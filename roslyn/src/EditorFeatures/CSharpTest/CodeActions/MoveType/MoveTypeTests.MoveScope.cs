@@ -924,11 +924,11 @@ namespace N1
             Assert.NotNull(moveTypeService);
 
             var modifiedSolution = await moveTypeService.GetModifiedSolutionAsync(
-                    documentToModify,
-                    textSpan,
-                    MoveTypeOperationKind.MoveTypeNamespaceScope,
-                    CancellationToken.None
-                )
+                documentToModify,
+                textSpan,
+                MoveTypeOperationKind.MoveTypeNamespaceScope,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             if (expectOperation)

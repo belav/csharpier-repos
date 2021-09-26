@@ -384,10 +384,9 @@ public class C
             var debug = CreateCompilation(source, options: TestOptions.DebugDll);
             var release = CreateCompilation(source, options: TestOptions.ReleaseDll);
 
-            CompileAndVerify(debug)
-                .VerifyPdb(
-                    "C.M",
-                    @"
+            CompileAndVerify(debug).VerifyPdb(
+                "C.M",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -420,11 +419,10 @@ public class C
   </methods>
 </symbols>
 "
-                );
-            CompileAndVerify(release)
-                .VerifyPdb(
-                    "C.M",
-                    @"
+            );
+            CompileAndVerify(release).VerifyPdb(
+                "C.M",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -449,7 +447,7 @@ public class C
   </methods>
 </symbols>
 "
-                );
+            );
         }
 
         [Fact]

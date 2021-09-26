@@ -124,9 +124,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
                 helpLink: helpLinkUri,
                 helpLinkToolTipText: helpLinkToolTip,
                 previewContent: previewContent,
-                logIdVerbatimInTelemetry: data.CustomTags.Contains(
-                    WellKnownDiagnosticTags.Telemetry
-                ),
+                logIdVerbatimInTelemetry: data.CustomTags
+                    .Contains(WellKnownDiagnosticTags.Telemetry),
                 uiShell: _uiShell,
                 optionPageGuid: optionPageGuid
             );

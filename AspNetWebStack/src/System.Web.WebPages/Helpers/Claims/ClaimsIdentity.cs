@@ -47,10 +47,8 @@ namespace System.Web.Helpers.Claims
 
             private static Func<TClaimsIdentity, IEnumerable<TClaim>> CreateClaimsGetter()
             {
-                PropertyInfo propInfo = typeof(TClaimsIdentity).GetProperty(
-                    "Claims",
-                    BindingFlags.Public | BindingFlags.Instance
-                );
+                PropertyInfo propInfo = typeof(TClaimsIdentity)
+                    .GetProperty("Claims", BindingFlags.Public | BindingFlags.Instance);
                 MethodInfo propGetter = propInfo.GetGetMethod();
 
                 // For improved perf, instance methods can be treated as static methods by leaving

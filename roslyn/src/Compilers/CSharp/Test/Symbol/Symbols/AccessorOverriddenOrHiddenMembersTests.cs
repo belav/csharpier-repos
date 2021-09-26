@@ -291,12 +291,11 @@ abstract public class TestClass2 : TestClass1
 }
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (8,29): error CS0533: 'TestClass2.P2' hides inherited abstract member 'TestClass1.P2'
-                    Diagnostic(ErrorCode.ERR_HidingAbstractMethod, "P2")
-                        .WithArguments("TestClass2.P2", "TestClass1.P2")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (8,29): error CS0533: 'TestClass2.P2' hides inherited abstract member 'TestClass1.P2'
+                Diagnostic(ErrorCode.ERR_HidingAbstractMethod, "P2")
+                    .WithArguments("TestClass2.P2", "TestClass1.P2")
+            );
         }
 
         [WorkItem(540145, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540145")]
@@ -324,18 +323,17 @@ public class TestClass3 : TestClass2
 }
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (8,29): error CS0533: 'TestClass2.P2' hides inherited abstract member 'TestClass1.P2'
-                    Diagnostic(ErrorCode.ERR_HidingAbstractMethod, "P2")
-                        .WithArguments("TestClass2.P2", "TestClass1.P2"),
-                    // (15,9): error CS0545: 'TestClass3.P2.get': cannot override because 'TestClass2.P2' does not have an overridable get accessor
-                    Diagnostic(ErrorCode.ERR_NoGetToOverride, "get")
-                        .WithArguments("TestClass3.P2.get", "TestClass2.P2"),
-                    // (10,14): error CS0534: 'TestClass3' does not implement inherited abstract member 'TestClass1.P2.get'
-                    Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "TestClass3")
-                        .WithArguments("TestClass3", "TestClass1.P2.get")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (8,29): error CS0533: 'TestClass2.P2' hides inherited abstract member 'TestClass1.P2'
+                Diagnostic(ErrorCode.ERR_HidingAbstractMethod, "P2")
+                    .WithArguments("TestClass2.P2", "TestClass1.P2"),
+                // (15,9): error CS0545: 'TestClass3.P2.get': cannot override because 'TestClass2.P2' does not have an overridable get accessor
+                Diagnostic(ErrorCode.ERR_NoGetToOverride, "get")
+                    .WithArguments("TestClass3.P2.get", "TestClass2.P2"),
+                // (10,14): error CS0534: 'TestClass3' does not implement inherited abstract member 'TestClass1.P2.get'
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "TestClass3")
+                    .WithArguments("TestClass3", "TestClass1.P2.get")
+            );
         }
 
         [Fact]
@@ -1191,9 +1189,8 @@ using System;
                 Assert.Equal(0, memberNameSyntax.Arity);
 
                 var semanticModel = compilation.GetSemanticModel(syntaxTree);
-                var classDisposable = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>(
-                    "Disposable"
-                );
+                var classDisposable = compilation.GlobalNamespace
+                    .GetMember<INamedTypeSymbol>("Disposable");
                 Assert.Equal(TypeKind.Class, classDisposable.TypeKind);
                 Assert.Equal("Disposable", classDisposable.Name);
 
@@ -1228,8 +1225,8 @@ using System;
                     semanticModel.GetSymbolInfo(memberAccessed).Symbol as IMethodSymbol;
                 var type = methodSymbol.ContainingType;
                 var disposeMethod = (IMethodSymbol)compilation.GetSpecialType(
-                        SpecialType.System_IDisposable
-                    )
+                    SpecialType.System_IDisposable
+                )
                     .GetMembers("Dispose")
                     .Single();
                 var isDispose = methodSymbol.Equals(

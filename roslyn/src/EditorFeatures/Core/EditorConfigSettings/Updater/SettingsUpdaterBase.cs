@@ -71,9 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         )
         {
             var solution = Workspace.CurrentSolution;
-            var analyzerConfigDocument = solution.Projects.SelectMany(
-                    p => p.AnalyzerConfigDocuments
-                )
+            var analyzerConfigDocument = solution.Projects
+                .SelectMany(p => p.AnalyzerConfigDocuments)
                 .FirstOrDefault(d => d.FilePath == EditorconfigPath);
             var newText = await GetChangedEditorConfigAsync(analyzerConfigDocument, token)
                 .ConfigureAwait(false);

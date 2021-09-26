@@ -96,7 +96,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             );
             var environment = new HostingEnvironment() { ApplicationName = "NonExistingDll" };
 
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new Dictionary<string, string>() { [WebHostDefaults.StaticWebAssetsKey] = path }
                 )
                 .Build();

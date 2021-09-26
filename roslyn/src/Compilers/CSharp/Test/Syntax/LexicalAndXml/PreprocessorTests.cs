@@ -5117,19 +5117,18 @@ class A { }
                 }
             );
 
-            node.GetDiagnostics()
-                .Verify(
-                    // (1,8): error CS1029: #error: 'version'
-                    // #error version
-                    Diagnostic(ErrorCode.ERR_ErrorDirective, "version")
-                        .WithArguments("version")
-                        .WithLocation(1, 8),
-                    // (1,8): error CS8304: Compiler version: '42.42.42.42424 (<developer build>)'. Language version: <expectedLanguageVersion>.
-                    // #error version
-                    Diagnostic(ErrorCode.ERR_CompilerAndLanguageVersion, "version")
-                        .WithArguments(GetExpectedVersion(), expectedLanguageVersion)
-                        .WithLocation(1, 8)
-                );
+            node.GetDiagnostics().Verify(
+                // (1,8): error CS1029: #error: 'version'
+                // #error version
+                Diagnostic(ErrorCode.ERR_ErrorDirective, "version")
+                    .WithArguments("version")
+                    .WithLocation(1, 8),
+                // (1,8): error CS8304: Compiler version: '42.42.42.42424 (<developer build>)'. Language version: <expectedLanguageVersion>.
+                // #error version
+                Diagnostic(ErrorCode.ERR_CompilerAndLanguageVersion, "version")
+                    .WithArguments(GetExpectedVersion(), expectedLanguageVersion)
+                    .WithLocation(1, 8)
+            );
         }
 
         [Fact]
@@ -5148,18 +5147,17 @@ class A { }
                 }
             );
 
-            node.GetDiagnostics()
-                .Verify(
-                    // (1,8): error CS1029: #error: 'version:7.1'
-                    // #error version:7.1
-                    Diagnostic(ErrorCode.ERR_ErrorDirective, "version:7.1")
-                        .WithArguments("version:7.1"),
-                    // (1,8): error CS8025: Feature 'version' is not available in C# 4. Please use language version 7.1 or greater.
-                    // #error version:7.1
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion4, "version:7.1")
-                        .WithArguments("version", "7.1")
-                        .WithLocation(1, 8)
-                );
+            node.GetDiagnostics().Verify(
+                // (1,8): error CS1029: #error: 'version:7.1'
+                // #error version:7.1
+                Diagnostic(ErrorCode.ERR_ErrorDirective, "version:7.1")
+                    .WithArguments("version:7.1"),
+                // (1,8): error CS8025: Feature 'version' is not available in C# 4. Please use language version 7.1 or greater.
+                // #error version:7.1
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion4, "version:7.1")
+                    .WithArguments("version", "7.1")
+                    .WithLocation(1, 8)
+            );
         }
 
         [Fact]
@@ -5178,14 +5176,13 @@ class A { }
                 }
             );
 
-            node.GetDiagnostics()
-                .Verify(
-                    // (1,8): error CS1029: #error: 'version:A.B'
-                    // #error version:A.B
-                    Diagnostic(ErrorCode.ERR_ErrorDirective, "version:A.B")
-                        .WithArguments("version:A.B")
-                        .WithLocation(1, 8)
-                );
+            node.GetDiagnostics().Verify(
+                // (1,8): error CS1029: #error: 'version:A.B'
+                // #error version:A.B
+                Diagnostic(ErrorCode.ERR_ErrorDirective, "version:A.B")
+                    .WithArguments("version:A.B")
+                    .WithLocation(1, 8)
+            );
         }
         #endregion
 
@@ -6257,12 +6254,8 @@ class A
             var file = "bogus.cs";
             var guid = "{" + Guid.Empty + "}";
             var bytes = "ab007f1d23d9";
-            var text = string.Format(
-                @"#pragma checksum ""{0}"" ""{1}"" ""{2}""",
-                file,
-                guid,
-                bytes
-            );
+            var text = string
+                .Format(@"#pragma checksum ""{0}"" ""{1}"" ""{2}""", file, guid, bytes);
             var node = Parse(text);
 
             TestRoundTripping(node, text);
@@ -6342,12 +6335,8 @@ class A
             var file = "bogus.cs";
             var guid = Guid.Empty.ToString();
             var bytes = "ab007f1d23d9";
-            var text = string.Format(
-                @"#pragma checksum ""{0}"" ""{1}"" ""{2}""",
-                file,
-                guid,
-                bytes
-            );
+            var text = string
+                .Format(@"#pragma checksum ""{0}"" ""{1}"" ""{2}""", file, guid, bytes);
             var node = Parse(text);
 
             TestRoundTripping(node, text);
@@ -6368,12 +6357,8 @@ class A
             var file = "bogus.cs";
             var guid = "{abc-123}";
             var bytes = "ab007f1d23d9";
-            var text = string.Format(
-                @"#pragma checksum ""{0}"" ""{1}"" ""{2}""",
-                file,
-                guid,
-                bytes
-            );
+            var text = string
+                .Format(@"#pragma checksum ""{0}"" ""{1}"" ""{2}""", file, guid, bytes);
             var node = Parse(text);
 
             TestRoundTripping(node, text, false);
@@ -6396,12 +6381,13 @@ class A
             var file = "test.cs";
             var guid = "{406EA660-64CF-4C82-B6F0-42D48172A799}";
             var bytes = string.Empty;
-            var text = string.Format(
-                @"#pragma checksum ""{0}"" ""{1}"" ""{2}"" /* Test Comment */",
-                file,
-                guid,
-                bytes
-            );
+            var text = string
+                .Format(
+                    @"#pragma checksum ""{0}"" ""{1}"" ""{2}"" /* Test Comment */",
+                    file,
+                    guid,
+                    bytes
+                );
 
             var node = Parse(text);
             TestRoundTripping(node, text, false);
@@ -6424,12 +6410,8 @@ class A
             var file = "test.cs";
             var guid = "{406EA660-64CF-4C82-B6F0-42D48172A799}";
             var bytes = string.Empty;
-            var text = string.Format(
-                @"#pragma checksum ""{0}"", ""{1}"" ""{2}"" ",
-                file,
-                guid,
-                bytes
-            );
+            var text = string
+                .Format(@"#pragma checksum ""{0}"", ""{1}"" ""{2}"" ", file, guid, bytes);
 
             var node = Parse(text);
             TestRoundTripping(node, text, false);

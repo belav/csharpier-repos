@@ -146,7 +146,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "75cec52ef0f9ae3e1639504aa1759512c46527fcf5476897d3fb6fc515ff1646f8f8bc09f84ea6e2ad04242d3fb9b190b816"
                 + "86b73d334e8b3afa7fb8eb31483efc0c7ccb0f8c1ca94d8be4f0daade4498501d02e6f92dd7b2f4401550896eb511ef14417"
                 + "cbb5a1b360d67998d334"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             // password = "1111"
             public static byte[] s_RSAKeyTransfer1Pfx = (
@@ -180,7 +181,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "86b73d334e8b3afa7fb8eb31483efc0c7ccb0f8c1ca94d8be4f0daade4498501d02e6f92dd7b2f4401550896eb511ef14417"
                 + "cbb5a1b360d67998d3343115301306092a864886f70d0109153106040401000000303b301f300706052b0e03021a0414c4c0"
                 + "4e0c0b0a20e50d58cb5ce565ba7c192d5d3f041479b53fc5f1f1f493a02cf113d563a247462e8726020207d0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static byte[] s_RSAKeyTransfer2Cer = (
                 "308201c830820131a00302010202102bce9f9ece39f98044f0cd2faa9a14e7300d06092a864886f70d0101050500301a3118"
@@ -193,7 +195,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "5685fedfc947e315db12a4c47e220601e8c810e84a39b05b7a89f87425a06c0202ad48b3f2713109f5815e6b5d61732dac45"
                 + "41da152963e700a6f37faf7678f084a9fb4fe88f7b2cbc6cdeb0b9fdcc6a8a16843e7bc281a71dc6eb8bbc4092d299bf7599"
                 + "a3492c99c9a3acf41b29"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             // password = "1111"
             public static byte[] s_RSAKeyTransfer2Pfx = (
@@ -227,7 +230,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "41da152963e700a6f37faf7678f084a9fb4fe88f7b2cbc6cdeb0b9fdcc6a8a16843e7bc281a71dc6eb8bbc4092d299bf7599"
                 + "a3492c99c9a3acf41b293115301306092a864886f70d0109153106040401000000303b301f300706052b0e03021a04143cdb"
                 + "6a36dfd2288ba4e3771766d7a5289c04419704146c84193dc4f3778f21197d11ff994d8bf4822049020207d0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static byte[] s_RSAKeyTransfer3Cer = (
                 "308201c830820131a00302010202104497d870785a23aa4432ed0106ef72a6300d06092a864886f70d0101050500301a3118"
@@ -240,7 +244,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "022607caeb44edb6f05a91f169903608d7391b245ac0dcbe052e16a91ac1f8d9533f19f6793f15cb6681b2cbaa0d8e83d77b"
                 + "5207e7c70d843deda8754af8ef1029e0b68c35d88c30d7da2f85d1a20dd4099facf373341b50a8a213f735421062e1477459"
                 + "6e27a32e23b3f3fcfec3"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             // password = "1111"
             public static byte[] s_RSAKeyTransfer3Pfx = (
@@ -274,7 +279,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "5207e7c70d843deda8754af8ef1029e0b68c35d88c30d7da2f85d1a20dd4099facf373341b50a8a213f735421062e1477459"
                 + "6e27a32e23b3f3fcfec33115301306092a864886f70d0109153106040401000000303b301f300706052b0e03021a0414cd11"
                 + "0833d653f2e18d2afb2de74689ff0446ec7d0414f2ca1c390db19317697044b9012ef6864e0f05cc020207d0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static byte[] s_RSAKeyTransferCapi1Cer = (
                 "3082020c30820179a00302010202105d2ffff863babc9b4d3c80ab178a4cca300906052b0e03021d0500301e311c301a0603"
@@ -288,7 +294,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "81e5535d8eceef265acbc82f6c5f8bc9d84319265f3ccf23369fa533c8dc1938952c5931662d9ecd8b1e7b81749e48468167"
                 + "e2fce3d019fa70d54646975b6dc2a3ba72d5a5274c1866da6d7a5df47938e034a075d11957d653b5c78e5291e4401045576f"
                 + "6d4eda81bef3c369af56121e49a083c8d1adb09f291822e99a429646"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             // Password = "1111"
             //
@@ -330,7 +337,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "d11957d653b5c78e5291e4401045576f6d4eda81bef3c369af56121e49a083c8d1adb09f291822e99a429646311530130609"
                 + "2a864886f70d0109153106040401000000303b301f300706052b0e03021a041463c18f4fec17cf06262e8acd744e18b8ab7b"
                 + "8f280414134ec4a25653b142c3d3f9999830f2ac66ef513b020207d0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static byte[] s_RSASha256KeyTransfer1Cer = (
                 "308201d43082013da003020102021072c6c7734916468c4d608253da017676300d06092a864886f70d01010b05003020311e"
@@ -343,7 +351,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "1ee4209c0694c790e72e3e8ad310b2506b277d7c001b09f660d48dba846ac5bbef97653613adf53d7624fc9b2b337f25cb33"
                 + "74227900cfefbe2fdac92b4f769cf2bf3befb485f282a85bfb09454b797ce5286de560c219fb0dd6fce0442adbfef4f767e9"
                 + "ac81cf3e9701baf81efc73a0ed88576adff12413b827"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             // password = "1111"
             public static byte[] s_RSASha256KeyTransfer1Pfx = (
@@ -378,7 +387,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "ac81cf3e9701baf81efc73a0ed88576adff12413b8273115301306092a864886f70d0109153106040401000000303b301f30"
                 + "0706052b0e03021a0414282ee1780ac2a08b2783b1f8f7c855fb1a53ce9e04143fad59471323dc979f3bf29b927e54eca677"
                 + "7576020207d0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static byte[] s_RSASha384KeyTransfer1Cer = (
                 "308201d43082013da00302010202103c724fb7a0159a9345caac9e3df5f136300d06092a864886f70d01010c05003020311e"
@@ -391,7 +401,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "c8a31534a461d061a4706a0aba52b7a1c709c2f1e3b94acf6dc0930b74e63e3babf3c5b11c8f8a888722d9f23c7e0a8c9b09"
                 + "90ebcdbce563b8d4209efc1b04750f46c8c6117ccb96b26b5f02b0b5f961ab01b0c3b4cdb2530cbc5dcf37786712a3476ce7"
                 + "32c5c544c328db5ebc3a338b18fe32aedaffedd973ef"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             // password = "1111"
             public static byte[] s_RSASha384KeyTransfer1Pfx = (
@@ -426,7 +437,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "32c5c544c328db5ebc3a338b18fe32aedaffedd973ef3115301306092a864886f70d0109153106040401000000303b301f30"
                 + "0706052b0e03021a041429bd86de50f91b8f804b2097b1d9167ca56577f40414b8714b8172fa1baa384bed57e3ddb6d1851a"
                 + "f5e9020207d0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static byte[] s_RSASha512KeyTransfer1Cer = (
                 "308201d43082013da00302010202102f5d9d58a5f41b844650aa233e68f105300d06092a864886f70d01010d05003020311e"
@@ -439,7 +451,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "7468dd09926d20933254c7c79645f7b466e7b4a90a583cedba1c3b3dbf4ccf1c2506eb392dcf15f53f964f3c3b519132a38e"
                 + "b966d3ea397fe25457b8a703fb43ddab1c52272d6a12476df1df1826c90fb679cebc4c04efc764fd8ce3277305c3bcdf1637"
                 + "91784d778663194097180584e5e8ab69039908bf6f86"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             // password = "1111"
             public static byte[] s_RSASha512KeyTransfer1Pfx = (
@@ -474,7 +487,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "91784d778663194097180584e5e8ab69039908bf6f863115301306092a864886f70d0109153106040401000000303b301f30"
                 + "0706052b0e03021a041401844058f6e177051a87eedcc55cc4fa8d567ff10414669cb82c9cc3ceb4d3ca9f65bd57ba829616"
                 + "60d9020207d0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static byte[] s_RSA2048Sha256KeyTransfer1Cer = (
                 "3082031e30820206a003020102020900dce4d72a7f3ca58e300d06092a86"
@@ -504,7 +518,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "dceca222c78f68fe80563e12282f7df936a161163f86a9eadba2e180a906"
                 + "de73aebeea0775f6ab9ae97c71f26e187e3d8cb50c8137663c99d440877d"
                 + "5a5e17df9785976e9031dd96134a07899281b6b64e3f"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static byte[] s_RSA2048Sha256KeyTransfer1Pfx = (
                 "308209710201033082093706092a864886f70d010701a08209280482092430820920308203c706092a864886f70d010706a0"
@@ -556,7 +571,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "f19eb36e9cc8215f28f2b911f772d4330340fbb6f8cc1840241720074c0c743125302306092a864886f70d01091531160414"
                 + "c6fe1078ea0dbc7c8d7f96ad3b7157625c8aab8c30313021300906052b0e03021a05000414bd17b7ccb644846ca45544381e"
                 + "b780abf0ccc2650408e4b108ac25f3820e02020800"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static byte[] s_DHKeyAgree1Cer = (
                 "3082041930820305a00302010202100ae59b0cb8119f8942eda74163413a02300906052b0e03021d0500304f314d304b0603"
@@ -581,7 +597,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "28f70f3a0a37358e7917fc94dfeb6e7cb176e8f5dbfa1ace2af6c0a4306e22eb3051e7705306152ce87328b24f7f153d565b"
                 + "73aef677d25ae8657f81ca1cd5dd50404b70b9373eadcd2d276e263105c00607a86f0c10ab26d1aafd986313a36c70389a4d"
                 + "1a8e88"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static byte[] s_RSAKeyTransferCer_ExplicitSki = (
                 "3082033E30820226A003020102020900B5EFA7E1E80518B4300D06092A864886F70D01010B0500304D310B3009060355"
@@ -602,7 +619,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "19A107A9FFEDBF34681AEEE57DF6A3DB3759D605A9269FB694D8EA56A90740529159D725BFD70C9141A38B98D4E88CDC"
                 + "31124ABBB4C3D3D49C220CCB6F2F94176B8225A0E2ADDB0F4A72E6B021601CD297AC45A0CAB95EBAC4001C8167899868"
                 + "3188DB9364AAD52D4E28169CC898B621FF84"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             // password = "1111"
             private static byte[] s_RSAKeyTransferPfx_ExplicitSki_RC2ContentEncryption = (
@@ -657,7 +675,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "6B7299207D7036EB87D5E86189768CB14AE4F8886BB5AB7864BDA9757D0C26BFFF3FAA4001258557D394313125302306"
                 + "092A864886F70D01091531160414080FB9AAB81BD67FD85C2186B359054CEB13D2D730313021300906052B0E03021A05"
                 + "0004142C205F0B1E9B99B0ED14E83F13D84BC683F66D3B04080D22E45D6A657CC602020800"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static byte[] s_RSAKeyTransferPfx_ExplicitSki_TripleDESContentEncryption = (
                 "308209930201033082094F06092A864886F70D010701A08209400482093C30820938308203EF06092A864886F70D0107"
@@ -712,7 +731,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "D394313125302306092A864886F70D01091531160414080FB9AAB81BD67FD85C2186B359054CEB13D2D7303B301F3007"
                 + "06052B0E03021A04145418AC4FCE987C52004DA05A858BFEA94B21D4860414A26BFC44B061FE0F7E01ED25D963641D1C"
                 + "057847020207D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static readonly byte[] s_RSAKeyTransferPfx_ExplicitSki =
                 PlatformSupport.IsRC2Supported
@@ -746,7 +766,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "6FAE95CCD67FD572A8C727E2C03E7B242457318BEC1BE52CA5BD9454A0A41140"
                 + "AE96ED1C56D220D1FD5DD3B1B4FB2AA0E04FC94F7E3C7D476F29896224556395"
                 + "3AD7225EDCEAC8B8509E49292E62D8BF"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static byte[] s_Rsa2048SignatureOnlyPfx_RC2ContentEncryption = (
                 "308209E3020103308209A306092A864886F70D010701A0820994048209903082"
@@ -829,7 +850,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "249519BDDF5F846EB8C5078BCC053037301F300706052B0E03021A0414461F5B"
                 + "19C6933240012EFEB95F734C648CCD13460414FA1743400686D25BA1CB28D736"
                 + "F2B1ED97699EA4"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static readonly byte[] s_Rsa2048SignatureOnlyPfx_TripleDESContentEncryption = (
                 "308209EF020103308209AB06092A864886F70D010701A082099C048209983082"
@@ -912,7 +934,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "14F8E01DBBC97DDC00D5A2C79DFD4ACC9FA206C035FA303B301F300706052B0E"
                 + "03021A0414EA08415D254A79B627FFF47D0D844454A24BBC2B041476D3D168D6"
                 + "31F22156DA4116AD098C466C4680D1020207D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static readonly byte[] s_Rsa2048SignatureOnlyPfx = PlatformSupport.IsRC2Supported
                 ? s_Rsa2048SignatureOnlyPfx_RC2ContentEncryption
@@ -975,7 +998,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "67007200610070006800690063002000500072006F0076006900640065007230"
                 + "313021300906052B0E03021A0500041466FD3518CEBBD69877BA663C9E8D7092"
                 + "8E8A98F30408DFB5AE610308BCF802020800"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static byte[] s_dsa1024Pfx_TripleDESContentEncryption = (
                 "30820700020103308206BC06092A864886F70D010701A08206AD048206A93082"
@@ -1035,7 +1059,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "69006400650072303B301F300706052B0E03021A04142C936C6E3D06E14A72F8"
                 + "C08B2FD50E40D2DDE70A0414D58EED14B5437EFB11F19215656B22E05D119346"
                 + "020207D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             public static readonly byte[] s_dsa1024Pfx = PlatformSupport.IsRC2Supported
                 ? s_dsa1024Pfx_RC2ContentEncryption
@@ -1071,7 +1096,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "0000000000000182096C6F63616C686F7374300B060960864801650304030203"
                 + "3000302D021500B9316CC7E05C9F79197E0B41F6FD4E3FCEB72A8A0214075505"
                 + "CCAECB18B7EF4C00F9C069FA3BC78014DE"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             // Password: "Test"
             private static readonly byte[] ECDsaP256_DigitalSignature_Pfx_Windows_RC2ContentEncryption =
@@ -1111,7 +1137,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     + "64A95EB350FF8EF6D625AD031BCD303B301F300706052B0E03021A0414C8D96C"
                     + "ED140F5CA3CB92BEFCA32C690804576ABF0414B59D4FECA9944D40EEFDE7FB96"
                     + "196D167B0FA511020207D0"
-                ).HexToByteArray();
+                )
+                    .HexToByteArray();
 
             private static readonly byte[] ECDsaP256_DigitalSignature_Pfx_Windows_TripleDESContentEncryption =
                 (
@@ -1149,7 +1176,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     + "6593D7A9303B301F300706052B0E03021A041497892AC27A24A2CC4F8841A8B3"
                     + "D4C17ACCAD1DAC04149135233EFE8BFB1A6C494E5E4F2621BF97B50E1F020207"
                     + "D0"
-                ).HexToByteArray();
+                )
+                    .HexToByteArray();
 
             internal static readonly byte[] ECDsaP256_DigitalSignature_Pfx_Windows =
                 PlatformSupport.IsRC2Supported
@@ -1168,7 +1196,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "0CCCFDF387DB300A06082A8648CE3D040302034800304502201AFE595E19F1AE"
                 + "4B6A4B231E8851926438C55B5DDE632E6ADF13C1023A65898E022100CBDF434F"
                 + "DD197D8B594E8026E44263BADE773C2BEBD060CC4109484A498E7C7E"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static readonly byte[] ECDsaP521_DigitalSignature_Pfx_Windows = (
                 "308205C10201033082057D06092A864886F70D010701A082056E0482056A3082"
@@ -1218,7 +1247,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "9BF9F6B1D77ED4AA303B301F300706052B0E03021A0414AF6FEF9E53E1144A81"
                 + "53A9459AADF886BA2979990414AC82239C24D3BB89B37A6A6109D7B43ABC433D"
                 + "12020207D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static readonly byte[] ECDsaP521_DigitalSignature_Cert = (
                 "3082024D308201AEA00302010202101549950E8AA087A34C179BE49774C8AF30"
@@ -1240,7 +1270,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "FE248C0C0F7C700B4680CA8F36024200F6625A58C219C389F2B4127BFDC228D8"
                 + "2765E2F9399DB66ED71EDF4D64F85998DE15ED82A75F363E42432BCE108CE55A"
                 + "41A9899160F95848826A9CE39498AEC2EF"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static readonly byte[] ValidLookingTsaCert_Cer = (
                 "308204243082020CA003020102020401020304300D06092A864886F70D01010B"
@@ -1277,7 +1308,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "000F5EA01AB1D8E89F219178DB67B2CD68AFC2C0C248D8A65FD9AE1A0DBFF84F"
                 + "3BBF2077EBFB373F6ED8D6C7CEA7BFDF0425494078F293949496B0BEAF63CAB5"
                 + "62C297590A737174"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static readonly byte[] ValidLookingTsaCert_Pfx_RC2ContentEncryption = (
                 "30820AAE02010330820A6E06092A864886F70D010701A0820A5F04820A5B3082"
@@ -1366,7 +1398,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "D6B7AADF7EF19C77A2555C1CF8CE1CEB030EBF1C365D40C9C33037301F300706"
                 + "052B0E03021A0414AACBB391FF9626295715807ED7DDEE57F716A5710414658C"
                 + "344F4B20292DD9282953DAA4CB587AD48714"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static readonly byte[] ValidLookingTsaCert_Pfx_TripleDESContentEncryption = (
                 "30820B1002010330820ACC06092A864886F70D010701A0820ABD04820AB93082"
@@ -1458,7 +1491,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "37C0EB82E91110CDED11FA41D5EBDB44499BE2FCB5E021303B301F300706052B"
                 + "0E03021A041413439C2B57F81655034A005B25CAA60BF393100B0414A6161E42"
                 + "F758104D24EBAE60A38A72EAF7F7519B020207D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static readonly byte[] ValidLookingTsaCert_Pfx = PlatformSupport.IsRC2Supported
                 ? ValidLookingTsaCert_Pfx_RC2ContentEncryption
@@ -1500,7 +1534,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "CECCE43F9513EA99F1AFFB2B900F5AC55DE8D7AF96B243BA663500A63E4A35D4"
                 + "7257229376EE8C0179396C355DFEEEC03F8773BA1DD5B0807E44EA1E11257751"
                 + "67020DF9"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static readonly byte[] TwoEkuTsaPfx_RC2ContentEncryption = (
                 "30820AC602010330820A8606092A864886F70D010701A0820A7704820A733082"
@@ -1590,7 +1625,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "74FBC63FC70A18F095C2AA6CD060A7B52A3037301F300706052B0E03021A0414"
                 + "A519F103F114AFAD5EB7F368DB4D0748559CDD190414584DD2F41EC2DBDAEA69"
                 + "FB2FF401BD9FC3B57572"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static readonly byte[] TwoEkuTsaPfx_TripleDESContentEncryption = (
                 "30820B2802010330820AE406092A864886F70D010701A0820AD504820AD13082"
@@ -1683,7 +1719,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "DBD9AB3B4D5FC3AB6978088D09E690303B301F300706052B0E03021A0414E6C1"
                 + "EB5F19E56891D2AD2D86C30FA62CF75AFEF10414CEB6CBF0022C852539BCB5CD"
                 + "5CF4123B4A8FF97F020207D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static readonly byte[] TwoEkuTsaPfx = PlatformSupport.IsRC2Supported
                 ? TwoEkuTsaPfx_RC2ContentEncryption
@@ -1724,7 +1761,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "C89F390EB8C6CCC19FA9EB5DFC5BFA4457DB30B27CA73EE1C19934C8BED63E58"
                 + "F227222B86010D9521324BDDE04F47BF5190778C6B812ED78AC7DD8C82FBD0C4"
                 + "0DA1EE040184500D"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static readonly byte[] NonCriticalTsaEkuPfx_RC2ContentEncryption = (
                 "30820AAE02010330820A6E06092A864886F70D010701A0820A5F04820A5B3082"
@@ -1813,7 +1851,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "8F2C4E296A728496C38076FD3F14B007FEFF015EB42329F7453037301F300706"
                 + "052B0E03021A0414A0E907FF695A237FAB54BBB94CBCE689EE0B4552041426E2"
                 + "132250203B3235FD5023D999B747478D8873"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static readonly byte[] NonCriticalTsaEkuPfx_TripleDESContentEncryption = (
                 "30820B1002010330820ACC06092A864886F70D010701A0820ABD04820AB93082"
@@ -1905,7 +1944,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "117F641226C01FE1A993CA8FD3BC1AC0F4B90396FB53ED303B301F300706052B"
                 + "0E03021A04148527AF9ACC926A87B49C07238F570D60B0588B4D041467593F11"
                 + "3A8077255DF0A79741DBB93B70E5E352020207D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static readonly byte[] NonCriticalTsaEkuPfx = PlatformSupport.IsRC2Supported
                 ? NonCriticalTsaEkuPfx_RC2ContentEncryption
@@ -1946,7 +1986,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "8DC13492C128B64F862E7800384C98A1303EA570D328C003E2B944A804B9794F"
                 + "A5C6040881E61510E90C20F21DEA0A73E0DA5C1A2D178A48D76CC8FAA2ADA660"
                 + "2A98B50AC197B40348A012E83A98EFF2B8D64900DE"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static readonly byte[] TlsClientServerEkuPfx_RC2ContentEncryption = (
                 "30820AB602010330820A7606092A864886F70D010701A0820A6704820A633082"
@@ -2035,7 +2076,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "055DBE8A531FA77690A620BC5463431899B7577E3AEF0D382F31955AB5FCC951"
                 + "973037301F300706052B0E03021A0414F2009473DB4B8B63778E28E68613246F"
                 + "D53995810414A911A22D051F1BF45E7FF974C4285F6B4D880B08"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static readonly byte[] TlsClientServerEkuPfx_TripleDESContentEncryption = (
                 "30820B1802010330820AD406092A864886F70D010701A0820AC504820AC13082"
@@ -2127,7 +2169,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "06F9AC1BE74D48907F7825B97CDAB88C9AE8738319F063497B7EC2E626C8A430"
                 + "3B301F300706052B0E03021A0414F71F2A9273499EABD45CD57C42AC2D2FD7DA"
                 + "4D17041406C0432C5D5A1BEDD4771A8232801BB5933EC037020207D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static readonly byte[] TlsClientServerEkuPfx = PlatformSupport.IsRC2Supported
                 ? TlsClientServerEkuPfx_RC2ContentEncryption
@@ -2411,7 +2454,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "07F9B1B12B5D368EC9317237CAB04D5B059F9226C972BADBB23CA747A46581D4"
                 + "9240E6FC0F2C8933F1844AD5F54E504DDAA3E87AE843C298DED1761035D2DFBF"
                 + "61E1B8F20930"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static readonly byte[] NegativeSerialNumberPfx_RC2ContentEncryption = (
                 "308209C40201033082098406092A864886F70D010701A0820975048209713082"
@@ -2493,7 +2537,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "5C86500AF2760F8A87DB8E6E5FA2753037301F300706052B0E03021A0414AA38"
                 + "B6B4257EBA3E399CA9EDD87BDC1F82FBF7D70414B796F49E612D1A2B5A0DEC11"
                 + "608A153B5BCD4FE9"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             private static readonly byte[] NegativeSerialNumberPfx_TripleDESContentEncryption = (
                 "308209C80201033082098406092A864886F70D010701A0820975048209713082"
@@ -2575,7 +2620,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "E8D0E90ECE88FCD440959F706B4028303B301F300706052B0E03021A0414E431"
                 + "D7F51D316EB967B5AC6CE0632A882B4F61F0041404CA58CF8EBA5473BFB0AFEF"
                 + "96D11C7E403BB3F3020207D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static readonly byte[] NegativeSerialNumberPfx = PlatformSupport.IsRC2Supported
                 ? NegativeSerialNumberPfx_RC2ContentEncryption
@@ -2608,7 +2654,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "5C7B4071D980FDC13E0D72DEDC6205884B14E523941CC0F1ADFC64109E85ED67"
                 + "83039EF14C45C5CE54151D679E8D38FB90F5F64F96C8FE23CBBA362C1A17A922"
                 + "32DB27C43535DD8ABB9C054B"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static byte[] RsaOaep2048_NullParametersPfx = (
                 "308209BE0201033082097806092A864886F70D010701A0820969048209653082"
@@ -2690,7 +2737,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "6D9A23303D3021300906052B0E03021A05000414A0CE79F0E969E2A8F6959B58"
                 + "6B99CD091DE4E4FA04143FFA346F6E7F8ABDE22A51853C06F365CE21D7D70202"
                 + "0400"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static byte[] RsaOaep2048_Sha1ParametersCert = (
                 "3082032830820210A003020102021000CD1B955EB1EFB9F3BAE8C64D49C16F30"
@@ -2719,7 +2767,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "6CF44C4211FA82A49F2E52BD168590955159B2D82A37421E0A72A11E6AB2117D"
                 + "F9AB0E0165F0E4C5D4075FE9E21C8B6E783C3EAC67027B4F9FBCA3855FA361C3"
                 + "C322E14CE938B2FE3A5AF38A"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static byte[] RsaOaep2048_Sha1ParametersPfx = (
                 "308209BE0201033082097806092A864886F70D010701A0820969048209653082"
@@ -2801,7 +2850,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "728658303D3021300906052B0E03021A050004144200D15CFF93500F241D12EA"
                 + "D690D3DB9CDE40A90414E9656D02B74AD5F7C1C9ECBEECDAA9F91B3B3E3A0202"
                 + "0400"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static byte[] RsaOaep2048_Sha256ParametersCert = (
                 "308203573082023FA003020102021000E632D0CD2B7885DEC18B874E9DEB2930"
@@ -2831,7 +2881,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "5AF4683C73BADDFEF3518B0A4E015A10BC6178C10E3AF6A11430A9F102E59B5C"
                 + "C44593D76E1A80D29932CF3A4F170F4516AD3666108BE1CE17FD74E266DE6B7E"
                 + "2F7DB1215D41CE515B615167083E8EF4A3A54607EC7D14A0839A58"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static byte[] RsaOaep2048_Sha256ParametersPfx = (
                 "308209EE020103308209A806092A864886F70D010701A0820999048209953082"
@@ -2914,7 +2965,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "788822C1BE1A53B5B4FBF60039AF86B12E1B1E303D3021300906052B0E03021A"
                 + "050004144E291DFD7C40F48494D521D4939815FF16938E220414732425C273E6"
                 + "923C8F31AED55ED4BA1110E70AEA02020400"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static byte[] RsaOaep2048_NoParametersCert = (
                 "308203263082020EA003020102021000D90B171E0AE0BB7FC73832CF72AB8530"
@@ -2943,7 +2995,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "21FE0F3D753D409AE08E34208C1AD07F70B73B97ED62DA6B8959232585BA5AAD"
                 + "6AFFDD7D7298CD80D42B50AA7DC6A317BB7B2FE9EE95AB1FC8E3C1B2392D5750"
                 + "45DC4D41362F8C83ABED"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             internal static byte[] RsaOaep2048_NoParametersPfx = (
                 "308209BE0201033082097806092A864886F70D010701A0820969048209653082"
@@ -3025,7 +3078,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "9502F3303D3021300906052B0E03021A0500041484BFCFD2BED79AAAAD26AFCC"
                 + "CC8F76FB6FD9D40804143A666EE41B085688C62A85EC7964C0FACF0512DF0202"
                 + "0400"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
         }
     }
 }

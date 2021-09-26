@@ -20,10 +20,8 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.IsType(
-                typeof(ParameterDescriptor).GetNestedType(
-                    "EmptyParameterBindingInfo",
-                    BindingFlags.NonPublic
-                ),
+                typeof(ParameterDescriptor)
+                    .GetNestedType("EmptyParameterBindingInfo", BindingFlags.NonPublic),
                 bindingInfo
             );
         }

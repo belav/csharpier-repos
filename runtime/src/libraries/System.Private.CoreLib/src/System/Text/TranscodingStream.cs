@@ -458,9 +458,9 @@ namespace System.Text
                             // performed earlier didn't take that into account.
 
                             int innerBytesReadJustNow = await _innerStream.ReadAsync(
-                                    rentedBytes.AsMemory(0, DefaultReadByteBufferSize),
-                                    cancellationToken
-                                )
+                                rentedBytes.AsMemory(0, DefaultReadByteBufferSize),
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             isEofReached = (innerBytesReadJustNow == 0);
 
@@ -706,9 +706,9 @@ namespace System.Text
 
                             decodedChars = decodedChars.Slice(charsConsumed);
                             await _innerStream.WriteAsync(
-                                    new ReadOnlyMemory<byte>(scratchBytes, 0, bytesWritten),
-                                    cancellationToken
-                                )
+                                new ReadOnlyMemory<byte>(scratchBytes, 0, bytesWritten),
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         } while (!encoderFinished);
                     } while (!decoderFinished);

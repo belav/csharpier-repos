@@ -191,10 +191,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
                     if (
                         accessors.Where(
-                                accessor =>
-                                    (accessor != null)
-                                    && (accessor.MemberType != MemberTypes.Method)
-                            )
+                            accessor =>
+                                (accessor != null) && (accessor.MemberType != MemberTypes.Method)
+                        )
                             .Any()
                     )
                     {
@@ -212,10 +211,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
                     if (
                         accessors.Where(
-                                accessor =>
-                                    (accessor != null)
-                                    && (accessor.MemberType != MemberTypes.Method)
-                            )
+                            accessor =>
+                                (accessor != null) && (accessor.MemberType != MemberTypes.Method)
+                        )
                             .Any()
                     )
                     {

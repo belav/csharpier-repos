@@ -176,11 +176,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     var foreignKey = skipNavigation.ForeignKey;
                     foreach (
                         var joinEntry in stateManager.GetEntriesForState(
-                                added: !value,
-                                modified: !value,
-                                deleted: !value,
-                                unchanged: value
-                            )
+                            added: !value,
+                            modified: !value,
+                            deleted: !value,
+                            unchanged: value
+                        )
                             .Where(
                                 e =>
                                     e.EntityType == joinEntityType
@@ -202,10 +202,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     {
                         foreach (var relatedEntity in navigationValue)
                         {
-                            var relatedEntry = InternalEntry.StateManager.TryGetEntry(
-                                relatedEntity,
-                                Metadata.TargetEntityType
-                            );
+                            var relatedEntry = InternalEntry.StateManager
+                                .TryGetEntry(relatedEntity, Metadata.TargetEntityType);
                             if (relatedEntry != null)
                             {
                                 var anyNonPk = foreignKey.Properties.Any(p => !p.IsPrimaryKey());
@@ -289,10 +287,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         private void EnsureInitialized() =>
-            Metadata.GetCollectionAccessor()!.GetOrCreate(
-                InternalEntry.Entity,
-                forMaterialization: true
-            );
+            Metadata.GetCollectionAccessor()!
+                .GetOrCreate(InternalEntry.Entity, forMaterialization: true);
 
         /// <summary>
         ///     The <see cref="EntityEntry" /> of an entity this navigation targets.

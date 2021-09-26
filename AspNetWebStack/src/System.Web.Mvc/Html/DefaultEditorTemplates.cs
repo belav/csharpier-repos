@@ -46,10 +46,10 @@ namespace System.Web.Mvc.Html
         private static string BooleanTemplateDropDownList(HtmlHelper html, bool? value)
         {
             return html.DropDownList(
-                    String.Empty,
-                    TriStateValues(value),
-                    CreateHtmlAttributes(html, "list-box tri-state")
-                )
+                String.Empty,
+                TriStateValues(value),
+                CreateHtmlAttributes(html, "list-box tri-state")
+            )
                 .ToHtmlString();
         }
 
@@ -112,10 +112,8 @@ namespace System.Web.Mvc.Html
                     {
                         itemType = item.GetType();
                     }
-                    ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                        () => item,
-                        itemType
-                    );
+                    ModelMetadata metadata = ModelMetadataProviders.Current
+                        .GetMetadataForType(() => item, itemType);
                     string fieldName = String.Format(
                         CultureInfo.InvariantCulture,
                         "{0}[{1}]",
@@ -212,14 +210,14 @@ namespace System.Web.Mvc.Html
         internal static string MultilineTextTemplate(HtmlHelper html)
         {
             return html.TextArea(
-                    String.Empty,
-                    html.ViewContext.ViewData.TemplateInfo.FormattedModelValue.ToString(),
-                    0 /* rows */
-                    ,
-                    0 /* columns */
-                    ,
-                    CreateHtmlAttributes(html, "text-box multi-line")
-                )
+                String.Empty,
+                html.ViewContext.ViewData.TemplateInfo.FormattedModelValue.ToString(),
+                0 /* rows */
+                ,
+                0 /* columns */
+                ,
+                CreateHtmlAttributes(html, "text-box multi-line")
+            )
                 .ToHtmlString();
         }
 
@@ -310,18 +308,17 @@ namespace System.Web.Mvc.Html
             }
 
             foreach (
-                ModelMetadata propertyMetadata in modelMetadata.Properties.Where(
-                    pm => ShouldShow(pm, templateInfo)
-                )
+                ModelMetadata propertyMetadata in modelMetadata.Properties
+                    .Where(pm => ShouldShow(pm, templateInfo))
             )
             {
                 if (!propertyMetadata.HideSurroundingHtml)
                 {
                     string label = LabelExtensions.LabelHelper(
-                            html,
-                            propertyMetadata,
-                            propertyMetadata.PropertyName
-                        )
+                        html,
+                        propertyMetadata,
+                        propertyMetadata.PropertyName
+                    )
                         .ToHtmlString();
                     if (!String.IsNullOrEmpty(label))
                     {
@@ -361,9 +358,8 @@ namespace System.Web.Mvc.Html
         internal static string PasswordTemplate(HtmlHelper html)
         {
             object value = null;
-            var usePasswordStrings = WebConfigurationManager.AppSettings.GetValues(
-                UsePasswordValue
-            );
+            var usePasswordStrings = WebConfigurationManager.AppSettings
+                .GetValues(UsePasswordValue);
             bool usePasswordValue;
             if (
                 usePasswordStrings != null
@@ -376,10 +372,10 @@ namespace System.Web.Mvc.Html
             }
 
             return html.Password(
-                    name: String.Empty,
-                    value: value,
-                    htmlAttributes: CreateHtmlAttributes(html, "text-box single-line password")
-                )
+                name: String.Empty,
+                value: value,
+                htmlAttributes: CreateHtmlAttributes(html, "text-box single-line password")
+            )
                 .ToHtmlString();
         }
 
@@ -508,14 +504,14 @@ namespace System.Web.Mvc.Html
         )
         {
             return html.TextBox(
-                    name: String.Empty,
-                    value: value,
-                    htmlAttributes: CreateHtmlAttributes(
-                        html,
-                        className: "text-box single-line",
-                        inputType: inputType
-                    )
+                name: String.Empty,
+                value: value,
+                htmlAttributes: CreateHtmlAttributes(
+                    html,
+                    className: "text-box single-line",
+                    inputType: inputType
                 )
+            )
                 .ToHtmlString();
         }
 

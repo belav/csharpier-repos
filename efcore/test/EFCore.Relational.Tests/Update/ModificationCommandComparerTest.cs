@@ -25,9 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             var key = entityType.AddProperty("Id", typeof(int));
             entityType.SetPrimaryKey(key);
 
-            var optionsBuilder = new DbContextOptionsBuilder().UseModel(
-                    RelationalTestHelpers.Instance.Finalize(modelBuilder)
-                )
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseModel(RelationalTestHelpers.Instance.Finalize(modelBuilder))
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider);
 
@@ -342,9 +341,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             keyProperty.IsNullable = false;
             entityType.SetPrimaryKey(keyProperty);
 
-            var optionsBuilder = new DbContextOptionsBuilder().UseInternalServiceProvider(
-                    InMemoryFixture.DefaultServiceProvider
-                )
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseModel(RelationalTestHelpers.Instance.Finalize(modelBuilder))
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 

@@ -311,7 +311,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void StaticConstructor_ThrowsArgumentException()
         {
-            ConstructorInfo cctor = typeof(StaticCtor).GetTypeInfo()
+            ConstructorInfo cctor = typeof(StaticCtor)
+                .GetTypeInfo()
                 .DeclaredConstructors.Single(c => c.IsStatic);
 
             AssertExtensions.Throws<ArgumentException>("constructor", () => Expression.New(cctor));
@@ -443,9 +444,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Arguments_ExpressionNotReadable_ThrowsArgumentException()
         {
-            ConstructorInfo constructor = typeof(ClassWithCtors).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(ClassWithCtors)
+                .GetConstructor(new Type[] { typeof(string) });
             Expression[] expressions = new Expression[]
             {
                 Expression.Property(
@@ -482,9 +482,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ConstructorAndArguments_IncompatibleTypes_ThrowsArgumentException()
         {
-            ConstructorInfo constructor = typeof(ClassWithCtors).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(ClassWithCtors)
+                .GetConstructor(new Type[] { typeof(string) });
             Expression[] expressions = new Expression[] { Expression.Constant(5) };
 
             AssertExtensions.Throws<ArgumentException>(
@@ -553,9 +552,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Members_MemberNotOnDeclaringType_ThrowsArgumentException()
         {
-            ConstructorInfo constructor = typeof(ClassWithCtors).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(ClassWithCtors)
+                .GetConstructor(new Type[] { typeof(string) });
             Expression[] arguments = new Expression[] { Expression.Constant("hello") };
             MemberInfo[] members = new MemberInfo[]
             {
@@ -578,9 +576,8 @@ namespace System.Linq.Expressions.Tests
         [InlineData(nameof(ClassWithCtors.StaticMethod))]
         public static void Members_StaticMember_ThrowsArgumentException(string memberName)
         {
-            ConstructorInfo constructor = typeof(ClassWithCtors).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(ClassWithCtors)
+                .GetConstructor(new Type[] { typeof(string) });
             Expression[] arguments = new Expression[] { Expression.Constant("hello") };
             MemberInfo[] members = new MemberInfo[]
             {
@@ -600,9 +597,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Members_MemberWriteOnly_ThrowsArgumentException()
         {
-            ConstructorInfo constructor = typeof(ClassWithCtors).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(ClassWithCtors)
+                .GetConstructor(new Type[] { typeof(string) });
             Expression[] arguments = new Expression[] { Expression.Constant("hello") };
             MemberInfo[] members = new MemberInfo[]
             {
@@ -622,9 +618,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Members_MemberNotPropertyAccessor_ThrowsArgumentException()
         {
-            ConstructorInfo constructor = typeof(ClassWithCtors).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(ClassWithCtors)
+                .GetConstructor(new Type[] { typeof(string) });
             Expression[] arguments = new Expression[] { Expression.Constant("hello") };
             MemberInfo[] members = new MemberInfo[]
             {
@@ -644,9 +639,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Members_MemberNotFieldPropertyOrMethod_ThrowsArgumentException()
         {
-            ConstructorInfo constructor = typeof(ClassWithCtors).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(ClassWithCtors)
+                .GetConstructor(new Type[] { typeof(string) });
             Expression[] arguments = new Expression[] { Expression.Constant("hello") };
             MemberInfo[] members = new MemberInfo[] { constructor };
 
@@ -663,9 +657,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Members_ArgumentTypeAndMemberTypeDontMatch_ThrowsArgumentException()
         {
-            ConstructorInfo constructor = typeof(ClassWithCtors).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(ClassWithCtors)
+                .GetConstructor(new Type[] { typeof(string) });
             Expression[] arguments = new Expression[] { Expression.Constant("hello") };
             MemberInfo[] members = new MemberInfo[]
             {
@@ -797,9 +790,9 @@ namespace System.Linq.Expressions.Tests
         public static void GlobalMethodInMembers()
         {
             ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(
-                    new AssemblyName("Name"),
-                    AssemblyBuilderAccess.RunAndCollect
-                )
+                new AssemblyName("Name"),
+                AssemblyBuilderAccess.RunAndCollect
+            )
                 .DefineDynamicModule("Module");
             MethodBuilder globalMethod = module.DefineGlobalMethod(
                 "GlobalMethod",
@@ -810,9 +803,8 @@ namespace System.Linq.Expressions.Tests
             globalMethod.GetILGenerator().Emit(OpCodes.Ret);
             module.CreateGlobalFunctions();
             MethodInfo globalMethodInfo = module.GetMethod(globalMethod.Name);
-            ConstructorInfo constructor = typeof(ClassWithCtors).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(ClassWithCtors)
+                .GetConstructor(new Type[] { typeof(string) });
             Expression[] arguments = { Expression.Constant(5) };
             MemberInfo[] members = { globalMethodInfo };
             AssertExtensions.Throws<ArgumentException>(
@@ -825,9 +817,9 @@ namespace System.Linq.Expressions.Tests
         public static void GlobalFieldInMembers()
         {
             ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(
-                    new AssemblyName("Name"),
-                    AssemblyBuilderAccess.RunAndCollect
-                )
+                new AssemblyName("Name"),
+                AssemblyBuilderAccess.RunAndCollect
+            )
                 .DefineDynamicModule("Module");
             FieldBuilder fieldBuilder = module.DefineInitializedData(
                 "GlobalField",
@@ -836,9 +828,8 @@ namespace System.Linq.Expressions.Tests
             );
             module.CreateGlobalFunctions();
             FieldInfo globalField = module.GetField(fieldBuilder.Name);
-            ConstructorInfo constructor = typeof(ClassWithCtors).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(ClassWithCtors)
+                .GetConstructor(new Type[] { typeof(string) });
             Expression[] arguments = { Expression.Constant(5) };
             MemberInfo[] members = { globalField };
             AssertExtensions.Throws<ArgumentException>(

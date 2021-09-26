@@ -39,10 +39,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
             unsafe
             {
-                return MetadataStringDecoder.DefaultUTF8.GetString(
-                    blobReader.CurrentPointer,
-                    backtickIndex
-                );
+                return MetadataStringDecoder.DefaultUTF8
+                    .GetString(blobReader.CurrentPointer, backtickIndex);
             }
         }
 
@@ -125,13 +123,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 return null;
 
             return await GetInfoForMetadataReferenceSlowAsync(
-                    solution.Workspace,
-                    SolutionKey.ToSolutionKey(solution),
-                    reference,
-                    checksum,
-                    metadata,
-                    cancellationToken
-                )
+                solution.Workspace,
+                SolutionKey.ToSolutionKey(solution),
+                reference,
+                checksum,
+                metadata,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -311,10 +309,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 _containsExtensionsMethod = false;
 
                 _inheritanceMap = OrderPreservingMultiDictionary<string, string>.GetInstance();
-                _parentToChildren = OrderPreservingMultiDictionary<
-                    MetadataNode,
-                    MetadataNode
-                >.GetInstance();
+                _parentToChildren = OrderPreservingMultiDictionary<MetadataNode, MetadataNode>
+                    .GetInstance();
                 _extensionMethodToParameterTypeInfo = new MultiDictionary<
                     MetadataNode,
                     ParameterTypeInfo
@@ -406,10 +402,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             private void GenerateMetadataNodes()
             {
                 var globalNamespace = _metadataReader.GetNamespaceDefinitionRoot();
-                var definitionMap = OrderPreservingMultiDictionary<
-                    string,
-                    MetadataDefinition
-                >.GetInstance();
+                var definitionMap = OrderPreservingMultiDictionary<string, MetadataDefinition>
+                    .GetInstance();
                 try
                 {
                     LookupMetadataDefinitions(globalNamespace, definitionMap);
@@ -442,10 +436,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 _parentToChildren.Add(parentNode, childNode);
 
                 // Add all child members
-                var definitionMap = OrderPreservingMultiDictionary<
-                    string,
-                    MetadataDefinition
-                >.GetInstance();
+                var definitionMap = OrderPreservingMultiDictionary<string, MetadataDefinition>
+                    .GetInstance();
                 try
                 {
                     foreach (var definition in definitionsWithSameName)
@@ -734,20 +726,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         if (dotIndex == -1)
                         {
                             simpleNames.Add(
-                                MetadataStringDecoder.DefaultUTF8.GetString(
-                                    blobReader.CurrentPointer,
-                                    blobReader.RemainingBytes
-                                )
+                                MetadataStringDecoder.DefaultUTF8
+                                    .GetString(blobReader.CurrentPointer, blobReader.RemainingBytes)
                             );
                             return;
                         }
                         else
                         {
                             simpleNames.Add(
-                                MetadataStringDecoder.DefaultUTF8.GetString(
-                                    blobReader.CurrentPointer,
-                                    dotIndex
-                                )
+                                MetadataStringDecoder.DefaultUTF8
+                                    .GetString(blobReader.CurrentPointer, dotIndex)
                             );
                             blobReader.Offset += dotIndex + 1;
                         }
@@ -790,10 +778,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     case HandleKind.TypeReference:
                         return baseTypeOrInterfaceHandle;
                     case HandleKind.TypeSpecification:
-                        return FirstEntityHandleProvider.Instance.GetTypeFromSpecification(
-                            _metadataReader,
-                            (TypeSpecificationHandle)baseTypeOrInterfaceHandle
-                        );
+                        return FirstEntityHandleProvider.Instance
+                            .GetTypeFromSpecification(
+                                _metadataReader,
+                                (TypeSpecificationHandle)baseTypeOrInterfaceHandle
+                            );
                     default:
                         return default;
                 }

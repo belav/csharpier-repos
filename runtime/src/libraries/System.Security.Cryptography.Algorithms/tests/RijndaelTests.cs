@@ -94,9 +94,10 @@ namespace System.Security.Cryptography.Encryption.Rijndael.Tests
         {
             static void test(Rijndael alg)
             {
-                byte[] plainTextBytes = new ASCIIEncoding().GetBytes(
-                    "This is a sentence that is longer than a block, it ensures that multi-block functions work."
-                );
+                byte[] plainTextBytes = new ASCIIEncoding()
+                    .GetBytes(
+                        "This is a sentence that is longer than a block, it ensures that multi-block functions work."
+                    );
 
                 byte[] encryptedBytesExpected = new byte[]
                 {
@@ -392,8 +393,8 @@ namespace System.Security.Cryptography.Encryption.Rijndael.Tests
             byte[] key = "0123456789ABCDEFFEDCBA9876543210".HexToByteArray();
             byte[] iv = "0123456789ABCDEF0123456789ABCDEF".HexToByteArray();
             byte[] outputBytes = new byte[iv.Length * 2 + outputPadding];
-            byte[] input =
-                "D1BF87C650FCD10B758445BE0E0A99D14652480DF53423A8B727D30C8C010EDE".HexToByteArray();
+            byte[] input = "D1BF87C650FCD10B758445BE0E0A99D14652480DF53423A8B727D30C8C010EDE"
+                .HexToByteArray();
             int outputOffset = 0;
 
             using (Rijndael alg = Rijndael.Create())

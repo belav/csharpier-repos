@@ -58,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity
 
                     if (encryptPersonalData)
                     {
-                        var personalDataProps = typeof(TUser).GetProperties()
+                        var personalDataProps = typeof(TUser)
+                            .GetProperties()
                             .Where(
                                 prop =>
                                     Attribute.IsDefined(
@@ -118,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity
 
                     if (encryptPersonalData)
                     {
-                        var tokenProps = typeof(TUserToken).GetProperties()
+                        var tokenProps = typeof(TUserToken)
+                            .GetProperties()
                             .Where(
                                 prop =>
                                     Attribute.IsDefined(

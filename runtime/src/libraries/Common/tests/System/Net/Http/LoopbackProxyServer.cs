@@ -200,11 +200,11 @@ namespace System.Net.Test.Common
 
                 Send200Response(writer);
                 await ProcessConnectMethod(
-                        clientSocket,
-                        (NetworkStream)reader.BaseStream,
-                        remoteHost,
-                        remotePort
-                    )
+                    clientSocket,
+                    (NetworkStream)reader.BaseStream,
+                    remoteHost,
+                    remotePort
+                )
                     .ConfigureAwait(false);
 
                 return false; // connection can't be used for any more requests
@@ -251,7 +251,8 @@ namespace System.Net.Test.Common
                 writer.Write(sb.ToString());
 
                 // Forward the response body from the server to the client.
-                string responseBody = await response.Content.ReadAsStringAsync()
+                string responseBody = await response.Content
+                    .ReadAsStringAsync()
                     .ConfigureAwait(false);
                 writer.Write(responseBody);
 

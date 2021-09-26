@@ -191,14 +191,16 @@ namespace System.Diagnostics
                                             }
 
                                             if (
-                                                !int.TryParse(
-                                                    splitVersion[0],
-                                                    out currentVersion[0]
-                                                )
-                                                || !int.TryParse(
-                                                    splitVersion[1],
-                                                    out currentVersion[1]
-                                                )
+                                                !int
+                                                    .TryParse(
+                                                        splitVersion[0],
+                                                        out currentVersion[0]
+                                                    )
+                                                || !int
+                                                    .TryParse(
+                                                        splitVersion[1],
+                                                        out currentVersion[1]
+                                                    )
                                             )
                                             {
                                                 continue;

@@ -101,7 +101,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
             object sender,
             ResolveEventArgs args
         ) =>
-            AppDomain.CurrentDomain.GetAssemblies()
+            AppDomain.CurrentDomain
+                .GetAssemblies()
                 .SingleOrDefault(assembly => assembly.FullName == args.Name);
 
         public void Dispose() => StopServiceCallback(this, EventArgs.Empty);

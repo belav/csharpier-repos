@@ -35,11 +35,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 solution.RemoveProjectReference(this.ProjectId, _reference);
 
             protected override string GetDisplayText() =>
-                string.Format(
-                    ServicesVSResources.Project_reference_to_0_in_project_1,
-                    _projectReferenceName,
-                    this.ProjectName
-                );
+                string
+                    .Format(
+                        ServicesVSResources.Project_reference_to_0_in_project_1,
+                        _projectReferenceName,
+                        this.ProjectName
+                    );
         }
     }
 }

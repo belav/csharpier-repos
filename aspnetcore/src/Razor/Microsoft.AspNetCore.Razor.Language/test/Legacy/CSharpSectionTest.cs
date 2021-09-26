@@ -133,12 +133,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             // Act & Assert
             ParseDocumentTest(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "@section Test{0}{{{0}{1}@if(true){0}{1}{{{0}{1}{1}<p>Hello World</p>{0}{1}}}",
-                    newLine,
-                    spaces
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "@section Test{0}{{{0}{1}@if(true){0}{1}{{{0}{1}{1}<p>Hello World</p>{0}{1}}}",
+                        newLine,
+                        spaces
+                    ),
                 new[] { SectionDirective.Directive }
             );
         }

@@ -78,11 +78,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             }
 
             if (
-                model.Tables.Any(
-                    t =>
-                        !t.IsExcludedFromMigrations
-                        && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)
-                )
+                model.Tables
+                    .Any(
+                        t =>
+                            !t.IsExcludedFromMigrations
+                            && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)
+                    )
             )
             {
                 yield return new Annotation(SqlServerAnnotationNames.MemoryOptimized, true);
@@ -150,11 +151,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             if (modelIndex.GetIncludeProperties() is IReadOnlyList<string> includeProperties)
             {
                 var includeColumns = includeProperties.Select(
-                        p =>
-                            modelIndex.DeclaringEntityType.FindProperty(p)!.GetColumnName(
-                                StoreObjectIdentifier.Table(table.Name, table.Schema)
-                            )
-                    )
+                    p =>
+                        modelIndex.DeclaringEntityType.FindProperty(p)!
+                            .GetColumnName(StoreObjectIdentifier.Table(table.Name, table.Schema))
+                )
                     .ToArray();
 
                 yield return new Annotation(SqlServerAnnotationNames.Include, includeColumns);
@@ -180,7 +180,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
         public override IEnumerable<IAnnotation> For(IColumn column)
         {
             var table = StoreObjectIdentifier.Table(column.Table.Name, column.Table.Schema);
-            var identityProperty = column.PropertyMappings.Where(
+            var identityProperty = column.PropertyMappings
+                .Where(
                     m =>
                         m.TableMapping.IsSharedTablePrincipal
                         && m.TableMapping.EntityType == m.Property.DeclaringEntityType
@@ -198,12 +199,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
 
                 yield return new Annotation(
                     SqlServerAnnotationNames.Identity,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0}, {1}",
-                        seed ?? 1,
-                        increment ?? 1
-                    )
+                    string
+                        .Format(CultureInfo.InvariantCulture, "{0}, {1}", seed ?? 1, increment ?? 1)
                 );
             }
 

@@ -1959,9 +1959,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             var options = new LoggingOptions();
             options.Initialize(
-                new DbContextOptionsBuilder().EnableSensitiveDataLogging(
-                    sensitiveDataLoggingEnabled
-                ).Options
+                new DbContextOptionsBuilder()
+                    .EnableSensitiveDataLogging(sensitiveDataLoggingEnabled).Options
             );
             return new DiagnosticsLogger<DbLoggerCategory.Model.Validation>(
                 Fixture.TestSqlLoggerFactory,

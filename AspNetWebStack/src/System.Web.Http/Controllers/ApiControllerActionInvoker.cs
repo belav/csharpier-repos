@@ -45,9 +45,8 @@ namespace System.Web.Http.Controllers
 
                 // This is cached in a local for performance reasons. ReturnType is a virtual property on HttpActionDescriptor,
                 // or else we'd want to cache this as part of that class.
-                bool isDeclaredTypeActionResult = typeof(IHttpActionResult).IsAssignableFrom(
-                    actionDescriptor.ReturnType
-                );
+                bool isDeclaredTypeActionResult = typeof(IHttpActionResult)
+                    .IsAssignableFrom(actionDescriptor.ReturnType);
                 if (result == null && isDeclaredTypeActionResult)
                 {
                     // If the return type of the action descriptor is IHttpActionResult, it's not valid to return null

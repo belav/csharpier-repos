@@ -1036,10 +1036,11 @@ namespace System.Numerics.Tests
                 try
                 {
                     BigInteger x2 = (
-                        int.Parse(
-                            new string(new char[] { inArr[i] }),
-                            NumberStyles.AllowHexSpecifier
-                        ) * baseNum
+                        int
+                            .Parse(
+                                new string(new char[] { inArr[i] }),
+                                NumberStyles.AllowHexSpecifier
+                            ) * baseNum
                     );
                     x = x + x2;
                 }

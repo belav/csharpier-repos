@@ -594,13 +594,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(null)
             );
-            var expectedErrorMessage = string.Join(
-                Environment.NewLine,
-                $"Cannot determine the 'formaction' attribute for <{tagName}>. The following attributes are mutually exclusive:",
-                "asp-route",
-                "asp-controller, asp-action",
-                "asp-page, asp-page-handler"
-            );
+            var expectedErrorMessage = string
+                .Join(
+                    Environment.NewLine,
+                    $"Cannot determine the 'formaction' attribute for <{tagName}>. The following attributes are mutually exclusive:",
+                    "asp-route",
+                    "asp-controller, asp-action",
+                    "asp-page, asp-page-handler"
+                );
 
             var context = new TagHelperContext(
                 tagName: "form-action",
@@ -637,13 +638,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(null)
             );
-            var expectedErrorMessage = string.Join(
-                Environment.NewLine,
-                $"Cannot determine the 'formaction' attribute for <{tagName}>. The following attributes are mutually exclusive:",
-                "asp-route",
-                "asp-controller, asp-action",
-                "asp-page, asp-page-handler"
-            );
+            var expectedErrorMessage = string
+                .Join(
+                    Environment.NewLine,
+                    $"Cannot determine the 'formaction' attribute for <{tagName}>. The following attributes are mutually exclusive:",
+                    "asp-route",
+                    "asp-controller, asp-action",
+                    "asp-page, asp-page-handler"
+                );
 
             var context = new TagHelperContext(
                 tagName: "form-action",
@@ -680,13 +682,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(null)
             );
-            var expectedErrorMessage = string.Join(
-                Environment.NewLine,
-                $"Cannot determine the 'formaction' attribute for <{tagName}>. The following attributes are mutually exclusive:",
-                "asp-route",
-                "asp-controller, asp-action",
-                "asp-page, asp-page-handler"
-            );
+            var expectedErrorMessage = string
+                .Join(
+                    Environment.NewLine,
+                    $"Cannot determine the 'formaction' attribute for <{tagName}>. The following attributes are mutually exclusive:",
+                    "asp-route",
+                    "asp-controller, asp-action",
+                    "asp-page, asp-page-handler"
+                );
 
             var context = new TagHelperContext(
                 tagName: "form-action",
@@ -723,13 +726,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(null)
             );
-            var expectedErrorMessage = string.Join(
-                Environment.NewLine,
-                $"Cannot determine the 'formaction' attribute for <{tagName}>. The following attributes are mutually exclusive:",
-                "asp-route",
-                "asp-controller, asp-action",
-                "asp-page, asp-page-handler"
-            );
+            var expectedErrorMessage = string
+                .Join(
+                    Environment.NewLine,
+                    $"Cannot determine the 'formaction' attribute for <{tagName}>. The following attributes are mutually exclusive:",
+                    "asp-route",
+                    "asp-controller, asp-action",
+                    "asp-page, asp-page-handler"
+                );
 
             var context = new TagHelperContext(
                 tagName: "form-action",

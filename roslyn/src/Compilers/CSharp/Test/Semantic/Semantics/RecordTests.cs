@@ -32,8 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             CSharpTestSource src,
             string? expectedOutput = null,
             IEnumerable<MetadataReference>? references = null
-        ) =>
-            base.CompileAndVerify(
+        ) => base.CompileAndVerify(
                 new[] { src, IsExternalInitTypeDefinition },
                 expectedOutput: expectedOutput,
                 parseOptions: TestOptions.Regular9,
@@ -133,16 +132,16 @@ record Point(int x, int y);
                 // (2,1): error CS8805: Program using top-level statements must be an executable.
                 // record Point(int x, int y);
                 Diagnostic(
-                        ErrorCode.ERR_SimpleProgramNotAnExecutable,
-                        "record Point(int x, int y);"
-                    )
+                    ErrorCode.ERR_SimpleProgramNotAnExecutable,
+                    "record Point(int x, int y);"
+                )
                     .WithLocation(2, 1),
                 // (2,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
                 // record Point(int x, int y);
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotAvailableInVersion8,
-                        "record Point(int x, int y);"
-                    )
+                    ErrorCode.ERR_FeatureNotAvailableInVersion8,
+                    "record Point(int x, int y);"
+                )
                     .WithArguments("top-level statements", "9.0")
                     .WithLocation(2, 1),
                 // (2,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
@@ -768,7 +767,9 @@ public record A(int, string ) { }
             Assert.IsType<ParameterSyntax>(
                 comp.GetMember<NamedTypeSymbol>("A").Constructors[0].Parameters[
                     1
-                ].DeclaringSyntaxReferences.Single().GetSyntax()
+                ].DeclaringSyntaxReferences
+                    .Single()
+                    .GetSyntax()
             );
         }
 
@@ -816,7 +817,9 @@ public record A(int, int ) { }
             Assert.IsType<ParameterSyntax>(
                 comp.GetMember<NamedTypeSymbol>("A").Constructors[0].Parameters[
                     1
-                ].DeclaringSyntaxReferences.Single().GetSyntax()
+                ].DeclaringSyntaxReferences
+                    .Single()
+                    .GetSyntax()
             );
         }
 
@@ -947,10 +950,10 @@ public partial record C
                 parseOptions: TestOptions.Regular9
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: "(2, 2)",
-                    verify: Verification.Skipped /* init-only */
-                )
+                comp,
+                expectedOutput: "(2, 2)",
+                verify: Verification.Skipped /* init-only */
+            )
                 .VerifyDiagnostics();
         }
 
@@ -1041,13 +1044,12 @@ record C(int X, int Y)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 1
 2
 123"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C..ctor(int, int)",
@@ -1130,18 +1132,17 @@ record C(int X, int Y)
     }
 }";
             CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 0
 2"
-                )
-                .VerifyDiagnostics(
-                    // (3,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
-                    // record C(int X, int Y)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
-                        .WithArguments("X")
-                        .WithLocation(3, 14)
-                );
+            ).VerifyDiagnostics(
+                // (3,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // record C(int X, int Y)
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(3, 14)
+            );
         }
 
         [Fact]
@@ -1162,18 +1163,17 @@ record C(int X, int Y)
     }
 }";
             CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 3
 2"
-                )
-                .VerifyDiagnostics(
-                    // (3,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
-                    // record C(int X, int Y)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
-                        .WithArguments("X")
-                        .WithLocation(3, 14)
-                );
+            ).VerifyDiagnostics(
+                // (3,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // record C(int X, int Y)
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(3, 14)
+            );
         }
 
         [Fact, WorkItem(48947, "https://github.com/dotnet/roslyn/issues/48947")]
@@ -1905,10 +1905,10 @@ record C()
                 // (4,5): error CS8862: A constructor declared in a record with parameter list must have 'this' constructor initializer.
                 //     C(int x)
                 Diagnostic(
-                        ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord,
-                        "C",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord,
+                    "C",
+                    isSuppressed: false
+                )
                     .WithLocation(4, 5)
             );
         }
@@ -2094,13 +2094,12 @@ data struct S(int X, int Y)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"0
+                src,
+                expectedOutput: @"0
 1
 True
 False"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact(Skip = "record struct")]
@@ -2120,11 +2119,10 @@ data struct S(int X, int Y)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"False
+                src,
+                expectedOutput: @"False
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "S.Main",
@@ -2176,11 +2174,10 @@ data struct S(int X, int Y)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"obj
+                src,
+                expectedOutput: @"obj
 s"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact(Skip = "record struct")]
@@ -2204,11 +2201,10 @@ data struct S(int X, int Y)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"s
+                src,
+                expectedOutput: @"s
 s"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact(Skip = "record struct")]
@@ -2253,7 +2249,8 @@ record C(int X)
                 Diagnostic(ErrorCode.ERR_InvalidWithReceiverType, "Main()").WithLocation(7, 13),
                 // (8,13): error CS8716: There is no target type for the default literal.
                 //         _ = default with { };
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
+                    .WithLocation(8, 13),
                 // (9,13): error CS8802: The receiver of a `with` expression must have a valid non-void type.
                 //         _ = null with { };
                 Diagnostic(ErrorCode.ERR_InvalidWithReceiverType, "null").WithLocation(9, 13)
@@ -2278,11 +2275,10 @@ record C(int X)
     }
 }";
             CompileAndVerify(
-                    src,
-                    expectedOutput: @"1
+                src,
+                expectedOutput: @"1
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -2515,11 +2511,10 @@ record C(int X)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"0
+                src,
+                expectedOutput: @"0
 5"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.Main",
@@ -2564,11 +2559,10 @@ record C(int X, int Y)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"0 1
+                src,
+                expectedOutput: @"0 1
 5 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.Main",
@@ -2614,12 +2608,11 @@ record C(int X, int Y)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"0 1
+                src,
+                expectedOutput: @"0 1
 5 1
 5 2"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.Main",
@@ -3001,13 +2994,12 @@ class C
 }";
 
             var verifier = CompileAndVerify(
-                    new[] { src, IsExternalInitTypeDefinition },
-                    parseOptions: TestOptions.Regular9,
-                    verify: Verification.Passes,
-                    expectedOutput: @"2
+                new[] { src, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.Regular9,
+                verify: Verification.Passes,
+                expectedOutput: @"2
 3"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.M<T>(T)",
@@ -4188,9 +4180,8 @@ abstract sealed record C1;
             Assert.Equal(
                 "record C1",
                 namedTypeSymbol.ToDisplayString(
-                    SymbolDisplayFormat.TestFormat.AddKindOptions(
-                        SymbolDisplayKindOptions.IncludeTypeKeyword
-                    )
+                    SymbolDisplayFormat.TestFormat
+                        .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                 )
             );
         }
@@ -4228,9 +4219,8 @@ sealed abstract record C1;
             Assert.Equal(
                 "record C1",
                 namedTypeSymbol.ToDisplayString(
-                    SymbolDisplayFormat.TestFormat.AddKindOptions(
-                        SymbolDisplayKindOptions.IncludeTypeKeyword
-                    )
+                    SymbolDisplayFormat.TestFormat
+                        .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                 )
             );
         }
@@ -4299,9 +4289,8 @@ sealed abstract record C2 : C1;
             Assert.Equal(
                 "record C1",
                 namedTypeSymbol.ToDisplayString(
-                    SymbolDisplayFormat.TestFormat.AddKindOptions(
-                        SymbolDisplayKindOptions.IncludeTypeKeyword
-                    )
+                    SymbolDisplayFormat.TestFormat
+                        .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                 )
             );
         }
@@ -4411,11 +4400,11 @@ public record B : A {
 
             Assert.Equal(
                 "class A",
-                comp.GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace
+                    .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -4533,11 +4522,11 @@ public class Program
 
             Assert.Equal(
                 "class A",
-                comp.GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace
+                    .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -4661,11 +4650,11 @@ public record B : A {
 
             Assert.Equal(
                 "class A",
-                comp.GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace
+                    .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -4797,11 +4786,11 @@ public class Program
 
             Assert.Equal(
                 "class A",
-                comp.GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace
+                    .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -4924,11 +4913,11 @@ public record B : A {
 
             Assert.Equal(
                 "class A",
-                comp.GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace
+                    .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -5060,11 +5049,11 @@ public class Program
 
             Assert.Equal(
                 "class A",
-                comp.GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace
+                    .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -5085,10 +5074,10 @@ public record B(int X) : A;
 ";
 
             var comp2Ref = CreateCompilation(
-                    new[] { source2, IsExternalInitTypeDefinition },
-                    references: new[] { comp1Ref },
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source2, IsExternalInitTypeDefinition },
+                references: new[] { comp1Ref },
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source3 =
@@ -5105,12 +5094,11 @@ class Program
 }
 ";
             CompileAndVerify(
-                    source3,
-                    references: new[] { comp1Ref, comp2Ref },
-                    expectedOutput: @"1
+                source3,
+                references: new[] { comp1Ref, comp2Ref },
+                expectedOutput: @"1
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -5122,10 +5110,10 @@ public record A;
 ";
 
             var comp1Ref = CreateCompilation(
-                    new[] { source1, IsExternalInitTypeDefinition },
-                    assemblyName: "Clone_12",
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source1, IsExternalInitTypeDefinition },
+                assemblyName: "Clone_12",
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source2 =
@@ -5134,10 +5122,10 @@ public record B(int X) : A;
 ";
 
             var comp2Ref = CreateCompilation(
-                    new[] { source2, IsExternalInitTypeDefinition },
-                    references: new[] { comp1Ref },
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source2, IsExternalInitTypeDefinition },
+                references: new[] { comp1Ref },
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source3 =
@@ -5179,9 +5167,9 @@ public record A;
 ";
 
             var comp1Ref = CreateCompilation(
-                    new[] { source1, IsExternalInitTypeDefinition },
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source1, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source2 =
@@ -5190,11 +5178,11 @@ public record B(int X) : A;
 ";
 
             var comp2Ref = CreateCompilation(
-                    new[] { source2, IsExternalInitTypeDefinition },
-                    assemblyName: "Clone_13",
-                    references: new[] { comp1Ref },
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source2, IsExternalInitTypeDefinition },
+                assemblyName: "Clone_13",
+                references: new[] { comp1Ref },
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source3 =
@@ -5203,10 +5191,10 @@ public record C(int X) : B(X);
 ";
 
             var comp3Ref = CreateCompilation(
-                    new[] { source3, IsExternalInitTypeDefinition },
-                    references: new[] { comp1Ref, comp2Ref },
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source3, IsExternalInitTypeDefinition },
+                references: new[] { comp1Ref, comp2Ref },
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source4 =
@@ -5305,10 +5293,10 @@ public record B(int X) : A;
 ";
 
             var comp2Ref = CreateCompilation(
-                    new[] { source2, IsExternalInitTypeDefinition },
-                    references: new[] { comp1Ref },
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source2, IsExternalInitTypeDefinition },
+                references: new[] { comp1Ref },
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source3 =
@@ -5325,12 +5313,11 @@ record C(int X) : B(X)
 }
 ";
             CompileAndVerify(
-                    source3,
-                    references: new[] { comp1Ref, comp2Ref },
-                    expectedOutput: @"1
+                source3,
+                references: new[] { comp1Ref, comp2Ref },
+                expectedOutput: @"1
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -5342,10 +5329,10 @@ public record A;
 ";
 
             var comp1Ref = CreateCompilation(
-                    new[] { source1, IsExternalInitTypeDefinition },
-                    assemblyName: "Clone_15",
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source1, IsExternalInitTypeDefinition },
+                assemblyName: "Clone_15",
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source2 =
@@ -5354,10 +5341,10 @@ public record B(int X) : A;
 ";
 
             var comp2Ref = CreateCompilation(
-                    new[] { source2, IsExternalInitTypeDefinition },
-                    references: new[] { comp1Ref },
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source2, IsExternalInitTypeDefinition },
+                references: new[] { comp1Ref },
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source3 =
@@ -5462,9 +5449,9 @@ public record A;
 ";
 
             var comp1Ref = CreateCompilation(
-                    new[] { source1, IsExternalInitTypeDefinition },
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source1, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source2 =
@@ -5473,11 +5460,11 @@ public record B(int X) : A;
 ";
 
             var comp2Ref = CreateCompilation(
-                    new[] { source2, IsExternalInitTypeDefinition },
-                    assemblyName: "Clone_16",
-                    references: new[] { comp1Ref },
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source2, IsExternalInitTypeDefinition },
+                assemblyName: "Clone_16",
+                references: new[] { comp1Ref },
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source3 =
@@ -5486,10 +5473,10 @@ public record C(int X) : B(X);
 ";
 
             var comp3Ref = CreateCompilation(
-                    new[] { source3, IsExternalInitTypeDefinition },
-                    references: new[] { comp1Ref, comp2Ref },
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source3, IsExternalInitTypeDefinition },
+                references: new[] { comp1Ref, comp2Ref },
+                parseOptions: TestOptions.Regular9
+            )
                 .EmitToImageReference();
 
             string source4 =
@@ -5709,11 +5696,11 @@ public record B : A {
 
             Assert.Equal(
                 "class A",
-                comp.GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace
+                    .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -5823,11 +5810,11 @@ public record B : A {
 
             Assert.Equal(
                 "class A",
-                comp.GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace
+                    .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -9346,11 +9333,10 @@ record C(int X)
 }
 ";
             var verifier = CompileAndVerify(
-                    source,
-                    expectedOutput: @"1
+                source,
+                expectedOutput: @"1
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C." + WellKnownMemberNames.CloneMethodName,
@@ -9396,11 +9382,10 @@ record C(int X)
 }
 ";
             var verifier = CompileAndVerify(
-                    source,
-                    expectedOutput: @"1
+                source,
+                expectedOutput: @"1
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C." + WellKnownMemberNames.CloneMethodName,
@@ -9444,11 +9429,10 @@ record C(int X)
 }
 ";
             var verifier = CompileAndVerify(
-                    source,
-                    expectedOutput: @"1
+                source,
+                expectedOutput: @"1
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C." + WellKnownMemberNames.CloneMethodName,
@@ -9486,11 +9470,10 @@ record C(int X)
 }
 ";
             var verifier = CompileAndVerify(
-                    source,
-                    expectedOutput: @"1
+                source,
+                expectedOutput: @"1
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C." + WellKnownMemberNames.CloneMethodName,
@@ -9528,11 +9511,10 @@ record C(int X)
 }
 ";
             var verifier = CompileAndVerify(
-                    source,
-                    expectedOutput: @"1
+                source,
+                expectedOutput: @"1
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C." + WellKnownMemberNames.CloneMethodName,
@@ -9571,11 +9553,10 @@ record C(int X)
 }
 ";
             var verifier = CompileAndVerify(
-                    source,
-                    expectedOutput: @"1
+                source,
+                expectedOutput: @"1
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C." + WellKnownMemberNames.CloneMethodName,
@@ -9617,13 +9598,12 @@ record Base
 record C(int X, int Y) : Base(X, Y);
 ";
             CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 1
 2
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -9652,13 +9632,12 @@ record Base
 record C(int X, int Y) : Base(X, Y) {}
 ";
             CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 1
 2
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -9838,12 +9817,11 @@ record C(int X, int Y, int Z)
 }
 ";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 Y
 X"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.Main",
@@ -10088,12 +10066,11 @@ record C(long X)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 conversion
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
             verifier.VerifyIL(
                 "C.Main",
                 @"
@@ -10150,12 +10127,11 @@ record C(long X)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 conversion
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -10241,13 +10217,12 @@ record C
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 conversion
 set
 11"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
             verifier.VerifyIL(
                 "C.Main",
                 @"
@@ -11310,7 +11285,8 @@ record B(string? X)
                     .WithLocation(10, 21),
                 // (11,18): warning CS8602: Dereference of a possibly null reference.
                 //         (b1 with { X = null }).ToString(); // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "{ X = null }").WithLocation(11, 18)
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "{ X = null }")
+                    .WithLocation(11, 18)
             );
         }
 
@@ -11344,7 +11320,8 @@ record B(string? X)
                     .WithLocation(13, 21),
                 // (14,18): warning CS8602: Dereference of a possibly null reference.
                 //         (b1 with { X = null }).ToString(); // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "{ X = null }").WithLocation(14, 18)
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "{ X = null }")
+                    .WithLocation(14, 18)
             );
         }
 
@@ -11440,8 +11417,8 @@ record C
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 True
 False
 1
@@ -11452,8 +11429,7 @@ True
 3
 1
 2"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -11477,7 +11453,7 @@ public record C
 }"
             );
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class D
 {
     public C M(C c) => c with
@@ -11487,9 +11463,8 @@ class D
         Z = 2,
     };
 }",
-                    references: new[] { comp1.EmitToImageReference() }
-                )
-                .VerifyDiagnostics();
+                references: new[] { comp1.EmitToImageReference() }
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "D.M",
@@ -11536,12 +11511,11 @@ record C(int Y)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 5
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.Main",
@@ -12012,7 +11986,8 @@ record B2(int X, int Y) : A
                 GetProperties(comp, "B2").ToTestDisplayStrings()
             );
 
-            var b1Ctor = comp.GetTypeByMetadataName("B1")!.GetMembersUnordered()
+            var b1Ctor = comp.GetTypeByMetadataName("B1")!
+                .GetMembersUnordered()
                 .OfType<SynthesizedRecordConstructor>()
                 .Single();
             Assert.Equal("B1..ctor(System.Int32 X, System.Int32 Y)", b1Ctor.ToTestDisplayString());
@@ -12175,11 +12150,10 @@ class Program
     }
 }";
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"1, 2
+                source,
+                expectedOutput: @"1, 2
 1, 2"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -12773,19 +12747,18 @@ class Program
             var actualMembers = GetProperties(comp, "C").ToTestDisplayStrings();
             AssertEx.Equal(new[] { "System.Type C.EqualityContract { get; }" }, actualMembers);
 
-            var verifier = CompileAndVerify(comp, expectedOutput: "(, )")
-                .VerifyDiagnostics(
-                    // (1,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
-                    // record C(object P1, object P2) : B
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
-                        .WithArguments("P1")
-                        .WithLocation(1, 17),
-                    // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
-                    // record C(object P1, object P2) : B
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
-                        .WithArguments("P2")
-                        .WithLocation(1, 28)
-                );
+            var verifier = CompileAndVerify(comp, expectedOutput: "(, )").VerifyDiagnostics(
+                // (1,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // record C(object P1, object P2) : B
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
+                    .WithArguments("P1")
+                    .WithLocation(1, 17),
+                // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // record C(object P1, object P2) : B
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
+                    .WithArguments("P2")
+                    .WithLocation(1, 28)
+            );
             verifier.VerifyIL(
                 "C..ctor(object, object)",
                 @"{
@@ -13711,25 +13684,24 @@ class Program
             AssertEx.Equal(expectedMembers, actualMembers);
 
             var verifier = CompileAndVerify(
-                    comp,
-                    verify: Verification.Skipped,
-                    expectedOutput: @"(1, 2)
+                comp,
+                verify: Verification.Skipped,
+                expectedOutput: @"(1, 2)
 (1, 2)
 (1, 2)
 (1, 2)"
-                )
-                .VerifyDiagnostics(
-                    // (2,26): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
-                    // abstract record A(object X, object Y)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
-                        .WithArguments("X")
-                        .WithLocation(2, 26),
-                    // (2,36): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
-                    // abstract record A(object X, object Y)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
-                        .WithArguments("Y")
-                        .WithLocation(2, 36)
-                );
+            ).VerifyDiagnostics(
+                // (2,26): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // abstract record A(object X, object Y)
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(2, 26),
+                // (2,36): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // abstract record A(object X, object Y)
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
+                    .WithArguments("Y")
+                    .WithLocation(2, 36)
+            );
 
             verifier.VerifyIL(
                 "A..ctor(object, object)",
@@ -13957,14 +13929,13 @@ class Program
             AssertEx.Equal(expectedMembers, actualMembers);
 
             var verifier = CompileAndVerify(
-                    comp,
-                    verify: Verification.Skipped,
-                    expectedOutput: @"(1, 2)
+                comp,
+                verify: Verification.Skipped,
+                expectedOutput: @"(1, 2)
 (1, 2)
 1
 (1, 2)"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "A..ctor()",
@@ -14227,27 +14198,26 @@ class Program
             AssertEx.Equal(expectedMembers, actualMembers);
 
             var verifier = CompileAndVerify(
-                    comp,
-                    verify: Verification.Skipped,
-                    expectedOutput: @"(1, 2)
+                comp,
+                verify: Verification.Skipped,
+                expectedOutput: @"(1, 2)
 (1, 2)
 (1, 2)
 (1, 2)
 (1, 2)
 (1, 2)"
-                )
-                .VerifyDiagnostics(
-                    // (2,26): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
-                    // abstract record A(object X, object Y)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
-                        .WithArguments("X")
-                        .WithLocation(2, 26),
-                    // (2,36): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
-                    // abstract record A(object X, object Y)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
-                        .WithArguments("Y")
-                        .WithLocation(2, 36)
-                );
+            ).VerifyDiagnostics(
+                // (2,26): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // abstract record A(object X, object Y)
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(2, 26),
+                // (2,36): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // abstract record A(object X, object Y)
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
+                    .WithArguments("Y")
+                    .WithLocation(2, 36)
+            );
 
             verifier.VerifyIL(
                 "A..ctor(object, object)",
@@ -14823,14 +14793,13 @@ record B(object P) : A
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    verify: Verification.Skipped,
-                    expectedOutput: @"3
+                comp,
+                verify: Verification.Skipped,
+                expectedOutput: @"3
 3
 2
 B"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var actualMembers = GetProperties(comp, "B");
             Assert.Equal(2, actualMembers.Length);
@@ -14925,14 +14894,13 @@ record B(object P) : A
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    verify: Verification.Skipped,
-                    expectedOutput: @"3
+                comp,
+                verify: Verification.Skipped,
+                expectedOutput: @"3
 3
 2
 B"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var actualMembers = GetProperties(comp, "B");
             Assert.Equal(2, actualMembers.Length);
@@ -15058,14 +15026,13 @@ record B(object P) : A
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    verify: Verification.Skipped,
-                    expectedOutput: @"3
+                comp,
+                verify: Verification.Skipped,
+                expectedOutput: @"3
 3
 2
 B"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var actualMembers = GetProperties(comp, "B");
             Assert.Equal(2, actualMembers.Length);
@@ -15110,10 +15077,11 @@ B"
             {
                 var returnType = method.ReturnTypeWithAnnotations;
                 Assert.True(
-                    method.OverriddenMethod.ReturnTypeWithAnnotations.Equals(
-                        returnType,
-                        TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                    )
+                    method.OverriddenMethod.ReturnTypeWithAnnotations
+                        .Equals(
+                            returnType,
+                            TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
                 );
                 AssertEx.Equal(expectedModifiers, returnType.CustomModifiers);
             }
@@ -15125,10 +15093,8 @@ B"
             {
                 var parameterType = method.Parameters[0].TypeWithAnnotations;
                 Assert.True(
-                    method.OverriddenMethod.Parameters[0].TypeWithAnnotations.Equals(
-                        parameterType,
-                        TypeCompareKind.ConsiderEverything
-                    )
+                    method.OverriddenMethod.Parameters[0].TypeWithAnnotations
+                        .Equals(parameterType, TypeCompareKind.ConsiderEverything)
                 );
                 AssertEx.Equal(expectedModifiers, parameterType.CustomModifiers);
             }
@@ -15247,11 +15213,9 @@ record B : A
 }";
             var compA = CreateCompilation(sourceA);
             var verifierA = CompileAndVerify(
-                    compA,
-                    verify: ExecutionConditionUtil.IsCoreClr
-                      ? Verification.Skipped
-                      : Verification.Fails
-                )
+                compA,
+                verify: ExecutionConditionUtil.IsCoreClr ? Verification.Skipped : Verification.Fails
+            )
                 .VerifyDiagnostics();
 
             verifierA.VerifyIL(
@@ -15303,12 +15267,10 @@ record B : A
             );
 
             var verifierB = CompileAndVerify(
-                    compB,
-                    expectedOutput: "(1, 2, 3, 4) (1, 2, 3, 4) (10, 2, 30, 4)",
-                    verify: ExecutionConditionUtil.IsCoreClr
-                      ? Verification.Skipped
-                      : Verification.Fails
-                )
+                compB,
+                expectedOutput: "(1, 2, 3, 4) (1, 2, 3, 4) (10, 2, 30, 4)",
+                verify: ExecutionConditionUtil.IsCoreClr ? Verification.Skipped : Verification.Fails
+            )
                 .VerifyDiagnostics();
             // call base copy constructor B..ctor(B)
             verifierB.VerifyIL(
@@ -15360,12 +15322,10 @@ public record C(object P1, object P2) : B(3, 4)
             );
 
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: "(1, 2, 3, 4) (10, 20, 30, 40)",
-                    verify: ExecutionConditionUtil.IsCoreClr
-                      ? Verification.Skipped
-                      : Verification.Fails
-                )
+                comp,
+                expectedOutput: "(1, 2, 3, 4) (10, 20, 30, 40)",
+                verify: ExecutionConditionUtil.IsCoreClr ? Verification.Skipped : Verification.Fails
+            )
                 .VerifyDiagnostics();
             // call base copy constructor B..ctor(B)
             verifier.VerifyIL(
@@ -15433,11 +15393,9 @@ public record C(object P1, object P2) : B(3, 4) { }
             AssertEx.Equal(expectedMembers, actualMembers);
 
             var verifier = CompileAndVerify(
-                    comp,
-                    verify: ExecutionConditionUtil.IsCoreClr
-                      ? Verification.Skipped
-                      : Verification.Fails
-                )
+                comp,
+                verify: ExecutionConditionUtil.IsCoreClr ? Verification.Skipped : Verification.Fails
+            )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
                 "C..ctor(C)",
@@ -15474,11 +15432,9 @@ public record C(object P1, object P2) : B(3, 4) { }
             var comp = CreateCompilation(source);
 
             var verifier = CompileAndVerify(
-                    comp,
-                    verify: ExecutionConditionUtil.IsCoreClr
-                      ? Verification.Skipped
-                      : Verification.Fails
-                )
+                comp,
+                verify: ExecutionConditionUtil.IsCoreClr ? Verification.Skipped : Verification.Fails
+            )
                 .VerifyDiagnostics(
                     // (3,17): warning CS0414: The field 'C.field' is assigned but its value is never used
                     //     private int field = 42;
@@ -15624,14 +15580,13 @@ public record C(object P1, object P2) : B(0, 1)
                 parseOptions: TestOptions.Regular9,
                 options: TestOptions.DebugExe
             );
-            var verifier = CompileAndVerify(comp, expectedOutput: "(2, 0)")
-                .VerifyDiagnostics(
-                    // (1,21): warning CS8907: Parameter 'I' is unread. Did you forget to use it to initialize the property with that name?
-                    // public record C(int I)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "I")
-                        .WithArguments("I")
-                        .WithLocation(1, 21)
-                );
+            var verifier = CompileAndVerify(comp, expectedOutput: "(2, 0)").VerifyDiagnostics(
+                // (1,21): warning CS8907: Parameter 'I' is unread. Did you forget to use it to initialize the property with that name?
+                // public record C(int I)
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "I")
+                    .WithArguments("I")
+                    .WithLocation(1, 21)
+            );
             verifier.VerifyIL(
                 "C..ctor(C)",
                 @"
@@ -15751,12 +15706,10 @@ public record C(object I)
                 options: TestOptions.DebugExe
             );
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: "RAN",
-                    verify: ExecutionConditionUtil.IsCoreClr
-                      ? Verification.Skipped
-                      : Verification.Fails
-                )
+                comp,
+                expectedOutput: "RAN",
+                verify: ExecutionConditionUtil.IsCoreClr ? Verification.Skipped : Verification.Fails
+            )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
                 "C..ctor(int)",
@@ -15821,12 +15774,10 @@ public record C(object I)
                 options: TestOptions.DebugExe
             );
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: "1 RAN 2",
-                    verify: ExecutionConditionUtil.IsCoreClr
-                      ? Verification.Skipped
-                      : Verification.Fails
-                )
+                comp,
+                expectedOutput: "1 RAN 2",
+                verify: ExecutionConditionUtil.IsCoreClr ? Verification.Skipped : Verification.Fails
+            )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
                 "C..ctor(C)",
@@ -15963,12 +15914,10 @@ public record D(int J) : C(1)
                 options: TestOptions.DebugExe
             );
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: "(1, 2, 42) RAN (10, 20, 42)",
-                    verify: ExecutionConditionUtil.IsCoreClr
-                      ? Verification.Skipped
-                      : Verification.Fails
-                )
+                comp,
+                expectedOutput: "(1, 2, 42) RAN (10, 20, 42)",
+                verify: ExecutionConditionUtil.IsCoreClr ? Verification.Skipped : Verification.Fails
+            )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
                 "D..ctor(D)",
@@ -16017,12 +15966,10 @@ public record D(int J) : C(1)
                 options: TestOptions.DebugExe
             );
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: "(1, 2, 42) (10, 20, 42)",
-                    verify: ExecutionConditionUtil.IsCoreClr
-                      ? Verification.Skipped
-                      : Verification.Fails
-                )
+                comp,
+                expectedOutput: "(1, 2, 42) (10, 20, 42)",
+                verify: ExecutionConditionUtil.IsCoreClr ? Verification.Skipped : Verification.Fails
+            )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
                 "D..ctor(D)",
@@ -16385,12 +16332,10 @@ public record C(object P1, object P2) : B(3, 4)
             );
 
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: "(1, 2, 3, 4, 100, 200)",
-                    verify: ExecutionConditionUtil.IsCoreClr
-                      ? Verification.Skipped
-                      : Verification.Fails
-                )
+                comp,
+                expectedOutput: "(1, 2, 3, 4, 100, 200)",
+                verify: ExecutionConditionUtil.IsCoreClr ? Verification.Skipped : Verification.Fails
+            )
                 .VerifyDiagnostics();
             verifier.VerifyIL(
                 "C..ctor(C)",
@@ -17112,9 +17057,8 @@ record B(int X, int Y)
 }"
             );
 
-            var deconstruct = ((CSharpCompilation)verifier.Compilation).GetMember<MethodSymbol>(
-                "B.Deconstruct"
-            );
+            var deconstruct = ((CSharpCompilation)verifier.Compilation)
+                .GetMember<MethodSymbol>("B.Deconstruct");
             Assert.Equal(2, deconstruct.ParameterCount);
 
             Assert.Equal(RefKind.Out, deconstruct.Parameters[0].RefKind);
@@ -17159,7 +17103,8 @@ record B(int X)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X)",
-                verifier.Compilation.GetMember("B.Deconstruct")
+                verifier.Compilation
+                    .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
         }
@@ -17271,7 +17216,8 @@ record B(int X, int Y)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier.Compilation.GetMember("B.Deconstruct")
+                verifier.Compilation
+                    .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
         }
@@ -17406,7 +17352,8 @@ record C(int X, int Y) : B
 
             Assert.Equal(
                 "void C.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier.Compilation.GetMember("C.Deconstruct")
+                verifier.Compilation
+                    .GetMember("C.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
         }
@@ -17629,7 +17576,8 @@ record C(int X) : B
 
             Assert.Equal(
                 "void C.Deconstruct(out System.Int32 X)",
-                verifier.Compilation.GetMember("C.Deconstruct")
+                verifier.Compilation
+                    .GetMember("C.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
         }
@@ -18395,7 +18343,8 @@ record B(int X, int Y)
             };
             Assert.Equal(
                 expectedSymbols,
-                verifier.Compilation.GetMembers("B.Deconstruct")
+                verifier.Compilation
+                    .GetMembers("B.Deconstruct")
                     .Select(s => s.ToTestDisplayString(includeNonNullable: false))
             );
         }
@@ -18484,7 +18433,8 @@ record B(int X)
             };
             Assert.Equal(
                 expectedSymbols,
-                verifier.Compilation.GetMembers("B.Deconstruct")
+                verifier.Compilation
+                    .GetMembers("B.Deconstruct")
                     .Select(s => s.ToTestDisplayString(includeNonNullable: false))
             );
         }
@@ -18564,7 +18514,8 @@ record B(int X, int Y) : A(X)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier.Compilation.GetMember("B.Deconstruct")
+                verifier.Compilation
+                    .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
         }
@@ -18604,7 +18555,8 @@ record B(int X, int Y) : A(X)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier.Compilation.GetMember("B.Deconstruct")
+                verifier.Compilation
+                    .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
         }
@@ -18770,7 +18722,8 @@ record B(int X)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X)",
-                verifier.Compilation.GetMember("B.Deconstruct")
+                verifier.Compilation
+                    .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
         }
@@ -19545,30 +19498,24 @@ public record A {
                 // (2,1): error CS0518: Predefined type 'System.Exception' is not defined or imported
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"public record A {
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Exception")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Exception").WithLocation(2, 1),
                 // (2,1): error CS0518: Predefined type 'System.Exception' is not defined or imported
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"public record A {
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Exception")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Exception").WithLocation(2, 1),
                 // (2,1): error CS0518: Predefined type 'System.Exception' is not defined or imported
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"public record A {
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Exception")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Exception").WithLocation(2, 1),
                 // error CS0518: Predefined type 'System.Attribute' is not defined or imported
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
                     .WithArguments("System.Attribute")
@@ -19616,30 +19563,24 @@ public record A {
                 // (2,1): error CS0656: Missing compiler required member 'System.Type.GetTypeFromHandle'
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"public record A {
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Type", "GetTypeFromHandle")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Type", "GetTypeFromHandle").WithLocation(2, 1),
                 // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.GetHashCode'
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"public record A {
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Collections.Generic.EqualityComparer`1", "GetHashCode")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Collections.Generic.EqualityComparer`1", "GetHashCode").WithLocation(2, 1),
                 // (2,1): error CS0656: Missing compiler required member 'System.Type.op_Equality'
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"public record A {
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Type", "op_Equality")
-                    .WithLocation(2, 1)
+                ).WithArguments("System.Type", "op_Equality").WithLocation(2, 1)
             );
         }
 
@@ -20640,9 +20581,9 @@ public record B : A {
                 // (3,23): error CS8830: 'B.GetHashCode()': Target runtime doesn't support covariant return types in overrides. Return type must be 'A' to match overridden member 'A.GetHashCode()'
                 //     public override B GetHashCode() => default;
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
-                        "GetHashCode"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
+                    "GetHashCode"
+                )
                     .WithArguments("B.GetHashCode()", "A.GetHashCode()", "A")
                     .WithLocation(3, 23)
             );
@@ -20707,23 +20648,19 @@ public record A {
                 // (2,1): error CS0518: Predefined type 'System.Exception' is not defined or imported
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"public record A {
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"public record A {
     public override Something GetHashCode() => default;
 }"
-                    )
-                    .WithArguments("System.Exception")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Exception").WithLocation(2, 1),
                 // (2,1): error CS0518: Predefined type 'System.Exception' is not defined or imported
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"public record A {
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"public record A {
     public override Something GetHashCode() => default;
 }"
-                    )
-                    .WithArguments("System.Exception")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Exception").WithLocation(2, 1),
                 // (2,15): error CS0518: Predefined type 'System.Type' is not defined or imported
                 // public record A {
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
@@ -20776,23 +20713,19 @@ public record A {
                 // (2,1): error CS0656: Missing compiler required member 'System.Type.GetTypeFromHandle'
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"public record A {
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"public record A {
     public override Something GetHashCode() => default;
 }"
-                    )
-                    .WithArguments("System.Type", "GetTypeFromHandle")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Type", "GetTypeFromHandle").WithLocation(2, 1),
                 // (2,1): error CS0656: Missing compiler required member 'System.Type.op_Equality'
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"public record A {
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"public record A {
     public override Something GetHashCode() => default;
 }"
-                    )
-                    .WithArguments("System.Type", "op_Equality")
-                    .WithLocation(2, 1)
+                ).WithArguments("System.Type", "op_Equality").WithLocation(2, 1)
             );
         }
 
@@ -20851,23 +20784,19 @@ public record A {
                 // (2,1): error CS0518: Predefined type 'System.Exception' is not defined or imported
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"public record A {
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"public record A {
     public override bool GetHashCode() => default;
 }"
-                    )
-                    .WithArguments("System.Exception")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Exception").WithLocation(2, 1),
                 // (2,1): error CS0518: Predefined type 'System.Exception' is not defined or imported
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"public record A {
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"public record A {
     public override bool GetHashCode() => default;
 }"
-                    )
-                    .WithArguments("System.Exception")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Exception").WithLocation(2, 1),
                 // (2,15): error CS0518: Predefined type 'System.Type' is not defined or imported
                 // public record A {
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
@@ -20920,23 +20849,19 @@ public record A {
                 // (2,1): error CS0656: Missing compiler required member 'System.Type.GetTypeFromHandle'
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"public record A {
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"public record A {
     public override bool GetHashCode() => default;
 }"
-                    )
-                    .WithArguments("System.Type", "GetTypeFromHandle")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Type", "GetTypeFromHandle").WithLocation(2, 1),
                 // (2,1): error CS0656: Missing compiler required member 'System.Type.op_Equality'
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"public record A {
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"public record A {
     public override bool GetHashCode() => default;
 }"
-                    )
-                    .WithArguments("System.Type", "op_Equality")
-                    .WithLocation(2, 1)
+                ).WithArguments("System.Type", "op_Equality").WithLocation(2, 1)
             );
         }
 
@@ -20999,30 +20924,24 @@ public record A {
                 // (2,1): error CS0518: Predefined type 'System.Exception' is not defined or imported
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"public record A {
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Exception")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Exception").WithLocation(2, 1),
                 // (2,1): error CS0518: Predefined type 'System.Exception' is not defined or imported
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"public record A {
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Exception")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Exception").WithLocation(2, 1),
                 // (2,1): error CS0518: Predefined type 'System.Exception' is not defined or imported
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"public record A {
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Exception")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Exception").WithLocation(2, 1),
                 // error CS0518: Predefined type 'System.Attribute' is not defined or imported
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
                     .WithArguments("System.Attribute")
@@ -21070,30 +20989,24 @@ public record A {
                 // (2,1): error CS0656: Missing compiler required member 'System.Type.GetTypeFromHandle'
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"public record A {
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Type", "GetTypeFromHandle")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Type", "GetTypeFromHandle").WithLocation(2, 1),
                 // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.GetHashCode'
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"public record A {
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Collections.Generic.EqualityComparer`1", "GetHashCode")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Collections.Generic.EqualityComparer`1", "GetHashCode").WithLocation(2, 1),
                 // (2,1): error CS0656: Missing compiler required member 'System.Type.op_Equality'
                 // public record A {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"public record A {
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"public record A {
 }"
-                    )
-                    .WithArguments("System.Type", "op_Equality")
-                    .WithLocation(2, 1)
+                ).WithArguments("System.Type", "op_Equality").WithLocation(2, 1)
             );
         }
 
@@ -21716,24 +21629,23 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 B.Equals(B)
 False
 "
-                )
-                .VerifyDiagnostics(
-                    // (5,26): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
-                    //     public abstract bool Equals(A x);
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("A")
-                        .WithLocation(5, 26),
-                    // (9,25): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(B other) => Report("B.Equals(B)");
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("B")
-                        .WithLocation(9, 25)
-                );
+            ).VerifyDiagnostics(
+                // (5,26): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
+                //     public abstract bool Equals(A x);
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("A")
+                    .WithLocation(5, 26),
+                // (9,25): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(B other) => Report("B.Equals(B)");
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B")
+                    .WithLocation(9, 25)
+            );
         }
 
         [Fact]
@@ -21766,19 +21678,18 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 B.Equals(B)
 False
 "
-                )
-                .VerifyDiagnostics(
-                    // (9,26): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
-                    //     public override bool Equals(B other) => Report("B.Equals(B)");
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("B")
-                        .WithLocation(9, 26)
-                );
+            ).VerifyDiagnostics(
+                // (9,26): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
+                //     public override bool Equals(B other) => Report("B.Equals(B)");
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B")
+                    .WithLocation(9, 26)
+            );
             var recordEquals = comp.GetMembers("A.Equals")
                 .OfType<SynthesizedRecordEquals>()
                 .Single();
@@ -21855,19 +21766,18 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 B.Equals(B)
 False
 "
-                )
-                .VerifyDiagnostics(
-                    // (9,33): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
-                    //     public sealed override bool Equals(B other) => Report("B.Equals(B)");
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("B")
-                        .WithLocation(9, 33)
-                );
+            ).VerifyDiagnostics(
+                // (9,33): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
+                //     public sealed override bool Equals(B other) => Report("B.Equals(B)");
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B")
+                    .WithLocation(9, 33)
+            );
 
             var copyCtor = comp.GetMember<NamedTypeSymbol>("A")
                 .InstanceConstructors.Where(c => c.ParameterCount == 1)
@@ -21998,15 +21908,14 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 A.Equals(B)
 False
 True
 True
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Theory]
@@ -22049,15 +21958,14 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 B.Equals(C)
 False
 True
 True
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var clone = comp.GetMember<MethodSymbol>("A." + WellKnownMemberNames.CloneMethodName);
             Assert.Equal(Accessibility.Public, clone.DeclaredAccessibility);
@@ -22120,15 +22028,14 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 A.Equals(B)
 False
 True
 True
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Theory]
@@ -22236,13 +22143,12 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 True
 True
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
             var recordEquals = comp.GetMembers("A.Equals")
                 .OfType<SynthesizedRecordEquals>()
                 .Single();
@@ -22310,59 +22216,51 @@ record A
                 // (2,1): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 // record A
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"record A
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"record A
 {
     public virtual bool Equals(A other)
         => throw null;
 
     System.Boolean System.IEquatable<A>.Equals(A x) => throw null;
 }"
-                    )
-                    .WithArguments("System.Boolean")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Boolean").WithLocation(2, 1),
                 // (2,1): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 // record A
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"record A
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"record A
 {
     public virtual bool Equals(A other)
         => throw null;
 
     System.Boolean System.IEquatable<A>.Equals(A x) => throw null;
 }"
-                    )
-                    .WithArguments("System.Boolean")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Boolean").WithLocation(2, 1),
                 // (2,1): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 // record A
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"record A
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"record A
 {
     public virtual bool Equals(A other)
         => throw null;
 
     System.Boolean System.IEquatable<A>.Equals(A x) => throw null;
 }"
-                    )
-                    .WithArguments("System.Boolean")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Boolean").WithLocation(2, 1),
                 // (2,1): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 // record A
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"record A
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"record A
 {
     public virtual bool Equals(A other)
         => throw null;
 
     System.Boolean System.IEquatable<A>.Equals(A x) => throw null;
 }"
-                    )
-                    .WithArguments("System.Boolean")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Boolean").WithLocation(2, 1),
                 // (2,8): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 // record A
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
@@ -22456,13 +22354,12 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 True
 True
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var recordEquals = comp.GetMembers("B.Equals")
                 .OfType<SynthesizedRecordEquals>()
@@ -22504,13 +22401,12 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 True
 True
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var recordEquals = comp.GetMembers("B.Equals")
                 .OfType<SynthesizedRecordEquals>()
@@ -22549,13 +22445,12 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 True
 True
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var recordEquals = comp.GetMembers("A.Equals")
                 .OfType<SynthesizedRecordEquals>()
@@ -22674,14 +22569,13 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 B.EqualityContract
 B.EqualityContract
 True
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -22758,14 +22652,13 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 B.EqualityContract
 B.EqualityContract
 True
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Theory]
@@ -22811,14 +22704,13 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"
+                comp,
+                expectedOutput: @"
 True
 True
 True
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var equalityContract = comp.GetMembers("B.EqualityContract")
                 .OfType<SynthesizedRecordEqualityContractProperty>()
@@ -22957,17 +22849,16 @@ class Program
                 options: modifiers == "abstract " ? TestOptions.ReleaseDll : TestOptions.ReleaseExe
             );
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: modifiers == "abstract "
-                      ? null
-                      : @"
+                comp,
+                expectedOutput: modifiers == "abstract "
+                  ? null
+                  : @"
 True
 True
 True
 B
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var equalityContract = comp.GetMembers("B.EqualityContract")
                 .OfType<SynthesizedRecordEqualityContractProperty>()
@@ -23051,17 +22942,16 @@ class Program
                 options: modifiers == "abstract " ? TestOptions.ReleaseDll : TestOptions.ReleaseExe
             );
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: modifiers == "abstract "
-                      ? null
-                      : @"
+                comp,
+                expectedOutput: modifiers == "abstract "
+                  ? null
+                  : @"
 True
 True
 True
 B
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var equalityContract = comp.GetMembers("B.EqualityContract")
                 .OfType<SynthesizedRecordEqualityContractProperty>()
@@ -23155,23 +23045,19 @@ record A
                 // (2,1): error CS0656: Missing compiler required member 'System.Type.GetTypeFromHandle'
                 // record A
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"record A
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"record A
 {
 }"
-                    )
-                    .WithArguments("System.Type", "GetTypeFromHandle")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Type", "GetTypeFromHandle").WithLocation(2, 1),
                 // (2,1): error CS0656: Missing compiler required member 'System.Type.op_Equality'
                 // record A
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"record A
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"record A
 {
 }"
-                    )
-                    .WithArguments("System.Type", "op_Equality")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Type", "op_Equality").WithLocation(2, 1),
                 // (2,8): error CS0518: Predefined type 'System.Type' is not defined or imported
                 // record A
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
@@ -24536,8 +24422,8 @@ record A(int X)
 record B(int X, int Y) : A(X);
 ";
             var verifier = CompileAndVerify(
-                    source,
-                    expectedOutput: @"
+                source,
+                expectedOutput: @"
 True True False False
 False False True True
 True True False False
@@ -24547,8 +24433,7 @@ True True False False
 False False True True
 True True False False
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var comp = (CSharpCompilation)verifier.Compilation;
             MethodSymbol op = comp.GetMembers("A." + WellKnownMemberNames.EqualityOperatorName)
@@ -24660,8 +24545,8 @@ record A(int X) : B
 }
 ";
             var verifier = CompileAndVerify(
-                    source,
-                    expectedOutput: @"
+                source,
+                expectedOutput: @"
 True True False False
 Equals(A other)
 Equals(A other)
@@ -24681,14 +24566,13 @@ Equals(A other)
 Equals(A other)
 False False True True
 "
-                )
-                .VerifyDiagnostics(
-                    // (6,25): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(A other)
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("A")
-                        .WithLocation(6, 25)
-                );
+            ).VerifyDiagnostics(
+                // (6,25): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(A other)
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("A")
+                    .WithLocation(6, 25)
+            );
 
             var comp = (CSharpCompilation)verifier.Compilation;
             MethodSymbol op = comp.GetMembers("A." + WellKnownMemberNames.EqualityOperatorName)
@@ -24951,21 +24835,18 @@ class Program
 }
 ";
             CompileAndVerify(
-                    source2,
-                    references: new[]
-                    {
-                        useImageReference
-                            ? comp1.EmitToImageReference()
-                            : comp1.ToMetadataReference()
-                    },
-                    expectedOutput: @"
+                source2,
+                references: new[]
+                {
+                    useImageReference ? comp1.EmitToImageReference() : comp1.ToMetadataReference()
+                },
+                expectedOutput: @"
 True True False False
 False False True True
 True True False False
 False False True True
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [WorkItem(44692, "https://github.com/dotnet/roslyn/issues/44692")]
@@ -25112,14 +24993,13 @@ record C
     }
 }";
             CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 True
 True
 False
 1 2 3"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Theory]
@@ -25166,20 +25046,19 @@ class E
     }
 }";
             var verifier = CompileAndVerify(
-                    src2,
-                    references: new[]
-                    {
-                        emitRef ? comp.EmitToImageReference() : comp.ToMetadataReference()
-                    },
-                    expectedOutput: @"
+                src2,
+                references: new[]
+                {
+                    emitRef ? comp.EmitToImageReference() : comp.ToMetadataReference()
+                },
+                expectedOutput: @"
 1
 2
 1 2
 2 3
 3 2
 4 3"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "E.Main",
@@ -25348,13 +25227,12 @@ record C(int X, int Y = 123) : Base(X, Y)
     C(int X, int Y, int Z = 124) : this(X, Y) {}
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 1
 2
 123"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C..ctor(int, int)",
@@ -25681,12 +25559,11 @@ record C(int X) : Base(Test(X, out var y), y)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 1
 2"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var comp = CreateCompilation(src);
 
@@ -26451,13 +26328,12 @@ partial record C
 }
 ";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 1
 2
 123"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C..ctor(int, int)",
@@ -26733,9 +26609,8 @@ interface I {}
 
                 SemanticModel speculativeModel;
                 speculativePrimaryInitializer = baseWithargs.WithArgumentList(
-                    baseWithargs.ArgumentList.WithArguments(
-                        baseWithargs.ArgumentList.Arguments.RemoveAt(1)
-                    )
+                    baseWithargs.ArgumentList
+                        .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
                 );
 
                 speculativeBaseInitializer = SyntaxFactory.ConstructorInitializer(
@@ -26793,7 +26668,8 @@ interface I {}
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
-                    speculativeModel!.GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
+                    speculativeModel!
+                        .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
                         .Symbol.ToTestDisplayString()
                 );
                 Assert.Equal(
@@ -26820,16 +26696,17 @@ interface I {}
                     "xx"
                 );
                 var xxRef = OutVarTests.GetReferences(
-                        speculativePrimaryInitializer.SyntaxTree,
-                        "xx"
-                    )
+                    speculativePrimaryInitializer.SyntaxTree,
+                    "xx"
+                )
                     .ToArray();
                 Assert.Equal(1, xxRef.Length);
                 OutVarTests.VerifyModelForOutVar(speculativeModel, xxDecl, xxRef);
 
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
-                    speculativeModel!.GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
+                    speculativeModel!
+                        .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
                         .Symbol.ToTestDisplayString()
                 );
                 Assert.Equal(
@@ -27075,9 +26952,8 @@ interface I {}
                 Assert.Empty(model.GetMemberGroup(baseWithargs));
 
                 speculativePrimaryInitializer = baseWithargs.WithArgumentList(
-                    baseWithargs.ArgumentList.WithArguments(
-                        baseWithargs.ArgumentList.Arguments.RemoveAt(1)
-                    )
+                    baseWithargs.ArgumentList
+                        .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
                 );
 
                 speculativeBaseInitializer = SyntaxFactory.ConstructorInitializer(
@@ -27322,11 +27198,10 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: @"True
+                comp,
+                expectedOutput: @"True
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "S.Equals(in S)",
@@ -27403,12 +27278,11 @@ class Program
             }
 
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: @"True
+                comp,
+                expectedOutput: @"True
 True
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.Equals(C)",
@@ -27481,12 +27355,11 @@ class Program
     }
 }";
             var verifier = CompileAndVerify(
-                    source,
-                    expectedOutput: @"True
+                source,
+                expectedOutput: @"True
 False
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.Equals(C)",
@@ -27537,9 +27410,8 @@ True"
 }"
             );
 
-            var clone = ((CSharpCompilation)verifier.Compilation).GetMember<MethodSymbol>(
-                "C." + WellKnownMemberNames.CloneMethodName
-            );
+            var clone = ((CSharpCompilation)verifier.Compilation)
+                .GetMember<MethodSymbol>("C." + WellKnownMemberNames.CloneMethodName);
             Assert.Equal(Accessibility.Public, clone.DeclaredAccessibility);
             Assert.False(clone.IsOverride);
             Assert.True(clone.IsVirtual);
@@ -27585,27 +27457,26 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: @"False
+                comp,
+                expectedOutput: @"False
 False
 False
 False
 False
 True
 True"
-                )
-                .VerifyDiagnostics(
-                    // (3,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
-                    // record B1(int P) : A
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
-                        .WithArguments("P")
-                        .WithLocation(3, 15),
-                    // (8,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
-                    // record B2(int P) : A
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
-                        .WithArguments("P")
-                        .WithLocation(8, 15)
-                );
+            ).VerifyDiagnostics(
+                // (3,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // record B1(int P) : A
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
+                    .WithArguments("P")
+                    .WithLocation(3, 15),
+                // (8,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // record B2(int P) : A
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
+                    .WithArguments("P")
+                    .WithLocation(8, 15)
+            );
 
             verifier.VerifyIL(
                 "A.Equals(A)",
@@ -27715,8 +27586,8 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: @"False
+                comp,
+                expectedOutput: @"False
 True
 False
 False
@@ -27725,24 +27596,23 @@ False
 False
 True
 True"
-                )
-                .VerifyDiagnostics(
-                    // (2,14): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
-                    // record A(int P)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
-                        .WithArguments("P")
-                        .WithLocation(2, 14),
-                    // (7,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
-                    // record B1(int P) : A
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
-                        .WithArguments("P")
-                        .WithLocation(7, 15),
-                    // (11,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
-                    // record B2(int P) : A
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
-                        .WithArguments("P")
-                        .WithLocation(11, 15)
-                );
+            ).VerifyDiagnostics(
+                // (2,14): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // record A(int P)
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
+                    .WithArguments("P")
+                    .WithLocation(2, 14),
+                // (7,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // record B1(int P) : A
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
+                    .WithArguments("P")
+                    .WithLocation(7, 15),
+                // (11,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // record B2(int P) : A
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
+                    .WithArguments("P")
+                    .WithLocation(11, 15)
+            );
 
             verifier.VerifyIL(
                 "A.Equals(A)",
@@ -27850,8 +27720,8 @@ class Program
             Assert.Null(model.GetOperation(recordDeclaration));
 
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: @"True
+                comp,
+                expectedOutput: @"True
 True
 False
 False
@@ -27864,14 +27734,13 @@ False
 False
 True
 True"
-                )
-                .VerifyDiagnostics(
-                    // (8,25): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(B b) => base.Equals((A)b);
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("B")
-                        .WithLocation(8, 25)
-                );
+            ).VerifyDiagnostics(
+                // (8,25): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(B b) => base.Equals((A)b);
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B")
+                    .WithLocation(8, 25)
+            );
 
             verifier.VerifyIL(
                 "A.Equals(A)",
@@ -27963,8 +27832,8 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: @"True
+                comp,
+                expectedOutput: @"True
 False
 False
 False
@@ -27993,8 +27862,7 @@ False
 False
 True
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "A.Equals(A)",
@@ -28196,8 +28064,8 @@ class Program
 }";
             // https://github.com/dotnet/roslyn/issues/44895: C.Equals() should compare B.Y.
             var verifier = CompileAndVerify(
-                    source,
-                    expectedOutput: @"True
+                source,
+                expectedOutput: @"True
 True
 False
 False
@@ -28219,34 +28087,33 @@ False
 False
 True
 True"
-                )
-                .VerifyDiagnostics(
-                    // (4,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
-                    // record A(int X)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
-                        .WithArguments("X")
-                        .WithLocation(4, 14),
-                    // (15,25): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(B b) => base.Equals((A)b);
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("B")
-                        .WithLocation(15, 25),
-                    // (17,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
-                    // record C(int X, int Y, int Z) : B
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
-                        .WithArguments("X")
-                        .WithLocation(17, 14),
-                    // (17,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
-                    // record C(int X, int Y, int Z) : B
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
-                        .WithArguments("Y")
-                        .WithLocation(17, 21),
-                    // (17,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the property with that name?
-                    // record C(int X, int Y, int Z) : B
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Z")
-                        .WithArguments("Z")
-                        .WithLocation(17, 28)
-                );
+            ).VerifyDiagnostics(
+                // (4,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // record A(int X)
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(4, 14),
+                // (15,25): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(B b) => base.Equals((A)b);
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B")
+                    .WithLocation(15, 25),
+                // (17,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // record C(int X, int Y, int Z) : B
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(17, 14),
+                // (17,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // record C(int X, int Y, int Z) : B
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
+                    .WithArguments("Y")
+                    .WithLocation(17, 21),
+                // (17,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the property with that name?
+                // record C(int X, int Y, int Z) : B
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Z")
+                    .WithArguments("Z")
+                    .WithLocation(17, 28)
+            );
 
             verifier.VerifyIL(
                 "A.Equals(A)",
@@ -28390,8 +28257,8 @@ class Program
             Assert.Null(model.GetOperation(recordDeclaration));
 
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: @"True
+                comp,
+                expectedOutput: @"True
 False
 False
 False
@@ -28413,39 +28280,38 @@ False
 False
 True
 True"
-                )
-                .VerifyDiagnostics(
-                    // (2,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
-                    // record A(int X)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
-                        .WithArguments("X")
-                        .WithLocation(2, 14),
-                    // (7,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
-                    // record B(int X, int Y) : A
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
-                        .WithArguments("X")
-                        .WithLocation(7, 14),
-                    // (7,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
-                    // record B(int X, int Y) : A
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
-                        .WithArguments("Y")
-                        .WithLocation(7, 21),
-                    // (12,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
-                    // record C(int X, int Y, int Z) : B
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
-                        .WithArguments("X")
-                        .WithLocation(12, 14),
-                    // (12,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
-                    // record C(int X, int Y, int Z) : B
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
-                        .WithArguments("Y")
-                        .WithLocation(12, 21),
-                    // (12,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the property with that name?
-                    // record C(int X, int Y, int Z) : B
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Z")
-                        .WithArguments("Z")
-                        .WithLocation(12, 28)
-                );
+            ).VerifyDiagnostics(
+                // (2,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // record A(int X)
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(2, 14),
+                // (7,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // record B(int X, int Y) : A
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(7, 14),
+                // (7,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // record B(int X, int Y) : A
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
+                    .WithArguments("Y")
+                    .WithLocation(7, 21),
+                // (12,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // record C(int X, int Y, int Z) : B
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(12, 14),
+                // (12,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // record C(int X, int Y, int Z) : B
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
+                    .WithArguments("Y")
+                    .WithLocation(12, 21),
+                // (12,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the property with that name?
+                // record C(int X, int Y, int Z) : B
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Z")
+                    .WithArguments("Z")
+                    .WithLocation(12, 28)
+            );
 
             verifier.VerifyIL(
                 "A.Equals(A)",
@@ -28579,15 +28445,14 @@ class Program
             );
             // init-only is unverifiable
             CompileAndVerify(
-                    comp,
-                    verify: Verification.Skipped,
-                    expectedOutput: @"True
+                comp,
+                verify: Verification.Skipped,
+                expectedOutput: @"True
 False
 False
 True
 False"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -28621,14 +28486,13 @@ class Program
             );
             // init-only is unverifiable
             CompileAndVerify(
-                    comp,
-                    verify: Verification.Skipped,
-                    expectedOutput: @"True
+                comp,
+                verify: Verification.Skipped,
+                expectedOutput: @"True
 False
 True
 False"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -28735,23 +28599,22 @@ class Program
     }
 }";
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"True
+                source,
+                expectedOutput: @"True
 False
 True"
-                )
-                .VerifyDiagnostics(
-                    // (8,25): warning CS8851: 'B1' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(B1 o) => base.Equals((A)o);
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("B1")
-                        .WithLocation(8, 25),
-                    // (15,25): warning CS8851: 'B2' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(B2 o) => base.Equals((A)o);
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("B2")
-                        .WithLocation(15, 25)
-                );
+            ).VerifyDiagnostics(
+                // (8,25): warning CS8851: 'B1' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(B1 o) => base.Equals((A)o);
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B1")
+                    .WithLocation(8, 25),
+                // (15,25): warning CS8851: 'B2' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(B2 o) => base.Equals((A)o);
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B2")
+                    .WithLocation(15, 25)
+            );
         }
 
         [Fact]
@@ -28789,23 +28652,22 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"True
+                comp,
+                expectedOutput: @"True
 False
 True"
-                )
-                .VerifyDiagnostics(
-                    // (8,25): warning CS8851: 'B1' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(B1 b) => base.Equals((A)b);
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("B1")
-                        .WithLocation(8, 25),
-                    // (15,25): warning CS8851: 'B2' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(B2 b) => base.Equals((A)b);
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("B2")
-                        .WithLocation(15, 25)
-                );
+            ).VerifyDiagnostics(
+                // (8,25): warning CS8851: 'B1' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(B1 b) => base.Equals((A)b);
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B1")
+                    .WithLocation(8, 25),
+                // (15,25): warning CS8851: 'B2' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(B2 b) => base.Equals((A)b);
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B2")
+                    .WithLocation(15, 25)
+            );
         }
 
         [Fact]
@@ -28841,9 +28703,9 @@ class Program
             );
             // init-only is unverifiable
             CompileAndVerify(
-                    comp,
-                    verify: Verification.Skipped,
-                    expectedOutput: @"True
+                comp,
+                verify: Verification.Skipped,
+                expectedOutput: @"True
 False
 True
 False
@@ -28851,8 +28713,7 @@ True
 False
 True
 False"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("B1")
                 .GetMembers()
@@ -28950,16 +28811,15 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             var verifier = CompileAndVerify(
-                    comp,
-                    expectedOutput: @"True
+                comp,
+                expectedOutput: @"True
 False
 False
 True
 False
 True
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "A<T>.Equals(A<T>)",
@@ -29083,25 +28943,21 @@ record C
                 // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.get_Default'
                 // record C
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"record C
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"record C
 {
     int x = 0;
 }"
-                    )
-                    .WithArguments("System.Collections.Generic.EqualityComparer`1", "get_Default")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Collections.Generic.EqualityComparer`1", "get_Default").WithLocation(2, 1),
                 // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.get_Default'
                 // record C
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"record C
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"record C
 {
     int x = 0;
 }"
-                    )
-                    .WithArguments("System.Collections.Generic.EqualityComparer`1", "get_Default")
-                    .WithLocation(2, 1),
+                ).WithArguments("System.Collections.Generic.EqualityComparer`1", "get_Default").WithLocation(2, 1),
                 // (4,9): warning CS0414: The field 'C.x' is assigned but its value is never used
                 //     int x = 0;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "x")
@@ -29167,13 +29023,12 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"A
+                comp,
+                expectedOutput: @"A
 A
 B`1
 C"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -29246,27 +29101,26 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"A<T>.Equals(A<T>)
+                comp,
+                expectedOutput: @"A<T>.Equals(A<T>)
 B.Equals(B)
 B.Equals(B)
 B.Equals(B)
 A<T>.Equals(A<T>)
 B.Equals(B)
 B.Equals(B)"
-                )
-                .VerifyDiagnostics(
-                    // (5,25): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(A<T> other) => Report("A<T>.Equals(A<T>)");
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("A")
-                        .WithLocation(5, 25),
-                    // (9,25): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(B other) => Report("B.Equals(B)");
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("B")
-                        .WithLocation(9, 25)
-                );
+            ).VerifyDiagnostics(
+                // (5,25): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(A<T> other) => Report("A<T>.Equals(A<T>)");
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("A")
+                    .WithLocation(5, 25),
+                // (9,25): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(B other) => Report("B.Equals(B)");
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B")
+                    .WithLocation(9, 25)
+            );
 
             var type = comp.GetMember<NamedTypeSymbol>("A");
             AssertEx.Equal(
@@ -29327,46 +29181,45 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"A<T>.Equals(A<T>)
+                comp,
+                expectedOutput: @"A<T>.Equals(A<T>)
 B.Equals(B)
 B.Equals(B)
 B.Equals(B)
 A<T>.Equals(A<T>)
 B.Equals(B)
 B.Equals(B)",
-                    symbolValidator: m =>
-                    {
-                        var b = m.GlobalNamespace.GetTypeMember("B");
-                        Assert.Equal(
-                            "B.Equals(B)",
-                            b.FindImplementationForInterfaceMember(
-                                    b.InterfacesNoUseSiteDiagnostics()[1].GetMember("Equals")
-                                )
-                                .ToDisplayString()
-                        );
-                        var c = m.GlobalNamespace.GetTypeMember("C");
-                        Assert.Equal(
-                            "C.Equals(C?)",
-                            c.FindImplementationForInterfaceMember(
-                                    c.InterfacesNoUseSiteDiagnostics()[1].GetMember("Equals")
-                                )
-                                .ToDisplayString()
-                        );
-                    }
-                )
-                .VerifyDiagnostics(
-                    // (5,25): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(A<T> other) => Report("A<T>.Equals(A<T>)");
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("A")
-                        .WithLocation(5, 25),
-                    // (9,25): warning CS8851: '{B}' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(B other) => Report("B.Equals(B)");
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("B")
-                        .WithLocation(9, 25)
-                );
+                symbolValidator: m =>
+                {
+                    var b = m.GlobalNamespace.GetTypeMember("B");
+                    Assert.Equal(
+                        "B.Equals(B)",
+                        b.FindImplementationForInterfaceMember(
+                            b.InterfacesNoUseSiteDiagnostics()[1].GetMember("Equals")
+                        )
+                            .ToDisplayString()
+                    );
+                    var c = m.GlobalNamespace.GetTypeMember("C");
+                    Assert.Equal(
+                        "C.Equals(C?)",
+                        c.FindImplementationForInterfaceMember(
+                            c.InterfacesNoUseSiteDiagnostics()[1].GetMember("Equals")
+                        )
+                            .ToDisplayString()
+                    );
+                }
+            ).VerifyDiagnostics(
+                // (5,25): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(A<T> other) => Report("A<T>.Equals(A<T>)");
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("A")
+                    .WithLocation(5, 25),
+                // (9,25): warning CS8851: '{B}' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(B other) => Report("B.Equals(B)");
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B")
+                    .WithLocation(9, 25)
+            );
 
             var type = comp.GetMember<NamedTypeSymbol>("A");
             AssertEx.Equal(
@@ -29425,12 +29278,11 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"A<T>.Equals(A<T>)
+                comp,
+                expectedOutput: @"A<T>.Equals(A<T>)
 B.Equals(A<object>)
 B.Equals(B)"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var type = comp.GetMember<NamedTypeSymbol>("A");
             AssertEx.Equal(
@@ -29831,7 +29683,8 @@ record B : A<int>, IEquatable<B>;
             comp.VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using System;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;").WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;")
+                    .WithLocation(1, 1),
                 // (2,8): error CS0518: Predefined type 'System.IEquatable`1' is not defined or imported
                 // record A<T> : IEquatable<A<T>>;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
@@ -30326,14 +30179,13 @@ record C(int X) : Base(() => 100 + X++)
     }
 }";
             var verifier = CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 101
 202
 303
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -30344,7 +30196,8 @@ record C(int X) : Base(() => 100 + X++)
 record R(int P1, int* P2, delegate*<int> P3);";
 
             var comp = CreateCompilation(src);
-            var p = comp.GlobalNamespace.GetTypeMember("R")
+            var p = comp.GlobalNamespace
+                .GetTypeMember("R")
                 .GetMember<SourcePropertySymbolBase>("P1");
             Assert.False(p.HasPointerType);
 
@@ -30728,24 +30581,21 @@ public record Test(
 
             IEnumerable<string> getAttributeStrings(Symbol symbol)
             {
-                return GetAttributeStrings(
-                    symbol.GetAttributes()
-                        .Where(
-                            a =>
+                return GetAttributeStrings(symbol.GetAttributes().Where(
+                        a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "A":
-                                    case "B":
-                                    case "C":
-                                    case "D":
-                                        return true;
-                                }
-
-                                return false;
+                                case "A":
+                                case "B":
+                                case "C":
+                                case "D":
+                                    return true;
                             }
-                        )
-                );
+
+                            return false;
+                        }
+                    ));
             }
         }
 
@@ -30813,24 +30663,21 @@ public record Test(
 
             IEnumerable<string> getAttributeStrings(Symbol symbol)
             {
-                return GetAttributeStrings(
-                    symbol.GetAttributes()
-                        .Where(
-                            a =>
+                return GetAttributeStrings(symbol.GetAttributes().Where(
+                        a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "A":
-                                    case "B":
-                                    case "C":
-                                    case "D":
-                                        return true;
-                                }
-
-                                return false;
+                                case "A":
+                                case "B":
+                                case "C":
+                                case "D":
+                                    return true;
                             }
-                        )
-                );
+
+                            return false;
+                        }
+                    ));
             }
         }
 
@@ -30903,24 +30750,21 @@ public record Test(
 
             IEnumerable<string> getAttributeStrings(Symbol symbol)
             {
-                return GetAttributeStrings(
-                    symbol.GetAttributes()
-                        .Where(
-                            a =>
+                return GetAttributeStrings(symbol.GetAttributes().Where(
+                        a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "A":
-                                    case "B":
-                                    case "C":
-                                    case "D":
-                                        return true;
-                                }
-
-                                return false;
+                                case "A":
+                                case "B":
+                                case "C":
+                                case "D":
+                                    return true;
                             }
-                        )
-                );
+
+                            return false;
+                        }
+                    ));
             }
         }
 
@@ -30979,21 +30823,18 @@ public record Test(
 
             IEnumerable<string> getAttributeStrings(Symbol symbol)
             {
-                return GetAttributeStrings(
-                    symbol.GetAttributes()
-                        .Where(
-                            a =>
+                return GetAttributeStrings(symbol.GetAttributes().Where(
+                        a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "A":
-                                        return true;
-                                }
-
-                                return false;
+                                case "A":
+                                    return true;
                             }
-                        )
-                );
+
+                            return false;
+                        }
+                    ));
             }
         }
 
@@ -31079,24 +30920,21 @@ public record Test(
 
             IEnumerable<string> getAttributeStrings(Symbol symbol)
             {
-                return GetAttributeStrings(
-                    symbol.GetAttributes()
-                        .Where(
-                            a =>
+                return GetAttributeStrings(symbol.GetAttributes().Where(
+                        a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "A":
-                                    case "B":
-                                    case "C":
-                                    case "D":
-                                        return true;
-                                }
-
-                                return false;
+                                case "A":
+                                case "B":
+                                case "C":
+                                case "D":
+                                    return true;
                             }
-                        )
-                );
+
+                            return false;
+                        }
+                    ));
             }
         }
 
@@ -31182,24 +31020,21 @@ public record Test(
 
             IEnumerable<string> getAttributeStrings(Symbol symbol)
             {
-                return GetAttributeStrings(
-                    symbol.GetAttributes()
-                        .Where(
-                            a =>
+                return GetAttributeStrings(symbol.GetAttributes().Where(
+                        a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "A":
-                                    case "B":
-                                    case "C":
-                                    case "D":
-                                        return true;
-                                }
-
-                                return false;
+                                case "A":
+                                case "B":
+                                case "C":
+                                case "D":
+                                    return true;
                             }
-                        )
-                );
+
+                            return false;
+                        }
+                    ));
             }
         }
 
@@ -31261,22 +31096,19 @@ public record Test(
 
             IEnumerable<string> getAttributeStrings(Symbol symbol)
             {
-                return GetAttributeStrings(
-                    symbol.GetAttributes()
-                        .Where(
-                            a =>
+                return GetAttributeStrings(symbol.GetAttributes().Where(
+                        a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "C":
-                                    case "D":
-                                        return true;
-                                }
-
-                                return false;
+                                case "C":
+                                case "D":
+                                    return true;
                             }
-                        )
-                );
+
+                            return false;
+                        }
+                    ));
             }
         }
 
@@ -31304,7 +31136,8 @@ record C<T>([property: NotNull] T? P1, T? P2) where T : class
             comp.VerifyEmitDiagnostics(
                 // (10,15): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 //         T y = P2;
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "P2").WithLocation(10, 15)
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "P2")
+                    .WithLocation(10, 15)
             );
         }
 
@@ -31364,17 +31197,17 @@ public class C
                 // (10,23): warning CS8634: The type 'string?' cannot be used as type parameter 'T' in the generic type or method 'R<T>'. Nullability of type argument 'string?' doesn't match 'class' constraint.
                 //         var r = new R<string?>("R");
                 Diagnostic(
-                        ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
-                        "string?"
-                    )
+                    ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
+                    "string?"
+                )
                     .WithArguments("R<T>", "T", "string?")
                     .WithLocation(10, 23),
                 // (11,25): warning CS8634: The type 'string?' cannot be used as type parameter 'T' in the generic type or method 'R2<T>'. Nullability of type argument 'string?' doesn't match 'class' constraint.
                 //         var r2 = new R2<string?>("R2");
                 Diagnostic(
-                        ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
-                        "string?"
-                    )
+                    ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
+                    "string?"
+                )
                     .WithArguments("R2<T>", "T", "string?")
                     .WithLocation(11, 25)
             );
@@ -31498,59 +31331,58 @@ record B<T> : A<B<T>> {
 }
 ";
             var comp = CreateCompilation(text);
-            comp.GetDeclarationDiagnostics()
-                .Verify(
-                    // (2,8): error CS0146: Circular base type dependency involving 'B<A<T>>' and 'A<T>'
-                    // record A<T> : B<A<T>> { }
-                    Diagnostic(ErrorCode.ERR_CircularBase, "A")
-                        .WithArguments("B<A<T>>", "A<T>")
-                        .WithLocation(2, 8),
-                    // (3,8): error CS0146: Circular base type dependency involving 'A<B<T>>' and 'B<T>'
-                    // record B<T> : A<B<T>> {
-                    Diagnostic(ErrorCode.ERR_CircularBase, "B")
-                        .WithArguments("A<B<T>>", "B<T>")
-                        .WithLocation(3, 8),
-                    // (2,8): error CS0115: 'A<T>.ToString()': no suitable method found to override
-                    // record A<T> : B<A<T>> { }
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "A")
-                        .WithArguments("A<T>.ToString()")
-                        .WithLocation(2, 8),
-                    // (2,8): error CS0115: 'A<T>.GetHashCode()': no suitable method found to override
-                    // record A<T> : B<A<T>> { }
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "A")
-                        .WithArguments("A<T>.GetHashCode()")
-                        .WithLocation(2, 8),
-                    // (2,8): error CS0115: 'A<T>.EqualityContract': no suitable method found to override
-                    // record A<T> : B<A<T>> { }
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "A")
-                        .WithArguments("A<T>.EqualityContract")
-                        .WithLocation(2, 8),
-                    // (2,8): error CS0115: 'A<T>.Equals(object?)': no suitable method found to override
-                    // record A<T> : B<A<T>> { }
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "A")
-                        .WithArguments("A<T>.Equals(object?)")
-                        .WithLocation(2, 8),
-                    // (3,8): error CS0115: 'B<T>.EqualityContract': no suitable method found to override
-                    // record B<T> : A<B<T>> {
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "B")
-                        .WithArguments("B<T>.EqualityContract")
-                        .WithLocation(3, 8),
-                    // (3,8): error CS0115: 'B<T>.Equals(object?)': no suitable method found to override
-                    // record B<T> : A<B<T>> {
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "B")
-                        .WithArguments("B<T>.Equals(object?)")
-                        .WithLocation(3, 8),
-                    // (3,8): error CS0115: 'B<T>.GetHashCode()': no suitable method found to override
-                    // record B<T> : A<B<T>> {
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "B")
-                        .WithArguments("B<T>.GetHashCode()")
-                        .WithLocation(3, 8),
-                    // (3,8): error CS0115: 'B<T>.ToString()': no suitable method found to override
-                    // record B<T> : A<B<T>> {
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "B")
-                        .WithArguments("B<T>.ToString()")
-                        .WithLocation(3, 8)
-                );
+            comp.GetDeclarationDiagnostics().Verify(
+                // (2,8): error CS0146: Circular base type dependency involving 'B<A<T>>' and 'A<T>'
+                // record A<T> : B<A<T>> { }
+                Diagnostic(ErrorCode.ERR_CircularBase, "A")
+                    .WithArguments("B<A<T>>", "A<T>")
+                    .WithLocation(2, 8),
+                // (3,8): error CS0146: Circular base type dependency involving 'A<B<T>>' and 'B<T>'
+                // record B<T> : A<B<T>> {
+                Diagnostic(ErrorCode.ERR_CircularBase, "B")
+                    .WithArguments("A<B<T>>", "B<T>")
+                    .WithLocation(3, 8),
+                // (2,8): error CS0115: 'A<T>.ToString()': no suitable method found to override
+                // record A<T> : B<A<T>> { }
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "A")
+                    .WithArguments("A<T>.ToString()")
+                    .WithLocation(2, 8),
+                // (2,8): error CS0115: 'A<T>.GetHashCode()': no suitable method found to override
+                // record A<T> : B<A<T>> { }
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "A")
+                    .WithArguments("A<T>.GetHashCode()")
+                    .WithLocation(2, 8),
+                // (2,8): error CS0115: 'A<T>.EqualityContract': no suitable method found to override
+                // record A<T> : B<A<T>> { }
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "A")
+                    .WithArguments("A<T>.EqualityContract")
+                    .WithLocation(2, 8),
+                // (2,8): error CS0115: 'A<T>.Equals(object?)': no suitable method found to override
+                // record A<T> : B<A<T>> { }
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "A")
+                    .WithArguments("A<T>.Equals(object?)")
+                    .WithLocation(2, 8),
+                // (3,8): error CS0115: 'B<T>.EqualityContract': no suitable method found to override
+                // record B<T> : A<B<T>> {
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "B")
+                    .WithArguments("B<T>.EqualityContract")
+                    .WithLocation(3, 8),
+                // (3,8): error CS0115: 'B<T>.Equals(object?)': no suitable method found to override
+                // record B<T> : A<B<T>> {
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "B")
+                    .WithArguments("B<T>.Equals(object?)")
+                    .WithLocation(3, 8),
+                // (3,8): error CS0115: 'B<T>.GetHashCode()': no suitable method found to override
+                // record B<T> : A<B<T>> {
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "B")
+                    .WithArguments("B<T>.GetHashCode()")
+                    .WithLocation(3, 8),
+                // (3,8): error CS0115: 'B<T>.ToString()': no suitable method found to override
+                // record B<T> : A<B<T>> {
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "B")
+                    .WithArguments("B<T>.ToString()")
+                    .WithLocation(3, 8)
+            );
         }
 
         [Fact]
@@ -31574,11 +31406,10 @@ record C : B
     }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (10,7): error CS0250: Do not directly call your base type Finalize method. It is called automatically from your destructor.
-                    Diagnostic(ErrorCode.ERR_CallingBaseFinalizeDeprecated, "base.Finalize()")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (10,7): error CS0250: Do not directly call your base type Finalize method. It is called automatically from your destructor.
+                Diagnostic(ErrorCode.ERR_CallingBaseFinalizeDeprecated, "base.Finalize()")
+            );
         }
 
         [Fact]
@@ -31659,12 +31490,11 @@ partial public record C  // CS0267
 }
 ";
 
-            CreateCompilation(test)
-                .VerifyDiagnostics(
-                    // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                    // partial public class C  // CS0267
-                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(2, 1)
-                );
+            CreateCompilation(test).VerifyDiagnostics(
+                // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                // partial public class C  // CS0267
+                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(2, 1)
+            );
         }
 
         [Fact]
@@ -31704,25 +31534,24 @@ class C<T, U>
 {
     void M<V>() where V : U, A, B { }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,18): error CS0406: The class type constraint 'A' must come before any other constraints
-                    Diagnostic(ErrorCode.ERR_ClassBoundNotFirst, "A")
-                        .WithArguments("A")
-                        .WithLocation(5, 18),
-                    // (6,18): error CS0406: The class type constraint 'B' must come before any other constraints
-                    Diagnostic(ErrorCode.ERR_ClassBoundNotFirst, "B")
-                        .WithArguments("B")
-                        .WithLocation(6, 18),
-                    // (8,30): error CS0406: The class type constraint 'A' must come before any other constraints
-                    Diagnostic(ErrorCode.ERR_ClassBoundNotFirst, "A")
-                        .WithArguments("A")
-                        .WithLocation(8, 30),
-                    // (8,33): error CS0406: The class type constraint 'B' must come before any other constraints
-                    Diagnostic(ErrorCode.ERR_ClassBoundNotFirst, "B")
-                        .WithArguments("B")
-                        .WithLocation(8, 33)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (5,18): error CS0406: The class type constraint 'A' must come before any other constraints
+                Diagnostic(ErrorCode.ERR_ClassBoundNotFirst, "A")
+                    .WithArguments("A")
+                    .WithLocation(5, 18),
+                // (6,18): error CS0406: The class type constraint 'B' must come before any other constraints
+                Diagnostic(ErrorCode.ERR_ClassBoundNotFirst, "B")
+                    .WithArguments("B")
+                    .WithLocation(6, 18),
+                // (8,30): error CS0406: The class type constraint 'A' must come before any other constraints
+                Diagnostic(ErrorCode.ERR_ClassBoundNotFirst, "A")
+                    .WithArguments("A")
+                    .WithLocation(8, 30),
+                // (8,33): error CS0406: The class type constraint 'B' must come before any other constraints
+                Diagnostic(ErrorCode.ERR_ClassBoundNotFirst, "B")
+                    .WithArguments("B")
+                    .WithLocation(8, 33)
+            );
         }
 
         [Fact]
@@ -31732,14 +31561,13 @@ class C<T, U>
                 @"
 sealed static record R;
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (2,22): error CS0106: The modifier 'static' is not valid for this item
-                    // sealed static record R;
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "R")
-                        .WithArguments("static")
-                        .WithLocation(2, 22)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (2,22): error CS0106: The modifier 'static' is not valid for this item
+                // sealed static record R;
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "R")
+                    .WithArguments("static")
+                    .WithLocation(2, 22)
+            );
         }
 
         [Fact]
@@ -31753,21 +31581,19 @@ record C
     public abstract int this[int x] { get; set; }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (4,41): error CS0513: 'C.E' is abstract but it is contained in non-abstract type 'C'
-                    //     public abstract event System.Action E;
-                    Diagnostic(ErrorCode.ERR_AbstractInConcreteClass, "E")
-                        .WithArguments("C.E", "C"),
-                    // (5,39): error CS0513: 'C.this[int].get' is abstract but it is contained in non-abstract type 'C'
-                    //     public abstract int this[int x] { get; set; }
-                    Diagnostic(ErrorCode.ERR_AbstractInConcreteClass, "get")
-                        .WithArguments("C.this[int].get", "C"),
-                    // (5,44): error CS0513: 'C.this[int].set' is abstract but it is contained in non-abstract type 'C'
-                    //     public abstract int this[int x] { get; set; }
-                    Diagnostic(ErrorCode.ERR_AbstractInConcreteClass, "set")
-                        .WithArguments("C.this[int].set", "C")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (4,41): error CS0513: 'C.E' is abstract but it is contained in non-abstract type 'C'
+                //     public abstract event System.Action E;
+                Diagnostic(ErrorCode.ERR_AbstractInConcreteClass, "E").WithArguments("C.E", "C"),
+                // (5,39): error CS0513: 'C.this[int].get' is abstract but it is contained in non-abstract type 'C'
+                //     public abstract int this[int x] { get; set; }
+                Diagnostic(ErrorCode.ERR_AbstractInConcreteClass, "get")
+                    .WithArguments("C.this[int].get", "C"),
+                // (5,44): error CS0513: 'C.this[int].set' is abstract but it is contained in non-abstract type 'C'
+                //     public abstract int this[int x] { get; set; }
+                Diagnostic(ErrorCode.ERR_AbstractInConcreteClass, "set")
+                    .WithArguments("C.this[int].set", "C")
+            );
         }
 
         [Fact]
@@ -31843,12 +31669,11 @@ namespace x
 }
 ";
 
-            CreateCompilation(test)
-                .VerifyDiagnostics(
-                    // (6,10): error CS0574: Name of destructor must match name of type
-                    //         ~iiii(){}
-                    Diagnostic(ErrorCode.ERR_BadDestructorName, "iiii").WithLocation(6, 10)
-                );
+            CreateCompilation(test).VerifyDiagnostics(
+                // (6,10): error CS0574: Name of destructor must match name of type
+                //         ~iiii(){}
+                Diagnostic(ErrorCode.ERR_BadDestructorName, "iiii").WithLocation(6, 10)
+            );
         }
 
         [Fact]
@@ -31926,13 +31751,11 @@ static record R(int I)
 {
     partial void M();
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,18): error CS0751: A partial method must be declared within a partial type
-                    //     partial void M();
-                    Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M")
-                        .WithLocation(3, 18)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,18): error CS0751: A partial method must be declared within a partial type
+                //     partial void M();
+                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M").WithLocation(3, 18)
+            );
         }
 
         [Fact]
@@ -31945,14 +31768,13 @@ record Base2;
 record R : Base1, Base2
 {
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,19): error CS1721: Class 'R' cannot have multiple base classes: 'Base1' and 'Base2'
-                    // record R : Base1, Base2
-                    Diagnostic(ErrorCode.ERR_NoMultipleInheritance, "Base2")
-                        .WithArguments("R", "Base1", "Base2")
-                        .WithLocation(4, 19)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,19): error CS1721: Class 'R' cannot have multiple base classes: 'Base1' and 'Base2'
+                // record R : Base1, Base2
+                Diagnostic(ErrorCode.ERR_NoMultipleInheritance, "Base2")
+                    .WithArguments("R", "Base1", "Base2")
+                    .WithLocation(4, 19)
+            );
         }
 
         [Fact]
@@ -31964,14 +31786,13 @@ record Base;
 interface I { }
 record R : I, Base;
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,15): error CS1722: Base class 'Base' must come before any interfaces
-                    // record R : I, Base;
-                    Diagnostic(ErrorCode.ERR_BaseClassMustBeFirst, "Base")
-                        .WithArguments("Base")
-                        .WithLocation(4, 15)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,15): error CS1722: Base class 'Base' must come before any interfaces
+                // record R : I, Base;
+                Diagnostic(ErrorCode.ERR_BaseClassMustBeFirst, "Base")
+                    .WithArguments("Base")
+                    .WithLocation(4, 15)
+            );
         }
 
         [Fact]
@@ -31989,9 +31810,8 @@ public record A;
                 "class A",
                 SymbolDisplay.ToDisplayString(
                     symbol,
-                    SymbolDisplayFormat.TestFormat.AddKindOptions(
-                        SymbolDisplayKindOptions.IncludeTypeKeyword
-                    )
+                    SymbolDisplayFormat.TestFormat
+                        .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                 )
             );
         }
@@ -33841,10 +33661,10 @@ public record X(int a)
 }";
 
             var comp = CreateCompilation(
-                    new[] { source, IsExternalInitTypeDefinition },
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.Regular9
-                )
+                new[] { source, IsExternalInitTypeDefinition },
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular9
+            )
                 .VerifyDiagnostics();
 
             CompileAndVerify(

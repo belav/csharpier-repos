@@ -115,9 +115,9 @@ namespace System.Linq.Parallel.Tests
             );
 
             ParallelQuery<int> repeating = Enumerable.Range(
-                    0,
-                    (count + (DuplicateFactor - 1)) / DuplicateFactor
-                )
+                0,
+                (count + (DuplicateFactor - 1)) / DuplicateFactor
+            )
                 .SelectMany(x => Enumerable.Range(0, DuplicateFactor))
                 .Take(count)
                 .AsParallel()
@@ -392,10 +392,11 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "first",
                 () =>
-                    ((ParallelQuery<int>)null).SequenceEqual(
-                        ParallelEnumerable.Range(0, 1),
-                        EqualityComparer<int>.Default
-                    )
+                    ((ParallelQuery<int>)null)
+                        .SequenceEqual(
+                            ParallelEnumerable.Range(0, 1),
+                            EqualityComparer<int>.Default
+                        )
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "second",
@@ -425,7 +426,8 @@ namespace System.Linq.Parallel.Tests
             );
             AssertThrows.Wrapped<TestDisposeException>(
                 () =>
-                    new DisposeExceptionEnumerable<int>(leftQuery).AsParallel()
+                    new DisposeExceptionEnumerable<int>(leftQuery)
+                        .AsParallel()
                         .SequenceEqual(rightQuery)
             );
         }

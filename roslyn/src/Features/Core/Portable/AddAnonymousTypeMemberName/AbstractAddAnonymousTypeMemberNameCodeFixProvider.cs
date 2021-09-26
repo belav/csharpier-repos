@@ -111,13 +111,13 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
             foreach (var diagnostic in diagnostics)
             {
                 await FixOneAsync(
-                        document,
-                        semanticModel,
-                        diagnostic,
-                        editor,
-                        annotation,
-                        cancellationToken
-                    )
+                    document,
+                    semanticModel,
+                    diagnostic,
+                    editor,
+                    annotation,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

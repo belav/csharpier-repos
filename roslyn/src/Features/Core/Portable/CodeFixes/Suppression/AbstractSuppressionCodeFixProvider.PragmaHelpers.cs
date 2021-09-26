@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 var startToken = suppressionTargetInfo.StartToken;
                 var endToken = suppressionTargetInfo.EndToken;
                 var nodeWithTokens = suppressionTargetInfo.NodeWithTokens;
-                var root = await nodeWithTokens.SyntaxTree.GetRootAsync(cancellationToken)
+                var root = await nodeWithTokens.SyntaxTree
+                    .GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var startAndEndTokenAreTheSame = startToken == endToken;
@@ -44,9 +45,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 {
                     var annotation = new SyntaxAnnotation();
                     newEndToken = root.ReplaceToken(
-                            startToken,
-                            newStartToken.WithAdditionalAnnotations(annotation)
-                        )
+                        startToken,
+                        newStartToken.WithAdditionalAnnotations(annotation)
+                    )
                         .GetAnnotatedTokens(annotation)
                         .Single();
                     var spanChange =

@@ -35,22 +35,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         )
         {
             _completionProviders = completionProviders.Where(
-                    lz =>
-                        lz.Metadata.Language == LanguageNames.CSharp
-                        || lz.Metadata.Language == LanguageNames.VisualBasic
-                )
+                lz =>
+                    lz.Metadata.Language == LanguageNames.CSharp
+                    || lz.Metadata.Language == LanguageNames.VisualBasic
+            )
                 .ToImmutableArray();
         }
 
         public VSServerCapabilities GetCapabilities()
         {
-            var commitCharacters = CompletionRules.Default.DefaultCommitCharacters.Select(
-                    c => c.ToString()
-                )
+            var commitCharacters = CompletionRules.Default.DefaultCommitCharacters
+                .Select(c => c.ToString())
                 .ToArray();
             var triggerCharacters = _completionProviders.SelectMany(
-                    lz => CompletionHandler.GetTriggerCharacters(lz.Value)
-                )
+                lz => CompletionHandler.GetTriggerCharacters(lz.Value)
+            )
                 .Distinct()
                 .Select(c => c.ToString())
                 .ToArray();
@@ -98,9 +97,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                     RangeProvider = true,
                     Legend = new SemanticTokensLegend
                     {
-                        TokenTypes = SemanticTokenTypes.AllTypes.Concat(
-                                SemanticTokensHelpers.RoslynCustomTokenTypes
-                            )
+                        TokenTypes = SemanticTokenTypes.AllTypes
+                            .Concat(SemanticTokensHelpers.RoslynCustomTokenTypes)
                             .ToArray(),
                         TokenModifiers = new string[] { SemanticTokenModifiers.Static }
                     }

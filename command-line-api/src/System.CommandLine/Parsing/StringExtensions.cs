@@ -18,11 +18,8 @@ namespace System.CommandLine.Parsing
             source.IndexOfCaseInsensitive(value) >= 0;
 
         internal static int IndexOfCaseInsensitive(this string source, string value) =>
-            CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                source,
-                value,
-                CompareOptions.OrdinalIgnoreCase
-            );
+            CultureInfo.InvariantCulture.CompareInfo
+                .IndexOf(source, value, CompareOptions.OrdinalIgnoreCase);
 
         internal static string RemovePrefix(this string rawAlias)
         {
@@ -362,10 +359,8 @@ namespace System.CommandLine.Parsing
                 }
                 catch (IOException e)
                 {
-                    var message = configuration.ValidationMessages.ErrorReadingResponseFile(
-                        filePath,
-                        e
-                    );
+                    var message = configuration.ValidationMessages
+                        .ErrorReadingResponseFile(filePath, e);
 
                     errorList.Add(new TokenizeError(message));
                 }

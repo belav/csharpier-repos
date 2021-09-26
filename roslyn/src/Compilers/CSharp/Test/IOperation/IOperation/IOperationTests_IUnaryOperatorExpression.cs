@@ -3889,7 +3889,7 @@ Block[B2] - Exit
         public void VerifyIndexOperator_Int()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M(int arg)
@@ -3897,8 +3897,7 @@ class Test
         var x = /*<bind>*/^arg/*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"
@@ -3920,7 +3919,7 @@ IUnaryOperation (UnaryOperatorKind.Hat) (OperationKind.Unary, Type: System.Index
         public void VerifyIndexOperator_NullableInt()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M(int? arg)
@@ -3928,8 +3927,7 @@ class Test
         var x = /*<bind>*/^arg/*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"
@@ -3951,7 +3949,7 @@ IUnaryOperation (UnaryOperatorKind.Hat, IsLifted) (OperationKind.Unary, Type: Sy
         public void VerifyIndexOperator_ConvertibleToInt()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M(byte arg)
@@ -3959,8 +3957,7 @@ class Test
         var x = /*<bind>*/^arg/*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"

@@ -83,9 +83,8 @@ namespace System.Diagnostics.Tests
         public void SkipFrames_CallMethod_ReturnsExpected()
         {
             StackFrame stackFrame = CallMethod(1);
-            MethodInfo expectedMethod = typeof(StackFrameTests).GetMethod(
-                nameof(SkipFrames_CallMethod_ReturnsExpected)
-            );
+            MethodInfo expectedMethod = typeof(StackFrameTests)
+                .GetMethod(nameof(SkipFrames_CallMethod_ReturnsExpected));
             Assert.Equal(expectedMethod, stackFrame.GetMethod());
         }
 
@@ -188,9 +187,9 @@ namespace System.Diagnostics.Tests
         public void ToString_Invoke_ReturnsExpected(StackFrame stackFrame, string expectedToString)
         {
             expectedToString = expectedToString.Replace(
-                    "{offset}",
-                    stackFrame.GetNativeOffset().ToString()
-                )
+                "{offset}",
+                stackFrame.GetNativeOffset().ToString()
+            )
                 .Replace("{fileName}", stackFrame.GetFileName() ?? "<filename unknown>")
                 .Replace("{lineNumber}", stackFrame.GetFileLineNumber().ToString())
                 .Replace("{column}", stackFrame.GetFileLineNumber().ToString());

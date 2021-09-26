@@ -93,7 +93,8 @@ namespace System.ComponentModel.TypeConverterTests
         }
 
         public static IEnumerable<object[]> ColorNames =>
-            typeof(Color).GetProperties()
+            typeof(Color)
+                .GetProperties()
                 .Where(p => p.PropertyType == typeof(Color))
                 .Select(p => new object[] { p.Name });
 
@@ -146,14 +147,15 @@ namespace System.ComponentModel.TypeConverterTests
             var color = (Color)conv.ConvertFrom(
                 null,
                 CultureInfo.InvariantCulture,
-                string.Format(
-                    "{0}{4} {1}{4} {2}{4} {3}",
-                    a,
-                    r,
-                    g,
-                    b,
-                    CultureInfo.InvariantCulture.TextInfo.ListSeparator
-                )
+                string
+                    .Format(
+                        "{0}{4} {1}{4} {2}{4} {3}",
+                        a,
+                        r,
+                        g,
+                        b,
+                        CultureInfo.InvariantCulture.TextInfo.ListSeparator
+                    )
             );
             Assert.Equal(a, color.A);
             Assert.Equal(r, color.R);
@@ -170,14 +172,8 @@ namespace System.ComponentModel.TypeConverterTests
             var color = (Color)conv.ConvertFrom(
                 null,
                 culture,
-                string.Format(
-                    "{0}{4} {1}{4} {2}{4} {3}",
-                    a,
-                    r,
-                    g,
-                    b,
-                    culture.TextInfo.ListSeparator
-                )
+                string
+                    .Format("{0}{4} {1}{4} {2}{4} {3}", a, r, g, b, culture.TextInfo.ListSeparator)
             );
             Assert.Equal(a, color.A);
             Assert.Equal(r, color.R);
@@ -433,14 +429,15 @@ namespace System.ComponentModel.TypeConverterTests
         {
             var conv = new ColorConverter();
             var color = (Color)conv.ConvertFromString(
-                string.Format(
-                    "{0}{4} {1}{4} {2}{4} {3}",
-                    a,
-                    r,
-                    g,
-                    b,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                )
+                string
+                    .Format(
+                        "{0}{4} {1}{4} {2}{4} {3}",
+                        a,
+                        r,
+                        g,
+                        b,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
             );
             Assert.Equal(a, color.A);
             Assert.Equal(r, color.R);
@@ -466,10 +463,11 @@ namespace System.ComponentModel.TypeConverterTests
                 () =>
                 {
                     conv.ConvertFromString(
-                        string.Format(
-                            "1{0} 2{0} 3{0} 4{0} 5",
-                            CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                        )
+                        string
+                            .Format(
+                                "1{0} 2{0} 3{0} 4{0} 5",
+                                CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                            )
                     );
                 }
             );
@@ -513,14 +511,15 @@ namespace System.ComponentModel.TypeConverterTests
             var conv = new ColorConverter();
             var str = conv.ConvertToString(Color.FromArgb(a, r, g, b));
             Assert.Equal(
-                string.Format(
-                    "{0}{4} {1}{4} {2}{4} {3}",
-                    a,
-                    r,
-                    g,
-                    b,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                ),
+                string
+                    .Format(
+                        "{0}{4} {1}{4} {2}{4} {3}",
+                        a,
+                        r,
+                        g,
+                        b,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    ),
                 str
             );
         }

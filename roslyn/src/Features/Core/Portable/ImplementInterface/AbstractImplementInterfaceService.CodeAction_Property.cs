@@ -52,8 +52,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     attributesToRemove
                 );
 
-                var syntaxFacts =
-                    Document.Project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
+                var syntaxFacts = Document.Project.LanguageServices
+                    .GetRequiredService<ISyntaxFactsService>();
 
                 var parameterNames = NameGenerator.EnsureUniqueness(
                     property.Parameters.SelectAsArray(p => p.Name),
@@ -94,7 +94,9 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     compilation.TupleElementNamesAttributeType(),
                     compilation.DynamicAttributeType(),
                     compilation.NativeIntegerAttributeType()
-                }.WhereNotNull().ToArray()!;
+                }
+                    .WhereNotNull()
+                    .ToArray()!;
             }
 
             private IMethodSymbol? GenerateSetAccessor(
@@ -119,10 +121,11 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                         ImplementTypePropertyGenerationBehavior.PreferThrowingProperties;
                 }
 
-                var setMethod = property.SetMethod.RemoveInaccessibleAttributesAndAttributesOfTypes(
-                    State.ClassOrStructType,
-                    attributesToRemove
-                );
+                var setMethod = property.SetMethod
+                    .RemoveInaccessibleAttributesAndAttributesOfTypes(
+                        State.ClassOrStructType,
+                        attributesToRemove
+                    );
 
                 return CodeGenerationSymbolFactory.CreateAccessorSymbol(
                     setMethod,
@@ -155,10 +158,11 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     return null;
                 }
 
-                var getMethod = property.GetMethod.RemoveInaccessibleAttributesAndAttributesOfTypes(
-                    State.ClassOrStructType,
-                    attributesToRemove
-                );
+                var getMethod = property.GetMethod
+                    .RemoveInaccessibleAttributesAndAttributesOfTypes(
+                        State.ClassOrStructType,
+                        attributesToRemove
+                    );
 
                 return CodeGenerationSymbolFactory.CreateAccessorSymbol(
                     getMethod,
@@ -206,8 +210,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 if (generateAbstractly)
                     return default;
 
-                var generator =
-                    Document.Project.LanguageServices.GetRequiredService<SyntaxGenerator>();
+                var generator = Document.Project.LanguageServices
+                    .GetRequiredService<SyntaxGenerator>();
                 return generator.GetGetAccessorStatements(
                     compilation,
                     property,

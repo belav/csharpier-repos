@@ -86,12 +86,10 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,15): error CS0185: 'method group' is not a reference type as required by the lock statement
-                    Diagnostic(ErrorCode.ERR_LockNeedsReference, "Main")
-                        .WithArguments("method group")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,15): error CS0185: 'method group' is not a reference type as required by the lock statement
+                Diagnostic(ErrorCode.ERR_LockNeedsReference, "Main").WithArguments("method group")
+            );
         }
 
         [Fact]
@@ -110,12 +108,11 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,15): error CS0185: 'lambda expression' is not a reference type as required by the lock statement
-                    Diagnostic(ErrorCode.ERR_LockNeedsReference, "x => x")
-                        .WithArguments("lambda expression")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,15): error CS0185: 'lambda expression' is not a reference type as required by the lock statement
+                Diagnostic(ErrorCode.ERR_LockNeedsReference, "x => x")
+                    .WithArguments("lambda expression")
+            );
         }
 
         [Fact]
@@ -154,11 +151,10 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,53): warning CS0642: Possible mistaken empty statement
-                    Diagnostic(ErrorCode.WRN_PossibleMistakenNullStatement, ";")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,53): warning CS0642: Possible mistaken empty statement
+                Diagnostic(ErrorCode.WRN_PossibleMistakenNullStatement, ";")
+            );
         }
 
         [Fact]
@@ -184,17 +180,16 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (16,14): error CS0631: ref and out are not valid in this context
-                    Diagnostic(ErrorCode.ERR_IllegalRefParam, "out"),
-                    // (9,13): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
-                    Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
-                    // (10,21): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
-                    Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
-                    // (11,22): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
-                    Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (16,14): error CS0631: ref and out are not valid in this context
+                Diagnostic(ErrorCode.ERR_IllegalRefParam, "out"),
+                // (9,13): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
+                // (10,21): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
+                // (11,22): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c")
+            );
         }
 
         [Fact]
@@ -219,17 +214,16 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (15,14): error CS0631: ref and out are not valid in this context
-                    Diagnostic(ErrorCode.ERR_IllegalRefParam, "out"),
-                    // (8,13): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
-                    Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
-                    // (9,21): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
-                    Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
-                    // (10,22): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
-                    Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (15,14): error CS0631: ref and out are not valid in this context
+                Diagnostic(ErrorCode.ERR_IllegalRefParam, "out"),
+                // (8,13): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
+                // (9,21): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
+                // (10,22): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c")
+            );
         }
 
         [Fact]
@@ -247,16 +241,15 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,15): error CS0185: 'int' is not a reference type as required by the lock statement
-                    //         lock (x)
-                    Diagnostic(ErrorCode.ERR_LockNeedsReference, "x").WithArguments("int"),
-                    // (4,16): warning CS0649: Field 'Program.x' is never assigned to, and will always have its default value 0
-                    //     static int x;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x")
-                        .WithArguments("Program.x", "0")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,15): error CS0185: 'int' is not a reference type as required by the lock statement
+                //         lock (x)
+                Diagnostic(ErrorCode.ERR_LockNeedsReference, "x").WithArguments("int"),
+                // (4,16): warning CS0649: Field 'Program.x' is never assigned to, and will always have its default value 0
+                //     static int x;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x")
+                    .WithArguments("Program.x", "0")
+            );
         }
 
         [Fact]
@@ -272,12 +265,11 @@ struct Conv
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,15): error CS0185: 'Conv' is not a reference type as required by the lock statement
-                    //         lock (this) { }
-                    Diagnostic(ErrorCode.ERR_LockNeedsReference, "this").WithArguments("Conv")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,15): error CS0185: 'Conv' is not a reference type as required by the lock statement
+                //         lock (this) { }
+                Diagnostic(ErrorCode.ERR_LockNeedsReference, "this").WithArguments("Conv")
+            );
         }
 
         [Fact]
@@ -296,12 +288,11 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,15): error CS0185: 'int?' is not a reference type as required by the lock statement
-                    //         lock (a)
-                    Diagnostic(ErrorCode.ERR_LockNeedsReference, "a").WithArguments("int?")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,15): error CS0185: 'int?' is not a reference type as required by the lock statement
+                //         lock (a)
+                Diagnostic(ErrorCode.ERR_LockNeedsReference, "a").WithArguments("int?")
+            );
         }
 
         [Fact]
@@ -327,16 +318,14 @@ partial class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,15): error CS0185: 'method group' is not a reference type as required by the lock statement
-                    //         lock (PM)
-                    Diagnostic(ErrorCode.ERR_LockNeedsReference, "PM")
-                        .WithArguments("method group"),
-                    // (10,15): error CS0185: 'void' is not a reference type as required by the lock statement
-                    //         lock (PM(1))
-                    Diagnostic(ErrorCode.ERR_LockNeedsReference, "PM(1)").WithArguments("void")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,15): error CS0185: 'method group' is not a reference type as required by the lock statement
+                //         lock (PM)
+                Diagnostic(ErrorCode.ERR_LockNeedsReference, "PM").WithArguments("method group"),
+                // (10,15): error CS0185: 'void' is not a reference type as required by the lock statement
+                //         lock (PM(1))
+                Diagnostic(ErrorCode.ERR_LockNeedsReference, "PM(1)").WithArguments("void")
+            );
         }
 
         // Object could not declare in lock statement
@@ -358,23 +347,22 @@ class Res
 {
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics( // (6,19): error CS1026: ) expected
-                    //         lock (Res d = new Res ())// Invalid
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "d"),
-                    // (6,33): error CS1002: ; expected
-                    //         lock (Res d = new Res ())// Invalid
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, ")"),
-                    // (6,33): error CS1513: } expected
-                    //         lock (Res d = new Res ())// Invalid
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, ")"),
-                    // (6,15): error CS0119: 'Res' is a type, which is not valid in the given context
-                    //         lock (Res d = new Res ())// Invalid
-                    Diagnostic(ErrorCode.ERR_BadSKunknown, "Res").WithArguments("Res", "type"),
-                    // (6,19): error CS0103: The name 'd' does not exist in the current context
-                    //         lock (Res d = new Res ())// Invalid
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "d").WithArguments("d")
-                );
+            CreateCompilation(source).VerifyDiagnostics( // (6,19): error CS1026: ) expected
+                //         lock (Res d = new Res ())// Invalid
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "d"),
+                // (6,33): error CS1002: ; expected
+                //         lock (Res d = new Res ())// Invalid
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, ")"),
+                // (6,33): error CS1513: } expected
+                //         lock (Res d = new Res ())// Invalid
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ")"),
+                // (6,15): error CS0119: 'Res' is a type, which is not valid in the given context
+                //         lock (Res d = new Res ())// Invalid
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "Res").WithArguments("Res", "type"),
+                // (6,19): error CS0103: The name 'd' does not exist in the current context
+                //         lock (Res d = new Res ())// Invalid
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "d").WithArguments("d")
+            );
         }
 
         [Fact]
@@ -397,20 +385,19 @@ class Test
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,15): error CS0185: 'lambda expression' is not a reference type as required by the lock statement
-                    //         lock ((ref int y) => { y = y + 1; return y; })     // Invalid
-                    Diagnostic(
-                            ErrorCode.ERR_LockNeedsReference,
-                            "(ref int y) => { y = y + 1; return y; }"
-                        )
-                        .WithArguments("lambda expression"),
-                    // (10,15): error CS0185: 'lambda expression' is not a reference type as required by the lock statement
-                    //         lock (() => { })     // Invalid
-                    Diagnostic(ErrorCode.ERR_LockNeedsReference, "() => { }")
-                        .WithArguments("lambda expression")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,15): error CS0185: 'lambda expression' is not a reference type as required by the lock statement
+                //         lock ((ref int y) => { y = y + 1; return y; })     // Invalid
+                Diagnostic(
+                    ErrorCode.ERR_LockNeedsReference,
+                    "(ref int y) => { y = y + 1; return y; }"
+                )
+                    .WithArguments("lambda expression"),
+                // (10,15): error CS0185: 'lambda expression' is not a reference type as required by the lock statement
+                //         lock (() => { })     // Invalid
+                Diagnostic(ErrorCode.ERR_LockNeedsReference, "() => { }")
+                    .WithArguments("lambda expression")
+            );
         }
 
         // malformed 'lock' statement
@@ -435,38 +422,37 @@ class Test
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,26): error CS1026: ) expected
-                    //         lock ((C + yield return +D).ToString())
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "return").WithLocation(9, 26),
-                    // (9,26): error CS1026: ) expected
-                    //         lock ((C + yield return +D).ToString())
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "return").WithLocation(9, 26),
-                    // (9,35): error CS1002: ; expected
-                    //         lock ((C + yield return +D).ToString())
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(9, 35),
-                    // (9,35): error CS1513: } expected
-                    //         lock ((C + yield return +D).ToString())
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(9, 35),
-                    // (9,47): error CS1002: ; expected
-                    //         lock ((C + yield return +D).ToString())
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(9, 47),
-                    // (9,47): error CS1513: } expected
-                    //         lock ((C + yield return +D).ToString())
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(9, 47),
-                    // (9,20): error CS0103: The name 'yield' does not exist in the current context
-                    //         lock ((C + yield return +D).ToString())
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "yield")
-                        .WithArguments("yield")
-                        .WithLocation(9, 20),
-                    // (9,26): error CS1622: Cannot return a value from an iterator. Use the yield return statement to return a value, or yield break to end the iteration.
-                    //         lock ((C + yield return +D).ToString())
-                    Diagnostic(ErrorCode.ERR_ReturnInIterator, "return").WithLocation(9, 26),
-                    // (9,37): warning CS0162: Unreachable code detected
-                    //         lock ((C + yield return +D).ToString())
-                    Diagnostic(ErrorCode.WRN_UnreachableCode, "ToString").WithLocation(9, 37)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,26): error CS1026: ) expected
+                //         lock ((C + yield return +D).ToString())
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "return").WithLocation(9, 26),
+                // (9,26): error CS1026: ) expected
+                //         lock ((C + yield return +D).ToString())
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "return").WithLocation(9, 26),
+                // (9,35): error CS1002: ; expected
+                //         lock ((C + yield return +D).ToString())
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(9, 35),
+                // (9,35): error CS1513: } expected
+                //         lock ((C + yield return +D).ToString())
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(9, 35),
+                // (9,47): error CS1002: ; expected
+                //         lock ((C + yield return +D).ToString())
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(9, 47),
+                // (9,47): error CS1513: } expected
+                //         lock ((C + yield return +D).ToString())
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(9, 47),
+                // (9,20): error CS0103: The name 'yield' does not exist in the current context
+                //         lock ((C + yield return +D).ToString())
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "yield")
+                    .WithArguments("yield")
+                    .WithLocation(9, 20),
+                // (9,26): error CS1622: Cannot return a value from an iterator. Use the yield return statement to return a value, or yield break to end the iteration.
+                //         lock ((C + yield return +D).ToString())
+                Diagnostic(ErrorCode.ERR_ReturnInIterator, "return").WithLocation(9, 26),
+                // (9,37): warning CS0162: Unreachable code detected
+                //         lock ((C + yield return +D).ToString())
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "ToString").WithLocation(9, 37)
+            );
         }
 
         [Fact]
@@ -510,27 +496,26 @@ class D
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,26): error CS1026: ) expected
-                    //             lock (varnew object)
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "object"),
-                    // (6,26): error CS1023: Embedded statement cannot be a declaration or labeled statement
-                    //             lock (varnew object)
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "object"),
-                    // (6,32): error CS1001: Identifier expected
-                    //             lock (varnew object)
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ")"),
-                    // (6,32): error CS1002: ; expected
-                    //             lock (varnew object)
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, ")"),
-                    // (6,32): error CS1513: } expected
-                    //             lock (varnew object)
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, ")"),
-                    // (6,19): error CS0103: The name 'varnew' does not exist in the current context
-                    //             lock (varnew object)
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "varnew").WithArguments("varnew")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,26): error CS1026: ) expected
+                //             lock (varnew object)
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "object"),
+                // (6,26): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             lock (varnew object)
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "object"),
+                // (6,32): error CS1001: Identifier expected
+                //             lock (varnew object)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")"),
+                // (6,32): error CS1002: ; expected
+                //             lock (varnew object)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, ")"),
+                // (6,32): error CS1513: } expected
+                //             lock (varnew object)
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ")"),
+                // (6,19): error CS0103: The name 'varnew' does not exist in the current context
+                //             lock (varnew object)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "varnew").WithArguments("varnew")
+            );
         }
 
         [Fact]
@@ -841,11 +826,10 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,20): error CS1023: Embedded statement cannot be a declaration or labeled statement
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "object o = new object();")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,20): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "object o = new object();")
+            );
         }
 
         [WorkItem(529001, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529001")]

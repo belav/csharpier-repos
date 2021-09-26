@@ -249,8 +249,8 @@ namespace System.Diagnostics
             get
             {
                 return beginningOfTime.AddSeconds(
-                        IntFrom(dataBuf, bufOffset + FieldOffsets.TIMEGENERATED)
-                    )
+                    IntFrom(dataBuf, bufOffset + FieldOffsets.TIMEGENERATED)
+                )
                     .ToLocalTime();
             }
         }
@@ -263,8 +263,8 @@ namespace System.Diagnostics
             get
             {
                 return beginningOfTime.AddSeconds(
-                        IntFrom(dataBuf, bufOffset + FieldOffsets.TIMEWRITTEN)
-                    )
+                    IntFrom(dataBuf, bufOffset + FieldOffsets.TIMEWRITTEN)
+                )
                     .ToLocalTime();
             }
         }
@@ -296,15 +296,16 @@ namespace System.Diagnostics
                     fixed (char* bufDomainName = new char[domainNameLen])
                     {
                         if (
-                            Interop.Advapi32.LookupAccountSid(
-                                MachineName,
-                                sid,
-                                bufUserName,
-                                ref userNameLen,
-                                bufDomainName,
-                                ref domainNameLen,
-                                out int sidNameUse
-                            ) != 0
+                            Interop.Advapi32
+                                .LookupAccountSid(
+                                    MachineName,
+                                    sid,
+                                    bufUserName,
+                                    ref userNameLen,
+                                    bufDomainName,
+                                    ref domainNameLen,
+                                    out int sidNameUse
+                                ) != 0
                         )
                         {
                             return new string(bufDomainName) + "\\" + new string(bufUserName);
@@ -373,10 +374,11 @@ namespace System.Diagnostics
                 uint paramMsgID = 0;
 
                 if (lasNumIdx != percentIdx + 1)
-                    uint.TryParse(
-                        msg.Substring(percentIdx + 1, lasNumIdx - percentIdx - 1),
-                        out paramMsgID
-                    );
+                    uint
+                        .TryParse(
+                            msg.Substring(percentIdx + 1, lasNumIdx - percentIdx - 1),
+                            out paramMsgID
+                        );
 
                 if (paramMsgID != 0)
                     param = owner.FormatMessageWrapper(paramDLLNames, paramMsgID, insertionStrings);

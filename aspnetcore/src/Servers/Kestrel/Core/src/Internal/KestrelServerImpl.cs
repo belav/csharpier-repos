@@ -192,9 +192,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                         }
 
                         options.UseHttp3Server(ServiceContext, application, options.Protocols);
-                        var multiplexedConnectionDelegate = (
-                            (IMultiplexedConnectionBuilder)options
-                        ).Build();
+                        var multiplexedConnectionDelegate = ((IMultiplexedConnectionBuilder)options)
+                            .Build();
 
                         // Add the connection limit middleware
                         multiplexedConnectionDelegate = EnforceConnectionLimit(
@@ -204,11 +203,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                         );
 
                         options.EndPoint = await _transportManager.BindAsync(
-                                options.EndPoint,
-                                multiplexedConnectionDelegate,
-                                options,
-                                onBindCancellationToken
-                            )
+                            options.EndPoint,
+                            multiplexedConnectionDelegate,
+                            options,
+                            onBindCancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -238,11 +237,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                         );
 
                         options.EndPoint = await _transportManager.BindAsync(
-                                options.EndPoint,
-                                connectionDelegate,
-                                options.EndpointConfig,
-                                onBindCancellationToken
-                            )
+                            options.EndPoint,
+                            connectionDelegate,
+                            options.EndpointConfig,
+                            onBindCancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -333,10 +332,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                 Options.ConfigurationLoader?.Load();
 
                 await AddressBinder.BindAsync(
-                        Options.ListenOptions,
-                        AddressBindContext!,
-                        cancellationToken
-                    )
+                    Options.ListenOptions,
+                    AddressBindContext!,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 _configChangedRegistration = reloadToken?.RegisterChangeCallback(
                     TriggerRebind,

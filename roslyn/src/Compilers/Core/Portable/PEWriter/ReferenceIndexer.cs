@@ -85,9 +85,8 @@ namespace Microsoft.Cci
                 {
                     if (fieldReference.IsContextualNamedEntity)
                     {
-                        ((IContextualNamedEntity)fieldReference).AssociateWithMetadataWriter(
-                            this.metadataWriter
-                        );
+                        ((IContextualNamedEntity)fieldReference)
+                            .AssociateWithMetadataWriter(this.metadataWriter);
                     }
 
                     this.Visit(fieldReference);

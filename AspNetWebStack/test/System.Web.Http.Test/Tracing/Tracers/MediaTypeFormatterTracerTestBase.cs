@@ -80,8 +80,8 @@ namespace System.Web.Http.Tracing.Tracers
             MediaTypeFormatter formatterObject = mockFormatter.Object;
 
             mockFormatter.Setup(
-                    f => f.GetPerRequestFormatterInstance(randomType, request, mediaType)
-                )
+                f => f.GetPerRequestFormatterInstance(randomType, request, mediaType)
+            )
                 .Returns(formatterObject)
                 .Verifiable();
             MediaTypeFormatter tracer = CreateTracer(
@@ -117,8 +117,8 @@ namespace System.Web.Http.Tracing.Tracers
             MediaTypeFormatter formatterObject = mockFormatter.Object;
 
             mockFormatter.Setup(
-                    f => f.SetDefaultContentHeaders(randomType, contentHeaders, mediaType)
-                )
+                f => f.SetDefaultContentHeaders(randomType, contentHeaders, mediaType)
+            )
                 .Verifiable();
             MediaTypeFormatter tracer = CreateTracer(
                 mockFormatter.Object,

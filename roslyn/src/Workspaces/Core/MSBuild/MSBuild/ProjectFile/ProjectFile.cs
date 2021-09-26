@@ -86,10 +86,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 );
 
                 if (
-                    !_loadedProject.GlobalProperties.TryGetValue(
-                        PropertyNames.TargetFramework,
-                        out var initialGlobalTargetFrameworkValue
-                    )
+                    !_loadedProject.GlobalProperties
+                        .TryGetValue(
+                            PropertyNames.TargetFramework,
+                            out var initialGlobalTargetFrameworkValue
+                        )
                 )
                     initialGlobalTargetFrameworkValue = null;
 
@@ -146,10 +147,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
 
             var project = await _buildManager.BuildProjectAsync(
-                    _loadedProject,
-                    Log,
-                    cancellationToken
-                )
+                _loadedProject,
+                Log,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return project != null
@@ -450,9 +451,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         private static bool IsInGAC(string filePath)
         {
-            return GlobalAssemblyCacheLocation.RootLocations.Any(
-                gloc => PathUtilities.IsChildPath(gloc, filePath)
-            );
+            return GlobalAssemblyCacheLocation.RootLocations
+                .Any(gloc => PathUtilities.IsChildPath(gloc, filePath));
         }
 
         private static string? s_frameworkRoot;
@@ -462,8 +462,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 if (RoslynString.IsNullOrEmpty(s_frameworkRoot))
                 {
-                    var runtimeDir =
-                        System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
+                    var runtimeDir = System.Runtime.InteropServices.RuntimeEnvironment
+                        .GetRuntimeDirectory();
                     s_frameworkRoot = Path.GetDirectoryName(runtimeDir); // back out one directory level to be root path of all framework versions
                 }
 
@@ -521,11 +521,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 // check for short name match
                 item = references.FirstOrDefault(
                     it =>
-                        string.Compare(
-                            it.EvaluatedInclude,
-                            shortAssemblyName,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                        string
+                            .Compare(
+                                it.EvaluatedInclude,
+                                shortAssemblyName,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
                 );
 
                 // check for full name match
@@ -533,11 +534,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 {
                     item = references.FirstOrDefault(
                         it =>
-                            string.Compare(
-                                it.EvaluatedInclude,
-                                fullAssemblyName,
-                                StringComparison.OrdinalIgnoreCase
-                            ) == 0
+                            string
+                                .Compare(
+                                    it.EvaluatedInclude,
+                                    fullAssemblyName,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
                     );
                 }
             }
@@ -564,12 +566,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 var partialName = identity.Name + ",";
                 var items = references.Where(
-                        it =>
-                            it.EvaluatedInclude.StartsWith(
-                                partialName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                    )
+                    it =>
+                        it.EvaluatedInclude
+                            .StartsWith(partialName, StringComparison.OrdinalIgnoreCase)
+                )
                     .ToList();
                 if (items.Count == 1)
                 {
@@ -584,14 +584,16 @@ namespace Microsoft.CodeAnalysis.MSBuild
         }
 
         private static string GetHintPath(MSB.Evaluation.ProjectItem item) =>
-            item.Metadata.FirstOrDefault(
-                m =>
-                    string.Equals(
-                        m.Name,
-                        MetadataNames.HintPath,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-            )?.EvaluatedValue ?? string.Empty;
+            item.Metadata
+                .FirstOrDefault(
+                    m =>
+                        string
+                            .Equals(
+                                m.Name,
+                                MetadataNames.HintPath,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                )?.EvaluatedValue ?? string.Empty;
 
         public void AddProjectReference(string projectName, ProjectFileReference reference)
         {
@@ -658,11 +660,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 item = references.First(
                     it =>
-                        string.Compare(
-                            projectName,
-                            it.GetMetadataValue(MetadataNames.Name),
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                        string
+                            .Compare(
+                                projectName,
+                                it.GetMetadataValue(MetadataNames.Name),
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
                 );
             }
 

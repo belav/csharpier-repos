@@ -152,17 +152,18 @@ namespace System.Linq.Parallel
 
         void IMergeHelper<TOutput>.Execute()
         {
-            OrderPreservingPipeliningSpoolingTask<TOutput, TKey>.Spool(
-                _taskGroupState,
-                _partitions,
-                _consumerWaiting,
-                _producerWaiting,
-                _producerDone,
-                _buffers,
-                _bufferLocks,
-                _taskScheduler,
-                _autoBuffered
-            );
+            OrderPreservingPipeliningSpoolingTask<TOutput, TKey>
+                .Spool(
+                    _taskGroupState,
+                    _partitions,
+                    _consumerWaiting,
+                    _producerWaiting,
+                    _producerDone,
+                    _buffers,
+                    _bufferLocks,
+                    _taskScheduler,
+                    _autoBuffered
+                );
         }
 
         //-----------------------------------------------------------------------------------

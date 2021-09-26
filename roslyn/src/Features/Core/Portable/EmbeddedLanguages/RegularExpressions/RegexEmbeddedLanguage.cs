@@ -70,10 +70,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         )
         {
             var (tree, _) = await TryGetTreeAndTokenAtPositionAsync(
-                    document,
-                    position,
-                    cancellationToken
-                )
+                document,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return tree;
         }

@@ -79,10 +79,8 @@ namespace System.ComponentModel
             if (destinationType == typeof(InstanceDescriptor) && value is TimeSpan)
             {
                 return new InstanceDescriptor(
-                    typeof(TimeSpan).GetMethod(
-                        nameof(TimeSpan.Parse),
-                        new Type[] { typeof(string) }
-                    ),
+                    typeof(TimeSpan)
+                        .GetMethod(nameof(TimeSpan.Parse), new Type[] { typeof(string) }),
                     new object[] { value.ToString() }
                 );
             }

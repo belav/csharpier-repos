@@ -111,10 +111,8 @@ namespace System.Security.Cryptography
                         throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                     }
 
-                    byte[] derFormatSignature = Interop.AppleCrypto.GenerateSignature(
-                        keys.PrivateKey,
-                        hash
-                    );
+                    byte[] derFormatSignature = Interop.AppleCrypto
+                        .GenerateSignature(keys.PrivateKey, hash);
                     byte[] ieeeFormatSignature = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
                         derFormatSignature.AsSpan(0, derFormatSignature.Length),
                         KeySize
@@ -135,10 +133,8 @@ namespace System.Security.Cryptography
                         throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                     }
 
-                    byte[] derFormatSignature = Interop.AppleCrypto.GenerateSignature(
-                        keys.PrivateKey,
-                        source
-                    );
+                    byte[] derFormatSignature = Interop.AppleCrypto
+                        .GenerateSignature(keys.PrivateKey, source);
                     byte[] ieeeFormatSignature = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
                         derFormatSignature.AsSpan(0, derFormatSignature.Length),
                         KeySize
@@ -184,11 +180,12 @@ namespace System.Security.Cryptography
                         return false;
                     }
 
-                    return Interop.AppleCrypto.VerifySignature(
-                        GetKeys().PublicKey,
-                        hash,
-                        AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(signature)
-                    );
+                    return Interop.AppleCrypto
+                        .VerifySignature(
+                            GetKeys().PublicKey,
+                            hash,
+                            AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(signature)
+                        );
                 }
 
                 protected override byte[] HashData(

@@ -39,10 +39,10 @@ namespace Microsoft.AspNetCore.WebUtilities
 
             Name = HeaderUtilities.RemoveQuotes(_contentDispositionHeader.Name).ToString();
             FileName = HeaderUtilities.RemoveQuotes(
-                    _contentDispositionHeader.FileNameStar.HasValue
-                      ? _contentDispositionHeader.FileNameStar
-                      : _contentDispositionHeader.FileName
-                )
+                _contentDispositionHeader.FileNameStar.HasValue
+                  ? _contentDispositionHeader.FileNameStar
+                  : _contentDispositionHeader.FileName
+            )
                 .ToString();
         }
 

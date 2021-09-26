@@ -144,7 +144,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     createCount += 1;
                     return new TestConnection(
                         onDispose: createCount == 1 ? onDisposeForFirstConnection : null
-                    ).StartAsync();
+                    )
+                        .StartAsync();
                 }
 
                 var builder = new HubConnectionBuilder().WithUrl("http://example.com");
@@ -239,8 +240,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     async connection =>
                     {
                         var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                                () => method(connection)
-                            )
+                            () => method(connection)
+                        )
                             .DefaultTimeout();
                         Assert.Equal(
                             $"The '{name}' method cannot be called if the connection is not active",
@@ -453,8 +454,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                         // We should be stopped now
                         var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                                () => connection.SendAsync("Foo")
-                            )
+                            () => connection.SendAsync("Foo")
+                        )
                             .DefaultTimeout();
                         Assert.Equal(
                             $"The '{nameof(HubConnection.SendCoreAsync)}' method cannot be called if the connection is not active",
@@ -497,8 +498,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                         // We should be stopped now
                         var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                                () => connection.SendAsync("Foo")
-                            )
+                            () => connection.SendAsync("Foo")
+                        )
                             .DefaultTimeout();
                         Assert.Equal(
                             $"The '{nameof(HubConnection.SendCoreAsync)}' method cannot be called if the connection is not active",
@@ -544,8 +545,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                         // We should be stopped now
                         var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                                () => connection.SendAsync("Foo")
-                            )
+                            () => connection.SendAsync("Foo")
+                        )
                             .DefaultTimeout();
                         Assert.Equal(
                             $"The '{nameof(HubConnection.SendCoreAsync)}' method cannot be called if the connection is not active",
@@ -587,8 +588,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                         // Wait for the method to complete, with an expected error.
                         var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                                () => targetTask
-                            )
+                            () => targetTask
+                        )
                             .DefaultTimeout();
                         Assert.Equal(
                             $"The '{methodName}' method cannot be called if the connection is not active",
@@ -633,8 +634,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         hubConnection.HandshakeTimeout = TimeSpan.FromMilliseconds(1);
 
                         await Assert.ThrowsAsync<OperationCanceledException>(
-                                () => hubConnection.StartAsync()
-                            )
+                            () => hubConnection.StartAsync()
+                        )
                             .DefaultTimeout();
                         Assert.Equal(HubConnectionState.Disconnected, hubConnection.State);
                     }
@@ -669,9 +670,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     try
                     {
                         await Assert.ThrowsAsync<TaskCanceledException>(
-                                () =>
-                                    hubConnection.StartAsync(new CancellationToken(canceled: true))
-                            )
+                            () => hubConnection.StartAsync(new CancellationToken(canceled: true))
+                        )
                             .DefaultTimeout();
                         Assert.False(onStartCalled);
                     }
@@ -765,9 +765,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 await hubConnection.StartAsync().DefaultTimeout();
 
-                await innerConnection.Application.Output.WriteAsync(
-                        Encoding.UTF8.GetBytes(new[] { '{' })
-                    )
+                await innerConnection.Application.Output
+                    .WriteAsync(Encoding.UTF8.GetBytes(new[] { '{' }))
                     .DefaultTimeout();
                 innerConnection.Application.Output.Complete();
 

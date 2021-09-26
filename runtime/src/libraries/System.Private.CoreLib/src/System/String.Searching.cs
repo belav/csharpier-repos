@@ -48,29 +48,20 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.IndexOf(
-                        this,
-                        value,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo.CurrentCulture.CompareInfo
+                        .IndexOf(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.IndexOf(
-                        this,
-                        value,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo.Invariant
+                        .IndexOf(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
 
                 case StringComparison.Ordinal:
                     return IndexOf(value);
 
                 case StringComparison.OrdinalIgnoreCase:
-                    return CompareInfo.Invariant.IndexOf(
-                        this,
-                        value,
-                        CompareOptions.OrdinalIgnoreCase
-                    );
+                    return CompareInfo.Invariant
+                        .IndexOf(this, value, CompareOptions.OrdinalIgnoreCase);
 
                 default:
                     throw new ArgumentException(
@@ -133,7 +124,8 @@ namespace System
                 int result = new ReadOnlySpan<char>(
                     ref Unsafe.Add(ref _firstChar, startIndex),
                     count
-                ).IndexOfAny(anyOf);
+                )
+                    .IndexOfAny(anyOf);
                 return result == -1 ? result : result + startIndex;
             }
             else if (anyOf.Length > 5)
@@ -372,23 +364,25 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.IndexOf(
-                        this,
-                        value,
-                        startIndex,
-                        count,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo.CurrentCulture.CompareInfo
+                        .IndexOf(
+                            this,
+                            value,
+                            startIndex,
+                            count,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.IndexOf(
-                        this,
-                        value,
-                        startIndex,
-                        count,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo.Invariant
+                        .IndexOf(
+                            this,
+                            value,
+                            startIndex,
+                            count,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
@@ -578,33 +572,36 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.LastIndexOf(
-                        this,
-                        value,
-                        startIndex,
-                        count,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo.CurrentCulture.CompareInfo
+                        .LastIndexOf(
+                            this,
+                            value,
+                            startIndex,
+                            count,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.LastIndexOf(
-                        this,
-                        value,
-                        startIndex,
-                        count,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo.Invariant
+                        .LastIndexOf(
+                            this,
+                            value,
+                            startIndex,
+                            count,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
-                    return CompareInfo.Invariant.LastIndexOf(
-                        this,
-                        value,
-                        startIndex,
-                        count,
-                        GetCompareOptionsFromOrdinalStringComparison(comparisonType)
-                    );
+                    return CompareInfo.Invariant
+                        .LastIndexOf(
+                            this,
+                            value,
+                            startIndex,
+                            count,
+                            GetCompareOptionsFromOrdinalStringComparison(comparisonType)
+                        );
 
                 default:
                     throw (value is null)

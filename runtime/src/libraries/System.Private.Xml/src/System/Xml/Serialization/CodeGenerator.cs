@@ -166,9 +166,8 @@ namespace System.Xml.Serialization
 
         internal LocalBuilder GetLocal(string name)
         {
-            System.Diagnostics.Debug.Assert(
-                _currentScope != null && _currentScope.ContainsKey(name)
-            );
+            System.Diagnostics.Debug
+                .Assert(_currentScope != null && _currentScope.ContainsKey(name));
             return _currentScope[name]!;
         }
 
@@ -347,11 +346,12 @@ namespace System.Xml.Serialization
 #if DEBUG
                     CodeGenerator.AssertHasInterface(varType, typeof(ICollection));
 #endif
-                    MethodInfo ICollection_get_Count = typeof(ICollection).GetMethod(
-                        "get_Count",
-                        CodeGenerator.InstanceBindingFlags,
-                        Type.EmptyTypes
-                    )!;
+                    MethodInfo ICollection_get_Count = typeof(ICollection)
+                        .GetMethod(
+                            "get_Count",
+                            CodeGenerator.InstanceBindingFlags,
+                            Type.EmptyTypes
+                        )!;
                     Call(ICollection_get_Count);
                 }
                 Blt(forState.BeginLabel);
@@ -819,11 +819,12 @@ namespace System.Xml.Serialization
             {
                 Ldtoken((Type)o);
                 Call(
-                    typeof(Type).GetMethod(
-                        "GetTypeFromHandle",
-                        BindingFlags.Static | BindingFlags.Public,
-                        new Type[] { typeof(RuntimeTypeHandle) }
-                    )!
+                    typeof(Type)
+                        .GetMethod(
+                            "GetTypeFromHandle",
+                            BindingFlags.Static | BindingFlags.Public,
+                            new Type[] { typeof(RuntimeTypeHandle) }
+                        )!
                 );
             }
             else if (valueType.IsEnum)
@@ -870,17 +871,18 @@ namespace System.Xml.Serialization
                         Ldstr((string)o);
                         break;
                     case TypeCode.Decimal:
-                        ConstructorInfo Decimal_ctor = typeof(decimal).GetConstructor(
-                            CodeGenerator.InstanceBindingFlags,
-                            new Type[]
-                            {
-                                typeof(int),
-                                typeof(int),
-                                typeof(int),
-                                typeof(bool),
-                                typeof(byte)
-                            }
-                        )!;
+                        ConstructorInfo Decimal_ctor = typeof(decimal)
+                            .GetConstructor(
+                                CodeGenerator.InstanceBindingFlags,
+                                new Type[]
+                                {
+                                    typeof(int),
+                                    typeof(int),
+                                    typeof(int),
+                                    typeof(bool),
+                                    typeof(byte)
+                                }
+                            )!;
                         int[] bits = decimal.GetBits((decimal)o);
                         Ldc(bits[0]); // digit
                         Ldc(bits[1]); // digit
@@ -890,10 +892,11 @@ namespace System.Xml.Serialization
                         New(Decimal_ctor);
                         break;
                     case TypeCode.DateTime:
-                        ConstructorInfo DateTime_ctor = typeof(DateTime).GetConstructor(
-                            CodeGenerator.InstanceBindingFlags,
-                            new Type[] { typeof(long) }
-                        )!;
+                        ConstructorInfo DateTime_ctor = typeof(DateTime)
+                            .GetConstructor(
+                                CodeGenerator.InstanceBindingFlags,
+                                new Type[] { typeof(long) }
+                            )!;
                         Ldc(((DateTime)o).Ticks); // ticks
                         New(DateTime_ctor);
                         break;
@@ -903,12 +906,13 @@ namespace System.Xml.Serialization
                     default:
                         if (valueType == typeof(TimeSpan))
                         {
-                            ConstructorInfo TimeSpan_ctor = typeof(TimeSpan).GetConstructor(
-                                CodeGenerator.InstanceBindingFlags,
-                                null,
-                                new Type[] { typeof(long) },
-                                null
-                            )!;
+                            ConstructorInfo TimeSpan_ctor = typeof(TimeSpan)
+                                .GetConstructor(
+                                    CodeGenerator.InstanceBindingFlags,
+                                    null,
+                                    new Type[] { typeof(long) },
+                                    null
+                                )!;
                             Ldc(((TimeSpan)o).Ticks); // ticks
                             New(TimeSpan_ctor);
                             break;

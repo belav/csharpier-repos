@@ -244,131 +244,130 @@ class Test<T>
     static string s;
 }";
             var option = TestOptions.ReleaseExe.WithWarningLevel(0);
-            CreateCompilationWithMscorlib40AndSystemCore(source, options: option)
-                .VerifyDiagnostics(
-                    // (12,20): error CS1525: Invalid expression term 'int'
-                    //         s = nameof(int);
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
-                        .WithArguments("int")
-                        .WithLocation(12, 20),
-                    // (13,20): error CS1026: ) expected
-                    //         s = nameof(void);
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "void").WithLocation(13, 20),
-                    // (13,20): error CS1002: ; expected
-                    //         s = nameof(void);
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "void").WithLocation(13, 20),
-                    // (13,20): error CS1547: Keyword 'void' cannot be used in this context
-                    //         s = nameof(void);
-                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(13, 20),
-                    // (13,24): error CS1001: Identifier expected
-                    //         s = nameof(void);
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(13, 24),
-                    // (13,24): error CS1002: ; expected
-                    //         s = nameof(void);
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(13, 24),
-                    // (13,24): error CS1513: } expected
-                    //         s = nameof(void);
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(13, 24),
-                    // (17,66): error CS1031: Type expected
-                    //         s = nameof(System.Collections.Generic.Dictionary<Program,>.KeyCollection);
-                    Diagnostic(ErrorCode.ERR_TypeExpected, ">").WithLocation(17, 66),
-                    // (11,27): error CS0305: Using the generic type 'Action<T>' requires 1 type arguments
-                    //         s = nameof(System.Action<>);
-                    Diagnostic(ErrorCode.ERR_BadArity, "Action<>")
-                        .WithArguments("System.Action<T>", "type", "1")
-                        .WithLocation(11, 27),
-                    // (13,13): error CS0103: The name 'nameof' does not exist in the current context
-                    //         s = nameof(void);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "nameof")
-                        .WithArguments("nameof")
-                        .WithLocation(13, 13),
-                    // (16,20): error CS0103: The name 'List' does not exist in the current context
-                    //         s = nameof(List<int>.Enumerator);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "List<int>")
-                        .WithArguments("List")
-                        .WithLocation(16, 20),
-                    // (19,33): error CS0122: 'Test<object>.s' is inaccessible due to its protection level
-                    //         s = nameof(Test<Object>.s);
-                    Diagnostic(ErrorCode.ERR_BadAccess, "s")
-                        .WithArguments("Test<object>.s")
-                        .WithLocation(19, 33),
-                    // (22,20): error CS0103: The name 'nameof' does not exist in the current context
-                    //         s = nameof(nameof);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "nameof")
-                        .WithArguments("nameof")
-                        .WithLocation(22, 20),
-                    // (23,28): error CS0117: 'Program' does not contain a definition for 's2'
-                    //         s = nameof(Program.s2);
-                    Diagnostic(ErrorCode.ERR_NoSuchMember, "s2")
-                        .WithArguments("Program", "s2")
-                        .WithLocation(23, 28),
-                    // (24,27): error CS0117: 'object' does not contain a definition for 'Something'
-                    //         s = nameof(Object.Something);
-                    Diagnostic(ErrorCode.ERR_NoSuchMember, "Something")
-                        .WithArguments("object", "Something")
-                        .WithLocation(24, 27),
-                    // (25,28): error CS0400: The type or namespace name 'Something' could not be found in the global namespace (are you missing an assembly reference?)
-                    //         s = nameof(global::Something);
-                    Diagnostic(ErrorCode.ERR_GlobalSingleTypeNameNotFound, "Something")
-                        .WithArguments("Something", "<global namespace>")
-                        .WithLocation(25, 28),
-                    // (26,20): error CS0432: Alias 'global2' not found
-                    //         s = nameof(global2::Something);
-                    Diagnostic(ErrorCode.ERR_AliasNotFound, "global2")
-                        .WithArguments("global2")
-                        .WithLocation(26, 20),
-                    // (27,20): error CS0234: The type or namespace name 'Collections2' does not exist in the namespace 'System' (are you missing an assembly reference?)
-                    //         s = nameof(System.Collections2.Generic.List);
-                    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "System.Collections2")
-                        .WithArguments("Collections2", "System")
-                        .WithLocation(27, 20),
-                    // (28,20): error CS0103: The name 'List2' does not exist in the current context
-                    //         s = nameof(List2<>.Add);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "List2<>")
-                        .WithArguments("List2")
-                        .WithLocation(28, 20),
-                    // (31,20): error CS8083: An alias-qualified name is not an expression.
-                    //         s = nameof(global::Program); // not an expression
-                    Diagnostic(ErrorCode.ERR_AliasQualifiedNameNotAnExpression, "global::Program")
-                        .WithLocation(31, 20),
-                    // (32,20): error CS0305: Using the generic type 'Test<T>' requires 1 type arguments
-                    //         s = nameof(Test<>.s); // inaccessible
-                    Diagnostic(ErrorCode.ERR_BadArity, "Test<>")
-                        .WithArguments("Test<T>", "type", "1")
-                        .WithLocation(32, 20),
-                    // (32,27): error CS0122: 'Test<T>.s' is inaccessible due to its protection level
-                    //         s = nameof(Test<>.s); // inaccessible
-                    Diagnostic(ErrorCode.ERR_BadAccess, "s")
-                        .WithArguments("Test<T>.s")
-                        .WithLocation(32, 27),
-                    // (33,20): error CS0841: Cannot use local variable 'b' before it is declared
-                    //         s = nameof(b); // cannot use before declaration
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "b")
-                        .WithArguments("b")
-                        .WithLocation(33, 20),
-                    // (35,20): error CS8084: Type parameters are not allowed on a method group as an argument to 'nameof'.
-                    //         s = nameof(System.Linq.Enumerable.Select<int, int>); // type parameters not allowed on method group in nameof
-                    Diagnostic(
-                            ErrorCode.ERR_NameofMethodGroupWithTypeParameters,
-                            "System.Linq.Enumerable.Select<int, int>"
-                        )
-                        .WithLocation(35, 20),
-                    // (43,13): error CS0103: The name 'nameof' does not exist in the current context
-                    //         s = nameof();
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "nameof")
-                        .WithArguments("nameof")
-                        .WithLocation(43, 13),
-                    // (44,20): error CS8081: Expression does not have a name.
-                    //         s = nameof(this);
-                    Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "this").WithLocation(44, 20),
-                    // (47,20): error CS8081: Expression does not have a name.
-                    //         s = nameof(typeof(string));
-                    Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(string)")
-                        .WithLocation(47, 20),
-                    // (49,20): error CS8082: Sub-expression cannot be used in an argument to nameof.
-                    //         s = nameof(a[4].Equals);
-                    Diagnostic(ErrorCode.ERR_SubexpressionNotInNameof, "a[4]").WithLocation(49, 20)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source, options: option).VerifyDiagnostics(
+                // (12,20): error CS1525: Invalid expression term 'int'
+                //         s = nameof(int);
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(12, 20),
+                // (13,20): error CS1026: ) expected
+                //         s = nameof(void);
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "void").WithLocation(13, 20),
+                // (13,20): error CS1002: ; expected
+                //         s = nameof(void);
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "void").WithLocation(13, 20),
+                // (13,20): error CS1547: Keyword 'void' cannot be used in this context
+                //         s = nameof(void);
+                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(13, 20),
+                // (13,24): error CS1001: Identifier expected
+                //         s = nameof(void);
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(13, 24),
+                // (13,24): error CS1002: ; expected
+                //         s = nameof(void);
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(13, 24),
+                // (13,24): error CS1513: } expected
+                //         s = nameof(void);
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(13, 24),
+                // (17,66): error CS1031: Type expected
+                //         s = nameof(System.Collections.Generic.Dictionary<Program,>.KeyCollection);
+                Diagnostic(ErrorCode.ERR_TypeExpected, ">").WithLocation(17, 66),
+                // (11,27): error CS0305: Using the generic type 'Action<T>' requires 1 type arguments
+                //         s = nameof(System.Action<>);
+                Diagnostic(ErrorCode.ERR_BadArity, "Action<>")
+                    .WithArguments("System.Action<T>", "type", "1")
+                    .WithLocation(11, 27),
+                // (13,13): error CS0103: The name 'nameof' does not exist in the current context
+                //         s = nameof(void);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "nameof")
+                    .WithArguments("nameof")
+                    .WithLocation(13, 13),
+                // (16,20): error CS0103: The name 'List' does not exist in the current context
+                //         s = nameof(List<int>.Enumerator);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "List<int>")
+                    .WithArguments("List")
+                    .WithLocation(16, 20),
+                // (19,33): error CS0122: 'Test<object>.s' is inaccessible due to its protection level
+                //         s = nameof(Test<Object>.s);
+                Diagnostic(ErrorCode.ERR_BadAccess, "s")
+                    .WithArguments("Test<object>.s")
+                    .WithLocation(19, 33),
+                // (22,20): error CS0103: The name 'nameof' does not exist in the current context
+                //         s = nameof(nameof);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "nameof")
+                    .WithArguments("nameof")
+                    .WithLocation(22, 20),
+                // (23,28): error CS0117: 'Program' does not contain a definition for 's2'
+                //         s = nameof(Program.s2);
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "s2")
+                    .WithArguments("Program", "s2")
+                    .WithLocation(23, 28),
+                // (24,27): error CS0117: 'object' does not contain a definition for 'Something'
+                //         s = nameof(Object.Something);
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Something")
+                    .WithArguments("object", "Something")
+                    .WithLocation(24, 27),
+                // (25,28): error CS0400: The type or namespace name 'Something' could not be found in the global namespace (are you missing an assembly reference?)
+                //         s = nameof(global::Something);
+                Diagnostic(ErrorCode.ERR_GlobalSingleTypeNameNotFound, "Something")
+                    .WithArguments("Something", "<global namespace>")
+                    .WithLocation(25, 28),
+                // (26,20): error CS0432: Alias 'global2' not found
+                //         s = nameof(global2::Something);
+                Diagnostic(ErrorCode.ERR_AliasNotFound, "global2")
+                    .WithArguments("global2")
+                    .WithLocation(26, 20),
+                // (27,20): error CS0234: The type or namespace name 'Collections2' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                //         s = nameof(System.Collections2.Generic.List);
+                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "System.Collections2")
+                    .WithArguments("Collections2", "System")
+                    .WithLocation(27, 20),
+                // (28,20): error CS0103: The name 'List2' does not exist in the current context
+                //         s = nameof(List2<>.Add);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "List2<>")
+                    .WithArguments("List2")
+                    .WithLocation(28, 20),
+                // (31,20): error CS8083: An alias-qualified name is not an expression.
+                //         s = nameof(global::Program); // not an expression
+                Diagnostic(ErrorCode.ERR_AliasQualifiedNameNotAnExpression, "global::Program")
+                    .WithLocation(31, 20),
+                // (32,20): error CS0305: Using the generic type 'Test<T>' requires 1 type arguments
+                //         s = nameof(Test<>.s); // inaccessible
+                Diagnostic(ErrorCode.ERR_BadArity, "Test<>")
+                    .WithArguments("Test<T>", "type", "1")
+                    .WithLocation(32, 20),
+                // (32,27): error CS0122: 'Test<T>.s' is inaccessible due to its protection level
+                //         s = nameof(Test<>.s); // inaccessible
+                Diagnostic(ErrorCode.ERR_BadAccess, "s")
+                    .WithArguments("Test<T>.s")
+                    .WithLocation(32, 27),
+                // (33,20): error CS0841: Cannot use local variable 'b' before it is declared
+                //         s = nameof(b); // cannot use before declaration
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "b")
+                    .WithArguments("b")
+                    .WithLocation(33, 20),
+                // (35,20): error CS8084: Type parameters are not allowed on a method group as an argument to 'nameof'.
+                //         s = nameof(System.Linq.Enumerable.Select<int, int>); // type parameters not allowed on method group in nameof
+                Diagnostic(
+                    ErrorCode.ERR_NameofMethodGroupWithTypeParameters,
+                    "System.Linq.Enumerable.Select<int, int>"
+                )
+                    .WithLocation(35, 20),
+                // (43,13): error CS0103: The name 'nameof' does not exist in the current context
+                //         s = nameof();
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "nameof")
+                    .WithArguments("nameof")
+                    .WithLocation(43, 13),
+                // (44,20): error CS8081: Expression does not have a name.
+                //         s = nameof(this);
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "this").WithLocation(44, 20),
+                // (47,20): error CS8081: Expression does not have a name.
+                //         s = nameof(typeof(string));
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(string)")
+                    .WithLocation(47, 20),
+                // (49,20): error CS8082: Sub-expression cannot be used in an argument to nameof.
+                //         s = nameof(a[4].Equals);
+                Diagnostic(ErrorCode.ERR_SubexpressionNotInNameof, "a[4]").WithLocation(49, 20)
+            );
         }
 
         [Fact]
@@ -488,35 +487,34 @@ class NameofLocal
 ";
             MetadataReference[] references = new[] { SystemCoreRef, CSharpRef };
             var option = TestOptions.ReleaseExe.WithWarningLevel(0);
-            CreateCompilationWithMscorlib45(source, references, options: option)
-                .VerifyDiagnostics(
-                    // (104,31): error CS1501: No overload for method 'nameof' takes 1 arguments
-                    //             Console.WriteLine(nameof(Class.var));
-                    Diagnostic(ErrorCode.ERR_BadArgCount, "nameof")
-                        .WithArguments("nameof", "1")
-                        .WithLocation(104, 31),
-                    // (74,9): error CS0079: The event 'NameofEvent.nameof' can only appear on the left hand side of += or -=
-                    //         nameof(Class.var);
-                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "nameof")
-                        .WithArguments("NameofEvent.nameof")
-                        .WithLocation(74, 9),
-                    // (74,9): error CS1593: Delegate 'System.Action' does not take 1 arguments
-                    //         nameof(Class.var);
-                    Diagnostic(ErrorCode.ERR_BadDelArgCount, "nameof")
-                        .WithArguments("System.Action", "1")
-                        .WithLocation(74, 9),
-                    // (81,27): error CS0149: Method name expected
-                    //         Console.WriteLine(nameof(Class.var));
-                    Diagnostic(ErrorCode.ERR_MethodNameExpected, "nameof").WithLocation(81, 27),
-                    // (96,31): error CS1501: No overload for method 'nameof' takes 1 arguments
-                    //             Console.WriteLine(nameof(Class.var));
-                    Diagnostic(ErrorCode.ERR_BadArgCount, "nameof")
-                        .WithArguments("nameof", "1")
-                        .WithLocation(96, 31),
-                    // (89,27): error CS0149: Method name expected
-                    //         Console.WriteLine(nameof(Class.var));
-                    Diagnostic(ErrorCode.ERR_MethodNameExpected, "nameof").WithLocation(89, 27)
-                );
+            CreateCompilationWithMscorlib45(source, references, options: option).VerifyDiagnostics(
+                // (104,31): error CS1501: No overload for method 'nameof' takes 1 arguments
+                //             Console.WriteLine(nameof(Class.var));
+                Diagnostic(ErrorCode.ERR_BadArgCount, "nameof")
+                    .WithArguments("nameof", "1")
+                    .WithLocation(104, 31),
+                // (74,9): error CS0079: The event 'NameofEvent.nameof' can only appear on the left hand side of += or -=
+                //         nameof(Class.var);
+                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "nameof")
+                    .WithArguments("NameofEvent.nameof")
+                    .WithLocation(74, 9),
+                // (74,9): error CS1593: Delegate 'System.Action' does not take 1 arguments
+                //         nameof(Class.var);
+                Diagnostic(ErrorCode.ERR_BadDelArgCount, "nameof")
+                    .WithArguments("System.Action", "1")
+                    .WithLocation(74, 9),
+                // (81,27): error CS0149: Method name expected
+                //         Console.WriteLine(nameof(Class.var));
+                Diagnostic(ErrorCode.ERR_MethodNameExpected, "nameof").WithLocation(81, 27),
+                // (96,31): error CS1501: No overload for method 'nameof' takes 1 arguments
+                //             Console.WriteLine(nameof(Class.var));
+                Diagnostic(ErrorCode.ERR_BadArgCount, "nameof")
+                    .WithArguments("nameof", "1")
+                    .WithLocation(96, 31),
+                // (89,27): error CS0149: Method name expected
+                //         Console.WriteLine(nameof(Class.var));
+                Diagnostic(ErrorCode.ERR_MethodNameExpected, "nameof").WithLocation(89, 27)
+            );
         }
 
         [Fact]
@@ -729,10 +727,10 @@ class Program
     }
 }";
             var compilation = CreateCompilation(
-                    source,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
-                )
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+            )
                 .VerifyDiagnostics(
                     // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                     //         nameof(N);
@@ -754,10 +752,10 @@ class Program
     }
 }";
             var compilation = CreateCompilation(
-                    source,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)
-                )
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)
+            )
                 .VerifyDiagnostics(
                     // (7,9): error CS8026: Feature 'nameof operator' is not available in C# 5. Please use language version 6 or greater.
                     //         nameof(N);
@@ -851,7 +849,8 @@ public class Program
             compilation.VerifyDiagnostics(
                 // (13,20): error CS8093: Extension method groups are not allowed as an argument to 'nameof'.
                 //         Use(nameof(a.Extension));
-                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension").WithLocation(13, 20)
+                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension")
+                    .WithLocation(13, 20)
             );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
@@ -902,7 +901,8 @@ namespace N1
             compilation.VerifyDiagnostics(
                 // (22,28): error CS8093: Extension method groups are not allowed as an argument to 'nameof'.
                 //                 Use(nameof(a.Extension));
-                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension").WithLocation(22, 28)
+                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension")
+                    .WithLocation(22, 28)
             );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
@@ -1039,7 +1039,8 @@ namespace N1
             compilation.VerifyDiagnostics(
                 // (21,28): error CS8093: Extension method groups are not allowed as an argument to 'nameof'.
                 //                 Use(nameof(A.Extension));
-                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "A.Extension").WithLocation(21, 28)
+                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "A.Extension")
+                    .WithLocation(21, 28)
             );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
@@ -1386,10 +1387,10 @@ unsafe struct Struct1
   }
 }";
             var compilation = CreateCompilationWithMscorlib45(
-                    source,
-                    null,
-                    TestOptions.UnsafeDebugDll
-                )
+                source,
+                null,
+                TestOptions.UnsafeDebugDll
+            )
                 .VerifyDiagnostics(
                     // (14,19): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
                     //     return nameof(MessageType);
@@ -1584,14 +1585,13 @@ class Program
 }
 ";
             var option = TestOptions.ReleaseDll;
-            CreateCompilation(source, options: option)
-                .VerifyDiagnostics(
-                    // (4,33): error CS0103: The name 'dynamic' does not exist in the current context
-                    //     static string M() => nameof(dynamic);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "dynamic")
-                        .WithArguments("dynamic")
-                        .WithLocation(4, 33)
-                );
+            CreateCompilation(source, options: option).VerifyDiagnostics(
+                // (4,33): error CS0103: The name 'dynamic' does not exist in the current context
+                //     static string M() => nameof(dynamic);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "dynamic")
+                    .WithArguments("dynamic")
+                    .WithLocation(4, 33)
+            );
         }
 
         [Fact]
@@ -1650,21 +1650,17 @@ class Program
     static string F3() => nameof(typeof(dynamic));
 }";
             var option = TestOptions.ReleaseDll;
-            CreateCompilation(source, options: option)
-                .VerifyDiagnostics(
-                    // (4,34): error CS8081: Expression does not have a name.
-                    //     static string F1() => nameof(typeof(int));
-                    Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(int)")
-                        .WithLocation(4, 34),
-                    // (5,34): error CS8081: Expression does not have a name.
-                    //     static string F2() => nameof(typeof(nint));
-                    Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(nint)")
-                        .WithLocation(5, 34),
-                    // (6,34): error CS1962: The typeof operator cannot be used on the dynamic type
-                    //     static string F3() => nameof(typeof(dynamic));
-                    Diagnostic(ErrorCode.ERR_BadDynamicTypeof, "typeof(dynamic)")
-                        .WithLocation(6, 34)
-                );
+            CreateCompilation(source, options: option).VerifyDiagnostics(
+                // (4,34): error CS8081: Expression does not have a name.
+                //     static string F1() => nameof(typeof(int));
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(int)").WithLocation(4, 34),
+                // (5,34): error CS8081: Expression does not have a name.
+                //     static string F2() => nameof(typeof(nint));
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(nint)").WithLocation(5, 34),
+                // (6,34): error CS1962: The typeof operator cannot be used on the dynamic type
+                //     static string F3() => nameof(typeof(dynamic));
+                Diagnostic(ErrorCode.ERR_BadDynamicTypeof, "typeof(dynamic)").WithLocation(6, 34)
+            );
         }
 
         [Fact]

@@ -2613,12 +2613,8 @@ namespace System.Tests
             char[] dst = new char[1];
             Assert.Throws<FormatException>(
                 () =>
-                    new TimeSpan().TryFormat(
-                        dst.AsSpan(),
-                        out int charsWritten,
-                        invalidFormat,
-                        null
-                    )
+                    new TimeSpan()
+                        .TryFormat(dst.AsSpan(), out int charsWritten, invalidFormat, null)
             );
         }
 

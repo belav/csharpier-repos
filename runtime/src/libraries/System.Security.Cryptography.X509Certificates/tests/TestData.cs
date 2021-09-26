@@ -48,7 +48,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             + "02133b5d20de553fa3ae9040313875285e04a9466de6f57a7940bd1fcde845d5"
             + "aee25d3ef575c7e6666360ccd59a84878d2430f7ef34d0631db142674a0e4bbf"
             + "3a0eefb6953aa738e4259208a6886682"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static readonly byte[] MsCertificatePemBytes = ByteUtils.AsciiBytes(
             @"-----BEGIN CERTIFICATE-----
@@ -183,7 +184,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "fa81b28134eabf58f3211a0d1eefdaae115e7872d5a67045c3b62a5da4393940"
             + "e5a496413a6d55ea6309d0013e90657c83c6e40aa8fafeee66acbb6661c14190"
             + "11e1fde6f4fcc328bd7e537e4aa2dbe216d8f1f3aa7e5ec60eb9cfdca7a41d74"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static readonly byte[] PfxData_RC2ContentEncryption = (
             "3082063A020103308205F606092A864886F70D010701A08205E7048205E33082"
@@ -236,7 +238,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "E568B18336BB4DC541352C9785C48D0F0E53066EB2009EFCB3E5644ED12252C1"
             + "BC303B301F300706052B0E03021A04144DEAB829B57A3156AEBC8239C0E7E884"
             + "EFD96E680414E147930B932899741C92D7652268938770254A2B020207D0"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static readonly byte[] PfxData_TripleDESContentEncryption = (
             "308206980201033082065406092A864886F70D010701A0820645048206413082"
@@ -292,7 +295,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "0F96C471C5FE026EA7EA68AA42DF0A693213ECF06555804A191637A8F7858A30"
             + "3B301F300706052B0E03021A04146B4EDA4227EAFC85EDA331AC88761DD06D54"
             + "60FD0414C8A2B10C67EAECB3D48BEC69616133185721613D020207D0"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static readonly byte[] PfxData = PlatformSupport.IsRC2Supported
             ? PfxData_RC2ContentEncryption
@@ -356,7 +360,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "9040313875285e04a9466de6f57a7940bd1fcde845d5aee25d3ef575c7e66663"
             + "60ccd59a84878d2430f7ef34d0631db142674a0e4bbf3a0eefb6953aa738e425"
             + "9208a68866823100"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static byte[] StoreSavedAsCerData = (
             "308201e530820152a0030201020210d5b5bc1c458a558845bff51cb4dff31c30"
@@ -375,7 +380,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "e492d2c736e1c929e648a65cc9eb63cd84e57b5909dd5ddf5dbbba4a6498b9ca"
             + "225b6e368b94913bfc24de6b2bd9a26b192b957304b89531e902ffc91b54b237"
             + "bb228be8afcda26476"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static byte[] StoreSavedAsSerializedCerData = (
             "0200000001000000bc0000001c0000006c000000010000000000000000000000"
@@ -400,7 +406,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "689ffd7234b7872611c5c23e5e0714531abadb5de492d2c736e1c929e648a65c"
             + "c9eb63cd84e57b5909dd5ddf5dbbba4a6498b9ca225b6e368b94913bfc24de6b"
             + "2bd9a26b192b957304b89531e902ffc91b54b237bb228be8afcda26476"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static byte[] StoreSavedAsSerializedStoreData = (
             "00000000434552540200000001000000bc0000001c0000006c00000001000000"
@@ -466,7 +473,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "285e04a9466de6f57a7940bd1fcde845d5aee25d3ef575c7e6666360ccd59a84"
             + "878d2430f7ef34d0631db142674a0e4bbf3a0eefb6953aa738e4259208a68866"
             + "82000000000000000000000000"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static byte[] DssCer = (
             "3082025d3082021da00302010202101e9ae1e91e07de8640ac7af21ac22e8030"
@@ -489,7 +497,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "f2f8bf0963300906072a8648ce380403032f00302c021461f6d143a47a4f7e0e"
             + "0ef9848b7f83eacbf83ffd021420e2ac47e656874633e01b0d207a99280c1127"
             + "01"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static readonly byte[] Dsa1024Pfx_RC2ContentEncryption = (
             "308206EE020103308206B406092A864886F70D010701A08206A5048206A13082"
@@ -548,7 +557,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "67007200610070006800690063002000500072006F0076006900640065007230"
             + "313021300906052B0E03021A0500041466FD3518CEBBD69877BA663C9E8D7092"
             + "8E8A98F30408DFB5AE610308BCF802020800"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static readonly byte[] Dsa1024Pfx_TripleDESContentEncryption = (
             "30820736020103308206F206092A864886F70D010701A08206E3048206DF3082"
@@ -609,7 +619,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "819E20916A942B2B4D002FAB3EC4F9582F3A9A19C500D6028E783BFED5303B30"
             + "1F300706052B0E03021A04143F1E5723BEBF22306EBF0DB2739B5E54BD5AB4C9"
             + "0414F83662B2693DF36BA3583ABA17BDF6590C903841020207D0"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static readonly byte[] Dsa1024Pfx = PlatformSupport.IsRC2Supported
             ? Dsa1024Pfx_RC2ContentEncryption
@@ -648,7 +659,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "0000000000000182096C6F63616C686F7374300B060960864801650304030203"
             + "3000302D021500B9316CC7E05C9F79197E0B41F6FD4E3FCEB72A8A0214075505"
             + "CCAECB18B7EF4C00F9C069FA3BC78014DE"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static byte[] CertWithEnhancedKeyUsage = (
             "308202BD308201A5A00302010202106144CAE1C8BF3049BB9BF62C08B74F1330"
@@ -674,7 +686,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "ECE244B1ADDF8878FC15236101BFA8E804ADA7C36DE088A16E3BEAABB65D1A91"
             + "BA7010C7E3AA701A03B843A93AC1A291A791B3DBEEB511CBF73E2252691CBA33"
             + "E2"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static byte[] CertWithPolicies = (
             "308201f33082015ca0030201020210134fb7082cf69bbb4930bfc8e1ca446130"
@@ -693,7 +706,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "4f7a1f05d50fb867c20e778e412a25237054555669ced01c1ce1ba8e8e57510f"
             + "73e1167c920f78aa5415dc5281f0c761fb25bb1ebc707bc003dd90911e649915"
             + "918cfe4f3176972f8afdc1cccd9705e7fb307a0c17d273"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static byte[] CertWithTemplateData = (
             "308201dc30820145a00302010202105101b8242daf6cae4c53bac68a948b0130"
@@ -711,7 +725,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "e85ba686f765101aea0a0391b22fcfa6c0760eece91a0eb75501bf6871553f8d"
             + "6b089cf2ea63c872e0b4a178795b71826c4569857b45994977895e506dfb8075"
             + "ed1b1096987f2c8f65f2d6bbc788b1847b6ba13bee17ef6cb9c6a3392e13003f"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static byte[] ComplexNameInfoCert = (
             "308204BE30820427A00302010202080123456789ABCDEF300D06092A864886F70"
@@ -752,7 +767,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "29008DE8B851E2C30B6BF73F219BCE651E5972E62D651BA171D1DA9831A449D99"
             + "AF4E2F4B9EE3FD0991EF305ADDA633C44EB5E4979751280B3F54F9CCD561AC27D"
             + "3426BC6FF32E8E1AAF9F7C0150A726B"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static readonly byte[] MultiPrivateKeyPfx_RC2ContentEncryption = (
             "30820F1602010330820ED606092A864886F70D010701A0820EC704820EC33082"
@@ -876,7 +892,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "02AE91C7DF2561AEBC3845A118B00D21913B4A401DDDC40CE983178EF26C4A41"
             + "343037301F300706052B0E03021A041454F0864331D9415EBA750C62FA93C97D"
             + "3402E1A40414B610EC75D16EA23BF253AAD061FAC376E1EAF684"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static readonly byte[] MultiPrivateKeyPfx_TripleDESContentEncryption = (
             "30820FD502010330820F9106092A864886F70D010701A0820F8204820F7E3082"
@@ -1006,7 +1023,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "277017226C810551C9DFFC7F2F713DE8A24BF892B07DA8651AD57CDA303B301F"
             + "300706052B0E03021A0414AC44D277F1D7291B5A520398F597F6E3016174BA04"
             + "140F226E1BFC1FED6205670D7C624A3A9C1C20470B020207D0"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] MultiPrivateKeyPfx = PlatformSupport.IsRC2Supported
             ? MultiPrivateKeyPfx_RC2ContentEncryption
@@ -1016,7 +1034,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             "304F020103301106092A864886F70D010701A004040230003037301F30070605"
             + "2B0E03021A0414822078BC83E955E314BDA908D76D4C5177CC94EB0414711018"
             + "F2897A44A90E92779CB655EA11814EC598"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal const string ChainPfxPassword = "test";
 
@@ -1177,7 +1196,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "474D33531086519C39EDD6310F3079EB5AC83289A6EDCBA3DC97E36E837134F7"
             + "303B301F300706052B0E03021A0414725663844329F8BF6DECA5873DDD8C96AA"
             + "8CA5D40414DF1D90CD18B3FBC72226B3C66EC2CB1AB351D4D2020207D0"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static readonly byte[] ChainPfxBytes_TripleDESContentEncryption = (
             "30821306020103308212C206092A864886F70D010701A08212B3048212AF3082"
@@ -1333,7 +1353,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "8A19E9413C47214C2D285A6B20303B301F300706052B0E03021A04147E4F196F"
             + "6D0A4EF84A2C08674CDDF6899F7672A50414206C1AAAFFB1E282745C91F6BF5F"
             + "0E87036AC61E020207D0"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static readonly byte[] ChainPfxBytes = PlatformSupport.IsRC2Supported
             ? ChainPfxBytes_RC2ContentEncryption
@@ -1453,7 +1474,8 @@ tcCZhP5KEu6XKKc1GcTqbyA0vi92YyyZViUa36hhVrNqPxtpclir+lcnNgnlqg==
             + "B462ADC84A434AEBAE38DEB9605FAB534A3CAF7B72C199448E58640388911296"
             + "115ED6B3478D0E741D990F2D59D66F12E58669D8983489AB0406E37462164B56"
             + "6AA1D9B273C406FA694A2556D1D3ACE723382C19871B8C143100"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] Pkcs7ChainPemBytes = ByteUtils.AsciiBytes(
             @"-----BEGIN PKCS7-----
@@ -1545,7 +1567,8 @@ MCcGCSqGSIb3DQEHAqAaMBgCAQExADALBgkqhkiG9w0BBwGgAKEAMQA=
         internal static readonly byte[] Pkcs7EmptyDerBytes = (
             "302706092A864886F70D010702A01A30180201013100300B06092A864886F70D"
             + "010701A000A1003100"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] Pkcs7SingleDerBytes = (
             "3082021406092A864886F70D010702A0820205308202010201013100300B0609"
@@ -1565,7 +1588,8 @@ MCcGCSqGSIb3DQEHAqAaMBgCAQExADALBgkqhkiG9w0BBwGgAKEAMQA=
             + "2611C5C23E5E0714531ABADB5DE492D2C736E1C929E648A65CC9EB63CD84E57B"
             + "5909DD5DDF5DBBBA4A6498B9CA225B6E368B94913BFC24DE6B2BD9A26B192B95"
             + "7304B89531E902FFC91B54B237BB228BE8AFCDA264763100"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] Pkcs7SinglePemBytes = ByteUtils.AsciiBytes(
             @"-----BEGIN PKCS7-----
@@ -1630,7 +1654,8 @@ WQndXd9du7pKZJi5yiJbbjaLlJE7/CTeayvZomsZK5VzBLiVMekC/8kbVLI3uyKL
             + "9918015647B5F8AC131CC5EB24534D172BC60218A88B65BCF71C7F388CE3E0EF"
             + "697B4203720483BB5794455B597D80D48CD3A1D73CBBC609C058767D1FF060A6"
             + "09D7E3D4317079AF0CD0A8A49251AB129157F9894A036487"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] MicrosoftDotComSslCertBytes = (
             "3082087930820661a00302010202136b000003f4e3a67a2348550c330000"
@@ -1706,7 +1731,8 @@ WQndXd9du7pKZJi5yiJbbjaLlJE7/CTeayvZomsZK5VzBLiVMekC/8kbVLI3uyKL
             + "0fd4bf9263f72c1ed260370b1add02cf6489898b8c3ae078cb04712d1d07"
             + "3e84756b54b0281649eb9a05e05ef1e939184f9a9244471277b2dd11385d"
             + "af125671c3331768048c27aed2"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] MicrosoftDotComIssuerBytes = (
             "3082055a30820442a00302010202100f14965f202069994fd5c7ac788941"
@@ -1755,7 +1781,8 @@ WQndXd9du7pKZJi5yiJbbjaLlJE7/CTeayvZomsZK5VzBLiVMekC/8kbVLI3uyKL
             + "d79e8de9c192566e388d343faecd6c6b4252623cd46989e0a057590b839f"
             + "c6722442f5080384ce1663f334f105763719b206de133e137061d304f2b8"
             + "476f05e38a88302b47455e7954c5f9ddebfa3f785175d25b"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] MicrosoftDotComRootBytes = (
             "308203773082025fa0030201020204020000b9300d06092a864886f70d01"
@@ -1788,7 +1815,8 @@ WQndXd9du7pKZJi5yiJbbjaLlJE7/CTeayvZomsZK5VzBLiVMekC/8kbVLI3uyKL
             + "1bb7f250887392c2e2e3168d9a3202ab8e18dde91011ee7e35ab90af3e30"
             + "947ad0333da7650ff5fc8e9e62cf47442c015dbb1db532d247d2382ed0fe"
             + "81dc326a1eb5ee3cd5fce7811d19c32442ea6339a9"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] Rsa384CertificatePemBytes = ByteUtils.AsciiBytes(
             @"-----BEGIN CERTIFICATE-----
@@ -1840,7 +1868,8 @@ wggvPj3b2WMXsVWiPr4S1Y/nBA==
             + "2A864886F70D01091531160414472193B362B056F6D6928EFF4C43FF1EFEB173"
             + "4E30313021300906052B0E03021A05000414B703685D5039D8EEF1A46F772F31"
             + "F177FDE874EC0408B4EF89F18902CE9502020800"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] ECDsabrainpoolP160r1_Explicit_Pfx = (
             "30820501020103308204C706092A864886F70D010701A08204B8048204B43082"
@@ -1884,7 +1913,8 @@ wggvPj3b2WMXsVWiPr4S1Y/nBA==
             + "1C8591A700DDE70FAC750C1539B2DFECAA3C30313021300906052B0E03021A05"
             + "0004143706E218219A899C700BD7AE3E8650FD1B2885AB0408E77FDD798BCADE"
             + "3C02020800"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] ECDsabrainpoolP160r1_CertificatePemBytes =
             ByteUtils.AsciiBytes(
@@ -1925,10 +1955,10 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
 
         internal static readonly ECDsaCngKeyValues ECDsaCng256PublicKey = new ECDsaCngKeyValues()
         {
-            QX =
-                "448d98ee08aeba0d8b40f3c6dbd500e8b69f07c70c661771655228ea5a178a91".HexToByteArray(),
-            QY =
-                "0ef5cb1759f6f2e062021d4f973f5bb62031be87ae915cff121586809e3219af".HexToByteArray(),
+            QX = "448d98ee08aeba0d8b40f3c6dbd500e8b69f07c70c661771655228ea5a178a91"
+                .HexToByteArray(),
+            QY = "0ef5cb1759f6f2e062021d4f973f5bb62031be87ae915cff121586809e3219af"
+                .HexToByteArray(),
             D = "692837e9cf613c0e290462a6f08faadcc7002398f75598d5554698a0cb51cf47".HexToByteArray(),
         };
 
@@ -1943,7 +1973,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "551d130101ff04023000300a06082a8648ce3d040302034800304502206c3019"
             + "8d724bb0501282fcd48aa383362ffe6da299e0701e83a5ab8bb0dcd292022100"
             + "8638a48e53393babfe2236c330211d76e5df95bc1fe2a11b1b4d9350f4268a8c"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] ECDsa256Certificate = (
             "308201223081c9a00302010202106a3c9e85ba6af1ac4f08111d8bdda340300906072a8648ce3d0401301431123010060355"
@@ -1952,16 +1983,20 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "ba0d8b40f3c6dbd500e8b69f07c70c661771655228ea5a178a910ef5cb1759f6f2e062021d4f973f5bb62031be87ae915cff"
             + "121586809e3219af300906072a8648ce3d04010349003046022100f221063dca71955d17c8f0e0f63a144c4065578fd9f68e"
             + "1ae6a7683e209ea742022100ed1db6a8be27cfb20ab43e0ca061622ceff26f7249a0f791e4d6be1a4e52adfa"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly ECDsaCngKeyValues ECDsaCng384PublicKey = new ECDsaCngKeyValues()
         {
             QX =
-                "c59eca607aa5559e6b2f8ac2eeb12d9ab47f420feabeb444c3f71520d7f2280439979323ab5a67344811d296fef6d1bd".HexToByteArray(),
+                "c59eca607aa5559e6b2f8ac2eeb12d9ab47f420feabeb444c3f71520d7f2280439979323ab5a67344811d296fef6d1bd"
+                    .HexToByteArray(),
             QY =
-                "d15f307cc6cc6c8baeeeb168bfb02c34d6eb0621efb3d06ad31c06b29eaf6ec2ec67bf288455e729d82e5a6439f70901".HexToByteArray(),
+                "d15f307cc6cc6c8baeeeb168bfb02c34d6eb0621efb3d06ad31c06b29eaf6ec2ec67bf288455e729d82e5a6439f70901"
+                    .HexToByteArray(),
             D =
-                "f55ba33e28cea32a014e2fe1213bb4d41cef361f1fee022116b15be50feb96bc946b10a46a9a7a94176787e0928a3e1d".HexToByteArray(),
+                "f55ba33e28cea32a014e2fe1213bb4d41cef361f1fee022116b15be50feb96bc946b10a46a9a7a94176787e0928a3e1d"
+                    .HexToByteArray(),
         };
 
         internal static readonly byte[] ECDsa384Certificate = (
@@ -1973,16 +2008,20 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "003066023100a8fbaeeae61953897eae5f0beeeffaca48e89bc0cb782145f39f4ba5b03390ce6a28e432e664adf5ebc6a802"
             + "040b238b023100dcc19109383b9482fdda68f40a63ee41797dbb8f25c0284155cc4238d682fbb3fb6e86ea0933297e850a26"
             + "16f6c39bbf"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly ECDsaCngKeyValues ECDsaCng521PublicKey = new ECDsaCngKeyValues()
         {
             QX =
-                "0134af29d1fe5e581fd2ff6194263abcb6f8cb4d9c08bdb384ede9b8663ae2f4e1af6c85eacc69dc768fbfcd856630792e05484cefb1fefb693081dc6490dac579c0".HexToByteArray(),
+                "0134af29d1fe5e581fd2ff6194263abcb6f8cb4d9c08bdb384ede9b8663ae2f4e1af6c85eacc69dc768fbfcd856630792e05484cefb1fefb693081dc6490dac579c0"
+                    .HexToByteArray(),
             QY =
-                "00bfe103f53cbcb039873b1a3e81a9da9abd71995e722318367281d30b35a338bf356662342b653eff38e85881863b7128ddbb856d8ae158365550bb6330b93d4ef0".HexToByteArray(),
+                "00bfe103f53cbcb039873b1a3e81a9da9abd71995e722318367281d30b35a338bf356662342b653eff38e85881863b7128ddbb856d8ae158365550bb6330b93d4ef0"
+                    .HexToByteArray(),
             D =
-                "0153603164bcef5c9f62388d06dcbf5681479be4397c07ff6f44bb848465e3397537d5f61abc7bc9266d4df6bae1df4847fcfd3dabdda37a2fe549b821ea858d088d".HexToByteArray(),
+                "0153603164bcef5c9f62388d06dcbf5681479be4397c07ff6f44bb848465e3397537d5f61abc7bc9266d4df6bae1df4847fcfd3dabdda37a2fe549b821ea858d088d"
+                    .HexToByteArray(),
         };
 
         internal static readonly ECDsaCngKeyValues ECDsabrainpoolP160r1_PublicKey =
@@ -2002,7 +2041,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "dfb328501910da4b02ba3ccd41f2bb073608c55f0f2b2e1198496c59b44db9e516a6a63ba7841d22cf590e39d3f09636d0eb"
             + "cd59a92c105f499e1329615602414285111634719b9bbd10eb7d08655b2fa7d7eb5e225bfdafef15562ae2f9f0c6a943a7bd"
             + "f0e39223d807b5e2e617a8e424294d90869567326531bcad0f893a0f3a"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] EccCert_KeyAgreement = (
             "308201553081FDA00302010202105A1C956450FFED894E85DC61E11CD968300A"
@@ -2016,7 +2056,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "AAB2C1B3300A06082A8648CE3D040302034700304402203CDF0CC71C63747BDA"
             + "2D2D563115AE68D34867E74BCA02738086C316B846CDF2022079F3990E5DCCEE"
             + "627B2E6E42317D4D279181EE695EE239D0C8516DD53A896EC3"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly byte[] ECDsa224Certificate = (
             "3082026630820214A003020102020900B94BCCE3179BAA21300A06082A8648CE"
@@ -2039,7 +2080,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "2A8648CE3D040302034000303D021D00AC10B79B6FD6BEE113573A1B68A3B771"
             + "3B9DA2719A9588376E334811021C1AAC3CA829DA79CE223FA83283E6F0A5A59D"
             + "2399E140D957C1C9DDAF"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static readonly byte[] ECDsaP256_DigitalSignature_Pfx_Windows_RC2ContentEncryption =
             (
@@ -2078,7 +2120,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
                 + "64A95EB350FF8EF6D625AD031BCD303B301F300706052B0E03021A0414C8D96C"
                 + "ED140F5CA3CB92BEFCA32C690804576ABF0414B59D4FECA9944D40EEFDE7FB96"
                 + "196D167B0FA511020207D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
         private static readonly byte[] ECDsaP256_DigitalSignature_Pfx_Windows_TripleDESContentEncryption =
             (
@@ -2116,7 +2159,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
                 + "98B1777F303B301F300706052B0E03021A041463C16FE8BB5114509BA9D023CB"
                 + "383E5DCE6904080414A1E1FBAD8DD3BDE73063DC6828C83C4B247E8F41020207"
                 + "D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
         internal static readonly byte[] ECDsaP256_DigitalSignature_Pfx_Windows =
             PlatformSupport.IsRC2Supported
@@ -2157,7 +2201,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
                 + "500072006F0076006900640065007230313021300906052B0E03021A05000414"
                 + "96C2244022AB2B809E0F97270F7F4EA7769DD26F04084C0E2946D65F8F220202"
                 + "0800"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
         // The PFX in ECDsaP256_DigitalSignature_Pfx_Windows_TripleDESContentEncryption washed through OpenSSL
         private static readonly byte[] ECDsaP256_DigitalSignature_Pfx_OpenSsl_TripleDESContentEncryption =
@@ -2189,7 +2234,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
                 + "4B5C5C547D8B535B455F647180409C50F8379B46A6A96C5A9A96303B301F3007"
                 + "06052B0E03021A0414D38DEF52C1BA0A1BA96F04916183C4CAE0F9D8490414C2"
                 + "B3F3C6F9C1C07BA92E77D8016E51A7D38C04FF020207D0"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
         internal static readonly byte[] ECDsaP256_DigitalSignature_Pfx_OpenSsl =
             PlatformSupport.IsRC2Supported
@@ -2224,7 +2270,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "ae9d3e34f7672106585583aa4623b6cc5ae2f730313021300906052b0e03021a"
             + "05000414d82cbf4010f6e9e061f5837b6dff6a4f9cbcef0504087dacc651dd12"
             + "f86202020800"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static readonly byte[] EcDhP256_KeyAgree_Pfx_Windows_RC2ContentEncryption = (
             "30820405020103308203c106092a864886f70d010701a08203b2048203ae"
@@ -2262,7 +2309,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "5f66285bc43d07023f7e1211303b301f300706052b0e03021a04144cd1a9"
             + "a7c08bafd5f9b98e28918201f4e2fc43fa0414fcb0ee0d7e9f504e754223"
             + "b786ccc551a220ba26020207d0"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static readonly byte[] EcDhP256_KeyAgree_Pfx_Windows_TripleDESContentEncryption = (
             "30820405020103308203C106092A864886F70D010701A08203B2048203AE3082"
@@ -2298,7 +2346,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "B0FC90D1A0FCA39A80C4BFF8303B301F300706052B0E03021A041469ED25801A"
             + "54E840547E4DD26ABDBBE7FBE329320414B77DAD6004C21BEF736BC9AC28CE55"
             + "C61FF7C3D0020207D0"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static readonly byte[] EcDhP256_KeyAgree_Pfx_Windows = PlatformSupport.IsRC2Supported
             ? EcDhP256_KeyAgree_Pfx_Windows_RC2ContentEncryption
@@ -2322,7 +2371,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
                 + "AE3A5A0BB3B4C792957D432391566CF3E2A52AFB0C142B9E0681B8972671AF2B"
                 + "82DD390A39B939CF719568687E4990A63050CA7768DCD6B378842F18FDB1F6D9"
                 + "FF096BAF7BEB98DCF930D66FCFD503F58D41BFF46212E24E3AFC45EA42BD8847"
-            ).HexToByteArray(),
+            )
+                .HexToByteArray(),
             Exponent = new byte[] { 0x02, 0x00, 0x00, 0x04, 0x41 },
             D = (
                 "64AF9BA5262483DA92B53F13439FD0EF13012F879ABC03CB7C06F1209904F352"
@@ -2333,37 +2383,43 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
                 + "F32CA35DE845776AC4BF36118812328C493F91C25A9BD42672D0AFAFDE0AF7E6"
                 + "19078D48B485EF91933DDCFFB54587B8F512D223C81894E91784982F3C5C6587"
                 + "1351F4655AB023C4AD99B6B03A96F9046CE124A471E828F05F8DB3BC7CCCF2D1"
-            ).HexToByteArray(),
+            )
+                .HexToByteArray(),
             P = (
                 "E43A3826A97204AE3CD8649A84DB4BBF0725C4B08F8C43840557A0CD04E313AF"
                 + "6D0460DDE69CDC508AD043D72514DA7A66BC918CD9624F485644B9DEEAB2BE0E"
                 + "112956D472CF0FD51F80FD33872D2DCC562A0588B012E8C90CE7D254B94792C6"
                 + "E7A02B3CCAA150E67A64377ACC49479AD5EB555493B2100CB0410956F7D73BF5"
-            ).HexToByteArray(),
+            )
+                .HexToByteArray(),
             Q = (
                 "C4DD2D7ADD6CA50740D3973F40C4DEBDBAB51F7F5181ABAE726C32596A3EDD0A"
                 + "EE44DAADDD8A9B7A864C4FFDAE00C4CB1F10177BA01C0466F812D522610F8C45"
                 + "43F1C3EF579FA9E13AE8DA1A4A8DAE307861D2CEAC03560279B61B6514989883"
                 + "FE86C5C7420D312838FC2F70BED59B5229654201882664CEFA38B48A3723E9CB"
-            ).HexToByteArray(),
+            )
+                .HexToByteArray(),
             DP = (
                 "09ECF151F5CDD2C9E6E52682364FA5B4ED094F622E4031BF46B851358A584DCC"
                 + "B5328B0BD9B63589183F491593D2A3ACAD14E0AACDA1F181B5C7D93C57ED26E6"
                 + "2C9FC26AF37E4A0644ECE82A7BA8AED88FF1D8E9C56CC66385CDB244EB3D57D1"
                 + "7E6AD420B19C9E2BEE18192B816265B74DA55FA3825F922D9D8E835B76BF3071"
-            ).HexToByteArray(),
+            )
+                .HexToByteArray(),
             DQ = (
                 "89B33B695789174B88368C494639D4D3267224572A40B2FE61910384228E3DBD"
                 + "11EED9040CD03977E9E0D7FC8BFC4BF4A93283529FF1D96590B18F4EABEF0303"
                 + "794F293E88DC761B3E23AFECB19F29F8A4D2A9058B714CF3F4D10733F13EA72B"
                 + "BF1FBEC8D71E106D0CE2115F3AD2DE020325C3879A091C413CD6397F83B3CB89"
-            ).HexToByteArray(),
+            )
+                .HexToByteArray(),
             InverseQ = (
                 "7C57ED74C9176FBA76C23183202515062C664D4D49FF3E037047A309DA10F159"
                 + "0CE01B7A1CD1A4326DC75883DFF93110AB065AAED140C9B98176A8810809ADEC"
                 + "75E86764A0951597EF467FA8FD509181CD2E491E43BE41084E5BE1B562EE76E9"
                 + "F92C9AB1E5AEAD9D291A6337E4DE85BDE67A0D72B4E55ADCF207F7A5A5225E15"
-            ).HexToByteArray()
+            )
+                .HexToByteArray()
         };
 
         internal static readonly byte[] BigExponentPkcs10Bytes = (
@@ -2392,7 +2448,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "DCFD0FEB87B9FDD2F4724A09DE1FB4C55E439F43C6E37A866BA19494B210D294"
             + "699B3C957C6DD22E9B63DBAE3B5AE62919F0EA3DF304C7DD9E0BBA0E7053605F"
             + "D066A788426159BB937C58E5A110461DC9364CA7CA"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static byte[] EmptySubjectCertificate = (
             "308202A73082018FA003020102020103300D06092A864886F70D01010B050030"
@@ -2417,7 +2474,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "BF14B08041CB1A90AC7339E7BD1DAF9A600479754F42C88D418B5449F5D34050"
             + "4E543013489C47297C83440C3EEF49C9A9D96E398949F03ACB0D5F72E7B4E9D3"
             + "895D82CAB526DB74AC5629"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static byte[] EmptySubjectIssuerCertificate = (
             "308202D4308201BCA003020102020900F68AD256DB542CF9300D06092A864886"
@@ -2443,7 +2501,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "027D561804C2F023AEBAA63F312F49A37B74BED2DB8B6D8AA1A6E60320589EB5"
             + "B14EB93CC47DAF7F07D67C25FD275493C0AF0CC23E8AED47963DCCE7C2ADFD56"
             + "5B8A77118C2978E15D1511572C4496CD1180094D43AE50FD"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static byte[] T61StringCertificate = (
             "2d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d494943"
@@ -2471,7 +2530,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "536844674d445733464670316c6d33564747564637365078504a792f4c6c6249"
             + "39366d5a59590a734f65735a513d3d0a2d2d2d2d2d454e442043455254494649"
             + "434154452d2d2d2d2d0a"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         // The SubjectPublicKeyInfo value from the test certificate in
         // https://tools.ietf.org/html/rfc4491#section-4.2
@@ -2480,7 +2540,8 @@ suIwDAYDVR0TBAUwAwEB/zAKBggqhkjOPQQDAgMwADAtAhUAxMT7z8lLv7hgWmGh
             + "03430004408495687560021A407508CD138C31892CFDE505037A435CF46D2B0F"
             + "E74F327E578FEBCC16B9958803D09A7C85AE0FE48DEAA6BB7E56C7CBB0DF0F66"
             + "BCCAEA1A60"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static byte[] ConcatenatedPemFile = ByteUtils.AsciiBytes(
             @"-----BEGIN CERTIFICATE-----
@@ -2549,19 +2610,22 @@ yLyKQXhw2W2Xs0qLeC1etA+jTGDK4UfLeC0SF7FSi8o5LL21L8IzApar2pR/
                 "6BC366B66355545E098F1FE90E5469B567E09FA79D817F2B367B45DECD4301A59C81D6911F7691D370E15AC692C04BC11872"
                 + "C171A7FE654E963D7DDA575A9E98CE026FB7D3934A258608134A8EC5ED69A2AEDC89401B67ADDE427F17EDAEB72D7AF45D9A"
                 + "B1D59E1B13D4EFBD17C764330267DDE352C20E05B80DB3C109FE8B9C"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             p.P = (
                 "C16D26C74D6C1627799C0918548E553FE58C7881DA484629CAF64311F4B27CFEF6BDB0F21206B0FFC4999A2FED53B43B9EE2"
                 + "910C68DA2C436A8018F4938F6472369F5647D005BCC96E22590CC15E3CD4EA0D132F5DA5AF6AAA0807B0CC4EF3404AF542F4"
                 + "546B37BDD6A47E641130837DB99397C845635D7DC36D0537E4A84B31"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             p.Q = "D83C0ECB73551E2FE30D51FCF4236C651883ADD7".HexToByteArray();
             p.X = "C02678007779E52E360682214BD47F8FAF42BC2D".HexToByteArray();
             p.Y = (
                 "690BB37A9145E05D6E7B47C457898AAEDD72501C9D16E79B1AD75A872CF017AA90BBFB90F1B3B7F5C03C87E46E8725665526"
                 + "FD34157B26F596A1F0997F59F3E65EFC615A552D5E7569C5FFC4593D5A0299110E71C97E1221A5A03FE9A6935AEDD88EF0B3"
                 + "B2F79D3A99ED75F7B871E6EAF2680D96D574A5F4C13BACE3B4B44DE1"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             return p;
         }
 

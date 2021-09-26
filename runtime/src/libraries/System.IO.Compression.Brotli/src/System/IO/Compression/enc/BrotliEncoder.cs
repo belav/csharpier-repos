@@ -24,11 +24,8 @@ namespace System.IO.Compression
         public BrotliEncoder(int quality, int window)
         {
             _disposed = false;
-            _state = Interop.Brotli.BrotliEncoderCreateInstance(
-                IntPtr.Zero,
-                IntPtr.Zero,
-                IntPtr.Zero
-            );
+            _state = Interop.Brotli
+                .BrotliEncoderCreateInstance(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
             if (_state.IsInvalid)
                 throw new IOException(SR.BrotliEncoder_Create);
             SetQuality(quality);
@@ -43,11 +40,8 @@ namespace System.IO.Compression
         internal void InitializeEncoder()
         {
             EnsureNotDisposed();
-            _state = Interop.Brotli.BrotliEncoderCreateInstance(
-                IntPtr.Zero,
-                IntPtr.Zero,
-                IntPtr.Zero
-            );
+            _state = Interop.Brotli
+                .BrotliEncoderCreateInstance(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
             if (_state.IsInvalid)
                 throw new IOException(SR.BrotliEncoder_Create);
         }
@@ -90,11 +84,12 @@ namespace System.IO.Compression
                 );
             }
             if (
-                !Interop.Brotli.BrotliEncoderSetParameter(
-                    _state,
-                    BrotliEncoderParameter.Quality,
-                    (uint)quality
-                )
+                !Interop.Brotli
+                    .BrotliEncoderSetParameter(
+                        _state,
+                        BrotliEncoderParameter.Quality,
+                        (uint)quality
+                    )
             )
             {
                 throw new InvalidOperationException(
@@ -124,11 +119,8 @@ namespace System.IO.Compression
                 );
             }
             if (
-                !Interop.Brotli.BrotliEncoderSetParameter(
-                    _state,
-                    BrotliEncoderParameter.LGWin,
-                    (uint)window
-                )
+                !Interop.Brotli
+                    .BrotliEncoderSetParameter(_state, BrotliEncoderParameter.LGWin, (uint)window)
             )
             {
                 throw new InvalidOperationException(
@@ -237,15 +229,16 @@ namespace System.IO.Compression
                     fixed (byte* outBytes = &MemoryMarshal.GetReference(destination))
                     {
                         if (
-                            !Interop.Brotli.BrotliEncoderCompressStream(
-                                _state,
-                                operation,
-                                ref availableInput,
-                                &inBytes,
-                                ref availableOutput,
-                                &outBytes,
-                                out _
-                            )
+                            !Interop.Brotli
+                                .BrotliEncoderCompressStream(
+                                    _state,
+                                    operation,
+                                    ref availableInput,
+                                    &inBytes,
+                                    ref availableOutput,
+                                    &outBytes,
+                                    out _
+                                )
                         )
                         {
                             return OperationStatus.InvalidData;
@@ -334,15 +327,16 @@ namespace System.IO.Compression
                 fixed (byte* outBytes = &MemoryMarshal.GetReference(destination))
                 {
                     nuint availableOutput = (nuint)destination.Length;
-                    bool success = Interop.Brotli.BrotliEncoderCompress(
-                        quality,
-                        window, /*BrotliEncoderMode*/
-                        0,
-                        (nuint)source.Length,
-                        inBytes,
-                        ref availableOutput,
-                        outBytes
-                    );
+                    bool success = Interop.Brotli
+                        .BrotliEncoderCompress(
+                            quality,
+                            window, /*BrotliEncoderMode*/
+                            0,
+                            (nuint)source.Length,
+                            inBytes,
+                            ref availableOutput,
+                            outBytes
+                        );
 
                     Debug.Assert(
                         success

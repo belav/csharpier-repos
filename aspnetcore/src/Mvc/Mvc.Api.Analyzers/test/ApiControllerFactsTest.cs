@@ -43,8 +43,8 @@ namespace TestNamespace
             var compilation = await project.GetCompilationAsync();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
             var method = (IMethodSymbol)compilation.GetTypeByMetadataName(
-                    "TestNamespace.TestController"
-                )
+                "TestNamespace.TestController"
+            )
                 .GetMembers("Get")
                 .First();
 
@@ -65,8 +65,8 @@ namespace TestNamespace
                 typeof(ApiConventionAnalyzerTest_IndexModel).FullName
             );
             var method = (IMethodSymbol)type.GetMembers(
-                    nameof(ApiConventionAnalyzerTest_IndexModel.OnGet)
-                )
+                nameof(ApiConventionAnalyzerTest_IndexModel.OnGet)
+            )
                 .First();
 
             // Act
@@ -86,8 +86,8 @@ namespace TestNamespace
                 typeof(ApiConventionAnalyzerTest_NotApiController).FullName
             );
             var method = (IMethodSymbol)type.GetMembers(
-                    nameof(ApiConventionAnalyzerTest_NotApiController.Index)
-                )
+                nameof(ApiConventionAnalyzerTest_NotApiController.Index)
+            )
                 .First();
 
             // Act
@@ -107,8 +107,8 @@ namespace TestNamespace
                 typeof(ApiConventionAnalyzerTest_NotAction).FullName
             );
             var method = (IMethodSymbol)type.GetMembers(
-                    nameof(ApiConventionAnalyzerTest_NotAction.Index)
-                )
+                nameof(ApiConventionAnalyzerTest_NotAction.Index)
+            )
                 .First();
 
             // Act
@@ -128,8 +128,8 @@ namespace TestNamespace
                 typeof(ApiConventionAnalyzerTest_Valid).FullName
             );
             var method = (IMethodSymbol)type.GetMembers(
-                    nameof(ApiConventionAnalyzerTest_Valid.Index)
-                )
+                nameof(ApiConventionAnalyzerTest_Valid.Index)
+            )
                 .First();
 
             // Act
@@ -151,10 +151,10 @@ namespace TestNamespace
                 typeof(IsApiControllerAction_ReturnsTrue_IfAttributeIsDeclaredOnAssemblyController).FullName
             );
             var method = (IMethodSymbol)type.GetMembers(
-                    nameof(
-                        IsApiControllerAction_ReturnsTrue_IfAttributeIsDeclaredOnAssemblyController.Action
-                    )
+                nameof(
+                    IsApiControllerAction_ReturnsTrue_IfAttributeIsDeclaredOnAssemblyController.Action
                 )
+            )
                 .First();
 
             // Act

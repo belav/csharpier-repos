@@ -54,11 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SyntaxKind.ExpressionStatement:
                         if (expression != null)
                         {
-                            MessageID.IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction.CheckFeatureAvailability(
-                                diagnostics,
-                                Compilation,
-                                node.Location
-                            );
+                            MessageID.IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction
+                                .CheckFeatureAvailability(diagnostics, Compilation, node.Location);
                         }
                         break;
                     case SyntaxKind.ForStatement:
@@ -66,11 +63,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             if (expression != null)
                             {
-                                MessageID.IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction.CheckFeatureAvailability(
-                                    diagnostics,
-                                    Compilation,
-                                    node.Location
-                                );
+                                MessageID.IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction
+                                    .CheckFeatureAvailability(
+                                        diagnostics,
+                                        Compilation,
+                                        node.Location
+                                    );
                             }
                         }
                         else
@@ -358,9 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (type.IsTupleType)
             {
                 // tuple literal such as `(1, 2)`, `(null, null)`, `(x.P, y.M())`
-                tupleOrDeconstructedTypes = type.TupleElementTypesWithAnnotations.SelectAsArray(
-                    TypeMap.AsTypeSymbol
-                );
+                tupleOrDeconstructedTypes = type.TupleElementTypesWithAnnotations
+                    .SelectAsArray(TypeMap.AsTypeSymbol);
                 SetInferredTypes(variables, tupleOrDeconstructedTypes, diagnostics);
 
                 if (variables.Count != tupleOrDeconstructedTypes.Length)
@@ -445,11 +442,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                         diagnostics
                     );
-                    nestedConversion = this.Conversions.ClassifyConversionFromType(
-                        tupleOrDeconstructedTypes[i],
-                        single.Type,
-                        ref useSiteInfo
-                    );
+                    nestedConversion = this.Conversions
+                        .ClassifyConversionFromType(
+                            tupleOrDeconstructedTypes[i],
+                            single.Type,
+                            ref useSiteInfo
+                        );
                     diagnostics.Add(single.Syntax, useSiteInfo);
 
                     if (!nestedConversion.IsImplicit)
@@ -570,7 +568,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         case BoundKind.DeconstructionVariablePendingInference:
                             BoundExpression errorLocal = (
                                 (DeconstructionVariablePendingInference)variable.Single
-                            ).FailInference(this, diagnostics);
+                            )
+                                .FailInference(this, diagnostics);
                             variables[i] = new DeconstructionVariable(
                                 errorLocal,
                                 errorLocal.Syntax
@@ -660,9 +659,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int leftLength = lhsVariables.Count;
             int rightLength = rhsLiteral.Arguments.Length;
 
-            var typesWithAnnotationsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                leftLength
-            );
+            var typesWithAnnotationsBuilder = ArrayBuilder<TypeWithAnnotations>
+                .GetInstance(leftLength);
             var locationsBuilder = ArrayBuilder<Location?>.GetInstance(leftLength);
             for (int i = 0; i < rightLength; i++)
             {
@@ -793,8 +791,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<bool> inferredPositions = tupleNames.IsDefault
                 ? default
                 : tupleNames.SelectAsArray(n => n != null);
-            bool disallowInferredNames =
-                this.Compilation.LanguageVersion.DisallowInferredTupleElementNames();
+            bool disallowInferredNames = this.Compilation.LanguageVersion
+                .DisallowInferredTupleElementNames();
 
             var type = NamedTypeSymbol.CreateTuple(
                 syntax.Location,
@@ -853,9 +851,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             receiver = BindToNaturalType(receiver, diagnostics);
             var analyzedArguments = AnalyzedArguments.GetInstance();
-            var outVars = ArrayBuilder<OutDeconstructVarPendingInference>.GetInstance(
-                numCheckedVariables
-            );
+            var outVars = ArrayBuilder<OutDeconstructVarPendingInference>
+                .GetInstance(numCheckedVariables);
 
             try
             {
@@ -1071,9 +1068,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.TupleExpression:
                 {
                     var component = (TupleExpressionSyntax)node;
-                    var builder = ArrayBuilder<DeconstructionVariable>.GetInstance(
-                        component.Arguments.Count
-                    );
+                    var builder = ArrayBuilder<DeconstructionVariable>
+                        .GetInstance(component.Arguments.Count);
                     foreach (var arg in component.Arguments)
                     {
                         if (arg.NameColon != null)
@@ -1193,10 +1189,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Check for variable declaration errors.
                 // Use the binder that owns the scope for the local because this (the current) binder
                 // might own nested scope.
-                var hasErrors = localSymbol.ScopeBinder.ValidateDeclarationNameConflictsInScope(
-                    localSymbol,
-                    diagnostics
-                );
+                var hasErrors = localSymbol.ScopeBinder
+                    .ValidateDeclarationNameConflictsInScope(localSymbol, diagnostics);
 
                 if (declTypeWithAnnotations.HasType)
                 {

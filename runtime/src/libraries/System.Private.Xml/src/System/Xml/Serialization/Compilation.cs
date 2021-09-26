@@ -237,10 +237,8 @@ namespace System.Xml.Serialization
 
                 if (!IsSerializerVersionMatch(serializer, type, defaultNamespace))
                 {
-                    XmlSerializationEventSource.Log.XmlSerializerExpired(
-                        serializerName,
-                        type.FullName!
-                    );
+                    XmlSerializationEventSource.Log
+                        .XmlSerializerExpired(serializerName, type.FullName!);
                     return null;
                 }
             }
@@ -545,8 +543,8 @@ namespace System.Xml.Serialization
             // Add AssemblyVersion attribute to match parent assembly version
             if (types != null && types.Length > 0 && types[0] != null)
             {
-                ConstructorInfo AssemblyVersionAttribute_ctor =
-                    typeof(AssemblyVersionAttribute).GetConstructor(new Type[] { typeof(string) })!;
+                ConstructorInfo AssemblyVersionAttribute_ctor = typeof(AssemblyVersionAttribute)
+                    .GetConstructor(new Type[] { typeof(string) })!;
                 string assemblyVersion = types[0]!.Assembly.GetName().Version!.ToString();
                 assemblyBuilder.SetCustomAttribute(
                     new CustomAttributeBuilder(

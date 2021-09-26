@@ -76,11 +76,8 @@ namespace System.Reflection.Tests
             else
                 Assert.False(
                     found,
-                    string.Format(
-                        "Failed!! found an unexpected event {0} in type {1}",
-                        eventName,
-                        t
-                    )
+                    string
+                        .Format("Failed!! found an unexpected event {0} in type {1}", eventName, t)
                 );
         }
     }

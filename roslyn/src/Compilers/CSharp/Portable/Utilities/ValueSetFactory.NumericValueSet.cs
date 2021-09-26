@@ -70,10 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // Prefer a value near zero.
                     var tc = default(TTC);
-                    var gz = NumericValueSetFactory<T, TTC>.Instance.Related(
-                        BinaryOperatorKind.GreaterThanOrEqual,
-                        tc.Zero
-                    );
+                    var gz = NumericValueSetFactory<T, TTC>.Instance
+                        .Related(BinaryOperatorKind.GreaterThanOrEqual, tc.Zero);
                     var t = (NumericValueSet<T, TTC>)this.Intersect(gz);
                     if (!t.IsEmpty)
                         return tc.ToConstantValue(t._intervals[0].first);
@@ -364,10 +362,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             public override string ToString()
             {
                 TTC tc = default;
-                return string.Join(
-                    ",",
-                    this._intervals.Select(p => $"[{tc.ToString(p.first)}..{tc.ToString(p.last)}]")
-                );
+                return string
+                    .Join(
+                        ",",
+                        this._intervals
+                            .Select(p => $"[{tc.ToString(p.first)}..{tc.ToString(p.last)}]")
+                    );
             }
 
             public override bool Equals(object? obj) =>

@@ -120,12 +120,13 @@ namespace Microsoft.CodeAnalysis
                             if (existingAction != action)
                             {
                                 throw new InvalidRuleSetException(
-                                    string.Format(
-                                        CodeAnalysisResources.RuleSetHasDuplicateRules,
-                                        ruleId,
-                                        existingAction,
-                                        action
-                                    )
+                                    string
+                                        .Format(
+                                            CodeAnalysisResources.RuleSetHasDuplicateRules,
+                                            ruleId,
+                                            existingAction,
+                                            action
+                                        )
                                 );
                             }
                         }
@@ -251,11 +252,12 @@ namespace Microsoft.CodeAnalysis
             }
 
             throw new InvalidRuleSetException(
-                string.Format(
-                    CodeAnalysisResources.RuleSetBadAttributeValue,
-                    RuleActionAttributeName,
-                    action
-                )
+                string
+                    .Format(
+                        CodeAnalysisResources.RuleSetBadAttributeValue,
+                        RuleActionAttributeName,
+                        action
+                    )
             );
         }
 
@@ -281,22 +283,24 @@ namespace Microsoft.CodeAnalysis
             if (attribute == null)
             {
                 throw new InvalidRuleSetException(
-                    string.Format(
-                        CodeAnalysisResources.RuleSetMissingAttribute,
-                        node.Name,
-                        attributeName
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.RuleSetMissingAttribute,
+                            node.Name,
+                            attributeName
+                        )
                 );
             }
 
             if (string.IsNullOrEmpty(attribute.Value))
             {
                 throw new InvalidRuleSetException(
-                    string.Format(
-                        CodeAnalysisResources.RuleSetBadAttributeValue,
-                        attributeName,
-                        attribute.Value
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.RuleSetBadAttributeValue,
+                            attributeName,
+                            attribute.Value
+                        )
                 );
             }
 

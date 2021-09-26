@@ -258,10 +258,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// </summary>
         public TDelegate CreateDelegate<TDelegate>(string name)
         {
-            var delegateInvokeMethod = typeof(TDelegate).GetMethod(
-                "Invoke",
-                BindingFlags.Instance | BindingFlags.Public
-            );
+            var delegateInvokeMethod = typeof(TDelegate)
+                .GetMethod("Invoke", BindingFlags.Instance | BindingFlags.Public);
 
             for (int i = _executionState.Count - 1; i >= 0; i--)
             {

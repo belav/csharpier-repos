@@ -2217,12 +2217,11 @@ class Derived : AccessorModifierMismatch
     // Failed to implement AddAbstract
 }
 ";
-            CreateCompilationWithILAndMscorlib40(csharp, il)
-                .VerifyDiagnostics(
-                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.AbstractSealed.add'
-                    Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
-                        .WithArguments("Derived", "AccessorModifierMismatch.AbstractSealed.add")
-                );
+            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
+                // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.AbstractSealed.add'
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
+                    .WithArguments("Derived", "AccessorModifierMismatch.AbstractSealed.add")
+            );
 
             csharp =
                 @"
@@ -2232,15 +2231,14 @@ class Derived : AccessorModifierMismatch
     public override void AddAbstract(System.Action a) { }
 }
 ";
-            CreateCompilationWithILAndMscorlib40(csharp, il)
-                .VerifyDiagnostics(
-                    // (5,26): error CS0115: 'Derived.AddAbstract(System.Action)': no suitable method found to override
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "AddAbstract")
-                        .WithArguments("Derived.AddAbstract(System.Action)"),
-                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.AbstractSealed.add'
-                    Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
-                        .WithArguments("Derived", "AccessorModifierMismatch.AbstractSealed.add")
-                );
+            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
+                // (5,26): error CS0115: 'Derived.AddAbstract(System.Action)': no suitable method found to override
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "AddAbstract")
+                    .WithArguments("Derived.AddAbstract(System.Action)"),
+                // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.AbstractSealed.add'
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
+                    .WithArguments("Derived", "AccessorModifierMismatch.AbstractSealed.add")
+            );
 
             csharp =
                 @"
@@ -2250,18 +2248,17 @@ class Derived : AccessorModifierMismatch
     public override event System.Action AbstractSealed { add { } }
 }
 ";
-            CreateCompilationWithILAndMscorlib40(csharp, il)
-                .VerifyDiagnostics(
-                    // (5,41): error CS0065: 'Derived.AbstractSealed': event property must have both add and remove accessors
-                    Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "AbstractSealed")
-                        .WithArguments("Derived.AbstractSealed"),
-                    // (5,41): error CS0239: 'Derived.AbstractSealed': cannot override inherited member 'AccessorModifierMismatch.AbstractSealed' because it is sealed
-                    Diagnostic(ErrorCode.ERR_CantOverrideSealed, "AbstractSealed")
-                        .WithArguments(
-                            "Derived.AbstractSealed",
-                            "AccessorModifierMismatch.AbstractSealed"
-                        )
-                );
+            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
+                // (5,41): error CS0065: 'Derived.AbstractSealed': event property must have both add and remove accessors
+                Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "AbstractSealed")
+                    .WithArguments("Derived.AbstractSealed"),
+                // (5,41): error CS0239: 'Derived.AbstractSealed': cannot override inherited member 'AccessorModifierMismatch.AbstractSealed' because it is sealed
+                Diagnostic(ErrorCode.ERR_CantOverrideSealed, "AbstractSealed")
+                    .WithArguments(
+                        "Derived.AbstractSealed",
+                        "AccessorModifierMismatch.AbstractSealed"
+                    )
+            );
 
             csharp =
                 @"
@@ -2271,15 +2268,14 @@ class Derived : AccessorModifierMismatch
     public override event System.Action AbstractSealed { add { } remove { } }
 }
 ";
-            CreateCompilationWithILAndMscorlib40(csharp, il)
-                .VerifyDiagnostics(
-                    // (5,41): error CS0239: 'Derived.AbstractSealed': cannot override inherited member 'AccessorModifierMismatch.AbstractSealed' because it is sealed
-                    Diagnostic(ErrorCode.ERR_CantOverrideSealed, "AbstractSealed")
-                        .WithArguments(
-                            "Derived.AbstractSealed",
-                            "AccessorModifierMismatch.AbstractSealed"
-                        )
-                );
+            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
+                // (5,41): error CS0239: 'Derived.AbstractSealed': cannot override inherited member 'AccessorModifierMismatch.AbstractSealed' because it is sealed
+                Diagnostic(ErrorCode.ERR_CantOverrideSealed, "AbstractSealed")
+                    .WithArguments(
+                        "Derived.AbstractSealed",
+                        "AccessorModifierMismatch.AbstractSealed"
+                    )
+            );
         }
 
         #region "Regressions"
@@ -2611,19 +2607,18 @@ class B3 : I
 {
     public static void M<T>() { }
 }";
-            CreateCompilationWithILAndMscorlib40(csharpSource, ilSource)
-                .VerifyDiagnostics(
-                    // (5,15): error CS0736: 'B2' does not implement interface member 'I.M<T>()'. 'A.M<T>()' cannot implement an interface member because it is static.
-                    // class B2 : A, I
-                    Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "I")
-                        .WithArguments("B2", "I.M<T>()", "A.M<T>()")
-                        .WithLocation(5, 15),
-                    // (8,12): error CS0736: 'B3' does not implement interface member 'I.M<T>()'. 'B3.M<T>()' cannot implement an interface member because it is static.
-                    // class B3 : I
-                    Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "I")
-                        .WithArguments("B3", "I.M<T>()", "B3.M<T>()")
-                        .WithLocation(8, 12)
-                );
+            CreateCompilationWithILAndMscorlib40(csharpSource, ilSource).VerifyDiagnostics(
+                // (5,15): error CS0736: 'B2' does not implement interface member 'I.M<T>()'. 'A.M<T>()' cannot implement an interface member because it is static.
+                // class B2 : A, I
+                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "I")
+                    .WithArguments("B2", "I.M<T>()", "A.M<T>()")
+                    .WithLocation(5, 15),
+                // (8,12): error CS0736: 'B3' does not implement interface member 'I.M<T>()'. 'B3.M<T>()' cannot implement an interface member because it is static.
+                // class B3 : I
+                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "I")
+                    .WithArguments("B3", "I.M<T>()", "B3.M<T>()")
+                    .WithLocation(8, 12)
+            );
         }
 
         [WorkItem(540383, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540383")]
@@ -2681,7 +2676,7 @@ enum E
         public void GenericMethodsHidingFieldsAndEvents()
         {
             CreateCompilation(
-                    @"
+                @"
 class Base
 {
     public int A = 1;
@@ -2695,16 +2690,7 @@ class Derived : Base
     public void B<T>() { }
     public void C<T>() { }
 }"
-                )
-                .VerifyDiagnostics(
-                    Diagnostic(ErrorCode.WRN_NewRequired, "A")
-                        .WithArguments("Derived.A<T>()", "Base.A"),
-                    Diagnostic(ErrorCode.WRN_NewRequired, "B")
-                        .WithArguments("Derived.B<T>()", "Base.B"),
-                    Diagnostic(ErrorCode.WRN_NewRequired, "C")
-                        .WithArguments("Derived.C<T>()", "Base.C"),
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "C").WithArguments("Base.C")
-                );
+            ).VerifyDiagnostics(Diagnostic(ErrorCode.WRN_NewRequired, "A").WithArguments("Derived.A<T>()", "Base.A"), Diagnostic(ErrorCode.WRN_NewRequired, "B").WithArguments("Derived.B<T>()", "Base.B"), Diagnostic(ErrorCode.WRN_NewRequired, "C").WithArguments("Derived.C<T>()", "Base.C"), Diagnostic(ErrorCode.WRN_UnreferencedEvent, "C").WithArguments("Base.C"));
         }
 
         [WorkItem(543448, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543448")]
@@ -2727,21 +2713,17 @@ class Sub : Base
     public void C<T>() { }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (11,17): warning CS0108: 'Sub.A<T>()' hides inherited member 'Base.A'. Use the new keyword if hiding was intended.
-                    Diagnostic(ErrorCode.WRN_NewRequired, "A")
-                        .WithArguments("Sub.A<T>()", "Base.A"),
-                    // (12,17): warning CS0108: 'Sub.B<T>()' hides inherited member 'Base.B'. Use the new keyword if hiding was intended.
-                    Diagnostic(ErrorCode.WRN_NewRequired, "B")
-                        .WithArguments("Sub.B<T>()", "Base.B"),
-                    // (13,17): warning CS0108: 'Sub.C<T>()' hides inherited member 'Base.C'. Use the new keyword if hiding was intended.
-                    Diagnostic(ErrorCode.WRN_NewRequired, "C")
-                        .WithArguments("Sub.C<T>()", "Base.C"),
-                    // (6,38): warning CS0067: The event 'Base.C' is never used
-                    //     public event System.EventHandler C;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "C").WithArguments("Base.C")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (11,17): warning CS0108: 'Sub.A<T>()' hides inherited member 'Base.A'. Use the new keyword if hiding was intended.
+                Diagnostic(ErrorCode.WRN_NewRequired, "A").WithArguments("Sub.A<T>()", "Base.A"),
+                // (12,17): warning CS0108: 'Sub.B<T>()' hides inherited member 'Base.B'. Use the new keyword if hiding was intended.
+                Diagnostic(ErrorCode.WRN_NewRequired, "B").WithArguments("Sub.B<T>()", "Base.B"),
+                // (13,17): warning CS0108: 'Sub.C<T>()' hides inherited member 'Base.C'. Use the new keyword if hiding was intended.
+                Diagnostic(ErrorCode.WRN_NewRequired, "C").WithArguments("Sub.C<T>()", "Base.C"),
+                // (6,38): warning CS0067: The event 'Base.C' is never used
+                //     public event System.EventHandler C;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "C").WithArguments("Base.C")
+            );
         }
 
         [WorkItem(543908, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543908")]
@@ -3531,17 +3513,23 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp1.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
 
@@ -3594,17 +3582,23 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp1.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
 
@@ -3657,17 +3651,23 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp1.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
 
@@ -3711,17 +3711,23 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp1.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
 
@@ -3765,17 +3771,23 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp1.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
 
@@ -3819,17 +3831,23 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp1.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
 
@@ -3900,17 +3918,23 @@ public class B : A
 
             var properties = new[]
             {
-                comp1.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp1.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp2.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                comp3.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
 
@@ -4062,51 +4086,50 @@ public class D8 : B
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (36,16): warning CS0108: 'D3.op_Explicit' hides inherited member 'B.explicit operator int(B)'. Use the new keyword if hiding was intended.
-                    //     public int op_Explicit = 1;//
-                    Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
-                        .WithArguments("D3.op_Explicit", "B.explicit operator int(B)"),
-                    // (35,16): warning CS0108: 'D3.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new keyword if hiding was intended.
-                    //     public int op_UnaryPlus = 1;//
-                    Diagnostic(ErrorCode.WRN_NewRequired, "op_UnaryPlus")
-                        .WithArguments("D3.op_UnaryPlus", "B.operator +(B)"),
-                    // (43,32): warning CS0108: 'D4.op_Explicit' hides inherited member 'B.explicit operator int(B)'. Use the new keyword if hiding was intended.
-                    //     public event System.Action op_Explicit;//
-                    Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
-                        .WithArguments("D4.op_Explicit", "B.explicit operator int(B)"),
-                    // (42,32): warning CS0108: 'D4.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new keyword if hiding was intended.
-                    //     public event System.Action op_UnaryPlus;//
-                    Diagnostic(ErrorCode.WRN_NewRequired, "op_UnaryPlus")
-                        .WithArguments("D4.op_UnaryPlus", "B.operator +(B)"),
-                    // (50,32): warning CS0108: 'D5.op_Explicit' hides inherited member 'B.explicit operator int(B)'. Use the new keyword if hiding was intended.
-                    //     public event System.Action op_Explicit { add { } remove { } }//
-                    Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
-                        .WithArguments("D5.op_Explicit", "B.explicit operator int(B)"),
-                    // (49,32): warning CS0108: 'D5.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new keyword if hiding was intended.
-                    //     public event System.Action op_UnaryPlus { add { } remove { } }//
-                    Diagnostic(ErrorCode.WRN_NewRequired, "op_UnaryPlus")
-                        .WithArguments("D5.op_UnaryPlus", "B.operator +(B)"),
-                    // (43,32): warning CS0067: The event 'D4.op_Explicit' is never used
-                    //     public event System.Action op_Explicit;//
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "op_Explicit")
-                        .WithArguments("D4.op_Explicit"),
-                    // (42,32): warning CS0067: The event 'D4.op_UnaryPlus' is never used
-                    //     public event System.Action op_UnaryPlus;//
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "op_UnaryPlus")
-                        .WithArguments("D4.op_UnaryPlus"),
-                    // (44,32): warning CS0067: The event 'D4.Finalize' is never used
-                    //     public event System.Action Finalize;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Finalize")
-                        .WithArguments("D4.Finalize"),
-                    // (72,24): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    //     public static void Finalize() { }
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
-                    // (65,17): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    //     public void Finalize() { }
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (36,16): warning CS0108: 'D3.op_Explicit' hides inherited member 'B.explicit operator int(B)'. Use the new keyword if hiding was intended.
+                //     public int op_Explicit = 1;//
+                Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
+                    .WithArguments("D3.op_Explicit", "B.explicit operator int(B)"),
+                // (35,16): warning CS0108: 'D3.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new keyword if hiding was intended.
+                //     public int op_UnaryPlus = 1;//
+                Diagnostic(ErrorCode.WRN_NewRequired, "op_UnaryPlus")
+                    .WithArguments("D3.op_UnaryPlus", "B.operator +(B)"),
+                // (43,32): warning CS0108: 'D4.op_Explicit' hides inherited member 'B.explicit operator int(B)'. Use the new keyword if hiding was intended.
+                //     public event System.Action op_Explicit;//
+                Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
+                    .WithArguments("D4.op_Explicit", "B.explicit operator int(B)"),
+                // (42,32): warning CS0108: 'D4.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new keyword if hiding was intended.
+                //     public event System.Action op_UnaryPlus;//
+                Diagnostic(ErrorCode.WRN_NewRequired, "op_UnaryPlus")
+                    .WithArguments("D4.op_UnaryPlus", "B.operator +(B)"),
+                // (50,32): warning CS0108: 'D5.op_Explicit' hides inherited member 'B.explicit operator int(B)'. Use the new keyword if hiding was intended.
+                //     public event System.Action op_Explicit { add { } remove { } }//
+                Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
+                    .WithArguments("D5.op_Explicit", "B.explicit operator int(B)"),
+                // (49,32): warning CS0108: 'D5.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new keyword if hiding was intended.
+                //     public event System.Action op_UnaryPlus { add { } remove { } }//
+                Diagnostic(ErrorCode.WRN_NewRequired, "op_UnaryPlus")
+                    .WithArguments("D5.op_UnaryPlus", "B.operator +(B)"),
+                // (43,32): warning CS0067: The event 'D4.op_Explicit' is never used
+                //     public event System.Action op_Explicit;//
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "op_Explicit")
+                    .WithArguments("D4.op_Explicit"),
+                // (42,32): warning CS0067: The event 'D4.op_UnaryPlus' is never used
+                //     public event System.Action op_UnaryPlus;//
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "op_UnaryPlus")
+                    .WithArguments("D4.op_UnaryPlus"),
+                // (44,32): warning CS0067: The event 'D4.Finalize' is never used
+                //     public event System.Action Finalize;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Finalize")
+                    .WithArguments("D4.Finalize"),
+                // (72,24): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                //     public static void Finalize() { }
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
+                // (65,17): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                //     public void Finalize() { }
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize")
+            );
         }
 
         [Fact, WorkItem(546836, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546836")]
@@ -4188,99 +4211,92 @@ public class D8 : B
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (23,22): warning CS0109: The member 'D1.Finalize' does not hide an accessible member. The new keyword is not required.
-                    //     new public class Finalize { } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
-                        .WithArguments("D1.Finalize"),
-                    // (21,22): warning CS0109: The member 'D1.op_UnaryPlus' does not hide an accessible member. The new keyword is not required.
-                    //     new public class op_UnaryPlus { } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
-                        .WithArguments("D1.op_UnaryPlus"),
-                    // (22,22): warning CS0109: The member 'D1.op_Explicit' does not hide an accessible member. The new keyword is not required.
-                    //     new public class op_Explicit { } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
-                        .WithArguments("D1.op_Explicit"),
-                    // (58,30): warning CS0109: The member 'D6.Finalize' does not hide an accessible member. The new keyword is not required.
-                    //     new public delegate void Finalize(); //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
-                        .WithArguments("D6.Finalize"),
-                    // (56,30): warning CS0109: The member 'D6.op_UnaryPlus' does not hide an accessible member. The new keyword is not required.
-                    //     new public delegate void op_UnaryPlus(); //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
-                        .WithArguments("D6.op_UnaryPlus"),
-                    // (57,30): warning CS0109: The member 'D6.op_Explicit' does not hide an accessible member. The new keyword is not required.
-                    //     new public delegate void op_Explicit(); //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
-                        .WithArguments("D6.op_Explicit"),
-                    // (37,20): warning CS0109: The member 'D3.Finalize' does not hide an accessible member. The new keyword is not required.
-                    //     new public int Finalize = 1; //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
-                        .WithArguments("D3.Finalize"),
-                    // (51,36): warning CS0109: The member 'D5.Finalize' does not hide an accessible member. The new keyword is not required.
-                    //     new public event System.Action Finalize { add { } remove { } } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
-                        .WithArguments("D5.Finalize"),
-                    // (71,27): warning CS0109: The member 'D8.op_Explicit(B)' does not hide an accessible member. The new keyword is not required.
-                    //     new public static int op_Explicit(B b) { return 0; } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
-                        .WithArguments("D8.op_Explicit(B)"),
-                    // (72,28): warning CS0109: The member 'D8.Finalize()' does not hide an accessible member. The new keyword is not required.
-                    //     new public static void Finalize() { } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
-                        .WithArguments("D8.Finalize()"),
-                    // (70,27): warning CS0109: The member 'D8.op_UnaryPlus(B)' does not hide an accessible member. The new keyword is not required.
-                    //     new public static int op_UnaryPlus(B b) { return 0; } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
-                        .WithArguments("D8.op_UnaryPlus(B)"),
-                    // (44,36): warning CS0109: The member 'D4.Finalize' does not hide an accessible member. The new keyword is not required.
-                    //     new public event System.Action Finalize; //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
-                        .WithArguments("D4.Finalize"),
-                    // (64,21): warning CS0109: The member 'D7.op_Explicit(B)' does not hide an accessible member. The new keyword is not required.
-                    //     new public void op_Explicit(B b) { } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
-                        .WithArguments("D7.op_Explicit(B)"),
-                    // (65,21): warning CS0109: The member 'D7.Finalize()' does not hide an accessible member. The new keyword is not required.
-                    //     new public void Finalize() { } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
-                        .WithArguments("D7.Finalize()"),
-                    // (63,21): warning CS0109: The member 'D7.op_UnaryPlus(B)' does not hide an accessible member. The new keyword is not required.
-                    //     new public void op_UnaryPlus(B b) { } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
-                        .WithArguments("D7.op_UnaryPlus(B)"),
-                    // (29,20): warning CS0109: The member 'D2.op_Explicit' does not hide an accessible member. The new keyword is not required.
-                    //     new public int op_Explicit { get; set; } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
-                        .WithArguments("D2.op_Explicit"),
-                    // (30,20): warning CS0109: The member 'D2.Finalize' does not hide an accessible member. The new keyword is not required.
-                    //     new public int Finalize { get; set; } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
-                        .WithArguments("D2.Finalize"),
-                    // (28,20): warning CS0109: The member 'D2.op_UnaryPlus' does not hide an accessible member. The new keyword is not required.
-                    //     new public int op_UnaryPlus { get; set; } //CS0109
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
-                        .WithArguments("D2.op_UnaryPlus"),
-                    // (44,36): warning CS0067: The event 'D4.Finalize' is never used
-                    //     new public event System.Action Finalize; //CS0109
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Finalize")
-                        .WithArguments("D4.Finalize"),
-                    // (42,36): warning CS0067: The event 'D4.op_UnaryPlus' is never used
-                    //     new public event System.Action op_UnaryPlus;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "op_UnaryPlus")
-                        .WithArguments("D4.op_UnaryPlus"),
-                    // (43,36): warning CS0067: The event 'D4.op_Explicit' is never used
-                    //     new public event System.Action op_Explicit;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "op_Explicit")
-                        .WithArguments("D4.op_Explicit"),
-                    // (72,28): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    //     new public static void Finalize() { } //CS0109
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
-                    // (65,21): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    //     new public void Finalize() { } //CS0109
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (23,22): warning CS0109: The member 'D1.Finalize' does not hide an accessible member. The new keyword is not required.
+                //     new public class Finalize { } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize").WithArguments("D1.Finalize"),
+                // (21,22): warning CS0109: The member 'D1.op_UnaryPlus' does not hide an accessible member. The new keyword is not required.
+                //     new public class op_UnaryPlus { } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
+                    .WithArguments("D1.op_UnaryPlus"),
+                // (22,22): warning CS0109: The member 'D1.op_Explicit' does not hide an accessible member. The new keyword is not required.
+                //     new public class op_Explicit { } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
+                    .WithArguments("D1.op_Explicit"),
+                // (58,30): warning CS0109: The member 'D6.Finalize' does not hide an accessible member. The new keyword is not required.
+                //     new public delegate void Finalize(); //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize").WithArguments("D6.Finalize"),
+                // (56,30): warning CS0109: The member 'D6.op_UnaryPlus' does not hide an accessible member. The new keyword is not required.
+                //     new public delegate void op_UnaryPlus(); //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
+                    .WithArguments("D6.op_UnaryPlus"),
+                // (57,30): warning CS0109: The member 'D6.op_Explicit' does not hide an accessible member. The new keyword is not required.
+                //     new public delegate void op_Explicit(); //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
+                    .WithArguments("D6.op_Explicit"),
+                // (37,20): warning CS0109: The member 'D3.Finalize' does not hide an accessible member. The new keyword is not required.
+                //     new public int Finalize = 1; //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize").WithArguments("D3.Finalize"),
+                // (51,36): warning CS0109: The member 'D5.Finalize' does not hide an accessible member. The new keyword is not required.
+                //     new public event System.Action Finalize { add { } remove { } } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize").WithArguments("D5.Finalize"),
+                // (71,27): warning CS0109: The member 'D8.op_Explicit(B)' does not hide an accessible member. The new keyword is not required.
+                //     new public static int op_Explicit(B b) { return 0; } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
+                    .WithArguments("D8.op_Explicit(B)"),
+                // (72,28): warning CS0109: The member 'D8.Finalize()' does not hide an accessible member. The new keyword is not required.
+                //     new public static void Finalize() { } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
+                    .WithArguments("D8.Finalize()"),
+                // (70,27): warning CS0109: The member 'D8.op_UnaryPlus(B)' does not hide an accessible member. The new keyword is not required.
+                //     new public static int op_UnaryPlus(B b) { return 0; } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
+                    .WithArguments("D8.op_UnaryPlus(B)"),
+                // (44,36): warning CS0109: The member 'D4.Finalize' does not hide an accessible member. The new keyword is not required.
+                //     new public event System.Action Finalize; //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize").WithArguments("D4.Finalize"),
+                // (64,21): warning CS0109: The member 'D7.op_Explicit(B)' does not hide an accessible member. The new keyword is not required.
+                //     new public void op_Explicit(B b) { } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
+                    .WithArguments("D7.op_Explicit(B)"),
+                // (65,21): warning CS0109: The member 'D7.Finalize()' does not hide an accessible member. The new keyword is not required.
+                //     new public void Finalize() { } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
+                    .WithArguments("D7.Finalize()"),
+                // (63,21): warning CS0109: The member 'D7.op_UnaryPlus(B)' does not hide an accessible member. The new keyword is not required.
+                //     new public void op_UnaryPlus(B b) { } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
+                    .WithArguments("D7.op_UnaryPlus(B)"),
+                // (29,20): warning CS0109: The member 'D2.op_Explicit' does not hide an accessible member. The new keyword is not required.
+                //     new public int op_Explicit { get; set; } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
+                    .WithArguments("D2.op_Explicit"),
+                // (30,20): warning CS0109: The member 'D2.Finalize' does not hide an accessible member. The new keyword is not required.
+                //     new public int Finalize { get; set; } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize").WithArguments("D2.Finalize"),
+                // (28,20): warning CS0109: The member 'D2.op_UnaryPlus' does not hide an accessible member. The new keyword is not required.
+                //     new public int op_UnaryPlus { get; set; } //CS0109
+                Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
+                    .WithArguments("D2.op_UnaryPlus"),
+                // (44,36): warning CS0067: The event 'D4.Finalize' is never used
+                //     new public event System.Action Finalize; //CS0109
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Finalize")
+                    .WithArguments("D4.Finalize"),
+                // (42,36): warning CS0067: The event 'D4.op_UnaryPlus' is never used
+                //     new public event System.Action op_UnaryPlus;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "op_UnaryPlus")
+                    .WithArguments("D4.op_UnaryPlus"),
+                // (43,36): warning CS0067: The event 'D4.op_Explicit' is never used
+                //     new public event System.Action op_Explicit;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "op_Explicit")
+                    .WithArguments("D4.op_Explicit"),
+                // (72,28): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                //     new public static void Finalize() { } //CS0109
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
+                // (65,21): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                //     new public void Finalize() { } //CS0109
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize")
+            );
         }
 
         [Fact]
@@ -4735,14 +4751,13 @@ class B : A
     public void M(in int x) { }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (8,17): warning CS0108: 'B.M(in int)' hides inherited member 'A.M(in int)'. Use the new keyword if hiding was intended.
-                    //     public void M(in int x) { }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                        .WithArguments("B.M(in int)", "A.M(in int)")
-                        .WithLocation(8, 17)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (8,17): warning CS0108: 'B.M(in int)' hides inherited member 'A.M(in int)'. Use the new keyword if hiding was intended.
+                //     public void M(in int x) { }
+                Diagnostic(ErrorCode.WRN_NewRequired, "M")
+                    .WithArguments("B.M(in int)", "A.M(in int)")
+                    .WithLocation(8, 17)
+            );
 
             var aMethod = comp.GetMember<MethodSymbol>("A.M");
             var bMethod = comp.GetMember<MethodSymbol>("B.M");
@@ -4770,14 +4785,13 @@ class B : A
     public ref readonly int M() { return ref x; }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,29): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was intended.
-                    //     public ref readonly int M() { return ref x; }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                        .WithArguments("B.M()", "A.M()")
-                        .WithLocation(9, 29)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (9,29): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was intended.
+                //     public ref readonly int M() { return ref x; }
+                Diagnostic(ErrorCode.WRN_NewRequired, "M")
+                    .WithArguments("B.M()", "A.M()")
+                    .WithLocation(9, 29)
+            );
 
             var aMethod = comp.GetMember<MethodSymbol>("A.M");
             var bMethod = comp.GetMember<MethodSymbol>("B.M");
@@ -4805,14 +4819,13 @@ class B : A
     public ref readonly int M() { return ref x; }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,29): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was intended.
-                    //     public ref readonly int M() { return ref x; }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                        .WithArguments("B.M()", "A.M()")
-                        .WithLocation(9, 29)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (9,29): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was intended.
+                //     public ref readonly int M() { return ref x; }
+                Diagnostic(ErrorCode.WRN_NewRequired, "M")
+                    .WithArguments("B.M()", "A.M()")
+                    .WithLocation(9, 29)
+            );
 
             var aMethod = comp.GetMember<MethodSymbol>("A.M");
             var bMethod = comp.GetMember<MethodSymbol>("B.M");
@@ -4840,14 +4853,13 @@ class B : A
     public ref int M() { return ref x; }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,20): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was intended.
-                    //     public ref int M() { return ref x; }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                        .WithArguments("B.M()", "A.M()")
-                        .WithLocation(9, 20)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (9,20): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was intended.
+                //     public ref int M() { return ref x; }
+                Diagnostic(ErrorCode.WRN_NewRequired, "M")
+                    .WithArguments("B.M()", "A.M()")
+                    .WithLocation(9, 20)
+            );
 
             var aMethod = comp.GetMember<MethodSymbol>("A.M");
             var bMethod = comp.GetMember<MethodSymbol>("B.M");
@@ -4875,14 +4887,13 @@ class B : A
     public ref readonly int Property { get { return ref x; } }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,29): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if hiding was intended.
-                    //     public ref readonly int Property { get { return ref x; } }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "Property")
-                        .WithArguments("B.Property", "A.Property")
-                        .WithLocation(9, 29)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (9,29): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if hiding was intended.
+                //     public ref readonly int Property { get { return ref x; } }
+                Diagnostic(ErrorCode.WRN_NewRequired, "Property")
+                    .WithArguments("B.Property", "A.Property")
+                    .WithLocation(9, 29)
+            );
 
             var aProperty = comp.GetMember<PropertySymbol>("A.Property");
             var bProperty = comp.GetMember<PropertySymbol>("B.Property");
@@ -4910,14 +4921,13 @@ class B : A
     public ref int Property { get { return ref x; } }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,20): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if hiding was intended.
-                    //     public ref int Property { get { return ref x; } }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "Property")
-                        .WithArguments("B.Property", "A.Property")
-                        .WithLocation(9, 20)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (9,20): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if hiding was intended.
+                //     public ref int Property { get { return ref x; } }
+                Diagnostic(ErrorCode.WRN_NewRequired, "Property")
+                    .WithArguments("B.Property", "A.Property")
+                    .WithLocation(9, 20)
+            );
 
             var aProperty = comp.GetMember<PropertySymbol>("A.Property");
             var bProperty = comp.GetMember<PropertySymbol>("B.Property");
@@ -4945,14 +4955,13 @@ class B : A
     public ref readonly int Property { get { return ref x; } }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,29): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if hiding was intended.
-                    //     public ref readonly int Property { get { return ref x; } }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "Property")
-                        .WithArguments("B.Property", "A.Property")
-                        .WithLocation(9, 29)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (9,29): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if hiding was intended.
+                //     public ref readonly int Property { get { return ref x; } }
+                Diagnostic(ErrorCode.WRN_NewRequired, "Property")
+                    .WithArguments("B.Property", "A.Property")
+                    .WithLocation(9, 29)
+            );
 
             var aProperty = comp.GetMember<PropertySymbol>("A.Property");
             var bProperty = comp.GetMember<PropertySymbol>("B.Property");
@@ -5235,19 +5244,18 @@ class ChildClass : BaseClass
     public override void Method2(ref int x) { }
 }";
 
-            var comp = CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (10,26): error CS0115: 'ChildClass.Method2(ref int)': no suitable method found to override
-                    //     public override void Method2(ref int x) { }
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "Method2")
-                        .WithArguments("ChildClass.Method2(ref int)")
-                        .WithLocation(10, 26),
-                    // (9,26): error CS0115: 'ChildClass.Method1(in int)': no suitable method found to override
-                    //     public override void Method1(in int x) { }
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "Method1")
-                        .WithArguments("ChildClass.Method1(in int)")
-                        .WithLocation(9, 26)
-                );
+            var comp = CreateCompilation(text).VerifyDiagnostics(
+                // (10,26): error CS0115: 'ChildClass.Method2(ref int)': no suitable method found to override
+                //     public override void Method2(ref int x) { }
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "Method2")
+                    .WithArguments("ChildClass.Method2(ref int)")
+                    .WithLocation(10, 26),
+                // (9,26): error CS0115: 'ChildClass.Method1(in int)': no suitable method found to override
+                //     public override void Method1(in int x) { }
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "Method1")
+                    .WithArguments("ChildClass.Method1(in int)")
+                    .WithLocation(9, 26)
+            );
         }
 
         [Fact]
@@ -5268,19 +5276,18 @@ class ChildClass : BaseClass
     public override ref int Method2() { return ref x; }
 }";
 
-            var comp = CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (11,29): error CS8148: 'ChildClass.Method2()' must match by reference return of overridden member 'BaseClass.Method2()'
-                    //     public override ref int Method2() { return ref x; }
-                    Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Method2")
-                        .WithArguments("ChildClass.Method2()", "BaseClass.Method2()")
-                        .WithLocation(11, 29),
-                    // (10,38): error CS8148: 'ChildClass.Method1()' must match by reference return of overridden member 'BaseClass.Method1()'
-                    //     public override in int Method1() { return ref x; }
-                    Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Method1")
-                        .WithArguments("ChildClass.Method1()", "BaseClass.Method1()")
-                        .WithLocation(10, 38)
-                );
+            var comp = CreateCompilation(text).VerifyDiagnostics(
+                // (11,29): error CS8148: 'ChildClass.Method2()' must match by reference return of overridden member 'BaseClass.Method2()'
+                //     public override ref int Method2() { return ref x; }
+                Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Method2")
+                    .WithArguments("ChildClass.Method2()", "BaseClass.Method2()")
+                    .WithLocation(11, 29),
+                // (10,38): error CS8148: 'ChildClass.Method1()' must match by reference return of overridden member 'BaseClass.Method1()'
+                //     public override in int Method1() { return ref x; }
+                Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Method1")
+                    .WithArguments("ChildClass.Method1()", "BaseClass.Method1()")
+                    .WithLocation(10, 38)
+            );
         }
 
         [Fact]
@@ -5301,19 +5308,18 @@ class B : A
     public override ref int Property2 { get { return ref x; } }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (11,29): error CS8148: 'B.Property2' must match by reference return of overridden member 'A.Property2'
-                    //     public override ref int Property2 { get { return ref x; } }
-                    Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Property2")
-                        .WithArguments("B.Property2", "A.Property2")
-                        .WithLocation(11, 29),
-                    // (10,38): error CS8148: 'B.Property1' must match by reference return of overridden member 'A.Property1'
-                    //     public override ref readonly int Property1 { get { return ref x; } }
-                    Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Property1")
-                        .WithArguments("B.Property1", "A.Property1")
-                        .WithLocation(10, 38)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (11,29): error CS8148: 'B.Property2' must match by reference return of overridden member 'A.Property2'
+                //     public override ref int Property2 { get { return ref x; } }
+                Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Property2")
+                    .WithArguments("B.Property2", "A.Property2")
+                    .WithLocation(11, 29),
+                // (10,38): error CS8148: 'B.Property1' must match by reference return of overridden member 'A.Property1'
+                //     public override ref readonly int Property1 { get { return ref x; } }
+                Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Property1")
+                    .WithArguments("B.Property1", "A.Property1")
+                    .WithLocation(10, 38)
+            );
         }
 
         [Fact]
@@ -5332,14 +5338,13 @@ class B : A
     public override ref readonly int this[int p] { get { return ref x; } }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,38): error CS8148: 'B.this[int]' must match by reference return of overridden member 'A.this[int]'
-                    //     public override ref readonly int this[int p] { get { return ref x; } }
-                    Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "this")
-                        .WithArguments("B.this[int]", "A.this[int]")
-                        .WithLocation(9, 38)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (9,38): error CS8148: 'B.this[int]' must match by reference return of overridden member 'A.this[int]'
+                //     public override ref readonly int this[int p] { get { return ref x; } }
+                Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "this")
+                    .WithArguments("B.this[int]", "A.this[int]")
+                    .WithLocation(9, 38)
+            );
         }
 
         [Fact]
@@ -5358,14 +5363,13 @@ class B : A
     public override ref int this[int p] { get { return ref x; } }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,29): error CS8148: 'B.this[int]' must match by reference return of overridden member 'A.this[int]'
-                    //     public override ref int this[int p] { get { return ref x; } }
-                    Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "this")
-                        .WithArguments("B.this[int]", "A.this[int]")
-                        .WithLocation(9, 29)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (9,29): error CS8148: 'B.this[int]' must match by reference return of overridden member 'A.this[int]'
+                //     public override ref int this[int p] { get { return ref x; } }
+                Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "this")
+                    .WithArguments("B.this[int]", "A.this[int]")
+                    .WithLocation(9, 29)
+            );
         }
 
         [Fact]
@@ -5401,19 +5405,18 @@ class B : A
     public override int this[int p] { get { return p; } }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (8,25): error CS0115: 'B.this[int]': no suitable method found to override
-                    //     public override int this[int p] { get { return p; } }
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "this")
-                        .WithArguments("B.this[int]")
-                        .WithLocation(8, 25),
-                    // (6,7): error CS0534: 'B' does not implement inherited abstract member 'A.this[in int].get'
-                    // class B : A
-                    Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "B")
-                        .WithArguments("B", "A.this[in int].get")
-                        .WithLocation(6, 7)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (8,25): error CS0115: 'B.this[int]': no suitable method found to override
+                //     public override int this[int p] { get { return p; } }
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "this")
+                    .WithArguments("B.this[int]")
+                    .WithLocation(8, 25),
+                // (6,7): error CS0534: 'B' does not implement inherited abstract member 'A.this[in int].get'
+                // class B : A
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "B")
+                    .WithArguments("B", "A.this[in int].get")
+                    .WithLocation(6, 7)
+            );
         }
 
         [Fact]
@@ -5431,19 +5434,18 @@ class B : A
     public override int this[in int p] { get { return p; } }
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (8,25): error CS0115: 'B.this[in int]': no suitable method found to override
-                    //     public override int this[in int p] { get { return p; } }
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "this")
-                        .WithArguments("B.this[in int]")
-                        .WithLocation(8, 25),
-                    // (6,7): error CS0534: 'B' does not implement inherited abstract member 'A.this[int].get'
-                    // class B : A
-                    Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "B")
-                        .WithArguments("B", "A.this[int].get")
-                        .WithLocation(6, 7)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (8,25): error CS0115: 'B.this[in int]': no suitable method found to override
+                //     public override int this[in int p] { get { return p; } }
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "this")
+                    .WithArguments("B.this[in int]")
+                    .WithLocation(8, 25),
+                // (6,7): error CS0534: 'B' does not implement inherited abstract member 'A.this[int].get'
+                // class B : A
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "B")
+                    .WithArguments("B", "A.this[int].get")
+                    .WithLocation(6, 7)
+            );
         }
     }
 }

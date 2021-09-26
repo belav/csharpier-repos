@@ -32,17 +32,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
         {
             var docComment = DocumentationComment.FromXmlFragment(docCommentXmlFragment);
 
-            var csharpFormattedComment = string.Join(
-                "\r\n",
-                AbstractMetadataAsSourceService.DocCommentFormatter.Format(
-                    _csharpService,
-                    docComment
-                )
-            );
-            var vbFormattedComment = string.Join(
-                "\r\n",
-                AbstractMetadataAsSourceService.DocCommentFormatter.Format(_vbService, docComment)
-            );
+            var csharpFormattedComment = string
+                .Join(
+                    "\r\n",
+                    AbstractMetadataAsSourceService.DocCommentFormatter
+                        .Format(_csharpService, docComment)
+                );
+            var vbFormattedComment = string
+                .Join(
+                    "\r\n",
+                    AbstractMetadataAsSourceService.DocCommentFormatter
+                        .Format(_vbService, docComment)
+                );
 
             Assert.Equal(expectedCSharp, csharpFormattedComment);
             Assert.Equal(expectedVB, vbFormattedComment);

@@ -291,7 +291,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(byte?)),
                     Expression.Constant(b, typeof(byte?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableByte")
                 )
             );
@@ -306,7 +307,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(char?)),
                     Expression.Constant(b, typeof(char?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableChar")
                 )
             );
@@ -325,7 +327,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(decimal?)),
                     Expression.Constant(b, typeof(decimal?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableDecimal")
                 )
             );
@@ -351,7 +354,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(double?)),
                     Expression.Constant(b, typeof(double?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableDouble")
                 )
             );
@@ -366,7 +370,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(float?)),
                     Expression.Constant(b, typeof(float?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableFloat")
                 )
             );
@@ -381,7 +386,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(int?)),
                     Expression.Constant(b, typeof(int?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableInt")
                 )
             );
@@ -396,7 +402,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(long?)),
                     Expression.Constant(b, typeof(long?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableLong")
                 )
             );
@@ -411,7 +418,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(sbyte?)),
                     Expression.Constant(b, typeof(sbyte?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableSByte")
                 )
             );
@@ -426,7 +434,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(short?)),
                     Expression.Constant(b, typeof(short?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableShort")
                 )
             );
@@ -441,7 +450,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(uint?)),
                     Expression.Constant(b, typeof(uint?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableUInt")
                 )
             );
@@ -456,7 +466,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(ulong?)),
                     Expression.Constant(b, typeof(ulong?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableULong")
                 )
             );
@@ -471,7 +482,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Subtract(
                     Expression.Constant(a, typeof(ushort?)),
                     Expression.Constant(b, typeof(ushort?)),
-                    typeof(LiftedSubtractNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractNullableUShort")
                 )
             );

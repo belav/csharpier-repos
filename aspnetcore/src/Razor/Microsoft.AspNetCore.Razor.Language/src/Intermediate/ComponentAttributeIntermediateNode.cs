@@ -106,8 +106,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             AttributeName = directiveAttributeParameterNode.AttributeNameWithoutParameter;
             AttributeStructure = directiveAttributeParameterNode.AttributeStructure;
             BoundAttribute = directiveAttributeParameterNode.BoundAttribute;
-            PropertyName =
-                directiveAttributeParameterNode.BoundAttributeParameter.GetPropertyName();
+            PropertyName = directiveAttributeParameterNode.BoundAttributeParameter
+                .GetPropertyName();
             Source = directiveAttributeParameterNode.Source;
             TagHelper = directiveAttributeParameterNode.TagHelper;
             TypeName = directiveAttributeParameterNode.BoundAttributeParameter.TypeName;
@@ -182,11 +182,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
 
             if (
-                string.Equals(
-                    TypeName,
-                    ComponentsApi.EventCallback.FullTypeName,
-                    StringComparison.Ordinal
-                )
+                string
+                    .Equals(
+                        TypeName,
+                        ComponentsApi.EventCallback.FullTypeName,
+                        StringComparison.Ordinal
+                    )
             )
             {
                 // Non-Generic

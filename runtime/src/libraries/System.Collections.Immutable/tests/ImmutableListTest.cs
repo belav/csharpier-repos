@@ -152,9 +152,8 @@ namespace System.Collections.Immutable.Tests
                 Assert.Equal(i * 10, list[i - 1]);
             }
 
-            var bulkList = ImmutableList<int>.Empty.AddRange(
-                Enumerable.Range(1, 10).Select(i => i * 10)
-            );
+            var bulkList = ImmutableList<int>.Empty
+                .AddRange(Enumerable.Range(1, 10).Select(i => i * 10));
             Assert.Equal<int>(list.ToArray(), bulkList.ToArray());
         }
 
@@ -473,15 +472,12 @@ namespace System.Collections.Immutable.Tests
         public void RemoveRangeDoesNotEnumerateSequenceIfThisIsEmpty()
         {
             var list = ImmutableList<int>.Empty;
-            list.RemoveRange(
-                Enumerable.Range(1, 1)
-                    .Select<int, int>(
-                        n =>
-                        {
-                            throw new ShouldNotBeInvokedException();
-                        }
-                    )
-            );
+            list.RemoveRange(Enumerable.Range(1, 1).Select<int, int>(
+                    n =>
+                    {
+                        throw new ShouldNotBeInvokedException();
+                    }
+                ));
         }
 
         [Fact]
@@ -908,11 +904,12 @@ namespace System.Collections.Immutable.Tests
                 "_root"
             );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                    == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(
+                    pr =>
+                        pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                        == DebuggerBrowsableState.RootHidden
+                );
             double[] items = itemProperty.GetValue(info.Instance) as double[];
             Assert.Equal(list, items);
         }
@@ -941,7 +938,8 @@ namespace System.Collections.Immutable.Tests
             typeBuilder.DefineDefaultConstructor(MethodAttributes.Public);
             var dummType = typeBuilder.CreateTypeInfo();
 
-            var createMethod = typeof(ImmutableList).GetMethods()
+            var createMethod = typeof(ImmutableList)
+                .GetMethods()
                 .Where(m => m.Name == "Create" && m.GetParameters().Length == 0)
                 .Single()
                 .MakeGenericMethod(dummType.AsType());

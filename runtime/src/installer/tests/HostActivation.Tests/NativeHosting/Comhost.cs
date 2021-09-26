@@ -42,9 +42,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 sharedState.ClsidString
             };
             CommandResult result = sharedState.CreateNativeHostCommand(
-                    args,
-                    sharedState.ComLibraryFixture.BuiltDotnet.BinPath
-                )
+                args,
+                sharedState.ComLibraryFixture.BuiltDotnet.BinPath
+            )
                 .Execute();
 
             result.Should().Pass().And.HaveStdOutContaining("New instance of Server created");
@@ -87,9 +87,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     sharedState.ClsidString
                 };
                 CommandResult result = sharedState.CreateNativeHostCommand(
-                        args,
-                        fixture.BuiltDotnet.BinPath
-                    )
+                    args,
+                    fixture.BuiltDotnet.BinPath
+                )
                     .Execute();
 
                 result.Should()
@@ -125,9 +125,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 
                 string[] args = { "comhost", "errorinfo", "1", comHost, sharedState.ClsidString };
                 CommandResult result = sharedState.CreateNativeHostCommand(
-                        args,
-                        fixture.BuiltDotnet.BinPath
-                    )
+                    args,
+                    fixture.BuiltDotnet.BinPath
+                )
                     .Execute();
 
                 result.Should()
@@ -156,9 +156,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 
                 string[] args = { "comhost", "typelib", "2", comHost, sharedState.ClsidString };
                 CommandResult result = sharedState.CreateNativeHostCommand(
-                        args,
-                        fixture.BuiltDotnet.BinPath
-                    )
+                    args,
+                    fixture.BuiltDotnet.BinPath
+                )
                     .Execute();
 
                 result.Should()
@@ -184,10 +184,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     return;
                 }
 
-                ComLibraryFixture = new TestProjectFixture(
-                    "ComLibrary",
-                    RepoDirectories
-                ).EnsureRestored().BuildProject();
+                ComLibraryFixture = new TestProjectFixture("ComLibrary", RepoDirectories)
+                    .EnsureRestored()
+                    .BuildProject();
 
                 // Create a .clsidmap from the assembly
                 string clsidMapPath = Path.Combine(

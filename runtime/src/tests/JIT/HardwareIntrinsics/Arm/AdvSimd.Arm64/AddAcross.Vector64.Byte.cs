@@ -266,9 +266,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = AdvSimd.Arm64.AddAcross(
-                Unsafe.Read<Vector64<Byte>>(_dataTable.inArray1Ptr)
-            );
+            var result = AdvSimd.Arm64
+                .AddAcross(Unsafe.Read<Vector64<Byte>>(_dataTable.inArray1Ptr));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
@@ -278,9 +277,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = AdvSimd.Arm64.AddAcross(
-                AdvSimd.LoadVector64((Byte*)(_dataTable.inArray1Ptr))
-            );
+            var result = AdvSimd.Arm64
+                .AddAcross(AdvSimd.LoadVector64((Byte*)(_dataTable.inArray1Ptr)));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
@@ -290,10 +288,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
-                    nameof(AdvSimd.Arm64.AddAcross),
-                    new Type[] { typeof(Vector64<Byte>) }
-                )
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(nameof(AdvSimd.Arm64.AddAcross), new Type[] { typeof(Vector64<Byte>) })
                 .Invoke(null, new object[] { Unsafe.Read<Vector64<Byte>>(_dataTable.inArray1Ptr) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector64<Byte>)(result));
@@ -304,10 +300,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
-                    nameof(AdvSimd.Arm64.AddAcross),
-                    new Type[] { typeof(Vector64<Byte>) }
-                )
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(nameof(AdvSimd.Arm64.AddAcross), new Type[] { typeof(Vector64<Byte>) })
                 .Invoke(
                     null,
                     new object[] { AdvSimd.LoadVector64((Byte*)(_dataTable.inArray1Ptr)) }
@@ -534,15 +528,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.AddAcross)}<Byte>(Vector64<Byte>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.AddAcross)}<Byte>(Vector64<Byte>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

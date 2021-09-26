@@ -416,9 +416,8 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Equal(
                 0x00ffffff,
-                (
-                    (UserStringHandle)new Handle((byte)HandleType.UserString, 0x00ffffff)
-                ).GetHeapOffset()
+                ((UserStringHandle)new Handle((byte)HandleType.UserString, 0x00ffffff))
+                    .GetHeapOffset()
             );
 
             Assert.Equal(1, ((GuidHandle)new Handle((byte)HandleType.Guid, 1)).Index);
@@ -429,15 +428,13 @@ namespace System.Reflection.Metadata.Tests
 
             Assert.Equal(
                 1,
-                (
-                    (NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 1)
-                ).GetHeapOffset()
+                ((NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 1))
+                    .GetHeapOffset()
             );
             Assert.Equal(
                 0x1fffffff,
-                (
-                    (NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 0x1fffffff)
-                ).GetHeapOffset()
+                ((NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 0x1fffffff))
+                    .GetHeapOffset()
             );
 
             Assert.Equal(1, ((StringHandle)new Handle((byte)HandleType.String, 1)).GetHeapOffset());

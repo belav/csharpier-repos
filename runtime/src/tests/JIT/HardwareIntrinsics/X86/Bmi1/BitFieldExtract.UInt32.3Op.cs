@@ -140,7 +140,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi1).GetMethod(
+            var result = typeof(Bmi1)
+                .GetMethod(
                     nameof(Bmi1.BitFieldExtract),
                     new Type[] { typeof(UInt32), typeof(Byte), typeof(Byte) }
                 )
@@ -250,9 +251,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi1)}.{nameof(Bmi1.BitFieldExtract)}<UInt32>(UInt32, Byte, Byte): BitFieldExtract failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi1)}.{nameof(Bmi1.BitFieldExtract)}<UInt32>(UInt32, Byte, Byte): BitFieldExtract failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"   op1: {op1}");
                 TestLibrary.TestFramework.LogInformation($"   op2: {op2}");
                 TestLibrary.TestFramework.LogInformation($"   op3: {op3}");

@@ -240,8 +240,8 @@ namespace Microsoft.AspNetCore.Mvc
 
                 var multiRegistrationServiceTypes = MultiRegistrationServiceTypes;
                 return services.Where(
-                        sd => !multiRegistrationServiceTypes.Keys.Contains(sd.ServiceType)
-                    )
+                    sd => !multiRegistrationServiceTypes.Keys.Contains(sd.ServiceType)
+                )
                     .Select(sd => sd.ServiceType);
             }
         }
@@ -339,9 +339,8 @@ namespace Microsoft.AspNetCore.Mvc
         )
         {
             var matches = services.Where(
-                    sd =>
-                        sd.ServiceType == serviceType && sd.ImplementationType == implementationType
-                )
+                sd => sd.ServiceType == serviceType && sd.ImplementationType == implementationType
+            )
                 .ToArray();
 
             if (matches.Length == 0)

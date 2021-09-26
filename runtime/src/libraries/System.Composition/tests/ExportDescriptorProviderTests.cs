@@ -63,9 +63,8 @@ namespace System.Composition.Lightweight.UnitTests
         [Fact]
         public void ProvidersCanLocateImplementationsOfAContractItSupports()
         {
-            var container = new ContainerConfiguration().WithProvider(
-                    new DefaultObjectExportDescriptorProvider()
-                )
+            var container = new ContainerConfiguration()
+                .WithProvider(new DefaultObjectExportDescriptorProvider())
                 .WithPart<ExportsObject>()
                 .CreateContainer();
 
@@ -76,9 +75,8 @@ namespace System.Composition.Lightweight.UnitTests
         [Fact]
         public void ProvidersCanDetectAbsenceOfAContractItSupports()
         {
-            var container = new ContainerConfiguration().WithProvider(
-                    new DefaultObjectExportDescriptorProvider()
-                )
+            var container = new ContainerConfiguration()
+                .WithProvider(new DefaultObjectExportDescriptorProvider())
                 .CreateContainer();
 
             var o = container.GetExport<object>();

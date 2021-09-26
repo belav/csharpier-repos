@@ -54,10 +54,8 @@ namespace System.UnitTesting
                     return method.MakeGenericMethod(extendedType.GenericTypeArguments[0]);
             }
 
-            return typeof(EqualityExtensions).GetMethod(
-                "IsEqual",
-                new[] { extendedType, extendedType }
-            );
+            return typeof(EqualityExtensions)
+                .GetMethod("IsEqual", new[] { extendedType, extendedType });
         }
 
         public static bool CheckEquals(object objA, object objB)

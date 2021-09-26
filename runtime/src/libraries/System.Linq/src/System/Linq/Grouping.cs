@@ -247,12 +247,8 @@ namespace System.Linq
 
         public IEnumerator<TResult> GetEnumerator()
         {
-            Lookup<TKey, TElement> lookup = Lookup<TKey, TElement>.Create(
-                _source,
-                _keySelector,
-                _elementSelector,
-                _comparer
-            );
+            Lookup<TKey, TElement> lookup = Lookup<TKey, TElement>
+                .Create(_source, _keySelector, _elementSelector, _comparer);
             return lookup.ApplyResultSelector(_resultSelector).GetEnumerator();
         }
 
@@ -295,11 +291,8 @@ namespace System.Linq
 
         public IEnumerator<TResult> GetEnumerator()
         {
-            Lookup<TKey, TSource> lookup = Lookup<TKey, TSource>.Create(
-                _source,
-                _keySelector,
-                _comparer
-            );
+            Lookup<TKey, TSource> lookup = Lookup<TKey, TSource>
+                .Create(_source, _keySelector, _comparer);
             return lookup.ApplyResultSelector(_resultSelector).GetEnumerator();
         }
 
@@ -341,7 +334,8 @@ namespace System.Linq
         }
 
         public IEnumerator<IGrouping<TKey, TElement>> GetEnumerator() =>
-            Lookup<TKey, TElement>.Create(_source, _keySelector, _elementSelector, _comparer)
+            Lookup<TKey, TElement>
+                .Create(_source, _keySelector, _elementSelector, _comparer)
                 .GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

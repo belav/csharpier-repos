@@ -40,16 +40,18 @@ public class Test
                 text,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     AssertReferencedIsUnmanagedAttribute(
                         Accessibility.Public,
@@ -78,15 +80,17 @@ public class Test<T> where T : unmanaged
                 text,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test`1")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test`1")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     AssertReferencedIsUnmanagedAttribute(
                         Accessibility.Public,
@@ -119,21 +123,22 @@ public class Test
 
             CompileAndVerify(
                 text,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     AssertReferencedIsUnmanagedAttribute(
                         Accessibility.Public,
@@ -158,20 +163,21 @@ public delegate void D<T>() where T : unmanaged;
 
             CompileAndVerify(
                 text,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.GlobalNamespace.GetTypeMember("D")
+                    var typeParameter = module.GlobalNamespace
+                        .GetTypeMember("D")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     AssertReferencedIsUnmanagedAttribute(
                         Accessibility.Public,
@@ -186,13 +192,12 @@ public delegate void D<T>() where T : unmanaged;
         public void AttributeUsedIfExists_FromReference_Method_Reference()
         {
             var reference = CreateCompilation(
-                    @"
+                @"
 namespace System.Runtime.CompilerServices
 {
     public class IsUnmanagedAttribute : System.Attribute { }
 }"
-                )
-                .EmitToImageReference();
+            ).EmitToImageReference();
 
             var text =
                 @"
@@ -207,7 +212,8 @@ public class Test
                 references: new[] { reference },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -227,13 +233,12 @@ public class Test
         public void AttributeUsedIfExists_FromReference_Class_Reference()
         {
             var reference = CreateCompilation(
-                    @"
+                @"
 namespace System.Runtime.CompilerServices
 {
     public class IsUnmanagedAttribute : System.Attribute { }
 }"
-                )
-                .EmitToImageReference();
+            ).EmitToImageReference();
 
             var text =
                 @"
@@ -247,7 +252,8 @@ public class Test<T> where T : unmanaged
                 references: new[] { reference },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test`1")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test`1")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
@@ -266,13 +272,12 @@ public class Test<T> where T : unmanaged
         public void AttributeUsedIfExists_FromReference_LocalFunction_Reference()
         {
             var reference = CreateCompilation(
-                    @"
+                @"
 namespace System.Runtime.CompilerServices
 {
     public class IsUnmanagedAttribute : System.Attribute { }
 }"
-                )
-                .EmitToImageReference();
+            ).EmitToImageReference();
 
             var text =
                 @"
@@ -289,13 +294,13 @@ public class Test
 
             CompileAndVerify(
                 source: text,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 references: new[] { reference },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -315,13 +320,12 @@ public class Test
         public void AttributeUsedIfExists_FromReference_Delegate_Reference()
         {
             var reference = CreateCompilation(
-                    @"
+                @"
 namespace System.Runtime.CompilerServices
 {
     public class IsUnmanagedAttribute : System.Attribute { }
 }"
-                )
-                .EmitToImageReference();
+            ).EmitToImageReference();
 
             var text =
                 @"
@@ -330,13 +334,13 @@ public delegate void D<T>() where T : unmanaged;
 
             CompileAndVerify(
                 source: text,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 references: new[] { reference },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.GlobalNamespace.GetTypeMember("D")
+                    var typeParameter = module.GlobalNamespace
+                        .GetTypeMember("D")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
@@ -355,13 +359,12 @@ public delegate void D<T>() where T : unmanaged;
         public void AttributeUsedIfExists_FromReference_Method_Module()
         {
             var reference = CreateCompilation(
-                    @"
+                @"
 namespace System.Runtime.CompilerServices
 {
     public class IsUnmanagedAttribute : System.Attribute { }
 }"
-                )
-                .EmitToImageReference();
+            ).EmitToImageReference();
 
             var text =
                 @"
@@ -378,7 +381,8 @@ public class Test
                 options: TestOptions.ReleaseModule,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -398,13 +402,12 @@ public class Test
         public void AttributeUsedIfExists_FromReference_Class_Module()
         {
             var reference = CreateCompilation(
-                    @"
+                @"
 namespace System.Runtime.CompilerServices
 {
     public class IsUnmanagedAttribute : System.Attribute { }
 }"
-                )
-                .EmitToImageReference();
+            ).EmitToImageReference();
 
             var text =
                 @"
@@ -420,7 +423,8 @@ public class Test<T> where T : unmanaged
                 options: TestOptions.ReleaseModule,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test`1")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test`1")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
@@ -439,13 +443,12 @@ public class Test<T> where T : unmanaged
         public void AttributeUsedIfExists_FromReference_LocalFunction_Module()
         {
             var reference = CreateCompilation(
-                    @"
+                @"
 namespace System.Runtime.CompilerServices
 {
     public class IsUnmanagedAttribute : System.Attribute { }
 }"
-                )
-                .EmitToImageReference();
+            ).EmitToImageReference();
 
             var text =
                 @"
@@ -464,12 +467,12 @@ public class Test
                 source: text,
                 verify: Verification.Fails,
                 references: new[] { reference },
-                options: TestOptions.ReleaseModule.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseModule
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -489,13 +492,12 @@ public class Test
         public void AttributeUsedIfExists_FromReference_Delegate_Module()
         {
             var reference = CreateCompilation(
-                    @"
+                @"
 namespace System.Runtime.CompilerServices
 {
     public class IsUnmanagedAttribute : System.Attribute { }
 }"
-                )
-                .EmitToImageReference();
+            ).EmitToImageReference();
 
             var text =
                 @"
@@ -506,12 +508,12 @@ public delegate void D<T>() where T : unmanaged;
                 source: text,
                 verify: Verification.Fails,
                 references: new[] { reference },
-                options: TestOptions.ReleaseModule.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseModule
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.GlobalNamespace.GetTypeMember("D")
+                    var typeParameter = module.GlobalNamespace
+                        .GetTypeMember("D")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
@@ -541,7 +543,8 @@ public class Test
                 text,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -570,7 +573,8 @@ public class Test<T> where T : unmanaged
                 text,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test`1")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test`1")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
@@ -602,12 +606,12 @@ public class Test
 
             CompileAndVerify(
                 source: text,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -632,12 +636,12 @@ public delegate void D<T>() where T : unmanaged;
 
             CompileAndVerify(
                 source: text,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.GlobalNamespace.GetTypeMember("D")
+                    var typeParameter = module.GlobalNamespace
+                        .GetTypeMember("D")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
@@ -667,19 +671,18 @@ namespace System.Runtime.CompilerServices
 public delegate void D([IsUnmanaged]int x);
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,2): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
-                    // [IsUnmanaged]
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(9, 2),
-                    // (10,25): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
-                    // public delegate void D([IsUnmanaged]int x);
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(10, 25)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (9,2): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
+                // [IsUnmanaged]
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(9, 2),
+                // (10,25): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
+                // public delegate void D([IsUnmanaged]int x);
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(10, 25)
+            );
         }
 
         [Fact]
@@ -700,14 +703,13 @@ public class Test
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,2): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
-                    // [IsUnmanaged]
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(9, 2)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (9,2): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
+                // [IsUnmanaged]
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(9, 2)
+            );
         }
 
         [Fact]
@@ -729,14 +731,13 @@ public class Test
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (11,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
-                    //     [IsUnmanaged]
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(11, 6)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (11,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
+                //     [IsUnmanaged]
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(11, 6)
+            );
         }
 
         [Fact]
@@ -758,14 +759,13 @@ public class Test
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (11,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
-                    //     [IsUnmanaged]
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(11, 6)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (11,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
+                //     [IsUnmanaged]
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(11, 6)
+            );
         }
 
         [Fact]
@@ -791,24 +791,23 @@ public class Test
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (11,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
-                    //     [IsUnmanaged]
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(11, 6),
-                    // (12,14): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
-                    //     [return: IsUnmanaged]
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(12, 14),
-                    // (13,24): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
-                    //     public int Method([IsUnmanaged]int x)
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(13, 24)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (11,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
+                //     [IsUnmanaged]
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(11, 6),
+                // (12,14): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
+                //     [return: IsUnmanaged]
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(12, 14),
+                // (13,24): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
+                //     public int Method([IsUnmanaged]int x)
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(13, 24)
+            );
         }
 
         [Fact]
@@ -830,19 +829,18 @@ public class Test
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (11,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
-                    //     [IsUnmanaged]
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(11, 6),
-                    // (12,22): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
-                    //     public int this[[IsUnmanaged]int x] => x;
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(12, 22)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (11,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
+                //     [IsUnmanaged]
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(11, 6),
+                // (12,22): error CS8335: Do not use 'System.Runtime.CompilerServices.IsUnmanagedAttribute'. This is reserved for compiler usage.
+                //     public int this[[IsUnmanaged]int x] => x;
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsUnmanaged")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(12, 22)
+            );
         }
 
         [Fact]
@@ -856,19 +854,18 @@ public class Test
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (2,2): error CS0246: The type or namespace name 'IsUnmanagedAttribute' could not be found (are you missing a using directive or an assembly reference?)
-                    // [IsUnmanaged]
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "IsUnmanaged")
-                        .WithArguments("IsUnmanagedAttribute")
-                        .WithLocation(2, 2),
-                    // (2,2): error CS0246: The type or namespace name 'IsUnmanaged' could not be found (are you missing a using directive or an assembly reference?)
-                    // [IsUnmanaged]
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "IsUnmanaged")
-                        .WithArguments("IsUnmanaged")
-                        .WithLocation(2, 2)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (2,2): error CS0246: The type or namespace name 'IsUnmanagedAttribute' could not be found (are you missing a using directive or an assembly reference?)
+                // [IsUnmanaged]
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "IsUnmanaged")
+                    .WithArguments("IsUnmanagedAttribute")
+                    .WithLocation(2, 2),
+                // (2,2): error CS0246: The type or namespace name 'IsUnmanaged' could not be found (are you missing a using directive or an assembly reference?)
+                // [IsUnmanaged]
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "IsUnmanaged")
+                    .WithArguments("IsUnmanaged")
+                    .WithLocation(2, 2)
+            );
         }
 
         [Fact]
@@ -912,7 +909,8 @@ public class Test2<T> : Test1<T> where T : unmanaged { }
                 code3,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test2`1")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test2`1")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
@@ -935,14 +933,13 @@ public class Test<T> where T : unmanaged
 {
 }";
 
-            CreateCompilation(code, options: TestOptions.ReleaseModule)
-                .VerifyDiagnostics(
-                    // (2,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsUnmanagedAttribute' is not defined or imported
-                    // public class Test<T> where T : unmanaged
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "T")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(2, 19)
-                );
+            CreateCompilation(code, options: TestOptions.ReleaseModule).VerifyDiagnostics(
+                // (2,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsUnmanagedAttribute' is not defined or imported
+                // public class Test<T> where T : unmanaged
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "T")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(2, 19)
+            );
         }
 
         [Fact]
@@ -955,14 +952,13 @@ public class Test
     public void M<T>() where T : unmanaged {}
 }";
 
-            CreateCompilation(code, options: TestOptions.ReleaseModule)
-                .VerifyDiagnostics(
-                    // (4,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsUnmanagedAttribute' is not defined or imported
-                    //     public void M<T>() where T : unmanaged {}
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "T")
-                        .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
-                        .WithLocation(4, 19)
-                );
+            CreateCompilation(code, options: TestOptions.ReleaseModule).VerifyDiagnostics(
+                // (4,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsUnmanagedAttribute' is not defined or imported
+                //     public void M<T>() where T : unmanaged {}
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "T")
+                    .WithArguments("System.Runtime.CompilerServices.IsUnmanagedAttribute")
+                    .WithLocation(4, 19)
+            );
         }
 
         [Fact]
@@ -983,11 +979,10 @@ public class Test
 }";
 
             CreateCompilation(
-                    source: code,
-                    options: TestOptions.ReleaseModule.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
-                )
+                source: code,
+                options: TestOptions.ReleaseModule
+                    .WithMetadataImportOptions(MetadataImportOptions.All)
+            )
                 .VerifyDiagnostics(
                     // (6,16): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsUnmanagedAttribute' is not defined or imported
                     //         void N<T>() where T : unmanaged
@@ -1003,11 +998,10 @@ public class Test
             var code = "public delegate void D<T>() where T : unmanaged;";
 
             CreateCompilation(
-                    source: code,
-                    options: TestOptions.ReleaseModule.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
-                )
+                source: code,
+                options: TestOptions.ReleaseModule
+                    .WithMetadataImportOptions(MetadataImportOptions.All)
+            )
                 .VerifyDiagnostics(
                     // (1,24): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsUnmanagedAttribute' is not defined or imported
                     // public delegate void D<T>() where T : unmanaged;
@@ -1034,7 +1028,8 @@ public class Test1<T> where T : unmanaged
                 options: options,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test1`1")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test1`1")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
@@ -1059,7 +1054,8 @@ public class Test2<T> : Test1<T> where T : unmanaged
                 references: new[] { comp1.Compilation.ToMetadataReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test2`1")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test2`1")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
@@ -1169,9 +1165,8 @@ class Test<T> where T : unmanaged
             string assemblyName
         )
         {
-            var attributes = (
-                (PEModuleSymbol)typeParameter.ContainingModule
-            ).GetCustomAttributesForToken(((PETypeParameterSymbol)typeParameter).Handle);
+            var attributes = ((PEModuleSymbol)typeParameter.ContainingModule)
+                .GetCustomAttributesForToken(((PETypeParameterSymbol)typeParameter).Handle);
             NamedTypeSymbol attributeType = attributes.Single().AttributeClass;
 
             Assert.Equal("IsUnmanagedAttribute", attributeType.Name);
@@ -1203,9 +1198,10 @@ class Test<T> where T : unmanaged
                 case Accessibility.Public:
                 {
                     Assert.Null(
-                        attributeType.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        attributeType.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     break;
                 }

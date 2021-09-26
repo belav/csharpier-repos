@@ -68,7 +68,8 @@ public class Test
 
         // Direct use of newobj gives exact type so all these
         // will devirtualize
-        new Base().Foo();
+        new Base()
+            .Foo();
         new Base().Bar();
         new Derived().Foo();
         new Derived().Bar();

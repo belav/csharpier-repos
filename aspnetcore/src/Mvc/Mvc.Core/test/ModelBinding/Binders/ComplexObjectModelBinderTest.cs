@@ -332,7 +332,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModelAsync_CreatesModelAndAddsError_IfIsTopLevelObject_WithNoData()
         {
             // Arrange
-            var parameter = typeof(ComplexObjectModelBinderTest).GetMethod(
+            var parameter = typeof(ComplexObjectModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithComplexParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -389,7 +390,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModelAsync_CreatesModelAndAddsError_IfIsTopLevelObject_WithNoSettableProperties()
         {
             // Arrange
-            var parameter = typeof(ComplexObjectModelBinderTest).GetMethod(
+            var parameter = typeof(ComplexObjectModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithNoSettablePropertiesParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -438,7 +440,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModelAsync_CreatesModelAndAddsError_IfIsTopLevelObject_WithAllPropertiesExcluded()
         {
             // Arrange
-            var parameter = typeof(ComplexObjectModelBinderTest).GetMethod(
+            var parameter = typeof(ComplexObjectModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithAllPropertiesExcludedParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -519,14 +522,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             );
             var originalModel = bindingContext.Model;
 
-            var binders = bindingContext.ModelMetadata.Properties.ToDictionary(
-                keySelector: item => item,
-                elementSelector: item =>
-                    (IModelBinder)new TestModelBinderProvider(
-                        item,
-                        ModelBindingResult.Success("Test")
-                    )
-            );
+            var binders = bindingContext.ModelMetadata.Properties
+                .ToDictionary(
+                    keySelector: item => item,
+                    elementSelector: item =>
+                        (IModelBinder)new TestModelBinderProvider(
+                            item,
+                            ModelBindingResult.Success("Test")
+                        )
+                );
 
             var binder = new ComplexObjectModelBinder(
                 binders,
@@ -969,22 +973,24 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 options =>
                 {
                     var firstNameProperty = containerMetadata.Properties[nameof(model.FirstName)];
-                    options.ModelBinderProviders.Insert(
-                        0,
-                        new TestModelBinderProvider(
-                            firstNameProperty,
-                            ModelBindingResult.Success("John")
-                        )
-                    );
+                    options.ModelBinderProviders
+                        .Insert(
+                            0,
+                            new TestModelBinderProvider(
+                                firstNameProperty,
+                                ModelBindingResult.Success("John")
+                            )
+                        );
 
                     var lastNameProperty = containerMetadata.Properties[nameof(model.LastName)];
-                    options.ModelBinderProviders.Insert(
-                        0,
-                        new TestModelBinderProvider(
-                            lastNameProperty,
-                            ModelBindingResult.Success("Doe")
-                        )
-                    );
+                    options.ModelBinderProviders
+                        .Insert(
+                            0,
+                            new TestModelBinderProvider(
+                                lastNameProperty,
+                                ModelBindingResult.Success("Doe")
+                            )
+                        );
                 }
             );
 
@@ -1547,16 +1553,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 get
                 {
                     return (m) =>
-                        !string.Equals(
-                            "Excluded1",
-                            m.PropertyName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && !string.Equals(
-                            "Excluded2",
-                            m.PropertyName,
-                            StringComparison.OrdinalIgnoreCase
-                        );
+                        !string
+                            .Equals("Excluded1", m.PropertyName, StringComparison.OrdinalIgnoreCase)
+                        && !string
+                            .Equals(
+                                "Excluded2",
+                                m.PropertyName,
+                                StringComparison.OrdinalIgnoreCase
+                            );
                 }
             }
         }

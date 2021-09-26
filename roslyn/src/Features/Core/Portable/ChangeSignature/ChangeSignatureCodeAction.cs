@@ -44,10 +44,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             {
                 var changeSignatureResult =
                     await _changeSignatureService.ChangeSignatureWithContextAsync(
-                            _context,
-                            changeSignatureOptions,
-                            cancellationToken
-                        )
+                        _context,
+                        changeSignatureOptions,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 if (changeSignatureResult.Succeeded)

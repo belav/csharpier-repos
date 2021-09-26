@@ -76,9 +76,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var context = new DefaultHttpContext();
             context.Request.Scheme = "https";
             context.Request.Host = new HostString("localhost");
-            context.RequestServices = new ServiceCollection().AddSingleton(
-                    new IdentityServerOptions()
-                )
+            context.RequestServices = new ServiceCollection()
+                .AddSingleton(new IdentityServerOptions())
                 .AddSingleton(credentialsStore.Object)
                 .BuildServiceProvider();
 
@@ -143,9 +142,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var context = new DefaultHttpContext();
             context.Request.Scheme = "https";
             context.Request.Host = new HostString("localhost");
-            context.RequestServices = new ServiceCollection().AddSingleton(
-                    new IdentityServerOptions()
-                )
+            context.RequestServices = new ServiceCollection()
+                .AddSingleton(new IdentityServerOptions())
                 .BuildServiceProvider();
             contextAccessor.SetupGet(ca => ca.HttpContext).Returns(context);
 

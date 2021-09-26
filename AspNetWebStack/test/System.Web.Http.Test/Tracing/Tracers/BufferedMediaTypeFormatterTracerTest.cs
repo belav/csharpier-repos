@@ -49,14 +49,14 @@ namespace System.Web.Http.Tracing.Tracers
             Mock<BufferedMediaTypeFormatter> mockFormatter =
                 new Mock<BufferedMediaTypeFormatter>() { CallBase = true };
             mockFormatter.Setup(
-                    f =>
-                        f.ReadFromStream(
-                            It.IsAny<Type>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<IFormatterLogger>()
-                        )
-                )
+                f =>
+                    f.ReadFromStream(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+            )
                 .Returns("sampleValue");
             TestTraceWriter traceWriter = new TestTraceWriter();
             HttpRequestMessage request = new HttpRequestMessage();
@@ -101,14 +101,14 @@ namespace System.Web.Http.Tracing.Tracers
             Mock<BufferedMediaTypeFormatter> mockFormatter =
                 new Mock<BufferedMediaTypeFormatter>() { CallBase = true };
             mockFormatter.Setup(
-                    f =>
-                        f.ReadFromStream(
-                            It.IsAny<Type>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<IFormatterLogger>()
-                        )
-                )
+                f =>
+                    f.ReadFromStream(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+            )
                 .Returns("sampleValue");
             TestTraceWriter traceWriter = new TestTraceWriter();
             HttpRequestMessage request = new HttpRequestMessage();
@@ -159,14 +159,14 @@ namespace System.Web.Http.Tracing.Tracers
             Mock<BufferedMediaTypeFormatter> mockFormatter =
                 new Mock<BufferedMediaTypeFormatter>() { CallBase = true };
             mockFormatter.Setup(
-                    f =>
-                        f.ReadFromStream(
-                            It.IsAny<Type>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<IFormatterLogger>()
-                        )
-                )
+                f =>
+                    f.ReadFromStream(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+            )
                 .Throws(exception);
 
             TestTraceWriter traceWriter = new TestTraceWriter();
@@ -322,14 +322,14 @@ namespace System.Web.Http.Tracing.Tracers
             Mock<BufferedMediaTypeFormatter> mockFormatter =
                 new Mock<BufferedMediaTypeFormatter>() { CallBase = true };
             mockFormatter.Setup(
-                    f =>
-                        f.WriteToStream(
-                            It.IsAny<Type>(),
-                            It.IsAny<Object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>()
-                        )
-                )
+                f =>
+                    f.WriteToStream(
+                        It.IsAny<Type>(),
+                        It.IsAny<Object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>()
+                    )
+            )
                 .Throws(exception);
 
             TestTraceWriter traceWriter = new TestTraceWriter();

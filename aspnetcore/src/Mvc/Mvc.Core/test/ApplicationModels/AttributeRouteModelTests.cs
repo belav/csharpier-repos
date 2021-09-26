@@ -175,12 +175,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         )
         {
             // Arrange
-            var expected = string.Format(
-                CultureInfo.InvariantCulture,
-                "The route template '{0}' has invalid syntax. {1}",
-                template,
-                reason
-            );
+            var expected = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "The route template '{0}' has invalid syntax. {1}",
+                    template,
+                    reason
+                );
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(

@@ -153,7 +153,8 @@ namespace System.DirectoryServices
                 AdsValue* pValue = column.pADsValues;
                 DirectoryVirtualListView value = (DirectoryVirtualListView)new AdsValueHelper(
                     *pValue
-                ).GetVlvValue();
+                )
+                    .GetVlvValue();
                 return value;
             }
 
@@ -289,21 +290,16 @@ namespace System.DirectoryServices
                 );
                 int hr = 0;
                 IntPtr pszColumnName = (IntPtr)0;
-                hr = _results.SearchObject.GetNextColumnName(
-                    _results.Handle,
-                    (INTPTR_INTPTRCAST)(&pszColumnName)
-                );
+                hr = _results.SearchObject
+                    .GetNextColumnName(_results.Handle, (INTPTR_INTPTRCAST)(&pszColumnName));
                 while (hr == 0)
                 {
                     try
                     {
                         AdsSearchColumn column = default;
                         AdsSearchColumn* pColumn = &column;
-                        _results.SearchObject.GetColumn(
-                            _results.Handle,
-                            pszColumnName,
-                            (INTPTR_INTPTRCAST)pColumn
-                        );
+                        _results.SearchObject
+                            .GetColumn(_results.Handle, pszColumnName, (INTPTR_INTPTRCAST)pColumn);
                         try
                         {
                             int numValues = column.dwNumValues;
@@ -314,10 +310,11 @@ namespace System.DirectoryServices
                                 values[i] = new AdsValueHelper(*pValue).GetValue();
                                 pValue++;
                             }
-                            entry.Properties.Add(
-                                Marshal.PtrToStringUni(pszColumnName)!,
-                                new ResultPropertyValueCollection(values)
-                            );
+                            entry.Properties
+                                .Add(
+                                    Marshal.PtrToStringUni(pszColumnName)!,
+                                    new ResultPropertyValueCollection(values)
+                                );
                         }
 
                         finally
@@ -334,10 +331,8 @@ namespace System.DirectoryServices
                     {
                         SafeNativeMethods.FreeADsMem(pszColumnName);
                     }
-                    hr = _results.SearchObject.GetNextColumnName(
-                        _results.Handle,
-                        (INTPTR_INTPTRCAST)(&pszColumnName)
-                    );
+                    hr = _results.SearchObject
+                        .GetNextColumnName(_results.Handle, (INTPTR_INTPTRCAST)(&pszColumnName));
                 }
 
                 return entry;

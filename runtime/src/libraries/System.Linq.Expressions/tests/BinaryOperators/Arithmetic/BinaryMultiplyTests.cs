@@ -672,7 +672,8 @@ namespace System.Linq.Expressions.Tests
             var e = Expression.Parameter(typeof(VBStyleExponentiation));
             var func = Expression.Lambda<
                 Func<VBStyleExponentiation, VBStyleExponentiation, VBStyleExponentiation>
-            >(Expression.Power(b, e), b, e).Compile(useInterpreter);
+            >(Expression.Power(b, e), b, e)
+                .Compile(useInterpreter);
             Assert.Equal(8.0, func(2.0, 3.0).Value);
             Assert.Equal(10000.0, func(10.0, 4.0).Value);
         }
@@ -684,7 +685,8 @@ namespace System.Linq.Expressions.Tests
             var e = Expression.Parameter(typeof(VBStyleExponentiation?));
             var func = Expression.Lambda<
                 Func<VBStyleExponentiation?, VBStyleExponentiation?, VBStyleExponentiation?>
-            >(Expression.Power(b, e), b, e).Compile(useInterpreter);
+            >(Expression.Power(b, e), b, e)
+                .Compile(useInterpreter);
             Assert.Equal(8.0, func(2.0, 3.0).Value.Value);
             Assert.Equal(10000.0, func(10.0, 4.0).Value.Value);
             Assert.Null(func(2.0, null));
@@ -715,7 +717,8 @@ namespace System.Linq.Expressions.Tests
             var e = Expression.Parameter(typeof(FSStyleExponentiation));
             var func = Expression.Lambda<
                 Func<FSStyleExponentiation, FSStyleExponentiation, FSStyleExponentiation>
-            >(Expression.Power(b, e), b, e).Compile(useInterpreter);
+            >(Expression.Power(b, e), b, e)
+                .Compile(useInterpreter);
             Assert.Equal(8.0, func(2.0, 3.0).Value);
             Assert.Equal(10000.0, func(10.0, 4.0).Value);
         }
@@ -727,7 +730,8 @@ namespace System.Linq.Expressions.Tests
             var e = Expression.Parameter(typeof(FSStyleExponentiation?));
             var func = Expression.Lambda<
                 Func<FSStyleExponentiation?, FSStyleExponentiation?, FSStyleExponentiation?>
-            >(Expression.Power(b, e), b, e).Compile(useInterpreter);
+            >(Expression.Power(b, e), b, e)
+                .Compile(useInterpreter);
             Assert.Equal(8.0, func(2.0, 3.0).Value.Value);
             Assert.Equal(10000.0, func(10.0, 4.0).Value.Value);
             Assert.Null(func(2.0, null));

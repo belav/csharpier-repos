@@ -73,7 +73,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             _worker.GetMessageBytes(message);
 
         internal static MessagePackSerializerOptions CreateDefaultMessagePackSerializerOptions() =>
-            MessagePackSerializerOptions.Standard.WithResolver(SignalRResolver.Instance)
+            MessagePackSerializerOptions.Standard
+                .WithResolver(SignalRResolver.Instance)
                 .WithSecurity(MessagePackSecurity.UntrustedData);
 
         internal class SignalRResolver : IFormatterResolver

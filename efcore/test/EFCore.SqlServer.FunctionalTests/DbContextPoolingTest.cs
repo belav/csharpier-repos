@@ -31,54 +31,57 @@ namespace Microsoft.EntityFrameworkCore
         private static IServiceProvider BuildServiceProvider<TContextService, TContext>()
             where TContextService : class
             where TContext : DbContext, TContextService =>
-            new ServiceCollection().AddDbContextPool<TContextService, TContext>(
+            new ServiceCollection()
+                .AddDbContextPool<TContextService, TContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false)
                 )
                 .AddDbContextPool<ISecondContext, SecondContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false)
                 )
                 .BuildServiceProvider();
 
         private static IServiceProvider BuildServiceProvider<TContext>()
             where TContext : DbContext =>
-            new ServiceCollection().AddDbContextPool<TContext>(
+            new ServiceCollection()
+                .AddDbContextPool<TContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false)
                 )
                 .AddDbContextPool<SecondContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false)
                 )
                 .BuildServiceProvider();
 
         private static IServiceProvider BuildServiceProviderWithFactory<TContext>()
             where TContext : DbContext =>
-            new ServiceCollection().AddPooledDbContextFactory<TContext>(
+            new ServiceCollection()
+                .AddPooledDbContextFactory<TContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false)
                 )
                 .AddDbContextPool<SecondContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false)
                 )
                 .BuildServiceProvider();
@@ -88,19 +91,20 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TContextService : class
             where TContext : DbContext, TContextService =>
-            new ServiceCollection().AddDbContextPool<TContextService, TContext>(
+            new ServiceCollection()
+                .AddDbContextPool<TContextService, TContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false),
                     poolSize
                 )
                 .AddDbContextPool<ISecondContext, SecondContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false),
                     poolSize
                 )
@@ -108,19 +112,20 @@ namespace Microsoft.EntityFrameworkCore
 
         private static IServiceProvider BuildServiceProvider<TContext>(int poolSize)
             where TContext : DbContext =>
-            new ServiceCollection().AddDbContextPool<TContext>(
+            new ServiceCollection()
+                .AddDbContextPool<TContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false),
                     poolSize
                 )
                 .AddDbContextPool<SecondContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false),
                     poolSize
                 )
@@ -128,19 +133,20 @@ namespace Microsoft.EntityFrameworkCore
 
         private static IServiceProvider BuildServiceProviderWithFactory<TContext>(int poolSize)
             where TContext : DbContext =>
-            new ServiceCollection().AddPooledDbContextFactory<TContext>(
+            new ServiceCollection()
+                .AddPooledDbContextFactory<TContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false),
                     poolSize
                 )
                 .AddDbContextPool<SecondContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false),
                     poolSize
                 )
@@ -247,7 +253,8 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 64,
-                scope.ServiceProvider.GetRequiredService<PooledContext>()
+                scope.ServiceProvider
+                    .GetRequiredService<PooledContext>()
                     .GetService<IDbContextOptions>()
                     .FindExtension<CoreOptionsExtension>().MaxPoolSize
             );
@@ -262,9 +269,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 64,
-                (
-                    (DbContext)scope.ServiceProvider.GetRequiredService<IPooledContext>()
-                ).GetService<IDbContextOptions>().FindExtension<CoreOptionsExtension>().MaxPoolSize
+                ((DbContext)scope.ServiceProvider.GetRequiredService<IPooledContext>())
+                    .GetService<IDbContextOptions>()
+                    .FindExtension<CoreOptionsExtension>().MaxPoolSize
             );
         }
 
@@ -275,7 +282,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using var context = serviceProvider.GetRequiredService<
                 IDbContextFactory<PooledContext>
-            >().CreateDbContext();
+            >()
+                .CreateDbContext();
 
             Assert.Equal(
                 64,
@@ -293,7 +301,8 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 128,
-                scope.ServiceProvider.GetRequiredService<PooledContext>()
+                scope.ServiceProvider
+                    .GetRequiredService<PooledContext>()
                     .GetService<IDbContextOptions>()
                     .FindExtension<CoreOptionsExtension>().MaxPoolSize
             );
@@ -308,9 +317,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 128,
-                (
-                    (DbContext)scope.ServiceProvider.GetRequiredService<IPooledContext>()
-                ).GetService<IDbContextOptions>().FindExtension<CoreOptionsExtension>().MaxPoolSize
+                ((DbContext)scope.ServiceProvider.GetRequiredService<IPooledContext>())
+                    .GetService<IDbContextOptions>()
+                    .FindExtension<CoreOptionsExtension>().MaxPoolSize
             );
         }
 
@@ -321,7 +330,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using var context = serviceProvider.GetRequiredService<
                 IDbContextFactory<PooledContext>
-            >().CreateDbContext();
+            >()
+                .CreateDbContext();
 
             Assert.Equal(
                 128,
@@ -414,9 +424,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_when_pooled_context_constructor_has_more_than_one_parameter()
         {
-            var serviceProvider =
-                new ServiceCollection().AddDbContextPool<TwoParameterConstructorContext>(_ => { })
-                    .BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddDbContextPool<TwoParameterConstructorContext>(_ => { })
+                .BuildServiceProvider();
 
             using var scope = serviceProvider.CreateScope();
 
@@ -437,9 +447,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_when_pooled_context_constructor_wrong_parameter()
         {
-            var serviceProvider =
-                new ServiceCollection().AddDbContextPool<WrongParameterConstructorContext>(_ => { })
-                    .BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddDbContextPool<WrongParameterConstructorContext>(_ => { })
+                .BuildServiceProvider();
 
             using var scope = serviceProvider.CreateScope();
 
@@ -530,8 +540,9 @@ namespace Microsoft.EntityFrameworkCore
 
             DbContext GetContext(IServiceScope serviceScope) =>
                 useFactory
-                    ? serviceScope.ServiceProvider.GetService<IDbContextFactory<DbContext>>()
-                          .CreateDbContext()
+                    ? serviceScope.ServiceProvider
+                      .GetService<IDbContextFactory<DbContext>>()
+                      .CreateDbContext()
                     : serviceScope.ServiceProvider.GetService<DbContext>();
         }
 
@@ -540,11 +551,12 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public async Task ContextIds_make_sense_when_not_pooling(bool async)
         {
-            var serviceProvider = new ServiceCollection().AddDbContext<DbContext>(
+            var serviceProvider = new ServiceCollection()
+                .AddDbContext<DbContext>(
                     ob =>
                         ob.UseSqlServer(
-                                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                            )
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                        )
                             .EnableServiceProviderCaching(false)
                 )
                 .BuildServiceProvider();
@@ -815,9 +827,10 @@ namespace Microsoft.EntityFrameworkCore
         public void Change_tracker_can_be_cleared_without_resetting_context_config()
         {
             var context = new PooledContext(
-                new DbContextOptionsBuilder().UseSqlServer(
-                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                ).Options
+                new DbContextOptionsBuilder()
+                    .UseSqlServer(
+                        SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                    ).Options
             );
 
             Assert.Null(GetContextEventField(context, nameof(DbContext.SavingChanges)));
@@ -865,7 +878,8 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         private object GetContextEventField(DbContext context, string eventName) =>
-            typeof(DbContext).GetField(
+            typeof(DbContext)
+                .GetField(
                     eventName,
                     BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance
                 )
@@ -1138,23 +1152,20 @@ namespace Microsoft.EntityFrameworkCore
                 : BuildServiceProvider<PooledContext>();
 
             var scope = serviceProvider.CreateScope();
-            var lease = scope.ServiceProvider.GetRequiredService<
-                IScopedDbContextLease<PooledContext>
-            >();
+            var lease = scope.ServiceProvider
+                .GetRequiredService<IScopedDbContextLease<PooledContext>>();
             var context = lease.Context;
 
             await Dispose(scope, async);
             await Dispose(scope, async);
 
             using var scope1 = serviceProvider.CreateScope();
-            var lease1 = scope1.ServiceProvider.GetRequiredService<
-                IScopedDbContextLease<PooledContext>
-            >();
+            var lease1 = scope1.ServiceProvider
+                .GetRequiredService<IScopedDbContextLease<PooledContext>>();
 
             using var scope2 = serviceProvider.CreateScope();
-            var lease2 = scope2.ServiceProvider.GetRequiredService<
-                IScopedDbContextLease<PooledContext>
-            >();
+            var lease2 = scope2.ServiceProvider
+                .GetRequiredService<IScopedDbContextLease<PooledContext>>();
 
             Assert.Same(context, lease1.Context);
             Assert.NotSame(lease1.Context, lease2.Context);

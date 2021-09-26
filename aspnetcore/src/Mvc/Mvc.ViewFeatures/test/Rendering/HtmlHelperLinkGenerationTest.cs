@@ -78,33 +78,35 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         )
         {
             //Arrange
-            var expectedLink = string.Format(
-                CultureInfo.InvariantCulture,
-                @"<a href=""HtmlEncode[[{0}{1}{2}{3}{4}{5}]]""{6}>HtmlEncode[[Details]]</a>",
-                protocol,
-                hostname,
-                controller,
-                action,
-                GetRouteValuesAsString(routeValues),
-                fragment,
-                GetHtmlAttributesAsString(htmlAttributes)
-            );
+            var expectedLink = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    @"<a href=""HtmlEncode[[{0}{1}{2}{3}{4}{5}]]""{6}>HtmlEncode[[Details]]</a>",
+                    protocol,
+                    hostname,
+                    controller,
+                    action,
+                    GetRouteValuesAsString(routeValues),
+                    fragment,
+                    GetHtmlAttributesAsString(htmlAttributes)
+                );
             expectedLink = expectedLink.Replace("HtmlEncode[[]]", string.Empty);
 
             var urlHelper = new Mock<IUrlHelper>();
             urlHelper.Setup(h => h.Action(It.IsAny<UrlActionContext>()))
                 .Returns<UrlActionContext>(
                     (actionContext) =>
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "{0}{1}{2}{3}{4}{5}",
-                            actionContext.Protocol,
-                            actionContext.Host,
-                            actionContext.Controller,
-                            actionContext.Action,
-                            GetRouteValuesAsString(actionContext.Values),
-                            actionContext.Fragment
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}{1}{2}{3}{4}{5}",
+                                actionContext.Protocol,
+                                actionContext.Host,
+                                actionContext.Controller,
+                                actionContext.Action,
+                                GetRouteValuesAsString(actionContext.Values),
+                                actionContext.Fragment
+                            )
                 );
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(urlHelper.Object);
@@ -181,29 +183,31 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         )
         {
             //Arrange
-            var expectedLink = string.Format(
-                CultureInfo.InvariantCulture,
-                @"<a href=""HtmlEncode[[{0}{1}{2}{3}]]""{4}>HtmlEncode[[Details]]</a>",
-                protocol,
-                hostname,
-                GetRouteValuesAsString(routeValues),
-                fragment,
-                GetHtmlAttributesAsString(htmlAttributes)
-            );
+            var expectedLink = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    @"<a href=""HtmlEncode[[{0}{1}{2}{3}]]""{4}>HtmlEncode[[Details]]</a>",
+                    protocol,
+                    hostname,
+                    GetRouteValuesAsString(routeValues),
+                    fragment,
+                    GetHtmlAttributesAsString(htmlAttributes)
+                );
             expectedLink = expectedLink.Replace("HtmlEncode[[]]", string.Empty);
 
             var urlHelper = new Mock<IUrlHelper>();
             urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
                 .Returns<UrlRouteContext>(
                     (context) =>
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "{0}{1}{2}{3}",
-                            context.Protocol,
-                            context.Host,
-                            GetRouteValuesAsString(context.Values),
-                            context.Fragment
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}{1}{2}{3}",
+                                context.Protocol,
+                                context.Host,
+                                GetRouteValuesAsString(context.Values),
+                                context.Fragment
+                            )
                 );
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(urlHelper.Object);
@@ -226,35 +230,39 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         private string GetRouteValuesAsString(object routeValues)
         {
             var dict = PropertyHelper.ObjectToDictionary(routeValues);
-            return string.Join(
-                string.Empty,
-                dict.Select(
-                    kvp =>
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "{0}={1}",
-                            kvp.Key,
-                            kvp.Value.ToString()
-                        )
-                )
-            );
+            return string
+                .Join(
+                    string.Empty,
+                    dict.Select(
+                        kvp =>
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "{0}={1}",
+                                    kvp.Key,
+                                    kvp.Value.ToString()
+                                )
+                    )
+                );
         }
 
         private string GetHtmlAttributesAsString(object routeValues)
         {
             var dict = PropertyHelper.ObjectToDictionary(routeValues);
-            return string.Join(
-                string.Empty,
-                dict.Select(
-                    kvp =>
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            " {0}=\"HtmlEncode[[{1}]]\"",
-                            kvp.Key,
-                            kvp.Value.ToString()
-                        )
-                )
-            );
+            return string
+                .Join(
+                    string.Empty,
+                    dict.Select(
+                        kvp =>
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    " {0}=\"HtmlEncode[[{1}]]\"",
+                                    kvp.Key,
+                                    kvp.Value.ToString()
+                                )
+                    )
+                );
         }
     }
 }

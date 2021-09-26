@@ -155,12 +155,13 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
 
         public override string ToString()
         {
-            return string.Format(
-                "[Variation] :: Runtime={0}, Arch={1}, Publish={2}",
-                RuntimeFlavor,
-                RuntimeArchitecture,
-                PublishApplicationBeforeDeployment
-            );
+            return string
+                .Format(
+                    "[Variation] :: Runtime={0}, Arch={1}, Publish={2}",
+                    RuntimeFlavor,
+                    RuntimeArchitecture,
+                    PublishApplicationBeforeDeployment
+                );
         }
     }
 }

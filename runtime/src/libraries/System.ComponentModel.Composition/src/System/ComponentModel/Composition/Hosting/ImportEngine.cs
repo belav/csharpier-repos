@@ -355,9 +355,8 @@ namespace System.ComponentModel.Composition.Hosting
                     {
                         partManager.State = ImportState.PreExportImportsSatisfying;
 
-                        var prereqImports = part.ImportDefinitions.Where(
-                            import => import.IsPrerequisite
-                        );
+                        var prereqImports = part.ImportDefinitions
+                            .Where(import => import.IsPrerequisite);
                         result = result.MergeResult(
                             TrySatisfyImportSubset(partManager, prereqImports, null)
                         );
@@ -369,9 +368,8 @@ namespace System.ComponentModel.Composition.Hosting
                     {
                         partManager.State = ImportState.PostExportImportsSatisfying;
 
-                        var requiredImports = part.ImportDefinitions.Where(
-                            import => !import.IsPrerequisite
-                        );
+                        var requiredImports = part.ImportDefinitions
+                            .Where(import => !import.IsPrerequisite);
 
                         result = result.MergeResult(
                             TrySatisfyImportSubset(partManager, requiredImports, null)
@@ -537,7 +535,8 @@ namespace System.ComponentModel.Composition.Hosting
                     // affected by these changes
                     affectedParts = affectedParts.ConcatAllowingNull(
                         engineContext!.GetAddedPartManagers()
-                    )!.Except(engineContext.GetRemovedPartManagers()!);
+                    )!
+                        .Except(engineContext.GetRemovedPartManagers()!);
                 }
             }
 

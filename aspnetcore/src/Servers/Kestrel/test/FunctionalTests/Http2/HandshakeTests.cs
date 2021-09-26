@@ -120,15 +120,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2
                         var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
                         Assert.NotNull(tlsFeature);
                         Assert.True(
-                            SslApplicationProtocol.Http2.Protocol.Span.SequenceEqual(
-                                tlsFeature.ApplicationProtocol.Span
-                            ),
+                            SslApplicationProtocol.Http2.Protocol.Span
+                                .SequenceEqual(tlsFeature.ApplicationProtocol.Span),
                             "ALPN: " + tlsFeature.ApplicationProtocol.Length
                         );
 
-                        return context.Response.WriteAsync(
-                            "hello world " + context.Request.Protocol
-                        );
+                        return context.Response
+                            .WriteAsync("hello world " + context.Request.Protocol);
                     },
                     new TestServiceContext(LoggerFactory),
                     kestrelOptions =>
@@ -166,15 +164,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2
                         var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
                         Assert.NotNull(tlsFeature);
                         Assert.True(
-                            SslApplicationProtocol.Http2.Protocol.Span.SequenceEqual(
-                                tlsFeature.ApplicationProtocol.Span
-                            ),
+                            SslApplicationProtocol.Http2.Protocol.Span
+                                .SequenceEqual(tlsFeature.ApplicationProtocol.Span),
                             "ALPN: " + tlsFeature.ApplicationProtocol.Length
                         );
 
-                        return context.Response.WriteAsync(
-                            "hello world " + context.Request.Protocol
-                        );
+                        return context.Response
+                            .WriteAsync("hello world " + context.Request.Protocol);
                     },
                     new TestServiceContext(LoggerFactory),
                     kestrelOptions =>

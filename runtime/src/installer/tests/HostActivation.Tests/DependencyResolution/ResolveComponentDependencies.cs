@@ -23,10 +23,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         public void InvalidMainComponentAssemblyPathFails()
         {
             sharedTestState.RunComponentResolutionTest(
-                    sharedTestState.FrameworkReferenceApp.AppDll + "_invalid",
-                    sharedTestState.FrameworkReferenceApp,
-                    sharedTestState.DotNetWithNetCoreApp.GreatestVersionHostFxrPath
-                )
+                sharedTestState.FrameworkReferenceApp.AppDll + "_invalid",
+                sharedTestState.FrameworkReferenceApp,
+                sharedTestState.DotNetWithNetCoreApp.GreatestVersionHostFxrPath
+            )
                 .Should()
                 .Fail()
                 .And.HaveStdOutContaining(
@@ -314,9 +314,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         public void ComponentWithDependencies()
         {
             sharedTestState.RunComponentResolutionTest(
-                    sharedTestState.ComponentWithDependencies,
-                    command => command.RuntimeId("win10-x86")
-                )
+                sharedTestState.ComponentWithDependencies,
+                command => command.RuntimeId("win10-x86")
+            )
                 .Should()
                 .Pass()
                 .And.HaveStdOutContaining("corehost_resolve_component_dependencies:Success")
@@ -517,10 +517,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             File.Copy(sharedTestState.FrameworkReferenceApp.DepsJson, additionalDepsPath);
 
             sharedTestState.RunComponentResolutionTest(
-                    component,
-                    command =>
-                        command.EnvironmentVariable("DOTNET_ADDITIONAL_DEPS", additionalDepsPath)
-                )
+                component,
+                command => command.EnvironmentVariable("DOTNET_ADDITIONAL_DEPS", additionalDepsPath)
+            )
                 .Should()
                 .Pass()
                 .And.HaveStdOutContaining("corehost_resolve_component_dependencies:Success")
@@ -533,9 +532,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         public void MultiThreadedComponentDependencyResolutionWhichSucceeeds()
         {
             sharedTestState.RunComponentResolutionMultiThreadedTest(
-                    sharedTestState.ComponentWithNoDependencies,
-                    sharedTestState.ComponentWithResources
-                )
+                sharedTestState.ComponentWithNoDependencies,
+                sharedTestState.ComponentWithResources
+            )
                 .Should()
                 .Pass()
                 .And.HaveStdOutContaining(
@@ -566,11 +565,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             );
 
             sharedTestState.RunComponentResolutionMultiThreadedTest(
-                    componentWithNoDependencies.AppDll,
-                    sharedTestState.ComponentWithResources.AppDll + "_invalid",
-                    sharedTestState.FrameworkReferenceApp,
-                    sharedTestState.DotNetWithNetCoreApp.GreatestVersionHostFxrPath
-                )
+                componentWithNoDependencies.AppDll,
+                sharedTestState.ComponentWithResources.AppDll + "_invalid",
+                sharedTestState.FrameworkReferenceApp,
+                sharedTestState.DotNetWithNetCoreApp.GreatestVersionHostFxrPath
+            )
                 .Should()
                 .Fail()
                 .And.HaveStdOutContaining(
@@ -616,8 +615,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 );
                 FileUtils.EnsureDirectoryExists(componentWithDependencies.Location);
                 NetCoreAppBuilder builder = NetCoreAppBuilder.PortableForNETCoreApp(
-                        componentWithDependencies
-                    )
+                    componentWithDependencies
+                )
                     .WithProject(p => p.WithAssemblyGroup(null, g => g.WithMainAssembly()))
                     .WithProject(
                         "ComponentDependency",
@@ -644,9 +643,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                         "1.9.1",
                         p =>
                             p.WithNativeLibraryGroup(
-                                    "debian-x64",
-                                    g => g.WithAsset("runtimes/debian-x64/native/libuv.so")
-                                )
+                                "debian-x64",
+                                g => g.WithAsset("runtimes/debian-x64/native/libuv.so")
+                            )
                                 .WithNativeLibraryGroup(
                                     "fedora-x64",
                                     g => g.WithAsset("runtimes/fedora-x64/native/libuv.so")
@@ -688,8 +687,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             {
                 TestApp componentWithResources = CreateTestApp(location, "ComponentWithResources");
                 NetCoreAppBuilder builder = NetCoreAppBuilder.PortableForNETCoreApp(
-                        componentWithResources
-                    )
+                    componentWithResources
+                )
                     .WithProject(
                         p =>
                             p.WithAssemblyGroup(null, g => g.WithMainAssembly())

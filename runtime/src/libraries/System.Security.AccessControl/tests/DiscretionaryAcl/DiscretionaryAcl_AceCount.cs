@@ -99,7 +99,8 @@ namespace System.Security.AccessControl.Tests
             capacity = 1;
             sid = new SecurityIdentifier(
                 Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-            ).ToString();
+            )
+                .ToString();
             rawAcl = new RawAcl(revision, capacity);
             for (int i = 0; i < 1820; i++)
             {

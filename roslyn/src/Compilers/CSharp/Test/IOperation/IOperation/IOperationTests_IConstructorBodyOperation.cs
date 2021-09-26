@@ -423,12 +423,11 @@ class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public C()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"public C()
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"public C()
     { throw null; }
     => throw null;"
-                    )
-                    .WithLocation(4, 5)
+                ).WithLocation(4, 5)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -548,12 +547,11 @@ class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public C(int i1, int i2, int j1, int j2) : base()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"public C(int i1, int i2, int j1, int j2) : base()
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"public C(int i1, int i2, int j1, int j2) : base()
     { i1 = i2; }
     => j1 = j2;"
-                    )
-                    .WithLocation(4, 5)
+                ).WithLocation(4, 5)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -634,12 +632,11 @@ class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public C()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"public C()
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"public C()
     { return; }
     => throw null;"
-                    )
-                    .WithLocation(4, 5)
+                ).WithLocation(4, 5)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -936,12 +933,11 @@ class Base
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     C(int j1, int j2) : base(out var i1, out var i2)
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"C(int j1, int j2) : base(out var i1, out var i2)
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"C(int j1, int j2) : base(out var i1, out var i2)
     { i1 = j1; }
     => j2 = i2;"
-                    )
-                    .WithLocation(4, 5)
+                ).WithLocation(4, 5)
             );
 
             var tree = compilation.SyntaxTrees.Single();

@@ -40,10 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
                 if (document != null)
                 {
-                    return document.Project.Solution.Options.GetOption(
-                        option,
-                        document.Project.Language
-                    );
+                    return document.Project.Solution.Options
+                        .GetOption(option, document.Project.Language);
                 }
 
                 return option.DefaultValue;
@@ -66,10 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
                 if (document != null)
                 {
-                    return document.Project.Solution.Options.GetOption(
-                        option,
-                        document.Project.Language
-                    );
+                    return document.Project.Solution.Options
+                        .GetOption(option, document.Project.Language);
                 }
 
                 return option.DefaultValue;
@@ -84,8 +80,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         {
             if (buffer.TryGetWorkspace(out var workspace))
             {
-                var workspaceContextService =
-                    workspace.Services.GetRequiredService<IWorkspaceContextService>();
+                var workspaceContextService = workspace.Services
+                    .GetRequiredService<IWorkspaceContextService>();
                 return workspaceContextService.IsInLspEditorContext();
             }
 

@@ -59,9 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         {
             Check.NotNull(command, nameof(command));
 
-            command.Parameters.Add(
-                RelationalTypeMapping.CreateParameter(command, Name, value, IsNullable)
-            );
+            command.Parameters
+                .Add(RelationalTypeMapping.CreateParameter(command, Name, value, IsNullable));
         }
     }
 }

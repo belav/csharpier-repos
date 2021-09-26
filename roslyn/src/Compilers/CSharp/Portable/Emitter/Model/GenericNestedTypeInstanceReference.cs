@@ -22,11 +22,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.ITypeReference Cci.ITypeMemberReference.GetContainingType(EmitContext context)
         {
-            return ((PEModuleBuilder)context.Module).Translate(
-                UnderlyingNamedType.ContainingType,
-                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                diagnostics: context.Diagnostics
-            );
+            return ((PEModuleBuilder)context.Module)
+                .Translate(
+                    UnderlyingNamedType.ContainingType,
+                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
+                    diagnostics: context.Diagnostics
+                );
         }
 
         public override Cci.IGenericTypeInstanceReference AsGenericTypeInstanceReference

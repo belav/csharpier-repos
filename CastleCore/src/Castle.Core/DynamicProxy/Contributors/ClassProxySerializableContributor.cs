@@ -197,13 +197,14 @@ namespace Castle.DynamicProxy.Contributors
 
             var ctor = emitter.CreateConstructor(serializationInfo, streamingContext);
 
-            ctor.CodeBuilder.AddStatement(
-                new ConstructorInvocationStatement(
-                    serializationConstructor,
-                    serializationInfo,
-                    streamingContext
-                )
-            );
+            ctor.CodeBuilder
+                .AddStatement(
+                    new ConstructorInvocationStatement(
+                        serializationConstructor,
+                        serializationInfo,
+                        streamingContext
+                    )
+                );
 
             foreach (var field in serializedFields)
             {
@@ -213,12 +214,17 @@ namespace Castle.DynamicProxy.Contributors
                     new LiteralStringExpression(field.Reference.Name),
                     new TypeTokenExpression(field.Reference.FieldType)
                 );
-                ctor.CodeBuilder.AddStatement(
-                    new AssignStatement(
-                        field,
-                        new ConvertExpression(field.Reference.FieldType, typeof(object), getValue)
-                    )
-                );
+                ctor.CodeBuilder
+                    .AddStatement(
+                        new AssignStatement(
+                            field,
+                            new ConvertExpression(
+                                field.Reference.FieldType,
+                                typeof(object),
+                                getValue
+                            )
+                        )
+                    );
             }
             ctor.CodeBuilder.AddStatement(new ReturnStatement());
         }
@@ -254,12 +260,13 @@ namespace Castle.DynamicProxy.Contributors
 
             if (!getObjectDataMethod.IsVirtual || getObjectDataMethod.IsFinal)
             {
-                var message = string.Format(
-                    "The type {0} implements ISerializable, but GetObjectData is not marked as virtual. "
-                        + "Dynamic Proxy needs types implementing ISerializable to mark GetObjectData as virtual "
-                        + "to ensure correct serialization process.",
-                    baseType.FullName
-                );
+                var message = string
+                    .Format(
+                        "The type {0} implements ISerializable, but GetObjectData is not marked as virtual. "
+                            + "Dynamic Proxy needs types implementing ISerializable to mark GetObjectData as virtual "
+                            + "to ensure correct serialization process.",
+                        baseType.FullName
+                    );
                 throw new ArgumentException(message);
             }
 
@@ -274,11 +281,12 @@ namespace Castle.DynamicProxy.Contributors
 
             if (serializationConstructor == null)
             {
-                var message = string.Format(
-                    "The type {0} implements ISerializable, "
-                        + "but failed to provide a deserialization constructor",
-                    baseType.FullName
-                );
+                var message = string
+                    .Format(
+                        "The type {0} implements ISerializable, "
+                            + "but failed to provide a deserialization constructor",
+                        baseType.FullName
+                    );
                 throw new ArgumentException(message);
             }
 

@@ -334,9 +334,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 try
                 {
-                    _classEntry.Properties[_propertyName].Add(
-                        ((ActiveDirectorySchemaClass)value).Name
-                    );
+                    _classEntry.Properties[_propertyName]
+                        .Add(((ActiveDirectorySchemaClass)value).Name);
                 }
                 catch (COMException e)
                 {

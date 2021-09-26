@@ -51,7 +51,8 @@ namespace Castle.Services.Logging.Log4netIntegration.Tests
             var memoryAppender = (
                 from appender in repository.GetAppenders().OfType<MemoryAppender>()
                 select appender
-            ).Single();
+            )
+                .Single();
 
             return memoryAppender.GetEvents()[0].RenderedMessage;
         }

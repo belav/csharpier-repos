@@ -23,30 +23,27 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public void ThrowFriendlyErrorWhenServicesNotRegistered()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRouting();
+                            app.UseEndpoints(
+                                endpoints =>
                                 {
-                                    app.UseRouting();
-                                    app.UseEndpoints(
-                                        endpoints =>
-                                        {
-                                            endpoints.MapHealthChecks("/healthz");
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddRouting();
+                                    endpoints.MapHealthChecks("/healthz");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddRouting();
+                        }
+                    );
+                }
+            ).Build();
 
             var ex = Assert.Throws<InvalidOperationException>(() => host.Start());
 
@@ -63,31 +60,28 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         {
             // Arrange
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRouting();
+                            app.UseEndpoints(
+                                endpoints =>
                                 {
-                                    app.UseRouting();
-                                    app.UseEndpoints(
-                                        endpoints =>
-                                        {
-                                            endpoints.MapHealthChecks("/healthz");
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddRouting();
-                                    services.AddHealthChecks();
+                                    endpoints.MapHealthChecks("/healthz");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddRouting();
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -108,43 +102,38 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         {
             // Arrange
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRouting();
+                            app.UseEndpoints(
+                                endpoints =>
                                 {
-                                    app.UseRouting();
-                                    app.UseEndpoints(
-                                        endpoints =>
+                                    endpoints.MapHealthChecks(
+                                        "/healthz",
+                                        new HealthCheckOptions
                                         {
-                                            endpoints.MapHealthChecks(
-                                                "/healthz",
-                                                new HealthCheckOptions
-                                                {
-                                                    ResponseWriter = async (context, report) =>
-                                                    {
-                                                        context.Response.ContentType = "text/plain";
-                                                        await context.Response.WriteAsync(
-                                                            "Custom!"
-                                                        );
-                                                    }
-                                                }
-                                            );
+                                            ResponseWriter = async (context, report) =>
+                                            {
+                                                context.Response.ContentType = "text/plain";
+                                                await context.Response.WriteAsync("Custom!");
+                                            }
                                         }
                                     );
                                 }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddRouting();
-                                    services.AddHealthChecks();
-                                }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddRouting();
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

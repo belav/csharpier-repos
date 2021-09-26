@@ -40,10 +40,8 @@ namespace Microsoft.AspNetCore.Authentication
             }
 
             options.Audience = azureADOptions.ClientId;
-            options.Authority = new Uri(
-                new Uri(azureADOptions.Instance),
-                azureADOptions.TenantId
-            ).ToString();
+            options.Authority = new Uri(new Uri(azureADOptions.Instance), azureADOptions.TenantId)
+                .ToString();
         }
 
         public void Configure(JwtBearerOptions options) { }

@@ -22,10 +22,8 @@ namespace System.Reflection.Emit.Tests
         {
             int newId = 0;
 
-            FieldInfo field = typeof(IDClass).GetField(
-                FieldName,
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            FieldInfo field = typeof(IDClass)
+                .GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
             DynamicMethod method = new DynamicMethod(
                 "Method",
                 typeof(int),
@@ -51,10 +49,8 @@ namespace System.Reflection.Emit.Tests
             Module module = typeof(TestClass).GetTypeInfo().Module;
             int newId = 0;
 
-            FieldInfo field = typeof(IDClass).GetField(
-                FieldName,
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            FieldInfo field = typeof(IDClass)
+                .GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
             DynamicMethod method = new DynamicMethod(
                 "Method",
                 typeof(int),
@@ -80,10 +76,8 @@ namespace System.Reflection.Emit.Tests
         {
             int newId = 0;
 
-            FieldInfo field = typeof(IDClass).GetField(
-                FieldName,
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            FieldInfo field = typeof(IDClass)
+                .GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
             DynamicMethod method = new DynamicMethod(
                 "Method",
                 typeof(int),
@@ -107,10 +101,8 @@ namespace System.Reflection.Emit.Tests
             Module module = typeof(TestClass).GetTypeInfo().Module;
             int newId = 0;
 
-            FieldInfo field = typeof(IDClass).GetField(
-                FieldName,
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            FieldInfo field = typeof(IDClass)
+                .GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
 
             DynamicMethod method = new DynamicMethod(
                 "Method",
@@ -151,10 +143,8 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void CreateDelegate_InvalidTarget_ThrowsArgumentException()
         {
-            FieldInfo field = typeof(IDClass).GetField(
-                FieldName,
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            FieldInfo field = typeof(IDClass)
+                .GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
             DynamicMethod method = new DynamicMethod(
                 "Method",
                 typeof(int),
@@ -177,10 +167,8 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(InvalidParamType))]
         public void CreateDelegate_DelegateTypeInvalid_ThrowsArgumentException(Type delegateType)
         {
-            FieldInfo field = typeof(IDClass).GetField(
-                FieldName,
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            FieldInfo field = typeof(IDClass)
+                .GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
             DynamicMethod method = new DynamicMethod(
                 "Method",
                 typeof(int),

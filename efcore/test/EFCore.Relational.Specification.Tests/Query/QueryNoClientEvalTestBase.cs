@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             AssertTranslationFailedWithDetails(
                 () =>
-                    context.Customers.OrderBy(c => c.IsLondon)
+                    context.Customers
+                        .OrderBy(c => c.IsLondon)
                         .ThenBy(c => ClientMethod(c))
                         .ToList(),
                 CoreStrings.QueryUnableToTranslateMember(
@@ -69,11 +70,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             AssertTranslationFailedWithDetails(
                 () =>
-                    context.Customers.Where(
+                    context.Customers
+                        .Where(
                             c1 =>
-                                context.Customers.Any(
-                                    c2 => c1.CustomerID == c2.CustomerID && c2.IsLondon
-                                )
+                                context.Customers
+                                    .Any(c2 => c1.CustomerID == c2.CustomerID && c2.IsLondon)
                         )
                         .ToList(),
                 CoreStrings.QueryUnableToTranslateMember(
@@ -102,9 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             AssertTranslationFailedWithDetails(
                 () =>
-                    context.Customers.FromSqlRaw(
-                            NormalizeDelimitersInRawString("select * from [Customers]")
-                        )
+                    context.Customers
+                        .FromSqlRaw(NormalizeDelimitersInRawString("select * from [Customers]"))
                         .Where(c => c.IsLondon)
                         .ToList(),
                 CoreStrings.QueryUnableToTranslateMember(
@@ -118,9 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Doesnt_throw_when_from_sql_not_composed()
         {
             using var context = CreateContext();
-            var customers = context.Customers.FromSqlRaw(
-                    NormalizeDelimitersInRawString("select * from [Customers]")
-                )
+            var customers = context.Customers
+                .FromSqlRaw(NormalizeDelimitersInRawString("select * from [Customers]"))
                 .ToList();
 
             Assert.Equal(91, customers.Count);
@@ -133,11 +132,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             AssertTranslationFailedWithDetails(
                 () =>
                     (
-                        from c1 in context.Customers.Where(c => c.IsLondon)
+                        from c1 in context.Customers
+                            .Where(c => c.IsLondon)
                             .OrderBy(c => c.CustomerID)
                             .Take(5)
                         select c1
-                    ).ToList(),
+                    )
+                        .ToList(),
                 CoreStrings.QueryUnableToTranslateMember(
                     nameof(Customer.IsLondon),
                     nameof(Customer)
@@ -165,7 +166,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         from e1 in context.Employees
                         join i in new uint[] { 1, 2, 3 } on e1.EmployeeID equals i
                         select e1
-                    ).ToList()
+                    )
+                        .ToList()
             );
         }
 
@@ -179,7 +181,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         from e1 in context.Employees
                         join i in new uint[] { 1, 2, 3 } on e1.EmployeeID equals i into g
                         select e1
-                    ).ToList()
+                    )
+                        .ToList()
             );
         }
 

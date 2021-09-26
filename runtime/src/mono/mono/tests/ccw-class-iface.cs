@@ -232,10 +232,8 @@ public class Tests
             && typeof(TestParent).GUID != new Guid("7dcc27e3-e226-35ca-a942-2286b21f2525")
         )
         {
-            Console.Error.WriteLine(
-                "Unexpected typeof(TestParent).GUID: {0}",
-                typeof(TestParent).GUID
-            );
+            Console.Error
+                .WriteLine("Unexpected typeof(TestParent).GUID: {0}", typeof(TestParent).GUID);
             return 6;
         }
 
@@ -251,10 +249,11 @@ public class Tests
 
         if (typeof(TestParent.INested).GUID != new Guid("9aea5855-969a-3c25-8a78-15186615895c"))
         {
-            Console.Error.WriteLine(
-                "Unexpected typeof(TestParent.INested).GUID: {0}",
-                typeof(TestParent.INested).GUID
-            );
+            Console.Error
+                .WriteLine(
+                    "Unexpected typeof(TestParent.INested).GUID: {0}",
+                    typeof(TestParent.INested).GUID
+                );
             return 8;
         }
 

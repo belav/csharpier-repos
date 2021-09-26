@@ -79,10 +79,8 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
 
         private static ImmutableArray<string> CreateWords(ArrayBuilder<TextSpan> parts, string name)
         {
-            using var resultDisposer = ArrayBuilder<string>.GetInstance(
-                parts.Count,
-                out var result
-            );
+            using var resultDisposer = ArrayBuilder<string>
+                .GetInstance(parts.Count, out var result);
             foreach (var part in parts)
             {
                 result.Add(name.Substring(part.Start, part.Length));

@@ -215,10 +215,8 @@ internal static partial class Interop
                 commonPathPrefixLength = 0;
             }
 
-            return string.Concat(
-                hierarchyMount,
-                cgroupPathRelativeToMount.AsSpan(commonPathPrefixLength)
-            );
+            return string
+                .Concat(hierarchyMount, cgroupPathRelativeToMount.AsSpan(commonPathPrefixLength));
         }
 
         /// <summary>Find the cgroup mount information for the specified subsystem.</summary>

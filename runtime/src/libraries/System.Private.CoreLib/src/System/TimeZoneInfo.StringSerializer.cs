@@ -435,13 +435,14 @@ namespace System
             {
                 string token = GetNextStringValue();
                 if (
-                    !int.TryParse(
-                        token,
-                        NumberStyles.AllowLeadingSign /* "[sign]digits" */
-                        ,
-                        CultureInfo.InvariantCulture,
-                        out int value
-                    )
+                    !int
+                        .TryParse(
+                            token,
+                            NumberStyles.AllowLeadingSign /* "[sign]digits" */
+                            ,
+                            CultureInfo.InvariantCulture,
+                            out int value
+                        )
                 )
                 {
                     throw new SerializationException(SR.Serialization_InvalidData);

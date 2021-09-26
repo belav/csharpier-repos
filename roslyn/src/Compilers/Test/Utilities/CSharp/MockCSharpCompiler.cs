@@ -72,13 +72,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             out ImmutableArray<ISourceGenerator> generators
         )
         {
-            base.ResolveAnalyzersFromArguments(
-                diagnostics,
-                messageProvider,
-                skipAnalyzers,
-                out analyzers,
-                out generators
-            );
+            base
+                .ResolveAnalyzersFromArguments(
+                    diagnostics,
+                    messageProvider,
+                    skipAnalyzers,
+                    out analyzers,
+                    out generators
+                );
             if (!_analyzers.IsDefaultOrEmpty)
             {
                 analyzers = analyzers.InsertRange(0, _analyzers);
@@ -110,13 +111,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             AnalyzerConfigOptionsResult globalDiagnosticOptionsOpt
         )
         {
-            Compilation = base.CreateCompilation(
-                consoleOutput,
-                touchedFilesLogger,
-                errorLogger,
-                syntaxDiagOptionsOpt,
-                globalDiagnosticOptionsOpt
-            );
+            Compilation = base
+                .CreateCompilation(
+                    consoleOutput,
+                    touchedFilesLogger,
+                    errorLogger,
+                    syntaxDiagOptionsOpt,
+                    globalDiagnosticOptionsOpt
+                );
             return Compilation;
         }
 
@@ -125,10 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             AnalyzerConfigOptionsProvider analyzerConfigOptionsProvider
         )
         {
-            AnalyzerOptions = base.CreateAnalyzerOptions(
-                additionalTextFiles,
-                analyzerConfigOptionsProvider
-            );
+            AnalyzerOptions = base
+                .CreateAnalyzerOptions(additionalTextFiles, analyzerConfigOptionsProvider);
             return AnalyzerOptions;
         }
     }

@@ -163,8 +163,8 @@ namespace Microsoft.CodeAnalysis
             var referencedProjectIds = projectReferences.IsEmpty()
                 ? ImmutableHashSet<ProjectId>.Empty
                 : projectReferences.Where(r => _projectIds.Contains(r.ProjectId))
-                      .Select(r => r.ProjectId)
-                      .ToImmutableHashSet();
+                  .Select(r => r.ProjectId)
+                  .ToImmutableHashSet();
 
             var referencesMap = referencedProjectIds.IsEmpty
                 ? _referencesMap.Remove(projectId)
@@ -244,12 +244,12 @@ namespace Microsoft.CodeAnalysis
             }
 
             return reverseReferencesMap.Select(
-                    kvp =>
-                        new KeyValuePair<ProjectId, ImmutableHashSet<ProjectId>>(
-                            kvp.Key,
-                            kvp.Value.ToImmutableHashSet()
-                        )
-                )
+                kvp =>
+                    new KeyValuePair<ProjectId, ImmutableHashSet<ProjectId>>(
+                        kvp.Key,
+                        kvp.Value.ToImmutableHashSet()
+                    )
+            )
                 .ToImmutableDictionary();
         }
 

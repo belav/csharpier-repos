@@ -182,11 +182,12 @@ namespace Microsoft.AspNetCore.DeveloperCertificates.Tools
                                         noPassword.HasValue()
                                         && !(
                                             format.HasValue()
-                                            && string.Equals(
-                                                format.Value(),
-                                                "PEM",
-                                                StringComparison.OrdinalIgnoreCase
-                                            )
+                                            && string
+                                                .Equals(
+                                                    format.Value(),
+                                                    "PEM",
+                                                    StringComparison.OrdinalIgnoreCase
+                                                )
                                         )
                                     )
                                     {

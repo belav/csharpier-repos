@@ -477,10 +477,8 @@ namespace AutoMapper.Configuration
             {
                 return null;
             }
-            return PathConfigurationExpression<TDestination, TSource, object>.Create(
-                SourceExpression,
-                GetDestinationExpression()
-            );
+            return PathConfigurationExpression<TDestination, TSource, object>
+                .Create(SourceExpression, GetDestinationExpression());
         }
 
         public void DoNotUseDestinationValue() => SetUseDestinationValue(false);

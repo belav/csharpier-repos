@@ -30,15 +30,14 @@ namespace System.Diagnostics
             {
                 if (
                     Interop.procfs.TryReadStatFile(pid, out Interop.procfs.ParsedStat parsedStat)
-                    && string.Equals(
-                        processName,
-                        Process.GetUntruncatedProcessName(ref parsedStat),
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    && Interop.procfs.TryReadStatusFile(
-                        pid,
-                        out Interop.procfs.ParsedStatus parsedStatus
-                    )
+                    && string
+                        .Equals(
+                            processName,
+                            Process.GetUntruncatedProcessName(ref parsedStat),
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    && Interop.procfs
+                        .TryReadStatusFile(pid, out Interop.procfs.ParsedStatus parsedStatus)
                 )
                 {
                     ProcessInfo processInfo = ProcessManager.CreateProcessInfo(
@@ -98,10 +97,11 @@ namespace System.Diagnostics
                     if (btimeEnd > btimeStart)
                     {
                         if (
-                            long.TryParse(
-                                text.AsSpan(btimeStart, btimeEnd - btimeStart),
-                                out long bootTimeSeconds
-                            )
+                            long
+                                .TryParse(
+                                    text.AsSpan(btimeStart, btimeEnd - btimeStart),
+                                    out long bootTimeSeconds
+                                )
                         )
                         {
                             return DateTime.UnixEpoch + TimeSpan.FromSeconds(bootTimeSeconds);

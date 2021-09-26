@@ -286,7 +286,8 @@ namespace System.Formats.Asn1.Tests.Reader
             // Since it's our first sub-identifier it's really encoding "2.(2^1022 - 80)".
             inputData[3] = 0x81;
             // Leave the last byte as 0.
-            new Span<byte>(inputData, 4, 145).Fill(0x80);
+            new Span<byte>(inputData, 4, 145)
+                .Fill(0x80);
 
             const string ExpectedOid =
                 "2."

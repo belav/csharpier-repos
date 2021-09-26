@@ -98,33 +98,17 @@ namespace DebuggerTests
             var obj = new EvaluateTestsClassWithProperties(0);
             var obj2 = new EvaluateTestsClassWithProperties(0);
             obj.InstanceMethod(400, 123, "just a test", obj2);
-            new EvaluateTestsClassWithProperties(0).GenericInstanceMethod<int>(
-                400,
-                123,
-                "just a test",
-                obj2
-            );
-            new EvaluateTestsClassWithProperties(0).EvaluateShadow(
-                new DateTime(2020, 3, 4, 5, 6, 7),
-                obj.NewInstance
-            );
+            new EvaluateTestsClassWithProperties(0)
+                .GenericInstanceMethod<int>(400, 123, "just a test", obj2);
+            new EvaluateTestsClassWithProperties(0)
+                .EvaluateShadow(new DateTime(2020, 3, 4, 5, 6, 7), obj.NewInstance);
 
-            await new EvaluateTestsClassWithProperties(0).InstanceMethodAsync(
-                400,
-                123,
-                "just a test",
-                obj2
-            );
-            await new EvaluateTestsClassWithProperties(0).GenericInstanceMethodAsync<int>(
-                400,
-                123,
-                "just a test",
-                obj2
-            );
-            await new EvaluateTestsClassWithProperties(0).EvaluateShadowAsync(
-                new DateTime(2020, 3, 4, 5, 6, 7),
-                obj.NewInstance
-            );
+            await new EvaluateTestsClassWithProperties(0)
+                .InstanceMethodAsync(400, 123, "just a test", obj2);
+            await new EvaluateTestsClassWithProperties(0)
+                .GenericInstanceMethodAsync<int>(400, 123, "just a test", obj2);
+            await new EvaluateTestsClassWithProperties(0)
+                .EvaluateShadowAsync(new DateTime(2020, 3, 4, 5, 6, 7), obj.NewInstance);
         }
 
         public void EvaluateShadow(DateTime dateTime, EvaluateTestsClassWithProperties me)
@@ -268,33 +252,17 @@ namespace DebuggerTests
             var obj = new EvaluateTestsStructWithProperties(0);
             var obj2 = new EvaluateTestsStructWithProperties(0);
             obj.InstanceMethod(400, 123, "just a test", obj2);
-            new EvaluateTestsStructWithProperties(0).GenericInstanceMethod<int>(
-                400,
-                123,
-                "just a test",
-                obj2
-            );
-            new EvaluateTestsStructWithProperties(0).EvaluateShadow(
-                new DateTime(2020, 3, 4, 5, 6, 7),
-                obj.NewInstance
-            );
+            new EvaluateTestsStructWithProperties(0)
+                .GenericInstanceMethod<int>(400, 123, "just a test", obj2);
+            new EvaluateTestsStructWithProperties(0)
+                .EvaluateShadow(new DateTime(2020, 3, 4, 5, 6, 7), obj.NewInstance);
 
-            await new EvaluateTestsStructWithProperties(0).InstanceMethodAsync(
-                400,
-                123,
-                "just a test",
-                obj2
-            );
-            await new EvaluateTestsStructWithProperties(0).GenericInstanceMethodAsync<int>(
-                400,
-                123,
-                "just a test",
-                obj2
-            );
-            await new EvaluateTestsStructWithProperties(0).EvaluateShadowAsync(
-                new DateTime(2020, 3, 4, 5, 6, 7),
-                obj.NewInstance
-            );
+            await new EvaluateTestsStructWithProperties(0)
+                .InstanceMethodAsync(400, 123, "just a test", obj2);
+            await new EvaluateTestsStructWithProperties(0)
+                .GenericInstanceMethodAsync<int>(400, 123, "just a test", obj2);
+            await new EvaluateTestsStructWithProperties(0)
+                .EvaluateShadowAsync(new DateTime(2020, 3, 4, 5, 6, 7), obj.NewInstance);
         }
 
         public void EvaluateShadow(DateTime dateTime, EvaluateTestsStructWithProperties me)

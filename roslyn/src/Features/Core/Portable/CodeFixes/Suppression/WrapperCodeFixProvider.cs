@@ -30,20 +30,19 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var diagnostics = context.Diagnostics.Where(
-                _suppressionFixProvider.IsFixableDiagnostic
-            );
+            var diagnostics = context.Diagnostics
+                .Where(_suppressionFixProvider.IsFixableDiagnostic);
 
             var documentDiagnostics = diagnostics.Where(d => d.Location.IsInSource)
                 .ToImmutableArray();
             if (!documentDiagnostics.IsEmpty)
             {
                 var suppressionFixes = await _suppressionFixProvider.GetFixesAsync(
-                        context.Document,
-                        context.Span,
-                        documentDiagnostics,
-                        context.CancellationToken
-                    )
+                    context.Document,
+                    context.Span,
+                    documentDiagnostics,
+                    context.CancellationToken
+                )
                     .ConfigureAwait(false);
                 RegisterSuppressionFixes(context, suppressionFixes);
             }
@@ -53,10 +52,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             if (!projectDiagnostics.IsEmpty)
             {
                 var suppressionFixes = await _suppressionFixProvider.GetFixesAsync(
-                        context.Project,
-                        projectDiagnostics,
-                        context.CancellationToken
-                    )
+                    context.Project,
+                    projectDiagnostics,
+                    context.CancellationToken
+                )
                     .ConfigureAwait(false);
                 RegisterSuppressionFixes(context, suppressionFixes);
             }

@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
     public class AppendSelectPropertyExpressionMutator : ExpressionMutator
     {
         private bool HasValidPropertyToSelect(Expression expression) =>
-            expression.Type.GetGenericArguments()[0].GetProperties()
+            expression.Type.GetGenericArguments()[0]
+                .GetProperties()
                 .Any(p => !p.GetMethod.IsStatic);
 
         public AppendSelectPropertyExpressionMutator(DbContext context) : base(context) { }
@@ -29,10 +30,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
 
             var i = random.Next(properties.Count);
 
-            var select = QueryableMethods.Select.MakeGenericMethod(
-                typeArgument,
-                properties[i].PropertyType
-            );
+            var select = QueryableMethods.Select
+                .MakeGenericMethod(typeArgument, properties[i].PropertyType);
             var prm = Expression.Parameter(typeArgument, "prm");
 
             var lambdaBody = (Expression)Expression.Property(prm, properties[i]);
@@ -45,13 +44,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                 )
             )
             {
-                var nullablePropertyType = typeof(Nullable<>).MakeGenericType(
-                    properties[i].PropertyType
-                );
-                select = QueryableMethods.Select.MakeGenericMethod(
-                    typeArgument,
-                    nullablePropertyType
-                );
+                var nullablePropertyType = typeof(Nullable<>)
+                    .MakeGenericType(properties[i].PropertyType);
+                select = QueryableMethods.Select
+                    .MakeGenericMethod(typeArgument, nullablePropertyType);
                 lambdaBody = Expression.Convert(lambdaBody, nullablePropertyType);
             }
 

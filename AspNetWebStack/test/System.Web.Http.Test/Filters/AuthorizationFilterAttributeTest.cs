@@ -62,13 +62,12 @@ namespace System.Web.Http.Filters
             Mock<AuthorizationFilterAttribute> filterMock =
                 new Mock<AuthorizationFilterAttribute>() { CallBase = true };
             bool onActionExecutingInvoked = false;
-            filterMock.Setup(f => f.OnAuthorization(It.IsAny<HttpActionContext>()))
-                .Callback(
-                    () =>
-                    {
-                        onActionExecutingInvoked = true;
-                    }
-                );
+            filterMock.Setup(f => f.OnAuthorization(It.IsAny<HttpActionContext>())).Callback(
+                () =>
+                {
+                    onActionExecutingInvoked = true;
+                }
+            );
             bool? flagWhenContinuationInvoked = null;
             Func<Task<HttpResponseMessage>> continuation = () =>
             {

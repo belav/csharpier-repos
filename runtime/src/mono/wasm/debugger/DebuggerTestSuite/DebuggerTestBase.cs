@@ -433,10 +433,10 @@ namespace DebuggerTests
 
         internal void CheckArray(JToken locals, string name, string class_name, int length) =>
             CheckValue(
-                    GetAndAssertObjectWithName(locals, name)["value"],
-                    TArray(class_name, length),
-                    name
-                )
+                GetAndAssertObjectWithName(locals, name)["value"],
+                TArray(class_name, length),
+                name
+            )
                 .Wait();
 
         internal JToken GetAndAssertObjectWithName(JToken obj, string name, string label = "")

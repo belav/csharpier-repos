@@ -299,9 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 Debug.Assert(methodOwner?.MethodKind != MethodKind.LambdaMethod);
                 bool allowShadowingNames =
-                    binder.Compilation.IsFeatureEnabled(
-                        MessageID.IDS_FeatureNameShadowingInNestedFunctions
-                    )
+                    binder.Compilation
+                        .IsFeatureEnabled(MessageID.IDS_FeatureNameShadowingInNestedFunctions)
                     && methodOwner?.MethodKind == MethodKind.LocalFunction;
 
                 binder.ValidateParameterNameConflicts(
@@ -695,9 +694,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 // error CS1737: Optional parameters must appear after all required parameters
-                Location loc = (
-                    (ParameterSyntax)(BaseParameterSyntax)parameterSyntax
-                ).Identifier.GetNextToken(includeZeroWidth: true).GetLocation(); //could be missing
+                Location loc = ((ParameterSyntax)(BaseParameterSyntax)parameterSyntax).Identifier
+                    .GetNextToken(includeZeroWidth: true)
+                    .GetLocation(); //could be missing
                 diagnostics.Add(ErrorCode.ERR_DefaultValueBeforeRequiredValue, loc);
             }
             else if (
@@ -747,11 +746,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = binder.GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            Conversion conversion = binder.Conversions.ClassifyImplicitConversionFromExpression(
-                defaultExpression,
-                parameterType,
-                ref useSiteInfo
-            );
+            Conversion conversion = binder.Conversions
+                .ClassifyImplicitConversionFromExpression(
+                    defaultExpression,
+                    parameterType,
+                    ref useSiteInfo
+                );
             diagnostics.Add(defaultExpression.Syntax, useSiteInfo);
 
             var refKind = GetModifiers(

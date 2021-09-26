@@ -18,10 +18,8 @@ namespace System.Net.Http.Tests
 
             Type type = typeof(HttpContent);
             TypeInfo typeInfo = type.GetTypeInfo();
-            FieldInfo bufferedContentField = typeof(HttpContent).GetField(
-                "_bufferedContent",
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            FieldInfo bufferedContentField = typeof(HttpContent)
+                .GetField("_bufferedContent", BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.NotNull(bufferedContentField);
 
             MemoryStream bufferedContentStream =

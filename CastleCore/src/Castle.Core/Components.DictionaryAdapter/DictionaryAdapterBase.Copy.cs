@@ -35,19 +35,18 @@ namespace Castle.Components.DictionaryAdapter
             if (other.Meta.Type.IsAssignableFrom(Meta.Type) == false)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        "Unable to copy to {0}.  The type must be assignable from {1}.",
-                        other.Meta.Type.FullName,
-                        Meta.Type.FullName
-                    )
+                    string
+                        .Format(
+                            "Unable to copy to {0}.  The type must be assignable from {1}.",
+                            other.Meta.Type.FullName,
+                            Meta.Type.FullName
+                        )
                 );
             }
 
             if (
-                This.CopyStrategies.Aggregate(
-                    false,
-                    (copied, s) => copied | s.Copy(this, other, ref selector)
-                )
+                This.CopyStrategies
+                    .Aggregate(false, (copied, s) => copied | s.Copy(this, other, ref selector))
             )
             {
                 return;

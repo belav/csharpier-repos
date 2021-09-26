@@ -157,21 +157,21 @@ namespace Microsoft.CodeAnalysis.Completion
             CancellationToken cancellationToken
         )
         {
-            var symbolDisplayService = workspace.Services.GetLanguageServices(
-                    semanticModel.Language
-                )
+            var symbolDisplayService = workspace.Services
+                .GetLanguageServices(semanticModel.Language)
                 .GetService<ISymbolDisplayService>();
-            var formatter = workspace.Services.GetLanguageServices(semanticModel.Language)
+            var formatter = workspace.Services
+                .GetLanguageServices(semanticModel.Language)
                 .GetService<IDocumentationCommentFormattingService>();
 
             // TODO(cyrusn): Figure out a way to cancel this.
             var sections = await symbolDisplayService.ToDescriptionGroupsAsync(
-                    workspace,
-                    semanticModel,
-                    position,
-                    ImmutableArray.Create(symbol),
-                    cancellationToken
-                )
+                workspace,
+                semanticModel,
+                position,
+                ImmutableArray.Create(symbol),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (!sections.ContainsKey(SymbolDescriptionGroups.MainDescription))

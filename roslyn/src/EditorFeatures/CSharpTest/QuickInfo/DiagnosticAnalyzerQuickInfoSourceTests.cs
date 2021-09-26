@@ -264,14 +264,14 @@ namespace T
         )
         {
             var info = await GetQuickinfo(workspace, document, position);
-            var description = info?.Sections.FirstOrDefault(
-                s => s.Kind == QuickInfoSectionKinds.Description
-            );
+            var description = info?.Sections
+                .FirstOrDefault(s => s.Kind == QuickInfoSectionKinds.Description);
             Assert.NotNull(description);
             Assert.Equal(expectedDescription, description.Text);
             Assert.Collection(
                 relatedSpans,
-                info.RelatedSpans.Select(
+                info.RelatedSpans
+                    .Select(
                         actualSpan =>
                             new Action<TextSpan>(
                                 expectedSpan => Assert.Equal(expectedSpan, actualSpan)
@@ -287,8 +287,8 @@ namespace T
             int position
         )
         {
-            var diagnosticAnalyzerService =
-                workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>();
+            var diagnosticAnalyzerService = workspace.ExportProvider
+                .GetExportedValue<IDiagnosticAnalyzerService>();
             var provider = new CSharpDiagnosticAnalyzerQuickInfoProvider(diagnosticAnalyzerService);
             var info = await provider.GetQuickInfoAsync(
                 new QuickInfoContext(document, position, CancellationToken.None)

@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
 
             using (var scoped = provider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                scoped.ServiceProvider.GetRequiredService<IdentityDbContext>()
+                scoped.ServiceProvider
+                    .GetRequiredService<IdentityDbContext>()
                     .Database.EnsureCreated();
             }
         }
@@ -47,12 +48,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         [ConditionalFact]
         public async Task EnsureStartupUsageWorks()
         {
-            var userStore = _builder.ApplicationServices.GetRequiredService<
-                IUserStore<IdentityUser>
-            >();
-            var userManager = _builder.ApplicationServices.GetRequiredService<
-                UserManager<IdentityUser>
-            >();
+            var userStore = _builder.ApplicationServices
+                .GetRequiredService<IUserStore<IdentityUser>>();
+            var userManager = _builder.ApplicationServices
+                .GetRequiredService<UserManager<IdentityUser>>();
 
             Assert.NotNull(userStore);
             Assert.NotNull(userManager);

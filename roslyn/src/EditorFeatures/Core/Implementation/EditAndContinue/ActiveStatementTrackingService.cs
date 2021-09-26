@@ -209,10 +209,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
 
                     var baseActiveStatementSpans =
                         await _spanProvider.GetBaseActiveStatementSpansAsync(
-                                solution,
-                                openDocumentIds,
-                                cancellationToken
-                            )
+                            solution,
+                            openDocumentIds,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     if (baseActiveStatementSpans.IsDefault)
                     {
@@ -227,10 +227,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                     {
                         documents.Add(
                             await solution.GetDocumentAsync(
-                                    id,
-                                    includeSourceGenerated: true,
-                                    cancellationToken
-                                )
+                                id,
+                                includeSourceGenerated: true,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         );
                     }
@@ -314,9 +314,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                     {
                         if (lazyBuilder == null)
                         {
-                            lazyBuilder = ArrayBuilder<ActiveStatementTrackingSpan>.GetInstance(
-                                oldSpans.Length
-                            );
+                            lazyBuilder = ArrayBuilder<ActiveStatementTrackingSpan>
+                                .GetInstance(oldSpans.Length);
                             lazyBuilder.AddRange(oldSpans);
                         }
 
@@ -396,10 +395,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                     );
                     var activeStatementSpans =
                         await _spanProvider.GetAdjustedActiveStatementSpansAsync(
-                                document,
-                                activeStatementSpanProvider,
-                                cancellationToken
-                            )
+                            document,
+                            activeStatementSpanProvider,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                     lock (_trackingSpans)

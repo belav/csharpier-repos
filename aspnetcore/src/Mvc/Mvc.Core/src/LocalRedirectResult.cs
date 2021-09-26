@@ -100,9 +100,8 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var executor = context.HttpContext.RequestServices.GetRequiredService<
-                IActionResultExecutor<LocalRedirectResult>
-            >();
+            var executor = context.HttpContext.RequestServices
+                .GetRequiredService<IActionResultExecutor<LocalRedirectResult>>();
             return executor.ExecuteAsync(context, this);
         }
     }

@@ -203,9 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && AdaptedMethodSymbol.ContainingModule == moduleBeingBuilt.SourceModule
             )
             {
-                return StaticCast<Cci.IParameterTypeInformation>.From(
-                    this.EnumerateDefinitionParameters()
-                );
+                return StaticCast<Cci.IParameterTypeInformation>
+                    .From(this.EnumerateDefinitionParameters());
             }
             else
             {
@@ -218,10 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(AdaptedMethodSymbol.Parameters.All(p => p.IsDefinition));
 
 #if DEBUG
-            return AdaptedMethodSymbol.Parameters.SelectAsArray<
-                ParameterSymbol,
-                Cci.IParameterDefinition
-            >(p => p.GetCciAdapter());
+            return AdaptedMethodSymbol.Parameters
+                .SelectAsArray<ParameterSymbol, Cci.IParameterDefinition>(p => p.GetCciAdapter());
 #else
             return StaticCast<Cci.IParameterDefinition>.From(AdaptedMethodSymbol.Parameters);
 #endif
@@ -231,9 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return ImmutableArray<Cci.ICustomModifier>.CastUp(
-                    AdaptedMethodSymbol.ReturnTypeWithAnnotations.CustomModifiers
-                );
+                return ImmutableArray<Cci.ICustomModifier>
+                    .CastUp(AdaptedMethodSymbol.ReturnTypeWithAnnotations.CustomModifiers);
             }
         }
 
@@ -241,9 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return ImmutableArray<Cci.ICustomModifier>.CastUp(
-                    AdaptedMethodSymbol.RefCustomModifiers
-                );
+                return ImmutableArray<Cci.ICustomModifier>
+                    .CastUp(AdaptedMethodSymbol.RefCustomModifiers);
             }
         }
 
@@ -254,11 +249,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         Cci.ITypeReference Cci.ISignature.GetType(EmitContext context)
         {
-            return ((PEModuleBuilder)context.Module).Translate(
-                AdaptedMethodSymbol.ReturnType,
-                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                diagnostics: context.Diagnostics
-            );
+            return ((PEModuleBuilder)context.Module)
+                .Translate(
+                    AdaptedMethodSymbol.ReturnType,
+                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
+                    diagnostics: context.Diagnostics
+                );
         }
 
         IEnumerable<Cci.ITypeReference> Cci.IGenericMethodInstanceReference.GetGenericArguments(
@@ -291,12 +287,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (!PEModuleBuilder.IsGenericType(container))
             {
                 // NoPia method might come through here.
-                return ((PEModuleBuilder)context.Module).Translate(
-                    (MethodSymbol)AdaptedMethodSymbol.OriginalDefinition,
-                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                    diagnostics: context.Diagnostics,
-                    needDeclaration: true
-                );
+                return ((PEModuleBuilder)context.Module)
+                    .Translate(
+                        (MethodSymbol)AdaptedMethodSymbol.OriginalDefinition,
+                        syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
+                        diagnostics: context.Diagnostics,
+                        needDeclaration: true
+                    );
             }
 
             MethodSymbol methodSymbol = AdaptedMethodSymbol.ConstructedFrom;

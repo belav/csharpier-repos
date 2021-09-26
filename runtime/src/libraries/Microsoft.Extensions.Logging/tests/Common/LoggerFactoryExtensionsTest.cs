@@ -34,16 +34,16 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var factory = new Mock<ILoggerFactory>();
             factory.Setup(
-                    f =>
-                        f.CreateLogger(
-                            It.Is<string>(
-                                x =>
-                                    x.Equals(
-                                        "Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType>"
-                                    )
-                            )
+                f =>
+                    f.CreateLogger(
+                        It.Is<string>(
+                            x =>
+                                x.Equals(
+                                    "Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType>"
+                                )
                         )
-                )
+                    )
+            )
                 .Returns(new Mock<ILogger>().Object);
 
             var logger = factory.Object.CreateLogger<GenericClass<TestType>>();
@@ -59,16 +59,16 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var factory = new Mock<ILoggerFactory>();
             factory.Setup(
-                    f =>
-                        f.CreateLogger(
-                            It.Is<string>(
-                                x =>
-                                    x.Equals(
-                                        "Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType, Microsoft.Extensions.Logging.Test.SecondTestType>"
-                                    )
-                            )
+                f =>
+                    f.CreateLogger(
+                        It.Is<string>(
+                            x =>
+                                x.Equals(
+                                    "Microsoft.Extensions.Logging.Test.GenericClass<Microsoft.Extensions.Logging.Test.TestType, Microsoft.Extensions.Logging.Test.SecondTestType>"
+                                )
                         )
-                )
+                    )
+            )
                 .Returns(new Mock<ILogger>().Object);
 
             var logger = factory.Object.CreateLogger<GenericClass<TestType, SecondTestType>>();
@@ -157,13 +157,13 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var factory = new Mock<ILoggerFactory>();
             factory.Setup(
-                    f =>
-                        f.CreateLogger(
-                            It.Is<string>(
-                                x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass")
-                            )
+                f =>
+                    f.CreateLogger(
+                        It.Is<string>(
+                            x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass")
                         )
-                )
+                    )
+            )
                 .Returns(new Mock<ILogger>().Object);
 
             var logger = factory.Object.CreateLogger(typeof(GenericClass<TestType>));
@@ -179,18 +179,17 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var factory = new Mock<ILoggerFactory>();
             factory.Setup(
-                    f =>
-                        f.CreateLogger(
-                            It.Is<string>(
-                                x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass")
-                            )
+                f =>
+                    f.CreateLogger(
+                        It.Is<string>(
+                            x => x.Equals("Microsoft.Extensions.Logging.Test.GenericClass")
                         )
-                )
+                    )
+            )
                 .Returns(new Mock<ILogger>().Object);
 
-            var logger = factory.Object.CreateLogger(
-                typeof(GenericClass<TestType, SecondTestType>)
-            );
+            var logger = factory.Object
+                .CreateLogger(typeof(GenericClass<TestType, SecondTestType>));
 
             // Assert
             Assert.NotNull(logger);

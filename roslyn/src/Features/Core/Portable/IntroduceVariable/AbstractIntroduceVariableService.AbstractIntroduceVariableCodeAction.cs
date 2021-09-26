@@ -61,9 +61,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 var changedDocument = await GetChangedDocumentCoreAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return await Simplifier.ReduceAsync(
-                        changedDocument,
-                        cancellationToken: cancellationToken
-                    )
+                    changedDocument,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -74,42 +74,42 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 if (_isQueryLocal)
                 {
                     return await _service.IntroduceQueryLocalAsync(
-                            _semanticDocument,
-                            _expression,
-                            _allOccurrences,
-                            cancellationToken
-                        )
+                        _semanticDocument,
+                        _expression,
+                        _allOccurrences,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else if (_isLocal)
                 {
                     return await _service.IntroduceLocalAsync(
-                            _semanticDocument,
-                            _expression,
-                            _allOccurrences,
-                            _isConstant,
-                            cancellationToken
-                        )
+                        _semanticDocument,
+                        _expression,
+                        _allOccurrences,
+                        _isConstant,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else
                 {
                     return await _service.IntroduceFieldAsync(
-                            _semanticDocument,
-                            _expression,
-                            _allOccurrences,
-                            _isConstant,
-                            cancellationToken
-                        )
+                        _semanticDocument,
+                        _expression,
+                        _allOccurrences,
+                        _isConstant,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
 
             private string CreateDisplayText(TExpressionSyntax expression)
             {
-                var singleLineExpression =
-                    _semanticDocument.Document.GetLanguageService<ISyntaxFactsService>()
-                        .ConvertToSingleLine(expression);
+                var singleLineExpression = _semanticDocument.Document
+                    .GetLanguageService<ISyntaxFactsService>()
+                    .ConvertToSingleLine(expression);
                 var nodeString = singleLineExpression.ToString();
 
                 return CreateDisplayText(nodeString);

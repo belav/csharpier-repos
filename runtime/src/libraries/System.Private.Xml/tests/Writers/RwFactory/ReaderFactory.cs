@@ -407,13 +407,11 @@ namespace System.Xml.Tests
             //Line number
             _settings.LineNumberOffset = int.Parse(ReadFilterCriteria("LineNumberOffset", true));
             //Line position
-            _settings.LinePositionOffset = int.Parse(
-                ReadFilterCriteria("LinePositionOffset", true)
-            );
+            _settings.LinePositionOffset = int
+                .Parse(ReadFilterCriteria("LinePositionOffset", true));
 
-            _settings.IgnoreProcessingInstructions = bool.Parse(
-                ReadFilterCriteria("IgnorePI", true)
-            );
+            _settings.IgnoreProcessingInstructions = bool
+                .Parse(ReadFilterCriteria("IgnorePI", true));
             _settings.IgnoreComments = bool.Parse(ReadFilterCriteria("IgnoreComments", true));
             _settings.IgnoreWhitespace = bool.Parse(ReadFilterCriteria("IgnoreWhiteSpace", true));
         } //End of SetupSettings

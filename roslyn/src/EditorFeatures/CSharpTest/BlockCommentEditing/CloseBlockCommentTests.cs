@@ -321,13 +321,15 @@ a    * /$$
                 workspace =>
                 {
                     workspace.TryApplyChanges(
-                        workspace.CurrentSolution.WithOptions(
-                            workspace.CurrentSolution.Options.WithChangedOption(
-                                FeatureOnOffOptions.AutoInsertBlockCommentStartString,
-                                LanguageNames.CSharp,
-                                false
+                        workspace.CurrentSolution
+                            .WithOptions(
+                                workspace.CurrentSolution.Options
+                                    .WithChangedOption(
+                                        FeatureOnOffOptions.AutoInsertBlockCommentStartString,
+                                        LanguageNames.CSharp,
+                                        false
+                                    )
                             )
-                        )
                     );
                 }
             );

@@ -161,9 +161,8 @@ namespace System.DirectoryServices.AccountManagement
                         if (propertyMappingTableByWinNT[winNTAttributeLower] == null)
                             propertyMappingTableByWinNT[winNTAttributeLower] = new ArrayList();
 
-                        ((ArrayList)propertyMappingTableByWinNT[winNTAttributeLower]).Add(
-                            propertyEntry
-                        );
+                        ((ArrayList)propertyMappingTableByWinNT[winNTAttributeLower])
+                            .Add(propertyEntry);
                     }
                 }
             }
@@ -265,7 +264,8 @@ namespace System.DirectoryServices.AccountManagement
                 );
 
                 // Load in all the initial values from the store
-                ((DirectoryEntry)p.UnderlyingObject).RefreshCache();
+                ((DirectoryEntry)p.UnderlyingObject)
+                    .RefreshCache();
 
                 // Load in the StoreKey
                 Debug.Assert(p.Key == null); // since it was previously unpersisted
@@ -1066,11 +1066,8 @@ namespace System.DirectoryServices.AccountManagement
             // Build a PrincipalContext for the store which owns the principal
             // Use the ad default options so we turn sign and seal back on.
 #if USE_CTX_CACHE
-            PrincipalContext remoteCtx = SDSCache.Domain.GetContext(
-                domainName,
-                _credentials,
-                DefaultContextOptions.ADDefaultContextOption
-            );
+            PrincipalContext remoteCtx = SDSCache.Domain
+                .GetContext(domainName, _credentials, DefaultContextOptions.ADDefaultContextOption);
 #else
             PrincipalContext remoteCtx = new PrincipalContext(
                 ContextType.Domain,
@@ -1085,12 +1082,13 @@ namespace System.DirectoryServices.AccountManagement
 
             SecurityIdentifier sidObj = new SecurityIdentifier(sid, 0);
 
-            Principal p = remoteCtx.QueryCtx.FindPrincipalByIdentRef(
-                typeof(Principal),
-                UrnScheme.SidScheme,
-                sidObj.ToString(),
-                DateTime.UtcNow
-            );
+            Principal p = remoteCtx.QueryCtx
+                .FindPrincipalByIdentRef(
+                    typeof(Principal),
+                    UrnScheme.SidScheme,
+                    sidObj.ToString(),
+                    DateTime.UtcNow
+                );
 
             if (p != null)
                 return p;

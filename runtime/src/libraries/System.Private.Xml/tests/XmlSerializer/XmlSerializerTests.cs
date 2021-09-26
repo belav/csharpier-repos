@@ -23,10 +23,11 @@ public static partial class XmlSerializerTests
 
     static XmlSerializerTests()
     {
-        MethodInfo method = typeof(XmlSerializer).GetMethod(
-            SerializationModeSetterName,
-            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-        );
+        MethodInfo method = typeof(XmlSerializer)
+            .GetMethod(
+                SerializationModeSetterName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+            );
         Assert.True(method != null, $"No method named {SerializationModeSetterName}");
 #if ReflectionOnly
         method.Invoke(null, new object[] { 1 });
@@ -471,7 +472,8 @@ public static partial class XmlSerializerTests
 
         Assert.StrictEqual(actual.EnumType, value.EnumType);
         Assert.StrictEqual(actual.MyChoice, value.MyChoice);
-        object[] stringArray = actual.XmlArrayProperty.Where(x => x != null)
+        object[] stringArray = actual.XmlArrayProperty
+            .Where(x => x != null)
             .Select(x => x.ToString())
             .ToArray();
         Assert.Equal(stringArray, value.XmlArrayProperty);
@@ -735,9 +737,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_TypeWithNonPublicDefaultConstructor()
     {
-        System.Reflection.TypeInfo ti = System.Reflection.IntrospectionExtensions.GetTypeInfo(
-            typeof(TypeWithNonPublicDefaultConstructor)
-        );
+        System.Reflection.TypeInfo ti = System.Reflection.IntrospectionExtensions
+            .GetTypeInfo(typeof(TypeWithNonPublicDefaultConstructor));
         TypeWithNonPublicDefaultConstructor value = null;
         value = (TypeWithNonPublicDefaultConstructor)FindDefaultConstructor(ti).Invoke(null);
         Assert.Equal("Mr. FooName", value.Name);
@@ -843,14 +844,15 @@ public static partial class XmlSerializerTests
             var result = Utils.Compare(baseline, actualOutput);
             Assert.True(
                 result.Equal,
-                string.Format(
-                    "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                    Environment.NewLine,
-                    result.ErrorMessage,
-                    expected,
-                    baseline,
-                    actualOutput
-                )
+                string
+                    .Format(
+                        "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                        Environment.NewLine,
+                        result.ErrorMessage,
+                        expected,
+                        baseline,
+                        actualOutput
+                    )
             );
             stream.Position = 0;
 
@@ -1182,9 +1184,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_TypeWithEnumFlagPropertyHavingDefaultValue()
     {
-        var mapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(TypeWithEnumFlagPropertyHavingDefaultValue)
-        );
+        var mapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(TypeWithEnumFlagPropertyHavingDefaultValue));
         var serializer = new XmlSerializer(mapping);
 
         var value = new TypeWithEnumFlagPropertyHavingDefaultValue()
@@ -1229,9 +1230,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_TypeWithXmlQualifiedName()
     {
-        var mapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(TypeWithXmlQualifiedName)
-        );
+        var mapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(TypeWithXmlQualifiedName));
         var serializer = new XmlSerializer(mapping);
 
         var value = new TypeWithXmlQualifiedName() { Value = new XmlQualifiedName("FooName") };
@@ -2040,9 +2040,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_TypeWithMyCollectionField()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(TypeWithMyCollectionField)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(TypeWithMyCollectionField));
         var serializer = new XmlSerializer(myTypeMapping);
         var value = new TypeWithMyCollectionField();
         value.Collection = new MyCollection<string>() { "s1", "s2" };
@@ -2331,14 +2330,15 @@ public static partial class XmlSerializerTests
                 Utils.CompareResult result = Utils.Compare(baseline, actualOutput);
                 Assert.True(
                     result.Equal,
-                    string.Format(
-                        "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                        Environment.NewLine,
-                        result.ErrorMessage,
-                        value,
-                        baseline,
-                        actualOutput
-                    )
+                    string
+                        .Format(
+                            "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                            Environment.NewLine,
+                            result.ErrorMessage,
+                            value,
+                            baseline,
+                            actualOutput
+                        )
                 );
             }
 
@@ -2408,14 +2408,15 @@ public static partial class XmlSerializerTests
                 Utils.CompareResult result = Utils.Compare(baseline, actualOutput);
                 Assert.True(
                     result.Equal,
-                    string.Format(
-                        "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                        Environment.NewLine,
-                        result.ErrorMessage,
-                        value,
-                        baseline,
-                        actualOutput
-                    )
+                    string
+                        .Format(
+                            "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                            Environment.NewLine,
+                            result.ErrorMessage,
+                            value,
+                            baseline,
+                            actualOutput
+                        )
                 );
             }
 
@@ -2502,14 +2503,15 @@ public static partial class XmlSerializerTests
                 Utils.CompareResult result = Utils.Compare(baseline, actualOutput);
                 Assert.True(
                     result.Equal,
-                    string.Format(
-                        "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                        Environment.NewLine,
-                        result.ErrorMessage,
-                        value,
-                        baseline,
-                        actualOutput
-                    )
+                    string
+                        .Format(
+                            "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                            Environment.NewLine,
+                            result.ErrorMessage,
+                            value,
+                            baseline,
+                            actualOutput
+                        )
                 );
             }
 
@@ -2540,14 +2542,15 @@ public static partial class XmlSerializerTests
             Utils.CompareResult result = Utils.Compare(baseline, actualOutput);
             Assert.True(
                 result.Equal,
-                string.Format(
-                    "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                    Environment.NewLine,
-                    result.ErrorMessage,
-                    value,
-                    baseline,
-                    actualOutput
-                )
+                string
+                    .Format(
+                        "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                        Environment.NewLine,
+                        result.ErrorMessage,
+                        value,
+                        baseline,
+                        actualOutput
+                    )
             );
 
             ms.Position = 0;

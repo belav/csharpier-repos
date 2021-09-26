@@ -36,15 +36,14 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             // Events can only be invoked directly from the class they were declared in.
             var expressionSymbol = semanticModel.GetSymbolInfo(
-                    invocationExpression.Expression,
-                    cancellationToken
-                )
+                invocationExpression.Expression,
+                cancellationToken
+            )
                 .GetAnySymbol();
             if (
                 expressionSymbol.IsKind(SymbolKind.Event)
-                && !expressionSymbol.ContainingType.OriginalDefinition.Equals(
-                    within.OriginalDefinition
-                )
+                && !expressionSymbol.ContainingType.OriginalDefinition
+                    .Equals(within.OriginalDefinition)
             )
             {
                 return null;

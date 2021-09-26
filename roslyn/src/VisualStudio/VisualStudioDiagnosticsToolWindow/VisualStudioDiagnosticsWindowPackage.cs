@@ -110,11 +110,11 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
                 async () =>
                 {
                     await ShowToolWindowAsync(
-                            typeof(DiagnosticsWindow),
-                            id: 0,
-                            create: true,
-                            this.DisposalToken
-                        )
+                        typeof(DiagnosticsWindow),
+                        id: 0,
+                        create: true,
+                        this.DisposalToken
+                    )
                         .ConfigureAwait(true);
                 }
             );
@@ -140,8 +140,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
             var componentModel = (IComponentModel)await GetServiceAsync(typeof(SComponentModel))
                 .ConfigureAwait(true);
             var menuCommandService = (IMenuCommandService)await GetServiceAsync(
-                    typeof(IMenuCommandService)
-                )
+                typeof(IMenuCommandService)
+            )
                 .ConfigureAwait(true);
 
             cancellationToken.ThrowIfCancellationRequested();

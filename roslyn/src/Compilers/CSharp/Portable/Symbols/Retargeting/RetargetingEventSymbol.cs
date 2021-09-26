@@ -50,10 +50,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return this.RetargetingTranslator.Retarget(
-                    _underlyingEvent.TypeWithAnnotations,
-                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
-                );
+                return this.RetargetingTranslator
+                    .Retarget(
+                        _underlyingEvent.TypeWithAnnotations,
+                        RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                    );
             }
         }
 
@@ -157,9 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             PEModuleBuilder moduleBuilder
         )
         {
-            return this.RetargetingTranslator.RetargetAttributes(
-                _underlyingEvent.GetCustomAttributesToEmit(moduleBuilder)
-            );
+            return this.RetargetingTranslator
+                .RetargetAttributes(_underlyingEvent.GetCustomAttributesToEmit(moduleBuilder));
         }
 
         internal override bool MustCallMethodsDirectly

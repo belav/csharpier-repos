@@ -44,12 +44,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 AwaitTaskReturn = awaitTaskReturn;
                 SemanticDocument = document;
                 _typeParametersInDeclaration = typeParametersInDeclaration.Select(
-                        s => semanticModel.ResolveType(s)
-                    )
+                    s => semanticModel.ResolveType(s)
+                )
                     .ToList();
                 _typeParametersInConstraintList = typeParametersInConstraintList.Select(
-                        s => semanticModel.ResolveType(s)
-                    )
+                    s => semanticModel.ResolveType(s)
+                )
                     .ToList();
                 _variables = variables;
                 ReturnType = semanticModel.ResolveType(returnType);

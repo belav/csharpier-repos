@@ -44,9 +44,10 @@ namespace OpenQA.Selenium
 
             // These two messages appear sometimes, but it doesn't actually block the tests.
             if (
-                entry.Message.Contains(
-                    "WASM: wasm streaming compile failed: TypeError: Could not download wasm module"
-                )
+                entry.Message
+                    .Contains(
+                        "WASM: wasm streaming compile failed: TypeError: Could not download wasm module"
+                    )
             )
             {
                 return true;

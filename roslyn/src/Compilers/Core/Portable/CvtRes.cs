@@ -654,12 +654,13 @@ namespace Microsoft.CodeAnalysis
                 _productNameContents = productName;
                 _productVersionContents = productVersion;
                 _assemblyVersionContents = assemblyVersion;
-                _langIdAndCodePageKey = System.String.Format(
-                    "{0:x4}{1:x4}",
-                    0 /*langId*/
-                    ,
-                    CP_WINUNICODE /*codepage*/
-                );
+                _langIdAndCodePageKey = System.String
+                    .Format(
+                        "{0:x4}{1:x4}",
+                        0 /*langId*/
+                        ,
+                        CP_WINUNICODE /*codepage*/
+                    );
             }
 
             private const uint VFT_APP = 0x00000001;
@@ -961,9 +962,8 @@ namespace Microsoft.CodeAnalysis
                 ); //padding
                 System.Diagnostics.Debug.Assert((writer.BaseStream.Position & 3) == 0);
 
-                System.Diagnostics.Debug.Assert(
-                    writer.BaseStream.Position - debugPos == dataSize - GetStringsSize()
-                );
+                System.Diagnostics.Debug
+                    .Assert(writer.BaseStream.Position - debugPos == dataSize - GetStringsSize());
                 debugPos = writer.BaseStream.Position;
 
                 foreach (var entry in GetVerStrings())
@@ -977,9 +977,8 @@ namespace Microsoft.CodeAnalysis
                     WriteVersionString(entry, writer);
                 }
 
-                System.Diagnostics.Debug.Assert(
-                    writer.BaseStream.Position - debugPos == GetStringsSize()
-                );
+                System.Diagnostics.Debug
+                    .Assert(writer.BaseStream.Position - debugPos == GetStringsSize());
             }
         }
     }

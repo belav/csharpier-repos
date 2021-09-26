@@ -360,15 +360,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 );
 
                 const string PrecertificatePoisonExtensionOid = "1.3.6.1.4.1.11129.2.4.3";
-                certReq.CertificateExtensions.Add(
-                    new X509Extension(
-                        new AsnEncodedData(
-                            new Oid(PrecertificatePoisonExtensionOid),
-                            new byte[] { 5, 0 }
-                        ),
-                        critical: true
-                    )
-                );
+                certReq.CertificateExtensions
+                    .Add(
+                        new X509Extension(
+                            new AsnEncodedData(
+                                new Oid(PrecertificatePoisonExtensionOid),
+                                new byte[] { 5, 0 }
+                            ),
+                            critical: true
+                        )
+                    );
 
                 DateTimeOffset notBefore = DateTimeOffset.UtcNow.AddDays(-1);
                 DateTimeOffset notAfter = notBefore.AddDays(30);
@@ -389,8 +390,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     }
                     else
                     {
-                        X509ChainElement certElement =
-                            chain.ChainElements.OfType<X509ChainElement>().Single();
+                        X509ChainElement certElement = chain.ChainElements
+                            .OfType<X509ChainElement>()
+                            .Single();
                         const X509ChainStatusFlags ExpectedFlag =
                             X509ChainStatusFlags.HasNotSupportedCriticalExtension;
                         X509ChainStatusFlags actualFlags = certElement.AllStatusFlags();
@@ -427,9 +429,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 certReq.CertificateExtensions.Add(BasicConstraintsEndEntity);
 
-                certReq.CertificateExtensions.Add(
-                    new X509Extension("1.3.6.1.5.5.7.1.1", new byte[] { 5 }, critical: false)
-                );
+                certReq.CertificateExtensions
+                    .Add(new X509Extension("1.3.6.1.5.5.7.1.1", new byte[] { 5 }, critical: false));
 
                 DateTimeOffset notBefore = DateTimeOffset.UtcNow.AddDays(-1);
                 DateTimeOffset notAfter = notBefore.AddDays(30);
@@ -461,7 +462,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void VerifyNumericStringSubject()
         {
             X500DistinguishedName dn = new X500DistinguishedName(
-                "30283117301506052901020203120C313233203635342037383930310D300B0603550403130454657374".HexToByteArray()
+                "30283117301506052901020203120C313233203635342037383930310D300B0603550403130454657374"
+                    .HexToByteArray()
             );
 
             using (RSA key = RSA.Create())

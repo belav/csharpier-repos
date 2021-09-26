@@ -549,14 +549,14 @@ namespace System.Web.WebPages.Test
                 .Setup(sp => sp.GetService(typeof(HttpWorkerRequest)))
                 .Returns(mockWorkerRequest.Object);
             mockWorkerRequest.Setup(
-                    wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar)
-                )
+                wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar)
+            )
                 .Returns("On!");
             if (isUrlRewriteOn)
             {
                 mockWorkerRequest.Setup(
-                        wr => wr.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar)
-                    )
+                    wr => wr.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar)
+                )
                     .Returns("Yup!");
             }
 

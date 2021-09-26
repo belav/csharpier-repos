@@ -22,13 +22,13 @@ namespace System.Web.Http.Tracing.Tracers
             HttpResponseMessage response = new HttpResponseMessage();
             Mock<IActionFilter> mockFilter = new Mock<IActionFilter>() { CallBase = true };
             mockFilter.Setup(
-                    f =>
-                        f.ExecuteActionFilterAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>(),
-                            It.IsAny<Func<Task<HttpResponseMessage>>>()
-                        )
-                )
+                f =>
+                    f.ExecuteActionFilterAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>(),
+                        It.IsAny<Func<Task<HttpResponseMessage>>>()
+                    )
+            )
                 .Returns(Task.FromResult<HttpResponseMessage>(response));
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
             {
@@ -90,13 +90,13 @@ namespace System.Web.Http.Tracing.Tracers
                 new TaskCompletionSource<HttpResponseMessage>(null);
             tcs.TrySetException(exception);
             mockFilter.Setup(
-                    f =>
-                        f.ExecuteActionFilterAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>(),
-                            It.IsAny<Func<Task<HttpResponseMessage>>>()
-                        )
-                )
+                f =>
+                    f.ExecuteActionFilterAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>(),
+                        It.IsAny<Func<Task<HttpResponseMessage>>>()
+                    )
+            )
                 .Returns(tcs.Task);
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
             {
@@ -133,11 +133,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            Task<HttpResponseMessage> task = ((IActionFilter)tracer).ExecuteActionFilterAsync(
-                actionContext,
-                CancellationToken.None,
-                continuation
-            );
+            Task<HttpResponseMessage> task = ((IActionFilter)tracer)
+                .ExecuteActionFilterAsync(actionContext, CancellationToken.None, continuation);
 
             // Assert
             Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() => task);

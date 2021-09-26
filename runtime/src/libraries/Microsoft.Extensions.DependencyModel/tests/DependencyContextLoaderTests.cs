@@ -21,10 +21,9 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             string fxDepsPath = "fxPath.deps.json";
             string extraDepsPath = "extra1.deps.json";
 
-            var fileSystem = FileSystemMockBuilder.Create()
-                .AddFile(
-                    appDepsPath,
-                    @"{
+            var fileSystem = FileSystemMockBuilder.Create().AddFile(
+                appDepsPath,
+                @"{
     ""runtimeTarget"": {
         ""name"":"".NETCoreApp,Version=v1.0/osx.10.10-x64"",
         ""signature"":""target-signature""
@@ -33,20 +32,18 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {}
     }
 }"
-                )
-                .AddFile(
-                    fxDepsPath,
-                    @"{
+            ).AddFile(
+                fxDepsPath,
+                @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {
             
         }
     }
 }"
-                )
-                .AddFile(
-                    extraDepsPath,
-                    @"
+            ).AddFile(
+                extraDepsPath,
+                @"
  {
      ""targets"": {
          "".NETStandard,Version=v1.5"": {
@@ -69,8 +66,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
          }
      }
  }"
-                )
-                .Build();
+            ).Build();
 
             var loader = new DependencyContextLoader(
                 appDepsPath,

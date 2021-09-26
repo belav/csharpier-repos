@@ -58,11 +58,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             // Even though we want to ultimately pass edits back to LSP, we still need to compute all semantic tokens,
             // both for caching purposes and in order to have a baseline comparison when computing the edits.
             var newSemanticTokensData = await SemanticTokensHelpers.ComputeSemanticTokensDataAsync(
-                    context.Document,
-                    SemanticTokensCache.TokenTypeToIndex,
-                    range: null,
-                    cancellationToken
-                )
+                context.Document,
+                SemanticTokensCache.TokenTypeToIndex,
+                range: null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             Contract.ThrowIfNull(newSemanticTokensData, "newSemanticTokensData is null.");
@@ -75,19 +75,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             };
 
             await _tokensCache.UpdateCacheAsync(
-                    request.TextDocument.Uri,
-                    newSemanticTokens,
-                    cancellationToken
-                )
+                request.TextDocument.Uri,
+                newSemanticTokens,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Getting the cached tokens for the document. If we don't have an applicable cached token set,
             // we can't calculate edits, so we must return all semantic tokens instead.
             var oldSemanticTokensData = await _tokensCache.GetCachedTokensDataAsync(
-                    request.TextDocument.Uri,
-                    request.PreviousResultId,
-                    cancellationToken
-                )
+                request.TextDocument.Uri,
+                request.PreviousResultId,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (oldSemanticTokensData == null)
             {
@@ -145,9 +145,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             // may have both an insertion and deletion, in which case we can combine the two into a
             // single update. We use the dictionary below to keep track of whether an index contains
             // an insertion, deletion, or both.
-            using var _ = PooledDictionary<int, SemanticTokenEditKind>.GetInstance(
-                out var indexToEditKinds
-            );
+            using var _ = PooledDictionary<int, SemanticTokenEditKind>
+                .GetInstance(out var indexToEditKinds);
 
             foreach (var edit in edits)
             {
@@ -205,9 +204,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             // special rules and would complicate the logic. They also generally do not result in a
             // huge reduction in the total number of edits, so we leave them out for now.
 
-            using var _ = ArrayBuilder<LSP.SemanticTokensEdit>.GetInstance(
-                out var semanticTokensEdits
-            );
+            using var _ = ArrayBuilder<LSP.SemanticTokensEdit>
+                .GetInstance(out var semanticTokensEdits);
 
             var editIndices = indexToEditKinds.Keys.ToArray();
 
@@ -295,9 +293,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 var deleteCount = 5 * (1 + (endEditIndex - startEditIndex));
                 for (var i = 0; i <= endEditIndex - startEditIndex; i++)
                 {
-                    newGroupedSemanticTokens[editIndices[startEditIndex + i]].AddToEnd(
-                        tokensToInsert
-                    );
+                    newGroupedSemanticTokens[editIndices[startEditIndex + i]]
+                        .AddToEnd(tokensToInsert);
                 }
 
                 semanticTokensEdits.Add(
@@ -331,9 +328,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
                 for (var i = 0; i <= endEditIndex - startEditIndex; i++)
                 {
-                    newGroupedSemanticTokens[editIndices[startEditIndex + i]].AddToEnd(
-                        tokensToInsert
-                    );
+                    newGroupedSemanticTokens[editIndices[startEditIndex + i]]
+                        .AddToEnd(tokensToInsert);
                 }
 
                 semanticTokensEdits.Add(

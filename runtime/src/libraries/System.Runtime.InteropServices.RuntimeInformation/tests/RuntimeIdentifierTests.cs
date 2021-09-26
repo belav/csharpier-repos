@@ -29,51 +29,47 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             options.StartInfo.EnvironmentVariables.Add("DOTNET_RUNTIME_ID", "overridenFromEnv-rid");
 
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Assert.Equal("overridenFromEnv-rid", RuntimeInformation.RuntimeIdentifier);
-                    },
-                    options
-                )
-                .Dispose();
+                () =>
+                {
+                    Assert.Equal("overridenFromEnv-rid", RuntimeInformation.RuntimeIdentifier);
+                },
+                options
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void VerifyAppContextVariable()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", "overriden-rid");
+                () =>
+                {
+                    AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", "overriden-rid");
 
-                        Assert.Equal("overriden-rid", RuntimeInformation.RuntimeIdentifier);
-                    }
-                )
-                .Dispose();
+                    Assert.Equal("overriden-rid", RuntimeInformation.RuntimeIdentifier);
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void VerifyAppContextVariableUnknown()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", null);
+                () =>
+                {
+                    AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", null);
 
-                        Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
-                    }
-                )
-                .Dispose();
+                    Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
+                }
+            ).Dispose();
 
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", new object());
+                () =>
+                {
+                    AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", new object());
 
-                        Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
-                    }
-                )
-                .Dispose();
+                    Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
+                }
+            ).Dispose();
         }
 
         [Fact, PlatformSpecific(TestPlatforms.Windows)]

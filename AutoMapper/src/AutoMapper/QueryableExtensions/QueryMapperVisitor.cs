@@ -145,10 +145,11 @@ namespace AutoMapper.QueryableExtensions.Impl
             // func which in turn defines the type of the field that has to be used for ordering/sorting
             if (newOrderByExpr is UnaryExpression unary && unary.Operand.Type.IsGenericType)
             {
-                methodArgs[1] = methodArgs[1].ReplaceItemType(
-                    typeof(string),
-                    unary.Operand.Type.GenericTypeArguments.Last()
-                );
+                methodArgs[1] = methodArgs[1]
+                    .ReplaceItemType(
+                        typeof(string),
+                        unary.Operand.Type.GenericTypeArguments.Last()
+                    );
             }
             else
             {
@@ -179,8 +180,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             {
                 var genArgs = lambdaType.GetTypeInfo().GenericTypeArguments;
                 var newGenArgs = genArgs.Select(
-                        t => t.ReplaceItemType(_sourceType, _destinationType)
-                    )
+                    t => t.ReplaceItemType(_sourceType, _destinationType)
+                )
                     .ToArray();
                 var genericTypeDef = lambdaType.GetGenericTypeDefinition();
                 if (genericTypeDef.FullName.StartsWith("System.Func"))
@@ -263,12 +264,13 @@ namespace AutoMapper.QueryableExtensions.Impl
                 destinationMemberType
             );
 
-            var propertyMap = typeMap.PropertyMaps.FirstOrDefault(
-                pm =>
-                    pm.CanResolveValue
-                    && pm.SourceMember != null
-                    && pm.SourceMember.Name == sourceMemberInfo.Name
-            );
+            var propertyMap = typeMap.PropertyMaps
+                .FirstOrDefault(
+                    pm =>
+                        pm.CanResolveValue
+                        && pm.SourceMember != null
+                        && pm.SourceMember.Name == sourceMemberInfo.Name
+                );
 
             if (propertyMap == null)
                 throw PropertyConfigurationException(typeMap, sourceMemberInfo.Name);

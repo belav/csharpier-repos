@@ -174,10 +174,8 @@ namespace CoreXml.Test.XLinq
                             // special treatment for XText
                             if (e1.Current.Data is XText && !(e1.Current.Data is XCData))
                                 if (
-                                    !object.ReferenceEquals(
-                                        e1.Current.originalReference,
-                                        e2.Current
-                                    )
+                                    !object
+                                        .ReferenceEquals(e1.Current.originalReference, e2.Current)
                                 )
                                 {
                                     TestLog.WriteLine("XText reference comparison: ");

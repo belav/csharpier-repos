@@ -75,17 +75,16 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,16): error CS0155: The type caught or thrown must be derived from System.Exception
-                    //         catch (int e)
-                    Diagnostic(ErrorCode.ERR_BadExceptionType, "int").WithLocation(9, 16),
-                    // (9,20): warning CS0168: The variable 'e' is declared but never used
-                    //         catch (int e)
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "e")
-                        .WithArguments("e")
-                        .WithLocation(9, 20)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,16): error CS0155: The type caught or thrown must be derived from System.Exception
+                //         catch (int e)
+                Diagnostic(ErrorCode.ERR_BadExceptionType, "int").WithLocation(9, 16),
+                // (9,20): warning CS0168: The variable 'e' is declared but never used
+                //         catch (int e)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e")
+                    .WithArguments("e")
+                    .WithLocation(9, 20)
+            );
         }
 
         [Fact]

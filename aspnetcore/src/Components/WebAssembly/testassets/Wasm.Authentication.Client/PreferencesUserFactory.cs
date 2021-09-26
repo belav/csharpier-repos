@@ -64,9 +64,8 @@ namespace Wasm.Authentication.Client
                     {
                         // The actual pattern would be to cache this info to avoid constant queries to the server per auth update.
                         // (By default once every minute)
-                        ((ClaimsIdentity)initialUser.Identity).AddClaim(
-                            new Claim("NewUser", "true")
-                        );
+                        ((ClaimsIdentity)initialUser.Identity)
+                            .AddClaim(new Claim("NewUser", "true"));
                     }
                 }
             }

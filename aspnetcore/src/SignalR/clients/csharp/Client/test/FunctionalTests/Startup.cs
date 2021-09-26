@@ -45,20 +45,19 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 }
             );
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(
-                    options =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+                options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidateAudience = false,
-                            ValidateIssuer = false,
-                            ValidateActor = false,
-                            ValidateLifetime = true,
-                            IssuerSigningKey = SecurityKey
-                        };
-                    }
-                );
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        ValidateActor = false,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = SecurityKey
+                    };
+                }
+            );
 
             // Since tests run in parallel, it's possible multiple servers will startup and read files being written by another test
             // Use a unique directory per server to avoid this collision
@@ -79,10 +78,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     return context =>
                     {
                         if (
-                            context.Request.Path.Value.EndsWith(
-                                "/negotiate",
-                                StringComparison.Ordinal
-                            )
+                            context.Request.Path.Value
+                                .EndsWith("/negotiate", StringComparison.Ordinal)
                         )
                         {
                             context.Response.Cookies.Append("fromNegotiate", "a value");
@@ -139,15 +136,16 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                         "/redirect/{*anything}",
                         context =>
                         {
-                            return context.Response.WriteAsync(
-                                JsonConvert.SerializeObject(
-                                    new
-                                    {
-                                        url = $"{context.Request.Scheme}://{context.Request.Host}/authorizedHub",
-                                        accessToken = GenerateJwtToken()
-                                    }
-                                )
-                            );
+                            return context.Response
+                                .WriteAsync(
+                                    JsonConvert.SerializeObject(
+                                        new
+                                        {
+                                            url = $"{context.Request.Scheme}://{context.Request.Host}/authorizedHub",
+                                            accessToken = GenerateJwtToken()
+                                        }
+                                    )
+                                );
                         }
                     );
                 }

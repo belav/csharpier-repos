@@ -15,10 +15,10 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
         {
             using var executor = CreateExecutor(args);
             var migrations = executor.GetMigrations(
-                    Context!.Value(),
-                    _connection!.Value(),
-                    _noConnect!.HasValue()
-                )
+                Context!.Value(),
+                _connection!.Value(),
+                _noConnect!.HasValue()
+            )
                 .ToList();
 
             if (_json!.HasValue())

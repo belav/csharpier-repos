@@ -74,9 +74,10 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         )
         {
             Debug.Assert(
-                languageInfo.InteractiveResponseFileName.IndexOfAny(
-                    new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }
-                ) == -1
+                languageInfo.InteractiveResponseFileName
+                    .IndexOfAny(
+                        new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }
+                    ) == -1
             );
 
             _threadingContext = threadingContext;
@@ -224,8 +225,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             var resetOptions = ResetOptions;
             _session.Host.SetOutputs(window.OutputWriter, window.ErrorOutputWriter);
             var isSuccessful = await _session.ResetAsync(
-                    _session.GetHostOptions(initialize: true, resetOptions.Platform)
-                )
+                _session.GetHostOptions(initialize: true, resetOptions.Platform)
+            )
                 .ConfigureAwait(false);
             return new ExecutionResult(isSuccessful);
         }

@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 private readonly SyntheticBoundNodeFactory _factory;
                 private readonly PooledDictionary<BoundDagTemp, BoundExpression> _map =
                     PooledDictionary<BoundDagTemp, BoundExpression>.GetInstance();
-                private readonly ArrayBuilder<LocalSymbol> _temps =
-                    ArrayBuilder<LocalSymbol>.GetInstance();
+                private readonly ArrayBuilder<LocalSymbol> _temps = ArrayBuilder<LocalSymbol>
+                    .GetInstance();
                 private readonly SyntaxNode _node;
 
                 private readonly bool _generateSequencePoints;
@@ -245,12 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         BoundExpression output = _tempAllocator.GetTemp(outputTemp);
                         CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
                             _localRewriter.GetNewCompoundUseSiteInfo();
-                        Conversion conversion =
-                            _factory.Compilation.Conversions.ClassifyBuiltInConversion(
-                                inputType,
-                                output.Type,
-                                ref useSiteInfo
-                            );
+                        Conversion conversion = _factory.Compilation.Conversions
+                            .ClassifyBuiltInConversion(inputType, output.Type, ref useSiteInfo);
                         _localRewriter._diagnostics.Add(t.Syntax, useSiteInfo);
                         BoundExpression evaluated;
                         if (conversion.Exists)
@@ -434,14 +430,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     literal = _factory.Convert(comparisonType, literal);
                 }
 
-                return this._localRewriter.MakeBinaryOperator(
-                    _factory.Syntax,
-                    operatorKind,
-                    input,
-                    literal,
-                    _factory.SpecialType(SpecialType.System_Boolean),
-                    method: null
-                );
+                return this._localRewriter
+                    .MakeBinaryOperator(
+                        _factory.Syntax,
+                        operatorKind,
+                        input,
+                        literal,
+                        _factory.SpecialType(SpecialType.System_Boolean),
+                        method: null
+                    );
             }
 
             /// <summary>
@@ -470,10 +467,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     test is BoundDagTypeTest typeDecision
                     && evaluation is BoundDagTypeEvaluation typeEvaluation1
                     && typeDecision.Type.IsReferenceType
-                    && typeEvaluation1.Type.Equals(
-                        typeDecision.Type,
-                        TypeCompareKind.AllIgnoreOptions
-                    )
+                    && typeEvaluation1.Type
+                        .Equals(typeDecision.Type, TypeCompareKind.AllIgnoreOptions)
                     && typeEvaluation1.Input == typeDecision.Input
                 )
                 {
@@ -494,11 +489,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     test is BoundDagNonNullTest nonNullTest
                     && evaluation is BoundDagTypeEvaluation typeEvaluation2
-                    && _factory.Compilation.Conversions.ClassifyBuiltInConversion(
-                        test.Input.Type,
-                        typeEvaluation2.Type,
-                        ref useSiteInfo
-                    )
+                    && _factory.Compilation.Conversions
+                        .ClassifyBuiltInConversion(
+                            test.Input.Type,
+                            typeEvaluation2.Type,
+                            ref useSiteInfo
+                        )
                         is Conversion conv
                     && (
                         conv.IsIdentity
@@ -540,10 +536,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(loweredInput.Type is { });
 
                 // We share input variables if there is no when clause (because a when clause might mutate them).
-                bool anyWhenClause = decisionDag.TopologicallySortedNodes.Any(
-                    node =>
-                        node is BoundWhenDecisionDagNode { WhenExpression: { ConstantValue: null } }
-                );
+                bool anyWhenClause = decisionDag.TopologicallySortedNodes
+                    .Any(
+                        node =>
+                            node
+                                is BoundWhenDecisionDagNode
+                                {
+                                    WhenExpression: { ConstantValue: null }
+                                }
+                    );
 
                 var inputDagTemp = BoundDagTemp.ForOriginalInput(loweredInput);
                 if (
@@ -592,9 +593,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (
                     loweredInput.Type.IsTupleType
-                    && !loweredInput.Type.OriginalDefinition.Equals(
-                        _factory.Compilation.GetWellKnownType(WellKnownType.System_ValueTuple_TRest)
-                    )
+                    && !loweredInput.Type.OriginalDefinition
+                        .Equals(
+                            _factory.Compilation
+                                .GetWellKnownType(WellKnownType.System_ValueTuple_TRest)
+                        )
                     && loweredInput.Syntax.Kind() == SyntaxKind.TupleExpression
                     && loweredInput is BoundObjectCreationExpression expr
                     && !decisionDag.TopologicallySortedNodes.Any(n => usesOriginalInput(n))
@@ -672,9 +675,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     loweredInput.Syntax,
                     loweredInput.Type
                 );
-                var newArguments = ArrayBuilder<BoundExpression>.GetInstance(
-                    loweredInput.Arguments.Length
-                );
+                var newArguments = ArrayBuilder<BoundExpression>
+                    .GetInstance(loweredInput.Arguments.Length);
                 for (int i = 0; i < count; i++)
                 {
                     var field = loweredInput.Type.TupleElements[i].CorrespondingTupleField;

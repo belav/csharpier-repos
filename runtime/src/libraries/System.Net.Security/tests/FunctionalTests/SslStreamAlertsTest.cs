@@ -31,8 +31,8 @@ namespace System.Net.Security.Tests
             {
                 Task serverAuth = server.AuthenticateAsServerAsync(certificate);
                 await client.AuthenticateAsClientAsync(
-                        certificate.GetNameInfo(X509NameType.SimpleName, false)
-                    )
+                    certificate.GetNameInfo(X509NameType.SimpleName, false)
+                )
                     .WaitAsync(TestConfiguration.PassingTestTimeout);
 
                 byte[] buffer = new byte[1024];
@@ -40,8 +40,8 @@ namespace System.Net.Security.Tests
                 // Schannel semantics require that Decrypt is called to receive an alert.
                 await client.WriteAsync(buffer, 0, buffer.Length);
                 var exception = await Assert.ThrowsAsync<IOException>(
-                        () => client.ReadAsync(buffer, 0, buffer.Length)
-                    )
+                    () => client.ReadAsync(buffer, 0, buffer.Length)
+                )
                     .WaitAsync(TestConfiguration.PassingTestTimeout);
 
                 Assert.IsType<Win32Exception>(exception.InnerException);

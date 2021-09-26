@@ -38,7 +38,8 @@ namespace System.CodeDom.Compiler
 
         public override string ToString() =>
             FileName.Length > 0
-                ? string.Format(
+                ? string
+                  .Format(
                       CultureInfo.InvariantCulture,
                       "{0}({1},{2}) : {3} {4}: {5}",
                       FileName,
@@ -48,7 +49,8 @@ namespace System.CodeDom.Compiler
                       ErrorNumber,
                       ErrorText
                   )
-                : string.Format(
+                : string
+                  .Format(
                       CultureInfo.InvariantCulture,
                       "{0} {1}: {2}",
                       WarningString,

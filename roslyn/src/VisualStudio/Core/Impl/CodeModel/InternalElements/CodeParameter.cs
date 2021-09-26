@@ -170,10 +170,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         }
 
         void IParameterKind.SetParameterPassingMode(PARAMETER_PASSING_MODE passingMode) =>
-            this.ParameterKind = this.CodeModelService.UpdateParameterKind(
-                ParameterKind,
-                passingMode
-            );
+            this.ParameterKind = this.CodeModelService
+                .UpdateParameterKind(ParameterKind, passingMode);
 
         void IParameterKind.SetParameterArrayDimensions(int dimensions)
         {

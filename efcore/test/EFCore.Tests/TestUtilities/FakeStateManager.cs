@@ -196,9 +196,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public DbContext Context =>
             new(
-                new DbContextOptionsBuilder().UseInternalServiceProvider(
-                        InMemoryFixture.DefaultServiceProvider
-                    )
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("D").Options
             );
 

@@ -43,10 +43,10 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression pX = Expression.Parameter(typeof(int).MakeByRefType());
             ParameterExpression pY = Expression.Parameter(typeof(int).MakeByRefType());
             ByRefNewFactory2 del = Expression.Lambda<ByRefNewFactory2>(
-                    Expression.New(typeof(ByRefNewType).GetConstructors()[0], pX, pY),
-                    pX,
-                    pY
-                )
+                Expression.New(typeof(ByRefNewType).GetConstructors()[0], pX, pY),
+                pX,
+                pY
+            )
                 .Compile(useInterpreter);
             int x = 3;
             int y = 4;
@@ -60,10 +60,10 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression pX = Expression.Parameter(typeof(int).MakeByRefType());
             ParameterExpression pY = Expression.Parameter(typeof(int).MakeByRefType());
             ByRefNewFactory2 del = Expression.Lambda<ByRefNewFactory2>(
-                    Expression.New(typeof(ByRefNewType).GetConstructors()[0], pX, pY),
-                    pX,
-                    pY
-                )
+                Expression.New(typeof(ByRefNewType).GetConstructors()[0], pX, pY),
+                pX,
+                pY
+            )
                 .Compile(useInterpreter);
             int x = 3;
             Assert.NotNull(del(ref x, ref x));
@@ -89,13 +89,13 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression p = Expression.Parameter(typeof(int).MakeByRefType());
             ByRefNewFactory1 del = Expression.Lambda<ByRefNewFactory1>(
-                    Expression.New(
-                        typeof(ByRefNewType).GetConstructors()[0],
-                        Expression.Field(Expression.Constant(this), "Always2"),
-                        p
-                    ),
+                Expression.New(
+                    typeof(ByRefNewType).GetConstructors()[0],
+                    Expression.Field(Expression.Constant(this), "Always2"),
                     p
-                )
+                ),
+                p
+            )
                 .Compile(useInterpreter);
             int x = 19;
             Assert.NotNull(del(ref x));
@@ -107,12 +107,12 @@ namespace System.Linq.Expressions.Tests
         public void CreateByRefReferencingOnlyReadonly(bool useInterpreter)
         {
             Func<ByRefNewType> del = Expression.Lambda<Func<ByRefNewType>>(
-                    Expression.New(
-                        typeof(ByRefNewType).GetConstructors()[0],
-                        Expression.Field(Expression.Constant(this), "Always2"),
-                        Expression.Field(Expression.Constant(this), "Always2")
-                    )
+                Expression.New(
+                    typeof(ByRefNewType).GetConstructors()[0],
+                    Expression.Field(Expression.Constant(this), "Always2"),
+                    Expression.Field(Expression.Constant(this), "Always2")
                 )
+            )
                 .Compile(useInterpreter);
             Assert.NotNull(del());
             Assert.Equal(2, Always2);
@@ -124,10 +124,10 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression pX = Expression.Parameter(typeof(int).MakeByRefType());
             ParameterExpression pY = Expression.Parameter(typeof(int).MakeByRefType());
             ByRefNewFactory2 del = Expression.Lambda<ByRefNewFactory2>(
-                    Expression.New(typeof(ByRefNewType).GetConstructors()[0], pX, pY),
-                    pX,
-                    pY
-                )
+                Expression.New(typeof(ByRefNewType).GetConstructors()[0], pX, pY),
+                pX,
+                pY
+            )
                 .Compile(useInterpreter);
             int x = -9;
             int y = 4;
@@ -139,9 +139,9 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression p = Expression.Parameter(typeof(int).MakeByRefType());
             OutNewTypeFactory del = Expression.Lambda<OutNewTypeFactory>(
-                    Expression.New(typeof(OutNewType).GetConstructors()[0], p),
-                    p
-                )
+                Expression.New(typeof(OutNewType).GetConstructors()[0], p),
+                p
+            )
                 .Compile(useInterpreter);
             int x;
             Assert.NotNull(del(out x));

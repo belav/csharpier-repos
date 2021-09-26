@@ -56,14 +56,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             }
 
             RunTest(
-                    SharedState.DotNetMainHive,
-                    SharedState.FrameworkReferenceApp,
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.0.0")
-                        )
-                        .WithWorkingDirectory(SharedState.DotNetCurrentHive.BinPath)
-                )
+                SharedState.DotNetMainHive,
+                SharedState.FrameworkReferenceApp,
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
+                        runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.0.0")
+                    )
+                    .WithWorkingDirectory(SharedState.DotNetCurrentHive.BinPath)
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.2.0");
         }
 
@@ -78,7 +78,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 return RunTest(
                     SharedState.DotNetMainHive,
                     SharedState.FrameworkReferenceApp,
-                    new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig)
+                    new TestSettings()
+                        .WithRuntimeConfigCustomizer(runtimeConfig)
                         .WithEnvironment(
                             Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
                             SharedState.DotNetGlobalHive.BinPath

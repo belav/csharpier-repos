@@ -57,20 +57,20 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     IRemoteExtensionMethodImportCompletionService,
                     SerializableUnimportedExtensionMethods
                 >(
-                        project.Solution,
-                        (service, solutionInfo, cancellationToken) =>
-                            service.GetUnimportedExtensionMethodsAsync(
-                                solutionInfo,
-                                document.Id,
-                                position,
-                                receiverTypeSymbolKeyData,
-                                namespaceInScope.ToImmutableArray(),
-                                targetTypesSymbolKeyData,
-                                forceIndexCreation,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    project.Solution,
+                    (service, solutionInfo, cancellationToken) =>
+                        service.GetUnimportedExtensionMethodsAsync(
+                            solutionInfo,
+                            document.Id,
+                            position,
+                            receiverTypeSymbolKeyData,
+                            namespaceInScope.ToImmutableArray(),
+                            targetTypesSymbolKeyData,
+                            forceIndexCreation,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!result.HasValue)
@@ -83,14 +83,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             else
             {
                 items = await GetUnimportedExtensionMethodsInCurrentProcessAsync(
-                        document,
-                        position,
-                        receiverTypeSymbol,
-                        namespaceInScope,
-                        targetTypesSymbols,
-                        forceIndexCreation,
-                        cancellationToken
-                    )
+                    document,
+                    position,
+                    receiverTypeSymbol,
+                    namespaceInScope,
+                    targetTypesSymbols,
+                    forceIndexCreation,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -131,24 +131,25 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             // First find symbols of all applicable extension methods.
             // Workspace's syntax/symbol index is used to avoid iterating every method symbols in the solution.
             var symbolComputer = await ExtensionMethodSymbolComputer.CreateAsync(
-                    document,
-                    position,
-                    receiverTypeSymbol,
-                    namespaceInScope,
-                    cancellationToken
-                )
+                document,
+                position,
+                receiverTypeSymbol,
+                namespaceInScope,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var (extentsionMethodSymbols, isPartialResult) =
                 await symbolComputer.GetExtensionMethodSymbolsAsync(
-                        forceIndexCreation,
-                        cancellationToken
-                    )
+                    forceIndexCreation,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             var getSymbolsTicks = Environment.TickCount - ticks;
             ticks = Environment.TickCount;
 
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var items = ConvertSymbolsToCompletionItems(
                 compilation,
@@ -193,13 +194,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         )
         {
             Dictionary<ITypeSymbol, bool> typeConvertibilityCache = new();
-            using var _1 = PooledDictionary<INamespaceSymbol, string>.GetInstance(
-                out var namespaceNameCache
-            );
+            using var _1 = PooledDictionary<INamespaceSymbol, string>
+                .GetInstance(out var namespaceNameCache);
             using var _2 = PooledDictionary<
                 (string containingNamespace, string methodName, bool isGeneric),
                 (IMethodSymbol bestSymbol, int overloadCount, bool includeInTargetTypedCompletion)
-            >.GetInstance(out var overloadMap);
+            >
+                .GetInstance(out var overloadMap);
 
             // Aggregate overloads
             foreach (var symbol in extentsionMethodSymbols)
@@ -264,9 +265,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             // Then convert symbols into completion items
-            using var _3 = ArrayBuilder<SerializableImportCompletionItem>.GetInstance(
-                out var itemsBuilder
-            );
+            using var _3 = ArrayBuilder<SerializableImportCompletionItem>
+                .GetInstance(out var itemsBuilder);
 
             foreach (
                 var (

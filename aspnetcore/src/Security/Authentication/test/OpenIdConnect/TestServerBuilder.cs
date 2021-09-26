@@ -69,92 +69,86 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             AuthenticationProperties properties
         )
         {
-            var host = new HostBuilder().ConfigureWebHost(
-                    builder =>
-                        builder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseAuthentication();
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            var req = context.Request;
-                                            var res = context.Response;
+            var host = new HostBuilder()
+                .ConfigureWebHost(builder => builder.UseTestServer().Configure(
+                            app =>
+                            {
+                                app.UseAuthentication();
+                                app.Use(
+                                    async (context, next) =>
+                                    {
+                                        var req = context.Request;
+                                        var res = context.Response;
 
-                                            if (req.Path == new PathString(Challenge))
-                                            {
-                                                await context.ChallengeAsync(
-                                                    OpenIdConnectDefaults.AuthenticationScheme
-                                                );
-                                            }
-                                            else if (
-                                                req.Path == new PathString(ChallengeWithProperties)
-                                            )
-                                            {
-                                                await context.ChallengeAsync(
-                                                    OpenIdConnectDefaults.AuthenticationScheme,
-                                                    properties
-                                                );
-                                            }
-                                            else if (
-                                                req.Path == new PathString(ChallengeWithOutContext)
-                                            )
-                                            {
-                                                res.StatusCode = 401;
-                                            }
-                                            else if (req.Path == new PathString(Signin))
-                                            {
-                                                await context.SignInAsync(
-                                                    OpenIdConnectDefaults.AuthenticationScheme,
-                                                    new ClaimsPrincipal()
-                                                );
-                                            }
-                                            else if (req.Path == new PathString(Signout))
-                                            {
-                                                await context.SignOutAsync(
-                                                    OpenIdConnectDefaults.AuthenticationScheme
-                                                );
-                                            }
-                                            else if (
-                                                req.Path
-                                                == new PathString(
-                                                    "/signout_with_specific_redirect_uri"
-                                                )
-                                            )
-                                            {
-                                                await context.SignOutAsync(
-                                                    OpenIdConnectDefaults.AuthenticationScheme,
-                                                    new AuthenticationProperties()
-                                                    {
-                                                        RedirectUri =
-                                                            "http://www.example.com/specific_redirect_uri"
-                                                    }
-                                                );
-                                            }
-                                            else if (handler != null)
-                                            {
-                                                await handler(context);
-                                            }
-                                            else
-                                            {
-                                                await next();
-                                            }
+                                        if (req.Path == new PathString(Challenge))
+                                        {
+                                            await context.ChallengeAsync(
+                                                OpenIdConnectDefaults.AuthenticationScheme
+                                            );
                                         }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddAuthentication(
-                                            CookieAuthenticationDefaults.AuthenticationScheme
+                                        else if (
+                                            req.Path == new PathString(ChallengeWithProperties)
                                         )
-                                        .AddCookie()
-                                        .AddOpenIdConnect(options);
-                                }
-                            )
-                )
+                                        {
+                                            await context.ChallengeAsync(
+                                                OpenIdConnectDefaults.AuthenticationScheme,
+                                                properties
+                                            );
+                                        }
+                                        else if (
+                                            req.Path == new PathString(ChallengeWithOutContext)
+                                        )
+                                        {
+                                            res.StatusCode = 401;
+                                        }
+                                        else if (req.Path == new PathString(Signin))
+                                        {
+                                            await context.SignInAsync(
+                                                OpenIdConnectDefaults.AuthenticationScheme,
+                                                new ClaimsPrincipal()
+                                            );
+                                        }
+                                        else if (req.Path == new PathString(Signout))
+                                        {
+                                            await context.SignOutAsync(
+                                                OpenIdConnectDefaults.AuthenticationScheme
+                                            );
+                                        }
+                                        else if (
+                                            req.Path
+                                            == new PathString("/signout_with_specific_redirect_uri")
+                                        )
+                                        {
+                                            await context.SignOutAsync(
+                                                OpenIdConnectDefaults.AuthenticationScheme,
+                                                new AuthenticationProperties()
+                                                {
+                                                    RedirectUri =
+                                                        "http://www.example.com/specific_redirect_uri"
+                                                }
+                                            );
+                                        }
+                                        else if (handler != null)
+                                        {
+                                            await handler(context);
+                                        }
+                                        else
+                                        {
+                                            await next();
+                                        }
+                                    }
+                                );
+                            }
+                        ).ConfigureServices(
+                            services =>
+                            {
+                                services.AddAuthentication(
+                                    CookieAuthenticationDefaults.AuthenticationScheme
+                                )
+                                    .AddCookie()
+                                    .AddOpenIdConnect(options);
+                            }
+                        ))
                 .Build();
 
             host.Start();

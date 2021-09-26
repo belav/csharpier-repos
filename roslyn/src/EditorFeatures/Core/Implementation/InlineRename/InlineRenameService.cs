@@ -70,10 +70,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             var editorRenameService =
                 document.GetRequiredLanguageService<IEditorInlineRenameService>();
             var renameInfo = editorRenameService.GetRenameInfoAsync(
-                    document,
-                    textSpan.Start,
-                    cancellationToken
-                )
+                document,
+                textSpan.Start,
+                cancellationToken
+            )
                 .WaitAndGetResult(cancellationToken);
 
             var readOnlyOrCannotNavigateToSpanSessionInfo = IsReadOnlyOrCannotNavigateToSpan(
@@ -126,20 +126,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 )
                 {
                     var workspace = document.Project.Solution.Workspace;
-                    var navigationService =
-                        workspace.Services.GetRequiredService<IDocumentNavigationService>();
+                    var navigationService = workspace.Services
+                        .GetRequiredService<IDocumentNavigationService>();
 
                     foreach (var documentSpan in inlineRenameInfo.DefinitionLocations)
                     {
-                        var sourceText = documentSpan.Document.GetTextSynchronously(
-                            cancellationToken
-                        );
+                        var sourceText = documentSpan.Document
+                            .GetTextSynchronously(cancellationToken);
                         var textSnapshot = sourceText.FindCorrespondingEditorTextSnapshot();
 
                         if (textSnapshot != null)
                         {
                             var buffer = textSnapshot.TextBuffer;
-                            var originalSpan = documentSpan.SourceSpan.ToSnapshotSpan(textSnapshot)
+                            var originalSpan = documentSpan.SourceSpan
+                                .ToSnapshotSpan(textSnapshot)
                                 .TranslateTo(
                                     buffer.CurrentSnapshot,
                                     SpanTrackingMode.EdgeInclusive

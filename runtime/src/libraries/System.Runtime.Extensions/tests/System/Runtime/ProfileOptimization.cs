@@ -24,22 +24,21 @@ namespace System.Runtime.Tests
             string profileFile = GetTestFileName();
 
             RemoteExecutor.Invoke(
-                    (_profileFile, _stopProfile) =>
-                    {
-                        // Perform the test work
-                        ProfileOptimization.SetProfileRoot(Path.GetDirectoryName(_profileFile));
-                        ProfileOptimization.StartProfile(Path.GetFileName(_profileFile));
+                (_profileFile, _stopProfile) =>
+                {
+                    // Perform the test work
+                    ProfileOptimization.SetProfileRoot(Path.GetDirectoryName(_profileFile));
+                    ProfileOptimization.StartProfile(Path.GetFileName(_profileFile));
 
-                        if (bool.Parse(_stopProfile))
-                        {
-                            ProfileOptimization.StartProfile(null);
-                            CheckProfileFileExists(_profileFile);
-                        }
-                    },
-                    profileFile,
-                    stopProfile.ToString()
-                )
-                .Dispose();
+                    if (bool.Parse(_stopProfile))
+                    {
+                        ProfileOptimization.StartProfile(null);
+                        CheckProfileFileExists(_profileFile);
+                    }
+                },
+                profileFile,
+                stopProfile.ToString()
+            ).Dispose();
 
             CheckProfileFileExists(profileFile);
         }

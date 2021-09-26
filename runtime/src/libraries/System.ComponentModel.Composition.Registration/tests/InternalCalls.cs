@@ -32,7 +32,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         public static PartBuilder PartBuilder(Predicate<Type> selectType)
         {
-            return (PartBuilder)typeof(PartBuilder).GetConstructor(
+            return (PartBuilder)typeof(PartBuilder)
+                .GetConstructor(
                     BindingFlags.NonPublic | BindingFlags.Instance,
                     null,
                     new Type[] { typeof(Predicate<Type>) },
@@ -43,7 +44,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         public static PartBuilder<T> PartBuilder<T>(Predicate<Type> selectType)
         {
-            return (PartBuilder<T>)typeof(PartBuilder<T>).GetConstructor(
+            return (PartBuilder<T>)typeof(PartBuilder<T>)
+                .GetConstructor(
                     BindingFlags.NonPublic | BindingFlags.Instance,
                     null,
                     new Type[] { typeof(Predicate<Type>) },
@@ -98,7 +100,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
             ref List<Tuple<object, List<Attribute>>> configuredMembers
         )
         {
-            typeof(PartBuilder).GetMethod(
+            typeof(PartBuilder)
+                .GetMethod(
                     "BuildDefaultConstructorAttributes",
                     BindingFlags.NonPublic | BindingFlags.Static
                 )

@@ -490,9 +490,9 @@ IAnonymousFunctionOperation (Symbol: lambda expression) (OperationKind.Anonymous
                 // CS0815: Cannot assign lambda expression to an implicitly-typed variable
                 //         var x = /*<bind>*/() => F()/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue,
-                        "x = /*<bind>*/() => F()"
-                    )
+                    ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue,
+                    "x = /*<bind>*/() => F()"
+                )
                     .WithArguments("lambda expression")
                     .WithLocation(8, 13)
             };

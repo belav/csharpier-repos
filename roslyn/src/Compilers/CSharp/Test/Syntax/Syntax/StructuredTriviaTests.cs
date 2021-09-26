@@ -82,8 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("<goo> </goo>", xmlElement.ToString());
 
             var docComment = SyntaxFactory.DocumentationCommentTrivia(
-                    SyntaxKind.SingleLineDocumentationCommentTrivia
-                )
+                SyntaxKind.SingleLineDocumentationCommentTrivia
+            )
                 .WithContent(new SyntaxList<XmlNodeSyntax>(xmlElement));
             Assert.Equal(" <goo> </goo> ", docComment.ToFullString());
             // Assert.Equal("<goo> </goo>", docComment.GetText());

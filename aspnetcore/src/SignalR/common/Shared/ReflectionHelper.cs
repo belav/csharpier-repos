@@ -49,20 +49,19 @@ namespace Microsoft.AspNetCore.SignalR
                 }
             }
 
-            return type.GetInterfaces()
-                .Any(
-                    t =>
+            return type.GetInterfaces().Any(
+                t =>
+                {
+                    if (t.IsGenericType)
                     {
-                        if (t.IsGenericType)
-                        {
-                            return t.GetGenericTypeDefinition() == typeof(IAsyncEnumerable<>);
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        return t.GetGenericTypeDefinition() == typeof(IAsyncEnumerable<>);
                     }
-                );
+                    else
+                    {
+                        return false;
+                    }
+                }
+            );
         }
     }
 }

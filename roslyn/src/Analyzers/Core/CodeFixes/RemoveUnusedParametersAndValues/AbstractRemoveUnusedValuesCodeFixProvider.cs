@@ -198,11 +198,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         // For the above examples, it will be "return x + M();" AND "=> x ?? new C();" respectively.
                         // For these cases, we want to show the title as "Remove redundant assignment" instead of "Use discard _".
 
-                        var syntaxFacts =
-                            context.Document.GetLanguageService<ISyntaxFactsService>();
-                        var root = await context.Document.GetSyntaxRootAsync(
-                                context.CancellationToken
-                            )
+                        var syntaxFacts = context.Document
+                            .GetLanguageService<ISyntaxFactsService>();
+                        var root = await context.Document
+                            .GetSyntaxRootAsync(context.CancellationToken)
                             .ConfigureAwait(false);
                         var node = root.FindNode(context.Span, getInnermostNodeForTie: true);
                         if (
@@ -416,31 +415,31 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     );
 
                     await FixAllAsync(
-                            diagnosticId,
-                            diagnosticsToFix.Select(d => d),
-                            document,
-                            semanticModel,
-                            root,
-                            containingMemberDeclaration,
-                            preference,
-                            removeAssignments,
-                            nameGenerator,
-                            editor,
-                            syntaxFacts,
-                            cancellationToken
-                        )
+                        diagnosticId,
+                        diagnosticsToFix.Select(d => d),
+                        document,
+                        semanticModel,
+                        root,
+                        containingMemberDeclaration,
+                        preference,
+                        removeAssignments,
+                        nameGenerator,
+                        editor,
+                        syntaxFacts,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
                 // Second pass to post process the document.
                 var currentRoot = editor.GetChangedRoot();
                 var newRoot = await PostProcessDocumentAsync(
-                        document,
-                        currentRoot,
-                        diagnosticId,
-                        preference,
-                        cancellationToken
-                    )
+                    document,
+                    currentRoot,
+                    diagnosticId,
+                    preference,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (currentRoot != newRoot)
                 {
@@ -490,18 +489,18 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     // int a = 0; int b = 1;
                     // After fix it would be int a; int b;
                     await FixAllValueAssignedIsUnusedDiagnosticsAsync(
-                            diagnostics.OrderBy(d => d.Location.SourceSpan.Start),
-                            document,
-                            semanticModel,
-                            root,
-                            containingMemberDeclaration,
-                            preference,
-                            removeAssignments,
-                            nameGenerator,
-                            editor,
-                            syntaxFacts,
-                            cancellationToken
-                        )
+                        diagnostics.OrderBy(d => d.Location.SourceSpan.Start),
+                        document,
+                        semanticModel,
+                        root,
+                        containingMemberDeclaration,
+                        preference,
+                        removeAssignments,
+                        nameGenerator,
+                        editor,
+                        syntaxFacts,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     break;
 
@@ -548,11 +547,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                             {
                                 var discardAssignmentExpression =
                                     (TExpressionSyntax)generator.AssignmentStatement(
-                                            left: generator.IdentifierName(
-                                                AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
-                                            ),
-                                            right: node.WithoutTrivia()
-                                        )
+                                        left: generator.IdentifierName(
+                                            AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
+                                        ),
+                                        right: node.WithoutTrivia()
+                                    )
                                         .WithTriviaFrom(node)
                                         .WithAdditionalAnnotations(
                                             Simplifier.Annotation,
@@ -576,7 +575,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                     node
                                 );
                                 // Add Simplifier annotation so that 'var'/explicit type is correctly added based on user options.
-                                var localDecl = editor.Generator.LocalDeclarationStatement(
+                                var localDecl = editor.Generator
+                                    .LocalDeclarationStatement(
                                         name: name,
                                         initializer: expression.WithoutLeadingTrivia()
                                     )
@@ -620,19 +620,16 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             // For both the above cases, if the original diagnostic was reported on a local declaration, i.e. redundant initialization
             // at declaration, then we also add a new variable declaration statement without initializer for this local.
 
-            using var _1 = PooledDictionary<SyntaxNode, SyntaxNode>.GetInstance(
-                out var nodeReplacementMap
-            );
+            using var _1 = PooledDictionary<SyntaxNode, SyntaxNode>
+                .GetInstance(out var nodeReplacementMap);
             using var _2 = PooledHashSet<SyntaxNode>.GetInstance(out var nodesToRemove);
             using var _3 =
-                PooledHashSet<(TLocalDeclarationStatementSyntax declarationStatement, SyntaxNode node)>.GetInstance(
-                    out var nodesToAdd
-                );
+                PooledHashSet<(TLocalDeclarationStatementSyntax declarationStatement, SyntaxNode node)>
+                    .GetInstance(out var nodesToAdd);
             // Indicates if the node's trivia was processed.
             using var _4 = PooledHashSet<SyntaxNode>.GetInstance(out var processedNodes);
-            using var _5 = PooledHashSet<TLocalDeclarationStatementSyntax>.GetInstance(
-                out var candidateDeclarationStatementsForRemoval
-            );
+            using var _5 = PooledHashSet<TLocalDeclarationStatementSyntax>
+                .GetInstance(out var candidateDeclarationStatementsForRemoval);
             var hasAnyUnusedLocalAssignment = false;
 
             foreach (var (node, isUnusedLocalAssignment) in GetNodesToFix())
@@ -716,9 +713,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     var newNameToken =
                         preference == UnusedValuePreference.DiscardVariable
                             ? document.GetRequiredLanguageService<SyntaxGeneratorInternal>()
-                                  .Identifier(
-                                      AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
-                                  )
+                              .Identifier(
+                                  AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
+                              )
                             : nameGenerator.GenerateUniqueNameAtSpanStart(node);
                     newLocalNameOpt = newNameToken.ValueText;
                     var newNameNode = TryUpdateNameForFlaggedNode(node, newNameToken);
@@ -841,10 +838,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         && syntaxFacts.GetInitializerOfVariableDeclarator(variables[0]) == null
                         && !(
                             await IsLocalDeclarationWithNoReferencesAsync(
-                                    localDeclarationStatement,
-                                    document,
-                                    cancellationToken
-                                )
+                                localDeclarationStatement,
+                                document,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         )
                     )
@@ -917,10 +914,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 ITypeSymbol type,
                 string name
             ) =>
-                (TLocalDeclarationStatementSyntax)editor.Generator.LocalDeclarationStatement(
-                        type,
-                        name
-                    )
+                (TLocalDeclarationStatementSyntax)editor.Generator
+                    .LocalDeclarationStatement(type, name)
                     .WithLeadingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed)
                     .WithAdditionalAnnotations(
                         s_newLocalDeclarationStatementAnnotation,
@@ -1018,11 +1013,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             if (preference == UnusedValuePreference.DiscardVariable)
             {
                 currentRoot = await PostProcessDocumentCoreAsync(
-                        ReplaceDiscardDeclarationsWithAssignmentsAsync,
-                        currentRoot,
-                        document,
-                        cancellationToken
-                    )
+                    ReplaceDiscardDeclarationsWithAssignmentsAsync,
+                    currentRoot,
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -1031,11 +1026,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             if (NeedsToMoveNewLocalDeclarationsNearReference(diagnosticId))
             {
                 currentRoot = await PostProcessDocumentCoreAsync(
-                        AdjustLocalDeclarationsAsync,
-                        currentRoot,
-                        document,
-                        cancellationToken
-                    )
+                    AdjustLocalDeclarationsAsync,
+                    currentRoot,
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -1060,9 +1055,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             var newDocument = document.WithSyntaxRoot(currentRoot);
             var newRoot = await newDocument.GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
-            using var _1 = PooledDictionary<SyntaxNode, SyntaxNode>.GetInstance(
-                out var memberDeclReplacementsMap
-            );
+            using var _1 = PooledDictionary<SyntaxNode, SyntaxNode>
+                .GetInstance(out var memberDeclReplacementsMap);
 
             foreach (
                 var memberDecl in newRoot.DescendantNodes()
@@ -1070,10 +1064,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             )
             {
                 var newMemberDecl = await processMemberDeclarationAsync(
-                        memberDecl,
-                        newDocument,
-                        cancellationToken
-                    )
+                    memberDecl,
+                    newDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 memberDeclReplacementsMap.Add(memberDecl, newMemberDecl);
             }
@@ -1108,11 +1102,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             return await service.ReplaceAsync(
-                    memberDeclaration,
-                    semanticModel,
-                    document.Project.Solution.Workspace,
-                    cancellationToken
-                )
+                memberDeclaration,
+                semanticModel,
+                document.Project.Solution.Workspace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -1184,18 +1178,18 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     // Otherwise, move the declaration closer to the first reference if possible.
                     if (
                         await service.CanMoveDeclarationNearReferenceAsync(
-                                document,
-                                declStatement,
-                                cancellationToken
-                            )
+                            document,
+                            declStatement,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {
                         document = await service.MoveDeclarationNearReferenceAsync(
-                                document,
-                                declStatement,
-                                cancellationToken
-                            )
+                            document,
+                            declStatement,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         documentUpdated = true;
                     }
@@ -1238,10 +1232,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     // Check if we have no references to local in fixed code.
                     if (
                         await IsLocalDeclarationWithNoReferencesAsync(
-                                newDecl,
-                                document,
-                                cancellationToken
-                            )
+                            newDecl,
+                            document,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {
@@ -1277,10 +1271,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
             // Check if the declared variable has no references in fixed code.
             var referencedSymbols = await SymbolFinder.FindReferencesAsync(
-                    local,
-                    document.Project.Solution,
-                    cancellationToken
-                )
+                local,
+                document.Project.Solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return referencedSymbols.Count() == 1 && referencedSymbols.Single().Locations.IsEmpty();
         }

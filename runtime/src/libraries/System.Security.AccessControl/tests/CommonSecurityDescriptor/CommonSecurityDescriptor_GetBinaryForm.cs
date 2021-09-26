@@ -234,11 +234,12 @@ namespace System.Security.AccessControl.Tests
                 Assert.True(resultSddl == null && verifierSddl == null);
             else
                 Assert.True(
-                    string.Compare(
-                        resultSddl,
-                        verifierSddl,
-                        StringComparison.CurrentCultureIgnoreCase
-                    ) == 0
+                    string
+                        .Compare(
+                            resultSddl,
+                            verifierSddl,
+                            StringComparison.CurrentCultureIgnoreCase
+                        ) == 0
                 );
         }
     }

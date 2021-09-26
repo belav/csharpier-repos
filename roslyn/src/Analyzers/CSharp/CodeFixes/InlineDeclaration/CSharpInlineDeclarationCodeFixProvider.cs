@@ -73,10 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
         )
         {
 #if CODE_STYLE
-            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
-                editor.OriginalRoot.SyntaxTree,
-                cancellationToken
-            );
+            var options = document.Project.AnalyzerOptions
+                .GetAnalyzerOptionSet(editor.OriginalRoot.SyntaxTree, cancellationToken);
 #else
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 #endif
@@ -87,9 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             foreach (var diagnostic in diagnostics)
             {
                 declarationsToRemove.Add(
-                    (LocalDeclarationStatementSyntax)diagnostic.AdditionalLocations[0].FindNode(
-                        cancellationToken
-                    ).Parent.Parent
+                    (LocalDeclarationStatementSyntax)diagnostic.AdditionalLocations[0]
+                        .FindNode(cancellationToken).Parent.Parent
                 );
             }
 
@@ -104,36 +101,32 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             );
 
             await editor.ApplyExpressionLevelSemanticEditsAsync(
-                    document,
-                    originalNodes,
-                    t =>
-                    {
-                        using var additionalNodesToTrackDisposer =
-                            ArrayBuilder<SyntaxNode>.GetInstance(
-                                capacity: 2,
-                                out var additionalNodesToTrack
-                            );
-                        additionalNodesToTrack.Add(t.identifier);
-                        additionalNodesToTrack.Add(t.declarator);
+                document,
+                originalNodes,
+                t =>
+                {
+                    using var additionalNodesToTrackDisposer = ArrayBuilder<SyntaxNode>
+                        .GetInstance(capacity: 2, out var additionalNodesToTrack);
+                    additionalNodesToTrack.Add(t.identifier);
+                    additionalNodesToTrack.Add(t.declarator);
 
-                        return (t.invocationOrCreation, additionalNodesToTrack.ToImmutable());
-                    },
-                    (_1, _2, _3) => true,
-                    (semanticModel, currentRoot, t, currentNode) =>
-                        ReplaceIdentifierWithInlineDeclaration(
-                            options,
-                            semanticModel,
-                            currentRoot,
-                            t.declarator,
-                            t.identifier,
-                            currentNode,
-                            declarationsToRemove,
-                            document.Project.Solution.Workspace,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+                    return (t.invocationOrCreation, additionalNodesToTrack.ToImmutable());
+                },
+                (_1, _2, _3) => true,
+                (semanticModel, currentRoot, t, currentNode) =>
+                    ReplaceIdentifierWithInlineDeclaration(
+                        options,
+                        semanticModel,
+                        currentRoot,
+                        t.declarator,
+                        t.identifier,
+                        currentNode,
+                        declarationsToRemove,
+                        document.Project.Solution.Workspace,
+                        cancellationToken
+                    ),
+                cancellationToken
+            ).ConfigureAwait(false);
         }
 
         private static (VariableDeclaratorSyntax declarator, IdentifierNameSyntax identifier, SyntaxNode invocationOrCreation) FindDiagnosticNodes(
@@ -482,8 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                 }
 
                 var updatedInvocationOrCreation = updatedTopmostContainer.GetAnnotatedNodes(
-                        annotation
-                    )
+                    annotation
+                )
                     .Single();
                 var updatedSymbolInfo = speculativeModel.GetSymbolInfo(
                     updatedInvocationOrCreation,
@@ -491,10 +484,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                 );
 
                 if (
-                    !SymbolEquivalenceComparer.Instance.Equals(
-                        previousSymbol,
-                        updatedSymbolInfo.Symbol
-                    )
+                    !SymbolEquivalenceComparer.Instance
+                        .Equals(previousSymbol, updatedSymbolInfo.Symbol)
                 )
                 {
                     // We're pointing at a new symbol now.  Semantic have changed.
@@ -508,12 +499,12 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
         private static SyntaxNode GetTopmostContainer(SyntaxNode expression)
         {
             return expression.GetAncestorsOrThis(
-                    a =>
-                        a is StatementSyntax
-                        || a is EqualsValueClauseSyntax
-                        || a is ArrowExpressionClauseSyntax
-                        || a is ConstructorInitializerSyntax
-                )
+                a =>
+                    a is StatementSyntax
+                    || a is EqualsValueClauseSyntax
+                    || a is ArrowExpressionClauseSyntax
+                    || a is ConstructorInitializerSyntax
+            )
                 .LastOrDefault();
         }
 

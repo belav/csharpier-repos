@@ -57,8 +57,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Intentionally avoiding using Xunit.Assert to get more diagnostics.
             var tempDataSerializers = _serviceCollection.Where(
-                    f => f.ServiceType == typeof(TempDataSerializer)
-                )
+                f => f.ServiceType == typeof(TempDataSerializer)
+            )
                 .ToList();
             if (
                 tempDataSerializers.Count == 1
@@ -102,10 +102,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Assert 1
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.True(
-                response.Headers.TryGetValues(
-                    HeaderNames.SetCookie,
-                    out IEnumerable<string> setCookieValues
-                )
+                response.Headers
+                    .TryGetValues(HeaderNames.SetCookie, out IEnumerable<string> setCookieValues)
             );
             setCookieValues = setCookieValues.Where(
                 cookie => cookie.Contains(CookieTempDataProvider.CookieName)
@@ -139,8 +137,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(expected, body);
             Assert.True(response.Headers.TryGetValues(HeaderNames.SetCookie, out setCookieValues));
             var setCookieHeaderValue = setCookieValues.Select(
-                    setCookieValue => SetCookieHeaderValue.Parse(setCookieValue)
-                )
+                setCookieValue => SetCookieHeaderValue.Parse(setCookieValue)
+            )
                 .FirstOrDefault(
                     setCookieHeader => setCookieHeader.Name == CookieTempDataProvider.CookieName
                 );
@@ -176,14 +174,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Assert 1
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.True(
-                response.Headers.TryGetValues(
-                    HeaderNames.SetCookie,
-                    out IEnumerable<string> setCookieValues
-                )
+                response.Headers
+                    .TryGetValues(HeaderNames.SetCookie, out IEnumerable<string> setCookieValues)
             );
             var setCookieHeader = setCookieValues.Select(
-                    setCookieValue => SetCookieHeaderValue.Parse(setCookieValue)
-                )
+                setCookieValue => SetCookieHeaderValue.Parse(setCookieValue)
+            )
                 .FirstOrDefault(
                     setCookieHeaderValue =>
                         setCookieHeaderValue.Name == CookieTempDataProvider.CookieName
@@ -213,8 +209,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Foo", body);
             Assert.True(response.Headers.TryGetValues(HeaderNames.SetCookie, out setCookieValues));
             setCookieHeader = setCookieValues.Select(
-                    setCookieValue => SetCookieHeaderValue.Parse(setCookieValue)
-                )
+                setCookieValue => SetCookieHeaderValue.Parse(setCookieValue)
+            )
                 .FirstOrDefault(
                     setCookieHeaderValue =>
                         setCookieHeaderValue.Name == CookieTempDataProvider.CookieName
@@ -251,14 +247,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.True(
-                response.Headers.TryGetValues(
-                    HeaderNames.SetCookie,
-                    out IEnumerable<string> setCookieValues
-                )
+                response.Headers
+                    .TryGetValues(HeaderNames.SetCookie, out IEnumerable<string> setCookieValues)
             );
             var setCookieHeader = setCookieValues.Select(
-                    setCookieValue => SetCookieHeaderValue.Parse(setCookieValue)
-                )
+                setCookieValue => SetCookieHeaderValue.Parse(setCookieValue)
+            )
                 .FirstOrDefault(
                     setCookieHeaderValue =>
                         setCookieHeaderValue.Name == CookieTempDataProvider.CookieName

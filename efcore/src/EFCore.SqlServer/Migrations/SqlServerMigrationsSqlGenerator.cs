@@ -276,9 +276,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             IEnumerable<ITableIndex>? indexesToRebuild = null;
             var column = model?.GetRelationalModel()
-                .FindTable(operation.Table, operation.Schema)?.Columns.FirstOrDefault(
-                c => c.Name == operation.Name
-            );
+                .FindTable(operation.Table, operation.Schema)?.Columns
+                .FirstOrDefault(c => c.Name == operation.Name);
 
             if (operation.ComputedColumnSql != null)
             {
@@ -408,10 +407,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             {
                 builder.Append("ALTER TABLE ")
                     .Append(
-                        Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                            operation.Table,
-                            operation.Schema
-                        )
+                        Dependencies.SqlGenerationHelper
+                            .DelimitIdentifier(operation.Table, operation.Schema)
                     )
                     .Append(" ALTER COLUMN ");
 
@@ -462,10 +459,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             {
                 builder.Append("ALTER TABLE ")
                     .Append(
-                        Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                            operation.Table,
-                            operation.Schema
-                        )
+                        Dependencies.SqlGenerationHelper
+                            .DelimitIdentifier(operation.Table, operation.Schema)
                     )
                     .Append(" ADD");
                 DefaultValue(
@@ -537,10 +532,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             }
 
             Rename(
-                Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                    operation.Table,
-                    operation.Schema
-                )
+                Dependencies.SqlGenerationHelper
+                    .DelimitIdentifier(operation.Table, operation.Schema)
                     + "."
                     + Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name),
                 operation.NewName,
@@ -577,10 +570,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             if (operation.NewName != null && operation.NewName != name)
             {
                 Rename(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    ),
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema),
                     operation.NewName,
                     builder
                 );
@@ -617,10 +608,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER SEQUENCE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema)
                 )
                 .Append(" RESTART WITH ")
                 .Append(IntegerConstant(operation.StartValue))
@@ -716,10 +705,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             if (operation.NewName != null && operation.NewName != name)
             {
                 Rename(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    ),
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema),
                     operation.NewName,
                     builder
                 );
@@ -788,9 +775,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Check.NotNull(builder, nameof(builder));
 
             var table = model?.GetRelationalModel().FindTable(operation.Table, operation.Schema);
-            var hasNullableColumns = operation.Columns.Any(
-                c => table?.FindColumn(c)?.IsNullable != false
-            );
+            var hasNullableColumns = operation.Columns
+                .Any(c => table?.FindColumn(c)?.IsNullable != false);
 
             var memoryOptimized = IsMemoryOptimized(
                 operation,
@@ -802,10 +788,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             {
                 builder.Append("ALTER TABLE ")
                     .Append(
-                        Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                            operation.Table,
-                            operation.Schema
-                        )
+                        Dependencies.SqlGenerationHelper
+                            .DelimitIdentifier(operation.Table, operation.Schema)
                     )
                     .Append(" ADD INDEX ")
                     .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
@@ -836,9 +820,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 {
                     subBuilder.EndCommand();
 
-                    var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(
-                        typeof(string)
-                    );
+                    var stringTypeMapping = Dependencies.TypeMappingSource
+                        .GetMapping(typeof(string));
                     var command = subBuilder.GetCommandList().Single();
 
                     builder.Append("EXEC(")
@@ -941,10 +924,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("CREATE SEQUENCE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema)
                 );
 
             if (operation.ClrType != typeof(long))
@@ -1341,10 +1322,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             {
                 builder.Append("ALTER TABLE ")
                     .Append(
-                        Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                            operation.Table!,
-                            operation.Schema
-                        )
+                        Dependencies.SqlGenerationHelper
+                            .DelimitIdentifier(operation.Table!, operation.Schema)
                     )
                     .Append(" DROP INDEX ")
                     .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name));
@@ -1355,10 +1334,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
                     .Append(" ON ")
                     .Append(
-                        Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                            operation.Table,
-                            operation.Schema
-                        )
+                        Dependencies.SqlGenerationHelper
+                            .DelimitIdentifier(operation.Table, operation.Schema)
                     );
             }
 
@@ -1421,10 +1398,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Check.NotNull(builder, nameof(builder));
 
             Rename(
-                Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                    operation.Table,
-                    operation.Schema
-                )
+                Dependencies.SqlGenerationHelper
+                    .DelimitIdentifier(operation.Table, operation.Schema)
                     + "."
                     + Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name),
                 operation.NewName,
@@ -1525,13 +1500,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             GenerateIdentityInsert(builder, operation, on: true);
 
             var sqlBuilder = new StringBuilder();
-            (
-                (SqlServerUpdateSqlGenerator)Dependencies.UpdateSqlGenerator
-            ).AppendBulkInsertOperation(
-                sqlBuilder,
-                GenerateModificationCommands(operation, model).ToList(),
-                0
-            );
+            ((SqlServerUpdateSqlGenerator)Dependencies.UpdateSqlGenerator)
+                .AppendBulkInsertOperation(
+                    sqlBuilder,
+                    GenerateModificationCommands(operation, model).ToList(),
+                    0
+                );
 
             if (Options.HasFlag(MigrationsSqlGenerationOptions.Idempotent))
             {
@@ -1564,18 +1538,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             builder.Append("IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE")
                 .Append(" [name] IN (")
                 .Append(
-                    string.Join(
-                        ", ",
-                        operation.Columns.Select(stringTypeMapping.GenerateSqlLiteral)
-                    )
+                    string
+                        .Join(", ", operation.Columns.Select(stringTypeMapping.GenerateSqlLiteral))
                 )
                 .Append(") AND [object_id] = OBJECT_ID(")
                 .Append(
                     stringTypeMapping.GenerateSqlLiteral(
-                        Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                            operation.Table,
-                            operation.Schema
-                        )
+                        Dependencies.SqlGenerationHelper
+                            .DelimitIdentifier(operation.Table, operation.Schema)
                     )
                 )
                 .AppendLine("))");
@@ -1584,10 +1554,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             {
                 builder.Append("SET IDENTITY_INSERT ")
                     .Append(
-                        Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                            operation.Table,
-                            operation.Schema
-                        )
+                        Dependencies.SqlGenerationHelper
+                            .DelimitIdentifier(operation.Table, operation.Schema)
                     )
                     .Append(on ? " ON" : " OFF")
                     .AppendLine(Dependencies.SqlGenerationHelper.StatementTerminator);
@@ -1912,9 +1880,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             {
                 var table = model?.GetRelationalModel()
                     .FindTable(operation.Table, operation.Schema);
-                var nullableColumns = operation.Columns.Where(
-                        c => table?.FindColumn(c)?.IsNullable != false
-                    )
+                var nullableColumns = operation.Columns
+                    .Where(c => table?.FindColumn(c)?.IsNullable != false)
                     .ToList();
 
                 builder.Append(" WHERE ");
@@ -1926,8 +1893,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     }
 
                     builder.Append(
-                            Dependencies.SqlGenerationHelper.DelimitIdentifier(nullableColumns[i])
-                        )
+                        Dependencies.SqlGenerationHelper.DelimitIdentifier(nullableColumns[i])
+                    )
                         .Append(" IS NOT NULL");
                 }
             }

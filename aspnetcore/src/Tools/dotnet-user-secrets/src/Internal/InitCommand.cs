@@ -100,9 +100,8 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
                 // Only set the UserSecretsId if the user specified an explicit value
                 if (string.IsNullOrWhiteSpace(OverrideId))
                 {
-                    context.Reporter.Output(
-                        Resources.FormatMessage_ProjectAlreadyInitialized(projectPath)
-                    );
+                    context.Reporter
+                        .Output(Resources.FormatMessage_ProjectAlreadyInitialized(projectPath));
                     return;
                 }
 
@@ -112,7 +111,8 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
             {
                 // Find the first non-conditional PropertyGroup
                 var propertyGroup =
-                    projectDocument.Root.DescendantNodes()
+                    projectDocument.Root
+                        .DescendantNodes()
                         .FirstOrDefault(
                             node =>
                                 node is XElement el
@@ -138,9 +138,10 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
             using var xw = XmlWriter.Create(projectPath, settings);
             projectDocument.Save(xw);
 
-            context.Reporter.Output(
-                Resources.FormatMessage_SetUserSecretsIdForProject(newSecretsId, projectPath)
-            );
+            context.Reporter
+                .Output(
+                    Resources.FormatMessage_SetUserSecretsIdForProject(newSecretsId, projectPath)
+                );
         }
 
         private static string ResolveProjectPath(string name, string path)

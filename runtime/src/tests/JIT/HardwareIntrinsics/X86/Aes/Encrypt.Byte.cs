@@ -325,7 +325,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Aes).GetMethod(
+            var result = typeof(Aes)
+                .GetMethod(
                     nameof(Aes.Encrypt),
                     new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) }
                 )
@@ -346,7 +347,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Aes).GetMethod(
+            var result = typeof(Aes)
+                .GetMethod(
                     nameof(Aes.Encrypt),
                     new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) }
                 )
@@ -367,7 +369,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Aes).GetMethod(
+            var result = typeof(Aes)
+                .GetMethod(
                     nameof(Aes.Encrypt),
                     new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) }
                 )
@@ -593,15 +596,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Aes)}.{nameof(Aes.Encrypt)}<Byte>(Vector128<Byte>, Vector128<Byte>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  expectedRet: ({string.Join(", ", _expectedRet)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Aes)}.{nameof(Aes.Encrypt)}<Byte>(Vector128<Byte>, Vector128<Byte>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  expectedRet: ({string.Join(", ", _expectedRet)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -38,21 +38,21 @@ namespace System.Web.Mvc.Html.Test
             html = new HtmlHelper<object>(viewContext.Object, viewDataContainer.Object);
 
             metadataProvider.Setup(
-                    p => p.GetMetadataForProperties(It.IsAny<object>(), It.IsAny<Type>())
-                )
+                p => p.GetMetadataForProperties(It.IsAny<object>(), It.IsAny<Type>())
+            )
                 .Returns(new ModelMetadata[0]);
             metadataProvider.Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            It.IsAny<Type>(),
-                            It.IsAny<string>()
-                        )
-                )
+                p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Returns(metadata.Object);
             metadataProvider.Setup(
-                    p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>())
-                )
+                p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>())
+            )
                 .Returns(metadata.Object);
         }
 
@@ -108,13 +108,13 @@ namespace System.Web.Mvc.Html.Test
             );
             viewData.Model = model;
             metadataProvider.Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            typeof(Model),
-                            "PropertyName"
-                        )
-                )
+                p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        typeof(Model),
+                        "PropertyName"
+                    )
+            )
                 .Returns(metadata.Object)
                 .Verifiable();
 
@@ -153,8 +153,8 @@ namespace System.Web.Mvc.Html.Test
                 "Custom property name from metadata"
             );
             metadataProvider.Setup(
-                    p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>())
-                )
+                p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>())
+            )
                 .Returns(metadata.Object);
 
             //Act
@@ -216,8 +216,8 @@ namespace System.Web.Mvc.Html.Test
                 "Custom property name from metadata"
             );
             metadataProvider.Setup(
-                    p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>())
-                )
+                p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>())
+            )
                 .Returns(metadata.Object);
 
             // Act

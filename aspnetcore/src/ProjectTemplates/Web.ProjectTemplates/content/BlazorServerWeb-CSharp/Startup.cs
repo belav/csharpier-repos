@@ -71,8 +71,8 @@ namespace BlazorServerWeb_CSharp
             );
 #endif
             services.AddDefaultIdentity<IdentityUser>(
-                    options => options.SignIn.RequireConfirmedAccount = true
-                )
+                options => options.SignIn.RequireConfirmedAccount = true
+            )
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
@@ -109,7 +109,8 @@ namespace BlazorServerWeb_CSharp
 #endif
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
-            services.AddControllersWithViews().AddMicrosoftIdentityUI();
+            services.AddControllersWithViews()
+                .AddMicrosoftIdentityUI();
 
             services.AddAuthorization(
                 options =>

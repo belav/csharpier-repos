@@ -361,11 +361,11 @@ namespace Moq
                     Debug.Assert(method.IsIndexerAccessor());
 
                     builder.AppendCommaSeparated(
-                            "[",
-                            arguments.Take(arguments.Count() - 1),
-                            AppendExpression,
-                            "] = "
-                        )
+                        "[",
+                        arguments.Take(arguments.Count() - 1),
+                        AppendExpression,
+                        "] = "
+                    )
                         .AppendExpression(arguments.Last());
                 }
             }

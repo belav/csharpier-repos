@@ -34,9 +34,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override Task Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation_complex(
             bool async
         ) =>
-            base.Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation_complex(
-                async
-            );
+            base
+                .Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation_complex(
+                    async
+                );
 
         [ConditionalTheory(Skip = "issue #19683")]
         public override Task Group_by_on_StartsWith_with_null_parameter_as_argument(bool async) =>
@@ -55,17 +56,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override Task Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
             bool async
         ) =>
-            base.Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
-                async
-            );
+            base
+                .Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
+                    async
+                );
 
         [ConditionalTheory(Skip = "issue #24325")]
         public override Task Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
             bool async
         ) =>
-            base.Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
-                async
-            );
+            base
+                .Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
+                    async
+                );
 
         [ConditionalTheory(Skip = "issue #24325")]
         public override Task Correlated_collection_with_distinct_3_levels(bool async) =>

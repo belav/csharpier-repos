@@ -293,11 +293,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // Compare name and containing symbol name. Uses HasNameQualifier
                         // extension method to avoid string allocations.
                         if (
-                            !string.Equals(
-                                namedType.MetadataName,
-                                targetInfo.Name,
-                                System.StringComparison.Ordinal
-                            ) || !namedType.HasNameQualifier(targetInfo.Namespace)
+                            !string
+                                .Equals(
+                                    namedType.MetadataName,
+                                    targetInfo.Name,
+                                    System.StringComparison.Ordinal
+                                ) || !namedType.HasNameQualifier(targetInfo.Namespace)
                         )
                         {
                             return false;

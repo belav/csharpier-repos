@@ -125,7 +125,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                           static property =>
                           {
                               var entityType = property.DeclaringEntityType;
-                              var factory = entityType.Model.GetModelDependencies()
+                              var factory = entityType.Model
+                                  .GetModelDependencies()
                                   .ParameterBindingFactories.FindFactory(
                                       property.ClrType,
                                       property.Name

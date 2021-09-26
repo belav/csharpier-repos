@@ -60,10 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             PropertyAccessMode? propertyAccessMode,
             ConfigurationSource configurationSource
         ) =>
-            (InternalNavigationBuilder?)base.UsePropertyAccessMode(
-                propertyAccessMode,
-                configurationSource
-            );
+            (InternalNavigationBuilder?)base
+                .UsePropertyAccessMode(propertyAccessMode, configurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -103,10 +101,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
                 else
                 {
-                    ((IConventionNavigation)Metadata).SetIsEagerLoaded(
-                        autoInclude,
-                        configurationSource == ConfigurationSource.DataAnnotation
-                    );
+                    ((IConventionNavigation)Metadata)
+                        .SetIsEagerLoaded(
+                            autoInclude,
+                            configurationSource == ConfigurationSource.DataAnnotation
+                        );
                 }
 
                 return this;
@@ -169,22 +168,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     }
 
                     return Metadata.IsOnDependent
-                      ? foreignKey.Builder.IsRequired(
-                            required,
-                            configurationSource
-                        )!.Metadata.DependentToPrincipal!.Builder
-                      : foreignKey.Builder.IsRequiredDependent(
-                            required,
-                            configurationSource
-                        )!.Metadata.PrincipalToDependent!.Builder;
+                      ? foreignKey.Builder
+                            .IsRequired(
+                                required,
+                                configurationSource
+                            )!.Metadata.DependentToPrincipal!.Builder
+                      : foreignKey.Builder
+                            .IsRequiredDependent(
+                                required,
+                                configurationSource
+                            )!.Metadata.PrincipalToDependent!.Builder;
                 }
 
                 if (Metadata.IsOnDependent)
                 {
-                    return foreignKey.Builder.IsRequired(
-                        required,
-                        configurationSource
-                    )!.Metadata.DependentToPrincipal!.Builder;
+                    return foreignKey.Builder
+                        .IsRequired(
+                            required,
+                            configurationSource
+                        )!.Metadata.DependentToPrincipal!.Builder;
                 }
 
                 throw new InvalidOperationException(

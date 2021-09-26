@@ -102,13 +102,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         /// <inheritdoc />
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                "({0}:{1},{2})",
-                AbsoluteIndex,
-                LineIndex,
-                CharacterIndex
-            );
+            return string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "({0}:{1},{2})",
+                    AbsoluteIndex,
+                    LineIndex,
+                    CharacterIndex
+                );
         }
 
         /// <inheritdoc />

@@ -483,7 +483,8 @@ namespace System.Linq.Expressions.Tests
         {
             var expr = Lambda<TDelegate>(
                 Call(
-                    typeof(UnaryQuoteTests).GetMethod(nameof(GetQuote))
+                    typeof(UnaryQuoteTests)
+                        .GetMethod(nameof(GetQuote))
                         .MakeGenericMethod(typeof(TQuoteType)),
                     Quote(Lambda<TQuoteType>(body))
                 ),

@@ -49,9 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpCompilation compilation
         )
         {
-            return compilation.SourceModule.GlobalNamespace.GetTypeMembers(
-                    WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
-                )
+            return compilation.SourceModule.GlobalNamespace
+                .GetTypeMembers(WellKnownMemberNames.TopLevelStatementsEntryPointTypeName)
                 .OfType<SimpleProgramNamedTypeSymbol>()
                 .SingleOrDefault();
         }
@@ -107,9 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
-            this.DeclaringCompilation.GetSpecialType(
-                Microsoft.CodeAnalysis.SpecialType.System_Object
-            );
+            this.DeclaringCompilation
+                .GetSpecialType(Microsoft.CodeAnalysis.SpecialType.System_Object);
 
         protected override void CheckBase(BindingDiagnosticBag diagnostics)
         {
@@ -252,17 +250,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             return new MembersAndInitializers(
-                nonTypeMembers: declaration.Declarations.SelectAsArray<
-                    SingleTypeDeclaration,
-                    Symbol
-                >(
-                    singleDeclaration =>
-                        new SynthesizedSimpleProgramEntryPointSymbol(
-                            this,
-                            singleDeclaration,
-                            diagnostics
-                        )
-                ),
+                nonTypeMembers: declaration.Declarations
+                    .SelectAsArray<SingleTypeDeclaration, Symbol>(
+                        singleDeclaration =>
+                            new SynthesizedSimpleProgramEntryPointSymbol(
+                                this,
+                                singleDeclaration,
+                                diagnostics
+                            )
+                    ),
                 staticInitializers: ImmutableArray<
                     ImmutableArray<FieldOrPropertyInitializer>
                 >.Empty,
@@ -305,9 +301,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             AddSynthesizedAttribute(
                 ref attributes,
-                this.DeclaringCompilation.TrySynthesizeAttribute(
-                    WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
-                )
+                this.DeclaringCompilation
+                    .TrySynthesizeAttribute(
+                        WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                    )
             );
         }
 

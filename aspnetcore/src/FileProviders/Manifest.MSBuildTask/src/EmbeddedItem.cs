@@ -13,11 +13,12 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task
 
         public bool Equals(EmbeddedItem other) =>
             string.Equals(ManifestFilePath, other?.ManifestFilePath, StringComparison.Ordinal)
-            && string.Equals(
-                AssemblyResourceName,
-                other?.AssemblyResourceName,
-                StringComparison.Ordinal
-            );
+            && string
+                .Equals(
+                    AssemblyResourceName,
+                    other?.AssemblyResourceName,
+                    StringComparison.Ordinal
+                );
 
         public override bool Equals(object obj) => Equals(obj as EmbeddedItem);
         public override int GetHashCode() =>

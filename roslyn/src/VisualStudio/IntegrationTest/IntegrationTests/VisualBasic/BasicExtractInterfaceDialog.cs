@@ -35,11 +35,8 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickOK();
@@ -77,11 +74,8 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -102,11 +96,8 @@ End Class"
 End Class"
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -142,11 +133,8 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickDeselectAll();
@@ -183,11 +171,8 @@ End Namespace"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 

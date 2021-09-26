@@ -1280,13 +1280,15 @@ SELECT @@ROWCOUNT');
             : base(
                 SqlServerTestHelpers.Instance,
                 new ServiceCollection().AddEntityFrameworkSqlServerNetTopologySuite(),
-                SqlServerTestHelpers.Instance.AddProviderOptions(
-                    (
-                        (IRelationalDbContextOptionsBuilderInfrastructure)new SqlServerDbContextOptionsBuilder(
-                            new DbContextOptionsBuilder()
-                        ).UseNetTopologySuite()
-                    ).OptionsBuilder
-                ).Options
+                SqlServerTestHelpers.Instance
+                    .AddProviderOptions(
+                        (
+                            (IRelationalDbContextOptionsBuilderInfrastructure)new SqlServerDbContextOptionsBuilder(
+                                new DbContextOptionsBuilder()
+                            )
+                                .UseNetTopologySuite()
+                        ).OptionsBuilder
+                    ).Options
             ) { }
     }
 }

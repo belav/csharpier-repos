@@ -131,49 +131,38 @@ namespace System.Linq.Parallel.Tests
         {
             //the failure was an ODE coming out due to an ephemeral disposed merged cancellation token source.
             _ = count;
-            ParallelQuery<int> left = labeled.Item.AsUnordered()
+            ParallelQuery<int> left = labeled.Item
+                .AsUnordered()
                 .WithExecutionMode(ParallelExecutionMode.ForceParallelism);
             ParallelQuery<int> right = Enumerable.Range(0, 1024)
                 .Select(x => x)
                 .AsParallel()
                 .AsUnordered();
-            AssertThrows.Wrapped<OperationCanceledException>(
-                () =>
-                    left.GroupJoin(
-                            right,
-                            x =>
-                            {
-                                throw new OperationCanceledException();
-                            },
-                            y => y,
-                            (x, e) => x
-                        )
-                        .ForAll(x => { })
-            );
-            AssertThrows.Wrapped<OperationCanceledException>(
-                () =>
-                    left.Join(
-                            right,
-                            x =>
-                            {
-                                throw new OperationCanceledException();
-                            },
-                            y => y,
-                            (x, e) => x
-                        )
-                        .ForAll(x => { })
-            );
-            AssertThrows.Wrapped<OperationCanceledException>(
-                () =>
-                    left.Zip<int, int, int>(
-                            right,
-                            (x, y) =>
-                            {
-                                throw new OperationCanceledException();
-                            }
-                        )
-                        .ForAll(x => { })
-            );
+            AssertThrows.Wrapped<OperationCanceledException>(() => left.GroupJoin(
+                        right,
+                        x =>
+                        {
+                            throw new OperationCanceledException();
+                        },
+                        y => y,
+                        (x, e) => x
+                    ).ForAll(x => { }));
+            AssertThrows.Wrapped<OperationCanceledException>(() => left.Join(
+                        right,
+                        x =>
+                        {
+                            throw new OperationCanceledException();
+                        },
+                        y => y,
+                        (x, e) => x
+                    ).ForAll(x => { }));
+            AssertThrows.Wrapped<OperationCanceledException>(() => left.Zip<int, int, int>(
+                        right,
+                        (x, y) =>
+                        {
+                            throw new OperationCanceledException();
+                        }
+                    ).ForAll(x => { }));
         }
 
         // If a query is canceled and immediately disposed, the dispose should not throw an OCE.
@@ -191,7 +180,8 @@ namespace System.Linq.Parallel.Tests
         {
             _ = count;
             CancellationTokenSource cancel = new CancellationTokenSource();
-            IEnumerator<int> enumerator = labeled.Item.WithCancellation(cancel.Token)
+            IEnumerator<int> enumerator = labeled.Item
+                .WithCancellation(cancel.Token)
                 .GetEnumerator();
             enumerator.MoveNext();
 

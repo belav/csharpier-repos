@@ -14,17 +14,18 @@ namespace Microsoft.AspNetCore.Analyzers
             {
                 var item = analysis.Options[i];
                 if (
-                    string.Equals(
-                        item.OptionsType.ToDisplayString(
-                            SymbolDisplayFormat.CSharpErrorMessageFormat
-                        ),
-                        SymbolNames.MvcOptions.MetadataName
-                    )
-                    && string.Equals(
-                        item.Property.Name,
-                        SymbolNames.MvcOptions.EnableEndpointRoutingPropertyName,
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            item.OptionsType
+                                .ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat),
+                            SymbolNames.MvcOptions.MetadataName
+                        )
+                    && string
+                        .Equals(
+                            item.Property.Name,
+                            SymbolNames.MvcOptions.EnableEndpointRoutingPropertyName,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     return item.ConstantValue as bool? == false;

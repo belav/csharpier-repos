@@ -149,7 +149,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, object, object, object> targ = callSite.Target;
             object result = targ(callSite, new[] { 1, 2, 3 }, 1);
             Assert.Equal(2, result);
@@ -169,7 +170,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, object, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, object, object, object, object> targ = callSite.Target;
             int[] array = { 1, 2, 3 };
             object result = targ(callSite, array, 1, 9);

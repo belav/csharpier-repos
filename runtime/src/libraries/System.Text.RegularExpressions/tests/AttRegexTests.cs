@@ -428,7 +428,8 @@ namespace System.Text.RegularExpressions.Tests
                     );
 
                     var actual = new HashSet<(int start, int end)>(
-                        match.Groups.Cast<Group>()
+                        match.Groups
+                            .Cast<Group>()
                             .Select(g => (start: g.Index, end: g.Index + g.Length))
                             .Distinct()
                             .OrderBy(g => g.start)

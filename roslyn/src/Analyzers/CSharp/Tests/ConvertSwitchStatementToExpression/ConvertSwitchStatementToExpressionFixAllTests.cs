@@ -215,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                 TestCode = input,
                 FixedCode = expected,
                 NumberOfFixAllIterations = 2,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(37907, "https://github.com/dotnet/roslyn/issues/37907")]

@@ -55,15 +55,16 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(
-                    new Customer
-                    {
-                        Id = 1,
-                        FirstName = "Bob",
-                        LastName = "Smith",
-                        Address = new DerivedLocalizedString { Value = "home" }
-                    }
-                );
+                context.Customers
+                    .Add(
+                        new Customer
+                        {
+                            Id = 1,
+                            FirstName = "Bob",
+                            LastName = "Smith",
+                            Address = new DerivedLocalizedString { Value = "home" }
+                        }
+                    );
 
                 base.Seed(context);
             }

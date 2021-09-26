@@ -105,14 +105,15 @@ namespace Microsoft.AspNetCore.Razor.Language
             var length = path.Length;
             Debug.Assert(fileNameIndex != -1);
             if (
-                string.Compare(
-                    path,
-                    fileNameIndex + 1,
-                    fileName,
-                    0,
-                    fileName.Length,
-                    StringComparison.Ordinal
-                ) == 0
+                string
+                    .Compare(
+                        path,
+                        fileNameIndex + 1,
+                        fileName,
+                        0,
+                        fileName.Length,
+                        StringComparison.Ordinal
+                    ) == 0
             )
             {
                 // If the specified path is for the file hierarchy being constructed, then the first file that applies

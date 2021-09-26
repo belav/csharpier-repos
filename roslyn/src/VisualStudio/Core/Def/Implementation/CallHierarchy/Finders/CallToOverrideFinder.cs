@@ -32,21 +32,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
         )
         {
             var overrides = await SymbolFinder.FindOverridesAsync(
-                    symbol,
-                    project.Solution,
-                    cancellationToken: cancellationToken
-                )
+                symbol,
+                project.Solution,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             var callsToOverrides = new List<SymbolCallerInfo>();
 
             foreach (var @override in overrides)
             {
                 var calls = await SymbolFinder.FindCallersAsync(
-                        @override,
-                        project.Solution,
-                        documents,
-                        cancellationToken
-                    )
+                    @override,
+                    project.Solution,
+                    documents,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var call in calls)

@@ -84,12 +84,13 @@ namespace Microsoft.EntityFrameworkCore
                 Action<DbContext> nestedTestOperation3 = null
             )
             {
-                base.ExecuteWithStrategyInTransaction(
-                    testOperation,
-                    nestedTestOperation1,
-                    nestedTestOperation2,
-                    nestedTestOperation3
-                );
+                base
+                    .ExecuteWithStrategyInTransaction(
+                        testOperation,
+                        nestedTestOperation1,
+                        nestedTestOperation2,
+                        nestedTestOperation3
+                    );
                 Fixture.Reseed();
             }
 
@@ -102,11 +103,12 @@ namespace Microsoft.EntityFrameworkCore
                 public override DbContextOptionsBuilder AddOptions(
                     DbContextOptionsBuilder builder
                 ) =>
-                    base.AddOptions(
-                        builder.ConfigureWarnings(
-                            w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)
-                        )
-                    );
+                    base
+                        .AddOptions(
+                            builder.ConfigureWarnings(
+                                w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)
+                            )
+                        );
             }
         }
 

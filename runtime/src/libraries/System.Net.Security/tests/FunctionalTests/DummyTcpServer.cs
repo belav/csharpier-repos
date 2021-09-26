@@ -156,8 +156,8 @@ namespace System.Net.Security.Tests
                     _log.WriteLine("Server: starting SSL authentication.");
 
                     SslStream sslStream = null;
-                    X509Certificate2 certificate =
-                        Configuration.Certificates.GetServerCertificate();
+                    X509Certificate2 certificate = Configuration.Certificates
+                        .GetServerCertificate();
 
                     try
                     {
@@ -165,11 +165,11 @@ namespace System.Net.Security.Tests
 
                         _log.WriteLine("Server: attempting to open SslStream.");
                         sslStream.AuthenticateAsServerAsync(
-                                certificate,
-                                false,
-                                _sslProtocols,
-                                false
-                            )
+                            certificate,
+                            false,
+                            _sslProtocols,
+                            false
+                        )
                             .ContinueWith(
                                 t =>
                                 {
@@ -193,13 +193,14 @@ namespace System.Net.Security.Tests
                     // Start listening for data from the client connection
                     try
                     {
-                        state.Stream.BeginRead(
-                            state.ReceiveBuffer,
-                            0,
-                            state.ReceiveBuffer.Length,
-                            OnReceive,
-                            state
-                        );
+                        state.Stream
+                            .BeginRead(
+                                state.ReceiveBuffer,
+                                0,
+                                state.ReceiveBuffer.Length,
+                                OnReceive,
+                                state
+                            );
                     }
                     catch { }
                 }
@@ -238,13 +239,14 @@ namespace System.Net.Security.Tests
                 }
 
                 // Read more from client (asynchronous)
-                state.Stream.BeginRead(
-                    state.ReceiveBuffer,
-                    0,
-                    state.ReceiveBuffer.Length,
-                    OnReceive,
-                    state
-                );
+                state.Stream
+                    .BeginRead(
+                        state.ReceiveBuffer,
+                        0,
+                        state.ReceiveBuffer.Length,
+                        OnReceive,
+                        state
+                    );
             }
             catch (IOException)
             {

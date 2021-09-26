@@ -3835,14 +3835,14 @@ namespace System.Linq.Expressions.Tests
             BinaryExpression index0 = Expression.ArrayIndex(array, Expression.Constant(0));
             BinaryExpression index1 = Expression.ArrayIndex(array, Expression.Constant(1));
             Func<bool> testValues = Expression.Lambda<Func<bool>>(
+                Expression.And(
+                    Expression.Equal(indexM1, Expression.Constant(5)),
                     Expression.And(
-                        Expression.Equal(indexM1, Expression.Constant(5)),
-                        Expression.And(
-                            Expression.Equal(index0, Expression.Constant(6)),
-                            Expression.Equal(index1, Expression.Constant(7))
-                        )
+                        Expression.Equal(index0, Expression.Constant(6)),
+                        Expression.Equal(index1, Expression.Constant(7))
                     )
                 )
+            )
                 .Compile(useInterpreter);
             Assert.True(testValues());
         }
@@ -3873,14 +3873,14 @@ namespace System.Linq.Expressions.Tests
                 new[] { Expression.Constant(1) }
             );
             Func<bool> testValues = Expression.Lambda<Func<bool>>(
+                Expression.And(
+                    Expression.Equal(indexM1, Expression.Constant(5)),
                     Expression.And(
-                        Expression.Equal(indexM1, Expression.Constant(5)),
-                        Expression.And(
-                            Expression.Equal(index0, Expression.Constant(6)),
-                            Expression.Equal(index1, Expression.Constant(7))
-                        )
+                        Expression.Equal(index0, Expression.Constant(6)),
+                        Expression.Equal(index1, Expression.Constant(7))
                     )
                 )
+            )
                 .Compile(useInterpreter);
             Assert.True(testValues());
         }
@@ -3891,8 +3891,8 @@ namespace System.Linq.Expressions.Tests
             string[,,,,,,,,,] arrayObj = { { { { { { { { { { "hugz" } } } } } } } } } };
             ConstantExpression array = Expression.Constant(arrayObj);
             Func<string> func = Expression.Lambda<Func<string>>(
-                    Expression.ArrayIndex(array, Enumerable.Repeat(Expression.Constant(0), 10))
-                )
+                Expression.ArrayIndex(array, Enumerable.Repeat(Expression.Constant(0), 10))
+            )
                 .Compile(useInterpreter);
             Assert.Equal("hugz", func());
         }

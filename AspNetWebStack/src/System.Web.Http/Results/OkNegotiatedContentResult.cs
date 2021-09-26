@@ -95,13 +95,14 @@ namespace System.Web.Http.Results
         public virtual Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
             return Task.FromResult(
-                NegotiatedContentResult<T>.Execute(
-                    HttpStatusCode.OK,
-                    _content,
-                    _dependencies.ContentNegotiator,
-                    _dependencies.Request,
-                    _dependencies.Formatters
-                )
+                NegotiatedContentResult<T>
+                    .Execute(
+                        HttpStatusCode.OK,
+                        _content,
+                        _dependencies.ContentNegotiator,
+                        _dependencies.Request,
+                        _dependencies.Formatters
+                    )
             );
         }
     }

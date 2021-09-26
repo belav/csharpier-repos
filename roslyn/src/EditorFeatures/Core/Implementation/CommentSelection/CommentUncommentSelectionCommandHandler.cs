@@ -156,10 +156,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
 
             // Get the information from the language as to how they'd like to comment this region.
             var commentInfo = service.GetInfoAsync(
-                    document,
-                    span.Span.ToTextSpan(),
-                    cancellationToken
-                )
+                document,
+                span.Span.ToTextSpan(),
+                cancellationToken
+            )
                 .WaitAndGetResult(cancellationToken);
             if (!commentInfo.SupportsBlockComment && !commentInfo.SupportsSingleLineComment)
             {

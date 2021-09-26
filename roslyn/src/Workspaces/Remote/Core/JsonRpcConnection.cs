@@ -121,14 +121,12 @@ namespace Microsoft.CodeAnalysis.Remote
             if (solution != null)
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(
-                        solution,
-                        cancellationToken
-                    )
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
-                using var _ = ArrayBuilder<object?>.GetInstance(
-                    arguments.Count + 1,
-                    out var argumentsBuilder
-                );
+                using var _ = ArrayBuilder<object?>
+                    .GetInstance(arguments.Count + 1, out var argumentsBuilder);
 
                 argumentsBuilder.Add(scope.SolutionInfo);
                 argumentsBuilder.AddRange(arguments);
@@ -154,14 +152,12 @@ namespace Microsoft.CodeAnalysis.Remote
             if (solution != null)
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(
-                        solution,
-                        cancellationToken
-                    )
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
-                using var _ = ArrayBuilder<object?>.GetInstance(
-                    arguments.Count + 1,
-                    out var argumentsBuilder
-                );
+                using var _ = ArrayBuilder<object?>
+                    .GetInstance(arguments.Count + 1, out var argumentsBuilder);
 
                 argumentsBuilder.Add(scope.SolutionInfo);
                 argumentsBuilder.AddRange(arguments);
@@ -169,40 +165,40 @@ namespace Microsoft.CodeAnalysis.Remote
                 if (dataReader != null)
                 {
                     return await _serviceEndPoint.InvokeAsync(
-                            targetName,
-                            argumentsBuilder,
-                            dataReader,
-                            cancellationToken
-                        )
+                        targetName,
+                        argumentsBuilder,
+                        dataReader,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else
                 {
                     return await _serviceEndPoint.InvokeAsync<T>(
-                            targetName,
-                            argumentsBuilder,
-                            cancellationToken
-                        )
+                        targetName,
+                        argumentsBuilder,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
             else if (dataReader != null)
             {
                 return await _serviceEndPoint.InvokeAsync(
-                        targetName,
-                        arguments,
-                        dataReader,
-                        cancellationToken
-                    )
+                    targetName,
+                    arguments,
+                    dataReader,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else
             {
                 return await _serviceEndPoint.InvokeAsync<T>(
-                        targetName,
-                        arguments,
-                        cancellationToken
-                    )
+                    targetName,
+                    arguments,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

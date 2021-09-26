@@ -1516,18 +1516,17 @@ class C<T>
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (10,19): error CS0034: Operator '&' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A & C<object>.E.A")
-                        .WithArguments("&", "C<dynamic>.E", "C<object>.E"),
-                    // (11,18): error CS0034: Operator '|' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A | C<object>.E.A")
-                        .WithArguments("|", "C<dynamic>.E", "C<object>.E"),
-                    // (12,19): error CS0034: Operator '^' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A ^ C<object>.E.A")
-                        .WithArguments("^", "C<dynamic>.E", "C<object>.E")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (10,19): error CS0034: Operator '&' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A & C<object>.E.A")
+                    .WithArguments("&", "C<dynamic>.E", "C<object>.E"),
+                // (11,18): error CS0034: Operator '|' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A | C<object>.E.A")
+                    .WithArguments("|", "C<dynamic>.E", "C<object>.E"),
+                // (12,19): error CS0034: Operator '^' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A ^ C<object>.E.A")
+                    .WithArguments("^", "C<dynamic>.E", "C<object>.E")
+            );
         }
 
         [Fact]
@@ -1697,65 +1696,64 @@ class C<T>
     }      
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (17,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<object, object>'
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d2")
-                        .WithArguments(
-                            "+",
-                            "C<dynamic>.A<object, object>",
-                            "C<object>.A<object, object>"
-                        ),
-                    // (18,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d3")
-                        .WithArguments(
-                            "+",
-                            "C<dynamic>.A<object, object>",
-                            "C<dynamic>.A<object, dynamic>"
-                        ),
-                    // (19,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<dynamic, object>'
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d4")
-                        .WithArguments(
-                            "+",
-                            "C<dynamic>.A<object, object>",
-                            "C<object>.A<dynamic, object>"
-                        ),
-                    // (20,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<object>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d2 + d3")
-                        .WithArguments(
-                            "+",
-                            "C<object>.A<object, object>",
-                            "C<dynamic>.A<object, dynamic>"
-                        ),
-                    // (22,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<object, object>'
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d2")
-                        .WithArguments(
-                            "-",
-                            "C<dynamic>.A<object, object>",
-                            "C<object>.A<object, object>"
-                        ),
-                    // (23,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d3")
-                        .WithArguments(
-                            "-",
-                            "C<dynamic>.A<object, object>",
-                            "C<dynamic>.A<object, dynamic>"
-                        ),
-                    // (24,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<dynamic, object>'
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d4")
-                        .WithArguments(
-                            "-",
-                            "C<dynamic>.A<object, object>",
-                            "C<object>.A<dynamic, object>"
-                        ),
-                    // (25,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<object>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d2 - d3")
-                        .WithArguments(
-                            "-",
-                            "C<object>.A<object, object>",
-                            "C<dynamic>.A<object, dynamic>"
-                        )
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (17,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<object, object>'
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d2")
+                    .WithArguments(
+                        "+",
+                        "C<dynamic>.A<object, object>",
+                        "C<object>.A<object, object>"
+                    ),
+                // (18,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d3")
+                    .WithArguments(
+                        "+",
+                        "C<dynamic>.A<object, object>",
+                        "C<dynamic>.A<object, dynamic>"
+                    ),
+                // (19,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<dynamic, object>'
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d4")
+                    .WithArguments(
+                        "+",
+                        "C<dynamic>.A<object, object>",
+                        "C<object>.A<dynamic, object>"
+                    ),
+                // (20,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<object>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d2 + d3")
+                    .WithArguments(
+                        "+",
+                        "C<object>.A<object, object>",
+                        "C<dynamic>.A<object, dynamic>"
+                    ),
+                // (22,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<object, object>'
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d2")
+                    .WithArguments(
+                        "-",
+                        "C<dynamic>.A<object, object>",
+                        "C<object>.A<object, object>"
+                    ),
+                // (23,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d3")
+                    .WithArguments(
+                        "-",
+                        "C<dynamic>.A<object, object>",
+                        "C<dynamic>.A<object, dynamic>"
+                    ),
+                // (24,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<dynamic, object>'
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d4")
+                    .WithArguments(
+                        "-",
+                        "C<dynamic>.A<object, object>",
+                        "C<object>.A<dynamic, object>"
+                    ),
+                // (25,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<object>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d2 - d3")
+                    .WithArguments(
+                        "-",
+                        "C<object>.A<object, object>",
+                        "C<dynamic>.A<object, dynamic>"
+                    )
+            );
         }
 
         [Fact]
@@ -1783,15 +1781,14 @@ class Program
 ";
             // Dev11 considers Action<object> == Action<dynamic> ambiguous and thus chooses Goo(Func<Action<object>, IComparable>) overload.
 
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Goo(System.Func<System.Action<object>, System.IComparable>)' and 'Program.Goo(System.Func<System.Action<dynamic>, System.IConvertible>)'
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Goo")
-                        .WithArguments(
-                            "Program.Goo(System.Func<System.Action<object>, System.IComparable>)",
-                            "Program.Goo(System.Func<System.Action<dynamic>, System.IConvertible>)"
-                        )
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Goo(System.Func<System.Action<object>, System.IComparable>)' and 'Program.Goo(System.Func<System.Action<dynamic>, System.IConvertible>)'
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Goo")
+                    .WithArguments(
+                        "Program.Goo(System.Func<System.Action<object>, System.IComparable>)",
+                        "Program.Goo(System.Func<System.Action<dynamic>, System.IConvertible>)"
+                    )
+            );
         }
 
         [Fact]
@@ -1848,9 +1845,9 @@ unsafe class C<T>
 ";
             // Dev11 reports "error CS0034: Operator '-' is ambiguous on operands ... and ..." for all ptr - ptr
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    options: TestOptions.UnsafeReleaseDll
-                )
+                source,
+                options: TestOptions.UnsafeReleaseDll
+            )
                 .VerifyDiagnostics();
         }
 
@@ -3283,21 +3280,20 @@ class C
         bool b3 = (object)s1 == ex1; // legal!
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (11,21): error CS0034: Operator '+' is ambiguous on operands of type 'long' and 'ulong'
-                    //         object o1 = i64 + ui64; // CS0034
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i64 + ui64")
-                        .WithArguments("+", "long", "ulong"),
-                    // (12,19): error CS0034: Operator '==' is ambiguous on operands of type 'long' and 'ulong'
-                    //         bool b1 = i64 == ui64;  // CS0034
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i64 == ui64")
-                        .WithArguments("==", "long", "ulong"),
-                    // (13,19): error CS0019: Operator '==' cannot be applied to operands of type 'string' and 'System.Exception'
-                    //         bool b2 = s1 == ex1;    // CS0019
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "s1 == ex1")
-                        .WithArguments("==", "string", "System.Exception")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (11,21): error CS0034: Operator '+' is ambiguous on operands of type 'long' and 'ulong'
+                //         object o1 = i64 + ui64; // CS0034
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i64 + ui64")
+                    .WithArguments("+", "long", "ulong"),
+                // (12,19): error CS0034: Operator '==' is ambiguous on operands of type 'long' and 'ulong'
+                //         bool b1 = i64 == ui64;  // CS0034
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i64 == ui64")
+                    .WithArguments("==", "long", "ulong"),
+                // (13,19): error CS0019: Operator '==' cannot be applied to operands of type 'string' and 'System.Exception'
+                //         bool b2 = s1 == ex1;    // CS0019
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "s1 == ex1")
+                    .WithArguments("==", "string", "System.Exception")
+            );
         }
 
         [Fact]
@@ -3347,29 +3343,28 @@ class C
 
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (17,9): error CS0200: Property or indexer 'C.ReadOnly' cannot be assigned to -- it is read only
-                    //         c.ReadOnly += 1;
-                    Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "c.ReadOnly")
-                        .WithArguments("C.ReadOnly")
-                        .WithLocation(17, 9),
-                    // (18,9): error CS0154: The property or indexer 'C.WriteOnly' cannot be used in this context because it lacks the get accessor
-                    //         c.WriteOnly += 1;
-                    Diagnostic(ErrorCode.ERR_PropertyLacksGet, "c.WriteOnly")
-                        .WithArguments("C.WriteOnly")
-                        .WithLocation(18, 9),
-                    // (34,9): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion exists (are you missing a cast?)
-                    //         i32 += i64;
-                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i32 += i64")
-                        .WithArguments("long", "int")
-                        .WithLocation(34, 9),
-                    // (39,9): error CS0266: Cannot implicitly convert type 'C' to 'C.D'. An explicit conversion exists (are you missing a cast?)
-                    //         d += c;
-                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "d += c")
-                        .WithArguments("C", "C.D")
-                        .WithLocation(39, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (17,9): error CS0200: Property or indexer 'C.ReadOnly' cannot be assigned to -- it is read only
+                //         c.ReadOnly += 1;
+                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "c.ReadOnly")
+                    .WithArguments("C.ReadOnly")
+                    .WithLocation(17, 9),
+                // (18,9): error CS0154: The property or indexer 'C.WriteOnly' cannot be used in this context because it lacks the get accessor
+                //         c.WriteOnly += 1;
+                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "c.WriteOnly")
+                    .WithArguments("C.WriteOnly")
+                    .WithLocation(18, 9),
+                // (34,9): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion exists (are you missing a cast?)
+                //         i32 += i64;
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i32 += i64")
+                    .WithArguments("long", "int")
+                    .WithLocation(34, 9),
+                // (39,9): error CS0266: Cannot implicitly convert type 'C' to 'C.D'. An explicit conversion exists (are you missing a cast?)
+                //         d += c;
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "d += c")
+                    .WithArguments("C", "C.D")
+                    .WithLocation(39, 9)
+            );
         }
 
         [Fact]
@@ -3468,7 +3463,8 @@ class C
             // the operators given to the comment that follows the use of the operator.
 
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace.GetTypeMembers("C")
+            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace
+                .GetTypeMembers("C")
                 .Single()
                 .GetMembers("M")
                 .Single();
@@ -3481,16 +3477,19 @@ class C
             var tree = BoundTreeDumperNodeProducer.MakeTree(block);
             var results = string.Join("\n", query(tree.PreorderTraversal()).ToArray());
 
-            var expected = string.Join(
-                "\n",
-                source.Split(
+            var expected = string
+                .Join(
+                    "\n",
+                    source.Split(
                         new[] { Environment.NewLine },
                         System.StringSplitOptions.RemoveEmptyEntries
                     )
-                    .Where(x => x.Contains("//-"))
-                    .Select(x => x.Substring(x.IndexOf("//-", StringComparison.Ordinal) + 3).Trim())
-                    .ToArray()
-            );
+                        .Where(x => x.Contains("//-"))
+                        .Select(
+                            x => x.Substring(x.IndexOf("//-", StringComparison.Ordinal) + 3).Trim()
+                        )
+                        .ToArray()
+                );
 
             Assert.Equal(expected, results);
         }
@@ -3525,23 +3524,24 @@ class C
                             node.Text == "eventAssignmentOperator"
                             || node.Text == "compoundAssignmentOperator"
                         )
-                    select string.Join(
-                        " ",
-                        from child in node.Children
-                        where
-                            child.Text == "@operator"
-                            || child.Text == "isAddition"
-                            || child.Text == "isDynamic"
-                            || child.Text == "leftConversion"
-                            || child.Text == "finalConversion"
-                        select child.Text
-                            + ": "
-                            + (
+                    select string
+                        .Join(
+                            " ",
+                            from child in node.Children
+                            where
                                 child.Text == "@operator"
-                                    ? ((BinaryOperatorSignature)child.Value).Kind.ToString()
-                                    : child.Value.ToString()
-                            )
-                    )
+                                || child.Text == "isAddition"
+                                || child.Text == "isDynamic"
+                                || child.Text == "leftConversion"
+                                || child.Text == "finalConversion"
+                            select child.Text
+                                + ": "
+                                + (
+                                    child.Text == "@operator"
+                                        ? ((BinaryOperatorSignature)child.Value).Kind.ToString()
+                                        : child.Value.ToString()
+                                )
+                        )
             );
         }
 
@@ -5098,7 +5098,7 @@ OPERATOR ndec   //-LiftedDecimalKIND"
         public void UserDefinedOperatorOnPointerType()
         {
             CreateCompilation(
-                    @"
+                @"
 unsafe struct A
 {
     public static implicit operator int*(A x) { return null; }
@@ -5111,9 +5111,8 @@ unsafe struct A
     }
 }
 ",
-                    options: TestOptions.UnsafeReleaseDll
-                )
-                .VerifyDiagnostics();
+                options: TestOptions.UnsafeReleaseDll
+            ).VerifyDiagnostics();
             // add better verification once this is implemented
         }
 
@@ -5279,18 +5278,12 @@ class A
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                    //         var c = a ?? b;
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
-                        .WithArguments(
-                            "B.implicit operator A(B)",
-                            "A.implicit operator A(B)",
-                            "B",
-                            "A"
-                        )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                //         var c = a ?? b;
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
+                    .WithArguments("B.implicit operator A(B)", "A.implicit operator A(B)", "B", "A")
+            );
         }
 
         [WorkItem(545631, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545631")]
@@ -5325,18 +5318,12 @@ struct A
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                    //         var c = a ?? b;
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
-                        .WithArguments(
-                            "B.implicit operator A(B)",
-                            "A.implicit operator A(B)",
-                            "B",
-                            "A"
-                        )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                //         var c = a ?? b;
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
+                    .WithArguments("B.implicit operator A(B)", "A.implicit operator A(B)", "B", "A")
+            );
         }
 
         [WorkItem(545631, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545631")]
@@ -5368,18 +5355,12 @@ struct A
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,18): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                    //         var c2 = b2 ?? a2;
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "b2")
-                        .WithArguments(
-                            "B.implicit operator A(B)",
-                            "A.implicit operator A(B)",
-                            "B",
-                            "A"
-                        )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,18): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                //         var c2 = b2 ?? a2;
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "b2")
+                    .WithArguments("B.implicit operator A(B)", "A.implicit operator A(B)", "B", "A")
+            );
         }
 
         [WorkItem(541343, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541343")]
@@ -5874,44 +5855,43 @@ class Outer<T>
     public enum E { }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (16,13): warning CS0184: The given expression is never of the provided ('Outer<long>.C') type
-                    //         b = c2 is Outer<long>.C;    // Always false.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "c2 is Outer<long>.C")
-                        .WithArguments("Outer<long>.C")
-                        .WithLocation(16, 13),
-                    // (18,13): warning CS0183: The given expression is always of the provided ('Outer<T>.S') type
-                    //         b = s1 is Outer<T>.S;       // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s1 is Outer<T>.S")
-                        .WithArguments("Outer<T>.S")
-                        .WithLocation(18, 13),
-                    // (23,13): warning CS0183: The given expression is always of the provided ('Outer<int>.S') type
-                    //         b = s2 is Outer<int>.S;     // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s2 is Outer<int>.S")
-                        .WithArguments("Outer<int>.S")
-                        .WithLocation(23, 13),
-                    // (24,13): warning CS0184: The given expression is never of the provided ('Outer<long>.S') type
-                    //         b = s2 is Outer<long>.S;    // Always false.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "s2 is Outer<long>.S")
-                        .WithArguments("Outer<long>.S")
-                        .WithLocation(24, 13),
-                    // (26,13): warning CS0183: The given expression is always of the provided ('Outer<T>.E') type
-                    //         b = e1 is Outer<T>.E;       // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Outer<T>.E")
-                        .WithArguments("Outer<T>.E")
-                        .WithLocation(26, 13),
-                    // (31,13): warning CS0183: The given expression is always of the provided ('Outer<int>.E') type
-                    //         b = e2 is Outer<int>.E;     // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Outer<int>.E")
-                        .WithArguments("Outer<int>.E")
-                        .WithLocation(31, 13),
-                    // (32,13): warning CS0184: The given expression is never of the provided ('Outer<long>.E') type
-                    //         b = e2 is Outer<long>.E;    // Always false.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "e2 is Outer<long>.E")
-                        .WithArguments("Outer<long>.E")
-                        .WithLocation(32, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (16,13): warning CS0184: The given expression is never of the provided ('Outer<long>.C') type
+                //         b = c2 is Outer<long>.C;    // Always false.
+                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "c2 is Outer<long>.C")
+                    .WithArguments("Outer<long>.C")
+                    .WithLocation(16, 13),
+                // (18,13): warning CS0183: The given expression is always of the provided ('Outer<T>.S') type
+                //         b = s1 is Outer<T>.S;       // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s1 is Outer<T>.S")
+                    .WithArguments("Outer<T>.S")
+                    .WithLocation(18, 13),
+                // (23,13): warning CS0183: The given expression is always of the provided ('Outer<int>.S') type
+                //         b = s2 is Outer<int>.S;     // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s2 is Outer<int>.S")
+                    .WithArguments("Outer<int>.S")
+                    .WithLocation(23, 13),
+                // (24,13): warning CS0184: The given expression is never of the provided ('Outer<long>.S') type
+                //         b = s2 is Outer<long>.S;    // Always false.
+                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "s2 is Outer<long>.S")
+                    .WithArguments("Outer<long>.S")
+                    .WithLocation(24, 13),
+                // (26,13): warning CS0183: The given expression is always of the provided ('Outer<T>.E') type
+                //         b = e1 is Outer<T>.E;       // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Outer<T>.E")
+                    .WithArguments("Outer<T>.E")
+                    .WithLocation(26, 13),
+                // (31,13): warning CS0183: The given expression is always of the provided ('Outer<int>.E') type
+                //         b = e2 is Outer<int>.E;     // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Outer<int>.E")
+                    .WithArguments("Outer<int>.E")
+                    .WithLocation(31, 13),
+                // (32,13): warning CS0184: The given expression is never of the provided ('Outer<long>.E') type
+                //         b = e2 is Outer<long>.E;    // Always false.
+                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "e2 is Outer<long>.E")
+                    .WithArguments("Outer<long>.E")
+                    .WithLocation(32, 13)
+            );
         }
 
         [Fact]
@@ -5928,14 +5908,13 @@ class Program
 }
 class C<T> { }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,16): warning CS0184: The given expression is never of the provided ('int') type
-                    //         return c is int;   // always false
-                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "c is int")
-                        .WithArguments("int")
-                        .WithLocation(6, 16)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,16): warning CS0184: The given expression is never of the provided ('int') type
+                //         return c is int;   // always false
+                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "c is int")
+                    .WithArguments("int")
+                    .WithLocation(6, 16)
+            );
         }
 
         [WorkItem(844635, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/844635")]
@@ -5963,14 +5942,13 @@ class Outer<T>
     public struct S { }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (11,13): warning CS0183: The given expression is always of the provided ('Outer<T[]>.S') type
-                    //         b = s2 is Outer<T[]>.S;     // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s2 is Outer<T[]>.S")
-                        .WithArguments("Outer<T[]>.S")
-                        .WithLocation(11, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (11,13): warning CS0183: The given expression is always of the provided ('Outer<T[]>.S') type
+                //         b = s2 is Outer<T[]>.S;     // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s2 is Outer<T[]>.S")
+                    .WithArguments("Outer<T[]>.S")
+                    .WithLocation(11, 13)
+            );
         }
 
         [WorkItem(844635, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/844635")]
@@ -6019,79 +5997,78 @@ class Outer<T>
     public enum E { }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (11,13): warning CS0183: The given expression is always of the provided ('System.Enum') type
-                    //         b = e1 is Enum; // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Enum")
-                        .WithArguments("System.Enum")
-                        .WithLocation(11, 13),
-                    // (12,13): warning CS0183: The given expression is always of the provided ('System.Enum') type
-                    //         b = e2 is Enum; // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Enum")
-                        .WithArguments("System.Enum")
-                        .WithLocation(12, 13),
-                    // (13,13): warning CS0184: The given expression is never of the provided ('System.Enum') type
-                    //         b = 0 is Enum;  // Always false.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "0 is Enum")
-                        .WithArguments("System.Enum")
-                        .WithLocation(13, 13),
-                    // (14,13): warning CS0184: The given expression is never of the provided ('System.Enum') type
-                    //         b = i is Enum;  // Always false.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "i is Enum")
-                        .WithArguments("System.Enum")
-                        .WithLocation(14, 13),
-                    // (19,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
-                    //         b = e1 is ValueType; // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is ValueType")
-                        .WithArguments("System.ValueType")
-                        .WithLocation(19, 13),
-                    // (20,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
-                    //         b = e2 is ValueType; // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is ValueType")
-                        .WithArguments("System.ValueType")
-                        .WithLocation(20, 13),
-                    // (21,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
-                    //         b = 0 is ValueType;  // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "0 is ValueType")
-                        .WithArguments("System.ValueType")
-                        .WithLocation(21, 13),
-                    // (22,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
-                    //         b = i is ValueType;  // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "i is ValueType")
-                        .WithArguments("System.ValueType")
-                        .WithLocation(22, 13),
-                    // (25,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
-                    //         b = ts is ValueType; // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "ts is ValueType")
-                        .WithArguments("System.ValueType")
-                        .WithLocation(25, 13),
-                    // (27,13): warning CS0183: The given expression is always of the provided ('object') type
-                    //         b = e1 is Object; // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Object")
-                        .WithArguments("object")
-                        .WithLocation(27, 13),
-                    // (28,13): warning CS0183: The given expression is always of the provided ('object') type
-                    //         b = e2 is Object; // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Object")
-                        .WithArguments("object")
-                        .WithLocation(28, 13),
-                    // (29,13): warning CS0183: The given expression is always of the provided ('object') type
-                    //         b = 0 is Object;  // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "0 is Object")
-                        .WithArguments("object")
-                        .WithLocation(29, 13),
-                    // (30,13): warning CS0183: The given expression is always of the provided ('object') type
-                    //         b = i is Object;  // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "i is Object")
-                        .WithArguments("object")
-                        .WithLocation(30, 13),
-                    // (33,13): warning CS0183: The given expression is always of the provided ('object') type
-                    //         b = ts is Object; // Always true.
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "ts is Object")
-                        .WithArguments("object")
-                        .WithLocation(33, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (11,13): warning CS0183: The given expression is always of the provided ('System.Enum') type
+                //         b = e1 is Enum; // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Enum")
+                    .WithArguments("System.Enum")
+                    .WithLocation(11, 13),
+                // (12,13): warning CS0183: The given expression is always of the provided ('System.Enum') type
+                //         b = e2 is Enum; // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Enum")
+                    .WithArguments("System.Enum")
+                    .WithLocation(12, 13),
+                // (13,13): warning CS0184: The given expression is never of the provided ('System.Enum') type
+                //         b = 0 is Enum;  // Always false.
+                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "0 is Enum")
+                    .WithArguments("System.Enum")
+                    .WithLocation(13, 13),
+                // (14,13): warning CS0184: The given expression is never of the provided ('System.Enum') type
+                //         b = i is Enum;  // Always false.
+                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "i is Enum")
+                    .WithArguments("System.Enum")
+                    .WithLocation(14, 13),
+                // (19,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
+                //         b = e1 is ValueType; // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is ValueType")
+                    .WithArguments("System.ValueType")
+                    .WithLocation(19, 13),
+                // (20,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
+                //         b = e2 is ValueType; // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is ValueType")
+                    .WithArguments("System.ValueType")
+                    .WithLocation(20, 13),
+                // (21,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
+                //         b = 0 is ValueType;  // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "0 is ValueType")
+                    .WithArguments("System.ValueType")
+                    .WithLocation(21, 13),
+                // (22,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
+                //         b = i is ValueType;  // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "i is ValueType")
+                    .WithArguments("System.ValueType")
+                    .WithLocation(22, 13),
+                // (25,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
+                //         b = ts is ValueType; // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "ts is ValueType")
+                    .WithArguments("System.ValueType")
+                    .WithLocation(25, 13),
+                // (27,13): warning CS0183: The given expression is always of the provided ('object') type
+                //         b = e1 is Object; // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Object")
+                    .WithArguments("object")
+                    .WithLocation(27, 13),
+                // (28,13): warning CS0183: The given expression is always of the provided ('object') type
+                //         b = e2 is Object; // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Object")
+                    .WithArguments("object")
+                    .WithLocation(28, 13),
+                // (29,13): warning CS0183: The given expression is always of the provided ('object') type
+                //         b = 0 is Object;  // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "0 is Object")
+                    .WithArguments("object")
+                    .WithLocation(29, 13),
+                // (30,13): warning CS0183: The given expression is always of the provided ('object') type
+                //         b = i is Object;  // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "i is Object")
+                    .WithArguments("object")
+                    .WithLocation(30, 13),
+                // (33,13): warning CS0183: The given expression is always of the provided ('object') type
+                //         b = ts is Object; // Always true.
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "ts is Object")
+                    .WithArguments("object")
+                    .WithLocation(33, 13)
+            );
         }
 
         [
@@ -6234,7 +6211,8 @@ class Test
                     .WithArguments("Bar", "Goo"),
                 // (38,21): error CS0077: The as operator must be used with a reference type or nullable type ('Bar' is a non-nullable value type)
                 //         object a2 = 1 as Bar;
-                Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "1 as Bar").WithArguments("Bar"),
+                Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "1 as Bar")
+                    .WithArguments("Bar"),
                 // (39,21): error CS0039: Cannot convert type 'Bar' to 'Goo2' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
                 //         object a3 = numeral as Goo2;
                 Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "numeral as Goo2")
@@ -6306,17 +6284,16 @@ public class Base
 }
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (12,27): warning CS0184: The given expression is never of the provided ('System.IntPtr') type
-                    //         Console.WriteLine(e is IntPtr);
-                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "e is IntPtr")
-                        .WithArguments("System.IntPtr"),
-                    // (13,27): error CS0077: The as operator must be used with a reference type or nullable type ('System.IntPtr' is a non-nullable value type)
-                    //         Console.WriteLine(e as IntPtr);
-                    Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "e as IntPtr")
-                        .WithArguments("System.IntPtr")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (12,27): warning CS0184: The given expression is never of the provided ('System.IntPtr') type
+                //         Console.WriteLine(e is IntPtr);
+                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "e is IntPtr")
+                    .WithArguments("System.IntPtr"),
+                // (13,27): error CS0077: The as operator must be used with a reference type or nullable type ('System.IntPtr' is a non-nullable value type)
+                //         Console.WriteLine(e as IntPtr);
+                Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "e as IntPtr")
+                    .WithArguments("System.IntPtr")
+            );
         }
 
         [WorkItem(543443, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543443")]
@@ -6336,14 +6313,13 @@ public class Base
         return false;
     }
 }";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (3,39): error CS1670: params is not valid in this context public static bool operator >(X a, params int[] b)
-                    Diagnostic(ErrorCode.ERR_IllegalParams, "params"),
-                    // (8,40): error CS1670: params is not valid in this context
-                    //     public static bool operator <(X a, params int[] b)
-                    Diagnostic(ErrorCode.ERR_IllegalParams, "params")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (3,39): error CS1670: params is not valid in this context public static bool operator >(X a, params int[] b)
+                Diagnostic(ErrorCode.ERR_IllegalParams, "params"),
+                // (8,40): error CS1670: params is not valid in this context
+                //     public static bool operator <(X a, params int[] b)
+                Diagnostic(ErrorCode.ERR_IllegalParams, "params")
+            );
         }
 
         [WorkItem(543438, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543438")]
@@ -6470,13 +6446,12 @@ struct S
 
 ";
             CompileAndVerify(source1, expectedOutput: "1");
-            CreateCompilation(source2)
-                .VerifyDiagnostics(
-                    // (16,9): error CS0034: Operator '==' is ambiguous on operands of type 'S?' and '<null>'
-                    //     if (s == null) s = default(S);
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "s == null")
-                        .WithArguments("==", "S?", "<null>")
-                );
+            CreateCompilation(source2).VerifyDiagnostics(
+                // (16,9): error CS0034: Operator '==' is ambiguous on operands of type 'S?' and '<null>'
+                //     if (s == null) s = default(S);
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "s == null")
+                    .WithArguments("==", "S?", "<null>")
+            );
         }
 
         [WorkItem(543432, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543432")]
@@ -6564,13 +6539,12 @@ namespace System
     }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (6,41): error CS0555: User-defined operator cannot take an object of the enclosing type and convert to an object of the enclosing type
-                    //         public static explicit operator (T1 fst, T2 snd)((T1 one, T2 two) s)
-                    Diagnostic(ErrorCode.ERR_IdentityConversion, "(T1 fst, T2 snd)")
-                        .WithLocation(6, 41)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (6,41): error CS0555: User-defined operator cannot take an object of the enclosing type and convert to an object of the enclosing type
+                //         public static explicit operator (T1 fst, T2 snd)((T1 one, T2 two) s)
+                Diagnostic(ErrorCode.ERR_IdentityConversion, "(T1 fst, T2 snd)")
+                    .WithLocation(6, 41)
+            );
         }
 
         [Fact, WorkItem(30668, "https://github.com/dotnet/roslyn/issues/30668")]
@@ -6690,17 +6664,16 @@ class D
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (21,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and 'D'
-                    //         Console.WriteLine((Func<int>)(C)null == (D)null);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(Func<int>)(C)null == (D)null")
-                        .WithArguments("==", "System.Func<int>", "D"),
-                    // (22,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and 'System.Action'
-                    //         Console.WriteLine((Func<int>)(C)null == (Action)(D)null);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(Func<int>)(C)null == (Action)(D)null")
-                        .WithArguments("==", "System.Func<int>", "System.Action")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (21,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and 'D'
+                //         Console.WriteLine((Func<int>)(C)null == (D)null);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(Func<int>)(C)null == (D)null")
+                    .WithArguments("==", "System.Func<int>", "D"),
+                // (22,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and 'System.Action'
+                //         Console.WriteLine((Func<int>)(C)null == (Action)(D)null);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(Func<int>)(C)null == (Action)(D)null")
+                    .WithArguments("==", "System.Func<int>", "System.Action")
+            );
         }
 
         [WorkItem(543431, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543431")]
@@ -6739,17 +6712,16 @@ class D
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (26,27): error CS0019: Operator '==' cannot be applied to operands of type 'C' and 'D'
-                    //         Console.WriteLine((C)null == (D)null);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(C)null == (D)null")
-                        .WithArguments("==", "C", "D"),
-                    // (27,27): error CS0019: Operator '!=' cannot be applied to operands of type 'C' and 'D'
-                    //         Console.WriteLine((C)null != (D)null);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(C)null != (D)null")
-                        .WithArguments("!=", "C", "D")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (26,27): error CS0019: Operator '==' cannot be applied to operands of type 'C' and 'D'
+                //         Console.WriteLine((C)null == (D)null);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(C)null == (D)null")
+                    .WithArguments("==", "C", "D"),
+                // (27,27): error CS0019: Operator '!=' cannot be applied to operands of type 'C' and 'D'
+                //         Console.WriteLine((C)null != (D)null);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(C)null != (D)null")
+                    .WithArguments("!=", "C", "D")
+            );
         }
 
         [WorkItem(543431, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543431")]
@@ -6955,16 +6927,15 @@ class Derived4 : Base4
     public static Base4 op_Addition(Base4 b, Derived4 d) { return b; }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,25): warning CS0108: 'Derived4.op_Addition(Base4, Derived4)' hides inherited member 'Base4.op_Addition(Base4, Derived4)'. Use the new keyword if hiding was intended.
-                    //     public static Base4 op_Addition(Base4 b, Derived4 d) { return b; }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "op_Addition")
-                        .WithArguments(
-                            "Derived4.op_Addition(Base4, Derived4)",
-                            "Base4.op_Addition(Base4, Derived4)"
-                        )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,25): warning CS0108: 'Derived4.op_Addition(Base4, Derived4)' hides inherited member 'Base4.op_Addition(Base4, Derived4)'. Use the new keyword if hiding was intended.
+                //     public static Base4 op_Addition(Base4 b, Derived4 d) { return b; }
+                Diagnostic(ErrorCode.WRN_NewRequired, "op_Addition")
+                    .WithArguments(
+                        "Derived4.op_Addition(Base4, Derived4)",
+                        "Base4.op_Addition(Base4, Derived4)"
+                    )
+            );
         }
 
         [Fact]
@@ -6982,12 +6953,11 @@ class Derived1 : Base1
     public static implicit operator string(Base1 b) { return null; } // CS0556, but not CS0108
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,37): error CS0556: User-defined conversion must convert to or from the enclosing type
-                    //     public static implicit operator string(Base1 b) { return null; }
-                    Diagnostic(ErrorCode.ERR_ConversionNotInvolvingContainedType, "string")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,37): error CS0556: User-defined conversion must convert to or from the enclosing type
+                //     public static implicit operator string(Base1 b) { return null; }
+                Diagnostic(ErrorCode.ERR_ConversionNotInvolvingContainedType, "string")
+            );
         }
 
         [Fact]
@@ -7041,13 +7011,12 @@ class Derived4 : Base4
     public static string op_Explicit(Base4 b) { return null; }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,26): warning CS0108: 'Derived4.op_Explicit(Base4)' hides inherited member 'Base4.op_Explicit(Base4)'. Use the new keyword if hiding was intended.
-                    //     public static string op_Explicit(Base4 b) { return null; }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
-                        .WithArguments("Derived4.op_Explicit(Base4)", "Base4.op_Explicit(Base4)")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,26): warning CS0108: 'Derived4.op_Explicit(Base4)' hides inherited member 'Base4.op_Explicit(Base4)'. Use the new keyword if hiding was intended.
+                //     public static string op_Explicit(Base4 b) { return null; }
+                Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
+                    .WithArguments("Derived4.op_Explicit(Base4)", "Base4.op_Explicit(Base4)")
+            );
         }
 
         [Fact]
@@ -7120,68 +7089,62 @@ class op_UnsignedRightShift
 		
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,38): error CS0542: 'op_Increment': member names cannot be the same as their enclosing type
-                    // 	public static op_Increment operator ++ (op_Increment c) { return null; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "++")
-                        .WithArguments("op_Increment"),
-                    // (8,38): error CS0542: 'op_Decrement': member names cannot be the same as their enclosing type
-                    // 	public static op_Decrement operator -- (op_Decrement c) { return null; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "--")
-                        .WithArguments("op_Decrement"),
-                    // (12,29): error CS0542: 'op_UnaryPlus': member names cannot be the same as their enclosing type
-                    // 	public static int operator + (op_UnaryPlus c) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "+")
-                        .WithArguments("op_UnaryPlus"),
-                    // (16,39): error CS0542: 'op_UnaryNegation': member names cannot be the same as their enclosing type
-                    // 	public static int operator - (op_UnaryNegation c) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "-")
-                        .WithArguments("op_UnaryNegation"),
-                    // (20,29): error CS0542: 'op_OnesComplement': member names cannot be the same as their enclosing type
-                    // 	public static int operator ~ (op_OnesComplement c) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "~")
-                        .WithArguments("op_OnesComplement"),
-                    // (24,29): error CS0542: 'op_Addition': member names cannot be the same as their enclosing type
-                    // 	public static int operator + (op_Addition c, int i) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "+")
-                        .WithArguments("op_Addition"),
-                    // (28,29): error CS0542: 'op_Subtraction': member names cannot be the same as their enclosing type
-                    // 	public static int operator - (op_Subtraction c, int i) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "-")
-                        .WithArguments("op_Subtraction"),
-                    // (32,29): error CS0542: 'op_Multiply': member names cannot be the same as their enclosing type
-                    // 	public static int operator * (op_Multiply c, int i) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "*")
-                        .WithArguments("op_Multiply"),
-                    // (36,29): error CS0542: 'op_Division': member names cannot be the same as their enclosing type
-                    // 	public static int operator / (op_Division c, int i) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "/")
-                        .WithArguments("op_Division"),
-                    // (40,29): error CS0542: 'op_Modulus': member names cannot be the same as their enclosing type
-                    // 	public static int operator % (op_Modulus c, int i) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "%").WithArguments("op_Modulus"),
-                    // (44,29): error CS0542: 'op_ExclusiveOr': member names cannot be the same as their enclosing type
-                    // 	public static int operator ^ (op_ExclusiveOr c, int i) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "^")
-                        .WithArguments("op_ExclusiveOr"),
-                    // (48,29): error CS0542: 'op_BitwiseAnd': member names cannot be the same as their enclosing type
-                    // 	public static int operator & (op_BitwiseAnd c, int i) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "&")
-                        .WithArguments("op_BitwiseAnd"),
-                    // (52,29): error CS0542: 'op_BitwiseOr': member names cannot be the same as their enclosing type
-                    // 	public static int operator | (op_BitwiseOr c, int i) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "|")
-                        .WithArguments("op_BitwiseOr"),
-                    // (56,30): error CS0542: 'op_LeftShift': member names cannot be the same as their enclosing type
-                    // 	public static long operator <<  (op_LeftShift c, int i) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "<<")
-                        .WithArguments("op_LeftShift"),
-                    // (60,30): error CS0542: 'op_RightShift': member names cannot be the same as their enclosing type
-                    // 	public static long operator >>  (op_RightShift c, int i) { return 0; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, ">>")
-                        .WithArguments("op_RightShift")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,38): error CS0542: 'op_Increment': member names cannot be the same as their enclosing type
+                // 	public static op_Increment operator ++ (op_Increment c) { return null; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "++")
+                    .WithArguments("op_Increment"),
+                // (8,38): error CS0542: 'op_Decrement': member names cannot be the same as their enclosing type
+                // 	public static op_Decrement operator -- (op_Decrement c) { return null; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "--")
+                    .WithArguments("op_Decrement"),
+                // (12,29): error CS0542: 'op_UnaryPlus': member names cannot be the same as their enclosing type
+                // 	public static int operator + (op_UnaryPlus c) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "+").WithArguments("op_UnaryPlus"),
+                // (16,39): error CS0542: 'op_UnaryNegation': member names cannot be the same as their enclosing type
+                // 	public static int operator - (op_UnaryNegation c) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "-")
+                    .WithArguments("op_UnaryNegation"),
+                // (20,29): error CS0542: 'op_OnesComplement': member names cannot be the same as their enclosing type
+                // 	public static int operator ~ (op_OnesComplement c) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "~")
+                    .WithArguments("op_OnesComplement"),
+                // (24,29): error CS0542: 'op_Addition': member names cannot be the same as their enclosing type
+                // 	public static int operator + (op_Addition c, int i) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "+").WithArguments("op_Addition"),
+                // (28,29): error CS0542: 'op_Subtraction': member names cannot be the same as their enclosing type
+                // 	public static int operator - (op_Subtraction c, int i) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "-")
+                    .WithArguments("op_Subtraction"),
+                // (32,29): error CS0542: 'op_Multiply': member names cannot be the same as their enclosing type
+                // 	public static int operator * (op_Multiply c, int i) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "*").WithArguments("op_Multiply"),
+                // (36,29): error CS0542: 'op_Division': member names cannot be the same as their enclosing type
+                // 	public static int operator / (op_Division c, int i) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "/").WithArguments("op_Division"),
+                // (40,29): error CS0542: 'op_Modulus': member names cannot be the same as their enclosing type
+                // 	public static int operator % (op_Modulus c, int i) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "%").WithArguments("op_Modulus"),
+                // (44,29): error CS0542: 'op_ExclusiveOr': member names cannot be the same as their enclosing type
+                // 	public static int operator ^ (op_ExclusiveOr c, int i) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "^")
+                    .WithArguments("op_ExclusiveOr"),
+                // (48,29): error CS0542: 'op_BitwiseAnd': member names cannot be the same as their enclosing type
+                // 	public static int operator & (op_BitwiseAnd c, int i) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "&")
+                    .WithArguments("op_BitwiseAnd"),
+                // (52,29): error CS0542: 'op_BitwiseOr': member names cannot be the same as their enclosing type
+                // 	public static int operator | (op_BitwiseOr c, int i) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "|").WithArguments("op_BitwiseOr"),
+                // (56,30): error CS0542: 'op_LeftShift': member names cannot be the same as their enclosing type
+                // 	public static long operator <<  (op_LeftShift c, int i) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "<<")
+                    .WithArguments("op_LeftShift"),
+                // (60,30): error CS0542: 'op_RightShift': member names cannot be the same as their enclosing type
+                // 	public static long operator >>  (op_RightShift c, int i) { return 0; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, ">>")
+                    .WithArguments("op_RightShift")
+            );
         }
 
         [Fact]
@@ -7199,17 +7162,16 @@ class op_Implicit
     public static implicit operator op_Implicit(int x) { return null; }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,37): error CS0542: 'op_Explicit': member names cannot be the same as their enclosing type
-                    //     public static explicit operator op_Explicit(int x) { return null; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "op_Explicit")
-                        .WithArguments("op_Explicit"),
-                    // (9,37): error CS0542: 'op_Implicit': member names cannot be the same as their enclosing type
-                    //     public static implicit operator op_Implicit(int x) { return null; }
-                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "op_Implicit")
-                        .WithArguments("op_Implicit")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,37): error CS0542: 'op_Explicit': member names cannot be the same as their enclosing type
+                //     public static explicit operator op_Explicit(int x) { return null; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "op_Explicit")
+                    .WithArguments("op_Explicit"),
+                // (9,37): error CS0542: 'op_Implicit': member names cannot be the same as their enclosing type
+                //     public static implicit operator op_Implicit(int x) { return null; }
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "op_Implicit")
+                    .WithArguments("op_Implicit")
+            );
         }
 
         [Fact, WorkItem(546771, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546771")]
@@ -7309,15 +7271,17 @@ class Program
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
 
-            var expectedOperator = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S1")
+            var expectedOperator = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("S1")
                 .GetMembers(WellKnownMemberNames.EqualityOperatorName)
                 .OfType<MethodSymbol>()
                 .Single(
                     m =>
-                        m.ParameterTypesWithAnnotations[0].Equals(
-                            m.ParameterTypesWithAnnotations[1],
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        m.ParameterTypesWithAnnotations[0]
+                            .Equals(
+                                m.ParameterTypesWithAnnotations[1],
+                                TypeCompareKind.ConsiderEverything
+                            )
                 );
 
             var tree = comp.SyntaxTrees.Single();
@@ -7365,13 +7329,12 @@ class Program
 }
 ";
             // CONSIDER: This is a little silly, since that method will never be called.
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (27,16): warning CS0618: 'S1.operator ==(S1, S1)' is obsolete: 'A'
-                    //         return s1 == null;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "s1 == null")
-                        .WithArguments("S1.operator ==(S1, S1)", "A")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (27,16): warning CS0618: 'S1.operator ==(S1, S1)' is obsolete: 'A'
+                //         return s1 == null;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "s1 == null")
+                    .WithArguments("S1.operator ==(S1, S1)", "A")
+            );
         }
 
         [WorkItem(631414, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/631414")]
@@ -7404,13 +7367,12 @@ class Program
 }
 ";
             // CONSIDER: There is no reason not to allow this, but dev11 doesn't.
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (21,16): error CS0019: Operator '==' cannot be applied to operands of type 'S1?' and 'S2?'
-                    //         return s1 == s2;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "s1 == s2")
-                        .WithArguments("==", "S1?", "S2?")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (21,16): error CS0019: Operator '==' cannot be applied to operands of type 'S1?' and 'S2?'
+                //         return s1 == s2;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "s1 == s2")
+                    .WithArguments("==", "S1?", "S2?")
+            );
         }
 
         [WorkItem(656739, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/656739")]
@@ -7492,13 +7454,12 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (21,18): error CS0034: Operator '|' is ambiguous on operands of type 'InputParameter' and 'InputParameter'
-                    //         bool b = i1 | i2;
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i1 | i2")
-                        .WithArguments("|", "InputParameter", "InputParameter")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (21,18): error CS0034: Operator '|' is ambiguous on operands of type 'InputParameter' and 'InputParameter'
+                //         bool b = i1 | i2;
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i1 | i2")
+                    .WithArguments("|", "InputParameter", "InputParameter")
+            );
         }
 
         [WorkItem(656739, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/656739")]
@@ -7660,13 +7621,12 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (16,18): error CS0019: Operator '||' cannot be applied to operands of type 'InputParameter' and 'InputParameter'
-                    //         bool b = i1 || i2;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 || i2")
-                        .WithArguments("||", "InputParameter", "InputParameter")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (16,18): error CS0019: Operator '||' cannot be applied to operands of type 'InputParameter' and 'InputParameter'
+                //         bool b = i1 || i2;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 || i2")
+                    .WithArguments("||", "InputParameter", "InputParameter")
+            );
         }
 
         [WorkItem(665002, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/665002")]
@@ -7759,9 +7719,8 @@ public class RubyTime
             var diagnostics = DiagnosticBag.GetInstance();
             var block = binder.BindEmbeddedBlock(methodBody, diagnostics);
             diagnostics.Free();
-            var exprs = block.Statements.SelectAsArray(
-                stmt => ((BoundExpressionStatement)stmt).Expression
-            );
+            var exprs = block.Statements
+                .SelectAsArray(stmt => ((BoundExpressionStatement)stmt).Expression);
             Assert.Equal(32, exprs.Length);
 
             var operators = new[]
@@ -7946,7 +7905,9 @@ public class RubyTime
                 from node in tree.GetRoot().DescendantNodes()
                 select ((ExpressionSyntax)(node as PrefixUnaryExpressionSyntax))
                     ?? node as PostfixUnaryExpressionSyntax
-            ).Where(node => (object)node != null).ToArray();
+            )
+                .Where(node => (object)node != null)
+                .ToArray();
 
             n = 0;
             for (int name = 0; name < typeNames.Length; name++)
@@ -8121,7 +8082,8 @@ public class RubyTime
                 case UnaryOperatorKind.UnaryMinus:
                     expectChecked = (
                         type.IsDynamic()
-                        || symbol1.ContainingType.EnumUnderlyingTypeOrSelf()
+                        || symbol1.ContainingType
+                            .EnumUnderlyingTypeOrSelf()
                             .SpecialType.IsIntegralType()
                     );
                     break;
@@ -8133,7 +8095,8 @@ public class RubyTime
                     expectChecked = (
                         type.IsDynamic()
                         || type.IsPointerType()
-                        || symbol1.ContainingType.EnumUnderlyingTypeOrSelf()
+                        || symbol1.ContainingType
+                            .EnumUnderlyingTypeOrSelf()
                             .SpecialType.IsIntegralType()
                         || symbol1.ContainingType.SpecialType == SpecialType.System_Char
                     );
@@ -8207,14 +8170,17 @@ class Module1
                 from node in tree.GetRoot().DescendantNodes()
                 select ((ExpressionSyntax)(node as PrefixUnaryExpressionSyntax))
                     ?? node as PostfixUnaryExpressionSyntax
-            ).Where(node => (object)node != null).ToArray();
+            )
+                .Where(node => (object)node != null)
+                .ToArray();
 
             Assert.Equal(2, nodes.Length);
 
             var symbols1 = (
                 from node1 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol1 in symbols1)
             {
                 Assert.False(symbol1.IsCheckedBuiltin);
@@ -8226,7 +8192,8 @@ class Module1
             var symbols2 = (
                 from node2 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol2 in symbols2)
             {
                 Assert.True(symbol2.IsCheckedBuiltin);
@@ -8395,7 +8362,9 @@ class Module1
             var nodes = (
                 from node in tree.GetRoot().DescendantNodes()
                 select (node as BinaryExpressionSyntax)
-            ).Where(node => (object)node != null).ToArray();
+            )
+                .Where(node => (object)node != null)
+                .ToArray();
 
             n = 0;
             foreach (var leftType in types)
@@ -8553,7 +8522,9 @@ class Module1
             var nodes = (
                 from node in tree.GetRoot().DescendantNodes()
                 select (node as AssignmentExpressionSyntax)
-            ).Where(node => (object)node != null).ToArray();
+            )
+                .Where(node => (object)node != null)
+                .ToArray();
 
             n = 0;
             foreach (var leftType in types)
@@ -8682,11 +8653,8 @@ class Module1
                     return;
             }
 
-            BinaryOperatorKind result = OverloadResolution.BinopEasyOut.OpKind(
-                op,
-                leftType,
-                rightType
-            );
+            BinaryOperatorKind result = OverloadResolution.BinopEasyOut
+                .OpKind(op, leftType, rightType);
             BinaryOperatorSignature signature;
             bool isDynamic = (leftType.IsDynamic() || rightType.IsDynamic());
 
@@ -8724,11 +8692,12 @@ class Module1
                     && rightType.IsReferenceType
                     && (
                         TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
-                        || compilation.Conversions.ClassifyConversionFromType(
-                            leftType,
-                            rightType,
-                            ref useSiteDiagnostics
-                        ).IsReference
+                        || compilation.Conversions
+                            .ClassifyConversionFromType(
+                                leftType,
+                                rightType,
+                                ref useSiteDiagnostics
+                            ).IsReference
                     )
                 )
                 {
@@ -8863,11 +8832,8 @@ class Module1
                     && leftType.IsEnumType()
                     && (rightType.IsIntegralType() || rightType.IsCharType())
                     && (
-                        result = OverloadResolution.BinopEasyOut.OpKind(
-                            op,
-                            leftType.EnumUnderlyingTypeOrSelf(),
-                            rightType
-                        )
+                        result = OverloadResolution.BinopEasyOut
+                            .OpKind(op, leftType.EnumUnderlyingTypeOrSelf(), rightType)
                     ) != BinaryOperatorKind.Error
                     && TypeSymbol.Equals(
                         (signature = compilation.builtInOperators.GetSignature(result)).RightType,
@@ -8888,11 +8854,8 @@ class Module1
                     && rightType.IsEnumType()
                     && (leftType.IsIntegralType() || leftType.IsCharType())
                     && (
-                        result = OverloadResolution.BinopEasyOut.OpKind(
-                            op,
-                            leftType,
-                            rightType.EnumUnderlyingTypeOrSelf()
-                        )
+                        result = OverloadResolution.BinopEasyOut
+                            .OpKind(op, leftType, rightType.EnumUnderlyingTypeOrSelf())
                     ) != BinaryOperatorKind.Error
                     && TypeSymbol.Equals(
                         (signature = compilation.builtInOperators.GetSignature(result)).LeftType,
@@ -9076,11 +9039,12 @@ class Module1
                 && (
                     !leftType.IsReferenceType
                     || !rightType.IsReferenceType
-                    || !compilation.Conversions.ClassifyConversionFromType(
-                        leftType,
-                        rightType,
-                        ref useSiteDiagnostics
-                    ).IsReference
+                    || !compilation.Conversions
+                        .ClassifyConversionFromType(
+                            leftType,
+                            rightType,
+                            ref useSiteDiagnostics
+                        ).IsReference
                 )
             )
             {
@@ -9160,7 +9124,8 @@ class Module1
                     isChecked =
                         isDynamic
                         || symbol1.ContainingSymbol.Kind == SymbolKind.PointerType
-                        || symbol1.ContainingType.EnumUnderlyingTypeOrSelf()
+                        || symbol1.ContainingType
+                            .EnumUnderlyingTypeOrSelf()
                             .SpecialType.IsIntegralType();
                     break;
 
@@ -9179,42 +9144,32 @@ class Module1
             Assert.Equal(symbol1.Name, symbol1.MetadataName);
 
             Assert.True(
-                SymbolEqualityComparer.ConsiderEverything.Equals(
-                    symbol1.ContainingSymbol,
-                    symbol1.Parameters[0].Type
-                )
-                    || SymbolEqualityComparer.ConsiderEverything.Equals(
-                        symbol1.ContainingSymbol,
-                        symbol1.Parameters[1].Type
-                    )
+                SymbolEqualityComparer.ConsiderEverything
+                    .Equals(symbol1.ContainingSymbol, symbol1.Parameters[0].Type)
+                    || SymbolEqualityComparer.ConsiderEverything
+                        .Equals(symbol1.ContainingSymbol, symbol1.Parameters[1].Type)
             );
 
             int match = 0;
             if (
-                SymbolEqualityComparer.ConsiderEverything.Equals(
-                    symbol1.ContainingSymbol,
-                    symbol1.ReturnType
-                )
+                SymbolEqualityComparer.ConsiderEverything
+                    .Equals(symbol1.ContainingSymbol, symbol1.ReturnType)
             )
             {
                 match++;
             }
 
             if (
-                SymbolEqualityComparer.ConsiderEverything.Equals(
-                    symbol1.ContainingSymbol,
-                    symbol1.Parameters[0].Type
-                )
+                SymbolEqualityComparer.ConsiderEverything
+                    .Equals(symbol1.ContainingSymbol, symbol1.Parameters[0].Type)
             )
             {
                 match++;
             }
 
             if (
-                SymbolEqualityComparer.ConsiderEverything.Equals(
-                    symbol1.ContainingSymbol,
-                    symbol1.Parameters[1].Type
-                )
+                SymbolEqualityComparer.ConsiderEverything
+                    .Equals(symbol1.ContainingSymbol, symbol1.Parameters[1].Type)
             )
             {
                 match++;
@@ -9327,7 +9282,9 @@ class Module1
             var nodes = (
                 from node in tree.GetRoot().DescendantNodes()
                 select node as BinaryExpressionSyntax
-            ).Where(node => (object)node != null).ToArray();
+            )
+                .Where(node => (object)node != null)
+                .ToArray();
 
             Assert.Equal(2, nodes.Length);
 
@@ -9373,7 +9330,8 @@ class Module1
             var symbols1 = (
                 from node1 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol1 in symbols1)
             {
                 Assert.False(symbol1.IsCheckedBuiltin);
@@ -9385,7 +9343,8 @@ class Module1
             var symbols2 = (
                 from node2 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol2 in symbols2)
             {
                 Assert.True(symbol2.IsCheckedBuiltin);
@@ -9422,14 +9381,17 @@ class Module1
             var nodes = (
                 from node in tree.GetRoot().DescendantNodes()
                 select node as BinaryExpressionSyntax
-            ).Where(node => (object)node != null).ToArray();
+            )
+                .Where(node => (object)node != null)
+                .ToArray();
 
             Assert.Equal(2, nodes.Length);
 
             var symbols1 = (
                 from node1 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol1 in symbols1)
             {
                 Assert.False(symbol1.IsCheckedBuiltin);
@@ -9443,7 +9405,8 @@ class Module1
             var symbols2 = (
                 from node2 in nodes
                 select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol
-            ).ToArray();
+            )
+                .ToArray();
             foreach (var symbol2 in symbols2)
             {
                 Assert.True(symbol2.IsCheckedBuiltin);
@@ -9505,7 +9468,9 @@ struct TestStr
             var nodes = (
                 from node in tree.GetRoot().DescendantNodes()
                 select node as BinaryExpressionSyntax
-            ).Where(node => (object)node != null).ToArray();
+            )
+                .Where(node => (object)node != null)
+                .ToArray();
 
             Assert.Equal(12, nodes.Length);
 
@@ -9619,10 +9584,10 @@ public static class Program
 }";
             CreateCompilation(source1, options: TestOptions.ReleaseDll).VerifyDiagnostics();
             CreateCompilation(
-                    source1,
-                    options: TestOptions.ReleaseDll,
-                    parseOptions: TestOptions.Regular.WithStrictFeature()
-                )
+                source1,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.Regular.WithStrictFeature()
+            )
                 .VerifyDiagnostics(
                     // (7,11): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'Color'
                     //         M(1 - Color.Red);
@@ -10523,209 +10488,208 @@ class Program
     }
 }";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (26,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int'
-                    //         Print(x - c);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
-                        .WithArguments("-", "TestEnum", "int")
-                        .WithLocation(26, 15),
-                    // (27,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum", "long")
-                        .WithLocation(27, 15),
-                    // (28,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int'
-                    //         Print(x - g);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
-                        .WithArguments("-", "TestEnum", "int")
-                        .WithLocation(28, 15),
-                    // (29,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-                    //         Print(x - h);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
-                        .WithArguments("-", "TestEnum", "long")
-                        .WithLocation(29, 15),
-                    // (30,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum'
-                    //         Print(c - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
-                        .WithArguments("-", "int", "TestEnum")
-                        .WithLocation(30, 15),
-                    // (31,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long", "TestEnum")
-                        .WithLocation(31, 15),
-                    // (32,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum'
-                    //         Print(g - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
-                        .WithArguments("-", "int", "TestEnum")
-                        .WithLocation(32, 15),
-                    // (33,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-                    //         Print(h - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
-                        .WithArguments("-", "long", "TestEnum")
-                        .WithLocation(33, 15),
-                    // (44,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int'
-                    //         Print(x - c);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
-                        .WithArguments("-", "TestEnum?", "int")
-                        .WithLocation(44, 15),
-                    // (45,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum?", "long")
-                        .WithLocation(45, 15),
-                    // (46,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int'
-                    //         Print(x - g);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
-                        .WithArguments("-", "TestEnum?", "int")
-                        .WithLocation(46, 15),
-                    // (47,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-                    //         Print(x - h);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
-                        .WithArguments("-", "TestEnum?", "long")
-                        .WithLocation(47, 15),
-                    // (48,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum?'
-                    //         Print(c - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
-                        .WithArguments("-", "int", "TestEnum?")
-                        .WithLocation(48, 15),
-                    // (49,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long", "TestEnum?")
-                        .WithLocation(49, 15),
-                    // (50,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum?'
-                    //         Print(g - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
-                        .WithArguments("-", "int", "TestEnum?")
-                        .WithLocation(50, 15),
-                    // (51,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-                    //         Print(h - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
-                        .WithArguments("-", "long", "TestEnum?")
-                        .WithLocation(51, 15),
-                    // (62,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int?'
-                    //         Print(x - c);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
-                        .WithArguments("-", "TestEnum", "int?")
-                        .WithLocation(62, 15),
-                    // (63,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum", "long?")
-                        .WithLocation(63, 15),
-                    // (64,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int?'
-                    //         Print(x - g);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
-                        .WithArguments("-", "TestEnum", "int?")
-                        .WithLocation(64, 15),
-                    // (65,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
-                    //         Print(x - h);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
-                        .WithArguments("-", "TestEnum", "long?")
-                        .WithLocation(65, 15),
-                    // (66,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum'
-                    //         Print(c - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
-                        .WithArguments("-", "int?", "TestEnum")
-                        .WithLocation(66, 15),
-                    // (67,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long?", "TestEnum")
-                        .WithLocation(67, 15),
-                    // (68,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum'
-                    //         Print(g - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
-                        .WithArguments("-", "int?", "TestEnum")
-                        .WithLocation(68, 15),
-                    // (69,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
-                    //         Print(h - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
-                        .WithArguments("-", "long?", "TestEnum")
-                        .WithLocation(69, 15),
-                    // (80,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int?'
-                    //         Print(x - c);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
-                        .WithArguments("-", "TestEnum?", "int?")
-                        .WithLocation(80, 15),
-                    // (81,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum?", "long?")
-                        .WithLocation(81, 15),
-                    // (82,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int?'
-                    //         Print(x - g);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
-                        .WithArguments("-", "TestEnum?", "int?")
-                        .WithLocation(82, 15),
-                    // (83,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
-                    //         Print(x - h);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
-                        .WithArguments("-", "TestEnum?", "long?")
-                        .WithLocation(83, 15),
-                    // (84,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum?'
-                    //         Print(c - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
-                        .WithArguments("-", "int?", "TestEnum?")
-                        .WithLocation(84, 15),
-                    // (85,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long?", "TestEnum?")
-                        .WithLocation(85, 15),
-                    // (86,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum?'
-                    //         Print(g - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
-                        .WithArguments("-", "int?", "TestEnum?")
-                        .WithLocation(86, 15),
-                    // (87,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
-                    //         Print(h - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
-                        .WithArguments("-", "long?", "TestEnum?")
-                        .WithLocation(87, 15),
-                    // (95,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum", "long")
-                        .WithLocation(95, 15),
-                    // (96,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long", "TestEnum")
-                        .WithLocation(96, 15),
-                    // (104,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum?", "long")
-                        .WithLocation(104, 15),
-                    // (105,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long", "TestEnum?")
-                        .WithLocation(105, 15),
-                    // (112,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-                    //         Print(x - (long)1);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
-                        .WithArguments("-", "TestEnum", "long")
-                        .WithLocation(112, 15),
-                    // (113,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-                    //         Print((long)1 - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
-                        .WithArguments("-", "long", "TestEnum")
-                        .WithLocation(113, 15),
-                    // (120,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-                    //         Print(x - (long)1);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
-                        .WithArguments("-", "TestEnum?", "long")
-                        .WithLocation(120, 15),
-                    // (121,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-                    //         Print((long)1 - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
-                        .WithArguments("-", "long", "TestEnum?")
-                        .WithLocation(121, 15)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (26,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int'
+                //         Print(x - c);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
+                    .WithArguments("-", "TestEnum", "int")
+                    .WithLocation(26, 15),
+                // (27,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum", "long")
+                    .WithLocation(27, 15),
+                // (28,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int'
+                //         Print(x - g);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
+                    .WithArguments("-", "TestEnum", "int")
+                    .WithLocation(28, 15),
+                // (29,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                //         Print(x - h);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                    .WithArguments("-", "TestEnum", "long")
+                    .WithLocation(29, 15),
+                // (30,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum'
+                //         Print(c - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
+                    .WithArguments("-", "int", "TestEnum")
+                    .WithLocation(30, 15),
+                // (31,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long", "TestEnum")
+                    .WithLocation(31, 15),
+                // (32,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum'
+                //         Print(g - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
+                    .WithArguments("-", "int", "TestEnum")
+                    .WithLocation(32, 15),
+                // (33,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                //         Print(h - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                    .WithArguments("-", "long", "TestEnum")
+                    .WithLocation(33, 15),
+                // (44,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int'
+                //         Print(x - c);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
+                    .WithArguments("-", "TestEnum?", "int")
+                    .WithLocation(44, 15),
+                // (45,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum?", "long")
+                    .WithLocation(45, 15),
+                // (46,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int'
+                //         Print(x - g);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
+                    .WithArguments("-", "TestEnum?", "int")
+                    .WithLocation(46, 15),
+                // (47,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                //         Print(x - h);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                    .WithArguments("-", "TestEnum?", "long")
+                    .WithLocation(47, 15),
+                // (48,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum?'
+                //         Print(c - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
+                    .WithArguments("-", "int", "TestEnum?")
+                    .WithLocation(48, 15),
+                // (49,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long", "TestEnum?")
+                    .WithLocation(49, 15),
+                // (50,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum?'
+                //         Print(g - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
+                    .WithArguments("-", "int", "TestEnum?")
+                    .WithLocation(50, 15),
+                // (51,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                //         Print(h - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                    .WithArguments("-", "long", "TestEnum?")
+                    .WithLocation(51, 15),
+                // (62,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int?'
+                //         Print(x - c);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
+                    .WithArguments("-", "TestEnum", "int?")
+                    .WithLocation(62, 15),
+                // (63,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum", "long?")
+                    .WithLocation(63, 15),
+                // (64,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int?'
+                //         Print(x - g);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
+                    .WithArguments("-", "TestEnum", "int?")
+                    .WithLocation(64, 15),
+                // (65,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
+                //         Print(x - h);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                    .WithArguments("-", "TestEnum", "long?")
+                    .WithLocation(65, 15),
+                // (66,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum'
+                //         Print(c - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
+                    .WithArguments("-", "int?", "TestEnum")
+                    .WithLocation(66, 15),
+                // (67,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long?", "TestEnum")
+                    .WithLocation(67, 15),
+                // (68,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum'
+                //         Print(g - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
+                    .WithArguments("-", "int?", "TestEnum")
+                    .WithLocation(68, 15),
+                // (69,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
+                //         Print(h - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                    .WithArguments("-", "long?", "TestEnum")
+                    .WithLocation(69, 15),
+                // (80,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int?'
+                //         Print(x - c);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
+                    .WithArguments("-", "TestEnum?", "int?")
+                    .WithLocation(80, 15),
+                // (81,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum?", "long?")
+                    .WithLocation(81, 15),
+                // (82,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int?'
+                //         Print(x - g);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
+                    .WithArguments("-", "TestEnum?", "int?")
+                    .WithLocation(82, 15),
+                // (83,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
+                //         Print(x - h);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                    .WithArguments("-", "TestEnum?", "long?")
+                    .WithLocation(83, 15),
+                // (84,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum?'
+                //         Print(c - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
+                    .WithArguments("-", "int?", "TestEnum?")
+                    .WithLocation(84, 15),
+                // (85,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long?", "TestEnum?")
+                    .WithLocation(85, 15),
+                // (86,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum?'
+                //         Print(g - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
+                    .WithArguments("-", "int?", "TestEnum?")
+                    .WithLocation(86, 15),
+                // (87,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
+                //         Print(h - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                    .WithArguments("-", "long?", "TestEnum?")
+                    .WithLocation(87, 15),
+                // (95,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum", "long")
+                    .WithLocation(95, 15),
+                // (96,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long", "TestEnum")
+                    .WithLocation(96, 15),
+                // (104,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum?", "long")
+                    .WithLocation(104, 15),
+                // (105,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long", "TestEnum?")
+                    .WithLocation(105, 15),
+                // (112,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                //         Print(x - (long)1);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
+                    .WithArguments("-", "TestEnum", "long")
+                    .WithLocation(112, 15),
+                // (113,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                //         Print((long)1 - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
+                    .WithArguments("-", "long", "TestEnum")
+                    .WithLocation(113, 15),
+                // (120,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                //         Print(x - (long)1);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
+                    .WithArguments("-", "TestEnum?", "long")
+                    .WithLocation(120, 15),
+                // (121,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                //         Print((long)1 - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
+                    .WithArguments("-", "long", "TestEnum?")
+                    .WithLocation(121, 15)
+            );
         }
 
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
@@ -11115,129 +11079,128 @@ class Program
     }
 }";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (24,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum", "long")
-                        .WithLocation(24, 15),
-                    // (25,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-                    //         Print(x - h);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
-                        .WithArguments("-", "TestEnum", "long")
-                        .WithLocation(25, 15),
-                    // (26,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long", "TestEnum")
-                        .WithLocation(26, 15),
-                    // (27,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-                    //         Print(h - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
-                        .WithArguments("-", "long", "TestEnum")
-                        .WithLocation(27, 15),
-                    // (36,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum?", "long")
-                        .WithLocation(36, 15),
-                    // (37,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-                    //         Print(x - h);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
-                        .WithArguments("-", "TestEnum?", "long")
-                        .WithLocation(37, 15),
-                    // (38,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long", "TestEnum?")
-                        .WithLocation(38, 15),
-                    // (39,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-                    //         Print(h - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
-                        .WithArguments("-", "long", "TestEnum?")
-                        .WithLocation(39, 15),
-                    // (48,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum", "long?")
-                        .WithLocation(48, 15),
-                    // (49,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
-                    //         Print(x - h);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
-                        .WithArguments("-", "TestEnum", "long?")
-                        .WithLocation(49, 15),
-                    // (50,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long?", "TestEnum")
-                        .WithLocation(50, 15),
-                    // (51,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
-                    //         Print(h - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
-                        .WithArguments("-", "long?", "TestEnum")
-                        .WithLocation(51, 15),
-                    // (60,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum?", "long?")
-                        .WithLocation(60, 15),
-                    // (61,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
-                    //         Print(x - h);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
-                        .WithArguments("-", "TestEnum?", "long?")
-                        .WithLocation(61, 15),
-                    // (62,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long?", "TestEnum?")
-                        .WithLocation(62, 15),
-                    // (63,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
-                    //         Print(h - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
-                        .WithArguments("-", "long?", "TestEnum?")
-                        .WithLocation(63, 15),
-                    // (71,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum", "long")
-                        .WithLocation(71, 15),
-                    // (72,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long", "TestEnum")
-                        .WithLocation(72, 15),
-                    // (80,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-                    //         Print(x - d);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
-                        .WithArguments("-", "TestEnum?", "long")
-                        .WithLocation(80, 15),
-                    // (81,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-                    //         Print(d - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
-                        .WithArguments("-", "long", "TestEnum?")
-                        .WithLocation(81, 15),
-                    // (88,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-                    //         Print(x - (long)1);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
-                        .WithArguments("-", "TestEnum", "long")
-                        .WithLocation(88, 15),
-                    // (89,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-                    //         Print((long)1 - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
-                        .WithArguments("-", "long", "TestEnum")
-                        .WithLocation(89, 15),
-                    // (96,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-                    //         Print(x - (long)1);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
-                        .WithArguments("-", "TestEnum?", "long")
-                        .WithLocation(96, 15),
-                    // (97,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-                    //         Print((long)1 - x);
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
-                        .WithArguments("-", "long", "TestEnum?")
-                        .WithLocation(97, 15)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (24,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum", "long")
+                    .WithLocation(24, 15),
+                // (25,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                //         Print(x - h);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                    .WithArguments("-", "TestEnum", "long")
+                    .WithLocation(25, 15),
+                // (26,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long", "TestEnum")
+                    .WithLocation(26, 15),
+                // (27,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                //         Print(h - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                    .WithArguments("-", "long", "TestEnum")
+                    .WithLocation(27, 15),
+                // (36,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum?", "long")
+                    .WithLocation(36, 15),
+                // (37,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                //         Print(x - h);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                    .WithArguments("-", "TestEnum?", "long")
+                    .WithLocation(37, 15),
+                // (38,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long", "TestEnum?")
+                    .WithLocation(38, 15),
+                // (39,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                //         Print(h - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                    .WithArguments("-", "long", "TestEnum?")
+                    .WithLocation(39, 15),
+                // (48,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum", "long?")
+                    .WithLocation(48, 15),
+                // (49,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
+                //         Print(x - h);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                    .WithArguments("-", "TestEnum", "long?")
+                    .WithLocation(49, 15),
+                // (50,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long?", "TestEnum")
+                    .WithLocation(50, 15),
+                // (51,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
+                //         Print(h - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                    .WithArguments("-", "long?", "TestEnum")
+                    .WithLocation(51, 15),
+                // (60,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum?", "long?")
+                    .WithLocation(60, 15),
+                // (61,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
+                //         Print(x - h);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                    .WithArguments("-", "TestEnum?", "long?")
+                    .WithLocation(61, 15),
+                // (62,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long?", "TestEnum?")
+                    .WithLocation(62, 15),
+                // (63,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
+                //         Print(h - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                    .WithArguments("-", "long?", "TestEnum?")
+                    .WithLocation(63, 15),
+                // (71,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum", "long")
+                    .WithLocation(71, 15),
+                // (72,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long", "TestEnum")
+                    .WithLocation(72, 15),
+                // (80,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                //         Print(x - d);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                    .WithArguments("-", "TestEnum?", "long")
+                    .WithLocation(80, 15),
+                // (81,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                //         Print(d - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                    .WithArguments("-", "long", "TestEnum?")
+                    .WithLocation(81, 15),
+                // (88,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                //         Print(x - (long)1);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
+                    .WithArguments("-", "TestEnum", "long")
+                    .WithLocation(88, 15),
+                // (89,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                //         Print((long)1 - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
+                    .WithArguments("-", "long", "TestEnum")
+                    .WithLocation(89, 15),
+                // (96,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                //         Print(x - (long)1);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
+                    .WithArguments("-", "TestEnum?", "long")
+                    .WithLocation(96, 15),
+                // (97,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                //         Print((long)1 - x);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
+                    .WithArguments("-", "long", "TestEnum?")
+                    .WithLocation(97, 15)
+            );
         }
 
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
@@ -12277,14 +12240,13 @@ public enum FlagsEnum
     }
 }
 ";
-            var compilation = CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,17): warning CS0183: The given expression is always of the provided ('string') type
-                    //         var x = d is string;
-                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "d is string")
-                        .WithArguments("string")
-                        .WithLocation(6, 17)
-                );
+            var compilation = CreateCompilation(source).VerifyDiagnostics(
+                // (6,17): warning CS0183: The given expression is always of the provided ('string') type
+                //         var x = d is string;
+                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "d is string")
+                    .WithArguments("string")
+                    .WithLocation(6, 17)
+            );
         }
 
         [Fact, WorkItem(19310, "https://github.com/dotnet/roslyn/issues/19310")]
@@ -12303,9 +12265,9 @@ class Program
     }
 }";
             var compilation = CreateCompilationWithMscorlib40(
-                    source,
-                    references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
-                )
+                source,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            )
                 .VerifyDiagnostics(
                     // (7,13): warning CS0184: The given expression is never of the provided ('(long, int)') type
                     //         if (t is ValueTuple<long, int>) { }   // too big

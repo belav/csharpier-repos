@@ -262,12 +262,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var mockKestrelTrace = new Mock<IKestrelTrace>();
             mockKestrelTrace.Setup(trace => trace.IsEnabled(LogLevel.Information)).Returns(true);
             mockKestrelTrace.Setup(
-                    trace =>
-                        trace.ConnectionBadRequest(
-                            It.IsAny<string>(),
-                            It.IsAny<BadHttpRequestException>()
-                        )
-                )
+                trace =>
+                    trace.ConnectionBadRequest(
+                        It.IsAny<string>(),
+                        It.IsAny<BadHttpRequestException>()
+                    )
+            )
                 .Callback<string, BadHttpRequestException>(
                     (connectionId, exception) => loggedException = exception
                 );

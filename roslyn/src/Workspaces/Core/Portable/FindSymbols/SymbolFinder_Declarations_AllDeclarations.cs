@@ -24,11 +24,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             using var query = SearchQuery.Create(name, ignoreCase);
             var declarations = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                    project,
-                    query,
-                    SymbolFilter.All,
-                    cancellationToken
-                )
+                project,
+                query,
+                SymbolFilter.All,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return declarations;
         }
@@ -46,11 +46,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             using var query = SearchQuery.Create(name, ignoreCase);
             var declarations = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                    project,
-                    query,
-                    filter,
-                    cancellationToken
-                )
+                project,
+                query,
+                filter,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return declarations;
         }

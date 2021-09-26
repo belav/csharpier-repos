@@ -226,10 +226,8 @@ namespace System.Security.Cryptography.Xml.Tests
             XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(doc.NameTable);
             xmlNamespaceManager.AddNamespace("enc", EncryptedXml.XmlEncNamespaceUrl);
             Assert.NotNull(
-                transformedDocument.DocumentElement.SelectSingleNode(
-                    "//enc:EncryptedData",
-                    xmlNamespaceManager
-                )
+                transformedDocument.DocumentElement
+                    .SelectSingleNode("//enc:EncryptedData", xmlNamespaceManager)
             );
             Assert.NotEqual(xml, transformedDocument.OuterXml);
         }
@@ -240,18 +238,15 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 var encryptedXml = new EncryptedXml();
                 encryptedXml.AddKeyNameMapping("aes", aesAlgo);
-                XmlElement elementToEncrypt = (XmlElement)doc.DocumentElement.SelectSingleNode(
-                    nodeToEncrypt
-                );
+                XmlElement elementToEncrypt = (XmlElement)doc.DocumentElement
+                    .SelectSingleNode(nodeToEncrypt);
                 EncryptedData encryptedData = encryptedXml.Encrypt(elementToEncrypt, "aes");
                 EncryptedXml.ReplaceElement(elementToEncrypt, encryptedData, false);
 
                 XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(doc.NameTable);
                 xmlNamespaceManager.AddNamespace("enc", EncryptedXml.XmlEncNamespaceUrl);
-                XmlElement encryptedNode = (XmlElement)doc.DocumentElement.SelectSingleNode(
-                    "//enc:EncryptedData",
-                    xmlNamespaceManager
-                );
+                XmlElement encryptedNode = (XmlElement)doc.DocumentElement
+                    .SelectSingleNode("//enc:EncryptedData", xmlNamespaceManager);
                 encryptedNode.SetAttribute("ID", "#_0");
 
                 transform.LoadInput(doc);

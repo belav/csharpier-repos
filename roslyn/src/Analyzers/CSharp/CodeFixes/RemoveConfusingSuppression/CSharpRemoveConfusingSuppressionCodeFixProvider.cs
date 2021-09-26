@@ -85,10 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveConfusingSuppression
 
             foreach (var diagnostic in diagnostics)
             {
-                var node = diagnostic.AdditionalLocations[0].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var node = diagnostic.AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 Debug.Assert(
                     node.IsKind(SyntaxKind.IsExpression)
                         || node.IsKind(SyntaxKind.IsPatternExpression)
@@ -114,9 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveConfusingSuppression
 
                 // Remove the suppression operator.
                 var suppression = (PostfixUnaryExpressionSyntax)left;
-                var withoutSuppression = suppression.Operand.WithAppendedTrailingTrivia(
-                    suppression.OperatorToken.GetAllTrivia()
-                );
+                var withoutSuppression = suppression.Operand
+                    .WithAppendedTrailingTrivia(suppression.OperatorToken.GetAllTrivia());
                 var isWithoutSuppression = updatedNode.ReplaceNode(suppression, withoutSuppression);
 
                 editor.ReplaceNode(node, isWithoutSuppression);
@@ -129,11 +126,11 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveConfusingSuppression
             FixAllProvider.Create(
                 async (context, document, diagnostics) =>
                     await FixAllAsync(
-                            document,
-                            diagnostics,
-                            context.CodeActionEquivalenceKey == NegateExpression,
-                            context.CancellationToken
-                        )
+                        document,
+                        diagnostics,
+                        context.CodeActionEquivalenceKey == NegateExpression,
+                        context.CancellationToken
+                    )
                         .ConfigureAwait(false)
             );
 

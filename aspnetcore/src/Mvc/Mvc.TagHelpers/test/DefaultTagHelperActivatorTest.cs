@@ -55,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Internal
 
         private ViewContext CreateViewContext()
         {
-            var services = new ServiceCollection().AddSingleton(HostingEnvironment)
+            var services = new ServiceCollection()
+                .AddSingleton(HostingEnvironment)
                 .AddSingleton(MemoryCache)
                 .AddSingleton(CacheProvider)
                 .AddSingleton(HtmlEncoder.Default)

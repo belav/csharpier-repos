@@ -974,9 +974,9 @@ namespace System.Text
                         (
                             Sse2.MoveMask(
                                 Sse2.AddSaturate(
-                                        utf16VectorFirst.AsUInt16(),
-                                        latin1MaskForAddSaturate
-                                    )
+                                    utf16VectorFirst.AsUInt16(),
+                                    latin1MaskForAddSaturate
+                                )
                                     .AsByte()
                             ) & NonLatin1DataSeenMask
                         ) != 0
@@ -1040,9 +1040,9 @@ namespace System.Text
                         (
                             Sse2.MoveMask(
                                 Sse2.AddSaturate(
-                                        combinedVector.AsUInt16(),
-                                        latin1MaskForAddSaturate
-                                    )
+                                    combinedVector.AsUInt16(),
+                                    latin1MaskForAddSaturate
+                                )
                                     .AsByte()
                             ) & NonLatin1DataSeenMask
                         ) != 0

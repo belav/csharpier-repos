@@ -44,14 +44,15 @@ namespace System.Runtime.Serialization.Tests
                     Utils.CompareResult result = Utils.Compare(baseline, actualOutput);
                     Assert.True(
                         result.Equal,
-                        string.Format(
-                            "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                            Environment.NewLine,
-                            result.ErrorMessage,
-                            value,
-                            baseline,
-                            actualOutput
-                        )
+                        string
+                            .Format(
+                                "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                                Environment.NewLine,
+                                result.ErrorMessage,
+                                value,
+                                baseline,
+                                actualOutput
+                            )
                     );
                 }
 

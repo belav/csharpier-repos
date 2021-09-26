@@ -25,8 +25,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                 var headerName = Encoding.UTF8.GetString(buffer.ToArray());
                 var headerValues = headers.FirstOrDefault(
-                        h => string.Equals(h.Key, headerName, StringComparison.OrdinalIgnoreCase)
-                    )
+                    h => string.Equals(h.Key, headerName, StringComparison.OrdinalIgnoreCase)
+                )
                     .Value.ToArray();
 
                 var data = Encoding.UTF8.GetBytes(string.Join(",", headerValues));

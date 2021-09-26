@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SplitComment
 
             var language = workspace.Projects.Single().Language;
             workspace.SetOptions(
-                workspace.Options.WithChangedOption(FormattingOptions.UseTabs, language, useTabs)
+                workspace.Options
+                    .WithChangedOption(FormattingOptions.UseTabs, language, useTabs)
                     .WithChangedOption(SplitCommentOptions.Enabled, language, enabled)
             );
 
@@ -74,10 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SplitComment
             view.SetMultiSelection(snapshotSpans);
 
             var undoHistoryRegistry = workspace.GetService<ITextUndoHistoryRegistry>();
-            var commandHandler =
-                workspace.ExportProvider.GetCommandHandler<SplitCommentCommandHandler>(
-                    nameof(SplitCommentCommandHandler)
-                );
+            var commandHandler = workspace.ExportProvider
+                .GetCommandHandler<SplitCommentCommandHandler>(nameof(SplitCommentCommandHandler));
             if (
                 !commandHandler.ExecuteCommand(
                     new ReturnKeyCommandArgs(view, view.TextBuffer),

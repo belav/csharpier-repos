@@ -295,9 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 switch (_syntax.Kind())
                 {
                     case SyntaxKind.AnonymousMethodExpression:
-                        return (
-                            (AnonymousMethodExpressionSyntax)_syntax
-                        ).DelegateKeyword.GetLocation();
+                        return ((AnonymousMethodExpressionSyntax)_syntax).DelegateKeyword
+                            .GetLocation();
                     case SyntaxKind.SimpleLambdaExpression:
                     case SyntaxKind.ParenthesizedLambdaExpression:
                         return ((LambdaExpressionSyntax)_syntax).ArrowToken.GetLocation();

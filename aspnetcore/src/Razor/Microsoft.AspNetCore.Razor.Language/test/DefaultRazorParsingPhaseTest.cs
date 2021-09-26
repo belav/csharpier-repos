@@ -16,13 +16,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                 builder =>
                 {
                     builder.Phases.Add(phase);
-                    builder.Features.Add(
-                        new DefaultRazorParserOptionsFeature(
-                            designTime: false,
-                            version: RazorLanguageVersion.Latest,
-                            fileKind: null
-                        )
-                    );
+                    builder.Features
+                        .Add(
+                            new DefaultRazorParserOptionsFeature(
+                                designTime: false,
+                                version: RazorLanguageVersion.Latest,
+                                fileKind: null
+                            )
+                        );
                 }
             );
 
@@ -44,13 +45,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                 (builder) =>
                 {
                     builder.Phases.Add(phase);
-                    builder.Features.Add(
-                        new DefaultRazorParserOptionsFeature(
-                            designTime: false,
-                            version: RazorLanguageVersion.Latest,
-                            fileKind: null
-                        )
-                    );
+                    builder.Features
+                        .Add(
+                            new DefaultRazorParserOptionsFeature(
+                                designTime: false,
+                                version: RazorLanguageVersion.Latest,
+                                fileKind: null
+                            )
+                        );
                     builder.Features.Add(new MyParserOptionsFeature());
                 }
             );
@@ -75,13 +77,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                 (builder) =>
                 {
                     builder.Phases.Add(phase);
-                    builder.Features.Add(
-                        new DefaultRazorParserOptionsFeature(
-                            designTime: false,
-                            version: RazorLanguageVersion.Latest,
-                            fileKind: null
-                        )
-                    );
+                    builder.Features
+                        .Add(
+                            new DefaultRazorParserOptionsFeature(
+                                designTime: false,
+                                version: RazorLanguageVersion.Latest,
+                                fileKind: null
+                            )
+                        );
                     builder.Features.Add(new MyParserOptionsFeature());
                 }
             );
@@ -124,9 +127,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public void Configure(RazorParserOptionsBuilder options)
             {
-                options.Directives.Add(
-                    DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)
-                );
+                options.Directives
+                    .Add(DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine));
             }
         }
     }

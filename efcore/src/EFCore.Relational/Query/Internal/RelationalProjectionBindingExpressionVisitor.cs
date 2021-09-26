@@ -26,9 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     public class RelationalProjectionBindingExpressionVisitor : ExpressionVisitor
     {
         private static readonly MethodInfo _getParameterValueMethodInfo =
-            typeof(RelationalProjectionBindingExpressionVisitor).GetRequiredDeclaredMethod(
-                nameof(GetParameterValue)
-            );
+            typeof(RelationalProjectionBindingExpressionVisitor)
+                .GetRequiredDeclaredMethod(nameof(GetParameterValue));
 
         private readonly RelationalQueryableMethodTranslatingExpressionVisitor _queryableMethodTranslatingExpressionVisitor;
         private readonly RelationalSqlTranslatingExpressionVisitor _sqlTranslator;
@@ -97,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         _selectExpression,
                         expression
                     );
-                _existingProjections = _selectExpression.Projection.Select(e => e.Expression)
+                _existingProjections = _selectExpression.Projection
+                    .Select(e => e.Expression)
                     .ToArray();
                 _selectExpression.ClearProjection();
                 result = Visit(expandedExpression);
@@ -174,7 +174,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 // This would be SqlExpression. EntityProjectionExpression would be wrapped inside EntityShaperExpression.
                                 var mappedProjection = (SqlExpression)(
                                     (SelectExpression)projectionBindingExpression.QueryExpression
-                                ).GetMappedProjection(projectionBindingExpression.ProjectionMember);
+                                )
+                                    .GetMappedProjection(
+                                        projectionBindingExpression.ProjectionMember
+                                    );
 
                                 return new ProjectionBindingExpression(
                                     _selectExpression,
@@ -214,7 +217,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                     materializeCollectionNavigationExpression.Subquery
                                 )!,
                                 materializeCollectionNavigationExpression.Navigation,
-                                materializeCollectionNavigationExpression.Navigation.ClrType.GetSequenceType()
+                                materializeCollectionNavigationExpression.Navigation.ClrType
+                                    .GetSequenceType()
                             );
 
                         case MethodCallExpression methodCallExpression:
@@ -420,7 +424,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         entityProjectionExpression = (EntityProjectionExpression)(
                             (SelectExpression)projectionBindingExpression.QueryExpression
-                        ).GetMappedProjection(projectionBindingExpression.ProjectionMember);
+                        )
+                            .GetMappedProjection(projectionBindingExpression.ProjectionMember);
                     }
                     else
                     {
@@ -431,10 +436,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     if (_clientEval)
                     {
                         if (
-                            !_entityProjectionCache!.TryGetValue(
-                                entityProjectionExpression,
-                                out var entityProjectionBinding
-                            )
+                            !_entityProjectionCache!
+                                .TryGetValue(
+                                    entityProjectionExpression,
+                                    out var entityProjectionBinding
+                                )
                         )
                         {
                             entityProjectionBinding = new ProjectionBindingExpression(

@@ -213,10 +213,8 @@ namespace Newtonsoft.Json.Bson
                     default:
                         throw JsonReaderException.Create(
                             this,
-                            "Unexpected state: {0}".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                _bsonReaderState
-                            )
+                            "Unexpected state: {0}"
+                                .FormatWith(CultureInfo.InvariantCulture, _bsonReaderState)
                         );
                 }
 
@@ -654,13 +652,8 @@ namespace Newtonsoft.Json.Bson
                     // calculate the index of the end of the last full character in the buffer
                     int lastFullCharStop = GetLastFullCharStop(count - 1);
 
-                    int charCount = Encoding.UTF8.GetChars(
-                        _byteBuffer,
-                        0,
-                        lastFullCharStop + 1,
-                        _charBuffer,
-                        0
-                    );
+                    int charCount = Encoding.UTF8
+                        .GetChars(_byteBuffer, 0, lastFullCharStop + 1, _charBuffer, 0);
 
                     if (builder == null)
                     {
@@ -741,13 +734,8 @@ namespace Newtonsoft.Json.Bson
                 {
                     // pref optimization to avoid reading into a string builder
                     // first iteration and all bytes read then return string directly
-                    int charCount = Encoding.UTF8.GetChars(
-                        _byteBuffer,
-                        0,
-                        byteCount,
-                        _charBuffer,
-                        0
-                    );
+                    int charCount = Encoding.UTF8
+                        .GetChars(_byteBuffer, 0, byteCount, _charBuffer, 0);
                     return new string(_charBuffer, 0, charCount);
                 }
                 else
@@ -759,13 +747,8 @@ namespace Newtonsoft.Json.Bson
                         builder = new StringBuilder(length);
                     }
 
-                    int charCount = Encoding.UTF8.GetChars(
-                        _byteBuffer,
-                        0,
-                        lastFullCharStop + 1,
-                        _charBuffer,
-                        0
-                    );
+                    int charCount = Encoding.UTF8
+                        .GetChars(_byteBuffer, 0, lastFullCharStop + 1, _charBuffer, 0);
                     builder.Append(_charBuffer, 0, charCount);
 
                     if (lastFullCharStop < byteCount - 1)

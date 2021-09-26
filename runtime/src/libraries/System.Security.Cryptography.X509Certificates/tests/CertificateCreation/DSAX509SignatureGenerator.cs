@@ -132,7 +132,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             byte[] r = EncodeUnsignedInteger(ieeeFormat, 0, segmentLength);
             byte[] s = EncodeUnsignedInteger(ieeeFormat, segmentLength, segmentLength);
 
-            return new byte[] { 0x30 }.Concat(EncodeLength(r.Length + s.Length))
+            return new byte[] { 0x30 }
+                .Concat(EncodeLength(r.Length + s.Length))
                 .Concat(r)
                 .Concat(s)
                 .ToArray();
@@ -155,9 +156,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             byte[] q = EncodeUnsignedInteger(dsaParameters.Q);
             byte[] g = EncodeUnsignedInteger(dsaParameters.G);
 
-            byte[] algParameters = new byte[] { 0x30 }.Concat(
-                    EncodeLength(p.Length + q.Length + g.Length)
-                )
+            byte[] algParameters = new byte[] { 0x30 }
+                .Concat(EncodeLength(p.Length + q.Length + g.Length))
                 .Concat(p)
                 .Concat(q)
                 .Concat(g)

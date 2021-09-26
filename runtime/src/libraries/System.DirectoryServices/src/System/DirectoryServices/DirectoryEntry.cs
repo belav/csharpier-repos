@@ -512,10 +512,8 @@ namespace System.DirectoryServices
                 // check whether the new option is available
 
                 // 8 is ADS_OPTION_ACCUMULATIVE_MODIFICATION
-                unmanagedResult = ((UnsafeNativeMethods.IAdsObjectOptions2)_adsObject).GetOption(
-                    8,
-                    out o
-                );
+                unmanagedResult = ((UnsafeNativeMethods.IAdsObjectOptions2)_adsObject)
+                    .GetOption(8, out o);
                 if (unmanagedResult != 0)
                 {
                     // rootdse does not support this option and invalid parameter due to without accumulative change fix in ADSI
@@ -1016,14 +1014,15 @@ namespace System.DirectoryServices
                     // we know ADsPath does not end with object type qualifier like ",computer" so it is fine to compare with whole newparent's adspath
                     // for the case that child has different components from newparent in the aspects other than case, we don't do any processing, just let ADSI decide in case future adsi change
                     if (
-                        System.DirectoryServices.ActiveDirectory.Utils.Compare(
-                            childPath,
-                            0,
-                            parentPath.Length,
-                            parentPath,
-                            0,
-                            parentPath.Length
-                        ) == 0
+                        System.DirectoryServices.ActiveDirectory.Utils
+                            .Compare(
+                                childPath,
+                                0,
+                                parentPath.Length,
+                                parentPath,
+                                0,
+                                parentPath.Length
+                            ) == 0
                     )
                     {
                         uint compareFlags =
@@ -1033,15 +1032,16 @@ namespace System.DirectoryServices
                             | System.DirectoryServices.ActiveDirectory.Utils.SORT_STRINGSORT;
                         // work around the ADSI case sensitive
                         if (
-                            System.DirectoryServices.ActiveDirectory.Utils.Compare(
-                                childPath,
-                                0,
-                                parentPath.Length,
-                                parentPath,
-                                0,
-                                parentPath.Length,
-                                compareFlags
-                            ) != 0
+                            System.DirectoryServices.ActiveDirectory.Utils
+                                .Compare(
+                                    childPath,
+                                    0,
+                                    parentPath.Length,
+                                    parentPath,
+                                    0,
+                                    parentPath.Length,
+                                    compareFlags
+                                ) != 0
                         )
                         {
                             childPath = parentPath + childPath.Substring(parentPath.Length);
@@ -1155,11 +1155,12 @@ namespace System.DirectoryServices
 
                         // if this is "ntSecurityDescriptor" we should refresh the objectSecurity property
                         if (
-                            string.Equals(
-                                propertyNames[i],
-                                SecurityDescriptorProperty,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    propertyNames[i],
+                                    SecurityDescriptorProperty,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             _objectSecurityInitialized = false;

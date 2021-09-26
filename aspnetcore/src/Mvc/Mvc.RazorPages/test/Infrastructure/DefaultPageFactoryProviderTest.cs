@@ -249,7 +249,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void PageFactoryDoesNotBindPropertiesWithNoRazorInjectAttribute()
         {
             // Arrange
-            var serviceProvider = new ServiceCollection().AddSingleton<ILogger>(NullLogger.Instance)
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<ILogger>(NullLogger.Instance)
                 .BuildServiceProvider();
 
             var pageContext = new PageContext
@@ -285,7 +286,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void PageFactoryCreatePageDisposerCreatesDisposerForPage()
         {
             // Arrange
-            var serviceProvider = new ServiceCollection().AddSingleton<ILogger>(NullLogger.Instance)
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<ILogger>(NullLogger.Instance)
                 .BuildServiceProvider();
 
             var pageContext = new PageContext
@@ -316,7 +318,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public async Task PageFactoryCreateAsyncPageDisposerCreatesDisposerForPage()
         {
             // Arrange
-            var serviceProvider = new ServiceCollection().AddSingleton<ILogger>(NullLogger.Instance)
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<ILogger>(NullLogger.Instance)
                 .BuildServiceProvider();
 
             var pageContext = new PageContext

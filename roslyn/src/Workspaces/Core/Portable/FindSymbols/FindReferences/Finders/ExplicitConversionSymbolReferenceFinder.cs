@@ -47,19 +47,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             var underlyingNamedType = GetUnderlyingNamedType(symbol.ReturnType);
             Contract.ThrowIfNull(underlyingNamedType);
             var documentsWithName = await FindDocumentsAsync(
-                    project,
-                    documents,
-                    findInGlobalSuppressions: false,
-                    cancellationToken,
-                    underlyingNamedType.Name
-                )
+                project,
+                documents,
+                findInGlobalSuppressions: false,
+                cancellationToken,
+                underlyingNamedType.Name
+            )
                 .ConfigureAwait(false);
             var documentsWithType = await FindDocumentsAsync(
-                    project,
-                    documents,
-                    underlyingNamedType.SpecialType.ToPredefinedType(),
-                    cancellationToken
-                )
+                project,
+                documents,
+                underlyingNamedType.SpecialType.ToPredefinedType(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             using var _ = ArrayBuilder<Document>.GetInstance(out var result);

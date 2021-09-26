@@ -423,11 +423,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 Cci.INamespaceTypeDefinition dx = x;
                 Cci.INamespaceTypeDefinition dy = y;
 
-                int result = string.Compare(
-                    dx.NamespaceName,
-                    dy.NamespaceName,
-                    StringComparison.Ordinal
-                );
+                int result = string
+                    .Compare(dx.NamespaceName, dy.NamespaceName, StringComparison.Ordinal);
 
                 if (result == 0)
                 {

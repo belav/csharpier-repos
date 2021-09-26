@@ -111,16 +111,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             int completedCount = 0;
             var c = new ActionBlock<int>(i => completedCount++);
-            var singleAssignments = Enumerable.Range(0, Iterations)
-                .Select(
-                    _ =>
-                    {
-                        var s = new WriteOnceBlock<int>(i => i);
-                        s.LinkTo(c);
-                        return s;
-                    }
-                )
-                .ToList();
+            var singleAssignments = Enumerable.Range(0, Iterations).Select(
+                _ =>
+                {
+                    var s = new WriteOnceBlock<int>(i => i);
+                    s.LinkTo(c);
+                    return s;
+                }
+            ).ToList();
             var ignored = Task.WhenAll(singleAssignments.Select(s => s.Completion))
                 .ContinueWith(
                     _ => c.Complete(),
@@ -194,18 +192,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var b = new BroadcastBlock<int>(i => i);
             int completedCount = 0;
-            var tasks = Enumerable.Range(0, 1)
-                .Select(
-                    _ =>
-                    {
-                        var c = new ActionBlock<int>(
-                            i => Interlocked.Increment(ref completedCount)
-                        );
-                        b.LinkTo(c, new DataflowLinkOptions { PropagateCompletion = true });
-                        return c.Completion;
-                    }
-                )
-                .ToArray();
+            var tasks = Enumerable.Range(0, 1).Select(
+                _ =>
+                {
+                    var c = new ActionBlock<int>(i => Interlocked.Increment(ref completedCount));
+                    b.LinkTo(c, new DataflowLinkOptions { PropagateCompletion = true });
+                    return c.Completion;
+                }
+            ).ToArray();
 
             var posts = Iterations / tasks.Length;
             b.PostRange(0, posts);

@@ -227,10 +227,10 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
             memoryStream.Position = 0;
             await memoryStream.CopyToAsync(
-                    outStream,
-                    bufferSize: length,
-                    cancellationToken: cancellationToken
-                )
+                outStream,
+                bufferSize: length,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -337,10 +337,10 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
                 memoryStream.Position = 0;
                 await memoryStream.CopyToAsync(
-                        outStream,
-                        bufferSize: length,
-                        cancellationToken: cancellationToken
-                    )
+                    outStream,
+                    bufferSize: length,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -611,8 +611,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// <returns>The hash value of the current assembly or an empty string</returns>
         public static string? GetCommitHash()
         {
-            var hashAttributes =
-                typeof(BuildRequest).Assembly.GetCustomAttributes<CommitHashAttribute>();
+            var hashAttributes = typeof(BuildRequest).Assembly
+                .GetCustomAttributes<CommitHashAttribute>();
             var hashAttributeCount = hashAttributes.Count();
             if (hashAttributeCount != 1)
             {
@@ -635,11 +635,11 @@ namespace Microsoft.CodeAnalysis.CommandLine
             do
             {
                 int bytesRead = await stream.ReadAsync(
-                        buffer,
-                        totalBytesRead,
-                        count - totalBytesRead,
-                        cancellationToken
-                    )
+                    buffer,
+                    totalBytesRead,
+                    count - totalBytesRead,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (bytesRead == 0)
                 {

@@ -124,7 +124,8 @@ namespace System.Xml.Serialization
                 return new XmlQualifiedName(
                     XmlConvert.EncodeLocalName(name.Substring(colon + 1)),
                     XmlConvert.EncodeLocalName(name.Substring(0, colon))
-                ).ToString();
+                )
+                    .ToString();
             }
         }
 

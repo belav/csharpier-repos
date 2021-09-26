@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 interfaces.Add(
                     ContainingAssembly.GetSpecialType(
-                            SpecialType.System_Collections_Generic_IEnumerable_T
-                        )
+                        SpecialType.System_Collections_Generic_IEnumerable_T
+                    )
                         .Construct(ElementType.Type)
                 );
                 interfaces.Add(
@@ -50,8 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             interfaces.Add(
                 ContainingAssembly.GetSpecialType(
-                        SpecialType.System_Collections_Generic_IEnumerator_T
-                    )
+                    SpecialType.System_Collections_Generic_IEnumerator_T
+                )
                     .Construct(ElementType.Type)
             );
             interfaces.Add(ContainingAssembly.GetSpecialType(SpecialType.System_IDisposable));

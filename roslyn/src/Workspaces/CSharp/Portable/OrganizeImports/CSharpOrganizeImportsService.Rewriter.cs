@@ -80,9 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
             {
                 if (list.Count > 0)
                 {
-                    this.TextChanges.Add(
-                        new TextChange(GetTextSpan(list), GetNewText(organizedList))
-                    );
+                    this.TextChanges
+                        .Add(new TextChange(GetTextSpan(list), GetNewText(organizedList)));
                 }
             }
 

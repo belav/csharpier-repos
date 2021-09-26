@@ -181,8 +181,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             using var context = new PrimateContext();
             var entry = context.Entry(
-                    new TWotty { Id = 1, Primate = "Monkey", RequiredPrimate = "Tarsier" }
-                )
+                new TWotty { Id = 1, Primate = "Monkey", RequiredPrimate = "Tarsier" }
+            )
                 .GetInfrastructure();
 
             entry.SetEntityState(EntityState.Unchanged);
@@ -201,8 +201,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             using var context = new PrimateContext();
             var entry = context.Entry(
-                    new TWotty { Id = 1, Primate = "Monkey", RequiredPrimate = "Tarsier" }
-                )
+                new TWotty { Id = 1, Primate = "Monkey", RequiredPrimate = "Tarsier" }
+            )
                 .GetInfrastructure();
 
             entry.SetEntityState(EntityState.Unchanged);
@@ -605,11 +605,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
         private void Can_get_name_generic_helper<TWotty>() where TWotty : class, IWotty, new()
         {
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                new TWotty { Id = 1, Primate = "Monkey" }
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(
+                    BuildModel(),
+                    EntityState.Unchanged,
+                    new TWotty { Id = 1, Primate = "Monkey" }
+                );
 
             Assert.Equal(
                 "Primate",
@@ -628,11 +629,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         private void Can_get_current_value_generic_helper<TWotty>()
             where TWotty : class, IWotty, new()
         {
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                new TWotty { Id = 1, Primate = "Monkey" }
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(
+                    BuildModel(),
+                    EntityState.Unchanged,
+                    new TWotty { Id = 1, Primate = "Monkey" }
+                );
 
             Assert.Equal("Monkey", new PropertyEntry<Wotty, string>(entry, "Primate").CurrentValue);
         }
@@ -650,11 +652,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new TWotty { Id = 1, Primate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
             new PropertyEntry<Wotty, string>(entry, "Primate").CurrentValue = "Chimp";
 
@@ -674,11 +673,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new TWotty { Id = 1, Primate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
             new PropertyEntry<Wotty, string>(entry, "Primate").CurrentValue = null;
 
@@ -698,11 +694,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new TWotty { Id = 1, Primate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
             Assert.Equal(
                 "Monkey",
@@ -726,11 +719,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         private void Can_set_original_value_to_null_generic_helper<TWotty>()
             where TWotty : class, IWotty, new()
         {
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                new TWotty { Id = 1, Primate = "Monkey" }
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(
+                    BuildModel(),
+                    EntityState.Unchanged,
+                    new TWotty { Id = 1, Primate = "Monkey" }
+                );
 
             new PropertyEntry<Wotty, string>(entry, "Primate").OriginalValue = null;
 
@@ -750,11 +744,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new TWotty { Id = 1, Primate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
             Assert.False(new PropertyEntry<Wotty, string>(entry, "Primate").IsModified);
 
@@ -772,11 +763,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new NotifyingWotty { Id = 1, Primate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
             Assert.Equal("Monkey", new PropertyEntry(entry, "Primate").OriginalValue);
 
@@ -789,11 +777,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [ConditionalFact]
         public void Can_set_original_value_to_null_notifying_entities()
         {
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                new NotifyingWotty { Id = 1, Primate = "Monkey" }
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(
+                    BuildModel(),
+                    EntityState.Unchanged,
+                    new NotifyingWotty { Id = 1, Primate = "Monkey" }
+                );
 
             new PropertyEntry(entry, "Primate").OriginalValue = null;
 
@@ -805,11 +794,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new NotifyingWotty { Id = 1, Primate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
             Assert.Equal(
                 "Monkey",
@@ -828,11 +814,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [ConditionalFact]
         public void Can_set_original_value_to_null_generic_notifying_entities()
         {
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                new NotifyingWotty { Id = 1, Primate = "Monkey" }
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(
+                    BuildModel(),
+                    EntityState.Unchanged,
+                    new NotifyingWotty { Id = 1, Primate = "Monkey" }
+                );
 
             new PropertyEntry<NotifyingWotty, string>(entry, "Primate").OriginalValue = null;
 
@@ -844,11 +831,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
             Assert.Equal("Monkey", new PropertyEntry(entry, "ConcurrentPrimate").OriginalValue);
 
@@ -861,11 +845,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [ConditionalFact]
         public void Can_set_concurrency_token_original_value_to_null_full_notification_entities()
         {
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(
+                    BuildModel(),
+                    EntityState.Unchanged,
+                    new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
+                );
 
             new PropertyEntry(entry, "ConcurrentPrimate").OriginalValue = null;
 
@@ -877,11 +862,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
             Assert.Equal(
                 "Monkey",
@@ -909,11 +891,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [ConditionalFact]
         public void Can_set_concurrency_token_original_value_to_null_generic_full_notification_entities()
         {
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(
+                    BuildModel(),
+                    EntityState.Unchanged,
+                    new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
+                );
 
             new PropertyEntry<FullyNotifyingWotty, string>(
                 entry,
@@ -933,11 +916,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new FullyNotifyingWotty { Id = 1, Primate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
             var propertyEntry = new PropertyEntry(entry, "Primate");
 
@@ -959,11 +939,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
             var propertyEntry = new PropertyEntry<FullyNotifyingWotty, string>(entry, "Primate");
 
@@ -985,13 +962,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new FullyNotifyingWotty { Id = 1, Primate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(
-                    ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
-                ),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(
+                    BuildModel(
+                        ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                    ),
+                    EntityState.Unchanged,
+                    entity
+                );
 
             Assert.Equal("Monkey", new PropertyEntry(entry, "Primate").OriginalValue);
 
@@ -1006,13 +984,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var entity = new FullyNotifyingWotty { Id = 1, Primate = "Monkey" };
 
-            var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-                BuildModel(
-                    ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
-                ),
-                EntityState.Unchanged,
-                entity
-            );
+            var entry = InMemoryTestHelpers.Instance
+                .CreateInternalEntry(
+                    BuildModel(
+                        ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                    ),
+                    EntityState.Unchanged,
+                    entity
+                );
 
             Assert.Equal(
                 "Monkey",

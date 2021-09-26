@@ -620,10 +620,8 @@ namespace System.Net.Sockets.Tests
                 c.AllowNatTraversal(allow);
                 Assert.Equal(
                     (int)resultLevel,
-                    (int)c.Client.GetSocketOption(
-                        SocketOptionLevel.IP,
-                        SocketOptionName.IPProtectionLevel
-                    )
+                    (int)c.Client
+                        .GetSocketOption(SocketOptionLevel.IP, SocketOptionName.IPProtectionLevel)
                 );
             }
         }
@@ -894,19 +892,16 @@ namespace System.Net.Sockets.Tests
             );
 
             Assert.True(
-                new UdpReceiveResult(buffer1, ep1).Equals(
-                    (object)new UdpReceiveResult(buffer1, ep2)
-                )
+                new UdpReceiveResult(buffer1, ep1)
+                    .Equals((object)new UdpReceiveResult(buffer1, ep2))
             );
             Assert.False(
-                new UdpReceiveResult(buffer1, ep1).Equals(
-                    (object)new UdpReceiveResult(buffer2, ep1)
-                )
+                new UdpReceiveResult(buffer1, ep1)
+                    .Equals((object)new UdpReceiveResult(buffer2, ep1))
             );
             Assert.False(
-                new UdpReceiveResult(buffer1, ep1).Equals(
-                    (object)new UdpReceiveResult(buffer1, ep3)
-                )
+                new UdpReceiveResult(buffer1, ep1)
+                    .Equals((object)new UdpReceiveResult(buffer1, ep3))
             );
             Assert.False(new UdpReceiveResult(buffer1, ep1).Equals(new object()));
 

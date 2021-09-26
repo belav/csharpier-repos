@@ -276,21 +276,20 @@ namespace System.Web.Mvc
             HashSet<string> disabledValues = GetStringHashSet(DisabledValues);
             HashSet<string> disabledGroups = GetStringHashSet(DisabledGroups);
 
-            IEnumerable<SelectListItem> listItems = Items.Cast<object>()
-                .Select(
-                    item =>
+            IEnumerable<SelectListItem> listItems = Items.Cast<object>().Select(
+                item =>
+                {
+                    string value = Eval(item, DataValueField);
+                    return new SelectListItem
                     {
-                        string value = Eval(item, DataValueField);
-                        return new SelectListItem
-                        {
-                            Group = GetGroup(item, disabledGroups),
-                            Value = value,
-                            Text = Eval(item, DataTextField),
-                            Selected = selectedValues.Contains(value),
-                            Disabled = disabledValues.Contains(value),
-                        };
-                    }
-                );
+                        Group = GetGroup(item, disabledGroups),
+                        Value = value,
+                        Text = Eval(item, DataTextField),
+                        Selected = selectedValues.Contains(value),
+                        Disabled = disabledValues.Contains(value),
+                    };
+                }
+            );
 
             return listItems.ToList();
         }
@@ -301,19 +300,18 @@ namespace System.Web.Mvc
             HashSet<object> disabledValues = GetObjectHashSet(DisabledValues);
             HashSet<string> disabledGroups = GetStringHashSet(DisabledGroups);
 
-            IEnumerable<SelectListItem> listItems = Items.Cast<object>()
-                .Select(
-                    item =>
+            IEnumerable<SelectListItem> listItems = Items.Cast<object>().Select(
+                item =>
+                {
+                    return new SelectListItem
                     {
-                        return new SelectListItem
-                        {
-                            Group = GetGroup(item, disabledGroups),
-                            Text = Eval(item, DataTextField),
-                            Selected = selectedValues.Contains(item),
-                            Disabled = disabledValues.Contains(item),
-                        };
-                    }
-                );
+                        Group = GetGroup(item, disabledGroups),
+                        Text = Eval(item, DataTextField),
+                        Selected = selectedValues.Contains(item),
+                        Disabled = disabledValues.Contains(item),
+                    };
+                }
+            );
 
             return listItems.ToList();
         }

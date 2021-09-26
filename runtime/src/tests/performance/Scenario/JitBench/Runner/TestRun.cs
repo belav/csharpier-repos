@@ -60,9 +60,9 @@ namespace JitBench
             };
             var reducedList = MetricNames.Distinct(StringComparer.OrdinalIgnoreCase);
             var isSubset = !reducedList.Except(
-                    validCollectionOptions,
-                    StringComparer.OrdinalIgnoreCase
-                )
+                validCollectionOptions,
+                StringComparer.OrdinalIgnoreCase
+            )
                 .Any();
 
             if (!isSubset)
@@ -169,9 +169,9 @@ namespace JitBench
         {
             if (!UseExistingSetup)
             {
-                DotNetSetup setup = new DotNetSetup(
-                    Path.Combine(OutputDir, ".dotnet")
-                ).WithSdkVersion(DotnetSdkVersion).WithArchitecture(Architecture);
+                DotNetSetup setup = new DotNetSetup(Path.Combine(OutputDir, ".dotnet"))
+                    .WithSdkVersion(DotnetSdkVersion)
+                    .WithArchitecture(Architecture);
                 if (DotnetFrameworkVersion != "use-sdk")
                 {
                     setup.WithFrameworkVersion(DotnetFrameworkVersion);
@@ -280,8 +280,8 @@ namespace JitBench
             foreach (Benchmark benchmark in Benchmarks)
             {
                 BenchmarkRunResult canonResult = BenchmarkRunResults.Where(
-                        r => r.Benchmark == benchmark
-                    )
+                    r => r.Benchmark == benchmark
+                )
                     .FirstOrDefault();
                 if (
                     canonResult == null
@@ -323,10 +323,11 @@ namespace JitBench
                 column.CellFormatter = row =>
                 {
                     var runResult = BenchmarkRunResults.Where(
-                            r => r.Benchmark == row.Benchmark && r.Configuration == config
-                        )
+                        r => r.Benchmark == row.Benchmark && r.Configuration == config
+                    )
                         .Single();
-                    var measurements = runResult.IterationResults.Skip(1)
+                    var measurements = runResult.IterationResults
+                        .Skip(1)
                         .Select(r => r.Measurements.Where(kv => kv.Key.Equals(row.Metric)).Single())
                         .Select(kv => kv.Value);
                     double median = measurements.Median();

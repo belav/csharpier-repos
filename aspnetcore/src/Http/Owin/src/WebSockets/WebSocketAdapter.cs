@@ -144,11 +144,8 @@ namespace Microsoft.AspNetCore.Owin
                 // Unpack the close message.
                 int statusCode =
                     (buffer.Array[buffer.Offset] << 8) | buffer.Array[buffer.Offset + 1];
-                string description = Encoding.UTF8.GetString(
-                    buffer.Array,
-                    buffer.Offset + 2,
-                    buffer.Count - 2
-                );
+                string description = Encoding.UTF8
+                    .GetString(buffer.Array, buffer.Offset + 2, buffer.Count - 2);
 
                 return CloseAsync(statusCode, description, cancel);
             }

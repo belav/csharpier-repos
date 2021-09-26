@@ -237,10 +237,11 @@ namespace System.Globalization.Tests
             Assert.True(
                 ci.Name.Equals(ri.Name, StringComparison.OrdinalIgnoreCase)
                     || // Desktop usese culture name as region name
-                    ri.Name.Equals(
-                        GetLocaleInfo(ci, LOCALE_SISO3166CTRYNAME),
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    ri.Name
+                        .Equals(
+                            GetLocaleInfo(ci, LOCALE_SISO3166CTRYNAME),
+                            StringComparison.OrdinalIgnoreCase
+                        )
             ); // netcore uses 2 letter ISO for region name
             Assert.Equal(
                 GetLocaleInfo(ci, LOCALE_SISO3166CTRYNAME),
@@ -477,11 +478,12 @@ namespace System.Globalization.Tests
         {
             Assert.True(
                 GetLocaleInfoEx(ci.Name, lctype, sb, 400) > 0,
-                string.Format(
-                    "GetLocaleInfoEx failed when calling with lctype {0} and culture {1}",
-                    lctype,
-                    ci
-                )
+                string
+                    .Format(
+                        "GetLocaleInfoEx failed when calling with lctype {0} and culture {1}",
+                        lctype,
+                        ci
+                    )
             );
             return sb.ToString();
         }
@@ -495,12 +497,13 @@ namespace System.Globalization.Tests
             {
                 Assert.False(
                     throwInFail,
-                    string.Format(
-                        "GetCalendarInfoEx failed when calling with caltype {0} and culture {1} and calendar Id {2}",
-                        calType,
-                        ci,
-                        calendar
-                    )
+                    string
+                        .Format(
+                            "GetCalendarInfoEx failed when calling with caltype {0} and culture {1} and calendar Id {2}",
+                            calType,
+                            ci,
+                            calendar
+                        )
                 );
                 return "";
             }
@@ -2234,10 +2237,8 @@ namespace System.Globalization.Tests
                     .Any(
                         c =>
                             cultureNames.Contains(c.Name, StringComparer.OrdinalIgnoreCase)
-                            || c.Name.Equals(
-                                alternativeCultureName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            || c.Name
+                                .Equals(alternativeCultureName, StringComparison.OrdinalIgnoreCase)
                     );
                 Assert.All(
                     CultureInfo.GetCultures(CultureTypes.SpecificCultures),
@@ -2253,10 +2254,11 @@ namespace System.Globalization.Tests
                         .Any(
                             c =>
                                 cultureNames.Contains(c.Name, StringComparer.OrdinalIgnoreCase)
-                                || c.Name.Equals(
-                                    alternativeCultureName,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                || c.Name
+                                    .Equals(
+                                        alternativeCultureName,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                         );
                 }
 
@@ -2275,21 +2277,20 @@ namespace System.Globalization.Tests
         public void ClearCachedDataTest()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        CultureInfo ci = CultureInfo.GetCultureInfo("ja-JP");
-                        Assert.True(
-                            (object)ci == (object)CultureInfo.GetCultureInfo("ja-JP"),
-                            "Expected getting same object reference"
-                        );
-                        ci.ClearCachedData();
-                        Assert.False(
-                            (object)ci == (object)CultureInfo.GetCultureInfo("ja-JP"),
-                            "expected to get a new object reference"
-                        );
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    CultureInfo ci = CultureInfo.GetCultureInfo("ja-JP");
+                    Assert.True(
+                        (object)ci == (object)CultureInfo.GetCultureInfo("ja-JP"),
+                        "Expected getting same object reference"
+                    );
+                    ci.ClearCachedData();
+                    Assert.False(
+                        (object)ci == (object)CultureInfo.GetCultureInfo("ja-JP"),
+                        "expected to get a new object reference"
+                    );
+                }
+            ).Dispose();
         }
 
         [Fact]

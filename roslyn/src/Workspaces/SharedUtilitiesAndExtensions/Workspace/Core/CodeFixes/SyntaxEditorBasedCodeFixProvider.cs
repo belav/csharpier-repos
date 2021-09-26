@@ -27,8 +27,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 async (fixAllContext, document, diagnostics) =>
                 {
                     var model = await document.GetRequiredSemanticModelAsync(
-                            fixAllContext.CancellationToken
-                        )
+                        fixAllContext.CancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     // Ensure that diagnostics for this document are always in document location order.  This provides a
@@ -55,10 +55,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                         return document;
 
                     return await this.FixAllAsync(
-                            document,
-                            filteredDiagnostics,
-                            fixAllContext.CancellationToken
-                        )
+                        document,
+                        filteredDiagnostics,
+                        fixAllContext.CancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             );

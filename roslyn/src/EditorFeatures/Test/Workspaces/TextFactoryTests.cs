@@ -67,10 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         public void TestCreateTextFallsBackToProvidedDefaultEncoding()
         {
             TestCreateTextInferredEncoding(
-                new UTF8Encoding(
-                    encoderShouldEmitUTF8Identifier: false,
-                    throwOnInvalidBytes: true
-                ).GetBytes("Test"),
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true)
+                    .GetBytes("Test"),
                 defaultEncoding: Encoding.GetEncoding(1254),
                 expectedEncoding: Encoding.GetEncoding(1254)
             );
@@ -80,12 +78,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         public void TestCreateTextUsesByteOrderMarkIfPresent()
         {
             TestCreateTextInferredEncoding(
-                Encoding.UTF8.GetPreamble()
+                Encoding.UTF8
+                    .GetPreamble()
                     .Concat(
                         new UTF8Encoding(
                             encoderShouldEmitUTF8Identifier: false,
                             throwOnInvalidBytes: true
-                        ).GetBytes("Test")
+                        )
+                            .GetBytes("Test")
                     )
                     .ToArray(),
                 defaultEncoding: Encoding.GetEncoding(1254),
@@ -147,8 +147,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 MockBehavior.Strict
             );
             mockTextBufferFactoryService.Setup(
-                    t => t.CreateTextBuffer(It.IsAny<TextReader>(), It.IsAny<IContentType>())
-                )
+                t => t.CreateTextBuffer(It.IsAny<TextReader>(), It.IsAny<IContentType>())
+            )
                 .Returns<TextReader, IContentType>(
                     (reader, contentType) =>
                     {

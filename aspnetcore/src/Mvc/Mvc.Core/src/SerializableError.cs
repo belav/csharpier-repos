@@ -43,14 +43,13 @@ namespace Microsoft.AspNetCore.Mvc
                 if (errors != null && errors.Count > 0)
                 {
                     var errorMessages = errors.Select(
-                            error =>
-                            {
-                                return string.IsNullOrEmpty(error.ErrorMessage)
-                                  ? Resources.SerializableError_DefaultError
-                                  : error.ErrorMessage;
-                            }
-                        )
-                        .ToArray();
+                        error =>
+                        {
+                            return string.IsNullOrEmpty(error.ErrorMessage)
+                              ? Resources.SerializableError_DefaultError
+                              : error.ErrorMessage;
+                        }
+                    ).ToArray();
 
                     Add(key, errorMessages);
                 }

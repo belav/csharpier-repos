@@ -144,12 +144,13 @@ namespace Castle.Core.Internal
 
         private void HandleAttributeConflict(Type attributeType)
         {
-            var message = string.Format(
-                "Cannot determine inherited attributes for interface type {0}.  "
-                    + "Conflicting attributes of type {1} exist in the inheritance graph.",
-                CurrentType.FullName,
-                attributeType.FullName
-            );
+            var message = string
+                .Format(
+                    "Cannot determine inherited attributes for interface type {0}.  "
+                        + "Conflicting attributes of type {1} exist in the inheritance graph.",
+                    CurrentType.FullName,
+                    attributeType.FullName
+                );
 
             throw new InvalidOperationException(message);
         }

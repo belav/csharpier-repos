@@ -161,7 +161,8 @@ namespace Microsoft.AspNetCore.Components
             provider.NextValidationResult = Task.FromResult(true);
 
             // Act
-            ((IDisposable)provider).Dispose();
+            ((IDisposable)provider)
+                .Dispose();
             await Task.Delay(200);
 
             // Assert
@@ -191,9 +192,10 @@ namespace Microsoft.AspNetCore.Components
             Assert.Equal(0, authenticationStateChangedCount);
 
             // Have the task throw a TCE to show this doesn't get treated as a failure
-            firstRevalidationCall.CancellationToken.Register(
-                () => validationTcs.TrySetCanceled(firstRevalidationCall.CancellationToken)
-            );
+            firstRevalidationCall.CancellationToken
+                .Register(
+                    () => validationTcs.TrySetCanceled(firstRevalidationCall.CancellationToken)
+                );
 
             // Act/Assert 2: token is cancelled when the loop is superseded
             provider.NextValidationResult = Task.FromResult(true);

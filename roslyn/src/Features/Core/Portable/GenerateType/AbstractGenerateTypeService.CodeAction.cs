@@ -52,21 +52,23 @@ namespace Microsoft.CodeAnalysis.GenerateType
             {
                 if (inNewFile)
                 {
-                    return string.Format(
-                        FeaturesResources.Generate_0_1_in_new_file,
-                        state.IsStruct ? "struct" : state.IsInterface ? "interface" : "class",
-                        state.Name
-                    );
+                    return string
+                        .Format(
+                            FeaturesResources.Generate_0_1_in_new_file,
+                            state.IsStruct ? "struct" : state.IsInterface ? "interface" : "class",
+                            state.Name
+                        );
                 }
                 else
                 {
-                    return string.Format(
-                        isNested
-                          ? FeaturesResources.Generate_nested_0_1
-                          : FeaturesResources.Generate_0_1,
-                        state.IsStruct ? "struct" : state.IsInterface ? "interface" : "class",
-                        state.Name
-                    );
+                    return string
+                        .Format(
+                            isNested
+                              ? FeaturesResources.Generate_nested_0_1
+                              : FeaturesResources.Generate_0_1,
+                            state.IsStruct ? "struct" : state.IsInterface ? "interface" : "class",
+                            state.Name
+                        );
                 }
             }
 
@@ -75,9 +77,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
             )
             {
                 var semanticDocument = await SemanticDocument.CreateAsync(
-                        _document,
-                        cancellationToken
-                    )
+                    _document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var editor = new Editor(
@@ -123,12 +125,12 @@ namespace Microsoft.CodeAnalysis.GenerateType
 
             public override object GetOptions(CancellationToken cancellationToken)
             {
-                var generateTypeOptionsService =
-                    _document.Project.Solution.Workspace.Services.GetRequiredService<IGenerateTypeOptionsService>();
-                var notificationService =
-                    _document.Project.Solution.Workspace.Services.GetService<INotificationService>();
-                var projectManagementService =
-                    _document.Project.Solution.Workspace.Services.GetService<IProjectManagementService>();
+                var generateTypeOptionsService = _document.Project.Solution.Workspace.Services
+                    .GetRequiredService<IGenerateTypeOptionsService>();
+                var notificationService = _document.Project.Solution.Workspace.Services
+                    .GetService<INotificationService>();
+                var projectManagementService = _document.Project.Solution.Workspace.Services
+                    .GetService<IProjectManagementService>();
                 var syntaxFactsService = _document.GetLanguageService<ISyntaxFactsService>();
                 var typeKindValue = GetTypeKindOption(_state);
                 var isPublicOnlyAccessibility = IsPublicOnlyAccessibility(
@@ -259,9 +261,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 )
                 {
                     var semanticDocument = await SemanticDocument.CreateAsync(
-                            _document,
-                            cancellationToken
-                        )
+                        _document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     var editor = new Editor(
                         _service,

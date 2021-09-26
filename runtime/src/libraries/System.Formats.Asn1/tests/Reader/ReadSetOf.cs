@@ -366,9 +366,8 @@ namespace System.Formats.Asn1.Tests.Reader
             }
             else
             {
-                inputData = (
-                    "3180" + "A280" + PayloadHex + "0000" + "0500" + "0000"
-                ).HexToByteArray();
+                inputData = ("3180" + "A280" + PayloadHex + "0000" + "0500" + "0000")
+                    .HexToByteArray();
             }
 
             AsnReaderOptions options = new AsnReaderOptions

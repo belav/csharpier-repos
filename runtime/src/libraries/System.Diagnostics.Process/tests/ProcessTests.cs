@@ -379,61 +379,60 @@ namespace System.Diagnostics.Tests
             options.StartInfo.EnvironmentVariables["PATH"] = path;
             options.StartInfo.WorkingDirectory = wd;
             RemoteExecutor.Invoke(
-                    pathDirectory =>
+                pathDirectory =>
+                {
+                    // Create two identically named scripts, one in the working directory and one on PATH.
+                    const int workingDirReturnValue = 1;
+                    const int pathDirReturnValue = 2;
+                    string pathScriptFile = WriteScriptFile(
+                        pathDirectory,
+                        "script",
+                        returnValue: pathDirReturnValue
+                    );
+                    string wdScriptFile = WriteScriptFile(
+                        Directory.GetCurrentDirectory(),
+                        "script",
+                        returnValue: workingDirReturnValue
+                    );
+                    string scriptFilename = Path.GetFileName(pathScriptFile);
+                    Assert.Equal(scriptFilename, Path.GetFileName(wdScriptFile));
+
+                    // Execute the script and verify we prefer the one in the working directory.
+                    using (
+                        var process = Process.Start(
+                            new ProcessStartInfo
+                            {
+                                UseShellExecute = true,
+                                FileName = scriptFilename
+                            }
+                        )
+                    )
                     {
-                        // Create two identically named scripts, one in the working directory and one on PATH.
-                        const int workingDirReturnValue = 1;
-                        const int pathDirReturnValue = 2;
-                        string pathScriptFile = WriteScriptFile(
-                            pathDirectory,
-                            "script",
-                            returnValue: pathDirReturnValue
-                        );
-                        string wdScriptFile = WriteScriptFile(
-                            Directory.GetCurrentDirectory(),
-                            "script",
-                            returnValue: workingDirReturnValue
-                        );
-                        string scriptFilename = Path.GetFileName(pathScriptFile);
-                        Assert.Equal(scriptFilename, Path.GetFileName(wdScriptFile));
+                        process.WaitForExit();
+                        Assert.Equal(workingDirReturnValue, process.ExitCode);
+                    }
 
-                        // Execute the script and verify we prefer the one in the working directory.
-                        using (
-                            var process = Process.Start(
-                                new ProcessStartInfo
-                                {
-                                    UseShellExecute = true,
-                                    FileName = scriptFilename
-                                }
-                            )
+                    // Remove the script in the working directory and verify we now use the one on PATH.
+                    File.Delete(scriptFilename);
+                    using (
+                        var process = Process.Start(
+                            new ProcessStartInfo
+                            {
+                                UseShellExecute = true,
+                                FileName = scriptFilename
+                            }
                         )
-                        {
-                            process.WaitForExit();
-                            Assert.Equal(workingDirReturnValue, process.ExitCode);
-                        }
+                    )
+                    {
+                        process.WaitForExit();
+                        Assert.Equal(pathDirReturnValue, process.ExitCode);
+                    }
 
-                        // Remove the script in the working directory and verify we now use the one on PATH.
-                        File.Delete(scriptFilename);
-                        using (
-                            var process = Process.Start(
-                                new ProcessStartInfo
-                                {
-                                    UseShellExecute = true,
-                                    FileName = scriptFilename
-                                }
-                            )
-                        )
-                        {
-                            process.WaitForExit();
-                            Assert.Equal(pathDirReturnValue, process.ExitCode);
-                        }
-
-                        return RemoteExecutor.SuccessExitCode;
-                    },
-                    path,
-                    options
-                )
-                .Dispose();
+                    return RemoteExecutor.SuccessExitCode;
+                },
+                path,
+                options
+            ).Dispose();
         }
 
         [ConditionalFact(
@@ -547,8 +546,8 @@ namespace System.Diagnostics.Tests
             else
             {
                 IEnumerable<int> testProcessIds = Process.GetProcessesByName(
-                        RemoteExecutor.HostRunnerName
-                    )
+                    RemoteExecutor.HostRunnerName
+                )
                     .Select(p => p.Id);
                 Assert.Contains(_process.Id, testProcessIds);
             }
@@ -621,10 +620,11 @@ namespace System.Diagnostics.Tests
             Assert.Equal(RemoteExecutor.HostRunnerName, p.MainModule.ModuleName);
             Assert.EndsWith(RemoteExecutor.HostRunnerName, p.MainModule.FileName);
             Assert.Equal(
-                string.Format(
-                    "System.Diagnostics.ProcessModule ({0})",
-                    RemoteExecutor.HostRunnerName
-                ),
+                string
+                    .Format(
+                        "System.Diagnostics.ProcessModule ({0})",
+                        RemoteExecutor.HostRunnerName
+                    ),
                 p.MainModule.ToString()
             );
         }
@@ -1285,7 +1285,8 @@ namespace System.Diagnostics.Tests
                     (p.Id == currentProcess.Id)
                     && (p.ProcessName.Equals(currentProcess.ProcessName))
                 select p
-            ).Any();
+            )
+                .Any();
 
             Assert.True(foundCurrentProcess, "TestGetProcesses001 failed");
 
@@ -1295,7 +1296,8 @@ namespace System.Diagnostics.Tests
                     (p.Id == currentProcess.Id)
                     && (p.ProcessName.Equals(currentProcess.ProcessName))
                 select p
-            ).Any();
+            )
+                .Any();
 
             Assert.True(foundCurrentProcess, "TestGetProcesses002 failed");
         }
@@ -1799,72 +1801,71 @@ namespace System.Diagnostics.Tests
         public void HandleCountChanges()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        RetryHelper.Execute(
-                            () =>
+                () =>
+                {
+                    RetryHelper.Execute(
+                        () =>
+                        {
+                            using (Process p = Process.GetCurrentProcess())
                             {
-                                using (Process p = Process.GetCurrentProcess())
-                                {
-                                    // Warm up code paths
-                                    p.Refresh();
-                                    using (
-                                        var tmpFile = File.Open(
-                                            GetTestFilePath(),
-                                            FileMode.OpenOrCreate
-                                        )
+                                // Warm up code paths
+                                p.Refresh();
+                                using (
+                                    var tmpFile = File.Open(
+                                        GetTestFilePath(),
+                                        FileMode.OpenOrCreate
                                     )
+                                )
+                                {
+                                    // Get the initial handle count
+                                    p.Refresh();
+                                    int handleCountAtStart = p.HandleCount;
+                                    int handleCountAfterOpens;
+
+                                    // Open a bunch of files and get a new handle count, then close the files
+                                    var files = new List<FileStream>();
+                                    try
                                     {
-                                        // Get the initial handle count
-                                        p.Refresh();
-                                        int handleCountAtStart = p.HandleCount;
-                                        int handleCountAfterOpens;
-
-                                        // Open a bunch of files and get a new handle count, then close the files
-                                        var files = new List<FileStream>();
-                                        try
-                                        {
-                                            files.AddRange(
-                                                Enumerable.Range(0, 50)
-                                                    .Select(
-                                                        _ =>
-                                                            File.Open(
-                                                                GetTestFilePath(),
-                                                                FileMode.OpenOrCreate
-                                                            )
-                                                    )
-                                            );
-                                            p.Refresh();
-                                            handleCountAfterOpens = p.HandleCount;
-                                        }
-
-                                        finally
-                                        {
-                                            files.ForEach(f => f.Dispose());
-                                        }
-
-                                        // Get the handle count after closing all the files
-                                        p.Refresh();
-                                        int handleCountAtEnd = p.HandleCount;
-
-                                        Assert.InRange(
-                                            handleCountAfterOpens,
-                                            handleCountAtStart + 1,
-                                            int.MaxValue
+                                        files.AddRange(
+                                            Enumerable.Range(0, 50)
+                                                .Select(
+                                                    _ =>
+                                                        File.Open(
+                                                            GetTestFilePath(),
+                                                            FileMode.OpenOrCreate
+                                                        )
+                                                )
                                         );
-                                        Assert.InRange(
-                                            handleCountAtEnd,
-                                            handleCountAtStart,
-                                            handleCountAfterOpens - 1
-                                        );
+                                        p.Refresh();
+                                        handleCountAfterOpens = p.HandleCount;
                                     }
+
+                                    finally
+                                    {
+                                        files.ForEach(f => f.Dispose());
+                                    }
+
+                                    // Get the handle count after closing all the files
+                                    p.Refresh();
+                                    int handleCountAtEnd = p.HandleCount;
+
+                                    Assert.InRange(
+                                        handleCountAfterOpens,
+                                        handleCountAtStart + 1,
+                                        int.MaxValue
+                                    );
+                                    Assert.InRange(
+                                        handleCountAtEnd,
+                                        handleCountAtStart,
+                                        handleCountAfterOpens - 1
+                                    );
                                 }
                             }
-                        );
-                        return RemoteExecutor.SuccessExitCode;
-                    }
-                )
-                .Dispose();
+                        }
+                    );
+                    return RemoteExecutor.SuccessExitCode;
+                }
+            ).Dispose();
         }
 
         [Fact]
@@ -2058,7 +2059,8 @@ namespace System.Diagnostics.Tests
                 SetPrivateFieldValue(
                     process,
                     "_processInfo",
-                    typeof(Process).Assembly.GetType("System.Diagnostics.ProcessInfo")
+                    typeof(Process).Assembly
+                        .GetType("System.Diagnostics.ProcessInfo")
                         .GetConstructor(
                             BindingFlags.NonPublic | BindingFlags.Instance,
                             Array.Empty<Type>()
@@ -2086,11 +2088,13 @@ namespace System.Diagnostics.Tests
             }
 
             static object GetPrivateFieldValue(Process process, string fieldName) =>
-                typeof(Process).GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance)
+                typeof(Process)
+                    .GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance)
                     .GetValue(process);
 
             static void SetPrivateFieldValue(Process process, string fieldName, object value) =>
-                typeof(Process).GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance)
+                typeof(Process)
+                    .GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance)
                     .SetValue(process, value);
         }
 
@@ -2869,7 +2873,8 @@ namespace System.Diagnostics.Tests
                 }
             );
 
-            IEnumerable<Process> childProcesses = rootResult.Message.Split(';')
+            IEnumerable<Process> childProcesses = rootResult.Message
+                .Split(';')
                 .Select(x => int.Parse(x))
                 .Select(pid => Process.GetProcessById(pid));
 

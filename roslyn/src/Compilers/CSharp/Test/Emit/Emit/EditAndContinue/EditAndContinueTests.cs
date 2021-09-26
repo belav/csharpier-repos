@@ -3907,9 +3907,8 @@ class C
                 ModuleMetadata.CreateFromImage(bytes0),
                 methodData0.EncDebugInfoProvider()
             );
-            testData0.GetMethodData("C.Main")
-                .VerifyIL(
-                    @"
+            testData0.GetMethodData("C.Main").VerifyIL(
+                @"
 {
   // Code size       31 (0x1f)
   .maxstack  3
@@ -3929,7 +3928,7 @@ class C
   IL_001d:  nop
   IL_001e:  ret
 }"
-                );
+            );
 
             var method1 = compilation1.GetMember<MethodSymbol>("C.Main");
             var diff1 = compilation1.EmitDifference(
@@ -6429,9 +6428,8 @@ class B
             var generation0 = EmitBaseline.CreateInitialBaseline(
                 md0,
                 m =>
-                    md0.MetadataReader.GetString(
-                        md0.MetadataReader.GetMethodDefinition(m).Name
-                    ) switch
+                    md0.MetadataReader
+                        .GetString(md0.MetadataReader.GetMethodDefinition(m).Name) switch
                     {
                         "F" => testData0.GetMethodData("C.F").GetEncDebugInfo(),
                         "G" => testData0.GetMethodData("C.G").GetEncDebugInfo(),
@@ -7671,9 +7669,8 @@ class C
                 testData0.GetMethodData("C.M").EncDebugInfoProvider()
             );
 
-            testData0.GetMethodData("C.M")
-                .VerifyIL(
-                    @"
+            testData0.GetMethodData("C.M").VerifyIL(
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  1
@@ -7698,7 +7695,7 @@ class C
   }
   IL_0016:  ret       
 }"
-                );
+            );
 
             var method1 = compilation1.GetMember<MethodSymbol>("C.M");
             var diff1 = compilation1.EmitDifference(

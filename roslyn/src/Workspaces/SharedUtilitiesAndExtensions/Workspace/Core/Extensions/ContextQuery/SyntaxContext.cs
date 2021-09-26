@@ -123,10 +123,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
 
         private ISet<INamedTypeSymbol> ComputeOuterTypes(CancellationToken cancellationToken)
         {
-            var enclosingSymbol = this.SemanticModel.GetEnclosingSymbol(
-                this.LeftToken.SpanStart,
-                cancellationToken
-            );
+            var enclosingSymbol = this.SemanticModel
+                .GetEnclosingSymbol(this.LeftToken.SpanStart, cancellationToken);
             if (enclosingSymbol != null)
             {
                 var containingType = enclosingSymbol.GetContainingTypeOrThis();
@@ -147,9 +145,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
         )
         {
             var typeInferenceService =
-                workspace?.Services.GetLanguageService<ITypeInferenceService>(
-                    semanticModel.Language
-                ) ?? GetTypeInferenceServiceWithoutWorkspace();
+                workspace?.Services
+                    .GetLanguageService<ITypeInferenceService>(semanticModel.Language)
+                ?? GetTypeInferenceServiceWithoutWorkspace();
             return typeInferenceService.InferTypes(semanticModel, position, cancellationToken);
         }
 

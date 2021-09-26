@@ -259,13 +259,15 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            string.Format(
-                                "RunContinueWithPreCancelTests: > FAILED.  doneCount[{0}] should be 1, is {1}",
-                                i,
-                                doneCount[i]
+                        string
+                            .Format(
+                                string
+                                    .Format(
+                                        "RunContinueWithPreCancelTests: > FAILED.  doneCount[{0}] should be 1, is {1}",
+                                        i,
+                                        doneCount[i]
+                                    )
                             )
-                        )
                     );
                 }
             }
@@ -296,31 +298,29 @@ namespace System.Threading.Tasks.Tests
                 }
             );
             Task<int> t4 = t3.ContinueWith(
-                    delegate(Task<int> t)
-                    {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 10;
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                delegate(Task<int> t)
+                {
+                    return Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            return 10;
+                        }
+                    );
+                }
+            ).Unwrap();
             Task<string> t5 = t4.ContinueWith(
-                    delegate(Task<int> t)
-                    {
-                        return Task<string>.Factory.StartNew(
-                            delegate
-                            {
-                                for (int i = 0; i < 400; i++)
-                                    ;
-                                return "worked";
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                delegate(Task<int> t)
+                {
+                    return Task<string>.Factory.StartNew(
+                        delegate
+                        {
+                            for (int i = 0; i < 400; i++)
+                                ;
+                            return "worked";
+                        }
+                    );
+                }
+            ).Unwrap();
 
             try
             {
@@ -329,50 +329,55 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationChainingTest: > FAILED! t5.Result should be \"worked\", is {0}",
-                            t5.Result
-                        )
+                        string
+                            .Format(
+                                "RunContinuationChainingTest: > FAILED! t5.Result should be \"worked\", is {0}",
+                                t5.Result
+                            )
                     );
                 }
                 if (t4.Result != 10)
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationChainingTest: > FAILED! t4.Result should be 10, is {0}",
-                            t4.Result
-                        )
+                        string
+                            .Format(
+                                "RunContinuationChainingTest: > FAILED! t4.Result should be 10, is {0}",
+                                t4.Result
+                            )
                     );
                 }
                 if (t3.Result != 5)
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationChainingTest: > FAILED! t3.Result should be 5, is {0}",
-                            t3.Result
-                        )
+                        string
+                            .Format(
+                                "RunContinuationChainingTest: > FAILED! t3.Result should be 5, is {0}",
+                                t3.Result
+                            )
                     );
                 }
                 if (y != 1)
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationChainingTest: > FAILED! y should be 1, is {0}",
-                            y
-                        )
+                        string
+                            .Format(
+                                "RunContinuationChainingTest: > FAILED! y should be 1, is {0}",
+                                y
+                            )
                     );
                 }
                 if (x != 1)
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationChainingTest: > FAILED! x should be 1, is {0}",
-                            x
-                        )
+                        string
+                            .Format(
+                                "RunContinuationChainingTest: > FAILED! x should be 1, is {0}",
+                                x
+                            )
                     );
                 }
             }
@@ -437,27 +442,30 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest: > FAILED.  Continuation task w/NotOnCanceled should have been canceled when antecedent was canceled."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest: > FAILED.  Continuation task w/NotOnCanceled should have been canceled when antecedent was canceled."
+                        )
                 );
             }
             if (c1c.Status != TaskStatus.RanToCompletion)
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest: > FAILED.  Continuation task w/ canceled antecedent should have run to completion."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest: > FAILED.  Continuation task w/ canceled antecedent should have run to completion."
+                        )
                 );
             }
             if (c2b.Status != TaskStatus.Canceled)
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest: > FAILED.  Continuation task w/NotOnRanToCompletion should have been canceled when antecedent completed."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest: > FAILED.  Continuation task w/NotOnRanToCompletion should have been canceled when antecedent completed."
+                        )
                 );
             }
             c2c.Wait();
@@ -465,9 +473,10 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest: > FAILED.  Continuation task w/ completed antecedent should have run to completion."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest: > FAILED.  Continuation task w/ completed antecedent should have run to completion."
+                        )
                 );
             }
         }
@@ -482,9 +491,10 @@ namespace System.Threading.Tasks.Tests
                 Task t2 = t1.ContinueWith((ooo) => { }, (TaskContinuationOptions)0x1000000);
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest: > FAILED.  Should have seen exception from illegal continuation options."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest: > FAILED.  Should have seen exception from illegal continuation options."
+                        )
                 );
             }
             catch { }
@@ -498,9 +508,10 @@ namespace System.Threading.Tasks.Tests
                 );
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest: > FAILED.  Should have seen exception when combining LongRunning and ExecuteSynchronously"
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest: > FAILED.  Should have seen exception when combining LongRunning and ExecuteSynchronously"
+                        )
                 );
             }
             catch { }
@@ -515,9 +526,10 @@ namespace System.Threading.Tasks.Tests
                 );
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest: > FAILED.  Should have seen exception from illegal NotOnAny continuation options."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest: > FAILED.  Should have seen exception from illegal NotOnAny continuation options."
+                        )
                 );
             }
             catch (Exception) { }
@@ -546,9 +558,8 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationCancelTest: > Failed!  t2 should not have run."
-                        )
+                        string
+                            .Format("RunContinuationCancelTest: > Failed!  t2 should not have run.")
                     );
                 },
                 ctsForT2.Token
@@ -764,12 +775,13 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                         {
                                             //Debug.WriteLine(" - Future = {2}Future.CW(func, ct({0}), tco({1}), TS.Default)", preCanceled ? "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => 5,
-                                                ct,
-                                                tco,
-                                                TaskScheduler.Default
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(
+                                                    _ => 5,
+                                                    ct,
+                                                    tco,
+                                                    TaskScheduler.Default
+                                                );
                                         }
                                         else
                                         {
@@ -787,12 +799,13 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                         {
                                             //Debug.WriteLine(" - Task = {2}Future.CW(action, ct({0}), tco({1}), TS.Default)", preCanceled ? "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => { },
-                                                ct,
-                                                tco,
-                                                TaskScheduler.Default
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(
+                                                    _ => { },
+                                                    ct,
+                                                    tco,
+                                                    TaskScheduler.Default
+                                                );
                                         }
                                         else
                                         {
@@ -852,9 +865,8 @@ namespace System.Threading.Tasks.Tests
                                             (ex != null)
                                                 && (ex.GetType() == typeof(AggregateException))
                                                 && (
-                                                    ((AggregateException)ex).InnerExceptions[
-                                                        0
-                                                    ].GetType() == typeof(TaskCanceledException)
+                                                    ((AggregateException)ex).InnerExceptions[0]
+                                                        .GetType() == typeof(TaskCanceledException)
                                                 ),
                                             "RunContinueWithAllParamsTestsNoState: Expected AE(TCE) for Wait after pre-cancellation"
                                         );
@@ -879,10 +891,8 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                         {
                                             //Debug.WriteLine(" - Future = {1}Future.CW(func, ct({0}))", preCanceled ? "signaled" : "unsignaled", preCompletedTask ? "C" : "U");
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => 5,
-                                                ct
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(_ => 5, ct);
                                         }
                                         else
                                         {
@@ -895,10 +905,8 @@ namespace System.Threading.Tasks.Tests
                                         if (antecedentIsFuture)
                                         {
                                             //Debug.WriteLine(" - Task = {1}Future.CW(action, ct({0}))", preCanceled ? "signaled" : "unsignaled", preCompletedTask ? "C" : "U");
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => { },
-                                                ct
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(_ => { }, ct);
                                         }
                                         else
                                         {
@@ -949,9 +957,8 @@ namespace System.Threading.Tasks.Tests
                                             (ex != null)
                                                 && (ex.GetType() == typeof(AggregateException))
                                                 && (
-                                                    ((AggregateException)ex).InnerExceptions[
-                                                        0
-                                                    ].GetType() == typeof(TaskCanceledException)
+                                                    ((AggregateException)ex).InnerExceptions[0]
+                                                        .GetType() == typeof(TaskCanceledException)
                                                 ),
                                             "RunContinueWithAllParamsTestsNoState overloads: Expected AE(TCE) for Wait after pre-cancellation"
                                         );
@@ -975,10 +982,8 @@ namespace System.Threading.Tasks.Tests
                                     {
                                         if (antecedentIsFuture)
                                         {
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => 5,
-                                                tco
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(_ => 5, tco);
                                         }
                                         else
                                         {
@@ -989,10 +994,8 @@ namespace System.Threading.Tasks.Tests
                                     {
                                         if (antecedentIsFuture)
                                         {
-                                            continuation = ((Task<int>)antecedent).ContinueWith(
-                                                _ => { },
-                                                tco
-                                            );
+                                            continuation = ((Task<int>)antecedent)
+                                                .ContinueWith(_ => { }, tco);
                                         }
                                         else
                                         {
@@ -1083,41 +1086,40 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunUnwrapTests: > FAILED.  {0} expected IsCompleted = {1}",
-                            scenario,
-                            shouldBeCompleted
-                        )
+                        string
+                            .Format(
+                                "RunUnwrapTests: > FAILED.  {0} expected IsCompleted = {1}",
+                                scenario,
+                                shouldBeCompleted
+                            )
                     );
                 }
             };
 
             c1 = taskRoot.ContinueWith(
-                    (antecedent) =>
-                    {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                mres.WaitOne();
-                                return 1;
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                (antecedent) =>
+                {
+                    return Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            mres.WaitOne();
+                            return 1;
+                        }
+                    );
+                }
+            ).Unwrap();
             c2 = futureRoot.ContinueWith(
-                    (antecedent) =>
-                    {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                mres.WaitOne();
-                                return 2;
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                (antecedent) =>
+                {
+                    return Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            mres.WaitOne();
+                            return 2;
+                        }
+                    );
+                }
+            ).Unwrap();
             var v3 = new Task<Task<int>>(
                 delegate
                 {
@@ -1132,50 +1134,47 @@ namespace System.Threading.Tasks.Tests
             );
             c3 = v3.Unwrap();
             c4 = Task.Factory.ContinueWhenAll(
-                    new Task[] { taskRoot, futureRoot },
-                    completedTasks =>
+                new Task[] { taskRoot, futureRoot },
+                completedTasks =>
+                {
+                    int sum = 0;
+                    for (int i = 0; i < completedTasks.Length; i++)
                     {
-                        int sum = 0;
-                        for (int i = 0; i < completedTasks.Length; i++)
+                        Task tmp = completedTasks[i];
+                        if (tmp is Task<int>)
+                            sum += ((Task<int>)tmp).Result;
+                    }
+                    return Task.Factory.StartNew(
+                        delegate
                         {
-                            Task tmp = completedTasks[i];
-                            if (tmp is Task<int>)
-                                sum += ((Task<int>)tmp).Result;
+                            mres.WaitOne();
+                            return sum;
                         }
-                        return Task.Factory.StartNew(
-                            delegate
-                            {
-                                mres.WaitOne();
-                                return sum;
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                    );
+                }
+            ).Unwrap();
             c5 = taskRoot.ContinueWith(
-                    (antecedent) =>
-                    {
-                        return Task.Factory.StartNew(
-                            delegate
-                            {
-                                mres.WaitOne();
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                (antecedent) =>
+                {
+                    return Task.Factory.StartNew(
+                        delegate
+                        {
+                            mres.WaitOne();
+                        }
+                    );
+                }
+            ).Unwrap();
             c6 = futureRoot.ContinueWith(
-                    (antecedent) =>
-                    {
-                        return Task.Factory.StartNew(
-                            delegate
-                            {
-                                mres.WaitOne();
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                (antecedent) =>
+                {
+                    return Task.Factory.StartNew(
+                        delegate
+                        {
+                            mres.WaitOne();
+                        }
+                    );
+                }
+            ).Unwrap();
             var v7 = new Task<Task>(
                 delegate
                 {
@@ -1189,18 +1188,17 @@ namespace System.Threading.Tasks.Tests
             );
             c7 = v7.Unwrap();
             c8 = Task.Factory.ContinueWhenAny(
-                    new Task[] { taskRoot, futureRoot },
-                    winner =>
-                    {
-                        return Task.Factory.StartNew(
-                            delegate
-                            {
-                                mres.WaitOne();
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                new Task[] { taskRoot, futureRoot },
+                winner =>
+                {
+                    return Task.Factory.StartNew(
+                        delegate
+                        {
+                            mres.WaitOne();
+                        }
+                    );
+                }
+            ).Unwrap();
 
             //Debug.WriteLine(" Testing that Unwrap() products do not complete before antecedent starts...");
             checkCompletionState(c1, false, "Task ==> Task<T>, antecedent unstarted");
@@ -1247,10 +1245,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Expected c1.Result = 1, got {0}",
-                        c1.Result
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Expected c1.Result = 1, got {0}",
+                            c1.Result
+                        )
                 );
             }
 
@@ -1258,10 +1257,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Expected c2.Result = 2, got {0}",
-                        c2.Result
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Expected c2.Result = 2, got {0}",
+                            c2.Result
+                        )
                 );
             }
 
@@ -1269,10 +1269,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Expected c3.Result = 3, got {0}",
-                        c3.Result
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Expected c3.Result = 3, got {0}",
+                            c3.Result
+                        )
                 );
             }
 
@@ -1280,10 +1281,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Expected c4.Result = 10, got {0}",
-                        c4.Result
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Expected c4.Result = 10, got {0}",
+                            c4.Result
+                        )
                 );
             }
             ////
@@ -1376,97 +1378,89 @@ namespace System.Threading.Tasks.Tests
                 }
             );
             c1 = taskRoot.ContinueWith(
-                    delegate(Task t)
-                    {
-                        doExc();
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 1;
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                delegate(Task t)
+                {
+                    doExc();
+                    return Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            return 1;
+                        }
+                    );
+                }
+            ).Unwrap();
             c2 = futureRoot.ContinueWith(
-                    delegate(Task<int> t)
-                    {
-                        doExc();
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 2;
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                delegate(Task<int> t)
+                {
+                    doExc();
+                    return Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            return 2;
+                        }
+                    );
+                }
+            ).Unwrap();
             c3 = taskRoot.ContinueWith(
-                    delegate(Task t)
-                    {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                doExc();
-                                return 3;
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                delegate(Task t)
+                {
+                    return Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            doExc();
+                            return 3;
+                        }
+                    );
+                }
+            ).Unwrap();
             c4 = futureRoot.ContinueWith(
-                    delegate(Task<int> t)
-                    {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                doExc();
-                                return 4;
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                delegate(Task<int> t)
+                {
+                    return Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            doExc();
+                            return 4;
+                        }
+                    );
+                }
+            ).Unwrap();
             c5 = taskRoot.ContinueWith(
-                    delegate(Task t)
-                    {
-                        doExc();
-                        return Task.Factory.StartNew(delegate { });
-                    }
-                )
-                .Unwrap();
+                delegate(Task t)
+                {
+                    doExc();
+                    return Task.Factory.StartNew(delegate { });
+                }
+            ).Unwrap();
             c6 = futureRoot.ContinueWith(
-                    delegate(Task<int> t)
-                    {
-                        doExc();
-                        return Task.Factory.StartNew(delegate { });
-                    }
-                )
-                .Unwrap();
+                delegate(Task<int> t)
+                {
+                    doExc();
+                    return Task.Factory.StartNew(delegate { });
+                }
+            ).Unwrap();
             c7 = taskRoot.ContinueWith(
-                    delegate(Task t)
-                    {
-                        return Task.Factory.StartNew(
-                            delegate
-                            {
-                                doExc();
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                delegate(Task t)
+                {
+                    return Task.Factory.StartNew(
+                        delegate
+                        {
+                            doExc();
+                        }
+                    );
+                }
+            ).Unwrap();
             c8 = futureRoot.ContinueWith(
-                    delegate(Task<int> t)
-                    {
-                        return Task.Factory.StartNew(
-                            delegate
-                            {
-                                doExc();
-                            }
-                        );
-                    }
-                )
-                .Unwrap();
+                delegate(Task<int> t)
+                {
+                    return Task.Factory.StartNew(
+                        delegate
+                        {
+                            doExc();
+                        }
+                    );
+                }
+            ).Unwrap();
             taskRoot.Start();
             futureRoot.Start();
 
@@ -1477,10 +1471,11 @@ namespace System.Threading.Tasks.Tests
                     ctask.Wait();
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunUnwrapTests: > FAILED.  Exception in {0} did not throw on Wait().",
-                            scenario
-                        )
+                        string
+                            .Format(
+                                "RunUnwrapTests: > FAILED.  Exception in {0} did not throw on Wait().",
+                                scenario
+                            )
                     );
                 }
                 catch (AggregateException) { }
@@ -1488,21 +1483,23 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunUnwrapTests: > FAILED.  Exception in {0} threw wrong exception.",
-                            scenario
-                        )
+                        string
+                            .Format(
+                                "RunUnwrapTests: > FAILED.  Exception in {0} threw wrong exception.",
+                                scenario
+                            )
                     );
                 }
                 if (ctask.Status != TaskStatus.Faulted)
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunUnwrapTests: > FAILED. Exception in {0} resulted in wrong status: {1}",
-                            scenario,
-                            ctask.Status
-                        )
+                        string
+                            .Format(
+                                "RunUnwrapTests: > FAILED. Exception in {0} resulted in wrong status: {1}",
+                                scenario,
+                                ctask.Status
+                            )
                     );
                 }
             };
@@ -1525,64 +1522,61 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Exception thrown while waiting for task/futureRoots used for exception testing: {0}",
-                        e
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Exception thrown while waiting for task/futureRoots used for exception testing: {0}",
+                            e
+                        )
                 );
             }
 
             //
             // Exception handling
             //
-            var c = Task.Factory.StartNew(() => { })
-                .ContinueWith(
-                    _ =>
-                        Task.Factory.StartNew(
-                            () =>
-                            {
-                                Task.Factory.StartNew(
-                                    delegate
-                                    {
-                                        throw new Exception("uh oh #1");
-                                    },
-                                    TaskCreationOptions.AttachedToParent
-                                );
-                                Task.Factory.StartNew(
-                                    delegate
-                                    {
-                                        throw new Exception("uh oh #2");
-                                    },
-                                    TaskCreationOptions.AttachedToParent
-                                );
-                                Task.Factory.StartNew(
-                                    delegate
-                                    {
-                                        throw new Exception("uh oh #3");
-                                    },
-                                    TaskCreationOptions.AttachedToParent
-                                );
-                                Task.Factory.StartNew(
-                                    delegate
-                                    {
-                                        throw new Exception("uh oh #4");
-                                    },
-                                    TaskCreationOptions.AttachedToParent
-                                );
-                                return 1;
-                            }
-                        )
-                )
-                .Unwrap();
+            var c = Task.Factory.StartNew(() => { }).ContinueWith(_ => Task.Factory.StartNew(
+                        () =>
+                        {
+                            Task.Factory.StartNew(
+                                delegate
+                                {
+                                    throw new Exception("uh oh #1");
+                                },
+                                TaskCreationOptions.AttachedToParent
+                            );
+                            Task.Factory.StartNew(
+                                delegate
+                                {
+                                    throw new Exception("uh oh #2");
+                                },
+                                TaskCreationOptions.AttachedToParent
+                            );
+                            Task.Factory.StartNew(
+                                delegate
+                                {
+                                    throw new Exception("uh oh #3");
+                                },
+                                TaskCreationOptions.AttachedToParent
+                            );
+                            Task.Factory.StartNew(
+                                delegate
+                                {
+                                    throw new Exception("uh oh #4");
+                                },
+                                TaskCreationOptions.AttachedToParent
+                            );
+                            return 1;
+                        }
+                    )).Unwrap();
 
             try
             {
                 c.Wait();
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Monadic continuation w/ excepted children failed to throw an exception."
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Monadic continuation w/ excepted children failed to throw an exception."
+                        )
                 );
             }
             catch (AggregateException ae)
@@ -1591,10 +1585,11 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunUnwrapTests: > FAILED.  Monadic continuation w/ faulted children had {0} inner exceptions, expected 4",
-                            ae.InnerExceptions.Count
-                        )
+                        string
+                            .Format(
+                                "RunUnwrapTests: > FAILED.  Monadic continuation w/ faulted children had {0} inner exceptions, expected 4",
+                                ae.InnerExceptions.Count
+                            )
                     );
                     Assert.True(false, string.Format("RunUnwrapTests: > Exception = {0}", ae));
                 }
@@ -1638,66 +1633,62 @@ namespace System.Threading.Tasks.Tests
                 delegate
                 {
                     c1 = taskRoot.ContinueWith(
-                            delegate(Task antecedent)
-                            {
-                                Task<int> rval = new Task<int>(
-                                    delegate
-                                    {
-                                        c1val = 1;
-                                        return 10;
-                                    }
-                                );
-                                return rval;
-                            },
-                            ctsForC1.Token
-                        )
-                        .Unwrap();
+                        delegate(Task antecedent)
+                        {
+                            Task<int> rval = new Task<int>(
+                                delegate
+                                {
+                                    c1val = 1;
+                                    return 10;
+                                }
+                            );
+                            return rval;
+                        },
+                        ctsForC1.Token
+                    ).Unwrap();
 
                     c2 = futureRoot.ContinueWith(
-                            delegate(Task<int> antecedent)
-                            {
-                                Task<int> rval = new Task<int>(
-                                    delegate
-                                    {
-                                        c2val = 1;
-                                        return 10;
-                                    }
-                                );
-                                return rval;
-                            },
-                            ctsForC2.Token
-                        )
-                        .Unwrap();
+                        delegate(Task<int> antecedent)
+                        {
+                            Task<int> rval = new Task<int>(
+                                delegate
+                                {
+                                    c2val = 1;
+                                    return 10;
+                                }
+                            );
+                            return rval;
+                        },
+                        ctsForC2.Token
+                    ).Unwrap();
 
                     c5 = taskRoot.ContinueWith(
-                            delegate(Task antecedent)
-                            {
-                                Task rval = new Task(
-                                    delegate
-                                    {
-                                        c5val = 1;
-                                    }
-                                );
-                                return rval;
-                            },
-                            ctsForC5.Token
-                        )
-                        .Unwrap();
+                        delegate(Task antecedent)
+                        {
+                            Task rval = new Task(
+                                delegate
+                                {
+                                    c5val = 1;
+                                }
+                            );
+                            return rval;
+                        },
+                        ctsForC5.Token
+                    ).Unwrap();
 
                     c6 = futureRoot.ContinueWith(
-                            delegate(Task<int> antecedent)
-                            {
-                                Task rval = new Task(
-                                    delegate
-                                    {
-                                        c6val = 1;
-                                    }
-                                );
-                                return rval;
-                            },
-                            ctsForC6.Token
-                        )
-                        .Unwrap();
+                        delegate(Task<int> antecedent)
+                        {
+                            Task rval = new Task(
+                                delegate
+                                {
+                                    c6val = 1;
+                                }
+                            );
+                            return rval;
+                        },
+                        ctsForC6.Token
+                    ).Unwrap();
 
                     mres.Set();
 
@@ -1715,9 +1706,10 @@ namespace System.Threading.Tasks.Tests
                 c1.Wait();
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Expected Wait() to throw after cancellation of Task->Task<int>."
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Expected Wait() to throw after cancellation of Task->Task<int>."
+                        )
                 );
             }
             catch { }
@@ -1726,10 +1718,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Direct cancellation of returned Task->Task<int> did not work -- status = {0}",
-                        ts
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Direct cancellation of returned Task->Task<int> did not work -- status = {0}",
+                            ts
+                        )
                 );
             }
 
@@ -1739,9 +1732,10 @@ namespace System.Threading.Tasks.Tests
                 c2.Wait();
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Expected Wait() to throw after cancellation of Task<int>->Task<int>."
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Expected Wait() to throw after cancellation of Task<int>->Task<int>."
+                        )
                 );
             }
             catch { }
@@ -1750,10 +1744,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Direct cancellation of returned Task<int>->Task<int> did not work -- status = {0}",
-                        ts
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Direct cancellation of returned Task<int>->Task<int> did not work -- status = {0}",
+                            ts
+                        )
                 );
             }
 
@@ -1763,9 +1758,10 @@ namespace System.Threading.Tasks.Tests
                 c5.Wait();
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Expected Wait() to throw after cancellation of Task->Task."
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Expected Wait() to throw after cancellation of Task->Task."
+                        )
                 );
             }
             catch { }
@@ -1774,10 +1770,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Direct cancellation of returned Task->Task did not work -- status = {0}",
-                        ts
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Direct cancellation of returned Task->Task did not work -- status = {0}",
+                            ts
+                        )
                 );
             }
 
@@ -1787,9 +1784,10 @@ namespace System.Threading.Tasks.Tests
                 c6.Wait();
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Expected Wait() to throw after cancellation of Task<int>->Task."
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Expected Wait() to throw after cancellation of Task<int>->Task."
+                        )
                 );
             }
             catch { }
@@ -1798,10 +1796,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Direct cancellation of returned Task<int>->Task did not work -- status = {0}",
-                        ts
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Direct cancellation of returned Task<int>->Task did not work -- status = {0}",
+                            ts
+                        )
                 );
             }
 
@@ -1822,10 +1821,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Exception thrown when root tasks were started and waited upon: {0}",
-                        e
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Exception thrown when root tasks were started and waited upon: {0}",
+                            e
+                        )
                 );
             }
 
@@ -1833,9 +1833,10 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Cancellation of Task->Task<int> failed to stop internal continuation"
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Cancellation of Task->Task<int> failed to stop internal continuation"
+                        )
                 );
             }
 
@@ -1843,9 +1844,10 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Cancellation of Task<int>->Task<int> failed to stop internal continuation"
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Cancellation of Task<int>->Task<int> failed to stop internal continuation"
+                        )
                 );
             }
 
@@ -1853,9 +1855,10 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Cancellation of Task->Task failed to stop internal continuation"
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Cancellation of Task->Task failed to stop internal continuation"
+                        )
                 );
             }
 
@@ -1863,9 +1866,10 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunUnwrapTests: > FAILED.  Cancellation of Task<int>->Task failed to stop internal continuation"
-                    )
+                    string
+                        .Format(
+                            "RunUnwrapTests: > FAILED.  Cancellation of Task<int>->Task failed to stop internal continuation"
+                        )
                 );
             }
         }
@@ -1890,9 +1894,10 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationCancelTest_State    > Failed!  t2 should not have run."
-                        )
+                        string
+                            .Format(
+                                "RunContinuationCancelTest_State    > Failed!  t2 should not have run."
+                            )
                     );
                 },
                 stateParam,
@@ -1919,9 +1924,8 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinuationCancelTest_State    > Failed!  t1 should have run."
-                    )
+                    string
+                        .Format("RunContinuationCancelTest_State    > Failed!  t1 should have run.")
                 );
             }
 
@@ -1929,9 +1933,8 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinuationCancelTest_State    > Failed!  t3 should have run."
-                    )
+                    string
+                        .Format("RunContinuationCancelTest_State    > Failed!  t3 should have run.")
                 );
             }
         }
@@ -2044,10 +2047,11 @@ namespace System.Threading.Tasks.Tests
                         {
                             Assert.True(
                                 false,
-                                string.Format(
-                                    "RunLazyCancellationTests: ERROR. Did not expect c1.Wait() to throw an exception, got "
-                                        + e.ToString()
-                                )
+                                string
+                                    .Format(
+                                        "RunLazyCancellationTests: ERROR. Did not expect c1.Wait() to throw an exception, got "
+                                            + e.ToString()
+                                    )
                             );
                         }
                     }
@@ -2095,23 +2099,25 @@ namespace System.Threading.Tasks.Tests
                         }
                         else if (useContinueWhenAny)
                         {
-                            c1 = Task.Factory.ContinueWhenAny(
-                                new Task[] { t1 },
-                                _ => { },
-                                cts.Token,
-                                options,
-                                TaskScheduler.Default
-                            );
+                            c1 = Task.Factory
+                                .ContinueWhenAny(
+                                    new Task[] { t1 },
+                                    _ => { },
+                                    cts.Token,
+                                    options,
+                                    TaskScheduler.Default
+                                );
                         }
                         else
                         {
-                            c1 = Task.Factory.ContinueWhenAll(
-                                new Task[] { t1 },
-                                _ => { },
-                                cts.Token,
-                                options,
-                                TaskScheduler.Default
-                            );
+                            c1 = Task.Factory
+                                .ContinueWhenAll(
+                                    new Task[] { t1 },
+                                    _ => { },
+                                    cts.Token,
+                                    options,
+                                    TaskScheduler.Default
+                                );
                         }
 
                         Assert.True(
@@ -2146,23 +2152,25 @@ namespace System.Threading.Tasks.Tests
                         }
                         else if (useContinueWhenAny)
                         {
-                            c1 = Task.Factory.ContinueWhenAny(
-                                new Task[] { t1 },
-                                _ => { },
-                                cts.Token,
-                                options,
-                                TaskScheduler.Default
-                            );
+                            c1 = Task.Factory
+                                .ContinueWhenAny(
+                                    new Task[] { t1 },
+                                    _ => { },
+                                    cts.Token,
+                                    options,
+                                    TaskScheduler.Default
+                                );
                         }
                         else
                         {
-                            c1 = Task.Factory.ContinueWhenAll(
-                                new Task[] { t1 },
-                                _ => { },
-                                cts.Token,
-                                options,
-                                TaskScheduler.Default
-                            );
+                            c1 = Task.Factory
+                                .ContinueWhenAll(
+                                    new Task[] { t1 },
+                                    _ => { },
+                                    cts.Token,
+                                    options,
+                                    TaskScheduler.Default
+                                );
                         }
                         cts.Cancel();
 
@@ -2232,12 +2240,13 @@ namespace System.Threading.Tasks.Tests
             func = async count =>
             {
                 return ++count < DiveDepth
-                  ? await await Task.Factory.StartNew(
-                        () => func(count),
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        TaskScheduler.Default
-                    )
+                  ? await await Task.Factory
+                        .StartNew(
+                            () => func(count),
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            TaskScheduler.Default
+                        )
                   : count;
             };
             func(0).Wait();
@@ -2359,11 +2368,11 @@ namespace System.Threading.Tasks.Tests
                         // The cancelAction should run exactly once per "to be canceled" continuation -- either in the first continuation or,
                         // if the first continuation is canceled, in the second continuation.
                         cancelContinuations[i] = antecedent.ContinueWith(
-                                cancelAction,
-                                cts.Token,
-                                tco,
-                                TaskScheduler.Default
-                            )
+                            cancelAction,
+                            cts.Token,
+                            tco,
+                            TaskScheduler.Default
+                        )
                             .ContinueWith(
                                 cancelAction,
                                 tco | TaskContinuationOptions.OnlyOnCanceled
@@ -2463,12 +2472,13 @@ namespace System.Threading.Tasks.Tests
                 exception = ((AggregateException)exception).InnerException;
                 Assert.True(
                     false,
-                    string.Format(
-                        message
-                            + " (threw "
-                            + exception.GetType().Name
-                            + " instead of TaskCanceledException)"
-                    )
+                    string
+                        .Format(
+                            message
+                                + " (threw "
+                                + exception.GetType().Name
+                                + " instead of TaskCanceledException)"
+                        )
                 );
             }
         }

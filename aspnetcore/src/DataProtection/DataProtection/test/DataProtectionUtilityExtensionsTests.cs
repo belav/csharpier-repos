@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.DataProtection
             var mockEnvironment = new Mock<IHostEnvironment>();
             mockEnvironment.Setup(o => o.ContentRootPath).Returns(contentRootPath);
 
-            var services = new ServiceCollection().AddSingleton(mockEnvironment.Object)
+            var services = new ServiceCollection()
+                .AddSingleton(mockEnvironment.Object)
                 .AddDataProtection()
                 .Services.BuildServiceProvider();
 
@@ -56,7 +57,8 @@ namespace Microsoft.AspNetCore.DataProtection
             mockEnvironment.SetupGet(o => o.ContentRootPath)
                 .Throws(new InvalidOperationException("Hosting environment should not be checked"));
 
-            var services = new ServiceCollection().AddSingleton(mockEnvironment.Object)
+            var services = new ServiceCollection()
+                .AddSingleton(mockEnvironment.Object)
                 .AddSingleton(mockAppDiscriminator.Object)
                 .AddDataProtection()
                 .Services.BuildServiceProvider();
@@ -79,7 +81,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public void GetApplicationUniqueIdentifier_NoHostingEnvironment_ReturnsNull()
         {
             // arrange
-            var services = new ServiceCollection().AddDataProtection()
+            var services = new ServiceCollection()
+                .AddDataProtection()
                 .Services.BuildServiceProvider();
 
             // act & assert

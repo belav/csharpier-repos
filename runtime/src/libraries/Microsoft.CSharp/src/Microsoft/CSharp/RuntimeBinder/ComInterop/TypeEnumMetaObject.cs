@@ -63,9 +63,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                         Expression.Equal(
                             Expression.Property(
                                 Helpers.Convert(Expression, typeof(ComTypeEnumDesc)),
-                                typeof(ComTypeEnumDesc).GetProperty(
-                                    nameof(ComTypeEnumDesc.TypeName)
-                                )
+                                typeof(ComTypeEnumDesc)
+                                    .GetProperty(nameof(ComTypeEnumDesc.TypeName))
                             ),
                             Expression.Constant(_desc.TypeName)
                         )

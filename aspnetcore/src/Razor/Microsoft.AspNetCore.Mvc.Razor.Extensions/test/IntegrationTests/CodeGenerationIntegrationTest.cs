@@ -13,8 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.IntegrationTests
 {
     public class CodeGenerationIntegrationTest : IntegrationTestBase
     {
-        private readonly static CSharpCompilation DefaultBaseCompilation =
-            MvcShim.BaseCompilation.WithAssemblyName("AppCode");
+        private readonly static CSharpCompilation DefaultBaseCompilation = MvcShim.BaseCompilation
+            .WithAssemblyName("AppCode");
 
         public CodeGenerationIntegrationTest()
             : base(
@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.IntegrationTests
             AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
             AssertLinePragmas(compiled.CodeDocument, designTime: false);
 
-            var diagnostics = compiled.Compilation.GetDiagnostics()
+            var diagnostics = compiled.Compilation
+                .GetDiagnostics()
                 .Where(d => d.Severity >= DiagnosticSeverity.Warning);
             Assert.Equal(
                 "The using directive for 'System' appeared previously in this namespace",
@@ -189,7 +190,8 @@ public class MyModel
             AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
             AssertLinePragmas(compiled.CodeDocument, designTime: false);
 
-            var diagnostics = compiled.Compilation.GetDiagnostics()
+            var diagnostics = compiled.Compilation
+                .GetDiagnostics()
                 .Where(d => d.Severity >= DiagnosticSeverity.Warning);
             Assert.Equal(
                 "Duplicate 'Serializable' attribute",
@@ -720,7 +722,8 @@ public class FormTagHelper : {typeof(TagHelper).FullName}
             AssertLinePragmas(compiled.CodeDocument, designTime: true);
             AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-            var diagnostics = compiled.Compilation.GetDiagnostics()
+            var diagnostics = compiled.Compilation
+                .GetDiagnostics()
                 .Where(d => d.Severity >= DiagnosticSeverity.Warning);
             Assert.Equal(
                 "The using directive for 'System' appeared previously in this namespace",
@@ -871,7 +874,8 @@ public class MyModel
             AssertLinePragmas(compiled.CodeDocument, designTime: true);
             AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-            var diagnostics = compiled.Compilation.GetDiagnostics()
+            var diagnostics = compiled.Compilation
+                .GetDiagnostics()
                 .Where(d => d.Severity >= DiagnosticSeverity.Warning);
             Assert.Equal(
                 "Duplicate 'Serializable' attribute",

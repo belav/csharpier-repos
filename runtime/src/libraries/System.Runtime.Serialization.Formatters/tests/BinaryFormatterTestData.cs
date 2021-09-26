@@ -1566,9 +1566,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
 
             Exception contractException = (Exception)Type.GetType(
-                    "System.Diagnostics.Contracts.ContractException",
-                    true
-                )
+                "System.Diagnostics.Contracts.ContractException",
+                true
+            )
                 .GetConstructor(
                     BindingFlags.Public | BindingFlags.Instance,
                     null,
@@ -2648,10 +2648,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
 
             // The JsonReaderException is internal.
-            Exception jsonReaderException = (Exception)typeof(JsonException).Assembly.GetType(
-                    "System.Text.Json.JsonReaderException",
-                    throwOnError: true
-                )
+            Exception jsonReaderException = (Exception)typeof(JsonException).Assembly
+                .GetType("System.Text.Json.JsonReaderException", throwOnError: true)
                 .GetConstructor(
                     BindingFlags.Public | BindingFlags.Instance,
                     null,
@@ -3033,7 +3031,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
             if (!PlatformDetection.IsBrowser) // all types in System.Data.Odbc throw PlatformNotSupportedException
             {
-                OdbcError odbcError = (OdbcError)typeof(OdbcError).GetConstructor(
+                OdbcError odbcError = (OdbcError)typeof(OdbcError)
+                    .GetConstructor(
                         BindingFlags.NonPublic | BindingFlags.Instance,
                         null,
                         new Type[] { typeof(string), typeof(string), typeof(string), typeof(int) },
@@ -3041,19 +3040,19 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     )
                     .Invoke(new object[] { "source", "message", "state", 0 });
                 OdbcErrorCollection odbcErrorCollection =
-                    (OdbcErrorCollection)typeof(OdbcErrorCollection).GetConstructor(
+                    (OdbcErrorCollection)typeof(OdbcErrorCollection)
+                        .GetConstructor(
                             BindingFlags.NonPublic | BindingFlags.Instance,
                             null,
                             new Type[] {  },
                             null
                         )
                         .Invoke(new object[] {  });
-                typeof(OdbcErrorCollection).GetMethod(
-                        "Add",
-                        BindingFlags.NonPublic | BindingFlags.Instance
-                    )
+                typeof(OdbcErrorCollection)
+                    .GetMethod("Add", BindingFlags.NonPublic | BindingFlags.Instance)
                     .Invoke(odbcErrorCollection, new object[] { odbcError });
-                OdbcException odbcException = (OdbcException)typeof(OdbcException).GetConstructor(
+                OdbcException odbcException = (OdbcException)typeof(OdbcException)
+                    .GetConstructor(
                         BindingFlags.NonPublic | BindingFlags.Instance,
                         null,
                         new Type[] { typeof(string), typeof(OdbcErrorCollection) },
@@ -3348,7 +3347,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
 
             RuntimeWrappedException runtimeWrappedException =
-                (RuntimeWrappedException)typeof(RuntimeWrappedException).GetConstructor(
+                (RuntimeWrappedException)typeof(RuntimeWrappedException)
+                    .GetConstructor(
                         (
                             PlatformDetection.IsNetFramework
                                 ? BindingFlags.NonPublic
@@ -3893,7 +3893,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
 
             ThreadAbortException threadAbortException =
-                (ThreadAbortException)typeof(ThreadAbortException).GetConstructor(
+                (ThreadAbortException)typeof(ThreadAbortException)
+                    .GetConstructor(
                         BindingFlags.NonPublic | BindingFlags.Instance,
                         null,
                         new Type[] {  },
@@ -3934,7 +3935,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
 
             ThreadStartException threadStartException =
-                (ThreadStartException)typeof(ThreadStartException).GetConstructor(
+                (ThreadStartException)typeof(ThreadStartException)
+                    .GetConstructor(
                         BindingFlags.NonPublic | BindingFlags.Instance,
                         null,
                         new Type[] { typeof(Exception) },
@@ -4607,11 +4609,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
             yield return new object[]
             {
-                TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                    new DateTime(1, 1, 1, 2, 0, 0),
-                    3,
-                    15
-                ),
+                TimeZoneInfo.TransitionTime
+                    .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 3, 15),
                 new TypeSerializableValue[]
                 {
                     new TypeSerializableValue(
@@ -4625,21 +4624,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 }
             };
 
-            var adjustmentRule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                new DateTime(1900, 1, 1),
-                new DateTime(1955, 12, 31),
-                TimeSpan.FromHours(2),
-                TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                    new DateTime(1, 1, 1, 2, 0, 0),
-                    2,
-                    3
-                ),
-                TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                    new DateTime(1, 1, 1, 2, 0, 0),
-                    3,
-                    4
-                )
-            );
+            var adjustmentRule = TimeZoneInfo.AdjustmentRule
+                .CreateAdjustmentRule(
+                    new DateTime(1900, 1, 1),
+                    new DateTime(1955, 12, 31),
+                    TimeSpan.FromHours(2),
+                    TimeZoneInfo.TransitionTime
+                        .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 2, 3),
+                    TimeZoneInfo.TransitionTime
+                        .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 3, 4)
+                );
             yield return new object[]
             {
                 adjustmentRule,
@@ -5013,7 +5007,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
             // Set a fixed timestamp for a Cookie field.
             var cookie = new Cookie("name1", "value", "/path", "127.0.0.1");
-            typeof(Cookie).GetField("m_timeStamp", BindingFlags.Instance | BindingFlags.NonPublic)
+            typeof(Cookie)
+                .GetField("m_timeStamp", BindingFlags.Instance | BindingFlags.NonPublic)
                 .SetValue(cookie, s_fixedTimestamp);
             yield return new object[]
             {
@@ -5048,10 +5043,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
             var cookieContainer = new CookieContainer(10, 5, 1024);
             // To avoid differences in generated blobs because of machine configuration (domain).
-            typeof(CookieContainer).GetField(
-                    "m_fqdnMyDomain",
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                )
+            typeof(CookieContainer)
+                .GetField("m_fqdnMyDomain", BindingFlags.Instance | BindingFlags.NonPublic)
                 .SetValue(cookieContainer, string.Empty);
             cookieContainer.Add(cookie);
             yield return new object[]
@@ -8215,10 +8208,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             CompareInfo compareInfo = new CultureInfo("").CompareInfo;
             // We set the sort version (if the field exists as it is optional) explicitly so that we aren't
             // dependent on the machine configuration NLS Sorting Change tables.
-            typeof(CompareInfo).GetField(
-                    "m_SortVersion",
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )
+            typeof(CompareInfo)
+                .GetField("m_SortVersion", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(compareInfo, sortVersion);
 
             yield return new object[]
@@ -10074,23 +10065,17 @@ namespace System.Runtime.Serialization.Formatters.Tests
             exception.Data.Add("secret", true);
             exception.Data.Add(1, "one");
 
-            typeof(Exception).GetField(
-                    "_stackTraceString",
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                )
+            typeof(Exception)
+                .GetField("_stackTraceString", BindingFlags.Instance | BindingFlags.NonPublic)
                 .SetValue(exception, "StackTrace string...");
             if (setHResult)
             {
-                typeof(Exception).GetField(
-                        "_HResult",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    )
+                typeof(Exception)
+                    .GetField("_HResult", BindingFlags.Instance | BindingFlags.NonPublic)
                     .SetValue(exception, 1000);
             }
-            typeof(Exception).GetField(
-                    "_remoteStackTraceString",
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                )
+            typeof(Exception)
+                .GetField("_remoteStackTraceString", BindingFlags.Instance | BindingFlags.NonPublic)
                 .SetValue(exception, "Remote StackTrace string...");
 
             return exception;

@@ -2777,16 +2777,15 @@ class Program
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            semanticModel.GetDiagnostics()
-                .Verify(
-                    // (21,30): error CS1935: Could not find an implementation of the query pattern for source type 'System.Collections.Generic.IEnumerable<int>'.  'Select' not found.  Are you missing required assembly references or a using directive for 'System.Linq'?
-                    //         var q1 = from num in System.Linq.Enumerable.Range(4, 5).Where(n => n > 10)
-                    Diagnostic(
-                            ErrorCode.ERR_QueryNoProviderStandard,
-                            "System.Linq.Enumerable.Range(4, 5).Where(n => n > 10)"
-                        )
-                        .WithArguments("System.Collections.Generic.IEnumerable<int>", "Select")
-                );
+            semanticModel.GetDiagnostics().Verify(
+                // (21,30): error CS1935: Could not find an implementation of the query pattern for source type 'System.Collections.Generic.IEnumerable<int>'.  'Select' not found.  Are you missing required assembly references or a using directive for 'System.Linq'?
+                //         var q1 = from num in System.Linq.Enumerable.Range(4, 5).Where(n => n > 10)
+                Diagnostic(
+                    ErrorCode.ERR_QueryNoProviderStandard,
+                    "System.Linq.Enumerable.Range(4, 5).Where(n => n > 10)"
+                )
+                    .WithArguments("System.Collections.Generic.IEnumerable<int>", "Select")
+            );
         }
 
         [WorkItem(528760, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528760")]
@@ -3348,7 +3347,8 @@ class Program
             compilation.VerifyDiagnostics(
                 // (17,11): warning CS0169: The field 'Program.Color' is never used
                 //     Color Color;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "Color").WithArguments("Program.Color"),
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "Color")
+                    .WithArguments("Program.Color"),
                 // (18,19): warning CS0649: Field 'Program.Flavor' is never assigned to, and will always have its default value null
                 //     static Flavor Flavor;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Flavor")
@@ -4409,9 +4409,9 @@ class Program
     public static T M<T>(T x, out T z) => z = x;
 }";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    csSource,
-                    parseOptions: TestOptions.Regular7_2
-                )
+                csSource,
+                parseOptions: TestOptions.Regular7_2
+            )
                 .VerifyDiagnostics(
                     // (10,53): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //         var zc = from x in a from y in M(a, out var z) select x; // error 1
@@ -4545,9 +4545,9 @@ class Program
     public static T M<T>(T x, bool b) => x;
 }";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    csSource,
-                    parseOptions: TestOptions.Regular7_2
-                )
+                csSource,
+                parseOptions: TestOptions.Regular7_2
+            )
                 .VerifyDiagnostics(
                     // (10,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //         var zc = from x in a from y in M(a, a is var z) select x; // error 1
@@ -4695,9 +4695,9 @@ namespace System
 }
 ";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    csSource,
-                    parseOptions: TestOptions.Regular7_2
-                )
+                csSource,
+                parseOptions: TestOptions.Regular7_2
+            )
                 .GetDiagnostics()
                 .Where(d => d.Code != (int)ErrorCode.ERR_DeclarationExpressionNotPermitted)
                 .Verify(

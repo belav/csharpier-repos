@@ -108,7 +108,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private static void AssertDefaultTargetExtensions(RazorProjectEngine engine)
         {
-            var feature = engine.EngineFeatures.OfType<IRazorTargetExtensionFeature>()
+            var feature = engine.EngineFeatures
+                .OfType<IRazorTargetExtensionFeature>()
                 .FirstOrDefault();
             Assert.NotNull(feature);
 

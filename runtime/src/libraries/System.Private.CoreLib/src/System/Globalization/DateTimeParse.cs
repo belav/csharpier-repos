@@ -860,11 +860,12 @@ namespace System
             }
 
             if (
-                str.CompareInfo.Compare(
-                    str.Value.Slice(str.Index, target.Length),
-                    target,
-                    CompareOptions.IgnoreCase
-                ) != 0
+                str.CompareInfo
+                    .Compare(
+                        str.Value.Slice(str.Index, target.Length),
+                        target,
+                        CompareOptions.IgnoreCase
+                    ) != 0
             )
             {
                 return false;
@@ -2289,12 +2290,8 @@ namespace System
             if (monthDayOrder == ORDER_DM || monthDayOrder == ORDER_MD)
             {
                 if (
-                    result.calendar.IsValidDay(
-                        result.Year,
-                        result.Month,
-                        raw.GetNumber(0),
-                        result.era
-                    )
+                    result.calendar
+                        .IsValidDay(result.Year, result.Month, raw.GetNumber(0), result.era)
                 )
                 {
                     result.Day = raw.GetNumber(0);
@@ -3231,10 +3228,8 @@ namespace System
                 int* numberPointer = stackalloc int[3];
                 raw.Init(numberPointer);
             }
-            raw.hasSameDateAndTimeSeparators = dtfi.DateSeparator.Equals(
-                dtfi.TimeSeparator,
-                StringComparison.Ordinal
-            );
+            raw.hasSameDateAndTimeSeparators = dtfi.DateSeparator
+                .Equals(dtfi.TimeSeparator, StringComparison.Ordinal);
 
             result.calendar = dtfi.Calendar;
             result.era = Calendar.CurrentEra;
@@ -3424,17 +3419,18 @@ namespace System
             }
 
             if (
-                !result.calendar.TryToDateTime(
-                    result.Year,
-                    result.Month,
-                    result.Day,
-                    result.Hour,
-                    result.Minute,
-                    result.Second,
-                    0,
-                    result.era,
-                    out DateTime time
-                )
+                !result.calendar
+                    .TryToDateTime(
+                        result.Year,
+                        result.Month,
+                        result.Day,
+                        result.Hour,
+                        result.Minute,
+                        result.Second,
+                        0,
+                        result.era,
+                        out DateTime time
+                    )
             )
             {
                 result.SetFailure(
@@ -5684,17 +5680,18 @@ namespace System
                 }
             }
             if (
-                !parseInfo.calendar.TryToDateTime(
-                    result.Year,
-                    result.Month,
-                    result.Day,
-                    result.Hour,
-                    result.Minute,
-                    result.Second,
-                    0,
-                    result.era,
-                    out result.parsedDate
-                )
+                !parseInfo.calendar
+                    .TryToDateTime(
+                        result.Year,
+                        result.Month,
+                        result.Day,
+                        result.Hour,
+                        result.Minute,
+                        result.Second,
+                        0,
+                        result.era,
+                        out result.parsedDate
+                    )
             )
             {
                 result.SetFailure(
@@ -5706,10 +5703,11 @@ namespace System
             if (result.fraction > 0)
             {
                 if (
-                    !result.parsedDate.TryAddTicks(
-                        (long)Math.Round(result.fraction * Calendar.TicksPerSecond),
-                        out result.parsedDate
-                    )
+                    !result.parsedDate
+                        .TryAddTicks(
+                            (long)Math.Round(result.fraction * Calendar.TicksPerSecond),
+                            out result.parsedDate
+                        )
                 )
                 {
                     result.SetBadDateTimeFailure();
@@ -5981,17 +5979,18 @@ namespace System
 
             // Validate that the parsed date is valid according to the calendar.
             if (
-                !parseInfo.calendar.TryToDateTime(
-                    year,
-                    month,
-                    day,
-                    hour,
-                    minute,
-                    second,
-                    0,
-                    0,
-                    out result.parsedDate
-                )
+                !parseInfo.calendar
+                    .TryToDateTime(
+                        year,
+                        month,
+                        day,
+                        hour,
+                        minute,
+                        second,
+                        0,
+                        0,
+                        out result.parsedDate
+                    )
             )
             {
                 result.SetFailure(

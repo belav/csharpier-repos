@@ -23,10 +23,11 @@ namespace System.Linq.Tests
 
             Assert.True(
                 enumerableNotInQueryable == null,
-                string.Format(
-                    "Enumerable method {0} not defined by Queryable",
-                    enumerableNotInQueryable
-                )
+                string
+                    .Format(
+                        "Enumerable method {0} not defined by Queryable",
+                        enumerableNotInQueryable
+                    )
             );
 
             MethodInfo queryableNotInEnumerable = GetMissingExtensionMethod(
@@ -37,10 +38,11 @@ namespace System.Linq.Tests
 
             Assert.True(
                 queryableNotInEnumerable == null,
-                string.Format(
-                    "Queryable method {0} not defined by Enumerable",
-                    queryableNotInEnumerable
-                )
+                string
+                    .Format(
+                        "Queryable method {0} not defined by Enumerable",
+                        queryableNotInEnumerable
+                    )
             );
         }
 

@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         public ServerComponentSerializer(IDataProtectionProvider dataProtectionProvider) =>
             _dataProtector = dataProtectionProvider.CreateProtector(
-                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
-                )
+                ServerComponentSerializationSettings.DataProtectionProviderPurpose
+            )
                 .ToTimeLimitedDataProtector();
 
         public ServerComponentMarker SerializeInvocation(

@@ -130,14 +130,14 @@ namespace Newtonsoft.Json.Tests.Schema
             }
 
             specTests = specTests.Where(
-                    s =>
-                        s.FileName != "dependencies.json"
-                        && s.TestCaseDescription != "multiple disallow subschema"
-                        && s.TestCaseDescription != "types from separate schemas are merged"
-                        && s.TestCaseDescription
-                            != "when types includes a schema it should fully validate the schema"
-                        && s.TestCaseDescription != "types can include schemas"
-                )
+                s =>
+                    s.FileName != "dependencies.json"
+                    && s.TestCaseDescription != "multiple disallow subschema"
+                    && s.TestCaseDescription != "types from separate schemas are merged"
+                    && s.TestCaseDescription
+                        != "when types includes a schema it should fully validate the schema"
+                    && s.TestCaseDescription != "types can include schemas"
+            )
                 .ToList();
 
             return specTests.Select(s => new object[] { s }).ToList();

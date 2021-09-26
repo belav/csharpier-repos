@@ -130,10 +130,8 @@ namespace Newtonsoft.Json.Linq
             if (_busy)
             {
                 throw new InvalidOperationException(
-                    "Cannot change {0} during a collection change event.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        GetType()
-                    )
+                    "Cannot change {0} during a collection change event."
+                        .FormatWith(CultureInfo.InvariantCulture, GetType())
                 );
             }
 #endif
@@ -675,11 +673,8 @@ namespace Newtonsoft.Json.Linq
             if (o.Type == JTokenType.Property)
             {
                 throw new ArgumentException(
-                    "Can not add {0} to {1}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        o.GetType(),
-                        GetType()
-                    )
+                    "Can not add {0} to {1}."
+                        .FormatWith(CultureInfo.InvariantCulture, o.GetType(), GetType())
                 );
             }
         }
@@ -801,10 +796,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Error reading {0} from JsonReader.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        GetType().Name
-                    )
+                    "Error reading {0} from JsonReader."
+                        .FormatWith(CultureInfo.InvariantCulture, GetType().Name)
                 );
             }
 
@@ -816,10 +809,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Unexpected end of content while loading {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        GetType().Name
-                    )
+                    "Unexpected end of content while loading {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, GetType().Name)
                 );
             }
         }
@@ -934,10 +925,8 @@ namespace Newtonsoft.Json.Linq
                         break;
                     default:
                         throw new InvalidOperationException(
-                            "The JsonReader should not be on a token of type {0}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                r.TokenType
-                            )
+                            "The JsonReader should not be on a token of type {0}."
+                                .FormatWith(CultureInfo.InvariantCulture, r.TokenType)
                         );
                 }
             } while (r.Read());
@@ -969,10 +958,8 @@ namespace Newtonsoft.Json.Linq
                 {
                     throw JsonReaderException.Create(
                         r,
-                        "Property with the name '{0}' already exists in the current JSON object.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            propertyName
-                        )
+                        "Property with the name '{0}' already exists in the current JSON object."
+                            .FormatWith(CultureInfo.InvariantCulture, propertyName)
                     );
                 }
             }
@@ -1172,20 +1159,16 @@ namespace Newtonsoft.Json.Linq
             if (args.NewObject == null)
             {
                 throw new JsonException(
-                    "Could not determine new value to add to '{0}'.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        GetType()
-                    )
+                    "Could not determine new value to add to '{0}'."
+                        .FormatWith(CultureInfo.InvariantCulture, GetType())
                 );
             }
 
             if (!(args.NewObject is JToken newItem))
             {
                 throw new JsonException(
-                    "New item to be added to collection must be compatible with {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        typeof(JToken)
-                    )
+                    "New item to be added to collection must be compatible with {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, typeof(JToken))
                 );
             }
 

@@ -28,10 +28,8 @@ namespace System.IO.Tests
         public override string[] GetEntries(string path, string searchPattern)
         {
             return (
-                (
-                    new DirectoryInfo(path).GetFileSystemInfos(searchPattern)
-                        .Select(x => x.FullName)
-                ).ToArray()
+                (new DirectoryInfo(path).GetFileSystemInfos(searchPattern).Select(x => x.FullName))
+                    .ToArray()
             );
         }
     }
@@ -42,9 +40,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).GetFileSystemInfos("*", SearchOption.TopDirectoryOnly)
+                    new DirectoryInfo(path)
+                        .GetFileSystemInfos("*", SearchOption.TopDirectoryOnly)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
 
@@ -52,12 +52,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).GetFileSystemInfos(
-                            searchPattern,
-                            SearchOption.TopDirectoryOnly
-                        )
+                    new DirectoryInfo(path)
+                        .GetFileSystemInfos(searchPattern, SearchOption.TopDirectoryOnly)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
 
@@ -65,9 +64,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).GetFileSystemInfos(searchPattern, option)
+                    new DirectoryInfo(path)
+                        .GetFileSystemInfos(searchPattern, option)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
     }

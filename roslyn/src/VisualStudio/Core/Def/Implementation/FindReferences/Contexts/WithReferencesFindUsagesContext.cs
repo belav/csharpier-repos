@@ -79,9 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 // win when we access the lock below.
 
                 using var _1 = ArrayBuilder<Entry>.GetInstance(out var declarations);
-                using var _2 = PooledHashSet<(string? filePath, TextSpan span)>.GetInstance(
-                    out var seenLocations
-                );
+                using var _2 = PooledHashSet<(string? filePath, TextSpan span)>
+                    .GetInstance(out var seenLocations);
                 foreach (var declarationLocation in definition.SourceSpans)
                 {
                     // Because of things like linked files, we may have a source symbol showing up in multiple
@@ -99,12 +98,12 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                         continue;
 
                     var definitionEntry = await TryCreateDocumentSpanEntryAsync(
-                            definitionBucket,
-                            declarationLocation,
-                            HighlightSpanKind.Definition,
-                            SymbolUsageInfo.None,
-                            additionalProperties: definition.DisplayableProperties
-                        )
+                        definitionBucket,
+                        declarationLocation,
+                        HighlightSpanKind.Definition,
+                        SymbolUsageInfo.None,
+                        additionalProperties: definition.DisplayableProperties
+                    )
                         .ConfigureAwait(false);
                     declarations.AddIfNotNull(definitionEntry);
                 }
@@ -242,16 +241,16 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     if (definition.IsExternal)
                     {
                         await OnEntryFoundAsync(
-                                definition,
-                                bucket =>
-                                    SimpleMessageEntry.CreateAsync(
-                                        bucket,
-                                        bucket,
-                                        ServicesVSResources.External_reference_found
-                                    )!,
-                                addToEntriesWhenGroupingByDefinition: whenGroupingByDefinition,
-                                addToEntriesWhenNotGroupingByDefinition: !whenGroupingByDefinition
-                            )
+                            definition,
+                            bucket =>
+                                SimpleMessageEntry.CreateAsync(
+                                    bucket,
+                                    bucket,
+                                    ServicesVSResources.External_reference_found
+                                )!,
+                            addToEntriesWhenGroupingByDefinition: whenGroupingByDefinition,
+                            addToEntriesWhenNotGroupingByDefinition: !whenGroupingByDefinition
+                        )
                             .ConfigureAwait(false);
                     }
                     else
@@ -261,25 +260,26 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                         // We'll place this under a single bucket called "Symbols without references" and we'll allow
                         // the user to navigate on that text entry to that definition if possible.
                         await OnEntryFoundAsync(
-                                SymbolsWithoutReferencesDefinitionItem,
-                                bucket =>
-                                    SimpleMessageEntry.CreateAsync(
-                                        definitionBucket: bucket,
-                                        navigationBucket: RoslynDefinitionBucket.Create(
-                                            Presenter,
-                                            this,
-                                            definition,
-                                            expandedByDefault: false
-                                        ),
-                                        string.Format(
+                            SymbolsWithoutReferencesDefinitionItem,
+                            bucket =>
+                                SimpleMessageEntry.CreateAsync(
+                                    definitionBucket: bucket,
+                                    navigationBucket: RoslynDefinitionBucket.Create(
+                                        Presenter,
+                                        this,
+                                        definition,
+                                        expandedByDefault: false
+                                    ),
+                                    string
+                                        .Format(
                                             ServicesVSResources.No_references_found_to_0,
                                             definition.NameDisplayParts.JoinText()
                                         )
-                                    )!,
-                                addToEntriesWhenGroupingByDefinition: whenGroupingByDefinition,
-                                addToEntriesWhenNotGroupingByDefinition: !whenGroupingByDefinition,
-                                expandedByDefault: false
-                            )
+                                )!,
+                            addToEntriesWhenGroupingByDefinition: whenGroupingByDefinition,
+                            addToEntriesWhenNotGroupingByDefinition: !whenGroupingByDefinition,
+                            expandedByDefault: false
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -339,16 +339,16 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 {
                     // Create a fake definition/reference called "search found no results"
                     await OnEntryFoundAsync(
-                            NoResultsDefinitionItem,
-                            bucket =>
-                                SimpleMessageEntry.CreateAsync(
-                                    bucket,
-                                    null,
-                                    ServicesVSResources.Search_found_no_results
-                                )!,
-                            addToEntriesWhenGroupingByDefinition: true,
-                            addToEntriesWhenNotGroupingByDefinition: true
-                        )
+                        NoResultsDefinitionItem,
+                        bucket =>
+                            SimpleMessageEntry.CreateAsync(
+                                bucket,
+                                null,
+                                ServicesVSResources.Search_found_no_results
+                            )!,
+                        addToEntriesWhenGroupingByDefinition: true,
+                        addToEntriesWhenNotGroupingByDefinition: true
+                    )
                         .ConfigureAwait(false);
                 }
             }

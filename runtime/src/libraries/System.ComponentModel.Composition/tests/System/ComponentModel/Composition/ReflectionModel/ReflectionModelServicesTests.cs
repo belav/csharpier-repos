@@ -855,7 +855,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void CreateImportDefinition_Parameter()
         {
-            ParameterInfo parameter = typeof(TestPart).GetConstructor(new Type[] { typeof(int) })
+            ParameterInfo parameter = typeof(TestPart)
+                .GetConstructor(new Type[] { typeof(int) })
                 .GetParameters()[0];
             Lazy<ParameterInfo> expectedLazyParameter = parameter.AsLazy();
 
@@ -900,7 +901,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void CreateImportDefinition_Parameter_NullAsParamater_ShouldThrowArgumentNull()
         {
-            ParameterInfo parameter = typeof(TestPart).GetConstructor(new Type[] { typeof(int) })
+            ParameterInfo parameter = typeof(TestPart)
+                .GetConstructor(new Type[] { typeof(int) })
                 .GetParameters()[0];
             Lazy<ParameterInfo> expectedLazyParameter = parameter.AsLazy();
 
@@ -936,7 +938,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void GetImportingParameter()
         {
-            ParameterInfo parameter = typeof(TestPart).GetConstructor(new Type[] { typeof(int) })
+            ParameterInfo parameter = typeof(TestPart)
+                .GetConstructor(new Type[] { typeof(int) })
                 .GetParameters()[0];
             Lazy<ParameterInfo> expectedLazyParameter = parameter.AsLazy();
 
@@ -1005,7 +1008,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void IsImportingParameter_OnParameterImport()
         {
-            ParameterInfo parameter = typeof(TestPart).GetConstructor(new Type[] { typeof(int) })
+            ParameterInfo parameter = typeof(TestPart)
+                .GetConstructor(new Type[] { typeof(int) })
                 .GetParameters()[0];
             Lazy<ParameterInfo> expectedLazyParameter = parameter.AsLazy();
 

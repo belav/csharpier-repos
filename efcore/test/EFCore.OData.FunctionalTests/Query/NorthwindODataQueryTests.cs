@@ -49,10 +49,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Query_for_alfki_expand_orders()
         {
-            var requestUri = string.Format(
-                @"{0}/odata/Customers?$filter=CustomerID eq 'ALFKI'&$expand=Orders",
-                BaseAddress
-            );
+            var requestUri = string
+                .Format(
+                    @"{0}/odata/Customers?$filter=CustomerID eq 'ALFKI'&$expand=Orders",
+                    BaseAddress
+                );
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 

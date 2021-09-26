@@ -28,10 +28,8 @@ namespace ILCompiler.PEWriter
                 Path.Combine(pdbPath, Path.GetFileNameWithoutExtension(dllFileName) + ".ni.pdb")
             );
 
-            new PdbWriter(pdbPath, PDBExtraData.None).WritePDBData(
-                dllFileName,
-                _outputInfoBuilder.EnumerateMethods()
-            );
+            new PdbWriter(pdbPath, PDBExtraData.None)
+                .WritePDBData(dllFileName, _outputInfoBuilder.EnumerateMethods());
         }
 
         public void SavePerfMap(string perfMapPath, string dllFileName, Guid? perfMapMvid)

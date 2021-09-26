@@ -77,9 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 this.AssertIsForeground();
 
                 Debug.Assert(
-                    _dataSource.CaretChangeBehavior.HasFlag(
-                        TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
-                    )
+                    _dataSource.CaretChangeBehavior
+                        .HasFlag(TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag)
                 );
 
                 var caret = _dataSource.GetCaretPoint(_textViewOpt, _subjectBuffer);
@@ -154,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                             this.AccumulatedTextChanges =
                                 this.AccumulatedTextChanges == null
                                     ? textChangeRange
-                                    : this.AccumulatedTextChanges.Accumulate(
+                                    : this.AccumulatedTextChanges
+                                      .Accumulate(
                                           SpecializedCollections.SingletonEnumerable(
                                               textChangeRange
                                           )
@@ -173,9 +173,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                             );
                         }
 
-                        this.AccumulatedTextChanges = this.AccumulatedTextChanges.Accumulate(
-                            textChangeRanges
-                        );
+                        this.AccumulatedTextChanges = this.AccumulatedTextChanges
+                            .Accumulate(textChangeRanges);
                         break;
                 }
             }
@@ -192,9 +191,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 // Don't bother going forward if we're not going adjust any tags based on edits.
                 if (
-                    _dataSource.TextChangeBehavior.HasFlag(
-                        TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits
-                    )
+                    _dataSource.TextChangeBehavior
+                        .HasFlag(TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits)
                 )
                 {
                     RemoveTagsThatIntersectEdit(e);
@@ -221,9 +219,11 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     return;
                 }
 
-                var tagsToRemove = e.Changes.SelectMany(
-                    c => treeForBuffer.GetIntersectingSpans(new SnapshotSpan(e.After, c.NewSpan))
-                );
+                var tagsToRemove = e.Changes
+                    .SelectMany(
+                        c =>
+                            treeForBuffer.GetIntersectingSpans(new SnapshotSpan(e.After, c.NewSpan))
+                    );
                 if (!tagsToRemove.Any())
                 {
                     return;
@@ -413,22 +413,20 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 var spansToTag = _dataSource.GetSpansToTag(_textViewOpt, _subjectBuffer);
 
                 var spansAndDocumentsToTag = spansToTag.Select(
-                        span =>
+                    span =>
+                    {
+                        if (!snapshotToDocumentMap.TryGetValue(span.Snapshot, out var document))
                         {
-                            if (!snapshotToDocumentMap.TryGetValue(span.Snapshot, out var document))
-                            {
-                                CheckSnapshot(span.Snapshot);
+                            CheckSnapshot(span.Snapshot);
 
-                                document =
-                                    span.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
-                                snapshotToDocumentMap[span.Snapshot] = document;
-                            }
-
-                            // document can be null if the buffer the given span is part of is not part of our workspace.
-                            return new DocumentSnapshotSpan(document, span);
+                            document = span.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                            snapshotToDocumentMap[span.Snapshot] = document;
                         }
-                    )
-                    .ToImmutableArray();
+
+                        // document can be null if the buffer the given span is part of is not part of our workspace.
+                        return new DocumentSnapshotSpan(document, span);
+                    }
+                ).ToImmutableArray();
 
                 return spansAndDocumentsToTag;
             }
@@ -611,15 +609,13 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 bool initialTags
             )
             {
-                var buffersToTag = context.SpansToTag.Select(
-                        dss => dss.SnapshotSpan.Snapshot.TextBuffer
-                    )
+                var buffersToTag = context.SpansToTag
+                    .Select(dss => dss.SnapshotSpan.Snapshot.TextBuffer)
                     .ToSet();
 
                 // Ignore any tag spans reported for any buffers we weren't interested in.
-                var newTagsByBuffer = context.tagSpans.Where(
-                        ts => buffersToTag.Contains(ts.Span.Snapshot.TextBuffer)
-                    )
+                var newTagsByBuffer = context.tagSpans
+                    .Where(ts => buffersToTag.Contains(ts.Span.Snapshot.TextBuffer))
                     .ToLookup(t => t.Span.Snapshot.TextBuffer);
 
                 var newTagTrees = ConvertToTagTrees(
@@ -710,25 +706,22 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     //
                     // Do this in a fire and forget manner, but ensure we notify the test harness of this so that it
                     // doesn't try to acquire tag results prior to this work finishing.
-                    var asyncToken = this._asyncListener.BeginAsyncOperation(
-                        nameof(ProcessNewTagTrees)
-                    );
+                    var asyncToken = this._asyncListener
+                        .BeginAsyncOperation(nameof(ProcessNewTagTrees));
                     Task.Run(
-                            async () =>
-                            {
-                                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                    cancellationToken
-                                );
-                                UpdateStateAndReportChanges(
-                                    newTagTrees,
-                                    bufferToChanges,
-                                    newState,
-                                    initialTags
-                                );
-                            },
-                            CancellationToken.None
-                        )
-                        .CompletesAsyncOperation(asyncToken); // TODO: What should the cancellation behavior be here? passing CancellationToken.None for now
+                        async () =>
+                        {
+                            await this.ThreadingContext.JoinableTaskFactory
+                                .SwitchToMainThreadAsync(cancellationToken);
+                            UpdateStateAndReportChanges(
+                                newTagTrees,
+                                bufferToChanges,
+                                newState,
+                                initialTags
+                            );
+                        },
+                        CancellationToken.None
+                    ).CompletesAsyncOperation(asyncToken); // TODO: What should the cancellation behavior be here? passing CancellationToken.None for now
                 }
                 else
                 {

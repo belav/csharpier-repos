@@ -49,10 +49,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Error reading {0} from JsonReader.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        GetType().Name
-                    )
+                    "Error reading {0} from JsonReader."
+                        .FormatWith(CultureInfo.InvariantCulture, GetType().Name)
                 );
             }
 
@@ -62,10 +60,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Unexpected end of content while loading {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        GetType().Name
-                    )
+                    "Unexpected end of content while loading {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, GetType().Name)
                 );
             }
         }
@@ -183,10 +179,8 @@ namespace Newtonsoft.Json.Linq
                         break;
                     default:
                         throw new InvalidOperationException(
-                            "The JsonReader should not be on a token of type {0}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                reader.TokenType
-                            )
+                            "The JsonReader should not be on a token of type {0}."
+                                .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                         );
                 }
             } while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false));

@@ -67,9 +67,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     out var address,
                     async httpContext =>
                     {
-                        var input = await new StreamReader(
-                            httpContext.Request.Body
-                        ).ReadToEndAsync();
+                        var input = await new StreamReader(httpContext.Request.Body)
+                            .ReadToEndAsync();
                         Assert.Equal("Hello World", input);
                         var body = Encoding.UTF8.GetBytes("Hello World");
                         httpContext.Response.ContentLength = body.Length;
@@ -200,8 +199,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 Assert.True(hashStrength >= 0, "HashStrength: " + hashStrength); // May be 0 for some algorithms
 
                 var keyExchangeAlgorithm = (ExchangeAlgorithmType)result.GetProperty(
-                        "keyExchangeAlgorithm"
-                    )
+                    "keyExchangeAlgorithm"
+                )
                     .GetInt32();
                 Assert.True(
                     keyExchangeAlgorithm >= ExchangeAlgorithmType.None,
@@ -228,8 +227,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         try
                         {
                             var tlsFeature = httpContext.Features.Get<ITlsHandshakeFeature>();
-                            var requestInfoFeature =
-                                httpContext.Features.Get<IHttpSysRequestInfoFeature>();
+                            var requestInfoFeature = httpContext.Features
+                                .Get<IHttpSysRequestInfoFeature>();
                             Assert.NotNull(tlsFeature);
                             Assert.NotNull(requestInfoFeature);
                             Assert.True(requestInfoFeature.RequestInfo.Count > 0);

@@ -316,10 +316,8 @@ namespace Newtonsoft.Json.Utilities
             )
             {
                 throw new ArgumentNullException(
-                    "'{0}' is not a generic interface definition.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        genericInterfaceDefinition
-                    )
+                    "'{0}' is not a generic interface definition."
+                        .FormatWith(CultureInfo.InvariantCulture, genericInterfaceDefinition)
                 );
             }
 
@@ -375,10 +373,8 @@ namespace Newtonsoft.Json.Utilities
             )
             {
                 throw new ArgumentNullException(
-                    "'{0}' is not a generic class definition.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        genericClassDefinition
-                    )
+                    "'{0}' is not a generic class definition."
+                        .FormatWith(CultureInfo.InvariantCulture, genericClassDefinition)
                 );
             }
 
@@ -431,10 +427,8 @@ namespace Newtonsoft.Json.Utilities
                 if (genericListType!.IsGenericTypeDefinition())
                 {
                     throw new Exception(
-                        "Type {0} is not a collection.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            type
-                        )
+                        "Type {0} is not a collection."
+                            .FormatWith(CultureInfo.InvariantCulture, type)
                     );
                 }
 
@@ -469,10 +463,8 @@ namespace Newtonsoft.Json.Utilities
                 if (genericDictionaryType!.IsGenericTypeDefinition())
                 {
                     throw new Exception(
-                        "Type {0} is not a dictionary.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            dictionaryType
-                        )
+                        "Type {0} is not a dictionary."
+                            .FormatWith(CultureInfo.InvariantCulture, dictionaryType)
                     );
                 }
 
@@ -490,10 +482,8 @@ namespace Newtonsoft.Json.Utilities
             }
 
             throw new Exception(
-                "Type {0} is not a dictionary.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    dictionaryType
-                )
+                "Type {0} is not a dictionary."
+                    .FormatWith(CultureInfo.InvariantCulture, dictionaryType)
             );
         }
 
@@ -536,11 +526,12 @@ namespace Newtonsoft.Json.Utilities
             for (int i = 0; i < attributes.Length; i++)
             {
                 if (
-                    string.Equals(
-                        attributes[i].GetType().FullName,
-                        "System.Runtime.CompilerServices.IsByRefLikeAttribute",
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            attributes[i].GetType().FullName,
+                            "System.Runtime.CompilerServices.IsByRefLikeAttribute",
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     return true;
@@ -587,19 +578,15 @@ namespace Newtonsoft.Json.Utilities
                     catch (TargetParameterCountException e)
                     {
                         throw new ArgumentException(
-                            "MemberInfo '{0}' has index parameters".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                member.Name
-                            ),
+                            "MemberInfo '{0}' has index parameters"
+                                .FormatWith(CultureInfo.InvariantCulture, member.Name),
                             e
                         );
                     }
                 default:
                     throw new ArgumentException(
-                        "MemberInfo '{0}' is not of type FieldInfo or PropertyInfo".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            member.Name
-                        ),
+                        "MemberInfo '{0}' is not of type FieldInfo or PropertyInfo"
+                            .FormatWith(CultureInfo.InvariantCulture, member.Name),
                         nameof(member)
                     );
             }
@@ -626,10 +613,8 @@ namespace Newtonsoft.Json.Utilities
                     break;
                 default:
                     throw new ArgumentException(
-                        "MemberInfo '{0}' must be of type FieldInfo or PropertyInfo".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            member.Name
-                        ),
+                        "MemberInfo '{0}' must be of type FieldInfo or PropertyInfo"
+                            .FormatWith(CultureInfo.InvariantCulture, member.Name),
                         nameof(member)
                     );
             }
@@ -881,8 +866,8 @@ namespace Newtonsoft.Json.Utilities
                     if (inherit && t.BaseType != null)
                     {
                         attributes = attributes.Union(
-                                GetAttributes(t.BaseType, attributeType, inherit)
-                            )
+                            GetAttributes(t.BaseType, attributeType, inherit)
+                        )
                             .ToArray();
                     }
 #endif
@@ -918,10 +903,8 @@ namespace Newtonsoft.Json.Utilities
                     return (Attribute[])result;
 #else
                     throw new Exception(
-                        "Cannot get attributes from '{0}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            provider
-                        )
+                        "Cannot get attributes from '{0}'."
+                            .FormatWith(CultureInfo.InvariantCulture, provider)
                     );
 #endif
             }
@@ -960,10 +943,8 @@ namespace Newtonsoft.Json.Utilities
             }
 
             throw new Exception(
-                "Cannot get attributes from '{0}'.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    provider
-                )
+                "Cannot get attributes from '{0}'."
+                    .FormatWith(CultureInfo.InvariantCulture, provider)
             );
         }
 #endif
@@ -1052,10 +1033,10 @@ namespace Newtonsoft.Json.Utilities
                     );
                 default:
                     return targetType.GetMember(
-                            memberInfo.Name,
-                            memberInfo.MemberType(),
-                            bindingAttr
-                        )
+                        memberInfo.Name,
+                        memberInfo.MemberType(),
+                        bindingAttr
+                    )
                         .SingleOrDefault();
             }
         }
@@ -1092,8 +1073,8 @@ namespace Newtonsoft.Json.Utilities
                 {
                     // filter out protected fields
                     IEnumerable<FieldInfo> childPrivateFields = targetType.GetFields(
-                            nonPublicBindingAttr
-                        )
+                        nonPublicBindingAttr
+                    )
                         .Where(f => f.IsPrivate);
 
                     initialFields.AddRange(childPrivateFields);
@@ -1213,9 +1194,8 @@ namespace Newtonsoft.Json.Utilities
                             p =>
                                 p.Name == subTypeProperty.Name
                                 && p.IsVirtual()
-                                && (
-                                    p.GetBaseDefinition()?.DeclaringType ?? p.DeclaringType
-                                ).IsAssignableFrom(subTypePropertyDeclaringType)
+                                && (p.GetBaseDefinition()?.DeclaringType ?? p.DeclaringType)
+                                    .IsAssignableFrom(subTypePropertyDeclaringType)
                         );
 
                         // don't add a virtual property that has an override
@@ -1235,8 +1215,8 @@ namespace Newtonsoft.Json.Utilities
         )
         {
             bool isMethodOverriden = currentType.GetMethods(
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-                )
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            )
                 .Any(
                     info =>
                         info.Name == method

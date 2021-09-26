@@ -81,11 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             if (
                 postedFiles.Count == 0
                 && bindingContext.OriginalModelName != null
-                && !string.Equals(
-                    modelName,
-                    bindingContext.OriginalModelName,
-                    StringComparison.Ordinal
-                )
+                && !string
+                    .Equals(modelName, bindingContext.OriginalModelName, StringComparison.Ordinal)
                 && !modelName.StartsWith(
                     bindingContext.OriginalModelName + "[",
                     StringComparison.Ordinal
@@ -145,16 +142,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             // We need to add a ValidationState entry because the modelName might be non-standard. Otherwise
             // the entry we create in model state might not be marked as valid.
-            bindingContext.ValidationState.Add(
-                value,
-                new ValidationStateEntry() { Key = modelName, }
-            );
+            bindingContext.ValidationState
+                .Add(value, new ValidationStateEntry() { Key = modelName, });
 
-            bindingContext.ModelState.SetModelValue(
-                modelName,
-                rawValue: null,
-                attemptedValue: null
-            );
+            bindingContext.ModelState
+                .SetModelValue(modelName, rawValue: null, attemptedValue: null);
 
             bindingContext.Result = ModelBindingResult.Success(value);
             _logger.DoneAttemptingToBindModel(bindingContext);

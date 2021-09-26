@@ -41,12 +41,8 @@ namespace System.Text.Json.Serialization.Converters
             >?)typeInfo.CreateObjectWithArgs;
             if (creator == null)
             {
-                creator =
-                    options.MemberAccessorStrategy.CreateImmutableDictionaryCreateRangeDelegate<
-                        TCollection,
-                        TKey,
-                        TValue
-                    >();
+                creator = options.MemberAccessorStrategy
+                    .CreateImmutableDictionaryCreateRangeDelegate<TCollection, TKey, TValue>();
                 typeInfo.CreateObjectWithArgs = creator;
             }
 

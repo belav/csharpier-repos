@@ -24,9 +24,8 @@ namespace Microsoft.CodeAnalysis.Razor
         private readonly INamedTypeSymbol _editorBrowsableAttributeSymbol;
 
         internal static readonly SymbolDisplayFormat FullNameTypeDisplayFormat =
-            SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
-                    SymbolDisplayGlobalNamespaceStyle.Omitted
-                )
+            SymbolDisplayFormat.FullyQualifiedFormat
+                .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
                 .WithMiscellaneousOptions(
                     SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions
                         & (~SymbolDisplayMiscellaneousOptions.UseSpecialTypes)
@@ -104,10 +103,8 @@ namespace Microsoft.CodeAnalysis.Razor
             var targetElementAttributes = type.GetAttributes()
                 .Where(
                     attribute =>
-                        SymbolEqualityComparer.Default.Equals(
-                            attribute.AttributeClass,
-                            _htmlTargetElementAttributeSymbol
-                        )
+                        SymbolEqualityComparer.Default
+                            .Equals(attribute.AttributeClass, _htmlTargetElementAttributeSymbol)
                 );
 
             // If there isn't an attribute specifying the tag name derive it from the name
@@ -185,10 +182,8 @@ namespace Microsoft.CodeAnalysis.Razor
             var restrictChildrenAttribute = type.GetAttributes()
                 .Where(
                     a =>
-                        SymbolEqualityComparer.Default.Equals(
-                            a.AttributeClass,
-                            _restrictChildrenAttributeSymbol
-                        )
+                        SymbolEqualityComparer.Default
+                            .Equals(a.AttributeClass, _restrictChildrenAttributeSymbol)
                 )
                 .FirstOrDefault();
             if (restrictChildrenAttribute == null)
@@ -235,10 +230,8 @@ namespace Microsoft.CodeAnalysis.Razor
             var outputElementHintAttribute = type.GetAttributes()
                 .Where(
                     a =>
-                        SymbolEqualityComparer.Default.Equals(
-                            a.AttributeClass,
-                            _outputElementHintAttributeSymbol
-                        )
+                        SymbolEqualityComparer.Default
+                            .Equals(a.AttributeClass, _outputElementHintAttributeSymbol)
                 )
                 .FirstOrDefault();
             if (outputElementHintAttribute != null)
@@ -259,10 +252,8 @@ namespace Microsoft.CodeAnalysis.Razor
             var attributeNameAttribute = property.GetAttributes()
                 .Where(
                     a =>
-                        SymbolEqualityComparer.Default.Equals(
-                            a.AttributeClass,
-                            _htmlAttributeNameAttributeSymbol
-                        )
+                        SymbolEqualityComparer.Default
+                            .Equals(a.AttributeClass, _htmlAttributeNameAttributeSymbol)
                 )
                 .FirstOrDefault();
 
@@ -271,9 +262,8 @@ namespace Microsoft.CodeAnalysis.Razor
             if (
                 attributeNameAttribute == null
                 || attributeNameAttribute.ConstructorArguments.Length == 0
-                || string.IsNullOrEmpty(
-                    (string)attributeNameAttribute.ConstructorArguments[0].Value
-                )
+                || string
+                    .IsNullOrEmpty((string)attributeNameAttribute.ConstructorArguments[0].Value)
             )
             {
                 hasExplicitName = false;
@@ -412,25 +402,30 @@ namespace Microsoft.CodeAnalysis.Razor
         {
             INamedTypeSymbol dictionaryType;
             if (
-                SymbolEqualityComparer.Default.Equals(
-                    (property.Type as INamedTypeSymbol)?.ConstructedFrom,
-                    _iDictionarySymbol
-                )
+                SymbolEqualityComparer.Default
+                    .Equals(
+                        (property.Type as INamedTypeSymbol)?.ConstructedFrom,
+                        _iDictionarySymbol
+                    )
             )
             {
                 dictionaryType = (INamedTypeSymbol)property.Type;
             }
             else if (
-                property.Type.AllInterfaces.Any(
-                    s =>
-                        SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
-                )
+                property.Type.AllInterfaces
+                    .Any(
+                        s =>
+                            SymbolEqualityComparer.Default
+                                .Equals(s.ConstructedFrom, _iDictionarySymbol)
+                    )
             )
             {
-                dictionaryType = property.Type.AllInterfaces.First(
-                    s =>
-                        SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
-                );
+                dictionaryType = property.Type.AllInterfaces
+                    .First(
+                        s =>
+                            SymbolEqualityComparer.Default
+                                .Equals(s.ConstructedFrom, _iDictionarySymbol)
+                    );
             }
             else
             {
@@ -494,17 +489,17 @@ namespace Microsoft.CodeAnalysis.Razor
         private bool IsPotentialDictionaryProperty(IPropertySymbol property)
         {
             return (
-                    SymbolEqualityComparer.Default.Equals(
-                        (property.Type as INamedTypeSymbol)?.ConstructedFrom,
-                        _iDictionarySymbol
-                    )
-                    || property.Type.AllInterfaces.Any(
-                        s =>
-                            SymbolEqualityComparer.Default.Equals(
-                                s.ConstructedFrom,
-                                _iDictionarySymbol
-                            )
-                    )
+                    SymbolEqualityComparer.Default
+                        .Equals(
+                            (property.Type as INamedTypeSymbol)?.ConstructedFrom,
+                            _iDictionarySymbol
+                        )
+                    || property.Type.AllInterfaces
+                        .Any(
+                            s =>
+                                SymbolEqualityComparer.Default
+                                    .Equals(s.ConstructedFrom, _iDictionarySymbol)
+                        )
                 )
                 && GetDictionaryArgumentTypes(property)?[0].SpecialType
                     == SpecialType.System_String;
@@ -529,20 +524,22 @@ namespace Microsoft.CodeAnalysis.Razor
                         && property.GetAttributes()
                             .Where(
                                 a =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        a.AttributeClass,
-                                        _htmlAttributeNotBoundAttributeSymbol
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(
+                                            a.AttributeClass,
+                                            _htmlAttributeNotBoundAttributeSymbol
+                                        )
                             )
                             .FirstOrDefault() == null
                         && (
                             property.GetAttributes()
                                 .Any(
                                     a =>
-                                        SymbolEqualityComparer.Default.Equals(
-                                            a.AttributeClass,
-                                            _htmlAttributeNameAttributeSymbol
-                                        )
+                                        SymbolEqualityComparer.Default
+                                            .Equals(
+                                                a.AttributeClass,
+                                                _htmlAttributeNameAttributeSymbol
+                                            )
                                 )
                             || property.SetMethod != null
                                 && property.SetMethod.DeclaredAccessibility == Accessibility.Public
@@ -568,10 +565,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 var editorBrowsableAttribute = symbol.GetAttributes()
                     .Where(
                         a =>
-                            SymbolEqualityComparer.Default.Equals(
-                                a.AttributeClass,
-                                _editorBrowsableAttributeSymbol
-                            )
+                            SymbolEqualityComparer.Default
+                                .Equals(a.AttributeClass, _editorBrowsableAttributeSymbol)
                     )
                     .FirstOrDefault();
 

@@ -223,10 +223,10 @@ namespace System.ComponentModel.DataAnnotations
                     BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
                 // Try to find a matching member on type
                 MemberInfo matchingMember = type.GetMember(
-                        memberName,
-                        allowedMemberTypes,
-                        searchFlags
-                    )
+                    memberName,
+                    allowedMemberTypes,
+                    searchFlags
+                )
                     .FirstOrDefault();
                 if (matchingMember != null)
                 {

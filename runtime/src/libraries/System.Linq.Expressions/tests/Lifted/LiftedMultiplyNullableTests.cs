@@ -291,7 +291,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(byte?)),
                     Expression.Constant(b, typeof(byte?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableByte")
                 )
             );
@@ -306,7 +307,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(char?)),
                     Expression.Constant(b, typeof(char?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableChar")
                 )
             );
@@ -325,7 +327,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(decimal?)),
                     Expression.Constant(b, typeof(decimal?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableDecimal")
                 )
             );
@@ -351,7 +354,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(double?)),
                     Expression.Constant(b, typeof(double?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableDouble")
                 )
             );
@@ -366,7 +370,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(float?)),
                     Expression.Constant(b, typeof(float?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableFloat")
                 )
             );
@@ -381,7 +386,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(int?)),
                     Expression.Constant(b, typeof(int?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableInt")
                 )
             );
@@ -396,7 +402,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(long?)),
                     Expression.Constant(b, typeof(long?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableLong")
                 )
             );
@@ -411,7 +418,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(sbyte?)),
                     Expression.Constant(b, typeof(sbyte?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableSByte")
                 )
             );
@@ -426,7 +434,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(short?)),
                     Expression.Constant(b, typeof(short?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableShort")
                 )
             );
@@ -441,7 +450,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(uint?)),
                     Expression.Constant(b, typeof(uint?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableUInt")
                 )
             );
@@ -456,7 +466,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(ulong?)),
                     Expression.Constant(b, typeof(ulong?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableULong")
                 )
             );
@@ -471,7 +482,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Multiply(
                     Expression.Constant(a, typeof(ushort?)),
                     Expression.Constant(b, typeof(ushort?)),
-                    typeof(LiftedMultiplyNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyNullableUShort")
                 )
             );

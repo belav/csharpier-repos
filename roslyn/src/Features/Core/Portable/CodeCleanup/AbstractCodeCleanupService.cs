@@ -50,11 +50,11 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             }
 
             document = await ApplyCodeFixesAsync(
-                    document,
-                    enabledDiagnostics.Diagnostics,
-                    progressTracker,
-                    cancellationToken
-                )
+                document,
+                enabledDiagnostics.Diagnostics,
+                progressTracker,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // do the remove usings after code fix, as code fix might remove some code which can results in unused usings.
@@ -62,10 +62,10 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             {
                 progressTracker.Description = this.OrganizeImportsDescription;
                 document = await RemoveSortUsingsAsync(
-                        document,
-                        enabledDiagnostics.OrganizeUsings,
-                        cancellationToken
-                    )
+                    document,
+                    enabledDiagnostics.OrganizeUsings,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 progressTracker.ItemCompleted();
             }
@@ -76,9 +76,9 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 using (Logger.LogBlock(FunctionId.CodeCleanup_Format, cancellationToken))
                 {
                     document = await Formatter.FormatAsync(
-                            document,
-                            cancellationToken: cancellationToken
-                        )
+                        document,
+                        cancellationToken: cancellationToken
+                    )
                         .ConfigureAwait(false);
                     progressTracker.ItemCompleted();
                 }
@@ -107,9 +107,9 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                     )
                     {
                         document = await removeUsingsService.RemoveUnnecessaryImportsAsync(
-                                document,
-                                cancellationToken
-                            )
+                            document,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -143,11 +143,11 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
 
                 progressTracker.Description = diagnosticSet.Description;
                 document = await ApplyCodeFixesForSpecificDiagnosticIdsAsync(
-                        document,
-                        diagnosticSet.DiagnosticIds,
-                        progressTracker,
-                        cancellationToken
-                    )
+                    document,
+                    diagnosticSet.DiagnosticIds,
+                    progressTracker,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // Mark this option as being completed.
@@ -175,11 +175,11 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 )
                 {
                     document = await _codeFixService.ApplyCodeFixesForSpecificDiagnosticIdAsync(
-                            document,
-                            diagnosticId,
-                            progressTracker,
-                            cancellationToken
-                        )
+                        document,
+                        diagnosticId,
+                        progressTracker,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }

@@ -1155,14 +1155,13 @@ class C {
 }
 ";
 
-            var comp = CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,15): error CS0121: The call is ambiguous between the following methods or properties: 'C.C(object, C)' and 'C.C(C, object)'
-                    //         C c = new(new(), new());
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "new(new(), new())")
-                        .WithArguments("C.C(object, C)", "C.C(C, object)")
-                        .WithLocation(9, 15)
-                );
+            var comp = CreateCompilation(source).VerifyDiagnostics(
+                // (9,15): error CS0121: The call is ambiguous between the following methods or properties: 'C.C(object, C)' and 'C.C(C, object)'
+                //         C c = new(new(), new());
+                Diagnostic(ErrorCode.ERR_AmbigCall, "new(new(), new())")
+                    .WithArguments("C.C(object, C)", "C.C(C, object)")
+                    .WithLocation(9, 15)
+            );
         }
 
         [Fact]
@@ -1422,9 +1421,9 @@ class C
                 // (6,14): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable '_'.
                 //         var (_, _) = new();
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "_"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "_"
+                )
                     .WithArguments("_")
                     .WithLocation(6, 14),
                 // (6,14): error CS8183: Cannot infer the type of implicitly-typed discard.
@@ -1433,9 +1432,9 @@ class C
                 // (6,17): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable '_'.
                 //         var (_, _) = new();
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "_"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "_"
+                )
                     .WithArguments("_")
                     .WithLocation(6, 17),
                 // (6,17): error CS8183: Cannot infer the type of implicitly-typed discard.
@@ -1453,9 +1452,9 @@ class C
                 // (7,10): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable '_'.
                 //         (var _, var _) = new();
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "var _"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "var _"
+                )
                     .WithArguments("_")
                     .WithLocation(7, 10),
                 // (7,10): error CS8183: Cannot infer the type of implicitly-typed discard.
@@ -1464,9 +1463,9 @@ class C
                 // (7,17): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable '_'.
                 //         (var _, var _) = new();
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "var _"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "var _"
+                )
                     .WithArguments("_")
                     .WithLocation(7, 17),
                 // (7,17): error CS8183: Cannot infer the type of implicitly-typed discard.
@@ -1479,7 +1478,8 @@ class C
                     .WithLocation(8, 22),
                 // (8,22): error CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         (C _, C _) = new();
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "new()").WithLocation(8, 22)
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "new()")
+                    .WithLocation(8, 22)
             );
         }
 
@@ -1618,15 +1618,14 @@ class C
 }
 ";
 
-            var comp = CreateCompilation(source, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (6,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                    //         new() ??= new C();
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new()").WithLocation(6, 9),
-                    // (7,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                    //         new() ??= new();
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new()").WithLocation(7, 9)
-                );
+            var comp = CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (6,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                //         new() ??= new C();
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new()").WithLocation(6, 9),
+                // (7,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                //         new() ??= new();
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new()").WithLocation(7, 9)
+            );
         }
 
         [Fact]
@@ -1649,14 +1648,13 @@ class C
 }
 ";
 
-            var comp = CreateCompilation(source, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (12,9): error CS0411: The type arguments for method 'C.M<T>(Func<bool, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         M(b => { if (b) return new(); else return new(); });
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M")
-                        .WithArguments("C.M<T>(System.Func<bool, T>)")
-                        .WithLocation(12, 9)
-                );
+            var comp = CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (12,9): error CS0411: The type arguments for method 'C.M<T>(Func<bool, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M(b => { if (b) return new(); else return new(); });
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M")
+                    .WithArguments("C.M<T>(System.Func<bool, T>)")
+                    .WithLocation(12, 9)
+            );
         }
 
         [Fact]
@@ -1677,24 +1675,23 @@ class C
 }
 ";
 
-            var comp = CreateCompilation(source, options: TestOptions.ReleaseDll)
-                .VerifyDiagnostics(
-                    // (8,16): error CS0417: 'A': cannot provide arguments when creating an instance of a variable type
-                    //         A v1 = new(1);
-                    Diagnostic(ErrorCode.ERR_NewTyvarWithArgs, "new(1)")
-                        .WithArguments("A")
-                        .WithLocation(8, 16),
-                    // (9,16): error CS0417: 'B': cannot provide arguments when creating an instance of a variable type
-                    //         B v2 = new(2);
-                    Diagnostic(ErrorCode.ERR_NewTyvarWithArgs, "new(2)")
-                        .WithArguments("B")
-                        .WithLocation(9, 16),
-                    // (10,16): error CS0304: Cannot create an instance of the variable type 'C' because it does not have the new() constraint
-                    //         C v3 = new();
-                    Diagnostic(ErrorCode.ERR_NoNewTyvar, "new()")
-                        .WithArguments("C")
-                        .WithLocation(10, 16)
-                );
+            var comp = CreateCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics(
+                // (8,16): error CS0417: 'A': cannot provide arguments when creating an instance of a variable type
+                //         A v1 = new(1);
+                Diagnostic(ErrorCode.ERR_NewTyvarWithArgs, "new(1)")
+                    .WithArguments("A")
+                    .WithLocation(8, 16),
+                // (9,16): error CS0417: 'B': cannot provide arguments when creating an instance of a variable type
+                //         B v2 = new(2);
+                Diagnostic(ErrorCode.ERR_NewTyvarWithArgs, "new(2)")
+                    .WithArguments("B")
+                    .WithLocation(9, 16),
+                // (10,16): error CS0304: Cannot create an instance of the variable type 'C' because it does not have the new() constraint
+                //         C v3 = new();
+                Diagnostic(ErrorCode.ERR_NoNewTyvar, "new()")
+                    .WithArguments("C")
+                    .WithLocation(10, 16)
+            );
         }
 
         [Fact]
@@ -1739,19 +1736,18 @@ class C
 }
 ";
 
-            var comp = CreateCompilation(source, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (8,28): error CS0200: Property or indexer 'string.Length' cannot be assigned to -- it is read only
-                    //         string x = new() { Length = 5 };
-                    Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "Length")
-                        .WithArguments("string.Length")
-                        .WithLocation(6, 28),
-                    // (8,20): error CS1729: 'string' does not contain a constructor that takes 0 arguments
-                    //         string x = new() { Length = 5 };
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "new() { Length = 5 }")
-                        .WithArguments("string", "0")
-                        .WithLocation(6, 20)
-                );
+            var comp = CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (8,28): error CS0200: Property or indexer 'string.Length' cannot be assigned to -- it is read only
+                //         string x = new() { Length = 5 };
+                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "Length")
+                    .WithArguments("string.Length")
+                    .WithLocation(6, 28),
+                // (8,20): error CS1729: 'string' does not contain a constructor that takes 0 arguments
+                //         string x = new() { Length = 5 };
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "new() { Length = 5 }")
+                    .WithArguments("string", "0")
+                    .WithLocation(6, 20)
+            );
         }
 
         [Fact]
@@ -1848,14 +1844,13 @@ class Program
 }
 ";
 
-            var comp = CreateCompilation(source, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (18,11): error CS1729: 'D' does not contain a constructor that takes 1 arguments
-                    //         M(new(1), 1);
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "new(1)")
-                        .WithArguments("D", "1")
-                        .WithLocation(18, 11)
-                );
+            var comp = CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (18,11): error CS1729: 'D' does not contain a constructor that takes 1 arguments
+                //         M(new(1), 1);
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "new(1)")
+                    .WithArguments("D", "1")
+                    .WithLocation(18, 11)
+            );
         }
 
         [Fact]
@@ -1916,14 +1911,13 @@ class Program
 }
 ";
 
-            var comp = CreateCompilation(source, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (18,15): error CS0103: The name 'Missing' does not exist in the current context
-                    //         M(new(Missing()));
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing")
-                        .WithArguments("Missing")
-                        .WithLocation(18, 15)
-                );
+            var comp = CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (18,15): error CS0103: The name 'Missing' does not exist in the current context
+                //         M(new(Missing()));
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing")
+                    .WithArguments("Missing")
+                    .WithLocation(18, 15)
+            );
         }
 
         [Fact]
@@ -1949,14 +1943,13 @@ class Program
 }
 ";
 
-            var comp = CreateCompilation(source, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (15,9): error CS0103: The name 'Missing' does not exist in the current context
-                    //         Missing(new(1));
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing")
-                        .WithArguments("Missing")
-                        .WithLocation(15, 9)
-                );
+            var comp = CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (15,9): error CS0103: The name 'Missing' does not exist in the current context
+                //         Missing(new(1));
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing")
+                    .WithArguments("Missing")
+                    .WithLocation(15, 9)
+            );
         }
 
         [Fact]
@@ -1985,14 +1978,13 @@ class Program
 }
 ";
 
-            var comp = CreateCompilation(source, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A, int)' and 'Program.M(B, object)'
-                    //         M(new(), 1);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
-                        .WithArguments("Program.M(A, int)", "Program.M(B, object)")
-                        .WithLocation(18, 9)
-                );
+            var comp = CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A, int)' and 'Program.M(B, object)'
+                //         M(new(), 1);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                    .WithArguments("Program.M(A, int)", "Program.M(B, object)")
+                    .WithLocation(18, 9)
+            );
         }
 
         [Fact]
@@ -2012,14 +2004,13 @@ class C
 }
 ";
 
-            var comp = CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,19): error CS1729: 'C' does not contain a constructor that takes 0 arguments
-                    //         C c = new(new(), new());
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "new()")
-                        .WithArguments("C", "0")
-                        .WithLocation(9, 19)
-                );
+            var comp = CreateCompilation(source).VerifyDiagnostics(
+                // (9,19): error CS1729: 'C' does not contain a constructor that takes 0 arguments
+                //         C c = new(new(), new());
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "new()")
+                    .WithArguments("C", "0")
+                    .WithLocation(9, 19)
+            );
         }
 
         [Fact]
@@ -2042,19 +2033,18 @@ class C
 }
 ";
 
-            var comp = CreateCompilation(source, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (10,9): error CS0103: The name 'Missing' does not exist in the current context
-                    //         Missing(new() { X = N(1) });
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing")
-                        .WithArguments("Missing")
-                        .WithLocation(10, 9),
-                    // (11,19): error CS0117: 'C' does not contain a definition for 'X'
-                    //         M(new() { X = N(2) });
-                    Diagnostic(ErrorCode.ERR_NoSuchMember, "X")
-                        .WithArguments("C", "X")
-                        .WithLocation(11, 19)
-                );
+            var comp = CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (10,9): error CS0103: The name 'Missing' does not exist in the current context
+                //         Missing(new() { X = N(1) });
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing")
+                    .WithArguments("Missing")
+                    .WithLocation(10, 9),
+                // (11,19): error CS0117: 'C' does not contain a definition for 'X'
+                //         M(new() { X = N(2) });
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "X")
+                    .WithArguments("C", "X")
+                    .WithLocation(11, 19)
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
@@ -2115,12 +2105,11 @@ class Program
 }
 ";
 
-            var comp = CreateCompilation(source, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (6,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                    //         new() = 5;
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new()").WithLocation(6, 9)
-                );
+            var comp = CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (6,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                //         new() = 5;
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new()").WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -2189,35 +2178,34 @@ struct S
     }
 }
 ";
-            _ = CreateCompilation(source, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (6,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                    //         new(a) { x };
-                    Diagnostic(ErrorCode.ERR_IllegalStatement, "new(a) { x }").WithLocation(6, 9),
-                    // (6,13): error CS0103: The name 'a' does not exist in the current context
-                    //         new(a) { x };
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "a")
-                        .WithArguments("a")
-                        .WithLocation(6, 13),
-                    // (6,18): error CS0103: The name 'x' does not exist in the current context
-                    //         new(a) { x };
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
-                        .WithArguments("x")
-                        .WithLocation(6, 18),
-                    // (7,9): error CS8754: There is no target type for 'new()'
-                    //         new() { x };
-                    Diagnostic(ErrorCode.ERR_ImplicitObjectCreationNoTargetType, "new() { x }")
-                        .WithArguments("new()")
-                        .WithLocation(7, 9),
-                    // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                    //         new() { x };
-                    Diagnostic(ErrorCode.ERR_IllegalStatement, "new() { x }").WithLocation(7, 9),
-                    // (7,17): error CS0103: The name 'x' does not exist in the current context
-                    //         new() { x };
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
-                        .WithArguments("x")
-                        .WithLocation(7, 17)
-                );
+            _ = CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (6,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                //         new(a) { x };
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "new(a) { x }").WithLocation(6, 9),
+                // (6,13): error CS0103: The name 'a' does not exist in the current context
+                //         new(a) { x };
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "a")
+                    .WithArguments("a")
+                    .WithLocation(6, 13),
+                // (6,18): error CS0103: The name 'x' does not exist in the current context
+                //         new(a) { x };
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                    .WithArguments("x")
+                    .WithLocation(6, 18),
+                // (7,9): error CS8754: There is no target type for 'new()'
+                //         new() { x };
+                Diagnostic(ErrorCode.ERR_ImplicitObjectCreationNoTargetType, "new() { x }")
+                    .WithArguments("new()")
+                    .WithLocation(7, 9),
+                // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                //         new() { x };
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "new() { x }").WithLocation(7, 9),
+                // (7,17): error CS0103: The name 'x' does not exist in the current context
+                //         new() { x };
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                    .WithArguments("x")
+                    .WithLocation(7, 17)
+            );
         }
 
         [Fact]
@@ -4441,14 +4429,13 @@ class Program
     }
 }";
 
-            var comp = CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (7,32): error CS8754: There is no target type for 'new()'
-                    //         Func<object> f = () => new() ?? "hello";
-                    Diagnostic(ErrorCode.ERR_ImplicitObjectCreationNoTargetType, "new()")
-                        .WithArguments("new()")
-                        .WithLocation(7, 32)
-                );
+            var comp = CreateCompilation(text).VerifyDiagnostics(
+                // (7,32): error CS8754: There is no target type for 'new()'
+                //         Func<object> f = () => new() ?? "hello";
+                Diagnostic(ErrorCode.ERR_ImplicitObjectCreationNoTargetType, "new()")
+                    .WithArguments("new()")
+                    .WithLocation(7, 32)
+            );
         }
 
         [Fact]
@@ -5280,9 +5267,8 @@ class D
         [Fact]
         public void UseSiteWarning()
         {
-            var signedDll = TestOptions.ReleaseDll.WithCryptoPublicKey(
-                TestResources.TestKeys.PublicKey_ce65828c82a341f2
-            );
+            var signedDll = TestOptions.ReleaseDll
+                .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_ce65828c82a341f2);
 
             var libBTemplate =
                 @"
@@ -5418,11 +5404,10 @@ class Program
 
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"Main
+                comp,
+                expectedOutput: @"Main
 Main"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -5455,11 +5440,10 @@ class Program
 
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"16
+                comp,
+                expectedOutput: @"16
 19"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -5493,7 +5477,8 @@ class X : List<int>
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single().Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -5645,7 +5630,8 @@ public class C
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new()").WithLocation(6, 43),
                 // (10,43): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     public void M2([DefaultParameterValue(new object())] object o)
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new object()").WithLocation(10, 43)
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new object()")
+                    .WithLocation(10, 43)
             );
         }
 

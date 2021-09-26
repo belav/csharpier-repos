@@ -183,8 +183,8 @@ namespace System.Web.TestUtil
 
                 // Act & assert
                 var pairs = MakeKeyValuePairs(
-                        true /* includeConflictingKeys */
-                    )
+                    true /* includeConflictingKeys */
+                )
                     .Skip(NonConflictingKeys.Length)
                     .ToArray();
                 testDictionary.Add(pairs[0].Key, pairs[1].Value);

@@ -71,8 +71,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             // only serializer properties that start with the specified character
             properties = properties.Where(
-                    p => p.PropertyName.StartsWith(_startingWithChar.ToString())
-                )
+                p => p.PropertyName.StartsWith(_startingWithChar.ToString())
+            )
                 .ToList();
 
             return properties;

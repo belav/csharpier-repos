@@ -224,10 +224,8 @@ namespace System.Tests
         {
             Assert.Throws<AmbiguousMatchException>(
                 () =>
-                    typeof(ClassWithTwoSameNameInterfaces).GetInterface(
-                        "Interface1",
-                        ignoreCase: true
-                    )
+                    typeof(ClassWithTwoSameNameInterfaces)
+                        .GetInterface("Interface1", ignoreCase: true)
             );
         }
 
@@ -235,10 +233,8 @@ namespace System.Tests
         public void GetInterface_SameNameInterfaces_FullySpecified_Succeeds()
         {
             Assert.NotNull(
-                typeof(ClassWithTwoSameNameInterfaces).GetInterface(
-                    "System.Tests.Inner.Interface1",
-                    ignoreCase: true
-                )
+                typeof(ClassWithTwoSameNameInterfaces)
+                    .GetInterface("System.Tests.Inner.Interface1", ignoreCase: true)
             );
         }
 
@@ -247,10 +243,8 @@ namespace System.Tests
         {
             Assert.Throws<AmbiguousMatchException>(
                 () =>
-                    typeof(ClassWithMixedCaseInterfaces).GetInterface(
-                        "mixedinterface",
-                        ignoreCase: true
-                    )
+                    typeof(ClassWithMixedCaseInterfaces)
+                        .GetInterface("mixedinterface", ignoreCase: true)
             );
         }
     }

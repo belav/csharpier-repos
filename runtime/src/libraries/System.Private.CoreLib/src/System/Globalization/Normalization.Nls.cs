@@ -25,11 +25,8 @@ namespace System.Globalization
             Interop.BOOL result;
             fixed (char* pInput = strInput)
             {
-                result = Interop.Normaliz.IsNormalizedString(
-                    normalizationForm,
-                    pInput,
-                    strInput.Length
-                );
+                result = Interop.Normaliz
+                    .IsNormalizedString(normalizationForm, pInput, strInput.Length);
             }
 
             int lastError = Marshal.GetLastWin32Error();
@@ -101,13 +98,14 @@ namespace System.Globalization
                     fixed (char* pInput = strInput)
                     fixed (char* pDest = &MemoryMarshal.GetReference(buffer))
                     {
-                        realLength = Interop.Normaliz.NormalizeString(
-                            normalizationForm,
-                            pInput,
-                            strInput.Length,
-                            pDest,
-                            buffer.Length
-                        );
+                        realLength = Interop.Normaliz
+                            .NormalizeString(
+                                normalizationForm,
+                                pInput,
+                                strInput.Length,
+                                pDest,
+                                buffer.Length
+                            );
                     }
                     int lastError = Marshal.GetLastWin32Error();
 

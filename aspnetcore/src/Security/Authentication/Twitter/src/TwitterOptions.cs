@@ -97,11 +97,12 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
             if (string.IsNullOrEmpty(ConsumerKey))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.Exception_OptionMustBeProvided,
-                        nameof(ConsumerKey)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Exception_OptionMustBeProvided,
+                            nameof(ConsumerKey)
+                        ),
                     nameof(ConsumerKey)
                 );
             }
@@ -109,11 +110,12 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
             if (string.IsNullOrEmpty(ConsumerSecret))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.Exception_OptionMustBeProvided,
-                        nameof(ConsumerSecret)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Exception_OptionMustBeProvided,
+                            nameof(ConsumerSecret)
+                        ),
                     nameof(ConsumerSecret)
                 );
             }

@@ -269,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     MethodKind = InvalidMethodKind,
                     ReturnsVoid = false
                 }
-            }.AsEnumerable();
+            }
+                .AsEnumerable();
 
             if (symbolKindsWithNoCodeBlocks != null)
             {
@@ -283,8 +284,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             );
 
             var actualOnCodeBlockStartedArguments = _callLog.Where(
-                    a => FilterByAbstractName(a, "CodeBlockStart")
-                )
+                a => FilterByAbstractName(a, "CodeBlockStart")
+            )
                 .Select(
                     e =>
                         new
@@ -296,8 +297,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 )
                 .Distinct();
             var actualOnCodeBlockEndedArguments = _callLog.Where(
-                    a => FilterByAbstractName(a, "CodeBlock")
-                )
+                a => FilterByAbstractName(a, "CodeBlock")
+            )
                 .Select(
                     e =>
                         new
@@ -363,11 +364,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         )
         {
             var missingElements = expectedSubset.GroupJoin(
-                    actualSuperset,
-                    e => e,
-                    a => a,
-                    (e, a) => new { Element = e, IsMissing = !a.Any() }
-                )
+                actualSuperset,
+                e => e,
+                a => a,
+                (e, a) => new { Element = e, IsMissing = !a.Any() }
+            )
                 .Where(p => p.IsMissing)
                 .Select(p => p.Element)
                 .ToList();

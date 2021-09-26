@@ -26,9 +26,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public static ClientBuilder IdentityServerSPA(string clientId)
         {
             var client = CreateClient(clientId);
-            return new ClientBuilder(client).WithApplicationProfile(
-                    ApplicationProfiles.IdentityServerSPA
-                )
+            return new ClientBuilder(client)
+                .WithApplicationProfile(ApplicationProfiles.IdentityServerSPA)
                 .WithAllowedGrants(GrantTypes.Code)
                 .WithoutClientSecrets()
                 .WithPkce()
@@ -44,7 +43,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public static ClientBuilder SPA(string clientId)
         {
             var client = CreateClient(clientId);
-            return new ClientBuilder(client).WithApplicationProfile(ApplicationProfiles.SPA)
+            return new ClientBuilder(client)
+                .WithApplicationProfile(ApplicationProfiles.SPA)
                 .WithAllowedGrants(GrantTypes.Code)
                 .WithoutClientSecrets()
                 .WithPkce()
@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public static ClientBuilder NativeApp(string clientId)
         {
             var client = CreateClient(clientId);
-            return new ClientBuilder(client).WithApplicationProfile(ApplicationProfiles.NativeApp)
+            return new ClientBuilder(client)
+                .WithApplicationProfile(ApplicationProfiles.NativeApp)
                 .WithAllowedGrants(GrantTypes.Code)
                 .WithRedirectUri(NativeAppClientRedirectUri)
                 .WithLogoutRedirectUri(NativeAppClientRedirectUri)

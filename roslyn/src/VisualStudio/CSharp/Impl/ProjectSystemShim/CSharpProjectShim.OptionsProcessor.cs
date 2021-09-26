@@ -153,10 +153,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 }
 
                 if (
-                    !int.TryParse(
-                        GetStringOption(CompilerOptions.OPTID_WARNINGLEVEL, defaultValue: ""),
-                        out var warningLevel
-                    )
+                    !int
+                        .TryParse(
+                            GetStringOption(CompilerOptions.OPTID_WARNINGLEVEL, defaultValue: ""),
+                            out var warningLevel
+                        )
                 )
                 {
                     warningLevel = 4;
@@ -164,9 +165,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 
                 // TODO: appConfigPath: GetFilePathOption(CompilerOptions.OPTID_FUSIONCONFIG), bug #869604
 
-                return ((CSharpCompilationOptions)compilationOptions).WithAllowUnsafe(
-                        GetBooleanOption(CompilerOptions.OPTID_UNSAFE)
-                    )
+                return ((CSharpCompilationOptions)compilationOptions)
+                    .WithAllowUnsafe(GetBooleanOption(CompilerOptions.OPTID_UNSAFE))
                     .WithOverflowChecks(GetBooleanOption(CompilerOptions.OPTID_CHECKED))
                     .WithCryptoKeyContainer(
                         GetStringOption(CompilerOptions.OPTID_KEYNAME, defaultValue: null)
@@ -275,7 +275,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                     out var languageVersion
                 );
 
-                return ((CSharpParseOptions)parseOptions).WithKind(SourceCodeKind.Regular)
+                return ((CSharpParseOptions)parseOptions)
+                    .WithKind(SourceCodeKind.Regular)
                     .WithLanguageVersion(languageVersion)
                     .WithPreprocessorSymbols(symbols.AsImmutable())
                     .WithDocumentationMode(documentationMode);

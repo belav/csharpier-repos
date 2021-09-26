@@ -169,10 +169,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd).GetMethod(
-                    nameof(AdvSimd.DuplicateToVector64),
-                    new Type[] { typeof(Single) }
-                )
+            var result = typeof(AdvSimd)
+                .GetMethod(nameof(AdvSimd.DuplicateToVector64), new Type[] { typeof(Single) })
                 .Invoke(
                     null,
                     new object[]
@@ -308,13 +306,13 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.DuplicateToVector64)}<Single>(Single): DuplicateToVector64 failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.DuplicateToVector64)}<Single>(Single): DuplicateToVector64 failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

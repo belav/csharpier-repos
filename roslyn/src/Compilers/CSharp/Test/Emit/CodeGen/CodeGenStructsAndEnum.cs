@@ -275,8 +275,8 @@ class Program
             var compilation = CompileAndVerify(source, expectedOutput: @"");
 
             compilation.VerifyIL(
-                    "S1.Equals(object)",
-                    @"
+                "S1.Equals(object)",
+                @"
 {
   // Code size       30 (0x1e)
   .maxstack  2
@@ -294,10 +294,9 @@ class Program
   IL_001d:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "S1.GetHashCode()",
-                    @"
+            ).VerifyIL(
+                "S1.GetHashCode()",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -306,10 +305,9 @@ class Program
   IL_0006:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "bool S1.op_Equality(S1, S1)",
-                    @"
+            ).VerifyIL(
+                "bool S1.op_Equality(S1, S1)",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -321,10 +319,9 @@ class Program
   IL_000e:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "bool S1.op_Inequality(S1, S1)",
-                    @"
+            ).VerifyIL(
+                "bool S1.op_Inequality(S1, S1)",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -338,7 +335,7 @@ class Program
   IL_0011:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -1677,7 +1674,7 @@ public class D
         public void BoxingRefStructForBaseCall()
         {
             CreateCompilation(
-                    @"
+                @"
 ref struct S
 {
     public override bool Equals(object obj) => base.Equals(obj);
@@ -1686,24 +1683,23 @@ ref struct S
 
     public override string ToString() => base.ToString();
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,48): error CS0029: Cannot implicitly convert type 'S' to 'System.ValueType'
-                    //     public override bool Equals(object obj) => base.Equals(obj);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "base")
-                        .WithArguments("S", "System.ValueType")
-                        .WithLocation(4, 48),
-                    // (6,42): error CS0029: Cannot implicitly convert type 'S' to 'System.ValueType'
-                    //     public override int GetHashCode() => base.GetHashCode();
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "base")
-                        .WithArguments("S", "System.ValueType")
-                        .WithLocation(6, 42),
-                    // (8,42): error CS0029: Cannot implicitly convert type 'S' to 'System.ValueType'
-                    //     public override string ToString() => base.ToString();
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "base")
-                        .WithArguments("S", "System.ValueType")
-                        .WithLocation(8, 42)
-                );
+            ).VerifyDiagnostics(
+                // (4,48): error CS0029: Cannot implicitly convert type 'S' to 'System.ValueType'
+                //     public override bool Equals(object obj) => base.Equals(obj);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "base")
+                    .WithArguments("S", "System.ValueType")
+                    .WithLocation(4, 48),
+                // (6,42): error CS0029: Cannot implicitly convert type 'S' to 'System.ValueType'
+                //     public override int GetHashCode() => base.GetHashCode();
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "base")
+                    .WithArguments("S", "System.ValueType")
+                    .WithLocation(6, 42),
+                // (8,42): error CS0029: Cannot implicitly convert type 'S' to 'System.ValueType'
+                //     public override string ToString() => base.ToString();
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "base")
+                    .WithArguments("S", "System.ValueType")
+                    .WithLocation(8, 42)
+            );
         }
 
         #endregion

@@ -460,11 +460,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             if (NeitherNull(x, y, out comparisonResult))
             {
-                comparisonResult = string.Compare(
-                    x.ValueText,
-                    y.ValueText,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                comparisonResult = string
+                    .Compare(x.ValueText, y.ValueText, StringComparison.OrdinalIgnoreCase);
             }
 
             return comparisonResult == 0;

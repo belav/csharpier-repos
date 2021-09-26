@@ -406,9 +406,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private static XElement GetUpgradedSerializationIfNecessary(XElement rootElement)
         {
-            var serializationVersion = int.Parse(
-                rootElement.Attribute("SerializationVersion").Value
-            );
+            var serializationVersion = int
+                .Parse(rootElement.Attribute("SerializationVersion").Value);
 
             if (serializationVersion == 4)
             {

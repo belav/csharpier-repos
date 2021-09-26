@@ -40,9 +40,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(
                         2,
-                        (
-                            await store.FindApiScopesByNameAsync(new[] { "ApiScope2", "ApiScope1" })
-                        ).Count()
+                        (await store.FindApiScopesByNameAsync(new[] { "ApiScope2", "ApiScope1" }))
+                            .Count()
                     );
                 }
             );
@@ -127,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore
                             await store.FindIdentityResourcesByScopeNameAsync(
                                 new[] { "IdentityResource2", "IdentityResource1" }
                             )
-                        ).Count()
+                        )
+                            .Count()
                     );
                 }
             );
@@ -262,7 +262,8 @@ namespace Microsoft.EntityFrameworkCore
                             await store.FindApiResourcesByNameAsync(
                                 new[] { "ApiResource2", "ApiResource1" }
                             )
-                        ).Count()
+                        )
+                            .Count()
                     );
                 }
             );
@@ -273,7 +274,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = CreateContext())
             {
-                var entityTypeMappings = context.Model.GetEntityTypes()
+                var entityTypeMappings = context.Model
+                    .GetEntityTypes()
                     .Select(e => new EntityTypeMapping(e))
                     .ToList();
 
@@ -829,7 +831,8 @@ namespace Microsoft.EntityFrameworkCore
             ) => base.AddServices(serviceCollection).AddSingleton<ConfigurationStoreOptions>();
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .EnableDetailedErrors()
                     .EnableSensitiveDataLogging()
                     .ConfigureWarnings(

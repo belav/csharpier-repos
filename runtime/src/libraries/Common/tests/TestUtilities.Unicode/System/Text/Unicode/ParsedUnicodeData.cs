@@ -91,16 +91,10 @@ namespace System.Text.Unicode
                     continue;
                 }
 
-                int fromCodePoint = (int)uint.Parse(
-                    split[0],
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture
-                );
-                int toCodePoint = (int)uint.Parse(
-                    split[2],
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture
-                );
+                int fromCodePoint = (int)uint
+                    .Parse(split[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                int toCodePoint = (int)uint
+                    .Parse(split[2], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
                 dict.Add(fromCodePoint, toCodePoint);
             }
 
@@ -316,10 +310,8 @@ namespace System.Text.Unicode
                         nextEntry.Name[..^", Last>".Length]
                     );
 
-                    string baseName = entry.Name.Remove(
-                        entry.Name.Length - ", First>".Length,
-                        ", First".Length
-                    ); // remove the ", First" part of the name
+                    string baseName = entry.Name
+                        .Remove(entry.Name.Length - ", First>".Length, ", First".Length); // remove the ", First" part of the name
                     for (
                         int i = entry.CodePoint;
                         i

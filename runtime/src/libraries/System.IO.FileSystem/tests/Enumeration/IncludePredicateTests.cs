@@ -57,11 +57,11 @@ namespace System.IO.Tests.Enumeration
             fileFour.Create().Dispose();
 
             string[] paths = GetFileFullPathsWithExtension(
-                    testDirectory.FullName,
-                    true,
-                    ".htm",
-                    ".doc"
-                )
+                testDirectory.FullName,
+                true,
+                ".htm",
+                ".doc"
+            )
                 .ToArray();
 
             FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileThree.FullName }, paths);

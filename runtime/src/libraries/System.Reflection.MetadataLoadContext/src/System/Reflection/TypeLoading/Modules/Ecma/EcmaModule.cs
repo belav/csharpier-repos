@@ -80,7 +80,8 @@ namespace System.Reflection.TypeLoading.Ecma
                         throw new BadImageFormatException();
 
                     MetadataReader reader = Reader;
-                    string moduleName = ((AssemblyFileHandle)handle).GetAssemblyFile(reader)
+                    string moduleName = ((AssemblyFileHandle)handle)
+                        .GetAssemblyFile(reader)
                         .Name.GetString(reader);
                     EcmaModule? roModule = (EcmaModule?)(Assembly.GetModule(moduleName));
                     return roModule!.ComputeEntryPoint(fileRefEntryPointAllowed: false);

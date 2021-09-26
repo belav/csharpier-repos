@@ -166,14 +166,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 data = bigger;
             }
 
-            return ((ECDsa)key.Key).VerifyData(
-                data,
-                offset,
-                count,
-                signature,
-                hashAlgorithm,
-                signatureFormat
-            );
+            return ((ECDsa)key.Key)
+                .VerifyData(data, offset, count, signature, hashAlgorithm, signatureFormat);
         }
 
         [Fact]
@@ -333,12 +327,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             ReadOnlySpan<byte> readOnlyData = data;
             ReadOnlySpan<byte> readOnlySignature = signature;
 
-            return ((ECDsa)key.Key).VerifyData(
-                readOnlyData,
-                readOnlySignature,
-                hashAlgorithm,
-                signatureFormat
-            );
+            return ((ECDsa)key.Key)
+                .VerifyData(readOnlyData, readOnlySignature, hashAlgorithm, signatureFormat);
         }
 
         private static int GetExpectedSize(int fieldSizeInBits)

@@ -36,10 +36,11 @@ namespace System.Web.Http.Tracing.Tracers
                 }
             };
 
-            MethodInfo method = typeof(DelegatingHandler).GetMethod(
-                "SendAsync",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            MethodInfo method = typeof(DelegatingHandler)
+                .GetMethod(
+                    "SendAsync",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                );
 
             // Act
             Task<HttpResponseMessage> task =
@@ -87,10 +88,11 @@ namespace System.Web.Http.Tracing.Tracers
                 }
             };
 
-            MethodInfo method = typeof(DelegatingHandler).GetMethod(
-                "SendAsync",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            MethodInfo method = typeof(DelegatingHandler)
+                .GetMethod(
+                    "SendAsync",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                );
 
             // Act
             Exception thrown = Assert.Throws<TargetInvocationException>(
@@ -141,10 +143,11 @@ namespace System.Web.Http.Tracing.Tracers
                 }
             };
 
-            MethodInfo method = typeof(DelegatingHandler).GetMethod(
-                "SendAsync",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            MethodInfo method = typeof(DelegatingHandler)
+                .GetMethod(
+                    "SendAsync",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                );
 
             // Act
             Task<HttpResponseMessage> task =

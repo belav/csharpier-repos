@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (EnableFilters)
             {
                 var animals = expectedData.Animals.Where(a => a.CountryId == 1).ToList();
-                var animalQueries = expectedData.AnimalQueries.Where(a => a.CountryId == 1)
+                var animalQueries = expectedData.AnimalQueries
+                    .Where(a => a.CountryId == 1)
                     .ToList();
                 expectedData = new InheritanceData(
                     animals,
@@ -75,10 +76,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 { typeof(Coke), e => ((Coke)e)?.Id },
                 { typeof(Lilt), e => ((Lilt)e)?.Id },
                 { typeof(Tea), e => ((Tea)e)?.Id },
-            }.ToDictionary(e => e.Key, e => (object)e.Value);
+            }
+                .ToDictionary(e => e.Key, e => (object)e.Value);
 
-        public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
-            new Dictionary<Type, Action<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntityAsserters() => new Dictionary<
+                Type,
+                Action<object, object>
+            >
             {
                 {
                     typeof(Animal),

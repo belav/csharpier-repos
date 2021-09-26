@@ -142,9 +142,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 string hText = new string('H', 60000);
                 string wText = new string('W', 60000);
 
-                await connection.Transport.Output.WriteAsync(
-                    Encoding.ASCII.GetBytes(hText + wText)
-                );
+                await connection.Transport.Output
+                    .WriteAsync(Encoding.ASCII.GetBytes(hText + wText));
                 connection.Transport.Output.Complete();
                 await task.DefaultTimeout();
                 Assert.Equal(

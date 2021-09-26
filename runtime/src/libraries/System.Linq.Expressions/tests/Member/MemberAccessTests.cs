@@ -666,7 +666,8 @@ namespace System.Linq.Expressions.Tests
                 () =>
                     Expression.Property(
                         null,
-                        typeof(GenericClass<>).GetProperty(nameof(GenericClass<string>.Property))
+                        typeof(GenericClass<>)
+                            .GetProperty(nameof(GenericClass<string>.Property))
                             .GetGetMethod()
                     )
             );

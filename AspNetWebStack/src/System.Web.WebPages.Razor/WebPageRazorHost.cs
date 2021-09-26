@@ -362,9 +362,8 @@ namespace System.Web.WebPages.Razor
             base.PostProcessGeneratedCode(context);
 
             // Add additional global imports
-            context.Namespace.Imports.AddRange(
-                GetGlobalImports().Select(s => new CodeNamespaceImport(s)).ToArray()
-            );
+            context.Namespace.Imports
+                .AddRange(GetGlobalImports().Select(s => new CodeNamespaceImport(s)).ToArray());
 
             // Create ApplicationInstance property
             CodeMemberProperty prop = new CodeMemberProperty()
@@ -375,17 +374,18 @@ namespace System.Web.WebPages.Razor
                 HasSet = false,
                 Attributes = MemberAttributes.Family | MemberAttributes.Final
             };
-            prop.GetStatements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeCastExpression(
-                        new CodeTypeReference(GlobalAsaxTypeName),
-                        new CodePropertyReferenceExpression(
-                            new CodePropertyReferenceExpression(null, ContextPropertyName),
-                            ApplicationInstancePropertyName
+            prop.GetStatements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeCastExpression(
+                            new CodeTypeReference(GlobalAsaxTypeName),
+                            new CodePropertyReferenceExpression(
+                                new CodePropertyReferenceExpression(null, ContextPropertyName),
+                                ApplicationInstancePropertyName
+                            )
                         )
                     )
-                )
-            );
+                );
             context.GeneratedClass.Members.Insert(0, prop);
         }
 

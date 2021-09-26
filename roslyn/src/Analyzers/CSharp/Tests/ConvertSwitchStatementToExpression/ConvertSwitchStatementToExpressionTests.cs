@@ -603,7 +603,8 @@ class Program
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = CSharp9,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
@@ -644,7 +645,8 @@ class Program
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 LanguageVersion = CSharp9,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]
@@ -813,17 +815,20 @@ class Program
 }";
 
             var analyzer = new ConvertSwitchStatementToExpressionDiagnosticAnalyzer();
-            var descriptor = analyzer.SupportedDiagnostics.First(
-                descriptor =>
-                    descriptor.Id == IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId
-            );
+            var descriptor = analyzer.SupportedDiagnostics
+                .First(
+                    descriptor =>
+                        descriptor.Id
+                        == IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId
+                );
             await new VerifyCS.Test
             {
                 TestCode = source,
                 ExpectedDiagnostics =
                 {
                     // Test0.cs(5,9): warning IDE0066: Use 'switch' expression
-                    new DiagnosticResult(descriptor).WithSeverity(DiagnosticSeverity.Warning)
+                    new DiagnosticResult(descriptor)
+                        .WithSeverity(DiagnosticSeverity.Warning)
                         .WithSpan(5, 9, 5, 15)
                         .WithSpan(5, 9, 15, 10),
                 },
@@ -1123,7 +1128,8 @@ class Program
             {
                 TestCode = code,
                 FixedState = { Sources = { fixedCode }, MarkupHandling = MarkupMode.Allow, },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(37950, "https://github.com/dotnet/roslyn/issues/37950")]
@@ -1256,7 +1262,8 @@ class Program
                 {
                     { CSharpCodeStyleOptions.VarElsewhere, true, NotificationOption2.Silent },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(38771, "https://github.com/dotnet/roslyn/issues/38771")]
@@ -1324,7 +1331,8 @@ class Program
                 {
                     { CSharpCodeStyleOptions.VarElsewhere, true, NotificationOption2.Silent },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(38771, "https://github.com/dotnet/roslyn/issues/38771")]
@@ -1392,7 +1400,8 @@ class Program
                 {
                     { CSharpCodeStyleOptions.VarElsewhere, true, NotificationOption2.Silent },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(38771, "https://github.com/dotnet/roslyn/issues/38771")]
@@ -1468,7 +1477,8 @@ class Program
                 {
                     { CSharpCodeStyleOptions.VarElsewhere, true, NotificationOption2.Silent },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(38771, "https://github.com/dotnet/roslyn/issues/38771")]
@@ -1536,7 +1546,8 @@ class Program
                 {
                     { CSharpCodeStyleOptions.VarElsewhere, true, NotificationOption2.Silent },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(38771, "https://github.com/dotnet/roslyn/issues/38771")]
@@ -1604,7 +1615,8 @@ class Program
                 {
                     { CSharpCodeStyleOptions.VarElsewhere, true, NotificationOption2.Silent },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(38771, "https://github.com/dotnet/roslyn/issues/38771")]
@@ -1672,7 +1684,8 @@ class Program
                 {
                     { CSharpCodeStyleOptions.VarElsewhere, true, NotificationOption2.Silent },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(38771, "https://github.com/dotnet/roslyn/issues/38771")]
@@ -1719,7 +1732,8 @@ class Program
                 {
                     { CSharpCodeStyleOptions.VarForBuiltInTypes, true, NotificationOption2.Silent },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]
@@ -1765,7 +1779,8 @@ class Program
                 {
                     { CSharpCodeStyleOptions.VarForBuiltInTypes, true, NotificationOption2.Silent },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]
@@ -1811,7 +1826,8 @@ class Program
                 {
                     { CSharpCodeStyleOptions.VarForBuiltInTypes, true, NotificationOption2.Silent },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]
@@ -1861,7 +1877,8 @@ class Program
                         NotificationOption2.Silent
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]
@@ -1907,7 +1924,8 @@ class Program
                 {
                     { CSharpCodeStyleOptions.VarForBuiltInTypes, true, NotificationOption2.Silent },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(40198, "https://github.com/dotnet/roslyn/issues/40198")]
@@ -2141,7 +2159,8 @@ class Program
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 LanguageVersion = CSharp9,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]

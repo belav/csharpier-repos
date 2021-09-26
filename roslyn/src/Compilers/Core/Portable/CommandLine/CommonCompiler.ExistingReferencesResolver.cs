@@ -78,9 +78,8 @@ namespace Microsoft.CodeAnalysis
 
                 try
                 {
-                    PEAssembly assembly = (
-                        (AssemblyMetadata)peReference.GetMetadataNoCopy()
-                    ).GetAssembly()!;
+                    PEAssembly assembly = ((AssemblyMetadata)peReference.GetMetadataNoCopy())
+                        .GetAssembly()!;
                     return assembly.Identity;
                 }
                 catch (Exception e) when (e is BadImageFormatException || e is IOException)

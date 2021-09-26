@@ -68,11 +68,12 @@ End Module";
         {
             SetUpEditor(TestSource);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Encapsulate field: 'name' (and use property)",
-                applyFix: true,
-                blockUntilComplete: true
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction(
+                    "Encapsulate field: 'name' (and use property)",
+                    applyFix: true,
+                    blockUntilComplete: true
+                );
             VisualStudio.Editor.Verify.TextContains(
                 @"
 Module Module1
@@ -99,11 +100,12 @@ End Module"
         {
             SetUpEditor(TestSource);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Encapsulate field: 'name' (but still use field)",
-                applyFix: true,
-                blockUntilComplete: true
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction(
+                    "Encapsulate field: 'name' (but still use field)",
+                    applyFix: true,
+                    blockUntilComplete: true
+                );
             VisualStudio.Editor.Verify.TextContains(
                 @"
 Module Module1

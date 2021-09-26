@@ -173,13 +173,14 @@ public interface I1
             if (m is PEModuleSymbol peModule)
             {
                 int rva;
-                peModule.Module.GetMethodDefPropsOrThrow(
-                    ((PEMethodSymbol)m1).Handle,
-                    out _,
-                    out _,
-                    out _,
-                    out rva
-                );
+                peModule.Module
+                    .GetMethodDefPropsOrThrow(
+                        ((PEMethodSymbol)m1).Handle,
+                        out _,
+                        out _,
+                        out _,
+                        out rva
+                    );
                 Assert.NotEqual(0, rva);
             }
 
@@ -491,9 +492,8 @@ M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -572,9 +572,8 @@ M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -663,9 +662,8 @@ Test.M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -754,9 +752,8 @@ Test.M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -1335,9 +1332,9 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.M1()' cannot implement interface member 'I1.M1()' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.M1()", "I1.M1()", "Test2")
                     .WithLocation(2, 15)
             );
@@ -1396,9 +1393,9 @@ class Test2 : I1
                     // (2,15): error CS8502: 'I1.M1()' cannot implement interface member 'I1.M1()' in type 'Test2' because the target runtime doesn't support default interface implementation.
                     // class Test2 : I1
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                            "I1"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                        "I1"
+                    )
                         .WithArguments("I1.M1()", "I1.M1()", "Test2")
                         .WithLocation(2, 15)
                 );
@@ -1537,9 +1534,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.M1()' cannot implement interface member 'I1.M1()' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.M1()",
                         "I1.M1()",
@@ -1552,9 +1549,9 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.M1()' cannot implement interface member 'I1.M1()' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.M1()", "I1.M1()", "Test2")
                     .WithLocation(2, 15)
             );
@@ -1654,9 +1651,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.M1()' cannot implement interface member 'I1.M1()' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.M1()",
                         "I1.M1()",
@@ -1825,13 +1822,8 @@ class Test1 : I2
                     Assert.True(i1.IsMetadataAbstract);
 
                     int rva;
-                    ((PEModuleSymbol)m).Module.GetMethodDefPropsOrThrow(
-                        result.Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    ((PEModuleSymbol)m).Module
+                        .GetMethodDefPropsOrThrow(result.Handle, out _, out _, out _, out rva);
                     Assert.NotEqual(0, rva);
 
                     var test1Result = m.GlobalNamespace.GetTypeMember("Test1");
@@ -1979,15 +1971,15 @@ class Test1 : I2, I1<string?>
                 Assert.Equal(
                     "void I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "void I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[2].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[2].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
 
@@ -1995,9 +1987,9 @@ class Test1 : I2, I1<string?>
                     // (4,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I2, I1<string?>
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I1<string?>", "Test1")
                         .WithLocation(4, 7)
                 );
@@ -2083,15 +2075,15 @@ class Test1 : I1<string?>, I2
                 Assert.Equal(
                     "void I1<System.String>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[0].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[0].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "void I1<System.String>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[2].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[2].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
 
@@ -2099,9 +2091,9 @@ class Test1 : I1<string?>, I2
                     // (4,7): warning CS8645: 'I1<string>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I1<string?>, I2
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I1<string>", "Test1")
                         .WithLocation(4, 7)
                 );
@@ -2191,15 +2183,15 @@ class Test1 : I2, I3
                 Assert.Equal(
                     "void I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "void I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[3].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[3].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
 
@@ -2207,9 +2199,9 @@ class Test1 : I2, I3
                     // (4,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I2, I3
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I1<string?>", "Test1")
                         .WithLocation(4, 7)
                 );
@@ -2299,15 +2291,15 @@ class Test1 : I3, I2
                 Assert.Equal(
                     "void I1<System.String>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "void I1<System.String>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[3].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[3].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
 
@@ -2315,9 +2307,9 @@ class Test1 : I3, I2
                     // (4,7): warning CS8645: 'I1<string>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I3, I2
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I1<string>", "Test1")
                         .WithLocation(4, 7)
                 );
@@ -2525,25 +2517,27 @@ class Test2 : I1
 
                 if (haveGet)
                 {
-                    peModule.Module.GetMethodDefPropsOrThrow(
-                        ((PEMethodSymbol)p1.GetMethod).Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    peModule.Module
+                        .GetMethodDefPropsOrThrow(
+                            ((PEMethodSymbol)p1.GetMethod).Handle,
+                            out _,
+                            out _,
+                            out _,
+                            out rva
+                        );
                     Assert.NotEqual(0, rva);
                 }
 
                 if (haveSet)
                 {
-                    peModule.Module.GetMethodDefPropsOrThrow(
-                        ((PEMethodSymbol)p1.SetMethod).Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    peModule.Module
+                        .GetMethodDefPropsOrThrow(
+                            ((PEMethodSymbol)p1.SetMethod).Handle,
+                            out _,
+                            out _,
+                            out _,
+                            out rva
+                        );
                     Assert.NotEqual(0, rva);
                 }
             }
@@ -3065,9 +3059,8 @@ class Test : I1 {}
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -3193,9 +3186,8 @@ class Test : I1 {}
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -3385,9 +3377,8 @@ class Test : I1
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -3577,9 +3568,8 @@ class Test : I1
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -3667,41 +3657,41 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.P7.set' cannot implement interface member 'I1.P7.set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P7.set", "I1.P7.set", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8502: 'I1.P1.get' cannot implement interface member 'I1.P1.get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P1.get", "I1.P1.get", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8502: 'I1.P3.get' cannot implement interface member 'I1.P3.get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P3.get", "I1.P3.get", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8502: 'I1.P5.set' cannot implement interface member 'I1.P5.set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P5.set", "I1.P5.set", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8502: 'I1.P7.get' cannot implement interface member 'I1.P7.get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P7.get", "I1.P7.get", "Test2")
                     .WithLocation(2, 15)
             );
@@ -3802,41 +3792,41 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.P7.set' cannot implement interface member 'I1.P7.set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P7.set", "I1.P7.set", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8502: 'I1.P1.get' cannot implement interface member 'I1.P1.get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P1.get", "I1.P1.get", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8502: 'I1.P3.get' cannot implement interface member 'I1.P3.get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P3.get", "I1.P3.get", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8502: 'I1.P5.set' cannot implement interface member 'I1.P5.set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P5.set", "I1.P5.set", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8502: 'I1.P7.get' cannot implement interface member 'I1.P7.get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P7.get", "I1.P7.get", "Test2")
                     .WithLocation(2, 15)
             );
@@ -4006,9 +3996,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.P7.set' cannot implement interface member 'I1.P7.set' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.P7.set",
                         "I1.P7.set",
@@ -4021,17 +4011,17 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.P7.set' cannot implement interface member 'I1.P7.set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P7.set", "I1.P7.set", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8506: 'I1.P1.get' cannot implement interface member 'I1.P1.get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.P1.get",
                         "I1.P1.get",
@@ -4044,17 +4034,17 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.P1.get' cannot implement interface member 'I1.P1.get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P1.get", "I1.P1.get", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8506: 'I1.P3.get' cannot implement interface member 'I1.P3.get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.P3.get",
                         "I1.P3.get",
@@ -4067,17 +4057,17 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.P3.get' cannot implement interface member 'I1.P3.get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P3.get", "I1.P3.get", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8506: 'I1.P5.set' cannot implement interface member 'I1.P5.set' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.P5.set",
                         "I1.P5.set",
@@ -4090,17 +4080,17 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.P5.set' cannot implement interface member 'I1.P5.set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P5.set", "I1.P5.set", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8506: 'I1.P7.get' cannot implement interface member 'I1.P7.get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.P7.get",
                         "I1.P7.get",
@@ -4113,9 +4103,9 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.P7.get' cannot implement interface member 'I1.P7.get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.P7.get", "I1.P7.get", "Test2")
                     .WithLocation(2, 15)
             );
@@ -4221,9 +4211,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.P7.set' cannot implement interface member 'I1.P7.set' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.P7.set",
                         "I1.P7.set",
@@ -4236,9 +4226,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.P1.get' cannot implement interface member 'I1.P1.get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.P1.get",
                         "I1.P1.get",
@@ -4251,9 +4241,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.P3.get' cannot implement interface member 'I1.P3.get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.P3.get",
                         "I1.P3.get",
@@ -4266,9 +4256,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.P5.set' cannot implement interface member 'I1.P5.set' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.P5.set",
                         "I1.P5.set",
@@ -4281,9 +4271,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.P7.get' cannot implement interface member 'I1.P7.get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.P7.get",
                         "I1.P7.get",
@@ -4602,9 +4592,9 @@ public interface I1
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     int this[int i] {add; remove;} => 0;
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        "int this[int i] {add; remove;} => 0;"
-                    )
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    "int this[int i] {add; remove;} => 0;"
+                )
                     .WithLocation(4, 5)
             );
 
@@ -4637,9 +4627,9 @@ public interface I1
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     int this[int i] {get; set;} => 0;
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        "int this[int i] {get; set;} => 0;"
-                    )
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    "int this[int i] {get; set;} => 0;"
+                )
                     .WithLocation(4, 5)
             );
 
@@ -4925,9 +4915,8 @@ class Test : I1 {}
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -5055,9 +5044,8 @@ class Test : I1 {}
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -5317,9 +5305,8 @@ class Test : I1
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -5511,9 +5498,8 @@ class Test : I1
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -5601,37 +5587,37 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.this[long].set' cannot implement interface member 'I1.this[long].set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[long].set", "I1.this[long].set", "Test2"),
                 // (2,15): error CS8502: 'I1.this[sbyte].get' cannot implement interface member 'I1.this[sbyte].get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[sbyte].get", "I1.this[sbyte].get", "Test2"),
                 // (2,15): error CS8502: 'I1.this[short].get' cannot implement interface member 'I1.this[short].get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[short].get", "I1.this[short].get", "Test2"),
                 // (2,15): error CS8502: 'I1.this[int].set' cannot implement interface member 'I1.this[int].set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[int].set", "I1.this[int].set", "Test2"),
                 // (2,15): error CS8502: 'I1.this[long].get' cannot implement interface member 'I1.this[long].get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[long].get", "I1.this[long].get", "Test2")
             );
 
@@ -5738,37 +5724,37 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.this[short].get' cannot implement interface member 'I1.this[short].get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[short].get", "I1.this[short].get", "Test2"),
                 // (2,15): error CS8502: 'I1.this[int].set' cannot implement interface member 'I1.this[int].set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[int].set", "I1.this[int].set", "Test2"),
                 // (2,15): error CS8502: 'I1.this[long].get' cannot implement interface member 'I1.this[long].get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[long].get", "I1.this[long].get", "Test2"),
                 // (2,15): error CS8502: 'I1.this[long].set' cannot implement interface member 'I1.this[long].set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[long].set", "I1.this[long].set", "Test2"),
                 // (2,15): error CS8502: 'I1.this[sbyte].get' cannot implement interface member 'I1.this[sbyte].get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[sbyte].get", "I1.this[sbyte].get", "Test2")
             );
 
@@ -5950,9 +5936,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.this[long].set' cannot implement interface member 'I1.this[long].set' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.this[long].set",
                         "I1.this[long].set",
@@ -5965,17 +5951,17 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.this[long].set' cannot implement interface member 'I1.this[long].set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[long].set", "I1.this[long].set", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8506: 'I1.this[sbyte].get' cannot implement interface member 'I1.this[sbyte].get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.this[sbyte].get",
                         "I1.this[sbyte].get",
@@ -5988,17 +5974,17 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.this[sbyte].get' cannot implement interface member 'I1.this[sbyte].get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[sbyte].get", "I1.this[sbyte].get", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8506: 'I1.this[short].get' cannot implement interface member 'I1.this[short].get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.this[short].get",
                         "I1.this[short].get",
@@ -6011,17 +5997,17 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.this[short].get' cannot implement interface member 'I1.this[short].get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[short].get", "I1.this[short].get", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8506: 'I1.this[int].set' cannot implement interface member 'I1.this[int].set' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.this[int].set",
                         "I1.this[int].set",
@@ -6034,17 +6020,17 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.this[int].set' cannot implement interface member 'I1.this[int].set' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[int].set", "I1.this[int].set", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8506: 'I1.this[long].get' cannot implement interface member 'I1.this[long].get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.this[long].get",
                         "I1.this[long].get",
@@ -6057,9 +6043,9 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.this[long].get' cannot implement interface member 'I1.this[long].get' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.this[long].get", "I1.this[long].get", "Test2")
                     .WithLocation(2, 15)
             );
@@ -6171,9 +6157,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.this[long].set' cannot implement interface member 'I1.this[long].set' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.this[long].set",
                         "I1.this[long].set",
@@ -6186,9 +6172,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.this[sbyte].get' cannot implement interface member 'I1.this[sbyte].get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.this[sbyte].get",
                         "I1.this[sbyte].get",
@@ -6201,9 +6187,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.this[short].get' cannot implement interface member 'I1.this[short].get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.this[short].get",
                         "I1.this[short].get",
@@ -6216,9 +6202,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.this[int].set' cannot implement interface member 'I1.this[int].set' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.this[int].set",
                         "I1.this[int].set",
@@ -6231,9 +6217,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.this[long].get' cannot implement interface member 'I1.this[long].get' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.this[long].get",
                         "I1.this[long].get",
@@ -6470,25 +6456,27 @@ class Test2 : I1
 
                 if (haveAdd)
                 {
-                    peModule.Module.GetMethodDefPropsOrThrow(
-                        ((PEMethodSymbol)addE1).Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    peModule.Module
+                        .GetMethodDefPropsOrThrow(
+                            ((PEMethodSymbol)addE1).Handle,
+                            out _,
+                            out _,
+                            out _,
+                            out rva
+                        );
                     Assert.NotEqual(0, rva);
                 }
 
                 if (haveRemove)
                 {
-                    peModule.Module.GetMethodDefPropsOrThrow(
-                        ((PEMethodSymbol)rmvE1).Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    peModule.Module
+                        .GetMethodDefPropsOrThrow(
+                            ((PEMethodSymbol)rmvE1).Handle,
+                            out _,
+                            out _,
+                            out _,
+                            out rva
+                        );
                     Assert.NotEqual(0, rva);
                 }
             }
@@ -6989,9 +6977,8 @@ remove E8",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -7086,9 +7073,8 @@ remove E8",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -7201,9 +7187,8 @@ remove E8",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -7316,9 +7301,8 @@ remove E8",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace
+                        .GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult.InterfacesNoUseSiteDiagnostics()
@@ -7365,9 +7349,9 @@ class Test1 : I1
                 // (7,9): error CS8501: Target runtime doesn't support default interface implementation.
                 //         remove {}
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                        "remove"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                    "remove"
+                )
                     .WithLocation(7, 9)
             );
 
@@ -7392,17 +7376,17 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.E7.remove' cannot implement interface member 'I1.E7.remove' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.E7.remove", "I1.E7.remove", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8502: 'I1.E7.add' cannot implement interface member 'I1.E7.add' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.E7.add", "I1.E7.add", "Test2")
                     .WithLocation(2, 15)
             );
@@ -7482,17 +7466,17 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.E7.remove' cannot implement interface member 'I1.E7.remove' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.E7.remove", "I1.E7.remove", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8502: 'I1.E7.add' cannot implement interface member 'I1.E7.add' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.E7.add", "I1.E7.add", "Test2")
                     .WithLocation(2, 15)
             );
@@ -7604,9 +7588,9 @@ class Test1 : I1
                 // (7,9): error CS8701: Target runtime doesn't support default interface implementation.
                 //         remove {}
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                        "remove"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                    "remove"
+                )
                     .WithLocation(7, 9)
             );
 
@@ -7631,9 +7615,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.E7.remove' cannot implement interface member 'I1.E7.remove' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.E7.remove",
                         "I1.E7.remove",
@@ -7646,17 +7630,17 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.E7.remove' cannot implement interface member 'I1.E7.remove' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.E7.remove", "I1.E7.remove", "Test2")
                     .WithLocation(2, 15),
                 // (2,15): error CS8506: 'I1.E7.add' cannot implement interface member 'I1.E7.add' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.E7.add",
                         "I1.E7.add",
@@ -7669,9 +7653,9 @@ class Test2 : I1
                 // (2,15): error CS8502: 'I1.E7.add' cannot implement interface member 'I1.E7.add' in type 'Test2' because the target runtime doesn't support default interface implementation.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.E7.add", "I1.E7.add", "Test2")
                     .WithLocation(2, 15)
             );
@@ -7763,9 +7747,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.E7.remove' cannot implement interface member 'I1.E7.remove' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.E7.remove",
                         "I1.E7.remove",
@@ -7778,9 +7762,9 @@ class Test2 : I1
                 // (2,15): error CS8506: 'I1.E7.add' cannot implement interface member 'I1.E7.add' in type 'Test2' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test2 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.E7.add",
                         "I1.E7.add",
@@ -8827,16 +8811,16 @@ public interface I1
                 // (5,20): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected void M02();
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "M02"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "M02"
+                )
                     .WithLocation(5, 20),
                 // (6,29): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected internal void M03();
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "M03"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "M03"
+                )
                     .WithLocation(6, 29),
                 // (8,18): error CS0501: 'I1.M05()' must declare a body because it is not marked abstract, extern, or partial
                 //     private void M05();
@@ -8878,9 +8862,9 @@ public interface I1
                 // (16,28): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     private protected void M13();
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "M13"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "M13"
+                )
                     .WithLocation(16, 28)
             );
 
@@ -9592,9 +9576,8 @@ class Test2 : I1
             var m1 = i1.GetMember<MethodSymbol>("M1");
 
             ValidateMethodModifiers_10(m1, accessibility);
-            var implementation = (
-                implementedByBase ? test1.BaseTypeNoUseSiteDiagnostics : test1
-            ).GetMember<MethodSymbol>((isExplicit ? "I1." : "") + "M1");
+            var implementation = (implementedByBase ? test1.BaseTypeNoUseSiteDiagnostics : test1)
+                .GetMember<MethodSymbol>((isExplicit ? "I1." : "") + "M1");
             Assert.NotNull(implementation);
             Assert.Same(implementation, test1.FindImplementationForInterfaceMember(m1));
 
@@ -11885,25 +11868,25 @@ public partial interface I1
                 // (5,32): error CS8793: Partial method 'I1.M2()' must have an implementation part because it has accessibility modifiers.
                 //     public static partial void M2();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M2"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M2"
+                )
                     .WithArguments("I1.M2()")
                     .WithLocation(5, 32),
                 // (6,34): error CS8793: Partial method 'I1.M3()' must have an implementation part because it has accessibility modifiers.
                 //     internal static partial void M3();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M3"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M3"
+                )
                     .WithArguments("I1.M3()")
                     .WithLocation(6, 34),
                 // (7,33): error CS8793: Partial method 'I1.M4()' must have an implementation part because it has accessibility modifiers.
                 //     private static partial void M4();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M4"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M4"
+                )
                     .WithArguments("I1.M4()")
                     .WithLocation(7, 33),
                 // (8,25): error CS8795: Partial method 'I1.M5(out int)' must have accessibility modifiers because it has 'out' parameters.
@@ -11950,25 +11933,25 @@ public partial interface I1
                 // (23,35): error CS8793: Partial method 'I1.M11()' must have an implementation part because it has accessibility modifiers.
                 //     protected static partial void M11();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M11"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M11"
+                )
                     .WithArguments("I1.M11()")
                     .WithLocation(23, 35),
                 // (24,44): error CS8793: Partial method 'I1.M12()' must have an implementation part because it has accessibility modifiers.
                 //     protected internal static partial void M12();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M12"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M12"
+                )
                     .WithArguments("I1.M12()")
                     .WithLocation(24, 44),
                 // (25,43): error CS8793: Partial method 'I1.M13()' must have an implementation part because it has accessibility modifiers.
                 //     private protected static partial void M13();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M13"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M13"
+                )
                     .WithArguments("I1.M13()")
                     .WithLocation(25, 43)
             );
@@ -11989,25 +11972,25 @@ public partial interface I1
                 // (5,32): error CS8793: Partial method 'I1.M2()' must have an implementation part because it has accessibility modifiers.
                 //     public static partial void M2();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M2"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M2"
+                )
                     .WithArguments("I1.M2()")
                     .WithLocation(5, 32),
                 // (6,34): error CS8793: Partial method 'I1.M3()' must have an implementation part because it has accessibility modifiers.
                 //     internal static partial void M3();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M3"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M3"
+                )
                     .WithArguments("I1.M3()")
                     .WithLocation(6, 34),
                 // (7,33): error CS8793: Partial method 'I1.M4()' must have an implementation part because it has accessibility modifiers.
                 //     private static partial void M4();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M4"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M4"
+                )
                     .WithArguments("I1.M4()")
                     .WithLocation(7, 33),
                 // (8,25): error CS8795: Partial method 'I1.M5(out int)' must have accessibility modifiers because it has 'out' parameters.
@@ -12074,25 +12057,25 @@ public partial interface I1
                 // (23,35): error CS8793: Partial method 'I1.M11()' must have an implementation part because it has accessibility modifiers.
                 //     protected static partial void M11();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M11"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M11"
+                )
                     .WithArguments("I1.M11()")
                     .WithLocation(23, 35),
                 // (24,44): error CS8793: Partial method 'I1.M12()' must have an implementation part because it has accessibility modifiers.
                 //     protected internal static partial void M12();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M12"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M12"
+                )
                     .WithArguments("I1.M12()")
                     .WithLocation(24, 44),
                 // (25,43): error CS8793: Partial method 'I1.M13()' must have an implementation part because it has accessibility modifiers.
                 //     private protected static partial void M13();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M13"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M13"
+                )
                     .WithArguments("I1.M13()")
                     .WithLocation(25, 43)
             );
@@ -12187,7 +12170,8 @@ interface I2
                 Diagnostic(ErrorCode.ERR_PartialMethodNotExplicit, "M7").WithLocation(19, 21),
                 // (25,18): error CS0751: A partial method must be declared within a partial type
                 //     partial void M8();
-                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M8").WithLocation(25, 18)
+                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M8")
+                    .WithLocation(25, 18)
             );
         }
 
@@ -14628,16 +14612,16 @@ public interface I1
                 // (5,19): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected int P02 {get;}
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "P02"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "P02"
+                )
                     .WithLocation(5, 19),
                 // (6,28): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected internal int P03 {set;}
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "P03"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "P03"
+                )
                     .WithLocation(6, 28),
                 // (8,22): error CS0501: 'I1.P05.set' must declare a body because it is not marked abstract, extern, or partial
                 //     private int P05 {set;}
@@ -14689,16 +14673,16 @@ public interface I1
                 // (17,30): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     int P13 { get; protected set;}
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "set"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "set"
+                )
                     .WithLocation(17, 30),
                 // (18,34): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     int P14 { protected internal get; set;}
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "get"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "get"
+                )
                     .WithLocation(18, 34),
                 // (20,23): error CS0442: 'I1.P16.get': abstract properties cannot have private accessors
                 //     int P16 { private get; set;}
@@ -14713,16 +14697,16 @@ public interface I1
                 // (23,27): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     private protected int P18 {get;}
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "P18"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "P18"
+                )
                     .WithLocation(23, 27),
                 // (24,38): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     int P19 { get; private protected set;}
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "set"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "set"
+                )
                     .WithLocation(24, 38)
             );
 
@@ -15328,9 +15312,9 @@ set_P8",
                 // (37,31): error CS8701: Target runtime doesn't support default interface implementation.
                 //     internal static int P4 => Test1.GetP4();
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                        "Test1.GetP4()"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                    "Test1.GetP4()"
+                )
                     .WithLocation(37, 31),
                 // (41,9): error CS8701: Target runtime doesn't support default interface implementation.
                 //         get
@@ -16375,7 +16359,9 @@ class Test1 : I1
                 TargetFramework.Standard,
                 // (9,12): error CS0122: 'I1.P1' is inaccessible due to its protection level
                 //     int I1.P1
-                Diagnostic(ErrorCode.ERR_BadAccess, "P1").WithArguments("I1.P1").WithLocation(9, 12)
+                Diagnostic(ErrorCode.ERR_BadAccess, "P1")
+                    .WithArguments("I1.P1")
+                    .WithLocation(9, 12)
             );
         }
 
@@ -19908,9 +19894,8 @@ set_P6
                     var compilation3 = CreateCompilation(
                         source2,
                         new[] { reference },
-                        options: TestOptions.DebugExe.WithMetadataImportOptions(
-                            metadataImportOptions
-                        ),
+                        options: TestOptions.DebugExe
+                            .WithMetadataImportOptions(metadataImportOptions),
                         parseOptions: TestOptions.Regular,
                         targetFramework: TargetFramework.NetCoreApp
                     );
@@ -22677,7 +22662,9 @@ class Test1 : I1
                 TargetFramework.NetCoreApp,
                 // (9,12): error CS0122: 'I1.P1' is inaccessible due to its protection level
                 //     int I1.P1
-                Diagnostic(ErrorCode.ERR_BadAccess, "P1").WithArguments("I1.P1").WithLocation(9, 12)
+                Diagnostic(ErrorCode.ERR_BadAccess, "P1")
+                    .WithArguments("I1.P1")
+                    .WithLocation(9, 12)
             );
         }
 
@@ -23906,16 +23893,16 @@ public interface I19{ int this[int x] { get; private protected set;} }
                 // (3,37): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 // public interface I02{ protected int this[int x] {get;} }
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "this"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "this"
+                )
                     .WithLocation(3, 37),
                 // (4,46): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 // public interface I03{ protected internal int this[int x] {set;} }
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "this"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "this"
+                )
                     .WithLocation(4, 46),
                 // (6,48): error CS0501: 'I05.this[int].set' must declare a body because it is not marked abstract, extern, or partial
                 // public interface I05{ private int this[int x] {set;} }
@@ -23968,16 +23955,16 @@ public interface I19{ int this[int x] { get; private protected set;} }
                 // (15,56): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 // public interface I13{ int this[int x] { get; protected set;} }
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "set"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "set"
+                )
                     .WithLocation(15, 56),
                 // (16,60): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 // public interface I14{ int this[int x] { protected internal get; set;} }
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "get"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "get"
+                )
                     .WithLocation(16, 60),
                 // (18,49): error CS0442: 'I16.this[int].get': abstract properties cannot have private accessors
                 // public interface I16{ int this[int x] { private get; set;} }
@@ -23992,16 +23979,16 @@ public interface I19{ int this[int x] { get; private protected set;} }
                 // (21,45): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 // public interface I18{ private protected int this[int x] { get; } }
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "this"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "this"
+                )
                     .WithLocation(21, 45),
                 // (22,64): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 // public interface I19{ int this[int x] { get; private protected set;} }
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "set"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "set"
+                )
                     .WithLocation(22, 64)
             );
 
@@ -29356,65 +29343,65 @@ public interface I1
                     // (5,35): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //     protected event System.Action P02 {add{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "P02"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "P02"
+                    )
                         .WithLocation(5, 35),
                     // (5,40): error CS8701: Target runtime doesn't support default interface implementation.
                     //     protected event System.Action P02 {add{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "add"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "add"
+                    )
                         .WithLocation(5, 40),
                     // (6,44): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //     protected internal event System.Action P03 {remove{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "P03"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "P03"
+                    )
                         .WithLocation(6, 44),
                     // (6,49): error CS8701: Target runtime doesn't support default interface implementation.
                     //     protected internal event System.Action P03 {remove{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "remove"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "remove"
+                    )
                         .WithLocation(6, 49),
                     // (7,39): error CS8701: Target runtime doesn't support default interface implementation.
                     //     internal event System.Action P04 {add{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "add"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "add"
+                    )
                         .WithLocation(7, 39),
                     // (8,38): error CS8701: Target runtime doesn't support default interface implementation.
                     //     private event System.Action P05 {remove{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "remove"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "remove"
+                    )
                         .WithLocation(8, 38),
                     // (9,37): error CS8701: Target runtime doesn't support default interface implementation.
                     //     static event System.Action P06 {add{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "add"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "add"
+                    )
                         .WithLocation(9, 37),
                     // (10,38): error CS8701: Target runtime doesn't support default interface implementation.
                     //     virtual event System.Action P07 {remove{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "remove"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "remove"
+                    )
                         .WithLocation(10, 38),
                     // (11,37): error CS8701: Target runtime doesn't support default interface implementation.
                     //     sealed event System.Action P08 {add{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "add"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "add"
+                    )
                         .WithLocation(11, 37),
                     // (12,34): error CS0106: The modifier 'override' is not valid for this item
                     //     override event System.Action P09 {remove{}}
@@ -29424,16 +29411,16 @@ public interface I1
                     // (12,39): error CS8701: Target runtime doesn't support default interface implementation.
                     //     override event System.Action P09 {remove{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "remove"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "remove"
+                    )
                         .WithLocation(12, 39),
                     // (13,39): error CS8701: Target runtime doesn't support default interface implementation.
                     //     abstract event System.Action P10 {add{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "add"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "add"
+                    )
                         .WithLocation(13, 39),
                     // (13,38): error CS8712: 'I1.P10': abstract event cannot use event accessor syntax
                     //     abstract event System.Action P10 {add{}}
@@ -29443,9 +29430,9 @@ public interface I1
                     // (14,37): error CS8701: Target runtime doesn't support default interface implementation.
                     //     extern event System.Action P11 {add{} remove{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "add"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "add"
+                    )
                         .WithLocation(14, 37),
                     // (14,37): error CS0179: 'I1.P11.add' cannot be extern and declare a body
                     //     extern event System.Action P11 {add{} remove{}}
@@ -29455,9 +29442,9 @@ public interface I1
                     // (14,43): error CS8701: Target runtime doesn't support default interface implementation.
                     //     extern event System.Action P11 {add{} remove{}}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "remove"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "remove"
+                    )
                         .WithLocation(14, 43),
                     // (14,43): error CS0179: 'I1.P11.remove' cannot be extern and declare a body
                     //     extern event System.Action P11 {add{} remove{}}
@@ -29467,9 +29454,9 @@ public interface I1
                     // (15,37): error CS8701: Target runtime doesn't support default interface implementation.
                     //     extern event System.Action P12 {add; remove;}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "add"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "add"
+                    )
                         .WithLocation(15, 37),
                     // (15,37): warning CS0626: Method, operator, or accessor 'I1.P12.add' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
                     //     extern event System.Action P12 {add; remove;}
@@ -29482,9 +29469,9 @@ public interface I1
                     // (15,42): error CS8701: Target runtime doesn't support default interface implementation.
                     //     extern event System.Action P12 {add; remove;}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "remove"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "remove"
+                    )
                         .WithLocation(15, 42),
                     // (15,42): warning CS0626: Method, operator, or accessor 'I1.P12.remove' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
                     //     extern event System.Action P12 {add; remove;}
@@ -29497,9 +29484,9 @@ public interface I1
                     // (16,32): error CS8701: Target runtime doesn't support default interface implementation.
                     //     extern event System.Action P13;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "P13"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "P13"
+                    )
                         .WithLocation(16, 32),
                     // (16,32): warning CS0626: Method, operator, or accessor 'I1.P13.remove' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
                     //     extern event System.Action P13;
@@ -29509,23 +29496,23 @@ public interface I1
                     // (17,43): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //     private protected event System.Action P14;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "P14"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "P14"
+                    )
                         .WithLocation(17, 43),
                     // (18,35): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //     protected event System.Action P15;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "P15"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "P15"
+                    )
                         .WithLocation(18, 35),
                     // (19,44): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //     protected internal event System.Action P16;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "P16"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "P16"
+                    )
                         .WithLocation(19, 44)
                 );
 
@@ -30235,9 +30222,9 @@ class Test1 : I1
                 // (9,9): error CS8701: Target runtime doesn't support default interface implementation.
                 //         remove;
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                        "remove"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                    "remove"
+                )
                     .WithLocation(9, 9),
                 // (9,15): error CS0073: An add or remove accessor must have a body
                 //         remove;
@@ -31133,7 +31120,9 @@ class Test1 : I1
                 TargetFramework.Standard,
                 // (9,28): error CS0122: 'I1.P1' is inaccessible due to its protection level
                 //     event System.Action I1.P1
-                Diagnostic(ErrorCode.ERR_BadAccess, "P1").WithArguments("I1.P1").WithLocation(9, 28)
+                Diagnostic(ErrorCode.ERR_BadAccess, "P1")
+                    .WithArguments("I1.P1")
+                    .WithLocation(9, 28)
             );
         }
 
@@ -32984,9 +32973,9 @@ class Test2 : I1, I2, I3, I4, I5
                 // (27,9): error CS8701: Target runtime doesn't support default interface implementation.
                 //         remove => throw null;
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                        "remove"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                    "remove"
+                )
                     .WithLocation(27, 9)
             );
 
@@ -33787,7 +33776,9 @@ class Test2
                     .WithLocation(8, 12),
                 // (9,12): error CS0122: 'I1.P2' is inaccessible due to its protection level
                 //         I1.P2 -= null;
-                Diagnostic(ErrorCode.ERR_BadAccess, "P2").WithArguments("I1.P2").WithLocation(9, 12)
+                Diagnostic(ErrorCode.ERR_BadAccess, "P2")
+                    .WithArguments("I1.P2")
+                    .WithLocation(9, 12)
             );
         }
 
@@ -34399,7 +34390,9 @@ class Test1 : I1
                 TargetFramework.NetCoreApp,
                 // (9,28): error CS0122: 'I1.P1' is inaccessible due to its protection level
                 //     event System.Action I1.P1
-                Diagnostic(ErrorCode.ERR_BadAccess, "P1").WithArguments("I1.P1").WithLocation(9, 28)
+                Diagnostic(ErrorCode.ERR_BadAccess, "P1")
+                    .WithArguments("I1.P1")
+                    .WithLocation(9, 28)
             );
         }
 
@@ -34812,37 +34805,37 @@ class Test1 : I1
                 // (4,25): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected interface T1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T1"
+                )
                     .WithLocation(4, 25),
                 // (9,21): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected class T2
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T2"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T2"
+                )
                     .WithLocation(9, 21),
                 // (12,22): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected struct T3
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T3"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T3"
+                )
                     .WithLocation(12, 22),
                 // (15,20): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected enum T4
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T4"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T4"
+                )
                     .WithLocation(15, 20),
                 // (20,29): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected delegate void T5();
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T5"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T5"
+                )
                     .WithLocation(20, 29)
             );
 
@@ -35080,37 +35073,37 @@ class Test1
                 // (4,34): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected internal interface T1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T1"
+                )
                     .WithLocation(4, 34),
                 // (9,30): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected internal class T2
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T2"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T2"
+                )
                     .WithLocation(9, 30),
                 // (12,31): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected internal struct T3
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T3"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T3"
+                )
                     .WithLocation(12, 31),
                 // (15,29): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected internal enum T4
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T4"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T4"
+                )
                     .WithLocation(15, 29),
                 // (20,38): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     protected internal delegate void T5();
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T5"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T5"
+                )
                     .WithLocation(20, 38)
             );
 
@@ -35548,37 +35541,37 @@ class Test1
                 // (4,33): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     private protected interface T1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T1"
+                )
                     .WithLocation(4, 33),
                 // (9,29): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     private protected class T2
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T2"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T2"
+                )
                     .WithLocation(9, 29),
                 // (12,30): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     private protected struct T3
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T3"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T3"
+                )
                     .WithLocation(12, 30),
                 // (15,28): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     private protected enum T4
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T4"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T4"
+                )
                     .WithLocation(15, 28),
                 // (20,37): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                 //     private protected delegate void T5();
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                        "T5"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                    "T5"
+                )
                     .WithLocation(20, 37)
             );
 
@@ -36125,13 +36118,14 @@ I4.M1
             if (m1.ContainingModule is PEModuleSymbol peModule)
             {
                 int rva;
-                peModule.Module.GetMethodDefPropsOrThrow(
-                    ((PEMethodSymbol)m1.OriginalDefinition).Handle,
-                    out _,
-                    out _,
-                    out _,
-                    out rva
-                );
+                peModule.Module
+                    .GetMethodDefPropsOrThrow(
+                        ((PEMethodSymbol)m1.OriginalDefinition).Handle,
+                        out _,
+                        out _,
+                        out _,
+                        out rva
+                    );
                 Assert.NotEqual(0, rva);
             }
         }
@@ -36216,9 +36210,9 @@ class Test1 : I1
                 // (6,15): error CS8506: 'I1.I2.M1()' cannot implement interface member 'I2.M1()' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.I2.M1()",
                         "I2.M1()",
@@ -36231,9 +36225,9 @@ class Test1 : I1
                 // (6,15): error CS8506: 'I1.I4.M1()' cannot implement interface member 'I4.M1()' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.I4.M1()",
                         "I4.M1()",
@@ -36328,17 +36322,17 @@ class Test1 : I1
                 // (6,15): error CS8502: 'I1.I2.M1()' cannot implement interface member 'I2.M1()' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I2.M1()", "I2.M1()", "Test1")
                     .WithLocation(6, 15),
                 // (6,15): error CS8502: 'I1.I4.M1()' cannot implement interface member 'I4.M1()' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I4.M1()", "I4.M1()", "Test1")
                     .WithLocation(6, 15)
             );
@@ -36824,13 +36818,14 @@ class Test1 : I1
             if (m1.ContainingModule is PEModuleSymbol peModule)
             {
                 int rva;
-                peModule.Module.GetMethodDefPropsOrThrow(
-                    ((PEMethodSymbol)m1).Handle,
-                    out _,
-                    out _,
-                    out _,
-                    out rva
-                );
+                peModule.Module
+                    .GetMethodDefPropsOrThrow(
+                        ((PEMethodSymbol)m1).Handle,
+                        out _,
+                        out _,
+                        out _,
+                        out rva
+                    );
                 Assert.Equal(0, rva);
             }
         }
@@ -36931,13 +36926,14 @@ class Test1 : I1
                 if (m1.ContainingModule is PEModuleSymbol peModule)
                 {
                     int rva;
-                    peModule.Module.GetMethodDefPropsOrThrow(
-                        ((PEMethodSymbol)m1).Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    peModule.Module
+                        .GetMethodDefPropsOrThrow(
+                            ((PEMethodSymbol)m1).Handle,
+                            out _,
+                            out _,
+                            out _,
+                            out rva
+                        );
                     Assert.NotEqual(0, rva);
                 }
             }
@@ -37768,35 +37764,35 @@ class Test2 : I2<long>
                     m.ContainingAssembly.GetSpecialType(SpecialType.System_Int32)
                 );
                 var test1i1m1 = i1.Construct(
-                        m.ContainingAssembly.GetSpecialType(SpecialType.System_Int32)
-                    )
+                    m.ContainingAssembly.GetSpecialType(SpecialType.System_Int32)
+                )
                     .GetMember<MethodSymbol>("M1");
                 var test1i1m2 = i1.Construct(
-                        m.ContainingAssembly.GetSpecialType(SpecialType.System_Int32)
-                    )
+                    m.ContainingAssembly.GetSpecialType(SpecialType.System_Int32)
+                )
                     .GetMember<MethodSymbol>("M2");
                 var test2 = m.GlobalNamespace.GetTypeMember("Test2");
                 var test2i1 = i1.Construct(
                     m.ContainingAssembly.GetSpecialType(SpecialType.System_Int64)
                 );
                 var test2i1m1 = i1.Construct(
-                        m.ContainingAssembly.GetSpecialType(SpecialType.System_Int64)
-                    )
+                    m.ContainingAssembly.GetSpecialType(SpecialType.System_Int64)
+                )
                     .GetMember<MethodSymbol>("M1");
                 var test2i1m2 = i1.Construct(
-                        m.ContainingAssembly.GetSpecialType(SpecialType.System_Int64)
-                    )
+                    m.ContainingAssembly.GetSpecialType(SpecialType.System_Int64)
+                )
                     .GetMember<MethodSymbol>("M2");
                 var test2i2 = i2.Construct(
                     m.ContainingAssembly.GetSpecialType(SpecialType.System_Int64)
                 );
                 var test2i2m1 = i2.Construct(
-                        m.ContainingAssembly.GetSpecialType(SpecialType.System_Int64)
-                    )
+                    m.ContainingAssembly.GetSpecialType(SpecialType.System_Int64)
+                )
                     .GetMember<MethodSymbol>("I1<T>.M1");
                 var test2i2m2 = i2.Construct(
-                        m.ContainingAssembly.GetSpecialType(SpecialType.System_Int64)
-                    )
+                    m.ContainingAssembly.GetSpecialType(SpecialType.System_Int64)
+                )
                     .GetMember<MethodSymbol>("I1<T>.M2");
 
                 Assert.NotSame(test1i1, test1i1m1.ContainingType);
@@ -37947,9 +37943,9 @@ class Test1 : I2, I3
                 // (2,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                 // class Test1 : I2, I3
                 Diagnostic(
-                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                        "Test1"
-                    )
+                    ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                    "Test1"
+                )
                     .WithArguments("I1<string?>", "Test1")
                     .WithLocation(2, 7),
                 // (2,15): error CS8705: Interface member 'I1<string>.M1()' does not have a most specific implementation. Neither 'I2.I1<string>.M1()', nor 'I3.I1<string?>.M1()' are most specific.
@@ -37994,9 +37990,9 @@ class Test1 : I2, I3
                 // (2,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                 // class Test1 : I2, I3
                 Diagnostic(
-                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                        "Test1"
-                    )
+                    ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                    "Test1"
+                )
                     .WithArguments("I1<string?>", "Test1")
                     .WithLocation(2, 7),
                 // (2,15): error CS8705: Interface member 'I1<string>.M1()' does not have a most specific implementation. Neither 'I2.I1<string>.M1()', nor 'I3.I1<string>.M1()' are most specific.
@@ -38083,9 +38079,9 @@ class Test1 : I2, I3, I1<string>
                 // (2,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                 // class Test1 : I2, I3, I1<string>
                 Diagnostic(
-                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                        "Test1"
-                    )
+                    ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                    "Test1"
+                )
                     .WithArguments("I1<string?>", "Test1")
                     .WithLocation(2, 7),
                 // (2,15): error CS8705: Interface member 'I1<string>.M1()' does not have a most specific implementation. Neither 'I2.I1<string>.M1()', nor 'I3.I1<string?>.M1()' are most specific.
@@ -38147,9 +38143,9 @@ class Test1 : I2, I3, I1<string>
                 // (2,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                 // class Test1 : I2, I3, I1<string>
                 Diagnostic(
-                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                        "Test1"
-                    )
+                    ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                    "Test1"
+                )
                     .WithArguments("I1<string?>", "Test1")
                     .WithLocation(2, 7),
                 // (2,15): error CS8705: Interface member 'I1<string>.M1()' does not have a most specific implementation. Neither 'I2.I1<string>.M1()', nor 'I3.I1<string>.M1()' are most specific.
@@ -38412,9 +38408,9 @@ class Test1 : I2, I3, I1<string?>
                 // (4,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                 // class Test1 : I2, I3, I1<string?>
                 Diagnostic(
-                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                        "Test1"
-                    )
+                    ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                    "Test1"
+                )
                     .WithArguments("I1<string?>", "Test1")
                     .WithLocation(4, 7),
                 // (4,15): error CS8705: Interface member 'I1<string>.M1()' does not have a most specific implementation. Neither 'I2.I1<string>.M1()', nor 'I3.I1<string?>.M1()' are most specific.
@@ -38459,9 +38455,9 @@ class Test1 : I2, I3, I1<string?>
                 // (4,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                 // class Test1 : I2, I3, I1<string?>
                 Diagnostic(
-                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                        "Test1"
-                    )
+                    ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                    "Test1"
+                )
                     .WithArguments("I1<string?>", "Test1")
                     .WithLocation(4, 7),
                 // (4,15): error CS8705: Interface member 'I1<string>.M1()' does not have a most specific implementation. Neither 'I2.I1<string>.M1()', nor 'I3.I1<string>.M1()' are most specific.
@@ -38568,9 +38564,9 @@ class Test1 : I3
                 // (4,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                 // class Test1 : I3
                 Diagnostic(
-                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                        "Test1"
-                    )
+                    ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                    "Test1"
+                )
                     .WithArguments("I1<string?>", "Test1")
                     .WithLocation(4, 7),
                 // (4,15): error CS0535: 'Test1' does not implement interface member 'I1<string>.M1()'
@@ -38680,15 +38676,15 @@ class Test1 : I2, I3
                 Assert.Equal(
                     "void I3.I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "void I3.I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[3].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[3].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
 
@@ -38696,9 +38692,9 @@ class Test1 : I2, I3
                     // (4,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I2, I3
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I1<string?>", "Test1")
                         .WithLocation(4, 7),
                     // (4,15): warning CS8644: 'Test1' does not implement interface member 'I1<string>.M1()'. Nullability of reference types in interface implemented by the base type doesn't match.
@@ -38797,15 +38793,15 @@ class Test1 : I3, I2
                 Assert.Equal(
                     "void I3.I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "void I3.I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[3].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[3].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
 
@@ -38813,9 +38809,9 @@ class Test1 : I3, I2
                     // (4,7): warning CS8645: 'I1<string>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I3, I2
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I1<string>", "Test1")
                         .WithLocation(4, 7),
                     // (4,19): warning CS8644: 'Test1' does not implement interface member 'I1<string>.M1()'. Nullability of reference types in interface implemented by the base type doesn't match.
@@ -38926,15 +38922,15 @@ class Test1 : I3, I4
                 Assert.Equal(
                     "void I2<System.String?>.I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[2].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[2].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "void I2<System.String?>.I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[5].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[5].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
 
@@ -38942,17 +38938,17 @@ class Test1 : I3, I4
                     // (4,7): warning CS8645: 'I2<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I3, I4
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I2<string?>", "Test1")
                         .WithLocation(4, 7),
                     // (4,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I3, I4
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I1<string?>", "Test1")
                         .WithLocation(4, 7)
                 );
@@ -39058,15 +39054,15 @@ class Test1 : I4, I3
                 Assert.Equal(
                     "void I2<System.String>.I1<System.String>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[2].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[2].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "void I2<System.String>.I1<System.String>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[5].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[5].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
 
@@ -39074,17 +39070,17 @@ class Test1 : I4, I3
                     // (4,7): warning CS8645: 'I2<string>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I4, I3
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I2<string>", "Test1")
                         .WithLocation(4, 7),
                     // (4,7): warning CS8645: 'I1<string>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I4, I3
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I1<string>", "Test1")
                         .WithLocation(4, 7)
                 );
@@ -39147,9 +39143,9 @@ class Test1 : I2
                 // (11,10): warning CS8643: Nullability of reference types in explicit interface specifier doesn't match interface implemented by the type.
                 //     void I1<string?>.M1()
                 Diagnostic(
-                        ErrorCode.WRN_NullabilityMismatchInExplicitlyImplementedInterface,
-                        "I1<string?>"
-                    )
+                    ErrorCode.WRN_NullabilityMismatchInExplicitlyImplementedInterface,
+                    "I1<string?>"
+                )
                     .WithLocation(11, 10)
             );
 
@@ -39179,8 +39175,8 @@ class Test1 : I2
                 Assert.Equal(
                     "void I2.I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[1].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
 
@@ -39262,17 +39258,17 @@ class Test1 : I2, I1<string?>
                     // (4,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I2, I1<string?>
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I1<string?>", "Test1")
                         .WithLocation(4, 7),
                     // (4,19): warning CS8644: 'Test1' does not implement interface member 'I1<string?>.M1()'. Nullability of reference types in interface implemented by the base type doesn't match.
                     // class Test1 : I2, I1<string?>
                     Diagnostic(
-                            ErrorCode.WRN_NullabilityMismatchInInterfaceImplementedByBase,
-                            "I1<string?>"
-                        )
+                        ErrorCode.WRN_NullabilityMismatchInInterfaceImplementedByBase,
+                        "I1<string?>"
+                    )
                         .WithArguments("Test1", "I1<string?>.M1()")
                         .WithLocation(4, 19)
                 );
@@ -39335,9 +39331,9 @@ class Test1 : I2, I1<string?>
                 // (11,10): warning CS8643: Nullability of reference types in explicit interface specifier doesn't match interface implemented by the type.
                 //     void I1<string>.M1()
                 Diagnostic(
-                        ErrorCode.WRN_NullabilityMismatchInExplicitlyImplementedInterface,
-                        "I1<string>"
-                    )
+                    ErrorCode.WRN_NullabilityMismatchInExplicitlyImplementedInterface,
+                    "I1<string>"
+                )
                     .WithLocation(11, 10)
             );
 
@@ -39466,15 +39462,15 @@ class Test1 : I2<string>, I3<string>, I4
                 Assert.Equal(
                     "void I4.I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[2].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[2].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "void I4.I1<System.String?>.M1()",
                     test1.FindImplementationForInterfaceMember(
-                            test1.AllInterfacesNoUseSiteDiagnostics[6].GetMember("M1")
-                        )
+                        test1.AllInterfacesNoUseSiteDiagnostics[6].GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
 
@@ -39482,33 +39478,33 @@ class Test1 : I2<string>, I3<string>, I4
                     // (4,7): warning CS8645: 'I2<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I2<string>, I3<string>, I4
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I2<string?>", "Test1")
                         .WithLocation(4, 7),
                     // (4,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I2<string>, I3<string>, I4
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I1<string?>", "Test1")
                         .WithLocation(4, 7),
                     // (4,7): warning CS8645: 'I3<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                     // class Test1 : I2<string>, I3<string>, I4
                     Diagnostic(
-                            ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                            "Test1"
-                        )
+                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                        "Test1"
+                    )
                         .WithArguments("I3<string?>", "Test1")
                         .WithLocation(4, 7),
                     // (4,15): warning CS8644: 'Test1' does not implement interface member 'I1<string>.M1()'. Nullability of reference types in interface implemented by the base type doesn't match.
                     // class Test1 : I2<string>, I3<string>, I4
                     Diagnostic(
-                            ErrorCode.WRN_NullabilityMismatchInInterfaceImplementedByBase,
-                            "I2<string>"
-                        )
+                        ErrorCode.WRN_NullabilityMismatchInInterfaceImplementedByBase,
+                        "I2<string>"
+                    )
                         .WithArguments("Test1", "I1<string>.M1()")
                         .WithLocation(4, 15)
                 );
@@ -40401,9 +40397,9 @@ class Test1 : I1
                 // (6,15): error CS8506: 'I1.I2.M1.get' cannot implement interface member 'I2.M1.get' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.I2.M1.get",
                         "I2.M1.get",
@@ -40416,9 +40412,9 @@ class Test1 : I1
                 // (6,15): error CS8506: 'I1.I4.M1.set' cannot implement interface member 'I4.M1.set' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.I4.M1.set",
                         "I4.M1.set",
@@ -40526,47 +40522,47 @@ class Test1 : I1
                     // (16,9): error CS8501: Target runtime doesn't support default interface implementation.
                     //         get
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "get"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "get"
+                    )
                         .WithLocation(16, 9),
                     // (21,9): error CS8501: Target runtime doesn't support default interface implementation.
                     //         set
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "set"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "set"
+                    )
                         .WithLocation(21, 9),
                     // (29,9): error CS8501: Target runtime doesn't support default interface implementation.
                     //         set
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "set"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "set"
+                    )
                         .WithLocation(29, 9)
                 },
                 // (6,15): error CS8502: 'I1.I2.M1.set' cannot implement interface member 'I2.M1.set' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I2.M1.set", "I2.M1.set", "Test1")
                     .WithLocation(6, 15),
                 // (6,15): error CS8502: 'I1.I2.M1.get' cannot implement interface member 'I2.M1.get' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I2.M1.get", "I2.M1.get", "Test1")
                     .WithLocation(6, 15),
                 // (6,15): error CS8502: 'I1.I4.M1.set' cannot implement interface member 'I4.M1.set' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I4.M1.set", "I4.M1.set", "Test1")
                     .WithLocation(6, 15)
             );
@@ -41030,9 +41026,9 @@ class Test1 : I1
                     // (9,23): error CS8501: Target runtime doesn't support default interface implementation.
                     //     extern int I2.M1 {get;}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "get"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "get"
+                    )
                         .WithLocation(9, 23),
                     // (9,23): warning CS0626: Method, operator, or accessor 'I1.I2.M1.get' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
                     //     extern int I2.M1 {get;}
@@ -42562,9 +42558,9 @@ class Test1 : I3
                 // (4,7): warning CS8645: 'I1<string?>' is already listed in the interface list on type 'Test1' with different nullability of reference types.
                 // class Test1 : I3
                 Diagnostic(
-                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
-                        "Test1"
-                    )
+                    ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                    "Test1"
+                )
                     .WithArguments("I1<string?>", "Test1")
                     .WithLocation(4, 7),
                 // (4,15): error CS0535: 'Test1' does not implement interface member 'I1<string>.M1'
@@ -43185,9 +43181,9 @@ class Test1 : I1
                 // (6,15): error CS8506: 'I1.I2.M1.remove' cannot implement interface member 'I2.M1.remove' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.I2.M1.remove",
                         "I2.M1.remove",
@@ -43200,9 +43196,9 @@ class Test1 : I1
                 // (6,15): error CS8506: 'I1.I2.M1.add' cannot implement interface member 'I2.M1.add' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.I2.M1.add",
                         "I2.M1.add",
@@ -43215,9 +43211,9 @@ class Test1 : I1
                 // (6,15): error CS8506: 'I1.I4.M1.remove' cannot implement interface member 'I4.M1.remove' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.I4.M1.remove",
                         "I4.M1.remove",
@@ -43230,9 +43226,9 @@ class Test1 : I1
                 // (6,15): error CS8506: 'I1.I4.M1.add' cannot implement interface member 'I4.M1.add' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.I4.M1.add",
                         "I4.M1.add",
@@ -43302,9 +43298,9 @@ class Test1 : I1
                 // (17,9): error CS8501: Target runtime doesn't support default interface implementation.
                 //         remove => throw null;
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                        "remove"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                    "remove"
+                )
                     .WithLocation(17, 9),
                 // (22,9): error CS8501: Target runtime doesn't support default interface implementation.
                 //         add => throw null;
@@ -43313,9 +43309,9 @@ class Test1 : I1
                 // (23,9): error CS8501: Target runtime doesn't support default interface implementation.
                 //         remove => throw null;
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                        "remove"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                    "remove"
+                )
                     .WithLocation(23, 9)
             );
 
@@ -43344,33 +43340,33 @@ class Test1 : I1
                 // (6,15): error CS8502: 'I1.I2.M1.remove' cannot implement interface member 'I2.M1.remove' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I2.M1.remove", "I2.M1.remove", "Test1")
                     .WithLocation(6, 15),
                 // (6,15): error CS8502: 'I1.I2.M1.add' cannot implement interface member 'I2.M1.add' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I2.M1.add", "I2.M1.add", "Test1")
                     .WithLocation(6, 15),
                 // (6,15): error CS8502: 'I1.I4.M1.remove' cannot implement interface member 'I4.M1.remove' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I4.M1.remove", "I4.M1.remove", "Test1")
                     .WithLocation(6, 15),
                 // (6,15): error CS8502: 'I1.I4.M1.add' cannot implement interface member 'I4.M1.add' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I4.M1.add", "I4.M1.add", "Test1")
                     .WithLocation(6, 15)
             );
@@ -43949,7 +43945,9 @@ I4.M1.remove
             compilation5.VerifyDiagnostics(
                 // (4,28): error CS0122: 'I2.M1' is inaccessible due to its protection level
                 //     event System.Action I2.M1
-                Diagnostic(ErrorCode.ERR_BadAccess, "M1").WithArguments("I2.M1").WithLocation(4, 28)
+                Diagnostic(ErrorCode.ERR_BadAccess, "M1")
+                    .WithArguments("I2.M1")
+                    .WithLocation(4, 28)
             );
 
             var compilation6 = CreateCompilation(
@@ -43965,7 +43963,9 @@ I4.M1.remove
             compilation6.VerifyDiagnostics(
                 // (4,28): error CS0122: 'I2.M1' is inaccessible due to its protection level
                 //     event System.Action I2.M1
-                Diagnostic(ErrorCode.ERR_BadAccess, "M1").WithArguments("I2.M1").WithLocation(4, 28)
+                Diagnostic(ErrorCode.ERR_BadAccess, "M1")
+                    .WithArguments("I2.M1")
+                    .WithLocation(4, 28)
             );
         }
 
@@ -45388,9 +45388,9 @@ class Test1 : I1
                 // (6,15): error CS8506: 'I1.I2.this[int].get' cannot implement interface member 'I2.this[int].get' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.I2.this[int].get",
                         "I2.this[int].get",
@@ -45403,9 +45403,9 @@ class Test1 : I1
                 // (6,15): error CS8506: 'I1.I4.this[int].set' cannot implement interface member 'I4.this[int].set' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_LanguageVersionDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments(
                         "I1.I4.this[int].set",
                         "I4.this[int].set",
@@ -45472,47 +45472,47 @@ class Test1 : I1
                     // (16,9): error CS8501: Target runtime doesn't support default interface implementation.
                     //         get
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "get"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "get"
+                    )
                         .WithLocation(16, 9),
                     // (21,9): error CS8501: Target runtime doesn't support default interface implementation.
                     //         set
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "set"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "set"
+                    )
                         .WithLocation(21, 9),
                     // (29,9): error CS8501: Target runtime doesn't support default interface implementation.
                     //         set
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "set"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "set"
+                    )
                         .WithLocation(29, 9)
                 },
                 // (6,15): error CS8502: 'I1.I2.this[int].set' cannot implement interface member 'I2.this[int].set' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I2.this[int].set", "I2.this[int].set", "Test1")
                     .WithLocation(6, 15),
                 // (6,15): error CS8502: 'I1.I2.this[int].get' cannot implement interface member 'I2.this[int].get' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I2.this[int].get", "I2.this[int].get", "Test1")
                     .WithLocation(6, 15),
                 // (6,15): error CS8502: 'I1.I4.this[int].set' cannot implement interface member 'I4.this[int].set' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
-                        "I1"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementationForMember,
+                    "I1"
+                )
                     .WithArguments("I1.I4.this[int].set", "I4.this[int].set", "Test1")
                     .WithLocation(6, 15)
             );
@@ -45894,9 +45894,9 @@ class Test1 : I1
                     // (9,32): error CS8501: Target runtime doesn't support default interface implementation.
                     //     extern int I2.this[int x] {get;}
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "get"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "get"
+                    )
                         .WithLocation(9, 32),
                     // (9,32): warning CS0626: Method, operator, or accessor 'I1.I2.this[int].get' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
                     //     extern int I2.this[int x] {get;}
@@ -47677,9 +47677,9 @@ interface I19
                 // (46,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     static I9() {} => throw null;
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        "static I9() {} => throw null;"
-                    )
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    "static I9() {} => throw null;"
+                )
                     .WithLocation(46, 5),
                 // (50,21): error CS0106: The modifier 'abstract' is not valid for this item
                 //     abstract static I10();
@@ -49578,51 +49578,51 @@ P50
                     // (7,34): error CS8501: Target runtime doesn't support default interface implementation.
                     //         System.Console.WriteLine(i1.P200);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.P200"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.P200"
+                    )
                         .WithLocation(7, 34),
                     // (8,9): error CS8501: Target runtime doesn't support default interface implementation.
                     //         i1.M300();
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.M300"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.M300"
+                    )
                         .WithLocation(8, 9),
                     // (9,9): error CS8501: Target runtime doesn't support default interface implementation.
                     //         i1.E400 += i1.M300;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.E400 += i1.M300"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.E400 += i1.M300"
+                    )
                         .WithLocation(9, 9),
                     // (9,20): error CS8501: Target runtime doesn't support default interface implementation.
                     //         i1.E400 += i1.M300;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.M300"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.M300"
+                    )
                         .WithLocation(9, 20),
                     // (10,9): error CS8501: Target runtime doesn't support default interface implementation.
                     //         i1.E400 -= new D1(i1.M300);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.E400 -= new D1(i1.M300)"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.E400 -= new D1(i1.M300)"
+                    )
                         .WithLocation(10, 9),
                     // (10,27): error CS8501: Target runtime doesn't support default interface implementation.
                     //         i1.E400 -= new D1(i1.M300);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.M300"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.M300"
+                    )
                         .WithLocation(10, 27),
                     // (11,9): error CS8701: Target runtime doesn't support default interface implementation.
                     //         i1["500"] = default;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            @"i1[""500""]"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        @"i1[""500""]"
+                    )
                         .WithLocation(11, 9)
                 );
             }
@@ -49717,86 +49717,86 @@ class Test2 : Test1
                     // (9,34): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         System.Console.WriteLine(I0.F1);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I0.F1"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I0.F1"
+                    )
                         .WithLocation(9, 34),
                     // (10,34): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         System.Console.WriteLine(I0.P2);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I0.P2"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I0.P2"
+                    )
                         .WithLocation(10, 34),
                     // (11,9): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         I0.M3();
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I0.M3"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I0.M3"
+                    )
                         .WithLocation(11, 9),
                     // (12,9): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         I0.E4 += I0.M3;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I0.E4 += I0.M3"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I0.E4 += I0.M3"
+                    )
                         .WithLocation(12, 9),
                     // (12,18): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         I0.E4 += I0.M3;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I0.M3"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I0.M3"
+                    )
                         .WithLocation(12, 18),
                     // (13,9): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         I0.E4 -= new D0(I0.M3);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I0.E4 -= new D0(I0.M3)"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I0.E4 -= new D0(I0.M3)"
+                    )
                         .WithLocation(13, 9),
                     // (13,25): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         I0.E4 -= new D0(I0.M3);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I0.M3"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I0.M3"
+                    )
                         .WithLocation(13, 25),
                     // (14,9): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         I0.P2 = 3;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I0.P2"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I0.P2"
+                    )
                         .WithLocation(14, 9),
                     // (15,12): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         I0.C6.M();
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "C6"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "C6"
+                    )
                         .WithLocation(15, 12),
                     // (16,17): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         _ = new C7<int>();
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "C7<int>"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "C7<int>"
+                    )
                         .WithLocation(16, 17),
                     // (17,13): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         _ = I0.P8;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I0.P8"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I0.P8"
+                    )
                         .WithLocation(17, 13),
                     // (20,9): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         I0.P9 = 13;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I0.P9"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I0.P9"
+                    )
                         .WithLocation(20, 9)
                 );
             }
@@ -49903,72 +49903,72 @@ interface Test4 : I1
                     // (4,17): error CS8701: Target runtime doesn't support default interface implementation.
                     //     static void Main()
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "Main"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "Main"
+                    )
                         .WithLocation(4, 17),
                     // (7,34): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         System.Console.WriteLine(i1.P20);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "i1.P20"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "i1.P20"
+                    )
                         .WithLocation(7, 34),
                     // (8,9): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         i1.M30();
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "i1.M30"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "i1.M30"
+                    )
                         .WithLocation(8, 9),
                     // (9,9): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         i1.E40 += i1.M30;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "i1.E40 += i1.M30"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "i1.E40 += i1.M30"
+                    )
                         .WithLocation(9, 9),
                     // (9,19): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         i1.E40 += i1.M30;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "i1.M30"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "i1.M30"
+                    )
                         .WithLocation(9, 19),
                     // (10,9): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         i1.E40 -= new D1(i1.M30);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "i1.E40 -= new D1(i1.M30)"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "i1.E40 -= new D1(i1.M30)"
+                    )
                         .WithLocation(10, 9),
                     // (10,26): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         i1.E40 -= new D1(i1.M30);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "i1.M30"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "i1.M30"
+                    )
                         .WithLocation(10, 26),
                     // (11,9): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         i1[50] = default;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "i1[50]"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "i1[50]"
+                    )
                         .WithLocation(11, 9),
                     // (12,13): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         _ = i1.P50;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "i1.P50"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "i1.P50"
+                    )
                         .WithLocation(12, 13),
                     // (15,9): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         i1.P60 = 13;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "i1.P60"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "i1.P60"
+                    )
                         .WithLocation(15, 9)
                 );
 
@@ -49985,86 +49985,86 @@ interface Test4 : I1
                     // (4,17): error CS8701: Target runtime doesn't support default interface implementation.
                     //     static void Main()
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "Main"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "Main"
+                    )
                         .WithLocation(4, 17),
                     // (7,34): error CS8701: Target runtime doesn't support default interface implementation.
                     //         System.Console.WriteLine(i1.P200);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.P200"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.P200"
+                    )
                         .WithLocation(7, 34),
                     // (8,9): error CS8701: Target runtime doesn't support default interface implementation.
                     //         i1.M300();
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.M300"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.M300"
+                    )
                         .WithLocation(8, 9),
                     // (9,9): error CS8701: Target runtime doesn't support default interface implementation.
                     //         i1.E400 += i1.M300;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.E400 += i1.M300"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.E400 += i1.M300"
+                    )
                         .WithLocation(9, 9),
                     // (9,20): error CS8701: Target runtime doesn't support default interface implementation.
                     //         i1.E400 += i1.M300;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.M300"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.M300"
+                    )
                         .WithLocation(9, 20),
                     // (10,9): error CS8701: Target runtime doesn't support default interface implementation.
                     //         i1.E400 -= new D1(i1.M300);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.E400 -= new D1(i1.M300)"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.E400 -= new D1(i1.M300)"
+                    )
                         .WithLocation(10, 9),
                     // (10,27): error CS8701: Target runtime doesn't support default interface implementation.
                     //         i1.E400 -= new D1(i1.M300);
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.M300"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.M300"
+                    )
                         .WithLocation(10, 27),
                     // (11,9): error CS8701: Target runtime doesn't support default interface implementation.
                     //         i1["500"] = default;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            @"i1[""500""]"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        @"i1[""500""]"
+                    )
                         .WithLocation(11, 9),
                     // (12,13): error CS8701: Target runtime doesn't support default interface implementation.
                     //         _ = i1.P500;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.P500"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.P500"
+                    )
                         .WithLocation(12, 13),
                     // (13,13): error CS8701: Target runtime doesn't support default interface implementation.
                     //         _ = i1.P600;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.P600"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.P600"
+                    )
                         .WithLocation(13, 13),
                     // (14,9): error CS8701: Target runtime doesn't support default interface implementation.
                     //         i1.P500 = 12;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.P500"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.P500"
+                    )
                         .WithLocation(14, 9),
                     // (15,9): error CS8701: Target runtime doesn't support default interface implementation.
                     //         i1.P600 = 13;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                            "i1.P600"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                        "i1.P600"
+                    )
                         .WithLocation(15, 9)
                 );
             }
@@ -50149,16 +50149,16 @@ class Test4 : I1
                     // (6,27): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         static void M1(I1.I2 x)
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I2"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I2"
+                    )
                         .WithLocation(6, 27),
                     // (11,27): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //         static void M2(I1.I3 x)
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I3"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I3"
+                    )
                         .WithLocation(11, 27)
                 );
 
@@ -50174,16 +50174,16 @@ class Test4 : I1
                     // (4,26): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //     interface Test5 : I1.I2
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I2"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I2"
+                    )
                         .WithLocation(4, 26),
                     // (8,26): error CS8707: Target runtime doesn't support 'protected', 'protected internal', or 'private protected' accessibility for a member of an interface.
                     //     interface Test6 : I1.I3
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
-                            "I3"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportProtectedAccessForInterfaceMember,
+                        "I3"
+                    )
                         .WithLocation(8, 26)
                 );
             }
@@ -50650,16 +50650,16 @@ true
                 // (40,33): error CS8701: Target runtime doesn't support default interface implementation.
                 //     public static bool operator true(I1 x)
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                        "true"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                    "true"
+                )
                     .WithLocation(40, 33),
                 // (46,33): error CS8701: Target runtime doesn't support default interface implementation.
                 //     public static bool operator false(I1 x)
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                        "false"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                    "false"
+                )
                     .WithLocation(46, 33),
                 // (52,31): error CS8701: Target runtime doesn't support default interface implementation.
                 //     public static I1 operator +(I1 x, I1 y)
@@ -57812,7 +57812,8 @@ class Test1 : I3
                 var i3 = test1.InterfacesNoUseSiteDiagnostics().First();
                 Assert.Equal("I3", i3.Name);
 
-                var i1p1 = i3.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i3.ContainingNamespace
+                    .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
                     .Single();
@@ -57984,7 +57985,8 @@ I3.set_P1
                 Assert.Equal("I3", i3.Name);
 
                 var i3p1 = i3.GetMembers().OfType<PropertySymbol>().Single();
-                var i1p1 = i3.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i3.ContainingNamespace
+                    .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
                     .Single();
@@ -58359,7 +58361,8 @@ class Test1 : I4
                 var test1 = m.GlobalNamespace.GetTypeMember("Test1");
                 var i4 = test1.InterfacesNoUseSiteDiagnostics().First();
                 Assert.Equal("I4", i4.Name);
-                var i1p1 = i4.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i4.ContainingNamespace
+                    .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
                     .Single();
@@ -58499,7 +58502,8 @@ I4.set_P1
                 Assert.Equal("I4", i4.Name);
 
                 var i4p1 = i4.GetMembers().OfType<PropertySymbol>().Single();
-                var i1p1 = i4.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i4.ContainingNamespace
+                    .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
                     .Single();
@@ -62542,7 +62546,8 @@ class Test1 : I3
                 var i3 = test1.InterfacesNoUseSiteDiagnostics().First();
                 Assert.Equal("I3", i3.Name);
 
-                var i1p1 = i3.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i3.ContainingNamespace
+                    .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
                     .Single();
@@ -62703,7 +62708,8 @@ I3.remove_P1
                 Assert.Equal("I3", i3.Name);
 
                 var i3p1 = i3.GetMembers().OfType<EventSymbol>().Single();
-                var i1p1 = i3.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i3.ContainingNamespace
+                    .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
                     .Single();
@@ -63041,7 +63047,8 @@ class Test1 : I4
                 var test1 = m.GlobalNamespace.GetTypeMember("Test1");
                 var i4 = test1.InterfacesNoUseSiteDiagnostics().First();
                 Assert.Equal("I4", i4.Name);
-                var i1p1 = i4.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i4.ContainingNamespace
+                    .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
                     .Single();
@@ -63172,7 +63179,8 @@ I4.remove_P1
                 Assert.Equal("I4", i4.Name);
 
                 var i4p1 = i4.GetMembers().OfType<EventSymbol>().Single();
-                var i1p1 = i4.ContainingNamespace.GetTypeMember("I1")
+                var i1p1 = i4.ContainingNamespace
+                    .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
                     .Single();
@@ -72737,14 +72745,13 @@ interface I2<out T1, in T2>
             );
 
             CompileAndVerify(
-                    compilation1,
-                    verify: VerifyOnMonoOrCoreClr,
-                    expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                      ? null
-                      : @"a
+                compilation1,
+                verify: VerifyOnMonoOrCoreClr,
+                expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
+                  ? null
+                  : @"a
 b"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -72807,14 +72814,13 @@ interface I2<out T1, in T2>
             );
 
             CompileAndVerify(
-                    compilation1,
-                    verify: VerifyOnMonoOrCoreClr,
-                    expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                      ? null
-                      : @"a
+                compilation1,
+                verify: VerifyOnMonoOrCoreClr,
+                expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
+                  ? null
+                  : @"a
 b"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -72887,14 +72893,13 @@ interface I2<out T1, in T2>
             );
 
             CompileAndVerify(
-                    compilation1,
-                    verify: VerifyOnMonoOrCoreClr,
-                    expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
-                      ? null
-                      : @"a
+                compilation1,
+                verify: VerifyOnMonoOrCoreClr,
+                expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr
+                  ? null
+                  : @"a
 b"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -73830,9 +73835,9 @@ namespace System.Runtime.CompilerServices
                 // (6,29): error CS8701: Target runtime doesn't support default interface implementation.
                 //         public const string DefaultImplementationsOfInterfaces = nameof(DefaultImplementationsOfInterfaces);
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                        "DefaultImplementationsOfInterfaces"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                    "DefaultImplementationsOfInterfaces"
+                )
                     .WithLocation(6, 29)
             );
 
@@ -73867,9 +73872,9 @@ namespace System.Runtime.CompilerServices
                 // (6,29): error CS8701: Target runtime doesn't support default interface implementation.
                 //         public const string DefaultImplementationsOfInterfaces = nameof(DefaultImplementationsOfInterfaces);
                 Diagnostic(
-                        ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
-                        "DefaultImplementationsOfInterfaces"
-                    )
+                    ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                    "DefaultImplementationsOfInterfaces"
+                )
                     .WithLocation(6, 29)
             );
 

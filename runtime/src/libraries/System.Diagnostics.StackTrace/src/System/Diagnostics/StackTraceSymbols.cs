@@ -83,7 +83,8 @@ namespace System.Diagnostics
                 {
                     MethodDebugInformationHandle methodDebugHandle = (
                         (MethodDefinitionHandle)handle
-                    ).ToDebugInformationHandle();
+                    )
+                        .ToDebugInformationHandle();
                     MethodDebugInformation methodInfo = reader.GetMethodDebugInformation(
                         methodDebugHandle
                     );

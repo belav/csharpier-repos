@@ -190,11 +190,12 @@ namespace System.IO.Tests
         /// </summary>
         public static void ExpectEvent(WaitHandle eventOccurred, string eventName_NoRetry)
         {
-            string message = string.Format(
-                "Didn't observe a {0} event within {1}ms",
-                eventName_NoRetry,
-                WaitForExpectedEventTimeout_NoRetry
-            );
+            string message = string
+                .Format(
+                    "Didn't observe a {0} event within {1}ms",
+                    eventName_NoRetry,
+                    WaitForExpectedEventTimeout_NoRetry
+                );
             Assert.True(eventOccurred.WaitOne(WaitForExpectedEventTimeout_NoRetry), message);
         }
 
@@ -408,9 +409,8 @@ namespace System.IO.Tests
             if (verifyCreated)
             {
                 bool Created_expected = ((expectedEvents & WatcherChangeTypes.Created) > 0);
-                bool Created_actual = created.EventOccured.WaitOne(
-                    verifyChanged ? SubsequentExpectedWait : timeout
-                );
+                bool Created_actual = created.EventOccured
+                    .WaitOne(verifyChanged ? SubsequentExpectedWait : timeout);
                 watcher.Created -= created.Handler;
                 result = result && Created_expected == Created_actual;
                 if (assertExpected)
@@ -424,9 +424,8 @@ namespace System.IO.Tests
             if (verifyDeleted)
             {
                 bool Deleted_expected = ((expectedEvents & WatcherChangeTypes.Deleted) > 0);
-                bool Deleted_actual = deleted.EventOccured.WaitOne(
-                    verifyChanged || verifyCreated ? SubsequentExpectedWait : timeout
-                );
+                bool Deleted_actual = deleted.EventOccured
+                    .WaitOne(verifyChanged || verifyCreated ? SubsequentExpectedWait : timeout);
                 watcher.Deleted -= deleted.Handler;
                 result = result && Deleted_expected == Deleted_actual;
                 if (assertExpected)
@@ -440,11 +439,12 @@ namespace System.IO.Tests
             if (verifyRenamed)
             {
                 bool Renamed_expected = ((expectedEvents & WatcherChangeTypes.Renamed) > 0);
-                bool Renamed_actual = renamed.EventOccured.WaitOne(
-                    verifyChanged || verifyCreated || verifyDeleted
-                      ? SubsequentExpectedWait
-                      : timeout
-                );
+                bool Renamed_actual = renamed.EventOccured
+                    .WaitOne(
+                        verifyChanged || verifyCreated || verifyDeleted
+                          ? SubsequentExpectedWait
+                          : timeout
+                    );
                 watcher.Renamed -= renamed.Handler;
                 result = result && Renamed_expected == Renamed_actual;
                 if (assertExpected)
@@ -472,11 +472,12 @@ namespace System.IO.Tests
             int attempts = DefaultAttemptsForExpectedEvent
         )
         {
-            string message = string.Format(
-                "Did not observe an error event within {0}ms and {1} attempts.",
-                WaitForExpectedEventTimeout,
-                attempts
-            );
+            string message = string
+                .Format(
+                    "Did not observe an error event within {0}ms and {1} attempts.",
+                    WaitForExpectedEventTimeout,
+                    attempts
+                );
             Assert.True(TryErrorEvent(watcher, action, cleanup, attempts, expected: true), message);
         }
 
@@ -494,11 +495,12 @@ namespace System.IO.Tests
             int attempts = DefaultAttemptsForUnExpectedEvent
         )
         {
-            string message = string.Format(
-                "Should not observe an error event within {0}ms. Attempted {1} times and received the event each time.",
-                WaitForExpectedEventTimeout,
-                attempts
-            );
+            string message = string
+                .Format(
+                    "Should not observe an error event within {0}ms. Attempted {1} times and received the event each time.",
+                    WaitForExpectedEventTimeout,
+                    attempts
+                );
             Assert.False(
                 TryErrorEvent(watcher, action, cleanup, attempts, expected: true),
                 message
@@ -625,21 +627,23 @@ namespace System.IO.Tests
             if (OperatingSystem.IsWindows())
             {
                 symLinkProcess.StartInfo.FileName = "cmd";
-                symLinkProcess.StartInfo.Arguments = string.Format(
-                    "/c mklink{0} \"{1}\" \"{2}\"",
-                    isDirectory ? " /D" : "",
-                    Path.GetFullPath(linkPath),
-                    Path.GetFullPath(targetPath)
-                );
+                symLinkProcess.StartInfo.Arguments = string
+                    .Format(
+                        "/c mklink{0} \"{1}\" \"{2}\"",
+                        isDirectory ? " /D" : "",
+                        Path.GetFullPath(linkPath),
+                        Path.GetFullPath(targetPath)
+                    );
             }
             else
             {
                 symLinkProcess.StartInfo.FileName = "/bin/ln";
-                symLinkProcess.StartInfo.Arguments = string.Format(
-                    "-s \"{0}\" \"{1}\"",
-                    Path.GetFullPath(targetPath),
-                    Path.GetFullPath(linkPath)
-                );
+                symLinkProcess.StartInfo.Arguments = string
+                    .Format(
+                        "-s \"{0}\" \"{1}\"",
+                        Path.GetFullPath(targetPath),
+                        Path.GetFullPath(linkPath)
+                    );
             }
             symLinkProcess.StartInfo.RedirectStandardOutput = true;
             symLinkProcess.Start();

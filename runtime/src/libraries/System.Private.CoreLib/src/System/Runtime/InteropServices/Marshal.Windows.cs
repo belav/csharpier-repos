@@ -69,16 +69,17 @@ namespace System.Runtime.InteropServices
 
             fixed (char* pwzChar = s)
             {
-                nb = Interop.Kernel32.WideCharToMultiByte(
-                    Interop.Kernel32.CP_ACP,
-                    flags,
-                    pwzChar,
-                    s.Length,
-                    buffer,
-                    bufferLength,
-                    IntPtr.Zero,
-                    throwOnUnmappableChar ? new IntPtr(&defaultCharUsed) : IntPtr.Zero
-                );
+                nb = Interop.Kernel32
+                    .WideCharToMultiByte(
+                        Interop.Kernel32.CP_ACP,
+                        flags,
+                        pwzChar,
+                        s.Length,
+                        buffer,
+                        bufferLength,
+                        IntPtr.Zero,
+                        throwOnUnmappableChar ? new IntPtr(&defaultCharUsed) : IntPtr.Zero
+                    );
             }
 
             if (defaultCharUsed != 0)
@@ -103,16 +104,17 @@ namespace System.Runtime.InteropServices
             {
                 fixed (char* pChars = chars)
                 {
-                    byteLength = Interop.Kernel32.WideCharToMultiByte(
-                        Interop.Kernel32.CP_ACP,
-                        Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
-                        pChars,
-                        chars.Length,
-                        null,
-                        0,
-                        IntPtr.Zero,
-                        IntPtr.Zero
-                    );
+                    byteLength = Interop.Kernel32
+                        .WideCharToMultiByte(
+                            Interop.Kernel32.CP_ACP,
+                            Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
+                            pChars,
+                            chars.Length,
+                            null,
+                            0,
+                            IntPtr.Zero,
+                            IntPtr.Zero
+                        );
                     if (byteLength <= 0)
                         throw new ArgumentException();
                 }
@@ -135,16 +137,17 @@ namespace System.Runtime.InteropServices
                 fixed (char* pChars = chars)
                 fixed (byte* pBytes = bytes)
                 {
-                    byteLength = Interop.Kernel32.WideCharToMultiByte(
-                        Interop.Kernel32.CP_ACP,
-                        Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
-                        pChars,
-                        chars.Length,
-                        pBytes,
-                        bytes.Length,
-                        IntPtr.Zero,
-                        IntPtr.Zero
-                    );
+                    byteLength = Interop.Kernel32
+                        .WideCharToMultiByte(
+                            Interop.Kernel32.CP_ACP,
+                            Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
+                            pChars,
+                            chars.Length,
+                            pBytes,
+                            bytes.Length,
+                            IntPtr.Zero,
+                            IntPtr.Zero
+                        );
                     if (byteLength <= 0)
                         throw new ArgumentException();
                 }
@@ -155,10 +158,8 @@ namespace System.Runtime.InteropServices
 
         public static IntPtr AllocHGlobal(IntPtr cb)
         {
-            IntPtr pNewMem = Interop.Kernel32.LocalAlloc(
-                Interop.Kernel32.LMEM_FIXED,
-                (nuint)(nint)cb
-            );
+            IntPtr pNewMem = Interop.Kernel32
+                .LocalAlloc(Interop.Kernel32.LMEM_FIXED, (nuint)(nint)cb);
             if (pNewMem == IntPtr.Zero)
             {
                 throw new OutOfMemoryException();
@@ -183,11 +184,8 @@ namespace System.Runtime.InteropServices
                 return AllocHGlobal(cb);
             }
 
-            IntPtr pNewMem = Interop.Kernel32.LocalReAlloc(
-                pv,
-                (nuint)(nint)cb,
-                Interop.Kernel32.LMEM_MOVEABLE
-            );
+            IntPtr pNewMem = Interop.Kernel32
+                .LocalReAlloc(pv, (nuint)(nint)cb, Interop.Kernel32.LMEM_MOVEABLE);
             if (pNewMem == IntPtr.Zero)
             {
                 throw new OutOfMemoryException();

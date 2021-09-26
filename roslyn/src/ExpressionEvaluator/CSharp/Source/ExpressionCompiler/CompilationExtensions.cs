@@ -101,10 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             var reader = module.Module.MetadataReader;
             var typeHandle = reader.GetMethodDefinition(methodHandle).GetDeclaringType();
             var type = GetType(module, typeHandle);
-            var method = (PEMethodSymbol)new MetadataDecoder(
-                module,
-                type
-            ).GetMethodSymbolForMethodDefOrMemberRef(methodHandle, type);
+            var method = (PEMethodSymbol)new MetadataDecoder(module, type)
+                .GetMethodSymbolForMethodDefOrMemberRef(methodHandle, type);
             return method;
         }
 
@@ -195,13 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         )
         {
             var builder = ArrayBuilder<bool>.GetInstance();
-            CSharpCompilation.DynamicTransformsEncoder.Encode(
-                type,
-                customModifiersCount,
-                refKind,
-                builder,
-                addCustomModifierFlags: true
-            );
+            CSharpCompilation.DynamicTransformsEncoder
+                .Encode(type, customModifiersCount, refKind, builder, addCustomModifierFlags: true);
             var bytes =
                 builder.Count > 0
                 && compilation.HasDynamicEmitAttributes(
@@ -243,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 platform: Platform.AnyCpu, // Platform should match PEModule.Machine, in this case I386.
                 optimizationLevel: OptimizationLevel.Release,
                 assemblyIdentityComparer: IdentityComparer
-            ).WithMetadataImportOptions(MetadataImportOptions.All)
+            )
+                .WithMetadataImportOptions(MetadataImportOptions.All)
                 .WithReferencesSupersedeLowerVersions(true)
                 .WithTopLevelBinderFlags(
                     BinderFlags.SuppressObsoleteChecks

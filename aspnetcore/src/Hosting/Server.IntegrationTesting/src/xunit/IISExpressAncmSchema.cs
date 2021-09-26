@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 return;
             }
 
-            SupportsInProcessHosting = ancmConfig.Root.Descendants("attribute")
+            SupportsInProcessHosting = ancmConfig.Root
+                .Descendants("attribute")
                 .Any(
                     n => "hostingModel".Equals(n.Attribute("name")?.Value, StringComparison.Ordinal)
                 );

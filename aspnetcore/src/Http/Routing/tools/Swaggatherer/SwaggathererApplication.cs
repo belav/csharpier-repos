@@ -60,13 +60,14 @@ namespace Swaggatherer
 
             if (InputDirectory.HasValue())
             {
-                Input.Values.AddRange(
-                    Directory.EnumerateFiles(
-                        InputDirectory.Value(),
-                        "*.json",
-                        SearchOption.AllDirectories
-                    )
-                );
+                Input.Values
+                    .AddRange(
+                        Directory.EnumerateFiles(
+                            InputDirectory.Value(),
+                            "*.json",
+                            SearchOption.AllDirectories
+                        )
+                    );
             }
 
             Console.WriteLine($"Processing {Input.Values.Count} files...");
@@ -207,11 +208,12 @@ namespace Swaggatherer
                 for (var k = 0; k < entry.Template.Segments.Count; k++)
                 {
                     if (
-                        !string.Equals(
-                            entry.Template.Segments[k].Parts[0].Text,
-                            other.Template.Segments[k].Parts[0].Text,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        !string
+                            .Equals(
+                                entry.Template.Segments[k].Parts[0].Text,
+                                other.Template.Segments[k].Parts[0].Text,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         isSame = false;
@@ -220,11 +222,8 @@ namespace Swaggatherer
 
                     if (
                         HttpMethods.HasValue()
-                        && !string.Equals(
-                            entry.Method,
-                            other.Method,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        && !string
+                            .Equals(entry.Method, other.Method, StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         isSame = false;
@@ -254,11 +253,12 @@ namespace Swaggatherer
                         return comparison;
                     }
 
-                    return string.Compare(
-                        x.Template.TemplateText,
-                        y.Template.TemplateText,
-                        StringComparison.Ordinal
-                    );
+                    return string
+                        .Compare(
+                            x.Template.TemplateText,
+                            y.Template.TemplateText,
+                            StringComparison.Ordinal
+                        );
                 }
             );
         }

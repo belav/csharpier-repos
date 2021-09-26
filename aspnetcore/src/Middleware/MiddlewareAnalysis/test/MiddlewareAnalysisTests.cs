@@ -21,28 +21,25 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
             DiagnosticListener diagnosticListener = null;
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    diagnosticListener =
-                                        app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            diagnosticListener = app.ApplicationServices
+                                .GetRequiredService<DiagnosticListener>();
 
-                                    app.UseDeveloperExceptionPage();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            throw new Exception("Test exception");
-                                        }
-                                    );
+                            app.UseDeveloperExceptionPage();
+                            app.Run(
+                                context =>
+                                {
+                                    throw new Exception("Test exception");
                                 }
-                            )
-                            .ConfigureServices(services => services.AddMiddlewareAnalysis());
-                    }
-                )
-                .Build();
+                            );
+                        }
+                    ).ConfigureServices(services => services.AddMiddlewareAnalysis());
+                }
+            ).Build();
 
             await host.StartAsync();
 

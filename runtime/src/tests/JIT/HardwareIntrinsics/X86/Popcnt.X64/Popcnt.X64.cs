@@ -39,10 +39,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     resl = Convert.ToUInt64(
-                        typeof(Popcnt.X64).GetMethod(
-                                nameof(Popcnt.X64.PopCount),
-                                new Type[] { sl.GetType() }
-                            )
+                        typeof(Popcnt.X64)
+                            .GetMethod(nameof(Popcnt.X64.PopCount), new Type[] { sl.GetType() })
                             .Invoke(null, new object[] { sl })
                     );
                     if (resl != longPopcntTable[i].res)
@@ -75,10 +73,8 @@ namespace IntelHardwareIntrinsicTest
                 try
                 {
                     resl = Convert.ToUInt64(
-                        typeof(Popcnt.X64).GetMethod(
-                                nameof(Popcnt.X64.PopCount),
-                                new Type[] { sl.GetType() }
-                            )
+                        typeof(Popcnt.X64)
+                            .GetMethod(nameof(Popcnt.X64.PopCount), new Type[] { sl.GetType() })
                             .Invoke(null, new object[] { sl })
                     );
                     Console.WriteLine(

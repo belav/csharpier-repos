@@ -107,10 +107,10 @@ namespace System.Net.Http.Tests
                 "http://microsoft.com/"
             );
             string parameter = await AuthenticationHelper.GetDigestTokenForCredential(
-                    credential,
-                    request,
-                    digestResponse
-                )
+                credential,
+                request,
+                digestResponse
+            )
                 .ConfigureAwait(false);
 
             Assert.Equal(expectedResult, parameter != null);
@@ -134,10 +134,10 @@ namespace System.Net.Http.Tests
                 "http://microsoft.com/"
             );
             string parameter = await AuthenticationHelper.GetDigestTokenForCredential(
-                    credential,
-                    request,
-                    digestResponse
-                )
+                credential,
+                request,
+                digestResponse
+            )
                 .ConfigureAwait(false);
             Assert.StartsWith(encodedUserName, parameter);
         }
@@ -219,10 +219,10 @@ namespace System.Net.Http.Tests
                 "http://microsoft.com/"
             );
             string parameter = await AuthenticationHelper.GetDigestTokenForCredential(
-                    credential,
-                    request,
-                    digestResponse
-                )
+                credential,
+                request,
+                digestResponse
+            )
                 .ConfigureAwait(false);
             if (match != null)
             {

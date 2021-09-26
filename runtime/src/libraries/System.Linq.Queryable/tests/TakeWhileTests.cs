@@ -78,7 +78,8 @@ namespace System.Linq.Tests
         [Fact]
         public void TakeWhile2()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .TakeWhile((n, i) => n + i < 4)
                 .Count();
             Assert.Equal(2, count);

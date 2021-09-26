@@ -46,8 +46,8 @@ namespace Internal.Cryptography.Pal.Windows
                     return WithCmsgCmsRecipientInfo(
                         delegate(CMSG_KEY_TRANS_RECIPIENT_INFO* recipient)
                         {
-                            SubjectIdentifier subjectIdentifier =
-                                recipient->RecipientId.ToSubjectIdentifier();
+                            SubjectIdentifier subjectIdentifier = recipient->RecipientId
+                                .ToSubjectIdentifier();
                             return subjectIdentifier;
                         }
                     );

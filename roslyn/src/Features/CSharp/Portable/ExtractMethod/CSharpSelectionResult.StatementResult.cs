@@ -64,20 +64,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 // it contains statements
                 var firstToken = GetFirstTokenInSelection();
-                return firstToken.GetAncestors<SyntaxNode>()
-                    .FirstOrDefault(
-                        n =>
-                        {
-                            return n is AccessorDeclarationSyntax
-                                || n is LocalFunctionStatementSyntax
-                                || n is BaseMethodDeclarationSyntax
-                                || n is AccessorDeclarationSyntax
-                                || n is ParenthesizedLambdaExpressionSyntax
-                                || n is SimpleLambdaExpressionSyntax
-                                || n is AnonymousMethodExpressionSyntax
-                                || n is CompilationUnitSyntax;
-                        }
-                    );
+                return firstToken.GetAncestors<SyntaxNode>().FirstOrDefault(
+                    n =>
+                    {
+                        return n is AccessorDeclarationSyntax
+                            || n is LocalFunctionStatementSyntax
+                            || n is BaseMethodDeclarationSyntax
+                            || n is AccessorDeclarationSyntax
+                            || n is ParenthesizedLambdaExpressionSyntax
+                            || n is SimpleLambdaExpressionSyntax
+                            || n is AnonymousMethodExpressionSyntax
+                            || n is CompilationUnitSyntax;
+                    }
+                );
             }
 
             public override ITypeSymbol GetContainingScopeType()

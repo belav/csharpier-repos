@@ -230,22 +230,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 "dummy_proj",
                 DummyLanguageService.LanguageName
             );
-            solution = project.Solution.AddDocument(
-                DocumentId.CreateNewId(project.Id, DummyLanguageService.LanguageName),
-                "a.dummy",
-                ""
-            );
+            solution = project.Solution
+                .AddDocument(
+                    DocumentId.CreateNewId(project.Id, DummyLanguageService.LanguageName),
+                    "a.dummy",
+                    ""
+                );
 
             var editSession = CreateEditSession(solution, activeStatements);
-            var baseActiveStatementsMap = await editSession.BaseActiveStatements.GetValueAsync(
-                    CancellationToken.None
-                )
+            var baseActiveStatementsMap = await editSession.BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
             var docs = GetDocumentIds(solution);
 
             // Active Statements
 
-            var statements = baseActiveStatementsMap.InstructionMap.Values.OrderBy(v => v.Ordinal)
+            var statements = baseActiveStatementsMap.InstructionMap.Values
+                .OrderBy(v => v.Ordinal)
                 .ToArray();
             AssertEx.Equal(
                 new[]
@@ -285,9 +286,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             // Exception Regions
 
             var baseExceptionRegions = await editSession.GetBaseActiveExceptionRegionsAsync(
-                    solution,
-                    CancellationToken.None
-                )
+                solution,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             AssertEx.Equal(
@@ -415,17 +416,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var solution = AddDefaultTestSolution(workspace, new[] { baseSource });
 
             var editSession = CreateEditSession(solution, baseActiveStatementInfos);
-            var baseActiveStatementMap = await editSession.BaseActiveStatements.GetValueAsync(
-                    CancellationToken.None
-                )
+            var baseActiveStatementMap = await editSession.BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
             var docs = GetDocumentIds(solution);
 
             // Active Statements
 
-            var baseActiveStatements = baseActiveStatementMap.InstructionMap.Values.OrderBy(
-                    v => v.Ordinal
-                )
+            var baseActiveStatements = baseActiveStatementMap.InstructionMap.Values
+                .OrderBy(v => v.Ordinal)
                 .ToArray();
 
             AssertEx.Equal(
@@ -440,9 +439,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             // Exception Regions
 
             var baseExceptionRegions = await editSession.GetBaseActiveExceptionRegionsAsync(
-                    solution,
-                    CancellationToken.None
-                )
+                solution,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             // Note that the spans correspond to the base snapshot (V2).
@@ -451,10 +450,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 baseExceptionRegions.Select(
                     r =>
                         "["
-                        + string.Join(
-                            ", ",
-                            r.Spans.Select(s => $"{s} '{GetFirstLineText(s, baseText)}'")
-                        )
+                        + string
+                            .Join(
+                                ", ",
+                                r.Spans.Select(s => $"{s} '{GetFirstLineText(s, baseText)}'")
+                            )
                         + "]"
                 )
             );
@@ -466,9 +466,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     docs[0],
                     ImmutableArray.Create(
                         baseActiveStatements[0],
-                        baseActiveStatements[1].WithSpan(
-                            baseActiveStatements[1].Span.AddLineDelta(+1)
-                        )
+                        baseActiveStatements[1]
+                            .WithSpan(baseActiveStatements[1].Span.AddLineDelta(+1))
                     ),
                     ImmutableArray.Create(
                         baseExceptionRegions[0].Spans,
@@ -558,9 +557,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 activeStatements,
                 initialState: CommittedSolution.DocumentState.OutOfSync
             );
-            var baseActiveStatementMap = await editSession.BaseActiveStatements.GetValueAsync(
-                    CancellationToken.None
-                )
+            var baseActiveStatementMap = await editSession.BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
             var docs = GetDocumentIds(solution);
 
@@ -578,9 +576,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             Assert.Equal(1, baseActiveStatementMap.InstructionMap.Count);
 
-            var s = baseActiveStatementMap.InstructionMap.Values.OrderBy(
-                    v => v.InstructionId.Method.Token
-                )
+            var s = baseActiveStatementMap.InstructionMap.Values
+                .OrderBy(v => v.InstructionId.Method.Token)
                 .Single();
             Assert.Equal(0x06000001, s.InstructionId.Method.Token);
             Assert.Equal(0, s.PrimaryDocumentOrdinal);
@@ -590,9 +587,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             // Exception Regions - not available in out-of-sync documents as we need the content of the base document to calculate them
 
             var baseExceptionRegions = await editSession.GetBaseActiveExceptionRegionsAsync(
-                    solution,
-                    CancellationToken.None
-                )
+                solution,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             AssertEx.Equal(
@@ -603,15 +600,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             );
 
             // document got synchronized:
-            editSession.DebuggingSession.LastCommittedSolution.Test_SetDocumentState(
-                docs[0],
-                CommittedSolution.DocumentState.MatchesBuildOutput
-            );
+            editSession.DebuggingSession.LastCommittedSolution
+                .Test_SetDocumentState(docs[0], CommittedSolution.DocumentState.MatchesBuildOutput);
 
             baseExceptionRegions = await editSession.GetBaseActiveExceptionRegionsAsync(
-                    solution,
-                    CancellationToken.None
-                )
+                solution,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             AssertEx.Equal(
@@ -780,17 +775,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 activeStatementsPreRemap,
                 initialNonRemappableRegions
             );
-            var baseActiveStatementMap = await editSession.BaseActiveStatements.GetValueAsync(
-                    CancellationToken.None
-                )
+            var baseActiveStatementMap = await editSession.BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
             var docs = GetDocumentIds(solution);
 
             // Active Statements
 
-            var baseActiveStatements = baseActiveStatementMap.InstructionMap.Values.OrderBy(
-                    v => v.Ordinal
-                )
+            var baseActiveStatements = baseActiveStatementMap.InstructionMap.Values
+                .OrderBy(v => v.Ordinal)
                 .ToArray();
 
             // Note that the spans of AS:2 and AS:3 correspond to the base snapshot (V2).
@@ -810,9 +803,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             // Exception Regions
 
             var baseExceptionRegions = await editSession.GetBaseActiveExceptionRegionsAsync(
-                    solution,
-                    CancellationToken.None
-                )
+                solution,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             // Note that the spans correspond to the base snapshot (V2).
@@ -827,10 +820,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 baseExceptionRegions.Select(
                     r =>
                         "["
-                        + string.Join(
-                            ", ",
-                            r.Spans.Select(s => $"{s} '{GetFirstLineText(s, sourceTextV2)}'")
-                        )
+                        + string
+                            .Join(
+                                ", ",
+                                r.Spans.Select(s => $"{s} '{GetFirstLineText(s, sourceTextV2)}'")
+                            )
                         + "]"
                 )
             );
@@ -845,13 +839,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     docs[0],
                     ImmutableArray.Create(
                         baseActiveStatements[0],
-                        baseActiveStatements[1].WithSpan(
-                            baseActiveStatements[1].Span.AddLineDelta(-1)
-                        ),
+                        baseActiveStatements[1]
+                            .WithSpan(baseActiveStatements[1].Span.AddLineDelta(-1)),
                         baseActiveStatements[2],
-                        baseActiveStatements[3].WithSpan(
-                            baseActiveStatements[3].Span.AddLineDelta(+2)
-                        )
+                        baseActiveStatements[3]
+                            .WithSpan(baseActiveStatements[3].Span.AddLineDelta(+2))
                     ),
                     ImmutableArray.Create(
                         baseExceptionRegions[0].Spans,
@@ -970,9 +962,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var solution = AddDefaultTestSolution(workspace, markedSources);
 
             var editSession = CreateEditSession(solution, activeStatements);
-            var baseActiveStatementMap = await editSession.BaseActiveStatements.GetValueAsync(
-                    CancellationToken.None
-                )
+            var baseActiveStatementMap = await editSession.BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
             var docs = GetDocumentIds(solution);
 
@@ -991,9 +982,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             Assert.Equal(2, baseActiveStatementMap.InstructionMap.Count);
 
-            var statements = baseActiveStatementMap.InstructionMap.Values.OrderBy(
-                    v => v.InstructionId.Method.Token
-                )
+            var statements = baseActiveStatementMap.InstructionMap.Values
+                .OrderBy(v => v.InstructionId.Method.Token)
                 .ToArray();
             var s = statements[0];
             Assert.Equal(0x06000001, s.InstructionId.Method.Token);
@@ -1011,9 +1001,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             // Exception Regions
 
             var baseExceptionRegions = await editSession.GetBaseActiveExceptionRegionsAsync(
-                    solution,
-                    CancellationToken.None
-                )
+                solution,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             AssertEx.Equal(
@@ -1060,12 +1050,13 @@ class Test2
             void AddProjectAndLinkDocument(string projectName, Document doc, SourceText text)
             {
                 var p = solution.AddProject(projectName, projectName, "C#");
-                solution = p.Solution.AddDocument(
-                    DocumentId.CreateNewId(p.Id, projectName + "->" + doc.Name),
-                    doc.Name,
-                    text,
-                    filePath: doc.FilePath
-                );
+                solution = p.Solution
+                    .AddDocument(
+                        DocumentId.CreateNewId(p.Id, projectName + "->" + doc.Name),
+                        doc.Name,
+                        text,
+                        filePath: doc.FilePath
+                    );
             }
 
             var documents = solution.Projects.Single().Documents;
@@ -1080,9 +1071,8 @@ class Test2
 
             var editSession = CreateEditSession(solution, activeStatements);
 
-            var baseActiveStatementsMap = await editSession.BaseActiveStatements.GetValueAsync(
-                    CancellationToken.None
-                )
+            var baseActiveStatementsMap = await editSession.BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
             var docs = GetDocumentIds(solution);
 
@@ -1141,7 +1131,8 @@ class Test2
 
             Assert.Equal(3, baseActiveStatementsMap.InstructionMap.Count);
 
-            var statements = baseActiveStatementsMap.InstructionMap.Values.OrderBy(v => v.Ordinal)
+            var statements = baseActiveStatementsMap.InstructionMap.Values
+                .OrderBy(v => v.Ordinal)
                 .ToArray();
             var s = statements[0];
             Assert.Equal(0x06000001, s.InstructionId.Method.Token);

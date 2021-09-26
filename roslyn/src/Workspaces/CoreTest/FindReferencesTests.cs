@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
-            return workspace.CurrentSolution.AddProject(pid, "goo", "goo", languageName)
+            return workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo", languageName)
                 .AddMetadataReference(pid, MscorlibRef)
                 .AddDocument(did, "goo.cs", SourceText.From(sourceText));
         }
@@ -70,12 +71,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var pid = ProjectId.CreateNewId();
 
-            var solution = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo", LanguageNames.CSharp)
                 .AddMetadataReference(pid, MscorlibRef);
 
             var docCounter = 1;
@@ -110,7 +107,8 @@ public class C {
             using var workspace = CreateWorkspace();
             var solution = GetSingleDocumentSolution(workspace, text);
             var project = solution.Projects.First();
-            var symbol = (await project.GetCompilationAsync()).GetTypeByMetadataName("C")
+            var symbol = (await project.GetCompilationAsync())
+                .GetTypeByMetadataName("C")
                 .GetMembers("X")
                 .First();
 
@@ -131,12 +129,8 @@ public class C {
             using var workspace = CreateWorkspace();
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
-            var solution = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddMetadataReference(pid, MscorlibRef)
                 .AddMetadataReference(
                     pid,
@@ -145,9 +139,8 @@ public class C {
                 .AddDocument(did, "goo.cs", SourceText.From(text));
 
             var project = solution.Projects.First();
-            var symbol = (IFieldSymbol)(await project.GetCompilationAsync()).GetTypeByMetadataName(
-                    "C"
-                )
+            var symbol = (IFieldSymbol)(await project.GetCompilationAsync())
+                .GetTypeByMetadataName("C")
                 .GetMembers("X")
                 .First();
 
@@ -194,8 +187,8 @@ Module Module1
             var prj1Id = ProjectId.CreateNewId();
             var docId = DocumentId.CreateNewId(prj1Id);
 
-            var sln = CreateWorkspace()
-                .CurrentSolution.AddProject(
+            var sln = CreateWorkspace().CurrentSolution
+                .AddProject(
                     prj1Id,
                     "testDeclareReferences",
                     "testAssembly",
@@ -283,13 +276,8 @@ static class Module1
             var prj1Id = ProjectId.CreateNewId();
             var docId = DocumentId.CreateNewId(prj1Id);
 
-            var sln = CreateWorkspace()
-                .CurrentSolution.AddProject(
-                    prj1Id,
-                    "testDeclareReferences",
-                    "testAssembly",
-                    LanguageNames.CSharp
-                )
+            var sln = CreateWorkspace().CurrentSolution
+                .AddProject(prj1Id, "testDeclareReferences", "testAssembly", LanguageNames.CSharp)
                 .AddMetadataReference(prj1Id, MscorlibRef)
                 .AddDocument(docId, "testFile", tree.GetText());
 
@@ -430,13 +418,13 @@ namespace N2
             desktopProject = solution.GetProject(desktopProject.Id);
             var netStandardProject = solution.Projects.First(p => p.Name == "NetStandardProject");
 
-            var interfaceMethod = (IMethodSymbol)(
-                await netStandardProject.GetCompilationAsync()
-            ).GetTypeByMetadataName("N.I").GetMembers("Get").First();
+            var interfaceMethod = (IMethodSymbol)(await netStandardProject.GetCompilationAsync())
+                .GetTypeByMetadataName("N.I")
+                .GetMembers("Get")
+                .First();
 
-            var references = (
-                await SymbolFinder.FindReferencesAsync(interfaceMethod, solution)
-            ).ToList();
+            var references = (await SymbolFinder.FindReferencesAsync(interfaceMethod, solution))
+                .ToList();
             Assert.Equal(2, references.Count);
 
             var projectIds = new HashSet<ProjectId>();
@@ -545,14 +533,14 @@ namespace M
             );
 
             // get symbols for methods
-            var portableCompilation = await solution.Projects.Single(
-                    p => p.Name == "PortableProject"
-                )
+            var portableCompilation = await solution.Projects
+                .Single(p => p.Name == "PortableProject")
                 .GetCompilationAsync();
             var baseType = portableCompilation.GetTypeByMetadataName("N.BaseClass");
             var baseVirtualMethodSymbol = baseType.GetMembers("SomeMethod").Single();
 
-            var normalCompilation = await solution.Projects.Single(p => p.Name == "NormalProject")
+            var normalCompilation = await solution.Projects
+                .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var derivedType = normalCompilation.GetTypeByMetadataName("M.DerivedClass");
             var overriddenMethodSymbol = derivedType.GetMembers("SomeMethod").Single();
@@ -723,11 +711,12 @@ namespace Test
 
             // those locations should not be the same
             Assert.True(
-                typeResult.Locations.All(
-                    loc =>
-                        loc.Location.SourceSpan
-                        != constructorResult.Locations.Single().Location.SourceSpan
-                )
+                typeResult.Locations
+                    .All(
+                        loc =>
+                            loc.Location.SourceSpan
+                            != constructorResult.Locations.Single().Location.SourceSpan
+                    )
             );
 
             // Constructor still binds to the alias.

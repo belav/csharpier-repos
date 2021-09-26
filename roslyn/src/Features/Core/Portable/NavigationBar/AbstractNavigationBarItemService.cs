@@ -26,9 +26,9 @@ namespace Microsoft.CodeAnalysis.NavigationBar
         )
         {
             var client = await RemoteHostClient.TryGetClientAsync(
-                    document.Project,
-                    cancellationToken
-                )
+                document.Project,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (client != null)
             {
@@ -38,16 +38,16 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                     IRemoteNavigationBarItemService,
                     ImmutableArray<SerializableNavigationBarItem>
                 >(
-                        solution,
-                        (service, solutionInfo, cancellationToken) =>
-                            service.GetItemsAsync(
-                                solutionInfo,
-                                document.Id,
-                                supportsCodeGeneration,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    solution,
+                    (service, solutionInfo, cancellationToken) =>
+                        service.GetItemsAsync(
+                            solutionInfo,
+                            document.Id,
+                            supportsCodeGeneration,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return result.HasValue
@@ -56,10 +56,10 @@ namespace Microsoft.CodeAnalysis.NavigationBar
             }
 
             var items = await GetItemsInCurrentProcessAsync(
-                    document,
-                    supportsCodeGeneration,
-                    cancellationToken
-                )
+                document,
+                supportsCodeGeneration,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return items;
         }

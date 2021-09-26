@@ -48,10 +48,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     MoveTypeOperationKind.MoveType
                       => string.Format(FeaturesResources.Move_type_to_0, _fileName),
                     MoveTypeOperationKind.RenameType
-                      => string.Format(
-                          FeaturesResources.Rename_type_to_0,
-                          _state.DocumentNameWithoutExtension
-                      ),
+                      => string
+                          .Format(
+                              FeaturesResources.Rename_type_to_0,
+                              _state.DocumentNameWithoutExtension
+                          ),
                     MoveTypeOperationKind.RenameFile
                       => string.Format(FeaturesResources.Rename_file_to_0, _fileName),
                     MoveTypeOperationKind.MoveTypeNamespaceScope => string.Empty,

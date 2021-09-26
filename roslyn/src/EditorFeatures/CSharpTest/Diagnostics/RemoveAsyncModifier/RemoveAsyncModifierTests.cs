@@ -234,7 +234,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetStandard.NetStandard21,
                 TestCode = source,
                 FixedCode = expected,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveAsyncModifier)]
@@ -278,7 +279,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetStandard.NetStandard21,
                 TestCode = source,
                 FixedCode = expected,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveAsyncModifier)]
@@ -311,7 +313,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetStandard.NetStandard21,
                 TestCode = source,
                 FixedCode = expected,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveAsyncModifier)]
@@ -340,7 +343,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetStandard.NetStandard21,
                 TestCode = source,
                 FixedCode = expected,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveAsyncModifier)]

@@ -180,11 +180,8 @@ namespace System.Web.Mvc
             DescriptorUtil.AppendUniqueId(uniqueIdBuilder, VaryByCustom);
             if (!String.IsNullOrEmpty(VaryByCustom))
             {
-                string varyByCustomResult =
-                    filterContext.HttpContext.ApplicationInstance.GetVaryByCustomString(
-                        HttpContext.Current,
-                        VaryByCustom
-                    );
+                string varyByCustomResult = filterContext.HttpContext.ApplicationInstance
+                    .GetVaryByCustomString(HttpContext.Current, VaryByCustom);
                 uniqueIdBuilder.Append(varyByCustomResult);
             }
 
@@ -217,10 +214,8 @@ namespace System.Web.Mvc
             {
                 // use all available key/value pairs. Keys need to be sorted so we end up with a stable identifier.
                 IEnumerable<KeyValuePair<string, object>> orderedParameters =
-                    filterContext.ActionParameters.OrderBy(
-                        k => k.Key,
-                        StringComparer.OrdinalIgnoreCase
-                    );
+                    filterContext.ActionParameters
+                        .OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase);
 
                 foreach (KeyValuePair<string, object> item in orderedParameters)
                 {

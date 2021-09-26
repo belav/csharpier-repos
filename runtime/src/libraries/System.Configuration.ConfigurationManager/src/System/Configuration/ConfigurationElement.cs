@@ -166,9 +166,8 @@ namespace System.Configuration
                                     childElement.SetReadOnly();
 
                                 if (
-                                    typeof(ConfigurationElementCollection).IsAssignableFrom(
-                                        prop.Type
-                                    )
+                                    typeof(ConfigurationElementCollection)
+                                        .IsAssignableFrom(prop.Type)
                                 )
                                 {
                                     ConfigurationElementCollection childElementCollection =

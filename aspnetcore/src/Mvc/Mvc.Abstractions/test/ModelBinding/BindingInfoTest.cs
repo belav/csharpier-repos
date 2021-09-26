@@ -85,15 +85,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             };
             var modelType = typeof(Guid);
             var provider = new TestModelMetadataProvider();
-            provider.ForType(modelType)
-                .BindingDetails(
-                    metadata =>
-                    {
-                        metadata.BindingSource = BindingSource.Special;
-                        metadata.BinderType = typeof(SimpleTypeModelBinder);
-                        metadata.BinderModelName = "Different";
-                    }
-                );
+            provider.ForType(modelType).BindingDetails(
+                metadata =>
+                {
+                    metadata.BindingSource = BindingSource.Special;
+                    metadata.BinderType = typeof(SimpleTypeModelBinder);
+                    metadata.BinderModelName = "Different";
+                }
+            );
             var modelMetadata = provider.GetMetadataForType(modelType);
 
             // Act
@@ -117,15 +116,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             };
             var modelType = typeof(Guid);
             var provider = new TestModelMetadataProvider();
-            provider.ForType(modelType)
-                .BindingDetails(
-                    metadata =>
-                    {
-                        metadata.BindingSource = BindingSource.Special;
-                        metadata.BinderType = typeof(SimpleTypeModelBinder);
-                        metadata.BinderModelName = "Different";
-                    }
-                );
+            provider.ForType(modelType).BindingDetails(
+                metadata =>
+                {
+                    metadata.BindingSource = BindingSource.Special;
+                    metadata.BinderType = typeof(SimpleTypeModelBinder);
+                    metadata.BinderModelName = "Different";
+                }
+            );
             var modelMetadata = provider.GetMetadataForType(modelType);
 
             // Act
@@ -145,13 +143,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var attributes = new object[] { new ControllerAttribute(), new BindNeverAttribute(), };
             var modelType = typeof(Guid);
             var provider = new TestModelMetadataProvider();
-            provider.ForType(modelType)
-                .BindingDetails(
-                    metadata =>
-                    {
-                        metadata.BinderType = typeof(ComplexObjectModelBinder);
-                    }
-                );
+            provider.ForType(modelType).BindingDetails(
+                metadata =>
+                {
+                    metadata.BinderType = typeof(ComplexObjectModelBinder);
+                }
+            );
             var modelMetadata = provider.GetMetadataForType(modelType);
 
             // Act
@@ -174,13 +171,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             };
             var modelType = typeof(Guid);
             var provider = new TestModelMetadataProvider();
-            provider.ForType(modelType)
-                .BindingDetails(
-                    metadata =>
-                    {
-                        metadata.BindingSource = BindingSource.Services;
-                    }
-                );
+            provider.ForType(modelType).BindingDetails(
+                metadata =>
+                {
+                    metadata.BindingSource = BindingSource.Services;
+                }
+            );
             var modelMetadata = provider.GetMetadataForType(modelType);
 
             // Act
@@ -204,13 +200,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var propertyFilterProvider = Mock.Of<IPropertyFilterProvider>();
             var modelType = typeof(Guid);
             var provider = new TestModelMetadataProvider();
-            provider.ForType(modelType)
-                .BindingDetails(
-                    metadata =>
-                    {
-                        metadata.PropertyFilterProvider = propertyFilterProvider;
-                    }
-                );
+            provider.ForType(modelType).BindingDetails(
+                metadata =>
+                {
+                    metadata.PropertyFilterProvider = propertyFilterProvider;
+                }
+            );
             var modelMetadata = provider.GetMetadataForType(modelType);
 
             // Act

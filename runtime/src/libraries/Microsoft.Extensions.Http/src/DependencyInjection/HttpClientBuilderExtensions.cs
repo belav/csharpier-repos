@@ -39,10 +39,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(configureClient));
             }
 
-            builder.Services.Configure<HttpClientFactoryOptions>(
-                builder.Name,
-                options => options.HttpClientActions.Add(configureClient)
-            );
+            builder.Services
+                .Configure<HttpClientFactoryOptions>(
+                    builder.Name,
+                    options => options.HttpClientActions.Add(configureClient)
+                );
 
             return builder;
         }
@@ -79,9 +80,8 @@ namespace Microsoft.Extensions.DependencyInjection
                         builder.Name,
                         (options) =>
                         {
-                            options.HttpClientActions.Add(
-                                client => configureClient(services, client)
-                            );
+                            options.HttpClientActions
+                                .Add(client => configureClient(services, client));
                         }
                     );
                 }
@@ -119,9 +119,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.AdditionalHandlers.Add(configureHandler())
-                    );
+                    options.HttpMessageHandlerBuilderActions
+                        .Add(b => b.AdditionalHandlers.Add(configureHandler()));
                 }
             );
 
@@ -162,9 +161,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.AdditionalHandlers.Add(configureHandler(b.Services))
-                    );
+                    options.HttpMessageHandlerBuilderActions
+                        .Add(b => b.AdditionalHandlers.Add(configureHandler(b.Services)));
                 }
             );
 
@@ -198,9 +196,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.AdditionalHandlers.Add(b.Services.GetRequiredService<THandler>())
-                    );
+                    options.HttpMessageHandlerBuilderActions
+                        .Add(
+                            b => b.AdditionalHandlers.Add(b.Services.GetRequiredService<THandler>())
+                        );
                 }
             );
 
@@ -237,9 +236,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.PrimaryHandler = configureHandler()
-                    );
+                    options.HttpMessageHandlerBuilderActions
+                        .Add(b => b.PrimaryHandler = configureHandler());
                 }
             );
 
@@ -282,9 +280,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.PrimaryHandler = configureHandler(b.Services)
-                    );
+                    options.HttpMessageHandlerBuilderActions
+                        .Add(b => b.PrimaryHandler = configureHandler(b.Services));
                 }
             );
 
@@ -319,9 +316,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Name,
                 options =>
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(
-                        b => b.PrimaryHandler = b.Services.GetRequiredService<THandler>()
-                    );
+                    options.HttpMessageHandlerBuilderActions
+                        .Add(b => b.PrimaryHandler = b.Services.GetRequiredService<THandler>());
                 }
             );
 
@@ -350,10 +346,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(configureBuilder));
             }
 
-            builder.Services.Configure<HttpClientFactoryOptions>(
-                builder.Name,
-                options => options.HttpMessageHandlerBuilderActions.Add(configureBuilder)
-            );
+            builder.Services
+                .Configure<HttpClientFactoryOptions>(
+                    builder.Name,
+                    options => options.HttpMessageHandlerBuilderActions.Add(configureBuilder)
+                );
 
             return builder;
         }
@@ -739,10 +736,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 );
             }
 
-            builder.Services.Configure<HttpClientFactoryOptions>(
-                builder.Name,
-                options => options.HandlerLifetime = handlerLifetime
-            );
+            builder.Services
+                .Configure<HttpClientFactoryOptions>(
+                    builder.Name,
+                    options => options.HandlerLifetime = handlerLifetime
+                );
             return builder;
         }
 
@@ -754,9 +752,10 @@ namespace Microsoft.Extensions.DependencyInjection
             bool validateSingleType
         )
         {
-            var registry = (HttpClientMappingRegistry)builder.Services.Single(
-                sd => sd.ServiceType == typeof(HttpClientMappingRegistry)
-            ).ImplementationInstance;
+            var registry = (HttpClientMappingRegistry)builder.Services
+                .Single(
+                    sd => sd.ServiceType == typeof(HttpClientMappingRegistry)
+                ).ImplementationInstance;
             Debug.Assert(registry != null);
 
             // Check for same name registered to two types. This won't work because we rely on named options for the configuration.

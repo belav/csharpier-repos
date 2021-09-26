@@ -41,12 +41,13 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         public void Log(FunctionId functionId, LogMessage logMessage)
         {
             OutputPane.WriteLine(
-                string.Format(
-                    "[{0}] {1} - {2}",
-                    Environment.CurrentManagedThreadId,
-                    functionId.ToString(),
-                    logMessage.GetMessage()
-                )
+                string
+                    .Format(
+                        "[{0}] {1} - {2}",
+                        Environment.CurrentManagedThreadId,
+                        functionId.ToString(),
+                        logMessage.GetMessage()
+                    )
             );
         }
 
@@ -58,13 +59,14 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         )
         {
             OutputPane.WriteLine(
-                string.Format(
-                    "[{0}] Start({1}) : {2} - {3}",
-                    Environment.CurrentManagedThreadId,
-                    uniquePairId,
-                    functionId.ToString(),
-                    logMessage.GetMessage()
-                )
+                string
+                    .Format(
+                        "[{0}] Start({1}) : {2} - {3}",
+                        Environment.CurrentManagedThreadId,
+                        uniquePairId,
+                        functionId.ToString(),
+                        logMessage.GetMessage()
+                    )
             );
         }
 
@@ -80,13 +82,14 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 functionId.ToString()
                 + (cancellationToken.IsCancellationRequested ? " Canceled" : string.Empty);
             OutputPane.WriteLine(
-                string.Format(
-                    "[{0}] End({1}) : [{2}ms] {3}",
-                    Environment.CurrentManagedThreadId,
-                    uniquePairId,
-                    delta,
-                    functionString
-                )
+                string
+                    .Format(
+                        "[{0}] End({1}) : [{2}ms] {3}",
+                        Environment.CurrentManagedThreadId,
+                        uniquePairId,
+                        delta,
+                        functionString
+                    )
             );
         }
 

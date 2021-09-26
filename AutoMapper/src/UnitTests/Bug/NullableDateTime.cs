@@ -27,15 +27,14 @@ namespace AutoMapper.UnitTests.Bug
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(
-                            m => m.Foo,
-                            opt =>
-                            {
-                                opt.Condition(src => src.Bars != null && src.Bars.Length > 0);
-                                opt.MapFrom(src => src.Bars.Min(b => b.Bar));
-                            }
-                        );
+                    cfg.CreateMap<Source, Destination>().ForMember(
+                        m => m.Foo,
+                        opt =>
+                        {
+                            opt.Condition(src => src.Bars != null && src.Bars.Length > 0);
+                            opt.MapFrom(src => src.Bars.Min(b => b.Bar));
+                        }
+                    );
                 }
             );
     }

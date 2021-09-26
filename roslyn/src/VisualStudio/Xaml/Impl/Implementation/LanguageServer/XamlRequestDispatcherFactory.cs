@@ -99,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                 {
                     try
                     {
-                        return await base.ExecuteRequestAsync(
+                        return await base
+                            .ExecuteRequestAsync(
                                 queue,
                                 request,
                                 clientCapabilities,

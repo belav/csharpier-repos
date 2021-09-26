@@ -68,31 +68,28 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
         {
             var castNodes = diagnostics.SelectAsArray(
                 d =>
-                    (ExpressionSyntax)d.AdditionalLocations[0].FindNode(
-                        getInnermostNodeForTie: true,
-                        cancellationToken
-                    )
+                    (ExpressionSyntax)d.AdditionalLocations[0]
+                        .FindNode(getInnermostNodeForTie: true, cancellationToken)
             );
 
             await editor.ApplyExpressionLevelSemanticEditsAsync(
-                    document,
-                    castNodes,
-                    (semanticModel, castExpression) =>
-                        CastSimplifier.IsUnnecessaryCast(
-                            castExpression,
-                            semanticModel,
-                            cancellationToken
-                        ),
-                    (_, currentRoot, castExpression) =>
-                    {
-                        var oldParent = castExpression.WalkUpParentheses();
-                        var newParent = Recurse(oldParent);
+                document,
+                castNodes,
+                (semanticModel, castExpression) =>
+                    CastSimplifier.IsUnnecessaryCast(
+                        castExpression,
+                        semanticModel,
+                        cancellationToken
+                    ),
+                (_, currentRoot, castExpression) =>
+                {
+                    var oldParent = castExpression.WalkUpParentheses();
+                    var newParent = Recurse(oldParent);
 
-                        return currentRoot.ReplaceNode(oldParent, newParent);
-                    },
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+                    return currentRoot.ReplaceNode(oldParent, newParent);
+                },
+                cancellationToken
+            ).ConfigureAwait(false);
         }
 
         private ExpressionSyntax Recurse(ExpressionSyntax old)
@@ -104,9 +101,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
                 // expressions as worthy of simplification.  The simplifier will remove these
                 // if possible, or leave them alone if not.
                 return parenthesizedExpression.ReplaceNode(
-                        parenthesizedExpression.Expression,
-                        Recurse(parenthesizedExpression.Expression)
-                    )
+                    parenthesizedExpression.Expression,
+                    Recurse(parenthesizedExpression.Expression)
+                )
                     .WithAdditionalAnnotations(Simplifier.Annotation);
             }
             else if (old is CastExpressionSyntax castExpression)
@@ -119,9 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
             }
             else if (old is BinaryExpressionSyntax binaryExpression)
             {
-                return binaryExpression.Left.WithTrailingTrivia(
-                        binaryExpression.GetTrailingTrivia()
-                    )
+                return binaryExpression.Left
+                    .WithTrailingTrivia(binaryExpression.GetTrailingTrivia())
                     .WithAdditionalAnnotations(Simplifier.Annotation);
             }
             else

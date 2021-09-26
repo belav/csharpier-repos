@@ -94,9 +94,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     return ImmutableArray.Create<CustomModifier>(
                         CSharpCustomModifier.CreateRequired(
-                            this.ContainingAssembly.GetSpecialType(
-                                SpecialType.System_Runtime_CompilerServices_IsVolatile
-                            )
+                            this.ContainingAssembly
+                                .GetSpecialType(
+                                    SpecialType.System_Runtime_CompilerServices_IsVolatile
+                                )
                         )
                     );
                 }
@@ -131,10 +132,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (attribute.IsTargetAttribute(this, AttributeDescription.FixedBufferAttribute))
             {
                 // error CS1716: Do not use 'System.Runtime.CompilerServices.FixedBuffer' attribute. Use the 'fixed' field modifier instead.
-                ((BindingDiagnosticBag)arguments.Diagnostics).Add(
-                    ErrorCode.ERR_DoNotUseFixedBufferAttr,
-                    arguments.AttributeSyntaxOpt.Name.Location
-                );
+                ((BindingDiagnosticBag)arguments.Diagnostics)
+                    .Add(
+                        ErrorCode.ERR_DoNotUseFixedBufferAttr,
+                        arguments.AttributeSyntaxOpt.Name.Location
+                    );
             }
             else
             {
@@ -345,9 +347,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                dependencies = ImmutableHashSet<SourceFieldSymbolWithSyntaxReference>.Empty.Union(
-                    builder
-                );
+                dependencies = ImmutableHashSet<SourceFieldSymbolWithSyntaxReference>.Empty
+                    .Union(builder);
             }
 
             diagnostics.Free();
@@ -437,9 +438,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this.AddDeclarationDiagnostics(diagnostics);
                     // CompletionPart.ConstantValue is the last part for a field
                     DeclaringCompilation.SymbolDeclaredEvent(this);
-                    var wasSetThisThread = this.state.NotePartComplete(
-                        CompletionPart.ConstantValue
-                    );
+                    var wasSetThisThread = this.state
+                        .NotePartComplete(CompletionPart.ConstantValue);
                     Debug.Assert(wasSetThisThread);
                 }
             }

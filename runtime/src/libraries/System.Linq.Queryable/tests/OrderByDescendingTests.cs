@@ -104,7 +104,8 @@ namespace System.Linq.Tests
         [Fact]
         public void OrderByDescending2()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .OrderByDescending(n => n, Comparer<int>.Default)
                 .Count();
             Assert.Equal(3, count);

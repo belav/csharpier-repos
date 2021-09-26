@@ -48,9 +48,8 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            ConstructorInfo constructor = typeof(TypeBuilderStringAttribute).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(TypeBuilderStringAttribute)
+                .GetConstructor(new Type[] { typeof(string) });
             CustomAttributeBuilder cuatbu = new CustomAttributeBuilder(
                 constructor,
                 new object[] { "hello" }

@@ -118,9 +118,8 @@ public class Directory_ReparsePoints_MountVolume
                             Eval(dirs.Length == list.Count, "Err_813weq! wrong count");
                             for (int i = 0; i < dirs.Length; i++)
                             {
-                                string exDir = dirs[i].Substring(
-                                    dirNameReferedFromMountedDrive.Length
-                                );
+                                string exDir = dirs[i]
+                                    .Substring(dirNameReferedFromMountedDrive.Length);
                                 if (
                                     Eval(
                                         list.Contains(exDir),
@@ -238,9 +237,8 @@ public class Directory_ReparsePoints_MountVolume
                             Eval(dirs.Length == list.Count, "Err_154vrz! wrong count");
                             for (int i = 0; i < dirs.Length; i++)
                             {
-                                string exDir = dirs[i].Substring(
-                                    dirNameReferedFromMountedDrive.Length
-                                );
+                                string exDir = dirs[i]
+                                    .Substring(dirNameReferedFromMountedDrive.Length);
                                 if (
                                     Eval(
                                         list.Contains(exDir),
@@ -356,9 +354,8 @@ public class Directory_ReparsePoints_MountVolume
                             Eval(dirs.Length == list.Count, "Err_771dxv! wrong count");
                             for (int i = 0; i < dirs.Length; i++)
                             {
-                                string exDir = dirs[i].Substring(
-                                    dirNameReferedFromMountedDrive.Length
-                                );
+                                string exDir = dirs[i]
+                                    .Substring(dirNameReferedFromMountedDrive.Length);
                                 if (
                                     Eval(
                                         list.Contains(exDir),
@@ -472,9 +469,8 @@ public class Directory_ReparsePoints_MountVolume
                             Eval(dirs.Length == list.Count, "Err_512oxq! wrong count");
                             for (int i = 0; i < dirs.Length; i++)
                             {
-                                string exDir = dirs[i].Substring(
-                                    dirNameReferedFromMountedDrive.Length
-                                );
+                                string exDir = dirs[i]
+                                    .Substring(dirNameReferedFromMountedDrive.Length);
                                 if (
                                     Eval(
                                         list.Contains(exDir),

@@ -34,9 +34,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(
-                                async
-                            )
+                            base
+                                .Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(
+                                    async
+                                )
                     )
                 ).Message
             );

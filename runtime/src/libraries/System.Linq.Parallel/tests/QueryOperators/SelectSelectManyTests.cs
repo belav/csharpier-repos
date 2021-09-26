@@ -622,9 +622,9 @@ namespace System.Linq.Parallel.Tests
             int seen = 0;
             Assert.All(
                 query.SelectMany(
-                        x => expand(x, expansion),
-                        (original, expanded) => KeyValuePair.Create(original, expanded)
-                    )
+                    x => expand(x, expansion),
+                    (original, expanded) => KeyValuePair.Create(original, expanded)
+                )
                     .ToList(),
                 p =>
                 {
@@ -801,9 +801,8 @@ namespace System.Linq.Parallel.Tests
             int seen = 0;
             Assert.All(
                 query.SelectMany(
-                        (x, index) =>
-                            expand(x, expansion).Select(y => KeyValuePair.Create(index, y))
-                    )
+                    (x, index) => expand(x, expansion).Select(y => KeyValuePair.Create(index, y))
+                )
                     .ToList(),
                 pIndex =>
                 {
@@ -989,10 +988,9 @@ namespace System.Linq.Parallel.Tests
             int seen = 0;
             Assert.All(
                 query.SelectMany(
-                        (x, index) =>
-                            expand(x, expansion).Select(y => KeyValuePair.Create(index, y)),
-                        (original, expanded) => KeyValuePair.Create(original, expanded)
-                    )
+                    (x, index) => expand(x, expansion).Select(y => KeyValuePair.Create(index, y)),
+                    (original, expanded) => KeyValuePair.Create(original, expanded)
+                )
                     .ToList(),
                 pOuter =>
                 {

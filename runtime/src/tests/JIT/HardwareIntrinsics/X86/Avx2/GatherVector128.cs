@@ -92,7 +92,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<float>)typeof(Avx2).GetMethod(
+                        (Vector128<float>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(float*), typeof(Vector128<int>), typeof(byte) }
                             )
@@ -205,7 +206,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vd =
-                        (Vector128<double>)typeof(Avx2).GetMethod(
+                        (Vector128<double>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(double*), typeof(Vector128<int>), typeof(byte) }
                             )
@@ -315,7 +317,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<int>)typeof(Avx2).GetMethod(
+                        (Vector128<int>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(int*), typeof(Vector128<int>), typeof(byte) }
                             )
@@ -407,7 +410,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<uint>)typeof(Avx2).GetMethod(
+                        (Vector128<uint>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(uint*), typeof(Vector128<int>), typeof(byte) }
                             )
@@ -499,7 +503,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<long>)typeof(Avx2).GetMethod(
+                        (Vector128<long>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(long*), typeof(Vector128<int>), typeof(byte) }
                             )
@@ -591,7 +596,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<ulong>)typeof(Avx2).GetMethod(
+                        (Vector128<ulong>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(ulong*), typeof(Vector128<int>), typeof(byte) }
                             )
@@ -685,7 +691,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<int>)typeof(Avx2).GetMethod(
+                        (Vector128<int>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(int*), typeof(Vector128<long>), typeof(byte) }
                             )
@@ -781,7 +788,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<uint>)typeof(Avx2).GetMethod(
+                        (Vector128<uint>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(uint*), typeof(Vector128<long>), typeof(byte) }
                             )
@@ -877,7 +885,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<long>)typeof(Avx2).GetMethod(
+                        (Vector128<long>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(long*), typeof(Vector128<long>), typeof(byte) }
                             )
@@ -973,7 +982,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<ulong>)typeof(Avx2).GetMethod(
+                        (Vector128<ulong>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(ulong*), typeof(Vector128<long>), typeof(byte) }
                             )
@@ -1076,7 +1086,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<float>)typeof(Avx2).GetMethod(
+                        (Vector128<float>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(float*), typeof(Vector128<long>), typeof(byte) }
                             )
@@ -1193,7 +1204,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vd =
-                        (Vector128<double>)typeof(Avx2).GetMethod(
+                        (Vector128<double>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[]
                                 {
@@ -1312,7 +1324,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<int>)typeof(Avx2).GetMethod(
+                        (Vector128<int>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(int*), typeof(Vector256<long>), typeof(byte) }
                             )
@@ -1408,7 +1421,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<uint>)typeof(Avx2).GetMethod(
+                        (Vector128<uint>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(uint*), typeof(Vector256<long>), typeof(byte) }
                             )
@@ -1509,7 +1523,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<float>)typeof(Avx2).GetMethod(
+                        (Vector128<float>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector128),
                                 new Type[] { typeof(float*), typeof(Vector256<long>), typeof(byte) }
                             )

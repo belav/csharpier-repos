@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
     internal class HubMethodDescriptor
     {
         private static readonly MethodInfo MakeCancelableAsyncEnumerableMethod =
-            typeof(AsyncEnumerableAdapters).GetRuntimeMethods()
+            typeof(AsyncEnumerableAdapters)
+                .GetRuntimeMethods()
                 .Single(
                     m =>
                         m.Name.Equals(nameof(AsyncEnumerableAdapters.MakeCancelableAsyncEnumerable))
@@ -24,12 +25,13 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                 );
 
         private static readonly MethodInfo MakeAsyncEnumerableFromChannelMethod =
-            typeof(AsyncEnumerableAdapters).GetRuntimeMethods()
+            typeof(AsyncEnumerableAdapters)
+                .GetRuntimeMethods()
                 .Single(
                     m =>
-                        m.Name.Equals(
-                            nameof(AsyncEnumerableAdapters.MakeAsyncEnumerableFromChannel)
-                        ) && m.IsGenericMethod
+                        m.Name
+                            .Equals(nameof(AsyncEnumerableAdapters.MakeAsyncEnumerableFromChannel))
+                        && m.IsGenericMethod
                 );
 
         private readonly MethodInfo? _makeCancelableEnumerableMethodInfo;
@@ -80,41 +82,35 @@ namespace Microsoft.AspNetCore.SignalR.Internal
 
             // Take out synthetic arguments that will be provided by the server, this list will be given to the protocol parsers
             ParameterTypes = methodExecutor.MethodParameters.Where(
-                    p =>
+                p =>
+                {
+                    // Only streams can take CancellationTokens currently
+                    if (IsStreamResponse && p.ParameterType == typeof(CancellationToken))
                     {
-                        // Only streams can take CancellationTokens currently
-                        if (IsStreamResponse && p.ParameterType == typeof(CancellationToken))
-                        {
-                            HasSyntheticArguments = true;
-                            return false;
-                        }
-                        else if (
-                            ReflectionHelper.IsStreamingType(
-                                p.ParameterType,
-                                mustBeDirectType: true
-                            )
-                        )
-                        {
-                            if (StreamingParameters == null)
-                            {
-                                StreamingParameters = new List<Type>();
-                            }
-
-                            StreamingParameters.Add(p.ParameterType.GetGenericArguments()[0]);
-                            HasSyntheticArguments = true;
-                            return false;
-                        }
-                        return true;
+                        HasSyntheticArguments = true;
+                        return false;
                     }
-                )
-                .Select(p => p.ParameterType)
-                .ToArray();
+                    else if (
+                        ReflectionHelper.IsStreamingType(p.ParameterType, mustBeDirectType: true)
+                    )
+                    {
+                        if (StreamingParameters == null)
+                        {
+                            StreamingParameters = new List<Type>();
+                        }
+
+                        StreamingParameters.Add(p.ParameterType.GetGenericArguments()[0]);
+                        HasSyntheticArguments = true;
+                        return false;
+                    }
+                    return true;
+                }
+            ).Select(p => p.ParameterType).ToArray();
 
             if (HasSyntheticArguments)
             {
-                OriginalParameterTypes = methodExecutor.MethodParameters.Select(
-                        p => p.ParameterType
-                    )
+                OriginalParameterTypes = methodExecutor.MethodParameters
+                    .Select(p => p.ParameterType)
                     .ToArray();
             }
 

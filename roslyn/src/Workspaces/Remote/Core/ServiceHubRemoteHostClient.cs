@@ -117,11 +117,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 var hubClient = new HubClient("ManagedLanguage.IDE.RemoteHostClient");
 
                 var remoteHostStream = await RequestServiceAsync(
-                        services,
-                        hubClient,
-                        WellKnownServiceHubService.RemoteHost,
-                        cancellationToken
-                    )
+                    services,
+                    hubClient,
+                    WellKnownServiceHubService.RemoteHost,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var client = new ServiceHubRemoteHostClient(
@@ -137,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 var cultureLCID = CultureInfo.CurrentCulture.LCID;
 
                 // initialize the remote service
-                await client._endPoint.InvokeAsync<string>(
+                await client._endPoint
+                    .InvokeAsync<string>(
                         nameof(IRemoteHostService.InitializeGlobalState),
                         new object?[] { uiCultureLCID, cultureLCID },
                         cancellationToken
@@ -145,14 +146,14 @@ namespace Microsoft.CodeAnalysis.Remote
                     .ConfigureAwait(false);
 
                 await client.TryInvokeAsync<IRemoteAsynchronousOperationListenerService>(
-                        (service, cancellationToken) =>
-                            service.EnableAsync(
-                                AsynchronousOperationListenerProvider.IsEnabled,
-                                listenerProvider.DiagnosticTokensEnabled,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    (service, cancellationToken) =>
+                        service.EnableAsync(
+                            AsynchronousOperationListenerProvider.IsEnabled,
+                            listenerProvider.DiagnosticTokensEnabled,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 client.Started();
@@ -285,11 +286,11 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             var serviceStream = await RequestServiceAsync(
-                    _services,
-                    _hubClient,
-                    serviceName,
-                    cancellationToken
-                )
+                _services,
+                _hubClient,
+                serviceName,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return new JsonRpcConnection(
                 _services,
@@ -343,19 +344,19 @@ namespace Microsoft.CodeAnalysis.Remote
                 )
                 {
                     await RemoteEndPoint.WriteDataToNamedPipeAsync(
-                            pipeName,
-                            (scopeId, checksums),
-                            (writer, data, cancellationToken) =>
-                                RemoteHostAssetSerialization.WriteDataAsync(
-                                    writer,
-                                    _assetStorage,
-                                    _serializer,
-                                    data.scopeId,
-                                    data.checksums,
-                                    cancellationToken
-                                ),
-                            cancellationToken
-                        )
+                        pipeName,
+                        (scopeId, checksums),
+                        (writer, data, cancellationToken) =>
+                            RemoteHostAssetSerialization.WriteDataAsync(
+                                writer,
+                                _assetStorage,
+                                _serializer,
+                                data.scopeId,
+                                data.checksums,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -377,7 +378,7 @@ namespace Microsoft.CodeAnalysis.Remote
             try
             {
                 return _services.GetRequiredService<IExperimentationService>()
-                    .IsExperimentEnabled(experimentName)
+                .IsExperimentEnabled(experimentName)
                   ? SpecializedTasks.True
                   : SpecializedTasks.False;
             }

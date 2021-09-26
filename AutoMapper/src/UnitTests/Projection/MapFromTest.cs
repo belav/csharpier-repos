@@ -26,9 +26,10 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
                 }
             );
 
-            typeof(NullReferenceException).ShouldNotBeThrownBy(
-                () => config.Internal().ProjectionBuilder.GetMapExpression<UserModel, UserDto>()
-            ); //null reference exception here
+            typeof(NullReferenceException)
+                .ShouldNotBeThrownBy(
+                    () => config.Internal().ProjectionBuilder.GetMapExpression<UserModel, UserDto>()
+                ); //null reference exception here
         }
 
         [Fact]
@@ -83,7 +84,8 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
 
         protected override void Because_of()
         {
-            _destination = new[] { new Model() }.AsQueryable()
+            _destination = new[] { new Model() }
+                .AsQueryable()
                 .ProjectTo<Dto>(Configuration)
                 .Single();
         }
@@ -117,8 +119,8 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
             );
         [Fact]
         public void Should_map_ok() =>
-            Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") })
-                .Value.ShouldBe("mappedFrom");
+            Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") }).Value
+                .ShouldBe("mappedFrom");
     }
     public class When_mapping_from_private_method : AutoMapperSpecBase
     {
@@ -145,7 +147,7 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
             );
         [Fact]
         public void Should_map_ok() =>
-            Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") })
-                .Value.ShouldBe("mappedFrom");
+            Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") }).Value
+                .ShouldBe("mappedFrom");
     }
 }

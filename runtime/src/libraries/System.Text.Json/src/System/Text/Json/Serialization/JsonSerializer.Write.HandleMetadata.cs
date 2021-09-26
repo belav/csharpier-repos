@@ -38,10 +38,8 @@ namespace System.Text.Json
             }
             else
             {
-                string referenceId = state.ReferenceResolver.GetReference(
-                    currentValue,
-                    out bool alreadyExists
-                );
+                string referenceId = state.ReferenceResolver
+                    .GetReference(currentValue, out bool alreadyExists);
                 Debug.Assert(referenceId != null);
 
                 if (alreadyExists)
@@ -77,10 +75,8 @@ namespace System.Text.Json
             }
             else
             {
-                string referenceId = state.ReferenceResolver.GetReference(
-                    currentValue,
-                    out bool alreadyExists
-                );
+                string referenceId = state.ReferenceResolver
+                    .GetReference(currentValue, out bool alreadyExists);
                 Debug.Assert(referenceId != null);
 
                 if (alreadyExists)

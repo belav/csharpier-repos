@@ -39,10 +39,10 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
                 document.GetLanguageService<IAddMissingImportsFeatureService>();
 
             var analysis = await addMissingImportsService.AnalyzeAsync(
-                    document,
-                    textSpan,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!analysis.CanAddMissingImports)
             {
@@ -71,10 +71,10 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
         )
         {
             var modifiedDocument = await addMissingImportsService.AddMissingImportsAsync(
-                    document,
-                    analysis,
-                    cancellationToken
-                )
+                document,
+                analysis,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return modifiedDocument.Project.Solution;
         }

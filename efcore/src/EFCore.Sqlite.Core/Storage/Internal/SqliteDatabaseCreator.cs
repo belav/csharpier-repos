@@ -112,8 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         public override bool HasTables()
         {
             var count = (long)_rawSqlCommandBuilder.Build(
-                    "SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;"
-                )
+                "SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;"
+            )
                 .ExecuteScalar(
                     new RelationalCommandParameterObject(
                         Dependencies.Connection,

@@ -182,10 +182,11 @@ namespace System.Data
                         case StorageType.UInt32:
                         case StorageType.UInt64:
                         case StorageType.Decimal:
-                            return decimal.Compare(
-                                Convert.ToDecimal(vLeft, FormatProvider),
-                                Convert.ToDecimal(vRight, FormatProvider)
-                            );
+                            return decimal
+                                .Compare(
+                                    Convert.ToDecimal(vLeft, FormatProvider),
+                                    Convert.ToDecimal(vRight, FormatProvider)
+                                );
                         case StorageType.Char:
                             return Convert.ToInt32(vLeft, FormatProvider)
                                 .CompareTo(Convert.ToInt32(vRight, FormatProvider));
@@ -207,11 +208,12 @@ namespace System.Data
                                 (DateTimeOffset)vRight
                             );
                         case StorageType.String:
-                            return table!.Compare(
-                                Convert.ToString(vLeft, FormatProvider)!,
-                                Convert.ToString(vRight, FormatProvider)!,
-                                comparer
-                            );
+                            return table!
+                                .Compare(
+                                    Convert.ToString(vLeft, FormatProvider)!,
+                                    Convert.ToString(vRight, FormatProvider)!,
+                                    comparer
+                                );
                         case StorageType.Guid:
                             return ((Guid)vLeft).CompareTo((Guid)vRight);
                         case StorageType.Boolean:

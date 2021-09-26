@@ -40,9 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || constructor.ContainingType.BaseTypeNoUseSiteDiagnostics.SpecialType
                         == SpecialType.System_Object
             );
-            var objectType = constructor.ContainingAssembly.GetSpecialType(
-                SpecialType.System_Object
-            );
+            var objectType = constructor.ContainingAssembly
+                .GetSpecialType(SpecialType.System_Object);
 
             BoundExpression receiver = new BoundThisReference(syntax, constructor.ContainingType)
             {
@@ -207,8 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             foreach (var field in synthesizedFields.FieldSymbols)
             {
                 var targetScriptType = (ImplicitNamedTypeSymbol)field.Type;
-                var targetSubmissionIndex =
-                    targetScriptType.DeclaringCompilation.GetSubmissionSlotIndex();
+                var targetSubmissionIndex = targetScriptType.DeclaringCompilation
+                    .GetSubmissionSlotIndex();
                 Debug.Assert(targetSubmissionIndex >= 0);
 
                 // this.<field> = (<target_script_type>)<submission_array>[<target_submission_index>];

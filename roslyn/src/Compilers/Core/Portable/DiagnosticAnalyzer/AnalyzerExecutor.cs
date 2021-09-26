@@ -1416,8 +1416,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                     if (filter is object)
                                     {
                                         return cb.DescendantNodesAndSelf(
-                                                descendIntoChildren: filter
-                                            )
+                                            descendIntoChildren: filter
+                                        )
                                             .Where(filter);
                                     }
                                     else
@@ -1870,7 +1870,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var nodeActionsByKind = PooledDictionary<
                 TLanguageKindEnum,
                 ArrayBuilder<SyntaxNodeAnalyzerAction<TLanguageKindEnum>>
-            >.GetInstance();
+            >
+                .GetInstance();
             foreach (var nodeAction in nodeActions)
             {
                 foreach (var kind in nodeAction.Kinds)
@@ -1881,7 +1882,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             kind,
                             actionsForKind = ArrayBuilder<
                                 SyntaxNodeAnalyzerAction<TLanguageKindEnum>
-                            >.GetInstance()
+                            >
+                                .GetInstance()
                         );
                     }
 
@@ -2104,7 +2106,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var operationActionsByKind = PooledDictionary<
                 OperationKind,
                 ArrayBuilder<OperationAnalyzerAction>
-            >.GetInstance();
+            >
+                .GetInstance();
             foreach (var operationAction in operationActions)
             {
                 foreach (var kind in operationAction.Kinds)
@@ -2443,7 +2446,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var analyzerName = analyzer.ToString();
             var title = CodeAnalysisResources.CompilerAnalyzerFailure;
             var messageFormat = CodeAnalysisResources.CompilerAnalyzerThrows;
-            var contextInformation = string.Join(
+            var contextInformation = string
+                .Join(
                     Environment.NewLine,
                     CreateDiagnosticDescription(info, e),
                     CreateDisablingMessage(analyzer)
@@ -2456,11 +2460,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 e.Message,
                 contextInformation
             };
-            var description = string.Format(
-                CodeAnalysisResources.CompilerAnalyzerThrowsDescription,
-                analyzerName,
-                CreateDiagnosticDescription(info, e)
-            );
+            var description = string
+                .Format(
+                    CodeAnalysisResources.CompilerAnalyzerThrowsDescription,
+                    analyzerName,
+                    CreateDiagnosticDescription(info, e)
+                );
             var descriptor = GetAnalyzerExceptionDiagnosticDescriptor(
                 AnalyzerExceptionDiagnosticId,
                 title,
@@ -2477,18 +2482,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return e.CreateDiagnosticDescription();
             }
 
-            return string.Join(
-                Environment.NewLine,
-                string.Format(CodeAnalysisResources.ExceptionContext, info?.GetContext()),
-                e.CreateDiagnosticDescription()
-            );
+            return string
+                .Join(
+                    Environment.NewLine,
+                    string.Format(CodeAnalysisResources.ExceptionContext, info?.GetContext()),
+                    e.CreateDiagnosticDescription()
+                );
         }
 
         private static string CreateDisablingMessage(DiagnosticAnalyzer analyzer)
         {
-            var diagnosticIds = ImmutableSortedSet<string>.Empty.WithComparer(
-                StringComparer.OrdinalIgnoreCase
-            );
+            var diagnosticIds = ImmutableSortedSet<string>.Empty
+                .WithComparer(StringComparer.OrdinalIgnoreCase);
             try
             {
                 foreach (var diagnostic in analyzer.SupportedDiagnostics)
@@ -2506,10 +2511,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return "";
             }
 
-            return string.Format(
-                CodeAnalysisResources.DisableAnalyzerDiagnosticsMessage,
-                string.Join(", ", diagnosticIds)
-            );
+            return string
+                .Format(
+                    CodeAnalysisResources.DisableAnalyzerDiagnosticsMessage,
+                    string.Join(", ", diagnosticIds)
+                );
         }
 
         internal static Diagnostic CreateDriverExceptionDiagnostic(Exception e)
@@ -2517,10 +2523,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var title = CodeAnalysisResources.AnalyzerDriverFailure;
             var messageFormat = CodeAnalysisResources.AnalyzerDriverThrows;
             var messageArguments = new[] { e.GetType().ToString(), e.Message };
-            var description = string.Format(
-                CodeAnalysisResources.AnalyzerDriverThrowsDescription,
-                e.CreateDiagnosticDescription()
-            );
+            var description = string
+                .Format(
+                    CodeAnalysisResources.AnalyzerDriverThrowsDescription,
+                    e.CreateDiagnosticDescription()
+                );
             var descriptor = GetAnalyzerExceptionDiagnosticDescriptor(
                 AnalyzerDriverExceptionDiagnosticId,
                 title,

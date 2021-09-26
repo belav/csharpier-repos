@@ -752,8 +752,8 @@ namespace System.Net.Security.Tests
             )
             {
                 var serverOptions = new SslServerAuthenticationOptions();
-                serverOptions.ServerCertificate =
-                    Configuration.Certificates.GetSelfSignedServerCertificate();
+                serverOptions.ServerCertificate = Configuration.Certificates
+                    .GetSelfSignedServerCertificate();
                 serverOptions.EncryptionPolicy = serverParams.EncryptionPolicy;
                 serverOptions.EnabledSslProtocols = serverParams.SslProtocols;
                 serverOptions.CipherSuitesPolicy = serverParams.CipherSuitesPolicy;
@@ -777,11 +777,11 @@ namespace System.Net.Security.Tests
                     );
 
                 Exception failure = WaitForSecureConnection(
-                        client,
-                        clientOptions,
-                        server,
-                        serverOptions
-                    )
+                    client,
+                    clientOptions,
+                    server,
+                    serverOptions
+                )
                     .GetAwaiter()
                     .GetResult();
 

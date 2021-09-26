@@ -227,10 +227,11 @@ namespace System.Net.Mime
         internal void PrepareHeaders(bool allowUnicode)
         {
             _contentType!.PersistIfNeeded((HeaderCollection)Headers, false);
-            _headers!.InternalSet(
-                MailHeaderInfo.GetString(MailHeaderID.ContentType)!,
-                _contentType.Encode(allowUnicode)
-            );
+            _headers!
+                .InternalSet(
+                    MailHeaderInfo.GetString(MailHeaderID.ContentType)!,
+                    _contentType.Encode(allowUnicode)
+                );
 
             if (_contentDisposition != null)
             {

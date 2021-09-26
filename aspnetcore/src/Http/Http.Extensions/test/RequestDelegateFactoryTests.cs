@@ -107,11 +107,12 @@ namespace Microsoft.AspNetCore.Routing.Internal
         [Fact]
         public async Task StaticMethodInfoOverloadWorksWithBasicReflection()
         {
-            var methodInfo = typeof(RequestDelegateFactoryTests).GetMethod(
-                nameof(StaticTestActionBasicReflection),
-                BindingFlags.NonPublic | BindingFlags.Static,
-                new[] { typeof(HttpContext) }
-            );
+            var methodInfo = typeof(RequestDelegateFactoryTests)
+                .GetMethod(
+                    nameof(StaticTestActionBasicReflection),
+                    BindingFlags.NonPublic | BindingFlags.Static,
+                    new[] { typeof(HttpContext) }
+                );
 
             var requestDelegate = RequestDelegateFactory.Create(methodInfo!);
 
@@ -140,11 +141,12 @@ namespace Microsoft.AspNetCore.Routing.Internal
         [Fact]
         public async Task NonStaticMethodInfoOverloadWorksWithBasicReflection()
         {
-            var methodInfo = typeof(TestNonStaticActionClass).GetMethod(
-                nameof(TestNonStaticActionClass.NonStaticTestAction),
-                BindingFlags.Public | BindingFlags.Instance,
-                new[] { typeof(HttpContext) }
-            );
+            var methodInfo = typeof(TestNonStaticActionClass)
+                .GetMethod(
+                    nameof(TestNonStaticActionClass.NonStaticTestAction),
+                    BindingFlags.Public | BindingFlags.Instance,
+                    new[] { typeof(HttpContext) }
+                );
 
             var invoked = false;
 
@@ -177,11 +179,12 @@ namespace Microsoft.AspNetCore.Routing.Internal
         [Fact]
         public void BuildRequestDelegateThrowsArgumentNullExceptions()
         {
-            var methodInfo = typeof(RequestDelegateFactoryTests).GetMethod(
-                nameof(StaticTestActionBasicReflection),
-                BindingFlags.NonPublic | BindingFlags.Static,
-                new[] { typeof(HttpContext) }
-            );
+            var methodInfo = typeof(RequestDelegateFactoryTests)
+                .GetMethod(
+                    nameof(StaticTestActionBasicReflection),
+                    BindingFlags.NonPublic | BindingFlags.Static,
+                    new[] { typeof(HttpContext) }
+                );
 
             var exNullAction = Assert.Throws<ArgumentNullException>(
                 () => RequestDelegateFactory.Create(action: null!)
@@ -604,9 +607,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
             var httpContext = new DefaultHttpContext();
             httpContext.Request.RouteValues["tryParsable"] = "invalid!";
             httpContext.Request.RouteValues["tryParsable2"] = "invalid again!";
-            httpContext.Features.Set<IHttpRequestLifetimeFeature>(
-                new TestHttpRequestLifetimeFeature()
-            );
+            httpContext.Features
+                .Set<IHttpRequestLifetimeFeature>(new TestHttpRequestLifetimeFeature());
             httpContext.RequestServices = serviceCollection.BuildServiceProvider();
 
             var requestDelegate = RequestDelegateFactory.Create((Action<int, int>)TestAction);
@@ -806,9 +808,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Headers["Content-Type"] = "application/json";
             httpContext.Request.Body = new IOExceptionThrowingRequestBodyStream(ioException);
-            httpContext.Features.Set<IHttpRequestLifetimeFeature>(
-                new TestHttpRequestLifetimeFeature()
-            );
+            httpContext.Features
+                .Set<IHttpRequestLifetimeFeature>(new TestHttpRequestLifetimeFeature());
             httpContext.RequestServices = serviceCollection.BuildServiceProvider();
 
             var requestDelegate = RequestDelegateFactory.Create((Action<Todo>)TestAction);
@@ -843,9 +844,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
             httpContext.Request.Body = new IOExceptionThrowingRequestBodyStream(
                 invalidDataException
             );
-            httpContext.Features.Set<IHttpRequestLifetimeFeature>(
-                new TestHttpRequestLifetimeFeature()
-            );
+            httpContext.Features
+                .Set<IHttpRequestLifetimeFeature>(new TestHttpRequestLifetimeFeature());
             httpContext.RequestServices = serviceCollection.BuildServiceProvider();
 
             var requestDelegate = RequestDelegateFactory.Create((Action<Todo>)TestAction);

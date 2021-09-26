@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
         {
             Host = CreateWebHost();
             RunInBackgroundThread(Host.Start);
-            return Host.Services.GetRequiredService<IServer>()
+            return Host.Services
+                .GetRequiredService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses.Single();
         }

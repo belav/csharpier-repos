@@ -44,15 +44,15 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             // Add the interface of the symbol to the top of the root namespace
             document = await CodeGenerator.AddNamespaceOrTypeDeclarationAsync(
-                    document.Project.Solution,
-                    rootNamespace,
-                    CreateCodeGenerationSymbol(document, symbol),
-                    CreateCodeGenerationOptions(
-                        newSemanticModel.SyntaxTree.GetLocation(new TextSpan()),
-                        options
-                    ),
-                    cancellationToken
-                )
+                document.Project.Solution,
+                rootNamespace,
+                CreateCodeGenerationSymbol(document, symbol),
+                CreateCodeGenerationOptions(
+                    newSemanticModel.SyntaxTree.GetLocation(new TextSpan()),
+                    options
+                ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             document = await AddNullableRegionsAsync(document, cancellationToken)
@@ -61,28 +61,28 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             var docCommentFormattingService =
                 document.GetLanguageService<IDocumentationCommentFormattingService>();
             var docWithDocComments = await ConvertDocCommentsToRegularCommentsAsync(
-                    document,
-                    docCommentFormattingService,
-                    cancellationToken
-                )
+                document,
+                docCommentFormattingService,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var docWithAssemblyInfo = await AddAssemblyInfoRegionAsync(
-                    docWithDocComments,
-                    symbolCompilation,
-                    symbol.GetOriginalUnreducedDefinition(),
-                    cancellationToken
-                )
+                docWithDocComments,
+                symbolCompilation,
+                symbol.GetOriginalUnreducedDefinition(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var node = await docWithAssemblyInfo.GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var formattedDoc = await Formatter.FormatAsync(
-                    docWithAssemblyInfo,
-                    SpecializedCollections.SingletonEnumerable(node.FullSpan),
-                    options: null,
-                    rules: GetFormattingRules(docWithAssemblyInfo),
-                    cancellationToken: cancellationToken
-                )
+                docWithAssemblyInfo,
+                SpecializedCollections.SingletonEnumerable(node.FullSpan),
+                options: null,
+                rules: GetFormattingRules(docWithAssemblyInfo),
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var reducers = GetReducers();

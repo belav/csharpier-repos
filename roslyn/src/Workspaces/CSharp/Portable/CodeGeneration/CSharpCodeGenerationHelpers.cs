@@ -316,7 +316,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 cancellationToken
             )
                 ? node.WithPrependedLeadingTrivia(SyntaxFactory.ParseLeadingTrivia(comment))
-                      .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)
+                  .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)
                 : node;
             return result;
         }

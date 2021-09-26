@@ -49,9 +49,8 @@ namespace System.Runtime.Loader
                 );
 
                 IntPtr errorWriterPtr = Marshal.GetFunctionPointerForDelegate(errorWriter);
-                IntPtr previousErrorWriterPtr = Interop.HostPolicy.corehost_set_error_writer(
-                    errorWriterPtr
-                );
+                IntPtr previousErrorWriterPtr = Interop.HostPolicy
+                    .corehost_set_error_writer(errorWriterPtr);
 
                 try
                 {
@@ -139,11 +138,12 @@ namespace System.Runtime.Loader
             //     AssemblyName.CultureName is just a shortcut to AssemblyName.Culture.Name.
             if (
                 !string.IsNullOrEmpty(assemblyName.CultureName)
-                && !string.Equals(
-                    assemblyName.CultureName,
-                    NeutralCultureName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && !string
+                    .Equals(
+                        assemblyName.CultureName,
+                        NeutralCultureName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 // Load satellite assembly

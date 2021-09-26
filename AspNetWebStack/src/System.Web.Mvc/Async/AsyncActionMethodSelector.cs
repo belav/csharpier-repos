@@ -161,7 +161,8 @@ namespace System.Web.Mvc.Async
                         false /* stripInfrastructureMethods */
                     )
                 select methodInfo
-            ).ToList();
+            )
+                .ToList();
 
             switch (methods.Count)
             {

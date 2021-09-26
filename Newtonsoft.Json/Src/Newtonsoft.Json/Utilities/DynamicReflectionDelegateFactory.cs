@@ -197,10 +197,11 @@ namespace Newtonsoft.Json.Utilities
                     if (parameterType.IsPrimitive())
                     {
                         // for primitive types we need to handle type widening (e.g. short -> int)
-                        MethodInfo toParameterTypeMethod = typeof(IConvertible).GetMethod(
-                            "To" + parameterType.Name,
-                            new[] { typeof(IFormatProvider) }
-                        );
+                        MethodInfo toParameterTypeMethod = typeof(IConvertible)
+                            .GetMethod(
+                                "To" + parameterType.Name,
+                                new[] { typeof(IFormatProvider) }
+                            );
 
                         if (toParameterTypeMethod != null)
                         {
@@ -316,10 +317,8 @@ namespace Newtonsoft.Json.Utilities
                 if (constructorInfo == null)
                 {
                     throw new ArgumentException(
-                        "Could not get constructor for {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            type
-                        )
+                        "Could not get constructor for {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, type)
                     );
                 }
 
@@ -350,10 +349,8 @@ namespace Newtonsoft.Json.Utilities
             if (getMethod == null)
             {
                 throw new ArgumentException(
-                    "Property '{0}' does not have a getter.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        propertyInfo.Name
-                    )
+                    "Property '{0}' does not have a getter."
+                        .FormatWith(CultureInfo.InvariantCulture, propertyInfo.Name)
                 );
             }
 

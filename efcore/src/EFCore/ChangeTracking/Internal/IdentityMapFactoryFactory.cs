@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual Func<bool, IIdentityMap> Create(IKey key) =>
-            (Func<bool, IIdentityMap>)typeof(IdentityMapFactoryFactory).GetTypeInfo()
+            (Func<bool, IIdentityMap>)typeof(IdentityMapFactoryFactory)
+                .GetTypeInfo()
                 .GetRequiredDeclaredMethod(nameof(CreateFactory))
                 .MakeGenericMethod(key.GetKeyType())
                 .Invoke(null, new object[] { key })!;

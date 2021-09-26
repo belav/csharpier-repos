@@ -20,13 +20,12 @@ namespace SampleApp
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(
-                    webBuilder =>
-                    {
-                        webBuilder.UseStartup<Startup>();
-                    }
-                );
+            Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(
+                webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                }
+            );
 
         private static void HelloWorld()
         {
@@ -65,9 +64,9 @@ namespace SampleApp
                 WebHost.Start(
                     router =>
                         router.MapGet(
-                                "hello/{name}",
-                                (req, res, data) => res.WriteAsync($"Hello, {data.Values["name"]}")
-                            )
+                            "hello/{name}",
+                            (req, res, data) => res.WriteAsync($"Hello, {data.Values["name"]}")
+                        )
                             .MapGet(
                                 "goodbye/{name}",
                                 (req, res, data) =>
@@ -135,18 +134,16 @@ namespace SampleApp
         private static void HostBuilderWithWebHost(string[] args)
         {
             var host = new HostBuilder().ConfigureAppConfiguration(
-                    config =>
-                    {
-                        config.AddCommandLine(args);
-                    }
-                )
-                .ConfigureWebHostDefaults(
-                    builder =>
-                    {
-                        builder.UseStartup<Startup>();
-                    }
-                )
-                .Build();
+                config =>
+                {
+                    config.AddCommandLine(args);
+                }
+            ).ConfigureWebHostDefaults(
+                builder =>
+                {
+                    builder.UseStartup<Startup>();
+                }
+            ).Build();
 
             host.Run();
         }

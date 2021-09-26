@@ -315,21 +315,23 @@ namespace System.Drawing
                 else
                 {
                     if (
-                        string.Equals(
-                            Path.GetExtension(imageName),
-                            ".ico",
-                            StringComparison.CurrentCultureIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                Path.GetExtension(imageName),
+                                ".ico",
+                                StringComparison.CurrentCultureIgnoreCase
+                            )
                     )
                     {
                         iconname = name;
                     }
                     else if (
-                        string.Equals(
-                            Path.GetExtension(imageName),
-                            ".bmp",
-                            StringComparison.CurrentCultureIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                Path.GetExtension(imageName),
+                                ".bmp",
+                                StringComparison.CurrentCultureIgnoreCase
+                            )
                     )
                     {
                         bmpname = name;

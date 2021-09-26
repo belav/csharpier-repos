@@ -163,19 +163,20 @@ namespace System.ComponentModel
                 }
 
                 return new InstanceDescriptor(
-                    typeof(DateTimeOffset).GetConstructor(
-                        new Type[]
-                        {
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(TimeSpan)
-                        }
-                    ),
+                    typeof(DateTimeOffset)
+                        .GetConstructor(
+                            new Type[]
+                            {
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(TimeSpan)
+                            }
+                        ),
                     new object[]
                     {
                         dto.Year,

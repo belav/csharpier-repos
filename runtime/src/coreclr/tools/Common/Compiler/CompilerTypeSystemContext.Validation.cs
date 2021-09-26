@@ -55,7 +55,8 @@ namespace ILCompiler
                 TypeDesc parameterType = parameterizedType.ParameterType;
 
                 // Make sure type of the parameter is loadable.
-                ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(parameterType);
+                ((CompilerTypeSystemContext)type.Context)
+                    .EnsureLoadableType(parameterType);
 
                 // Validate we're not constructing a type over a ByRef
                 if (parameterType.IsByRef)
@@ -136,9 +137,8 @@ namespace ILCompiler
                 // We need to be able to load interfaces
                 foreach (var intf in type.RuntimeInterfaces)
                 {
-                    ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(
-                        intf.NormalizeInstantiation()
-                    );
+                    ((CompilerTypeSystemContext)type.Context)
+                        .EnsureLoadableType(intf.NormalizeInstantiation());
                 }
 
                 if (type.BaseType != null)

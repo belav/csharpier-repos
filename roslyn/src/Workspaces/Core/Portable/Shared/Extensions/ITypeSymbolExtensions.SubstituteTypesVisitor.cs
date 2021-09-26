@@ -92,9 +92,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 }
 
                 return _typeGenerator.Construct(
-                        symbol.OriginalDefinition,
-                        substitutedArguments.ToArray()
-                    )
+                    symbol.OriginalDefinition,
+                    substitutedArguments.ToArray()
+                )
                     .WithNullableAnnotation(symbol.NullableAnnotation);
             }
 

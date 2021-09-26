@@ -227,8 +227,8 @@ namespace Microsoft.EntityFrameworkCore
             protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
                 optionsBuilder = optionsBuilder.UseInternalServiceProvider(
-                        InMemoryFixture.DefaultServiceProvider
-                    )
+                    InMemoryFixture.DefaultServiceProvider
+                )
                     .UseInMemoryDatabase(nameof(ModelContext));
 
                 if (_model != null)
@@ -252,7 +252,8 @@ namespace Microsoft.EntityFrameworkCore
                 designTime: false
             );
             var packageVersion =
-                typeof(Context1).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                typeof(Context1).Assembly
+                    .GetCustomAttributes<AssemblyMetadataAttribute>()
                     .Single(m => m.Key == "PackageVersion").Value;
 
             var prereleaseIndex = packageVersion.IndexOf("-", StringComparison.Ordinal);

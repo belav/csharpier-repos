@@ -208,9 +208,10 @@ namespace System.Reflection.Emit
                         // type is one.
                         if (
                             !(property.DeclaringType is TypeBuilder)
-                            || !con.DeclaringType.IsSubclassOf(
-                                ((TypeBuilder)property.DeclaringType).BakedRuntimeType
-                            )
+                            || !con.DeclaringType
+                                .IsSubclassOf(
+                                    ((TypeBuilder)property.DeclaringType).BakedRuntimeType
+                                )
                         )
                             throw new ArgumentException(
                                 SR.Argument_BadPropertyForConstructorBuilder
@@ -274,9 +275,10 @@ namespace System.Reflection.Emit
                         // type is one.
                         if (
                             !(namedField.DeclaringType is TypeBuilder)
-                            || !con.DeclaringType.IsSubclassOf(
-                                ((TypeBuilder)namedFields[i].DeclaringType!).BakedRuntimeType
-                            )
+                            || !con.DeclaringType
+                                .IsSubclassOf(
+                                    ((TypeBuilder)namedFields[i].DeclaringType!).BakedRuntimeType
+                                )
                         )
                             throw new ArgumentException(SR.Argument_BadFieldForConstructorBuilder);
                     }

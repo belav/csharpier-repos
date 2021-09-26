@@ -86,13 +86,14 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     // All operation blocks for a symbol belong to the same tree.
                     var firstBlock = context.OperationBlocks[0];
                     if (
-                        !symbolStartAnalyzer._compilationAnalyzer.TryGetOptions(
-                            firstBlock.Syntax.SyntaxTree,
-                            firstBlock.Language,
-                            context.Options,
-                            context.CancellationToken,
-                            out var options
-                        )
+                        !symbolStartAnalyzer._compilationAnalyzer
+                            .TryGetOptions(
+                                firstBlock.Syntax.SyntaxTree,
+                                firstBlock.Language,
+                                context.Options,
+                                context.CancellationToken,
+                                out var options
+                            )
                     )
                     {
                         return;
@@ -133,7 +134,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         foreach (var operationBlock in context.OperationBlocks)
                         {
                             if (
-                                operationBlock.Syntax.GetDiagnostics()
+                                operationBlock.Syntax
+                                    .GetDiagnostics()
                                     .ToImmutableArrayOrEmpty()
                                     .HasAnyErrors()
                             )
@@ -150,12 +152,12 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         foreach (var operationBlock in context.OperationBlocks)
                         {
                             if (
-                                operationBlock.Syntax.DescendantNodes(descendIntoTrivia: true)
+                                operationBlock.Syntax
+                                    .DescendantNodes(descendIntoTrivia: true)
                                     .Any(
                                         n =>
-                                            symbolStartAnalyzer._compilationAnalyzer.IsIfConditionalDirective(
-                                                n
-                                            )
+                                            symbolStartAnalyzer._compilationAnalyzer
+                                                .IsIfConditionalDirective(n)
                                     )
                             )
                             {
@@ -277,12 +279,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     //     an invocation by prefixing the invocation with keyword "Call".
                     //     Similarly, we do not want to flag an expression of a C# expression body.
                     if (
-                        _symbolStartAnalyzer._compilationAnalyzer.IsCallStatement(
-                            expressionStatement
-                        )
-                        || _symbolStartAnalyzer._compilationAnalyzer.IsExpressionOfExpressionBody(
-                            expressionStatement
-                        )
+                        _symbolStartAnalyzer._compilationAnalyzer
+                            .IsCallStatement(expressionStatement)
+                        || _symbolStartAnalyzer._compilationAnalyzer
+                            .IsExpressionOfExpressionBody(expressionStatement)
                     )
                     {
                         return;
@@ -595,9 +595,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                     // Builder to store the symbol read/write usage result for each operation block computed during the first pass.
                     // These are later used to compute unused parameters in second pass.
-                    using var _ = PooledHashSet<SymbolUsageResult>.GetInstance(
-                        out var symbolUsageResultsBuilder
-                    );
+                    using var _ = PooledHashSet<SymbolUsageResult>
+                        .GetInstance(out var symbolUsageResultsBuilder);
 
                     // Flag indicating if we found an operation block where all symbol writes were used.
                     AnalyzeUnusedValueAssignments(
@@ -659,10 +658,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                 // Assert that even slow pass (dataflow analysis) would have yielded no unused symbol writes.
                                 Debug.Assert(
                                     !SymbolUsageAnalysis.Run(
-                                            context.GetControlFlowGraph(operationBlock),
-                                            context.OwningSymbol,
-                                            context.CancellationToken
-                                        )
+                                        context.GetControlFlowGraph(operationBlock),
+                                        context.OwningSymbol,
+                                        context.CancellationToken
+                                    )
                                         .HasUnreadSymbolWrites()
                                 );
 
@@ -704,9 +703,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                     && unusedParameter.ContainingSymbol.IsLocalFunction()
                                 )
                                 {
-                                    var hasReference = symbolUsageResult.SymbolsRead.Contains(
-                                        unusedParameter
-                                    );
+                                    var hasReference = symbolUsageResult.SymbolsRead
+                                        .Contains(unusedParameter);
 
                                     bool shouldReport;
                                     switch (unusedParameter.RefKind)
@@ -758,9 +756,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                             {
                                 var diagnostic = DiagnosticHelper.Create(
                                     s_valueAssignedIsUnusedRule,
-                                    _symbolStartAnalyzer._compilationAnalyzer.GetDefinitionLocationToFade(
-                                        unreadWriteOperation
-                                    ),
+                                    _symbolStartAnalyzer._compilationAnalyzer
+                                        .GetDefinitionLocationToFade(unreadWriteOperation),
                                     _options.UnusedValueAssignmentSeverity,
                                     additionalLocations: null,
                                     properties,
@@ -839,9 +836,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     )
                     {
                         if (
-                            _symbolStartAnalyzer._compilationAnalyzer.ShouldBailOutFromRemovableAssignmentAnalysis(
-                                unusedSymbolWriteOperation
-                            )
+                            _symbolStartAnalyzer._compilationAnalyzer
+                                .ShouldBailOutFromRemovableAssignmentAnalysis(
+                                    unusedSymbolWriteOperation
+                                )
                         )
                         {
                             return false;

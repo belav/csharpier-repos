@@ -443,11 +443,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             {
                 var attribute = attributes[i];
                 if (
-                    string.Equals(
-                        attribute.Name,
-                        HrefAttributeName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            attribute.Name,
+                            HrefAttributeName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     continue;
@@ -455,11 +456,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
                 if (
                     SuppressFallbackIntegrity
-                    && string.Equals(
-                        attribute.Name,
-                        IntegrityAttributeName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && string
+                        .Equals(
+                            attribute.Name,
+                            IntegrityAttributeName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     continue;
@@ -503,11 +505,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 stringValue = Convert.ToString(attributeValue, CultureInfo.InvariantCulture);
             }
 
-            var hasRelStylesheet = string.Equals(
-                "stylesheet",
-                stringValue,
-                StringComparison.Ordinal
-            );
+            var hasRelStylesheet = string
+                .Equals("stylesheet", stringValue, StringComparison.Ordinal);
 
             return hasRelStylesheet;
         }
@@ -573,8 +572,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         {
             if (FileVersionProvider == null)
             {
-                FileVersionProvider =
-                    ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
+                FileVersionProvider = ViewContext.HttpContext.RequestServices
+                    .GetRequiredService<IFileVersionProvider>();
             }
         }
 
@@ -595,11 +594,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 var attribute = attributes[i];
 
                 if (
-                    string.Equals(
-                        attribute.Name,
-                        HrefAttributeName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            attribute.Name,
+                            HrefAttributeName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     addHref = false;

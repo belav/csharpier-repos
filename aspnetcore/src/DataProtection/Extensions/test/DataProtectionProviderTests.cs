@@ -65,15 +65,16 @@ namespace Microsoft.AspNetCore.DataProtection
                 setupAction: builder =>
                 {
                     builder.SetApplicationName("TestApplication");
-                    builder.Services.AddSingleton<IKeyManager>(
-                        s =>
-                            new XmlKeyManager(
-                                s.GetRequiredService<IOptions<KeyManagementOptions>>(),
-                                s.GetRequiredService<IActivator>(),
-                                NullLoggerFactory.Instance,
-                                mock.Object
-                            )
-                    );
+                    builder.Services
+                        .AddSingleton<IKeyManager>(
+                            s =>
+                                new XmlKeyManager(
+                                    s.GetRequiredService<IOptions<KeyManagementOptions>>(),
+                                    s.GetRequiredService<IActivator>(),
+                                    NullLoggerFactory.Instance,
+                                    mock.Object
+                                )
+                        );
                 }
             );
 
@@ -122,13 +123,12 @@ namespace Microsoft.AspNetCore.DataProtection
 
                     // Step 2: instantiate the system and round-trip a payload
                     var protector = DataProtectionProvider.Create(
-                            directory,
-                            configure =>
-                            {
-                                configure.ProtectKeysWithDpapi();
-                            }
-                        )
-                        .CreateProtector("purpose");
+                        directory,
+                        configure =>
+                        {
+                            configure.ProtectKeysWithDpapi();
+                        }
+                    ).CreateProtector("purpose");
                     Assert.Equal("payload", protector.Unprotect(protector.Protect("payload")));
 
                     // Step 3: validate that there's now a single key in the directory and that it's protected with DPAPI
@@ -175,11 +175,8 @@ namespace Microsoft.AspNetCore.DataProtection
                             StoreLocation.CurrentUser
                         );
                         certificateStore.Open(OpenFlags.ReadWrite);
-                        var certificate = certificateStore.Certificates.Find(
-                            X509FindType.FindBySubjectName,
-                            "TestCert",
-                            false
-                        )[0];
+                        var certificate = certificateStore.Certificates
+                            .Find(X509FindType.FindBySubjectName, "TestCert", false)[0];
                         Assert.True(certificate.HasPrivateKey, "Cert should have a private key");
                         try
                         {
@@ -198,9 +195,9 @@ namespace Microsoft.AspNetCore.DataProtection
                                 "password"
                             );
                             var unprotector = DataProtectionProvider.Create(
-                                    directory,
-                                    o => o.UnprotectKeysWithAnyCertificate(certWithoutKey)
-                                )
+                                directory,
+                                o => o.UnprotectKeysWithAnyCertificate(certWithoutKey)
+                            )
                                 .CreateProtector("purpose");
                             Assert.Equal("payload", unprotector.Unprotect(data));
 
@@ -259,11 +256,8 @@ namespace Microsoft.AspNetCore.DataProtection
                     )
                     {
                         certificateStore.Open(OpenFlags.ReadWrite);
-                        var certInStore = certificateStore.Certificates.Find(
-                            X509FindType.FindBySubjectName,
-                            "TestCert",
-                            false
-                        )[0];
+                        var certInStore = certificateStore.Certificates
+                            .Find(X509FindType.FindBySubjectName, "TestCert", false)[0];
                         Assert.NotNull(certInStore);
                         Assert.False(certInStore.HasPrivateKey, "Cert should not have private key");
 
@@ -285,9 +279,9 @@ namespace Microsoft.AspNetCore.DataProtection
                             );
 
                             var unprotector = DataProtectionProvider.Create(
-                                    directory,
-                                    o => o.UnprotectKeysWithAnyCertificate(certInStore, certWithKey)
-                                )
+                                directory,
+                                o => o.UnprotectKeysWithAnyCertificate(certInStore, certWithKey)
+                            )
                                 .CreateProtector("purpose");
                             Assert.Equal("payload", unprotector.Unprotect(data));
                         }
@@ -352,11 +346,8 @@ namespace Microsoft.AspNetCore.DataProtection
 
                 // ensure this cert is not in the x509 store
                 Assert.Empty(
-                    store.Certificates.Find(
-                        X509FindType.FindByThumbprint,
-                        certificate.Thumbprint,
-                        false
-                    )
+                    store.Certificates
+                        .Find(X509FindType.FindByThumbprint, certificate.Thumbprint, false)
                 );
             }
         }

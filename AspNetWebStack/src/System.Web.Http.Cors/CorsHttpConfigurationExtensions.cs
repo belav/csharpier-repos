@@ -103,9 +103,8 @@ namespace System.Web.Http
                     if (!config.Properties.TryGetValue(CorsEnabledKey, out corsEnabled))
                     {
                         // Execute this in the Initializer to ensure that the CorsMessageHandler is added last.
-                        config.MessageHandlers.Add(
-                            new CorsMessageHandler(config, rethrowExceptions)
-                        );
+                        config.MessageHandlers
+                            .Add(new CorsMessageHandler(config, rethrowExceptions));
 
                         ITraceWriter traceWriter = config.Services.GetTraceWriter();
 
@@ -167,10 +166,8 @@ namespace System.Web.Http
                 throw new ArgumentNullException("httpConfiguration");
             }
 
-            return (ICorsEngine)httpConfiguration.Properties.GetOrAdd(
-                CorsEngineKey,
-                k => new CorsEngine()
-            );
+            return (ICorsEngine)httpConfiguration.Properties
+                .GetOrAdd(CorsEngineKey, k => new CorsEngine());
         }
 
         /// <summary>
@@ -215,10 +212,11 @@ namespace System.Web.Http
                 throw new ArgumentNullException("httpConfiguration");
             }
 
-            return (ICorsPolicyProviderFactory)httpConfiguration.Properties.GetOrAdd(
-                CorsPolicyProviderFactoryKey,
-                k => new AttributeBasedPolicyProviderFactory()
-            );
+            return (ICorsPolicyProviderFactory)httpConfiguration.Properties
+                .GetOrAdd(
+                    CorsPolicyProviderFactoryKey,
+                    k => new AttributeBasedPolicyProviderFactory()
+                );
         }
     }
 }

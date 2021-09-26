@@ -132,12 +132,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             WriteContentNode(
                 node,
                 node.TagName,
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0}.{1}",
-                    nameof(TagMode),
-                    node.TagMode
-                )
+                string
+                    .Format(CultureInfo.InvariantCulture, "{0}.{1}", nameof(TagMode), node.TagMode)
             );
         }
 
@@ -147,11 +143,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 node,
                 node.AttributeName,
                 node.BoundAttribute.DisplayName,
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "HtmlAttributeValueStyle.{0}",
-                    node.AttributeStructure
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "HtmlAttributeValueStyle.{0}",
+                        node.AttributeStructure
+                    )
             );
         }
 
@@ -162,11 +159,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             WriteContentNode(
                 node,
                 node.AttributeName,
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "HtmlAttributeValueStyle.{0}",
-                    node.AttributeStructure
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "HtmlAttributeValueStyle.{0}",
+                        node.AttributeStructure
+                    )
             );
         }
 
@@ -178,11 +176,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 node,
                 node.AttributeName,
                 node.BoundAttribute.DisplayName,
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "HtmlAttributeValueStyle.{0}",
-                    node.AttributeStructure
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "HtmlAttributeValueStyle.{0}",
+                        node.AttributeStructure
+                    )
             );
         }
 
@@ -193,11 +192,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             WriteContentNode(
                 node,
                 node.AttributeName,
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "HtmlAttributeValueStyle.{0}",
-                    node.AttributeStructure
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "HtmlAttributeValueStyle.{0}",
+                        node.AttributeStructure
+                    )
             );
         }
 
@@ -212,11 +212,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 node,
                 node.AttributeName,
                 node.PropertyName,
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "AttributeStructure.{0}",
-                    node.AttributeStructure
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "AttributeStructure.{0}",
+                        node.AttributeStructure
+                    )
             );
         }
 
@@ -277,11 +278,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                         n.VariableName,
                         n.AttributeName,
                         n.Value,
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "HtmlAttributeValueStyle.{0}",
-                            n.AttributeStructure
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "HtmlAttributeValueStyle.{0}",
+                                n.AttributeStructure
+                            )
                     );
                     break;
                 case PreallocatedTagHelperPropertyIntermediateNode n:
@@ -293,11 +295,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                         n.VariableName,
                         n.AttributeName,
                         n.Value,
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "HtmlAttributeValueStyle.{0}",
-                            n.AttributeStructure
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "HtmlAttributeValueStyle.{0}",
+                                n.AttributeStructure
+                            )
                     );
                     break;
                 case DefaultTagHelperCreateIntermediateNode n:
@@ -310,11 +313,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     WriteContentNode(
                         n,
                         n.AttributeName,
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "HtmlAttributeValueStyle.{0}",
-                            n.AttributeStructure
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "HtmlAttributeValueStyle.{0}",
+                                n.AttributeStructure
+                            )
                     );
                     break;
                 case DefaultTagHelperPropertyIntermediateNode n:
@@ -322,11 +326,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                         n,
                         n.AttributeName,
                         n.BoundAttribute.DisplayName,
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "HtmlAttributeValueStyle.{0}",
-                            n.AttributeStructure
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "HtmlAttributeValueStyle.{0}",
+                                n.AttributeStructure
+                            )
                     );
                     break;
                 case DefaultTagHelperRuntimeIntermediateNode n:
@@ -421,9 +426,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
             if (sourceRange.FilePath != null)
             {
-                var fileName = sourceRange.FilePath.Substring(
-                    sourceRange.FilePath.LastIndexOf('/') + 1
-                );
+                var fileName = sourceRange.FilePath
+                    .Substring(sourceRange.FilePath.LastIndexOf('/') + 1);
                 _writer.Write(fileName);
             }
 

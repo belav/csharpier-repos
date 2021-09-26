@@ -51,10 +51,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
                     {
                         featureFlags = (IVsFeatureFlags)await (
                             (IAsyncServiceProvider)serviceProvider
-                        ).GetServiceAsync(typeof(SVsFeatureFlags)).ConfigureAwait(false);
-                        experimentationServiceOpt = await (
-                            (IAsyncServiceProvider)serviceProvider
-                        ).GetServiceAsync(typeof(SVsExperimentationService)).ConfigureAwait(false);
+                        )
+                            .GetServiceAsync(typeof(SVsFeatureFlags))
+                            .ConfigureAwait(false);
+                        experimentationServiceOpt = await ((IAsyncServiceProvider)serviceProvider)
+                            .GetServiceAsync(typeof(SVsExperimentationService))
+                            .ConfigureAwait(false);
                         if (experimentationServiceOpt != null)
                         {
                             isCachedFlightEnabledInfo = experimentationServiceOpt.GetType()

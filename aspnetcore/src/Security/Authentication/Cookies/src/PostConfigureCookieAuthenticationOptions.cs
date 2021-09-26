@@ -41,11 +41,12 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
             if (options.TicketDataFormat == null)
             {
                 // Note: the purpose for the data protector must remain fixed for interop to work.
-                var dataProtector = options.DataProtectionProvider.CreateProtector(
-                    "Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationMiddleware",
-                    name,
-                    "v2"
-                );
+                var dataProtector = options.DataProtectionProvider
+                    .CreateProtector(
+                        "Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationMiddleware",
+                        name,
+                        "v2"
+                    );
                 options.TicketDataFormat = new TicketDataFormat(dataProtector);
             }
             if (options.CookieManager == null)

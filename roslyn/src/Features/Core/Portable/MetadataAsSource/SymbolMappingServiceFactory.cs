@@ -49,10 +49,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             )
             {
                 return await MapSymbolAsync(
-                        document,
-                        SymbolKey.Create(symbol, cancellationToken),
-                        cancellationToken
-                    )
+                    document,
+                    SymbolKey.Create(symbol, cancellationToken),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

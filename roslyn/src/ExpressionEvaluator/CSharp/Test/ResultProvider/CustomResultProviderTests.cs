@@ -300,12 +300,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 ReadOnlyCollection<string> formatSpecifiers
             )
             {
-                return ((IDkmClrFormatter2)_fallback).GetValueString(
-                    value,
-                    customTypeInfo,
-                    inspectionContext,
-                    formatSpecifiers
-                );
+                return ((IDkmClrFormatter2)_fallback)
+                    .GetValueString(value, customTypeInfo, inspectionContext, formatSpecifiers);
             }
 
             string IDkmClrFormatter2.GetEditableValueString(
@@ -314,11 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 DkmClrCustomTypeInfo customTypeInfo
             )
             {
-                return ((IDkmClrFormatter2)_fallback).GetEditableValueString(
-                    value,
-                    inspectionContext,
-                    customTypeInfo
-                );
+                return ((IDkmClrFormatter2)_fallback)
+                    .GetEditableValueString(value, inspectionContext, customTypeInfo);
             }
 
             string IDkmClrFullNameProvider.GetClrTypeName(
@@ -364,10 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 string identifier
             )
             {
-                return ((IDkmClrFullNameProvider)_fallback).GetClrValidIdentifier(
-                    inspectionContext,
-                    identifier
-                );
+                return ((IDkmClrFullNameProvider)_fallback)
+                    .GetClrValidIdentifier(inspectionContext, identifier);
             }
 
             string IDkmClrFullNameProvider.GetClrExpressionAndFormatSpecifiers(
@@ -376,11 +367,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 out ReadOnlyCollection<string> formatSpecifiers
             )
             {
-                return ((IDkmClrFullNameProvider)_fallback).GetClrExpressionAndFormatSpecifiers(
-                    inspectionContext,
-                    expression,
-                    out formatSpecifiers
-                );
+                return ((IDkmClrFullNameProvider)_fallback)
+                    .GetClrExpressionAndFormatSpecifiers(
+                        inspectionContext,
+                        expression,
+                        out formatSpecifiers
+                    );
             }
 
             bool IDkmClrFullNameProvider.ClrExpressionMayRequireParentheses(
@@ -388,10 +380,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 string expression
             )
             {
-                return ((IDkmClrFullNameProvider)_fallback).ClrExpressionMayRequireParentheses(
-                    inspectionContext,
-                    expression
-                );
+                return ((IDkmClrFullNameProvider)_fallback)
+                    .ClrExpressionMayRequireParentheses(inspectionContext, expression);
             }
 
             string IDkmClrFullNameProvider.GetClrMemberName(
@@ -404,15 +394,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 bool memberIsStatic
             )
             {
-                return ((IDkmClrFullNameProvider)_fallback).GetClrMemberName(
-                    inspectionContext,
-                    parentFullName,
-                    declaringType,
-                    declaringTypeInfo,
-                    memberName,
-                    memberAccessRequiresExplicitCast,
-                    memberIsStatic
-                );
+                return ((IDkmClrFullNameProvider)_fallback)
+                    .GetClrMemberName(
+                        inspectionContext,
+                        parentFullName,
+                        declaringType,
+                        declaringTypeInfo,
+                        memberName,
+                        memberAccessRequiresExplicitCast,
+                        memberIsStatic
+                    );
             }
 
             string IDkmClrFullNameProvider.GetClrExpressionForNull(

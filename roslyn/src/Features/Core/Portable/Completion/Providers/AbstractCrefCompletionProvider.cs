@@ -30,28 +30,29 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 bool.TryParse(hideAdvancedMembersString, out hideAdvancedMembers);
             }
 
-            var options = document.Project.Solution.Workspace.Options.WithChangedOption(
-                new OptionKey(CompletionOptions.HideAdvancedMembers, document.Project.Language),
-                hideAdvancedMembers
-            );
+            var options = document.Project.Solution.Workspace.Options
+                .WithChangedOption(
+                    new OptionKey(CompletionOptions.HideAdvancedMembers, document.Project.Language),
+                    hideAdvancedMembers
+                );
 
             var (token, semanticModel, symbols) = await GetSymbolsAsync(
-                    document,
-                    position,
-                    options,
-                    cancellationToken
-                )
+                document,
+                position,
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var name = SymbolCompletionItem.GetSymbolName(item);
             var kind = SymbolCompletionItem.GetKind(item);
             var bestSymbols = symbols.WhereAsArray(s => s.Kind == kind && s.Name == name);
             return await SymbolCompletionItem.GetDescriptionAsync(
-                    item,
-                    bestSymbols,
-                    document,
-                    semanticModel,
-                    cancellationToken
-                )
+                item,
+                bestSymbols,
+                document,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

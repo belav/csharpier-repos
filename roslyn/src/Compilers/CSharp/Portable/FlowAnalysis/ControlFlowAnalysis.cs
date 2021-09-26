@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                   _context.LastInRegion,
                                   out _succeeded
                               )
-                          ).ToImmutableArray();
+                          )
+                          .ToImmutableArray();
                     ImmutableInterlocked.InterlockedInitialize(ref _entryPoints, result);
                 }
 
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                   _context.FirstInRegion,
                                   _context.LastInRegion
                               )
-                          ).ToImmutableArray()
+                          )
+                          .ToImmutableArray()
                         : ImmutableArray<SyntaxNode>.Empty;
                     ImmutableInterlocked.InterlockedInitialize(ref _exitPoints, result);
                 }

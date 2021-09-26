@@ -45,12 +45,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
                 WrapperPolicy.s_ComWrapperFactory = MockComWrapperFactory.Instance;
 
                 var visualStudioWorkspaceMock = new MockVisualStudioWorkspace(workspace);
-                var threadingContext =
-                    workspace.ExportProvider.GetExportedValue<IThreadingContext>();
-                var notificationService =
-                    workspace.ExportProvider.GetExportedValue<IForegroundNotificationService>();
-                var listenerProvider =
-                    workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+                var threadingContext = workspace.ExportProvider
+                    .GetExportedValue<IThreadingContext>();
+                var notificationService = workspace.ExportProvider
+                    .GetExportedValue<IForegroundNotificationService>();
+                var listenerProvider = workspace.ExportProvider
+                    .GetExportedValue<AsynchronousOperationListenerProvider>();
 
                 var state = new CodeModelState(
                     threadingContext,

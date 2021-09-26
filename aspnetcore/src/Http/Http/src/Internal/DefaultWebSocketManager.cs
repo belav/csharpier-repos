@@ -57,9 +57,8 @@ namespace Microsoft.AspNetCore.Http
         {
             get
             {
-                return HttpRequestFeature.Headers.GetCommaSeparatedValues(
-                    HeaderNames.WebSocketSubProtocols
-                );
+                return HttpRequestFeature.Headers
+                    .GetCommaSeparatedValues(HeaderNames.WebSocketSubProtocols);
             }
         }
 

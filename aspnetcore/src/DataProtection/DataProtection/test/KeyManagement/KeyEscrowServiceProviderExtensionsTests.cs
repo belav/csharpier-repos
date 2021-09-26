@@ -41,12 +41,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     (keyId, element) =>
                     {
                         output.Add(
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "{0:D}: {1}",
-                                keyId,
-                                element.Name.LocalName
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "{0:D}: {1}",
+                                    keyId,
+                                    element.Name.LocalName
+                                )
                         );
                     }
                 );
@@ -78,12 +79,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     (keyId, element) =>
                     {
                         output.Add(
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "[sink1] {0:D}: {1}",
-                                keyId,
-                                element.Name.LocalName
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "[sink1] {0:D}: {1}",
+                                    keyId,
+                                    element.Name.LocalName
+                                )
                         );
                     }
                 );
@@ -94,12 +96,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     (keyId, element) =>
                     {
                         output.Add(
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "[sink2] {0:D}: {1}",
-                                keyId,
-                                element.Name.LocalName
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "[sink2] {0:D}: {1}",
+                                    keyId,
+                                    element.Name.LocalName
+                                )
                         );
                     }
                 );

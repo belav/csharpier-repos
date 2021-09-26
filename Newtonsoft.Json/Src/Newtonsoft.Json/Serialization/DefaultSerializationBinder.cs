@@ -98,10 +98,8 @@ namespace Newtonsoft.Json.Serialization
                 if (assembly == null)
                 {
                     throw new JsonSerializationException(
-                        "Could not load assembly '{0}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            assemblyName
-                        )
+                        "Could not load assembly '{0}'."
+                            .FormatWith(CultureInfo.InvariantCulture, assemblyName)
                     );
                 }
 
@@ -119,11 +117,12 @@ namespace Newtonsoft.Json.Serialization
                         catch (Exception ex)
                         {
                             throw new JsonSerializationException(
-                                "Could not find type '{0}' in assembly '{1}'.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    typeName,
-                                    assembly.FullName
-                                ),
+                                "Could not find type '{0}' in assembly '{1}'."
+                                    .FormatWith(
+                                        CultureInfo.InvariantCulture,
+                                        typeName,
+                                        assembly.FullName
+                                    ),
                                 ex
                             );
                         }
@@ -132,11 +131,12 @@ namespace Newtonsoft.Json.Serialization
                     if (type == null)
                     {
                         throw new JsonSerializationException(
-                            "Could not find type '{0}' in assembly '{1}'.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                typeName,
-                                assembly.FullName
-                            )
+                            "Could not find type '{0}' in assembly '{1}'."
+                                .FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    typeName,
+                                    assembly.FullName
+                                )
                         );
                     }
                 }

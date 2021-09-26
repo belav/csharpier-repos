@@ -419,11 +419,12 @@ namespace Microsoft.VisualBasic
                 OutputIdentifier(arg.Name);
                 Output.Write(":=");
             }
-            ((ICodeGenerator)this).GenerateCodeFromExpression(
-                arg.Value,
-                ((ExposedTabStringIndentedTextWriter)Output).InnerWriter,
-                Options
-            );
+            ((ICodeGenerator)this)
+                .GenerateCodeFromExpression(
+                    arg.Value,
+                    ((ExposedTabStringIndentedTextWriter)Output).InnerWriter,
+                    Options
+                );
         }
 
         private void OutputAttributes(CodeAttributeDeclarationCollection attributes, bool inLine)
@@ -852,7 +853,8 @@ namespace Microsoft.VisualBasic
             {
                 Output.Write(
                     "Global.Microsoft.VisualBasic.ChrW("
-                        + ((IConvertible)e.Value).ToInt32(CultureInfo.InvariantCulture)
+                        + ((IConvertible)e.Value)
+                            .ToInt32(CultureInfo.InvariantCulture)
                             .ToString(CultureInfo.InvariantCulture)
                         + ")"
                 );
@@ -1653,11 +1655,12 @@ namespace Microsoft.VisualBasic
             bool sub = false;
             if (
                 e.ReturnType.BaseType.Length == 0
-                || string.Equals(
-                    e.ReturnType.BaseType,
-                    typeof(void).FullName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                || string
+                    .Equals(
+                        e.ReturnType.BaseType,
+                        typeof(void).FullName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 sub = true;
@@ -2025,11 +2028,12 @@ namespace Microsoft.VisualBasic
                 CodeTypeDelegate del = (CodeTypeDelegate)e;
                 if (
                     del.ReturnType.BaseType.Length > 0
-                    && !string.Equals(
-                        del.ReturnType.BaseType,
-                        "System.Void",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !string
+                        .Equals(
+                            del.ReturnType.BaseType,
+                            "System.Void",
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                     Output.Write("Delegate Function ");
                 else
@@ -2040,11 +2044,12 @@ namespace Microsoft.VisualBasic
                 Output.Write(')');
                 if (
                     del.ReturnType.BaseType.Length > 0
-                    && !string.Equals(
-                        del.ReturnType.BaseType,
-                        "System.Void",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !string
+                        .Equals(
+                            del.ReturnType.BaseType,
+                            "System.Void",
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     Output.Write(" As ");

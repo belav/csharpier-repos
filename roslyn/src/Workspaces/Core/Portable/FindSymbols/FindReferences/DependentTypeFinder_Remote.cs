@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             )
             {
                 var client = await RemoteHostClient.TryGetClientAsync(
-                        solution.Workspace,
-                        cancellationToken
-                    )
+                    solution.Workspace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (client != null)
                 {
@@ -47,18 +47,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         IRemoteDependentTypeFinderService,
                         ImmutableArray<SerializableSymbolAndProjectId>
                     >(
-                            solution,
-                            (service, solutionInfo, cancellationToken) =>
-                                service.FindTypesAsync(
-                                    solutionInfo,
-                                    serializedType,
-                                    projectIds,
-                                    transitive,
-                                    kind,
-                                    cancellationToken
-                                ),
-                            cancellationToken
-                        )
+                        solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.FindTypesAsync(
+                                solutionInfo,
+                                serializedType,
+                                projectIds,
+                                transitive,
+                                kind,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     if (!result.HasValue)
@@ -73,13 +73,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
 
             return await FindTypesInCurrentProcessAsync(
-                    type,
-                    solution,
-                    projects,
-                    transitive,
-                    kind,
-                    cancellationToken
-                )
+                type,
+                solution,
+                projects,
+                transitive,
+                kind,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

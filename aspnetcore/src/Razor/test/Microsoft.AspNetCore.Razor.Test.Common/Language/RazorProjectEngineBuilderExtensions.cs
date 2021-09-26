@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             IEnumerable<TagHelperDescriptor> tagHelpers
         )
         {
-            var feature = (TestTagHelperFeature)builder.Features.OfType<ITagHelperFeature>()
+            var feature = (TestTagHelperFeature)builder.Features
+                .OfType<ITagHelperFeature>()
                 .FirstOrDefault();
             if (feature == null)
             {
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             this RazorProjectEngineBuilder builder
         )
         {
-            var feature = builder.Features.OfType<DefaultDocumentClassifierPassFeature>()
+            var feature = builder.Features
+                .OfType<DefaultDocumentClassifierPassFeature>()
                 .FirstOrDefault();
             if (feature == null)
             {

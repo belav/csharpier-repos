@@ -112,10 +112,10 @@ namespace System
             if (Sse.IsSupported || AdvSimd.IsSupported)
             {
                 return VectorMath.ConditionalSelectBitwise(
-                        Vector128.CreateScalarUnsafe(-0.0f),
-                        Vector128.CreateScalarUnsafe(y),
-                        Vector128.CreateScalarUnsafe(x)
-                    )
+                    Vector128.CreateScalarUnsafe(-0.0f),
+                    Vector128.CreateScalarUnsafe(y),
+                    Vector128.CreateScalarUnsafe(x)
+                )
                     .ToScalar();
             }
             else
@@ -294,7 +294,8 @@ namespace System
             }
             else if (AdvSimd.Arm64.IsSupported)
             {
-                return AdvSimd.Arm64.ReciprocalEstimateScalar(Vector64.CreateScalarUnsafe(x))
+                return AdvSimd.Arm64
+                    .ReciprocalEstimateScalar(Vector64.CreateScalarUnsafe(x))
                     .ToScalar();
             }
             else
@@ -320,9 +321,8 @@ namespace System
             }
             else if (AdvSimd.Arm64.IsSupported)
             {
-                return AdvSimd.Arm64.ReciprocalSquareRootEstimateScalar(
-                        Vector64.CreateScalarUnsafe(x)
-                    )
+                return AdvSimd.Arm64
+                    .ReciprocalSquareRootEstimateScalar(Vector64.CreateScalarUnsafe(x))
                     .ToScalar();
             }
             else

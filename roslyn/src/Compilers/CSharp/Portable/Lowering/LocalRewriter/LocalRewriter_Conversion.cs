@@ -62,11 +62,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var toType = node.Type;
             Debug.Assert(
-                result.Type!.Equals(
-                    toType,
-                    TypeCompareKind.IgnoreDynamicAndTupleNames
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                )
+                result.Type!
+                    .Equals(
+                        toType,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
             );
 
             return result;
@@ -219,10 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         _inExpressionLambda
-                        || !rewrittenOperand.Type.Equals(
-                            rewrittenType,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        || !rewrittenOperand.Type
+                            .Equals(rewrittenType, TypeCompareKind.ConsiderEverything)
                     )
                     {
                         break;
@@ -369,11 +368,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // we keep tuple literal conversions in the tree for the purpose of semantic model (for example when they are casts in the source)
                     // for the purpose of lowering/codegeneration they are identity conversions.
                     Debug.Assert(
-                        rewrittenOperand.Type.Equals(
-                            rewrittenType,
-                            TypeCompareKind.IgnoreDynamicAndTupleNames
-                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        )
+                        rewrittenOperand.Type
+                            .Equals(
+                                rewrittenType,
+                                TypeCompareKind.IgnoreDynamicAndTupleNames
+                                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            )
                     );
                     return rewrittenOperand;
                 }
@@ -493,12 +493,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(!conversion.IsExtensionMethod);
                     Debug.Assert(constantValueOpt == null);
                     return _dynamicFactory.MakeDynamicConversion(
-                            rewrittenOperand,
-                            explicitCastInCode || conversion.Kind == ConversionKind.ExplicitDynamic,
-                            conversion.IsArrayIndex,
-                            @checked,
-                            rewrittenType
-                        )
+                        rewrittenOperand,
+                        explicitCastInCode || conversion.Kind == ConversionKind.ExplicitDynamic,
+                        conversion.IsArrayIndex,
+                        @checked,
+                        rewrittenType
+                    )
                         .ToExpression();
 
                 case ConversionKind.ImplicitTuple:
@@ -657,11 +657,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics,
                 compilation.Assembly
             );
-            Conversion conversion = compilation.Conversions.ClassifyConversionFromType(
-                rewrittenOperand.Type,
-                rewrittenType,
-                ref useSiteInfo
-            );
+            Conversion conversion = compilation.Conversions
+                .ClassifyConversionFromType(rewrittenOperand.Type, rewrittenType, ref useSiteInfo);
             diagnostics.Add(rewrittenOperand.Syntax, useSiteInfo);
 
             if (!conversion.IsValid)
@@ -742,11 +739,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(rewrittenOperand.Type is object);
 
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo();
-            Conversion conversion = _compilation.Conversions.ClassifyConversionFromType(
-                rewrittenOperand.Type,
-                rewrittenType,
-                ref useSiteInfo
-            );
+            Conversion conversion = _compilation.Conversions
+                .ClassifyConversionFromType(rewrittenOperand.Type, rewrittenType, ref useSiteInfo);
             _diagnostics.Add(rewrittenOperand.Syntax, useSiteInfo);
             if (!conversion.IsImplicit)
             {
@@ -846,7 +840,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(rewrittenOperand.Type is { });
                 if (
                     rewrittenOperand.Type.IsNullableType()
-                    && conversion.Method.GetParameterType(0)
+                    && conversion.Method
+                        .GetParameterType(0)
                         .Equals(
                             rewrittenOperand.Type.GetNullableUnderlyingType(),
                             TypeCompareKind.AllIgnoreOptions
@@ -857,7 +852,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     userDefinedConversionRewrittenType = (
                         (NamedTypeSymbol)rewrittenOperand.Type.OriginalDefinition
-                    ).Construct(userDefinedConversionRewrittenType);
+                    )
+                        .Construct(userDefinedConversionRewrittenType);
                 }
 
                 BoundExpression userDefined = RewriteUserDefinedConversion(
@@ -995,10 +991,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Conversion: { Kind: ConversionKind.ImplicitNullable },
                     Operand: var convertedArgument
                 }
-                      when convertedArgument.Type!.Equals(
-                          expression.Type.StrippedType(),
-                          TypeCompareKind.AllIgnoreOptions
-                      ):
+                      when convertedArgument.Type!
+                          .Equals(expression.Type.StrippedType(), TypeCompareKind.AllIgnoreOptions):
                     return convertedArgument;
 
                 // Detect the unlowered nullable conversion from a tuple type T1 to Nullable<T2> for a tuple type T2.
@@ -1158,9 +1152,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // NOTE: Dev10 converts enum? to underlying?, rather than directly to underlying.
                     rewrittenOperandType = rewrittenOperandType.IsNullableType()
-                        ? ((NamedTypeSymbol)rewrittenOperandType.OriginalDefinition).Construct(
-                              typeFromUnderlying
-                          )
+                        ? ((NamedTypeSymbol)rewrittenOperandType.OriginalDefinition)
+                          .Construct(typeFromUnderlying)
                         : typeFromUnderlying;
                     rewrittenOperand = BoundConversion.SynthesizedNonUserDefined(
                         syntax,
@@ -1174,9 +1167,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     typeToUnderlying = typeTo.GetEnumUnderlyingType()!;
                 }
 
-                var method = (MethodSymbol)_compilation.Assembly.GetSpecialTypeMember(
-                    DecimalConversionMethod(typeFromUnderlying, typeToUnderlying)
-                );
+                var method = (MethodSymbol)_compilation.Assembly
+                    .GetSpecialTypeMember(
+                        DecimalConversionMethod(typeFromUnderlying, typeToUnderlying)
+                    );
                 var conversionKind = conversion.Kind.IsImplicitConversion()
                     ? ConversionKind.ImplicitUserDefined
                     : ConversionKind.ExplicitUserDefined;
@@ -2251,11 +2245,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo();
             var result = TryMakeConversion(
                 syntax,
-                _compilation.Conversions.ClassifyConversionFromType(
-                    fromType,
-                    toType,
-                    ref useSiteInfo
-                ),
+                _compilation.Conversions
+                    .ClassifyConversionFromType(fromType, toType, ref useSiteInfo),
                 fromType,
                 toType
             );

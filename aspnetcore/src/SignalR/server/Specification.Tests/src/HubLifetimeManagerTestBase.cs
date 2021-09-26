@@ -143,11 +143,11 @@ namespace Microsoft.AspNetCore.SignalR.Specification.Tests
                 await manager.AddToGroupAsync(connection2.ConnectionId, "group1").DefaultTimeout();
 
                 await manager.SendGroupExceptAsync(
-                        "group1",
-                        "Hello",
-                        new object[] { "World" },
-                        new[] { connection2.ConnectionId }
-                    )
+                    "group1",
+                    "Hello",
+                    new object[] { "World" },
+                    new[] { connection2.ConnectionId }
+                )
                     .DefaultTimeout();
 
                 var message = Assert.IsType<InvocationMessage>(client1.TryRead());
@@ -174,10 +174,10 @@ namespace Microsoft.AspNetCore.SignalR.Specification.Tests
                 await manager.OnConnectedAsync(connection).DefaultTimeout();
 
                 await manager.SendConnectionAsync(
-                        connection.ConnectionId,
-                        "Hello",
-                        new object[] { "World" }
-                    )
+                    connection.ConnectionId,
+                    "Hello",
+                    new object[] { "World" }
+                )
                     .DefaultTimeout();
 
                 var message = Assert.IsType<InvocationMessage>(client.TryRead());

@@ -31,9 +31,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit
 
             var skipReasons = new List<string>();
             var attributes = _assemblyAttributes.GetOrAdd(
-                    assembly.Name,
-                    a => assembly.GetCustomAttributes(typeof(ITestCondition)).ToList()
-                )
+                assembly.Name,
+                a => assembly.GetCustomAttributes(typeof(ITestCondition)).ToList()
+            )
                 .Concat(
                     _typeAttributes.GetOrAdd(
                         type.Name,

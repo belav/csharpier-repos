@@ -116,9 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var compilation = CreateEmptyCompilation(
                 text,
                 new[] { MscorlibRef },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var mscorlib = compilation.ExternalReferences[0];
@@ -126,9 +125,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("mscorlib", mscorNS.Name);
             Assert.Equal(SymbolKind.Assembly, mscorNS.Kind);
             var ns1 =
-                (
-                    mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol
-                ).GetMembers("Collections").Single() as NamespaceSymbol;
+                (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol)
+                    .GetMembers("Collections")
+                    .Single() as NamespaceSymbol;
             var ns2 = ns1.GetMembers("Generic").Single() as NamespaceSymbol;
 
             var type1 = ns2.GetTypeMembers("Dictionary").First() as NamedTypeSymbol;
@@ -177,9 +176,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var mscorlib = compilation.ExternalReferences[0];
             var mscorNS = compilation.GetReferencedAssemblySymbol(mscorlib);
             var ns1 =
-                (
-                    mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol
-                ).GetMembers("Collections").Single() as NamespaceSymbol;
+                (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol)
+                    .GetMembers("Collections")
+                    .Single() as NamespaceSymbol;
             var ns2 = ns1.GetMembers("Generic").Single() as NamespaceSymbol;
 
             var type1 = ns2.GetTypeMembers("IList").First() as NamedTypeSymbol;
@@ -226,9 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var compilation = CreateEmptyCompilation(
                 text,
                 new[] { MscorlibRef },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var mscorlib = compilation.ExternalReferences[0];
@@ -307,9 +305,8 @@ namespace System.Diagnostics.Eventing
                     TestMetadata.Net40.SystemCore,
                     compilation1.EmitToImageReference()
                 },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var compilation1Lib = compilation2.ExternalReferences[2];
@@ -559,7 +556,8 @@ class Test : StaticModClass
 
             var comp = CreateCompilationWithILAndMscorlib40("", ilSource);
 
-            var stateMachineClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var stateMachineClass = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMembers()
                 .OfType<NamedTypeSymbol>()
                 .Single();

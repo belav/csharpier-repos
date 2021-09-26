@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var assembly = MetadataTestHelpers.GetSymbolForReference(TestMetadata.Net40.mscorlib);
             var module0 = assembly.Modules[0];
 
-            var objectType = module0.GlobalNamespace.GetMembers("System")
+            var objectType = module0.GlobalNamespace
+                .GetMembers("System")
                 .OfType<NamespaceSymbol>()
                 .Single()
                 .GetTypeMembers("Object")
@@ -201,13 +202,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 TestResources.MetadataTests.Invalid.InvalidGenericType.AsImmutableOrNull()
             );
             string source = "class X : C<int, int>.D { }";
-            CreateCompilation(source, new[] { mdRef })
-                .VerifyDiagnostics(
-                    // (2,11): error CS0648: 'C<T1, T2>.D' is a type not supported by the language
-                    // class X : C<int, int>.D { }
-                    Diagnostic(ErrorCode.ERR_BogusType, "C<int, int>.D")
-                        .WithArguments("C<T1, T2>.D")
-                );
+            CreateCompilation(source, new[] { mdRef }).VerifyDiagnostics(
+                // (2,11): error CS0648: 'C<T1, T2>.D' is a type not supported by the language
+                // class X : C<int, int>.D { }
+                Diagnostic(ErrorCode.ERR_BogusType, "C<int, int>.D").WithArguments("C<T1, T2>.D")
+            );
         }
 
         [WorkItem(528859, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528859")]

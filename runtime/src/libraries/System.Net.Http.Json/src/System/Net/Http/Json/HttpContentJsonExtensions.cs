@@ -68,11 +68,11 @@ namespace System.Net.Http.Json
             using (contentStream)
             {
                 return await JsonSerializer.DeserializeAsync(
-                        contentStream,
-                        type,
-                        options ?? JsonContent.s_defaultSerializerOptions,
-                        cancellationToken
-                    )
+                    contentStream,
+                    type,
+                    options ?? JsonContent.s_defaultSerializerOptions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -96,10 +96,10 @@ namespace System.Net.Http.Json
             using (contentStream)
             {
                 return await JsonSerializer.DeserializeAsync<T>(
-                        contentStream,
-                        options ?? JsonContent.s_defaultSerializerOptions,
-                        cancellationToken
-                    )
+                    contentStream,
+                    options ?? JsonContent.s_defaultSerializerOptions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

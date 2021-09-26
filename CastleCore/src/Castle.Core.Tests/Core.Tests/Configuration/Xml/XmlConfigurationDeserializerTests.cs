@@ -34,9 +34,8 @@ namespace Castle.Core.Configuration.Xml.Tests
         [Bug("CORE-37")]
         public void Tab_character_is_not_trimmed_from_config_value_XML()
         {
-            var node = new XmlDocument().ReadNode(
-                XmlReader.Create(new StringReader("<foo><![CDATA[\t]]></foo>"))
-            );
+            var node = new XmlDocument()
+                .ReadNode(XmlReader.Create(new StringReader("<foo><![CDATA[\t]]></foo>")));
             var result = XmlConfigurationDeserializer.GetDeserializedNode(node);
             Assert.AreEqual("\t", result.Value);
         }

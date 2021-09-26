@@ -58,9 +58,8 @@ namespace System.Xml.Tests
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(
-                new DateTime(2, 1, 1, 0, 0, 0).Add(
-                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(2, 1, 1))
-                ),
+                new DateTime(2, 1, 1, 0, 0, 0)
+                    .Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(2, 1, 1))),
                 (DateTime)reader.ReadContentAs(typeof(DateTime), null)
             );
         }
@@ -192,7 +191,8 @@ namespace System.Xml.Tests
                     0,
                     0,
                     DateTimeKind.Utc
-                ).ToLocalTime(),
+                )
+                    .ToLocalTime(),
                 (DateTime)reader.ReadContentAs(typeof(DateTime), null)
             );
         }
@@ -270,10 +270,11 @@ namespace System.Xml.Tests
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(
-                new DateTime(2000, 2, 29, 23, 59, 59).Add(
-                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(2000, 2, 29))
-                        + new TimeSpan(14, 0, 0)
-                ),
+                new DateTime(2000, 2, 29, 23, 59, 59)
+                    .Add(
+                        TimeZoneInfo.Local.GetUtcOffset(new DateTime(2000, 2, 29))
+                            + new TimeSpan(14, 0, 0)
+                    ),
                 (DateTime)reader.ReadContentAs(typeof(DateTime), null)
             );
         }
@@ -377,7 +378,8 @@ namespace System.Xml.Tests
                     0,
                     0,
                     TimeZoneInfo.Local.GetUtcOffset(new DateTime(9999, 12, 31))
-                ).ToString(),
+                )
+                    .ToString(),
                 reader.ReadContentAs(typeof(DateTimeOffset), null).ToString()
             );
         }

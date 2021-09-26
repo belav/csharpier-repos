@@ -1079,9 +1079,9 @@ namespace Microsoft.CodeAnalysis.Emit
             }
 
             _lazySynthesizedNamespaceMembers.GetOrAdd(
-                    container,
-                    _ => new ConcurrentQueue<INamespaceOrTypeSymbolInternal>()
-                )
+                container,
+                _ => new ConcurrentQueue<INamespaceOrTypeSymbolInternal>()
+            )
                 .Enqueue(typeOrNamespace);
         }
 

@@ -265,7 +265,8 @@ WHERE [b].[IsVisible] = N'N'"
 
         public override void Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_EFProperty()
         {
-            base.Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_EFProperty();
+            base
+                .Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_EFProperty();
 
             AssertSql(
                 @"SELECT [b].[BlogId], [b].[Discriminator], [b].[IndexerVisible], [b].[IsVisible], [b].[Url], [b].[RssUrl]
@@ -276,7 +277,8 @@ WHERE [b].[IsVisible] = N'Y'"
 
         public override void Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_indexer()
         {
-            base.Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_indexer();
+            base
+                .Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_indexer();
 
             AssertSql(
                 @"SELECT [b].[BlogId], [b].[Discriminator], [b].[IndexerVisible], [b].[IsVisible], [b].[Url], [b].[RssUrl]
@@ -327,7 +329,8 @@ WHERE [b].[Id] = 1"
             public override DateTime DefaultDateTime => new();
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .ConfigureWarnings(c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)

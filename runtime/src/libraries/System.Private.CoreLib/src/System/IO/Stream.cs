@@ -122,17 +122,17 @@ namespace System.IO
                     while (
                         (
                             bytesRead = await source.ReadAsync(
-                                    new Memory<byte>(buffer),
-                                    cancellationToken
-                                )
+                                new Memory<byte>(buffer),
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         ) != 0
                     )
                     {
                         await destination.WriteAsync(
-                                new ReadOnlyMemory<byte>(buffer, 0, bytesRead),
-                                cancellationToken
-                            )
+                            new ReadOnlyMemory<byte>(buffer, 0, bytesRead),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -218,13 +218,14 @@ namespace System.IO
         public Task FlushAsync() => FlushAsync(CancellationToken.None);
 
         public virtual Task FlushAsync(CancellationToken cancellationToken) =>
-            Task.Factory.StartNew(
-                static state => ((Stream)state!).Flush(),
-                this,
-                cancellationToken,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task.Factory
+                .StartNew(
+                    static state => ((Stream)state!).Flush(),
+                    this,
+                    cancellationToken,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
 
         [Obsolete(
             "CreateWaitHandle will be removed eventually.  Please use \"new ManualResetEvent(false)\" instead."
@@ -302,11 +303,8 @@ namespace System.IO
                     try
                     {
                         // Do the Read and return the number of bytes read
-                        return thisTask._stream.Read(
-                            thisTask._buffer!,
-                            thisTask._offset,
-                            thisTask._count
-                        );
+                        return thisTask._stream
+                            .Read(thisTask._buffer!, thisTask._offset, thisTask._count);
                     }
 
                     finally
@@ -446,13 +444,14 @@ namespace System.IO
             }
 
             // Otherwise, we need to wrap calls to Begin/EndWrite to ensure we use the derived type's functionality.
-            return TaskFactory<int>.FromAsyncTrim(
-                this,
-                new ReadWriteParameters { Buffer = buffer, Offset = offset, Count = count },
-                (stream, args, callback, state) =>
-                    stream.BeginRead(args.Buffer, args.Offset, args.Count, callback, state), // cached by compiler
-                (stream, asyncResult) => stream.EndRead(asyncResult)
-            ); // cached by compiler
+            return TaskFactory<int>
+                .FromAsyncTrim(
+                    this,
+                    new ReadWriteParameters { Buffer = buffer, Offset = offset, Count = count },
+                    (stream, args, callback, state) =>
+                        stream.BeginRead(args.Buffer, args.Offset, args.Count, callback, state), // cached by compiler
+                    (stream, asyncResult) => stream.EndRead(asyncResult)
+                ); // cached by compiler
         }
 
         private struct ReadWriteParameters // struct for arguments to Read and Write calls
@@ -533,11 +532,8 @@ namespace System.IO
                     try
                     {
                         // Do the Write
-                        thisTask._stream.Write(
-                            thisTask._buffer!,
-                            thisTask._offset,
-                            thisTask._count
-                        );
+                        thisTask._stream
+                            .Write(thisTask._buffer!, thisTask._offset, thisTask._count);
                         return 0; // not used, but signature requires a value be returned
                     }
 

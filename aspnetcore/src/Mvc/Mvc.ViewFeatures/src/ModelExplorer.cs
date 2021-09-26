@@ -220,11 +220,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         for (var j = 0; j < propertyHelpers.Length; j++)
                         {
                             if (
-                                string.Equals(
-                                    propertyMetadata.PropertyName,
-                                    propertyHelpers[j].Property.Name,
-                                    StringComparison.Ordinal
-                                )
+                                string
+                                    .Equals(
+                                        propertyMetadata.PropertyName,
+                                        propertyHelpers[j].Property.Name,
+                                        StringComparison.Ordinal
+                                    )
                             )
                             {
                                 propertyHelper = propertyHelpers[j];

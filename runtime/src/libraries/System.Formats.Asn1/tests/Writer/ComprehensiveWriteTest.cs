@@ -362,7 +362,8 @@ namespace System.Formats.Asn1.Tests.Writer
                     + "F71C7F388CE3E0EF697B4203720483BB5794455B597D80D48CD3A1D73CBBC609"
                     + "C058767D1FF060A609D7E3D4317079AF0CD0A8A49251AB129157F9894A036487"
                     + "090807060504030201"
-                ).HexToByteArray();
+                )
+                    .HexToByteArray();
 
                 writer.WriteBitString(containsSignature.AsSpan(9, 256));
             }

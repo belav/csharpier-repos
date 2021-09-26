@@ -50,9 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     return null;
 
                 var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                        token.Parent,
-                        cancellationToken
-                    )
+                    token.Parent,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var typeInferrer = document.GetRequiredLanguageService<ITypeInferenceService>();
                 if (
@@ -205,10 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // But "(a: b, c" cannot be a lambda
             if (
                 tree.IsPossibleTupleContext(token, position)
-                && token.Parent.IsKind(
-                    SyntaxKind.TupleExpression,
-                    out TupleExpressionSyntax? tupleExpression
-                )
+                && token.Parent
+                    .IsKind(SyntaxKind.TupleExpression, out TupleExpressionSyntax? tupleExpression)
                 && !tupleExpression.HasNames()
             )
             {

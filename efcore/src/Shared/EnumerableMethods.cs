@@ -256,9 +256,8 @@ namespace Microsoft.EntityFrameworkCore
 
         static EnumerableMethods()
         {
-            var queryableMethodGroups = typeof(Enumerable).GetMethods(
-                    BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
-                )
+            var queryableMethodGroups = typeof(Enumerable)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly)
                 .GroupBy(mi => mi.Name)
                 .ToDictionary(e => e.Key, l => l.ToList());
 
@@ -439,11 +438,12 @@ namespace Microsoft.EntityFrameworkCore
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
                         typeof(Func<, >).MakeGenericType(types[0], types[1]),
                         typeof(Func<, >).MakeGenericType(types[0], types[2]),
-                        typeof(Func<, , >).MakeGenericType(
-                            types[1],
-                            typeof(IEnumerable<>).MakeGenericType(types[2]),
-                            types[3]
-                        )
+                        typeof(Func<, , >)
+                            .MakeGenericType(
+                                types[1],
+                                typeof(IEnumerable<>).MakeGenericType(types[2]),
+                                types[3]
+                            )
                     }
             );
 
@@ -455,11 +455,12 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
                         typeof(Func<, >).MakeGenericType(types[0], types[1]),
-                        typeof(Func<, , >).MakeGenericType(
-                            types[1],
-                            typeof(IEnumerable<>).MakeGenericType(types[0]),
-                            types[2]
-                        )
+                        typeof(Func<, , >)
+                            .MakeGenericType(
+                                types[1],
+                                typeof(IEnumerable<>).MakeGenericType(types[0]),
+                                types[2]
+                            )
                     }
             );
 
@@ -473,11 +474,12 @@ namespace Microsoft.EntityFrameworkCore
                         typeof(IEnumerable<>).MakeGenericType(types[1]),
                         typeof(Func<, >).MakeGenericType(types[0], types[2]),
                         typeof(Func<, >).MakeGenericType(types[1], types[2]),
-                        typeof(Func<, , >).MakeGenericType(
-                            types[0],
-                            typeof(IEnumerable<>).MakeGenericType(types[1]),
-                            types[3]
-                        )
+                        typeof(Func<, , >)
+                            .MakeGenericType(
+                                types[0],
+                                typeof(IEnumerable<>).MakeGenericType(types[1]),
+                                types[3]
+                            )
                     }
             );
 
@@ -654,10 +656,11 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(
-                            types[0],
-                            typeof(IEnumerable<>).MakeGenericType(types[1])
-                        )
+                        typeof(Func<, >)
+                            .MakeGenericType(
+                                types[0],
+                                typeof(IEnumerable<>).MakeGenericType(types[1])
+                            )
                     }
             );
 
@@ -668,10 +671,11 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(
-                            types[0],
-                            typeof(IEnumerable<>).MakeGenericType(types[1])
-                        ),
+                        typeof(Func<, >)
+                            .MakeGenericType(
+                                types[0],
+                                typeof(IEnumerable<>).MakeGenericType(types[1])
+                            ),
                         typeof(Func<, , >).MakeGenericType(types[0], types[1], types[2])
                     }
             );
@@ -903,25 +907,26 @@ namespace Microsoft.EntityFrameworkCore
                 int genericParameterCount,
                 Func<Type[], Type[]> parameterGenerator
             ) =>
-                queryableMethodGroups[name].Single(
-                    mi =>
-                        (
-                            (genericParameterCount == 0 && !mi.IsGenericMethod)
-                            || (
-                                mi.IsGenericMethod
-                                && mi.GetGenericArguments().Length == genericParameterCount
-                            )
-                        )
-                        && mi.GetParameters()
-                            .Select(e => e.ParameterType)
-                            .SequenceEqual(
-                                parameterGenerator(
+                queryableMethodGroups[name]
+                    .Single(
+                        mi =>
+                            (
+                                (genericParameterCount == 0 && !mi.IsGenericMethod)
+                                || (
                                     mi.IsGenericMethod
-                                      ? mi.GetGenericArguments()
-                                      : Array.Empty<Type>()
+                                    && mi.GetGenericArguments().Length == genericParameterCount
                                 )
                             )
-                );
+                            && mi.GetParameters()
+                                .Select(e => e.ParameterType)
+                                .SequenceEqual(
+                                    parameterGenerator(
+                                        mi.IsGenericMethod
+                                          ? mi.GetGenericArguments()
+                                          : Array.Empty<Type>()
+                                    )
+                                )
+                    );
         }
     }
 }

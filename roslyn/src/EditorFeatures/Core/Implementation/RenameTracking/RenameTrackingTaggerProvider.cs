@@ -65,16 +65,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 
         public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
         {
-            var stateMachine = buffer.Properties.GetOrCreateSingletonProperty(
-                () =>
-                    new StateMachine(
-                        _threadingContext,
-                        buffer,
-                        _inlineRenameService,
-                        _asyncListener,
-                        _diagnosticAnalyzerService
-                    )
-            );
+            var stateMachine = buffer.Properties
+                .GetOrCreateSingletonProperty(
+                    () =>
+                        new StateMachine(
+                            _threadingContext,
+                            buffer,
+                            _inlineRenameService,
+                            _asyncListener,
+                            _diagnosticAnalyzerService
+                        )
+                );
             return new Tagger(stateMachine) as ITagger<T>;
         }
 
@@ -102,20 +103,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     if (textBuffer == null)
                     {
                         FailFast.Fail(
-                            string.Format(
-                                "document with name {0} is open but textBuffer is null. Textcontainer is of type {1}. SourceText is: {2}",
-                                document.Name,
-                                text.Container.GetType().FullName,
-                                text.ToString()
-                            )
+                            string
+                                .Format(
+                                    "document with name {0} is open but textBuffer is null. Textcontainer is of type {1}. SourceText is: {2}",
+                                    document.Name,
+                                    text.Container.GetType().FullName,
+                                    text.ToString()
+                                )
                         );
                     }
 
                     if (
-                        textBuffer.Properties.TryGetProperty(
-                            typeof(StateMachine),
-                            out StateMachine stateMachine
-                        )
+                        textBuffer.Properties
+                            .TryGetProperty(typeof(StateMachine), out StateMachine stateMachine)
                     )
                     {
                         if (visible)
@@ -148,10 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     var textBuffer = text.Container.TryGetTextBuffer();
                     if (
                         textBuffer != null
-                        && textBuffer.Properties.TryGetProperty(
-                            typeof(StateMachine),
-                            out StateMachine stateMachine
-                        )
+                        && textBuffer.Properties
+                            .TryGetProperty(typeof(StateMachine), out StateMachine stateMachine)
                         && stateMachine.CanInvokeRename(out _, cancellationToken: cancellationToken)
                     )
                     {

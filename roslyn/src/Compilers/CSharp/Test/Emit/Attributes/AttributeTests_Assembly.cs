@@ -242,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             other.VerifyDiagnostics(
                 // (1,63): error CS7058: The specified version string does not conform to the required format - major.minor.build.revision (without wildcards)
                 // [assembly: System.Resources.SatelliteContractVersionAttribute("1.2.3.A")] public class C {}
-                Diagnostic(ErrorCode.ERR_InvalidVersionFormat2, @"""1.2.3.A""").WithLocation(1, 63)
+                Diagnostic(ErrorCode.ERR_InvalidVersionFormat2, @"""1.2.3.A""")
+                    .WithLocation(1, 63)
             );
 
             s =
@@ -472,12 +473,11 @@ public class en_US
                 assemblyName: assemblyNameBase + "10"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyDiagnostics(
-                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
-                    Diagnostic(ErrorCode.WRN_RefCultureMismatch)
-                        .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
-                );
+            CompileAndVerify(compilation).VerifyDiagnostics(
+                // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
+                Diagnostic(ErrorCode.WRN_RefCultureMismatch)
+                    .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
+            );
 
             compilation = compilation.WithOptions(TestOptions.ReleaseModule);
             compilation.VerifyEmitDiagnostics();
@@ -489,12 +489,11 @@ public class en_US
                 assemblyName: assemblyNameBase + "20"
             );
 
-            CompileAndVerify(compilation, verify: Verification.Skipped)
-                .VerifyDiagnostics(
-                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
-                    Diagnostic(ErrorCode.WRN_RefCultureMismatch)
-                        .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
-                );
+            CompileAndVerify(compilation, verify: Verification.Skipped).VerifyDiagnostics(
+                // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
+                Diagnostic(ErrorCode.WRN_RefCultureMismatch)
+                    .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
+            );
 
             // Confirm that suppressing the old alink warning 1607 shuts off WRN_RefCultureMismatch
             var warnings = new Dictionary<string, ReportDiagnostic>();
@@ -563,31 +562,30 @@ public class en_US
             );
 
             CompileAndVerify(
-                    compilation,
-                    sourceSymbolValidator: m =>
-                    {
-                        Assert.Equal(1, m.GetReferencedAssemblySymbols().Length);
+                compilation,
+                sourceSymbolValidator: m =>
+                {
+                    Assert.Equal(1, m.GetReferencedAssemblySymbols().Length);
 
-                        var naturalRef = m.ContainingAssembly.Modules[
-                            1
-                        ].GetReferencedAssemblySymbols()[1];
-                        Assert.True(naturalRef.IsMissing);
-                        Assert.Equal(
-                            "neutral, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            naturalRef.ToTestDisplayString()
-                        );
-                    },
-                    symbolValidator: m =>
-                    {
-                        Assert.Equal(2, ((PEModuleSymbol)m).GetReferencedAssemblySymbols().Length);
-                        Assert.Equal(
-                            "neutral, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            m.GetReferencedAssemblySymbols()[1].ToTestDisplayString()
-                        );
-                    },
-                    verify: Verification.Skipped
-                )
-                .VerifyDiagnostics();
+                    var naturalRef = m.ContainingAssembly.Modules[1].GetReferencedAssemblySymbols()[
+                        1
+                    ];
+                    Assert.True(naturalRef.IsMissing);
+                    Assert.Equal(
+                        "neutral, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                        naturalRef.ToTestDisplayString()
+                    );
+                },
+                symbolValidator: m =>
+                {
+                    Assert.Equal(2, ((PEModuleSymbol)m).GetReferencedAssemblySymbols().Length);
+                    Assert.Equal(
+                        "neutral, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                        m.GetReferencedAssemblySymbols()[1].ToTestDisplayString()
+                    );
+                },
+                verify: Verification.Skipped
+            ).VerifyDiagnostics();
 
             compilation = CreateCompilationWithMscorlib40(
                 @"
@@ -602,12 +600,11 @@ public class neutral
                 assemblyName: assemblyNameBase + "50"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyDiagnostics(
-                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
-                    Diagnostic(ErrorCode.WRN_RefCultureMismatch)
-                        .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
-                );
+            CompileAndVerify(compilation).VerifyDiagnostics(
+                // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
+                Diagnostic(ErrorCode.WRN_RefCultureMismatch)
+                    .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
+            );
 
             compilation = compilation.WithOptions(TestOptions.ReleaseModule);
             compilation.VerifyEmitDiagnostics();
@@ -619,12 +616,11 @@ public class neutral
                 assemblyName: assemblyNameBase + "60"
             );
 
-            CompileAndVerify(compilation, verify: Verification.Skipped)
-                .VerifyDiagnostics(
-                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
-                    Diagnostic(ErrorCode.WRN_RefCultureMismatch)
-                        .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
-                );
+            CompileAndVerify(compilation, verify: Verification.Skipped).VerifyDiagnostics(
+                // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
+                Diagnostic(ErrorCode.WRN_RefCultureMismatch)
+                    .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
+            );
         }
 
         [Fact]
@@ -791,10 +787,11 @@ class Program
                     );
 
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly.ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -878,10 +875,11 @@ class Program
                     );
 
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly.ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -957,10 +955,11 @@ class Program
                     );
 
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly.ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1043,10 +1042,11 @@ class Program
                         reader.GetBlobBytes(file2.HashValue)
                     );
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly.ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1157,10 +1157,11 @@ class Program
                         reader.GetBlobBytes(file2.HashValue)
                     );
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly.ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1304,10 +1305,11 @@ class Program
                     );
 
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly.ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1483,10 +1485,11 @@ class Program
                     );
 
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly.ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1519,10 +1522,11 @@ class Program
                     AssemblyDefinition assembly = peReader.GetAssemblyDefinition();
                     Assert.Equal(AssemblyHashAlgorithm.MD5, assembly.HashAlgorithm);
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly.ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1659,9 +1663,9 @@ public class C {}
                 // (1,12): warning CS0618: 'System.Reflection.AssemblyFlagsAttribute.AssemblyFlagsAttribute(int)' is obsolete: 'This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202'
                 // [assembly: System.Reflection.AssemblyFlags(12345)] public class C {}
                 Diagnostic(
-                        ErrorCode.WRN_DeprecatedSymbolStr,
-                        "System.Reflection.AssemblyFlags(12345)"
-                    )
+                    ErrorCode.WRN_DeprecatedSymbolStr,
+                    "System.Reflection.AssemblyFlags(12345)"
+                )
                     .WithArguments(
                         "System.Reflection.AssemblyFlagsAttribute.AssemblyFlagsAttribute(int)",
                         "This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202"
@@ -1688,9 +1692,9 @@ public class C {}
                 // (1,12): warning CS0618: 'System.Reflection.AssemblyFlagsAttribute.AssemblyFlagsAttribute(int)' is obsolete: 'This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202'
                 // [assembly: System.Reflection.AssemblyFlags(12345)] public class C {}
                 Diagnostic(
-                        ErrorCode.WRN_DeprecatedSymbolStr,
-                        "System.Reflection.AssemblyFlags(12345U)"
-                    )
+                    ErrorCode.WRN_DeprecatedSymbolStr,
+                    "System.Reflection.AssemblyFlags(12345U)"
+                )
                     .WithArguments(
                         "System.Reflection.AssemblyFlagsAttribute.AssemblyFlagsAttribute(uint)",
                         "This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202"
@@ -1807,7 +1811,8 @@ public class C {}
         {
             // SOURCE ATTRIBUTES
 
-            var sourceAttributes = compilation.Assembly.GetAttributes()
+            var sourceAttributes = compilation.Assembly
+                .GetAttributes()
                 .Where(
                     a =>
                         string.Equals(a.AttributeClass.Name, attrTypeName, StringComparison.Ordinal)
@@ -1825,14 +1830,16 @@ public class C {}
                     var expectedEmittedAttrsCount =
                         expectedSrcAttrCount - expectedDuplicateAttrCount;
 
-                    var metadataAttributes = module.ContainingAssembly.GetAttributes()
+                    var metadataAttributes = module.ContainingAssembly
+                        .GetAttributes()
                         .Where(
                             a =>
-                                string.Equals(
-                                    a.AttributeClass.Name,
-                                    attrTypeName,
-                                    StringComparison.Ordinal
-                                )
+                                string
+                                    .Equals(
+                                        a.AttributeClass.Name,
+                                        attrTypeName,
+                                        StringComparison.Ordinal
+                                    )
                         );
 
                     Assert.Equal(expectedEmittedAttrsCount, metadataAttributes.Count());
@@ -2487,8 +2494,8 @@ class Program
 using System;
 ";
             var defsRef = CreateCompilationWithMscorlib40(
-                    defaultHeaderString + s_defaultNetModuleSourceBody
-                )
+                defaultHeaderString + s_defaultNetModuleSourceBody
+            )
                 .ToMetadataReference();
             MetadataReference netmodule1Ref = GetNetModuleWithAssemblyAttributesRef(
                 source2,
@@ -2921,7 +2928,8 @@ public class C { }
                 assembly,
                 symbolValidator: moduleSymbol =>
                 {
-                    var attrs = moduleSymbol.ContainingAssembly.GetAttributes()
+                    var attrs = moduleSymbol.ContainingAssembly
+                        .GetAttributes()
                         .Select(a => a.ToString())
                         .ToArray();
                     AssertEx.SetEqual(
@@ -2980,11 +2988,10 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,9): warning CS1058: A previous catch clause already catches all exceptions. All non-exceptions thrown will be wrapped in a System.Runtime.CompilerServices.RuntimeWrappedException.
-                    Diagnostic(ErrorCode.WRN_UnreachableGeneralCatch, "catch")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,9): warning CS1058: A previous catch clause already catches all exceptions. All non-exceptions thrown will be wrapped in a System.Runtime.CompilerServices.RuntimeWrappedException.
+                Diagnostic(ErrorCode.WRN_UnreachableGeneralCatch, "catch")
+            );
         }
 
         [Fact, WorkItem(546460, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546460")]
@@ -3006,11 +3013,10 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,9): error CS1017: Catch clauses cannot follow the general catch clause of a try statement
-                    Diagnostic(ErrorCode.ERR_TooManyCatches, "catch")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,9): error CS1017: Catch clauses cannot follow the general catch clause of a try statement
+                Diagnostic(ErrorCode.ERR_TooManyCatches, "catch")
+            );
         }
 
         [Fact]
@@ -3323,19 +3329,18 @@ public class C { }
             Assert.Equal(3, appCompilation.Assembly.Modules.Length);
 
             CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: (ModuleSymbol m) =>
-                    {
-                        var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
+                appCompilation,
+                symbolValidator: (ModuleSymbol m) =>
+                {
+                    var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
 
-                        Assert.Equal(1, list.Length);
-                        Assert.Equal(
-                            "System.Reflection.AssemblyDescriptionAttribute(\"Module1\")",
-                            list[0].ToString()
-                        );
-                    }
-                )
-                .VerifyDiagnostics();
+                    Assert.Equal(1, list.Length);
+                    Assert.Equal(
+                        "System.Reflection.AssemblyDescriptionAttribute(\"Module1\")",
+                        list[0].ToString()
+                    );
+                }
+            ).VerifyDiagnostics();
         }
 
         private static IEnumerable<CSharpAttributeData> GetAssemblyDescriptionAttributes(
@@ -3387,26 +3392,22 @@ public class C { }
             Assert.Equal(3, appCompilation.Assembly.Modules.Length);
 
             CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: (ModuleSymbol m) =>
-                    {
-                        var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
+                appCompilation,
+                symbolValidator: (ModuleSymbol m) =>
+                {
+                    var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
 
-                        Assert.Equal(1, list.Length);
-                        Assert.Equal(
-                            "System.Reflection.AssemblyDescriptionAttribute(\"Module2\")",
-                            list[0].ToString()
-                        );
-                    }
-                )
-                .VerifyDiagnostics(
-                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M1.netmodule' is overridden.
-                    Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
-                        .WithArguments(
-                            "System.Reflection.AssemblyDescriptionAttribute",
-                            "M1.netmodule"
-                        )
-                );
+                    Assert.Equal(1, list.Length);
+                    Assert.Equal(
+                        "System.Reflection.AssemblyDescriptionAttribute(\"Module2\")",
+                        list[0].ToString()
+                    );
+                }
+            ).VerifyDiagnostics(
+                // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M1.netmodule' is overridden.
+                Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
+                    .WithArguments("System.Reflection.AssemblyDescriptionAttribute", "M1.netmodule")
+            );
         }
 
         [Fact, WorkItem(530579, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530579")]
@@ -3444,32 +3445,28 @@ public class C { }
             Assert.Equal(3, appCompilation.Assembly.Modules.Length);
 
             CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: (ModuleSymbol m) =>
-                    {
-                        var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
+                appCompilation,
+                symbolValidator: (ModuleSymbol m) =>
+                {
+                    var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
 
-                        Assert.Equal(1, list.Length);
-                        Assert.Equal(
-                            "System.Reflection.AssemblyDescriptionAttribute(\"Module3\")",
-                            list[0].ToString()
-                        );
-                    }
-                )
-                .VerifyDiagnostics(
-                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M2.netmodule' is overridden.
-                    Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
-                        .WithArguments(
-                            "System.Reflection.AssemblyDescriptionAttribute",
-                            "M2.netmodule"
-                        ),
-                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M1.netmodule' is overridden.
-                    Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
-                        .WithArguments(
-                            "System.Reflection.AssemblyDescriptionAttribute",
-                            "M1.netmodule"
-                        )
-                );
+                    Assert.Equal(1, list.Length);
+                    Assert.Equal(
+                        "System.Reflection.AssemblyDescriptionAttribute(\"Module3\")",
+                        list[0].ToString()
+                    );
+                }
+            ).VerifyDiagnostics(
+                // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M2.netmodule' is overridden.
+                Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
+                    .WithArguments(
+                        "System.Reflection.AssemblyDescriptionAttribute",
+                        "M2.netmodule"
+                    ),
+                // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M1.netmodule' is overridden.
+                Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
+                    .WithArguments("System.Reflection.AssemblyDescriptionAttribute", "M1.netmodule")
+            );
         }
 
         [Fact, WorkItem(530579, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530579")]
@@ -3507,26 +3504,22 @@ public class C { }
             Assert.Equal(3, appCompilation.Assembly.Modules.Length);
 
             CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: (ModuleSymbol m) =>
-                    {
-                        var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
+                appCompilation,
+                symbolValidator: (ModuleSymbol m) =>
+                {
+                    var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
 
-                        Assert.Equal(1, list.Length);
-                        Assert.Equal(
-                            "System.Reflection.AssemblyDescriptionAttribute(\"Module1\")",
-                            list[0].ToString()
-                        );
-                    }
-                )
-                .VerifyDiagnostics(
-                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M2.netmodule' is overridden.
-                    Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
-                        .WithArguments(
-                            "System.Reflection.AssemblyDescriptionAttribute",
-                            "M2.netmodule"
-                        )
-                );
+                    Assert.Equal(1, list.Length);
+                    Assert.Equal(
+                        "System.Reflection.AssemblyDescriptionAttribute(\"Module1\")",
+                        list[0].ToString()
+                    );
+                }
+            ).VerifyDiagnostics(
+                // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M2.netmodule' is overridden.
+                Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
+                    .WithArguments("System.Reflection.AssemblyDescriptionAttribute", "M2.netmodule")
+            );
         }
 
         [Fact, WorkItem(649346, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/649346")]
@@ -3551,35 +3544,31 @@ public class C { }
             Assert.Equal(2, appCompilation.Assembly.Modules.Length);
 
             CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: (ModuleSymbol m) =>
-                    {
-                        // var list = new ArrayBuilder<AttributeData>();
-                        var asm = m.ContainingAssembly;
-                        var attrs = m.ContainingAssembly.GetAttributes();
-                        var attrlist = attrs.Where(
-                            a =>
-                                a.IsTargetAttribute(
-                                    asm,
-                                    AttributeDescription.AssemblyFileVersionAttribute
-                                )
-                        );
+                appCompilation,
+                symbolValidator: (ModuleSymbol m) =>
+                {
+                    // var list = new ArrayBuilder<AttributeData>();
+                    var asm = m.ContainingAssembly;
+                    var attrs = m.ContainingAssembly.GetAttributes();
+                    var attrlist = attrs.Where(
+                        a =>
+                            a.IsTargetAttribute(
+                                asm,
+                                AttributeDescription.AssemblyFileVersionAttribute
+                            )
+                    );
 
-                        Assert.Equal(1, attrlist.Count());
-                        Assert.Equal(
-                            "System.Reflection.AssemblyFileVersionAttribute(\"4.3.2.1\")",
-                            attrlist.First().ToString()
-                        );
-                    }
-                )
-                .VerifyDiagnostics(
-                    // warning CS7090: Attribute 'System.Reflection.AssemblyFileVersionAttribute' from module 'M1.netmodule' will be ignored in favor of the instance appearing in source
-                    Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
-                        .WithArguments(
-                            "System.Reflection.AssemblyFileVersionAttribute",
-                            "M1.netmodule"
-                        )
-                );
+                    Assert.Equal(1, attrlist.Count());
+                    Assert.Equal(
+                        "System.Reflection.AssemblyFileVersionAttribute(\"4.3.2.1\")",
+                        attrlist.First().ToString()
+                    );
+                }
+            ).VerifyDiagnostics(
+                // warning CS7090: Attribute 'System.Reflection.AssemblyFileVersionAttribute' from module 'M1.netmodule' will be ignored in favor of the instance appearing in source
+                Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
+                    .WithArguments("System.Reflection.AssemblyFileVersionAttribute", "M1.netmodule")
+            );
         }
 
         [Fact, WorkItem(1082421, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1082421")]

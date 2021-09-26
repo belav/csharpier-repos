@@ -376,7 +376,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         [ConditionalFact]
         public void Can_get_and_set_dbfunction()
         {
-            var testMethod = typeof(TestDbFunctions).GetTypeInfo()
+            var testMethod = typeof(TestDbFunctions)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(TestDbFunctions.MethodA));
 
             var modelBuilder = new ModelBuilder();

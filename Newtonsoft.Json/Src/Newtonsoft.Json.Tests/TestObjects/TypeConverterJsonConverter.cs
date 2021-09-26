@@ -40,10 +40,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
         private TypeConverter GetConverter(Type type)
         {
             var converters = ReflectionUtils.GetAttributes(
-                    type,
-                    typeof(TypeConverterAttribute),
-                    true
-                )
+                type,
+                typeof(TypeConverterAttribute),
+                true
+            )
                 .Union(
                     from t in type.GetInterfaces()
                     from c in ReflectionUtils.GetAttributes(t, typeof(TypeConverterAttribute), true)
@@ -60,7 +60,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     converter.CanConvertFrom(typeof(string))
                     && converter.CanConvertTo(typeof(string))
                 select converter
-            ).FirstOrDefault();
+            )
+                .FirstOrDefault();
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

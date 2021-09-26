@@ -123,11 +123,8 @@ namespace Microsoft.CodeAnalysis
                 var firstString = first as string;
                 if (firstString != null)
                 {
-                    return string.Equals(
-                        firstString,
-                        second as string,
-                        System.StringComparison.Ordinal
-                    );
+                    return string
+                        .Equals(firstString, second as string, System.StringComparison.Ordinal);
                 }
 
                 return first.Equals(second);

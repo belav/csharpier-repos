@@ -56,9 +56,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var ifStatement = (TIfStatementSyntax)diagnostic.AdditionalLocations[0].FindNode(
-                cancellationToken
-            );
+            var ifStatement = (TIfStatementSyntax)diagnostic.AdditionalLocations[0]
+                .FindNode(cancellationToken);
 
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -88,15 +87,15 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
 
             var anyReturn = (trueReturn ?? falseReturn)!;
             var conditionalExpression = await CreateConditionalExpressionAsync(
-                    document,
-                    ifOperation,
-                    trueStatement,
-                    falseStatement,
-                    trueReturn?.ReturnedValue ?? trueStatement,
-                    falseReturn?.ReturnedValue ?? falseStatement,
-                    anyReturn.GetRefKind(containingSymbol) != RefKind.None,
-                    cancellationToken
-                )
+                document,
+                ifOperation,
+                trueStatement,
+                falseStatement,
+                trueReturn?.ReturnedValue ?? trueStatement,
+                falseReturn?.ReturnedValue ?? falseStatement,
+                anyReturn.GetRefKind(containingSymbol) != RefKind.None,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();

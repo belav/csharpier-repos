@@ -356,10 +356,10 @@ namespace System.Xml
                         if (
                             (
                                 _valueChunkLength = await _reader.ReadValueChunkAsync(
-                                        _valueChunk!,
-                                        0,
-                                        ChunkSize
-                                    )
+                                    _valueChunk!,
+                                    0,
+                                    ChunkSize
+                                )
                                     .ConfigureAwait(false)
                             ) == 0
                         )

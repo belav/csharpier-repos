@@ -188,14 +188,12 @@ namespace Microsoft.AspNetCore.Builder
             // Arrange
             var matcherEndpointDataSources = new List<EndpointDataSource>();
             var matcherFactoryMock = new Mock<MatcherFactory>();
-            matcherFactoryMock.Setup(m => m.CreateMatcher(It.IsAny<EndpointDataSource>()))
-                .Callback(
-                    (EndpointDataSource arg) =>
-                    {
-                        matcherEndpointDataSources.Add(arg);
-                    }
-                )
-                .Returns(new TestMatcher(false));
+            matcherFactoryMock.Setup(m => m.CreateMatcher(It.IsAny<EndpointDataSource>())).Callback(
+                (EndpointDataSource arg) =>
+                {
+                    matcherEndpointDataSources.Add(arg);
+                }
+            ).Returns(new TestMatcher(false));
 
             var services = CreateServices(matcherFactoryMock.Object);
 
@@ -260,14 +258,12 @@ namespace Microsoft.AspNetCore.Builder
             // Arrange
             var matcherEndpointDataSources = new List<EndpointDataSource>();
             var matcherFactoryMock = new Mock<MatcherFactory>();
-            matcherFactoryMock.Setup(m => m.CreateMatcher(It.IsAny<EndpointDataSource>()))
-                .Callback(
-                    (EndpointDataSource arg) =>
-                    {
-                        matcherEndpointDataSources.Add(arg);
-                    }
-                )
-                .Returns(new TestMatcher(false));
+            matcherFactoryMock.Setup(m => m.CreateMatcher(It.IsAny<EndpointDataSource>())).Callback(
+                (EndpointDataSource arg) =>
+                {
+                    matcherEndpointDataSources.Add(arg);
+                }
+            ).Returns(new TestMatcher(false));
 
             var services = CreateServices(matcherFactoryMock.Object);
 

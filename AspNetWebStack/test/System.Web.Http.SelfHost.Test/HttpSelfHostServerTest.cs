@@ -42,9 +42,8 @@ namespace System.Web.Http.SelfHost
             {
                 // Arrange & Act
                 server = await CreateServerAsync(port, transferMode);
-                HttpResponseMessage response = await new HttpClient().GetAsync(
-                    BaseUri(port, transferMode) + uri
-                );
+                HttpResponseMessage response = await new HttpClient()
+                    .GetAsync(BaseUri(port, transferMode) + uri);
                 string responseString = await response.Content.ReadAsStringAsync();
 
                 // Assert
@@ -68,9 +67,8 @@ namespace System.Web.Http.SelfHost
                 bool shouldChunk = transferMode == TransferMode.Streamed;
 
                 // Act
-                HttpResponseMessage response = await new HttpClient().GetAsync(
-                    BaseUri(port, transferMode) + uri
-                );
+                HttpResponseMessage response = await new HttpClient()
+                    .GetAsync(BaseUri(port, transferMode) + uri);
                 string responseString = await response.Content.ReadAsStringAsync();
                 IEnumerable<string> headerValues = null;
                 bool isChunked =
@@ -99,9 +97,8 @@ namespace System.Web.Http.SelfHost
             {
                 // Arrange & Act
                 server = await CreateServerAsync(port, transferMode);
-                HttpResponseMessage response = await new HttpClient(server).GetAsync(
-                    BaseUri(port, transferMode) + uri
-                );
+                HttpResponseMessage response = await new HttpClient(server)
+                    .GetAsync(BaseUri(port, transferMode) + uri);
                 string responseString = await response.Content.ReadAsStringAsync();
                 IEnumerable<string> headerValues = null;
                 bool isChunked =
@@ -129,9 +126,8 @@ namespace System.Web.Http.SelfHost
             {
                 // Arrange & Act
                 server = await CreateServerAsync(port, transferMode);
-                HttpResponseMessage response = await new HttpClient().GetAsync(
-                    BaseUri(port, transferMode) + uri
-                );
+                HttpResponseMessage response = await new HttpClient()
+                    .GetAsync(BaseUri(port, transferMode) + uri);
                 string responseString = await response.Content.ReadAsStringAsync();
 
                 // Assert
@@ -178,9 +174,8 @@ namespace System.Web.Http.SelfHost
             {
                 // Arrange
                 server = await CreateServerAsync(port, transferMode);
-                Task<HttpResponseMessage> task = new HttpClient().GetAsync(
-                    BaseUri(port, transferMode) + uri
-                );
+                Task<HttpResponseMessage> task = new HttpClient()
+                    .GetAsync(BaseUri(port, transferMode) + uri);
 
                 // Act & Assert
                 await Assert.ThrowsAsync<HttpRequestException>(() => task);
@@ -313,9 +308,8 @@ namespace System.Web.Http.SelfHost
             {
                 // Arrange & Act
                 server = await CreateServerAsync(port, transferMode, ignoreRoute: true);
-                HttpResponseMessage response = await new HttpClient().GetAsync(
-                    BaseUri(port, transferMode) + uri
-                );
+                HttpResponseMessage response = await new HttpClient()
+                    .GetAsync(BaseUri(port, transferMode) + uri);
 
                 // Assert
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -337,9 +331,8 @@ namespace System.Web.Http.SelfHost
             {
                 // Arrange & Act
                 server = await CreateServerAsync(port, transferMode, ignoreRoute: true);
-                HttpResponseMessage response = await new HttpClient().GetAsync(
-                    BaseUri(port, transferMode) + uri
-                );
+                HttpResponseMessage response = await new HttpClient()
+                    .GetAsync(BaseUri(port, transferMode) + uri);
 
                 // Assert
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -362,9 +355,8 @@ namespace System.Web.Http.SelfHost
             {
                 // Arrange & Act
                 server = await CreateServerAsync(port, transferMode, ignoreRoute: true);
-                HttpResponseMessage response = await new HttpClient().GetAsync(
-                    BaseUri(port, transferMode) + uri
-                );
+                HttpResponseMessage response = await new HttpClient()
+                    .GetAsync(BaseUri(port, transferMode) + uri);
 
                 // Assert
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -387,9 +379,8 @@ namespace System.Web.Http.SelfHost
             {
                 // Arrange & Act
                 server = await CreateServerAsync(port, transferMode, ignoreRoute: true);
-                HttpResponseMessage response = await new HttpClient().GetAsync(
-                    BaseUri(port, transferMode) + uri
-                );
+                HttpResponseMessage response = await new HttpClient()
+                    .GetAsync(BaseUri(port, transferMode) + uri);
                 string responseString = await response.Content.ReadAsStringAsync();
 
                 // Assert
@@ -410,9 +401,8 @@ namespace System.Web.Http.SelfHost
             {
                 // Arrange & Act
                 server = await CreateServerAsync(port, transferMode, ignoreRoute: true);
-                HttpResponseMessage response = await new HttpClient().GetAsync(
-                    BaseUri(port, transferMode) + uri
-                );
+                HttpResponseMessage response = await new HttpClient()
+                    .GetAsync(BaseUri(port, transferMode) + uri);
                 string responseString = await response.Content.ReadAsStringAsync();
 
                 // Assert
@@ -505,11 +495,12 @@ namespace System.Web.Http.SelfHost
             if (ignoreRoute)
             {
                 config.Routes.IgnoreRoute("Ignore", "{controller}/{action}");
-                config.Routes.IgnoreRoute(
-                    "IgnoreWithConstraints",
-                    "constraint/values/{id}",
-                    constraints: new { constraint = new CustomConstraint() }
-                );
+                config.Routes
+                    .IgnoreRoute(
+                        "IgnoreWithConstraints",
+                        "constraint/values/{id}",
+                        constraints: new { constraint = new CustomConstraint() }
+                    );
             }
             config.Routes.MapHttpRoute("Default", "{controller}/{action}");
             config.Routes.MapHttpRoute("Other", "other/{controller}/{action}");

@@ -251,9 +251,8 @@ GROUP BY [o].[OrderDate]"
             bool async
         )
         {
-            await base.GroupBy_aggregate_projecting_conditional_expression_based_on_group_key(
-                async
-            );
+            await base
+                .GroupBy_aggregate_projecting_conditional_expression_based_on_group_key(async);
 
             AssertSql(
                 @"SELECT CASE
@@ -930,9 +929,10 @@ GROUP BY [o].[CustomerID]"
             bool async
         )
         {
-            await base.Element_selector_with_case_block_repeated_inside_another_case_block_in_projection(
-                async
-            );
+            await base
+                .Element_selector_with_case_block_repeated_inside_another_case_block_in_projection(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [o].[OrderID], COALESCE(SUM(CASE
@@ -1300,9 +1300,10 @@ GROUP BY [c].[CustomerID]"
             bool async
         )
         {
-            await base.GroupBy_after_anonymous_projection_and_distinct_followed_by_another_anonymous_projection(
-                async
-            );
+            await base
+                .GroupBy_after_anonymous_projection_and_distinct_followed_by_another_anonymous_projection(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [t].[CustomerID] AS [Key], COUNT(*) AS [Count]
@@ -1982,9 +1983,8 @@ ORDER BY [e].[EmployeeID]"
             bool async
         )
         {
-            await base.GroupBy_with_orderby_take_skip_distinct_followed_by_group_key_projection(
-                async
-            );
+            await base
+                .GroupBy_with_orderby_take_skip_distinct_followed_by_group_key_projection(async);
 
             AssertSql("");
         }
@@ -2689,9 +2689,8 @@ GROUP BY [o].[OrderID]"
             bool async
         )
         {
-            await base.Where_select_function_groupby_followed_by_another_select_with_aggregates(
-                async
-            );
+            await base
+                .Where_select_function_groupby_followed_by_another_select_with_aggregates(async);
 
             AssertSql(
                 @"SELECT [o].[CustomerID] AS [Key], COALESCE(SUM(CASE
@@ -2797,9 +2796,10 @@ ORDER BY [t].[City], [t0].[ProductID], [t1].[ProductID]"
             bool async
         )
         {
-            await base.Select_correlated_collection_after_GroupBy_aggregate_when_identifier_does_not_change(
-                async
-            );
+            await base
+                .Select_correlated_collection_after_GroupBy_aggregate_when_identifier_does_not_change(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [t].[CustomerID], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
@@ -2818,9 +2818,10 @@ ORDER BY [t].[CustomerID], [o].[OrderID]"
             bool async
         )
         {
-            await base.Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes(
-                async
-            );
+            await base
+                .Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [t].[CustomerID], [o0].[OrderID], [o0].[CustomerID], [o0].[EmployeeID], [o0].[OrderDate]
@@ -2839,9 +2840,10 @@ ORDER BY [t].[CustomerID], [o0].[OrderID]"
             bool async
         )
         {
-            await base.Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(
-                async
-            );
+            await base
+                .Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(
+                    async
+                );
             //AssertSql(" ");
         }
 

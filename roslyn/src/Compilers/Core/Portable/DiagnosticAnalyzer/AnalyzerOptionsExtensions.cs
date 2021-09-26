@@ -45,11 +45,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (
                 analyzerOptions == null
                 || !descriptor.IsEnabledByDefault
-                || descriptor.CustomTags.Contains(
-                    tag =>
-                        tag == WellKnownDiagnosticTags.Compiler
-                        || tag == WellKnownDiagnosticTags.NotConfigurable
-                )
+                || descriptor.CustomTags
+                    .Contains(
+                        tag =>
+                            tag == WellKnownDiagnosticTags.Compiler
+                            || tag == WellKnownDiagnosticTags.NotConfigurable
+                    )
             )
             {
                 severity = default;
@@ -73,9 +74,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return false;
             }
 
-            var analyzerConfigOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                tree
-            );
+            var analyzerConfigOptions = analyzerOptions.AnalyzerConfigOptionsProvider
+                .GetOptions(tree);
 
             // If user has explicitly configured default severity for the diagnostic category, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.category-security.severity = error'

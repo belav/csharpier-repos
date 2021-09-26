@@ -933,16 +933,10 @@ namespace System.Net
             // if the protocol verb/method doesn't support it. Note that this is not
             // entirely compliant RFC2616 for the aforementioned compatibility reasons.
             if (
-                string.Equals(
-                    HttpMethod.Get.Method,
-                    _originVerb,
-                    StringComparison.OrdinalIgnoreCase
-                )
-                || string.Equals(
-                    HttpMethod.Head.Method,
-                    _originVerb,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(HttpMethod.Get.Method, _originVerb, StringComparison.OrdinalIgnoreCase)
+                || string
+                    .Equals(HttpMethod.Head.Method, _originVerb, StringComparison.OrdinalIgnoreCase)
                 || string.Equals("CONNECT", _originVerb, StringComparison.OrdinalIgnoreCase)
             )
             {
@@ -1055,17 +1049,13 @@ namespace System.Net
                             request.Content = new ByteArrayContent(Array.Empty<byte>());
                         }
 
-                        request.Content.Headers.TryAddWithoutValidation(
-                            headerName,
-                            _webHeaderCollection[headerName!]
-                        );
+                        request.Content.Headers
+                            .TryAddWithoutValidation(headerName, _webHeaderCollection[headerName!]);
                     }
                     else
                     {
-                        request.Headers.TryAddWithoutValidation(
-                            headerName,
-                            _webHeaderCollection[headerName!]
-                        );
+                        request.Headers
+                            .TryAddWithoutValidation(headerName, _webHeaderCollection[headerName!]);
                     }
                 }
 
@@ -1311,11 +1301,12 @@ namespace System.Net
             else
             {
                 if (
-                    !string.Equals(
-                        curRange.Substring(0, curRange.IndexOf('=')),
-                        rangeSpecifier,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    !string
+                        .Equals(
+                            curRange.Substring(0, curRange.IndexOf('=')),
+                            rangeSpecifier,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     return false;

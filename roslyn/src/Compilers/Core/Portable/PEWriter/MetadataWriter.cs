@@ -1198,9 +1198,10 @@ namespace Microsoft.Cci
             }
 
             var builder = PooledBlobBuilder.GetInstance();
-            var encoder = new BlobEncoder(builder).MethodSpecificationSignature(
-                methodInstanceReference.GetGenericMethod(Context).GenericParameterCount
-            );
+            var encoder = new BlobEncoder(builder)
+                .MethodSpecificationSignature(
+                    methodInstanceReference.GetGenericMethod(Context).GenericParameterCount
+                );
 
             foreach (
                 ITypeReference typeReference in methodInstanceReference.GetGenericArguments(Context)
@@ -1289,12 +1290,14 @@ namespace Microsoft.Cci
 
             var builder = PooledBlobBuilder.GetInstance();
 
-            var encoder = new BlobEncoder(builder).MethodSignature(
-                new SignatureHeader((byte)methodReference.CallingConvention).CallingConvention,
-                methodReference.GenericParameterCount,
-                isInstanceMethod: (methodReference.CallingConvention & CallingConvention.HasThis)
-                    != 0
-            );
+            var encoder = new BlobEncoder(builder)
+                .MethodSignature(
+                    new SignatureHeader((byte)methodReference.CallingConvention).CallingConvention,
+                    methodReference.GenericParameterCount,
+                    isInstanceMethod: (
+                        methodReference.CallingConvention & CallingConvention.HasThis
+                    ) != 0
+                );
 
             SerializeReturnValueAndParameters(
                 encoder,
@@ -1360,11 +1363,12 @@ namespace Microsoft.Cci
         {
             Debug.Assert(!(signature is IMethodReference));
             var builder = PooledBlobBuilder.GetInstance();
-            var signatureEncoder = new BlobEncoder(builder).MethodSignature(
-                convention: signature.CallingConvention.ToSignatureConvention(),
-                genericParameterCount: 0,
-                isInstanceMethod: false
-            );
+            var signatureEncoder = new BlobEncoder(builder)
+                .MethodSignature(
+                    convention: signature.CallingConvention.ToSignatureConvention(),
+                    genericParameterCount: 0,
+                    isInstanceMethod: false
+                );
             SerializeReturnValueAndParameters(
                 signatureEncoder,
                 signature,
@@ -1460,9 +1464,11 @@ namespace Microsoft.Cci
 
             var builder = PooledBlobBuilder.GetInstance();
 
-            var encoder = new BlobEncoder(builder).PropertySignature(
-                isInstanceProperty: (propertyDef.CallingConvention & CallingConvention.HasThis) != 0
-            );
+            var encoder = new BlobEncoder(builder)
+                .PropertySignature(
+                    isInstanceProperty: (propertyDef.CallingConvention & CallingConvention.HasThis)
+                        != 0
+                );
 
             SerializeReturnValueAndParameters(
                 encoder,
@@ -1549,13 +1555,15 @@ namespace Microsoft.Cci
             if (IsTooLongInternal(name, NameLengthLimit))
             {
                 Location location = GetNamedEntityLocation(errorEntity);
-                this.Context.Diagnostics.Add(
-                    this.messageProvider.CreateDiagnostic(
-                        this.messageProvider.ERR_MetadataNameTooLong,
-                        location,
-                        name
-                    )
-                );
+                this.Context.Diagnostics
+                    .Add(
+                        this.messageProvider
+                            .CreateDiagnostic(
+                                this.messageProvider.ERR_MetadataNameTooLong,
+                                location,
+                                name
+                            )
+                    );
             }
         }
 
@@ -1564,13 +1572,15 @@ namespace Microsoft.Cci
             if (IsTooLongInternal(path, PathLengthLimit))
             {
                 Location location = GetNamedEntityLocation(errorEntity);
-                this.Context.Diagnostics.Add(
-                    this.messageProvider.CreateDiagnostic(
-                        this.messageProvider.ERR_MetadataNameTooLong,
-                        location,
-                        path
-                    )
-                );
+                this.Context.Diagnostics
+                    .Add(
+                        this.messageProvider
+                            .CreateDiagnostic(
+                                this.messageProvider.ERR_MetadataNameTooLong,
+                                location,
+                                path
+                            )
+                    );
             }
         }
 
@@ -1599,13 +1609,15 @@ namespace Microsoft.Cci
                 if (utf8Length > NameLengthLimit)
                 {
                     Location location = GetNamedEntityLocation(errorEntity);
-                    this.Context.Diagnostics.Add(
-                        this.messageProvider.CreateDiagnostic(
-                            this.messageProvider.ERR_MetadataNameTooLong,
-                            location,
-                            namespaceName + "." + mangledTypeName
-                        )
-                    );
+                    this.Context.Diagnostics
+                        .Add(
+                            this.messageProvider
+                                .CreateDiagnostic(
+                                    this.messageProvider.ERR_MetadataNameTooLong,
+                                    location,
+                                    namespaceName + "." + mangledTypeName
+                                )
+                        );
                 }
             }
         }
@@ -1615,13 +1627,15 @@ namespace Microsoft.Cci
             if (IsTooLongInternal(usingString, PdbLengthLimit))
             {
                 Location location = GetNamedEntityLocation(errorEntity);
-                this.Context.Diagnostics.Add(
-                    this.messageProvider.CreateDiagnostic(
-                        this.messageProvider.WRN_PdbUsingNameTooLong,
-                        location,
-                        usingString
-                    )
-                );
+                this.Context.Diagnostics
+                    .Add(
+                        this.messageProvider
+                            .CreateDiagnostic(
+                                this.messageProvider.WRN_PdbUsingNameTooLong,
+                                location,
+                                usingString
+                            )
+                    );
                 return true;
             }
 
@@ -1633,13 +1647,15 @@ namespace Microsoft.Cci
             string name = localDefinition.Name;
             if (IsTooLongInternal(name, PdbLengthLimit))
             {
-                this.Context.Diagnostics.Add(
-                    this.messageProvider.CreateDiagnostic(
-                        this.messageProvider.WRN_PdbLocalNameTooLong,
-                        localDefinition.Location,
-                        name
-                    )
-                );
+                this.Context.Diagnostics
+                    .Add(
+                        this.messageProvider
+                            .CreateDiagnostic(
+                                this.messageProvider.WRN_PdbLocalNameTooLong,
+                                localDefinition.Location,
+                                name
+                            )
+                    );
                 return true;
             }
 
@@ -2171,23 +2187,21 @@ namespace Microsoft.Cci
 
         private ImmutableArray<IGenericParameter> GetSortedGenericParameters()
         {
-            return GetGenericParameters()
-                .OrderBy(
-                    (x, y) =>
+            return GetGenericParameters().OrderBy(
+                (x, y) =>
+                {
+                    // Spec: GenericParam table is sorted by Owner and then by Number.
+                    int result =
+                        CodedIndex.TypeOrMethodDef(GetDeclaringTypeOrMethodHandle(x))
+                        - CodedIndex.TypeOrMethodDef(GetDeclaringTypeOrMethodHandle(y));
+                    if (result != 0)
                     {
-                        // Spec: GenericParam table is sorted by Owner and then by Number.
-                        int result =
-                            CodedIndex.TypeOrMethodDef(GetDeclaringTypeOrMethodHandle(x))
-                            - CodedIndex.TypeOrMethodDef(GetDeclaringTypeOrMethodHandle(y));
-                        if (result != 0)
-                        {
-                            return result;
-                        }
-
-                        return x.Index - y.Index;
+                        return result;
                     }
-                )
-                .ToImmutableArray();
+
+                    return x.Index - y.Index;
+                }
+            ).ToImmutableArray();
         }
 
         private void PopulateTypeSystemTables(
@@ -2532,10 +2546,8 @@ namespace Microsoft.Cci
             {
                 groupedSecurityAttributes =
                     groupedSecurityAttributes
-                    ?? OrderPreservingMultiDictionary<
-                        DeclarativeSecurityAction,
-                        ICustomAttribute
-                    >.GetInstance();
+                    ?? OrderPreservingMultiDictionary<DeclarativeSecurityAction, ICustomAttribute>
+                        .GetInstance();
                 groupedSecurityAttributes.Add(
                     securityAttribute.Action,
                     securityAttribute.Attribute
@@ -3622,12 +3634,14 @@ namespace Microsoft.Cci
                 }
                 catch (ImageFormatLimitationException)
                 {
-                    this.Context.Diagnostics.Add(
-                        this.messageProvider.CreateDiagnostic(
-                            this.messageProvider.ERR_TooManyUserStrings,
-                            NoLocation.Singleton
-                        )
-                    );
+                    this.Context.Diagnostics
+                        .Add(
+                            this.messageProvider
+                                .CreateDiagnostic(
+                                    this.messageProvider.ERR_TooManyUserStrings,
+                                    NoLocation.Singleton
+                                )
+                        );
                     _userStringTokenOverflow = true;
                 }
             }
@@ -3645,12 +3659,14 @@ namespace Microsoft.Cci
                 }
                 catch (ImageFormatLimitationException)
                 {
-                    this.Context.Diagnostics.Add(
-                        this.messageProvider.CreateDiagnostic(
-                            this.messageProvider.ERR_TooManyUserStrings,
-                            NoLocation.Singleton
-                        )
-                    );
+                    this.Context.Diagnostics
+                        .Add(
+                            this.messageProvider
+                                .CreateDiagnostic(
+                                    this.messageProvider.ERR_TooManyUserStrings,
+                                    NoLocation.Singleton
+                                )
+                        );
                     _userStringTokenOverflow = true;
                 }
             }
@@ -3718,11 +3734,10 @@ namespace Microsoft.Cci
                                         break;
                                     case SourceDocumentIndex:
                                         token = _dynamicAnalysisDataWriterOpt.GetOrAddDocument(
-                                            (
-                                                (CommonPEModuleBuilder)module
-                                            ).GetSourceDocumentFromIndex(
-                                                (uint)(pseudoToken & 0x00ffffff)
-                                            )
+                                            ((CommonPEModuleBuilder)module)
+                                                .GetSourceDocumentFromIndex(
+                                                    (uint)(pseudoToken & 0x00ffffff)
+                                                )
                                         );
                                         break;
                                     default:
@@ -3911,9 +3926,10 @@ namespace Microsoft.Cci
             IGenericMethodInstanceReference genericMethodInstanceReference
         )
         {
-            var argsEncoder = new BlobEncoder(builder).MethodSpecificationSignature(
-                genericMethodInstanceReference.GetGenericMethod(Context).GenericParameterCount
-            );
+            var argsEncoder = new BlobEncoder(builder)
+                .MethodSpecificationSignature(
+                    genericMethodInstanceReference.GetGenericMethod(Context).GenericParameterCount
+                );
             foreach (
                 ITypeReference genericArgument in genericMethodInstanceReference.GetGenericArguments(
                     Context
@@ -3937,10 +3953,8 @@ namespace Microsoft.Cci
 
             FixedArgumentsEncoder fixedArgsEncoder;
             CustomAttributeNamedArgumentsEncoder namedArgsEncoder;
-            new BlobEncoder(builder).CustomAttributeSignature(
-                out fixedArgsEncoder,
-                out namedArgsEncoder
-            );
+            new BlobEncoder(builder)
+                .CustomAttributeSignature(out fixedArgsEncoder, out namedArgsEncoder);
 
             for (int i = 0; i < parameters.Length; i++)
             {
@@ -4283,9 +4297,8 @@ namespace Microsoft.Cci
                 writer.WriteSerializedString(typeName);
 
                 var customAttributeArgsBuilder = PooledBlobBuilder.GetInstance();
-                var namedArgsEncoder = new BlobEncoder(
-                    customAttributeArgsBuilder
-                ).PermissionSetArguments(customAttribute.NamedArgumentCount);
+                var namedArgsEncoder = new BlobEncoder(customAttributeArgsBuilder)
+                    .PermissionSetArguments(customAttribute.NamedArgumentCount);
                 SerializeCustomAttributeNamedArguments(namedArgsEncoder, customAttribute);
                 writer.WriteCompressedInteger(customAttributeArgsBuilder.Count);
 
@@ -4580,9 +4593,8 @@ namespace Microsoft.Cci
                     // "void" is handled specifically for "void*" with custom modifiers.
                     // If SignatureTypeEncoder supports such cases directly, this can
                     // be removed. See https://github.com/dotnet/corefx/issues/14571.
-                    encoder.Builder.WriteByte(
-                        (byte)System.Reflection.Metadata.PrimitiveTypeCode.Void
-                    );
+                    encoder.Builder
+                        .WriteByte((byte)System.Reflection.Metadata.PrimitiveTypeCode.Void);
                     break;
 
                 default:

@@ -2604,11 +2604,8 @@ namespace System.Web.Mvc.Ajax.Test
 
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            ajaxHelper.RouteCollection.MapRoute(
-                "MyRouteName",
-                "any/url",
-                new { controller = "Charlie" }
-            );
+            ajaxHelper.RouteCollection
+                .MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
             StringWriter writer = new StringWriter();
             ajaxHelper.ViewContext.Writer = writer;
 
@@ -2631,11 +2628,8 @@ namespace System.Web.Mvc.Ajax.Test
 
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            ajaxHelper.RouteCollection.MapRoute(
-                "MyRouteName",
-                "any/url",
-                new { controller = "Charlie" }
-            );
+            ajaxHelper.RouteCollection
+                .MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
             StringWriter writer = new StringWriter();
             ajaxHelper.ViewContext.Writer = writer;
 

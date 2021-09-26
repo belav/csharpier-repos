@@ -163,10 +163,11 @@ namespace System.Drawing
         {
             if (!Enum.IsDefined(typeof(CopyPixelOperation), copyPixelOperation))
                 throw new InvalidEnumArgumentException(
-                    string.Format(
-                        "Enum argument value '{0}' is not valid for CopyPixelOperation",
-                        copyPixelOperation
-                    )
+                    string
+                        .Format(
+                            "Enum argument value '{0}' is not valid for CopyPixelOperation",
+                            copyPixelOperation
+                        )
                 );
 
             if (Gdip.UseX11Drawable)
@@ -237,11 +238,12 @@ namespace System.Drawing
             );
             if (image == IntPtr.Zero)
             {
-                string s = string.Format(
-                    "XGetImage returned NULL when asked to for a {0}x{1} region block",
-                    blockRegionSize.Width,
-                    blockRegionSize.Height
-                );
+                string s = string
+                    .Format(
+                        "XGetImage returned NULL when asked to for a {0}x{1} region block",
+                        blockRegionSize.Width,
+                        blockRegionSize.Height
+                    );
                 throw new InvalidOperationException(s);
             }
 
@@ -272,10 +274,8 @@ namespace System.Drawing
                             blue = (int)((pixel & blue_mask)) & 0xff;
                             break;
                         default:
-                            string text = string.Format(
-                                "{0}bbp depth not supported.",
-                                visual.depth
-                            );
+                            string text = string
+                                .Format("{0}bbp depth not supported.", visual.depth);
                             throw new NotImplementedException(text);
                     }
 

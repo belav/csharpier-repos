@@ -68,12 +68,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             EmbeddedLanguageInfo info
         )
         {
-            var dateTimeType = semanticModel.Compilation.GetTypeByMetadataName(
-                typeof(System.DateTime).FullName!
-            );
-            var dateTimeOffsetType = semanticModel.Compilation.GetTypeByMetadataName(
-                typeof(System.DateTimeOffset).FullName!
-            );
+            var dateTimeType = semanticModel.Compilation
+                .GetTypeByMetadataName(typeof(System.DateTime).FullName!);
+            var dateTimeOffsetType = semanticModel.Compilation
+                .GetTypeByMetadataName(typeof(System.DateTimeOffset).FullName!);
             if (dateTimeType == null || dateTimeOffsetType == null)
                 return null;
 

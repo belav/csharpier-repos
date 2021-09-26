@@ -125,10 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
                 Debug.Assert(t.PrimitiveTypeCode == Cci.PrimitiveTypeCode.NotPrimitive);
                 builder.Add(
-                    this.RetargetingTranslator.Retarget(
-                        t,
-                        RetargetOptions.RetargetPrimitiveTypesByName
-                    )
+                    this.RetargetingTranslator
+                        .Retarget(t, RetargetOptions.RetargetPrimitiveTypesByName)
                 );
             }
 
@@ -213,10 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 return new MissingMetadataTypeSymbol.TopLevel(_retargetingModule, ref typeName);
             }
 
-            return this.RetargetingTranslator.Retarget(
-                underlying,
-                RetargetOptions.RetargetPrimitiveTypesByName
-            );
+            return this.RetargetingTranslator
+                .Retarget(underlying, RetargetOptions.RetargetPrimitiveTypesByName);
         }
 
         internal override void GetExtensionMethods(

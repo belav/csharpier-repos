@@ -149,10 +149,8 @@ namespace System.Threading
                     ThreadCounts newCounts = counts;
                     newCounts.NumThreadsGoal = newMinThreads;
 
-                    ThreadCounts oldCounts = _separated.counts.InterlockedCompareExchange(
-                        newCounts,
-                        counts
-                    );
+                    ThreadCounts oldCounts = _separated.counts
+                        .InterlockedCompareExchange(newCounts, counts);
                     if (oldCounts == counts)
                     {
                         if (_separated.numRequestedWorkers > 0)
@@ -210,10 +208,8 @@ namespace System.Threading
                     ThreadCounts newCounts = counts;
                     newCounts.NumThreadsGoal = newMaxThreads;
 
-                    ThreadCounts oldCounts = _separated.counts.InterlockedCompareExchange(
-                        newCounts,
-                        counts
-                    );
+                    ThreadCounts oldCounts = _separated.counts
+                        .InterlockedCompareExchange(newCounts, counts);
                     if (oldCounts == counts)
                     {
                         break;
@@ -321,22 +317,16 @@ namespace System.Threading
 
                     ThreadCounts currentCounts = _separated.counts.VolatileRead();
                     int newMax;
-                    (newMax, _threadAdjustmentIntervalMs) =
-                        HillClimbing.ThreadPoolHillClimber.Update(
-                            currentCounts.NumThreadsGoal,
-                            elapsedSeconds,
-                            numCompletions
-                        );
+                    (newMax, _threadAdjustmentIntervalMs) = HillClimbing.ThreadPoolHillClimber
+                        .Update(currentCounts.NumThreadsGoal, elapsedSeconds, numCompletions);
 
                     while (newMax != currentCounts.NumThreadsGoal)
                     {
                         ThreadCounts newCounts = currentCounts;
                         newCounts.NumThreadsGoal = (short)newMax;
 
-                        ThreadCounts oldCounts = _separated.counts.InterlockedCompareExchange(
-                            newCounts,
-                            currentCounts
-                        );
+                        ThreadCounts oldCounts = _separated.counts
+                            .InterlockedCompareExchange(newCounts, currentCounts);
                         if (oldCounts == currentCounts)
                         {
                             //

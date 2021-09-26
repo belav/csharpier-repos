@@ -808,10 +808,10 @@ namespace System.IO
                 if (_charPos == _charLen)
                 {
                     await FlushAsyncInternal(
-                            flushStream: false,
-                            flushEncoder: false,
-                            cancellationToken
-                        )
+                        flushStream: false,
+                        flushEncoder: false,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -833,10 +833,10 @@ namespace System.IO
                     if (_charPos == _charLen)
                     {
                         await FlushAsyncInternal(
-                                flushStream: false,
-                                flushEncoder: false,
-                                cancellationToken
-                            )
+                            flushStream: false,
+                            flushEncoder: false,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -1054,9 +1054,9 @@ namespace System.IO
                     if (preamble.Length > 0)
                     {
                         await _stream.WriteAsync(
-                                new ReadOnlyMemory<byte>(preamble),
-                                cancellationToken
-                            )
+                            new ReadOnlyMemory<byte>(preamble),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -1073,9 +1073,9 @@ namespace System.IO
                 if (count > 0)
                 {
                     await _stream.WriteAsync(
-                            new ReadOnlyMemory<byte>(byteBuffer, 0, count),
-                            cancellationToken
-                        )
+                        new ReadOnlyMemory<byte>(byteBuffer, 0, count),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 

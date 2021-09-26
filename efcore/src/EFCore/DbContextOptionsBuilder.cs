@@ -251,10 +251,11 @@ namespace Microsoft.EntityFrameworkCore
                             for (var i = 0; i < categoriesArray.Length; i++)
                             {
                                 if (
-                                    eventId.Name!.StartsWith(
-                                        categoriesArray[i],
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                                    eventId.Name!
+                                        .StartsWith(
+                                            categoriesArray[i],
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
                                 )
                                 {
                                     return true;
@@ -707,11 +708,12 @@ namespace Microsoft.EntityFrameworkCore
             Func<CoreOptionsExtension, CoreOptionsExtension> withFunc
         )
         {
-            ((IDbContextOptionsBuilderInfrastructure)this).AddOrUpdateExtension(
-                withFunc(
-                    Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension()
-                )
-            );
+            ((IDbContextOptionsBuilderInfrastructure)this)
+                .AddOrUpdateExtension(
+                    withFunc(
+                        Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension()
+                    )
+                );
 
             return this;
         }

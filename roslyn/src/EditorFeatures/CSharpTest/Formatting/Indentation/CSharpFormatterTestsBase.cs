@@ -31,9 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
     public class CSharpFormatterTestsBase : CSharpFormattingEngineTestBase
     {
         private static readonly TestComposition s_composition =
-            EditorTestCompositions.EditorFeatures.AddParts(
-                typeof(TestFormattingRuleFactoryServiceFactory)
-            );
+            EditorTestCompositions.EditorFeatures
+                .AddParts(typeof(TestFormattingRuleFactoryServiceFactory));
 
         public CSharpFormatterTestsBase(ITestOutputHelper output) : base(output) { }
 
@@ -54,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
         {
             await TokenFormatWorkerAsync(workspace, buffer, indentationLine, ch);
 
-            return buffer.CurrentSnapshot.GetLineFromLineNumber(indentationLine)
+            return buffer.CurrentSnapshot
+                .GetLineFromLineNumber(indentationLine)
                 .GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(TestEditorOptions.Instance);
         }
 
@@ -89,8 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
             var position = line.Start + index;
             var token = root.FindToken(position);
 
-            var formattingRuleProvider =
-                workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleProvider = workspace.Services
+                .GetService<IHostDependentFormattingRuleFactoryService>();
 
             var rules = formattingRuleProvider.CreateRule(document, position)
                 .Concat(Formatter.GetDefaultFormattingRules(document));
@@ -129,19 +129,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
             // create tree service
             using var workspace = TestWorkspace.CreateCSharp(code, composition: s_composition);
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        FormattingOptions2.UseTabs,
-                        LanguageNames.CSharp,
-                        useTabs
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(
+                                FormattingOptions2.UseTabs,
+                                LanguageNames.CSharp,
+                                useTabs
+                            )
                     )
-                )
             );
 
             if (baseIndentation.HasValue)
             {
-                var factory =
-                    (TestFormattingRuleFactoryServiceFactory.Factory)workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+                var factory = (TestFormattingRuleFactoryServiceFactory.Factory)workspace.Services
+                    .GetService<IHostDependentFormattingRuleFactoryService>();
                 factory.BaseIndentation = baseIndentation.Value;
                 factory.TextSpan = span;
             }

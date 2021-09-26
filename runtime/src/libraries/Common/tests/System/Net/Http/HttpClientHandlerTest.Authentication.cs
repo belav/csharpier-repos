@@ -903,8 +903,8 @@ namespace System.Net.Http.Functional.Tests
                     Configuration.Http.DomainJoinedHttpHost
                 );
                 IPAddress hostIP = addresses.Where(
-                        a => a.AddressFamily == AddressFamily.InterNetwork
-                    )
+                    a => a.AddressFamily == AddressFamily.InterNetwork
+                )
                     .Select(a => a)
                     .First();
 

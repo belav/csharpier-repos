@@ -3766,13 +3766,15 @@ class Program{
             using var workspace = TestWorkspace.CreateCSharp(markup);
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        FormattingOptions2.UseTabs,
-                        LanguageNames.CSharp,
-                        useTabs
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(
+                                FormattingOptions2.UseTabs,
+                                LanguageNames.CSharp,
+                                useTabs
+                            )
                     )
-                )
             );
 
             var subjectDocument = workspace.Documents.Single();
@@ -3850,20 +3852,20 @@ class Program{
         )
         {
             await AutoFormatOnMarkerAsync(
-                    initialMarkup,
-                    expected,
-                    useTabs: false,
-                    tokenKind,
-                    startTokenKind
-                )
+                initialMarkup,
+                expected,
+                useTabs: false,
+                tokenKind,
+                startTokenKind
+            )
                 .ConfigureAwait(false);
             await AutoFormatOnMarkerAsync(
-                    initialMarkup.Replace("    ", "\t"),
-                    expected.Replace("    ", "\t"),
-                    useTabs: true,
-                    tokenKind,
-                    startTokenKind
-                )
+                initialMarkup.Replace("    ", "\t"),
+                expected.Replace("    ", "\t"),
+                useTabs: true,
+                tokenKind,
+                startTokenKind
+            )
                 .ConfigureAwait(false);
         }
 
@@ -3878,13 +3880,15 @@ class Program{
             using var workspace = TestWorkspace.CreateCSharp(initialMarkup);
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        FormattingOptions2.UseTabs,
-                        LanguageNames.CSharp,
-                        useTabs
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(
+                                FormattingOptions2.UseTabs,
+                                LanguageNames.CSharp,
+                                useTabs
+                            )
                     )
-                )
             );
 
             var tuple = GetService(workspace);

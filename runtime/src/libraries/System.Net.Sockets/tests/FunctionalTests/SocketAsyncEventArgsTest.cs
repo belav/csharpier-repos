@@ -428,7 +428,8 @@ namespace System.Net.Sockets.Tests
                     Array = new byte[length],
                     Offset = offset,
                     Count = count
-                }.ToActual();
+                }
+                    .ToActual();
                 Assert.Throws<ArgumentOutOfRangeException>(
                     () => e.BufferList = new List<ArraySegment<byte>> { invalidBuffer }
                 );

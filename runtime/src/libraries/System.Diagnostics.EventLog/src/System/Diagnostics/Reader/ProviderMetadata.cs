@@ -249,27 +249,30 @@ namespace System.Diagnostics.Eventing.Reader
                             if (channelRefDisplayName == null && isImported)
                             {
                                 if (
-                                    string.Compare(
-                                        channelName,
-                                        "Application",
-                                        StringComparison.OrdinalIgnoreCase
-                                    ) == 0
+                                    string
+                                        .Compare(
+                                            channelName,
+                                            "Application",
+                                            StringComparison.OrdinalIgnoreCase
+                                        ) == 0
                                 )
                                     channelRefMessageId = 256;
                                 else if (
-                                    string.Compare(
-                                        channelName,
-                                        "System",
-                                        StringComparison.OrdinalIgnoreCase
-                                    ) == 0
+                                    string
+                                        .Compare(
+                                            channelName,
+                                            "System",
+                                            StringComparison.OrdinalIgnoreCase
+                                        ) == 0
                                 )
                                     channelRefMessageId = 258;
                                 else if (
-                                    string.Compare(
-                                        channelName,
-                                        "Security",
-                                        StringComparison.OrdinalIgnoreCase
-                                    ) == 0
+                                    string
+                                        .Compare(
+                                            channelName,
+                                            "Security",
+                                            StringComparison.OrdinalIgnoreCase
+                                        ) == 0
                                 )
                                     channelRefMessageId = 257;
                                 else

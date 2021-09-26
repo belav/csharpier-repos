@@ -51,7 +51,8 @@ namespace Newtonsoft.Json.Linq
 
             for (int i = 0; i < _values.Count; i++)
             {
-                await _values[i].WriteToAsync(writer, cancellationToken, converters)
+                await _values[i]
+                    .WriteToAsync(writer, cancellationToken, converters)
                     .ConfigureAwait(false);
             }
 
@@ -104,10 +105,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Error reading JArray from JsonReader. Current JsonReader item is not an array: {0}".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Error reading JArray from JsonReader. Current JsonReader item is not an array: {0}"
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
 

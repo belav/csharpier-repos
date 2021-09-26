@@ -47,7 +47,8 @@ namespace System.Web.Mvc.Test
             );
 
             // Act
-            ((IController)controller).Execute(requestContext); // first call
+            ((IController)controller)
+                .Execute(requestContext); // first call
             Assert.Throws<InvalidOperationException>(
                 delegate
                 {

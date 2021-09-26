@@ -650,14 +650,15 @@ namespace System.Numerics.Tests
         {
             Quaternion target = new Quaternion(-1.0f, 2.2f, 3.3f, -4.4f);
 
-            string expected = string.Format(
-                CultureInfo.CurrentCulture,
-                "{{X:{0} Y:{1} Z:{2} W:{3}}}",
-                -1.0f,
-                2.2f,
-                3.3f,
-                -4.4f
-            );
+            string expected = string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "{{X:{0} Y:{1} Z:{2} W:{3}}}",
+                    -1.0f,
+                    2.2f,
+                    3.3f,
+                    -4.4f
+                );
 
             string actual = target.ToString();
             Assert.Equal(expected, actual);

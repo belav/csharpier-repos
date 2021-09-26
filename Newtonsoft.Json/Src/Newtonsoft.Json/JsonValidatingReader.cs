@@ -82,8 +82,8 @@ namespace Newtonsoft.Json
                 _schemas = schemas;
 
                 _requiredProperties = schemas.SelectMany<JsonSchemaModel, string>(
-                        GetRequiredProperties
-                    )
+                    GetRequiredProperties
+                )
                     .Distinct()
                     .ToDictionary(p => p, p => false);
 
@@ -207,10 +207,11 @@ namespace Newtonsoft.Json
                         {
                             if (
                                 schema.Properties != null
-                                && schema.Properties.TryGetValue(
-                                    _currentScope.CurrentPropertyName,
-                                    out JsonSchemaModel propertySchema
-                                )
+                                && schema.Properties
+                                    .TryGetValue(
+                                        _currentScope.CurrentPropertyName,
+                                        out JsonSchemaModel propertySchema
+                                    )
                             )
                             {
                                 schemas.Add(propertySchema);
@@ -285,10 +286,8 @@ namespace Newtonsoft.Json
                     default:
                         throw new ArgumentOutOfRangeException(
                             "TokenType",
-                            "Unexpected token type: {0}".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                _currentScope.TokenType
-                            )
+                            "Unexpected token type: {0}"
+                                .FormatWith(CultureInfo.InvariantCulture, _currentScope.TokenType)
                         );
                 }
             }
@@ -301,11 +300,12 @@ namespace Newtonsoft.Json
             string exceptionMessage =
                 (lineInfo.HasLineInfo())
                     ? message
-                      + " Line {0}, position {1}.".FormatWith(
-                          CultureInfo.InvariantCulture,
-                          lineInfo.LineNumber,
-                          lineInfo.LinePosition
-                      )
+                      + " Line {0}, position {1}."
+                          .FormatWith(
+                              CultureInfo.InvariantCulture,
+                              lineInfo.LineNumber,
+                              lineInfo.LinePosition
+                          )
                     : message;
 
             OnValidationEvent(
@@ -402,10 +402,8 @@ namespace Newtonsoft.Json
                 )
                 {
                     RaiseError(
-                        "Type {0} is disallowed.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            currentNodeType
-                        ),
+                        "Type {0} is disallowed."
+                            .FormatWith(CultureInfo.InvariantCulture, currentNodeType),
                         schema
                     );
                 }
@@ -576,8 +574,8 @@ namespace Newtonsoft.Json
                 case JsonToken.StartObject:
                     ProcessValue();
                     IList<JsonSchemaModel> objectSchemas = CurrentMemberSchemas.Where(
-                            ValidateObject
-                        )
+                        ValidateObject
+                    )
                         .ToList();
                     Push(new SchemaScope(JTokenType.Object, objectSchemas));
                     WriteToken(CurrentSchemas);
@@ -716,17 +714,16 @@ namespace Newtonsoft.Json
                         if (isInUniqueArray)
                         {
                             if (
-                                schemaScope.UniqueArrayItems.Contains(
-                                    finishedItem,
-                                    JToken.EqualityComparer
-                                )
+                                schemaScope.UniqueArrayItems
+                                    .Contains(finishedItem, JToken.EqualityComparer)
                             )
                             {
                                 RaiseError(
-                                    "Non-unique array item at index {0}.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        schemaScope.ArrayItemCount - 1
-                                    ),
+                                    "Non-unique array item at index {0}."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            schemaScope.ArrayItemCount - 1
+                                        ),
                                     schemaScope.Schemas.First(s => s.UniqueItems)
                                 );
                             }
@@ -740,10 +737,8 @@ namespace Newtonsoft.Json
                                 if (schema.Enum != null)
                                 {
                                     if (
-                                        !schema.Enum.ContainsValue(
-                                            finishedItem,
-                                            JToken.EqualityComparer
-                                        )
+                                        !schema.Enum
+                                            .ContainsValue(finishedItem, JToken.EqualityComparer)
                                     )
                                     {
                                         StringWriter sw = new StringWriter(
@@ -752,10 +747,11 @@ namespace Newtonsoft.Json
                                         finishedItem.WriteTo(new JsonTextWriter(sw));
 
                                         RaiseError(
-                                            "Value {0} is not defined in enum.".FormatWith(
-                                                CultureInfo.InvariantCulture,
-                                                sw.ToString()
-                                            ),
+                                            "Value {0} is not defined in enum."
+                                                .FormatWith(
+                                                    CultureInfo.InvariantCulture,
+                                                    sw.ToString()
+                                                ),
                                             schema
                                         );
                                     }
@@ -779,20 +775,18 @@ namespace Newtonsoft.Json
             if (requiredProperties != null && requiredProperties.Values.Any(v => !v))
             {
                 IEnumerable<string> unmatchedRequiredProperties = requiredProperties.Where(
-                        kv => !kv.Value
-                    )
+                    kv => !kv.Value
+                )
                     .Select(kv => kv.Key);
                 RaiseError(
-                    "Required properties are missing from object: {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        string.Join(
-                            ", ",
-                            unmatchedRequiredProperties
+                    "Required properties are missing from object: {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, string.Join(
+                                ", ",
+                                unmatchedRequiredProperties
 #if !HAVE_STRING_JOIN_WITH_ENUMERABLE
-                            .ToArray()
+                                .ToArray()
 #endif
-                        )
-                    ),
+                            )),
                     schema
                 );
             }
@@ -810,11 +804,12 @@ namespace Newtonsoft.Json
             if (schema.MaximumItems != null && arrayItemCount > schema.MaximumItems)
             {
                 RaiseError(
-                    "Array item count {0} exceeds maximum count of {1}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        arrayItemCount,
-                        schema.MaximumItems
-                    ),
+                    "Array item count {0} exceeds maximum count of {1}."
+                        .FormatWith(
+                            CultureInfo.InvariantCulture,
+                            arrayItemCount,
+                            schema.MaximumItems
+                        ),
                     schema
                 );
             }
@@ -822,11 +817,12 @@ namespace Newtonsoft.Json
             if (schema.MinimumItems != null && arrayItemCount < schema.MinimumItems)
             {
                 RaiseError(
-                    "Array item count {0} is less than minimum count of {1}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        arrayItemCount,
-                        schema.MinimumItems
-                    ),
+                    "Array item count {0} is less than minimum count of {1}."
+                        .FormatWith(
+                            CultureInfo.InvariantCulture,
+                            arrayItemCount,
+                            schema.MinimumItems
+                        ),
                     schema
                 );
             }
@@ -881,11 +877,8 @@ namespace Newtonsoft.Json
             if (schema.MaximumLength != null && value.Length > schema.MaximumLength)
             {
                 RaiseError(
-                    "String '{0}' exceeds maximum length of {1}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        value,
-                        schema.MaximumLength
-                    ),
+                    "String '{0}' exceeds maximum length of {1}."
+                        .FormatWith(CultureInfo.InvariantCulture, value, schema.MaximumLength),
                     schema
                 );
             }
@@ -893,11 +886,8 @@ namespace Newtonsoft.Json
             if (schema.MinimumLength != null && value.Length < schema.MinimumLength)
             {
                 RaiseError(
-                    "String '{0}' is less than minimum length of {1}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        value,
-                        schema.MinimumLength
-                    ),
+                    "String '{0}' is less than minimum length of {1}."
+                        .FormatWith(CultureInfo.InvariantCulture, value, schema.MinimumLength),
                     schema
                 );
             }
@@ -909,11 +899,8 @@ namespace Newtonsoft.Json
                     if (!Regex.IsMatch(value, pattern))
                     {
                         RaiseError(
-                            "String '{0}' does not match regex pattern '{1}'.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                value,
-                                pattern
-                            ),
+                            "String '{0}' does not match regex pattern '{1}'."
+                                .FormatWith(CultureInfo.InvariantCulture, value, pattern),
                             schema
                         );
                     }
@@ -942,11 +929,8 @@ namespace Newtonsoft.Json
                 if (JValue.Compare(JTokenType.Integer, value, schema.Maximum) > 0)
                 {
                     RaiseError(
-                        "Integer {0} exceeds maximum value of {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            value,
-                            schema.Maximum
-                        ),
+                        "Integer {0} exceeds maximum value of {1}."
+                            .FormatWith(CultureInfo.InvariantCulture, value, schema.Maximum),
                         schema
                     );
                 }
@@ -956,11 +940,8 @@ namespace Newtonsoft.Json
                 )
                 {
                     RaiseError(
-                        "Integer {0} equals maximum value of {1} and exclusive maximum is true.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            value,
-                            schema.Maximum
-                        ),
+                        "Integer {0} equals maximum value of {1} and exclusive maximum is true."
+                            .FormatWith(CultureInfo.InvariantCulture, value, schema.Maximum),
                         schema
                     );
                 }
@@ -971,11 +952,8 @@ namespace Newtonsoft.Json
                 if (JValue.Compare(JTokenType.Integer, value, schema.Minimum) < 0)
                 {
                     RaiseError(
-                        "Integer {0} is less than minimum value of {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            value,
-                            schema.Minimum
-                        ),
+                        "Integer {0} is less than minimum value of {1}."
+                            .FormatWith(CultureInfo.InvariantCulture, value, schema.Minimum),
                         schema
                     );
                 }
@@ -985,11 +963,8 @@ namespace Newtonsoft.Json
                 )
                 {
                     RaiseError(
-                        "Integer {0} equals minimum value of {1} and exclusive minimum is true.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            value,
-                            schema.Minimum
-                        ),
+                        "Integer {0} equals minimum value of {1} and exclusive minimum is true."
+                            .FormatWith(CultureInfo.InvariantCulture, value, schema.Minimum),
                         schema
                     );
                 }
@@ -1004,8 +979,8 @@ namespace Newtonsoft.Json
                     // not that this will lose any decimal point on DivisibleBy
                     // so manually raise an error if DivisibleBy is not an integer and value is not zero
                     bool divisibleNonInteger = !Math.Abs(
-                            schema.DivisibleBy.Value - Math.Truncate(schema.DivisibleBy.Value)
-                        )
+                        schema.DivisibleBy.Value - Math.Truncate(schema.DivisibleBy.Value)
+                    )
                         .Equals(0);
                     if (divisibleNonInteger)
                     {
@@ -1028,11 +1003,12 @@ namespace Newtonsoft.Json
                 if (notDivisible)
                 {
                     RaiseError(
-                        "Integer {0} is not evenly divisible by {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            JsonConvert.ToString(value),
-                            schema.DivisibleBy
-                        ),
+                        "Integer {0} is not evenly divisible by {1}."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                JsonConvert.ToString(value),
+                                schema.DivisibleBy
+                            ),
                         schema
                     );
                 }
@@ -1059,10 +1035,11 @@ namespace Newtonsoft.Json
                     )
                     {
                         RaiseError(
-                            "Index {0} has not been defined and the schema does not allow additional items.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                _currentScope.ArrayItemCount
-                            ),
+                            "Index {0} has not been defined and the schema does not allow additional items."
+                                .FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    _currentScope.ArrayItemCount
+                                ),
                             currentSchema
                         );
                     }
@@ -1091,22 +1068,24 @@ namespace Newtonsoft.Json
                 if (value > schema.Maximum)
                 {
                     RaiseError(
-                        "Float {0} exceeds maximum value of {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            JsonConvert.ToString(value),
-                            schema.Maximum
-                        ),
+                        "Float {0} exceeds maximum value of {1}."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                JsonConvert.ToString(value),
+                                schema.Maximum
+                            ),
                         schema
                     );
                 }
                 if (schema.ExclusiveMaximum && value == schema.Maximum)
                 {
                     RaiseError(
-                        "Float {0} equals maximum value of {1} and exclusive maximum is true.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            JsonConvert.ToString(value),
-                            schema.Maximum
-                        ),
+                        "Float {0} equals maximum value of {1} and exclusive maximum is true."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                JsonConvert.ToString(value),
+                                schema.Maximum
+                            ),
                         schema
                     );
                 }
@@ -1117,22 +1096,24 @@ namespace Newtonsoft.Json
                 if (value < schema.Minimum)
                 {
                     RaiseError(
-                        "Float {0} is less than minimum value of {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            JsonConvert.ToString(value),
-                            schema.Minimum
-                        ),
+                        "Float {0} is less than minimum value of {1}."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                JsonConvert.ToString(value),
+                                schema.Minimum
+                            ),
                         schema
                     );
                 }
                 if (schema.ExclusiveMinimum && value == schema.Minimum)
                 {
                     RaiseError(
-                        "Float {0} equals minimum value of {1} and exclusive minimum is true.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            JsonConvert.ToString(value),
-                            schema.Minimum
-                        ),
+                        "Float {0} equals minimum value of {1} and exclusive minimum is true."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                JsonConvert.ToString(value),
+                                schema.Minimum
+                            ),
                         schema
                     );
                 }
@@ -1148,11 +1129,12 @@ namespace Newtonsoft.Json
                 if (!IsZero(remainder))
                 {
                     RaiseError(
-                        "Float {0} is not evenly divisible by {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            JsonConvert.ToString(value),
-                            schema.DivisibleBy
-                        ),
+                        "Float {0} is not evenly divisible by {1}."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                JsonConvert.ToString(value),
+                                schema.DivisibleBy
+                            ),
                         schema
                     );
                 }
@@ -1192,10 +1174,8 @@ namespace Newtonsoft.Json
                 if (!propertyDefinied)
                 {
                     RaiseError(
-                        "Property '{0}' has not been defined and the schema does not allow additional properties.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            propertyName
-                        ),
+                        "Property '{0}' has not been defined and the schema does not allow additional properties."
+                            .FormatWith(CultureInfo.InvariantCulture, propertyName),
                         schema
                     );
                 }
@@ -1250,11 +1230,8 @@ namespace Newtonsoft.Json
             if (!JsonSchemaGenerator.HasFlag(currentSchema.Type, currentType))
             {
                 RaiseError(
-                    "Invalid type. Expected {0} but got {1}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        currentSchema.Type,
-                        currentType
-                    ),
+                    "Invalid type. Expected {0} but got {1}."
+                        .FormatWith(CultureInfo.InvariantCulture, currentSchema.Type, currentType),
                     currentSchema
                 );
                 return false;

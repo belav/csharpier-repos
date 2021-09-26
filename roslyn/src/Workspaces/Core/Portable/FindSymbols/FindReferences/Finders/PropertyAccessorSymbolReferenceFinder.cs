@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         )
         {
-            var result = await base.DetermineCascadedSymbolsAsync(
+            var result = await base
+                .DetermineCascadedSymbolsAsync(
                     symbol,
                     solution,
                     projects,
@@ -60,12 +61,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             // This will find explicit calls to the method (which can happen when C# references
             // a VB parameterized property).
             var result = await FindDocumentsAsync(
-                    project,
-                    documents,
-                    findInGlobalSuppressions: true,
-                    cancellationToken,
-                    symbol.Name
-                )
+                project,
+                documents,
+                findInGlobalSuppressions: true,
+                cancellationToken,
+                symbol.Name
+            )
                 .ConfigureAwait(false);
 
             if (
@@ -76,15 +77,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 // we want to associate normal property references with the specific accessor being
                 // referenced.  So we also need to include documents with our property's name. Just
                 // defer to the Property finder to find these docs and combine them with the result.
-                var propertyDocuments =
-                    await ReferenceFinders.Property.DetermineDocumentsToSearchAsync(
-                            property,
-                            project,
-                            documents,
-                            options.With(associatePropertyReferencesWithSpecificAccessor: false),
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
+                var propertyDocuments = await ReferenceFinders.Property
+                    .DetermineDocumentsToSearchAsync(
+                        property,
+                        project,
+                        documents,
+                        options.With(associatePropertyReferencesWithSpecificAccessor: false),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 result = result.AddRange(propertyDocuments);
             }
@@ -103,11 +104,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var references = await FindReferencesInDocumentUsingSymbolNameAsync(
-                    symbol,
-                    document,
-                    semanticModel,
-                    cancellationToken
-                )
+                symbol,
+                document,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (
@@ -115,15 +116,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 && options.AssociatePropertyReferencesWithSpecificAccessor
             )
             {
-                var propertyReferences =
-                    await ReferenceFinders.Property.FindReferencesInDocumentAsync(
-                            property,
-                            document,
-                            semanticModel,
-                            options.With(associatePropertyReferencesWithSpecificAccessor: false),
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
+                var propertyReferences = await ReferenceFinders.Property
+                    .FindReferencesInDocumentAsync(
+                        property,
+                        document,
+                        semanticModel,
+                        options.With(associatePropertyReferencesWithSpecificAccessor: false),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
                 var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();

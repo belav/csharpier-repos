@@ -45,7 +45,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     resi = Convert.ToUInt32(
-                        typeof(Sse42).GetMethod(
+                        typeof(Sse42)
+                            .GetMethod(
                                 nameof(Sse42.Crc32),
                                 new Type[] { s1i.GetType(), s2i.GetType() }
                             )
@@ -86,7 +87,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     resi = Convert.ToUInt32(
-                        typeof(Sse42).GetMethod(
+                        typeof(Sse42)
+                            .GetMethod(
                                 nameof(Sse42.Crc32),
                                 new Type[] { s1i.GetType(), s2s.GetType() }
                             )
@@ -127,7 +129,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     resi = Convert.ToUInt32(
-                        typeof(Sse42).GetMethod(
+                        typeof(Sse42)
+                            .GetMethod(
                                 nameof(Sse42.Crc32),
                                 new Type[] { s1i.GetType(), s2b.GetType() }
                             )

@@ -25,11 +25,12 @@ namespace System.Diagnostics
             for (int i = 0; i < procs.Length; i++)
             {
                 if (
-                    string.Equals(
-                        processName,
-                        procs[i].ProcessName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            processName,
+                            procs[i].ProcessName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     list.Add(procs[i]);
@@ -118,10 +119,8 @@ namespace System.Diagnostics
                 {
                     CurrentLimit = (ulong)newMax.Value.ToInt64()
                 };
-                int result = Interop.Sys.SetRLimit(
-                    Interop.Sys.RlimitResources.RLIMIT_RSS,
-                    ref limits
-                );
+                int result = Interop.Sys
+                    .SetRLimit(Interop.Sys.RlimitResources.RLIMIT_RSS, ref limits);
                 if (result != 0)
                 {
                     throw new System.ComponentModel.Win32Exception(SR.RUsageFailure);

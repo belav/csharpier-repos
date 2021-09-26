@@ -50,20 +50,21 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object, object>> site = CallSite<
                 Func<CallSite, object, object, object, object>
-            >.Create(
-                Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "Equals",
-                    null,
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.InvokeMember(
+                        CSharpBinderFlags.None,
+                        "Equals",
+                        null,
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, object, object, object, object> target = site.Target;
             Assert.Throws<ArgumentException>(
                 null,
@@ -80,23 +81,24 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object, object>> site = CallSite<
                 Func<CallSite, object, object, object, object>
-            >.Create(
-                Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "Equals",
-                    null,
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(
-                            CSharpArgumentInfoFlags.IsStaticType,
-                            "Type Argument"
-                        ),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.InvokeMember(
+                        CSharpBinderFlags.None,
+                        "Equals",
+                        null,
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(
+                                CSharpArgumentInfoFlags.IsStaticType,
+                                "Type Argument"
+                            ),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, object, object, object, object> target = site.Target;
             Assert.Throws<ArgumentException>(
                 "Type Argument",
@@ -113,23 +115,24 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object, object>> site = CallSite<
                 Func<CallSite, object, object, object, object>
-            >.Create(
-                Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "Equals",
-                    null,
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(
-                            CSharpArgumentInfoFlags.IsStaticType,
-                            "Type Argument"
-                        ),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.InvokeMember(
+                        CSharpBinderFlags.None,
+                        "Equals",
+                        null,
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(
+                                CSharpArgumentInfoFlags.IsStaticType,
+                                "Type Argument"
+                            ),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, object, object, object, object> target = site.Target;
             AssertExtensions.Throws<ArgumentException>(
                 "Type Argument",
@@ -144,18 +147,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         )]
         public void NonTypeToCtor()
         {
-            CallSite<Func<CallSite, object, object>> site = CallSite<
-                Func<CallSite, object, object>
-            >.Create(
-                Binder.InvokeConstructor(
-                    CSharpBinderFlags.None,
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "Type Argument")
-                    }
-                )
-            );
+            CallSite<Func<CallSite, object, object>> site = CallSite<Func<CallSite, object, object>>
+                .Create(
+                    Binder.InvokeConstructor(
+                        CSharpBinderFlags.None,
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "Type Argument")
+                        }
+                    )
+                );
             Func<CallSite, object, object> targ = site.Target;
             AssertExtensions.Throws<ArgumentException>(
                 "Type Argument",

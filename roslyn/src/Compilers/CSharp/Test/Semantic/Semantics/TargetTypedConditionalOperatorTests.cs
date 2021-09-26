@@ -270,10 +270,10 @@ class C
             )
             {
                 var comp = CreateCompilation(
-                        source,
-                        options: TestOptions.ReleaseExe,
-                        parseOptions: TestOptions.Regular.WithLanguageVersion(langVersion)
-                    )
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(langVersion)
+                )
                     .VerifyDiagnostics();
                 CompileAndVerify(comp, expectedOutput: "M(long)");
             }
@@ -304,10 +304,10 @@ class C
             )
             {
                 var comp = CreateCompilation(
-                        source,
-                        options: TestOptions.ReleaseExe,
-                        parseOptions: TestOptions.Regular.WithLanguageVersion(langVersion)
-                    )
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(langVersion)
+                )
                     .VerifyDiagnostics();
             }
         }
@@ -335,10 +335,10 @@ class C
             )
             {
                 var comp = CreateCompilation(
-                        source,
-                        options: TestOptions.ReleaseExe,
-                        parseOptions: TestOptions.Regular.WithLanguageVersion(langVersion)
-                    )
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(langVersion)
+                )
                     .VerifyDiagnostics();
             }
         }
@@ -379,10 +379,10 @@ class C { }
             )
             {
                 var comp = CreateCompilation(
-                        source,
-                        options: TestOptions.ReleaseExe,
-                        parseOptions: TestOptions.Regular.WithLanguageVersion(langVersion)
-                    )
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(langVersion)
+                )
                     .VerifyDiagnostics();
                 CompileAndVerify(
                     comp,
@@ -571,19 +571,20 @@ public class Program {
 2
 4";
             var comp = CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular8,
-                    options: TestOptions.DebugExe
-                )
+                source,
+                parseOptions: TestOptions.Regular8,
+                options: TestOptions.DebugExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(comp, expectedOutput: expectedOutput);
             comp = CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                source,
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     ),
-                    options: TestOptions.DebugExe
-                )
+                options: TestOptions.DebugExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(comp, expectedOutput: expectedOutput);
         }
@@ -602,18 +603,19 @@ public class Program {
     }
 }";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular8,
-                    options: TestOptions.DebugDll.WithAllowUnsafe(true)
-                )
+                source,
+                parseOptions: TestOptions.Regular8,
+                options: TestOptions.DebugDll.WithAllowUnsafe(true)
+            )
                 .VerifyEmitDiagnostics();
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                source,
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     ),
-                    options: TestOptions.DebugDll.WithAllowUnsafe(true)
-                )
+                options: TestOptions.DebugDll.WithAllowUnsafe(true)
+            )
                 .VerifyEmitDiagnostics();
         }
 
@@ -632,18 +634,19 @@ public class Program {
     }
 }";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular8,
-                    options: TestOptions.DebugDll
-                )
+                source,
+                parseOptions: TestOptions.Regular8,
+                options: TestOptions.DebugDll
+            )
                 .VerifyEmitDiagnostics();
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                source,
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     ),
-                    options: TestOptions.DebugDll
-                )
+                options: TestOptions.DebugDll
+            )
                 .VerifyEmitDiagnostics();
         }
 
@@ -687,9 +690,10 @@ public class Program {
             );
             CompileAndVerify(
                 source,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                ),
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    ),
                 expectedOutput: expectedOutput
             );
         }
@@ -728,16 +732,17 @@ public class Program {
                     .WithLocation(7, 18)
             };
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp3)
-                )
+                source,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp3)
+            )
                 .VerifyDiagnostics(expectedDiagnostics);
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                source,
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     )
-                )
+            )
                 .VerifyDiagnostics(expectedDiagnostics);
         }
 
@@ -775,9 +780,10 @@ System.Char: A";
             );
             CompileAndVerify(
                 source,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                ),
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    ),
                 expectedOutput: expectedOutput
             );
         }
@@ -816,9 +822,10 @@ System.Int32: 65";
             );
             CompileAndVerify(
                 source,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                ),
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    ),
                 expectedOutput: expectedOutput
             );
         }
@@ -846,16 +853,17 @@ class Program
     }
 }";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
-                )
+                source,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
+            )
                 .VerifyDiagnostics();
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                source,
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     )
-                )
+            )
                 .VerifyDiagnostics();
         }
 
@@ -882,9 +890,9 @@ class Program
     }
 }";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
-                )
+                source,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
+            )
                 .VerifyDiagnostics(
                     // (15,16): error CS0029: Cannot implicitly convert type 'A' to 'B'
                     //         return (b ? a : 0) + a;
@@ -898,11 +906,12 @@ class Program
                         .WithLocation(15, 17)
                 );
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                source,
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     )
-                )
+            )
                 .VerifyDiagnostics(
                     // (15,16): error CS0029: Cannot implicitly convert type 'A' to 'B'
                     //         return (b ? a : 0) + a;

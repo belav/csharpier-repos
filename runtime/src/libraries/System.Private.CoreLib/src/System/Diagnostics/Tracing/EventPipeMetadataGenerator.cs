@@ -28,11 +28,8 @@ namespace System.Diagnostics.Tracing
                     parameters[i].ParameterType,
                     out TraceLoggingTypeInfo? paramTypeInfo
                 );
-                eventParams[i].SetInfo(
-                    parameters[i].Name!,
-                    parameters[i].ParameterType,
-                    paramTypeInfo
-                );
+                eventParams[i]
+                    .SetInfo(parameters[i].Name!, parameters[i].ParameterType, paramTypeInfo);
             }
 
             return GenerateMetadata(

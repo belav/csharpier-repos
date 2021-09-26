@@ -153,7 +153,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             params RouteEndpoint[] endpoints
         )
         {
-            var services = new ServiceCollection().AddLogging()
+            var services = new ServiceCollection()
+                .AddLogging()
                 .AddOptions()
                 .AddRouting()
                 .BuildServiceProvider();

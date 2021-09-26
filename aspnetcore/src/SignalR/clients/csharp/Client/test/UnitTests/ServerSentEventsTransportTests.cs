@@ -46,13 +46,13 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         // returns unfinished task to block pipelines
                         var mockStream = new Mock<Stream>();
                         mockStream.Setup(
-                                s =>
-                                    s.CopyToAsync(
-                                        It.IsAny<Stream>(),
-                                        It.IsAny<int>(),
-                                        It.IsAny<CancellationToken>()
-                                    )
-                            )
+                            s =>
+                                s.CopyToAsync(
+                                    It.IsAny<Stream>(),
+                                    It.IsAny<int>(),
+                                    It.IsAny<CancellationToken>()
+                                )
+                        )
                             .Returns(copyToAsyncTcs.Task);
                         mockStream.Setup(s => s.CanRead).Returns(true);
                         return new HttpResponseMessage
@@ -69,9 +69,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 {
                     var sseTransport = new ServerSentEventsTransport(httpClient, LoggerFactory);
                     await sseTransport.StartAsync(
-                            new Uri("http://fakeuri.org"),
-                            TransferFormat.Text
-                        )
+                        new Uri("http://fakeuri.org"),
+                        TransferFormat.Text
+                    )
                         .DefaultTimeout();
 
                     await eventStreamTcs.Task.DefaultTimeout();
@@ -101,12 +101,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     {
                         var mockStream = new Mock<Stream>();
                         mockStream.Setup(
-                                s =>
-                                    s.ReadAsync(
-                                        It.IsAny<Memory<byte>>(),
-                                        It.IsAny<CancellationToken>()
-                                    )
-                            )
+                            s =>
+                                s.ReadAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())
+                        )
                             .Returns<Memory<byte>, CancellationToken>(
                                 async (data, t) =>
                                 {
@@ -115,10 +112,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                                         return 0;
                                     }
 
-                                    int count = Encoding.ASCII.GetBytes(
-                                        "data: 3:abc\r\n\r\n",
-                                        data.Span
-                                    );
+                                    int count = Encoding.ASCII
+                                        .GetBytes("data: 3:abc\r\n\r\n", data.Span);
                                     await Task.Delay(100);
                                     return count;
                                 }
@@ -143,9 +138,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 try
                 {
                     await sseTransport.StartAsync(
-                            new Uri("http://fakeuri.org"),
-                            TransferFormat.Text
-                        )
+                        new Uri("http://fakeuri.org"),
+                        TransferFormat.Text
+                    )
                         .DefaultTimeout();
 
                     transportActiveTask = sseTransport.Running;
@@ -181,12 +176,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                         var mockStream = new Mock<Stream>();
                         mockStream.Setup(
-                                s =>
-                                    s.ReadAsync(
-                                        It.IsAny<Memory<byte>>(),
-                                        It.IsAny<CancellationToken>()
-                                    )
-                            )
+                            s =>
+                                s.ReadAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())
+                        )
                             .Returns<Memory<byte>, CancellationToken>(
                                 (data, t) =>
                                 {
@@ -263,12 +255,12 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                             // returns unfinished task to block pipelines
                             var mockStream = new Mock<Stream>();
                             mockStream.Setup(
-                                    s =>
-                                        s.ReadAsync(
-                                            It.IsAny<Memory<byte>>(),
-                                            It.IsAny<CancellationToken>()
-                                        )
-                                )
+                                s =>
+                                    s.ReadAsync(
+                                        It.IsAny<Memory<byte>>(),
+                                        It.IsAny<CancellationToken>()
+                                    )
+                            )
                                 .Returns<Memory<byte>, CancellationToken>(
                                     async (data, ct) =>
                                     {
@@ -336,12 +328,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         // returns unfinished task to block pipelines
                         var mockStream = new Mock<Stream>();
                         mockStream.Setup(
-                                s =>
-                                    s.ReadAsync(
-                                        It.IsAny<Memory<byte>>(),
-                                        It.IsAny<CancellationToken>()
-                                    )
-                            )
+                            s =>
+                                s.ReadAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())
+                        )
                             .Returns<Memory<byte>, CancellationToken>(
                                 async (data, ct) =>
                                 {
@@ -441,12 +430,12 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                             // returns unfinished task to block pipelines
                             var mockStream = new Mock<Stream>();
                             mockStream.Setup(
-                                    s =>
-                                        s.ReadAsync(
-                                            It.IsAny<Memory<byte>>(),
-                                            It.IsAny<CancellationToken>()
-                                        )
-                                )
+                                s =>
+                                    s.ReadAsync(
+                                        It.IsAny<Memory<byte>>(),
+                                        It.IsAny<CancellationToken>()
+                                    )
+                            )
                                 .Returns(
                                     async () =>
                                     {
@@ -521,9 +510,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 var ex = await Assert.ThrowsAsync<ArgumentException>(
                     () =>
                         sseTransport.StartAsync(
-                                new Uri("http://fakeuri.org"),
-                                TransferFormat.Binary
-                            )
+                            new Uri("http://fakeuri.org"),
+                            TransferFormat.Binary
+                        )
                             .DefaultTimeout()
                 );
 

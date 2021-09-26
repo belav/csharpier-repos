@@ -216,12 +216,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 ImmBinaryOpTest__MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int32_Vector64_Int32_1 testClass
             )
             {
-                var result =
-                    AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
-                        _fld1,
-                        _fld2,
-                        1
-                    );
+                var result = AdvSimd.Arm64
+                    .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(_fld1, _fld2, 1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                 testClass.ValidateResult(_fld1, _fld2, testClass._dataTable.outArrayPtr);
@@ -234,8 +230,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 fixed (Vector64<Int32>* pFld1 = &_fld1)
                 fixed (Vector64<Int32>* pFld2 = &_fld2)
                 {
-                    var result =
-                        AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
+                    var result = AdvSimd.Arm64
+                        .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
                             AdvSimd.LoadVector64((Int32*)(pFld1)),
                             AdvSimd.LoadVector64((Int32*)(pFld2)),
                             1
@@ -337,11 +333,12 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
-                Unsafe.Read<Vector64<Int32>>(_dataTable.inArray1Ptr),
-                Unsafe.Read<Vector64<Int32>>(_dataTable.inArray2Ptr),
-                1
-            );
+            var result = AdvSimd.Arm64
+                .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
+                    Unsafe.Read<Vector64<Int32>>(_dataTable.inArray1Ptr),
+                    Unsafe.Read<Vector64<Int32>>(_dataTable.inArray2Ptr),
+                    1
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
@@ -351,11 +348,12 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
-                AdvSimd.LoadVector64((Int32*)(_dataTable.inArray1Ptr)),
-                AdvSimd.LoadVector64((Int32*)(_dataTable.inArray2Ptr)),
-                1
-            );
+            var result = AdvSimd.Arm64
+                .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
+                    AdvSimd.LoadVector64((Int32*)(_dataTable.inArray1Ptr)),
+                    AdvSimd.LoadVector64((Int32*)(_dataTable.inArray2Ptr)),
+                    1
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
@@ -365,7 +363,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(
                     nameof(AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh),
                     new Type[] { typeof(Vector64<Int32>), typeof(Vector64<Int32>), typeof(byte) }
                 )
@@ -387,7 +386,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(
                     nameof(AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh),
                     new Type[] { typeof(Vector64<Int32>), typeof(Vector64<Int32>), typeof(byte) }
                 )
@@ -409,11 +409,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
-                _clsVar1,
-                _clsVar2,
-                1
-            );
+            var result = AdvSimd.Arm64
+                .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(_clsVar1, _clsVar2, 1);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar1, _clsVar2, _dataTable.outArrayPtr);
@@ -426,8 +423,8 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Int32>* pClsVar1 = &_clsVar1)
             fixed (Vector64<Int32>* pClsVar2 = &_clsVar2)
             {
-                var result =
-                    AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
+                var result = AdvSimd.Arm64
+                    .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
                         AdvSimd.LoadVector64((Int32*)(pClsVar1)),
                         AdvSimd.LoadVector64((Int32*)(pClsVar2)),
                         1
@@ -444,11 +441,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var op1 = Unsafe.Read<Vector64<Int32>>(_dataTable.inArray1Ptr);
             var op2 = Unsafe.Read<Vector64<Int32>>(_dataTable.inArray2Ptr);
-            var result = AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
-                op1,
-                op2,
-                1
-            );
+            var result = AdvSimd.Arm64
+                .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(op1, op2, 1);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(op1, op2, _dataTable.outArrayPtr);
@@ -460,11 +454,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var op1 = AdvSimd.LoadVector64((Int32*)(_dataTable.inArray1Ptr));
             var op2 = AdvSimd.LoadVector64((Int32*)(_dataTable.inArray2Ptr));
-            var result = AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
-                op1,
-                op2,
-                1
-            );
+            var result = AdvSimd.Arm64
+                .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(op1, op2, 1);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(op1, op2, _dataTable.outArrayPtr);
@@ -476,11 +467,12 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test =
                 new ImmBinaryOpTest__MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int32_Vector64_Int32_1();
-            var result = AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
-                test._fld1,
-                test._fld2,
-                1
-            );
+            var result = AdvSimd.Arm64
+                .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
+                    test._fld1,
+                    test._fld2,
+                    1
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld1, test._fld2, _dataTable.outArrayPtr);
@@ -495,8 +487,8 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Int32>* pFld1 = &test._fld1)
             fixed (Vector64<Int32>* pFld2 = &test._fld2)
             {
-                var result =
-                    AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
+                var result = AdvSimd.Arm64
+                    .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
                         AdvSimd.LoadVector64((Int32*)(pFld1)),
                         AdvSimd.LoadVector64((Int32*)(pFld2)),
                         1
@@ -511,11 +503,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario));
 
-            var result = AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
-                _fld1,
-                _fld2,
-                1
-            );
+            var result = AdvSimd.Arm64
+                .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(_fld1, _fld2, 1);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_fld1, _fld2, _dataTable.outArrayPtr);
@@ -528,8 +517,8 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Int32>* pFld1 = &_fld1)
             fixed (Vector64<Int32>* pFld2 = &_fld2)
             {
-                var result =
-                    AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
+                var result = AdvSimd.Arm64
+                    .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
                         AdvSimd.LoadVector64((Int32*)(pFld1)),
                         AdvSimd.LoadVector64((Int32*)(pFld2)),
                         1
@@ -545,11 +534,12 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario));
 
             var test = TestStruct.Create();
-            var result = AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
-                test._fld1,
-                test._fld2,
-                1
-            );
+            var result = AdvSimd.Arm64
+                .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
+                    test._fld1,
+                    test._fld2,
+                    1
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld1, test._fld2, _dataTable.outArrayPtr);
@@ -560,11 +550,12 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result = AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
-                AdvSimd.LoadVector64((Int32*)(&test._fld1)),
-                AdvSimd.LoadVector64((Int32*)(&test._fld2)),
-                1
-            );
+            var result = AdvSimd.Arm64
+                .MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh(
+                    AdvSimd.LoadVector64((Int32*)(&test._fld1)),
+                    AdvSimd.LoadVector64((Int32*)(&test._fld2)),
+                    1
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld1, test._fld2, _dataTable.outArrayPtr);
@@ -686,18 +677,16 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh)}<Int32>(Vector64<Int32>, Vector64<Int32>, 1): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"    firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   secondOp: ({string.Join(", ", secondOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh)}<Int32>(Vector64<Int32>, Vector64<Int32>, 1): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"    firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"   secondOp: ({string.Join(", ", secondOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

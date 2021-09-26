@@ -51,9 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
-            var documentOptionSet = await context.Document.GetOptionsAsync(
-                    context.CancellationToken
-                )
+            var documentOptionSet = await context.Document
+                .GetOptionsAsync(context.CancellationToken)
                 .ConfigureAwait(false);
 
 #if CODE_STYLE // 'CodeActionPriority' is not a public API, hence not supported in CodeStyle layer.

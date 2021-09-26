@@ -24,26 +24,24 @@ namespace Microsoft.AspNetCore.Diagnostics
             // Arrange
             DiagnosticListener diagnosticListener = null;
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            diagnosticListener = app.ApplicationServices
+                                .GetRequiredService<DiagnosticListener>();
+                            app.UseDeveloperExceptionPage();
+                            app.Run(
+                                context =>
                                 {
-                                    diagnosticListener =
-                                        app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-                                    app.UseDeveloperExceptionPage();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            throw new Exception("Test exception");
-                                        }
-                                    );
+                                    throw new Exception("Test exception");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -66,24 +64,22 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             // Arrange
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseDeveloperExceptionPage();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseDeveloperExceptionPage();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            throw new Exception("Test exception");
-                                        }
-                                    );
+                                    throw new Exception("Test exception");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -91,9 +87,8 @@ namespace Microsoft.AspNetCore.Diagnostics
 
             // Act
             var client = server.CreateClient();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("text/html")
-            );
+            client.DefaultRequestHeaders.Accept
+                .Add(new MediaTypeWithQualityHeaderValue("text/html"));
             var response = await client.GetAsync("/path");
 
             // Assert
@@ -108,24 +103,22 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             // Arrange
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseDeveloperExceptionPage();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseDeveloperExceptionPage();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            throw new Exception("Test exception");
-                                        }
-                                    );
+                                    throw new Exception("Test exception");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -146,33 +139,30 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             // Arrange
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton<
+                                IDeveloperPageExceptionFilter,
+                                ExceptionMessageFilter
+                            >();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseDeveloperExceptionPage();
+                            app.Run(
+                                context =>
                                 {
-                                    services.AddSingleton<
-                                        IDeveloperPageExceptionFilter,
-                                        ExceptionMessageFilter
-                                    >();
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseDeveloperExceptionPage();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            throw new Exception("Test exception");
-                                        }
-                                    );
+                                    throw new Exception("Test exception");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -190,41 +180,38 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             // Arrange
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton<
+                                IDeveloperPageExceptionFilter,
+                                PassThroughExceptionFilter
+                            >();
+                            services.AddSingleton<
+                                IDeveloperPageExceptionFilter,
+                                AlwaysBadFormatExceptionFilter
+                            >();
+                            services.AddSingleton<
+                                IDeveloperPageExceptionFilter,
+                                ExceptionMessageFilter
+                            >();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseDeveloperExceptionPage();
+                            app.Run(
+                                context =>
                                 {
-                                    services.AddSingleton<
-                                        IDeveloperPageExceptionFilter,
-                                        PassThroughExceptionFilter
-                                    >();
-                                    services.AddSingleton<
-                                        IDeveloperPageExceptionFilter,
-                                        AlwaysBadFormatExceptionFilter
-                                    >();
-                                    services.AddSingleton<
-                                        IDeveloperPageExceptionFilter,
-                                        ExceptionMessageFilter
-                                    >();
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseDeveloperExceptionPage();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            throw new Exception("Test exception");
-                                        }
-                                    );
+                                    throw new Exception("Test exception");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -244,41 +231,38 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             // Arrange
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton<
+                                IDeveloperPageExceptionFilter,
+                                AlwaysThrowSameMessageFilter
+                            >();
+                            services.AddSingleton<
+                                IDeveloperPageExceptionFilter,
+                                ExceptionMessageFilter
+                            >();
+                            services.AddSingleton<
+                                IDeveloperPageExceptionFilter,
+                                ExceptionToStringFilter
+                            >();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseDeveloperExceptionPage();
+                            app.Run(
+                                context =>
                                 {
-                                    services.AddSingleton<
-                                        IDeveloperPageExceptionFilter,
-                                        AlwaysThrowSameMessageFilter
-                                    >();
-                                    services.AddSingleton<
-                                        IDeveloperPageExceptionFilter,
-                                        ExceptionMessageFilter
-                                    >();
-                                    services.AddSingleton<
-                                        IDeveloperPageExceptionFilter,
-                                        ExceptionToStringFilter
-                                    >();
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseDeveloperExceptionPage();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            throw new Exception("Test exception");
-                                        }
-                                    );
+                                    throw new Exception("Test exception");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -414,26 +398,24 @@ namespace Microsoft.AspNetCore.Diagnostics
             // Arrange
             DiagnosticListener diagnosticListener = null;
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            diagnosticListener = app.ApplicationServices
+                                .GetRequiredService<DiagnosticListener>();
+                            app.UseDeveloperExceptionPage();
+                            app.Run(
+                                context =>
                                 {
-                                    diagnosticListener =
-                                        app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-                                    app.UseDeveloperExceptionPage();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            throw new CustomCompilationException(failures);
-                                        }
-                                    );
+                                    throw new CustomCompilationException(failures);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

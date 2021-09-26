@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             try
             {
                 var cancellationToken = context.CancellationToken;
-                var syntaxTree = await context.Document.GetSyntaxTreeAsync(cancellationToken)
+                var syntaxTree = await context.Document
+                    .GetSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var syntaxFactsService = context.Document.GetLanguageService<ISyntaxFactsService>();
                 if (
@@ -97,10 +98,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                     if (
                         await CheckTypeInfoOfAttributeAsync(
-                                context.Document,
-                                attributeSyntaxNode,
-                                context.CancellationToken
-                            )
+                            context.Document,
+                            attributeSyntaxNode,
+                            context.CancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {
@@ -164,9 +165,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         )
         {
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    attributeNode,
-                    cancellationToken
-                )
+                attributeNode,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var typeInfo = semanticModel.GetTypeInfo(attributeNode, cancellationToken);
             var type = typeInfo.Type;
@@ -175,9 +176,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 return false;
             }
 
-            var internalsVisibleToAttributeSymbol = semanticModel.Compilation.GetTypeByMetadataName(
-                typeof(InternalsVisibleToAttribute).FullName
-            );
+            var internalsVisibleToAttributeSymbol = semanticModel.Compilation
+                .GetTypeByMetadataName(typeof(InternalsVisibleToAttribute).FullName);
             return type.Equals(internalsVisibleToAttributeSymbol);
         }
 
@@ -189,9 +189,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var currentProject = context.Document.Project;
             var allInternalsVisibleToAttributesOfProject =
                 await GetAllInternalsVisibleToAssemblyNamesOfProjectAsync(
-                        context,
-                        cancellationToken
-                    )
+                    context,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             foreach (var project in context.Document.Project.Solution.Projects)
             {
@@ -225,10 +225,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (context.Items.Count > 0)
             {
                 context.CompletionListSpan = await GetTextChangeSpanAsync(
-                        context.Document,
-                        context.CompletionListSpan,
-                        cancellationToken
-                    )
+                    context.Document,
+                    context.CompletionListSpan,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -274,10 +274,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                     if (
                         await CheckTypeInfoOfAttributeAsync(
-                                document,
-                                attribute,
-                                completionContext.CancellationToken
-                            )
+                            document,
+                            attribute,
+                            completionContext.CancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {
@@ -291,10 +291,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         // the public key actually fits to the assembly.
                         var assemblyName =
                             await GetAssemblyNameFromInternalsVisibleToAttributeAsync(
-                                    document,
-                                    attribute,
-                                    completionContext.CancellationToken
-                                )
+                                document,
+                                attribute,
+                                completionContext.CancellationToken
+                            )
                                 .ConfigureAwait(false);
                         if (!string.IsNullOrWhiteSpace(assemblyName))
                         {
@@ -325,9 +325,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    constructorArgument,
-                    cancellationToken
-                )
+                constructorArgument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var constantCandidate = semanticModel.GetConstantValue(
                 constructorArgument,

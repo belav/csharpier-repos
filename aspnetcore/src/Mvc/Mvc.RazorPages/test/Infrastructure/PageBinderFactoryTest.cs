@@ -832,8 +832,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var valueProviderFactory = new Mock<IValueProviderFactory>();
             valueProviderFactory.Setup(
-                    f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())
-                )
+                f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())
+            )
                 .Throws(new ValueProviderException("Some error"));
 
             pageContext.ValueProviderFactories.Add(valueProviderFactory.Object);

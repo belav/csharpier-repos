@@ -305,7 +305,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(byte?)),
                     Expression.Constant(b, typeof(byte?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableByte")
                 )
             );
@@ -324,7 +325,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(char?)),
                     Expression.Constant(b, typeof(char?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableChar")
                 )
             );
@@ -347,7 +349,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(decimal?)),
                     Expression.Constant(b, typeof(decimal?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableDecimal")
                 )
             );
@@ -377,7 +380,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(double?)),
                     Expression.Constant(b, typeof(double?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableDouble")
                 )
             );
@@ -392,7 +396,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(float?)),
                     Expression.Constant(b, typeof(float?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableFloat")
                 )
             );
@@ -407,7 +412,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(int?)),
                     Expression.Constant(b, typeof(int?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableInt")
                 )
             );
@@ -426,7 +432,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(long?)),
                     Expression.Constant(b, typeof(long?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableLong")
                 )
             );
@@ -452,7 +459,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(sbyte?)),
                     Expression.Constant(b, typeof(sbyte?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableSByte")
                 )
             );
@@ -471,7 +479,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(short?)),
                     Expression.Constant(b, typeof(short?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableShort")
                 )
             );
@@ -490,7 +499,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(uint?)),
                     Expression.Constant(b, typeof(uint?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableUInt")
                 )
             );
@@ -509,7 +519,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(ulong?)),
                     Expression.Constant(b, typeof(ulong?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableULong")
                 )
             );
@@ -539,7 +550,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.AddChecked(
                     Expression.Constant(a, typeof(ushort?)),
                     Expression.Constant(b, typeof(ushort?)),
-                    typeof(LiftedAddCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedAddCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddCheckedNullableUShort")
                 )
             );

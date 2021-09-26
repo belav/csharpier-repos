@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 
                 first = false;
                 members.AddRange(
-                    property.Type.ToMinimalDisplayParts(semanticModel, position)
+                    property.Type
+                        .ToMinimalDisplayParts(semanticModel, position)
                         .Select(p => p.MassageErrorTypeNames("?"))
                 );
                 members.AddRange(Space());

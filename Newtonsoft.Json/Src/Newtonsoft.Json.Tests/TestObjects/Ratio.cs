@@ -184,11 +184,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
             if (!TryParse(input, formatProvider, out result))
             {
                 throw new FormatException(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Text '{0}' is invalid text representation of ratio",
-                        input
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "Text '{0}' is invalid text representation of ratio",
+                            input
+                        )
                 );
             }
             return result;
@@ -218,18 +219,20 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 {
                     int denominator;
                     if (
-                        int.TryParse(
-                            input.Substring(0, fractionIndex),
-                            NumberStyles.Integer,
-                            formatProvider,
-                            out numerator
-                        )
-                        && int.TryParse(
-                            input.Substring(fractionIndex + 1),
-                            NumberStyles.Integer,
-                            formatProvider,
-                            out denominator
-                        )
+                        int
+                            .TryParse(
+                                input.Substring(0, fractionIndex),
+                                NumberStyles.Integer,
+                                formatProvider,
+                                out numerator
+                            )
+                        && int
+                            .TryParse(
+                                input.Substring(fractionIndex + 1),
+                                NumberStyles.Integer,
+                                formatProvider,
+                                out denominator
+                            )
                     )
                     {
                         result = new Ratio(numerator, denominator);

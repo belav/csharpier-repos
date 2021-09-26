@@ -35,49 +35,52 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
             public override void VisitClassDeclaration(ClassDeclarationIntermediateNode node)
             {
-                node.Children.Insert(
-                    0,
-                    new CSharpCodeIntermediateNode()
-                    {
-                        Children =
+                node.Children
+                    .Insert(
+                        0,
+                        new CSharpCodeIntermediateNode()
                         {
-                            new IntermediateToken()
+                            Children =
                             {
-                                Kind = TokenKind.CSharp,
-                                Content = "#pragma warning disable 0414",
+                                new IntermediateToken()
+                                {
+                                    Kind = TokenKind.CSharp,
+                                    Content = "#pragma warning disable 0414",
+                                }
                             }
                         }
-                    }
-                );
-                node.Children.Insert(
-                    1,
-                    new CSharpCodeIntermediateNode()
-                    {
-                        Children =
+                    );
+                node.Children
+                    .Insert(
+                        1,
+                        new CSharpCodeIntermediateNode()
                         {
-                            new IntermediateToken()
+                            Children =
                             {
-                                Kind = TokenKind.CSharp,
-                                Content =
-                                    $"private static {typeof(object).FullName} {DesignTimeVariable} = null;",
+                                new IntermediateToken()
+                                {
+                                    Kind = TokenKind.CSharp,
+                                    Content =
+                                        $"private static {typeof(object).FullName} {DesignTimeVariable} = null;",
+                                }
                             }
                         }
-                    }
-                );
-                node.Children.Insert(
-                    2,
-                    new CSharpCodeIntermediateNode()
-                    {
-                        Children =
+                    );
+                node.Children
+                    .Insert(
+                        2,
+                        new CSharpCodeIntermediateNode()
                         {
-                            new IntermediateToken()
+                            Children =
                             {
-                                Kind = TokenKind.CSharp,
-                                Content = "#pragma warning restore 0414",
+                                new IntermediateToken()
+                                {
+                                    Kind = TokenKind.CSharp,
+                                    Content = "#pragma warning restore 0414",
+                                }
                             }
                         }
-                    }
-                );
+                    );
 
                 _directiveNode = new DesignTimeDirectiveIntermediateNode();
 

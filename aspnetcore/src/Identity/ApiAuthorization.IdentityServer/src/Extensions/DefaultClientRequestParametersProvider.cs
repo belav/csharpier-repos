@@ -31,10 +31,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var authority = context.GetIdentityServerIssuerUri();
             var responseType = "";
             if (
-                !client.Properties.TryGetValue(
-                    ApplicationProfilesPropertyNames.Profile,
-                    out var type
-                )
+                !client.Properties
+                    .TryGetValue(ApplicationProfilesPropertyNames.Profile, out var type)
             )
             {
                 throw new InvalidOperationException(

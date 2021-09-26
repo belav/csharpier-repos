@@ -32,9 +32,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             // Find the nearest enclosing type declaration and use its name
             var syntaxTree = document.GetSyntaxTreeSynchronously(cancellationToken);
             var type = syntaxTree.FindTokenOnLeftOfPosition(
-                    fieldSpan.Start.Position,
-                    cancellationToken
-                )
+                fieldSpan.Start.Position,
+                cancellationToken
+            )
                 .GetAncestor<TypeDeclarationSyntax>();
 
             if (type != null)

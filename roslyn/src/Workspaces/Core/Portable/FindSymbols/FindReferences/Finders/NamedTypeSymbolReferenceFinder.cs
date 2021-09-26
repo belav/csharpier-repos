@@ -62,19 +62,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             var syntaxFacts = project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
 
             var documentsWithName = await FindDocumentsAsync(
-                    project,
-                    documents,
-                    findInGlobalSuppressions: true,
-                    cancellationToken,
-                    symbol.Name
-                )
+                project,
+                documents,
+                findInGlobalSuppressions: true,
+                cancellationToken,
+                symbol.Name
+            )
                 .ConfigureAwait(false);
             var documentsWithType = await FindDocumentsAsync(
-                    project,
-                    documents,
-                    symbol.SpecialType.ToPredefinedType(),
-                    cancellationToken
-                )
+                project,
+                documents,
+                symbol.SpecialType.ToPredefinedType(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var documentsWithAttribute = TryGetNameWithoutAttributeSuffix(
                 symbol.Name,
@@ -82,12 +82,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 out var simpleName
             )
                 ? await FindDocumentsAsync(
-                          project,
-                          documents,
-                          findInGlobalSuppressions: false,
-                          cancellationToken,
-                          simpleName
-                      )
+                      project,
+                      documents,
+                      findInGlobalSuppressions: false,
+                      cancellationToken,
+                      simpleName
+                  )
                       .ConfigureAwait(false)
                 : ImmutableArray<Document>.Empty;
 
@@ -115,11 +115,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var nonAliasReferences = await FindNonAliasReferencesAsync(
-                    namedType,
-                    document,
-                    semanticModel,
-                    cancellationToken
-                )
+                namedType,
+                document,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var symbolsMatch = GetStandardSymbolsMatchFunction(
                 namedType,
@@ -128,12 +128,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 cancellationToken
             );
             var aliasReferences = await FindAliasReferencesAsync(
-                    nonAliasReferences,
-                    document,
-                    semanticModel,
-                    symbolsMatch,
-                    cancellationToken
-                )
+                nonAliasReferences,
+                document,
+                semanticModel,
+                symbolsMatch,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return nonAliasReferences.Concat(aliasReferences);
         }
@@ -146,25 +146,25 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var ordinaryRefs = await FindOrdinaryReferencesAsync(
-                    symbol,
-                    document,
-                    semanticModel,
-                    cancellationToken
-                )
+                symbol,
+                document,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var attributeRefs = await FindAttributeReferencesAsync(
-                    symbol,
-                    document,
-                    semanticModel,
-                    cancellationToken
-                )
+                symbol,
+                document,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var predefinedTypeRefs = await FindPredefinedTypeReferencesAsync(
-                    symbol,
-                    document,
-                    semanticModel,
-                    cancellationToken
-                )
+                symbol,
+                document,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return ordinaryRefs.Concat(attributeRefs).Concat(predefinedTypeRefs);
         }

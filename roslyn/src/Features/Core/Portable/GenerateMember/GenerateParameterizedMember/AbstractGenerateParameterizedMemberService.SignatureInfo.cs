@@ -161,10 +161,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 );
 
                 // Ensure no conflicts between type parameter names and parameter names.
-                var languageServiceProvider =
-                    Document.Project.Solution.Workspace.Services.GetLanguageServices(
-                        State.TypeToGenerateIn.Language
-                    );
+                var languageServiceProvider = Document.Project.Solution.Workspace.Services
+                    .GetLanguageServices(State.TypeToGenerateIn.Language);
                 var syntaxFacts = languageServiceProvider.GetService<ISyntaxFactsService>();
 
                 var equalityComparer = syntaxFacts.StringComparer;
@@ -202,12 +200,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
                 typeSymbol = typeSymbol.RemoveAnonymousTypes(compilation);
                 typeSymbol = await ReplaceTypeParametersBasedOnTypeConstraintsAsync(
-                        Document.Project,
-                        typeSymbol,
-                        compilation,
-                        availableTypeParameterNames,
-                        cancellationToken
-                    )
+                    Document.Project,
+                    typeSymbol,
+                    compilation,
+                    availableTypeParameterNames,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return typeSymbol.RemoveUnavailableTypeParameters(compilation, allTypeParameters)
                     .RemoveUnnamedErrorTypes(compilation)
@@ -279,9 +277,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             {
                 var modifiers = DetermineParameterModifiers(cancellationToken);
                 var types = await SpecializedTasks.WhenAll(
-                        DetermineParameterTypes(cancellationToken)
-                            .Select(t => FixTypeAsync(t, cancellationToken))
-                    )
+                    DetermineParameterTypes(cancellationToken)
+                        .Select(t => FixTypeAsync(t, cancellationToken))
+                )
                     .ConfigureAwait(false);
                 var optionality = DetermineParameterOptionality(cancellationToken);
                 var names = DetermineParameterNames(cancellationToken);
@@ -340,9 +338,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         return Accessibility.Protected;
                     }
                     else if (
-                        containingType.ContainingAssembly.IsSameAssemblyOrHasFriendAccessTo(
-                            State.TypeToGenerateIn.ContainingAssembly
-                        )
+                        containingType.ContainingAssembly
+                            .IsSameAssemblyOrHasFriendAccessTo(
+                                State.TypeToGenerateIn.ContainingAssembly
+                            )
                     )
                     {
                         return Accessibility.Internal;

@@ -515,12 +515,11 @@ public class C
                 // (6,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     static void M1()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"static void M1() 
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"static void M1() 
     { }
     => P1;"
-                    )
-                    .WithLocation(6, 5)
+                ).WithLocation(6, 5)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -559,12 +558,11 @@ public class C
                 // (6,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     static public int operator + (C x, C y)
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"static public int operator + (C x, C y)
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"static public int operator + (C x, C y)
     { return 1; }
     => P1;"
-                    )
-                    .WithLocation(6, 5)
+                ).WithLocation(6, 5)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -602,12 +600,11 @@ public class C
             comp.VerifyDiagnostics(
                 // (5,5): error  CS8057: Block bodies and expression bodies cannot both be provided.
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"C()
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"C()
     { P1 = 1; }
     => P1;"
-                    )
-                    .WithLocation(6, 5)
+                ).WithLocation(6, 5)
             );
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
@@ -670,12 +667,11 @@ public class C
                 // (6,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     ~C()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"~C()
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"~C()
     { P1 = 1; }
     => P1;"
-                    )
-                    .WithLocation(6, 5)
+                ).WithLocation(6, 5)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -742,12 +738,11 @@ public class C
                 // (8,9): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //         get
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"get
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"get
         { return 1; }
         => P1;"
-                    )
-                    .WithLocation(8, 9)
+                ).WithLocation(8, 9)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -778,13 +773,12 @@ public class C
                 // (6,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     static public int P2
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"static public int P2
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"static public int P2
     {
     }
     => P1;"
-                    )
-                    .WithLocation(6, 5),
+                ).WithLocation(6, 5),
                 // (6,23): error CS0548: 'C.P2': property or indexer must have at least one accessor
                 //     static public int P2
                 Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "P2")
@@ -825,12 +819,11 @@ public class C
                 // (6,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     static public explicit operator int (C x)
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"static public explicit operator int (C x)
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"static public explicit operator int (C x)
     { return 1; }
     => P1;"
-                    )
-                    .WithLocation(6, 5)
+                ).WithLocation(6, 5)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -869,12 +862,11 @@ public class C
                 // (6,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     static int M1()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"static int M1() 
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"static int M1() 
     { return P1; }
     => 1;"
-                    )
-                    .WithLocation(6, 5)
+                ).WithLocation(6, 5)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -913,12 +905,11 @@ public class C
                 // (6,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     static public int operator + (C x, C y)
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"static public int operator + (C x, C y)
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"static public int operator + (C x, C y)
     { return P1; }
     => 1;"
-                    )
-                    .WithLocation(6, 5)
+                ).WithLocation(6, 5)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -959,14 +950,13 @@ public class C
                 // (6,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     static public int P2
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"static public int P2
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"static public int P2
     {
         get { return P1; }
     }
     => 1;"
-                    )
-                    .WithLocation(6, 5)
+                ).WithLocation(6, 5)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -1005,12 +995,11 @@ public class C
                 // (6,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     static public explicit operator int (C x)
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"static public explicit operator int (C x)
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"static public explicit operator int (C x)
     { return P1; }
     => 1;"
-                    )
-                    .WithLocation(6, 5)
+                ).WithLocation(6, 5)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -1049,12 +1038,11 @@ public class C
                 // (6,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public C()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"public C()
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"public C()
     { P1 = 1; }
     => P1 = 1;"
-                    )
-                    .WithLocation(6, 5)
+                ).WithLocation(6, 5)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -1094,12 +1082,11 @@ public class C
                 // (6,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public C()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"~C()
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"~C()
     { P1 = 1; }
     => P1 = 1;"
-                    )
-                    .WithLocation(6, 5)
+                ).WithLocation(6, 5)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -1142,12 +1129,11 @@ public class C
                 // (8,9): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //         set
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"set
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"set
             { P1 = 1; }
             => P1 = 1;"
-                    )
-                    .WithLocation(8, 9)
+                ).WithLocation(8, 9)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -1186,9 +1172,9 @@ public class C
                 // (6,9): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //         int Bar() { return 0; } => 0;
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        "int Bar() { return 0; } => 0;"
-                    )
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    "int Bar() { return 0; } => 0;"
+                )
                     .WithLocation(6, 9),
                 // (6,13): warning CS8321: The local function 'Bar' is declared but never used
                 //         int Bar() { return 0; } => 0;
@@ -1214,9 +1200,9 @@ public class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     int this[int i] { get { return 0; } } => 0;
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        "int this[int i] { get { return 0; } } => 0;"
-                    )
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    "int this[int i] { get { return 0; } } => 0;"
+                )
                     .WithLocation(4, 5)
             );
         }
@@ -1322,33 +1308,26 @@ public class C
 }
 ";
             CreateCompilation(source, parseOptions: TestOptions.Regular).VerifyDiagnostics();
-            CreateCompilation(source, parseOptions: TestOptions.Regular6)
-                .VerifyDiagnostics(
-                    // (5,9): error CS8059: Feature 'expression body constructor and destructor' is not available in C# 6. Please use language version 7.0 or greater.
-                    //     C() => Console.WriteLine(1);
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "=> Console.WriteLine(1)"
-                        )
-                        .WithArguments("expression body constructor and destructor", "7.0")
-                        .WithLocation(5, 9),
-                    // (6,10): error CS8059: Feature 'expression body constructor and destructor' is not available in C# 6. Please use language version 7.0 or greater.
-                    //     ~C() => Console.WriteLine(2);
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "=> Console.WriteLine(2)"
-                        )
-                        .WithArguments("expression body constructor and destructor", "7.0")
-                        .WithLocation(6, 10),
-                    // (7,17): error CS8059: Feature 'expression body property accessor' is not available in C# 6. Please use language version 7.0 or greater.
-                    //     int P { set => Console.WriteLine(value); }
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "=> Console.WriteLine(value)"
-                        )
-                        .WithArguments("expression body property accessor", "7.0")
-                        .WithLocation(7, 17)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
+                // (5,9): error CS8059: Feature 'expression body constructor and destructor' is not available in C# 6. Please use language version 7.0 or greater.
+                //     C() => Console.WriteLine(1);
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "=> Console.WriteLine(1)")
+                    .WithArguments("expression body constructor and destructor", "7.0")
+                    .WithLocation(5, 9),
+                // (6,10): error CS8059: Feature 'expression body constructor and destructor' is not available in C# 6. Please use language version 7.0 or greater.
+                //     ~C() => Console.WriteLine(2);
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "=> Console.WriteLine(2)")
+                    .WithArguments("expression body constructor and destructor", "7.0")
+                    .WithLocation(6, 10),
+                // (7,17): error CS8059: Feature 'expression body property accessor' is not available in C# 6. Please use language version 7.0 or greater.
+                //     int P { set => Console.WriteLine(value); }
+                Diagnostic(
+                    ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                    "=> Console.WriteLine(value)"
+                )
+                    .WithArguments("expression body property accessor", "7.0")
+                    .WithLocation(7, 17)
+            );
         }
     }
 }

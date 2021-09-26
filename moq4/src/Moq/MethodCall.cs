@@ -57,7 +57,8 @@ namespace Moq
             {
                 var thisMethod = MethodBase.GetCurrentMethod();
                 var mockAssembly = Assembly.GetExecutingAssembly();
-                var frame = new StackTrace(true).GetFrames()
+                var frame = new StackTrace(true)
+                    .GetFrames()
                     .SkipWhile(f => f.GetMethod() != thisMethod)
                     .SkipWhile(
                         f =>
@@ -176,12 +177,13 @@ namespace Moq
                 if (!callback.CompareParameterTypesTo(expectedParamTypes))
                 {
                     throw new ArgumentException(
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            Resources.InvalidCallbackParameterMismatch,
-                            this.Method.GetParameterTypeList(),
-                            callback.GetMethodInfo().GetParameterTypeList()
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                Resources.InvalidCallbackParameterMismatch,
+                                this.Method.GetParameterTypeList(),
+                                callback.GetMethodInfo().GetParameterTypeList()
+                            )
                     );
                 }
 
@@ -209,10 +211,8 @@ namespace Moq
         {
             Guard.NotNull(eventExpression, nameof(eventExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
-                eventExpression,
-                this.Mock.ConstructorArguments
-            );
+            var expression = ExpressionReconstructor.Instance
+                .ReconstructExpression(eventExpression, this.Mock.ConstructorArguments);
 
             // TODO: validate that expression is for event subscription or unsubscription
 
@@ -226,10 +226,8 @@ namespace Moq
         {
             Guard.NotNull(eventExpression, nameof(eventExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
-                eventExpression,
-                this.Mock.ConstructorArguments
-            );
+            var expression = ExpressionReconstructor.Instance
+                .ReconstructExpression(eventExpression, this.Mock.ConstructorArguments);
 
             // TODO: validate that expression is for event subscription or unsubscription
 
@@ -333,12 +331,13 @@ namespace Moq
                     if (numberOfActualParameters != numberOfExpectedParameters)
                     {
                         throw new ArgumentException(
-                            string.Format(
-                                CultureInfo.CurrentCulture,
-                                Resources.InvalidCallbackParameterCountMismatch,
-                                numberOfExpectedParameters,
-                                numberOfActualParameters
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.CurrentCulture,
+                                    Resources.InvalidCallbackParameterCountMismatch,
+                                    numberOfExpectedParameters,
+                                    numberOfActualParameters
+                                )
                         );
                     }
                 }
@@ -360,12 +359,13 @@ namespace Moq
                     if (typeof(ITypeMatcher).IsAssignableFrom(expectedReturnType) == false)
                     {
                         throw new ArgumentException(
-                            string.Format(
-                                CultureInfo.CurrentCulture,
-                                Resources.InvalidCallbackReturnTypeMismatch,
-                                expectedReturnType.GetFormattedName(),
-                                actualReturnType.GetFormattedName()
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.CurrentCulture,
+                                    Resources.InvalidCallbackReturnTypeMismatch,
+                                    expectedReturnType.GetFormattedName(),
+                                    actualReturnType.GetFormattedName()
+                                )
                         );
                     }
                 }

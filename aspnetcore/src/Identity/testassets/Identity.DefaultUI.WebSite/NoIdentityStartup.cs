@@ -32,15 +32,13 @@ namespace Identity.DefaultUI.WebSite
                 }
             );
 
-            services.AddMvc()
-                .AddRazorPagesOptions(
-                    options =>
-                    {
-                        options.Conventions.AuthorizeFolder("/Areas/Identity/Pages/Account/Manage");
-                        options.Conventions.AuthorizePage("/Areas/Identity/Pages/Account/Logout");
-                    }
-                )
-                .AddNewtonsoftJson();
+            services.AddMvc().AddRazorPagesOptions(
+                options =>
+                {
+                    options.Conventions.AuthorizeFolder("/Areas/Identity/Pages/Account/Manage");
+                    options.Conventions.AuthorizePage("/Areas/Identity/Pages/Account/Logout");
+                }
+            ).AddNewtonsoftJson();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
         }

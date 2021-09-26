@@ -92,49 +92,42 @@ namespace Interop.FunctionalTests
             InitializeArgs();
 
             var hostBuilder = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(
+                                IPAddress.Loopback,
+                                0,
+                                listenOptions =>
                                 {
-                                    options.Listen(
-                                        IPAddress.Loopback,
-                                        0,
-                                        listenOptions =>
-                                        {
-                                            listenOptions.Protocols = HttpProtocols.Http2;
-                                            listenOptions.UseHttps(
-                                                TestResources.GetTestCertificate()
+                                    listenOptions.Protocols = HttpProtocols.Http2;
+                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                }
+                            );
+                        }
+                    ).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    if (HttpMethods.IsPost(context.Request.Query["TestMethod"]))
+                                    {
+                                        await context.Response.WriteAsync(_postHtml);
+                                    }
+                                    else
+                                    {
+                                        await context.Response
+                                            .WriteAsync(
+                                                $"Interop {context.Request.Protocol} {context.Request.Method}"
                                             );
-                                        }
-                                    );
+                                    }
                                 }
                             )
-                            .Configure(
-                                app =>
-                                    app.Run(
-                                        async context =>
-                                        {
-                                            if (
-                                                HttpMethods.IsPost(
-                                                    context.Request.Query["TestMethod"]
-                                                )
-                                            )
-                                            {
-                                                await context.Response.WriteAsync(_postHtml);
-                                            }
-                                            else
-                                            {
-                                                await context.Response.WriteAsync(
-                                                    $"Interop {context.Request.Protocol} {context.Request.Method}"
-                                                );
-                                            }
-                                        }
-                                    )
-                            );
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+                    );
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {

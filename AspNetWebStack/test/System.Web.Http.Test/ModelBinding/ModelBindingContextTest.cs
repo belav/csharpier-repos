@@ -17,10 +17,8 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext originalBindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(object)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(object)),
                 ModelName = "theName",
                 ModelState = new ModelStateDictionary(),
                 ValueProvider = new SimpleHttpValueProvider()
@@ -42,10 +40,8 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int))
             };
 
             // Act & assert
@@ -92,10 +88,8 @@ namespace System.Web.Http.ModelBinding
             // Act
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => 42,
-                    typeof(int)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => 42, typeof(int))
             };
 
             // Assert
@@ -109,10 +103,8 @@ namespace System.Web.Http.ModelBinding
             // Act
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => 42,
-                    typeof(int)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => 42, typeof(int))
             };
 
             // Act & assert
@@ -129,10 +121,8 @@ namespace System.Web.Http.ModelBinding
             // Act
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => 42,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => 42, typeof(int)),
                 ModelName = "theInt"
             };
 

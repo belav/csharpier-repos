@@ -34,10 +34,10 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             await _callback.InvokeAsync(
-                    (callback, cancellationToken) =>
-                        callback.OnProjectRemovedAsync(_callbackId, projectId, cancellationToken),
-                    cancellationToken
-                )
+                (callback, cancellationToken) =>
+                    callback.OnProjectRemovedAsync(_callbackId, projectId, cancellationToken),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -47,14 +47,10 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             await _callback.InvokeAsync(
-                    (callback, cancellationToken) =>
-                        callback.ReportDesignerAttributeDataAsync(
-                            _callbackId,
-                            data,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                (callback, cancellationToken) =>
+                    callback.ReportDesignerAttributeDataAsync(_callbackId, data, cancellationToken),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

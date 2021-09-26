@@ -329,7 +329,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Assert.Equal(string.Empty, output.Text);
 
             // We can trigger a pointer event and receive a PointerEventArgs
-            new Actions(Browser).Click(elem).Perform();
+            new Actions(Browser)
+                .Click(elem)
+                .Perform();
             Browser.Equal(
                 "Microsoft.AspNetCore.Components.Web.PointerEventArgs:mouse",
                 () => output.Text

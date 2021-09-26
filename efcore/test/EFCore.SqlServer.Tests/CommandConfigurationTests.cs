@@ -33,10 +33,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.Throws<InvalidOperationException>(
                     () =>
-                        new DbContextOptionsBuilder().UseSqlServer(
-                            "No=LoveyDovey",
-                            b => b.CommandTimeout(-55)
-                        )
+                        new DbContextOptionsBuilder()
+                            .UseSqlServer("No=LoveyDovey", b => b.CommandTimeout(-55))
                 );
 
                 using var context = new TimeoutContext();
@@ -66,8 +64,8 @@ namespace Microsoft.EntityFrameworkCore
 
                 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                     optionsBuilder.UseInternalServiceProvider(
-                            SqlServerFixture.DefaultServiceProvider
-                        )
+                        SqlServerFixture.DefaultServiceProvider
+                    )
                         .UseSqlServer(new FakeDbConnection("A=B"));
             }
         }

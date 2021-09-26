@@ -28,32 +28,33 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             protected override string GetXmlText()
             {
-                return string.Concat(
-                    "<Root xmlns:x='urn:schemas-castle-org:xml-reference'>",
-                    "<A x:id='1'>",
-                    "<Value>a</Value>",
-                    "</A>",
-                    "<D>", // Put this out of order to exercise deferred reference loading; // TODO: Rename stuff so it's in order
-                    "<Y x:ref='1'/>",
-                    "<Z x:ref='2'/>",
-                    "</D>",
-                    "<B>",
-                    "<X>",
-                    "<Value>b1</Value>",
-                    "</X>",
-                    "<X x:id='2'>",
-                    "<Value>b2</Value>",
-                    "</X>",
-                    "<X>",
-                    "<Value>b3</Value>",
-                    "</X>",
-                    "</B>",
-                    "<C>",
-                    "<Value>c</Value>",
-                    "</C>",
-                    "<E/>",
-                    "</Root>"
-                );
+                return string
+                    .Concat(
+                        "<Root xmlns:x='urn:schemas-castle-org:xml-reference'>",
+                        "<A x:id='1'>",
+                        "<Value>a</Value>",
+                        "</A>",
+                        "<D>", // Put this out of order to exercise deferred reference loading; // TODO: Rename stuff so it's in order
+                        "<Y x:ref='1'/>",
+                        "<Z x:ref='2'/>",
+                        "</D>",
+                        "<B>",
+                        "<X>",
+                        "<Value>b1</Value>",
+                        "</X>",
+                        "<X x:id='2'>",
+                        "<Value>b2</Value>",
+                        "</X>",
+                        "<X>",
+                        "<Value>b3</Value>",
+                        "</X>",
+                        "</B>",
+                        "<C>",
+                        "<Value>c</Value>",
+                        "</C>",
+                        "<E/>",
+                        "</Root>"
+                    );
             }
 
             [Test]
@@ -377,13 +378,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             protected override string GetXmlText()
             {
-                return string.Concat(
-                    "<Root $x>",
-                    "<A C='c'> d <E>f</E> g </A>",
-                    "<B/>",
-                    "<C/>",
-                    "</Root>"
-                );
+                return string
+                    .Concat("<Root $x>", "<A C='c'> d <E>f</E> g </A>", "<B/>", "<C/>", "</Root>");
             }
 
             [Test]
@@ -494,7 +490,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 var document = new XmlDocument();
 
-                var text = string.Concat(xml)
+                var text = string
+                    .Concat(xml)
                     .Replace("$x", "xmlns:x='urn:schemas-castle-org:xml-reference'");
 
                 document.LoadXml(text);

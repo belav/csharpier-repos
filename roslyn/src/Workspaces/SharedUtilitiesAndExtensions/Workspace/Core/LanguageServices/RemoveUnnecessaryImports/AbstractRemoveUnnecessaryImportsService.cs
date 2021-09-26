@@ -41,9 +41,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
         {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
 
-            var trimmedLeadingTrivia = token.LeadingTrivia.SkipWhile(
-                    t => syntaxFacts.IsEndOfLineTrivia(t)
-                )
+            var trimmedLeadingTrivia = token.LeadingTrivia
+                .SkipWhile(t => syntaxFacts.IsEndOfLineTrivia(t))
                 .ToList();
 
             // If the list ends with 3 newlines remove the last one until there's only 2 newlines to end the leading trivia.
@@ -73,11 +72,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             var unnecessaryImports = new HashSet<T>(this);
             unnecessaryImports.AddRange(
                 UnnecessaryImportsProvider.GetUnnecessaryImports(
-                        model,
-                        root,
-                        predicate,
-                        cancellationToken
-                    )
+                    model,
+                    root,
+                    predicate,
+                    cancellationToken
+                )
                     .Cast<T>()
             );
             foreach (var current in document.GetLinkedDocuments())
@@ -89,11 +88,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 
                 unnecessaryImports.IntersectWith(
                     UnnecessaryImportsProvider.GetUnnecessaryImports(
-                            currentModel,
-                            currentRoot,
-                            predicate,
-                            cancellationToken
-                        )
+                        currentModel,
+                        currentRoot,
+                        predicate,
+                        cancellationToken
+                    )
                         .Cast<T>()
                 );
             }

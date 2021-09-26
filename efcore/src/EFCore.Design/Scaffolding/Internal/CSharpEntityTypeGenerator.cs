@@ -153,8 +153,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             GenerateIndexAttributes(entityType);
 
             var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
-                    entityType.GetAnnotations()
-                )
+                entityType.GetAnnotations()
+            )
                 .ToDictionary(a => a.Name, a => a);
             _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(entityType, annotations);
 
@@ -227,8 +227,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             {
                 // If there are annotations that cannot be represented using an IndexAttribute then use fluent API instead.
                 var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
-                        index.GetAnnotations()
-                    )
+                    index.GetAnnotations()
+                )
                     .ToDictionary(a => a.Name, a => a);
                 _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(index, annotations);
 
@@ -336,8 +336,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             GeneratePrecisionAttribute(property);
 
             var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
-                    property.GetAnnotations()
-                )
+                property.GetAnnotations()
+            )
                 .ToDictionary(a => a.Name, a => a);
             _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(property, annotations);
 
@@ -518,10 +518,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     {
                         foreignKeyAttribute.AddParameter(
                             _code.Literal(
-                                string.Join(
-                                    ",",
-                                    navigation.ForeignKey.Properties.Select(p => p.Name)
-                                )
+                                string
+                                    .Join(",", navigation.ForeignKey.Properties.Select(p => p.Name))
                             )
                         );
                     }
@@ -550,7 +548,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     );
 
                     inversePropertyAttribute.AddParameter(
-                        !navigation.DeclaringEntityType.GetPropertiesAndNavigations()
+                        !navigation.DeclaringEntityType
+                            .GetPropertiesAndNavigations()
                             .Any(m => m.Name == inverseNavigation.DeclaringEntityType.Name)
                           ? $"nameof({inverseNavigation.DeclaringEntityType.Name}.{inverseNavigation.Name})"
                           : _code.Literal(inverseNavigation.Name)

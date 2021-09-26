@@ -96,9 +96,9 @@ namespace System.Diagnostics
                 try
                 {
                     int bytesRead = await _stream.ReadAsync(
-                            new Memory<byte>(_byteBuffer),
-                            _cts.Token
-                        )
+                        new Memory<byte>(_byteBuffer),
+                        _cts.Token
+                    )
                         .ConfigureAwait(false);
                     if (bytesRead == 0)
                         break;

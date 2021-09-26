@@ -250,10 +250,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                         .Where(
                             element =>
                                 element.Name == "add"
-                                && element.Attribute("name")?.Value.StartsWith(
-                                    "AspNetCoreModule",
-                                    StringComparison.Ordinal
-                                ) == true
+                                && element.Attribute("name")?.Value
+                                    .StartsWith("AspNetCoreModule", StringComparison.Ordinal)
+                                    == true
                                 && element.Attribute("image") != null
                         );
 
@@ -267,10 +266,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     foreach (var element in moduleNodes)
                     {
                         var imageAttribute = element.Attribute("image");
-                        imageAttribute.Value = imageAttribute.Value.Replace(
-                            sourceDirectory.FullName,
-                            destinationDirectory.FullName
-                        );
+                        imageAttribute.Value = imageAttribute.Value
+                            .Replace(sourceDirectory.FullName, destinationDirectory.FullName);
                     }
                     CopyFiles(sourceDirectory, destinationDirectory);
                 }

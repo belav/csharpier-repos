@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis
 
             // only add references to projects that are contained in the solution/graph
             var referencedProjectIds = projectReferences.Where(
-                    r => _projectIds.Contains(r.ProjectId)
-                )
+                r => _projectIds.Contains(r.ProjectId)
+            )
                 .Select(r => r.ProjectId)
                 .ToList();
 

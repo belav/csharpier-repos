@@ -606,10 +606,8 @@ public class Bar
 
                 long attributeValue;
                 Assert.True(
-                    peModule.Module.TryExtractLongValueFromAttribute(
-                        attributeInfo.Handle,
-                        out attributeValue
-                    )
+                    peModule.Module
+                        .TryExtractLongValueFromAttribute(attributeInfo.Handle, out attributeValue)
                 );
                 Assert.Equal(-1L, attributeValue); // check the attribute is constructed with a -1
 
@@ -959,11 +957,10 @@ public class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,59): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(decimal)")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,59): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(decimal)")
+            );
         }
 
         [Fact]
@@ -1609,24 +1606,23 @@ public class Goo: Attribute
     public static void Main() {}
 }";
 
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (15,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in '' conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
-                    //     public Goo([Optional(isOpt: false)][Goo]int y) {}
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Optional")
-                        .WithArguments(
-                            "",
-                            "System.Runtime.InteropServices.OptionalAttribute",
-                            "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                            "System.Runtime.InteropServices.OptionalAttribute"
-                        )
-                        .WithLocation(15, 17),
-                    // (15,41): error CS7036: There is no argument given that corresponds to the required formal parameter 'y' of 'Goo.Goo(int)'
-                    //     public Goo([Optional(isOpt: false)][Goo]int y) {}
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Goo")
-                        .WithArguments("y", "Goo.Goo(int)")
-                        .WithLocation(15, 41)
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (15,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in '' conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
+                //     public Goo([Optional(isOpt: false)][Goo]int y) {}
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Optional")
+                    .WithArguments(
+                        "",
+                        "System.Runtime.InteropServices.OptionalAttribute",
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        "System.Runtime.InteropServices.OptionalAttribute"
+                    )
+                    .WithLocation(15, 17),
+                // (15,41): error CS7036: There is no argument given that corresponds to the required formal parameter 'y' of 'Goo.Goo(int)'
+                //     public Goo([Optional(isOpt: false)][Goo]int y) {}
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Goo")
+                    .WithArguments("y", "Goo.Goo(int)")
+                    .WithLocation(15, 41)
+            );
         }
 
         [Fact]
@@ -1652,22 +1648,21 @@ public class Goo: Attribute
     public static void Main() {}
 }";
 
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (16,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in '' conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
-                    //     public Goo([Optional][Goo]int y) {}
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Optional")
-                        .WithArguments(
-                            "",
-                            "System.Runtime.InteropServices.OptionalAttribute",
-                            "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                            "System.Runtime.InteropServices.OptionalAttribute"
-                        ),
-                    // (16,17): error CS0592: Attribute 'Optional' is not valid on this declaration type. It is only valid on 'class' declarations.
-                    //     public Goo([Optional][Goo]int y) {}
-                    Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "Optional")
-                        .WithArguments("Optional", "class")
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (16,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in '' conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
+                //     public Goo([Optional][Goo]int y) {}
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Optional")
+                    .WithArguments(
+                        "",
+                        "System.Runtime.InteropServices.OptionalAttribute",
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        "System.Runtime.InteropServices.OptionalAttribute"
+                    ),
+                // (16,17): error CS0592: Attribute 'Optional' is not valid on this declaration type. It is only valid on 'class' declarations.
+                //     public Goo([Optional][Goo]int y) {}
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "Optional")
+                    .WithArguments("Optional", "class")
+            );
         }
 
         [Fact]
@@ -1693,29 +1688,28 @@ public class Goo: Attribute
     public static void Main() {}
 }";
 
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (16,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in '' conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
-                    //     public Goo([Optional(new Goo())][Goo]int y) {}
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Optional")
-                        .WithArguments(
-                            "",
-                            "System.Runtime.InteropServices.OptionalAttribute",
-                            "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                            "System.Runtime.InteropServices.OptionalAttribute"
-                        )
-                        .WithLocation(16, 17),
-                    // (16,30): error CS7036: There is no argument given that corresponds to the required formal parameter 'y' of 'Goo.Goo(int)'
-                    //     public Goo([Optional(new Goo())][Goo]int y) {}
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Goo")
-                        .WithArguments("y", "Goo.Goo(int)")
-                        .WithLocation(16, 30),
-                    // (16,38): error CS7036: There is no argument given that corresponds to the required formal parameter 'y' of 'Goo.Goo(int)'
-                    //     public Goo([Optional(new Goo())][Goo]int y) {}
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Goo")
-                        .WithArguments("y", "Goo.Goo(int)")
-                        .WithLocation(16, 38)
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (16,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in '' conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
+                //     public Goo([Optional(new Goo())][Goo]int y) {}
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Optional")
+                    .WithArguments(
+                        "",
+                        "System.Runtime.InteropServices.OptionalAttribute",
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        "System.Runtime.InteropServices.OptionalAttribute"
+                    )
+                    .WithLocation(16, 17),
+                // (16,30): error CS7036: There is no argument given that corresponds to the required formal parameter 'y' of 'Goo.Goo(int)'
+                //     public Goo([Optional(new Goo())][Goo]int y) {}
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Goo")
+                    .WithArguments("y", "Goo.Goo(int)")
+                    .WithLocation(16, 30),
+                // (16,38): error CS7036: There is no argument given that corresponds to the required formal parameter 'y' of 'Goo.Goo(int)'
+                //     public Goo([Optional(new Goo())][Goo]int y) {}
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Goo")
+                    .WithArguments("y", "Goo.Goo(int)")
+                    .WithLocation(16, 38)
+            );
         }
 
         [Fact, WorkItem(546624, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546624")]
@@ -2003,62 +1997,61 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (63,65): error CS1763: 'x' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
-                    //     public MyPermission5Attribute(SecurityAction action, object x = SecurityAction.Demand) : base(SecurityAction.Demand)
-                    Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "x")
-                        .WithArguments("x", "object"),
-                    // (76,42): error CS1763: 'x' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
-                    //     public MyPermission6Attribute(object x = SecurityAction.Demand) : base(SecurityAction.Demand)
-                    Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "x")
-                        .WithArguments("x", "object"),
-                    // (101,46): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
-                    //     public MyPermission8Attribute([Optional][DefaultParameterValueAttribute(null)]SecurityAction x) : base(SecurityAction.Demand)
-                    Diagnostic(
-                        ErrorCode.ERR_DefaultValueTypeMustMatch,
-                        "DefaultParameterValueAttribute"
-                    ),
-                    // (113,46): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
-                    //     public MyPermission9Attribute([Optional][DefaultParameterValueAttribute(-1)]SecurityAction x) : base(SecurityAction.Demand)
-                    Diagnostic(
-                        ErrorCode.ERR_DefaultValueTypeMustMatch,
-                        "DefaultParameterValueAttribute"
-                    ),
-                    // (137,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter value was specified.
-                    // [MyPermission(SecurityAction.Demand)]
-                    Diagnostic(ErrorCode.ERR_BadAttributeParamDefaultArgument, "MyPermission")
-                        .WithArguments("x"),
-                    // (140,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter value was specified.
-                    // [MyPermission2(SecurityAction.Demand)]
-                    Diagnostic(ErrorCode.ERR_BadAttributeParamDefaultArgument, "MyPermission2")
-                        .WithArguments("x"),
-                    // (143,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter value was specified.
-                    // [MyPermission3()]
-                    Diagnostic(ErrorCode.ERR_BadAttributeParamDefaultArgument, "MyPermission3")
-                        .WithArguments("x"),
-                    // (149,16): error CS1503: Argument 1: cannot convert from '<null>' to 'System.Security.Permissions.SecurityAction'
-                    // [MyPermission4(null)]
-                    Diagnostic(ErrorCode.ERR_BadArgType, "null")
-                        .WithArguments("1", "<null>", "System.Security.Permissions.SecurityAction"),
-                    // (167,2): error CS1763: 'y' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
-                    // [MyPermission10(SecurityAction.Demand)]
-                    Diagnostic(
-                            ErrorCode.ERR_NotNullRefDefaultParameter,
-                            "MyPermission10(SecurityAction.Demand)"
-                        )
-                        .WithArguments("y", "object"),
-                    // (145,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
-                    // [MyPermission3(null)]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MyPermission3"),
-                    // (147,2): error CS7049: Security attribute 'MyPermission4' has an invalid SecurityAction value '0'
-                    // [MyPermission4()]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeInvalidAction, "MyPermission4()")
-                        .WithArguments("MyPermission4", "0"),
-                    // (156,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
-                    // [MyPermission6(null)]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MyPermission6")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (63,65): error CS1763: 'x' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
+                //     public MyPermission5Attribute(SecurityAction action, object x = SecurityAction.Demand) : base(SecurityAction.Demand)
+                Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "x")
+                    .WithArguments("x", "object"),
+                // (76,42): error CS1763: 'x' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
+                //     public MyPermission6Attribute(object x = SecurityAction.Demand) : base(SecurityAction.Demand)
+                Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "x")
+                    .WithArguments("x", "object"),
+                // (101,46): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                //     public MyPermission8Attribute([Optional][DefaultParameterValueAttribute(null)]SecurityAction x) : base(SecurityAction.Demand)
+                Diagnostic(
+                    ErrorCode.ERR_DefaultValueTypeMustMatch,
+                    "DefaultParameterValueAttribute"
+                ),
+                // (113,46): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                //     public MyPermission9Attribute([Optional][DefaultParameterValueAttribute(-1)]SecurityAction x) : base(SecurityAction.Demand)
+                Diagnostic(
+                    ErrorCode.ERR_DefaultValueTypeMustMatch,
+                    "DefaultParameterValueAttribute"
+                ),
+                // (137,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter value was specified.
+                // [MyPermission(SecurityAction.Demand)]
+                Diagnostic(ErrorCode.ERR_BadAttributeParamDefaultArgument, "MyPermission")
+                    .WithArguments("x"),
+                // (140,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter value was specified.
+                // [MyPermission2(SecurityAction.Demand)]
+                Diagnostic(ErrorCode.ERR_BadAttributeParamDefaultArgument, "MyPermission2")
+                    .WithArguments("x"),
+                // (143,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter value was specified.
+                // [MyPermission3()]
+                Diagnostic(ErrorCode.ERR_BadAttributeParamDefaultArgument, "MyPermission3")
+                    .WithArguments("x"),
+                // (149,16): error CS1503: Argument 1: cannot convert from '<null>' to 'System.Security.Permissions.SecurityAction'
+                // [MyPermission4(null)]
+                Diagnostic(ErrorCode.ERR_BadArgType, "null")
+                    .WithArguments("1", "<null>", "System.Security.Permissions.SecurityAction"),
+                // (167,2): error CS1763: 'y' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
+                // [MyPermission10(SecurityAction.Demand)]
+                Diagnostic(
+                    ErrorCode.ERR_NotNullRefDefaultParameter,
+                    "MyPermission10(SecurityAction.Demand)"
+                )
+                    .WithArguments("y", "object"),
+                // (145,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
+                // [MyPermission3(null)]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MyPermission3"),
+                // (147,2): error CS7049: Security attribute 'MyPermission4' has an invalid SecurityAction value '0'
+                // [MyPermission4()]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeInvalidAction, "MyPermission4()")
+                    .WithArguments("MyPermission4", "0"),
+                // (156,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
+                // [MyPermission6(null)]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MyPermission6")
+            );
         }
 
         [Fact]
@@ -2378,146 +2371,137 @@ class C
         public void InAttribute_RefParameter()
         {
             CreateCompilation(
-                    @"
+                @"
 using System.Runtime.InteropServices;
 class C
 {
     public static void M([In]ref int p) { }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void OutAttribute_RefParameter()
         {
             CreateCompilation(
-                    @"
+                @"
 using System.Runtime.InteropServices;
 class C
 {
     public static void M([Out]ref int p) { }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (5,39): error CS0662: Cannot specify the Out attribute on a ref parameter without also specifying the In attribute.
-                    //     public static void M([Out]ref int p) { }
-                    Diagnostic(ErrorCode.ERR_OutAttrOnRefParam, "p").WithLocation(5, 39)
-                );
+            ).VerifyDiagnostics(
+                // (5,39): error CS0662: Cannot specify the Out attribute on a ref parameter without also specifying the In attribute.
+                //     public static void M([Out]ref int p) { }
+                Diagnostic(ErrorCode.ERR_OutAttrOnRefParam, "p").WithLocation(5, 39)
+            );
         }
 
         [Fact]
         public void InAndOutAttributes_RefParameter()
         {
             CreateCompilation(
-                    @"
+                @"
 using System.Runtime.InteropServices;
 class C
 {
     public static void M([In, Out]ref int p) { }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void InAttribute_OutParameter()
         {
             CreateCompilation(
-                    @"
+                @"
 using System.Runtime.InteropServices;
 class C
 {
     public static void M([In]out int p) { p = 0; }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (5,38): error CS0036: An out parameter cannot have the In attribute
-                    //     public static void M([In]out int p) { p = 0; }
-                    Diagnostic(ErrorCode.ERR_InAttrOnOutParam, "p").WithLocation(5, 38)
-                );
+            ).VerifyDiagnostics(
+                // (5,38): error CS0036: An out parameter cannot have the In attribute
+                //     public static void M([In]out int p) { p = 0; }
+                Diagnostic(ErrorCode.ERR_InAttrOnOutParam, "p").WithLocation(5, 38)
+            );
         }
 
         [Fact]
         public void OutAttribute_OutParameter()
         {
             CreateCompilation(
-                    @"
+                @"
 using System.Runtime.InteropServices;
 class C
 {
     public static void M([Out]out int p) { p = 0; }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void InAndOutAttributes_OutParameter()
         {
             CreateCompilation(
-                    @"
+                @"
 using System.Runtime.InteropServices;
 class C
 {
     public static void M([In, Out]out int p) { p = 0; }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (5,43): error CS0036: An out parameter cannot have the In attribute
-                    //     public static void M([In, Out]out int p) { p = 0; }
-                    Diagnostic(ErrorCode.ERR_InAttrOnOutParam, "p").WithLocation(5, 43)
-                );
+            ).VerifyDiagnostics(
+                // (5,43): error CS0036: An out parameter cannot have the In attribute
+                //     public static void M([In, Out]out int p) { p = 0; }
+                Diagnostic(ErrorCode.ERR_InAttrOnOutParam, "p").WithLocation(5, 43)
+            );
         }
 
         [Fact]
         public void InAttribute_InParameter()
         {
             CreateCompilation(
-                    @"
+                @"
 using System.Runtime.InteropServices;
 class C
 {
     public static void M([In]in int p) { }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void OutAttribute_InParameter()
         {
             CreateCompilation(
-                    @"
+                @"
 using System.Runtime.InteropServices;
 class C
 {
     public static void M([Out]in int p) { }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (5,38): error CS8355: An in parameter cannot have the Out attribute.
-                    //     public static void M([Out]in int p) { }
-                    Diagnostic(ErrorCode.ERR_OutAttrOnInParam, "p").WithLocation(5, 38)
-                );
+            ).VerifyDiagnostics(
+                // (5,38): error CS8355: An in parameter cannot have the Out attribute.
+                //     public static void M([Out]in int p) { }
+                Diagnostic(ErrorCode.ERR_OutAttrOnInParam, "p").WithLocation(5, 38)
+            );
         }
 
         [Fact]
         public void OutAndInAttributes_InParameter()
         {
             CreateCompilation(
-                    @"
+                @"
 using System.Runtime.InteropServices;
 class C
 {
     public static void M([Out, In]in int p) { }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (5,42): error CS8355: An in parameter cannot have the Out attribute.
-                    //     public static void M([Out, In]in int p) { }
-                    Diagnostic(ErrorCode.ERR_OutAttrOnInParam, "p").WithLocation(5, 42)
-                );
+            ).VerifyDiagnostics(
+                // (5,42): error CS8355: An in parameter cannot have the Out attribute.
+                //     public static void M([Out, In]in int p) { }
+                Diagnostic(ErrorCode.ERR_OutAttrOnInParam, "p").WithLocation(5, 42)
+            );
         }
 
         [Fact]
@@ -2788,13 +2772,12 @@ namespace System.Runtime.InteropServices
             //      (4,6): warning CS0436: The type 'DllImport' in '' conflicts with the imported type 'System.Runtime.InteropServices.DllImportAttribute' in
             //      'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,6): error CS0616: 'System.Runtime.InteropServices.DllImportAttribute' is not an attribute class
-                    //     [DllImport]
-                    Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "DllImport")
-                        .WithArguments("System.Runtime.InteropServices.DllImportAttribute")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,6): error CS0616: 'System.Runtime.InteropServices.DllImportAttribute' is not an attribute class
+                //     [DllImport]
+                Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "DllImport")
+                    .WithArguments("System.Runtime.InteropServices.DllImportAttribute")
+            );
         }
 
         [Fact]
@@ -2850,54 +2833,53 @@ class C
 }
 ";
             // Dev10 fails in Emit or emits invalid metadata
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,16): error CS0591: Invalid value for argument to 'DllImport' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "null")
-                        .WithArguments("DllImport"),
-                    // (9,16): error CS0591: Invalid value for argument to 'DllImport' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""""")
-                        .WithArguments("DllImport"),
-                    // (12,23): error CS0599: Invalid value for named attribute argument 'EntryPoint'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "EntryPoint = null")
-                        .WithArguments("EntryPoint"),
-                    // (15,23): error CS0599: Invalid value for named attribute argument 'EntryPoint'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, @"EntryPoint = """"")
-                        .WithArguments("EntryPoint"),
-                    // (18,16): error CS0591: Invalid value for argument to 'DllImport' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "null")
-                        .WithArguments("DllImport"),
-                    // (18,22): error CS0599: Invalid value for named attribute argument 'EntryPoint'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "EntryPoint = null")
-                        .WithArguments("EntryPoint"),
-                    // (21,16): error CS0591: Invalid value for argument to 'DllImport' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""\0""")
-                        .WithArguments("DllImport"),
-                    // (24,16): error CS0591: Invalid value for argument to 'DllImport' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""\0b""")
-                        .WithArguments("DllImport"),
-                    // (27,16): error CS0591: Invalid value for argument to 'DllImport' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""b\0""")
-                        .WithArguments("DllImport"),
-                    // (30,16): error CS0591: Invalid value for argument to 'DllImport' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""x\0y""")
-                        .WithArguments("DllImport"),
-                    // (33,21): error CS0599: Invalid value for named attribute argument 'EntryPoint'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, @"EntryPoint = ""x\0y""")
-                        .WithArguments("EntryPoint"),
-                    // (36,16): error CS0591: Invalid value for argument to 'DllImport' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""\uD800""")
-                        .WithArguments("DllImport"),
-                    // (39,16): error CS0591: Invalid value for argument to 'DllImport' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""\uDC00""")
-                        .WithArguments("DllImport"),
-                    // (42,16): error CS0591: Invalid value for argument to 'DllImport' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""\uDC00\uD800""")
-                        .WithArguments("DllImport"),
-                    // (45,21): error CS0599: Invalid value for named attribute argument 'EntryPoint'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, @"EntryPoint = ""\uDC00\uD800""")
-                        .WithArguments("EntryPoint")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,16): error CS0591: Invalid value for argument to 'DllImport' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "null")
+                    .WithArguments("DllImport"),
+                // (9,16): error CS0591: Invalid value for argument to 'DllImport' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""""")
+                    .WithArguments("DllImport"),
+                // (12,23): error CS0599: Invalid value for named attribute argument 'EntryPoint'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "EntryPoint = null")
+                    .WithArguments("EntryPoint"),
+                // (15,23): error CS0599: Invalid value for named attribute argument 'EntryPoint'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, @"EntryPoint = """"")
+                    .WithArguments("EntryPoint"),
+                // (18,16): error CS0591: Invalid value for argument to 'DllImport' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "null")
+                    .WithArguments("DllImport"),
+                // (18,22): error CS0599: Invalid value for named attribute argument 'EntryPoint'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "EntryPoint = null")
+                    .WithArguments("EntryPoint"),
+                // (21,16): error CS0591: Invalid value for argument to 'DllImport' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""\0""")
+                    .WithArguments("DllImport"),
+                // (24,16): error CS0591: Invalid value for argument to 'DllImport' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""\0b""")
+                    .WithArguments("DllImport"),
+                // (27,16): error CS0591: Invalid value for argument to 'DllImport' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""b\0""")
+                    .WithArguments("DllImport"),
+                // (30,16): error CS0591: Invalid value for argument to 'DllImport' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""x\0y""")
+                    .WithArguments("DllImport"),
+                // (33,21): error CS0599: Invalid value for named attribute argument 'EntryPoint'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, @"EntryPoint = ""x\0y""")
+                    .WithArguments("EntryPoint"),
+                // (36,16): error CS0591: Invalid value for argument to 'DllImport' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""\uD800""")
+                    .WithArguments("DllImport"),
+                // (39,16): error CS0591: Invalid value for argument to 'DllImport' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""\uDC00""")
+                    .WithArguments("DllImport"),
+                // (42,16): error CS0591: Invalid value for argument to 'DllImport' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""\uDC00\uD800""")
+                    .WithArguments("DllImport"),
+                // (45,21): error CS0599: Invalid value for named attribute argument 'EntryPoint'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, @"EntryPoint = ""\uDC00\uD800""")
+                    .WithArguments("EntryPoint")
+            );
         }
 
         [Fact]
@@ -3016,8 +2998,9 @@ public class C
                     );
 
                     // MethodDef:
-                    MethodDefinitionHandle[] methodDefs =
-                        metadataReader.MethodDefinitions.AsEnumerable().ToArray();
+                    MethodDefinitionHandle[] methodDefs = metadataReader.MethodDefinitions
+                        .AsEnumerable()
+                        .ToArray();
                     Assert.Equal(2, methodDefs.Length); // M, ctor
                     Assert.Equal(
                         MethodImplAttributes.PreserveSig,
@@ -3475,26 +3458,24 @@ class M
     static extern int F6();
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,31): error CS0037: Cannot convert null to 'System.Runtime.InteropServices.CharSet' because it is a non-nullable value type
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("System.Runtime.InteropServices.CharSet"),
-                    // (9,31): error CS0119: 'System.Runtime.InteropServices.CharSet' is a type, which is not valid in the given context
-                    Diagnostic(ErrorCode.ERR_BadSKunknown, "CharSet")
-                        .WithArguments("System.Runtime.InteropServices.CharSet", "type"),
-                    // (12,31): error CS0029: Cannot implicitly convert type 'string' to 'System.Runtime.InteropServices.CharSet'
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""str""")
-                        .WithArguments("string", "System.Runtime.InteropServices.CharSet"),
-                    // (15,16): error CS1503: Argument 1: cannot convert from 'bool' to 'string'
-                    Diagnostic(ErrorCode.ERR_BadArgType, "true")
-                        .WithArguments("1", "bool", "string"),
-                    // (18,16): error CS0119: 'System.Runtime.InteropServices.CharSet' is a type, which is not valid in the given context
-                    Diagnostic(ErrorCode.ERR_BadSKunknown, "CharSet")
-                        .WithArguments("System.Runtime.InteropServices.CharSet", "type"),
-                    // (21,16): error CS1503: Argument 1: cannot convert from 'int' to 'string'
-                    Diagnostic(ErrorCode.ERR_BadArgType, "1").WithArguments("1", "int", "string")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,31): error CS0037: Cannot convert null to 'System.Runtime.InteropServices.CharSet' because it is a non-nullable value type
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("System.Runtime.InteropServices.CharSet"),
+                // (9,31): error CS0119: 'System.Runtime.InteropServices.CharSet' is a type, which is not valid in the given context
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "CharSet")
+                    .WithArguments("System.Runtime.InteropServices.CharSet", "type"),
+                // (12,31): error CS0029: Cannot implicitly convert type 'string' to 'System.Runtime.InteropServices.CharSet'
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""str""")
+                    .WithArguments("string", "System.Runtime.InteropServices.CharSet"),
+                // (15,16): error CS1503: Argument 1: cannot convert from 'bool' to 'string'
+                Diagnostic(ErrorCode.ERR_BadArgType, "true").WithArguments("1", "bool", "string"),
+                // (18,16): error CS0119: 'System.Runtime.InteropServices.CharSet' is a type, which is not valid in the given context
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "CharSet")
+                    .WithArguments("System.Runtime.InteropServices.CharSet", "type"),
+                // (21,16): error CS1503: Argument 1: cannot convert from 'int' to 'string'
+                Diagnostic(ErrorCode.ERR_BadArgType, "1").WithArguments("1", "int", "string")
+            );
         }
 
         [Fact]
@@ -3881,42 +3862,35 @@ class Program1
     void f7() { } 
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,17): error CS0591: Invalid value for argument to 'MethodImpl' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "1")
-                        .WithArguments("MethodImpl"),
-                    // (12,17): error CS0591: Invalid value for argument to 'MethodImpl' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "2")
-                        .WithArguments("MethodImpl"),
-                    // (15,17): error CS0591: Invalid value for argument to 'MethodImpl' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "3")
-                        .WithArguments("MethodImpl"),
-                    // (21,17): error CS0591: Invalid value for argument to 'MethodImpl' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "5")
-                        .WithArguments("MethodImpl"),
-                    // (27,17): error CS0591: Invalid value for argument to 'MethodImpl' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(MethodImplOptions)2")
-                        .WithArguments("MethodImpl"),
-                    // (27,56): error CS0643: 'MethodCodeType' duplicate named attribute argument
-                    Diagnostic(
-                            ErrorCode.ERR_DuplicateNamedAttributeArgument,
-                            "MethodCodeType = (MethodCodeType)9"
-                        )
-                        .WithArguments("MethodCodeType"),
-                    // (27,20): error CS0599: Invalid value for named attribute argument 'MethodCodeType'
-                    Diagnostic(
-                            ErrorCode.ERR_InvalidNamedArgument,
-                            "MethodCodeType = (MethodCodeType)8"
-                        )
-                        .WithArguments("MethodCodeType"),
-                    // (27,56): error CS0599: Invalid value for named attribute argument 'MethodCodeType'
-                    Diagnostic(
-                            ErrorCode.ERR_InvalidNamedArgument,
-                            "MethodCodeType = (MethodCodeType)9"
-                        )
-                        .WithArguments("MethodCodeType")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,17): error CS0591: Invalid value for argument to 'MethodImpl' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "1")
+                    .WithArguments("MethodImpl"),
+                // (12,17): error CS0591: Invalid value for argument to 'MethodImpl' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "2")
+                    .WithArguments("MethodImpl"),
+                // (15,17): error CS0591: Invalid value for argument to 'MethodImpl' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "3")
+                    .WithArguments("MethodImpl"),
+                // (21,17): error CS0591: Invalid value for argument to 'MethodImpl' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "5")
+                    .WithArguments("MethodImpl"),
+                // (27,17): error CS0591: Invalid value for argument to 'MethodImpl' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(MethodImplOptions)2")
+                    .WithArguments("MethodImpl"),
+                // (27,56): error CS0643: 'MethodCodeType' duplicate named attribute argument
+                Diagnostic(
+                    ErrorCode.ERR_DuplicateNamedAttributeArgument,
+                    "MethodCodeType = (MethodCodeType)9"
+                )
+                    .WithArguments("MethodCodeType"),
+                // (27,20): error CS0599: Invalid value for named attribute argument 'MethodCodeType'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "MethodCodeType = (MethodCodeType)8")
+                    .WithArguments("MethodCodeType"),
+                // (27,56): error CS0599: Invalid value for named attribute argument 'MethodCodeType'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "MethodCodeType = (MethodCodeType)9")
+                    .WithArguments("MethodCodeType")
+            );
         }
 
         [Fact, WorkItem(544518, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544518")]
@@ -4039,12 +4013,11 @@ using System.Runtime.InteropServices;
 [module: DefaultCharSet((CharSet)int.MaxValue)]
 ";
             // Ref.Emit doesn't implement custom attributes yet
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,25): error CS0591: Invalid value for argument to 'DefaultCharSet' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(CharSet)int.MaxValue")
-                        .WithArguments("DefaultCharSet")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,25): error CS0591: Invalid value for argument to 'DefaultCharSet' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(CharSet)int.MaxValue")
+                    .WithArguments("DefaultCharSet")
+            );
         }
 
         [Fact]
@@ -4169,56 +4142,55 @@ public class C1 { }
 public class C2 { }
 ";
             // Dev10 fails in Emit or emits invalid metadata
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (13,9): error CS0501: 'C.F2(int, string)' must declare a body because it is not marked abstract, extern, or partial
-                    //     int F2(int bufSize, string buf);
-                    Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "F2")
-                        .WithArguments("C.F2(int, string)")
-                        .WithLocation(13, 9),
-                    // (6,6): error CS0601: The DllImport attribute must be specified on a method marked 'static' and 'extern'
-                    //     [DllImport("D.DLL")]
-                    Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport")
-                        .WithLocation(6, 6),
-                    // (9,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
-                    //     [DllImport("D.DLL")]
-                    Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
-                        .WithArguments("DllImport", "method")
-                        .WithLocation(9, 6),
-                    // (12,6): error CS0601: The DllImport attribute must be specified on a method marked 'static' and 'extern'
-                    //     [DllImport("D.DLL")]
-                    Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport")
-                        .WithLocation(12, 6),
-                    // (15,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
-                    //     [DllImport("D.DLL")]
-                    Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
-                        .WithArguments("DllImport", "method")
-                        .WithLocation(15, 6),
-                    // (18,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
-                    //     [DllImport("d.dll")]
-                    Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
-                        .WithArguments("DllImport", "method")
-                        .WithLocation(18, 6),
-                    // (21,26): error CS0579: Duplicate 'DllImport' attribute
-                    //     [DllImport("D.DLL"), DllImport("GDI.DLL")]
-                    Diagnostic(ErrorCode.ERR_DuplicateAttribute, "DllImport")
-                        .WithArguments("DllImport")
-                        .WithLocation(21, 26),
-                    // (26,8): error CS7014: Attributes are not valid in this context.
-                    //        [DllImport("d.dll")]
-                    Diagnostic(ErrorCode.ERR_AttributesNotAllowed, @"[DllImport(""d.dll"")]")
-                        .WithLocation(26, 8),
-                    // (31,2): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
-                    // [DllImport("dd.dllL")]
-                    Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
-                        .WithArguments("DllImport", "method")
-                        .WithLocation(31, 2),
-                    // (34,2): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
-                    // [DllImport("dd.dll")]
-                    Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
-                        .WithArguments("DllImport", "method")
-                        .WithLocation(34, 2)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (13,9): error CS0501: 'C.F2(int, string)' must declare a body because it is not marked abstract, extern, or partial
+                //     int F2(int bufSize, string buf);
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "F2")
+                    .WithArguments("C.F2(int, string)")
+                    .WithLocation(13, 9),
+                // (6,6): error CS0601: The DllImport attribute must be specified on a method marked 'static' and 'extern'
+                //     [DllImport("D.DLL")]
+                Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport")
+                    .WithLocation(6, 6),
+                // (9,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
+                //     [DllImport("D.DLL")]
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
+                    .WithArguments("DllImport", "method")
+                    .WithLocation(9, 6),
+                // (12,6): error CS0601: The DllImport attribute must be specified on a method marked 'static' and 'extern'
+                //     [DllImport("D.DLL")]
+                Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport")
+                    .WithLocation(12, 6),
+                // (15,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
+                //     [DllImport("D.DLL")]
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
+                    .WithArguments("DllImport", "method")
+                    .WithLocation(15, 6),
+                // (18,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
+                //     [DllImport("d.dll")]
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
+                    .WithArguments("DllImport", "method")
+                    .WithLocation(18, 6),
+                // (21,26): error CS0579: Duplicate 'DllImport' attribute
+                //     [DllImport("D.DLL"), DllImport("GDI.DLL")]
+                Diagnostic(ErrorCode.ERR_DuplicateAttribute, "DllImport")
+                    .WithArguments("DllImport")
+                    .WithLocation(21, 26),
+                // (26,8): error CS7014: Attributes are not valid in this context.
+                //        [DllImport("d.dll")]
+                Diagnostic(ErrorCode.ERR_AttributesNotAllowed, @"[DllImport(""d.dll"")]")
+                    .WithLocation(26, 8),
+                // (31,2): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
+                // [DllImport("dd.dllL")]
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
+                    .WithArguments("DllImport", "method")
+                    .WithLocation(31, 2),
+                // (34,2): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
+                // [DllImport("dd.dll")]
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
+                    .WithArguments("DllImport", "method")
+                    .WithLocation(34, 2)
+            );
         }
 
         #endregion
@@ -4620,14 +4592,13 @@ public class MainClass
         return 0;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (22,29): error CS0122: 'Wrapper.IWorksheet' is inaccessible due to its protection level
-                    //         var a = new Wrapper.IWorksheet();
-                    Diagnostic(ErrorCode.ERR_BadAccess, "IWorksheet")
-                        .WithArguments("Wrapper.IWorksheet")
-                        .WithLocation(22, 29)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (22,29): error CS0122: 'Wrapper.IWorksheet' is inaccessible due to its protection level
+                //         var a = new Wrapper.IWorksheet();
+                Diagnostic(ErrorCode.ERR_BadAccess, "IWorksheet")
+                    .WithArguments("Wrapper.IWorksheet")
+                    .WithLocation(22, 29)
+            );
         }
 
         [Fact]
@@ -4716,14 +4687,13 @@ public class MainClass
         return 0;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (22,21): error CS0122: 'Wrapper.WorksheetClass.WorksheetClass()' is inaccessible due to its protection level
-                    //         var a = new Wrapper.IWorksheet();
-                    Diagnostic(ErrorCode.ERR_BadAccess, "Wrapper.IWorksheet")
-                        .WithArguments("Wrapper.WorksheetClass.WorksheetClass()")
-                        .WithLocation(22, 21)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (22,21): error CS0122: 'Wrapper.WorksheetClass.WorksheetClass()' is inaccessible due to its protection level
+                //         var a = new Wrapper.IWorksheet();
+                Diagnostic(ErrorCode.ERR_BadAccess, "Wrapper.IWorksheet")
+                    .WithArguments("Wrapper.WorksheetClass.WorksheetClass()")
+                    .WithLocation(22, 21)
+            );
         }
 
         [Fact]
@@ -4811,22 +4781,18 @@ public class MainClass
         return 0;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (10,6): warning CS0684: 'IWorksheet' interface marked with 'CoClassAttribute' not marked with 'ComImportAttribute'
-                    //     [CoClass(typeof(WorksheetClass))]
-                    Diagnostic(
-                            ErrorCode.WRN_CoClassWithoutComImport,
-                            "CoClass(typeof(WorksheetClass))"
-                        )
-                        .WithArguments("IWorksheet")
-                        .WithLocation(10, 6),
-                    // (20,17): error CS0144: Cannot create an instance of the abstract type or interface 'Wrapper.IWorksheet'
-                    //         var a = new Wrapper.IWorksheet();
-                    Diagnostic(ErrorCode.ERR_NoNewAbstract, "new Wrapper.IWorksheet()")
-                        .WithArguments("Wrapper.IWorksheet")
-                        .WithLocation(20, 17)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (10,6): warning CS0684: 'IWorksheet' interface marked with 'CoClassAttribute' not marked with 'ComImportAttribute'
+                //     [CoClass(typeof(WorksheetClass))]
+                Diagnostic(ErrorCode.WRN_CoClassWithoutComImport, "CoClass(typeof(WorksheetClass))")
+                    .WithArguments("IWorksheet")
+                    .WithLocation(10, 6),
+                // (20,17): error CS0144: Cannot create an instance of the abstract type or interface 'Wrapper.IWorksheet'
+                //         var a = new Wrapper.IWorksheet();
+                Diagnostic(ErrorCode.ERR_NoNewAbstract, "new Wrapper.IWorksheet()")
+                    .WithArguments("Wrapper.IWorksheet")
+                    .WithLocation(20, 17)
+            );
         }
 
         [Fact]
@@ -4880,22 +4846,21 @@ public class MainClass
                     // (11,6): warning CS0684: 'IWorksheet' interface marked with 'CoClassAttribute' not marked with 'ComImportAttribute'
                     //     [CoClass(typeof(WorksheetClass))]
                     Diagnostic(
-                            ErrorCode.WRN_CoClassWithoutComImport,
-                            "CoClass(typeof(WorksheetClass))"
-                        )
+                        ErrorCode.WRN_CoClassWithoutComImport,
+                        "CoClass(typeof(WorksheetClass))"
+                    )
                         .WithArguments("IWorksheet")
                 }
             );
 
             // Using assembly file reference to test PENamedTypeSymbol symbol CoClass type
-            CreateCompilation(source2, references: new[] { assemblyRef })
-                .VerifyDiagnostics(
-                    // (6,17): error CS0144: Cannot create an instance of the abstract type or interface 'Wrapper.IWorksheet'
-                    //         var a = new Wrapper.IWorksheet();
-                    Diagnostic(ErrorCode.ERR_NoNewAbstract, "new Wrapper.IWorksheet()")
-                        .WithArguments("Wrapper.IWorksheet")
-                        .WithLocation(6, 17)
-                );
+            CreateCompilation(source2, references: new[] { assemblyRef }).VerifyDiagnostics(
+                // (6,17): error CS0144: Cannot create an instance of the abstract type or interface 'Wrapper.IWorksheet'
+                //         var a = new Wrapper.IWorksheet();
+                Diagnostic(ErrorCode.ERR_NoNewAbstract, "new Wrapper.IWorksheet()")
+                    .WithArguments("Wrapper.IWorksheet")
+                    .WithLocation(6, 17)
+            );
         }
 
         [Fact]
@@ -4927,14 +4892,13 @@ public class MainClass
         return 0;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (22,17): error CS0144: Cannot create an instance of the abstract type or interface 'IWorksheet'
-                    //         var a = new IWorksheet();
-                    Diagnostic(ErrorCode.ERR_NoNewAbstract, "new IWorksheet()")
-                        .WithArguments("IWorksheet")
-                        .WithLocation(22, 17)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (22,17): error CS0144: Cannot create an instance of the abstract type or interface 'IWorksheet'
+                //         var a = new IWorksheet();
+                Diagnostic(ErrorCode.ERR_NoNewAbstract, "new IWorksheet()")
+                    .WithArguments("IWorksheet")
+                    .WithLocation(22, 17)
+            );
         }
 
         [Fact]
@@ -5023,19 +4987,18 @@ public class MainClass
         return 0;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,25): error CS0122: 'Wrapper.WorksheetClass' is inaccessible due to its protection level
-                    // [CoClass(typeof(Wrapper.WorksheetClass))]
-                    Diagnostic(ErrorCode.ERR_BadAccess, "WorksheetClass")
-                        .WithArguments("Wrapper.WorksheetClass")
-                        .WithLocation(6, 25),
-                    // (22,17): error CS0144: Cannot create an instance of the abstract type or interface 'IWorksheet'
-                    //         var a = new IWorksheet();
-                    Diagnostic(ErrorCode.ERR_NoNewAbstract, "new IWorksheet()")
-                        .WithArguments("IWorksheet")
-                        .WithLocation(22, 17)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,25): error CS0122: 'Wrapper.WorksheetClass' is inaccessible due to its protection level
+                // [CoClass(typeof(Wrapper.WorksheetClass))]
+                Diagnostic(ErrorCode.ERR_BadAccess, "WorksheetClass")
+                    .WithArguments("Wrapper.WorksheetClass")
+                    .WithLocation(6, 25),
+                // (22,17): error CS0144: Cannot create an instance of the abstract type or interface 'IWorksheet'
+                //         var a = new IWorksheet();
+                Diagnostic(ErrorCode.ERR_NoNewAbstract, "new IWorksheet()")
+                    .WithArguments("IWorksheet")
+                    .WithLocation(22, 17)
+            );
         }
 
         [Fact]
@@ -5266,14 +5229,13 @@ public class MainClass
         return 0;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (16,13): error CS0144: Cannot create an instance of the abstract type or interface 'InterfaceType'
-                    // [AAttribute(new InterfaceType())]
-                    Diagnostic(ErrorCode.ERR_NoNewAbstract, "new InterfaceType()")
-                        .WithArguments("InterfaceType")
-                        .WithLocation(16, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (16,13): error CS0144: Cannot create an instance of the abstract type or interface 'InterfaceType'
+                // [AAttribute(new InterfaceType())]
+                Diagnostic(ErrorCode.ERR_NoNewAbstract, "new InterfaceType()")
+                    .WithArguments("InterfaceType")
+                    .WithLocation(16, 13)
+            );
         }
 
         [Fact, WorkItem(544237, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544237")]
@@ -5297,14 +5259,13 @@ class A
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (14,17): error CS0030: Cannot convert type 'System.StackOverflowException' to 'I'
-                    //         var x = new I(); // error CS0030: Cannot convert type 'System.StackOverflowException' to 'I'
-                    Diagnostic(ErrorCode.ERR_NoExplicitConv, "new I()")
-                        .WithArguments("System.StackOverflowException", "I")
-                        .WithLocation(14, 17)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (14,17): error CS0030: Cannot convert type 'System.StackOverflowException' to 'I'
+                //         var x = new I(); // error CS0030: Cannot convert type 'System.StackOverflowException' to 'I'
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "new I()")
+                    .WithArguments("System.StackOverflowException", "I")
+                    .WithLocation(14, 17)
+            );
         }
 
         #endregion
@@ -5335,35 +5296,34 @@ class D {}
 [Guid(null)]    // null
 class E {}
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,7): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [Guid("69D3E2A0-BB0F-4FE3-9860-ED714C51075")]    // incorrect length (35 chars)
-                    Diagnostic(
-                            ErrorCode.ERR_InvalidAttributeArgument,
-                            @"""69D3E2A0-BB0F-4FE3-9860-ED714C51075"""
-                        )
-                        .WithArguments("Guid")
-                        .WithLocation(9, 7),
-                    // (12,7): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [Guid("69D3E2A0BB0F--4FE3-9860-ED714C510756")]    // invalid format
-                    Diagnostic(
-                            ErrorCode.ERR_InvalidAttributeArgument,
-                            @"""69D3E2A0BB0F--4FE3-9860-ED714C510756"""
-                        )
-                        .WithArguments("Guid")
-                        .WithLocation(12, 7),
-                    // (15,7): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [Guid("")]    // empty string
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""""")
-                        .WithArguments("Guid")
-                        .WithLocation(15, 7),
-                    // (18,7): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [Guid(null)]    // null
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "null")
-                        .WithArguments("Guid")
-                        .WithLocation(18, 7)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,7): error CS0591: Invalid value for argument to 'Guid' attribute
+                // [Guid("69D3E2A0-BB0F-4FE3-9860-ED714C51075")]    // incorrect length (35 chars)
+                Diagnostic(
+                    ErrorCode.ERR_InvalidAttributeArgument,
+                    @"""69D3E2A0-BB0F-4FE3-9860-ED714C51075"""
+                )
+                    .WithArguments("Guid")
+                    .WithLocation(9, 7),
+                // (12,7): error CS0591: Invalid value for argument to 'Guid' attribute
+                // [Guid("69D3E2A0BB0F--4FE3-9860-ED714C510756")]    // invalid format
+                Diagnostic(
+                    ErrorCode.ERR_InvalidAttributeArgument,
+                    @"""69D3E2A0BB0F--4FE3-9860-ED714C510756"""
+                )
+                    .WithArguments("Guid")
+                    .WithLocation(12, 7),
+                // (15,7): error CS0591: Invalid value for argument to 'Guid' attribute
+                // [Guid("")]    // empty string
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, @"""""")
+                    .WithArguments("Guid")
+                    .WithLocation(15, 7),
+                // (18,7): error CS0591: Invalid value for argument to 'Guid' attribute
+                // [Guid(null)]    // null
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "null")
+                    .WithArguments("Guid")
+                    .WithLocation(18, 7)
+            );
         }
 
         [WorkItem(545490, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545490")]
@@ -5389,41 +5349,40 @@ class C {}
 [Guid(""{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}"")]    // Four hexadecimal values enclosed in braces, where the fourth value is a subset of eight hexadecimal values that is also enclosed in braces
 class D {}
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,7): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [Guid("69D3E2A0BB0F4FE39860ED714C510756")]    // 32 digits, no hyphens
-                    Diagnostic(
-                            ErrorCode.ERR_InvalidAttributeArgument,
-                            @"""69D3E2A0BB0F4FE39860ED714C510756"""
-                        )
-                        .WithArguments("Guid")
-                        .WithLocation(7, 7),
-                    // (10,7): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [Guid("{69D3E2A0-BB0F-4FE3-9860-ED714C510756}")]    // 32 digits separated by hyphens, enclosed in braces
-                    Diagnostic(
-                            ErrorCode.ERR_InvalidAttributeArgument,
-                            @"""{69D3E2A0-BB0F-4FE3-9860-ED714C510756}"""
-                        )
-                        .WithArguments("Guid")
-                        .WithLocation(10, 7),
-                    // (13,7): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [Guid("(69D3E2A0-BB0F-4FE3-9860-ED714C510756)")]    // 32 digits separated by hyphens, enclosed in parentheses
-                    Diagnostic(
-                            ErrorCode.ERR_InvalidAttributeArgument,
-                            @"""(69D3E2A0-BB0F-4FE3-9860-ED714C510756)"""
-                        )
-                        .WithArguments("Guid")
-                        .WithLocation(13, 7),
-                    // (16,7): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [Guid("{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}")]    // Four hexadecimal values enclosed in braces, where the fourth value is a subset of eight hexadecimal values that is also enclosed in braces
-                    Diagnostic(
-                            ErrorCode.ERR_InvalidAttributeArgument,
-                            @"""{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}"""
-                        )
-                        .WithArguments("Guid")
-                        .WithLocation(16, 7)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,7): error CS0591: Invalid value for argument to 'Guid' attribute
+                // [Guid("69D3E2A0BB0F4FE39860ED714C510756")]    // 32 digits, no hyphens
+                Diagnostic(
+                    ErrorCode.ERR_InvalidAttributeArgument,
+                    @"""69D3E2A0BB0F4FE39860ED714C510756"""
+                )
+                    .WithArguments("Guid")
+                    .WithLocation(7, 7),
+                // (10,7): error CS0591: Invalid value for argument to 'Guid' attribute
+                // [Guid("{69D3E2A0-BB0F-4FE3-9860-ED714C510756}")]    // 32 digits separated by hyphens, enclosed in braces
+                Diagnostic(
+                    ErrorCode.ERR_InvalidAttributeArgument,
+                    @"""{69D3E2A0-BB0F-4FE3-9860-ED714C510756}"""
+                )
+                    .WithArguments("Guid")
+                    .WithLocation(10, 7),
+                // (13,7): error CS0591: Invalid value for argument to 'Guid' attribute
+                // [Guid("(69D3E2A0-BB0F-4FE3-9860-ED714C510756)")]    // 32 digits separated by hyphens, enclosed in parentheses
+                Diagnostic(
+                    ErrorCode.ERR_InvalidAttributeArgument,
+                    @"""(69D3E2A0-BB0F-4FE3-9860-ED714C510756)"""
+                )
+                    .WithArguments("Guid")
+                    .WithLocation(13, 7),
+                // (16,7): error CS0591: Invalid value for argument to 'Guid' attribute
+                // [Guid("{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}")]    // Four hexadecimal values enclosed in braces, where the fourth value is a subset of eight hexadecimal values that is also enclosed in braces
+                Diagnostic(
+                    ErrorCode.ERR_InvalidAttributeArgument,
+                    @"""{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}"""
+                )
+                    .WithArguments("Guid")
+                    .WithLocation(16, 7)
+            );
         }
 
         [Fact]
@@ -5436,17 +5395,16 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid(""69D3E2A0BB0F--4FE3-9860-ED714C510756"")]    // invalid format
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,17): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [assembly: Guid("69D3E2A0BB0F--4FE3-9860-ED714C510756")]    // invalid format
-                    Diagnostic(
-                            ErrorCode.ERR_InvalidAttributeArgument,
-                            @"""69D3E2A0BB0F--4FE3-9860-ED714C510756"""
-                        )
-                        .WithArguments("Guid")
-                        .WithLocation(5, 17)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (5,17): error CS0591: Invalid value for argument to 'Guid' attribute
+                // [assembly: Guid("69D3E2A0BB0F--4FE3-9860-ED714C510756")]    // invalid format
+                Diagnostic(
+                    ErrorCode.ERR_InvalidAttributeArgument,
+                    @"""69D3E2A0BB0F--4FE3-9860-ED714C510756"""
+                )
+                    .WithArguments("Guid")
+                    .WithLocation(5, 17)
+            );
         }
 
         #endregion
@@ -6120,15 +6078,14 @@ public class MyAttribute : Attribute
 	public const AttributeTargets badAttributeTargets = Missing;
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,54): error CS0103: The name 'Missing' does not exist in the current context
-                    // 	public const AttributeTargets badAttributeTargets = Missing;
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing").WithArguments("Missing"),
-                    // (4,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [AttributeUsage(badAttributeTargets)]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "badAttributeTargets")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,54): error CS0103: The name 'Missing' does not exist in the current context
+                // 	public const AttributeTargets badAttributeTargets = Missing;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing").WithArguments("Missing"),
+                // (4,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [AttributeUsage(badAttributeTargets)]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "badAttributeTargets")
+            );
         }
 
         #endregion
@@ -6249,10 +6206,9 @@ public class Test
 ";
             #endregion
 
-            CompileAndVerify(source, expectedOutput: @"System.Reflection.Missing")
-                .VerifyIL(
-                    "Test.Main",
-                    @"{
+            CompileAndVerify(source, expectedOutput: @"System.Reflection.Missing").VerifyIL(
+                "Test.Main",
+                @"{
   // Code size       16 (0x10)
   .maxstack  2
   IL_0000:  newobj     ""Test..ctor()""
@@ -6260,7 +6216,7 @@ public class Test
   IL_000a:  call       ""void Test.Goo2(object)""
   IL_000f:  ret
 }"
-                );
+            );
         }
 
         #endregion
@@ -6321,37 +6277,32 @@ public class InvalidClass5 { }
 public interface InvalidTarget {}
 ";
 
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (26,17): error CS0591: Invalid value for argument to 'ClassInterface' attribute
-                    // [ClassInterface((ClassInterfaceType)(-1))]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(ClassInterfaceType)(-1)")
-                        .WithArguments("ClassInterface"),
-                    // (29,17): error CS0591: Invalid value for argument to 'ClassInterface' attribute
-                    // [ClassInterface((ClassInterfaceType)3)]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(ClassInterfaceType)3")
-                        .WithArguments("ClassInterface"),
-                    // (32,17): error CS0591: Invalid value for argument to 'ClassInterface' attribute
-                    // [ClassInterface((short)(-1))]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(short)(-1)")
-                        .WithArguments("ClassInterface"),
-                    // (35,17): error CS0591: Invalid value for argument to 'ClassInterface' attribute
-                    // [ClassInterface((short)3)]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(short)3")
-                        .WithArguments("ClassInterface"),
-                    // (38,17): error CS1503: Argument 1: cannot convert from 'int' to 'System.Runtime.InteropServices.ClassInterfaceType'
-                    // [ClassInterface(System.Int32.MaxValue)]
-                    Diagnostic(ErrorCode.ERR_BadArgType, "System.Int32.MaxValue")
-                        .WithArguments(
-                            "1",
-                            "int",
-                            "System.Runtime.InteropServices.ClassInterfaceType"
-                        ),
-                    // (41,2): error CS0592: Attribute 'ClassInterface' is not valid on this declaration type. It is only valid on 'assembly, class' declarations.
-                    // [ClassInterface(ClassInterfaceType.None)]
-                    Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ClassInterface")
-                        .WithArguments("ClassInterface", "assembly, class")
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (26,17): error CS0591: Invalid value for argument to 'ClassInterface' attribute
+                // [ClassInterface((ClassInterfaceType)(-1))]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(ClassInterfaceType)(-1)")
+                    .WithArguments("ClassInterface"),
+                // (29,17): error CS0591: Invalid value for argument to 'ClassInterface' attribute
+                // [ClassInterface((ClassInterfaceType)3)]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(ClassInterfaceType)3")
+                    .WithArguments("ClassInterface"),
+                // (32,17): error CS0591: Invalid value for argument to 'ClassInterface' attribute
+                // [ClassInterface((short)(-1))]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(short)(-1)")
+                    .WithArguments("ClassInterface"),
+                // (35,17): error CS0591: Invalid value for argument to 'ClassInterface' attribute
+                // [ClassInterface((short)3)]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(short)3")
+                    .WithArguments("ClassInterface"),
+                // (38,17): error CS1503: Argument 1: cannot convert from 'int' to 'System.Runtime.InteropServices.ClassInterfaceType'
+                // [ClassInterface(System.Int32.MaxValue)]
+                Diagnostic(ErrorCode.ERR_BadArgType, "System.Int32.MaxValue")
+                    .WithArguments("1", "int", "System.Runtime.InteropServices.ClassInterfaceType"),
+                // (41,2): error CS0592: Attribute 'ClassInterface' is not valid on this declaration type. It is only valid on 'assembly, class' declarations.
+                // [ClassInterface(ClassInterfaceType.None)]
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ClassInterface")
+                    .WithArguments("ClassInterface", "assembly, class")
+            );
         }
 
         #endregion
@@ -6413,37 +6364,32 @@ public interface InvalidInterface5 {}
 [InterfaceType(ComInterfaceType.InterfaceIsDual)]
 public class InvalidTarget {}
 ";
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (34,16): error CS0591: Invalid value for argument to 'InterfaceType' attribute
-                    // [InterfaceType((ComInterfaceType)(-1))]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(ComInterfaceType)(-1)")
-                        .WithArguments("InterfaceType"),
-                    // (37,16): error CS0591: Invalid value for argument to 'InterfaceType' attribute
-                    // [InterfaceType((ComInterfaceType)4)]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(ComInterfaceType)4")
-                        .WithArguments("InterfaceType"),
-                    // (40,16): error CS0591: Invalid value for argument to 'InterfaceType' attribute
-                    // [InterfaceType((short)(-1))]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(short)(-1)")
-                        .WithArguments("InterfaceType"),
-                    // (43,16): error CS0591: Invalid value for argument to 'InterfaceType' attribute
-                    // [InterfaceType((short)4)]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(short)4")
-                        .WithArguments("InterfaceType"),
-                    // (46,16): error CS1503: Argument 1: cannot convert from 'int' to 'System.Runtime.InteropServices.ComInterfaceType'
-                    // [InterfaceType(System.Int32.MaxValue)]
-                    Diagnostic(ErrorCode.ERR_BadArgType, "System.Int32.MaxValue")
-                        .WithArguments(
-                            "1",
-                            "int",
-                            "System.Runtime.InteropServices.ComInterfaceType"
-                        ),
-                    // (49,2): error CS0592: Attribute 'InterfaceType' is not valid on this declaration type. It is only valid on 'interface' declarations.
-                    // [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-                    Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "InterfaceType")
-                        .WithArguments("InterfaceType", "interface")
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (34,16): error CS0591: Invalid value for argument to 'InterfaceType' attribute
+                // [InterfaceType((ComInterfaceType)(-1))]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(ComInterfaceType)(-1)")
+                    .WithArguments("InterfaceType"),
+                // (37,16): error CS0591: Invalid value for argument to 'InterfaceType' attribute
+                // [InterfaceType((ComInterfaceType)4)]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(ComInterfaceType)4")
+                    .WithArguments("InterfaceType"),
+                // (40,16): error CS0591: Invalid value for argument to 'InterfaceType' attribute
+                // [InterfaceType((short)(-1))]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(short)(-1)")
+                    .WithArguments("InterfaceType"),
+                // (43,16): error CS0591: Invalid value for argument to 'InterfaceType' attribute
+                // [InterfaceType((short)4)]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(short)4")
+                    .WithArguments("InterfaceType"),
+                // (46,16): error CS1503: Argument 1: cannot convert from 'int' to 'System.Runtime.InteropServices.ComInterfaceType'
+                // [InterfaceType(System.Int32.MaxValue)]
+                Diagnostic(ErrorCode.ERR_BadArgType, "System.Int32.MaxValue")
+                    .WithArguments("1", "int", "System.Runtime.InteropServices.ComInterfaceType"),
+                // (49,2): error CS0592: Attribute 'InterfaceType' is not valid on this declaration type. It is only valid on 'interface' declarations.
+                // [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "InterfaceType")
+                    .WithArguments("InterfaceType", "interface")
+            );
         }
 
         #endregion
@@ -6487,17 +6433,16 @@ using System.Runtime.InteropServices;
 
 [assembly: TypeLibVersionAttribute(-1, int.MinValue)]
 ";
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (4,36): error CS0591: Invalid value for argument to 'TypeLibVersionAttribute' attribute
-                    // [assembly: TypeLibVersionAttribute(-1, int.MinValue)]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
-                        .WithArguments("TypeLibVersionAttribute"),
-                    // (4,40): error CS0591: Invalid value for argument to 'TypeLibVersionAttribute' attribute
-                    // [assembly: TypeLibVersionAttribute(-1, int.MinValue)]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "int.MinValue")
-                        .WithArguments("TypeLibVersionAttribute")
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (4,36): error CS0591: Invalid value for argument to 'TypeLibVersionAttribute' attribute
+                // [assembly: TypeLibVersionAttribute(-1, int.MinValue)]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
+                    .WithArguments("TypeLibVersionAttribute"),
+                // (4,40): error CS0591: Invalid value for argument to 'TypeLibVersionAttribute' attribute
+                // [assembly: TypeLibVersionAttribute(-1, int.MinValue)]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "int.MinValue")
+                    .WithArguments("TypeLibVersionAttribute")
+            );
         }
 
         [Fact]
@@ -6509,13 +6454,12 @@ using System.Runtime.InteropServices;
 
 [assembly: TypeLibVersionAttribute(""str"", 0)]
 ";
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (4,36): error CS1503: Argument 1: cannot convert from 'string' to 'int'
-                    // [assembly: TypeLibVersionAttribute("str", 0)]
-                    Diagnostic(ErrorCode.ERR_BadArgType, @"""str""")
-                        .WithArguments("1", "string", "int")
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (4,36): error CS1503: Argument 1: cannot convert from 'string' to 'int'
+                // [assembly: TypeLibVersionAttribute("str", 0)]
+                Diagnostic(ErrorCode.ERR_BadArgType, @"""str""")
+                    .WithArguments("1", "string", "int")
+            );
         }
 
         #endregion
@@ -6543,25 +6487,24 @@ using System.Runtime.InteropServices;
 
 [assembly: ComCompatibleVersionAttribute(-1, -1, -1, -1)]
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,42): error CS0591: Invalid value for argument to 'ComCompatibleVersionAttribute' attribute
-                    // [assembly: ComCompatibleVersionAttribute(-1, -1, -1, -1)]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
-                        .WithArguments("ComCompatibleVersionAttribute"),
-                    // (4,46): error CS0591: Invalid value for argument to 'ComCompatibleVersionAttribute' attribute
-                    // [assembly: ComCompatibleVersionAttribute(-1, -1, -1, -1)]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
-                        .WithArguments("ComCompatibleVersionAttribute"),
-                    // (4,50): error CS0591: Invalid value for argument to 'ComCompatibleVersionAttribute' attribute
-                    // [assembly: ComCompatibleVersionAttribute(-1, -1, -1, -1)]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
-                        .WithArguments("ComCompatibleVersionAttribute"),
-                    // (4,54): error CS0591: Invalid value for argument to 'ComCompatibleVersionAttribute' attribute
-                    // [assembly: ComCompatibleVersionAttribute(-1, -1, -1, -1)]
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
-                        .WithArguments("ComCompatibleVersionAttribute")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,42): error CS0591: Invalid value for argument to 'ComCompatibleVersionAttribute' attribute
+                // [assembly: ComCompatibleVersionAttribute(-1, -1, -1, -1)]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
+                    .WithArguments("ComCompatibleVersionAttribute"),
+                // (4,46): error CS0591: Invalid value for argument to 'ComCompatibleVersionAttribute' attribute
+                // [assembly: ComCompatibleVersionAttribute(-1, -1, -1, -1)]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
+                    .WithArguments("ComCompatibleVersionAttribute"),
+                // (4,50): error CS0591: Invalid value for argument to 'ComCompatibleVersionAttribute' attribute
+                // [assembly: ComCompatibleVersionAttribute(-1, -1, -1, -1)]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
+                    .WithArguments("ComCompatibleVersionAttribute"),
+                // (4,54): error CS0591: Invalid value for argument to 'ComCompatibleVersionAttribute' attribute
+                // [assembly: ComCompatibleVersionAttribute(-1, -1, -1, -1)]
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
+                    .WithArguments("ComCompatibleVersionAttribute")
+            );
         }
 
         [Fact]
@@ -6573,20 +6516,19 @@ using System.Runtime.InteropServices;
 
 [assembly: ComCompatibleVersionAttribute(""str"", 0)]
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,12): error CS7036: There is no argument given that corresponds to the required formal parameter 'build' of 'System.Runtime.InteropServices.ComCompatibleVersionAttribute.ComCompatibleVersionAttribute(int, int, int, int)'
-                    // [assembly: ComCompatibleVersionAttribute("str", 0)]
-                    Diagnostic(
-                            ErrorCode.ERR_NoCorrespondingArgument,
-                            @"ComCompatibleVersionAttribute(""str"", 0)"
-                        )
-                        .WithArguments(
-                            "build",
-                            "System.Runtime.InteropServices.ComCompatibleVersionAttribute.ComCompatibleVersionAttribute(int, int, int, int)"
-                        )
-                        .WithLocation(4, 12)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,12): error CS7036: There is no argument given that corresponds to the required formal parameter 'build' of 'System.Runtime.InteropServices.ComCompatibleVersionAttribute.ComCompatibleVersionAttribute(int, int, int, int)'
+                // [assembly: ComCompatibleVersionAttribute("str", 0)]
+                Diagnostic(
+                    ErrorCode.ERR_NoCorrespondingArgument,
+                    @"ComCompatibleVersionAttribute(""str"", 0)"
+                )
+                    .WithArguments(
+                        "build",
+                        "System.Runtime.InteropServices.ComCompatibleVersionAttribute.ComCompatibleVersionAttribute(int, int, int, int)"
+                    )
+                    .WithLocation(4, 12)
+            );
         }
 
         #endregion
@@ -6699,8 +6641,8 @@ class A
             {
                 NamespaceSymbol securityNS = Get_System_Security_NamespaceSymbol(module);
                 NamedTypeSymbol dynamicSecurityMethodAttrType = securityNS.GetTypeMembers(
-                        "DynamicSecurityMethodAttribute"
-                    )
+                    "DynamicSecurityMethodAttribute"
+                )
                     .Single(type => type.DeclaringSyntaxReferences.Any());
                 NamedTypeSymbol typeA = module.GlobalNamespace.GetTypeMember("A");
                 MethodSymbol method = typeA.GetMember<MethodSymbol>("SecurityMethod");
@@ -6895,64 +6837,63 @@ class SelfReferenceInBase : IGoo<SelfReferenceInBase> {}
 class SelfReferenceInBase1 : IGoo<SelfReferenceInBase> {}
 
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (78,7): error CS0101: The namespace '<global namespace>' already contains a definition for 'TypeClashWithNS'
-                    // class TypeClashWithNS : Attribute
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "TypeClashWithNS")
-                        .WithArguments("TypeClashWithNS", "<global namespace>")
-                        .WithLocation(78, 7),
-                    // (53,29): warning CS0612: 'AnotherAttribute' is obsolete
-                    // [AttrWithType(typeof(G<int, AnotherAttribute>))]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "AnotherAttribute")
-                        .WithArguments("AnotherAttribute")
-                        .WithLocation(53, 29),
-                    // (53,22): warning CS0612: 'G<int, AnotherAttribute>' is obsolete
-                    // [AttrWithType(typeof(G<int, AnotherAttribute>))]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "G<int, AnotherAttribute>")
-                        .WithArguments("G<int, AnotherAttribute>")
-                        .WithLocation(53, 22),
-                    // (7,5): error CS0619: 'Class1' is obsolete: 'Do not use this type'
-                    //     Class1 Prop1 { get; set; }
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Class1")
-                        .WithArguments("Class1", "Do not use this type")
-                        .WithLocation(7, 5),
-                    // (87,35): warning CS0612: 'SelfReferenceInBase' is obsolete
-                    // class SelfReferenceInBase1 : IGoo<SelfReferenceInBase> {}
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "SelfReferenceInBase")
-                        .WithArguments("SelfReferenceInBase")
-                        .WithLocation(87, 35),
-                    // (6,5): error CS0619: 'Class1' is obsolete: 'Do not use this type'
-                    //     Class1 field1;
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Class1")
-                        .WithArguments("Class1", "Do not use this type")
-                        .WithLocation(6, 5),
-                    // (37,2): warning CS0618: 'A1' is obsolete: 'Do not use A1'
-                    // [A1]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "A1")
-                        .WithArguments("A1", "Do not use A1")
-                        .WithLocation(37, 2),
-                    // (8,18): error CS0619: 'Class1' is obsolete: 'Do not use this type'
-                    //     void Method1(Class1 c) {}
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Class1")
-                        .WithArguments("Class1", "Do not use this type")
-                        .WithLocation(8, 18),
-                    // (12,9): error CS0619: 'Class1' is obsolete: 'Do not use this type'
-                    //         Class1 c = null;
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Class1")
-                        .WithArguments("Class1", "Do not use this type")
-                        .WithLocation(12, 9),
-                    // (16,23): error CS0619: 'Class1' is obsolete: 'Do not use this type'
-                    //         t.Method1(new Class1());
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Class1")
-                        .WithArguments("Class1", "Do not use this type")
-                        .WithLocation(16, 23),
-                    // (18,9): warning CS0612: 'Mydeleg' is obsolete
-                    //         Mydeleg x = (i) => i;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Mydeleg")
-                        .WithArguments("Mydeleg")
-                        .WithLocation(18, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (78,7): error CS0101: The namespace '<global namespace>' already contains a definition for 'TypeClashWithNS'
+                // class TypeClashWithNS : Attribute
+                Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "TypeClashWithNS")
+                    .WithArguments("TypeClashWithNS", "<global namespace>")
+                    .WithLocation(78, 7),
+                // (53,29): warning CS0612: 'AnotherAttribute' is obsolete
+                // [AttrWithType(typeof(G<int, AnotherAttribute>))]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "AnotherAttribute")
+                    .WithArguments("AnotherAttribute")
+                    .WithLocation(53, 29),
+                // (53,22): warning CS0612: 'G<int, AnotherAttribute>' is obsolete
+                // [AttrWithType(typeof(G<int, AnotherAttribute>))]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "G<int, AnotherAttribute>")
+                    .WithArguments("G<int, AnotherAttribute>")
+                    .WithLocation(53, 22),
+                // (7,5): error CS0619: 'Class1' is obsolete: 'Do not use this type'
+                //     Class1 Prop1 { get; set; }
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Class1")
+                    .WithArguments("Class1", "Do not use this type")
+                    .WithLocation(7, 5),
+                // (87,35): warning CS0612: 'SelfReferenceInBase' is obsolete
+                // class SelfReferenceInBase1 : IGoo<SelfReferenceInBase> {}
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "SelfReferenceInBase")
+                    .WithArguments("SelfReferenceInBase")
+                    .WithLocation(87, 35),
+                // (6,5): error CS0619: 'Class1' is obsolete: 'Do not use this type'
+                //     Class1 field1;
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Class1")
+                    .WithArguments("Class1", "Do not use this type")
+                    .WithLocation(6, 5),
+                // (37,2): warning CS0618: 'A1' is obsolete: 'Do not use A1'
+                // [A1]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "A1")
+                    .WithArguments("A1", "Do not use A1")
+                    .WithLocation(37, 2),
+                // (8,18): error CS0619: 'Class1' is obsolete: 'Do not use this type'
+                //     void Method1(Class1 c) {}
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Class1")
+                    .WithArguments("Class1", "Do not use this type")
+                    .WithLocation(8, 18),
+                // (12,9): error CS0619: 'Class1' is obsolete: 'Do not use this type'
+                //         Class1 c = null;
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Class1")
+                    .WithArguments("Class1", "Do not use this type")
+                    .WithLocation(12, 9),
+                // (16,23): error CS0619: 'Class1' is obsolete: 'Do not use this type'
+                //         t.Method1(new Class1());
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Class1")
+                    .WithArguments("Class1", "Do not use this type")
+                    .WithLocation(16, 23),
+                // (18,9): warning CS0612: 'Mydeleg' is obsolete
+                //         Mydeleg x = (i) => i;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Mydeleg")
+                    .WithArguments("Mydeleg")
+                    .WithLocation(18, 9)
+            );
         }
 
         [Fact]
@@ -7281,41 +7222,40 @@ public class Test
     static public Test operator &(Test x, Test x2) { return new Test(); }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (27,13): warning CS0612: 'Test.implicit operator Test(int)' is obsolete
-                    //         t = 10;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "10")
-                        .WithArguments("Test.implicit operator Test(int)"),
-                    // (28,13): warning CS0612: 'Test.explicit operator Test(string)' is obsolete
-                    //         t = (Test)"10";
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, @"(Test)""10""")
-                        .WithArguments("Test.explicit operator Test(string)"),
-                    // (13,19): warning CS0612: 'Test.operator -(Test)' is obsolete
-                    //         Test c1 = -c;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "-c")
-                        .WithArguments("Test.operator -(Test)"),
-                    // (14,19): warning CS0612: 'Test.operator ++(Test)' is obsolete
-                    //         Test c2 = c++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c++")
-                        .WithArguments("Test.operator ++(Test)"),
-                    // (15,19): warning CS0612: 'Test.operator true(Test)' is obsolete
-                    //         bool b1 = c? true: false;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c")
-                        .WithArguments("Test.operator true(Test)"),
-                    // (16,13): warning CS0612: 'Test.operator &(Test, Test)' is obsolete
-                    //         if (c && c1)
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c && c1")
-                        .WithArguments("Test.operator &(Test, Test)"),
-                    // (16,13): warning CS0612: 'Test.operator true(Test)' is obsolete
-                    //         if (c && c1)
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c && c1")
-                        .WithArguments("Test.operator true(Test)"),
-                    // (18,11): warning CS0612: 'Test.operator +(Test, Test)' is obsolete
-                    //           c1 += c;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c1 += c")
-                        .WithArguments("Test.operator +(Test, Test)")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (27,13): warning CS0612: 'Test.implicit operator Test(int)' is obsolete
+                //         t = 10;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "10")
+                    .WithArguments("Test.implicit operator Test(int)"),
+                // (28,13): warning CS0612: 'Test.explicit operator Test(string)' is obsolete
+                //         t = (Test)"10";
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, @"(Test)""10""")
+                    .WithArguments("Test.explicit operator Test(string)"),
+                // (13,19): warning CS0612: 'Test.operator -(Test)' is obsolete
+                //         Test c1 = -c;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "-c")
+                    .WithArguments("Test.operator -(Test)"),
+                // (14,19): warning CS0612: 'Test.operator ++(Test)' is obsolete
+                //         Test c2 = c++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c++")
+                    .WithArguments("Test.operator ++(Test)"),
+                // (15,19): warning CS0612: 'Test.operator true(Test)' is obsolete
+                //         bool b1 = c? true: false;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c")
+                    .WithArguments("Test.operator true(Test)"),
+                // (16,13): warning CS0612: 'Test.operator &(Test, Test)' is obsolete
+                //         if (c && c1)
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c && c1")
+                    .WithArguments("Test.operator &(Test, Test)"),
+                // (16,13): warning CS0612: 'Test.operator true(Test)' is obsolete
+                //         if (c && c1)
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c && c1")
+                    .WithArguments("Test.operator true(Test)"),
+                // (18,11): warning CS0612: 'Test.operator +(Test, Test)' is obsolete
+                //           c1 += c;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c1 += c")
+                    .WithArguments("Test.operator +(Test, Test)")
+            );
         }
 
         [Fact, WorkItem(546062, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546062")]
@@ -7384,64 +7324,63 @@ public class Test
     }
 }
 ";
-            CreateCompilation(source, new[] { peReference })
-                .VerifyDiagnostics(
-                    // (5,29): warning CS0618: 'TestClass2' is obsolete: 'TestClass2 is obsolete'
-                    //     public static void goo2(TestClass2 c) {}
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "TestClass2")
-                        .WithArguments("TestClass2", "TestClass2 is obsolete")
-                        .WithLocation(5, 29),
-                    // (6,29): error CS0619: 'TestClass3' is obsolete: 'Do not use TestClass3'
-                    //     public static void goo3(TestClass3 c) {}
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "TestClass3")
-                        .WithArguments("TestClass3", "Do not use TestClass3")
-                        .WithLocation(6, 29),
-                    // (7,29): warning CS0618: 'TestClass4' is obsolete: 'TestClass4 is obsolete'
-                    //     public static void goo4(TestClass4 c) {}
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "TestClass4")
-                        .WithArguments("TestClass4", "TestClass4 is obsolete")
-                        .WithLocation(7, 29),
-                    // (4,29): warning CS0612: 'TestClass1' is obsolete
-                    //     public static void goo1(TestClass1 c) {}
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "TestClass1")
-                        .WithArguments("TestClass1")
-                        .WithLocation(4, 29),
-                    // (12,9): warning CS0618: 'TestClass.TestMethod()' is obsolete: 'Do not use TestMethod'
-                    //         c.TestMethod();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c.TestMethod()")
-                        .WithArguments("TestClass.TestMethod()", "Do not use TestMethod")
-                        .WithLocation(12, 9),
-                    // (13,17): warning CS0618: 'TestClass.Prop1' is obsolete: 'Do not use Prop1'
-                    //         var i = c.Prop1;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c.Prop1")
-                        .WithArguments("TestClass.Prop1", "Do not use Prop1")
-                        .WithLocation(13, 17),
-                    // (14,13): error CS0619: 'TestClass.field1' is obsolete: 'Do not use field1'
-                    //         c = c.field1;
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "c.field1")
-                        .WithArguments("TestClass.field1", "Do not use field1")
-                        .WithLocation(14, 13),
-                    // (15,9): error CS0619: 'TestClass.event1' is obsolete: 'Do not use event'
-                    //         c.event1();
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "c.event1")
-                        .WithArguments("TestClass.event1", "Do not use event")
-                        .WithLocation(15, 9),
-                    // (16,9): error CS0619: 'TestClass.event1' is obsolete: 'Do not use event'
-                    //         c.event1 += () => {};
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "c.event1")
-                        .WithArguments("TestClass.event1", "Do not use event")
-                        .WithLocation(16, 9),
-                    // (18,13): warning CS0618: 'TestClass.Prop2.get' is obsolete: 'Do not use Prop2.Get'
-                    //         i = c.Prop2;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c.Prop2")
-                        .WithArguments("TestClass.Prop2.get", "Do not use Prop2.Get")
-                        .WithLocation(18, 13),
-                    // (19,9): error CS0619: 'TestClass.Prop3.set' is obsolete: 'Do not use Prop3.Get'
-                    //         c.Prop3 = 42;
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "c.Prop3")
-                        .WithArguments("TestClass.Prop3.set", "Do not use Prop3.Get")
-                        .WithLocation(19, 9)
-                );
+            CreateCompilation(source, new[] { peReference }).VerifyDiagnostics(
+                // (5,29): warning CS0618: 'TestClass2' is obsolete: 'TestClass2 is obsolete'
+                //     public static void goo2(TestClass2 c) {}
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "TestClass2")
+                    .WithArguments("TestClass2", "TestClass2 is obsolete")
+                    .WithLocation(5, 29),
+                // (6,29): error CS0619: 'TestClass3' is obsolete: 'Do not use TestClass3'
+                //     public static void goo3(TestClass3 c) {}
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "TestClass3")
+                    .WithArguments("TestClass3", "Do not use TestClass3")
+                    .WithLocation(6, 29),
+                // (7,29): warning CS0618: 'TestClass4' is obsolete: 'TestClass4 is obsolete'
+                //     public static void goo4(TestClass4 c) {}
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "TestClass4")
+                    .WithArguments("TestClass4", "TestClass4 is obsolete")
+                    .WithLocation(7, 29),
+                // (4,29): warning CS0612: 'TestClass1' is obsolete
+                //     public static void goo1(TestClass1 c) {}
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "TestClass1")
+                    .WithArguments("TestClass1")
+                    .WithLocation(4, 29),
+                // (12,9): warning CS0618: 'TestClass.TestMethod()' is obsolete: 'Do not use TestMethod'
+                //         c.TestMethod();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c.TestMethod()")
+                    .WithArguments("TestClass.TestMethod()", "Do not use TestMethod")
+                    .WithLocation(12, 9),
+                // (13,17): warning CS0618: 'TestClass.Prop1' is obsolete: 'Do not use Prop1'
+                //         var i = c.Prop1;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c.Prop1")
+                    .WithArguments("TestClass.Prop1", "Do not use Prop1")
+                    .WithLocation(13, 17),
+                // (14,13): error CS0619: 'TestClass.field1' is obsolete: 'Do not use field1'
+                //         c = c.field1;
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "c.field1")
+                    .WithArguments("TestClass.field1", "Do not use field1")
+                    .WithLocation(14, 13),
+                // (15,9): error CS0619: 'TestClass.event1' is obsolete: 'Do not use event'
+                //         c.event1();
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "c.event1")
+                    .WithArguments("TestClass.event1", "Do not use event")
+                    .WithLocation(15, 9),
+                // (16,9): error CS0619: 'TestClass.event1' is obsolete: 'Do not use event'
+                //         c.event1 += () => {};
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "c.event1")
+                    .WithArguments("TestClass.event1", "Do not use event")
+                    .WithLocation(16, 9),
+                // (18,13): warning CS0618: 'TestClass.Prop2.get' is obsolete: 'Do not use Prop2.Get'
+                //         i = c.Prop2;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c.Prop2")
+                    .WithArguments("TestClass.Prop2.get", "Do not use Prop2.Get")
+                    .WithLocation(18, 13),
+                // (19,9): error CS0619: 'TestClass.Prop3.set' is obsolete: 'Do not use Prop3.Get'
+                //         c.Prop3 = 42;
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "c.Prop3")
+                    .WithArguments("TestClass.Prop3.set", "Do not use Prop3.Get")
+                    .WithLocation(19, 9)
+            );
         }
 
         [Fact]
@@ -7556,49 +7495,48 @@ class F6 : F5
     public override int Goo { [Obsolete] get; set;}
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (10,26): warning CS0809: Obsolete member 'C2.goo()' overrides non-obsolete member 'C1.goo()'
-                    //     public override void goo() {}
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "goo")
-                        .WithArguments("C2.goo()", "C1.goo()")
-                        .WithLocation(10, 26),
-                    // (90,30): warning CS0672: Member 'F2.Goo.get' overrides obsolete member 'F1.Goo.get'. Add the Obsolete attribute to 'F2.Goo.get'.
-                    //     public override int Goo {get; set;}
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "get")
-                        .WithArguments("F2.Goo.get", "F1.Goo.get")
-                        .WithLocation(90, 30),
-                    // (77,42): warning CS0809: Obsolete member 'E5.Goo.get' overrides non-obsolete member 'E1.Goo.get'
-                    //     public override int Goo { [Obsolete] get; set;}
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get")
-                        .WithArguments("E5.Goo.get", "E1.Goo.get")
-                        .WithLocation(77, 42),
-                    // (51,26): warning CS0672: Member 'D5.goo()' overrides obsolete member 'D1.goo()'. Add the Obsolete attribute to 'D5.goo()'.
-                    //     public override void goo() {}
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "goo")
-                        .WithArguments("D5.goo()", "D1.goo()")
-                        .WithLocation(51, 26),
-                    // (38,26): warning CS0672: Member 'D2.goo()' overrides obsolete member 'D1.goo()'. Add the Obsolete attribute to 'D2.goo()'.
-                    //     public override void goo() {}
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "goo")
-                        .WithArguments("D2.goo()", "D1.goo()")
-                        .WithLocation(38, 26),
-                    // (24,26): warning CS0809: Obsolete member 'C5.goo()' overrides non-obsolete member 'C1.goo()'
-                    //     public override void goo() {}
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "goo")
-                        .WithArguments("C5.goo()", "C1.goo()")
-                        .WithLocation(24, 26),
-                    // (102,30): warning CS0672: Member 'F5.Goo.get' overrides obsolete member 'F1.Goo.get'. Add the Obsolete attribute to 'F5.Goo.get'.
-                    //     public override int Goo {get; set;}
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "get")
-                        .WithArguments("F5.Goo.get", "F1.Goo.get")
-                        .WithLocation(102, 30),
-                    // (65,42): warning CS0809: Obsolete member 'E2.Goo.get' overrides non-obsolete member 'E1.Goo.get'
-                    //     public override int Goo { [Obsolete] get; set;}
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get")
-                        .WithArguments("E2.Goo.get", "E1.Goo.get")
-                        .WithLocation(65, 42)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (10,26): warning CS0809: Obsolete member 'C2.goo()' overrides non-obsolete member 'C1.goo()'
+                //     public override void goo() {}
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "goo")
+                    .WithArguments("C2.goo()", "C1.goo()")
+                    .WithLocation(10, 26),
+                // (90,30): warning CS0672: Member 'F2.Goo.get' overrides obsolete member 'F1.Goo.get'. Add the Obsolete attribute to 'F2.Goo.get'.
+                //     public override int Goo {get; set;}
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "get")
+                    .WithArguments("F2.Goo.get", "F1.Goo.get")
+                    .WithLocation(90, 30),
+                // (77,42): warning CS0809: Obsolete member 'E5.Goo.get' overrides non-obsolete member 'E1.Goo.get'
+                //     public override int Goo { [Obsolete] get; set;}
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get")
+                    .WithArguments("E5.Goo.get", "E1.Goo.get")
+                    .WithLocation(77, 42),
+                // (51,26): warning CS0672: Member 'D5.goo()' overrides obsolete member 'D1.goo()'. Add the Obsolete attribute to 'D5.goo()'.
+                //     public override void goo() {}
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "goo")
+                    .WithArguments("D5.goo()", "D1.goo()")
+                    .WithLocation(51, 26),
+                // (38,26): warning CS0672: Member 'D2.goo()' overrides obsolete member 'D1.goo()'. Add the Obsolete attribute to 'D2.goo()'.
+                //     public override void goo() {}
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "goo")
+                    .WithArguments("D2.goo()", "D1.goo()")
+                    .WithLocation(38, 26),
+                // (24,26): warning CS0809: Obsolete member 'C5.goo()' overrides non-obsolete member 'C1.goo()'
+                //     public override void goo() {}
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "goo")
+                    .WithArguments("C5.goo()", "C1.goo()")
+                    .WithLocation(24, 26),
+                // (102,30): warning CS0672: Member 'F5.Goo.get' overrides obsolete member 'F1.Goo.get'. Add the Obsolete attribute to 'F5.Goo.get'.
+                //     public override int Goo {get; set;}
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "get")
+                    .WithArguments("F5.Goo.get", "F1.Goo.get")
+                    .WithLocation(102, 30),
+                // (65,42): warning CS0809: Obsolete member 'E2.Goo.get' overrides non-obsolete member 'E1.Goo.get'
+                //     public override int Goo { [Obsolete] get; set;}
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get")
+                    .WithArguments("E2.Goo.get", "E1.Goo.get")
+                    .WithLocation(65, 42)
+            );
         }
 
         [Fact]
@@ -7638,49 +7576,48 @@ public class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (14,31): warning CS0672: Member 'Derived.Boo.get' overrides obsolete member 'Base.Boo.get'. Add the Obsolete attribute to 'Derived.Boo.get'.
-                    //     public override int Boo { get; set; }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "get")
-                        .WithArguments("Derived.Boo.get", "Base.Boo.get")
-                        .WithLocation(14, 31),
-                    // (15,42): warning CS0809: Obsolete member 'Derived.Goo.get' overrides non-obsolete member 'Base.Goo.get'
-                    //     public override int Goo { [Obsolete] get; set; }
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get")
-                        .WithArguments("Derived.Goo.get", "Base.Goo.get")
-                        .WithLocation(15, 42),
-                    // (18,25): warning CS0672: Member 'Derived.Koo' overrides obsolete member 'Base.Koo'. Add the Obsolete attribute to 'Derived.Koo'.
-                    //     public override int Koo { [Obsolete("Derived.Koo is Obsolete")] get; set; }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "Koo")
-                        .WithArguments("Derived.Koo", "Base.Koo")
-                        .WithLocation(18, 25),
-                    // (18,69): warning CS0809: Obsolete member 'Derived.Koo.get' overrides non-obsolete member 'Base.Koo.get'
-                    //     public override int Koo { [Obsolete("Derived.Koo is Obsolete")] get; set; }
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get")
-                        .WithArguments("Derived.Koo.get", "Base.Koo.get")
-                        .WithLocation(18, 69),
-                    // (26,7): warning CS0612: 'Base.Boo.get' is obsolete
-                    // 		_ = derived.Boo;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "derived.Boo")
-                        .WithArguments("Base.Boo.get")
-                        .WithLocation(26, 7),
-                    // (28,13): error CS0619: 'Base.Hoo.get' is obsolete: 'Base.Hoo is Obsolete'
-                    //         _ = derived.Hoo;
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "derived.Hoo")
-                        .WithArguments("Base.Hoo.get", "Base.Hoo is Obsolete")
-                        .WithLocation(28, 13),
-                    // (29,13): warning CS0618: 'Base.Joo.get' is obsolete: 'Base.Joo is Obsolete'
-                    //         _ = derived.Joo;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "derived.Joo")
-                        .WithArguments("Base.Joo.get", "Base.Joo is Obsolete")
-                        .WithLocation(29, 13),
-                    // (30,13): warning CS0618: 'Base.Koo' is obsolete: 'Base.Koo is Obsolete'
-                    //         _ = derived.Koo;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "derived.Koo")
-                        .WithArguments("Base.Koo", "Base.Koo is Obsolete")
-                        .WithLocation(30, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (14,31): warning CS0672: Member 'Derived.Boo.get' overrides obsolete member 'Base.Boo.get'. Add the Obsolete attribute to 'Derived.Boo.get'.
+                //     public override int Boo { get; set; }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "get")
+                    .WithArguments("Derived.Boo.get", "Base.Boo.get")
+                    .WithLocation(14, 31),
+                // (15,42): warning CS0809: Obsolete member 'Derived.Goo.get' overrides non-obsolete member 'Base.Goo.get'
+                //     public override int Goo { [Obsolete] get; set; }
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get")
+                    .WithArguments("Derived.Goo.get", "Base.Goo.get")
+                    .WithLocation(15, 42),
+                // (18,25): warning CS0672: Member 'Derived.Koo' overrides obsolete member 'Base.Koo'. Add the Obsolete attribute to 'Derived.Koo'.
+                //     public override int Koo { [Obsolete("Derived.Koo is Obsolete")] get; set; }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "Koo")
+                    .WithArguments("Derived.Koo", "Base.Koo")
+                    .WithLocation(18, 25),
+                // (18,69): warning CS0809: Obsolete member 'Derived.Koo.get' overrides non-obsolete member 'Base.Koo.get'
+                //     public override int Koo { [Obsolete("Derived.Koo is Obsolete")] get; set; }
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get")
+                    .WithArguments("Derived.Koo.get", "Base.Koo.get")
+                    .WithLocation(18, 69),
+                // (26,7): warning CS0612: 'Base.Boo.get' is obsolete
+                // 		_ = derived.Boo;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "derived.Boo")
+                    .WithArguments("Base.Boo.get")
+                    .WithLocation(26, 7),
+                // (28,13): error CS0619: 'Base.Hoo.get' is obsolete: 'Base.Hoo is Obsolete'
+                //         _ = derived.Hoo;
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "derived.Hoo")
+                    .WithArguments("Base.Hoo.get", "Base.Hoo is Obsolete")
+                    .WithLocation(28, 13),
+                // (29,13): warning CS0618: 'Base.Joo.get' is obsolete: 'Base.Joo is Obsolete'
+                //         _ = derived.Joo;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "derived.Joo")
+                    .WithArguments("Base.Joo.get", "Base.Joo is Obsolete")
+                    .WithLocation(29, 13),
+                // (30,13): warning CS0618: 'Base.Koo' is obsolete: 'Base.Koo is Obsolete'
+                //         _ = derived.Koo;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "derived.Koo")
+                    .WithArguments("Base.Koo", "Base.Koo is Obsolete")
+                    .WithLocation(30, 13)
+            );
         }
 
         [Fact]
@@ -7746,99 +7683,98 @@ public class SomeAttr1: Attribute
     public SomeAttr1(Action x) {}
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,15): warning CS0618: 'Test.F1' is obsolete: 'F1 is obsolete'
-                    //     [SomeAttr(F1)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "F1")
-                        .WithArguments("Test.F1", "F1 is obsolete")
-                        .WithLocation(7, 15),
-                    // (15,15): error CS0619: 'Test.F2' is obsolete: 'F2 is obsolete'
-                    //     [SomeAttr(F2)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "F2")
-                        .WithArguments("Test.F2", "F2 is obsolete")
-                        .WithLocation(15, 15),
-                    // (11,15): warning CS0618: 'Test.F3' is obsolete: 'F3 is obsolete'
-                    //     [SomeAttr(F3)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "F3")
-                        .WithArguments("Test.F3", "F3 is obsolete")
-                        .WithLocation(11, 15),
-                    // (18,15): error CS0619: 'Test.F4' is obsolete: 'blah'
-                    //     [Obsolete(F4, true)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "F4")
-                        .WithArguments("Test.F4", "blah")
-                        .WithLocation(18, 15),
-                    // (21,15): error CS0120: An object reference is required for the non-static field, method, or property 'Test.F5'
-                    //     [Obsolete(F5)]
-                    Diagnostic(ErrorCode.ERR_ObjectRequired, "F5")
-                        .WithArguments("Test.F5")
-                        .WithLocation(21, 15),
-                    // (24,15): error CS0120: An object reference is required for the non-static field, method, or property 'Test.P1'
-                    //     [Obsolete(P1, true)]
-                    Diagnostic(ErrorCode.ERR_ObjectRequired, "P1")
-                        .WithArguments("Test.P1")
-                        .WithLocation(24, 15),
-                    // (28,15): warning CS0612: 'Test.P2' is obsolete
-                    //     [SomeAttr(P2, true)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "P2")
-                        .WithArguments("Test.P2")
-                        .WithLocation(28, 15),
-                    // (28,15): error CS0120: An object reference is required for the non-static field, method, or property 'Test.P2'
-                    //     [SomeAttr(P2, true)]
-                    Diagnostic(ErrorCode.ERR_ObjectRequired, "P2")
-                        .WithArguments("Test.P2")
-                        .WithLocation(28, 15),
-                    // (28,6): error CS1729: 'SomeAttr' does not contain a constructor that takes 2 arguments
-                    //     [SomeAttr(P2, true)]
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "SomeAttr(P2, true)")
-                        .WithArguments("SomeAttr", "2")
-                        .WithLocation(28, 6),
-                    // (31,15): error CS1503: Argument 1: cannot convert from 'method group' to 'string'
-                    //     [Obsolete(Method1)]
-                    Diagnostic(ErrorCode.ERR_BadArgType, "Method1")
-                        .WithArguments("1", "method group", "string")
-                        .WithLocation(31, 15),
-                    // (35,16): warning CS0612: 'Test.Method2()' is obsolete
-                    //     [SomeAttr1(Method2)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Method2")
-                        .WithArguments("Test.Method2()")
-                        .WithLocation(35, 16),
-                    // (35,6): error CS0181: Attribute constructor parameter 'x' has type 'Action', which is not a valid attribute parameter type
-                    //     [SomeAttr1(Method2)]
-                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "SomeAttr1")
-                        .WithArguments("x", "System.Action")
-                        .WithLocation(35, 6),
-                    // (43,15): error CS0619: 'Test.F7' is obsolete: 'F7 is obsolete'
-                    //     [Obsolete(F7, true)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "F7")
-                        .WithArguments("Test.F7", "F7 is obsolete")
-                        .WithLocation(43, 15),
-                    // (44,15): warning CS0618: 'Test.F6' is obsolete: 'F6 is obsolete'
-                    //     [SomeAttr(F6)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "F6")
-                        .WithArguments("Test.F6", "F6 is obsolete")
-                        .WithLocation(44, 15),
-                    // (45,15): error CS0619: 'Test.F7' is obsolete: 'F7 is obsolete'
-                    //     [SomeAttr(F7)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "F7")
-                        .WithArguments("Test.F7", "F7 is obsolete")
-                        .WithLocation(45, 15),
-                    // (38,15): warning CS0618: 'Test.F6' is obsolete: 'F6 is obsolete'
-                    //     [Obsolete(F6)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "F6")
-                        .WithArguments("Test.F6", "F6 is obsolete")
-                        .WithLocation(38, 15),
-                    // (39,15): warning CS0618: 'Test.F6' is obsolete: 'F6 is obsolete'
-                    //     [SomeAttr(F6)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "F6")
-                        .WithArguments("Test.F6", "F6 is obsolete")
-                        .WithLocation(39, 15),
-                    // (40,15): error CS0619: 'Test.F7' is obsolete: 'F7 is obsolete'
-                    //     [SomeAttr(F7)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "F7")
-                        .WithArguments("Test.F7", "F7 is obsolete")
-                        .WithLocation(40, 15)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,15): warning CS0618: 'Test.F1' is obsolete: 'F1 is obsolete'
+                //     [SomeAttr(F1)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "F1")
+                    .WithArguments("Test.F1", "F1 is obsolete")
+                    .WithLocation(7, 15),
+                // (15,15): error CS0619: 'Test.F2' is obsolete: 'F2 is obsolete'
+                //     [SomeAttr(F2)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "F2")
+                    .WithArguments("Test.F2", "F2 is obsolete")
+                    .WithLocation(15, 15),
+                // (11,15): warning CS0618: 'Test.F3' is obsolete: 'F3 is obsolete'
+                //     [SomeAttr(F3)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "F3")
+                    .WithArguments("Test.F3", "F3 is obsolete")
+                    .WithLocation(11, 15),
+                // (18,15): error CS0619: 'Test.F4' is obsolete: 'blah'
+                //     [Obsolete(F4, true)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "F4")
+                    .WithArguments("Test.F4", "blah")
+                    .WithLocation(18, 15),
+                // (21,15): error CS0120: An object reference is required for the non-static field, method, or property 'Test.F5'
+                //     [Obsolete(F5)]
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "F5")
+                    .WithArguments("Test.F5")
+                    .WithLocation(21, 15),
+                // (24,15): error CS0120: An object reference is required for the non-static field, method, or property 'Test.P1'
+                //     [Obsolete(P1, true)]
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "P1")
+                    .WithArguments("Test.P1")
+                    .WithLocation(24, 15),
+                // (28,15): warning CS0612: 'Test.P2' is obsolete
+                //     [SomeAttr(P2, true)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "P2")
+                    .WithArguments("Test.P2")
+                    .WithLocation(28, 15),
+                // (28,15): error CS0120: An object reference is required for the non-static field, method, or property 'Test.P2'
+                //     [SomeAttr(P2, true)]
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "P2")
+                    .WithArguments("Test.P2")
+                    .WithLocation(28, 15),
+                // (28,6): error CS1729: 'SomeAttr' does not contain a constructor that takes 2 arguments
+                //     [SomeAttr(P2, true)]
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "SomeAttr(P2, true)")
+                    .WithArguments("SomeAttr", "2")
+                    .WithLocation(28, 6),
+                // (31,15): error CS1503: Argument 1: cannot convert from 'method group' to 'string'
+                //     [Obsolete(Method1)]
+                Diagnostic(ErrorCode.ERR_BadArgType, "Method1")
+                    .WithArguments("1", "method group", "string")
+                    .WithLocation(31, 15),
+                // (35,16): warning CS0612: 'Test.Method2()' is obsolete
+                //     [SomeAttr1(Method2)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Method2")
+                    .WithArguments("Test.Method2()")
+                    .WithLocation(35, 16),
+                // (35,6): error CS0181: Attribute constructor parameter 'x' has type 'Action', which is not a valid attribute parameter type
+                //     [SomeAttr1(Method2)]
+                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "SomeAttr1")
+                    .WithArguments("x", "System.Action")
+                    .WithLocation(35, 6),
+                // (43,15): error CS0619: 'Test.F7' is obsolete: 'F7 is obsolete'
+                //     [Obsolete(F7, true)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "F7")
+                    .WithArguments("Test.F7", "F7 is obsolete")
+                    .WithLocation(43, 15),
+                // (44,15): warning CS0618: 'Test.F6' is obsolete: 'F6 is obsolete'
+                //     [SomeAttr(F6)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "F6")
+                    .WithArguments("Test.F6", "F6 is obsolete")
+                    .WithLocation(44, 15),
+                // (45,15): error CS0619: 'Test.F7' is obsolete: 'F7 is obsolete'
+                //     [SomeAttr(F7)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "F7")
+                    .WithArguments("Test.F7", "F7 is obsolete")
+                    .WithLocation(45, 15),
+                // (38,15): warning CS0618: 'Test.F6' is obsolete: 'F6 is obsolete'
+                //     [Obsolete(F6)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "F6")
+                    .WithArguments("Test.F6", "F6 is obsolete")
+                    .WithLocation(38, 15),
+                // (39,15): warning CS0618: 'Test.F6' is obsolete: 'F6 is obsolete'
+                //     [SomeAttr(F6)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "F6")
+                    .WithArguments("Test.F6", "F6 is obsolete")
+                    .WithLocation(39, 15),
+                // (40,15): error CS0619: 'Test.F7' is obsolete: 'F7 is obsolete'
+                //     [SomeAttr(F7)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "F7")
+                    .WithArguments("Test.F7", "F7 is obsolete")
+                    .WithLocation(40, 15)
+            );
         }
 
         [WorkItem(546064, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546064")]
@@ -7889,7 +7825,8 @@ public class Base
                 .VerifyDiagnostics(
                     // (23,15): warning CS0612: 'SomeType' is obsolete
                     //     [Obsolete(SomeType.Message)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "SomeType").WithArguments("SomeType")
+                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "SomeType")
+                        .WithArguments("SomeType")
                 );
         }
 
@@ -7946,19 +7883,18 @@ public class Base<T> {}
 [Obsolete]
 public class Derived : Base<Base<int>> {}
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (27,19): warning CS0612: 'SomeType' is obsolete
-                    //     public static SomeType someProp3 { [Obsolete] get => new SomeType(); }
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "SomeType")
-                        .WithArguments("SomeType")
-                        .WithLocation(27, 19),
-                    // (20,28): warning CS0067: The event 'Test.someEvent' is never used
-                    //     event Action<SomeType> someEvent;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "someEvent")
-                        .WithArguments("Test.someEvent")
-                        .WithLocation(20, 28)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (27,19): warning CS0612: 'SomeType' is obsolete
+                //     public static SomeType someProp3 { [Obsolete] get => new SomeType(); }
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "SomeType")
+                    .WithArguments("SomeType")
+                    .WithLocation(27, 19),
+                // (20,28): warning CS0067: The event 'Test.someEvent' is never used
+                //     event Action<SomeType> someEvent;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "someEvent")
+                    .WithArguments("Test.someEvent")
+                    .WithLocation(20, 28)
+            );
         }
 
         [Fact]
@@ -8006,15 +7942,14 @@ public class A
     }
 }
 ";
-            CreateCompilation(s, new[] { new CSharpCompilationReference(other) })
-                .VerifyDiagnostics(
-                    // (3,17): warning CS0612: 'C' is obsolete
-                    //     protected A(C o)
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "C").WithArguments("C"),
-                    // (5,9): warning CS0612: 'C.Goo()' is obsolete
-                    //         o.Goo();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "o.Goo()").WithArguments("C.Goo()")
-                );
+            CreateCompilation(s, new[] { new CSharpCompilationReference(other) }).VerifyDiagnostics(
+                // (3,17): warning CS0612: 'C' is obsolete
+                //     protected A(C o)
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "C").WithArguments("C"),
+                // (5,9): warning CS0612: 'C.Goo()' is obsolete
+                //         o.Goo();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "o.Goo()").WithArguments("C.Goo()")
+            );
         }
 
         [Fact]
@@ -8062,25 +7997,24 @@ public class B : IEnumerable
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,26): warning CS1064: The best overloaded Add method 'B.Add(long)' for the collection initializer element is obsolete.
-                    //         B coll = new B { 1, new B(), "a", false };
-                    Diagnostic(ErrorCode.WRN_DeprecatedCollectionInitAdd, "1")
-                        .WithArguments("B.Add(long)"),
-                    // (9,29): warning CS1062: The best overloaded Add method 'B.Add(B)' for the collection initializer element is obsolete. Don't use this overload
-                    //         B coll = new B { 1, new B(), "a", false };
-                    Diagnostic(ErrorCode.WRN_DeprecatedCollectionInitAddStr, "new B()")
-                        .WithArguments("B.Add(B)", "Don't use this overload"),
-                    // (9,38): error CS1063: The best overloaded Add method 'B.Add(string)' for the collection initializer element is obsolete. Don't use this overload
-                    //         B coll = new B { 1, new B(), "a", false };
-                    Diagnostic(ErrorCode.ERR_DeprecatedCollectionInitAddStr, @"""a""")
-                        .WithArguments("B.Add(string)", "Don't use this overload"),
-                    // (9,43): warning CS1064: The best overloaded Add method 'B.Add(bool)' for the collection initializer element is obsolete.
-                    //         B coll = new B { 1, new B(), "a", false };
-                    Diagnostic(ErrorCode.WRN_DeprecatedCollectionInitAdd, "false")
-                        .WithArguments("B.Add(bool)")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,26): warning CS1064: The best overloaded Add method 'B.Add(long)' for the collection initializer element is obsolete.
+                //         B coll = new B { 1, new B(), "a", false };
+                Diagnostic(ErrorCode.WRN_DeprecatedCollectionInitAdd, "1")
+                    .WithArguments("B.Add(long)"),
+                // (9,29): warning CS1062: The best overloaded Add method 'B.Add(B)' for the collection initializer element is obsolete. Don't use this overload
+                //         B coll = new B { 1, new B(), "a", false };
+                Diagnostic(ErrorCode.WRN_DeprecatedCollectionInitAddStr, "new B()")
+                    .WithArguments("B.Add(B)", "Don't use this overload"),
+                // (9,38): error CS1063: The best overloaded Add method 'B.Add(string)' for the collection initializer element is obsolete. Don't use this overload
+                //         B coll = new B { 1, new B(), "a", false };
+                Diagnostic(ErrorCode.ERR_DeprecatedCollectionInitAddStr, @"""a""")
+                    .WithArguments("B.Add(string)", "Don't use this overload"),
+                // (9,43): warning CS1064: The best overloaded Add method 'B.Add(bool)' for the collection initializer element is obsolete.
+                //         B coll = new B { 1, new B(), "a", false };
+                Diagnostic(ErrorCode.WRN_DeprecatedCollectionInitAdd, "false")
+                    .WithArguments("B.Add(bool)")
+            );
         }
 
         [Fact]
@@ -8137,79 +8071,78 @@ public class Test
     public static void Main() { }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (37,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
-                    // [Att]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att")
-                        .WithArguments("Att.Att()", "Constructor")
-                        .WithLocation(37, 2),
-                    // (38,6): error CS0619: 'Att.Field' is obsolete: 'Field'
-                    // [Att(Field = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Field = 1")
-                        .WithArguments("Att.Field", "Field")
-                        .WithLocation(38, 6),
-                    // (38,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
-                    // [Att(Field = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Field = 1)")
-                        .WithArguments("Att.Att()", "Constructor")
-                        .WithLocation(38, 2),
-                    // (39,6): error CS0619: 'Att.Prop' is obsolete: 'Property'
-                    // [Att(Prop = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop = 1")
-                        .WithArguments("Att.Prop", "Property")
-                        .WithLocation(39, 6),
-                    // (39,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
-                    // [Att(Prop = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Prop = 1)")
-                        .WithArguments("Att.Att()", "Constructor")
-                        .WithLocation(39, 2),
-                    // (40,6): error CS0619: 'Att.Prop2' is obsolete: 'Property'
-                    // [Att(Prop2 = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop2 = 1")
-                        .WithArguments("Att.Prop2", "Property")
-                        .WithLocation(40, 6),
-                    // (40,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
-                    // [Att(Prop2 = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Prop2 = 1)")
-                        .WithArguments("Att.Att()", "Constructor")
-                        .WithLocation(40, 2),
-                    // (41,6): error CS0619: 'Att.Prop3.set' is obsolete: 'setter'
-                    // [Att(Prop3 = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop3 = 1")
-                        .WithArguments("Att.Prop3.set", "setter")
-                        .WithLocation(41, 6),
-                    // (41,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
-                    // [Att(Prop3 = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Prop3 = 1)")
-                        .WithArguments("Att.Att()", "Constructor")
-                        .WithLocation(41, 2),
-                    // (42,6): error CS0619: 'Att.Prop4' is obsolete: 'Property'
-                    // [Att(Prop4 = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop4 = 1")
-                        .WithArguments("Att.Prop4", "Property")
-                        .WithLocation(42, 6),
-                    // (42,6): error CS0619: 'Att.Prop4.set' is obsolete: 'setter'
-                    // [Att(Prop4 = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop4 = 1")
-                        .WithArguments("Att.Prop4.set", "setter")
-                        .WithLocation(42, 6),
-                    // (42,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
-                    // [Att(Prop4 = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Prop4 = 1)")
-                        .WithArguments("Att.Att()", "Constructor")
-                        .WithLocation(42, 2),
-                    // (43,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
-                    // [Att(Prop5 = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Prop5 = 1)")
-                        .WithArguments("Att.Att()", "Constructor")
-                        .WithLocation(43, 2),
-                    // (46,6): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
-                    //     [Att()]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att()")
-                        .WithArguments("Att.Att()", "Constructor")
-                        .WithLocation(46, 6)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (37,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
+                // [Att]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att")
+                    .WithArguments("Att.Att()", "Constructor")
+                    .WithLocation(37, 2),
+                // (38,6): error CS0619: 'Att.Field' is obsolete: 'Field'
+                // [Att(Field = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Field = 1")
+                    .WithArguments("Att.Field", "Field")
+                    .WithLocation(38, 6),
+                // (38,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
+                // [Att(Field = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Field = 1)")
+                    .WithArguments("Att.Att()", "Constructor")
+                    .WithLocation(38, 2),
+                // (39,6): error CS0619: 'Att.Prop' is obsolete: 'Property'
+                // [Att(Prop = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop = 1")
+                    .WithArguments("Att.Prop", "Property")
+                    .WithLocation(39, 6),
+                // (39,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
+                // [Att(Prop = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Prop = 1)")
+                    .WithArguments("Att.Att()", "Constructor")
+                    .WithLocation(39, 2),
+                // (40,6): error CS0619: 'Att.Prop2' is obsolete: 'Property'
+                // [Att(Prop2 = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop2 = 1")
+                    .WithArguments("Att.Prop2", "Property")
+                    .WithLocation(40, 6),
+                // (40,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
+                // [Att(Prop2 = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Prop2 = 1)")
+                    .WithArguments("Att.Att()", "Constructor")
+                    .WithLocation(40, 2),
+                // (41,6): error CS0619: 'Att.Prop3.set' is obsolete: 'setter'
+                // [Att(Prop3 = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop3 = 1")
+                    .WithArguments("Att.Prop3.set", "setter")
+                    .WithLocation(41, 6),
+                // (41,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
+                // [Att(Prop3 = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Prop3 = 1)")
+                    .WithArguments("Att.Att()", "Constructor")
+                    .WithLocation(41, 2),
+                // (42,6): error CS0619: 'Att.Prop4' is obsolete: 'Property'
+                // [Att(Prop4 = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop4 = 1")
+                    .WithArguments("Att.Prop4", "Property")
+                    .WithLocation(42, 6),
+                // (42,6): error CS0619: 'Att.Prop4.set' is obsolete: 'setter'
+                // [Att(Prop4 = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop4 = 1")
+                    .WithArguments("Att.Prop4.set", "setter")
+                    .WithLocation(42, 6),
+                // (42,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
+                // [Att(Prop4 = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Prop4 = 1)")
+                    .WithArguments("Att.Att()", "Constructor")
+                    .WithLocation(42, 2),
+                // (43,2): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
+                // [Att(Prop5 = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att(Prop5 = 1)")
+                    .WithArguments("Att.Att()", "Constructor")
+                    .WithLocation(43, 2),
+                // (46,6): error CS0619: 'Att.Att()' is obsolete: 'Constructor'
+                //     [Att()]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Att()")
+                    .WithArguments("Att.Att()", "Constructor")
+                    .WithLocation(46, 6)
+            );
         }
 
         [Fact]
@@ -8283,34 +8216,33 @@ public class Test
     public static void Main() { }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (43,9): warning CS0672: Member 'DerivedAtt.Prop1.set' overrides obsolete member 'BaseAtt.Prop1.set'. Add the Obsolete attribute to 'DerivedAtt.Prop1.set'.
-                    //         set { }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "set")
-                        .WithArguments("DerivedAtt.Prop1.set", "BaseAtt.Prop1.set")
-                        .WithLocation(43, 9),
-                    // (55,36): warning CS0809: Obsolete member 'DerivedAtt.Prop3.set' overrides non-obsolete member 'BaseAtt.Prop3.set'
-                    //         [Obsolete("setter", true)] set { }
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "set")
-                        .WithArguments("DerivedAtt.Prop3.set", "BaseAtt.Prop3.set")
-                        .WithLocation(55, 36),
-                    // (59,13): error CS0619: 'BaseAtt.Prop.set' is obsolete: 'setter'
-                    // [DerivedAtt(Prop = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop = 1")
-                        .WithArguments("BaseAtt.Prop.set", "setter")
-                        .WithLocation(59, 13),
-                    // (60,13): error CS0619: 'BaseAtt.Prop1.set' is obsolete: 'setter'
-                    // [DerivedAtt(Prop1 = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop1 = 1")
-                        .WithArguments("BaseAtt.Prop1.set", "setter")
-                        .WithLocation(60, 13),
-                    // (61,13): error CS0619: 'BaseAtt.Prop2.set' is obsolete: 'base setter'
-                    // [DerivedAtt(Prop2 = 1)]
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop2 = 1")
-                        .WithArguments("BaseAtt.Prop2.set", "base setter")
-                        .WithLocation(61, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (43,9): warning CS0672: Member 'DerivedAtt.Prop1.set' overrides obsolete member 'BaseAtt.Prop1.set'. Add the Obsolete attribute to 'DerivedAtt.Prop1.set'.
+                //         set { }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "set")
+                    .WithArguments("DerivedAtt.Prop1.set", "BaseAtt.Prop1.set")
+                    .WithLocation(43, 9),
+                // (55,36): warning CS0809: Obsolete member 'DerivedAtt.Prop3.set' overrides non-obsolete member 'BaseAtt.Prop3.set'
+                //         [Obsolete("setter", true)] set { }
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "set")
+                    .WithArguments("DerivedAtt.Prop3.set", "BaseAtt.Prop3.set")
+                    .WithLocation(55, 36),
+                // (59,13): error CS0619: 'BaseAtt.Prop.set' is obsolete: 'setter'
+                // [DerivedAtt(Prop = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop = 1")
+                    .WithArguments("BaseAtt.Prop.set", "setter")
+                    .WithLocation(59, 13),
+                // (60,13): error CS0619: 'BaseAtt.Prop1.set' is obsolete: 'setter'
+                // [DerivedAtt(Prop1 = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop1 = 1")
+                    .WithArguments("BaseAtt.Prop1.set", "setter")
+                    .WithLocation(60, 13),
+                // (61,13): error CS0619: 'BaseAtt.Prop2.set' is obsolete: 'base setter'
+                // [DerivedAtt(Prop2 = 1)]
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop2 = 1")
+                    .WithArguments("BaseAtt.Prop2.set", "base setter")
+                    .WithLocation(61, 13)
+            );
         }
 
         [Fact]
@@ -8341,19 +8273,18 @@ public class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (19,17): warning CS0612: 'C1.this[int].get' is obsolete
-                    //         c1[0] = c1[0];
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c1[0]")
-                        .WithArguments("C1.this[int].get")
-                        .WithLocation(19, 17),
-                    // (21,9): warning CS0612: 'C2.this[int].set' is obsolete
-                    //         c2[0] = c2[0];
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c2[0]")
-                        .WithArguments("C2.this[int].set")
-                        .WithLocation(21, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (19,17): warning CS0612: 'C1.this[int].get' is obsolete
+                //         c1[0] = c1[0];
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c1[0]")
+                    .WithArguments("C1.this[int].get")
+                    .WithLocation(19, 17),
+                // (21,9): warning CS0612: 'C2.this[int].set' is obsolete
+                //         c2[0] = c2[0];
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c2[0]")
+                    .WithArguments("C2.this[int].set")
+                    .WithLocation(21, 9)
+            );
         }
 
         [Fact]
@@ -8417,56 +8348,55 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (42,13): warning CS0612: 'A.B.C1' is obsolete
-                    // class D : B<A.B.C1.D> { }
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C1").WithArguments("A.B.C1"),
-                    // (43,14): warning CS0612: 'A.B.C2<int>' is obsolete
-                    // class D1 : B<A.B.C2<int>.D> { }
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>")
-                        .WithArguments("A.B.C2<int>"),
-                    // (49,17): warning CS0612: 'A.B.C' is obsolete
-                    //         var x = A.B.C.Field1;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C").WithArguments("A.B.C"),
-                    // (49,17): warning CS0612: 'A.B.C.Field1' is obsolete
-                    //         var x = A.B.C.Field1;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C.Field1")
-                        .WithArguments("A.B.C.Field1"),
-                    // (50,18): warning CS0612: 'A.B.C' is obsolete
-                    //         var x1 = A.B.C.D.Field2;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C").WithArguments("A.B.C"),
-                    // (50,18): warning CS0612: 'A.B.C.D' is obsolete
-                    //         var x1 = A.B.C.D.Field2;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C.D").WithArguments("A.B.C.D"),
-                    // (50,18): warning CS0612: 'A.B.C.D.Field2' is obsolete
-                    //         var x1 = A.B.C.D.Field2;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C.D.Field2")
-                        .WithArguments("A.B.C.D.Field2"),
-                    // (51,21): warning CS0612: 'A.B.C1' is obsolete
-                    //         var y = new A.B.C1.D();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C1").WithArguments("A.B.C1"),
-                    // (52,22): warning CS0612: 'A.B.C2<int>' is obsolete
-                    //         var y1 = new A.B.C2<int>.D();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>")
-                        .WithArguments("A.B.C2<int>"),
-                    // (53,18): warning CS0612: 'A.B.C2<int>' is obsolete
-                    //         var y2 = A.B.C2<int>.Field1;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>")
-                        .WithArguments("A.B.C2<int>"),
-                    // (53,18): warning CS0612: 'A.B.C2<int>.Field1' is obsolete
-                    //         var y2 = A.B.C2<int>.Field1;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>.Field1")
-                        .WithArguments("A.B.C2<int>.Field1"),
-                    // (54,22): warning CS0612: 'A.B.C2<int>' is obsolete
-                    //         var y3 = new A.B.C2<int>.E<int>();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>")
-                        .WithArguments("A.B.C2<int>"),
-                    // (54,22): warning CS0612: 'A.B.C2<int>.E<int>' is obsolete
-                    //         var y3 = new A.B.C2<int>.E<int>();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>.E<int>")
-                        .WithArguments("A.B.C2<int>.E<int>")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (42,13): warning CS0612: 'A.B.C1' is obsolete
+                // class D : B<A.B.C1.D> { }
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C1").WithArguments("A.B.C1"),
+                // (43,14): warning CS0612: 'A.B.C2<int>' is obsolete
+                // class D1 : B<A.B.C2<int>.D> { }
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>")
+                    .WithArguments("A.B.C2<int>"),
+                // (49,17): warning CS0612: 'A.B.C' is obsolete
+                //         var x = A.B.C.Field1;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C").WithArguments("A.B.C"),
+                // (49,17): warning CS0612: 'A.B.C.Field1' is obsolete
+                //         var x = A.B.C.Field1;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C.Field1")
+                    .WithArguments("A.B.C.Field1"),
+                // (50,18): warning CS0612: 'A.B.C' is obsolete
+                //         var x1 = A.B.C.D.Field2;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C").WithArguments("A.B.C"),
+                // (50,18): warning CS0612: 'A.B.C.D' is obsolete
+                //         var x1 = A.B.C.D.Field2;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C.D").WithArguments("A.B.C.D"),
+                // (50,18): warning CS0612: 'A.B.C.D.Field2' is obsolete
+                //         var x1 = A.B.C.D.Field2;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C.D.Field2")
+                    .WithArguments("A.B.C.D.Field2"),
+                // (51,21): warning CS0612: 'A.B.C1' is obsolete
+                //         var y = new A.B.C1.D();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C1").WithArguments("A.B.C1"),
+                // (52,22): warning CS0612: 'A.B.C2<int>' is obsolete
+                //         var y1 = new A.B.C2<int>.D();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>")
+                    .WithArguments("A.B.C2<int>"),
+                // (53,18): warning CS0612: 'A.B.C2<int>' is obsolete
+                //         var y2 = A.B.C2<int>.Field1;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>")
+                    .WithArguments("A.B.C2<int>"),
+                // (53,18): warning CS0612: 'A.B.C2<int>.Field1' is obsolete
+                //         var y2 = A.B.C2<int>.Field1;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>.Field1")
+                    .WithArguments("A.B.C2<int>.Field1"),
+                // (54,22): warning CS0612: 'A.B.C2<int>' is obsolete
+                //         var y3 = new A.B.C2<int>.E<int>();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>")
+                    .WithArguments("A.B.C2<int>"),
+                // (54,22): warning CS0612: 'A.B.C2<int>.E<int>' is obsolete
+                //         var y3 = new A.B.C2<int>.E<int>();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C2<int>.E<int>")
+                    .WithArguments("A.B.C2<int>.E<int>")
+            );
         }
 
         [Fact]
@@ -8517,33 +8447,32 @@ class Event1
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (11,5): error CS0619: 'C.C()' is obsolete: 'Do not use'
-                    //     public D() { }
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "public D() { }")
-                        .WithArguments("C.C()", "Do not use"),
-                    // (15,16): error CS0619: 'C.C()' is obsolete: 'Do not use'
-                    //     public E() : base() { }
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, ": base()")
-                        .WithArguments("C.C()", "Do not use"),
-                    // (29,9): warning CS0618: 'Event1.A1' is obsolete: 'Do not use'
-                    //         A1();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "A1")
-                        .WithArguments("Event1.A1", "Do not use"),
-                    // (30,9): warning CS0618: 'Event1.A' is obsolete: 'Do not use'
-                    //         A += () => {};
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "A")
-                        .WithArguments("Event1.A", "Do not use"),
-                    // (38,9): warning CS0618: 'Event1.A1' is obsolete: 'Do not use'
-                    //         e.A1();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "e.A1")
-                        .WithArguments("Event1.A1", "Do not use"),
-                    // (39,9): warning CS0618: 'Event1.A' is obsolete: 'Do not use'
-                    //         e.A += () => {};
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "e.A")
-                        .WithArguments("Event1.A", "Do not use")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (11,5): error CS0619: 'C.C()' is obsolete: 'Do not use'
+                //     public D() { }
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "public D() { }")
+                    .WithArguments("C.C()", "Do not use"),
+                // (15,16): error CS0619: 'C.C()' is obsolete: 'Do not use'
+                //     public E() : base() { }
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, ": base()")
+                    .WithArguments("C.C()", "Do not use"),
+                // (29,9): warning CS0618: 'Event1.A1' is obsolete: 'Do not use'
+                //         A1();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "A1")
+                    .WithArguments("Event1.A1", "Do not use"),
+                // (30,9): warning CS0618: 'Event1.A' is obsolete: 'Do not use'
+                //         A += () => {};
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "A")
+                    .WithArguments("Event1.A", "Do not use"),
+                // (38,9): warning CS0618: 'Event1.A1' is obsolete: 'Do not use'
+                //         e.A1();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "e.A1")
+                    .WithArguments("Event1.A1", "Do not use"),
+                // (39,9): warning CS0618: 'Event1.A' is obsolete: 'Do not use'
+                //         e.A += () => {};
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "e.A")
+                    .WithArguments("Event1.A", "Do not use")
+            );
         }
 
         [Fact]
@@ -8590,21 +8519,20 @@ class Program
         }
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (35,9): warning CS0618: 'Foreachable.GetEnumerator()' is obsolete: '4'
-                    //         foreach (var x in new Foreachable())
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "foreach")
-                        .WithArguments("Foreachable.GetEnumerator()", "4"),
-                    // (35,9): warning CS0618: 'MyEnumerator.MoveNext()' is obsolete: '1'
-                    //         foreach (var x in new Foreachable())
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "foreach")
-                        .WithArguments("MyEnumerator.MoveNext()", "1"),
-                    // (35,9): warning CS0618: 'MyEnumerator.Current' is obsolete: '2'
-                    //         foreach (var x in new Foreachable())
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "foreach")
-                        .WithArguments("MyEnumerator.Current", "2")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (35,9): warning CS0618: 'Foreachable.GetEnumerator()' is obsolete: '4'
+                //         foreach (var x in new Foreachable())
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "foreach")
+                    .WithArguments("Foreachable.GetEnumerator()", "4"),
+                // (35,9): warning CS0618: 'MyEnumerator.MoveNext()' is obsolete: '1'
+                //         foreach (var x in new Foreachable())
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "foreach")
+                    .WithArguments("MyEnumerator.MoveNext()", "1"),
+                // (35,9): warning CS0618: 'MyEnumerator.Current' is obsolete: '2'
+                //         foreach (var x in new Foreachable())
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "foreach")
+                    .WithArguments("MyEnumerator.Current", "2")
+            );
         }
 
         [Fact]
@@ -8630,15 +8558,14 @@ internal sealed class C1 : I1
     void I1.M() {}
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,1): info CS8019: Unnecessary using directive.
-                    // using X = A;
-                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = A;"),
-                    // (5,1): info CS8019: Unnecessary using directive.
-                    // using Y = A.B;
-                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Y = A.B;")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,1): info CS8019: Unnecessary using directive.
+                // using X = A;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = A;"),
+                // (5,1): info CS8019: Unnecessary using directive.
+                // using Y = A.B;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Y = A.B;")
+            );
         }
 
         [Fact]
@@ -8768,49 +8695,48 @@ namespace N
         public Z z;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,22): error CS0619: 'A' is obsolete: 'Do not use'
-                    //     public class E : Z { }
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Z")
-                        .WithArguments("N.A", "Do not use")
-                        .WithLocation(12, 22),
-                    // (13,27): error CS0619: 'A' is obsolete: 'Do not use'
-                    //     public class D : List<Y>
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Y")
-                        .WithArguments("N.A", "Do not use")
-                        .WithLocation(13, 27),
-                    // (10,22): error CS0619: 'A' is obsolete: 'Do not use'
-                    //     public class B : X { }
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "X")
-                        .WithArguments("N.A", "Do not use")
-                        .WithLocation(10, 22),
-                    // (11,22): error CS0619: 'A' is obsolete: 'Do not use'
-                    //     public class C : Y { }
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Y")
-                        .WithArguments("N.A", "Do not use")
-                        .WithLocation(11, 22),
-                    // (16,16): error CS0619: 'A' is obsolete: 'Do not use'
-                    //         public Y y1;
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Y")
-                        .WithArguments("N.A", "Do not use")
-                        .WithLocation(16, 16),
-                    // (17,21): error CS0619: 'A' is obsolete: 'Do not use'
-                    //         public List<Y> y2;
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Y")
-                        .WithArguments("N.A", "Do not use")
-                        .WithLocation(17, 21),
-                    // (18,16): error CS0619: 'A' is obsolete: 'Do not use'
-                    //         public Z z;
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Z")
-                        .WithArguments("N.A", "Do not use")
-                        .WithLocation(18, 16),
-                    // (15,16): error CS0619: 'A' is obsolete: 'Do not use'
-                    //         public X x;
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "X")
-                        .WithArguments("N.A", "Do not use")
-                        .WithLocation(15, 16)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,22): error CS0619: 'A' is obsolete: 'Do not use'
+                //     public class E : Z { }
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Z")
+                    .WithArguments("N.A", "Do not use")
+                    .WithLocation(12, 22),
+                // (13,27): error CS0619: 'A' is obsolete: 'Do not use'
+                //     public class D : List<Y>
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Y")
+                    .WithArguments("N.A", "Do not use")
+                    .WithLocation(13, 27),
+                // (10,22): error CS0619: 'A' is obsolete: 'Do not use'
+                //     public class B : X { }
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "X")
+                    .WithArguments("N.A", "Do not use")
+                    .WithLocation(10, 22),
+                // (11,22): error CS0619: 'A' is obsolete: 'Do not use'
+                //     public class C : Y { }
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Y")
+                    .WithArguments("N.A", "Do not use")
+                    .WithLocation(11, 22),
+                // (16,16): error CS0619: 'A' is obsolete: 'Do not use'
+                //         public Y y1;
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Y")
+                    .WithArguments("N.A", "Do not use")
+                    .WithLocation(16, 16),
+                // (17,21): error CS0619: 'A' is obsolete: 'Do not use'
+                //         public List<Y> y2;
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Y")
+                    .WithArguments("N.A", "Do not use")
+                    .WithLocation(17, 21),
+                // (18,16): error CS0619: 'A' is obsolete: 'Do not use'
+                //         public Z z;
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Z")
+                    .WithArguments("N.A", "Do not use")
+                    .WithLocation(18, 16),
+                // (15,16): error CS0619: 'A' is obsolete: 'Do not use'
+                //         public X x;
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "X")
+                    .WithArguments("N.A", "Do not use")
+                    .WithLocation(15, 16)
+            );
         }
 
         [ConditionalFact(
@@ -8867,60 +8793,59 @@ class Test
 }
 ";
             // All member accesses produce obsolete warnings.
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (17,25): warning CS0672: Member 'B.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'B.P'.
-                    //     public override int P { get; set; }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
-                        .WithArguments("B.P", "A.P"),
-                    // (18,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'B.M()'.
-                    //     public override void M() { }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
-                        .WithArguments("B.M()", "A.M()"),
-                    // (16,34): warning CS0672: Member 'B.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'B.E'.
-                    //     public override event Action E { add { } remove { } }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
-                        .WithArguments("B.E", "A.E"),
-                    // (24,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'C.P'.
-                    //     public override int P { get; set; }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
-                        .WithArguments("C.P", "A.P"),
-                    // (25,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'C.M()'.
-                    //     public override void M() { }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
-                        .WithArguments("C.M()", "A.M()"),
-                    // (23,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'C.E'.
-                    //     public override event Action E { add { } remove { } }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
-                        .WithArguments("C.E", "A.E"),
-                    // (32,9): warning CS0612: 'A.E' is obsolete
-                    //         a.E += null;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "a.E").WithArguments("A.E"),
-                    // (33,9): warning CS0612: 'A.P' is obsolete
-                    //         a.P++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "a.P").WithArguments("A.P"),
-                    // (34,9): warning CS0612: 'A.M()' is obsolete
-                    //         a.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "a.M()").WithArguments("A.M()"),
-                    // (36,9): warning CS0612: 'A.E' is obsolete
-                    //         b.E += null;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.E").WithArguments("A.E"),
-                    // (37,9): warning CS0612: 'A.P' is obsolete
-                    //         b.P++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.P").WithArguments("A.P"),
-                    // (38,9): warning CS0612: 'A.M()' is obsolete
-                    //         b.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.M()").WithArguments("A.M()"),
-                    // (40,9): warning CS0612: 'A.E' is obsolete
-                    //         c.E += null;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c.E").WithArguments("A.E"),
-                    // (41,9): warning CS0612: 'A.P' is obsolete
-                    //         c.P++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c.P").WithArguments("A.P"),
-                    // (42,9): warning CS0612: 'A.M()' is obsolete
-                    //         c.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c.M()").WithArguments("A.M()")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (17,25): warning CS0672: Member 'B.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'B.P'.
+                //     public override int P { get; set; }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
+                    .WithArguments("B.P", "A.P"),
+                // (18,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'B.M()'.
+                //     public override void M() { }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
+                    .WithArguments("B.M()", "A.M()"),
+                // (16,34): warning CS0672: Member 'B.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'B.E'.
+                //     public override event Action E { add { } remove { } }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
+                    .WithArguments("B.E", "A.E"),
+                // (24,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'C.P'.
+                //     public override int P { get; set; }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
+                    .WithArguments("C.P", "A.P"),
+                // (25,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'C.M()'.
+                //     public override void M() { }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
+                    .WithArguments("C.M()", "A.M()"),
+                // (23,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'C.E'.
+                //     public override event Action E { add { } remove { } }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
+                    .WithArguments("C.E", "A.E"),
+                // (32,9): warning CS0612: 'A.E' is obsolete
+                //         a.E += null;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "a.E").WithArguments("A.E"),
+                // (33,9): warning CS0612: 'A.P' is obsolete
+                //         a.P++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "a.P").WithArguments("A.P"),
+                // (34,9): warning CS0612: 'A.M()' is obsolete
+                //         a.M();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "a.M()").WithArguments("A.M()"),
+                // (36,9): warning CS0612: 'A.E' is obsolete
+                //         b.E += null;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.E").WithArguments("A.E"),
+                // (37,9): warning CS0612: 'A.P' is obsolete
+                //         b.P++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.P").WithArguments("A.P"),
+                // (38,9): warning CS0612: 'A.M()' is obsolete
+                //         b.M();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.M()").WithArguments("A.M()"),
+                // (40,9): warning CS0612: 'A.E' is obsolete
+                //         c.E += null;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c.E").WithArguments("A.E"),
+                // (41,9): warning CS0612: 'A.P' is obsolete
+                //         c.P++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c.P").WithArguments("A.P"),
+                // (42,9): warning CS0612: 'A.M()' is obsolete
+                //         c.M();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c.M()").WithArguments("A.M()")
+            );
         }
 
         [Fact]
@@ -8974,21 +8899,20 @@ class Test
 }
 ";
             // No member accesses produce obsolete warnings.
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (16,25): warning CS0809: Obsolete member 'B.P' overrides non-obsolete member 'A.P'
-                    //     public override int P { get; set; }
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "P")
-                        .WithArguments("B.P", "A.P"),
-                    // (18,26): warning CS0809: Obsolete member 'B.M()' overrides non-obsolete member 'A.M()'
-                    //     public override void M() { }
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "M")
-                        .WithArguments("B.M()", "A.M()"),
-                    // (14,34): warning CS0809: Obsolete member 'B.E' overrides non-obsolete member 'A.E'
-                    //     public override event Action E { add { } remove { } }
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "E")
-                        .WithArguments("B.E", "A.E")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (16,25): warning CS0809: Obsolete member 'B.P' overrides non-obsolete member 'A.P'
+                //     public override int P { get; set; }
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "P")
+                    .WithArguments("B.P", "A.P"),
+                // (18,26): warning CS0809: Obsolete member 'B.M()' overrides non-obsolete member 'A.M()'
+                //     public override void M() { }
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "M")
+                    .WithArguments("B.M()", "A.M()"),
+                // (14,34): warning CS0809: Obsolete member 'B.E' overrides non-obsolete member 'A.E'
+                //     public override event Action E { add { } remove { } }
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "E")
+                    .WithArguments("B.E", "A.E")
+            );
         }
 
         [Fact]
@@ -9026,26 +8950,25 @@ class Test
 }
 ";
             // All member accesses produce obsolete warnings.
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (17,26): warning CS0672: Member 'C<T>.M()' overrides obsolete member 'A<T>.M()'. Add the Obsolete attribute to 'C<T>.M()'.
-                    //     public override void M() { }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
-                        .WithArguments("C<T>.M()", "A<T>.M()"),
-                    // (12,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A<int>.M()'. Add the Obsolete attribute to 'B.M()'.
-                    //     public override void M() { }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
-                        .WithArguments("B.M()", "A<int>.M()"),
-                    // (24,9): warning CS0612: 'A<int>.M()' is obsolete
-                    //         a.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "a.M()").WithArguments("A<int>.M()"),
-                    // (25,9): warning CS0612: 'A<int>.M()' is obsolete
-                    //         b.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.M()").WithArguments("A<int>.M()"),
-                    // (26,9): warning CS0612: 'A<char>.M()' is obsolete
-                    //         c.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c.M()").WithArguments("A<char>.M()")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (17,26): warning CS0672: Member 'C<T>.M()' overrides obsolete member 'A<T>.M()'. Add the Obsolete attribute to 'C<T>.M()'.
+                //     public override void M() { }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
+                    .WithArguments("C<T>.M()", "A<T>.M()"),
+                // (12,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A<int>.M()'. Add the Obsolete attribute to 'B.M()'.
+                //     public override void M() { }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
+                    .WithArguments("B.M()", "A<int>.M()"),
+                // (24,9): warning CS0612: 'A<int>.M()' is obsolete
+                //         a.M();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "a.M()").WithArguments("A<int>.M()"),
+                // (25,9): warning CS0612: 'A<int>.M()' is obsolete
+                //         b.M();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.M()").WithArguments("A<int>.M()"),
+                // (26,9): warning CS0612: 'A<char>.M()' is obsolete
+                //         c.M();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c.M()").WithArguments("A<char>.M()")
+            );
         }
 
         [Fact]
@@ -9076,17 +8999,15 @@ class Test
 }
 ";
             // All member accesses produce obsolete warnings.
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,26): warning CS0672: Member 'B.M<T>()' overrides obsolete member 'A.M<T>()'. Add the Obsolete attribute to 'B.M<T>()'.
-                    //     public override void M<T>() { }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
-                        .WithArguments("B.M<T>()", "A.M<T>()"),
-                    // (19,9): warning CS0612: 'A.M<T>()' is obsolete
-                    //         b.M<int>();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.M<int>()")
-                        .WithArguments("A.M<T>()")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,26): warning CS0672: Member 'B.M<T>()' overrides obsolete member 'A.M<T>()'. Add the Obsolete attribute to 'B.M<T>()'.
+                //     public override void M<T>() { }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
+                    .WithArguments("B.M<T>()", "A.M<T>()"),
+                // (19,9): warning CS0612: 'A.M<T>()' is obsolete
+                //         b.M<int>();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.M<int>()").WithArguments("A.M<T>()")
+            );
         }
 
         [Fact]
@@ -9136,51 +9057,50 @@ public class C : B
 }
 ";
             // Reported in B.Test and C.Test against members of A.
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (17,25): warning CS0672: Member 'B.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'B.P'.
-                    //     public override int P { get; set; }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
-                        .WithArguments("B.P", "A.P"),
-                    // (18,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'B.M()'.
-                    //     public override void M() { }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
-                        .WithArguments("B.M()", "A.M()"),
-                    // (16,34): warning CS0672: Member 'B.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'B.E'.
-                    //     public override event Action E { add { } remove { } }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
-                        .WithArguments("B.E", "A.E"),
-                    // (31,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'C.P'.
-                    //     public override int P { get; set; }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
-                        .WithArguments("C.P", "A.P"),
-                    // (32,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'C.M()'.
-                    //     public override void M() { }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
-                        .WithArguments("C.M()", "A.M()"),
-                    // (30,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'C.E'.
-                    //     public override event Action E { add { } remove { } }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
-                        .WithArguments("C.E", "A.E"),
-                    // (23,9): warning CS0612: 'A.P' is obsolete
-                    //         base.P++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.P").WithArguments("A.P"),
-                    // (24,9): warning CS0612: 'A.M()' is obsolete
-                    //         base.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.M()").WithArguments("A.M()"),
-                    // (22,9): warning CS0612: 'A.E' is obsolete
-                    //         base.E += null;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.E").WithArguments("A.E"),
-                    // (37,9): warning CS0612: 'A.P' is obsolete
-                    //         base.P++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.P").WithArguments("A.P"),
-                    // (38,9): warning CS0612: 'A.M()' is obsolete
-                    //         base.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.M()").WithArguments("A.M()"),
-                    // (36,9): warning CS0612: 'A.E' is obsolete
-                    //         base.E += null;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.E").WithArguments("A.E")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (17,25): warning CS0672: Member 'B.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'B.P'.
+                //     public override int P { get; set; }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
+                    .WithArguments("B.P", "A.P"),
+                // (18,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'B.M()'.
+                //     public override void M() { }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
+                    .WithArguments("B.M()", "A.M()"),
+                // (16,34): warning CS0672: Member 'B.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'B.E'.
+                //     public override event Action E { add { } remove { } }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
+                    .WithArguments("B.E", "A.E"),
+                // (31,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'C.P'.
+                //     public override int P { get; set; }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
+                    .WithArguments("C.P", "A.P"),
+                // (32,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'C.M()'.
+                //     public override void M() { }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
+                    .WithArguments("C.M()", "A.M()"),
+                // (30,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'C.E'.
+                //     public override event Action E { add { } remove { } }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
+                    .WithArguments("C.E", "A.E"),
+                // (23,9): warning CS0612: 'A.P' is obsolete
+                //         base.P++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.P").WithArguments("A.P"),
+                // (24,9): warning CS0612: 'A.M()' is obsolete
+                //         base.M();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.M()").WithArguments("A.M()"),
+                // (22,9): warning CS0612: 'A.E' is obsolete
+                //         base.E += null;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.E").WithArguments("A.E"),
+                // (37,9): warning CS0612: 'A.P' is obsolete
+                //         base.P++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.P").WithArguments("A.P"),
+                // (38,9): warning CS0612: 'A.M()' is obsolete
+                //         base.M();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.M()").WithArguments("A.M()"),
+                // (36,9): warning CS0612: 'A.E' is obsolete
+                //         base.E += null;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.E").WithArguments("A.E")
+            );
         }
 
         [Fact]
@@ -9234,39 +9154,38 @@ public class C : B
 ";
             // Reported in B.Test and C.Test against members of A (seems like C.Test should report against members of B,
             // but this is dev11's behavior).
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (34,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'C.P'.
-                    //     public override int P { get; set; }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
-                        .WithArguments("C.P", "A.P"),
-                    // (35,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'C.M()'.
-                    //     public override void M() { }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
-                        .WithArguments("C.M()", "A.M()"),
-                    // (33,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'C.E'.
-                    //     public override event Action E { add { } remove { } }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
-                        .WithArguments("C.E", "A.E"),
-                    // (26,9): warning CS0612: 'A.P' is obsolete
-                    //         base.P++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.P").WithArguments("A.P"),
-                    // (27,9): warning CS0612: 'A.M()' is obsolete
-                    //         base.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.M()").WithArguments("A.M()"),
-                    // (25,9): warning CS0612: 'A.E' is obsolete
-                    //         base.E += null;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.E").WithArguments("A.E"),
-                    // (40,9): warning CS0612: 'A.P' is obsolete
-                    //         base.P++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.P").WithArguments("A.P"),
-                    // (41,9): warning CS0612: 'A.M()' is obsolete
-                    //         base.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.M()").WithArguments("A.M()"),
-                    // (39,9): warning CS0612: 'A.E' is obsolete
-                    //         base.E += null;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.E").WithArguments("A.E")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (34,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'C.P'.
+                //     public override int P { get; set; }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
+                    .WithArguments("C.P", "A.P"),
+                // (35,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'C.M()'.
+                //     public override void M() { }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
+                    .WithArguments("C.M()", "A.M()"),
+                // (33,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'C.E'.
+                //     public override event Action E { add { } remove { } }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
+                    .WithArguments("C.E", "A.E"),
+                // (26,9): warning CS0612: 'A.P' is obsolete
+                //         base.P++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.P").WithArguments("A.P"),
+                // (27,9): warning CS0612: 'A.M()' is obsolete
+                //         base.M();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.M()").WithArguments("A.M()"),
+                // (25,9): warning CS0612: 'A.E' is obsolete
+                //         base.E += null;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.E").WithArguments("A.E"),
+                // (40,9): warning CS0612: 'A.P' is obsolete
+                //         base.P++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.P").WithArguments("A.P"),
+                // (41,9): warning CS0612: 'A.M()' is obsolete
+                //         base.M();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.M()").WithArguments("A.M()"),
+                // (39,9): warning CS0612: 'A.E' is obsolete
+                //         base.E += null;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.E").WithArguments("A.E")
+            );
         }
 
         [Fact]
@@ -9315,30 +9234,29 @@ public class C : B
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (16,25): warning CS0809: Obsolete member 'B.P' overrides non-obsolete member 'A.P'
-                    //     public override int P { get; set; }
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "P")
-                        .WithArguments("B.P", "A.P"),
-                    // (18,26): warning CS0809: Obsolete member 'B.M()' overrides non-obsolete member 'A.M()'
-                    //     public override void M() { }
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "M")
-                        .WithArguments("B.M()", "A.M()"),
-                    // (14,34): warning CS0809: Obsolete member 'B.E' overrides non-obsolete member 'A.E'
-                    //     public override event Action E { add { } remove { } }
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "E")
-                        .WithArguments("B.E", "A.E"),
-                    // (37,9): warning CS0612: 'B.P' is obsolete
-                    //         base.P++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.P").WithArguments("B.P"),
-                    // (38,9): warning CS0612: 'B.M()' is obsolete
-                    //         base.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.M()").WithArguments("B.M()"),
-                    // (36,9): warning CS0612: 'B.E' is obsolete
-                    //         base.E += null;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.E").WithArguments("B.E")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (16,25): warning CS0809: Obsolete member 'B.P' overrides non-obsolete member 'A.P'
+                //     public override int P { get; set; }
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "P")
+                    .WithArguments("B.P", "A.P"),
+                // (18,26): warning CS0809: Obsolete member 'B.M()' overrides non-obsolete member 'A.M()'
+                //     public override void M() { }
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "M")
+                    .WithArguments("B.M()", "A.M()"),
+                // (14,34): warning CS0809: Obsolete member 'B.E' overrides non-obsolete member 'A.E'
+                //     public override event Action E { add { } remove { } }
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "E")
+                    .WithArguments("B.E", "A.E"),
+                // (37,9): warning CS0612: 'B.P' is obsolete
+                //         base.P++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.P").WithArguments("B.P"),
+                // (38,9): warning CS0612: 'B.M()' is obsolete
+                //         base.M();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.M()").WithArguments("B.M()"),
+                // (36,9): warning CS0612: 'B.E' is obsolete
+                //         base.E += null;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base.E").WithArguments("B.E")
+            );
         }
 
         [Fact]
@@ -9374,24 +9292,22 @@ public class C : B
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (15,25): warning CS0809: Obsolete member 'B.this[int]' overrides non-obsolete member 'A.this[int]'
-                    //     public override int this[int x] { get { return 0; } set { } }
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "this")
-                        .WithArguments("B.this[int]", "A.this[int]"),
-                    // (20,5): warning CS0612: 'B.B()' is obsolete
-                    //     public C() { } // Implicit base constructor invocation.
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "public C() { }")
-                        .WithArguments("B.B()"),
-                    // (21,21): warning CS0612: 'B.B()' is obsolete
-                    //     public C(int x) : base() { } // Doesn't override anything anyway.
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, ": base()").WithArguments("B.B()"),
-                    // (25,9): warning CS0612: 'B.this[int]' is obsolete
-                    //         base[1]++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base[1]")
-                        .WithArguments("B.this[int]")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (15,25): warning CS0809: Obsolete member 'B.this[int]' overrides non-obsolete member 'A.this[int]'
+                //     public override int this[int x] { get { return 0; } set { } }
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "this")
+                    .WithArguments("B.this[int]", "A.this[int]"),
+                // (20,5): warning CS0612: 'B.B()' is obsolete
+                //     public C() { } // Implicit base constructor invocation.
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "public C() { }")
+                    .WithArguments("B.B()"),
+                // (21,21): warning CS0612: 'B.B()' is obsolete
+                //     public C(int x) : base() { } // Doesn't override anything anyway.
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, ": base()").WithArguments("B.B()"),
+                // (25,9): warning CS0612: 'B.this[int]' is obsolete
+                //         base[1]++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "base[1]").WithArguments("B.this[int]")
+            );
         }
 
         [Fact]
@@ -9434,29 +9350,28 @@ class Test
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (29,15): warning CS0618: 'B.explicit operator B(A)' is obsolete: 'B to A'
-                    //         B b = (B)a;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "(B)a")
-                        .WithArguments("B.explicit operator B(A)", "B to A"),
-                    // (30,13): warning CS0618: 'B.implicit operator A(B)' is obsolete: 'A to B'
-                    //         a = b;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "b")
-                        .WithArguments("B.implicit operator A(B)", "A to B"),
-                    // (31,19): warning CS0618: 'B.implicit operator A(B)' is obsolete: 'A to B'
-                    //         a = (A)(B)(A)b;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "(A)b")
-                        .WithArguments("B.implicit operator A(B)", "A to B"),
-                    // (31,16): warning CS0618: 'B.explicit operator B(A)' is obsolete: 'B to A'
-                    //         a = (A)(B)(A)b;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "(B)(A)b")
-                        .WithArguments("B.explicit operator B(A)", "B to A"),
-                    // (31,13): warning CS0618: 'B.implicit operator A(B)' is obsolete: 'A to B'
-                    //         a = (A)(B)(A)b;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "(A)(B)(A)b")
-                        .WithArguments("B.implicit operator A(B)", "A to B")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (29,15): warning CS0618: 'B.explicit operator B(A)' is obsolete: 'B to A'
+                //         B b = (B)a;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "(B)a")
+                    .WithArguments("B.explicit operator B(A)", "B to A"),
+                // (30,13): warning CS0618: 'B.implicit operator A(B)' is obsolete: 'A to B'
+                //         a = b;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "b")
+                    .WithArguments("B.implicit operator A(B)", "A to B"),
+                // (31,19): warning CS0618: 'B.implicit operator A(B)' is obsolete: 'A to B'
+                //         a = (A)(B)(A)b;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "(A)b")
+                    .WithArguments("B.implicit operator A(B)", "A to B"),
+                // (31,16): warning CS0618: 'B.explicit operator B(A)' is obsolete: 'B to A'
+                //         a = (A)(B)(A)b;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "(B)(A)b")
+                    .WithArguments("B.explicit operator B(A)", "B to A"),
+                // (31,13): warning CS0618: 'B.implicit operator A(B)' is obsolete: 'A to B'
+                //         a = (A)(B)(A)b;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "(A)(B)(A)b")
+                    .WithArguments("B.implicit operator A(B)", "A to B")
+            );
         }
 
         [Fact]
@@ -9499,17 +9414,16 @@ class Test
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (25,17): warning CS0618: 'A<int>.implicit operator int(A<int>)' is obsolete: 'A<T> to T'
-                    //         int i = ai;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "ai")
-                        .WithArguments("A<int>.implicit operator int(A<int>)", "A<T> to T"),
-                    // (26,14): warning CS0618: 'A<int>.implicit operator A<int>(int)' is obsolete: 'T to A<T>'
-                    //         ai = i;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "i")
-                        .WithArguments("A<int>.implicit operator A<int>(int)", "T to A<T>")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (25,17): warning CS0618: 'A<int>.implicit operator int(A<int>)' is obsolete: 'A<T> to T'
+                //         int i = ai;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "ai")
+                    .WithArguments("A<int>.implicit operator int(A<int>)", "A<T> to T"),
+                // (26,14): warning CS0618: 'A<int>.implicit operator A<int>(int)' is obsolete: 'T to A<T>'
+                //         ai = i;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "i")
+                    .WithArguments("A<int>.implicit operator A<int>(int)", "T to A<T>")
+            );
         }
 
         [Fact]
@@ -9555,28 +9469,24 @@ class Test
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (25,13): warning CS0618: 'Convertible.implicit operator bool(Convertible)' is obsolete: 'To bool'
-                    //         if (c)
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c")
-                        .WithArguments(
-                            "Convertible.implicit operator bool(Convertible)",
-                            "To bool"
-                        ),
-                    // (27,21): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
-                    //             switch (c)
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c")
-                        .WithArguments("Convertible.implicit operator int(Convertible)", "To int"),
-                    // (30,29): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
-                    //                     int x = c + 1;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c")
-                        .WithArguments("Convertible.implicit operator int(Convertible)", "To int"),
-                    // (31,26): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
-                    //                     x = +c;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c")
-                        .WithArguments("Convertible.implicit operator int(Convertible)", "To int")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (25,13): warning CS0618: 'Convertible.implicit operator bool(Convertible)' is obsolete: 'To bool'
+                //         if (c)
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c")
+                    .WithArguments("Convertible.implicit operator bool(Convertible)", "To bool"),
+                // (27,21): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
+                //             switch (c)
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c")
+                    .WithArguments("Convertible.implicit operator int(Convertible)", "To int"),
+                // (30,29): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
+                //                     int x = c + 1;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c")
+                    .WithArguments("Convertible.implicit operator int(Convertible)", "To int"),
+                // (31,26): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
+                //                     x = +c;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c")
+                    .WithArguments("Convertible.implicit operator int(Convertible)", "To int")
+            );
         }
 
         [Fact]
@@ -9607,13 +9517,12 @@ class Test
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (19,14): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
-                    //         args[c].ToString();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c")
-                        .WithArguments("Convertible.implicit operator int(Convertible)", "To int")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (19,14): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
+                //         args[c].ToString();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c")
+                    .WithArguments("Convertible.implicit operator int(Convertible)", "To int")
+            );
         }
 
         [Fact]
@@ -9653,35 +9562,28 @@ class Test
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (26,13): warning CS0618: 'Convertible.implicit operator Convertible(int)' is obsolete: 'From int'
-                    //             c++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c++")
-                        .WithArguments(
-                            "Convertible.implicit operator Convertible(int)",
-                            "From int"
-                        ),
-                    // (26,13): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
-                    //             c++;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c++")
-                        .WithArguments("Convertible.implicit operator int(Convertible)", "To int"),
-                    // (27,13): warning CS0618: 'Convertible.implicit operator Convertible(int)' is obsolete: 'From int'
-                    //             c -= 2;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c -= 2")
-                        .WithArguments(
-                            "Convertible.implicit operator Convertible(int)",
-                            "From int"
-                        ),
-                    // (27,13): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
-                    //             c -= 2;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c -= 2")
-                        .WithArguments("Convertible.implicit operator int(Convertible)", "To int"),
-                    // (23,9): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
-                    //         foreach (int i in new Convertible[1])
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "foreach")
-                        .WithArguments("Convertible.implicit operator int(Convertible)", "To int")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (26,13): warning CS0618: 'Convertible.implicit operator Convertible(int)' is obsolete: 'From int'
+                //             c++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c++")
+                    .WithArguments("Convertible.implicit operator Convertible(int)", "From int"),
+                // (26,13): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
+                //             c++;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c++")
+                    .WithArguments("Convertible.implicit operator int(Convertible)", "To int"),
+                // (27,13): warning CS0618: 'Convertible.implicit operator Convertible(int)' is obsolete: 'From int'
+                //             c -= 2;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c -= 2")
+                    .WithArguments("Convertible.implicit operator Convertible(int)", "From int"),
+                // (27,13): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
+                //             c -= 2;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c -= 2")
+                    .WithArguments("Convertible.implicit operator int(Convertible)", "To int"),
+                // (23,9): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
+                //         foreach (int i in new Convertible[1])
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "foreach")
+                    .WithArguments("Convertible.implicit operator int(Convertible)", "To int")
+            );
         }
 
         [Fact]
@@ -9711,13 +9613,12 @@ class Test
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (18,17): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
-                    //         int i = c ?? 1;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c ?? 1")
-                        .WithArguments("Convertible.implicit operator int(Convertible)", "To int")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (18,17): warning CS0618: 'Convertible.implicit operator int(Convertible)' is obsolete: 'To int'
+                //         int i = c ?? 1;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "c ?? 1")
+                    .WithArguments("Convertible.implicit operator int(Convertible)", "To int")
+            );
         }
 
         private const string ObsoleteAttributeSource =
@@ -9972,7 +9873,9 @@ class C
             diags.Verify(
                 // (12,9): warning TEST1: 'C.M1()' is obsolete: 'don't use'
                 //         M1(); // 1
-                Diagnostic("TEST1", "M1()").WithArguments("C.M1()", "don't use").WithLocation(12, 9)
+                Diagnostic("TEST1", "M1()")
+                    .WithArguments("C.M1()", "don't use")
+                    .WithLocation(12, 9)
             );
         }
 
@@ -10075,7 +9978,9 @@ class C
                     .WithLocation(20, 9),
                 // (24,9): warning TEST1: 'C.M1()' is obsolete: 'don't use'
                 //         M1(); // 4
-                Diagnostic("TEST1", "M1()").WithArguments("C.M1()", "don't use").WithLocation(24, 9)
+                Diagnostic("TEST1", "M1()")
+                    .WithArguments("C.M1()", "don't use")
+                    .WithLocation(24, 9)
             );
         }
 
@@ -10369,12 +10274,11 @@ class C2 : C1
 
             // WithSpecificDiagnosticOption for id TEST1
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Warn
-                    )
-                ),
+                TestOptions.DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>.Empty
+                            .Add("TEST1", ReportDiagnostic.Warn)
+                    ),
                 // (6,9): warning TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10383,12 +10287,11 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Error
-                    )
-                ),
+                TestOptions.DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>.Empty
+                            .Add("TEST1", ReportDiagnostic.Error)
+                    ),
                 // (6,9): error TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10398,12 +10301,11 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Hidden
-                    )
-                ),
+                TestOptions.DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>.Empty
+                            .Add("TEST1", ReportDiagnostic.Hidden)
+                    ),
                 // (6,9): hidden TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10412,22 +10314,20 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Suppress
+                TestOptions.DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>.Empty
+                            .Add("TEST1", ReportDiagnostic.Suppress)
                     )
-                )
             );
 
             // WithSpecificDiagnosticOption for id CS0618
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "CS0618",
-                        ReportDiagnostic.Error
-                    )
-                ),
+                TestOptions.DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>.Empty
+                            .Add("CS0618", ReportDiagnostic.Error)
+                    ),
                 // (6,9): warning TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10436,12 +10336,11 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "CS0618",
-                        ReportDiagnostic.Suppress
-                    )
-                ),
+                TestOptions.DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>.Empty
+                            .Add("CS0618", ReportDiagnostic.Suppress)
+                    ),
                 // (6,9): warning TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -11410,17 +11309,16 @@ public class F : E
     public override void M() { }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (13,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'B.M()'.
-                    //     public override void M() { }
-                    Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
-                        .WithArguments("B.M()", "A.M()"),
-                    // (31,26): warning CS0809: Obsolete member 'E.M()' overrides non-obsolete member 'D.M()'
-                    //     public override void M() { }
-                    Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "M")
-                        .WithArguments("E.M()", "D.M()")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (13,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'B.M()'.
+                //     public override void M() { }
+                Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
+                    .WithArguments("B.M()", "A.M()"),
+                // (31,26): warning CS0809: Obsolete member 'E.M()' overrides non-obsolete member 'D.M()'
+                //     public override void M() { }
+                Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "M")
+                    .WithArguments("E.M()", "D.M()")
+            );
         }
 
         [Fact]
@@ -11442,7 +11340,8 @@ public class C
 
             Action<ModuleSymbol> validator = module =>
             {
-                var method = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                var method = module.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("C")
                     .GetMember<MethodSymbol>("M");
                 var param = method.Parameters.Single();
 
@@ -15207,7 +15106,8 @@ class MyAttribute : System.Attribute
                                     "AsyncStateMachineAttribute"
                                 )
                                 .ConstructorArguments.Single().ValueInternal
-                        ).GetMember<MethodSymbol>("MoveNext")
+                        )
+                            .GetMember<MethodSymbol>("MoveNext")
                     )
                 );
 
@@ -15220,7 +15120,9 @@ class MyAttribute : System.Attribute
                                 "AsyncStateMachineAttribute"
                             )
                             .ConstructorArguments.Single().ValueInternal
-                    ).GetMember<MethodSymbol>("MoveNext").GetAttributes().Length
+                    )
+                        .GetMember<MethodSymbol>("MoveNext")
+                        .GetAttributes().Length
                 );
 
                 Assert.Equal(
@@ -15233,7 +15135,8 @@ class MyAttribute : System.Attribute
                                     "IteratorStateMachineAttribute"
                                 )
                                 .ConstructorArguments.Single().ValueInternal
-                        ).GetMember<MethodSymbol>("MoveNext")
+                        )
+                            .GetMember<MethodSymbol>("MoveNext")
                     )
                 );
 
@@ -15246,7 +15149,9 @@ class MyAttribute : System.Attribute
                                 "IteratorStateMachineAttribute"
                             )
                             .ConstructorArguments.Single().ValueInternal
-                    ).GetMember<MethodSymbol>("MoveNext").GetAttributes().Length
+                    )
+                        .GetMember<MethodSymbol>("MoveNext")
+                        .GetAttributes().Length
                 );
             };
 
@@ -15452,19 +15357,18 @@ class Test
     }
 }";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,14): error CS0619: 'TestError' is obsolete: 'Broken Error Class'
-                    // using static TestError;
-                    Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "TestError")
-                        .WithArguments("TestError", "Broken Error Class")
-                        .WithLocation(3, 14),
-                    // (4,14): warning CS0618: 'TestWarning' is obsolete: 'Broken Warning Class'
-                    // using static TestWarning;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "TestWarning")
-                        .WithArguments("TestWarning", "Broken Warning Class")
-                        .WithLocation(4, 14)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,14): error CS0619: 'TestError' is obsolete: 'Broken Error Class'
+                // using static TestError;
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "TestError")
+                    .WithArguments("TestError", "Broken Error Class")
+                    .WithLocation(3, 14),
+                // (4,14): warning CS0618: 'TestWarning' is obsolete: 'Broken Warning Class'
+                // using static TestWarning;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "TestWarning")
+                    .WithArguments("TestWarning", "Broken Warning Class")
+                    .WithLocation(4, 14)
+            );
         }
 
         [Fact, WorkItem(10639, "https://github.com/dotnet/roslyn/issues/10639")]
@@ -15524,32 +15428,28 @@ class Test
     }
 }";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,14): warning CS0612: 'ActiveParent.ObsoleteChild' is obsolete
-                    // using static ActiveParent.ObsoleteChild;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "ActiveParent.ObsoleteChild")
-                        .WithArguments("ActiveParent.ObsoleteChild")
-                        .WithLocation(3, 14),
-                    // (4,14): warning CS0612: 'ObsoleteParent' is obsolete
-                    // using static ObsoleteParent.ActiveChild;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "ObsoleteParent")
-                        .WithArguments("ObsoleteParent")
-                        .WithLocation(4, 14),
-                    // (5,14): warning CS0612: 'BothObsoleteParent' is obsolete
-                    // using static BothObsoleteParent.BothObsoleteChild;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "BothObsoleteParent")
-                        .WithArguments("BothObsoleteParent")
-                        .WithLocation(5, 14),
-                    // (5,14): warning CS0612: 'BothObsoleteParent.BothObsoleteChild' is obsolete
-                    // using static BothObsoleteParent.BothObsoleteChild;
-                    Diagnostic(
-                            ErrorCode.WRN_DeprecatedSymbol,
-                            "BothObsoleteParent.BothObsoleteChild"
-                        )
-                        .WithArguments("BothObsoleteParent.BothObsoleteChild")
-                        .WithLocation(5, 14)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,14): warning CS0612: 'ActiveParent.ObsoleteChild' is obsolete
+                // using static ActiveParent.ObsoleteChild;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "ActiveParent.ObsoleteChild")
+                    .WithArguments("ActiveParent.ObsoleteChild")
+                    .WithLocation(3, 14),
+                // (4,14): warning CS0612: 'ObsoleteParent' is obsolete
+                // using static ObsoleteParent.ActiveChild;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "ObsoleteParent")
+                    .WithArguments("ObsoleteParent")
+                    .WithLocation(4, 14),
+                // (5,14): warning CS0612: 'BothObsoleteParent' is obsolete
+                // using static BothObsoleteParent.BothObsoleteChild;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "BothObsoleteParent")
+                    .WithArguments("BothObsoleteParent")
+                    .WithLocation(5, 14),
+                // (5,14): warning CS0612: 'BothObsoleteParent.BothObsoleteChild' is obsolete
+                // using static BothObsoleteParent.BothObsoleteChild;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "BothObsoleteParent.BothObsoleteChild")
+                    .WithArguments("BothObsoleteParent.BothObsoleteChild")
+                    .WithLocation(5, 14)
+            );
         }
 
         [Fact, WorkItem(19394, "https://github.com/dotnet/roslyn/issues/19394")]
@@ -15571,14 +15471,12 @@ class T
     void M(dynamic x) {}
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics()
-                .VerifyEmitDiagnostics(
-                    // error CS0616: 'System.Runtime.CompilerServices.DynamicAttribute' is not an attribute class
-                    Diagnostic(ErrorCode.ERR_NotAnAttributeClass)
-                        .WithArguments("System.Runtime.CompilerServices.DynamicAttribute")
-                        .WithLocation(1, 1)
-                );
+            CreateCompilation(code).VerifyDiagnostics().VerifyEmitDiagnostics(
+                // error CS0616: 'System.Runtime.CompilerServices.DynamicAttribute' is not an attribute class
+                Diagnostic(ErrorCode.ERR_NotAnAttributeClass)
+                    .WithArguments("System.Runtime.CompilerServices.DynamicAttribute")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact, WorkItem(19394, "https://github.com/dotnet/roslyn/issues/19394")]
@@ -15622,7 +15520,8 @@ first
 second",
                 symbolValidator: module =>
                 {
-                    var attribute = module.ContainingAssembly.GetTypeByMetadataName("Program")
+                    var attribute = module.ContainingAssembly
+                        .GetTypeByMetadataName("Program")
                         .GetMethod("Test")
                         .Parameters.Single()
                         .GetAttributes()
@@ -15663,14 +15562,12 @@ class Test
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics()
-                .VerifyEmitDiagnostics(
-                    // error CS0616: 'IsReadOnlyAttribute' is not an attribute class
-                    Diagnostic(ErrorCode.ERR_NotAnAttributeClass)
-                        .WithArguments("System.Runtime.CompilerServices.IsReadOnlyAttribute")
-                        .WithLocation(1, 1)
-                );
+            CreateCompilation(code).VerifyDiagnostics().VerifyEmitDiagnostics(
+                // error CS0616: 'IsReadOnlyAttribute' is not an attribute class
+                Diagnostic(ErrorCode.ERR_NotAnAttributeClass)
+                    .WithArguments("System.Runtime.CompilerServices.IsReadOnlyAttribute")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
@@ -15708,29 +15605,28 @@ class C
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (5,24): warning CS0612: 'C.Prop' is obsolete
-                    //     public void M() => Prop = Prop;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Prop")
-                        .WithArguments("C.Prop")
-                        .WithLocation(5, 24),
-                    // (5,24): warning CS0612: 'C.Prop.set' is obsolete
-                    //     public void M() => Prop = Prop;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Prop")
-                        .WithArguments("C.Prop.set")
-                        .WithLocation(5, 24),
-                    // (5,31): warning CS0612: 'C.Prop' is obsolete
-                    //     public void M() => Prop = Prop;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Prop")
-                        .WithArguments("C.Prop")
-                        .WithLocation(5, 31),
-                    // (5,31): warning CS0612: 'C.Prop.get' is obsolete
-                    //     public void M() => Prop = Prop;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Prop")
-                        .WithArguments("C.Prop.get")
-                        .WithLocation(5, 31)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (5,24): warning CS0612: 'C.Prop' is obsolete
+                //     public void M() => Prop = Prop;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Prop")
+                    .WithArguments("C.Prop")
+                    .WithLocation(5, 24),
+                // (5,24): warning CS0612: 'C.Prop.set' is obsolete
+                //     public void M() => Prop = Prop;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Prop")
+                    .WithArguments("C.Prop.set")
+                    .WithLocation(5, 24),
+                // (5,31): warning CS0612: 'C.Prop' is obsolete
+                //     public void M() => Prop = Prop;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Prop")
+                    .WithArguments("C.Prop")
+                    .WithLocation(5, 31),
+                // (5,31): warning CS0612: 'C.Prop.get' is obsolete
+                //     public void M() => Prop = Prop;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Prop")
+                    .WithArguments("C.Prop.get")
+                    .WithLocation(5, 31)
+            );
         }
 
         [Fact]
@@ -15768,17 +15664,17 @@ class C
 ";
 
             CreateEmptyCompilation(
-                    code,
-                    references: WinRtRefs,
-                    parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7_3)
-                )
+                code,
+                references: WinRtRefs,
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7_3)
+            )
                 .VerifyDiagnostics(
                     // (5,24): error CS8652: The feature 'obsolete on property accessor' is not available in C# 7.3. Please use language version 8.0 or greater.
                     //     public int Prop { [Deprecated("don't use this", DeprecationType.Remove, 50331648u)] get; set; }
                     Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
-                            @"Deprecated(""don't use this"", DeprecationType.Remove, 50331648u)"
-                        )
+                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                        @"Deprecated(""don't use this"", DeprecationType.Remove, 50331648u)"
+                    )
                         .WithArguments("obsolete on property accessor", "8.0")
                         .WithLocation(5, 24)
                 );
@@ -15840,10 +15736,10 @@ class C
 ";
 
             CreateEmptyCompilation(
-                    code,
-                    references: WinRtRefs,
-                    parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7_3)
-                )
+                code,
+                references: WinRtRefs,
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7_3)
+            )
                 .VerifyDiagnostics(
                     // (7,10): error CS8423: Attribute 'Windows.Foundation.Metadata.DeprecatedAttribute' is not valid on event accessors. It is only valid on 'class, struct, enum, constructor, method, property, indexer, field, event, interface, delegate' declarations.
                     //         [Deprecated("don't use this", DeprecationType.Remove, 50331648u)]

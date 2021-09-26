@@ -26,8 +26,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             var mockDescriptor = Mock.Of<IAuthenticatedEncryptorDescriptor>();
             var mockInternalKeyManager = new Mock<IInternalXmlKeyManager>();
             mockInternalKeyManager.Setup(
-                    o => o.DeserializeDescriptorFromKeyElement(It.IsAny<XElement>())
-                )
+                o => o.DeserializeDescriptorFromKeyElement(It.IsAny<XElement>())
+            )
                 .Returns<XElement>(
                     element =>
                     {

@@ -104,14 +104,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                             ExpressionSyntax sizeExpression = arguments[0].Expression;
 
-                            BinderFactory binderFactory =
-                                this.DeclaringCompilation.GetBinderFactory(SyntaxTree);
+                            BinderFactory binderFactory = this.DeclaringCompilation
+                                .GetBinderFactory(SyntaxTree);
                             Binder binder = binderFactory.GetBinder(sizeExpression);
                             binder = new ExecutableCodeBinder(
                                 sizeExpression,
                                 binder.ContainingMemberOrLambda,
                                 binder
-                            ).GetBinder(sizeExpression);
+                            )
+                                .GetBinder(sizeExpression);
 
                             TypeSymbol intType = binder.GetSpecialType(
                                 SpecialType.System_Int32,

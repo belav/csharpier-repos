@@ -32,13 +32,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
-                    solution,
-                    context.InputNodes,
-                    cancellationToken
-                )
+                solution,
+                context.InputNodes,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
-            var searchTasks = solution.Projects.Where(p => p.FilePath != null)
+            var searchTasks = solution.Projects
+                .Where(p => p.FilePath != null)
                 .Select(p => ProcessProjectAsync(p, graphBuilder, cancellationToken))
                 .ToArray();
             await Task.WhenAll(searchTasks).ConfigureAwait(false);
@@ -67,11 +68,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         if (symbol is INamedTypeSymbol namedType)
                         {
                             await AddLinkedNodeForTypeAsync(
-                                    project,
-                                    namedType,
-                                    graphBuilder,
-                                    symbol.DeclaringSyntaxReferences.Select(d => d.SyntaxTree)
-                                )
+                                project,
+                                namedType,
+                                graphBuilder,
+                                symbol.DeclaringSyntaxReferences.Select(d => d.SyntaxTree)
+                            )
                                 .ConfigureAwait(false);
                         }
                         else
@@ -95,16 +96,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             if (namedType.ContainingType != null)
             {
                 var parentTypeNode = await AddLinkedNodeForTypeAsync(
-                        project,
-                        namedType.ContainingType,
-                        graphBuilder,
-                        syntaxTrees
-                    )
+                    project,
+                    namedType.ContainingType,
+                    graphBuilder,
+                    syntaxTrees
+                )
                     .ConfigureAwait(false);
                 var typeNode = await graphBuilder.AddNodeAsync(
-                        namedType,
-                        relatedNode: parentTypeNode
-                    )
+                    namedType,
+                    relatedNode: parentTypeNode
+                )
                     .ConfigureAwait(false);
                 graphBuilder.AddLink(parentTypeNode, GraphCommonSchema.Contains, typeNode);
 
@@ -114,10 +115,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             {
                 // From here, we can link back up to the containing project item
                 var typeNode = await graphBuilder.AddNodeAsync(
-                        namedType,
-                        contextProject: project,
-                        contextDocument: null
-                    )
+                    namedType,
+                    contextProject: project,
+                    contextDocument: null
+                )
                     .ConfigureAwait(false);
 
                 foreach (var tree in syntaxTrees)
@@ -145,11 +146,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             var trees = member.DeclaringSyntaxReferences.Select(d => d.SyntaxTree);
 
             var parentTypeNode = await AddLinkedNodeForTypeAsync(
-                    project,
-                    member.ContainingType,
-                    graphBuilder,
-                    trees
-                )
+                project,
+                member.ContainingType,
+                graphBuilder,
+                trees
+            )
                 .ConfigureAwait(false);
             var memberNode = await graphBuilder.AddNodeAsync(symbol, relatedNode: parentTypeNode)
                 .ConfigureAwait(false);
@@ -178,11 +179,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             try
             {
                 declarations = await DeclarationFinder.FindSourceDeclarationsWithPatternAsync(
-                        project,
-                        _searchPattern,
-                        SymbolFilter.TypeAndMember,
-                        cancellationToken
-                    )
+                    project,
+                    _searchPattern,
+                    SymbolFilter.TypeAndMember,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (SoftCrashException ex) when (ex.InnerException != null)

@@ -158,11 +158,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     },
                     out error
                 );
-                result = r.CompileResult.ToQueryResult(
-                    CompilerId,
-                    r.ResultProperties,
-                    runtimeInstance
-                );
+                result = r.CompileResult
+                    .ToQueryResult(CompilerId, r.ResultProperties, runtimeInstance);
             }
             catch (Exception e) when (ExpressionEvaluatorFatalError.CrashIfFailFastEnabled(e))
             {
@@ -211,11 +208,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         ) == DkmClrCompilationResultFlags.PotentialSideEffect
                 );
 
-                result = r.CompileResult.ToQueryResult(
-                    CompilerId,
-                    r.ResultProperties,
-                    runtimeInstance
-                );
+                result = r.CompileResult
+                    .ToQueryResult(CompilerId, r.ResultProperties, runtimeInstance);
             }
             catch (Exception e) when (ExpressionEvaluatorFatalError.CrashIfFailFastEnabled(e))
             {
@@ -547,8 +541,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         {
                             if (assembliesLoadedInRetryLoop == null)
                             {
-                                assembliesLoadedInRetryLoop =
-                                    PooledHashSet<AssemblyIdentity>.GetInstance();
+                                assembliesLoadedInRetryLoop = PooledHashSet<AssemblyIdentity>
+                                    .GetInstance();
                             }
                             // If any identities failed to add (they were already in the list), then don't retry.
                             if (assembliesLoadedInRetryLoop.AddAll(missingAssemblyIdentities))

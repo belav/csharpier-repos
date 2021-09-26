@@ -49,10 +49,11 @@ class MyClass : Microsoft.EntityFrameworkCore.Storage.Internal.RawRelationalPara
                     Assert.Equal(InternalUsageDiagnosticAnalyzer.Id, diagnostic.Id);
                     Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
                     Assert.Equal(
-                        string.Format(
-                            InternalUsageDiagnosticAnalyzer.MessageFormat,
-                            "Microsoft.EntityFrameworkCore.Storage.Internal.RawRelationalParameter"
-                        ),
+                        string
+                            .Format(
+                                InternalUsageDiagnosticAnalyzer.MessageFormat,
+                                "Microsoft.EntityFrameworkCore.Storage.Internal.RawRelationalParameter"
+                            ),
                         diagnostic.GetMessage()
                     );
 
@@ -67,10 +68,11 @@ class MyClass : Microsoft.EntityFrameworkCore.Storage.Internal.RawRelationalPara
                     Assert.Equal(InternalUsageDiagnosticAnalyzer.Id, diagnostic.Id);
                     Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
                     Assert.Equal(
-                        string.Format(
-                            InternalUsageDiagnosticAnalyzer.MessageFormat,
-                            "Microsoft.EntityFrameworkCore.Storage.Internal.RawRelationalParameter"
-                        ),
+                        string
+                            .Format(
+                                InternalUsageDiagnosticAnalyzer.MessageFormat,
+                                "Microsoft.EntityFrameworkCore.Storage.Internal.RawRelationalParameter"
+                            ),
                         diagnostic.GetMessage()
                     );
 
@@ -263,9 +265,10 @@ namespace Bar
             string source,
             params string[] extraUsings
         ) =>
-            base.GetDiagnosticsAsync(
-                source,
-                extraUsings.Concat(new[] { "Microsoft.EntityFrameworkCore.Internal" }).ToArray()
-            );
+            base
+                .GetDiagnosticsAsync(
+                    source,
+                    extraUsings.Concat(new[] { "Microsoft.EntityFrameworkCore.Internal" }).ToArray()
+                );
     }
 }

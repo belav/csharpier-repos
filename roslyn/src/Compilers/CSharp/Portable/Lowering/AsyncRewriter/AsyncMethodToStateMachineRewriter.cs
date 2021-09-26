@@ -128,11 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     slotAllocatorOpt == null
                     || !slotAllocatorOpt.TryGetPreviousAwaiterSlotIndex(
-                        F.ModuleBuilderOpt.Translate(
-                            awaiterType,
-                            F.Syntax,
-                            F.Diagnostics.DiagnosticBag
-                        ),
+                        F.ModuleBuilderOpt
+                            .Translate(awaiterType, F.Syntax, F.Diagnostics.DiagnosticBag),
                         F.Diagnostics.DiagnosticBag,
                         out slotIndex
                     )
@@ -496,15 +493,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             // dynamic:
             Debug.Assert(methodName != null);
             return _dynamicFactory.MakeDynamicMemberInvocation(
-                    methodName,
-                    receiver,
-                    typeArgumentsWithAnnotations: ImmutableArray<TypeWithAnnotations>.Empty,
-                    loweredArguments: ImmutableArray<BoundExpression>.Empty,
-                    argumentNames: ImmutableArray<string>.Empty,
-                    refKinds: ImmutableArray<RefKind>.Empty,
-                    hasImplicitReceiver: false,
-                    resultDiscarded: resultsDiscarded
-                )
+                methodName,
+                receiver,
+                typeArgumentsWithAnnotations: ImmutableArray<TypeWithAnnotations>.Empty,
+                loweredArguments: ImmutableArray<BoundExpression>.Empty,
+                argumentNames: ImmutableArray<string>.Empty,
+                refKinds: ImmutableArray<RefKind>.Empty,
+                hasImplicitReceiver: false,
+                resultDiscarded: resultsDiscarded
+            )
                 .ToExpression();
         }
 
@@ -516,17 +513,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (awaiterTemp.Type.IsDynamic())
             {
                 return _dynamicFactory.MakeDynamicConversion(
-                        _dynamicFactory.MakeDynamicGetMember(
-                                F.Local(awaiterTemp),
-                                WellKnownMemberNames.IsCompleted,
-                                false
-                            )
-                            .ToExpression(),
-                        isExplicit: true,
-                        isArrayIndex: false,
-                        isChecked: false,
-                        resultType: F.SpecialType(SpecialType.System_Boolean)
+                    _dynamicFactory.MakeDynamicGetMember(
+                        F.Local(awaiterTemp),
+                        WellKnownMemberNames.IsCompleted,
+                        false
                     )
+                        .ToExpression(),
+                    isExplicit: true,
+                    isArrayIndex: false,
+                    isChecked: false,
+                    resultType: F.SpecialType(SpecialType.System_Boolean)
+                )
                     .ToExpression();
             }
 
@@ -682,10 +679,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         F.ExpressionStatement(
                             F.Call(
                                 F.Field(F.This(), _asyncMethodBuilderField),
-                                _asyncMethodBuilderMemberCollection.AwaitOnCompleted.Construct(
-                                    notifyCompletionTemp.Type,
-                                    F.This().Type
-                                ),
+                                _asyncMethodBuilderMemberCollection.AwaitOnCompleted
+                                    .Construct(notifyCompletionTemp.Type, F.This().Type),
                                 F.Local(notifyCompletionTemp),
                                 F.This(thisTemp)
                             )
@@ -699,10 +694,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         F.ExpressionStatement(
                             F.Call(
                                 F.Field(F.This(), _asyncMethodBuilderField),
-                                _asyncMethodBuilderMemberCollection.AwaitUnsafeOnCompleted.Construct(
-                                    criticalNotifyCompletedTemp.Type,
-                                    F.This().Type
-                                ),
+                                _asyncMethodBuilderMemberCollection.AwaitUnsafeOnCompleted
+                                    .Construct(criticalNotifyCompletedTemp.Type, F.This().Type),
                                 F.Local(criticalNotifyCompletedTemp),
                                 F.This(thisTemp)
                             )
@@ -740,19 +733,22 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
             var useUnsafeOnCompleted =
-                F.Compilation.Conversions.ClassifyImplicitConversionFromType(
-                    loweredAwaiterType,
-                    F.Compilation.GetWellKnownType(
-                        WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion
-                    ),
-                    ref discardedUseSiteInfo
-                ).IsImplicit;
+                F.Compilation.Conversions
+                    .ClassifyImplicitConversionFromType(
+                        loweredAwaiterType,
+                        F.Compilation
+                            .GetWellKnownType(
+                                WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion
+                            ),
+                        ref discardedUseSiteInfo
+                    ).IsImplicit;
 
             var onCompleted = (
                 useUnsafeOnCompleted
                     ? _asyncMethodBuilderMemberCollection.AwaitUnsafeOnCompleted
                     : _asyncMethodBuilderMemberCollection.AwaitOnCompleted
-            ).Construct(loweredAwaiterType, F.This().Type);
+            )
+                .Construct(loweredAwaiterType, F.This().Type);
             if (_asyncMethodBuilderMemberCollection.CheckGenericMethodConstraints)
             {
                 onCompleted.CheckConstraints(

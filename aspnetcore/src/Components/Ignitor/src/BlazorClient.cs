@@ -381,9 +381,10 @@ namespace Ignitor
         )
         {
             var builder = new HubConnectionBuilder();
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<IHubProtocol, IgnitorMessagePackHubProtocol>()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<IHubProtocol, IgnitorMessagePackHubProtocol>()
+                );
             var hubUrl = GetHubUrl(uri);
             builder.WithUrl(hubUrl);
             builder.ConfigureLogging(
@@ -582,10 +583,8 @@ namespace Ignitor
         public async Task<string> GetPrerenderDescriptors(Uri uri)
         {
             var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                "Cookie",
-                "__blazor_execution_mode=server"
-            );
+            httpClient.DefaultRequestHeaders
+                .TryAddWithoutValidation("Cookie", "__blazor_execution_mode=server");
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
@@ -618,8 +617,8 @@ namespace Ignitor
             content = content.Replace("\r\n", "").Replace("\n", "");
             var matches = Regex.Matches(content, MarkerPattern);
             var markers = matches.Select(
-                    s => (value: s.Groups[1].Value, parsed: JsonDocument.Parse(s.Groups[1].Value))
-                )
+                s => (value: s.Groups[1].Value, parsed: JsonDocument.Parse(s.Groups[1].Value))
+            )
                 .Where(
                     s =>
                     {

@@ -122,10 +122,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                 }
 
                 var @overrides = await SymbolFinder.FindOverridesAsync(
-                        symbol,
-                        project.Solution,
-                        cancellationToken: cancellationToken
-                    )
+                    symbol,
+                    project.Solution,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (overrides.Any())
                 {
@@ -146,10 +146,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 
                 var implementedInterfaceMembers =
                     await SymbolFinder.FindImplementedInterfaceMembersAsync(
-                            symbol,
-                            project.Solution,
-                            cancellationToken: cancellationToken
-                        )
+                        symbol,
+                        project.Solution,
+                        cancellationToken: cancellationToken
+                    )
                         .ConfigureAwait(false);
                 foreach (var implementedInterfaceMember in implementedInterfaceMembers)
                 {
@@ -187,10 +187,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                 .WaitAndGetResult(cancellationToken);
             var resolution = id.Resolve(compilation, cancellationToken: cancellationToken);
             var workspace = project.Solution.Workspace;
-            var options = workspace.Options.WithChangedOption(
-                NavigationOptions.PreferProvisionalTab,
-                true
-            );
+            var options = workspace.Options
+                .WithChangedOption(NavigationOptions.PreferProvisionalTab, true);
             var symbolNavigationService = workspace.Services.GetService<ISymbolNavigationService>();
 
             symbolNavigationService.TryNavigateToSymbol(

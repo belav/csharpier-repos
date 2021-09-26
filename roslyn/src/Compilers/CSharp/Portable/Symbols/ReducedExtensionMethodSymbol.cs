@@ -688,9 +688,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 get
                 {
-                    return _containingMethod._typeMap.SubstituteType(
-                        this._underlyingParameter.TypeWithAnnotations
-                    );
+                    return _containingMethod._typeMap
+                        .SubstituteType(this._underlyingParameter.TypeWithAnnotations);
                 }
             }
 
@@ -698,9 +697,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 get
                 {
-                    return _containingMethod._typeMap.SubstituteCustomModifiers(
-                        this._underlyingParameter.RefCustomModifiers
-                    );
+                    return _containingMethod._typeMap
+                        .SubstituteCustomModifiers(this._underlyingParameter.RefCustomModifiers);
                 }
             }
 

@@ -462,11 +462,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         bool IsDerivedType(TypeSymbol possibleDerived, TypeSymbol possibleBase)
         {
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            return this._conversions.HasIdentityOrImplicitReferenceConversion(
-                possibleDerived,
-                possibleBase,
-                ref discardedUseSiteInfo
-            );
+            return this._conversions
+                .HasIdentityOrImplicitReferenceConversion(
+                    possibleDerived,
+                    possibleBase,
+                    ref discardedUseSiteInfo
+                );
         }
 
         private Tests MakeTestsAndBindingsForDeclarationPattern(
@@ -948,10 +949,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // If one incoming edge does not have a set of possible values for the temp,
                         // that means the temp can take on any value of its type.
                         if (
-                            existingState.RemainingValues.TryGetValue(
-                                dagTemp,
-                                out var existingValuesForTemp
-                            )
+                            existingState.RemainingValues
+                                .TryGetValue(dagTemp, out var existingValuesForTemp)
                         )
                         {
                             var newExistingValuesForTemp = existingValuesForTemp.Union(
@@ -963,11 +962,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         existingState.RemainingValues.Count != newRemainingValues.Count
-                        || !existingState.RemainingValues.All(
-                            kv =>
-                                newRemainingValues.TryGetValue(kv.Key, out IValueSet? values)
-                                && kv.Value.Equals(values)
-                        )
+                        || !existingState.RemainingValues
+                            .All(
+                                kv =>
+                                    newRemainingValues.TryGetValue(kv.Key, out IValueSet? values)
+                                    && kv.Value.Equals(values)
+                            )
                     )
                     {
                         existingState.UpdateRemainingValues(newRemainingValues.ToImmutable());
@@ -1121,10 +1121,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // We "intern" the dag nodes, so that we only have a single object representing one
             // semantic node. We do this because different states may end up mapping to the same
             // set of successor states. In this case we merge them when producing the bound state machine.
-            var uniqueNodes = PooledDictionary<
-                BoundDecisionDagNode,
-                BoundDecisionDagNode
-            >.GetInstance();
+            var uniqueNodes = PooledDictionary<BoundDecisionDagNode, BoundDecisionDagNode>
+                .GetInstance();
             BoundDecisionDagNode uniqifyDagNode(BoundDecisionDagNode node) =>
                 uniqueNodes.GetOrAdd(node, node);
 
@@ -1234,15 +1232,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref bool foundExplicitNullTest
         )
         {
-            stateForCase.RemainingTests.Filter(
-                this,
-                test,
-                whenTrueValues,
-                whenFalseValues,
-                out Tests whenTrueTests,
-                out Tests whenFalseTests,
-                ref foundExplicitNullTest
-            );
+            stateForCase.RemainingTests
+                .Filter(
+                    this,
+                    test,
+                    whenTrueValues,
+                    whenFalseValues,
+                    out Tests whenTrueTests,
+                    out Tests whenFalseTests,
+                    ref foundExplicitNullTest
+                );
             whenTrue = makeNext(whenTrueTests);
             whenFalse = makeNext(whenFalseTests);
             return;
@@ -1804,7 +1803,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 PooledDictionary<BoundDagEvaluation, int> tempIdentifierMap = PooledDictionary<
                     BoundDagEvaluation,
                     int
-                >.GetInstance();
+                >
+                    .GetInstance();
                 int tempIdentifier(BoundDagEvaluation? e)
                 {
                     return (e == null)
@@ -1831,9 +1831,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             + stateIdentifierMap[state]
                             + (isFail ? " FAIL" : "")
                     );
-                    var remainingValues = state.RemainingValues.Select(
-                        kvp => $"{tempName(kvp.Key)}:{kvp.Value}"
-                    );
+                    var remainingValues = state.RemainingValues
+                        .Select(kvp => $"{tempName(kvp.Key)}:{kvp.Value}");
                     result.AppendLine(
                         $"{(remainingValues.Any() ? " REMAINING " + string.Join(" ", remainingValues) : "")}"
                     );
@@ -1874,10 +1873,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     builder.Append(
                         $"{cd.Index}. [{cd.Syntax}] {(cd.PatternIsSatisfied ? "MATCH" : cd.RemainingTests.Dump(dumpDagTest))}"
                     );
-                    var bindings = cd.Bindings.Select(
-                        bpb =>
-                            $"{(bpb.VariableAccess is BoundLocal l ? l.LocalSymbol.Name : "<var>")}={tempName(bpb.TempContainingValue)}"
-                    );
+                    var bindings = cd.Bindings
+                        .Select(
+                            bpb =>
+                                $"{(bpb.VariableAccess is BoundLocal l ? l.LocalSymbol.Name : "<var>")}={tempName(bpb.TempContainingValue)}"
+                        );
                     if (bindings.Any())
                     {
                         builder.Append(" BIND[");

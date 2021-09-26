@@ -16,11 +16,11 @@ namespace System.Threading.Tests
         public void Mutex_Create_NullSecurity()
         {
             CreateAndVerifyMutex(
-                    initiallyOwned: true,
-                    GetRandomName(),
-                    expectedSecurity: null,
-                    expectedCreatedNew: true
-                )
+                initiallyOwned: true,
+                GetRandomName(),
+                expectedSecurity: null,
+                expectedCreatedNew: true
+            )
                 .Dispose();
         }
 
@@ -77,11 +77,11 @@ namespace System.Threading.Tests
                     () =>
                     {
                         CreateAndVerifyMutex(
-                                initiallyOwned: true,
-                                name,
-                                GetBasicMutexSecurity(),
-                                expectedCreatedNew: true
-                            )
+                            initiallyOwned: true,
+                            name,
+                            GetBasicMutexSecurity(),
+                            expectedCreatedNew: true
+                        )
                             .Dispose();
                     }
                 );
@@ -125,11 +125,11 @@ namespace System.Threading.Tests
                 accessControl
             );
             CreateAndVerifyMutex(
-                    initiallyOwned,
-                    GetRandomName(),
-                    security,
-                    expectedCreatedNew: true
-                )
+                initiallyOwned,
+                GetRandomName(),
+                security,
+                expectedCreatedNew: true
+            )
                 .Dispose();
         }
 
@@ -348,18 +348,18 @@ namespace System.Threading.Tests
             Assert.Equal(typeof(MutexRights), actualSecurity.AccessRightType);
 
             List<MutexAccessRule> expectedAccessRules = expectedSecurity.GetAccessRules(
-                    includeExplicit: true,
-                    includeInherited: false,
-                    typeof(SecurityIdentifier)
-                )
+                includeExplicit: true,
+                includeInherited: false,
+                typeof(SecurityIdentifier)
+            )
                 .Cast<MutexAccessRule>()
                 .ToList();
 
             List<MutexAccessRule> actualAccessRules = actualSecurity.GetAccessRules(
-                    includeExplicit: true,
-                    includeInherited: false,
-                    typeof(SecurityIdentifier)
-                )
+                includeExplicit: true,
+                includeInherited: false,
+                typeof(SecurityIdentifier)
+            )
                 .Cast<MutexAccessRule>()
                 .ToList();
 

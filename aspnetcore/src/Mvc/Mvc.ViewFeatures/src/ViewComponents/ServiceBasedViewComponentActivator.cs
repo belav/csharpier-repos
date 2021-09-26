@@ -22,9 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
             var viewComponentType = context.ViewComponentDescriptor.TypeInfo.AsType();
 
-            return context.ViewContext.HttpContext.RequestServices.GetRequiredService(
-                viewComponentType
-            );
+            return context.ViewContext.HttpContext.RequestServices
+                .GetRequiredService(viewComponentType);
         }
 
         /// <inheritdoc />

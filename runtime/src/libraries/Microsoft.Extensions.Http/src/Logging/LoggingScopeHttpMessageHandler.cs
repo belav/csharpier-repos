@@ -61,7 +61,8 @@ namespace Microsoft.Extensions.Http.Logging
             using (Log.BeginRequestPipelineScope(_logger, request))
             {
                 Log.RequestPipelineStart(_logger, request, shouldRedactHeaderValue);
-                HttpResponseMessage response = await base.SendAsync(request, cancellationToken)
+                HttpResponseMessage response = await base
+                    .SendAsync(request, cancellationToken)
                     .ConfigureAwait(false);
                 Log.RequestPipelineEnd(
                     _logger,

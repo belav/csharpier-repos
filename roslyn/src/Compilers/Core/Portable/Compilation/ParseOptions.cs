@@ -162,10 +162,8 @@ namespace Microsoft.CodeAnalysis
                 && (
                     this.PreprocessorSymbolNames == null
                         ? other.PreprocessorSymbolNames == null
-                        : this.PreprocessorSymbolNames.SequenceEqual(
-                              other.PreprocessorSymbolNames,
-                              StringComparer.Ordinal
-                          )
+                        : this.PreprocessorSymbolNames
+                          .SequenceEqual(other.PreprocessorSymbolNames, StringComparer.Ordinal)
                 );
         }
 

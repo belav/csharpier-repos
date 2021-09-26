@@ -67,13 +67,14 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(
-                    o =>
-                        o.HttpContext.GetGlobalResourceObject(
+                o =>
+                    o.HttpContext
+                        .GetGlobalResourceObject(
                             "someResourceClassKey",
                             "someResourceName",
                             CultureInfo.CurrentUICulture
                         )
-                )
+            )
                 .Returns("My custom resource string");
 
             // Act

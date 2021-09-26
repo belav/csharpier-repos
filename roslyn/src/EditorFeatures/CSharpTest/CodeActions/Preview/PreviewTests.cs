@@ -28,9 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
     public partial class PreviewTests : AbstractCSharpCodeActionTest
     {
         private static readonly TestComposition s_composition =
-            EditorTestCompositions.EditorFeaturesWpf.AddExcludedPartTypes(
-                    typeof(IDiagnosticUpdateSourceRegistrationService)
-                )
+            EditorTestCompositions.EditorFeaturesWpf
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(
                     typeof(MockDiagnosticUpdateSourceRegistrationService),
                     typeof(MockPreviewPaneService)
@@ -108,9 +107,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
                     solution = solution.WithDocumentSyntaxRoot(
                         _oldDocument.Id,
                         CSharpSyntaxTree.ParseText(
-                                ChangedDocumentText,
-                                cancellationToken: cancellationToken
-                            )
+                            ChangedDocumentText,
+                            cancellationToken: cancellationToken
+                        )
                             .GetRoot(cancellationToken)
                     );
 
@@ -138,8 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
             );
             provider.ComputeRefactoringsAsync(context).Wait();
             var action = refactorings.Single();
-            var editHandler =
-                workspace.ExportProvider.GetExportedValue<ICodeActionEditHandlerService>();
+            var editHandler = workspace.ExportProvider
+                .GetExportedValue<ICodeActionEditHandlerService>();
             previews = editHandler.GetPreviews(
                 workspace,
                 action.GetPreviewOperationsAsync(CancellationToken.None).Result,
@@ -161,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
             Assert.NotNull(preview);
             Assert.True(preview is DifferenceViewerPreview);
             var diffView = preview as DifferenceViewerPreview;
-            var text = diffView.Viewer.RightView.TextBuffer.AsTextContainer()
+            var text = diffView.Viewer.RightView.TextBuffer
+                .AsTextContainer()
                 .CurrentText.ToString();
             Assert.Equal(ChangedDocumentText, text);
             diffView.Dispose();

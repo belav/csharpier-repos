@@ -154,7 +154,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             // Act & Assert
             Assert.Empty(
-                provider.ActionModelConventions.OfType<ConsumesConstraintForFormFileParameterConvention>()
+                provider.ActionModelConventions
+                    .OfType<ConsumesConstraintForFormFileParameterConvention>()
             );
         }
 

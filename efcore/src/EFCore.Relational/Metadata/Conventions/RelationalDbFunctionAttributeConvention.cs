@@ -48,12 +48,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             while (contextType != null && contextType != typeof(DbContext))
             {
                 var functions = contextType.GetMethods(
-                        BindingFlags.Public
-                            | BindingFlags.NonPublic
-                            | BindingFlags.Instance
-                            | BindingFlags.Static
-                            | BindingFlags.DeclaredOnly
-                    )
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.DeclaredOnly
+                )
                     .Where(mi => mi.IsDefined(typeof(DbFunctionAttribute)));
 
                 foreach (var function in functions)

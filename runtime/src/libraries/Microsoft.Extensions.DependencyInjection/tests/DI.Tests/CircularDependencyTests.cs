@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.SelfCircularDependency -> "
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.SelfCircularDependency";
 
-            var serviceProvider = new ServiceCollection().AddTransient<SelfCircularDependency>()
+            var serviceProvider = new ServiceCollection()
+                .AddTransient<SelfCircularDependency>()
                 .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(
@@ -41,7 +42,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.SelfCircularDependency -> "
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.SelfCircularDependency";
 
-            var serviceProvider = new ServiceCollection().AddTransient<SelfCircularDependency>()
+            var serviceProvider = new ServiceCollection()
+                .AddTransient<SelfCircularDependency>()
                 .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(
@@ -61,9 +63,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.SelfCircularDependencyGeneric<string> -> "
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.SelfCircularDependencyGeneric<string>";
 
-            var serviceProvider = new ServiceCollection().AddTransient<
-                SelfCircularDependencyGeneric<string>
-            >().BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddTransient<SelfCircularDependencyGeneric<string>>()
+                .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(
                 () => serviceProvider.GetRequiredService<SelfCircularDependencyGeneric<string>>()
@@ -83,9 +85,10 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.SelfCircularDependencyGeneric<string> -> "
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.SelfCircularDependencyGeneric<string>";
 
-            var serviceProvider = new ServiceCollection().AddTransient<
-                SelfCircularDependencyGeneric<int>
-            >().AddTransient<SelfCircularDependencyGeneric<string>>().BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddTransient<SelfCircularDependencyGeneric<int>>()
+                .AddTransient<SelfCircularDependencyGeneric<string>>()
+                .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(
                 () => serviceProvider.GetRequiredService<SelfCircularDependencyGeneric<int>>()
@@ -97,9 +100,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         [Fact]
         public void NoCircularDependencyGeneric()
         {
-            var serviceProvider = new ServiceCollection().AddSingleton(
-                    new SelfCircularDependencyGeneric<string>()
-                )
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton(new SelfCircularDependencyGeneric<string>())
                 .AddTransient<SelfCircularDependencyGeneric<int>>()
                 .BuildServiceProvider();
 
@@ -123,10 +125,13 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 + "(Microsoft.Extensions.DependencyInjection.Tests.Fakes.SelfCircularDependencyWithInterface) -> "
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.ISelfCircularDependencyWithInterface";
 
-            var serviceProvider = new ServiceCollection().AddTransient<
-                ISelfCircularDependencyWithInterface,
-                SelfCircularDependencyWithInterface
-            >().AddTransient<SelfCircularDependencyWithInterface>().BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddTransient<
+                    ISelfCircularDependencyWithInterface,
+                    SelfCircularDependencyWithInterface
+                >()
+                .AddTransient<SelfCircularDependencyWithInterface>()
+                .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(
                 () => serviceProvider.GetRequiredService<SelfCircularDependencyWithInterface>()
@@ -146,7 +151,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.DirectCircularDependencyB -> "
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.DirectCircularDependencyA";
 
-            var serviceProvider = new ServiceCollection().AddSingleton<DirectCircularDependencyA>()
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<DirectCircularDependencyA>()
                 .AddSingleton<DirectCircularDependencyB>()
                 .BuildServiceProvider();
 
@@ -169,11 +175,11 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.IndirectCircularDependencyC -> "
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.IndirectCircularDependencyA";
 
-            var serviceProvider =
-                new ServiceCollection().AddSingleton<IndirectCircularDependencyA>()
-                    .AddTransient<IndirectCircularDependencyB>()
-                    .AddTransient<IndirectCircularDependencyC>()
-                    .BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<IndirectCircularDependencyA>()
+                .AddTransient<IndirectCircularDependencyB>()
+                .AddTransient<IndirectCircularDependencyC>()
+                .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(
                 () => serviceProvider.GetRequiredService<IndirectCircularDependencyA>()
@@ -185,11 +191,11 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         [Fact]
         public void NoCircularDependencySameTypeMultipleTimes()
         {
-            var serviceProvider =
-                new ServiceCollection().AddTransient<NoCircularDependencySameTypeMultipleTimesA>()
-                    .AddTransient<NoCircularDependencySameTypeMultipleTimesB>()
-                    .AddTransient<NoCircularDependencySameTypeMultipleTimesC>()
-                    .BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddTransient<NoCircularDependencySameTypeMultipleTimesA>()
+                .AddTransient<NoCircularDependencySameTypeMultipleTimesB>()
+                .AddTransient<NoCircularDependencySameTypeMultipleTimesC>()
+                .BuildServiceProvider();
 
             var resolvedService =
                 serviceProvider.GetRequiredService<NoCircularDependencySameTypeMultipleTimesA>();
@@ -208,11 +214,11 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.DirectCircularDependencyB -> "
                 + "Microsoft.Extensions.DependencyInjection.Tests.Fakes.DirectCircularDependencyA";
 
-            var serviceProvider =
-                new ServiceCollection().AddTransient<DependencyOnCircularDependency>()
-                    .AddTransient<DirectCircularDependencyA>()
-                    .AddTransient<DirectCircularDependencyB>()
-                    .BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddTransient<DependencyOnCircularDependency>()
+                .AddTransient<DirectCircularDependencyA>()
+                .AddTransient<DirectCircularDependencyB>()
+                .BuildServiceProvider();
 
             var exception = Assert.Throws<InvalidOperationException>(
                 () => serviceProvider.GetRequiredService<DependencyOnCircularDependency>()

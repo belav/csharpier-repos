@@ -398,11 +398,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         // The alias called "global" is special.  It means that we don't
                         // give it an alias on the command-line.
                         if (
-                            string.Compare(
-                                "global",
-                                trimmedAlias,
-                                StringComparison.OrdinalIgnoreCase
-                            ) == 0
+                            string
+                                .Compare("global", trimmedAlias, StringComparison.OrdinalIgnoreCase)
+                            == 0
                         )
                         {
                             commandLine.AppendSwitchIfNotNull(switchName, reference.ItemSpec);
@@ -818,11 +816,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 // Other options are not supported since in-proc compiler always uses current locale.
                 if (
                     !string.IsNullOrEmpty(PreferredUILang)
-                    && !string.Equals(
-                        PreferredUILang,
-                        System.Globalization.CultureInfo.CurrentUICulture.Name,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !string
+                        .Equals(
+                            PreferredUILang,
+                            System.Globalization.CultureInfo.CurrentUICulture.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     CheckHostObjectSupport(

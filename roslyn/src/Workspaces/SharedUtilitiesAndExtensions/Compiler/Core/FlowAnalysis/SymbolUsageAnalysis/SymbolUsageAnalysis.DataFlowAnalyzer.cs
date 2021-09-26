@@ -56,11 +56,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 using var analyzer = new DataFlowAnalyzer(cfg, owningSymbol);
-                _ = CustomDataFlowAnalysis<BasicBlockAnalysisData>.Run(
-                    cfg,
-                    analyzer,
-                    cancellationToken
-                );
+                _ = CustomDataFlowAnalysis<BasicBlockAnalysisData>
+                    .Run(cfg, analyzer, cancellationToken);
                 return analyzer._analysisData.ToResult();
             }
 
@@ -85,11 +82,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     (FlowGraphAnalysisData)parentAnalysisData
                 );
 
-                var resultBlockAnalysisData = CustomDataFlowAnalysis<BasicBlockAnalysisData>.Run(
-                    cfg,
-                    analyzer,
-                    cancellationToken
-                );
+                var resultBlockAnalysisData = CustomDataFlowAnalysis<BasicBlockAnalysisData>
+                    .Run(cfg, analyzer, cancellationToken);
                 if (resultBlockAnalysisData == null)
                 {
                     // Unreachable exit block from lambda/local.
@@ -186,9 +180,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 );
 
                 // Ensure that we use different instances of block analysis data for fall through successor and conditional successor.
-                _analysisData.AdditionalConditionalBranchAnalysisData.SetAnalysisDataFrom(
-                    newCurrentAnalysisData
-                );
+                _analysisData.AdditionalConditionalBranchAnalysisData
+                    .SetAnalysisDataFrom(newCurrentAnalysisData);
                 var fallThroughSuccessorData =
                     _analysisData.AdditionalConditionalBranchAnalysisData;
 

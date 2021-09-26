@@ -71,9 +71,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             // Use 'IOperation.Children' to get named attribute arguments.
             // Each named attribute argument is represented as an 'ISimpleAssignmentOperation'
             // with a constant value assignment to an 'IPropertyReferenceOperation' in the operation tree.
-            using var _ = ArrayBuilder<(string name, IOperation value)>.GetInstance(
-                out var builder
-            );
+            using var _ = ArrayBuilder<(string name, IOperation value)>
+                .GetInstance(out var builder);
             foreach (var childOperation in attribute.Children)
             {
                 if (

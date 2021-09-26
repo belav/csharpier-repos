@@ -67,11 +67,10 @@ namespace System.ComponentModel.Composition.Registration.Tests
                     (iface, bldr) => bldr.AsContractType((Type)iface)
                 );
             builder.ForTypesMatching(
-                    (t) =>
-                        t.GetInterfaces()
-                            .Where((iface) => iface != typeof(System.IDisposable))
-                            .Count() == 0
-                )
+                (t) =>
+                    t.GetInterfaces().Where((iface) => iface != typeof(System.IDisposable)).Count()
+                    == 0
+            )
                 .Export();
 
             var types = new Type[]
@@ -114,11 +113,10 @@ namespace System.ComponentModel.Composition.Registration.Tests
             builder.ForTypesMatching((t) => true)
                 .ExportInterfaces((iface) => iface != typeof(System.IDisposable));
             builder.ForTypesMatching(
-                    (t) =>
-                        t.GetInterfaces()
-                            .Where((iface) => iface != typeof(System.IDisposable))
-                            .Count() == 0
-                )
+                (t) =>
+                    t.GetInterfaces().Where((iface) => iface != typeof(System.IDisposable)).Count()
+                    == 0
+            )
                 .Export();
 
             var types = new Type[]

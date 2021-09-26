@@ -26,9 +26,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class EntityQueryProvider : IAsyncQueryProvider
     {
-        private static readonly MethodInfo _genericCreateQueryMethod =
-            typeof(EntityQueryProvider).GetRuntimeMethods()
-                .Single(m => (m.Name == "CreateQuery") && m.IsGenericMethod);
+        private static readonly MethodInfo _genericCreateQueryMethod = typeof(EntityQueryProvider)
+            .GetRuntimeMethods()
+            .Single(m => (m.Name == "CreateQuery") && m.IsGenericMethod);
 
         private readonly MethodInfo _genericExecuteMethod;
 
@@ -65,8 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual IQueryable CreateQuery(Expression expression) =>
             (IQueryable)_genericCreateQueryMethod.MakeGenericMethod(
-                    expression.Type.GetSequenceType()
-                )
+                expression.Type.GetSequenceType()
+            )
                 .Invoke(this, new object[] { expression })!;
 
         /// <summary>

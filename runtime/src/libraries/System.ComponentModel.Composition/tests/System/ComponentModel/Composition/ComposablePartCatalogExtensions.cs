@@ -25,8 +25,8 @@ namespace System.ComponentModel.Composition
         )
         {
             return catalog.GetExports(
-                    ImportDefinitionFactory.Create(typeof(T), ImportCardinality.ZeroOrMore)
-                )
+                ImportDefinitionFactory.Create(typeof(T), ImportCardinality.ZeroOrMore)
+            )
                 .ToArray();
         }
 
@@ -35,8 +35,8 @@ namespace System.ComponentModel.Composition
         )
         {
             return catalog.GetExports(
-                    ImportDefinitionFactory.Create(typeof(T), ImportCardinality.ExactlyOne)
-                )
+                ImportDefinitionFactory.Create(typeof(T), ImportCardinality.ExactlyOne)
+            )
                 .Single();
         }
     }

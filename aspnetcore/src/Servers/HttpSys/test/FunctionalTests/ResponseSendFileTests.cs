@@ -497,19 +497,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         out var address,
                         async httpContext =>
                         {
-                            await httpContext.Response.SendFileAsync(
-                                emptyFilePath,
-                                0,
-                                null,
-                                CancellationToken.None
-                            );
+                            await httpContext.Response
+                                .SendFileAsync(emptyFilePath, 0, null, CancellationToken.None);
                             Assert.True(httpContext.Response.HasStarted);
-                            await httpContext.Response.Body.WriteAsync(
-                                new byte[10],
-                                0,
-                                10,
-                                CancellationToken.None
-                            );
+                            await httpContext.Response.Body
+                                .WriteAsync(new byte[10], 0, 10, CancellationToken.None);
                         }
                     )
                 )
@@ -517,10 +509,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     var response = await SendRequestAsync(address);
                     Assert.Equal(200, (int)response.StatusCode);
                     Assert.False(
-                        response.Content.Headers.TryGetValues(
-                            "content-length",
-                            out var contentLength
-                        ),
+                        response.Content.Headers
+                            .TryGetValues("content-length", out var contentLength),
                         "Content-Length"
                     );
                     Assert.True(response.Headers.TransferEncodingChunked.HasValue);
@@ -544,18 +534,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     {
                         var cts = new CancellationTokenSource();
                         // First write sends headers
-                        await httpContext.Response.SendFileAsync(
-                            AbsoluteFilePath,
-                            0,
-                            null,
-                            cts.Token
-                        );
-                        await httpContext.Response.SendFileAsync(
-                            AbsoluteFilePath,
-                            0,
-                            null,
-                            cts.Token
-                        );
+                        await httpContext.Response
+                            .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
+                        await httpContext.Response
+                            .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                     }
                 )
             )
@@ -580,18 +562,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         var cts = new CancellationTokenSource();
                         cts.CancelAfter(TimeSpan.FromSeconds(10));
                         // First write sends headers
-                        await httpContext.Response.SendFileAsync(
-                            AbsoluteFilePath,
-                            0,
-                            null,
-                            cts.Token
-                        );
-                        await httpContext.Response.SendFileAsync(
-                            AbsoluteFilePath,
-                            0,
-                            null,
-                            cts.Token
-                        );
+                        await httpContext.Response
+                            .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
+                        await httpContext.Response
+                            .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                     }
                 )
             )
@@ -621,12 +595,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             var cts = new CancellationTokenSource();
                             cts.Cancel();
                             // First write sends headers
-                            var writeTask = httpContext.Response.SendFileAsync(
-                                AbsoluteFilePath,
-                                0,
-                                null,
-                                cts.Token
-                            );
+                            var writeTask = httpContext.Response
+                                .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                             Assert.True(writeTask.IsCanceled);
                             testComplete.SetResult(0);
                         }
@@ -662,12 +632,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             var cts = new CancellationTokenSource();
                             cts.Cancel();
                             // First write sends headers
-                            var writeTask = httpContext.Response.SendFileAsync(
-                                AbsoluteFilePath,
-                                0,
-                                null,
-                                cts.Token
-                            );
+                            var writeTask = httpContext.Response
+                                .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                             Assert.True(writeTask.IsCanceled);
                             testComplete.SetResult(0);
                         }
@@ -701,19 +667,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         {
                             var cts = new CancellationTokenSource();
                             // First write sends headers
-                            await httpContext.Response.SendFileAsync(
-                                AbsoluteFilePath,
-                                0,
-                                null,
-                                cts.Token
-                            );
+                            await httpContext.Response
+                                .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                             cts.Cancel();
-                            var writeTask = httpContext.Response.SendFileAsync(
-                                AbsoluteFilePath,
-                                0,
-                                null,
-                                cts.Token
-                            );
+                            var writeTask = httpContext.Response
+                                .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                             Assert.True(writeTask.IsCanceled);
                             testComplete.SetResult(0);
                         }
@@ -746,19 +704,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         {
                             var cts = new CancellationTokenSource();
                             // First write sends headers
-                            await httpContext.Response.SendFileAsync(
-                                AbsoluteFilePath,
-                                0,
-                                null,
-                                cts.Token
-                            );
+                            await httpContext.Response
+                                .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                             cts.Cancel();
-                            var writeTask = httpContext.Response.SendFileAsync(
-                                AbsoluteFilePath,
-                                0,
-                                null,
-                                cts.Token
-                            );
+                            var writeTask = httpContext.Response
+                                .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                             Assert.True(writeTask.IsCanceled);
                             testComplete.SetResult(0);
                         }
@@ -795,9 +745,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     out var address,
                     async httpContext =>
                     {
-                        httpContext.RequestAborted.Register(
-                            () => cancellationReceived.SetResult(0)
-                        );
+                        httpContext.RequestAborted
+                            .Register(() => cancellationReceived.SetResult(0));
                         requestReceived.SetResult(0);
                         await requestCancelled.Task;
 
@@ -813,24 +762,16 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                                     // It can take several tries before Send notices the disconnect.
                                     for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                                     {
-                                        await httpContext.Response.SendFileAsync(
-                                            AbsoluteFilePath,
-                                            0,
-                                            null,
-                                            cts.Token
-                                        );
+                                        await httpContext.Response
+                                            .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                                     }
                                 }
                             );
 
                             await Assert.ThrowsAsync<ObjectDisposedException>(
                                 () =>
-                                    httpContext.Response.SendFileAsync(
-                                        AbsoluteFilePath,
-                                        0,
-                                        null,
-                                        cts.Token
-                                    )
+                                    httpContext.Response
+                                        .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token)
                             );
 
                             testComplete.SetResult(0);
@@ -877,9 +818,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     out var address,
                     async httpContext =>
                     {
-                        httpContext.RequestAborted.Register(
-                            () => cancellationReceived.SetResult(0)
-                        );
+                        httpContext.RequestAborted
+                            .Register(() => cancellationReceived.SetResult(0));
                         requestReceived.SetResult(0);
                         await requestCancelled.Task;
 
@@ -938,16 +878,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         // before it throws an IOException, but there's a race depending on when the disconnect is noticed.
                         // Passing our own token to skip that.
                         using var cts = new CancellationTokenSource();
-                        httpContext.RequestAborted.Register(
-                            () => cancellationReceived.SetResult(0)
-                        );
+                        httpContext.RequestAborted
+                            .Register(() => cancellationReceived.SetResult(0));
                         // First write sends headers
-                        await httpContext.Response.SendFileAsync(
-                            AbsoluteFilePath,
-                            0,
-                            null,
-                            cts.Token
-                        );
+                        await httpContext.Response
+                            .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                         firstSendComplete.SetResult(0);
                         await clientDisconnected.Task;
 
@@ -959,12 +894,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                                     // It can take several tries before Write notices the disconnect.
                                     for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                                     {
-                                        await httpContext.Response.SendFileAsync(
-                                            AbsoluteFilePath,
-                                            0,
-                                            null,
-                                            cts.Token
-                                        );
+                                        await httpContext.Response
+                                            .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                                     }
                                 }
                             );
@@ -1021,9 +952,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     out var address,
                     async httpContext =>
                     {
-                        httpContext.RequestAborted.Register(
-                            () => cancellationReceived.SetResult(0)
-                        );
+                        httpContext.RequestAborted
+                            .Register(() => cancellationReceived.SetResult(0));
                         // First write sends headers
                         await httpContext.Response.SendFileAsync(AbsoluteFilePath, 0, null);
                         firstSendComplete.SetResult(0);
@@ -1034,12 +964,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             // It can take several tries before Write notices the disconnect.
                             for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                             {
-                                await httpContext.Response.SendFileAsync(
-                                    AbsoluteFilePath,
-                                    0,
-                                    null,
-                                    CancellationToken.None
-                                );
+                                await httpContext.Response
+                                    .SendFileAsync(
+                                        AbsoluteFilePath,
+                                        0,
+                                        null,
+                                        CancellationToken.None
+                                    );
                             }
 
                             testComplete.SetResult(0);

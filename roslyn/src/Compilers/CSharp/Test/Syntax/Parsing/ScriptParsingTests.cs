@@ -111,20 +111,18 @@ Console.Goo
 new in
 ";
 
-            UsingTree(test)
-                .GetDiagnostics()
-                .Verify(
-                    // (2,5): error CS1526: A new expression requires an argument list or (), [], or {} after type
-                    // new in
-                    Diagnostic(ErrorCode.ERR_BadNewExpr, "in").WithLocation(2, 5),
-                    // (2,5): error CS1002: ; expected
-                    // new in
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "in").WithLocation(2, 5),
-                    // (2,5): error CS7017: Member definition, statement, or end-of-file expected
-                    // new in
-                    Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, "in")
-                        .WithLocation(2, 5)
-                );
+            UsingTree(test).GetDiagnostics().Verify(
+                // (2,5): error CS1526: A new expression requires an argument list or (), [], or {} after type
+                // new in
+                Diagnostic(ErrorCode.ERR_BadNewExpr, "in").WithLocation(2, 5),
+                // (2,5): error CS1002: ; expected
+                // new in
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "in").WithLocation(2, 5),
+                // (2,5): error CS7017: Member definition, statement, or end-of-file expected
+                // new in
+                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, "in")
+                    .WithLocation(2, 5)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1791,35 +1789,34 @@ new public bool this[int index] { get; }
                 new ErrorDescription { Code = 1513, Line = 1, Column = 17 }
             );
 
-            CreateCompilation(test)
-                .VerifyDiagnostics(
-                    // (1,13): error CS1003: Syntax error, '[' expected
-                    // string this ="";
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "=")
-                        .WithArguments("[", "=")
-                        .WithLocation(1, 13),
-                    // (1,13): error CS1001: Identifier expected
-                    // string this ="";
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 13),
-                    // (1,17): error CS1003: Syntax error, ']' expected
-                    // string this ="";
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "")
-                        .WithArguments("]", "")
-                        .WithLocation(1, 17),
-                    // (1,17): error CS1514: { expected
-                    // string this ="";
-                    Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 17),
-                    // (1,17): error CS1513: } expected
-                    // string this ="";
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 17),
-                    // (1,8): error CS0548: '<invalid-global-code>.this': property or indexer must have at least one accessor
-                    // string this ="";
-                    Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this")
-                        .WithArguments("<invalid-global-code>.this")
-                        .WithLocation(1, 8),
-                    // error CS1551: Indexers must have at least one parameter
-                    Diagnostic(ErrorCode.ERR_IndexerNeedsParam).WithLocation(1, 1)
-                );
+            CreateCompilation(test).VerifyDiagnostics(
+                // (1,13): error CS1003: Syntax error, '[' expected
+                // string this ="";
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=")
+                    .WithArguments("[", "=")
+                    .WithLocation(1, 13),
+                // (1,13): error CS1001: Identifier expected
+                // string this ="";
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 13),
+                // (1,17): error CS1003: Syntax error, ']' expected
+                // string this ="";
+                Diagnostic(ErrorCode.ERR_SyntaxError, "")
+                    .WithArguments("]", "")
+                    .WithLocation(1, 17),
+                // (1,17): error CS1514: { expected
+                // string this ="";
+                Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 17),
+                // (1,17): error CS1513: } expected
+                // string this ="";
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 17),
+                // (1,8): error CS0548: '<invalid-global-code>.this': property or indexer must have at least one accessor
+                // string this ="";
+                Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this")
+                    .WithArguments("<invalid-global-code>.this")
+                    .WithLocation(1, 8),
+                // error CS1551: Indexers must have at least one parameter
+                Diagnostic(ErrorCode.ERR_IndexerNeedsParam).WithLocation(1, 1)
+            );
         }
 
         #endregion
@@ -2095,15 +2092,14 @@ partial void Goo(){};
                 @"
 partial enum en {};
 ";
-            CreateCompilation(test)
-                .VerifyDiagnostics(
-                    // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                    // partial enum en {};
-                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(2, 1),
-                    // (2,14): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                    // partial enum en {};
-                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "en").WithLocation(2, 14)
-                );
+            CreateCompilation(test).VerifyDiagnostics(
+                // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                // partial enum en {};
+                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(2, 1),
+                // (2,14): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                // partial enum en {};
+                Diagnostic(ErrorCode.ERR_PartialMisplaced, "en").WithLocation(2, 14)
+            );
         }
 
         [Fact]

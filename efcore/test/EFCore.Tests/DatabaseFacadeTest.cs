@@ -25,9 +25,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var creator = new FakeDatabaseCreator();
 
-            var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDatabaseCreator>(creator)
-            );
+            var context = InMemoryTestHelpers.Instance
+                .CreateContext(new ServiceCollection().AddSingleton<IDatabaseCreator>(creator));
 
             if (async)
             {
@@ -133,11 +132,13 @@ namespace Microsoft.EntityFrameworkCore
         {
             var transaction = new FakeDbContextTransaction();
 
-            var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(
-                    new FakeDbContextTransactionManager(transaction)
-                )
-            );
+            var context = InMemoryTestHelpers.Instance
+                .CreateContext(
+                    new ServiceCollection()
+                        .AddSingleton<IDbContextTransactionManager>(
+                            new FakeDbContextTransactionManager(transaction)
+                        )
+                );
 
             Assert.Same(
                 transaction,
@@ -264,9 +265,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
-            var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
-            );
+            var context = InMemoryTestHelpers.Instance
+                .CreateContext(
+                    new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+                );
 
             context.Database.CommitTransaction();
 
@@ -278,9 +280,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
-            var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
-            );
+            var context = InMemoryTestHelpers.Instance
+                .CreateContext(
+                    new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+                );
 
             await context.Database.CommitTransactionAsync();
 
@@ -292,9 +295,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
-            var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
-            );
+            var context = InMemoryTestHelpers.Instance
+                .CreateContext(
+                    new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+                );
 
             context.Database.RollbackTransaction();
 
@@ -306,9 +310,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
-            var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
-            );
+            var context = InMemoryTestHelpers.Instance
+                .CreateContext(
+                    new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+                );
 
             await context.Database.RollbackTransactionAsync();
 
@@ -320,11 +325,13 @@ namespace Microsoft.EntityFrameworkCore
         {
             var transaction = new FakeDbContextTransaction();
 
-            var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(
-                    new FakeDbContextTransactionManager(transaction)
-                )
-            );
+            var context = InMemoryTestHelpers.Instance
+                .CreateContext(
+                    new ServiceCollection()
+                        .AddSingleton<IDbContextTransactionManager>(
+                            new FakeDbContextTransactionManager(transaction)
+                        )
+                );
 
             Assert.Same(transaction, context.Database.CurrentTransaction);
         }

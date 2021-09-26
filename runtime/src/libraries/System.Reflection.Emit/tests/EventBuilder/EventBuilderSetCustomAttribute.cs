@@ -19,9 +19,8 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(TestEventHandler)
             );
-            ConstructorInfo atrtributeConstructor = typeof(EmptyAttribute).GetConstructor(
-                new Type[0]
-            );
+            ConstructorInfo atrtributeConstructor = typeof(EmptyAttribute)
+                .GetConstructor(new Type[0]);
             byte[] bytes = Enumerable.Range(0, 256).Select(i => (byte)i).ToArray();
 
             eventBuilder.SetCustomAttribute(atrtributeConstructor, bytes);
@@ -51,9 +50,8 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(TestEventHandler)
             );
-            ConstructorInfo attributeConstructor = typeof(EmptyAttribute).GetConstructor(
-                new Type[0]
-            );
+            ConstructorInfo attributeConstructor = typeof(EmptyAttribute)
+                .GetConstructor(new Type[0]);
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "binaryAttribute",
@@ -70,9 +68,8 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(TestEventHandler)
             );
-            ConstructorInfo attributeConstructor = typeof(EmptyAttribute).GetConstructor(
-                new Type[0]
-            );
+            ConstructorInfo attributeConstructor = typeof(EmptyAttribute)
+                .GetConstructor(new Type[0]);
             byte[] bytes = Enumerable.Range(0, 256).Select(i => (byte)i).ToArray();
             type.CreateTypeInfo().AsType();
 
@@ -90,9 +87,8 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(TestEventHandler)
             );
-            ConstructorInfo attributeConstructor = typeof(EmptyAttribute).GetConstructor(
-                new Type[0]
-            );
+            ConstructorInfo attributeConstructor = typeof(EmptyAttribute)
+                .GetConstructor(new Type[0]);
             CustomAttributeBuilder attribute = new CustomAttributeBuilder(
                 attributeConstructor,
                 new object[0]
@@ -125,9 +121,8 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(TestEventHandler)
             );
-            ConstructorInfo attributeConstructor = typeof(EmptyAttribute).GetConstructor(
-                new Type[0]
-            );
+            ConstructorInfo attributeConstructor = typeof(EmptyAttribute)
+                .GetConstructor(new Type[0]);
             CustomAttributeBuilder attribute = new CustomAttributeBuilder(
                 attributeConstructor,
                 new object[0]

@@ -183,17 +183,18 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             if (errors.Count > 0)
             {
-                var allErrors = string.Join(
-                    Environment.NewLine + Environment.NewLine,
-                    errors.Select(
-                        e =>
-                            Resources.FormatAttributeRoute_IndividualErrorMessage(
-                                e.ActionDescriptor.DisplayName,
-                                Environment.NewLine,
-                                e.ErrorMessage
-                            )
-                    )
-                );
+                var allErrors = string
+                    .Join(
+                        Environment.NewLine + Environment.NewLine,
+                        errors.Select(
+                            e =>
+                                Resources.FormatAttributeRoute_IndividualErrorMessage(
+                                    e.ActionDescriptor.DisplayName,
+                                    Environment.NewLine,
+                                    e.ErrorMessage
+                                )
+                        )
+                    );
 
                 var message = Resources.FormatAttributeRoute_AggregateErrorMessage(
                     Environment.NewLine,
@@ -293,11 +294,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 }
                 else
                 {
-                    return string.Equals(
-                        x.RouteTemplate!.TemplateText,
-                        y.RouteTemplate!.TemplateText,
-                        StringComparison.OrdinalIgnoreCase
-                    );
+                    return string
+                        .Equals(
+                            x.RouteTemplate!.TemplateText,
+                            y.RouteTemplate!.TemplateText,
+                            StringComparison.OrdinalIgnoreCase
+                        );
                 }
             }
 

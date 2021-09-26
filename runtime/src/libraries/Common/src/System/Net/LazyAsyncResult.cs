@@ -347,13 +347,14 @@ namespace System.Net
                         if (NetEventSource.Log.IsEnabled())
                             NetEventSource.Info(this, "*** OFFLOADED the user callback ****");
 
-                        Task.Factory.StartNew(
-                            s => WorkerThreadComplete(s!),
-                            this,
-                            CancellationToken.None,
-                            TaskCreationOptions.DenyChildAttach,
-                            TaskScheduler.Default
-                        );
+                        Task.Factory
+                            .StartNew(
+                                s => WorkerThreadComplete(s!),
+                                this,
+                                CancellationToken.None,
+                                TaskCreationOptions.DenyChildAttach,
+                                TaskScheduler.Default
+                            );
 
                         offloaded = true;
                     }

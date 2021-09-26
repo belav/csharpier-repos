@@ -112,14 +112,13 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSignalR()
-                .AddHubOptions<CustomHub>(
-                    options =>
-                    {
-                        options.SupportedProtocols.Clear();
-                        options.AddFilter(new CustomHubFilter());
-                    }
-                );
+            serviceCollection.AddSignalR().AddHubOptions<CustomHub>(
+                options =>
+                {
+                    options.SupportedProtocols.Clear();
+                    options.AddFilter(new CustomHubFilter());
+                }
+            );
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             Assert.Equal(
@@ -179,13 +178,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSignalR()
-                .AddHubOptions<CustomHub>(
-                    options =>
-                    {
-                        options.StreamBufferCapacity = 42;
-                    }
-                );
+            serviceCollection.AddSignalR().AddHubOptions<CustomHub>(
+                options =>
+                {
+                    options.StreamBufferCapacity = 42;
+                }
+            );
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             Assert.Equal(

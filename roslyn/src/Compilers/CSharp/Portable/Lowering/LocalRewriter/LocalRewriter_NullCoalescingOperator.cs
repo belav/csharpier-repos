@@ -43,11 +43,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(rewrittenResultType is { });
             Debug.Assert(rewrittenRight.Type is { });
             Debug.Assert(
-                rewrittenRight.Type.Equals(
-                    rewrittenResultType,
-                    TypeCompareKind.IgnoreDynamicAndTupleNames
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                )
+                rewrittenRight.Type
+                    .Equals(
+                        rewrittenResultType,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
             );
 
             if (_inExpressionLambda)
@@ -194,10 +195,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 rewrittenLeft.Type.IsNullableType()
                 && RemoveIdentityConversions(rewrittenRight).IsDefaultValue()
-                && rewrittenRight.Type.Equals(
-                    rewrittenLeft.Type.GetNullableUnderlyingType(),
-                    TypeCompareKind.AllIgnoreOptions
-                )
+                && rewrittenRight.Type
+                    .Equals(
+                        rewrittenLeft.Type.GetNullableUnderlyingType(),
+                        TypeCompareKind.AllIgnoreOptions
+                    )
                 && TryGetNullableMethod(
                     rewrittenLeft.Syntax,
                     rewrittenLeft.Type,
@@ -237,11 +239,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             Debug.Assert(
                 convertedLeft.HasErrors
-                    || convertedLeft.Type!.Equals(
-                        rewrittenResultType,
-                        TypeCompareKind.IgnoreDynamicAndTupleNames
-                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                    )
+                    || convertedLeft.Type!
+                        .Equals(
+                            rewrittenResultType,
+                            TypeCompareKind.IgnoreDynamicAndTupleNames
+                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
             );
 
             // (temp != null) ? MakeConversion(temp, LeftConversion) : RightOperand
@@ -257,11 +260,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(conditionalExpression.ConstantValue == null); // we shouldn't have hit this else case otherwise
             Debug.Assert(
-                conditionalExpression.Type!.Equals(
-                    rewrittenResultType,
-                    TypeCompareKind.IgnoreDynamicAndTupleNames
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                )
+                conditionalExpression.Type!
+                    .Equals(
+                        rewrittenResultType,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
             );
 
             return new BoundSequence(

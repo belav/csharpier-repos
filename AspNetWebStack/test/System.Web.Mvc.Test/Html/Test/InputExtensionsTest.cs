@@ -138,10 +138,8 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
-            helper.ViewData.ModelState.SetModelValue(
-                "foo",
-                HtmlHelperTest.GetValueProviderResult("false", "false")
-            );
+            helper.ViewData.ModelState
+                .SetModelValue("foo", HtmlHelperTest.GetValueProviderResult("false", "false"));
 
             // Act
             MvcHtmlString html = helper.CheckBox("foo");
@@ -545,10 +543,8 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper<FooBarBazModel> helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
-            helper.ViewContext.ViewData.ModelState.SetModelValue(
-                "foo",
-                HtmlHelperTest.GetValueProviderResult("false", "false")
-            );
+            helper.ViewContext.ViewData.ModelState
+                .SetModelValue("foo", HtmlHelperTest.GetValueProviderResult("false", "false"));
 
             // Act
             MvcHtmlString html = helper.CheckBoxFor(m => m.foo);
@@ -1135,10 +1131,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.Hidden(
-                    name: "name",
-                    value: null,
-                    htmlAttributes: new { attribute = text, }
-                )
+                name: "name",
+                value: null,
+                htmlAttributes: new { attribute = text, }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -1184,10 +1180,10 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper.Hidden(
-                    name: String.Empty,
-                    value: null,
-                    htmlAttributes: new { id = "id", }
-                )
+                name: String.Empty,
+                value: null,
+                htmlAttributes: new { id = "id", }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -1833,10 +1829,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.Password(
-                    name: "name",
-                    value: null,
-                    htmlAttributes: new { attribute = text, }
-                )
+                name: "name",
+                value: null,
+                htmlAttributes: new { attribute = text, }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -1886,10 +1882,10 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper.Password(
-                    name: String.Empty,
-                    value: null,
-                    htmlAttributes: new { id = "id", }
-                )
+                name: String.Empty,
+                value: null,
+                htmlAttributes: new { id = "id", }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -2242,10 +2238,11 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
-            helper.ViewData.ModelState.SetModelValue(
-                "foo",
-                HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo")
-            );
+            helper.ViewData.ModelState
+                .SetModelValue(
+                    "foo",
+                    HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo")
+                );
 
             // Act
             MvcHtmlString html = helper.RadioButton(
@@ -2602,10 +2599,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.RadioButton(
-                    name: "name",
-                    value: "value",
-                    htmlAttributes: new { attribute = text, }
-                )
+                name: "name",
+                value: "value",
+                htmlAttributes: new { attribute = text, }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -2633,10 +2630,10 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper.RadioButton(
-                    text,
-                    value: "value",
-                    htmlAttributes: new { id = "id", }
-                )
+                text,
+                value: "value",
+                htmlAttributes: new { id = "id", }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -2663,10 +2660,10 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper.RadioButton(
-                    name: String.Empty,
-                    value: String.Empty,
-                    htmlAttributes: new { id = "id", }
-                )
+                name: String.Empty,
+                value: String.Empty,
+                htmlAttributes: new { id = "id", }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -2751,10 +2748,11 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
-            helper.ViewData.ModelState.SetModelValue(
-                "foo",
-                HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo")
-            );
+            helper.ViewData.ModelState
+                .SetModelValue(
+                    "foo",
+                    HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo")
+                );
 
             // Act
             MvcHtmlString html = helper.RadioButtonFor(
@@ -2958,10 +2956,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.RadioButtonFor(
-                    m => m,
-                    value: String.Empty,
-                    htmlAttributes: new { attribute = text, }
-                )
+                m => m,
+                value: String.Empty,
+                htmlAttributes: new { attribute = text, }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -2990,10 +2988,10 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper.RadioButtonFor(
-                    m => m,
-                    value: String.Empty,
-                    htmlAttributes: new { id = "id", }
-                )
+                m => m,
+                value: String.Empty,
+                htmlAttributes: new { id = "id", }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -3395,10 +3393,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.TextBox(
-                    name: "name",
-                    value: null,
-                    htmlAttributes: new { attribute = text, }
-                )
+                name: "name",
+                value: null,
+                htmlAttributes: new { attribute = text, }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -3471,10 +3469,10 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper.TextBox(
-                    name: String.Empty,
-                    value: null,
-                    htmlAttributes: new { id = "id", }
-                )
+                name: String.Empty,
+                value: null,
+                htmlAttributes: new { id = "id", }
+            )
                 .ToHtmlString();
 
             // Assert

@@ -378,11 +378,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                 foreach (var header in context.HttpContext.Response.Headers)
                 {
                     if (
-                        !string.Equals(
-                            header.Key,
-                            HeaderNames.Age,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        !string
+                            .Equals(header.Key, HeaderNames.Age, StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         context.CachedResponse.Headers[header.Key] = header.Value;

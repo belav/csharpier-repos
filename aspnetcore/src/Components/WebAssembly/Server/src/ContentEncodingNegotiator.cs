@@ -147,8 +147,7 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
         }
 
         private bool ResourceExists(HttpContext context, string extension) =>
-            _webHostEnvironment.WebRootFileProvider.GetFileInfo(
-                context.Request.Path + extension
-            ).Exists;
+            _webHostEnvironment.WebRootFileProvider
+                .GetFileInfo(context.Request.Path + extension).Exists;
     }
 }

@@ -54,9 +54,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             Succeeded = status.Succeeded() && !status.HasSuggestion();
             SucceededWithSuggestion = status.Succeeded() && status.HasSuggestion();
 
-            Reasons = (
-                reasons ?? SpecializedCollections.EmptyEnumerable<string>()
-            ).ToReadOnlyCollection();
+            Reasons = (reasons ?? SpecializedCollections.EmptyEnumerable<string>())
+                .ToReadOnlyCollection();
 
             Document = document;
             InvocationNameToken = invocationNameToken;

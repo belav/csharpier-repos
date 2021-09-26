@@ -105,9 +105,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 );
 
                 var rewrittenToken = TryEscapeIdentifierToken(
-                        rewriter.VisitToken(token),
-                        token.Parent
-                    )
+                    rewriter.VisitToken(token),
+                    token.Parent
+                )
                     .WithAdditionalAnnotations(Simplifier.Annotation);
                 if (
                     TryAddLeadingElasticTriviaIfNecessary(
@@ -166,13 +166,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             // safe to escape identifier
             return syntaxToken.CopyAnnotationsTo(
-                    SyntaxFactory.VerbatimIdentifier(
-                        syntaxToken.LeadingTrivia,
-                        syntaxToken.ToString(),
-                        syntaxToken.ValueText,
-                        syntaxToken.TrailingTrivia
-                    )
+                SyntaxFactory.VerbatimIdentifier(
+                    syntaxToken.LeadingTrivia,
+                    syntaxToken.ToString(),
+                    syntaxToken.ValueText,
+                    syntaxToken.TrailingTrivia
                 )
+            )
                 .WithAdditionalAnnotations(Simplifier.Annotation);
         }
 

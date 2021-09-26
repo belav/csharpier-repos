@@ -758,10 +758,11 @@ namespace System.Xml.Serialization
                 }
 
                 MethodInfo getSetMemberValueDelegateWithTypeGenericMi =
-                    typeof(ReflectionXmlSerializationReaderHelper).GetMethod(
-                        "GetSetMemberValueDelegateWithType",
-                        BindingFlags.Static | BindingFlags.Public
-                    )!;
+                    typeof(ReflectionXmlSerializationReaderHelper)
+                        .GetMethod(
+                            "GetSetMemberValueDelegateWithType",
+                            BindingFlags.Static | BindingFlags.Public
+                        )!;
                 MethodInfo getSetMemberValueDelegateWithTypeMi =
                     getSetMemberValueDelegateWithTypeGenericMi.MakeGenericMethod(
                         o.GetType(),
@@ -1475,14 +1476,15 @@ namespace System.Xml.Serialization
                 else
                 {
                     string methodName = "To" + mapping.TypeDesc.FormatterName;
-                    MethodInfo? method = typeof(XmlSerializationReader).GetMethod(
-                        methodName,
-                        BindingFlags.Static
-                            | BindingFlags.Instance
-                            | BindingFlags.Public
-                            | BindingFlags.NonPublic,
-                        new Type[] { typeof(string) }
-                    );
+                    MethodInfo? method = typeof(XmlSerializationReader)
+                        .GetMethod(
+                            methodName,
+                            BindingFlags.Static
+                                | BindingFlags.Instance
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic,
+                            new Type[] { typeof(string) }
+                        );
                     if (method == null)
                     {
                         throw new InvalidOperationException(
@@ -2117,7 +2119,8 @@ namespace System.Xml.Serialization
                         void Wrapper(object? _)
                         {
                             string specifiedMemberName = member.Mapping.Name + "Specified";
-                            MethodInfo? specifiedMethodInfo = o!.GetType()
+                            MethodInfo? specifiedMethodInfo = o!
+                                .GetType()
                                 .GetMethod("set_" + specifiedMemberName);
                             if (specifiedMethodInfo != null)
                             {
@@ -2644,10 +2647,10 @@ namespace System.Xml.Serialization
                     var fieldExpr = Expression.Field(objectParam, fieldInfo);
                     var assignExpr = Expression.Assign(fieldExpr, valueParam);
                     setTypedDelegate = Expression.Lambda<Action<TObj, TParam>>(
-                            assignExpr,
-                            objectParam,
-                            valueParam
-                        )
+                        assignExpr,
+                        objectParam,
+                        valueParam
+                    )
                         .Compile();
                 }
 

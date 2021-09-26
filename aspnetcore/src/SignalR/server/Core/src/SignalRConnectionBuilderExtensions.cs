@@ -28,9 +28,8 @@ namespace Microsoft.AspNetCore.SignalR
             [DynamicallyAccessedMembers(HubAccessibility)] THub
         >(this IConnectionBuilder connectionBuilder) where THub : Hub
         {
-            var marker = connectionBuilder.ApplicationServices.GetService(
-                typeof(SignalRCoreMarkerService)
-            );
+            var marker = connectionBuilder.ApplicationServices
+                .GetService(typeof(SignalRCoreMarkerService));
             if (marker == null)
             {
                 throw new InvalidOperationException(

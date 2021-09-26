@@ -2783,10 +2783,8 @@ namespace CoreXml.Test.XLinq
 
                     w.Dispose();
 
-                    string strExpected = string.Format(
-                        "<root xmlns:pre=\"{0}\"><pre:elt>text</pre:elt></root>",
-                        uri
-                    );
+                    string strExpected = string
+                        .Format("<root xmlns:pre=\"{0}\"><pre:elt>text</pre:elt></root>", uri);
                     if (!CompareReader(doc, strExpected))
                         throw new TestException(TestResult.Failed, "");
                 }

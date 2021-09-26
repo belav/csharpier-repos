@@ -226,19 +226,19 @@ namespace Microsoft.AspNetCore.ResponseCompression
             if (_provider.ShouldCompressResponse(_context))
             {
                 // If the MIME type indicates that the response could be compressed, caches will need to vary by the Accept-Encoding header
-                var varyValues = _context.Response.Headers.GetCommaSeparatedValues(
-                    HeaderNames.Vary
-                );
+                var varyValues = _context.Response.Headers
+                    .GetCommaSeparatedValues(HeaderNames.Vary);
                 var varyByAcceptEncoding = false;
 
                 for (var i = 0; i < varyValues.Length; i++)
                 {
                     if (
-                        string.Equals(
-                            varyValues[i],
-                            HeaderNames.AcceptEncoding,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                varyValues[i],
+                                HeaderNames.AcceptEncoding,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         varyByAcceptEncoding = true;
@@ -254,10 +254,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
                 var compressionProvider = ResolveCompressionProvider();
                 if (compressionProvider != null)
                 {
-                    _context.Response.Headers.Append(
-                        HeaderNames.ContentEncoding,
-                        compressionProvider.EncodingName
-                    );
+                    _context.Response.Headers
+                        .Append(HeaderNames.ContentEncoding, compressionProvider.EncodingName);
                     _context.Response.Headers.Remove(HeaderNames.ContentMD5); // Reset the MD5 because the content changed.
                     _context.Response.Headers.Remove(HeaderNames.ContentLength);
                 }

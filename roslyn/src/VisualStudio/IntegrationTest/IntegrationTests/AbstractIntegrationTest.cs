@@ -52,8 +52,8 @@ namespace Roslyn.VisualStudio.IntegrationTests
             try
             {
                 _visualStudioContext = await _instanceFactory.GetNewOrUsedInstanceAsync(
-                        SharedIntegrationHostFixture.RequiredPackageIds
-                    )
+                    SharedIntegrationHostFixture.RequiredPackageIds
+                )
                     .ConfigureAwait(false);
                 _visualStudioContext.Instance.ActivateMainWindow();
             }

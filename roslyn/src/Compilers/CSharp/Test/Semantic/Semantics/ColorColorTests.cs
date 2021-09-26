@@ -84,7 +84,8 @@ class F
                 "void E.M(System.Int32 x)",
                 // (10,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
+                    .WithArguments("F.E", "null")
             );
         }
 
@@ -226,7 +227,8 @@ class F
                 "System.Int32 E.P { get; set; }",
                 // (9,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
+                    .WithArguments("F.E", "null")
             );
         }
 
@@ -261,7 +263,8 @@ class F
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F").WithArguments("E.F", "0"),
                 // (9,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
+                    .WithArguments("F.E", "null")
             );
         }
 
@@ -296,7 +299,8 @@ class F
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event").WithArguments("E.Event"),
                 // (9,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
+                    .WithArguments("F.E", "null")
             );
         }
 
@@ -364,7 +368,8 @@ class F
                 "C.Inner",
                 // (12,14): warning CS0649: Field 'F.C' is never assigned to, and will always have its default value null
                 //     public C C;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "C").WithArguments("F.C", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "C")
+                    .WithArguments("F.C", "null")
             );
         }
 
@@ -397,7 +402,8 @@ class F
                 "void E.M(System.Int32 x)",
                 // (10,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
+                    .WithArguments("F.E", "null")
             );
         }
 
@@ -430,7 +436,8 @@ class F
                 "void E.M<System.Int32>(System.Int32 x)",
                 // (10,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
+                    .WithArguments("F.E", "null")
             );
         }
 
@@ -463,7 +470,8 @@ class F
                 "void E.M<System.Boolean>(System.Boolean x)",
                 // (10,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
+                    .WithArguments("F.E", "null")
             );
         }
 
@@ -500,7 +508,8 @@ class F
                 "void E.M(System.Int32 x)",
                 // (14,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
+                    .WithArguments("F.E", "null")
             );
         }
 
@@ -537,7 +546,8 @@ class F
                 "void E.M(System.Int32 x)",
                 // (14,14): warning CS0649: Field 'F.E' is never assigned to, and will always have its default value null
                 //     public E E;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E").WithArguments("F.E", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "E")
+                    .WithArguments("F.E", "null")
             );
         }
 
@@ -1121,16 +1131,15 @@ class Program
         var xs = var<int>.field;
     }
 }";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (9,13): warning CS0219: The variable 'var' is assigned but its value is never used
-                    //         var var = "A";
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "var").WithArguments("var"),
-                    // (3,21): warning CS0649: Field 'var<T>.field' is never assigned to, and will always have its default value
-                    //     public static T field;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
-                        .WithArguments("var<T>.field", "")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (9,13): warning CS0219: The variable 'var' is assigned but its value is never used
+                //         var var = "A";
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "var").WithArguments("var"),
+                // (3,21): warning CS0649: Field 'var<T>.field' is never assigned to, and will always have its default value
+                //     public static T field;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
+                    .WithArguments("var<T>.field", "")
+            );
         }
 
         [WorkItem(543551, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543551")]
@@ -1715,10 +1724,9 @@ static class Test
                 text,
                 options: TestOptions.DebugExe
             );
-            CompileAndVerify(comp)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       54 (0x36)
   .maxstack  1
@@ -1748,7 +1756,7 @@ static class Test
   IL_0035:  ret
 }
 "
-                );
+            );
         }
 
         [WorkItem(938389, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/938389")]
@@ -1785,26 +1793,26 @@ namespace Goo
                 assemblyName: System.Guid.NewGuid().ToString()
             );
             var ref1 = MetadataReference.CreateFromStream(comp1.EmitToStream());
-            var refIdentity = ((AssemblyMetadata)ref1.GetMetadataNoCopy()).GetAssembly()
+            var refIdentity = ((AssemblyMetadata)ref1.GetMetadataNoCopy())
+                .GetAssembly()
                 .Identity.ToString();
-            CompileAndVerify(source2, new[] { ref1 }, expectedOutput: "42")
-                .VerifyDiagnostics(
-                    // (8,16): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '04f2260a-2ee6-4e74-938a-c47b6dc61d9c, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
-                    //         static A A { get { return null; } }
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
-                        .WithArguments("", "Goo.A", refIdentity, "Goo.A")
-                        .WithLocation(8, 16),
-                    // (8,39): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '59c700fa-e88d-45e4-acec-fd0bae894f9d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
-                    //         static A A { get { return new A(); } }
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
-                        .WithArguments("", "Goo.A", refIdentity, "Goo.A")
-                        .WithLocation(8, 39),
-                    // (12,38): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '04f2260a-2ee6-4e74-938a-c47b6dc61d9c, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
-                    //             System.Console.WriteLine(A.I);
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
-                        .WithArguments("", "Goo.A", refIdentity, "Goo.A")
-                        .WithLocation(12, 38)
-                );
+            CompileAndVerify(source2, new[] { ref1 }, expectedOutput: "42").VerifyDiagnostics(
+                // (8,16): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '04f2260a-2ee6-4e74-938a-c47b6dc61d9c, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
+                //         static A A { get { return null; } }
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
+                    .WithArguments("", "Goo.A", refIdentity, "Goo.A")
+                    .WithLocation(8, 16),
+                // (8,39): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '59c700fa-e88d-45e4-acec-fd0bae894f9d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
+                //         static A A { get { return new A(); } }
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
+                    .WithArguments("", "Goo.A", refIdentity, "Goo.A")
+                    .WithLocation(8, 39),
+                // (12,38): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '04f2260a-2ee6-4e74-938a-c47b6dc61d9c, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
+                //             System.Console.WriteLine(A.I);
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
+                    .WithArguments("", "Goo.A", refIdentity, "Goo.A")
+                    .WithLocation(12, 38)
+            );
         }
 
         [WorkItem(938389, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/938389")]
@@ -1841,21 +1849,21 @@ namespace Goo
                 assemblyName: System.Guid.NewGuid().ToString()
             );
             var ref1 = MetadataReference.CreateFromStream(comp1.EmitToStream());
-            var refIdentity = ((AssemblyMetadata)ref1.GetMetadataNoCopy()).GetAssembly()
+            var refIdentity = ((AssemblyMetadata)ref1.GetMetadataNoCopy())
+                .GetAssembly()
                 .Identity.ToString();
-            CompileAndVerify(source2, new[] { ref1 }, expectedOutput: "42")
-                .VerifyDiagnostics(
-                    // (8,16): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '59c700fa-e88d-45e4-acec-fd0bae894f9d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
-                    //         static A A { get { return new A(); } }
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
-                        .WithArguments("", "Goo.A", refIdentity, "Goo.A")
-                        .WithLocation(8, 16),
-                    // (8,39): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '59c700fa-e88d-45e4-acec-fd0bae894f9d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
-                    //         static A A { get { return new A(); } }
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
-                        .WithArguments("", "Goo.A", refIdentity, "Goo.A")
-                        .WithLocation(8, 39)
-                );
+            CompileAndVerify(source2, new[] { ref1 }, expectedOutput: "42").VerifyDiagnostics(
+                // (8,16): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '59c700fa-e88d-45e4-acec-fd0bae894f9d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
+                //         static A A { get { return new A(); } }
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
+                    .WithArguments("", "Goo.A", refIdentity, "Goo.A")
+                    .WithLocation(8, 16),
+                // (8,39): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '59c700fa-e88d-45e4-acec-fd0bae894f9d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
+                //         static A A { get { return new A(); } }
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
+                    .WithArguments("", "Goo.A", refIdentity, "Goo.A")
+                    .WithLocation(8, 39)
+            );
         }
 
         [WorkItem(938389, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/938389")]
@@ -1892,26 +1900,26 @@ namespace Goo
                 assemblyName: System.Guid.NewGuid().ToString()
             );
             var ref1 = MetadataReference.CreateFromStream(comp1.EmitToStream());
-            var refIdentity = ((AssemblyMetadata)ref1.GetMetadataNoCopy()).GetAssembly()
+            var refIdentity = ((AssemblyMetadata)ref1.GetMetadataNoCopy())
+                .GetAssembly()
                 .Identity.ToString();
-            CompileAndVerify(source2, new[] { ref1 }, expectedOutput: "42")
-                .VerifyDiagnostics(
-                    // (8,16): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '499975c2-0b0d-4d9b-8f1f-4d91133627db, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
-                    //         static A A { get { return null; } }
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
-                        .WithArguments("", "Goo.A", refIdentity, "Goo.A")
-                        .WithLocation(8, 16),
-                    // (8,39): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '59c700fa-e88d-45e4-acec-fd0bae894f9d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
-                    //         static A A { get { return new A(); } }
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
-                        .WithArguments("", "Goo.A", refIdentity, "Goo.A")
-                        .WithLocation(8, 39),
-                    // (12,38): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '499975c2-0b0d-4d9b-8f1f-4d91133627db, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
-                    //             System.Console.WriteLine(A.I);
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
-                        .WithArguments("", "Goo.A", refIdentity, "Goo.A")
-                        .WithLocation(12, 38)
-                );
+            CompileAndVerify(source2, new[] { ref1 }, expectedOutput: "42").VerifyDiagnostics(
+                // (8,16): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '499975c2-0b0d-4d9b-8f1f-4d91133627db, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
+                //         static A A { get { return null; } }
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
+                    .WithArguments("", "Goo.A", refIdentity, "Goo.A")
+                    .WithLocation(8, 16),
+                // (8,39): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '59c700fa-e88d-45e4-acec-fd0bae894f9d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
+                //         static A A { get { return new A(); } }
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
+                    .WithArguments("", "Goo.A", refIdentity, "Goo.A")
+                    .WithLocation(8, 39),
+                // (12,38): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in '499975c2-0b0d-4d9b-8f1f-4d91133627db, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
+                //             System.Console.WriteLine(A.I);
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
+                    .WithArguments("", "Goo.A", refIdentity, "Goo.A")
+                    .WithLocation(12, 38)
+            );
         }
 
         [WorkItem(938389, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/938389")]
@@ -1948,21 +1956,21 @@ namespace Goo
                 assemblyName: System.Guid.NewGuid().ToString()
             );
             var ref1 = MetadataReference.CreateFromStream(comp1.EmitToStream());
-            var refIdentity = ((AssemblyMetadata)ref1.GetMetadataNoCopy()).GetAssembly()
+            var refIdentity = ((AssemblyMetadata)ref1.GetMetadataNoCopy())
+                .GetAssembly()
                 .Identity.ToString();
-            CompileAndVerify(source2, new[] { ref1 }, expectedOutput: "42")
-                .VerifyDiagnostics(
-                    // (8,16): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in 'cb07e894-1bb8-4db2-93ba-747f45e89f22, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
-                    //         static A A { get { return new A(); } }
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
-                        .WithArguments("", "Goo.A", refIdentity, "Goo.A")
-                        .WithLocation(8, 16),
-                    // (8,39): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in 'cb07e894-1bb8-4db2-93ba-747f45e89f22, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
-                    //         static A A { get { return new A(); } }
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
-                        .WithArguments("", "Goo.A", refIdentity, "Goo.A")
-                        .WithLocation(8, 39)
-                );
+            CompileAndVerify(source2, new[] { ref1 }, expectedOutput: "42").VerifyDiagnostics(
+                // (8,16): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in 'cb07e894-1bb8-4db2-93ba-747f45e89f22, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
+                //         static A A { get { return new A(); } }
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
+                    .WithArguments("", "Goo.A", refIdentity, "Goo.A")
+                    .WithLocation(8, 16),
+                // (8,39): warning CS0436: The type 'A' in '' conflicts with the imported type 'A' in 'cb07e894-1bb8-4db2-93ba-747f45e89f22, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
+                //         static A A { get { return new A(); } }
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "A")
+                    .WithArguments("", "Goo.A", refIdentity, "Goo.A")
+                    .WithLocation(8, 39)
+            );
         }
 
         [WorkItem(1095020, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1095020")]
@@ -2056,9 +2064,8 @@ public class Example
 
                 var memberAccessExpression = context.Node as MemberAccessExpressionSyntax;
 
-                var actualSymbol = context.SemanticModel.GetSymbolInfo(
-                    memberAccessExpression.Expression
-                );
+                var actualSymbol = context.SemanticModel
+                    .GetSymbolInfo(memberAccessExpression.Expression);
 
                 Assert.Equal("Lifetime", actualSymbol.Symbol.ToTestDisplayString());
                 Assert.Equal(SymbolKind.NamedType, actualSymbol.Symbol.Kind);
@@ -2518,9 +2525,9 @@ class C2
                 // (9,13): error CS0123: No overload for 'ReferenceEquals' matches delegate 'Action'
                 //         _ = new System.Action(C2.ReferenceEquals);
                 Diagnostic(
-                        ErrorCode.ERR_MethDelegateMismatch,
-                        "new System.Action(C2.ReferenceEquals)"
-                    )
+                    ErrorCode.ERR_MethDelegateMismatch,
+                    "new System.Action(C2.ReferenceEquals)"
+                )
                     .WithArguments("ReferenceEquals", "System.Action")
                     .WithLocation(9, 13)
             );
@@ -2529,9 +2536,9 @@ class C2
                 // (9,13): error CS0123: No overload for 'ReferenceEquals' matches delegate 'Action'
                 //         _ = new System.Action(C2.ReferenceEquals);
                 Diagnostic(
-                        ErrorCode.ERR_MethDelegateMismatch,
-                        "new System.Action(C2.ReferenceEquals)"
-                    )
+                    ErrorCode.ERR_MethDelegateMismatch,
+                    "new System.Action(C2.ReferenceEquals)"
+                )
                     .WithArguments("ReferenceEquals", "System.Action")
                     .WithLocation(9, 13)
             );

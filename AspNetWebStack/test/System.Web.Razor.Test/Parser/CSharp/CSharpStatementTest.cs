@@ -110,8 +110,8 @@ namespace System.Web.Razor.Test.Parser.CSharp
                 new StatementBlock(
                     Factory.CodeTransition(),
                     Factory.Code(
-                            "if(true) { foo(); } else if(false) { foo(); } else if(!false) { foo(); }"
-                        )
+                        "if(true) { foo(); } else if(false) { foo(); } else if(!false) { foo(); }"
+                    )
                         .AsStatement()
                 )
             );
@@ -151,8 +151,8 @@ namespace System.Web.Razor.Test.Parser.CSharp
                 new StatementBlock(
                     Factory.CodeTransition(),
                     Factory.Code(
-                            "try { foo(); } catch(IOException ioex) { handleIO(); } catch(Exception ex) { handleOther(); }"
-                        )
+                        "try { foo(); } catch(IOException ioex) { handleIO(); } catch(Exception ex) { handleOther(); }"
+                    )
                         .AsStatement()
                 )
             );
@@ -194,8 +194,8 @@ namespace System.Web.Razor.Test.Parser.CSharp
                 new DirectiveBlock(
                     Factory.CodeTransition(),
                     Factory.Code(
-                            "using StringDictionary = System.Collections.Generic.Dictionary<string, string>"
-                        )
+                        "using StringDictionary = System.Collections.Generic.Dictionary<string, string>"
+                    )
                         .AsNamespaceImport(
                             " StringDictionary = System.Collections.Generic.Dictionary<string, string>",
                             5

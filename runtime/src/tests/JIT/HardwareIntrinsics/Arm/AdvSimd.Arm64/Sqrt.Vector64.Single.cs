@@ -274,9 +274,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = AdvSimd.Arm64.Sqrt(
-                AdvSimd.LoadVector64((Single*)(_dataTable.inArray1Ptr))
-            );
+            var result = AdvSimd.Arm64
+                .Sqrt(AdvSimd.LoadVector64((Single*)(_dataTable.inArray1Ptr)));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
@@ -286,10 +285,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
-                    nameof(AdvSimd.Arm64.Sqrt),
-                    new Type[] { typeof(Vector64<Single>) }
-                )
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(nameof(AdvSimd.Arm64.Sqrt), new Type[] { typeof(Vector64<Single>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector64<Single>>(_dataTable.inArray1Ptr) }
@@ -303,10 +300,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
-                    nameof(AdvSimd.Arm64.Sqrt),
-                    new Type[] { typeof(Vector64<Single>) }
-                )
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(nameof(AdvSimd.Arm64.Sqrt), new Type[] { typeof(Vector64<Single>) })
                 .Invoke(
                     null,
                     new object[] { AdvSimd.LoadVector64((Single*)(_dataTable.inArray1Ptr)) }
@@ -529,15 +524,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.Sqrt)}<Single>(Vector64<Single>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.Sqrt)}<Single>(Vector64<Single>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

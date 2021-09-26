@@ -165,13 +165,13 @@ namespace Roslyn.Utilities
                     var token = _asyncListener.BeginAsyncOperation(nameof(TryKickOffNextBatchTask));
 
                     _updateTask = _updateTask.ContinueWithAfterDelayFromAsync(
-                            _ => ProcessNextBatchAsync(_cancellationToken),
-                            _cancellationToken,
-                            (int)_delay.TotalMilliseconds,
-                            _asyncListener,
-                            TaskContinuationOptions.RunContinuationsAsynchronously,
-                            TaskScheduler.Default
-                        )
+                        _ => ProcessNextBatchAsync(_cancellationToken),
+                        _cancellationToken,
+                        (int)_delay.TotalMilliseconds,
+                        _asyncListener,
+                        TaskContinuationOptions.RunContinuationsAsynchronously,
+                        TaskScheduler.Default
+                    )
                         .CompletesAsyncOperation(token);
                 }
                 else

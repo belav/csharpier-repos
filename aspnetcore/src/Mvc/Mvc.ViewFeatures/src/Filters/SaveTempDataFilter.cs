@@ -45,10 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
 
             if (!context.HttpContext.Response.HasStarted)
             {
-                context.HttpContext.Response.OnStarting(
-                    callback: OnStartingCallback,
-                    state: context.HttpContext
-                );
+                context.HttpContext.Response
+                    .OnStarting(callback: OnStartingCallback, state: context.HttpContext);
             }
         }
 

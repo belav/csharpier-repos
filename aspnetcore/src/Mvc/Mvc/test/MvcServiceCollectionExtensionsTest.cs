@@ -454,9 +454,8 @@ namespace Microsoft.AspNetCore.Mvc
                 )
                 {
                     // This will throw if something is invalid.
-                    scope.ServiceProvider.GetService(
-                        typeof(IEnumerable<>).MakeGenericType(serviceType)
-                    );
+                    scope.ServiceProvider
+                        .GetService(typeof(IEnumerable<>).MakeGenericType(serviceType));
                 }
             }
         }
@@ -504,8 +503,8 @@ namespace Microsoft.AspNetCore.Mvc
 
                 var multiRegistrationServiceTypes = MultiRegistrationServiceTypes;
                 return services.Where(
-                        sd => !multiRegistrationServiceTypes.Keys.Contains(sd.ServiceType)
-                    )
+                    sd => !multiRegistrationServiceTypes.Keys.Contains(sd.ServiceType)
+                )
                     .Where(sd => sd.ServiceType.Assembly.FullName.Contains("Mvc"))
                     .Select(sd => sd.ServiceType);
             }
@@ -646,10 +645,11 @@ namespace Microsoft.AspNetCore.Mvc
                 (expectedServiceRegistrationCount == actual),
                 $"Expected service type '{serviceType}' to be registered {expectedServiceRegistrationCount}"
                     + $" time(s) but was actually registered {actual} time(s)."
-                    + string.Join(
-                        Environment.NewLine,
-                        serviceDescriptors.Select(sd => sd.ImplementationType)
-                    )
+                    + string
+                        .Join(
+                            Environment.NewLine,
+                            serviceDescriptors.Select(sd => sd.ImplementationType)
+                        )
             );
         }
 
@@ -660,9 +660,8 @@ namespace Microsoft.AspNetCore.Mvc
         )
         {
             var matches = services.Where(
-                    sd =>
-                        sd.ServiceType == serviceType && sd.ImplementationType == implementationType
-                )
+                sd => sd.ServiceType == serviceType && sd.ImplementationType == implementationType
+            )
                 .ToArray();
 
             if (matches.Length == 0)

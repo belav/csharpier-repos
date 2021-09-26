@@ -14,10 +14,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         {
             // Arrange
             var tagHelper = TagHelperDescriptorBuilder.Create(
-                    ViewComponentTagHelperConventions.Kind,
-                    "TestTagHelper",
-                    "TestAssembly"
-                )
+                ViewComponentTagHelperConventions.Kind,
+                "TestTagHelper",
+                "TestAssembly"
+            )
                 .TypeName("__Generated__TagCloudViewComponentTagHelper")
                 .BoundAttributeDescriptor(
                     attribute => attribute.Name("Foo").TypeName("System.Int32").PropertyName("Foo")
@@ -70,10 +70,10 @@ public class __Generated__TagCloudViewComponentTagHelper : Microsoft.AspNetCore.
         {
             // Arrange
             var tagHelper = TagHelperDescriptorBuilder.Create(
-                    ViewComponentTagHelperConventions.Kind,
-                    "TestTagHelper",
-                    "TestAssembly"
-                )
+                ViewComponentTagHelperConventions.Kind,
+                "TestTagHelper",
+                "TestAssembly"
+            )
                 .TypeName("__Generated__TagCloudViewComponentTagHelper")
                 .BoundAttributeDescriptor(
                     attribute =>

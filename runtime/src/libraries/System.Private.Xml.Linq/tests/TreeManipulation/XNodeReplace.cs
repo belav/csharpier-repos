@@ -169,10 +169,10 @@ namespace XLinqTests
                         .IsEmpty();
 
                     IEnumerable<ExpectedValue> expValues = ReplaceWithExpValues(
-                            elem,
-                            toReplace,
-                            replacement
-                        )
+                        elem,
+                        toReplace,
+                        replacement
+                    )
                         .ProcessNodes()
                         .ToList();
 
@@ -229,10 +229,10 @@ namespace XLinqTests
                         .IsEmpty();
 
                     IEnumerable<ExpectedValue> expValues = ReplaceWithExpValues(
-                            doc,
-                            toReplace,
-                            replacement
-                        )
+                        doc,
+                        toReplace,
+                        replacement
+                    )
                         .ProcessNodes()
                         .ToList();
 

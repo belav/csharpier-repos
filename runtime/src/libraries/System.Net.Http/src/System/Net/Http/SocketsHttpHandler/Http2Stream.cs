@@ -205,8 +205,8 @@ namespace System.Net.Http
                     {
                         linkedRegistration = RegisterRequestBodyCancellation(cancellationToken);
                         sendRequestContent = await WaitFor100ContinueAsync(
-                                _requestBodyCancellationSource.Token
-                            )
+                            _requestBodyCancellationSource.Token
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -217,11 +217,12 @@ namespace System.Net.Http
                         if (HttpTelemetry.Log.IsEnabled())
                             HttpTelemetry.Log.RequestContentStart();
 
-                        ValueTask vt = _request.Content.InternalCopyToAsync(
-                            writeStream,
-                            context: null,
-                            _requestBodyCancellationSource.Token
-                        );
+                        ValueTask vt = _request.Content
+                            .InternalCopyToAsync(
+                                writeStream,
+                                context: null,
+                                _requestBodyCancellationSource.Token
+                            );
                         if (vt.IsCompleted)
                         {
                             vt.GetAwaiter().GetResult();
@@ -354,8 +355,7 @@ namespace System.Net.Http
                         waiter
                     )
                 )
-                await using (
-                    new Timer(
+                await using (new Timer(
                         static s =>
                         {
                             var thisRef = (Http2Stream)s!;
@@ -366,8 +366,7 @@ namespace System.Net.Http
                         this,
                         _connection._pool.Settings._expect100ContinueTimeout,
                         Timeout.InfiniteTimeSpan
-                    ).ConfigureAwait(false)
-                )
+                    ).ConfigureAwait(false))
                 {
                     bool shouldSendContent = await waiter.Task.ConfigureAwait(false);
                     // By now, either we got a response from the server or the timer expired or cancellation was requested.
@@ -796,13 +795,14 @@ namespace System.Net.Http
                             value,
                             valueEncoding
                         );
-                        _response.Headers.TryAddWithoutValidation(
-                            (descriptor.HeaderType & HttpHeaderType.Request)
-                                == HttpHeaderType.Request
-                              ? descriptor.AsCustomHeader()
-                              : descriptor,
-                            headerValue
-                        );
+                        _response.Headers
+                            .TryAddWithoutValidation(
+                                (descriptor.HeaderType & HttpHeaderType.Request)
+                                    == HttpHeaderType.Request
+                                  ? descriptor.AsCustomHeader()
+                                  : descriptor,
+                                headerValue
+                            );
                     }
                 }
             }
@@ -1395,9 +1395,9 @@ namespace System.Net.Http
                         {
                             ExtendWindow(bytesRead);
                             await destination.WriteAsync(
-                                    new ReadOnlyMemory<byte>(buffer, 0, bytesRead),
-                                    cancellationToken
-                                )
+                                new ReadOnlyMemory<byte>(buffer, 0, bytesRead),
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         }
                         else
@@ -1478,10 +1478,10 @@ namespace System.Net.Http
                         (current, buffer) = SplitBuffer(buffer, sendSize);
 
                         await _connection.SendStreamDataAsync(
-                                StreamId,
-                                current,
-                                _requestBodyCancellationSource.Token
-                            )
+                            StreamId,
+                            current,
+                            _requestBodyCancellationSource.Token
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -1590,14 +1590,15 @@ namespace System.Net.Http
                         if (signalWaiter)
                         {
                             // Wake up the wait.  It will then immediately check whether cancellation was requested and throw if it was.
-                            thisRef._waitSource.SetException(
-                                ExceptionDispatchInfo.SetCurrentStackTrace(
-                                    CancellationHelper.CreateOperationCanceledException(
-                                        null,
-                                        cancellationToken
+                            thisRef._waitSource
+                                .SetException(
+                                    ExceptionDispatchInfo.SetCurrentStackTrace(
+                                        CancellationHelper.CreateOperationCanceledException(
+                                            null,
+                                            cancellationToken
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     },
                     this

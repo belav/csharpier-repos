@@ -147,7 +147,8 @@ namespace System.Xml.Xsl.Xslt
             _nsVars = _f.GlobalVariableList();
 
             // Refactor huge templates into smaller ones (more JIT friendly)
-            (new XslAstRewriter()).Rewrite(compiler);
+            (new XslAstRewriter())
+                .Rewrite(compiler);
 
             if (!IsDebug)
             {
@@ -1349,9 +1350,9 @@ namespace System.Xml.Xsl.Xslt
                     {
                         QilIterator let = _f.Let(val!);
                         let.DebugName = _f.QName(
-                                "with-param " + withParam.Name!.QualifiedName,
-                                XmlReservedNs.NsXslDebug
-                            )
+                            "with-param " + withParam.Name!.QualifiedName,
+                            XmlReservedNs.NsXslDebug
+                        )
                             .ToString();
                         _varHelper.AddVariable(let);
                         withParam.Value = let;
@@ -1406,9 +1407,9 @@ namespace System.Xml.Xsl.Xslt
                     QilNode val = withParam.Value!;
                     QilIterator let = _f.Let(val);
                     let.DebugName = _f.QName(
-                            "with-param " + withParam.Name!.QualifiedName,
-                            XmlReservedNs.NsXslDebug
-                        )
+                        "with-param " + withParam.Name!.QualifiedName,
+                        XmlReservedNs.NsXslDebug
+                    )
                         .ToString();
                     _varHelper.AddVariable(let);
                     withParam.Value = let;
@@ -3242,15 +3243,16 @@ namespace System.Xml.Xsl.Xslt
                 }
 
                 // 3.1.2 switch on type of current node
-                QilTernary builtinTemplates = _f.BaseFactory.Conditional(
-                    _f.IsType(current, _elementOrDocumentType),
-                    loopOnContent,
-                    _f.Conditional(
-                        _f.IsType(current, _textOrAttributeType),
-                        _f.TextCtor(_f.XPathNodeValue(current)),
-                        _f.Sequence()
-                    )
-                );
+                QilTernary builtinTemplates = _f.BaseFactory
+                    .Conditional(
+                        _f.IsType(current, _elementOrDocumentType),
+                        loopOnContent,
+                        _f.Conditional(
+                            _f.IsType(current, _textOrAttributeType),
+                            _f.TextCtor(_f.XPathNodeValue(current)),
+                            _f.Sequence()
+                        )
+                    );
 
                 // 3.2 Stylesheet templates
                 _matcherBuilder.CollectPatterns(sheet, mode);

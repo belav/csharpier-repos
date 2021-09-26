@@ -49,15 +49,11 @@ namespace AnalyzerRunner
                     continue;
 
                 var modifiedSpecificDiagnosticOptions =
-                    project.CompilationOptions.SpecificDiagnosticOptions.SetItem(
-                            "AD0001",
-                            ReportDiagnostic.Error
-                        )
+                    project.CompilationOptions.SpecificDiagnosticOptions
+                        .SetItem("AD0001", ReportDiagnostic.Error)
                         .SetItem("AD0002", ReportDiagnostic.Error);
-                var modifiedCompilationOptions =
-                    project.CompilationOptions.WithSpecificDiagnosticOptions(
-                        modifiedSpecificDiagnosticOptions
-                    );
+                var modifiedCompilationOptions = project.CompilationOptions
+                    .WithSpecificDiagnosticOptions(modifiedSpecificDiagnosticOptions);
                 solution = solution.WithProjectCompilationOptions(
                     projectId,
                     modifiedCompilationOptions
@@ -96,11 +92,11 @@ namespace AnalyzerRunner
             var stopwatch = PerformanceTracker.StartNew();
 
             var analysisResult = await GetAnalysisResultAsync(
-                    solution,
-                    _analyzers,
-                    _options,
-                    cancellationToken
-                )
+                solution,
+                _analyzers,
+                _options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var allDiagnostics = analysisResult.Where(pair => pair.Value != null)
                 .SelectMany(pair => pair.Value.GetAllDiagnostics())
@@ -147,12 +143,12 @@ namespace AnalyzerRunner
                         }
 
                         var currentDocumentPerformance = await TestDocumentPerformanceAsync(
-                                _analyzers,
-                                project,
-                                documentId,
-                                _options,
-                                cancellationToken
-                            )
+                            _analyzers,
+                            project,
+                            documentId,
+                            _options,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         Console.WriteLine(
                             $"{document.FilePath ?? document.Name}: {currentDocumentPerformance.EditsPerSecond:0.00} ({currentDocumentPerformance.AllocatedBytesPerEdit} bytes)"
@@ -161,12 +157,12 @@ namespace AnalyzerRunner
                     }
 
                     var sumOfDocumentAverages = documentPerformance.Where(
-                            x => x.Key.ProjectId == projectId
-                        )
+                        x => x.Key.ProjectId == projectId
+                    )
                         .Sum(x => x.Value.EditsPerSecond);
                     double documentCount = documentPerformance.Where(
-                            x => x.Key.ProjectId == projectId
-                        )
+                        x => x.Key.ProjectId == projectId
+                    )
                         .Count();
                     if (documentCount > 0)
                     {
@@ -227,10 +223,9 @@ namespace AnalyzerRunner
             {
                 WriteDiagnosticResults(
                     analysisResult.SelectMany(
-                            pair =>
-                                pair.Value.GetAllDiagnostics()
-                                    .Select(j => Tuple.Create(pair.Key, j))
-                        )
+                        pair =>
+                            pair.Value.GetAllDiagnostics().Select(j => Tuple.Create(pair.Key, j))
+                    )
                         .ToImmutableArray(),
                     _options.LogFileName
                 );
@@ -275,15 +270,15 @@ namespace AnalyzerRunner
                     .GetSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
                 await compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(
-                        tree,
-                        cancellationToken
-                    )
+                    tree,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 await compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(
-                        compilation.GetSemanticModel(tree),
-                        null,
-                        cancellationToken
-                    )
+                    compilation.GetSemanticModel(tree),
+                    null,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -385,9 +380,8 @@ namespace AnalyzerRunner
                 else if (options.AnalyzerNames.Count == 0)
                 {
                     if (
-                        analyzer.SupportedDiagnostics.Any(
-                            diagnosticDescriptor => diagnosticDescriptor.IsEnabledByDefault
-                        )
+                        analyzer.SupportedDiagnostics
+                            .Any(diagnosticDescriptor => diagnosticDescriptor.IsEnabledByDefault)
                     )
                     {
                         yield return analyzer;
@@ -434,10 +428,8 @@ namespace AnalyzerRunner
             );
             var csharpAnalyzers = analyzerReference.GetAnalyzers(LanguageNames.CSharp);
             var basicAnalyzers = analyzerReference.GetAnalyzers(LanguageNames.VisualBasic);
-            return ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>>.Empty.Add(
-                    LanguageNames.CSharp,
-                    csharpAnalyzers
-                )
+            return ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>>.Empty
+                .Add(LanguageNames.CSharp, csharpAnalyzers)
                 .Add(LanguageNames.VisualBasic, basicAnalyzers);
         }
 
@@ -563,8 +555,8 @@ namespace AnalyzerRunner
                     )
                 );
                 var analystResult = await compilationWithAnalyzers.GetAnalysisResultAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return analystResult;
             }
@@ -618,8 +610,8 @@ namespace AnalyzerRunner
 
             WriteLine($"Execution times (ms):", ConsoleColor.DarkCyan);
             var longestAnalyzerName = telemetryInfoDictionary.Select(
-                    x => x.Key.GetType().Name.Length
-                )
+                x => x.Key.GetType().Name.Length
+            )
                 .Max();
             foreach (
                 var pair in telemetryInfoDictionary.OrderBy(

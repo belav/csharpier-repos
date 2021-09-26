@@ -61,8 +61,8 @@ namespace Company.WebApplication1
 #endif
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDefaultIdentity<IdentityUser>(
-                    options => options.SignIn.RequireConfirmedAccount = true
-                )
+                options => options.SignIn.RequireConfirmedAccount = true
+            )
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
@@ -109,7 +109,8 @@ namespace Company.WebApplication1
             );
             services.AddRazorPages().AddMvcOptions(options => { }).AddMicrosoftIdentityUI();
 #elif (IndividualB2CAuth)
-            services.AddRazorPages().AddMicrosoftIdentityUI();
+            services.AddRazorPages()
+                .AddMicrosoftIdentityUI();
 #else
             services.AddRazorPages();
 #endif

@@ -156,12 +156,13 @@ namespace System.Xml
                             element = parent as XmlElement;
                             if (element != null)
                             {
-                                element.XmlName = _doc!.AddXmlName(
-                                    element.Prefix,
-                                    element.LocalName,
-                                    element.NamespaceURI,
-                                    schemaInfo
-                                );
+                                element.XmlName = _doc!
+                                    .AddXmlName(
+                                        element.Prefix,
+                                        element.LocalName,
+                                        element.NamespaceURI,
+                                        schemaInfo
+                                    );
                             }
                         }
                         if (parent.ParentNode == null)
@@ -462,12 +463,8 @@ namespace System.Xml
                 }
             }
 
-            XmlDocumentType dtNode = _doc!.CreateDocumentType(
-                localName,
-                publicId,
-                systemId,
-                internalSubset
-            );
+            XmlDocumentType dtNode = _doc!
+                .CreateDocumentType(localName, publicId, systemId, internalSubset);
 
             IDtdInfo? dtdInfo = _reader.DtdInfo;
             if (dtdInfo != null)
@@ -689,9 +686,15 @@ namespace System.Xml
                 {
                     foreach (SchemaNotation scNot in schInfo.Notations.Values)
                     {
-                        dtNode.Notations.SetNamedItem(
-                            new XmlNotation(scNot.Name.Name, scNot.Pubid, scNot.SystemLiteral, _doc)
-                        );
+                        dtNode.Notations
+                            .SetNamedItem(
+                                new XmlNotation(
+                                    scNot.Name.Name,
+                                    scNot.Pubid,
+                                    scNot.SystemLiteral,
+                                    _doc
+                                )
+                            );
                     }
                 }
 

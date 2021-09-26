@@ -25,16 +25,14 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
         private const string DescriptionKey = nameof(DescriptionKey);
 
         // Always soft-select these completion items.  Also, never filter down.
-        private static readonly CompletionItemRules s_rules =
-            CompletionItemRules.Default.WithSelectionBehavior(
-                    CompletionItemSelectionBehavior.SoftSelection
+        private static readonly CompletionItemRules s_rules = CompletionItemRules.Default
+            .WithSelectionBehavior(CompletionItemSelectionBehavior.SoftSelection)
+            .WithFilterCharacterRule(
+                CharacterSetModificationRule.Create(
+                    CharacterSetModificationKind.Replace,
+                    new char[] {  }
                 )
-                .WithFilterCharacterRule(
-                    CharacterSetModificationRule.Create(
-                        CharacterSetModificationKind.Replace,
-                        new char[] {  }
-                    )
-                );
+            );
 
         private readonly DateAndTimeEmbeddedLanguageFeatures _language;
 
@@ -79,10 +77,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
         public override async Task ProvideCompletionsAsync(CompletionContext context)
         {
             if (
-                !context.Options.GetOption(
-                    DateAndTimeOptions.ProvideDateAndTimeCompletions,
-                    context.Document.Project.Language
-                )
+                !context.Options
+                    .GetOption(
+                        DateAndTimeOptions.ProvideDateAndTimeCompletions,
+                        context.Document.Project.Language
+                    )
             )
                 return;
 
@@ -100,10 +99,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
             var cancellationToken = context.CancellationToken;
 
             var stringTokenOpt = await _language.TryGetDateAndTimeTokenAtPositionAsync(
-                    document,
-                    position,
-                    cancellationToken
-                )
+                document,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (stringTokenOpt == null)
@@ -120,9 +119,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
             }
 
             // Note: it's acceptable if this fails to convert.  We just won't show the example in that case.
-            var virtualChars = _language.Info.VirtualCharService.TryConvertToVirtualChars(
-                stringToken
-            );
+            var virtualChars = _language.Info.VirtualCharService
+                .TryConvertToVirtualChars(stringToken);
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 

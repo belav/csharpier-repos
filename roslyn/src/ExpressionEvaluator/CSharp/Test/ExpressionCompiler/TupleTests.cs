@@ -429,9 +429,8 @@ class C
                     var testData = new CompilationTestData();
                     string error;
                     context.CompileExpression("x.Item4 + x.Item8", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       19 (0x13)
   .maxstack  2
   .locals init (System.ValueTuple<int, int, int, int, int, int, int, System.ValueTuple<int>> V_0) //x
@@ -443,7 +442,7 @@ class C
   IL_0011:  add
   IL_0012:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -473,9 +472,8 @@ class C
                     var testData = new CompilationTestData();
                     string error;
                     context.CompileExpression("x.Item8 + x.Eight", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       24 (0x18)
   .maxstack  2
   .locals init (System.ValueTuple<int, int, int, int, int, int, int, System.ValueTuple<int>> V_0) //x
@@ -488,7 +486,7 @@ class C
   IL_0016:  add
   IL_0017:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -741,9 +739,8 @@ class C
                         null,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       47 (0x2f)
   .maxstack  2
   IL_0000:  ldstr      ""x""
@@ -758,7 +755,7 @@ class C
   IL_002d:  add
   IL_002e:  ret
 }"
-                        );
+                    );
                 }
             );
         }

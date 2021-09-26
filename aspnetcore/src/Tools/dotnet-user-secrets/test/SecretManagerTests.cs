@@ -141,12 +141,13 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
             foreach (var keyValue in secrets)
             {
                 Assert.Contains(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Successfully saved {0} = {1} to the secret store.",
-                        keyValue.Key,
-                        keyValue.Value
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "Successfully saved {0} = {1} to the secret store.",
+                            keyValue.Key,
+                            keyValue.Value
+                        ),
                     _console.GetOutput()
                 );
             }
@@ -159,12 +160,13 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
             foreach (var keyValue in secrets)
             {
                 Assert.Contains(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0} = {1}",
-                        keyValue.Key,
-                        keyValue.Value
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "{0} = {1}",
+                            keyValue.Key,
+                            keyValue.Value
+                        ),
                     _console.GetOutput()
                 );
             }
@@ -220,19 +222,21 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
 
             secretManager.RunInternal("-v", "set", "secret1", "value1", "-p", projectPath);
             Assert.Contains(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Project file path {0}.",
-                    Path.Combine(projectPath, "TestProject.csproj")
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "Project file path {0}.",
+                        Path.Combine(projectPath, "TestProject.csproj")
+                    ),
                 _console.GetOutput()
             );
             Assert.Contains(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Secrets file path {0}.",
-                    PathHelper.GetSecretsPathFromSecretsId(secretId)
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "Secrets file path {0}.",
+                        PathHelper.GetSecretsPathFromSecretsId(secretId)
+                    ),
                 _console.GetOutput()
             );
             Assert.Contains(
@@ -244,19 +248,21 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
             secretManager.RunInternal("-v", "list", "-p", projectPath);
 
             Assert.Contains(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Project file path {0}.",
-                    Path.Combine(projectPath, "TestProject.csproj")
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "Project file path {0}.",
+                        Path.Combine(projectPath, "TestProject.csproj")
+                    ),
                 _console.GetOutput()
             );
             Assert.Contains(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Secrets file path {0}.",
-                    PathHelper.GetSecretsPathFromSecretsId(secretId)
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "Secrets file path {0}.",
+                        PathHelper.GetSecretsPathFromSecretsId(secretId)
+                    ),
                 _console.GetOutput()
             );
             Assert.Contains("secret1 = value1", _console.GetOutput());
@@ -402,12 +408,13 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
             foreach (var keyValue in secrets)
             {
                 Assert.Contains(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Successfully saved {0} = {1} to the secret store.",
-                        keyValue.Key,
-                        keyValue.Value
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "Successfully saved {0} = {1} to the secret store.",
+                            keyValue.Key,
+                            keyValue.Value
+                        ),
                     _console.GetOutput()
                 );
             }
@@ -421,12 +428,13 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
             foreach (var keyValue in secrets)
             {
                 Assert.Contains(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0} = {1}",
-                        keyValue.Key,
-                        keyValue.Value
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "{0} = {1}",
+                            keyValue.Key,
+                            keyValue.Value
+                        ),
                     _console.GetOutput()
                 );
             }

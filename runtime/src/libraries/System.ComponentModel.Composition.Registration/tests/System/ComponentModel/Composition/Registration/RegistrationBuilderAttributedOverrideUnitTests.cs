@@ -291,10 +291,10 @@ namespace System.ComponentModel.Composition.Registration.Tests
             RegistrationBuilder convention =
                 ConfigureExportInterfaceConvention<NonExportClassDeclarationAttributes>();
 
-            var unionOfConventionAndDeclared =
-                typeof(NonExportClassDeclarationAttributes).GetCustomAttributes(true)
-                    .Concat(ExportInterfaceConventionAttributes)
-                    .ToArray();
+            var unionOfConventionAndDeclared = typeof(NonExportClassDeclarationAttributes)
+                .GetCustomAttributes(true)
+                .Concat(ExportInterfaceConventionAttributes)
+                .ToArray();
 
             AssertHasAttributesUnderConvention<NonExportClassDeclarationAttributes>(
                 convention,
@@ -455,11 +455,11 @@ namespace System.ComponentModel.Composition.Registration.Tests
                     t => t.AB
                 );
 
-            var unionOfConventionAndDeclared =
-                typeof(NonExportPropertyDeclarationAttributes).GetProperty("AB")
-                    .GetCustomAttributes(true)
-                    .Concat(ExportPropertyConventionAttributes)
-                    .ToArray();
+            var unionOfConventionAndDeclared = typeof(NonExportPropertyDeclarationAttributes)
+                .GetProperty("AB")
+                .GetCustomAttributes(true)
+                .Concat(ExportPropertyConventionAttributes)
+                .ToArray();
 
             AssertHasAttributesUnderConvention<NonExportPropertyDeclarationAttributes>(
                 t => t.AB,
@@ -557,11 +557,11 @@ namespace System.ComponentModel.Composition.Registration.Tests
                     t => t.AB
                 );
 
-            var unionOfConventionAndDeclared =
-                typeof(NonImportPropertyDeclarationAttributes).GetProperty("AB")
-                    .GetCustomAttributes(true)
-                    .Concat(ImportPropertyConventionAttributes)
-                    .ToArray();
+            var unionOfConventionAndDeclared = typeof(NonImportPropertyDeclarationAttributes)
+                .GetProperty("AB")
+                .GetCustomAttributes(true)
+                .Concat(ImportPropertyConventionAttributes)
+                .ToArray();
 
             AssertHasAttributesUnderConvention<NonImportPropertyDeclarationAttributes>(
                 t => t.AB,

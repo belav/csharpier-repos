@@ -160,15 +160,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                     ProjectGuid = projectGuid
                 };
 
-                project = _threadingContext.JoinableTaskFactory.Run(
-                    () =>
-                        _visualStudioProjectFactory.CreateAndAddToWorkspaceAsync(
-                            name,
-                            StringConstants.XamlLanguageName,
-                            projectInfo,
-                            CancellationToken.None
-                        )
-                );
+                project = _threadingContext.JoinableTaskFactory
+                    .Run(
+                        () =>
+                            _visualStudioProjectFactory.CreateAndAddToWorkspaceAsync(
+                                name,
+                                StringConstants.XamlLanguageName,
+                                projectInfo,
+                                CancellationToken.None
+                            )
+                    );
                 _xamlProjects.Add(hierarchy, project);
             }
 
@@ -176,7 +177,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             {
                 project.AddSourceFile(filePath);
 
-                var documentId = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(filePath)
+                var documentId = _workspace.CurrentSolution
+                    .GetDocumentIdsWithFilePath(filePath)
                     .Single(d => d.ProjectId == project.Id);
                 _documentIds[filePath] = documentId;
 
@@ -220,9 +222,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                 var document = _workspace.CurrentSolution.GetDocument(documentId);
                 if (document?.FilePath != null)
                 {
-                    var project = _xamlProjects.Values.SingleOrDefault(
-                        p => p.Id == document.Project.Id
-                    );
+                    var project = _xamlProjects.Values
+                        .SingleOrDefault(p => p.Id == document.Project.Id);
                     project?.RemoveSourceFile(document.FilePath);
                 }
                 _documentIds.TryRemove(filePath, out _);
@@ -277,7 +278,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             {
                 project.AddSourceFile(newMoniker);
 
-                var documentId = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(newMoniker)
+                var documentId = _workspace.CurrentSolution
+                    .GetDocumentIdsWithFilePath(newMoniker)
                     .Single(d => d.ProjectId == project.Id);
                 _documentIds[newMoniker] = documentId;
             }

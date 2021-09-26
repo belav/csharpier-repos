@@ -589,21 +589,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             psi.Environment.Add("SSL_CERT_DIR", sslCertDir);
             psi.Environment.Add("SSL_CERT_FILE", "/nonexisting");
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    using (var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
                     {
-                        using (
-                            var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine)
-                        )
-                        {
-                            store.Open(OpenFlags.OpenExistingOnly);
+                        store.Open(OpenFlags.OpenExistingOnly);
 
-                            // Check nr of certificates in store.
-                            Assert.Equal(2, store.Certificates.Count);
-                        }
-                    },
-                    new RemoteInvokeOptions { StartInfo = psi }
-                )
-                .Dispose();
+                        // Check nr of certificates in store.
+                        Assert.Equal(2, store.Certificates.Count);
+                    }
+                },
+                new RemoteInvokeOptions { StartInfo = psi }
+            ).Dispose();
         }
 
         [DllImport("libc")]

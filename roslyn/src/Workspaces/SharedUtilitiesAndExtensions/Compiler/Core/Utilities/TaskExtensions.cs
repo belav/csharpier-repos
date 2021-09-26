@@ -348,18 +348,18 @@ namespace Roslyn.Utilities
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
-                    t =>
-                        Task.Delay(millisecondsDelay, cancellationToken)
-                            .SafeContinueWith(
-                                _ => continuationFunction(t),
-                                cancellationToken,
-                                TaskContinuationOptions.None,
-                                scheduler
-                            ),
-                    cancellationToken,
-                    taskContinuationOptions,
-                    scheduler
-                )
+                t =>
+                    Task.Delay(millisecondsDelay, cancellationToken)
+                        .SafeContinueWith(
+                            _ => continuationFunction(t),
+                            cancellationToken,
+                            TaskContinuationOptions.None,
+                            scheduler
+                        ),
+                cancellationToken,
+                taskContinuationOptions,
+                scheduler
+            )
                 .Unwrap();
         }
 
@@ -380,18 +380,18 @@ namespace Roslyn.Utilities
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
-                    t =>
-                        Task.Delay(millisecondsDelay, cancellationToken)
-                            .SafeContinueWith(
-                                _ => continuationFunction(),
-                                cancellationToken,
-                                TaskContinuationOptions.None,
-                                scheduler
-                            ),
-                    cancellationToken,
-                    taskContinuationOptions,
-                    scheduler
-                )
+                t =>
+                    Task.Delay(millisecondsDelay, cancellationToken)
+                        .SafeContinueWith(
+                            _ => continuationFunction(),
+                            cancellationToken,
+                            TaskContinuationOptions.None,
+                            scheduler
+                        ),
+                cancellationToken,
+                taskContinuationOptions,
+                scheduler
+            )
                 .Unwrap();
         }
 
@@ -412,18 +412,18 @@ namespace Roslyn.Utilities
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
-                    t =>
-                        Task.Delay(millisecondsDelay, cancellationToken)
-                            .SafeContinueWith(
-                                _ => continuationFunction(t),
-                                cancellationToken,
-                                TaskContinuationOptions.None,
-                                scheduler
-                            ),
-                    cancellationToken,
-                    taskContinuationOptions,
-                    scheduler
-                )
+                t =>
+                    Task.Delay(millisecondsDelay, cancellationToken)
+                        .SafeContinueWith(
+                            _ => continuationFunction(t),
+                            cancellationToken,
+                            TaskContinuationOptions.None,
+                            scheduler
+                        ),
+                cancellationToken,
+                taskContinuationOptions,
+                scheduler
+            )
                 .Unwrap();
         }
 
@@ -444,18 +444,18 @@ namespace Roslyn.Utilities
             Contract.ThrowIfNull(continuationAction, nameof(continuationAction));
 
             return task.SafeContinueWith(
-                    t =>
-                        Task.Delay(millisecondsDelay, cancellationToken)
-                            .SafeContinueWith(
-                                _ => continuationAction(),
-                                cancellationToken,
-                                TaskContinuationOptions.None,
-                                scheduler
-                            ),
-                    cancellationToken,
-                    taskContinuationOptions,
-                    scheduler
-                )
+                t =>
+                    Task.Delay(millisecondsDelay, cancellationToken)
+                        .SafeContinueWith(
+                            _ => continuationAction(),
+                            cancellationToken,
+                            TaskContinuationOptions.None,
+                            scheduler
+                        ),
+                cancellationToken,
+                taskContinuationOptions,
+                scheduler
+            )
                 .Unwrap();
         }
 
@@ -504,11 +504,11 @@ namespace Roslyn.Utilities
             // the behavior we want.
             // This is the only place in the code where we're allowed to call ContinueWith.
             var nextTask = task.ContinueWith(
-                    continuationFunction,
-                    cancellationToken,
-                    continuationOptions | TaskContinuationOptions.LazyCancellation,
-                    scheduler
-                )
+                continuationFunction,
+                cancellationToken,
+                continuationOptions | TaskContinuationOptions.LazyCancellation,
+                scheduler
+            )
                 .Unwrap();
 
             nextTask.ContinueWith(
@@ -565,11 +565,11 @@ namespace Roslyn.Utilities
             // the behavior we want.
             // This is the only place in the code where we're allowed to call ContinueWith.
             var nextTask = task.ContinueWith(
-                    continuationFunction,
-                    cancellationToken,
-                    continuationOptions | TaskContinuationOptions.LazyCancellation,
-                    scheduler
-                )
+                continuationFunction,
+                cancellationToken,
+                continuationOptions | TaskContinuationOptions.LazyCancellation,
+                scheduler
+            )
                 .Unwrap();
             ReportNonFatalError(nextTask, continuationFunction);
             return nextTask;
@@ -617,11 +617,11 @@ namespace Roslyn.Utilities
             // the behavior we want.
             // This is the only place in the code where we're allowed to call ContinueWith.
             var nextTask = task.ContinueWith(
-                    continuationFunction,
-                    cancellationToken,
-                    continuationOptions | TaskContinuationOptions.LazyCancellation,
-                    scheduler
-                )
+                continuationFunction,
+                cancellationToken,
+                continuationOptions | TaskContinuationOptions.LazyCancellation,
+                scheduler
+            )
                 .Unwrap();
             ReportNonFatalError(nextTask, continuationFunction);
             return nextTask;
@@ -639,18 +639,18 @@ namespace Roslyn.Utilities
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
-                    t =>
-                        Task.Delay(millisecondsDelay, cancellationToken)
-                            .SafeContinueWithFromAsync(
-                                _ => continuationFunction(),
-                                cancellationToken,
-                                TaskContinuationOptions.None,
-                                scheduler
-                            ),
-                    cancellationToken,
-                    taskContinuationOptions,
-                    scheduler
-                )
+                t =>
+                    Task.Delay(millisecondsDelay, cancellationToken)
+                        .SafeContinueWithFromAsync(
+                            _ => continuationFunction(),
+                            cancellationToken,
+                            TaskContinuationOptions.None,
+                            scheduler
+                        ),
+                cancellationToken,
+                taskContinuationOptions,
+                scheduler
+            )
                 .Unwrap();
         }
 
@@ -666,18 +666,18 @@ namespace Roslyn.Utilities
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
-                    t =>
-                        Task.Delay(millisecondsDelay, cancellationToken)
-                            .SafeContinueWithFromAsync(
-                                _ => continuationFunction(t),
-                                cancellationToken,
-                                TaskContinuationOptions.None,
-                                scheduler
-                            ),
-                    cancellationToken,
-                    taskContinuationOptions,
-                    scheduler
-                )
+                t =>
+                    Task.Delay(millisecondsDelay, cancellationToken)
+                        .SafeContinueWithFromAsync(
+                            _ => continuationFunction(t),
+                            cancellationToken,
+                            TaskContinuationOptions.None,
+                            scheduler
+                        ),
+                cancellationToken,
+                taskContinuationOptions,
+                scheduler
+            )
                 .Unwrap();
         }
 
@@ -693,18 +693,18 @@ namespace Roslyn.Utilities
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
-                    t =>
-                        Task.Delay(millisecondsDelay, cancellationToken)
-                            .SafeContinueWithFromAsync(
-                                _ => continuationFunction(),
-                                cancellationToken,
-                                TaskContinuationOptions.None,
-                                scheduler
-                            ),
-                    cancellationToken,
-                    taskContinuationOptions,
-                    scheduler
-                )
+                t =>
+                    Task.Delay(millisecondsDelay, cancellationToken)
+                        .SafeContinueWithFromAsync(
+                            _ => continuationFunction(),
+                            cancellationToken,
+                            TaskContinuationOptions.None,
+                            scheduler
+                        ),
+                cancellationToken,
+                taskContinuationOptions,
+                scheduler
+            )
                 .Unwrap();
         }
 
@@ -720,18 +720,18 @@ namespace Roslyn.Utilities
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
-                    t =>
-                        Task.Delay(millisecondsDelay, cancellationToken)
-                            .SafeContinueWithFromAsync(
-                                _ => continuationFunction(t),
-                                cancellationToken,
-                                TaskContinuationOptions.None,
-                                scheduler
-                            ),
-                    cancellationToken,
-                    taskContinuationOptions,
-                    scheduler
-                )
+                t =>
+                    Task.Delay(millisecondsDelay, cancellationToken)
+                        .SafeContinueWithFromAsync(
+                            _ => continuationFunction(t),
+                            cancellationToken,
+                            TaskContinuationOptions.None,
+                            scheduler
+                        ),
+                cancellationToken,
+                taskContinuationOptions,
+                scheduler
+            )
                 .Unwrap();
         }
 
@@ -748,21 +748,21 @@ namespace Roslyn.Utilities
             Contract.ThrowIfNull(continuationFunction, nameof(continuationFunction));
 
             return task.SafeContinueWith(
-                    t =>
-                        delaySource.Delay(
-                                TimeSpan.FromMilliseconds(millisecondsDelay),
-                                cancellationToken
-                            )
-                            .SafeContinueWithFromAsync(
-                                _ => continuationFunction(t),
-                                cancellationToken,
-                                TaskContinuationOptions.None,
-                                scheduler
-                            ),
-                    cancellationToken,
-                    taskContinuationOptions,
-                    scheduler
-                )
+                t =>
+                    delaySource.Delay(
+                        TimeSpan.FromMilliseconds(millisecondsDelay),
+                        cancellationToken
+                    )
+                        .SafeContinueWithFromAsync(
+                            _ => continuationFunction(t),
+                            cancellationToken,
+                            TaskContinuationOptions.None,
+                            scheduler
+                        ),
+                cancellationToken,
+                taskContinuationOptions,
+                scheduler
+            )
                 .Unwrap();
         }
 

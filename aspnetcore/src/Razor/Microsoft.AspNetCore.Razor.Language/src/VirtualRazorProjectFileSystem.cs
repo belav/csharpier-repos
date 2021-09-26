@@ -130,14 +130,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                     // directory.Path -> /Views/Home/
                     // We only need to match the file name portion since we've already matched the directory segment.
                     if (
-                        string.Compare(
-                            path,
-                            directoryLength,
-                            filePath,
-                            directoryLength,
-                            path.Length - directoryLength,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                        string
+                            .Compare(
+                                path,
+                                directoryLength,
+                                filePath,
+                                directoryLength,
+                                path.Length - directoryLength,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
                     )
                     {
                         return file.ProjectItem;
@@ -216,14 +217,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                     var directoryNameLength = directoryPath.Length - startIndex;
 
                     if (
-                        string.Compare(
-                            path,
-                            startIndex,
-                            directoryPath,
-                            startIndex,
-                            directoryPath.Length - startIndex,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                        string
+                            .Compare(
+                                path,
+                                startIndex,
+                                directoryPath,
+                                startIndex,
+                                directoryPath.Length - startIndex,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
                     )
                     {
                         return currentDirectory;

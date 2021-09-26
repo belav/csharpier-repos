@@ -25,11 +25,8 @@ namespace Internal.IL
             string name
         )
         {
-            MetadataType helperType = context.SystemModule.GetType(
-                HelperTypesNamespace,
-                name,
-                NotFoundBehavior.ReturnNull
-            );
+            MetadataType helperType = context.SystemModule
+                .GetType(HelperTypesNamespace, name, NotFoundBehavior.ReturnNull);
             return helperType;
         }
 

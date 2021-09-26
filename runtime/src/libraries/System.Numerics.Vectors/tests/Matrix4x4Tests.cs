@@ -310,29 +310,32 @@ namespace System.Numerics.Tests
             {
                 Assert.True(
                     MathHelper.Equal(expectedScales, scales),
-                    string.Format(
-                        "Matrix4x4.Decompose did not return expected value Expected:{0} actual:{1}.",
-                        expectedScales,
-                        scales
-                    )
+                    string
+                        .Format(
+                            "Matrix4x4.Decompose did not return expected value Expected:{0} actual:{1}.",
+                            expectedScales,
+                            scales
+                        )
                 );
                 Assert.True(
                     MathHelper.EqualRotation(expectedRotation, rotation),
-                    string.Format(
-                        "Matrix4x4.Decompose did not return expected value. Expected:{0} actual:{1}.",
-                        expectedRotation,
-                        rotation
-                    )
+                    string
+                        .Format(
+                            "Matrix4x4.Decompose did not return expected value. Expected:{0} actual:{1}.",
+                            expectedRotation,
+                            rotation
+                        )
                 );
             }
 
             Assert.True(
                 MathHelper.Equal(expectedTranslation, translation),
-                string.Format(
-                    "Matrix4x4.Decompose did not return expected value. Expected:{0} actual:{1}.",
-                    expectedTranslation,
-                    translation
-                )
+                string
+                    .Format(
+                        "Matrix4x4.Decompose did not return expected value. Expected:{0} actual:{1}.",
+                        expectedTranslation,
+                        translation
+                    )
             );
         }
 
@@ -706,12 +709,13 @@ namespace System.Numerics.Tests
                         );
                         Assert.True(
                             MathHelper.Equal(expected, actual),
-                            string.Format(
-                                "Yaw:{0} Pitch:{1} Roll:{2}",
-                                yawAngle,
-                                pitchAngle,
-                                rollAngle
-                            )
+                            string
+                                .Format(
+                                    "Yaw:{0} Pitch:{1} Roll:{2}",
+                                    yawAngle,
+                                    pitchAngle,
+                                    rollAngle
+                                )
                         );
                     }
                 }
@@ -1757,20 +1761,22 @@ namespace System.Numerics.Tests
                 Matrix4x4 actual = Matrix4x4.CreateFromQuaternion(quat);
                 Assert.True(
                     MathHelper.Equal(expected, actual),
-                    string.Format(
-                        "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
-                        angle.ToString()
-                    )
+                    string
+                        .Format(
+                            "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
+                            angle.ToString()
+                        )
                 );
 
                 // make sure convert back to quaternion is same as we passed quaternion.
                 Quaternion q2 = Quaternion.CreateFromRotationMatrix(actual);
                 Assert.True(
                     MathHelper.EqualRotation(quat, q2),
-                    string.Format(
-                        "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
-                        angle.ToString()
-                    )
+                    string
+                        .Format(
+                            "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
+                            angle.ToString()
+                        )
                 );
             }
         }
@@ -1788,20 +1794,22 @@ namespace System.Numerics.Tests
                 Matrix4x4 actual = Matrix4x4.CreateFromQuaternion(quat);
                 Assert.True(
                     MathHelper.Equal(expected, actual),
-                    string.Format(
-                        "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
-                        angle.ToString()
-                    )
+                    string
+                        .Format(
+                            "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
+                            angle.ToString()
+                        )
                 );
 
                 // make sure convert back to quaternion is same as we passed quaternion.
                 Quaternion q2 = Quaternion.CreateFromRotationMatrix(actual);
                 Assert.True(
                     MathHelper.EqualRotation(quat, q2),
-                    string.Format(
-                        "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
-                        angle.ToString()
-                    )
+                    string
+                        .Format(
+                            "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
+                            angle.ToString()
+                        )
                 );
             }
         }
@@ -1819,20 +1827,22 @@ namespace System.Numerics.Tests
                 Matrix4x4 actual = Matrix4x4.CreateFromQuaternion(quat);
                 Assert.True(
                     MathHelper.Equal(expected, actual),
-                    string.Format(
-                        "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
-                        angle.ToString()
-                    )
+                    string
+                        .Format(
+                            "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
+                            angle.ToString()
+                        )
                 );
 
                 // make sure convert back to quaternion is same as we passed quaternion.
                 Quaternion q2 = Quaternion.CreateFromRotationMatrix(actual);
                 Assert.True(
                     MathHelper.EqualRotation(quat, q2),
-                    string.Format(
-                        "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
-                        angle.ToString()
-                    )
+                    string
+                        .Format(
+                            "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
+                            angle.ToString()
+                        )
                 );
             }
         }
@@ -1856,20 +1866,22 @@ namespace System.Numerics.Tests
                 Matrix4x4 actual = Matrix4x4.CreateFromQuaternion(quat);
                 Assert.True(
                     MathHelper.Equal(expected, actual),
-                    string.Format(
-                        "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
-                        angle.ToString()
-                    )
+                    string
+                        .Format(
+                            "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
+                            angle.ToString()
+                        )
                 );
 
                 // make sure convert back to quaternion is same as we passed quaternion.
                 Quaternion q2 = Quaternion.CreateFromRotationMatrix(actual);
                 Assert.True(
                     MathHelper.EqualRotation(quat, q2),
-                    string.Format(
-                        "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
-                        angle.ToString()
-                    )
+                    string
+                        .Format(
+                            "Quaternion.FromQuaternion did not return the expected value. angle:{0}",
+                            angle.ToString()
+                        )
                 );
             }
         }
@@ -1896,26 +1908,27 @@ namespace System.Numerics.Tests
             a.M43 = 43.0f;
             a.M44 = 44.0f;
 
-            string expected = string.Format(
-                CultureInfo.CurrentCulture,
-                "{{ {{M11:{0} M12:{1} M13:{2} M14:{3}}} {{M21:{4} M22:{5} M23:{6} M24:{7}}} {{M31:{8} M32:{9} M33:{10} M34:{11}}} {{M41:{12} M42:{13} M43:{14} M44:{15}}} }}",
-                11.0f,
-                -12.0f,
-                -13.3f,
-                14.4f,
-                21.0f,
-                22.0f,
-                23.0f,
-                24.0f,
-                31.0f,
-                32.0f,
-                33.0f,
-                34.0f,
-                41.0f,
-                42.0f,
-                43.0f,
-                44.0f
-            );
+            string expected = string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "{{ {{M11:{0} M12:{1} M13:{2} M14:{3}}} {{M21:{4} M22:{5} M23:{6} M24:{7}}} {{M31:{8} M32:{9} M33:{10} M34:{11}}} {{M41:{12} M42:{13} M43:{14} M44:{15}}} }}",
+                    11.0f,
+                    -12.0f,
+                    -13.3f,
+                    14.4f,
+                    21.0f,
+                    22.0f,
+                    23.0f,
+                    24.0f,
+                    31.0f,
+                    32.0f,
+                    33.0f,
+                    34.0f,
+                    41.0f,
+                    42.0f,
+                    43.0f,
+                    44.0f
+                );
 
             string actual = a.ToString();
             Assert.Equal(expected, actual);

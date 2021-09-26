@@ -35,10 +35,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
 
         public async Task CreateAndStartConnectionAsync(string url, HttpTransportType transportType)
         {
-            _connection = new HubConnectionBuilder().WithUrl(
-                    url,
-                    options => options.Transports = transportType
-                )
+            _connection = new HubConnectionBuilder()
+                .WithUrl(url, options => options.Transports = transportType)
                 .Build();
 
             _connection.Closed += (ex) =>

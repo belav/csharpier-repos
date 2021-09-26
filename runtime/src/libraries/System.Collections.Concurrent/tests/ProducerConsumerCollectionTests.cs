@@ -232,28 +232,24 @@ namespace System.Collections.Concurrent.Tests
 
             using (var b = new Barrier(threadsCount))
             {
-                WaitAllOrAnyFailed(
-                    Enumerable.Range(0, threadsCount)
-                        .Select(
-                            threadNum =>
-                                ThreadFactory.StartNew(
-                                    () =>
+                WaitAllOrAnyFailed(Enumerable.Range(0, threadsCount).Select(
+                        threadNum =>
+                            ThreadFactory.StartNew(
+                                () =>
+                                {
+                                    b.SignalAndWait();
+                                    for (int j = 0; j < itemsPerThread; j++)
                                     {
-                                        b.SignalAndWait();
-                                        for (int j = 0; j < itemsPerThread; j++)
+                                        int data;
+                                        if (take ? c.TryTake(out data) : TryPeek(c, out data))
                                         {
-                                            int data;
-                                            if (take ? c.TryTake(out data) : TryPeek(c, out data))
-                                            {
-                                                Interlocked.Increment(ref successes);
-                                                Assert.NotEqual(0, data); // shouldn't be default(T)
-                                            }
+                                            Interlocked.Increment(ref successes);
+                                            Assert.NotEqual(0, data); // shouldn't be default(T)
                                         }
                                     }
-                                )
-                        )
-                        .ToArray()
-                );
+                                }
+                            )
+                    ).ToArray());
             }
 
             Assert.Equal(take ? numStartingItems : threadsCount * itemsPerThread, successes);
@@ -323,16 +319,14 @@ namespace System.Collections.Concurrent.Tests
             {
                 // Create a thread that adds items to the collection
                 ThreadFactory.StartNew(
-                        () =>
+                    () =>
+                    {
+                        for (int j = i; j < i + 100; j++)
                         {
-                            for (int j = i; j < i + 100; j++)
-                            {
-                                Assert.True(c.TryAdd(j));
-                            }
+                            Assert.True(c.TryAdd(j));
                         }
-                    )
-                    .GetAwaiter()
-                    .GetResult();
+                    }
+                ).GetAwaiter().GetResult();
 
                 // Allow threads to be collected
                 GC.Collect();
@@ -575,43 +569,39 @@ namespace System.Collections.Concurrent.Tests
             var bc = new BlockingCollection<int>(CreateProducerConsumerCollection());
             long dummy = 0;
 
-            Task[] producers = Enumerable.Range(0, numThreadsPerConsumerProducer)
-                .Select(
-                    _ =>
-                        ThreadFactory.StartNew(
-                            () =>
+            Task[] producers = Enumerable.Range(0, numThreadsPerConsumerProducer).Select(
+                _ =>
+                    ThreadFactory.StartNew(
+                        () =>
+                        {
+                            for (int i = 1; i <= numItemsPerThread; i++)
                             {
-                                for (int i = 1; i <= numItemsPerThread; i++)
-                                {
-                                    for (int j = 0; j < producerSpin; j++)
-                                        dummy *= j; // spin a little
-                                    bc.Add(i);
-                                }
+                                for (int j = 0; j < producerSpin; j++)
+                                    dummy *= j; // spin a little
+                                bc.Add(i);
                             }
-                        )
-                )
-                .ToArray();
+                        }
+                    )
+            ).ToArray();
 
-            Task[] consumers = Enumerable.Range(0, numThreadsPerConsumerProducer)
-                .Select(
-                    _ =>
-                        ThreadFactory.StartNew(
-                            () =>
+            Task[] consumers = Enumerable.Range(0, numThreadsPerConsumerProducer).Select(
+                _ =>
+                    ThreadFactory.StartNew(
+                        () =>
+                        {
+                            for (int i = 0; i < numItemsPerThread; i++)
                             {
-                                for (int i = 0; i < numItemsPerThread; i++)
-                                {
-                                    const int TimeoutMs = 100000;
-                                    int item;
-                                    Assert.True(
-                                        bc.TryTake(out item, TimeoutMs),
-                                        $"Couldn't get {i}th item after {TimeoutMs}ms"
-                                    );
-                                    Assert.NotEqual(0, item);
-                                }
+                                const int TimeoutMs = 100000;
+                                int item;
+                                Assert.True(
+                                    bc.TryTake(out item, TimeoutMs),
+                                    $"Couldn't get {i}th item after {TimeoutMs}ms"
+                                );
+                                Assert.NotEqual(0, item);
                             }
-                        )
-                )
-                .ToArray();
+                        }
+                    )
+            ).ToArray();
 
             WaitAllOrAnyFailed(producers);
             WaitAllOrAnyFailed(consumers);
@@ -838,37 +828,35 @@ namespace System.Collections.Concurrent.Tests
                 )
             )
             {
-                Task<int>[] tasks = Enumerable.Range(0, b.ParticipantCount)
-                    .Select(
-                        _ =>
-                            ThreadFactory.StartNew(
-                                () =>
+                Task<int>[] tasks = Enumerable.Range(0, b.ParticipantCount).Select(
+                    _ =>
+                        ThreadFactory.StartNew(
+                            () =>
+                            {
+                                b.SignalAndWait();
+
+                                int count = 0;
+                                var rand = new Random();
+
+                                while (DateTime.UtcNow < end)
                                 {
-                                    b.SignalAndWait();
-
-                                    int count = 0;
-                                    var rand = new Random();
-
-                                    while (DateTime.UtcNow < end)
+                                    if (rand.NextDouble() < .5)
                                     {
-                                        if (rand.NextDouble() < .5)
-                                        {
-                                            Assert.True(c.TryAdd(rand.Next()));
-                                            count++;
-                                        }
-                                        else
-                                        {
-                                            int item;
-                                            if (c.TryTake(out item))
-                                                count--;
-                                        }
+                                        Assert.True(c.TryAdd(rand.Next()));
+                                        count++;
                                     }
-
-                                    return count;
+                                    else
+                                    {
+                                        int item;
+                                        if (c.TryTake(out item))
+                                            count--;
+                                    }
                                 }
-                            )
-                    )
-                    .ToArray();
+
+                                return count;
+                            }
+                        )
+                ).ToArray();
                 Task.WaitAll(tasks);
                 Assert.Equal(tasks.Sum(t => t.Result), c.Count);
             }
@@ -1134,11 +1122,12 @@ namespace System.Collections.Concurrent.Tests
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(count);
             DebuggerAttributes.ValidateDebuggerDisplayReferences(c);
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(c);
-            PropertyInfo itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                    == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(
+                    pr =>
+                        pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                        == DebuggerBrowsableState.RootHidden
+                );
             Array items = itemProperty.GetValue(info.Instance) as Array;
             Assert.Equal(c, items.Cast<int>());
         }

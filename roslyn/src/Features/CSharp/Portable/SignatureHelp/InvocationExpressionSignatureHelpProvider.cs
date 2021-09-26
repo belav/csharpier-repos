@@ -109,9 +109,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             }
 
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    invocationExpression,
-                    cancellationToken
-                )
+                invocationExpression,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var within = semanticModel.GetEnclosingNamedTypeOrAssembly(position, cancellationToken);
             if (within == null)
@@ -121,9 +121,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             // get the regular signature help items
             var methodGroup = semanticModel.GetMemberGroup(
-                    invocationExpression.Expression,
-                    cancellationToken
-                )
+                invocationExpression.Expression,
+                cancellationToken
+            )
                 .OfType<IMethodSymbol>()
                 .ToImmutableArray()
                 .FilterToVisibleAndBrowsableSymbols(
@@ -147,10 +147,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             methodGroup = methodGroup.Sort(semanticModel, invocationExpression.SpanStart);
 
-            var anonymousTypeDisplayService =
-                document.Project.LanguageServices.GetRequiredService<IAnonymousTypeDisplayService>();
-            var documentationCommentFormattingService =
-                document.Project.LanguageServices.GetRequiredService<IDocumentationCommentFormattingService>();
+            var anonymousTypeDisplayService = document.Project.LanguageServices
+                .GetRequiredService<IAnonymousTypeDisplayService>();
+            var documentationCommentFormattingService = document.Project.LanguageServices
+                .GetRequiredService<IDocumentationCommentFormattingService>();
 
             var textSpan = SignatureHelpUtilities.GetSignatureHelpSpan(
                 invocationExpression.ArgumentList
@@ -167,13 +167,13 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     cancellationToken
                 );
                 var (items, selectedItem) = await GetMethodGroupItemsAndSelectionAsync(
-                        accessibleMethods,
-                        document,
-                        invocationExpression,
-                        semanticModel,
-                        symbolInfo,
-                        cancellationToken
-                    )
+                    accessibleMethods,
+                    document,
+                    invocationExpression,
+                    semanticModel,
+                    symbolInfo,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return CreateSignatureHelpItems(

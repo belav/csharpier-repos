@@ -23,9 +23,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
             var blob = new Mock<ICloudAppendBlob>();
             var buffers = new List<byte[]>();
             blob.Setup(
-                    b =>
-                        b.AppendAsync(It.IsAny<ArraySegment<byte>>(), It.IsAny<CancellationToken>())
-                )
+                b => b.AppendAsync(It.IsAny<ArraySegment<byte>>(), It.IsAny<CancellationToken>())
+            )
                 .Callback((ArraySegment<byte> s, CancellationToken ct) => buffers.Add(ToArray(s)))
                 .Returns(Task.CompletedTask);
 
@@ -73,9 +72,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
             var names = new List<string>();
 
             blob.Setup(
-                    b =>
-                        b.AppendAsync(It.IsAny<ArraySegment<byte>>(), It.IsAny<CancellationToken>())
-                )
+                b => b.AppendAsync(It.IsAny<ArraySegment<byte>>(), It.IsAny<CancellationToken>())
+            )
                 .Callback((ArraySegment<byte> s, CancellationToken ct) => buffers.Add(ToArray(s)))
                 .Returns(Task.CompletedTask);
 

@@ -24,11 +24,8 @@ namespace System.Numerics
             Vector<float> right
         )
         {
-            return (Vector<float>)Vector<float>.ConditionalSelect(
-                (Vector<float>)condition,
-                left,
-                right
-            );
+            return (Vector<float>)Vector<float>
+                .ConditionalSelect((Vector<float>)condition, left, right);
         }
 
         /// <summary>Creates a new double-precision vector with elements selected between two specified double-precision source vectors based on an integral mask vector.</summary>
@@ -44,11 +41,8 @@ namespace System.Numerics
             Vector<double> right
         )
         {
-            return (Vector<double>)Vector<double>.ConditionalSelect(
-                (Vector<double>)condition,
-                left,
-                right
-            );
+            return (Vector<double>)Vector<double>
+                .ConditionalSelect((Vector<double>)condition, left, right);
         }
 
         /// <summary>Creates a new vector of a specified type with elements selected between two specified source vectors of the same type based on an integral mask vector.</summary>

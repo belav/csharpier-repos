@@ -427,7 +427,8 @@ namespace System.Linq.Expressions.Interpreter
                     TypeCode.UInt64,
                     TypeCode.Char,
                     TypeCode.Boolean
-                }.Contains(Convert.GetTypeCode(from))
+                }
+                    .Contains(Convert.GetTypeCode(from))
             );
             frame.Push(from == null ? null : Enum.ToObject(_t, from));
             return 1;

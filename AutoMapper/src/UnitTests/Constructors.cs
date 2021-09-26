@@ -410,9 +410,10 @@ namespace AutoMapper.UnitTests.Constructors
         [Fact]
         public void Should_throw()
         {
-            new Action(() => Mapper.Map<Destination>(new Source())).ShouldThrow<ArgumentException>(
-                $"Cannot create an instance of abstract type {typeof(Destination)}."
-            );
+            new Action(() => Mapper.Map<Destination>(new Source()))
+                .ShouldThrow<ArgumentException>(
+                    $"Cannot create an instance of abstract type {typeof(Destination)}."
+                );
         }
     }
 
@@ -1069,15 +1070,15 @@ namespace AutoMapper.UnitTests.Constructors
         [Fact]
         public void Should_say_what_parameter_fails()
         {
-            new Action(
-                Configuration.AssertConfigurationIsValid
-            ).ShouldThrowException<AutoMapperConfigurationException>(
-                ex =>
-                    ex.MemberMap.ToString()
-                        .ShouldBe(
-                            "AutoMapper.UnitTests.Constructors.When_mapping_constructor_argument_fails+Dest.Void .ctor(System.DateTime).parameter foo"
-                        )
-            );
+            new Action(Configuration.AssertConfigurationIsValid)
+                .ShouldThrowException<AutoMapperConfigurationException>(
+                    ex =>
+                        ex.MemberMap
+                            .ToString()
+                            .ShouldBe(
+                                "AutoMapper.UnitTests.Constructors.When_mapping_constructor_argument_fails+Dest.Void .ctor(System.DateTime).parameter foo"
+                            )
+                );
         }
     }
 

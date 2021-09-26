@@ -155,9 +155,9 @@ namespace System.Net.Http
                     // this and must send our headers immediately.
 
                     await _stream.WriteAsync(
-                            _sendBuffer.ActiveMemory,
-                            requestCancellationSource.Token
-                        )
+                        _sendBuffer.ActiveMemory,
+                        requestCancellationSource.Token
+                    )
                         .ConfigureAwait(false);
                     _sendBuffer.Discard(_sendBuffer.ActiveLength);
 
@@ -351,8 +351,8 @@ namespace System.Net.Http
                 _headerState = HeaderState.StatusHeader;
 
                 (Http3FrameType? frameType, long payloadLength) = await ReadFrameEnvelopeAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (frameType != Http3FrameType.Headers)
@@ -391,9 +391,8 @@ namespace System.Net.Http
                     {
                         timer = new Timer(
                             static o =>
-                                (
-                                    (Http3RequestStream)o!
-                                )._expect100ContinueCompletionSource!.TrySetResult(true),
+                                ((Http3RequestStream)o!)._expect100ContinueCompletionSource!
+                                    .TrySetResult(true),
                             this,
                             _connection.Pool.Settings._expect100ContinueTimeout,
                             Timeout.InfiniteTimeSpan
@@ -615,8 +614,8 @@ namespace System.Net.Http
 
             if (_connection.Pool.Settings._useCookies)
             {
-                string cookiesFromContainer =
-                    _connection.Pool.Settings._cookieContainer!.GetCookieHeader(request.RequestUri);
+                string cookiesFromContainer = _connection.Pool.Settings._cookieContainer!
+                    .GetCookieHeader(request.RequestUri);
                 if (cookiesFromContainer != string.Empty)
                 {
                     Encoding? valueEncoding =
@@ -702,11 +701,12 @@ namespace System.Net.Http
                             foreach (string value in headerValues)
                             {
                                 if (
-                                    string.Equals(
-                                        value,
-                                        "trailers",
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                                    string
+                                        .Equals(
+                                            value,
+                                            "trailers",
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
                                 )
                                 {
                                     BufferLiteralHeaderWithoutNameReference(
@@ -905,9 +905,9 @@ namespace System.Net.Http
                         VariableLengthIntegerHelper.MaximumEncodedLength * 2
                     );
                     bytesRead = await _stream.ReadAsync(
-                            _recvBuffer.AvailableMemory,
-                            cancellationToken
-                        )
+                        _recvBuffer.AvailableMemory,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     if (bytesRead != 0)
@@ -987,9 +987,9 @@ namespace System.Net.Http
                     _recvBuffer.EnsureAvailableSpace(1);
 
                     int bytesRead = await _stream.ReadAsync(
-                            _recvBuffer.AvailableMemory,
-                            cancellationToken
-                        )
+                        _recvBuffer.AvailableMemory,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (bytesRead != 0)
                     {
@@ -1176,28 +1176,28 @@ namespace System.Net.Http
                         throw new Http3ConnectionException(Http3ErrorCode.ProtocolError);
                     case HeaderState.ResponseHeaders
                           when descriptor.HeaderType.HasFlag(HttpHeaderType.Content):
-                        _response!.Content!.Headers.TryAddWithoutValidation(
-                            descriptor,
-                            headerValue
-                        );
+                        _response!.Content!.Headers
+                            .TryAddWithoutValidation(descriptor, headerValue);
                         break;
                     case HeaderState.ResponseHeaders:
-                        _response!.Headers.TryAddWithoutValidation(
-                            descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
-                              ? descriptor.AsCustomHeader()
-                              : descriptor,
-                            headerValue
-                        );
-                        break;
-                    case HeaderState.TrailingHeaders:
-                        _trailingHeaders!.Add(
-                            (
+                        _response!.Headers
+                            .TryAddWithoutValidation(
                                 descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
                                   ? descriptor.AsCustomHeader()
                                   : descriptor,
                                 headerValue
-                            )
-                        );
+                            );
+                        break;
+                    case HeaderState.TrailingHeaders:
+                        _trailingHeaders!
+                            .Add(
+                                (
+                                    descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
+                                      ? descriptor.AsCustomHeader()
+                                      : descriptor,
+                                    headerValue
+                                )
+                            );
                         break;
                     default:
                         Debug.Fail(
@@ -1226,9 +1226,9 @@ namespace System.Net.Http
                 {
                     _recvBuffer.EnsureAvailableSpace(1);
                     int bytesRead = await _stream.ReadAsync(
-                            _recvBuffer.AvailableMemory,
-                            cancellationToken
-                        )
+                        _recvBuffer.AvailableMemory,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     if (bytesRead != 0)
@@ -1367,9 +1367,9 @@ namespace System.Net.Http
 
                         int copyLen = (int)Math.Min(buffer.Length, _responseDataPayloadRemaining);
                         int bytesRead = await _stream.ReadAsync(
-                                buffer.Slice(0, copyLen),
-                                cancellationToken
-                            )
+                            buffer.Slice(0, copyLen),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         if (bytesRead == 0)

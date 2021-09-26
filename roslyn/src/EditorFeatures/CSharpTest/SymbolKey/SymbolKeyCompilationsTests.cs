@@ -75,14 +75,14 @@ namespace N1.N2
             var comp2 = CreateCompilation(src2, assemblyName: "Test");
 
             var originalSymbols = GetSourceSymbols(
-                    comp1,
-                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
-                )
+                comp1,
+                SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+            )
                 .OrderBy(s => s.Name);
             var newSymbols = GetSourceSymbols(
-                    comp2,
-                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
-                )
+                comp2,
+                SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+            )
                 .OrderBy(s => s.Name);
 
             ResolveAndVerifySymbolList(newSymbols, originalSymbols, comp1);
@@ -116,14 +116,14 @@ public void Method()
             Assert.NotEqual(SymbolKind.ErrorType, symbol02.Kind);
 
             var originalSymbols = GetSourceSymbols(
-                    comp1,
-                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
-                )
+                comp1,
+                SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+            )
                 .OrderBy(s => s.Name);
             var newSymbols = GetSourceSymbols(
-                    comp2,
-                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
-                )
+                comp2,
+                SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+            )
                 .OrderBy(s => s.Name);
 
             ResolveAndVerifySymbolList(newSymbols, originalSymbols, comp1);
@@ -428,16 +428,16 @@ public class Test
             var comp2 = CreateCompilation(src2, assemblyName: "Test");
 
             var originalSymbols = GetSourceSymbols(
-                    comp1,
-                    SymbolCategory.NonTypeMember | SymbolCategory.Parameter
-                )
+                comp1,
+                SymbolCategory.NonTypeMember | SymbolCategory.Parameter
+            )
                 .Where(s => !s.IsAccessor())
                 .OrderBy(s => s.Name);
 
             var newSymbols = GetSourceSymbols(
-                    comp2,
-                    SymbolCategory.NonTypeMember | SymbolCategory.Parameter
-                )
+                comp2,
+                SymbolCategory.NonTypeMember | SymbolCategory.Parameter
+            )
                 .Where(s => !s.IsAccessor())
                 .OrderBy(s => s.Name);
 

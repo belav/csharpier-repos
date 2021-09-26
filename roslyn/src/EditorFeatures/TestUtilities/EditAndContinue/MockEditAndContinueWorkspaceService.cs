@@ -77,10 +77,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (EmitSolutionUpdateImpl ?? throw new NotImplementedException()).Invoke(
-                    solution,
-                    activeStatementSpanProvider
-                )
+                (EmitSolutionUpdateImpl ?? throw new NotImplementedException())
+                    .Invoke(solution, activeStatementSpanProvider)
             );
 
         public void EndDebuggingSession(out ImmutableArray<DocumentId> documentsToReanalyze)
@@ -97,10 +95,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (GetBaseActiveStatementSpansImpl ?? throw new NotImplementedException()).Invoke(
-                    solution,
-                    documentIds
-                )
+                (GetBaseActiveStatementSpansImpl ?? throw new NotImplementedException())
+                    .Invoke(solution, documentIds)
             );
 
         public ValueTask<LinePositionSpan?> GetCurrentActiveStatementPositionAsync(
@@ -110,9 +106,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (
-                    GetCurrentActiveStatementPositionImpl ?? throw new NotImplementedException()
-                ).Invoke(solution, activeStatementSpanProvider, instructionId)
+                (GetCurrentActiveStatementPositionImpl ?? throw new NotImplementedException())
+                    .Invoke(solution, activeStatementSpanProvider, instructionId)
             );
 
         public ValueTask<
@@ -123,10 +118,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (GetAdjustedActiveStatementSpansImpl ?? throw new NotImplementedException()).Invoke(
-                    document,
-                    activeStatementSpanProvider
-                )
+                (GetAdjustedActiveStatementSpansImpl ?? throw new NotImplementedException())
+                    .Invoke(document, activeStatementSpanProvider)
             );
 
         public ValueTask<ImmutableArray<Diagnostic>> GetDocumentDiagnosticsAsync(
@@ -135,10 +128,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (GetDocumentDiagnosticsImpl ?? throw new NotImplementedException()).Invoke(
-                    document,
-                    activeStatementSpanProvider
-                )
+                (GetDocumentDiagnosticsImpl ?? throw new NotImplementedException())
+                    .Invoke(document, activeStatementSpanProvider)
             );
 
         public ValueTask<bool> HasChangesAsync(
@@ -148,11 +139,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (HasChangesImpl ?? throw new NotImplementedException()).Invoke(
-                    solution,
-                    activeStatementSpanProvider,
-                    sourceFilePath
-                )
+                (HasChangesImpl ?? throw new NotImplementedException())
+                    .Invoke(solution, activeStatementSpanProvider, sourceFilePath)
             );
 
         public ValueTask<bool?> IsActiveStatementInExceptionRegionAsync(
@@ -161,9 +149,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             CancellationToken cancellationToken
         ) =>
             new(
-                (
-                    IsActiveStatementInExceptionRegionImpl ?? throw new NotImplementedException()
-                ).Invoke(solution, instructionId)
+                (IsActiveStatementInExceptionRegionImpl ?? throw new NotImplementedException())
+                    .Invoke(solution, instructionId)
             );
 
         public void OnSourceFileUpdated(Document document) =>

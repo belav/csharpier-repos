@@ -66,16 +66,15 @@ namespace IdeBenchmarks
 
             // Explicitly choose the sqlite db to test.
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(
-                        StorageOptions.Database,
-                        StorageDatabase.SQLite
+                _workspace.CurrentSolution
+                    .WithOptions(
+                        _workspace.Options
+                            .WithChangedOption(StorageOptions.Database, StorageDatabase.SQLite)
                     )
-                )
             );
 
-            var connectionPoolService =
-                _workspace.ExportProvider.GetExportedValue<SQLiteConnectionPoolService>();
+            var connectionPoolService = _workspace.ExportProvider
+                .GetExportedValue<SQLiteConnectionPoolService>();
             _storageService = new SQLitePersistentStorageService(
                 connectionPoolService,
                 new LocationService()
@@ -83,11 +82,11 @@ namespace IdeBenchmarks
 
             var solution = _workspace.CurrentSolution;
             _storage = _storageService.GetStorageWorkerAsync(
-                    _workspace,
-                    SolutionKey.ToSolutionKey(solution),
-                    solution,
-                    CancellationToken.None
-                )
+                _workspace,
+                SolutionKey.ToSolutionKey(solution),
+                solution,
+                CancellationToken.None
+            )
                 .AsTask()
                 .GetAwaiter()
                 .GetResult();

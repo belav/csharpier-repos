@@ -56,11 +56,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
         private void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
             var cancellationToken = context.CancellationToken;
-            var option = context.Options.GetOption(
-                CSharpCodeStyleOptions.PreferDeconstructedVariableDeclaration,
-                context.Node.SyntaxTree,
-                cancellationToken
-            );
+            var option = context.Options
+                .GetOption(
+                    CSharpCodeStyleOptions.PreferDeconstructedVariableDeclaration,
+                    context.Node.SyntaxTree,
+                    cancellationToken
+                );
             if (!option.Value)
             {
                 return;
@@ -284,9 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                 }
             }
 
-            using var _ = ArrayBuilder<MemberAccessExpressionSyntax>.GetInstance(
-                out var references
-            );
+            using var _ = ArrayBuilder<MemberAccessExpressionSyntax>
+                .GetInstance(out var references);
 
             // If the user actually uses the tuple local for anything other than accessing
             // fields off of it, then we can't deconstruct this tuple into locals.

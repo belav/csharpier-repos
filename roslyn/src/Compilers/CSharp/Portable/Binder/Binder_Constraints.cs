@@ -55,14 +55,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // An array of constraint clauses, one for each type parameter, indexed by ordinal.
-            var results = ArrayBuilder<TypeParameterConstraintClause?>.GetInstance(
-                n,
-                fillWithValue: null
-            );
-            var syntaxNodes = ArrayBuilder<ArrayBuilder<TypeConstraintSyntax>?>.GetInstance(
-                n,
-                fillWithValue: null
-            );
+            var results = ArrayBuilder<TypeParameterConstraintClause?>
+                .GetInstance(n, fillWithValue: null);
+            var syntaxNodes = ArrayBuilder<ArrayBuilder<TypeConstraintSyntax>?>
+                .GetInstance(n, fillWithValue: null);
 
             // Bind each clause and add to the results.
             foreach (var clause in clauses)
@@ -472,9 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeParameterListSyntax typeParameterList
         )
         {
-            var builder = ArrayBuilder<TypeParameterConstraintClause>.GetInstance(
-                typeParameterList.Parameters.Count
-            );
+            var builder = ArrayBuilder<TypeParameterConstraintClause>
+                .GetInstance(typeParameterList.Parameters.Count);
 
             foreach (TypeParameterSyntax typeParameterSyntax in typeParameterList.Parameters)
             {

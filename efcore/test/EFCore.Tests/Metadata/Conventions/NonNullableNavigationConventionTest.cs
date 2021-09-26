@@ -27,10 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void Non_nullability_does_not_override_configuration_from_explicit_source()
         {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Post>();
-            var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
-                typeof(Blog),
-                ConfigurationSource.Convention
-            );
+            var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder
+                .Entity(typeof(Blog), ConfigurationSource.Convention);
 
             var relationshipBuilder = dependentEntityTypeBuilder.HasRelationship(
                 principalEntityTypeBuilder.Metadata,
@@ -62,10 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void Non_nullability_does_not_override_configuration_from_data_annotation()
         {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Post>();
-            var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
-                typeof(Blog),
-                ConfigurationSource.Convention
-            );
+            var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder
+                .Entity(typeof(Blog), ConfigurationSource.Convention);
 
             var relationshipBuilder = dependentEntityTypeBuilder.HasRelationship(
                 principalEntityTypeBuilder.Metadata,
@@ -97,10 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void Non_nullability_does_not_set_is_required_for_collection_navigation()
         {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Dependent>();
-            var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
-                typeof(Principal),
-                ConfigurationSource.Convention
-            );
+            var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder
+                .Entity(typeof(Principal), ConfigurationSource.Convention);
 
             var relationshipBuilder = principalEntityTypeBuilder.HasRelationship(
                 dependentEntityTypeBuilder.Metadata,
@@ -109,9 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Convention
             );
 
-            var navigation = principalEntityTypeBuilder.Metadata.FindNavigation(
-                nameof(Principal.Dependents)
-            );
+            var navigation = principalEntityTypeBuilder.Metadata
+                .FindNavigation(nameof(Principal.Dependents));
 
             Assert.False(relationshipBuilder.Metadata.IsRequired);
 
@@ -126,26 +119,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void Non_nullability_does_not_set_is_required_for_navigation_to_dependent()
         {
             var dependentEntityTypeBuilder = CreateInternalEntityTypeBuilder<Dependent>();
-            var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder.Entity(
-                typeof(Principal),
-                ConfigurationSource.Convention
-            );
+            var principalEntityTypeBuilder = dependentEntityTypeBuilder.ModelBuilder
+                .Entity(typeof(Principal), ConfigurationSource.Convention);
 
             var relationshipBuilder = dependentEntityTypeBuilder.HasRelationship(
-                    principalEntityTypeBuilder.Metadata,
-                    nameof(Dependent.Principal),
-                    nameof(Principal.Dependent),
-                    ConfigurationSource.Convention
-                )
+                principalEntityTypeBuilder.Metadata,
+                nameof(Dependent.Principal),
+                nameof(Principal.Dependent),
+                ConfigurationSource.Convention
+            )
                 .HasEntityTypes(
                     principalEntityTypeBuilder.Metadata,
                     dependentEntityTypeBuilder.Metadata,
                     ConfigurationSource.Explicit
                 );
 
-            var navigation = principalEntityTypeBuilder.Metadata.FindNavigation(
-                nameof(Principal.Dependent)
-            );
+            var navigation = principalEntityTypeBuilder.Metadata
+                .FindNavigation(nameof(Principal.Dependent));
 
             Assert.False(relationshipBuilder.Metadata.IsRequired);
 
@@ -193,9 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var dependencies = CreateDependencies();
             // Use public API to add conventions, issue #214
             var conventionSet = new ConventionSet();
-            conventionSet.EntityTypeAddedConventions.Add(
-                new PropertyDiscoveryConvention(dependencies)
-            );
+            conventionSet.EntityTypeAddedConventions
+                .Add(new PropertyDiscoveryConvention(dependencies));
 
             conventionSet.EntityTypeAddedConventions.Add(new KeyDiscoveryConvention(dependencies));
 
@@ -217,11 +206,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             CreateServiceProvider().GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         protected IServiceProvider CreateServiceProvider() =>
-            InMemoryTestHelpers.Instance.CreateContextServices(
-                new ServiceCollection().AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(
-                    _ => CreateLogger()
-                )
-            );
+            InMemoryTestHelpers.Instance
+                .CreateContextServices(
+                    new ServiceCollection()
+                        .AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(_ => CreateLogger())
+                );
 
         private DiagnosticsLogger<DbLoggerCategory.Model> CreateLogger()
         {
@@ -272,9 +261,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private class Principal
         {
-            public static readonly PropertyInfo DependentIdProperty = typeof(Principal).GetProperty(
-                "DependentId"
-            )!;
+            public static readonly PropertyInfo DependentIdProperty = typeof(Principal)
+                .GetProperty("DependentId")!;
 
             public int Id { get; set; }
 
@@ -288,9 +276,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private class Dependent
         {
-            public static readonly PropertyInfo PrincipalIdProperty = typeof(Dependent).GetProperty(
-                "PrincipalId"
-            )!;
+            public static readonly PropertyInfo PrincipalIdProperty = typeof(Dependent)
+                .GetProperty("PrincipalId")!;
 
             public int Id { get; set; }
 

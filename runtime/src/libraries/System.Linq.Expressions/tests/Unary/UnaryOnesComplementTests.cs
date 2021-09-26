@@ -247,9 +247,8 @@ namespace System.Linq.Expressions.Tests
         public static void ExplicitOperatorOnesComplement(bool useInterpreter)
         {
             Complementary value = new Complementary { Value = 43 };
-            MethodInfo method = typeof(Complementary).GetMethod(
-                nameof(Complementary.OnesComplement)
-            );
+            MethodInfo method = typeof(Complementary)
+                .GetMethod(nameof(Complementary.OnesComplement));
             Expression<Func<Complementary>> lambda = Expression.Lambda<Func<Complementary>>(
                 Expression.OnesComplement(Expression.Constant(value), method)
             );

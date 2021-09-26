@@ -117,13 +117,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // There could be mixed desired behavior per textView and even per same completion session.
             // The right fix would be to send this information as a result of the method.
             // Then, the Editor would choose the right behavior for mixed cases.
-            _textView.Options.GlobalOptions.SetOptionValue(
-                NonBlockingCompletionEditorOption,
-                !document.Project.Solution.Workspace.Options.GetOption(
-                    CompletionOptions.BlockForCompletionItems2,
-                    service.Language
-                )
-            );
+            _textView.Options.GlobalOptions
+                .SetOptionValue(
+                    NonBlockingCompletionEditorOption,
+                    !document.Project.Solution.Workspace.Options
+                        .GetOption(CompletionOptions.BlockForCompletionItems2, service.Language)
+                );
 
             // In case of calls with multiple completion services for the same view (e.g. TypeScript and C#), those completion services must not be called simultaneously for the same session.
             // Therefore, in each completion session we use a list of commit character for a specific completion service and a specific content type.
@@ -154,17 +153,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             {
                 var workspace = document.Project.Solution.Workspace;
 
-                var experimentationService =
-                    workspace.Services.GetRequiredService<IExperimentationService>();
+                var experimentationService = workspace.Services
+                    .GetRequiredService<IExperimentationService>();
                 textView.Properties[TargetTypeFilterExperimentEnabled] =
                     experimentationService.IsExperimentEnabled(
                         WellKnownExperimentNames.TargetTypedCompletionFilter
                     );
 
-                var importCompletionOptionValue = workspace.Options.GetOption(
-                    CompletionOptions.ShowItemsFromUnimportedNamespaces,
-                    document.Project.Language
-                );
+                var importCompletionOptionValue = workspace.Options
+                    .GetOption(
+                        CompletionOptions.ShowItemsFromUnimportedNamespaces,
+                        document.Project.Language
+                    );
                 var importCompletionExperimentValue = experimentationService.IsExperimentEnabled(
                     WellKnownExperimentNames.TypeImportCompletion
                 );
@@ -273,11 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 TextSpan.FromBounds(caretPoint - 2, caretPoint),
                 string.Empty
             );
-            document.Project.Solution.Workspace.ApplyTextChanges(
-                document.Id,
-                textChange,
-                CancellationToken.None
-            );
+            document.Project.Solution.Workspace
+                .ApplyTextChanges(document.Id, textChange, CancellationToken.None);
 
             _snippetCompletionTriggeredIndirectly = true;
             return true;
@@ -318,12 +315,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 if (Helpers.TryGetInitialTriggerLocation(session, out var initialTriggerLocation))
                 {
                     return await GetCompletionContextWorkerAsync(
-                            session,
-                            intialTrigger,
-                            initialTriggerLocation,
-                            isExpanded: true,
-                            cancellationToken
-                        )
+                        session,
+                        intialTrigger,
+                        initialTriggerLocation,
+                        isExpanded: true,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -363,9 +360,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (_isDebuggerTextView)
             {
                 options = options.WithChangedOption(
-                        CompletionControllerOptions.FilterOutOfScopeLocals,
-                        false
-                    )
+                    CompletionControllerOptions.FilterOutOfScopeLocals,
+                    false
+                )
                     .WithChangedOption(
                         CompletionControllerOptions.ShowXmlDocCommentCompletion,
                         false
@@ -375,13 +372,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             var (completionList, expandItemsAvailable) =
                 await completionService.GetCompletionsInternalAsync(
-                        document,
-                        triggerLocation,
-                        roslynTrigger,
-                        _roles,
-                        options,
-                        cancellationToken
-                    )
+                    document,
+                    triggerLocation,
+                    roslynTrigger,
+                    _roles,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             ImmutableArray<VSCompletionItem> items;
@@ -409,10 +406,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     completionList.SuggestionModeItem != null
                         ? new AsyncCompletionData.SuggestionItemOptions(
                               completionList.SuggestionModeItem.DisplayText,
-                              completionList.SuggestionModeItem.Properties.TryGetValue(
-                                  Description,
-                                  out var description
-                              )
+                              completionList.SuggestionModeItem.Properties
+                              .TryGetValue(Description, out var description)
                                 ? description
                                 : string.Empty
                           )
@@ -432,10 +427,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 // Controller.Session_ComputeModel: if completionList.SuggestionModeItem != null, then suggestionMode = true
                 // If there are suggestionItemOptions, then later HandleNormalFiltering should set selection to SoftSelection.
                 if (
-                    !session.Properties.TryGetProperty(
-                        HasSuggestionItemOptions,
-                        out bool hasSuggestionItemOptionsBefore
-                    ) || !hasSuggestionItemOptionsBefore
+                    !session.Properties
+                        .TryGetProperty(
+                            HasSuggestionItemOptions,
+                            out bool hasSuggestionItemOptionsBefore
+                        ) || !hasSuggestionItemOptionsBefore
                 )
                 {
                     session.Properties[HasSuggestionItemOptions] = suggestionItemOptions != null;
@@ -445,15 +441,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 if (excludedCommitCharacters.Length > 0)
                 {
                     if (
-                        session.Properties.TryGetProperty(
-                            ExcludedCommitCharacters,
-                            out ImmutableArray<char> excludedCommitCharactersBefore
-                        )
+                        session.Properties
+                            .TryGetProperty(
+                                ExcludedCommitCharacters,
+                                out ImmutableArray<char> excludedCommitCharactersBefore
+                            )
                     )
                     {
                         excludedCommitCharacters = excludedCommitCharacters.Union(
-                                excludedCommitCharactersBefore
-                            )
+                            excludedCommitCharactersBefore
+                        )
                             .ToImmutableArray();
                     }
 
@@ -504,13 +501,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             }
 
             var description = await service.GetDescriptionAsync(
-                    document,
-                    roslynItem,
-                    cancellationToken
-                )
+                document,
+                roslynItem,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
-            var elements = IntelliSense.Helpers.BuildInteractiveTextElements(
+            var elements = IntelliSense.Helpers
+                .BuildInteractiveTextElements(
                     description.TaggedParts,
                     document,
                     ThreadingContext,

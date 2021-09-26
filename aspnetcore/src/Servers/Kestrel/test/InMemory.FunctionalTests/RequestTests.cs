@@ -119,7 +119,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         var buffer = new byte[1024];
                         try
                         {
-                            await context.Request.Body.ReadUntilLengthAsync(buffer, 6, cts.Token)
+                            await context.Request.Body
+                                .ReadUntilLengthAsync(buffer, 6, cts.Token)
                                 .DefaultTimeout();
 
                             Assert.Equal("Hello ", Encoding.ASCII.GetString(buffer, 0, 6));
@@ -134,12 +135,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         try
                         {
-                            var task = context.Request.Body.ReadAsync(
-                                buffer,
-                                0,
-                                buffer.Length,
-                                cts.Token
-                            );
+                            var task = context.Request.Body
+                                .ReadAsync(buffer, 0, buffer.Length, cts.Token);
                             readTcs.TrySetResult();
                             await task;
 
@@ -195,7 +192,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 var server = new TestServer(
                     async context =>
                     {
-                        var stream = await context.Features.Get<IHttpUpgradeFeature>()
+                        var stream = await context.Features
+                            .Get<IHttpUpgradeFeature>()
                             .UpgradeAsync();
                         var data = new byte[3];
 
@@ -651,9 +649,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 )
             )
             {
-                var requestId = await server.HttpClientSlim.GetStringAsync(
-                    $"http://localhost:{server.Port}/"
-                );
+                var requestId = await server.HttpClientSlim
+                    .GetStringAsync($"http://localhost:{server.Port}/");
                 Assert.Equal(knownId, requestId);
             }
         }
@@ -687,9 +684,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     iterations,
                     async i =>
                     {
-                        var id = await server.HttpClientSlim.GetStringAsync(
-                            $"http://localhost:{server.Port}/"
-                        );
+                        var id = await server.HttpClientSlim
+                            .GetStringAsync($"http://localhost:{server.Port}/");
                         Assert.DoesNotContain(id, usedIds.ToArray());
                         usedIds.Add(id);
                     }
@@ -715,11 +711,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         while (offset < identifierLength)
                         {
-                            var read = await connection.Reader.ReadAsync(
-                                buffer,
-                                offset,
-                                identifierLength - offset
-                            );
+                            var read = await connection.Reader
+                                .ReadAsync(buffer, offset, identifierLength - offset);
                             offset += read;
 
                             Assert.NotEqual(0, read);
@@ -1019,7 +1012,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         // This will hang if 0 content length is not assumed by the server
                         Assert.Equal(
                             0,
-                            await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1)
+                            await httpContext.Request.Body
+                                .ReadAsync(new byte[1], 0, 1)
                                 .DefaultTimeout()
                         );
                     },
@@ -1064,7 +1058,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 var server = new TestServer(
                     async httpContext =>
                     {
-                        var readResult = await httpContext.Request.BodyReader.ReadAsync()
+                        var readResult = await httpContext.Request.BodyReader
+                            .ReadAsync()
                             .AsTask()
                             .DefaultTimeout();
                         // This will hang if 0 content length is not assumed by the server
@@ -1153,10 +1148,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         var readResult = await httpContext.Request.BodyReader.ReadAsync();
                         // This will hang if 0 content length is not assumed by the server
                         Assert.Equal(5, readResult.Buffer.Length);
-                        httpContext.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        httpContext.Request.BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                         readResult = await httpContext.Request.BodyReader.ReadAsync();
                         Assert.Equal(5, readResult.Buffer.Length);
                     },
@@ -1197,19 +1190,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         var readResult = await httpContext.Request.BodyReader.ReadAsync();
                         // This will hang if 0 content length is not assumed by the server
                         Assert.Equal(5, readResult.Buffer.Length);
-                        httpContext.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        httpContext.Request.BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                         for (var i = 0; i < 2; i++)
                         {
                             readResult = await httpContext.Request.BodyReader.ReadAsync();
                             Assert.Equal(5, readResult.Buffer.Length);
-                            httpContext.Request.BodyReader.AdvanceTo(
-                                readResult.Buffer.Start,
-                                readResult.Buffer.End
-                            );
+                            httpContext.Request.BodyReader
+                                .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                         }
                     },
                     testContext
@@ -1274,17 +1263,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         Assert.Equal(3, readResult.Buffer.Length);
                         tcs.SetResult();
 
-                        httpContext.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        httpContext.Request.BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                         // Buffer 1 more byte.
                         readResult = await httpContext.Request.BodyReader.ReadAsync();
-                        httpContext.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        httpContext.Request.BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                         tcs2.SetResult();
 
                         // Buffer 1 last byte.
@@ -1292,10 +1277,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         Assert.Equal(5, readResult.Buffer.Length);
 
                         // Do one more read to ensure completion is always observed.
-                        httpContext.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        httpContext.Request.BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                         readResult = await httpContext.Request.BodyReader.ReadAsync();
                         Assert.True(readResult.IsCompleted);
                     },
@@ -1338,16 +1321,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     {
                         var readResult = await httpContext.Request.BodyReader.ReadAsync();
 
-                        httpContext.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        httpContext.Request.BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                         readResult = await httpContext.Request.BodyReader.ReadAsync();
-                        httpContext.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Slice(1).Start,
-                            readResult.Buffer.End
-                        );
+                        httpContext.Request.BodyReader
+                            .AdvanceTo(readResult.Buffer.Slice(1).Start, readResult.Buffer.End);
                     },
                     testContext
                 )
@@ -1559,29 +1538,31 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                             }
                         );
 
-                    var response = string.Join(
-                        "\r\n",
-                        new string[]
-                        {
-                            "HTTP/1.1 200 OK",
-                            $"Date: {testContext.DateHeaderValue}",
-                            "Content-Length: 0",
-                            ""
-                        }
-                    );
+                    var response = string
+                        .Join(
+                            "\r\n",
+                            new string[]
+                            {
+                                "HTTP/1.1 200 OK",
+                                $"Date: {testContext.DateHeaderValue}",
+                                "Content-Length: 0",
+                                ""
+                            }
+                        );
 
-                    var lastResponse = string.Join(
-                        "\r\n",
-                        new string[]
-                        {
-                            "HTTP/1.1 200 OK",
-                            "Connection: close",
-                            $"Date: {testContext.DateHeaderValue}",
-                            "Content-Length: 7",
-                            "",
-                            "Goodbye"
-                        }
-                    );
+                    var lastResponse = string
+                        .Join(
+                            "\r\n",
+                            new string[]
+                            {
+                                "HTTP/1.1 200 OK",
+                                "Connection: close",
+                                $"Date: {testContext.DateHeaderValue}",
+                                "Content-Length: 7",
+                                "",
+                                "Goodbye"
+                            }
+                        );
 
                     var responseData = Enumerable.Repeat(response, loopCount)
                         .Concat(new[] { lastResponse });
@@ -1819,7 +1800,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                             );
 
                         using (
-                            var stream = await context.Features.Get<IHttpUpgradeFeature>()
+                            var stream = await context.Features
+                                .Get<IHttpUpgradeFeature>()
                                 .UpgradeAsync()
                         )
                         {
@@ -1901,11 +1883,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         while (offset < 5)
                         {
-                            offset += await context.Request.Body.ReadAsync(
-                                buffer,
-                                offset,
-                                5 - offset
-                            );
+                            offset += await context.Request.Body
+                                .ReadAsync(buffer, offset, 5 - offset);
                         }
 
                         Assert.Equal(0, await context.Request.Body.ReadAsync(new byte[1], 0, 1));
@@ -2015,7 +1994,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx2.Message);
 
                         var buffer = new byte[5];
-                        var read = await context.Request.Body.ReadUntilEndAsync(buffer)
+                        var read = await context.Request.Body
+                            .ReadUntilEndAsync(buffer)
                             .DefaultTimeout();
 
                         Assert.Equal("Hello", Encoding.ASCII.GetString(buffer, 0, read));
@@ -2152,9 +2132,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                            );
                     },
                     testContext
                 )
@@ -2201,9 +2182,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                            );
                     },
                     testContext
                 )
@@ -2301,9 +2283,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                            );
                     },
                     testContext
                 )
@@ -2476,7 +2459,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 {
                     await connection.Send("GET / HTTP/1.1", "Host:", "X-Test: ");
 
-                    await connection.Stream.WriteAsync(Encoding.UTF32.GetBytes("£"))
+                    await connection.Stream
+                        .WriteAsync(Encoding.UTF32.GetBytes("£"))
                         .DefaultTimeout();
 
                     await connection.Send("", "", "");

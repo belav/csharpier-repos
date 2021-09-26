@@ -68,10 +68,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 },
                 { typeof(Weapon), e => ((Weapon)e)?.Id },
                 { typeof(LocustHighCommand), e => ((LocustHighCommand)e)?.Id }
-            }.ToDictionary(e => e.Key, e => (object)e.Value);
+            }
+                .ToDictionary(e => e.Key, e => (object)e.Value);
 
-        public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
-            new Dictionary<Type, Action<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntityAsserters() => new Dictionary<
+                Type,
+                Action<object, object>
+            >
             {
                 {
                     typeof(City),
@@ -425,7 +428,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected override void Seed(GearsOfWarContext context) => GearsOfWarContext.Seed(context);
 
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-            base.AddOptions(builder)
+            base
+                .AddOptions(builder)
                 .ConfigureWarnings(
                     w => w.Log(CoreEventId.RowLimitingOperationWithoutOrderByWarning)
                 );

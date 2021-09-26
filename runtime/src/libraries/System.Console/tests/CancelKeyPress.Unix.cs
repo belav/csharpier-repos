@@ -48,40 +48,39 @@ public partial class CancelKeyPressTests
         }
 
         RemoteExecutor.Invoke(
-                () =>
+            () =>
+            {
+                var mre = new ManualResetEventSlim();
+                var tcs = new TaskCompletionSource();
+
+                // CancelKeyPress is triggered by SIGINT/SIGQUIT
+                Console.CancelKeyPress += (sender, e) =>
                 {
-                    var mre = new ManualResetEventSlim();
-                    var tcs = new TaskCompletionSource();
+                    tcs.SetResult();
+                    // Block CancelKeyPress
+                    Assert.True(mre.Wait(WaitFailTestTimeoutSeconds * 1000));
+                };
 
-                    // CancelKeyPress is triggered by SIGINT/SIGQUIT
-                    Console.CancelKeyPress += (sender, e) =>
-                    {
-                        tcs.SetResult();
-                        // Block CancelKeyPress
-                        Assert.True(mre.Wait(WaitFailTestTimeoutSeconds * 1000));
-                    };
+                // Generate CancelKeyPress
+                Assert.Equal(0, kill(Environment.ProcessId, SIGINT));
+                // Wait till we block CancelKeyPress
+                Assert.True(tcs.Task.Wait(WaitFailTestTimeoutSeconds * 1000));
 
-                    // Generate CancelKeyPress
-                    Assert.Equal(0, kill(Environment.ProcessId, SIGINT));
-                    // Wait till we block CancelKeyPress
-                    Assert.True(tcs.Task.Wait(WaitFailTestTimeoutSeconds * 1000));
-
-                    // Create a process and wait for it to exit.
-                    using (
-                        RemoteInvokeHandle handle = RemoteExecutor.Invoke(
-                            () => RemoteExecutor.SuccessExitCode
-                        )
+                // Create a process and wait for it to exit.
+                using (
+                    RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                        () => RemoteExecutor.SuccessExitCode
                     )
-                    {
-                        // Process exit is detected on SIGCHLD
-                        Assert.Equal(RemoteExecutor.SuccessExitCode, handle.ExitCode);
-                    }
-
-                    // Release CancelKeyPress
-                    mre.Set();
+                )
+                {
+                    // Process exit is detected on SIGCHLD
+                    Assert.Equal(RemoteExecutor.SuccessExitCode, handle.ExitCode);
                 }
-            )
-            .Dispose();
+
+                // Release CancelKeyPress
+                mre.Set();
+            }
+        ).Dispose();
     }
 
     private void HandlerInvokedForSignal(int signalOuter)
@@ -95,38 +94,37 @@ public partial class CancelKeyPressTests
         // This test sends a SIGINT back to itself... if run in the xunit process, this would end
         // up canceling the rest of xunit's tests.  So we run the test itself in a separate process.
         RemoteExecutor.Invoke(
-                signalStr =>
+            signalStr =>
+            {
+                var tcs = new TaskCompletionSource<ConsoleSpecialKey>();
+
+                ConsoleCancelEventHandler handler = (sender, e) =>
                 {
-                    var tcs = new TaskCompletionSource<ConsoleSpecialKey>();
+                    e.Cancel = true;
+                    tcs.SetResult(e.SpecialKey);
+                };
 
-                    ConsoleCancelEventHandler handler = (sender, e) =>
-                    {
-                        e.Cancel = true;
-                        tcs.SetResult(e.SpecialKey);
-                    };
+                Console.CancelKeyPress += handler;
+                try
+                {
+                    int signalInner = int.Parse(signalStr);
+                    Assert.Equal(0, kill(Environment.ProcessId, signalInner));
+                    Assert.True(tcs.Task.Wait(WaitFailTestTimeoutSeconds * 1000));
+                    Assert.Equal(
+                        signalInner == SIGINT
+                          ? ConsoleSpecialKey.ControlC
+                          : ConsoleSpecialKey.ControlBreak,
+                        tcs.Task.Result
+                    );
+                }
 
-                    Console.CancelKeyPress += handler;
-                    try
-                    {
-                        int signalInner = int.Parse(signalStr);
-                        Assert.Equal(0, kill(Environment.ProcessId, signalInner));
-                        Assert.True(tcs.Task.Wait(WaitFailTestTimeoutSeconds * 1000));
-                        Assert.Equal(
-                            signalInner == SIGINT
-                              ? ConsoleSpecialKey.ControlC
-                              : ConsoleSpecialKey.ControlBreak,
-                            tcs.Task.Result
-                        );
-                    }
-
-                    finally
-                    {
-                        Console.CancelKeyPress -= handler;
-                    }
-                },
-                signalOuter.ToString()
-            )
-            .Dispose();
+                finally
+                {
+                    Console.CancelKeyPress -= handler;
+                }
+            },
+            signalOuter.ToString()
+        ).Dispose();
     }
 
     private unsafe static bool IsSignalIgnored(int signal)

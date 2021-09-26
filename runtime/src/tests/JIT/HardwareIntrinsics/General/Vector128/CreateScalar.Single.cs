@@ -58,10 +58,8 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             Single value = TestLibrary.Generator.GetSingle();
-            object result = typeof(Vector128).GetMethod(
-                    nameof(Vector128.CreateScalar),
-                    new Type[] { typeof(Single) }
-                )
+            object result = typeof(Vector128)
+                .GetMethod(nameof(Vector128.CreateScalar), new Type[] { typeof(Single) })
                 .Invoke(null, new object[] { value });
 
             ValidateResult((Vector128<Single>)(result), value);
@@ -104,13 +102,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128.CreateScalar(Single): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128.CreateScalar(Single): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

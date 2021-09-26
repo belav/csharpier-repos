@@ -360,8 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 Debug.Assert(originatingSyntax != null);
 
-                bool diagnose =
-                    originatingSyntax.SyntaxTree.ReportDocumentationCommentDiagnostics();
+                bool diagnose = originatingSyntax.SyntaxTree
+                    .ReportDocumentationCommentDiagnostics();
 
                 if (!EnterIncludeElement(location))
                 {
@@ -578,13 +578,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         if (location.IsInSource)
                         {
-                            commentMessage = string.Format(
-                                ErrorFacts.GetMessage(
-                                    MessageID.IDS_XMLIGNORED2,
-                                    CultureInfo.CurrentUICulture
-                                ),
-                                resolvedFilePath
-                            );
+                            commentMessage = string
+                                .Format(
+                                    ErrorFacts.GetMessage(
+                                        MessageID.IDS_XMLIGNORED2,
+                                        CultureInfo.CurrentUICulture
+                                    ),
+                                    resolvedFilePath
+                                );
 
                             // As in Dev11, return only the comment - drop the include element.
                             return new XNode[] { new XComment(commentMessage) };
@@ -872,17 +873,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     treelessSyntax.ContainsDiagnostics
-                    && (
-                        (SyntaxTree)sourceLocation.SourceTree
-                    ).ReportDocumentationCommentDiagnostics()
+                    && ((SyntaxTree)sourceLocation.SourceTree)
+                        .ReportDocumentationCommentDiagnostics()
                 )
                 {
                     // NOTE: treelessSyntax doesn't have its own SyntaxTree, so we have to access the diagnostics
                     // via the Dummy tree.
                     foreach (
-                        Diagnostic diagnostic in CSharpSyntaxTree.Dummy.GetDiagnostics(
-                            treelessSyntax
-                        )
+                        Diagnostic diagnostic in CSharpSyntaxTree.Dummy
+                            .GetDiagnostics(treelessSyntax)
                     )
                     {
                         _diagnostics.Add(diagnostic.WithLocation(sourceLocation));

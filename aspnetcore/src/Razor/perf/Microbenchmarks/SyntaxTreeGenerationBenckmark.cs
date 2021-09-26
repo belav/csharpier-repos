@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Razor.Microbenchmarks
             );
             MSN = RazorSourceDocument.ReadFrom(projectItem);
 
-            var directiveFeature = ProjectEngine.EngineFeatures.OfType<IRazorDirectiveFeature>()
+            var directiveFeature = ProjectEngine.EngineFeatures
+                .OfType<IRazorDirectiveFeature>()
                 .FirstOrDefault();
             Directives =
                 directiveFeature?.Directives.ToArray() ?? Array.Empty<DirectiveDescriptor>();

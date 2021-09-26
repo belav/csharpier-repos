@@ -106,15 +106,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
 
         private void UpdateDialog()
         {
-            ((IVsThreadedWaitDialog2)_dialog).UpdateProgress(
-                this.ProgressTracker.Description ?? _message,
-                szProgressText: null,
-                szStatusBarText: null,
-                iCurrentStep: this.ProgressTracker.CompletedItems,
-                iTotalSteps: this.ProgressTracker.TotalItems,
-                fDisableCancel: !_allowCancel,
-                pfCanceled: out _
-            );
+            ((IVsThreadedWaitDialog2)_dialog)
+                .UpdateProgress(
+                    this.ProgressTracker.Description ?? _message,
+                    szProgressText: null,
+                    szStatusBarText: null,
+                    iCurrentStep: this.ProgressTracker.CompletedItems,
+                    iTotalSteps: this.ProgressTracker.TotalItems,
+                    fDisableCancel: !_allowCancel,
+                    pfCanceled: out _
+                );
         }
 
         public void Dispose()

@@ -31,11 +31,12 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
         public static string GetAssemblyInfo(IAssemblySymbol assemblySymbol)
         {
-            return string.Format(
-                "{0} {1}",
-                FeaturesResources.Assembly,
-                assemblySymbol.Identity.GetDisplayName()
-            );
+            return string
+                .Format(
+                    "{0} {1}",
+                    FeaturesResources.Assembly,
+                    assemblySymbol.Identity.GetDisplayName()
+                );
         }
 
         public static string GetAssemblyDisplay(
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         )
         {
             var resolution = symbolId.Resolve(
-                await generatedDocument.Project.GetCompilationAsync(cancellationToken)
+                await generatedDocument.Project
+                    .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false),
                 ignoreAssemblyKey: true,
                 cancellationToken: cancellationToken

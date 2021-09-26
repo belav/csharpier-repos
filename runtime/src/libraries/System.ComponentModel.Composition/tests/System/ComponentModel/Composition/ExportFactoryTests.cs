@@ -335,7 +335,8 @@ namespace Tests.Integration
             Assert.NotEqual(foo, foo2);
 
             // Disposing of part should cause foo to be disposed
-            ((IDisposable)part).Dispose();
+            ((IDisposable)part)
+                .Dispose();
             Assert.True(foo.IsDisposed);
         }
 

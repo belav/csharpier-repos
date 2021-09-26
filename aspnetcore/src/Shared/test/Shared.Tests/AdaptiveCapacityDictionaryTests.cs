@@ -577,9 +577,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
             var dict = new AdaptiveCapacityDictionary<string, object>() { { "age", 30 }, };
 
             // Act
-            ((ICollection<KeyValuePair<string, object?>>)dict).Add(
-                new KeyValuePair<string, object?>("key", "value")
-            );
+            ((ICollection<KeyValuePair<string, object?>>)dict)
+                .Add(new KeyValuePair<string, object?>("key", "value"));
 
             // Assert
             Assert.Collection(
@@ -776,7 +775,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
             var array = new KeyValuePair<string, object?>[2];
 
             // Act
-            ((ICollection<KeyValuePair<string, object?>>)dict).CopyTo(array, 1);
+            ((ICollection<KeyValuePair<string, object?>>)dict)
+                .CopyTo(array, 1);
 
             // Assert
             Assert.Equal(

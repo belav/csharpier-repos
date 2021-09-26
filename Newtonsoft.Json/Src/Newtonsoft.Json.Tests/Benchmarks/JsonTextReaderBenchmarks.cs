@@ -39,9 +39,8 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 
         static JsonTextReaderBenchmarks()
         {
-            FloatArrayJson = new JArray(Enumerable.Range(0, 5000).Select(i => i * 1.1m)).ToString(
-                Formatting.None
-            );
+            FloatArrayJson = new JArray(Enumerable.Range(0, 5000).Select(i => i * 1.1m))
+                .ToString(Formatting.None);
         }
 
         [Benchmark]

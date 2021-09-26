@@ -66,11 +66,11 @@ namespace Microsoft.CodeAnalysis.Editing
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             Contract.ThrowIfNull(root);
             return await AddImportsFromSyntaxesAsync(
-                    document,
-                    root.FullSpan,
-                    options,
-                    cancellationToken
-                )
+                document,
+                root.FullSpan,
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -97,11 +97,11 @@ namespace Microsoft.CodeAnalysis.Editing
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             Contract.ThrowIfNull(root);
             return await AddImportsFromSyntaxesAsync(
-                    document,
-                    root.GetAnnotatedNodesAndTokens(annotation).Select(t => t.FullSpan),
-                    options,
-                    cancellationToken
-                )
+                document,
+                root.GetAnnotatedNodesAndTokens(annotation).Select(t => t.FullSpan),
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -144,11 +144,11 @@ namespace Microsoft.CodeAnalysis.Editing
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             Contract.ThrowIfNull(root);
             return await AddImportsFromSymbolAnnotationAsync(
-                    document,
-                    root.FullSpan,
-                    options,
-                    cancellationToken
-                )
+                document,
+                root.FullSpan,
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -181,11 +181,11 @@ namespace Microsoft.CodeAnalysis.Editing
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             Contract.ThrowIfNull(root);
             return await AddImportsFromSymbolAnnotationAsync(
-                    document,
-                    root.GetAnnotatedNodesAndTokens(annotation).Select(t => t.FullSpan),
-                    options,
-                    cancellationToken
-                )
+                document,
+                root.GetAnnotatedNodesAndTokens(annotation).Select(t => t.FullSpan),
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

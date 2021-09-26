@@ -117,10 +117,8 @@ namespace Castle.DynamicProxy.Tests
 
             generator.CreateClassProxy(typeof(EmptyClass), new ProxyGenerationOptions(hook));
 
-            var memberwiseClone = typeof(EmptyClass).GetMethod(
-                "MemberwiseClone",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            var memberwiseClone = typeof(EmptyClass)
+                .GetMethod("MemberwiseClone", BindingFlags.NonPublic | BindingFlags.Instance);
             CollectionAssert.DoesNotContain(hook.AskedMembers, memberwiseClone);
             CollectionAssert.DoesNotContain(hook.NonVirtualMembers, memberwiseClone);
         }

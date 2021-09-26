@@ -83,13 +83,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual DebugView DebugView =>
             new(
                 () =>
-                    ((IReadOnlyNavigation)this).ToDebugString(
-                        MetadataDebugStringOptions.ShortDefault
-                    ),
+                    ((IReadOnlyNavigation)this)
+                        .ToDebugString(MetadataDebugStringOptions.ShortDefault),
                 () =>
-                    ((IReadOnlyNavigation)this).ToDebugString(
-                        MetadataDebugStringOptions.LongDefault
-                    )
+                    ((IReadOnlyNavigation)this)
+                        .ToDebugString(MetadataDebugStringOptions.LongDefault)
             );
 
         /// <inheritdoc/>

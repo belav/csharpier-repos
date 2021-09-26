@@ -21,19 +21,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (exception is AggregateException aggregateException)
             {
                 var flattened = aggregateException.Flatten();
-                return string.Join(
-                    s_separator,
-                    flattened.InnerExceptions.Select(e => GetExceptionMessage(e))
-                );
+                return string
+                    .Join(
+                        s_separator,
+                        flattened.InnerExceptions.Select(e => GetExceptionMessage(e))
+                    );
             }
 
             if (exception != null)
             {
-                return string.Join(
-                    s_separator,
-                    GetExceptionMessage(exception),
-                    CreateDiagnosticDescription(exception.InnerException)
-                );
+                return string
+                    .Join(
+                        s_separator,
+                        GetExceptionMessage(exception),
+                        CreateDiagnosticDescription(exception.InnerException)
+                    );
             }
 
             return string.Empty;

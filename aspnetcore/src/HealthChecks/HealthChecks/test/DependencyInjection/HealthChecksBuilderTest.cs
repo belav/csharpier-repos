@@ -140,15 +140,14 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var services = CreateServices();
-            services.AddHealthChecks()
-                .AddCheck(
-                    "test",
-                    tags: new[] { "tag", },
-                    check: () =>
-                    {
-                        return HealthCheckResult.Healthy();
-                    }
-                );
+            services.AddHealthChecks().AddCheck(
+                "test",
+                tags: new[] { "tag", },
+                check: () =>
+                {
+                    return HealthCheckResult.Healthy();
+                }
+            );
 
             var serviceProvider = services.BuildServiceProvider();
 
@@ -169,15 +168,14 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var services = CreateServices();
-            services.AddHealthChecks()
-                .AddCheck(
-                    "test",
-                    (_) =>
-                    {
-                        return HealthCheckResult.Degraded();
-                    },
-                    tags: new[] { "tag", }
-                );
+            services.AddHealthChecks().AddCheck(
+                "test",
+                (_) =>
+                {
+                    return HealthCheckResult.Degraded();
+                },
+                tags: new[] { "tag", }
+            );
 
             var serviceProvider = services.BuildServiceProvider();
 
@@ -198,15 +196,14 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var services = CreateServices();
-            services.AddHealthChecks()
-                .AddAsyncCheck(
-                    "test",
-                    () =>
-                    {
-                        return Task.FromResult(HealthCheckResult.Healthy());
-                    },
-                    tags: new[] { "tag", }
-                );
+            services.AddHealthChecks().AddAsyncCheck(
+                "test",
+                () =>
+                {
+                    return Task.FromResult(HealthCheckResult.Healthy());
+                },
+                tags: new[] { "tag", }
+            );
 
             var serviceProvider = services.BuildServiceProvider();
 
@@ -227,15 +224,14 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var services = CreateServices();
-            services.AddHealthChecks()
-                .AddAsyncCheck(
-                    "test",
-                    (_) =>
-                    {
-                        return Task.FromResult(HealthCheckResult.Unhealthy());
-                    },
-                    tags: new[] { "tag", }
-                );
+            services.AddHealthChecks().AddAsyncCheck(
+                "test",
+                (_) =>
+                {
+                    return Task.FromResult(HealthCheckResult.Unhealthy());
+                },
+                tags: new[] { "tag", }
+            );
 
             var serviceProvider = services.BuildServiceProvider();
 

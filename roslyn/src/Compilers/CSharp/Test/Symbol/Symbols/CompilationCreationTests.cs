@@ -64,10 +64,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
 
             var types = expectedSyntaxTrees.Select(
-                    tree =>
-                        compilation.GetSemanticModel(tree)
-                            .GetDeclaredSymbol(tree.GetCompilationUnitRoot().Members.Single())
-                )
+                tree =>
+                    compilation.GetSemanticModel(tree)
+                        .GetDeclaredSymbol(tree.GetCompilationUnitRoot().Members.Single())
+            )
                 .ToArray();
             for (int i = 0; i < numTrees; i++)
             {
@@ -181,11 +181,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm1[1].BoundReferences()
                     where object.ReferenceEquals(a, asm1[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 SymbolKind.ErrorType,
-                asm1[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm1[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -216,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm2[1].BoundReferences()
                     where object.ReferenceEquals(a, asm2[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -224,11 +227,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm2[1].BoundReferences()
                     where object.ReferenceEquals(a, asm2[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var retval1 =
-                asm2[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm2[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -249,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm2[2].BoundReferences()
                     where object.ReferenceEquals(a, asm2[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var varV2MTTestLib3Ref = TestReferences.SymbolsTests.V2.MTTestLib3.dll;
@@ -279,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm3[1].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -287,11 +294,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm3[1].BoundReferences()
                     where object.ReferenceEquals(a, asm3[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var retval2 =
-                asm3[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm3[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -317,7 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm3[2].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm3[3].Identity.Name);
@@ -331,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -339,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -347,7 +359,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type1 = asm3[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -396,7 +409,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm4[1].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -404,11 +418,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm4[1].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var retval6 =
-                asm4[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm4[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -439,7 +455,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm4[2].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm4[3].Identity.Name);
@@ -455,7 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -463,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -471,7 +490,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type2 = asm4[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -502,7 +522,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -510,7 +531,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -518,7 +540,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -526,7 +549,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[3])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type3 = asm4[4].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -600,7 +624,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm7[2].BoundReferences()
                     where object.ReferenceEquals(a, asm7[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -608,7 +633,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm7[2].BoundReferences()
                     where object.ReferenceEquals(a, asm7[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type4 = asm7[2].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -638,7 +664,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -646,7 +673,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -654,7 +682,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type5 = asm7[3].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -738,15 +767,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm1[1].BoundReferences()
-                    where ReferenceEquals(a, asm1[0])
-                    select a
-                ).Count()
+                (from a in asm1[1].BoundReferences() where ReferenceEquals(a, asm1[0]) select a)
+                    .Count()
             );
             Assert.Equal(
                 SymbolKind.ErrorType,
-                asm1[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm1[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -764,23 +791,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm2[1].BoundReferences()
-                    where ReferenceEquals(a, asm2[0])
-                    select a
-                ).Count()
+                (from a in asm2[1].BoundReferences() where ReferenceEquals(a, asm2[0]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm2[1].BoundReferences()
-                    where ReferenceEquals(a, asm2[2])
-                    select a
-                ).Count()
+                (from a in asm2[1].BoundReferences() where ReferenceEquals(a, asm2[2]) select a)
+                    .Count()
             );
 
             retval1 =
-                asm2[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm2[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -797,11 +819,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm2[2].BoundReferences()
-                    where ReferenceEquals(a, asm2[0])
-                    select a
-                ).Count()
+                (from a in asm2[2].BoundReferences() where ReferenceEquals(a, asm2[0]) select a)
+                    .Count()
             );
 
             Assert.Same(asm3[0], asm1[0]);
@@ -816,23 +835,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm3[1].BoundReferences()
-                    where ReferenceEquals(a, asm3[0])
-                    select a
-                ).Count()
+                (from a in asm3[1].BoundReferences() where ReferenceEquals(a, asm3[0]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm3[1].BoundReferences()
-                    where ReferenceEquals(a, asm3[2])
-                    select a
-                ).Count()
+                (from a in asm3[1].BoundReferences() where ReferenceEquals(a, asm3[2]) select a)
+                    .Count()
             );
 
             retval2 =
-                asm3[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm3[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -854,11 +868,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm3[2].BoundReferences()
-                    where ReferenceEquals(a, asm3[0])
-                    select a
-                ).Count()
+                (from a in asm3[2].BoundReferences() where ReferenceEquals(a, asm3[0]) select a)
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm3[3].Identity.Name);
@@ -868,27 +879,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm3[3].BoundReferences()
-                    where ReferenceEquals(a, asm3[0])
-                    select a
-                ).Count()
+                (from a in asm3[3].BoundReferences() where ReferenceEquals(a, asm3[0]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm3[3].BoundReferences()
-                    where ReferenceEquals(a, asm3[1])
-                    select a
-                ).Count()
+                (from a in asm3[3].BoundReferences() where ReferenceEquals(a, asm3[1]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm3[3].BoundReferences()
-                    where ReferenceEquals(a, asm3[2])
-                    select a
-                ).Count()
+                (from a in asm3[3].BoundReferences() where ReferenceEquals(a, asm3[2]) select a)
+                    .Count()
             );
 
             type1 = asm3[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -921,23 +923,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm4[1].BoundReferences()
-                    where ReferenceEquals(a, asm4[0])
-                    select a
-                ).Count()
+                (from a in asm4[1].BoundReferences() where ReferenceEquals(a, asm4[0]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm4[1].BoundReferences()
-                    where ReferenceEquals(a, asm4[2])
-                    select a
-                ).Count()
+                (from a in asm4[1].BoundReferences() where ReferenceEquals(a, asm4[2]) select a)
+                    .Count()
             );
 
             retval6 =
-                asm4[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm4[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -964,11 +961,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm4[2].BoundReferences()
-                    where ReferenceEquals(a, asm4[0])
-                    select a
-                ).Count()
+                (from a in asm4[2].BoundReferences() where ReferenceEquals(a, asm4[0]) select a)
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm4[3].Identity.Name);
@@ -980,27 +974,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm4[3].BoundReferences()
-                    where ReferenceEquals(a, asm4[0])
-                    select a
-                ).Count()
+                (from a in asm4[3].BoundReferences() where ReferenceEquals(a, asm4[0]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm4[3].BoundReferences()
-                    where ReferenceEquals(a, asm4[1])
-                    select a
-                ).Count()
+                (from a in asm4[3].BoundReferences() where ReferenceEquals(a, asm4[1]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm4[3].BoundReferences()
-                    where ReferenceEquals(a, asm4[2])
-                    select a
-                ).Count()
+                (from a in asm4[3].BoundReferences() where ReferenceEquals(a, asm4[2]) select a)
+                    .Count()
             );
 
             type2 = asm4[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -1027,35 +1012,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm4[4].BoundReferences()
-                    where ReferenceEquals(a, asm4[0])
-                    select a
-                ).Count()
+                (from a in asm4[4].BoundReferences() where ReferenceEquals(a, asm4[0]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm4[4].BoundReferences()
-                    where ReferenceEquals(a, asm4[1])
-                    select a
-                ).Count()
+                (from a in asm4[4].BoundReferences() where ReferenceEquals(a, asm4[1]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm4[4].BoundReferences()
-                    where ReferenceEquals(a, asm4[2])
-                    select a
-                ).Count()
+                (from a in asm4[4].BoundReferences() where ReferenceEquals(a, asm4[2]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm4[4].BoundReferences()
-                    where ReferenceEquals(a, asm4[3])
-                    select a
-                ).Count()
+                (from a in asm4[4].BoundReferences() where ReferenceEquals(a, asm4[3]) select a)
+                    .Count()
             );
 
             type3 = asm4[4].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -1099,19 +1072,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm7[2].BoundReferences()
-                    where ReferenceEquals(a, asm7[0])
-                    select a
-                ).Count()
+                (from a in asm7[2].BoundReferences() where ReferenceEquals(a, asm7[0]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm7[2].BoundReferences()
-                    where ReferenceEquals(a, asm7[1])
-                    select a
-                ).Count()
+                (from a in asm7[2].BoundReferences() where ReferenceEquals(a, asm7[1]) select a)
+                    .Count()
             );
 
             type4 = asm7[2].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -1137,27 +1104,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm7[3].BoundReferences()
-                    where ReferenceEquals(a, asm7[0])
-                    select a
-                ).Count()
+                (from a in asm7[3].BoundReferences() where ReferenceEquals(a, asm7[0]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm7[3].BoundReferences()
-                    where ReferenceEquals(a, asm7[1])
-                    select a
-                ).Count()
+                (from a in asm7[3].BoundReferences() where ReferenceEquals(a, asm7[1]) select a)
+                    .Count()
             );
             Assert.Equal(
                 1,
-                (
-                    from a in asm7[3].BoundReferences()
-                    where ReferenceEquals(a, asm7[2])
-                    select a
-                ).Count()
+                (from a in asm7[3].BoundReferences() where ReferenceEquals(a, asm7[2]) select a)
+                    .Count()
             );
 
             type5 = asm7[3].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -1266,7 +1224,8 @@ public class Class4
                     from a in asm2[1].BoundReferences()
                     where object.ReferenceEquals(a, asm2[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1274,11 +1233,13 @@ public class Class4
                     from a in asm2[1].BoundReferences()
                     where object.ReferenceEquals(a, asm2[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var retval1 =
-                asm2[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm2[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -1299,7 +1260,8 @@ public class Class4
                     from a in asm2[2].BoundReferences()
                     where object.ReferenceEquals(a, asm2[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var varMTTestLib1_V2_Name = new AssemblyIdentity("MTTestLib1", new Version("2.0.0.0"));
@@ -1403,7 +1365,8 @@ public class Class5
                     from a in asm3[1].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1411,11 +1374,13 @@ public class Class5
                     from a in asm3[1].BoundReferences()
                     where object.ReferenceEquals(a, asm3[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var retval2 =
-                asm3[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm3[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -1438,7 +1403,8 @@ public class Class5
                     from a in asm3[2].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm3[3].Identity.Name);
@@ -1452,7 +1418,8 @@ public class Class5
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1460,7 +1427,8 @@ public class Class5
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1468,7 +1436,8 @@ public class Class5
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type1 = asm3[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -1613,7 +1582,8 @@ public class Class6
                     from a in asm4[1].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1621,11 +1591,13 @@ public class Class6
                     from a in asm4[1].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var retval6 =
-                asm4[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm4[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -1650,7 +1622,8 @@ public class Class6
                     from a in asm4[2].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm4[3].Identity.Name);
@@ -1666,7 +1639,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1674,7 +1648,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1682,7 +1657,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type2 = asm4[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -1713,7 +1689,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1721,7 +1698,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1729,7 +1707,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1737,7 +1716,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[3])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type3 = asm4[4].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -1790,9 +1770,10 @@ public class Class6
 
             Assert.Same(asm6[0], asm2[0]);
             Assert.True(
-                asm6[1].RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
-                    varC_MTTestLib2.SourceAssembly()
-                )
+                asm6[1]
+                    .RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
+                        varC_MTTestLib2.SourceAssembly()
+                    )
             );
 
             var c7 = CreateCompilation(
@@ -1811,9 +1792,10 @@ public class Class6
 
             Assert.Same(asm7[0], asm2[0]);
             Assert.True(
-                asm7[1].RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
-                    varC_MTTestLib2.SourceAssembly()
-                )
+                asm7[1]
+                    .RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
+                        varC_MTTestLib2.SourceAssembly()
+                    )
             );
             Assert.NotSame(asm7[2], asm3[3]);
             Assert.NotSame(asm7[2], asm4[3]);
@@ -1831,7 +1813,8 @@ public class Class6
                     from a in asm7[2].BoundReferences()
                     where object.ReferenceEquals(a, asm7[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1839,7 +1822,8 @@ public class Class6
                     from a in asm7[2].BoundReferences()
                     where object.ReferenceEquals(a, asm7[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type4 = asm7[2].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -1873,7 +1857,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1881,7 +1866,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -1889,7 +1875,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type5 = asm7[3].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -1993,7 +1980,8 @@ public class Class6
                     from a in asm2[1].BoundReferences()
                     where object.ReferenceEquals(a, asm2[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2001,11 +1989,13 @@ public class Class6
                     from a in asm2[1].BoundReferences()
                     where object.ReferenceEquals(a, asm2[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             retval1 =
-                asm2[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm2[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -2026,7 +2016,8 @@ public class Class6
                     from a in asm2[2].BoundReferences()
                     where object.ReferenceEquals(a, asm2[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Same(asm_MTTestLib3[0], asm_MTTestLib1_V1[0]);
@@ -2053,7 +2044,8 @@ public class Class6
                     from a in asm3[1].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2061,11 +2053,13 @@ public class Class6
                     from a in asm3[1].BoundReferences()
                     where object.ReferenceEquals(a, asm3[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             retval2 =
-                asm3[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm3[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -2088,7 +2082,8 @@ public class Class6
                     from a in asm3[2].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm3[3].Identity.Name);
@@ -2102,7 +2097,8 @@ public class Class6
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2110,7 +2106,8 @@ public class Class6
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2118,7 +2115,8 @@ public class Class6
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             type1 = asm3[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -2162,7 +2160,8 @@ public class Class6
                     from a in asm4[1].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2170,11 +2169,13 @@ public class Class6
                     from a in asm4[1].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             retval6 =
-                asm4[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm4[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -2199,7 +2200,8 @@ public class Class6
                     from a in asm4[2].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm4[3].Identity.Name);
@@ -2215,7 +2217,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2223,7 +2226,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2231,7 +2235,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             type2 = asm4[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -2262,7 +2267,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2270,7 +2276,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2278,7 +2285,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2286,7 +2294,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[3])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             type3 = asm4[4].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -2323,16 +2332,18 @@ public class Class6
 
             Assert.Same(asm6[0], asm2[0]);
             Assert.True(
-                asm6[1].RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
-                    varC_MTTestLib2.SourceAssembly()
-                )
+                asm6[1]
+                    .RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
+                        varC_MTTestLib2.SourceAssembly()
+                    )
             );
 
             Assert.Same(asm7[0], asm2[0]);
             Assert.True(
-                asm7[1].RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
-                    varC_MTTestLib2.SourceAssembly()
-                )
+                asm7[1]
+                    .RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
+                        varC_MTTestLib2.SourceAssembly()
+                    )
             );
             Assert.NotSame(asm7[2], asm3[3]);
             Assert.NotSame(asm7[2], asm4[3]);
@@ -2350,7 +2361,8 @@ public class Class6
                     from a in asm7[2].BoundReferences()
                     where object.ReferenceEquals(a, asm7[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2358,7 +2370,8 @@ public class Class6
                     from a in asm7[2].BoundReferences()
                     where object.ReferenceEquals(a, asm7[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             type4 = asm7[2].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -2392,7 +2405,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2400,7 +2414,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 1,
@@ -2408,7 +2423,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             type5 = asm7[3].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -2483,7 +2499,8 @@ public class Class6
                     from a in asm2[1].BoundReferences()
                     where object.ReferenceEquals(a, asm2[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -2491,11 +2508,13 @@ public class Class6
                     from a in asm2[1].BoundReferences()
                     where object.ReferenceEquals(a, asm2[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var retval1 =
-                asm2[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm2[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -2503,7 +2522,8 @@ public class Class6
 
             Assert.Same(
                 retval1,
-                asm2[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm2[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Bar")
                     .OfType<FieldSymbol>()
@@ -2525,7 +2545,8 @@ public class Class6
                     from a in asm2[2].BoundReferences()
                     where object.ReferenceEquals(a, asm2[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var varMTTestLib3_Name = new AssemblyIdentity("MTTestLib3");
@@ -2595,7 +2616,8 @@ public class Class6
                     from a in asm3[1].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -2603,11 +2625,13 @@ public class Class6
                     from a in asm3[1].BoundReferences()
                     where object.ReferenceEquals(a, asm3[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var retval2 =
-                asm3[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm3[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -2615,7 +2639,8 @@ public class Class6
 
             Assert.Same(
                 retval2,
-                asm3[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm3[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Bar")
                     .OfType<FieldSymbol>()
@@ -2643,7 +2668,8 @@ public class Class6
                     from a in asm3[2].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm3[3].Identity.Name);
@@ -2657,7 +2683,8 @@ public class Class6
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -2665,7 +2692,8 @@ public class Class6
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -2673,7 +2701,8 @@ public class Class6
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type1 = asm3[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -2770,7 +2799,8 @@ public class Class6
                     from a in asm4[1].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -2778,11 +2808,13 @@ public class Class6
                     from a in asm4[1].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var retval6 =
-                asm4[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm4[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -2813,7 +2845,8 @@ public class Class6
                     from a in asm4[2].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm4[3].Identity.Name);
@@ -2829,7 +2862,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -2837,7 +2871,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -2845,7 +2880,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type2 = asm4[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -2876,7 +2912,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -2884,7 +2921,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -2892,7 +2930,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -2900,7 +2939,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[3])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type3 = asm4[4].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -2961,9 +3001,10 @@ public class Class6
 
             Assert.Same(asm6[0], asm2[0]);
             Assert.True(
-                asm6[1].RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
-                    varC_MTTestLib2.SourceAssembly()
-                )
+                asm6[1]
+                    .RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
+                        varC_MTTestLib2.SourceAssembly()
+                    )
             );
 
             var c7 = CreateCompilation(
@@ -2982,9 +3023,10 @@ public class Class6
 
             Assert.Same(asm7[0], asm2[0]);
             Assert.True(
-                asm7[1].RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
-                    varC_MTTestLib2.SourceAssembly()
-                )
+                asm7[1]
+                    .RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
+                        varC_MTTestLib2.SourceAssembly()
+                    )
             );
             Assert.NotSame(asm7[2], asm3[3]);
             Assert.NotSame(asm7[2], asm4[3]);
@@ -3002,7 +3044,8 @@ public class Class6
                     from a in asm7[2].BoundReferences()
                     where object.ReferenceEquals(a, asm7[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3010,7 +3053,8 @@ public class Class6
                     from a in asm7[2].BoundReferences()
                     where object.ReferenceEquals(a, asm7[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type4 = asm7[2].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -3045,7 +3089,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3053,7 +3098,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3061,7 +3107,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             var type5 = asm7[3].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -3180,7 +3227,8 @@ public class Class6
                     from a in asm2[1].BoundReferences()
                     where object.ReferenceEquals(a, asm2[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3188,11 +3236,13 @@ public class Class6
                     from a in asm2[1].BoundReferences()
                     where object.ReferenceEquals(a, asm2[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             retval1 =
-                asm2[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm2[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -3213,7 +3263,8 @@ public class Class6
                     from a in asm2[2].BoundReferences()
                     where object.ReferenceEquals(a, asm2[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Same(asm_MTTestLib3[0], asm_MTTestLib2[0]);
@@ -3240,7 +3291,8 @@ public class Class6
                     from a in asm3[1].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3248,11 +3300,13 @@ public class Class6
                     from a in asm3[1].BoundReferences()
                     where object.ReferenceEquals(a, asm3[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             retval2 =
-                asm3[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm3[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -3278,7 +3332,8 @@ public class Class6
                     from a in asm3[2].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm3[3].Identity.Name);
@@ -3292,7 +3347,8 @@ public class Class6
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3300,7 +3356,8 @@ public class Class6
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3308,7 +3365,8 @@ public class Class6
                     from a in asm3[3].BoundReferences()
                     where object.ReferenceEquals(a, asm3[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             type1 = asm3[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -3352,7 +3410,8 @@ public class Class6
                     from a in asm4[1].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3360,11 +3419,13 @@ public class Class6
                     from a in asm4[1].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             retval6 =
-                asm4[1].GlobalNamespace.GetTypeMembers("Class4")
+                asm4[1].GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
@@ -3395,7 +3456,8 @@ public class Class6
                     from a in asm4[2].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             Assert.Equal("MTTestLib3", asm4[3].Identity.Name);
@@ -3411,7 +3473,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3419,7 +3482,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3427,7 +3491,8 @@ public class Class6
                     from a in asm4[3].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             type2 = asm4[3].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -3458,7 +3523,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3466,7 +3532,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3474,7 +3541,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3482,7 +3550,8 @@ public class Class6
                     from a in asm4[4].BoundReferences()
                     where object.ReferenceEquals(a, asm4[3])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             type3 = asm4[4].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -3519,16 +3588,18 @@ public class Class6
 
             Assert.Same(asm6[0], asm2[0]);
             Assert.True(
-                asm6[1].RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
-                    varC_MTTestLib2.SourceAssembly()
-                )
+                asm6[1]
+                    .RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
+                        varC_MTTestLib2.SourceAssembly()
+                    )
             );
 
             Assert.Same(asm7[0], asm2[0]);
             Assert.True(
-                asm7[1].RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
-                    varC_MTTestLib2.SourceAssembly()
-                )
+                asm7[1]
+                    .RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
+                        varC_MTTestLib2.SourceAssembly()
+                    )
             );
             Assert.NotSame(asm7[2], asm3[3]);
             Assert.NotSame(asm7[2], asm4[3]);
@@ -3546,7 +3617,8 @@ public class Class6
                     from a in asm7[2].BoundReferences()
                     where object.ReferenceEquals(a, asm7[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3554,7 +3626,8 @@ public class Class6
                     from a in asm7[2].BoundReferences()
                     where object.ReferenceEquals(a, asm7[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             type4 = asm7[2].GlobalNamespace.GetTypeMembers("Class5").Single();
@@ -3587,7 +3660,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[0])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3595,7 +3669,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[1])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
             Assert.Equal(
                 2,
@@ -3603,7 +3678,8 @@ public class Class6
                     from a in asm7[3].BoundReferences()
                     where object.ReferenceEquals(a, asm7[2])
                     select a
-                ).Count()
+                )
+                    .Count()
             );
 
             type5 = asm7[3].GlobalNamespace.GetTypeMembers("Class6").Single();
@@ -3832,7 +3908,8 @@ namespace ns1
 
             var asm3 = c3.SourceAssembly();
 
-            var localC3Foo2 = asm3.GlobalNamespace.GetTypeMembers("C3")
+            var localC3Foo2 = asm3.GlobalNamespace
+                .GetTypeMembers("C3")
                 .Single()
                 .GetMembers("Foo2")
                 .OfType<MethodSymbol>()
@@ -3921,7 +3998,8 @@ public class C5 :
 
             Assert.Same(
                 retval4,
-                asm3.GlobalNamespace.GetTypeMembers("C3")
+                asm3.GlobalNamespace
+                    .GetTypeMembers("C3")
                     .Single()
                     .GetMembers("Foo1")
                     .OfType<MethodSymbol>()
@@ -4019,7 +4097,8 @@ public class C5 :
 
             Assert.Equal(
                 typeC301.ToTestDisplayString(),
-                asm3.GlobalNamespace.GetTypeMembers("C3")
+                asm3.GlobalNamespace
+                    .GetTypeMembers("C3")
                     .Single()
                     .GetTypeMembers("C301")
                     .Single()
@@ -4033,7 +4112,8 @@ public class C5 :
 
             Assert.Equal(
                 typeC301.ToDisplayString(SymbolDisplayFormat.QualifiedNameArityFormat),
-                asm3.GlobalNamespace.GetTypeMembers("C3")
+                asm3.GlobalNamespace
+                    .GetTypeMembers("C3")
                     .Single()
                     .GetTypeMembers("C301")
                     .Single()
@@ -4042,7 +4122,8 @@ public class C5 :
 
             Assert.Equal(
                 typeC6.ToDisplayString(SymbolDisplayFormat.QualifiedNameArityFormat),
-                asm3.GlobalNamespace.GetTypeMembers("C6")
+                asm3.GlobalNamespace
+                    .GetTypeMembers("C6")
                     .Single()
                     .ToDisplayString(SymbolDisplayFormat.QualifiedNameArityFormat)
             );
@@ -4218,19 +4299,16 @@ class Module1
             );
 
             SourceAssemblySymbol c1AsmSource = (SourceAssemblySymbol)c1.Assembly;
-            PEAssemblySymbol Lib1_V1 = (PEAssemblySymbol)c1AsmSource.Modules[
-                0
-            ].GetReferencedAssemblySymbols()[1];
+            PEAssemblySymbol Lib1_V1 = (PEAssemblySymbol)c1AsmSource.Modules[0]
+                .GetReferencedAssemblySymbols()[1];
             PEModuleSymbol module1 = (PEModuleSymbol)c1AsmSource.Modules[1];
 
             Assert.Equal(LocationKind.MetadataFile, ((MetadataLocation)Lib1_V1.Locations[0]).Kind);
             SourceAssemblySymbol c2AsmSource = (SourceAssemblySymbol)c2.Assembly;
-            RetargetingAssemblySymbol c1AsmRef = (RetargetingAssemblySymbol)c2AsmSource.Modules[
-                0
-            ].GetReferencedAssemblySymbols()[2];
-            PEAssemblySymbol Lib1_V2 = (PEAssemblySymbol)c2AsmSource.Modules[
-                0
-            ].GetReferencedAssemblySymbols()[1];
+            RetargetingAssemblySymbol c1AsmRef = (RetargetingAssemblySymbol)c2AsmSource.Modules[0]
+                .GetReferencedAssemblySymbols()[2];
+            PEAssemblySymbol Lib1_V2 = (PEAssemblySymbol)c2AsmSource.Modules[0]
+                .GetReferencedAssemblySymbols()[1];
             PEModuleSymbol module2 = (PEModuleSymbol)c1AsmRef.Modules[1];
 
             Assert.Equal(1, Lib1_V1.Identity.Version.Major);
@@ -4239,9 +4317,8 @@ class Module1
             Assert.NotEqual(module1, module2);
             Assert.Same(module1.Module, module2.Module);
 
-            NamedTypeSymbol classModule1 = c1AsmRef.Modules[0].GlobalNamespace.GetTypeMembers(
-                    "Module1"
-                )
+            NamedTypeSymbol classModule1 = c1AsmRef.Modules[0].GlobalNamespace
+                .GetTypeMembers("Module1")
                 .Single();
             MethodSymbol m1 = classModule1.GetMembers("M1").OfType<MethodSymbol>().Single();
             MethodSymbol m2 = classModule1.GetMembers("M2").OfType<MethodSymbol>().Single();
@@ -4379,9 +4456,8 @@ System.Diagnostics.Process.GetCurrentProcess();
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new Resolver(data, core, system)
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(new Resolver(data, core, system))
             );
 
             compilation.VerifyDiagnostics();
@@ -4421,9 +4497,8 @@ System.Diagnostics.Process.GetCurrentProcess();
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new Resolver(data, core, system)
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(new Resolver(data, core, system))
             );
 
             compilation.VerifyDiagnostics(
@@ -4489,9 +4564,8 @@ class C : Metadata.ICSPropImpl { }";
 
             var compilation = CreateCompilationWithMscorlib45(
                 new[] { Parse(source, options: TestOptions.Script) },
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new DummyReferenceResolver(csClasses01)
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(new DummyReferenceResolver(csClasses01))
             );
 
             compilation.VerifyDiagnostics();
@@ -4545,9 +4619,8 @@ class C
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions.ReleaseDll.WithUsings(
-                    ImmutableArray.Create("System.Console", "System")
-                )
+                options: TestOptions.ReleaseDll
+                    .WithUsings(ImmutableArray.Create("System.Console", "System"))
             );
 
             var diagnostics = compilation.GetDiagnostics().ToArray();

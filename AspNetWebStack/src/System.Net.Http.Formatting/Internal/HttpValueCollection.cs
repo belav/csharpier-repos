@@ -99,7 +99,8 @@ namespace System.Net.Http.Formatting.Internal
             Names.Add(name);
             List.Add(new KeyValuePair<string, string>(name, value));
 #else
-            base.Add(name, value);
+            base
+                .Add(name, value);
 #endif
         }
 

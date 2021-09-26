@@ -294,8 +294,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await hubConnection.StartAsync();
 
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 1, target = "Foo", arguments = args }
-                        )
+                        new { invocationId = "1", type = 1, target = "Foo", arguments = args }
+                    )
                         .DefaultTimeout();
 
                     await handlerTcs.Task.DefaultTimeout();
@@ -326,25 +326,25 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     await connection.ReceiveJsonMessage(
-                            new
-                            {
-                                invocationId = "1",
-                                type = 1,
-                                target = "Foo",
-                                arguments = new object[] { 42, "42" }
-                            }
-                        )
+                        new
+                        {
+                            invocationId = "1",
+                            type = 1,
+                            target = "Foo",
+                            arguments = new object[] { 42, "42" }
+                        }
+                    )
                         .DefaultTimeout();
 
                     await connection.ReceiveJsonMessage(
-                            new
-                            {
-                                invocationId = "2",
-                                type = 1,
-                                target = "Foo",
-                                arguments = new object[] { 42 }
-                            }
-                        )
+                        new
+                        {
+                            invocationId = "2",
+                            type = 1,
+                            target = "Foo",
+                            arguments = new object[] { 42 }
+                        }
+                    )
                         .DefaultTimeout();
 
                     Assert.Equal(42, await receiveTcs.Task.DefaultTimeout());
@@ -376,25 +376,25 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     await connection.ReceiveJsonMessage(
-                            new
-                            {
-                                invocationId = "1",
-                                type = 1,
-                                target = "Foo",
-                                arguments = new object[] { 42, "42" }
-                            }
-                        )
+                        new
+                        {
+                            invocationId = "1",
+                            type = 1,
+                            target = "Foo",
+                            arguments = new object[] { 42, "42" }
+                        }
+                    )
                         .DefaultTimeout();
 
                     await connection.ReceiveJsonMessage(
-                            new
-                            {
-                                invocationId = "2",
-                                type = 1,
-                                target = "Foo",
-                                arguments = new object[] { 42 }
-                            }
-                        )
+                        new
+                        {
+                            invocationId = "2",
+                            type = 1,
+                            target = "Foo",
+                            arguments = new object[] { 42 }
+                        }
+                    )
                         .DefaultTimeout();
 
                     Assert.Equal(42, await receiveTcs.Task.DefaultTimeout());
@@ -425,25 +425,25 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     await connection.ReceiveJsonMessage(
-                            new
-                            {
-                                invocationId = "1",
-                                type = 1,
-                                target = "Foo",
-                                arguments = new object[] { "xxx" }
-                            }
-                        )
+                        new
+                        {
+                            invocationId = "1",
+                            type = 1,
+                            target = "Foo",
+                            arguments = new object[] { "xxx" }
+                        }
+                    )
                         .DefaultTimeout();
 
                     await connection.ReceiveJsonMessage(
-                            new
-                            {
-                                invocationId = "2",
-                                type = 1,
-                                target = "Foo",
-                                arguments = new object[] { 42 }
-                            }
-                        )
+                        new
+                        {
+                            invocationId = "2",
+                            type = 1,
+                            target = "Foo",
+                            arguments = new object[] { 42 }
+                        }
+                    )
                         .DefaultTimeout();
 
                     Assert.Equal(42, await receiveTcs.Task.DefaultTimeout());
@@ -475,25 +475,25 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     await connection.ReceiveJsonMessage(
-                            new
-                            {
-                                invocationId = "1",
-                                type = 1,
-                                target = "Foo",
-                                arguments = new object[] { "xxx" }
-                            }
-                        )
+                        new
+                        {
+                            invocationId = "1",
+                            type = 1,
+                            target = "Foo",
+                            arguments = new object[] { "xxx" }
+                        }
+                    )
                         .DefaultTimeout();
 
                     await connection.ReceiveJsonMessage(
-                            new
-                            {
-                                invocationId = "2",
-                                type = 1,
-                                target = "Foo",
-                                arguments = new object[] { 42 }
-                            }
-                        )
+                        new
+                        {
+                            invocationId = "2",
+                            type = 1,
+                            target = "Foo",
+                            arguments = new object[] { 42 }
+                        }
+                    )
                         .DefaultTimeout();
 
                     Assert.Equal(42, await receiveTcs.Task.DefaultTimeout());

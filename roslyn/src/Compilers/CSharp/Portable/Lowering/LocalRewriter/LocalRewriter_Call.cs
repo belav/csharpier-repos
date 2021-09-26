@@ -55,15 +55,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                         NamedTypeSymbol firstContainer =
                             node.ApplicableMethods.First().ContainingType;
                         Debug.Assert(
-                            node.ApplicableMethods.All(
-                                m =>
-                                    !m.RequiresInstanceReceiver
-                                    && TypeSymbol.Equals(
-                                        m.ContainingType,
-                                        firstContainer,
-                                        TypeCompareKind.ConsiderEverything2
-                                    )
-                            )
+                            node.ApplicableMethods
+                                .All(
+                                    m =>
+                                        !m.RequiresInstanceReceiver
+                                        && TypeSymbol.Equals(
+                                            m.ContainingType,
+                                            firstContainer,
+                                            TypeCompareKind.ConsiderEverything2
+                                        )
+                                )
                         );
 
                         loweredReceiver = new BoundTypeExpression(
@@ -108,26 +109,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // delegate invocation
                     var loweredExpression = VisitExpression(node.Expression);
                     return _dynamicFactory.MakeDynamicInvocation(
-                            loweredExpression,
-                            loweredArguments,
-                            node.ArgumentNamesOpt,
-                            node.ArgumentRefKindsOpt,
-                            resultDiscarded
-                        )
+                        loweredExpression,
+                        loweredArguments,
+                        node.ArgumentNamesOpt,
+                        node.ArgumentRefKindsOpt,
+                        resultDiscarded
+                    )
                         .ToExpression();
             }
 
             Debug.Assert(loweredReceiver != null);
             return _dynamicFactory.MakeDynamicMemberInvocation(
-                    name,
-                    loweredReceiver,
-                    typeArguments,
-                    loweredArguments,
-                    node.ArgumentNamesOpt,
-                    node.ArgumentRefKindsOpt,
-                    hasImplicitReceiver,
-                    resultDiscarded
-                )
+                name,
+                loweredReceiver,
+                typeArguments,
+                loweredArguments,
+                node.ArgumentNamesOpt,
+                node.ArgumentRefKindsOpt,
+                hasImplicitReceiver,
+                resultDiscarded
+            )
                 .ToExpression();
         }
 
@@ -148,11 +149,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var m in methods)
                     {
-                        module.EmbeddedTypesManagerOpt.EmbedMethodIfNeedTo(
-                            m.OriginalDefinition.GetCciAdapter(),
-                            syntaxNode,
-                            _diagnostics.DiagnosticBag
-                        );
+                        module.EmbeddedTypesManagerOpt
+                            .EmbedMethodIfNeedTo(
+                                m.OriginalDefinition.GetCciAdapter(),
+                                syntaxNode,
+                                _diagnostics.DiagnosticBag
+                            );
                     }
                 }
             }
@@ -175,11 +177,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var p in properties)
                     {
-                        module.EmbeddedTypesManagerOpt.EmbedPropertyIfNeedTo(
-                            p.OriginalDefinition.GetCciAdapter(),
-                            syntaxNode,
-                            _diagnostics.DiagnosticBag
-                        );
+                        module.EmbeddedTypesManagerOpt
+                            .EmbedPropertyIfNeedTo(
+                                p.OriginalDefinition.GetCciAdapter(),
+                                syntaxNode,
+                                _diagnostics.DiagnosticBag
+                            );
                     }
                 }
             }
@@ -556,10 +559,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression[] actualArguments = new BoundExpression[parameters.Length]; // The actual arguments that will be passed; one actual argument per formal parameter.
             ArrayBuilder<BoundAssignmentOperator> storesToTemps =
                 ArrayBuilder<BoundAssignmentOperator>.GetInstance(rewrittenArguments.Length);
-            ArrayBuilder<RefKind> refKinds = ArrayBuilder<RefKind>.GetInstance(
-                parameters.Length,
-                RefKind.None
-            );
+            ArrayBuilder<RefKind> refKinds = ArrayBuilder<RefKind>
+                .GetInstance(parameters.Length, RefKind.None);
 
             // Step one: Store everything that is non-trivial into a temporary; record the
             // stores in storesToTemps and make the actual argument a reference to the temp.
@@ -653,10 +654,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                         else
                         {
-                            refKindsBuilder = ArrayBuilder<RefKind>.GetInstance(
-                                parameters.Length,
-                                fillWithValue: RefKind.None
-                            );
+                            refKindsBuilder = ArrayBuilder<RefKind>
+                                .GetInstance(parameters.Length, fillWithValue: RefKind.None);
                         }
                     }
 
@@ -711,8 +710,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // So we just return list of arguments as is.
 
                 ImmutableArray<ParameterSymbol> parameters = methodOrIndexer.GetParameters();
-                ArrayBuilder<IArgumentOperation> argumentsBuilder =
-                    ArrayBuilder<IArgumentOperation>.GetInstance(arguments.Length);
+                ArrayBuilder<IArgumentOperation> argumentsBuilder = ArrayBuilder<IArgumentOperation>
+                    .GetInstance(arguments.Length);
 
                 int i = 0;
                 for (; i < parameters.Length; ++i)
@@ -965,8 +964,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(firstNonParamArrayArgumentIndex <= arguments.Length);
 
                     kind = ArgumentKind.ParamArray;
-                    ArrayBuilder<BoundExpression> paramArray =
-                        ArrayBuilder<BoundExpression>.GetInstance(paramArrayArgumentCount);
+                    ArrayBuilder<BoundExpression> paramArray = ArrayBuilder<BoundExpression>
+                        .GetInstance(paramArrayArgumentCount);
 
                     for (int i = a; i < firstNonParamArrayArgumentIndex; ++i)
                     {

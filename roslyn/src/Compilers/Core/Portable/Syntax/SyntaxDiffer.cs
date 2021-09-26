@@ -61,11 +61,8 @@ namespace Microsoft.CodeAnalysis
         // return a set of text changes that when applied to the old document produces the new document
         internal static IList<TextChange> GetTextChanges(SyntaxNode oldNode, SyntaxNode newNode)
         {
-            return new SyntaxDiffer(
-                oldNode,
-                newNode,
-                computeNewText: true
-            ).ComputeTextChangesFromOld();
+            return new SyntaxDiffer(oldNode, newNode, computeNewText: true)
+                .ComputeTextChangesFromOld();
         }
 
         private IList<TextChange> ComputeTextChangesFromOld()

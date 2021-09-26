@@ -165,10 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
                 if (
                     argument.NameColon != null
                     || argument.RefOrOutKeyword.Kind() != SyntaxKind.None
-                    || !argument.Expression.IsKind(
-                        SyntaxKind.IdentifierName,
-                        out IdentifierNameSyntax identifierName
-                    )
+                    || !argument.Expression
+                        .IsKind(SyntaxKind.IdentifierName, out IdentifierNameSyntax identifierName)
                 )
                 {
                     return false;
@@ -225,10 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             if (!lambdaMethod.ReturnsVoid)
             {
                 // Return type has to be covariant.
-                var conversion = document.SemanticModel.Compilation.ClassifyConversion(
-                    invocationMethod.ReturnType,
-                    lambdaMethod.ReturnType
-                );
+                var conversion = document.SemanticModel.Compilation
+                    .ClassifyConversion(invocationMethod.ReturnType, lambdaMethod.ReturnType);
                 if (!conversion.IsIdentityOrImplicitReference())
                 {
                     return false;
@@ -238,10 +234,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             // Parameter types have to be contravariant.
             for (var i = 0; i < lambdaMethod.Parameters.Length; i++)
             {
-                var conversion = document.SemanticModel.Compilation.ClassifyConversion(
-                    lambdaMethod.Parameters[i].Type,
-                    invocationMethod.Parameters[i].Type
-                );
+                var conversion = document.SemanticModel.Compilation
+                    .ClassifyConversion(
+                        lambdaMethod.Parameters[i].Type,
+                        invocationMethod.Parameters[i].Type
+                    );
 
                 if (!conversion.IsIdentityOrImplicitReference())
                 {

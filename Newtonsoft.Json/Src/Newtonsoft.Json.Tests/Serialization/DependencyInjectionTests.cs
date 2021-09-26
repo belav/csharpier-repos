@@ -178,10 +178,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             // attempt to create the contact from the resolved type
             IComponentRegistration registration;
             if (
-                _container.ComponentRegistry.TryGetRegistration(
-                    new TypedService(objectType),
-                    out registration
-                )
+                _container.ComponentRegistry
+                    .TryGetRegistration(new TypedService(objectType), out registration)
             )
             {
                 Type viewType = (registration.Activator as ReflectionActivator)?.LimitType;
@@ -225,13 +223,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             builder.RegisterType<TaskRepository>().As<ITaskRepository>();
             builder.RegisterType<TaskController>();
             builder.Register(
-                    c =>
-                    {
-                        count++;
-                        return new LogManager(new DateTime(2000, 12, 12));
-                    }
-                )
-                .As<ILogger>();
+                c =>
+                {
+                    count++;
+                    return new LogManager(new DateTime(2000, 12, 12));
+                }
+            ).As<ILogger>();
 
             IContainer container = builder.Build();
 
@@ -262,22 +259,20 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             ContainerBuilder builder = new ContainerBuilder();
             builder.Register(
-                    c =>
-                    {
-                        count++;
-                        return new TaskRepository();
-                    }
-                )
-                .As<ITaskRepository>();
+                c =>
+                {
+                    count++;
+                    return new TaskRepository();
+                }
+            ).As<ITaskRepository>();
             builder.RegisterType<HasSettableProperty>();
             builder.Register(
-                    c =>
-                    {
-                        count++;
-                        return new LogManager(new DateTime(2000, 12, 12));
-                    }
-                )
-                .As<ILogger>();
+                c =>
+                {
+                    count++;
+                    return new LogManager(new DateTime(2000, 12, 12));
+                }
+            ).As<ILogger>();
 
             IContainer container = builder.Build();
 

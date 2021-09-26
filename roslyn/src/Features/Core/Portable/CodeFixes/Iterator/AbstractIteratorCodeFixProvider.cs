@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Iterator
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken)
+            var root = await context.Document
+                .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             if (!TryGetNode(root, context.Span, out var node))
             {
@@ -41,12 +42,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Iterator
             var diagnostic = context.Diagnostics.FirstOrDefault();
 
             var codeAction = await GetCodeFixAsync(
-                    root,
-                    node,
-                    context.Document,
-                    diagnostic,
-                    context.CancellationToken
-                )
+                root,
+                node,
+                context.Document,
+                diagnostic,
+                context.CancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (codeAction != null)

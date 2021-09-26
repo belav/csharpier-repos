@@ -49,23 +49,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         private const string SmallData1 = "Hello ESENT";
         private const string SmallData2 = "Goodbye ESENT";
 
-        private static readonly string MediumData1 = string.Join(
-            ",",
-            Enumerable.Repeat(SmallData1, MediumSize / SmallData1.Length)
-        );
-        private static readonly string MediumData2 = string.Join(
-            ",",
-            Enumerable.Repeat(SmallData2, MediumSize / SmallData2.Length)
-        );
+        private static readonly string MediumData1 = string
+            .Join(",", Enumerable.Repeat(SmallData1, MediumSize / SmallData1.Length));
+        private static readonly string MediumData2 = string
+            .Join(",", Enumerable.Repeat(SmallData2, MediumSize / SmallData2.Length));
 
-        private static readonly string LargeData1 = string.Join(
-            ",",
-            Enumerable.Repeat(SmallData1, LargeSize / SmallData1.Length)
-        );
-        private static readonly string LargeData2 = string.Join(
-            ",",
-            Enumerable.Repeat(SmallData2, LargeSize / SmallData2.Length)
-        );
+        private static readonly string LargeData1 = string
+            .Join(",", Enumerable.Repeat(SmallData1, LargeSize / SmallData1.Length));
+        private static readonly string LargeData2 = string
+            .Join(",", Enumerable.Repeat(SmallData2, LargeSize / SmallData2.Length));
 
         private static readonly Checksum s_checksum1 = Checksum.Create("1");
         private static readonly Checksum s_checksum2 = Checksum.Create("2");
@@ -389,11 +381,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                         EncodeString(s)
                     )
             );
-            var value = int.Parse(
-                ReadStringToEnd(
-                    await storage.ReadStreamAsync(solution.Projects.Single(), streamName1)
-                )
-            );
+            var value = int
+                .Parse(
+                    ReadStringToEnd(
+                        await storage.ReadStreamAsync(solution.Projects.Single(), streamName1)
+                    )
+                );
             Assert.True(value >= 0);
             Assert.True(value < NumThreads);
         }
@@ -414,14 +407,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                         EncodeString(s)
                     )
             );
-            var value = int.Parse(
-                ReadStringToEnd(
-                    await storage.ReadStreamAsync(
-                        solution.Projects.Single().Documents.Single(),
-                        streamName1
+            var value = int
+                .Parse(
+                    ReadStringToEnd(
+                        await storage.ReadStreamAsync(
+                            solution.Projects.Single().Documents.Single(),
+                            streamName1
+                        )
                     )
-                )
-            );
+                );
             Assert.True(value >= 0);
             Assert.True(value < NumThreads);
         }
@@ -1450,9 +1444,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         public void CacheDirectoryShouldNotBeAtRoot()
         {
             var workspace = new AdhocWorkspace(
-                FeaturesTestCompositions.Features.AddParts(
-                        typeof(TestPersistentStorageLocationService)
-                    )
+                FeaturesTestCompositions.Features
+                    .AddParts(typeof(TestPersistentStorageLocationService))
                     .GetHostServices()
             );
             workspace.AddSolution(
@@ -1463,8 +1456,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                 )
             );
 
-            var locationService =
-                workspace.Services.GetRequiredService<IPersistentStorageLocationService>();
+            var locationService = workspace.Services
+                .GetRequiredService<IPersistentStorageLocationService>();
             var location = locationService.TryGetStorageLocation(workspace.CurrentSolution);
             Assert.False(location?.StartsWith("/") ?? false);
         }

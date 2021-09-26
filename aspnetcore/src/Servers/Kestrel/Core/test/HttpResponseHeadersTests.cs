@@ -306,11 +306,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         private static long ParseLong(string value)
         {
-            return long.Parse(
-                value,
-                NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
-                CultureInfo.InvariantCulture
-            );
+            return long
+                .Parse(
+                    value,
+                    NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
+                    CultureInfo.InvariantCulture
+                );
         }
 
         public static TheoryData<string> GoodContentLengths =>

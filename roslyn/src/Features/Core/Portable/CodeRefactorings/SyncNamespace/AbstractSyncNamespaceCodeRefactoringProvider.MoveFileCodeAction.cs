@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
 
             public override string Title =>
                 _newfolders.Length > 0
-                    ? string.Format(
+                    ? string
+                      .Format(
                           FeaturesResources.Move_file_to_0,
                           string.Join(PathUtilities.DirectorySeparatorStr, _newfolders)
                       )

@@ -59,10 +59,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
             var name =
                 "(IUnknown*)0x"
-                + string.Format(
-                    IntPtr.Size == 4 ? "{0:x8}" : "{0:x16}",
-                    comObject.NativeComPointer
-                );
+                + string
+                    .Format(IntPtr.Size == 4 ? "{0:x8}" : "{0:x16}", comObject.NativeComPointer);
             var fullName = "{C++}" + name;
 
             return new EvalResult(

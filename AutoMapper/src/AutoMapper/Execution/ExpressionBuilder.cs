@@ -14,12 +14,10 @@ namespace AutoMapper.Execution
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class ExpressionBuilder
     {
-        public static readonly MethodInfo ObjectToString = typeof(object).GetMethod(
-            nameof(object.ToString)
-        );
-        private static readonly MethodInfo DisposeMethod = typeof(IDisposable).GetMethod(
-            nameof(IDisposable.Dispose)
-        );
+        public static readonly MethodInfo ObjectToString = typeof(object)
+            .GetMethod(nameof(object.ToString));
+        private static readonly MethodInfo DisposeMethod = typeof(IDisposable)
+            .GetMethod(nameof(IDisposable.Dispose));
         public static readonly Expression False = Constant(false, typeof(bool));
         public static readonly Expression True = Constant(true, typeof(bool));
         public static readonly Expression Null = Constant(null, typeof(object));
@@ -35,41 +33,24 @@ namespace AutoMapper.Execution
         );
         public static readonly MethodInfo IListClear = typeof(IList).GetMethod(nameof(IList.Clear));
         public static readonly MethodInfo IListAdd = typeof(IList).GetMethod(nameof(IList.Add));
-        public static readonly MethodInfo IncTypeDepthInfo = typeof(ResolutionContext).GetMethod(
-            nameof(ResolutionContext.IncrementTypeDepth),
-            TypeExtensions.InstanceFlags
-        );
-        public static readonly MethodInfo DecTypeDepthInfo = typeof(ResolutionContext).GetMethod(
-            nameof(ResolutionContext.DecrementTypeDepth),
-            TypeExtensions.InstanceFlags
-        );
-        public static readonly MethodInfo ContextCreate = typeof(ResolutionContext).GetMethod(
-            nameof(ResolutionContext.CreateInstance),
-            TypeExtensions.InstanceFlags
-        );
-        public static readonly MethodInfo OverTypeDepthMethod = typeof(ResolutionContext).GetMethod(
-            nameof(ResolutionContext.OverTypeDepth),
-            TypeExtensions.InstanceFlags
-        );
-        public static readonly MethodInfo CacheDestinationMethod =
-            typeof(ResolutionContext).GetMethod(
-                nameof(ResolutionContext.CacheDestination),
-                TypeExtensions.InstanceFlags
-            );
-        public static readonly MethodInfo GetDestinationMethod =
-            typeof(ResolutionContext).GetMethod(
-                nameof(ResolutionContext.GetDestination),
-                TypeExtensions.InstanceFlags
-            );
-        private static readonly MethodInfo CheckContextMethod =
-            typeof(ResolutionContext).GetStaticMethod(nameof(ResolutionContext.CheckContext));
-        private static readonly MethodInfo ContextMapMethod = typeof(ResolutionContext).GetMethod(
-            nameof(ResolutionContext.MapInternal),
-            TypeExtensions.InstanceFlags
-        );
-        private static readonly MethodInfo ArrayEmptyMethod = typeof(Array).GetStaticMethod(
-            nameof(Array.Empty)
-        );
+        public static readonly MethodInfo IncTypeDepthInfo = typeof(ResolutionContext)
+            .GetMethod(nameof(ResolutionContext.IncrementTypeDepth), TypeExtensions.InstanceFlags);
+        public static readonly MethodInfo DecTypeDepthInfo = typeof(ResolutionContext)
+            .GetMethod(nameof(ResolutionContext.DecrementTypeDepth), TypeExtensions.InstanceFlags);
+        public static readonly MethodInfo ContextCreate = typeof(ResolutionContext)
+            .GetMethod(nameof(ResolutionContext.CreateInstance), TypeExtensions.InstanceFlags);
+        public static readonly MethodInfo OverTypeDepthMethod = typeof(ResolutionContext)
+            .GetMethod(nameof(ResolutionContext.OverTypeDepth), TypeExtensions.InstanceFlags);
+        public static readonly MethodInfo CacheDestinationMethod = typeof(ResolutionContext)
+            .GetMethod(nameof(ResolutionContext.CacheDestination), TypeExtensions.InstanceFlags);
+        public static readonly MethodInfo GetDestinationMethod = typeof(ResolutionContext)
+            .GetMethod(nameof(ResolutionContext.GetDestination), TypeExtensions.InstanceFlags);
+        private static readonly MethodInfo CheckContextMethod = typeof(ResolutionContext)
+            .GetStaticMethod(nameof(ResolutionContext.CheckContext));
+        private static readonly MethodInfo ContextMapMethod = typeof(ResolutionContext)
+            .GetMethod(nameof(ResolutionContext.MapInternal), TypeExtensions.InstanceFlags);
+        private static readonly MethodInfo ArrayEmptyMethod = typeof(Array)
+            .GetStaticMethod(nameof(Array.Empty));
 
         public static Expression MapExpression(
             this IGlobalConfiguration configurationProvider,
@@ -176,9 +157,8 @@ namespace AutoMapper.Execution
                             return destinationParameter;
                         }
                         var destinationElementType = GetEnumerableElementType(destinationType);
-                        destinationCollectionType = typeof(ICollection<>).MakeGenericType(
-                            destinationElementType
-                        );
+                        destinationCollectionType = typeof(ICollection<>)
+                            .MakeGenericType(destinationElementType);
                         collection = Convert(collection, destinationCollectionType);
                     }
                     clearMethod = destinationCollectionType.GetMethod("Clear");
@@ -276,9 +256,8 @@ namespace AutoMapper.Execution
                         source,
                         (current, vtConfig) =>
                             ToType(
-                                vtConfig.TransformerExpression.ReplaceParameters(
-                                    ToType(current, vtConfig.ValueType)
-                                ),
+                                vtConfig.TransformerExpression
+                                    .ReplaceParameters(ToType(current, vtConfig.ValueType)),
                                 memberMap.DestinationType
                             )
                     );

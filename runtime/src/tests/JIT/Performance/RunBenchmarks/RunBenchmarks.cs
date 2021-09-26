@@ -774,10 +774,8 @@ namespace BenchmarkConsoleApplication
             foreach (var benchmark in benchmarkList)
             {
                 string benchmarksRootDirectory = Controls.BenchmarksRootDirectory;
-                string benchmarkDirectory = System.IO.Path.Combine(
-                    benchmarksRootDirectory,
-                    benchmark.WorkingDirectory
-                );
+                string benchmarkDirectory = System.IO.Path
+                    .Combine(benchmarksRootDirectory, benchmark.WorkingDirectory);
                 string workingDirectory = benchmarkDirectory;
                 string executableName = System.IO.Path.Combine(workingDirectory, benchmark.ExeName);
 
@@ -870,10 +868,8 @@ namespace BenchmarkConsoleApplication
             bool doVerbose = Controls.DoVerbose;
             string complusVersion = Controls.ComplusVersion;
             string benchmarksRootDirectory = Controls.BenchmarksRootDirectory;
-            string benchmarkDirectory = System.IO.Path.Combine(
-                benchmarksRootDirectory,
-                benchmark.WorkingDirectory
-            );
+            string benchmarkDirectory = System.IO.Path
+                .Combine(benchmarksRootDirectory, benchmark.WorkingDirectory);
             bool doRunInShell = benchmark.DoRunInShell;
             bool useSSE = benchmark.UseSSE;
             bool useAVX = benchmark.UseAVX;

@@ -37,14 +37,8 @@ namespace System.Threading
                     SR.PlatformNotSupported_NamedSynchronizationPrimitives
                 );
 #endif
-            SafeWaitHandle myHandle = Interop.Kernel32.CreateSemaphoreEx(
-                IntPtr.Zero,
-                initialCount,
-                maximumCount,
-                name,
-                0,
-                AccessRights
-            );
+            SafeWaitHandle myHandle = Interop.Kernel32
+                .CreateSemaphoreEx(IntPtr.Zero, initialCount, maximumCount, name, 0, AccessRights);
 
             int errorCode = Marshal.GetLastWin32Error();
             if (myHandle.IsInvalid)
@@ -104,11 +98,8 @@ namespace System.Threading
         private int ReleaseCore(int releaseCount)
         {
             if (
-                !Interop.Kernel32.ReleaseSemaphore(
-                    SafeWaitHandle!,
-                    releaseCount,
-                    out int previousCount
-                )
+                !Interop.Kernel32
+                    .ReleaseSemaphore(SafeWaitHandle!, releaseCount, out int previousCount)
             )
                 throw new SemaphoreFullException();
 

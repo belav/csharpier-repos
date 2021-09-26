@@ -47,20 +47,22 @@ namespace System.Text.Unicode
                 return false;
             }
 
-            uint firstCodePoint = uint.Parse(
-                match.Groups["firstCodePoint"].Value,
-                NumberStyles.HexNumber,
-                CultureInfo.InvariantCulture
-            );
+            uint firstCodePoint = uint
+                .Parse(
+                    match.Groups["firstCodePoint"].Value,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture
+                );
             uint lastCodePoint = firstCodePoint; // assume no "..YYYY" segment for now
 
             if (match.Groups["lastCodePoint"].Success)
             {
-                lastCodePoint = uint.Parse(
-                    match.Groups["lastCodePoint"].Value,
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture
-                );
+                lastCodePoint = uint
+                    .Parse(
+                        match.Groups["lastCodePoint"].Value,
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture
+                    );
             }
 
             value = new PropsFileEntry(

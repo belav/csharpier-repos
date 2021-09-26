@@ -247,9 +247,8 @@ namespace Microsoft.EntityFrameworkCore
 
                 var wrappedCommand = eventData.Connection.CreateCommand();
 
-                return InterceptionResult<DbCommand>.SuppressWithResult(
-                    new WrappingDbCommand(wrappedCommand)
-                );
+                return InterceptionResult<DbCommand>
+                    .SuppressWithResult(new WrappingDbCommand(wrappedCommand));
             }
 
             public override InterceptionResult<DbDataReader> ReaderExecuting(
@@ -664,9 +663,8 @@ namespace Microsoft.EntityFrameworkCore
                 base.ReaderExecuting(command, eventData, result);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
-                return InterceptionResult<DbDataReader>.SuppressWithResult(
-                    CreateNewCommand(command).ExecuteReader()
-                );
+                return InterceptionResult<DbDataReader>
+                    .SuppressWithResult(CreateNewCommand(command).ExecuteReader());
             }
 
             public override async ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(
@@ -679,9 +677,10 @@ namespace Microsoft.EntityFrameworkCore
                 await base.ReaderExecutingAsync(command, eventData, result, cancellationToken);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
-                return InterceptionResult<DbDataReader>.SuppressWithResult(
-                    await CreateNewCommand(command).ExecuteReaderAsync(cancellationToken)
-                );
+                return InterceptionResult<DbDataReader>
+                    .SuppressWithResult(
+                        await CreateNewCommand(command).ExecuteReaderAsync(cancellationToken)
+                    );
             }
 
             private static DbCommand CreateNewCommand(DbCommand command)
@@ -751,9 +750,8 @@ namespace Microsoft.EntityFrameworkCore
                 base.ScalarExecuting(command, eventData, result);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
-                return InterceptionResult<object>.SuppressWithResult(
-                    CreateNewCommand(command).ExecuteScalar()
-                );
+                return InterceptionResult<object>
+                    .SuppressWithResult(CreateNewCommand(command).ExecuteScalar());
             }
 
             public override async ValueTask<InterceptionResult<object>> ScalarExecutingAsync(
@@ -766,9 +764,10 @@ namespace Microsoft.EntityFrameworkCore
                 await base.ScalarExecutingAsync(command, eventData, result, cancellationToken);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
-                return InterceptionResult<object>.SuppressWithResult(
-                    await CreateNewCommand(command).ExecuteScalarAsync(cancellationToken)
-                );
+                return InterceptionResult<object>
+                    .SuppressWithResult(
+                        await CreateNewCommand(command).ExecuteScalarAsync(cancellationToken)
+                    );
             }
 
             private static DbCommand CreateNewCommand(DbCommand command)
@@ -834,9 +833,8 @@ namespace Microsoft.EntityFrameworkCore
                 base.NonQueryExecuting(command, eventData, result);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
-                return InterceptionResult<int>.SuppressWithResult(
-                    CreateNewCommand(command).ExecuteNonQuery()
-                );
+                return InterceptionResult<int>
+                    .SuppressWithResult(CreateNewCommand(command).ExecuteNonQuery());
             }
 
             public override async ValueTask<InterceptionResult<int>> NonQueryExecutingAsync(
@@ -849,9 +847,10 @@ namespace Microsoft.EntityFrameworkCore
                 await base.NonQueryExecutingAsync(command, eventData, result, cancellationToken);
 
                 // Note: this DbCommand will not get disposed...can be problematic on some providers
-                return InterceptionResult<int>.SuppressWithResult(
-                    await CreateNewCommand(command).ExecuteNonQueryAsync(cancellationToken)
-                );
+                return InterceptionResult<int>
+                    .SuppressWithResult(
+                        await CreateNewCommand(command).ExecuteNonQueryAsync(cancellationToken)
+                    );
             }
 
             private DbCommand CreateNewCommand(DbCommand command)

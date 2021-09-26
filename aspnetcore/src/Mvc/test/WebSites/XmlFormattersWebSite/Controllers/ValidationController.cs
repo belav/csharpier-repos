@@ -53,12 +53,13 @@ namespace XmlFormattersWebSite
                         if (errorMessage != null)
                         {
                             allErrorMessages.Add(
-                                string.Format(
-                                    CultureInfo.InvariantCulture,
-                                    "{0}:{1}",
-                                    key,
-                                    errorMessage
-                                )
+                                string
+                                    .Format(
+                                        CultureInfo.InvariantCulture,
+                                        "{0}:{1}",
+                                        key,
+                                        errorMessage
+                                    )
                             );
                         }
                     }

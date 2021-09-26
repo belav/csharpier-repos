@@ -384,7 +384,8 @@ namespace Microsoft.Net.Http.Headers
                 new NameValueHeaderValue("name", "value7"),
                 new NameValueHeaderValue("name", "\"value 8\""),
                 new NameValueHeaderValue("name", "\"value 9\""),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -417,7 +418,8 @@ namespace Microsoft.Net.Http.Headers
                 new NameValueHeaderValue("name", "value7"),
                 new NameValueHeaderValue("name", "\"value 8\""),
                 new NameValueHeaderValue("name", "\"value 9\""),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -450,7 +452,8 @@ namespace Microsoft.Net.Http.Headers
                 new NameValueHeaderValue("name", "value7"),
                 new NameValueHeaderValue("name", "\"value 8\""),
                 new NameValueHeaderValue("name", "\"value 9\""),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -483,7 +486,8 @@ namespace Microsoft.Net.Http.Headers
                 new NameValueHeaderValue("name", "value7"),
                 new NameValueHeaderValue("name", "\"value 8\""),
                 new NameValueHeaderValue("name", "\"value 9\""),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -519,7 +523,8 @@ namespace Microsoft.Net.Http.Headers
                 new NameValueHeaderValue("name9", "value9"),
                 new NameValueHeaderValue("name10", "\"value 10\""),
                 new NameValueHeaderValue("name11", "\"value 11\""),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -573,7 +578,8 @@ namespace Microsoft.Net.Http.Headers
                 new NameValueHeaderValue("name9", "value9"),
                 new NameValueHeaderValue("name10", "\"value 10\""),
                 new NameValueHeaderValue("name11", "\"value 11\""),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }

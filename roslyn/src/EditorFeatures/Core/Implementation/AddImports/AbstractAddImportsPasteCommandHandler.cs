@@ -48,9 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
         )
         {
             // Check that the feature is enabled before doing any work
-            var optionValue = args.SubjectBuffer.GetOptionalFeatureOnOffOption(
-                FeatureOnOffOptions.AddImportsOnPaste
-            );
+            var optionValue = args.SubjectBuffer
+                .GetOptionalFeatureOnOffOption(FeatureOnOffOptions.AddImportsOnPaste);
 
             // If the feature is explicitly disabled we can exit early
             if (optionValue.HasValue && !optionValue.Value)
@@ -68,11 +67,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
             }
 
             // Create a tracking span from the pre-paste caret position that will grow as text is inserted.
-            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(
-                caretPosition.Value.Position,
-                0,
-                SpanTrackingMode.EdgeInclusive
-            );
+            var trackingSpan = caretPosition.Value.Snapshot
+                .CreateTrackingSpan(
+                    caretPosition.Value.Position,
+                    0,
+                    SpanTrackingMode.EdgeInclusive
+                );
 
             // Perform the paste command before adding imports
             nextCommandHandler();
@@ -128,8 +128,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
                 return;
             }
 
-            var experimentationService =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IExperimentationService>();
+            var experimentationService = document.Project.Solution.Workspace.Services
+                .GetRequiredService<IExperimentationService>();
             var enabled =
                 optionValue.HasValue && optionValue.Value
                 || experimentationService.IsExperimentEnabled(
@@ -141,10 +141,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
                 return;
             }
 
-            using var _ = executionContext.OperationContext.AddScope(
-                allowCancellation: true,
-                DialogText
-            );
+            using var _ = executionContext.OperationContext
+                .AddScope(allowCancellation: true, DialogText);
             var cancellationToken = executionContext.OperationContext.UserCancellationToken;
 
             // We're going to log the same thing on success or failure since this blocks the UI thread. This measurement is
@@ -158,14 +156,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
             var addMissingImportsService =
                 document.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
 #pragma warning disable VSTHRD102 // Implement internal logic asynchronously
-            var updatedDocument = _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    addMissingImportsService.AddMissingImportsAsync(
-                        document,
-                        textSpan,
-                        cancellationToken
-                    )
-            );
+            var updatedDocument = _threadingContext.JoinableTaskFactory
+                .Run(
+                    () =>
+                        addMissingImportsService.AddMissingImportsAsync(
+                            document,
+                            textSpan,
+                            cancellationToken
+                        )
+                );
 #pragma warning restore VSTHRD102 // Implement internal logic asynchronously
             if (updatedDocument is null)
             {

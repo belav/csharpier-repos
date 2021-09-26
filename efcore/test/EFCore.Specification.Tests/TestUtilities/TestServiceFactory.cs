@@ -50,11 +50,11 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             var exceptions = specialCases.Concat(_wellKnownExceptions).ToList();
 
             return _factories.GetOrAdd(
-                    typeof(TService),
-                    t =>
-                        AddType(new ServiceCollection(), typeof(TService), exceptions)
-                            .BuildServiceProvider()
-                )
+                typeof(TService),
+                t =>
+                    AddType(new ServiceCollection(), typeof(TService), exceptions)
+                        .BuildServiceProvider()
+            )
                 .GetService<TService>();
         }
 
@@ -126,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             var elementType = TryGetEnumerableType(serviceType);
 
-            var implementationTypes = (elementType ?? serviceType).Assembly.GetTypes()
+            var implementationTypes = (elementType ?? serviceType).Assembly
+                .GetTypes()
                 .Where(t => (elementType ?? serviceType).IsAssignableFrom(t) && !t.IsAbstract)
                 .ToList();
 

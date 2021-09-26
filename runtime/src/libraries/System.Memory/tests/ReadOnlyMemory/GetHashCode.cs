@@ -58,7 +58,8 @@ namespace System.MemoryTests
 
             ReadOnlyMemory<int> memoryFromNonEmptyArrayButWithZeroLength = new Memory<int>(
                 new int[1] { 123 }
-            ).Slice(0, 0);
+            )
+                .Slice(0, 0);
 
             Assert.NotEqual(left.GetHashCode(), right.GetHashCode());
             Assert.NotEqual(

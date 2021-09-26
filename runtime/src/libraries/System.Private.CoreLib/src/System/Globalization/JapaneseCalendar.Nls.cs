@@ -183,24 +183,27 @@ namespace System.Globalization
 
             ReadOnlySpan<char> valueSpan = value.AsSpan();
             if (
-                !int.TryParse(
-                    valueSpan.Slice(0, 4),
-                    NumberStyles.None,
-                    NumberFormatInfo.InvariantInfo,
-                    out int year
-                )
-                || !int.TryParse(
-                    valueSpan.Slice(5, 2),
-                    NumberStyles.None,
-                    NumberFormatInfo.InvariantInfo,
-                    out int month
-                )
-                || !int.TryParse(
-                    valueSpan.Slice(8, 2),
-                    NumberStyles.None,
-                    NumberFormatInfo.InvariantInfo,
-                    out int day
-                )
+                !int
+                    .TryParse(
+                        valueSpan.Slice(0, 4),
+                        NumberStyles.None,
+                        NumberFormatInfo.InvariantInfo,
+                        out int year
+                    )
+                || !int
+                    .TryParse(
+                        valueSpan.Slice(5, 2),
+                        NumberStyles.None,
+                        NumberFormatInfo.InvariantInfo,
+                        out int month
+                    )
+                || !int
+                    .TryParse(
+                        valueSpan.Slice(8, 2),
+                        NumberStyles.None,
+                        NumberFormatInfo.InvariantInfo,
+                        out int day
+                    )
             )
             {
                 // Couldn't convert integer, fail

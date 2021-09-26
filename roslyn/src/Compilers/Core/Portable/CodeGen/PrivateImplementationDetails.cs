@@ -135,9 +135,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             // Sort fields.
             ArrayBuilder<SynthesizedStaticField> fieldsBuilder =
-                ArrayBuilder<SynthesizedStaticField>.GetInstance(
-                    _mappedFields.Count + (_mvidField != null ? 1 : 0)
-                );
+                ArrayBuilder<SynthesizedStaticField>
+                    .GetInstance(_mappedFields.Count + (_mvidField != null ? 1 : 0));
             fieldsBuilder.AddRange(_mappedFields.Values);
             if (_mvidField != null)
             {

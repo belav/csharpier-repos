@@ -652,9 +652,9 @@ ILocalFunctionOperation (Symbol: System.Object F()) (OperationKind.LocalFunction
                 // error CS8057: Block bodies and expression bodies cannot both be provided.
                 //         /*<bind>*/object F() { return new object(); } => null;/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        "object F() { return new object(); } => null;"
-                    )
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    "object F() { return new object(); } => null;"
+                )
                     .WithLocation(6, 19),
                 // warning CS8321: The local function 'F' is declared but never used
                 //         /*<bind>*/object F() { return new object(); } => null;/*</bind>*/;
@@ -1153,14 +1153,13 @@ Block[B2] - Exit
                 // file.cs(7,9): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //         void local(bool result, bool input1, bool input2)
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"void local(bool result, bool input1, bool input2)
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"void local(bool result, bool input1, bool input2)
         {
             result = input1;
         } 
         => result = input2;"
-                    )
-                    .WithLocation(7, 9)
+                ).WithLocation(7, 9)
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(

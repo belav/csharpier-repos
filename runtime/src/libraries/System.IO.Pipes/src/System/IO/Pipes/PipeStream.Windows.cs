@@ -274,11 +274,12 @@ namespace System.IO.Pipes
         {
             string normalizedPipePath = Path.GetFullPath(@"\\" + serverName + @"\pipe\" + pipeName);
             if (
-                string.Equals(
-                    normalizedPipePath,
-                    @"\\.\pipe\" + AnonymousPipeName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        normalizedPipePath,
+                        @"\\.\pipe\" + AnonymousPipeName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 throw new ArgumentOutOfRangeException(
@@ -593,12 +594,13 @@ namespace System.IO.Pipes
                 {
                     int pipeReadType = (int)value << 1;
                     if (
-                        !Interop.Kernel32.SetNamedPipeHandleState(
-                            _handle!,
-                            &pipeReadType,
-                            IntPtr.Zero,
-                            IntPtr.Zero
-                        )
+                        !Interop.Kernel32
+                            .SetNamedPipeHandleState(
+                                _handle!,
+                                &pipeReadType,
+                                IntPtr.Zero,
+                                IntPtr.Zero
+                            )
                     )
                     {
                         throw WinIOError(Marshal.GetLastWin32Error());
@@ -638,13 +640,8 @@ namespace System.IO.Pipes
             {
                 r = _isAsync
                     ? Interop.Kernel32.ReadFile(handle, p, buffer.Length, IntPtr.Zero, overlapped)
-                    : Interop.Kernel32.ReadFile(
-                          handle,
-                          p,
-                          buffer.Length,
-                          out numBytesRead,
-                          IntPtr.Zero
-                      );
+                    : Interop.Kernel32
+                      .ReadFile(handle, p, buffer.Length, out numBytesRead, IntPtr.Zero);
             }
 
             if (r == 0)
@@ -687,13 +684,8 @@ namespace System.IO.Pipes
             {
                 r = _isAsync
                     ? Interop.Kernel32.WriteFile(handle, p, buffer.Length, IntPtr.Zero, overlapped)
-                    : Interop.Kernel32.WriteFile(
-                          handle,
-                          p,
-                          buffer.Length,
-                          out numBytesWritten,
-                          IntPtr.Zero
-                      );
+                    : Interop.Kernel32
+                      .WriteFile(handle, p, buffer.Length, out numBytesWritten, IntPtr.Zero);
             }
 
             if (r == 0)
@@ -752,15 +744,8 @@ namespace System.IO.Pipes
         {
             uint flags;
             if (
-                !Interop.Kernel32.GetNamedPipeHandleStateW(
-                    SafePipeHandle,
-                    &flags,
-                    null,
-                    null,
-                    null,
-                    null,
-                    0
-                )
+                !Interop.Kernel32
+                    .GetNamedPipeHandleStateW(SafePipeHandle, &flags, null, null, null, null, 0)
             )
             {
                 throw WinIOError(Marshal.GetLastWin32Error());

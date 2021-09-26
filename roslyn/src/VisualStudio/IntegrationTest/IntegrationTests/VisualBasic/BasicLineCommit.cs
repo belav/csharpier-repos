@@ -132,18 +132,12 @@ End Module"
 
             VisualStudio.Editor.PlaceCaret("End Sub", charsOffset: -1);
             VisualStudio.Editor.SendKeys(" ");
-            VisualStudio.SolutionExplorer.AddFile(
-                new ProjName(ProjectName),
-                "TestZ.vb",
-                open: true
-            ); // Cause focus lost
+            VisualStudio.SolutionExplorer
+                .AddFile(new ProjName(ProjectName), "TestZ.vb", open: true); // Cause focus lost
             VisualStudio.SolutionExplorer.OpenFile(new ProjName(ProjectName), "TestZ.vb"); // Work around https://github.com/dotnet/roslyn/issues/18488
             VisualStudio.Editor.SendKeys("                  ");
-            VisualStudio.SolutionExplorer.CloseCodeFile(
-                new ProjName(ProjectName),
-                "TestZ.vb",
-                saveFile: false
-            );
+            VisualStudio.SolutionExplorer
+                .CloseCodeFile(new ProjName(ProjectName), "TestZ.vb", saveFile: false);
             VisualStudio.Editor.Verify.TextContains(
                 @"
     Sub M()
@@ -157,12 +151,13 @@ End Module"
         {
             try
             {
-                VisualStudio.Workspace.SetPerLanguageOption(
-                    "PrettyListing",
-                    "FeatureOnOffOptions",
-                    LanguageNames.VisualBasic,
-                    false
-                );
+                VisualStudio.Workspace
+                    .SetPerLanguageOption(
+                        "PrettyListing",
+                        "FeatureOnOffOptions",
+                        LanguageNames.VisualBasic,
+                        false
+                    );
                 VisualStudio.Editor.SetText(
                     @"Module M
     Sub M()
@@ -172,18 +167,12 @@ End Module"
 
                 VisualStudio.Editor.PlaceCaret("End Sub", charsOffset: -1);
                 VisualStudio.Editor.SendKeys(" ");
-                VisualStudio.SolutionExplorer.AddFile(
-                    new ProjName(ProjectName),
-                    "TestZ.vb",
-                    open: true
-                ); // Cause focus lost
+                VisualStudio.SolutionExplorer
+                    .AddFile(new ProjName(ProjectName), "TestZ.vb", open: true); // Cause focus lost
                 VisualStudio.SolutionExplorer.OpenFile(new ProjName(ProjectName), "TestZ.vb"); // Work around https://github.com/dotnet/roslyn/issues/18488
                 VisualStudio.Editor.SendKeys("                  ");
-                VisualStudio.SolutionExplorer.CloseCodeFile(
-                    new ProjName(ProjectName),
-                    "TestZ.vb",
-                    saveFile: false
-                );
+                VisualStudio.SolutionExplorer
+                    .CloseCodeFile(new ProjName(ProjectName), "TestZ.vb", saveFile: false);
                 VisualStudio.Editor.Verify.TextContains(
                     @"
     Sub M()
@@ -194,12 +183,13 @@ End Module"
 
             finally
             {
-                VisualStudio.Workspace.SetPerLanguageOption(
-                    "PrettyListing",
-                    "FeatureOnOffOptions",
-                    LanguageNames.VisualBasic,
-                    true
-                );
+                VisualStudio.Workspace
+                    .SetPerLanguageOption(
+                        "PrettyListing",
+                        "FeatureOnOffOptions",
+                        LanguageNames.VisualBasic,
+                        true
+                    );
             }
         }
     }

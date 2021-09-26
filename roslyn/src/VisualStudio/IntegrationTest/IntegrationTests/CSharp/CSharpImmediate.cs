@@ -29,11 +29,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.SolutionExplorer.CreateSolution(nameof(CSharpInteractive));
             var testProj = new ProjectUtils.Project("TestProj");
-            VisualStudio.SolutionExplorer.AddProject(
-                testProj,
-                WellKnownProjectTemplates.ConsoleApplication,
-                LanguageNames.CSharp
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    testProj,
+                    WellKnownProjectTemplates.ConsoleApplication,
+                    LanguageNames.CSharp
+                );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/25814")]
@@ -52,18 +53,17 @@ class Program
 "
             );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
             VisualStudio.Debugger.SetBreakPoint("Program.cs", "}");
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.ImmediateWindow.ShowImmediateWindow(clearAll: true);
             VisualStudio.SendKeys.Send("?n");
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.CompletionSet
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.CompletionSet
+                );
             VisualStudio.SendKeys.Send("1", VirtualKey.Tab, VirtualKey.Enter);
             Assert.Contains("?n1Var\r\n42", VisualStudio.ImmediateWindow.GetText());
         }

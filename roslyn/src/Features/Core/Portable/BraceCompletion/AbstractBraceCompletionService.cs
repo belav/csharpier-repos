@@ -58,11 +58,11 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
                 .ConfigureAwait(false);
             var token = root.FindToken(openingPoint, findInsideTrivia: true);
             var validOpeningPoint = await IsValidOpenBraceTokenAtPositionAsync(
-                    token,
-                    openingPoint,
-                    document,
-                    cancellationToken
-                )
+                token,
+                openingPoint,
+                document,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!validOpeningPoint)
             {
@@ -170,10 +170,11 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             CancellationToken cancellationToken
         )
         {
-            var tree = await context.Document.GetRequiredSyntaxTreeAsync(cancellationToken)
+            var tree = await context.Document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var syntaxFactsService =
-                context.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+            var syntaxFactsService = context.Document
+                .GetRequiredLanguageService<ISyntaxFactsService>();
 
             return !syntaxFactsService.IsInNonUserCode(
                     tree,
@@ -181,10 +182,10 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
                     cancellationToken
                 )
                 && await CheckClosingTokenKindAsync(
-                        context.Document,
-                        context.ClosingPoint,
-                        cancellationToken
-                    )
+                    context.Document,
+                    context.ClosingPoint,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
         }
 

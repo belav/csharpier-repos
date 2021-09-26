@@ -200,16 +200,17 @@ namespace System.StubHelpers
             fixed (char* pwzChar = strManaged)
             {
 #if TARGET_WINDOWS
-                cbWritten = Interop.Kernel32.WideCharToMultiByte(
-                    Interop.Kernel32.CP_ACP,
-                    bestFit ? 0 : Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
-                    pwzChar,
-                    numChars,
-                    buffer,
-                    length,
-                    IntPtr.Zero,
-                    throwOnUnmappableChar ? new IntPtr(&defaultCharUsed) : IntPtr.Zero
-                );
+                cbWritten = Interop.Kernel32
+                    .WideCharToMultiByte(
+                        Interop.Kernel32.CP_ACP,
+                        bestFit ? 0 : Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
+                        pwzChar,
+                        numChars,
+                        buffer,
+                        length,
+                        IntPtr.Zero,
+                        throwOnUnmappableChar ? new IntPtr(&defaultCharUsed) : IntPtr.Zero
+                    );
 #else
                 cbWritten = Encoding.UTF8.GetBytes(pwzChar, numChars, buffer, length);
 #endif
@@ -1266,10 +1267,8 @@ namespace System.StubHelpers
                         length = string.strlen((byte*)pNativeHome);
                     }
 
-                    ((StringBuilder)pManagedHome).ReplaceBufferAnsiInternal(
-                        (sbyte*)pNativeHome,
-                        length
-                    );
+                    ((StringBuilder)pManagedHome)
+                        .ReplaceBufferAnsiInternal((sbyte*)pNativeHome, length);
                     break;
                 }
 

@@ -487,14 +487,13 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,7): error CS0411: The type arguments for method 'C.Apply<T>(C.F<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //       Apply(delegate { while (true) { } });
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Apply")
-                        .WithArguments("C.Apply<T>(C.F<T>)")
-                        .WithLocation(8, 7)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,7): error CS0411: The type arguments for method 'C.Apply<T>(C.F<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //       Apply(delegate { while (true) { } });
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Apply")
+                    .WithArguments("C.Apply<T>(C.F<T>)")
+                    .WithLocation(8, 7)
+            );
         }
 
         [Fact, WorkItem(578362, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578362")]
@@ -642,13 +641,12 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,17): error CS0305: Using the generic method 'Program.Goo<T, U>(T, U)' requires 2 type arguments
-                    //         var s = Goo<>(123, 345);
-                    Diagnostic(ErrorCode.ERR_BadArity, "Goo<>")
-                        .WithArguments("Program.Goo<T, U>(T, U)", "method", "2")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,17): error CS0305: Using the generic method 'Program.Goo<T, U>(T, U)' requires 2 type arguments
+                //         var s = Goo<>(123, 345);
+                Diagnostic(ErrorCode.ERR_BadArity, "Goo<>")
+                    .WithArguments("Program.Goo<T, U>(T, U)", "method", "2")
+            );
         }
 
         [WorkItem(541887, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541887")]
@@ -672,17 +670,16 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,26): error CS1031: Type expected
-                    //         var s = Goo<int, >(123, 345);
-                    Diagnostic(ErrorCode.ERR_TypeExpected, ">"),
-                    // CONSIDER: we would prefer not to report this cascading diagnostic.
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,26): error CS1031: Type expected
+                //         var s = Goo<int, >(123, 345);
+                Diagnostic(ErrorCode.ERR_TypeExpected, ">"),
+                // CONSIDER: we would prefer not to report this cascading diagnostic.
 
-                    // (6,33): error CS1503: Argument 2: cannot convert from 'int' to '?'
-                    //         var s = Goo<int, >(123, 345);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "345").WithArguments("2", "int", "?")
-                );
+                // (6,33): error CS1503: Argument 2: cannot convert from 'int' to '?'
+                //         var s = Goo<int, >(123, 345);
+                Diagnostic(ErrorCode.ERR_BadArgType, "345").WithArguments("2", "int", "?")
+            );
         }
 
         [WorkItem(542591, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542591")]
@@ -700,11 +697,10 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,11): error CS0103: The name 'E' does not exist in the current context
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "E").WithArguments("E")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,11): error CS0103: The name 'E' does not exist in the current context
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "E").WithArguments("E")
+            );
         }
 
         [WorkItem(9145, "http://vstfdevdiv:8080/DevDiv_Projects/Roslyn/_workitems/edit/9145")]
@@ -763,9 +759,9 @@ class Program
 
 ";
             CreateCompilationWithMscorlib40(
-                    source,
-                    references: new[] { TestMetadata.Net40.SystemCore }
-                )
+                source,
+                references: new[] { TestMetadata.Net40.SystemCore }
+            )
                 .VerifyDiagnostics();
         }
 
@@ -810,16 +806,15 @@ public class Test
  
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,9): error CS0411: The type arguments for method 'Test.M<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         M(Main());
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M")
-                        .WithArguments("Test.M<T>(T)"),
-                    // (9,16): error CS1510: A ref or out argument must be an assignable variable
-                    //         M1(ref Main());
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "Main()")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,9): error CS0411: The type arguments for method 'Test.M<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M(Main());
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M")
+                    .WithArguments("Test.M<T>(T)"),
+                // (9,16): error CS1510: A ref or out argument must be an assignable variable
+                //         M1(ref Main());
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "Main()")
+            );
         }
 
         [WorkItem(717264, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/717264")]

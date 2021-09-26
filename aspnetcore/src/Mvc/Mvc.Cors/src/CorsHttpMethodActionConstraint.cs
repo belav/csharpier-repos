@@ -34,10 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
             if (
                 Http.HttpMethods.IsOptions(request.Method)
                 && request.Headers.ContainsKey(OriginHeader)
-                && request.Headers.TryGetValue(
-                    AccessControlRequestMethod,
-                    out var accessControlRequestMethod
-                )
+                && request.Headers
+                    .TryGetValue(AccessControlRequestMethod, out var accessControlRequestMethod)
                 && !StringValues.IsNullOrEmpty(accessControlRequestMethod)
             )
             {
@@ -47,11 +45,12 @@ namespace Microsoft.AspNetCore.Mvc.Cors
                 {
                     var supportedMethod = methods[i];
                     if (
-                        string.Equals(
-                            supportedMethod,
-                            accessControlRequestMethod,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                supportedMethod,
+                                accessControlRequestMethod,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         return true;

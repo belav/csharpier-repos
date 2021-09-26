@@ -36,12 +36,13 @@ namespace System.Net.Mime
                 {
                     long longValue;
                     if (
-                        !long.TryParse(
-                            value.ToString(),
-                            NumberStyles.None,
-                            CultureInfo.InvariantCulture,
-                            out longValue
-                        )
+                        !long
+                            .TryParse(
+                                value.ToString(),
+                                NumberStyles.None,
+                                CultureInfo.InvariantCulture,
+                                out longValue
+                            )
                     )
                     {
                         throw new FormatException(SR.ContentDispositionInvalid);
@@ -156,10 +157,8 @@ namespace System.Net.Mime
             set
             {
                 SmtpDateTime date = new SmtpDateTime(value);
-                ((TrackingValidationObjectDictionary)Parameters).InternalSet(
-                    ModificationDateKey,
-                    date
-                );
+                ((TrackingValidationObjectDictionary)Parameters)
+                    .InternalSet(ModificationDateKey, date);
             }
         }
 
@@ -195,9 +194,8 @@ namespace System.Net.Mime
         {
             get
             {
-                object? sizeValue = ((TrackingValidationObjectDictionary)Parameters).InternalGet(
-                    SizeKey
-                );
+                object? sizeValue = ((TrackingValidationObjectDictionary)Parameters)
+                    .InternalGet(SizeKey);
                 return sizeValue == null ? -1 : (long)sizeValue;
             }
             set { ((TrackingValidationObjectDictionary)Parameters).InternalSet(SizeKey, value); }

@@ -118,12 +118,13 @@ namespace System.Net
                 if (
                     addressLength == s.Length
                     || (
-                        uint.TryParse(
-                            s.Slice(addressLength + 1),
-                            NumberStyles.None,
-                            CultureInfo.InvariantCulture,
-                            out port
-                        )
+                        uint
+                            .TryParse(
+                                s.Slice(addressLength + 1),
+                                NumberStyles.None,
+                                CultureInfo.InvariantCulture,
+                                out port
+                            )
                         && port <= MaxPort
                     )
                 )
@@ -161,11 +162,8 @@ namespace System.Net
         {
             string format =
                 (_address.AddressFamily == AddressFamily.InterNetworkV6) ? "[{0}]:{1}" : "{0}:{1}";
-            return string.Format(
-                format,
-                _address.ToString(),
-                Port.ToString(NumberFormatInfo.InvariantInfo)
-            );
+            return string
+                .Format(format, _address.ToString(), Port.ToString(NumberFormatInfo.InvariantInfo));
         }
 
         public override SocketAddress Serialize() => new SocketAddress(Address, Port);

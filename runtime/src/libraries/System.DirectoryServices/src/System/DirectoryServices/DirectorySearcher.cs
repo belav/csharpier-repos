@@ -824,7 +824,8 @@ namespace System.DirectoryServices
                 info.vValue = new AdsValueHelper(
                     AttributeScopeQuery,
                     AdsType.ADSTYPE_CASE_IGNORE_STRING
-                ).GetStruct();
+                )
+                    .GetStruct();
                 prefList.Add(info);
             }
 
@@ -863,16 +864,16 @@ namespace System.DirectoryServices
                 info.vValue = new AdsValueHelper(
                     DirectorySynchronization!.GetDirectorySynchronizationCookie(),
                     AdsType.ADSTYPE_PROV_SPECIFIC
-                ).GetStruct();
+                )
+                    .GetStruct();
                 prefList.Add(info);
 
                 if (DirectorySynchronization.Option != DirectorySynchronizationOptions.None)
                 {
                     info = default;
                     info.dwSearchPref = (int)AdsSearchPreferences.DIRSYNC_FLAG;
-                    info.vValue = new AdsValueHelper(
-                        (int)DirectorySynchronization.Option
-                    ).GetStruct();
+                    info.vValue = new AdsValueHelper((int)DirectorySynchronization.Option)
+                        .GetStruct();
                     prefList.Add(info);
                 }
             }
@@ -900,10 +901,8 @@ namespace System.DirectoryServices
                         0,
                         sortKeyBytes.Length
                     );
-                    info.vValue = new AdsValueHelper(
-                        sortKeyBytes,
-                        AdsType.ADSTYPE_PROV_SPECIFIC
-                    ).GetStruct();
+                    info.vValue = new AdsValueHelper(sortKeyBytes, AdsType.ADSTYPE_PROV_SPECIFIC)
+                        .GetStruct();
                     prefList.Add(info);
                 }
 
@@ -952,10 +951,8 @@ namespace System.DirectoryServices
                     {
                         Marshal.FreeHGlobal(vlvPtr);
                     }
-                    info.vValue = new AdsValueHelper(
-                        vlvBytes,
-                        AdsType.ADSTYPE_PROV_SPECIFIC
-                    ).GetStruct();
+                    info.vValue = new AdsValueHelper(vlvBytes, AdsType.ADSTYPE_PROV_SPECIFIC)
+                        .GetStruct();
                     prefList.Add(info);
                 }
 

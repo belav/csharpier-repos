@@ -338,9 +338,9 @@ namespace WebMatrix.WebData
                 if (throwOnPopulatedRole)
                 {
                     int usersInRole = db.Query(
-                            @"SELECT * FROM " + UsersInRoleTableName + " WHERE (RoleId = @0)",
-                            roleId
-                        )
+                        @"SELECT * FROM " + UsersInRoleTableName + " WHERE (RoleId = @0)",
+                        roleId
+                    )
                         .Count();
                     if (usersInRole > 0)
                     {
@@ -381,21 +381,21 @@ namespace WebMatrix.WebData
             {
                 // REVIEW: Is there any way to directly get out a string[]?
                 List<dynamic> userNames = db.Query(
-                        @"SELECT u."
-                            + SafeUserNameColumn
-                            + " FROM "
-                            + SafeUserTableName
-                            + " u, "
-                            + UsersInRoleTableName
-                            + " ur, "
-                            + RoleTableName
-                            + " r Where (r.RoleName = @0 and ur.RoleId = r.RoleId and ur.UserId = u."
-                            + SafeUserIdColumn
-                            + " and u."
-                            + SafeUserNameColumn
-                            + " LIKE @1)",
-                        new object[] { roleName, usernameToMatch }
-                    )
+                    @"SELECT u."
+                        + SafeUserNameColumn
+                        + " FROM "
+                        + SafeUserTableName
+                        + " u, "
+                        + UsersInRoleTableName
+                        + " ur, "
+                        + RoleTableName
+                        + " r Where (r.RoleName = @0 and ur.RoleId = r.RoleId and ur.UserId = u."
+                        + SafeUserIdColumn
+                        + " and u."
+                        + SafeUserNameColumn
+                        + " LIKE @1)",
+                    new object[] { roleName, usernameToMatch }
+                )
                     .ToList();
                 string[] users = new string[userNames.Count];
                 for (int i = 0; i < userNames.Count; i++)

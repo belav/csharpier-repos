@@ -56,11 +56,12 @@ namespace Microsoft.CodeAnalysis.Differencing
                     if (comparer.GetLabel(knownMatch.Key) != comparer.GetLabel(knownMatch.Value))
                     {
                         throw new ArgumentException(
-                            string.Format(
-                                WorkspacesResources.Matching_nodes_0_and_1_must_have_the_same_label,
-                                knownMatch.Key,
-                                knownMatch.Value
-                            ),
+                            string
+                                .Format(
+                                    WorkspacesResources.Matching_nodes_0_and_1_must_have_the_same_label,
+                                    knownMatch.Key,
+                                    knownMatch.Value
+                                ),
                             nameof(knownMatches)
                         );
                     }
@@ -68,10 +69,11 @@ namespace Microsoft.CodeAnalysis.Differencing
                     if (!comparer.TreesEqual(knownMatch.Key, root1))
                     {
                         throw new ArgumentException(
-                            string.Format(
-                                WorkspacesResources.Node_0_must_be_contained_in_the_old_tree,
-                                knownMatch.Key
-                            ),
+                            string
+                                .Format(
+                                    WorkspacesResources.Node_0_must_be_contained_in_the_old_tree,
+                                    knownMatch.Key
+                                ),
                             nameof(knownMatches)
                         );
                     }
@@ -79,10 +81,11 @@ namespace Microsoft.CodeAnalysis.Differencing
                     if (!comparer.TreesEqual(knownMatch.Value, root2))
                     {
                         throw new ArgumentException(
-                            string.Format(
-                                WorkspacesResources.Node_0_must_be_contained_in_the_new_tree,
-                                knownMatch.Value
-                            ),
+                            string
+                                .Format(
+                                    WorkspacesResources.Node_0_must_be_contained_in_the_new_tree,
+                                    knownMatch.Value
+                                ),
                             nameof(knownMatches)
                         );
                     }
@@ -116,11 +119,12 @@ namespace Microsoft.CodeAnalysis.Differencing
                 if (label < 0 || label >= labelCount)
                 {
                     throw new InvalidOperationException(
-                        string.Format(
-                            WorkspacesResources.Label_for_node_0_is_invalid_it_must_be_within_bracket_0_1,
-                            node,
-                            labelCount
-                        )
+                        string
+                            .Format(
+                                WorkspacesResources.Label_for_node_0_is_invalid_it_must_be_within_bracket_0_1,
+                                node,
+                                labelCount
+                            )
                     );
                 }
 

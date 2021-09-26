@@ -250,11 +250,12 @@ namespace System.Data.Common
                             || (0 <= keyValue.IndexOf(';'))
                             || (
                                 0
-                                == string.Compare(
-                                    DbConnectionStringKeywords.Driver,
-                                    keyName,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                == string
+                                    .Compare(
+                                        DbConnectionStringKeywords.Driver,
+                                        keyName,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                         )
                         && !ConnectionStringQuoteOdbcValueRegex.IsMatch(keyValue)
@@ -352,11 +353,12 @@ namespace System.Data.Common
         {
             try
             {
-                return int.Parse(
-                    stringValue,
-                    System.Globalization.NumberStyles.Integer,
-                    CultureInfo.InvariantCulture
-                );
+                return int
+                    .Parse(
+                        stringValue,
+                        System.Globalization.NumberStyles.Integer,
+                        CultureInfo.InvariantCulture
+                    );
             }
             catch (FormatException e)
             {
@@ -970,9 +972,8 @@ namespace System.Data.Common
                 CaptureCollection keyvalues = match.Groups[ValueIndex].Captures;
                 foreach (Capture keypair in match.Groups[KeyIndex].Captures)
                 {
-                    string keyname = (
-                        firstKey ? keypair.Value : keypair.Value.Replace("==", "=")
-                    ).ToLowerInvariant();
+                    string keyname = (firstKey ? keypair.Value : keypair.Value.Replace("==", "="))
+                        .ToLowerInvariant();
                     string? keyvalue = keyvalues[indexValue++].Value;
                     if (0 < keyvalue.Length)
                     {

@@ -129,9 +129,8 @@ namespace System.Drawing.PrimitivesTest
             // If SizeF implements IEquatable<SizeF> (e.g in .NET Core), then classes that are implicitly
             // convertible to SizeF can potentially be equal.
             // See https://github.com/dotnet/runtime/issues/16050.
-            bool expectsImplicitCastToSizeF = typeof(IEquatable<SizeF>).IsAssignableFrom(
-                size.GetType()
-            );
+            bool expectsImplicitCastToSizeF = typeof(IEquatable<SizeF>)
+                .IsAssignableFrom(size.GetType());
             Assert.Equal(expectsImplicitCastToSizeF, size.Equals(new Size(0, 0)));
 
             Assert.False(size.Equals((object)new Size(0, 0))); // No implicit cast
@@ -167,12 +166,13 @@ namespace System.Drawing.PrimitivesTest
         {
             SizeF s = new SizeF(0, 0);
             Assert.Equal(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    "{{Width={0}, Height={1}}}",
-                    s.Width,
-                    s.Height
-                ),
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        "{{Width={0}, Height={1}}}",
+                        s.Width,
+                        s.Height
+                    ),
                 s.ToString()
             );
         }

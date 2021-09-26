@@ -357,7 +357,8 @@ namespace System.Linq.Expressions.Tests
             };
 
             // IndexExpression for indexed property
-            PropertyInfo simpleIndexer = typeof(PropertyAndFields).GetProperties()
+            PropertyInfo simpleIndexer = typeof(PropertyAndFields)
+                .GetProperties()
                 .First(prop => prop.GetIndexParameters().Length == 1);
             yield return new object[]
             {
@@ -369,7 +370,8 @@ namespace System.Linq.Expressions.Tests
                 5
             };
 
-            PropertyInfo advancedIndexer = typeof(PropertyAndFields).GetProperties()
+            PropertyInfo advancedIndexer = typeof(PropertyAndFields)
+                .GetProperties()
                 .First(prop => prop.GetIndexParameters().Length == 2);
             yield return new object[]
             {
@@ -386,9 +388,8 @@ namespace System.Linq.Expressions.Tests
             {
                 Expression.Property(
                     null,
-                    typeof(PropertyAndFields).GetProperty(
-                        nameof(PropertyAndFields.StaticInt32Property2)
-                    ),
+                    typeof(PropertyAndFields)
+                        .GetProperty(nameof(PropertyAndFields.StaticInt32Property2)),
                     new Expression[0]
                 ),
                 6
@@ -452,11 +453,11 @@ namespace System.Linq.Expressions.Tests
         public void AssignToMember(Expression memberExp, object value, bool useInterpreter)
         {
             Func<bool> func = Expression.Lambda<Func<bool>>(
-                    Expression.Block(
-                        Expression.Assign(memberExp, Expression.Constant(value)),
-                        Expression.Equal(memberExp, Expression.Constant(value))
-                    )
+                Expression.Block(
+                    Expression.Assign(memberExp, Expression.Constant(value)),
+                    Expression.Equal(memberExp, Expression.Constant(value))
                 )
+            )
                 .Compile(useInterpreter);
             Assert.True(func());
         }
@@ -623,7 +624,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Constant(1),
                 Expression.Empty()
             );
-            PropertyInfo simpleIndexer = typeof(PropertyAndFields).GetProperties()
+            PropertyInfo simpleIndexer = typeof(PropertyAndFields)
+                .GetProperties()
                 .First(prop => prop.GetIndexParameters().Length == 1);
             Expression index = Expression.Property(
                 Expression.Constant(new PropertyAndFields()),
@@ -632,11 +634,11 @@ namespace System.Linq.Expressions.Tests
             );
 
             Func<bool> func = Expression.Lambda<Func<bool>>(
-                    Expression.Block(
-                        Expression.Assign(index, Expression.Constant(123)),
-                        Expression.Equal(index, Expression.Constant(123))
-                    )
+                Expression.Block(
+                    Expression.Assign(index, Expression.Constant(123)),
+                    Expression.Equal(index, Expression.Constant(123))
                 )
+            )
                 .Compile(useInterpreter);
             Assert.True(func());
         }

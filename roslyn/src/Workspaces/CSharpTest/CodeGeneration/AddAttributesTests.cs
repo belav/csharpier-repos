@@ -39,14 +39,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGeneration
             var options = await doc.GetOptionsAsync();
 
             var attributeList = SyntaxFactory.AttributeList(
-                    SyntaxFactory.SingletonSeparatedList(
-                        SyntaxFactory.Attribute(
-                            SyntaxFactory.IdentifierName(
-                                "System.Reflection.AssemblyVersion(\"1.0.0.0\")"
-                            )
+                SyntaxFactory.SingletonSeparatedList(
+                    SyntaxFactory.Attribute(
+                        SyntaxFactory.IdentifierName(
+                            "System.Reflection.AssemblyVersion(\"1.0.0.0\")"
                         )
                     )
                 )
+            )
                 .WithTarget(
                     SyntaxFactory.AttributeTargetSpecifier(
                         SyntaxFactory.Token(SyntaxKind.AssemblyKeyword)

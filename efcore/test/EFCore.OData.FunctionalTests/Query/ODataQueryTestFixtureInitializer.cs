@@ -98,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             selfHostServer.Start();
 
-            var baseAddress = selfHostServer.Services.GetService<IServer>()
+            var baseAddress = selfHostServer.Services
+                .GetService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses.First();
             var clientFactory = selfHostServer.Services.GetRequiredService<IHttpClientFactory>();

@@ -69,11 +69,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             // high fan-out (like IDisposable.Dispose()).
             var findRefsOptions = FindReferencesSearchOptions.Default.With(cascade: false);
             var references = await SymbolFinder.FindReferencesAsync(
-                    implMember,
-                    solution,
-                    findRefsOptions,
-                    cancellationToken
-                )
+                implMember,
+                solution,
+                findRefsOptions,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var implReferences = references.FirstOrDefault();
@@ -92,9 +92,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                 var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var editor = await solutionEditor.GetDocumentEditorAsync(
-                        document.Id,
-                        cancellationToken
-                    )
+                    document.Id,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var refLocation in group)
@@ -169,11 +169,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                 editor.ReplaceNode(
                     identifierName,
                     generator.MemberAccessExpression(
-                            generator.AddParentheses(
-                                generator.CastExpression(interfaceType, generator.ThisExpression())
-                            ),
-                            identifierName.WithoutTrivia()
-                        )
+                        generator.AddParentheses(
+                            generator.CastExpression(interfaceType, generator.ThisExpression())
+                        ),
+                        identifierName.WithoutTrivia()
+                    )
                         .WithTriviaFrom(identifierName)
                 );
             }

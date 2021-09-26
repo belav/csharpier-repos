@@ -395,7 +395,8 @@ namespace System.Net.WebSockets
                     Task<WebSocketReceiveResult> t = ReceiveAsyncPrivate<
                         WebSocketReceiveResultGetter,
                         WebSocketReceiveResult
-                    >(buffer, cancellationToken).AsTask();
+                    >(buffer, cancellationToken)
+                        .AsTask();
                     _lastReceiveAsync = t;
                     return t;
                 }
@@ -691,9 +692,9 @@ namespace System.Net.WebSockets
                 using (cancellationToken.Register(static s => ((ManagedWebSocket)s!).Abort(), this))
                 {
                     await _stream.WriteAsync(
-                            new ReadOnlyMemory<byte>(_sendBuffer, 0, sendBytes),
-                            cancellationToken
-                        )
+                        new ReadOnlyMemory<byte>(_sendBuffer, 0, sendBytes),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -796,17 +797,16 @@ namespace System.Net.WebSockets
                 else
                 {
                     // "Observe" any exception, ignoring it to prevent the unobserved exception event from being raised.
-                    t.AsTask()
-                        .ContinueWith(
-                            static p =>
-                            {
-                                _ = p.Exception;
-                            },
-                            CancellationToken.None,
-                            TaskContinuationOptions.OnlyOnFaulted
-                                | TaskContinuationOptions.ExecuteSynchronously,
-                            TaskScheduler.Default
-                        );
+                    t.AsTask().ContinueWith(
+                        static p =>
+                        {
+                            _ = p.Exception;
+                        },
+                        CancellationToken.None,
+                        TaskContinuationOptions.OnlyOnFaulted
+                            | TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    );
                 }
             }
             else
@@ -956,10 +956,10 @@ namespace System.Net.WebSockets
                             if (_receiveBufferCount < 2)
                             {
                                 await EnsureBufferContainsAsync(
-                                        2,
-                                        cancellationToken,
-                                        throwOnPrematureClosure: true
-                                    )
+                                    2,
+                                    cancellationToken,
+                                    throwOnPrematureClosure: true
+                                )
                                     .ConfigureAwait(false);
                             }
 
@@ -988,10 +988,10 @@ namespace System.Net.WebSockets
                         if (headerErrorMessage != null)
                         {
                             await CloseWithReceiveErrorAndThrowAsync(
-                                    WebSocketCloseStatus.ProtocolError,
-                                    WebSocketError.Faulted,
-                                    headerErrorMessage
-                                )
+                                WebSocketCloseStatus.ProtocolError,
+                                WebSocketError.Faulted,
+                                headerErrorMessage
+                            )
                                 .ConfigureAwait(false);
                         }
                         _receivedMaskOffsetOffset = 0;
@@ -1061,7 +1061,8 @@ namespace System.Net.WebSockets
                             (int)Math.Min(header.PayloadLength, _receiveBufferCount)
                         );
                         Debug.Assert(receiveBufferBytesToCopy > 0);
-                        _receiveBuffer.Span.Slice(_receiveBufferOffset, receiveBufferBytesToCopy)
+                        _receiveBuffer.Span
+                            .Slice(_receiveBufferOffset, receiveBufferBytesToCopy)
                             .CopyTo(payloadBuffer.Span);
                         ConsumeFromBuffer(receiveBufferBytesToCopy);
                         totalBytesReceived += receiveBufferBytesToCopy;
@@ -1079,13 +1080,13 @@ namespace System.Net.WebSockets
                     )
                     {
                         int numBytesRead = await _stream.ReadAsync(
-                                payloadBuffer.Slice(
-                                    totalBytesReceived,
-                                    (int)Math.Min(payloadBuffer.Length, header.PayloadLength)
-                                        - totalBytesReceived
-                                ),
-                                cancellationToken
-                            )
+                            payloadBuffer.Slice(
+                                totalBytesReceived,
+                                (int)Math.Min(payloadBuffer.Length, header.PayloadLength)
+                                    - totalBytesReceived
+                            ),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (numBytesRead <= 0)
                         {
@@ -1116,9 +1117,9 @@ namespace System.Net.WebSockets
                     )
                     {
                         await CloseWithReceiveErrorAndThrowAsync(
-                                WebSocketCloseStatus.InvalidPayloadData,
-                                WebSocketError.Faulted
-                            )
+                            WebSocketCloseStatus.InvalidPayloadData,
+                            WebSocketError.Faulted
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -1185,9 +1186,9 @@ namespace System.Net.WebSockets
             {
                 // The close payload length can be 0 or >= 2, but not 1.
                 await CloseWithReceiveErrorAndThrowAsync(
-                        WebSocketCloseStatus.ProtocolError,
-                        WebSocketError.Faulted
-                    )
+                    WebSocketCloseStatus.ProtocolError,
+                    WebSocketError.Faulted
+                )
                     .ConfigureAwait(false);
             }
             else if (header.PayloadLength >= 2)
@@ -1214,9 +1215,9 @@ namespace System.Net.WebSockets
                 if (!IsValidCloseStatus(closeStatus))
                 {
                     await CloseWithReceiveErrorAndThrowAsync(
-                            WebSocketCloseStatus.ProtocolError,
-                            WebSocketError.Faulted
-                        )
+                        WebSocketCloseStatus.ProtocolError,
+                        WebSocketError.Faulted
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -1225,19 +1226,17 @@ namespace System.Net.WebSockets
                     try
                     {
                         closeStatusDescription = s_textEncoding.GetString(
-                            _receiveBuffer.Span.Slice(
-                                _receiveBufferOffset + 2,
-                                (int)header.PayloadLength - 2
-                            )
+                            _receiveBuffer.Span
+                                .Slice(_receiveBufferOffset + 2, (int)header.PayloadLength - 2)
                         );
                     }
                     catch (DecoderFallbackException exc)
                     {
                         await CloseWithReceiveErrorAndThrowAsync(
-                                WebSocketCloseStatus.ProtocolError,
-                                WebSocketError.Faulted,
-                                innerException: exc
-                            )
+                            WebSocketCloseStatus.ProtocolError,
+                            WebSocketError.Faulted,
+                            innerException: exc
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -1310,11 +1309,11 @@ namespace System.Net.WebSockets
                 }
 
                 await SendFrameAsync(
-                        MessageOpcode.Pong,
-                        endOfMessage: true,
-                        _receiveBuffer.Slice(_receiveBufferOffset, (int)header.PayloadLength),
-                        cancellationToken
-                    )
+                    MessageOpcode.Pong,
+                    endOfMessage: true,
+                    _receiveBuffer.Slice(_receiveBufferOffset, (int)header.PayloadLength),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -1542,9 +1541,8 @@ namespace System.Net.WebSockets
             if (State == WebSocketState.CloseSent)
             {
                 // Wait until we've received a close response
-                byte[] closeBuffer = ArrayPool<byte>.Shared.Rent(
-                    MaxMessageHeaderLength + MaxControlPayloadLength
-                );
+                byte[] closeBuffer = ArrayPool<byte>.Shared
+                    .Rent(MaxMessageHeaderLength + MaxControlPayloadLength);
                 try
                 {
                     while (!_receivedCloseFrame)
@@ -1653,11 +1651,11 @@ namespace System.Net.WebSockets
                 buffer[1] = (byte)(closeStatusValue & 0xFF);
 
                 await SendFrameAsync(
-                        MessageOpcode.Close,
-                        true,
-                        new Memory<byte>(buffer, 0, count),
-                        cancellationToken
-                    )
+                    MessageOpcode.Close,
+                    true,
+                    new Memory<byte>(buffer, 0, count),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -1716,7 +1714,8 @@ namespace System.Net.WebSockets
                 // If there's any data in the buffer, shift it down.
                 if (_receiveBufferCount > 0)
                 {
-                    _receiveBuffer.Span.Slice(_receiveBufferOffset, _receiveBufferCount)
+                    _receiveBuffer.Span
+                        .Slice(_receiveBufferOffset, _receiveBufferCount)
                         .CopyTo(_receiveBuffer.Span);
                 }
                 _receiveBufferOffset = 0;
@@ -1725,12 +1724,12 @@ namespace System.Net.WebSockets
                 while (_receiveBufferCount < minimumRequiredBytes)
                 {
                     int numRead = await _stream.ReadAsync(
-                            _receiveBuffer.Slice(
-                                _receiveBufferCount,
-                                _receiveBuffer.Length - _receiveBufferCount
-                            ),
-                            cancellationToken
-                        )
+                        _receiveBuffer.Slice(
+                            _receiveBufferCount,
+                            _receiveBuffer.Length - _receiveBufferCount
+                        ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     Debug.Assert(numRead >= 0, $"Expected non-negative bytes read, got {numRead}");
                     if (numRead <= 0)

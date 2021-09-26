@@ -777,11 +777,12 @@ namespace System.Management
 
                             if (
                                 status >= 0
-                                && !string.Equals(
-                                    serverOrg,
-                                    serverNew,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                && !string
+                                    .Equals(
+                                        serverOrg,
+                                        serverNew,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                                 status = wmiPath.SetServer_(serverNew);
                         }
@@ -1130,9 +1131,8 @@ namespace System.Management
             if (value is ManagementPath && destinationType == typeof(InstanceDescriptor))
             {
                 ManagementPath obj = ((ManagementPath)(value));
-                ConstructorInfo ctor = typeof(ManagementPath).GetConstructor(
-                    new Type[] { typeof(string) }
-                );
+                ConstructorInfo ctor = typeof(ManagementPath)
+                    .GetConstructor(new Type[] { typeof(string) });
                 if (ctor != null)
                 {
                     return new InstanceDescriptor(ctor, new object[] { obj.Path });

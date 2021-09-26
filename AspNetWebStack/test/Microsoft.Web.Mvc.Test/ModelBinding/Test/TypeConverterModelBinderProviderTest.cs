@@ -60,10 +60,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             return new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    modelType
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, modelType),
                 ModelName = "theModelName",
                 ValueProvider = new SimpleValueProvider { { "theModelName", "someValue" } }
             };

@@ -18,9 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 threadingContext.JoinableTaskFactory.RunAsync(
                     async () =>
                     {
-                        await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            alwaysYield: true
-                        );
+                        await threadingContext.JoinableTaskFactory
+                            .SwitchToMainThreadAsync(alwaysYield: true);
 
                         var newHeight = view.LineHeight * view.TextBuffer.CurrentSnapshot.LineCount;
                         if (IsGreater(newHeight, view.VisualElement.Height))

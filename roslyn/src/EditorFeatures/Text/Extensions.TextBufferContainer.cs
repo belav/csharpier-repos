@@ -30,10 +30,8 @@ namespace Microsoft.CodeAnalysis.Text
                 Contract.ThrowIfNull(editorBuffer);
 
                 _weakEditorBuffer = new WeakReference<ITextBuffer>(editorBuffer);
-                editorBuffer.Properties.TryGetProperty(
-                    typeof(ITextBufferCloneService),
-                    out _textBufferCloneService
-                );
+                editorBuffer.Properties
+                    .TryGetProperty(typeof(ITextBufferCloneService), out _textBufferCloneService);
                 _currentText = SnapshotSourceText.From(
                     _textBufferCloneService,
                     editorBuffer.CurrentSnapshot,
@@ -126,13 +124,14 @@ namespace Microsoft.CodeAnalysis.Text
                 _currentText = newText;
 
                 var changes = ImmutableArray.CreateRange(
-                    args.Changes.Select(
-                        c =>
-                            new TextChangeRange(
-                                new TextSpan(c.OldSpan.Start, c.OldSpan.Length),
-                                c.NewLength
-                            )
-                    )
+                    args.Changes
+                        .Select(
+                            c =>
+                                new TextChangeRange(
+                                    new TextSpan(c.OldSpan.Start, c.OldSpan.Length),
+                                    c.NewLength
+                                )
+                        )
                 );
                 var eventArgs = new TextChangeEventArgs(oldText, newText, changes);
 

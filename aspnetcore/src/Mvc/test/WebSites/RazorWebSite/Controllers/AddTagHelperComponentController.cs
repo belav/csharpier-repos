@@ -17,12 +17,13 @@ namespace RazorWebSite.Controllers
 
         public IActionResult AddComponent()
         {
-            _tagHelperComponentManager.Components.Add(
-                new TestBodyTagHelperComponent(
-                    0,
-                    "Processed TagHelperComponent added from controller."
-                )
-            );
+            _tagHelperComponentManager.Components
+                .Add(
+                    new TestBodyTagHelperComponent(
+                        0,
+                        "Processed TagHelperComponent added from controller."
+                    )
+                );
             ViewData["TestData"] = "Value";
             return View("AddComponent");
         }

@@ -79,10 +79,10 @@ namespace AnalyzerRunner
             }
 
             await workspace.OpenSolutionAsync(
-                    options.SolutionPath,
-                    progress: null,
-                    cancellationToken
-                )
+                options.SolutionPath,
+                progress: null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             foreach (var workspaceDiagnostic in workspace.Diagnostics)
@@ -161,7 +161,8 @@ namespace AnalyzerRunner
                 );
             }
 
-            var projects = solution.Projects.Where(
+            var projects = solution.Projects
+                .Where(
                     project =>
                         project.Language == LanguageNames.CSharp
                         || project.Language == LanguageNames.VisualBasic
@@ -210,7 +211,8 @@ namespace AnalyzerRunner
             CancellationToken cancellationToken
         )
         {
-            var projects = solution.Projects.Where(
+            var projects = solution.Projects
+                .Where(
                     project =>
                         project.Language == LanguageNames.CSharp
                         || project.Language == LanguageNames.VisualBasic

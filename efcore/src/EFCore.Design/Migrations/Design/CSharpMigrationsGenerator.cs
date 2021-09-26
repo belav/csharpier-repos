@@ -98,11 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     .AppendLine("{");
                 using (builder.Indent())
                 {
-                    CSharpDependencies.CSharpMigrationOperationGenerator.Generate(
-                        "migrationBuilder",
-                        upOperations,
-                        builder
-                    );
+                    CSharpDependencies.CSharpMigrationOperationGenerator
+                        .Generate("migrationBuilder", upOperations, builder);
                 }
 
                 builder.AppendLine()
@@ -112,11 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     .AppendLine("{");
                 using (builder.Indent())
                 {
-                    CSharpDependencies.CSharpMigrationOperationGenerator.Generate(
-                        "migrationBuilder",
-                        downOperations,
-                        builder
-                    );
+                    CSharpDependencies.CSharpMigrationOperationGenerator
+                        .Generate("migrationBuilder", downOperations, builder);
                 }
 
                 builder.AppendLine().AppendLine("}");
@@ -200,8 +194,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             using (builder.Indent())
             {
                 builder.AppendLine(
-                        "protected override void BuildTargetModel(ModelBuilder modelBuilder)"
-                    )
+                    "protected override void BuildTargetModel(ModelBuilder modelBuilder)"
+                )
                     .AppendLine("{")
                     .DecrementIndent()
                     .DecrementIndent()
@@ -211,11 +205,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 using (builder.Indent())
                 {
                     // TODO: Optimize. This is repeated below
-                    CSharpDependencies.CSharpSnapshotGenerator.Generate(
-                        "modelBuilder",
-                        targetModel,
-                        builder
-                    );
+                    CSharpDependencies.CSharpSnapshotGenerator
+                        .Generate("modelBuilder", targetModel, builder);
                 }
 
                 builder.DecrementIndent()
@@ -302,11 +293,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     .IncrementIndent();
                 using (builder.Indent())
                 {
-                    CSharpDependencies.CSharpSnapshotGenerator.Generate(
-                        "modelBuilder",
-                        model,
-                        builder
-                    );
+                    CSharpDependencies.CSharpSnapshotGenerator
+                        .Generate("modelBuilder", model, builder);
                 }
 
                 builder.DecrementIndent()

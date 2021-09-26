@@ -169,8 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
 
             public override SyntaxNode VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
             {
-                var namespaceDeclaration =
-                    (NamespaceDeclarationSyntax)base.VisitNamespaceDeclaration(node);
+                var namespaceDeclaration = (NamespaceDeclarationSyntax)base
+                    .VisitNamespaceDeclaration(node);
                 var usingsToRemove = GetUsingsToRemove(node.Usings, namespaceDeclaration.Usings);
                 if (usingsToRemove.Count == 0)
                 {
@@ -188,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 // follows the usings.
                 if (finalTrivia.Count > 0)
                 {
-                    var nextToken = namespaceDeclaration.Usings.Last()
+                    var nextToken = namespaceDeclaration.Usings
+                        .Last()
                         .GetLastToken()
                         .GetNextToken();
                     namespaceDeclaration = namespaceDeclaration.ReplaceToken(

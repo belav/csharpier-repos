@@ -22,9 +22,9 @@ namespace System.Net.WebSockets.Client.Tests
         )
         {
             ValueWebSocketReceiveResult r = await ws.ReceiveAsync(
-                    (Memory<byte>)arraySegment,
-                    cancellationToken
-                )
+                (Memory<byte>)arraySegment,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return new WebSocketReceiveResult(
                 r.Count,
@@ -43,11 +43,11 @@ namespace System.Net.WebSockets.Client.Tests
             CancellationToken cancellationToken
         ) =>
             ws.SendAsync(
-                    (ReadOnlyMemory<byte>)arraySegment,
-                    messageType,
-                    endOfMessage,
-                    cancellationToken
-                )
+                (ReadOnlyMemory<byte>)arraySegment,
+                messageType,
+                endOfMessage,
+                cancellationToken
+            )
                 .AsTask();
     }
 
@@ -612,9 +612,8 @@ namespace System.Net.WebSockets.Client.Tests
                             );
 
                             // Wait for client-side ConnectAsync to complete and for a pending ReceiveAsync to be posted.
-                            await pendingReceiveAsyncPosted.Task.WaitAsync(
-                                TimeSpan.FromMilliseconds(TimeOutMilliseconds)
-                            );
+                            await pendingReceiveAsyncPosted.Task
+                                .WaitAsync(TimeSpan.FromMilliseconds(TimeOutMilliseconds));
 
                             // Close the underlying connection prematurely (without sending a WebSocket Close frame).
                             connection.Socket.Shutdown(SocketShutdown.Both);

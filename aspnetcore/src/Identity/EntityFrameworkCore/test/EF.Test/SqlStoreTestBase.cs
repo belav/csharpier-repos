@@ -36,18 +36,15 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         protected virtual void SetupAddIdentity(IServiceCollection services)
         {
             services.AddIdentityCore<TUser>(
-                    options =>
-                    {
-                        options.Password.RequireDigit = false;
-                        options.Password.RequireLowercase = false;
-                        options.Password.RequireNonAlphanumeric = false;
-                        options.Password.RequireUppercase = false;
-                        options.User.AllowedUserNameCharacters = null;
-                    }
-                )
-                .AddRoles<TRole>()
-                .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<TestDbContext>();
+                options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.User.AllowedUserNameCharacters = null;
+                }
+            ).AddRoles<TRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<TestDbContext>();
 
             services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
         }
@@ -84,12 +81,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             {
                 UserName = useNamePrefixAsUserName
                     ? namePrefix
-                    : string.Format(
-                          CultureInfo.InvariantCulture,
-                          "{0}{1}",
-                          namePrefix,
-                          Guid.NewGuid()
-                      ),
+                    : string
+                      .Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
                 Email = email,
                 PhoneNumber = phoneNumber,
                 LockoutEnabled = lockoutEnabled,
@@ -104,12 +97,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             var roleName = useRoleNamePrefixAsRoleName
                 ? roleNamePrefix
-                : string.Format(
-                      CultureInfo.InvariantCulture,
-                      "{0}{1}",
-                      roleNamePrefix,
-                      Guid.NewGuid()
-                  );
+                : string
+                  .Format(CultureInfo.InvariantCulture, "{0}{1}", roleNamePrefix, Guid.NewGuid());
             return new TRole() { Name = roleName };
         }
 

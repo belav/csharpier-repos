@@ -256,7 +256,8 @@ namespace System.Threading.Tests
         {
             int maxTimers = 10000;
             CountdownEvent ce = new CountdownEvent(maxTimers);
-            Timer[] timers = System.Linq.Enumerable.Range(0, maxTimers)
+            Timer[] timers = System.Linq.Enumerable
+                .Range(0, maxTimers)
                 .Select(
                     _ =>
                         new Timer(
@@ -272,11 +273,8 @@ namespace System.Threading.Tests
             {
                 Assert.True(
                     ce.Wait(MaxPositiveTimeoutInMs),
-                    string.Format(
-                        "Not all timers fired, {0} left of {1}",
-                        ce.CurrentCount,
-                        maxTimers
-                    )
+                    string
+                        .Format("Not all timers fired, {0} left of {1}", ce.CurrentCount, maxTimers)
                 );
             }
 

@@ -115,11 +115,12 @@ namespace Microsoft.CodeAnalysis.Host
                 {
                     var rawAccessor = RunWithCompactingGCFallback(
                         info =>
-                            info._memoryMappedFile.Target.CreateViewAccessor(
-                                info.Offset,
-                                info.Size,
-                                MemoryMappedFileAccess.Read
-                            ),
+                            info._memoryMappedFile.Target
+                                .CreateViewAccessor(
+                                    info.Offset,
+                                    info.Size,
+                                    MemoryMappedFileAccess.Read
+                                ),
                         this
                     );
                     streamAccessor = new ReferenceCountedDisposable<MemoryMappedViewAccessor>(
@@ -143,11 +144,8 @@ namespace Microsoft.CodeAnalysis.Host
             {
                 return RunWithCompactingGCFallback(
                     info =>
-                        info._memoryMappedFile.Target.CreateViewStream(
-                            info.Offset,
-                            info.Size,
-                            MemoryMappedFileAccess.Write
-                        ),
+                        info._memoryMappedFile.Target
+                            .CreateViewStream(info.Offset, info.Size, MemoryMappedFileAccess.Write),
                     this
                 );
             }

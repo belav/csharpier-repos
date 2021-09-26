@@ -25,9 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             "{ \"street\" : \"" + AddressStreetContent + "\" }";
         private const string AddressStreetContent = "1 Microsoft Way";
 
-        private static readonly byte[] ByteArrayContent = Encoding.BigEndianUnicode.GetBytes(
-            "abcd"
-        );
+        private static readonly byte[] ByteArrayContent = Encoding.BigEndianUnicode
+            .GetBytes("abcd");
         private static readonly string ByteArrayEncoded = Convert.ToBase64String(ByteArrayContent);
 
         private record Order1(int ProductId, Person1 Customer);
@@ -2135,21 +2134,22 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task WithBindRequired_NoData_AndCustomizedMessage_AddsGivenMessage()
         {
             // Arrange
-            var parameterInfo = typeof(Order10).GetConstructor(new[] { typeof(Person10) })
+            var parameterInfo = typeof(Order10)
+                .GetConstructor(new[] { typeof(Person10) })
                 .GetParameters()[0];
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider.ForParameter(parameterInfo)
-                .BindingDetails(
-                    (Action<ModelBinding.Metadata.BindingMetadata>)(
-                        binding =>
-                        {
-                            // A real details provider could customize message based on BindingMetadataProviderContext.
-                            binding.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(
+            metadataProvider.ForParameter(parameterInfo).BindingDetails(
+                (Action<ModelBinding.Metadata.BindingMetadata>)(
+                    binding =>
+                    {
+                        // A real details provider could customize message based on BindingMetadataProviderContext.
+                        binding.ModelBindingMessageProvider
+                            .SetMissingBindRequiredValueAccessor(
                                 name => $"Hurts when '{name}' is not provided."
                             );
-                        }
-                    )
-                );
+                    }
+                )
+            );
 
             var parameter = new ParameterDescriptor()
             {

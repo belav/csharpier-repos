@@ -214,18 +214,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
                 if (
                     newGeneralDiagnosticOption != _generalDiagnosticOption
-                    || !object.ReferenceEquals(
-                        newSpecificDiagnosticOptions,
-                        _specificDiagnosticOptions
-                    )
-                    || !object.ReferenceEquals(
-                        newAnalyzerConfigOptions?.TreeOptions,
-                        _analyzerConfigOptions?.TreeOptions
-                    )
-                    || !object.ReferenceEquals(
-                        newAnalyzerConfigOptions?.AnalyzerOptions,
-                        _analyzerConfigOptions?.AnalyzerOptions
-                    )
+                    || !object
+                        .ReferenceEquals(newSpecificDiagnosticOptions, _specificDiagnosticOptions)
+                    || !object
+                        .ReferenceEquals(
+                            newAnalyzerConfigOptions?.TreeOptions,
+                            _analyzerConfigOptions?.TreeOptions
+                        )
+                    || !object
+                        .ReferenceEquals(
+                            newAnalyzerConfigOptions?.AnalyzerOptions,
+                            _analyzerConfigOptions?.AnalyzerOptions
+                        )
                 )
                 {
                     _generalDiagnosticOption = newGeneralDiagnosticOption;
@@ -239,10 +239,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
                     foreach (var item in _items.OfType<DiagnosticItem>())
                     {
-                        var effectiveSeverity = item.Descriptor.GetEffectiveSeverity(
-                            project.CompilationOptions,
-                            newAnalyzerConfigOptions
-                        );
+                        var effectiveSeverity = item.Descriptor
+                            .GetEffectiveSeverity(
+                                project.CompilationOptions,
+                                newAnalyzerConfigOptions
+                            );
                         item.UpdateEffectiveSeverity(effectiveSeverity);
                     }
                 }

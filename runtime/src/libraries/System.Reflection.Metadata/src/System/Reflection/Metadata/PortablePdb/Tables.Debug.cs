@@ -391,13 +391,14 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal MethodDefinitionHandle FindKickoffMethod(int moveNextMethodRowId)
         {
-            int foundRowNumber = this.Block.BinarySearchReference(
-                this.NumberOfRows,
-                this.RowSize,
-                MoveNextMethodOffset,
-                (uint)moveNextMethodRowId,
-                _isMethodRefSizeSmall
-            );
+            int foundRowNumber = this.Block
+                .BinarySearchReference(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    MoveNextMethodOffset,
+                    (uint)moveNextMethodRowId,
+                    _isMethodRefSizeSmall
+                );
 
             if (foundRowNumber < 0)
             {

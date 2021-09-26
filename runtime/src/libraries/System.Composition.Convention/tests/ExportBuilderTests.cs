@@ -20,9 +20,9 @@ namespace System.Composition.Convention.Tests
             builder.ForType<FooImpl>().Export<IFoo>();
 
             Collections.Generic.IEnumerable<ExportAttribute> exports = builder.GetCustomAttributes(
-                    typeof(FooImpl),
-                    typeof(FooImpl).GetTypeInfo()
-                )
+                typeof(FooImpl),
+                typeof(FooImpl).GetTypeInfo()
+            )
                 .Where<Attribute>(e => e is ExportAttribute)
                 .Cast<ExportAttribute>();
             Assert.Equal(1, exports.Count());

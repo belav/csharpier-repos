@@ -100,10 +100,8 @@ namespace Moq
         private static bool IsFinalizer(MethodInfo method)
         {
             return method.GetBaseDefinition()
-                == typeof(object).GetMethod(
-                    "Finalize",
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                );
+                == typeof(object)
+                    .GetMethod("Finalize", BindingFlags.NonPublic | BindingFlags.Instance);
         }
 
         private static bool IsObjectMethod(MethodInfo method) =>
@@ -152,10 +150,10 @@ namespace Moq
                     && invocation.Method.IsEventAddAccessor()
                 )
                 {
-                    var implementingMethod = invocation.Method.GetImplementingMethod(
-                        invocation.ProxyType
-                    );
-                    var @event = implementingMethod.DeclaringType.GetEvents(bindingFlags)
+                    var implementingMethod = invocation.Method
+                        .GetImplementingMethod(invocation.ProxyType);
+                    var @event = implementingMethod.DeclaringType
+                        .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetAddMethod(true) == implementingMethod);
                     if (@event != null)
                     {
@@ -181,10 +179,10 @@ namespace Moq
                     && invocation.Method.IsEventRemoveAccessor()
                 )
                 {
-                    var implementingMethod = invocation.Method.GetImplementingMethod(
-                        invocation.ProxyType
-                    );
-                    var @event = implementingMethod.DeclaringType.GetEvents(bindingFlags)
+                    var implementingMethod = invocation.Method
+                        .GetImplementingMethod(invocation.ProxyType);
+                    var @event = implementingMethod.DeclaringType
+                        .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetRemoveMethod(true) == implementingMethod);
                     if (@event != null)
                     {
@@ -241,10 +239,8 @@ namespace Moq
             if (invocationMethod.IsPropertyAccessor())
             {
                 string propertyNameToSearch = invocationMethod.Name.Substring(AccessorPrefixLength);
-                PropertyInfo property = invocationMethod.DeclaringType.GetProperty(
-                    propertyNameToSearch,
-                    Type.EmptyTypes
-                );
+                PropertyInfo property = invocationMethod.DeclaringType
+                    .GetProperty(propertyNameToSearch, Type.EmptyTypes);
 
                 if (property == null)
                 {

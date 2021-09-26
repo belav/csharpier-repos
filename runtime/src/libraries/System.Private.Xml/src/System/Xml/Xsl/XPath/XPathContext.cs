@@ -79,11 +79,12 @@ namespace System.Xml.Xsl.XPath
                 Debug.Assert(context.For.Type == QilNodeType.For);
                 // convert context (1) --> (2)
                 QilIterator for2 = f.For(context.For.Binding);
-                QilNode cnd2 = new Replacer(f).Replace( /*inExpr:*/
-                    context.Where, /*from:*/
-                    context.For, /*to:*/
-                    for2
-                );
+                QilNode cnd2 = new Replacer(f)
+                    .Replace( /*inExpr:*/
+                        context.Where, /*from:*/
+                        context.For, /*to:*/
+                        for2
+                    );
                 context.For.Binding = f.OldTuple(for2, cnd2, for2);
                 context.Where = f.True();
             }

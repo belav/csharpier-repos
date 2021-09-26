@@ -329,13 +329,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
             {
                 var constraint = constraints[i];
                 if (
-                    !constraint.Value.Match(
-                        httpContext,
-                        NullRouter.Instance,
-                        constraint.Key,
-                        values,
-                        RouteDirection.IncomingRequest
-                    )
+                    !constraint.Value
+                        .Match(
+                            httpContext,
+                            NullRouter.Instance,
+                            constraint.Key,
+                            values,
+                            RouteDirection.IncomingRequest
+                        )
                 )
                 {
                     Logger.CandidateRejectedByConstraint(

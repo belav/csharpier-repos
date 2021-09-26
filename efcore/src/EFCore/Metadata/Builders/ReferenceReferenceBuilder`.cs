@@ -59,10 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string annotation,
             object? value
         ) =>
-            (ReferenceReferenceBuilder<TEntity, TRelatedEntity>)base.HasAnnotation(
-                annotation,
-                value
-            );
+            (ReferenceReferenceBuilder<TEntity, TRelatedEntity>)base
+                .HasAnnotation(annotation, value);
 
         /// <summary>
         ///     <para>

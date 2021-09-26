@@ -68,9 +68,9 @@ namespace System.Security.Cryptography.CryptoConfigTests
 
                 using (
                     HashAlgorithm equivalent = (HashAlgorithm)baseType.GetMethod(
-                            "Create",
-                            Type.EmptyTypes
-                        )
+                        "Create",
+                        Type.EmptyTypes
+                    )
                         .Invoke(null, null)
                 )
                 {

@@ -67,10 +67,8 @@ namespace Moq
             }
         }
 
-        private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(
-            nameof(It.IsAny),
-            BindingFlags.Public | BindingFlags.Static
-        );
+        private static readonly MethodInfo isAnyMethod = typeof(It)
+            .GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
 
         internal static MethodCallExpression IsAny(Type genericArgument)
         {
@@ -281,10 +279,8 @@ namespace Moq
             IEqualityComparer<TValue> comparer
         )
         {
-            return Match<TValue>.Create(
-                value => items.Contains(value, comparer),
-                () => It.IsIn(items, comparer)
-            );
+            return Match<TValue>
+                .Create(value => items.Contains(value, comparer), () => It.IsIn(items, comparer));
         }
 
         /// <summary>
@@ -340,10 +336,11 @@ namespace Moq
             IEqualityComparer<TValue> comparer
         )
         {
-            return Match<TValue>.Create(
-                value => !items.Contains(value, comparer),
-                () => It.IsNotIn(items, comparer)
-            );
+            return Match<TValue>
+                .Create(
+                    value => !items.Contains(value, comparer),
+                    () => It.IsNotIn(items, comparer)
+                );
         }
 
         /// <summary>
@@ -386,10 +383,8 @@ namespace Moq
             var re = new Regex(regex);
 
             // But evaluated every time :)
-            return Match<string>.Create(
-                value => value != null && re.IsMatch(value),
-                () => It.IsRegex(regex)
-            );
+            return Match<string>
+                .Create(value => value != null && re.IsMatch(value), () => It.IsRegex(regex));
         }
 
         /// <summary>
@@ -413,10 +408,11 @@ namespace Moq
             var re = new Regex(regex, options);
 
             // But evaluated every time :)
-            return Match<string>.Create(
-                value => value != null && re.IsMatch(value),
-                () => It.IsRegex(regex, options)
-            );
+            return Match<string>
+                .Create(
+                    value => value != null && re.IsMatch(value),
+                    () => It.IsRegex(regex, options)
+                );
         }
 
         /// <summary>

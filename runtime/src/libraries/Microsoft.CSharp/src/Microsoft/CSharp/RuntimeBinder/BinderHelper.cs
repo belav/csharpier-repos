@@ -36,7 +36,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             ParameterExpression tempForIncrement = null;
             IEnumerator<CSharpArgumentInfo> arginfosEnum = (
                 arginfos ?? Array.Empty<CSharpArgumentInfo>()
-            ).GetEnumerator();
+            )
+                .GetEnumerator();
 
             for (int index = 0; index < args.Length; ++index)
             {
@@ -162,9 +163,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 return new DynamicMetaObject(
                     Expression.Throw(
                         Expression.New(
-                            typeof(RuntimeBinderException).GetConstructor(
-                                new Type[] { typeof(string) }
-                            ),
+                            typeof(RuntimeBinderException)
+                                .GetConstructor(new Type[] { typeof(string) }),
                             Expression.Constant(e.Message)
                         ),
                         GetTypeForErrorMetaObject(action, args)

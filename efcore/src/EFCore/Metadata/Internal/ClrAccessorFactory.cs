@@ -15,10 +15,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public abstract class ClrAccessorFactory<TAccessor> where TAccessor : class
     {
-        private static readonly MethodInfo _genericCreate =
-            typeof(ClrAccessorFactory<TAccessor>).GetTypeInfo()
-                .GetDeclaredMethods(nameof(CreateGeneric))
-                .Single();
+        private static readonly MethodInfo _genericCreate = typeof(ClrAccessorFactory<TAccessor>)
+            .GetTypeInfo()
+            .GetDeclaredMethods(nameof(CreateGeneric))
+            .Single();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -36,50 +36,32 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
             );
             var dummyReason = ConnectionReason.BufferGraphChange;
 
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory
+                .CreateExportProvider();
             var service = Assert.IsType<TextBufferAssociatedViewService>(
                 exportProvider.GetExportedValue<ITextBufferAssociatedViewService>()
             );
 
-            ((ITextViewConnectionListener)service).SubjectBuffersConnected(
-                viewMock.Object,
-                dummyReason,
-                bufferCollection
-            );
+            ((ITextViewConnectionListener)service)
+                .SubjectBuffersConnected(viewMock.Object, dummyReason, bufferCollection);
             Assert.Equal(1, service.GetAssociatedTextViews(bufferMock.Object).Count());
 
-            ((ITextViewConnectionListener)service).SubjectBuffersDisconnected(
-                viewMock.Object,
-                dummyReason,
-                bufferCollection
-            );
+            ((ITextViewConnectionListener)service)
+                .SubjectBuffersDisconnected(viewMock.Object, dummyReason, bufferCollection);
             Assert.Equal(0, service.GetAssociatedTextViews(bufferMock.Object).Count());
 
-            ((ITextViewConnectionListener)service).SubjectBuffersConnected(
-                viewMock.Object,
-                dummyReason,
-                bufferCollection
-            );
-            ((ITextViewConnectionListener)service).SubjectBuffersConnected(
-                viewMock2.Object,
-                dummyReason,
-                bufferCollection
-            );
+            ((ITextViewConnectionListener)service)
+                .SubjectBuffersConnected(viewMock.Object, dummyReason, bufferCollection);
+            ((ITextViewConnectionListener)service)
+                .SubjectBuffersConnected(viewMock2.Object, dummyReason, bufferCollection);
             Assert.Equal(2, service.GetAssociatedTextViews(bufferMock.Object).Count());
 
-            ((ITextViewConnectionListener)service).SubjectBuffersDisconnected(
-                viewMock.Object,
-                dummyReason,
-                bufferCollection
-            );
+            ((ITextViewConnectionListener)service)
+                .SubjectBuffersDisconnected(viewMock.Object, dummyReason, bufferCollection);
             Assert.Equal(1, service.GetAssociatedTextViews(bufferMock.Object).Count());
 
-            ((ITextViewConnectionListener)service).SubjectBuffersDisconnected(
-                viewMock2.Object,
-                dummyReason,
-                bufferCollection
-            );
+            ((ITextViewConnectionListener)service)
+                .SubjectBuffersDisconnected(viewMock2.Object, dummyReason, bufferCollection);
             Assert.Equal(0, service.GetAssociatedTextViews(bufferMock.Object).Count());
         }
     }

@@ -23,10 +23,10 @@ namespace System.Reflection.Tests
             yield return new object[]
             {
                 TypeExtensions.GetMethod(
-                        typeof(NonGenericClass),
-                        nameof(NonGenericClass.TestGenericMethod),
-                        Helpers.AllFlags
-                    )
+                    typeof(NonGenericClass),
+                    nameof(NonGenericClass.TestGenericMethod),
+                    Helpers.AllFlags
+                )
                     .MakeGenericMethod(typeof(int)),
                 false
             };

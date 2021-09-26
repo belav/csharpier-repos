@@ -47,13 +47,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             }
 
             return await client.RunRemoteAsync<T>(
-                    WellKnownServiceHubService.IntelliCode,
-                    targetName,
-                    solution,
-                    arguments,
-                    callbackTarget: null,
-                    cancellationToken
-                )
+                WellKnownServiceHubService.IntelliCode,
+                targetName,
+                solution,
+                arguments,
+                callbackTarget: null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

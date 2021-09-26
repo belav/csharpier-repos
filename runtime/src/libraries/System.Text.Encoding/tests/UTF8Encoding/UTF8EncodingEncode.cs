@@ -1351,9 +1351,8 @@ namespace System.Text.Tests
         )
         {
             byte[] expectedUtf8Output = expected.SelectMany(
-                    ch =>
-                        (ch == '\uFFFD') ? new byte[] { 0xEF, 0xBF, 0xBD } : new byte[] { (byte)ch }
-                )
+                ch => (ch == '\uFFFD') ? new byte[] { 0xEF, 0xBF, 0xBD } : new byte[] { (byte)ch }
+            )
                 .ToArray();
 
             Encoding utf8Encoding = Encoding.GetEncoding(

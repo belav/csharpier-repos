@@ -103,10 +103,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             foreach (var (documentId, documentRudeEdits) in RudeEdits)
             {
                 var document = await solution.GetDocumentAsync(
-                        documentId,
-                        includeSourceGenerated: true,
-                        cancellationToken
-                    )
+                    documentId,
+                    includeSourceGenerated: true,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 Contract.ThrowIfNull(document);
 
@@ -169,10 +169,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             foreach (var (documentId, diagnostics) in rudeEdits)
             {
                 var document = await solution.GetRequiredDocumentAsync(
-                        documentId,
-                        includeSourceGenerated: true,
-                        cancellationToken
-                    )
+                    documentId,
+                    includeSourceGenerated: true,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -195,10 +195,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     builder.Add(
                         new ManagedHotReloadDiagnostic(
                             descriptor.Id,
-                            string.Format(
-                                descriptor.MessageFormat.ToString(CultureInfo.CurrentUICulture),
-                                diagnostic.Arguments
-                            ),
+                            string
+                                .Format(
+                                    descriptor.MessageFormat.ToString(CultureInfo.CurrentUICulture),
+                                    diagnostic.Arguments
+                                ),
                             severity,
                             fileSpan.Path ?? "",
                             fileSpan.Span.ToSourceSpan()

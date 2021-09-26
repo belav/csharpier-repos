@@ -288,9 +288,8 @@ namespace System.Reflection.Tests
                 "MethodWithOptionalDefaultOutInMarshalParam",
                 0
             );
-            CustomAttributeData attribute = parameterInfo.CustomAttributes.SingleOrDefault(
-                a => a.AttributeType.Equals(attrType)
-            );
+            CustomAttributeData attribute = parameterInfo.CustomAttributes
+                .SingleOrDefault(a => a.AttributeType.Equals(attrType));
             Assert.NotNull(attribute);
 
             Assert.NotNull(attribute);

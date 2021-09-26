@@ -26,9 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var connection = new FakeRelationalConnection(
                 CreateOptions(
-                    (FakeRelationalOptionsExtension)new FakeRelationalOptionsExtension().WithConnection(
-                        dbConnection
-                    )
+                    (FakeRelationalOptionsExtension)new FakeRelationalOptionsExtension()
+                        .WithConnection(dbConnection)
                 )
             );
 
@@ -92,10 +91,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                optionsExtension
-                    ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString)
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(
+                    optionsExtension
+                        ?? new FakeRelationalOptionsExtension()
+                            .WithConnectionString(ConnectionString)
+                );
 
             return optionsBuilder.Options;
         }

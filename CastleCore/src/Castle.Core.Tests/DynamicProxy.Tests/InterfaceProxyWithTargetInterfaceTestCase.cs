@@ -247,11 +247,12 @@ namespace Castle.DynamicProxy.Tests
                     >(new List<IList<PrivateInterface>>(), new IInterceptor[0])
             );
 
-            var expected = string.Format(
-                "Can not create proxy for type {0} because type {1} is not accessible. Make it public, or internal",
-                typeof(IList<IList<PrivateInterface>>).FullName,
-                typeof(PrivateInterface).FullName
-            );
+            var expected = string
+                .Format(
+                    "Can not create proxy for type {0} because type {1} is not accessible. Make it public, or internal",
+                    typeof(IList<IList<PrivateInterface>>).FullName,
+                    typeof(PrivateInterface).FullName
+                );
             StringAssert.StartsWith(expected, ex.Message);
         }
 

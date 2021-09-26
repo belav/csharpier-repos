@@ -237,14 +237,12 @@ namespace System.Text.RegularExpressions
                                 switch (concatChild.Type)
                                 {
                                     case RegexNode.One:
-                                        (classes[classPos++] ??= new RegexCharClass()).AddChar(
-                                            concatChild.Ch
-                                        );
+                                        (classes[classPos++] ??= new RegexCharClass())
+                                            .AddChar(concatChild.Ch);
                                         break;
                                     case RegexNode.Set:
-                                        (classes[classPos++] ??= new RegexCharClass()).AddCharClass(
-                                            RegexCharClass.Parse(concatChild.Str!)
-                                        );
+                                        (classes[classPos++] ??= new RegexCharClass())
+                                            .AddCharClass(RegexCharClass.Parse(concatChild.Str!));
                                         break;
                                     case RegexNode.Multi:
                                         for (
@@ -254,9 +252,8 @@ namespace System.Text.RegularExpressions
                                             c++
                                         )
                                         {
-                                            (classes[classPos++] ??= new RegexCharClass()).AddChar(
-                                                concatChild.Str[c]
-                                            );
+                                            (classes[classPos++] ??= new RegexCharClass())
+                                                .AddChar(concatChild.Str[c]);
                                         }
                                         break;
 

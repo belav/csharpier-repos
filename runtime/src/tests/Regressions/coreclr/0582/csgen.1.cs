@@ -337,24 +337,26 @@ public class App
     {
         try
         {
-            AA<char, bool>.Static1(
-                App.m_xFwd11,
-                ref App.m_agboFwd12,
-                (new ulong[50u, 40u, 98u]),
-                ref App.m_byFwd4
-            );
+            AA<char, bool>
+                .Static1(
+                    App.m_xFwd11,
+                    ref App.m_agboFwd12,
+                    (new ulong[50u, 40u, 98u]),
+                    ref App.m_byFwd4
+                );
         }
         catch (Exception) { }
         try
         {
-            AA<char, bool>.Static2(
-                (new bool[72u, 126u][,,]),
-                ref App.m_aulFwd13,
-                App.m_gcFwd14,
-                App.m_agboFwd12,
-                App.m_gcFwd14,
-                App.m_agboFwd12
-            );
+            AA<char, bool>
+                .Static2(
+                    (new bool[72u, 126u][,,]),
+                    ref App.m_aulFwd13,
+                    App.m_gcFwd14,
+                    App.m_agboFwd12,
+                    App.m_gcFwd14,
+                    App.m_agboFwd12
+                );
         }
         catch (Exception) { }
         try

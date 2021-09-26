@@ -149,9 +149,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
 
                 var isCorsPreflightRequest =
                     isOptionsRequest
-                    && context.Request.Headers.ContainsKey(
-                        CorsConstants.AccessControlRequestMethod
-                    );
+                    && context.Request.Headers
+                        .ContainsKey(CorsConstants.AccessControlRequestMethod);
 
                 if (isCorsPreflightRequest)
                 {
@@ -221,10 +220,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             }
             else
             {
-                context.Response.OnStarting(
-                    OnResponseStartingDelegate,
-                    Tuple.Create(this, context, corsResult)
-                );
+                context.Response
+                    .OnStarting(
+                        OnResponseStartingDelegate,
+                        Tuple.Create(this, context, corsResult)
+                    );
                 return _next(context);
             }
         }

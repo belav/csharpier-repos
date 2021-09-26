@@ -53,17 +53,18 @@ namespace System.Data.Tests
             Assert.Equal(6, dt.Rows.Count);
             dt.Rows.Remove(dt.Rows[0]);
             Assert.Equal(5, dt.Rows.Count);
-            dt.Rows.Add(
-                new object[]
-                {
-                    1,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
-                    1.534,
-                    true
-                }
-            );
+            dt.Rows
+                .Add(
+                    new object[]
+                    {
+                        1,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                        1.534,
+                        true
+                    }
+                );
             Assert.Equal(6, dt.Rows.Count);
         }
 
@@ -168,17 +169,18 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             dt.Rows.Clear();
-            dt.Rows.Add(
-                new object[]
-                {
-                    1,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
-                    1.534,
-                    true
-                }
-            );
+            dt.Rows
+                .Add(
+                    new object[]
+                    {
+                        1,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                        1.534,
+                        true
+                    }
+                );
             Assert.Equal(1, dt.Rows.Count);
             Assert.Equal(1, dt.Rows[0]["ParentId"]);
             Assert.Equal("1-String1", dt.Rows[0]["String1"]);
@@ -193,16 +195,17 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             int count = dt.Rows.Count;
-            dt.Rows.Add(
-                new object[]
-                {
-                    8,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
-                    1.534
-                }
-            );
+            dt.Rows
+                .Add(
+                    new object[]
+                    {
+                        8,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                        1.534
+                    }
+                );
             Assert.Equal(count + 1, dt.Rows.Count);
         }
 

@@ -164,10 +164,10 @@ namespace Microsoft.CodeAnalysis.Remote
             try
             {
                 return await _rpc.InvokeWithCancellationAsync<T>(
-                        targetName,
-                        arguments,
-                        cancellationToken
-                    )
+                    targetName,
+                    arguments,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception ex) when (!logError || ReportUnlessCanceled(ex, cancellationToken))

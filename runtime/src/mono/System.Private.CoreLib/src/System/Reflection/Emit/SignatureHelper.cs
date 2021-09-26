@@ -263,10 +263,11 @@ namespace System.Reflection.Emit
 
             if (custom_modifiers.Length != n)
                 throw new ArgumentException(
-                    string.Format(
-                        "Custom modifiers length `{0}' does not match the size of the arguments",
-                        custom_modifiers.Length
-                    )
+                    string
+                        .Format(
+                            "Custom modifiers length `{0}' does not match the size of the arguments",
+                            custom_modifiers.Length
+                        )
                 );
 
             foreach (Type[] parameter_modifiers in custom_modifiers)

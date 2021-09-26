@@ -58,8 +58,8 @@ class C
                 .OfType<ElementAccessExpressionSyntax>()
                 .ToList();
             var arrayTypes = arrayAccesses.Select(
-                    arr => model.GetTypeInfoAndVerifyIOperation(arr.Expression).Type
-                )
+                arr => model.GetTypeInfoAndVerifyIOperation(arr.Expression).Type
+            )
                 .Cast<IArrayTypeSymbol>()
                 .ToList();
 
@@ -109,8 +109,8 @@ class C
 
             var invocations = root.DescendantNodes().OfType<InvocationExpressionSyntax>().ToList();
             var expressionTypes = invocations.Select(
-                    inv => model.GetTypeInfoAndVerifyIOperation(inv).Type
-                )
+                inv => model.GetTypeInfoAndVerifyIOperation(inv).Type
+            )
                 .Cast<INamedTypeSymbol>()
                 .ToList();
 
@@ -904,7 +904,8 @@ public class C
                         .WithLocation(10, 11)
                 },
                 comp =>
-                    ((INamedTypeSymbol)((Compilation)comp).GetMember("I")).GetMembers()
+                    ((INamedTypeSymbol)((Compilation)comp).GetMember("I"))
+                        .GetMembers()
                         .OfType<IMethodSymbol>()
                         .Where(m => m.Name.StartsWith("F"))
                         .ToArray(),
@@ -982,7 +983,8 @@ public interface I<T, U, V>
                         .WithLocation(14, 6)
                 },
                 comp =>
-                    ((INamedTypeSymbol)((Compilation)comp).GetMember("I")).GetMembers()
+                    ((INamedTypeSymbol)((Compilation)comp).GetMember("I"))
+                        .GetMembers()
                         .OfType<IMethodSymbol>()
                         .Where(m => m.Name.StartsWith("F"))
                         .ToArray(),
@@ -1061,16 +1063,19 @@ public interface I
                         .WithLocation(14, 13)
                 },
                 comp =>
-                    ((INamedTypeSymbol)((Compilation)comp).GetMember("I")).GetMembers()
+                    ((INamedTypeSymbol)((Compilation)comp).GetMember("I"))
+                        .GetMembers()
                         .OfType<IMethodSymbol>()
                         .Where(m => m.Name.StartsWith("F"))
                         .ToArray(),
                 method =>
                 {
                     ITypeParameterSymbol typeParameterSymbol = (
-                        (INamedTypeSymbol)((INamedTypeSymbol)method.ReturnType).GetMembers("B")
+                        (INamedTypeSymbol)((INamedTypeSymbol)method.ReturnType)
+                            .GetMembers("B")
                             .Single()
-                    ).TypeParameters.Single();
+                    ).TypeParameters
+                        .Single();
                     var result = typeParameterSymbol.ConstraintTypes.Single().NullableAnnotation;
                     Assert.Equal(
                         result,
@@ -1148,25 +1153,25 @@ public interface IB<T, U, V>
                         .WithLocation(17, 9)
                 },
                 comp =>
-                    ((INamedTypeSymbol)((Compilation)comp).GetMember("IB")).GetMembers()
+                    ((INamedTypeSymbol)((Compilation)comp).GetMember("IB"))
+                        .GetMembers()
                         .OfType<IMethodSymbol>()
                         .Where(m => m.Name.StartsWith("F"))
                         .ToArray(),
                 method =>
                 {
                     var result =
-                        (
-                            (INamedTypeSymbol)method.ReturnType
-                        ).TypeArguments.Single().NullableAnnotation;
+                        ((INamedTypeSymbol)method.ReturnType).TypeArguments
+                            .Single().NullableAnnotation;
                     Assert.Equal(
                         result,
-                        (
-                            (INamedTypeSymbol)method.ReturnType
-                        ).TypeArgumentNullableAnnotations.Single()
+                        ((INamedTypeSymbol)method.ReturnType).TypeArgumentNullableAnnotations
+                            .Single()
                     );
                     Assert.Equal(
                         result,
-                        ((INamedTypeSymbol)method.ReturnType).TypeArgumentNullableAnnotations()
+                        ((INamedTypeSymbol)method.ReturnType)
+                            .TypeArgumentNullableAnnotations()
                             .Single()
                     );
                     return result;
@@ -1226,15 +1231,14 @@ public interface IB<T, U, V>
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>();
             var actualAnnotations = invocations.Select(
-                    inv =>
-                    {
-                        var method = (IMethodSymbol)model.GetSymbolInfo(inv).Symbol;
-                        var result = method.TypeArguments.Single().NullableAnnotation;
-                        Assert.Equal(result, method.TypeArgumentNullableAnnotations.Single());
-                        return result;
-                    }
-                )
-                .ToArray();
+                inv =>
+                {
+                    var method = (IMethodSymbol)model.GetSymbolInfo(inv).Symbol;
+                    var result = method.TypeArguments.Single().NullableAnnotation;
+                    Assert.Equal(result, method.TypeArgumentNullableAnnotations.Single());
+                    return result;
+                }
+            ).ToArray();
             var expectedAnnotations = new[]
             {
                 PublicNullableAnnotation.NotAnnotated,
@@ -1290,15 +1294,14 @@ class C
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>();
             var actualAnnotations = variables.Select(
-                    v =>
-                    {
-                        var localSymbol = (ILocalSymbol)model.GetDeclaredSymbol(v);
-                        var result = localSymbol.Type.NullableAnnotation;
-                        Assert.Equal(result, localSymbol.NullableAnnotation);
-                        return result;
-                    }
-                )
-                .ToArray();
+                v =>
+                {
+                    var localSymbol = (ILocalSymbol)model.GetDeclaredSymbol(v);
+                    var result = localSymbol.Type.NullableAnnotation;
+                    Assert.Equal(result, localSymbol.NullableAnnotation);
+                    return result;
+                }
+            ).ToArray();
 
             var expectedAnnotations = new[]
             {
@@ -1516,26 +1519,27 @@ class C
                     {
                         if (syntaxContext.Node.ToString() != "o")
                             return;
-                        var info = syntaxContext.SemanticModel.GetTypeInfoAndVerifyIOperation(
-                            syntaxContext.Node
-                        );
+                        var info = syntaxContext.SemanticModel
+                            .GetTypeInfoAndVerifyIOperation(syntaxContext.Node);
                         Assert.True(
-                            syntaxContext.SemanticModel.TryGetSpeculativeSemanticModel(
-                                syntaxContext.Node.SpanStart,
-                                newSource,
-                                out var specModel
-                            )
+                            syntaxContext.SemanticModel
+                                .TryGetSpeculativeSemanticModel(
+                                    syntaxContext.Node.SpanStart,
+                                    newSource,
+                                    out var specModel
+                                )
                         );
                         var specInfo = specModel.GetTypeInfoAndVerifyIOperation(oReference);
                         syntaxContext.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                s_descriptor1,
-                                syntaxContext.Node.GetLocation(),
-                                syntaxContext.Node,
-                                info.Nullability.FlowState,
-                                info.Nullability.Annotation,
-                                specInfo.Nullability.FlowState
-                            )
+                            CodeAnalysis.Diagnostic
+                                .Create(
+                                    s_descriptor1,
+                                    syntaxContext.Node.GetLocation(),
+                                    syntaxContext.Node,
+                                    info.Nullability.FlowState,
+                                    info.Nullability.Annotation,
+                                    specInfo.Nullability.FlowState
+                                )
                         );
                     },
                     SyntaxKind.IdentifierName
@@ -1545,20 +1549,20 @@ class C
                     context =>
                     {
                         var declarator = (VariableDeclaratorSyntax)context.Node;
-                        var declaredSymbol = (ILocalSymbol)context.SemanticModel.GetDeclaredSymbol(
-                            declarator
-                        );
+                        var declaredSymbol = (ILocalSymbol)context.SemanticModel
+                            .GetDeclaredSymbol(declarator);
                         Assert.Equal(
                             declaredSymbol.Type.NullableAnnotation,
                             declaredSymbol.NullableAnnotation
                         );
                         context.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                s_descriptor2,
-                                declarator.GetLocation(),
-                                declaredSymbol.Name,
-                                declaredSymbol.NullableAnnotation
-                            )
+                            CodeAnalysis.Diagnostic
+                                .Create(
+                                    s_descriptor2,
+                                    declarator.GetLocation(),
+                                    declaredSymbol.Name,
+                                    declaredSymbol.NullableAnnotation
+                                )
                         );
                     },
                     SyntaxKind.VariableDeclarator
@@ -1954,9 +1958,9 @@ class C
                 // (11,32): warning CS8619: Nullability of reference types in value of type '(object?, int)' doesn't match target type '(object a, int b)'.
                 //         (object a, int b) t4 = (default(object), default(int)) /*T:(object?, int)*/ /*CT:(object! a, int b)*/; // 3
                 Diagnostic(
-                        ErrorCode.WRN_NullabilityMismatchInAssignment,
-                        "(default(object), default(int))"
-                    )
+                    ErrorCode.WRN_NullabilityMismatchInAssignment,
+                    "(default(object), default(int))"
+                )
                     .WithArguments("(object?, int)", "(object a, int b)")
                     .WithLocation(11, 32)
             );
@@ -2209,14 +2213,12 @@ class C
                 // (9,28): error CS1593: Delegate 'Action<string>' does not take 0 arguments
                 //         Action<string> a = () => {
                 Diagnostic(
-                        ErrorCode.ERR_BadDelArgCount,
-                        @"() => {
+                    ErrorCode.ERR_BadDelArgCount,
+                    @"() => {
             var v = s_data;
             v = GetNullableString();
         }"
-                    )
-                    .WithArguments("System.Action<string>", "0")
-                    .WithLocation(9, 28)
+                ).WithArguments("System.Action<string>", "0").WithLocation(9, 28)
             );
 
             var syntaxTree = comp.SyntaxTrees[0];
@@ -2543,13 +2545,13 @@ class C
                 );
                 Assert.Equal(
                     expectedAnnotation,
-                    (
-                        (INamedTypeSymbol)methodSymbol.ReturnType
-                    ).TypeArgumentNullableAnnotations.Single()
+                    ((INamedTypeSymbol)methodSymbol.ReturnType).TypeArgumentNullableAnnotations
+                        .Single()
                 );
                 Assert.Equal(
                     expectedAnnotation,
-                    ((INamedTypeSymbol)methodSymbol.ReturnType).TypeArgumentNullableAnnotations()
+                    ((INamedTypeSymbol)methodSymbol.ReturnType)
+                        .TypeArgumentNullableAnnotations()
                         .Single()
                 );
             }
@@ -2967,9 +2969,9 @@ class C
                 // (6,20): error CS0821: Implicitly-typed local variables cannot be fixed
                 //         fixed (var o1 = o ?? new object())
                 Diagnostic(
-                        ErrorCode.ERR_ImplicitlyTypedLocalCannotBeFixed,
-                        "o1 = o ?? new object()"
-                    )
+                    ErrorCode.ERR_ImplicitlyTypedLocalCannotBeFixed,
+                    "o1 = o ?? new object()"
+                )
                     .WithLocation(6, 20)
             );
 
@@ -3003,9 +3005,9 @@ class C
                 // (8,14): error CS0819: Implicitly-typed variables cannot have multiple declarators
                 //         for (var o5 = o1, o6 = o2; false; ) {}
                 Diagnostic(
-                        ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
-                        "var o5 = o1, o6 = o2"
-                    )
+                    ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
+                    "var o5 = o1, o6 = o2"
+                )
                     .WithLocation(8, 14)
             );
 
@@ -6457,11 +6459,11 @@ class Program
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>();
             var actualAnnotations = invocations.Select(
-                    inv =>
-                        (((IMethodSymbol)model.GetSymbolInfo(inv).Symbol)).TypeArguments[
-                            0
-                        ].NullableAnnotation
-                )
+                inv =>
+                    (((IMethodSymbol)model.GetSymbolInfo(inv).Symbol)).TypeArguments[
+                        0
+                    ].NullableAnnotation
+            )
                 .ToArray();
             var expectedAnnotations = new[]
             {
@@ -6635,9 +6637,8 @@ M();"
         {
             var comp = CreateCompilation(
                 code,
-                options: TestOptions.ReleaseExe.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.ReleaseExe
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -6801,17 +6802,15 @@ public class C
                 // (9,21): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
                 //         C c = new C(() =>
                 Diagnostic(
-                        ErrorCode.ERR_AnonMethToNonDel,
-                        @"() =>
+                    ErrorCode.ERR_AnonMethToNonDel,
+                    @"() =>
         { 
             M2();
             _ = s;
             s = """";
             _ = s;
         }"
-                    )
-                    .WithArguments("lambda expression", "int")
-                    .WithLocation(9, 21)
+                ).WithArguments("lambda expression", "int").WithLocation(9, 21)
             );
 
             var tree = comp.SyntaxTrees[0];

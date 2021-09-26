@@ -312,10 +312,10 @@ class C
 
             var leadingTrivia = node.GetLeadingTrivia();
             var newNode = SyntaxFactory.MemberAccessExpression(
-                    SyntaxKind.SimpleMemberAccessExpression,
-                    SyntaxFactory.ThisExpression(),
-                    node.WithoutLeadingTrivia()
-                )
+                SyntaxKind.SimpleMemberAccessExpression,
+                SyntaxFactory.ThisExpression(),
+                node.WithoutLeadingTrivia()
+            )
                 .WithLeadingTrivia(leadingTrivia);
 
             var newRoot = root.ReplaceNode(node, newNode);
@@ -379,8 +379,8 @@ public class TestClass
 
             var leadingTrivia = node.GetLeadingTrivia();
             var newNode = SyntaxFactory.PredefinedType(
-                    SyntaxFactory.Token(SyntaxKind.ObjectKeyword)
-                )
+                SyntaxFactory.Token(SyntaxKind.ObjectKeyword)
+            )
                 .WithLeadingTrivia(leadingTrivia);
 
             var newRoot = root.ReplaceNode(node, newNode);

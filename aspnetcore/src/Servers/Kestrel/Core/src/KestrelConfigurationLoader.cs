@@ -421,8 +421,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
                 // Now that defaults have been loaded, we can compare to the currently bound endpoints to see if the config changed.
                 // There's no reason to rerun an EndpointConfigurations callback if nothing changed.
                 var matchingBoundEndpoints = endpointsToStop.Where(
-                        o => o.EndpointConfig == endpoint
-                    )
+                    o => o.EndpointConfig == endpoint
+                )
                     .ToList();
 
                 if (matchingBoundEndpoints.Count > 0)
@@ -517,10 +517,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         {
             string? certificatePath = null;
             if (
-                ConfigurationReader.Certificates.TryGetValue(
-                    "Development",
-                    out var certificateConfig
-                )
+                ConfigurationReader.Certificates
+                    .TryGetValue("Development", out var certificateConfig)
                 && certificateConfig.Path == null
                 && certificateConfig.Password != null
                 && TryGetCertificatePath(out certificatePath)
@@ -562,11 +560,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel
             foreach (var ext in certificate.Extensions)
             {
                 if (
-                    string.Equals(
-                        ext.Oid?.Value,
-                        CertificateManager.AspNetHttpsOid,
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            ext.Oid?.Value,
+                            CertificateManager.AspNetHttpsOid,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     return true;

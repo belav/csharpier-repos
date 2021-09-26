@@ -29,11 +29,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         )
         {
             await UnderlyingObject.RunRemoteAsync(
-                    targetName,
-                    solution,
-                    arguments,
-                    cancellationToken
-                )
+                targetName,
+                solution,
+                arguments,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return true;
         }
@@ -45,11 +45,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             CancellationToken cancellationToken
         ) =>
             await UnderlyingObject.RunRemoteAsync<T>(
-                    targetName,
-                    solution,
-                    arguments,
-                    cancellationToken
-                )
+                targetName,
+                solution,
+                arguments,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
         public void Dispose() => UnderlyingObject?.Dispose();

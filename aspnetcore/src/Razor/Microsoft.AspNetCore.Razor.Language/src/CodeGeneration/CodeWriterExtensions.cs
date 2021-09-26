@@ -45,11 +45,12 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
             if (
                 context.SourceDocument.FilePath != null
-                && !string.Equals(
-                    context.SourceDocument.FilePath,
-                    span.Value.FilePath,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && !string
+                    .Equals(
+                        context.SourceDocument.FilePath,
+                        span.Value.FilePath,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 // We don't want to generate padding for nodes from imports.
@@ -250,12 +251,13 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
             return WriteMethodInvocation(
                 writer,
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    InstanceMethodFormat,
-                    instanceName,
-                    methodName
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        InstanceMethodFormat,
+                        instanceName,
+                        methodName
+                    ),
                 endLine,
                 parameters
             );
@@ -279,12 +281,13 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
             return WriteStartMethodInvocation(
                 writer,
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    InstanceMethodFormat,
-                    instanceName,
-                    methodName
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        InstanceMethodFormat,
+                        instanceName,
+                        methodName
+                    )
             );
         }
 

@@ -29,9 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return ImmutableArray<Cci.ICustomModifier>.CastUp(
-                    AdaptedParameterSymbol.TypeWithAnnotations.CustomModifiers
-                );
+                return ImmutableArray<Cci.ICustomModifier>
+                    .CastUp(AdaptedParameterSymbol.TypeWithAnnotations.CustomModifiers);
             }
         }
 
@@ -44,19 +43,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return ImmutableArray<Cci.ICustomModifier>.CastUp(
-                    AdaptedParameterSymbol.RefCustomModifiers
-                );
+                return ImmutableArray<Cci.ICustomModifier>
+                    .CastUp(AdaptedParameterSymbol.RefCustomModifiers);
             }
         }
 
         Cci.ITypeReference Cci.IParameterTypeInformation.GetType(EmitContext context)
         {
-            return ((PEModuleBuilder)context.Module).Translate(
-                AdaptedParameterSymbol.Type,
-                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                diagnostics: context.Diagnostics
-            );
+            return ((PEModuleBuilder)context.Module)
+                .Translate(
+                    AdaptedParameterSymbol.Type,
+                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
+                    diagnostics: context.Diagnostics
+                );
         }
 
         ushort Cci.IParameterListEntry.Index
@@ -86,9 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // preserve the exact type of the constant for primitive types,
                 // e.g. it should be Int16 for [DefaultParameterValue((short)1)]int x
-                type = AdaptedParameterSymbol.ContainingAssembly.GetSpecialType(
-                    constant.SpecialType
-                );
+                type = AdaptedParameterSymbol.ContainingAssembly
+                    .GetSpecialType(constant.SpecialType);
             }
             else
             {
@@ -96,12 +94,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 type = AdaptedParameterSymbol.Type;
             }
 
-            return ((PEModuleBuilder)context.Module).CreateConstant(
-                type,
-                constant.Value,
-                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                diagnostics: context.Diagnostics
-            );
+            return ((PEModuleBuilder)context.Module)
+                .CreateConstant(
+                    type,
+                    constant.Value,
+                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
+                    diagnostics: context.Diagnostics
+                );
         }
 
         bool Cci.IParameterDefinition.HasDefaultValue

@@ -1010,11 +1010,12 @@ namespace Newtonsoft.Json
             {
                 throw JsonWriterException.Create(
                     this,
-                    "Token {0} in state {1} would result in an invalid JSON object.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        tokenBeingWritten.ToString(),
-                        _currentState.ToString()
-                    ),
+                    "Token {0} in state {1} would result in an invalid JSON object."
+                        .FormatWith(
+                            CultureInfo.InvariantCulture,
+                            tokenBeingWritten.ToString(),
+                            _currentState.ToString()
+                        ),
                     null
                 );
             }
@@ -1860,10 +1861,8 @@ namespace Newtonsoft.Json
         {
             return JsonWriterException.Create(
                 writer,
-                "Unsupported type: {0}. Use the JsonSerializer class to get the object's JSON representation.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    value.GetType()
-                ),
+                "Unsupported type: {0}. Use the JsonSerializer class to get the object's JSON representation."
+                    .FormatWith(CultureInfo.InvariantCulture, value.GetType()),
                 null
             );
         }

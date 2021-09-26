@@ -97,24 +97,20 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                     (
                         (
                             columnTypeConfigurationSource == null
-                            && ConfigurationSource.Convention.Overrides(
-                                property.GetTypeMappingConfigurationSource()
-                            )
+                            && ConfigurationSource.Convention
+                                .Overrides(property.GetTypeMappingConfigurationSource())
                         )
                         || (
                             columnTypeConfigurationSource != null
-                            && ConfigurationSource.Convention.Overrides(
-                                columnTypeConfigurationSource
-                            )
+                            && ConfigurationSource.Convention
+                                .Overrides(columnTypeConfigurationSource)
                         )
                     )
                     && (
-                        ConfigurationSource.Convention.Overrides(
-                            property.GetPrecisionConfigurationSource()
-                        )
-                        || ConfigurationSource.Convention.Overrides(
-                            property.GetScaleConfigurationSource()
-                        )
+                        ConfigurationSource.Convention
+                            .Overrides(property.GetPrecisionConfigurationSource())
+                        || ConfigurationSource.Convention
+                            .Overrides(property.GetScaleConfigurationSource())
                     )
                 )
                 {
@@ -176,9 +172,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                             p =>
                                 p.GetValueGenerationStrategy()
                                     == SqlServerValueGenerationStrategy.SequenceHiLo
-                                && (
-                                    (IConventionProperty)p
-                                ).GetValueGenerationStrategyConfigurationSource() != null
+                                && ((IConventionProperty)p)
+                                    .GetValueGenerationStrategyConfigurationSource() != null
                                 && !p.IsKey()
                                 && p.ValueGenerated != ValueGenerated.Never
                                 && (
@@ -188,9 +183,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                                         )
                                         is IConventionAnnotation strategy
                                     )
-                                    || !ConfigurationSource.Convention.Overrides(
-                                        strategy.GetConfigurationSource()
-                                    )
+                                    || !ConfigurationSource.Convention
+                                        .Overrides(strategy.GetConfigurationSource())
                                 )
                         )
                 )
@@ -350,11 +344,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
 
             if (identityColumns.Count > 1)
             {
-                var sb = new StringBuilder().AppendJoin(
-                    identityColumns.Values.Select(
-                        p => "'" + p.DeclaringEntityType.DisplayName() + "." + p.Name + "'"
-                    )
-                );
+                var sb = new StringBuilder()
+                    .AppendJoin(
+                        identityColumns.Values
+                            .Select(
+                                p => "'" + p.DeclaringEntityType.DisplayName() + "." + p.Name + "'"
+                            )
+                    );
                 throw new InvalidOperationException(
                     SqlServerStrings.MultipleIdentityColumns(sb, storeObject.DisplayName())
                 );
@@ -379,14 +375,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
             if (propertyStrategy != duplicatePropertyStrategy)
             {
                 var isConflicting =
-                    ((IConventionProperty)property).FindAnnotation(
-                        SqlServerAnnotationNames.ValueGenerationStrategy
-                    )?.GetConfigurationSource() == ConfigurationSource.Explicit
+                    ((IConventionProperty)property)
+                        .FindAnnotation(
+                            SqlServerAnnotationNames.ValueGenerationStrategy
+                        )?.GetConfigurationSource() == ConfigurationSource.Explicit
                     || propertyStrategy != SqlServerValueGenerationStrategy.None;
                 var isDuplicateConflicting =
-                    ((IConventionProperty)duplicateProperty).FindAnnotation(
-                        SqlServerAnnotationNames.ValueGenerationStrategy
-                    )?.GetConfigurationSource() == ConfigurationSource.Explicit
+                    ((IConventionProperty)duplicateProperty)
+                        .FindAnnotation(
+                            SqlServerAnnotationNames.ValueGenerationStrategy
+                        )?.GetConfigurationSource() == ConfigurationSource.Explicit
                     || duplicatePropertyStrategy != SqlServerValueGenerationStrategy.None;
 
                 if (isConflicting && isDuplicateConflicting)

@@ -256,9 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             bool initializeCollections = true
         )
         {
-            var accessor = new ClrCollectionAccessorFactory().Create(
-                CreateNavigation(navigationName)
-            );
+            var accessor = new ClrCollectionAccessorFactory()
+                .Create(CreateNavigation(navigationName));
 
             var entity = new MyEntity(initializeCollections);
 
@@ -291,10 +290,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
 
             var navigation = foreignKey.SetPrincipalToDependent(
-                typeof(MyEntity).GetProperty(
-                    nameof(MyEntity.AsICollectionWithCustomComparer),
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-                )
+                typeof(MyEntity)
+                    .GetProperty(
+                        nameof(MyEntity.AsICollectionWithCustomComparer),
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                    )
             );
 
             RunConvention(navigation);
@@ -360,9 +360,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Action<IClrCollectionAccessor, MyEntity, MyOtherEntity> test
         )
         {
-            var accessor = new ClrCollectionAccessorFactory().Create(
-                CreateNavigation("AsIEnumerableNotCollection")
-            );
+            var accessor = new ClrCollectionAccessorFactory()
+                .Create(CreateNavigation("AsIEnumerableNotCollection"));
 
             var entity = new MyEntity(initialize: true);
             var value = new MyOtherEntity();
@@ -400,9 +399,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [ConditionalFact]
         public void Initialization_for_navigation_without_backing_field_throws()
         {
-            var accessor = new ClrCollectionAccessorFactory().Create(
-                CreateNavigation("NoBackingFound")
-            );
+            var accessor = new ClrCollectionAccessorFactory()
+                .Create(CreateNavigation("NoBackingFound"));
 
             Assert.Equal(
                 CoreStrings.NavigationNoSetter("NoBackingFound", typeof(MyEntity).Name),
@@ -420,9 +418,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [ConditionalFact]
         public void Initialization_for_read_only_navigation_without_backing_field_throws()
         {
-            var accessor = new ClrCollectionAccessorFactory().Create(
-                CreateNavigation("ReadOnlyPropNoField")
-            );
+            var accessor = new ClrCollectionAccessorFactory()
+                .Create(CreateNavigation("ReadOnlyPropNoField"));
 
             Assert.Equal(
                 CoreStrings.NavigationNoSetter("ReadOnlyPropNoField", typeof(MyEntity).Name),
@@ -456,9 +453,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [ConditionalFact]
         public void Initialization_for_navigation_with_private_constructor_throws()
         {
-            var accessor = new ClrCollectionAccessorFactory().Create(
-                CreateNavigation("AsMyPrivateCollection")
-            );
+            var accessor = new ClrCollectionAccessorFactory()
+                .Create(CreateNavigation("AsMyPrivateCollection"));
 
             Assert.Equal(
                 CoreStrings.NavigationCannotCreateType(
@@ -480,9 +476,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [ConditionalFact]
         public void Initialization_for_navigation_with_internal_constructor_throws()
         {
-            var accessor = new ClrCollectionAccessorFactory().Create(
-                CreateNavigation("AsMyInternalCollection")
-            );
+            var accessor = new ClrCollectionAccessorFactory()
+                .Create(CreateNavigation("AsMyInternalCollection"));
 
             Assert.Equal(
                 CoreStrings.NavigationCannotCreateType(
@@ -504,9 +499,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [ConditionalFact]
         public void Initialization_for_navigation_without_parameterless_constructor_throws()
         {
-            var accessor = new ClrCollectionAccessorFactory().Create(
-                CreateNavigation("AsMyUnavailableCollection")
-            );
+            var accessor = new ClrCollectionAccessorFactory()
+                .Create(CreateNavigation("AsMyUnavailableCollection"));
 
             Assert.Equal(
                 CoreStrings.NavigationCannotCreateType(
@@ -537,10 +531,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
 
             var navigation = foreignKey.SetPrincipalToDependent(
-                typeof(MyEntity).GetProperty(
-                    navigationName,
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-                )
+                typeof(MyEntity)
+                    .GetProperty(
+                        navigationName,
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                    )
             );
 
             RunConvention(navigation);
@@ -554,23 +549,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ((ForeignKey)navigation.ForeignKey).DeclaringEntityType.Model.ConventionDispatcher
             );
 
-            new BackingFieldConvention(CreateDependencies()).ProcessNavigationAdded(
-                ((IConventionNavigation)navigation).Builder,
-                context
-            );
+            new BackingFieldConvention(CreateDependencies())
+                .ProcessNavigationAdded(((IConventionNavigation)navigation).Builder, context);
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private class MyEntity
         {
-            public static readonly PropertyInfo AsICollectionProperty =
-                typeof(MyEntity).GetProperty(
-                    nameof(AsICollection),
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                );
+            public static readonly PropertyInfo AsICollectionProperty = typeof(MyEntity)
+                .GetProperty(nameof(AsICollection), BindingFlags.NonPublic | BindingFlags.Instance);
 
             private ICollection<MyOtherEntity> _asICollection;
             private ICollection<MyEntityWithCustomComparer> _asICollectionOfEntitiesWithCustomComparer;

@@ -1019,8 +1019,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 // we don't emit multiple sequence points for the same location
                 int lastOffset = -1;
 
-                ArrayBuilder<RawSequencePoint> seqPoints =
-                    ArrayBuilder<RawSequencePoint>.GetInstance();
+                ArrayBuilder<RawSequencePoint> seqPoints = ArrayBuilder<RawSequencePoint>
+                    .GetInstance();
                 foreach (var seqPoint in this.SeqPointsOpt)
                 {
                     int offset = this.GetILOffsetFromMarker(seqPoint.ILMarker);
@@ -1071,13 +1071,14 @@ namespace Microsoft.CodeAnalysis.CodeGen
             if (_initialHiddenSequencePointMarker >= 0)
             {
                 Debug.Assert(this.SeqPointsOpt.Count == 0);
-                this.SeqPointsOpt.Add(
-                    new RawSequencePoint(
-                        syntaxTree,
-                        _initialHiddenSequencePointMarker,
-                        RawSequencePoint.HiddenSequencePointSpan
-                    )
-                );
+                this.SeqPointsOpt
+                    .Add(
+                        new RawSequencePoint(
+                            syntaxTree,
+                            _initialHiddenSequencePointMarker,
+                            RawSequencePoint.HiddenSequencePointSpan
+                        )
+                    );
                 _initialHiddenSequencePointMarker = -1;
             }
 

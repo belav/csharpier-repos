@@ -104,12 +104,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     )
                     {
                         // There is no corresponding bind node. Add a diagnostic and move on.
-                        parameterReference.Parent.Diagnostics.Add(
-                            ComponentDiagnosticFactory.CreateBindAttributeParameter_MissingBind(
-                                node.Source,
-                                node.AttributeName
-                            )
-                        );
+                        parameterReference.Parent.Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.CreateBindAttributeParameter_MissingBind(
+                                    node.Source,
+                                    node.AttributeName
+                                )
+                            );
                     }
                     else if (node.BoundAttributeParameter.Name == "event")
                     {
@@ -262,19 +263,21 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             // If we still have duplicates at this point then they are genuine conflicts.
-            var duplicates = node.Children.OfType<TagHelperDirectiveAttributeIntermediateNode>()
+            var duplicates = node.Children
+                .OfType<TagHelperDirectiveAttributeIntermediateNode>()
                 .GroupBy(p => p.AttributeName)
                 .Where(g => g.Count() > 1);
 
             foreach (var duplicate in duplicates)
             {
-                node.Diagnostics.Add(
-                    ComponentDiagnosticFactory.CreateBindAttribute_Duplicates(
-                        node.Source,
-                        duplicate.First().OriginalAttributeName,
-                        duplicate.ToArray()
-                    )
-                );
+                node.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.CreateBindAttribute_Duplicates(
+                            node.Source,
+                            duplicate.First().OriginalAttributeName,
+                            duplicate.ToArray()
+                        )
+                    );
                 foreach (var property in duplicate)
                 {
                     node.Children.Remove(property);
@@ -323,12 +326,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             {
                 // Skip anything we can't understand. It's important that we don't crash, that will bring down
                 // the build.
-                node.Diagnostics.Add(
-                    ComponentDiagnosticFactory.CreateBindAttribute_InvalidSyntax(
-                        node.Source,
-                        node.AttributeName
-                    )
-                );
+                node.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.CreateBindAttribute_InvalidSyntax(
+                            node.Source,
+                            node.AttributeName
+                        )
+                    );
                 return new[] { node };
             }
 
@@ -531,13 +535,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
                     expressionNode.Children.Clear();
                     expressionNode.Children.Add(new CSharpExpressionIntermediateNode());
-                    expressionNode.Children[0].Children.Add(
-                        new IntermediateToken()
-                        {
-                            Content = $"() => {original.Content}",
-                            Kind = TokenKind.CSharp
-                        }
-                    );
+                    expressionNode.Children[0].Children
+                        .Add(
+                            new IntermediateToken()
+                            {
+                                Content = $"() => {original.Content}",
+                                Kind = TokenKind.CSharp
+                            }
+                        );
                 }
 
                 return expressionNode == null
@@ -853,9 +858,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             if (template != null)
             {
                 // See comments in TemplateDiagnosticPass
-                node.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_TemplateInvalidLocation(template.Source)
-                );
+                node.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_TemplateInvalidLocation(template.Source)
+                    );
                 return new IntermediateToken() { Kind = TokenKind.CSharp, Content = string.Empty, };
             }
 
@@ -865,10 +871,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 // an expression.
                 var content =
                     "\""
-                    + string.Join(
-                        string.Empty,
-                        htmlContentNode.Children.OfType<IntermediateToken>().Select(t => t.Content)
-                    )
+                    + string
+                        .Join(
+                            string.Empty,
+                            htmlContentNode.Children
+                                .OfType<IntermediateToken>()
+                                .Select(t => t.Content)
+                        )
                     + "\"";
                 return new IntermediateToken() { Kind = TokenKind.CSharp, Content = content };
             }
@@ -895,10 +904,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 return new IntermediateToken()
                 {
                     Kind = TokenKind.CSharp,
-                    Content = string.Join(
-                        string.Empty,
-                        parent.Children.OfType<IntermediateToken>().Select(t => t.Content)
-                    ),
+                    Content = string
+                        .Join(
+                            string.Empty,
+                            parent.Children.OfType<IntermediateToken>().Select(t => t.Content)
+                        ),
                 };
             }
         }

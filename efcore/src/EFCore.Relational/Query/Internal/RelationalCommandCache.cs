@@ -159,10 +159,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     {
                         var value = parameterValue.Value;
                         if (
-                            !commandCacheKey._parameterValues.TryGetValue(
-                                parameterValue.Key,
-                                out var otherValue
-                            )
+                            !commandCacheKey._parameterValues
+                                .TryGetValue(parameterValue.Key, out var otherValue)
                         )
                         {
                             return false;

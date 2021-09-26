@@ -1257,14 +1257,15 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 if (rootDSE.Properties.Contains(PropertyManager.DomainFunctionality))
                 {
-                    domainFunctionality = int.Parse(
-                        (string)PropertyManager.GetPropertyValue(
-                            context,
-                            rootDSE,
-                            PropertyManager.DomainFunctionality
-                        )!,
-                        NumberFormatInfo.InvariantInfo
-                    );
+                    domainFunctionality = int
+                        .Parse(
+                            (string)PropertyManager.GetPropertyValue(
+                                context,
+                                rootDSE,
+                                PropertyManager.DomainFunctionality
+                            )!,
+                            NumberFormatInfo.InvariantInfo
+                        );
                 }
             }
             catch (COMException e)

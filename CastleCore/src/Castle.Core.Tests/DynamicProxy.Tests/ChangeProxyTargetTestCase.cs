@@ -56,7 +56,8 @@ namespace Castle.DynamicProxy.Tests
             {
                 (invocation as IChangeProxyTarget).ChangeInvocationTarget(LazyTarget.Value);
 #pragma warning disable CS0618 // obsolete: use DynProxySetTarget instead
-                (invocation as IChangeProxyTarget).ChangeProxyTarget(LazyTarget.Value);
+                (invocation as IChangeProxyTarget)
+                    .ChangeProxyTarget(LazyTarget.Value);
 #pragma warning restore CS0618 // obsolete
             }
 

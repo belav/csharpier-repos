@@ -294,10 +294,10 @@ namespace System.Net.Http
         )
         {
             string? parameter = await GetDigestTokenForCredential(
-                    credential,
-                    request,
-                    digestResponse
-                )
+                credential,
+                request,
+                digestResponse
+            )
                 .ConfigureAwait(false);
 
             // Any errors in obtaining parameter return false and we don't proceed with auth
@@ -376,13 +376,13 @@ namespace System.Net.Http
             }
 
             HttpResponseMessage response = await InnerSendAsync(
-                    request,
-                    async,
-                    isProxyAuth,
-                    doRequestAuth,
-                    pool,
-                    cancellationToken
-                )
+                request,
+                async,
+                isProxyAuth,
+                doRequestAuth,
+                pool,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (
@@ -401,23 +401,23 @@ namespace System.Net.Http
                         var digestResponse = new DigestResponse(challenge.ChallengeData);
                         if (
                             await TrySetDigestAuthToken(
-                                    request,
-                                    challenge.Credential,
-                                    digestResponse,
-                                    isProxyAuth
-                                )
+                                request,
+                                challenge.Credential,
+                                digestResponse,
+                                isProxyAuth
+                            )
                                 .ConfigureAwait(false)
                         )
                         {
                             response.Dispose();
                             response = await InnerSendAsync(
-                                    request,
-                                    async,
-                                    isProxyAuth,
-                                    doRequestAuth,
-                                    pool,
-                                    cancellationToken
-                                )
+                                request,
+                                async,
+                                isProxyAuth,
+                                doRequestAuth,
+                                pool,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
 
                             // Retry in case of nonce timeout in server.
@@ -434,23 +434,23 @@ namespace System.Net.Http
                                 if (
                                     IsServerNonceStale(digestResponse)
                                     && await TrySetDigestAuthToken(
-                                            request,
-                                            challenge.Credential,
-                                            digestResponse,
-                                            isProxyAuth
-                                        )
+                                        request,
+                                        challenge.Credential,
+                                        digestResponse,
+                                        isProxyAuth
+                                    )
                                         .ConfigureAwait(false)
                                 )
                                 {
                                     response.Dispose();
                                     response = await InnerSendAsync(
-                                            request,
-                                            async,
-                                            isProxyAuth,
-                                            doRequestAuth,
-                                            pool,
-                                            cancellationToken
-                                        )
+                                        request,
+                                        async,
+                                        isProxyAuth,
+                                        doRequestAuth,
+                                        pool,
+                                        cancellationToken
+                                    )
                                         .ConfigureAwait(false);
                                 }
                             }
@@ -473,13 +473,13 @@ namespace System.Net.Http
                         response.Dispose();
                         SetBasicAuthToken(request, challenge.Credential, isProxyAuth);
                         response = await InnerSendAsync(
-                                request,
-                                async,
-                                isProxyAuth,
-                                doRequestAuth,
-                                pool,
-                                cancellationToken
-                            )
+                            request,
+                            async,
+                            isProxyAuth,
+                            doRequestAuth,
+                            pool,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         if (preAuthenticate)
@@ -509,11 +509,8 @@ namespace System.Net.Http
                                                     $"Adding Basic credential to cache, uri={authUri}, username={challenge.Credential.UserName}"
                                                 );
                                             }
-                                            pool.PreAuthCredentials.Add(
-                                                authUri,
-                                                BasicScheme,
-                                                challenge.Credential
-                                            );
+                                            pool.PreAuthCredentials
+                                                .Add(authUri, BasicScheme, challenge.Credential);
                                         }
                                         catch (ArgumentException)
                                         {

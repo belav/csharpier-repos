@@ -120,11 +120,11 @@ class Program
     }
 }";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "12",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "12",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Program.Main",
                     @"
@@ -189,11 +189,11 @@ class Program
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "12",
-                    verify: Verification.Passes
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "12",
+                verify: Verification.Passes
+            )
                 .VerifyIL(
                     "Program.Main",
                     @"
@@ -248,11 +248,11 @@ class Program
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "12",
-                    verify: Verification.Passes
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "12",
+                verify: Verification.Passes
+            )
                 .VerifyIL(
                     "Program.Main",
                     @"
@@ -307,11 +307,11 @@ class Program
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "12",
-                    verify: Verification.Passes
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "12",
+                verify: Verification.Passes
+            )
                 .VerifyIL(
                     "Program.Main",
                     @"
@@ -364,12 +364,11 @@ class Program
 }
 ";
 
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics(
-                    // (9,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
-                    //     public fixed S1 x[10];
-                    Diagnostic(ErrorCode.ERR_IllegalFixedType, "S1").WithLocation(9, 18)
-                );
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
+                // (9,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
+                //     public fixed S1 x[10];
+                Diagnostic(ErrorCode.ERR_IllegalFixedType, "S1").WithLocation(9, 18)
+            );
         }
 
         [Fact]
@@ -398,15 +397,14 @@ class Program
 }
 ";
 
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics(
-                    // (14,34): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                    //         System.Console.WriteLine(s.x[3]);
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "s.x").WithLocation(14, 34),
-                    // (18,34): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                    //         System.Console.WriteLine(a[0].x[3]);
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "a[0].x").WithLocation(18, 34)
-                );
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
+                // (14,34): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                //         System.Console.WriteLine(s.x[3]);
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "s.x").WithLocation(14, 34),
+                // (18,34): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                //         System.Console.WriteLine(a[0].x[3]);
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "a[0].x").WithLocation(18, 34)
+            );
         }
 
         [Fact]
@@ -436,19 +434,18 @@ class Program
 }
 ";
 
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics(
-                    // (17,9): error CS1648: Members of readonly field 'S1.field' cannot be modified (except in a constructor, an init-only member or a variable initializer)
-                    //         c.field.x[0] = 12;
-                    Diagnostic(ErrorCode.ERR_AssgReadonly2, "c.field.x[0]")
-                        .WithArguments("S1.field")
-                        .WithLocation(17, 9),
-                    // (19,27): error CS1649: Members of readonly field 'S1.field' cannot be used as a ref or out value (except in a constructor)
-                    //         ref int irw = ref c.field.x[0];
-                    Diagnostic(ErrorCode.ERR_RefReadonly2, "c.field.x[0]")
-                        .WithArguments("S1.field")
-                        .WithLocation(19, 27)
-                );
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
+                // (17,9): error CS1648: Members of readonly field 'S1.field' cannot be modified (except in a constructor, an init-only member or a variable initializer)
+                //         c.field.x[0] = 12;
+                Diagnostic(ErrorCode.ERR_AssgReadonly2, "c.field.x[0]")
+                    .WithArguments("S1.field")
+                    .WithLocation(17, 9),
+                // (19,27): error CS1649: Members of readonly field 'S1.field' cannot be used as a ref or out value (except in a constructor)
+                //         ref int irw = ref c.field.x[0];
+                Diagnostic(ErrorCode.ERR_RefReadonly2, "c.field.x[0]")
+                    .WithArguments("S1.field")
+                    .WithLocation(19, 27)
+            );
         }
 
         [Fact]
@@ -483,11 +480,11 @@ class Program
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "12",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "12",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Program.Main",
                     @"
@@ -556,11 +553,11 @@ class Program
     }
 }";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "12",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "12",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Program.Main",
                     @"
@@ -677,11 +674,11 @@ class Program
     }
 }";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "12",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "12",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Program.Main",
                     @"
@@ -718,18 +715,17 @@ unsafe class C
     fixed int G[1];
 }
 ";
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics(
-                    // (5,15): error CS1642: Fixed size buffer fields may only be members of structs
-                    //     fixed int G[1];
-                    Diagnostic(ErrorCode.ERR_FixedNotInStruct, "G"),
-                    // (4,15): error CS1642: Fixed size buffer fields may only be members of structs
-                    //     fixed int F[G];
-                    Diagnostic(ErrorCode.ERR_FixedNotInStruct, "F"),
-                    // (4,17): error CS0120: An object reference is required for the non-static field, method, or property 'C.G'
-                    //     fixed int F[G];
-                    Diagnostic(ErrorCode.ERR_ObjectRequired, "G").WithArguments("C.G")
-                );
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
+                // (5,15): error CS1642: Fixed size buffer fields may only be members of structs
+                //     fixed int G[1];
+                Diagnostic(ErrorCode.ERR_FixedNotInStruct, "G"),
+                // (4,15): error CS1642: Fixed size buffer fields may only be members of structs
+                //     fixed int F[G];
+                Diagnostic(ErrorCode.ERR_FixedNotInStruct, "F"),
+                // (4,17): error CS0120: An object reference is required for the non-static field, method, or property 'C.G'
+                //     fixed int F[G];
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "G").WithArguments("C.G")
+            );
         }
 
         [Fact]
@@ -746,21 +742,19 @@ unsafe struct S
 }
 ";
             // CONSIDER: Dev11 reports CS1666 (ERR_FixedBufferNotFixed), but that's no more helpful.
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics(
-                    // (6,18): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
-                    //     fixed int F1[(new S()).G];
-                    Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "(new S()).G")
-                        .WithLocation(6, 18),
-                    // (4,17): error CS0120: An object reference is required for the non-static field, method, or property 'S.G'
-                    //     fixed int F[G];
-                    Diagnostic(ErrorCode.ERR_ObjectRequired, "G")
-                        .WithArguments("S.G")
-                        .WithLocation(4, 17),
-                    // (4,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
-                    //     fixed int F[G];
-                    Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "G").WithLocation(4, 17)
-                );
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
+                // (6,18): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                //     fixed int F1[(new S()).G];
+                Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "(new S()).G").WithLocation(6, 18),
+                // (4,17): error CS0120: An object reference is required for the non-static field, method, or property 'S.G'
+                //     fixed int F[G];
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "G")
+                    .WithArguments("S.G")
+                    .WithLocation(4, 17),
+                // (4,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                //     fixed int F[G];
+                Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "G").WithLocation(4, 17)
+            );
         }
 
         [Fact]
@@ -778,21 +772,19 @@ unsafe struct S
             // CONSIDER: Dev11 also reports CS0110 (ERR_CircConstValue), but Roslyn doesn't regard this as a cycle:
             // F has no initializer, so it has no constant value, so the constant value of F is "null" - not "the
             // constant value of F" (i.e. cyclic).
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics(
-                    // (5,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
-                    //     fixed int G[default(S).G];
-                    Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "default(S).G")
-                        .WithLocation(5, 17),
-                    // (4,17): error CS0120: An object reference is required for the non-static field, method, or property 'S.F'
-                    //     fixed int F[F];
-                    Diagnostic(ErrorCode.ERR_ObjectRequired, "F")
-                        .WithArguments("S.F")
-                        .WithLocation(4, 17),
-                    // (4,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
-                    //     fixed int F[F];
-                    Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "F").WithLocation(4, 17)
-                );
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
+                // (5,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                //     fixed int G[default(S).G];
+                Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "default(S).G").WithLocation(5, 17),
+                // (4,17): error CS0120: An object reference is required for the non-static field, method, or property 'S.F'
+                //     fixed int F[F];
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "F")
+                    .WithArguments("S.F")
+                    .WithLocation(4, 17),
+                // (4,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                //     fixed int F[F];
+                Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "F").WithLocation(4, 17)
+            );
         }
 
         [Fact]
@@ -805,12 +797,11 @@ unsafe struct S
 {
     fixed int F[3, 4];
 }";
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics(
-                    // (4,16): error CS7092: A fixed buffer may only have one dimension.
-                    //     fixed int F[3, 4];
-                    Diagnostic(ErrorCode.ERR_FixedBufferTooManyDimensions, "[3, 4]")
-                );
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
+                // (4,16): error CS7092: A fixed buffer may only have one dimension.
+                //     fixed int F[3, 4];
+                Diagnostic(ErrorCode.ERR_FixedBufferTooManyDimensions, "[3, 4]")
+            );
         }
 
         [Fact, WorkItem(1171076, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1171076")]
@@ -852,11 +843,11 @@ class Program
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "133",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "133",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Program.Test",
                     @"
@@ -899,14 +890,13 @@ class Program
     }
 }
 ";
-            CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
-                .VerifyEmitDiagnostics(
-                    // (8,34): error CS0106: The modifier 'readonly' is not valid for this item
-                    //     public readonly fixed UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "StartOfTables")
-                        .WithArguments("readonly")
-                        .WithLocation(8, 34)
-                );
+            CreateCompilation(text, options: TestOptions.UnsafeReleaseDll).VerifyEmitDiagnostics(
+                // (8,34): error CS0106: The modifier 'readonly' is not valid for this item
+                //     public readonly fixed UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "StartOfTables")
+                    .WithArguments("readonly")
+                    .WithLocation(8, 34)
+            );
         }
 
         [Fact, WorkItem(1171076, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1171076")]
@@ -931,14 +921,13 @@ class Program
     }
 }
 ";
-            CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
-                .VerifyEmitDiagnostics(
-                    // (8,32): error CS0106: The modifier 'static' is not valid for this item
-                    //     public static fixed UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "StartOfTables")
-                        .WithArguments("static")
-                        .WithLocation(8, 32)
-                );
+            CreateCompilation(text, options: TestOptions.UnsafeReleaseDll).VerifyEmitDiagnostics(
+                // (8,32): error CS0106: The modifier 'static' is not valid for this item
+                //     public static fixed UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "StartOfTables")
+                    .WithArguments("static")
+                    .WithLocation(8, 32)
+            );
         }
 
         [Fact, WorkItem(1171076, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1171076")]
@@ -963,45 +952,44 @@ class Program
     }
 }
 ";
-            CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
-                .VerifyEmitDiagnostics(
-                    // (8,18): error CS1031: Type expected
-                    //     public fixed const UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_TypeExpected, "const").WithLocation(8, 18),
-                    // (8,18): error CS1001: Identifier expected
-                    //     public fixed const UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "const").WithLocation(8, 18),
-                    // (8,18): error CS1003: Syntax error, '[' expected
-                    //     public fixed const UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "const")
-                        .WithArguments("[", "const")
-                        .WithLocation(8, 18),
-                    // (8,18): error CS1003: Syntax error, ']' expected
-                    //     public fixed const UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "const")
-                        .WithArguments("]", "const")
-                        .WithLocation(8, 18),
-                    // (8,18): error CS0443: Syntax error; value expected
-                    //     public fixed const UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_ValueExpected, "const").WithLocation(8, 18),
-                    // (8,18): error CS1002: ; expected
-                    //     public fixed const UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "const").WithLocation(8, 18),
-                    // (8,44): error CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
-                    //     public fixed const UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_CStyleArray, "[ 16 ]").WithLocation(8, 44),
-                    // (8,46): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                    //     public fixed const UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "16").WithLocation(8, 46),
-                    // (8,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
-                    //     public fixed const UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_IllegalFixedType, "").WithLocation(8, 18),
-                    // (15,25): error CS0122: 'AssemblyRecord.StartOfTables' is inaccessible due to its protection level
-                    //         return pStruct->StartOfTables[ 11 ];
-                    Diagnostic(ErrorCode.ERR_BadAccess, "StartOfTables")
-                        .WithArguments("AssemblyRecord.StartOfTables")
-                        .WithLocation(15, 25)
-                );
+            CreateCompilation(text, options: TestOptions.UnsafeReleaseDll).VerifyEmitDiagnostics(
+                // (8,18): error CS1031: Type expected
+                //     public fixed const UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_TypeExpected, "const").WithLocation(8, 18),
+                // (8,18): error CS1001: Identifier expected
+                //     public fixed const UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "const").WithLocation(8, 18),
+                // (8,18): error CS1003: Syntax error, '[' expected
+                //     public fixed const UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_SyntaxError, "const")
+                    .WithArguments("[", "const")
+                    .WithLocation(8, 18),
+                // (8,18): error CS1003: Syntax error, ']' expected
+                //     public fixed const UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_SyntaxError, "const")
+                    .WithArguments("]", "const")
+                    .WithLocation(8, 18),
+                // (8,18): error CS0443: Syntax error; value expected
+                //     public fixed const UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_ValueExpected, "const").WithLocation(8, 18),
+                // (8,18): error CS1002: ; expected
+                //     public fixed const UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "const").WithLocation(8, 18),
+                // (8,44): error CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
+                //     public fixed const UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_CStyleArray, "[ 16 ]").WithLocation(8, 44),
+                // (8,46): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                //     public fixed const UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "16").WithLocation(8, 46),
+                // (8,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
+                //     public fixed const UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_IllegalFixedType, "").WithLocation(8, 18),
+                // (15,25): error CS0122: 'AssemblyRecord.StartOfTables' is inaccessible due to its protection level
+                //         return pStruct->StartOfTables[ 11 ];
+                Diagnostic(ErrorCode.ERR_BadAccess, "StartOfTables")
+                    .WithArguments("AssemblyRecord.StartOfTables")
+                    .WithLocation(15, 25)
+            );
         }
 
         [Fact, WorkItem(1171076, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1171076")]
@@ -1026,26 +1014,25 @@ class Program
     }
 }
 ";
-            CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
-                .VerifyEmitDiagnostics(
-                    // (8,18): error CS1031: Type expected
-                    //     public const fixed UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_TypeExpected, "fixed").WithLocation(8, 18),
-                    // (8,18): error CS1001: Identifier expected
-                    //     public const fixed UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "fixed").WithLocation(8, 18),
-                    // (8,18): error CS0145: A const field requires a value to be provided
-                    //     public const fixed UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_ConstValueRequired, "fixed").WithLocation(8, 18),
-                    // (8,18): error CS1002: ; expected
-                    //     public const fixed UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "fixed").WithLocation(8, 18),
-                    // (15,25): error CS0122: 'AssemblyRecord.StartOfTables' is inaccessible due to its protection level
-                    //         return pStruct->StartOfTables[ 11 ];
-                    Diagnostic(ErrorCode.ERR_BadAccess, "StartOfTables")
-                        .WithArguments("AssemblyRecord.StartOfTables")
-                        .WithLocation(15, 25)
-                );
+            CreateCompilation(text, options: TestOptions.UnsafeReleaseDll).VerifyEmitDiagnostics(
+                // (8,18): error CS1031: Type expected
+                //     public const fixed UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_TypeExpected, "fixed").WithLocation(8, 18),
+                // (8,18): error CS1001: Identifier expected
+                //     public const fixed UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "fixed").WithLocation(8, 18),
+                // (8,18): error CS0145: A const field requires a value to be provided
+                //     public const fixed UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_ConstValueRequired, "fixed").WithLocation(8, 18),
+                // (8,18): error CS1002: ; expected
+                //     public const fixed UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "fixed").WithLocation(8, 18),
+                // (15,25): error CS0122: 'AssemblyRecord.StartOfTables' is inaccessible due to its protection level
+                //         return pStruct->StartOfTables[ 11 ];
+                Diagnostic(ErrorCode.ERR_BadAccess, "StartOfTables")
+                    .WithArguments("AssemblyRecord.StartOfTables")
+                    .WithLocation(15, 25)
+            );
         }
 
         [Fact, WorkItem(1171076, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1171076")]
@@ -1070,14 +1057,13 @@ class Program
     }
 }
 ";
-            CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
-                .VerifyEmitDiagnostics(
-                    // (8,34): error CS0106: The modifier 'volatile' is not valid for this item
-                    //     public volatile fixed UInt32 StartOfTables[ 16 ];
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "StartOfTables")
-                        .WithArguments("volatile")
-                        .WithLocation(8, 34)
-                );
+            CreateCompilation(text, options: TestOptions.UnsafeReleaseDll).VerifyEmitDiagnostics(
+                // (8,34): error CS0106: The modifier 'volatile' is not valid for this item
+                //     public volatile fixed UInt32 StartOfTables[ 16 ];
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "StartOfTables")
+                    .WithArguments("volatile")
+                    .WithLocation(8, 34)
+            );
         }
 
         [Fact, WorkItem(3392, "https://github.com/dotnet/roslyn/issues/3392")]
@@ -1228,7 +1214,7 @@ class Program
         public void FixedFieldDoesNotAllowAddressOfOperator()
         {
             CreateCompilation(
-                    @"
+                @"
 unsafe struct Foo
 {
     private fixed int Bar[2];
@@ -1236,16 +1222,15 @@ unsafe struct Foo
     public int* M1 => &this.Bar[0];
     public int* M2 => &Bar[1];
 }",
-                    options: TestOptions.UnsafeReleaseDll
-                )
-                .VerifyDiagnostics(
-                    // (6,23): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
-                    //     public int* M1 => &this.Bar[0];
-                    Diagnostic(ErrorCode.ERR_FixedNeeded, "&this.Bar[0]").WithLocation(6, 23),
-                    // (7,23): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
-                    //     public int* M2 => &Bar[1];
-                    Diagnostic(ErrorCode.ERR_FixedNeeded, "&Bar[1]").WithLocation(7, 23)
-                );
+                options: TestOptions.UnsafeReleaseDll
+            ).VerifyDiagnostics(
+                // (6,23): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                //     public int* M1 => &this.Bar[0];
+                Diagnostic(ErrorCode.ERR_FixedNeeded, "&this.Bar[0]").WithLocation(6, 23),
+                // (7,23): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                //     public int* M2 => &Bar[1];
+                Diagnostic(ErrorCode.ERR_FixedNeeded, "&Bar[1]").WithLocation(7, 23)
+            );
         }
 
         [Fact]
@@ -1351,7 +1336,8 @@ public unsafe struct FixedBuffer
                 references: new[] { comp.ToMetadataReference() },
                 targetFramework: TargetFramework.Mscorlib46
             );
-            var retargetingField = comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("FixedBuffer")
+            var retargetingField = comp3.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("FixedBuffer")
                 .GetMember<RetargetingFieldSymbol>("buffer");
             Assert.True(retargetingField.IsFixedSizeBuffer);
         }

@@ -276,13 +276,15 @@ namespace System.Text.Json.Serialization.Tests
             Verify();
 
             // Verify the values are round-trippable.
-            ((JsonDynamicArray)obj["MyArray"]).RemoveAt(2);
+            ((JsonDynamicArray)obj["MyArray"])
+                .RemoveAt(2);
             Verify();
 
             void Verify()
             {
                 // Change some primitives.
-                ((JsonDynamicType)obj["MyString"]).SetValue("Hello!");
+                ((JsonDynamicType)obj["MyString"])
+                    .SetValue("Hello!");
                 ((JsonDynamicType)obj["MyBoolean"]).SetValue(false);
                 ((JsonDynamicType)obj["MyInt"]).SetValue(43);
 

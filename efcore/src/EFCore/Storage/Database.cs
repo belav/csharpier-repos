@@ -73,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Expression query,
             bool async
         ) =>
-            Dependencies.QueryCompilationContextFactory.Create(async)
+            Dependencies.QueryCompilationContextFactory
+                .Create(async)
                 .CreateQueryExecutor<TResult>(query);
     }
 }

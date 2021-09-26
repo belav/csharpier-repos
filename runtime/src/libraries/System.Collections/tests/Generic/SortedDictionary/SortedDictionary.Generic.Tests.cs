@@ -80,9 +80,8 @@ namespace System.Collections.Tests
             Assert.Equal(sourceSorted, copied);
             Assert.Equal(comparer, copied.Comparer);
             // Test copying a sorted dictionary with a different comparer.
-            IComparer<TKey> reverseComparer = Comparer<TKey>.Create(
-                (key1, key2) => -comparer.Compare(key1, key2)
-            );
+            IComparer<TKey> reverseComparer = Comparer<TKey>
+                .Create((key1, key2) => -comparer.Compare(key1, key2));
             SortedDictionary<TKey, TValue> copiedReverse = new SortedDictionary<TKey, TValue>(
                 sourceSorted,
                 reverseComparer

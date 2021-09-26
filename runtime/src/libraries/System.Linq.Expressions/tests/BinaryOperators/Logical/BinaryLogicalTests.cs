@@ -510,9 +510,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void AndAlso_Method_ExpressionDoesntMatchMethodParameters_ThrowsInvalidOperationException()
         {
-            MethodInfo method = typeof(NonGenericClass).GetMethod(
-                nameof(NonGenericClass.StaticIntMethod2Valid)
-            );
+            MethodInfo method = typeof(NonGenericClass)
+                .GetMethod(nameof(NonGenericClass.StaticIntMethod2Valid));
             Assert.Throws<InvalidOperationException>(
                 () => Expression.AndAlso(Expression.Constant("abc"), Expression.Constant(5), method)
             );
@@ -524,9 +523,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void OrElse_ExpressionDoesntMatchMethodParameters_ThrowsInvalidOperationException()
         {
-            MethodInfo method = typeof(NonGenericClass).GetMethod(
-                nameof(NonGenericClass.StaticIntMethod2Valid)
-            );
+            MethodInfo method = typeof(NonGenericClass)
+                .GetMethod(nameof(NonGenericClass.StaticIntMethod2Valid));
             Assert.Throws<InvalidOperationException>(
                 () => Expression.AndAlso(Expression.Constant("abc"), Expression.Constant(5), method)
             );
@@ -538,9 +536,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void MethodParametersNotEqual_ThrowsArgumentException()
         {
-            MethodInfo method = typeof(NonGenericClass).GetMethod(
-                nameof(NonGenericClass.StaticIntMethod2Invalid1)
-            );
+            MethodInfo method = typeof(NonGenericClass)
+                .GetMethod(nameof(NonGenericClass.StaticIntMethod2Invalid1));
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Expression.AndAlso(Expression.Constant(5), Expression.Constant("abc"), method)
@@ -554,9 +551,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Method_ReturnTypeNotEqualToParameterTypes_ThrowsArgumentException()
         {
-            MethodInfo method = typeof(NonGenericClass).GetMethod(
-                nameof(NonGenericClass.StaticIntMethod2Invalid2)
-            );
+            MethodInfo method = typeof(NonGenericClass)
+                .GetMethod(nameof(NonGenericClass.StaticIntMethod2Invalid2));
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Expression.AndAlso(Expression.Constant(5), Expression.Constant(5), method)
@@ -570,9 +566,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void MethodDeclaringTypeHasNoTrueFalseOperator_ThrowsArgumentException()
         {
-            MethodInfo method = typeof(NonGenericClass).GetMethod(
-                nameof(NonGenericClass.StaticIntMethod2Valid)
-            );
+            MethodInfo method = typeof(NonGenericClass)
+                .GetMethod(nameof(NonGenericClass.StaticIntMethod2Valid));
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Expression.AndAlso(Expression.Constant(5), Expression.Constant(5), method)
@@ -1265,9 +1260,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ImplicitConversionToBool_ThrowsArgumentException()
         {
-            MethodInfo method = typeof(ClassWithImplicitBoolOperator).GetMethod(
-                nameof(ClassWithImplicitBoolOperator.ConversionMethod)
-            );
+            MethodInfo method = typeof(ClassWithImplicitBoolOperator)
+                .GetMethod(nameof(ClassWithImplicitBoolOperator.ConversionMethod));
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () =>
@@ -1388,9 +1382,9 @@ namespace System.Linq.Expressions.Tests
         private static MethodInfo GlobalMethod(Type returnType, Type[] parameterTypes)
         {
             ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(
-                    new AssemblyName("Name"),
-                    AssemblyBuilderAccess.RunAndCollect
-                )
+                new AssemblyName("Name"),
+                AssemblyBuilderAccess.RunAndCollect
+            )
                 .DefineDynamicModule("Module");
             MethodBuilder globalMethod = module.DefineGlobalMethod(
                 "GlobalMethod",

@@ -131,10 +131,11 @@ namespace System.Net.Security
             }
             else
             {
-                bindingHandle = Interop.OpenSsl.QueryChannelBinding(
-                    ((SafeDeleteSslContext)securityContext).SslContext,
-                    attribute
-                );
+                bindingHandle = Interop.OpenSsl
+                    .QueryChannelBinding(
+                        ((SafeDeleteSslContext)securityContext).SslContext,
+                        attribute
+                    );
             }
 
             return bindingHandle;
@@ -188,12 +189,13 @@ namespace System.Net.Security
                     );
                 }
 
-                bool done = Interop.OpenSsl.DoSslHandshake(
-                    ((SafeDeleteSslContext)context).SslContext,
-                    inputBuffer,
-                    out output,
-                    out outputSize
-                );
+                bool done = Interop.OpenSsl
+                    .DoSslHandshake(
+                        ((SafeDeleteSslContext)context).SslContext,
+                        inputBuffer,
+                        out output,
+                        out outputSize
+                    );
 
                 // When the handshake is done, and the context is server, check if the alpnHandle target was set to null during ALPN.
                 // If it was, then that indicates ALPN failed, send failure.
@@ -266,22 +268,13 @@ namespace System.Net.Security
 
                 if (encrypt)
                 {
-                    resultSize = Interop.OpenSsl.Encrypt(
-                        scHandle,
-                        input.Span,
-                        ref output,
-                        out errorCode
-                    );
+                    resultSize = Interop.OpenSsl
+                        .Encrypt(scHandle, input.Span, ref output, out errorCode);
                 }
                 else
                 {
-                    resultSize = Interop.OpenSsl.Decrypt(
-                        scHandle,
-                        output,
-                        offset,
-                        size,
-                        out errorCode
-                    );
+                    resultSize = Interop.OpenSsl
+                        .Decrypt(scHandle, output, offset, size, out errorCode);
                 }
 
                 switch (errorCode)

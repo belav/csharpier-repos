@@ -38,11 +38,11 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             else
             {
                 return await GetFormattedDocumentWithDetailedChanges(
-                        document,
-                        sourceText,
-                        optionSet,
-                        cancellationToken
-                    )
+                    document,
+                    sourceText,
+                    optionSet,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -57,10 +57,10 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
         )
         {
             var formattedDocument = await Formatter.FormatAsync(
-                    document,
-                    optionSet,
-                    cancellationToken
-                )
+                document,
+                optionSet,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return await formattedDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
         }

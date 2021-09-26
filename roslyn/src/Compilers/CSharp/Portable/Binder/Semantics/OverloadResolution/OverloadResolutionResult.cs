@@ -1470,10 +1470,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // The argument and parameter type might match, but may not have same in/out modifiers
                 if (argument.Kind == BoundKind.UnboundLambda && refArg == refParameter)
                 {
-                    ((UnboundLambda)argument).GenerateAnonymousFunctionConversionError(
-                        diagnostics,
-                        parameterType
-                    );
+                    ((UnboundLambda)argument)
+                        .GenerateAnonymousFunctionConversionError(diagnostics, parameterType);
                 }
                 else if (
                     argument.Kind == BoundKind.MethodGroup
@@ -1855,15 +1853,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
             else if (
-                System.Linq.Enumerable.Any(
-                    ResultsBuilder,
-                    x =>
-                        (x.Result.Kind == MemberResolutionKind.TypeInferenceFailed)
-                        || (
-                            x.Result.Kind
-                            == MemberResolutionKind.TypeInferenceExtensionInstanceArgument
-                        )
-                )
+                System.Linq.Enumerable
+                    .Any(
+                        ResultsBuilder,
+                        x =>
+                            (x.Result.Kind == MemberResolutionKind.TypeInferenceFailed)
+                            || (
+                                x.Result.Kind
+                                == MemberResolutionKind.TypeInferenceExtensionInstanceArgument
+                            )
+                    )
             )
             {
                 sb.AppendLine(

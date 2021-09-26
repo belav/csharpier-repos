@@ -47,10 +47,10 @@ namespace Microsoft.CodeAnalysis.UnsealClass
             )
             {
                 var definition = await SymbolFinder.FindSourceDefinitionAsync(
-                        type,
-                        document.Project.Solution,
-                        cancellationToken
-                    )
+                    type,
+                    document.Project.Solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (definition != null && definition.DeclaringSyntaxReferences.Length > 0)
                 {

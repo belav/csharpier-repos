@@ -22,10 +22,11 @@ namespace System.Linq.Expressions.Tests
             public Inner InnerProperty { get; set; } = new Inner();
         }
 
-        private static readonly PropertyInfo DebugViewProperty = typeof(Expression).GetProperty(
-            "DebugView",
-            BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
-        );
+        private static readonly PropertyInfo DebugViewProperty = typeof(Expression)
+            .GetProperty(
+                "DebugView",
+                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+            );
 
         // Available via Arguments and Expressions properties
         private static readonly string[] ExcludedPropertyNames =
@@ -92,8 +93,8 @@ namespace System.Linq.Expressions.Tests
             }
             object view = viewType.GetConstructors().Single().Invoke(new[] { obj });
             IEnumerable<PropertyInfo> properties = type.GetProperties(
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy
-                )
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy
+            )
                 .Where(pr => !ExcludedPropertyNames.Contains(pr.Name) && pr.CanRead);
             if (obj is Expression)
             {

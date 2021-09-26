@@ -82,8 +82,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 var bindings = new Dictionary<string, Binding>();
                 var componentTypeParameters = node.Component.GetTypeParameters().ToList();
                 var supplyCascadingTypeParameters = componentTypeParameters.Where(
-                        p => p.IsCascadingTypeParameterProperty()
-                    )
+                    p => p.IsCascadingTypeParameterProperty()
+                )
                     .Select(p => p.Name)
                     .ToList();
                 foreach (var attribute in componentTypeParameters)
@@ -159,9 +159,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         && TryFindGenericTypeNames(attribute.BoundAttribute, out var typeParameters)
                     )
                     {
-                        var attributeValueIsLambda = _pass.TypeNameFeature.IsLambda(
-                            GetContent(attribute)
-                        );
+                        var attributeValueIsLambda = _pass.TypeNameFeature
+                            .IsLambda(GetContent(attribute));
                         var provideCascadingGenericTypes = new CascadingGenericTypeParameter
                         {
                             GenericTypeNames = typeParameters,
@@ -179,10 +178,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                                 // or Dictionary<T, U>, we prefer List<T>.
                                 node.ProvidesCascadingGenericTypes ??= new();
                                 if (
-                                    !node.ProvidesCascadingGenericTypes.TryGetValue(
-                                        typeName,
-                                        out var existingValue
-                                    )
+                                    !node.ProvidesCascadingGenericTypes
+                                        .TryGetValue(typeName, out var existingValue)
                                     || existingValue.GenericTypeNames.Count > typeParameters.Count
                                 )
                                 {
@@ -222,10 +219,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     {
                         if (
                             candidateAncestor.ProvidesCascadingGenericTypes != null
-                            && candidateAncestor.ProvidesCascadingGenericTypes.TryGetValue(
-                                uncoveredBindingKey,
-                                out var genericTypeProvider
-                            )
+                            && candidateAncestor.ProvidesCascadingGenericTypes
+                                .TryGetValue(uncoveredBindingKey, out var genericTypeProvider)
                         )
                         {
                             // If the parameter value is an expression that includes multiple generic types, we only want
@@ -291,13 +286,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         node
                     );
 
-                    node.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_GenericComponentTypeInferenceUnderspecified(
-                            node.Source,
-                            node,
-                            node.Component.GetTypeParameters()
-                        )
-                    );
+                    node.Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_GenericComponentTypeInferenceUnderspecified(
+                                node.Source,
+                                node,
+                                node.Component.GetTypeParameters()
+                            )
+                        );
                 }
 
                 // Next we need to generate a type inference 'method' node. This represents a method that we will codegen that
@@ -340,22 +336,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             private string GetContent(ComponentTypeArgumentIntermediateNode node)
             {
-                return string.Join(
-                    string.Empty,
-                    node.FindDescendantNodes<IntermediateToken>()
-                        .Where(t => t.IsCSharp)
-                        .Select(t => t.Content)
-                );
+                return string
+                    .Join(
+                        string.Empty,
+                        node.FindDescendantNodes<IntermediateToken>()
+                            .Where(t => t.IsCSharp)
+                            .Select(t => t.Content)
+                    );
             }
 
             private string GetContent(ComponentAttributeIntermediateNode node)
             {
-                return string.Join(
-                    string.Empty,
-                    node.FindDescendantNodes<IntermediateToken>()
-                        .Where(t => t.IsCSharp)
-                        .Select(t => t.Content)
-                );
+                return string
+                    .Join(
+                        string.Empty,
+                        node.FindDescendantNodes<IntermediateToken>()
+                            .Where(t => t.IsCSharp)
+                            .Select(t => t.Content)
+                    );
             }
 
             private static bool ValidateTypeArguments(
@@ -380,13 +378,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     // We add our own error for this because its likely the user will see other errors due
                     // to incorrect codegen without the types. Our errors message will pretty clearly indicate
                     // what to do, whereas the other errors might be confusing.
-                    node.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_GenericComponentMissingTypeArgument(
-                            node.Source,
-                            node,
-                            missing
-                        )
-                    );
+                    node.Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_GenericComponentMissingTypeArgument(
+                                node.Source,
+                                node,
+                                missing
+                            )
+                        );
                     return false;
                 }
 
@@ -503,18 +502,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 node.TypeInferenceNode = typeInferenceNode;
 
                 // Now we need to insert the type inference node into the tree.
-                var namespaceNode =
-                    documentNode.Children.OfType<NamespaceDeclarationIntermediateNode>()
-                        .Where(
-                            n =>
-                                n.Annotations.Contains(
+                var namespaceNode = documentNode.Children
+                    .OfType<NamespaceDeclarationIntermediateNode>()
+                    .Where(
+                        n =>
+                            n.Annotations
+                                .Contains(
                                     new KeyValuePair<object, object>(
                                         ComponentMetadata.Component.GenericTypedKey,
                                         bool.TrueString
                                     )
                                 )
-                        )
-                        .FirstOrDefault();
+                    )
+                    .FirstOrDefault();
                 if (namespaceNode == null)
                 {
                     namespaceNode = new NamespaceDeclarationIntermediateNode()
@@ -529,7 +529,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     documentNode.Children.Add(namespaceNode);
                 }
 
-                var classNode = namespaceNode.Children.OfType<ClassDeclarationIntermediateNode>()
+                var classNode = namespaceNode.Children
+                    .OfType<ClassDeclarationIntermediateNode>()
                     .Where(n => n.ClassName == "TypeInference")
                     .FirstOrDefault();
                 if (classNode == null)

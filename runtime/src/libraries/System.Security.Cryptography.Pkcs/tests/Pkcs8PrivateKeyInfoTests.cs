@@ -571,7 +571,8 @@ D9fVWpuVzYpEDfZm"
                 ReadOnlyMemory<byte>.Empty,
                 Array.Empty<byte>(),
                 skipCopies: true
-            ).Encode();
+            )
+                .Encode();
 
             Assert.Equal("300A02010030030601000400", encoded.ByteArrayToHex());
 

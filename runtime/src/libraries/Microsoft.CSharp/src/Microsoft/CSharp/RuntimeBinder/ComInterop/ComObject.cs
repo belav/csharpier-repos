@@ -74,10 +74,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
             return Expression.Property(
                 Helpers.Convert(comObject, typeof(ComObject)),
-                typeof(ComObject).GetProperty(
-                    nameof(RuntimeCallableWrapper),
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )
+                typeof(ComObject)
+                    .GetProperty(
+                        nameof(RuntimeCallableWrapper),
+                        BindingFlags.NonPublic | BindingFlags.Instance
+                    )
             );
         }
 

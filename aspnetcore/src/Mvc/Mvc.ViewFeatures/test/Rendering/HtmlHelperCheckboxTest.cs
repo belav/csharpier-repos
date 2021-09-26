@@ -293,11 +293,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 + @"<input name=""HtmlEncode[[Property1]]"" type=""HtmlEncode[[hidden]]"" value=""HtmlEncode[[false]]"" />";
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(GetTestModelViewData());
-            helper.ViewData.ModelState.SetModelValue(
-                "Property1",
-                new string[] { "false" },
-                "false"
-            );
+            helper.ViewData.ModelState
+                .SetModelValue("Property1", new string[] { "false" }, "false");
 
             // Act
             var html = helper.CheckBox("Property1", isChecked: null, htmlAttributes: null);
@@ -725,11 +722,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
             var viewData = GetTestModelViewData();
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(viewData);
-            viewData.ModelState.SetModelValue(
-                "Property1",
-                new string[] { attemptedValue },
-                attemptedValue
-            );
+            viewData.ModelState
+                .SetModelValue("Property1", new string[] { attemptedValue }, attemptedValue);
 
             // Act
             var html = helper.CheckBoxFor(m => m.Property1, htmlAttributes: null);

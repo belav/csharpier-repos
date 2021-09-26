@@ -21,8 +21,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     {
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
-        private static readonly MethodInfo _methodInfo =
-            typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _methodInfo = typeof(SqlServerDbFunctionsExtensions)
+            .GetRequiredRuntimeMethod(
                 nameof(SqlServerDbFunctionsExtensions.IsNumeric),
                 new[] { typeof(DbFunctions), typeof(string) }
             );

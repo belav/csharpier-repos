@@ -171,10 +171,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return false;
             }
 
-            var options = workspace.Options.WithChangedOption(
-                    NavigationOptions.PreferProvisionalTab,
-                    previewTab
-                )
+            var options = workspace.Options
+                .WithChangedOption(NavigationOptions.PreferProvisionalTab, previewTab)
                 .WithChangedOption(NavigationOptions.ActivateTab, activate);
             return navigationService.TryNavigateToLineAndOffset(
                 workspace,

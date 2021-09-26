@@ -98,8 +98,8 @@ namespace Microsoft.AspNetCore.Mvc
                 );
             }
 
-            var loggerFactory =
-                context.HttpContext.RequestServices.GetRequiredService<ILoggerFactory>();
+            var loggerFactory = context.HttpContext.RequestServices
+                .GetRequiredService<ILoggerFactory>();
             var logger = loggerFactory.CreateLogger<SignOutResult>();
 
             logger.SignOutResultExecuting(AuthenticationSchemes);

@@ -54,7 +54,8 @@ namespace System.IO.Tests
         {
             // When enumerating we populate the state as we already have it.
             string path = CreateItem();
-            FileSystemInfo info = new DirectoryInfo(TestDirectory).EnumerateFileSystemInfos()
+            FileSystemInfo info = new DirectoryInfo(TestDirectory)
+                .EnumerateFileSystemInfos()
                 .First();
             DeleteItem(path);
 

@@ -107,47 +107,51 @@ namespace System.Numerics.Tests
 
             Vector3 v1 = new Vector3(2.0f, 3.0f, 3.3f);
             string v1str = v1.ToString();
-            string expectedv1 = string.Format(
-                CultureInfo.CurrentCulture,
-                "<{1:G}{0} {2:G}{0} {3:G}>",
-                separator,
-                2,
-                3,
-                3.3
-            );
+            string expectedv1 = string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "<{1:G}{0} {2:G}{0} {3:G}>",
+                    separator,
+                    2,
+                    3,
+                    3.3
+                );
             Assert.Equal(expectedv1, v1str);
 
             string v1strformatted = v1.ToString("c", CultureInfo.CurrentCulture);
-            string expectedv1formatted = string.Format(
-                CultureInfo.CurrentCulture,
-                "<{1:c}{0} {2:c}{0} {3:c}>",
-                separator,
-                2,
-                3,
-                3.3
-            );
+            string expectedv1formatted = string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "<{1:c}{0} {2:c}{0} {3:c}>",
+                    separator,
+                    2,
+                    3,
+                    3.3
+                );
             Assert.Equal(expectedv1formatted, v1strformatted);
 
             string v2strformatted = v1.ToString("c", enUsCultureInfo);
-            string expectedv2formatted = string.Format(
-                enUsCultureInfo,
-                "<{1:c}{0} {2:c}{0} {3:c}>",
-                enUsCultureInfo.NumberFormat.NumberGroupSeparator,
-                2,
-                3,
-                3.3
-            );
+            string expectedv2formatted = string
+                .Format(
+                    enUsCultureInfo,
+                    "<{1:c}{0} {2:c}{0} {3:c}>",
+                    enUsCultureInfo.NumberFormat.NumberGroupSeparator,
+                    2,
+                    3,
+                    3.3
+                );
             Assert.Equal(expectedv2formatted, v2strformatted);
 
             string v3strformatted = v1.ToString("c");
-            string expectedv3formatted = string.Format(
-                CultureInfo.CurrentCulture,
-                "<{1:c}{0} {2:c}{0} {3:c}>",
-                separator,
-                2,
-                3,
-                3.3
-            );
+            string expectedv3formatted = string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "<{1:c}{0} {2:c}{0} {3:c}>",
+                    separator,
+                    2,
+                    3,
+                    3.3
+                );
             Assert.Equal(expectedv3formatted, v3strformatted);
         }
 

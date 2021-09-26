@@ -152,7 +152,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
                 // and produce a policy using this. This would mean we would have effectively run some auth twice, but it maintains compat.
                 var policyProvider =
                     PolicyProvider
-                    ?? context.HttpContext.RequestServices.GetRequiredService<IAuthorizationPolicyProvider>();
+                    ?? context.HttpContext.RequestServices
+                        .GetRequiredService<IAuthorizationPolicyProvider>();
                 var endpointAuthorizeData =
                     endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>()
                     ?? Array.Empty<IAuthorizeData>();
@@ -190,8 +191,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
                 return;
             }
 
-            var policyEvaluator =
-                context.HttpContext.RequestServices.GetRequiredService<IPolicyEvaluator>();
+            var policyEvaluator = context.HttpContext.RequestServices
+                .GetRequiredService<IPolicyEvaluator>();
 
             var authenticateResult = await policyEvaluator.AuthenticateAsync(
                 effectivePolicy,

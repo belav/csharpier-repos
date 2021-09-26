@@ -731,19 +731,13 @@ namespace System.Xml.Schema
                 object valueToCheck = value;
                 if (value.GetType() != this.ValueType)
                 {
-                    valueToCheck = this.ValueConverter.ChangeType(
-                        value,
-                        this.ValueType,
-                        namespaceResolver
-                    );
+                    valueToCheck = this.ValueConverter
+                        .ChangeType(value, this.ValueType, namespaceResolver);
                 }
                 if (this.HasLexicalFacets)
                 {
-                    string s1 = (string)this.ValueConverter.ChangeType(
-                        value,
-                        typeof(string),
-                        namespaceResolver
-                    ); //Using value here to avoid info loss
+                    string s1 = (string)this.ValueConverter
+                        .ChangeType(value, typeof(string), namespaceResolver); //Using value here to avoid info loss
                     exception = this.FacetsChecker.CheckLexicalFacets(ref s1, this);
                     if (exception != null)
                         goto Error;
@@ -1160,10 +1154,8 @@ namespace System.Xml.Schema
                     xmlType1 = atomicValues1[i].XmlType;
                     if (
                         xmlType1 != atomicValues2[i].XmlType
-                        || !xmlType1.Datatype!.IsEqual(
-                            atomicValues1[i].TypedValue,
-                            atomicValues2[i].TypedValue
-                        )
+                        || !xmlType1.Datatype!
+                            .IsEqual(atomicValues1[i].TypedValue, atomicValues2[i].TypedValue)
                     )
                     {
                         return -1;
@@ -1248,11 +1240,8 @@ namespace System.Xml.Schema
 
             try
             {
-                object valueToCheck = this.ValueConverter.ChangeType(
-                    value,
-                    this.ValueType,
-                    namespaceResolver
-                );
+                object valueToCheck = this.ValueConverter
+                    .ChangeType(value, this.ValueType, namespaceResolver);
                 Array valuesToCheck = (valueToCheck as Array)!;
                 Debug.Assert(valuesToCheck != null);
 
@@ -1287,11 +1276,8 @@ namespace System.Xml.Schema
                 //Check facets on the list itself
                 if (this.HasLexicalFacets)
                 {
-                    string s1 = (string)this.ValueConverter.ChangeType(
-                        valueToCheck,
-                        typeof(string),
-                        namespaceResolver
-                    );
+                    string s1 = (string)this.ValueConverter
+                        .ChangeType(valueToCheck, typeof(string), namespaceResolver);
                     exception = listFacetsChecker.CheckLexicalFacets(ref s1, this);
                     if (exception != null)
                         goto Error;
@@ -1587,11 +1573,8 @@ namespace System.Xml.Schema
             {
                 if (this.HasLexicalFacets)
                 {
-                    string s1 = (string)this.ValueConverter.ChangeType(
-                        valueToCheck,
-                        typeof(string),
-                        nsmgr
-                    ); //Using value here to avoid info loss
+                    string s1 = (string)this.ValueConverter
+                        .ChangeType(valueToCheck, typeof(string), nsmgr); //Using value here to avoid info loss
                     exception = unionFacetsChecker.CheckLexicalFacets(ref s1, this);
                     if (exception != null)
                         goto Error;
@@ -3257,11 +3240,8 @@ namespace System.Xml.Schema
             Debug.Assert(uri != null);
 
             string stringValue = uri.OriginalString;
-            exception = ((StringFacetsChecker)stringFacetsChecker).CheckValueFacets(
-                stringValue,
-                this,
-                false
-            );
+            exception = ((StringFacetsChecker)stringFacetsChecker)
+                .CheckValueFacets(stringValue, this, false);
             if (exception != null)
                 goto Error;
 

@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                     TInvocationExpressionSyntax,
                     TExpressionStatementSyntax,
                     TVariableDeclaratorSyntax
-                >.Analyze(semanticModel, syntaxFacts, objectCreation, cancellationToken);
+                >
+                    .Analyze(semanticModel, syntaxFacts, objectCreation, cancellationToken);
 
                 if (matches == null || matches.Value.Length == 0)
                 {

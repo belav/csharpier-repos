@@ -39,9 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
     public abstract class AbstractNavigateToTests
     {
         private static readonly TestComposition s_composition =
-            EditorTestCompositions.EditorFeatures.AddParts(
-                typeof(TestDocumentTrackingServiceFactory)
-            );
+            EditorTestCompositions.EditorFeatures
+                .AddParts(typeof(TestDocumentTrackingServiceFactory));
 
         protected INavigateToItemProvider _provider;
         protected NavigateToTestAggregator _aggregator;
@@ -251,22 +250,24 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
                 Assert.Equal(expectedItem.Name, actualItem.Name);
                 Assert.True(
                     expectedItem.PatternMatch.Kind == actualItem.PatternMatch.Kind,
-                    string.Format(
-                        "pattern: {0} expected: {1} actual: {2}",
-                        expectedItem.Name,
-                        expectedItem.PatternMatch.Kind,
-                        actualItem.PatternMatch.Kind
-                    )
+                    string
+                        .Format(
+                            "pattern: {0} expected: {1} actual: {2}",
+                            expectedItem.Name,
+                            expectedItem.PatternMatch.Kind,
+                            actualItem.PatternMatch.Kind
+                        )
                 );
                 Assert.True(
                     expectedItem.PatternMatch.IsCaseSensitive
                         == actualItem.PatternMatch.IsCaseSensitive,
-                    string.Format(
-                        "pattern: {0} expected: {1} actual: {2}",
-                        expectedItem.Name,
-                        expectedItem.PatternMatch.IsCaseSensitive,
-                        actualItem.PatternMatch.IsCaseSensitive
-                    )
+                    string
+                        .Format(
+                            "pattern: {0} expected: {1} actual: {2}",
+                            expectedItem.Name,
+                            expectedItem.PatternMatch.IsCaseSensitive,
+                            actualItem.PatternMatch.IsCaseSensitive
+                        )
                 );
                 Assert.Equal(expectedItem.Language, actualItem.Language);
                 Assert.Equal(expectedItem.Kind, actualItem.Kind);
@@ -303,9 +304,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
                 out ImmutableArray<TextSpan> expectedDisplayNameSpans
             );
 
-            var itemDisplay = (NavigateToItemDisplay)result.DisplayFactory.CreateItemDisplay(
-                result
-            );
+            var itemDisplay = (NavigateToItemDisplay)result.DisplayFactory
+                .CreateItemDisplay(result);
 
             Assert.Equal(itemDisplay.GlyphMoniker, glyph.GetImageMoniker());
 

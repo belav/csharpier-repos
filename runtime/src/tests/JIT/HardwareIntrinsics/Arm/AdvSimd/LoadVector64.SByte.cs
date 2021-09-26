@@ -141,10 +141,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd).GetMethod(
-                    nameof(AdvSimd.LoadVector64),
-                    new Type[] { typeof(SByte*) }
-                )
+            var result = typeof(AdvSimd)
+                .GetMethod(nameof(AdvSimd.LoadVector64), new Type[] { typeof(SByte*) })
                 .Invoke(null, new object[] { Pointer.Box(_dataTable.inArray1Ptr, typeof(SByte*)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector64<SByte>)(result));
@@ -228,15 +226,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.LoadVector64)}<SByte>(Vector64<SByte>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.LoadVector64)}<SByte>(Vector64<SByte>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"   result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

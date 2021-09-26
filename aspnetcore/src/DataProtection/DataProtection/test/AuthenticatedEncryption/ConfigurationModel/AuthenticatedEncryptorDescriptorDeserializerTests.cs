@@ -34,10 +34,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                   <validation algorithm='HMACSHA512' />
                   <masterKey enc:requiresEncryption='true'>{masterKey}</masterKey>
                 </encryptor>";
-            var deserializedDescriptor =
-                new AuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
-                    XElement.Parse(xml)
-                );
+            var deserializedDescriptor = new AuthenticatedEncryptorDescriptorDeserializer()
+                .ImportFromXml(XElement.Parse(xml));
             var test = CreateEncryptorInstanceFromDescriptor(
                 deserializedDescriptor as AuthenticatedEncryptorDescriptor
             );

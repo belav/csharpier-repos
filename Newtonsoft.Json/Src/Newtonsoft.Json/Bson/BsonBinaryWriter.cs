@@ -207,10 +207,8 @@ namespace Newtonsoft.Json.Bson
                 default:
                     throw new ArgumentOutOfRangeException(
                         nameof(t),
-                        "Unexpected token when writing BSON: {0}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            t.Type
-                        )
+                        "Unexpected token when writing BSON: {0}"
+                            .FormatWith(CultureInfo.InvariantCulture, t.Type)
                     );
             }
         }
@@ -352,10 +350,8 @@ namespace Newtonsoft.Json.Bson
                 default:
                     throw new ArgumentOutOfRangeException(
                         nameof(t),
-                        "Unexpected token when writing BSON: {0}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            t.Type
-                        )
+                        "Unexpected token when writing BSON: {0}"
+                            .FormatWith(CultureInfo.InvariantCulture, t.Type)
                     );
             }
         }

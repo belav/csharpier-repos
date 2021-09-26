@@ -564,23 +564,26 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
 
                 if (!string.IsNullOrEmpty(Extension._connectionString))
                 {
-                    debugInfo["Cosmos:" + nameof(ConnectionString)] =
-                        Extension._connectionString.GetHashCode()
-                            .ToString(CultureInfo.InvariantCulture);
+                    debugInfo["Cosmos:" + nameof(ConnectionString)] = Extension._connectionString
+                        .GetHashCode()
+                        .ToString(CultureInfo.InvariantCulture);
                 }
                 else
                 {
                     debugInfo["Cosmos:" + nameof(AccountEndpoint)] = (
                         Extension._accountEndpoint?.GetHashCode() ?? 0L
-                    ).ToString(CultureInfo.InvariantCulture);
+                    )
+                        .ToString(CultureInfo.InvariantCulture);
                     debugInfo["Cosmos:" + nameof(AccountKey)] = (
                         Extension._accountKey?.GetHashCode() ?? 0L
-                    ).ToString(CultureInfo.InvariantCulture);
+                    )
+                        .ToString(CultureInfo.InvariantCulture);
                 }
 
                 debugInfo["Cosmos:" + nameof(CosmosDbContextOptionsBuilder.Region)] = (
                     Extension._region?.GetHashCode() ?? 0
-                ).ToString(CultureInfo.InvariantCulture);
+                )
+                    .ToString(CultureInfo.InvariantCulture);
             }
 
             public override string LogFragment

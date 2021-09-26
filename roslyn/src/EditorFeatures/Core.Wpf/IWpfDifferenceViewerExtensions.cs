@@ -39,9 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             public async Task SizeToFitAsync(CancellationToken cancellationToken)
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext.JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task (containing method uses JTF)
                 await CalculateSizeAsync(cancellationToken);
@@ -76,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
                 try
                 {
-                    return await completionSource.Task.WithCancellation(cancellationToken)
+                    return await completionSource.Task
+                        .WithCancellation(cancellationToken)
                         .ConfigureAwaitRunInline();
                 }
 
@@ -103,9 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             private async Task CalculateSizeAsync(CancellationToken cancellationToken)
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext.JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 IWpfTextView textView;
                 ITextSnapshot snapshot;

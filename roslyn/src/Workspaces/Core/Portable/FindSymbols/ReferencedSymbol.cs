@@ -47,12 +47,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private string GetDebuggerDisplay()
         {
             var count = this.Locations.Count();
-            return string.Format(
-                "{0}, {1} {2}",
-                this.Definition.Name,
-                count,
-                count == 1 ? "ref" : "refs"
-            );
+            return string
+                .Format("{0}, {1} {2}", this.Definition.Name, count, count == 1 ? "ref" : "refs");
         }
 
         internal TestAccessor GetTestAccessor() => new(this);

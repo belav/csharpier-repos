@@ -36,11 +36,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
         )
         {
             var callers = await SymbolFinder.FindCallersAsync(
-                    symbol,
-                    project.Solution,
-                    documents,
-                    cancellationToken
-                )
+                symbol,
+                project.Solution,
+                documents,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return callers.Where(c => c.IsDirect);
         }

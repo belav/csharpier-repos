@@ -20,9 +20,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Act & assert
             Assert.True(
                 t.GetCustomAttributes(
-                        typeof(ModelBinderProviderOptionsAttribute),
-                        true /* inherit */
-                    )
+                    typeof(ModelBinderProviderOptionsAttribute),
+                    true /* inherit */
+                )
                     .Cast<ModelBinderProviderOptionsAttribute>()
                     .Single().FrontOfList
             );
@@ -72,10 +72,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             return new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    modelType
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, modelType),
                 ModelName = "theModelName"
             };
         }

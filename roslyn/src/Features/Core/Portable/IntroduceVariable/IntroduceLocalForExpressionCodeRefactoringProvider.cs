@@ -136,12 +136,12 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 cancellationToken
             );
             var uniqueName = semanticFacts.GenerateUniqueLocalName(
-                    semanticModel,
-                    expression,
-                    containerOpt: null,
-                    baseName,
-                    cancellationToken
-                )
+                semanticModel,
+                expression,
+                containerOpt: null,
+                baseName,
+                cancellationToken
+            )
                 .WithAdditionalAnnotations(RenameAnnotation.Create());
             return uniqueName;
         }

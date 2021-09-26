@@ -244,9 +244,8 @@ namespace System
 delegate void @out();
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol dout = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers(
-                    "out"
-                )
+            NamedTypeSymbol dout = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("out")
                 .Single();
             Assert.Equal("out", dout.Name);
             Assert.Equal("@out", dout.ToString());
@@ -321,13 +320,12 @@ namespace CSSample
     }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (17,19): warning CS0169: The field 'CSSample.Program.d3' is never used
-                    //         static D3 d3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "d3")
-                        .WithArguments("CSSample.Program.d3")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (17,19): warning CS0169: The field 'CSSample.Program.d3' is never used
+                //         static D3 d3;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "d3")
+                    .WithArguments("CSSample.Program.d3")
+            );
         }
 
         [WorkItem(538722, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538722")]
@@ -345,12 +343,11 @@ class Program
   }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (7,27): error CS0428: Cannot convert method group 'Main' to non-delegate type 'System.MulticastDelegate'. Did you intend to invoke the method?
-                    Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "Main")
-                        .WithArguments("Main", "System.MulticastDelegate")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (7,27): error CS0428: Cannot convert method group 'Main' to non-delegate type 'System.MulticastDelegate'. Did you intend to invoke the method?
+                Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "Main")
+                    .WithArguments("Main", "System.MulticastDelegate")
+            );
         }
 
         [WorkItem(538706, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538706")]
@@ -364,7 +361,8 @@ delegate int D(int x, ref int y, out int z);
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("D")
+            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("D")
                 .Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
@@ -421,7 +419,8 @@ delegate void D(out int result);
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("D")
+            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("D")
                 .Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
@@ -454,7 +453,8 @@ delegate void D(out int @__result);
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("D")
+            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("D")
                 .Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
@@ -487,7 +487,8 @@ delegate void D(out int result, out int @__result);
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("D")
+            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("D")
                 .Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
@@ -523,7 +524,8 @@ delegate void D(int callback, int @object);
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("D")
+            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("D")
                 .Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
@@ -635,149 +637,148 @@ public class DelegateTest
     public static void RunG<T>(T t) { }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (44,14): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Da'
-                    //         da = new Da(FTT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Da(FTT)")
-                        .WithArguments("FTT", "DelegateTest.Da")
-                        .WithLocation(44, 14),
-                    // (45,21): error CS0411: The type arguments for method 'DelegateTest.FCT<T>(C<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         da = new Da(FCT);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FCT")
-                        .WithArguments("DelegateTest.FCT<T>(C<T>)")
-                        .WithLocation(45, 21),
-                    // (46,21): error CS0411: The type arguments for method 'DelegateTest.PT<T>(params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         da = new Da(PT);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PT")
-                        .WithArguments("DelegateTest.PT<T>(params T[])")
-                        .WithLocation(46, 21),
-                    // (48,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Daa'
-                    //         daa = new Daa(FT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(FT)")
-                        .WithArguments("FT", "DelegateTest.Daa")
-                        .WithLocation(48, 15),
-                    // (49,15): error CS0123: No overload for 'FTi' matches delegate 'DelegateTest.Daa'
-                    //         daa = new Daa(FTi);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(FTi)")
-                        .WithArguments("FTi", "DelegateTest.Daa")
-                        .WithLocation(49, 15),
-                    // (50,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Daa'
-                    //         daa = new Daa(PTT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(PTT)")
-                        .WithArguments("PTT", "DelegateTest.Daa")
-                        .WithLocation(50, 15),
-                    // (51,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         daa = new Daa(PST);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST")
-                        .WithArguments("DelegateTest.PST<S, T>(S, params T[])")
-                        .WithLocation(51, 23),
-                    // (53,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dai'
-                    //         dai = new Dai(FT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dai(FT)")
-                        .WithArguments("FT", "DelegateTest.Dai")
-                        .WithLocation(53, 15),
-                    // (54,23): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         dai = new Dai(FTT);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
-                        .WithArguments("DelegateTest.FTT<T>(T, T)")
-                        .WithLocation(54, 23),
-                    // (55,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Dai'
-                    //         dai = new Dai(PTT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dai(PTT)")
-                        .WithArguments("PTT", "DelegateTest.Dai")
-                        .WithLocation(55, 15),
-                    // (56,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         dai = new Dai(PST);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST")
-                        .WithArguments("DelegateTest.PST<S, T>(S, params T[])")
-                        .WithLocation(56, 23),
-                    // (58,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dab'
-                    //         dab = new Dab(FT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(FT)")
-                        .WithArguments("FT", "DelegateTest.Dab")
-                        .WithLocation(58, 15),
-                    // (59,23): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         dab = new Dab(FTT);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
-                        .WithArguments("DelegateTest.FTT<T>(T, T)")
-                        .WithLocation(59, 23),
-                    // (60,15): error CS0123: No overload for 'FTi' matches delegate 'DelegateTest.Dab'
-                    //         dab = new Dab(FTi);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(FTi)")
-                        .WithArguments("FTi", "DelegateTest.Dab")
-                        .WithLocation(60, 15),
-                    // (61,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Dab'
-                    //         dab = new Dab(PTT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(PTT)")
-                        .WithArguments("PTT", "DelegateTest.Dab")
-                        .WithLocation(61, 15),
-                    // (62,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         dab = new Dab(PST);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST")
-                        .WithArguments("DelegateTest.PST<S, T>(S, params T[])")
-                        .WithLocation(62, 23),
-                    // (64,15): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Dpa'
-                    //         dpa = new Dpa(FTT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dpa(FTT)")
-                        .WithArguments("FTT", "DelegateTest.Dpa")
-                        .WithLocation(64, 15),
-                    // (65,23): error CS0411: The type arguments for method 'DelegateTest.FCT<T>(C<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         dpa = new Dpa(FCT);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FCT")
-                        .WithArguments("DelegateTest.FCT<T>(C<T>)")
-                        .WithLocation(65, 23),
-                    // (67,16): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dapa'
-                    //         dapa = new Dapa(FT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dapa(FT)")
-                        .WithArguments("FT", "DelegateTest.Dapa")
-                        .WithLocation(67, 16),
-                    // (68,25): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         dapa = new Dapa(FTT);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
-                        .WithArguments("DelegateTest.FTT<T>(T, T)")
-                        .WithLocation(68, 25),
-                    // (70,16): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dapb'
-                    //         dapb = new Dapb(FT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dapb(FT)")
-                        .WithArguments("FT", "DelegateTest.Dapb")
-                        .WithLocation(70, 16),
-                    // (71,25): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         dapb = new Dapb(FTT);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
-                        .WithArguments("DelegateTest.FTT<T>(T, T)")
-                        .WithLocation(71, 25),
-                    // (72,25): error CS0411: The type arguments for method 'DelegateTest.PTT<T>(T, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         dapb = new Dapb(PTT);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PTT")
-                        .WithArguments("DelegateTest.PTT<T>(T, params T[])")
-                        .WithLocation(72, 25),
-                    // (74,17): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dpapa'
-                    //         dpapa = new Dpapa(FT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dpapa(FT)")
-                        .WithArguments("FT", "DelegateTest.Dpapa")
-                        .WithLocation(74, 17),
-                    // (75,27): error CS0411: The type arguments for method 'DelegateTest.PTT<T>(T, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         dpapa = new Dpapa(PTT);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PTT")
-                        .WithArguments("DelegateTest.PTT<T>(T, params T[])")
-                        .WithLocation(75, 27),
-                    // (77,15): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Dca'
-                    //         dca = new Dca(FTT);
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dca(FTT)")
-                        .WithArguments("FTT", "DelegateTest.Dca")
-                        .WithLocation(77, 15),
-                    // (78,23): error CS0411: The type arguments for method 'DelegateTest.PT<T>(params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         dca = new Dca(PT);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PT")
-                        .WithArguments("DelegateTest.PT<T>(params T[])")
-                        .WithLocation(78, 23),
-                    // (80,9): error CS0411: The type arguments for method 'DelegateTest.RunG<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         RunG(null);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "RunG")
-                        .WithArguments("DelegateTest.RunG<T>(T)")
-                        .WithLocation(80, 9)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (44,14): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Da'
+                //         da = new Da(FTT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Da(FTT)")
+                    .WithArguments("FTT", "DelegateTest.Da")
+                    .WithLocation(44, 14),
+                // (45,21): error CS0411: The type arguments for method 'DelegateTest.FCT<T>(C<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         da = new Da(FCT);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FCT")
+                    .WithArguments("DelegateTest.FCT<T>(C<T>)")
+                    .WithLocation(45, 21),
+                // (46,21): error CS0411: The type arguments for method 'DelegateTest.PT<T>(params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         da = new Da(PT);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PT")
+                    .WithArguments("DelegateTest.PT<T>(params T[])")
+                    .WithLocation(46, 21),
+                // (48,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Daa'
+                //         daa = new Daa(FT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(FT)")
+                    .WithArguments("FT", "DelegateTest.Daa")
+                    .WithLocation(48, 15),
+                // (49,15): error CS0123: No overload for 'FTi' matches delegate 'DelegateTest.Daa'
+                //         daa = new Daa(FTi);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(FTi)")
+                    .WithArguments("FTi", "DelegateTest.Daa")
+                    .WithLocation(49, 15),
+                // (50,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Daa'
+                //         daa = new Daa(PTT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(PTT)")
+                    .WithArguments("PTT", "DelegateTest.Daa")
+                    .WithLocation(50, 15),
+                // (51,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         daa = new Daa(PST);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST")
+                    .WithArguments("DelegateTest.PST<S, T>(S, params T[])")
+                    .WithLocation(51, 23),
+                // (53,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dai'
+                //         dai = new Dai(FT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dai(FT)")
+                    .WithArguments("FT", "DelegateTest.Dai")
+                    .WithLocation(53, 15),
+                // (54,23): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         dai = new Dai(FTT);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
+                    .WithArguments("DelegateTest.FTT<T>(T, T)")
+                    .WithLocation(54, 23),
+                // (55,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Dai'
+                //         dai = new Dai(PTT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dai(PTT)")
+                    .WithArguments("PTT", "DelegateTest.Dai")
+                    .WithLocation(55, 15),
+                // (56,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         dai = new Dai(PST);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST")
+                    .WithArguments("DelegateTest.PST<S, T>(S, params T[])")
+                    .WithLocation(56, 23),
+                // (58,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dab'
+                //         dab = new Dab(FT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(FT)")
+                    .WithArguments("FT", "DelegateTest.Dab")
+                    .WithLocation(58, 15),
+                // (59,23): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         dab = new Dab(FTT);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
+                    .WithArguments("DelegateTest.FTT<T>(T, T)")
+                    .WithLocation(59, 23),
+                // (60,15): error CS0123: No overload for 'FTi' matches delegate 'DelegateTest.Dab'
+                //         dab = new Dab(FTi);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(FTi)")
+                    .WithArguments("FTi", "DelegateTest.Dab")
+                    .WithLocation(60, 15),
+                // (61,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Dab'
+                //         dab = new Dab(PTT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(PTT)")
+                    .WithArguments("PTT", "DelegateTest.Dab")
+                    .WithLocation(61, 15),
+                // (62,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         dab = new Dab(PST);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST")
+                    .WithArguments("DelegateTest.PST<S, T>(S, params T[])")
+                    .WithLocation(62, 23),
+                // (64,15): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Dpa'
+                //         dpa = new Dpa(FTT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dpa(FTT)")
+                    .WithArguments("FTT", "DelegateTest.Dpa")
+                    .WithLocation(64, 15),
+                // (65,23): error CS0411: The type arguments for method 'DelegateTest.FCT<T>(C<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         dpa = new Dpa(FCT);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FCT")
+                    .WithArguments("DelegateTest.FCT<T>(C<T>)")
+                    .WithLocation(65, 23),
+                // (67,16): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dapa'
+                //         dapa = new Dapa(FT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dapa(FT)")
+                    .WithArguments("FT", "DelegateTest.Dapa")
+                    .WithLocation(67, 16),
+                // (68,25): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         dapa = new Dapa(FTT);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
+                    .WithArguments("DelegateTest.FTT<T>(T, T)")
+                    .WithLocation(68, 25),
+                // (70,16): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dapb'
+                //         dapb = new Dapb(FT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dapb(FT)")
+                    .WithArguments("FT", "DelegateTest.Dapb")
+                    .WithLocation(70, 16),
+                // (71,25): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         dapb = new Dapb(FTT);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
+                    .WithArguments("DelegateTest.FTT<T>(T, T)")
+                    .WithLocation(71, 25),
+                // (72,25): error CS0411: The type arguments for method 'DelegateTest.PTT<T>(T, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         dapb = new Dapb(PTT);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PTT")
+                    .WithArguments("DelegateTest.PTT<T>(T, params T[])")
+                    .WithLocation(72, 25),
+                // (74,17): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dpapa'
+                //         dpapa = new Dpapa(FT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dpapa(FT)")
+                    .WithArguments("FT", "DelegateTest.Dpapa")
+                    .WithLocation(74, 17),
+                // (75,27): error CS0411: The type arguments for method 'DelegateTest.PTT<T>(T, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         dpapa = new Dpapa(PTT);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PTT")
+                    .WithArguments("DelegateTest.PTT<T>(T, params T[])")
+                    .WithLocation(75, 27),
+                // (77,15): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Dca'
+                //         dca = new Dca(FTT);
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dca(FTT)")
+                    .WithArguments("FTT", "DelegateTest.Dca")
+                    .WithLocation(77, 15),
+                // (78,23): error CS0411: The type arguments for method 'DelegateTest.PT<T>(params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         dca = new Dca(PT);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PT")
+                    .WithArguments("DelegateTest.PT<T>(params T[])")
+                    .WithLocation(78, 23),
+                // (80,9): error CS0411: The type arguments for method 'DelegateTest.RunG<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         RunG(null);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "RunG")
+                    .WithArguments("DelegateTest.RunG<T>(T)")
+                    .WithLocation(80, 9)
+            );
         }
 
         [Fact]
@@ -809,15 +810,14 @@ class C
 {
     D d = async delegate { };
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,17): error CS1988: Async methods cannot have ref, in or out parameters
-                    //     D d = async delegate { };
-                    Diagnostic(ErrorCode.ERR_BadAsyncArgType, "delegate"),
-                    // (4,17): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-                    //     D d = async delegate { };
-                    Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "delegate").WithLocation(4, 17)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,17): error CS1988: Async methods cannot have ref, in or out parameters
+                //     D d = async delegate { };
+                Diagnostic(ErrorCode.ERR_BadAsyncArgType, "delegate"),
+                // (4,17): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                //     D d = async delegate { };
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "delegate").WithLocation(4, 17)
+            );
         }
 
         [Fact]

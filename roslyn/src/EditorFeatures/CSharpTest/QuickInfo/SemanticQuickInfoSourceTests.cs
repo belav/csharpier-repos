@@ -1523,10 +1523,11 @@ class AsyncExample2
             await TestAsync(
                 markup,
                 MainDescription(
-                    string.Format(
-                        FeaturesResources.Awaited_task_returns_0,
-                        $"({CSharpFeaturesResources.awaitable}) class System.Threading.Tasks.Task<TResult>"
-                    )
+                    string
+                        .Format(
+                            FeaturesResources.Awaited_task_returns_0,
+                            $"({CSharpFeaturesResources.awaitable}) class System.Threading.Tasks.Task<TResult>"
+                        )
                 ),
                 TypeParameterMap($"\r\nTResult {FeaturesResources.is_} int")
             );

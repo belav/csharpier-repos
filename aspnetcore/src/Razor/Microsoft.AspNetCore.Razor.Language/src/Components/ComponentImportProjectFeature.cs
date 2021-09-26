@@ -58,9 +58,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         {
             // We want items in descending order. FindHierarchicalItems returns items in ascending order.
             return project.FindHierarchicalItems(
-                    projectItem.FilePath,
-                    ComponentMetadata.ImportsFileName
-                )
+                projectItem.FilePath,
+                ComponentMetadata.ImportsFileName
+            )
                 .Reverse();
         }
 

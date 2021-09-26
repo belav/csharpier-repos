@@ -137,12 +137,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             );
             var serverTypeName = languageClient.GetType().Name;
             var logger = await CreateLoggerAsync(
-                    asyncServiceProvider,
-                    serverTypeName,
-                    clientName,
-                    jsonRpc,
-                    cancellationToken
-                )
+                asyncServiceProvider,
+                serverTypeName,
+                clientName,
+                jsonRpc,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return new InProcLanguageServer(
@@ -177,22 +177,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                 new ServiceMoniker(typeof(InProcLanguageServer).FullName)
             );
 
-            var serviceContainer = await VSShell.ServiceExtensions.GetServiceAsync<
-                SVsBrokeredServiceContainer,
-                IBrokeredServiceContainer
-            >(asyncServiceProvider).ConfigureAwait(false);
+            var serviceContainer = await VSShell.ServiceExtensions
+                .GetServiceAsync<SVsBrokeredServiceContainer, IBrokeredServiceContainer>(
+                    asyncServiceProvider
+                )
+                .ConfigureAwait(false);
             var service = serviceContainer.GetFullAccessServiceBroker();
 
             var configuration = await TraceConfiguration.CreateTraceConfigurationInstanceAsync(
-                    service,
-                    cancellationToken
-                )
+                service,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var traceSource = await configuration.RegisterLogSourceAsync(
-                    logId,
-                    new LogHub.LoggerOptions(),
-                    cancellationToken
-                )
+                logId,
+                new LogHub.LoggerOptions(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             traceSource.Switch.Level = SourceLevels.ActivityTracing | SourceLevels.Information;
@@ -516,13 +517,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
             // Convert to sumtype before reporting to work around https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1107698
             return await _requestDispatcher.ExecuteRequestAsync<CompletionParams, CompletionList>(
-                    _queue,
-                    Methods.TextDocumentCompletionName,
-                    completionParams,
-                    _clientCapabilities,
-                    _clientName,
-                    cancellationToken
-                )
+                _queue,
+                Methods.TextDocumentCompletionName,
+                completionParams,
+                _clientCapabilities,
+                _clientName,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -1112,21 +1113,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
             var asyncToken = _listener.BeginAsyncOperation(nameof(RequestExecutionQueue_Errored));
             _errorShutdownTask = Task.Run(
-                    async () =>
-                    {
-                        _logger?.TraceInformation("Shutting down language server.");
+                async () =>
+                {
+                    _logger?.TraceInformation("Shutting down language server.");
 
-                        await _jsonRpc.NotifyWithParameterObjectAsync(
-                                Methods.WindowLogMessageName,
-                                message
-                            )
-                            .ConfigureAwait(false);
+                    await _jsonRpc.NotifyWithParameterObjectAsync(
+                        Methods.WindowLogMessageName,
+                        message
+                    )
+                        .ConfigureAwait(false);
 
-                        ShutdownImpl();
-                        ExitImpl();
-                    }
-                )
-                .CompletesAsyncOperation(asyncToken);
+                    ShutdownImpl();
+                    ExitImpl();
+                }
+            ).CompletesAsyncOperation(asyncToken);
         }
 
         /// <summary>
@@ -1161,16 +1161,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         /// <summary>
         /// Basic comparer for Uris used by <see cref="_documentsToPublishedUris"/> when publishing notifications.
         /// </summary>
-        private static readonly Comparer<Uri> s_uriComparer = Comparer<Uri>.Create(
-            (uri1, uri2) =>
-                Uri.Compare(
-                    uri1,
-                    uri2,
-                    UriComponents.AbsoluteUri,
-                    UriFormat.SafeUnescaped,
-                    StringComparison.OrdinalIgnoreCase
-                )
-        );
+        private static readonly Comparer<Uri> s_uriComparer = Comparer<Uri>
+            .Create(
+                (uri1, uri2) =>
+                    Uri.Compare(
+                        uri1,
+                        uri2,
+                        UriComponents.AbsoluteUri,
+                        UriFormat.SafeUnescaped,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+            );
 
         // internal for testing purposes
         internal async Task ProcessDiagnosticUpdatedBatchAsync(
@@ -1197,10 +1198,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                         : InternalDiagnosticsOptions.NormalDiagnosticMode;
                     if (_workspace.IsPushDiagnostics(diagnosticMode))
                         await PublishDiagnosticsAsync(
-                                diagnosticService,
-                                document,
-                                cancellationToken
-                            )
+                            diagnosticService,
+                            document,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                 }
             }
@@ -1214,10 +1215,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         {
             // Retrieve all diagnostics for the current document grouped by their actual file uri.
             var fileUriToDiagnostics = await GetDiagnosticsAsync(
-                    diagnosticService,
-                    document,
-                    cancellationToken
-                )
+                diagnosticService,
+                document,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Get the list of file uris with diagnostics (for the document).
@@ -1226,9 +1227,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             // of the current diagnostics set (because the diagnostics were fixed).
             // Use sorted set to have consistent publish ordering for tests and debugging.
             var urisForCurrentDocument = _documentsToPublishedUris.GetValueOrDefault(
-                    document.Id,
-                    ImmutableSortedSet.Create<Uri>(s_uriComparer)
-                )
+                document.Id,
+                ImmutableSortedSet.Create<Uri>(s_uriComparer)
+            )
                 .Union(fileUriToDiagnostics.Keys);
 
             // Update the mapping for this document to be the uris we're about to publish diagnostics for.
@@ -1247,9 +1248,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                 {
                     // Get all previously published diagnostics for this uri excluding those that were contributed from the current document.
                     // We don't need those since we just computed the updated values above.
-                    var diagnosticsFromOtherDocuments = _publishedFileToDiagnostics[fileUri].Where(
-                            kvp => kvp.Key != document.Id
-                        )
+                    var diagnosticsFromOtherDocuments = _publishedFileToDiagnostics[fileUri]
+                        .Where(kvp => kvp.Key != document.Id)
                         .SelectMany(kvp => kvp.Value);
 
                     // Since diagnostics are replaced per uri, we must publish both contributions from this document and any other document
@@ -1308,9 +1308,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                 Uri = uri
             };
             await _jsonRpc.NotifyWithParameterObjectAsync(
-                    Methods.TextDocumentPublishDiagnosticsName,
-                    publishDiagnosticsParams
-                )
+                Methods.TextDocumentPublishDiagnosticsName,
+                publishDiagnosticsParams
+            )
                 .ConfigureAwait(false);
         }
 
@@ -1324,14 +1324,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                 ? InternalDiagnosticsOptions.RazorDiagnosticMode
                 : InternalDiagnosticsOptions.NormalDiagnosticMode;
             var pushDiagnostics = await diagnosticService.GetPushDiagnosticsAsync(
-                    document.Project.Solution.Workspace,
-                    document.Project.Id,
-                    document.Id,
-                    id: null,
-                    includeSuppressedDiagnostics: false,
-                    option,
-                    cancellationToken
-                )
+                document.Project.Solution.Workspace,
+                document.Project.Id,
+                document.Id,
+                id: null,
+                includeSuppressedDiagnostics: false,
+                option,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var diagnostics = pushDiagnostics.WhereAsArray(IncludeDiagnostic);
 
@@ -1345,8 +1345,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             // So we get the diagnostics and group them by the actual mapped path so we can publish notifications
             // for each mapped file's diagnostics.
             var fileUriToDiagnostics = diagnostics.GroupBy(
-                    diagnostic => GetDiagnosticUri(document, diagnostic)
-                )
+                diagnostic => GetDiagnosticUri(document, diagnostic)
+            )
                 .ToDictionary(
                     group => group.Key,
                     group =>
@@ -1462,10 +1462,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                 _server._documentsToPublishedUris.Keys.ToImmutableArray();
 
             internal IImmutableSet<Uri> GetFileUrisForDocument(DocumentId documentId) =>
-                _server._documentsToPublishedUris.GetValueOrDefault(
-                    documentId,
-                    ImmutableSortedSet<Uri>.Empty
-                );
+                _server._documentsToPublishedUris
+                    .GetValueOrDefault(documentId, ImmutableSortedSet<Uri>.Empty);
 
             internal ImmutableArray<LSP.Diagnostic> GetDiagnosticsForUriAndDocument(
                 DocumentId documentId,

@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             const string ItemParameterName = "item";
             const string TemplateWriterName = "__razor_template_writer";
 
-            context.CodeWriter.Write(ItemParameterName)
+            context.CodeWriter
+                .Write(ItemParameterName)
                 .Write(" => ")
                 .WriteStartNewObject(TemplateTypeName);
 

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Completion
 
         public static CompletionHelper GetHelper(Document document)
         {
-            return document.Project.Solution.Workspace.Services.GetRequiredService<ICompletionHelperService>()
+            return document.Project.Solution.Workspace.Services
+                .GetRequiredService<ICompletionHelperService>()
                 .GetCompletionHelper(document);
         }
 
@@ -85,9 +86,8 @@ namespace Microsoft.CodeAnalysis.Completion
             value.MatchedSpans.IsDefaultOrEmpty
                 ? value
                 : value.WithMatchedSpans(
-                      value.MatchedSpans.SelectAsArray(
-                          s => new TextSpan(s.Start + offset, s.Length)
-                      )
+                      value.MatchedSpans
+                          .SelectAsArray(s => new TextSpan(s.Start + offset, s.Length))
                   );
 
         private PatternMatch? GetMatchWorker(
@@ -105,9 +105,8 @@ namespace Microsoft.CodeAnalysis.Completion
             // Now we escaping from the second check for English languages.
             // Maybe we can escape as well for more similar languages in case if we meet performance issues.
             if (
-                culture.ThreeLetterWindowsLanguageName.Equals(
-                    EnUSCultureInfo.ThreeLetterWindowsLanguageName
-                )
+                culture.ThreeLetterWindowsLanguageName
+                    .Equals(EnUSCultureInfo.ThreeLetterWindowsLanguageName)
             )
             {
                 return match;
@@ -339,9 +338,8 @@ namespace Microsoft.CodeAnalysis.Completion
         // If they both seemed just as good, but they differ on preselection, then
         // item1 is better if it is preselected, otherwise it is worse.
         private static int ComparePreselection(CompletionItem item1, CompletionItem item2) =>
-            (item1.Rules.MatchPriority != MatchPriority.Preselect).CompareTo(
-                item2.Rules.MatchPriority != MatchPriority.Preselect
-            );
+            (item1.Rules.MatchPriority != MatchPriority.Preselect)
+                .CompareTo(item2.Rules.MatchPriority != MatchPriority.Preselect);
 
         private static int CompareExpandedItem(
             CompletionItem item1,

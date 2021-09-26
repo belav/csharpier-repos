@@ -11,24 +11,18 @@ namespace System.Linq.Expressions.Tests
     public sealed class DynamicMethodILProvider : IILProvider
     {
         private static readonly FieldInfo s_fiLen = typeof(ILGenerator).GetFieldAssert("m_length");
-        private static readonly FieldInfo s_fiStream = typeof(ILGenerator).GetFieldAssert(
-            "m_ILStream"
-        );
-        private static readonly FieldInfo s_fiExceptions = typeof(ILGenerator).GetFieldAssert(
-            "m_exceptions"
-        );
-        private static readonly FieldInfo s_fiExceptionCount = typeof(ILGenerator).GetFieldAssert(
-            "m_exceptionCount"
-        );
-        private static readonly FieldInfo s_fiLocalSignature = typeof(ILGenerator).GetFieldAssert(
-            "m_localSignature"
-        );
-        private static readonly MethodInfo s_miBakeByteArray = typeof(ILGenerator).GetMethodAssert(
-            "BakeByteArray"
-        );
-        private static readonly MethodInfo s_miMaxStackSize = typeof(ILGenerator).GetMethodAssert(
-            "GetMaxStackSize"
-        );
+        private static readonly FieldInfo s_fiStream = typeof(ILGenerator)
+            .GetFieldAssert("m_ILStream");
+        private static readonly FieldInfo s_fiExceptions = typeof(ILGenerator)
+            .GetFieldAssert("m_exceptions");
+        private static readonly FieldInfo s_fiExceptionCount = typeof(ILGenerator)
+            .GetFieldAssert("m_exceptionCount");
+        private static readonly FieldInfo s_fiLocalSignature = typeof(ILGenerator)
+            .GetFieldAssert("m_localSignature");
+        private static readonly MethodInfo s_miBakeByteArray = typeof(ILGenerator)
+            .GetMethodAssert("BakeByteArray");
+        private static readonly MethodInfo s_miMaxStackSize = typeof(ILGenerator)
+            .GetMethodAssert("GetMaxStackSize");
 
         private readonly DynamicMethod _method;
         private byte[] _byteArray;

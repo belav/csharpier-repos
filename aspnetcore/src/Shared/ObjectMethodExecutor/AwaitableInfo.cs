@@ -85,7 +85,8 @@ namespace Microsoft.Extensions.Internal
             }
 
             // INotifyCompletion supplies a method matching "void OnCompleted(Action action)"
-            var onCompletedMethod = typeof(INotifyCompletion).GetRuntimeMethods()
+            var onCompletedMethod = typeof(INotifyCompletion)
+                .GetRuntimeMethods()
                 .Single(
                     m =>
                         m.Name.Equals("OnCompleted", StringComparison.OrdinalIgnoreCase)
@@ -102,7 +103,8 @@ namespace Microsoft.Extensions.Internal
             if (implementsICriticalNotifyCompletion)
             {
                 // ICriticalNotifyCompletion supplies a method matching "void UnsafeOnCompleted(Action action)"
-                unsafeOnCompletedMethod = typeof(ICriticalNotifyCompletion).GetRuntimeMethods()
+                unsafeOnCompletedMethod = typeof(ICriticalNotifyCompletion)
+                    .GetRuntimeMethods()
                     .Single(
                         m =>
                             m.Name.Equals("UnsafeOnCompleted", StringComparison.OrdinalIgnoreCase)

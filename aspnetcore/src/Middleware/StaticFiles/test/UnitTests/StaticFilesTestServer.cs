@@ -22,20 +22,18 @@ namespace Microsoft.AspNetCore.StaticFiles
         )
         {
             Action<IServiceCollection> defaultConfigureServices = services => { };
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
-                    new[] { new KeyValuePair<string, string>("webroot", ".") }
-                )
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("webroot", ".") })
                 .Build();
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .UseConfiguration(configuration)
-                            .Configure(configureApp)
-                            .ConfigureServices(configureServices ?? defaultConfigureServices);
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer()
+                        .UseConfiguration(configuration)
+                        .Configure(configureApp)
+                        .ConfigureServices(configureServices ?? defaultConfigureServices);
+                }
+            ).Build();
 
             await host.StartAsync();
             return host;

@@ -84,9 +84,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void NullEventObject()
         {
             CallSiteBinder binder = Binder.IsEvent(CSharpBinderFlags.None, "Event", GetType());
-            CallSite<Func<CallSite, object, bool>> callSite = CallSite<
-                Func<CallSite, object, bool>
-            >.Create(binder);
+            CallSite<Func<CallSite, object, bool>> callSite = CallSite<Func<CallSite, object, bool>>
+                .Create(binder);
             Func<CallSite, object, bool> target = callSite.Target;
             Assert.Throws<RuntimeBinderException>(() => target(callSite, null));
         }
@@ -95,9 +94,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void NullContextAnswerTrue()
         {
             CallSiteBinder binder = Binder.IsEvent(CSharpBinderFlags.None, "Event", null);
-            CallSite<Func<CallSite, object, bool>> callSite = CallSite<
-                Func<CallSite, object, bool>
-            >.Create(binder);
+            CallSite<Func<CallSite, object, bool>> callSite = CallSite<Func<CallSite, object, bool>>
+                .Create(binder);
             Func<CallSite, object, bool> target = callSite.Target;
             Assert.True(target(callSite, new TypeWithEvents()));
         }
@@ -106,9 +104,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void NullContextAnswerFalse()
         {
             CallSiteBinder binder = Binder.IsEvent(CSharpBinderFlags.None, "Nah", null);
-            CallSite<Func<CallSite, object, bool>> callSite = CallSite<
-                Func<CallSite, object, bool>
-            >.Create(binder);
+            CallSite<Func<CallSite, object, bool>> callSite = CallSite<Func<CallSite, object, bool>>
+                .Create(binder);
             Func<CallSite, object, bool> target = callSite.Target;
             Assert.False(target(callSite, new TypeWithEvents()));
         }
@@ -117,9 +114,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void ContextWithVisibilityOnPrivateType()
         {
             CallSiteBinder binder = Binder.IsEvent(CSharpBinderFlags.None, "Event", GetType());
-            CallSite<Func<CallSite, object, bool>> callSite = CallSite<
-                Func<CallSite, object, bool>
-            >.Create(binder);
+            CallSite<Func<CallSite, object, bool>> callSite = CallSite<Func<CallSite, object, bool>>
+                .Create(binder);
             Func<CallSite, object, bool> target = callSite.Target;
             Assert.True(target(callSite, new PrivateTypeWithEvent()));
         }
@@ -128,9 +124,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void NullContextAndPrivateType()
         {
             CallSiteBinder binder = Binder.IsEvent(CSharpBinderFlags.None, "Event", null);
-            CallSite<Func<CallSite, object, bool>> callSite = CallSite<
-                Func<CallSite, object, bool>
-            >.Create(binder);
+            CallSite<Func<CallSite, object, bool>> callSite = CallSite<Func<CallSite, object, bool>>
+                .Create(binder);
             Func<CallSite, object, bool> target = callSite.Target;
             Assert.False(target(callSite, new PrivateTypeWithEvent()));
         }

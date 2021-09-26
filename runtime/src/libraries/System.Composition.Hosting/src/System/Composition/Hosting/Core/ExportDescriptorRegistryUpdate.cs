@@ -51,7 +51,8 @@ namespace System.Composition.Hosting.Core
             foreach (var result in _updateResults)
             {
                 var resultContract = result.Key;
-                var descriptors = result.Value.GetResults()
+                var descriptors = result.Value
+                    .GetResults()
                     .Select(cb => cb.GetDescriptor())
                     .ToArray();
                 _partDefinitions.Add(resultContract, descriptors);
@@ -166,15 +167,15 @@ namespace System.Composition.Hosting.Core
             ExportDescriptor[] definitions;
             if (_partDefinitions.TryGetValue(contract, out definitions))
                 return definitions.Select(
-                        d =>
-                            new ExportDescriptorPromise(
-                                contract,
-                                "Preexisting",
-                                false,
-                                s_noDependencies,
-                                _ => d
-                            )
-                    )
+                    d =>
+                        new ExportDescriptorPromise(
+                            contract,
+                            "Preexisting",
+                            false,
+                            s_noDependencies,
+                            _ => d
+                        )
+                )
                     .ToArray();
 
             UpdateResult updateResult;

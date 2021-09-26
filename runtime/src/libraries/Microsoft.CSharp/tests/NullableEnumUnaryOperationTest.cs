@@ -94,7 +94,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, Int8Enum?, object>> site = CallSite<
                 Func<CallSite, Int8Enum?, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, Int8Enum?, object> targ = site.Target;
             object result = targ(site, value);
             Assert.Equal(~value, result);
@@ -122,7 +123,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, Int32Enum?, object>> site = CallSite<
                 Func<CallSite, Int32Enum?, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, Int32Enum?, object> targ = site.Target;
             object result = targ(site, value);
             Assert.Equal(~value, result);
@@ -150,7 +152,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, UInt32Enum?, object>> site = CallSite<
                 Func<CallSite, UInt32Enum?, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, UInt32Enum?, object> targ = site.Target;
             object result = targ(site, value);
             Assert.Equal(~value, result);
@@ -178,7 +181,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, Int64Enum?, object>> site = CallSite<
                 Func<CallSite, Int64Enum?, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, Int64Enum?, object> targ = site.Target;
             object result = targ(site, value);
             Assert.Equal(~value, result);
@@ -199,7 +203,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, Int32Enum?, object>> site = CallSite<
                 Func<CallSite, Int32Enum?, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, Int32Enum?, object> targ = site.Target;
             object result = targ(site, value);
             Assert.Equal(++value, result); // Note that there is no write-back to value.
@@ -220,7 +225,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, Int32Enum?, object>> site = CallSite<
                 Func<CallSite, Int32Enum?, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, Int32Enum?, object> targ = site.Target;
             object result = targ(site, value);
             Assert.Equal(--value, result); // Note that there is no write-back to value.
@@ -241,7 +247,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, Int32Enum?, object>> site = CallSite<
                 Func<CallSite, Int32Enum?, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, Int32Enum?, object> targ = site.Target;
             Assert.Throws<RuntimeBinderException>(() => targ(site, default));
         }
@@ -261,7 +268,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, Int32Enum?, object>> site = CallSite<
                 Func<CallSite, Int32Enum?, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, Int32Enum?, object> targ = site.Target;
             Assert.Throws<RuntimeBinderException>(() => targ(site, default));
         }

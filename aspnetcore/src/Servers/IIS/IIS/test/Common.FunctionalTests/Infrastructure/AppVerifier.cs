@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             // Set in SetupTestEnvironment.ps1
             var enabledCodes = (
                 Environment.GetEnvironmentVariable("APPVERIFIER_ENABLED_CODES") ?? ""
-            ).Split(' ');
+            )
+                .Split(' ');
             string processName;
             switch (serverType)
             {

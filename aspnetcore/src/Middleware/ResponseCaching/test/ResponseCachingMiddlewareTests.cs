@@ -296,8 +296,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                 utcNow + TimeSpan.FromSeconds(10)
             );
 
-            context.HttpContext.Request.Headers[HeaderNames.IfNoneMatch] =
-                EntityTagHeaderValue.Any.ToString();
+            context.HttpContext.Request.Headers[HeaderNames.IfNoneMatch] = EntityTagHeaderValue.Any
+                .ToString();
             Assert.True(ResponseCachingMiddleware.ContentIsNotModified(context));
             TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.NotModifiedIfNoneMatchStar);
         }
@@ -562,7 +562,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                 {
                     MaxAge = TimeSpan.FromSeconds(12),
                     SharedMaxAge = TimeSpan.FromSeconds(13)
-                }.ToString();
+                }
+                    .ToString();
             context.HttpContext.Response.Headers[HeaderNames.Expires] = HeaderUtilities.FormatDate(
                 clock.UtcNow + TimeSpan.FromSeconds(11)
             );
@@ -584,12 +585,13 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.HttpContext.Response.Headers[HeaderNames.Vary] = new StringValues(
                 new[] { "headerA", "HEADERB", "HEADERc" }
             );
-            context.HttpContext.Features.Set<IResponseCachingFeature>(
-                new ResponseCachingFeature()
-                {
-                    VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
-                }
-            );
+            context.HttpContext.Features
+                .Set<IResponseCachingFeature>(
+                    new ResponseCachingFeature()
+                    {
+                        VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
+                    }
+                );
             var cachedVaryByRules = new CachedVaryByRules()
             {
                 Headers = new StringValues(new[] { "HeaderA", "HeaderB" }),
@@ -615,12 +617,13 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.HttpContext.Response.Headers[HeaderNames.Vary] = new StringValues(
                 new[] { "headerA", "HEADERB" }
             );
-            context.HttpContext.Features.Set<IResponseCachingFeature>(
-                new ResponseCachingFeature()
-                {
-                    VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
-                }
-            );
+            context.HttpContext.Features
+                .Set<IResponseCachingFeature>(
+                    new ResponseCachingFeature()
+                    {
+                        VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
+                    }
+                );
             var cachedVaryByRules = new CachedVaryByRules()
             {
                 VaryByKeyPrefix = FastGuid.NewGuid().IdString,
@@ -667,9 +670,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var context = TestUtils.CreateTestContext();
 
             context.HttpContext.Response.Headers[HeaderNames.Vary] = vary;
-            context.HttpContext.Features.Set<IResponseCachingFeature>(
-                new ResponseCachingFeature() { VaryByQueryKeys = vary }
-            );
+            context.HttpContext.Features
+                .Set<IResponseCachingFeature>(
+                    new ResponseCachingFeature() { VaryByQueryKeys = vary }
+                );
 
             middleware.FinalizeCacheHeaders(context);
 

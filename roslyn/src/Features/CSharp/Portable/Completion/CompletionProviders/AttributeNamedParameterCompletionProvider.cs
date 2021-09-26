@@ -38,9 +38,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         private const string ColonString = ":";
 
         private static readonly CompletionItemRules _spaceItemFilterRule =
-            CompletionItemRules.Default.WithFilterCharacterRule(
-                CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ' ')
-            );
+            CompletionItemRules.Default
+                .WithFilterCharacterRule(
+                    CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ' ')
+                );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -102,25 +103,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 var workspace = document.Project.Solution.Workspace;
                 var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                        attributeSyntax,
-                        cancellationToken
-                    )
+                    attributeSyntax,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var nameColonItems = await GetNameColonItemsAsync(
-                        context,
-                        semanticModel,
-                        token,
-                        attributeSyntax,
-                        existingNamedParameters
-                    )
+                    context,
+                    semanticModel,
+                    token,
+                    attributeSyntax,
+                    existingNamedParameters
+                )
                     .ConfigureAwait(false);
                 var nameEqualsItems = await GetNameEqualsItemsAsync(
-                        context,
-                        semanticModel,
-                        token,
-                        attributeSyntax,
-                        existingNamedParameters
-                    )
+                    context,
+                    semanticModel,
+                    token,
+                    attributeSyntax,
+                    existingNamedParameters
+                )
                     .ConfigureAwait(false);
 
                 context.AddItems(nameEqualsItems);
@@ -212,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 p => !existingNamedParameters.Contains(p.Name)
             );
 
-            var text = await semanticModel.SyntaxTree.GetTextAsync(context.CancellationToken)
+            var text = await semanticModel.SyntaxTree
+                .GetTextAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var q =
                 from p in attributeNamedParameters
@@ -245,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             );
             parameterLists = parameterLists.Where(pl => IsValid(pl, existingNamedParameters));
 
-            var text = await semanticModel.SyntaxTree.GetTextAsync(context.CancellationToken)
+            var text = await semanticModel.SyntaxTree
+                .GetTextAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             return from pl in parameterLists
             from p in pl
@@ -277,10 +280,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position
         )
         {
-            var existingArguments1 = argumentList.Arguments.Where(a => a.Span.End <= position)
+            var existingArguments1 = argumentList.Arguments
+                .Where(a => a.Span.End <= position)
                 .Where(a => a.NameColon != null)
                 .Select(a => a.NameColon.Name.Identifier.ValueText);
-            var existingArguments2 = argumentList.Arguments.Where(a => a.Span.End <= position)
+            var existingArguments2 = argumentList.Arguments
+                .Where(a => a.Span.End <= position)
                 .Where(a => a.NameEquals != null)
                 .Select(a => a.NameEquals.Name.Identifier.ValueText);
 
@@ -301,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     is INamedTypeSymbol attributeType
             )
             {
-                return attributeType.InstanceConstructors.Where(c => c.IsAccessibleWithin(within))
+                return attributeType.InstanceConstructors
+                    .Where(c => c.IsAccessibleWithin(within))
                     .Select(c => c.Parameters);
             }
 

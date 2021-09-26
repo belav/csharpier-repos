@@ -100,9 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // it uninitialized.
 
             var sourceMethodTypeParameters = sourceMethod.TypeParameters;
-            var allSourceTypeParameters = container.SourceTypeParameters.Concat(
-                sourceMethodTypeParameters
-            );
+            var allSourceTypeParameters = container.SourceTypeParameters
+                .Concat(sourceMethodTypeParameters);
 
             var getTypeMap = new Func<TypeMap>(() => this.TypeMap);
             _typeParameters = sourceMethodTypeParameters.SelectAsArray(
@@ -119,9 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this.SubstitutedSourceMethod = sourceMethod.AsMember(substitutedSourceType);
             if (sourceMethod.Arity > 0)
             {
-                this.SubstitutedSourceMethod = this.SubstitutedSourceMethod.Construct(
-                    _typeParameters.As<TypeSymbol>()
-                );
+                this.SubstitutedSourceMethod = this.SubstitutedSourceMethod
+                    .Construct(_typeParameters.As<TypeSymbol>());
             }
             TypeParameterChecker.Check(this.SubstitutedSourceMethod, _allTypeParameters);
 
@@ -185,10 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this.LocalsForBinding = localsBuilder.ToImmutableAndFree();
 
             // Create a map from variable name to display class field.
-            var displayClassVariables = PooledDictionary<
-                string,
-                DisplayClassVariable
-            >.GetInstance();
+            var displayClassVariables = PooledDictionary<string, DisplayClassVariable>
+                .GetInstance();
             foreach (var pair in sourceDisplayClassVariables)
             {
                 var variable = pair.Value;

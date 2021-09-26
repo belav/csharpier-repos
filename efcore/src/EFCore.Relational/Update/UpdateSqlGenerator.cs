@@ -164,7 +164,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             var name = command.TableName;
             var schema = command.Schema;
-            var conditionOperations = command.ColumnModifications.Where(o => o.IsCondition)
+            var conditionOperations = command.ColumnModifications
+                .Where(o => o.IsCondition)
                 .ToList();
 
             AppendDeleteCommand(commandStringBuilder, name, schema, conditionOperations);
@@ -370,28 +371,24 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             commandStringBuilder.Append("UPDATE ");
             SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
-            commandStringBuilder.Append(" SET ")
-                .AppendJoin(
-                    operations,
-                    (this, name, schema),
-                    (sb, o, p) =>
+            commandStringBuilder.Append(" SET ").AppendJoin(
+                operations,
+                (this, name, schema),
+                (sb, o, p) =>
+                {
+                    var (g, n, s) = p;
+                    g.SqlGenerationHelper.DelimitIdentifier(sb, o.ColumnName);
+                    sb.Append(" = ");
+                    if (!o.UseCurrentValueParameter)
                     {
-                        var (g, n, s) = p;
-                        g.SqlGenerationHelper.DelimitIdentifier(sb, o.ColumnName);
-                        sb.Append(" = ");
-                        if (!o.UseCurrentValueParameter)
-                        {
-                            g.AppendSqlLiteral(sb, o, n, s);
-                        }
-                        else
-                        {
-                            g.SqlGenerationHelper.GenerateParameterNamePlaceholder(
-                                sb,
-                                o.ParameterName
-                            );
-                        }
+                        g.AppendSqlLiteral(sb, o, n, s);
                     }
-                );
+                    else
+                    {
+                        g.SqlGenerationHelper.GenerateParameterNamePlaceholder(sb, o.ParameterName);
+                    }
+                }
+            );
         }
 
         /// <summary>
@@ -470,34 +467,30 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             if (operations.Count > 0)
             {
-                commandStringBuilder.Append("(")
-                    .AppendJoin(
-                        operations,
-                        (this, name, schema),
-                        (sb, o, p) =>
+                commandStringBuilder.Append("(").AppendJoin(
+                    operations,
+                    (this, name, schema),
+                    (sb, o, p) =>
+                    {
+                        if (o.IsWrite)
                         {
-                            if (o.IsWrite)
+                            var (g, n, s) = p;
+                            if (!o.UseCurrentValueParameter)
                             {
-                                var (g, n, s) = p;
-                                if (!o.UseCurrentValueParameter)
-                                {
-                                    g.AppendSqlLiteral(sb, o, n, s);
-                                }
-                                else
-                                {
-                                    g.SqlGenerationHelper.GenerateParameterNamePlaceholder(
-                                        sb,
-                                        o.ParameterName
-                                    );
-                                }
+                                g.AppendSqlLiteral(sb, o, n, s);
                             }
                             else
                             {
-                                sb.Append("DEFAULT");
+                                g.SqlGenerationHelper
+                                    .GenerateParameterNamePlaceholder(sb, o.ParameterName);
                             }
                         }
-                    )
-                    .Append(")");
+                        else
+                        {
+                            sb.Append("DEFAULT");
+                        }
+                    }
+                ).Append(")");
             }
         }
 
@@ -545,25 +538,24 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             if (operations.Count > 0)
             {
-                commandStringBuilder.Append(" AND ")
-                    .AppendJoin(
-                        operations,
-                        (sb, v) =>
+                commandStringBuilder.Append(" AND ").AppendJoin(
+                    operations,
+                    (sb, v) =>
+                    {
+                        if (v.IsKey)
                         {
-                            if (v.IsKey)
+                            if (v.IsRead)
                             {
-                                if (v.IsRead)
-                                {
-                                    AppendIdentityWhereCondition(sb, v);
-                                }
-                                else
-                                {
-                                    AppendWhereCondition(sb, v, v.UseOriginalValueParameter);
-                                }
+                                AppendIdentityWhereCondition(sb, v);
                             }
-                        },
-                        " AND "
-                    );
+                            else
+                            {
+                                AppendWhereCondition(sb, v, v.UseOriginalValueParameter);
+                            }
+                        }
+                    },
+                    " AND "
+                );
             }
         }
 

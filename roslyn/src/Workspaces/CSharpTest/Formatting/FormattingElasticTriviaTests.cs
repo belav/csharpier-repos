@@ -159,10 +159,10 @@ public class SomeAttribute : System.Attribute { }
             Assert.Equal(expected, formatted);
 
             var elasticOnlyFormatted = Formatter.Format(
-                    newRoot,
-                    SyntaxAnnotation.ElasticAnnotation,
-                    ws
-                )
+                newRoot,
+                SyntaxAnnotation.ElasticAnnotation,
+                ws
+            )
                 .ToFullString();
             Assert.Equal(expected, elasticOnlyFormatted);
 

@@ -38,9 +38,10 @@ namespace Microsoft.CodeAnalysis.AddImports
                 root = root.ReplaceToken(firstToken, newFirstToken);
 
                 // Move the leading trivia from the first token to the first using.
-                var newFirstUsing = newImports[0].WithLeadingTrivia(
-                    firstToken.LeadingTrivia.Where(t => !IsDocCommentOrElastic(syntaxFacts, t))
-                );
+                var newFirstUsing = newImports[0]
+                    .WithLeadingTrivia(
+                        firstToken.LeadingTrivia.Where(t => !IsDocCommentOrElastic(syntaxFacts, t))
+                    );
                 newImports[0] = newFirstUsing;
             }
             else
@@ -52,9 +53,8 @@ namespace Microsoft.CodeAnalysis.AddImports
                     // And move it to the new using.
                     var originalFirstUsingCurrentIndex = newImports.IndexOf(originalFirstUsing);
 
-                    newImports[0] = newImports[0].WithLeadingTrivia(
-                        originalFirstUsing.GetLeadingTrivia()
-                    );
+                    newImports[0] = newImports[0]
+                        .WithLeadingTrivia(originalFirstUsing.GetLeadingTrivia());
 
                     var trailingTrivia = newImports[0].GetTrailingTrivia();
                     if (
@@ -63,9 +63,8 @@ namespace Microsoft.CodeAnalysis.AddImports
                         )
                     )
                     {
-                        newImports[0] = newImports[0].WithAppendedTrailingTrivia(
-                            syntaxFacts.ElasticCarriageReturnLineFeed
-                        );
+                        newImports[0] = newImports[0]
+                            .WithAppendedTrailingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed);
                     }
 
                     newImports[originalFirstUsingCurrentIndex] =

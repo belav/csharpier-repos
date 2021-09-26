@@ -277,23 +277,15 @@ namespace System.Numerics.Tensors
 
                         if (allocateIndex < nonZeroCount)
                         {
-                            var valuesSpan = values.Span.Slice(
-                                allocateIndex,
-                                nonZeroCount - allocateIndex
-                            );
-                            var indicesSpan = indices.Span.Slice(
-                                allocateIndex,
-                                nonZeroCount - allocateIndex
-                            );
+                            var valuesSpan = values.Span
+                                .Slice(allocateIndex, nonZeroCount - allocateIndex);
+                            var indicesSpan = indices.Span
+                                .Slice(allocateIndex, nonZeroCount - allocateIndex);
 
-                            var newValuesSpan = newValues.Span.Slice(
-                                allocateIndex + 1,
-                                nonZeroCount - allocateIndex
-                            );
-                            var newIndicesSpan = newIndices.Span.Slice(
-                                allocateIndex + 1,
-                                nonZeroCount - allocateIndex
-                            );
+                            var newValuesSpan = newValues.Span
+                                .Slice(allocateIndex + 1, nonZeroCount - allocateIndex);
+                            var newIndicesSpan = newIndices.Span
+                                .Slice(allocateIndex + 1, nonZeroCount - allocateIndex);
 
                             valuesSpan.CopyTo(newValuesSpan);
                             indicesSpan.CopyTo(newIndicesSpan);
@@ -319,9 +311,11 @@ namespace System.Numerics.Tensors
             else if (nonZeroCount != valueIndex)
             {
                 // shift values to make a gap
-                values.Span.Slice(valueIndex, nonZeroCount - valueIndex)
+                values.Span
+                    .Slice(valueIndex, nonZeroCount - valueIndex)
                     .CopyTo(values.Span.Slice(valueIndex + 1));
-                indices.Span.Slice(valueIndex, nonZeroCount - valueIndex)
+                indices.Span
+                    .Slice(valueIndex, nonZeroCount - valueIndex)
                     .CopyTo(indices.Span.Slice(valueIndex + 1));
             }
 
@@ -342,9 +336,11 @@ namespace System.Numerics.Tensors
             Debug.Assert(compressedIndex < compressedCounts.Length - 1);
 
             // shift values to close the gap
-            values.Span.Slice(valueIndex + 1, nonZeroCount - valueIndex - 1)
+            values.Span
+                .Slice(valueIndex + 1, nonZeroCount - valueIndex - 1)
                 .CopyTo(values.Span.Slice(valueIndex));
-            indices.Span.Slice(valueIndex + 1, nonZeroCount - valueIndex - 1)
+            indices.Span
+                .Slice(valueIndex + 1, nonZeroCount - valueIndex - 1)
                 .CopyTo(indices.Span.Slice(valueIndex));
 
             var compressedCountsSpan = compressedCounts.Span.Slice(compressedIndex + 1);

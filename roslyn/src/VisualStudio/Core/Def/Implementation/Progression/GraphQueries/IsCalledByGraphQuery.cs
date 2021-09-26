@@ -32,10 +32,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             )
             {
                 var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
-                        solution,
-                        context.InputNodes,
-                        cancellationToken
-                    )
+                    solution,
+                    context.InputNodes,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var node in context.InputNodes)
@@ -44,18 +44,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     if (symbol != null)
                     {
                         var callers = await SymbolFinder.FindCallersAsync(
-                                symbol,
-                                solution,
-                                cancellationToken
-                            )
+                            symbol,
+                            solution,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         foreach (var caller in callers.Where(c => c.IsDirect))
                         {
                             var callerNode = await graphBuilder.AddNodeAsync(
-                                    caller.CallingSymbol,
-                                    relatedNode: node
-                                )
+                                caller.CallingSymbol,
+                                relatedNode: node
+                            )
                                 .ConfigureAwait(false);
                             graphBuilder.AddLink(callerNode, CodeLinkCategories.Calls, node);
                         }

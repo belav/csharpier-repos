@@ -79,9 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             );
 
             foreach (
-                var consumedProperty in constructorBinding.ParameterBindings.SelectMany(
-                    p => p.ConsumedProperties
-                )
+                var consumedProperty in constructorBinding.ParameterBindings
+                    .SelectMany(p => p.ConsumedProperties)
             )
             {
                 properties.Remove(consumedProperty);
@@ -183,13 +182,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     );
 
                     return Expression.Lambda<Func<MaterializationContext, object>>(
-                            CreateMaterializeExpression(
-                                e,
-                                "instance",
-                                materializationContextParameter
-                            ),
-                            materializationContextParameter
-                        )
+                        CreateMaterializeExpression(e, "instance", materializationContextParameter),
+                        materializationContextParameter
+                    )
                         .Compile();
                 }
             );

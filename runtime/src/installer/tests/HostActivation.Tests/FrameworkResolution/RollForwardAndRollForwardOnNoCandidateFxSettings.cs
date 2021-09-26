@@ -112,7 +112,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             CommandResult result = RunTest(
-                new TestSettings().WithRuntimeConfigCustomizer(
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
                         runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.0.0")
                     )
                     .With(
@@ -143,19 +144,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void CollisionsOnCommandLine_RollForwardOnNoCandidateFx()
         {
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0")
-                        )
-                        .WithCommandLine(
-                            Constants.RollForwardSetting.CommandLineArgument,
-                            Constants.RollForwardSetting.LatestPatch
-                        )
-                        .WithCommandLine(
-                            Constants.RollForwardOnNoCandidateFxSetting.CommandLineArgument,
-                            "2"
-                        )
-                )
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
+                        runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0")
+                    )
+                    .WithCommandLine(
+                        Constants.RollForwardSetting.CommandLineArgument,
+                        Constants.RollForwardSetting.LatestPatch
+                    )
+                    .WithCommandLine(
+                        Constants.RollForwardOnNoCandidateFxSetting.CommandLineArgument,
+                        "2"
+                    )
+            )
                 .Should()
                 .Fail()
                 .And.HaveStdErrContaining(
@@ -189,7 +190,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             CommandResult result = RunTest(
-                new TestSettings().WithRuntimeConfigCustomizer(
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
                         runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.0.0")
                     )
                     .With(

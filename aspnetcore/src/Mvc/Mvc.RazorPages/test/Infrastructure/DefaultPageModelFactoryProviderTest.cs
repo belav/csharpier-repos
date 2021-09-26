@@ -132,8 +132,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             {
                 var mockActivator = new Mock<IPageModelActivatorProvider>();
                 mockActivator.Setup(
-                        a => a.CreateActivator(It.IsAny<CompiledPageActionDescriptor>())
-                    )
+                    a => a.CreateActivator(It.IsAny<CompiledPageActionDescriptor>())
+                )
                     .Returns(
                         (CompiledPageActionDescriptor descriptor) =>
                         {

@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis
             Console.WriteLine(stackTrace.ToString());
 #endif
 
-            Console.Out.Flush();
+            Console.Out
+                .Flush();
         }
 
         /// <summary>

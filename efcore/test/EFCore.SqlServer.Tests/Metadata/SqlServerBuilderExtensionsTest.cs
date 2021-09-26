@@ -565,10 +565,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var modelBuilder = CreateConventionModelBuilder();
 
             modelBuilder.HasSequence<int>(
-                    "Snook",
-                    "Tasty",
-                    b => b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
-                )
+                "Snook",
+                "Tasty",
+                b => b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
+            )
                 .Entity<Customer>()
                 .Property(e => e.Id)
                 .UseHiLo("Snook", "Tasty");

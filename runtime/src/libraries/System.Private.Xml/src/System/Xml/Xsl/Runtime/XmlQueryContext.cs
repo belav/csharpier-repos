@@ -195,7 +195,8 @@ namespace System.Xml.Xsl.Runtime
                     return new XPathDocument(
                         WhitespaceRuleReader.CreateReader(reader, _wsRules),
                         XmlSpace.Preserve
-                    ).CreateNavigator();
+                    )
+                        .CreateNavigator();
                 }
 
                 finally
@@ -211,7 +212,8 @@ namespace System.Xml.Xsl.Runtime
                 return new XPathDocument(
                     WhitespaceRuleReader.CreateReader(dataSource as XmlReader, _wsRules),
                     XmlSpace.Preserve
-                ).CreateNavigator();
+                )
+                    .CreateNavigator();
             }
             else if (dataSource is IXPathNavigable)
             {
@@ -280,7 +282,8 @@ namespace System.Xml.Xsl.Runtime
                 -1,
                 instance.GetType(),
                 XmlQueryRuntime.LateBoundFlags
-            ).CanBind();
+            )
+                .CanBind();
         }
 
         /// <summary>

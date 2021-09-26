@@ -51,10 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
             var defaultErrorType = typeof(void);
             if (
-                action.Properties.TryGetValue(
-                    typeof(ProducesErrorResponseTypeAttribute),
-                    out result
-                )
+                action.Properties
+                    .TryGetValue(typeof(ProducesErrorResponseTypeAttribute), out result)
             )
             {
                 defaultErrorType = ((ProducesErrorResponseTypeAttribute)result).Type;
@@ -81,7 +79,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             // while searching for a filter that implements IApiResponseMetadataProvider.
             //
             // The workaround for that is to implement the metadata interface on the IFilterFactory.
-            return action.FilterDescriptors.Select(fd => fd.Filter)
+            return action.FilterDescriptors
+                .Select(fd => fd.Filter)
                 .OfType<IApiResponseMetadataProvider>()
                 .ToList();
         }
@@ -187,8 +186,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             MediaTypeCollection declaredContentTypes
         )
         {
-            var responseTypeMetadataProviders =
-                _mvcOptions.OutputFormatters.OfType<IApiResponseTypeMetadataProvider>();
+            var responseTypeMetadataProviders = _mvcOptions.OutputFormatters
+                .OfType<IApiResponseTypeMetadataProvider>();
 
             // Given the content-types that were declared for this action, determine the formatters that support the content-type for the given
             // response type.
@@ -232,22 +231,22 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                             var formatterSupportedContentType in formatterSupportedContentTypes
                         )
                         {
-                            apiResponse.ApiResponseFormats.Add(
-                                new ApiResponseFormat
-                                {
-                                    Formatter = (IOutputFormatter)responseTypeMetadataProvider,
-                                    MediaType = formatterSupportedContentType,
-                                }
-                            );
+                            apiResponse.ApiResponseFormats
+                                .Add(
+                                    new ApiResponseFormat
+                                    {
+                                        Formatter = (IOutputFormatter)responseTypeMetadataProvider,
+                                        MediaType = formatterSupportedContentType,
+                                    }
+                                );
                         }
                     }
 
                     if (!isSupportedContentType && contentType != null)
                     {
                         // No output formatter was found that supports this content type. Add the user specified content type as-is to the result.
-                        apiResponse.ApiResponseFormats.Add(
-                            new ApiResponseFormat { MediaType = contentType, }
-                        );
+                        apiResponse.ApiResponseFormats
+                            .Add(new ApiResponseFormat { MediaType = contentType, });
                     }
                 }
             }

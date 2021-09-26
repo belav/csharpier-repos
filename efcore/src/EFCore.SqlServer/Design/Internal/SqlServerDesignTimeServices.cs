@@ -32,10 +32,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
             serviceCollection.AddEntityFrameworkSqlServer();
-            new EntityFrameworkRelationalDesignServicesBuilder(serviceCollection).TryAdd<
-                IAnnotationCodeGenerator,
-                SqlServerAnnotationCodeGenerator
-            >()
+            new EntityFrameworkRelationalDesignServicesBuilder(serviceCollection)
+                .TryAdd<IAnnotationCodeGenerator, SqlServerAnnotationCodeGenerator>()
                 .TryAdd<IDatabaseModelFactory, SqlServerDatabaseModelFactory>()
                 .TryAdd<IProviderConfigurationCodeGenerator, SqlServerCodeGenerator>()
                 .TryAddCoreServices();

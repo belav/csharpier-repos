@@ -269,27 +269,27 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     );
 
                     var resultToProvider = Expression.Lambda<Func<object>>(
-                            Expression.Convert(
-                                Expression.Invoke(
-                                    converter.ConvertToProviderExpression,
-                                    Expression.Convert(Expression.Constant(1), fromType)
-                                ),
-                                typeof(object)
-                            )
+                        Expression.Convert(
+                            Expression.Invoke(
+                                converter.ConvertToProviderExpression,
+                                Expression.Convert(Expression.Constant(1), fromType)
+                            ),
+                            typeof(object)
                         )
+                    )
                         .Compile()();
 
                     Assert.Same(toType.UnwrapNullableType(), resultToProvider.GetType());
 
                     var resultFromProvider = Expression.Lambda<Func<object>>(
-                            Expression.Convert(
-                                Expression.Invoke(
-                                    converter.ConvertFromProviderExpression,
-                                    Expression.Convert(Expression.Constant(1), toType)
-                                ),
-                                typeof(object)
-                            )
+                        Expression.Convert(
+                            Expression.Invoke(
+                                converter.ConvertFromProviderExpression,
+                                Expression.Convert(Expression.Constant(1), toType)
+                            ),
+                            typeof(object)
                         )
+                    )
                         .Compile()();
 
                     Assert.Same(fromType.UnwrapNullableType(), resultFromProvider.GetType());
@@ -310,7 +310,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = (
                 (ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString)
-            ).ConvertToProviderExpression.Compile();
+            ).ConvertToProviderExpression
+                .Compile();
 
             Assert.Equal("7", converter(Beatles.John));
             Assert.Equal("4", converter(Beatles.Paul));
@@ -339,7 +340,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = (
                 (ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString)
-            ).ConvertFromProviderExpression.Compile();
+            ).ConvertFromProviderExpression
+                .Compile();
 
             Assert.Equal(Beatles.John, converter("7"));
             Assert.Equal(Beatles.Paul, converter("4"));

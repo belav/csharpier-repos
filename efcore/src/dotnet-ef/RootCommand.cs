@@ -286,17 +286,18 @@ namespace Microsoft.EntityFrameworkCore.Tools
             }
 
             var projectFiles = Directory.EnumerateFiles(
-                    path,
-                    "*.*proj",
-                    SearchOption.TopDirectoryOnly
-                )
+                path,
+                "*.*proj",
+                SearchOption.TopDirectoryOnly
+            )
                 .Where(
                     f =>
-                        !string.Equals(
-                            Path.GetExtension(f),
-                            ".xproj",
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        !string
+                            .Equals(
+                                Path.GetExtension(f),
+                                ".xproj",
+                                StringComparison.OrdinalIgnoreCase
+                            )
                 )
                 .Take(2)
                 .ToList();
@@ -305,7 +306,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
         }
 
         private static string GetVersion() =>
-            typeof(RootCommand).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion;
+            typeof(RootCommand).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion;
 
         private static bool ShouldHelp(IReadOnlyList<string> commands) =>
             commands.Count == 0

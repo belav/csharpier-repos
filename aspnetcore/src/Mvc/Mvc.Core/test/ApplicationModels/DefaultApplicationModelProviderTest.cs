@@ -553,10 +553,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             // Arrange
             var builder = new TestApplicationModelProvider();
-            var method = typeof(DerivedController).GetMethod(
-                "PrivateMethod",
-                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
-            );
+            var method = typeof(DerivedController)
+                .GetMethod(
+                    "PrivateMethod",
+                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+                );
             Assert.NotNull(method);
 
             // Act
@@ -624,10 +625,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             // Arrange
             var builder = new TestApplicationModelProvider();
-            var method = typeof(DerivedController).GetMethod(
-                methodName,
-                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
-            );
+            var method = typeof(DerivedController)
+                .GetMethod(
+                    methodName,
+                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+                );
             Assert.NotNull(method);
 
             // Act
@@ -777,10 +779,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             // Arrange
             var builder = new TestApplicationModelProvider();
-            var method = typeof(DerivedController).GetMethod(
-                methodName,
-                BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
-            );
+            var method = typeof(DerivedController)
+                .GetMethod(
+                    methodName,
+                    BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
+                );
             Assert.NotNull(method);
 
             // Act
@@ -1443,7 +1446,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var builder = new TestApplicationModelProvider();
             var typeInfo =
-                typeof(DerivedFromControllerAndExplicitIDisposableImplementationController).GetTypeInfo();
+                typeof(DerivedFromControllerAndExplicitIDisposableImplementationController)
+                    .GetTypeInfo();
             var context = new ApplicationModelProviderContext(new[] { typeInfo });
 
             // Act
@@ -1459,8 +1463,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             // Arrange
             var builder = new TestApplicationModelProvider();
-            var typeInfo =
-                typeof(DerivedFromControllerAndHidesBaseDisposeMethodController).GetTypeInfo();
+            var typeInfo = typeof(DerivedFromControllerAndHidesBaseDisposeMethodController)
+                .GetTypeInfo();
             var context = new ApplicationModelProviderContext(new[] { typeInfo });
 
             // Act
@@ -1490,9 +1494,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void CreatePropertyModel_AddsBindingInfoToProperty_IfDeclaringTypeHasBindPropertiesAttribute()
         {
             // Arrange
-            var propertyInfo = typeof(BindPropertyController).GetProperty(
-                nameof(BindPropertyController.Property)
-            );
+            var propertyInfo = typeof(BindPropertyController)
+                .GetProperty(nameof(BindPropertyController.Property));
 
             // Act
             var property = Provider.CreatePropertyModel(propertyInfo);
@@ -1511,9 +1514,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void CreatePropertyModel_DoesNotSetBindingInfo_IfPropertySpecifiesBinderType()
         {
             // Arrange
-            var propertyInfo = typeof(BindPropertyController).GetProperty(
-                nameof(BindPropertyController.BinderType)
-            );
+            var propertyInfo = typeof(BindPropertyController)
+                .GetProperty(nameof(BindPropertyController.BinderType));
 
             // Act
             var property = Provider.CreatePropertyModel(propertyInfo);
@@ -1527,9 +1529,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void CreatePropertyModel_DoesNotSetBindingInfo_IfPropertySpecifiesBinderSource()
         {
             // Arrange
-            var propertyInfo = typeof(BindPropertyController).GetProperty(
-                nameof(BindPropertyController.BinderSource)
-            );
+            var propertyInfo = typeof(BindPropertyController)
+                .GetProperty(nameof(BindPropertyController.BinderSource));
 
             // Act
             var property = Provider.CreatePropertyModel(propertyInfo);
@@ -1549,9 +1550,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void CreatePropertyModel_AppliesBindPropertyAttributeDeclaredOnBaseType()
         {
             // Arrange
-            var propertyInfo = typeof(DerivedFromBindPropertyController).GetProperty(
-                nameof(DerivedFromBindPropertyController.DerivedProperty)
-            );
+            var propertyInfo = typeof(DerivedFromBindPropertyController)
+                .GetProperty(nameof(DerivedFromBindPropertyController.DerivedProperty));
 
             // Act
             var property = Provider.CreatePropertyModel(propertyInfo);
@@ -1572,12 +1572,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // This test ensures that applying BindPropertyAttribute on a user defined type does not cause properties on
             // Controller \ ControllerBase to be treated as model bound.
             // Arrange
-            var derivedPropertyInfo = typeof(UserController).GetProperty(
-                nameof(UserController.DerivedProperty)
-            );
-            var basePropertyInfo = typeof(UserController).GetProperty(
-                nameof(ControllerBase.ControllerContext)
-            );
+            var derivedPropertyInfo = typeof(UserController)
+                .GetProperty(nameof(UserController.DerivedProperty));
+            var basePropertyInfo = typeof(UserController)
+                .GetProperty(nameof(ControllerBase.ControllerContext));
 
             // Act
             var derivedProperty = Provider.CreatePropertyModel(derivedPropertyInfo);

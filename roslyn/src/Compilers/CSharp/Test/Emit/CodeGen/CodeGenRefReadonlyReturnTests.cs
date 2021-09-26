@@ -1378,7 +1378,7 @@ class Program
         public void RefExtensionMethod_PassThrough_LocalNoCopying()
         {
             CompileAndVerify(
-                    @"
+                @"
 public static class Ext
 {
     public static ref int M(ref this int p) => ref p;
@@ -1391,11 +1391,10 @@ class Test
         x.M();
     }
 }",
-                    verify: Verification.Fails
-                )
-                .VerifyIL(
-                    "Test.M",
-                    @"
+                verify: Verification.Fails
+            ).VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  1
@@ -1407,14 +1406,14 @@ class Test
   IL_0009:  pop
   IL_000a:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void RefExtensionMethod_PassThrough_FieldNoCopying()
         {
             CompileAndVerify(
-                    @"
+                @"
 public static class Ext
 {
     public static ref int M(ref this int p) => ref p;
@@ -1427,11 +1426,10 @@ class Test
         x.M();
     }
 }",
-                    verify: Verification.Fails
-                )
-                .VerifyIL(
-                    "Test.M",
-                    @"
+                verify: Verification.Fails
+            ).VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  1
@@ -1441,14 +1439,14 @@ class Test
   IL_000b:  pop
   IL_000c:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void RefExtensionMethod_PassThrough_ChainNoCopying()
         {
             CompileAndVerify(
-                    @"
+                @"
 public static class Ext
 {
     public static ref int M(ref this int p) => ref p;
@@ -1461,11 +1459,10 @@ class Test
         x.M().M().M();
     }
 }",
-                    verify: Verification.Fails
-                )
-                .VerifyIL(
-                    "Test.M",
-                    @"
+                verify: Verification.Fails
+            ).VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  1
@@ -1477,14 +1474,14 @@ class Test
   IL_0015:  pop
   IL_0016:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void RefReadOnlyExtensionMethod_PassThrough_TempCopying()
         {
             CompileAndVerify(
-                    @"
+                @"
 public static class Ext
 {
     public static ref readonly int M(in this int p) => ref p;
@@ -1496,11 +1493,10 @@ class Test
         5.M();
     }
 }",
-                    verify: Verification.Fails
-                )
-                .VerifyIL(
-                    "Test.M",
-                    @"
+                verify: Verification.Fails
+            ).VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  1
@@ -1512,14 +1508,14 @@ class Test
   IL_0009:  pop
   IL_000a:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void RefReadOnlyExtensionMethod_PassThrough_LocalNoCopying()
         {
             CompileAndVerify(
-                    @"
+                @"
 public static class Ext
 {
     public static ref readonly int M(in this int p) => ref p;
@@ -1532,11 +1528,10 @@ class Test
         x.M();
     }
 }",
-                    verify: Verification.Fails
-                )
-                .VerifyIL(
-                    "Test.M",
-                    @"
+                verify: Verification.Fails
+            ).VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  1
@@ -1548,14 +1543,14 @@ class Test
   IL_0009:  pop
   IL_000a:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void RefReadOnlyExtensionMethod_PassThrough_FieldNoCopying()
         {
             CompileAndVerify(
-                    @"
+                @"
 public static class Ext
 {
     public static ref readonly int M(in this int p) => ref p;
@@ -1568,11 +1563,10 @@ class Test
         x.M();
     }
 }",
-                    verify: Verification.Fails
-                )
-                .VerifyIL(
-                    "Test.M",
-                    @"
+                verify: Verification.Fails
+            ).VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  1
@@ -1582,14 +1576,14 @@ class Test
   IL_000b:  pop
   IL_000c:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void RefReadOnlyExtensionMethod_PassThrough_ChainNoCopying()
         {
             CompileAndVerify(
-                    @"
+                @"
 public static class Ext
 {
     public static ref readonly int M(in this int p) => ref p;
@@ -1602,11 +1596,10 @@ class Test
         x.M().M().M();
     }
 }",
-                    verify: Verification.Fails
-                )
-                .VerifyIL(
-                    "Test.M",
-                    @"
+                verify: Verification.Fails
+            ).VerifyIL(
+                "Test.M",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  1
@@ -1618,7 +1611,7 @@ class Test
   IL_0015:  pop
   IL_0016:  ret
 }"
-                );
+            );
         }
 
         [Fact]

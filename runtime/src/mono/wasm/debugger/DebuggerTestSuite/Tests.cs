@@ -1151,9 +1151,8 @@ namespace DebuggerTests
             var sourceToGet = JObject.FromObject(
                 new
                 {
-                    scriptId = pause_location["callFrames"][0]["functionLocation"][
-                        "scriptId"
-                    ].Value<string>()
+                    scriptId = pause_location["callFrames"][0]["functionLocation"]["scriptId"]
+                        .Value<string>()
                 }
             );
 

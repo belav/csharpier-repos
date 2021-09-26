@@ -27,10 +27,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
         {
             var i = random.Next(_expressionFinder.FoundExpressions.Count);
 
-            var stringConcatMethodInfo = typeof(string).GetRuntimeMethod(
-                nameof(string.Concat),
-                new[] { typeof(string), typeof(string) }
-            );
+            var stringConcatMethodInfo = typeof(string)
+                .GetRuntimeMethod(nameof(string.Concat), new[] { typeof(string), typeof(string) });
 
             var injector = new ExpressionInjector(
                 _expressionFinder.FoundExpressions[i],

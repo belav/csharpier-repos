@@ -79,8 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.NotNull(customers);
             Assert.Contains(
                 CoreResources.LogSensitiveDataLoggingEnabled(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage(),
                 Fixture.TestSqlLoggerFactory.Log.Select(l => l.Message)
             );
@@ -113,8 +113,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Equal(
                 CoreResources.LogRowLimitingOperationWithoutOrderBy(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage(),
                 Fixture.TestSqlLoggerFactory.Log[1].Message
             );
@@ -130,8 +130,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Equal(
                 CoreResources.LogRowLimitingOperationWithoutOrderBy(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage(),
                 Fixture.TestSqlLoggerFactory.Log[1].Message
             );
@@ -147,8 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Equal(
                 CoreResources.LogFirstWithoutOrderByAndFilter(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage(),
                 Fixture.TestSqlLoggerFactory.Log[1].Message
             );
@@ -168,8 +168,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Equal(
                 CoreResources.LogDistinctAfterOrderByWithoutRowLimitingOperatorWarning(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage(),
                 Fixture.TestSqlLoggerFactory.Log[1].Message
             );

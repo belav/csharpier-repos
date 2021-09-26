@@ -237,15 +237,13 @@ namespace ILCompiler
                 KeyValuePair<
                     MethodDesc,
                     Dictionary<MethodDesc, int>
-                > methodProfile in _profileData.CallChainProfile.ResolvedProfileData.Where(
-                    kvp => methodMap.ContainsKey(kvp.Key)
-                )
+                > methodProfile in _profileData.CallChainProfile.ResolvedProfileData
+                    .Where(kvp => methodMap.ContainsKey(kvp.Key))
             )
             {
                 foreach (
-                    KeyValuePair<MethodDesc, int> callee in methodProfile.Value.Where(
-                        kvp => methodMap.ContainsKey(kvp.Key)
-                    )
+                    KeyValuePair<MethodDesc, int> callee in methodProfile.Value
+                        .Where(kvp => methodMap.ContainsKey(kvp.Key))
                 )
                 {
                     callList.Add(

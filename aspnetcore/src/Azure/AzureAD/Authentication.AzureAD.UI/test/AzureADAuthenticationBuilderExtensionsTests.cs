@@ -42,18 +42,17 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddAzureAD(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com";
-                        o.ClientId = "ClientId";
-                        o.ClientSecret = "ClientSecret";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                        o.TenantId = "Common";
-                    }
-                );
+            services.AddAuthentication().AddAzureAD(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com";
+                    o.ClientId = "ClientId";
+                    o.ClientSecret = "ClientSecret";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                    o.TenantId = "Common";
+                }
+            );
             var provider = services.BuildServiceProvider();
 
             // Assert
@@ -104,18 +103,17 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddAzureAD(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com";
-                        o.ClientId = "ClientId";
-                        o.ClientSecret = "ClientSecret";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                        o.TenantId = "Common";
-                    }
-                );
+            services.AddAuthentication().AddAzureAD(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com";
+                    o.ClientId = "ClientId";
+                    o.ClientSecret = "ClientSecret";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                    o.TenantId = "Common";
+                }
+            );
 
             services.Configure<OpenIdConnectOptions>(
                 AzureADDefaults.OpenIdScheme,
@@ -161,20 +159,17 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddOpenIdConnect()
-                .AddCookie()
-                .AddAzureAD(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com";
-                        o.ClientId = "ClientId";
-                        o.ClientSecret = "ClientSecret";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                        o.TenantId = "Common";
-                    }
-                );
+            services.AddAuthentication().AddOpenIdConnect().AddCookie().AddAzureAD(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com";
+                    o.ClientId = "ClientId";
+                    o.ClientSecret = "ClientSecret";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                    o.TenantId = "Common";
+                }
+            );
 
             services.Configure<OpenIdConnectOptions>(
                 AzureADDefaults.OpenIdScheme,
@@ -346,17 +341,16 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddAzureADBearer(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com/";
-                        o.ClientId = "ClientId";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                        o.TenantId = "TenantId";
-                    }
-                );
+            services.AddAuthentication().AddAzureADBearer(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com/";
+                    o.ClientId = "ClientId";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                    o.TenantId = "TenantId";
+                }
+            );
             var provider = services.BuildServiceProvider();
 
             // Assert
@@ -388,17 +382,16 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddAzureADBearer(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com/";
-                        o.ClientId = "ClientId";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                        o.TenantId = "TenantId";
-                    }
-                );
+            services.AddAuthentication().AddAzureADBearer(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com/";
+                    o.ClientId = "ClientId";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                    o.TenantId = "TenantId";
+                }
+            );
 
             services.Configure<JwtBearerOptions>(
                 AzureADDefaults.JwtBearerAuthenticationScheme,
@@ -428,18 +421,16 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddJwtBearer()
-                .AddAzureADBearer(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com/";
-                        o.ClientId = "ClientId";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                        o.TenantId = "TenantId";
-                    }
-                );
+            services.AddAuthentication().AddJwtBearer().AddAzureADBearer(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com/";
+                    o.ClientId = "ClientId";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                    o.TenantId = "TenantId";
+                }
+            );
 
             services.Configure<JwtBearerOptions>(
                 AzureADDefaults.JwtBearerAuthenticationScheme,
@@ -556,17 +547,15 @@ namespace Microsoft.AspNetCore.Authentication
             var services = new ServiceCollection();
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-            services.AddAuthentication()
-                .AddAzureAD(o => { })
-                .AddOpenIdConnect(
-                    "other",
-                    null,
-                    o =>
-                    {
-                        o.ClientId = "ClientId";
-                        o.Authority = "https://authority.com";
-                    }
-                );
+            services.AddAuthentication().AddAzureAD(o => { }).AddOpenIdConnect(
+                "other",
+                null,
+                o =>
+                {
+                    o.ClientId = "ClientId";
+                    o.Authority = "https://authority.com";
+                }
+            );
 
             var provider = services.BuildServiceProvider();
             var openIdConnectOptions = provider.GetService<IOptionsMonitor<OpenIdConnectOptions>>();

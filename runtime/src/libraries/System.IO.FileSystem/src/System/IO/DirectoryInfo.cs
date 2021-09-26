@@ -54,7 +54,8 @@ namespace System.IO
                     PathInternal.IsRoot(fullPath.AsSpan())
                         ? fullPath.AsSpan()
                         : Path.GetFileName(Path.TrimEndingDirectorySeparator(fullPath.AsSpan()))
-                ).ToString();
+                )
+                    .ToString();
 
             FullPath = fullPath;
 
@@ -142,7 +143,8 @@ namespace System.IO
                     SearchTarget.Files,
                     enumerationOptions
                 )
-            ).ToArray();
+            )
+                .ToArray();
 
         // Returns an array of strongly typed FileSystemInfo entries which will contain a listing
         // of all the files and directories.
@@ -189,7 +191,8 @@ namespace System.IO
                     SearchTarget.Directories,
                     enumerationOptions
                 )
-            ).ToArray();
+            )
+                .ToArray();
 
         public IEnumerable<DirectoryInfo> EnumerateDirectories() =>
             EnumerateDirectories("*", enumerationOptions: EnumerationOptions.Compatible);
@@ -317,11 +320,12 @@ namespace System.IO
             string sourceWithSeparator = PathInternal.EnsureTrailingSeparator(FullPath);
 
             if (
-                string.Equals(
-                    sourceWithSeparator,
-                    destinationWithSeparator,
-                    PathInternal.StringComparison
-                )
+                string
+                    .Equals(
+                        sourceWithSeparator,
+                        destinationWithSeparator,
+                        PathInternal.StringComparison
+                    )
             )
                 throw new IOException(SR.IO_SourceDestMustBeDifferent);
 

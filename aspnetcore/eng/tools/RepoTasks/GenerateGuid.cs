@@ -23,7 +23,8 @@ namespace RepoTasks
         {
             try
             {
-                var value = string.Join(",", Values.Select(o => o.ItemSpec).ToArray())
+                var value = string
+                    .Join(",", Values.Select(o => o.ItemSpec).ToArray())
                     .ToLowerInvariant();
 
                 Guid = Uuid.Create(new Guid(NamespaceGuid), value).ToString();

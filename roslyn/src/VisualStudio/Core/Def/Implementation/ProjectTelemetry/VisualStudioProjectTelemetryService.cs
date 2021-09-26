@@ -126,10 +126,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
             // Now kick off scanning in the OOP process.
             // If the call fails an error has already been reported and there is nothing more to do.
             _ = await _lazyConnection.TryInvokeAsync(
-                    (service, callbackId, cancellationToken) =>
-                        service.ComputeProjectTelemetryAsync(callbackId, cancellationToken),
-                    cancellationToken
-                )
+                (service, callbackId, cancellationToken) =>
+                    service.ComputeProjectTelemetryAsync(callbackId, cancellationToken),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -172,9 +172,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
         {
             try
             {
-                var telemetryEvent = TelemetryHelper.TelemetryService.CreateEvent(
-                    TelemetryEventPath
-                );
+                var telemetryEvent = TelemetryHelper.TelemetryService
+                    .CreateEvent(TelemetryEventPath);
                 telemetryEvent.SetStringProperty(
                     TelemetryProjectIdName,
                     info.ProjectId.Id.ToString()
@@ -207,9 +206,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
                 // So, to be very careful, put this in a try/catch too.
                 try
                 {
-                    var exceptionEvent = TelemetryHelper.TelemetryService.CreateEvent(
-                        TelemetryExceptionEventPath
-                    );
+                    var exceptionEvent = TelemetryHelper.TelemetryService
+                        .CreateEvent(TelemetryExceptionEventPath);
                     exceptionEvent.SetStringProperty("Type", e.GetTypeDisplayName());
                     exceptionEvent.SetStringProperty("Message", e.Message);
                     exceptionEvent.SetStringProperty("StackTrace", e.StackTrace);

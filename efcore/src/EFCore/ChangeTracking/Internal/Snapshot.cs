@@ -71,10 +71,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var snapshotParameter = Expression.Parameter(typeof(TSnapshot), "snapshot");
 
                 delegates[i] = Expression.Lambda(
-                        typeof(Func<, >).MakeGenericType(typeof(TSnapshot), genericArguments[i]),
-                        Expression.Field(snapshotParameter, "_value" + i),
-                        snapshotParameter
-                    )
+                    typeof(Func<, >).MakeGenericType(typeof(TSnapshot), genericArguments[i]),
+                    Expression.Field(snapshotParameter, "_value" + i),
+                    snapshotParameter
+                )
                     .Compile();
             }
 
@@ -110,231 +110,38 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 18 => typeof(Snapshot<, , , , , , , , , , , , , , , , , >).MakeGenericType(types),
                 19 => typeof(Snapshot<, , , , , , , , , , , , , , , , , , >).MakeGenericType(types),
                 20
-                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , >).MakeGenericType(
-                      types
-                  ),
+                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , >)
+                      .MakeGenericType(types),
                 21
-                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , >).MakeGenericType(
-                      types
-                  ),
+                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , >)
+                      .MakeGenericType(types),
                 22
-                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , >).MakeGenericType(
-                      types
-                  ),
+                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , >)
+                      .MakeGenericType(types),
                 23
-                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , , >).MakeGenericType(
-                      types
-                  ),
+                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , , >)
+                      .MakeGenericType(types),
                 24
-                  => typeof(Snapshot<
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-
-                  >).MakeGenericType(types),
+                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , , , >)
+                      .MakeGenericType(types),
                 25
-                  => typeof(Snapshot<
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-
-                  >).MakeGenericType(types),
+                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , , , , >)
+                      .MakeGenericType(types),
                 26
-                  => typeof(Snapshot<
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-
-                  >).MakeGenericType(types),
+                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , , , , , >)
+                      .MakeGenericType(types),
                 27
-                  => typeof(Snapshot<
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-
-                  >).MakeGenericType(types),
+                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , , , , , , >)
+                      .MakeGenericType(types),
                 28
-                  => typeof(Snapshot<
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-
-                  >).MakeGenericType(types),
+                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , , , , , , , >)
+                      .MakeGenericType(types),
                 29
-                  => typeof(Snapshot<
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-
-                  >).MakeGenericType(types),
+                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , , , , , , , , >)
+                      .MakeGenericType(types),
                 30
-                  => typeof(Snapshot<
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-                      ,
-
-                  >).MakeGenericType(types),
+                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , , , , , , , , , >)
+                      .MakeGenericType(types),
                 _ => throw new IndexOutOfRangeException(),
             };
     }

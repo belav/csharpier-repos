@@ -379,10 +379,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (accessorIsFromSomeCompilation)
                 {
-                    return MemberSignatureComparer.CSharpAccessorOverrideComparer.Equals(
-                        accessor,
-                        overriddenAccessor
-                    ); //NB: custom comparer
+                    return MemberSignatureComparer.CSharpAccessorOverrideComparer
+                        .Equals(accessor, overriddenAccessor); //NB: custom comparer
                 }
 
                 if (
@@ -395,10 +393,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return true;
                 }
 
-                return MemberSignatureComparer.RuntimeSignatureComparer.Equals(
-                    accessor,
-                    overriddenAccessor
-                );
+                return MemberSignatureComparer.RuntimeSignatureComparer
+                    .Equals(accessor, overriddenAccessor);
             }
         }
 
@@ -479,14 +475,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && IsOverriddenSymbolAccessible(overriddenAccessor, accessor.ContainingType)
                 && (
                     accessorIsFromSomeCompilation
-                        ? MemberSignatureComparer.CSharpAccessorOverrideComparer.Equals(
-                              accessor,
-                              overriddenAccessor
-                          ) //NB: custom comparer
-                        : MemberSignatureComparer.RuntimeSignatureComparer.Equals(
-                              accessor,
-                              overriddenAccessor
-                          )
+                        ? MemberSignatureComparer.CSharpAccessorOverrideComparer
+                          .Equals(accessor, overriddenAccessor) //NB: custom comparer
+                        : MemberSignatureComparer.RuntimeSignatureComparer
+                          .Equals(accessor, overriddenAccessor)
                 )
             )
             {
@@ -541,8 +533,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             PooledHashSet<NamedTypeSymbol> membersOfOtherKindsHidden =
                 PooledHashSet<NamedTypeSymbol>.GetInstance();
-            PooledHashSet<NamedTypeSymbol> allMembersHidden =
-                PooledHashSet<NamedTypeSymbol>.GetInstance(); // Implies membersOfOtherKindsHidden.
+            PooledHashSet<NamedTypeSymbol> allMembersHidden = PooledHashSet<NamedTypeSymbol>
+                .GetInstance(); // Implies membersOfOtherKindsHidden.
 
             ArrayBuilder<Symbol> hiddenBuilder = null;
 
@@ -833,9 +825,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 )
                             );
                             Debug.Assert(
-                                !param.Type.HasCustomModifiers(
-                                    flagNonDefaultArraySizesOrLowerBounds: false
-                                )
+                                !param.Type
+                                    .HasCustomModifiers(
+                                        flagNonDefaultArraySizesOrLowerBounds: false
+                                    )
                             );
                         }
 #endif
@@ -850,10 +843,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             )
                             {
                                 if (
-                                    MemberSignatureComparer.CSharpOverrideComparer.Equals(
-                                        otherMember,
-                                        currTypeBestMatch
-                                    )
+                                    MemberSignatureComparer.CSharpOverrideComparer
+                                        .Equals(otherMember, currTypeBestMatch)
                                 )
                                 {
                                     int customModifierCount = CustomModifierCount(otherMember);
@@ -1003,9 +994,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int representativeCustomModifierCount = -1;
 
             foreach (
-                Symbol otherMember in representativeMember.ContainingType.GetMembers(
-                    representativeMember.Name
-                )
+                Symbol otherMember in representativeMember.ContainingType
+                    .GetMembers(representativeMember.Name)
             )
             {
                 if (otherMember.Kind == representativeMember.Kind)
@@ -1024,10 +1014,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             }
 
                             if (
-                                MemberSignatureComparer.CSharpOverrideComparer.Equals(
-                                    otherMember,
-                                    representativeMember
-                                )
+                                MemberSignatureComparer.CSharpOverrideComparer
+                                    .Equals(otherMember, representativeMember)
                                 && otherMember.CustomModifierCount()
                                     == representativeCustomModifierCount
                             )
@@ -1038,10 +1026,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         else
                         {
                             if (
-                                MemberSignatureComparer.CSharpCustomModifierOverrideComparer.Equals(
-                                    otherMember,
-                                    representativeMember
-                                )
+                                MemberSignatureComparer.CSharpCustomModifierOverrideComparer
+                                    .Equals(otherMember, representativeMember)
                             )
                             {
                                 overriddenBuilder.Add(otherMember);
@@ -1090,9 +1076,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             IEqualityComparer<Symbol> comparer =
                 MemberSignatureComparer.CSharpCustomModifierOverrideComparer;
             foreach (
-                Symbol otherMember in representativeMember.ContainingType.GetMembers(
-                    representativeMember.Name
-                )
+                Symbol otherMember in representativeMember.ContainingType
+                    .GetMembers(representativeMember.Name)
             )
             {
                 if (otherMember.Kind == representativeMember.Kind)
@@ -1138,22 +1123,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var methodReturnType = method.ReturnTypeWithAnnotations;
                     return methodReturnType.CustomModifiers.Any()
                         || method.RefCustomModifiers.Any()
-                        || methodReturnType.Type.HasCustomModifiers(
-                            flagNonDefaultArraySizesOrLowerBounds: false
-                        );
+                        || methodReturnType.Type
+                            .HasCustomModifiers(flagNonDefaultArraySizesOrLowerBounds: false);
                 case SymbolKind.Property:
                     PropertySymbol property = (PropertySymbol)member;
                     var propertyType = property.TypeWithAnnotations;
                     return propertyType.CustomModifiers.Any()
                         || property.RefCustomModifiers.Any()
-                        || propertyType.Type.HasCustomModifiers(
-                            flagNonDefaultArraySizesOrLowerBounds: false
-                        );
+                        || propertyType.Type
+                            .HasCustomModifiers(flagNonDefaultArraySizesOrLowerBounds: false);
                 case SymbolKind.Event:
                     EventSymbol @event = (EventSymbol)member;
-                    return @event.Type.HasCustomModifiers(
-                        flagNonDefaultArraySizesOrLowerBounds: false
-                    ); //can't have custom modifiers on (vs in) type
+                    return @event.Type
+                        .HasCustomModifiers(flagNonDefaultArraySizesOrLowerBounds: false); //can't have custom modifiers on (vs in) type
                 default:
                     throw ExceptionUtilities.UnexpectedValue(member.Kind);
             }
@@ -1210,10 +1192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // we can use a methodimpl (even though it is of a form not supported by the runtime and would result in a
             // loader error) so that the symbol APIs produce the most useful result.
             if (
-                !method.ReturnType.Equals(
-                    csharpOverriddenMethod.ReturnType,
-                    TypeCompareKind.AllIgnoreOptions
-                )
+                !method.ReturnType
+                    .Equals(csharpOverriddenMethod.ReturnType, TypeCompareKind.AllIgnoreOptions)
             )
                 return true;
 
@@ -1235,10 +1215,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             warnAmbiguous = !originalOverriddenMethodWasAmbiguous;
 
             bool overriddenMethodContainedInSameTypeAsRuntimeOverriddenMethod =
-                csharpOverriddenMethod.ContainingType.Equals(
-                    runtimeOverriddenMethod.ContainingType,
-                    TypeCompareKind.CLRSignatureCompareOptions
-                );
+                csharpOverriddenMethod.ContainingType
+                    .Equals(
+                        runtimeOverriddenMethod.ContainingType,
+                        TypeCompareKind.CLRSignatureCompareOptions
+                    );
 
             // If the overridden method is on a different (e.g. base) type compared to the runtime overridden
             // method, then the runtime overridden method could not possibly resolve correctly to the overridden method.
@@ -1311,10 +1292,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (
                         otherMember.Kind == SymbolKind.Method
                         && IsOverriddenSymbolAccessible(otherMember, containingType)
-                        && MemberSignatureComparer.RuntimeSignatureComparer.Equals(
-                            method,
-                            otherMember
-                        )
+                        && MemberSignatureComparer.RuntimeSignatureComparer
+                            .Equals(method, otherMember)
                     )
                     {
                         MethodSymbol overridden = (MethodSymbol)otherMember;

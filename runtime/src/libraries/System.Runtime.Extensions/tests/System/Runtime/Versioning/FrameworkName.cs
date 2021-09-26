@@ -51,12 +51,13 @@ namespace System.Runtime.Versioning.Tests
         [Fact]
         public static void ConstructFromStringWithWhitespace()
         {
-            var nameString = string.Format(
-                "   \r{0}\r\n, Version = {1}\t,  Profile =  {2} \r\n",
-                TestIdentifier,
-                s_testVersion,
-                TestProfile
-            );
+            var nameString = string
+                .Format(
+                    "   \r{0}\r\n, Version = {1}\t,  Profile =  {2} \r\n",
+                    TestIdentifier,
+                    s_testVersion,
+                    TestProfile
+                );
             VerifyConstructor(
                 new FrameworkName(nameString),
                 s_testNameString,

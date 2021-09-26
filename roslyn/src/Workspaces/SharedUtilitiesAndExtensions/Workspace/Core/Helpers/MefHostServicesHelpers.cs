@@ -46,12 +46,13 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             }
 
             var assemblyName = new AssemblyName(
-                string.Format(
-                    "{0}, Version={1}, Culture=neutral, PublicKeyToken={2}",
-                    assemblySimpleName,
-                    assemblyVersion,
-                    publicKeyToken
-                )
+                string
+                    .Format(
+                        "{0}, Version={1}, Culture=neutral, PublicKeyToken={2}",
+                        assemblySimpleName,
+                        assemblyVersion,
+                        publicKeyToken
+                    )
             );
 
             try

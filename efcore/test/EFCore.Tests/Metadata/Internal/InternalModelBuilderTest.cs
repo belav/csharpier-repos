@@ -233,9 +233,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var modelBuilder = CreateModelBuilder();
             var customerEntityTypeBuilder = modelBuilder.Entity(
-                    typeof(Customer),
-                    ConfigurationSource.Explicit
-                )
+                typeof(Customer),
+                ConfigurationSource.Explicit
+            )
                 .PrimaryKey(new[] { Customer.IdProperty }, ConfigurationSource.Convention);
             var orderEntityTypeBuilder = modelBuilder.Entity(
                 typeof(Order),
@@ -366,10 +366,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ConfigurationSource.Explicit
             );
             orderEntityTypeBuilder.HasRelationship(
-                    typeof(Product),
-                    new[] { Order.ProductIdProperty },
-                    ConfigurationSource.Convention
-                )
+                typeof(Product),
+                new[] { Order.ProductIdProperty },
+                ConfigurationSource.Convention
+            )
                 .HasNavigation("Product", pointsToPrincipal: true, ConfigurationSource.Convention);
 
             Assert.NotNull(
@@ -383,7 +383,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
             Assert.Equal(
                 typeof(Product),
-                orderEntityTypeBuilder.Metadata.GetForeignKeys()
+                orderEntityTypeBuilder.Metadata
+                    .GetForeignKeys()
                     .Single().PrincipalEntityType.ClrType
             );
         }
@@ -402,10 +403,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ConfigurationSource.Convention
             );
             orderEntityTypeBuilder.HasRelationship(
-                    typeof(Product),
-                    new[] { Order.ProductIdProperty },
-                    ConfigurationSource.Convention
-                )
+                typeof(Product),
+                new[] { Order.ProductIdProperty },
+                ConfigurationSource.Convention
+            )
                 .HasNavigation("Order", pointsToPrincipal: false, ConfigurationSource.Convention);
 
             Assert.NotNull(
@@ -419,7 +420,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
             Assert.Equal(
                 typeof(Product),
-                orderEntityTypeBuilder.Metadata.GetForeignKeys()
+                orderEntityTypeBuilder.Metadata
+                    .GetForeignKeys()
                     .Single().PrincipalEntityType.ClrType
             );
         }
@@ -575,19 +577,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ).Builder;
             var leftFK =
                 joinEntityTypeBuilder.HasRelationship(
-                        manyToManyLeft.Metadata.Name,
-                        new List<string> { "ManyToManyLeft_Id" },
-                        manyToManyLeftPK.Metadata,
-                        ConfigurationSource.Convention
-                    )
+                    manyToManyLeft.Metadata.Name,
+                    new List<string> { "ManyToManyLeft_Id" },
+                    manyToManyLeftPK.Metadata,
+                    ConfigurationSource.Convention
+                )
                     .IsUnique(false, ConfigurationSource.Convention).Metadata;
             var rightFK =
                 joinEntityTypeBuilder.HasRelationship(
-                        manyToManyRight.Metadata.Name,
-                        new List<string> { "ManyToManyRight_Id" },
-                        manyToManyRightPK.Metadata,
-                        ConfigurationSource.Convention
-                    )
+                    manyToManyRight.Metadata.Name,
+                    new List<string> { "ManyToManyRight_Id" },
+                    manyToManyRightPK.Metadata,
+                    ConfigurationSource.Convention
+                )
                     .IsUnique(false, ConfigurationSource.Convention).Metadata;
             skipNavOnLeft.HasForeignKey(leftFK, ConfigurationSource.Convention);
             skipNavOnRight.HasForeignKey(rightFK, ConfigurationSource.Convention);
@@ -603,12 +605,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Empty(model.GetEntityTypes().Where(e => e.IsImplicitlyCreatedJoinEntityType));
 
-            var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(
-                nameof(ManyToManyLeft.Rights)
-            );
-            var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(
-                nameof(ManyToManyRight.Lefts)
-            );
+            var leftSkipNav = manyToManyLeft.Metadata
+                .FindDeclaredSkipNavigation(nameof(ManyToManyLeft.Rights));
+            var rightSkipNav = manyToManyRight.Metadata
+                .FindDeclaredSkipNavigation(nameof(ManyToManyRight.Lefts));
 
             Assert.NotNull(leftSkipNav);
             Assert.NotNull(rightSkipNav);
@@ -683,12 +683,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Null(modelBuilder.RemoveImplicitJoinEntity(joinEntityType));
 
-            var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(
-                nameof(ManyToManyLeft.Rights)
-            );
-            var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(
-                nameof(ManyToManyRight.Lefts)
-            );
+            var leftSkipNav = manyToManyLeft.Metadata
+                .FindDeclaredSkipNavigation(nameof(ManyToManyLeft.Rights));
+            var rightSkipNav = manyToManyRight.Metadata
+                .FindDeclaredSkipNavigation(nameof(ManyToManyRight.Lefts));
             Assert.NotNull(leftSkipNav);
             Assert.NotNull(rightSkipNav);
 
@@ -776,16 +774,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private static void Cleanup(InternalModelBuilder modelBuilder)
         {
-            new ModelCleanupConvention(CreateDependencies()).ProcessModelFinalizing(
-                modelBuilder,
-                new ConventionContext<IConventionModelBuilder>(
-                    modelBuilder.Metadata.ConventionDispatcher
-                )
-            );
+            new ModelCleanupConvention(CreateDependencies())
+                .ProcessModelFinalizing(
+                    modelBuilder,
+                    new ConventionContext<IConventionModelBuilder>(
+                        modelBuilder.Metadata.ConventionDispatcher
+                    )
+                );
         }
 
         private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         protected virtual InternalModelBuilder CreateModelBuilder(Model model = null) =>
@@ -811,12 +811,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private class Order
         {
             public static readonly PropertyInfo IdProperty = typeof(Order).GetProperty("Id");
-            public static readonly PropertyInfo CustomerIdProperty = typeof(Order).GetProperty(
-                "CustomerId"
-            );
-            public static readonly PropertyInfo ProductIdProperty = typeof(Order).GetProperty(
-                "ProductId"
-            );
+            public static readonly PropertyInfo CustomerIdProperty = typeof(Order)
+                .GetProperty("CustomerId");
+            public static readonly PropertyInfo ProductIdProperty = typeof(Order)
+                .GetProperty("ProductId");
 
             public int Id { get; set; }
             public int CustomerId { get; set; }

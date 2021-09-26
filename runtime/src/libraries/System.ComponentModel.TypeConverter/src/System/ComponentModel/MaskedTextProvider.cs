@@ -90,14 +90,15 @@ namespace System.ComponentModel
 
             public override string ToString()
             {
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "MaskPosition[{0}] <CaseConversion.{1}><CharType.{2}><IsAssigned: {3}",
-                    MaskPosition,
-                    CaseConversion,
-                    CharType,
-                    IsAssigned
-                );
+                return string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "MaskPosition[{0}] <CaseConversion.{1}><CharType.{2}><IsAssigned: {3}",
+                        MaskPosition,
+                        CaseConversion,
+                        CharType,
+                        IsAssigned
+                    );
             }
         }
 

@@ -66,9 +66,8 @@ namespace System.Net.Http
 
             HttpRequestMessage = httpRequest;
             Headers.ContentType = new MediaTypeHeaderValue(DefaultMediaType);
-            Headers.ContentType.Parameters.Add(
-                new NameValueHeaderValue(MsgTypeParameter, DefaultRequestMsgType)
-            );
+            Headers.ContentType.Parameters
+                .Add(new NameValueHeaderValue(MsgTypeParameter, DefaultRequestMsgType));
 
             InitializeStreamTask();
         }
@@ -87,9 +86,8 @@ namespace System.Net.Http
 
             HttpResponseMessage = httpResponse;
             Headers.ContentType = new MediaTypeHeaderValue(DefaultMediaType);
-            Headers.ContentType.Parameters.Add(
-                new NameValueHeaderValue(MsgTypeParameter, DefaultResponseMsgType)
-            );
+            Headers.ContentType.Parameters
+                .Add(new NameValueHeaderValue(MsgTypeParameter, DefaultResponseMsgType));
 
             InitializeStreamTask();
         }
@@ -143,10 +141,8 @@ namespace System.Net.Http
             if (contentType != null)
             {
                 if (
-                    !contentType.MediaType.Equals(
-                        DefaultMediaType,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    !contentType.MediaType
+                        .Equals(DefaultMediaType, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     if (throwOnError)

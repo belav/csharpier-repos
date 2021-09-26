@@ -67,32 +67,28 @@ namespace JIT.HardwareIntrinsics.General
             Vector256<Byte> value;
 
             value = Vector256.Create((byte)TestLibrary.Generator.GetByte());
-            object Result = typeof(Vector256).GetMethod(nameof(Vector256.AsVector))
+            object Result = typeof(Vector256)
+                .GetMethod(nameof(Vector256.AsVector))
                 .MakeGenericMethod(typeof(Byte))
                 .Invoke(null, new object[] { value });
             ValidateResult((Vector<Byte>)(Result), value);
 
-            value =
-                (Vector256<Byte>)typeof(Vector256).GetMethods()
-                    .Where(
-                        (methodInfo) =>
+            value = (Vector256<Byte>)typeof(Vector256).GetMethods().Where(
+                    (methodInfo) =>
+                    {
+                        if (methodInfo.Name == nameof(Vector256.AsVector256))
                         {
-                            if (methodInfo.Name == nameof(Vector256.AsVector256))
-                            {
-                                var parameters = methodInfo.GetParameters();
-                                return (parameters.Length == 1)
-                                    && (parameters[0].ParameterType.IsGenericType)
-                                    && (
-                                        parameters[0].ParameterType.GetGenericTypeDefinition()
-                                        == typeof(Vector<>)
-                                    );
-                            }
-                            return false;
+                            var parameters = methodInfo.GetParameters();
+                            return (parameters.Length == 1)
+                                && (parameters[0].ParameterType.IsGenericType)
+                                && (
+                                    parameters[0].ParameterType.GetGenericTypeDefinition()
+                                    == typeof(Vector<>)
+                                );
                         }
-                    )
-                    .Single()
-                    .MakeGenericMethod(typeof(Byte))
-                    .Invoke(null, new object[] { Result });
+                        return false;
+                    }
+                ).Single().MakeGenericMethod(typeof(Byte)).Invoke(null, new object[] { Result });
             ValidateResult(value, (Vector<Byte>)(Result));
         }
 
@@ -168,15 +164,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256<Byte>.AsVector: {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", valueElements)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector256<Byte>.AsVector: {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", valueElements)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

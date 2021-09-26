@@ -520,13 +520,8 @@ namespace System.Net.Sockets.Tests
                 SocketServer server = new SocketServer(_log, listenOn, dualModeServer, out int port)
             )
             {
-                await Task.Factory.FromAsync(
-                    socket.BeginConnect,
-                    socket.EndConnect,
-                    connectTo,
-                    port,
-                    null
-                );
+                await Task.Factory
+                    .FromAsync(socket.BeginConnect, socket.EndConnect, connectTo, port, null);
                 Assert.True(socket.Connected);
             }
         }
@@ -620,12 +615,13 @@ namespace System.Net.Sockets.Tests
                 SocketServer server = new SocketServer(_log, listenOn, dualModeServer, out int port)
             )
             {
-                await Task.Factory.FromAsync(
-                    socket.BeginConnect,
-                    socket.EndConnect,
-                    new IPEndPoint(connectTo, port),
-                    null
-                );
+                await Task.Factory
+                    .FromAsync(
+                        socket.BeginConnect,
+                        socket.EndConnect,
+                        new IPEndPoint(connectTo, port),
+                        null
+                    );
                 Assert.True(socket.Connected);
             }
         }
@@ -649,13 +645,8 @@ namespace System.Net.Sockets.Tests
                 SocketServer server = new SocketServer(_log, listenOn, dualModeServer, out int port)
             )
             {
-                await Task.Factory.FromAsync(
-                    socket.BeginConnect,
-                    socket.EndConnect,
-                    connectTo,
-                    port,
-                    null
-                );
+                await Task.Factory
+                    .FromAsync(socket.BeginConnect, socket.EndConnect, connectTo, port, null);
                 Assert.True(socket.Connected);
             }
         }
@@ -673,13 +664,8 @@ namespace System.Net.Sockets.Tests
                 SocketServer server = new SocketServer(_log, listenOn, dualModeServer, out int port)
             )
             {
-                await Task.Factory.FromAsync(
-                    socket.BeginConnect,
-                    socket.EndConnect,
-                    "localhost",
-                    port,
-                    null
-                );
+                await Task.Factory
+                    .FromAsync(socket.BeginConnect, socket.EndConnect, "localhost", port, null);
                 Assert.True(socket.Connected);
             }
         }
@@ -697,12 +683,13 @@ namespace System.Net.Sockets.Tests
                 SocketServer server = new SocketServer(_log, listenOn, dualModeServer, out int port)
             )
             {
-                await Task.Factory.FromAsync(
-                    socket.BeginConnect,
-                    socket.EndConnect,
-                    new DnsEndPoint("localhost", port),
-                    null
-                );
+                await Task.Factory
+                    .FromAsync(
+                        socket.BeginConnect,
+                        socket.EndConnect,
+                        new DnsEndPoint("localhost", port),
+                        null
+                    );
                 Assert.True(socket.Connected);
             }
         }
@@ -1480,11 +1467,12 @@ namespace System.Net.Sockets.Tests
                 int sent = client.SendTo(new byte[1], new IPEndPoint(connectTo, port));
                 Assert.Equal(1, sent);
 
-                bool success = server.WaitHandle.WaitOne(
-                    expectedToTimeout
-                      ? TestSettings.FailingTestTimeout
-                      : TestSettings.PassingTestTimeout
-                ); // Make sure the bytes were received
+                bool success = server.WaitHandle
+                    .WaitOne(
+                        expectedToTimeout
+                          ? TestSettings.FailingTestTimeout
+                          : TestSettings.PassingTestTimeout
+                    ); // Make sure the bytes were received
                 if (!success)
                 {
                     throw new TimeoutException();
@@ -1651,11 +1639,12 @@ namespace System.Net.Sockets.Tests
                 int sent = client.EndSendTo(async);
                 Assert.Equal(1, sent);
 
-                bool success = server.WaitHandle.WaitOne(
-                    expectedToTimeout
-                      ? TestSettings.FailingTestTimeout
-                      : TestSettings.PassingTestTimeout
-                ); // Make sure the bytes were received
+                bool success = server.WaitHandle
+                    .WaitOne(
+                        expectedToTimeout
+                          ? TestSettings.FailingTestTimeout
+                          : TestSettings.PassingTestTimeout
+                    ); // Make sure the bytes were received
                 if (!success)
                 {
                     throw new TimeoutException();
@@ -1842,11 +1831,12 @@ namespace System.Net.Sockets.Tests
                     }
                 }
 
-                bool success = server.WaitHandle.WaitOne(
-                    expectedToTimeout
-                      ? TestSettings.FailingTestTimeout
-                      : TestSettings.PassingTestTimeout
-                ); // Make sure the bytes were received
+                bool success = server.WaitHandle
+                    .WaitOne(
+                        expectedToTimeout
+                          ? TestSettings.FailingTestTimeout
+                          : TestSettings.PassingTestTimeout
+                    ); // Make sure the bytes were received
                 if (!success)
                 {
                     throw new TimeoutException();
@@ -2193,11 +2183,12 @@ namespace System.Net.Sockets.Tests
                 // Assert.Equal(connectTo.MapToIPv6(), remoteEndPoint.Address);
 
                 SocketUdpClient client = new SocketUdpClient(_log, serverSocket, connectTo, port);
-                bool success = async.AsyncWaitHandle.WaitOne(
-                    expectedToTimeout
-                      ? TestSettings.FailingTestTimeout
-                      : TestSettings.PassingTestTimeout
-                );
+                bool success = async.AsyncWaitHandle
+                    .WaitOne(
+                        expectedToTimeout
+                          ? TestSettings.FailingTestTimeout
+                          : TestSettings.PassingTestTimeout
+                    );
                 if (!success)
                 {
                     throw new TimeoutException();
@@ -2708,9 +2699,8 @@ namespace System.Net.Sockets.Tests
                     Assert.Equal(expectedEP, args.RemoteEndPoint);
                     Assert.True(
                         args.ReceiveMessageFromPacketInfo.Address.Equals(IPAddress.Loopback)
-                            || args.ReceiveMessageFromPacketInfo.Address.Equals(
-                                IPAddress.Loopback.MapToIPv6()
-                            )
+                            || args.ReceiveMessageFromPacketInfo.Address
+                                .Equals(IPAddress.Loopback.MapToIPv6())
                     );
                 }
             }
@@ -3020,11 +3010,12 @@ namespace System.Net.Sockets.Tests
                 // Assert.Equal(connectTo.MapToIPv6(), remoteEndPoint.Address);
 
                 SocketUdpClient client = new SocketUdpClient(_log, serverSocket, connectTo, port);
-                bool success = async.AsyncWaitHandle.WaitOne(
-                    expectedToTimeout
-                      ? TestSettings.FailingTestTimeout
-                      : TestSettings.PassingTestTimeout
-                );
+                bool success = async.AsyncWaitHandle
+                    .WaitOne(
+                        expectedToTimeout
+                          ? TestSettings.FailingTestTimeout
+                          : TestSettings.PassingTestTimeout
+                    );
                 if (!success)
                 {
                     throw new TimeoutException();

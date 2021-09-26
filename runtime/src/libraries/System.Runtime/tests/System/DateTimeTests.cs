@@ -2105,21 +2105,21 @@ namespace System.Tests
                 Assert.Equal(
                     expected,
                     DateTime.ParseExact(
-                            expected,
-                            new[] { standardFormat },
-                            null,
-                            DateTimeStyles.None
-                        )
+                        expected,
+                        new[] { standardFormat },
+                        null,
+                        DateTimeStyles.None
+                    )
                         .ToString(standardFormat)
                 );
                 Assert.Equal(
                     expected,
                     DateTime.ParseExact(
-                            expected,
-                            new[] { standardFormat },
-                            null,
-                            DateTimeStyles.AllowWhiteSpaces
-                        )
+                        expected,
+                        new[] { standardFormat },
+                        null,
+                        DateTimeStyles.AllowWhiteSpaces
+                    )
                         .ToString(standardFormat)
                 );
 
@@ -2219,45 +2219,45 @@ namespace System.Tests
             Assert.Equal(
                 dt.ToString("r"),
                 DateTime.ParseExact(
-                        input + Whitespace,
-                        "r",
-                        null,
-                        DateTimeStyles.AllowTrailingWhite
-                    )
+                    input + Whitespace,
+                    "r",
+                    null,
+                    DateTimeStyles.AllowTrailingWhite
+                )
                     .ToString("r")
             );
             Assert.Equal(
                 dt.ToString("r"),
                 DateTime.ParseExact(
-                        Whitespace + input + Whitespace,
-                        "r",
-                        null,
-                        DateTimeStyles.AllowLeadingWhite | DateTimeStyles.AllowTrailingWhite
-                    )
+                    Whitespace + input + Whitespace,
+                    "r",
+                    null,
+                    DateTimeStyles.AllowLeadingWhite | DateTimeStyles.AllowTrailingWhite
+                )
                     .ToString("r")
             );
             Assert.Equal(
                 dt.ToString("r"),
                 DateTime.ParseExact(
-                        input.Substring(0, 4) + Whitespace + input.Substring(4),
-                        "r",
-                        null,
-                        DateTimeStyles.AllowInnerWhite
-                    )
+                    input.Substring(0, 4) + Whitespace + input.Substring(4),
+                    "r",
+                    null,
+                    DateTimeStyles.AllowInnerWhite
+                )
                     .ToString("r")
             );
             Assert.Equal(
                 dt.ToString("r"),
                 DateTime.ParseExact(
-                        Whitespace
-                            + input.Substring(0, 4)
-                            + Whitespace
-                            + input.Substring(4)
-                            + Whitespace,
-                        "r",
-                        null,
-                        DateTimeStyles.AllowWhiteSpaces
-                    )
+                    Whitespace
+                        + input.Substring(0, 4)
+                        + Whitespace
+                        + input.Substring(4)
+                        + Whitespace,
+                    "r",
+                    null,
+                    DateTimeStyles.AllowWhiteSpaces
+                )
                     .ToString("r")
             );
         }
@@ -2415,45 +2415,45 @@ namespace System.Tests
             Assert.Equal(
                 expectedString,
                 DateTime.ParseExact(
-                        input + Whitespace,
-                        "o",
-                        null,
-                        DateTimeStyles.AllowTrailingWhite
-                    )
+                    input + Whitespace,
+                    "o",
+                    null,
+                    DateTimeStyles.AllowTrailingWhite
+                )
                     .ToString("o")
             );
             Assert.Equal(
                 expectedString,
                 DateTime.ParseExact(
-                        Whitespace + input + Whitespace,
-                        "o",
-                        null,
-                        DateTimeStyles.AllowLeadingWhite | DateTimeStyles.AllowTrailingWhite
-                    )
+                    Whitespace + input + Whitespace,
+                    "o",
+                    null,
+                    DateTimeStyles.AllowLeadingWhite | DateTimeStyles.AllowTrailingWhite
+                )
                     .ToString("o")
             );
             Assert.Equal(
                 expectedString,
                 DateTime.ParseExact(
-                        input.Substring(0, 27) + Whitespace + input.Substring(27),
-                        "o",
-                        null,
-                        DateTimeStyles.AllowInnerWhite
-                    )
+                    input.Substring(0, 27) + Whitespace + input.Substring(27),
+                    "o",
+                    null,
+                    DateTimeStyles.AllowInnerWhite
+                )
                     .ToString("o")
             );
             Assert.Equal(
                 expectedString,
                 DateTime.ParseExact(
-                        Whitespace
-                            + input.Substring(0, 27)
-                            + Whitespace
-                            + input.Substring(27)
-                            + Whitespace,
-                        "o",
-                        null,
-                        DateTimeStyles.AllowWhiteSpaces
-                    )
+                    Whitespace
+                        + input.Substring(0, 27)
+                        + Whitespace
+                        + input.Substring(27)
+                        + Whitespace,
+                    "o",
+                    null,
+                    DateTimeStyles.AllowWhiteSpaces
+                )
                     .ToString("o")
             );
         }

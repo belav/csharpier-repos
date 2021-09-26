@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #2992
         public void Can_customize_ModelBuilder()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddSingleton<IModelCustomizer, MyModelCustomizer>()
                 .BuildServiceProvider();
 

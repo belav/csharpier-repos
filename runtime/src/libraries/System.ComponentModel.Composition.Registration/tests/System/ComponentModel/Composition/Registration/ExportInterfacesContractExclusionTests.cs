@@ -50,12 +50,13 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Primitives.ComposablePartDefinition part = new TypeCatalog(
                 new[] { typeof(ClassWithLifetimeConcerns) },
                 rb
-            ).Single();
+            )
+                .Single();
 
             var exportedContracts = part.ExportDefinitions.Select(ed => ed.ContractName).ToArray();
             var expectedContracts = s_contractInterfaces.Select(
-                    ci => AttributedModelServices.GetContractName(ci)
-                )
+                ci => AttributedModelServices.GetContractName(ci)
+            )
                 .ToArray();
 
             Assert.Equal(expectedContracts, exportedContracts);
@@ -68,21 +69,21 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
             var rb = new RegistrationBuilder();
 
-            rb.ForType<ClassWithLifetimeConcerns>()
-                .ExportInterfaces(
-                    i =>
-                    {
-                        seenInterfaces.Add(i);
-                        return true;
-                    }
-                );
+            rb.ForType<ClassWithLifetimeConcerns>().ExportInterfaces(
+                i =>
+                {
+                    seenInterfaces.Add(i);
+                    return true;
+                }
+            );
 
             rb.MapType(typeof(ClassWithLifetimeConcerns).GetTypeInfo());
 
             Primitives.ComposablePartDefinition part = new TypeCatalog(
                 new[] { typeof(ClassWithLifetimeConcerns) },
                 rb
-            ).Single();
+            )
+                .Single();
 
             Assert.Equal(s_contractInterfaces, seenInterfaces);
         }

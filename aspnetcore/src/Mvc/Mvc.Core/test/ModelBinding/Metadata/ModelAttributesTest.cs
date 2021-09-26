@@ -165,9 +165,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void GetAttributesForProperty_MergedAttributes()
         {
             // Arrange
-            var property = typeof(MergedAttributes).GetRuntimeProperty(
-                nameof(MergedAttributes.Property)
-            );
+            var property = typeof(MergedAttributes)
+                .GetRuntimeProperty(nameof(MergedAttributes.Property));
 
             // Act
             var attributes = ModelAttributes.GetAttributesForProperty(
@@ -194,9 +193,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         {
             // Arrange & Act
             var attributes = ModelAttributes.GetAttributesForParameter(
-                typeof(MethodWithParamAttributesType).GetMethod(
-                        nameof(MethodWithParamAttributesType.Method)
-                    )
+                typeof(MethodWithParamAttributesType)
+                    .GetMethod(nameof(MethodWithParamAttributesType.Method))
                     .GetParameters()[0]
             );
 
@@ -213,9 +211,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         {
             // Arrange & Act
             var attributes = ModelAttributes.GetAttributesForParameter(
-                typeof(MethodWithParamAttributesType).GetMethod(
-                        nameof(MethodWithParamAttributesType.Method)
-                    )
+                typeof(MethodWithParamAttributesType)
+                    .GetMethod(nameof(MethodWithParamAttributesType.Method))
                     .GetParameters()[1]
             );
 
@@ -243,9 +240,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void GetAttributesForParameter_IncludesTypeAttributes()
         {
             // Arrange
-            var parameters = typeof(MethodWithParamAttributesType).GetMethod(
-                    nameof(MethodWithParamAttributesType.Method)
-                )
+            var parameters = typeof(MethodWithParamAttributesType)
+                .GetMethod(nameof(MethodWithParamAttributesType.Method))
                 .GetParameters();
 
             // Act
@@ -266,9 +262,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void GetAttributesForParameter_WithModelType_IncludesTypeAttributes()
         {
             // Arrange
-            var parameters = typeof(MethodWithParamAttributesType).GetMethod(
-                    nameof(MethodWithParamAttributesType.Method)
-                )
+            var parameters = typeof(MethodWithParamAttributesType)
+                .GetMethod(nameof(MethodWithParamAttributesType.Method))
                 .GetParameters();
 
             // Act

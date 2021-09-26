@@ -40,19 +40,19 @@ namespace System.Xml
                     if (prefix.Length == 0)
                     {
                         await writer.WriteStartAttributeAsync(
-                                string.Empty,
-                                "xmlns",
-                                XmlReservedNs.NsXmlNs
-                            )
+                            string.Empty,
+                            "xmlns",
+                            XmlReservedNs.NsXmlNs
+                        )
                             .ConfigureAwait(false);
                     }
                     else
                     {
                         await writer.WriteStartAttributeAsync(
-                                "xmlns",
-                                prefix,
-                                XmlReservedNs.NsXmlNs
-                            )
+                            "xmlns",
+                            prefix,
+                            XmlReservedNs.NsXmlNs
+                        )
                             .ConfigureAwait(false);
                     }
                     await writer.WriteStringAsync(namespaceUri).ConfigureAwait(false);
@@ -100,10 +100,10 @@ namespace System.Xml
                         case ItemType.StringChars:
                             bufChunk = (BufferChunk)item.data;
                             await writer.WriteCharsAsync(
-                                    bufChunk.buffer,
-                                    bufChunk.index,
-                                    bufChunk.count
-                                )
+                                bufChunk.buffer,
+                                bufChunk.index,
+                                bufChunk.count
+                            )
                                 .ConfigureAwait(false);
                             break;
                         case ItemType.Raw:
@@ -112,10 +112,10 @@ namespace System.Xml
                         case ItemType.RawChars:
                             bufChunk = (BufferChunk)item.data;
                             await writer.WriteCharsAsync(
-                                    bufChunk.buffer,
-                                    bufChunk.index,
-                                    bufChunk.count
-                                )
+                                bufChunk.buffer,
+                                bufChunk.index,
+                                bufChunk.count
+                            )
                                 .ConfigureAwait(false);
                             break;
                         case ItemType.ValueString:

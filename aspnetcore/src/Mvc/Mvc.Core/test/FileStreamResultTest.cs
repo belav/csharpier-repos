@@ -549,21 +549,21 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var mockReadStream = new Mock<Stream>();
             mockReadStream.SetupSequence(
-                    s => s.ReadAsync(It.IsAny<byte[]>(), 0, 0x1000, CancellationToken.None)
-                )
+                s => s.ReadAsync(It.IsAny<byte[]>(), 0, 0x1000, CancellationToken.None)
+            )
                 .Returns(Task.FromResult(0x1000))
                 .Returns(Task.FromResult(0x500))
                 .Returns(Task.FromResult(0));
 
             var mockBodyStream = new Mock<Stream>();
             mockBodyStream.Setup(
-                    s => s.WriteAsync(It.IsAny<byte[]>(), 0, 0x1000, CancellationToken.None)
-                )
+                s => s.WriteAsync(It.IsAny<byte[]>(), 0, 0x1000, CancellationToken.None)
+            )
                 .Returns(Task.FromResult(0));
 
             mockBodyStream.Setup(
-                    s => s.WriteAsync(It.IsAny<byte[]>(), 0, 0x500, CancellationToken.None)
-                )
+                s => s.WriteAsync(It.IsAny<byte[]>(), 0, 0x500, CancellationToken.None)
+            )
                 .Returns(Task.FromResult(0));
 
             var result = new FileStreamResult(mockReadStream.Object, "text/plain");

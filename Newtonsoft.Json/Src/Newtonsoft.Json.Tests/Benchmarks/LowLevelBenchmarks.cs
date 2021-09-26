@@ -97,35 +97,39 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         public void DecimalTryParseString()
         {
             decimal value;
-            decimal.TryParse(
-                FloatText,
-                NumberStyles.Number | NumberStyles.AllowExponent,
-                CultureInfo.InvariantCulture,
-                out value
-            );
+            decimal
+                .TryParse(
+                    FloatText,
+                    NumberStyles.Number | NumberStyles.AllowExponent,
+                    CultureInfo.InvariantCulture,
+                    out value
+                );
         }
 
         [Benchmark]
         public void GetMemberWithMemberTypeAndBindingFlags()
         {
-            typeof(LowLevelBenchmarks).GetMember(
-                "AName",
-                MemberTypes.Field | MemberTypes.Property,
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-            );
+            typeof(LowLevelBenchmarks)
+                .GetMember(
+                    "AName",
+                    MemberTypes.Field | MemberTypes.Property,
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                );
         }
 
         [Benchmark]
         public void GetPropertyGetField()
         {
-            typeof(LowLevelBenchmarks).GetProperty(
-                "AName",
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-            );
-            typeof(LowLevelBenchmarks).GetField(
-                "AName",
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-            );
+            typeof(LowLevelBenchmarks)
+                .GetProperty(
+                    "AName",
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                );
+            typeof(LowLevelBenchmarks)
+                .GetField(
+                    "AName",
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                );
         }
 
         [Benchmark]

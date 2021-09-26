@@ -182,9 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // the first argument with our converted receiver and pass null as the receiver instead.
             if (getEnumeratorInfo.Method.IsExtensionMethod)
             {
-                var builder = ArrayBuilder<BoundExpression>.GetInstance(
-                    getEnumeratorInfo.Arguments.Length
-                );
+                var builder = ArrayBuilder<BoundExpression>
+                    .GetInstance(getEnumeratorInfo.Arguments.Length);
                 builder.Add(receiver);
                 builder.AddRange(
                     getEnumeratorInfo.Arguments,

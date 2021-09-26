@@ -2220,9 +2220,9 @@ class C
                 // CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         (b ? (var i1, var i2) : (var i3, var i4)) = (1, 2);
                 Diagnostic(
-                        ErrorCode.ERR_AssgLvalueExpected,
-                        "b ? (var i1, var i2) : (var i3, var i4)"
-                    )
+                    ErrorCode.ERR_AssgLvalueExpected,
+                    "b ? (var i1, var i2) : (var i3, var i4)"
+                )
                     .WithLocation(6, 10)
             };
 

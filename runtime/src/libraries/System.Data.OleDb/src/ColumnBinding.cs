@@ -1085,10 +1085,8 @@ namespace System.Data.OleDb
             if (s_getIDispatchForObject == null)
             {
                 object? delegateInstance = null;
-                MethodInfo? mi = typeof(Marshal).GetMethod(
-                    "GetIDispatchForObject",
-                    BindingFlags.Public | BindingFlags.Static
-                );
+                MethodInfo? mi = typeof(Marshal)
+                    .GetMethod("GetIDispatchForObject", BindingFlags.Public | BindingFlags.Static);
                 if (mi == null)
                 {
                     throw new NotSupportedException(SR.PlatformNotSupported_GetIDispatchForObject);

@@ -165,9 +165,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((IntStructKeyPrincipal)p).OptionalDependents.Select(
-                                d => (IIntOptionalDependent)d
-                            )
+                        ((IntStructKeyPrincipal)p).OptionalDependents
+                            .Select(d => (IIntOptionalDependent)d)
                             .ToList(),
                     d => ((IntStructKeyOptionalDependent)d).Principal
                 );
@@ -323,9 +322,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((ComparableIntStructKeyPrincipal)p).OptionalDependents.Select(
-                                d => (IIntOptionalDependent)d
-                            )
+                        ((ComparableIntStructKeyPrincipal)p).OptionalDependents
+                            .Select(d => (IIntOptionalDependent)d)
                             .ToList(),
                     d => ((ComparableIntStructKeyOptionalDependent)d).Principal
                 );
@@ -485,9 +483,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((GenericComparableIntStructKeyPrincipal)p).OptionalDependents.Select(
-                                d => (IIntOptionalDependent)d
-                            )
+                        ((GenericComparableIntStructKeyPrincipal)p).OptionalDependents
+                            .Select(d => (IIntOptionalDependent)d)
                             .ToList(),
                     d => ((GenericComparableIntStructKeyOptionalDependent)d).Principal
                 );
@@ -639,9 +636,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((IntStructKeyPrincipal)p).RequiredDependents.Select(
-                                d => (IIntRequiredDependent)d
-                            )
+                        ((IntStructKeyPrincipal)p).RequiredDependents
+                            .Select(d => (IIntRequiredDependent)d)
                             .ToList(),
                     d => ((IntStructKeyRequiredDependent)d).Principal
                 );
@@ -801,9 +797,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((ComparableIntStructKeyPrincipal)p).RequiredDependents.Select(
-                                d => (IIntRequiredDependent)d
-                            )
+                        ((ComparableIntStructKeyPrincipal)p).RequiredDependents
+                            .Select(d => (IIntRequiredDependent)d)
                             .ToList(),
                     d => ((ComparableIntStructKeyRequiredDependent)d).Principal
                 );
@@ -969,9 +964,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((GenericComparableIntStructKeyPrincipal)p).RequiredDependents.Select(
-                                d => (IIntRequiredDependent)d
-                            )
+                        ((GenericComparableIntStructKeyPrincipal)p).RequiredDependents
+                            .Select(d => (IIntRequiredDependent)d)
                             .ToList(),
                     d => ((GenericComparableIntStructKeyRequiredDependent)d).Principal
                 );
@@ -1113,9 +1107,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((IntClassKeyPrincipal)p).OptionalDependents.Select(
-                                d => (IIntOptionalDependent)d
-                            )
+                        ((IntClassKeyPrincipal)p).OptionalDependents
+                            .Select(d => (IIntOptionalDependent)d)
                             .ToList(),
                     d => ((IntClassKeyOptionalDependent)d).Principal
                 );
@@ -1269,9 +1262,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((ComparableIntClassKeyPrincipal)p).OptionalDependents.Select(
-                                d => (IIntOptionalDependent)d
-                            )
+                        ((ComparableIntClassKeyPrincipal)p).OptionalDependents
+                            .Select(d => (IIntOptionalDependent)d)
                             .ToList(),
                     d => ((ComparableIntClassKeyOptionalDependent)d).Principal
                 );
@@ -1428,9 +1420,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((BytesStructKeyPrincipal)p).OptionalDependents.Select(
-                                d => (IBytesOptionalDependent)d
-                            )
+                        ((BytesStructKeyPrincipal)p).OptionalDependents
+                            .Select(d => (IBytesOptionalDependent)d)
                             .ToList(),
                     d => ((BytesStructKeyOptionalDependent)d).Principal
                 );
@@ -1508,9 +1499,13 @@ namespace Microsoft.EntityFrameworkCore
                         .Include(e => e.OptionalDependents)
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey { Id = new byte[] { 1 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 1 }
+                                        }
+                                    )
                         ),
                     context.Set<StructuralComparableBytesStructKeyPrincipal>()
                         .Include(e => e.OptionalDependents)
@@ -1524,12 +1519,13 @@ namespace Microsoft.EntityFrameworkCore
                         .Include(e => e.OptionalDependents)
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey
-                                    {
-                                        Id = new byte[] { 4, 4, 4, 4 }
-                                    }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 4, 4, 4, 4 }
+                                        }
+                                    )
                         )
                 };
 
@@ -1543,38 +1539,42 @@ namespace Microsoft.EntityFrameworkCore
                     context.Set<StructuralComparableBytesStructKeyOptionalDependent>()
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey
-                                    {
-                                        Id = new byte[] { 101 }
-                                    }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 101 }
+                                        }
+                                    )
                         ),
                     context.Set<StructuralComparableBytesStructKeyOptionalDependent>()
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey { Id = oneOhTwo }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey { Id = oneOhTwo }
+                                    )
                         ),
                     context.Set<StructuralComparableBytesStructKeyOptionalDependent>()
                         .Single(e => e.Id.Equals(oneOhThree)),
                     context.Set<StructuralComparableBytesStructKeyOptionalDependent>()
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey
-                                    {
-                                        Id = new byte[] { 104 }
-                                    }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 104 }
+                                        }
+                                    )
                         ),
                     context.Set<StructuralComparableBytesStructKeyOptionalDependent>()
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey { Id = oneOhFive }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey { Id = oneOhFive }
+                                    )
                         ),
                     context.Set<StructuralComparableBytesStructKeyOptionalDependent>()
                         .Single(e => e.Id.Equals(oneOhSix))
@@ -1631,9 +1631,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((StructuralComparableBytesStructKeyPrincipal)p).OptionalDependents.Select(
-                                d => (IBytesOptionalDependent)d
-                            )
+                        ((StructuralComparableBytesStructKeyPrincipal)p).OptionalDependents
+                            .Select(d => (IBytesOptionalDependent)d)
                             .ToList(),
                     d => ((StructuralComparableBytesStructKeyOptionalDependent)d).Principal
                 );
@@ -1725,9 +1724,13 @@ namespace Microsoft.EntityFrameworkCore
                         .Include(e => e.OptionalDependents)
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new ComparableBytesStructKey { Id = new byte[] { 4, 4, 4, 4 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new ComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 4, 4, 4, 4 }
+                                        }
+                                    )
                         )
                 };
 
@@ -1741,9 +1744,10 @@ namespace Microsoft.EntityFrameworkCore
                     context.Set<ComparableBytesStructKeyOptionalDependent>()
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new ComparableBytesStructKey { Id = new byte[] { 101 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new ComparableBytesStructKey { Id = new byte[] { 101 } }
+                                    )
                         ),
                     context.Set<ComparableBytesStructKeyOptionalDependent>()
                         .Single(e => e.Id.Equals(new ComparableBytesStructKey { Id = oneOhTwo })),
@@ -1752,9 +1756,10 @@ namespace Microsoft.EntityFrameworkCore
                     context.Set<ComparableBytesStructKeyOptionalDependent>()
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new ComparableBytesStructKey { Id = new byte[] { 104 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new ComparableBytesStructKey { Id = new byte[] { 104 } }
+                                    )
                         ),
                     context.Set<ComparableBytesStructKeyOptionalDependent>()
                         .Single(e => e.Id.Equals(new ComparableBytesStructKey { Id = oneOhFive })),
@@ -1809,9 +1814,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((ComparableBytesStructKeyPrincipal)p).OptionalDependents.Select(
-                                d => (IBytesOptionalDependent)d
-                            )
+                        ((ComparableBytesStructKeyPrincipal)p).OptionalDependents
+                            .Select(d => (IBytesOptionalDependent)d)
                             .ToList(),
                     d => ((ComparableBytesStructKeyOptionalDependent)d).Principal
                 );
@@ -1889,9 +1893,13 @@ namespace Microsoft.EntityFrameworkCore
                         .Include(e => e.OptionalDependents)
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new GenericComparableBytesStructKey { Id = new byte[] { 1 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new GenericComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 1 }
+                                        }
+                                    )
                         ),
                     context.Set<GenericComparableBytesStructKeyPrincipal>()
                         .Include(e => e.OptionalDependents)
@@ -1903,12 +1911,13 @@ namespace Microsoft.EntityFrameworkCore
                         .Include(e => e.OptionalDependents)
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new GenericComparableBytesStructKey
-                                    {
-                                        Id = new byte[] { 4, 4, 4, 4 }
-                                    }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new GenericComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 4, 4, 4, 4 }
+                                        }
+                                    )
                         )
                 };
 
@@ -1922,9 +1931,13 @@ namespace Microsoft.EntityFrameworkCore
                     context.Set<GenericComparableBytesStructKeyOptionalDependent>()
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new GenericComparableBytesStructKey { Id = new byte[] { 101 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new GenericComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 101 }
+                                        }
+                                    )
                         ),
                     context.Set<GenericComparableBytesStructKeyOptionalDependent>()
                         .Single(
@@ -1935,9 +1948,13 @@ namespace Microsoft.EntityFrameworkCore
                     context.Set<GenericComparableBytesStructKeyOptionalDependent>()
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new GenericComparableBytesStructKey { Id = new byte[] { 104 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new GenericComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 104 }
+                                        }
+                                    )
                         ),
                     context.Set<GenericComparableBytesStructKeyOptionalDependent>()
                         .Single(
@@ -1994,9 +2011,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((GenericComparableBytesStructKeyPrincipal)p).OptionalDependents.Select(
-                                d => (IBytesOptionalDependent)d
-                            )
+                        ((GenericComparableBytesStructKeyPrincipal)p).OptionalDependents
+                            .Select(d => (IBytesOptionalDependent)d)
                             .ToList(),
                     d => ((GenericComparableBytesStructKeyOptionalDependent)d).Principal
                 );
@@ -2080,9 +2096,10 @@ namespace Microsoft.EntityFrameworkCore
                         .Include(e => e.RequiredDependents)
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new BytesStructKey { Id = new byte[] { 14, 14, 14, 14 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new BytesStructKey { Id = new byte[] { 14, 14, 14, 14 } }
+                                    )
                         )
                 };
 
@@ -2158,9 +2175,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((BytesStructKeyPrincipal)p).RequiredDependents.Select(
-                                d => (IBytesRequiredDependent)d
-                            )
+                        ((BytesStructKeyPrincipal)p).RequiredDependents
+                            .Select(d => (IBytesRequiredDependent)d)
                             .ToList(),
                     d => ((BytesStructKeyRequiredDependent)d).Principal
                 );
@@ -2250,12 +2266,13 @@ namespace Microsoft.EntityFrameworkCore
                         .Include(e => e.RequiredDependents)
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new ComparableBytesStructKey
-                                    {
-                                        Id = new byte[] { 14, 14, 14, 14 }
-                                    }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new ComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 14, 14, 14, 14 }
+                                        }
+                                    )
                         )
                 };
 
@@ -2269,9 +2286,10 @@ namespace Microsoft.EntityFrameworkCore
                     context.Set<ComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
                             e =>
-                                e.Id.Equals(
-                                    new ComparableBytesStructKey { Id = new byte[] { 111 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new ComparableBytesStructKey { Id = new byte[] { 111 } }
+                                    )
                         ),
                     context.Set<ComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
@@ -2282,9 +2300,10 @@ namespace Microsoft.EntityFrameworkCore
                     context.Set<ComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
                             e =>
-                                e.Id.Equals(
-                                    new ComparableBytesStructKey { Id = new byte[] { 114 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new ComparableBytesStructKey { Id = new byte[] { 114 } }
+                                    )
                         ),
                     context.Set<ComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
@@ -2341,9 +2360,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((ComparableBytesStructKeyPrincipal)p).RequiredDependents.Select(
-                                d => (IBytesRequiredDependent)d
-                            )
+                        ((ComparableBytesStructKeyPrincipal)p).RequiredDependents
+                            .Select(d => (IBytesRequiredDependent)d)
                             .ToList(),
                     d => ((ComparableBytesStructKeyRequiredDependent)d).Principal
                 );
@@ -2424,12 +2442,13 @@ namespace Microsoft.EntityFrameworkCore
                         .Include(e => e.RequiredDependents)
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey
-                                    {
-                                        Id = new byte[] { 11 }
-                                    }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 11 }
+                                        }
+                                    )
                         ),
                     context.Set<StructuralComparableBytesStructKeyPrincipal>()
                         .Include(e => e.RequiredDependents)
@@ -2443,12 +2462,13 @@ namespace Microsoft.EntityFrameworkCore
                         .Include(e => e.RequiredDependents)
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey
-                                    {
-                                        Id = new byte[] { 14, 14, 14, 14 }
-                                    }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 14, 14, 14, 14 }
+                                        }
+                                    )
                         )
                 };
 
@@ -2465,38 +2485,42 @@ namespace Microsoft.EntityFrameworkCore
                     context.Set<StructuralComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey
-                                    {
-                                        Id = new byte[] { 111 }
-                                    }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 111 }
+                                        }
+                                    )
                         ),
                     context.Set<StructuralComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey { Id = oneTwelve }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey { Id = oneTwelve }
+                                    )
                         ),
                     context.Set<StructuralComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(e => e.Id.Equals(oneThirteen)),
                     context.Set<StructuralComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey
-                                    {
-                                        Id = new byte[] { 114 }
-                                    }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 114 }
+                                        }
+                                    )
                         ),
                     context.Set<StructuralComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
                             e =>
-                                e.Id.Equals(
-                                    new StructuralComparableBytesStructKey { Id = oneFifteeen }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new StructuralComparableBytesStructKey { Id = oneFifteeen }
+                                    )
                         ),
                     context.Set<StructuralComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(e => e.Id.Equals(oneSixteen))
@@ -2553,9 +2577,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((StructuralComparableBytesStructKeyPrincipal)p).RequiredDependents.Select(
-                                d => (IBytesRequiredDependent)d
-                            )
+                        ((StructuralComparableBytesStructKeyPrincipal)p).RequiredDependents
+                            .Select(d => (IBytesRequiredDependent)d)
                             .ToList(),
                     d => ((StructuralComparableBytesStructKeyRequiredDependent)d).Principal
                 );
@@ -2636,9 +2659,13 @@ namespace Microsoft.EntityFrameworkCore
                         .Include(e => e.RequiredDependents)
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new GenericComparableBytesStructKey { Id = new byte[] { 11 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new GenericComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 11 }
+                                        }
+                                    )
                         ),
                     context.Set<GenericComparableBytesStructKeyPrincipal>()
                         .Include(e => e.RequiredDependents)
@@ -2652,12 +2679,13 @@ namespace Microsoft.EntityFrameworkCore
                         .Include(e => e.RequiredDependents)
                         .Single(
                             e =>
-                                e.Id.Equals(
-                                    new GenericComparableBytesStructKey
-                                    {
-                                        Id = new byte[] { 14, 14, 14, 14 }
-                                    }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new GenericComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 14, 14, 14, 14 }
+                                        }
+                                    )
                         )
                 };
 
@@ -2671,9 +2699,13 @@ namespace Microsoft.EntityFrameworkCore
                     context.Set<GenericComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
                             e =>
-                                e.Id.Equals(
-                                    new GenericComparableBytesStructKey { Id = new byte[] { 111 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new GenericComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 111 }
+                                        }
+                                    )
                         ),
                     context.Set<GenericComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
@@ -2684,16 +2716,21 @@ namespace Microsoft.EntityFrameworkCore
                     context.Set<GenericComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
                             e =>
-                                e.Id.Equals(
-                                    new GenericComparableBytesStructKey { Id = new byte[] { 114 } }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new GenericComparableBytesStructKey
+                                        {
+                                            Id = new byte[] { 114 }
+                                        }
+                                    )
                         ),
                     context.Set<GenericComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(
                             e =>
-                                e.Id.Equals(
-                                    new GenericComparableBytesStructKey { Id = oneFifteeen }
-                                )
+                                e.Id
+                                    .Equals(
+                                        new GenericComparableBytesStructKey { Id = oneFifteeen }
+                                    )
                         ),
                     context.Set<GenericComparableBytesStructKeyRequiredDependent>()
                         .FirstOrDefault(e => e.Id.Equals(oneSixteen))
@@ -2750,9 +2787,8 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((GenericComparableBytesStructKeyPrincipal)p).RequiredDependents.Select(
-                                d => (IBytesRequiredDependent)d
-                            )
+                        ((GenericComparableBytesStructKeyPrincipal)p).RequiredDependents
+                            .Select(d => (IBytesRequiredDependent)d)
                             .ToList(),
                     d => ((GenericComparableBytesStructKeyRequiredDependent)d).Principal
                 );
@@ -3221,10 +3257,8 @@ namespace Microsoft.EntityFrameworkCore
 
                 return result != 0
                   ? result
-                  : StructuralComparisons.StructuralComparer.Compare(
-                        Id,
-                        ((ComparableBytesStructKey)other).Id
-                    );
+                  : StructuralComparisons.StructuralComparer
+                    .Compare(Id, ((ComparableBytesStructKey)other).Id);
             }
         }
 

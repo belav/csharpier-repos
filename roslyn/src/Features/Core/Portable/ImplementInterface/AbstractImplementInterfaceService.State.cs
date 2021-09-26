@@ -101,24 +101,22 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 if (service.CanImplementImplicitly)
                 {
                     state.MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented =
-                        state.ClassOrStructType.GetAllUnimplementedMembers(
-                            interfaceTypes,
-                            includeMembersRequiringExplicitImplementation: false,
-                            cancellationToken
-                        );
+                        state.ClassOrStructType
+                            .GetAllUnimplementedMembers(
+                                interfaceTypes,
+                                includeMembersRequiringExplicitImplementation: false,
+                                cancellationToken
+                            );
 
-                    state.MembersWithoutExplicitOrImplicitImplementation =
-                        state.ClassOrStructType.GetAllUnimplementedMembers(
+                    state.MembersWithoutExplicitOrImplicitImplementation = state.ClassOrStructType
+                        .GetAllUnimplementedMembers(
                             interfaceTypes,
                             includeMembersRequiringExplicitImplementation: true,
                             cancellationToken
                         );
 
-                    state.MembersWithoutExplicitImplementation =
-                        state.ClassOrStructType.GetAllUnimplementedExplicitMembers(
-                            interfaceTypes,
-                            cancellationToken
-                        );
+                    state.MembersWithoutExplicitImplementation = state.ClassOrStructType
+                        .GetAllUnimplementedExplicitMembers(interfaceTypes, cancellationToken);
 
                     var allMembersImplemented =
                         state.MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented.Length
@@ -134,10 +132,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 {
                     // We put the members in this bucket so that the code fix title is "Implement Interface"
                     state.MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented =
-                        state.ClassOrStructType.GetAllUnimplementedExplicitMembers(
-                            interfaceTypes,
-                            cancellationToken
-                        );
+                        state.ClassOrStructType
+                            .GetAllUnimplementedExplicitMembers(interfaceTypes, cancellationToken);
 
                     var allMembersImplemented =
                         state.MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented.Length

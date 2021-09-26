@@ -54,7 +54,8 @@ namespace Moq
             var elementType = type.GetGenericArguments()[0];
             var array = Array.CreateInstance(elementType, 0);
 
-            return typeof(Queryable).GetMethods("AsQueryable")
+            return typeof(Queryable)
+                .GetMethods("AsQueryable")
                 .Single(x => x.IsGenericMethod)
                 .MakeGenericMethod(elementType)
                 .Invoke(null, new[] { array });

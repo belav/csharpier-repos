@@ -1506,7 +1506,8 @@ namespace System.Text.Json.Tests
             {
                 if (ExceptionToThrow != null)
                     throw ExceptionToThrow;
-                await base.WriteAsync(buffer, offset, count, cancellationToken)
+                await base
+                    .WriteAsync(buffer, offset, count, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -1569,9 +1570,10 @@ namespace System.Text.Json.Tests
                 SkipValidation = skipValidation
             };
 
-            byte[] utf8String = Encoding.UTF8.GetBytes(
-                "this is a string long enough to overflow the buffer and cause an exception to be thrown."
-            );
+            byte[] utf8String = Encoding.UTF8
+                .GetBytes(
+                    "this is a string long enough to overflow the buffer and cause an exception to be thrown."
+                );
 
             using var jsonUtf8 = new Utf8JsonWriter(output, options);
 
@@ -1871,10 +1873,11 @@ namespace System.Text.Json.Tests
                     Assert.Equal(257, output.Formatted.Length);
                 }
                 Assert.Equal(
-                    decimal.Parse(
-                        actualStr.Substring(actualStr.Length - 31),
-                        CultureInfo.InvariantCulture
-                    ),
+                    decimal
+                        .Parse(
+                            actualStr.Substring(actualStr.Length - 31),
+                            CultureInfo.InvariantCulture
+                        ),
                     value
                 );
             }
@@ -3524,9 +3527,8 @@ namespace System.Text.Json.Tests
 
             byte[] base64StringUtf8 = new byte[Base64.GetMaxEncodedToUtf8Length(value.Length)];
             Base64.EncodeToUtf8(value, base64StringUtf8, out _, out int bytesWritten);
-            string expectedValue = Encoding.UTF8.GetString(
-                base64StringUtf8.AsSpan(0, bytesWritten).ToArray()
-            );
+            string expectedValue = Encoding.UTF8
+                .GetString(base64StringUtf8.AsSpan(0, bytesWritten).ToArray());
 
             string expectedJson = formatted
                 ? $"{{{Environment.NewLine}  \"foo\": \"{expectedValue}\"{Environment.NewLine}}}"

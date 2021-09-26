@@ -165,10 +165,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     var navigationValue = CurrentValue;
                     if (navigationValue != null)
                     {
-                        var relatedEntry = InternalEntry.StateManager.TryGetEntry(
-                            navigationValue,
-                            Metadata.TargetEntityType
-                        );
+                        var relatedEntry = InternalEntry.StateManager
+                            .TryGetEntry(navigationValue, Metadata.TargetEntityType);
                         if (relatedEntry != null)
                         {
                             SetFkPropertiesModified(navigation, relatedEntry, value);
@@ -205,10 +203,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 return false;
             }
 
-            var relatedEntry = InternalEntry.StateManager.TryGetEntry(
-                relatedEntity,
-                Metadata.TargetEntityType
-            );
+            var relatedEntry = InternalEntry.StateManager
+                .TryGetEntry(relatedEntity, Metadata.TargetEntityType);
 
             return relatedEntry != null
                 && (
@@ -241,10 +237,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         protected virtual InternalEntityEntry? GetTargetEntry() =>
             CurrentValue == null
                 ? null
-                : InternalEntry.StateManager.GetOrCreateEntry(
-                      CurrentValue,
-                      Metadata.TargetEntityType
-                  );
+                : InternalEntry.StateManager
+                  .GetOrCreateEntry(CurrentValue, Metadata.TargetEntityType);
 
         private IEntityFinder TargetFinder =>
             _finder ??= InternalEntry.StateManager.CreateEntityFinder(Metadata.TargetEntityType);

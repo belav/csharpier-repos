@@ -93,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_on_BeginTransactionAsync() =>
             AssertThrows(
                 () =>
-                    new InMemoryTransactionManager(CreateLogger()).BeginTransactionAsync()
+                    new InMemoryTransactionManager(CreateLogger())
+                        .BeginTransactionAsync()
                         .GetAwaiter()
                         .GetResult()
             );
@@ -106,7 +107,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_on_CommitTransactionAsync() =>
             AssertThrows(
                 () =>
-                    new InMemoryTransactionManager(CreateLogger()).CommitTransactionAsync()
+                    new InMemoryTransactionManager(CreateLogger())
+                        .CommitTransactionAsync()
                         .GetAwaiter()
                         .GetResult()
             );
@@ -121,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_on_RollbackTransactionAsync() =>
             AssertThrows(
                 () =>
-                    new InMemoryTransactionManager(CreateLogger()).RollbackTransactionAsync()
+                    new InMemoryTransactionManager(CreateLogger())
+                        .RollbackTransactionAsync()
                         .GetAwaiter()
                         .GetResult()
             );
@@ -132,8 +135,8 @@ namespace Microsoft.EntityFrameworkCore
                 CoreStrings.WarningAsErrorTemplate(
                     InMemoryEventId.TransactionIgnoredWarning,
                     InMemoryResources.LogTransactionsNotSupported(
-                            new TestLogger<InMemoryLoggingDefinitions>()
-                        )
+                        new TestLogger<InMemoryLoggingDefinitions>()
+                    )
                         .GenerateMessage(),
                     "InMemoryEventId.TransactionIgnoredWarning"
                 ),
@@ -145,9 +148,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var options = new LoggingOptions();
             options.Initialize(
-                new DbContextOptionsBuilder().ConfigureWarnings(
-                    w => w.Default(WarningBehavior.Throw)
-                ).Options
+                new DbContextOptionsBuilder()
+                    .ConfigureWarnings(w => w.Default(WarningBehavior.Throw)).Options
             );
             var logger = new DiagnosticsLogger<DbLoggerCategory.Database.Transaction>(
                 new ListLoggerFactory(l => false),

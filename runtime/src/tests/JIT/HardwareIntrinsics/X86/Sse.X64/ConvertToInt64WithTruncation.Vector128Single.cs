@@ -176,9 +176,10 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Sse.X64.ConvertToInt64WithTruncation(
-                Unsafe.Read<Vector128<Single>>(_dataTable.inArrayPtr)
-            );
+            var result = Sse.X64
+                .ConvertToInt64WithTruncation(
+                    Unsafe.Read<Vector128<Single>>(_dataTable.inArrayPtr)
+                );
 
             ValidateResult(_dataTable.inArrayPtr, result);
         }
@@ -187,9 +188,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = Sse.X64.ConvertToInt64WithTruncation(
-                Sse.LoadVector128((Single*)(_dataTable.inArrayPtr))
-            );
+            var result = Sse.X64
+                .ConvertToInt64WithTruncation(Sse.LoadVector128((Single*)(_dataTable.inArrayPtr)));
 
             ValidateResult(_dataTable.inArrayPtr, result);
         }
@@ -198,9 +198,10 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_LoadAligned));
 
-            var result = Sse.X64.ConvertToInt64WithTruncation(
-                Sse.LoadAlignedVector128((Single*)(_dataTable.inArrayPtr))
-            );
+            var result = Sse.X64
+                .ConvertToInt64WithTruncation(
+                    Sse.LoadAlignedVector128((Single*)(_dataTable.inArrayPtr))
+                );
 
             ValidateResult(_dataTable.inArrayPtr, result);
         }
@@ -209,7 +210,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Sse.X64).GetMethod(
+            var result = typeof(Sse.X64)
+                .GetMethod(
                     nameof(Sse.X64.ConvertToInt64WithTruncation),
                     new Type[] { typeof(Vector128<Single>) }
                 )
@@ -225,7 +227,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse.X64).GetMethod(
+            var result = typeof(Sse.X64)
+                .GetMethod(
                     nameof(Sse.X64.ConvertToInt64WithTruncation),
                     new Type[] { typeof(Vector128<Single>) }
                 )
@@ -238,7 +241,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse.X64).GetMethod(
+            var result = typeof(Sse.X64)
+                .GetMethod(
                     nameof(Sse.X64.ConvertToInt64WithTruncation),
                     new Type[] { typeof(Vector128<Single>) }
                 )
@@ -389,12 +393,12 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse.X64)}.{nameof(Sse.X64.ConvertToInt64WithTruncation)}<Int64>(Vector128<Single>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse.X64)}.{nameof(Sse.X64.ConvertToInt64WithTruncation)}<Int64>(Vector128<Single>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($"   result: result");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

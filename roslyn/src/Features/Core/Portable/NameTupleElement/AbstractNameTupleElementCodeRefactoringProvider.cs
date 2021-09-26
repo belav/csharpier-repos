@@ -29,10 +29,10 @@ namespace Microsoft.CodeAnalysis.NameTupleElement
         {
             var (document, span, cancellationToken) = context;
             var (_, argument, elementName) = await TryGetArgumentInfoAsync(
-                    document,
-                    span,
-                    cancellationToken
-                )
+                document,
+                span,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (elementName == null)
@@ -62,9 +62,9 @@ namespace Microsoft.CodeAnalysis.NameTupleElement
 
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var potentialArguments = await document.GetRelevantNodesAsync<TArgumentSyntax>(
-                    span,
-                    cancellationToken
-                )
+                span,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var argument = potentialArguments.FirstOrDefault(
                 n => n?.Parent is TTupleExpressionSyntax
@@ -118,10 +118,10 @@ namespace Microsoft.CodeAnalysis.NameTupleElement
         )
         {
             var (root, argument, elementName) = await TryGetArgumentInfoAsync(
-                    document,
-                    span,
-                    cancellationToken
-                )
+                document,
+                span,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var newArgument = WithName(argument, elementName).WithTriviaFrom(argument);

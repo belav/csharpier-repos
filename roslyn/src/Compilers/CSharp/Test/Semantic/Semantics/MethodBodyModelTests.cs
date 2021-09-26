@@ -353,12 +353,11 @@ class A
 }
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (6,42): error CS1525: Invalid expression term ','
-                    //         int[,] arr = new int[3,2] {{1,2},,{4,5}};
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (6,42): error CS1525: Invalid expression term ','
+                //         int[,] arr = new int[3,2] {{1,2},,{4,5}};
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",")
+            );
         }
 
         [Fact]
@@ -989,14 +988,13 @@ struct Outer
             var tree = Parse(text);
             var comp = CreateCompilation(tree);
             Assert.Equal(0, comp.GetDeclarationDiagnostics().Count());
-            comp.GetMethodBodyDiagnostics()
-                .Verify(
-                    // (10,21): error CS0120: An object reference is required for the non-static field, method, or property 'Outer.f1'
-                    //             var x = f1 - 1;
-                    Diagnostic(ErrorCode.ERR_ObjectRequired, "f1")
-                        .WithArguments("Outer.f1")
-                        .WithLocation(10, 21)
-                );
+            comp.GetMethodBodyDiagnostics().Verify(
+                // (10,21): error CS0120: An object reference is required for the non-static field, method, or property 'Outer.f1'
+                //             var x = f1 - 1;
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "f1")
+                    .WithArguments("Outer.f1")
+                    .WithLocation(10, 21)
+            );
         }
 
         [Fact, WorkItem(8556, "https://github.com/dotnet/roslyn/issues/8556")]
@@ -1031,19 +1029,18 @@ class Program
 ";
             var tree = Parse(text);
             var comp = CreateCompilation(tree);
-            comp.GetMethodBodyDiagnostics()
-                .Verify(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'D.explicit operator D(Goo)' and 'D.implicit operator D(Action)' when converting from 'method group' to 'D'
-                    //          D d = (D) Main;
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "(D) Main")
-                        .WithArguments(
-                            "D.explicit operator D(Goo)",
-                            "D.implicit operator D(System.Action)",
-                            "method group",
-                            "D"
-                        )
-                        .WithLocation(23, 15)
-                );
+            comp.GetMethodBodyDiagnostics().Verify(
+                // (23,15): error CS0457: Ambiguous user defined conversions 'D.explicit operator D(Goo)' and 'D.implicit operator D(Action)' when converting from 'method group' to 'D'
+                //          D d = (D) Main;
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(D) Main")
+                    .WithArguments(
+                        "D.explicit operator D(Goo)",
+                        "D.implicit operator D(System.Action)",
+                        "method group",
+                        "D"
+                    )
+                    .WithLocation(23, 15)
+            );
         }
     }
 }

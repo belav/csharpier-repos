@@ -148,9 +148,8 @@ namespace Microsoft.CodeAnalysis
             out ImmutableArray<Diagnostic> diagnostics
         ) where TList : IReadOnlyCollection<AnalyzerConfig>
         {
-            var sortedAnalyzerConfigs = ArrayBuilder<AnalyzerConfig>.GetInstance(
-                analyzerConfigs.Count
-            );
+            var sortedAnalyzerConfigs = ArrayBuilder<AnalyzerConfig>
+                .GetInstance(analyzerConfigs.Count);
             sortedAnalyzerConfigs.AddRange(analyzerConfigs);
             sortedAnalyzerConfigs.Sort(AnalyzerConfig.DirectoryLengthComparer);
 
@@ -166,17 +165,15 @@ namespace Microsoft.CodeAnalysis
             _analyzerConfigs = analyzerConfigs;
             _globalConfig = globalConfig;
 
-            var allMatchers = ArrayBuilder<ImmutableArray<SectionNameMatcher?>>.GetInstance(
-                _analyzerConfigs.Length
-            );
+            var allMatchers = ArrayBuilder<ImmutableArray<SectionNameMatcher?>>
+                .GetInstance(_analyzerConfigs.Length);
 
             foreach (var config in _analyzerConfigs)
             {
                 // Create an array of regexes with each entry corresponding to the same index
                 // in <see cref="EditorConfig.NamedSections"/>.
-                var builder = ArrayBuilder<SectionNameMatcher?>.GetInstance(
-                    config.NamedSections.Length
-                );
+                var builder = ArrayBuilder<SectionNameMatcher?>
+                    .GetInstance(config.NamedSections.Length);
                 foreach (var section in config.NamedSections)
                 {
                     SectionNameMatcher? matcher = AnalyzerConfig.TryCreateSectionNameMatcher(

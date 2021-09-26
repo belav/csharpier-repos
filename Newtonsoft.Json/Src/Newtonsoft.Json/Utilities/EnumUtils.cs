@@ -83,11 +83,8 @@ namespace Newtonsoft.Json.Utilities
                 if (Array.IndexOf(resolvedNames, resolvedName, 0, i) != -1)
                 {
                     throw new InvalidOperationException(
-                        "Enum name '{0}' already exists on enum '{1}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            resolvedName,
-                            enumType.Name
-                        )
+                        "Enum name '{0}' already exists on enum '{1}'."
+                            .FormatWith(CultureInfo.InvariantCulture, resolvedName, enumType.Name)
                     );
                 }
 #else
@@ -113,10 +110,8 @@ namespace Newtonsoft.Json.Utilities
             if (!enumType.IsDefined(typeof(FlagsAttribute), false))
             {
                 throw new ArgumentException(
-                    "Enum type {0} is not a set of flags.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        enumType
-                    )
+                    "Enum type {0} is not a set of flags."
+                        .FormatWith(CultureInfo.InvariantCulture, enumType)
                 );
             }
 
@@ -378,10 +373,8 @@ namespace Newtonsoft.Json.Utilities
                     if (disallowNumber)
                     {
                         throw new FormatException(
-                            "Integer string '{0}' is not allowed.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                value
-                            )
+                            "Integer string '{0}' is not allowed."
+                                .FormatWith(CultureInfo.InvariantCulture, value)
                         );
                     }
 
@@ -458,10 +451,8 @@ namespace Newtonsoft.Json.Utilities
 
                     // no match so error
                     throw new ArgumentException(
-                        "Requested value '{0}' was not found.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            value
-                        )
+                        "Requested value '{0}' was not found."
+                            .FormatWith(CultureInfo.InvariantCulture, value)
                     );
                 }
 
@@ -516,14 +507,15 @@ namespace Newtonsoft.Json.Utilities
             {
                 if (
                     enumNames[i].Length == valueSubstringLength
-                    && string.Compare(
-                        enumNames[i],
-                        0,
-                        value,
-                        valueIndex,
-                        valueSubstringLength,
-                        comparison
-                    ) == 0
+                    && string
+                        .Compare(
+                            enumNames[i],
+                            0,
+                            value,
+                            valueIndex,
+                            valueSubstringLength,
+                            comparison
+                        ) == 0
                 )
                 {
                     return i;

@@ -27,56 +27,46 @@ namespace Microsoft.AspNetCore.StaticFiles
         public async Task ReturnsFileForDefaultPattern()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.ConfigureServices(
+                        services =>
+                        {
+                            services.AddRouting();
+                            services.AddSingleton(LoggerFactory);
+                        }
+                    ).UseKestrel().UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel)).UseWebRoot(AppContext.BaseDirectory).Configure(
+                        app =>
+                        {
+                            var environment = app.ApplicationServices
+                                .GetRequiredService<IWebHostEnvironment>();
+                            app.UseRouting();
+                            app.UseEndpoints(
+                                endpoints =>
                                 {
-                                    services.AddRouting();
-                                    services.AddSingleton(LoggerFactory);
-                                }
-                            )
-                            .UseKestrel()
-                            .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
-                            .UseWebRoot(AppContext.BaseDirectory)
-                            .Configure(
-                                app =>
-                                {
-                                    var environment =
-                                        app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
-                                    app.UseRouting();
-                                    app.UseEndpoints(
-                                        endpoints =>
+                                    endpoints.Map(
+                                        "/hello",
+                                        context =>
                                         {
-                                            endpoints.Map(
-                                                "/hello",
-                                                context =>
-                                                {
-                                                    return context.Response.WriteAsync(
-                                                        "Hello, world!"
-                                                    );
-                                                }
-                                            );
+                                            return context.Response.WriteAsync("Hello, world!");
+                                        }
+                                    );
 
-                                            endpoints.MapFallbackToFile(
-                                                "default.html",
-                                                new StaticFileOptions()
-                                                {
-                                                    FileProvider = new PhysicalFileProvider(
-                                                        Path.Combine(
-                                                            environment.WebRootPath,
-                                                            "SubFolder"
-                                                        )
-                                                    ),
-                                                }
-                                            );
+                                    endpoints.MapFallbackToFile(
+                                        "default.html",
+                                        new StaticFileOptions()
+                                        {
+                                            FileProvider = new PhysicalFileProvider(
+                                                Path.Combine(environment.WebRootPath, "SubFolder")
+                                            ),
                                         }
                                     );
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -101,46 +91,39 @@ namespace Microsoft.AspNetCore.StaticFiles
         public async Task ReturnsFileForCustomPattern()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.ConfigureServices(
+                        services =>
+                        {
+                            services.AddRouting();
+                            services.AddSingleton(LoggerFactory);
+                        }
+                    ).UseKestrel().UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel)).UseWebRoot(AppContext.BaseDirectory).Configure(
+                        app =>
+                        {
+                            app.UseRouting();
+                            app.UseEndpoints(
+                                endpoints =>
                                 {
-                                    services.AddRouting();
-                                    services.AddSingleton(LoggerFactory);
-                                }
-                            )
-                            .UseKestrel()
-                            .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
-                            .UseWebRoot(AppContext.BaseDirectory)
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRouting();
-                                    app.UseEndpoints(
-                                        endpoints =>
+                                    endpoints.Map(
+                                        "/hello",
+                                        context =>
                                         {
-                                            endpoints.Map(
-                                                "/hello",
-                                                context =>
-                                                {
-                                                    return context.Response.WriteAsync(
-                                                        "Hello, world!"
-                                                    );
-                                                }
-                                            );
-
-                                            endpoints.MapFallbackToFile(
-                                                "/prefix/{*path:nonfile}",
-                                                "TestDocument.txt"
-                                            );
+                                            return context.Response.WriteAsync("Hello, world!");
                                         }
+                                    );
+
+                                    endpoints.MapFallbackToFile(
+                                        "/prefix/{*path:nonfile}",
+                                        "TestDocument.txt"
                                     );
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

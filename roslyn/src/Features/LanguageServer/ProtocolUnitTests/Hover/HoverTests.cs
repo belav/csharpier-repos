@@ -228,22 +228,22 @@ class Program
         private void VerifyContent(LSP.VSHover result, string expectedContent)
         {
             var containerElement = (ContainerElement)result.RawContent;
-            using var _ = ArrayBuilder<ClassifiedTextElement>.GetInstance(
-                out var classifiedTextElements
-            );
+            using var _ = ArrayBuilder<ClassifiedTextElement>
+                .GetInstance(out var classifiedTextElements);
             GetClassifiedTextElements(containerElement, classifiedTextElements);
             Assert.False(
                 classifiedTextElements.SelectMany(
-                        classifiedTextElements => classifiedTextElements.Runs
-                    )
+                    classifiedTextElements => classifiedTextElements.Runs
+                )
                     .Any(run => run.NavigationAction != null)
             );
-            var content = string.Join(
-                "|",
-                classifiedTextElements.Select(
-                    cte => string.Join(string.Empty, cte.Runs.Select(ctr => ctr.Text))
-                )
-            );
+            var content = string
+                .Join(
+                    "|",
+                    classifiedTextElements.Select(
+                        cte => string.Join(string.Empty, cte.Runs.Select(ctr => ctr.Text))
+                    )
+                );
             Assert.Equal(expectedContent, content);
         }
 

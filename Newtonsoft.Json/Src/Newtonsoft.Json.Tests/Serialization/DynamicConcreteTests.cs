@@ -172,10 +172,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         static DynamicConcrete()
         {
             var assemblyName = new AssemblyName("DynImpl");
-            DynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                assemblyName,
-                AssemblyBuilderAccess.RunAndSave
-            );
+            DynamicAssembly = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
             ModuleBuilder = DynamicAssembly.DefineDynamicModule("DynImplModule");
         }
 
@@ -261,10 +259,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 }
                 else if (methodInfo.ReturnType.IsValueType || methodInfo.ReturnType.IsEnum)
                 {
-                    var getMethod = typeof(Activator).GetMethod(
-                        "CreateInstance",
-                        new[] { typeof(Type) }
-                    );
+                    var getMethod = typeof(Activator)
+                        .GetMethod("CreateInstance", new[] { typeof(Type) });
                     var lb = methodILGen.DeclareLocal(methodInfo.ReturnType);
                     if (lb.LocalType != null)
                     {

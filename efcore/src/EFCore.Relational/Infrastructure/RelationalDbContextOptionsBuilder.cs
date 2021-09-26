@@ -144,9 +144,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         protected virtual TBuilder WithOption(Func<TExtension, TExtension> setAction)
         {
-            ((IDbContextOptionsBuilderInfrastructure)OptionsBuilder).AddOrUpdateExtension(
-                setAction(OptionsBuilder.Options.FindExtension<TExtension>() ?? new TExtension())
-            );
+            ((IDbContextOptionsBuilderInfrastructure)OptionsBuilder)
+                .AddOrUpdateExtension(
+                    setAction(
+                        OptionsBuilder.Options.FindExtension<TExtension>() ?? new TExtension()
+                    )
+                );
 
             return (TBuilder)this;
         }

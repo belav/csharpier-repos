@@ -91,17 +91,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 )
             )
             {
-                var token = (
-                    (DirectiveIntermediateNode)preserveWhitespaceDirective.Node
-                ).Tokens.FirstOrDefault();
+                var token = ((DirectiveIntermediateNode)preserveWhitespaceDirective.Node).Tokens
+                    .FirstOrDefault();
                 var shouldPreserveWhitespaceContent = token?.Content;
                 if (shouldPreserveWhitespaceContent != null)
                 {
-                    shouldPreserveWhitespace = string.Equals(
-                        shouldPreserveWhitespaceContent,
-                        "true",
-                        StringComparison.Ordinal
-                    );
+                    shouldPreserveWhitespace = string
+                        .Equals(shouldPreserveWhitespaceContent, "true", StringComparison.Ordinal);
                 }
             }
 

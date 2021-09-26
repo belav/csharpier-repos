@@ -301,7 +301,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(byte?)),
                     Expression.Constant(b, typeof(byte?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableByte")
                 )
             );
@@ -319,7 +320,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(char?)),
                     Expression.Constant(b, typeof(char?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableChar")
                 )
             );
@@ -337,7 +339,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(decimal?)),
                     Expression.Constant(b, typeof(decimal?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableDecimal")
                 )
             );
@@ -355,7 +358,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(double?)),
                     Expression.Constant(b, typeof(double?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableDouble")
                 )
             );
@@ -370,7 +374,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(float?)),
                     Expression.Constant(b, typeof(float?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableFloat")
                 )
             );
@@ -385,7 +390,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(int?)),
                     Expression.Constant(b, typeof(int?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableInt")
                 )
             );
@@ -405,7 +411,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(long?)),
                     Expression.Constant(b, typeof(long?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableLong")
                 )
             );
@@ -425,7 +432,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(sbyte?)),
                     Expression.Constant(b, typeof(sbyte?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableSByte")
                 )
             );
@@ -443,7 +451,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(short?)),
                     Expression.Constant(b, typeof(short?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableShort")
                 )
             );
@@ -461,7 +470,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(uint?)),
                     Expression.Constant(b, typeof(uint?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableUInt")
                 )
             );
@@ -479,7 +489,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(ulong?)),
                     Expression.Constant(b, typeof(ulong?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableULong")
                 )
             );
@@ -497,7 +508,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Modulo(
                     Expression.Constant(a, typeof(ushort?)),
                     Expression.Constant(b, typeof(ushort?)),
-                    typeof(LiftedModuloNullableTests).GetTypeInfo()
+                    typeof(LiftedModuloNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ModuloNullableUShort")
                 )
             );

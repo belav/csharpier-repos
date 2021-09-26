@@ -260,18 +260,18 @@ namespace XLinqTests
             XAttribute origAttrib = e.Attribute(newName);
             IEnumerable<XAttribute> origAttrs = e.Attributes().ToList();
             IEnumerable<ExpectedValue> refComparison = getExpectedAttributes(
-                    e,
-                    newName,
-                    newValue,
-                    true
-                )
+                e,
+                newName,
+                newValue,
+                true
+            )
                 .ToList();
             IEnumerable<ExpectedValue> valueComparison = getExpectedAttributes(
-                    e,
-                    newName,
-                    newValue,
-                    false
-                )
+                e,
+                newName,
+                newValue,
+                false
+            )
                 .ToList();
             IEnumerable<XNode> nodes = e.Nodes().ToList();
 

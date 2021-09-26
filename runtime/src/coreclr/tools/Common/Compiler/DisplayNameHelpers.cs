@@ -34,9 +34,8 @@ namespace ILCompiler
                     sb.Append(method.Instantiation[i].GetDisplayNameWithoutNamespace()).Append(',');
 
                 sb.Append(
-                    method.Instantiation[
-                        method.Instantiation.Length - 1
-                    ].GetDisplayNameWithoutNamespace()
+                    method.Instantiation[method.Instantiation.Length - 1]
+                        .GetDisplayNameWithoutNamespace()
                 );
                 sb.Append('>');
             }
@@ -60,7 +59,8 @@ namespace ILCompiler
 
         public static string GetDisplayName(this FieldDesc field)
         {
-            return new StringBuilder(field.OwningType.GetDisplayName()).Append('.')
+            return new StringBuilder(field.OwningType.GetDisplayName())
+                .Append('.')
                 .Append(field.Name)
                 .ToString();
         }
@@ -68,7 +68,8 @@ namespace ILCompiler
 #if !READYTORUN
         public static string GetDisplayName(this PropertyPseudoDesc property)
         {
-            return new StringBuilder(property.OwningType.GetDisplayName()).Append('.')
+            return new StringBuilder(property.OwningType.GetDisplayName())
+                .Append('.')
                 .Append(property.Name)
                 .ToString();
         }

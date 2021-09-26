@@ -985,12 +985,13 @@ namespace Moq.Tests
             var mex = Assert.Throws<MockException>(() => mock.Verify(f => f.Execute("pong")));
 
             Assert.True(
-                mex.Message.ContainsConsecutiveLines(
-                    "      VerifyFixture.IFoo.Execute(\"ping\")",
-                    "      VerifyFixture.IFoo.Echo(42)",
-                    "      VerifyFixture.IFoo.Submit()",
-                    "      VerifyFixture.IFoo.Save([1, 2, \"hello\"])"
-                )
+                mex.Message
+                    .ContainsConsecutiveLines(
+                        "      VerifyFixture.IFoo.Execute(\"ping\")",
+                        "      VerifyFixture.IFoo.Echo(42)",
+                        "      VerifyFixture.IFoo.Submit()",
+                        "      VerifyFixture.IFoo.Save([1, 2, \"hello\"])"
+                    )
             );
         }
 
@@ -1081,9 +1082,10 @@ namespace Moq.Tests
             mock.Object.Method(strings);
             var mex = Assert.Throws<MockException>(() => mock.Verify(_ => _.Method(null)));
             Assert.True(
-                mex.Message.ContainsConsecutiveLines(
-                    @"      VerifyFixture.IArrays.Method([""1"", null, ""3""])"
-                )
+                mex.Message
+                    .ContainsConsecutiveLines(
+                        @"      VerifyFixture.IArrays.Method([""1"", null, ""3""])"
+                    )
             );
         }
 
@@ -1095,9 +1097,10 @@ namespace Moq.Tests
             mock.Object.Method(strings);
             var mex = Assert.Throws<MockException>(() => mock.Verify(_ => _.Method(null)));
             Assert.True(
-                mex.Message.ContainsConsecutiveLines(
-                    @"      VerifyFixture.IArrays.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10""])"
-                )
+                mex.Message
+                    .ContainsConsecutiveLines(
+                        @"      VerifyFixture.IArrays.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10""])"
+                    )
             );
         }
 
@@ -1109,9 +1112,10 @@ namespace Moq.Tests
             mock.Object.Method(strings);
             var mex = Assert.Throws<MockException>(() => mock.Verify(_ => _.Method(null)));
             Assert.True(
-                mex.Message.ContainsConsecutiveLines(
-                    @"      VerifyFixture.IArrays.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10"", ...])"
-                )
+                mex.Message
+                    .ContainsConsecutiveLines(
+                        @"      VerifyFixture.IArrays.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10"", ...])"
+                    )
             );
         }
 

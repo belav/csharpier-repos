@@ -1017,7 +1017,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.False(context.ChangeTracker.HasChanges());
 
             foreach (
-                var entity in new object[] { category }.Concat(category.Products)
+                var entity in new object[] { category }
+                    .Concat(category.Products)
                     .Concat(category.Products.Select(e => e.Details))
             )
             {
@@ -1181,18 +1182,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [ConditionalFact]
         public void TrackGraph_does_not_call_DetectChanges()
         {
-            var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-            );
+            var provider = InMemoryTestHelpers.Instance
+                .CreateServiceProvider(
+                    new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+                );
             using var context = new EarlyLearningCenter(GetType().Name, provider);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
             changeDetector.DetectChangesCalled = false;
 
-            context.ChangeTracker.TrackGraph(
-                CreateSimpleGraph(2),
-                e => e.Entry.State = EntityState.Unchanged
-            );
+            context.ChangeTracker
+                .TrackGraph(CreateSimpleGraph(2), e => e.Entry.State = EntityState.Unchanged);
 
             Assert.False(changeDetector.DetectChangesCalled);
 
@@ -1473,17 +1473,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     }
                 );
 
-                modelBuilder.Entity<Sweet>()
-                    .OwnsOne(
-                        e => e.Dreams,
-                        b =>
-                        {
-                            b.WithOwner(e => e.Sweet);
-                            b.OwnsOne(e => e.Are);
-                            b.OwnsOne(e => e.Made);
-                            b.OwnsOne(e => e.OfThis);
-                        }
-                    );
+                modelBuilder.Entity<Sweet>().OwnsOne(
+                    e => e.Dreams,
+                    b =>
+                    {
+                        b.WithOwner(e => e.Sweet);
+                        b.OwnsOne(e => e.Are);
+                        b.OwnsOne(e => e.Made);
+                        b.OwnsOne(e => e.OfThis);
+                    }
+                );
 
                 modelBuilder.Entity<Category>().HasMany(e => e.Products).WithOne(e => e.Category);
 
@@ -1533,7 +1532,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             }
 
             public virtual void TrackEntity(EntityEntryGraphNode node) =>
-                node.Entry.GetInfrastructure()
+                node.Entry
+                    .GetInfrastructure()
                     .SetEntityState(DetermineState(node.Entry), acceptChanges: true);
 
             public virtual EntityState DetermineState(EntityEntry entry) =>

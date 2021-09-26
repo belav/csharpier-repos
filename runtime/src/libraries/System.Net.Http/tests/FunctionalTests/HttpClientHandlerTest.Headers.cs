@@ -72,9 +72,8 @@ namespace System.Net.Http.Functional.Tests
                             Version = UseVersion
                         };
                         message.Headers.TryAddWithoutValidation("User-Agent", userAgent);
-                        (
-                            await client.SendAsync(TestAsync, message).ConfigureAwait(false)
-                        ).Dispose();
+                        (await client.SendAsync(TestAsync, message).ConfigureAwait(false))
+                            .Dispose();
                     }
                 },
                 async server =>
@@ -113,10 +112,8 @@ namespace System.Net.Http.Functional.Tests
                     };
                     for (int i = 0; i < count; i++)
                     {
-                        message.Headers.TryAddWithoutValidation(
-                            "large-header" + i,
-                            largeHeaderValue
-                        );
+                        message.Headers
+                            .TryAddWithoutValidation("large-header" + i, largeHeaderValue);
                     }
                     var response = await client.SendAsync(TestAsync, message).ConfigureAwait(false);
                 },
@@ -148,18 +145,15 @@ namespace System.Net.Http.Functional.Tests
                 {
                     using (HttpClient client = CreateHttpClient())
                     {
-                        client.DefaultRequestHeaders.TryAddWithoutValidation(
-                            "x-ms-version",
-                            Version
-                        );
+                        client.DefaultRequestHeaders
+                            .TryAddWithoutValidation("x-ms-version", Version);
                         client.DefaultRequestHeaders.Add("x-ms-blob-type", Blob);
                         var message = new HttpRequestMessage(HttpMethod.Get, uri)
                         {
                             Version = UseVersion
                         };
-                        (
-                            await client.SendAsync(TestAsync, message).ConfigureAwait(false)
-                        ).Dispose();
+                        (await client.SendAsync(TestAsync, message).ConfigureAwait(false))
+                            .Dispose();
                     }
                 },
                 async server =>
@@ -204,8 +198,8 @@ namespace System.Net.Http.Functional.Tests
                     {
                         // Client should abort at some point so this is going to throw.
                         HttpRequestData requestData = await server.HandleRequestAsync(
-                                HttpStatusCode.OK
-                            )
+                            HttpStatusCode.OK
+                        )
                             .ConfigureAwait(false);
                     }
                     catch (Exception) { }
@@ -239,14 +233,11 @@ namespace System.Net.Http.Functional.Tests
                         if (!message.Headers.TryAddWithoutValidation(key, value))
                         {
                             message.Content = new StringContent("");
-                            contentHeader = message.Content.Headers.TryAddWithoutValidation(
-                                key,
-                                value
-                            );
+                            contentHeader = message.Content.Headers
+                                .TryAddWithoutValidation(key, value);
                         }
-                        (
-                            await client.SendAsync(TestAsync, message).ConfigureAwait(false)
-                        ).Dispose();
+                        (await client.SendAsync(TestAsync, message).ConfigureAwait(false))
+                            .Dispose();
                     }
 
                     // Validate our test by validating our understanding of a header's parsability.
@@ -278,9 +269,10 @@ namespace System.Net.Http.Functional.Tests
         public async Task GetAsync_LargeHeader_Success(string headerName, int headerValueLength)
         {
             var rand = new Random(42);
-            string headerValue = string.Concat(
-                Enumerable.Range(0, headerValueLength).Select(_ => (char)('A' + rand.Next(26)))
-            );
+            string headerValue = string
+                .Concat(
+                    Enumerable.Range(0, headerValueLength).Select(_ => (char)('A' + rand.Next(26)))
+                );
 
             const string ContentString = "hello world";
             await LoopbackServerFactory.CreateClientAndServerAsync(
@@ -717,13 +709,13 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     List<HttpHeaderData> headerData = s_nonAsciiHeaders.Select(
-                            h =>
-                                new HttpHeaderData(
-                                    h.Name,
-                                    string.Join(", ", h.Values),
-                                    valueEncoding: h.ValueEncoding
-                                )
-                        )
+                        h =>
+                            new HttpHeaderData(
+                                h.Name,
+                                string.Join(", ", h.Values),
+                                valueEncoding: h.ValueEncoding
+                            )
+                    )
                         .ToList();
 
                     await server.HandleRequestAsync(headers: headerData);

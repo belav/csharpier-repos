@@ -66,12 +66,13 @@ public class Directory_Delete_MountVolume
 
                         File.AppendAllText(
                             debugFileName,
-                            string.Format(
-                                "Mounting on {0}{1}{2}",
-                                otherDriveInMachine.Substring(0, 2),
-                                mountedDirName,
-                                Environment.NewLine
-                            )
+                            string
+                                .Format(
+                                    "Mounting on {0}{1}{2}",
+                                    otherDriveInMachine.Substring(0, 2),
+                                    mountedDirName,
+                                    Environment.NewLine
+                                )
                         );
                         MountHelper.Mount(otherDriveInMachine.Substring(0, 2), mountedDirName);
 
@@ -81,11 +82,12 @@ public class Directory_Delete_MountVolume
                         );
                         File.AppendAllText(
                             debugFileName,
-                            string.Format(
-                                "Creating a sub tree at: {0}{1}",
-                                dirName,
-                                Environment.NewLine
-                            )
+                            string
+                                .Format(
+                                    "Creating a sub tree at: {0}{1}",
+                                    dirName,
+                                    Environment.NewLine
+                                )
                         );
                         using (ManageFileSystem fileManager = new ManageFileSystem(dirName, 3, 100))
                         {
@@ -125,10 +127,11 @@ public class Directory_Delete_MountVolume
                 else
                     File.AppendAllText(
                         debugFileName,
-                        string.Format(
-                            "Scenario 1 - Vanilla - NOT RUN: Different drive is mounted on the current drive {0}",
-                            Environment.NewLine
-                        )
+                        string
+                            .Format(
+                                "Scenario 1 - Vanilla - NOT RUN: Different drive is mounted on the current drive {0}",
+                                Environment.NewLine
+                            )
                     );
             }
             catch (Exception ex)
@@ -160,12 +163,13 @@ public class Directory_Delete_MountVolume
 
                         File.AppendAllText(
                             debugFileName,
-                            string.Format(
-                                "Mounting on {0}{1}{2}",
-                                Directory.GetCurrentDirectory().Substring(0, 2),
-                                mountedDirName,
-                                Environment.NewLine
-                            )
+                            string
+                                .Format(
+                                    "Mounting on {0}{1}{2}",
+                                    Directory.GetCurrentDirectory().Substring(0, 2),
+                                    mountedDirName,
+                                    Environment.NewLine
+                                )
                         );
                         MountHelper.Mount(
                             Directory.GetCurrentDirectory().Substring(0, 2),
@@ -178,11 +182,12 @@ public class Directory_Delete_MountVolume
                         );
                         File.AppendAllText(
                             debugFileName,
-                            string.Format(
-                                "Creating a sub tree at: {0}{1}",
-                                dirName,
-                                Environment.NewLine
-                            )
+                            string
+                                .Format(
+                                    "Creating a sub tree at: {0}{1}",
+                                    dirName,
+                                    Environment.NewLine
+                                )
                         );
                         using (ManageFileSystem fileManager = new ManageFileSystem(dirName, 3, 100))
                         {
@@ -248,12 +253,13 @@ public class Directory_Delete_MountVolume
 
                         File.AppendAllText(
                             debugFileName,
-                            string.Format(
-                                "Mounting on {0}{1}{2}",
-                                Directory.GetCurrentDirectory().Substring(0, 2),
-                                mountedDirName,
-                                Environment.NewLine
-                            )
+                            string
+                                .Format(
+                                    "Mounting on {0}{1}{2}",
+                                    Directory.GetCurrentDirectory().Substring(0, 2),
+                                    mountedDirName,
+                                    Environment.NewLine
+                                )
                         );
                         MountHelper.Mount(
                             Directory.GetCurrentDirectory().Substring(0, 2),
@@ -266,11 +272,12 @@ public class Directory_Delete_MountVolume
                         );
                         File.AppendAllText(
                             debugFileName,
-                            string.Format(
-                                "Creating a sub tree at: {0}{1}",
-                                dirName,
-                                Environment.NewLine
-                            )
+                            string
+                                .Format(
+                                    "Creating a sub tree at: {0}{1}",
+                                    dirName,
+                                    Environment.NewLine
+                                )
                         );
                         using (ManageFileSystem fileManager = new ManageFileSystem(dirName, 3, 100))
                         {
@@ -336,12 +343,13 @@ public class Directory_Delete_MountVolume
 
                         File.AppendAllText(
                             debugFileName,
-                            string.Format(
-                                "Mounting on {0}{1}{2}",
-                                Directory.GetCurrentDirectory().Substring(0, 2),
-                                mountedDirName,
-                                Environment.NewLine
-                            )
+                            string
+                                .Format(
+                                    "Mounting on {0}{1}{2}",
+                                    Directory.GetCurrentDirectory().Substring(0, 2),
+                                    mountedDirName,
+                                    Environment.NewLine
+                                )
                         );
                         MountHelper.Mount(
                             Directory.GetCurrentDirectory().Substring(0, 2),
@@ -354,11 +362,12 @@ public class Directory_Delete_MountVolume
                         );
                         File.AppendAllText(
                             debugFileName,
-                            string.Format(
-                                "Creating a sub tree at: {0}{1}",
-                                dirName,
-                                Environment.NewLine
-                            )
+                            string
+                                .Format(
+                                    "Creating a sub tree at: {0}{1}",
+                                    dirName,
+                                    Environment.NewLine
+                                )
                         );
                         using (ManageFileSystem fileManager = new ManageFileSystem(dirName, 3, 100))
                         {
@@ -426,12 +435,13 @@ public class Directory_Delete_MountVolume
 
                         File.AppendAllText(
                             debugFileName,
-                            string.Format(
-                                "Mounting on {0}{1}{2}",
-                                Directory.GetCurrentDirectory().Substring(0, 2),
-                                mountedDirName,
-                                Environment.NewLine
-                            )
+                            string
+                                .Format(
+                                    "Mounting on {0}{1}{2}",
+                                    Directory.GetCurrentDirectory().Substring(0, 2),
+                                    mountedDirName,
+                                    Environment.NewLine
+                                )
                         );
                         MountHelper.Mount(
                             Directory.GetCurrentDirectory().Substring(0, 2),
@@ -491,11 +501,12 @@ public class Directory_Delete_MountVolume
                         );
                         File.AppendAllText(
                             debugFileName,
-                            string.Format(
-                                "Creating a sub tree at: {0}{1}",
-                                dirName,
-                                Environment.NewLine
-                            )
+                            string
+                                .Format(
+                                    "Creating a sub tree at: {0}{1}",
+                                    dirName,
+                                    Environment.NewLine
+                                )
                         );
                         using (ManageFileSystem fileManager = new ManageFileSystem(dirName, 2, 20))
                         {
@@ -527,12 +538,13 @@ public class Directory_Delete_MountVolume
                                 {
                                     File.AppendAllText(
                                         debugFileName,
-                                        string.Format(
-                                            "Mounting on {0}{1}{2}",
-                                            Directory.GetCurrentDirectory().Substring(0, 2),
-                                            mountedDirName,
-                                            Environment.NewLine
-                                        )
+                                        string
+                                            .Format(
+                                                "Mounting on {0}{1}{2}",
+                                                Directory.GetCurrentDirectory().Substring(0, 2),
+                                                mountedDirName,
+                                                Environment.NewLine
+                                            )
                                     );
                                     MountHelper.Mount(
                                         Directory.GetCurrentDirectory().Substring(0, 2),
@@ -603,11 +615,12 @@ public class Directory_Delete_MountVolume
                         );
                         File.AppendAllText(
                             debugFileName,
-                            string.Format(
-                                "Creating a sub tree at: {0}{1}",
-                                dirName,
-                                Environment.NewLine
-                            )
+                            string
+                                .Format(
+                                    "Creating a sub tree at: {0}{1}",
+                                    dirName,
+                                    Environment.NewLine
+                                )
                         );
                         using (ManageFileSystem fileManager = new ManageFileSystem(dirName, 2, 30))
                         {
@@ -641,12 +654,13 @@ public class Directory_Delete_MountVolume
                                 {
                                     File.AppendAllText(
                                         debugFileName,
-                                        string.Format(
-                                            "Mounting on {0}{1}{2}",
-                                            Directory.GetCurrentDirectory().Substring(0, 2),
-                                            mountedDirName,
-                                            Environment.NewLine
-                                        )
+                                        string
+                                            .Format(
+                                                "Mounting on {0}{1}{2}",
+                                                Directory.GetCurrentDirectory().Substring(0, 2),
+                                                mountedDirName,
+                                                Environment.NewLine
+                                            )
                                     );
                                     MountHelper.Mount(
                                         Directory.GetCurrentDirectory().Substring(0, 2),

@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
             PrefixOutput
                 ? value == null
                     ? prefix
-                    : string.Join(
+                    : string
+                      .Join(
                           Environment.NewLine,
                           value.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
                               .Select(l => prefix + l)

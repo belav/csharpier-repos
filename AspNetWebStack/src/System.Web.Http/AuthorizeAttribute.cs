@@ -164,19 +164,19 @@ namespace System.Web.Http
                 throw Error.ArgumentNull("actionContext");
             }
 
-            actionContext.Response = actionContext.ControllerContext.Request.CreateErrorResponse(
-                HttpStatusCode.Unauthorized,
-                SRResources.RequestNotAuthorized
-            );
+            actionContext.Response = actionContext.ControllerContext.Request
+                .CreateErrorResponse(HttpStatusCode.Unauthorized, SRResources.RequestNotAuthorized);
         }
 
         private static bool SkipAuthorization(HttpActionContext actionContext)
         {
             Contract.Assert(actionContext != null);
 
-            return actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>()
+            return actionContext.ActionDescriptor
+                    .GetCustomAttributes<AllowAnonymousAttribute>()
                     .Any()
-                || actionContext.ControllerContext.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>()
+                || actionContext.ControllerContext.ControllerDescriptor
+                    .GetCustomAttributes<AllowAnonymousAttribute>()
                     .Any();
         }
 

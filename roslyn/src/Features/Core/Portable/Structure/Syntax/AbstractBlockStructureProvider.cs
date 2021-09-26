@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Structure
         {
             try
             {
-                var syntaxRoot = await context.SyntaxTree.GetRootAsync(context.CancellationToken)
+                var syntaxRoot = await context.SyntaxTree
+                    .GetRootAsync(context.CancellationToken)
                     .ConfigureAwait(false);
 
                 ProvideBlockStructureWorker(context, syntaxRoot);

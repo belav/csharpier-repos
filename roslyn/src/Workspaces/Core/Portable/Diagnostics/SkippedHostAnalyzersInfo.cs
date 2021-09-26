@@ -62,9 +62,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             using var _1 = PooledHashSet<object>.GetInstance(out var projectAnalyzerIds);
             using var _2 = PooledHashSet<string>.GetInstance(out var projectAnalyzerDiagnosticIds);
-            using var _3 = PooledHashSet<string>.GetInstance(
-                out var projectSuppressedDiagnosticIds
-            );
+            using var _3 = PooledHashSet<string>
+                .GetInstance(out var projectSuppressedDiagnosticIds);
 
             foreach (
                 var (

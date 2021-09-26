@@ -149,16 +149,12 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void All_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .All(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
-            );
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).All(
+                        x =>
+                        {
+                            throw new DeliberateTestException();
+                        }
+                    ));
         }
 
         [Fact]

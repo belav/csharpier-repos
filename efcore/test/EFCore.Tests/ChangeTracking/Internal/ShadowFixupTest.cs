@@ -420,11 +420,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 modelBuilder.Entity<Product>(
                     b =>
                     {
-                        var fk = b.Metadata.AddForeignKey(
-                            new[] { b.Property<int>("CategoryId").Metadata },
-                            category.FindPrimaryKey(),
-                            category
-                        );
+                        var fk = b.Metadata
+                            .AddForeignKey(
+                                new[] { b.Property<int>("CategoryId").Metadata },
+                                category.FindPrimaryKey(),
+                                category
+                            );
                         fk.SetDependentToPrincipal("Category");
                         fk.SetPrincipalToDependent("Products");
                     }
@@ -435,11 +436,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 modelBuilder.Entity<Child>(
                     b =>
                     {
-                        var fk = b.Metadata.AddForeignKey(
-                            new[] { b.Property<int>("ParentId").Metadata },
-                            parent.FindPrimaryKey(),
-                            parent
-                        );
+                        var fk = b.Metadata
+                            .AddForeignKey(
+                                new[] { b.Property<int>("ParentId").Metadata },
+                                parent.FindPrimaryKey(),
+                                parent
+                            );
                         fk.IsUnique = true;
                         fk.SetDependentToPrincipal("Parent");
                         fk.SetPrincipalToDependent("Child");

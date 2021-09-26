@@ -33,15 +33,14 @@ namespace JwtBearerSample
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(
-                    o =>
-                    {
-                        // You also need to update /wwwroot/app/scripts/app.js
-                        o.Authority = Configuration["oidc:authority"];
-                        o.Audience = Configuration["oidc:clientid"];
-                    }
-                );
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+                o =>
+                {
+                    // You also need to update /wwwroot/app/scripts/app.js
+                    o.Authority = Configuration["oidc:authority"];
+                    o.Audience = Configuration["oidc:clientid"];
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

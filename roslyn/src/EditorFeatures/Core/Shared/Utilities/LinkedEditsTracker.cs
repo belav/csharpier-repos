@@ -56,11 +56,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             // TODO: custom tracking spans!
             var newTrackingSpans = snapshotSpanCollection.Select(
                 ss =>
-                    ss.Snapshot.CreateTrackingSpan(
-                        ss,
-                        SpanTrackingMode.EdgeInclusive,
-                        TrackingFidelityMode.Forward
-                    )
+                    ss.Snapshot
+                        .CreateTrackingSpan(
+                            ss,
+                            SpanTrackingMode.EdgeInclusive,
+                            TrackingFidelityMode.Forward
+                        )
             );
             AddSpans(newTrackingSpans);
         }

@@ -107,8 +107,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 if (LocalFunctions == null)
                 {
-                    LocalFunctions =
-                        ArrayBuilder<(IMethodSymbol, ILocalFunctionOperation)>.GetInstance();
+                    LocalFunctions = ArrayBuilder<(IMethodSymbol, ILocalFunctionOperation)>
+                        .GetInstance();
                 }
 
                 LocalFunctions.Add((symbol, operation));
@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 if (LocalFunctions == null)
                 {
-                    LocalFunctions =
-                        ArrayBuilder<(IMethodSymbol, ILocalFunctionOperation)>.GetInstance();
+                    LocalFunctions = ArrayBuilder<(IMethodSymbol, ILocalFunctionOperation)>
+                        .GetInstance();
                 }
 
                 LocalFunctions.AddRange(others);

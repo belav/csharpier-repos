@@ -30,7 +30,8 @@ namespace System.CommandLine.Tests
 
             await result.InvokeAsync(_console);
 
-            _console.Out.ToString()
+            _console.Out
+                .ToString()
                 .Should()
                 .Contain($"{RootCommand.ExecutableName} [options] command subcommand");
         }
@@ -58,7 +59,8 @@ namespace System.CommandLine.Tests
         [InlineData("/?")]
         public async Task UseHelp_accepts_default_values(string value)
         {
-            var parser = new CommandLineBuilder().AddCommand(new Command("command"))
+            var parser = new CommandLineBuilder()
+                .AddCommand(new Command("command"))
                 .UseHelp()
                 .Build();
 
@@ -176,13 +178,11 @@ namespace System.CommandLine.Tests
             var console = new TestConsole();
 
             new CommandLineBuilder(command).UseHelp<HelpBuilder>(
-                    builder =>
-                    {
-                        builder.Customize(option, descriptor: "-x (eXtreme)");
-                    }
-                )
-                .Build()
-                .Invoke("-h", console);
+                builder =>
+                {
+                    builder.Customize(option, descriptor: "-x (eXtreme)");
+                }
+            ).Build().Invoke("-h", console);
 
             console.Should().ShowHelp();
             console.Out.ToString().Should().Contain("-x (eXtreme)");
@@ -197,14 +197,11 @@ namespace System.CommandLine.Tests
             var console = new TestConsole();
 
             new CommandLineBuilder(command).UseHelp<HelpBuilder>(
-                    builder =>
-                    {
-                        builder.Customize(option, descriptor: "-x (eXtreme)");
-                    }
-                )
-                .UseHelp<HelpBuilder>(null)
-                .Build()
-                .Invoke("-h", console);
+                builder =>
+                {
+                    builder.Customize(option, descriptor: "-x (eXtreme)");
+                }
+            ).UseHelp<HelpBuilder>(null).Build().Invoke("-h", console);
 
             console.Should().ShowHelp();
             console.Out.ToString().Should().NotContain("-x (eXTreme)");
@@ -218,13 +215,11 @@ namespace System.CommandLine.Tests
 
             var console = new TestConsole();
             var parser = new CommandLineBuilder(command).UseHelp<HelpBuilder>(
-                    builder =>
-                    {
-                        builder.Customize(option, descriptor: "-x (eXtreme)");
-                    }
-                )
-                .UseHelpBuilder(context => new CustomHelpBuilder())
-                .Build();
+                builder =>
+                {
+                    builder.Customize(option, descriptor: "-x (eXtreme)");
+                }
+            ).UseHelpBuilder(context => new CustomHelpBuilder()).Build();
 
             Action action = () => parser.Invoke("-h", console);
             action.Should().Throw<InvalidCastException>();

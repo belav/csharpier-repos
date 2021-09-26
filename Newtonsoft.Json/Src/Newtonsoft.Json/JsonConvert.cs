@@ -585,10 +585,8 @@ namespace Newtonsoft.Json
             }
 
             throw new ArgumentException(
-                "Unsupported type: {0}. Use the JsonSerializer class to get the object's JSON representation.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    value.GetType()
-                )
+                "Unsupported type: {0}. Use the JsonSerializer class to get the object's JSON representation."
+                    .FormatWith(CultureInfo.InvariantCulture, value.GetType())
             );
         }
 

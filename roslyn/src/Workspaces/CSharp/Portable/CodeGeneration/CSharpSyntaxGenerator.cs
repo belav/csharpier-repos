@@ -505,15 +505,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 PropertyDeclarationSyntax property
                   => property.WithAccessorList(
-                          CreateAccessorList(property.AccessorList, accessorDeclarations)
-                      )
+                      CreateAccessorList(property.AccessorList, accessorDeclarations)
+                  )
                       .WithExpressionBody(null)
                       .WithSemicolonToken(default),
 
                 IndexerDeclarationSyntax indexer
                   => indexer.WithAccessorList(
-                          CreateAccessorList(indexer.AccessorList, accessorDeclarations)
-                      )
+                      CreateAccessorList(indexer.AccessorList, accessorDeclarations)
+                  )
                       .WithExpressionBody(null)
                       .WithSemicolonToken(default),
 
@@ -753,21 +753,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration.Kind() switch
             {
                 SyntaxKind.MethodDeclaration
-                  => ((MethodDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                  => ((MethodDeclarationSyntax)declaration)
+                      .WithExplicitInterfaceSpecifier(specifier),
                 SyntaxKind.PropertyDeclaration
-                  => ((PropertyDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                  => ((PropertyDeclarationSyntax)declaration)
+                      .WithExplicitInterfaceSpecifier(specifier),
                 SyntaxKind.IndexerDeclaration
-                  => ((IndexerDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                  => ((IndexerDeclarationSyntax)declaration)
+                      .WithExplicitInterfaceSpecifier(specifier),
                 SyntaxKind.EventDeclaration
-                  => ((EventDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                  => ((EventDeclarationSyntax)declaration)
+                      .WithExplicitInterfaceSpecifier(specifier),
                 _ => declaration,
             };
 
@@ -840,7 +836,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static AccessorDeclarationSyntax WithoutBody(AccessorDeclarationSyntax accessor) =>
             accessor.Body != null
                 ? accessor.WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                      .WithBody(null)
+                  .WithBody(null)
                 : accessor;
 
         public override SyntaxNode ClassDeclaration(
@@ -906,9 +902,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             switch (node.Kind())
             {
                 case SyntaxKind.ConstructorDeclaration:
-                    node = ((ConstructorDeclarationSyntax)node).WithIdentifier(
-                        className.ToIdentifierToken()
-                    );
+                    node = ((ConstructorDeclarationSyntax)node)
+                        .WithIdentifier(className.ToIdentifierToken());
                     break;
 
                 case SyntaxKind.VariableDeclaration:
@@ -930,8 +925,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             var itypes = interfaceTypes?.Select(
-                    i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i)
-                )
+                i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i)
+            )
                 .ToList();
             if (itypes?.Count == 0)
             {
@@ -958,8 +953,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             var itypes = interfaceTypes?.Select(
-                    i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i)
-                )
+                i => (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)i)
+            )
                 .ToList();
             if (itypes?.Count == 0)
             {
@@ -1000,7 +995,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     switch (member.Kind())
                     {
                         case SyntaxKind.MethodDeclaration:
-                            return ((MethodDeclarationSyntax)member).WithModifiers(default)
+                            return ((MethodDeclarationSyntax)member)
+                                .WithModifiers(default)
                                 .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
                                 .WithBody(null);
 
@@ -2449,28 +2445,30 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 SyntaxKind.MethodDeclaration
                   => ((MethodDeclarationSyntax)declaration).WithReturnType((TypeSyntax)type),
                 SyntaxKind.FieldDeclaration
-                  => ((FieldDeclarationSyntax)declaration).WithDeclaration(
-                      ((FieldDeclarationSyntax)declaration).Declaration.WithType((TypeSyntax)type)
-                  ),
+                  => ((FieldDeclarationSyntax)declaration)
+                      .WithDeclaration(
+                          ((FieldDeclarationSyntax)declaration).Declaration
+                              .WithType((TypeSyntax)type)
+                      ),
                 SyntaxKind.PropertyDeclaration
                   => ((PropertyDeclarationSyntax)declaration).WithType((TypeSyntax)type),
                 SyntaxKind.IndexerDeclaration
                   => ((IndexerDeclarationSyntax)declaration).WithType((TypeSyntax)type),
                 SyntaxKind.EventFieldDeclaration
-                  => ((EventFieldDeclarationSyntax)declaration).WithDeclaration(
-                      ((EventFieldDeclarationSyntax)declaration).Declaration.WithType(
-                          (TypeSyntax)type
-                      )
-                  ),
+                  => ((EventFieldDeclarationSyntax)declaration)
+                      .WithDeclaration(
+                          ((EventFieldDeclarationSyntax)declaration).Declaration
+                              .WithType((TypeSyntax)type)
+                      ),
                 SyntaxKind.EventDeclaration
                   => ((EventDeclarationSyntax)declaration).WithType((TypeSyntax)type),
                 SyntaxKind.Parameter => ((ParameterSyntax)declaration).WithType((TypeSyntax)type),
                 SyntaxKind.LocalDeclarationStatement
-                  => ((LocalDeclarationStatementSyntax)declaration).WithDeclaration(
-                      ((LocalDeclarationStatementSyntax)declaration).Declaration.WithType(
-                          (TypeSyntax)type
-                      )
-                  ),
+                  => ((LocalDeclarationStatementSyntax)declaration)
+                      .WithDeclaration(
+                          ((LocalDeclarationStatementSyntax)declaration).Declaration
+                              .WithType((TypeSyntax)type)
+                      ),
                 SyntaxKind.VariableDeclaration
                   => ((VariableDeclarationSyntax)declaration).WithType((TypeSyntax)type),
                 _ => declaration,
@@ -2511,8 +2509,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         {
                             var attrList = (AttributeListSyntax)attr.Parent;
                             return attrList.WithAttributes(
-                                    SyntaxFactory.SingletonSeparatedList(attr)
-                                )
+                                SyntaxFactory.SingletonSeparatedList(attr)
+                            )
                                 .WithTarget(null);
                         }
                         break;
@@ -2670,10 +2668,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 return switchStatement;
             }
 
-            var newSections = statement.Sections.InsertRange(
-                index,
-                switchSections.Cast<SwitchSectionSyntax>()
-            );
+            var newSections = statement.Sections
+                .InsertRange(index, switchSections.Cast<SwitchSectionSyntax>());
             return AddMissingTokens(statement, recurse: false).WithSections(newSections);
         }
 
@@ -2734,9 +2730,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 case SyntaxKind.OperatorDeclaration:
                     return ((OperatorDeclarationSyntax)declaration).WithParameterList(list);
                 case SyntaxKind.ConversionOperatorDeclaration:
-                    return ((ConversionOperatorDeclarationSyntax)declaration).WithParameterList(
-                        list
-                    );
+                    return ((ConversionOperatorDeclarationSyntax)declaration)
+                        .WithParameterList(list);
                 case SyntaxKind.ConstructorDeclaration:
                     return ((ConstructorDeclarationSyntax)declaration).WithParameterList(list);
                 case SyntaxKind.DestructorDeclaration:
@@ -2744,13 +2739,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 case SyntaxKind.IndexerDeclaration:
                     return ((IndexerDeclarationSyntax)declaration).WithParameterList(list);
                 case SyntaxKind.LocalFunctionStatement:
-                    return ((LocalFunctionStatementSyntax)declaration).WithParameterList(
-                        (ParameterListSyntax)list
-                    );
+                    return ((LocalFunctionStatementSyntax)declaration)
+                        .WithParameterList((ParameterListSyntax)list);
                 case SyntaxKind.ParenthesizedLambdaExpression:
-                    return ((ParenthesizedLambdaExpressionSyntax)declaration).WithParameterList(
-                        (ParameterListSyntax)list
-                    );
+                    return ((ParenthesizedLambdaExpressionSyntax)declaration)
+                        .WithParameterList((ParameterListSyntax)list);
                 case SyntaxKind.SimpleLambdaExpression:
                     var lambda = (SimpleLambdaExpressionSyntax)declaration;
                     var parameters = list.Parameters;
@@ -2761,9 +2754,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     else
                     {
                         return SyntaxFactory.ParenthesizedLambdaExpression(
-                                AsParameterList(parameters),
-                                lambda.Body
-                            )
+                            AsParameterList(parameters),
+                            lambda.Body
+                        )
                             .WithLeadingTrivia(lambda.GetLeadingTrivia())
                             .WithTrailingTrivia(lambda.GetTrailingTrivia());
                     }
@@ -2832,14 +2825,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             switch (declaration.Kind())
             {
                 case SyntaxKind.ParenthesizedLambdaExpression:
-                    return ((ParenthesizedLambdaExpressionSyntax)declaration).WithBody(
-                        (CSharpSyntaxNode)expr ?? CreateBlock(null)
-                    );
+                    return ((ParenthesizedLambdaExpressionSyntax)declaration)
+                        .WithBody((CSharpSyntaxNode)expr ?? CreateBlock(null));
 
                 case SyntaxKind.SimpleLambdaExpression:
-                    return ((SimpleLambdaExpressionSyntax)declaration).WithBody(
-                        (CSharpSyntaxNode)expr ?? CreateBlock(null)
-                    );
+                    return ((SimpleLambdaExpressionSyntax)declaration)
+                        .WithBody((CSharpSyntaxNode)expr ?? CreateBlock(null));
 
                 case SyntaxKind.PropertyDeclaration:
                     var pd = (PropertyDeclarationSyntax)declaration;
@@ -3045,27 +3036,33 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             switch (declaration.Kind())
             {
                 case SyntaxKind.MethodDeclaration:
-                    return ((MethodDeclarationSyntax)declaration).WithBody(somebody)
+                    return ((MethodDeclarationSyntax)declaration)
+                        .WithBody(somebody)
                         .WithSemicolonToken(semicolon)
                         .WithExpressionBody(null);
                 case SyntaxKind.OperatorDeclaration:
-                    return ((OperatorDeclarationSyntax)declaration).WithBody(somebody)
+                    return ((OperatorDeclarationSyntax)declaration)
+                        .WithBody(somebody)
                         .WithSemicolonToken(semicolon)
                         .WithExpressionBody(null);
                 case SyntaxKind.ConversionOperatorDeclaration:
-                    return ((ConversionOperatorDeclarationSyntax)declaration).WithBody(somebody)
+                    return ((ConversionOperatorDeclarationSyntax)declaration)
+                        .WithBody(somebody)
                         .WithSemicolonToken(semicolon)
                         .WithExpressionBody(null);
                 case SyntaxKind.ConstructorDeclaration:
-                    return ((ConstructorDeclarationSyntax)declaration).WithBody(somebody)
+                    return ((ConstructorDeclarationSyntax)declaration)
+                        .WithBody(somebody)
                         .WithSemicolonToken(semicolon)
                         .WithExpressionBody(null);
                 case SyntaxKind.DestructorDeclaration:
-                    return ((DestructorDeclarationSyntax)declaration).WithBody(somebody)
+                    return ((DestructorDeclarationSyntax)declaration)
+                        .WithBody(somebody)
                         .WithSemicolonToken(semicolon)
                         .WithExpressionBody(null);
                 case SyntaxKind.LocalFunctionStatement:
-                    return ((LocalFunctionStatementSyntax)declaration).WithBody(somebody)
+                    return ((LocalFunctionStatementSyntax)declaration)
+                        .WithBody(somebody)
                         .WithSemicolonToken(semicolon)
                         .WithExpressionBody(null);
                 case SyntaxKind.AnonymousMethodExpression:
@@ -3078,7 +3075,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 case SyntaxKind.SetAccessorDeclaration:
                 case SyntaxKind.AddAccessorDeclaration:
                 case SyntaxKind.RemoveAccessorDeclaration:
-                    return ((AccessorDeclarationSyntax)declaration).WithBody(somebody)
+                    return ((AccessorDeclarationSyntax)declaration)
+                        .WithBody(somebody)
                         .WithSemicolonToken(semicolon)
                         .WithExpressionBody(null);
                 default:
@@ -3275,7 +3273,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             var baseList = GetBaseList(declaration);
             if (baseList != null)
             {
-                return baseList.Types.OfType<SimpleBaseTypeSyntax>()
+                return baseList.Types
+                    .OfType<SimpleBaseTypeSyntax>()
                     .Select(bt => bt.Type)
                     .ToReadOnlyCollection();
             }
@@ -3323,10 +3322,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 return WithBaseList(
                     declaration,
                     baseList.WithTypes(
-                        baseList.Types.Insert(
-                            baseList.Types.Count,
-                            SyntaxFactory.SimpleBaseType((TypeSyntax)interfaceType)
-                        )
+                        baseList.Types
+                            .Insert(
+                                baseList.Types.Count,
+                                SyntaxFactory.SimpleBaseType((TypeSyntax)interfaceType)
+                            )
                     )
                 );
             }
@@ -4110,16 +4110,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         public override SyntaxNode CastExpression(SyntaxNode type, SyntaxNode expression) =>
             SyntaxFactory.CastExpression(
-                    (TypeSyntax)type,
-                    (ExpressionSyntax)Parenthesize(expression)
-                )
+                (TypeSyntax)type,
+                (ExpressionSyntax)Parenthesize(expression)
+            )
                 .WithAdditionalAnnotations(Simplifier.Annotation);
 
         public override SyntaxNode ConvertExpression(SyntaxNode type, SyntaxNode expression) =>
             SyntaxFactory.CastExpression(
-                    (TypeSyntax)type,
-                    (ExpressionSyntax)Parenthesize(expression)
-                )
+                (TypeSyntax)type,
+                (ExpressionSyntax)Parenthesize(expression)
+            )
                 .WithAdditionalAnnotations(Simplifier.Annotation);
 
         public override SyntaxNode AssignmentStatement(SyntaxNode left, SyntaxNode right) =>
@@ -4401,12 +4401,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxNode initializer,
             bool isConst
         ) =>
-            CSharpSyntaxGeneratorInternal.Instance.LocalDeclarationStatement(
-                type,
-                name.ToIdentifierToken(),
-                initializer,
-                isConst
-            );
+            CSharpSyntaxGeneratorInternal.Instance
+                .LocalDeclarationStatement(type, name.ToIdentifierToken(), initializer, isConst);
 
         public override SyntaxNode UsingStatement(
             SyntaxNode type,
@@ -4632,8 +4628,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (modifiedNode is TypeDeclarationSyntax declarationSyntax)
             {
                 return declarationSyntax.WithOpenBraceToken(
-                        RemoveLeadingAndTrailingComments(declarationSyntax.OpenBraceToken)
-                    )
+                    RemoveLeadingAndTrailingComments(declarationSyntax.OpenBraceToken)
+                )
                     .WithCloseBraceToken(
                         RemoveLeadingAndTrailingComments(declarationSyntax.CloseBraceToken)
                     );

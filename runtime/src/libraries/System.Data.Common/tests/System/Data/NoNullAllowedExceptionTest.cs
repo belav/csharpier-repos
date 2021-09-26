@@ -42,9 +42,8 @@ namespace System.Data.Tests
             Assert.Throws<NoNullAllowedException>(
                 () =>
                 {
-                    tbl.Rows.Add(
-                        new object[] { null, "value", "value", new DateTime(0), 0.5, true }
-                    );
+                    tbl.Rows
+                        .Add(new object[] { null, "value", "value", new DateTime(0), 0.5, true });
                 }
             );
 
@@ -53,9 +52,18 @@ namespace System.Data.Tests
             Assert.Throws<NoNullAllowedException>(
                 () =>
                 {
-                    tbl.Rows.Add(
-                        new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true }
-                    );
+                    tbl.Rows
+                        .Add(
+                            new object[]
+                            {
+                                DBNull.Value,
+                                "value",
+                                "value",
+                                new DateTime(0),
+                                0.5,
+                                true
+                            }
+                        );
                 }
             );
 
@@ -127,18 +135,19 @@ namespace System.Data.Tests
             Assert.Throws<NoNullAllowedException>(
                 () =>
                 {
-                    tbl.Rows.Add(
-                        new object[]
-                        {
-                            1,
-                            "value",
-                            "value",
-                            new DateTime(0),
-                            0.5,
-                            true,
-                            DBNull.Value
-                        }
-                    );
+                    tbl.Rows
+                        .Add(
+                            new object[]
+                            {
+                                1,
+                                "value",
+                                "value",
+                                new DateTime(0),
+                                0.5,
+                                true,
+                                DBNull.Value
+                            }
+                        );
                 }
             );
 

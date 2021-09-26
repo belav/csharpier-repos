@@ -360,9 +360,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             if (!filePathToDocumentMapOpt.TryGetValue(project, out var filePathMap))
                             {
                                 filePathMap = await GetFilePathToDocumentMapAsync(
-                                        project,
-                                        cancellationToken
-                                    )
+                                    project,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                                 filePathToDocumentMapOpt[project] = filePathMap;
                             }
@@ -382,7 +382,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             );
                             var textSpan = (
                                 await tree.GetTextAsync(cancellationToken).ConfigureAwait(false)
-                            ).Lines.GetTextSpan(linePositionSpan);
+                            ).Lines
+                                .GetTextSpan(linePositionSpan);
                             location = new DiagnosticDataLocation(
                                 document.Id,
                                 textSpan,

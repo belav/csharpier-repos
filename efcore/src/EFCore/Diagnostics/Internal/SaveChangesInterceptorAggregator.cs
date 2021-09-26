@@ -75,11 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].SavingChangesAsync(
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .SavingChangesAsync(eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -94,11 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].SavedChangesAsync(
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .SavedChangesAsync(eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -112,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].SaveChangesFailedAsync(eventData, cancellationToken)
+                    await _interceptors[i]
+                        .SaveChangesFailedAsync(eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }

@@ -29,12 +29,13 @@ namespace ControllersFromServicesClassLibrary
         {
             var urlHelper = UrlHelperFactory.GetUrlHelper(ActionContext);
 
-            var content = string.Join(
-                " ",
-                urlHelper.Action(),
-                QueryService.GetValue(),
-                ActionContext.HttpContext.Request.Headers["Test-Header"]
-            );
+            var content = string
+                .Join(
+                    " ",
+                    urlHelper.Action(),
+                    QueryService.GetValue(),
+                    ActionContext.HttpContext.Request.Headers["Test-Header"]
+                );
 
             return new ContentResult { Content = content };
         }

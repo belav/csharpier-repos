@@ -255,7 +255,8 @@ namespace System.Linq.Parallel.Tests
             };
             Assert.Equal(
                 0,
-                labeled.Item.WithDegreeOfParallelism(count - 1)
+                labeled.Item
+                    .WithDegreeOfParallelism(count - 1)
                     .WithMergeOptions(options)
                     .Select(down)
                     .First()
@@ -324,9 +325,8 @@ namespace System.Linq.Parallel.Tests
         {
             _ = leftCount;
             _ = rightCount;
-            ParallelQuery<int> query = left.Item.WithExecutionMode(
-                    ParallelExecutionMode.ForceParallelism
-                )
+            ParallelQuery<int> query = left.Item
+                .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
                 .Select(
                     x =>
                     {
@@ -368,17 +368,15 @@ namespace System.Linq.Parallel.Tests
             _ = leftCount;
             _ = rightCount;
             ParallelQuery<int> query = Partitioner.Create(
-                    left.Item.WithExecutionMode(ParallelExecutionMode.ForceParallelism)
-                        .Select(
-                            x =>
-                            {
-                                if (x == 4)
-                                    throw new DeliberateTestException();
-                                return x;
-                            }
-                        )
-                        .Zip(right.Item, (a, b) => a + b)
-                )
+                left.Item.WithExecutionMode(ParallelExecutionMode.ForceParallelism).Select(
+                    x =>
+                    {
+                        if (x == 4)
+                            throw new DeliberateTestException();
+                        return x;
+                    }
+                ).Zip(right.Item, (a, b) => a + b)
+            )
                 .AsParallel();
 
             AggregateException ae = Assert.Throws<AggregateException>(() => query.ToArray());

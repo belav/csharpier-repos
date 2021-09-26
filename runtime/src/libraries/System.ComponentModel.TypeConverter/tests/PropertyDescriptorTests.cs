@@ -202,9 +202,9 @@ namespace System.ComponentModel.Tests
         public static void ReadOnlyVirtualPropertyReturnsTrue()
         {
             PropertyDescriptor property = TypeDescriptor.GetProperties(
-                    typeof(ReadOnlyPropertyTestClass),
-                    new[] { BrowsableAttribute.Yes }
-                )
+                typeof(ReadOnlyPropertyTestClass),
+                new[] { BrowsableAttribute.Yes }
+            )
                 .Find("BarReadOnlyBaseClass", true);
             Assert.True(property.IsReadOnly);
         }

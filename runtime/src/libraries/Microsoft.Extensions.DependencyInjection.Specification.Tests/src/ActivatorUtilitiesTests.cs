@@ -67,10 +67,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         )
         {
             // Arrange
-            var serviceCollection = new TestServiceCollection().AddTransient<
-                IFakeService,
-                FakeService
-            >();
+            var serviceCollection = new TestServiceCollection()
+                .AddTransient<IFakeService, FakeService>();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             var anotherClass = CreateInstance<AnotherClass>(createFunc, serviceProvider);
@@ -85,10 +83,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         )
         {
             // Arrange
-            var serviceCollection = new TestServiceCollection().AddTransient<
-                IFakeService,
-                FakeService
-            >();
+            var serviceCollection = new TestServiceCollection()
+                .AddTransient<IFakeService, FakeService>();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             // Act
@@ -169,10 +165,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         )
         {
             // Arrange
-            var serviceCollection = new TestServiceCollection().AddTransient<
-                IFakeService,
-                FakeService
-            >();
+            var serviceCollection = new TestServiceCollection()
+                .AddTransient<IFakeService, FakeService>();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             // Act
@@ -227,10 +221,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var expectedMessage =
                 $"A suitable constructor for type '{typeof(AnotherClassAcceptingData).FullName}' could not be located. "
                 + "Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
-            var serviceCollection = new TestServiceCollection().AddTransient<
-                IFakeService,
-                FakeService
-            >();
+            var serviceCollection = new TestServiceCollection()
+                .AddTransient<IFakeService, FakeService>();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             var ex1 = Assert.Throws<InvalidOperationException>(
@@ -387,10 +379,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             {
                 CreationCountFakeService.InstanceCount = 0;
 
-                var serviceCollection = new TestServiceCollection().AddTransient<
-                    IFakeService,
-                    FakeService
-                >().AddTransient<CreationCountFakeService>();
+                var serviceCollection = new TestServiceCollection()
+                    .AddTransient<IFakeService, FakeService>()
+                    .AddTransient<CreationCountFakeService>();
 
                 var serviceProvider = CreateServiceProvider(serviceCollection);
 
@@ -420,10 +411,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 // Reset the count because test order is not guaranteed
                 CreationCountFakeService.InstanceCount = 0;
 
-                var serviceCollection = new TestServiceCollection().AddTransient<
-                    IFakeService,
-                    FakeService
-                >().AddSingleton<CreationCountFakeService>();
+                var serviceCollection = new TestServiceCollection()
+                    .AddTransient<IFakeService, FakeService>()
+                    .AddSingleton<CreationCountFakeService>();
                 var serviceProvider = CreateServiceProvider(serviceCollection);
 
                 // Act and Assert
@@ -453,10 +443,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 // Reset the count because test order is not guaranteed
                 CreationCountFakeService.InstanceCount = 0;
 
-                var serviceCollection = new TestServiceCollection().AddTransient<
-                    IFakeService,
-                    FakeService
-                >();
+                var serviceCollection = new TestServiceCollection()
+                    .AddTransient<IFakeService, FakeService>();
                 var serviceProvider = CreateServiceProvider(serviceCollection);
 
                 // Act and Assert
@@ -484,8 +472,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             CreateInstanceFunc createFunc
         )
         {
-            var serviceCollection =
-                new TestServiceCollection().AddSingleton<CreationCountFakeService>();
+            var serviceCollection = new TestServiceCollection()
+                .AddSingleton<CreationCountFakeService>();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             var ex = Assert.Throws<InvalidOperationException>(

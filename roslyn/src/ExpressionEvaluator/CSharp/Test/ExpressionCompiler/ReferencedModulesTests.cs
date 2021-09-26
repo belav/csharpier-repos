@@ -112,13 +112,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 context = CreateMethodContext(
                     new AppDomain(),
                     ImmutableArray.Create(
-                            moduleMscorlib,
-                            moduleA1,
-                            moduleA2,
-                            moduleB1,
-                            moduleB2,
-                            moduleC
-                        )
+                        moduleMscorlib,
+                        moduleA1,
+                        moduleA2,
+                        moduleB1,
+                        moduleB2,
+                        moduleC
+                    )
                         .SelectAsArray(m => m.MetadataBlock),
                     stateB2
                 );
@@ -139,14 +139,14 @@ IL_0005:  ret
                 context = CreateMethodContext(
                     new AppDomain(),
                     ImmutableArray.Create(
-                            moduleC,
-                            moduleB2,
-                            moduleB1,
-                            moduleA2,
-                            moduleA1,
-                            moduleMscorlib,
-                            moduleIntrinsic
-                        )
+                        moduleC,
+                        moduleB2,
+                        moduleB1,
+                        moduleA2,
+                        moduleA1,
+                        moduleMscorlib,
+                        moduleIntrinsic
+                    )
                         .SelectAsArray(m => m.MetadataBlock),
                     stateB2
                 );
@@ -168,13 +168,13 @@ IL_0005:  ret
                 context = CreateMethodContext(
                     new AppDomain(),
                     ImmutableArray.Create(
-                            moduleMscorlib,
-                            moduleA1,
-                            moduleA2,
-                            moduleB1,
-                            moduleB2,
-                            moduleC
-                        )
+                        moduleMscorlib,
+                        moduleA1,
+                        moduleA2,
+                        moduleB1,
+                        moduleB2,
+                        moduleC
+                    )
                         .SelectAsArray(m => m.MetadataBlock),
                     stateA1
                 );
@@ -196,13 +196,13 @@ IL_0005:  ret
                 context = CreateMethodContext(
                     new AppDomain(),
                     ImmutableArray.Create(
-                            moduleMscorlib,
-                            moduleA1,
-                            moduleA2,
-                            moduleB1,
-                            moduleB2,
-                            moduleC
-                        )
+                        moduleMscorlib,
+                        moduleA1,
+                        moduleA2,
+                        moduleB1,
+                        moduleB2,
+                        moduleC
+                    )
                         .SelectAsArray(m => m.MetadataBlock),
                     stateB1
                 );
@@ -224,13 +224,13 @@ IL_0005:  ret
                 context = CreateMethodContext(
                     new AppDomain(),
                     ImmutableArray.Create(
-                            moduleMscorlib,
-                            moduleA1,
-                            moduleA2,
-                            moduleB1,
-                            moduleB2,
-                            moduleC
-                        )
+                        moduleMscorlib,
+                        moduleA1,
+                        moduleA2,
+                        moduleB1,
+                        moduleB2,
+                        moduleC
+                    )
                         .SelectAsArray(m => m.MetadataBlock),
                     stateC
                 );
@@ -255,13 +255,13 @@ IL_0005:  ret
                 // Other EvaluationContext.CreateMethodContext overload.
                 // A1.M with all assemblies.
                 var allBlocks = ImmutableArray.Create(
-                        moduleMscorlib,
-                        moduleA1,
-                        moduleA2,
-                        moduleB1,
-                        moduleB2,
-                        moduleC
-                    )
+                    moduleMscorlib,
+                    moduleA1,
+                    moduleA2,
+                    moduleB1,
+                    moduleB2,
+                    moduleC
+                )
                     .SelectAsArray(m => m.MetadataBlock);
                 context = EvaluationContext.CreateMethodContext(
                     allBlocks,
@@ -611,13 +611,13 @@ IL_0005:  ret
                 context = CreateMethodContext(
                     new AppDomain(),
                     ImmutableArray.Create(
-                            moduleMscorlib,
-                            moduleA3,
-                            moduleA1,
-                            moduleA3,
-                            moduleA1,
-                            moduleB1
-                        )
+                        moduleMscorlib,
+                        moduleA3,
+                        moduleA1,
+                        moduleA3,
+                        moduleA1,
+                        moduleB1
+                    )
                         .SelectAsArray(m => m.MetadataBlock),
                     stateB
                 );
@@ -1678,13 +1678,15 @@ class B : A
 
                     Assert.Equal(
                         identityAS2,
-                        context.Compilation.GlobalNamespace.GetMembers("A")
+                        context.Compilation.GlobalNamespace
+                            .GetMembers("A")
                             .OfType<NamedTypeSymbol>()
                             .Single().ContainingAssembly.Identity
                     );
                     Assert.Equal(
                         identityBS2,
-                        context.Compilation.GlobalNamespace.GetMembers("B")
+                        context.Compilation.GlobalNamespace
+                            .GetMembers("B")
                             .OfType<NamedTypeSymbol>()
                             .Single().ContainingAssembly.Identity
                     );
@@ -1737,9 +1739,8 @@ IL_0005:  ret
 }"
                     );
                     Assert.Equal(
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnType.ContainingAssembly.ToDisplayString(),
+                        ((MethodSymbol)methodData.Method).ReturnType.ContainingAssembly
+                            .ToDisplayString(),
                         identityBS2.GetDisplayName()
                     );
                     // B.F should result in missing assembly AS2 since there were no direct references to AS2.
@@ -1816,9 +1817,8 @@ IL_0005:  ret
 }"
                     );
                     Assert.Equal(
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnType.ContainingAssembly.ToDisplayString(),
+                        ((MethodSymbol)methodData.Method).ReturnType.ContainingAssembly
+                            .ToDisplayString(),
                         identityBS2.GetDisplayName()
                     );
                     // B.F should result in missing assembly AS2 since there were no direct references to AS2.
@@ -2030,19 +2030,21 @@ public class B
             IEnumerable<string> CS0433Messages(string type)
             {
                 yield return "error CS0433: "
-                    + string.Format(
-                        CSharpResources.ERR_SameFullNameAggAgg,
-                        compilationA.Assembly.Identity,
-                        type,
-                        compilationB.Assembly.Identity
-                    );
+                    + string
+                        .Format(
+                            CSharpResources.ERR_SameFullNameAggAgg,
+                            compilationA.Assembly.Identity,
+                            type,
+                            compilationB.Assembly.Identity
+                        );
                 yield return "error CS0433: "
-                    + string.Format(
-                        CSharpResources.ERR_SameFullNameAggAgg,
-                        compilationB.Assembly.Identity,
-                        type,
-                        compilationA.Assembly.Identity
-                    );
+                    + string
+                        .Format(
+                            CSharpResources.ERR_SameFullNameAggAgg,
+                            compilationB.Assembly.Identity,
+                            type,
+                            compilationA.Assembly.Identity
+                        );
             }
             Assert.Contains(errorMessage, CS0433Messages("C1"));
 
@@ -2233,24 +2235,24 @@ class C
 {
 }";
             var moduleA = CreateEmptyCompilation(
-                    sourceA,
-                    references: new[] { SystemRuntimePP7Ref },
-                    options: TestOptions.DebugDll
-                )
+                sourceA,
+                references: new[] { SystemRuntimePP7Ref },
+                options: TestOptions.DebugDll
+            )
                 .ToModuleInstance();
 
             var moduleB = CreateEmptyCompilation(
-                    sourceB,
-                    references: new[] { SystemRuntimePP7Ref, moduleA.GetReference() },
-                    options: TestOptions.DebugDll
-                )
+                sourceB,
+                references: new[] { SystemRuntimePP7Ref, moduleA.GetReference() },
+                options: TestOptions.DebugDll
+            )
                 .ToModuleInstance();
 
             // Include an empty assembly to verify that not all assemblies
             // with no references are treated as mscorlib.
             var referenceC = AssemblyMetadata.CreateFromImage(
-                    TestResources.ExpressionCompiler.Empty
-                )
+                TestResources.ExpressionCompiler.Empty
+            )
                 .GetReference();
 
             // At runtime System.Runtime.dll contract assembly is replaced
@@ -2458,9 +2460,8 @@ IL_0005:  ret
 }"
                     );
                     Assert.Equal(
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnType.ContainingAssembly.ToDisplayString(),
+                        ((MethodSymbol)methodData.Method).ReturnType.ContainingAssembly
+                            .ToDisplayString(),
                         identityObjectModel.GetDisplayName()
                     );
                 }
@@ -2628,9 +2629,8 @@ namespace System
                 references: new[] { MscorlibRef, refLib }
             );
             compCorLib.VerifyDiagnostics();
-            var objectType = compCorLib.SourceAssembly.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "System.Object"
-            );
+            var objectType = compCorLib.SourceAssembly.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("System.Object");
             Assert.NotNull(objectType.BaseType());
 
             ImmutableArray<byte> peBytes;
@@ -2663,7 +2663,8 @@ namespace System
                 // Verify the PEModule has no assembly references.
                 Assert.Equal(0, module.Module.ReferencedAssemblies.Length);
                 // Verify the underlying metadata has the expected assembly references.
-                var actualReferences = metadataReader.AssemblyReferences.Select(
+                var actualReferences = metadataReader.AssemblyReferences
+                    .Select(
                         r => metadataReader.GetString(metadataReader.GetAssemblyReference(r).Name)
                     )
                     .ToImmutableArray();
@@ -2696,15 +2697,14 @@ namespace System
                     var testData = new CompilationTestData();
                     context.CompileExpression("new object()", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  newobj     ""object..ctor()""
   IL_0005:  ret
 }"
-                        );
+                    );
 
                     // Invalid expression: System.Int32 is not defined in corlib above.
                     testData = new CompilationTestData();
@@ -2773,9 +2773,8 @@ namespace System
                 options: options
             );
             compCorLib.VerifyDiagnostics();
-            var objectType = compCorLib.SourceAssembly.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "System.Object"
-            );
+            var objectType = compCorLib.SourceAssembly.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("System.Object");
             Assert.NotNull(objectType.BaseType());
 
             var pdbPath = Temp.CreateDirectory().Path;
@@ -2811,7 +2810,8 @@ namespace System
                 // Verify the PEModule has no assembly references.
                 Assert.Equal(0, module.Module.ReferencedAssemblies.Length);
                 // Verify the underlying metadata has the expected assembly references.
-                var actualReferences = metadataReader.AssemblyReferences.Select(
+                var actualReferences = metadataReader.AssemblyReferences
+                    .Select(
                         r => metadataReader.GetString(metadataReader.GetAssemblyReference(r).Name)
                     )
                     .ToImmutableArray();
@@ -2872,9 +2872,8 @@ namespace System
                 var testData = new CompilationTestData();
                 context.CompileExpression("1.GetType()", out error, testData);
                 Assert.Null(error);
-                testData.GetMethodData("<>x.<>m0")
-                    .VerifyIL(
-                        @"{
+                testData.GetMethodData("<>x.<>m0").VerifyIL(
+                    @"{
   // Code size       12 (0xc)
   .maxstack  1
   IL_0000:  ldc.i4.1
@@ -2882,7 +2881,7 @@ namespace System
   IL_0006:  call       ""System.Type object.GetType()""
   IL_000b:  ret
 }"
-                    );
+                );
             }
         }
 

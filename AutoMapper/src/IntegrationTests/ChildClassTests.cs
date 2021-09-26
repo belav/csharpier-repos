@@ -59,14 +59,15 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             protected override void Seed(TestContext testContext)
             {
-                testContext.Bases.Add(
-                    new Base()
-                    {
-                        BaseID = 1,
-                        Base1 = "base1",
-                        Sub = new Sub() { BaseId = 1, Sub1 = "sub1" }
-                    }
-                );
+                testContext.Bases
+                    .Add(
+                        new Base()
+                        {
+                            BaseID = 1,
+                            Base1 = "base1",
+                            Sub = new Sub() { BaseId = 1, Sub1 = "sub1" }
+                        }
+                    );
 
                 base.Seed(testContext);
             }
@@ -96,7 +97,8 @@ namespace AutoMapper.IntegrationTests.Net4
 
                 using (var context = new TestContext())
                 {
-                    var baseDTO = context.Bases.Select(
+                    var baseDTO = context.Bases
+                        .Select(
                             b =>
                                 new BaseDTO
                                 {
@@ -118,9 +120,8 @@ namespace AutoMapper.IntegrationTests.Net4
             }
             [Fact]
             public void MapShouldThrow() =>
-                new Action(
-                    () => Mapper.Map<SubDTO>(new Sub())
-                ).ShouldThrow<AutoMapperConfigurationException>()
+                new Action(() => Mapper.Map<SubDTO>(new Sub()))
+                    .ShouldThrow<AutoMapperConfigurationException>()
                     .Message.ShouldBe("CreateProjection works with ProjectTo, not with Map.");
         }
     }

@@ -94,19 +94,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             return x.ColumnMappings.Zip(
-                    y.ColumnMappings,
-                    (xc, yc) =>
-                    {
-                        var columnResult = StringComparer.Ordinal.Compare(
-                            xc.Property.Name,
-                            yc.Property.Name
-                        );
-                        return columnResult != 0
-                          ? columnResult
-                          : StringComparer.Ordinal.Compare(xc.Column.Name, yc.Column.Name);
-                    }
-                )
-                .FirstOrDefault(r => r != 0);
+                y.ColumnMappings,
+                (xc, yc) =>
+                {
+                    var columnResult = StringComparer.Ordinal
+                        .Compare(xc.Property.Name, yc.Property.Name);
+                    return columnResult != 0
+                      ? columnResult
+                      : StringComparer.Ordinal.Compare(xc.Column.Name, yc.Column.Name);
+                }
+            ).FirstOrDefault(r => r != 0);
         }
 
         /// <summary>

@@ -64,12 +64,8 @@ namespace System.Linq.Parallel
 
         void IMergeHelper<TInputOutput>.Execute()
         {
-            OrderPreservingSpoolingTask<TInputOutput, TKey>.Spool(
-                _taskGroupState,
-                _partitions,
-                _results,
-                _taskScheduler
-            );
+            OrderPreservingSpoolingTask<TInputOutput, TKey>
+                .Spool(_taskGroupState, _partitions, _results, _taskScheduler);
         }
 
         //-----------------------------------------------------------------------------------

@@ -188,19 +188,16 @@ CommonKey3:CommonKey4=IniValue6";
             var provider = new NotVeryGoodFileProvider();
             var error = Assert.Throws<FileNotFoundException>(
                 () =>
-                    new ConfigurationBuilder().AddIniFile(
-                            provider,
-                            "missing.ini",
-                            optional: false,
-                            reloadOnChange: false
-                        )
+                    new ConfigurationBuilder()
+                        .AddIniFile(provider, "missing.ini", optional: false, reloadOnChange: false)
                         .Build()
             );
             Assert.False(error.Message.Contains(_basePath), error.Message);
 
             error = Assert.Throws<FileNotFoundException>(
                 () =>
-                    new ConfigurationBuilder().AddJsonFile(
+                    new ConfigurationBuilder()
+                        .AddJsonFile(
                             provider,
                             "missing.json",
                             optional: false,
@@ -212,12 +209,8 @@ CommonKey3:CommonKey4=IniValue6";
 
             error = Assert.Throws<FileNotFoundException>(
                 () =>
-                    new ConfigurationBuilder().AddXmlFile(
-                            provider,
-                            "missing.xml",
-                            optional: false,
-                            reloadOnChange: false
-                        )
+                    new ConfigurationBuilder()
+                        .AddXmlFile(provider, "missing.xml", optional: false, reloadOnChange: false)
                         .Build()
             );
             Assert.False(error.Message.Contains(_basePath), error.Message);
@@ -229,19 +222,16 @@ CommonKey3:CommonKey4=IniValue6";
             var provider = new AlwaysMissingFileProvider();
             var error = Assert.Throws<FileNotFoundException>(
                 () =>
-                    new ConfigurationBuilder().AddIniFile(
-                            provider,
-                            "missing.ini",
-                            optional: false,
-                            reloadOnChange: false
-                        )
+                    new ConfigurationBuilder()
+                        .AddIniFile(provider, "missing.ini", optional: false, reloadOnChange: false)
                         .Build()
             );
             Assert.False(error.Message.Contains(_basePath), error.Message);
 
             error = Assert.Throws<FileNotFoundException>(
                 () =>
-                    new ConfigurationBuilder().AddJsonFile(
+                    new ConfigurationBuilder()
+                        .AddJsonFile(
                             provider,
                             "missing.json",
                             optional: false,
@@ -253,12 +243,8 @@ CommonKey3:CommonKey4=IniValue6";
 
             error = Assert.Throws<FileNotFoundException>(
                 () =>
-                    new ConfigurationBuilder().AddXmlFile(
-                            provider,
-                            "missing.xml",
-                            optional: false,
-                            reloadOnChange: false
-                        )
+                    new ConfigurationBuilder()
+                        .AddXmlFile(provider, "missing.xml", optional: false, reloadOnChange: false)
                         .Build()
             );
             Assert.False(error.Message.Contains(_basePath), error.Message);
@@ -455,7 +441,8 @@ CommonKey3:CommonKey4=IniValue6";
 
             try
             {
-                new ConfigurationBuilder().AddJsonFile("error.json")
+                new ConfigurationBuilder()
+                    .AddJsonFile("error.json")
                     .SetFileLoadExceptionHandler(jsonLoadError)
                     .Build();
             }
@@ -556,15 +543,13 @@ IniKey1=IniValue2"
                 c.Ignore = true;
             };
 
-            CreateBuilder()
-                .AddJsonFile(
-                    s =>
-                    {
-                        s.Path = "error.json";
-                        s.OnLoadException = jsonLoadError;
-                    }
-                )
-                .Build();
+            CreateBuilder().AddJsonFile(
+                s =>
+                {
+                    s.Path = "error.json";
+                    s.OnLoadException = jsonLoadError;
+                }
+            ).Build();
 
             Assert.NotNull(provider);
         }
@@ -592,9 +577,8 @@ IniKey1=IniValue2"
             {
                 Assert.Equal(
                     "NewValue",
-                    (provider as FileConfigurationProvider).Get(
-                        "CommonKey1:CommonKey2:CommonKey3:CommonKey4"
-                    )
+                    (provider as FileConfigurationProvider)
+                        .Get("CommonKey1:CommonKey2:CommonKey3:CommonKey4")
                 );
             }
 
@@ -611,9 +595,8 @@ IniKey1=IniValue2"
             {
                 Assert.Equal(
                     "NewValue",
-                    (provider as FileConfigurationProvider).Get(
-                        "CommonKey1:CommonKey2:CommonKey3:CommonKey4"
-                    )
+                    (provider as FileConfigurationProvider)
+                        .Get("CommonKey1:CommonKey2:CommonKey3:CommonKey4")
                 );
             }
 
@@ -708,11 +691,8 @@ IniKey1=IniValue2"
             var jsonRootRelativeFile = Path.Combine(directory, Path.GetRandomFileName());
             var jsonAbsoluteFile = Path.Combine(_fileSystem.RootPath, jsonRootRelativeFile);
 
-            var config = new ConfigurationBuilder().AddJsonFile(
-                    jsonAbsoluteFile,
-                    optional: true,
-                    reloadOnChange: true
-                )
+            var config = new ConfigurationBuilder()
+                .AddJsonFile(jsonAbsoluteFile, optional: true, reloadOnChange: true)
                 .Build();
 
             Assert.Null(config["JsonKey1"]);

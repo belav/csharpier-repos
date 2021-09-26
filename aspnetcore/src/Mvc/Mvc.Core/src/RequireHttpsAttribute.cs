@@ -77,9 +77,8 @@ namespace Microsoft.AspNetCore.Mvc
             }
             else
             {
-                var optionsAccessor = filterContext.HttpContext.RequestServices.GetRequiredService<
-                    IOptions<MvcOptions>
-                >();
+                var optionsAccessor = filterContext.HttpContext.RequestServices
+                    .GetRequiredService<IOptions<MvcOptions>>();
 
                 var request = filterContext.HttpContext.Request;
 
@@ -97,13 +96,14 @@ namespace Microsoft.AspNetCore.Mvc
 
                 var permanentValue = _permanent ?? optionsAccessor.Value.RequireHttpsPermanent;
 
-                var newUrl = string.Concat(
-                    "https://",
-                    host.ToUriComponent(),
-                    request.PathBase.ToUriComponent(),
-                    request.Path.ToUriComponent(),
-                    request.QueryString.ToUriComponent()
-                );
+                var newUrl = string
+                    .Concat(
+                        "https://",
+                        host.ToUriComponent(),
+                        request.PathBase.ToUriComponent(),
+                        request.Path.ToUriComponent(),
+                        request.QueryString.ToUriComponent()
+                    );
 
                 // redirect to HTTPS version of page
                 filterContext.Result = new RedirectResult(newUrl, permanentValue);

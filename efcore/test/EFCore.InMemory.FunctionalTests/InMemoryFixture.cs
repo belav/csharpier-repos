@@ -34,9 +34,8 @@ namespace Microsoft.EntityFrameworkCore
         public static ServiceProvider BuildServiceProvider(
             IServiceCollection providerServices = null
         ) =>
-            InMemoryTestStoreFactory.Instance.AddProviderServices(
-                    providerServices ?? new ServiceCollection()
-                )
+            InMemoryTestStoreFactory.Instance
+                .AddProviderServices(providerServices ?? new ServiceCollection())
                 .BuildServiceProvider();
     }
 }

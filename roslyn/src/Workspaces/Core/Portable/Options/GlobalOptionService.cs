@@ -185,10 +185,10 @@ namespace Microsoft.CodeAnalysis.Options
             )
             {
                 return await optionSerializerProviders.SelectAsArrayAsync(
-                        static (lazyProvider, cancellationToken) =>
-                            lazyProvider.Value.GetOrCreatePersisterAsync(cancellationToken),
-                        cancellationToken
-                    )
+                    static (lazyProvider, cancellationToken) =>
+                        lazyProvider.Value.GetOrCreatePersisterAsync(cancellationToken),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -281,10 +281,8 @@ namespace Microsoft.CodeAnalysis.Options
                             continue;
 
                         if (
-                            !AnalyzerConfigOptions.KeyComparer.Equals(
-                                key,
-                                editorConfigStorage.KeyName
-                            )
+                            !AnalyzerConfigOptions.KeyComparer
+                                .Equals(key, editorConfigStorage.KeyName)
                         )
                             continue;
 
@@ -344,10 +342,10 @@ namespace Microsoft.CodeAnalysis.Options
                 languages
             );
             var changedOptionsKeysSerializable = _changedOptionKeys.Where(
-                    key =>
-                        serializableOptions.Contains(key.Option)
-                        && (!key.Option.IsPerLanguage || languages.Contains(key.Language!))
-                )
+                key =>
+                    serializableOptions.Contains(key.Option)
+                    && (!key.Option.IsPerLanguage || languages.Contains(key.Language!))
+            )
                 .ToImmutableHashSet();
             return new SerializableOptionSet(
                 languages,

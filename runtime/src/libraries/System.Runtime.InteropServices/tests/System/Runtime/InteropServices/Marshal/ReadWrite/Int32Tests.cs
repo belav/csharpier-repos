@@ -72,16 +72,16 @@ namespace System.Runtime.InteropServices.Tests
         public void WriteInt32_StructWithReferenceTypes_ReturnsExpected()
         {
             int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
-                    nameof(StructWithReferenceTypes.pointerValue)
-                )
+                nameof(StructWithReferenceTypes.pointerValue)
+            )
                 .ToInt32();
             int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
-                    nameof(StructWithReferenceTypes.stringValue)
-                )
+                nameof(StructWithReferenceTypes.stringValue)
+            )
                 .ToInt32();
             int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
-                    nameof(StructWithReferenceTypes.byValueArray)
-                )
+                nameof(StructWithReferenceTypes.byValueArray)
+            )
                 .ToInt32();
 
             object structure = new StructWithReferenceTypes
@@ -129,16 +129,16 @@ namespace System.Runtime.InteropServices.Tests
         public void ReadInt32_StructWithReferenceTypes_ReturnsExpected()
         {
             int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
-                    nameof(StructWithReferenceTypes.pointerValue)
-                )
+                nameof(StructWithReferenceTypes.pointerValue)
+            )
                 .ToInt32();
             int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
-                    nameof(StructWithReferenceTypes.stringValue)
-                )
+                nameof(StructWithReferenceTypes.stringValue)
+            )
                 .ToInt32();
             int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
-                    nameof(StructWithReferenceTypes.byValueArray)
-                )
+                nameof(StructWithReferenceTypes.byValueArray)
+            )
                 .ToInt32();
 
             object structure = new StructWithReferenceTypes

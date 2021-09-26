@@ -605,14 +605,15 @@ namespace System.Threading.Tasks
         public Task<TResult> StartNew<TResult>(Func<TResult> function)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                m_defaultCancellationToken,
-                m_defaultCreationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    m_defaultCancellationToken,
+                    m_defaultCreationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -644,14 +645,15 @@ namespace System.Threading.Tasks
         )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                cancellationToken,
-                m_defaultCreationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    cancellationToken,
+                    m_defaultCreationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -685,14 +687,15 @@ namespace System.Threading.Tasks
         )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                m_defaultCancellationToken,
-                creationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    m_defaultCancellationToken,
+                    creationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -738,14 +741,15 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler
         )
         {
-            return Task<TResult>.StartNew(
-                Task.InternalCurrentIfAttached(creationOptions),
-                function,
-                cancellationToken,
-                creationOptions,
-                InternalTaskOptions.None,
-                scheduler
-            );
+            return Task<TResult>
+                .StartNew(
+                    Task.InternalCurrentIfAttached(creationOptions),
+                    function,
+                    cancellationToken,
+                    creationOptions,
+                    InternalTaskOptions.None,
+                    scheduler
+                );
         }
 
         /// <summary>
@@ -772,15 +776,16 @@ namespace System.Threading.Tasks
         public Task<TResult> StartNew<TResult>(Func<object?, TResult> function, object? state)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                state,
-                m_defaultCancellationToken,
-                m_defaultCreationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    state,
+                    m_defaultCancellationToken,
+                    m_defaultCreationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -815,15 +820,16 @@ namespace System.Threading.Tasks
         )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                state,
-                cancellationToken,
-                m_defaultCreationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    state,
+                    cancellationToken,
+                    m_defaultCreationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -860,15 +866,16 @@ namespace System.Threading.Tasks
         )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                state,
-                m_defaultCancellationToken,
-                creationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    state,
+                    m_defaultCancellationToken,
+                    creationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -917,15 +924,16 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler
         )
         {
-            return Task<TResult>.StartNew(
-                Task.InternalCurrentIfAttached(creationOptions),
-                function,
-                state,
-                cancellationToken,
-                creationOptions,
-                InternalTaskOptions.None,
-                scheduler
-            );
+            return Task<TResult>
+                .StartNew(
+                    Task.InternalCurrentIfAttached(creationOptions),
+                    function,
+                    state,
+                    cancellationToken,
+                    creationOptions,
+                    InternalTaskOptions.None,
+                    scheduler
+                );
         }
 
         //
@@ -1009,13 +1017,8 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler
         )
         {
-            return TaskFactory<VoidTaskResult>.FromAsyncImpl(
-                asyncResult,
-                null,
-                endMethod,
-                creationOptions,
-                scheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .FromAsyncImpl(asyncResult, null, endMethod, creationOptions, scheduler);
         }
 
         /// <summary>
@@ -1073,13 +1076,8 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions
         )
         {
-            return TaskFactory<VoidTaskResult>.FromAsyncImpl(
-                beginMethod,
-                null,
-                endMethod,
-                state,
-                creationOptions
-            );
+            return TaskFactory<VoidTaskResult>
+                .FromAsyncImpl(beginMethod, null, endMethod, state, creationOptions);
         }
 
         /// <summary>
@@ -1149,14 +1147,8 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions
         )
         {
-            return TaskFactory<VoidTaskResult>.FromAsyncImpl(
-                beginMethod,
-                null,
-                endMethod,
-                arg1,
-                state,
-                creationOptions
-            );
+            return TaskFactory<VoidTaskResult>
+                .FromAsyncImpl(beginMethod, null, endMethod, arg1, state, creationOptions);
         }
 
         /// <summary>
@@ -1236,15 +1228,8 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions
         )
         {
-            return TaskFactory<VoidTaskResult>.FromAsyncImpl(
-                beginMethod,
-                null,
-                endMethod,
-                arg1,
-                arg2,
-                state,
-                creationOptions
-            );
+            return TaskFactory<VoidTaskResult>
+                .FromAsyncImpl(beginMethod, null, endMethod, arg1, arg2, state, creationOptions);
         }
 
         /// <summary>
@@ -1342,16 +1327,17 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions
         )
         {
-            return TaskFactory<VoidTaskResult>.FromAsyncImpl<TArg1, TArg2, TArg3>(
-                beginMethod,
-                null,
-                endMethod,
-                arg1,
-                arg2,
-                arg3,
-                state,
-                creationOptions
-            );
+            return TaskFactory<VoidTaskResult>
+                .FromAsyncImpl<TArg1, TArg2, TArg3>(
+                    beginMethod,
+                    null,
+                    endMethod,
+                    arg1,
+                    arg2,
+                    arg3,
+                    state,
+                    creationOptions
+                );
         }
 
         //
@@ -1380,13 +1366,14 @@ namespace System.Threading.Tasks
             Func<IAsyncResult, TResult> endMethod
         )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(
-                asyncResult,
-                endMethod,
-                null,
-                m_defaultCreationOptions,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .FromAsyncImpl(
+                    asyncResult,
+                    endMethod,
+                    null,
+                    m_defaultCreationOptions,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -1417,13 +1404,8 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions
         )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(
-                asyncResult,
-                endMethod,
-                null,
-                creationOptions,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .FromAsyncImpl(asyncResult, endMethod, null, creationOptions, DefaultScheduler);
         }
 
         /// <summary>
@@ -1459,13 +1441,8 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler
         )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(
-                asyncResult,
-                endMethod,
-                null,
-                creationOptions,
-                scheduler
-            );
+            return TaskFactory<TResult>
+                .FromAsyncImpl(asyncResult, endMethod, null, creationOptions, scheduler);
         }
 
         /// <summary>
@@ -1494,13 +1471,8 @@ namespace System.Threading.Tasks
             object? state
         )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(
-                beginMethod,
-                endMethod,
-                null,
-                state,
-                m_defaultCreationOptions
-            );
+            return TaskFactory<TResult>
+                .FromAsyncImpl(beginMethod, endMethod, null, state, m_defaultCreationOptions);
         }
 
         /// <summary>
@@ -1535,13 +1507,8 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions
         )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(
-                beginMethod,
-                endMethod,
-                null,
-                state,
-                creationOptions
-            );
+            return TaskFactory<TResult>
+                .FromAsyncImpl(beginMethod, endMethod, null, state, creationOptions);
         }
 
         /// <summary>
@@ -1575,14 +1542,8 @@ namespace System.Threading.Tasks
             object? state
         )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(
-                beginMethod,
-                endMethod,
-                null,
-                arg1,
-                state,
-                m_defaultCreationOptions
-            );
+            return TaskFactory<TResult>
+                .FromAsyncImpl(beginMethod, endMethod, null, arg1, state, m_defaultCreationOptions);
         }
 
         /// <summary>
@@ -1622,14 +1583,8 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions
         )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(
-                beginMethod,
-                endMethod,
-                null,
-                arg1,
-                state,
-                creationOptions
-            );
+            return TaskFactory<TResult>
+                .FromAsyncImpl(beginMethod, endMethod, null, arg1, state, creationOptions);
         }
 
         /// <summary>
@@ -1668,15 +1623,16 @@ namespace System.Threading.Tasks
             object? state
         )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(
-                beginMethod,
-                endMethod,
-                null,
-                arg1,
-                arg2,
-                state,
-                m_defaultCreationOptions
-            );
+            return TaskFactory<TResult>
+                .FromAsyncImpl(
+                    beginMethod,
+                    endMethod,
+                    null,
+                    arg1,
+                    arg2,
+                    state,
+                    m_defaultCreationOptions
+                );
         }
 
         /// <summary>
@@ -1721,15 +1677,8 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions
         )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(
-                beginMethod,
-                endMethod,
-                null,
-                arg1,
-                arg2,
-                state,
-                creationOptions
-            );
+            return TaskFactory<TResult>
+                .FromAsyncImpl(beginMethod, endMethod, null, arg1, arg2, state, creationOptions);
         }
 
         /// <summary>
@@ -1773,16 +1722,17 @@ namespace System.Threading.Tasks
             object? state
         )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(
-                beginMethod,
-                endMethod,
-                null,
-                arg1,
-                arg2,
-                arg3,
-                state,
-                m_defaultCreationOptions
-            );
+            return TaskFactory<TResult>
+                .FromAsyncImpl(
+                    beginMethod,
+                    endMethod,
+                    null,
+                    arg1,
+                    arg2,
+                    arg3,
+                    state,
+                    m_defaultCreationOptions
+                );
         }
 
         /// <summary>
@@ -1832,16 +1782,17 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions
         )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(
-                beginMethod,
-                endMethod,
-                null,
-                arg1,
-                arg2,
-                arg3,
-                state,
-                creationOptions
-            );
+            return TaskFactory<TResult>
+                .FromAsyncImpl(
+                    beginMethod,
+                    endMethod,
+                    null,
+                    arg1,
+                    arg2,
+                    arg3,
+                    state,
+                    creationOptions
+                );
         }
 
         /// <summary>
@@ -1919,11 +1870,8 @@ namespace System.Threading.Tasks
                 _count = tasksCopy.Length;
 
                 if (TplEventSource.Log.IsEnabled())
-                    TplEventSource.Log.TraceOperationBegin(
-                        this.Id,
-                        "TaskFactory.ContinueWhenAll",
-                        0
-                    );
+                    TplEventSource.Log
+                        .TraceOperationBegin(this.Id, "TaskFactory.ContinueWhenAll", 0);
 
                 if (Task.s_asyncDebuggingEnabled)
                     AddToActiveTasks(this);
@@ -1939,10 +1887,8 @@ namespace System.Threading.Tasks
                 if (Interlocked.Decrement(ref _count) == 0)
                 {
                     if (TplEventSource.Log.IsEnabled())
-                        TplEventSource.Log.TraceOperationEnd(
-                            this.Id,
-                            AsyncCausalityStatus.Completed
-                        );
+                        TplEventSource.Log
+                            .TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
 
                     if (Task.s_asyncDebuggingEnabled)
                         RemoveFromActiveTasks(this);
@@ -2001,11 +1947,8 @@ namespace System.Threading.Tasks
                 _count = tasksCopy.Length;
 
                 if (TplEventSource.Log.IsEnabled())
-                    TplEventSource.Log.TraceOperationBegin(
-                        this.Id,
-                        "TaskFactory.ContinueWhenAll<>",
-                        0
-                    );
+                    TplEventSource.Log
+                        .TraceOperationBegin(this.Id, "TaskFactory.ContinueWhenAll<>", 0);
 
                 if (Task.s_asyncDebuggingEnabled)
                     AddToActiveTasks(this);
@@ -2021,10 +1964,8 @@ namespace System.Threading.Tasks
                 if (Interlocked.Decrement(ref _count) == 0)
                 {
                     if (TplEventSource.Log.IsEnabled())
-                        TplEventSource.Log.TraceOperationEnd(
-                            this.Id,
-                            AsyncCausalityStatus.Completed
-                        );
+                        TplEventSource.Log
+                            .TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
 
                     if (Task.s_asyncDebuggingEnabled)
                         RemoveFromActiveTasks(this);
@@ -2083,14 +2024,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
-                tasks,
-                null,
-                continuationAction,
-                m_defaultContinuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAllImpl(
+                    tasks,
+                    null,
+                    continuationAction,
+                    m_defaultContinuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2123,14 +2065,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
-                tasks,
-                null,
-                continuationAction,
-                m_defaultContinuationOptions,
-                cancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAllImpl(
+                    tasks,
+                    null,
+                    continuationAction,
+                    m_defaultContinuationOptions,
+                    cancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2169,14 +2112,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
-                tasks,
-                null,
-                continuationAction,
-                continuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAllImpl(
+                    tasks,
+                    null,
+                    continuationAction,
+                    continuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2227,14 +2171,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
-                tasks,
-                null,
-                continuationAction,
-                continuationOptions,
-                cancellationToken,
-                scheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAllImpl(
+                    tasks,
+                    null,
+                    continuationAction,
+                    continuationOptions,
+                    cancellationToken,
+                    scheduler
+                );
         }
 
         /// <summary>
@@ -2262,14 +2207,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl<TAntecedentResult>(
-                tasks,
-                null,
-                continuationAction,
-                m_defaultContinuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAllImpl<TAntecedentResult>(
+                    tasks,
+                    null,
+                    continuationAction,
+                    m_defaultContinuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2303,14 +2249,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl<TAntecedentResult>(
-                tasks,
-                null,
-                continuationAction,
-                m_defaultContinuationOptions,
-                cancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAllImpl<TAntecedentResult>(
+                    tasks,
+                    null,
+                    continuationAction,
+                    m_defaultContinuationOptions,
+                    cancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2350,14 +2297,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl<TAntecedentResult>(
-                tasks,
-                null,
-                continuationAction,
-                continuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAllImpl<TAntecedentResult>(
+                    tasks,
+                    null,
+                    continuationAction,
+                    continuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2409,14 +2357,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl<TAntecedentResult>(
-                tasks,
-                null,
-                continuationAction,
-                continuationOptions,
-                cancellationToken,
-                scheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAllImpl<TAntecedentResult>(
+                    tasks,
+                    null,
+                    continuationAction,
+                    continuationOptions,
+                    cancellationToken,
+                    scheduler
+                );
         }
 
         /// <summary>
@@ -2447,14 +2396,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(
-                tasks,
-                continuationFunction,
-                null,
-                m_defaultContinuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAllImpl(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    m_defaultContinuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2491,14 +2441,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(
-                tasks,
-                continuationFunction,
-                null,
-                m_defaultContinuationOptions,
-                cancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAllImpl(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    m_defaultContinuationOptions,
+                    cancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2541,14 +2492,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(
-                tasks,
-                continuationFunction,
-                null,
-                continuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAllImpl(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    continuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2603,14 +2555,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(
-                tasks,
-                continuationFunction,
-                null,
-                continuationOptions,
-                cancellationToken,
-                scheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAllImpl(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    continuationOptions,
+                    cancellationToken,
+                    scheduler
+                );
         }
 
         /// <summary>
@@ -2642,14 +2595,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl<TAntecedentResult>(
-                tasks,
-                continuationFunction,
-                null,
-                m_defaultContinuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAllImpl<TAntecedentResult>(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    m_defaultContinuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2687,14 +2641,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl<TAntecedentResult>(
-                tasks,
-                continuationFunction,
-                null,
-                m_defaultContinuationOptions,
-                cancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAllImpl<TAntecedentResult>(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    m_defaultContinuationOptions,
+                    cancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2738,14 +2693,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl<TAntecedentResult>(
-                tasks,
-                continuationFunction,
-                null,
-                continuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAllImpl<TAntecedentResult>(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    continuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -2801,14 +2757,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl<TAntecedentResult>(
-                tasks,
-                continuationFunction,
-                null,
-                continuationOptions,
-                cancellationToken,
-                scheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAllImpl<TAntecedentResult>(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    continuationOptions,
+                    cancellationToken,
+                    scheduler
+                );
         }
 
         //
@@ -2846,11 +2803,8 @@ namespace System.Threading.Tasks
                 }
 
                 if (TplEventSource.Log.IsEnabled())
-                    TplEventSource.Log.TraceOperationBegin(
-                        this.Id,
-                        "TaskFactory.ContinueWhenAny",
-                        0
-                    );
+                    TplEventSource.Log
+                        .TraceOperationBegin(this.Id, "TaskFactory.ContinueWhenAny", 0);
 
                 if (Task.s_asyncDebuggingEnabled)
                     AddToActiveTasks(this);
@@ -2870,14 +2824,10 @@ namespace System.Threading.Tasks
                 {
                     if (TplEventSource.Log.IsEnabled())
                     {
-                        TplEventSource.Log.TraceOperationRelation(
-                            this.Id,
-                            CausalityRelation.Choice
-                        );
-                        TplEventSource.Log.TraceOperationEnd(
-                            this.Id,
-                            AsyncCausalityStatus.Completed
-                        );
+                        TplEventSource.Log
+                            .TraceOperationRelation(this.Id, CausalityRelation.Choice);
+                        TplEventSource.Log
+                            .TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
                     }
 
                     if (Task.s_asyncDebuggingEnabled)
@@ -2985,7 +2935,8 @@ namespace System.Threading.Tasks
         {
             // Force cleanup of the promise (e.g. removing continuations from each
             // constituent task), by completing the promise with any value (it's not observable).
-            ((CompleteOnInvokePromise)continuation).Invoke(null!);
+            ((CompleteOnInvokePromise)continuation)
+                .Invoke(null!);
         }
 
         /// <summary>
@@ -3009,14 +2960,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
-                tasks,
-                null,
-                continuationAction,
-                m_defaultContinuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAnyImpl(
+                    tasks,
+                    null,
+                    continuationAction,
+                    m_defaultContinuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3049,14 +3001,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
-                tasks,
-                null,
-                continuationAction,
-                m_defaultContinuationOptions,
-                cancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAnyImpl(
+                    tasks,
+                    null,
+                    continuationAction,
+                    m_defaultContinuationOptions,
+                    cancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3095,14 +3048,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
-                tasks,
-                null,
-                continuationAction,
-                continuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAnyImpl(
+                    tasks,
+                    null,
+                    continuationAction,
+                    continuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3153,14 +3107,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
-                tasks,
-                null,
-                continuationAction,
-                continuationOptions,
-                cancellationToken,
-                scheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAnyImpl(
+                    tasks,
+                    null,
+                    continuationAction,
+                    continuationOptions,
+                    cancellationToken,
+                    scheduler
+                );
         }
 
         /// <summary>
@@ -3191,14 +3146,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(
-                tasks,
-                continuationFunction,
-                null,
-                m_defaultContinuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAnyImpl(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    m_defaultContinuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3235,14 +3191,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(
-                tasks,
-                continuationFunction,
-                null,
-                m_defaultContinuationOptions,
-                cancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAnyImpl(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    m_defaultContinuationOptions,
+                    cancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3285,14 +3242,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(
-                tasks,
-                continuationFunction,
-                null,
-                continuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAnyImpl(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    continuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3347,14 +3305,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(
-                tasks,
-                continuationFunction,
-                null,
-                continuationOptions,
-                cancellationToken,
-                scheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAnyImpl(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    continuationOptions,
+                    cancellationToken,
+                    scheduler
+                );
         }
 
         /// <summary>
@@ -3385,14 +3344,15 @@ namespace System.Threading.Tasks
         {
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
-            return TaskFactory<TResult>.ContinueWhenAnyImpl<TAntecedentResult>(
-                tasks,
-                continuationFunction,
-                null,
-                m_defaultContinuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAnyImpl<TAntecedentResult>(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    m_defaultContinuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3430,14 +3390,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl<TAntecedentResult>(
-                tasks,
-                continuationFunction,
-                null,
-                m_defaultContinuationOptions,
-                cancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAnyImpl<TAntecedentResult>(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    m_defaultContinuationOptions,
+                    cancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3481,14 +3442,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl<TAntecedentResult>(
-                tasks,
-                continuationFunction,
-                null,
-                continuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAnyImpl<TAntecedentResult>(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    continuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3544,14 +3506,15 @@ namespace System.Threading.Tasks
             if (continuationFunction == null)
                 throw new ArgumentNullException(nameof(continuationFunction));
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl<TAntecedentResult>(
-                tasks,
-                continuationFunction,
-                null,
-                continuationOptions,
-                cancellationToken,
-                scheduler
-            );
+            return TaskFactory<TResult>
+                .ContinueWhenAnyImpl<TAntecedentResult>(
+                    tasks,
+                    continuationFunction,
+                    null,
+                    continuationOptions,
+                    cancellationToken,
+                    scheduler
+                );
         }
 
         /// <summary>
@@ -3579,14 +3542,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl<TAntecedentResult>(
-                tasks,
-                null,
-                continuationAction,
-                m_defaultContinuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAnyImpl<TAntecedentResult>(
+                    tasks,
+                    null,
+                    continuationAction,
+                    m_defaultContinuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3620,14 +3584,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl<TAntecedentResult>(
-                tasks,
-                null,
-                continuationAction,
-                m_defaultContinuationOptions,
-                cancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAnyImpl<TAntecedentResult>(
+                    tasks,
+                    null,
+                    continuationAction,
+                    m_defaultContinuationOptions,
+                    cancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3667,14 +3632,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl<TAntecedentResult>(
-                tasks,
-                null,
-                continuationAction,
-                continuationOptions,
-                m_defaultCancellationToken,
-                DefaultScheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAnyImpl<TAntecedentResult>(
+                    tasks,
+                    null,
+                    continuationAction,
+                    continuationOptions,
+                    m_defaultCancellationToken,
+                    DefaultScheduler
+                );
         }
 
         /// <summary>
@@ -3726,14 +3692,15 @@ namespace System.Threading.Tasks
             if (continuationAction == null)
                 throw new ArgumentNullException(nameof(continuationAction));
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl<TAntecedentResult>(
-                tasks,
-                null,
-                continuationAction,
-                continuationOptions,
-                cancellationToken,
-                scheduler
-            );
+            return TaskFactory<VoidTaskResult>
+                .ContinueWhenAnyImpl<TAntecedentResult>(
+                    tasks,
+                    null,
+                    continuationAction,
+                    continuationOptions,
+                    cancellationToken,
+                    scheduler
+                );
         }
 
         // Check task array and return a defensive copy.

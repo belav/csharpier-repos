@@ -26,10 +26,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 return;
             }
 
-            TestProjectFixture portableAppFixture =
-                sharedTestState.TestWindowsOsShimsAppFixture.Copy();
+            TestProjectFixture portableAppFixture = sharedTestState.TestWindowsOsShimsAppFixture
+                .Copy();
 
-            portableAppFixture.BuiltDotnet.Exec(portableAppFixture.TestProject.AppDll)
+            portableAppFixture.BuiltDotnet
+                .Exec(portableAppFixture.TestProject.AppDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
@@ -50,9 +51,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             // Long paths must also be enabled via a machine-wide setting. Only run the test if it is enabled.
             using (
-                RegistryKey key = Registry.LocalMachine.OpenSubKey(
-                    @"SYSTEM\CurrentControlSet\Control\FileSystem"
-                )
+                RegistryKey key = Registry.LocalMachine
+                    .OpenSubKey(@"SYSTEM\CurrentControlSet\Control\FileSystem")
             )
             {
                 if (key == null)
@@ -103,12 +103,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 PortableAppWithLongPathFixture = new TestProjectFixture(
                     "PortableAppWithLongPath",
                     RepoDirectories
-                ).EnsureRestored().BuildProject();
+                )
+                    .EnsureRestored()
+                    .BuildProject();
 
                 TestWindowsOsShimsAppFixture = new TestProjectFixture(
                     "TestWindowsOsShimsApp",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
             }
 
             public void Dispose()

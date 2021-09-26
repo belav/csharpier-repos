@@ -37,12 +37,13 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             out SyntaxToken genericIdentifier,
             out SyntaxToken lessThanToken
         ) =>
-            root.SyntaxTree.IsInPartiallyWrittenGeneric(
-                position,
-                cancellationToken,
-                out genericIdentifier,
-                out lessThanToken
-            );
+            root.SyntaxTree
+                .IsInPartiallyWrittenGeneric(
+                    position,
+                    cancellationToken,
+                    out genericIdentifier,
+                    out lessThanToken
+                );
 
         protected override TextSpan GetTextSpan(
             SyntaxToken genericIdentifier,

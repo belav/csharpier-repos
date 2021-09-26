@@ -31,9 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
     public class DiagnosticAnalyzerDriverTests
     {
         private static readonly TestComposition s_compositionWithMockDiagnosticUpdateSourceRegistrationService =
-            EditorTestCompositions.EditorFeatures.AddExcludedPartTypes(
-                    typeof(IDiagnosticUpdateSourceRegistrationService)
-                )
+            EditorTestCompositions.EditorFeatures
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
         [Fact]
@@ -62,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                 ImmutableArray.Create<DiagnosticAnalyzer>(analyzer)
             );
             var newSolution =
-                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+                workspace.CurrentSolution
+                    .WithAnalyzerReferences(new[] { analyzerReference })
                     .Projects.Single()
                     .AddAdditionalDocument(
                         name: "dummy.txt",
@@ -114,12 +114,12 @@ class C
                     ImmutableArray.Create<DiagnosticAnalyzer>(ideEngineAnalyzer)
                 );
                 ideEngineWorkspace.TryApplyChanges(
-                    ideEngineWorkspace.CurrentSolution.WithAnalyzerReferences(
-                        new[] { analyzerReference }
-                    )
+                    ideEngineWorkspace.CurrentSolution
+                        .WithAnalyzerReferences(new[] { analyzerReference })
                 );
 
-                var ideEngineDocument = ideEngineWorkspace.CurrentSolution.Projects.Single()
+                var ideEngineDocument = ideEngineWorkspace.CurrentSolution.Projects
+                    .Single()
                     .Documents.Single();
                 await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
                     ideEngineWorkspace,
@@ -129,30 +129,32 @@ class C
                 foreach (var method in methodNames)
                 {
                     Assert.False(
-                        ideEngineAnalyzer.CallLog.Any(
-                            e =>
-                                e.CallerName == method
-                                && e.MethodKind == MethodKind.DelegateInvoke
-                                && e.ReturnsVoid
-                        )
+                        ideEngineAnalyzer.CallLog
+                            .Any(
+                                e =>
+                                    e.CallerName == method
+                                    && e.MethodKind == MethodKind.DelegateInvoke
+                                    && e.ReturnsVoid
+                            )
                     );
                     Assert.False(
-                        ideEngineAnalyzer.CallLog.Any(
-                            e =>
-                                e.CallerName == method
-                                && e.MethodKind == MethodKind.DelegateInvoke
-                                && !e.ReturnsVoid
-                        )
+                        ideEngineAnalyzer.CallLog
+                            .Any(
+                                e =>
+                                    e.CallerName == method
+                                    && e.MethodKind == MethodKind.DelegateInvoke
+                                    && !e.ReturnsVoid
+                            )
                     );
                     Assert.True(
-                        ideEngineAnalyzer.CallLog.Any(
-                            e => e.CallerName == method && e.SymbolKind == SymbolKind.NamedType
-                        )
+                        ideEngineAnalyzer.CallLog
+                            .Any(
+                                e => e.CallerName == method && e.SymbolKind == SymbolKind.NamedType
+                            )
                     );
                     Assert.False(
-                        ideEngineAnalyzer.CallLog.Any(
-                            e => e.CallerName == method && e.SymbolKind == SymbolKind.Property
-                        )
+                        ideEngineAnalyzer.CallLog
+                            .Any(e => e.CallerName == method && e.SymbolKind == SymbolKind.Property)
                     );
                 }
             }
@@ -163,36 +165,37 @@ class C
                 composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
             );
             var compilerEngineCompilation =
-                (CSharpCompilation)compilerEngineWorkspace.CurrentSolution.Projects.Single()
+                (CSharpCompilation)compilerEngineWorkspace.CurrentSolution.Projects
+                    .Single()
                     .GetRequiredCompilationAsync(CancellationToken.None).Result;
             compilerEngineCompilation.GetAnalyzerDiagnostics(new[] { compilerEngineAnalyzer });
             foreach (var method in methodNames)
             {
                 Assert.False(
-                    compilerEngineAnalyzer.CallLog.Any(
-                        e =>
-                            e.CallerName == method
-                            && e.MethodKind == MethodKind.DelegateInvoke
-                            && e.ReturnsVoid
-                    )
+                    compilerEngineAnalyzer.CallLog
+                        .Any(
+                            e =>
+                                e.CallerName == method
+                                && e.MethodKind == MethodKind.DelegateInvoke
+                                && e.ReturnsVoid
+                        )
                 );
                 Assert.False(
-                    compilerEngineAnalyzer.CallLog.Any(
-                        e =>
-                            e.CallerName == method
-                            && e.MethodKind == MethodKind.DelegateInvoke
-                            && !e.ReturnsVoid
-                    )
+                    compilerEngineAnalyzer.CallLog
+                        .Any(
+                            e =>
+                                e.CallerName == method
+                                && e.MethodKind == MethodKind.DelegateInvoke
+                                && !e.ReturnsVoid
+                        )
                 );
                 Assert.True(
-                    compilerEngineAnalyzer.CallLog.Any(
-                        e => e.CallerName == method && e.SymbolKind == SymbolKind.NamedType
-                    )
+                    compilerEngineAnalyzer.CallLog
+                        .Any(e => e.CallerName == method && e.SymbolKind == SymbolKind.NamedType)
                 );
                 Assert.False(
-                    compilerEngineAnalyzer.CallLog.Any(
-                        e => e.CallerName == method && e.SymbolKind == SymbolKind.Property
-                    )
+                    compilerEngineAnalyzer.CallLog
+                        .Any(e => e.CallerName == method && e.SymbolKind == SymbolKind.Property)
                 );
             }
         }
@@ -203,32 +206,34 @@ class C
         {
             var source = TestResource.AllInOneCSharpCode;
 
-            await ThrowingDiagnosticAnalyzer<SyntaxKind>.VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(
-                async analyzer =>
-                {
-                    using var workspace = TestWorkspace.CreateCSharp(
-                        source,
-                        TestOptions.Regular,
-                        composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
-                    );
+            await ThrowingDiagnosticAnalyzer<SyntaxKind>
+                .VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(
+                    async analyzer =>
+                    {
+                        using var workspace = TestWorkspace.CreateCSharp(
+                            source,
+                            TestOptions.Regular,
+                            composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
+                        );
 
-                    var analyzerReference = new AnalyzerImageReference(
-                        ImmutableArray.Create(analyzer)
-                    );
-                    workspace.TryApplyChanges(
-                        workspace.CurrentSolution.WithAnalyzerReferences(
-                            new[] { analyzerReference }
-                        )
-                    );
+                        var analyzerReference = new AnalyzerImageReference(
+                            ImmutableArray.Create(analyzer)
+                        );
+                        workspace.TryApplyChanges(
+                            workspace.CurrentSolution
+                                .WithAnalyzerReferences(new[] { analyzerReference })
+                        );
 
-                    var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
-                    return await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
-                        workspace,
-                        document,
-                        new TextSpan(0, document.GetTextAsync().Result.Length)
-                    );
-                }
-            );
+                        var document = workspace.CurrentSolution.Projects
+                            .Single()
+                            .Documents.Single();
+                        return await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
+                            workspace,
+                            document,
+                            new TextSpan(0, document.GetTextAsync().Result.Length)
+                        );
+                    }
+                );
         }
 
         [WorkItem(908621, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/908621")]
@@ -284,7 +289,8 @@ class C
             );
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+                workspace.CurrentSolution
+                    .WithAnalyzerReferences(new[] { analyzerReference })
                     .AddAdditionalDocument(additionalDocId, "add.config", additionalText.GetText())
             );
 
@@ -413,12 +419,12 @@ class C
                     ImmutableArray.Create<DiagnosticAnalyzer>(analyzer)
                 );
                 ideEngineWorkspace.TryApplyChanges(
-                    ideEngineWorkspace.CurrentSolution.WithAnalyzerReferences(
-                        new[] { analyzerReference }
-                    )
+                    ideEngineWorkspace.CurrentSolution
+                        .WithAnalyzerReferences(new[] { analyzerReference })
                 );
 
-                var ideEngineDocument = ideEngineWorkspace.CurrentSolution.Projects.Single()
+                var ideEngineDocument = ideEngineWorkspace.CurrentSolution.Projects
+                    .Single()
                     .Documents.Single();
                 var diagnostics = await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
                     ideEngineWorkspace,
@@ -451,7 +457,8 @@ class C
             )
             {
                 var compilerEngineCompilation =
-                    (CSharpCompilation)compilerEngineWorkspace.CurrentSolution.Projects.Single()
+                    (CSharpCompilation)compilerEngineWorkspace.CurrentSolution.Projects
+                        .Single()
                         .GetRequiredCompilationAsync(CancellationToken.None).Result;
                 var diagnostics = compilerEngineCompilation.GetAnalyzerDiagnostics(
                     new[] { analyzer }
@@ -523,7 +530,8 @@ class C
             var analyzer = new InvalidSpanAnalyzer();
             using var compilerEngineWorkspace = TestWorkspace.CreateCSharp(source);
             var compilerEngineCompilation = (CSharpCompilation)(
-                await compilerEngineWorkspace.CurrentSolution.Projects.Single()
+                await compilerEngineWorkspace.CurrentSolution.Projects
+                    .Single()
                     .GetRequiredCompilationAsync(CancellationToken.None)
             );
 
@@ -1081,12 +1089,15 @@ class C
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    workspace.CurrentSolution.WithAnalyzerReferences(
-                        new[]
-                        {
-                            new AnalyzerImageReference(vsixAnalyzerReferences.ToImmutableArray())
-                        }
-                    )
+                    workspace.CurrentSolution
+                        .WithAnalyzerReferences(
+                            new[]
+                            {
+                                new AnalyzerImageReference(
+                                    vsixAnalyzerReferences.ToImmutableArray()
+                                )
+                            }
+                        )
                 )
             );
 
@@ -1120,7 +1131,9 @@ class C
                     root.FullSpan,
                     includeSuppressedDiagnostics: true
                 )
-            ).OrderBy(d => d.Id).ToImmutableArray();
+            )
+                .OrderBy(d => d.Id)
+                .ToImmutableArray();
 
             diagnostics.Verify(expectedDiagnostics.Select(d => d.diagnostic).ToArray());
 
@@ -1273,10 +1286,8 @@ class C
                     if (this.mapping.TryGetValue(diagnostic.Id, out var descriptor))
                     {
                         context.ReportSuppression(
-                            Microsoft.CodeAnalysis.Diagnostics.Suppression.Create(
-                                descriptor,
-                                diagnostic
-                            )
+                            Microsoft.CodeAnalysis.Diagnostics.Suppression
+                                .Create(descriptor, diagnostic)
                         );
                     }
                 }

@@ -284,8 +284,8 @@ namespace Microsoft.AspNetCore.Hosting
         )
         {
             var loggerFactory =
-                listenOptions.KestrelServerOptions?.ApplicationServices.GetRequiredService<ILoggerFactory>()
-                ?? NullLoggerFactory.Instance;
+                listenOptions.KestrelServerOptions?.ApplicationServices
+                    .GetRequiredService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
 
             listenOptions.IsTls = true;
             listenOptions.HttpsOptions = httpsOptions;
@@ -373,8 +373,8 @@ namespace Microsoft.AspNetCore.Hosting
         )
         {
             var loggerFactory =
-                listenOptions.KestrelServerOptions?.ApplicationServices.GetRequiredService<ILoggerFactory>()
-                ?? NullLoggerFactory.Instance;
+                listenOptions.KestrelServerOptions?.ApplicationServices
+                    .GetRequiredService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
 
             listenOptions.IsTls = true;
             listenOptions.Use(

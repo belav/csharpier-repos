@@ -138,9 +138,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var detailsProvider = new EmptyCompositeMetadataDetailsProvider();
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(TypeWithProperties).GetProperty(
-                    nameof(TypeWithProperties.PublicGetPublicSetProperty)
-                ),
+                typeof(TypeWithProperties)
+                    .GetProperty(nameof(TypeWithProperties.PublicGetPublicSetProperty)),
                 typeof(string),
                 typeof(TypeWithProperties)
             );
@@ -182,9 +181,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var detailsProvider = new EmptyCompositeMetadataDetailsProvider();
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(TypeWithProperties).GetProperty(
-                    nameof(TypeWithProperties.PublicGetPublicSetProperty)
-                ),
+                typeof(TypeWithProperties)
+                    .GetProperty(nameof(TypeWithProperties.PublicGetPublicSetProperty)),
                 typeof(string),
                 typeof(TypeWithProperties)
             );
@@ -226,9 +224,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var detailsProvider = new EmptyCompositeMetadataDetailsProvider();
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(TypeWithProperties).GetProperty(
-                    nameof(TypeWithProperties.PublicGetPublicSetProperty)
-                ),
+                typeof(TypeWithProperties)
+                    .GetProperty(nameof(TypeWithProperties.PublicGetPublicSetProperty)),
                 typeof(string),
                 typeof(TypeWithProperties)
             );
@@ -1161,9 +1158,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
                 hasValidators: false
             );
 
-            var property = typeof(TypeWithProperties).GetProperty(
-                nameof(TypeWithProperties.PublicGetPublicSetProperty)
-            );
+            var property = typeof(TypeWithProperties)
+                .GetProperty(nameof(TypeWithProperties.PublicGetPublicSetProperty));
             var propertyIdentity = ModelMetadataIdentity.ForProperty(
                 property,
                 typeof(int),

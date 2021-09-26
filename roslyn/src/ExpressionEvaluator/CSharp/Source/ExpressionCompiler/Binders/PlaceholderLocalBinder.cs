@@ -90,12 +90,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 var valueText = name.Substring(2);
                 ulong address;
                 if (
-                    !ulong.TryParse(
-                        valueText,
-                        NumberStyles.AllowHexSpecifier,
-                        CultureInfo.InvariantCulture,
-                        out address
-                    )
+                    !ulong
+                        .TryParse(
+                            valueText,
+                            NumberStyles.AllowHexSpecifier,
+                            CultureInfo.InvariantCulture,
+                            out address
+                        )
                 )
                 {
                     // Invalid value should have been caught by Lexer.
@@ -138,16 +139,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 }
                 else
                 {
-                    base.LookupSymbolsInSingleBinder(
-                        result,
-                        name,
-                        arity,
-                        basesBeingResolved,
-                        options,
-                        originalBinder,
-                        diagnose,
-                        ref useSiteInfo
-                    );
+                    base
+                        .LookupSymbolsInSingleBinder(
+                            result,
+                            name,
+                            arity,
+                            basesBeingResolved,
+                            options,
+                            originalBinder,
+                            diagnose,
+                            ref useSiteInfo
+                        );
                 }
             }
         }

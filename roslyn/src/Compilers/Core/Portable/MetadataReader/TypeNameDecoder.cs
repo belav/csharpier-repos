@@ -304,7 +304,8 @@ namespace Microsoft.CodeAnalysis
             int count = arguments.Length;
             var typeArgumentsBuilder = ArrayBuilder<
                 KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>
-            >.GetInstance(count);
+            >
+                .GetInstance(count);
             var refersToNoPiaBuilder = ArrayBuilder<bool>.GetInstance(count);
 
             foreach (var argument in arguments)

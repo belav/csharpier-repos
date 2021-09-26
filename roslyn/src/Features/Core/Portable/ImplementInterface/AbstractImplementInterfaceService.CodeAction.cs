@@ -170,10 +170,11 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     }
                     else if (ThroughMember != null)
                     {
-                        return string.Format(
-                            FeaturesResources.Implement_interface_through_0,
-                            ThroughMember.Name
-                        );
+                        return string
+                            .Format(
+                                FeaturesResources.Implement_interface_through_0,
+                                ThroughMember.Name
+                            );
                     }
                     else
                     {
@@ -265,7 +266,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             )
             {
                 var result = document;
-                var compilation = await result.Project.GetCompilationAsync(cancellationToken)
+                var compilation = await result.Project
+                    .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var isComImport = unimplementedMembers.Any(t => t.type.IsComImport);
@@ -291,18 +293,18 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                         == ImplementTypeInsertionBehavior.WithOtherMembersOfTheSameKind;
 
                 return await CodeGenerator.AddMemberDeclarationsAsync(
-                        result.Project.Solution,
-                        classOrStructType,
-                        memberDefinitions.Concat(extraMembers),
-                        new CodeGenerationOptions(
-                            contextLocation: classOrStructDecl.GetLocation(),
-                            autoInsertionLocation: groupMembers,
-                            sortMembers: groupMembers,
-                            options: await document.GetOptionsAsync(cancellationToken)
-                                .ConfigureAwait(false)
-                        ),
-                        cancellationToken
-                    )
+                    result.Project.Solution,
+                    classOrStructType,
+                    memberDefinitions.Concat(extraMembers),
+                    new CodeGenerationOptions(
+                        contextLocation: classOrStructDecl.GetLocation(),
+                        autoInsertionLocation: groupMembers,
+                        sortMembers: groupMembers,
+                        options: await document.GetOptionsAsync(cancellationToken)
+                            .ConfigureAwait(false)
+                    ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -362,9 +364,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             private bool IsReservedName(string name)
             {
                 return IdentifiersMatch(State.ClassOrStructType.Name, name)
-                    || State.ClassOrStructType.TypeParameters.Any(
-                        t => IdentifiersMatch(t.Name, name)
-                    );
+                    || State.ClassOrStructType.TypeParameters
+                        .Any(t => IdentifiersMatch(t.Name, name));
             }
 
             private string DetermineMemberName(
@@ -374,11 +375,9 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             {
                 if (HasConflictingMember(member, implementedVisibleMembers))
                 {
-                    var memberNames =
-                        State.ClassOrStructType.GetAccessibleMembersInThisAndBaseTypes<ISymbol>(
-                                State.ClassOrStructType
-                            )
-                            .Select(m => m.Name);
+                    var memberNames = State.ClassOrStructType
+                        .GetAccessibleMembersInThisAndBaseTypes<ISymbol>(State.ClassOrStructType)
+                        .Select(m => m.Name);
 
                     return NameGenerator.GenerateUniqueName(
                         string.Format("{0}_{1}", member.ContainingType.Name, member.Name),
@@ -500,14 +499,14 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             {
                 var condition1 =
                     typeParameter.ConstraintTypes.Count(t => t.TypeKind == TypeKind.Class) >= 2;
-                var condition2 = typeParameter.ConstraintTypes.Any(
-                    ts => ts.IsUnexpressibleTypeParameterConstraint()
-                );
+                var condition2 = typeParameter.ConstraintTypes
+                    .Any(ts => ts.IsUnexpressibleTypeParameterConstraint());
                 var condition3 =
                     typeParameter.HasReferenceTypeConstraint
-                    && typeParameter.ConstraintTypes.Any(
-                        ts => ts.IsReferenceType && ts.SpecialType != SpecialType.System_Object
-                    );
+                    && typeParameter.ConstraintTypes
+                        .Any(
+                            ts => ts.IsReferenceType && ts.SpecialType != SpecialType.System_Object
+                        );
 
                 return condition1 || condition2 || condition3;
             }
@@ -676,10 +675,11 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     return method1.MethodKind == MethodKind.Ordinary
                         && method2.MethodKind == MethodKind.Ordinary
                         && method1.TypeParameters.Length == method2.TypeParameters.Length
-                        && method1.Parameters.SequenceEqual(
-                            method2.Parameters,
-                            SymbolEquivalenceComparer.Instance.ParameterEquivalenceComparer
-                        );
+                        && method1.Parameters
+                            .SequenceEqual(
+                                method2.Parameters,
+                                SymbolEquivalenceComparer.Instance.ParameterEquivalenceComparer
+                            );
                 }
 
                 // Any non method members with the same name simple name conflict.
@@ -749,11 +749,12 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     return false;
                 }
 
-                return SignatureComparer.Instance.HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
-                    member1,
-                    member2,
-                    IsCaseSensitive
-                );
+                return SignatureComparer.Instance
+                    .HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
+                        member1,
+                        member2,
+                        IsCaseSensitive
+                    );
             }
         }
     }

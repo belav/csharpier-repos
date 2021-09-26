@@ -18,17 +18,18 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public void InlineCache()
         {
-            var callSite = CallSite<Func<CallSite, object, object>>.Create(
-                Binder.GetMember(
-                    CSharpBinderFlags.None,
-                    "A",
-                    typeof(CallSiteCachingTests),
-                    new CSharpArgumentInfo[1]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            var callSite = CallSite<Func<CallSite, object, object>>
+                .Create(
+                    Binder.GetMember(
+                        CSharpBinderFlags.None,
+                        "A",
+                        typeof(CallSiteCachingTests),
+                        new CSharpArgumentInfo[1]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
 
             var initialTarget = callSite.Target;
             Assert.Equal((object)initialTarget, callSite.Update);
@@ -50,17 +51,18 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public void L1Cache()
         {
-            var callSite = CallSite<Func<CallSite, object, object>>.Create(
-                Binder.GetMember(
-                    CSharpBinderFlags.None,
-                    "A",
-                    typeof(CallSiteCachingTests),
-                    new CSharpArgumentInfo[1]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            var callSite = CallSite<Func<CallSite, object, object>>
+                .Create(
+                    Binder.GetMember(
+                        CSharpBinderFlags.None,
+                        "A",
+                        typeof(CallSiteCachingTests),
+                        new CSharpArgumentInfo[1]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
 
             ObjAndRule[] t = new ObjAndRule[200];
 
@@ -91,17 +93,18 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public void L2Cache()
         {
-            var callSite = CallSite<Func<CallSite, object, object>>.Create(
-                Binder.GetMember(
-                    CSharpBinderFlags.None,
-                    "A",
-                    typeof(CallSiteCachingTests),
-                    new CSharpArgumentInfo[1]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            var callSite = CallSite<Func<CallSite, object, object>>
+                .Create(
+                    Binder.GetMember(
+                        CSharpBinderFlags.None,
+                        "A",
+                        typeof(CallSiteCachingTests),
+                        new CSharpArgumentInfo[1]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
 
             ObjAndRule[] t = new ObjAndRule[200];
 
@@ -211,42 +214,11 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public void BinderCacheFlushWhenTooBig()
         {
-            var callSite1 = CallSite<Func<CallSite, object, object>>.Create(
-                Binder.GetMember(
-                    CSharpBinderFlags.None,
-                    "A",
-                    typeof(TestClass01),
-                    new CSharpArgumentInfo[1]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
-
-            var rules1 = CallSiteOps.GetRuleCache((dynamic)callSite1);
-
-            var callSite2 = CallSite<Func<CallSite, object, object>>.Create(
-                Binder.GetMember(
-                    CSharpBinderFlags.None,
-                    "A",
-                    typeof(TestClass01),
-                    new CSharpArgumentInfo[1]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
-
-            var rules2 = CallSiteOps.GetRuleCache((dynamic)callSite2);
-            Assert.Equal(rules1, rules2);
-
-            // blast through callsite cache
-            for (int i = 0; i < 10000; i++)
-            {
-                var callSiteN = CallSite<Func<CallSite, object, object>>.Create(
+            var callSite1 = CallSite<Func<CallSite, object, object>>
+                .Create(
                     Binder.GetMember(
                         CSharpBinderFlags.None,
-                        i.ToString(),
+                        "A",
                         typeof(TestClass01),
                         new CSharpArgumentInfo[1]
                         {
@@ -254,19 +226,54 @@ namespace System.Runtime.CompilerServices.Tests
                         }
                     )
                 );
+
+            var rules1 = CallSiteOps.GetRuleCache((dynamic)callSite1);
+
+            var callSite2 = CallSite<Func<CallSite, object, object>>
+                .Create(
+                    Binder.GetMember(
+                        CSharpBinderFlags.None,
+                        "A",
+                        typeof(TestClass01),
+                        new CSharpArgumentInfo[1]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
+
+            var rules2 = CallSiteOps.GetRuleCache((dynamic)callSite2);
+            Assert.Equal(rules1, rules2);
+
+            // blast through callsite cache
+            for (int i = 0; i < 10000; i++)
+            {
+                var callSiteN = CallSite<Func<CallSite, object, object>>
+                    .Create(
+                        Binder.GetMember(
+                            CSharpBinderFlags.None,
+                            i.ToString(),
+                            typeof(TestClass01),
+                            new CSharpArgumentInfo[1]
+                            {
+                                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            }
+                        )
+                    );
             }
 
-            var callSite3 = CallSite<Func<CallSite, object, object>>.Create(
-                Binder.GetMember(
-                    CSharpBinderFlags.None,
-                    "A",
-                    typeof(TestClass01),
-                    new CSharpArgumentInfo[1]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            var callSite3 = CallSite<Func<CallSite, object, object>>
+                .Create(
+                    Binder.GetMember(
+                        CSharpBinderFlags.None,
+                        "A",
+                        typeof(TestClass01),
+                        new CSharpArgumentInfo[1]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
 
             var rules3 = CallSiteOps.GetRuleCache((dynamic)callSite3);
             Assert.NotEqual(rules1, rules3);
@@ -305,12 +312,13 @@ namespace System.Runtime.CompilerServices.Tests
             var tasks = Enumerable.Range(0, nTasks)
                 .Select(
                     i =>
-                        Task.Factory.StartNew(
-                            () => AddAndUpdateRules(run),
-                            cancellationToken: default,
-                            creationOptions: default,
-                            scheduler: TaskScheduler.Default
-                        )
+                        Task.Factory
+                            .StartNew(
+                                () => AddAndUpdateRules(run),
+                                cancellationToken: default,
+                                creationOptions: default,
+                                scheduler: TaskScheduler.Default
+                            )
                 )
                 .ToArray();
             Task.WaitAll(tasks);
@@ -334,7 +342,8 @@ namespace System.Runtime.CompilerServices.Tests
 
             static System.Reflection.MethodInfo GetCallSiteOpsMethod(string methodName)
             {
-                return typeof(CallSiteOps).GetMethod(methodName)
+                return typeof(CallSiteOps)
+                    .GetMethod(methodName)
                     .MakeGenericMethod(typeof(Func<CallSite, int>));
             }
 

@@ -173,7 +173,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 testAssemblyName + ".dll"
             );
 
-            SharedState.DotNetWithNetCoreApp.Exec(app.AppDll)
+            SharedState.DotNetWithNetCoreApp
+                .Exec(app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
                 .Should()

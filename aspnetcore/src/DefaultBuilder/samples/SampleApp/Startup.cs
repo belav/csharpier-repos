@@ -23,9 +23,8 @@ namespace SampleApp
             app.Run(
                 async (context) =>
                 {
-                    await context.Response.WriteAsync(
-                        $"Hello from {context.Request.GetDisplayUrl()}\r\n"
-                    );
+                    await context.Response
+                        .WriteAsync($"Hello from {context.Request.GetDisplayUrl()}\r\n");
                     await context.Response.WriteAsync("\r\n");
 
                     await context.Response.WriteAsync("Headers:\r\n");
@@ -36,27 +35,23 @@ namespace SampleApp
                     await context.Response.WriteAsync("\r\n");
 
                     await context.Response.WriteAsync("Connection:\r\n");
-                    await context.Response.WriteAsync(
-                        "RemoteIp: " + context.Connection.RemoteIpAddress + "\r\n"
-                    );
-                    await context.Response.WriteAsync(
-                        "RemotePort: " + context.Connection.RemotePort + "\r\n"
-                    );
-                    await context.Response.WriteAsync(
-                        "LocalIp: " + context.Connection.LocalIpAddress + "\r\n"
-                    );
-                    await context.Response.WriteAsync(
-                        "LocalPort: " + context.Connection.LocalPort + "\r\n"
-                    );
-                    await context.Response.WriteAsync(
-                        "ClientCert: " + context.Connection.ClientCertificate + "\r\n"
-                    );
+                    await context.Response
+                        .WriteAsync("RemoteIp: " + context.Connection.RemoteIpAddress + "\r\n");
+                    await context.Response
+                        .WriteAsync("RemotePort: " + context.Connection.RemotePort + "\r\n");
+                    await context.Response
+                        .WriteAsync("LocalIp: " + context.Connection.LocalIpAddress + "\r\n");
+                    await context.Response
+                        .WriteAsync("LocalPort: " + context.Connection.LocalPort + "\r\n");
+                    await context.Response
+                        .WriteAsync("ClientCert: " + context.Connection.ClientCertificate + "\r\n");
                     await context.Response.WriteAsync("\r\n");
 
                     await context.Response.WriteAsync("Environment Variables:\r\n");
                     var vars = Environment.GetEnvironmentVariables();
                     foreach (
-                        var key in vars.Keys.Cast<string>()
+                        var key in vars.Keys
+                            .Cast<string>()
                             .OrderBy(key => key, StringComparer.OrdinalIgnoreCase)
                     )
                     {

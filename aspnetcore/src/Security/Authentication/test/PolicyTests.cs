@@ -21,31 +21,28 @@ namespace Microsoft.AspNetCore.Authentication
             using var server = await CreateServer(
                 services =>
                 {
-                    services.AddLogging()
-                        .AddAuthentication(
-                            o =>
-                            {
-                                o.AddScheme<TestHandler>("auth1", "auth1");
-                                o.AddScheme<TestHandler>("auth2", "auth2");
-                                o.AddScheme<TestHandler>("auth3", "auth3");
-                            }
-                        )
-                        .AddPolicyScheme(
-                            "policy1",
-                            "policy1",
-                            p =>
-                            {
-                                p.ForwardDefault = "auth1";
-                            }
-                        )
-                        .AddPolicyScheme(
-                            "policy2",
-                            "policy2",
-                            p =>
-                            {
-                                p.ForwardAuthenticate = "auth2";
-                            }
-                        );
+                    services.AddLogging().AddAuthentication(
+                        o =>
+                        {
+                            o.AddScheme<TestHandler>("auth1", "auth1");
+                            o.AddScheme<TestHandler>("auth2", "auth2");
+                            o.AddScheme<TestHandler>("auth3", "auth3");
+                        }
+                    ).AddPolicyScheme(
+                        "policy1",
+                        "policy1",
+                        p =>
+                        {
+                            p.ForwardDefault = "auth1";
+                        }
+                    ).AddPolicyScheme(
+                        "policy2",
+                        "policy2",
+                        p =>
+                        {
+                            p.ForwardAuthenticate = "auth2";
+                        }
+                    );
                 }
             );
 
@@ -70,21 +67,20 @@ namespace Microsoft.AspNetCore.Authentication
         {
             var services = new ServiceCollection().AddOptions().AddLogging();
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.AddScheme<TestHandler>("auth1", "auth1");
-                        o.AddScheme<TestHandler2>("auth2", "auth2");
-                    }
-                )
-                .AddPolicyScheme(
-                    "forward",
-                    "forward",
-                    p =>
-                    {
-                        p.ForwardDefault = "auth2";
-                        p.ForwardDefaultSelector = ctx => "auth1";
-                    }
-                );
+                o =>
+                {
+                    o.AddScheme<TestHandler>("auth1", "auth1");
+                    o.AddScheme<TestHandler2>("auth2", "auth2");
+                }
+            ).AddPolicyScheme(
+                "forward",
+                "forward",
+                p =>
+                {
+                    p.ForwardDefault = "auth2";
+                    p.ForwardDefaultSelector = ctx => "auth1";
+                }
+            );
 
             var handler1 = new TestHandler();
             services.AddSingleton(handler1);
@@ -135,21 +131,20 @@ namespace Microsoft.AspNetCore.Authentication
         {
             var services = new ServiceCollection().AddOptions().AddLogging();
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.AddScheme<TestHandler>("auth1", "auth1");
-                        o.AddScheme<TestHandler2>("auth2", "auth2");
-                    }
-                )
-                .AddPolicyScheme(
-                    "forward",
-                    "forward",
-                    p =>
-                    {
-                        p.ForwardDefault = "auth1";
-                        p.ForwardDefaultSelector = ctx => null;
-                    }
-                );
+                o =>
+                {
+                    o.AddScheme<TestHandler>("auth1", "auth1");
+                    o.AddScheme<TestHandler2>("auth2", "auth2");
+                }
+            ).AddPolicyScheme(
+                "forward",
+                "forward",
+                p =>
+                {
+                    p.ForwardDefault = "auth1";
+                    p.ForwardDefaultSelector = ctx => null;
+                }
+            );
 
             var handler1 = new TestHandler();
             services.AddSingleton(handler1);
@@ -200,26 +195,25 @@ namespace Microsoft.AspNetCore.Authentication
         {
             var services = new ServiceCollection().AddOptions().AddLogging();
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.AddScheme<TestHandler>("auth1", "auth1");
-                        o.AddScheme<TestHandler2>("auth2", "auth2");
-                    }
-                )
-                .AddPolicyScheme(
-                    "forward",
-                    "forward",
-                    p =>
-                    {
-                        p.ForwardDefault = "auth2";
-                        p.ForwardDefaultSelector = ctx => "auth2";
-                        p.ForwardAuthenticate = "auth1";
-                        p.ForwardSignIn = "auth1";
-                        p.ForwardSignOut = "auth1";
-                        p.ForwardForbid = "auth1";
-                        p.ForwardChallenge = "auth1";
-                    }
-                );
+                o =>
+                {
+                    o.AddScheme<TestHandler>("auth1", "auth1");
+                    o.AddScheme<TestHandler2>("auth2", "auth2");
+                }
+            ).AddPolicyScheme(
+                "forward",
+                "forward",
+                p =>
+                {
+                    p.ForwardDefault = "auth2";
+                    p.ForwardDefaultSelector = ctx => "auth2";
+                    p.ForwardAuthenticate = "auth1";
+                    p.ForwardSignIn = "auth1";
+                    p.ForwardSignOut = "auth1";
+                    p.ForwardForbid = "auth1";
+                    p.ForwardChallenge = "auth1";
+                }
+            );
 
             var handler1 = new TestHandler();
             services.AddSingleton(handler1);
@@ -270,13 +264,12 @@ namespace Microsoft.AspNetCore.Authentication
         {
             var services = new ServiceCollection().AddOptions().AddLogging();
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.AddScheme<TestHandler>("auth1", "auth1");
-                        o.AddScheme<TestHandler2>("auth2", "auth2");
-                    }
-                )
-                .AddPolicyScheme("forward", "forward", p => p.ForwardDefault = "auth1");
+                o =>
+                {
+                    o.AddScheme<TestHandler>("auth1", "auth1");
+                    o.AddScheme<TestHandler2>("auth2", "auth2");
+                }
+            ).AddPolicyScheme("forward", "forward", p => p.ForwardDefault = "auth1");
 
             var handler1 = new TestHandler();
             services.AddSingleton(handler1);
@@ -327,22 +320,21 @@ namespace Microsoft.AspNetCore.Authentication
         {
             var services = new ServiceCollection().AddOptions().AddLogging();
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.AddScheme<TestHandler>("auth1", "auth1");
-                        o.AddScheme<TestHandler2>("auth2", "auth2");
-                    }
-                )
-                .AddPolicyScheme(
-                    "forward",
-                    "forward",
-                    p =>
-                    {
-                        p.ForwardDefault = "auth1";
-                        p.ForwardChallenge = "auth2";
-                        p.ForwardSignIn = "auth2";
-                    }
-                );
+                o =>
+                {
+                    o.AddScheme<TestHandler>("auth1", "auth1");
+                    o.AddScheme<TestHandler2>("auth2", "auth2");
+                }
+            ).AddPolicyScheme(
+                "forward",
+                "forward",
+                p =>
+                {
+                    p.ForwardDefault = "auth1";
+                    p.ForwardChallenge = "auth2";
+                    p.ForwardSignIn = "auth2";
+                }
+            );
 
             var handler1 = new TestHandler();
             services.AddSingleton(handler1);
@@ -395,22 +387,21 @@ namespace Microsoft.AspNetCore.Authentication
                 services =>
                 {
                     services.AddAuthentication(
-                            o =>
-                            {
-                                o.AddScheme<TestHandler>("auth1", "auth1");
-                                o.AddScheme<TestHandler>("auth2", "auth2");
-                                o.AddScheme<TestHandler>("auth3", "auth3");
-                            }
-                        )
-                        .AddPolicyScheme(
-                            "dynamic",
-                            "dynamic",
-                            p =>
-                            {
-                                p.ForwardDefaultSelector = c =>
-                                    c.Request.QueryString.Value.Substring(1);
-                            }
-                        );
+                        o =>
+                        {
+                            o.AddScheme<TestHandler>("auth1", "auth1");
+                            o.AddScheme<TestHandler>("auth2", "auth2");
+                            o.AddScheme<TestHandler>("auth3", "auth3");
+                        }
+                    ).AddPolicyScheme(
+                        "dynamic",
+                        "dynamic",
+                        p =>
+                        {
+                            p.ForwardDefaultSelector = c =>
+                                c.Request.QueryString.Value.Substring(1);
+                        }
+                    );
                 }
             );
 
@@ -558,49 +549,47 @@ namespace Microsoft.AspNetCore.Authentication
         )
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.Configure(
+                        app =>
+                        {
+                            app.UseAuthentication();
+                            app.Use(
+                                async (context, next) =>
                                 {
-                                    app.UseAuthentication();
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            var req = context.Request;
-                                            var res = context.Response;
-                                            if (
-                                                req.Path.StartsWithSegments(
-                                                    new PathString("/auth"),
-                                                    out var remainder
-                                                )
+                                    var req = context.Request;
+                                    var res = context.Response;
+                                    if (
+                                        req.Path
+                                            .StartsWithSegments(
+                                                new PathString("/auth"),
+                                                out var remainder
                                             )
-                                            {
-                                                var name =
-                                                    (remainder.Value.Length > 0)
-                                                        ? remainder.Value.Substring(1)
-                                                        : null;
-                                                var result = await context.AuthenticateAsync(name);
-                                                await res.DescribeAsync(result?.Ticket?.Principal);
-                                            }
-                                            else
-                                            {
-                                                await next();
-                                            }
-                                        }
-                                    );
+                                    )
+                                    {
+                                        var name =
+                                            (remainder.Value.Length > 0)
+                                                ? remainder.Value.Substring(1)
+                                                : null;
+                                        var result = await context.AuthenticateAsync(name);
+                                        await res.DescribeAsync(result?.Ticket?.Principal);
+                                    }
+                                    else
+                                    {
+                                        await next();
+                                    }
                                 }
-                            )
-                            .UseTestServer();
-                    }
-                )
-                .ConfigureServices(
-                    services =>
-                    {
-                        configure?.Invoke(services);
-                    }
-                )
-                .Build();
+                            );
+                        }
+                    ).UseTestServer();
+                }
+            ).ConfigureServices(
+                services =>
+                {
+                    configure?.Invoke(services);
+                }
+            ).Build();
 
             var server = host.GetTestServer();
 

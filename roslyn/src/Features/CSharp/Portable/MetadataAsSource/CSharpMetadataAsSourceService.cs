@@ -267,9 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
             {
                 // switch us back to enabled as we leave the type.
                 result = result.WithCloseBraceToken(
-                    result.CloseBraceToken.WithPrependedLeadingTrivia(
-                        CreateNullableTrivia(enable: true)
-                    )
+                    result.CloseBraceToken
+                        .WithPrependedLeadingTrivia(CreateNullableTrivia(enable: true))
                 );
             }
 

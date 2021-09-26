@@ -24,7 +24,8 @@ namespace System.Composition.UnitTests
             params Type[] types
         )
         {
-            return new ContainerConfiguration().WithParts(types)
+            return new ContainerConfiguration()
+                .WithParts(types)
                 .WithDefaultConventions(rb)
                 .CreateContainer();
         }

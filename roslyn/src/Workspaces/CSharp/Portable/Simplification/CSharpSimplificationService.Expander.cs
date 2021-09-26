@@ -81,10 +81,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 if (
                     type.IsDelegateType()
                     && argument.IsParentKind(SyntaxKind.ArgumentList)
-                    && argument.Parent.IsParentKind(
-                        SyntaxKind.ObjectCreationExpression,
-                        out ObjectCreationExpressionSyntax objectCreationExpression
-                    )
+                    && argument.Parent
+                        .IsParentKind(
+                            SyntaxKind.ObjectCreationExpression,
+                            out ObjectCreationExpressionSyntax objectCreationExpression
+                        )
                 )
                 {
                     var objectCreationType =
@@ -227,7 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                         if (parameters.Length > 0 && parameters.Any(p => p.Type == null))
                         {
-                            var parameterSymbols = node.ParameterList.Parameters.Select(
+                            var parameterSymbols = node.ParameterList.Parameters
+                                .Select(
                                     p => _semanticModel.GetDeclaredSymbol(p, _cancellationToken)
                                 )
                                 .ToArray();
@@ -238,9 +240,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                                 for (var i = 0; i < parameterSymbols.Length; i++)
                                 {
-                                    var typeSyntax = parameterSymbols[i].Type.GenerateTypeSyntax()
+                                    var typeSyntax = parameterSymbols[i].Type
+                                        .GenerateTypeSyntax()
                                         .WithTrailingTrivia(s_oneWhitespaceSeparator);
-                                    var newParameter = parameters[i].WithType(typeSyntax)
+                                    var newParameter = parameters[i]
+                                        .WithType(typeSyntax)
                                         .WithAdditionalAnnotations(Simplifier.Annotation);
 
                                     var currentParameter = newParameters[i];
@@ -295,29 +299,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         var parameterSymbol = _semanticModel.GetDeclaredSymbol(node.Parameter);
                         if (parameterSymbol?.Type?.ContainsAnonymousType() == false)
                         {
-                            var typeSyntax = parameterSymbol.Type.GenerateTypeSyntax()
+                            var typeSyntax = parameterSymbol.Type
+                                .GenerateTypeSyntax()
                                 .WithTrailingTrivia(s_oneWhitespaceSeparator);
-                            var newSimpleLambdaParameter = simpleLambda.Parameter.WithType(
-                                    typeSyntax
-                                )
+                            var newSimpleLambdaParameter = simpleLambda.Parameter
+                                .WithType(typeSyntax)
                                 .WithoutTrailingTrivia();
 
                             var parenthesizedLambda = SyntaxFactory.ParenthesizedLambdaExpression(
-                                    simpleLambda.AsyncKeyword,
-                                    SyntaxFactory.ParameterList(
-                                            SyntaxFactory.SingletonSeparatedList(
-                                                newSimpleLambdaParameter
-                                            )
-                                        )
-                                        .WithTrailingTrivia(
-                                            simpleLambda.Parameter.GetTrailingTrivia()
-                                        )
-                                        .WithLeadingTrivia(
-                                            simpleLambda.Parameter.GetLeadingTrivia()
-                                        ),
-                                    simpleLambda.ArrowToken,
-                                    simpleLambda.Body
+                                simpleLambda.AsyncKeyword,
+                                SyntaxFactory.ParameterList(
+                                    SyntaxFactory.SingletonSeparatedList(newSimpleLambdaParameter)
                                 )
+                                    .WithTrailingTrivia(simpleLambda.Parameter.GetTrailingTrivia())
+                                    .WithLeadingTrivia(simpleLambda.Parameter.GetLeadingTrivia()),
+                                simpleLambda.ArrowToken,
+                                simpleLambda.Body
+                            )
                                 .WithAdditionalAnnotations(Simplifier.Annotation);
 
                             return SimplificationHelpers.CopyAnnotations(
@@ -422,10 +420,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 AnonymousObjectMemberDeclaratorSyntax node
             )
             {
-                var newDeclarator =
-                    (AnonymousObjectMemberDeclaratorSyntax)base.VisitAnonymousObjectMemberDeclarator(
-                        node
-                    );
+                var newDeclarator = (AnonymousObjectMemberDeclaratorSyntax)base
+                    .VisitAnonymousObjectMemberDeclarator(node);
                 if (node.NameEquals == null)
                 {
                     var inferredName = node.Expression.TryGetInferredMemberName();
@@ -515,28 +511,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 if (rewrittenname.Kind() == SyntaxKind.QualifiedName)
                 {
                     return node.CopyAnnotationsTo(
-                            SyntaxFactory.QualifiedCref(
-                                    (
-                                        (QualifiedNameSyntax)rewrittenname
-                                    ).Left.WithAdditionalAnnotations(Simplifier.Annotation),
-                                    SyntaxFactory.NameMemberCref(
-                                            ((QualifiedNameSyntax)rewrittenname).Right,
-                                            parameters
-                                        )
-                                        .WithLeadingTrivia(SyntaxTriviaList.Empty)
-                                )
-                                .WithLeadingTrivia(node.GetLeadingTrivia())
-                                .WithTrailingTrivia(node.GetTrailingTrivia())
+                        SyntaxFactory.QualifiedCref(
+                            ((QualifiedNameSyntax)rewrittenname).Left
+                                .WithAdditionalAnnotations(Simplifier.Annotation),
+                            SyntaxFactory.NameMemberCref(
+                                ((QualifiedNameSyntax)rewrittenname).Right,
+                                parameters
+                            )
+                                .WithLeadingTrivia(SyntaxTriviaList.Empty)
                         )
+                            .WithLeadingTrivia(node.GetLeadingTrivia())
+                            .WithTrailingTrivia(node.GetTrailingTrivia())
+                    )
                         .WithAdditionalAnnotations(Simplifier.Annotation);
                 }
                 else if (rewrittenname.Kind() == SyntaxKind.AliasQualifiedName)
                 {
                     return node.CopyAnnotationsTo(
-                            SyntaxFactory.TypeCref(rewrittenname)
-                                .WithLeadingTrivia(node.GetLeadingTrivia())
-                                .WithTrailingTrivia(node.GetTrailingTrivia())
-                        )
+                        SyntaxFactory.TypeCref(rewrittenname)
+                            .WithLeadingTrivia(node.GetLeadingTrivia())
+                            .WithTrailingTrivia(node.GetTrailingTrivia())
+                    )
                         .WithAdditionalAnnotations(Simplifier.Annotation);
                 }
 
@@ -610,9 +605,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                             && IsTypeOfUnboundGenericType(_semanticModel, typeOfExpression)
                         )
                         {
-                            aliasTarget = (
-                                (INamedTypeSymbol)aliasTarget
-                            ).ConstructUnboundGenericType();
+                            aliasTarget = ((INamedTypeSymbol)aliasTarget)
+                                .ConstructUnboundGenericType();
                         }
 
                         if (aliasTarget is INamedTypeSymbol typeSymbol && typeSymbol.IsTupleType)
@@ -622,13 +616,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                         // the expanded form replaces the current identifier name.
                         var replacement = FullyQualifyIdentifierName(
-                                aliasTarget,
-                                newNode,
-                                originalSimpleName,
-                                replaceNode: true,
-                                isInsideCref: isInsideCref,
-                                omitLeftHandSide: false
-                            )
+                            aliasTarget,
+                            newNode,
+                            originalSimpleName,
+                            replaceNode: true,
+                            isInsideCref: isInsideCref,
+                            omitLeftHandSide: false
+                        )
                             .WithAdditionalAnnotations(Simplifier.Annotation);
 
                         // We replace the simple name completely, so we can't continue and rename the token
@@ -641,9 +635,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                                     (AliasQualifiedNameSyntax)replacement;
                                 replacement = replacement.ReplaceNode(
                                     aliasQualifiedReplacement.Name,
-                                    aliasQualifiedReplacement.Name.WithIdentifier(
-                                        GetNewIdentifier(aliasQualifiedReplacement.Name.Identifier)
-                                    )
+                                    aliasQualifiedReplacement.Name
+                                        .WithIdentifier(
+                                            GetNewIdentifier(
+                                                aliasQualifiedReplacement.Name.Identifier
+                                            )
+                                        )
                                 );
 
                                 var firstReplacementToken = replacement.GetFirstToken(
@@ -677,9 +674,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                                 var qualifiedReplacement = (QualifiedNameSyntax)replacement;
                                 replacement = replacement.ReplaceNode(
                                     qualifiedReplacement.Right,
-                                    qualifiedReplacement.Right.WithIdentifier(
-                                        GetNewIdentifier(qualifiedReplacement.Right.Identifier)
-                                    )
+                                    qualifiedReplacement.Right
+                                        .WithIdentifier(
+                                            GetNewIdentifier(qualifiedReplacement.Right.Identifier)
+                                        )
                                 );
                                 break;
 
@@ -875,13 +873,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 if (symbol.Kind == SymbolKind.NamedType || symbol.Kind == SymbolKind.Namespace)
                 {
                     var replacement = FullyQualifyIdentifierName(
-                            (INamespaceOrTypeSymbol)symbol,
-                            newNode,
-                            originalSimpleName,
-                            replaceNode: false,
-                            isInsideCref: isInsideCref,
-                            omitLeftHandSide: omitLeftSideOfExpression
-                        )
+                        (INamespaceOrTypeSymbol)symbol,
+                        newNode,
+                        originalSimpleName,
+                        replaceNode: false,
+                        isInsideCref: isInsideCref,
+                        omitLeftHandSide: omitLeftSideOfExpression
+                    )
                         .WithAdditionalAnnotations(Simplifier.Annotation);
 
                     replacement = AppendElasticTriviaIfNecessary(replacement, originalSimpleName);
@@ -899,11 +897,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     if (
                         symbol.IsStatic
                         || originalSimpleName.IsParentKind(SyntaxKind.NameMemberCref)
-                        || _semanticModel.SyntaxTree.IsNameOfContext(
-                            originalSimpleName.SpanStart,
-                            _semanticModel,
-                            _cancellationToken
-                        )
+                        || _semanticModel.SyntaxTree
+                            .IsNameOfContext(
+                                originalSimpleName.SpanStart,
+                                _semanticModel,
+                                _cancellationToken
+                            )
                     )
                     {
                         newNode = FullyQualifyIdentifierName(
@@ -947,10 +946,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                             newNode = newNode.CopyAnnotationsTo(
                                 SyntaxFactory.MemberAccessExpression(
-                                        SyntaxKind.SimpleMemberAccessExpression,
-                                        left,
-                                        (SimpleNameSyntax)newNode.WithLeadingTrivia(null)
-                                    )
+                                    SyntaxKind.SimpleMemberAccessExpression,
+                                    left,
+                                    (SimpleNameSyntax)newNode.WithLeadingTrivia(null)
+                                )
                                     .WithLeadingTrivia(identifiersLeadingTrivia)
                             );
                         }
@@ -1007,21 +1006,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         if (!typeArguments.Any(t => t.ContainsAnonymousType()))
                         {
                             var genericName = SyntaxFactory.GenericName(
-                                    ((IdentifierNameSyntax)newNode).Identifier,
-                                    SyntaxFactory.TypeArgumentList(
-                                        SyntaxFactory.SeparatedList(
-                                            typeArguments.Select(
-                                                p =>
-                                                    SyntaxFactory.ParseTypeName(
-                                                        p.ToDisplayParts(
-                                                                s_typeNameFormatWithGenerics
-                                                            )
-                                                            .ToDisplayString()
-                                                    )
-                                            )
+                                ((IdentifierNameSyntax)newNode).Identifier,
+                                SyntaxFactory.TypeArgumentList(
+                                    SyntaxFactory.SeparatedList(
+                                        typeArguments.Select(
+                                            p =>
+                                                SyntaxFactory.ParseTypeName(
+                                                    p.ToDisplayParts(s_typeNameFormatWithGenerics)
+                                                        .ToDisplayString()
+                                                )
                                         )
                                     )
                                 )
+                            )
                                 .WithLeadingTrivia(newNode.GetLeadingTrivia())
                                 .WithTrailingTrivia(newNode.GetTrailingTrivia())
                                 .WithAdditionalAnnotations(Simplifier.Annotation);
@@ -1194,10 +1191,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     )
                     {
                         return currentNode.Kind() == SyntaxKind.SimpleAssignmentExpression
-                            && object.Equals(
-                                ((AssignmentExpressionSyntax)currentNode).Left,
-                                identifierName
-                            );
+                            && object
+                                .Equals(
+                                    ((AssignmentExpressionSyntax)currentNode).Left,
+                                    identifierName
+                                );
                     }
                     else if (parent is ExpressionSyntax)
                     {
@@ -1249,20 +1247,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     {
                         return rewrittenNode.CopyAnnotationsTo(
                             SyntaxFactory.AliasQualifiedName(
-                                    SyntaxFactory.IdentifierName(
-                                        SyntaxFactory.Token(SyntaxKind.GlobalKeyword)
-                                    ),
-                                    (SimpleNameSyntax)rewrittenNode.WithLeadingTrivia(null)
-                                )
+                                SyntaxFactory.IdentifierName(
+                                    SyntaxFactory.Token(SyntaxKind.GlobalKeyword)
+                                ),
+                                (SimpleNameSyntax)rewrittenNode.WithLeadingTrivia(null)
+                            )
                                 .WithLeadingTrivia(rewrittenNode.GetLeadingTrivia())
                         );
                     }
 
                     displayParts = replaceNode
                         ? symbol.ToDisplayParts(s_typeNameFormatWithGenerics)
-                        : (
-                              symbol.ContainingType ?? (ISymbol)symbol.ContainingNamespace
-                          ).ToDisplayParts(s_typeNameFormatWithGenerics);
+                        : (symbol.ContainingType ?? (ISymbol)symbol.ContainingNamespace)
+                          .ToDisplayParts(s_typeNameFormatWithGenerics);
 
                     rewrittenNode = TryAddTypeArgumentToIdentifierName(rewrittenNode, symbol);
 
@@ -1426,14 +1423,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     return originalNode;
                 }
 
-                var rewrittenNode = (InvocationExpressionSyntax)base.VisitInvocationExpression(
-                    originalNode
-                );
+                var rewrittenNode = (InvocationExpressionSyntax)base
+                    .VisitInvocationExpression(originalNode);
                 if (
-                    originalNode.Expression.IsKind(
-                        SyntaxKind.SimpleMemberAccessExpression,
-                        out MemberAccessExpressionSyntax memberAccess
-                    )
+                    originalNode.Expression
+                        .IsKind(
+                            SyntaxKind.SimpleMemberAccessExpression,
+                            out MemberAccessExpressionSyntax memberAccess
+                        )
                 )
                 {
                     var targetSymbol = SimplificationHelpers.GetOriginalSymbolInfo(
@@ -1504,9 +1501,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 // It may be the case that this extension method cannot be called in static form.  For example, if the
                 // qualified name for the type containing the extension would be ambiguous.  In that case, just return
                 // the original call as is.
-                var containingTypeString = reducedExtensionMethod.ContainingType.ToDisplayString(
-                    s_typeNameFormatWithGenerics
-                );
+                var containingTypeString = reducedExtensionMethod.ContainingType
+                    .ToDisplayString(s_typeNameFormatWithGenerics);
 
                 // We use .ParseExpression here, and not .GenerateTypeSyntax as we want this to be a property
                 // MemberAccessExpression, and not a QualifiedNameSyntax.
@@ -1528,7 +1524,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     .WithLeadingTrivia(thisExpression.GetFirstToken().LeadingTrivia);
 
                 // Copies the annotation for the member access expression
-                newMemberAccess = originalNode.Expression.CopyAnnotationsTo(newMemberAccess)
+                newMemberAccess = originalNode.Expression
+                    .CopyAnnotationsTo(newMemberAccess)
                     .WithAdditionalAnnotations(Simplifier.Annotation);
 
                 var thisArgument = SyntaxFactory.Argument(thisExpression)

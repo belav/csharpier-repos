@@ -304,8 +304,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
                     configuration.GetSection(nameof(LaunchOptions.Args)),
                     argsMap =>
                         argsMap.SelectMany(
-                                argNameValue => argNameValue.Value.Prepend(argNameValue.Key)
-                            )
+                            argNameValue => argNameValue.Value.Prepend(argNameValue.Key)
+                        )
                             .ToArray()
                 ),
                 Headless = configuration.GetValue<bool?>(nameof(LaunchOptions.Headless)),

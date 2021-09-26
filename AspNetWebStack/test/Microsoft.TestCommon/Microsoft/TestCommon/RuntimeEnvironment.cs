@@ -14,9 +14,8 @@ namespace Microsoft.TestCommon
 
         static RuntimeEnvironment()
         {
-            object runtimeVersion = Registry.LocalMachine.OpenSubKey(
-                    RuntimeEnvironment.NetFx40FullSubKey
-                )
+            object runtimeVersion = Registry.LocalMachine
+                .OpenSubKey(RuntimeEnvironment.NetFx40FullSubKey)
                 .GetValue(RuntimeEnvironment.Version);
             string versionFor40String = runtimeVersion as string;
             if (versionFor40String != null)

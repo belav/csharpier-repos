@@ -50,10 +50,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
                 return false;
             }
 
-            using var waitScope = context.OperationContext.AddScope(
-                allowCancellation: true,
-                EditorFeaturesResources.Applying_Encapsulate_Field_refactoring
-            );
+            using var waitScope = context.OperationContext
+                .AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Applying_Encapsulate_Field_refactoring
+                );
 
             return Execute(args, waitScope);
         }
@@ -63,8 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
             using var token = _listener.BeginAsyncOperation("EncapsulateField");
 
             var cancellationToken = waitScope.Context.UserCancellationToken;
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+            var document = args.SubjectBuffer.CurrentSnapshot
+                .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                     waitScope.Context,
                     _threadingContext
                 );
@@ -78,11 +79,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
             var service = document.GetLanguageService<AbstractEncapsulateFieldService>();
 
             var result = service.EncapsulateFieldsInSpanAsync(
-                    document,
-                    spans.First().Span.ToTextSpan(),
-                    true,
-                    cancellationToken
-                )
+                document,
+                spans.First().Span.ToTextSpan(),
+                true,
+                cancellationToken
+            )
                 .WaitAndGetResult(cancellationToken);
 
             // We are about to show a modal UI dialog so we should take over the command execution
@@ -111,10 +112,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
             if (previewService != null)
             {
                 finalSolution = previewService.PreviewChanges(
-                    string.Format(
-                        EditorFeaturesResources.Preview_Changes_0,
-                        EditorFeaturesResources.Encapsulate_Field
-                    ),
+                    string
+                        .Format(
+                            EditorFeaturesResources.Preview_Changes_0,
+                            EditorFeaturesResources.Encapsulate_Field
+                        ),
                     "vs.csharp.refactoring.preview",
                     EditorFeaturesResources.Encapsulate_Field_colon,
                     result.Name,

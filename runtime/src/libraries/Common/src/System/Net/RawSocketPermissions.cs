@@ -32,7 +32,8 @@ namespace System.Net
                     addressFamily == AddressFamily.InterNetwork
                       ? ProtocolType.Icmp
                       : ProtocolType.IcmpV6
-                ).Dispose();
+                )
+                    .Dispose();
                 return true;
             }
             catch

@@ -15,11 +15,8 @@ namespace System.DirectoryServices.AccountManagement
     {
         internal static bool IsOfObjectClass(DirectoryEntry de, string classToCompare)
         {
-            return string.Equals(
-                de.SchemaClassName,
-                classToCompare,
-                StringComparison.OrdinalIgnoreCase
-            );
+            return string
+                .Equals(de.SchemaClassName, classToCompare, StringComparison.OrdinalIgnoreCase);
         }
 
         internal static bool GetOSVersion(

@@ -56,10 +56,8 @@ namespace JIT.HardwareIntrinsics.General
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
-            object result = typeof(Vector256<Double>).GetProperty(
-                    nameof(Vector256<Double>.AllBitsSet),
-                    new Type[] {  }
-                )
+            object result = typeof(Vector256<Double>)
+                .GetProperty(nameof(Vector256<Double>.AllBitsSet), new Type[] {  })
                 .GetGetMethod()
                 .Invoke(null, new object[] {  });
 
@@ -90,12 +88,10 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256.AllBitsSet(Double): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector256.AllBitsSet(Double): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

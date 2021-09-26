@@ -38,9 +38,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var cancellationToken = context.CancellationToken;
 
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    position,
-                    cancellationToken
-                )
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (
                 !(

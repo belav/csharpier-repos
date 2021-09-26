@@ -160,7 +160,8 @@ namespace JitBench
 
         static IEnumerable<Benchmark> GetAllBenchmarks()
         {
-            IEnumerable<Type> benchmarkTypes = typeof(Program).GetTypeInfo()
+            IEnumerable<Type> benchmarkTypes = typeof(Program)
+                .GetTypeInfo()
                 .Assembly.GetTypes()
                 .Where(t => typeof(Benchmark).IsAssignableFrom(t));
             foreach (Type bt in benchmarkTypes)
@@ -235,8 +236,8 @@ namespace JitBench
             foreach (string configName in configNames)
             {
                 BenchmarkConfiguration config = possibleConfigs.Where(
-                        c => c.Name.Equals(configName, StringComparison.OrdinalIgnoreCase)
-                    )
+                    c => c.Name.Equals(configName, StringComparison.OrdinalIgnoreCase)
+                )
                     .FirstOrDefault();
                 if (config == null)
                 {

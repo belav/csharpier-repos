@@ -1043,8 +1043,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (
                         currType.InterfacesAndTheirBaseInterfacesWithDefinitionUseSiteDiagnostics(
-                                ref useSiteInfo
-                            )
+                            ref useSiteInfo
+                        )
                             .ContainsKey(interfaceType)
                     )
                     {
@@ -1286,9 +1286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 // It is still possible that we actually looked for the accessor in interfaces, but failed due to an ambiguity.
                 // Let's try to look for a property to improve diagnostics in this scenario.
-                return !symbolAndDiagnostics.Diagnostics.Diagnostics.Any(
-                    d => d.Code == (int)ErrorCode.ERR_MostSpecificImplementationIsNotFound
-                );
+                return !symbolAndDiagnostics.Diagnostics.Diagnostics
+                    .Any(d => d.Code == (int)ErrorCode.ERR_MostSpecificImplementationIsNotFound);
             }
         }
 
@@ -1527,10 +1526,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var implementations = ArrayBuilder<(MultiDictionary<
                         Symbol,
                         Symbol
-                    >.ValueSet MethodSet, MultiDictionary<
-                        NamedTypeSymbol,
-                        NamedTypeSymbol
-                    > Bases)>.GetInstance();
+                    >.ValueSet MethodSet, MultiDictionary<NamedTypeSymbol, NamedTypeSymbol> Bases)>
+                    .GetInstance();
 
                 foreach (var interfaceType in allInterfaces)
                 {
@@ -1676,9 +1673,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (!containingType.Equals(interfaceType, TypeCompareKind.ConsiderEverything))
                     {
-                        interfaceMember = interfaceMember.OriginalDefinition.SymbolAsMember(
-                            interfaceType
-                        );
+                        interfaceMember = interfaceMember.OriginalDefinition
+                            .SymbolAsMember(interfaceType);
                     }
 
                     return new MultiDictionary<Symbol, Symbol>.ValueSet(interfaceMember);
@@ -1888,22 +1884,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     case MethodKind.PropertyGet:
                         correspondingImplementingAccessor = (
                             (PropertySymbol)implementingPropertyOrEvent
-                        ).GetOwnOrInheritedGetMethod();
+                        )
+                            .GetOwnOrInheritedGetMethod();
                         break;
                     case MethodKind.PropertySet:
                         correspondingImplementingAccessor = (
                             (PropertySymbol)implementingPropertyOrEvent
-                        ).GetOwnOrInheritedSetMethod();
+                        )
+                            .GetOwnOrInheritedSetMethod();
                         break;
                     case MethodKind.EventAdd:
                         correspondingImplementingAccessor = (
                             (EventSymbol)implementingPropertyOrEvent
-                        ).GetOwnOrInheritedAddMethod();
+                        )
+                            .GetOwnOrInheritedAddMethod();
                         break;
                     case MethodKind.EventRemove:
                         correspondingImplementingAccessor = (
                             (EventSymbol)implementingPropertyOrEvent
-                        ).GetOwnOrInheritedRemoveMethod();
+                        )
+                            .GetOwnOrInheritedRemoveMethod();
                         break;
                     default:
                         throw ExceptionUtilities.UnexpectedValue(interfaceMethod.MethodKind);
@@ -1987,8 +1987,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // The default implementation is coming from a different module, which means that we probably didn't check
                 // for the required runtime capability or language version
 
-                LanguageVersion requiredVersion =
-                    MessageID.IDS_DefaultInterfaceImplementation.RequiredVersion();
+                LanguageVersion requiredVersion = MessageID.IDS_DefaultInterfaceImplementation
+                    .RequiredVersion();
                 LanguageVersion? availableVersion =
                     implementingType.DeclaringCompilation?.LanguageVersion;
                 if (requiredVersion > availableVersion)
@@ -2153,10 +2153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         //do nothing - not an ambiguous implementation
                     }
                     else if (
-                        MemberSignatureComparer.RuntimeImplicitImplementationComparer.Equals(
-                            interfaceMember,
-                            member
-                        ) && !member.IsAccessor()
+                        MemberSignatureComparer.RuntimeImplicitImplementationComparer
+                            .Equals(interfaceMember, member) && !member.IsAccessor()
                     )
                     {
                         // CONSIDER: Dev10 does not seem to report this for indexers or their accessors.
@@ -2550,9 +2548,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             SourceMemberContainerTypeSymbol snt = null;
             if (
-                implementingType.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics[
-                    @interface
-                ].Contains(@interface)
+                implementingType.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics[@interface]
+                    .Contains(@interface)
             )
             {
                 snt = implementingType as SourceMemberContainerTypeSymbol;
@@ -2734,10 +2731,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // We can ignore custom modifiers here, because our goal is to improve the helpfulness
                         // of an error we're already giving, rather than to generate a new error.
                         if (
-                            MemberSignatureComparer.CSharpCloseImplicitImplementationComparer.Equals(
-                                interfaceMember,
-                                member
-                            )
+                            MemberSignatureComparer.CSharpCloseImplicitImplementationComparer
+                                .Equals(interfaceMember, member)
                         )
                         {
                             closeMismatch = member;
@@ -2797,10 +2792,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // Inexact matches are acceptable because we'll just generate bridge members - explicit implementations
                 // with exact signatures that delegate to the inexact match.  This happens automatically in
                 // SourceMemberContainerTypeSymbol.SynthesizeInterfaceMemberImplementation.
-                return MemberSignatureComparer.CSharpImplicitImplementationComparer.Equals(
-                    interfaceMember,
-                    candidateMember
-                );
+                return MemberSignatureComparer.CSharpImplicitImplementationComparer
+                    .Equals(interfaceMember, candidateMember);
             }
             else
             {
@@ -2809,10 +2802,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // CLI interpretation instead.  For example, using this comparer might allow a member with a ref
                 // parameter to implement a member with an out parameter -  which Dev10 would not allow - but that's
                 // okay because Dev10's behavior is not observable.
-                return MemberSignatureComparer.RuntimeImplicitImplementationComparer.Equals(
-                    interfaceMember,
-                    candidateMember
-                );
+                return MemberSignatureComparer.RuntimeImplicitImplementationComparer
+                    .Equals(interfaceMember, candidateMember);
             }
         }
 
@@ -2869,10 +2860,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public bool Equals(Symbol x, Symbol y)
             {
                 return x.OriginalDefinition == y.OriginalDefinition
-                    && x.ContainingType.Equals(
-                        y.ContainingType,
-                        TypeCompareKind.CLRSignatureCompareOptions
-                    );
+                    && x.ContainingType
+                        .Equals(y.ContainingType, TypeCompareKind.CLRSignatureCompareOptions);
             }
 
             public int GetHashCode(Symbol obj)

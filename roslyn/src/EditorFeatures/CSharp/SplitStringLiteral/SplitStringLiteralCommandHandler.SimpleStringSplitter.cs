@@ -53,12 +53,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
             {
                 // TODO(cyrusn): Deal with the positoin being after a \ character
                 var prefix = SourceText.GetSubText(
-                        TextSpan.FromBounds(_token.SpanStart, CursorPosition)
-                    )
+                    TextSpan.FromBounds(_token.SpanStart, CursorPosition)
+                )
                     .ToString();
                 var suffix = SourceText.GetSubText(
-                        TextSpan.FromBounds(CursorPosition, _token.Span.End)
-                    )
+                    TextSpan.FromBounds(CursorPosition, _token.Span.End)
+                )
                     .ToString();
 
                 var firstToken = SyntaxFactory.Token(

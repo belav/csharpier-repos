@@ -55,10 +55,8 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new int[][] { new int[] { 10 } }, IID_IUNKNOWN };
             yield return new object[] { new int[,] { { 10 } }, IID_IUNKNOWN };
 
-            MethodInfo method = typeof(GetObjectForIUnknownTests).GetMethod(
-                nameof(NonGenericMethod),
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            MethodInfo method = typeof(GetObjectForIUnknownTests)
+                .GetMethod(nameof(NonGenericMethod), BindingFlags.NonPublic | BindingFlags.Static);
             Delegate d = method.CreateDelegate(typeof(NonGenericDelegate));
             yield return new object[] { d, IID_IUNKNOWN };
             yield return new object[] { d, IID_IDISPATCH };

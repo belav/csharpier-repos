@@ -83,11 +83,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     return Expression.Lambda<
                         Func<MaterializationContext, IEntityType, object, object>
                     >(
-                            b.BindToParameter(materializationContextParam, entityTypeParam),
-                            materializationContextParam,
-                            entityTypeParam,
-                            entityParam
-                        )
+                        b.BindToParameter(materializationContextParam, entityTypeParam),
+                        materializationContextParam,
+                        entityTypeParam,
+                        entityParam
+                    )
                         .Compile();
                 }
             );

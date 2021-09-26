@@ -33,11 +33,11 @@ namespace Microsoft.CodeAnalysis.AddImport
             )
             {
                 var declarations = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                        _project,
-                        searchQuery,
-                        filter,
-                        CancellationToken
-                    )
+                    _project,
+                    searchQuery,
+                    filter,
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return declarations;

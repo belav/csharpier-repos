@@ -152,9 +152,8 @@ public class Program
         //     }) { IsBackground = true }.Start();
         // }
 
-        string contentSource = string.Concat(
-            Enumerable.Repeat("1234567890", maxContentLength / 10)
-        );
+        string contentSource = string
+            .Concat(Enumerable.Repeat("1234567890", maxContentLength / 10));
         const int DisplayIntervalMilliseconds = 10000;
         const int HttpsPort = 5001;
         const string LocalhostName = "localhost";
@@ -253,11 +252,8 @@ public class Program
                     )
                     {
                         var cts = new CancellationTokenSource();
-                        Task<HttpResponseMessage> t = ctx.HttpClient.SendAsync(
-                            req,
-                            HttpCompletionOption.ResponseHeadersRead,
-                            cts.Token
-                        );
+                        Task<HttpResponseMessage> t = ctx.HttpClient
+                            .SendAsync(req, HttpCompletionOption.ResponseHeadersRead, cts.Token);
                         await Task.Delay(1);
                         cts.Cancel();
                         try
@@ -363,10 +359,8 @@ public class Program
                         }
                     )
                     using (
-                        HttpResponseMessage m = await ctx.HttpClient.SendAsync(
-                            req,
-                            HttpCompletionOption.ResponseHeadersRead
-                        )
+                        HttpResponseMessage m = await ctx.HttpClient
+                            .SendAsync(req, HttpCompletionOption.ResponseHeadersRead)
                     )
                     {
                         ValidateResponse(m, httpVersion);
@@ -391,10 +385,8 @@ public class Program
                         }
                     )
                     using (
-                        HttpResponseMessage m = await ctx.HttpClient.SendAsync(
-                            req,
-                            HttpCompletionOption.ResponseHeadersRead
-                        )
+                        HttpResponseMessage m = await ctx.HttpClient
+                            .SendAsync(req, HttpCompletionOption.ResponseHeadersRead)
                     )
                     {
                         ValidateResponse(m, httpVersion);
@@ -419,10 +411,8 @@ public class Program
                     {
                         req.Headers.ExpectContinue = true;
                         using (
-                            HttpResponseMessage m = await ctx.HttpClient.SendAsync(
-                                req,
-                                HttpCompletionOption.ResponseHeadersRead
-                            )
+                            HttpResponseMessage m = await ctx.HttpClient
+                                .SendAsync(req, HttpCompletionOption.ResponseHeadersRead)
                         )
                         {
                             ValidateResponse(m, httpVersion);
@@ -448,11 +438,8 @@ public class Program
                     {
                         var cts = new CancellationTokenSource();
                         req.Content = new CancelableContent(cts.Token);
-                        Task<HttpResponseMessage> t = ctx.HttpClient.SendAsync(
-                            req,
-                            HttpCompletionOption.ResponseHeadersRead,
-                            cts.Token
-                        );
+                        Task<HttpResponseMessage> t = ctx.HttpClient
+                            .SendAsync(req, HttpCompletionOption.ResponseHeadersRead, cts.Token);
                         await Task.Delay(1);
                         cts.Cancel();
                         try
@@ -561,98 +548,98 @@ public class Program
         // Start the Kestrel web server in-proc.
         Console.WriteLine("Starting server.");
         WebHost.CreateDefaultBuilder()
-            //Use Kestrel, and configure it for HTTPS with a self - signed test certificate.
-            .UseKestrel(
-                ko =>
-                {
-                    ko.ListenLocalhost(
-                        HttpsPort,
-                        listenOptions =>
+        //Use Kestrel, and configure it for HTTPS with a self - signed test certificate.
+        .UseKestrel(
+            ko =>
+            {
+                ko.ListenLocalhost(
+                    HttpsPort,
+                    listenOptions =>
+                    {
+                        using (RSA rsa = RSA.Create())
                         {
-                            using (RSA rsa = RSA.Create())
-                            {
-                                var certReq = new CertificateRequest(
-                                    $"CN={LocalhostName}",
-                                    rsa,
-                                    HashAlgorithmName.SHA256,
-                                    RSASignaturePadding.Pkcs1
-                                );
-                                certReq.CertificateExtensions.Add(
-                                    new X509BasicConstraintsExtension(false, false, 0, false)
-                                );
-                                certReq.CertificateExtensions.Add(
+                            var certReq = new CertificateRequest(
+                                $"CN={LocalhostName}",
+                                rsa,
+                                HashAlgorithmName.SHA256,
+                                RSASignaturePadding.Pkcs1
+                            );
+                            certReq.CertificateExtensions
+                                .Add(new X509BasicConstraintsExtension(false, false, 0, false));
+                            certReq.CertificateExtensions
+                                .Add(
                                     new X509EnhancedKeyUsageExtension(
                                         new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
                                         false
                                     )
                                 );
-                                certReq.CertificateExtensions.Add(
+                            certReq.CertificateExtensions
+                                .Add(
                                     new X509KeyUsageExtension(
                                         X509KeyUsageFlags.DigitalSignature,
                                         false
                                     )
                                 );
-                                X509Certificate2 cert = certReq.CreateSelfSigned(
-                                    DateTimeOffset.UtcNow.AddMonths(-1),
-                                    DateTimeOffset.UtcNow.AddMonths(1)
-                                );
-                                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                                {
-                                    cert = new X509Certificate2(cert.Export(X509ContentType.Pfx));
-                                }
-                                listenOptions.UseHttps(cert);
+                            X509Certificate2 cert = certReq.CreateSelfSigned(
+                                DateTimeOffset.UtcNow.AddMonths(-1),
+                                DateTimeOffset.UtcNow.AddMonths(1)
+                            );
+                            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                            {
+                                cert = new X509Certificate2(cert.Export(X509ContentType.Pfx));
                             }
+                            listenOptions.UseHttps(cert);
                         }
-                    );
-                }
-            )
-            // Output only warnings and errors from Kestrel
-            .ConfigureLogging(
-                log =>
-                    log.AddFilter(
-                        "Microsoft.AspNetCore",
-                        level => aspnetLog ? level >= LogLevel.Error : false
-                    )
-            )
-            // Set up how each request should be handled by the server.
-            .Configure(
-                app =>
-                {
-                    var head = new[] { "HEAD" };
-                    app.UseRouting();
-                    app.UseEndpoints(
-                        endpoints =>
-                        {
-                            endpoints.MapGet(
-                                "/",
-                                async context =>
+                    }
+                );
+            }
+        )
+        // Output only warnings and errors from Kestrel
+        .ConfigureLogging(
+            log =>
+                log.AddFilter(
+                    "Microsoft.AspNetCore",
+                    level => aspnetLog ? level >= LogLevel.Error : false
+                )
+        )
+        // Set up how each request should be handled by the server.
+        .Configure(
+            app =>
+            {
+                var head = new[] { "HEAD" };
+                app.UseRouting();
+                app.UseEndpoints(
+                    endpoints =>
+                    {
+                        endpoints.MapGet(
+                            "/",
+                            async context =>
+                            {
+                                // Get requests just send back the requested content.
+                                await context.Response.WriteAsync(contentSource);
+                            }
+                        );
+                        endpoints.MapGet(
+                            "/slow",
+                            async context =>
+                            {
+                                // Sends back the content a character at a time.
+                                for (int i = 0; i < contentSource.Length; i++)
                                 {
-                                    // Get requests just send back the requested content.
-                                    await context.Response.WriteAsync(contentSource);
+                                    await context.Response.WriteAsync(contentSource[i].ToString());
+                                    await context.Response.Body.FlushAsync();
                                 }
-                            );
-                            endpoints.MapGet(
-                                "/slow",
-                                async context =>
+                            }
+                        );
+                        endpoints.MapGet(
+                            "/headers",
+                            async context =>
+                            {
+                                // Get request but with a bunch of extra headers
+                                for (int i = 0; i < 20; i++)
                                 {
-                                    // Sends back the content a character at a time.
-                                    for (int i = 0; i < contentSource.Length; i++)
-                                    {
-                                        await context.Response.WriteAsync(
-                                            contentSource[i].ToString()
-                                        );
-                                        await context.Response.Body.FlushAsync();
-                                    }
-                                }
-                            );
-                            endpoints.MapGet(
-                                "/headers",
-                                async context =>
-                                {
-                                    // Get request but with a bunch of extra headers
-                                    for (int i = 0; i < 20; i++)
-                                    {
-                                        context.Response.Headers.Add(
+                                    context.Response.Headers
+                                        .Add(
                                             "CustomHeader" + i,
                                             new StringValues(
                                                 Enumerable.Range(0, i)
@@ -660,13 +647,14 @@ public class Program
                                                     .ToArray()
                                             )
                                         );
-                                    }
-                                    await context.Response.WriteAsync(contentSource);
-                                    if (context.Response.SupportsTrailers())
+                                }
+                                await context.Response.WriteAsync(contentSource);
+                                if (context.Response.SupportsTrailers())
+                                {
+                                    for (int i = 0; i < 10; i++)
                                     {
-                                        for (int i = 0; i < 10; i++)
-                                        {
-                                            context.Response.AppendTrailer(
+                                        context.Response
+                                            .AppendTrailer(
                                                 "CustomTrailer" + i,
                                                 new StringValues(
                                                     Enumerable.Range(0, i)
@@ -674,76 +662,75 @@ public class Program
                                                         .ToArray()
                                                 )
                                             );
-                                        }
                                     }
                                 }
-                            );
-                            endpoints.MapGet(
-                                "/abort",
-                                async context =>
-                                {
-                                    // Server writes some content, then aborts the connection
-                                    await context.Response.WriteAsync(
+                            }
+                        );
+                        endpoints.MapGet(
+                            "/abort",
+                            async context =>
+                            {
+                                // Server writes some content, then aborts the connection
+                                await context.Response
+                                    .WriteAsync(
                                         contentSource.Substring(0, contentSource.Length / 2)
                                     );
-                                    context.Abort();
-                                }
-                            );
-                            endpoints.MapPost(
-                                "/",
-                                async context =>
+                                context.Abort();
+                            }
+                        );
+                        endpoints.MapPost(
+                            "/",
+                            async context =>
+                            {
+                                // Post echos back the requested content, first buffering it all server-side, then sending it all back.
+                                var s = new MemoryStream();
+                                await context.Request.Body.CopyToAsync(s);
+                                s.Position = 0;
+                                await s.CopyToAsync(context.Response.Body);
+                            }
+                        );
+                        endpoints.MapPost(
+                            "/duplex",
+                            async context =>
+                            {
+                                // Echos back the requested content in a full duplex manner.
+                                await context.Request.Body.CopyToAsync(context.Response.Body);
+                            }
+                        );
+                        endpoints.MapPost(
+                            "/duplexSlow",
+                            async context =>
+                            {
+                                // Echos back the requested content in a full duplex manner, but one byte at a time.
+                                var buffer = new byte[1];
+                                while ((await context.Request.Body.ReadAsync(buffer)) != 0)
                                 {
-                                    // Post echos back the requested content, first buffering it all server-side, then sending it all back.
-                                    var s = new MemoryStream();
-                                    await context.Request.Body.CopyToAsync(s);
-                                    s.Position = 0;
-                                    await s.CopyToAsync(context.Response.Body);
+                                    await context.Response.Body.WriteAsync(buffer);
                                 }
-                            );
-                            endpoints.MapPost(
-                                "/duplex",
-                                async context =>
-                                {
-                                    // Echos back the requested content in a full duplex manner.
-                                    await context.Request.Body.CopyToAsync(context.Response.Body);
-                                }
-                            );
-                            endpoints.MapPost(
-                                "/duplexSlow",
-                                async context =>
-                                {
-                                    // Echos back the requested content in a full duplex manner, but one byte at a time.
-                                    var buffer = new byte[1];
-                                    while ((await context.Request.Body.ReadAsync(buffer)) != 0)
-                                    {
-                                        await context.Response.Body.WriteAsync(buffer);
-                                    }
-                                }
-                            );
-                            endpoints.MapMethods(
-                                "/",
-                                head,
-                                context =>
-                                {
-                                    // Just set the max content length on the response.
-                                    context.Response.Headers.ContentLength = maxContentLength;
-                                    return Task.CompletedTask;
-                                }
-                            );
-                            endpoints.MapPut(
-                                "/",
-                                async context =>
-                                {
-                                    // Read the full request but don't send back a response body.
-                                    await context.Request.Body.CopyToAsync(Stream.Null);
-                                }
-                            );
-                        }
-                    );
-                }
-            )
-            .Build()
-            .Start();
+                            }
+                        );
+                        endpoints.MapMethods(
+                            "/",
+                            head,
+                            context =>
+                            {
+                                // Just set the max content length on the response.
+                                context.Response.Headers.ContentLength = maxContentLength;
+                                return Task.CompletedTask;
+                            }
+                        );
+                        endpoints.MapPut(
+                            "/",
+                            async context =>
+                            {
+                                // Read the full request but don't send back a response body.
+                                await context.Request.Body.CopyToAsync(Stream.Null);
+                            }
+                        );
+                    }
+                );
+            }
+        ).Build().Start();
 
         // Start the client.
         Console.WriteLine($"Starting {concurrentRequests} client workers.");
@@ -833,66 +820,62 @@ public class Program
                 }
             ) {
                 IsBackground = true
-            }.Start();
+            }
+                .Start();
 
             // Start N workers, each of which sits in a loop making requests.
-            Task.WaitAll(
-                Enumerable.Range(0, concurrentRequests)
-                    .Select(
-                        taskNum =>
-                            Task.Run(
-                                async () =>
+            Task.WaitAll(Enumerable.Range(0, concurrentRequests).Select(
+                    taskNum =>
+                        Task.Run(
+                            async () =>
+                            {
+                                var clientContext = new ClientContext(
+                                    client,
+                                    taskNum: taskNum,
+                                    seed: seed
+                                );
+                                // TODO make 50000 configurable based on time.
+                                for (long i = taskNum; i < 500000; i++)
                                 {
-                                    var clientContext = new ClientContext(
-                                        client,
-                                        taskNum: taskNum,
-                                        seed: seed
-                                    );
-                                    // TODO make 50000 configurable based on time.
-                                    for (long i = taskNum; i < 500000; i++)
+                                    long opIndex = i % clientOperations.Length;
+                                    (string operation, Func<ClientContext, Task> func) =
+                                        clientOperations[opIndex];
+                                    try
                                     {
-                                        long opIndex = i % clientOperations.Length;
-                                        (string operation, Func<ClientContext, Task> func) =
-                                            clientOperations[opIndex];
-                                        try
-                                        {
-                                            await func(clientContext);
+                                        await func(clientContext);
 
-                                            Increment(ref success[opIndex]);
+                                        Increment(ref success[opIndex]);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Increment(ref fail[opIndex]);
+
+                                        if (
+                                            e is HttpRequestException hre
+                                            && hre.InnerException is SocketException se
+                                            && se.SocketErrorCode == SocketError.AddressAlreadyInUse
+                                        )
+                                        {
+                                            Interlocked.Increment(ref reuseAddressFailure);
                                         }
-                                        catch (Exception e)
+                                        else
                                         {
-                                            Increment(ref fail[opIndex]);
-
-                                            if (
-                                                e is HttpRequestException hre
-                                                && hre.InnerException is SocketException se
-                                                && se.SocketErrorCode
-                                                    == SocketError.AddressAlreadyInUse
-                                            )
+                                            lock (Console.Out)
                                             {
-                                                Interlocked.Increment(ref reuseAddressFailure);
-                                            }
-                                            else
-                                            {
-                                                lock (Console.Out)
-                                                {
-                                                    Console.ForegroundColor = ConsoleColor.Yellow;
-                                                    Console.WriteLine(
-                                                        $"Error from iteration {i} ({operation}) in task {taskNum} with {success.Sum()} successes / {fail.Sum()} fails:"
-                                                    );
-                                                    Console.ResetColor();
-                                                    Console.WriteLine(e);
-                                                    Console.WriteLine();
-                                                }
+                                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                                Console.WriteLine(
+                                                    $"Error from iteration {i} ({operation}) in task {taskNum} with {success.Sum()} successes / {fail.Sum()} fails:"
+                                                );
+                                                Console.ResetColor();
+                                                Console.WriteLine(e);
+                                                Console.WriteLine();
                                             }
                                         }
                                     }
                                 }
-                            )
-                    )
-                    .ToArray()
-            );
+                            }
+                        )
+                ).ToArray());
 
             for (var i = 0; i < fail.Length; i++)
             {

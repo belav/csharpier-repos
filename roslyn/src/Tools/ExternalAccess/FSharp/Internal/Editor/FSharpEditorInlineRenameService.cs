@@ -96,8 +96,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
         {
             _set = set;
             _locations = set.Locations?.Select(
-                    x => new InlineRenameLocation(x.Document, x.TextSpan)
-                )
+                x => new InlineRenameLocation(x.Document, x.TextSpan)
+            )
                 .ToList();
         }
 
@@ -110,10 +110,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
         )
         {
             var info = await _set.GetReplacementsAsync(
-                    replacementText,
-                    optionSet,
-                    cancellationToken
-                )
+                replacementText,
+                optionSet,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (info != null)
             {

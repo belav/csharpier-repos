@@ -19,10 +19,10 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var token = await tree.GetTouchingTokenAsync(
-                    position,
-                    cancellationToken,
-                    findInsideTrivia: true
-                )
+                position,
+                cancellationToken,
+                findInsideTrivia: true
+            )
                 .ConfigureAwait(false);
 
             var info = await GetQuickInfoAsync(document, token, position, cancellationToken)

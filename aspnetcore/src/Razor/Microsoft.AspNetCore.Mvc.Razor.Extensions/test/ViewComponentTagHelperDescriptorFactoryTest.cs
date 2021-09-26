@@ -26,10 +26,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             var factory = new ViewComponentTagHelperDescriptorFactory(testCompilation);
 
             var expectedDescriptor = TagHelperDescriptorBuilder.Create(
-                    ViewComponentTagHelperConventions.Kind,
-                    "__Generated__StringParameterViewComponentTagHelper",
-                    typeof(StringParameterViewComponent).GetTypeInfo().Assembly.GetName().Name
-                )
+                ViewComponentTagHelperConventions.Kind,
+                "__Generated__StringParameterViewComponentTagHelper",
+                typeof(StringParameterViewComponent).GetTypeInfo().Assembly.GetName().Name
+            )
                 .TypeName("__Generated__StringParameterViewComponentTagHelper")
                 .DisplayName("StringParameterViewComponentTagHelper")
                 .TagMatchingRuleDescriptor(
@@ -73,10 +73,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             var factory = new ViewComponentTagHelperDescriptorFactory(testCompilation);
 
             var expectedDescriptor = TagHelperDescriptorBuilder.Create(
-                    ViewComponentTagHelperConventions.Kind,
-                    "__Generated__VariousParameterViewComponentTagHelper",
-                    typeof(VariousParameterViewComponent).GetTypeInfo().Assembly.GetName().Name
-                )
+                ViewComponentTagHelperConventions.Kind,
+                "__Generated__VariousParameterViewComponentTagHelper",
+                typeof(VariousParameterViewComponent).GetTypeInfo().Assembly.GetName().Name
+            )
                 .TypeName("__Generated__VariousParameterViewComponentTagHelper")
                 .DisplayName("VariousParameterViewComponentTagHelper")
                 .TagMatchingRuleDescriptor(
@@ -138,10 +138,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             var factory = new ViewComponentTagHelperDescriptorFactory(testCompilation);
 
             var expectedDescriptor = TagHelperDescriptorBuilder.Create(
-                    ViewComponentTagHelperConventions.Kind,
-                    "__Generated__GenericParameterViewComponentTagHelper",
-                    typeof(GenericParameterViewComponent).GetTypeInfo().Assembly.GetName().Name
-                )
+                ViewComponentTagHelperConventions.Kind,
+                "__Generated__GenericParameterViewComponentTagHelper",
+                typeof(GenericParameterViewComponent).GetTypeInfo().Assembly.GetName().Name
+            )
                 .TypeName("__Generated__GenericParameterViewComponentTagHelper")
                 .DisplayName("GenericParameterViewComponentTagHelper")
                 .TagMatchingRuleDescriptor(
@@ -188,10 +188,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             var factory = new ViewComponentTagHelperDescriptorFactory(testCompilation);
 
             var expectedDescriptor = TagHelperDescriptorBuilder.Create(
-                    ViewComponentTagHelperConventions.Kind,
-                    "__Generated__SyncDerivedViewComponentTagHelper",
-                    typeof(SyncDerivedViewComponent).GetTypeInfo().Assembly.GetName().Name
-                )
+                ViewComponentTagHelperConventions.Kind,
+                "__Generated__SyncDerivedViewComponentTagHelper",
+                typeof(SyncDerivedViewComponent).GetTypeInfo().Assembly.GetName().Name
+            )
                 .TypeName("__Generated__SyncDerivedViewComponentTagHelper")
                 .DisplayName("SyncDerivedViewComponentTagHelper")
                 .TagMatchingRuleDescriptor(
@@ -236,10 +236,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             var factory = new ViewComponentTagHelperDescriptorFactory(testCompilation);
 
             var expectedDescriptor = TagHelperDescriptorBuilder.Create(
-                    ViewComponentTagHelperConventions.Kind,
-                    "__Generated__AsyncDerivedViewComponentTagHelper",
-                    typeof(AsyncDerivedViewComponent).Assembly.GetName().Name
-                )
+                ViewComponentTagHelperConventions.Kind,
+                "__Generated__AsyncDerivedViewComponentTagHelper",
+                typeof(AsyncDerivedViewComponent).Assembly.GetName().Name
+            )
                 .TypeName("__Generated__AsyncDerivedViewComponentTagHelper")
                 .DisplayName("AsyncDerivedViewComponentTagHelper")
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("vc:async-derived"))

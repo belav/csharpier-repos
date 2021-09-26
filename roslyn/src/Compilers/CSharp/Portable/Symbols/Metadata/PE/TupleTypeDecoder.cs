@@ -84,11 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         )
         {
             ImmutableArray<string?> elementNames;
-            var hasTupleElementNamesAttribute =
-                containingModule.Module.HasTupleElementNamesAttribute(
-                    targetHandle,
-                    out elementNames
-                );
+            var hasTupleElementNamesAttribute = containingModule.Module
+                .HasTupleElementNamesAttribute(targetHandle, out elementNames);
 
             // If we have the TupleElementNamesAttribute, but no names, that's
             // bad metadata
@@ -111,11 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         )
         {
             ImmutableArray<string?> elementNames;
-            var hasTupleElementNamesAttribute =
-                containingModule.Module.HasTupleElementNamesAttribute(
-                    targetHandle,
-                    out elementNames
-                );
+            var hasTupleElementNamesAttribute = containingModule.Module
+                .HasTupleElementNamesAttribute(targetHandle, out elementNames);
 
             // If we have the TupleElementNamesAttribute, but no names, that's
             // bad metadata
@@ -240,9 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (type.Signature.ParameterCount > 0)
             {
-                var paramsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                    type.Signature.ParameterCount
-                );
+                var paramsBuilder = ArrayBuilder<TypeWithAnnotations>
+                    .GetInstance(type.Signature.ParameterCount);
 
                 for (int i = type.Signature.ParameterCount - 1; i >= 0; i--)
                 {

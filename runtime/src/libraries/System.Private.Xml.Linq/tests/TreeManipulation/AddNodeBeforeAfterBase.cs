@@ -92,8 +92,8 @@ namespace XLinqTests
                     var orig = new XElement(referenceElement);
 
                     IEnumerable<ExpectedValue> expectedNodes = Helpers.ProcessNodes(
-                            calculateExpectedValues(orig, startPos, newNodes)
-                        )
+                        calculateExpectedValues(orig, startPos, newNodes)
+                    )
                         .ToList();
 
                     // Add node on the expected place
@@ -179,8 +179,8 @@ namespace XLinqTests
                     XNode n = doc.FirstNode;
 
                     List<ExpectedValue> expNodes = Helpers.ProcessNodes(
-                            calculateExpectedValues(doc, 0, o)
-                        )
+                        calculateExpectedValues(doc, 0, o)
+                    )
                         .ToList();
                     bool shouldFail = expNodes.IsXDocValid();
 

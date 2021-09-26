@@ -294,18 +294,14 @@ namespace AutoMapper.UnitTests.Bug
             var config = new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap<ModelObject, DtoObject>()
-                        .ForMember(
-                            d => d.BaseString,
-                            m =>
-                            {
-                                m.Condition(
-                                    src => !string.IsNullOrWhiteSpace(src.DifferentBaseString)
-                                );
-                                m.MapFrom(s => s.DifferentBaseString);
-                            }
-                        )
-                        .Include<ModelSubObject, DtoSubObject>();
+                    cfg.CreateMap<ModelObject, DtoObject>().ForMember(
+                        d => d.BaseString,
+                        m =>
+                        {
+                            m.Condition(src => !string.IsNullOrWhiteSpace(src.DifferentBaseString));
+                            m.MapFrom(s => s.DifferentBaseString);
+                        }
+                    ).Include<ModelSubObject, DtoSubObject>();
 
                     cfg.CreateMap<ModelSubObject, DtoSubObject>();
                 }
@@ -323,16 +319,14 @@ namespace AutoMapper.UnitTests.Bug
             var config = new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap<ModelObject, DtoObject>()
-                        .ForMember(
-                            d => d.BaseString,
-                            m =>
-                            {
-                                m.MapFrom(s => s.DifferentBaseString);
-                                m.NullSubstitute("12345");
-                            }
-                        )
-                        .Include<ModelSubObject, DtoSubObject>();
+                    cfg.CreateMap<ModelObject, DtoObject>().ForMember(
+                        d => d.BaseString,
+                        m =>
+                        {
+                            m.MapFrom(s => s.DifferentBaseString);
+                            m.NullSubstitute("12345");
+                        }
+                    ).Include<ModelSubObject, DtoSubObject>();
 
                     cfg.CreateMap<ModelSubObject, DtoSubObject>();
                 }

@@ -122,31 +122,24 @@ namespace System.Linq.Parallel.Tests
             foreach (
                 Labeled<Operation> operation in new[]
                 {
-                    Label(
-                        "OrderBy",
-                        (start, count, s) =>
-                            s(start, count)
-                                .OrderBy<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                    ),
+                    Label("OrderBy", (start, count, s) => s(start, count).OrderBy<int, int>(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )),
                     Label(
                         "OrderBy-Comparer",
                         (start, count, s) => s(start, count).OrderBy(x => x, new FailingComparer())
                     ),
                     Label(
                         "OrderByDescending",
-                        (start, count, s) =>
-                            s(start, count)
-                                .OrderByDescending<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                        (start, count, s) => s(start, count).OrderByDescending<int, int>(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
                     ),
                     Label(
                         "OrderByDescending-Comparer",
@@ -155,15 +148,12 @@ namespace System.Linq.Parallel.Tests
                     ),
                     Label(
                         "ThenBy",
-                        (start, count, s) =>
-                            s(start, count)
-                                .OrderBy(x => 0)
-                                .ThenBy<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                        (start, count, s) => s(start, count).OrderBy(x => 0).ThenBy<int, int>(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
                     ),
                     Label(
                         "ThenBy-Comparer",
@@ -173,14 +163,12 @@ namespace System.Linq.Parallel.Tests
                     Label(
                         "ThenByDescending",
                         (start, count, s) =>
-                            s(start, count)
-                                .OrderBy(x => 0)
-                                .ThenByDescending<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                            s(start, count).OrderBy(x => 0).ThenByDescending<int, int>(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
                     ),
                     Label(
                         "ThenByDescending-Comparer",
@@ -562,18 +550,12 @@ namespace System.Linq.Parallel.Tests
                         (start, count, s) =>
                             s(start, count).Distinct(new FailingEqualityComparer<int>())
                     ),
-                    Label(
-                        "GroupBy",
-                        (start, count, s) =>
-                            s(start, count)
-                                .GroupBy<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                                .Select(g => g.Key)
-                    ),
+                    Label("GroupBy", (start, count, s) => s(start, count).GroupBy<int, int>(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            ).Select(g => g.Key)),
                     Label(
                         "GroupBy-Comparer",
                         (start, count, s) =>
@@ -583,164 +565,108 @@ namespace System.Linq.Parallel.Tests
                     ),
                     Label(
                         "GroupBy-ElementSelector",
-                        (start, count, s) =>
-                            s(start, count)
-                                .GroupBy<int, int, int>(
-                                    x => x,
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                                .Select(g => g.Key)
+                        (start, count, s) => s(start, count).GroupBy<int, int, int>(
+                                x => x,
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            ).Select(g => g.Key)
                     ),
                     Label(
                         "GroupBy-ResultSelector",
-                        (start, count, s) =>
-                            s(start, count)
-                                .GroupBy<int, int, int, int>(
-                                    x => x,
-                                    x => x,
-                                    (x, g) =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                        (start, count, s) => s(start, count).GroupBy<int, int, int, int>(
+                                x => x,
+                                x => x,
+                                (x, g) =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
                     ),
-                    Label(
-                        "Select",
-                        (start, count, s) =>
-                            s(start, count)
-                                .Select<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                    ),
-                    Label(
-                        "Select-Index",
-                        (start, count, s) =>
-                            s(start, count)
-                                .Select<int, int>(
-                                    (x, index) =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                    ),
-                    Label(
-                        "SelectMany",
-                        (start, count, s) =>
-                            s(start, count)
-                                .SelectMany<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                    ),
+                    Label("Select", (start, count, s) => s(start, count).Select<int, int>(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )),
+                    Label("Select-Index", (start, count, s) => s(start, count).Select<int, int>(
+                                (x, index) =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )),
+                    Label("SelectMany", (start, count, s) => s(start, count).SelectMany<int, int>(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )),
                     Label(
                         "SelectMany-Index",
-                        (start, count, s) =>
-                            s(start, count)
-                                .SelectMany<int, int>(
-                                    (x, index) =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                        (start, count, s) => s(start, count).SelectMany<int, int>(
+                                (x, index) =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
                     ),
                     Label(
                         "SelectMany-ResultSelector",
-                        (start, count, s) =>
-                            s(start, count)
-                                .SelectMany<int, int, int>(
-                                    x => Enumerable.Range(x, 2),
-                                    (group, elem) =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                        (start, count, s) => s(start, count).SelectMany<int, int, int>(
+                                x => Enumerable.Range(x, 2),
+                                (group, elem) =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
                     ),
                     Label(
                         "SelectMany-Index-ResultSelector",
-                        (start, count, s) =>
-                            s(start, count)
-                                .SelectMany<int, int, int>(
-                                    (x, index) => Enumerable.Range(x, 2),
-                                    (group, elem) =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                        (start, count, s) => s(start, count).SelectMany<int, int, int>(
+                                (x, index) => Enumerable.Range(x, 2),
+                                (group, elem) =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
                     ),
-                    Label(
-                        "SkipWhile",
-                        (start, count, s) =>
-                            s(start, count)
-                                .SkipWhile(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                    ),
-                    Label(
-                        "SkipWhile-Index",
-                        (start, count, s) =>
-                            s(start, count)
-                                .SkipWhile(
-                                    (x, index) =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                    ),
-                    Label(
-                        "TakeWhile",
-                        (start, count, s) =>
-                            s(start, count)
-                                .TakeWhile(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                    ),
-                    Label(
-                        "TakeWhile-Index",
-                        (start, count, s) =>
-                            s(start, count)
-                                .SkipWhile(
-                                    (x, index) =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                    ),
-                    Label(
-                        "Where",
-                        (start, count, s) =>
-                            s(start, count)
-                                .Where(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                    ),
-                    Label(
-                        "Where-Index",
-                        (start, count, s) =>
-                            s(start, count)
-                                .Where(
-                                    (x, index) =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                    ),
+                    Label("SkipWhile", (start, count, s) => s(start, count).SkipWhile(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )),
+                    Label("SkipWhile-Index", (start, count, s) => s(start, count).SkipWhile(
+                                (x, index) =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )),
+                    Label("TakeWhile", (start, count, s) => s(start, count).TakeWhile(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )),
+                    Label("TakeWhile-Index", (start, count, s) => s(start, count).SkipWhile(
+                                (x, index) =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )),
+                    Label("Where", (start, count, s) => s(start, count).Where(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )),
+                    Label("Where-Index", (start, count, s) => s(start, count).Where(
+                                (x, index) =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )),
                 }
             )
             {
@@ -1159,14 +1085,12 @@ namespace System.Linq.Parallel.Tests
         {
             Labeled<Operation> failing = Label(
                 "Failing",
-                (start, count, s) =>
-                    s(start, count)
-                        .Select<int, int>(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                (start, count, s) => s(start, count).Select<int, int>(
+                        x =>
+                        {
+                            throw new DeliberateTestException();
+                        }
+                    )
             );
 
             foreach (Labeled<Operation> operation in BinaryOperatorSources(LabeledDefaultSource))
@@ -1229,18 +1153,13 @@ namespace System.Linq.Parallel.Tests
                                     new FailingEqualityComparer<int>()
                                 )
                     ),
-                    Label(
-                        "Zip-Fail",
-                        (start, count, s) =>
-                            s(start, count)
-                                .Zip<int, int, int>(
-                                    DefaultSource(start, count),
-                                    (x, y) =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
-                    ),
+                    Label("Zip-Fail", (start, count, s) => s(start, count).Zip<int, int, int>(
+                                DefaultSource(start, count),
+                                (x, y) =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )),
                 }
             )
             {

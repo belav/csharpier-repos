@@ -238,16 +238,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     (routeLink && actionLink) || (routeLink && pageLink) || (actionLink && pageLink)
                 )
                 {
-                    var message = string.Join(
-                        Environment.NewLine,
-                        Resources.FormatCannotDetermineAttributeFor(
-                            HtmlActionAttributeName,
-                            "<form>"
-                        ),
-                        RouteAttributeName,
-                        ControllerAttributeName + ", " + ActionAttributeName,
-                        PageAttributeName
-                    );
+                    var message = string
+                        .Join(
+                            Environment.NewLine,
+                            Resources.FormatCannotDetermineAttributeFor(
+                                HtmlActionAttributeName,
+                                "<form>"
+                            ),
+                            RouteAttributeName,
+                            ControllerAttributeName + ", " + ActionAttributeName,
+                            PageAttributeName
+                        );
 
                     throw new InvalidOperationException(message);
                 }

@@ -99,18 +99,16 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider.ForType(typeof(KeyValuePair<string, int>))
-                .BindingDetails(
-                    (System.Action<ModelBinding.Metadata.BindingMetadata>)(
-                        binding =>
-                        {
-                            // A real details provider could customize message based on BindingMetadataProviderContext.
-                            binding.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(
-                                () => $"Hurts when nothing is provided."
-                            );
-                        }
-                    )
-                );
+            metadataProvider.ForType(typeof(KeyValuePair<string, int>)).BindingDetails(
+                (System.Action<ModelBinding.Metadata.BindingMetadata>)(
+                    binding =>
+                    {
+                        // A real details provider could customize message based on BindingMetadataProviderContext.
+                        binding.ModelBindingMessageProvider
+                            .SetMissingKeyOrValueAccessor(() => $"Hurts when nothing is provided.");
+                    }
+                )
+            );
 
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
@@ -195,18 +193,16 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider.ForType(typeof(KeyValuePair<string, int>))
-                .BindingDetails(
-                    (System.Action<ModelBinding.Metadata.BindingMetadata>)(
-                        binding =>
-                        {
-                            // A real details provider could customize message based on BindingMetadataProviderContext.
-                            binding.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(
-                                () => $"Hurts when nothing is provided."
-                            );
-                        }
-                    )
-                );
+            metadataProvider.ForType(typeof(KeyValuePair<string, int>)).BindingDetails(
+                (System.Action<ModelBinding.Metadata.BindingMetadata>)(
+                    binding =>
+                    {
+                        // A real details provider could customize message based on BindingMetadataProviderContext.
+                        binding.ModelBindingMessageProvider
+                            .SetMissingKeyOrValueAccessor(() => $"Hurts when nothing is provided.");
+                    }
+                )
+            );
 
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>

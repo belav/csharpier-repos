@@ -169,9 +169,10 @@ namespace Microsoft.XmlSerializer.Generator
                 {
                     foreach (string err in errs)
                     {
-                        Console.Error.WriteLine(
-                            FormatMessage(parsableErrors, true, SR.Format(SR.Warning, err))
-                        );
+                        Console.Error
+                            .WriteLine(
+                                FormatMessage(parsableErrors, true, SR.Format(SR.Warning, err))
+                            );
                     }
                 }
 
@@ -179,16 +180,17 @@ namespace Microsoft.XmlSerializer.Generator
                 {
                     if (assembly == null)
                     {
-                        Console.Error.WriteLine(
-                            FormatMessage(
-                                parsableErrors,
-                                false,
-                                SR.Format(
-                                    SR.ErrMissingRequiredArgument,
-                                    SR.Format(SR.ErrAssembly, "assembly")
+                        Console.Error
+                            .WriteLine(
+                                FormatMessage(
+                                    parsableErrors,
+                                    false,
+                                    SR.Format(
+                                        SR.ErrMissingRequiredArgument,
+                                        SR.Format(SR.ErrAssembly, "assembly")
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     WriteHelp();
@@ -281,16 +283,17 @@ namespace Microsoft.XmlSerializer.Generator
                     Type type = assembly.GetType(typeName);
                     if (type == null)
                     {
-                        Console.Error.WriteLine(
-                            FormatMessage(
-                                parsableerrors,
-                                false,
-                                SR.Format(
-                                    SR.ErrorDetails,
-                                    SR.Format(SR.ErrLoadType, typeName, assemblyName)
+                        Console.Error
+                            .WriteLine(
+                                FormatMessage(
+                                    parsableerrors,
+                                    false,
+                                    SR.Format(
+                                        SR.ErrorDetails,
+                                        SR.Format(SR.ErrLoadType, typeName, assemblyName)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     types[typeIndex++] = type;
@@ -334,13 +337,14 @@ namespace Microsoft.XmlSerializer.Generator
                 {
                     if (warnings)
                     {
-                        Console.Out.WriteLine(
-                            FormatMessage(
-                                parsableerrors,
-                                true,
-                                SR.Format(SR.InfoIgnoreType, type.FullName)
-                            )
-                        );
+                        Console.Out
+                            .WriteLine(
+                                FormatMessage(
+                                    parsableerrors,
+                                    true,
+                                    SR.Format(SR.InfoIgnoreType, type.FullName)
+                                )
+                            );
                         WriteWarning(e, parsableerrors);
                     }
                     continue;
@@ -414,20 +418,21 @@ namespace Microsoft.XmlSerializer.Generator
 
                     using (FileStream fs = File.Create(codePath))
                     {
-                        MethodInfo method =
-                            typeof(System.Xml.Serialization.XmlSerializer).GetMethod(
+                        MethodInfo method = typeof(System.Xml.Serialization.XmlSerializer)
+                            .GetMethod(
                                 "GenerateSerializer",
                                 BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
                             );
                         if (method == null)
                         {
-                            Console.Error.WriteLine(
-                                FormatMessage(
-                                    parsableerrors: false,
-                                    warning: false,
-                                    message: SR.GenerateSerializerNotFound
-                                )
-                            );
+                            Console.Error
+                                .WriteLine(
+                                    FormatMessage(
+                                        parsableerrors: false,
+                                        warning: false,
+                                        message: SR.GenerateSerializerNotFound
+                                    )
+                                );
                         }
                         else
                         {
@@ -458,31 +463,34 @@ namespace Microsoft.XmlSerializer.Generator
                     if (!silent)
                     {
                         Console.Out.WriteLine(SR.Format(SR.InfoFileName, codePath));
-                        Console.Out.WriteLine(
-                            SR.Format(SR.InfoGeneratedFile, assembly.Location, codePath)
-                        );
+                        Console.Out
+                            .WriteLine(
+                                SR.Format(SR.InfoGeneratedFile, assembly.Location, codePath)
+                            );
                     }
                 }
                 else
                 {
-                    Console.Out.WriteLine(
-                        FormatMessage(
-                            parsableerrors,
-                            false,
-                            SR.Format(SR.ErrGenerationFailed, assembly.Location)
-                        )
-                    );
+                    Console.Out
+                        .WriteLine(
+                            FormatMessage(
+                                parsableerrors,
+                                false,
+                                SR.Format(SR.ErrGenerationFailed, assembly.Location)
+                            )
+                        );
                 }
             }
             else
             {
-                Console.Out.WriteLine(
-                    FormatMessage(
-                        parsableerrors,
-                        true,
-                        SR.Format(SR.InfoNoSerializableTypes, assembly.Location)
-                    )
-                );
+                Console.Out
+                    .WriteLine(
+                        FormatMessage(
+                            parsableerrors,
+                            true,
+                            SR.Format(SR.InfoNoSerializableTypes, assembly.Location)
+                        )
+                    );
             }
         }
 
@@ -536,13 +544,14 @@ namespace Microsoft.XmlSerializer.Generator
 
                 if (verbose)
                 {
-                    Console.Out.WriteLine(
-                        FormatMessage(
-                            parsableerrors,
-                            true,
-                            SR.Format(SR.InfoIgnoreType, type.FullName)
-                        )
-                    );
+                    Console.Out
+                        .WriteLine(
+                            FormatMessage(
+                                parsableerrors,
+                                true,
+                                SR.Format(SR.InfoIgnoreType, type.FullName)
+                            )
+                        );
                     WriteWarning(e, parsableerrors);
                 }
 
@@ -582,12 +591,13 @@ namespace Microsoft.XmlSerializer.Generator
         private void WriteHelp()
         {
             Console.Out.WriteLine(SR.HelpDescription);
-            Console.Out.WriteLine(
-                SR.Format(
-                    SR.HelpUsage,
-                    this.GetType().Assembly.GetName().Name.Substring("dotnet-".Length)
-                )
-            );
+            Console.Out
+                .WriteLine(
+                    SR.Format(
+                        SR.HelpUsage,
+                        this.GetType().Assembly.GetName().Name.Substring("dotnet-".Length)
+                    )
+                );
             Console.Out.WriteLine(SR.HelpDevOptions);
             Console.Out.WriteLine(SR.Format(SR.HelpAssembly, "-a", "--assembly"));
             Console.Out.WriteLine(SR.Format(SR.HelpType, "--type"));

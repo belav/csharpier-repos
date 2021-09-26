@@ -609,7 +609,8 @@ namespace Microsoft.Net.Http.Headers
                 new MediaTypeHeaderValue("application/xml", 0.9),
                 new MediaTypeHeaderValue("image/webp"),
                 new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -631,7 +632,8 @@ namespace Microsoft.Net.Http.Headers
                 new MediaTypeHeaderValue("application/xml", 0.9),
                 new MediaTypeHeaderValue("image/webp"),
                 new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -653,7 +655,8 @@ namespace Microsoft.Net.Http.Headers
                 new MediaTypeHeaderValue("application/xml", 0.9),
                 new MediaTypeHeaderValue("image/webp"),
                 new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -675,7 +678,8 @@ namespace Microsoft.Net.Http.Headers
                 new MediaTypeHeaderValue("application/xml", 0.9),
                 new MediaTypeHeaderValue("image/webp"),
                 new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -698,7 +702,8 @@ namespace Microsoft.Net.Http.Headers
                 new MediaTypeHeaderValue("application/xml", 0.9),
                 new MediaTypeHeaderValue("image/webp"),
                 new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -733,7 +738,8 @@ namespace Microsoft.Net.Http.Headers
                 new MediaTypeHeaderValue("application/xml", 0.9),
                 new MediaTypeHeaderValue("image/webp"),
                 new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }

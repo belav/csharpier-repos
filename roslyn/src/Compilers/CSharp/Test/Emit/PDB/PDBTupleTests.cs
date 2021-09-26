@@ -198,8 +198,7 @@ class C
 }"
             );
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
-            comp.VerifyPdb(
-                string.Format(
+            comp.VerifyPdb(string.Format(
                     @"<symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -231,8 +230,7 @@ class C
                     "\u1234",
                     "_\u1200_",
                     "\u1200"
-                )
-            );
+                ));
         }
 
         [Fact]
@@ -253,8 +251,7 @@ class C
 }"
             );
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
-            comp.VerifyPdb(
-                string.Format(
+            comp.VerifyPdb(string.Format(
                     @"<symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -293,8 +290,7 @@ class C
     </method>
   </methods>
 </symbols>"
-                )
-            );
+                ));
         }
 
         [WorkItem(17947, "https://github.com/dotnet/roslyn/issues/17947")]

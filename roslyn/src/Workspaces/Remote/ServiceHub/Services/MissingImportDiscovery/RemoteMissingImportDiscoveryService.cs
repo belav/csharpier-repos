@@ -67,17 +67,17 @@ namespace Microsoft.CodeAnalysis.Remote
                     var symbolSearchService = new SymbolSearchService(_callback, callbackId);
 
                     var result = await service.GetFixesAsync(
-                            document,
-                            span,
-                            diagnosticId,
-                            maxResults,
-                            placeSystemNamespaceFirst,
-                            allowInHiddenRegions,
-                            symbolSearchService,
-                            searchReferenceAssemblies,
-                            packageSources,
-                            cancellationToken
-                        )
+                        document,
+                        span,
+                        diagnosticId,
+                        maxResults,
+                        placeSystemNamespaceFirst,
+                        allowInHiddenRegions,
+                        symbolSearchService,
+                        searchReferenceAssemblies,
+                        packageSources,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return result;

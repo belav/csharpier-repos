@@ -17,7 +17,8 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer("Database=Crunchie", b => b.MaxBatchSize(123));
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>()
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
                 .Single();
 
             Assert.Equal(123, extension.MaxBatchSize);
@@ -29,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer("Database=Crunchie", b => b.CommandTimeout(30));
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>()
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
                 .Single();
 
             Assert.Equal(30, extension.CommandTimeout);
@@ -41,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer("Database=Crunchie");
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>()
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
                 .Single();
 
             Assert.Equal("Database=Crunchie", extension.ConnectionString);
@@ -54,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
             optionsBuilder.UseSqlServer("Database=Whisper");
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>()
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
                 .Single();
 
             Assert.Equal("Database=Whisper", extension.ConnectionString);
@@ -69,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore
 
             optionsBuilder.UseSqlServer(connection);
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>()
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
                 .Single();
 
             Assert.Same(connection, extension.Connection);
@@ -84,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore
 
             optionsBuilder.UseSqlServer(connection);
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>()
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
                 .Single();
 
             Assert.Same(connection, extension.Connection);

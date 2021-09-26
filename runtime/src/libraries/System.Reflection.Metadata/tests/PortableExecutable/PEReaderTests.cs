@@ -612,7 +612,8 @@ namespace System.Reflection.PortableExecutable.Tests
                     var embeddedBytes = new BlobReader(
                         embeddedReader.MetadataPointer,
                         embeddedReader.MetadataLength
-                    ).ReadBytes(embeddedReader.MetadataLength);
+                    )
+                        .ReadBytes(embeddedReader.MetadataLength);
 
                     string pathQueried = null;
 

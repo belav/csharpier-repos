@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
 
             using (Logger.LogBlock(FunctionId.SmartIndentation_Start, cancellationToken))
             {
-                var document =
-                    lineToBeIndented.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var document = lineToBeIndented.Snapshot
+                    .GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                 {
                     return null;
@@ -85,10 +85,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
                 {
                     var result =
                         (Indentation.IndentationResult?)oldAsyncService.GetDesiredIndentation(
-                                document,
-                                lineToBeIndented.LineNumber,
-                                cancellationToken
-                            )
+                            document,
+                            lineToBeIndented.LineNumber,
+                            cancellationToken
+                        )
                             .WaitAndGetResult(cancellationToken);
                     return result?.GetIndentation(_textView, lineToBeIndented);
                 }

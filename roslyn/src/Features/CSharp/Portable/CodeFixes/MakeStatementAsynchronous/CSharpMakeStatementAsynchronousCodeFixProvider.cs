@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken)
+            var root = await context.Document
+                .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var node = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
 
@@ -73,10 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
         {
             foreach (var diagnostic in diagnostics)
             {
-                var node = diagnostic.Location.FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var node = diagnostic.Location
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 var statementToFix = TryGetStatementToFix(node);
                 if (statementToFix != null)
                 {
@@ -97,8 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
             {
                 case ForEachStatementSyntax forEach:
                     newStatement = forEach.WithForEachKeyword(
-                            forEach.ForEachKeyword.WithLeadingTrivia()
-                        )
+                        forEach.ForEachKeyword.WithLeadingTrivia()
+                    )
                         .WithAwaitKeyword(
                             SyntaxFactory.Token(SyntaxKind.AwaitKeyword)
                                 .WithLeadingTrivia(forEach.GetLeadingTrivia())
@@ -106,8 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
                     break;
                 case ForEachVariableStatementSyntax forEachDeconstruction:
                     newStatement = forEachDeconstruction.WithForEachKeyword(
-                            forEachDeconstruction.ForEachKeyword.WithLeadingTrivia()
-                        )
+                        forEachDeconstruction.ForEachKeyword.WithLeadingTrivia()
+                    )
                         .WithAwaitKeyword(
                             SyntaxFactory.Token(SyntaxKind.AwaitKeyword)
                                 .WithLeadingTrivia(forEachDeconstruction.GetLeadingTrivia())
@@ -115,8 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
                     break;
                 case UsingStatementSyntax usingStatement:
                     newStatement = usingStatement.WithUsingKeyword(
-                            usingStatement.UsingKeyword.WithLeadingTrivia()
-                        )
+                        usingStatement.UsingKeyword.WithLeadingTrivia()
+                    )
                         .WithAwaitKeyword(
                             SyntaxFactory.Token(SyntaxKind.AwaitKeyword)
                                 .WithLeadingTrivia(usingStatement.GetLeadingTrivia())
@@ -124,8 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
                     break;
                 case LocalDeclarationStatementSyntax localDeclaration:
                     newStatement = localDeclaration.WithUsingKeyword(
-                            localDeclaration.UsingKeyword.WithLeadingTrivia()
-                        )
+                        localDeclaration.UsingKeyword.WithLeadingTrivia()
+                    )
                         .WithAwaitKeyword(
                             SyntaxFactory.Token(SyntaxKind.AwaitKeyword)
                                 .WithLeadingTrivia(localDeclaration.GetLeadingTrivia())

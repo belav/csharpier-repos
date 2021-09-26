@@ -78,41 +78,44 @@ namespace System.Reflection
         {
             if (Flags == ExceptionHandlingClauseOptions.Clause)
             {
-                return string.Format(
-                    CultureInfo.CurrentUICulture,
-                    "Flags={0}, TryOffset={1}, TryLength={2}, HandlerOffset={3}, HandlerLength={4}, CatchType={5}",
-                    Flags,
-                    TryOffset,
-                    TryLength,
-                    HandlerOffset,
-                    HandlerLength,
-                    CatchType
-                );
+                return string
+                    .Format(
+                        CultureInfo.CurrentUICulture,
+                        "Flags={0}, TryOffset={1}, TryLength={2}, HandlerOffset={3}, HandlerLength={4}, CatchType={5}",
+                        Flags,
+                        TryOffset,
+                        TryLength,
+                        HandlerOffset,
+                        HandlerLength,
+                        CatchType
+                    );
             }
 
             if (Flags == ExceptionHandlingClauseOptions.Filter)
             {
-                return string.Format(
+                return string
+                    .Format(
+                        CultureInfo.CurrentUICulture,
+                        "Flags={0}, TryOffset={1}, TryLength={2}, HandlerOffset={3}, HandlerLength={4}, FilterOffset={5}",
+                        Flags,
+                        TryOffset,
+                        TryLength,
+                        HandlerOffset,
+                        HandlerLength,
+                        FilterOffset
+                    );
+            }
+
+            return string
+                .Format(
                     CultureInfo.CurrentUICulture,
-                    "Flags={0}, TryOffset={1}, TryLength={2}, HandlerOffset={3}, HandlerLength={4}, FilterOffset={5}",
+                    "Flags={0}, TryOffset={1}, TryLength={2}, HandlerOffset={3}, HandlerLength={4}",
                     Flags,
                     TryOffset,
                     TryLength,
                     HandlerOffset,
-                    HandlerLength,
-                    FilterOffset
+                    HandlerLength
                 );
-            }
-
-            return string.Format(
-                CultureInfo.CurrentUICulture,
-                "Flags={0}, TryOffset={1}, TryLength={2}, HandlerOffset={3}, HandlerLength={4}",
-                Flags,
-                TryOffset,
-                TryLength,
-                HandlerOffset,
-                HandlerLength
-            );
         }
     }
 }

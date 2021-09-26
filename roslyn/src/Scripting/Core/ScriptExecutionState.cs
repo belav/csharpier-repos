@@ -114,9 +114,8 @@ namespace Microsoft.CodeAnalysis.Scripting
                 try
                 {
                     executorIndex++;
-                    result = await (
-                        (Task<TResult>)currentExecutor(_submissionStates)
-                    ).ConfigureAwait(continueOnCapturedContext: false);
+                    result = await ((Task<TResult>)currentExecutor(_submissionStates))
+                        .ConfigureAwait(continueOnCapturedContext: false);
                 }
 
                 finally

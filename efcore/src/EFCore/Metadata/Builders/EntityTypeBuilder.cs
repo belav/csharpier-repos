@@ -1071,7 +1071,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     navigationName,
                     ConfigurationSource.Explicit,
                     targetIsPrincipal: false
-                )!.IsUnique(false, ConfigurationSource.Explicit);
+                )!
+                    .IsUnique(false, ConfigurationSource.Explicit);
             }
 
             return new CollectionNavigationBuilder(
@@ -1097,11 +1098,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             (
                 navigationName == null
                     ? null
-                    : Builder.ModelBuilder.Metadata.FindEntityType(
-                          relatedTypeName,
-                          navigationName,
-                          Builder.Metadata
-                      )
+                    : Builder.ModelBuilder.Metadata
+                      .FindEntityType(relatedTypeName, navigationName, Builder.Metadata)
             )
             ?? Builder.ModelBuilder.Entity(relatedTypeName, ConfigurationSource.Explicit)!.Metadata;
 
@@ -1119,11 +1117,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             (
                 navigationName == null || !Builder.ModelBuilder.Metadata.IsShared(relatedType)
                     ? null
-                    : Builder.ModelBuilder.Metadata.FindEntityType(
-                          relatedType,
-                          navigationName,
-                          Builder.Metadata
-                      )
+                    : Builder.ModelBuilder.Metadata
+                      .FindEntityType(relatedType, navigationName, Builder.Metadata)
             ) ?? Builder.ModelBuilder.Entity(relatedType, ConfigurationSource.Explicit)!.Metadata;
 
         /// <summary>

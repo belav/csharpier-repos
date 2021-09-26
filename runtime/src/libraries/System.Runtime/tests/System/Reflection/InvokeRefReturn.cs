@@ -44,9 +44,8 @@ namespace System.Reflection.Tests
         public static void TestNullRefReturnInvoke<T>(T value)
         {
             TestClass<T> tc = new TestClass<T>(value);
-            PropertyInfo p = typeof(TestClass<T>).GetProperty(
-                nameof(TestClass<T>.NullRefReturningProp)
-            );
+            PropertyInfo p = typeof(TestClass<T>)
+                .GetProperty(nameof(TestClass<T>.NullRefReturningProp));
             Assert.NotNull(p);
             Assert.Throws<NullReferenceException>(() => p.GetValue(tc));
         }
@@ -56,9 +55,8 @@ namespace System.Reflection.Tests
         {
             int* expected = (int*)0x1122334455667788;
             TestClassIntPointer tc = new TestClassIntPointer(expected);
-            PropertyInfo p = typeof(TestClassIntPointer).GetProperty(
-                nameof(TestClassIntPointer.RefReturningProp)
-            );
+            PropertyInfo p = typeof(TestClassIntPointer)
+                .GetProperty(nameof(TestClassIntPointer.RefReturningProp));
             object rv = p.GetValue(tc);
             Assert.True(rv is Pointer);
             int* actual = (int*)(Pointer.Unbox(rv));
@@ -70,9 +68,8 @@ namespace System.Reflection.Tests
         {
             TestClassIntPointer tc = new TestClassIntPointer(null);
 
-            PropertyInfo p = typeof(TestClassIntPointer).GetProperty(
-                nameof(TestClassIntPointer.NullRefReturningProp)
-            );
+            PropertyInfo p = typeof(TestClassIntPointer)
+                .GetProperty(nameof(TestClassIntPointer.NullRefReturningProp));
             Assert.NotNull(p);
             Assert.Throws<NullReferenceException>(() => p.GetValue(tc));
         }
@@ -82,9 +79,8 @@ namespace System.Reflection.Tests
         {
             ByRefLike brl = new ByRefLike();
             ByRefLike* pBrl = &brl;
-            MethodInfo mi = typeof(TestClass<int>).GetMethod(
-                nameof(TestClass<int>.ByRefLikeRefReturningMethod)
-            );
+            MethodInfo mi = typeof(TestClass<int>)
+                .GetMethod(nameof(TestClass<int>.ByRefLikeRefReturningMethod));
             try
             {
                 // Don't use Assert.Throws because that will make a lambda and invalidate the pointer
@@ -135,9 +131,8 @@ namespace System.Reflection.Tests
         )
         {
             TestClass<T> tc = new TestClass<T>(value);
-            PropertyInfo p = typeof(TestClass<T>).GetProperty(
-                nameof(TestClass<T>.RefReturningProp)
-            );
+            PropertyInfo p = typeof(TestClass<T>)
+                .GetProperty(nameof(TestClass<T>.RefReturningProp));
             object rv = invoker(p, tc);
             if (rv != null)
             {
@@ -157,9 +152,8 @@ namespace System.Reflection.Tests
         private static void TestRefReturnInvokeNullable<T>(T? nullable) where T : struct
         {
             TestClass<T?> tc = new TestClass<T?>(nullable);
-            PropertyInfo p = typeof(TestClass<T?>).GetProperty(
-                nameof(TestClass<T?>.RefReturningProp)
-            );
+            PropertyInfo p = typeof(TestClass<T?>)
+                .GetProperty(nameof(TestClass<T?>.RefReturningProp));
             object rv = p.GetValue(tc);
             if (rv != null)
             {

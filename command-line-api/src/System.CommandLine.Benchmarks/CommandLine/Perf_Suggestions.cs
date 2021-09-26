@@ -34,9 +34,8 @@ namespace System.CommandLine.Benchmarks.CommandLine
         [GlobalSetup(Target = nameof(SuggestionsFromSymbol))]
         public void Setup_FromSymbol()
         {
-            _testSymbol = new Option("--hello", arity: ArgumentArity.ExactlyOne).AddSuggestions(
-                GenerateSuggestionsArray(TestSuggestionsCount)
-            );
+            _testSymbol = new Option("--hello", arity: ArgumentArity.ExactlyOne)
+                .AddSuggestions(GenerateSuggestionsArray(TestSuggestionsCount));
         }
 
         [Benchmark]

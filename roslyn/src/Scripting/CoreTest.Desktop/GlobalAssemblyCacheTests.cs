@@ -31,9 +31,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
 
             names = gac.GetAssemblyIdentities(
-                    new AssemblyName("mscorlib"),
-                    ImmutableArray.Create(ProcessorArchitecture.MSIL, ProcessorArchitecture.X86)
-                )
+                new AssemblyName("mscorlib"),
+                ImmutableArray.Create(ProcessorArchitecture.MSIL, ProcessorArchitecture.X86)
+            )
                 .ToArray();
             Assert.True(names.Length >= 1, "At least one 32bit mscorlib");
             foreach (var name in names)
@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
 
             names = gac.GetAssemblyIdentities(
-                    "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-                )
+                "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+            )
                 .ToArray();
             Assert.True(names.Length >= 1, "At least System.Core");
             foreach (var name in names)
@@ -128,15 +128,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void AssemblyAndGacLocation()
         {
             var names = ClrGlobalAssemblyCache.GetAssemblyObjects(
-                    partialNameFilter: null,
-                    architectureFilter: default(ImmutableArray<ProcessorArchitecture>)
-                )
+                partialNameFilter: null,
+                architectureFilter: default(ImmutableArray<ProcessorArchitecture>)
+            )
                 .ToArray();
             Assert.True(names.Length > 100, "There are at least 100 assemblies in the GAC");
 
-            var gacLocationsUpper = GlobalAssemblyCacheLocation.RootLocations.Select(
-                location => location.ToUpper()
-            );
+            var gacLocationsUpper = GlobalAssemblyCacheLocation.RootLocations
+                .Select(location => location.ToUpper());
             foreach (var name in names)
             {
                 string location = ClrGlobalAssemblyCache.GetAssemblyLocation(name);

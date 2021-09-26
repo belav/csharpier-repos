@@ -21,9 +21,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             new ReaderWriterLockSlim();
 
         // Information about private static method declared below.
-        private static readonly MethodInfo _strongTryGetValueImplInfo =
-            typeof(TryGetValueProvider).GetTypeInfo()
-                .GetDeclaredMethod(nameof(StrongTryGetValueImpl));
+        private static readonly MethodInfo _strongTryGetValueImplInfo = typeof(TryGetValueProvider)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(StrongTryGetValueImpl));
 
         /// <summary>
         /// Returns a <see cref="TryGetValueDelegate"/> for the specified <see cref="IDictionary{TKey, TValue}"/> type.

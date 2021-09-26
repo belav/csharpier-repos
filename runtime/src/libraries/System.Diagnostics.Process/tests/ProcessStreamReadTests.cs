@@ -472,10 +472,8 @@ namespace System.Diagnostics.Tests
 
                 using (var cts = new CancellationTokenSource())
                 {
-                    ValueTask<int> vt = p.StandardOutput.ReadAsync(
-                        new char[1].AsMemory(),
-                        cts.Token
-                    );
+                    ValueTask<int> vt = p.StandardOutput
+                        .ReadAsync(new char[1].AsMemory(), cts.Token);
                     await Task.Delay(1);
                     Assert.False(vt.IsCompleted);
                     cts.Cancel();
@@ -484,10 +482,8 @@ namespace System.Diagnostics.Tests
 
                 using (var cts = new CancellationTokenSource())
                 {
-                    ValueTask<int> vt = p.StandardError.ReadAsync(
-                        new char[1].AsMemory(),
-                        cts.Token
-                    );
+                    ValueTask<int> vt = p.StandardError
+                        .ReadAsync(new char[1].AsMemory(), cts.Token);
                     await Task.Delay(1);
                     Assert.False(vt.IsCompleted);
                     cts.Cancel();

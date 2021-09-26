@@ -113,31 +113,30 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             // to tell it about the ones that didn't change since that will have no effect on the
             // user experience.
             var latestData = await ComputeLatestDataAsync(
-                    project,
-                    specificDocument,
-                    projectVersion,
-                    cancellationToken
-                )
+                project,
+                specificDocument,
+                projectVersion,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var changedData = latestData.Where(
-                    d =>
-                    {
-                        _documentToLastReportedInformation.TryGetValue(
-                            d.document.Id,
-                            out var existingInfo
-                        );
-                        return existingInfo.category != d.data.Category;
-                    }
-                )
-                .ToImmutableArray();
+                d =>
+                {
+                    _documentToLastReportedInformation.TryGetValue(
+                        d.document.Id,
+                        out var existingInfo
+                    );
+                    return existingInfo.category != d.data.Category;
+                }
+            ).ToImmutableArray();
 
             if (!changedData.IsEmpty)
             {
                 await ReportDesignerAttributeDataAsync(
-                        changedData.SelectAsArray(d => d.data),
-                        cancellationToken
-                    )
+                    changedData.SelectAsArray(d => d.data),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -157,9 +156,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                 .ConfigureAwait(false);
             var designerCategoryType = compilation.DesignerCategoryAttributeType();
 
-            using var _ = ArrayBuilder<
-                Task<(Document document, DesignerAttributeData data)>
-            >.GetInstance(out var tasks);
+            using var _ = ArrayBuilder<Task<(Document document, DesignerAttributeData data)>>
+                .GetInstance(out var tasks);
             foreach (var document in project.Documents)
             {
                 // If we're only analyzing a specific document, then skip the rest.
@@ -210,10 +208,10 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                 // So recompute here.  Figure out what the current category is, and if that's different
                 // from what we previously stored.
                 var category = await DesignerAttributeHelpers.ComputeDesignerAttributeCategoryAsync(
-                        designerCategoryType,
-                        document,
-                        cancellationToken
-                    )
+                    designerCategoryType,
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var data = new DesignerAttributeData

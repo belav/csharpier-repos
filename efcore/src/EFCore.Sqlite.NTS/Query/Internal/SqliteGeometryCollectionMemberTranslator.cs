@@ -19,8 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteGeometryCollectionMemberTranslator : IMemberTranslator
     {
-        private static readonly MemberInfo _count =
-            typeof(GeometryCollection).GetRequiredRuntimeProperty(nameof(GeometryCollection.Count));
+        private static readonly MemberInfo _count = typeof(GeometryCollection)
+            .GetRequiredRuntimeProperty(nameof(GeometryCollection.Count));
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
         /// <summary>

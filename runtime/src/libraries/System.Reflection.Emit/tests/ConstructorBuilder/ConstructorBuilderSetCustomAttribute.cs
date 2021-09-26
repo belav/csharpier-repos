@@ -18,9 +18,8 @@ namespace System.Reflection.Emit.Tests
                 new Type[] { typeof(int) }
             );
 
-            ConstructorInfo attributeConstructor = typeof(IntAllAttribute).GetConstructor(
-                new Type[] { typeof(int) }
-            );
+            ConstructorInfo attributeConstructor = typeof(IntAllAttribute)
+                .GetConstructor(new Type[] { typeof(int) });
             constructor.SetCustomAttribute(attributeConstructor, new byte[] { 1, 0, 5, 0, 0, 0 });
             constructor.GetILGenerator().Emit(OpCodes.Ret);
 
@@ -60,9 +59,8 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = constructor.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ldarg_1);
 
-            ConstructorInfo attributeConstructor = typeof(IntAllAttribute).GetConstructor(
-                new Type[] { typeof(int) }
-            );
+            ConstructorInfo attributeConstructor = typeof(IntAllAttribute)
+                .GetConstructor(new Type[] { typeof(int) });
             CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(
                 attributeConstructor,
                 new object[] { 2 }

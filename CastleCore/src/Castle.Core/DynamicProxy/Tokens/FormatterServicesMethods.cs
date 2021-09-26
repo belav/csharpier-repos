@@ -22,13 +22,11 @@ namespace Castle.DynamicProxy.Tokens
 
     internal static class FormatterServicesMethods
     {
-        public static readonly MethodInfo GetObjectData = typeof(FormatterServices).GetMethod(
-            "GetObjectData",
-            new[] { typeof(object), typeof(MemberInfo[]) }
-        );
+        public static readonly MethodInfo GetObjectData = typeof(FormatterServices)
+            .GetMethod("GetObjectData", new[] { typeof(object), typeof(MemberInfo[]) });
 
-        public static readonly MethodInfo GetSerializableMembers =
-            typeof(FormatterServices).GetMethod("GetSerializableMembers", new[] { typeof(Type) });
+        public static readonly MethodInfo GetSerializableMembers = typeof(FormatterServices)
+            .GetMethod("GetSerializableMembers", new[] { typeof(Type) });
     }
 }
 

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 let option = ConvertToSpacingOption(v)
                 where option.HasValue && option.Value == parenthesesSpacingOption
                 select option
-            ).Any();
+            )
+                .Any();
 
         private static SpacingWithinParenthesesOption? ConvertToSpacingOption(string value) =>
             s_spacingWithinParenthesisOptionsEditorConfigMap.TryGetValue(value, out var option)
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 let option = ConvertToNewLineOption(v)
                 where option.HasValue && option.Value == optionName
                 select option
-            ).Any();
+            )
+                .Any();
         }
 
         private static NewLineOption? ConvertToNewLineOption(string value)

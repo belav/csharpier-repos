@@ -53,10 +53,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
-            new EntityFrameworkRelationalServicesBuilder(serviceCollection).TryAdd<
-                LoggingDefinitions,
-                SqlServerLoggingDefinitions
-            >()
+            new EntityFrameworkRelationalServicesBuilder(serviceCollection)
+                .TryAdd<LoggingDefinitions, SqlServerLoggingDefinitions>()
                 .TryAdd<IDatabaseProvider, DatabaseProvider<SqlServerOptionsExtension>>()
                 .TryAdd<IValueGeneratorCache>(
                     p => p.GetRequiredService<ISqlServerValueGeneratorCache>()

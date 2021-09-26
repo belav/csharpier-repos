@@ -715,7 +715,8 @@ namespace System.Security.Cryptography.CryptoConfigTests
             // Build a string like 1.11.11.11. ... .11.1, which has 0x80 separators.
             // The BER/DER encoding of an OID has a minimum number of bytes as the number of separator characters,
             // so this would produce an OID with a length segment of more than one byte, which EncodeOID can't handle.
-            string s = new StringBuilder(valueToRepeat.Length * 0x80).Insert(0, valueToRepeat, 0x80)
+            string s = new StringBuilder(valueToRepeat.Length * 0x80)
+                .Insert(0, valueToRepeat, 0x80)
                 .ToString();
             Assert.Throws<CryptographicUnexpectedOperationException>(
                 () => CryptoConfig.EncodeOID(s)
@@ -723,7 +724,8 @@ namespace System.Security.Cryptography.CryptoConfigTests
 
             // Try again with one less separator for the boundary case, but the particular output is really long
             // and would just clutter up this test, so only verify it doesn't throw.
-            s = new StringBuilder(valueToRepeat.Length * 0x7f).Insert(0, valueToRepeat, 0x7f)
+            s = new StringBuilder(valueToRepeat.Length * 0x7f)
+                .Insert(0, valueToRepeat, 0x7f)
                 .ToString();
             CryptoConfig.EncodeOID(s);
         }

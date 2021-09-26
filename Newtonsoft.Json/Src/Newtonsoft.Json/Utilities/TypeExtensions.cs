@@ -231,32 +231,31 @@ namespace Newtonsoft.Json.Utilities
             IEnumerable<PropertyInfo> propertyInfos = type.GetProperties(bindingFlags);
 
             return propertyInfos.Where(
-                    p =>
+                p =>
+                {
+                    if (name != null && name != p.Name)
                     {
-                        if (name != null && name != p.Name)
-                        {
-                            return false;
-                        }
-                        if (propertyType != null && propertyType != p.PropertyType)
-                        {
-                            return false;
-                        }
-                        if (indexParameters != null)
-                        {
-                            if (
-                                !p.GetIndexParameters()
-                                    .Select(ip => ip.ParameterType)
-                                    .SequenceEqual(indexParameters)
-                            )
-                            {
-                                return false;
-                            }
-                        }
-
-                        return true;
+                        return false;
                     }
-                )
-                .SingleOrDefault();
+                    if (propertyType != null && propertyType != p.PropertyType)
+                    {
+                        return false;
+                    }
+                    if (indexParameters != null)
+                    {
+                        if (
+                            !p.GetIndexParameters()
+                                .Select(ip => ip.ParameterType)
+                                .SequenceEqual(indexParameters)
+                        )
+                        {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+            ).SingleOrDefault();
         }
 
         public static IEnumerable<MemberInfo> GetMember(
@@ -269,18 +268,17 @@ namespace Newtonsoft.Json.Utilities
 #if PORTABLE
             return type.GetMemberInternal(name, memberType, bindingFlags);
 #else
-            return type.GetMember(name, bindingFlags)
-                .Where(
-                    m =>
+            return type.GetMember(name, bindingFlags).Where(
+                m =>
+                {
+                    if ((m.MemberType() | memberType) != memberType)
                     {
-                        if ((m.MemberType() | memberType) != memberType)
-                        {
-                            return false;
-                        }
-
-                        return true;
+                        return false;
                     }
-                );
+
+                    return true;
+                }
+            );
 #endif
         }
 #endif
@@ -389,17 +387,14 @@ namespace Newtonsoft.Json.Utilities
             BindingFlags bindingFlags
         )
         {
-            return type.GetTypeInfo()
-                .GetMembersRecursive()
-                .Where(
-                    m =>
-                        m.Name == member
-                        &&
-                        // test type before accessibility - accessibility doesn't support some types
-                        (memberType == null || (m.MemberType() | memberType) == memberType)
-                        && TestAccessibility(m, bindingFlags)
-                )
-                .ToArray();
+            return type.GetTypeInfo().GetMembersRecursive().Where(
+                m =>
+                    m.Name == member
+                    &&
+                    // test type before accessibility - accessibility doesn't support some types
+                    (memberType == null || (m.MemberType() | memberType) == memberType)
+                    && TestAccessibility(m, bindingFlags)
+            ).ToArray();
         }
 
         public static FieldInfo? GetField(this Type type, string member)

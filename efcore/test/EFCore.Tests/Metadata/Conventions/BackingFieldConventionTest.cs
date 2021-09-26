@@ -254,9 +254,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void FieldInfo_set_by_annotation_is_used()
         {
-            var entityType = ((IConventionModel)CreateModel()).AddEntityType(
-                typeof(AlwaysLookOnTheBrightSideOfLife)
-            );
+            var entityType = ((IConventionModel)CreateModel())
+                .AddEntityType(typeof(AlwaysLookOnTheBrightSideOfLife));
             var property = entityType.AddProperty("OnTheRun", typeof(int));
 
             RunConvention((IMutableProperty)property);
@@ -293,23 +292,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         private void RunConvention(IMutableProperty property) =>
-            new BackingFieldConvention(CreateDependencies()).ProcessPropertyAdded(
-                ((Property)property).Builder,
-                new ConventionContext<IConventionPropertyBuilder>(
-                    ((Model)property.DeclaringEntityType.Model).ConventionDispatcher
-                )
-            );
+            new BackingFieldConvention(CreateDependencies())
+                .ProcessPropertyAdded(
+                    ((Property)property).Builder,
+                    new ConventionContext<IConventionPropertyBuilder>(
+                        ((Model)property.DeclaringEntityType.Model).ConventionDispatcher
+                    )
+                );
 
         private void Validate(IMutableProperty property) =>
-            new BackingFieldConvention(CreateDependencies()).ProcessModelFinalizing(
-                ((Property)property).DeclaringEntityType.Model.Builder,
-                new ConventionContext<IConventionModelBuilder>(
-                    ((Model)property.DeclaringEntityType.Model).ConventionDispatcher
-                )
-            );
+            new BackingFieldConvention(CreateDependencies())
+                .ProcessModelFinalizing(
+                    ((Property)property).DeclaringEntityType.Model.Builder,
+                    new ConventionContext<IConventionModelBuilder>(
+                        ((Model)property.DeclaringEntityType.Model).ConventionDispatcher
+                    )
+                );
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private static IMutableModel CreateModel() => new Model();
@@ -453,9 +455,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private class TheDarkSide : OfTheMoon
         {
-            public static readonly PropertyInfo OnBaseProperty = typeof(TheDarkSide).GetProperty(
-                nameof(OnBase)
-            );
+            public static readonly PropertyInfo OnBaseProperty = typeof(TheDarkSide)
+                .GetProperty(nameof(OnBase));
 
             public int OnBase
             {
@@ -470,8 +471,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private class OfTheMoon
         {
-            public static readonly PropertyInfo TheGreatGigInTheSkyProperty =
-                typeof(OfTheMoon).GetProperty(nameof(TheGreatGigInTheSky));
+            public static readonly PropertyInfo TheGreatGigInTheSkyProperty = typeof(OfTheMoon)
+                .GetProperty(nameof(TheGreatGigInTheSky));
 
             private int? _theGreatGigInTheSky;
 

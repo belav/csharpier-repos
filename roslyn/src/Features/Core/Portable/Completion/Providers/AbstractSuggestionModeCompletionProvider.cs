@@ -23,12 +23,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         public override async Task ProvideCompletionsAsync(CompletionContext context)
         {
             context.SuggestionModeItem = await GetSuggestionModeItemAsync(
-                    context.Document,
-                    context.Position,
-                    context.CompletionListSpan,
-                    context.Trigger,
-                    context.CancellationToken
-                )
+                context.Document,
+                context.Position,
+                context.CompletionListSpan,
+                context.Trigger,
+                context.CancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

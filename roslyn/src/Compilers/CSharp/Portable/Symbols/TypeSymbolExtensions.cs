@@ -1454,9 +1454,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return true;
 
                 case TypeKind.Enum:
-                    return (
-                        (NamedTypeSymbol)type
-                    ).EnumUnderlyingType.SpecialType.IsValidVolatileFieldType();
+                    return ((NamedTypeSymbol)type).EnumUnderlyingType.SpecialType
+                        .IsValidVolatileFieldType();
 
                 case TypeKind.TypeParameter:
                     return type.IsReferenceType;
@@ -1579,10 +1578,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     for (int i = 0; i < typeArguments.Length; i++)
                     {
                         if (
-                            !typeParameters[i].Equals(
-                                typeArguments[i].Type.OriginalDefinition,
-                                TypeCompareKind.ConsiderEverything
-                            )
+                            !typeParameters[i]
+                                .Equals(
+                                    typeArguments[i].Type.OriginalDefinition,
+                                    TypeCompareKind.ConsiderEverything
+                                )
                         )
                         {
                             return false;
@@ -1759,11 +1759,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (container.Kind != SymbolKind.Namespace)
             {
                 // Nested type. For simplicity, compare qualified name to SymbolDisplay result.
-                return string.Equals(
-                    container.ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat),
-                    qualifiedName,
-                    comparison
-                );
+                return string
+                    .Equals(
+                        container.ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat),
+                        qualifiedName,
+                        comparison
+                    );
             }
 
             var @namespace = (NamespaceSymbol)container;
@@ -2123,9 +2124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (funcPtrType.Signature.ParameterCount > 0)
             {
-                var paramsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                    funcPtrType.Signature.ParameterCount
-                );
+                var paramsBuilder = ArrayBuilder<TypeWithAnnotations>
+                    .GetInstance(funcPtrType.Signature.ParameterCount);
                 bool madeParamChanges = false;
                 foreach (var param in funcPtrType.Signature.Parameters)
                 {

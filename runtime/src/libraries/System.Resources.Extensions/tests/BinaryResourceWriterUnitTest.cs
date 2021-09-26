@@ -666,9 +666,8 @@ namespace System.Resources.Extensions.Tests
         {
             ResourceManager resourceManager = new ResourceManager(typeof(TestData));
 
-            IEnumerable<KeyValuePair<string, object>> objectPairs = TestData.Primitive.Concat(
-                    TestData.PrimitiveAsString
-                )
+            IEnumerable<KeyValuePair<string, object>> objectPairs = TestData.Primitive
+                .Concat(TestData.PrimitiveAsString)
                 .Concat(TestData.BinaryFormattedWithoutDrawing)
                 .Concat(TestData.BinaryFormattedWithoutDrawingNoType)
                 .Concat(TestData.ByteArrayConverterWithoutDrawing)
@@ -722,9 +721,10 @@ namespace System.Resources.Extensions.Tests
             // this is meant to catch a case where our embedded test resources are out of date with respect to the current writer.
             // that could be intentional, or accidental.  Regardless we want to know.
             using (
-                Stream resourcesStream = typeof(TestData).Assembly.GetManifestResourceStream(
-                    "System.Resources.Extensions.Tests.TestData.resources"
-                )
+                Stream resourcesStream = typeof(TestData).Assembly
+                    .GetManifestResourceStream(
+                        "System.Resources.Extensions.Tests.TestData.resources"
+                    )
             )
             using (
                 MemoryStream actualData = new MemoryStream(),

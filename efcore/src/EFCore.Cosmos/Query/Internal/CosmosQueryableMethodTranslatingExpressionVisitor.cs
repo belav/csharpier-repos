@@ -165,9 +165,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                 )
                                 {
                                     var propertyParameterList = queryProperties.Zip(
-                                            parameterNames,
-                                            (property, parameter) => (property, parameter)
-                                        )
+                                        parameterNames,
+                                        (property, parameter) => (property, parameter)
+                                    )
                                         .ToDictionary(
                                             tuple => tuple.property,
                                             tuple => tuple.parameter
@@ -179,9 +179,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                     );
 
                                     return CreateShapedQueryExpression(
-                                            readItemExpression,
-                                            entityType
-                                        )
+                                        readItemExpression,
+                                        entityType
+                                    )
                                         .UpdateResultCardinality(ResultCardinality.Single);
                                 }
                             }
@@ -1030,9 +1030,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var translation = TranslateLambdaExpression(source, keySelector);
             if (translation != null)
             {
-                ((SelectExpression)source.QueryExpression).ApplyOrdering(
-                    new OrderingExpression(translation, ascending)
-                );
+                ((SelectExpression)source.QueryExpression)
+                    .ApplyOrdering(new OrderingExpression(translation, ascending));
 
                 return source;
             }
@@ -1330,9 +1329,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var translation = TranslateLambdaExpression(source, keySelector);
             if (translation != null)
             {
-                ((SelectExpression)source.QueryExpression).AppendOrdering(
-                    new OrderingExpression(translation, ascending)
-                );
+                ((SelectExpression)source.QueryExpression)
+                    .AppendOrdering(new OrderingExpression(translation, ascending));
 
                 return source;
             }
@@ -1382,13 +1380,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     is Expression partitionKeyValue
             )
             {
-                var partitionKeyProperty = entityShaperExpression.EntityType.GetProperty(
-                    entityShaperExpression.EntityType.GetPartitionKeyPropertyName()
-                );
-                ((SelectExpression)source.QueryExpression).SetPartitionKey(
-                    partitionKeyProperty,
-                    partitionKeyValue
-                );
+                var partitionKeyProperty = entityShaperExpression.EntityType
+                    .GetProperty(entityShaperExpression.EntityType.GetPartitionKeyPropertyName());
+                ((SelectExpression)source.QueryExpression)
+                    .SetPartitionKey(partitionKeyProperty, partitionKeyValue);
 
                 if (newPredicate == null)
                 {
@@ -1593,7 +1588,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     ? (Expression)Expression.Constant(null, resultType)
                     : Expression.Throw(
                           Expression.New(
-                              typeof(InvalidOperationException).GetConstructors()
+                              typeof(InvalidOperationException)
+                                  .GetConstructors()
                                   .Single(ci => ci.GetParameters().Length == 1),
                               Expression.Constant(CoreStrings.SequenceContainsNoElements)
                           ),

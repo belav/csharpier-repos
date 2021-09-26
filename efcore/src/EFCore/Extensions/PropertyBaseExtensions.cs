@@ -40,16 +40,17 @@ namespace Microsoft.EntityFrameworkCore
             bool includeTypes = false
         ) =>
             "{"
-            + string.Join(
-                ", ",
-                properties.Select(
-                    p =>
-                        "'"
-                        + p.Name
-                        + "'"
-                        + (includeTypes ? " : " + p.ClrType.DisplayName(fullName: false) : "")
+            + string
+                .Join(
+                    ", ",
+                    properties.Select(
+                        p =>
+                            "'"
+                            + p.Name
+                            + "'"
+                            + (includeTypes ? " : " + p.ClrType.DisplayName(fullName: false) : "")
+                    )
                 )
-            )
             + "}";
     }
 }

@@ -43,24 +43,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
             CompletionItemFlags? flags = null
         )
         {
-            return base.VerifyWorkerAsync(
-                code,
-                position,
-                expectedItemOrNull,
-                expectedDescriptionOrNull,
-                SourceCodeKind.Regular,
-                usePreviousCharAsTrigger,
-                checkForAbsence,
-                glyph,
-                matchPriority,
-                hasSuggestionItem,
-                displayTextSuffix,
-                displayTextPrefix,
-                inlineDescription,
-                isComplexTextEdit,
-                matchingFilters,
-                flags
-            );
+            return base
+                .VerifyWorkerAsync(
+                    code,
+                    position,
+                    expectedItemOrNull,
+                    expectedDescriptionOrNull,
+                    SourceCodeKind.Regular,
+                    usePreviousCharAsTrigger,
+                    checkForAbsence,
+                    glyph,
+                    matchPriority,
+                    hasSuggestionItem,
+                    displayTextSuffix,
+                    displayTextPrefix,
+                    inlineDescription,
+                    isComplexTextEdit,
+                    matchingFilters,
+                    flags
+                );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]

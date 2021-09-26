@@ -204,8 +204,8 @@ namespace N
     class C {{ }}
 }}";
             var expectedDiagnostic = VerifyCS.Diagnostic(
-                    AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.LegacyFormatTargetDescriptor
-                )
+                AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.LegacyFormatTargetDescriptor
+            )
                 .WithLocation(0)
                 .WithArguments(target);
 

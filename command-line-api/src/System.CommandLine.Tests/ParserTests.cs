@@ -85,7 +85,8 @@ namespace System.CommandLine.Tests
             ParseResult result = new Parser(
                 new Option(new[] { "-o", "--one" }),
                 new Option(new[] { "-t", "--two" })
-            ).Parse("-o -t");
+            )
+                .Parse("-o -t");
 
             result.HasOption("-o").Should().BeTrue();
             result.HasOption("--one").Should().BeTrue();
@@ -128,7 +129,8 @@ namespace System.CommandLine.Tests
 
             var result = parser.Parse(prefix);
 
-            result.Errors.Select(e => e.Message)
+            result.Errors
+                .Select(e => e.Message)
                 .Should()
                 .Contain(Resources.Instance.UnrecognizedCommandOrArgument(prefix));
         }
@@ -151,9 +153,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public void A_double_dash_delimiter_specifies_that_no_further_command_line_args_will_be_treated_as_options()
         {
-            var result = new Parser(new Option(new[] { "-o", "--one" })).Parse(
-                "-o \"some stuff\" -- -x -y -z -o:foo"
-            );
+            var result = new Parser(new Option(new[] { "-o", "--one" }))
+                .Parse("-o \"some stuff\" -- -x -y -z -o:foo");
 
             result.HasOption("-o").Should().BeTrue();
 
@@ -230,7 +231,8 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("the-command -xyz");
 
-            result.CommandResult.Children.Select(o => o.Symbol.Name)
+            result.CommandResult.Children
+                .Select(o => o.Symbol.Name)
                 .Should()
                 .BeEquivalentTo("x", "y", "z");
         }
@@ -238,7 +240,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Options_short_forms_do_not_get_unbundled_if_unbundling_is_turned_off()
         {
-            var parser = new CommandLineBuilder().EnablePosixBundling(false)
+            var parser = new CommandLineBuilder()
+                .EnablePosixBundling(false)
                 .AddCommand(
                     new Command("the-command")
                     {
@@ -415,7 +418,8 @@ namespace System.CommandLine.Tests
             var animalsOption = new Option(
                 new[] { "-a", "--animals" },
                 arity: ArgumentArity.ZeroOrMore
-            ).FromAmong("dog", "cat", "sheep");
+            )
+                .FromAmong("dog", "cat", "sheep");
             var vegetablesOption = new Option(
                 new[] { "-v", "--vegetables" },
                 arity: ArgumentArity.ZeroOrMore
@@ -574,11 +578,13 @@ namespace System.CommandLine.Tests
 
             var result = parser.Parse("outer --inner1 argument1 --inner2 argument2");
 
-            result.CommandResult.Children.Should()
+            result.CommandResult.Children
+                .Should()
                 .ContainSingle(
                     o => o.Symbol.Name == "inner1" && o.Tokens.Single().Value == "argument1"
                 );
-            result.CommandResult.Children.Should()
+            result.CommandResult.Children
+                .Should()
                 .ContainSingle(
                     o => o.Symbol.Name == "inner2" && o.Tokens.Single().Value == "argument2"
                 );
@@ -715,7 +721,8 @@ namespace System.CommandLine.Tests
             var result = command.Parse("the-command -x the-argument");
 
             result.FindResultFor(option).Tokens.Should().BeEmpty();
-            result.CommandResult.Tokens.Select(t => t.Value)
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("the-argument");
         }
@@ -902,7 +909,8 @@ namespace System.CommandLine.Tests
 
             var result = parser.Parse(command);
 
-            result.CommandResult.Tokens.Select(t => t.Value)
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
                 .Should()
                 .OnlyContain(a => a == @"/temp/the file.txt");
         }
@@ -918,7 +926,8 @@ namespace System.CommandLine.Tests
 
             ParseResult result = parser.Parse(command);
 
-            result.CommandResult.Tokens.Should()
+            result.CommandResult.Tokens
+                .Should()
                 .OnlyContain(a => a.Value == @"c:\temp\the file.txt\");
         }
 
@@ -1012,7 +1021,8 @@ namespace System.CommandLine.Tests
 
             ParseResult result = outer.Parse("outer inner -p:RandomThing=random");
 
-            result.CommandResult.Tokens.Select(t => t.Value)
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("-p:RandomThing=random");
         }
@@ -1251,7 +1261,8 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("1");
 
-            result.Errors.Select(e => e.Message)
+            result.Errors
+                .Select(e => e.Message)
                 .Should()
                 .Contain(Resources.Instance.RequiredArgumentMissing(result.CommandResult));
         }
@@ -1266,7 +1277,8 @@ namespace System.CommandLine.Tests
 
             ParseResult parseResult = command.Parse("1 2 3 4");
 
-            parseResult.Errors.Select(e => e.Message)
+            parseResult.Errors
+                .Select(e => e.Message)
                 .Should()
                 .Contain(Resources.Instance.UnrecognizedCommandOrArgument("4"));
         }
@@ -1324,12 +1336,12 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("-x 1");
 
-            result.Errors.Select(e => e.Message)
+            result.Errors
+                .Select(e => e.Message)
                 .Should()
                 .Contain(
-                    Resources.Instance.RequiredArgumentMissing(
-                        result.CommandResult.FindResultFor(option)
-                    )
+                    Resources.Instance
+                        .RequiredArgumentMissing(result.CommandResult.FindResultFor(option))
                 );
         }
 
@@ -1383,7 +1395,8 @@ namespace System.CommandLine.Tests
                 "jdbc url \"jdbc:sqlserver://10.0.0.2;databaseName=main\""
             );
 
-            result.Tokens.Select(t => t.Value)
+            result.Tokens
+                .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("url", "jdbc:sqlserver://10.0.0.2;databaseName=main");
         }

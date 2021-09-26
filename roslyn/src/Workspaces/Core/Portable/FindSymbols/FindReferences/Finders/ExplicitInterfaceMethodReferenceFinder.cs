@@ -30,9 +30,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 
             // An explicit interface method will cascade to all the methods that it implements in the up direction.
             return Task.FromResult(
-                symbol.ExplicitInterfaceImplementations.SelectAsArray(
-                    m => ((ISymbol)m, FindReferencesCascadeDirection.Up)
-                )
+                symbol.ExplicitInterfaceImplementations
+                    .SelectAsArray(m => ((ISymbol)m, FindReferencesCascadeDirection.Up))
             );
         }
 

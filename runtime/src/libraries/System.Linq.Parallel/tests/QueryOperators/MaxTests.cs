@@ -838,143 +838,99 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Max_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Max(
-                            (Func<int, int>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max(
+                        (Func<int, int>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Max(
-                            (Func<int, int?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max(
+                        (Func<int, int?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Max(
-                            (Func<int, long>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max(
+                        (Func<int, long>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Max(
-                            (Func<int, long?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max(
+                        (Func<int, long?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Max(
-                            (Func<int, float>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max(
+                        (Func<int, float>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Max(
-                            (Func<int, float?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max(
+                        (Func<int, float?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Max(
-                            (Func<int, double>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max(
+                        (Func<int, double>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Max(
-                            (Func<int, double?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max(
+                        (Func<int, double?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Max(
-                            (Func<int, decimal>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max(
+                        (Func<int, decimal>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Max(
-                            (Func<int, decimal?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max(
+                        (Func<int, decimal?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Max(
-                            (Func<int, NotComparable>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max(
+                        (Func<int, NotComparable>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
         }
 
         [Fact]

@@ -110,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             _constructors.GetOrAdd(
                 type,
                 t =>
-                    typeof(ReaderColumn<>).MakeGenericType(t)
+                    typeof(ReaderColumn<>)
+                        .MakeGenericType(t)
                         .GetConstructors()
                         .First(ci => ci.GetParameters().Length == 4)
             );

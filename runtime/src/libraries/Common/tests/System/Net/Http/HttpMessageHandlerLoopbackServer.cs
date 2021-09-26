@@ -30,9 +30,9 @@ namespace System.Net.Test.Common
         )
         {
             await clientFunc(
-                    new LoopbackServerHttpMessageHandler(serverFunc),
-                    new Uri("http://example.com")
-                )
+                new LoopbackServerHttpMessageHandler(serverFunc),
+                new Uri("http://example.com")
+            )
                 .ConfigureAwait(false);
         }
 
@@ -121,10 +121,8 @@ namespace System.Net.Test.Common
                     )
                     {
                         response.Content.Headers.Remove("Content-Type");
-                        response.Content.Headers.TryAddWithoutValidation(
-                            "Content-Type",
-                            header.Value
-                        );
+                        response.Content.Headers
+                            .TryAddWithoutValidation("Content-Type", header.Value);
                     }
                     else
                     {

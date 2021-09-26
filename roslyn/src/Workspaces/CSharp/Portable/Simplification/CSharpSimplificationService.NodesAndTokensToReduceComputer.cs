@@ -87,9 +87,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     if (
                         _simplifyAllDescendants
                         || node.DescendantNodesAndTokens(
-                                s_containsAnnotations,
-                                descendIntoTrivia: true
-                            )
+                            s_containsAnnotations,
+                            descendIntoTrivia: true
+                        )
                             .Any(s_hasSimplifierAnnotation)
                     )
                     {

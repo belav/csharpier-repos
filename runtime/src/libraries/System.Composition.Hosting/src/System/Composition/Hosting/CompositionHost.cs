@@ -60,7 +60,9 @@ namespace System.Composition.Hosting
                 new LazyWithMetadataExportDescriptorProvider(),
                 new CurrentScopeExportDescriptorProvider(),
                 new ExportFactoryWithMetadataExportDescriptorProvider()
-            }.Concat(providers).ToArray();
+            }
+                .Concat(providers)
+                .ToArray();
 
             var container = new LifetimeContext(
                 new ExportDescriptorRegistry(allProviders),

@@ -41,12 +41,13 @@ namespace Microsoft.Net.Http.Headers
             if (!TryParseValue(value, ref index, out var result))
             {
                 throw new FormatException(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "The header contains invalid values at index {0}: '{1}'",
-                        index,
-                        value.Value ?? "<null>"
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "The header contains invalid values at index {0}: '{1}'",
+                            index,
+                            value.Value ?? "<null>"
+                        )
                 );
             }
             return result;
@@ -158,12 +159,13 @@ namespace Microsoft.Net.Http.Headers
                     else if (strict)
                     {
                         throw new FormatException(
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "The header contains invalid values at index {0}: '{1}'",
-                                index,
-                                value
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "The header contains invalid values at index {0}: '{1}'",
+                                    index,
+                                    value
+                                )
                         );
                     }
                     else

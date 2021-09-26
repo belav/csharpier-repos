@@ -75,12 +75,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure
                 Dependencies,
                 RelationalDependencies
             );
-            conventionSet.EntityTypeAddedConventions.Add(
-                new RelationalTableAttributeConvention(Dependencies, RelationalDependencies)
-            );
-            conventionSet.EntityTypeAddedConventions.Add(
-                new RelationalTableCommentAttributeConvention(Dependencies, RelationalDependencies)
-            );
+            conventionSet.EntityTypeAddedConventions
+                .Add(new RelationalTableAttributeConvention(Dependencies, RelationalDependencies));
+            conventionSet.EntityTypeAddedConventions
+                .Add(
+                    new RelationalTableCommentAttributeConvention(
+                        Dependencies,
+                        RelationalDependencies
+                    )
+                );
             conventionSet.EntityTypeAddedConventions.Add(tableNameFromDbSetConvention);
 
             ValueGenerationConvention valueGenerationConvention =
@@ -91,9 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure
             );
             conventionSet.EntityTypeBaseTypeChangedConventions.Add(tableNameFromDbSetConvention);
 
-            conventionSet.EntityTypeAnnotationChangedConventions.Add(
-                (RelationalValueGenerationConvention)valueGenerationConvention
-            );
+            conventionSet.EntityTypeAnnotationChangedConventions
+                .Add((RelationalValueGenerationConvention)valueGenerationConvention);
 
             ReplaceConvention(
                 conventionSet.EntityTypePrimaryKeyChangedConventions,
@@ -114,9 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure
                 RelationalDependencies
             );
             conventionSet.PropertyAnnotationChangedConventions.Add(storeGenerationConvention);
-            conventionSet.PropertyAnnotationChangedConventions.Add(
-                (RelationalValueGenerationConvention)valueGenerationConvention
-            );
+            conventionSet.PropertyAnnotationChangedConventions
+                .Add((RelationalValueGenerationConvention)valueGenerationConvention);
 
             var dbFunctionAttributeConvention = new RelationalDbFunctionAttributeConvention(
                 Dependencies,
@@ -130,21 +131,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure
                 new TableValuedDbFunctionConvention(Dependencies, RelationalDependencies),
                 typeof(ModelCleanupConvention)
             );
-            conventionSet.ModelFinalizingConventions.Add(
-                new TableSharingConcurrencyTokenConvention(Dependencies, RelationalDependencies)
-            );
+            conventionSet.ModelFinalizingConventions
+                .Add(
+                    new TableSharingConcurrencyTokenConvention(Dependencies, RelationalDependencies)
+                );
             conventionSet.ModelFinalizingConventions.Add(dbFunctionAttributeConvention);
             conventionSet.ModelFinalizingConventions.Add(tableNameFromDbSetConvention);
             conventionSet.ModelFinalizingConventions.Add(storeGenerationConvention);
-            conventionSet.ModelFinalizingConventions.Add(
-                new EntityTypeHierarchyMappingConvention(Dependencies, RelationalDependencies)
-            );
-            conventionSet.ModelFinalizingConventions.Add(
-                new SequenceUniquificationConvention(Dependencies, RelationalDependencies)
-            );
-            conventionSet.ModelFinalizingConventions.Add(
-                new SharedTableConvention(Dependencies, RelationalDependencies)
-            );
+            conventionSet.ModelFinalizingConventions
+                .Add(
+                    new EntityTypeHierarchyMappingConvention(Dependencies, RelationalDependencies)
+                );
+            conventionSet.ModelFinalizingConventions
+                .Add(new SequenceUniquificationConvention(Dependencies, RelationalDependencies));
+            conventionSet.ModelFinalizingConventions
+                .Add(new SharedTableConvention(Dependencies, RelationalDependencies));
             ReplaceConvention(
                 conventionSet.ModelFinalizingConventions,
                 (QueryFilterRewritingConvention)new RelationalQueryFilterRewritingConvention(

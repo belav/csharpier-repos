@@ -63,18 +63,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 return;
 
             var cancellationToken = context.CancellationToken;
-            var styleOption = context.Options.GetOption(
-                CSharpCodeStyleOptions.PreferPatternMatching,
-                syntaxTree,
-                cancellationToken
-            );
+            var styleOption = context.Options
+                .GetOption(
+                    CSharpCodeStyleOptions.PreferPatternMatching,
+                    syntaxTree,
+                    cancellationToken
+                );
             if (!styleOption.Value)
                 return;
 
             var semanticModel = context.SemanticModel;
-            var expressionTypeOpt = semanticModel.Compilation.GetTypeByMetadataName(
-                "System.Linq.Expressions.Expression`1"
-            );
+            var expressionTypeOpt = semanticModel.Compilation
+                .GetTypeByMetadataName("System.Linq.Expressions.Expression`1");
             if (expression.IsInExpressionTree(semanticModel, expressionTypeOpt, cancellationToken))
                 return;
 
@@ -122,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                     return HasIllegalPatternVariables(p.Left, permitDesignations)
                         || HasIllegalPatternVariables(p.Right, permitDesignations);
                 case Source p when !permitDesignations:
-                    return p.PatternSyntax.DescendantNodes()
+                    return p.PatternSyntax
+                        .DescendantNodes()
                         .OfType<SingleVariableDesignationSyntax>()
                         .Any(variable => !variable.Identifier.IsMissing);
                 default:

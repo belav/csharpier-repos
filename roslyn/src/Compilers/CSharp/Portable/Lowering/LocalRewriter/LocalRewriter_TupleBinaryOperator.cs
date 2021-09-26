@@ -675,9 +675,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     int tupleCardinality = operand.Type.TupleElementTypesWithAnnotations.Length;
                     var underlyingConversions = tupleConversion.UnderlyingConversions;
                     Debug.Assert(underlyingConversions.Length == tupleCardinality);
-                    var argumentBuilder = ArrayBuilder<BoundExpression>.GetInstance(
-                        tupleCardinality
-                    );
+                    var argumentBuilder = ArrayBuilder<BoundExpression>
+                        .GetInstance(tupleCardinality);
                     for (int i = 0; i < tupleCardinality; i++)
                     {
                         argumentBuilder.Add(
@@ -698,7 +697,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         inferredNamesOpt: ImmutableArray<bool>.Empty,
                         type: expr.Type,
                         hasErrors: expr.HasErrors
-                    ).WithSuppression(expr.IsSuppressed);
+                    )
+                        .WithSuppression(expr.IsSuppressed);
                     throw null;
                 }
                 default:
@@ -836,12 +836,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // (left != right).op_true
 
                 BoundExpression dynamicResult = _dynamicFactory.MakeDynamicBinaryOperator(
-                        single.Kind,
-                        left,
-                        right,
-                        isCompoundAssignment: false,
-                        _compilation.DynamicType
-                    )
+                    single.Kind,
+                    left,
+                    right,
+                    isCompoundAssignment: false,
+                    _compilation.DynamicType
+                )
                     .ToExpression();
                 if (operatorKind == BinaryOperatorKind.Equal)
                 {

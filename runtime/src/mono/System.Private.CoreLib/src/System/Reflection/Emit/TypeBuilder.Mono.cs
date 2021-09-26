@@ -1723,16 +1723,17 @@ namespace System.Reflection.Emit
         )
         {
             check_created();
-            return created!.InvokeMember(
-                name,
-                invokeAttr,
-                binder,
-                target,
-                args,
-                modifiers,
-                culture,
-                namedParameters
-            );
+            return created!
+                .InvokeMember(
+                    name,
+                    invokeAttr,
+                    binder,
+                    target,
+                    args,
+                    modifiers,
+                    culture,
+                    namedParameters
+                );
         }
 
         protected override bool IsArrayImpl()
@@ -1807,11 +1808,12 @@ namespace System.Reflection.Emit
 
             if (generic_params!.Length != typeArguments.Length)
                 throw new ArgumentException(
-                    string.Format(
-                        "The type or method has {0} generic parameter(s) but {1} generic argument(s) where provided. A generic argument must be provided for each generic parameter.",
-                        generic_params.Length,
-                        typeArguments.Length
-                    ),
+                    string
+                        .Format(
+                            "The type or method has {0} generic parameter(s) but {1} generic argument(s) where provided. A generic argument must be provided for each generic parameter.",
+                            generic_params.Length,
+                            typeArguments.Length
+                        ),
                     nameof(typeArguments)
                 );
 

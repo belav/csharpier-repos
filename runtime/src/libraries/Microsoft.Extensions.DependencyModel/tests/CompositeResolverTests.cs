@@ -20,12 +20,12 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             var fail = new Mock<ICompilationAssemblyResolver>();
             var success = new Mock<ICompilationAssemblyResolver>();
             success.Setup(
-                    r =>
-                        r.TryResolveAssemblyPaths(
-                            It.IsAny<CompilationLibrary>(),
-                            It.IsAny<List<string>>()
-                        )
-                )
+                r =>
+                    r.TryResolveAssemblyPaths(
+                        It.IsAny<CompilationLibrary>(),
+                        It.IsAny<List<string>>()
+                    )
+            )
                 .Returns(true);
 
             var failTwo = new Mock<ICompilationAssemblyResolver>();
@@ -85,12 +85,12 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             var fail = new Mock<ICompilationAssemblyResolver>();
             var success = new Mock<ICompilationAssemblyResolver>();
             success.Setup(
-                    r =>
-                        r.TryResolveAssemblyPaths(
-                            It.IsAny<CompilationLibrary>(),
-                            It.IsAny<List<string>>()
-                        )
-                )
+                r =>
+                    r.TryResolveAssemblyPaths(
+                        It.IsAny<CompilationLibrary>(),
+                        It.IsAny<List<string>>()
+                    )
+            )
                 .Returns(true)
                 .Callback(
                     (CompilationLibrary l, List<string> a) =>

@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 nodeInList,
                 nodesToInsert,
                 insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter
-            ).Visit(root);
+            )
+                .Visit(root);
         }
 
         private class Replacer<TNode> : SyntaxRewriter where TNode : SyntaxNode

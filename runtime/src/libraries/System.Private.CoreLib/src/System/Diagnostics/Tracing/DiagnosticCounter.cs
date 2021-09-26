@@ -154,7 +154,8 @@ namespace System.Diagnostics.Tracing
 
             // Otherwise, append it, then append the element we moved to, and then
             // iterate through the remainder of the elements, appending each.
-            StringBuilder sb = new StringBuilder().Append(current.Key)
+            StringBuilder sb = new StringBuilder()
+                .Append(current.Key)
                 .Append(':')
                 .Append(current.Value);
             do

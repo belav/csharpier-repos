@@ -694,18 +694,18 @@ class Program
         )
         {
             await AssertSmartTokenFormatterOpenBraceWithBaseIndentationAsync(
-                    markup,
-                    baseIndentation,
-                    expectedIndentation,
-                    useTabs: false
-                )
+                markup,
+                baseIndentation,
+                expectedIndentation,
+                useTabs: false
+            )
                 .ConfigureAwait(false);
             await AssertSmartTokenFormatterOpenBraceWithBaseIndentationAsync(
-                    markup.Replace("    ", "\t"),
-                    baseIndentation,
-                    expectedIndentation,
-                    useTabs: true
-                )
+                markup.Replace("    ", "\t"),
+                baseIndentation,
+                expectedIndentation,
+                useTabs: true
+            )
                 .ConfigureAwait(false);
         }
 
@@ -742,22 +742,22 @@ class Program
         )
         {
             await AssertSmartTokenFormatterOpenBraceAsync(
-                    code,
-                    indentationLine,
-                    expectedSpace,
-                    useTabs: false,
-                    baseIndentation,
-                    span
-                )
+                code,
+                indentationLine,
+                expectedSpace,
+                useTabs: false,
+                baseIndentation,
+                span
+            )
                 .ConfigureAwait(false);
             await AssertSmartTokenFormatterOpenBraceAsync(
-                    code.Replace("    ", "\t"),
-                    indentationLine,
-                    expectedSpace,
-                    useTabs: true,
-                    baseIndentation,
-                    span
-                )
+                code.Replace("    ", "\t"),
+                indentationLine,
+                expectedSpace,
+                useTabs: true,
+                baseIndentation,
+                span
+            )
                 .ConfigureAwait(false);
         }
 
@@ -788,18 +788,18 @@ class Program
         )
         {
             await AssertSmartTokenFormatterOpenBraceAsync(
-                    expected,
-                    code,
-                    indentationLine,
-                    useTabs: false
-                )
+                expected,
+                code,
+                indentationLine,
+                useTabs: false
+            )
                 .ConfigureAwait(false);
             await AssertSmartTokenFormatterOpenBraceAsync(
-                    expected.Replace("    ", "\t"),
-                    code.Replace("    ", "\t"),
-                    indentationLine,
-                    useTabs: true
-                )
+                expected.Replace("    ", "\t"),
+                code.Replace("    ", "\t"),
+                indentationLine,
+                useTabs: true
+            )
                 .ConfigureAwait(false);
         }
 
@@ -814,13 +814,15 @@ class Program
             using var workspace = TestWorkspace.CreateCSharp(code);
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        FormattingOptions2.UseTabs,
-                        LanguageNames.CSharp,
-                        useTabs
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(
+                                FormattingOptions2.UseTabs,
+                                LanguageNames.CSharp,
+                                useTabs
+                            )
                     )
-                )
             );
 
             var buffer = workspace.Documents.First().GetTextBuffer();
@@ -836,18 +838,18 @@ class Program
         )
         {
             await AssertSmartTokenFormatterCloseBraceWithBaseIndentation(
-                    markup,
-                    baseIndentation,
-                    expectedIndentation,
-                    useTabs: false
-                )
+                markup,
+                baseIndentation,
+                expectedIndentation,
+                useTabs: false
+            )
                 .ConfigureAwait(false);
             await AssertSmartTokenFormatterCloseBraceWithBaseIndentation(
-                    markup.Replace("    ", "\t"),
-                    baseIndentation,
-                    expectedIndentation,
-                    useTabs: true
-                )
+                markup.Replace("    ", "\t"),
+                baseIndentation,
+                expectedIndentation,
+                useTabs: true
+            )
                 .ConfigureAwait(false);
         }
 
@@ -884,22 +886,22 @@ class Program
         )
         {
             await AssertSmartTokenFormatterCloseBraceAsync(
-                    code,
-                    indentationLine,
-                    expectedSpace,
-                    useTabs: false,
-                    baseIndentation,
-                    span
-                )
+                code,
+                indentationLine,
+                expectedSpace,
+                useTabs: false,
+                baseIndentation,
+                span
+            )
                 .ConfigureAwait(false);
             await AssertSmartTokenFormatterCloseBraceAsync(
-                    code.Replace("    ", "\t"),
-                    indentationLine,
-                    expectedSpace,
-                    useTabs: true,
-                    baseIndentation,
-                    span
-                )
+                code.Replace("    ", "\t"),
+                indentationLine,
+                expectedSpace,
+                useTabs: true,
+                baseIndentation,
+                span
+            )
                 .ConfigureAwait(false);
         }
 
@@ -929,16 +931,16 @@ class Program
         )
         {
             await ExpectException_SmartTokenFormatterCloseBraceAsync(
-                    code,
-                    indentationLine,
-                    useTabs: false
-                )
+                code,
+                indentationLine,
+                useTabs: false
+            )
                 .ConfigureAwait(false);
             await ExpectException_SmartTokenFormatterCloseBraceAsync(
-                    code.Replace("    ", "\t"),
-                    indentationLine,
-                    useTabs: true
-                )
+                code.Replace("    ", "\t"),
+                indentationLine,
+                useTabs: true
+            )
                 .ConfigureAwait(false);
         }
 

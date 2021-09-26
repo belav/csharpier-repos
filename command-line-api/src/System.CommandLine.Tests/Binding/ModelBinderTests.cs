@@ -504,9 +504,8 @@ namespace System.CommandLine.Tests.Binding
             var intOption = new Option<int>("-a");
             var stringOption = new Option<string>("-b");
             var parser = new Parser(intOption, stringOption);
-            var ctor = typeof(ClassWithMultiLetterCtorParameters).GetConstructors(
-                BindingFlags.Public | BindingFlags.Instance
-            )[0];
+            var ctor = typeof(ClassWithMultiLetterCtorParameters)
+                .GetConstructors(BindingFlags.Public | BindingFlags.Instance)[0];
             var paramInfo = ctor.GetParameters()[0];
 
             var bindingContext = new BindingContext(parser.Parse("-a 42 -b Hello"));
@@ -609,16 +608,15 @@ namespace System.CommandLine.Tests.Binding
             );
 
             var parser = new CommandLineBuilder(rootCommand).UseMiddleware(
-                    context =>
-                    {
-                        var binder = new ModelBinder<ClassWithSetter<int>>();
+                context =>
+                {
+                    var binder = new ModelBinder<ClassWithSetter<int>>();
 
-                        binder.BindMemberFromValue(instance => instance.Value, _ => 456);
+                    binder.BindMemberFromValue(instance => instance.Value, _ => 456);
 
-                        context.BindingContext.AddModelBinder(binder);
-                    }
-                )
-                .Build();
+                    context.BindingContext.AddModelBinder(binder);
+                }
+            ).Build();
 
             parser.Invoke("--value 123");
 
@@ -637,16 +635,15 @@ namespace System.CommandLine.Tests.Binding
             );
 
             var parser = new CommandLineBuilder(rootCommand).UseMiddleware(
-                    context =>
-                    {
-                        var binder = new ModelBinder<ClassWithSetter<int>>();
+                context =>
+                {
+                    var binder = new ModelBinder<ClassWithSetter<int>>();
 
-                        binder.BindMemberFromValue(instance => instance.Value, _ => 456);
+                    binder.BindMemberFromValue(instance => instance.Value, _ => 456);
 
-                        context.BindingContext.AddModelBinder(binder);
-                    }
-                )
-                .Build();
+                    context.BindingContext.AddModelBinder(binder);
+                }
+            ).Build();
 
             parser.Invoke("123");
 

@@ -106,12 +106,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             // Arrange
             var item1 = Mock.Of<RazorCompiledItem>(i => i.Identifier == "Item");
             var item2 = Mock.Of<RazorCompiledItem>(i => i.Identifier == "item");
-            var expected = string.Join(
-                Environment.NewLine,
-                "The following precompiled view paths differ only in case, which is not supported:",
-                "Item",
-                "item"
-            );
+            var expected = string
+                .Join(
+                    Environment.NewLine,
+                    "The following precompiled view paths differ only in case, which is not supported:",
+                    "Item",
+                    "item"
+                );
             var part1 = new AssemblyPart(typeof(RazorCompiledItemFeatureProviderTest).Assembly);
             var part2 = new Mock<ApplicationPart>();
             part2.As<IRazorCompiledItemProvider>()

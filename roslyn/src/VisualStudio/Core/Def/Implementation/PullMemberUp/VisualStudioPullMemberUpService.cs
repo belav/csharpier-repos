@@ -42,17 +42,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
             ISymbol selectedMember
         )
         {
-            var membersInType = selectedMember.ContainingType.GetMembers()
+            var membersInType = selectedMember.ContainingType
+                .GetMembers()
                 .WhereAsArray(member => MemberAndDestinationValidator.IsMemberValid(member));
             var memberViewModels = membersInType.SelectAsArray(
                 member =>
                     new PullMemberUpSymbolViewModel(member, _glyphService)
                     {
                         // The member user selected will be checked at the beginning.
-                        IsChecked = SymbolEquivalenceComparer.Instance.Equals(
-                            selectedMember,
-                            member
-                        ),
+                        IsChecked = SymbolEquivalenceComparer.Instance
+                            .Equals(selectedMember, member),
                         MakeAbstract = false,
                         IsMakeAbstractCheckable =
                             !member.IsKind(SymbolKind.Field) && !member.IsAbstract,

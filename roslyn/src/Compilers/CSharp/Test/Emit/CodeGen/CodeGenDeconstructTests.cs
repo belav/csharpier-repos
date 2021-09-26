@@ -285,15 +285,14 @@ class C
             var tree = comp.Compilation.SyntaxTrees.First();
             var model = comp.Compilation.GetSemanticModel(tree);
             var deconstruction = (AssignmentExpressionSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.SimpleAssignmentExpression
-                )
+                SyntaxKind.SimpleAssignmentExpression
+            )
                 .AsNode();
             Assert.Equal("(x, y) = new C()", deconstruction.ToString());
             var deconstructionInfo = model.GetDeconstructionInfo(deconstruction);
 
-            var firstDeconstructMethod = (
-                (CSharpCompilation)comp.Compilation
-            ).GetTypeByMetadataName("C")
+            var firstDeconstructMethod = ((CSharpCompilation)comp.Compilation)
+                .GetTypeByMetadataName("C")
                 .GetMembers(WellKnownMemberNames.DeconstructMethodName)
                 .OfType<SourceOrdinaryMethodSymbol>()
                 .Where(m => m.ParameterCount == 2)
@@ -318,9 +317,9 @@ class C
             Assert.Empty(nested[1].Nested);
 
             var assignment = (AssignmentExpressionSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.SimpleAssignmentExpression,
-                    occurrence: 2
-                )
+                SyntaxKind.SimpleAssignmentExpression,
+                occurrence: 2
+            )
                 .AsNode();
             Assert.Equal("a = 1", assignment.ToString());
             var defaultInfo = model.GetDeconstructionInfo(assignment);
@@ -358,8 +357,8 @@ class C
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
             var foreachDeconstruction = (ForEachVariableStatementSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.ForEachVariableStatement
-                )
+                SyntaxKind.ForEachVariableStatement
+            )
                 .AsNode();
             Assert.Equal(@"foreach (char in s) { }", foreachDeconstruction.ToString());
             var deconstructionInfo = model.GetDeconstructionInfo(foreachDeconstruction);
@@ -2572,8 +2571,8 @@ class C
             var tree = comp.Compilation.SyntaxTrees.First();
             var model = comp.Compilation.GetSemanticModel(tree);
             var deconstruction = (AssignmentExpressionSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.SimpleAssignmentExpression
-                )
+                SyntaxKind.SimpleAssignmentExpression
+            )
                 .AsNode();
             Assert.Equal(
                 @"(x, (y, z)) = Tuple.Create(1, Tuple.Create(""hello"", ""world""))",
@@ -2779,12 +2778,11 @@ static class D
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (10,9): error CS1510: A ref or out value must be an assignable variable
-                    //         (x, y) = c;
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "(x, y) = c").WithLocation(10, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (10,9): error CS1510: A ref or out value must be an assignable variable
+                //         (x, y) = c;
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "(x, y) = c").WithLocation(10, 9)
+            );
         }
 
         [Fact]
@@ -6383,41 +6381,40 @@ var (x, y) = (1, null);
                 options: TestOptions.DebugExe,
                 references: s_valueTupleRefs
             );
-            comp.GetDeclarationDiagnostics()
-                .Verify(
-                    // (2,6): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x'.
-                    // var (x, y) = (1, null);
-                    Diagnostic(
-                            ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                            "x"
-                        )
-                        .WithArguments("x")
-                        .WithLocation(2, 6),
-                    // (2,9): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'y'.
-                    // var (x, y) = (1, null);
-                    Diagnostic(
-                            ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                            "y"
-                        )
-                        .WithArguments("y")
-                        .WithLocation(2, 9)
-                );
-
-            comp.VerifyDiagnostics(
+            comp.GetDeclarationDiagnostics().Verify(
                 // (2,6): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x'.
                 // var (x, y) = (1, null);
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x"
+                )
                     .WithArguments("x")
                     .WithLocation(2, 6),
                 // (2,9): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'y'.
                 // var (x, y) = (1, null);
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "y"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "y"
+                )
+                    .WithArguments("y")
+                    .WithLocation(2, 9)
+            );
+
+            comp.VerifyDiagnostics(
+                // (2,6): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x'.
+                // var (x, y) = (1, null);
+                Diagnostic(
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x"
+                )
+                    .WithArguments("x")
+                    .WithLocation(2, 6),
+                // (2,9): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'y'.
+                // var (x, y) = (1, null);
+                Diagnostic(
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "y"
+                )
                     .WithArguments("y")
                     .WithLocation(2, 9)
             );
@@ -6457,19 +6454,18 @@ var (x1, x2) = (x2, x1);
                 options: TestOptions.DebugExe,
                 references: s_valueTupleRefs
             );
-            comp.GetDeclarationDiagnostics()
-                .Verify(
-                    // (2,10): error CS7019: Type of 'x2' cannot be inferred since its initializer directly or indirectly refers to the definition.
-                    // var (x1, x2) = (x2, x1);
-                    Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x2")
-                        .WithArguments("x2")
-                        .WithLocation(2, 10),
-                    // (2,6): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or indirectly refers to the definition.
-                    // var (x1, x2) = (x2, x1);
-                    Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x1")
-                        .WithArguments("x1")
-                        .WithLocation(2, 6)
-                );
+            comp.GetDeclarationDiagnostics().Verify(
+                // (2,10): error CS7019: Type of 'x2' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // var (x1, x2) = (x2, x1);
+                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(2, 10),
+                // (2,6): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // var (x1, x2) = (x2, x1);
+                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(2, 6)
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
@@ -6508,24 +6504,23 @@ var (y1, y2) = (x1, x2);
                 options: TestOptions.DebugExe,
                 references: s_valueTupleRefs
             );
-            comp.GetDeclarationDiagnostics()
-                .Verify(
-                    // (3,6): error CS7019: Type of 'y1' cannot be inferred since its initializer directly or indirectly refers to the definition.
-                    // var (y1, y2) = (x1, x2);
-                    Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "y1")
-                        .WithArguments("y1")
-                        .WithLocation(3, 6),
-                    // (2,6): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or indirectly refers to the definition.
-                    // var (x1, x2) = (y1, y2);
-                    Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x1")
-                        .WithArguments("x1")
-                        .WithLocation(2, 6),
-                    // (2,10): error CS7019: Type of 'x2' cannot be inferred since its initializer directly or indirectly refers to the definition.
-                    // var (x1, x2) = (y1, y2);
-                    Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x2")
-                        .WithArguments("x2")
-                        .WithLocation(2, 10)
-                );
+            comp.GetDeclarationDiagnostics().Verify(
+                // (3,6): error CS7019: Type of 'y1' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // var (y1, y2) = (x1, x2);
+                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(3, 6),
+                // (2,6): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // var (x1, x2) = (y1, y2);
+                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(2, 6),
+                // (2,10): error CS7019: Type of 'x2' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // var (x1, x2) = (y1, y2);
+                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(2, 10)
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
@@ -6569,9 +6564,9 @@ System.Console.Write($""{x1} {x2} {x3}"");
                 // (3,5): error CS8136: Deconstruction 'var (...)' form disallows a specific type for 'var'.
                 // var (x1, (x2, x3)) = (1, (2, 3));
                 Diagnostic(
-                        ErrorCode.ERR_DeconstructionVarFormDisallowsSpecificType,
-                        "(x1, (x2, x3))"
-                    )
+                    ErrorCode.ERR_DeconstructionVarFormDisallowsSpecificType,
+                    "(x1, (x2, x3))"
+                )
                     .WithLocation(3, 5)
             );
 
@@ -6620,9 +6615,9 @@ System.Console.Write($""{x1} {x2} {x3}"");
                 // (6,5): error CS8136: Deconstruction 'var (...)' form disallows a specific type for 'var'.
                 // var (x1, (x2, x3)) = (1, (2, 3));
                 Diagnostic(
-                        ErrorCode.ERR_DeconstructionVarFormDisallowsSpecificType,
-                        "(x1, (x2, x3))"
-                    )
+                    ErrorCode.ERR_DeconstructionVarFormDisallowsSpecificType,
+                    "(x1, (x2, x3))"
+                )
                     .WithLocation(6, 5)
             );
 
@@ -6936,7 +6931,8 @@ class C
                 // Test to show that reference-unequal discards are equal by type.
                 IDiscardSymbol symbolClone = new DiscardSymbol(
                     TypeWithAnnotations.Create(symbol.Type.GetSymbol())
-                ).GetPublicSymbol();
+                )
+                    .GetPublicSymbol();
                 Assert.NotSame(symbol, symbolClone);
                 Assert.Equal(SymbolKind.Discard, symbolClone.Kind);
                 Assert.Equal(
@@ -7115,10 +7111,10 @@ class C
                 // (6,9): error CS8652: The feature 'Mixed declarations and expressions in deconstruction' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
                 //         (@_, var x) = (1, 2);
                 Diagnostic(
-                        ErrorCode.ERR_FeatureInPreview,
-                        "(@_, var x) = (1, 2)",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_FeatureInPreview,
+                    "(@_, var x) = (1, 2)",
+                    isSuppressed: false
+                )
                     .WithArguments("Mixed declarations and expressions in deconstruction")
                     .WithLocation(6, 9),
                 // (6,10): error CS0103: The name '_' does not exist in the current context
@@ -7156,10 +7152,9 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics();
-            CompileAndVerify(comp, expectedOutput: "1")
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "1").VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  1
@@ -7175,7 +7170,7 @@ class C
   IL_000b:  nop
   IL_000c:  ret
 }"
-                );
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
@@ -7675,9 +7670,9 @@ class C
                 // (6,9): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call.
                 //         System.Threading.Tasks.Task.Delay(new System.TimeSpan(0));
                 Diagnostic(
-                        ErrorCode.WRN_UnobservedAwaitableExpression,
-                        "System.Threading.Tasks.Task.Delay(new System.TimeSpan(0))"
-                    )
+                    ErrorCode.WRN_UnobservedAwaitableExpression,
+                    "System.Threading.Tasks.Task.Delay(new System.TimeSpan(0))"
+                )
                     .WithLocation(6, 9)
             );
         }
@@ -7749,10 +7744,10 @@ class C
                 // (6,9): error CS8652: The feature 'Mixed declarations and expressions in deconstruction' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
                 //         (var x, x) = (1, 2);
                 Diagnostic(
-                        ErrorCode.ERR_FeatureInPreview,
-                        "(var x, x) = (1, 2)",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_FeatureInPreview,
+                    "(var x, x) = (1, 2)",
+                    isSuppressed: false
+                )
                     .WithArguments("Mixed declarations and expressions in deconstruction")
                     .WithLocation(6, 9),
                 // (6,17): error CS0841: Cannot use local variable 'x' before it is declared
@@ -7763,10 +7758,10 @@ class C
                 // (7,9): error CS8652: The feature 'Mixed declarations and expressions in deconstruction' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
                 //         (y, var y) = (1, 2);
                 Diagnostic(
-                        ErrorCode.ERR_FeatureInPreview,
-                        "(y, var y) = (1, 2)",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_FeatureInPreview,
+                    "(y, var y) = (1, 2)",
+                    isSuppressed: false
+                )
                     .WithArguments("Mixed declarations and expressions in deconstruction")
                     .WithLocation(7, 9),
                 // (7,10): error CS0841: Cannot use local variable 'y' before it is declared
@@ -8225,10 +8220,9 @@ class Program
                 parseOptions: TestOptions.RegularPreview
             );
             compilation.VerifyDiagnostics();
-            CompileAndVerify(compilation, expectedOutput: "1")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(compilation, expectedOutput: "1").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       32 (0x20)
   .maxstack  3
@@ -8251,7 +8245,7 @@ class Program
   IL_001e:  nop
   IL_001f:  ret
 }"
-                );
+            );
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
 
@@ -8284,10 +8278,9 @@ class Program
                 parseOptions: TestOptions.RegularPreview
             );
             compilation.VerifyDiagnostics();
-            CompileAndVerify(compilation, expectedOutput: "1")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(compilation, expectedOutput: "1").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  3
@@ -8314,7 +8307,7 @@ class Program
   IL_0024:  br.s       IL_001a
   IL_0026:  ret
 }"
-                );
+            );
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
 
@@ -8454,7 +8447,8 @@ class Program
             compilation.VerifyDiagnostics(
                 // (6,34): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         foreach ((M(out var x1), args is var x2, _) in new[] { (1, 2, 3) })
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "args is var x2").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "args is var x2")
+                    .WithLocation(6, 34),
                 // (6,34): error CS0029: Cannot implicitly convert type 'int' to 'bool'
                 //         foreach ((M(out var x1), args is var x2, _) in new[] { (1, 2, 3) })
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "args is var x2")
@@ -8463,9 +8457,9 @@ class Program
                 // (6,18): error CS8186: A foreach loop must declare its iteration variables.
                 //         foreach ((M(out var x1), args is var x2, _) in new[] { (1, 2, 3) })
                 Diagnostic(
-                        ErrorCode.ERR_MustDeclareForeachIteration,
-                        "(M(out var x1), args is var x2, _)"
-                    )
+                    ErrorCode.ERR_MustDeclareForeachIteration,
+                    "(M(out var x1), args is var x2, _)"
+                )
                     .WithLocation(6, 18)
             );
             var tree = compilation.SyntaxTrees.First();
@@ -8585,10 +8579,9 @@ class Program
                 options: TestOptions.DebugExe,
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(compilation, expectedOutput: "1True")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(compilation, expectedOutput: "1True").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       73 (0x49)
   .maxstack  4
@@ -8628,7 +8621,7 @@ class Program
   IL_0046:  br.s       IL_0035
   IL_0048:  ret
 }"
-                );
+            );
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
@@ -11057,17 +11050,16 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,23): error CS8185: A declaration is not allowed in this context.
-                    //         var z1 = (x1, string y1) = new C();
-                    Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "string y1")
-                        .WithLocation(7, 23),
-                    // (9,19): error CS8185: A declaration is not allowed in this context.
-                    //         var z2 = (int x2, y2) = new C();
-                    Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int x2")
-                        .WithLocation(9, 19)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,23): error CS8185: A declaration is not allowed in this context.
+                //         var z1 = (x1, string y1) = new C();
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "string y1")
+                    .WithLocation(7, 23),
+                // (9,19): error CS8185: A declaration is not allowed in this context.
+                //         var z2 = (int x2, y2) = new C();
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int x2")
+                    .WithLocation(9, 19)
+            );
         }
 
         [Fact]
@@ -11092,27 +11084,26 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,13): warning CS0168: The variable 'x1' is declared but never used
-                    //         int x1;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x1")
-                        .WithArguments("x1")
-                        .WithLocation(6, 13),
-                    // (7,17): error CS8186: A foreach loop must declare its iteration variables.
-                    //         foreach((x1, string y1) in new C[0]);
-                    Diagnostic(ErrorCode.ERR_MustDeclareForeachIteration, "(x1, string y1)")
-                        .WithLocation(7, 17),
-                    // (8,16): warning CS0168: The variable 'y2' is declared but never used
-                    //         string y2;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "y2")
-                        .WithArguments("y2")
-                        .WithLocation(8, 16),
-                    // (9,17): error CS8186: A foreach loop must declare its iteration variables.
-                    //         foreach((int x2, y2) in new C[0]);
-                    Diagnostic(ErrorCode.ERR_MustDeclareForeachIteration, "(int x2, y2)")
-                        .WithLocation(9, 17)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,13): warning CS0168: The variable 'x1' is declared but never used
+                //         int x1;
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(6, 13),
+                // (7,17): error CS8186: A foreach loop must declare its iteration variables.
+                //         foreach((x1, string y1) in new C[0]);
+                Diagnostic(ErrorCode.ERR_MustDeclareForeachIteration, "(x1, string y1)")
+                    .WithLocation(7, 17),
+                // (8,16): warning CS0168: The variable 'y2' is declared but never used
+                //         string y2;
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(8, 16),
+                // (9,17): error CS8186: A foreach loop must declare its iteration variables.
+                //         foreach((int x2, y2) in new C[0]);
+                Diagnostic(ErrorCode.ERR_MustDeclareForeachIteration, "(int x2, y2)")
+                    .WithLocation(9, 17)
+            );
         }
 
         [Fact]
@@ -11139,29 +11130,28 @@ class C
     }
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.RegularPreview)
-                .VerifyDiagnostics(
-                    // (7,16): warning CS0168: The variable 'y1' is declared but never used
-                    //         string y1;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "y1")
-                        .WithArguments("y1")
-                        .WithLocation(7, 16),
-                    // (8,21): error CS0128: A local variable or function named 'y1' is already defined in this scope
-                    //         (x1, string y1) = new C();
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1")
-                        .WithArguments("y1")
-                        .WithLocation(8, 21),
-                    // (11,13): error CS0128: A local variable or function named 'x2' is already defined in this scope
-                    //         int x2;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
-                        .WithArguments("x2")
-                        .WithLocation(11, 13),
-                    // (11,13): warning CS0168: The variable 'x2' is declared but never used
-                    //         int x2;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x2")
-                        .WithArguments("x2")
-                        .WithLocation(11, 13)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.RegularPreview).VerifyDiagnostics(
+                // (7,16): warning CS0168: The variable 'y1' is declared but never used
+                //         string y1;
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(7, 16),
+                // (8,21): error CS0128: A local variable or function named 'y1' is already defined in this scope
+                //         (x1, string y1) = new C();
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(8, 21),
+                // (11,13): error CS0128: A local variable or function named 'x2' is already defined in this scope
+                //         int x2;
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(11, 13),
+                // (11,13): warning CS0168: The variable 'x2' is declared but never used
+                //         int x2;
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(11, 13)
+            );
         }
 
         [Fact]
@@ -11184,19 +11174,18 @@ class C
     }
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.RegularPreview)
-                .VerifyDiagnostics(
-                    // (6,10): error CS0103: The name 'x1' does not exist in the current context
-                    //         (x1, string y1) = new C();
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
-                        .WithArguments("x1")
-                        .WithLocation(6, 10),
-                    // (7,18): error CS0103: The name 'y2' does not exist in the current context
-                    //         (int x2, y2) = new C();
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y2")
-                        .WithArguments("y2")
-                        .WithLocation(7, 18)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.RegularPreview).VerifyDiagnostics(
+                // (6,10): error CS0103: The name 'x1' does not exist in the current context
+                //         (x1, string y1) = new C();
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(6, 10),
+                // (7,18): error CS0103: The name 'y2' does not exist in the current context
+                //         (int x2, y2) = new C();
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(7, 18)
+            );
         }
 
         [Fact]
@@ -11426,45 +11415,44 @@ class B
     }
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular9)
-                .VerifyDiagnostics(
-                    // (7,9): error CS8652: The feature 'Mixed declarations and expressions in deconstruction' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                    //         (x1, string y1) = new A();
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureInPreview,
-                            "(x1, string y1) = new A()",
-                            isSuppressed: false
-                        )
-                        .WithArguments("Mixed declarations and expressions in deconstruction")
-                        .WithLocation(7, 9),
-                    // (9,9): error CS8652: The feature 'Mixed declarations and expressions in deconstruction' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                    //         (int x2, y2) = new A();
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureInPreview,
-                            "(int x2, y2) = new A()",
-                            isSuppressed: false
-                        )
-                        .WithArguments("Mixed declarations and expressions in deconstruction")
-                        .WithLocation(9, 9),
-                    // (11,9): error CS8652: The feature 'Mixed declarations and expressions in deconstruction' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                    //         (int x3, (string y3, z3)) = new B();
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureInPreview,
-                            "(int x3, (string y3, z3)) = new B()",
-                            isSuppressed: false
-                        )
-                        .WithArguments("Mixed declarations and expressions in deconstruction")
-                        .WithLocation(11, 9),
-                    // (13,9): error CS8652: The feature 'Mixed declarations and expressions in deconstruction' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                    //         (x4, var (y4, z4)) = new B();
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureInPreview,
-                            "(x4, var (y4, z4)) = new B()",
-                            isSuppressed: false
-                        )
-                        .WithArguments("Mixed declarations and expressions in deconstruction")
-                        .WithLocation(13, 9)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular9).VerifyDiagnostics(
+                // (7,9): error CS8652: The feature 'Mixed declarations and expressions in deconstruction' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                //         (x1, string y1) = new A();
+                Diagnostic(
+                    ErrorCode.ERR_FeatureInPreview,
+                    "(x1, string y1) = new A()",
+                    isSuppressed: false
+                )
+                    .WithArguments("Mixed declarations and expressions in deconstruction")
+                    .WithLocation(7, 9),
+                // (9,9): error CS8652: The feature 'Mixed declarations and expressions in deconstruction' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                //         (int x2, y2) = new A();
+                Diagnostic(
+                    ErrorCode.ERR_FeatureInPreview,
+                    "(int x2, y2) = new A()",
+                    isSuppressed: false
+                )
+                    .WithArguments("Mixed declarations and expressions in deconstruction")
+                    .WithLocation(9, 9),
+                // (11,9): error CS8652: The feature 'Mixed declarations and expressions in deconstruction' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                //         (int x3, (string y3, z3)) = new B();
+                Diagnostic(
+                    ErrorCode.ERR_FeatureInPreview,
+                    "(int x3, (string y3, z3)) = new B()",
+                    isSuppressed: false
+                )
+                    .WithArguments("Mixed declarations and expressions in deconstruction")
+                    .WithLocation(11, 9),
+                // (13,9): error CS8652: The feature 'Mixed declarations and expressions in deconstruction' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                //         (x4, var (y4, z4)) = new B();
+                Diagnostic(
+                    ErrorCode.ERR_FeatureInPreview,
+                    "(x4, var (y4, z4)) = new B()",
+                    isSuppressed: false
+                )
+                    .WithArguments("Mixed declarations and expressions in deconstruction")
+                    .WithLocation(13, 9)
+            );
         }
 
         [Fact]
@@ -11568,45 +11556,28 @@ class B
     }
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.RegularPreview)
-                .VerifyDiagnostics(
-                    // (6,10): error CS0841: Cannot use local variable 'x1' before it is declared
-                    //         (x1, string y1) = new A();
-                    Diagnostic(
-                            ErrorCode.ERR_VariableUsedBeforeDeclaration,
-                            "x1",
-                            isSuppressed: false
-                        )
-                        .WithArguments("x1")
-                        .WithLocation(6, 10),
-                    // (8,18): error CS0841: Cannot use local variable 'y2' before it is declared
-                    //         (int x2, y2) = new A();
-                    Diagnostic(
-                            ErrorCode.ERR_VariableUsedBeforeDeclaration,
-                            "y2",
-                            isSuppressed: false
-                        )
-                        .WithArguments("y2")
-                        .WithLocation(8, 18),
-                    // (10,30): error CS0841: Cannot use local variable 'z3' before it is declared
-                    //         (int x3, (string y3, z3)) = new B();
-                    Diagnostic(
-                            ErrorCode.ERR_VariableUsedBeforeDeclaration,
-                            "z3",
-                            isSuppressed: false
-                        )
-                        .WithArguments("z3")
-                        .WithLocation(10, 30),
-                    // (12,10): error CS0841: Cannot use local variable 'x4' before it is declared
-                    //         (x4, var (y4, z4)) = new B();
-                    Diagnostic(
-                            ErrorCode.ERR_VariableUsedBeforeDeclaration,
-                            "x4",
-                            isSuppressed: false
-                        )
-                        .WithArguments("x4")
-                        .WithLocation(12, 10)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.RegularPreview).VerifyDiagnostics(
+                // (6,10): error CS0841: Cannot use local variable 'x1' before it is declared
+                //         (x1, string y1) = new A();
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1", isSuppressed: false)
+                    .WithArguments("x1")
+                    .WithLocation(6, 10),
+                // (8,18): error CS0841: Cannot use local variable 'y2' before it is declared
+                //         (int x2, y2) = new A();
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y2", isSuppressed: false)
+                    .WithArguments("y2")
+                    .WithLocation(8, 18),
+                // (10,30): error CS0841: Cannot use local variable 'z3' before it is declared
+                //         (int x3, (string y3, z3)) = new B();
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "z3", isSuppressed: false)
+                    .WithArguments("z3")
+                    .WithLocation(10, 30),
+                // (12,10): error CS0841: Cannot use local variable 'x4' before it is declared
+                //         (x4, var (y4, z4)) = new B();
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4", isSuppressed: false)
+                    .WithArguments("x4")
+                    .WithLocation(12, 10)
+            );
         }
 
         [Fact]
@@ -11643,29 +11614,28 @@ class B
     }
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.RegularPreview)
-                .VerifyDiagnostics(
-                    // (6,18): error CS0841: Cannot use local variable 'x1' before it is declared
-                    //         (var x1, x1) = new A();
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1")
-                        .WithArguments("x1")
-                        .WithLocation(6, 18),
-                    // (7,10): error CS0841: Cannot use local variable 'x2' before it is declared
-                    //         (x2, var x2) = new A();
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
-                        .WithArguments("x2")
-                        .WithLocation(7, 10),
-                    // (8,27): error CS0841: Cannot use local variable 'x3' before it is declared
-                    //         (var x3, (var y3, x3)) = new B();
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x3")
-                        .WithArguments("x3")
-                        .WithLocation(8, 27),
-                    // (9,10): error CS0841: Cannot use local variable 'x4' before it is declared
-                    //         (x4, (var y4, var x4)) = new B();
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
-                        .WithArguments("x4")
-                        .WithLocation(9, 10)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.RegularPreview).VerifyDiagnostics(
+                // (6,18): error CS0841: Cannot use local variable 'x1' before it is declared
+                //         (var x1, x1) = new A();
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(6, 18),
+                // (7,10): error CS0841: Cannot use local variable 'x2' before it is declared
+                //         (x2, var x2) = new A();
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(7, 10),
+                // (8,27): error CS0841: Cannot use local variable 'x3' before it is declared
+                //         (var x3, (var y3, x3)) = new B();
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(8, 27),
+                // (9,10): error CS0841: Cannot use local variable 'x4' before it is declared
+                //         (x4, (var y4, var x4)) = new B();
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(9, 10)
+            );
         }
     }
 }

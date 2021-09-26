@@ -531,8 +531,8 @@ class Derived<T, U> : Base<T, U, object, dynamic>
             );
             var assembly = ReflectionUtilities.Load(assemblyBytes);
             var reflectionType = assembly.GetType(
-                    ExpressionCompilerConstants.TypeVariablesClassName
-                )
+                ExpressionCompilerConstants.TypeVariablesClassName
+            )
                 .MakeGenericType(new[] { typeof(object), typeof(object), typeof(object[]) });
             var value = CreateDkmClrValue(
                 value: null,

@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected override string StoreName => "SpatialQueryGeographyTest";
 
         protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
-            base.AddServices(serviceCollection.AddSingleton(GeometryServices))
+            base
+                .AddServices(serviceCollection.AddSingleton(GeometryServices))
                 .AddSingleton<IRelationalTypeMappingSource, ReplacementTypeMappingSource>();
 
         protected class ReplacementTypeMappingSource : SqlServerTypeMappingSource
@@ -53,13 +54,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             ) =>
                 mappingInfo.ClrType == typeof(GeoPoint)
                     ? (
-                          (RelationalTypeMapping)base.FindMapping(typeof(Point))
+                          (RelationalTypeMapping)base
+                              .FindMapping(typeof(Point))
                               .Clone(
                                   new GeoPointConverter(
                                       CreateGeometryServices().CreateGeometryFactory()
                                   )
                               )
-                      ).Clone("geography", null)
+                      )
+                      .Clone("geography", null)
                     : base.FindMapping(mappingInfo);
         }
     }

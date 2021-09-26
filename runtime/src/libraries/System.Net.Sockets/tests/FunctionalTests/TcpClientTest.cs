@@ -174,33 +174,30 @@ namespace System.Net.Sockets.Tests
                         break;
 
                     case 3:
-                        await Task.Factory.FromAsync(
-                            client.BeginConnect,
-                            client.EndConnect,
-                            host,
-                            port,
-                            null
-                        );
+                        await Task.Factory
+                            .FromAsync(client.BeginConnect, client.EndConnect, host, port, null);
                         break;
                     case 4:
                         addresses = await Dns.GetHostAddressesAsync(host);
-                        await Task.Factory.FromAsync(
-                            client.BeginConnect,
-                            client.EndConnect,
-                            addresses[0],
-                            port,
-                            null
-                        );
+                        await Task.Factory
+                            .FromAsync(
+                                client.BeginConnect,
+                                client.EndConnect,
+                                addresses[0],
+                                port,
+                                null
+                            );
                         break;
                     case 5:
                         addresses = await Dns.GetHostAddressesAsync(host);
-                        await Task.Factory.FromAsync(
-                            client.BeginConnect,
-                            client.EndConnect,
-                            addresses,
-                            port,
-                            null
-                        );
+                        await Task.Factory
+                            .FromAsync(
+                                client.BeginConnect,
+                                client.EndConnect,
+                                addresses,
+                                port,
+                                null
+                            );
                         break;
 
                     case 6:

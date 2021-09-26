@@ -4600,10 +4600,8 @@ namespace Microsoft.EntityFrameworkCore
             var expectedState = tempKeys ? EntityState.Added : EntityState.Unchanged;
 
             if (
-                context.Database.ProviderName.EndsWith(
-                    "InMemory",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                context.Database.ProviderName
+                    .EndsWith("InMemory", StringComparison.OrdinalIgnoreCase)
             )
             {
                 tempKeys = false;

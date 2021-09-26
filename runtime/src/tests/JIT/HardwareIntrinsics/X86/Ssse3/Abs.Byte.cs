@@ -303,10 +303,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Ssse3).GetMethod(
-                    nameof(Ssse3.Abs),
-                    new Type[] { typeof(Vector128<SByte>) }
-                )
+            var result = typeof(Ssse3)
+                .GetMethod(nameof(Ssse3.Abs), new Type[] { typeof(Vector128<SByte>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector128<SByte>>(_dataTable.inArray1Ptr) }
@@ -320,10 +318,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Ssse3).GetMethod(
-                    nameof(Ssse3.Abs),
-                    new Type[] { typeof(Vector128<SByte>) }
-                )
+            var result = typeof(Ssse3)
+                .GetMethod(nameof(Ssse3.Abs), new Type[] { typeof(Vector128<SByte>) })
                 .Invoke(
                     null,
                     new object[] { Sse2.LoadVector128((SByte*)(_dataTable.inArray1Ptr)) }
@@ -337,10 +333,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Ssse3).GetMethod(
-                    nameof(Ssse3.Abs),
-                    new Type[] { typeof(Vector128<SByte>) }
-                )
+            var result = typeof(Ssse3)
+                .GetMethod(nameof(Ssse3.Abs), new Type[] { typeof(Vector128<SByte>) })
                 .Invoke(
                     null,
                     new object[] { Sse2.LoadAlignedVector128((SByte*)(_dataTable.inArray1Ptr)) }
@@ -578,15 +572,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Ssse3)}.{nameof(Ssse3.Abs)}<Byte>(Vector128<SByte>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Ssse3)}.{nameof(Ssse3.Abs)}<Byte>(Vector128<SByte>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -36,10 +36,10 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             var (document, textSpan, cancellationToken) = context;
             var moveToNamespaceService = document.GetLanguageService<IMoveToNamespaceService>();
             var actions = await moveToNamespaceService.GetCodeActionsAsync(
-                    document,
-                    textSpan,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
         }

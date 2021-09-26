@@ -62,13 +62,12 @@ namespace Microsoft.AspNetCore.Hosting
             Action<LibuvTransportOptions> configureOptions
         )
         {
-            return hostBuilder.UseLibuv()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.Configure(configureOptions);
-                    }
-                );
+            return hostBuilder.UseLibuv().ConfigureServices(
+                services =>
+                {
+                    services.Configure(configureOptions);
+                }
+            );
         }
     }
 }

@@ -1308,9 +1308,8 @@ namespace System.IO.Tests
         [Fact]
         public void FileSystemWatcher_CreateManyConcurrentWatches()
         {
-            int maxUserWatches = int.Parse(
-                File.ReadAllText("/proc/sys/fs/inotify/max_user_watches")
-            );
+            int maxUserWatches = int
+                .Parse(File.ReadAllText("/proc/sys/fs/inotify/max_user_watches"));
 
             using (var dir = new TempDirectory(GetTestFilePath()))
             using (

@@ -86,12 +86,12 @@ namespace System.Web.Mvc.Test
             mockControllerContext.Setup(c => c.HttpContext.Request.ApplicationPath)
                 .Returns("/somepath");
             mockControllerContext.Setup(
-                    c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>())
-                )
+                c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>())
+            )
                 .Returns((string s) => s);
             mockControllerContext.Setup(
-                    c => c.HttpContext.Response.Redirect("/somepath/c/a/i", false)
-                )
+                c => c.HttpContext.Response.Redirect("/somepath/c/a/i", false)
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.Controller).Returns(mockController.Object);
 
@@ -118,12 +118,12 @@ namespace System.Web.Mvc.Test
             mockControllerContext.Setup(c => c.HttpContext.Request.ApplicationPath)
                 .Returns("/somepath");
             mockControllerContext.Setup(
-                    c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>())
-                )
+                c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>())
+            )
                 .Returns((string s) => s);
             mockControllerContext.Setup(
-                    c => c.HttpContext.Response.RedirectPermanent("/somepath/c/a/i", false)
-                )
+                c => c.HttpContext.Response.RedirectPermanent("/somepath/c/a/i", false)
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.Controller).Returns(mockController.Object);
 
@@ -156,12 +156,12 @@ namespace System.Web.Mvc.Test
             mockControllerContext.Setup(c => c.HttpContext.Request.ApplicationPath)
                 .Returns("/somepath");
             mockControllerContext.Setup(
-                    c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>())
-                )
+                c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>())
+            )
                 .Returns((string s) => s);
             mockControllerContext.Setup(
-                    c => c.HttpContext.Response.Redirect("/somepath/c/a/i", false)
-                )
+                c => c.HttpContext.Response.Redirect("/somepath/c/a/i", false)
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.Controller).Returns(mockController.Object);
 
@@ -175,10 +175,8 @@ namespace System.Web.Mvc.Test
             // Act
             object value = tempData["Foo"];
             result.ExecuteResult(mockControllerContext.Object);
-            mockController.Object.TempData.Save(
-                mockControllerContext.Object,
-                new Mock<ITempDataProvider>().Object
-            );
+            mockController.Object.TempData
+                .Save(mockControllerContext.Object, new Mock<ITempDataProvider>().Object);
 
             // Assert
             Assert.True(tempData.ContainsKey("Foo"));

@@ -276,7 +276,8 @@ namespace AutoMapper.UnitTests
                             opts =>
                                 opts.MapFrom(
                                     src =>
-                                        src.SubModels.FirstOrDefault()
+                                        src.SubModels
+                                            .FirstOrDefault()
                                             .SubSubModels.FirstOrDefault().Id
                                 )
                         );
@@ -434,18 +435,17 @@ namespace AutoMapper.UnitTests
                 return new MapperConfiguration(
                     c =>
                     {
-                        c.CreateMap<Source, Destination>()
-                            .ForMember(
-                                d => d.Value,
-                                o =>
-                                    o.MapFrom(
-                                        (s, d) =>
-                                        {
-                                            Throw();
-                                            return 0;
-                                        }
-                                    )
-                            );
+                        c.CreateMap<Source, Destination>().ForMember(
+                            d => d.Value,
+                            o =>
+                                o.MapFrom(
+                                    (s, d) =>
+                                    {
+                                        Throw();
+                                        return 0;
+                                    }
+                                )
+                        );
                     }
                 );
             }
@@ -459,9 +459,10 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_propagate_exception()
         {
-            new Action(
-                () => Mapper.Map<Destination>(new Source())
-            ).ShouldThrowException<AutoMapperMappingException>(e => e.InnerException.ShouldBe(_ex));
+            new Action(() => Mapper.Map<Destination>(new Source()))
+                .ShouldThrowException<AutoMapperMappingException>(
+                    e => e.InnerException.ShouldBe(_ex)
+                );
         }
     }
 

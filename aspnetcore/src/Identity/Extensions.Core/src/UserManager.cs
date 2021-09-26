@@ -1852,12 +1852,8 @@ namespace Microsoft.AspNetCore.Identity
                 );
             }
             // Make sure the token is valid
-            var result = await _tokenProviders[tokenProvider].ValidateAsync(
-                purpose,
-                token,
-                this,
-                user
-            );
+            var result = await _tokenProviders[tokenProvider]
+                .ValidateAsync(purpose, token, this, user);
 
             if (!result)
             {
@@ -1979,12 +1975,8 @@ namespace Microsoft.AspNetCore.Identity
             }
 
             // Make sure the token is valid
-            var result = await _tokenProviders[tokenProvider].ValidateAsync(
-                "TwoFactor",
-                token,
-                this,
-                user
-            );
+            var result = await _tokenProviders[tokenProvider]
+                .ValidateAsync("TwoFactor", token, this, user);
             if (!result)
             {
                 Logger.LogWarning(

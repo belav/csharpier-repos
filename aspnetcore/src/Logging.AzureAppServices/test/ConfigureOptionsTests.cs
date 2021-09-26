@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         [InlineData(null)]
         public void InitializesIsEnabled(bool? enabled)
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("IsEnabledKey", Convert.ToString(enabled))
@@ -36,7 +37,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         [Fact]
         public void InitializesLogDirectory()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -59,7 +61,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         [Fact]
         public void InitializesBlobUriSiteInstanceAndName()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(

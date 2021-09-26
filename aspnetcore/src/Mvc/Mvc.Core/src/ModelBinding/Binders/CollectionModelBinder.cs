@@ -149,9 +149,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 return;
             }
 
-            var valueProviderResult = bindingContext.ValueProvider.GetValue(
-                bindingContext.ModelName
-            );
+            var valueProviderResult = bindingContext.ValueProvider
+                .GetValue(bindingContext.ModelName);
 
             CollectionResult result;
             if (valueProviderResult == ValueProviderResult.None)
@@ -178,20 +177,19 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             Debug.Assert(model != null);
             if (result.ValidationStrategy != null)
             {
-                bindingContext.ValidationState.Add(
-                    model,
-                    new ValidationStateEntry() { Strategy = result.ValidationStrategy, }
-                );
+                bindingContext.ValidationState
+                    .Add(
+                        model,
+                        new ValidationStateEntry() { Strategy = result.ValidationStrategy, }
+                    );
             }
 
             if (valueProviderResult != ValueProviderResult.None)
             {
                 // If we did simple binding, then modelstate should be updated to reflect what we bound for ModelName.
                 // If we did complex binding, there will already be an entry for each index.
-                bindingContext.ModelState.SetModelValue(
-                    bindingContext.ModelName,
-                    valueProviderResult
-                );
+                bindingContext.ModelState
+                    .SetModelValue(bindingContext.ModelName, valueProviderResult);
             }
 
             bindingContext.Result = ModelBindingResult.Success(model);

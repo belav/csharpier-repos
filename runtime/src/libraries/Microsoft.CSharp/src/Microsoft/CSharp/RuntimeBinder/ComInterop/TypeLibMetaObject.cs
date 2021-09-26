@@ -22,9 +22,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             if (_lib.HasMember(name))
             {
                 BindingRestrictions restrictions = BindingRestrictions.GetTypeRestriction(
-                        Expression,
-                        typeof(ComTypeLibDesc)
-                    )
+                    Expression,
+                    typeof(ComTypeLibDesc)
+                )
                     .Merge(
                         BindingRestrictions.GetExpressionRestriction(
                             Expression.Equal(

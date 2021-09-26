@@ -19,12 +19,12 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(ServiceLifetime.Transient)]
         public void Factory_creates_new_context_instance(ServiceLifetime lifetime)
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddDbContextFactory<WoolacombeContext>(
-                        b => b.UseInMemoryDatabase(nameof(WoolacombeContext)),
-                        lifetime
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddDbContextFactory<WoolacombeContext>(
+                    b => b.UseInMemoryDatabase(nameof(WoolacombeContext)),
+                    lifetime
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             if (lifetime == ServiceLifetime.Scoped)
             {
@@ -44,11 +44,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Factory_can_use_pool()
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddPooledDbContextFactory<WoolacombeContext>(
-                        b => b.UseInMemoryDatabase(nameof(WoolacombeContext))
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddPooledDbContextFactory<WoolacombeContext>(
+                    b => b.UseInMemoryDatabase(nameof(WoolacombeContext))
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             var contextFactory = serviceProvider.GetService<IDbContextFactory<WoolacombeContext>>();
 
@@ -75,16 +75,16 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Factory_can_use_shared_pool()
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddDbContext<WoolacombeContext>(
-                        b => b.UseInMemoryDatabase(nameof(WoolacombeContext)),
-                        ServiceLifetime.Scoped,
-                        ServiceLifetime.Singleton
-                    )
-                    .AddPooledDbContextFactory<WoolacombeContext>(
-                        b => b.UseInMemoryDatabase(nameof(WoolacombeContext))
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddDbContext<WoolacombeContext>(
+                    b => b.UseInMemoryDatabase(nameof(WoolacombeContext)),
+                    ServiceLifetime.Scoped,
+                    ServiceLifetime.Singleton
+                )
+                .AddPooledDbContextFactory<WoolacombeContext>(
+                    b => b.UseInMemoryDatabase(nameof(WoolacombeContext))
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             var scope = serviceProvider.CreateScope();
             var contextFactory = serviceProvider.GetService<IDbContextFactory<WoolacombeContext>>();
@@ -128,10 +128,11 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(ServiceLifetime.Transient)]
         public void Factory_and_options_have_the_same_lifetime(ServiceLifetime lifetime)
         {
-            var serviceCollection = new ServiceCollection().AddDbContextFactory<WoolacombeContext>(
-                b => b.UseInMemoryDatabase(nameof(WoolacombeContext)),
-                lifetime
-            );
+            var serviceCollection = new ServiceCollection()
+                .AddDbContextFactory<WoolacombeContext>(
+                    b => b.UseInMemoryDatabase(nameof(WoolacombeContext)),
+                    lifetime
+                );
 
             Assert.Equal(
                 lifetime,
@@ -150,9 +151,10 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Default_lifetime_is_singleton()
         {
-            var serviceCollection = new ServiceCollection().AddDbContextFactory<WoolacombeContext>(
-                b => b.UseInMemoryDatabase(nameof(WoolacombeContext))
-            );
+            var serviceCollection = new ServiceCollection()
+                .AddDbContextFactory<WoolacombeContext>(
+                    b => b.UseInMemoryDatabase(nameof(WoolacombeContext))
+                );
 
             Assert.Equal(
                 ServiceLifetime.Singleton,
@@ -172,8 +174,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Lifetime_is_singleton_when_pooling()
         {
-            var serviceCollection =
-                new ServiceCollection().AddPooledDbContextFactory<WoolacombeContext>(
+            var serviceCollection = new ServiceCollection()
+                .AddPooledDbContextFactory<WoolacombeContext>(
                     b => b.UseInMemoryDatabase(nameof(WoolacombeContext))
                 );
 
@@ -208,11 +210,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Factory_can_use_constructor_with_non_generic_builder()
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddDbContextFactory<CroydeContext>(
-                        b => b.UseInMemoryDatabase(nameof(CroydeContext))
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddDbContextFactory<CroydeContext>(
+                    b => b.UseInMemoryDatabase(nameof(CroydeContext))
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             using var context = serviceProvider.GetService<IDbContextFactory<CroydeContext>>()
                 .CreateDbContext();
@@ -228,9 +230,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Factory_can_use_parameterless_constructor()
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddDbContextFactory<MortehoeContext>()
-                    .BuildServiceProvider(validateScopes: true);
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddDbContextFactory<MortehoeContext>()
+                .BuildServiceProvider(validateScopes: true);
 
             using var context = serviceProvider.GetService<IDbContextFactory<MortehoeContext>>()
                 .CreateDbContext();
@@ -248,11 +250,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Factory_can_use_DbContext_directly()
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddDbContextFactory<DbContext>(
-                        b => b.UseInMemoryDatabase(nameof(DbContext))
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddDbContextFactory<DbContext>(b => b.UseInMemoryDatabase(nameof(DbContext)))
+                .BuildServiceProvider(validateScopes: true);
 
             using var context = serviceProvider.GetService<IDbContextFactory<DbContext>>()
                 .CreateDbContext();
@@ -266,14 +266,14 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(ServiceLifetime.Transient)]
         public void Can_always_inject_singleton_and_transient_services(ServiceLifetime lifetime)
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddSingleton<SingletonService>()
-                    .AddTransient<TransientService>()
-                    .AddDbContextFactory<IlfracombeContext>(
-                        b => b.UseInMemoryDatabase(nameof(IlfracombeContext)),
-                        lifetime
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddSingleton<SingletonService>()
+                .AddTransient<TransientService>()
+                .AddDbContextFactory<IlfracombeContext>(
+                    b => b.UseInMemoryDatabase(nameof(IlfracombeContext)),
+                    lifetime
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             if (lifetime == ServiceLifetime.Scoped)
             {
@@ -325,15 +325,15 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_inject_singleton_transient_and_scoped_services_into_scoped_factory()
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddSingleton<SingletonService>()
-                    .AddScoped<ScopedService>()
-                    .AddTransient<TransientService>()
-                    .AddDbContextFactory<CombeMartinContext>(
-                        b => b.UseInMemoryDatabase(nameof(CombeMartinContext)),
-                        ServiceLifetime.Scoped
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddSingleton<SingletonService>()
+                .AddScoped<ScopedService>()
+                .AddTransient<TransientService>()
+                .AddDbContextFactory<CombeMartinContext>(
+                    b => b.UseInMemoryDatabase(nameof(CombeMartinContext)),
+                    ServiceLifetime.Scoped
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             var scope = serviceProvider.CreateScope();
             var scopedServiceProvider = scope.ServiceProvider;
@@ -416,26 +416,26 @@ namespace Microsoft.EntityFrameworkCore
             ServiceLifetime lifetime
         )
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddSingleton<SingletonService>()
-                    .AddScoped<ScopedService>()
-                    .AddTransient<TransientService>()
-                    .AddDbContextFactory<WoolacombeContext>(
-                        (p, b) =>
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddSingleton<SingletonService>()
+                .AddScoped<ScopedService>()
+                .AddTransient<TransientService>()
+                .AddDbContextFactory<WoolacombeContext>(
+                    (p, b) =>
+                    {
+                        Assert.NotNull(p.GetService<SingletonService>());
+                        Assert.NotNull(p.GetService<TransientService>());
+
+                        if (lifetime == ServiceLifetime.Scoped)
                         {
-                            Assert.NotNull(p.GetService<SingletonService>());
-                            Assert.NotNull(p.GetService<TransientService>());
+                            Assert.NotNull(p.GetService<ScopedService>());
+                        }
 
-                            if (lifetime == ServiceLifetime.Scoped)
-                            {
-                                Assert.NotNull(p.GetService<ScopedService>());
-                            }
-
-                            b.UseInMemoryDatabase(nameof(WoolacombeContext));
-                        },
-                        lifetime
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+                        b.UseInMemoryDatabase(nameof(WoolacombeContext));
+                    },
+                    lifetime
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             if (lifetime == ServiceLifetime.Scoped)
             {
@@ -455,19 +455,19 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_resolve_from_the_service_provider_when_pooling()
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddSingleton<SingletonService>()
-                    .AddTransient<TransientService>()
-                    .AddDbContextFactory<WoolacombeContext>(
-                        (p, b) =>
-                        {
-                            Assert.NotNull(p.GetService<SingletonService>());
-                            Assert.NotNull(p.GetService<TransientService>());
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddSingleton<SingletonService>()
+                .AddTransient<TransientService>()
+                .AddDbContextFactory<WoolacombeContext>(
+                    (p, b) =>
+                    {
+                        Assert.NotNull(p.GetService<SingletonService>());
+                        Assert.NotNull(p.GetService<TransientService>());
 
-                            b.UseInMemoryDatabase(nameof(WoolacombeContext));
-                        }
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+                        b.UseInMemoryDatabase(nameof(WoolacombeContext));
+                    }
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             var contextFactory = serviceProvider.GetService<IDbContextFactory<WoolacombeContext>>();
 
@@ -482,11 +482,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_if_dependencies_are_not_in_DI()
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddDbContextFactory<WestwardHoContext>(
-                        b => b.UseInMemoryDatabase(nameof(WestwardHoContext))
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddDbContextFactory<WestwardHoContext>(
+                    b => b.UseInMemoryDatabase(nameof(WestwardHoContext))
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             var factory = serviceProvider.GetService<IDbContextFactory<WestwardHoContext>>();
 
@@ -504,14 +504,14 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_register_factories_for_multiple_contexts_even_with_non_generic_options()
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddDbContextFactory<CroydeContext>(
-                        b => b.UseInMemoryDatabase(nameof(CroydeContext))
-                    )
-                    .AddDbContextFactory<ClovellyContext>(
-                        b => b.UseInMemoryDatabase(nameof(ClovellyContext))
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddDbContextFactory<CroydeContext>(
+                    b => b.UseInMemoryDatabase(nameof(CroydeContext))
+                )
+                .AddDbContextFactory<ClovellyContext>(
+                    b => b.UseInMemoryDatabase(nameof(ClovellyContext))
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             using var context1 = serviceProvider.GetService<IDbContextFactory<CroydeContext>>()
                 .CreateDbContext();
@@ -530,18 +530,19 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_register_factories_for_multiple_contexts()
         {
-            var serviceProvider =
-                (IServiceProvider)new ServiceCollection().AddDbContextFactory<WidemouthBayContext>(
-                        b => b.UseInMemoryDatabase(nameof(WidemouthBayContext))
-                    )
-                    .AddDbContextFactory<WoolacombeContext>(
-                        b => b.UseInMemoryDatabase(nameof(WoolacombeContext))
-                    )
-                    .BuildServiceProvider(validateScopes: true);
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddDbContextFactory<WidemouthBayContext>(
+                    b => b.UseInMemoryDatabase(nameof(WidemouthBayContext))
+                )
+                .AddDbContextFactory<WoolacombeContext>(
+                    b => b.UseInMemoryDatabase(nameof(WoolacombeContext))
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             using var context1 = serviceProvider.GetService<
                 IDbContextFactory<WidemouthBayContext>
-            >().CreateDbContext();
+            >()
+                .CreateDbContext();
             using var context2 = serviceProvider.GetService<IDbContextFactory<WoolacombeContext>>()
                 .CreateDbContext();
 
@@ -558,10 +559,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Application_can_register_explicit_factory_implementation()
         {
-            var serviceProvider = (IServiceProvider)new ServiceCollection().AddSingleton<
-                IDbContextFactory<WoolacombeContext>,
-                WoolacombeContextFactory
-            >()
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddSingleton<IDbContextFactory<WoolacombeContext>, WoolacombeContextFactory>()
                 .AddDbContextFactory<WoolacombeContext>(
                     b => b.UseInMemoryDatabase(nameof(WoolacombeContext))
                 )
@@ -582,10 +581,10 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Application_can_register_factory_implementation_in_AddDbContextFactory()
         {
-            var serviceProvider = (IServiceProvider)new ServiceCollection().AddDbContextFactory<
-                WoolacombeContext,
-                WoolacombeContextFactory
-            >(b => b.UseInMemoryDatabase(nameof(WoolacombeContext)))
+            var serviceProvider = (IServiceProvider)new ServiceCollection()
+                .AddDbContextFactory<WoolacombeContext, WoolacombeContextFactory>(
+                    b => b.UseInMemoryDatabase(nameof(WoolacombeContext))
+                )
                 .BuildServiceProvider(validateScopes: true);
 
             var contextFactory = serviceProvider.GetService<IDbContextFactory<WoolacombeContext>>();

@@ -182,11 +182,12 @@ namespace System.Data.Common
                             || (0 <= keyValue.IndexOf(';'))
                             || (
                                 0
-                                == string.Compare(
-                                    DbConnectionStringKeywords.Driver,
-                                    keyName,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                == string
+                                    .Compare(
+                                        DbConnectionStringKeywords.Driver,
+                                        keyName,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                         )
                         && !s_connectionStringQuoteOdbcValueRegex.IsMatch(keyValue)
@@ -288,11 +289,12 @@ namespace System.Data.Common
         {
             try
             {
-                return int.Parse(
-                    stringValue,
-                    System.Globalization.NumberStyles.Integer,
-                    CultureInfo.InvariantCulture
-                );
+                return int
+                    .Parse(
+                        stringValue,
+                        System.Globalization.NumberStyles.Integer,
+                        CultureInfo.InvariantCulture
+                    );
             }
             catch (FormatException e)
             {

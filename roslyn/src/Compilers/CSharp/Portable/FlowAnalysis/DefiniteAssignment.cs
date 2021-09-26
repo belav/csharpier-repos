@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly PooledDictionary<VariableIdentifier, int> _variableSlot = PooledDictionary<
             VariableIdentifier,
             int
-        >.GetInstance();
+        >
+            .GetInstance();
 
         /// <summary>
         /// A mapping from the local variable slot to the symbol for the local variable itself.  This
@@ -71,8 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Variables that were used anywhere, in the sense required to suppress warnings about
         /// unused variables.
         /// </summary>
-        private readonly PooledHashSet<LocalSymbol> _usedVariables =
-            PooledHashSet<LocalSymbol>.GetInstance();
+        private readonly PooledHashSet<LocalSymbol> _usedVariables = PooledHashSet<LocalSymbol>
+            .GetInstance();
 
 #nullable enable
         /// <summary>
@@ -91,8 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Variables that were initialized or written anywhere.
         /// </summary>
-        private readonly PooledHashSet<Symbol> _writtenVariables =
-            PooledHashSet<Symbol>.GetInstance();
+        private readonly PooledHashSet<Symbol> _writtenVariables = PooledHashSet<Symbol>
+            .GetInstance();
 
         /// <summary>
         /// Map from variables that had their addresses taken, to the location of the first corresponding
@@ -107,13 +108,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Variables that were captured by anonymous functions.
         /// </summary>
-        private readonly PooledHashSet<Symbol> _capturedVariables =
-            PooledHashSet<Symbol>.GetInstance();
+        private readonly PooledHashSet<Symbol> _capturedVariables = PooledHashSet<Symbol>
+            .GetInstance();
 
-        private readonly PooledHashSet<Symbol> _capturedInside =
-            PooledHashSet<Symbol>.GetInstance();
-        private readonly PooledHashSet<Symbol> _capturedOutside =
-            PooledHashSet<Symbol>.GetInstance();
+        private readonly PooledHashSet<Symbol> _capturedInside = PooledHashSet<Symbol>
+            .GetInstance();
+        private readonly PooledHashSet<Symbol> _capturedOutside = PooledHashSet<Symbol>
+            .GetInstance();
 
         /// <summary>
         /// The current source assembly.
@@ -1594,10 +1595,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.TupleLiteral:
                 case BoundKind.ConvertedTupleLiteral:
-                    ((BoundTupleExpression)node).VisitAllElements(
-                        (x, self) => self.Assign(x, value: null, isRef: isRef),
-                        this
-                    );
+                    ((BoundTupleExpression)node)
+                        .VisitAllElements(
+                            (x, self) => self.Assign(x, value: null, isRef: isRef),
+                            this
+                        );
                     break;
 
                 default:

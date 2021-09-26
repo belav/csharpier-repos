@@ -63,13 +63,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal string GetDebuggerDisplay()
         {
-            return string.Join(
-                "; ",
-                UsingAliases.OrderBy(x => x.Value.UsingDirective.Location.SourceSpan.Start)
-                    .Select(ua => $"{ua.Key} = {ua.Value.Alias.Target}")
-                    .Concat(Usings.Select(u => u.NamespaceOrType.ToString()))
-                    .Concat(ExternAliases.Select(ea => $"extern alias {ea.Alias.Name}"))
-            );
+            return string
+                .Join(
+                    "; ",
+                    UsingAliases.OrderBy(x => x.Value.UsingDirective.Location.SourceSpan.Start)
+                        .Select(ua => $"{ua.Key} = {ua.Value.Alias.Target}")
+                        .Concat(Usings.Select(u => u.NamespaceOrType.ToString()))
+                        .Concat(ExternAliases.Select(ea => $"extern alias {ea.Alias.Name}"))
+                );
         }
 
         public static Imports FromSyntax(
@@ -500,10 +501,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var expandedUsings = ImmutableArray<NamespaceOrTypeAndUsingDirective>.Empty;
             if (!previousSubmissionImports.Usings.IsEmpty)
             {
-                var expandedUsingsBuilder =
-                    ArrayBuilder<NamespaceOrTypeAndUsingDirective>.GetInstance(
-                        previousSubmissionImports.Usings.Length
-                    );
+                var expandedUsingsBuilder = ArrayBuilder<NamespaceOrTypeAndUsingDirective>
+                    .GetInstance(previousSubmissionImports.Usings.Length);
                 foreach (var previousUsing in previousSubmissionImports.Usings)
                 {
                     var previousTarget = previousUsing.NamespaceOrType;
@@ -602,7 +601,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(_compilation == otherImports._compilation);
 
             var usingAliases = this.UsingAliases.SetItems(otherImports.UsingAliases); // NB: SetItems, rather than AddRange
-            var usings = this.Usings.AddRange(otherImports.Usings)
+            var usings = this.Usings
+                .AddRange(otherImports.Usings)
                 .Distinct(UsingTargetComparer.Instance);
             var externAliases = ConcatExternAliases(this.ExternAliases, otherImports.ExternAliases);
 
@@ -633,9 +633,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             var replacedExternAliases = PooledHashSet<string>.GetInstance();
             replacedExternAliases.AddAll(externs2.Select(e => e.Alias.Name));
             return externs1.WhereAsArray(
-                    (e, replacedExternAliases) => !replacedExternAliases.Contains(e.Alias.Name),
-                    replacedExternAliases
-                )
+                (e, replacedExternAliases) => !replacedExternAliases.Contains(e.Alias.Name),
+                replacedExternAliases
+            )
                 .AddRange(externs2);
         }
 
@@ -1094,12 +1094,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SymbolKind.Namespace:
                     {
                         var count = methods.Count;
-                        ((NamespaceSymbol)nsOrType.NamespaceOrType).GetExtensionMethods(
-                            methods,
-                            name,
-                            arity,
-                            options
-                        );
+                        ((NamespaceSymbol)nsOrType.NamespaceOrType)
+                            .GetExtensionMethods(methods, name, arity, options);
 
                         // If we found any extension methods, then consider this using as used.
                         if (methods.Count != count)
@@ -1113,12 +1109,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SymbolKind.NamedType:
                     {
                         var count = methods.Count;
-                        ((NamedTypeSymbol)nsOrType.NamespaceOrType).GetExtensionMethods(
-                            methods,
-                            name,
-                            arity,
-                            options
-                        );
+                        ((NamedTypeSymbol)nsOrType.NamespaceOrType)
+                            .GetExtensionMethods(methods, name, arity, options);
 
                         // If we found any extension methods, then consider this using as used.
                         if (methods.Count != count)

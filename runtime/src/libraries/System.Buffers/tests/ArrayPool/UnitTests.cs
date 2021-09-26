@@ -123,20 +123,16 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingMultipleArraysGivesBackDifferentInstances()
         {
-            ArrayPool<byte> instance = ArrayPool<byte>.Create(
-                maxArraysPerBucket: 2,
-                maxArrayLength: 16
-            );
+            ArrayPool<byte> instance = ArrayPool<byte>
+                .Create(maxArraysPerBucket: 2, maxArrayLength: 16);
             Assert.NotSame(instance.Rent(100), instance.Rent(100));
         }
 
         [Fact]
         public static void RentingMoreArraysThanSpecifiedInCreateWillStillSucceed()
         {
-            ArrayPool<byte> instance = ArrayPool<byte>.Create(
-                maxArraysPerBucket: 1,
-                maxArrayLength: 16
-            );
+            ArrayPool<byte> instance = ArrayPool<byte>
+                .Create(maxArraysPerBucket: 1, maxArrayLength: 16);
             Assert.NotNull(instance.Rent(100));
             Assert.NotNull(instance.Rent(100));
         }
@@ -144,10 +140,8 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentCanReturnBiggerArraySizeThanRequested()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                maxArraysPerBucket: 1,
-                maxArrayLength: 32
-            );
+            ArrayPool<byte> pool = ArrayPool<byte>
+                .Create(maxArraysPerBucket: 1, maxArrayLength: 32);
             byte[] rented = pool.Rent(27);
             Assert.NotNull(rented);
             Assert.Equal(32, rented.Length);
@@ -243,10 +237,8 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void TakingAllBuffersFromABucketPlusAnAllocatedOneShouldAllowReturningAllBuffers()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                maxArrayLength: 16,
-                maxArraysPerBucket: 1
-            );
+            ArrayPool<byte> pool = ArrayPool<byte>
+                .Create(maxArrayLength: 16, maxArraysPerBucket: 1);
             byte[] rented = pool.Rent(16);
             byte[] allocated = pool.Rent(16);
             pool.Return(rented);
@@ -264,10 +256,8 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void ReturningABufferGreaterThanMaxSizeDoesNotThrow()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                maxArrayLength: 16,
-                maxArraysPerBucket: 1
-            );
+            ArrayPool<byte> pool = ArrayPool<byte>
+                .Create(maxArrayLength: 16, maxArraysPerBucket: 1);
             byte[] rented = pool.Rent(32);
             pool.Return(rented);
 
@@ -279,10 +269,8 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingAllBuffersAndCallingRentAgainWillAllocateBufferAndReturnIt()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                maxArrayLength: 16,
-                maxArraysPerBucket: 1
-            );
+            ArrayPool<byte> pool = ArrayPool<byte>
+                .Create(maxArrayLength: 16, maxArraysPerBucket: 1);
             byte[] rented1 = pool.Rent(16);
             byte[] rented2 = pool.Rent(16);
             Assert.NotNull(rented1);
@@ -292,10 +280,8 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingReturningThenRentingABufferShouldNotAllocate()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                maxArrayLength: 16,
-                maxArraysPerBucket: 1
-            );
+            ArrayPool<byte> pool = ArrayPool<byte>
+                .Create(maxArrayLength: 16, maxArraysPerBucket: 1);
             byte[] bt = pool.Rent(16);
             int id = bt.GetHashCode();
             pool.Return(bt);
@@ -407,10 +393,8 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingAfterPoolExhaustionReturnsSizeForCorrespondingBucket_SmallerThanLimit()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                maxArrayLength: 64,
-                maxArraysPerBucket: 2
-            );
+            ArrayPool<byte> pool = ArrayPool<byte>
+                .Create(maxArrayLength: 64, maxArraysPerBucket: 2);
 
             Assert.Equal(16, pool.Rent(15).Length); // try initial bucket
             Assert.Equal(16, pool.Rent(15).Length);
@@ -424,10 +408,8 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingAfterPoolExhaustionReturnsSizeForCorrespondingBucket_JustBelowLimit()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                maxArrayLength: 64,
-                maxArraysPerBucket: 2
-            );
+            ArrayPool<byte> pool = ArrayPool<byte>
+                .Create(maxArrayLength: 64, maxArraysPerBucket: 2);
 
             Assert.Equal(32, pool.Rent(31).Length); // try initial bucket
             Assert.Equal(32, pool.Rent(31).Length);
@@ -441,10 +423,8 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingAfterPoolExhaustionReturnsSizeForCorrespondingBucket_AtLimit()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                maxArrayLength: 64,
-                maxArraysPerBucket: 2
-            );
+            ArrayPool<byte> pool = ArrayPool<byte>
+                .Create(maxArrayLength: 64, maxArraysPerBucket: 2);
 
             Assert.Equal(64, pool.Rent(63).Length); // try initial bucket
             Assert.Equal(64, pool.Rent(63).Length);
@@ -458,10 +438,8 @@ namespace System.Buffers.ArrayPool.Tests
             RemoteInvokeWithTrimming(
                 () =>
                 {
-                    ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                        maxArrayLength: 16,
-                        maxArraysPerBucket: 1
-                    );
+                    ArrayPool<byte> pool = ArrayPool<byte>
+                        .Create(maxArrayLength: 16, maxArraysPerBucket: 1);
 
                     byte[] buffer = pool.Rent(16);
                     pool.Return(buffer);
@@ -520,10 +498,8 @@ namespace System.Buffers.ArrayPool.Tests
             RemoteInvokeWithTrimming(
                 () =>
                 {
-                    ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                        maxArrayLength: 16,
-                        maxArraysPerBucket: 1
-                    );
+                    ArrayPool<byte> pool = ArrayPool<byte>
+                        .Create(maxArrayLength: 16, maxArraysPerBucket: 1);
                     byte[] buffer = pool.Rent(16);
                     Assert.Equal(
                         1,
@@ -549,10 +525,8 @@ namespace System.Buffers.ArrayPool.Tests
             RemoteInvokeWithTrimming(
                 () =>
                 {
-                    ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                        maxArrayLength: 16,
-                        maxArraysPerBucket: 1
-                    );
+                    ArrayPool<byte> pool = ArrayPool<byte>
+                        .Create(maxArrayLength: 16, maxArraysPerBucket: 1);
                     Assert.Equal(
                         1,
                         RunWithListener(
@@ -571,10 +545,8 @@ namespace System.Buffers.ArrayPool.Tests
             RemoteInvokeWithTrimming(
                 () =>
                 {
-                    ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                        maxArrayLength: 16,
-                        maxArraysPerBucket: 1
-                    );
+                    ArrayPool<byte> pool = ArrayPool<byte>
+                        .Create(maxArrayLength: 16, maxArraysPerBucket: 1);
                     Assert.Equal(
                         1,
                         RunWithListener(
@@ -593,10 +565,8 @@ namespace System.Buffers.ArrayPool.Tests
             RemoteInvokeWithTrimming(
                 () =>
                 {
-                    ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                        maxArrayLength: 16,
-                        maxArraysPerBucket: 10
-                    );
+                    ArrayPool<byte> pool = ArrayPool<byte>
+                        .Create(maxArrayLength: 16, maxArraysPerBucket: 10);
                     var list = new List<EventWrittenEventArgs>();
 
                     Assert.Equal(

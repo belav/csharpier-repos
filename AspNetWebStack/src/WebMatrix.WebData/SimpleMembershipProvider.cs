@@ -556,17 +556,15 @@ namespace WebMatrix.WebData
                 // We need to compare the token using a case insensitive comparison however it seems tricky to do this uniformly across databases when representing the token as a string.
                 // Therefore verify the case on the client
                 var rows = db.Query(
-                        "SELECT [UserId], [ConfirmationToken] FROM "
-                            + MembershipTableName
-                            + " WHERE [ConfirmationToken] = @0",
-                        accountConfirmationToken
-                    )
+                    "SELECT [UserId], [ConfirmationToken] FROM "
+                        + MembershipTableName
+                        + " WHERE [ConfirmationToken] = @0",
+                    accountConfirmationToken
+                )
                     .Where(
                         r =>
-                            ((string)r[1]).Equals(
-                                accountConfirmationToken,
-                                StringComparison.Ordinal
-                            )
+                            ((string)r[1])
+                                .Equals(accountConfirmationToken, StringComparison.Ordinal)
                     )
                     .ToList();
                 Debug.Assert(
@@ -1208,17 +1206,17 @@ namespace WebMatrix.WebData
         private string GetHashedPassword(IDatabase db, int userId)
         {
             var pwdQuery = db.Query(
-                    @"SELECT m.[Password] "
-                        + @"FROM "
-                        + MembershipTableName
-                        + " m, "
-                        + SafeUserTableName
-                        + " u "
-                        + @"WHERE m.UserId = "
-                        + userId
-                        + " AND m.UserId = u."
-                        + SafeUserIdColumn
-                )
+                @"SELECT m.[Password] "
+                    + @"FROM "
+                    + MembershipTableName
+                    + " m, "
+                    + SafeUserTableName
+                    + " u "
+                    + @"WHERE m.UserId = "
+                    + userId
+                    + " AND m.UserId = u."
+                    + SafeUserIdColumn
+            )
                 .ToList();
             // REVIEW: Should get exactly one match, should we throw if we get > 1?
             if (pwdQuery.Count != 1)

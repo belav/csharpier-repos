@@ -79,9 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                 )
             );
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                connection
-            );
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>())
+                .UseConnection(connection);
             return connection;
         }
 
@@ -89,8 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         {
             private static readonly IServiceProvider _serviceProvider =
                 FakeRelationalOptionsExtension.AddEntityFrameworkRelationalDatabase(
-                        new ServiceCollection()
-                    )
+                    new ServiceCollection()
+                )
                     .BuildServiceProvider();
 
             public TestContext()

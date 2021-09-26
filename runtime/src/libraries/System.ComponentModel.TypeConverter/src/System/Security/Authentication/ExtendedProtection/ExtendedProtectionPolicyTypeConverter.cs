@@ -62,9 +62,8 @@ namespace System.Security.Authentication.ExtendedProtection
                         };
                     }
 
-                    ConstructorInfo constructor = typeof(ExtendedProtectionPolicy).GetConstructor(
-                        parameterTypes
-                    );
+                    ConstructorInfo constructor = typeof(ExtendedProtectionPolicy)
+                        .GetConstructor(parameterTypes);
                     return new InstanceDescriptor(constructor, parameterValues);
                 }
             }

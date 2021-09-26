@@ -100,8 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
 
         private bool SplitString(ITextView textView, ITextBuffer subjectBuffer, SnapshotPoint caret)
         {
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
 
             if (document != null)
             {
@@ -130,12 +130,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                             subjectBuffer.CurrentSnapshot,
                             cursorPosition.Value
                         );
-                        var newCaretPoint = textView.BufferGraph.MapUpToBuffer(
-                            snapshotPoint,
-                            PointTrackingMode.Negative,
-                            PositionAffinity.Predecessor,
-                            textView.TextBuffer
-                        );
+                        var newCaretPoint = textView.BufferGraph
+                            .MapUpToBuffer(
+                                snapshotPoint,
+                                PointTrackingMode.Negative,
+                                PositionAffinity.Predecessor,
+                                textView.TextBuffer
+                            );
 
                         if (newCaretPoint != null)
                         {

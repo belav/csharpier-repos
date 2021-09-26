@@ -243,10 +243,10 @@ namespace Microsoft.AspNetCore.Builder
                 b =>
                 {
                     // MVC registers a policy that looks for this metadata.
-                    b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area: null));
-                    b.Metadata.Add(
-                        new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId)
-                    );
+                    b.Metadata
+                        .Add(CreateDynamicControllerMetadata(action, controller, area: null));
+                    b.Metadata
+                        .Add(new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId));
                 }
             );
             return builder;
@@ -327,10 +327,10 @@ namespace Microsoft.AspNetCore.Builder
                 b =>
                 {
                     // MVC registers a policy that looks for this metadata.
-                    b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area: null));
-                    b.Metadata.Add(
-                        new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId)
-                    );
+                    b.Metadata
+                        .Add(CreateDynamicControllerMetadata(action, controller, area: null));
+                    b.Metadata
+                        .Add(new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId));
                 }
             );
             return builder;
@@ -404,9 +404,8 @@ namespace Microsoft.AspNetCore.Builder
                 {
                     // MVC registers a policy that looks for this metadata.
                     b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area));
-                    b.Metadata.Add(
-                        new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId)
-                    );
+                    b.Metadata
+                        .Add(new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId));
                 }
             );
             return builder;
@@ -490,9 +489,8 @@ namespace Microsoft.AspNetCore.Builder
                 {
                     // MVC registers a policy that looks for this metadata.
                     b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area));
-                    b.Metadata.Add(
-                        new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId)
-                    );
+                    b.Metadata
+                        .Add(new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId));
                 }
             );
             return builder;
@@ -656,14 +654,15 @@ namespace Microsoft.AspNetCore.Builder
             IEndpointRouteBuilder endpoints
         )
         {
-            var dataSource = endpoints.DataSources.OfType<ControllerActionEndpointDataSource>()
+            var dataSource = endpoints.DataSources
+                .OfType<ControllerActionEndpointDataSource>()
                 .FirstOrDefault();
             if (dataSource == null)
             {
-                var orderProvider =
-                    endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
-                var factory =
-                    endpoints.ServiceProvider.GetRequiredService<ControllerActionEndpointDataSourceFactory>();
+                var orderProvider = endpoints.ServiceProvider
+                    .GetRequiredService<OrderedEndpointsSequenceProviderCache>();
+                var factory = endpoints.ServiceProvider
+                    .GetRequiredService<ControllerActionEndpointDataSourceFactory>();
                 dataSource = factory.Create(
                     orderProvider.GetOrCreateOrderedEndpointsSequenceProvider(endpoints)
                 );

@@ -78,10 +78,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                     }
 
                     if (
-                        method.ContainingType.HasAttribute(
-                            symbolCache.IApiBehaviorMetadata,
-                            inherit: true
-                        )
+                        method.ContainingType
+                            .HasAttribute(symbolCache.IApiBehaviorMetadata, inherit: true)
                     )
                     {
                         // The issue of parameter name collision with properties affects complex model-bound types
@@ -154,11 +152,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
 
                     var propertyName = GetName(symbolCache, member);
                     if (
-                        string.Equals(
-                            parameterName,
-                            propertyName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(parameterName, propertyName, StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         return true;
@@ -196,10 +191,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             foreach (var attribute in symbol.GetAttributes(symbolCache.IModelNameProvider))
             {
                 // BindAttribute uses the Prefix property as an alias for IModelNameProvider.Name
-                var nameProperty = SymbolEqualityComparer.Default.Equals(
-                    attribute.AttributeClass,
-                    symbolCache.BindAttribute
-                )
+                var nameProperty = SymbolEqualityComparer.Default
+                .Equals(attribute.AttributeClass, symbolCache.BindAttribute)
                     ? "Prefix"
                     : "Name";
 
@@ -258,11 +251,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 for (var i = 0; i < constructorParameters.Length; i++)
                 {
                     if (
-                        string.Equals(
-                            constructorParameters[i].Name,
-                            "binderType",
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(
+                                constructorParameters[i].Name,
+                                "binderType",
+                                StringComparison.Ordinal
+                            )
                     )
                     {
                         // A constructor that requires binderType was used.

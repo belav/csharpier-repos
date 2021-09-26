@@ -591,14 +591,16 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual(2, errors.Count);
             Assert.IsTrue(
-                errors[0].StartsWith(
-                    " - Required1 - Required property 'Required1' not found in JSON. Path '', line 1, position 2."
-                )
+                errors[0]
+                    .StartsWith(
+                        " - Required1 - Required property 'Required1' not found in JSON. Path '', line 1, position 2."
+                    )
             );
             Assert.IsTrue(
-                errors[1].StartsWith(
-                    " - Required2 - Required property 'Required2' not found in JSON. Path '', line 1, position 2."
-                )
+                errors[1]
+                    .StartsWith(
+                        " - Required2 - Required property 'Required2' not found in JSON. Path '', line 1, position 2."
+                    )
             );
         }
 
@@ -978,8 +980,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             };
 
             Dictionary<string, IEnumerable<IErrorPerson2>> dictionary = data.GroupBy(
-                    person => person.FirstName
-                )
+                person => person.FirstName
+            )
                 .ToDictionary(group => @group.Key, group => @group.Cast<IErrorPerson2>());
             string output = JsonConvert.SerializeObject(dictionary, Formatting.None, settings);
             Assert.AreEqual(@"{""Scott"":[]}", output);
@@ -1003,8 +1005,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             };
 
             Dictionary<string, IEnumerable<IErrorPerson2>> dictionary = data.GroupBy(
-                    person => person.FirstName
-                )
+                person => person.FirstName
+            )
                 .ToDictionary(group => @group.Key, group => @group.Cast<IErrorPerson2>());
             string output = JsonConvert.SerializeObject(dictionary, Formatting.None, settings);
 

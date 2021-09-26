@@ -21,9 +21,9 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 UserAgent = "X-SignalR-User-Agent";
             }
 
-            var assemblyVersion =
-                typeof(Constants).Assembly.GetCustomAttributes<AssemblyInformationalVersionAttribute>()
-                    .FirstOrDefault();
+            var assemblyVersion = typeof(Constants).Assembly
+                .GetCustomAttributes<AssemblyInformationalVersionAttribute>()
+                .FirstOrDefault();
 
             Debug.Assert(assemblyVersion != null);
 

@@ -48,13 +48,13 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                 cancellationToken
             );
             return await ApplyFileChangesAsync(
-                    solution,
-                    formattedDocuments,
-                    formatOptions,
-                    logger,
-                    formattedFiles,
-                    cancellationToken
-                )
+                solution,
+                formattedDocuments,
+                formatOptions,
+                logger,
+                formattedFiles,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -105,20 +105,19 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                             return (originalSourceText, null);
 
                         var analyzerConfigOptions =
-                            document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                                syntaxTree
-                            );
+                            document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider
+                                .GetOptions(syntaxTree);
                         var optionSet = await document.GetOptionsAsync(cancellationToken)
                             .ConfigureAwait(false);
 
                         return await GetFormattedSourceTextAsync(
-                                document,
-                                optionSet,
-                                analyzerConfigOptions,
-                                formatOptions,
-                                logger,
-                                cancellationToken
-                            )
+                            document,
+                            optionSet,
+                            analyzerConfigOptions,
+                            formatOptions,
+                            logger,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     },
                     cancellationToken
@@ -145,14 +144,14 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             var originalSourceText = await document.GetTextAsync(cancellationToken)
                 .ConfigureAwait(false);
             var formattedSourceText = await FormatFileAsync(
-                    document,
-                    originalSourceText,
-                    optionSet,
-                    analyzerConfigOptions,
-                    formatOptions,
-                    logger,
-                    cancellationToken
-                )
+                document,
+                originalSourceText,
+                optionSet,
+                analyzerConfigOptions,
+                formatOptions,
+                logger,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return
@@ -270,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                     ? string.Format(Resources.Delete_0_characters, change.Span.Length)
                     : isAdd
                         ? string.Format(Resources.Insert_0, textChange)
-                        : string.Format(
+                        : string
+                          .Format(
                               Resources.Replace_0_characters_with_1,
                               change.Span.Length,
                               textChange

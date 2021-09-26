@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         )
         {
             // NOTE: You may need to update AddEntityFrameworkDesignTimeServices() too
-            var services = new ServiceCollection().AddSingleton<TypeMappingSourceDependencies>()
+            var services = new ServiceCollection()
+                .AddSingleton<TypeMappingSourceDependencies>()
                 .AddSingleton<RelationalTypeMappingSourceDependencies>()
                 .AddSingleton<ValueConverterSelectorDependencies>()
                 .AddSingleton<DiagnosticSource>(new DiagnosticListener(DbLoggerCategory.Name))

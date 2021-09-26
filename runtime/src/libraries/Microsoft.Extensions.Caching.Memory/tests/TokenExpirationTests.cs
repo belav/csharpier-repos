@@ -69,7 +69,8 @@ namespace Microsoft.Extensions.Caching.Memory
             cache.Set(
                 key,
                 value,
-                new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
+                new MemoryCacheEntryOptions()
+                    .AddExpirationToken(expirationToken)
                     .RegisterPostEvictionCallback(
                         (subkey, subValue, reason, state) =>
                         {
@@ -100,7 +101,8 @@ namespace Microsoft.Extensions.Caching.Memory
             cache.Set(
                 key,
                 value,
-                new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
+                new MemoryCacheEntryOptions()
+                    .AddExpirationToken(expirationToken)
                     .RegisterPostEvictionCallback(
                         (subkey, subValue, reason, state) =>
                         {
@@ -135,7 +137,8 @@ namespace Microsoft.Extensions.Caching.Memory
             cache.Set(
                 key,
                 value,
-                new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
+                new MemoryCacheEntryOptions()
+                    .AddExpirationToken(expirationToken)
                     .RegisterPostEvictionCallback(
                         (subkey, subValue, reason, state) =>
                         {
@@ -169,7 +172,8 @@ namespace Microsoft.Extensions.Caching.Memory
             cache.Set(
                 key,
                 value,
-                new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
+                new MemoryCacheEntryOptions()
+                    .AddExpirationToken(expirationToken)
                     .RegisterPostEvictionCallback(
                         (subkey, subValue, reason, state) =>
                         {
@@ -198,7 +202,8 @@ namespace Microsoft.Extensions.Caching.Memory
             var result = cache.Set(
                 key,
                 value,
-                new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
+                new MemoryCacheEntryOptions()
+                    .AddExpirationToken(expirationToken)
                     .RegisterPostEvictionCallback(
                         (subkey, subValue, reason, state) =>
                         {

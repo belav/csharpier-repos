@@ -41,13 +41,14 @@ namespace System.Net
         {
             Listener = listener;
 
-            uint statusCode = Interop.HttpApi.HttpCreateRequestQueue(
-                Interop.HttpApi.s_version,
-                null!,
-                null,
-                0,
-                out HttpRequestQueueV2Handle requestQueueHandle
-            );
+            uint statusCode = Interop.HttpApi
+                .HttpCreateRequestQueue(
+                    Interop.HttpApi.s_version,
+                    null!,
+                    null,
+                    0,
+                    out HttpRequestQueueV2Handle requestQueueHandle
+                );
 
             if (statusCode != Interop.HttpApi.ERROR_SUCCESS)
             {
@@ -57,11 +58,12 @@ namespace System.Net
             // Disabling callbacks when IO operation completes synchronously (returns ErrorCodes.ERROR_SUCCESS)
             if (
                 HttpListener.SkipIOCPCallbackOnSuccess
-                && !Interop.Kernel32.SetFileCompletionNotificationModes(
-                    requestQueueHandle,
-                    Interop.Kernel32.FileCompletionNotificationModes.SkipCompletionPortOnSuccess
-                        | Interop.Kernel32.FileCompletionNotificationModes.SkipSetEventOnHandle
-                )
+                && !Interop.Kernel32
+                    .SetFileCompletionNotificationModes(
+                        requestQueueHandle,
+                        Interop.Kernel32.FileCompletionNotificationModes.SkipCompletionPortOnSuccess
+                            | Interop.Kernel32.FileCompletionNotificationModes.SkipSetEventOnHandle
+                    )
             )
             {
                 throw new HttpListenerException(Marshal.GetLastWin32Error());

@@ -58,15 +58,11 @@ namespace Microsoft.AspNet.Facebook.Authorization
             }
 
             IEnumerable<FacebookAuthorizeAttribute> authorizeAttributes =
-                filterContext.ActionDescriptor.GetCustomAttributes(
-                        typeof(FacebookAuthorizeAttribute),
-                        inherit: true
-                    )
+                filterContext.ActionDescriptor
+                    .GetCustomAttributes(typeof(FacebookAuthorizeAttribute), inherit: true)
                     .Union(
-                        filterContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes(
-                            typeof(FacebookAuthorizeAttribute),
-                            inherit: true
-                        )
+                        filterContext.ActionDescriptor.ControllerDescriptor
+                            .GetCustomAttributes(typeof(FacebookAuthorizeAttribute), inherit: true)
                     )
                     .OfType<FacebookAuthorizeAttribute>();
             if (!authorizeAttributes.Any())
@@ -148,8 +144,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
             }
             else if (requiredPermissions.Any())
             {
-                PermissionsStatus currentPermissionsStatus =
-                    _config.PermissionService.GetUserPermissionsStatus(userId, accessToken);
+                PermissionsStatus currentPermissionsStatus = _config.PermissionService
+                    .GetUserPermissionsStatus(userId, accessToken);
                 // Instead of performing another request to gather "granted" permissions just parse the status
                 IEnumerable<string> currentPermissions = PermissionHelper.GetGrantedPermissions(
                     currentPermissionsStatus
@@ -358,10 +354,10 @@ namespace Microsoft.AspNet.Facebook.Authorization
             // Declined permissions and skipped permissions can persist through multiple pages.  So we need to cross check
             // them against the current pages permissions, this will determine if we should invoke the denied permission hook.
             bool deniedPermissions = missingPermissions.Where(
-                    permission =>
-                        declinedPermissions.Contains(permission)
-                        || skippedPermissions.Contains(permission)
-                )
+                permission =>
+                    declinedPermissions.Contains(permission)
+                    || skippedPermissions.Contains(permission)
+            )
                 .Any();
 
             permissionContext.RedirectUrl = redirectUrl;

@@ -74,10 +74,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             var analyzerExecutionContext = GetAnalyzerExecutionContext(analyzer);
             return await GetCompilationAnalysisScopeCoreAsync(
-                    sessionScope,
-                    analyzerExecutor,
-                    analyzerExecutionContext
-                )
+                sessionScope,
+                analyzerExecutor,
+                analyzerExecutionContext
+            )
                 .ConfigureAwait(false);
         }
 
@@ -94,9 +94,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             try
             {
                 return await analyzerExecutionContext.GetCompilationAnalysisScopeAsync(
-                        sessionScope,
-                        analyzerExecutor
-                    )
+                    sessionScope,
+                    analyzerExecutor
+                )
                     .ConfigureAwait(false);
             }
             catch (OperationCanceledException)
@@ -107,10 +107,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 analyzerExecutor.CancellationToken.ThrowIfCancellationRequested();
                 return await GetCompilationAnalysisScopeCoreAsync(
-                        sessionScope,
-                        analyzerExecutor,
-                        analyzerExecutionContext
-                    )
+                    sessionScope,
+                    analyzerExecutor,
+                    analyzerExecutionContext
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -124,11 +124,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             var analyzerExecutionContext = GetAnalyzerExecutionContext(analyzer);
             return await GetSymbolAnalysisScopeCoreAsync(
-                    symbol,
-                    symbolStartActions,
-                    analyzerExecutor,
-                    analyzerExecutionContext
-                )
+                symbol,
+                symbolStartActions,
+                analyzerExecutor,
+                analyzerExecutionContext
+            )
                 .ConfigureAwait(false);
         }
 
@@ -142,10 +142,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             try
             {
                 return await analyzerExecutionContext.GetSymbolAnalysisScopeAsync(
-                        symbol,
-                        symbolStartActions,
-                        analyzerExecutor
-                    )
+                    symbol,
+                    symbolStartActions,
+                    analyzerExecutor
+                )
                     .ConfigureAwait(false);
             }
             catch (OperationCanceledException)
@@ -156,11 +156,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 analyzerExecutor.CancellationToken.ThrowIfCancellationRequested();
                 return await GetSymbolAnalysisScopeCoreAsync(
-                        symbol,
-                        symbolStartActions,
-                        analyzerExecutor,
-                        analyzerExecutionContext
-                    )
+                    symbol,
+                    symbolStartActions,
+                    analyzerExecutor,
+                    analyzerExecutionContext
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -176,9 +176,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             var analyzerExecutionContext = GetAnalyzerExecutionContext(analyzer);
             return await GetSessionAnalysisScopeCoreAsync(
-                    analyzerExecutor,
-                    analyzerExecutionContext
-                )
+                analyzerExecutor,
+                analyzerExecutionContext
+            )
                 .ConfigureAwait(false);
         }
 
@@ -204,9 +204,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 analyzerExecutor.CancellationToken.ThrowIfCancellationRequested();
                 return await GetSessionAnalysisScopeCoreAsync(
-                        analyzerExecutor,
-                        analyzerExecutionContext
-                    )
+                    analyzerExecutor,
+                    analyzerExecutionContext
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -233,10 +233,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             )
             {
                 var compilationScope = await GetCompilationAnalysisScopeAsync(
-                        analyzer,
-                        sessionScope,
-                        analyzerExecutor
-                    )
+                    analyzer,
+                    sessionScope,
+                    analyzerExecutor
+                )
                     .ConfigureAwait(false);
                 return compilationScope.GetAnalyzerActions(analyzer);
             }
@@ -268,11 +268,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 if (filteredSymbolStartActions.Length > 0)
                 {
                     var symbolScope = await GetSymbolAnalysisScopeAsync(
-                            symbol,
-                            analyzer,
-                            filteredSymbolStartActions,
-                            analyzerExecutor
-                        )
+                        symbol,
+                        analyzer,
+                        filteredSymbolStartActions,
+                        analyzerExecutor
+                    )
                         .ConfigureAwait(false);
                     return symbolScope.GetAnalyzerActions(analyzer);
                 }
@@ -292,8 +292,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     {
                         if (filteredActionsBuilderOpt == null)
                         {
-                            filteredActionsBuilderOpt =
-                                ArrayBuilder<SymbolStartAnalyzerAction>.GetInstance();
+                            filteredActionsBuilderOpt = ArrayBuilder<SymbolStartAnalyzerAction>
+                                .GetInstance();
                             filteredActionsBuilderOpt.AddRange(symbolStartActions, i);
                         }
                     }
@@ -462,11 +462,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     (
                         diagnosticOptions.TryGetValue(diag.Id, out var severity)
                         || options.SyntaxTreeOptionsProvider is object
-                            && options.SyntaxTreeOptionsProvider.TryGetGlobalDiagnosticValue(
-                                diag.Id,
-                                analyzerExecutor.CancellationToken,
-                                out severity
-                            )
+                            && options.SyntaxTreeOptionsProvider
+                                .TryGetGlobalDiagnosticValue(
+                                    diag.Id,
+                                    analyzerExecutor.CancellationToken,
+                                    out severity
+                                )
                     )
                     && severity != ReportDiagnostic.Default
                 )

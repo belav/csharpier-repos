@@ -424,7 +424,8 @@ namespace System.Reflection.Tests
                 2,
                 attributeData.Count(
                     attr =>
-                        attr.AttributeType.ToString()
+                        attr.AttributeType
+                            .ToString()
                             .Equals(
                                 "System.Reflection.Tests.MyAttribute_AllowMultiple_P",
                                 StringComparison.Ordinal
@@ -435,7 +436,8 @@ namespace System.Reflection.Tests
                 1,
                 attributeData.Count(
                     attr =>
-                        attr.AttributeType.ToString()
+                        attr.AttributeType
+                            .ToString()
                             .Equals(
                                 "System.Reflection.Tests.MyAttribute_Single_P",
                                 StringComparison.Ordinal
@@ -446,7 +448,8 @@ namespace System.Reflection.Tests
                 1,
                 attributeData.Count(
                     attr =>
-                        attr.AttributeType.ToString()
+                        attr.AttributeType
+                            .ToString()
                             .Equals(
                                 "System.Reflection.Tests.MyAttribute_Single_Inherited_P",
                                 StringComparison.Ordinal
@@ -457,7 +460,8 @@ namespace System.Reflection.Tests
                 1,
                 attributeData.Count(
                     attr =>
-                        attr.AttributeType.ToString()
+                        attr.AttributeType
+                            .ToString()
                             .Equals(
                                 "System.Reflection.Tests.MyAttribute_AllowMultiple_Inherited_P",
                                 StringComparison.Ordinal

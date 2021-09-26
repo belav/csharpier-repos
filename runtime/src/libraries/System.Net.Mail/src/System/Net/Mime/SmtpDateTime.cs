@@ -219,24 +219,26 @@ namespace System.Net.Mime
             // TryParse will parse in base 10 by default.  do not allow any styles of input beyond the default
             // which is numeric values only
             if (
-                !int.TryParse(
-                    offset.AsSpan(1, 2),
-                    NumberStyles.None,
-                    CultureInfo.InvariantCulture,
-                    out hours
-                )
+                !int
+                    .TryParse(
+                        offset.AsSpan(1, 2),
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out hours
+                    )
             )
             {
                 throw new FormatException(SR.MailDateInvalidFormat);
             }
 
             if (
-                !int.TryParse(
-                    offset.AsSpan(3, 2),
-                    NumberStyles.None,
-                    CultureInfo.InvariantCulture,
-                    out minutes
-                )
+                !int
+                    .TryParse(
+                        offset.AsSpan(3, 2),
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out minutes
+                    )
             )
             {
                 throw new FormatException(SR.MailDateInvalidFormat);

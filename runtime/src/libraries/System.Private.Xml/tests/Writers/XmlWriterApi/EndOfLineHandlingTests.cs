@@ -499,10 +499,11 @@ namespace System.Xml.Tests
             w.Dispose();
 
             VerifyOutput(
-                string.Format(
-                    "<root>{0}  <foo>{0}    <bar />{0}  </foo>{0}</root>",
-                    Environment.NewLine
-                )
+                string
+                    .Format(
+                        "<root>{0}  <foo>{0}    <bar />{0}  </foo>{0}</root>",
+                        Environment.NewLine
+                    )
             );
         }
 
@@ -946,10 +947,8 @@ namespace System.Xml.Tests
                 VerifyOutput(PrototypeOutput.Replace("&NewLine", newLineChars));
             else
                 VerifyOutput(
-                    "<root><![CDATA[foo\r\nfoo\nfoo\rfoo\tfoo]]></root>&NewLine<?pi foo\r\nfoo\nfoo\rfoo\tfoo?>&NewLine<!--foo\r\nfoo\nfoo\rfoo\tfoo-->".Replace(
-                        "&NewLine",
-                        newLineChars
-                    )
+                    "<root><![CDATA[foo\r\nfoo\nfoo\rfoo\tfoo]]></root>&NewLine<?pi foo\r\nfoo\nfoo\rfoo\tfoo?>&NewLine<!--foo\r\nfoo\nfoo\rfoo\tfoo-->"
+                        .Replace("&NewLine", newLineChars)
                 );
 
             return;

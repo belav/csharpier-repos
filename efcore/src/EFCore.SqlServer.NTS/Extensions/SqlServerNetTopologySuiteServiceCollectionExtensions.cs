@@ -30,23 +30,22 @@ namespace Microsoft.Extensions.DependencyInjection
 
             serviceCollection.TryAddSingleton(NtsGeometryServices.Instance);
 
-            new EntityFrameworkRelationalServicesBuilder(
-                serviceCollection
-            ).TryAddProviderSpecificServices(
-                x =>
-                    x.TryAddSingletonEnumerable<
-                        IRelationalTypeMappingSourcePlugin,
-                        SqlServerNetTopologySuiteTypeMappingSourcePlugin
-                    >()
-                        .TryAddSingletonEnumerable<
-                            IMethodCallTranslatorPlugin,
-                            SqlServerNetTopologySuiteMethodCallTranslatorPlugin
+            new EntityFrameworkRelationalServicesBuilder(serviceCollection)
+                .TryAddProviderSpecificServices(
+                    x =>
+                        x.TryAddSingletonEnumerable<
+                            IRelationalTypeMappingSourcePlugin,
+                            SqlServerNetTopologySuiteTypeMappingSourcePlugin
                         >()
-                        .TryAddSingletonEnumerable<
-                            IMemberTranslatorPlugin,
-                            SqlServerNetTopologySuiteMemberTranslatorPlugin
-                        >()
-            );
+                            .TryAddSingletonEnumerable<
+                                IMethodCallTranslatorPlugin,
+                                SqlServerNetTopologySuiteMethodCallTranslatorPlugin
+                            >()
+                            .TryAddSingletonEnumerable<
+                                IMemberTranslatorPlugin,
+                                SqlServerNetTopologySuiteMemberTranslatorPlugin
+                            >()
+                );
 
             return serviceCollection;
         }

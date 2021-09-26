@@ -142,10 +142,11 @@ namespace System.Formats.Asn1.Tests.Writer
             string input,
             string expectedPayloadHex
         ) =>
-            base.VerifyWrite_BER_String_CustomTag_ClearsConstructed_Helper(
-                input,
-                expectedPayloadHex
-            );
+            base
+                .VerifyWrite_BER_String_CustomTag_ClearsConstructed_Helper(
+                    input,
+                    expectedPayloadHex
+                );
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
@@ -177,10 +178,11 @@ namespace System.Formats.Asn1.Tests.Writer
             string input,
             string expectedPayloadHex
         ) =>
-            base.VerifyWrite_CER_String_CustomTag_ClearsConstructed_Helper(
-                input,
-                expectedPayloadHex
-            );
+            base
+                .VerifyWrite_CER_String_CustomTag_ClearsConstructed_Helper(
+                    input,
+                    expectedPayloadHex
+                );
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]
@@ -212,10 +214,11 @@ namespace System.Formats.Asn1.Tests.Writer
             string input,
             string expectedPayloadHex
         ) =>
-            base.VerifyWrite_DER_String_CustomTag_ClearsConstructed_Helper(
-                input,
-                expectedPayloadHex
-            );
+            base
+                .VerifyWrite_DER_String_CustomTag_ClearsConstructed_Helper(
+                    input,
+                    expectedPayloadHex
+                );
 
         [Theory]
         [MemberData(nameof(ShortValidCases))]

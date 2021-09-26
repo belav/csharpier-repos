@@ -19,8 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteMultiLineStringMemberTranslator : IMemberTranslator
     {
-        private static readonly MemberInfo _isClosed =
-            typeof(MultiLineString).GetRequiredRuntimeProperty(nameof(MultiLineString.IsClosed));
+        private static readonly MemberInfo _isClosed = typeof(MultiLineString)
+            .GetRequiredRuntimeProperty(nameof(MultiLineString.IsClosed));
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
         /// <summary>

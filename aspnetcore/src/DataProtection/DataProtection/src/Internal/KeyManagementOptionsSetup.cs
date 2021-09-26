@@ -67,18 +67,14 @@ namespace Microsoft.AspNetCore.DataProtection.Internal
                     new AuthenticatedEncryptorConfiguration();
             }
 
-            options.AuthenticatedEncryptorFactories.Add(
-                new CngGcmAuthenticatedEncryptorFactory(_loggerFactory)
-            );
-            options.AuthenticatedEncryptorFactories.Add(
-                new CngCbcAuthenticatedEncryptorFactory(_loggerFactory)
-            );
-            options.AuthenticatedEncryptorFactories.Add(
-                new ManagedAuthenticatedEncryptorFactory(_loggerFactory)
-            );
-            options.AuthenticatedEncryptorFactories.Add(
-                new AuthenticatedEncryptorFactory(_loggerFactory)
-            );
+            options.AuthenticatedEncryptorFactories
+                .Add(new CngGcmAuthenticatedEncryptorFactory(_loggerFactory));
+            options.AuthenticatedEncryptorFactories
+                .Add(new CngCbcAuthenticatedEncryptorFactory(_loggerFactory));
+            options.AuthenticatedEncryptorFactories
+                .Add(new ManagedAuthenticatedEncryptorFactory(_loggerFactory));
+            options.AuthenticatedEncryptorFactories
+                .Add(new AuthenticatedEncryptorFactory(_loggerFactory));
         }
     }
 }

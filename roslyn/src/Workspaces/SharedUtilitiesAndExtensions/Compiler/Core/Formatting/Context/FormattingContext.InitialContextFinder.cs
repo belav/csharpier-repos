@@ -96,11 +96,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 {
                     // get all operations for the nodes that contains the formatting span, but not ones contained by the span
                     node.DescendantNodesAndSelf(
-                            n =>
-                                n != previous
-                                && n.Span.IntersectsWith(span)
-                                && !span.Contains(n.Span)
-                        )
+                        n => n != previous && n.Span.IntersectsWith(span) && !span.Contains(n.Span)
+                    )
                         .Do(
                             n =>
                             {

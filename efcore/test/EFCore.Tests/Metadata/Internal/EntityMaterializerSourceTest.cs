@@ -29,9 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [ConditionalFact]
         public void Throws_for_abstract_types()
         {
-            var entityType = ((IMutableModel)CreateConventionalModelBuilder().Model).AddEntityType(
-                typeof(SomeAbstractEntity)
-            );
+            var entityType = ((IMutableModel)CreateConventionalModelBuilder().Model)
+                .AddEntityType(typeof(SomeAbstractEntity));
             var source = new EntityMaterializerSource(new EntityMaterializerSourceDependencies());
 
             Assert.Equal(
@@ -48,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var entityType = CreateEntityType();
 
             entityType.ConstructorBinding = new ConstructorBinding(
-                typeof(SomeEntity).GetTypeInfo()
+                typeof(SomeEntity)
+                    .GetTypeInfo()
                     .DeclaredConstructors.Single(c => c.GetParameters().Length == 2),
                 new List<ParameterBinding>
                 {
@@ -144,7 +144,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var entityType = CreateEntityType();
 
             entityType.ConstructorBinding = new FactoryMethodBinding(
-                typeof(SomeEntity).GetTypeInfo()
+                typeof(SomeEntity)
+                    .GetTypeInfo()
                     .GetDeclaredMethod(nameof(SomeEntity.GeneralFactory)),
                 new List<ParameterBinding>
                 {
@@ -199,7 +200,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             entityType.ConstructorBinding = new FactoryMethodBinding(
                 TestProxyFactory.Instance,
-                typeof(TestProxyFactory).GetTypeInfo()
+                typeof(TestProxyFactory)
+                    .GetTypeInfo()
                     .GetDeclaredMethod(nameof(TestProxyFactory.Create)),
                 new List<ParameterBinding> { new EntityTypeParameterBinding() },
                 entityType.ClrType
@@ -412,13 +414,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyEntityType entityType
         ) =>
             Expression.Lambda<Func<MaterializationContext, object>>(
-                    source.CreateMaterializeExpression(
-                        (IEntityType)entityType,
-                        "instance",
-                        _contextParameter
-                    ),
+                source.CreateMaterializeExpression(
+                    (IEntityType)entityType,
+                    "instance",
                     _contextParameter
-                )
+                ),
+                _contextParameter
+            )
                 .Compile();
 
         private abstract class SomeAbstractEntity
@@ -466,12 +468,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             public static readonly PropertyInfo IdProperty = typeof(SomeEntity).GetProperty("Id");
             public static readonly PropertyInfo FooProperty = typeof(SomeEntity).GetProperty("Foo");
             public static readonly PropertyInfo GooProperty = typeof(SomeEntity).GetProperty("Goo");
-            public static readonly PropertyInfo EnumProperty = typeof(SomeEntity).GetProperty(
-                "Enum"
-            );
-            public static readonly PropertyInfo MaybeEnumProperty = typeof(SomeEntity).GetProperty(
-                "MaybeEnum"
-            );
+            public static readonly PropertyInfo EnumProperty = typeof(SomeEntity)
+                .GetProperty("Enum");
+            public static readonly PropertyInfo MaybeEnumProperty = typeof(SomeEntity)
+                .GetProperty("MaybeEnum");
 
             // ReSharper disable UnusedAutoPropertyAccessor.Local
             public int Id
@@ -504,16 +504,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class SomeEntityWithFields
         {
-            public static readonly PropertyInfo IdProperty =
-                typeof(SomeEntityWithFields).GetProperty("Id");
-            public static readonly PropertyInfo FooProperty =
-                typeof(SomeEntityWithFields).GetProperty("Foo");
-            public static readonly PropertyInfo GooProperty =
-                typeof(SomeEntityWithFields).GetProperty("Goo");
-            public static readonly PropertyInfo EnumProperty =
-                typeof(SomeEntityWithFields).GetProperty("Enum");
-            public static readonly PropertyInfo MaybeEnumProperty =
-                typeof(SomeEntityWithFields).GetProperty("MaybeEnum");
+            public static readonly PropertyInfo IdProperty = typeof(SomeEntityWithFields)
+                .GetProperty("Id");
+            public static readonly PropertyInfo FooProperty = typeof(SomeEntityWithFields)
+                .GetProperty("Foo");
+            public static readonly PropertyInfo GooProperty = typeof(SomeEntityWithFields)
+                .GetProperty("Goo");
+            public static readonly PropertyInfo EnumProperty = typeof(SomeEntityWithFields)
+                .GetProperty("Enum");
+            public static readonly PropertyInfo MaybeEnumProperty = typeof(SomeEntityWithFields)
+                .GetProperty("MaybeEnum");
 
 #pragma warning disable 649, IDE0044 // Add readonly modifier
             private int _id;

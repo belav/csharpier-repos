@@ -36,15 +36,13 @@ namespace System.IO.Tests
             );
             Assert.Throws<IOException>(
                 () =>
-                    new DirectoryInfo(TestDirectory).CreateSubdirectory(
-                        IOServices.AddTrailingSlashIfNeeded(path)
-                    )
+                    new DirectoryInfo(TestDirectory)
+                        .CreateSubdirectory(IOServices.AddTrailingSlashIfNeeded(path))
             );
             Assert.Throws<IOException>(
                 () =>
-                    new DirectoryInfo(TestDirectory).CreateSubdirectory(
-                        IOServices.RemoveTrailingSlash(path)
-                    )
+                    new DirectoryInfo(TestDirectory)
+                        .CreateSubdirectory(IOServices.RemoveTrailingSlash(path))
             );
         }
 
@@ -77,17 +75,15 @@ namespace System.IO.Tests
         public void DotIsCurrentDirectory()
         {
             string path = GetTestFileName();
-            DirectoryInfo result = new DirectoryInfo(TestDirectory).CreateSubdirectory(
-                Path.Combine(path, ".")
-            );
+            DirectoryInfo result = new DirectoryInfo(TestDirectory)
+                .CreateSubdirectory(Path.Combine(path, "."));
             Assert.Equal(
                 IOServices.RemoveTrailingSlash(Path.Combine(TestDirectory, path)),
                 result.FullName
             );
 
-            result = new DirectoryInfo(TestDirectory).CreateSubdirectory(
-                Path.Combine(path, ".") + Path.DirectorySeparatorChar
-            );
+            result = new DirectoryInfo(TestDirectory)
+                .CreateSubdirectory(Path.Combine(path, ".") + Path.DirectorySeparatorChar);
             Assert.Equal(
                 IOServices.AddTrailingSlashIfNeeded(Path.Combine(TestDirectory, path)),
                 result.FullName
@@ -106,14 +102,14 @@ namespace System.IO.Tests
         [Fact]
         public void DotDotIsParentDirectory()
         {
-            DirectoryInfo result = new DirectoryInfo(TestDirectory).CreateSubdirectory(
-                Path.Combine(GetTestFileName(), "..")
-            );
+            DirectoryInfo result = new DirectoryInfo(TestDirectory)
+                .CreateSubdirectory(Path.Combine(GetTestFileName(), ".."));
             Assert.Equal(IOServices.RemoveTrailingSlash(TestDirectory), result.FullName);
 
-            result = new DirectoryInfo(TestDirectory).CreateSubdirectory(
-                Path.Combine(GetTestFileName(), "..") + Path.DirectorySeparatorChar
-            );
+            result = new DirectoryInfo(TestDirectory)
+                .CreateSubdirectory(
+                    Path.Combine(GetTestFileName(), "..") + Path.DirectorySeparatorChar
+                );
             Assert.Equal(IOServices.AddTrailingSlashIfNeeded(TestDirectory), result.FullName);
         }
 
@@ -122,9 +118,8 @@ namespace System.IO.Tests
         {
             Assert.Throws<ArgumentException>(
                 () =>
-                    new DirectoryInfo(TestDirectory).CreateSubdirectory(
-                        Path.Combine(TestDirectory, "..")
-                    )
+                    new DirectoryInfo(TestDirectory)
+                        .CreateSubdirectory(Path.Combine(TestDirectory, ".."))
             );
             Assert.Throws<ArgumentException>(
                 () => new DirectoryInfo(TestDirectory + "/path").CreateSubdirectory("../../path2")

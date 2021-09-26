@@ -230,11 +230,8 @@ namespace System.Xml.Tests
         {
             try
             {
-                new XslCompiledTransform().Load(
-                    (IXPathNavigable)null,
-                    XsltSettings.TrustedXslt,
-                    (XmlResolver)null
-                );
+                new XslCompiledTransform()
+                    .Load((IXPathNavigable)null, XsltSettings.TrustedXslt, (XmlResolver)null);
             }
             catch (ArgumentNullException)
             {
@@ -254,11 +251,8 @@ namespace System.Xml.Tests
         {
             try
             {
-                new XslCompiledTransform().Load(
-                    (XmlReader)null,
-                    XsltSettings.TrustedXslt,
-                    (XmlResolver)null
-                );
+                new XslCompiledTransform()
+                    .Load((XmlReader)null, XsltSettings.TrustedXslt, (XmlResolver)null);
             }
             catch (ArgumentNullException)
             {
@@ -278,11 +272,8 @@ namespace System.Xml.Tests
         {
             try
             {
-                new XslCompiledTransform().Load(
-                    (IXPathNavigable)null,
-                    XsltSettings.TrustedXslt,
-                    (XmlResolver)null
-                );
+                new XslCompiledTransform()
+                    .Load((IXPathNavigable)null, XsltSettings.TrustedXslt, (XmlResolver)null);
             }
             catch (ArgumentNullException)
             {
@@ -302,11 +293,8 @@ namespace System.Xml.Tests
         {
             try
             {
-                new XslCompiledTransform().Load(
-                    (XmlReader)null,
-                    XsltSettings.TrustedXslt,
-                    (XmlResolver)null
-                );
+                new XslCompiledTransform()
+                    .Load((XmlReader)null, XsltSettings.TrustedXslt, (XmlResolver)null);
             }
             catch (ArgumentNullException)
             {
@@ -2073,7 +2061,8 @@ namespace System.Xml.Tests
                                 Uri.UriSchemeFile
                                     + Uri.SchemeDelimiter
                                     + Path.GetFullPath(FullFilePath("XmlResolver_Include.xsl"))
-                            ).ToString(),
+                            )
+                                .ToString(),
                             "null"
                         }
                     );
@@ -2090,7 +2079,8 @@ namespace System.Xml.Tests
                                 Uri.UriSchemeFile
                                     + Uri.SchemeDelimiter
                                     + Path.GetFullPath(FullFilePath("XmlResolver_Main.xsl"))
-                            ).ToString(),
+                            )
+                                .ToString(),
                             "null"
                         }
                     );
@@ -2127,7 +2117,8 @@ namespace System.Xml.Tests
                                 Uri.UriSchemeFile
                                     + Uri.SchemeDelimiter
                                     + Path.GetFullPath(FullFilePath("XmlResolver_Include.xsl"))
-                            ).ToString(),
+                            )
+                                .ToString(),
                             "null"
                         }
                     );
@@ -2144,7 +2135,8 @@ namespace System.Xml.Tests
                                 Uri.UriSchemeFile
                                     + Uri.SchemeDelimiter
                                     + Path.GetFullPath(FullFilePath("XmlResolver_Main.xsl"))
-                            ).ToString(),
+                            )
+                                .ToString(),
                             "null"
                         }
                     );
@@ -2222,7 +2214,8 @@ namespace System.Xml.Tests
                                     Uri.UriSchemeFile
                                         + Uri.SchemeDelimiter
                                         + Path.GetFullPath(FullFilePath("XmlResolver_Include.xsl"))
-                                ).ToString(),
+                                )
+                                    .ToString(),
                                 "null"
                             }
                         );
@@ -2240,7 +2233,8 @@ namespace System.Xml.Tests
                                     Uri.UriSchemeFile
                                         + Uri.SchemeDelimiter
                                         + Path.GetFullPath(FullFilePath("XmlResolver_Main.xsl"))
-                                ).ToString(),
+                                )
+                                    .ToString(),
                                 "null"
                             }
                         );
@@ -4837,10 +4831,11 @@ namespace System.Xml.Tests
             public override Uri ResolveUri(Uri baseUri, string relativeUri)
             {
                 if (baseUri == null)
-                    return base.ResolveUri(
-                        new Uri(Uri.UriSchemeFile + Uri.SchemeDelimiter + _baseUri),
-                        relativeUri
-                    );
+                    return base
+                        .ResolveUri(
+                            new Uri(Uri.UriSchemeFile + Uri.SchemeDelimiter + _baseUri),
+                            relativeUri
+                        );
                 return base.ResolveUri(baseUri, relativeUri);
             }
         }

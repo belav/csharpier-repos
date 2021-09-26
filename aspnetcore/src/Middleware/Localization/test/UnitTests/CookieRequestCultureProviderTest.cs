@@ -23,47 +23,44 @@ namespace Microsoft.Extensions.Localization
         public async Task GetCultureInfoFromPersistentCookie()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            var options = new RequestLocalizationOptions
+                            {
+                                DefaultRequestCulture = new RequestCulture("en-US"),
+                                SupportedCultures = new List<CultureInfo>
                                 {
-                                    var options = new RequestLocalizationOptions
-                                    {
-                                        DefaultRequestCulture = new RequestCulture("en-US"),
-                                        SupportedCultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-SA")
-                                        },
-                                        SupportedUICultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-SA")
-                                        }
-                                    };
-                                    var provider = new CookieRequestCultureProvider
-                                    {
-                                        CookieName = "Preferences"
-                                    };
-                                    options.RequestCultureProviders.Insert(0, provider);
+                                    new CultureInfo("ar-SA")
+                                },
+                                SupportedUICultures = new List<CultureInfo>
+                                {
+                                    new CultureInfo("ar-SA")
+                                }
+                            };
+                            var provider = new CookieRequestCultureProvider
+                            {
+                                CookieName = "Preferences"
+                            };
+                            options.RequestCultureProviders.Insert(0, provider);
 
-                                    app.UseRequestLocalization(options);
-                                    app.Run(
-                                        context =>
-                                        {
-                                            var requestCultureFeature =
-                                                context.Features.Get<IRequestCultureFeature>();
-                                            var requestCulture =
-                                                requestCultureFeature.RequestCulture;
-                                            Assert.Equal("ar-SA", requestCulture.Culture.Name);
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                            app.UseRequestLocalization(options);
+                            app.Run(
+                                context =>
+                                {
+                                    var requestCultureFeature = context.Features
+                                        .Get<IRequestCultureFeature>();
+                                    var requestCulture = requestCultureFeature.RequestCulture;
+                                    Assert.Equal("ar-SA", requestCulture.Culture.Name);
+                                    return Task.FromResult(0);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -73,10 +70,8 @@ namespace Microsoft.Extensions.Localization
                 var culture = new CultureInfo("ar-SA");
                 var requestCulture = new RequestCulture(culture);
                 var value = CookieRequestCultureProvider.MakeCookieValue(requestCulture);
-                client.DefaultRequestHeaders.Add(
-                    "Cookie",
-                    new CookieHeaderValue("Preferences", value).ToString()
-                );
+                client.DefaultRequestHeaders
+                    .Add("Cookie", new CookieHeaderValue("Preferences", value).ToString());
                 var response = await client.GetAsync(string.Empty);
                 Assert.Equal("c=ar-SA|uic=ar-SA", value);
             }
@@ -86,46 +81,43 @@ namespace Microsoft.Extensions.Localization
         public async Task GetDefaultCultureInfoIfCultureKeysAreMissingOrInvalid()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            var options = new RequestLocalizationOptions
+                            {
+                                DefaultRequestCulture = new RequestCulture("en-US"),
+                                SupportedCultures = new List<CultureInfo>
                                 {
-                                    var options = new RequestLocalizationOptions
-                                    {
-                                        DefaultRequestCulture = new RequestCulture("en-US"),
-                                        SupportedCultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-SA")
-                                        },
-                                        SupportedUICultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-SA")
-                                        }
-                                    };
-                                    var provider = new CookieRequestCultureProvider
-                                    {
-                                        CookieName = "Preferences"
-                                    };
-                                    options.RequestCultureProviders.Insert(0, provider);
-                                    app.UseRequestLocalization(options);
-                                    app.Run(
-                                        context =>
-                                        {
-                                            var requestCultureFeature =
-                                                context.Features.Get<IRequestCultureFeature>();
-                                            var requestCulture =
-                                                requestCultureFeature.RequestCulture;
-                                            Assert.Equal("en-US", requestCulture.Culture.Name);
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                                    new CultureInfo("ar-SA")
+                                },
+                                SupportedUICultures = new List<CultureInfo>
+                                {
+                                    new CultureInfo("ar-SA")
+                                }
+                            };
+                            var provider = new CookieRequestCultureProvider
+                            {
+                                CookieName = "Preferences"
+                            };
+                            options.RequestCultureProviders.Insert(0, provider);
+                            app.UseRequestLocalization(options);
+                            app.Run(
+                                context =>
+                                {
+                                    var requestCultureFeature = context.Features
+                                        .Get<IRequestCultureFeature>();
+                                    var requestCulture = requestCultureFeature.RequestCulture;
+                                    Assert.Equal("en-US", requestCulture.Culture.Name);
+                                    return Task.FromResult(0);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -133,10 +125,8 @@ namespace Microsoft.Extensions.Localization
             {
                 var client = server.CreateClient();
 
-                client.DefaultRequestHeaders.Add(
-                    "Cookie",
-                    new CookieHeaderValue("Preferences", "uic=ar-SA").ToString()
-                );
+                client.DefaultRequestHeaders
+                    .Add("Cookie", new CookieHeaderValue("Preferences", "uic=ar-SA").ToString());
                 var response = await client.GetAsync(string.Empty);
             }
         }
@@ -145,46 +135,43 @@ namespace Microsoft.Extensions.Localization
         public async Task GetDefaultCultureInfoIfCookieDoesNotExist()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            var options = new RequestLocalizationOptions
+                            {
+                                DefaultRequestCulture = new RequestCulture("en-US"),
+                                SupportedCultures = new List<CultureInfo>
                                 {
-                                    var options = new RequestLocalizationOptions
-                                    {
-                                        DefaultRequestCulture = new RequestCulture("en-US"),
-                                        SupportedCultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-SA")
-                                        },
-                                        SupportedUICultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-SA")
-                                        }
-                                    };
-                                    var provider = new CookieRequestCultureProvider
-                                    {
-                                        CookieName = "Preferences"
-                                    };
-                                    options.RequestCultureProviders.Insert(0, provider);
-                                    app.UseRequestLocalization(options);
-                                    app.Run(
-                                        context =>
-                                        {
-                                            var requestCultureFeature =
-                                                context.Features.Get<IRequestCultureFeature>();
-                                            var requestCulture =
-                                                requestCultureFeature.RequestCulture;
-                                            Assert.Equal("en-US", requestCulture.Culture.Name);
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                                    new CultureInfo("ar-SA")
+                                },
+                                SupportedUICultures = new List<CultureInfo>
+                                {
+                                    new CultureInfo("ar-SA")
+                                }
+                            };
+                            var provider = new CookieRequestCultureProvider
+                            {
+                                CookieName = "Preferences"
+                            };
+                            options.RequestCultureProviders.Insert(0, provider);
+                            app.UseRequestLocalization(options);
+                            app.Run(
+                                context =>
+                                {
+                                    var requestCultureFeature = context.Features
+                                        .Get<IRequestCultureFeature>();
+                                    var requestCulture = requestCultureFeature.RequestCulture;
+                                    Assert.Equal("en-US", requestCulture.Culture.Name);
+                                    return Task.FromResult(0);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -204,42 +191,39 @@ namespace Microsoft.Extensions.Localization
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            var options = new RequestLocalizationOptions
+                            {
+                                DefaultRequestCulture = new RequestCulture("en-US"),
+                                SupportedCultures = new List<CultureInfo>
                                 {
-                                    var options = new RequestLocalizationOptions
-                                    {
-                                        DefaultRequestCulture = new RequestCulture("en-US"),
-                                        SupportedCultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-YE")
-                                        },
-                                        SupportedUICultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-YE")
-                                        }
-                                    };
-                                    var provider = new CookieRequestCultureProvider
-                                    {
-                                        CookieName = "Preferences"
-                                    };
-                                    options.RequestCultureProviders.Insert(0, provider);
-                                    app.UseRequestLocalization(options);
-                                    app.Run(context => Task.CompletedTask);
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
+                                    new CultureInfo("ar-YE")
+                                },
+                                SupportedUICultures = new List<CultureInfo>
                                 {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                                    new CultureInfo("ar-YE")
                                 }
-                            );
-                    }
-                )
-                .Build();
+                            };
+                            var provider = new CookieRequestCultureProvider
+                            {
+                                CookieName = "Preferences"
+                            };
+                            options.RequestCultureProviders.Insert(0, provider);
+                            app.UseRequestLocalization(options);
+                            app.Run(context => Task.CompletedTask);
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -248,10 +232,12 @@ namespace Microsoft.Extensions.Localization
                 var client = server.CreateClient();
                 var culture = "??";
                 var uiCulture = "ar-YE";
-                client.DefaultRequestHeaders.Add(
-                    "Cookie",
-                    new CookieHeaderValue("Preferences", $"c={culture}|uic={uiCulture}").ToString()
-                );
+                client.DefaultRequestHeaders
+                    .Add(
+                        "Cookie",
+                        new CookieHeaderValue("Preferences", $"c={culture}|uic={uiCulture}")
+                            .ToString()
+                    );
 
                 var response = await client.GetAsync(string.Empty);
                 response.EnsureSuccessStatusCode();
@@ -274,42 +260,39 @@ namespace Microsoft.Extensions.Localization
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            var options = new RequestLocalizationOptions
+                            {
+                                DefaultRequestCulture = new RequestCulture("en-US"),
+                                SupportedCultures = new List<CultureInfo>
                                 {
-                                    var options = new RequestLocalizationOptions
-                                    {
-                                        DefaultRequestCulture = new RequestCulture("en-US"),
-                                        SupportedCultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-YE")
-                                        },
-                                        SupportedUICultures = new List<CultureInfo>
-                                        {
-                                            new CultureInfo("ar-YE")
-                                        }
-                                    };
-                                    var provider = new CookieRequestCultureProvider
-                                    {
-                                        CookieName = "Preferences"
-                                    };
-                                    options.RequestCultureProviders.Insert(0, provider);
-                                    app.UseRequestLocalization(options);
-                                    app.Run(context => Task.CompletedTask);
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
+                                    new CultureInfo("ar-YE")
+                                },
+                                SupportedUICultures = new List<CultureInfo>
                                 {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                                    new CultureInfo("ar-YE")
                                 }
-                            );
-                    }
-                )
-                .Build();
+                            };
+                            var provider = new CookieRequestCultureProvider
+                            {
+                                CookieName = "Preferences"
+                            };
+                            options.RequestCultureProviders.Insert(0, provider);
+                            app.UseRequestLocalization(options);
+                            app.Run(context => Task.CompletedTask);
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -318,10 +301,12 @@ namespace Microsoft.Extensions.Localization
                 var client = server.CreateClient();
                 var culture = "ar-YE";
                 var uiCulture = "??";
-                client.DefaultRequestHeaders.Add(
-                    "Cookie",
-                    new CookieHeaderValue("Preferences", $"c={culture}|uic={uiCulture}").ToString()
-                );
+                client.DefaultRequestHeaders
+                    .Add(
+                        "Cookie",
+                        new CookieHeaderValue("Preferences", $"c={culture}|uic={uiCulture}")
+                            .ToString()
+                    );
 
                 var response = await client.GetAsync(string.Empty);
                 response.EnsureSuccessStatusCode();

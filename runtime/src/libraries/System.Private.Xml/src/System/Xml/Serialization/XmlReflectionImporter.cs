@@ -1930,11 +1930,12 @@ namespace System.Xml.Serialization
         {
             for (int i = 0; i < reflectionMembers.Length; i++)
                 if (
-                    string.Equals(
-                        reflectionMembers[i].MemberName,
-                        memberName + "Specified",
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            reflectionMembers[i].MemberName,
+                            memberName + "Specified",
+                            StringComparison.Ordinal
+                        )
                 )
                     return reflectionMembers[i];
             return null;
@@ -2061,23 +2062,25 @@ namespace System.Xml.Serialization
         {
             // check that the choice field exists
 
-            MemberInfo[] infos = structModel.Type.GetMember(
-                choice.MemberName,
-                BindingFlags.DeclaredOnly
-                    | BindingFlags.Public
-                    | BindingFlags.Instance
-                    | BindingFlags.Static
-            );
-            if (infos == null || infos.Length == 0)
-            {
-                // if we can not find the choice identifier between fields, check properties
-                PropertyInfo? info = structModel.Type.GetProperty(
+            MemberInfo[] infos = structModel.Type
+                .GetMember(
                     choice.MemberName,
                     BindingFlags.DeclaredOnly
                         | BindingFlags.Public
                         | BindingFlags.Instance
                         | BindingFlags.Static
                 );
+            if (infos == null || infos.Length == 0)
+            {
+                // if we can not find the choice identifier between fields, check properties
+                PropertyInfo? info = structModel.Type
+                    .GetProperty(
+                        choice.MemberName,
+                        BindingFlags.DeclaredOnly
+                            | BindingFlags.Public
+                            | BindingFlags.Instance
+                            | BindingFlags.Static
+                    );
 
                 if (info == null)
                 {
@@ -2442,9 +2445,8 @@ namespace System.Xml.Serialization
                     for (int i = 0; i < a.XmlAnyElements.Count; i++)
                     {
                         XmlAnyElementAttribute xmlAnyElement = a.XmlAnyElements[i]!;
-                        Type targetType = typeof(IXmlSerializable).IsAssignableFrom(
-                            arrayElementType
-                        )
+                        Type targetType = typeof(IXmlSerializable)
+                        .IsAssignableFrom(arrayElementType)
                             ? arrayElementType
                             : typeof(XmlNode).IsAssignableFrom(arrayElementType)
                                 ? arrayElementType
@@ -2530,9 +2532,10 @@ namespace System.Xml.Serialization
                     if (a.XmlArray == null)
                         a.XmlArray = CreateArrayAttribute(accessor.TypeDesc);
                     if (CountAtLevel(a.XmlArrayItems, _arrayNestingLevel) == 0)
-                        a.XmlArrayItems.Add(
-                            CreateArrayItemAttribute(arrayElementTypeDesc, _arrayNestingLevel)
-                        );
+                        a.XmlArrayItems
+                            .Add(
+                                CreateArrayItemAttribute(arrayElementTypeDesc, _arrayNestingLevel)
+                            );
                     ElementAccessor arrayElement = new ElementAccessor();
                     arrayElement.Name = XmlConvert.EncodeLocalName(
                         a.XmlArray.ElementName.Length == 0 ? accessorName : a.XmlArray.ElementName

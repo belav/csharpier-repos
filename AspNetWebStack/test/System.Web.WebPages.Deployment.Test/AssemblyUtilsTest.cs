@@ -47,14 +47,15 @@ namespace System.Web.WebPages.Deployment.Test
         {
             string formatString = "{0}, Version={1}, Culture={2}, PublicKeyToken={3}";
 
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                formatString,
-                name,
-                version,
-                culture,
-                publicKeyToken
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    formatString,
+                    name,
+                    version,
+                    culture,
+                    publicKeyToken
+                );
         }
 
         [Fact]

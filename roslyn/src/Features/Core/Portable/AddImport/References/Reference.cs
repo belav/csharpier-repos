@@ -43,10 +43,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 
                 // Both our names need to change.  Sort by the name we're
                 // changing to.
-                diff = StringComparer.OrdinalIgnoreCase.Compare(
-                    SearchResult.DesiredName,
-                    other.SearchResult.DesiredName
-                );
+                diff = StringComparer.OrdinalIgnoreCase
+                    .Compare(SearchResult.DesiredName, other.SearchResult.DesiredName);
                 if (diff != 0)
                 {
                     return diff;
@@ -136,25 +134,25 @@ namespace Microsoft.CodeAnalysis.AddImport
                     .ConfigureAwait(false);
 
                 var newDocument = await provider.AddImportAsync(
-                        node,
-                        SearchResult.NameParts,
-                        document,
-                        placeSystemNamespaceFirst,
-                        allowInHiddenRegions,
-                        cancellationToken
-                    )
+                    node,
+                    SearchResult.NameParts,
+                    document,
+                    placeSystemNamespaceFirst,
+                    allowInHiddenRegions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var cleanedDocument = await CodeAction.CleanupDocumentAsync(
-                        newDocument,
-                        cancellationToken
-                    )
+                    newDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var textChanges = await cleanedDocument.GetTextChangesAsync(
-                        originalDocument,
-                        cancellationToken
-                    )
+                    originalDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return textChanges.ToImmutableArray();

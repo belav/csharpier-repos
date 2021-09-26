@@ -378,22 +378,21 @@ namespace Microsoft.AspNetCore.TestHost
             // This logger will attempt to access information from HttpRequest once the HttpContext is created
             var logger = new VerifierLogger();
             var builder = new WebHostBuilder().ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton<ILogger<IWebHost>>(logger);
-                    }
-                )
-                .Configure(
-                    app =>
-                    {
-                        app.Run(
-                            context =>
-                            {
-                                return Task.FromResult(0);
-                            }
-                        );
-                    }
-                );
+                services =>
+                {
+                    services.AddSingleton<ILogger<IWebHost>>(logger);
+                }
+            ).Configure(
+                app =>
+                {
+                    app.Run(
+                        context =>
+                        {
+                            return Task.FromResult(0);
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
 
             // The HttpContext will be created and the logger will make sure that the HttpRequest exists and contains reasonable values

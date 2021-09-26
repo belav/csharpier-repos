@@ -37,8 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
             foreach (
                 var returnStatementSyntax in methodSyntax.DescendantNodes(
-                        _shouldDescendIntoChildren
-                    )
+                    _shouldDescendIntoChildren
+                )
                     .OfType<ReturnStatementSyntax>()
             )
             {
@@ -96,9 +96,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             }
 
             var defaultStatusCodeAttribute = statementReturnType.GetAttributes(
-                    symbolCache.DefaultStatusCodeAttribute,
-                    inherit: true
-                )
+                symbolCache.DefaultStatusCodeAttribute,
+                inherit: true
+            )
                 .FirstOrDefault();
 
             var statusCode = GetDefaultStatusCode(defaultStatusCodeAttribute);
@@ -370,19 +370,19 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             for (var i = 0; i < property.ExplicitInterfaceImplementations.Length; i++)
             {
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        property.ExplicitInterfaceImplementations[i],
-                        statusCodeActionResultStatusProperty
-                    )
+                    SymbolEqualityComparer.Default
+                        .Equals(
+                            property.ExplicitInterfaceImplementations[i],
+                            statusCodeActionResultStatusProperty
+                        )
                 )
                 {
                     return true;
                 }
             }
 
-            var implementedProperty = property.ContainingType.FindImplementationForInterfaceMember(
-                statusCodeActionResultStatusProperty
-            );
+            var implementedProperty = property.ContainingType
+                .FindImplementationForInterfaceMember(statusCodeActionResultStatusProperty);
             return SymbolEqualityComparer.Default.Equals(implementedProperty, property);
         }
 

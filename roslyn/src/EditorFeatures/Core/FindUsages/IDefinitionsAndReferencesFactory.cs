@@ -71,14 +71,14 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             // to compute the classified spans for the locations of the definition.  So it's totally
             // fine to pass in CancellationToken.None and block on the result.
             return ToDefinitionItemAsync(
-                    definition,
-                    solution,
-                    isPrimary: false,
-                    includeHiddenLocations,
-                    includeClassifiedSpans: false,
-                    options: FindReferencesSearchOptions.Default,
-                    cancellationToken: CancellationToken.None
-                )
+                definition,
+                solution,
+                isPrimary: false,
+                includeHiddenLocations,
+                includeClassifiedSpans: false,
+                options: FindReferencesSearchOptions.Default,
+                cancellationToken: CancellationToken.None
+            )
                 .WaitAndGetResult_CanCallOnBackground(CancellationToken.None);
         }
 
@@ -215,10 +215,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                             var documentLocation = !includeClassifiedSpans
                                 ? new DocumentSpan(document, location.SourceSpan)
                                 : await ClassifiedSpansAndHighlightSpanFactory.GetClassifiedDocumentSpanAsync(
-                                          document,
-                                          location.SourceSpan,
-                                          cancellationToken
-                                      )
+                                      document,
+                                      location.SourceSpan,
+                                      cancellationToken
+                                  )
                                       .ConfigureAwait(false);
 
                             sourceLocations.Add(documentLocation);
@@ -307,10 +307,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
 
             var documentSpan =
                 await ClassifiedSpansAndHighlightSpanFactory.GetClassifiedDocumentSpanAsync(
-                        document,
-                        sourceSpan,
-                        cancellationToken
-                    )
+                    document,
+                    sourceSpan,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             return new SourceReferenceItem(

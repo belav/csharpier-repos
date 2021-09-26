@@ -32,11 +32,12 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             var path = httpContext.Request.Path.Value;
             if (
-                string.Equals(
-                    _endpoint.RoutePattern.RawText,
-                    path,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        _endpoint.RoutePattern.RawText,
+                        path,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 httpContext.SetEndpoint(_endpoint);
@@ -50,11 +51,12 @@ namespace Microsoft.AspNetCore.Routing.Matching
         internal Candidate[] FindCandidateSet(string path, ReadOnlySpan<PathSegment> segments)
         {
             if (
-                string.Equals(
-                    _endpoint.RoutePattern.RawText,
-                    path,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        _endpoint.RoutePattern.RawText,
+                        path,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 return _candidates;

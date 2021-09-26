@@ -82,18 +82,18 @@ namespace System.IO.Pipes.Tests
             Assert.Equal(typeof(PipeAccessRights), actualSecurity.AccessRightType);
 
             List<PipeAccessRule> expectedAccessRules = expectedSecurity.GetAccessRules(
-                    includeExplicit: true,
-                    includeInherited: false,
-                    typeof(SecurityIdentifier)
-                )
+                includeExplicit: true,
+                includeInherited: false,
+                typeof(SecurityIdentifier)
+            )
                 .Cast<PipeAccessRule>()
                 .ToList();
 
             List<PipeAccessRule> actualAccessRules = actualSecurity.GetAccessRules(
-                    includeExplicit: true,
-                    includeInherited: false,
-                    typeof(SecurityIdentifier)
-                )
+                includeExplicit: true,
+                includeInherited: false,
+                typeof(SecurityIdentifier)
+            )
                 .Cast<PipeAccessRule>()
                 .ToList();
 

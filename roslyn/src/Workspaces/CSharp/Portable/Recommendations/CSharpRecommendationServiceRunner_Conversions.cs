@@ -263,9 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
 
             foreach (var specialType in specialTypes)
             {
-                var targetTypeSymbol = _context.SemanticModel.Compilation.GetSpecialType(
-                    specialType
-                );
+                var targetTypeSymbol = _context.SemanticModel.Compilation
+                    .GetSpecialType(specialType);
                 var conversion = CreateConversion(
                     containerWithoutNullable,
                     fromType: containerWithoutNullable,
@@ -288,11 +287,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                 ITypeSymbol toType
             )
             {
-                var summary = string.Format(
-                    WorkspacesResources.Predefined_conversion_from_0_to_1,
-                    SeeTag(fromType.GetDocumentationCommentId()),
-                    SeeTag(toType.GetDocumentationCommentId())
-                );
+                var summary = string
+                    .Format(
+                        WorkspacesResources.Predefined_conversion_from_0_to_1,
+                        SeeTag(fromType.GetDocumentationCommentId()),
+                        SeeTag(toType.GetDocumentationCommentId())
+                    );
 
                 return $"<summary>{summary}</summary>";
 

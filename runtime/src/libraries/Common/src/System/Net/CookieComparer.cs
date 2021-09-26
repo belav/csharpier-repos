@@ -19,11 +19,8 @@ namespace System.Net
 
             if (
                 (
-                    result = string.Compare(
-                        left.Domain,
-                        right.Domain,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    result = string
+                        .Compare(left.Domain, right.Domain, StringComparison.OrdinalIgnoreCase)
                 ) != 0
             )
             {

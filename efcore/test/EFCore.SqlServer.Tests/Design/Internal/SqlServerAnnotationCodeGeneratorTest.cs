@@ -33,9 +33,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var key = (IKey)modelBuilder.Model.FindEntityType("Post").GetKeys().Single();
 
             var result = generator.GenerateFluentApiCalls(
-                    key,
-                    key.GetAnnotations().ToDictionary(a => a.Name, a => a)
-                )
+                key,
+                key.GetAnnotations().ToDictionary(a => a.Name, a => a)
+            )
                 .Single();
 
             Assert.Equal("IsClustered", result.Method);
@@ -59,9 +59,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var key = (IKey)modelBuilder.Model.FindEntityType("Post").GetKeys().Single();
 
             var result = generator.GenerateFluentApiCalls(
-                    key,
-                    key.GetAnnotations().ToDictionary(a => a.Name, a => a)
-                )
+                key,
+                key.GetAnnotations().ToDictionary(a => a.Name, a => a)
+            )
                 .Single();
 
             Assert.Equal("IsClustered", result.Method);
@@ -87,9 +87,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var index = (IIndex)modelBuilder.Model.FindEntityType("Post").GetIndexes().Single();
 
             var result = generator.GenerateFluentApiCalls(
-                    index,
-                    index.GetAnnotations().ToDictionary(a => a.Name, a => a)
-                )
+                index,
+                index.GetAnnotations().ToDictionary(a => a.Name, a => a)
+            )
                 .Single();
 
             Assert.Equal("IsClustered", result.Method);
@@ -114,9 +114,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var index = (IIndex)modelBuilder.Model.FindEntityType("Post").GetIndexes().Single();
 
             var result = generator.GenerateFluentApiCalls(
-                    index,
-                    index.GetAnnotations().ToDictionary(a => a.Name, a => a)
-                )
+                index,
+                index.GetAnnotations().ToDictionary(a => a.Name, a => a)
+            )
                 .Single();
 
             Assert.Equal("IsClustered", result.Method);
@@ -142,9 +142,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             var index = (IIndex)modelBuilder.Model.FindEntityType("Post").GetIndexes().Single();
             var result = generator.GenerateFluentApiCalls(
-                    index,
-                    index.GetAnnotations().ToDictionary(a => a.Name, a => a)
-                )
+                index,
+                index.GetAnnotations().ToDictionary(a => a.Name, a => a)
+            )
                 .Single();
 
             Assert.Equal("HasFillFactor", result.Method);
@@ -170,9 +170,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             var index = (IIndex)modelBuilder.Model.FindEntityType("Post").GetIndexes().Single();
             var result = generator.GenerateFluentApiCalls(
-                    index,
-                    index.GetAnnotations().ToDictionary(a => a.Name, a => a)
-                )
+                index,
+                index.GetAnnotations().ToDictionary(a => a.Name, a => a)
+            )
                 .Single();
 
             Assert.Equal("IncludeProperties", result.Method);
@@ -294,7 +294,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             MethodCallCodeFragment GenerateFluentApiCall(string entityTypeName, string propertyName)
             {
-                var property = modelBuilder.Model.FindEntityType(entityTypeName)
+                var property = modelBuilder.Model
+                    .FindEntityType(entityTypeName)
                     .FindProperty(propertyName);
                 var annotations = property.GetAnnotations().ToDictionary(a => a.Name, a => a);
                 return generator.GenerateFluentApiCalls((IProperty)property, annotations)

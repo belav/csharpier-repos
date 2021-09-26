@@ -34,11 +34,10 @@ static class C {
 ";
             var compilation = CreateEmptyCompilation(source, options: TestOptions.ReleaseDll);
             compilation.GetDiagnostics().Verify();
-            compilation.GetEmitDiagnostics()
-                .Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
-                );
+            compilation.GetEmitDiagnostics().Verify(
+                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
+            );
         }
 
         [Fact, WorkItem(18811, "https://github.com/dotnet/roslyn/issues/18811")]
@@ -59,11 +58,10 @@ static class C {
 ";
             var compilation = CreateEmptyCompilation(source, options: TestOptions.UnsafeReleaseDll);
             compilation.GetDiagnostics().Verify();
-            compilation.GetEmitDiagnostics()
-                .Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion)
-                );
+            compilation.GetEmitDiagnostics().Verify(
+                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion)
+            );
         }
 
         [Fact]
@@ -91,41 +89,40 @@ static class C {
 ";
             var compilation = CreateEmptyCompilation(source, options: TestOptions.UnsafeReleaseDll);
             compilation.GetDiagnostics().Verify();
-            compilation.GetEmitDiagnostics()
-                .Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
-                    // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
-                    //             case int i: break;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
-                        .WithArguments("System.Nullable`1", "get_HasValue")
-                        .WithLocation(14, 18),
-                    // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.GetValueOrDefault'
-                    //             case int i: break;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
-                        .WithArguments("System.Nullable`1", "GetValueOrDefault")
-                        .WithLocation(14, 18),
-                    // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_Value'
-                    //             case int i: break;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
-                        .WithArguments("System.Nullable`1", "get_Value")
-                        .WithLocation(14, 18),
-                    // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
-                    //     static bool M2(int? x) => x is int i;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
-                        .WithArguments("System.Nullable`1", "get_HasValue")
-                        .WithLocation(17, 36),
-                    // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.GetValueOrDefault'
-                    //     static bool M2(int? x) => x is int i;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
-                        .WithArguments("System.Nullable`1", "GetValueOrDefault")
-                        .WithLocation(17, 36),
-                    // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_Value'
-                    //     static bool M2(int? x) => x is int i;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
-                        .WithArguments("System.Nullable`1", "get_Value")
-                        .WithLocation(17, 36)
-                );
+            compilation.GetEmitDiagnostics().Verify(
+                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
+                // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
+                //             case int i: break;
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                    .WithArguments("System.Nullable`1", "get_HasValue")
+                    .WithLocation(14, 18),
+                // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.GetValueOrDefault'
+                //             case int i: break;
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                    .WithArguments("System.Nullable`1", "GetValueOrDefault")
+                    .WithLocation(14, 18),
+                // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_Value'
+                //             case int i: break;
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                    .WithArguments("System.Nullable`1", "get_Value")
+                    .WithLocation(14, 18),
+                // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
+                //     static bool M2(int? x) => x is int i;
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                    .WithArguments("System.Nullable`1", "get_HasValue")
+                    .WithLocation(17, 36),
+                // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.GetValueOrDefault'
+                //     static bool M2(int? x) => x is int i;
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                    .WithArguments("System.Nullable`1", "GetValueOrDefault")
+                    .WithLocation(17, 36),
+                // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_Value'
+                //     static bool M2(int? x) => x is int i;
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                    .WithArguments("System.Nullable`1", "get_Value")
+                    .WithLocation(17, 36)
+            );
         }
 
         [Fact]
@@ -153,21 +150,20 @@ static class C {
 ";
             var compilation = CreateEmptyCompilation(source, options: TestOptions.UnsafeReleaseDll);
             compilation.GetDiagnostics().Verify();
-            compilation.GetEmitDiagnostics()
-                .Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
-                    // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
-                    //             case int i: break;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
-                        .WithArguments("System.Nullable`1", "get_HasValue")
-                        .WithLocation(14, 18),
-                    // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
-                    //     static bool M2(int? x) => x is int i;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
-                        .WithArguments("System.Nullable`1", "get_HasValue")
-                        .WithLocation(17, 36)
-                );
+            compilation.GetEmitDiagnostics().Verify(
+                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
+                // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
+                //             case int i: break;
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                    .WithArguments("System.Nullable`1", "get_HasValue")
+                    .WithLocation(14, 18),
+                // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
+                //     static bool M2(int? x) => x is int i;
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                    .WithArguments("System.Nullable`1", "get_HasValue")
+                    .WithLocation(17, 36)
+            );
         }
 
         [Fact, WorkItem(17266, "https://github.com/dotnet/roslyn/issues/17266")]
@@ -3383,29 +3379,27 @@ static class C {
 }
 ";
             var compilation = CreateEmptyCompilation(source, options: TestOptions.ReleaseDll);
-            compilation.GetDiagnostics()
-                .Verify(
-                    // (9,38): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
-                    //     public static bool M(int i) => i switch { 1 => true };
-                    Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
-                        .WithArguments("0")
-                        .WithLocation(9, 38)
-                );
-            compilation.GetEmitDiagnostics()
-                .Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
-                    // (9,36): error CS0656: Missing compiler required member 'System.InvalidOperationException..ctor'
-                    //     public static bool M(int i) => i switch { 1 => true };
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "i switch { 1 => true }")
-                        .WithArguments("System.InvalidOperationException", ".ctor")
-                        .WithLocation(9, 36),
-                    // (9,38): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
-                    //     public static bool M(int i) => i switch { 1 => true };
-                    Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
-                        .WithArguments("0")
-                        .WithLocation(9, 38)
-                );
+            compilation.GetDiagnostics().Verify(
+                // (9,38): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
+                //     public static bool M(int i) => i switch { 1 => true };
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("0")
+                    .WithLocation(9, 38)
+            );
+            compilation.GetEmitDiagnostics().Verify(
+                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
+                // (9,36): error CS0656: Missing compiler required member 'System.InvalidOperationException..ctor'
+                //     public static bool M(int i) => i switch { 1 => true };
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "i switch { 1 => true }")
+                    .WithArguments("System.InvalidOperationException", ".ctor")
+                    .WithLocation(9, 36),
+                // (9,38): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
+                //     public static bool M(int i) => i switch { 1 => true };
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("0")
+                    .WithLocation(9, 38)
+            );
         }
 
         [Fact, WorkItem(32774, "https://github.com/dotnet/roslyn/issues/32774")]
@@ -5165,9 +5159,9 @@ public class B
                 // (8,9): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     [My(1 switch { 1 => new A(), _ => new B() })]
                 Diagnostic(
-                        ErrorCode.ERR_BadAttributeArgument,
-                        "1 switch { 1 => new A(), _ => new B() }"
-                    )
+                    ErrorCode.ERR_BadAttributeArgument,
+                    "1 switch { 1 => new A(), _ => new B() }"
+                )
                     .WithLocation(8, 9),
                 // (11,9): error CS1503: Argument 1: cannot convert from '<switch expression>' to 'int'
                 //     [My(1 switch { 1 => 1, _ => string.Empty })]
@@ -5317,9 +5311,9 @@ public class B
                 // (8,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     [My(Value = 1 switch { 1 => new A(), _ => new B() })]
                 Diagnostic(
-                        ErrorCode.ERR_BadAttributeArgument,
-                        "1 switch { 1 => new A(), _ => new B() }"
-                    )
+                    ErrorCode.ERR_BadAttributeArgument,
+                    "1 switch { 1 => new A(), _ => new B() }"
+                )
                     .WithLocation(8, 17),
                 // (11,41): error CS0029: Cannot implicitly convert type 'string' to 'int'
                 //     [My(Value = 1 switch { 1 => 1, _ => string.Empty })]

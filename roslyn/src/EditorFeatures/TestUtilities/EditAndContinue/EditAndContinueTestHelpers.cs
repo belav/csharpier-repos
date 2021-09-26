@@ -207,13 +207,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             {
                 var expectedResult = expectedResults[documentIndex];
 
-                var oldActiveStatements =
-                    expectedResult.ActiveStatements.OldStatements.ToImmutableArray();
+                var oldActiveStatements = expectedResult.ActiveStatements.OldStatements
+                    .ToImmutableArray();
 
                 var includeFirstLineInDiagnostics =
                     expectedResult.Diagnostics.Any(d => d.FirstLine != null) == true;
-                var newActiveStatementSpans =
-                    expectedResult.ActiveStatements.OldTrackingSpans.ToImmutableArrayOrEmpty();
+                var newActiveStatementSpans = expectedResult.ActiveStatements.OldTrackingSpans
+                    .ToImmutableArrayOrEmpty();
 
                 // we need to rebuild the edit script, so that it operates on nodes associated with the same syntax trees backing the documents:
                 var oldTree = oldTrees[documentIndex];
@@ -494,10 +494,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         partners =>
                             new MatchingPair
                             {
-                                Old = partners.Key.ToString()
+                                Old = partners.Key
+                                    .ToString()
                                     .Replace("\r\n", " ")
                                     .Replace("\n", " "),
-                                New = partners.Value.ToString()
+                                New = partners.Value
+                                    .ToString()
                                     .Replace("\r\n", " ")
                                     .Replace("\n", " ")
                             }

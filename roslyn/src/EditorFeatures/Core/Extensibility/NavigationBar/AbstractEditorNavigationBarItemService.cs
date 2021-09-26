@@ -53,13 +53,13 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
         {
             var service =
                 document.GetRequiredLanguageService<CodeAnalysis.NavigationBar.INavigationBarItemService>();
-            var workspaceSupportsDocumentChanges =
-                document.Project.Solution.Workspace.CanApplyChange(ApplyChangesKind.ChangeDocument);
+            var workspaceSupportsDocumentChanges = document.Project.Solution.Workspace
+                .CanApplyChange(ApplyChangesKind.ChangeDocument);
             var items = await service.GetItemsAsync(
-                    document,
-                    workspaceSupportsDocumentChanges,
-                    cancellationToken
-                )
+                document,
+                workspaceSupportsDocumentChanges,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return items.SelectAsArray(v => (NavigationBarItem)new WrappedNavigationBarItem(v));
         }
@@ -84,16 +84,18 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
         )
         {
             Contract.ThrowIfFalse(item.Kind == RoslynNavigationBarItemKind.Symbol);
-            var symbolNavigationService =
-                document.Project.Solution.Workspace.Services.GetRequiredService<ISymbolNavigationService>();
+            var symbolNavigationService = document.Project.Solution.Workspace.Services
+                .GetRequiredService<ISymbolNavigationService>();
 
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var symbolInfo = item.NavigationSymbolId.Resolve(
-                compilation,
-                ignoreAssemblyKey: true,
-                cancellationToken: cancellationToken
-            );
+            var symbolInfo = item.NavigationSymbolId
+                .Resolve(
+                    compilation,
+                    ignoreAssemblyKey: true,
+                    cancellationToken: cancellationToken
+                );
             var symbol = symbolInfo.GetAnySymbol();
 
             // Do not allow third party navigation to types or constructors
@@ -102,10 +104,10 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
                 && symbol is not ITypeSymbol
                 && !symbol.IsConstructor()
                 && await symbolNavigationService.TrySymbolNavigationNotifyAsync(
-                        symbol,
-                        document.Project,
-                        cancellationToken
-                    )
+                    symbol,
+                    document.Project,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             )
             {
@@ -113,16 +115,15 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
             }
 
             var navigationPoint = await this.GetSymbolItemNavigationPointAsync(
-                    document,
-                    item,
-                    cancellationToken
-                )
+                document,
+                item,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (navigationPoint.HasValue)
             {
-                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await this.ThreadingContext.JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
                 NavigateToVirtualTreePoint(
                     document.Project.Solution,
                     navigationPoint.Value,
@@ -140,8 +141,8 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
             this.AssertIsForeground();
             var documentToNavigate = solution.GetRequiredDocument(navigationPoint.Tree);
             var workspace = solution.Workspace;
-            var navigationService =
-                workspace.Services.GetRequiredService<IDocumentNavigationService>();
+            var navigationService = workspace.Services
+                .GetRequiredService<IDocumentNavigationService>();
 
             if (
                 navigationService.CanNavigateToPosition(
@@ -164,8 +165,8 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
             }
             else
             {
-                var notificationService =
-                    workspace.Services.GetRequiredService<INotificationService>();
+                var notificationService = workspace.Services
+                    .GetRequiredService<INotificationService>();
                 notificationService.SendNotification(
                     EditorFeaturesResources.The_definition_of_the_object_is_hidden,
                     severity: NotificationSeverity.Error
@@ -182,12 +183,11 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
         )
         {
             Contract.ThrowIfFalse(item.Kind == RoslynNavigationBarItemKind.Symbol);
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var symbols = item.NavigationSymbolId.Resolve(
-                compilation,
-                cancellationToken: cancellationToken
-            );
+            var symbols = item.NavigationSymbolId
+                .Resolve(compilation, cancellationToken: cancellationToken);
 
             var symbol = symbols.Symbol;
             if (symbol == null)

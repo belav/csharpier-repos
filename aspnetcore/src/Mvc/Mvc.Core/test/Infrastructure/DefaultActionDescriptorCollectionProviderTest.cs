@@ -81,8 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var invocations = 0;
             actionDescriptorProvider.Setup(
-                    p => p.OnProvidersExecuting(It.IsAny<ActionDescriptorProviderContext>())
-                )
+                p => p.OnProvidersExecuting(It.IsAny<ActionDescriptorProviderContext>())
+            )
                 .Callback(
                     (ActionDescriptorProviderContext context) =>
                     {
@@ -173,8 +173,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         {
             var actionDescriptorProvider = new Mock<IActionDescriptorProvider>();
             actionDescriptorProvider.Setup(
-                    p => p.OnProvidersExecuting(It.IsAny<ActionDescriptorProviderContext>())
-                )
+                p => p.OnProvidersExecuting(It.IsAny<ActionDescriptorProviderContext>())
+            )
                 .Callback(
                     (ActionDescriptorProviderContext context) =>
                     {

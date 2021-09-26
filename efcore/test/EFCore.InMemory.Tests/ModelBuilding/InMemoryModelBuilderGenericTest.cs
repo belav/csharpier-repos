@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .HasForeignKey(x => new { x.LinkedGroupHeaderId, x.AccountId });
 
                 var contextOptions =
-                    new DbContextOptionsBuilder().UseModel(modelBuilder.Model.FinalizeModel())
+                    new DbContextOptionsBuilder()
+                        .UseModel(modelBuilder.Model.FinalizeModel())
                         .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilityCheckProvider)
                         .UseInMemoryDatabase(
                             "Can_use_self_referencing_overlapping_FK_PK",
@@ -178,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 );
 
                 var contextOptions =
-                    new DbContextOptionsBuilder().UseModel(modelBuilder.Model.FinalizeModel())
+                    new DbContextOptionsBuilder()
+                        .UseModel(modelBuilder.Model.FinalizeModel())
                         .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                         .UseInMemoryDatabase(
                             "Can_use_self_referencing_overlapping_FK_PK_one_to_one"

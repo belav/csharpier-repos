@@ -499,9 +499,8 @@ namespace Microsoft.Cci
             // no extern alias defined in scope at all -> error in compiler
             Debug.Assert(declaredExternAliases != null);
 
-            var allAliases = _metadataWriter.Context.Module.GetAssemblyReferenceAliases(
-                _metadataWriter.Context
-            );
+            var allAliases = _metadataWriter.Context.Module
+                .GetAssemblyReferenceAliases(_metadataWriter.Context);
             foreach (AssemblyReferenceAlias alias in allAliases)
             {
                 // Multiple aliases may be given to an assembly reference.
@@ -874,10 +873,11 @@ namespace Microsoft.Cci
             catch (SymUnmanagedWriterException e) when (e.InnerException is NotSupportedException)
             {
                 throw new SymUnmanagedWriterException(
-                    string.Format(
-                        CodeAnalysisResources.SymWriterDoesNotSupportSourceLink,
-                        e.ImplementationModuleName
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.SymWriterDoesNotSupportSourceLink,
+                            e.ImplementationModuleName
+                        )
                 );
             }
         }

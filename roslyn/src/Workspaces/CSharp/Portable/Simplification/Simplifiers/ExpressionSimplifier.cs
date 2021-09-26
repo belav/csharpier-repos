@@ -93,14 +93,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 );
 
             if (expression is NameSyntax name)
-                return NameSimplifier.Instance.TrySimplify(
-                    name,
-                    semanticModel,
-                    optionSet,
-                    out replacementNode,
-                    out issueSpan,
-                    cancellationToken
-                );
+                return NameSimplifier.Instance
+                    .TrySimplify(
+                        name,
+                        semanticModel,
+                        optionSet,
+                        out replacementNode,
+                        out issueSpan,
+                        cancellationToken
+                    );
 
             return false;
         }
@@ -191,15 +192,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     }
 
                     replacementNode = SyntaxFactory.IdentifierName(
-                        memberAccess.Name.Identifier.CopyAnnotationsTo(
-                            SyntaxFactory.Identifier(
-                                memberAccess.GetLeadingTrivia(),
-                                SyntaxKind.IdentifierToken,
-                                text,
-                                aliasReplacement.Name,
-                                memberAccess.GetTrailingTrivia()
+                        memberAccess.Name.Identifier
+                            .CopyAnnotationsTo(
+                                SyntaxFactory.Identifier(
+                                    memberAccess.GetLeadingTrivia(),
+                                    SyntaxKind.IdentifierToken,
+                                    text,
+                                    aliasReplacement.Name,
+                                    memberAccess.GetTrailingTrivia()
+                                )
                             )
-                        )
                     );
 
                     replacementNode = memberAccess.CopyAnnotationsTo(replacementNode);
@@ -257,10 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             // Try to eliminate cases without actually calling CanReplaceWithReducedName. For expressions of the form
             // 'this.Name' or 'base.Name', no additional check here is required.
             if (
-                !memberAccess.Expression.IsKind(
-                    SyntaxKind.ThisExpression,
-                    SyntaxKind.BaseExpression
-                )
+                !memberAccess.Expression
+                    .IsKind(SyntaxKind.ThisExpression, SyntaxKind.BaseExpression)
             )
             {
                 GetReplacementCandidates(
@@ -412,10 +412,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     {
                         // replacement node might not be in it's simplest form, so add simplify annotation to it.
                         replacementNode = memberAccess.Update(
-                                newLeft,
-                                memberAccess.OperatorToken,
-                                memberAccess.Name
-                            )
+                            newLeft,
+                            memberAccess.OperatorToken,
+                            memberAccess.Name
+                        )
                             .WithAdditionalAnnotations(Simplifier.Annotation);
 
                         // Ensure that replacement doesn't change semantics.
@@ -444,10 +444,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     {
                         // replacement node might not be in it's simplest form, so add simplify annotation to it.
                         replacementNode = qualifiedName.Update(
-                                (NameSyntax)newLeft,
-                                qualifiedName.DotToken,
-                                qualifiedName.Right
-                            )
+                            (NameSyntax)newLeft,
+                            qualifiedName.DotToken,
+                            qualifiedName.Right
+                        )
                             .WithAdditionalAnnotations(Simplifier.Annotation);
 
                         // Ensure that replacement doesn't change semantics.
@@ -554,9 +554,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (ancestorInvocation?.SpanStart == memberAccess.SpanStart)
             {
                 var leftSymbol = semanticModel.GetSymbolInfo(
-                        memberAccess.Expression,
-                        cancellationToken
-                    )
+                    memberAccess.Expression,
+                    cancellationToken
+                )
                     .GetAnySymbol();
                 if (leftSymbol is INamedTypeSymbol)
                 {
@@ -690,10 +690,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 
                 if (
                     previousToken.Kind() == SyntaxKind.OpenParenToken
-                    && previousToken.Parent.IsKind(
-                        SyntaxKind.ParenthesizedExpression,
-                        out ParenthesizedExpressionSyntax parenExpr
-                    )
+                    && previousToken.Parent
+                        .IsKind(
+                            SyntaxKind.ParenthesizedExpression,
+                            out ParenthesizedExpressionSyntax parenExpr
+                        )
                     && !parenExpr.IsParentKind(SyntaxKind.ParenthesizedExpression)
                     && parenExpr.Expression.Kind() == SyntaxKind.SimpleMemberAccessExpression
                     && symbol != null

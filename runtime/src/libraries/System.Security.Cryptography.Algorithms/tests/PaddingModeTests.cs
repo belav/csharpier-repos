@@ -50,8 +50,8 @@ namespace System.Security.Cryptography.Tests
                 "This tests only non-ISO10126 padding"
             );
 
-            byte[] key =
-                "1ed2f625c187b993256a8b3ccf9dcbfa5b44b4795c731012f70e4e64732efd5d".HexToByteArray();
+            byte[] key = "1ed2f625c187b993256a8b3ccf9dcbfa5b44b4795c731012f70e4e64732efd5d"
+                .HexToByteArray();
             byte[] iv = "47d1e060ba3c8643f9f8b65feeda4b30".HexToByteArray();
 
             byte[] plainText = plainTextStr.HexToByteArray();
@@ -87,8 +87,8 @@ namespace System.Security.Cryptography.Tests
             string plainTextStr
         )
         {
-            byte[] key =
-                "1ed2f625c187b993256a8b3ccf9dcbfa5b44b4795c731012f70e4e64732efd5d".HexToByteArray();
+            byte[] key = "1ed2f625c187b993256a8b3ccf9dcbfa5b44b4795c731012f70e4e64732efd5d"
+                .HexToByteArray();
             byte[] iv = "47d1e060ba3c8643f9f8b65feeda4b30".HexToByteArray();
 
             byte[] plainText = plainTextStr.HexToByteArray();

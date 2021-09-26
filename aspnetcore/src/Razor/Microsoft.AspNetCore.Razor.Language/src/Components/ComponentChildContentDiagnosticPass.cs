@@ -39,12 +39,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     {
                         if (attribute.AttributeName == childContent.AttributeName)
                         {
-                            node.Diagnostics.Add(
-                                ComponentDiagnosticFactory.Create_ChildContentSetByAttributeAndBody(
-                                    attribute.Source,
-                                    attribute.AttributeName
-                                )
-                            );
+                            node.Diagnostics
+                                .Add(
+                                    ComponentDiagnosticFactory.Create_ChildContentSetByAttributeAndBody(
+                                        attribute.Source,
+                                        attribute.AttributeName
+                                    )
+                                );
                         }
                     }
                 }
@@ -66,24 +67,26 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         if (
                             ancestor != null
                             && ancestor.IsParameterized
-                            && string.Equals(
-                                node.ParameterName,
-                                ancestor.ParameterName,
-                                StringComparison.Ordinal
-                            )
+                            && string
+                                .Equals(
+                                    node.ParameterName,
+                                    ancestor.ParameterName,
+                                    StringComparison.Ordinal
+                                )
                         )
                         {
                             // Duplicate name. We report an error because this will almost certainly also lead to an error
                             // from the C# compiler that's way less clear.
-                            node.Diagnostics.Add(
-                                ComponentDiagnosticFactory.Create_ChildContentRepeatedParameterName(
-                                    node.Source,
-                                    node,
-                                    (ComponentIntermediateNode)Ancestors[0], // Enclosing component
-                                    ancestor, // conflicting child content node
-                                    (ComponentIntermediateNode)Ancestors[i + 1]
-                                )
-                            ); // Enclosing component of conflicting child content node
+                            node.Diagnostics
+                                .Add(
+                                    ComponentDiagnosticFactory.Create_ChildContentRepeatedParameterName(
+                                        node.Source,
+                                        node,
+                                        (ComponentIntermediateNode)Ancestors[0], // Enclosing component
+                                        ancestor, // conflicting child content node
+                                        (ComponentIntermediateNode)Ancestors[i + 1]
+                                    )
+                                ); // Enclosing component of conflicting child content node
                         }
                     }
                 }

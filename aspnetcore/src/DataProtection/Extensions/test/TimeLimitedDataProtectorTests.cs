@@ -24,28 +24,28 @@ namespace Microsoft.AspNetCore.DataProtection
             DateTimeOffset expiration = StringToDateTime("2000-01-01 00:00:00Z");
             var mockInnerProtector = new Mock<IDataProtector>();
             mockInnerProtector.Setup(
-                    o =>
-                        o.CreateProtector("new purpose")
-                            .CreateProtector(TimeLimitedPurposeString)
-                            .Protect(
-                                new byte[]
-                                {
-                                    0x08,
-                                    0xc1,
-                                    0x22,
-                                    0x02,
-                                    0x47,
-                                    0xe4,
-                                    0x40,
-                                    0x00, /* header */
-                                    0x01,
-                                    0x02,
-                                    0x03,
-                                    0x04,
-                                    0x05 /* payload */
-                                }
-                            )
-                )
+                o =>
+                    o.CreateProtector("new purpose")
+                        .CreateProtector(TimeLimitedPurposeString)
+                        .Protect(
+                            new byte[]
+                            {
+                                0x08,
+                                0xc1,
+                                0x22,
+                                0x02,
+                                0x47,
+                                0xe4,
+                                0x40,
+                                0x00, /* header */
+                                0x01,
+                                0x02,
+                                0x03,
+                                0x04,
+                                0x05 /* payload */
+                            }
+                        )
+            )
                 .Returns(new byte[] { 0x10, 0x11 });
 
             var timeLimitedProtector = new TimeLimitedDataProtector(mockInnerProtector.Object);
@@ -69,28 +69,28 @@ namespace Microsoft.AspNetCore.DataProtection
             DateTimeOffset expiration = StringToDateTime("2000-01-01 00:00:00Z");
             var mockInnerProtector = new Mock<IDataProtector>();
             mockInnerProtector.Setup(
-                    o =>
-                        o.CreateProtector("new purpose")
-                            .CreateProtector(TimeLimitedPurposeString)
-                            .Protect(
-                                new byte[]
-                                {
-                                    0x2b,
-                                    0xca,
-                                    0x28,
-                                    0x75,
-                                    0xf4,
-                                    0x37,
-                                    0x3f,
-                                    0xff, /* header */
-                                    0x01,
-                                    0x02,
-                                    0x03,
-                                    0x04,
-                                    0x05 /* payload */
-                                }
-                            )
-                )
+                o =>
+                    o.CreateProtector("new purpose")
+                        .CreateProtector(TimeLimitedPurposeString)
+                        .Protect(
+                            new byte[]
+                            {
+                                0x2b,
+                                0xca,
+                                0x28,
+                                0x75,
+                                0xf4,
+                                0x37,
+                                0x3f,
+                                0xff, /* header */
+                                0x01,
+                                0x02,
+                                0x03,
+                                0x04,
+                                0x05 /* payload */
+                            }
+                        )
+            )
                 .Returns(new byte[] { 0x10, 0x11 });
 
             var timeLimitedProtector = new TimeLimitedDataProtector(mockInnerProtector.Object);
@@ -114,10 +114,9 @@ namespace Microsoft.AspNetCore.DataProtection
             DateTimeOffset now = StringToDateTime("1999-01-01 00:00:00Z");
             var mockInnerProtector = new Mock<IDataProtector>();
             mockInnerProtector.Setup(
-                    o =>
-                        o.CreateProtector(TimeLimitedPurposeString)
-                            .Unprotect(new byte[] { 0x10, 0x11 })
-                )
+                o =>
+                    o.CreateProtector(TimeLimitedPurposeString).Unprotect(new byte[] { 0x10, 0x11 })
+            )
                 .Returns(
                     new byte[]
                     {
@@ -160,10 +159,9 @@ namespace Microsoft.AspNetCore.DataProtection
             DateTimeOffset now = StringToDateTime("2001-01-01 00:00:00Z");
             var mockInnerProtector = new Mock<IDataProtector>();
             mockInnerProtector.Setup(
-                    o =>
-                        o.CreateProtector(TimeLimitedPurposeString)
-                            .Unprotect(new byte[] { 0x10, 0x11 })
-                )
+                o =>
+                    o.CreateProtector(TimeLimitedPurposeString).Unprotect(new byte[] { 0x10, 0x11 })
+            )
                 .Returns(
                     new byte[]
                     {
@@ -204,10 +202,9 @@ namespace Microsoft.AspNetCore.DataProtection
             // 0x08c1220247e44000 is the representation of midnight 2000-01-01 UTC.
             var mockInnerProtector = new Mock<IDataProtector>();
             mockInnerProtector.Setup(
-                    o =>
-                        o.CreateProtector(TimeLimitedPurposeString)
-                            .Unprotect(new byte[] { 0x10, 0x11 })
-                )
+                o =>
+                    o.CreateProtector(TimeLimitedPurposeString).Unprotect(new byte[] { 0x10, 0x11 })
+            )
                 .Returns(
                     new byte[]
                     {
@@ -239,10 +236,9 @@ namespace Microsoft.AspNetCore.DataProtection
             // 0x08c1220247e44000 is the representation of midnight 2000-01-01 UTC.
             var mockInnerProtector = new Mock<IDataProtector>();
             mockInnerProtector.Setup(
-                    o =>
-                        o.CreateProtector(TimeLimitedPurposeString)
-                            .Unprotect(new byte[] { 0x10, 0x11 })
-                )
+                o =>
+                    o.CreateProtector(TimeLimitedPurposeString).Unprotect(new byte[] { 0x10, 0x11 })
+            )
                 .Throws(new Exception("How exceptional!"));
             var timeLimitedProtector = new TimeLimitedDataProtector(mockInnerProtector.Object);
 
@@ -260,9 +256,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public void RoundTrip_ProtectedData()
         {
             // Arrange
-            var ephemeralProtector = new EphemeralDataProtectionProvider(
-                NullLoggerFactory.Instance
-            ).CreateProtector("my purpose");
+            var ephemeralProtector = new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                .CreateProtector("my purpose");
             var timeLimitedProtector = new TimeLimitedDataProtector(ephemeralProtector);
             var expectedExpiration = StringToDateTime("2020-01-01 00:00:00Z");
 

@@ -51,8 +51,8 @@ namespace System.Net.Http
             mockStream.Setup(s => s.CanWrite).Returns(true);
             Mock<MultipartStreamProvider> mockStreamProvider = new Mock<MultipartStreamProvider>();
             mockStreamProvider.Setup(
-                    sp => sp.GetStream(It.IsAny<HttpContent>(), It.IsAny<HttpContentHeaders>())
-                )
+                sp => sp.GetStream(It.IsAny<HttpContent>(), It.IsAny<HttpContentHeaders>())
+            )
                 .Returns(mockStream.Object);
             MimeBodyPart bodypart = new MimeBodyPart(mockStreamProvider.Object, 1024, parent);
             bodypart.Segments.Add(new ArraySegment<byte>(new byte[] { 1 }));
@@ -75,8 +75,8 @@ namespace System.Net.Http
             Mock<MemoryStream> mockStream = new Mock<MemoryStream> { CallBase = true };
             Mock<MultipartStreamProvider> mockStreamProvider = new Mock<MultipartStreamProvider>();
             mockStreamProvider.Setup(
-                    sp => sp.GetStream(It.IsAny<HttpContent>(), It.IsAny<HttpContentHeaders>())
-                )
+                sp => sp.GetStream(It.IsAny<HttpContent>(), It.IsAny<HttpContentHeaders>())
+            )
                 .Returns(mockStream.Object);
             MimeBodyPart bodypart = new MimeBodyPart(mockStreamProvider.Object, 1024, parent);
             bodypart.Segments.Add(new ArraySegment<byte>(new byte[] { 1 }));

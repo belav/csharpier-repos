@@ -125,11 +125,8 @@ namespace System.Xml.Schema
                     {
                         Debug.Assert(mt.Datatype != null);
                         Debug.Assert(value != null);
-                        typedValue = mt.Datatype.ParseValue(
-                            value,
-                            schemas.NameTable,
-                            namespaceManager
-                        );
+                        typedValue = mt.Datatype
+                            .ParseValue(value, schemas.NameTable, namespaceManager);
                     }
                     catch (XmlSchemaException) { }
                     if (typedValue != null)
@@ -335,15 +332,16 @@ namespace System.Xml.Schema
             PushElement(e, ref xsiType, ref xsiNil);
             IXmlLineInfo original = SaveLineInfo(e);
             source = e;
-            validator!.ValidateElement(
-                e.Name.LocalName,
-                e.Name.NamespaceName,
-                si,
-                xsiType,
-                xsiNil,
-                null,
-                null
-            );
+            validator!
+                .ValidateElement(
+                    e.Name.LocalName,
+                    e.Name.NamespaceName,
+                    si,
+                    xsiType,
+                    xsiNil,
+                    null,
+                    null
+                );
             ValidateAttributes(e);
             validator.ValidateEndOfAttributes(si);
             ValidateNodes(e);
@@ -537,11 +535,8 @@ namespace System.Xml.Schema
                 throw new ArgumentNullException(nameof(source));
             if (schemas == null)
                 throw new ArgumentNullException(nameof(schemas));
-            new XNodeValidator(schemas, validationEventHandler).Validate(
-                source,
-                null,
-                addSchemaInfo
-            );
+            new XNodeValidator(schemas, validationEventHandler)
+                .Validate(source, null, addSchemaInfo);
         }
 
         /// <summary>
@@ -593,11 +588,8 @@ namespace System.Xml.Schema
                 throw new ArgumentNullException(nameof(partialValidationType));
             if (schemas == null)
                 throw new ArgumentNullException(nameof(schemas));
-            new XNodeValidator(schemas, validationEventHandler).Validate(
-                source,
-                partialValidationType,
-                addSchemaInfo
-            );
+            new XNodeValidator(schemas, validationEventHandler)
+                .Validate(source, partialValidationType, addSchemaInfo);
         }
 
         /// <summary>
@@ -649,11 +641,8 @@ namespace System.Xml.Schema
                 throw new ArgumentNullException(nameof(partialValidationType));
             if (schemas == null)
                 throw new ArgumentNullException(nameof(schemas));
-            new XNodeValidator(schemas, validationEventHandler).Validate(
-                source,
-                partialValidationType,
-                addSchemaInfo
-            );
+            new XNodeValidator(schemas, validationEventHandler)
+                .Validate(source, partialValidationType, addSchemaInfo);
         }
     }
 }

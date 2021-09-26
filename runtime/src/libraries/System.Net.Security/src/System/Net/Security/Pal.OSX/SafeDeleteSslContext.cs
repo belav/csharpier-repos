@@ -48,11 +48,8 @@ namespace System.Net
 
                 _sslContext = CreateSslContext(credential, sslAuthenticationOptions.IsServer);
 
-                osStatus = Interop.AppleCrypto.SslSetIoCallbacks(
-                    _sslContext,
-                    _readCallback,
-                    _writeCallback
-                );
+                osStatus = Interop.AppleCrypto
+                    .SslSetIoCallbacks(_sslContext, _readCallback, _writeCallback);
 
                 if (osStatus != 0)
                 {
@@ -67,11 +64,12 @@ namespace System.Net
                     {
                         fixed (uint* cipherSuites = tlsCipherSuites)
                         {
-                            osStatus = Interop.AppleCrypto.SslSetEnabledCipherSuites(
-                                _sslContext,
-                                cipherSuites,
-                                tlsCipherSuites.Length
-                            );
+                            osStatus = Interop.AppleCrypto
+                                .SslSetEnabledCipherSuites(
+                                    _sslContext,
+                                    cipherSuites,
+                                    tlsCipherSuites.Length
+                                );
 
                             if (osStatus != 0)
                             {
@@ -86,10 +84,11 @@ namespace System.Net
                     // On OSX coretls supports only client side. For server, we will silently ignore the option.
                     if (!sslAuthenticationOptions.IsServer)
                     {
-                        Interop.AppleCrypto.SslCtxSetAlpnProtos(
-                            _sslContext,
-                            sslAuthenticationOptions.ApplicationProtocols
-                        );
+                        Interop.AppleCrypto
+                            .SslCtxSetAlpnProtos(
+                                _sslContext,
+                                sslAuthenticationOptions.ApplicationProtocols
+                            );
                     }
                 }
             }

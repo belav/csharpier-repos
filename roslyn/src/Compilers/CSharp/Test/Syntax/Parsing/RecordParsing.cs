@@ -268,14 +268,13 @@ class C
         public void RecordParsing05()
         {
             var tree = ParseTree("record Point;", options: TestOptions.Regular8);
-            tree.GetDiagnostics()
-                .Verify(
-                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
-                    // record Point;
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "record Point;")
-                        .WithArguments("top-level statements", "9.0")
-                        .WithLocation(1, 1)
-                );
+            tree.GetDiagnostics().Verify(
+                // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                // record Point;
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "record Point;")
+                    .WithArguments("top-level statements", "9.0")
+                    .WithLocation(1, 1)
+            );
 
             UsingNode((CSharpSyntaxNode)tree.GetRoot());
 
@@ -308,15 +307,14 @@ class C
         public void RecordParsing06()
         {
             var tree = ParseTree("interface P;", options: null);
-            tree.GetDiagnostics()
-                .Verify(
-                    // (1,12): error CS1514: { expected
-                    // interface P;
-                    Diagnostic(ErrorCode.ERR_LbraceExpected, ";").WithLocation(1, 12),
-                    // (1,12): error CS1513: } expected
-                    // interface P;
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, ";").WithLocation(1, 12)
-                );
+            tree.GetDiagnostics().Verify(
+                // (1,12): error CS1514: { expected
+                // interface P;
+                Diagnostic(ErrorCode.ERR_LbraceExpected, ";").WithLocation(1, 12),
+                // (1,12): error CS1513: } expected
+                // interface P;
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ";").WithLocation(1, 12)
+            );
 
             UsingNode((CSharpSyntaxNode)tree.GetRoot());
 
@@ -339,27 +337,23 @@ class C
         public void RecordParsing07()
         {
             var tree = ParseTree("interface P(int x, int y);", options: TestOptions.Regular8);
-            tree.GetDiagnostics()
-                .Verify(
-                    // (1,12): error CS1514: { expected
-                    // interface P(int x, int y);
-                    Diagnostic(ErrorCode.ERR_LbraceExpected, "(").WithLocation(1, 12),
-                    // (1,12): error CS1513: } expected
-                    // interface P(int x, int y);
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, "(").WithLocation(1, 12),
-                    // (1,12): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
-                    // interface P(int x, int y);
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int x, int y);")
-                        .WithArguments("top-level statements", "9.0")
-                        .WithLocation(1, 12),
-                    // (1,12): error CS8803: Top-level statements must precede namespace and type declarations.
-                    // interface P(int x, int y);
-                    Diagnostic(
-                            ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
-                            "(int x, int y);"
-                        )
-                        .WithLocation(1, 12)
-                );
+            tree.GetDiagnostics().Verify(
+                // (1,12): error CS1514: { expected
+                // interface P(int x, int y);
+                Diagnostic(ErrorCode.ERR_LbraceExpected, "(").WithLocation(1, 12),
+                // (1,12): error CS1513: } expected
+                // interface P(int x, int y);
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "(").WithLocation(1, 12),
+                // (1,12): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                // interface P(int x, int y);
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int x, int y);")
+                    .WithArguments("top-level statements", "9.0")
+                    .WithLocation(1, 12),
+                // (1,12): error CS8803: Top-level statements must precede namespace and type declarations.
+                // interface P(int x, int y);
+                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "(int x, int y);")
+                    .WithLocation(1, 12)
+            );
         }
 
         [Fact]
@@ -1248,14 +1242,13 @@ class C
     int x = 0 with {};
 }";
             var tree = SyntaxFactory.ParseSyntaxTree(text, options: TestOptions.Regular8);
-            tree.GetDiagnostics()
-                .Verify(
-                    // (4,15): error CS8400: Feature 'records' is not available in C# 8.0. Please use language version 9.0 or greater.
-                    //     int x = 0 with {};
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "with")
-                        .WithArguments("records", "9.0")
-                        .WithLocation(4, 15)
-                );
+            tree.GetDiagnostics().Verify(
+                // (4,15): error CS8400: Feature 'records' is not available in C# 8.0. Please use language version 9.0 or greater.
+                //     int x = 0 with {};
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "with")
+                    .WithArguments("records", "9.0")
+                    .WithLocation(4, 15)
+            );
         }
 
         [Fact]
@@ -2201,11 +2194,10 @@ class C(int X, int Y)
                 // (2,8): error CS8803: Top-level statements must precede namespace and type declarations.
                 // class C(int X, int Y)
                 Diagnostic(
-                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
-                        @"(int X, int Y)
+                    ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                    @"(int X, int Y)
 "
-                    )
-                    .WithLocation(2, 8),
+                ).WithLocation(2, 8),
                 // (2,22): error CS1002: ; expected
                 // class C(int X, int Y)
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 22),

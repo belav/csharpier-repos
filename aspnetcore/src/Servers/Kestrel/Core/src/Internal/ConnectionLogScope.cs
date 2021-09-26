@@ -51,11 +51,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         {
             if (_cachedToString == null)
             {
-                _cachedToString = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "ConnectionId:{0}",
-                    _connectionId
-                );
+                _cachedToString = string
+                    .Format(CultureInfo.InvariantCulture, "ConnectionId:{0}", _connectionId);
             }
 
             return _cachedToString;

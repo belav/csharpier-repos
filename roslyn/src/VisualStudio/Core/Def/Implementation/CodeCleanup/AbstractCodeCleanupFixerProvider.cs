@@ -32,8 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
 
         public IReadOnlyCollection<ICodeCleanUpFixer> GetFixers(IContentType contentType) =>
             _codeCleanUpFixers.WhereAsArray(
-                    handler => handler.Metadata.ContentTypes.Any(contentType.IsOfType)
-                )
+                handler => handler.Metadata.ContentTypes.Any(contentType.IsOfType)
+            )
                 .SelectAsArray(l => l.Value);
     }
 }

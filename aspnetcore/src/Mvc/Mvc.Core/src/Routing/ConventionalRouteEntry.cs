@@ -43,12 +43,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             catch (Exception exception)
             {
                 throw new RouteCreationException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        "An error occurred while creating the route with name '{0}' and pattern '{1}'.",
-                        routeName,
-                        pattern
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            "An error occurred while creating the route with name '{0}' and pattern '{1}'.",
+                            routeName,
+                            pattern
+                        ),
                     exception
                 );
             }

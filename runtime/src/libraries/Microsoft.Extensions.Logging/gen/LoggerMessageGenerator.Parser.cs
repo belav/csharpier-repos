@@ -310,11 +310,13 @@ namespace Microsoft.Extensions.Logging.Generators
                                             }
 
                                             IParameterSymbol declaredType = sm.GetDeclaredSymbol(p);
-                                            string typeName = declaredType!.Type.ToDisplayString(
-                                                SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(
-                                                    SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                                                )
-                                            );
+                                            string typeName = declaredType!.Type
+                                                .ToDisplayString(
+                                                    SymbolDisplayFormat.FullyQualifiedFormat
+                                                        .WithMiscellaneousOptions(
+                                                            SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                                                        )
+                                                );
 
                                             var lp = new LoggerParameter
                                             {
@@ -486,10 +488,11 @@ namespace Microsoft.Extensions.Logging.Generators
                                                 foreach (LoggerParameter p in lm.AllParameters)
                                                 {
                                                     if (
-                                                        t.Key.Equals(
-                                                            p.Name,
-                                                            StringComparison.OrdinalIgnoreCase
-                                                        )
+                                                        t.Key
+                                                            .Equals(
+                                                                p.Name,
+                                                                StringComparison.OrdinalIgnoreCase
+                                                            )
                                                     )
                                                     {
                                                         found = true;

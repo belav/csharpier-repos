@@ -72,11 +72,8 @@ namespace System.Globalization.Tests
             }
             Assert.Equal(
                 expected,
-                new TaiwanCalendar().GetWeekOfYear(
-                    time,
-                    CalendarWeekRule.FirstDay,
-                    DayOfWeek.Sunday
-                )
+                new TaiwanCalendar()
+                    .GetWeekOfYear(time, CalendarWeekRule.FirstDay, DayOfWeek.Sunday)
             );
         }
 

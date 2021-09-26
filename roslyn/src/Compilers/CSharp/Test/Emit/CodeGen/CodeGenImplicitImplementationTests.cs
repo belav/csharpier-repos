@@ -892,13 +892,12 @@ class C1 : IInterface
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (26,9): error CS0121: The call is ambiguous between the following methods or properties: 'IBase1.BaseGoo()' and 'IBase2.BaseGoo()'
-                    //         ((IInterface)c).BaseGoo();
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "BaseGoo")
-                        .WithArguments("IBase1.BaseGoo()", "IBase2.BaseGoo()")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (26,9): error CS0121: The call is ambiguous between the following methods or properties: 'IBase1.BaseGoo()' and 'IBase2.BaseGoo()'
+                //         ((IInterface)c).BaseGoo();
+                Diagnostic(ErrorCode.ERR_AmbigCall, "BaseGoo")
+                    .WithArguments("IBase1.BaseGoo()", "IBase2.BaseGoo()")
+            );
         }
 
         [WorkItem(540410, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540410")]
@@ -944,10 +943,9 @@ public static class MainClass
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: "ILeft IBase ILeft IBase")
-                .VerifyIL(
-                    "MainClass.Test",
-                    @"
+            CompileAndVerify(source, expectedOutput: "ILeft IBase ILeft IBase").VerifyIL(
+                "MainClass.Test",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  1
@@ -961,7 +959,7 @@ public static class MainClass
   IL_0013:  callvirt   ""void IBase.Goo()""
   IL_0018:  ret       
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2127,8 +2125,8 @@ class Test : I3
 }";
 
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"
+                source,
+                expectedOutput: @"
 I3.M1
 I1.M2
 I3.M2
@@ -2158,8 +2156,7 @@ I3.M8+I1.M8
 I3.M8+I1.M8
 I3.M9+I1.M9
 I1.P"
-                )
-                .VerifyDiagnostics(); // No errors
+            ).VerifyDiagnostics(); // No errors
         }
 
         [Fact]
@@ -2350,14 +2347,13 @@ class Test
 }";
 
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"
+                source,
+                expectedOutput: @"
 C.Method
 B.set_Property
 C.Method
 B.set_Property"
-                )
-                .VerifyDiagnostics(); // No errors
+            ).VerifyDiagnostics(); // No errors
         }
 
         [Fact]
@@ -2398,14 +2394,13 @@ class Test
 }";
 
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"
+                source,
+                expectedOutput: @"
 B.Method
 B.set_Property
 C.Method
 C.set_Property"
-                )
-                .VerifyDiagnostics(); // No errors
+            ).VerifyDiagnostics(); // No errors
         }
 
         [Fact]
@@ -2447,12 +2442,11 @@ class Test
 }";
 
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"
+                source,
+                expectedOutput: @"
 B3.Method
 D.set_Property"
-                )
-                .VerifyDiagnostics(); // No errors
+            ).VerifyDiagnostics(); // No errors
         }
 
         [Fact]
@@ -2495,13 +2489,12 @@ class Test
 }";
 
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"
+                source,
+                expectedOutput: @"
 B1.Method
 B1.set_Property
 D.M"
-                )
-                .VerifyDiagnostics(); // No errors
+            ).VerifyDiagnostics(); // No errors
         }
 
         /// <summary>

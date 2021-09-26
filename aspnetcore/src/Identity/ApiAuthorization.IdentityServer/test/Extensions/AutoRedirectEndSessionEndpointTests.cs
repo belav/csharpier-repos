@@ -33,12 +33,9 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
             endSessionValidator.Setup(
-                    esv =>
-                        esv.ValidateAsync(
-                            It.IsAny<NameValueCollection>(),
-                            It.IsAny<ClaimsPrincipal>()
-                        )
-                )
+                esv =>
+                    esv.ValidateAsync(It.IsAny<NameValueCollection>(), It.IsAny<ClaimsPrincipal>())
+            )
                 .ReturnsAsync(
                     new EndSessionValidationResult()
                     {
@@ -92,12 +89,9 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
             endSessionValidator.Setup(
-                    esv =>
-                        esv.ValidateAsync(
-                            It.IsAny<NameValueCollection>(),
-                            It.IsAny<ClaimsPrincipal>()
-                        )
-                )
+                esv =>
+                    esv.ValidateAsync(It.IsAny<NameValueCollection>(), It.IsAny<ClaimsPrincipal>())
+            )
                 .ReturnsAsync(
                     new EndSessionValidationResult()
                     {
@@ -152,12 +146,9 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
             endSessionValidator.Setup(
-                    esv =>
-                        esv.ValidateAsync(
-                            It.IsAny<NameValueCollection>(),
-                            It.IsAny<ClaimsPrincipal>()
-                        )
-                )
+                esv =>
+                    esv.ValidateAsync(It.IsAny<NameValueCollection>(), It.IsAny<ClaimsPrincipal>())
+            )
                 .ReturnsAsync(
                     new EndSessionValidationResult() { IsError = true, Error = "SomeError" }
                 );
@@ -200,12 +191,9 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
             endSessionValidator.Setup(
-                    esv =>
-                        esv.ValidateAsync(
-                            It.IsAny<NameValueCollection>(),
-                            It.IsAny<ClaimsPrincipal>()
-                        )
-                )
+                esv =>
+                    esv.ValidateAsync(It.IsAny<NameValueCollection>(), It.IsAny<ClaimsPrincipal>())
+            )
                 .ReturnsAsync(
                     new EndSessionValidationResult()
                     {
@@ -255,12 +243,9 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
             endSessionValidator.Setup(
-                    esv =>
-                        esv.ValidateAsync(
-                            It.IsAny<NameValueCollection>(),
-                            It.IsAny<ClaimsPrincipal>()
-                        )
-                )
+                esv =>
+                    esv.ValidateAsync(It.IsAny<NameValueCollection>(), It.IsAny<ClaimsPrincipal>())
+            )
                 .ReturnsAsync(
                     new EndSessionValidationResult()
                     {
@@ -364,13 +349,13 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var collection = new ServiceCollection();
             var authService = new Mock<IAuthenticationService>();
             authService.Setup(
-                    service =>
-                        service.SignOutAsync(
-                            It.IsAny<HttpContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<AuthenticationProperties>()
-                        )
-                )
+                service =>
+                    service.SignOutAsync(
+                        It.IsAny<HttpContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<AuthenticationProperties>()
+                    )
+            )
                 .Returns(Task.CompletedTask);
 
             collection.AddSingleton(authService.Object);

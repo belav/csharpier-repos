@@ -448,7 +448,8 @@ namespace System.Reflection.Tests
             //
             VerifyIsAssignableFrom(
                 "GBase<T> GDerived<>",
-                typeof(GBase<>).Project()
+                typeof(GBase<>)
+                    .Project()
                     .MakeGenericType(typeof(GDerived<>).Project().Gp(0).AsType())
                     .GetTypeInfo(),
                 typeof(GDerived<>).Project().GetTypeInfo(),

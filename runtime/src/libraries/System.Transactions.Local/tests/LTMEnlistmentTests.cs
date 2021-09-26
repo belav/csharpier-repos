@@ -386,18 +386,16 @@ namespace System.Transactions.Tests
             }
 
             Task.Run(
-                    () => // in case current thread is STA thread, where WaitHandle.WaitAll isn't supported
-                    {
-                        Assert.True(
-                            WaitHandle.WaitAll(
-                                outcomeEvents,
-                                TimeSpan.FromSeconds(MaxTransactionCommitTimeoutInSeconds)
-                            )
-                        );
-                    }
-                )
-                .GetAwaiter()
-                .GetResult();
+                () => // in case current thread is STA thread, where WaitHandle.WaitAll isn't supported
+                {
+                    Assert.True(
+                        WaitHandle.WaitAll(
+                            outcomeEvents,
+                            TimeSpan.FromSeconds(MaxTransactionCommitTimeoutInSeconds)
+                        )
+                    );
+                }
+            ).GetAwaiter().GetResult();
 
             Assert.NotNull(tx);
             Assert.Equal(expectedTxStatus, tx.TransactionInformation.Status);

@@ -238,7 +238,8 @@ public class A
             var compilation1 = CreateCompilation(source1);
             compilation1.VerifyDiagnostics(
                 // (4,19): error CS0246: The type or namespace name 'Missing' could not be found (are you missing a using directive or an assembly reference?)
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Missing").WithArguments("Missing")
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Missing")
+                    .WithArguments("Missing")
             );
 
             string source2 =
@@ -272,20 +273,17 @@ public class B
                 var result = compilation2.Emit(executableStream);
                 Assert.False(result.Success);
 
-                result.Diagnostics.Verify(
-                    expectedDiagnostics.Concat(
-                            new[]
-                            {
-                                // error CS7038: Failed to emit module 'Test': Unable to determine specific cause of the failure.
-                                Diagnostic(ErrorCode.ERR_ModuleEmitFailure)
-                                    .WithArguments(
-                                        compilation2.AssemblyName,
-                                        "Unable to determine specific cause of the failure."
-                                    )
-                            }
-                        )
-                        .ToArray()
-                );
+                result.Diagnostics.Verify(expectedDiagnostics.Concat(
+                        new[]
+                        {
+                            // error CS7038: Failed to emit module 'Test': Unable to determine specific cause of the failure.
+                            Diagnostic(ErrorCode.ERR_ModuleEmitFailure)
+                                .WithArguments(
+                                    compilation2.AssemblyName,
+                                    "Unable to determine specific cause of the failure."
+                                )
+                        }
+                    ).ToArray());
             }
 
             using (var executableStream = new MemoryStream())

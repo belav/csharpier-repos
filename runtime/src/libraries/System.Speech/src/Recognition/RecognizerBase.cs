@@ -218,9 +218,10 @@ namespace System.Speech.Recognition
                 // If the grammar is actually loaded then update its state in sapi.
                 if (grammar.Loaded)
                 {
-                    grammarData._sapiGrammar.SetGrammarState(
-                        enabled ? SPGRAMMARSTATE.SPGS_ENABLED : SPGRAMMARSTATE.SPGS_DISABLED
-                    );
+                    grammarData._sapiGrammar
+                        .SetGrammarState(
+                            enabled ? SPGRAMMARSTATE.SPGS_ENABLED : SPGRAMMARSTATE.SPGS_DISABLED
+                        );
                 }
 
                 // Otherwise just update the local copy so it gets set correctly when Loaded.
@@ -3536,14 +3537,15 @@ namespace System.Speech.Recognition
                 ref string pbstrRedirectUrl
             )
             {
-                return ((ISpGrammarResourceLoader)Recognizer).LoadResource(
-                    bstrResourceUri,
-                    fAlwaysReload,
-                    out pStream,
-                    ref pbstrMIMEType,
-                    ref pfModified,
-                    ref pbstrRedirectUrl
-                );
+                return ((ISpGrammarResourceLoader)Recognizer)
+                    .LoadResource(
+                        bstrResourceUri,
+                        fAlwaysReload,
+                        out pStream,
+                        ref pbstrMIMEType,
+                        ref pfModified,
+                        ref pbstrRedirectUrl
+                    );
             }
 
             /// <summary>
@@ -3555,11 +3557,8 @@ namespace System.Speech.Recognition
                 out Uri redirectUrl
             )
             {
-                return ((ISpGrammarResourceLoader)Recognizer).GetLocalCopy(
-                    resourcePath,
-                    out mimeType,
-                    out redirectUrl
-                );
+                return ((ISpGrammarResourceLoader)Recognizer)
+                    .GetLocalCopy(resourcePath, out mimeType, out redirectUrl);
             }
 
             /// <summary>

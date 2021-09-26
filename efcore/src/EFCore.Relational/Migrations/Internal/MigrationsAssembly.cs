@@ -119,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     t.IsSubclassOf(typeof(ModelSnapshot))
                     && t.GetCustomAttribute<DbContextAttribute>()?.ContextType == _contextType
                 select (ModelSnapshot)Activator.CreateInstance(t.AsType())!
-            ).FirstOrDefault();
+            )
+                .FirstOrDefault();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -135,21 +136,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual string? FindMigrationId(string nameOrId) =>
-            Migrations.Keys.Where(
-                    _idGenerator.IsValidId(nameOrId)
-                      // ReSharper disable once ImplicitlyCapturedClosure
-                      ? (Func<string, bool>)(
-                            id => string.Equals(id, nameOrId, StringComparison.OrdinalIgnoreCase)
-                        )
-                      : id =>
-                            string.Equals(
+        public virtual string? FindMigrationId(string nameOrId) => Migrations.Keys.Where(
+                _idGenerator.IsValidId(nameOrId)
+                  // ReSharper disable once ImplicitlyCapturedClosure
+                  ? (Func<string, bool>)(
+                        id => string.Equals(id, nameOrId, StringComparison.OrdinalIgnoreCase)
+                    )
+                  : id =>
+                        string
+                            .Equals(
                                 _idGenerator.GetName(id),
                                 nameOrId,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                )
-                .FirstOrDefault();
+            ).FirstOrDefault();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

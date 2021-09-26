@@ -59,10 +59,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 && _options.Value.DataAnnotationLocalizerProvider != null
             )
             {
-                stringLocalizer = _options.Value.DataAnnotationLocalizerProvider(
-                    context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
-                    _stringLocalizerFactory
-                );
+                stringLocalizer = _options.Value
+                    .DataAnnotationLocalizerProvider(
+                        context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
+                        _stringLocalizerFactory
+                    );
             }
 
             var results = context.Results;
@@ -101,13 +102,14 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Produce a validator if the type supports IValidatableObject
             if (typeof(IValidatableObject).IsAssignableFrom(context.ModelMetadata.ModelType))
             {
-                context.Results.Add(
-                    new ValidatorItem
-                    {
-                        Validator = new ValidatableObjectAdapter(),
-                        IsReusable = true
-                    }
-                );
+                context.Results
+                    .Add(
+                        new ValidatorItem
+                        {
+                            Validator = new ValidatableObjectAdapter(),
+                            IsReusable = true
+                        }
+                    );
             }
         }
 

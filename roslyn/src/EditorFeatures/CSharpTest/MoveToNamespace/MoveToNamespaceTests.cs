@@ -24,9 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveToNamespace
     public class MoveToNamespaceTests : AbstractMoveToNamespaceTests
     {
         private static readonly TestComposition s_compositionWithoutOptions =
-            FeaturesTestCompositions.Features.AddExcludedPartTypes(
-                    typeof(IDiagnosticUpdateSourceRegistrationService)
-                )
+            FeaturesTestCompositions.Features
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(
                     typeof(MockDiagnosticUpdateSourceRegistrationService),
                     typeof(TestSymbolRenamedCodeActionOperationFactoryWorkspaceService)
@@ -1157,11 +1156,12 @@ class MyClass
             using var testState = new TestState(workspace);
             Assert.Null(testState.TestMoveToNamespaceOptionsService);
 
-            var actions = await testState.MoveToNamespaceService.GetCodeActionsAsync(
-                testState.InvocationDocument,
-                testState.TestInvocationDocument.SelectedSpans.Single(),
-                CancellationToken.None
-            );
+            var actions = await testState.MoveToNamespaceService
+                .GetCodeActionsAsync(
+                    testState.InvocationDocument,
+                    testState.TestInvocationDocument.SelectedSpans.Single(),
+                    CancellationToken.None
+                );
 
             Assert.Empty(actions);
         }
@@ -1321,9 +1321,8 @@ namespace B
             var document = workspace.CurrentSolution.GetDocument(testDocument.Id);
             var movenamespaceService = document.GetLanguageService<IMoveToNamespaceService>();
             var moveToNamespaceOptions = new MoveToNamespaceOptionsResult("B");
-            ((TestMoveToNamespaceOptionsService)movenamespaceService.OptionsService).SetOptions(
-                moveToNamespaceOptions
-            );
+            ((TestMoveToNamespaceOptionsService)movenamespaceService.OptionsService)
+                .SetOptions(moveToNamespaceOptions);
 
             var (_, action) = await GetCodeActionsAsync(workspace, default);
             var operations = await VerifyActionAndGetOperationsAsync(workspace, action, default);

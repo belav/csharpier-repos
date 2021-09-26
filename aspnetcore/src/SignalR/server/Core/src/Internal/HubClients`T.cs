@@ -19,23 +19,20 @@ namespace Microsoft.AspNetCore.SignalR.Internal
 
         public T AllExcept(IReadOnlyList<string> excludedConnectionIds)
         {
-            return TypedClientBuilder<T>.Build(
-                new AllClientsExceptProxy<THub>(_lifetimeManager, excludedConnectionIds)
-            );
+            return TypedClientBuilder<T>
+                .Build(new AllClientsExceptProxy<THub>(_lifetimeManager, excludedConnectionIds));
         }
 
         public virtual T Client(string connectionId)
         {
-            return TypedClientBuilder<T>.Build(
-                new SingleClientProxy<THub>(_lifetimeManager, connectionId)
-            );
+            return TypedClientBuilder<T>
+                .Build(new SingleClientProxy<THub>(_lifetimeManager, connectionId));
         }
 
         public T Clients(IReadOnlyList<string> connectionIds)
         {
-            return TypedClientBuilder<T>.Build(
-                new MultipleClientProxy<THub>(_lifetimeManager, connectionIds)
-            );
+            return TypedClientBuilder<T>
+                .Build(new MultipleClientProxy<THub>(_lifetimeManager, connectionIds));
         }
 
         public virtual T Group(string groupName)
@@ -45,16 +42,16 @@ namespace Microsoft.AspNetCore.SignalR.Internal
 
         public T GroupExcept(string groupName, IReadOnlyList<string> excludedConnectionIds)
         {
-            return TypedClientBuilder<T>.Build(
-                new GroupExceptProxy<THub>(_lifetimeManager, groupName, excludedConnectionIds)
-            );
+            return TypedClientBuilder<T>
+                .Build(
+                    new GroupExceptProxy<THub>(_lifetimeManager, groupName, excludedConnectionIds)
+                );
         }
 
         public T Groups(IReadOnlyList<string> groupNames)
         {
-            return TypedClientBuilder<T>.Build(
-                new MultipleGroupProxy<THub>(_lifetimeManager, groupNames)
-            );
+            return TypedClientBuilder<T>
+                .Build(new MultipleGroupProxy<THub>(_lifetimeManager, groupNames));
         }
 
         public virtual T User(string userId)
@@ -64,9 +61,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
 
         public virtual T Users(IReadOnlyList<string> userIds)
         {
-            return TypedClientBuilder<T>.Build(
-                new MultipleUserProxy<THub>(_lifetimeManager, userIds)
-            );
+            return TypedClientBuilder<T>
+                .Build(new MultipleUserProxy<THub>(_lifetimeManager, userIds));
         }
     }
 }

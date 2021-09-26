@@ -37,10 +37,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             {
                 var service = document.GetLanguageService<AbstractChangeSignatureService>();
                 var actions = await service.GetChangeSignatureCodeActionAsync(
-                        document,
-                        span,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 context.RegisterRefactorings(actions);
             }

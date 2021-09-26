@@ -146,12 +146,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             var newLineStarter = string.Concat("\n", commentStarter);
 
             // Start the comment with an empty line for visual clarity.
-            comment = string.Concat(
-                commentStarter,
-                "\r\n",
-                commentStarter,
-                xml.Replace("\n", newLineStarter)
-            );
+            comment = string
+                .Concat(commentStarter, "\r\n", commentStarter, xml.Replace("\n", newLineStarter));
             return true;
         }
 
@@ -179,22 +175,19 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 return namedType.GetMembers();
             }
 
-            return namedType.GetMembers()
-                .OfType<IFieldSymbol>()
-                .OrderBy(
-                    (f1, f2) =>
+            return namedType.GetMembers().OfType<IFieldSymbol>().OrderBy(
+                (f1, f2) =>
+                {
+                    if (f1.HasConstantValue != f2.HasConstantValue)
                     {
-                        if (f1.HasConstantValue != f2.HasConstantValue)
-                        {
-                            return f1.HasConstantValue ? 1 : -1;
-                        }
-
-                        return f1.HasConstantValue
-                          ? Comparer<object>.Default.Compare(f1.ConstantValue, f2.ConstantValue)
-                          : f1.Name.CompareTo(f2.Name);
+                        return f1.HasConstantValue ? 1 : -1;
                     }
-                )
-                .ToList();
+
+                    return f1.HasConstantValue
+                      ? Comparer<object>.Default.Compare(f1.ConstantValue, f2.ConstantValue)
+                      : f1.Name.CompareTo(f2.Name);
+                }
+            ).ToList();
         }
 
         public static T? GetReuseableSyntaxNodeForSymbol<T>(

@@ -227,13 +227,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         ) =>
             string.Equals(firstCommand.TableName, secondCommand.TableName, StringComparison.Ordinal)
             && string.Equals(firstCommand.Schema, secondCommand.Schema, StringComparison.Ordinal)
-            && firstCommand.ColumnModifications.Where(o => o.IsWrite)
+            && firstCommand.ColumnModifications
+                .Where(o => o.IsWrite)
                 .Select(o => o.ColumnName)
                 .SequenceEqual(
-                    secondCommand.ColumnModifications.Where(o => o.IsWrite)
+                    secondCommand.ColumnModifications
+                        .Where(o => o.IsWrite)
                         .Select(o => o.ColumnName)
                 )
-            && firstCommand.ColumnModifications.Where(o => o.IsRead)
+            && firstCommand.ColumnModifications
+                .Where(o => o.IsRead)
                 .Select(o => o.ColumnName)
                 .SequenceEqual(
                     secondCommand.ColumnModifications.Where(o => o.IsRead).Select(o => o.ColumnName)

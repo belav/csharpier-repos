@@ -18,7 +18,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task Declaration_of_UseExceptionHandler_can_come_after_other_middleware()
         {
-            await new CommandLineBuilder().AddCommand(new Command("the-command"))
+            await new CommandLineBuilder()
+                .AddCommand(new Command("the-command"))
                 .UseMiddleware(_ => throw new Exception("oops!"))
                 .UseExceptionHandler()
                 .Build()
@@ -30,14 +31,16 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task UseExceptionHandler_catches_middleware_exceptions_and_writes_details_to_standard_error()
         {
-            var parser = new CommandLineBuilder().AddCommand(new Command("the-command"))
+            var parser = new CommandLineBuilder()
+                .AddCommand(new Command("the-command"))
                 .UseMiddleware(_ => throw new Exception("oops!"))
                 .UseExceptionHandler()
                 .Build();
 
             var resultCode = await parser.InvokeAsync("the-command", _console);
 
-            _console.Error.ToString()
+            _console.Error
+                .ToString()
                 .Should()
                 .Contain("Unhandled exception: System.Exception: oops!");
 
@@ -91,7 +94,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task Declaration_of_UseExceptionHandler_can_come_before_other_middleware()
         {
-            await new CommandLineBuilder().AddCommand(new Command("the-command"))
+            await new CommandLineBuilder()
+                .AddCommand(new Command("the-command"))
                 .UseExceptionHandler()
                 .UseMiddleware(_ => throw new Exception("oops!"))
                 .Build()
@@ -103,7 +107,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task When_thrown_exception_is_from_cancelation_no_output_is_generated()
         {
-            int resultCode = await new CommandLineBuilder().AddCommand(new Command("the-command"))
+            int resultCode = await new CommandLineBuilder()
+                .AddCommand(new Command("the-command"))
                 .UseExceptionHandler()
                 .UseMiddleware(_ => throw new OperationCanceledException())
                 .Build()
@@ -116,7 +121,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task UseExceptionHandler_output_can_be_customized()
         {
-            int resultCode = await new CommandLineBuilder().AddCommand(new Command("the-command"))
+            int resultCode = await new CommandLineBuilder()
+                .AddCommand(new Command("the-command"))
                 .UseExceptionHandler(
                     (exception, context) =>
                     {
@@ -135,7 +141,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task UseExceptionHandler_set_custom_result_code()
         {
-            int resultCode = await new CommandLineBuilder().AddCommand(new Command("the-command"))
+            int resultCode = await new CommandLineBuilder()
+                .AddCommand(new Command("the-command"))
                 .UseExceptionHandler(errorExitCode: 42)
                 .UseMiddleware(_ => throw new Exception("oops!"))
                 .Build()

@@ -1244,11 +1244,8 @@ namespace System.Data.Common
                     "How can we have a _parameterNames collection but no _parameterMarkerFormat?"
                 );
 
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    _parameterMarkerFormat,
-                    parameterName
-                );
+                return string
+                    .Format(CultureInfo.InvariantCulture, _parameterMarkerFormat, parameterName);
             }
         }
 
@@ -1303,11 +1300,8 @@ namespace System.Data.Common
                     "How can we have a _parameterNames collection but no _parameterMarkerFormat?"
                 );
 
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    _parameterMarkerFormat,
-                    parameterName
-                );
+                return string
+                    .Format(CultureInfo.InvariantCulture, _parameterMarkerFormat, parameterName);
             }
         }
 

@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Components
                 { nameof(HasInstanceProperties.IntProp), 123 },
                 { nameof(HasInstanceProperties.StringProp), "Hello" },
                 { HasInstanceProperties.ObjectPropName, someObject },
-            }.Build();
+            }
+                .Build();
             var target = new HasInstanceProperties();
 
             // Act
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Components
             var parameters = new ParameterViewBuilder
             {
                 { nameof(HasInstanceProperties.IntProp).ToLowerInvariant(), 123 }
-            }.Build();
+            }
+                .Build();
             var target = new HasInstanceProperties();
 
             // Act
@@ -59,7 +61,8 @@ namespace Microsoft.AspNetCore.Components
             {
                 { nameof(HasInheritedProperties.IntProp), 123 },
                 { nameof(HasInheritedProperties.DerivedClassIntProp), 456 },
-            }.Build();
+            }
+                .Build();
             var target = new HasInheritedProperties();
 
             // Act
@@ -75,10 +78,8 @@ namespace Microsoft.AspNetCore.Components
         {
             // Test for https://github.com/dotnet/aspnetcore/issues/13162
             // Arrange
-            var parameters = new ParameterViewBuilder
-            {
-                { nameof(DerivedType.VirtualProp), 123 },
-            }.Build();
+            var parameters = new ParameterViewBuilder { { nameof(DerivedType.VirtualProp), 123 }, }
+                .Build();
             var target = new DerivedType();
 
             // Act
@@ -175,7 +176,8 @@ namespace Microsoft.AspNetCore.Components
             var parameters = new ParameterViewBuilder
             {
                 { nameof(HasPropertyWithoutParameterAttribute.IntProp), 123 },
-            }.Build();
+            }
+                .Build();
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
@@ -199,7 +201,8 @@ namespace Microsoft.AspNetCore.Components
             var parameters = new ParameterViewBuilder
             {
                 { nameof(HasNonPublicPropertyWithParameterAttribute.IntProp), 123 },
-            }.Build();
+            }
+                .Build();
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
@@ -238,7 +241,8 @@ namespace Microsoft.AspNetCore.Components
             var parameters = new ParameterViewBuilder
             {
                 { nameof(HasCascadingParameter.Cascading), 123 },
-            }.Build();
+            }
+                .Build();
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
@@ -284,7 +288,8 @@ namespace Microsoft.AspNetCore.Components
             var parameters = new ParameterViewBuilder
             {
                 { nameof(HasCaptureUnmatchedValuesProperty.CaptureUnmatchedValues), value },
-            }.Build();
+            }
+                .Build();
 
             // Act
             parameters.SetParameterProperties(target);
@@ -303,7 +308,8 @@ namespace Microsoft.AspNetCore.Components
                 { nameof(HasCaptureUnmatchedValuesProperty.StringProp), "hi" },
                 { "test1", 123 },
                 { "test2", 456 },
-            }.Build();
+            }
+                .Build();
 
             // Act
             parameters.SetParameterProperties(target);
@@ -338,7 +344,8 @@ namespace Microsoft.AspNetCore.Components
                 },
                 { "test1", 123 },
                 { "test2", 456 },
-            }.Build();
+            }
+                .Build();
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
@@ -370,7 +377,8 @@ namespace Microsoft.AspNetCore.Components
                     nameof(HasCaptureUnmatchedValuesProperty.CaptureUnmatchedValues),
                     new Dictionary<string, object>()
                 },
-            }.Build();
+            }
+                .Build();
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
@@ -447,7 +455,8 @@ namespace Microsoft.AspNetCore.Components
             var parameters = new ParameterViewBuilder
             {
                 { nameof(HasCaptureUnmatchedValuesPropertyAndCascadingParameter.Cascading), "hi" },
-            }.Build();
+            }
+                .Build();
 
             // Act
             parameters.SetParameterProperties(target);
@@ -496,7 +505,8 @@ namespace Microsoft.AspNetCore.Components
             var parameters = new ParameterViewBuilder
             {
                 { nameof(HasInstanceProperties.IntProp), "string value" },
-            }.Build();
+            }
+                .Build();
             var target = new HasInstanceProperties();
 
             // Act
@@ -520,7 +530,8 @@ namespace Microsoft.AspNetCore.Components
             var parameters = new ParameterViewBuilder
             {
                 { nameof(HasPropertyWhoseSetterThrows.StringProp), "anything" },
-            }.Build();
+            }
+                .Build();
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
@@ -588,7 +599,8 @@ namespace Microsoft.AspNetCore.Components
             {
                 { nameof(HasInstanceProperties.IntProp), null },
                 { nameof(HasInstanceProperties.StringProp), null },
-            }.Build();
+            }
+                .Build();
             var target = new HasInstanceProperties { IntProp = 123, StringProp = "Hello" };
 
             // Act

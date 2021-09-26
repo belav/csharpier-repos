@@ -60,8 +60,7 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
             }
         }
 
-        public static IDictionary<string, ProtocolTestData> BaseTestData =>
-            new[]
+        public static IDictionary<string, ProtocolTestData> BaseTestData => new[]
             {
                 // Invocation messages
                 new ProtocolTestData(
@@ -354,8 +353,7 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
             );
         }
 
-        public static IDictionary<string, InvalidMessageData> BaseInvalidPayloads =>
-            new[]
+        public static IDictionary<string, InvalidMessageData> BaseInvalidPayloads => new[]
             {
                 // Message Type
                 new InvalidMessageData(
@@ -562,8 +560,7 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
             Assert.Equal(testData.ErrorMessage, exception.Message);
         }
 
-        public static IDictionary<string, InvalidMessageData> ArgumentBindingErrors =>
-            new[]
+        public static IDictionary<string, InvalidMessageData> ArgumentBindingErrors => new[]
             {
                 // InvocationMessage
                 new InvalidMessageData(
@@ -859,7 +856,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                     6
                 ),
                 new MessageSizeTestData("PingMessage", PingMessage.Instance, 3),
-            }.ToDictionary(t => t.Name);
+            }
+                .ToDictionary(t => t.Name);
 
         public static IEnumerable<object[]> MessageSizeDataNames =>
             MessageSizeData.Keys.Select(name => new object[] { name });

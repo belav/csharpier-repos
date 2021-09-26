@@ -85,9 +85,8 @@ namespace HttpStress
 
         protected override async void OnEventWritten(EventWrittenEventArgs eventData)
         {
-            var sb = new StringBuilder().Append(
-                $"{eventData.TimeStamp:HH:mm:ss.fffffff}[{eventData.EventName}] "
-            );
+            var sb = new StringBuilder()
+                .Append($"{eventData.TimeStamp:HH:mm:ss.fffffff}[{eventData.EventName}] ");
             for (int i = 0; i < eventData.Payload?.Count; i++)
             {
                 if (i > 0)

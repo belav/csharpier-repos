@@ -37,11 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
 
             public ImmutableDictionary<SchemeName, ColorScheme> GetColorSchemes()
             {
-                return new[]
-                {
-                    SchemeName.VisualStudio2019,
-                    SchemeName.VisualStudio2017
-                }.ToImmutableDictionary(name => name, name => GetColorScheme(name));
+                return new[] { SchemeName.VisualStudio2019, SchemeName.VisualStudio2017 }
+                    .ToImmutableDictionary(name => name, name => GetColorScheme(name));
             }
 
             private ColorScheme GetColorScheme(SchemeName schemeName)
@@ -134,9 +131,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             public void MigrateToColorSchemeSetting()
             {
                 // Get the preview feature flag value.
-                var useEnhancedColorsSetting = _workspace.Options.GetOption(
-                    ColorSchemeOptions.LegacyUseEnhancedColors
-                );
+                var useEnhancedColorsSetting = _workspace.Options
+                    .GetOption(ColorSchemeOptions.LegacyUseEnhancedColors);
 
                 // Return if we have already migrated.
                 if (useEnhancedColorsSetting == ColorSchemeOptions.UseEnhancedColors.Migrated)
@@ -150,16 +146,15 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                         : SchemeName.VisualStudio2019;
 
                 _workspace.SetOptions(
-                    _workspace.Options.WithChangedOption(
-                        ColorSchemeOptions.ColorScheme,
-                        colorScheme
-                    )
+                    _workspace.Options
+                        .WithChangedOption(ColorSchemeOptions.ColorScheme, colorScheme)
                 );
                 _workspace.SetOptions(
-                    _workspace.Options.WithChangedOption(
-                        ColorSchemeOptions.LegacyUseEnhancedColors,
-                        ColorSchemeOptions.UseEnhancedColors.Migrated
-                    )
+                    _workspace.Options
+                        .WithChangedOption(
+                            ColorSchemeOptions.LegacyUseEnhancedColors,
+                            ColorSchemeOptions.UseEnhancedColors.Migrated
+                        )
                 );
             }
         }

@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
 
             // let's take the largest (last) StringConcat we can given current textSpan
             var top = possibleExpressions.Where(
-                    expr => IsStringConcat(syntaxFacts, expr, semanticModel, cancellationToken)
-                )
+                expr => IsStringConcat(syntaxFacts, expr, semanticModel, cancellationToken)
+            )
                 .LastOrDefault();
 
             if (top == null)
@@ -83,10 +83,10 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             CollectPiecesDown(syntaxFacts, pieces, top, semanticModel, cancellationToken);
 
             var stringLiterals = pieces.Where(
-                    x =>
-                        syntaxFacts.IsStringLiteralExpression(x)
-                        || syntaxFacts.IsCharacterLiteralExpression(x)
-                )
+                x =>
+                    syntaxFacts.IsStringLiteralExpression(x)
+                    || syntaxFacts.IsCharacterLiteralExpression(x)
+            )
                 .ToImmutableArray();
 
             // If the entire expression is just concatenated strings, then don't offer to

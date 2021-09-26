@@ -115,9 +115,10 @@ namespace Microsoft.AspNetCore.TestHost
         {
             // Arrange
             RequestDelegate appDelegate = async ctx =>
-                await ctx.Response.WriteAsync(
-                    await new StreamReader(ctx.Request.Body).ReadToEndAsync() + " POST Response"
-                );
+                await ctx.Response
+                    .WriteAsync(
+                        await new StreamReader(ctx.Request.Body).ReadToEndAsync() + " POST Response"
+                    );
             var builder = new WebHostBuilder().Configure(app => app.Run(appDelegate));
             var server = new TestServer(builder);
             var client = server.CreateClient();
@@ -219,9 +220,9 @@ namespace Microsoft.AspNetCore.TestHost
 
             // Act
             var response = await client.SendAsync(
-                    httpRequest,
-                    HttpCompletionOption.ResponseHeadersRead
-                )
+                httpRequest,
+                HttpCompletionOption.ResponseHeadersRead
+            )
                 .DefaultTimeout();
 
             await responseStartedSyncPoint.WaitForSyncPoint().DefaultTimeout();
@@ -313,9 +314,9 @@ namespace Microsoft.AspNetCore.TestHost
 
             // Act
             var response = await client.SendAsync(
-                    httpRequest,
-                    HttpCompletionOption.ResponseHeadersRead
-                )
+                httpRequest,
+                HttpCompletionOption.ResponseHeadersRead
+            )
                 .DefaultTimeout();
 
             await responseStartedSyncPoint.WaitForSyncPoint().DefaultTimeout();
@@ -380,9 +381,9 @@ namespace Microsoft.AspNetCore.TestHost
 
             // Act
             var response = await client.SendAsync(
-                    httpRequest,
-                    HttpCompletionOption.ResponseHeadersRead
-                )
+                httpRequest,
+                HttpCompletionOption.ResponseHeadersRead
+            )
                 .DefaultTimeout();
 
             var responseContent = await response.Content.ReadAsStreamAsync().DefaultTimeout();
@@ -401,8 +402,8 @@ namespace Microsoft.AspNetCore.TestHost
                     try
                     {
                         await requestStream.WriteAsync(
-                                Encoding.UTF8.GetBytes(new string('!', 1024 * 1024 * 50))
-                            )
+                            Encoding.UTF8.GetBytes(new string('!', 1024 * 1024 * 50))
+                        )
                             .AsTask()
                             .DefaultTimeout();
                         requestStreamTcs.SetResult(null);
@@ -456,9 +457,9 @@ namespace Microsoft.AspNetCore.TestHost
 
             // Act
             var response = await client.SendAsync(
-                    httpRequest,
-                    HttpCompletionOption.ResponseHeadersRead
-                )
+                httpRequest,
+                HttpCompletionOption.ResponseHeadersRead
+            )
                 .DefaultTimeout();
 
             var responseContent = await response.Content.ReadAsStreamAsync().DefaultTimeout();
@@ -516,9 +517,9 @@ namespace Microsoft.AspNetCore.TestHost
 
             // Act
             var response = await client.SendAsync(
-                    httpRequest,
-                    HttpCompletionOption.ResponseHeadersRead
-                )
+                httpRequest,
+                HttpCompletionOption.ResponseHeadersRead
+            )
                 .DefaultTimeout();
 
             var responseContent = await response.Content.ReadAsStreamAsync().DefaultTimeout();
@@ -573,9 +574,9 @@ namespace Microsoft.AspNetCore.TestHost
 
             // Act
             var response = await client.SendAsync(
-                    httpRequest,
-                    HttpCompletionOption.ResponseHeadersRead
-                )
+                httpRequest,
+                HttpCompletionOption.ResponseHeadersRead
+            )
                 .DefaultTimeout();
 
             var responseContent = await response.Content.ReadAsStreamAsync().DefaultTimeout();
@@ -590,9 +591,9 @@ namespace Microsoft.AspNetCore.TestHost
 
             // Send content and finish request body
             await ExceptionAssert.ThrowsAsync<OperationCanceledException>(
-                    () => requestStream.WriteAsync(Encoding.UTF8.GetBytes("Hello world")).AsTask(),
-                    "Flush was canceled on underlying PipeWriter."
-                )
+                () => requestStream.WriteAsync(Encoding.UTF8.GetBytes("Hello world")).AsTask(),
+                "Flush was canceled on underlying PipeWriter."
+            )
                 .DefaultTimeout();
 
             responseEndingSyncPoint.Continue();
@@ -666,17 +667,16 @@ namespace Microsoft.AspNetCore.TestHost
                 }
             };
             var builder = new WebHostBuilder().ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton<ILogger<IWebHost>>(logger);
-                    }
-                )
-                .Configure(
-                    app =>
-                    {
-                        app.Run(appDelegate);
-                    }
-                );
+                services =>
+                {
+                    services.AddSingleton<ILogger<IWebHost>>(logger);
+                }
+            ).Configure(
+                app =>
+                {
+                    app.Run(appDelegate);
+                }
+            );
             var server = new TestServer(builder);
 
             // Act
@@ -849,9 +849,8 @@ namespace Microsoft.AspNetCore.TestHost
                     }
                 }
             };
-            var builder = new WebHostBuilder().ConfigureServices(
-                    services => services.AddSingleton<ILogger<IWebHost>>(logger)
-                )
+            var builder = new WebHostBuilder()
+                .ConfigureServices(services => services.AddSingleton<ILogger<IWebHost>>(logger))
                 .Configure(app => app.Run(appDelegate));
             var server = new TestServer(builder);
 

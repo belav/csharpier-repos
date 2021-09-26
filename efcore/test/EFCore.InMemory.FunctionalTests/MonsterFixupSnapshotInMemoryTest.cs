@@ -25,14 +25,15 @@ namespace Microsoft.EntityFrameworkCore
                 TDimensions
             >(ModelBuilder builder)
             {
-                base.OnModelCreating<
-                    TMessage,
-                    TProduct,
-                    TProductPhoto,
-                    TProductReview,
-                    TComputerDetail,
-                    TDimensions
-                >(builder);
+                base
+                    .OnModelCreating<
+                        TMessage,
+                        TProduct,
+                        TProductPhoto,
+                        TProductReview,
+                        TComputerDetail,
+                        TDimensions
+                    >(builder);
 
                 builder.Entity<TMessage>().Property(e => e.MessageId).ValueGeneratedOnAdd();
                 builder.Entity<TProductPhoto>().Property(e => e.PhotoId).ValueGeneratedOnAdd();

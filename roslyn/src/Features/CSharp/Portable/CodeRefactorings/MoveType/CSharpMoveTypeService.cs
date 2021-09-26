@@ -36,9 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.MoveType
             CancellationToken cancellationToken
         ) =>
             await document.TryGetRelevantNodeAsync<BaseTypeDeclarationSyntax>(
-                    textSpan,
-                    cancellationToken
-                )
+                textSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
     }
 }

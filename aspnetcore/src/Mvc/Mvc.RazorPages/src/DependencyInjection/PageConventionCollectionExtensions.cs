@@ -672,12 +672,13 @@ namespace Microsoft.Extensions.DependencyInjection
                     selector.AttributeRouteModel.SuppressLinkGeneration = true;
                 }
 
-                model.Selectors.Add(
-                    new SelectorModel
-                    {
-                        AttributeRouteModel = new AttributeRouteModel { Template = route, }
-                    }
-                );
+                model.Selectors
+                    .Add(
+                        new SelectorModel
+                        {
+                            AttributeRouteModel = new AttributeRouteModel { Template = route, }
+                        }
+                    );
             };
         }
 

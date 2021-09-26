@@ -55,9 +55,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                         }
                         else
                         {
-                            m[CodeFixProvider] =
-                                fixAllState.CodeFixProvider.GetType().FullName!.GetHashCode()
-                                    .ToString();
+                            m[CodeFixProvider] = fixAllState.CodeFixProvider.GetType().FullName!
+                                .GetHashCode()
+                                .ToString();
                             m[CodeActionEquivalenceKey] =
                                 fixAllState.CodeActionEquivalenceKey?.GetHashCode().ToString();
                             m[LanguageName] = fixAllState.Project.Language.GetHashCode().ToString();
@@ -71,9 +71,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                                 break;
 
                             case CodeFixes.FixAllScope.Solution:
-                                m[DocumentCount] = fixAllState.Solution.Projects.Sum(
-                                    p => p.DocumentIds.Count
-                                );
+                                m[DocumentCount] = fixAllState.Solution.Projects
+                                    .Sum(p => p.DocumentIds.Count);
                                 break;
                         }
                     }
@@ -163,9 +162,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     {
                         m[CorrelationId] = correlationId;
                         m[DocumentsWithDiagnosticsToFix] = documentsAndDiagnosticsToFixMap.Count;
-                        m[TotalDiagnosticsToFix] = documentsAndDiagnosticsToFixMap.Values.Sum(
-                            v => v.Length
-                        );
+                        m[TotalDiagnosticsToFix] = documentsAndDiagnosticsToFixMap.Values
+                            .Sum(v => v.Length);
                     }
                 )
             );
@@ -183,9 +181,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     {
                         m[CorrelationId] = correlationId;
                         m[ProjectsWithDiagnosticsToFix] = projectsAndDiagnosticsToFixMap.Count;
-                        m[TotalDiagnosticsToFix] = projectsAndDiagnosticsToFixMap.Values.Sum(
-                            v => v.Length
-                        );
+                        m[TotalDiagnosticsToFix] = projectsAndDiagnosticsToFixMap.Values
+                            .Sum(v => v.Length);
                     }
                 )
             );

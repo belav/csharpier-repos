@@ -99,9 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                     && _storeTypeMappings.TryGetValue(storeTypeName, out defaultClrType)
                 )
               ? (RelationalTypeMapping)Activator.CreateInstance(
-                    typeof(SqliteGeometryTypeMapping<>).MakeGenericType(
-                        clrType ?? defaultClrType ?? typeof(Geometry)
-                    ),
+                    typeof(SqliteGeometryTypeMapping<>)
+                        .MakeGenericType(clrType ?? defaultClrType ?? typeof(Geometry)),
                     _geometryServices,
                     storeTypeName ?? defaultStoreType ?? "GEOMETRY"
                 )!

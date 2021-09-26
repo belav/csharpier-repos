@@ -445,10 +445,8 @@ Example tracing commands used to generate the input to this tool:
             {
                 ConsoleColor oldColor = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Error.WriteLine(
-                    Internal.CommandLine.Strings.ErrorWithMessageFmt,
-                    e.Message
-                );
+                Console.Error
+                    .WriteLine(Internal.CommandLine.Strings.ErrorWithMessageFmt, e.Message);
                 Console.ForegroundColor = oldColor;
 
                 CommandLineOptions helpParse = new CommandLineOptions();

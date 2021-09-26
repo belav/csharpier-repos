@@ -92,9 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             var reporter = new TestOperationReporter();
             var migrationAssembly = new MigrationsAssembly(
                 currentContext,
-                new DbContextOptions<TContext>().WithExtension(
-                    new FakeRelationalOptionsExtension()
-                ),
+                new DbContextOptions<TContext>()
+                    .WithExtension(new FakeRelationalOptionsExtension()),
                 idGenerator,
                 new FakeDiagnosticsLogger<DbLoggerCategory.Migrations>()
             );
@@ -115,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     new MigrationsModelDiffer(
                         new TestRelationalTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                            TestServiceFactory.Instance
+                                .Create<RelationalTypeMappingSourceDependencies>()
                         ),
                         new MigrationsAnnotationProvider(
                             new MigrationsAnnotationProviderDependencies()

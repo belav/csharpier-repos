@@ -46,8 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             );
 
             // Assert
-            var feature =
-                resourceExecutingContext.HttpContext.Features.Get<IMiddlewareFilterFeature>();
+            var feature = resourceExecutingContext.HttpContext.Features
+                .Get<IMiddlewareFilterFeature>();
             Assert.NotNull(feature);
             Assert.Same(resourceExecutingContext, feature.ResourceExecutingContext);
             Assert.Same(resourceExecutionDelegate, feature.ResourceExecutionDelegate);
@@ -307,20 +307,18 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
             if (actionThrows)
             {
-                actionDescriptor.MethodInfo =
-                    typeof(ControllerActionInvokerTest.TestController).GetMethod(
+                actionDescriptor.MethodInfo = typeof(ControllerActionInvokerTest.TestController)
+                    .GetMethod(
                         nameof(ControllerActionInvokerTest.TestController.ThrowingActionMethod)
                     );
             }
             else
             {
-                actionDescriptor.MethodInfo =
-                    typeof(ControllerActionInvokerTest.TestController).GetMethod(
-                        nameof(ControllerActionInvokerTest.TestController.ActionMethod)
-                    );
+                actionDescriptor.MethodInfo = typeof(ControllerActionInvokerTest.TestController)
+                    .GetMethod(nameof(ControllerActionInvokerTest.TestController.ActionMethod));
             }
-            actionDescriptor.ControllerTypeInfo =
-                typeof(ControllerActionInvokerTest.TestController).GetTypeInfo();
+            actionDescriptor.ControllerTypeInfo = typeof(ControllerActionInvokerTest.TestController)
+                .GetTypeInfo();
 
             return CreateInvoker(filters, actionDescriptor, _controller);
         }

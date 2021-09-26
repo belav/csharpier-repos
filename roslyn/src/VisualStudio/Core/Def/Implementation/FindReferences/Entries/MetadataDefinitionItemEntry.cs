@@ -35,18 +35,17 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 bool isPreview,
                 CancellationToken cancellationToken
             ) =>
-                DefinitionBucket.DefinitionItem.TryNavigateTo(
-                    Presenter._workspace,
-                    showInPreviewTab: isPreview,
-                    activateTab: !isPreview,
-                    cancellationToken
-                ); // Only activate the tab if not opening in preview
+                DefinitionBucket.DefinitionItem
+                    .TryNavigateTo(
+                        Presenter._workspace,
+                        showInPreviewTab: isPreview,
+                        activateTab: !isPreview,
+                        cancellationToken
+                    ); // Only activate the tab if not opening in preview
 
             protected override IList<Inline> CreateLineTextInlines() =>
-                DefinitionBucket.DefinitionItem.DisplayParts.ToInlines(
-                    Presenter.ClassificationFormatMap,
-                    Presenter.TypeMap
-                );
+                DefinitionBucket.DefinitionItem.DisplayParts
+                    .ToInlines(Presenter.ClassificationFormatMap, Presenter.TypeMap);
         }
     }
 }

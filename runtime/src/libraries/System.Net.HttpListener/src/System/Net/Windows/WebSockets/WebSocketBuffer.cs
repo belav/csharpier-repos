@@ -85,9 +85,9 @@ namespace System.Net.WebSockets
             // Size of the internal buffer owned exclusively by the WSPC.
             int nativeBufferSize = _receiveBufferSize + _sendBufferSize + NativeOverheadBufferSize;
             _startAddress = Marshal.UnsafeAddrOfPinnedArrayElement(
-                    internalBuffer.Array,
-                    internalBuffer.Offset
-                )
+                internalBuffer.Array,
+                internalBuffer.Offset
+            )
                 .ToInt64();
             _endAddress = _startAddress + nativeBufferSize;
             _nativeBuffer = new ArraySegment<byte>(
@@ -237,9 +237,9 @@ namespace System.Net.WebSockets
             _pinnedSendBufferHandle = GCHandle.Alloc(_pinnedSendBuffer.Array, GCHandleType.Pinned);
             bufferHasBeenPinned = true;
             _pinnedSendBufferStartAddress = Marshal.UnsafeAddrOfPinnedArrayElement(
-                    _pinnedSendBuffer.Array!,
-                    _pinnedSendBuffer.Offset
-                )
+                _pinnedSendBuffer.Array!,
+                _pinnedSendBuffer.Offset
+            )
                 .ToInt64();
             _pinnedSendBufferEndAddress = _pinnedSendBufferStartAddress + _pinnedSendBuffer.Count;
         }
@@ -262,9 +262,9 @@ namespace System.Net.WebSockets
 
             Debug.Assert(
                 Marshal.UnsafeAddrOfPinnedArrayElement(
-                        _pinnedSendBuffer.Array!,
-                        _pinnedSendBuffer.Offset
-                    )
+                    _pinnedSendBuffer.Array!,
+                    _pinnedSendBuffer.Offset
+                )
                     .ToInt64() == _pinnedSendBufferStartAddress,
                 "'m_PinnedSendBuffer.Array' MUST be pinned during the entire send operation."
             );
@@ -287,9 +287,9 @@ namespace System.Net.WebSockets
 
             Debug.Assert(
                 Marshal.UnsafeAddrOfPinnedArrayElement(
-                        _pinnedSendBuffer.Array!,
-                        _pinnedSendBuffer.Offset
-                    )
+                    _pinnedSendBuffer.Array!,
+                    _pinnedSendBuffer.Offset
+                )
                     .ToInt64() == _pinnedSendBufferStartAddress,
                 "'m_PinnedSendBuffer.Array' MUST be pinned during the entire send operation."
             );
@@ -522,11 +522,8 @@ namespace System.Net.WebSockets
 
                 // No need to wrap DecoderFallbackException for invalid UTF8 chacters, because
                 // Encoding.UTF8 will not throw but replace invalid characters instead.
-                reason = Encoding.UTF8.GetString(
-                    reasonBlob.Array!,
-                    reasonBlob.Offset,
-                    reasonBlob.Count
-                );
+                reason = Encoding.UTF8
+                    .GetString(reasonBlob.Array!, reasonBlob.Offset, reasonBlob.Count);
             }
         }
 
@@ -751,9 +748,9 @@ namespace System.Net.WebSockets
 
             Debug.Assert(
                 Marshal.UnsafeAddrOfPinnedArrayElement(
-                        _internalBuffer.Array!,
-                        _internalBuffer.Offset
-                    )
+                    _internalBuffer.Array!,
+                    _internalBuffer.Offset
+                )
                     .ToInt64() == _startAddress,
                 "'m_InternalBuffer.Array' MUST be pinned for the whole lifetime of a WebSocket."
             );

@@ -15,9 +15,8 @@ namespace Microsoft.CodeAnalysis.Razor
           ITagHelperDescriptorProvider
     {
         private static readonly SymbolDisplayFormat FullNameTypeDisplayFormat =
-            SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
-                    SymbolDisplayGlobalNamespaceStyle.Omitted
-                )
+            SymbolDisplayFormat.FullyQualifiedFormat
+                .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
                 .WithMiscellaneousOptions(
                     SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions
                         & (~SymbolDisplayMiscellaneousOptions.UseSpecialTypes)
@@ -83,20 +82,22 @@ namespace Microsoft.CodeAnalysis.Razor
                 )
                 {
                     // Synthesize a separate tag helper for each child content property that's declared.
-                    context.Results.Add(
-                        CreateChildContentDescriptor(
-                            symbols,
-                            shortNameMatchingDescriptor,
-                            childContent
-                        )
-                    );
-                    context.Results.Add(
-                        CreateChildContentDescriptor(
-                            symbols,
-                            fullyQualifiedNameMatchingDescriptor,
-                            childContent
-                        )
-                    );
+                    context.Results
+                        .Add(
+                            CreateChildContentDescriptor(
+                                symbols,
+                                shortNameMatchingDescriptor,
+                                childContent
+                            )
+                        );
+                    context.Results
+                        .Add(
+                            CreateChildContentDescriptor(
+                                symbols,
+                                fullyQualifiedNameMatchingDescriptor,
+                                childContent
+                            )
+                        );
                 }
             }
         }
@@ -165,10 +166,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 var cascadeGenericTypeAttributes = type.GetAttributes()
                     .Where(
                         a =>
-                            SymbolEqualityComparer.Default.Equals(
-                                a.AttributeClass,
-                                symbols.CascadingTypeParameterAttribute
-                            )
+                            SymbolEqualityComparer.Default
+                                .Equals(a.AttributeClass, symbols.CascadingTypeParameterAttribute)
                     )
                     .Select(
                         attribute => attribute.ConstructorArguments.FirstOrDefault().Value as string
@@ -207,14 +206,16 @@ namespace Microsoft.CodeAnalysis.Razor
 
             if (
                 builder.BoundAttributes.Any(a => a.IsParameterizedChildContentProperty())
-                && !builder.BoundAttributes.Any(
-                    a =>
-                        string.Equals(
-                            a.Name,
-                            ComponentMetadata.ChildContent.ParameterAttributeName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                )
+                && !builder.BoundAttributes
+                    .Any(
+                        a =>
+                            string
+                                .Equals(
+                                    a.Name,
+                                    ComponentMetadata.ChildContent.ParameterAttributeName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                    )
             )
             {
                 // If we have any parameterized child content parameters, synthesize a 'Context' parameter to be
@@ -246,34 +247,26 @@ namespace Microsoft.CodeAnalysis.Razor
 
                     if (kind == PropertyKind.ChildContent)
                     {
-                        pb.Metadata.Add(
-                            ComponentMetadata.Component.ChildContentKey,
-                            bool.TrueString
-                        );
+                        pb.Metadata
+                            .Add(ComponentMetadata.Component.ChildContentKey, bool.TrueString);
                     }
 
                     if (kind == PropertyKind.EventCallback)
                     {
-                        pb.Metadata.Add(
-                            ComponentMetadata.Component.EventCallbackKey,
-                            bool.TrueString
-                        );
+                        pb.Metadata
+                            .Add(ComponentMetadata.Component.EventCallbackKey, bool.TrueString);
                     }
 
                     if (kind == PropertyKind.Delegate)
                     {
-                        pb.Metadata.Add(
-                            ComponentMetadata.Component.DelegateSignatureKey,
-                            bool.TrueString
-                        );
+                        pb.Metadata
+                            .Add(ComponentMetadata.Component.DelegateSignatureKey, bool.TrueString);
                     }
 
                     if (HasTypeParameter(property.Type))
                     {
-                        pb.Metadata.Add(
-                            ComponentMetadata.Component.GenericTypedKey,
-                            bool.TrueString
-                        );
+                        pb.Metadata
+                            .Add(ComponentMetadata.Component.GenericTypedKey, bool.TrueString);
                     }
 
                     var xml = property.GetDocumentationCommentXml();
@@ -346,12 +339,13 @@ namespace Microsoft.CodeAnalysis.Razor
                     pb.Metadata[ComponentMetadata.Component.TypeParameterIsCascadingKey] =
                         cascade.ToString();
 
-                    pb.Documentation = string.Format(
-                        CultureInfo.InvariantCulture,
-                        ComponentResources.ComponentTypeParameter_Documentation,
-                        typeParameter.Name,
-                        builder.Name
-                    );
+                    pb.Documentation = string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            ComponentResources.ComponentTypeParameter_Documentation,
+                            typeParameter.Name,
+                            builder.Name
+                        );
                 }
             );
         }
@@ -425,10 +419,11 @@ namespace Microsoft.CodeAnalysis.Razor
                 {
                     b.Name = ComponentMetadata.ChildContent.ParameterAttributeName;
                     b.TypeName = typeof(string).FullName;
-                    b.Metadata.Add(
-                        ComponentMetadata.Component.ChildContentParameterNameKey,
-                        bool.TrueString
-                    );
+                    b.Metadata
+                        .Add(
+                            ComponentMetadata.Component.ChildContentParameterNameKey,
+                            bool.TrueString
+                        );
                     b.Metadata.Add(TagHelperMetadata.Common.PropertyName, b.Name);
 
                     if (childContentName == null)
@@ -438,11 +433,12 @@ namespace Microsoft.CodeAnalysis.Razor
                     }
                     else
                     {
-                        b.Documentation = string.Format(
-                            CultureInfo.InvariantCulture,
-                            ComponentResources.ChildContentParameterName_Documentation,
-                            childContentName
-                        );
+                        b.Documentation = string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                ComponentResources.ChildContentParameterName_Documentation,
+                                childContentName
+                            );
                     }
                 }
             );
@@ -524,10 +520,8 @@ namespace Microsoft.CodeAnalysis.Razor
                         !property.GetAttributes()
                             .Any(
                                 a =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        a.AttributeClass,
-                                        symbols.ParameterAttribute
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(a.AttributeClass, symbols.ParameterAttribute)
                             )
                     )
                     {
@@ -549,10 +543,8 @@ namespace Microsoft.CodeAnalysis.Razor
 
                     if (
                         kind == PropertyKind.Default
-                        && SymbolEqualityComparer.Default.Equals(
-                            property.Type,
-                            symbols.RenderFragment
-                        )
+                        && SymbolEqualityComparer.Default
+                            .Equals(property.Type, symbols.RenderFragment)
                     )
                     {
                         kind = PropertyKind.ChildContent;
@@ -562,10 +554,8 @@ namespace Microsoft.CodeAnalysis.Razor
                         kind == PropertyKind.Default
                         && property.Type is INamedTypeSymbol namedType
                         && namedType.IsGenericType
-                        && SymbolEqualityComparer.Default.Equals(
-                            namedType.ConstructedFrom,
-                            symbols.RenderFragmentOfT
-                        )
+                        && SymbolEqualityComparer.Default
+                            .Equals(namedType.ConstructedFrom, symbols.RenderFragmentOfT)
                     )
                     {
                         kind = PropertyKind.ChildContent;
@@ -573,10 +563,8 @@ namespace Microsoft.CodeAnalysis.Razor
 
                     if (
                         kind == PropertyKind.Default
-                        && SymbolEqualityComparer.Default.Equals(
-                            property.Type,
-                            symbols.EventCallback
-                        )
+                        && SymbolEqualityComparer.Default
+                            .Equals(property.Type, symbols.EventCallback)
                     )
                     {
                         kind = PropertyKind.EventCallback;
@@ -586,10 +574,8 @@ namespace Microsoft.CodeAnalysis.Razor
                         kind == PropertyKind.Default
                         && property.Type is INamedTypeSymbol namedType2
                         && namedType2.IsGenericType
-                        && SymbolEqualityComparer.Default.Equals(
-                            namedType2.ConstructedFrom,
-                            symbols.EventCallbackOfT
-                        )
+                        && SymbolEqualityComparer.Default
+                            .Equals(namedType2.ConstructedFrom, symbols.EventCallbackOfT)
                     )
                     {
                         kind = PropertyKind.EventCallback;

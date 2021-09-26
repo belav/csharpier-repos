@@ -86,14 +86,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 }
                 else
                 {
-                    destination = string.Compare(
-                        @string,
-                        segment.Start,
-                        @string,
-                        0,
-                        segment.Length,
-                        StringComparison.OrdinalIgnoreCase
-                    );
+                    destination = string
+                        .Compare(
+                            @string,
+                            segment.Start,
+                            @string,
+                            0,
+                            segment.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        );
                 }
             }
 

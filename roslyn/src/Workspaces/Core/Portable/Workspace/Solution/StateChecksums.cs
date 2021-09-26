@@ -92,11 +92,11 @@ namespace Microsoft.CodeAnalysis.Serialization
                 }
 
                 await projectStateChecksums.FindAsync(
-                        projectState,
-                        searchingChecksumsLeft,
-                        result,
-                        cancellationToken
-                    )
+                    projectState,
+                    searchingChecksumsLeft,
+                    result,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (searchingChecksumsLeft.Count == 0)
                 {
@@ -245,25 +245,25 @@ namespace Microsoft.CodeAnalysis.Serialization
             );
 
             await ChecksumCollection.FindAsync(
-                    state.DocumentStates,
-                    searchingChecksumsLeft,
-                    result,
-                    cancellationToken
-                )
+                state.DocumentStates,
+                searchingChecksumsLeft,
+                result,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             await ChecksumCollection.FindAsync(
-                    state.AdditionalDocumentStates,
-                    searchingChecksumsLeft,
-                    result,
-                    cancellationToken
-                )
+                state.AdditionalDocumentStates,
+                searchingChecksumsLeft,
+                result,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             await ChecksumCollection.FindAsync(
-                    state.AnalyzerConfigDocumentStates,
-                    searchingChecksumsLeft,
-                    result,
-                    cancellationToken
-                )
+                state.AnalyzerConfigDocumentStates,
+                searchingChecksumsLeft,
+                result,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }
@@ -305,9 +305,9 @@ namespace Microsoft.CodeAnalysis.Serialization
             if (searchingChecksumsLeft.Remove(Text))
             {
                 result[Text] = await SerializableSourceText.FromTextDocumentStateAsync(
-                        state,
-                        cancellationToken
-                    )
+                    state,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

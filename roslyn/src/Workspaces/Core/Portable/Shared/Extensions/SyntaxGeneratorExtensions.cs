@@ -68,13 +68,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                       isContainedInUnsafeType
                   );
             var statements = factory.CreateAssignmentStatements(
-                    semanticModel,
-                    parameters,
-                    parameterToExistingMemberMap,
-                    parameterToNewMemberMap,
-                    addNullChecks,
-                    preferThrowExpression
-                )
+                semanticModel,
+                parameters,
+                parameterToExistingMemberMap,
+                parameterToNewMemberMap,
+                addNullChecks,
+                preferThrowExpression
+            )
                 .SelectAsArray(s => s.WithAdditionalAnnotations(Simplifier.Annotation));
 
             var constructor = CodeGenerationSymbolFactory.CreateConstructorSymbol(
@@ -239,9 +239,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             IParameterSymbol parameter
         ) =>
             factory.ObjectCreationExpression(
-                    compilation.GetTypeByMetadataName("System.ArgumentNullException"),
-                    factory.NameOfExpression(factory.IdentifierName(parameter.Name))
-                )
+                compilation.GetTypeByMetadataName("System.ArgumentNullException"),
+                factory.NameOfExpression(factory.IdentifierName(parameter.Name))
+            )
                 .WithAdditionalAnnotations(Simplifier.AddImportsAnnotation);
 
         public static SyntaxNode CreateNullCheckAndThrowStatement(
@@ -278,10 +278,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             var identifier = factory.IdentifierName(identifierName);
             var nullExpr = factory.NullLiteralExpression();
-            var condition = factory.SyntaxGeneratorInternal.SupportsPatterns(
-                semanticModel.SyntaxTree.Options
-            )
-                ? factory.SyntaxGeneratorInternal.IsPatternExpression(
+            var condition = factory.SyntaxGeneratorInternal
+            .SupportsPatterns(semanticModel.SyntaxTree.Options)
+                ? factory.SyntaxGeneratorInternal
+                  .IsPatternExpression(
                       identifier,
                       factory.SyntaxGeneratorInternal.ConstantPattern(nullExpr)
                   )
@@ -329,9 +329,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                     {
                         var fieldAccess = factory.MemberAccessExpression(
-                                factory.ThisExpression(),
-                                factory.IdentifierName(fieldName)
-                            )
+                            factory.ThisExpression(),
+                            factory.IdentifierName(fieldName)
+                        )
                             .WithAdditionalAnnotations(Simplifier.Annotation);
 
                         factory.AddAssignmentStatements(
@@ -429,19 +429,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             CancellationToken cancellationToken
         )
         {
-            var getAccessibility = overriddenProperty.GetMethod.ComputeResultantAccessibility(
-                containingType
-            );
-            var setAccessibility = overriddenProperty.SetMethod.ComputeResultantAccessibility(
-                containingType
-            );
+            var getAccessibility = overriddenProperty.GetMethod
+                .ComputeResultantAccessibility(containingType);
+            var setAccessibility = overriddenProperty.SetMethod
+                .ComputeResultantAccessibility(containingType);
 
             SyntaxNode getBody;
             SyntaxNode setBody;
             // Implement an abstract property by throwing not implemented in accessors.
             if (overriddenProperty.IsAbstract)
             {
-                var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+                var compilation = await document.Project
+                    .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var statement = codeFactory.CreateThrowNotImplementedStatement(compilation);
 
@@ -482,10 +481,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     document.Project.Language == LanguageNames.CSharp
                     && (
                         await SymbolFinder.FindSourceDefinitionAsync(
-                                overriddenProperty,
-                                document.Project.Solution,
-                                cancellationToken
-                            )
+                            overriddenProperty,
+                            document.Project.Solution,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     ).Language == LanguageNames.VisualBasic
                 )
@@ -658,23 +657,23 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (symbol is IMethodSymbol method)
             {
                 return await generator.OverrideMethodAsync(
-                        method,
-                        modifiers,
-                        containingType,
-                        document,
-                        cancellationToken
-                    )
+                    method,
+                    modifiers,
+                    containingType,
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else if (symbol is IPropertySymbol property)
             {
                 return await generator.OverridePropertyAsync(
-                        property,
-                        modifiers,
-                        containingType,
-                        document,
-                        cancellationToken
-                    )
+                    property,
+                    modifiers,
+                    containingType,
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else if (symbol is IEventSymbol ev)
@@ -705,7 +704,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // Abstract: Throw not implemented
             if (overriddenMethod.IsAbstract)
             {
-                var compilation = await newDocument.Project.GetCompilationAsync(cancellationToken)
+                var compilation = await newDocument.Project
+                    .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var statement = codeFactory.CreateThrowNotImplementedStatement(compilation);
 

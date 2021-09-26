@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 F.Call(
                                     receiver: null,
                                     ContainingType.GetMembers(
-                                            WellKnownMemberNames.EqualityOperatorName
-                                        )
+                                        WellKnownMemberNames.EqualityOperatorName
+                                    )
                                         .OfType<SynthesizedRecordEqualityOperator>()
                                         .Single(),
                                     F.Parameter(Parameters[0]),

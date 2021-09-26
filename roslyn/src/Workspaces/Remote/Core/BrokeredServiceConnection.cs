@@ -84,10 +84,10 @@ namespace Microsoft.CodeAnalysis.Remote
             var options = new ServiceActivationOptions { ClientRpcTarget = _callbackDispatcher };
 
             var proxyRental = await _serviceBrokerClient.GetProxyAsync<TService>(
-                    _serviceDescriptor,
-                    options,
-                    cancellationToken
-                )
+                _serviceDescriptor,
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var service = proxyRental.Proxy;
             Contract.ThrowIfNull(service);
@@ -143,11 +143,11 @@ namespace Microsoft.CodeAnalysis.Remote
             {
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
                 return await InvokeStreamingServiceAsync(
-                        rental.Service,
-                        invocation,
-                        reader,
-                        cancellationToken
-                    )
+                    rental.Service,
+                    invocation,
+                    reader,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception exception)
@@ -219,9 +219,9 @@ namespace Microsoft.CodeAnalysis.Remote
             try
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(
-                        solution,
-                        cancellationToken
-                    )
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
                 await invocation(rental.Service, scope.SolutionInfo, cancellationToken)
@@ -245,9 +245,9 @@ namespace Microsoft.CodeAnalysis.Remote
             try
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(
-                        solution,
-                        cancellationToken
-                    )
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
                 return await invocation(rental.Service, scope.SolutionInfo, cancellationToken)
@@ -271,18 +271,18 @@ namespace Microsoft.CodeAnalysis.Remote
             try
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(
-                        solution,
-                        cancellationToken
-                    )
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
                 return await InvokeStreamingServiceAsync(
-                        rental.Service,
-                        (service, pipeWriter, cancellationToken) =>
-                            invocation(service, scope.SolutionInfo, pipeWriter, cancellationToken),
-                        reader,
-                        cancellationToken
-                    )
+                    rental.Service,
+                    (service, pipeWriter, cancellationToken) =>
+                        invocation(service, scope.SolutionInfo, pipeWriter, cancellationToken),
+                    reader,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception exception)
@@ -312,17 +312,17 @@ namespace Microsoft.CodeAnalysis.Remote
             try
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(
-                        solution,
-                        cancellationToken
-                    )
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
                 await invocation(
-                        rental.Service,
-                        scope.SolutionInfo,
-                        _callbackHandle.Id,
-                        cancellationToken
-                    )
+                    rental.Service,
+                    scope.SolutionInfo,
+                    _callbackHandle.Id,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return true;
@@ -352,17 +352,17 @@ namespace Microsoft.CodeAnalysis.Remote
             try
             {
                 using var scope = await _solutionAssetStorage.StoreAssetsAsync(
-                        solution,
-                        cancellationToken
-                    )
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
                 return await invocation(
-                        rental.Service,
-                        scope.SolutionInfo,
-                        _callbackHandle.Id,
-                        cancellationToken
-                    )
+                    rental.Service,
+                    scope.SolutionInfo,
+                    _callbackHandle.Id,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception exception)
@@ -535,26 +535,29 @@ namespace Microsoft.CodeAnalysis.Remote
 
             if (IsRemoteIOException(exception))
             {
-                message = string.Format(
-                    RemoteWorkspacesResources.Feature_0_is_currently_unavailable_due_to_an_intermittent_error,
-                    featureName,
-                    exception.Message
-                );
+                message = string
+                    .Format(
+                        RemoteWorkspacesResources.Feature_0_is_currently_unavailable_due_to_an_intermittent_error,
+                        featureName,
+                        exception.Message
+                    );
             }
             else if (IsHostShuttingDown)
             {
-                message = string.Format(
-                    RemoteWorkspacesResources.Feature_0_is_currently_unavailable_host_shutting_down,
-                    featureName,
-                    _errorReportingService.HostDisplayName
-                );
+                message = string
+                    .Format(
+                        RemoteWorkspacesResources.Feature_0_is_currently_unavailable_host_shutting_down,
+                        featureName,
+                        _errorReportingService.HostDisplayName
+                    );
             }
             else
             {
-                message = string.Format(
-                    RemoteWorkspacesResources.Feature_0_is_currently_unavailable_due_to_an_internal_error,
-                    featureName
-                );
+                message = string
+                    .Format(
+                        RemoteWorkspacesResources.Feature_0_is_currently_unavailable_due_to_an_internal_error,
+                        featureName
+                    );
                 internalException = exception;
             }
 

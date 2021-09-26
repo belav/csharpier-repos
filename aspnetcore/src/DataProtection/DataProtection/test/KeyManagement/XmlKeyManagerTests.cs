@@ -147,12 +147,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             // After the call to CreateNewKey, the first CT should be fired,
             // and we should've gotten a new CT.
-            var newKey = ((IInternalXmlKeyManager)keyManager).CreateNewKey(
-                keyId: keyId,
-                creationDate: creationDate,
-                activationDate: activationDate,
-                expirationDate: expirationDate
-            );
+            var newKey = ((IInternalXmlKeyManager)keyManager)
+                .CreateNewKey(
+                    keyId: keyId,
+                    creationDate: creationDate,
+                    activationDate: activationDate,
+                    expirationDate: expirationDate
+                );
             var secondCancellationToken = keyManager.GetCacheExpirationToken();
             Assert.True(firstCancellationToken.IsCancellationRequested);
             Assert.False(secondCancellationToken.IsCancellationRequested);
@@ -267,12 +268,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             // After the call to CreateNewKey, the first CT should be fired,
             // and we should've gotten a new CT.
-            var newKey = ((IInternalXmlKeyManager)keyManager).CreateNewKey(
-                keyId: keyId,
-                creationDate: creationDate,
-                activationDate: activationDate,
-                expirationDate: expirationDate
-            );
+            var newKey = ((IInternalXmlKeyManager)keyManager)
+                .CreateNewKey(
+                    keyId: keyId,
+                    creationDate: creationDate,
+                    activationDate: activationDate,
+                    expirationDate: expirationDate
+                );
             var secondCancellationToken = keyManager.GetCacheExpirationToken();
             Assert.True(firstCancellationToken.IsCancellationRequested);
             Assert.False(secondCancellationToken.IsCancellationRequested);
@@ -358,14 +360,14 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             DateTimeOffset expirationDate = activationDate.AddMonths(1);
             var mockInternalKeyManager = new Mock<IInternalXmlKeyManager>();
             mockInternalKeyManager.Setup(
-                    o =>
-                        o.CreateNewKey(
-                            It.IsAny<Guid>(),
-                            It.IsAny<DateTimeOffset>(),
-                            activationDate,
-                            expirationDate
-                        )
-                )
+                o =>
+                    o.CreateNewKey(
+                        It.IsAny<Guid>(),
+                        It.IsAny<DateTimeOffset>(),
+                        activationDate,
+                        expirationDate
+                    )
+            )
                 .Callback<Guid, DateTimeOffset, DateTimeOffset, DateTimeOffset>(
                     (innerKeyId, innerCreationDate, innerActivationDate, innerExpirationDate) =>
                     {
@@ -847,11 +849,12 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             // After the call to RevokeKey, the first CT should be fired,
             // and we should've gotten a new CT.
-            ((IInternalXmlKeyManager)keyManager).RevokeSingleKey(
-                keyId: new Guid("a11f35fc-1fed-4bd4-b727-056a63b70932"),
-                revocationDate: revocationDate,
-                reason: "Here's some reason text."
-            );
+            ((IInternalXmlKeyManager)keyManager)
+                .RevokeSingleKey(
+                    keyId: new Guid("a11f35fc-1fed-4bd4-b727-056a63b70932"),
+                    revocationDate: revocationDate,
+                    reason: "Here's some reason text."
+                );
             var secondCancellationToken = keyManager.GetCacheExpirationToken();
             Assert.True(firstCancellationToken.IsCancellationRequested);
             Assert.False(secondCancellationToken.IsCancellationRequested);
@@ -883,13 +886,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             DateTimeOffset? actualRevocationDate = null;
             var mockInternalKeyManager = new Mock<IInternalXmlKeyManager>();
             mockInternalKeyManager.Setup(
-                    o =>
-                        o.RevokeSingleKey(
-                            keyToRevoke,
-                            It.IsAny<DateTimeOffset>(),
-                            "Here's some reason text."
-                        )
-                )
+                o =>
+                    o.RevokeSingleKey(
+                        keyToRevoke,
+                        It.IsAny<DateTimeOffset>(),
+                        "Here's some reason text."
+                    )
+            )
                 .Callback<Guid, DateTimeOffset, string>(
                     (innerKeyId, innerRevocationDate, innerReason) =>
                     {

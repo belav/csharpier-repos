@@ -35,13 +35,8 @@ namespace System.Web.Mvc.Test
                 ViewEngineCollection = viewEngineCollection.Object
             };
             viewEngine.Setup(
-                    e =>
-                        e.FindPartialView(
-                            It.IsAny<ControllerContext>(),
-                            _viewName,
-                            It.IsAny<bool>()
-                        )
-                )
+                e => e.FindPartialView(It.IsAny<ControllerContext>(), _viewName, It.IsAny<bool>())
+            )
                 .Callback<ControllerContext, string, bool>(
                     (controllerContext, viewName, useCache) =>
                     {
@@ -51,8 +46,8 @@ namespace System.Web.Mvc.Test
                 )
                 .Returns(new ViewEngineResult(view.Object, viewEngine.Object));
             viewEngineCollection.Setup(
-                    e => e.FindPartialView(It.IsAny<ControllerContext>(), _viewName)
-                )
+                e => e.FindPartialView(It.IsAny<ControllerContext>(), _viewName)
+            )
                 .Returns(new ViewEngineResult(view.Object, viewEngine.Object));
             view.Setup(o => o.Render(It.IsAny<ViewContext>(), httpContext.Response.Output))
                 .Callback<ViewContext, TextWriter>(
@@ -102,17 +97,12 @@ namespace System.Web.Mvc.Test
                 ViewEngineCollection = viewEngineCollection.Object
             };
             viewEngineCollection.Setup(
-                    e => e.FindPartialView(It.IsAny<ControllerContext>(), _viewName)
-                )
+                e => e.FindPartialView(It.IsAny<ControllerContext>(), _viewName)
+            )
                 .Returns(new ViewEngineResult(new[] { "location1", "location2" }));
             viewEngine.Setup(
-                    e =>
-                        e.FindPartialView(
-                            It.IsAny<ControllerContext>(),
-                            _viewName,
-                            It.IsAny<bool>()
-                        )
-                )
+                e => e.FindPartialView(It.IsAny<ControllerContext>(), _viewName, It.IsAny<bool>())
+            )
                 .Callback<ControllerContext, string, bool>(
                     (controllerContext, viewName, useCache) =>
                     {
@@ -170,17 +160,12 @@ namespace System.Web.Mvc.Test
                     }
                 );
             viewEngineCollection.Setup(
-                    e => e.FindPartialView(It.IsAny<ControllerContext>(), _viewName)
-                )
+                e => e.FindPartialView(It.IsAny<ControllerContext>(), _viewName)
+            )
                 .Returns(new ViewEngineResult(view.Object, viewEngine.Object));
             viewEngine.Setup(
-                    e =>
-                        e.FindPartialView(
-                            It.IsAny<ControllerContext>(),
-                            _viewName,
-                            It.IsAny<bool>()
-                        )
-                )
+                e => e.FindPartialView(It.IsAny<ControllerContext>(), _viewName, It.IsAny<bool>())
+            )
                 .Callback<ControllerContext, string, bool>(
                     (controllerContext, viewName, useCache) =>
                     {

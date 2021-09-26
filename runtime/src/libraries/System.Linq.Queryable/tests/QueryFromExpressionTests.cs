@@ -507,7 +507,8 @@ namespace System.Linq.Tests
         public void EnumerableQueryableAsInternalArgumentToMethod()
         {
             Expression call = Expression.Call(
-                typeof(TestLinqExtensions).GetMethods()
+                typeof(TestLinqExtensions)
+                    .GetMethods()
                     .First(
                         mi =>
                             mi.Name == "RunningTotals"
@@ -524,7 +525,8 @@ namespace System.Linq.Tests
         public void EnumerableQueryableAsInternalArgumentToMethodNoMatch()
         {
             Expression call = Expression.Call(
-                typeof(TestLinqExtensions).GetMethods()
+                typeof(TestLinqExtensions)
+                    .GetMethods()
                     .First(
                         mi =>
                             mi.Name == "RunningTotalsNoMatch"
@@ -540,7 +542,8 @@ namespace System.Linq.Tests
         public void EnumerableQueryableAsInternalArgumentToMethodNoArgumentMatch()
         {
             Expression call = Expression.Call(
-                typeof(TestLinqExtensions).GetMethods()
+                typeof(TestLinqExtensions)
+                    .GetMethods()
                     .First(mi => mi.Name == "RunningTotals" && mi.GetParameters().Length == 2),
                 Expression.Constant(Enumerable.Range(1, 3).AsQueryable()),
                 Expression.Constant(3)
@@ -554,7 +557,8 @@ namespace System.Linq.Tests
         {
             Expression call = Expression.Call(
                 Expression.Constant(new TestLinqInstanceNoMatch()),
-                typeof(TestLinqInstanceNoMatch).GetMethods()
+                typeof(TestLinqInstanceNoMatch)
+                    .GetMethods()
                     .First(mi => mi.Name == "RunningTotals"),
                 Expression.Constant(Enumerable.Range(1, 3).AsQueryable())
             );

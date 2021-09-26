@@ -259,7 +259,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             else if (httpContext.Request.Path == "/upgrade")
             {
                 using (
-                    var stream = await httpContext.Features.Get<IHttpUpgradeFeature>()
+                    var stream = await httpContext.Features
+                        .Get<IHttpUpgradeFeature>()
                         .UpgradeAsync()
                 )
                 {

@@ -104,9 +104,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 )
                                 {
                                     await Task.WhenAll(
-                                            GlobalOperationTask,
-                                            HigherQueueOperationTask
-                                        )
+                                        GlobalOperationTask,
+                                        HigherQueueOperationTask
+                                    )
                                         .ConfigureAwait(false);
                                 }
 

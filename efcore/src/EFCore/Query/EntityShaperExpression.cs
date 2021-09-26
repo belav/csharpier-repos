@@ -28,9 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     public class EntityShaperExpression : Expression, IPrintableExpression
     {
         private static readonly MethodInfo _createUnableToDiscriminateException =
-            typeof(EntityShaperExpression).GetRequiredDeclaredMethod(
-                nameof(CreateUnableToDiscriminateException)
-            );
+            typeof(EntityShaperExpression)
+                .GetRequiredDeclaredMethod(nameof(CreateUnableToDiscriminateException));
 
         [UsedImplicitly]
         private static Exception CreateUnableToDiscriminateException(

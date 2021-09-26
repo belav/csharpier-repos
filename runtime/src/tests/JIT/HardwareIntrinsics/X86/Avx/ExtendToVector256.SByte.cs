@@ -217,7 +217,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Avx).GetMethod(nameof(Avx.ExtendToVector256))
+            var result = typeof(Avx)
+                .GetMethod(nameof(Avx.ExtendToVector256))
                 .MakeGenericMethod(new Type[] { typeof(SByte) })
                 .Invoke(
                     null,
@@ -232,7 +233,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Avx).GetMethod(nameof(Avx.ExtendToVector256))
+            var result = typeof(Avx)
+                .GetMethod(nameof(Avx.ExtendToVector256))
                 .MakeGenericMethod(new Type[] { typeof(SByte) })
                 .Invoke(null, new object[] { Sse2.LoadVector128((SByte*)(_dataTable.inArrayPtr)) });
 
@@ -244,7 +246,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Avx).GetMethod(nameof(Avx.ExtendToVector256))
+            var result = typeof(Avx)
+                .GetMethod(nameof(Avx.ExtendToVector256))
                 .MakeGenericMethod(new Type[] { typeof(SByte) })
                 .Invoke(
                     null,
@@ -420,15 +423,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!Succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Avx)}.{nameof(Avx.ExtendToVector256)}<SByte>(Vector128<SByte>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Avx)}.{nameof(Avx.ExtendToVector256)}<SByte>(Vector128<SByte>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"   result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }
         }

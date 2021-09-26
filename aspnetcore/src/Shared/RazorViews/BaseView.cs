@@ -315,12 +315,13 @@ namespace Microsoft.Extensions.RazorViews
             }
 
             // Split on line breaks before passing it through the encoder.
-            return string.Join(
-                "<br />" + Environment.NewLine,
-                input.Split("\r\n", StringSplitOptions.None)
-                    .SelectMany(s => s.Split(NewLineChars, StringSplitOptions.None))
-                    .Select(HtmlEncoder.Encode)
-            );
+            return string
+                .Join(
+                    "<br />" + Environment.NewLine,
+                    input.Split("\r\n", StringSplitOptions.None)
+                        .SelectMany(s => s.Split(NewLineChars, StringSplitOptions.None))
+                        .Select(HtmlEncoder.Encode)
+                );
         }
     }
 }

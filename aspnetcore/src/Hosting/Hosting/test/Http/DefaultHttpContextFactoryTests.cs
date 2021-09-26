@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Http
         public void CreateHttpContextSetsHttpContextAccessor()
         {
             // Arrange
-            var services = new ServiceCollection().AddOptions()
+            var services = new ServiceCollection()
+                .AddOptions()
                 .AddHttpContextAccessor()
                 .BuildServiceProvider();
             var accessor = services.GetRequiredService<IHttpContextAccessor>();
@@ -30,7 +31,8 @@ namespace Microsoft.AspNetCore.Http
         public void DisposeHttpContextSetsHttpContextAccessorToNull()
         {
             // Arrange
-            var services = new ServiceCollection().AddOptions()
+            var services = new ServiceCollection()
+                .AddOptions()
                 .AddHttpContextAccessor()
                 .BuildServiceProvider();
             var accessor = services.GetRequiredService<IHttpContextAccessor>();

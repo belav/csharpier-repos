@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Tools.Logging
                 [LogLevel.Debug] = ConsoleColor.Gray,
                 [LogLevel.Trace] = ConsoleColor.Gray,
                 [LogLevel.None] = ConsoleColor.White,
-            }.ToImmutableDictionary();
+            }
+                .ToImmutableDictionary();
 
         public SimpleConsoleLogger(
             IConsole console,

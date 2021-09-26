@@ -85,11 +85,11 @@ namespace System.IO.Tests
             {
                 Assert.Throws<PlatformNotSupportedException>(() => fs.Lock(0, 100));
                 File.Open(
-                        path,
-                        FileMode.Open,
-                        FileAccess.Write,
-                        FileShare.ReadWrite | FileShare.Delete
-                    )
+                    path,
+                    FileMode.Open,
+                    FileAccess.Write,
+                    FileShare.ReadWrite | FileShare.Delete
+                )
                     .Dispose();
                 Assert.Throws<PlatformNotSupportedException>(() => fs.Unlock(0, 100));
             }
@@ -310,50 +310,48 @@ namespace System.IO.Tests
                 fs1.Lock(firstPosition, firstLength);
 
                 RemoteExecutor.Invoke(
-                        (secondPath, secondPos, secondLen) =>
-                        {
-                            using (
-                                FileStream fs2 = File.Open(
-                                    secondPath,
-                                    FileMode.Open,
-                                    FileAccess.ReadWrite,
-                                    FileShare.ReadWrite
-                                )
+                    (secondPath, secondPos, secondLen) =>
+                    {
+                        using (
+                            FileStream fs2 = File.Open(
+                                secondPath,
+                                FileMode.Open,
+                                FileAccess.ReadWrite,
+                                FileShare.ReadWrite
                             )
-                            {
-                                Assert.Throws<IOException>(
-                                    () => fs2.Lock(long.Parse(secondPos), long.Parse(secondLen))
-                                );
-                            }
-                        },
-                        path,
-                        secondPosition.ToString(),
-                        secondLength.ToString()
-                    )
-                    .Dispose();
+                        )
+                        {
+                            Assert.Throws<IOException>(
+                                () => fs2.Lock(long.Parse(secondPos), long.Parse(secondLen))
+                            );
+                        }
+                    },
+                    path,
+                    secondPosition.ToString(),
+                    secondLength.ToString()
+                ).Dispose();
 
                 fs1.Unlock(firstPosition, firstLength);
                 RemoteExecutor.Invoke(
-                        (secondPath, secondPos, secondLen) =>
-                        {
-                            using (
-                                FileStream fs2 = File.Open(
-                                    secondPath,
-                                    FileMode.Open,
-                                    FileAccess.ReadWrite,
-                                    FileShare.ReadWrite
-                                )
+                    (secondPath, secondPos, secondLen) =>
+                    {
+                        using (
+                            FileStream fs2 = File.Open(
+                                secondPath,
+                                FileMode.Open,
+                                FileAccess.ReadWrite,
+                                FileShare.ReadWrite
                             )
-                            {
-                                fs2.Lock(long.Parse(secondPos), long.Parse(secondLen));
-                                fs2.Unlock(long.Parse(secondPos), long.Parse(secondLen));
-                            }
-                        },
-                        path,
-                        secondPosition.ToString(),
-                        secondLength.ToString()
-                    )
-                    .Dispose();
+                        )
+                        {
+                            fs2.Lock(long.Parse(secondPos), long.Parse(secondLen));
+                            fs2.Unlock(long.Parse(secondPos), long.Parse(secondLen));
+                        }
+                    },
+                    path,
+                    secondPosition.ToString(),
+                    secondLength.ToString()
+                ).Dispose();
             }
         }
 
@@ -373,20 +371,19 @@ namespace System.IO.Tests
             fs1.Lock(0, 100);
 
             RemoteExecutor.Invoke(
-                    (path) =>
-                    {
-                        using FileStream fs2 = File.Open(
-                            path,
-                            FileMode.Open,
-                            FileAccess.Read,
-                            FileShare.ReadWrite
-                        );
-                        fs2.Lock(0, 100);
-                        fs2.Unlock(0, 100);
-                    },
-                    path
-                )
-                .Dispose();
+                (path) =>
+                {
+                    using FileStream fs2 = File.Open(
+                        path,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.ReadWrite
+                    );
+                    fs2.Lock(0, 100);
+                    fs2.Unlock(0, 100);
+                },
+                path
+            ).Dispose();
 
             fs1.Unlock(0, 100);
         }
@@ -407,37 +404,35 @@ namespace System.IO.Tests
             fs1.Lock(0, 100);
 
             RemoteExecutor.Invoke(
-                    (path) =>
-                    {
-                        using FileStream fs2 = File.Open(
-                            path,
-                            FileMode.Open,
-                            FileAccess.Write,
-                            FileShare.ReadWrite
-                        );
-                        Assert.Throws<IOException>(() => fs2.Lock(0, 100));
-                    },
-                    path
-                )
-                .Dispose();
+                (path) =>
+                {
+                    using FileStream fs2 = File.Open(
+                        path,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.ReadWrite
+                    );
+                    Assert.Throws<IOException>(() => fs2.Lock(0, 100));
+                },
+                path
+            ).Dispose();
 
             fs1.Unlock(0, 100);
 
             RemoteExecutor.Invoke(
-                    (path) =>
-                    {
-                        using FileStream fs2 = File.Open(
-                            path,
-                            FileMode.Open,
-                            FileAccess.Write,
-                            FileShare.ReadWrite
-                        );
-                        fs2.Lock(0, 100);
-                        fs2.Unlock(0, 100);
-                    },
-                    path
-                )
-                .Dispose();
+                (path) =>
+                {
+                    using FileStream fs2 = File.Open(
+                        path,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.ReadWrite
+                    );
+                    fs2.Lock(0, 100);
+                    fs2.Unlock(0, 100);
+                },
+                path
+            ).Dispose();
         }
     }
 }

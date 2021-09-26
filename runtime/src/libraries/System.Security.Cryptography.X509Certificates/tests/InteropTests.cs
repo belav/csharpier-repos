@@ -39,8 +39,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     // Does the serial number match?
                     CERT_INFO* pCertInfo = pCertContext->pCertInfo;
                     byte[] serialNumber = pCertInfo->SerialNumber.ToByteArray();
-                    byte[] expectedSerial =
-                        "b00000000100dd9f3bd08b0aaf11b000000033".HexToByteArray();
+                    byte[] expectedSerial = "b00000000100dd9f3bd08b0aaf11b000000033"
+                        .HexToByteArray();
                     Assert.Equal(expectedSerial, serialNumber);
                 }
             }
@@ -113,13 +113,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     + "2e2aae9d181f0e1eb6c2af24b40e50bcde1c935c49a679b5b6dbcef9707b2801"
                     + "84b82a29cfbfa90505e1e00f714dfdad5c238329ebc7c54ac8e82784d37ec643"
                     + "0b950005b14f6571c50203010001"
-                ).HexToByteArray();
+                )
+                    .HexToByteArray();
 
                 byte[] publicKey = c.GetPublicKey();
                 Assert.Equal(expectedPublicKey, publicKey);
 
-                byte[] expectedThumbPrint =
-                    "108e2ba23632620c427c570b6d9db51ac31387fe".HexToByteArray();
+                byte[] expectedThumbPrint = "108e2ba23632620c427c570b6d9db51ac31387fe"
+                    .HexToByteArray();
                 byte[] thumbPrint = c.GetCertHash();
                 Assert.Equal(expectedThumbPrint, thumbPrint);
             }

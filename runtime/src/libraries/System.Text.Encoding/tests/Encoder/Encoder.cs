@@ -249,10 +249,10 @@ namespace System.Text.Encodings.Tests
             }
 
             encoder = Encoding.GetEncoding(
-                    "us-ascii",
-                    new EncoderExceptionFallback(),
-                    new DecoderExceptionFallback()
-                )
+                "us-ascii",
+                new EncoderExceptionFallback(),
+                new DecoderExceptionFallback()
+            )
                 .GetEncoder();
 
             fixed (char* charsPtr = "\uFFFF")
@@ -385,10 +385,10 @@ namespace System.Text.Encodings.Tests
             }
 
             encoder = Encoding.GetEncoding(
-                    "us-ascii",
-                    new EncoderExceptionFallback(),
-                    new DecoderExceptionFallback()
-                )
+                "us-ascii",
+                new EncoderExceptionFallback(),
+                new DecoderExceptionFallback()
+            )
                 .GetEncoder();
 
             fixed (char* charsPtr = "\uFFFF")
@@ -410,10 +410,10 @@ namespace System.Text.Encodings.Tests
         public static void EncoderExceptionFallbackBufferTest()
         {
             Encoder encoder = Encoding.GetEncoding(
-                    "us-ascii",
-                    new EncoderExceptionFallback(),
-                    new DecoderExceptionFallback()
-                )
+                "us-ascii",
+                new EncoderExceptionFallback(),
+                new DecoderExceptionFallback()
+            )
                 .GetEncoder();
 
             char[] chars = new char[] { '\uFFFF' };
@@ -503,10 +503,10 @@ namespace System.Text.Encodings.Tests
         public static void EncoderReplacementFallbackBufferTest()
         {
             Encoder encoder = Encoding.GetEncoding(
-                    "us-ascii",
-                    new EncoderReplacementFallback(),
-                    new DecoderReplacementFallback()
-                )
+                "us-ascii",
+                new EncoderReplacementFallback(),
+                new DecoderReplacementFallback()
+            )
                 .GetEncoder();
 
             char[] chars = new char[] { '\uFFFF' };
@@ -614,10 +614,10 @@ namespace System.Text.Encodings.Tests
             // Expected output = "[1F332]XYZ" (as ASCII bytes)
 
             Encoder encoder = Encoding.GetEncoding(
-                    "ascii",
-                    new CustomEncoderReplacementFallback(),
-                    DecoderFallback.ExceptionFallback
-                )
+                "ascii",
+                new CustomEncoderReplacementFallback(),
+                DecoderFallback.ExceptionFallback
+            )
                 .GetEncoder();
             byte[] destBuffer = new byte[100];
 
@@ -721,10 +721,10 @@ namespace System.Text.Encodings.Tests
             // Expected output = "[1F332]XYZ" (as ASCII bytes)
 
             Encoder encoder = Encoding.GetEncoding(
-                    "ascii",
-                    new CustomEncoderReplacementFallback(),
-                    DecoderFallback.ExceptionFallback
-                )
+                "ascii",
+                new CustomEncoderReplacementFallback(),
+                DecoderFallback.ExceptionFallback
+            )
                 .GetEncoder();
             byte[] destBuffer = new byte[100];
 

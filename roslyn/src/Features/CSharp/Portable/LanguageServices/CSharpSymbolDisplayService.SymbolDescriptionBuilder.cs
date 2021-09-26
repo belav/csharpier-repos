@@ -22,9 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
         protected class SymbolDescriptionBuilder : AbstractSymbolDescriptionBuilder
         {
             private static readonly SymbolDisplayFormat s_minimallyQualifiedFormat =
-                SymbolDisplayFormat.MinimallyQualifiedFormat.AddLocalOptions(
-                        SymbolDisplayLocalOptions.IncludeRef
-                    )
+                SymbolDisplayFormat.MinimallyQualifiedFormat
+                    .AddLocalOptions(SymbolDisplayLocalOptions.IncludeRef)
                     .AddMiscellaneousOptions(
                         SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName
                     )
@@ -33,8 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 
             private static readonly SymbolDisplayFormat s_minimallyQualifiedFormatWithConstants =
                 s_minimallyQualifiedFormat.AddLocalOptions(
-                        SymbolDisplayLocalOptions.IncludeConstantValue
-                    )
+                    SymbolDisplayLocalOptions.IncludeConstantValue
+                )
                     .AddMemberOptions(SymbolDisplayMemberOptions.IncludeConstantValue)
                     .AddParameterOptions(SymbolDisplayParameterOptions.IncludeDefaultValue);
 
@@ -139,20 +138,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
                 int position,
                 SymbolDisplayFormat format
             ) =>
-                CodeAnalysis.CSharp.SymbolDisplay.ToMinimalDisplayParts(
-                    symbol,
-                    semanticModel,
-                    position,
-                    format
-                );
+                CodeAnalysis.CSharp.SymbolDisplay
+                    .ToMinimalDisplayParts(symbol, semanticModel, position, format);
 
             protected override string GetNavigationHint(ISymbol symbol) =>
                 symbol == null
                     ? null
-                    : CodeAnalysis.CSharp.SymbolDisplay.ToDisplayString(
-                          symbol,
-                          SymbolDisplayFormat.MinimallyQualifiedFormat
-                      );
+                    : CodeAnalysis.CSharp.SymbolDisplay
+                      .ToDisplayString(symbol, SymbolDisplayFormat.MinimallyQualifiedFormat);
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetInitializerSourcePartsAsync(
                 IFieldSymbol symbol
@@ -161,8 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
                 EqualsValueClauseSyntax initializer = null;
 
                 var variableDeclarator = await GetFirstDeclarationAsync<VariableDeclaratorSyntax>(
-                        symbol
-                    )
+                    symbol
+                )
                     .ConfigureAwait(false);
                 if (variableDeclarator != null)
                 {
@@ -243,11 +236,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
                     if (semanticModel != null)
                     {
                         return await Classifier.GetClassifiedSymbolDisplayPartsAsync(
-                                semanticModel,
-                                equalsValue.Value.Span,
-                                Workspace,
-                                cancellationToken: CancellationToken
-                            )
+                            semanticModel,
+                            equalsValue.Value.Span,
+                            Workspace,
+                            cancellationToken: CancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }

@@ -34,11 +34,12 @@ namespace Microsoft.Extensions.Configuration.UserSecrets
             if (badCharIndex != -1)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        SR.Error_Invalid_Character_In_UserSecrets_Id,
-                        userSecretsId[badCharIndex],
-                        badCharIndex
-                    )
+                    string
+                        .Format(
+                            SR.Error_Invalid_Character_In_UserSecrets_Id,
+                            userSecretsId[badCharIndex],
+                            badCharIndex
+                        )
                 );
             }
 

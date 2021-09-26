@@ -54,11 +54,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
             var resultId = _tokensCache.GetNextResultId();
             var tokensData = await SemanticTokensHelpers.ComputeSemanticTokensDataAsync(
-                    context.Document,
-                    SemanticTokensCache.TokenTypeToIndex,
-                    range: null,
-                    cancellationToken
-                )
+                context.Document,
+                SemanticTokensCache.TokenTypeToIndex,
+                range: null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var tokens = new LSP.SemanticTokens { ResultId = resultId, Data = tokensData };

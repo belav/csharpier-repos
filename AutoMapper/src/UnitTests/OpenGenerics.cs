@@ -99,9 +99,8 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(cfg => cfg.CreateMap(typeof(Source<>), typeof(Destination<>)));
         [Fact]
         public void Should_work() =>
-            new Action(
-                () => Mapper.Map(new Source<int>(), null, typeof(Destination<>))
-            ).ShouldThrow<ArgumentException>()
+            new Action(() => Mapper.Map(new Source<int>(), null, typeof(Destination<>)))
+                .ShouldThrow<ArgumentException>()
                 .Message.ShouldStartWith(
                     $"Type {typeof(Destination<>).FullName}[T] is a generic type definition"
                 );
@@ -377,9 +376,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_report_unmapped_property()
         {
-            new Action(
-                Configuration.AssertConfigurationIsValid
-            ).ShouldThrow<AutoMapperConfigurationException>()
+            new Action(Configuration.AssertConfigurationIsValid)
+                .ShouldThrow<AutoMapperConfigurationException>()
                 .Errors.Single()
                 .UnmappedPropertyNames.Single()
                 .ShouldBe("A");
@@ -412,9 +410,8 @@ namespace AutoMapper.UnitTests
 
         [Fact]
         public void Should_report_unmapped_property() =>
-            new Action(
-                () => AssertConfigurationIsValid<MyProfile>()
-            ).ShouldThrow<AutoMapperConfigurationException>()
+            new Action(() => AssertConfigurationIsValid<MyProfile>())
+                .ShouldThrow<AutoMapperConfigurationException>()
                 .Errors.Single()
                 .UnmappedPropertyNames.Single()
                 .ShouldBe("A");

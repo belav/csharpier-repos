@@ -43,10 +43,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var selectionTrimmed = await CodeRefactoringHelpers.GetTrimmedTextSpanAsync(
-                    document,
-                    selectionRaw,
-                    cancellationToken
-                )
+                document,
+                selectionRaw,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // If user selected only whitespace we don't want to return anything. We could do following:
@@ -59,9 +59,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 return ImmutableArray<TSyntaxNode>.Empty;
             }
 
-            using var relevantNodesBuilderDisposer = ArrayBuilder<TSyntaxNode>.GetInstance(
-                out var relevantNodesBuilder
-            );
+            using var relevantNodesBuilderDisposer = ArrayBuilder<TSyntaxNode>
+                .GetInstance(out var relevantNodesBuilder);
 
             // Every time a Node is considered an extractNodes method is called to add all nodes around the original one
             // that should also be considered.
@@ -117,11 +116,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 // First we need to get tokens we might potentially be touching, tokenToRightOrIn and tokenToLeft.
                 var (tokenToRightOrIn, tokenToLeft, location) =
                     await GetTokensToRightOrInToLeftAndUpdatedLocationAsync(
-                            document,
-                            root,
-                            selectionTrimmed,
-                            cancellationToken
-                        )
+                        document,
+                        root,
+                        selectionTrimmed,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 // In addition to per-node extr also check if current location (if selection is empty) is in a header of higher level
@@ -158,11 +157,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     // Reason to treat Arguments (and potentially others) as Expression-like:
                     // https://github.com/dotnet/roslyn/pull/37295#issuecomment-516145904
                     await AddNodesDeepInAsync(
-                            document,
-                            location,
-                            relevantNodesBuilder,
-                            cancellationToken
-                        )
+                        document,
+                        location,
+                        relevantNodesBuilder,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }

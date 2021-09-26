@@ -89,11 +89,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var cancellationToken = context.CancellationToken;
 
                 var (token, semanticModel, symbols) = await GetSymbolsAsync(
-                        document,
-                        position,
-                        options,
-                        cancellationToken
-                    )
+                    document,
+                    position,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (symbols.Length == 0)
@@ -109,10 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     CompletionOptions.HideAdvancedMembers,
                     semanticModel.Language
                 );
-                var serializedOptions = ImmutableDictionary<string, string>.Empty.Add(
-                    HideAdvancedMembers,
-                    hideAdvancedMembers.ToString()
-                );
+                var serializedOptions = ImmutableDictionary<string, string>.Empty
+                    .Add(HideAdvancedMembers, hideAdvancedMembers.ToString());
 
                 var items = CreateCompletionItems(
                     semanticModel,
@@ -144,16 +142,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
 
             var token = tree.FindTokenOnLeftOfPosition(
-                    position,
-                    cancellationToken,
-                    includeDocumentationComments: true
-                )
+                position,
+                cancellationToken,
+                includeDocumentationComments: true
+            )
                 .GetPreviousTokenIfTouchingWord(position);
 
             // To get a Speculative SemanticModel (which is much faster), we need to
             // walk up to the node the DocumentationTrivia is attached to.
-            var parentNode =
-                token.Parent.FirstAncestorOrSelf<DocumentationCommentTriviaSyntax>()?.ParentTrivia.Token.Parent;
+            var parentNode = token.Parent
+                .FirstAncestorOrSelf<DocumentationCommentTriviaSyntax>()?.ParentTrivia.Token.Parent;
             _testSpeculativeNodeCallbackOpt?.Invoke(parentNode);
             if (parentNode == null)
             {
@@ -161,9 +159,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
 
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    parentNode,
-                    cancellationToken
-                )
+                parentNode,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var symbols = GetSymbols(token, semanticModel, cancellationToken)
@@ -201,10 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             //   <see cref="M[x, out |
 
             if (
-                !token.Parent.IsKind(
-                    SyntaxKind.CrefParameterList,
-                    SyntaxKind.CrefBracketedParameterList
-                )
+                !token.Parent
+                    .IsKind(SyntaxKind.CrefParameterList, SyntaxKind.CrefBracketedParameterList)
             )
             {
                 return false;

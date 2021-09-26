@@ -70,12 +70,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 try
                 {
                     var references = await finder.FindReferencesInDocumentAsync(
-                            symbol,
-                            document,
-                            semanticModel,
-                            _options,
-                            _cancellationToken
-                        )
+                        symbol,
+                        document,
+                        semanticModel,
+                        _options,
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false);
                     foreach (var (_, location) in references)
                     {

@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                         typeof(DiagnosticSeverity),
                         namingRuleElement.Attribute(nameof(EnforcementLevel)).Value
                     )
-                ).ToReportDiagnostic(),
+                )
+                    .ToReportDiagnostic(),
                 NamingStyleID = Guid.Parse(
                     namingRuleElement.Attribute(nameof(NamingStyleID)).Value
                 ),

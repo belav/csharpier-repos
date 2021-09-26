@@ -80,13 +80,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var provider = new TestModelMetadataProvider();
-            provider.ForType<DefaultTemplatesUtilities.ObjectTemplateModel>()
-                .DisplayDetails(
-                    dd =>
-                    {
-                        dd.NullDisplayText = "(null value)";
-                    }
-                );
+            provider.ForType<DefaultTemplatesUtilities.ObjectTemplateModel>().DisplayDetails(
+                dd =>
+                {
+                    dd.NullDisplayText = "(null value)";
+                }
+            );
 
             var html = DefaultTemplatesUtilities.GetHtmlHelper(provider: provider);
 
@@ -110,14 +109,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             model.Property1 = simpleDisplayText;
 
             var provider = new TestModelMetadataProvider();
-            provider.ForType<DefaultTemplatesUtilities.ObjectTemplateModel>()
-                .DisplayDetails(
-                    dd =>
-                    {
-                        dd.HtmlEncode = htmlEncode;
-                        dd.SimpleDisplayProperty = "Property1";
-                    }
-                );
+            provider.ForType<DefaultTemplatesUtilities.ObjectTemplateModel>().DisplayDetails(
+                dd =>
+                {
+                    dd.HtmlEncode = htmlEncode;
+                    dd.SimpleDisplayProperty = "Property1";
+                }
+            );
 
             var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider);
 
@@ -148,22 +146,22 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var model = new DefaultTemplatesUtilities.ObjectWithScaffoldColumn();
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
 
@@ -230,19 +228,21 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var stringBuilder = new StringBuilder();
             foreach (var property in expectedProperties)
             {
-                var label = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[{0}]]</div>",
-                    property
-                );
+                var label = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "<div class=\"HtmlEncode[[display-label]]\">HtmlEncode[[{0}]]</div>",
+                        property
+                    );
                 stringBuilder.AppendLine(label);
 
-                var value = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "<div class=\"HtmlEncode[[display-field]]\">Model = (null), ModelType = System.String, PropertyName = {0}, "
-                        + "SimpleDisplayText = (null)</div>",
-                    property
-                );
+                var value = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "<div class=\"HtmlEncode[[display-field]]\">Model = (null), ModelType = System.String, PropertyName = {0}, "
+                            + "SimpleDisplayText = (null)</div>",
+                        property
+                    );
                 stringBuilder.AppendLine(value);
             }
             var expected = stringBuilder.ToString();
@@ -283,13 +283,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var model = "Model string";
 
             var provider = new TestModelMetadataProvider();
-            provider.ForType<string>()
-                .DisplayDetails(
-                    dd =>
-                    {
-                        dd.HideSurroundingHtml = true;
-                    }
-                );
+            provider.ForType<string>().DisplayDetails(
+                dd =>
+                {
+                    dd.HideSurroundingHtml = true;
+                }
+            );
 
             var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider: provider);
             var viewData = html.ViewData;
@@ -315,22 +314,22 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             };
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
             helper.ViewData["Property1"] = "ViewData string";
@@ -355,22 +354,22 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             };
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
             helper.ViewData["Property1"] = "ViewData string";
@@ -395,22 +394,22 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             };
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
 
@@ -436,22 +435,22 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             };
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
             helper.ViewData["Property1"] = "ViewData string";
@@ -473,33 +472,32 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 Property1 = "Test string",
             };
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Returns(
-                    Task.Run(
-                        () =>
-                        {
-                            throw new ArgumentException(expectedMessage);
-                        }
-                    )
-                );
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Returns(
+                Task.Run(
+                    () =>
+                    {
+                        throw new ArgumentException(expectedMessage);
+                    }
+                )
+            );
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.Found("test-view", view.Object));
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
             helper.ViewData["Property1"] = "ViewData string";
@@ -515,22 +513,22 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            "DisplayTemplates/String", /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        "DisplayTemplates/String", /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.Found(string.Empty, new Mock<IView>().Object))
                 .Verifiable();
             var html = DefaultTemplatesUtilities.GetHtmlHelper(

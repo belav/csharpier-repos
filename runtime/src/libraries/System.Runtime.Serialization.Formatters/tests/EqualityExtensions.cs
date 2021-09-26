@@ -55,10 +55,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     return method.MakeGenericMethod(extendedType.GenericTypeArguments[0]);
             }
 
-            return typeof(EqualityExtensions).GetMethod(
-                "IsEqual",
-                new[] { extendedType, extendedType, typeof(bool) }
-            );
+            return typeof(EqualityExtensions)
+                .GetMethod("IsEqual", new[] { extendedType, extendedType, typeof(bool) });
         }
 
         public static void CheckEquals(object objA, object objB, bool isSamePlatform)

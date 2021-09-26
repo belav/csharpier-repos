@@ -353,9 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                         var kind =
                             fieldDeclaration is EventFieldDeclarationSyntax
                                 ? DeclaredSymbolInfoKind.Event
-                                : fieldDeclaration.Modifiers.Any(
-                                      m => m.Kind() == SyntaxKind.ConstKeyword
-                                  )
+                                : fieldDeclaration.Modifiers
+                                  .Any(m => m.Kind() == SyntaxKind.ConstKeyword)
                                     ? DeclaredSymbolInfoKind.Constant
                                     : DeclaredSymbolInfoKind.Field;
 
@@ -486,10 +485,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
         }
 
         private static string GetContainerDisplayName(SyntaxNode node) =>
-            CSharpSyntaxFacts.Instance.GetDisplayName(
-                node,
-                DisplayNameOptions.IncludeTypeParameters
-            );
+            CSharpSyntaxFacts.Instance
+                .GetDisplayName(node, DisplayNameOptions.IncludeTypeParameters);
 
         private static string GetFullyQualifiedContainerName(SyntaxNode node) =>
             CSharpSyntaxFacts.Instance.GetDisplayName(node, DisplayNameOptions.IncludeNamespaces);
@@ -607,9 +604,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
             var methodDeclaration = (MethodDeclarationSyntax)node;
             Debug.Assert(IsExtensionMethod(methodDeclaration));
 
-            var typeParameterNames = methodDeclaration.TypeParameterList?.Parameters.SelectAsArray(
-                p => p.Identifier.Text
-            );
+            var typeParameterNames = methodDeclaration.TypeParameterList?.Parameters
+                .SelectAsArray(p => p.Identifier.Text);
             TryGetSimpleTypeName(
                 methodDeclaration.ParameterList.Parameters[0].Type,
                 typeParameterNames,

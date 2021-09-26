@@ -38,8 +38,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             _msbuildExecutable = Path.Combine(s_msbuildDirectory, "MSBuild.exe");
             _tempDirectory = Temp.CreateDirectory();
             _existingServerList = Process.GetProcessesByName(
-                    Path.GetFileNameWithoutExtension("VBCSCompiler")
-                )
+                Path.GetFileNameWithoutExtension("VBCSCompiler")
+            )
                 .ToList();
             _buildTaskDll = typeof(ManagedCompiler).Assembly.Location;
         }
@@ -436,9 +436,10 @@ End Class
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/1445")]
         public void SimpleMSBuild()
         {
-            string arguments = string.Format(
-                @"/m /nr:false /t:Rebuild /p:UseSharedCompilation=false /p:UseRoslyn=1 HelloSolution.sln"
-            );
+            string arguments = string
+                .Format(
+                    @"/m /nr:false /t:Rebuild /p:UseSharedCompilation=false /p:UseRoslyn=1 HelloSolution.sln"
+                );
             var result = RunCommandLineCompiler(
                 _msbuildExecutable,
                 arguments,
@@ -652,9 +653,10 @@ End Class
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/16301")]
         public void ReportAnalyzerMSBuild()
         {
-            string arguments = string.Format(
-                @"/m /nr:false /t:Rebuild /p:UseSharedCompilation=false /p:UseRoslyn=1 HelloSolution.sln"
-            );
+            string arguments = string
+                .Format(
+                    @"/m /nr:false /t:Rebuild /p:UseSharedCompilation=false /p:UseRoslyn=1 HelloSolution.sln"
+                );
             var result = RunCommandLineCompiler(
                 _msbuildExecutable,
                 arguments,
@@ -677,9 +679,8 @@ End Class
         public void SolutionWithPunctuation()
         {
             var testDir = _tempDirectory.CreateDirectory(@"SLN;!@(goo)'^1");
-            var slnFile = testDir.CreateFile("Console;!@(goo)'^(Application1.sln")
-                .WriteAllText(
-                    @"
+            var slnFile = testDir.CreateFile("Console;!@(goo)'^(Application1.sln").WriteAllText(
+                @"
 Microsoft Visual Studio Solution File, Format Version 10.00
 \u0023 Visual Studio 2005
 Project(""{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"") = ""Cons.ole;!@(goo)'^(Application1"", ""Console;!@(goo)'^(Application1\Cons.ole;!@(goo)'^(Application1.csproj"", ""{770F2381-8C39-49E9-8C96-0538FA4349A7}""
@@ -706,7 +707,7 @@ Global
     EndGlobalSection
 EndGlobal
 "
-                );
+            );
             var appDir = testDir.CreateDirectory(@"Console;!@(goo)'^(Application1");
             var appProjFile = appDir.CreateFile(@"Cons.ole;!@(goo)'^(Application1.csproj")
                 .WriteAllText(
@@ -762,9 +763,8 @@ EndGlobal
 "
                 );
 
-            var appProgramFile = appDir.CreateFile("Program.cs")
-                .WriteAllText(
-                    @"
+            var appProgramFile = appDir.CreateFile("Program.cs").WriteAllText(
+                @"
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -779,7 +779,7 @@ namespace Console____goo____Application1
         }
     }
 }"
-                );
+            );
 
             var libraryDir = testDir.CreateDirectory(@"Class;!@(goo)'^(Library1");
             var libraryProjFile = libraryDir.CreateFile("Class;!@(goo)'^(Library1.csproj")
@@ -842,9 +842,8 @@ namespace Console____goo____Application1
 "
                 );
 
-            var libraryClassFile = libraryDir.CreateFile("Class1.cs")
-                .WriteAllText(
-                    @"
+            var libraryClassFile = libraryDir.CreateFile("Class1.cs").WriteAllText(
+                @"
 namespace Class____goo____Library1
 {
     public class Class1
@@ -852,7 +851,7 @@ namespace Class____goo____Library1
     }
 }
 "
-                );
+            );
 
             var result = RunCommandLineCompiler(
                 _msbuildExecutable,

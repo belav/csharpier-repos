@@ -100,9 +100,9 @@ namespace Microsoft.CodeAnalysis.Completion
                 var mefExporter = (IMefHostExportProvider)_workspace.Services.HostServices;
 
                 var providers = ExtensionOrderer.Order(
-                        mefExporter.GetExports<CompletionProvider, CompletionProviderMetadata>()
-                            .Where(lz => lz.Metadata.Language == language)
-                    )
+                    mefExporter.GetExports<CompletionProvider, CompletionProviderMetadata>()
+                        .Where(lz => lz.Metadata.Language == language)
+                )
                     .ToList();
 
                 Interlocked.CompareExchange(ref _importedProviders, providers, null);
@@ -316,13 +316,13 @@ namespace Microsoft.CodeAnalysis.Completion
         )
         {
             var (completionList, _) = await GetCompletionsWithAvailabilityOfExpandedItemsAsync(
-                    document,
-                    caretPosition,
-                    trigger,
-                    roles,
-                    options,
-                    cancellationToken
-                )
+                document,
+                caretPosition,
+                trigger,
+                roles,
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return completionList;
         }
@@ -361,15 +361,15 @@ namespace Microsoft.CodeAnalysis.Completion
                     )
                     {
                         triggeredProviders = providers.Where(
-                                p =>
-                                    p.ShouldTriggerCompletion(
-                                        document.Project.LanguageServices,
-                                        text,
-                                        caretPosition,
-                                        trigger,
-                                        options
-                                    )
-                            )
+                            p =>
+                                p.ShouldTriggerCompletion(
+                                    document.Project.LanguageServices,
+                                    text,
+                                    caretPosition,
+                                    trigger,
+                                    options
+                                )
+                        )
                             .ToImmutableArrayOrEmpty();
                         Debug.Assert(
                             ValidatePossibleTriggerCharacterSet(
@@ -405,12 +405,12 @@ namespace Microsoft.CodeAnalysis.Completion
                 {
                     if (
                         !await provider.IsSyntacticTriggerCharacterAsync(
-                                document,
-                                caretPosition,
-                                trigger,
-                                options,
-                                cancellationToken
-                            )
+                            document,
+                            caretPosition,
+                            trigger,
+                            options,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {
@@ -426,14 +426,14 @@ namespace Microsoft.CodeAnalysis.Completion
             // Note: we keep any context with items *or* with a suggested item.
             var (triggeredCompletionContexts, expandItemsAvailableFromTriggeredProviders) =
                 await ComputeNonEmptyCompletionContextsAsync(
-                        document,
-                        caretPosition,
-                        trigger,
-                        options,
-                        defaultItemSpan,
-                        triggeredProviders,
-                        cancellationToken
-                    )
+                    document,
+                    caretPosition,
+                    trigger,
+                    options,
+                    defaultItemSpan,
+                    triggeredProviders,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             // If we didn't even get any back with items, then there's nothing to do.
@@ -474,14 +474,14 @@ namespace Microsoft.CodeAnalysis.Completion
 
             var (augmentingCompletionContexts, expandItemsAvailableFromAugmentingProviders) =
                 await ComputeNonEmptyCompletionContextsAsync(
-                        document,
-                        caretPosition,
-                        trigger,
-                        options,
-                        defaultItemSpan,
-                        augmentingProviders,
-                        cancellationToken
-                    )
+                    document,
+                    caretPosition,
+                    trigger,
+                    options,
+                    defaultItemSpan,
+                    augmentingProviders,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             var allContexts = triggeredCompletionContexts.Concat(augmentingCompletionContexts);
@@ -629,10 +629,8 @@ namespace Microsoft.CodeAnalysis.Completion
             }
 
             // TODO(DustinCa): Revisit performance of this.
-            using var _ = ArrayBuilder<CompletionItem>.GetInstance(
-                displayNameToItemsMap.Count,
-                out var builder
-            );
+            using var _ = ArrayBuilder<CompletionItem>
+                .GetInstance(displayNameToItemsMap.Count, out var builder);
             builder.AddRange(displayNameToItemsMap);
             builder.Sort();
 
@@ -815,13 +813,13 @@ namespace Microsoft.CodeAnalysis.Completion
             var provider = GetProvider(item);
             return provider != null
               ? await provider.GetChangeAsync(
-                        document,
-                        item,
-                        completionListSpan,
-                        commitKey,
-                        disallowAddingImports,
-                        cancellationToken
-                    )
+                    document,
+                    item,
+                    completionListSpan,
+                    commitKey,
+                    disallowAddingImports,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
               : CompletionChange.Create(new TextChange(completionListSpan, item.DisplayText));
         }

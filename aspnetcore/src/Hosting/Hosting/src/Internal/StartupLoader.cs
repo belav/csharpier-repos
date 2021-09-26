@@ -277,11 +277,12 @@ namespace Microsoft.AspNetCore.Hosting
             if (string.IsNullOrEmpty(startupAssemblyName))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        "A startup method, startup type or startup assembly is required. If specifying an assembly, '{0}' cannot be null or empty.",
-                        nameof(startupAssemblyName)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            "A startup method, startup type or startup assembly is required. If specifying an assembly, '{0}' cannot be null or empty.",
+                            nameof(startupAssemblyName)
+                        ),
                     nameof(startupAssemblyName)
                 );
             }
@@ -327,13 +328,14 @@ namespace Microsoft.AspNetCore.Hosting
             if (type == null)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        "A type named '{0}' or '{1}' could not be found in assembly '{2}'.",
-                        startupNameWithEnv,
-                        startupNameWithoutEnv,
-                        startupAssemblyName
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            "A type named '{0}' or '{1}' could not be found in assembly '{2}'.",
+                            startupNameWithEnv,
+                            startupNameWithoutEnv,
+                            startupAssemblyName
+                        )
                 );
             }
 
@@ -416,20 +418,16 @@ namespace Microsoft.AspNetCore.Hosting
             bool required = true
         )
         {
-            var methodNameWithEnv = string.Format(
-                CultureInfo.InvariantCulture,
-                methodName,
-                environmentName
-            );
+            var methodNameWithEnv = string
+                .Format(CultureInfo.InvariantCulture, methodName, environmentName);
             var methodNameWithNoEnv = string.Format(CultureInfo.InvariantCulture, methodName, "");
 
             var methods = startupType.GetMethods(
                 BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
             );
             var selectedMethods = methods.Where(
-                    method =>
-                        method.Name.Equals(methodNameWithEnv, StringComparison.OrdinalIgnoreCase)
-                )
+                method => method.Name.Equals(methodNameWithEnv, StringComparison.OrdinalIgnoreCase)
+            )
                 .ToList();
             if (selectedMethods.Count > 1)
             {
@@ -440,12 +438,9 @@ namespace Microsoft.AspNetCore.Hosting
             if (selectedMethods.Count == 0)
             {
                 selectedMethods = methods.Where(
-                        method =>
-                            method.Name.Equals(
-                                methodNameWithNoEnv,
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                    )
+                    method =>
+                        method.Name.Equals(methodNameWithNoEnv, StringComparison.OrdinalIgnoreCase)
+                )
                     .ToList();
                 if (selectedMethods.Count > 1)
                 {
@@ -461,13 +456,14 @@ namespace Microsoft.AspNetCore.Hosting
                 if (required)
                 {
                     throw new InvalidOperationException(
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            "A public method named '{0}' or '{1}' could not be found in the '{2}' type.",
-                            methodNameWithEnv,
-                            methodNameWithNoEnv,
-                            startupType.FullName
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                "A public method named '{0}' or '{1}' could not be found in the '{2}' type.",
+                                methodNameWithEnv,
+                                methodNameWithNoEnv,
+                                startupType.FullName
+                            )
                     );
                 }
                 return null;
@@ -477,13 +473,14 @@ namespace Microsoft.AspNetCore.Hosting
                 if (required)
                 {
                     throw new InvalidOperationException(
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            "The '{0}' method in the type '{1}' must have a return type of '{2}'.",
-                            methodInfo.Name,
-                            startupType.FullName,
-                            returnType.Name
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                "The '{0}' method in the type '{1}' must have a return type of '{2}'.",
+                                methodInfo.Name,
+                                startupType.FullName,
+                                returnType.Name
+                            )
                     );
                 }
                 return null;

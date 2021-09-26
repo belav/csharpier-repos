@@ -388,9 +388,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     migrationBuilder.ActiveProvider;
 
                 migrationBuilder.CreateTable(
-                        name: "Table1",
-                        columns: x => new { Id = x.Column<int>(), Foo = x.Column<int>() }
-                    )
+                    name: "Table1",
+                    columns: x => new { Id = x.Column<int>(), Foo = x.Column<int>() }
+                )
                     .PrimaryKey(name: "PK_Table1", columns: x => x.Id);
             }
 

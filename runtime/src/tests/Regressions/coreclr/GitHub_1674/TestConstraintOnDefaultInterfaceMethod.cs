@@ -17,11 +17,14 @@ namespace TestConstraint
             auditTrail.AppendAsync<EmptyLogEntry>(new EmptyLogEntry(), CancellationToken.None);
 
             // This should work since int always meets the constraint of IBuggy<T1>.Foo<T2> where T2: T1
-            ((IBuggy<int>)new Worky()).Foo<int>();
+            ((IBuggy<int>)new Worky())
+                .Foo<int>();
             // This should work since Object always meets the constraint of IBuggy<T1>.Foo<T2> where T2: T1
-            ((IBuggy<object>)new Worky2()).Foo<string>();
+            ((IBuggy<object>)new Worky2())
+                .Foo<string>();
             // This should not throw since Open meets the constraint of IBuggy<T1>.Foo<T2> where T2: T1
-            ((IBuggy<Open>)new Buggy()).Foo<Open>();
+            ((IBuggy<Open>)new Buggy())
+                .Foo<Open>();
 
             return 100;
         }

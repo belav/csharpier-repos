@@ -35,7 +35,8 @@ class C
             {
                 LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp8,
                 TestCode = source,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseImplicitObjectCreation)]
@@ -155,9 +156,13 @@ class C
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(4,5): error CS0246: The type or namespace name 'E' could not be found (are you missing a using directive or an assembly reference?)
-                        DiagnosticResult.CompilerError("CS0246").WithLocation(0).WithArguments("E"),
+                        DiagnosticResult.CompilerError("CS0246")
+                            .WithLocation(0)
+                            .WithArguments("E"),
                         // /0/Test0.cs(4,15): error CS0246: The type or namespace name 'E' could not be found (are you missing a using directive or an assembly reference?)
-                        DiagnosticResult.CompilerError("CS0246").WithLocation(1).WithArguments("E"),
+                        DiagnosticResult.CompilerError("CS0246")
+                            .WithLocation(1)
+                            .WithArguments("E"),
                     }
                 },
                 LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,

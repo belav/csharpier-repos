@@ -237,10 +237,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             {
                 context.CancellationToken.ThrowIfCancellationRequested();
                 await ProduceTagsAsync(
-                        context,
-                        spanToTag,
-                        GetCaretPosition(context.CaretPosition, spanToTag.SnapshotSpan)
-                    )
+                    context,
+                    spanToTag,
+                    GetCaretPosition(context.CaretPosition, spanToTag.SnapshotSpan)
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -294,7 +294,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             //
             // Taggers that need to be called accurately should override this method to produce
             // results quickly if possible.
-            ProduceTagsAsync(context, spanToTag, caretPosition).Wait(context.CancellationToken);
+            ProduceTagsAsync(context, spanToTag, caretPosition)
+                .Wait(context.CancellationToken);
         }
 
         internal TestAccessor GetTestAccessor() => new(this);

@@ -107,23 +107,25 @@ public class Test
         new Gen().ExceptionTest<RefX1<RefX1<RefX1<RefX1<Guid>>>>>(true);
 
         new Gen().ExceptionTest<RefX1<RefX2<int, string>>>(true);
-        new Gen().ExceptionTest<
-            RefX2<
-                RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>,
-                RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>
-            >
-        >(true);
-        new Gen().ExceptionTest<
-            RefX3<
-                RefX1<int[][,,,]>,
-                RefX2<object[,,,][][], Guid[][][]>,
-                RefX3<
-                    double[,,,,,,,,,,],
-                    Guid[][][][,,,,][,,,,][][][],
-                    string[][][][][][][][][][][]
+        new Gen()
+            .ExceptionTest<
+                RefX2<
+                    RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>,
+                    RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>
                 >
-            >
-        >(true);
+            >(true);
+        new Gen()
+            .ExceptionTest<
+                RefX3<
+                    RefX1<int[][,,,]>,
+                    RefX2<object[,,,][][], Guid[][][]>,
+                    RefX3<
+                        double[,,,,,,,,,,],
+                        Guid[][][][,,,,][,,,,][][][],
+                        string[][][][][][][][][][][]
+                    >
+                >
+            >(true);
 
         new Gen().ExceptionTest<ValX1<int>>(true);
         new Gen().ExceptionTest<ValX1<RefX1<int>>>(true);
@@ -135,23 +137,25 @@ public class Test
         new Gen().ExceptionTest<ValX1<ValX1<ValX1<ValX1<Guid>>>>>(true);
 
         new Gen().ExceptionTest<ValX1<ValX2<int, string>>>(true);
-        new Gen().ExceptionTest<
-            ValX2<
-                ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>,
-                ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>
-            >
-        >(true);
-        new Gen().ExceptionTest<
-            ValX3<
-                ValX1<int[][,,,]>,
-                ValX2<object[,,,][][], Guid[][][]>,
-                ValX3<
-                    double[,,,,,,,,,,],
-                    Guid[][][][,,,,][,,,,][][][],
-                    string[][][][][][][][][][][]
+        new Gen()
+            .ExceptionTest<
+                ValX2<
+                    ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>,
+                    ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>
                 >
-            >
-        >(true);
+            >(true);
+        new Gen()
+            .ExceptionTest<
+                ValX3<
+                    ValX1<int[][,,,]>,
+                    ValX2<object[,,,][][], Guid[][][]>,
+                    ValX3<
+                        double[,,,,,,,,,,],
+                        Guid[][][][,,,,][,,,,][][][],
+                        string[][][][][][][][][][][]
+                    >
+                >
+            >(true);
 
         if (result)
         {

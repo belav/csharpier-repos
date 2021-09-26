@@ -141,9 +141,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     {
                         candidateMembers = segmentIsNamedTypeName.Value
                             ? candidateMembers.Where(s => s.Kind == SymbolKind.NamedType)
-                                  .ToImmutableArray()
+                              .ToImmutableArray()
                             : candidateMembers.Where(s => s.Kind != SymbolKind.NamedType)
-                                  .ToImmutableArray();
+                              .ToImmutableArray();
 
                         segmentIsNamedTypeName = null;
                     }

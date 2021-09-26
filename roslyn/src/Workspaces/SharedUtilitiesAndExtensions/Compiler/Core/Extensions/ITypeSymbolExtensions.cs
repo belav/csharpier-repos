@@ -213,10 +213,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     : type.GetBaseTypes();
             return baseTypes.Contains(
                 t =>
-                    SymbolEquivalenceComparer.Instance.Equals(
-                        t.OriginalDefinition,
-                        originalBaseType
-                    )
+                    SymbolEquivalenceComparer.Instance
+                        .Equals(t.OriginalDefinition, originalBaseType)
             );
         }
 
@@ -236,10 +234,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             while (currentBaseType != null)
             {
                 if (
-                    SymbolEquivalenceComparer.Instance.Equals(
-                        currentBaseType.OriginalDefinition,
-                        originalBaseType
-                    )
+                    SymbolEquivalenceComparer.Instance
+                        .Equals(currentBaseType.OriginalDefinition, originalBaseType)
                 )
                 {
                     return true;
@@ -257,20 +253,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         )
         {
             var originalInterfaceType = interfaceType.OriginalDefinition;
-            return type.AllInterfaces.Any(
-                t =>
-                    SymbolEquivalenceComparer.Instance.Equals(
-                        t.OriginalDefinition,
-                        originalInterfaceType
-                    )
-            );
+            return type.AllInterfaces
+                .Any(
+                    t =>
+                        SymbolEquivalenceComparer.Instance
+                            .Equals(t.OriginalDefinition, originalInterfaceType)
+                );
         }
 
         public static bool Implements(this ITypeSymbol type, ITypeSymbol interfaceType)
         {
-            return type.AllInterfaces.Contains(
-                t => SymbolEquivalenceComparer.Instance.Equals(t, interfaceType)
-            );
+            return type.AllInterfaces
+                .Contains(t => SymbolEquivalenceComparer.Instance.Equals(t, interfaceType));
         }
 
         public static bool IsAttribute(this ITypeSymbol symbol)
@@ -469,9 +463,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol within
         )
         {
-            return typeSymbol.AllInterfaces.Any(
-                    i => i.SpecialType == SpecialType.System_Collections_IEnumerable
-                )
+            return typeSymbol.AllInterfaces
+                    .Any(i => i.SpecialType == SpecialType.System_Collections_IEnumerable)
                 && typeSymbol.GetBaseTypesAndThis()
                     .Union(typeSymbol.GetOriginalInterfacesAndTheirBaseInterfaces())
                     .SelectAccessibleMembers<IMethodSymbol>(

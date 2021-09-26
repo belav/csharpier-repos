@@ -1009,7 +1009,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
 #if !NET20
             XDocument d = XDocument.Parse(xml);
-            XAttribute a = d.Root.Element("{http://www.w3.org/2001/XMLSchema}element")
+            XAttribute a = d.Root
+                .Element("{http://www.w3.org/2001/XMLSchema}element")
                 .Attribute("{urn:schemas-microsoft-com:xml-msdata}IsDataSet");
 
             jsonText = JsonConvert.SerializeXNode(a);
@@ -2896,9 +2897,8 @@ namespace Newtonsoft.Json.Tests.Converters
             Newtonsoft.Json.JsonSerializerSettings settings =
                 new Newtonsoft.Json.JsonSerializerSettings();
             settings.Converters.Add(new Newtonsoft.Json.Converters.XmlNodeConverter());
-            Newtonsoft.Json.JsonSerializer serializer = Newtonsoft.Json.JsonSerializer.Create(
-                settings
-            );
+            Newtonsoft.Json.JsonSerializer serializer = Newtonsoft.Json.JsonSerializer
+                .Create(settings);
             using (
                 Newtonsoft.Json.JsonTextReader reader = new Newtonsoft.Json.JsonTextReader(
                     new System.IO.StreamReader(json)

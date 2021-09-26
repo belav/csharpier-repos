@@ -21,9 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             return SyntaxFactory.ParseSyntaxTree(
                 text,
-                options: (options ?? TestOptions.Regular).WithLanguageVersion(
-                    LanguageVersion.CSharp8
-                )
+                options: (options ?? TestOptions.Regular)
+                    .WithLanguageVersion(LanguageVersion.CSharp8)
             );
         }
 
@@ -34,9 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             return SyntaxFactory.ParseExpression(
                 text,
-                options: (options ?? TestOptions.Regular).WithLanguageVersion(
-                    LanguageVersion.CSharp8
-                )
+                options: (options ?? TestOptions.Regular)
+                    .WithLanguageVersion(LanguageVersion.CSharp8)
             );
         }
 
@@ -59,14 +57,13 @@ class C
                 source,
                 options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
             );
-            tree.GetDiagnostics()
-                .Verify(
-                    // (6,9): error CS8652: The feature 'asynchronous using' is not available in C# 7.3. Please use language version 8.0 or greater.
-                    //         await using (var x = this)
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await")
-                        .WithArguments("asynchronous using", "8.0")
-                        .WithLocation(6, 9)
-                );
+            tree.GetDiagnostics().Verify(
+                // (6,9): error CS8652: The feature 'asynchronous using' is not available in C# 7.3. Please use language version 8.0 or greater.
+                //         await using (var x = this)
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await")
+                    .WithArguments("asynchronous using", "8.0")
+                    .WithLocation(6, 9)
+            );
 
             UsingTree(source);
             N(SyntaxKind.CompilationUnit);
@@ -379,14 +376,13 @@ class C
                 source,
                 options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
             );
-            tree.GetDiagnostics()
-                .Verify(
-                    // (6,9): error CS8652: The feature 'async streams' is not available in C# 7.3. Please use language version 8.0 or greater.
-                    //         await foreach (var i in collection)
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await")
-                        .WithArguments("async streams", "8.0")
-                        .WithLocation(6, 9)
-                );
+            tree.GetDiagnostics().Verify(
+                // (6,9): error CS8652: The feature 'async streams' is not available in C# 7.3. Please use language version 8.0 or greater.
+                //         await foreach (var i in collection)
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await")
+                    .WithArguments("async streams", "8.0")
+                    .WithLocation(6, 9)
+            );
 
             UsingTree(source);
             N(SyntaxKind.CompilationUnit);
@@ -628,14 +624,13 @@ class C
                 source,
                 options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
             );
-            tree.GetDiagnostics()
-                .Verify(
-                    // (6,9): error CS8652: The feature 'async streams' is not available in C# 7.3. Please use language version 8.0 or greater.
-                    //         await foreach (var (i, j) in collection)
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await")
-                        .WithArguments("async streams", "8.0")
-                        .WithLocation(6, 9)
-                );
+            tree.GetDiagnostics().Verify(
+                // (6,9): error CS8652: The feature 'async streams' is not available in C# 7.3. Please use language version 8.0 or greater.
+                //         await foreach (var (i, j) in collection)
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await")
+                    .WithArguments("async streams", "8.0")
+                    .WithLocation(6, 9)
+            );
 
             UsingTree(source);
             N(SyntaxKind.CompilationUnit);

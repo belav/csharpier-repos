@@ -119,12 +119,12 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         )
         {
             var originalListWithoutRemovedOrAdded = originalListOfParameters.Where(
-                    p => updatedListOfParameters.Contains(p)
-                )
+                p => updatedListOfParameters.Contains(p)
+            )
                 .ToImmutableArray();
             var updatedListWithoutRemovedOrAdded = updatedListOfParameters.Where(
-                    p => originalListOfParameters.Contains(p)
-                )
+                p => originalListOfParameters.Contains(p)
+            )
                 .ToImmutableArray();
 
             for (var i = 0; i < originalListWithoutRemovedOrAdded.Length; i++)

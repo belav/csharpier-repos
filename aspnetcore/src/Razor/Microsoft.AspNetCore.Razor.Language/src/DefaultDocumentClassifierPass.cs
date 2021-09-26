@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             MethodDeclarationIntermediateNode method
         )
         {
-            var configuration = Engine.Features.OfType<DefaultDocumentClassifierPassFeature>()
+            var configuration = Engine.Features
+                .OfType<DefaultDocumentClassifierPassFeature>()
                 .FirstOrDefault();
             if (configuration != null)
             {

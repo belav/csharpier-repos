@@ -85,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     join _f in context.Motors on _.Id equals _f.Id
                     join __ in context.VehicleInspections on _f.Id equals __.Id
                     select _
-                ).ToList();
+                )
+                    .ToList();
 
                 Assert.Empty(results);
             }
@@ -108,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from v in context.VehicleInspections
                     where v.Id == _ || v.Id == __ || v.Id == _f
                     select _
-                ).ToList();
+                )
+                    .ToList();
 
                 Assert.Empty(results);
             }
@@ -486,7 +488,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = ctx.Posts.Where(x => x.Blog.Id > 1)
+                        var result = ctx.Posts
+                            .Where(x => x.Blog.Id > 1)
                             .Include(x => x.Blog)
                             .ToList();
 
@@ -507,7 +510,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     async i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                        var result = await ctx.Posts
+                            .Where(x => x.Blog.Id > 1)
                             .Include(x => x.Blog)
                             .ToListAsync();
 
@@ -528,7 +532,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = ctx.Posts.Where(x => x.Blog.Id > 1)
+                        var result = ctx.Posts
+                            .Where(x => x.Blog.Id > 1)
                             .Include(x => x.Blog)
                             .Include(x => x.Comments)
                             .ToList();
@@ -550,7 +555,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     async i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                        var result = await ctx.Posts
+                            .Where(x => x.Blog.Id > 1)
                             .Include(x => x.Blog)
                             .Include(x => x.Comments)
                             .ToListAsync();
@@ -572,7 +578,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = ctx.Posts.Where(x => x.Blog.Id > 1)
+                        var result = ctx.Posts
+                            .Where(x => x.Blog.Id > 1)
                             .Include(x => x.Blog)
                             .ThenInclude(b => b.Author)
                             .ToList();
@@ -594,7 +601,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     async i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                        var result = await ctx.Posts
+                            .Where(x => x.Blog.Id > 1)
                             .Include(x => x.Blog)
                             .ThenInclude(b => b.Author)
                             .ToListAsync();
@@ -856,20 +864,22 @@ namespace Microsoft.EntityFrameworkCore.Query
                     new BookViewModel21768
                     {
                         FirstPage =
-                            b.FrontCover.Illustrations.FirstOrDefault(
-                                i => i.State >= IllustrationState21768.Approved
-                            ) != null
+                            b.FrontCover.Illustrations
+                                .FirstOrDefault(i => i.State >= IllustrationState21768.Approved)
+                            != null
                                 ? new PageViewModel21768
                                   {
                                       Uri =
-                                          b.FrontCover.Illustrations.FirstOrDefault(
-                                              i => i.State >= IllustrationState21768.Approved
-                                          ).Uri
+                                          b.FrontCover.Illustrations
+                                              .FirstOrDefault(
+                                                  i => i.State >= IllustrationState21768.Approved
+                                              ).Uri
                                   }
                                 : null,
                     };
 
-                var result = context.Books.Where(b => b.Id == 1)
+                var result = context.Books
+                    .Where(b => b.Id == 1)
                     .Select(projection)
                     .SingleOrDefault();
             }
@@ -1063,9 +1073,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void Seed20729(MyContext20729 context)
         {
-            context.Owners.Add(
-                new Owner20729 { Owned1 = new Owned120729(), Owned2 = new Owned220729(), }
-            );
+            context.Owners
+                .Add(new Owner20729 { Owned1 = new Owned120729(), Owned2 = new Owned220729(), });
 
             context.SaveChanges();
         }
@@ -1117,7 +1126,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Expression<Func<A19253, string>> leftKeySelector = x => x.forkey;
                 Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
-                var query = context.A.GroupJoin(
+                var query = context.A
+                    .GroupJoin(
                         context.B,
                         leftKeySelector,
                         rightKeySelector,
@@ -1128,7 +1138,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
                     )
                     .Concat(
-                        context.B.GroupJoin(
+                        context.B
+                            .GroupJoin(
                                 context.A,
                                 rightKeySelector,
                                 leftKeySelector,
@@ -1161,7 +1172,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Expression<Func<A19253, string>> leftKeySelector = x => x.forkey;
                 Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
-                var query = context.A.GroupJoin(
+                var query = context.A
+                    .GroupJoin(
                         context.B,
                         leftKeySelector,
                         rightKeySelector,
@@ -1172,7 +1184,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
                     )
                     .Union(
-                        context.B.GroupJoin(
+                        context.B
+                            .GroupJoin(
                                 context.A,
                                 rightKeySelector,
                                 leftKeySelector,
@@ -1204,7 +1217,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Expression<Func<A19253, string>> leftKeySelector = x => x.forkey;
                 Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
-                var query = context.A.GroupJoin(
+                var query = context.A
+                    .GroupJoin(
                         context.B,
                         leftKeySelector,
                         rightKeySelector,
@@ -1215,7 +1229,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
                     )
                     .Except(
-                        context.B.GroupJoin(
+                        context.B
+                            .GroupJoin(
                                 context.A,
                                 rightKeySelector,
                                 leftKeySelector,
@@ -1246,7 +1261,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Expression<Func<A19253, string>> leftKeySelector = x => x.forkey;
                 Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
-                var query = context.A.GroupJoin(
+                var query = context.A
+                    .GroupJoin(
                         context.B,
                         leftKeySelector,
                         rightKeySelector,
@@ -1257,7 +1273,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
                     )
                     .Intersect(
-                        context.B.GroupJoin(
+                        context.B
+                            .GroupJoin(
                                 context.A,
                                 rightKeySelector,
                                 leftKeySelector,
@@ -1418,14 +1435,15 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void Seed23687(MyContext23687 context)
         {
-            context.Table.Add(
-                new Root23687
-                {
-                    Id1 = 1,
-                    Id2 = 11,
-                    OwnedProp = new OwnedClass23687 { A = "A", B = "B" }
-                }
-            );
+            context.Table
+                .Add(
+                    new Root23687
+                    {
+                        Id1 = 1,
+                        Id2 = 11,
+                        OwnedProp = new OwnedClass23687 { A = "A", B = "B" }
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -1634,7 +1652,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext18435();
 
-                var result = context.TestEntities.Select(
+                var result = context.TestEntities
+                    .Select(
                         x =>
                             new
                             {
@@ -1725,7 +1744,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 var query = (
                     from foo in context.FooTable
                     select new { Bar = foo.Bar != null ? (Bar19425)foo.Bar : (Bar19425?)null }
-                ).ToList();
+                )
+                    .ToList();
 
                 Assert.Single(query);
             }
@@ -1772,7 +1792,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext19667();
 
-                var query = context.Entities.OrderByDescending(e => e.Id)
+                var query = context.Entities
+                    .OrderByDescending(e => e.Id)
                     .FirstOrDefault(p => p.Type.Date.Year == 2020);
 
                 Assert.Equal(2, query.Id);
@@ -1781,20 +1802,22 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void Seed19667(MyContext19667 context)
         {
-            context.Entities.Add(
-                new MyEntity19667
-                {
-                    Id = 1,
-                    Type = new MyType19667 { Date = new DateTime(2020, 1, 1) }
-                }
-            );
-            context.Entities.Add(
-                new MyEntity19667
-                {
-                    Id = 2,
-                    Type = new MyType19667 { Date = new DateTime(2020, 1, 1).AddDays(1) }
-                }
-            );
+            context.Entities
+                .Add(
+                    new MyEntity19667
+                    {
+                        Id = 1,
+                        Type = new MyType19667 { Date = new DateTime(2020, 1, 1) }
+                    }
+                );
+            context.Entities
+                .Add(
+                    new MyEntity19667
+                    {
+                        Id = 2,
+                        Type = new MyType19667 { Date = new DateTime(2020, 1, 1).AddDays(1) }
+                    }
+                );
 
             context.SaveChanges();
         }
@@ -1834,15 +1857,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext20359();
 
-                var result1 = (
-                    from r in context.Root
-                    select new { r.B.BValue, r.A.Sub.AValue }
-                ).FirstOrDefault();
+                var result1 = (from r in context.Root select new { r.B.BValue, r.A.Sub.AValue })
+                    .FirstOrDefault();
 
-                var result2 = (
-                    from r in context.Root
-                    select new { r.A.Sub.AValue, r.B.BValue, }
-                ).FirstOrDefault();
+                var result2 = (from r in context.Root select new { r.A.Sub.AValue, r.B.BValue, })
+                    .FirstOrDefault();
 
                 Assert.Equal(result1.BValue, result2.BValue);
             }
@@ -2010,7 +2029,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext18394();
 
-                var myA = context.As.Where(x => x.Id == 1)
+                var myA = context.As
+                    .Where(x => x.Id == 1)
                     .Select(
                         x =>
                             new ADto18394
@@ -2022,7 +2042,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         : new BDto18394
                                           {
                                               Id = x.PropertyB.Id,
-                                              PropertyCList = x.PropertyB.PropertyCList.Select(
+                                              PropertyCList = x.PropertyB.PropertyCList
+                                                  .Select(
                                                       y =>
                                                           new CDto18394
                                                           {
@@ -2132,9 +2153,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 var criteria = new DateTime(2020, 1, 1);
 
-                var data = context.Outers.Where(
-                        x => x.OwnedProp.At >= criteria || x.Inner.OwnedProp.At >= criteria
-                    )
+                var data = context.Outers
+                    .Where(x => x.OwnedProp.At >= criteria || x.Inner.OwnedProp.At >= criteria)
                     .ToList();
 
                 Assert.Single(data);

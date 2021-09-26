@@ -26,25 +26,22 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
         public async Task SetOptionsWithDefault_SetsMaxAgeToCorrectValue()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(services => { })
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(services => { }).Configure(
+                        app =>
+                        {
+                            app.UseHsts();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseHsts();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            return context.Response.WriteAsync("Hello world");
-                                        }
-                                    );
+                                    return context.Response.WriteAsync("Hello world");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -78,37 +75,34 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.Configure<HstsOptions>(
+                                options =>
                                 {
-                                    services.Configure<HstsOptions>(
-                                        options =>
-                                        {
-                                            options.Preload = preload;
-                                            options.IncludeSubDomains = includeSubDomains;
-                                            options.MaxAge = TimeSpan.FromSeconds(maxAge);
-                                        }
-                                    );
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHsts();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            return context.Response.WriteAsync("Hello world");
-                                        }
-                                    );
+                                    options.Preload = preload;
+                                    options.IncludeSubDomains = includeSubDomains;
+                                    options.MaxAge = TimeSpan.FromSeconds(maxAge);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseHsts();
+                            app.Run(
+                                context =>
+                                {
+                                    return context.Response.WriteAsync("Hello world");
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -141,37 +135,34 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddHsts(
+                                options =>
                                 {
-                                    services.AddHsts(
-                                        options =>
-                                        {
-                                            options.Preload = preload;
-                                            options.IncludeSubDomains = includeSubDomains;
-                                            options.MaxAge = TimeSpan.FromSeconds(maxAge);
-                                        }
-                                    );
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHsts();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            return context.Response.WriteAsync("Hello world");
-                                        }
-                                    );
+                                    options.Preload = preload;
+                                    options.IncludeSubDomains = includeSubDomains;
+                                    options.MaxAge = TimeSpan.FromSeconds(maxAge);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseHsts();
+                            app.Run(
+                                context =>
+                                {
+                                    return context.Response.WriteAsync("Hello world");
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -204,30 +195,27 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton<ILoggerFactory>(loggerFactory);
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseHsts();
+                            app.Run(
+                                context =>
                                 {
-                                    services.AddSingleton<ILoggerFactory>(loggerFactory);
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHsts();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            return context.Response.WriteAsync("Hello world");
-                                        }
-                                    );
+                                    return context.Response.WriteAsync("Hello world");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -266,37 +254,34 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton<ILoggerFactory>(loggerFactory);
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton<ILoggerFactory>(loggerFactory);
 
-                                    services.AddHsts(
-                                        options =>
-                                        {
-                                            options.ExcludedHosts.Clear();
-                                        }
-                                    );
-                                }
-                            )
-                            .Configure(
-                                app =>
+                            services.AddHsts(
+                                options =>
                                 {
-                                    app.UseHsts();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            return context.Response.WriteAsync("Hello world");
-                                        }
-                                    );
+                                    options.ExcludedHosts.Clear();
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseHsts();
+                            app.Run(
+                                context =>
+                                {
+                                    return context.Response.WriteAsync("Hello world");
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -331,37 +316,34 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton<ILoggerFactory>(loggerFactory);
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton<ILoggerFactory>(loggerFactory);
 
-                                    services.AddHsts(
-                                        options =>
-                                        {
-                                            options.ExcludedHosts.Add(hostUrl);
-                                        }
-                                    );
-                                }
-                            )
-                            .Configure(
-                                app =>
+                            services.AddHsts(
+                                options =>
                                 {
-                                    app.UseHsts();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            return context.Response.WriteAsync("Hello world");
-                                        }
-                                    );
+                                    options.ExcludedHosts.Add(hostUrl);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseHsts();
+                            app.Run(
+                                context =>
+                                {
+                                    return context.Response.WriteAsync("Hello world");
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -397,30 +379,27 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton<ILoggerFactory>(loggerFactory);
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseHsts();
+                            app.Run(
+                                context =>
                                 {
-                                    services.AddSingleton<ILoggerFactory>(loggerFactory);
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHsts();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            return context.Response.WriteAsync("Hello world");
-                                        }
-                                    );
+                                    return context.Response.WriteAsync("Hello world");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -455,30 +434,27 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton<ILoggerFactory>(loggerFactory);
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseHsts();
+                            app.Run(
+                                context =>
                                 {
-                                    services.AddSingleton<ILoggerFactory>(loggerFactory);
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHsts();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            return context.Response.WriteAsync("Hello world");
-                                        }
-                                    );
+                                    return context.Response.WriteAsync("Hello world");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
             var server = host.GetTestServer();

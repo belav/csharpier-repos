@@ -56,10 +56,8 @@ namespace Internal.Cryptography.Pal.Native
 
                     pOidPointers[i] = pOidContents;
 
-                    int bytesWritten = Encoding.ASCII.GetBytes(
-                        oidString,
-                        new Span<byte>(pOidContents, oidString.Length)
-                    );
+                    int bytesWritten = Encoding.ASCII
+                        .GetBytes(oidString, new Span<byte>(pOidContents, oidString.Length));
                     Debug.Assert(bytesWritten == oidString.Length);
 
                     pOidContents[oidString.Length] = 0;
@@ -96,15 +94,16 @@ namespace Internal.Cryptography.Pal.Native
                 int cb = 0;
 
                 if (
-                    !Interop.crypt32.CryptDecodeObjectPointer(
-                        CertEncodingType.All,
-                        lpszStructType,
-                        encoded,
-                        encoded.Length,
-                        CryptDecodeObjectFlags.None,
-                        null,
-                        ref cb
-                    )
+                    !Interop.crypt32
+                        .CryptDecodeObjectPointer(
+                            CertEncodingType.All,
+                            lpszStructType,
+                            encoded,
+                            encoded.Length,
+                            CryptDecodeObjectFlags.None,
+                            null,
+                            ref cb
+                        )
                 )
                 {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
@@ -113,15 +112,16 @@ namespace Internal.Cryptography.Pal.Native
                 byte* decoded = stackalloc byte[cb];
 
                 if (
-                    !Interop.crypt32.CryptDecodeObjectPointer(
-                        CertEncodingType.All,
-                        lpszStructType,
-                        encoded,
-                        encoded.Length,
-                        CryptDecodeObjectFlags.None,
-                        decoded,
-                        ref cb
-                    )
+                    !Interop.crypt32
+                        .CryptDecodeObjectPointer(
+                            CertEncodingType.All,
+                            lpszStructType,
+                            encoded,
+                            encoded.Length,
+                            CryptDecodeObjectFlags.None,
+                            decoded,
+                            ref cb
+                        )
                 )
                 {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
@@ -142,15 +142,16 @@ namespace Internal.Cryptography.Pal.Native
                 int cb = 0;
 
                 if (
-                    !Interop.crypt32.CryptDecodeObjectPointer(
-                        CertEncodingType.All,
-                        lpszStructType,
-                        encoded,
-                        encoded.Length,
-                        CryptDecodeObjectFlags.None,
-                        null,
-                        ref cb
-                    )
+                    !Interop.crypt32
+                        .CryptDecodeObjectPointer(
+                            CertEncodingType.All,
+                            lpszStructType,
+                            encoded,
+                            encoded.Length,
+                            CryptDecodeObjectFlags.None,
+                            null,
+                            ref cb
+                        )
                 )
                 {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
@@ -159,15 +160,16 @@ namespace Internal.Cryptography.Pal.Native
                 byte* decoded = stackalloc byte[cb];
 
                 if (
-                    !Interop.crypt32.CryptDecodeObjectPointer(
-                        CertEncodingType.All,
-                        lpszStructType,
-                        encoded,
-                        encoded.Length,
-                        CryptDecodeObjectFlags.None,
-                        decoded,
-                        ref cb
-                    )
+                    !Interop.crypt32
+                        .CryptDecodeObjectPointer(
+                            CertEncodingType.All,
+                            lpszStructType,
+                            encoded,
+                            encoded.Length,
+                            CryptDecodeObjectFlags.None,
+                            decoded,
+                            ref cb
+                        )
                 )
                 {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
@@ -188,15 +190,16 @@ namespace Internal.Cryptography.Pal.Native
                 int cb = 0;
 
                 if (
-                    !Interop.crypt32.CryptDecodeObjectPointer(
-                        CertEncodingType.All,
-                        lpszStructType,
-                        encoded,
-                        encoded.Length,
-                        CryptDecodeObjectFlags.None,
-                        null,
-                        ref cb
-                    )
+                    !Interop.crypt32
+                        .CryptDecodeObjectPointer(
+                            CertEncodingType.All,
+                            lpszStructType,
+                            encoded,
+                            encoded.Length,
+                            CryptDecodeObjectFlags.None,
+                            null,
+                            ref cb
+                        )
                 )
                 {
                     return false;
@@ -205,15 +208,16 @@ namespace Internal.Cryptography.Pal.Native
                 byte* decoded = stackalloc byte[cb];
 
                 if (
-                    !Interop.crypt32.CryptDecodeObjectPointer(
-                        CertEncodingType.All,
-                        lpszStructType,
-                        encoded,
-                        encoded.Length,
-                        CryptDecodeObjectFlags.None,
-                        decoded,
-                        ref cb
-                    )
+                    !Interop.crypt32
+                        .CryptDecodeObjectPointer(
+                            CertEncodingType.All,
+                            lpszStructType,
+                            encoded,
+                            encoded.Length,
+                            CryptDecodeObjectFlags.None,
+                            decoded,
+                            ref cb
+                        )
                 )
                 {
                     return false;

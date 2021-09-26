@@ -95,41 +95,40 @@ namespace System.ComponentModel.Tests
         )
         {
             RemoteExecutor.Invoke(
-                    (innerType, innerReturnNull, innerStringToConvert, innerExpectedValue) =>
-                    {
-                        FieldInfo s_convertFromInvariantString =
-                            typeof(DefaultValueAttribute).GetField(
-                                "s_convertFromInvariantString",
-                                BindingFlags.GetField
-                                    | Reflection.BindingFlags.NonPublic
-                                    | Reflection.BindingFlags.Static
-                            );
-                        Assert.NotNull(s_convertFromInvariantString);
-
-                        // simulate TypeDescriptor.ConvertFromInvariantString not found
-                        s_convertFromInvariantString.SetValue(null, new object());
-
-                        // we fallback to empty catch in DefaultValueAttribute constructor
-                        DefaultValueAttribute attr = new DefaultValueAttribute(
-                            Type.GetType(innerType),
-                            innerStringToConvert
+                (innerType, innerReturnNull, innerStringToConvert, innerExpectedValue) =>
+                {
+                    FieldInfo s_convertFromInvariantString = typeof(DefaultValueAttribute)
+                        .GetField(
+                            "s_convertFromInvariantString",
+                            BindingFlags.GetField
+                                | Reflection.BindingFlags.NonPublic
+                                | Reflection.BindingFlags.Static
                         );
+                    Assert.NotNull(s_convertFromInvariantString);
 
-                        if (bool.Parse(innerReturnNull))
-                        {
-                            Assert.Null(attr.Value);
-                        }
-                        else
-                        {
-                            Assert.Equal(int.Parse(innerExpectedValue), attr.Value);
-                        }
-                    },
-                    type.ToString(),
-                    returnNull.ToString(),
-                    stringToConvert,
-                    expectedValue.ToString()
-                )
-                .Dispose();
+                    // simulate TypeDescriptor.ConvertFromInvariantString not found
+                    s_convertFromInvariantString.SetValue(null, new object());
+
+                    // we fallback to empty catch in DefaultValueAttribute constructor
+                    DefaultValueAttribute attr = new DefaultValueAttribute(
+                        Type.GetType(innerType),
+                        innerStringToConvert
+                    );
+
+                    if (bool.Parse(innerReturnNull))
+                    {
+                        Assert.Null(attr.Value);
+                    }
+                    else
+                    {
+                        Assert.Equal(int.Parse(innerExpectedValue), attr.Value);
+                    }
+                },
+                type.ToString(),
+                returnNull.ToString(),
+                stringToConvert,
+                expectedValue.ToString()
+            ).Dispose();
         }
 
         [Theory]

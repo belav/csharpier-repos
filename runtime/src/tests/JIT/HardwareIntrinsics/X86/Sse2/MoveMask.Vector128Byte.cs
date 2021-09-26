@@ -202,10 +202,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Sse2).GetMethod(
-                    nameof(Sse2.MoveMask),
-                    new Type[] { typeof(Vector128<Byte>) }
-                )
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.MoveMask), new Type[] { typeof(Vector128<Byte>) })
                 .Invoke(null, new object[] { Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr) });
 
             ValidateResult(_dataTable.inArrayPtr, (Int32)(result));
@@ -215,10 +213,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse2).GetMethod(
-                    nameof(Sse2.MoveMask),
-                    new Type[] { typeof(Vector128<Byte>) }
-                )
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.MoveMask), new Type[] { typeof(Vector128<Byte>) })
                 .Invoke(null, new object[] { Sse2.LoadVector128((Byte*)(_dataTable.inArrayPtr)) });
 
             ValidateResult(_dataTable.inArrayPtr, (Int32)(result));
@@ -228,10 +224,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse2).GetMethod(
-                    nameof(Sse2.MoveMask),
-                    new Type[] { typeof(Vector128<Byte>) }
-                )
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.MoveMask), new Type[] { typeof(Vector128<Byte>) })
                 .Invoke(
                     null,
                     new object[] { Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr)) }
@@ -378,12 +372,12 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse2)}.{nameof(Sse2.MoveMask)}<Int32>(Vector128<Byte>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse2)}.{nameof(Sse2.MoveMask)}<Int32>(Vector128<Byte>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($"   result: result");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

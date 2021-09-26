@@ -46,8 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         public bool IsInLspEditorContext()
         {
-            var featureFlagService =
-                _workspace.Services.GetRequiredService<IExperimentationService>();
+            var featureFlagService = _workspace.Services
+                .GetRequiredService<IExperimentationService>();
             var isInLspContext =
                 IsLiveShareGuest()
                 || IsCloudEnvironmentClient()

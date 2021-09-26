@@ -33,9 +33,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 deterministic: true
             );
 
-        public static readonly object[][] Platforms = (
-            (Platform[])Enum.GetValues(typeof(Platform))
-        ).Select(p => new[] { (object)p }).ToArray();
+        public static readonly object[][] Platforms = ((Platform[])Enum.GetValues(typeof(Platform)))
+            .Select(p => new[] { (object)p })
+            .ToArray();
 
         [Theory]
         [MemberData(nameof(Platforms))]

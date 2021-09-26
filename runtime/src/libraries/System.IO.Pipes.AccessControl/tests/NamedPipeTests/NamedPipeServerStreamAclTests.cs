@@ -21,16 +21,16 @@ namespace System.IO.Pipes.Tests
         {
             CreateNamedPipe(GetRandomName(), expectedSecurity: null).Dispose();
             CreateNamedPipe(
-                    GetRandomName(),
-                    expectedSecurity: null,
-                    options: PipeOptions.WriteThrough
-                )
+                GetRandomName(),
+                expectedSecurity: null,
+                options: PipeOptions.WriteThrough
+            )
                 .Dispose();
             CreateNamedPipe(
-                    GetRandomName(),
-                    expectedSecurity: null,
-                    options: PipeOptions.Asynchronous
-                )
+                GetRandomName(),
+                expectedSecurity: null,
+                options: PipeOptions.Asynchronous
+            )
                 .Dispose();
         }
 
@@ -45,10 +45,10 @@ namespace System.IO.Pipes.Tests
                 () =>
                 {
                     CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            options: options
-                        )
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        options: options
+                    )
                         .Dispose();
                 }
             );
@@ -133,10 +133,10 @@ namespace System.IO.Pipes.Tests
                 () =>
                 {
                     CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            direction: direction
-                        )
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        direction: direction
+                    )
                         .Dispose();
                 }
             );
@@ -154,10 +154,10 @@ namespace System.IO.Pipes.Tests
                 () =>
                 {
                     CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            maxNumberOfServerInstances: maxNumberOfServerInstances
-                        )
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        maxNumberOfServerInstances: maxNumberOfServerInstances
+                    )
                         .Dispose();
                 }
             );
@@ -171,10 +171,10 @@ namespace System.IO.Pipes.Tests
         public void Create_ValidMaxNumberOfServerInstances(int instances)
         {
             CreateAndVerifyNamedPipe(
-                    GetRandomName(),
-                    GetBasicPipeSecurity(),
-                    maxNumberOfServerInstances: instances
-                )
+                GetRandomName(),
+                GetBasicPipeSecurity(),
+                maxNumberOfServerInstances: instances
+            )
                 .Dispose();
         }
 
@@ -188,10 +188,10 @@ namespace System.IO.Pipes.Tests
                 () =>
                 {
                     CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            transmissionMode: transmissionMode
-                        )
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        transmissionMode: transmissionMode
+                    )
                         .Dispose();
                 }
             );
@@ -205,10 +205,10 @@ namespace System.IO.Pipes.Tests
                 () =>
                 {
                     CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            inBufferSize: inBufferSize
-                        )
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        inBufferSize: inBufferSize
+                    )
                         .Dispose();
                 }
             );
@@ -222,10 +222,10 @@ namespace System.IO.Pipes.Tests
                 () =>
                 {
                     CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            outBufferSize: outBufferSize
-                        )
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        outBufferSize: outBufferSize
+                    )
                         .Dispose();
                 }
             );
@@ -239,10 +239,10 @@ namespace System.IO.Pipes.Tests
                 () =>
                 {
                     CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            inheritability: inheritability
-                        )
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        inheritability: inheritability
+                    )
                         .Dispose();
                 }
             );
@@ -406,17 +406,17 @@ namespace System.IO.Pipes.Tests
                     controlType
                 );
                 CreateAndVerifyNamedPipe(
-                        GetRandomName(),
-                        security,
-                        direction,
-                        maxNumberOfServerInstances,
-                        transmissionMode,
-                        options,
-                        inBufferSize,
-                        outBufferSize,
-                        inheritability,
-                        0
-                    )
+                    GetRandomName(),
+                    security,
+                    direction,
+                    maxNumberOfServerInstances,
+                    transmissionMode,
+                    options,
+                    inBufferSize,
+                    outBufferSize,
+                    inheritability,
+                    0
+                )
                     .Dispose();
             }
         }

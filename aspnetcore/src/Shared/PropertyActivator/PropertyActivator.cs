@@ -87,16 +87,15 @@ namespace Microsoft.Extensions.Internal
                 throw new ArgumentNullException(nameof(createActivateInfo));
             }
 
-            var properties = type.GetRuntimeProperties()
-                .Where(
-                    (property) =>
-                    {
-                        return property.IsDefined(activateAttributeType)
-                            && property.GetIndexParameters().Length == 0
-                            && property.SetMethod != null
-                            && !property.SetMethod.IsStatic;
-                    }
-                );
+            var properties = type.GetRuntimeProperties().Where(
+                (property) =>
+                {
+                    return property.IsDefined(activateAttributeType)
+                        && property.GetIndexParameters().Length == 0
+                        && property.SetMethod != null
+                        && !property.SetMethod.IsStatic;
+                }
+            );
 
             if (!includeNonPublic)
             {

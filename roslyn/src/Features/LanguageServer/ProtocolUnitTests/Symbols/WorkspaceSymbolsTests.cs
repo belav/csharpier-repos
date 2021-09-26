@@ -306,11 +306,12 @@ End Class";
             }
             else
             {
-                return string.Format(
-                    FeaturesResources.in_0_project_1,
-                    containingSymbolName,
-                    solution.Projects.Single().Name
-                );
+                return string
+                    .Format(
+                        FeaturesResources.in_0_project_1,
+                        containingSymbolName,
+                        solution.Projects.Single().Name
+                    );
             }
         }
     }

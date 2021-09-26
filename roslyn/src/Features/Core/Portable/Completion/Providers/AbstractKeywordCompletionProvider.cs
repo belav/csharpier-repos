@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             )
             {
                 context.AddItems(
-                    await context.Document.GetUnionItemsFromDocumentAndLinkedDocumentsAsync(
+                    await context.Document
+                        .GetUnionItemsFromDocumentAndLinkedDocumentsAsync(
                             s_comparer,
                             d =>
                                 RecommendCompletionItemsAsync(
@@ -67,9 +68,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             var syntaxContextService = document.GetRequiredLanguageService<ISyntaxContextService>();
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    position,
-                    cancellationToken
-                )
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var syntaxContext = (TContext)syntaxContextService.CreateContext(
                 document.Project.Solution.Workspace,
@@ -78,11 +79,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 cancellationToken
             );
             var keywords = await RecommendKeywordsAsync(
-                    document,
-                    position,
-                    syntaxContext,
-                    cancellationToken
-                )
+                document,
+                position,
+                syntaxContext,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return keywords.SelectAsArray(k => CreateItem(k, syntaxContext, cancellationToken));
         }

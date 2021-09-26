@@ -95,10 +95,10 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         {
             // Arrange/Act 1: Compilation
             var componentType = CompileToComponent(
-                    $"@inject {FullTypeName<IMyService1>()} MyService1\n"
-                        + $"@inject {FullTypeName<IMyService2>()} MyService2\n"
-                        + $"Hello from @MyService1 and @MyService2"
-                )
+                $"@inject {FullTypeName<IMyService1>()} MyService1\n"
+                    + $"@inject {FullTypeName<IMyService2>()} MyService2\n"
+                    + $"Hello from @MyService1 and @MyService2"
+            )
                 .GetType();
 
             // Assert 1: Compiled type has correct properties

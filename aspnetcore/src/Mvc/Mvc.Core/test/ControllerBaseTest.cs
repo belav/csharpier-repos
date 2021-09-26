@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
         {
             get
             {
-                return typeof(ControllerBase).GetTypeInfo()
+                return typeof(ControllerBase)
+                    .GetTypeInfo()
                     .DeclaredMethods.Where(
                         method =>
                             method.IsPublic
@@ -2872,8 +2873,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
 
             var valueProviderFactory = new Mock<IValueProviderFactory>();
             valueProviderFactory.Setup(
-                    f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())
-                )
+                f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())
+            )
                 .Throws(new ValueProviderException("some error"));
 
             var controller = GetController(new StubModelBinder());

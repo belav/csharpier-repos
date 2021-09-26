@@ -75,12 +75,12 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
 
             if (
                 await CanBeSeparateStatementsAsync(
-                        document,
-                        syntaxFacts,
-                        ifGenerator,
-                        ifOrElseIf,
-                        cancellationToken
-                    )
+                    document,
+                    syntaxFacts,
+                    ifGenerator,
+                    ifOrElseIf,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             )
             {
@@ -184,10 +184,11 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 string ifKeywordText
             )
                 : base(
-                    string.Format(
-                        FeaturesResources.Split_into_consecutive_0_statements,
-                        ifKeywordText
-                    ),
+                    string
+                        .Format(
+                            FeaturesResources.Split_into_consecutive_0_statements,
+                            ifKeywordText
+                        ),
                     createChangedDocument
                 ) { }
         }

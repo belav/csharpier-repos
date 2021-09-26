@@ -363,10 +363,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 {
                                     // Disallow null descriptors.
                                     throw new ArgumentException(
-                                        string.Format(
-                                            CodeAnalysisResources.SupportedDiagnosticsHasNullDescriptor,
-                                            analyzer.ToString()
-                                        ),
+                                        string
+                                            .Format(
+                                                CodeAnalysisResources.SupportedDiagnosticsHasNullDescriptor,
+                                                analyzer.ToString()
+                                            ),
                                         nameof(DiagnosticAnalyzer.SupportedDiagnostics)
                                     );
                                 }
@@ -428,10 +429,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                     {
                                         // Disallow null descriptors.
                                         throw new ArgumentException(
-                                            string.Format(
-                                                CodeAnalysisResources.SupportedSuppressionsHasNullDescriptor,
-                                                analyzer.ToString()
-                                            ),
+                                            string
+                                                .Format(
+                                                    CodeAnalysisResources.SupportedSuppressionsHasNullDescriptor,
+                                                    analyzer.ToString()
+                                                ),
                                             nameof(DiagnosticSuppressor.SupportedSuppressions)
                                         );
                                     }

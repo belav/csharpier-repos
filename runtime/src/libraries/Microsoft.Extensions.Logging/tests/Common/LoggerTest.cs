@@ -19,8 +19,8 @@ namespace Microsoft.Extensions.Logging.Test
             var loggerFactory = TestLoggerBuilder.Create(
                 builder =>
                     builder.AddProvider(
-                            new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
-                        )
+                        new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
+                    )
                         .AddProvider(
                             new CustomLoggerProvider("provider2", ThrowExceptionAt.Log, store)
                         )
@@ -56,8 +56,8 @@ namespace Microsoft.Extensions.Logging.Test
             var loggerFactory = TestLoggerBuilder.Create(
                 builder =>
                     builder.AddProvider(
-                            new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
-                        )
+                        new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
+                    )
                         .AddProvider(
                             new CustomLoggerProvider(
                                 "provider2",
@@ -97,8 +97,8 @@ namespace Microsoft.Extensions.Logging.Test
             var loggerFactory = TestLoggerBuilder.Create(
                 builder =>
                     builder.AddProvider(
-                            new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
-                        )
+                        new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
+                    )
                         .AddProvider(
                             new CustomLoggerProvider("provider2", ThrowExceptionAt.IsEnabled, store)
                         )
@@ -137,8 +137,8 @@ namespace Microsoft.Extensions.Logging.Test
             var loggerFactory = TestLoggerBuilder.Create(
                 builder =>
                     builder.AddProvider(
-                            new CustomLoggerProvider("provider1", ThrowExceptionAt.Log, store)
-                        )
+                        new CustomLoggerProvider("provider1", ThrowExceptionAt.Log, store)
+                    )
                         .AddProvider(
                             new CustomLoggerProvider("provider2", ThrowExceptionAt.Log, store)
                         )
@@ -229,9 +229,8 @@ namespace Microsoft.Extensions.Logging.Test
                 builder =>
                 {
                     builder.AddProvider(provider.Object);
-                    builder.Services.Configure<LoggerFilterOptions>(
-                        options => options.CaptureScopes = false
-                    );
+                    builder.Services
+                        .Configure<LoggerFilterOptions>(options => options.CaptureScopes = false);
                 }
             );
 
@@ -263,9 +262,8 @@ namespace Microsoft.Extensions.Logging.Test
                 builder =>
                 {
                     builder.AddProvider(provider.Object);
-                    builder.Services.Configure<LoggerFilterOptions>(
-                        options => options.CaptureScopes = false
-                    );
+                    builder.Services
+                        .Configure<LoggerFilterOptions>(options => options.CaptureScopes = false);
                 }
             );
 

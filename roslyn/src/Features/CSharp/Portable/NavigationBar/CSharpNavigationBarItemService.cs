@@ -25,9 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
     internal class CSharpNavigationBarItemService : AbstractNavigationBarItemService
     {
         private static readonly SymbolDisplayFormat s_typeFormat =
-            SymbolDisplayFormat.CSharpErrorMessageFormat.AddGenericsOptions(
-                SymbolDisplayGenericsOptions.IncludeVariance
-            );
+            SymbolDisplayFormat.CSharpErrorMessageFormat
+                .AddGenericsOptions(SymbolDisplayGenericsOptions.IncludeVariance);
 
         private static readonly SymbolDisplayFormat s_memberFormat =
             new(
@@ -87,9 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                         caseSensitive: true
                     );
 
-                    using var _2 = ArrayBuilder<RoslynNavigationBarItem>.GetInstance(
-                        out var memberItems
-                    );
+                    using var _2 = ArrayBuilder<RoslynNavigationBarItem>
+                        .GetInstance(out var memberItems);
                     foreach (var member in type.GetMembers())
                     {
                         if (
@@ -119,9 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                                 CreateItemForMember(
                                     method.PartialImplementationPart,
                                     memberSymbolIndexProvider.GetIndexForSymbolId(
-                                        method.PartialImplementationPart.GetSymbolKey(
-                                            cancellationToken
-                                        )
+                                        method.PartialImplementationPart
+                                            .GetSymbolKey(cancellationToken)
                                     ),
                                     tree,
                                     cancellationToken
@@ -335,9 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             ArrayBuilder<TextSpan> spans
         )
         {
-            var reference = symbol.DeclaringSyntaxReferences.FirstOrDefault(
-                r => r.SyntaxTree == tree
-            );
+            var reference = symbol.DeclaringSyntaxReferences
+                .FirstOrDefault(r => r.SyntaxTree == tree);
             if (reference == null)
             {
                 return;
@@ -375,9 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
         {
             // Ideally we want the span of this to include the trailing comma, so let's find
             // the declaration
-            var reference = symbol.DeclaringSyntaxReferences.FirstOrDefault(
-                r => r.SyntaxTree == tree
-            );
+            var reference = symbol.DeclaringSyntaxReferences
+                .FirstOrDefault(r => r.SyntaxTree == tree);
             if (reference == null)
             {
                 return;

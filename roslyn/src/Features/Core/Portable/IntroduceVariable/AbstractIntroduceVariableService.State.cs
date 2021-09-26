@@ -80,10 +80,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     return false;
                 }
 
-                Expression = await document.Document.TryGetRelevantNodeAsync<TExpressionSyntax>(
-                        textSpan,
-                        cancellationToken
-                    )
+                Expression = await document.Document
+                    .TryGetRelevantNodeAsync<TExpressionSyntax>(textSpan, cancellationToken)
                     .ConfigureAwait(false);
                 if (
                     Expression == null
@@ -223,8 +221,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                         { HasValue: true, Value: var value }
                     )
                     {
-                        var syntaxKindsService =
-                            document.Document.GetRequiredLanguageService<ISyntaxKindsService>();
+                        var syntaxKindsService = document.Document
+                            .GetRequiredLanguageService<ISyntaxKindsService>();
                         if (
                             syntaxKindsService.InterpolatedStringExpression == expression.RawKind
                             && value is string
@@ -232,10 +230,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                         {
                             // Interpolated strings can have constant values, but if it's being converted to a FormattableString
                             // or IFormattable then we cannot treat it as one
-                            var typeInfo = document.SemanticModel.GetTypeInfo(
-                                expression,
-                                cancellationToken
-                            );
+                            var typeInfo = document.SemanticModel
+                                .GetTypeInfo(expression, cancellationToken);
                             return typeInfo.ConvertedType?.IsFormattableStringOrIFormattable()
                                 != true;
                         }
@@ -253,10 +249,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
             public SemanticMap GetSemanticMap(CancellationToken cancellationToken)
             {
-                _semanticMap ??= Document.SemanticModel.GetSemanticMap(
-                    Expression,
-                    cancellationToken
-                );
+                _semanticMap ??= Document.SemanticModel
+                    .GetSemanticMap(Expression, cancellationToken);
                 return _semanticMap;
             }
 
@@ -287,8 +281,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 //
                 // In essence, this says "i can be replaced with an expression as long as I'm not being
                 // written to".
-                var semanticFacts =
-                    Document.Project.LanguageServices.GetService<ISemanticFactsService>();
+                var semanticFacts = Document.Project.LanguageServices
+                    .GetService<ISemanticFactsService>();
                 return semanticFacts.CanReplaceWithRValue(
                     Document.SemanticModel,
                     Expression,

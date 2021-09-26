@@ -367,8 +367,10 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 PaddingMode.None,
                 key: "c1497fdf67cecbab80d543f16d13c8d5c1497fdf67cecbab".HexToByteArray(),
                 iv: "a1241ca0fe9378cd".HexToByteArray(),
-                plainBytes: "157dcfa7ad6758335e561fa7dd7f98dca592e9128e7be30ccd1af7dc5a4536d5".HexToByteArray(),
-                cipherBytes: "08fcace492f82282fb3255884a64a231dd438069ffbcb432bd7ec446f5b8adfd".HexToByteArray(),
+                plainBytes: "157dcfa7ad6758335e561fa7dd7f98dca592e9128e7be30ccd1af7dc5a4536d5"
+                    .HexToByteArray(),
+                cipherBytes: "08fcace492f82282fb3255884a64a231dd438069ffbcb432bd7ec446f5b8adfd"
+                    .HexToByteArray(),
                 feedbackSize: 64
             );
         }
@@ -382,8 +384,10 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 PaddingMode.None,
                 key: "fd0e3262ec38fe5710389d0779c2fb43fd0e3262ec38fe57".HexToByteArray(),
                 iv: "33c9e4adfb4634ac".HexToByteArray(),
-                plainBytes: "37536dda516aab8a992131004134ce48c56fee05261164aae0a88db0f43410617f105e20940cf3e9".HexToByteArray(),
-                cipherBytes: "80e8a96c3fe83857fc738ac7b6639f0d8c28bfa617c56a60fd1b8fbdc36afe9ce3151e161fa5e3a7".HexToByteArray(),
+                plainBytes: "37536dda516aab8a992131004134ce48c56fee05261164aae0a88db0f43410617f105e20940cf3e9"
+                    .HexToByteArray(),
+                cipherBytes: "80e8a96c3fe83857fc738ac7b6639f0d8c28bfa617c56a60fd1b8fbdc36afe9ce3151e161fa5e3a7"
+                    .HexToByteArray(),
                 feedbackSize: 64
             );
         }
@@ -397,8 +401,10 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 PaddingMode.None,
                 key: "ae32253be61040157a7c10b6011fcde3ae32253be6104015".HexToByteArray(),
                 iv: "47be2286dbccdfe6".HexToByteArray(),
-                plainBytes: "e579282129c123c914c700ad8c099b593fe83fdef7be7e5ffb36add9c6b91644cc79c1e457212017488963e16198c528".HexToByteArray(),
-                cipherBytes: "7185c5800ca4d5432b50f5b7920e26296c2913e7e3f847a1ef639e156ba4f9ec6e4b36ded885601d2b9d22f19dc3829f".HexToByteArray(),
+                plainBytes: "e579282129c123c914c700ad8c099b593fe83fdef7be7e5ffb36add9c6b91644cc79c1e457212017488963e16198c528"
+                    .HexToByteArray(),
+                cipherBytes: "7185c5800ca4d5432b50f5b7920e26296c2913e7e3f847a1ef639e156ba4f9ec6e4b36ded885601d2b9d22f19dc3829f"
+                    .HexToByteArray(),
                 feedbackSize: 64
             );
         }
@@ -412,8 +418,10 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 PaddingMode.None,
                 key: "df83498cec83084acb7aaef26e58f1e0df83498cec83084a".HexToByteArray(),
                 iv: "158d2ca6e70b18f6".HexToByteArray(),
-                plainBytes: "4fb7cf2a244ff20beddf8719b2d9c78ab0710703036f804f08bc1f7927ea9906ba1ef57afd1553c5304c0b72694cd88bb6cb1289772dfff0".HexToByteArray(),
-                cipherBytes: "158b396cd1969a07042e808d0c875d74166ce77291df233fe300c29c5a30b1946575ec02042093537dae3f8d51ed96906e601d9da6e34e14".HexToByteArray(),
+                plainBytes: "4fb7cf2a244ff20beddf8719b2d9c78ab0710703036f804f08bc1f7927ea9906ba1ef57afd1553c5304c0b72694cd88bb6cb1289772dfff0"
+                    .HexToByteArray(),
+                cipherBytes: "158b396cd1969a07042e808d0c875d74166ce77291df233fe300c29c5a30b1946575ec02042093537dae3f8d51ed96906e601d9da6e34e14"
+                    .HexToByteArray(),
                 feedbackSize: 64
             );
         }
@@ -427,8 +435,10 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 PaddingMode.None,
                 key: "ce31cd2067c157199bfb3b8ad9ef9223ce31cd2067c15719".HexToByteArray(),
                 iv: "d31741512b6a7471".HexToByteArray(),
-                plainBytes: "a0447f5abebf8623db81b600699ce8373353442908fefe8c63f5e29e22ba1057f759635505ed0ac059887def2d31f6996128d4fbe2df6534429744d7f6496768".HexToByteArray(),
-                cipherBytes: "b3a791b128f003bc28cd17bbb5c68990faec73f88c10b664f1349b045f3fba24c5f51bbb10259c41a72492c2377bb331b6dd34fea25c2eea8adc461bd0c78d6b".HexToByteArray(),
+                plainBytes: "a0447f5abebf8623db81b600699ce8373353442908fefe8c63f5e29e22ba1057f759635505ed0ac059887def2d31f6996128d4fbe2df6534429744d7f6496768"
+                    .HexToByteArray(),
+                cipherBytes: "b3a791b128f003bc28cd17bbb5c68990faec73f88c10b664f1349b045f3fba24c5f51bbb10259c41a72492c2377bb331b6dd34fea25c2eea8adc461bd0c78d6b"
+                    .HexToByteArray(),
                 feedbackSize: 64
             );
         }
@@ -442,8 +452,10 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 PaddingMode.None,
                 key: "5bbc3423bf67e05262d65740708019f15bbc3423bf67e052".HexToByteArray(),
                 iv: "14544ea4813c49d9".HexToByteArray(),
-                plainBytes: "a21f26496f74fd8a93aa5423e2a4fc76facbff015db2f4ef14f08b8c13a29d0561e4e57d04b0b00211f8fba46d025a9c0727c8aebb7d25f27f1606321909ba50e660fa25358c63f9".HexToByteArray(),
-                cipherBytes: "c3acc89b9b6037effc65eacdc23b36c38d0e609566d360eba594e4481108983b4a67a5d9647c776ad5fcc4639116ca95734bd8a3df800fb9a6526a7b29a9fc3cc29079715f44f865".HexToByteArray(),
+                plainBytes: "a21f26496f74fd8a93aa5423e2a4fc76facbff015db2f4ef14f08b8c13a29d0561e4e57d04b0b00211f8fba46d025a9c0727c8aebb7d25f27f1606321909ba50e660fa25358c63f9"
+                    .HexToByteArray(),
+                cipherBytes: "c3acc89b9b6037effc65eacdc23b36c38d0e609566d360eba594e4481108983b4a67a5d9647c776ad5fcc4639116ca95734bd8a3df800fb9a6526a7b29a9fc3cc29079715f44f865"
+                    .HexToByteArray(),
                 feedbackSize: 64
             );
         }
@@ -457,8 +469,10 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 PaddingMode.None,
                 key: "197c738cfb6e0bc2fee57ffb1ca72675197c738cfb6e0bc2".HexToByteArray(),
                 iv: "f1a42447a333caa3".HexToByteArray(),
-                plainBytes: "6f914b6996ee8e7ea625b2fddd7677b4384320be0aba3af81d1210965ac37983f340d5698ddf35d45dfccbf783a50c6eed1a730b5c98675cb6b7645fc8374e10d8b340c44b0eae988c1ef635fab913da".HexToByteArray(),
-                cipherBytes: "8aabb83216e4bd5a3dd20586e598bb8e956dcbf7d09cde17a2cf8b7a788ecb853503ae5981004dfa644300b115f8d1ae0c7f30f25e70e86c4adc51620fd6c71301325c9bdc8dca16588eac08fe6aedfd".HexToByteArray(),
+                plainBytes: "6f914b6996ee8e7ea625b2fddd7677b4384320be0aba3af81d1210965ac37983f340d5698ddf35d45dfccbf783a50c6eed1a730b5c98675cb6b7645fc8374e10d8b340c44b0eae988c1ef635fab913da"
+                    .HexToByteArray(),
+                cipherBytes: "8aabb83216e4bd5a3dd20586e598bb8e956dcbf7d09cde17a2cf8b7a788ecb853503ae5981004dfa644300b115f8d1ae0c7f30f25e70e86c4adc51620fd6c71301325c9bdc8dca16588eac08fe6aedfd"
+                    .HexToByteArray(),
                 feedbackSize: 64
             );
         }
@@ -572,15 +586,15 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 alg.Padding = PaddingMode.None;
                 alg.Mode = CipherMode.ECB;
 
-                byte[] plainText =
-                    "de7d2dddea96b691e979e647dc9d3ca27d7f1ad673ca9570".HexToByteArray();
+                byte[] plainText = "de7d2dddea96b691e979e647dc9d3ca27d7f1ad673ca9570"
+                    .HexToByteArray();
                 byte[] cipher = alg.Encrypt(plainText);
                 byte[] expectedCipher = expectedCipherHex.HexToByteArray();
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted =
-                    "de7d2dddea96b691e979e647dc9d3ca27d7f1ad673ca9570".HexToByteArray();
+                byte[] expectedDecrypted = "de7d2dddea96b691e979e647dc9d3ca27d7f1ad673ca9570"
+                    .HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
@@ -619,15 +633,15 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 alg.Padding = PaddingMode.None;
                 alg.Mode = CipherMode.CBC;
 
-                byte[] plainText =
-                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] plainText = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b"
+                    .HexToByteArray();
                 byte[] cipher = alg.Encrypt(plainText);
                 byte[] expectedCipher = expectedCipherHex.HexToByteArray();
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted =
-                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] expectedDecrypted = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b"
+                    .HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
@@ -670,8 +684,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted =
-                    "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8000000".HexToByteArray();
+                byte[] expectedDecrypted = "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8000000"
+                    .HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
@@ -742,8 +756,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted =
-                    "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8".HexToByteArray();
+                byte[] expectedDecrypted = "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8"
+                    .HexToByteArray();
                 Assert.Equal<byte>(plainText, decrypted);
             }
         }
@@ -762,14 +776,14 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 byte[] plainText = "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8".HexToByteArray();
                 byte[] cipher = alg.Encrypt(plainText);
 
-                byte[] expectedCipher =
-                    "149ec32f558b27c7e4151e340d8184f1c90f0a499e20fda9".HexToByteArray();
+                byte[] expectedCipher = "149ec32f558b27c7e4151e340d8184f1c90f0a499e20fda9"
+                    .HexToByteArray();
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 alg.Padding = PaddingMode.Zeros;
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted =
-                    "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8".HexToByteArray();
+                byte[] expectedDecrypted = "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8"
+                    .HexToByteArray();
 
                 // They should not decrypt to the same value
                 Assert.NotEqual<byte>(plainText, decrypted);
@@ -816,8 +830,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted =
-                    "f9e9a1385bf3bd056d6a06eac662736891bd3e6837000000".HexToByteArray();
+                byte[] expectedDecrypted = "f9e9a1385bf3bd056d6a06eac662736891bd3e6837000000"
+                    .HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
@@ -860,8 +874,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted =
-                    "5bd3c4e16a723a17ac60dd0efdb158e269cddfd0fa".HexToByteArray();
+                byte[] expectedDecrypted = "5bd3c4e16a723a17ac60dd0efdb158e269cddfd0fa"
+                    .HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
@@ -906,8 +920,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted =
-                    "e867f915e275eab27d6951165d26dec6dd0acafcfc".HexToByteArray();
+                byte[] expectedDecrypted = "e867f915e275eab27d6951165d26dec6dd0acafcfc"
+                    .HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }

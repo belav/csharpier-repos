@@ -141,13 +141,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 CallBase = true
             };
             attributeProviderMock.Setup(
-                    p =>
-                        p.AddValidationAttributes(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<ModelExplorer>(),
-                            It.IsAny<IDictionary<string, string>>()
-                        )
-                )
+                p =>
+                    p.AddValidationAttributes(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<ModelExplorer>(),
+                        It.IsAny<IDictionary<string, string>>()
+                    )
+            )
                 .Verifiable();
             var attributeProvider = attributeProviderMock.Object;
 
@@ -229,13 +229,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 CallBase = true
             };
             attributeProviderMock.Setup(
-                    p =>
-                        p.AddValidationAttributes(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<ModelExplorer>(),
-                            It.IsAny<IDictionary<string, string>>()
-                        )
-                )
+                p =>
+                    p.AddValidationAttributes(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<ModelExplorer>(),
+                        It.IsAny<IDictionary<string, string>>()
+                    )
+            )
                 .Verifiable();
             var attributeProvider = attributeProviderMock.Object;
 
@@ -314,9 +314,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Add validation properties for float, double and decimal properties. Ignore everything else.
             var mvcViewOptions = new MvcViewOptions();
-            mvcViewOptions.ClientModelValidatorProviders.Add(
-                new NumericClientModelValidatorProvider()
-            );
+            mvcViewOptions.ClientModelValidatorProviders
+                .Add(new NumericClientModelValidatorProvider());
 
             var mvcViewOptionsAccessor = new Mock<IOptions<MvcViewOptions>>();
             mvcViewOptionsAccessor.SetupGet(accessor => accessor.Value).Returns(mvcViewOptions);

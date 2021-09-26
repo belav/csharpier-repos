@@ -145,13 +145,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (item.Properties.TryGetValue("Symbols", out var symbolIds))
             {
                 var idList = symbolIds.Split(
-                        s_symbolSplitters,
-                        StringSplitOptions.RemoveEmptyEntries
-                    )
+                    s_symbolSplitters,
+                    StringSplitOptions.RemoveEmptyEntries
+                )
                     .ToList();
                 using var _ = ArrayBuilder<ISymbol>.GetInstance(out var symbols);
 
-                var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+                var compilation = await document.Project
+                    .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 DecodeSymbols(idList, compilation, symbols);
 
@@ -164,9 +165,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         foreach (var id in linkedIds)
                         {
                             var linkedDoc = document.Project.Solution.GetDocument(id);
-                            var linkedCompilation = await linkedDoc.Project.GetCompilationAsync(
-                                    cancellationToken
-                                )
+                            var linkedCompilation = await linkedDoc.Project
+                                .GetCompilationAsync(cancellationToken)
                                 .ConfigureAwait(false);
                             DecodeSymbols(idList, linkedCompilation, symbols);
                         }
@@ -241,13 +241,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 .ConfigureAwait(false);
 
             return await CommonCompletionUtilities.CreateDescriptionAsync(
-                    workspace,
-                    semanticModel,
-                    position,
-                    symbols,
-                    supportedPlatforms,
-                    cancellationToken
-                )
+                workspace,
+                semanticModel,
+                position,
+                symbols,
+                supportedPlatforms,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -283,9 +283,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (supportedPlatforms != null)
             {
                 return completionItem.AddProperty(
-                        "InvalidProjects",
-                        string.Join(";", supportedPlatforms.InvalidProjects.Select(id => id.Id))
-                    )
+                    "InvalidProjects",
+                    string.Join(";", supportedPlatforms.InvalidProjects.Select(id => id.Id))
+                )
                     .AddProperty(
                         "CandidateProjects",
                         string.Join(";", supportedPlatforms.CandidateProjects.Select(id => id.Id))
@@ -484,13 +484,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (symbols.Count != 0)
             {
                 return await CommonCompletionUtilities.CreateDescriptionAsync(
-                        workspace,
-                        semanticModel,
-                        position,
-                        symbols,
-                        supportedPlatforms,
-                        cancellationToken
-                    )
+                    workspace,
+                    semanticModel,
+                    position,
+                    symbols,
+                    supportedPlatforms,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else

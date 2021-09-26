@@ -540,10 +540,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "C.Main",
-                    @"{
+            CompileAndVerify(text).VerifyIL(
+                "C.Main",
+                @"{
   // Code size       15 (0xf)
   .maxstack  2
   .locals init (int V_0) //i
@@ -560,7 +559,7 @@ class C
   IL_000e:  ret       
 }
 "
-                );
+            );
         }
 
         // Nested for Loops

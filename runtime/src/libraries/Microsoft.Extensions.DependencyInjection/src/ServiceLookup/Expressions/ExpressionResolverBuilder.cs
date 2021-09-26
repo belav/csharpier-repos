@@ -33,9 +33,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             lockObj => Monitor.Exit(lockObj)
         );
 
-        private static readonly MethodInfo ArrayEmptyMethodInfo = typeof(Array).GetMethod(
-            nameof(Array.Empty)
-        );
+        private static readonly MethodInfo ArrayEmptyMethodInfo = typeof(Array)
+            .GetMethod(nameof(Array.Empty));
 
         private static readonly ParameterExpression ScopeParameter = Expression.Parameter(
             typeof(ServiceProviderEngineScope)
@@ -54,10 +53,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 ResolvedServices,
                 Expression.Property(
                     ScopeParameter,
-                    typeof(ServiceProviderEngineScope).GetProperty(
-                        nameof(ServiceProviderEngineScope.ResolvedServices),
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    )
+                    typeof(ServiceProviderEngineScope)
+                        .GetProperty(
+                            nameof(ServiceProviderEngineScope.ResolvedServices),
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        )
                 )
             );
 
@@ -65,10 +65,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             Sync,
             Expression.Property(
                 ScopeParameter,
-                typeof(ServiceProviderEngineScope).GetProperty(
-                    nameof(ServiceProviderEngineScope.Sync),
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                )
+                typeof(ServiceProviderEngineScope)
+                    .GetProperty(
+                        nameof(ServiceProviderEngineScope.Sync),
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    )
             )
         );
 
@@ -155,10 +156,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             Expression<Func<ServiceProviderEngineScope, object>> expression = BuildExpression(
                 callSite
             );
-            DependencyInjectionEventSource.Log.ExpressionTreeGenerated(
-                callSite.ServiceType,
-                expression
-            );
+            DependencyInjectionEventSource.Log
+                .ExpressionTreeGenerated(callSite.ServiceType, expression);
             return expression.Compile();
         }
 
@@ -238,9 +237,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
             return Expression.NewArrayInit(
                 callSite.ItemType,
-                callSite.ServiceCallSites.Select(
-                    cs => Convert(VisitCallSite(cs, context), callSite.ItemType)
-                )
+                callSite.ServiceCallSites
+                    .Select(cs => Convert(VisitCallSite(cs, context), callSite.ItemType))
             );
         }
 

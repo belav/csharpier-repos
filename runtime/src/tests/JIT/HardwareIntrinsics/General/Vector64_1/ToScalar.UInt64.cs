@@ -73,7 +73,8 @@ namespace JIT.HardwareIntrinsics.General
 
             Vector64<UInt64> value = Vector64.Create(values[0]);
 
-            object result = typeof(Vector64).GetMethod(nameof(Vector64.ToScalar))
+            object result = typeof(Vector64)
+                .GetMethod(nameof(Vector64.ToScalar))
                 .MakeGenericMethod(typeof(UInt64))
                 .Invoke(null, new object[] { value });
 
@@ -88,12 +89,10 @@ namespace JIT.HardwareIntrinsics.General
         {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64<UInt64>.ToScalar(): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  values: ({string.Join(", ", values)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector64<UInt64>.ToScalar(): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"  values: ({string.Join(", ", values)})");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

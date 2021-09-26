@@ -720,13 +720,14 @@ namespace System.Text.RegularExpressions
                                     );
                                 }
 
-                                charClass!.AddCategoryFromName(
-                                    ParseProperty(),
-                                    ch != 'p',
-                                    caseInsensitive,
-                                    _pattern,
-                                    _currentPos
-                                );
+                                charClass!
+                                    .AddCategoryFromName(
+                                        ParseProperty(),
+                                        ch != 'p',
+                                        caseInsensitive,
+                                        _pattern,
+                                        _currentPos
+                                    );
                             }
                             else
                             {
@@ -2575,11 +2576,13 @@ namespace System.Text.RegularExpressions
             {
                 string str =
                     UseOptionI() && !isReplacement
-                        ? string.Create(
+                        ? string
+                          .Create(
                               cch,
                               (_pattern, _culture, pos, cch),
                               static (span, state) =>
-                                  state._pattern.AsSpan(state.pos, state.cch)
+                                  state._pattern
+                                      .AsSpan(state.pos, state.cch)
                                       .ToLower(span, state._culture)
                           )
                         : _pattern.Substring(pos, cch);

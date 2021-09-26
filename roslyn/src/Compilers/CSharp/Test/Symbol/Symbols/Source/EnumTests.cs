@@ -609,13 +609,11 @@ enum MyEnum
 {
     One
 }";
-            var comp = CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,17): warning CS0458: The result of the expression is always 'null' of type 'MyEnum?'
-                    //     MyEnum? e = null & MyEnum.One;
-                    Diagnostic(ErrorCode.WRN_AlwaysNull, "null & MyEnum.One")
-                        .WithArguments("MyEnum?")
-                );
+            var comp = CreateCompilation(source).VerifyDiagnostics(
+                // (3,17): warning CS0458: The result of the expression is always 'null' of type 'MyEnum?'
+                //     MyEnum? e = null & MyEnum.One;
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "null & MyEnum.One").WithArguments("MyEnum?")
+            );
         }
 
         [WorkItem(5030, "DevDiv_Projects/Roslyn")]
@@ -644,38 +642,37 @@ class c1
 public enum Enum1 { A1 = 1, B1 = 2 };
 public enum Enum2 : byte { A2, B2 };
 ";
-            var comp = CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,20): error CS0019: Operator '+' cannot be applied to operands of type 'Enum1' and 'long'
-                    //         Enum1 e1 = e1 + 5L;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "e1 + 5L")
-                        .WithArguments("+", "Enum1", "long"),
-                    // (7,20): error CS0019: Operator '+' cannot be applied to operands of type 'Enum1' and 'Enum2'
-                    //         Enum2 e2 = e1 + e2;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "e1 + e2")
-                        .WithArguments("+", "Enum1", "Enum2"),
-                    // (8,14): error CS0019: Operator '+' cannot be applied to operands of type 'Enum1' and 'Enum1'
-                    //         e1 = Enum1.A1 + Enum1.B1;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "Enum1.A1 + Enum1.B1")
-                        .WithArguments("+", "Enum1", "Enum1"),
-                    // (9,19): error CS0019: Operator '==' cannot be applied to operands of type 'Enum1' and 'int'
-                    //         bool b1 = e1 == 1;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "e1 == 1")
-                        .WithArguments("==", "Enum1", "int"),
-                    // (10,19): error CS0019: Operator '==' cannot be applied to operands of type 'Enum1' and 'Enum2'
-                    //         bool b7 = e1 == e2;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "e1 == e2")
-                        .WithArguments("==", "Enum1", "Enum2"),
-                    // (6,20): error CS0165: Use of unassigned local variable 'e1'
-                    //         Enum1 e1 = e1 + 5L;
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "e1").WithArguments("e1"),
-                    // (7,25): error CS0165: Use of unassigned local variable 'e2'
-                    //         Enum2 e2 = e1 + e2;
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "e2").WithArguments("e2"),
-                    // (15,13): warning CS0219: The variable 's' is assigned but its value is never used
-                    //         var s = sizeof(Enum1); // OK
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s").WithArguments("s")
-                );
+            var comp = CreateCompilation(source).VerifyDiagnostics(
+                // (6,20): error CS0019: Operator '+' cannot be applied to operands of type 'Enum1' and 'long'
+                //         Enum1 e1 = e1 + 5L;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "e1 + 5L")
+                    .WithArguments("+", "Enum1", "long"),
+                // (7,20): error CS0019: Operator '+' cannot be applied to operands of type 'Enum1' and 'Enum2'
+                //         Enum2 e2 = e1 + e2;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "e1 + e2")
+                    .WithArguments("+", "Enum1", "Enum2"),
+                // (8,14): error CS0019: Operator '+' cannot be applied to operands of type 'Enum1' and 'Enum1'
+                //         e1 = Enum1.A1 + Enum1.B1;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "Enum1.A1 + Enum1.B1")
+                    .WithArguments("+", "Enum1", "Enum1"),
+                // (9,19): error CS0019: Operator '==' cannot be applied to operands of type 'Enum1' and 'int'
+                //         bool b1 = e1 == 1;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "e1 == 1")
+                    .WithArguments("==", "Enum1", "int"),
+                // (10,19): error CS0019: Operator '==' cannot be applied to operands of type 'Enum1' and 'Enum2'
+                //         bool b7 = e1 == e2;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "e1 == e2")
+                    .WithArguments("==", "Enum1", "Enum2"),
+                // (6,20): error CS0165: Use of unassigned local variable 'e1'
+                //         Enum1 e1 = e1 + 5L;
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "e1").WithArguments("e1"),
+                // (7,25): error CS0165: Use of unassigned local variable 'e2'
+                //         Enum2 e2 = e1 + e2;
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "e2").WithArguments("e2"),
+                // (15,13): warning CS0219: The variable 's' is assigned but its value is never used
+                //         var s = sizeof(Enum1); // OK
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s").WithArguments("s")
+            );
         }
 
         [WorkItem(5030, "DevDiv_Projects/Roslyn")]
@@ -886,11 +883,10 @@ class Test
         Member2 = e, Member1
     }
 }";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (4,14): error CS0110: The evaluation of the constant value for 'Test.e' involves a circular definition
-                    Diagnostic(ErrorCode.ERR_CircConstValue, "e").WithArguments("Test.e")
-                ); // No Errors
+            CreateCompilation(text).VerifyDiagnostics(
+                // (4,14): error CS0110: The evaluation of the constant value for 'Test.e' involves a circular definition
+                Diagnostic(ErrorCode.ERR_CircConstValue, "e").WithArguments("Test.e")
+            ); // No Errors
         }
 
         [WorkItem(540765, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540765")]
@@ -924,13 +920,12 @@ class Test
         Member = (e) + 1 //fine
     }
 }";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (16,18): error CS0266: Cannot implicitly convert type 'Test.E3' to 'int'. An explicit conversion exists (are you missing a cast?)
-                    //         Member = (E3)e
-                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(E3)e")
-                        .WithArguments("Test.E3", "int")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (16,18): error CS0266: Cannot implicitly convert type 'Test.E3' to 'int'. An explicit conversion exists (are you missing a cast?)
+                //         Member = (E3)e
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(E3)e")
+                    .WithArguments("Test.E3", "int")
+            );
         }
 
         [WorkItem(540771, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540771")]
@@ -984,16 +979,15 @@ public enum Breaks8 : System.UInt64 {}";
             var text =
                 @"public enum Breaks1 : string {} 
 public enum Breaks2 : System.String {}";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (1,23): error CS1008: Type byte, sbyte, short, ushort, int, uint, long, or ulong expected
-                    // public enum Breaks1 : string {}
-                    Diagnostic(ErrorCode.ERR_IntegralTypeExpected, "string").WithLocation(1, 23),
-                    // (2,23): error CS1008: Type byte, sbyte, short, ushort, int, uint, long, or ulong expected
-                    // public enum Breaks2 : System.String {}
-                    Diagnostic(ErrorCode.ERR_IntegralTypeExpected, "System.String")
-                        .WithLocation(2, 23)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (1,23): error CS1008: Type byte, sbyte, short, ushort, int, uint, long, or ulong expected
+                // public enum Breaks1 : string {}
+                Diagnostic(ErrorCode.ERR_IntegralTypeExpected, "string").WithLocation(1, 23),
+                // (2,23): error CS1008: Type byte, sbyte, short, ushort, int, uint, long, or ulong expected
+                // public enum Breaks2 : System.String {}
+                Diagnostic(ErrorCode.ERR_IntegralTypeExpected, "System.String")
+                    .WithLocation(2, 23)
+            );
         }
 
         [WorkItem(750553, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/750553")]
@@ -1129,19 +1123,21 @@ class C<T> { enum E4 : T { } }
                 var members = currentContainer.GetMembers(name);
                 Assert.True(
                     members.Length > 0,
-                    string.Format(
-                        "No members named {0} inside {1}",
-                        name,
-                        currentSymbol.ToTestDisplayString()
-                    )
+                    string
+                        .Format(
+                            "No members named {0} inside {1}",
+                            name,
+                            currentSymbol.ToTestDisplayString()
+                        )
                 );
                 Assert.True(
                     members.Length <= 1,
-                    string.Format(
-                        "Multiple members named {0} inside {1}",
-                        name,
-                        currentSymbol.ToTestDisplayString()
-                    )
+                    string
+                        .Format(
+                            "Multiple members named {0} inside {1}",
+                            name,
+                            currentSymbol.ToTestDisplayString()
+                        )
                 );
                 currentSymbol = members.First();
             }

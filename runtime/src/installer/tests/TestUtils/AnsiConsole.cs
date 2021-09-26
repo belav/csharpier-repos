@@ -101,10 +101,11 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                         case 'm':
                             int value;
                             if (
-                                int.TryParse(
-                                    message.Substring(startIndex, endIndex - startIndex),
-                                    out value
-                                )
+                                int
+                                    .TryParse(
+                                        message.Substring(startIndex, endIndex - startIndex),
+                                        out value
+                                    )
                             )
                             {
                                 switch (value)

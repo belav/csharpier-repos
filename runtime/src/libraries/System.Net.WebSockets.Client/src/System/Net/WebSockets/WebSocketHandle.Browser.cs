@@ -56,7 +56,8 @@ namespace System.Net.WebSockets
                 using (linkedCancellation)
                 {
                     WebSocket = new BrowserWebSocket();
-                    await ((BrowserWebSocket)WebSocket).ConnectAsyncJavaScript(
+                    await ((BrowserWebSocket)WebSocket)
+                        .ConnectAsyncJavaScript(
                             uri,
                             externalAndAbortCancellation.Token,
                             options.RequestedSubProtocols

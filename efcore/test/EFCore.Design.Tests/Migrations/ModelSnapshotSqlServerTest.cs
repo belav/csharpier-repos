@@ -447,8 +447,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     Assert.Equal(
                         "DerivedEntity",
                         o.FindEntityType(
-                                "Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+DerivedEntity"
-                            )
+                            "Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+DerivedEntity"
+                        )
                             .GetTableName()
                     );
                 }
@@ -509,8 +509,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     Assert.Equal(
                         "DerivedEntity",
                         o.FindEntityType(
-                                "Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+DerivedEntity"
-                            )
+                            "Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+DerivedEntity"
+                        )
                             .GetTableName()
                     );
                 }
@@ -559,10 +559,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 builder =>
                 {
                     builder.HasDbFunction(
-                        typeof(ModelSnapshotSqlServerTest).GetMethod(
-                            nameof(GetCountByYear),
-                            BindingFlags.NonPublic | BindingFlags.Static
-                        )
+                        typeof(ModelSnapshotSqlServerTest)
+                            .GetMethod(
+                                nameof(GetCountByYear),
+                                BindingFlags.NonPublic | BindingFlags.Static
+                            )
                     );
 
                     builder.Entity<TestKeylessType>().HasNoKey();
@@ -6180,9 +6181,10 @@ namespace RootNamespace
 
         protected void Test(IModel model, string expectedCode, Action<IModel, IModel> assert)
         {
-            var serviceProvider = SqlServerTestHelpers.Instance.CreateContextServices(
-                new ServiceCollection().AddEntityFrameworkSqlServerNetTopologySuite()
-            );
+            var serviceProvider = SqlServerTestHelpers.Instance
+                .CreateContextServices(
+                    new ServiceCollection().AddEntityFrameworkSqlServerNetTopologySuite()
+                );
 
             serviceProvider.GetService<IModelRuntimeInitializer>()
                 .Initialize(model, designTime: true, validationLogger: null);
@@ -6239,9 +6241,10 @@ namespace RootNamespace
 
         protected ModelBuilder CreateConventionalModelBuilder()
         {
-            var serviceProvider = SqlServerTestHelpers.Instance.CreateContextServices(
-                new ServiceCollection().AddEntityFrameworkSqlServerNetTopologySuite()
-            );
+            var serviceProvider = SqlServerTestHelpers.Instance
+                .CreateContextServices(
+                    new ServiceCollection().AddEntityFrameworkSqlServerNetTopologySuite()
+                );
 
             return new ModelBuilder(
                 serviceProvider.GetService<IConventionSetBuilder>().CreateConventionSet(),

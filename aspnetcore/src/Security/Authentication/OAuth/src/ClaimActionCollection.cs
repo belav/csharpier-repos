@@ -27,9 +27,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth.Claims
         public void Remove(string claimType)
         {
             var itemsToRemove = Actions.Where(
-                    map =>
-                        string.Equals(claimType, map.ClaimType, StringComparison.OrdinalIgnoreCase)
-                )
+                map => string.Equals(claimType, map.ClaimType, StringComparison.OrdinalIgnoreCase)
+            )
                 .ToList();
             itemsToRemove.ForEach(map => Actions.Remove(map));
         }

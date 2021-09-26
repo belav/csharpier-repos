@@ -174,10 +174,12 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     {
                         try
                         {
-                            exceptionData = string.Join(
-                                Environment.NewLine,
-                                completionTask.Exception!.InnerExceptions.Select(e => e.ToString())
-                            );
+                            exceptionData = string
+                                .Join(
+                                    Environment.NewLine,
+                                    completionTask.Exception!.InnerExceptions
+                                        .Select(e => e.ToString())
+                                );
                         }
                         catch { }
                     }

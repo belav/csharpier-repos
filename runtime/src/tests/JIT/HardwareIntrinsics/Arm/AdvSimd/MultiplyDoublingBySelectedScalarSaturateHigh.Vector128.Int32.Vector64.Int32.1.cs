@@ -359,7 +359,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.MultiplyDoublingBySelectedScalarSaturateHigh),
                     new Type[] { typeof(Vector128<Int32>), typeof(Vector64<Int32>), typeof(byte) }
                 )
@@ -381,7 +382,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.MultiplyDoublingBySelectedScalarSaturateHigh),
                     new Type[] { typeof(Vector128<Int32>), typeof(Vector64<Int32>), typeof(byte) }
                 )
@@ -658,18 +660,16 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.MultiplyDoublingBySelectedScalarSaturateHigh)}<Int32>(Vector128<Int32>, Vector64<Int32>, 1): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"    firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   secondOp: ({string.Join(", ", secondOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.MultiplyDoublingBySelectedScalarSaturateHigh)}<Int32>(Vector128<Int32>, Vector64<Int32>, 1): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"    firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"   secondOp: ({string.Join(", ", secondOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

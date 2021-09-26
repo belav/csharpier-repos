@@ -923,8 +923,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Can_convert_bytes_to_nullable_decimal()
         {
-            var converter =
-                _nullableDecimalToBytesConverter.ConvertFromProviderExpression.Compile();
+            var converter = _nullableDecimalToBytesConverter.ConvertFromProviderExpression
+                .Compile();
 
             Assert.Equal(
                 decimal.MaxValue,

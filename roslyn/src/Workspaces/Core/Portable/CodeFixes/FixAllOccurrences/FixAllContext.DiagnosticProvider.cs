@@ -80,8 +80,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     )
                     {
                         return await FixAllContextHelper.GetDocumentDiagnosticsToFixAsync(
-                                fixAllContext
-                            )
+                            fixAllContext
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -106,8 +106,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                         {
                             case FixAllScope.Project:
                                 var diagnostics = await fixAllContext.GetProjectDiagnosticsAsync(
-                                        project
-                                    )
+                                    project
+                                )
                                     .ConfigureAwait(false);
                                 var kvp = SpecializedCollections.SingletonEnumerable(
                                     KeyValuePairUtil.Create(project, diagnostics)
@@ -120,14 +120,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                                     ImmutableArray<Diagnostic>
                                 >();
 
-                                var tasks = project.Solution.Projects.Select(
+                                var tasks = project.Solution.Projects
+                                    .Select(
                                         async p =>
                                             new
                                             {
                                                 Project = p,
                                                 Diagnostics = await fixAllContext.GetProjectDiagnosticsAsync(
-                                                        p
-                                                    )
+                                                    p
+                                                )
                                                     .ConfigureAwait(false)
                                             }
                                     )

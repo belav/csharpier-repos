@@ -21,12 +21,12 @@ namespace System.Web.Http.Tracing.Tracers
             HttpResponseMessage response = new HttpResponseMessage();
             Mock<IExceptionFilter> mockFilter = new Mock<IExceptionFilter>() { CallBase = true };
             mockFilter.Setup(
-                    f =>
-                        f.ExecuteExceptionFilterAsync(
-                            It.IsAny<HttpActionExecutedContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                f =>
+                    f.ExecuteExceptionFilterAsync(
+                        It.IsAny<HttpActionExecutedContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(TaskHelpers.Completed());
             HttpActionExecutedContext actionExecutedContext = ContextUtil.GetActionExecutedContext(
                 request,
@@ -74,12 +74,12 @@ namespace System.Web.Http.Tracing.Tracers
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>(null);
             tcs.TrySetException(exception);
             mockFilter.Setup(
-                    a =>
-                        a.ExecuteExceptionFilterAsync(
-                            It.IsAny<HttpActionExecutedContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                a =>
+                    a.ExecuteExceptionFilterAsync(
+                        It.IsAny<HttpActionExecutedContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(tcs.Task);
             HttpActionExecutedContext actionExecutedContext = ContextUtil.GetActionExecutedContext(
                 request,
@@ -105,10 +105,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            Task task = ((IExceptionFilter)tracer).ExecuteExceptionFilterAsync(
-                actionExecutedContext,
-                CancellationToken.None
-            );
+            Task task = ((IExceptionFilter)tracer)
+                .ExecuteExceptionFilterAsync(actionExecutedContext, CancellationToken.None);
 
             // Assert
             Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() => task);

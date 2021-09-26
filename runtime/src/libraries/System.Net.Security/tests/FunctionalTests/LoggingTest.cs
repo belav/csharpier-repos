@@ -14,11 +14,8 @@ namespace System.Net.Security.Tests
         [Fact]
         public void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(SslStream).Assembly.GetType(
-                "System.Net.NetEventSource",
-                throwOnError: true,
-                ignoreCase: false
-            );
+            Type esType = typeof(SslStream).Assembly
+                .GetType("System.Net.NetEventSource", throwOnError: true, ignoreCase: false);
             Assert.NotNull(esType);
 
             Assert.Equal(
@@ -37,33 +34,32 @@ namespace System.Net.Security.Tests
         public void EventSource_EventsRaisedAsExpected()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        using (
-                            var listener = new TestEventListener(
-                                "Private.InternalDiagnostics.System.Net.Security",
-                                EventLevel.Verbose
-                            )
+                () =>
+                {
+                    using (
+                        var listener = new TestEventListener(
+                            "Private.InternalDiagnostics.System.Net.Security",
+                            EventLevel.Verbose
                         )
-                        {
-                            var events = new ConcurrentQueue<EventWrittenEventArgs>();
-                            listener.RunWithCallback(
-                                events.Enqueue,
-                                () =>
-                                {
-                                    // Invoke tests that'll cause some events to be generated
-                                    var test = new SslStreamStreamToStreamTest_Async();
-                                    test.SslStream_StreamToStream_Authentication_Success()
-                                        .GetAwaiter()
-                                        .GetResult();
-                                }
-                            );
-                            Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
-                            Assert.InRange(events.Count, 1, int.MaxValue);
-                        }
+                    )
+                    {
+                        var events = new ConcurrentQueue<EventWrittenEventArgs>();
+                        listener.RunWithCallback(
+                            events.Enqueue,
+                            () =>
+                            {
+                                // Invoke tests that'll cause some events to be generated
+                                var test = new SslStreamStreamToStreamTest_Async();
+                                test.SslStream_StreamToStream_Authentication_Success()
+                                    .GetAwaiter()
+                                    .GetResult();
+                            }
+                        );
+                        Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
+                        Assert.InRange(events.Count, 1, int.MaxValue);
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
     }
 }

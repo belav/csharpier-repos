@@ -155,11 +155,12 @@ namespace Microsoft.AspNetCore.SignalR
                 foreach (var serializedMessage in _cachedItems)
                 {
                     if (
-                        string.Equals(
-                            serializedMessage.ProtocolName,
-                            protocolName,
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(
+                                serializedMessage.ProtocolName,
+                                protocolName,
+                                StringComparison.Ordinal
+                            )
                     )
                     {
                         result = serializedMessage.Serialized;

@@ -48,13 +48,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             }
 
             // the manager keeps itself alive by listening to text view events.
-            AdornmentManager<TTag>.Create(
-                _threadingContext,
-                textView,
-                _tagAggregatorFactoryService,
-                _asyncListener,
-                AdornmentLayerName
-            );
+            AdornmentManager<TTag>
+                .Create(
+                    _threadingContext,
+                    textView,
+                    _tagAggregatorFactoryService,
+                    _asyncListener,
+                    AdornmentLayerName
+                );
         }
     }
 }

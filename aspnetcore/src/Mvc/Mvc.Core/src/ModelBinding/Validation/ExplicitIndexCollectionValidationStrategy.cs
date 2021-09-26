@@ -57,11 +57,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             object model
         )
         {
-            var enumerator =
-                DefaultCollectionValidationStrategy.Instance.GetEnumeratorForElementType(
-                    metadata,
-                    model
-                );
+            var enumerator = DefaultCollectionValidationStrategy.Instance
+                .GetEnumeratorForElementType(metadata, model);
             return new Enumerator(metadata.ElementMetadata!, key, ElementKeys, enumerator);
         }
 

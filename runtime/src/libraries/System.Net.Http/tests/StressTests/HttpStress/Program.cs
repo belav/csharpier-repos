@@ -276,8 +276,9 @@ public static class Program
     {
         (string name, Func<RequestContext, Task> op)[] clientOperations =
             ClientOperations.Operations
-            // annotate the operation name with its index
-            .Select((op, i) => ($"{i.ToString().PadLeft(2)}: {op.name}", op.operation)).ToArray();
+                // annotate the operation name with its index
+                .Select((op, i) => ($"{i.ToString().PadLeft(2)}: {op.name}", op.operation))
+                .ToArray();
 
         if ((config.RunMode & RunMode.both) == 0)
         {

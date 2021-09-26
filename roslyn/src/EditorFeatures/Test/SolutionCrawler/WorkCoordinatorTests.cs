@@ -454,10 +454,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             await WaitWaiterAsync(workspace.ExportProvider);
 
-            var newSolution = workspace.CurrentSolution.WithProjectOutputFilePath(
-                project.Id,
-                "/newPath"
-            );
+            var newSolution = workspace.CurrentSolution
+                .WithProjectOutputFilePath(project.Id, "/newPath");
             var worker = await ExecuteOperation(
                 workspace,
                 w => w.ChangeProject(project.Id, newSolution)
@@ -493,10 +491,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             await WaitWaiterAsync(workspace.ExportProvider);
 
-            var newSolution = workspace.CurrentSolution.WithProjectOutputRefFilePath(
-                project.Id,
-                "/newPath"
-            );
+            var newSolution = workspace.CurrentSolution
+                .WithProjectOutputRefFilePath(project.Id, "/newPath");
             var worker = await ExecuteOperation(
                 workspace,
                 w => w.ChangeProject(project.Id, newSolution)
@@ -532,10 +528,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             await WaitWaiterAsync(workspace.ExportProvider);
 
-            var newSolution = workspace.CurrentSolution.WithProjectCompilationOutputInfo(
-                project.Id,
-                new CompilationOutputInfo(assemblyPath: "/newPath")
-            );
+            var newSolution = workspace.CurrentSolution
+                .WithProjectCompilationOutputInfo(
+                    project.Id,
+                    new CompilationOutputInfo(assemblyPath: "/newPath")
+                );
             var worker = await ExecuteOperation(
                 workspace,
                 w => w.ChangeProject(project.Id, newSolution)
@@ -601,9 +598,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 workspace,
                 w =>
                     w.TryApplyChanges(
-                        w.CurrentSolution.WithOptions(
-                            w.CurrentSolution.Options.WithChangedOption(Analyzer.TestOption, false)
-                        )
+                        w.CurrentSolution
+                            .WithOptions(
+                                w.CurrentSolution.Options
+                                    .WithChangedOption(Analyzer.TestOption, false)
+                            )
                     )
             );
 
@@ -637,13 +636,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 workspace,
                 w =>
                     w.TryApplyChanges(
-                        w.CurrentSolution.WithOptions(
-                            w.CurrentSolution.Options.WithChangedOption(
-                                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                                LanguageNames.CSharp,
-                                newAnalysisScope
+                        w.CurrentSolution
+                            .WithOptions(
+                                w.CurrentSolution.Options
+                                    .WithChangedOption(
+                                        SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                                        LanguageNames.CSharp,
+                                        newAnalysisScope
+                                    )
                             )
-                        )
                     )
             );
 
@@ -683,13 +684,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 workspace,
                 w =>
                     w.TryApplyChanges(
-                        w.CurrentSolution.WithOptions(
-                            w.CurrentSolution.Options.WithChangedOption(
-                                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                                LanguageNames.CSharp,
-                                newAnalysisScope
+                        w.CurrentSolution
+                            .WithOptions(
+                                w.CurrentSolution.Options
+                                    .WithChangedOption(
+                                        SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                                        LanguageNames.CSharp,
+                                        newAnalysisScope
+                                    )
                             )
-                        )
                     )
             );
 
@@ -867,10 +870,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             await WaitWaiterAsync(workspace.ExportProvider);
 
             var lazyWorker = Assert.Single(
-                workspace.ExportProvider.GetExports<
-                    IIncrementalAnalyzerProvider,
-                    IncrementalAnalyzerProviderMetadata
-                >()
+                workspace.ExportProvider
+                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var worker = Assert.IsType<Analyzer>(
@@ -1081,10 +1082,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             await WaitWaiterAsync(workspace.ExportProvider);
 
             var lazyWorker = Assert.Single(
-                workspace.ExportProvider.GetExports<
-                    IIncrementalAnalyzerProvider,
-                    IncrementalAnalyzerProviderMetadata
-                >()
+                workspace.ExportProvider
+                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var analyzer = Assert.IsType<Analyzer>(
@@ -1141,10 +1140,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             await WaitWaiterAsync(workspace.ExportProvider);
 
             var lazyWorker = Assert.Single(
-                workspace.ExportProvider.GetExports<
-                    IIncrementalAnalyzerProvider,
-                    IncrementalAnalyzerProviderMetadata
-                >()
+                workspace.ExportProvider
+                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var analyzer = Assert.IsType<Analyzer>(
@@ -1197,10 +1194,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             var id = workspace.CurrentSolution.Projects.First().DocumentIds[0];
 
             var lazyWorker = Assert.Single(
-                workspace.ExportProvider.GetExports<
-                    IIncrementalAnalyzerProvider,
-                    IncrementalAnalyzerProviderMetadata
-                >()
+                workspace.ExportProvider
+                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var analyzer = Assert.IsType<Analyzer>(
@@ -1500,12 +1495,14 @@ class C
                 incrementalAnalyzer: typeof(AnalyzerProviderNoWaitNoBlock)
             );
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly,
-                        false
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(
+                                InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly,
+                                false
+                            )
                     )
-                )
             );
 
             workspace.OnSolutionAdded(solution);
@@ -1530,12 +1527,14 @@ class C
                 incrementalAnalyzer: typeof(AnalyzerProviderNoWaitNoBlock)
             );
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly,
-                        true
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(
+                                InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly,
+                                true
+                            )
                     )
-                )
             );
 
             workspace.OnSolutionAdded(solution);
@@ -1578,8 +1577,8 @@ class C
                 }
             };
 
-            var registrationService =
-                workspace.Services.GetService<ISolutionCrawlerRegistrationService>();
+            var registrationService = workspace.Services
+                .GetService<ISolutionCrawlerRegistrationService>();
             registrationService.Register(workspace);
 
             // first mutation
@@ -1655,10 +1654,8 @@ class C
 
             // add analyzer
             var lazyWorker = Assert.Single(
-                workspace.ExportProvider.GetExports<
-                    IIncrementalAnalyzerProvider,
-                    IncrementalAnalyzerProviderMetadata
-                >()
+                workspace.ExportProvider
+                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var worker = Assert.IsType<Analyzer2>(
@@ -1687,8 +1684,8 @@ class C
             // let the test not care about cancellation or work not enqueued yet.
 
             // block solution cralwer from processing.
-            var globalOperation =
-                workspace.Services.GetService<IGlobalOperationNotificationService>();
+            var globalOperation = workspace.Services
+                .GetService<IGlobalOperationNotificationService>();
             using (var operation = globalOperation.Start("Block SolutionCrawler"))
             {
                 // make sure global operaiton is actually started
@@ -1707,8 +1704,8 @@ class C
 
                 // now wait for semantic processor to finish
                 var crawlerListener = (AsynchronousOperationListener)GetListenerProvider(
-                        workspace.ExportProvider
-                    )
+                    workspace.ExportProvider
+                )
                     .GetListener(FeatureAttribute.SolutionCrawler);
 
                 // first, wait for first work to be queued.
@@ -1760,9 +1757,8 @@ class C
                 compilationOptions: null,
                 parseOptions: null,
                 new[] { code },
-                composition: EditorTestCompositions.EditorFeatures.AddExcludedPartTypes(
-                        typeof(IIncrementalAnalyzerProvider)
-                    )
+                composition: EditorTestCompositions.EditorFeatures
+                    .AddExcludedPartTypes(typeof(IIncrementalAnalyzerProvider))
                     .AddParts(typeof(AnalyzerProviderNoWaitNoBlock)),
                 workspaceKind: SolutionCrawlerWorkspaceKind
             );
@@ -1772,10 +1768,8 @@ class C
             var textBuffer = testDocument.GetTextBuffer();
 
             var lazyWorker = Assert.Single(
-                workspace.ExportProvider.GetExports<
-                    IIncrementalAnalyzerProvider,
-                    IncrementalAnalyzerProviderMetadata
-                >()
+                workspace.ExportProvider
+                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var analyzer = Assert.IsType<Analyzer>(
@@ -1811,10 +1805,8 @@ class C
         )
         {
             var lazyWorker = Assert.Single(
-                workspace.ExportProvider.GetExports<
-                    IIncrementalAnalyzerProvider,
-                    IncrementalAnalyzerProviderMetadata
-                >()
+                workspace.ExportProvider
+                    .GetExports<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>()
             );
             Assert.Equal(Metadata.Crawler, lazyWorker.Metadata);
             var worker = Assert.IsType<Analyzer>(
@@ -1998,32 +1990,34 @@ class C
         {
             // override default timespan to make test run faster
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                            InternalSolutionCrawlerOptions.ActiveFileWorkerBackOffTimeSpanInMS,
-                            0
-                        )
-                        .WithChangedOption(
-                            InternalSolutionCrawlerOptions.AllFilesWorkerBackOffTimeSpanInMS,
-                            0
-                        )
-                        .WithChangedOption(
-                            InternalSolutionCrawlerOptions.PreviewBackOffTimeSpanInMS,
-                            0
-                        )
-                        .WithChangedOption(
-                            InternalSolutionCrawlerOptions.ProjectPropagationBackOffTimeSpanInMS,
-                            0
-                        )
-                        .WithChangedOption(
-                            InternalSolutionCrawlerOptions.SemanticChangeBackOffTimeSpanInMS,
-                            0
-                        )
-                        .WithChangedOption(
-                            InternalSolutionCrawlerOptions.EntireProjectWorkerBackOffTimeSpanInMS,
-                            100
-                        )
-                )
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(
+                                InternalSolutionCrawlerOptions.ActiveFileWorkerBackOffTimeSpanInMS,
+                                0
+                            )
+                            .WithChangedOption(
+                                InternalSolutionCrawlerOptions.AllFilesWorkerBackOffTimeSpanInMS,
+                                0
+                            )
+                            .WithChangedOption(
+                                InternalSolutionCrawlerOptions.PreviewBackOffTimeSpanInMS,
+                                0
+                            )
+                            .WithChangedOption(
+                                InternalSolutionCrawlerOptions.ProjectPropagationBackOffTimeSpanInMS,
+                                0
+                            )
+                            .WithChangedOption(
+                                InternalSolutionCrawlerOptions.SemanticChangeBackOffTimeSpanInMS,
+                                0
+                            )
+                            .WithChangedOption(
+                                InternalSolutionCrawlerOptions.EntireProjectWorkerBackOffTimeSpanInMS,
+                                100
+                            )
+                    )
             );
         }
 
@@ -2033,21 +2027,23 @@ class C
         private static void MakeDocumentActive(Document document)
         {
             var documentTrackingService =
-                (TestDocumentTrackingService)document.Project.Solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
+                (TestDocumentTrackingService)document.Project.Solution.Workspace.Services
+                    .GetRequiredService<IDocumentTrackingService>();
             documentTrackingService.SetActiveDocument(document.Id);
         }
 
         private static void ClearActiveDocument(Workspace workspace)
         {
-            var documentTrackingService =
-                (TestDocumentTrackingService)workspace.Services.GetService<IDocumentTrackingService>();
+            var documentTrackingService = (TestDocumentTrackingService)workspace.Services
+                .GetService<IDocumentTrackingService>();
             documentTrackingService.SetActiveDocument(null);
         }
 
         private class WorkCoordinatorWorkspace : TestWorkspace
         {
             private static readonly TestComposition s_composition =
-                EditorTestCompositions.EditorFeatures.AddParts(typeof(TestDocumentTrackingService))
+                EditorTestCompositions.EditorFeatures
+                    .AddParts(typeof(TestDocumentTrackingService))
                     .AddExcludedPartTypes(typeof(IIncrementalAnalyzerProvider));
 
             private readonly IAsynchronousOperationWaiter _workspaceWaiter;
@@ -2090,13 +2086,15 @@ class C
                     incrementalAnalyzer
                 );
                 workspace.TryApplyChanges(
-                    workspace.CurrentSolution.WithOptions(
-                        workspace.Options.WithChangedOption(
-                            SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                            LanguageNames.CSharp,
-                            analysisScope
+                    workspace.CurrentSolution
+                        .WithOptions(
+                            workspace.Options
+                                .WithChangedOption(
+                                    SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                                    LanguageNames.CSharp,
+                                    analysisScope
+                                )
                         )
-                    )
                 );
                 return workspace;
             }

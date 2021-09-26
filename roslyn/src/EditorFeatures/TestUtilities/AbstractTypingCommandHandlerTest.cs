@@ -42,9 +42,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 
                 var testDocument = workspace.Documents.Single();
                 var view = testDocument.GetTextView();
-                view.Caret.MoveTo(
-                    new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
-                );
+                view.Caret
+                    .MoveTo(
+                        new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
+                    );
 
                 var commandHandler = GetCommandHandler(workspace);
 
@@ -67,11 +68,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 var caretPosition = view.Caret.Position.BufferPosition.Position;
                 Assert.True(
                     expectedPosition == caretPosition,
-                    string.Format(
-                        "Caret positioned incorrectly. Should have been {0}, but was {1}.",
-                        expectedPosition,
-                        caretPosition
-                    )
+                    string
+                        .Format(
+                            "Caret positioned incorrectly. Should have been {0}, but was {1}.",
+                            expectedPosition,
+                            caretPosition
+                        )
                 );
             }
         }
@@ -87,9 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             {
                 var caretPosition = textView.Caret.Position.BufferPosition;
                 var newSpanshot = textView.TextBuffer.Insert(caretPosition, text);
-                textView.Caret.MoveTo(
-                    new SnapshotPoint(newSpanshot, (int)caretPosition + text.Length)
-                );
+                textView.Caret
+                    .MoveTo(new SnapshotPoint(newSpanshot, (int)caretPosition + text.Length));
             };
         }
     }

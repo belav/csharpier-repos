@@ -36,14 +36,15 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             protected override void Seed(Context context)
             {
-                context.EntityA.AddRange(
-                    new[]
-                    {
-                        new DbEntityA { ID = 1, Name = "Alain Brito" },
-                        new DbEntityA { ID = 2, Name = "Jimmy Bogard" },
-                        new DbEntityA { ID = 3, Name = "Bill Gates" }
-                    }
-                );
+                context.EntityA
+                    .AddRange(
+                        new[]
+                        {
+                            new DbEntityA { ID = 1, Name = "Alain Brito" },
+                            new DbEntityA { ID = 2, Name = "Jimmy Bogard" },
+                            new DbEntityA { ID = 3, Name = "Bill Gates" }
+                        }
+                    );
                 base.Seed(context);
             }
         }
@@ -340,7 +341,8 @@ namespace AutoMapper.IntegrationTests.Net4
                 //.ForMember(d => d.DayType, opt => opt.Ignore());
 
                 //Include to mapping -> this causes the exception!
-                CreateMap<DataLayer.ValidityDayType, IValidityDayType>().As<ValidityDayType>();
+                CreateMap<DataLayer.ValidityDayType, IValidityDayType>()
+                    .As<ValidityDayType>();
                 CreateProjection<DataLayer.ValidityDayType, ValidityDayType>();
 
                 CreateProjection<ICalendar, DataLayer.Calendar>();

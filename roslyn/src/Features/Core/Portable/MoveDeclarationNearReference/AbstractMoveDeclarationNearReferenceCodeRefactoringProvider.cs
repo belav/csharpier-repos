@@ -41,10 +41,10 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             var service = document.GetLanguageService<IMoveDeclarationNearReferenceService>();
             if (
                 !await service.CanMoveDeclarationNearReferenceAsync(
-                        document,
-                        declaration,
-                        cancellationToken
-                    )
+                    document,
+                    declaration,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             )
             {
@@ -65,10 +65,10 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
         {
             var service = document.GetLanguageService<IMoveDeclarationNearReferenceService>();
             return await service.MoveDeclarationNearReferenceAsync(
-                    document,
-                    statement,
-                    cancellationToken
-                )
+                document,
+                statement,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

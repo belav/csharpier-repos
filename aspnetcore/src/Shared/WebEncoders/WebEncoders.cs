@@ -136,13 +136,14 @@ namespace Microsoft.Extensions.Internal
             if (buffer.Length - bufferOffset < arraySizeRequired)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
-                        nameof(count),
-                        nameof(bufferOffset),
-                        nameof(input)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
+                            nameof(count),
+                            nameof(bufferOffset),
+                            nameof(input)
+                        ),
                     nameof(count)
                 );
             }
@@ -300,13 +301,14 @@ namespace Microsoft.Extensions.Internal
             if (output.Length - outputOffset < arraySizeRequired)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
-                        nameof(count),
-                        nameof(outputOffset),
-                        nameof(output)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
+                            nameof(count),
+                            nameof(outputOffset),
+                            nameof(output)
+                        ),
                     nameof(count)
                 );
             }
@@ -448,11 +450,12 @@ namespace Microsoft.Extensions.Internal
                     return 1;
                 default:
                     throw new FormatException(
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            EncoderResources.WebEncoders_MalformedInput,
-                            inputLength
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                EncoderResources.WebEncoders_MalformedInput,
+                                inputLength
+                            )
                     );
             }
         }
@@ -475,13 +478,14 @@ namespace Microsoft.Extensions.Internal
             if (bufferLength - offset < count)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
-                        nameof(count),
-                        nameof(offset),
-                        inputName
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
+                            nameof(count),
+                            nameof(offset),
+                            inputName
+                        ),
                     nameof(count)
                 );
             }

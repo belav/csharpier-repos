@@ -23,8 +23,8 @@ namespace System.Web.Helpers
 
             _totalRows = totalRows;
             _rows = values.Select(
-                    (value, index) => new WebGridRow(grid, value: value, rowIndex: index)
-                )
+                (value, index) => new WebGridRow(grid, value: value, rowIndex: index)
+            )
                 .ToList();
         }
 

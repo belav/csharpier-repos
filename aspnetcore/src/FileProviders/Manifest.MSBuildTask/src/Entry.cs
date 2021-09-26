@@ -80,11 +80,12 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task
 
             if (IsFile)
             {
-                return string.Equals(
-                    other.AssemblyResourceName,
-                    AssemblyResourceName,
-                    StringComparison.Ordinal
-                );
+                return string
+                    .Equals(
+                        other.AssemblyResourceName,
+                        AssemblyResourceName,
+                        StringComparison.Ordinal
+                    );
             }
             else
             {

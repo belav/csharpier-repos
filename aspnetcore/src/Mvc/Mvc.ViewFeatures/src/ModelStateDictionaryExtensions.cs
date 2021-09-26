@@ -170,9 +170,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             string modelKey = GetExpressionText(expression);
             if (string.IsNullOrEmpty(modelKey))
             {
-                var modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    typeof(TModel)
-                );
+                var modelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(typeof(TModel));
                 for (var i = 0; i < modelMetadata.Properties.Count; i++)
                 {
                     var property = modelMetadata.Properties[i];

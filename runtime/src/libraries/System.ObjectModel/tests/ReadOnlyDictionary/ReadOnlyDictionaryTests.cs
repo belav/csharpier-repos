@@ -307,11 +307,12 @@ namespace System.Collections.ObjectModel.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 dict
             );
-            PropertyInfo itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                    == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(
+                    pr =>
+                        pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                        == DebuggerBrowsableState.RootHidden
+                );
             KeyValuePair<int, int>[] pairs =
                 itemProperty.GetValue(info.Instance) as KeyValuePair<int, int>[];
             Assert.Equal(dict, pairs);
@@ -322,11 +323,12 @@ namespace System.Collections.ObjectModel.Tests
                 new Type[] { typeof(int) },
                 dict.Keys
             );
-            itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                    == DebuggerBrowsableState.RootHidden
-            );
+            itemProperty = info.Properties
+                .Single(
+                    pr =>
+                        pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                        == DebuggerBrowsableState.RootHidden
+                );
             int[] items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(dict.Keys, items);
 
@@ -336,11 +338,12 @@ namespace System.Collections.ObjectModel.Tests
                 new Type[] { typeof(int) },
                 dict.Values
             );
-            itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                    == DebuggerBrowsableState.RootHidden
-            );
+            itemProperty = info.Properties
+                .Single(
+                    pr =>
+                        pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                        == DebuggerBrowsableState.RootHidden
+                );
             items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(dict.Values, items);
         }

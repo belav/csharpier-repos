@@ -257,10 +257,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         if (
                             !IsProjectLoadable(projectReferencePath)
                             && await VerifyUnloadableProjectOutputExistsAsync(
-                                    projectReferencePath,
-                                    builder,
-                                    cancellationToken
-                                )
+                                projectReferencePath,
+                                builder,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         )
                         {
@@ -272,10 +272,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         if (
                             _preferMetadataForReferencesOfDiscoveredProjects
                             && await VerifyProjectOutputExistsAsync(
-                                    projectReferencePath,
-                                    builder,
-                                    cancellationToken
-                                )
+                                projectReferencePath,
+                                builder,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         )
                         {
@@ -285,12 +285,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         // Finally, we'll try to load and reference the project.
                         if (
                             await TryLoadAndAddReferenceAsync(
-                                    id,
-                                    projectReferencePath,
-                                    aliases,
-                                    builder,
-                                    cancellationToken
-                                )
+                                id,
+                                projectReferencePath,
+                                aliases,
+                                builder,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         )
                         {
@@ -322,10 +322,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     _diagnosticReporter.Report(
                         new ProjectDiagnostic(
                             WorkspaceDiagnosticKind.Warning,
-                            string.Format(
-                                WorkspaceMSBuildResources.Unresolved_metadata_reference_removed_from_project_0,
-                                filePath
-                            ),
+                            string
+                                .Format(
+                                    WorkspaceMSBuildResources.Unresolved_metadata_reference_removed_from_project_0,
+                                    filePath
+                                ),
                             id
                         )
                     );
@@ -343,10 +344,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
             )
             {
                 var projectReferenceInfos = await LoadProjectInfosFromPathAsync(
-                        projectReferencePath,
-                        _discoveredProjectOptions,
-                        cancellationToken
-                    )
+                    projectReferencePath,
+                    _discoveredProjectOptions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (projectReferenceInfos.IsEmpty)
@@ -383,10 +384,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     _diagnosticReporter.Report(
                         new ProjectDiagnostic(
                             WorkspaceDiagnosticKind.Warning,
-                            string.Format(
-                                WorkspaceMSBuildResources.Found_project_reference_without_a_matching_metadata_reference_0,
-                                projectReferencePath
-                            ),
+                            string
+                                .Format(
+                                    WorkspaceMSBuildResources.Found_project_reference_without_a_matching_metadata_reference_0,
+                                    projectReferencePath
+                                ),
                             id
                         )
                     );
@@ -445,9 +447,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
             )
             {
                 var outputFilePath = await _buildManager.TryGetOutputFilePathAsync(
-                        projectPath,
-                        cancellationToken
-                    )
+                    projectPath,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return outputFilePath != null
                     && builder.Contains(outputFilePath)
@@ -462,10 +464,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 // Note: Load the project, but don't report failures.
                 var projectFileInfos = await LoadProjectFileInfosAsync(
-                        projectPath,
-                        DiagnosticReportingOptions.IgnoreAll,
-                        cancellationToken
-                    )
+                    projectPath,
+                    DiagnosticReportingOptions.IgnoreAll,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var projectFileInfo in projectFileInfos)

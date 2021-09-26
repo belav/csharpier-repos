@@ -317,11 +317,8 @@ namespace System.IO.Ports.Tests
                 int totalBytesRead = 0;
                 while (totalBytesRead < bytes.Length)
                 {
-                    int bytesRead = com2.BaseStream.Read(
-                        bytes,
-                        totalBytesRead,
-                        bytes.Length - totalBytesRead
-                    );
+                    int bytesRead = com2.BaseStream
+                        .Read(bytes, totalBytesRead, bytes.Length - totalBytesRead);
                     totalBytesRead += bytesRead;
                 }
 

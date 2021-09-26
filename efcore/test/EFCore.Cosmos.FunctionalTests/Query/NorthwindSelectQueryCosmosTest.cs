@@ -421,15 +421,18 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         {
             using (var context = CreateContext())
             {
-                var customers = context.Customers.Where(c => c.CustomerID == "ALFKI")
+                var customers = context.Customers
+                    .Where(c => c.CustomerID == "ALFKI")
                     .Select(
                         c =>
                             new
                             {
-                                Order = (int?)c.Orders.Where(o => o.OrderID < 10500)
+                                Order = (int?)c.Orders
+                                    .Where(o => o.OrderID < 10500)
                                     .Select(
                                         o =>
-                                            o.OrderDetails.Where(od => od.OrderID != c.Orders.Count)
+                                            o.OrderDetails
+                                                .Where(od => od.OrderID != c.Orders.Count)
                                                 .Select(od => od.ProductID)
                                                 .FirstOrDefault()
                                     )
@@ -503,9 +506,10 @@ ORDER BY c[""OrderID""]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(
-                async
-            );
+            await base
+                .Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c[""EmployeeID""]
@@ -519,9 +523,10 @@ ORDER BY c[""OrderID""]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(
-                async
-            );
+            await base
+                .Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c[""EmployeeID""]
@@ -535,9 +540,10 @@ ORDER BY c[""OrderID""]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(
-                async
-            );
+            await base
+                .Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c[""OrderID""]
@@ -551,9 +557,10 @@ ORDER BY c[""OrderID""]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(
-                async
-            );
+            await base
+                .Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(
+                    async
+                );
 
             AssertSql(
                 @"SELECT VALUE {""c"" : (c[""OrderID""] + c[""OrderID""])}
@@ -567,9 +574,10 @@ ORDER BY c[""OrderID""]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(
-                async
-            );
+            await base
+                .Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c[""OrderID""]
@@ -583,9 +591,10 @@ ORDER BY c[""OrderID""]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(
-                async
-            );
+            await base
+                .Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(
+                    async
+                );
 
             AssertSql(
                 @"SELECT VALUE {""c"" : -(c[""OrderID""])}
@@ -599,9 +608,10 @@ ORDER BY c[""OrderID""]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(
-                async
-            );
+            await base
+                .Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c[""OrderID""]
@@ -629,9 +639,8 @@ ORDER BY c[""OrderID""]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_method_call_introduces_explicit_cast(
-                async
-            );
+            await base
+                .Select_non_matching_value_types_from_method_call_introduces_explicit_cast(async);
 
             AssertSql(
                 @"SELECT c[""OrderID""]
@@ -645,9 +654,10 @@ ORDER BY c[""OrderID""]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(
-                async
-            );
+            await base
+                .Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c[""OrderID""]
@@ -662,9 +672,10 @@ ORDER BY c[""OrderID""]"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
-                async
-            );
+            await base
+                .Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
+                    async
+                );
 
             AssertSql("");
         }
@@ -715,7 +726,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10300))"
                         .Where(c => c.CustomerID == "ALFKI")
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .Take(1)
                                     .FirstOrDefault()
@@ -741,7 +753,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
                         .Where(c => c.CustomerID == "ALFKI")
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .Skip(1)
                                     .FirstOrDefault()
@@ -767,7 +780,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
                         .Where(c => c.CustomerID == "ALFKI")
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .Distinct()
                                     .FirstOrDefault()
@@ -786,9 +800,10 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
-                async
-            );
+            await base
+                .Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c
@@ -809,7 +824,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
                         .Where(c => c.CustomerID == "ALFKI")
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .Take(1)
                                     .FirstOrDefault()
@@ -835,7 +851,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
                         .Where(c => c.CustomerID == "ALFKI")
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .ThenByDescending(o => o.OrderDate)
                                     .Select(o => o.CustomerID)
                                     .Take(2)
@@ -854,9 +871,10 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
-                async
-            );
+            await base
+                .Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c
@@ -877,7 +895,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                         .Where(c => c.CustomerID == "ALFKI")
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.CustomerID)
+                                c.Orders
+                                    .OrderBy(o => o.CustomerID)
                                     .ThenByDescending(o => o.OrderDate)
                                     .Select(o => o.CustomerID)
                                     .Take(2)
@@ -904,7 +923,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
                         .Where(o => o.OrderID < 10250)
                         .Select(
                             o =>
-                                o.OrderDetails.OrderBy(od => od.Product.ProductName)
+                                o.OrderDetails
+                                    .OrderBy(od => od.Product.ProductName)
                                     .Select(od => od.OrderID)
                                     .Take(1)
                                     .FirstOrDefault()
@@ -923,9 +943,10 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
-                async
-            );
+            await base
+                .Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c
@@ -1198,9 +1219,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            return base.FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(
-                async
-            );
+            return base
+                .FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(async);
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -1235,9 +1255,10 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            return base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
-                async
-            );
+            return base
+                .SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1245,9 +1266,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            return base.Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(
-                async
-            );
+            return base
+                .Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(async);
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1389,9 +1409,10 @@ ORDER BY c[""CustomerID""]"
             bool async
         )
         {
-            return base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
-                async
-            );
+            return base
+                .Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
@@ -1399,9 +1420,8 @@ ORDER BY c[""CustomerID""]"
             bool async
         )
         {
-            return base.Correlated_collection_after_distinct_not_containing_original_identifier(
-                async
-            );
+            return base
+                .Correlated_collection_after_distinct_not_containing_original_identifier(async);
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
@@ -1409,9 +1429,10 @@ ORDER BY c[""CustomerID""]"
             bool async
         )
         {
-            return base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
-                async
-            );
+            return base
+                .Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
@@ -1419,9 +1440,10 @@ ORDER BY c[""CustomerID""]"
             bool async
         )
         {
-            return base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
-                async
-            );
+            return base
+                .Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
+                    async
+                );
         }
 
         public override Task Reverse_without_explicit_ordering(bool async)
@@ -1451,9 +1473,10 @@ ORDER BY c[""CustomerID""]"
             bool async
         )
         {
-            return base.Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
-                async
-            );
+            return base
+                .Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
+                    async
+                );
         }
 
         public override async Task Projection_take_predicate_projection(bool async)
@@ -1496,9 +1519,10 @@ OFFSET 0 LIMIT @__p_0"
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Projection_skip_projection_doesnt_project_intermittent_column(
-                                async
-                            )
+                            base
+                                .Projection_skip_projection_doesnt_project_intermittent_column(
+                                    async
+                                )
                     )
                 ).Message;
 
@@ -1510,9 +1534,10 @@ OFFSET 0 LIMIT @__p_0"
             bool async
         )
         {
-            return base.Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
-                async
-            );
+            return base
+                .Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
@@ -1546,9 +1571,10 @@ OFFSET 0 LIMIT @__p_0"
             bool async
         )
         {
-            return base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
-                async
-            );
+            return base
+                .Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
+                    async
+                );
         }
 
         public override async Task Ternary_in_client_eval_assigns_correct_types(bool async)

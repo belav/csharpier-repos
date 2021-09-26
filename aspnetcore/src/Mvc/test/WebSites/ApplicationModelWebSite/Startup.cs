@@ -17,9 +17,8 @@ namespace ApplicationModelWebSite
             services.AddControllers(
                 options =>
                 {
-                    options.Conventions.Add(
-                        new ApplicationDescription("Common Application Description")
-                    );
+                    options.Conventions
+                        .Add(new ApplicationDescription("Common Application Description"));
                     options.Conventions.Add(new ControllerLicenseConvention());
                     options.Conventions.Add(new FromHeaderConvention());
                     options.Conventions.Add(new MultipleAreasControllerConvention());
@@ -58,7 +57,8 @@ namespace ApplicationModelWebSite
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder().UseContentRoot(Directory.GetCurrentDirectory())
+            new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .UseKestrel()
                 .UseIISIntegration();

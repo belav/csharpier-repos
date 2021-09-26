@@ -27,28 +27,30 @@ namespace System.CommandLine.Invocation
             for (var i = 0; i < result.UnmatchedTokens.Count; i++)
             {
                 var token = result.UnmatchedTokens[i];
-                string suggestions = string.Join(
-                    ", or ",
-                    GetPossibleTokens(result.CommandResult.Command, token).Select(x => $"'{x}'")
-                );
+                string suggestions = string
+                    .Join(
+                        ", or ",
+                        GetPossibleTokens(result.CommandResult.Command, token).Select(x => $"'{x}'")
+                    );
 
                 if (suggestions.Length > 0)
                 {
-                    console.Out.WriteLine(
-                        $"'{token}' was not matched. Did you mean {suggestions}?"
-                    );
+                    console.Out
+                        .WriteLine($"'{token}' was not matched. Did you mean {suggestions}?");
                 }
             }
         }
 
         private IEnumerable<string> GetPossibleTokens(ISymbol targetSymbol, string token)
         {
-            IEnumerable<string> possibleMatches = targetSymbol.Children.Where(x => !x.IsHidden)
+            IEnumerable<string> possibleMatches = targetSymbol.Children
+                .Where(x => !x.IsHidden)
                 .OfType<IIdentifierSymbol>()
                 .Where(x => x.Aliases.Count > 0)
                 .Select(
                     symbol =>
-                        symbol.Aliases.Union(symbol.Aliases)
+                        symbol.Aliases
+                            .Union(symbol.Aliases)
                             .OrderBy(x => GetDistance(token, x))
                             .ThenByDescending(x => GetStartsWithDistance(token, x))
                             .First()
@@ -56,8 +58,8 @@ namespace System.CommandLine.Invocation
 
             int? bestDistance = null;
             return possibleMatches.Select(
-                    possibleMatch => (possibleMatch, distance: GetDistance(token, possibleMatch))
-                )
+                possibleMatch => (possibleMatch, distance: GetDistance(token, possibleMatch))
+            )
                 .Where(tuple => tuple.distance <= _maxLevenshteinDistance)
                 .OrderBy(tuple => tuple.distance)
                 .ThenByDescending(tuple => GetStartsWithDistance(token, tuple.possibleMatch))

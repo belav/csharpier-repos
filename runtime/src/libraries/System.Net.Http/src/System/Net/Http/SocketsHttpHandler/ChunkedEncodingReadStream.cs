@@ -189,11 +189,11 @@ namespace System.Net.Http
                             // the maximum amount we'd otherwise read at a time.
                             Debug.Assert(_connection.RemainingBuffer.Length == 0);
                             int bytesRead = await _connection.ReadAsync(
-                                    buffer.Slice(
-                                        0,
-                                        (int)Math.Min((ulong)buffer.Length, _chunkBytesRemaining)
-                                    )
+                                buffer.Slice(
+                                    0,
+                                    (int)Math.Min((ulong)buffer.Length, _chunkBytesRemaining)
                                 )
+                            )
                                 .ConfigureAwait(false);
                             if (bytesRead == 0)
                             {
@@ -262,9 +262,8 @@ namespace System.Net.Http
                 CancellationToken cancellationToken
             )
             {
-                CancellationTokenRegistration ctr = _connection!.RegisterCancellation(
-                    cancellationToken
-                );
+                CancellationTokenRegistration ctr = _connection!
+                    .RegisterCancellation(cancellationToken);
                 try
                 {
                     while (true)
@@ -599,10 +598,11 @@ namespace System.Net.Http
                             if (drainTime != Timeout.InfiniteTimeSpan)
                             {
                                 cts = new CancellationTokenSource((int)drainTime.TotalMilliseconds);
-                                ctr = cts.Token.Register(
-                                    static s => ((HttpConnection)s!).Dispose(),
-                                    _connection
-                                );
+                                ctr = cts.Token
+                                    .Register(
+                                        static s => ((HttpConnection)s!).Dispose(),
+                                        _connection
+                                    );
                             }
                         }
 

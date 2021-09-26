@@ -736,9 +736,9 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
                 // CS8129: No suitable Deconstruct instance or extension method was found for type 'C', with 2 out parameters and a void return type.
                 //         /*<bind>*/(x, y) = new C() { Deconstruct = DeconstructMethod }/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_MissingDeconstruct,
-                        "new C() { Deconstruct = DeconstructMethod }"
-                    )
+                    ErrorCode.ERR_MissingDeconstruct,
+                    "new C() { Deconstruct = DeconstructMethod }"
+                )
                     .WithArguments("C", "2")
                     .WithLocation(11, 28)
             };
@@ -1294,7 +1294,8 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
             {
                 // CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         /*<bind>*/(x, x) = null/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null").WithLocation(7, 28)
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null")
+                    .WithLocation(7, 28)
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -1789,17 +1790,17 @@ class C
                 // (8,113): error CS1501: No overload for method 'Deconstruct' takes 22 arguments
                 //         (x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22) = CreateLongRef(1, 2, 3, 4, 5, 6, 7, CreateLongRef(8, 9, 10, 11, 12, 13, 14, Tuple.Create(15, 16, 17, 18, 19, 20, 21, 22)));
                 Diagnostic(
-                        ErrorCode.ERR_BadArgCount,
-                        "CreateLongRef(1, 2, 3, 4, 5, 6, 7, CreateLongRef(8, 9, 10, 11, 12, 13, 14, Tuple.Create(15, 16, 17, 18, 19, 20, 21, 22)))"
-                    )
+                    ErrorCode.ERR_BadArgCount,
+                    "CreateLongRef(1, 2, 3, 4, 5, 6, 7, CreateLongRef(8, 9, 10, 11, 12, 13, 14, Tuple.Create(15, 16, 17, 18, 19, 20, 21, 22)))"
+                )
                     .WithArguments("Deconstruct", "22")
                     .WithLocation(8, 113),
                 // (8,113): error CS8129: No Deconstruct instance or extension method was found for type 'Tuple<int, int, int, int, int, int, int, Tuple<int, int, int, int, int, int, int, Tuple<int, int, int, int, int, int, int, Tuple<int>>>>', with 22 out parameters.
                 //         (x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22) = CreateLongRef(1, 2, 3, 4, 5, 6, 7, CreateLongRef(8, 9, 10, 11, 12, 13, 14, Tuple.Create(15, 16, 17, 18, 19, 20, 21, 22)));
                 Diagnostic(
-                        ErrorCode.ERR_MissingDeconstruct,
-                        "CreateLongRef(1, 2, 3, 4, 5, 6, 7, CreateLongRef(8, 9, 10, 11, 12, 13, 14, Tuple.Create(15, 16, 17, 18, 19, 20, 21, 22)))"
-                    )
+                    ErrorCode.ERR_MissingDeconstruct,
+                    "CreateLongRef(1, 2, 3, 4, 5, 6, 7, CreateLongRef(8, 9, 10, 11, 12, 13, 14, Tuple.Create(15, 16, 17, 18, 19, 20, 21, 22)))"
+                )
                     .WithArguments(
                         "System.Tuple<int, int, int, int, int, int, int, System.Tuple<int, int, int, int, int, int, int, System.Tuple<int, int, int, int, int, int, int, System.Tuple<int>>>>",
                         "22"
@@ -1935,17 +1936,17 @@ class C1
 }
 ";
             var libMissingComp = CreateCompilation(
-                    new string[] { libMissingSource },
-                    assemblyName: "libMissingComp"
-                )
+                new string[] { libMissingSource },
+                assemblyName: "libMissingComp"
+            )
                 .VerifyDiagnostics();
             var libMissingRef = libMissingComp.EmitToImageReference();
 
             var libComp = CreateCompilation(
-                    new string[] { libSource },
-                    references: new[] { libMissingRef },
-                    parseOptions: TestOptions.Regular
-                )
+                new string[] { libSource },
+                references: new[] { libMissingRef },
+                parseOptions: TestOptions.Regular
+            )
                 .VerifyDiagnostics();
             var libRef = libComp.EmitToImageReference();
 
@@ -2564,9 +2565,9 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
                 // CS8132: Cannot deconstruct a tuple of '2' elements into '3' variables.
                 //         /*<bind>*/(x, (y, z, w)) = Pair.Create(42, (43, 44))/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_DeconstructWrongCardinality,
-                        "(x, (y, z, w)) = Pair.Create(42, (43, 44))"
-                    )
+                    ErrorCode.ERR_DeconstructWrongCardinality,
+                    "(x, (y, z, w)) = Pair.Create(42, (43, 44))"
+                )
                     .WithArguments("2", "3")
                     .WithLocation(8, 19)
             };
@@ -3019,7 +3020,8 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
             {
                 // CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         /*<bind>*/(int x1, int x2) = null/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null").WithLocation(6, 38)
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null")
+                    .WithLocation(6, 38)
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -3060,21 +3062,22 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
             {
                 // CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         /*<bind>*/var (x1, x2) = null/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null")
+                    .WithLocation(6, 34),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x1'.
                 //         /*<bind>*/var (x1, x2) = null/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x1"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x1"
+                )
                     .WithArguments("x1")
                     .WithLocation(6, 24),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x2'.
                 //         /*<bind>*/var (x1, x2) = null/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x2"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x2"
+                )
                     .WithArguments("x2")
                     .WithLocation(6, 28)
             };
@@ -3122,17 +3125,17 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x1'.
                 //         /*<bind>*/var (x1, x2) = (1, null)/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x1"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x1"
+                )
                     .WithArguments("x1")
                     .WithLocation(6, 24),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x2'.
                 //         /*<bind>*/var (x1, x2) = (1, null)/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x2"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x2"
+                )
                     .WithArguments("x2")
                     .WithLocation(6, 28)
             };
@@ -3193,17 +3196,17 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x3'.
                 //         /*<bind>*/(string x1, (byte x2, var x3), var x4) = (null, (2, null), null)/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x3"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x3"
+                )
                     .WithArguments("x3")
                     .WithLocation(6, 45),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x4'.
                 //         /*<bind>*/(string x1, (byte x2, var x3), var x4) = (null, (2, null), null)/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x4"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x4"
+                )
                     .WithArguments("x4")
                     .WithLocation(6, 54)
             };
@@ -3258,13 +3261,14 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
             {
                 // CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         /*<bind>*/((string x1, byte x2, var x3), int x4) = (null, 4)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null").WithLocation(6, 61),
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null")
+                    .WithLocation(6, 61),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x3'.
                 //         /*<bind>*/((string x1, byte x2, var x3), int x4) = (null, 4)/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x3"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x3"
+                )
                     .WithArguments("x3")
                     .WithLocation(6, 45)
             };
@@ -3317,9 +3321,9 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x2'.
                 //         /*<bind>*/(string x1, var x2) = (null, (null, 2))/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x2"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x2"
+                )
                     .WithArguments("x2")
                     .WithLocation(6, 35)
             };
@@ -3373,9 +3377,9 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
                 // CS8132: Cannot deconstruct a tuple of '2' elements into '3' variables.
                 //         /*<bind>*/(string x1, var x2, int x3) = (null, "hello")/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_DeconstructWrongCardinality,
-                        @"(string x1, var x2, int x3) = (null, ""hello"")"
-                    )
+                    ErrorCode.ERR_DeconstructWrongCardinality,
+                    @"(string x1, var x2, int x3) = (null, ""hello"")"
+                )
                     .WithArguments("2", "3")
                     .WithLocation(6, 19)
             };
@@ -3429,20 +3433,21 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
                 // CS8132: Cannot deconstruct a tuple of '3' elements into '2' variables.
                 //         /*<bind>*/(string x1, var y1) = (null, "hello", 3)/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_DeconstructWrongCardinality,
-                        @"(string x1, var y1) = (null, ""hello"", 3)"
-                    )
+                    ErrorCode.ERR_DeconstructWrongCardinality,
+                    @"(string x1, var y1) = (null, ""hello"", 3)"
+                )
                     .WithArguments("3", "2")
                     .WithLocation(6, 19),
                 // CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         (string x2, var y2) = (null, "hello", null);
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null").WithLocation(7, 47),
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null")
+                    .WithLocation(7, 47),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'y2'.
                 //         (string x2, var y2) = (null, "hello", null);
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "y2"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "y2"
+                )
                     .WithArguments("y2")
                     .WithLocation(7, 25)
             };
@@ -3620,25 +3625,25 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
                 // CS8132: Cannot deconstruct a tuple of '3' elements into '2' variables.
                 //         /*<bind>*/(var (x1, x2), var x3) = (1, 2, 3)/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_DeconstructWrongCardinality,
-                        "(var (x1, x2), var x3) = (1, 2, 3)"
-                    )
+                    ErrorCode.ERR_DeconstructWrongCardinality,
+                    "(var (x1, x2), var x3) = (1, 2, 3)"
+                )
                     .WithArguments("3", "2")
                     .WithLocation(6, 19),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x1'.
                 //         /*<bind>*/(var (x1, x2), var x3) = (1, 2, 3)/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x1"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x1"
+                )
                     .WithArguments("x1")
                     .WithLocation(6, 25),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x2'.
                 //         /*<bind>*/(var (x1, x2), var x3) = (1, 2, 3)/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x2"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x2"
+                )
                     .WithArguments("x2")
                     .WithLocation(6, 29)
             };
@@ -3808,17 +3813,17 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x'.
                 //         /*<bind>*/var (x, y) = 42/*</bind>*/; // parsed as deconstruction
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x"
+                )
                     .WithArguments("x")
                     .WithLocation(9, 24),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'y'.
                 //         /*<bind>*/var (x, y) = 42/*</bind>*/; // parsed as deconstruction
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "y"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "y"
+                )
                     .WithArguments("y")
                     .WithLocation(9, 27),
                 // CS0219: The variable 'x' is assigned but its value is never used
@@ -4475,17 +4480,17 @@ IDeclarationExpressionOperation (OperationKind.DeclarationExpression, Type: (var
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x1'.
                 //         foreach (/*<bind>*/var (x1, x2)/*</bind>*/ in 1)
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x1"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x1"
+                )
                     .WithArguments("x1")
                     .WithLocation(6, 33),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x2'.
                 //         foreach (/*<bind>*/var (x1, x2)/*</bind>*/ in 1)
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x2"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x2"
+                )
                     .WithArguments("x2")
                     .WithLocation(6, 37)
             };
@@ -4586,17 +4591,17 @@ class C
                 // (6,23): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x1'.
                 //         foreach (var (x1, x2) in M(x1)) { }
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x1"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x1"
+                )
                     .WithArguments("x1")
                     .WithLocation(6, 23),
                 // (6,27): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x2'.
                 //         foreach (var (x1, x2) in M(x1)) { }
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x2"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x2"
+                )
                     .WithArguments("x2")
                     .WithLocation(6, 27)
             );

@@ -120,12 +120,13 @@ namespace System.Data
                 {
                     decimal r12;
                     if (
-                        decimal.TryParse(
-                            sval,
-                            NumberStyles.Number,
-                            NumberFormatInfo.InvariantInfo,
-                            out r12
-                        )
+                        decimal
+                            .TryParse(
+                                sval,
+                                NumberStyles.Number,
+                                NumberFormatInfo.InvariantInfo,
+                                out r12
+                            )
                     )
                     {
                         return r12;
@@ -133,12 +134,13 @@ namespace System.Data
 
                     double r8;
                     if (
-                        double.TryParse(
-                            sval,
-                            NumberStyles.Float | NumberStyles.AllowThousands,
-                            NumberFormatInfo.InvariantInfo,
-                            out r8
-                        )
+                        double
+                            .TryParse(
+                                sval,
+                                NumberStyles.Float | NumberStyles.AllowThousands,
+                                NumberFormatInfo.InvariantInfo,
+                                out r8
+                            )
                     )
                     {
                         return r8;
@@ -208,36 +210,39 @@ namespace System.Data
                 {
                     int i4;
                     if (
-                        int.TryParse(
-                            sval,
-                            NumberStyles.Integer,
-                            NumberFormatInfo.InvariantInfo,
-                            out i4
-                        )
+                        int
+                            .TryParse(
+                                sval,
+                                NumberStyles.Integer,
+                                NumberFormatInfo.InvariantInfo,
+                                out i4
+                            )
                     )
                     {
                         return i4;
                     }
                     long i8;
                     if (
-                        long.TryParse(
-                            sval,
-                            NumberStyles.Integer,
-                            NumberFormatInfo.InvariantInfo,
-                            out i8
-                        )
+                        long
+                            .TryParse(
+                                sval,
+                                NumberStyles.Integer,
+                                NumberFormatInfo.InvariantInfo,
+                                out i8
+                            )
                     )
                     {
                         return i8;
                     }
                     double r8;
                     if (
-                        double.TryParse(
-                            sval,
-                            NumberStyles.Float | NumberStyles.AllowThousands,
-                            NumberFormatInfo.InvariantInfo,
-                            out r8
-                        )
+                        double
+                            .TryParse(
+                                sval,
+                                NumberStyles.Float | NumberStyles.AllowThousands,
+                                NumberFormatInfo.InvariantInfo,
+                                out r8
+                            )
                     )
                     {
                         return r8;

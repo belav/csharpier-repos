@@ -65,15 +65,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 DotNetRoot = dotNet.BinPath;
                 HostFxrPath = dotNet.GreatestVersionHostFxrFilePath;
 
-                PortableAppFixture = new TestProjectFixture(
-                    "PortableApp",
-                    RepoDirectories
-                ).EnsureRestored().PublishProject();
+                PortableAppFixture = new TestProjectFixture("PortableApp", RepoDirectories)
+                    .EnsureRestored()
+                    .PublishProject();
 
                 PortableAppWithExceptionFixture = new TestProjectFixture(
                     "PortableAppWithException",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
             }
 
             protected override void Dispose(bool disposing)
@@ -107,14 +108,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             var constraint = assertion.ExecuteApplication(hostPath, appPath);
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                return constraint.And.HaveStdOutContaining(
-                    $"hostfxr_run_app threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
-                );
+                return constraint.And
+                    .HaveStdOutContaining(
+                        $"hostfxr_run_app threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
+                    );
             }
             else
             {
                 // Exception is unhandled by native host on non-Windows systems
-                return constraint.And.ExitWith(Constants.ErrorCode.SIGABRT)
+                return constraint.And
+                    .ExitWith(Constants.ErrorCode.SIGABRT)
                     .And.HaveStdErrContaining(
                         "Unhandled exception. System.Exception: Goodbye World!"
                     );

@@ -30,16 +30,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             // the symbols given to the comment that follows the call.
 
             var mscorlibRef = AssemblyMetadata.CreateFromImage(
-                    TestMetadata.ResourcesNet451.mscorlib
-                )
+                TestMetadata.ResourcesNet451.mscorlib
+            )
                 .GetReference(display: "mscorlib");
-            var references = new[] { mscorlibRef }.Concat(
-                additionalRefs ?? Array.Empty<MetadataReference>()
-            );
+            var references = new[] { mscorlibRef }
+                .Concat(additionalRefs ?? Array.Empty<MetadataReference>());
 
             var compilation = CreateEmptyCompilation(source, references, TestOptions.ReleaseDll);
 
-            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace.GetTypeMembers("C")
+            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace
+                .GetTypeMembers("C")
                 .Single()
                 .GetMembers("M")
                 .Single();
@@ -50,27 +50,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new BindingDiagnosticBag(diagnostics)
             );
             var tree = BoundTreeDumperNodeProducer.MakeTree(block);
-            var results = string.Join(
-                "\n",
-                tree.PreorderTraversal()
-                    .Select(edge => edge.Value)
-                    .Where(x => x.Text == "method" && x.Value != null)
-                    .Select(x => x.Value)
-                    .ToArray()
-            );
+            var results = string
+                .Join(
+                    "\n",
+                    tree.PreorderTraversal()
+                        .Select(edge => edge.Value)
+                        .Where(x => x.Text == "method" && x.Value != null)
+                        .Select(x => x.Value)
+                        .ToArray()
+                );
 
             // var r = string.Join("\n", tree.PreorderTraversal().Select(edge => edge.Value).ToArray();
 
-            var expected = string.Join(
-                "\n",
-                source.Split(
+            var expected = string
+                .Join(
+                    "\n",
+                    source.Split(
                         new[] { Environment.NewLine },
                         System.StringSplitOptions.RemoveEmptyEntries
                     )
-                    .Where(x => x.Contains("//-"))
-                    .Select(x => x.Substring(x.IndexOf("//-", StringComparison.Ordinal) + 3))
-                    .ToArray()
-            );
+                        .Where(x => x.Contains("//-"))
+                        .Select(x => x.Substring(x.IndexOf("//-", StringComparison.Ordinal) + 3))
+                        .ToArray()
+                );
 
             AssertEx.EqualOrDiff(expected, results);
         }

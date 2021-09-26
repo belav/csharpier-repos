@@ -62,9 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             // through them, firing their latest events.
             _documentsToFireEventsFor = new AsyncBatchingWorkQueue<DocumentId>(
                 TimeSpan.FromMilliseconds(
-                    visualStudioWorkspace.Options.GetOption(
-                        InternalSolutionCrawlerOptions.AllFilesWorkerBackOffTimeSpanInMS
-                    )
+                    visualStudioWorkspace.Options
+                        .GetOption(InternalSolutionCrawlerOptions.AllFilesWorkerBackOffTimeSpanInMS)
                 ),
                 ProcessNextDocumentBatchAsync,
                 // We only care about unique doc-ids, so pass in this comparer to collapse streams of changes for a
@@ -217,10 +216,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             _ = _threadingContext.RunWithShutdownBlockAsync(
                 async cancellationToken =>
                 {
-                    await _threadingContext.JoinableTaskFactory.StartOnIdle(
-                        () => a(cancellationToken),
-                        VsTaskRunContext.UIThreadNormalPriority
-                    );
+                    await _threadingContext.JoinableTaskFactory
+                        .StartOnIdle(
+                            () => a(cancellationToken),
+                            VsTaskRunContext.UIThreadNormalPriority
+                        );
                 }
             );
         }

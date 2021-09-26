@@ -82,18 +82,16 @@ namespace System.Xml.Tests
 
             if (constructorArgs.Length == 1)
             {
-                object[] args = (
-                    (IEnumerable<object>)constructorArgs[0] ?? new object[] { null }
-                ).ToArray();
+                object[] args = ((IEnumerable<object>)constructorArgs[0] ?? new object[] { null })
+                    .ToArray();
                 return GenerateTestCases(WriterType.All, args);
             }
 
             if (constructorArgs.Length == 2)
             {
                 WriterType writerTypeFlags = (WriterType)constructorArgs[0];
-                object[] args = (
-                    (IEnumerable<object>)constructorArgs[1] ?? new object[] { null }
-                ).ToArray();
+                object[] args = ((IEnumerable<object>)constructorArgs[1] ?? new object[] { null })
+                    .ToArray();
                 return GenerateTestCases(writerTypeFlags, args);
             }
 

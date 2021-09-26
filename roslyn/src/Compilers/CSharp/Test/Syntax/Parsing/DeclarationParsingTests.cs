@@ -1120,14 +1120,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, cs.Members.Count);
             Assert.NotEqual(default, cs.CloseBraceToken);
 
-            CreateCompilation(text)
-                .GetDeclarationDiagnostics()
-                .Verify(
-                    // (1,9): error CS0080: Constraints are not allowed on non-generic declarations
-                    // class a where b : c { }
-                    Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where")
-                        .WithLocation(1, 9)
-                );
+            CreateCompilation(text).GetDeclarationDiagnostics().Verify(
+                // (1,9): error CS0080: Constraints are not allowed on non-generic declarations
+                // class a where b : c { }
+                Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where")
+                    .WithLocation(1, 9)
+            );
         }
 
         [Fact]
@@ -1135,14 +1133,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var text = "class a { void M() where b : c { } }";
 
-            CreateCompilation(text)
-                .GetDeclarationDiagnostics()
-                .Verify(
-                    // (1,20): error CS0080: Constraints are not allowed on non-generic declarations
-                    // class a { void M() where b : c { } }
-                    Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where")
-                        .WithLocation(1, 20)
-                );
+            CreateCompilation(text).GetDeclarationDiagnostics().Verify(
+                // (1,20): error CS0080: Constraints are not allowed on non-generic declarations
+                // class a { void M() where b : c { } }
+                Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where")
+                    .WithLocation(1, 20)
+            );
         }
 
         [Fact]
@@ -5719,36 +5715,33 @@ class Class1<T>{
         public void TestNamespaceDeclarationsBadNames1()
         {
             var text = @"namespace A::B { }";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (1,11): error CS7000: Unexpected use of an aliased name
-                    // namespace A::B { }
-                    Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "A::B").WithLocation(1, 11)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (1,11): error CS7000: Unexpected use of an aliased name
+                // namespace A::B { }
+                Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "A::B").WithLocation(1, 11)
+            );
         }
 
         [Fact]
         public void TestNamespaceDeclarationsBadNames2()
         {
             var text = @"namespace A<B> { }";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (1,11): error CS7002: Unexpected use of a generic name
-                    // namespace A<B> { }
-                    Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "A<B>").WithLocation(1, 11)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (1,11): error CS7002: Unexpected use of a generic name
+                // namespace A<B> { }
+                Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "A<B>").WithLocation(1, 11)
+            );
         }
 
         [Fact]
         public void TestNamespaceDeclarationsBadNames3()
         {
             var text = @"namespace A<,> { }";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (1,11): error CS7002: Unexpected use of a generic name
-                    // namespace A<,> { }
-                    Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "A<,>").WithLocation(1, 11)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (1,11): error CS7002: Unexpected use of a generic name
+                // namespace A<,> { }
+                Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "A<,>").WithLocation(1, 11)
+            );
         }
 
         [WorkItem(537690, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537690")]
@@ -5792,55 +5785,53 @@ partial class PartialPartial
 }
 ";
             // These errors aren't great.  Ideally we can improve things in the future.
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (5,13): error CS1525: Invalid expression term 'partial'
-                    //     partial partial void PM();
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "partial")
-                        .WithArguments("partial")
-                        .WithLocation(5, 13),
-                    // (5,13): error CS1002: ; expected
-                    //     partial partial void PM();
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "partial").WithLocation(5, 13),
-                    // (6,13): error CS1525: Invalid expression term 'partial'
-                    //     partial partial void PM()
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "partial")
-                        .WithArguments("partial")
-                        .WithLocation(6, 13),
-                    // (6,13): error CS1002: ; expected
-                    //     partial partial void PM()
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "partial").WithLocation(6, 13),
-                    // (6,13): error CS0102: The type 'PartialPartial' already contains a definition for ''
-                    //     partial partial void PM()
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "")
-                        .WithArguments("PartialPartial", "")
-                        .WithLocation(6, 13),
-                    // (5,5): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
-                    //     partial partial void PM();
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial")
-                        .WithArguments("partial")
-                        .WithLocation(5, 5),
-                    // (6,5): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
-                    //     partial partial void PM()
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial")
-                        .WithArguments("partial")
-                        .WithLocation(6, 5)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (5,13): error CS1525: Invalid expression term 'partial'
+                //     partial partial void PM();
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "partial")
+                    .WithArguments("partial")
+                    .WithLocation(5, 13),
+                // (5,13): error CS1002: ; expected
+                //     partial partial void PM();
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "partial").WithLocation(5, 13),
+                // (6,13): error CS1525: Invalid expression term 'partial'
+                //     partial partial void PM()
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "partial")
+                    .WithArguments("partial")
+                    .WithLocation(6, 13),
+                // (6,13): error CS1002: ; expected
+                //     partial partial void PM()
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "partial").WithLocation(6, 13),
+                // (6,13): error CS0102: The type 'PartialPartial' already contains a definition for ''
+                //     partial partial void PM()
+                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "")
+                    .WithArguments("PartialPartial", "")
+                    .WithLocation(6, 13),
+                // (5,5): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
+                //     partial partial void PM();
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial")
+                    .WithArguments("partial")
+                    .WithLocation(5, 5),
+                // (6,5): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
+                //     partial partial void PM()
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial")
+                    .WithArguments("partial")
+                    .WithLocation(6, 5)
+            );
         }
 
         [Fact]
         public void TestPartialEnum()
         {
             var text = @"partial enum E{}";
-            CreateCompilationWithMscorlib45(text)
-                .VerifyDiagnostics(
-                    // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                    // partial enum E{}
-                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1),
-                    // (1,14): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                    // partial enum E{}
-                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "E").WithLocation(1, 14)
-                );
+            CreateCompilationWithMscorlib45(text).VerifyDiagnostics(
+                // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                // partial enum E{}
+                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1),
+                // (1,14): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                // partial enum E{}
+                Diagnostic(ErrorCode.ERR_PartialMisplaced, "E").WithLocation(1, 14)
+            );
         }
 
         [WorkItem(539120, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539120")]
@@ -5878,12 +5869,11 @@ class C {
             Assert.NotNull(file);
             Assert.Equal(0, file.Errors().Length);
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (5,28): error CS1065: Default values are not valid in this context.
-                    //      F f = delegate (int x = 0) { };
-                    Diagnostic(ErrorCode.ERR_DefaultValueNotAllowed, "=").WithLocation(5, 28)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (5,28): error CS1065: Default values are not valid in this context.
+                //      F f = delegate (int x = 0) { };
+                Diagnostic(ErrorCode.ERR_DefaultValueNotAllowed, "=").WithLocation(5, 28)
+            );
         }
 
         [WorkItem(537865, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537865")]
@@ -6011,18 +6001,16 @@ class C
    void M(__arglist, int j)  {}
 }";
 
-            CreateCompilation(text1)
-                .VerifyDiagnostics(
-                    // (4,11): error CS0231: A params parameter must be the last parameter in a formal parameter list
-                    //    void M(params int[] i, int j)  {}
-                    Diagnostic(ErrorCode.ERR_ParamsLast, "params int[] i").WithLocation(4, 11)
-                );
-            CreateCompilation(text2)
-                .VerifyDiagnostics(
-                    // (4,11): error CS0257: An __arglist parameter must be the last parameter in a formal parameter list
-                    //    void M(__arglist, int j)  {}
-                    Diagnostic(ErrorCode.ERR_VarargsLast, "__arglist").WithLocation(4, 11)
-                );
+            CreateCompilation(text1).VerifyDiagnostics(
+                // (4,11): error CS0231: A params parameter must be the last parameter in a formal parameter list
+                //    void M(params int[] i, int j)  {}
+                Diagnostic(ErrorCode.ERR_ParamsLast, "params int[] i").WithLocation(4, 11)
+            );
+            CreateCompilation(text2).VerifyDiagnostics(
+                // (4,11): error CS0257: An __arglist parameter must be the last parameter in a formal parameter list
+                //    void M(__arglist, int j)  {}
+                Diagnostic(ErrorCode.ERR_VarargsLast, "__arglist").WithLocation(4, 11)
+            );
         }
 
         [Fact]
@@ -6940,14 +6928,13 @@ class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (6,13): error CS0106: The modifier 'ref' is not valid for this item
-                    //         ref get => throw null;
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "get")
-                        .WithArguments("ref")
-                        .WithLocation(6, 13)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (6,13): error CS0106: The modifier 'ref' is not valid for this item
+                //         ref get => throw null;
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "get")
+                    .WithArguments("ref")
+                    .WithLocation(6, 13)
+            );
         }
 
         [Fact]
@@ -6964,19 +6951,18 @@ class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (6,22): error CS0106: The modifier 'abstract' is not valid for this item
-                    //         abstract ref get => throw null;
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "get")
-                        .WithArguments("abstract")
-                        .WithLocation(6, 22),
-                    // (6,22): error CS0106: The modifier 'ref' is not valid for this item
-                    //         abstract ref get => throw null;
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "get")
-                        .WithArguments("ref")
-                        .WithLocation(6, 22)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (6,22): error CS0106: The modifier 'abstract' is not valid for this item
+                //         abstract ref get => throw null;
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "get")
+                    .WithArguments("abstract")
+                    .WithLocation(6, 22),
+                // (6,22): error CS0106: The modifier 'ref' is not valid for this item
+                //         abstract ref get => throw null;
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "get")
+                    .WithArguments("ref")
+                    .WithLocation(6, 22)
+            );
         }
 
         [Fact]
@@ -6993,14 +6979,13 @@ class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (6,13): error CS0106: The modifier 'ref' is not valid for this item
-                    //         ref set => throw null;
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "set")
-                        .WithArguments("ref")
-                        .WithLocation(6, 13)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (6,13): error CS0106: The modifier 'ref' is not valid for this item
+                //         ref set => throw null;
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "set")
+                    .WithArguments("ref")
+                    .WithLocation(6, 13)
+            );
         }
 
         [Fact]
@@ -7017,19 +7002,18 @@ class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (6,22): error CS0106: The modifier 'abstract' is not valid for this item
-                    //         abstract ref set => throw null;
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "set")
-                        .WithArguments("abstract")
-                        .WithLocation(6, 22),
-                    // (6,22): error CS0106: The modifier 'ref' is not valid for this item
-                    //         abstract ref set => throw null;
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "set")
-                        .WithArguments("ref")
-                        .WithLocation(6, 22)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (6,22): error CS0106: The modifier 'abstract' is not valid for this item
+                //         abstract ref set => throw null;
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "set")
+                    .WithArguments("abstract")
+                    .WithLocation(6, 22),
+                // (6,22): error CS0106: The modifier 'ref' is not valid for this item
+                //         abstract ref set => throw null;
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "set")
+                    .WithArguments("ref")
+                    .WithLocation(6, 22)
+            );
         }
 
         [Fact]
@@ -7047,15 +7031,14 @@ public class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (6,9): error CS1609: Modifiers cannot be placed on event accessor declarations
-                    //         ref add => throw null;
-                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "ref").WithLocation(6, 9),
-                    // (7,9): error CS1609: Modifiers cannot be placed on event accessor declarations
-                    //         ref remove => throw null;
-                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "ref").WithLocation(7, 9)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (6,9): error CS1609: Modifiers cannot be placed on event accessor declarations
+                //         ref add => throw null;
+                Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "ref").WithLocation(6, 9),
+                // (7,9): error CS1609: Modifiers cannot be placed on event accessor declarations
+                //         ref remove => throw null;
+                Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "ref").WithLocation(7, 9)
+            );
         }
 
         [Fact]
@@ -7073,15 +7056,14 @@ public class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (6,9): error CS1609: Modifiers cannot be placed on event accessor declarations
-                    //         abstract ref add => throw null;
-                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "abstract").WithLocation(6, 9),
-                    // (7,9): error CS1609: Modifiers cannot be placed on event accessor declarations
-                    //         abstract ref remove => throw null;
-                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "abstract").WithLocation(7, 9)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (6,9): error CS1609: Modifiers cannot be placed on event accessor declarations
+                //         abstract ref add => throw null;
+                Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "abstract").WithLocation(6, 9),
+                // (7,9): error CS1609: Modifiers cannot be placed on event accessor declarations
+                //         abstract ref remove => throw null;
+                Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "abstract").WithLocation(7, 9)
+            );
         }
 
         [Fact]
@@ -7483,7 +7465,9 @@ class B<X, Y> : A<int
                 TestOptions.Regular7_3,
                 // (2,22): error CS1003: Syntax error, '>' expected
                 // class B<X, Y> : A<int
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">", "").WithLocation(2, 22)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "")
+                    .WithArguments(">", "")
+                    .WithLocation(2, 22)
             );
 
             N(SyntaxKind.CompilationUnit);
@@ -7575,20 +7559,17 @@ class A : B : C
                 // (3,1): error CS8370: Feature 'top-level statements' is not available in C# 7.3. Please use language version 9.0 or greater.
                 // {
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
-                        @"{
+                    ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                    @"{
 }"
-                    )
-                    .WithArguments("top-level statements", "9.0")
-                    .WithLocation(3, 1),
+                ).WithArguments("top-level statements", "9.0").WithLocation(3, 1),
                 // (3,1): error CS8803: Top-level statements must precede namespace and type declarations.
                 // {
                 Diagnostic(
-                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
-                        @"{
+                    ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                    @"{
 }"
-                    )
-                    .WithLocation(3, 1)
+                ).WithLocation(3, 1)
             );
 
             N(SyntaxKind.CompilationUnit);

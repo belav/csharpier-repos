@@ -388,10 +388,8 @@ namespace System.Web.Http.Tracing
                 (TraceRecord traceRecord) =>
                 {
                     traceRecord.Exception = exception;
-                    traceRecord.Message = System.Web.Http.Error.Format(
-                        messageFormat,
-                        messageArguments
-                    );
+                    traceRecord.Message = System.Web.Http.Error
+                        .Format(messageFormat, messageArguments);
                 }
             );
         }
@@ -432,10 +430,8 @@ namespace System.Web.Http.Tracing
                 level,
                 (TraceRecord traceRecord) =>
                 {
-                    traceRecord.Message = System.Web.Http.Error.Format(
-                        messageFormat,
-                        messageArguments
-                    );
+                    traceRecord.Message = System.Web.Http.Error
+                        .Format(messageFormat, messageArguments);
                 }
             );
         }

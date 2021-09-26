@@ -15,10 +15,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => 42,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => 42, typeof(int)),
                 ModelName = "foo",
                 ValueProvider = new SimpleValueProvider()
             };
@@ -39,10 +37,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => 42,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => 42, typeof(int)),
                 ModelName = "foo",
                 ValueProvider = new SimpleValueProvider { { "foo.bar", "someValue" } }
             };
@@ -64,10 +60,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(ComplexModelDto)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(ComplexModelDto)),
                 ModelName = "foo",
                 ValueProvider = new SimpleValueProvider { { "foo.bar", "someValue" } }
             };

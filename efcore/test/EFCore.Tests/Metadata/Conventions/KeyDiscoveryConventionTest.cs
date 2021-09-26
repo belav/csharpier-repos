@@ -140,8 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(LogLevel.Debug, logEntry.Level);
             Assert.Equal(
                 CoreResources.LogMultiplePrimaryKeyCandidates(
-                        new TestLogger<TestLoggingDefinitions>()
-                    )
+                    new TestLogger<TestLoggingDefinitions>()
+                )
                     .GenerateMessage(
                         nameof(EntityWithMultipleIds.ID),
                         nameof(EntityWithMultipleIds.Id),
@@ -175,7 +175,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private KeyDiscoveryConvention CreateKeyDiscoveryConvention() => new(CreateDependencies());
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>() with
             {
                 Logger = CreateLogger()
@@ -206,10 +207,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var context = new ConventionContext<IConventionEntityTypeBuilder>(
                 modelBuilder.Metadata.ConventionDispatcher
             );
-            new PropertyDiscoveryConvention(CreateDependencies()).ProcessEntityTypeAdded(
-                entityBuilder,
-                context
-            );
+            new PropertyDiscoveryConvention(CreateDependencies())
+                .ProcessEntityTypeAdded(entityBuilder, context);
 
             return entityBuilder;
         }

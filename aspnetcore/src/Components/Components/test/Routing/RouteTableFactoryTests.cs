@@ -262,7 +262,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void CanMatchTemplateWithMultipleParameters()
         {
             // Arrange
-            var routeTable = new TestRouteTableBuilder().AddRoute("/{some}/awesome/{route}/")
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/{some}/awesome/{route}/")
                 .Build();
             var context = new RouteContext("/an/awesome/path");
 
@@ -284,9 +285,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void CanMatchTemplateWithMultipleParametersAndCatchAllParameter()
         {
             // Arrange
-            var routeTable = new TestRouteTableBuilder().AddRoute(
-                    "/{some}/awesome/{route}/with/{*catchAll}"
-                )
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/{some}/awesome/{route}/with/{*catchAll}")
                 .Build();
             var context = new RouteContext("/an/awesome/path/with/some/catch/all/stuff");
 
@@ -359,7 +359,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             // Arrange
 
             // Routes are added in reverse precedence order
-            var builder = new TestRouteTableBuilder().AddRoute("/{*last}")
+            var builder = new TestRouteTableBuilder()
+                .AddRoute("/{*last}")
                 .AddRoute("/{*last:int}")
                 .AddRoute("/{last}")
                 .AddRoute("/{last:int}")
@@ -433,7 +434,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             // Arrange
 
             // Routes are added in reverse precedence order
-            var table = new TestRouteTableBuilder().AddRoute(first, typeof(TestHandler1))
+            var table = new TestRouteTableBuilder()
+                .AddRoute(first, typeof(TestHandler1))
                 .AddRoute(second, typeof(TestHandler2))
                 .Build();
 
@@ -517,7 +519,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             // Arrange
 
             // Routes are added in reverse precedence order
-            var table = new TestRouteTableBuilder().AddRoute("{param1?}/{param2?}/{param3?}")
+            var table = new TestRouteTableBuilder()
+                .AddRoute("{param1?}/{param2?}/{param3?}")
                 .Build();
 
             var context = new RouteContext(path);
@@ -550,7 +553,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             // Arrange
 
             // Routes are added in reverse precedence order
-            var table = new TestRouteTableBuilder().AddRoute("prefix/{param1?}/{param2?}/{param3?}")
+            var table = new TestRouteTableBuilder()
+                .AddRoute("prefix/{param1?}/{param2?}/{param3?}")
                 .Build();
 
             var context = new RouteContext(path);
@@ -752,10 +756,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void PrefersLiteralTemplateOverTemplateWithParameters()
         {
             // Arrange
-            var routeTable = new TestRouteTableBuilder().AddRoute(
-                    "/an/awesome/path",
-                    typeof(TestHandler1)
-                )
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/an/awesome/path", typeof(TestHandler1))
                 .AddRoute("/{some}/awesome/{route}/", typeof(TestHandler2))
                 .Build();
             var context = new RouteContext("/an/awesome/path");
@@ -772,7 +774,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void PrefersLiteralTemplateOverTemplateWithOptionalParameters()
         {
             // Arrange
-            var routeTable = new TestRouteTableBuilder().AddRoute("/users/1", typeof(TestHandler1))
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/users/1", typeof(TestHandler1))
                 .AddRoute("/users/{id?}", typeof(TestHandler2))
                 .Build();
             var context = new RouteContext("/users/1");
@@ -791,7 +794,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             // Arrange, act & assert
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    new TestRouteTableBuilder().AddRoute("/users/{id}", typeof(TestHandler1))
+                    new TestRouteTableBuilder()
+                        .AddRoute("/users/{id}", typeof(TestHandler1))
                         .AddRoute("/users/{id?}", typeof(TestHandler2))
                         .Build()
             );
@@ -837,7 +841,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             // Arrange, act & assert
             var exception = Assert.Throws<InvalidOperationException>(
                 () =>
-                    new TestRouteTableBuilder().AddRoute(first, typeof(TestHandler1))
+                    new TestRouteTableBuilder()
+                        .AddRoute(first, typeof(TestHandler1))
                         .AddRoute(second, typeof(TestHandler2))
                         .Build()
             );
@@ -884,7 +889,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void DoesNotThrowForNonAmbiguousRoutes(string first, string second)
         {
             // Arrange
-            var builder = new TestRouteTableBuilder().AddRoute(first, typeof(TestHandler1))
+            var builder = new TestRouteTableBuilder()
+                .AddRoute(first, typeof(TestHandler1))
                 .AddRoute(second, typeof(TestHandler2));
 
             var expectedOrder = new[] { second, first };
@@ -910,10 +916,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void PrefersLiteralTemplateOverParameterizedTemplates()
         {
             // Arrange
-            var routeTable = new TestRouteTableBuilder().AddRoute(
-                    "/users/1/friends",
-                    typeof(TestHandler1)
-                )
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/users/1/friends", typeof(TestHandler1))
                 .AddRoute("/users/{id}/{location}", typeof(TestHandler2))
                 .AddRoute("/users/1/{location}", typeof(TestHandler2))
                 .Build();
@@ -933,7 +937,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         {
             // Arrange & Act
             var handler = typeof(int);
-            var routeTable = new TestRouteTableBuilder().AddRoute("/an/awesome/path")
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/an/awesome/path")
                 .AddRoute("/an/awesome/", handler)
                 .Build();
 
@@ -945,7 +950,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void PrefersMoreConstraintsOverFewer()
         {
             // Arrange
-            var routeTable = new TestRouteTableBuilder().AddRoute("/products/{id}")
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/products/{id}")
                 .AddRoute("/products/{id:int}")
                 .Build();
             var context = new RouteContext("/products/456");
@@ -962,10 +968,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void PrefersRoutesThatMatchMoreSegments()
         {
             // Arrange
-            var routeTable = new TestRouteTableBuilder().AddRoute(
-                    "/{anythingGoes}",
-                    typeof(TestHandler1)
-                )
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/{anythingGoes}", typeof(TestHandler1))
                 .AddRoute("/users/{id?}", typeof(TestHandler2))
                 .Build();
             var context = new RouteContext("/users/1");
@@ -984,7 +988,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         {
             // Arrange & Act
             var handler = typeof(int);
-            var routeTable = new TestRouteTableBuilder().AddRoute("/an/awesome/", handler)
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/an/awesome/", handler)
                 .AddRoute("/a/brilliant/")
                 .Build();
 
@@ -1052,10 +1057,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void SuppliesNullForUnusedHandlerParameters()
         {
             // Arrange
-            var routeTable = new TestRouteTableBuilder().AddRoute(
-                    "/{unrelated}",
-                    typeof(TestHandler2)
-                )
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/{unrelated}", typeof(TestHandler2))
                 .AddRoute("/products/{param2}/{PaRam1}", typeof(TestHandler1))
                 .AddRoute("/products/{param1:int}", typeof(TestHandler1))
                 .AddRoute("/", typeof(TestHandler1))

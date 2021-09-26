@@ -122,10 +122,8 @@ namespace Microsoft.CodeAnalysis
                 for (int i = 0; i < explicitAssemblies.Length; i++)
                 {
                     referenceBindings.Add(
-                        explicitAssemblies[i].BindAssemblyReferences(
-                            explicitAssemblies,
-                            IdentityComparer
-                        )
+                        explicitAssemblies[i]
+                            .BindAssemblyReferences(explicitAssemblies, IdentityComparer)
                     );
                 }
 
@@ -260,7 +258,8 @@ namespace Microsoft.CodeAnalysis
 
             // metadata references and corresponding bindings of their references, used to calculate a fixed point:
             var referenceBindingsToProcess =
-                ArrayBuilder<(MetadataReference, ArraySegment<AssemblyReferenceBinding>)>.GetInstance();
+                ArrayBuilder<(MetadataReference, ArraySegment<AssemblyReferenceBinding>)>
+                    .GetInstance();
 
             // collect all missing identities, resolve the assemblies and bind their references against explicit definitions:
             GetInitialReferenceBindingsToProcess(
@@ -574,9 +573,10 @@ namespace Microsoft.CodeAnalysis
             var referenceBindingsOfAssemblyBeingBuilt = referenceBindings[0];
 
             // add implicitly resolved assemblies to the bindings of the assembly being built:
-            var bindingsOfAssemblyBeingBuilt = ArrayBuilder<AssemblyReferenceBinding>.GetInstance(
-                referenceBindingsOfAssemblyBeingBuilt.Length + implicitAssemblies.Count
-            );
+            var bindingsOfAssemblyBeingBuilt = ArrayBuilder<AssemblyReferenceBinding>
+                .GetInstance(
+                    referenceBindingsOfAssemblyBeingBuilt.Length + implicitAssemblies.Count
+                );
 
             // add bindings for explicitly specified assemblies (-1 for the assembly being built):
             bindingsOfAssemblyBeingBuilt.AddRange(
@@ -1033,9 +1033,8 @@ namespace Microsoft.CodeAnalysis
 
                             // Make sure symbols represent the same assembly/binary
                             if (
-                                !assemblies[definitionIndex].IsMatchingAssembly(
-                                    currentCandidateReferencedSymbol
-                                )
+                                !assemblies[definitionIndex]
+                                    .IsMatchingAssembly(currentCandidateReferencedSymbol)
                             )
                             {
                                 // Mismatch between versions?
@@ -1107,9 +1106,8 @@ namespace Microsoft.CodeAnalysis
 
                                 // Make sure candidate COR library represent the same assembly/binary
                                 if (
-                                    !assemblies[corLibraryIndex].IsMatchingAssembly(
-                                        candidateCorLibrary
-                                    )
+                                    !assemblies[corLibraryIndex]
+                                        .IsMatchingAssembly(candidateCorLibrary)
                                 )
                                 {
                                     // Mismatch between versions?

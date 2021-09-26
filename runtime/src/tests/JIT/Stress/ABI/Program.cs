@@ -133,9 +133,8 @@ namespace ABIStress
                         int numRejected = tcel.FailureReasons.Values.Sum();
                         Console.WriteLine("{0} rejected tailcalls. Breakdown:", numRejected);
                         foreach (
-                            var (reason, count) in tcel.FailureReasons.OrderByDescending(
-                                kvp => kvp.Value
-                            )
+                            var (reason, count) in tcel.FailureReasons
+                                .OrderByDescending(kvp => kvp.Value)
                         )
                             Console.WriteLine(
                                 "[{0:00.00}%]: {1}",
@@ -331,8 +330,8 @@ namespace ABIStress
         )
         {
             object[] outerArgs = callerParameters.Select(
-                    p => Gen.GenConstant(p.Type, p.Fields, rand)
-                )
+                p => Gen.GenConstant(p.Type, p.Fields, rand)
+            )
                 .ToArray();
             object[] innerArgs = passedArgs.Select(v => v.Get(outerArgs)).ToArray();
 
@@ -372,18 +371,12 @@ namespace ABIStress
             Console.WriteLine(mi.ToString().Replace(ns + ".", ""));
         }
 
-        private static readonly MethodInfo s_writeString = typeof(Console).GetMethod(
-            "Write",
-            new[] { typeof(string) }
-        );
-        private static readonly MethodInfo s_writeLineString = typeof(Console).GetMethod(
-            "WriteLine",
-            new[] { typeof(string) }
-        );
-        private static readonly MethodInfo s_dumpValue = typeof(Program).GetMethod(
-            "DumpValue",
-            BindingFlags.NonPublic | BindingFlags.Static
-        );
+        private static readonly MethodInfo s_writeString = typeof(Console)
+            .GetMethod("Write", new[] { typeof(string) });
+        private static readonly MethodInfo s_writeLineString = typeof(Console)
+            .GetMethod("WriteLine", new[] { typeof(string) });
+        private static readonly MethodInfo s_dumpValue = typeof(Program)
+            .GetMethod("DumpValue", BindingFlags.NonPublic | BindingFlags.Static);
 
         private static void DumpObject(object o)
         {
@@ -463,7 +456,9 @@ namespace ABIStress
             typeof(S32U),
             typeof(Hfa1),
             typeof(Hfa2),
-        }.Select(t => new TypeEx(t)).ToArray();
+        }
+            .Select(t => new TypeEx(t))
+            .ToArray();
 
         private static readonly IAbi s_abi = SelectAbi();
 
@@ -506,7 +501,9 @@ namespace ABIStress
             typeof(S32U),
             typeof(Hfa1),
             typeof(Hfa2),
-        }.Select(t => new TypeEx(t)).ToArray();
+        }
+            .Select(t => new TypeEx(t))
+            .ToArray();
 
         private static IAbi SelectAbi()
         {

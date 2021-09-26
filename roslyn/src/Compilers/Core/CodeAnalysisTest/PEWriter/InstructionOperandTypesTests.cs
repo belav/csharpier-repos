@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.PEWriter
             };
 
             foreach (
-                FieldInfo fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static)
+                FieldInfo fi in typeof(OpCodes)
+                    .GetFields(BindingFlags.Public | BindingFlags.Static)
                     .Where(f => !reserved.Contains(f.Name))
             )
             {

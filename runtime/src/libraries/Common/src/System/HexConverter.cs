@@ -182,9 +182,9 @@ namespace System
                     shuffleMask
                 );
                 Vector128<byte> highNibbles = Sse2.ShiftRightLogical(
-                        Sse2.ShiftRightLogical128BitLane(lowNibbles, 2).AsInt32(),
-                        4
-                    )
+                    Sse2.ShiftRightLogical128BitLane(lowNibbles, 2).AsInt32(),
+                    4
+                )
                     .AsByte();
 
                 // Lookup the hex values at the positions of the indices

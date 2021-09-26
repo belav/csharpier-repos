@@ -44,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
 
             var internalEntityEntry = node.GetInfrastructure();
-            var navigations = internalEntityEntry.EntityType.GetNavigations()
+            var navigations = internalEntityEntry.EntityType
+                .GetNavigations()
                 .Concat<INavigationBase>(internalEntityEntry.EntityType.GetSkipNavigations());
 
             var stateManager = internalEntityEntry.StateManager;
@@ -59,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     if (navigation.IsCollection)
                     {
                         foreach (
-                            var relatedEntity in ((IEnumerable)navigationValue).Cast<object>()
+                            var relatedEntity in ((IEnumerable)navigationValue)
+                                .Cast<object>()
                                 .ToList()
                         )
                         {
@@ -114,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
 
             var internalEntityEntry = node.GetInfrastructure();
-            var navigations = internalEntityEntry.EntityType.GetNavigations()
+            var navigations = internalEntityEntry.EntityType
+                .GetNavigations()
                 .Concat<INavigationBase>(internalEntityEntry.EntityType.GetSkipNavigations());
             var stateManager = internalEntityEntry.StateManager;
 
@@ -128,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     if (navigation.IsCollection)
                     {
                         foreach (
-                            var relatedEntity in ((IEnumerable)navigationValue).Cast<object>()
+                            var relatedEntity in ((IEnumerable)navigationValue)
+                                .Cast<object>()
                                 .ToList()
                         )
                         {
@@ -137,14 +141,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                 targetType
                             );
                             await TraverseGraphAsync(
-                                    (EntityEntryGraphNode<TState>)node.CreateNode(
-                                        node,
-                                        targetEntry,
-                                        navigation
-                                    ),
-                                    handleNode,
-                                    cancellationToken
-                                )
+                                (EntityEntryGraphNode<TState>)node.CreateNode(
+                                    node,
+                                    targetEntry,
+                                    navigation
+                                ),
+                                handleNode,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         }
                     }
@@ -155,14 +159,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             targetType
                         );
                         await TraverseGraphAsync(
-                                (EntityEntryGraphNode<TState>)node.CreateNode(
-                                    node,
-                                    targetEntry,
-                                    navigation
-                                ),
-                                handleNode,
-                                cancellationToken
-                            )
+                            (EntityEntryGraphNode<TState>)node.CreateNode(
+                                node,
+                                targetEntry,
+                                navigation
+                            ),
+                            handleNode,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }

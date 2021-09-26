@@ -723,20 +723,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             analyzerAssembly.GetCustomAttribute<TargetFrameworkAttribute>();
                         if (
                             targetFrameworkAttribute is object
-                            && targetFrameworkAttribute.FrameworkName.StartsWith(
-                                ".NETFramework",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            && targetFrameworkAttribute.FrameworkName
+                                .StartsWith(".NETFramework", StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             _reference.AnalyzerLoadFailed?.Invoke(
                                 _reference,
                                 new AnalyzerLoadFailureEventArgs(
                                     AnalyzerLoadFailureEventArgs.FailureErrorCode.ReferencesFramework,
-                                    string.Format(
-                                        CodeAnalysisResources.AssemblyReferencesNetFramework,
-                                        typeName
-                                    ),
+                                    string
+                                        .Format(
+                                            CodeAnalysisResources.AssemblyReferencesNetFramework,
+                                            typeName
+                                        ),
                                     typeNameOpt: typeName
                                 )
                             );

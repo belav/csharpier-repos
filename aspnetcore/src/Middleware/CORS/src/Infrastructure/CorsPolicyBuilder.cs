@@ -95,10 +95,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
                     builder.Port = uri.Port;
                 }
 
-                return builder.Uri.GetComponents(
-                    UriComponents.SchemeAndServer,
-                    UriFormat.Unescaped
-                );
+                return builder.Uri
+                    .GetComponents(UriComponents.SchemeAndServer, UriFormat.Unescaped);
             }
 
             return origin.ToLowerInvariant();

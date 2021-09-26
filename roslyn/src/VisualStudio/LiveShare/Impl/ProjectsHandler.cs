@@ -41,16 +41,16 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
                     }
                 }
 #pragma warning disable 0612
-                await requestContext.ProtocolConverter.RegisterExternalFilesAsync(
-                        externalUris.ToArrayAndFree()
-                    )
+                await requestContext.ProtocolConverter
+                    .RegisterExternalFilesAsync(externalUris.ToArrayAndFree())
                     .ConfigureAwait(false);
 #pragma warning restore 0612
 
                 var lspProject = new CustomProtocol.Project
                 {
                     Name = project.Name,
-                    SourceFiles = project.Documents.Select(
+                    SourceFiles = project.Documents
+                        .Select(
                             d => requestContext.ProtocolConverter.ToProtocolUri(new Uri(d.FilePath))
                         )
                         .ToArray(),

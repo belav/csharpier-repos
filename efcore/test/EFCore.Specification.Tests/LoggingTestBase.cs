@@ -76,9 +76,8 @@ namespace Microsoft.EntityFrameworkCore
                 var _ = context.Model;
             }
 
-            return loggerFactory.Log.Single(
-                t => t.Id.Id == CoreEventId.ContextInitialized.Id
-            ).Message;
+            return loggerFactory.Log
+                .Single(t => t.Id.Id == CoreEventId.ContextInitialized.Id).Message;
         }
 
         protected class LoggingContext : DbContext

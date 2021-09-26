@@ -97,10 +97,8 @@ internal static class ByRefLikeTest
         il.Emit(OpCodes.Tailcall);
         il.Emit(
             OpCodes.Call,
-            typeof(ByRefLikeTest).GetMethod(
-                "TailCallee",
-                BindingFlags.Static | BindingFlags.NonPublic
-            )
+            typeof(ByRefLikeTest)
+                .GetMethod("TailCallee", BindingFlags.Static | BindingFlags.NonPublic)
         );
         il.Emit(OpCodes.Ret);
 

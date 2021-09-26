@@ -95,7 +95,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
                 {
                     using (var manifest = File.OpenRead(versionedPath))
                     {
-                        typeof(StaticWebAssetsLoader).GetMethod(
+                        typeof(StaticWebAssetsLoader)
+                            .GetMethod(
                                 "UseStaticWebAssetsCore",
                                 BindingFlags.NonPublic | BindingFlags.Static
                             )
@@ -109,7 +110,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         {
             var content = File.ReadAllText(versionedPath);
             var path =
-                typeof(ServerFactory<, >).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                typeof(ServerFactory<, >).Assembly
+                    .GetCustomAttributes<AssemblyMetadataAttribute>()
                     .Single(
                         a => a.Key == "Microsoft.AspNetCore.Testing.IdentityUIProjectPath"
                     ).Value;

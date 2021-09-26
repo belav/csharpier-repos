@@ -29,9 +29,8 @@ namespace Microsoft.CodeAnalysis
                     return default;
                 }
 
-                using var result = PooledArrayBuilder<IArrayTypeSymbol>.GetInstance(
-                    elementTypeResolution.SymbolCount
-                );
+                using var result = PooledArrayBuilder<IArrayTypeSymbol>
+                    .GetInstance(elementTypeResolution.SymbolCount);
                 foreach (var typeSymbol in elementTypeResolution.OfType<ITypeSymbol>())
                     result.AddIfNotNull(reader.Compilation.CreateArrayTypeSymbol(typeSymbol, rank));
 

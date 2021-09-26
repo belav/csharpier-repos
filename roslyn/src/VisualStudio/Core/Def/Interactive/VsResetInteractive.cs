@@ -144,13 +144,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             var projectDir = (string)dteProject.Properties.Item("FullPath").Value;
             var outputFileName = (string)dteProject.Properties.Item("OutputFileName").Value;
             var defaultNamespace = (string)dteProject.Properties.Item("DefaultNamespace").Value;
-            var targetFrameworkMoniker = (string)dteProject.Properties.Item(
-                "TargetFrameworkMoniker"
-            ).Value;
+            var targetFrameworkMoniker = (string)dteProject.Properties
+                .Item("TargetFrameworkMoniker").Value;
             var relativeOutputPath =
-                (string)dteProject.ConfigurationManager.ActiveConfiguration.Properties.Item(
-                    "OutputPath"
-                ).Value;
+                (string)dteProject.ConfigurationManager.ActiveConfiguration.Properties
+                    .Item("OutputPath").Value;
 
             Debug.Assert(!string.IsNullOrEmpty(projectDir));
             Debug.Assert(!string.IsNullOrEmpty(outputFileName));
@@ -198,9 +196,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         }
 
         internal Project GetProjectFromHierarchy(IVsHierarchy hierarchy) =>
-            _workspace.CurrentSolution.Projects.FirstOrDefault(
-                proj => ProjectIdMatchesHierarchy(_workspace, proj.Id, hierarchy)
-            );
+            _workspace.CurrentSolution.Projects
+                .FirstOrDefault(proj => ProjectIdMatchesHierarchy(_workspace, proj.Id, hierarchy));
 
         private static bool ProjectIdMatchesHierarchy(
             VisualStudioWorkspace workspace,
@@ -303,15 +300,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             string culture = reference.Culture;
             string publicKeyToken = reference.PublicKeyToken;
 
-            var fullName = string.Concat(
-                name,
-                ", Version=",
-                version,
-                ", Culture=",
-                (culture == "") ? "neutral" : culture,
-                ", PublicKeyToken=",
-                publicKeyToken.ToLowerInvariant()
-            );
+            var fullName = string
+                .Concat(
+                    name,
+                    ", Version=",
+                    version,
+                    ", Culture=",
+                    (culture == "") ? "neutral" : culture,
+                    ", PublicKeyToken=",
+                    publicKeyToken.ToLowerInvariant()
+                );
 
             AssemblyIdentity identity;
             if (!AssemblyIdentity.TryParseDisplayName(fullName, out identity))
@@ -325,10 +323,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             foreach (var possibleGacName in possibleGacNames)
             {
                 if (
-                    DesktopAssemblyIdentityComparer.Default.ReferenceMatchesDefinition(
-                        identity,
-                        possibleGacName
-                    )
+                    DesktopAssemblyIdentityComparer.Default
+                        .ReferenceMatchesDefinition(identity, possibleGacName)
                 )
                 {
                     foundEquivalent = true;
@@ -398,8 +394,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             IInteractiveWindow interactiveWindow
         )
         {
-            var document =
-                interactiveWindow.CurrentLanguageBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = interactiveWindow.CurrentLanguageBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             var compilation = await document.Project.GetCompilationAsync().ConfigureAwait(true);
             return namespacesToImport.Where(
                 ns => compilation.GlobalNamespace.GetQualifiedNamespace(ns) != null

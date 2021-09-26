@@ -79,12 +79,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 {
                     if ((uint)ex.ErrorCode != OperationNotSupportedHResult)
                     {
-                        var message = string.Format(
-                            CultureInfo.InvariantCulture,
-                            "Failed to raise debugger command, an unexpected '{0}' was thrown with the HResult of '{1}'.",
-                            typeof(COMException),
-                            ex.ErrorCode
-                        );
+                        var message = string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "Failed to raise debugger command, an unexpected '{0}' was thrown with the HResult of '{1}'.",
+                                typeof(COMException),
+                                ex.ErrorCode
+                            );
 
                         throw new Exception(message, ex);
                     }
@@ -98,11 +99,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             // Repeat the command if "Operation Not Supported" is thrown.
             if (!TryWaitFor(DebuggerCommandRetryTimeout, predicate))
             {
-                var message = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Failed to raise debugger command within '{0}' seconds.",
-                    DebuggerCommandRetryTimeout.TotalSeconds
-                );
+                var message = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "Failed to raise debugger command within '{0}' seconds.",
+                        DebuggerCommandRetryTimeout.TotalSeconds
+                    );
 
                 throw new Exception(message);
             }

@@ -566,12 +566,11 @@ class Program
             var subjectDocument = workspace.Documents.Single();
             var spans = subjectDocument.SelectedSpans;
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        FormattingOptions2.AllowDisjointSpanMerging,
-                        true
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(FormattingOptions2.AllowDisjointSpanMerging, true)
                     )
-                )
             );
 
             var document = workspace.CurrentSolution.Projects.Single().Documents.Single();

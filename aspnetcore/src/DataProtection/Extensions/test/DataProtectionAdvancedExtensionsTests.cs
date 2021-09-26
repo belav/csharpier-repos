@@ -24,10 +24,8 @@ namespace Microsoft.AspNetCore.DataProtection
                 .Returns(new byte[] { 0x01, 0x02 });
 
             // Act
-            string protectedPayload = mockDataProtector.Object.Protect(
-                "this is plaintext",
-                expiration
-            );
+            string protectedPayload = mockDataProtector.Object
+                .Protect("this is plaintext", expiration);
 
             // Assert
             Assert.Equal(SampleEncodedString, protectedPayload);
@@ -51,10 +49,8 @@ namespace Microsoft.AspNetCore.DataProtection
 
             // Act
             DateTimeOffset lowerBound = DateTimeOffset.UtcNow.AddHours(48);
-            string protectedPayload = mockDataProtector.Object.Protect(
-                "this is plaintext",
-                TimeSpan.FromHours(48)
-            );
+            string protectedPayload = mockDataProtector.Object
+                .Protect("this is plaintext", TimeSpan.FromHours(48));
             DateTimeOffset upperBound = DateTimeOffset.UtcNow.AddHours(48);
 
             // Assert
@@ -69,8 +65,8 @@ namespace Microsoft.AspNetCore.DataProtection
             DateTimeOffset actualExpiration = default(DateTimeOffset);
             var mockDataProtector = new Mock<ITimeLimitedDataProtector>();
             mockDataProtector.Setup(
-                    o => o.Protect(new byte[] { 0x11, 0x22, 0x33 }, It.IsAny<DateTimeOffset>())
-                )
+                o => o.Protect(new byte[] { 0x11, 0x22, 0x33 }, It.IsAny<DateTimeOffset>())
+            )
                 .Returns<byte[], DateTimeOffset>(
                     (_, exp) =>
                     {
@@ -81,10 +77,8 @@ namespace Microsoft.AspNetCore.DataProtection
 
             // Act
             DateTimeOffset lowerBound = DateTimeOffset.UtcNow.AddHours(48);
-            byte[] protectedPayload = mockDataProtector.Object.Protect(
-                new byte[] { 0x11, 0x22, 0x33 },
-                TimeSpan.FromHours(48)
-            );
+            byte[] protectedPayload = mockDataProtector.Object
+                .Protect(new byte[] { 0x11, 0x22, 0x33 }, TimeSpan.FromHours(48));
             DateTimeOffset upperBound = DateTimeOffset.UtcNow.AddHours(48);
 
             // Assert
@@ -100,15 +94,13 @@ namespace Microsoft.AspNetCore.DataProtection
             var controlExpiration = futureDate;
             var mockDataProtector = new Mock<ITimeLimitedDataProtector>();
             mockDataProtector.Setup(
-                    o => o.Unprotect(new byte[] { 0x01, 0x02 }, out controlExpiration)
-                )
+                o => o.Unprotect(new byte[] { 0x01, 0x02 }, out controlExpiration)
+            )
                 .Returns(Encoding.UTF8.GetBytes("this is plaintext"));
 
             // Act
-            string unprotectedPayload = mockDataProtector.Object.Unprotect(
-                SampleEncodedString,
-                out var testExpiration
-            );
+            string unprotectedPayload = mockDataProtector.Object
+                .Unprotect(SampleEncodedString, out var testExpiration);
 
             // Assert
             Assert.Equal("this is plaintext", unprotectedPayload);

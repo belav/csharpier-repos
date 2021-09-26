@@ -94,12 +94,14 @@ namespace JIT.HardwareIntrinsics.General
                 values[7]
             );
 
-            object result = typeof(Vector128).GetMethod(nameof(Vector128.ToVector256))
+            object result = typeof(Vector128)
+                .GetMethod(nameof(Vector128.ToVector256))
                 .MakeGenericMethod(typeof(Int16))
                 .Invoke(null, new object[] { value });
             ValidateResult((Vector256<Int16>)(result), values, isUnsafe: false);
 
-            object unsafeResult = typeof(Vector128).GetMethod(nameof(Vector128.ToVector256))
+            object unsafeResult = typeof(Vector128)
+                .GetMethod(nameof(Vector128.ToVector256))
                 .MakeGenericMethod(typeof(Int16))
                 .Invoke(null, new object[] { value });
             ValidateResult((Vector256<Int16>)(unsafeResult), values, isUnsafe: true);
@@ -150,15 +152,14 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<Int16>.ToVector256{(isUnsafe ? "Unsafe" : "")}(): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", values)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"Vector128<Int16>.ToVector256{(isUnsafe ? "Unsafe" : "")}(): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

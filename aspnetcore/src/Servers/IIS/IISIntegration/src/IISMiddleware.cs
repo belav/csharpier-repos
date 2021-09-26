@@ -134,11 +134,12 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         public async Task Invoke(HttpContext httpContext)
         {
             if (
-                !string.Equals(
-                    _pairingToken,
-                    httpContext.Request.Headers[MSAspNetCoreToken],
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        _pairingToken,
+                        httpContext.Request.Headers[MSAspNetCoreToken],
+                        StringComparison.Ordinal
+                    )
             )
             {
                 _logger.LogError(
@@ -152,11 +153,12 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             if (
                 HttpMethods.IsPost(httpContext.Request.Method)
                 && httpContext.Request.Path.Equals(ANCMRequestPath)
-                && string.Equals(
-                    ANCMShutdownEventHeaderValue,
-                    httpContext.Request.Headers[MSAspNetCoreEvent],
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && string
+                    .Equals(
+                        ANCMShutdownEventHeaderValue,
+                        httpContext.Request.Headers[MSAspNetCoreEvent],
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 // Execute shutdown task on background thread without waiting for completion
@@ -167,11 +169,8 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
 
             if (
                 Debugger.IsAttached
-                && string.Equals(
-                    "DEBUG",
-                    httpContext.Request.Method,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && string
+                    .Equals("DEBUG", httpContext.Request.Method, StringComparison.OrdinalIgnoreCase)
             )
             {
                 // The Visual Studio debugger tooling sends a DEBUG request to make IIS & AspNetCoreModule launch the process
@@ -191,9 +190,10 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
                 var header = httpContext.Request.Headers[MSAspNetCoreClientCert];
                 if (!StringValues.IsNullOrEmpty(header))
                 {
-                    httpContext.Features.Set<ITlsConnectionFeature>(
-                        new ForwardedTlsConnectionFeature(_logger, header)
-                    );
+                    httpContext.Features
+                        .Set<ITlsConnectionFeature>(
+                            new ForwardedTlsConnectionFeature(_logger, header)
+                        );
                 }
             }
 
@@ -229,12 +229,13 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
 
             if (
                 !StringValues.IsNullOrEmpty(tokenHeader)
-                && int.TryParse(
-                    tokenHeader,
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture,
-                    out var hexHandle
-                )
+                && int
+                    .TryParse(
+                        tokenHeader,
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out var hexHandle
+                    )
             )
             {
                 // Always create the identity if the handle exists, we need to dispose it so it does not leak.

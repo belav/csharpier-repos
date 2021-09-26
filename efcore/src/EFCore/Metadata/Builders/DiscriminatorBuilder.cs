@@ -51,27 +51,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         {
             if (configurationSource == ConfigurationSource.Explicit)
             {
-                ((IMutableEntityType)EntityTypeBuilder.Metadata).SetDiscriminatorMappingComplete(
-                    complete
-                );
+                ((IMutableEntityType)EntityTypeBuilder.Metadata)
+                    .SetDiscriminatorMappingComplete(complete);
             }
             else
             {
                 if (
-                    !((IConventionEntityTypeBuilder)EntityTypeBuilder).CanSetAnnotation(
-                        CoreAnnotationNames.DiscriminatorMappingComplete,
-                        complete,
-                        configurationSource == ConfigurationSource.DataAnnotation
-                    )
+                    !((IConventionEntityTypeBuilder)EntityTypeBuilder)
+                        .CanSetAnnotation(
+                            CoreAnnotationNames.DiscriminatorMappingComplete,
+                            complete,
+                            configurationSource == ConfigurationSource.DataAnnotation
+                        )
                 )
                 {
                     return null;
                 }
 
-                ((IConventionEntityType)EntityTypeBuilder.Metadata).SetDiscriminatorMappingComplete(
-                    complete,
-                    configurationSource == ConfigurationSource.DataAnnotation
-                );
+                ((IConventionEntityType)EntityTypeBuilder.Metadata)
+                    .SetDiscriminatorMappingComplete(
+                        complete,
+                        configurationSource == ConfigurationSource.DataAnnotation
+                    );
             }
 
             return this;
@@ -102,11 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder so that multiple calls can be chained. </returns>
         public virtual DiscriminatorBuilder HasValue(Type entityType, object? value)
         {
-            var entityTypeBuilder = EntityTypeBuilder.ModelBuilder.Entity(
-                entityType,
-                ConfigurationSource.Explicit,
-                shouldBeOwned: null
-            );
+            var entityTypeBuilder = EntityTypeBuilder.ModelBuilder
+                .Entity(entityType, ConfigurationSource.Explicit, shouldBeOwned: null);
 
             return HasValue(entityTypeBuilder, value, ConfigurationSource.Explicit)!;
         }
@@ -119,11 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The same builder so that multiple calls can be chained. </returns>
         public virtual DiscriminatorBuilder HasValue(string entityTypeName, object? value)
         {
-            var entityTypeBuilder = EntityTypeBuilder.ModelBuilder.Entity(
-                entityTypeName,
-                ConfigurationSource.Explicit,
-                shouldBeOwned: null
-            );
+            var entityTypeBuilder = EntityTypeBuilder.ModelBuilder
+                .Entity(entityTypeName, ConfigurationSource.Explicit, shouldBeOwned: null);
 
             return HasValue(entityTypeBuilder, value, ConfigurationSource.Explicit)!;
         }
@@ -143,9 +138,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             if (
                 !baseEntityTypeBuilder.Metadata.IsAssignableFrom(entityTypeBuilder.Metadata)
                 && (
-                    !baseEntityTypeBuilder.Metadata.ClrType.IsAssignableFrom(
-                        entityTypeBuilder.Metadata.ClrType
-                    )
+                    !baseEntityTypeBuilder.Metadata.ClrType
+                        .IsAssignableFrom(entityTypeBuilder.Metadata.ClrType)
                     || entityTypeBuilder.HasBaseType(
                         baseEntityTypeBuilder.Metadata,
                         configurationSource
@@ -168,20 +162,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             else
             {
                 if (
-                    !((IConventionDiscriminatorBuilder)this).CanSetValue(
-                        entityTypeBuilder.Metadata,
-                        value,
-                        configurationSource == ConfigurationSource.DataAnnotation
-                    )
+                    !((IConventionDiscriminatorBuilder)this)
+                        .CanSetValue(
+                            entityTypeBuilder.Metadata,
+                            value,
+                            configurationSource == ConfigurationSource.DataAnnotation
+                        )
                 )
                 {
                     return null;
                 }
 
-                ((IConventionEntityType)entityTypeBuilder.Metadata).SetDiscriminatorValue(
-                    value,
-                    configurationSource == ConfigurationSource.DataAnnotation
-                );
+                ((IConventionEntityType)entityTypeBuilder.Metadata)
+                    .SetDiscriminatorValue(
+                        value,
+                        configurationSource == ConfigurationSource.DataAnnotation
+                    );
             }
 
             return this;
@@ -213,10 +209,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             bool complete,
             bool fromDataAnnotation
         ) =>
-            ((IConventionEntityTypeBuilder)EntityTypeBuilder).CanSetAnnotation(
-                CoreAnnotationNames.DiscriminatorMappingComplete,
-                fromDataAnnotation
-            );
+            ((IConventionEntityTypeBuilder)EntityTypeBuilder)
+                .CanSetAnnotation(
+                    CoreAnnotationNames.DiscriminatorMappingComplete,
+                    fromDataAnnotation
+                );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
@@ -249,11 +246,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
         /// <inheritdoc />
         bool IConventionDiscriminatorBuilder.CanSetValue(object? value, bool fromDataAnnotation) =>
-            ((IConventionDiscriminatorBuilder)this).CanSetValue(
-                EntityTypeBuilder.Metadata,
-                value,
-                fromDataAnnotation
-            );
+            ((IConventionDiscriminatorBuilder)this)
+                .CanSetValue(EntityTypeBuilder.Metadata, value, fromDataAnnotation);
 
         #region Hidden System.Object members
 

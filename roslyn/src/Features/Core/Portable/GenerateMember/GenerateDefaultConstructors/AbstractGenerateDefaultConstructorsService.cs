@@ -41,9 +41,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
             )
             {
                 var semanticDocument = await SemanticDocument.CreateAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 using var _ = ArrayBuilder<CodeAction>.GetInstance(out var result);

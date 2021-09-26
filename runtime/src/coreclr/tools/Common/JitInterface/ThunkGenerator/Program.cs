@@ -134,15 +134,15 @@ namespace Thunkerator
             int indexOfLastWhitespaceInReturnTypeAndFunctionName =
                 returnTypeAndFunctionName.LastIndexOfAny(new char[] { ' ', '*' });
             FunctionName = returnTypeAndFunctionName.Substring(
-                    indexOfLastWhitespaceInReturnTypeAndFunctionName + 1
-                )
+                indexOfLastWhitespaceInReturnTypeAndFunctionName + 1
+            )
                 .Canonicalize();
             if (FunctionName.StartsWith("*"))
                 throw new Exception("Names not allowed to start with *");
             string returnType = returnTypeAndFunctionName.Substring(
-                    0,
-                    indexOfLastWhitespaceInReturnTypeAndFunctionName + 1
-                )
+                0,
+                indexOfLastWhitespaceInReturnTypeAndFunctionName + 1
+            )
                 .Canonicalize();
 
             if (!ThunkReturnTypes.TryGetValue(returnType, out ReturnType))
@@ -151,9 +151,9 @@ namespace Thunkerator
             }
 
             string parameterList = line.Substring(
-                    indexOfOpenParen + 1,
-                    indexOfCloseParen - indexOfOpenParen - 1
-                )
+                indexOfOpenParen + 1,
+                indexOfCloseParen - indexOfOpenParen - 1
+            )
                 .Canonicalize();
             string[] parametersString =
                 parameterList.Length == 0 ? new string[0] : parameterList.Split(',');
@@ -167,9 +167,9 @@ namespace Thunkerator
                 string paramName = parameterString.Substring(indexOfLastWhitespaceInParameter + 1)
                     .Canonicalize();
                 string paramType = parameterString.Substring(
-                        0,
-                        indexOfLastWhitespaceInParameter + 1
-                    )
+                    0,
+                    indexOfLastWhitespaceInParameter + 1
+                )
                     .Canonicalize();
                 TypeReplacement tr;
                 if (!ThunkTypes.TryGetValue(paramType, out tr))
@@ -287,11 +287,8 @@ namespace Thunkerator
                 }
                 catch (Exception e)
                 {
-                    Console.Error.WriteLine(
-                        "Error parsing line {0} : {1}",
-                        currentLineIndex,
-                        e.Message
-                    );
+                    Console.Error
+                        .WriteLine("Error parsing line {0} : {1}", currentLineIndex, e.Message);
                 }
             }
 

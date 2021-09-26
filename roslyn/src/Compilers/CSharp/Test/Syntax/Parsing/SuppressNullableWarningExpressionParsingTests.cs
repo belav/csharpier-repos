@@ -178,7 +178,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
                 TestOptions.Regular8,
                 // (1,8): error CS1525: Invalid expression term '='
                 // o = o!==null
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=").WithArguments("=").WithLocation(1, 8)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=")
+                    .WithArguments("=")
+                    .WithLocation(1, 8)
             );
             N(SyntaxKind.SimpleAssignmentExpression);
             {
@@ -825,10 +827,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
                 // (1,3): error CS8370: Feature 'nullable reference types' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // x?.y!.z
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
-                        ".y!",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                    ".y!",
+                    isSuppressed: false
+                )
                     .WithArguments("nullable reference types", "8.0")
                     .WithLocation(1, 3)
             );

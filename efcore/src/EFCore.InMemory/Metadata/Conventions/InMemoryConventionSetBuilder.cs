@@ -35,9 +35,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions
         {
             var conventionSet = base.CreateConventionSet();
 
-            conventionSet.ModelFinalizingConventions.Add(
-                new DefiningQueryRewritingConvention(Dependencies)
-            );
+            conventionSet.ModelFinalizingConventions
+                .Add(new DefiningQueryRewritingConvention(Dependencies));
 
             return conventionSet;
         }
@@ -82,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions
 
         private static IServiceScope CreateServiceScope()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddDbContext<DbContext>(
                     (p, o) =>
                         o.UseInMemoryDatabase(Guid.NewGuid().ToString())

@@ -259,16 +259,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             _http1Connection.Reset();
 
             var nextId =
-                (
-                    (IFeatureCollection)_http1Connection
-                ).Get<IHttpRequestIdentifierFeature>().TraceIdentifier;
+                ((IFeatureCollection)_http1Connection)
+                    .Get<IHttpRequestIdentifierFeature>().TraceIdentifier;
             Assert.NotEqual("xyz", nextId);
 
             _http1Connection.Reset();
             var secondId =
-                (
-                    (IFeatureCollection)_http1Connection
-                ).Get<IHttpRequestIdentifierFeature>().TraceIdentifier;
+                ((IFeatureCollection)_http1Connection)
+                    .Get<IHttpRequestIdentifierFeature>().TraceIdentifier;
             Assert.NotEqual(nextId, secondId);
         }
 
@@ -308,9 +306,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public void TraceIdentifierCountsRequestsPerHttp1Connection()
         {
             var connectionId = _http1ConnectionContext.ConnectionId;
-            var feature = (
-                (IFeatureCollection)_http1Connection
-            ).Get<IHttpRequestIdentifierFeature>();
+            var feature = ((IFeatureCollection)_http1Connection)
+                .Get<IHttpRequestIdentifierFeature>();
             // Reset() is called once in the test ctor
             var count = 1;
             void Reset()
@@ -425,10 +422,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.True(_http1Connection.HasResponseStarted);
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    ((IHttpResponseFeature)_http1Connection).OnStarting(
-                        _ => Task.CompletedTask,
-                        null
-                    )
+                    ((IHttpResponseFeature)_http1Connection)
+                        .OnStarting(_ => Task.CompletedTask, null)
             );
         }
 
@@ -438,9 +433,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             MinDataRate minDataRate
         )
         {
-            (
-                (IFeatureCollection)_http1Connection
-            ).Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate = minDataRate;
+            ((IFeatureCollection)_http1Connection)
+                .Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate = minDataRate;
 
             Assert.Same(minDataRate, _http1Connection.MinRequestBodyDataRate);
         }
@@ -451,9 +445,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             MinDataRate minDataRate
         )
         {
-            (
-                (IFeatureCollection)_http1Connection
-            ).Get<IHttpMinResponseDataRateFeature>().MinDataRate = minDataRate;
+            ((IFeatureCollection)_http1Connection)
+                .Get<IHttpMinResponseDataRateFeature>().MinDataRate = minDataRate;
 
             Assert.Same(minDataRate, _http1Connection.MinResponseDataRate);
         }
@@ -600,9 +593,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(TargetWithEncodedNullCharData))]
         public async Task TakeStartLineThrowsOnEncodedNullCharInTarget(string target)
         {
-            await _application.Output.WriteAsync(
-                Encoding.ASCII.GetBytes($"GET {target} HTTP/1.1\r\n")
-            );
+            await _application.Output
+                .WriteAsync(Encoding.ASCII.GetBytes($"GET {target} HTTP/1.1\r\n"));
             var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
             var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
@@ -620,9 +612,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(TargetWithNullCharData))]
         public async Task TakeStartLineThrowsOnNullCharInTarget(string target)
         {
-            await _application.Output.WriteAsync(
-                Encoding.ASCII.GetBytes($"GET {target} HTTP/1.1\r\n")
-            );
+            await _application.Output
+                .WriteAsync(Encoding.ASCII.GetBytes($"GET {target} HTTP/1.1\r\n"));
             var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
             var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
@@ -666,9 +657,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             var target = $"/{queryString}";
 
-            await _application.Output.WriteAsync(
-                Encoding.ASCII.GetBytes($"GET {target} HTTP/1.1\r\n")
-            );
+            await _application.Output
+                .WriteAsync(Encoding.ASCII.GetBytes($"GET {target} HTTP/1.1\r\n"));
             var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
             var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
@@ -1022,9 +1012,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
                 _serviceContext.Log = mockTrace.Object;
 
-                await _application.Output.WriteAsync(
-                    Encoding.ASCII.GetBytes($"GET /%00 HTTP/1.1\r\n")
-                );
+                await _application.Output
+                    .WriteAsync(Encoding.ASCII.GetBytes($"GET /%00 HTTP/1.1\r\n"));
                 var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
                 var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
@@ -1175,9 +1164,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             var requestProcessingTask = _http1Connection.ProcessRequestsAsync(httpApplication);
 
-            var data = Encoding.ASCII.GetBytes(
-                "POST / HTTP/1.1\r\nHost:\r\nConnection: close\r\ncontent-length: 1\r\n\r\n"
-            );
+            var data = Encoding.ASCII
+                .GetBytes(
+                    "POST / HTTP/1.1\r\nHost:\r\nConnection: close\r\ncontent-length: 1\r\n\r\n"
+                );
             await _application.Output.WriteAsync(data);
             await requestProcessingTask.DefaultTimeout();
 
@@ -1318,11 +1308,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         private static string MakeHeaders(int count, int startAt = 0)
         {
-            return string.Join(
-                "",
-                Enumerable.Range(0, count)
-                    .Select(i => $"Header-{startAt + i}: value{startAt + i}\r\n")
-            );
+            return string
+                .Join(
+                    "",
+                    Enumerable.Range(0, count)
+                        .Select(i => $"Header-{startAt + i}: value{startAt + i}\r\n")
+                );
         }
 
         public static IEnumerable<object[]> RequestLineValidData =>

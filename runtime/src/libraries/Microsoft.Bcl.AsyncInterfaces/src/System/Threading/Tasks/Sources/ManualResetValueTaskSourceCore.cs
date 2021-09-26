@@ -185,13 +185,14 @@ namespace System.Threading.Tasks.Sources
                 switch (_capturedContext)
                 {
                     case null:
-                        Task.Factory.StartNew(
-                            continuation,
-                            state,
-                            CancellationToken.None,
-                            TaskCreationOptions.DenyChildAttach,
-                            TaskScheduler.Default
-                        );
+                        Task.Factory
+                            .StartNew(
+                                continuation,
+                                state,
+                                CancellationToken.None,
+                                TaskCreationOptions.DenyChildAttach,
+                                TaskScheduler.Default
+                            );
                         break;
 
                     case SynchronizationContext sc:
@@ -206,13 +207,14 @@ namespace System.Threading.Tasks.Sources
                         break;
 
                     case TaskScheduler ts:
-                        Task.Factory.StartNew(
-                            continuation,
-                            state,
-                            CancellationToken.None,
-                            TaskCreationOptions.DenyChildAttach,
-                            ts
-                        );
+                        Task.Factory
+                            .StartNew(
+                                continuation,
+                                state,
+                                CancellationToken.None,
+                                TaskCreationOptions.DenyChildAttach,
+                                ts
+                            );
                         break;
                 }
             }
@@ -275,13 +277,14 @@ namespace System.Threading.Tasks.Sources
                 case null:
                     if (RunContinuationsAsynchronously)
                     {
-                        Task.Factory.StartNew(
-                            _continuation,
-                            _continuationState,
-                            CancellationToken.None,
-                            TaskCreationOptions.DenyChildAttach,
-                            TaskScheduler.Default
-                        );
+                        Task.Factory
+                            .StartNew(
+                                _continuation,
+                                _continuationState,
+                                CancellationToken.None,
+                                TaskCreationOptions.DenyChildAttach,
+                                TaskScheduler.Default
+                            );
                     }
                     else
                     {
@@ -301,13 +304,14 @@ namespace System.Threading.Tasks.Sources
                     break;
 
                 case TaskScheduler ts:
-                    Task.Factory.StartNew(
-                        _continuation,
-                        _continuationState,
-                        CancellationToken.None,
-                        TaskCreationOptions.DenyChildAttach,
-                        ts
-                    );
+                    Task.Factory
+                        .StartNew(
+                            _continuation,
+                            _continuationState,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            ts
+                        );
                     break;
             }
         }

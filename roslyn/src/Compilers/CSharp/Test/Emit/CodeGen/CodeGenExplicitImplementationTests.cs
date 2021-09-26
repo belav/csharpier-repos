@@ -489,25 +489,32 @@ Class2.Method(4, 5, c)",
             comp.VerifyDiagnostics(
                 // (11,40): warning CS1066: The default value specified for parameter 'b' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a, long b = 3, string c = "", params List<string>[] d)
-                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "b").WithArguments("b"),
+                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "b")
+                    .WithArguments("b"),
                 // (11,54): warning CS1066: The default value specified for parameter 'c' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a, long b = 3, string c = "", params List<string>[] d)
-                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c").WithArguments("c"),
+                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c")
+                    .WithArguments("c"),
                 // (17,50): warning CS1066: The default value specified for parameter 'c' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a, long b, string c = "", params List<string>[] d)
-                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c").WithArguments("c"),
+                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c")
+                    .WithArguments("c"),
                 // (24,32): warning CS1066: The default value specified for parameter 'a' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a = 4, long b = 3, string c = "", List<string>[] d = null)
-                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "a").WithArguments("a"),
+                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "a")
+                    .WithArguments("a"),
                 // (24,44): warning CS1066: The default value specified for parameter 'b' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a = 4, long b = 3, string c = "", List<string>[] d = null)
-                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "b").WithArguments("b"),
+                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "b")
+                    .WithArguments("b"),
                 // (24,58): warning CS1066: The default value specified for parameter 'c' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a = 4, long b = 3, string c = "", List<string>[] d = null)
-                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c").WithArguments("c"),
+                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c")
+                    .WithArguments("c"),
                 // (24,81): warning CS1066: The default value specified for parameter 'd' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a = 4, long b = 3, string c = "", List<string>[] d = null)
-                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "d").WithArguments("d")
+                Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "d")
+                    .WithArguments("d")
             );
         }
 
@@ -1019,8 +1026,8 @@ class Test : I3
     }
 }";
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"
+                source,
+                expectedOutput: @"
 I3.M1
 I1.M2
 I3.M2
@@ -1050,8 +1057,7 @@ I1.M8
 I1.M8
 I1.M9
 I1.P"
-                )
-                .VerifyDiagnostics(); // No errors
+            ).VerifyDiagnostics(); // No errors
         }
 
         [WorkItem(543426, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543426")]

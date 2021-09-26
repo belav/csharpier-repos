@@ -372,12 +372,13 @@ namespace System.Numerics.Tests
         public void PlaneToStringTest()
         {
             Plane target = new Plane(1, 2, 3, 4);
-            string expected = string.Format(
-                CultureInfo.CurrentCulture,
-                "{{Normal:{0:G} D:{1}}}",
-                target.Normal,
-                target.D
-            );
+            string expected = string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "{{Normal:{0:G} D:{1}}}",
+                    target.Normal,
+                    target.D
+                );
 
             Assert.Equal(expected, target.ToString());
         }

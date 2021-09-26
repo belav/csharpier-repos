@@ -620,9 +620,8 @@ namespace System.DirectoryServices.Protocols.Tests
                 }
                 else
                 {
-                    SearchResponse response = (SearchResponse)state.Connection.EndSendRequest(
-                        asyncResult
-                    );
+                    SearchResponse response = (SearchResponse)state.Connection
+                        .EndSendRequest(asyncResult);
 
                     if (response != null)
                     {
@@ -844,9 +843,8 @@ namespace System.DirectoryServices.Protocols.Tests
 
         private LdapConnection GetConnection()
         {
-            LdapDirectoryIdentifier directoryIdentifier = string.IsNullOrEmpty(
-                LdapConfiguration.Configuration.Port
-            )
+            LdapDirectoryIdentifier directoryIdentifier = string
+            .IsNullOrEmpty(LdapConfiguration.Configuration.Port)
                 ? new LdapDirectoryIdentifier(
                       LdapConfiguration.Configuration.ServerName,
                       true,
@@ -854,11 +852,12 @@ namespace System.DirectoryServices.Protocols.Tests
                   )
                 : new LdapDirectoryIdentifier(
                       LdapConfiguration.Configuration.ServerName,
-                      int.Parse(
-                          LdapConfiguration.Configuration.Port,
-                          NumberStyles.None,
-                          CultureInfo.InvariantCulture
-                      ),
+                      int
+                          .Parse(
+                              LdapConfiguration.Configuration.Port,
+                              NumberStyles.None,
+                              CultureInfo.InvariantCulture
+                          ),
                       true,
                       false
                   );

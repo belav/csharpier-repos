@@ -125,9 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                     var solution = document.Project.Solution;
 
                     foreach (
-                        var type in compilation.Assembly.GlobalNamespace.GetAllTypes(
-                            context.CancellationToken
-                        )
+                        var type in compilation.Assembly.GlobalNamespace
+                            .GetAllTypes(context.CancellationToken)
                     )
                     {
                         if (!type.MightContainExtensionMethods)
@@ -148,10 +147,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                                 var loc = extMethod.Locations.First();
 
                                 var sourceDefinition = await SymbolFinder.FindSourceDefinitionAsync(
-                                        reducedMethod,
-                                        solution,
-                                        context.CancellationToken
-                                    )
+                                    reducedMethod,
+                                    solution,
+                                    context.CancellationToken
+                                )
                                     .ConfigureAwait(false);
 
                                 // And if our definition actually is from source, then let's re-figure out what project it came from

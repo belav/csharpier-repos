@@ -32,9 +32,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             );
             if (dictionaryType != null)
             {
-                var binderType = typeof(DictionaryModelBinder<, >).MakeGenericType(
-                    dictionaryType.GenericTypeArguments
-                );
+                var binderType = typeof(DictionaryModelBinder<, >)
+                    .MakeGenericType(dictionaryType.GenericTypeArguments);
 
                 var keyType = dictionaryType.GenericTypeArguments[0];
                 var keyBinder = context.CreateBinder(

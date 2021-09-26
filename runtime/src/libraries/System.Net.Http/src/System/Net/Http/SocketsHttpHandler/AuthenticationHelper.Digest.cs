@@ -51,10 +51,8 @@ namespace System.Net.Http
             // It is mandatory for servers to implement sha-256 per RFC 7616
             // Keep MD5 for backward compatibility.
             string? algorithm;
-            bool isAlgorithmSpecified = digestResponse.Parameters.TryGetValue(
-                Algorithm,
-                out algorithm
-            );
+            bool isAlgorithmSpecified = digestResponse.Parameters
+                .TryGetValue(Algorithm, out algorithm);
             if (isAlgorithmSpecified)
             {
                 if (
@@ -138,27 +136,20 @@ namespace System.Net.Http
             if (isQopSpecified)
             {
                 // Check if auth-int present in qop string
-                int index1 = digestResponse.Parameters[Qop].IndexOf(
-                    AuthInt,
-                    StringComparison.Ordinal
-                );
+                int index1 = digestResponse.Parameters[Qop]
+                    .IndexOf(AuthInt, StringComparison.Ordinal);
                 if (index1 != -1)
                 {
                     // Get index of auth if present in qop string
-                    int index2 = digestResponse.Parameters[Qop].IndexOf(
-                        Auth,
-                        StringComparison.Ordinal
-                    );
+                    int index2 = digestResponse.Parameters[Qop]
+                        .IndexOf(Auth, StringComparison.Ordinal);
 
                     // If index2 < index1, auth option is available
                     // If index2 == index1, check if auth option available later in string after auth-int.
                     if (index2 == index1)
                     {
-                        index2 = digestResponse.Parameters[Qop].IndexOf(
-                            Auth,
-                            index1 + AuthInt.Length,
-                            StringComparison.Ordinal
-                        );
+                        index2 = digestResponse.Parameters[Qop]
+                            .IndexOf(Auth, index1 + AuthInt.Length, StringComparison.Ordinal);
                         if (index2 == -1)
                         {
                             qop = AuthInt;

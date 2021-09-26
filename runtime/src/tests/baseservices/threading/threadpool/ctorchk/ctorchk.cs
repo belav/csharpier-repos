@@ -11,9 +11,8 @@ class TestMonitor
     {
         // This will look for any private constructor.
         // There shouldn't be one in Whidbey.
-        ConstructorInfo[] m = typeof(ThreadPool).GetConstructors(
-            BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public
-        );
+        ConstructorInfo[] m = typeof(ThreadPool)
+            .GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
         Console.WriteLine(m.Length);
 
         if (m.Length > 0)

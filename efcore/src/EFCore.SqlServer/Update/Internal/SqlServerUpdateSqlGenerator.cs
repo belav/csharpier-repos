@@ -55,13 +55,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             );
             if (
                 modificationCommands.Count == 1
-                && modificationCommands[0].ColumnModifications.All(
-                    o =>
-                        !o.IsKey
-                        || !o.IsRead
-                        || o.Property?.GetValueGenerationStrategy(table)
-                            == SqlServerValueGenerationStrategy.IdentityColumn
-                )
+                && modificationCommands[0].ColumnModifications
+                    .All(
+                        o =>
+                            !o.IsKey
+                            || !o.IsRead
+                            || o.Property?.GetValueGenerationStrategy(table)
+                                == SqlServerValueGenerationStrategy.IdentityColumn
+                    )
             )
             {
                 return AppendInsertOperation(
@@ -71,15 +72,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                 );
             }
 
-            var readOperations = modificationCommands[0].ColumnModifications.Where(o => o.IsRead)
+            var readOperations = modificationCommands[0].ColumnModifications
+                .Where(o => o.IsRead)
                 .ToList();
-            var writeOperations = modificationCommands[0].ColumnModifications.Where(o => o.IsWrite)
+            var writeOperations = modificationCommands[0].ColumnModifications
+                .Where(o => o.IsWrite)
                 .ToList();
-            var keyOperations = modificationCommands[0].ColumnModifications.Where(o => o.IsKey)
+            var keyOperations = modificationCommands[0].ColumnModifications
+                .Where(o => o.IsKey)
                 .ToList();
 
             var defaultValuesOnly = writeOperations.Count == 0;
-            var nonIdentityOperations = modificationCommands[0].ColumnModifications.Where(
+            var nonIdentityOperations = modificationCommands[0].ColumnModifications
+                .Where(
                     o =>
                         o.Property?.GetValueGenerationStrategy(table)
                         != SqlServerValueGenerationStrategy.IdentityColumn
@@ -128,9 +133,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             }
 
             if (
-                modificationCommands[0].Entries.SelectMany(
-                        e => e.EntityType.GetAllBaseTypesInclusive()
-                    )
+                modificationCommands[0].Entries
+                    .SelectMany(e => e.EntityType.GetAllBaseTypesInclusive())
                     .Any(e => e.IsMemoryOptimized())
             )
             {
@@ -365,18 +369,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                 .Append(")");
 
             AppendValuesHeader(commandStringBuilder, writeOperations);
-            commandStringBuilder.Append("(")
-                .AppendJoin(
-                    writeOperations,
-                    toInsertTableAlias,
-                    SqlGenerationHelper,
-                    (sb, o, alias, helper) =>
-                    {
-                        sb.Append(alias).Append(".");
-                        helper.DelimitIdentifier(sb, o.ColumnName);
-                    }
-                )
-                .Append(")");
+            commandStringBuilder.Append("(").AppendJoin(
+                writeOperations,
+                toInsertTableAlias,
+                SqlGenerationHelper,
+                (sb, o, alias, helper) =>
+                {
+                    sb.Append(alias).Append(".");
+                    helper.DelimitIdentifier(sb, o.ColumnName);
+                }
+            ).Append(")");
         }
 
         private void AppendValues(
@@ -387,25 +389,21 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         {
             if (operations.Count > 0)
             {
-                commandStringBuilder.Append("(")
-                    .AppendJoin(
-                        operations,
-                        SqlGenerationHelper,
-                        (sb, o, helper) =>
+                commandStringBuilder.Append("(").AppendJoin(
+                    operations,
+                    SqlGenerationHelper,
+                    (sb, o, helper) =>
+                    {
+                        if (o.IsWrite)
                         {
-                            if (o.IsWrite)
-                            {
-                                helper.GenerateParameterName(sb, o.ParameterName!);
-                            }
-                            else
-                            {
-                                sb.Append("DEFAULT");
-                            }
+                            helper.GenerateParameterName(sb, o.ParameterName!);
                         }
-                    )
-                    .Append(", ")
-                    .Append(additionalLiteral)
-                    .Append(")");
+                        else
+                        {
+                            sb.Append("DEFAULT");
+                        }
+                    }
+                ).Append(", ").Append(additionalLiteral).Append(")");
             }
         }
 
@@ -462,17 +460,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             string? additionalColumns = null
         )
         {
-            commandStringBuilder.AppendLine()
-                .Append("OUTPUT ")
-                .AppendJoin(
-                    operations,
-                    SqlGenerationHelper,
-                    (sb, o, helper) =>
-                    {
-                        sb.Append("INSERTED.");
-                        helper.DelimitIdentifier(sb, o.ColumnName);
-                    }
-                );
+            commandStringBuilder.AppendLine().Append("OUTPUT ").AppendJoin(
+                operations,
+                SqlGenerationHelper,
+                (sb, o, helper) =>
+                {
+                    sb.Append("INSERTED.");
+                    helper.DelimitIdentifier(sb, o.ColumnName);
+                }
+            );
 
             if (additionalColumns != null)
             {

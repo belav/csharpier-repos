@@ -25,12 +25,13 @@ namespace Roslyn.Hosting.Diagnostics
         public static void Install()
         {
             // make sure TPL installs its own event source
-            Task.Factory.StartNew(
-                () => { },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+            Task.Factory
+                .StartNew(
+                    () => { },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
 
             var local = new TPLListener();
             Interlocked.CompareExchange(ref s_listener, local, null);

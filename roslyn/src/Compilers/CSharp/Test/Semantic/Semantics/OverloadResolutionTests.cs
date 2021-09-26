@@ -156,37 +156,36 @@ class P
   }
 }";
 
-            CreateCompilation(source2)
-                .VerifyDiagnostics(
-                    // (18,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M(string, System.Action<string>)' and 'P.M(object, System.Action<object>)'
-                    //     M((string)null, null);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
-                        .WithArguments(
-                            "P.M(string, System.Action<string>)",
-                            "P.M(object, System.Action<object>)"
-                        ),
-                    // (19,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M1(string, System.Func<object>)' and 'P.M1(object, System.Func<System.ValueType>)'
-                    //     M1((string)null, ()=>{ return 5;});
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
-                        .WithArguments(
-                            "P.M1(string, System.Func<object>)",
-                            "P.M1(object, System.Func<System.ValueType>)"
-                        ),
-                    // (20,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M4(System.Func<object>, System.Action<object>, System.Action<string>)' and 'P.M4(System.Func<System.ValueType>, System.Action<string>, System.Action<object>)'
-                    //     M4(()=>{ throw new NotImplementedException();}, q=> {}, q=> {});
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M4")
-                        .WithArguments(
-                            "P.M4(System.Func<object>, System.Action<object>, System.Action<string>)",
-                            "P.M4(System.Func<System.ValueType>, System.Action<string>, System.Action<object>)"
-                        ),
-                    // (21,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M6(System.Action<object>, string, object)' and 'P.M6(System.Action<string>, object, string)'
-                    //     M6(q=> {},(string)null, (string)null);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
-                        .WithArguments(
-                            "P.M6(System.Action<object>, string, object)",
-                            "P.M6(System.Action<string>, object, string)"
-                        )
-                );
+            CreateCompilation(source2).VerifyDiagnostics(
+                // (18,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M(string, System.Action<string>)' and 'P.M(object, System.Action<object>)'
+                //     M((string)null, null);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                    .WithArguments(
+                        "P.M(string, System.Action<string>)",
+                        "P.M(object, System.Action<object>)"
+                    ),
+                // (19,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M1(string, System.Func<object>)' and 'P.M1(object, System.Func<System.ValueType>)'
+                //     M1((string)null, ()=>{ return 5;});
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
+                    .WithArguments(
+                        "P.M1(string, System.Func<object>)",
+                        "P.M1(object, System.Func<System.ValueType>)"
+                    ),
+                // (20,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M4(System.Func<object>, System.Action<object>, System.Action<string>)' and 'P.M4(System.Func<System.ValueType>, System.Action<string>, System.Action<object>)'
+                //     M4(()=>{ throw new NotImplementedException();}, q=> {}, q=> {});
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M4")
+                    .WithArguments(
+                        "P.M4(System.Func<object>, System.Action<object>, System.Action<string>)",
+                        "P.M4(System.Func<System.ValueType>, System.Action<string>, System.Action<object>)"
+                    ),
+                // (21,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M6(System.Action<object>, string, object)' and 'P.M6(System.Action<string>, object, string)'
+                //     M6(q=> {},(string)null, (string)null);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
+                    .WithArguments(
+                        "P.M6(System.Action<object>, string, object)",
+                        "P.M6(System.Action<string>, object, string)"
+                    )
+            );
 
             // By comparing these two programs, it becomes clear how unfortunate this is. M(q=>null) is ambiguous,
             // M(null) is unambiguous. But M((string)null, q=>{}) is unambiguous, M((string)null, null) is ambiguous!
@@ -324,18 +323,17 @@ class P
   }
 }";
 
-            CreateCompilation(source2)
-                .VerifyDiagnostics(
-                    // (16,8): error CS1503: Argument 1: cannot convert from 'int?' to 'int'
-                    //     M1(ni);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "ni").WithArguments("1", "int?", "int"),
-                    // (17,8): error CS1503: Argument 1: cannot convert from 'short?' to 'int'
-                    //     M1(ns);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "ns").WithArguments("1", "short?", "int"),
-                    // (19,8): error CS1503: Argument 1: cannot convert from 'uint?' to 'int?'
-                    //     M2(nu);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "nu").WithArguments("1", "uint?", "int?")
-                );
+            CreateCompilation(source2).VerifyDiagnostics(
+                // (16,8): error CS1503: Argument 1: cannot convert from 'int?' to 'int'
+                //     M1(ni);
+                Diagnostic(ErrorCode.ERR_BadArgType, "ni").WithArguments("1", "int?", "int"),
+                // (17,8): error CS1503: Argument 1: cannot convert from 'short?' to 'int'
+                //     M1(ns);
+                Diagnostic(ErrorCode.ERR_BadArgType, "ns").WithArguments("1", "short?", "int"),
+                // (19,8): error CS1503: Argument 1: cannot convert from 'uint?' to 'int?'
+                //     M2(nu);
+                Diagnostic(ErrorCode.ERR_BadArgType, "nu").WithArguments("1", "uint?", "int?")
+            );
         }
 
         [Fact]
@@ -359,13 +357,12 @@ class P
   }
 }";
 
-            CreateCompilation(source2)
-                .VerifyDiagnostics(
-                    // (14,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M1(P.DA)' and 'P.M1(P.DB)'
-                    //     M1(() => x);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
-                        .WithArguments("P.M1(P.DA)", "P.M1(P.DB)")
-                );
+            CreateCompilation(source2).VerifyDiagnostics(
+                // (14,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M1(P.DA)' and 'P.M1(P.DB)'
+                //     M1(() => x);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
+                    .WithArguments("P.M1(P.DA)", "P.M1(P.DB)")
+            );
         }
 
         [Fact]
@@ -457,12 +454,11 @@ class P
   }
 }";
 
-            CreateCompilation(source1)
-                .VerifyDiagnostics(
-                    // (36,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M1(CA)' and 'P.M1(CB)'
-                    //     M1(i);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M1").WithArguments("P.M1(CA)", "P.M1(CB)")
-                );
+            CreateCompilation(source1).VerifyDiagnostics(
+                // (36,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M1(CA)' and 'P.M1(CB)'
+                //     M1(i);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M1").WithArguments("P.M1(CA)", "P.M1(CB)")
+            );
         }
 
         [Fact]
@@ -500,16 +496,15 @@ class P
   }
 }";
 
-            CreateCompilation(source2)
-                .VerifyDiagnostics(
-                    // (11,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M1(System.Threading.Tasks.Task<int>, uint)' and 'P.M1(System.Threading.Tasks.Task<uint>, int)'
-                    //     M1(null,0);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
-                        .WithArguments(
-                            "P.M1(System.Threading.Tasks.Task<int>, uint)",
-                            "P.M1(System.Threading.Tasks.Task<uint>, int)"
-                        )
-                );
+            CreateCompilation(source2).VerifyDiagnostics(
+                // (11,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M1(System.Threading.Tasks.Task<int>, uint)' and 'P.M1(System.Threading.Tasks.Task<uint>, int)'
+                //     M1(null,0);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
+                    .WithArguments(
+                        "P.M1(System.Threading.Tasks.Task<int>, uint)",
+                        "P.M1(System.Threading.Tasks.Task<uint>, int)"
+                    )
+            );
         }
 
         [Fact]
@@ -545,17 +540,16 @@ public class MyTaskBuilder<T>
 
 namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : System.Attribute { public AsyncMethodBuilderAttribute(System.Type t) { } } }
 ";
-            CreateCompilationWithMscorlib45(source1)
-                .VerifyDiagnostics(
-                    // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.h<T>(Func<Task<T>>)' and 'C.h<T>(Func<MyTask<T>>)'
-                    //         h(async () => { await (Task)null; return 1; });
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "h")
-                        .WithArguments(
-                            "C.h<T>(System.Func<System.Threading.Tasks.Task<T>>)",
-                            "C.h<T>(System.Func<MyTask<T>>)"
-                        )
-                        .WithLocation(9, 9)
-                );
+            CreateCompilationWithMscorlib45(source1).VerifyDiagnostics(
+                // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.h<T>(Func<Task<T>>)' and 'C.h<T>(Func<MyTask<T>>)'
+                //         h(async () => { await (Task)null; return 1; });
+                Diagnostic(ErrorCode.ERR_AmbigCall, "h")
+                    .WithArguments(
+                        "C.h<T>(System.Func<System.Threading.Tasks.Task<T>>)",
+                        "C.h<T>(System.Func<MyTask<T>>)"
+                    )
+                    .WithLocation(9, 9)
+            );
 
             string source2 =
                 @"
@@ -601,17 +595,16 @@ public class YourTaskBuilder<T>
 
 namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : System.Attribute { public AsyncMethodBuilderAttribute(System.Type t) { } } }
 ";
-            CreateCompilationWithMscorlib45(source2)
-                .VerifyDiagnostics(
-                    // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.k<T>(Func<YourTask<T>>)' and 'C.k<T>(Func<MyTask<T>>)'
-                    //         k(async () => { await (Task)null; return 1; });
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "k")
-                        .WithArguments(
-                            "C.k<T>(System.Func<YourTask<T>>)",
-                            "C.k<T>(System.Func<MyTask<T>>)"
-                        )
-                        .WithLocation(9, 9)
-                );
+            CreateCompilationWithMscorlib45(source2).VerifyDiagnostics(
+                // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.k<T>(Func<YourTask<T>>)' and 'C.k<T>(Func<MyTask<T>>)'
+                //         k(async () => { await (Task)null; return 1; });
+                Diagnostic(ErrorCode.ERR_AmbigCall, "k")
+                    .WithArguments(
+                        "C.k<T>(System.Func<YourTask<T>>)",
+                        "C.k<T>(System.Func<MyTask<T>>)"
+                    )
+                    .WithLocation(9, 9)
+            );
         }
 
         [Fact]
@@ -746,9 +739,9 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
                 // (10,12): error CS8128: Member 'Rest' was not found on type 'ValueTuple<T1, T2, T3, T4, T5, T6, T7, T8>' from assembly comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //     static (MyTask, char, byte, short, ushort, int, uint, long, ulong, char, byte, short, ushort, int, uint, long, MyTask<T>) F3;
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
-                        "(MyTask, char, byte, short, ushort, int, uint, long, ulong, char, byte, short, ushort, int, uint, long, MyTask<T>)"
-                    )
+                    ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
+                    "(MyTask, char, byte, short, ushort, int, uint, long, ulong, char, byte, short, ushort, int, uint, long, MyTask<T>)"
+                )
                     .WithArguments(
                         "Rest",
                         "System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, T8>",
@@ -1319,20 +1312,16 @@ class P
   }
 }";
 
-            CreateCompilation(source2)
-                .VerifyDiagnostics(
-                    // (13,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M1(System.Func<int>, uint)' and 'P.M1(System.Func<uint>, int)'
-                    //     M1(null,0);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
-                        .WithArguments(
-                            "P.M1(System.Func<int>, uint)",
-                            "P.M1(System.Func<uint>, int)"
-                        ),
-                    // (14,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M2(System.Func<int>, uint)' and 'P.M2(System.Action, int)'
-                    //     M2(null,0);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M2")
-                        .WithArguments("P.M2(System.Func<int>, uint)", "P.M2(System.Action, int)")
-                );
+            CreateCompilation(source2).VerifyDiagnostics(
+                // (13,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M1(System.Func<int>, uint)' and 'P.M1(System.Func<uint>, int)'
+                //     M1(null,0);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
+                    .WithArguments("P.M1(System.Func<int>, uint)", "P.M1(System.Func<uint>, int)"),
+                // (14,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M2(System.Func<int>, uint)' and 'P.M2(System.Action, int)'
+                //     M2(null,0);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M2")
+                    .WithArguments("P.M2(System.Func<int>, uint)", "P.M2(System.Action, int)")
+            );
         }
 
         [Fact, WorkItem(6560, "https://github.com/dotnet/roslyn/issues/6560")]
@@ -1409,14 +1398,13 @@ class C
         J(123.0, 456.0m);
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,9): error CS0411: The type arguments for method 'C.J<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         J(123.0, 456.0m);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "J")
-                        .WithArguments("C.J<T>(T, T)")
-                        .WithLocation(8, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,9): error CS0411: The type arguments for method 'C.J<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         J(123.0, 456.0m);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "J")
+                    .WithArguments("C.J<T>(T, T)")
+                    .WithLocation(8, 9)
+            );
         }
 
         [Fact]
@@ -1470,34 +1458,33 @@ class C
         K(z=>{ Console.WriteLine(z == string.Empty, z - 4.5); });
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (26,36): error CS1061: 'string' does not contain a definition for 'ToStrign' and no extension method 'ToStrign' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         J(x=>{ Console.WriteLine(x.ToStrign(), x.Length, x * 2); });
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "ToStrign")
-                        .WithArguments("string", "ToStrign")
-                        .WithLocation(26, 36),
-                    // (30,34): error CS0019: Operator '==' cannot be applied to operands of type 'int' and 'string'
-                    //         J(y=>{ Console.WriteLine(y == string.Empty, y / 4.5); });
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "y == string.Empty")
-                        .WithArguments("==", "int", "string")
-                        .WithLocation(30, 34),
-                    // (30,53): error CS0019: Operator '/' cannot be applied to operands of type 'string' and 'double'
-                    //         J(y=>{ Console.WriteLine(y == string.Empty, y / 4.5); });
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "y / 4.5")
-                        .WithArguments("/", "string", "double")
-                        .WithLocation(30, 53),
-                    // (45,53): error CS0019: Operator '-' cannot be applied to operands of type 'string' and 'double'
-                    //         K(z=>{ Console.WriteLine(z == string.Empty, z - 4.5); });
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "z - 4.5")
-                        .WithArguments("-", "string", "double")
-                        .WithLocation(45, 53),
-                    // (45,34): error CS0019: Operator '==' cannot be applied to operands of type 'double' and 'string'
-                    //         K(z=>{ Console.WriteLine(z == string.Empty, z - 4.5); });
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "z == string.Empty")
-                        .WithArguments("==", "double", "string")
-                        .WithLocation(45, 34)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (26,36): error CS1061: 'string' does not contain a definition for 'ToStrign' and no extension method 'ToStrign' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         J(x=>{ Console.WriteLine(x.ToStrign(), x.Length, x * 2); });
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "ToStrign")
+                    .WithArguments("string", "ToStrign")
+                    .WithLocation(26, 36),
+                // (30,34): error CS0019: Operator '==' cannot be applied to operands of type 'int' and 'string'
+                //         J(y=>{ Console.WriteLine(y == string.Empty, y / 4.5); });
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "y == string.Empty")
+                    .WithArguments("==", "int", "string")
+                    .WithLocation(30, 34),
+                // (30,53): error CS0019: Operator '/' cannot be applied to operands of type 'string' and 'double'
+                //         J(y=>{ Console.WriteLine(y == string.Empty, y / 4.5); });
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "y / 4.5")
+                    .WithArguments("/", "string", "double")
+                    .WithLocation(30, 53),
+                // (45,53): error CS0019: Operator '-' cannot be applied to operands of type 'string' and 'double'
+                //         K(z=>{ Console.WriteLine(z == string.Empty, z - 4.5); });
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "z - 4.5")
+                    .WithArguments("-", "string", "double")
+                    .WithLocation(45, 53),
+                // (45,34): error CS0019: Operator '==' cannot be applied to operands of type 'double' and 'string'
+                //         K(z=>{ Console.WriteLine(z == string.Empty, z - 4.5); });
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "z == string.Empty")
+                    .WithArguments("==", "double", "string")
+                    .WithLocation(45, 34)
+            );
         }
 
         [Fact]
@@ -1524,37 +1511,36 @@ class p
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (14,21): error CS1503: Argument 1: cannot convert from 'lambda expression' to 'ref Func<string, string>'
-                    //         Goo<string>(x => x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x => x")
-                        .WithArguments("1", "lambda expression", "ref System.Func<string, string>")
-                        .WithLocation(14, 21),
-                    // (15,21): error CS1503: Argument 1: cannot convert from 'lambda expression' to 'out Func<string, string>'
-                    //         Bar<string>(x => x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x => x")
-                        .WithArguments("1", "lambda expression", "out System.Func<string, string>")
-                        .WithLocation(15, 21),
-                    // (16,22): error CS1503: Argument 1: cannot convert from 'lambda expression' to 'ref Expression<Func<string, string>>'
-                    //         Goo2<string>(x => x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x => x")
-                        .WithArguments(
-                            "1",
-                            "lambda expression",
-                            "ref System.Linq.Expressions.Expression<System.Func<string, string>>"
-                        )
-                        .WithLocation(16, 22),
-                    // (17,22): error CS1503: Argument 1: cannot convert from 'lambda expression' to 'out Expression<Func<string, string>>'
-                    //         Bar2<string>(x => x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x => x")
-                        .WithArguments(
-                            "1",
-                            "lambda expression",
-                            "out System.Linq.Expressions.Expression<System.Func<string, string>>"
-                        )
-                        .WithLocation(17, 22)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (14,21): error CS1503: Argument 1: cannot convert from 'lambda expression' to 'ref Func<string, string>'
+                //         Goo<string>(x => x);
+                Diagnostic(ErrorCode.ERR_BadArgType, "x => x")
+                    .WithArguments("1", "lambda expression", "ref System.Func<string, string>")
+                    .WithLocation(14, 21),
+                // (15,21): error CS1503: Argument 1: cannot convert from 'lambda expression' to 'out Func<string, string>'
+                //         Bar<string>(x => x);
+                Diagnostic(ErrorCode.ERR_BadArgType, "x => x")
+                    .WithArguments("1", "lambda expression", "out System.Func<string, string>")
+                    .WithLocation(15, 21),
+                // (16,22): error CS1503: Argument 1: cannot convert from 'lambda expression' to 'ref Expression<Func<string, string>>'
+                //         Goo2<string>(x => x);
+                Diagnostic(ErrorCode.ERR_BadArgType, "x => x")
+                    .WithArguments(
+                        "1",
+                        "lambda expression",
+                        "ref System.Linq.Expressions.Expression<System.Func<string, string>>"
+                    )
+                    .WithLocation(16, 22),
+                // (17,22): error CS1503: Argument 1: cannot convert from 'lambda expression' to 'out Expression<Func<string, string>>'
+                //         Bar2<string>(x => x);
+                Diagnostic(ErrorCode.ERR_BadArgType, "x => x")
+                    .WithArguments(
+                        "1",
+                        "lambda expression",
+                        "out System.Linq.Expressions.Expression<System.Func<string, string>>"
+                    )
+                    .WithLocation(17, 22)
+            );
         }
 
         [
@@ -1711,39 +1697,38 @@ class C
                         .WithLocation(58, 9)
                 );
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (67,36): error CS0453: The type 'Y' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C.N<T>'
-                    //     static void Test5<Y>(Y y, N<Y> ny) { }
-                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "ny")
-                        .WithArguments("C.N<T>", "T", "Y")
-                        .WithLocation(67, 36),
-                    // (17,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'C.Test1<U>(U, C.N<U>)'
-                    //         Test1<string>(s, null);
-                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "Test1<string>")
-                        .WithArguments("C.Test1<U>(U, C.N<U>)", "U", "string")
-                        .WithLocation(17, 9),
-                    // (21,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'V' in the generic type or method 'C.Test2<V>(V, C.N<V>)'
-                    //         Test2(s, null);
-                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "Test2")
-                        .WithArguments("C.Test2<V>(V, C.N<V>)", "V", "string")
-                        .WithLocation(21, 9),
-                    // (47,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C.N<T>'
-                    //         Test5(s, null);
-                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "Test5")
-                        .WithArguments("C.N<T>", "T", "string")
-                        .WithLocation(47, 9),
-                    // (58,17): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'S' in the generic type or method 'C.L<S>'
-                    //         Test6<L<string>>(null);
-                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "string")
-                        .WithArguments("C.L<S>", "S", "string")
-                        .WithLocation(58, 17),
-                    // (58,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'S' in the generic type or method 'C.L<S>'
-                    //         Test6<L<string>>(null);
-                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "Test6<L<string>>")
-                        .WithArguments("C.L<S>", "S", "string")
-                        .WithLocation(58, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (67,36): error CS0453: The type 'Y' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C.N<T>'
+                //     static void Test5<Y>(Y y, N<Y> ny) { }
+                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "ny")
+                    .WithArguments("C.N<T>", "T", "Y")
+                    .WithLocation(67, 36),
+                // (17,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'C.Test1<U>(U, C.N<U>)'
+                //         Test1<string>(s, null);
+                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "Test1<string>")
+                    .WithArguments("C.Test1<U>(U, C.N<U>)", "U", "string")
+                    .WithLocation(17, 9),
+                // (21,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'V' in the generic type or method 'C.Test2<V>(V, C.N<V>)'
+                //         Test2(s, null);
+                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "Test2")
+                    .WithArguments("C.Test2<V>(V, C.N<V>)", "V", "string")
+                    .WithLocation(21, 9),
+                // (47,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C.N<T>'
+                //         Test5(s, null);
+                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "Test5")
+                    .WithArguments("C.N<T>", "T", "string")
+                    .WithLocation(47, 9),
+                // (58,17): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'S' in the generic type or method 'C.L<S>'
+                //         Test6<L<string>>(null);
+                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "string")
+                    .WithArguments("C.L<S>", "S", "string")
+                    .WithLocation(58, 17),
+                // (58,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'S' in the generic type or method 'C.L<S>'
+                //         Test6<L<string>>(null);
+                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "Test6<L<string>>")
+                    .WithArguments("C.L<S>", "S", "string")
+                    .WithLocation(58, 9)
+            );
         }
 
         [Fact]
@@ -1759,14 +1744,13 @@ class C
     }
     static void Goo<T>(params T[] x) { }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,9): error CS0411: The type arguments for method 'C.Goo<T>(params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         Goo();
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Goo")
-                        .WithArguments("C.Goo<T>(params T[])")
-                        .WithLocation(6, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,9): error CS0411: The type arguments for method 'C.Goo<T>(params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         Goo();
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Goo")
+                    .WithArguments("C.Goo<T>(params T[])")
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -1783,19 +1767,18 @@ class C
         System.Console.WriteLine(VoidReturning());
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,22): error CS1729: 'byte' does not contain a constructor that takes 1 arguments
-                    //         byte b = new byte(1);
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "byte")
-                        .WithArguments("byte", "1")
-                        .WithLocation(7, 22),
-                    // (8,34): error CS1503: Argument 1: cannot convert from 'void' to 'bool'
-                    //         System.Console.WriteLine(VoidReturning());
-                    Diagnostic(ErrorCode.ERR_BadArgType, "VoidReturning()")
-                        .WithArguments("1", "void", "bool")
-                        .WithLocation(8, 34)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,22): error CS1729: 'byte' does not contain a constructor that takes 1 arguments
+                //         byte b = new byte(1);
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "byte")
+                    .WithArguments("byte", "1")
+                    .WithLocation(7, 22),
+                // (8,34): error CS1503: Argument 1: cannot convert from 'void' to 'bool'
+                //         System.Console.WriteLine(VoidReturning());
+                Diagnostic(ErrorCode.ERR_BadArgType, "VoidReturning()")
+                    .WithArguments("1", "void", "bool")
+                    .WithLocation(8, 34)
+            );
         }
 
         [Fact]
@@ -2109,17 +2092,16 @@ class Test2
         b.Method2(d, d, d, d, d); // Should report error - No overload for Method2 takes 5 arguments
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (10,15): error CS0466: 'Derived.Base.Method2(Derived, Derived, params Derived[])' should not have a params parameter since 'Base.Method2(Derived, Derived, Derived[])' does not
-                    Diagnostic(ErrorCode.ERR_ExplicitImplParams, "Method2")
-                        .WithArguments(
-                            "Derived.Base.Method2(Derived, Derived, params Derived[])",
-                            "Base.Method2(Derived, Derived, Derived[])"
-                        ),
-                    // (19,9): error CS1501: No overload for method 'Method2' takes 5 arguments
-                    Diagnostic(ErrorCode.ERR_BadArgCount, "Method2").WithArguments("Method2", "5")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (10,15): error CS0466: 'Derived.Base.Method2(Derived, Derived, params Derived[])' should not have a params parameter since 'Base.Method2(Derived, Derived, Derived[])' does not
+                Diagnostic(ErrorCode.ERR_ExplicitImplParams, "Method2")
+                    .WithArguments(
+                        "Derived.Base.Method2(Derived, Derived, params Derived[])",
+                        "Base.Method2(Derived, Derived, Derived[])"
+                    ),
+                // (19,9): error CS1501: No overload for method 'Method2' takes 5 arguments
+                Diagnostic(ErrorCode.ERR_BadArgCount, "Method2").WithArguments("Method2", "5")
+            );
         }
 
         [WorkItem(540153, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540153")]
@@ -2507,12 +2489,11 @@ class Test
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (17,21): error CS0122: 'Base.Base()' is inaccessible due to its protection level
-                    //         var a = new Base();
-                    Diagnostic(ErrorCode.ERR_BadAccess, "Base").WithArguments("Base.Base()")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (17,21): error CS0122: 'Base.Base()' is inaccessible due to its protection level
+                //         var a = new Base();
+                Diagnostic(ErrorCode.ERR_BadAccess, "Base").WithArguments("Base.Base()")
+            );
         }
 
         [Fact]
@@ -3102,14 +3083,13 @@ class Test
    }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (13,16): error CS0423: Since 'Ref1Impl' has the ComImport attribute, 'Ref1Impl.M(ref int, int)' must be extern or abstract
-                    //     public int M(ref int x, int y) { return x + y; }
-                    Diagnostic(ErrorCode.ERR_ComImportWithImpl, "M")
-                        .WithArguments("Ref1Impl.M(ref int, int)", "Ref1Impl")
-                        .WithLocation(13, 16)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (13,16): error CS0423: Since 'Ref1Impl' has the ComImport attribute, 'Ref1Impl.M(ref int, int)' must be extern or abstract
+                //     public int M(ref int x, int y) { return x + y; }
+                Diagnostic(ErrorCode.ERR_ComImportWithImpl, "M")
+                    .WithArguments("Ref1Impl.M(ref int, int)", "Ref1Impl")
+                    .WithLocation(13, 16)
+            );
         }
 
         [Fact]
@@ -3142,14 +3122,13 @@ class Test
    }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (21,25): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //        int ret = ref1.M(10, 10);
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "10")
-                        .WithArguments("1", "ref")
-                        .WithLocation(21, 25)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (21,25): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //        int ret = ref1.M(10, 10);
+                Diagnostic(ErrorCode.ERR_BadArgRef, "10")
+                    .WithArguments("1", "ref")
+                    .WithLocation(21, 25)
+            );
         }
 
         [Fact]
@@ -3182,19 +3161,18 @@ class Test
        return ret;
    }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (22,25): error CS1620: Argument 1 must be passed with the 'out' keyword
-                    //        int ret = ref1.M(x, 10);
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "x")
-                        .WithArguments("1", "out")
-                        .WithLocation(22, 25),
-                    // (22,25): error CS0165: Use of unassigned local variable 'x'
-                    //        int ret = ref1.M(x, 10);
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x")
-                        .WithArguments("x")
-                        .WithLocation(22, 25)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (22,25): error CS1620: Argument 1 must be passed with the 'out' keyword
+                //        int ret = ref1.M(x, 10);
+                Diagnostic(ErrorCode.ERR_BadArgRef, "x")
+                    .WithArguments("1", "out")
+                    .WithLocation(22, 25),
+                // (22,25): error CS0165: Use of unassigned local variable 'x'
+                //        int ret = ref1.M(x, 10);
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x")
+                    .WithArguments("x")
+                    .WithLocation(22, 25)
+            );
         }
 
         [Fact]
@@ -3228,32 +3206,31 @@ public class Goo
     public extern int M1(ref int x, int y);
     public static extern int M2(ref int x, int y);
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (13,7): error CS0424: 'Attr2': a class with the ComImport attribute cannot specify a base class
-                    // class Attr2: Attribute
-                    Diagnostic(ErrorCode.ERR_ComImportWithBase, "Attr2")
-                        .WithArguments("Attr2")
-                        .WithLocation(13, 7),
-                    // (15,12): error CS0669: A class with the ComImport attribute cannot have a user-defined constructor
-                    //     public Attr2(ref int x) {}
-                    Diagnostic(ErrorCode.ERR_ComImportWithUserCtor, "Attr2").WithLocation(15, 12),
-                    // (20,20): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    // [Attr(new Goo().M1(1, 1))]
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "1")
-                        .WithArguments("1", "ref")
-                        .WithLocation(20, 20),
-                    // (21,14): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    // [Attr(Goo.M2(1, 1))]
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "1")
-                        .WithArguments("1", "ref")
-                        .WithLocation(21, 14),
-                    // (22,8): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    // [Attr2(1)]
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "1")
-                        .WithArguments("1", "ref")
-                        .WithLocation(22, 8)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (13,7): error CS0424: 'Attr2': a class with the ComImport attribute cannot specify a base class
+                // class Attr2: Attribute
+                Diagnostic(ErrorCode.ERR_ComImportWithBase, "Attr2")
+                    .WithArguments("Attr2")
+                    .WithLocation(13, 7),
+                // (15,12): error CS0669: A class with the ComImport attribute cannot have a user-defined constructor
+                //     public Attr2(ref int x) {}
+                Diagnostic(ErrorCode.ERR_ComImportWithUserCtor, "Attr2").WithLocation(15, 12),
+                // (20,20): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                // [Attr(new Goo().M1(1, 1))]
+                Diagnostic(ErrorCode.ERR_BadArgRef, "1")
+                    .WithArguments("1", "ref")
+                    .WithLocation(20, 20),
+                // (21,14): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                // [Attr(Goo.M2(1, 1))]
+                Diagnostic(ErrorCode.ERR_BadArgRef, "1")
+                    .WithArguments("1", "ref")
+                    .WithLocation(21, 14),
+                // (22,8): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                // [Attr2(1)]
+                Diagnostic(ErrorCode.ERR_BadArgRef, "1")
+                    .WithArguments("1", "ref")
+                    .WithLocation(22, 8)
+            );
         }
 
         [Fact]
@@ -3327,12 +3304,11 @@ class D : C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (18,19): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //         new D().M(x);
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (18,19): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //         new D().M(x);
+                Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref")
+            );
         }
 
         [Fact, WorkItem(546122, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546122")]
@@ -3413,39 +3389,38 @@ class J : I
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,6): error CS0601: The DllImport attribute must be specified on a method marked 'static' and 'extern'
-                    //     [DllImport("goo")]
-                    Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport"),
-                    // (20,19): error CS1503: Argument 1: cannot convert from 'short' to 'sbyte'
-                    //         new F().M(x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x").WithArguments("1", "short", "sbyte"),
-                    // (36,24): warning CS0626: Method, operator, or accessor 'H.M(ref short)' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
-                    //     extern public void M(ref short p);
-                    Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "M")
-                        .WithArguments("H.M(ref short)"),
-                    // (43,19): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //         new H().M(x);
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref"),
-                    // (46,13): error CS1503: Argument 1: cannot convert from 'short' to 'sbyte'
-                    //         g.M(x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x").WithArguments("1", "short", "sbyte"),
-                    // (58,24): warning CS0626: Method, operator, or accessor 'J.M(sbyte)' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
-                    //     extern public void M(sbyte p);
-                    Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "M")
-                        .WithArguments("J.M(sbyte)"),
-                    // (59,24): warning CS0626: Method, operator, or accessor 'J.M(ref short)' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
-                    //     extern public void M(ref short p);
-                    Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "M")
-                        .WithArguments("J.M(ref short)"),
-                    // (66,19): error CS1503: Argument 1: cannot convert from 'short' to 'sbyte'
-                    //         new J().M(x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x").WithArguments("1", "short", "sbyte"),
-                    // (69,11): error CS1061: 'I' does not contain a definition for 'M' and no extension method 'M' accepting a first argument of type 'I' could be found (are you missing a using directive or an assembly reference?)
-                    //         i.M(x);
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M").WithArguments("I", "M")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,6): error CS0601: The DllImport attribute must be specified on a method marked 'static' and 'extern'
+                //     [DllImport("goo")]
+                Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport"),
+                // (20,19): error CS1503: Argument 1: cannot convert from 'short' to 'sbyte'
+                //         new F().M(x);
+                Diagnostic(ErrorCode.ERR_BadArgType, "x").WithArguments("1", "short", "sbyte"),
+                // (36,24): warning CS0626: Method, operator, or accessor 'H.M(ref short)' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
+                //     extern public void M(ref short p);
+                Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "M")
+                    .WithArguments("H.M(ref short)"),
+                // (43,19): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //         new H().M(x);
+                Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref"),
+                // (46,13): error CS1503: Argument 1: cannot convert from 'short' to 'sbyte'
+                //         g.M(x);
+                Diagnostic(ErrorCode.ERR_BadArgType, "x").WithArguments("1", "short", "sbyte"),
+                // (58,24): warning CS0626: Method, operator, or accessor 'J.M(sbyte)' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
+                //     extern public void M(sbyte p);
+                Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "M")
+                    .WithArguments("J.M(sbyte)"),
+                // (59,24): warning CS0626: Method, operator, or accessor 'J.M(ref short)' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
+                //     extern public void M(ref short p);
+                Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "M")
+                    .WithArguments("J.M(ref short)"),
+                // (66,19): error CS1503: Argument 1: cannot convert from 'short' to 'sbyte'
+                //         new J().M(x);
+                Diagnostic(ErrorCode.ERR_BadArgType, "x").WithArguments("1", "short", "sbyte"),
+                // (69,11): error CS1061: 'I' does not contain a definition for 'M' and no extension method 'M' accepting a first argument of type 'I' could be found (are you missing a using directive or an assembly reference?)
+                //         i.M(x);
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M").WithArguments("I", "M")
+            );
         }
 
         [Fact, WorkItem(546122, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546122")]
@@ -3491,15 +3466,14 @@ class C: B
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (30,13): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //         a.M(x);
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref"),
-                    // (32,13): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //         c.M(x);
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (30,13): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //         a.M(x);
+                Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref"),
+                // (32,13): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //         c.M(x);
+                Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref")
+            );
         }
 
         [Fact, WorkItem(546122, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546122")]
@@ -3527,12 +3501,11 @@ class H<T> where T: K, new()
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (18,13): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //         t.M(x);
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (18,13): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //         t.M(x);
+                Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref")
+            );
         }
 
         [Fact, WorkItem(546122, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546122")]
@@ -3602,14 +3575,13 @@ class Y
             // BREAK: Dev11 produces an error.  It doesn't make sense that the introduction
             // of a color-color local would eliminate an error, since it does not affect the
             // outcome of overload resolution.
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (22,11): warning CS0219: The variable 'E' is assigned but its value is never used
-                    //         E E = null;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "E")
-                        .WithArguments("E")
-                        .WithLocation(22, 11)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (22,11): warning CS0219: The variable 'E' is assigned but its value is never used
+                //         E E = null;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "E")
+                    .WithArguments("E")
+                    .WithLocation(22, 11)
+            );
         }
 
         [
@@ -4093,107 +4065,106 @@ class Test
    }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (79,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        ref1.M1(10L);      // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "int"),
-                    // (80,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        ref1.M1(l);        // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
-                    // (81,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M1(ref l);    // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (82,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M1(ref c);    // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (89,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M2(ref l);    // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (90,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M2(ref c);    // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (97,16): error CS1503: Argument 1: cannot convert from 'long' to 'char'
-                    //        ref1.M3(10L);      // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "char"),
-                    // (98,16): error CS1503: Argument 1: cannot convert from 'long' to 'char'
-                    //        ref1.M3(l);        // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "char"),
-                    // (99,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M3(ref l);    // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (100,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M3(ref c);    // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (107,16): error CS1620: Argument 1 must be passed with the 'out' keyword
-                    //        ref1.M4(10L);      // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "10L").WithArguments("1", "out"),
-                    // (108,16): error CS1620: Argument 1 must be passed with the 'out' keyword
-                    //        ref1.M4(l);        // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "out"),
-                    // (109,20): error CS1620: Argument 1 must be passed with the 'out' keyword
-                    //        ref1.M4(ref l);    // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "out"),
-                    // (110,20): error CS1620: Argument 1 must be passed with the 'out' keyword
-                    //        ref1.M4(ref c);    // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "c").WithArguments("1", "out"),
-                    // (117,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M5(ref int)' and 'IRef1.M5(ref long)'
-                    //        ref1.M5(10);       // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M5")
-                        .WithArguments("IRef1.M5(ref int)", "IRef1.M5(ref long)"),
-                    // (118,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M5(ref int)' and 'IRef1.M5(ref long)'
-                    //        ref1.M5('c');      // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M5")
-                        .WithArguments("IRef1.M5(ref int)", "IRef1.M5(ref long)"),
-                    // (119,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M5(ref int)' and 'IRef1.M5(ref long)'
-                    //        ref1.M5(i);        // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M5")
-                        .WithArguments("IRef1.M5(ref int)", "IRef1.M5(ref long)"),
-                    // (120,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M5(ref int)' and 'IRef1.M5(ref long)'
-                    //        ref1.M5(c);        // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M5")
-                        .WithArguments("IRef1.M5(ref int)", "IRef1.M5(ref long)"),
-                    // (121,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref int'
-                    //        ref1.M5(ref c);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref int"),
-                    // (128,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref char)' and 'IRef1.M6(ref long)'
-                    //        ref1.M6('c');      // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
-                        .WithArguments("IRef1.M6(ref char)", "IRef1.M6(ref long)"),
-                    // (129,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref char)' and 'IRef1.M6(ref long)'
-                    //        ref1.M6(c);        // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
-                        .WithArguments("IRef1.M6(ref char)", "IRef1.M6(ref long)"),
-                    // (130,20): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref char'
-                    //        ref1.M6(ref i);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i")
-                        .WithArguments("1", "ref int", "ref char"),
-                    // (137,20): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
-                    //        ref1.M7(ref i);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i")
-                        .WithArguments("1", "ref int", "ref long"),
-                    // (138,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
-                    //        ref1.M7(ref c);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref long"),
-                    // (145,20): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
-                    //        ref1.M8(ref i);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i")
-                        .WithArguments("1", "ref int", "ref long"),
-                    // (146,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
-                    //        ref1.M8(ref c);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref long"),
-                    // (153,20): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref char'
-                    //        ref1.M9(ref i);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i")
-                        .WithArguments("1", "ref int", "ref char"),
-                    // (154,20): error CS1503: Argument 1: cannot convert from 'ref long' to 'ref char'
-                    //        ref1.M9(ref l);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l")
-                        .WithArguments("1", "ref long", "ref char")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (79,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        ref1.M1(10L);      // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "int"),
+                // (80,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        ref1.M1(l);        // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
+                // (81,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M1(ref l);    // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (82,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M1(ref c);    // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (89,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M2(ref l);    // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (90,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M2(ref c);    // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (97,16): error CS1503: Argument 1: cannot convert from 'long' to 'char'
+                //        ref1.M3(10L);      // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "char"),
+                // (98,16): error CS1503: Argument 1: cannot convert from 'long' to 'char'
+                //        ref1.M3(l);        // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "char"),
+                // (99,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M3(ref l);    // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (100,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M3(ref c);    // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (107,16): error CS1620: Argument 1 must be passed with the 'out' keyword
+                //        ref1.M4(10L);      // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "10L").WithArguments("1", "out"),
+                // (108,16): error CS1620: Argument 1 must be passed with the 'out' keyword
+                //        ref1.M4(l);        // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "out"),
+                // (109,20): error CS1620: Argument 1 must be passed with the 'out' keyword
+                //        ref1.M4(ref l);    // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "out"),
+                // (110,20): error CS1620: Argument 1 must be passed with the 'out' keyword
+                //        ref1.M4(ref c);    // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "c").WithArguments("1", "out"),
+                // (117,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M5(ref int)' and 'IRef1.M5(ref long)'
+                //        ref1.M5(10);       // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M5")
+                    .WithArguments("IRef1.M5(ref int)", "IRef1.M5(ref long)"),
+                // (118,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M5(ref int)' and 'IRef1.M5(ref long)'
+                //        ref1.M5('c');      // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M5")
+                    .WithArguments("IRef1.M5(ref int)", "IRef1.M5(ref long)"),
+                // (119,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M5(ref int)' and 'IRef1.M5(ref long)'
+                //        ref1.M5(i);        // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M5")
+                    .WithArguments("IRef1.M5(ref int)", "IRef1.M5(ref long)"),
+                // (120,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M5(ref int)' and 'IRef1.M5(ref long)'
+                //        ref1.M5(c);        // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M5")
+                    .WithArguments("IRef1.M5(ref int)", "IRef1.M5(ref long)"),
+                // (121,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref int'
+                //        ref1.M5(ref c);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref int"),
+                // (128,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref char)' and 'IRef1.M6(ref long)'
+                //        ref1.M6('c');      // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
+                    .WithArguments("IRef1.M6(ref char)", "IRef1.M6(ref long)"),
+                // (129,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref char)' and 'IRef1.M6(ref long)'
+                //        ref1.M6(c);        // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
+                    .WithArguments("IRef1.M6(ref char)", "IRef1.M6(ref long)"),
+                // (130,20): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref char'
+                //        ref1.M6(ref i);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i")
+                    .WithArguments("1", "ref int", "ref char"),
+                // (137,20): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
+                //        ref1.M7(ref i);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i")
+                    .WithArguments("1", "ref int", "ref long"),
+                // (138,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
+                //        ref1.M7(ref c);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref long"),
+                // (145,20): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
+                //        ref1.M8(ref i);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i")
+                    .WithArguments("1", "ref int", "ref long"),
+                // (146,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
+                //        ref1.M8(ref c);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref long"),
+                // (153,20): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref char'
+                //        ref1.M9(ref i);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i")
+                    .WithArguments("1", "ref int", "ref char"),
+                // (154,20): error CS1503: Argument 1: cannot convert from 'ref long' to 'ref char'
+                //        ref1.M9(ref l);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l")
+                    .WithArguments("1", "ref long", "ref char")
+            );
         }
 
         [Fact, WorkItem(546176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546176")]
@@ -5522,177 +5493,176 @@ class Test
    }
 }
 ";
-            CreateCompilationWithILAndMscorlib40(source2, source1)
-                .VerifyDiagnostics(
-                    // (15,21): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        value = a.P1[10L];         // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "int"),
-                    // (16,13): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        a.P1[10L] = value;         // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "int"),
-                    // (17,21): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        value = a.P1[l];           // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
-                    // (18,13): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        a.P1[l] = value;           // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
-                    // (19,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        value = a.P1[ref l];       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (20,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        a.P1[ref l] = value;       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (21,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        value = a.P1[ref c];       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (22,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        a.P1[ref c] = value;       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (27,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        value = a.P2[ref l];       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (28,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        a.P2[ref l] = value;       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (29,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        value = a.P2[ref c];       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (30,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        a.P2[ref c] = value;       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (35,21): error CS1503: Argument 1: cannot convert from 'long' to 'char'
-                    //        value = a.P3[10L];         // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "char"),
-                    // (36,13): error CS1503: Argument 1: cannot convert from 'long' to 'char'
-                    //        a.P3[10L] = value;         // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "char"),
-                    // (37,21): error CS1503: Argument 1: cannot convert from 'long' to 'char'
-                    //        value = a.P3[l];           // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "char"),
-                    // (38,13): error CS1503: Argument 1: cannot convert from 'long' to 'char'
-                    //        a.P3[l] = value;           // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "char"),
-                    // (39,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        value = a.P3[ref l];       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (40,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        a.P3[ref l] = value;       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (41,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        value = a.P3[ref c];       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (42,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        a.P3[ref c] = value;       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (47,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
-                    //        value = a.P4[10];          // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[10]")
-                        .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
-                    // (58,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
-                    //        a.P4[10] = value;          // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[10]")
-                        .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
-                    // (49,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
-                    //        value = a.P4['c'];         // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4['c']")
-                        .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
-                    // (50,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
-                    //        a.P4['c'] = value;         // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4['c']")
-                        .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
-                    // (51,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
-                    //        value = a.P4[i];           // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[i]")
-                        .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
-                    // (52,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
-                    //        a.P4[i] = value;           // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[i]")
-                        .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
-                    // (53,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
-                    //        value = a.P4[c];           // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[c]")
-                        .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
-                    // (54,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
-                    //        a.P4[c] = value;           // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[c]")
-                        .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
-                    // (55,25): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
-                    //        value = a.P4[ref c];       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref long"),
-                    // (56,17): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
-                    //        a.P4[ref c] = value;       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref long"),
-                    // (61,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P5[ref long]' and 'IA.P5[ref char]'
-                    //        value = a.P5['c'];         // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P5['c']")
-                        .WithArguments("IA.P5[ref long]", "IA.P5[ref char]"),
-                    // (62,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P5[ref long]' and 'IA.P5[ref char]'
-                    //        a.P5['c'] = value;         // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P5['c']")
-                        .WithArguments("IA.P5[ref long]", "IA.P5[ref char]"),
-                    // (63,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P5[ref long]' and 'IA.P5[ref char]'
-                    //        value = a.P5[c];           // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P5[c]")
-                        .WithArguments("IA.P5[ref long]", "IA.P5[ref char]"),
-                    // (64,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P5[ref long]' and 'IA.P5[ref char]'
-                    //        a.P5[c] = value;           // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "a.P5[c]")
-                        .WithArguments("IA.P5[ref long]", "IA.P5[ref char]"),
-                    // (65,25): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
-                    //        value = a.P5[ref i];       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i")
-                        .WithArguments("1", "ref int", "ref long"),
-                    // (66,17): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
-                    //        a.P5[ref i] = value;       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i")
-                        .WithArguments("1", "ref int", "ref long"),
-                    // (71,25): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
-                    //        value = a.P6[ref i];       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i")
-                        .WithArguments("1", "ref int", "ref long"),
-                    // (72,17): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
-                    //        a.P6[ref i] = value;       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i")
-                        .WithArguments("1", "ref int", "ref long"),
-                    // (73,25): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
-                    //        value = a.P6[ref c];       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref long"),
-                    // (74,17): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
-                    //        a.P6[ref c] = value;       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref long"),
-                    // (79,25): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
-                    //        value = a.P7[ref i];       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i")
-                        .WithArguments("1", "ref int", "ref long"),
-                    // (80,17): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
-                    //        a.P7[ref i] = value;       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i")
-                        .WithArguments("1", "ref int", "ref long"),
-                    // (81,25): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
-                    //        value = a.P7[ref c];       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref long"),
-                    // (82,17): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
-                    //        a.P7[ref c] = value;       // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref long"),
-                    // (87,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        value = a.P8[ref i];       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
-                    // (88,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        a.P8[ref i] = value;       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
-                    // (89,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        value = a.P8[ref l];       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (90,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        a.P8[ref l] = value;       // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref")
-                );
+            CreateCompilationWithILAndMscorlib40(source2, source1).VerifyDiagnostics(
+                // (15,21): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        value = a.P1[10L];         // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "int"),
+                // (16,13): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        a.P1[10L] = value;         // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "int"),
+                // (17,21): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        value = a.P1[l];           // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
+                // (18,13): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        a.P1[l] = value;           // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
+                // (19,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        value = a.P1[ref l];       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (20,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        a.P1[ref l] = value;       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (21,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        value = a.P1[ref c];       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (22,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        a.P1[ref c] = value;       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (27,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        value = a.P2[ref l];       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (28,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        a.P2[ref l] = value;       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (29,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        value = a.P2[ref c];       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (30,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        a.P2[ref c] = value;       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (35,21): error CS1503: Argument 1: cannot convert from 'long' to 'char'
+                //        value = a.P3[10L];         // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "char"),
+                // (36,13): error CS1503: Argument 1: cannot convert from 'long' to 'char'
+                //        a.P3[10L] = value;         // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "char"),
+                // (37,21): error CS1503: Argument 1: cannot convert from 'long' to 'char'
+                //        value = a.P3[l];           // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "char"),
+                // (38,13): error CS1503: Argument 1: cannot convert from 'long' to 'char'
+                //        a.P3[l] = value;           // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "char"),
+                // (39,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        value = a.P3[ref l];       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (40,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        a.P3[ref l] = value;       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (41,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        value = a.P3[ref c];       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (42,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        a.P3[ref c] = value;       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (47,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
+                //        value = a.P4[10];          // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[10]")
+                    .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
+                // (58,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
+                //        a.P4[10] = value;          // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[10]")
+                    .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
+                // (49,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
+                //        value = a.P4['c'];         // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4['c']")
+                    .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
+                // (50,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
+                //        a.P4['c'] = value;         // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4['c']")
+                    .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
+                // (51,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
+                //        value = a.P4[i];           // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[i]")
+                    .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
+                // (52,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
+                //        a.P4[i] = value;           // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[i]")
+                    .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
+                // (53,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
+                //        value = a.P4[c];           // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[c]")
+                    .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
+                // (54,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P4[ref long]' and 'IA.P4[ref int]'
+                //        a.P4[c] = value;           // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P4[c]")
+                    .WithArguments("IA.P4[ref long]", "IA.P4[ref int]"),
+                // (55,25): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
+                //        value = a.P4[ref c];       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref long"),
+                // (56,17): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
+                //        a.P4[ref c] = value;       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref long"),
+                // (61,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P5[ref long]' and 'IA.P5[ref char]'
+                //        value = a.P5['c'];         // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P5['c']")
+                    .WithArguments("IA.P5[ref long]", "IA.P5[ref char]"),
+                // (62,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P5[ref long]' and 'IA.P5[ref char]'
+                //        a.P5['c'] = value;         // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P5['c']")
+                    .WithArguments("IA.P5[ref long]", "IA.P5[ref char]"),
+                // (63,16): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P5[ref long]' and 'IA.P5[ref char]'
+                //        value = a.P5[c];           // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P5[c]")
+                    .WithArguments("IA.P5[ref long]", "IA.P5[ref char]"),
+                // (64,8): error CS0121: The call is ambiguous between the following methods or properties: 'IA.P5[ref long]' and 'IA.P5[ref char]'
+                //        a.P5[c] = value;           // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "a.P5[c]")
+                    .WithArguments("IA.P5[ref long]", "IA.P5[ref char]"),
+                // (65,25): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
+                //        value = a.P5[ref i];       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i")
+                    .WithArguments("1", "ref int", "ref long"),
+                // (66,17): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
+                //        a.P5[ref i] = value;       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i")
+                    .WithArguments("1", "ref int", "ref long"),
+                // (71,25): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
+                //        value = a.P6[ref i];       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i")
+                    .WithArguments("1", "ref int", "ref long"),
+                // (72,17): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
+                //        a.P6[ref i] = value;       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i")
+                    .WithArguments("1", "ref int", "ref long"),
+                // (73,25): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
+                //        value = a.P6[ref c];       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref long"),
+                // (74,17): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
+                //        a.P6[ref c] = value;       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref long"),
+                // (79,25): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
+                //        value = a.P7[ref i];       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i")
+                    .WithArguments("1", "ref int", "ref long"),
+                // (80,17): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
+                //        a.P7[ref i] = value;       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i")
+                    .WithArguments("1", "ref int", "ref long"),
+                // (81,25): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
+                //        value = a.P7[ref c];       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref long"),
+                // (82,17): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref long'
+                //        a.P7[ref c] = value;       // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref long"),
+                // (87,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        value = a.P8[ref i];       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
+                // (88,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        a.P8[ref i] = value;       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
+                // (89,25): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        value = a.P8[ref l];       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (90,17): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        a.P8[ref l] = value;       // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref")
+            );
         }
 
         [Fact]
@@ -6337,396 +6307,383 @@ class Test
    }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (80,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        ref1.M1(l, i);      // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
-                    // (81,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        ref1.M1(l, l);      // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
-                    // (82,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        ref1.M1(l, c);      // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
-                    // (83,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M1(ref i, l);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
-                    // (84,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M1(ref l, i);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (85,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M1(ref l, l);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (86,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M1(ref l, c);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (87,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M1(ref c, i);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (88,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M1(ref c, l);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (89,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M1(ref c, c);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (96,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M2(i, l);      // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (97,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        ref1.M2(l, i);      // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
-                    // (97,19): error CS1503: Argument 2: cannot convert from 'int' to 'char'
-                    //        ref1.M2(l, i);      // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
-                    // (98,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        ref1.M2(l, l);      // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
-                    // (98,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M2(l, l);      // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (99,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                    //        ref1.M2(l, c);      // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
-                    // (100,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M2(c, l);      // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (101,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M2(ref i, l);  // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
-                    // (101,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M2(ref i, l);  // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (102,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M2(ref l, i);  // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (102,23): error CS1503: Argument 2: cannot convert from 'int' to 'char'
-                    //        ref1.M2(ref l, i);  // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
-                    // (103,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M2(ref l, l);  // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (103,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M2(ref l, l);  // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (104,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M2(ref l, c);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (105,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M2(ref c, i);  // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (105,23): error CS1503: Argument 2: cannot convert from 'int' to 'char'
-                    //        ref1.M2(ref c, i);  // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
-                    // (106,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M2(ref c, l);  // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (106,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M2(ref c, l);  // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (107,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M2(ref c, c);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
-                    // (114,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M3(i, l);      // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (115,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //        ref1.M3(l, l);      // CS1620, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
-                    // (115,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M3(l, l);      // CS1620, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (116,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M3(c, l);      // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (117,23): error CS1503: Argument 2: cannot convert from 'int' to 'char'
-                    //        ref1.M3(ref i, i);  // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
-                    // (118,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M3(ref i, l);  // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (119,20): error CS1503: Argument 1: cannot convert from 'ref long' to 'ref int'
-                    //        ref1.M3(ref l, l);  // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l")
-                        .WithArguments("1", "ref long", "ref int"),
-                    // (119,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M3(ref l, l);  // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (120,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref int'
-                    //        ref1.M3(ref c, i);  // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref int"),
-                    // (120,23): error CS1503: Argument 2: cannot convert from 'int' to 'char'
-                    //        ref1.M3(ref c, i);  // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
-                    // (121,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref int'
-                    //        ref1.M3(ref c, l);  // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref int"),
-                    // (121,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M3(ref c, l);  // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (122,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref int'
-                    //        ref1.M3(ref c, c);  // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "c")
-                        .WithArguments("1", "ref char", "ref int"),
-                    // (129,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M4(ref int, long)' and 'IRef1.M4(ref int, ref int)'
-                    //        ref1.M4(i, i);      // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M4")
-                        .WithArguments("IRef1.M4(ref int, long)", "IRef1.M4(ref int, ref int)"),
-                    // (130,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M4(ref int, long)' and 'IRef1.M4(ref int, ref int)'
-                    //        ref1.M4(i, c);      // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M4")
-                        .WithArguments("IRef1.M4(ref int, long)", "IRef1.M4(ref int, ref int)"),
-                    // (131,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //        ref1.M4(l, i);      // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
-                    // (132,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //        ref1.M4(l, l);      // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
-                    // (133,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //        ref1.M4(l, c);      // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
-                    // (134,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M4(ref int, long)' and 'IRef1.M4(ref int, ref int)'
-                    //        ref1.M4(c, i);      // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M4")
-                        .WithArguments("IRef1.M4(ref int, long)", "IRef1.M4(ref int, ref int)"),
-                    // (135,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M4(ref int, long)' and 'IRef1.M4(ref int, ref int)'
-                    //        ref1.M4(c, c);      // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M4")
-                        .WithArguments("IRef1.M4(ref int, long)", "IRef1.M4(ref int, ref int)"),
-                    // (136,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //        ref1.M4(l, ref i);  // CS1620, CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
-                    // (136,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
-                    //        ref1.M4(l, ref i);  // CS1620, CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("2", "ref"),
-                    // (137,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
-                    //        ref1.M4(i, ref l);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
-                    // (138,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //        ref1.M4(l, ref l);  // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
-                    // (138,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
-                    //        ref1.M4(l, ref l);  // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
-                    // (139,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
-                    //        ref1.M4(c, ref l);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
-                    // (146,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M5(i, l);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (147,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //        ref1.M5(l, l);    // CS1620, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
-                    // (147,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M5(l, l);    // CS1620, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (148,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M5(c, l);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (149,23): error CS1503: Argument 2: cannot convert from 'int' to 'char'
-                    //        ref1.M5(ref i, i);  // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
-                    // (150,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M5(ref i, l);  // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (151,20): error CS1503: Argument 1: cannot convert from 'ref long' to 'ref int'
-                    //        ref1.M5(ref l, l);  // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l")
-                        .WithArguments("1", "ref long", "ref int"),
-                    // (151,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
-                    //        ref1.M5(ref l, l);  // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
-                    // (158,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref int, int)' and 'IRef1.M6(ref long, int)'
-                    //        ref1.M6(i, i);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
-                        .WithArguments("IRef1.M6(ref int, int)", "IRef1.M6(ref long, int)"),
-                    // (159,19): error CS1503: Argument 2: cannot convert from 'long' to 'int'
-                    //        ref1.M6(i, l);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "int"),
-                    // (160,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref int, int)' and 'IRef1.M6(ref long, int)'
-                    //        ref1.M6(i, c);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
-                        .WithArguments("IRef1.M6(ref int, int)", "IRef1.M6(ref long, int)"),
-                    // (161,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //        ref1.M6(l, l);    // CS1620, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
-                    // (161,19): error CS1503: Argument 2: cannot convert from 'long' to 'int'
-                    //        ref1.M6(l, l);    // CS1620, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "int"),
-                    // (162,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref int, int)' and 'IRef1.M6(ref long, int)'
-                    //        ref1.M6(c, i);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
-                        .WithArguments("IRef1.M6(ref int, int)", "IRef1.M6(ref long, int)"),
-                    // (163,19): error CS1503: Argument 2: cannot convert from 'long' to 'int'
-                    //        ref1.M6(c, l);    // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "int"),
-                    // (164,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref int, int)' and 'IRef1.M6(ref long, int)'
-                    //        ref1.M6(c, c);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
-                        .WithArguments("IRef1.M6(ref int, int)", "IRef1.M6(ref long, int)"),
-                    // (165,23): error CS1503: Argument 2: cannot convert from 'long' to 'int'
-                    //        ref1.M6(ref i, l);  // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "int"),
-                    // (166,20): error CS1503: Argument 1: cannot convert from 'ref long' to 'ref int'
-                    //        ref1.M6(ref l, l);  // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l")
-                        .WithArguments("1", "ref long", "ref int"),
-                    // (166,23): error CS1503: Argument 2: cannot convert from 'long' to 'int'
-                    //        ref1.M6(ref l, l);  // CS1503, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "int"),
-                    // (173,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M7(ref int, long)' and 'IRef1.M7(ref long, ref int)'
-                    //        ref1.M7(i, i);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M7")
-                        .WithArguments("IRef1.M7(ref int, long)", "IRef1.M7(ref long, ref int)"),
-                    // (174,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M7(ref int, long)' and 'IRef1.M7(ref long, ref int)'
-                    //        ref1.M7(i, c);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M7")
-                        .WithArguments("IRef1.M7(ref int, long)", "IRef1.M7(ref long, ref int)"),
-                    // (175,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //        ref1.M7(l, l);    // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
-                    // (176,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M7(ref int, long)' and 'IRef1.M7(ref long, ref int)'
-                    //        ref1.M7(c, i);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M7")
-                        .WithArguments("IRef1.M7(ref int, long)", "IRef1.M7(ref long, ref int)"),
-                    // (177,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M7(ref int, long)' and 'IRef1.M7(ref long, ref int)'
-                    //        ref1.M7(c, c);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M7")
-                        .WithArguments("IRef1.M7(ref int, long)", "IRef1.M7(ref long, ref int)"),
-                    // (178,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
-                    //        ref1.M7(i, ref l);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
-                    // (179,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //        ref1.M7(l, ref l);  // CS1620, CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
-                    // (179,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
-                    //        ref1.M7(l, ref l);  // CS1620, CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
-                    // (180,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
-                    //        ref1.M7(c, ref l);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
-                    // (181,27): error CS1615: Argument 2 should not be passed with the 'ref' keyword
-                    //        ref1.M7(ref i, ref i);  // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("2", "ref"),
-                    // (188,19): error CS1620: Argument 2 must be passed with the 'ref' keyword
-                    //        ref1.M8(i, l);    // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
-                    // (189,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M8(long, ref int)' and 'IRef1.M8(ref long, int)'
-                    //        ref1.M8(i, c);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M8")
-                        .WithArguments("IRef1.M8(long, ref int)", "IRef1.M8(ref long, int)"),
-                    // (190,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M8(long, ref int)' and 'IRef1.M8(ref long, int)'
-                    //        ref1.M8(l, i);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M8")
-                        .WithArguments("IRef1.M8(long, ref int)", "IRef1.M8(ref long, int)"),
-                    // (191,19): error CS1620: Argument 2 must be passed with the 'ref' keyword
-                    //        ref1.M8(l, l);    // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
-                    // (192,19): error CS1620: Argument 2 must be passed with the 'ref' keyword
-                    //        ref1.M8(c, l);    // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
-                    // (193,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M8(long, ref int)' and 'IRef1.M8(ref long, int)'
-                    //        ref1.M8(c, c);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M8")
-                        .WithArguments("IRef1.M8(long, ref int)", "IRef1.M8(ref long, int)"),
-                    // (194,23): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
-                    //        ref1.M8(i, ref l);   // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l")
-                        .WithArguments("2", "ref long", "ref int"),
-                    // (195,23): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
-                    //        ref1.M8(l, ref l);   // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l")
-                        .WithArguments("2", "ref long", "ref int"),
-                    // (196,23): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
-                    //        ref1.M8(c, ref l);   // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l")
-                        .WithArguments("2", "ref long", "ref int"),
-                    // (197,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M8(ref i, i);   // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
-                    // (198,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M8(ref i, l);   // CS1615, CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
-                    // (198,23): error CS1620: Argument 2 must be passed with the 'ref' keyword
-                    //        ref1.M8(ref i, l);   // CS1615, CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
-                    // (199,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M8(ref i, c);   // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
-                    // (200,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M8(ref l, l);   // CS1615, CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (200,23): error CS1620: Argument 2 must be passed with the 'ref' keyword
-                    //        ref1.M8(ref l, l);   // CS1615, CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
-                    // (201,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M8(ref i, ref i);   // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
-                    // (202,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M8(ref i, ref l);   // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
-                    // (202,27): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
-                    //        ref1.M8(ref i, ref l);   // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l")
-                        .WithArguments("2", "ref long", "ref int"),
-                    // (203,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M8(ref l, ref i);   // CS1615
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (204,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    //        ref1.M8(ref l, ref l);   // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
-                    // (204,27): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
-                    //        ref1.M8(ref l, ref l);   // CS1615, CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l")
-                        .WithArguments("2", "ref long", "ref int"),
-                    // (211,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M9(ref long, ref int)' and 'IRef1.M9(ref int, ref long)'
-                    //        ref1.M9(i, i);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M9")
-                        .WithArguments(
-                            "IRef1.M9(ref long, ref int)",
-                            "IRef1.M9(ref int, ref long)"
-                        ),
-                    // (212,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M9(ref long, ref int)' and 'IRef1.M9(ref int, ref long)'
-                    //        ref1.M9(i, c);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M9")
-                        .WithArguments(
-                            "IRef1.M9(ref long, ref int)",
-                            "IRef1.M9(ref int, ref long)"
-                        ),
-                    // (213,19): error CS1620: Argument 2 must be passed with the 'ref' keyword
-                    //        ref1.M9(l, l);    // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
-                    // (214,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M9(ref long, ref int)' and 'IRef1.M9(ref int, ref long)'
-                    //        ref1.M9(c, i);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M9")
-                        .WithArguments(
-                            "IRef1.M9(ref long, ref int)",
-                            "IRef1.M9(ref int, ref long)"
-                        ),
-                    // (215,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M9(ref long, ref int)' and 'IRef1.M9(ref int, ref long)'
-                    //        ref1.M9(c, c);    // CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M9")
-                        .WithArguments(
-                            "IRef1.M9(ref long, ref int)",
-                            "IRef1.M9(ref int, ref long)"
-                        ),
-                    // (216,23): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
-                    //        ref1.M9(l, ref l);   // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l")
-                        .WithArguments("2", "ref long", "ref int"),
-                    // (217,23): error CS1620: Argument 2 must be passed with the 'ref' keyword
-                    //        ref1.M9(ref l, l);   // CS1620
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
-                    // (218,20): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
-                    //        ref1.M9(ref i, ref i);   // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "i")
-                        .WithArguments("1", "ref int", "ref long"),
-                    // (219,27): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
-                    //        ref1.M9(ref l, ref l);   // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "l")
-                        .WithArguments("2", "ref long", "ref int")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (80,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        ref1.M1(l, i);      // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
+                // (81,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        ref1.M1(l, l);      // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
+                // (82,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        ref1.M1(l, c);      // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
+                // (83,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M1(ref i, l);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
+                // (84,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M1(ref l, i);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (85,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M1(ref l, l);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (86,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M1(ref l, c);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (87,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M1(ref c, i);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (88,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M1(ref c, l);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (89,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M1(ref c, c);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (96,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M2(i, l);      // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (97,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        ref1.M2(l, i);      // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
+                // (97,19): error CS1503: Argument 2: cannot convert from 'int' to 'char'
+                //        ref1.M2(l, i);      // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
+                // (98,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        ref1.M2(l, l);      // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
+                // (98,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M2(l, l);      // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (99,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
+                //        ref1.M2(l, c);      // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "int"),
+                // (100,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M2(c, l);      // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (101,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M2(ref i, l);  // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
+                // (101,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M2(ref i, l);  // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (102,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M2(ref l, i);  // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (102,23): error CS1503: Argument 2: cannot convert from 'int' to 'char'
+                //        ref1.M2(ref l, i);  // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
+                // (103,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M2(ref l, l);  // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (103,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M2(ref l, l);  // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (104,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M2(ref l, c);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (105,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M2(ref c, i);  // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (105,23): error CS1503: Argument 2: cannot convert from 'int' to 'char'
+                //        ref1.M2(ref c, i);  // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
+                // (106,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M2(ref c, l);  // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (106,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M2(ref c, l);  // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (107,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M2(ref c, c);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
+                // (114,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M3(i, l);      // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (115,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //        ref1.M3(l, l);      // CS1620, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
+                // (115,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M3(l, l);      // CS1620, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (116,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M3(c, l);      // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (117,23): error CS1503: Argument 2: cannot convert from 'int' to 'char'
+                //        ref1.M3(ref i, i);  // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
+                // (118,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M3(ref i, l);  // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (119,20): error CS1503: Argument 1: cannot convert from 'ref long' to 'ref int'
+                //        ref1.M3(ref l, l);  // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l")
+                    .WithArguments("1", "ref long", "ref int"),
+                // (119,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M3(ref l, l);  // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (120,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref int'
+                //        ref1.M3(ref c, i);  // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref int"),
+                // (120,23): error CS1503: Argument 2: cannot convert from 'int' to 'char'
+                //        ref1.M3(ref c, i);  // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
+                // (121,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref int'
+                //        ref1.M3(ref c, l);  // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref int"),
+                // (121,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M3(ref c, l);  // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (122,20): error CS1503: Argument 1: cannot convert from 'ref char' to 'ref int'
+                //        ref1.M3(ref c, c);  // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "c")
+                    .WithArguments("1", "ref char", "ref int"),
+                // (129,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M4(ref int, long)' and 'IRef1.M4(ref int, ref int)'
+                //        ref1.M4(i, i);      // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M4")
+                    .WithArguments("IRef1.M4(ref int, long)", "IRef1.M4(ref int, ref int)"),
+                // (130,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M4(ref int, long)' and 'IRef1.M4(ref int, ref int)'
+                //        ref1.M4(i, c);      // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M4")
+                    .WithArguments("IRef1.M4(ref int, long)", "IRef1.M4(ref int, ref int)"),
+                // (131,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //        ref1.M4(l, i);      // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
+                // (132,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //        ref1.M4(l, l);      // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
+                // (133,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //        ref1.M4(l, c);      // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
+                // (134,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M4(ref int, long)' and 'IRef1.M4(ref int, ref int)'
+                //        ref1.M4(c, i);      // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M4")
+                    .WithArguments("IRef1.M4(ref int, long)", "IRef1.M4(ref int, ref int)"),
+                // (135,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M4(ref int, long)' and 'IRef1.M4(ref int, ref int)'
+                //        ref1.M4(c, c);      // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M4")
+                    .WithArguments("IRef1.M4(ref int, long)", "IRef1.M4(ref int, ref int)"),
+                // (136,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //        ref1.M4(l, ref i);  // CS1620, CS1615
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
+                // (136,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
+                //        ref1.M4(l, ref i);  // CS1620, CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("2", "ref"),
+                // (137,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
+                //        ref1.M4(i, ref l);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
+                // (138,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //        ref1.M4(l, ref l);  // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
+                // (138,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
+                //        ref1.M4(l, ref l);  // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
+                // (139,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
+                //        ref1.M4(c, ref l);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
+                // (146,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M5(i, l);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (147,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //        ref1.M5(l, l);    // CS1620, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
+                // (147,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M5(l, l);    // CS1620, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (148,19): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M5(c, l);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (149,23): error CS1503: Argument 2: cannot convert from 'int' to 'char'
+                //        ref1.M5(ref i, i);  // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i").WithArguments("2", "int", "char"),
+                // (150,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M5(ref i, l);  // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (151,20): error CS1503: Argument 1: cannot convert from 'ref long' to 'ref int'
+                //        ref1.M5(ref l, l);  // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l")
+                    .WithArguments("1", "ref long", "ref int"),
+                // (151,23): error CS1503: Argument 2: cannot convert from 'long' to 'char'
+                //        ref1.M5(ref l, l);  // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "char"),
+                // (158,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref int, int)' and 'IRef1.M6(ref long, int)'
+                //        ref1.M6(i, i);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
+                    .WithArguments("IRef1.M6(ref int, int)", "IRef1.M6(ref long, int)"),
+                // (159,19): error CS1503: Argument 2: cannot convert from 'long' to 'int'
+                //        ref1.M6(i, l);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "int"),
+                // (160,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref int, int)' and 'IRef1.M6(ref long, int)'
+                //        ref1.M6(i, c);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
+                    .WithArguments("IRef1.M6(ref int, int)", "IRef1.M6(ref long, int)"),
+                // (161,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //        ref1.M6(l, l);    // CS1620, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
+                // (161,19): error CS1503: Argument 2: cannot convert from 'long' to 'int'
+                //        ref1.M6(l, l);    // CS1620, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "int"),
+                // (162,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref int, int)' and 'IRef1.M6(ref long, int)'
+                //        ref1.M6(c, i);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
+                    .WithArguments("IRef1.M6(ref int, int)", "IRef1.M6(ref long, int)"),
+                // (163,19): error CS1503: Argument 2: cannot convert from 'long' to 'int'
+                //        ref1.M6(c, l);    // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "int"),
+                // (164,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M6(ref int, int)' and 'IRef1.M6(ref long, int)'
+                //        ref1.M6(c, c);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M6")
+                    .WithArguments("IRef1.M6(ref int, int)", "IRef1.M6(ref long, int)"),
+                // (165,23): error CS1503: Argument 2: cannot convert from 'long' to 'int'
+                //        ref1.M6(ref i, l);  // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "int"),
+                // (166,20): error CS1503: Argument 1: cannot convert from 'ref long' to 'ref int'
+                //        ref1.M6(ref l, l);  // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l")
+                    .WithArguments("1", "ref long", "ref int"),
+                // (166,23): error CS1503: Argument 2: cannot convert from 'long' to 'int'
+                //        ref1.M6(ref l, l);  // CS1503, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("2", "long", "int"),
+                // (173,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M7(ref int, long)' and 'IRef1.M7(ref long, ref int)'
+                //        ref1.M7(i, i);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M7")
+                    .WithArguments("IRef1.M7(ref int, long)", "IRef1.M7(ref long, ref int)"),
+                // (174,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M7(ref int, long)' and 'IRef1.M7(ref long, ref int)'
+                //        ref1.M7(i, c);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M7")
+                    .WithArguments("IRef1.M7(ref int, long)", "IRef1.M7(ref long, ref int)"),
+                // (175,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //        ref1.M7(l, l);    // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
+                // (176,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M7(ref int, long)' and 'IRef1.M7(ref long, ref int)'
+                //        ref1.M7(c, i);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M7")
+                    .WithArguments("IRef1.M7(ref int, long)", "IRef1.M7(ref long, ref int)"),
+                // (177,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M7(ref int, long)' and 'IRef1.M7(ref long, ref int)'
+                //        ref1.M7(c, c);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M7")
+                    .WithArguments("IRef1.M7(ref int, long)", "IRef1.M7(ref long, ref int)"),
+                // (178,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
+                //        ref1.M7(i, ref l);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
+                // (179,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //        ref1.M7(l, ref l);  // CS1620, CS1615
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("1", "ref"),
+                // (179,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
+                //        ref1.M7(l, ref l);  // CS1620, CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
+                // (180,23): error CS1615: Argument 2 should not be passed with the 'ref' keyword
+                //        ref1.M7(c, ref l);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("2", "ref"),
+                // (181,27): error CS1615: Argument 2 should not be passed with the 'ref' keyword
+                //        ref1.M7(ref i, ref i);  // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("2", "ref"),
+                // (188,19): error CS1620: Argument 2 must be passed with the 'ref' keyword
+                //        ref1.M8(i, l);    // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
+                // (189,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M8(long, ref int)' and 'IRef1.M8(ref long, int)'
+                //        ref1.M8(i, c);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M8")
+                    .WithArguments("IRef1.M8(long, ref int)", "IRef1.M8(ref long, int)"),
+                // (190,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M8(long, ref int)' and 'IRef1.M8(ref long, int)'
+                //        ref1.M8(l, i);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M8")
+                    .WithArguments("IRef1.M8(long, ref int)", "IRef1.M8(ref long, int)"),
+                // (191,19): error CS1620: Argument 2 must be passed with the 'ref' keyword
+                //        ref1.M8(l, l);    // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
+                // (192,19): error CS1620: Argument 2 must be passed with the 'ref' keyword
+                //        ref1.M8(c, l);    // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
+                // (193,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M8(long, ref int)' and 'IRef1.M8(ref long, int)'
+                //        ref1.M8(c, c);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M8")
+                    .WithArguments("IRef1.M8(long, ref int)", "IRef1.M8(ref long, int)"),
+                // (194,23): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
+                //        ref1.M8(i, ref l);   // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l")
+                    .WithArguments("2", "ref long", "ref int"),
+                // (195,23): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
+                //        ref1.M8(l, ref l);   // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l")
+                    .WithArguments("2", "ref long", "ref int"),
+                // (196,23): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
+                //        ref1.M8(c, ref l);   // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l")
+                    .WithArguments("2", "ref long", "ref int"),
+                // (197,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M8(ref i, i);   // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
+                // (198,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M8(ref i, l);   // CS1615, CS1620
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
+                // (198,23): error CS1620: Argument 2 must be passed with the 'ref' keyword
+                //        ref1.M8(ref i, l);   // CS1615, CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
+                // (199,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M8(ref i, c);   // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
+                // (200,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M8(ref l, l);   // CS1615, CS1620
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (200,23): error CS1620: Argument 2 must be passed with the 'ref' keyword
+                //        ref1.M8(ref l, l);   // CS1615, CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
+                // (201,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M8(ref i, ref i);   // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
+                // (202,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M8(ref i, ref l);   // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "i").WithArguments("1", "ref"),
+                // (202,27): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
+                //        ref1.M8(ref i, ref l);   // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l")
+                    .WithArguments("2", "ref long", "ref int"),
+                // (203,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M8(ref l, ref i);   // CS1615
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (204,20): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                //        ref1.M8(ref l, ref l);   // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "l").WithArguments("1", "ref"),
+                // (204,27): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
+                //        ref1.M8(ref l, ref l);   // CS1615, CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l")
+                    .WithArguments("2", "ref long", "ref int"),
+                // (211,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M9(ref long, ref int)' and 'IRef1.M9(ref int, ref long)'
+                //        ref1.M9(i, i);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M9")
+                    .WithArguments("IRef1.M9(ref long, ref int)", "IRef1.M9(ref int, ref long)"),
+                // (212,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M9(ref long, ref int)' and 'IRef1.M9(ref int, ref long)'
+                //        ref1.M9(i, c);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M9")
+                    .WithArguments("IRef1.M9(ref long, ref int)", "IRef1.M9(ref int, ref long)"),
+                // (213,19): error CS1620: Argument 2 must be passed with the 'ref' keyword
+                //        ref1.M9(l, l);    // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
+                // (214,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M9(ref long, ref int)' and 'IRef1.M9(ref int, ref long)'
+                //        ref1.M9(c, i);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M9")
+                    .WithArguments("IRef1.M9(ref long, ref int)", "IRef1.M9(ref int, ref long)"),
+                // (215,8): error CS0121: The call is ambiguous between the following methods or properties: 'IRef1.M9(ref long, ref int)' and 'IRef1.M9(ref int, ref long)'
+                //        ref1.M9(c, c);    // CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M9")
+                    .WithArguments("IRef1.M9(ref long, ref int)", "IRef1.M9(ref int, ref long)"),
+                // (216,23): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
+                //        ref1.M9(l, ref l);   // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l")
+                    .WithArguments("2", "ref long", "ref int"),
+                // (217,23): error CS1620: Argument 2 must be passed with the 'ref' keyword
+                //        ref1.M9(ref l, l);   // CS1620
+                Diagnostic(ErrorCode.ERR_BadArgRef, "l").WithArguments("2", "ref"),
+                // (218,20): error CS1503: Argument 1: cannot convert from 'ref int' to 'ref long'
+                //        ref1.M9(ref i, ref i);   // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "i")
+                    .WithArguments("1", "ref int", "ref long"),
+                // (219,27): error CS1503: Argument 2: cannot convert from 'ref long' to 'ref int'
+                //        ref1.M9(ref l, ref l);   // CS1503
+                Diagnostic(ErrorCode.ERR_BadArgType, "l")
+                    .WithArguments("2", "ref long", "ref int")
+            );
         }
 
         [Fact]
@@ -6761,39 +6718,34 @@ class C
     static void M3<T>(params T[] a) { }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,15): error CS1503: Argument 2: cannot convert from '<null>' to 'int'
-                    //         M1(1, null);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "null")
-                        .WithArguments("2", "<null>", "int"),
-                    // (7,12): error CS1503: Argument 1: cannot convert from '<null>' to 'int'
-                    //         M1(null, 1);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "null")
-                        .WithArguments("1", "<null>", "int"),
-                    // (12,15): error CS1503: Argument 2: cannot convert from '<null>' to 'int'
-                    //         M3(1, null);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "null")
-                        .WithArguments("2", "<null>", "int"),
-                    // (13,12): error CS1503: Argument 1: cannot convert from '<null>' to 'int'
-                    //         M3(null, 1);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "null")
-                        .WithArguments("1", "<null>", "int"),
-                    // (18,15): error CS1503: Argument 2: cannot convert from 'string' to 'int'
-                    //         M1(1, "A");
-                    Diagnostic(ErrorCode.ERR_BadArgType, @"""A""")
-                        .WithArguments("2", "string", "int"),
-                    // (19,12): error CS1503: Argument 1: cannot convert from 'int' to 'string'
-                    //         M2(1, "A");
-                    Diagnostic(ErrorCode.ERR_BadArgType, "1").WithArguments("1", "int", "string"),
-                    // (20,20): error CS1503: Argument 2: cannot convert from 'string' to 'int'
-                    //         M3<int>(1, "A");
-                    Diagnostic(ErrorCode.ERR_BadArgType, @"""A""")
-                        .WithArguments("2", "string", "int"),
-                    // (21,20): error CS1503: Argument 1: cannot convert from 'int' to 'string'
-                    //         M3<string>(1, "A");
-                    Diagnostic(ErrorCode.ERR_BadArgType, "1").WithArguments("1", "int", "string")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,15): error CS1503: Argument 2: cannot convert from '<null>' to 'int'
+                //         M1(1, null);
+                Diagnostic(ErrorCode.ERR_BadArgType, "null").WithArguments("2", "<null>", "int"),
+                // (7,12): error CS1503: Argument 1: cannot convert from '<null>' to 'int'
+                //         M1(null, 1);
+                Diagnostic(ErrorCode.ERR_BadArgType, "null").WithArguments("1", "<null>", "int"),
+                // (12,15): error CS1503: Argument 2: cannot convert from '<null>' to 'int'
+                //         M3(1, null);
+                Diagnostic(ErrorCode.ERR_BadArgType, "null").WithArguments("2", "<null>", "int"),
+                // (13,12): error CS1503: Argument 1: cannot convert from '<null>' to 'int'
+                //         M3(null, 1);
+                Diagnostic(ErrorCode.ERR_BadArgType, "null").WithArguments("1", "<null>", "int"),
+                // (18,15): error CS1503: Argument 2: cannot convert from 'string' to 'int'
+                //         M1(1, "A");
+                Diagnostic(ErrorCode.ERR_BadArgType, @"""A""")
+                    .WithArguments("2", "string", "int"),
+                // (19,12): error CS1503: Argument 1: cannot convert from 'int' to 'string'
+                //         M2(1, "A");
+                Diagnostic(ErrorCode.ERR_BadArgType, "1").WithArguments("1", "int", "string"),
+                // (20,20): error CS1503: Argument 2: cannot convert from 'string' to 'int'
+                //         M3<int>(1, "A");
+                Diagnostic(ErrorCode.ERR_BadArgType, @"""A""")
+                    .WithArguments("2", "string", "int"),
+                // (21,20): error CS1503: Argument 1: cannot convert from 'int' to 'string'
+                //         M3<string>(1, "A");
+                Diagnostic(ErrorCode.ERR_BadArgType, "1").WithArguments("1", "int", "string")
+            );
         }
 
         [Fact]
@@ -6860,43 +6812,42 @@ public class AggTest {
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (43,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //             M3(null); // Can't infer
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
-                        .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
-                    // (44,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //             M3(a); // Can't infer
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
-                        .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
-                    // (45,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //             M3(i); // Can't infer
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
-                        .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
-                    // (46,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //             M3(g1a); // Can't infer
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
-                        .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
-                    // (47,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //             M3(g11b); // Can't infer
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
-                        .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
-                    // (48,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //             M3(g111c); // Can't infer
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
-                        .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
-                    // NOTE: Dev10 reports "AggTest.B1.M3<S,T>(G2<G1<S>,T>)" for the last two, but this seems just as good (type inference fails for both).
+            CreateCompilation(source).VerifyDiagnostics(
+                // (43,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //             M3(null); // Can't infer
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
+                    .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
+                // (44,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //             M3(a); // Can't infer
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
+                    .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
+                // (45,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //             M3(i); // Can't infer
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
+                    .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
+                // (46,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //             M3(g1a); // Can't infer
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
+                    .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
+                // (47,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //             M3(g11b); // Can't infer
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
+                    .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
+                // (48,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //             M3(g111c); // Can't infer
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
+                    .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
+                // NOTE: Dev10 reports "AggTest.B1.M3<S,T>(G2<G1<S>,T>)" for the last two, but this seems just as good (type inference fails for both).
 
-                    // (50,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //             M3(g2ab); // Can't infer
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
-                        .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
-                    // (55,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //             M3(g2a2bc); // Can't infer
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
-                        .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)")
-                );
+                // (50,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //             M3(g2ab); // Can't infer
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
+                    .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)"),
+                // (55,13): error CS0411: The type arguments for method 'AggTest.B1.M3<S, T>(G1<G2<S, T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //             M3(g2a2bc); // Can't infer
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
+                    .WithArguments("AggTest.B1.M3<S, T>(G1<G2<S, T>>)")
+            );
         }
 
         [WorkItem(528425, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528425")]
@@ -6926,12 +6877,11 @@ public class D
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,9): error CS0122: 'D.M(int, int, string)' is inaccessible due to its protection level
-                    //         d.M(4, 5, "b");
-                    Diagnostic(ErrorCode.ERR_BadAccess, "d.M")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,9): error CS0122: 'D.M(int, int, string)' is inaccessible due to its protection level
+                //         d.M(4, 5, "b");
+                Diagnostic(ErrorCode.ERR_BadAccess, "d.M")
+            );
         }
 
         [WorkItem(545382, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545382")]
@@ -6987,19 +6937,18 @@ class baz
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Ambig.overload1(byte, goo)' and 'Ambig.overload1(int, baz)'
-                    //         overload1(1, 1);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "overload1")
-                        .WithArguments("Ambig.overload1(byte, goo)", "Ambig.overload1(int, baz)")
-                        .WithLocation(6, 9),
-                    // (7,9): error CS0121: The call is ambiguous between the following methods or properties: 'Ambig.overload2(int, baz)' and 'Ambig.overload2(byte, goo)'
-                    //         overload2(1, 1);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "overload2")
-                        .WithArguments("Ambig.overload2(int, baz)", "Ambig.overload2(byte, goo)")
-                        .WithLocation(7, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Ambig.overload1(byte, goo)' and 'Ambig.overload1(int, baz)'
+                //         overload1(1, 1);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "overload1")
+                    .WithArguments("Ambig.overload1(byte, goo)", "Ambig.overload1(int, baz)")
+                    .WithLocation(6, 9),
+                // (7,9): error CS0121: The call is ambiguous between the following methods or properties: 'Ambig.overload2(int, baz)' and 'Ambig.overload2(byte, goo)'
+                //         overload2(1, 1);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "overload2")
+                    .WithArguments("Ambig.overload2(int, baz)", "Ambig.overload2(byte, goo)")
+                    .WithLocation(7, 9)
+            );
         }
 
         [WorkItem(545382, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545382")]
@@ -7071,13 +7020,12 @@ public class Q
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Ambig.F(P1)' and 'Ambig.F(P2)'
-                    //         F(new Q());
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "F")
-                        .WithArguments("Ambig.F(P1)", "Ambig.F(P2)")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Ambig.F(P1)' and 'Ambig.F(P2)'
+                //         F(new Q());
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F")
+                    .WithArguments("Ambig.F(P1)", "Ambig.F(P2)")
+            );
         }
 
         [WorkItem(545467, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545467")]
@@ -7241,9 +7189,9 @@ class MainClass
                 // (8,13): error CS0019: Operator '+' cannot be applied to operands of type 'MainClass' and 'lambda expression'
                 //         r = r + ((MainClass x) => x + (MainClass)((MainClass y) => (y + null)));
                 Diagnostic(
-                        ErrorCode.ERR_BadBinaryOps,
-                        "r + ((MainClass x) => x + (MainClass)((MainClass y) => (y + null)))"
-                    )
+                    ErrorCode.ERR_BadBinaryOps,
+                    "r + ((MainClass x) => x + (MainClass)((MainClass y) => (y + null)))"
+                )
                     .WithArguments("+", "MainClass", "lambda expression")
             );
         }
@@ -7288,16 +7236,16 @@ class MainClass
                 // (7,13): error CS0019: Operator '+' cannot be applied to operands of type 'MainClass' and 'lambda expression'
                 //         r = r + ((MainClass x) => (x + ((MainClass y) => (y + null))));
                 Diagnostic(
-                        ErrorCode.ERR_BadBinaryOps,
-                        "r + ((MainClass x) => (x + ((MainClass y) => (y + null))))"
-                    )
+                    ErrorCode.ERR_BadBinaryOps,
+                    "r + ((MainClass x) => (x + ((MainClass y) => (y + null))))"
+                )
                     .WithArguments("+", "MainClass", "lambda expression"),
                 // (8,13): error CS0019: Operator '+' cannot be applied to operands of type 'MainClass' and 'lambda expression'
                 //         r = r + ((MainClass x) => (x + (MainClass)((MainClass y) => (y + null))));
                 Diagnostic(
-                        ErrorCode.ERR_BadBinaryOps,
-                        "r + ((MainClass x) => (x + (MainClass)((MainClass y) => (y + null))))"
-                    )
+                    ErrorCode.ERR_BadBinaryOps,
+                    "r + ((MainClass x) => (x + (MainClass)((MainClass y) => (y + null))))"
+                )
                     .WithArguments("+", "MainClass", "lambda expression"),
                 // (9,52): error CS0019: Operator '+' cannot be applied to operands of type 'MainClass' and 'lambda expression'
                 //         System.Func<MainClass, MainClass> f = x => x + (y => y);
@@ -7336,16 +7284,16 @@ class MainClass
                 // (7,13): error CS0019: Operator '+' cannot be applied to operands of type 'MainClass' and 'lambda expression'
                 //         r = r + ((MainClass x) => x + ((MainClass y) => (y + null)));
                 Diagnostic(
-                        ErrorCode.ERR_BadBinaryOps,
-                        "r + ((MainClass x) => x + ((MainClass y) => (y + null)))"
-                    )
+                    ErrorCode.ERR_BadBinaryOps,
+                    "r + ((MainClass x) => x + ((MainClass y) => (y + null)))"
+                )
                     .WithArguments("+", "MainClass", "lambda expression"),
                 // (8,13): error CS0019: Operator '+' cannot be applied to operands of type 'MainClass' and 'lambda expression'
                 //         r = r + ((MainClass x) => x + (MainClass)((MainClass y) => (y + null)));
                 Diagnostic(
-                        ErrorCode.ERR_BadBinaryOps,
-                        "r + ((MainClass x) => x + (MainClass)((MainClass y) => (y + null)))"
-                    )
+                    ErrorCode.ERR_BadBinaryOps,
+                    "r + ((MainClass x) => x + (MainClass)((MainClass y) => (y + null)))"
+                )
                     .WithArguments("+", "MainClass", "lambda expression")
             );
         }
@@ -7385,7 +7333,7 @@ public class Test
         public void TestNamedParamsParam()
         {
             CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static void M(
@@ -7407,9 +7355,8 @@ class C
         C.M(0, z: """");
     }
 }",
-                    expectedOutput: "2"
-                )
-                .VerifyDiagnostics();
+                expectedOutput: "2"
+            ).VerifyDiagnostics();
         }
 
         [WorkItem(531173, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531173")]
@@ -7431,13 +7378,12 @@ public class C
 	}
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,20): error CS0115: 'C.Override<T>(T)': no suitable method found to override
-                    //     public override T Override<T>(T t)
-                    Diagnostic(ErrorCode.ERR_OverrideNotExpected, "Override")
-                        .WithArguments("C.Override<T>(T)")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,20): error CS0115: 'C.Override<T>(T)': no suitable method found to override
+                //     public override T Override<T>(T t)
+                Diagnostic(ErrorCode.ERR_OverrideNotExpected, "Override")
+                    .WithArguments("C.Override<T>(T)")
+            );
         }
 
         [WorkItem(547186, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/547186")]
@@ -7466,26 +7412,25 @@ class C : A
     // Not finished typing yet.
 ";
             // Doesn't assert.
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (18,41): error CS1514: { expected
-                    //     public override int this[string arg]
-                    Diagnostic(ErrorCode.ERR_LbraceExpected, ""),
-                    // (18,41): error CS1513: } expected
-                    //     public override int this[string arg]
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
-                    // (18,41): error CS1513: } expected
-                    //     public override int this[string arg]
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
-                    // (18,25): error CS0548: 'C.this[string]': property or indexer must have at least one accessor
-                    //     public override int this[string arg]
-                    Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this")
-                        .WithArguments("C.this[string]"),
-                    // (16,7): error CS0534: 'C' does not implement inherited abstract member 'A.this[string].set'
-                    // class C : A
-                    Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "C")
-                        .WithArguments("C", "A.this[string].set")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (18,41): error CS1514: { expected
+                //     public override int this[string arg]
+                Diagnostic(ErrorCode.ERR_LbraceExpected, ""),
+                // (18,41): error CS1513: } expected
+                //     public override int this[string arg]
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
+                // (18,41): error CS1513: } expected
+                //     public override int this[string arg]
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ""),
+                // (18,25): error CS0548: 'C.this[string]': property or indexer must have at least one accessor
+                //     public override int this[string arg]
+                Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this")
+                    .WithArguments("C.this[string]"),
+                // (16,7): error CS0534: 'C' does not implement inherited abstract member 'A.this[string].set'
+                // class C : A
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "C")
+                    .WithArguments("C", "A.this[string].set")
+            );
         }
 
         [Fact]
@@ -7562,9 +7507,9 @@ class D<T>
             // Dev11 reports error CS0411: The type arguments for method 'C.Bar<T>(D<T>.E*[])' cannot be inferred from the usage. Try
             // specifying the type arguments explicitly.
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    options: TestOptions.UnsafeReleaseDll
-                )
+                source,
+                options: TestOptions.UnsafeReleaseDll
+            )
                 .VerifyDiagnostics();
         }
 
@@ -7652,16 +7597,15 @@ public class Test
     }
 }";
             // Doesn't assert.
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (20,16): error CS0121: The call is ambiguous between the following methods or properties: 'Test.Goo(Test.nongenerics, dynamic)' and 'Test.Goo<T>(Test.generics<T>, dynamic)'
-                    //         return Goo(method, "abc");
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Goo")
-                        .WithArguments(
-                            "Test.Goo(Test.nongenerics, dynamic)",
-                            "Test.Goo<T>(Test.generics<T>, dynamic)"
-                        )
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (20,16): error CS0121: The call is ambiguous between the following methods or properties: 'Test.Goo(Test.nongenerics, dynamic)' and 'Test.Goo<T>(Test.generics<T>, dynamic)'
+                //         return Goo(method, "abc");
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Goo")
+                    .WithArguments(
+                        "Test.Goo(Test.nongenerics, dynamic)",
+                        "Test.Goo<T>(Test.generics<T>, dynamic)"
+                    )
+            );
         }
 
         [WorkItem(662641, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/662641")]
@@ -7771,13 +7715,12 @@ static class Extensions
     public static void Add(this IViewable @this, object obj = null) { }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (8,16): warning CS0618: 'Extensions.Add(IViewable2)' is obsolete: 'A'
-                    //         v.View(v.Add);
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "v.Add")
-                        .WithArguments("Extensions.Add(IViewable2)", "A")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (8,16): warning CS0618: 'Extensions.Add(IViewable2)' is obsolete: 'A'
+                //         v.View(v.Add);
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "v.Add")
+                    .WithArguments("Extensions.Add(IViewable2)", "A")
+            );
         }
 
         [WorkItem(718294, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/718294")]
@@ -7814,13 +7757,12 @@ static class Extensions
     public static void Add(this IViewable @this, params object[] obj) { }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (8,16): warning CS0618: 'Extensions.Add(IViewable2)' is obsolete: 'A'
-                    //         v.View(v.Add);
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "v.Add")
-                        .WithArguments("Extensions.Add(IViewable2)", "A")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (8,16): warning CS0618: 'Extensions.Add(IViewable2)' is obsolete: 'A'
+                //         v.View(v.Add);
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "v.Add")
+                    .WithArguments("Extensions.Add(IViewable2)", "A")
+            );
         }
 
         [WorkItem(709114, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/709114")]
@@ -8495,10 +8437,8 @@ namespace C
 
             Assert.Equal(
                 "(30,19): error CS0121: The call is ambiguous between the following methods or properties: 'A.B.X.Test(int)' and 'A.C.X.Test(int)'",
-                DiagnosticFormatter.Instance.Format(
-                    comp.GetDiagnostics()[0],
-                    EnsureEnglishUICulture.PreferredOrNull
-                )
+                DiagnosticFormatter.Instance
+                    .Format(comp.GetDiagnostics()[0], EnsureEnglishUICulture.PreferredOrNull)
             );
         }
 
@@ -8584,10 +8524,10 @@ namespace ConsoleApplication2
 ";
 
             CreateCompilation(
-                    source1,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.WithoutImprovedOverloadCandidates
-                )
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            )
                 .VerifyDiagnostics(
                     // (25,38): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Bar<T, V>.Create(Func<T, bool>)' and 'Program.Bar<T, V>.Create(Func<T, V>, params Func<T, bool>[])'
                     //             var x = Bar<Goo, double>.Create(Goo.IsThing);
@@ -8686,10 +8626,10 @@ namespace ConsoleApplication2
 ";
 
             CreateCompilation(
-                    source1,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.WithoutImprovedOverloadCandidates
-                )
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            )
                 .VerifyDiagnostics(
                     // (25,38): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Bar<T, V>.Create(Func<T, bool>, params int[])' and 'Program.Bar<T, V>.Create(Func<T, V>)'
                     //             var x = Bar<Goo, double>.Create(Goo.IsThing);
@@ -8742,10 +8682,10 @@ namespace ConsoleApplication2
 ";
 
             CreateCompilation(
-                    source1,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.WithoutImprovedOverloadCandidates
-                )
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            )
                 .VerifyDiagnostics(
                     // (25,38): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Bar<T, V>.Create(Func<T, V>)' and 'Program.Bar<T, V>.Create(Func<T, bool>, params int[])'
                     //             var x = Bar<Goo, double>.Create(Goo.IsThing);
@@ -8798,10 +8738,10 @@ namespace ConsoleApplication2
 ";
 
             CreateCompilation(
-                    source1,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.WithoutImprovedOverloadCandidates
-                )
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            )
                 .VerifyDiagnostics(
                     // (25,38): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Bar<T, V>.Create(Func<T, V>, params Func<T, bool>[])' and 'Program.Bar<T, V>.Create(Func<T, bool>)'
                     //             var x = Bar<Goo, double>.Create(Goo.IsThing);
@@ -8852,10 +8792,10 @@ namespace ConsoleApplication2
 ";
 
             CreateCompilation(
-                    source1,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.WithoutImprovedOverloadCandidates
-                )
+                source1,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            )
                 .VerifyDiagnostics(
                     // (23,38): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Bar<T, V>.Create(Func<T, bool>, params int[])' and 'Program.Bar<T, V>.Create(Func<T, V>, params int[])'
                     //             var x = Bar<Goo, double>.Create(Goo.IsThing);
@@ -9212,16 +9152,15 @@ class Program
     }
 }";
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"pass
+                source,
+                expectedOutput: @"pass
 pass"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
             CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseDll,
-                    parseOptions: TestOptions.Regular.WithStrictFeature()
-                )
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.Regular.WithStrictFeature()
+            )
                 .VerifyDiagnostics(
                     // (12,36): error CS1657: Cannot use 'M' as a ref or out value because it is a 'method group'
                     //         Action a1 = new Action(ref M);
@@ -10031,14 +9970,13 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (11,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(Del1)' and 'Program.Method(Del2)'
-                    //         Method(() => null);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments("Program.Method(Del1)", "Program.Method(Del2)")
-                        .WithLocation(11, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (11,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(Del1)' and 'Program.Method(Del2)'
+                //         Method(() => null);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments("Program.Method(Del1)", "Program.Method(Del2)")
+                    .WithLocation(11, 9)
+            );
         }
 
         [Fact, WorkItem(12061, "https://github.com/dotnet/roslyn/issues/12061")]
@@ -10059,14 +9997,13 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (11,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(Del1)' and 'Program.Method(Del2)'
-                    //         Method(() => null);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments("Program.Method(Del1)", "Program.Method(Del2)")
-                        .WithLocation(11, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (11,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(Del1)' and 'Program.Method(Del2)'
+                //         Method(() => null);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments("Program.Method(Del1)", "Program.Method(Del2)")
+                    .WithLocation(11, 9)
+            );
         }
 
         [Fact, WorkItem(12061, "https://github.com/dotnet/roslyn/issues/12061")]
@@ -10087,17 +10024,13 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (11,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(Del1<string>)' and 'Program.Method(Del2<string>)'
-                    //         Method(() => null);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments(
-                            "Program.Method(Del1<string>)",
-                            "Program.Method(Del2<string>)"
-                        )
-                        .WithLocation(11, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (11,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(Del1<string>)' and 'Program.Method(Del2<string>)'
+                //         Method(() => null);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments("Program.Method(Del1<string>)", "Program.Method(Del2<string>)")
+                    .WithLocation(11, 9)
+            );
         }
 
         [Fact, WorkItem(12061, "https://github.com/dotnet/roslyn/issues/12061")]
@@ -10119,14 +10052,13 @@ class Program
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (12,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(Del1)' and 'Program.Method(Del2)'
-                    //         Method(() => null);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments("Program.Method(Del1)", "Program.Method(Del2)")
-                        .WithLocation(12, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (12,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(Del1)' and 'Program.Method(Del2)'
+                //         Method(() => null);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments("Program.Method(Del1)", "Program.Method(Del2)")
+                    .WithLocation(12, 9)
+            );
         }
 
         [Fact, WorkItem(13380, "https://github.com/dotnet/roslyn/issues/13380")]
@@ -10437,14 +10369,13 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (11,20): error CS1615: Argument 1 may not be passed with the 'ref' keyword
-                    //         Method(ref x);
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "x")
-                        .WithArguments("1", "ref")
-                        .WithLocation(11, 20)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (11,20): error CS1615: Argument 1 may not be passed with the 'ref' keyword
+                //         Method(ref x);
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "x")
+                    .WithArguments("1", "ref")
+                    .WithLocation(11, 20)
+            );
         }
 
         [Fact]
@@ -10465,14 +10396,13 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (11,20): error CS1615: Argument 1 may not be passed with the 'out' keyword
-                    //         Method(out x);
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "x")
-                        .WithArguments("1", "out")
-                        .WithLocation(11, 20)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (11,20): error CS1615: Argument 1 may not be passed with the 'out' keyword
+                //         Method(out x);
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "x")
+                    .WithArguments("1", "out")
+                    .WithLocation(11, 20)
+            );
         }
 
         [Fact]
@@ -10515,14 +10445,13 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (11,16): error CS1503: Argument 1: cannot convert from 'System.Exception' to 'in int'
-                    //         Method(x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x")
-                        .WithArguments("1", "System.Exception", "in int")
-                        .WithLocation(11, 16)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (11,16): error CS1503: Argument 1: cannot convert from 'System.Exception' to 'in int'
+                //         Method(x);
+                Diagnostic(ErrorCode.ERR_BadArgType, "x")
+                    .WithArguments("1", "System.Exception", "in int")
+                    .WithLocation(11, 16)
+            );
         }
 
         [WorkItem(20799, "https://github.com/dotnet/roslyn/issues/20799")]
@@ -10544,14 +10473,13 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (11,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
-                    //         Method(x);
-                    Diagnostic(ErrorCode.ERR_BadArgRef, "x")
-                        .WithArguments("1", "ref")
-                        .WithLocation(11, 16)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (11,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
+                //         Method(x);
+                Diagnostic(ErrorCode.ERR_BadArgRef, "x")
+                    .WithArguments("1", "ref")
+                    .WithLocation(11, 16)
+            );
         }
 
         [Fact]
@@ -11064,19 +10992,18 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(in int, int)' and 'Program.Method(int, in int)'
-                    //         Method(x, y);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments("Program.Method(in int, int)", "Program.Method(int, in int)")
-                        .WithLocation(18, 9),
-                    // (19,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(in int, int)' and 'Program.Method(int, in int)'
-                    //         Method(3, 4);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments("Program.Method(in int, int)", "Program.Method(int, in int)")
-                        .WithLocation(19, 9)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(in int, int)' and 'Program.Method(int, in int)'
+                //         Method(x, y);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments("Program.Method(in int, int)", "Program.Method(int, in int)")
+                    .WithLocation(18, 9),
+                // (19,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(in int, int)' and 'Program.Method(int, in int)'
+                //         Method(3, 4);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments("Program.Method(in int, int)", "Program.Method(int, in int)")
+                    .WithLocation(19, 9)
+            );
         }
 
         [Fact]
@@ -11105,19 +11032,18 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(int, in int)' and 'Program.Method(in int, int)'
-                    //         Method(x, y);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments("Program.Method(int, in int)", "Program.Method(in int, int)")
-                        .WithLocation(18, 9),
-                    // (19,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(int, in int)' and 'Program.Method(in int, int)'
-                    //         Method(3, 4);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments("Program.Method(int, in int)", "Program.Method(in int, int)")
-                        .WithLocation(19, 9)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(int, in int)' and 'Program.Method(in int, int)'
+                //         Method(x, y);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments("Program.Method(int, in int)", "Program.Method(in int, int)")
+                    .WithLocation(18, 9),
+                // (19,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(int, in int)' and 'Program.Method(in int, int)'
+                //         Method(3, 4);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments("Program.Method(int, in int)", "Program.Method(in int, int)")
+                    .WithLocation(19, 9)
+            );
         }
 
         [Fact]
@@ -11146,25 +11072,24 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(in int, int, in int)' and 'Program.Method(int, in int, int)'
-                    //         Method(x, y, z);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments(
-                            "Program.Method(in int, int, in int)",
-                            "Program.Method(int, in int, int)"
-                        )
-                        .WithLocation(18, 9),
-                    // (19,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(in int, int, in int)' and 'Program.Method(int, in int, int)'
-                    //         Method(4, 5, 6);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments(
-                            "Program.Method(in int, int, in int)",
-                            "Program.Method(int, in int, int)"
-                        )
-                        .WithLocation(19, 9)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(in int, int, in int)' and 'Program.Method(int, in int, int)'
+                //         Method(x, y, z);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments(
+                        "Program.Method(in int, int, in int)",
+                        "Program.Method(int, in int, int)"
+                    )
+                    .WithLocation(18, 9),
+                // (19,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(in int, int, in int)' and 'Program.Method(int, in int, int)'
+                //         Method(4, 5, 6);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments(
+                        "Program.Method(in int, int, in int)",
+                        "Program.Method(int, in int, int)"
+                    )
+                    .WithLocation(19, 9)
+            );
         }
 
         [Fact]
@@ -11193,32 +11118,31 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(int, in int, int)' and 'Program.Method(in int, int, in int)'
-                    //         Method(x, y, z);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments(
-                            "Program.Method(int, in int, int)",
-                            "Program.Method(in int, int, in int)"
-                        )
-                        .WithLocation(18, 9),
-                    // (19,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(int, in int, int)' and 'Program.Method(in int, int, in int)'
-                    //         Method(4, 5, 6);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments(
-                            "Program.Method(int, in int, int)",
-                            "Program.Method(in int, int, in int)"
-                        )
-                        .WithLocation(19, 9)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(int, in int, int)' and 'Program.Method(in int, int, in int)'
+                //         Method(x, y, z);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments(
+                        "Program.Method(int, in int, int)",
+                        "Program.Method(in int, int, in int)"
+                    )
+                    .WithLocation(18, 9),
+                // (19,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Method(int, in int, int)' and 'Program.Method(in int, int, in int)'
+                //         Method(4, 5, 6);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments(
+                        "Program.Method(int, in int, int)",
+                        "Program.Method(in int, int, in int)"
+                    )
+                    .WithLocation(19, 9)
+            );
         }
 
         [Fact]
         public void PassingInArgumentsOverloadedOnIn_ConflictingParameters_Error_BinaryOperators()
         {
             CreateCompilation(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -11235,21 +11159,20 @@ class Program
         Console.WriteLine(a + b);
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (15,27): error CS0034: Operator '+' is ambiguous on operands of type 'Test' and 'Test'
-                    //         Console.WriteLine(a + b);
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "a + b")
-                        .WithArguments("+", "Test", "Test")
-                        .WithLocation(15, 27)
-                );
+            ).VerifyDiagnostics(
+                // (15,27): error CS0034: Operator '+' is ambiguous on operands of type 'Test' and 'Test'
+                //         Console.WriteLine(a + b);
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "a + b")
+                    .WithArguments("+", "Test", "Test")
+                    .WithLocation(15, 27)
+            );
         }
 
         [Fact]
         public void PassingInArgumentsOverloadedOnIn_ConflictingParameters_Error_BinaryOperators_Inverse()
         {
             CreateCompilation(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -11266,14 +11189,13 @@ class Program
         Console.WriteLine(a + b);
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (15,27): error CS0034: Operator '+' is ambiguous on operands of type 'Test' and 'Test'
-                    //         Console.WriteLine(a + b);
-                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "a + b")
-                        .WithArguments("+", "Test", "Test")
-                        .WithLocation(15, 27)
-                );
+            ).VerifyDiagnostics(
+                // (15,27): error CS0034: Operator '+' is ambiguous on operands of type 'Test' and 'Test'
+                //         Console.WriteLine(a + b);
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "a + b")
+                    .WithArguments("+", "Test", "Test")
+                    .WithLocation(15, 27)
+            );
         }
 
         [Fact]
@@ -11420,14 +11342,13 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (17,19): error CS1615: Argument 1 may not be passed with the 'in' keyword
-                    //         Method(in x, op3: 0);       // ERROR
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "x")
-                        .WithArguments("1", "in")
-                        .WithLocation(17, 19)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (17,19): error CS1615: Argument 1 may not be passed with the 'in' keyword
+                //         Method(in x, op3: 0);       // ERROR
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "x")
+                    .WithArguments("1", "in")
+                    .WithLocation(17, 19)
+            );
         }
 
         [Fact]
@@ -11494,20 +11415,19 @@ public static class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (17,19): error CS1503: Argument 1: cannot convert from 'in byte' to 'in int'
-                    //         Method(in x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x")
-                        .WithArguments("1", "in byte", "in int")
-                        .WithLocation(17, 19),
-                    // (20,26): error CS1510: A ref or out value must be an assignable variable
-                    //         Method(valP: out 2);
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "2").WithLocation(20, 26),
-                    // (21,25): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
-                    //         Method(valP: in 2);
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "2").WithLocation(21, 25)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (17,19): error CS1503: Argument 1: cannot convert from 'in byte' to 'in int'
+                //         Method(in x);
+                Diagnostic(ErrorCode.ERR_BadArgType, "x")
+                    .WithArguments("1", "in byte", "in int")
+                    .WithLocation(17, 19),
+                // (20,26): error CS1510: A ref or out value must be an assignable variable
+                //         Method(valP: out 2);
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "2").WithLocation(20, 26),
+                // (21,25): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
+                //         Method(valP: in 2);
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "2").WithLocation(21, 25)
+            );
         }
 
         [Fact]
@@ -11599,20 +11519,19 @@ public class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (27,18): error CS1503: Argument 1: cannot convert from 'in byte' to 'in int'
-                    //         _ = p[in x];
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x")
-                        .WithArguments("1", "in byte", "in int")
-                        .WithLocation(27, 18),
-                    // (30,25): error CS1510: A ref or out value must be an assignable variable
-                    //         _ = p[valP: out 2];
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "2").WithLocation(30, 25),
-                    // (31,23): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
-                    //         _ = p[inP: in 2];
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "2").WithLocation(31, 23)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (27,18): error CS1503: Argument 1: cannot convert from 'in byte' to 'in int'
+                //         _ = p[in x];
+                Diagnostic(ErrorCode.ERR_BadArgType, "x")
+                    .WithArguments("1", "in byte", "in int")
+                    .WithLocation(27, 18),
+                // (30,25): error CS1510: A ref or out value must be an assignable variable
+                //         _ = p[valP: out 2];
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "2").WithLocation(30, 25),
+                // (31,23): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
+                //         _ = p[inP: in 2];
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "2").WithLocation(31, 23)
+            );
         }
 
         [Fact]
@@ -11919,7 +11838,7 @@ class Program
         public void PassingArgumentsToOverloadsOfByValAndInParameters_TypeConversions_NonConvertible_Error()
         {
             CreateCompilation(
-                    @"
+                @"
 using System;
 using System.Text;
 class Program
@@ -11932,14 +11851,13 @@ class Program
         M(null);
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (11,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(string)' and 'Program.M(StringBuilder)'
-                    //         M(null);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
-                        .WithArguments("Program.M(string)", "Program.M(System.Text.StringBuilder)")
-                        .WithLocation(11, 9)
-                );
+            ).VerifyDiagnostics(
+                // (11,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(string)' and 'Program.M(StringBuilder)'
+                //         M(null);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                    .WithArguments("Program.M(string)", "Program.M(System.Text.StringBuilder)")
+                    .WithLocation(11, 9)
+            );
         }
 
         [Fact]
@@ -12018,44 +11936,43 @@ class Program
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (15,9): error CS0411: The type arguments for method 'Program.M1<T>(in T, in T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         M1(null, null);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
-                        .WithArguments("Program.M1<T>(in T, in T)")
-                        .WithLocation(15, 9),
-                    // (16,12): error CS1503: Argument 1: cannot convert from '<null>' to 'in int'
-                    //         M1(null, 1);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "null")
-                        .WithArguments("1", "<null>", "in int")
-                        .WithLocation(16, 12),
-                    // (17,9): error CS0411: The type arguments for method 'Program.M1<T>(in T, in T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         M1(new object(), default(RefLike));
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
-                        .WithArguments("Program.M1<T>(in T, in T)")
-                        .WithLocation(17, 9),
-                    // (19,9): error CS0306: The type 'Program.RefLike' may not be used as a type argument
-                    //         M1(rl, rl);
-                    Diagnostic(ErrorCode.ERR_BadTypeArgument, "M1")
-                        .WithArguments("Program.RefLike")
-                        .WithLocation(19, 9),
-                    // (20,9): error CS0306: The type 'Program.RefLike' may not be used as a type argument
-                    //         M1(in rl, in rl);
-                    Diagnostic(ErrorCode.ERR_BadTypeArgument, "M1")
-                        .WithArguments("Program.RefLike")
-                        .WithLocation(20, 9),
-                    // (22,9): error CS0411: The type arguments for method 'Program.M1<T>(in T, in T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         M1(in y, in x);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
-                        .WithArguments("Program.M1<T>(in T, in T)")
-                        .WithLocation(22, 9),
-                    // (23,9): error CS0411: The type arguments for method 'Program.M1<T>(in T, in T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         M1(in y, x);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
-                        .WithArguments("Program.M1<T>(in T, in T)")
-                        .WithLocation(23, 9)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (15,9): error CS0411: The type arguments for method 'Program.M1<T>(in T, in T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M1(null, null);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
+                    .WithArguments("Program.M1<T>(in T, in T)")
+                    .WithLocation(15, 9),
+                // (16,12): error CS1503: Argument 1: cannot convert from '<null>' to 'in int'
+                //         M1(null, 1);
+                Diagnostic(ErrorCode.ERR_BadArgType, "null")
+                    .WithArguments("1", "<null>", "in int")
+                    .WithLocation(16, 12),
+                // (17,9): error CS0411: The type arguments for method 'Program.M1<T>(in T, in T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M1(new object(), default(RefLike));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
+                    .WithArguments("Program.M1<T>(in T, in T)")
+                    .WithLocation(17, 9),
+                // (19,9): error CS0306: The type 'Program.RefLike' may not be used as a type argument
+                //         M1(rl, rl);
+                Diagnostic(ErrorCode.ERR_BadTypeArgument, "M1")
+                    .WithArguments("Program.RefLike")
+                    .WithLocation(19, 9),
+                // (20,9): error CS0306: The type 'Program.RefLike' may not be used as a type argument
+                //         M1(in rl, in rl);
+                Diagnostic(ErrorCode.ERR_BadTypeArgument, "M1")
+                    .WithArguments("Program.RefLike")
+                    .WithLocation(20, 9),
+                // (22,9): error CS0411: The type arguments for method 'Program.M1<T>(in T, in T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M1(in y, in x);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
+                    .WithArguments("Program.M1<T>(in T, in T)")
+                    .WithLocation(22, 9),
+                // (23,9): error CS0411: The type arguments for method 'Program.M1<T>(in T, in T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M1(in y, x);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
+                    .WithArguments("Program.M1<T>(in T, in T)")
+                    .WithLocation(23, 9)
+            );
         }
 
         [Fact]
@@ -12135,9 +12052,9 @@ class Program
 ";
 
             CreateCompilationWithMscorlib40(
-                    code,
-                    references: new[] { SystemRuntimeFacadeRef, ValueTupleRef }
-                )
+                code,
+                references: new[] { SystemRuntimeFacadeRef, ValueTupleRef }
+            )
                 .VerifyDiagnostics(
                     // (15,9): error CS0411: The type arguments for method 'Program.Method<T>(in (T arg1, T arg2))' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                     //         Method((null, null));
@@ -12190,7 +12107,8 @@ class Program
                         .WithLocation(20, 19),
                     // (22,19): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                     //         Method(in (y, x));
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "(y, x)").WithLocation(22, 19)
+                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "(y, x)")
+                        .WithLocation(22, 19)
                 );
         }
 
@@ -12215,14 +12133,13 @@ class Program
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (13,9): error CS0411: The type arguments for method 'Program.M1<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         M1((in int arg1, in int arg2) => throw null, (in int arg1, in int arg2) => throw null);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
-                        .WithArguments("Program.M1<T>(T, T)")
-                        .WithLocation(13, 9)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (13,9): error CS0411: The type arguments for method 'Program.M1<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M1((in int arg1, in int arg2) => throw null, (in int arg1, in int arg2) => throw null);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
+                    .WithArguments("Program.M1<T>(T, T)")
+                    .WithLocation(13, 9)
+            );
         }
 
         [Fact]
@@ -12247,9 +12164,9 @@ public static class Extensions
 ";
 
             var libComp = CreateCompilationWithMscorlib40(
-                    librarySrc,
-                    references: new[] { TestMetadata.Net40.SystemCore }
-                )
+                librarySrc,
+                references: new[] { TestMetadata.Net40.SystemCore }
+            )
                 .VerifyDiagnostics();
 
             var code =
@@ -12320,14 +12237,13 @@ class Program
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (13,30): error CS0123: No overload for 'F' matches delegate 'Action<DateTime>'
-                    //         Action<DateTime> a = F;
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "F")
-                        .WithArguments("F", "System.Action<System.DateTime>")
-                        .WithLocation(13, 30)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (13,30): error CS0123: No overload for 'F' matches delegate 'Action<DateTime>'
+                //         Action<DateTime> a = F;
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "F")
+                    .WithArguments("F", "System.Action<System.DateTime>")
+                    .WithLocation(13, 30)
+            );
         }
 
         [Fact]
@@ -12417,14 +12333,13 @@ class Program
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (16,15): error CS8189: Ref mismatch between 'Program.F(in DateTime)' and delegate 'Program.D'
-                    //         D a = F;
-                    Diagnostic(ErrorCode.ERR_DelegateRefMismatch, "F")
-                        .WithArguments("Program.F(in System.DateTime)", "Program.D")
-                        .WithLocation(16, 15)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (16,15): error CS8189: Ref mismatch between 'Program.F(in DateTime)' and delegate 'Program.D'
+                //         D a = F;
+                Diagnostic(ErrorCode.ERR_DelegateRefMismatch, "F")
+                    .WithArguments("Program.F(in System.DateTime)", "Program.D")
+                    .WithLocation(16, 15)
+            );
         }
 
         [Fact]
@@ -12452,14 +12367,13 @@ class Program
 }
 ";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (16,15): error CS0407: 'string Program.F(in DateTime)' has the wrong return type
-                    //         D a = F;
-                    Diagnostic(ErrorCode.ERR_BadRetType, "F")
-                        .WithArguments("Program.F(in System.DateTime)", "string")
-                        .WithLocation(16, 15)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (16,15): error CS0407: 'string Program.F(in DateTime)' has the wrong return type
+                //         D a = F;
+                Diagnostic(ErrorCode.ERR_BadRetType, "F")
+                    .WithArguments("Program.F(in System.DateTime)", "string")
+                    .WithLocation(16, 15)
+            );
         }
 
         [Fact, WorkItem(25813, "https://github.com/dotnet/roslyn/issues/25813")]

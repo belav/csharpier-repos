@@ -627,8 +627,8 @@ class C
         {
             var instructionDecoder = CSharpInstructionDecoder.Instance;
             var serializedTypeArgumentNames = typeArguments?.Select(
-                    t => (t != null) ? t.AssemblyQualifiedName : null
-                )
+                t => (t != null) ? t.AssemblyQualifiedName : null
+            )
                 .ToArray();
             var method = GetConstructedMethod(
                 source,

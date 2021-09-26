@@ -2335,10 +2335,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -2397,10 +2395,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -2519,10 +2515,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -2565,10 +2559,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -2627,10 +2619,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -2668,10 +2658,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -2715,10 +2703,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -2762,10 +2748,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -2902,10 +2886,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -2960,10 +2942,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -3082,10 +3062,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -3140,10 +3118,8 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer.Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -3292,10 +3268,8 @@ partial record C
                                         .OfType<IMethodSymbol>()
                                         .First(
                                             m =>
-                                                SymbolEqualityComparer.Default.Equals(
-                                                    m.Parameters[0].Type,
-                                                    m.ContainingType
-                                                )
+                                                SymbolEqualityComparer.Default
+                                                    .Equals(m.Parameters[0].Type, m.ContainingType)
                                         )
                             ),
                             SemanticEdit(
@@ -3377,10 +3351,8 @@ partial record C
                                         .OfType<IMethodSymbol>()
                                         .First(
                                             m =>
-                                                SymbolEqualityComparer.Default.Equals(
-                                                    m.Parameters[0].Type,
-                                                    m.ContainingType
-                                                )
+                                                SymbolEqualityComparer.Default
+                                                    .Equals(m.Parameters[0].Type, m.ContainingType)
                                         )
                             ),
                             SemanticEdit(

@@ -37,9 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected override Expression RewriteExpectedQueryExpression(
             Expression expectedQueryExpression
         ) =>
-            new ExpectedQueryRewritingVisitor(Fixture.GetShadowPropertyMappings()).Visit(
-                expectedQueryExpression
-            );
+            new ExpectedQueryRewritingVisitor(Fixture.GetShadowPropertyMappings())
+                .Visit(expectedQueryExpression);
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
@@ -380,7 +379,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var tags = context.Tags.Select(t => (Guid?)t.Id).ToList();
 
-            var query = context.Gears.Include(g => g.Tag)
+            var query = context.Gears
+                .Include(g => g.Tag)
                 .Where(g => g.Tag != null && tags.Contains(g.Tag.Id));
 
             var gears = async ? (await query.ToListAsync()) : query.ToList();
@@ -399,7 +399,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var tags = context.Tags.Select(t => (Guid?)t.Id).ToList();
 
-            var query = context.Gears.Include(g => g.Tag)
+            var query = context.Gears
+                .Include(g => g.Tag)
                 .Where(g => g.CityOfBirth.Location != null && tags.Contains(g.Tag.Id));
 
             var gears = async ? (await query.ToListAsync()) : query.ToList();
@@ -802,13 +803,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Where(
                             g =>
-                                g.Rank.HasFlag(
-                                    ss.Set<Gear>()
-                                        .OrderBy(x => x.Nickname)
-                                        .ThenBy(x => x.SquadId)
-                                        .Select(x => x.Rank)
-                                        .FirstOrDefault()
-                                )
+                                g.Rank
+                                    .HasFlag(
+                                        ss.Set<Gear>()
+                                            .OrderBy(x => x.Nickname)
+                                            .ThenBy(x => x.SquadId)
+                                            .Select(x => x.Rank)
+                                            .FirstOrDefault()
+                                    )
                         )
             );
 
@@ -818,13 +820,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Where(
                             g =>
-                                MilitaryRank.Corporal.HasFlag(
-                                    ss.Set<Gear>()
-                                        .OrderBy(x => x.Nickname)
-                                        .ThenBy(x => x.SquadId)
-                                        .Select(x => x.Rank)
-                                        .FirstOrDefault()
-                                )
+                                MilitaryRank.Corporal
+                                    .HasFlag(
+                                        ss.Set<Gear>()
+                                            .OrderBy(x => x.Nickname)
+                                            .ThenBy(x => x.SquadId)
+                                            .Select(x => x.Rank)
+                                            .FirstOrDefault()
+                                    )
                         )
             );
         }
@@ -839,12 +842,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Where(
                             g =>
-                                g.Rank.HasFlag(
-                                    ss.Set<Gear>()
-                                        .OrderBy(x => x.Nickname)
-                                        .ThenBy(x => x.SquadId)
-                                        .FirstOrDefault().Rank
-                                )
+                                g.Rank
+                                    .HasFlag(
+                                        ss.Set<Gear>()
+                                            .OrderBy(x => x.Nickname)
+                                            .ThenBy(x => x.SquadId)
+                                            .FirstOrDefault().Rank
+                                    )
                         )
             );
 
@@ -854,12 +858,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Where(
                             g =>
-                                MilitaryRank.Corporal.HasFlag(
-                                    ss.Set<Gear>()
-                                        .OrderBy(x => x.Nickname)
-                                        .ThenBy(x => x.SquadId)
-                                        .FirstOrDefault().Rank
-                                )
+                                MilitaryRank.Corporal
+                                    .HasFlag(
+                                        ss.Set<Gear>()
+                                            .OrderBy(x => x.Nickname)
+                                            .ThenBy(x => x.SquadId)
+                                            .FirstOrDefault().Rank
+                                    )
                         )
             );
         }
@@ -874,12 +879,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Where(
                             g =>
-                                g.Rank.HasFlag(
-                                    ss.Set<Gear>()
-                                        .OrderBy(x => x.Nickname)
-                                        .ThenBy(x => x.SquadId)
-                                        .First().Rank
-                                )
+                                g.Rank
+                                    .HasFlag(
+                                        ss.Set<Gear>()
+                                            .OrderBy(x => x.Nickname)
+                                            .ThenBy(x => x.SquadId)
+                                            .First().Rank
+                                    )
                         )
             );
         }
@@ -1707,7 +1713,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Where(
                             g =>
-                                g.Weapons.OrderBy(w => w.Id)
+                                g.Weapons
+                                    .OrderBy(w => w.Id)
                                     .Select(w => w.IsAutomatic)
                                     .FirstOrDefault()
                         )
@@ -1737,7 +1744,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(
                             g =>
                                 g.HasSoulPatch
-                                && g.Weapons.Distinct()
+                                && g.Weapons
+                                    .Distinct()
                                     .OrderBy(w => w.Id)
                                     .Select(w => w.IsAutomatic)
                                     .FirstOrDefault()
@@ -1756,7 +1764,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(
                             g =>
                                 g.HasSoulPatch
-                                && g.Weapons.Distinct()
+                                && g.Weapons
+                                    .Distinct()
                                     .OrderBy(w => w.Id)
                                     .FirstOrDefault().IsAutomatic
                         )
@@ -1793,7 +1802,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(
                             g =>
                                 g.HasSoulPatch
-                                && g.Weapons.Where(w => w.Name.Contains("Lancer"))
+                                && g.Weapons
+                                    .Where(w => w.Name.Contains("Lancer"))
                                     .Distinct()
                                     .Select(w => w.IsAutomatic)
                                     .SingleOrDefault()
@@ -1814,7 +1824,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(
                             g =>
                                 g.HasSoulPatch
-                                && g.Weapons.Where(w => w.Name.Contains("Lancer"))
+                                && g.Weapons
+                                    .Where(w => w.Name.Contains("Lancer"))
                                     .Select(w => w.IsAutomatic)
                                     .Distinct()
                                     .SingleOrDefault()
@@ -1837,7 +1848,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(
                             g =>
                                 g.HasSoulPatch
-                                && g.Weapons.Where(w => w.Name.Contains("Lancer"))
+                                && g.Weapons
+                                    .Where(w => w.Name.Contains("Lancer"))
                                     .Distinct()
                                     .SingleOrDefault().IsAutomatic
                         ),
@@ -1891,7 +1903,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(
                             g =>
                                 g.HasSoulPatch
-                                && g.Weapons.Distinct()
+                                && g.Weapons
+                                    .Distinct()
                                     .OrderBy(w => w.Id)
                                     .Select(w => w.IsAutomatic)
                                     .FirstOrDefault()
@@ -1912,7 +1925,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(
                             g =>
                                 g.HasSoulPatch
-                                && g.Weapons.Distinct()
+                                && g.Weapons
+                                    .Distinct()
                                     .OrderBy(w => w.Id)
                                     .FirstOrDefault().IsAutomatic
                         )
@@ -1930,7 +1944,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(
                             g =>
                                 g.HasSoulPatch
-                                && g.Weapons.Union(g.Weapons)
+                                && g.Weapons
+                                    .Union(g.Weapons)
                                     .OrderBy(w => w.Id)
                                     .FirstOrDefault().IsAutomatic
                         )
@@ -1948,7 +1963,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(
                             g =>
                                 g.HasSoulPatch
-                                && g.Weapons.Join(g.Weapons, e => e.Id, e => e.Id, (e1, e2) => e1)
+                                && g.Weapons
+                                    .Join(g.Weapons, e => e.Id, e => e.Id, (e1, e2) => e1)
                                     .OrderBy(w => w.Id)
                                     .FirstOrDefault().IsAutomatic
                         )
@@ -1971,7 +1987,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     join i in g.Weapons on o.Id equals i.Id into grouping
                                     from i in grouping.DefaultIfEmpty()
                                     select o
-                                ).OrderBy(w => w.Id).FirstOrDefault().IsAutomatic
+                                )
+                                    .OrderBy(w => w.Id)
+                                    .FirstOrDefault().IsAutomatic
                         )
             );
         }
@@ -1987,7 +2005,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(
                             g =>
                                 g.HasSoulPatch
-                                && g.Weapons.Concat(g.Weapons)
+                                && g.Weapons
+                                    .Concat(g.Weapons)
                                     .OrderBy(w => w.Id)
                                     .FirstOrDefault().IsAutomatic
                         )
@@ -2278,7 +2297,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 id2 = g.Nickname
                             }
                         select g
-                    ).Include(g => g.Tag),
+                    )
+                        .Include(g => g.Tag),
                 elementAsserter: (e, a) =>
                     AssertInclude(e, a, new ExpectedInclude<Officer>(o => o.Tag))
             );
@@ -2300,7 +2320,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 id2 = t.GearNickName
                             }
                         select g
-                    ).Include(g => g.Tag),
+                    )
+                        .Include(g => g.Tag),
                 elementAsserter: (e, a) =>
                     AssertInclude(e, a, new ExpectedInclude<Officer>(o => o.Tag))
             );
@@ -3336,11 +3357,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQueryScalar(
                 async,
                 ss =>
-                    (
-                        from g in ss.Set<Gear>()
-                        where g.Tag.Note != "Foo"
-                        select g.HasSoulPatch
-                    ).Distinct()
+                    (from g in ss.Set<Gear>() where g.Tag.Note != "Foo" select g.HasSoulPatch)
+                        .Distinct()
             );
         }
 
@@ -3546,7 +3564,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         where gear.HasSoulPatch
                         orderby tag.Note
                         select gear
-                    ).AsTracking()
+                    )
+                        .AsTracking()
                     orderby g.FullName
                     select g.FullName,
                 assertOrder: true
@@ -3567,7 +3586,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         join tag in ss.Set<CogTag>() on gear.Nickname equals tag.GearNickName
                         orderby tag.Note
                         select gear
-                    ).AsTracking()
+                    )
+                        .AsTracking()
                     orderby g.Nickname
                     select g.Nickname,
                 assertOrder: true
@@ -3591,7 +3611,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         from tag in grouping.DefaultIfEmpty()
                         orderby gear.Rank
                         select gear
-                    ).AsTracking()
+                    )
+                        .AsTracking()
                     orderby g.Nickname
                     select g.Nickname,
                 assertOrder: true
@@ -3611,7 +3632,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         orderby tag.Note
                         where tag.GearNickName != "Cole Train"
                         select gear
-                    ).AsTracking()
+                    )
+                        .AsTracking()
                     join tag in ss.Set<CogTag>() on gear.Nickname equals tag.GearNickName
                     orderby gear.Nickname ,tag.Id
                     select gear.Nickname,
@@ -4079,12 +4101,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss =>
-                    (
-                        from f in ss.Set<Faction>()
-                        where f is LocustHorde
-                        orderby f.Id
-                        select f
-                    ).Include(f => f.Capital),
+                    (from f in ss.Set<Faction>() where f is LocustHorde orderby f.Id  select f)
+                        .Include(f => f.Capital),
                 elementAsserter: (e, a) => AssertInclude(e, a, expectedIncludes),
                 assertOrder: true
             );
@@ -4664,7 +4682,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         where g.Nickname != "Marcus"
                         orderby g.Nickname
                         select g.Weapons.ToList()
-                    ).Select(e => e.Count),
+                    )
+                        .Select(e => e.Count),
                 assertOrder: true
             );
         }
@@ -4695,11 +4714,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from g in ss.Set<Gear>()
                     where g.Nickname != "Marcus"
                     orderby g.Nickname
-                    select (
-                        from w in g.Weapons
-                        where w.IsAutomatic || w.Name != "foo"
-                        select w
-                    ).ToList(),
+                    select (from w in g.Weapons where w.IsAutomatic || w.Name != "foo" select w)
+                        .ToList(),
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a)
             );
@@ -4715,11 +4731,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from g in ss.Set<Gear>()
                     where g.Nickname != "Marcus"
                     orderby g.Nickname
-                    select (
-                        from w in g.Weapons
-                        where w.IsAutomatic || w.Name != "foo"
-                        select w
-                    ).ToList(),
+                    select (from w in g.Weapons where w.IsAutomatic || w.Name != "foo" select w)
+                        .ToList(),
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a)
             );
@@ -4735,11 +4748,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from g in ss.Set<Gear>()
                     where g.Nickname != "Marcus"
                     orderby g.Nickname
-                    select (
-                        from w in g.Weapons
-                        where w.IsAutomatic || w.Name != "foo"
-                        select w
-                    ).ToArray(),
+                    select (from w in g.Weapons where w.IsAutomatic || w.Name != "foo" select w)
+                        .ToArray(),
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a)
             );
@@ -4760,7 +4770,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         where w.IsAutomatic || w.Name != "foo"
                         orderby w.Name descending
                         select w
-                    ).ToList(),
+                    )
+                        .ToList(),
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a, ordered: true)
             );
@@ -4782,7 +4793,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             from r in o.Reports
                             where !r.HasSoulPatch
                             select new { r.Nickname, r.FullName }
-                        ).ToArray()
+                        )
+                            .ToArray()
                     },
                 elementSorter: e => e.Nickname,
                 elementAsserter: (e, a) =>
@@ -4816,7 +4828,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         from w in g.Weapons
                         where w.IsAutomatic || w.Name != "foo"
                         select w.Name
-                    ).ToList(),
+                    )
+                        .ToList(),
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a)
             );
@@ -4832,11 +4845,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from g in ss.Set<Gear>()
                     where g.Nickname != "Marcus"
                     orderby g.Nickname
-                    select (
-                        from w in g.Weapons
-                        where w.IsAutomatic || w.Name != "foo"
-                        select "BFG"
-                    ).ToList(),
+                    select (from w in g.Weapons where w.IsAutomatic || w.Name != "foo" select "BFG")
+                        .ToList(),
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a)
             );
@@ -4852,11 +4862,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from g in ss.Set<Gear>()
                     where g.Nickname != "Marcus"
                     orderby g.Nickname
-                    select (
-                        from w in g.Weapons
-                        where w.IsAutomatic || w.Name != "foo"
-                        select true
-                    ).ToList(),
+                    select (from w in g.Weapons where w.IsAutomatic || w.Name != "foo" select true)
+                        .ToList(),
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a)
             );
@@ -4892,10 +4899,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     select new
                     {
                         s.Name,
-                        Collection = (
-                            from m in s.Members
-                            select new { m.FullName, m.Rank }
-                        ).ToList()
+                        Collection = (from m in s.Members select new { m.FullName, m.Rank })
+                            .ToList()
                     },
                 elementSorter: e => e.Name,
                 elementAsserter: (e, a) =>
@@ -4921,8 +4926,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                             from ps in m.Mission.ParticipatingSquads
                             where ps.SquadId < 7
                             select ps
-                        ).ToList()
-                    ).ToList(),
+                        )
+                            .ToList()
+                    )
+                        .ToList(),
                 elementSorter: e => e.Count(),
                 elementAsserter: (e, a) =>
                     AssertCollection(
@@ -4949,7 +4956,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             from ps in m.Mission.ParticipatingSquads
                             where ps.SquadId < 2
                             select ps
-                        ).ToList()
+                        )
+                            .ToList()
                     ),
                 elementSorter: e => e.Count(),
                 elementAsserter: (e, a) =>
@@ -4978,7 +4986,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             where ps.SquadId < 7
                             select ps
                         )
-                    ).ToList(),
+                    )
+                        .ToList(),
                 elementSorter: e => e.Count(),
                 elementAsserter: (e, a) =>
                     AssertCollection(
@@ -5005,16 +5014,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     o.FullName,
-                                    OuterCollection = o.Reports.Where(r => r.FullName != "Foo")
+                                    OuterCollection = o.Reports
+                                        .Where(r => r.FullName != "Foo")
                                         .OrderBy(r => r.Rank)
                                         .Select(
                                             g =>
                                                 new
                                                 {
                                                     g.FullName,
-                                                    InnerCollection = g.Weapons.Where(
-                                                            w => w.Name != "Bar"
-                                                        )
+                                                    InnerCollection = g.Weapons
+                                                        .Where(w => w.Name != "Bar")
                                                         .OrderBy(w => w.IsAutomatic)
                                                         .ToList()
                                                 }
@@ -5080,10 +5089,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     select new
                     {
                         g.FullName,
-                        First = g.Weapons.OrderBy(w1 => w1.OwnerFullName)
+                        First = g.Weapons
+                            .OrderBy(w1 => w1.OwnerFullName)
                             .Where(w1 => w1.IsAutomatic)
                             .ToList(),
-                        Second = g.Weapons.OrderBy(w2 => w2.IsAutomatic)
+                        Second = g.Weapons
+                            .OrderBy(w2 => w2.IsAutomatic)
                             .Where(w2 => !w2.IsAutomatic)
                             .ToArray()
                     },
@@ -5109,10 +5120,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     select new
                     {
                         o.Nickname,
-                        First = o.Weapons.Where(w => w.IsAutomatic)
+                        First = o.Weapons
+                            .Where(w => w.IsAutomatic)
                             .Select(w => new { w.Name, w.IsAutomatic })
                             .ToArray(),
-                        Second = o.Reports.OrderBy(r => r.FullName)
+                        Second = o.Reports
+                            .OrderBy(r => r.FullName)
                             .Select(r => new { r.Nickname, r.Rank })
                             .ToList()
                     },
@@ -5162,7 +5175,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             from www in o.Tag.Gear.Weapons
                             orderby www.IsAutomatic ,www.Owner.Nickname descending
                             select www
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 elementSorter: e => e.FullName,
                 elementAsserter: (e, a) =>
@@ -5193,7 +5207,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             orderby www.IsAutomatic ,www.Owner.Nickname descending
                             orderby www.IsAutomatic ,www.Owner.Nickname descending
                             select www
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 elementSorter: e => e.FullName,
                 elementAsserter: (e, a) =>
@@ -5223,7 +5238,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             from www in o.Tag.Gear.Weapons
                             orderby www.Id descending,www.Owner.Weapons.Count
                             select www
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 elementSorter: e => e.FullName,
                 elementAsserter: (e, a) =>
@@ -5261,24 +5277,25 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     select new
                                     {
                                         w.Id,
-                                        InnerFirst = w.Owner.Weapons.Select(
-                                                ww => new { ww.Name, ww.IsAutomatic }
-                                            )
+                                        InnerFirst = w.Owner.Weapons
+                                            .Select(ww => new { ww.Name, ww.IsAutomatic })
                                             .ToList(),
-                                        InnerSecond = w.Owner.Squad.Members.OrderBy(
-                                                mm => mm.Nickname
-                                            )
+                                        InnerSecond = w.Owner.Squad.Members
+                                            .OrderBy(mm => mm.Nickname)
                                             .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                             .ToList()
                                     }
-                                ).ToList()
+                                )
+                                    .ToList()
                             }
-                        ).ToList(),
+                        )
+                            .ToList(),
                         OuterCollection2 = (
                             from www in o.Tag.Gear.Weapons
                             orderby www.IsAutomatic ,www.Owner.Nickname descending
                             select www
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 elementSorter: e => e.FullName,
                 elementAsserter: (e, a) =>
@@ -5399,9 +5416,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     from w in r.Weapons
                                     where w.Name != "Bar"
                                     select new { w.Name, r.Nickname }
-                                ).ToList()
+                                )
+                                    .ToList()
                             }
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 elementSorter: e => e.FullName,
                 elementAsserter: (e, a) =>
@@ -5560,7 +5579,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(s => s.Name)
                         .Select(
                             s =>
-                                s.Members.OrderBy(m => m.Nickname)
+                                s.Members
+                                    .OrderBy(m => m.Nickname)
                                     .Select(m => m.FullName)
                                     .FirstOrDefault()
                         ),
@@ -5664,7 +5684,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     join g in ss.Set<Gear>() on t.GearNickName equals g.Nickname into grouping
                     from g in grouping.DefaultIfEmpty()
                     orderby t.Note ,g.Nickname descending
-                    select g.Squad.Members.Where(m => m.HasSoulPatch)
+                    select g.Squad.Members
+                        .Where(m => m.HasSoulPatch)
                         .Select(
                             m =>
                                 new
@@ -5680,28 +5701,30 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from g in grouping.DefaultIfEmpty()
                     orderby t.Note ,g.Nickname descending
                     select g != null
-                        ? g.Squad.Members.Where(m => m.HasSoulPatch)
-                              .OrderBy(m => m.Nickname)
-                              .Select(
-                                  m =>
-                                      new
-                                      {
-                                          m.Nickname,
-                                          AutomaticWeapons = m.Weapons.Where(w => w.IsAutomatic)
-                                              .ToList()
-                                      }
-                              )
-                              .ToList()
+                        ? g.Squad.Members
+                          .Where(m => m.HasSoulPatch)
+                          .OrderBy(m => m.Nickname)
+                          .Select(
+                              m =>
+                                  new
+                                  {
+                                      m.Nickname,
+                                      AutomaticWeapons = m.Weapons
+                                          .Where(w => w.IsAutomatic)
+                                          .ToList()
+                                  }
+                          )
+                          .ToList()
                         : Enumerable.Empty<int>()
-                              .Select(
-                                  x =>
-                                      new
-                                      {
-                                          Nickname = (string)null,
-                                          AutomaticWeapons = new List<Weapon>()
-                                      }
-                              )
-                              .ToList(),
+                          .Select(
+                              x =>
+                                  new
+                                  {
+                                      Nickname = (string)null,
+                                      AutomaticWeapons = new List<Weapon>()
+                                  }
+                          )
+                          .ToList(),
                 assertOrder: true,
                 elementAsserter: (e, a) =>
                     AssertCollection(
@@ -5730,12 +5753,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(w => w.Name)
                         .Select(
                             w =>
-                                w.Owner.Squad.Members.OrderByDescending(m => m.FullName)
+                                w.Owner.Squad.Members
+                                    .OrderByDescending(m => m.FullName)
                                     .Select(
                                         m =>
                                             new
                                             {
-                                                Weapons = m.Weapons.Where(ww => !ww.IsAutomatic)
+                                                Weapons = m.Weapons
+                                                    .Where(ww => !ww.IsAutomatic)
                                                     .OrderBy(ww => ww.Id)
                                                     .ToList(),
                                                 m.Rank
@@ -5749,29 +5774,29 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(
                             w =>
                                 w.Owner != null
-                                    ? w.Owner.Squad.Members.OrderByDescending(m => m.FullName)
-                                          .Select(
-                                              m =>
-                                                  new
-                                                  {
-                                                      Weapons = m.Weapons.Where(
-                                                              ww => !ww.IsAutomatic
-                                                          )
-                                                          .OrderBy(ww => ww.Id)
-                                                          .ToList(),
-                                                      m.Rank
-                                                  }
-                                          )
-                                          .ToList()
+                                    ? w.Owner.Squad.Members
+                                      .OrderByDescending(m => m.FullName)
+                                      .Select(
+                                          m =>
+                                              new
+                                              {
+                                                  Weapons = m.Weapons
+                                                      .Where(ww => !ww.IsAutomatic)
+                                                      .OrderBy(ww => ww.Id)
+                                                      .ToList(),
+                                                  m.Rank
+                                              }
+                                      )
+                                      .ToList()
                                     : Enumerable.Empty<int>()
-                                          .Select(
-                                              x =>
-                                                  new
-                                                  {
-                                                      Weapons = new List<Weapon>(),
-                                                      Rank = default(MilitaryRank)
-                                                  }
-                                          )
+                                      .Select(
+                                          x =>
+                                              new
+                                              {
+                                                  Weapons = new List<Weapon>(),
+                                                  Rank = default(MilitaryRank)
+                                              }
+                                      )
                         ),
                 assertOrder: true,
                 elementAsserter: (e, a) =>
@@ -5804,11 +5829,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                             select new
                             {
                                 w.Id,
-                                InnerCollection = w.Owner.Squad.Members.OrderBy(mm => mm.Nickname)
+                                InnerCollection = w.Owner.Squad.Members
+                                    .OrderBy(mm => mm.Nickname)
                                     .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                     .ToList()
                             }
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 elementSorter: e => e.FullName,
                 elementAsserter: (e, a) =>
@@ -5853,15 +5880,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     select new
                                     {
                                         w.Id,
-                                        InnerSecond = w.Owner.Squad.Members.OrderBy(
-                                                mm => mm.Nickname
-                                            )
+                                        InnerSecond = w.Owner.Squad.Members
+                                            .OrderBy(mm => mm.Nickname)
                                             .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                             .ToList()
                                     }
-                                ).ToList()
+                                )
+                                    .ToList()
                             }
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 elementSorter: e => e.FullName,
                 elementAsserter: (e, a) =>
@@ -5911,11 +5939,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                             select new
                             {
                                 w.Id,
-                                InnerCollection = w.Owner.Squad.Members.OrderBy(mm => mm.Nickname)
+                                InnerCollection = w.Owner.Squad.Members
+                                    .OrderBy(mm => mm.Nickname)
                                     .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                     .ToList()
                             }
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 assertOrder: true,
                 elementAsserter: (e, a) =>
@@ -5963,15 +5993,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     select new
                                     {
                                         w.Id,
-                                        InnerSecond = w.Owner.Squad.Members.OrderBy(
-                                                mm => mm.Nickname
-                                            )
+                                        InnerSecond = w.Owner.Squad.Members
+                                            .OrderBy(mm => mm.Nickname)
                                             .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                             .ToList()
                                     }
-                                ).ToList()
+                                )
+                                    .ToList()
                             }
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 assertOrder: true,
                 elementAsserter: (e, a) =>
@@ -6174,7 +6205,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             from t in ss.Set<CogTag>()
                             join g in ss.Set<Gear>() on o.FullName equals g.FullName
                             select t.Note
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e.Collection, a.Collection)
@@ -6196,7 +6228,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             from t in ss.Set<CogTag>()
                             join g in ss.Set<Gear>() on o.FullName equals o.Nickname
                             select t.Note
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e.Collection, a.Collection)
@@ -6219,7 +6252,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             join g in ss.Set<Gear>() on o.FullName equals g.FullName into grouping
                             from g in grouping.DefaultIfEmpty()
                             select t.Note
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e.Collection, a.Collection)
@@ -6537,7 +6571,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         .OrderBy(g => g.Nickname)
                                         .Select(
                                             g =>
-                                                g.Weapons.Where(w => !w.IsAutomatic)
+                                                g.Weapons
+                                                    .Where(w => !w.IsAutomatic)
                                                     .OrderBy(w => w.Id)
                                         ),
                                 asserter: (e, a) => AssertCollection(e, a, ordered: true)
@@ -6578,7 +6613,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     s.Name,
-                                    SquadId = s.Members.Where(m => m.HasSoulPatch)
+                                    SquadId = s.Members
+                                        .Where(m => m.HasSoulPatch)
                                         .Select(m => m.SquadId)
                                         .FirstOrDefault()
                                 }
@@ -6602,7 +6638,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     s.Name,
-                                    SquadId = s.Members.Where(m => m.HasSoulPatch)
+                                    SquadId = s.Members
+                                        .Where(m => m.HasSoulPatch)
                                         .Select(m => (int?)m.SquadId)
                                         .FirstOrDefault()
                                 }
@@ -6626,7 +6663,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     s.Name,
-                                    SquadId = s.Members.Where(m => m.HasSoulPatch)
+                                    SquadId = s.Members
+                                        .Where(m => m.HasSoulPatch)
                                         .Select(m => ClientFunction(m.SquadId, m.LeaderSquadId))
                                         .FirstOrDefault()
                                 }
@@ -6650,7 +6688,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(s => s.Name == "Kilo")
                         .Where(
                             s =>
-                                s.Members.Where(m => m.HasSoulPatch)
+                                s.Members
+                                    .Where(m => m.HasSoulPatch)
                                     .Select(m => m.SquadId)
                                     .FirstOrDefault() != 0
                         )
@@ -6671,7 +6710,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     s.Name,
-                                    Gear = s.Members.Where(g => g.HasSoulPatch)
+                                    Gear = s.Members
+                                        .Where(g => g.HasSoulPatch)
                                         .Select(g => 42)
                                         .FirstOrDefault()
                                 }
@@ -6692,7 +6732,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     s.Name,
-                                    Gear = s.Members.Where(g => g.HasSoulPatch)
+                                    Gear = s.Members
+                                        .Where(g => g.HasSoulPatch)
                                         .Select(g => "Foo")
                                         .FirstOrDefault()
                                 }
@@ -6713,7 +6754,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     s.Name,
-                                    Gear = s.Members.Where(g => g.HasSoulPatch)
+                                    Gear = s.Members
+                                        .Where(g => g.HasSoulPatch)
                                         .Select(g => true)
                                         .FirstOrDefault()
                                 }
@@ -6734,7 +6776,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     s.Name,
-                                    Gear = s.Members.Where(g => g.HasSoulPatch)
+                                    Gear = s.Members
+                                        .Where(g => g.HasSoulPatch)
                                         .Select(g => new { One = 1 })
                                         .FirstOrDefault()
                                 }
@@ -6757,7 +6800,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     s.Name,
-                                    Gear = s.Members.Where(g => g.HasSoulPatch)
+                                    Gear = s.Members
+                                        .Where(g => g.HasSoulPatch)
                                         .Select(g => new { True1 = true, False1 = false })
                                         .FirstOrDefault()
                                 }
@@ -6819,7 +6863,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     s.Name,
-                                    Gear = s.Members.Where(g => g.HasSoulPatch)
+                                    Gear = s.Members
+                                        .Where(g => g.HasSoulPatch)
                                         .Select(g => (MyDTO)null)
                                         .FirstOrDefault()
                                 }
@@ -6842,7 +6887,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     s.Name,
-                                    Gear = s.Members.Where(g => g.HasSoulPatch)
+                                    Gear = s.Members
+                                        .Where(g => g.HasSoulPatch)
                                         .Select(g => new MyDTO())
                                         .FirstOrDefault()
                                 }
@@ -6931,7 +6977,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Include(o => o.Reports)
                         .OrderBy(
                             o =>
-                                o.Weapons.OrderBy(w => w.Id)
+                                o.Weapons
+                                    .OrderBy(w => w.Id)
                                     .Select(w => w.IsAutomatic)
                                     .FirstOrDefault()
                         )
@@ -6970,7 +7017,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OfType<Officer>()
                         .OrderBy(
                             o =>
-                                o.Weapons.Where(
+                                o.Weapons
+                                    .Where(
                                         w =>
                                             w.IsAutomatic
                                             == ss.Set<Gear>()
@@ -7013,7 +7061,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Select(
                             g =>
-                                g.Weapons.OrderBy(w => w.Id)
+                                g.Weapons
+                                    .OrderBy(w => w.Id)
                                     .Select(w => w.IsAutomatic)
                                     .FirstOrDefault()
                         )
@@ -7042,7 +7091,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Select(
                             g =>
-                                g.Weapons.OrderBy(w => w.Id)
+                                g.Weapons
+                                    .OrderBy(w => w.Id)
                                     .Select(w => (int?)w.Id)
                                     .FirstOrDefault() ?? 42
                         )
@@ -7059,7 +7109,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Select(
                             g =>
-                                (int?)g.Weapons.OrderBy(w => w.Id)
+                                (int?)g.Weapons
+                                    .OrderBy(w => w.Id)
                                     .Select(w => w.Id)
                                     .FirstOrDefault() ?? 42
                         )
@@ -7104,7 +7155,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Select(
                             g =>
-                                g.Weapons.Where(w => w.Name == "BFG")
+                                g.Weapons
+                                    .Where(w => w.Name == "BFG")
                                     .OrderBy(w => w.Id)
                                     .Select(w => w.IsAutomatic)
                                     .FirstOrDefault()
@@ -7122,7 +7174,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Select(
                             g =>
-                                (bool?)g.Weapons.Where(w => w.Name == "BFG")
+                                (bool?)g.Weapons
+                                    .Where(w => w.Name == "BFG")
                                     .OrderBy(w => w.Id)
                                     .FirstOrDefault().IsAutomatic
                         ),
@@ -7141,7 +7194,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(g => g.HasSoulPatch)
                         .Select(
                             g =>
-                                g.Weapons.Where(w => w.Name.Contains("Lancer"))
+                                g.Weapons
+                                    .Where(w => w.Name.Contains("Lancer"))
                                     .Distinct()
                                     .Select(w => w.IsAutomatic)
                                     .SingleOrDefault()
@@ -7161,7 +7215,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(g => g.HasSoulPatch)
                         .Select(
                             g =>
-                                g.Weapons.Where(w => w.Name.Contains("Lancer"))
+                                g.Weapons
+                                    .Where(w => w.Name.Contains("Lancer"))
                                     .Select(w => w.IsAutomatic)
                                     .Distinct()
                                     .SingleOrDefault()
@@ -7183,7 +7238,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(g => g.HasSoulPatch)
                         .Select(
                             g =>
-                                g.Weapons.Where(w => w.Name.Contains("Lancer"))
+                                g.Weapons
+                                    .Where(w => w.Name.Contains("Lancer"))
                                     .Distinct()
                                     .SingleOrDefault().IsAutomatic
                         ),
@@ -7202,7 +7258,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(g => g.HasSoulPatch)
                         .Select(
                             g =>
-                                g.Weapons.Where(w => w.Name == "BFG")
+                                g.Weapons
+                                    .Where(w => w.Name == "BFG")
                                     .Distinct()
                                     .Select(w => w.IsAutomatic)
                                     .SingleOrDefault()
@@ -7221,7 +7278,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(g => g.HasSoulPatch)
                         .Select(
                             g =>
-                                g.Weapons.Where(w => w.Name == "BFG")
+                                g.Weapons
+                                    .Where(w => w.Name == "BFG")
                                     .Select(w => w.IsAutomatic)
                                     .Distinct()
                                     .SingleOrDefault()
@@ -7242,7 +7300,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(g => g.HasSoulPatch)
                         .Select(
                             g =>
-                                (bool?)g.Weapons.Where(w => w.Name == "BFG")
+                                (bool?)g.Weapons
+                                    .Where(w => w.Name == "BFG")
                                     .Distinct()
                                     .SingleOrDefault().IsAutomatic
                         ),
@@ -7262,7 +7321,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(c => c.Name == "Ephyra")
                         .Select(
                             c =>
-                                c.StationedGears.Select(
+                                c.StationedGears
+                                    .Select(
                                         g =>
                                             new Officer
                                             {
@@ -7294,7 +7354,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(c => c.Name == "Ephyra")
                         .Select(
                             c =>
-                                c.StationedGears.OrderByDescending(g => g.Nickname)
+                                c.StationedGears
+                                    .OrderByDescending(g => g.Nickname)
                                     .Select(
                                         g =>
                                             new Officer
@@ -7539,10 +7600,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     orderby g.Nickname ,m.Id
                     select new
                     {
-                        HasSoulPatch = string.Concat(
-                            "HasSoulPatch " + g.HasSoulPatch,
-                            " HasSoulPatch"
-                        ),
+                        HasSoulPatch = string
+                            .Concat("HasSoulPatch " + g.HasSoulPatch, " HasSoulPatch"),
                         Rank = string.Concat("Rank " + g.Rank, " Rank"),
                         SquadId = string.Concat("SquadId " + g.SquadId, " SquadId"),
                         Rating = string.Concat("Rating " + m.Rating, " Rating"),
@@ -7813,7 +7872,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual Task Multiple_includes_with_client_method_around_entity_and_also_projecting_included_collection()
         {
             using var ctx = CreateContext();
-            var query = ctx.Squads.Include(s => s.Members)
+            var query = ctx.Squads
+                .Include(s => s.Members)
                 .ThenInclude(g => g.Weapons)
                 .Where(s => s.Name == "Delta")
                 .Select(s => new { s.Name, Client(s).Members });
@@ -7969,7 +8029,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from g in ss.Set<Gear>()
                     where g.Nickname != "Dom"
-                    let automaticWeapons = g.Weapons.OrderByDescending(w => w.AmmunitionType)
+                    let automaticWeapons = g.Weapons
+                        .OrderByDescending(w => w.AmmunitionType)
                         .Where(w => w.IsAutomatic)
                     select new { g.Nickname, WeaponName = automaticWeapons.FirstOrDefault().Name },
                 elementSorter: e => e.Nickname,
@@ -8100,7 +8161,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Nav_rewrite_Distinct_with_convert()
         {
             using var ctx = CreateContext();
-            var result = ctx.Factions.Include(f => ((LocustHorde)f).Commander)
+            var result = ctx.Factions
+                .Include(f => ((LocustHorde)f).Commander)
                 .Where(f => f.Capital.Name != "Foo")
                 .Select(f => (LocustHorde)f)
                 .Distinct()
@@ -8112,7 +8174,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Nav_rewrite_Distinct_with_convert_anonymous()
         {
             using var ctx = CreateContext();
-            var result = ctx.Factions.Include(f => ((LocustHorde)f).Commander)
+            var result = ctx.Factions
+                .Include(f => ((LocustHorde)f).Commander)
                 .Where(f => f.Capital.Name != "Foo")
                 .Select(f => new { horde = (LocustHorde)f })
                 .Distinct()
@@ -8356,7 +8419,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 && t.Note != null
                                 && null != t.Note
                             select g
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 elementSorter: e => e.key,
                 elementAsserter: (e, a) =>
@@ -8584,9 +8648,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                             g =>
                                 new
                                 {
-                                    Weapons = g.Weapons.Select(
-                                        w => new { w.Id, w.IsAutomatic, w.SynergyWith.Name }
-                                    )
+                                    Weapons = g.Weapons
+                                        .Select(
+                                            w => new { w.Id, w.IsAutomatic, w.SynergyWith.Name }
+                                        )
                                 }
                         ),
                 assertOrder: true,
@@ -8634,8 +8699,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Items = t.Gear != null
-                                        ? t.Gear.Weapons.Select(w => new { w.Owner.Nickname })
-                                              .ToList()
+                                        ? t.Gear.Weapons
+                                          .Select(w => new { w.Owner.Nickname })
+                                          .ToList()
                                         : null
                                 }
                         ),
@@ -8898,7 +8964,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     (
                         from g in ss.Set<Gear>()
                         select new { g.AssignedCity.Name, Count = g.Weapons.Count() }
-                    ).Concat(
+                    )
+                        .Concat(
                             from g in ss.Set<Gear>()
                             select new { g.CityOfBirth.Name, Count = g.Weapons.Count() }
                         )
@@ -8918,7 +8985,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     (
                         from g in ss.Set<Gear>()
                         select new { g.AssignedCity.Name, Count = g.Weapons.Count() }
-                    ).Concat(
+                    )
+                        .Concat(
                             from g in ss.Set<Gear>()
                             select new { g.CityOfBirth.Name, Count = g.Weapons.Count() }
                         )
@@ -10271,7 +10339,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(s => s.Name == "Kilo")
                         .Where(
                             s =>
-                                s.Members.Where(m => m.HasSoulPatch)
+                                s.Members
+                                    .Where(m => m.HasSoulPatch)
                                     .Select(m => m.SquadId)
                                     .FirstOrDefault() != 0
                         )
@@ -10296,7 +10365,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Collection = (
                             from r in o.Reports
                             select new { ReportName = r.FullName, OfficerName = o.FullName }
-                        ).ToList()
+                        )
+                            .ToList()
                     },
                 elementSorter: e => e.FullName,
                 elementAsserter: (e, a) =>
@@ -10436,7 +10506,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         where t.GearNickName == g.FullName
                         orderby t.Id
                         select t.IssueDate
-                    ).FirstOrDefault()
+                    )
+                        .FirstOrDefault()
                     where g.Tag.IssueDate > invalidTagIssueDate
                     select new { g.Nickname, invalidTagIssueDate }
             );
@@ -10973,7 +11044,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = g.Nickname,
-                                    Subquery = g.Weapons.Select(w => new { w.Id, w.Name })
+                                    Subquery = g.Weapons
+                                        .Select(w => new { w.Id, w.Name })
                                         .Distinct()
                                         .ToList()
                                 }
@@ -11011,9 +11083,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = g.Nickname,
-                                    Subquery = g.Weapons.Select(
-                                            w => new { w.Id, w.Name, w.OwnerFullName }
-                                        )
+                                    Subquery = g.Weapons
+                                        .Select(w => new { w.Id, w.Name, w.OwnerFullName })
                                         .Distinct()
                                         .ToList()
                                 }
@@ -11052,9 +11123,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = s.Id,
-                                    Subquery = s.Members.Select(
-                                            m => new { m.Nickname, m.SquadId, m.HasSoulPatch }
-                                        )
+                                    Subquery = s.Members
+                                        .Select(m => new { m.Nickname, m.SquadId, m.HasSoulPatch })
                                         .Distinct()
                                         .ToList()
                                 }
@@ -11093,7 +11163,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = g.Nickname,
-                                    Subquery = g.Weapons.Select(w => new { w.Name, w.IsAutomatic })
+                                    Subquery = g.Weapons
+                                        .Select(w => new { w.Name, w.IsAutomatic })
                                         .Distinct()
                                         .ToList()
                                 }
@@ -11131,7 +11202,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = g.Nickname,
-                                    Subquery = g.Weapons.Select(
+                                    Subquery = g.Weapons
+                                        .Select(
                                             w =>
                                                 new
                                                 {
@@ -11178,7 +11250,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = g.Nickname,
-                                    Subquery = g.Weapons.Select(w => new { w.Name, w.IsAutomatic })
+                                    Subquery = g.Weapons
+                                        .Select(w => new { w.Name, w.IsAutomatic })
                                         .GroupBy(x => x.IsAutomatic)
                                         .Select(x => new { x.Key })
                                         .ToList()
@@ -11216,7 +11289,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = g.Nickname,
-                                    Subquery = g.Weapons.Select(w => new { w.Name, w.IsAutomatic })
+                                    Subquery = g.Weapons
+                                        .Select(w => new { w.Name, w.IsAutomatic })
                                         .GroupBy(x => x.IsAutomatic)
                                         .Select(x => new { x.Key, Count = x.Count() })
                                         .ToList()
@@ -11255,7 +11329,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = g.Nickname,
-                                    Subquery = g.Weapons.Select(w => new { w.Name, w.IsAutomatic })
+                                    Subquery = g.Weapons
+                                        .Select(w => new { w.Name, w.IsAutomatic })
                                         .GroupBy(x => new { x.IsAutomatic, x.Name })
                                         .Select(x => new { x.Key, Count = x.Count() })
                                         .ToList()
@@ -11295,7 +11370,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = g.Nickname,
-                                    Subquery = g.Weapons.Select(w => new { w.Name, w.IsAutomatic })
+                                    Subquery = g.Weapons
+                                        .Select(w => new { w.Name, w.IsAutomatic })
                                         .GroupBy(x => x.Name.Length)
                                         .Select(x => new { x.Key, Count = x.Count() })
                                         .ToList()
@@ -11332,7 +11408,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(g => g.Nickname)
                         .Select(
                             g =>
-                                g.Weapons.SelectMany(x => x.Owner.AssignedCity.BornGears)
+                                g.Weapons
+                                    .SelectMany(x => x.Owner.AssignedCity.BornGears)
                                     .Select(x => (bool?)x.HasSoulPatch)
                                     .Distinct()
                                     .ToList()
@@ -11342,7 +11419,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(g => g.Nickname)
                         .Select(
                             g =>
-                                g.Weapons.SelectMany(
+                                g.Weapons
+                                    .SelectMany(
                                         x =>
                                             x.Owner.AssignedCity.Maybe(x => x.BornGears)
                                             ?? new List<Gear>()
@@ -11470,14 +11548,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     s,
-                                    Members = s.Members.Select(
+                                    Members = s.Members
+                                        .Select(
                                             m =>
                                                 new
                                                 {
                                                     m,
-                                                    Weapons = m.Weapons.Where(
-                                                            w => w.OwnerFullName == m.FullName
-                                                        )
+                                                    Weapons = m.Weapons
+                                                        .Where(w => w.OwnerFullName == m.FullName)
                                                         .ToList()
                                                 }
                                         )
@@ -11509,7 +11587,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         from g in ss.Set<Gear>()
                                         where g.SquadId == x.Id
                                         select new { g.Nickname, g.FullName, g.HasSoulPatch }
-                                    ).Distinct()
+                                    )
+                                        .Distinct()
                                         .Select(
                                             xx =>
                                                 new
@@ -11528,7 +11607,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                                             xx.FullName,
                                                             xx.HasSoulPatch
                                                         }
-                                                    ).ToList()
+                                                    )
+                                                        .ToList()
                                                 }
                                         )
                                         .ToList()
@@ -11588,7 +11668,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         from g in ss.Set<Gear>()
                                         where g.Nickname.Length == x.Length
                                         select new { g.HasSoulPatch, g.CityOfBirthName }
-                                    ).Distinct()
+                                    )
+                                        .Distinct()
                                         .Select(
                                             xx =>
                                                 new
@@ -11603,7 +11684,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                                             x.Length,
                                                             xx.HasSoulPatch
                                                         }
-                                                    ).ToList()
+                                                    )
+                                                        .ToList()
                                                 }
                                         )
                                         .ToList()

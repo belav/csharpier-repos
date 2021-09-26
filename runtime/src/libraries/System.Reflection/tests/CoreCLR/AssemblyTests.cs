@@ -30,9 +30,8 @@ namespace System.Reflection.Tests
         [Fact]
         public void LoadFromStream_Location_IsEmpty()
         {
-            Assembly assembly = new TestStreamLoadContext().LoadFromAssemblyName(
-                new AssemblyName("TinyAssembly")
-            );
+            Assembly assembly = new TestStreamLoadContext()
+                .LoadFromAssemblyName(new AssemblyName("TinyAssembly"));
             Assert.Empty(assembly.Location);
         }
 

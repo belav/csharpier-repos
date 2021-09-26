@@ -665,10 +665,8 @@ namespace System.Xml.Xsl.XsltOld
                             {
                                 Write("%");
                                 Write(
-                                    ((uint)_byteBuffer![j]).ToString(
-                                        "X2",
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    ((uint)_byteBuffer![j])
+                                        .ToString("X2", CultureInfo.InvariantCulture)
                                 );
                             }
                         }
@@ -772,11 +770,8 @@ namespace System.Xml.Xsl.XsltOld
                 WriteName(attribute.Prefix, attribute.LocalName);
                 if (
                     abr
-                    && string.Equals(
-                        attribute.LocalName,
-                        attrValue,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && string
+                        .Equals(attribute.LocalName, attrValue, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     // Since the name of the attribute = the value of the attribute,

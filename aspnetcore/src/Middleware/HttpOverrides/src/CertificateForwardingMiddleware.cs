@@ -59,9 +59,10 @@ namespace Microsoft.AspNetCore.HttpOverrides
             var header = httpContext.Request.Headers[_options.CertificateHeader];
             if (!StringValues.IsNullOrEmpty(header))
             {
-                httpContext.Features.Set<ITlsConnectionFeature>(
-                    new CertificateForwardingFeature(_logger, header, _options)
-                );
+                httpContext.Features
+                    .Set<ITlsConnectionFeature>(
+                        new CertificateForwardingFeature(_logger, header, _options)
+                    );
             }
             return _next(httpContext);
         }

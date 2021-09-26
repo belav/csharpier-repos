@@ -19,10 +19,8 @@ namespace System.Web.Http.ModelBinding.Binders
             Mock<IModelBinder> mockKvpBinder = new Mock<IModelBinder>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(IDictionary<int, string>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(IDictionary<int, string>)),
                 ModelName = "someName",
                 ValueProvider = new SimpleHttpValueProvider
                 {
@@ -31,31 +29,28 @@ namespace System.Web.Http.ModelBinding.Binders
                 }
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(
-                typeof(ModelBinderProvider),
-                (
-                    new SimpleModelBinderProvider(
-                        typeof(KeyValuePair<int, string>),
-                        mockKvpBinder.Object
+            context.ControllerContext.Configuration.Services
+                .Replace(
+                    typeof(ModelBinderProvider),
+                    (
+                        new SimpleModelBinderProvider(
+                            typeof(KeyValuePair<int, string>),
+                            mockKvpBinder.Object
+                        )
                     )
-                )
-            );
-
-            mockKvpBinder.Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns(
-                    (HttpActionContext cc, ModelBindingContext mbc) =>
-                    {
-                        mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName)
-                            .ConvertTo(mbc.ModelType);
-                        return true;
-                    }
                 );
 
-            // Act
-            bool retVal = new DictionaryModelBinder<int, string>().BindModel(
-                context,
-                bindingContext
+            mockKvpBinder.Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>())).Returns(
+                (HttpActionContext cc, ModelBindingContext mbc) =>
+                {
+                    mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName).ConvertTo(mbc.ModelType);
+                    return true;
+                }
             );
+
+            // Act
+            bool retVal = new DictionaryModelBinder<int, string>()
+                .BindModel(context, bindingContext);
 
             // Assert
             Assert.True(retVal);

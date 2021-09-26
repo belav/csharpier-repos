@@ -31,7 +31,8 @@ namespace Templates.Test.Helpers
 
         public static string DotNetEfFullPath =>
             (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DotNetEfFullPath")))
-                ? typeof(ProjectFactoryFixture).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                ? typeof(ProjectFactoryFixture).Assembly
+                      .GetCustomAttributes<AssemblyMetadataAttribute>()
                       .First(attribute => attribute.Key == "DotNetEfFullPath").Value
                 : Environment.GetEnvironmentVariable("DotNetEfFullPath");
 
@@ -536,9 +537,9 @@ namespace Templates.Test.Helpers
 
         private static string GetAssemblyMetadata(string key)
         {
-            var attribute =
-                typeof(Project).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .FirstOrDefault(a => a.Key == key);
+            var attribute = typeof(Project).Assembly
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
+                .FirstOrDefault(a => a.Key == key);
 
             if (attribute is null)
             {

@@ -133,13 +133,8 @@ namespace System.Net.Http.Internal
             object state
         )
         {
-            return base.BeginRead(
-                buffer,
-                offset,
-                PrepareStreamForRangeRead(count),
-                callback,
-                state
-            );
+            return base
+                .BeginRead(buffer, offset, PrepareStreamForRangeRead(count), callback, state);
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -154,12 +149,8 @@ namespace System.Net.Http.Internal
             CancellationToken cancellationToken
         )
         {
-            return base.ReadAsync(
-                buffer,
-                offset,
-                PrepareStreamForRangeRead(count),
-                cancellationToken
-            );
+            return base
+                .ReadAsync(buffer, offset, PrepareStreamForRangeRead(count), cancellationToken);
         }
 
         public override int ReadByte()

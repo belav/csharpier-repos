@@ -120,26 +120,26 @@ namespace System.Linq.Expressions.Tests
             IndexExpression index0 = Expression.ArrayAccess(array, Expression.Constant(0));
             IndexExpression index1 = Expression.ArrayAccess(array, Expression.Constant(1));
             Action setValues = Expression.Lambda<Action>(
-                    Expression.Block(
-                        Expression.Assign(indexM1, Expression.Constant(5)),
-                        Expression.Assign(index0, Expression.Constant(6)),
-                        Expression.Assign(index1, Expression.Constant(7))
-                    )
+                Expression.Block(
+                    Expression.Assign(indexM1, Expression.Constant(5)),
+                    Expression.Assign(index0, Expression.Constant(6)),
+                    Expression.Assign(index1, Expression.Constant(7))
                 )
+            )
                 .Compile(useInterpreter);
             setValues();
             Assert.Equal(5, arrayObj.GetValue(-1));
             Assert.Equal(6, arrayObj.GetValue(0));
             Assert.Equal(7, arrayObj.GetValue(1));
             Func<bool> testValues = Expression.Lambda<Func<bool>>(
+                Expression.And(
+                    Expression.Equal(indexM1, Expression.Constant(5)),
                     Expression.And(
-                        Expression.Equal(indexM1, Expression.Constant(5)),
-                        Expression.And(
-                            Expression.Equal(index0, Expression.Constant(6)),
-                            Expression.Equal(index1, Expression.Constant(7))
-                        )
+                        Expression.Equal(index0, Expression.Constant(6)),
+                        Expression.Equal(index1, Expression.Constant(7))
                     )
                 )
+            )
                 .Compile(useInterpreter);
             Assert.True(testValues());
         }
@@ -158,8 +158,8 @@ namespace System.Linq.Expressions.Tests
                 rank
             );
             Func<string> func = Expression.Lambda<Func<string>>(
-                    Expression.ArrayAccess(array, indices)
-                )
+                Expression.ArrayAccess(array, indices)
+            )
                 .Compile(useInterpreter);
             Assert.Equal("solitary value", func());
         }

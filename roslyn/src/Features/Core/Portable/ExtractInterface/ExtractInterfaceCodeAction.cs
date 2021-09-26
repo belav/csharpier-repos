@@ -32,12 +32,12 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                     : _typeAnalysisResult.TypeToExtractFrom.ContainingNamespace.ToDisplayString();
 
             return AbstractExtractInterfaceService.GetExtractInterfaceOptionsAsync(
-                    _typeAnalysisResult.DocumentToExtractFrom,
-                    _typeAnalysisResult.TypeToExtractFrom,
-                    _typeAnalysisResult.ExtractableMembers,
-                    containingNamespaceDisplay,
-                    cancellationToken
-                )
+                _typeAnalysisResult.DocumentToExtractFrom,
+                _typeAnalysisResult.TypeToExtractFrom,
+                _typeAnalysisResult.ExtractableMembers,
+                containingNamespaceDisplay,
+                cancellationToken
+            )
                 .WaitAndGetResult_CanCallOnBackground(cancellationToken);
         }
 
@@ -55,10 +55,10 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             {
                 var extractInterfaceResult =
                     await _extractInterfaceService.ExtractInterfaceFromAnalyzedTypeAsync(
-                            _typeAnalysisResult,
-                            extractInterfaceOptions,
-                            cancellationToken
-                        )
+                        _typeAnalysisResult,
+                        extractInterfaceOptions,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 if (extractInterfaceResult.Succeeded)

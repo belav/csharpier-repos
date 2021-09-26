@@ -542,9 +542,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
                 // (1,1): error CS8400: Feature 'function pointers' is not available in C# 8.0. Please use language version 9.0 or greater.
                 // delegate* unmanaged[cdecl]<string, Goo, int> ptr;
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotAvailableInVersion8,
-                        "delegate* unmanaged[cdecl]<string, Goo, int>"
-                    )
+                    ErrorCode.ERR_FeatureNotAvailableInVersion8,
+                    "delegate* unmanaged[cdecl]<string, Goo, int>"
+                )
                     .WithArguments("function pointers", "9.0")
                     .WithLocation(1, 1)
             );

@@ -587,8 +587,8 @@ namespace System.Web.Http.Validation.Providers
             ModelValidator[] validators = provider.GetValidators(metadata, _noValidatorProviders)
                 .ToArray();
             ModelValidationResult[] results = validators.SelectMany(
-                    o => o.Validate(metadata, model)
-                )
+                o => o.Validate(metadata, model)
+            )
                 .ToArray();
 
             // Assert

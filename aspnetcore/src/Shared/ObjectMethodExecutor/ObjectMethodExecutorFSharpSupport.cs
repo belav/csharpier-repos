@@ -86,11 +86,12 @@ namespace Microsoft.Extensions.Internal
         {
             var typeFullName = possibleFSharpAsyncGenericType?.FullName;
             if (
-                !string.Equals(
-                    typeFullName,
-                    "Microsoft.FSharp.Control.FSharpAsync`1",
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        typeFullName,
+                        "Microsoft.FSharp.Control.FSharpAsync`1",
+                        StringComparison.Ordinal
+                    )
             )
             {
                 return false;

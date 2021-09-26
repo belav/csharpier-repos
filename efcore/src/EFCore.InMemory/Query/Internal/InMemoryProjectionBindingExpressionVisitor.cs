@@ -148,7 +148,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                                     materializeCollectionNavigationExpression.Subquery
                                 )!,
                                 materializeCollectionNavigationExpression.Navigation,
-                                materializeCollectionNavigationExpression.Navigation.ClrType.GetSequenceType()
+                                materializeCollectionNavigationExpression.Navigation.ClrType
+                                    .GetSequenceType()
                             );
 
                         case MethodCallExpression methodCallExpression:
@@ -302,7 +303,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                     entityProjectionExpression = (EntityProjectionExpression)(
                         (InMemoryQueryExpression)projectionBindingExpression.QueryExpression
-                    ).GetMappedProjection(projectionBindingExpression.ProjectionMember);
+                    )
+                        .GetMappedProjection(projectionBindingExpression.ProjectionMember);
                 }
                 else
                 {
@@ -313,10 +315,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 if (_clientEval)
                 {
                     if (
-                        !_entityProjectionCache!.TryGetValue(
-                            entityProjectionExpression,
-                            out var entityProjectionBinding
-                        )
+                        !_entityProjectionCache!
+                            .TryGetValue(
+                                entityProjectionExpression,
+                                out var entityProjectionBinding
+                            )
                     )
                     {
                         entityProjectionBinding = new ProjectionBindingExpression(

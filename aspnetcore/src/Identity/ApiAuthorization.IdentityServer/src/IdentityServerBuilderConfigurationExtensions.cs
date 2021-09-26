@@ -147,12 +147,13 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
             );
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IPostConfigureOptions<ApiAuthorizationOptions>,
-                    ConfigureApiScopes
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IPostConfigureOptions<ApiAuthorizationOptions>,
+                        ConfigureApiScopes
+                    >()
+                );
 
             return builder;
         }
@@ -233,12 +234,13 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.ConfigureReplacedServices();
             builder.AddInMemoryClients(Enumerable.Empty<Client>());
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IPostConfigureOptions<ApiAuthorizationOptions>,
-                    ConfigureClientScopes
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IPostConfigureOptions<ApiAuthorizationOptions>,
+                        ConfigureClientScopes
+                    >()
+                );
 
             builder.Services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<
@@ -342,18 +344,20 @@ namespace Microsoft.Extensions.DependencyInjection
             this IIdentityServerBuilder builder
         )
         {
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Transient<
-                    IConfigureOptions<IdentityServerOptions>,
-                    AspNetConventionsConfigureOptions
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Transient<
+                        IConfigureOptions<IdentityServerOptions>,
+                        AspNetConventionsConfigureOptions
+                    >()
+                );
             builder.Services.TryAddSingleton<IAbsoluteUrlFactory, AbsoluteUrlFactory>();
             builder.Services.AddSingleton<IRedirectUriValidator, RelativeRedirectUriValidator>();
-            builder.Services.AddSingleton<
-                IClientRequestParametersProvider,
-                DefaultClientRequestParametersProvider
-            >();
+            builder.Services
+                .AddSingleton<
+                    IClientRequestParametersProvider,
+                    DefaultClientRequestParametersProvider
+                >();
             ReplaceEndSessionEndpoint(builder);
 
             return builder;
@@ -364,16 +368,18 @@ namespace Microsoft.Extensions.DependencyInjection
             // We don't have a better way to replace the end session endpoint as far as we know other than looking the descriptor up
             // on the container and replacing the instance. This is due to the fact that we chain on AddIdentityServer which configures the
             // list of endpoints by default.
-            var endSessionEndpointDescriptor = builder.Services.Single(
-                s =>
-                    s.ImplementationInstance is Endpoint e
-                    && string.Equals(e.Name, "Endsession", StringComparison.OrdinalIgnoreCase)
-                    && string.Equals(
-                        "/connect/endsession",
-                        e.Path,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-            );
+            var endSessionEndpointDescriptor = builder.Services
+                .Single(
+                    s =>
+                        s.ImplementationInstance is Endpoint e
+                        && string.Equals(e.Name, "Endsession", StringComparison.OrdinalIgnoreCase)
+                        && string
+                            .Equals(
+                                "/connect/endsession",
+                                e.Path,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                );
 
             builder.Services.Remove(endSessionEndpointDescriptor);
             builder.AddEndpoint<AutoRedirectEndSessionEndpoint>(

@@ -677,12 +677,13 @@ namespace System.Net.Http
 
             // Add request headers to WinHTTP request handle.
             if (
-                !Interop.WinHttp.WinHttpAddRequestHeaders(
-                    requestHandle,
-                    requestHeadersBuffer,
-                    (uint)requestHeadersBuffer.Length,
-                    Interop.WinHttp.WINHTTP_ADDREQ_FLAG_ADD
-                )
+                !Interop.WinHttp
+                    .WinHttpAddRequestHeaders(
+                        requestHandle,
+                        requestHeadersBuffer,
+                        (uint)requestHeadersBuffer.Length,
+                        Interop.WinHttp.WINHTTP_ADDREQ_FLAG_ADD
+                    )
             )
             {
                 WinHttpException.ThrowExceptionUsingLastError(
@@ -747,13 +748,14 @@ namespace System.Net.Http
                         if (NetEventSource.Log.IsEnabled())
                             NetEventSource.Info(this, $"Proxy accessType={accessType}");
 
-                        sessionHandle = Interop.WinHttp.WinHttpOpen(
-                            IntPtr.Zero,
-                            accessType,
-                            Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
-                            Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
-                            (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
-                        );
+                        sessionHandle = Interop.WinHttp
+                            .WinHttpOpen(
+                                IntPtr.Zero,
+                                accessType,
+                                Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
+                                Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
+                                (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
+                            );
 
                         if (sessionHandle.IsInvalid)
                         {
@@ -772,19 +774,20 @@ namespace System.Net.Http
                             // WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY.  So, we'll need to read the Wininet style proxy
                             // settings ourself using our WinInetProxyHelper object.
                             _proxyHelper = new WinInetProxyHelper();
-                            sessionHandle = Interop.WinHttp.WinHttpOpen(
-                                IntPtr.Zero,
-                                _proxyHelper.ManualSettingsOnly
-                                  ? Interop.WinHttp.WINHTTP_ACCESS_TYPE_NAMED_PROXY
-                                  : Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY,
-                                _proxyHelper.ManualSettingsOnly
-                                  ? _proxyHelper.Proxy
-                                  : Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
-                                _proxyHelper.ManualSettingsOnly
-                                  ? _proxyHelper.ProxyBypass
-                                  : Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
-                                (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
-                            );
+                            sessionHandle = Interop.WinHttp
+                                .WinHttpOpen(
+                                    IntPtr.Zero,
+                                    _proxyHelper.ManualSettingsOnly
+                                      ? Interop.WinHttp.WINHTTP_ACCESS_TYPE_NAMED_PROXY
+                                      : Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY,
+                                    _proxyHelper.ManualSettingsOnly
+                                      ? _proxyHelper.Proxy
+                                      : Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
+                                    _proxyHelper.ManualSettingsOnly
+                                      ? _proxyHelper.ProxyBypass
+                                      : Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
+                                    (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
+                                );
                             ThrowOnInvalidHandle(
                                 sessionHandle,
                                 nameof(Interop.WinHttp.WinHttpOpen)
@@ -794,12 +797,13 @@ namespace System.Net.Http
                         uint optionAssuredNonBlockingTrue = 1; // TRUE
 
                         if (
-                            !Interop.WinHttp.WinHttpSetOption(
-                                sessionHandle,
-                                Interop.WinHttp.WINHTTP_OPTION_ASSURED_NON_BLOCKING_CALLBACKS,
-                                ref optionAssuredNonBlockingTrue,
-                                (uint)sizeof(uint)
-                            )
+                            !Interop.WinHttp
+                                .WinHttpSetOption(
+                                    sessionHandle,
+                                    Interop.WinHttp.WINHTTP_OPTION_ASSURED_NON_BLOCKING_CALLBACKS,
+                                    ref optionAssuredNonBlockingTrue,
+                                    (uint)sizeof(uint)
+                                )
                         )
                         {
                             // This option is not available on downlevel Windows versions. While it improves
@@ -841,14 +845,15 @@ namespace System.Net.Http
                 );
 
                 // Specify an HTTP server.
-                connectHandle = Interop.WinHttp.WinHttpConnect(
-                    _sessionHandle,
-                    state.RequestMessage.RequestUri.HostNameType == UriHostNameType.IPv6
-                      ? "[" + state.RequestMessage.RequestUri.IdnHost + "]"
-                      : state.RequestMessage.RequestUri.IdnHost,
-                    (ushort)state.RequestMessage.RequestUri.Port,
-                    0
-                );
+                connectHandle = Interop.WinHttp
+                    .WinHttpConnect(
+                        _sessionHandle,
+                        state.RequestMessage.RequestUri.HostNameType == UriHostNameType.IPv6
+                          ? "[" + state.RequestMessage.RequestUri.IdnHost + "]"
+                          : state.RequestMessage.RequestUri.IdnHost,
+                        (ushort)state.RequestMessage.RequestUri.Port,
+                        0
+                    );
                 ThrowOnInvalidHandle(connectHandle, nameof(Interop.WinHttp.WinHttpConnect));
                 connectHandle.SetParentHandle(_sessionHandle);
 
@@ -874,15 +879,16 @@ namespace System.Net.Http
                 }
 
                 // Create an HTTP request handle.
-                state.RequestHandle = Interop.WinHttp.WinHttpOpenRequest(
-                    connectHandle,
-                    state.RequestMessage.Method.Method,
-                    state.RequestMessage.RequestUri.PathAndQuery,
-                    httpVersion,
-                    Interop.WinHttp.WINHTTP_NO_REFERER,
-                    Interop.WinHttp.WINHTTP_DEFAULT_ACCEPT_TYPES,
-                    flags
-                );
+                state.RequestHandle = Interop.WinHttp
+                    .WinHttpOpenRequest(
+                        connectHandle,
+                        state.RequestMessage.Method.Method,
+                        state.RequestMessage.RequestUri.PathAndQuery,
+                        httpVersion,
+                        Interop.WinHttp.WINHTTP_NO_REFERER,
+                        Interop.WinHttp.WINHTTP_DEFAULT_ACCEPT_TYPES,
+                        flags
+                    );
                 ThrowOnInvalidHandle(
                     state.RequestHandle,
                     nameof(Interop.WinHttp.WinHttpOpenRequest)
@@ -922,10 +928,8 @@ namespace System.Net.Http
                 // on the handle and thus releasing the awaiting tasks in the loop below. This helps to provide
                 // a more timely, cooperative, cancellation pattern.
                 using (
-                    state.CancellationToken.Register(
-                        s => ((WinHttpRequestState)s).RequestHandle.Dispose(),
-                        state
-                    )
+                    state.CancellationToken
+                        .Register(s => ((WinHttpRequestState)s).RequestHandle.Dispose(), state)
                 )
                 {
                     do
@@ -1124,13 +1128,14 @@ namespace System.Net.Http
         private void SetSessionHandleTimeoutOptions(SafeWinHttpHandle sessionHandle)
         {
             if (
-                !Interop.WinHttp.WinHttpSetTimeouts(
-                    sessionHandle,
-                    0,
-                    0,
-                    (int)_sendTimeout.TotalMilliseconds,
-                    (int)_receiveHeadersTimeout.TotalMilliseconds
-                )
+                !Interop.WinHttp
+                    .WinHttpSetTimeouts(
+                        sessionHandle,
+                        0,
+                        0,
+                        (int)_sendTimeout.TotalMilliseconds,
+                        (int)_receiveHeadersTimeout.TotalMilliseconds
+                    )
             )
             {
                 WinHttpException.ThrowExceptionUsingLastError(
@@ -1386,11 +1391,12 @@ namespace System.Net.Http
             // But the support must be opted in.
             uint optionData = Interop.WinHttp.WINHTTP_HTTP2_PLUS_CLIENT_CERT_FLAG;
             if (
-                Interop.WinHttp.WinHttpSetOption(
-                    _sessionHandle,
-                    Interop.WinHttp.WINHTTP_OPTION_ENABLE_HTTP2_PLUS_CLIENT_CERT,
-                    ref optionData
-                )
+                Interop.WinHttp
+                    .WinHttpSetOption(
+                        _sessionHandle,
+                        Interop.WinHttp.WINHTTP_OPTION_ENABLE_HTTP2_PLUS_CLIENT_CERT,
+                        ref optionData
+                    )
             )
             {
                 if (NetEventSource.Log.IsEnabled())
@@ -1409,11 +1415,12 @@ namespace System.Net.Http
             {
                 uint optionData = 1;
                 if (
-                    Interop.WinHttp.WinHttpSetOption(
-                        sessionHandle,
-                        Interop.WinHttp.WINHTTP_OPTION_DISABLE_STREAM_QUEUE,
-                        ref optionData
-                    )
+                    Interop.WinHttp
+                        .WinHttpSetOption(
+                            sessionHandle,
+                            Interop.WinHttp.WINHTTP_OPTION_DISABLE_STREAM_QUEUE,
+                            ref optionData
+                        )
                 )
                 {
                     if (NetEventSource.Log.IsEnabled())
@@ -1479,11 +1486,12 @@ namespace System.Net.Http
             uint optionData =
                 (requestVersion == HttpVersion20) ? Interop.WinHttp.WINHTTP_PROTOCOL_FLAG_HTTP2 : 0;
             if (
-                Interop.WinHttp.WinHttpSetOption(
-                    requestHandle,
-                    Interop.WinHttp.WINHTTP_OPTION_ENABLE_HTTP_PROTOCOL,
-                    ref optionData
-                )
+                Interop.WinHttp
+                    .WinHttpSetOption(
+                        requestHandle,
+                        Interop.WinHttp.WINHTTP_OPTION_ENABLE_HTTP_PROTOCOL,
+                        ref optionData
+                    )
             )
             {
                 if (NetEventSource.Log.IsEnabled())
@@ -1535,9 +1543,10 @@ namespace System.Net.Http
                 // Wrap expected exceptions as HttpRequestExceptions since this is considered an error during
                 // execution. All other exception types, including ArgumentExceptions and ProtocolViolationExceptions
                 // are 'unexpected' or caused by user error and should not be wrapped.
-                state.Tcs.TrySetException(
-                    new HttpRequestException(SR.net_http_client_execution_error, ex)
-                );
+                state.Tcs
+                    .TrySetException(
+                        new HttpRequestException(SR.net_http_client_execution_error, ex)
+                    );
             }
             else
             {
@@ -1592,12 +1601,8 @@ namespace System.Net.Http
                 | Interop.WinHttp.WINHTTP_CALLBACK_FLAG_REDIRECT
                 | Interop.WinHttp.WINHTTP_CALLBACK_FLAG_SEND_REQUEST;
 
-            IntPtr oldCallback = Interop.WinHttp.WinHttpSetStatusCallback(
-                requestHandle,
-                callback,
-                notificationFlags,
-                IntPtr.Zero
-            );
+            IntPtr oldCallback = Interop.WinHttp
+                .WinHttpSetStatusCallback(requestHandle, callback, notificationFlags, IntPtr.Zero);
 
             if (oldCallback == new IntPtr(Interop.WinHttp.WINHTTP_INVALID_STATUS_CALLBACK))
             {
@@ -1629,15 +1634,16 @@ namespace System.Net.Http
             {
                 state.Pin();
                 if (
-                    !Interop.WinHttp.WinHttpSendRequest(
-                        state.RequestHandle,
-                        IntPtr.Zero,
-                        0,
-                        IntPtr.Zero,
-                        0,
-                        0,
-                        state.ToIntPtr()
-                    )
+                    !Interop.WinHttp
+                        .WinHttpSendRequest(
+                            state.RequestHandle,
+                            IntPtr.Zero,
+                            0,
+                            IntPtr.Zero,
+                            0,
+                            0,
+                            state.ToIntPtr()
+                        )
                 )
                 {
                     // WinHTTP doesn't always associate our context value (state object) to the request handle.
@@ -1662,10 +1668,8 @@ namespace System.Net.Http
         {
             using (var requestStream = new WinHttpRequestStream(state, chunkedModeForSend))
             {
-                await state.RequestMessage.Content.CopyToAsync(
-                        requestStream,
-                        state.TransportContext
-                    )
+                await state.RequestMessage.Content
+                    .CopyToAsync(requestStream, state.TransportContext)
                     .ConfigureAwait(false);
                 await requestStream.EndUploadAsync(state.CancellationToken).ConfigureAwait(false);
             }

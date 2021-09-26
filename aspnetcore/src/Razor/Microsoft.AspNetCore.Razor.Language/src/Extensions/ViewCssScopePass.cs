@@ -24,11 +24,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
             if (
                 !string.Equals(documentNode.DocumentKind, "mvc.1.0.view", StringComparison.Ordinal)
-                && !string.Equals(
-                    documentNode.DocumentKind,
-                    "mvc.1.0.razor-page",
-                    StringComparison.Ordinal
-                )
+                && !string
+                    .Equals(
+                        documentNode.DocumentKind,
+                        "mvc.1.0.razor-page",
+                        StringComparison.Ordinal
+                    )
             )
             {
                 return;
@@ -57,15 +58,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                         && !content.StartsWith("<!", StringComparison.Ordinal);
                     if (isValidToken)
                     {
-                        node.Children.Insert(
-                            i + 1,
-                            new IntermediateToken()
-                            {
-                                Content = cssScope,
-                                Kind = TokenKind.Html,
-                                Source = null
-                            }
-                        );
+                        node.Children
+                            .Insert(
+                                i + 1,
+                                new IntermediateToken()
+                                {
+                                    Content = cssScope,
+                                    Kind = TokenKind.Html,
+                                    Source = null
+                                }
+                            );
                         i++;
                     }
                 }

@@ -325,11 +325,8 @@ namespace Microsoft.AspNetCore.ResponseCompression
 
             public bool Equals(ProviderCandidate other)
             {
-                return string.Equals(
-                    EncodingName,
-                    other.EncodingName,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                return string
+                    .Equals(EncodingName, other.EncodingName, StringComparison.OrdinalIgnoreCase);
             }
 
             public override bool Equals(object? obj)

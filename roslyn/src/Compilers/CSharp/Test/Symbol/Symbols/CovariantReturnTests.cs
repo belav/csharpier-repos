@@ -222,58 +222,58 @@ namespace System.Runtime.CompilerServices
 }
 ";
             CorelibraryWithoutCovariantReturnSupport1 = CreateEmptyCompilation(
-                    new string[]
-                    {
-                        corlibWithoutCovariantSupport,
-                        @"[assembly: System.Reflection.AssemblyVersion(""4.1.0.0"")]"
-                    },
-                    assemblyName: "mscorlib"
-                )
+                new string[]
+                {
+                    corlibWithoutCovariantSupport,
+                    @"[assembly: System.Reflection.AssemblyVersion(""4.1.0.0"")]"
+                },
+                assemblyName: "mscorlib"
+            )
                 .EmitToImageReference(
                     options: new CodeAnalysis.Emit.EmitOptions(runtimeMetadataVersion: "v4.1")
                 );
             CorelibraryWithoutCovariantReturnSupport2 = CreateEmptyCompilation(
-                    new string[]
-                    {
-                        corlibWithoutCovariantSupport,
-                        @"[assembly: System.Reflection.AssemblyVersion(""4.2.0.0"")]"
-                    },
-                    assemblyName: "mscorlib"
-                )
+                new string[]
+                {
+                    corlibWithoutCovariantSupport,
+                    @"[assembly: System.Reflection.AssemblyVersion(""4.2.0.0"")]"
+                },
+                assemblyName: "mscorlib"
+            )
                 .EmitToImageReference(
                     options: new CodeAnalysis.Emit.EmitOptions(runtimeMetadataVersion: "v4.2")
                 );
             CorelibraryWithCovariantReturnSupport1 = CreateEmptyCompilation(
-                    new string[]
-                    {
-                        corlibWithCovariantSupport,
-                        @"[assembly: System.Reflection.AssemblyVersion(""5.0.0.0"")]"
-                    },
-                    assemblyName: "mscorlib"
-                )
+                new string[]
+                {
+                    corlibWithCovariantSupport,
+                    @"[assembly: System.Reflection.AssemblyVersion(""5.0.0.0"")]"
+                },
+                assemblyName: "mscorlib"
+            )
                 .EmitToImageReference(
                     options: new CodeAnalysis.Emit.EmitOptions(runtimeMetadataVersion: "v5.0")
                 );
             CorelibraryWithCovariantReturnSupport2 = CreateEmptyCompilation(
-                    new string[]
-                    {
-                        corlibWithCovariantSupport,
-                        @"[assembly: System.Reflection.AssemblyVersion(""5.1.0.0"")]"
-                    },
-                    assemblyName: "mscorlib"
-                )
+                new string[]
+                {
+                    corlibWithCovariantSupport,
+                    @"[assembly: System.Reflection.AssemblyVersion(""5.1.0.0"")]"
+                },
+                assemblyName: "mscorlib"
+            )
                 .EmitToImageReference(
                     options: new CodeAnalysis.Emit.EmitOptions(runtimeMetadataVersion: "v5.1")
                 );
             CorelibraryWithCovariantReturnSupportButWithoutPreserveBaseOverridesAttribute =
                 CreateEmptyCompilation(
-                        new string[]
-                        {
-                            corlibWithCovariantSupportButWithoutPreserveBaseOverridesAttribute,
-                            @"[assembly: System.Reflection.AssemblyVersion(""4.9.0.0"")]"
-                        },
-                        assemblyName: "mscorlib"
-                    )
+                    new string[]
+                    {
+                        corlibWithCovariantSupportButWithoutPreserveBaseOverridesAttribute,
+                        @"[assembly: System.Reflection.AssemblyVersion(""4.9.0.0"")]"
+                    },
+                    assemblyName: "mscorlib"
+                )
                     .EmitToImageReference(
                         options: new CodeAnalysis.Emit.EmitOptions(runtimeMetadataVersion: "v4.9")
                     );
@@ -313,10 +313,8 @@ namespace System.Runtime.CompilerServices
                 Assert.True(method.IsOverride);
                 Assert.False(method.IsVirtual);
                 Assert.True(method.IsMetadataVirtual(ignoreInterfaceImplementationChanges: true));
-                var isCovariant = !method.ReturnType.Equals(
-                    overriddenMethod.ReturnType,
-                    TypeCompareKind.AllIgnoreOptions
-                );
+                var isCovariant = !method.ReturnType
+                    .Equals(overriddenMethod.ReturnType, TypeCompareKind.AllIgnoreOptions);
                 var checkMetadata = hasReturnConversion(
                     method.ReturnType,
                     overriddenMethod.ReturnType
@@ -378,10 +376,8 @@ namespace System.Runtime.CompilerServices
                 && overriddenMember is PropertySymbol overriddenProperty
             )
             {
-                var isCovariant = !property.Type.Equals(
-                    overriddenProperty.Type,
-                    TypeCompareKind.AllIgnoreOptions
-                );
+                var isCovariant = !property.Type
+                    .Equals(overriddenProperty.Type, TypeCompareKind.AllIgnoreOptions);
                 if (
                     property.GetMethod is MethodSymbol getMethod
                     && overriddenProperty.GetMethod is MethodSymbol overriddenGetMethod
@@ -434,10 +430,8 @@ namespace System.Runtime.CompilerServices
                 member is EventSymbol eventSymbol && overriddenMember is EventSymbol overriddenEvent
             )
             {
-                var isCovariant = !eventSymbol.Type.Equals(
-                    overriddenEvent.Type,
-                    TypeCompareKind.AllIgnoreOptions
-                );
+                var isCovariant = !eventSymbol.Type
+                    .Equals(overriddenEvent.Type, TypeCompareKind.AllIgnoreOptions);
                 if (
                     eventSymbol.AddMethod is MethodSymbol addMethod
                     && overriddenEvent.AddMethod is MethodSymbol overriddenAddMethod
@@ -473,11 +467,12 @@ namespace System.Runtime.CompilerServices
             bool hasReturnConversion(TypeSymbol fromType, TypeSymbol toType)
             {
                 var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-                return comp.Conversions.HasIdentityOrImplicitReferenceConversion(
-                    fromType,
-                    toType,
-                    ref discardedUseSiteInfo
-                );
+                return comp.Conversions
+                    .HasIdentityOrImplicitReferenceConversion(
+                        fromType,
+                        toType,
+                        ref discardedUseSiteInfo
+                    );
             }
         }
 
@@ -689,10 +684,8 @@ namespace System.Runtime.CompilerServices
                 assignments,
                 references: references,
                 targetFramework: TargetFramework.Empty,
-                options: TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(
-                    "CS1701",
-                    ReportDiagnostic.Suppress
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithSpecificDiagnosticOptions("CS1701", ReportDiagnostic.Suppress),
                 parseOptions: parseOptions
             );
 
@@ -722,14 +715,14 @@ public class Derived : Base
 }
 ";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.WithCovariantReturns,
-                    references: new[]
-                    {
-                        CorelibraryWithCovariantReturnSupportButWithoutPreserveBaseOverridesAttribute
-                    },
-                    targetFramework: TargetFramework.Empty
-                )
+                source,
+                parseOptions: TestOptions.WithCovariantReturns,
+                references: new[]
+                {
+                    CorelibraryWithCovariantReturnSupportButWithoutPreserveBaseOverridesAttribute
+                },
+                targetFramework: TargetFramework.Empty
+            )
                 .VerifyDiagnostics(
                     // (8,28): error CS8830: 'Derived.M()': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base.M()'
                     //     public override string M() => null;
@@ -775,12 +768,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -796,7 +788,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -839,9 +831,9 @@ public class Derived2 : Base
             var assignments = @"";
 
             CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (12,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string M1() => null;
@@ -931,9 +923,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string M() => null;
@@ -944,20 +936,19 @@ public class Program
             verify(SourceView(comp, assignments));
 
             // Test against a runtime that does not admit support for covariant returns.
-            comp = CreateCompilationWithoutCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (8,28): error CS8778: 'Derived.M()': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base.M()'
-                    //     public override string M() => null;
-                    Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses, "M")
-                        .WithArguments("Derived.M()", "Base.M()", "object")
-                        .WithLocation(8, 28)
-                );
+            comp = CreateCompilationWithoutCovariantReturns(source).VerifyDiagnostics(
+                // (8,28): error CS8778: 'Derived.M()': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base.M()'
+                //     public override string M() => null;
+                Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses, "M")
+                    .WithArguments("Derived.M()", "Base.M()", "object")
+                    .WithLocation(8, 28)
+            );
             verify(SourceView(comp, assignments));
 
             comp = CreateCompilationWithoutCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,28): error CS8778: 'Derived.M()': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base.M()'
                     //     public override string M() => null;
@@ -972,12 +963,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -993,7 +983,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -1032,9 +1022,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,23): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override U M<T, U>() => null;
@@ -1048,12 +1038,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -1069,7 +1058,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -1104,9 +1093,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,23): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override U M() => null;
@@ -1120,12 +1109,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base<object>, Derived<object, string>)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base<object>, Derived<object, string>)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -1141,7 +1129,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -1184,9 +1172,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (9,23): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override T M() => null;
@@ -1200,12 +1188,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived<Q>)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived<Q>)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -1221,7 +1208,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -1262,9 +1249,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string M => null;
@@ -1276,9 +1263,9 @@ public class Program
 
             // Test against a runtime that does not admit support for covariant returns.
             comp = CreateCompilationWithoutCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,28): error CS8779: 'Derived.M': Target runtime doesn't support covariant types in overrides. Type must be 'object' to match overridden member 'Base.M'
                     //     public override string M => null;
@@ -1293,12 +1280,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -1314,7 +1300,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -1360,9 +1346,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,23): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override U M => null;
@@ -1376,12 +1362,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base<object>, Derived<object, string>)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base<object>, Derived<object, string>)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -1397,7 +1382,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -1458,9 +1443,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (9,23): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override T M => null;
@@ -1474,12 +1459,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived<Q>)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived<Q>)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -1495,7 +1479,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -1543,9 +1527,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string this[int i] => null;
@@ -1559,12 +1543,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -1582,7 +1565,7 @@ public class Program
   IL_0010:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -1628,9 +1611,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,23): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override U this[int i] => null;
@@ -1644,12 +1627,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base<object>, Derived<object, string>)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base<object>, Derived<object, string>)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -1667,7 +1649,7 @@ public class Program
   IL_0010:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -1740,9 +1722,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (9,23): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override T this[int i] => null;
@@ -1756,12 +1738,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived<Q>)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived<Q>)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -1779,7 +1760,7 @@ public class Program
   IL_0010:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -1829,23 +1810,21 @@ public class Derived : Base
 }
 ";
             var assignments = @"";
-            var comp = CreateCompilationWithoutCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (10,40): error CS1715: 'Derived.E': type must be 'Func<object>' to match overridden member 'Base.E'
-                    //     public override event Func<string> E;
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "E")
-                        .WithArguments("Derived.E", "Base.E", "System.Func<object>")
-                        .WithLocation(10, 40)
-                );
+            var comp = CreateCompilationWithoutCovariantReturns(source).VerifyDiagnostics(
+                // (10,40): error CS1715: 'Derived.E': type must be 'Func<object>' to match overridden member 'Base.E'
+                //     public override event Func<string> E;
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "E")
+                    .WithArguments("Derived.E", "Base.E", "System.Func<object>")
+                    .WithLocation(10, 40)
+            );
             verify(SourceView(comp, assignments));
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (10,40): error CS1715: 'Derived.E': type must be 'Func<object>' to match overridden member 'Base.E'
-                    //     public override event Func<string> E;
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "E")
-                        .WithArguments("Derived.E", "Base.E", "System.Func<object>")
-                        .WithLocation(10, 40)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (10,40): error CS1715: 'Derived.E': type must be 'Func<object>' to match overridden member 'Base.E'
+                //     public override event Func<string> E;
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "E")
+                    .WithArguments("Derived.E", "Base.E", "System.Func<object>")
+                    .WithLocation(10, 40)
+            );
             verify(SourceView(comp, assignments));
 
             static void verify(CSharpCompilation comp)
@@ -1886,23 +1865,21 @@ public class Program
     }
 }
 ";
-            var comp = CreateCompilationWithoutCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (9,34): error CS1715: 'Derived.P': type must be 'Func<object>' to match overridden member 'Base.P'
-                    //     public override Func<string> P { get; set; }
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "P")
-                        .WithArguments("Derived.P", "Base.P", "System.Func<object>")
-                        .WithLocation(9, 34)
-                );
+            var comp = CreateCompilationWithoutCovariantReturns(source).VerifyDiagnostics(
+                // (9,34): error CS1715: 'Derived.P': type must be 'Func<object>' to match overridden member 'Base.P'
+                //     public override Func<string> P { get; set; }
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "P")
+                    .WithArguments("Derived.P", "Base.P", "System.Func<object>")
+                    .WithLocation(9, 34)
+            );
             verify(SourceView(comp, assignments));
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (9,34): error CS1715: 'Derived.P': type must be 'Func<object>' to match overridden member 'Base.P'
-                    //     public override Func<string> P { get; set; }
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "P")
-                        .WithArguments("Derived.P", "Base.P", "System.Func<object>")
-                        .WithLocation(9, 34)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (9,34): error CS1715: 'Derived.P': type must be 'Func<object>' to match overridden member 'Base.P'
+                //     public override Func<string> P { get; set; }
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "P")
+                    .WithArguments("Derived.P", "Base.P", "System.Func<object>")
+                    .WithLocation(9, 34)
+            );
             verify(SourceView(comp, assignments));
 
             static void verify(CSharpCompilation comp)
@@ -1954,10 +1931,10 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    references: new[] { baseMetadata },
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                references: new[] { baseMetadata },
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (4,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string M() => null;
@@ -1972,12 +1949,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments, new[] { baseMetadata }));
             verify(MetadataView(comp, assignments, new[] { baseMetadata }));
             verify(RetargetingView(comp, assignments, new[] { baseMetadata }));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -1993,7 +1969,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -2038,10 +2014,10 @@ public class Program
 ";
             var references = new[] { baseMetadata };
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    references: references,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                references: references,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (4,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string M => null;
@@ -2056,12 +2032,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments, references));
             verify(MetadataView(comp, assignments, references));
             verify(RetargetingView(comp, assignments, references));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -2077,7 +2052,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -2128,10 +2103,10 @@ public class Program
 ";
             var references = new[] { baseMetadata };
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    references: references,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                references: references,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (4,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string this[int i] => null;
@@ -2146,12 +2121,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments, references));
             verify(MetadataView(comp, assignments, references));
             verify(RetargetingView(comp, assignments, references));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -2169,7 +2143,7 @@ public class Program
   IL_0010:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -2215,9 +2189,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string M() => null;
@@ -2231,12 +2205,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -2252,7 +2225,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -2291,23 +2264,21 @@ public class Program
     }
 }
 ";
-            var comp = CreateCompilationWithoutCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (8,28): error CS0508: 'Derived.M()': return type must be 'string' to match overridden member 'Base.M()'
-                    //     public override object M() => null;
-                    Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "M")
-                        .WithArguments("Derived.M()", "Base.M()", "string")
-                        .WithLocation(8, 28)
-                );
+            var comp = CreateCompilationWithoutCovariantReturns(source).VerifyDiagnostics(
+                // (8,28): error CS0508: 'Derived.M()': return type must be 'string' to match overridden member 'Base.M()'
+                //     public override object M() => null;
+                Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "M")
+                    .WithArguments("Derived.M()", "Base.M()", "string")
+                    .WithLocation(8, 28)
+            );
             verify(SourceView(comp, assignments));
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (8,28): error CS0508: 'Derived.M()': return type must be 'string' to match overridden member 'Base.M()'
-                    //     public override object M() => null;
-                    Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "M")
-                        .WithArguments("Derived.M()", "Base.M()", "string")
-                        .WithLocation(8, 28)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (8,28): error CS0508: 'Derived.M()': return type must be 'string' to match overridden member 'Base.M()'
+                //     public override object M() => null;
+                Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "M")
+                    .WithArguments("Derived.M()", "Base.M()", "string")
+                    .WithLocation(8, 28)
+            );
             verify(SourceView(comp, assignments));
 
             static void verify(CSharpCompilation comp)
@@ -2365,43 +2336,41 @@ public class Program
     }
 }
 ";
-            var comp = CreateCompilationWithoutCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (10,19): warning CS0114: 'Derived.M2' hides inherited member 'Base.M2'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
-                    //     public string M2 => null;    // A
-                    Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "M2")
-                        .WithArguments("Derived.M2", "Base.M2")
-                        .WithLocation(10, 19),
-                    // (15,19): warning CS0108: 'Derived2.M2' hides inherited member 'Derived.M2'. Use the new keyword if hiding was intended.
-                    //     public string M2 => null;    // B
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M2")
-                        .WithArguments("Derived2.M2", "Derived.M2")
-                        .WithLocation(15, 19),
-                    // (20,19): warning CS0108: 'Derived3.M2' hides inherited member 'Derived.M2'. Use the new keyword if hiding was intended.
-                    //     public object M2 => null;
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M2")
-                        .WithArguments("Derived3.M2", "Derived.M2")
-                        .WithLocation(20, 19)
-                );
+            var comp = CreateCompilationWithoutCovariantReturns(source).VerifyDiagnostics(
+                // (10,19): warning CS0114: 'Derived.M2' hides inherited member 'Base.M2'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                //     public string M2 => null;    // A
+                Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "M2")
+                    .WithArguments("Derived.M2", "Base.M2")
+                    .WithLocation(10, 19),
+                // (15,19): warning CS0108: 'Derived2.M2' hides inherited member 'Derived.M2'. Use the new keyword if hiding was intended.
+                //     public string M2 => null;    // B
+                Diagnostic(ErrorCode.WRN_NewRequired, "M2")
+                    .WithArguments("Derived2.M2", "Derived.M2")
+                    .WithLocation(15, 19),
+                // (20,19): warning CS0108: 'Derived3.M2' hides inherited member 'Derived.M2'. Use the new keyword if hiding was intended.
+                //     public object M2 => null;
+                Diagnostic(ErrorCode.WRN_NewRequired, "M2")
+                    .WithArguments("Derived3.M2", "Derived.M2")
+                    .WithLocation(20, 19)
+            );
             verify(SourceView(comp, assignments));
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (10,19): warning CS0114: 'Derived.M2' hides inherited member 'Base.M2'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
-                    //     public string M2 => null;    // A
-                    Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "M2")
-                        .WithArguments("Derived.M2", "Base.M2")
-                        .WithLocation(10, 19),
-                    // (15,19): warning CS0108: 'Derived2.M2' hides inherited member 'Derived.M2'. Use the new keyword if hiding was intended.
-                    //     public string M2 => null;    // B
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M2")
-                        .WithArguments("Derived2.M2", "Derived.M2")
-                        .WithLocation(15, 19),
-                    // (20,19): warning CS0108: 'Derived3.M2' hides inherited member 'Derived.M2'. Use the new keyword if hiding was intended.
-                    //     public object M2 => null;
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M2")
-                        .WithArguments("Derived3.M2", "Derived.M2")
-                        .WithLocation(20, 19)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (10,19): warning CS0114: 'Derived.M2' hides inherited member 'Base.M2'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                //     public string M2 => null;    // A
+                Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "M2")
+                    .WithArguments("Derived.M2", "Base.M2")
+                    .WithLocation(10, 19),
+                // (15,19): warning CS0108: 'Derived2.M2' hides inherited member 'Derived.M2'. Use the new keyword if hiding was intended.
+                //     public string M2 => null;    // B
+                Diagnostic(ErrorCode.WRN_NewRequired, "M2")
+                    .WithArguments("Derived2.M2", "Derived.M2")
+                    .WithLocation(15, 19),
+                // (20,19): warning CS0108: 'Derived3.M2' hides inherited member 'Derived.M2'. Use the new keyword if hiding was intended.
+                //     public object M2 => null;
+                Diagnostic(ErrorCode.WRN_NewRequired, "M2")
+                    .WithArguments("Derived3.M2", "Derived.M2")
+                    .WithLocation(20, 19)
+            );
             verify(SourceView(comp, assignments));
 
             static void verify(CSharpCompilation comp)
@@ -2459,9 +2428,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (10,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string M1 => null; // A
@@ -2490,19 +2459,18 @@ public class Program
                         .WithLocation(18, 26)
                 );
             verify(SourceView(comp, assignments));
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (17,28): error CS1715: 'Derived2.M2': type must be 'string' to match overridden member 'Derived.M2'
-                    //     public override object M2 => null; // 1
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M2")
-                        .WithArguments("Derived2.M2", "Derived.M2", "string")
-                        .WithLocation(17, 28),
-                    // (18,26): error CS1715: 'Derived2.M3': type must be 'string' to match overridden member 'Derived.M3'
-                    //     public override Base M3 => null;   // 2
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M3")
-                        .WithArguments("Derived2.M3", "Derived.M3", "string")
-                        .WithLocation(18, 26)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (17,28): error CS1715: 'Derived2.M2': type must be 'string' to match overridden member 'Derived.M2'
+                //     public override object M2 => null; // 1
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M2")
+                    .WithArguments("Derived2.M2", "Derived.M2", "string")
+                    .WithLocation(17, 28),
+                // (18,26): error CS1715: 'Derived2.M3': type must be 'string' to match overridden member 'Derived.M3'
+                //     public override Base M3 => null;   // 2
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M3")
+                    .WithArguments("Derived2.M3", "Derived.M3", "string")
+                    .WithLocation(18, 26)
+            );
             verify(SourceView(comp, assignments));
 
             static void verify(CSharpCompilation comp)
@@ -2617,9 +2585,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (9,33): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override IIn<object> M1 => null;
@@ -2638,12 +2606,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       29 (0x1d)
   .maxstack  1
@@ -2667,7 +2634,7 @@ public class Program
   IL_001c:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -2730,33 +2697,31 @@ public class Program
     }
 }
 ";
-            var comp = CreateCompilationWithoutCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (9,33): error CS1715: 'Derived.M1': type must be 'IIn<object>' to match overridden member 'Base.M1'
-                    //     public override IIn<string> M1 => null;
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M1")
-                        .WithArguments("Derived.M1", "Base.M1", "IIn<object>")
-                        .WithLocation(9, 33),
-                    // (10,34): error CS1715: 'Derived.M2': type must be 'IOut<string>' to match overridden member 'Base.M2'
-                    //     public override IOut<object> M2 => null;
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M2")
-                        .WithArguments("Derived.M2", "Base.M2", "IOut<string>")
-                        .WithLocation(10, 34)
-                );
+            var comp = CreateCompilationWithoutCovariantReturns(source).VerifyDiagnostics(
+                // (9,33): error CS1715: 'Derived.M1': type must be 'IIn<object>' to match overridden member 'Base.M1'
+                //     public override IIn<string> M1 => null;
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M1")
+                    .WithArguments("Derived.M1", "Base.M1", "IIn<object>")
+                    .WithLocation(9, 33),
+                // (10,34): error CS1715: 'Derived.M2': type must be 'IOut<string>' to match overridden member 'Base.M2'
+                //     public override IOut<object> M2 => null;
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M2")
+                    .WithArguments("Derived.M2", "Base.M2", "IOut<string>")
+                    .WithLocation(10, 34)
+            );
             verify(SourceView(comp, assignments));
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (9,33): error CS1715: 'Derived.M1': type must be 'IIn<object>' to match overridden member 'Base.M1'
-                    //     public override IIn<string> M1 => null;
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M1")
-                        .WithArguments("Derived.M1", "Base.M1", "IIn<object>")
-                        .WithLocation(9, 33),
-                    // (10,34): error CS1715: 'Derived.M2': type must be 'IOut<string>' to match overridden member 'Base.M2'
-                    //     public override IOut<object> M2 => null;
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M2")
-                        .WithArguments("Derived.M2", "Base.M2", "IOut<string>")
-                        .WithLocation(10, 34)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (9,33): error CS1715: 'Derived.M1': type must be 'IIn<object>' to match overridden member 'Base.M1'
+                //     public override IIn<string> M1 => null;
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M1")
+                    .WithArguments("Derived.M1", "Base.M1", "IIn<object>")
+                    .WithLocation(9, 33),
+                // (10,34): error CS1715: 'Derived.M2': type must be 'IOut<string>' to match overridden member 'Base.M2'
+                //     public override IOut<object> M2 => null;
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M2")
+                    .WithArguments("Derived.M2", "Base.M2", "IOut<string>")
+                    .WithLocation(10, 34)
+            );
             verify(SourceView(comp, assignments));
 
             static void verify(CSharpCompilation comp)
@@ -2823,33 +2788,31 @@ public class Program
     }
 }
 ";
-            var comp = CreateCompilationWithoutCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (9,27): error CS1715: 'Derived.M1': type must be 'int' to match overridden member 'Base.M1'
-                    //     public override short M1 => 1;
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M1")
-                        .WithArguments("Derived.M1", "Base.M1", "int")
-                        .WithLocation(9, 27),
-                    // (10,23): error CS1715: 'Derived.M2': type must be 'A' to match overridden member 'Base.M2'
-                    //     public override B M2 => null;
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M2")
-                        .WithArguments("Derived.M2", "Base.M2", "A")
-                        .WithLocation(10, 23)
-                );
+            var comp = CreateCompilationWithoutCovariantReturns(source).VerifyDiagnostics(
+                // (9,27): error CS1715: 'Derived.M1': type must be 'int' to match overridden member 'Base.M1'
+                //     public override short M1 => 1;
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M1")
+                    .WithArguments("Derived.M1", "Base.M1", "int")
+                    .WithLocation(9, 27),
+                // (10,23): error CS1715: 'Derived.M2': type must be 'A' to match overridden member 'Base.M2'
+                //     public override B M2 => null;
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M2")
+                    .WithArguments("Derived.M2", "Base.M2", "A")
+                    .WithLocation(10, 23)
+            );
             verify(SourceView(comp, assignments));
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (9,27): error CS1715: 'Derived.M1': type must be 'int' to match overridden member 'Base.M1'
-                    //     public override short M1 => 1;
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M1")
-                        .WithArguments("Derived.M1", "Base.M1", "int")
-                        .WithLocation(9, 27),
-                    // (10,23): error CS1715: 'Derived.M2': type must be 'A' to match overridden member 'Base.M2'
-                    //     public override B M2 => null;
-                    Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M2")
-                        .WithArguments("Derived.M2", "Base.M2", "A")
-                        .WithLocation(10, 23)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (9,27): error CS1715: 'Derived.M1': type must be 'int' to match overridden member 'Base.M1'
+                //     public override short M1 => 1;
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M1")
+                    .WithArguments("Derived.M1", "Base.M1", "int")
+                    .WithLocation(9, 27),
+                // (10,23): error CS1715: 'Derived.M2': type must be 'A' to match overridden member 'Base.M2'
+                //     public override B M2 => null;
+                Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "M2")
+                    .WithArguments("Derived.M2", "Base.M2", "A")
+                    .WithLocation(10, 23)
+            );
             verify(SourceView(comp, assignments));
 
             static void verify(CSharpCompilation comp)
@@ -2898,9 +2861,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string M => null;
@@ -2914,12 +2877,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -2935,7 +2897,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -2990,53 +2952,51 @@ public class Program
 }
 ";
             // these are poor diagnostics; see https://github.com/dotnet/roslyn/issues/43719
-            var comp = CreateCompilationWithoutCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (9,17): error CS0539: 'Derived.M1' in explicit interface declaration is not found among members of the interface that can be implemented
-                    //     string Base.M1 => null;   // 1
-                    Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M1")
-                        .WithArguments("Derived.M1")
-                        .WithLocation(9, 17),
-                    // (10,17): error CS0539: 'Derived.M2()' in explicit interface declaration is not found among members of the interface that can be implemented
-                    //     string Base.M2() => null; // 2
-                    Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M2")
-                        .WithArguments("Derived.M2()")
-                        .WithLocation(10, 17),
-                    // (14,17): error CS0539: 'C.M1' in explicit interface declaration is not found among members of the interface that can be implemented
-                    //     string Base.M1 => null;   // 3
-                    Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M1")
-                        .WithArguments("C.M1")
-                        .WithLocation(14, 17),
-                    // (15,17): error CS0539: 'C.M2()' in explicit interface declaration is not found among members of the interface that can be implemented
-                    //     string Base.M2() => null; // 4
-                    Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M2")
-                        .WithArguments("C.M2()")
-                        .WithLocation(15, 17)
-                );
+            var comp = CreateCompilationWithoutCovariantReturns(source).VerifyDiagnostics(
+                // (9,17): error CS0539: 'Derived.M1' in explicit interface declaration is not found among members of the interface that can be implemented
+                //     string Base.M1 => null;   // 1
+                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M1")
+                    .WithArguments("Derived.M1")
+                    .WithLocation(9, 17),
+                // (10,17): error CS0539: 'Derived.M2()' in explicit interface declaration is not found among members of the interface that can be implemented
+                //     string Base.M2() => null; // 2
+                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M2")
+                    .WithArguments("Derived.M2()")
+                    .WithLocation(10, 17),
+                // (14,17): error CS0539: 'C.M1' in explicit interface declaration is not found among members of the interface that can be implemented
+                //     string Base.M1 => null;   // 3
+                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M1")
+                    .WithArguments("C.M1")
+                    .WithLocation(14, 17),
+                // (15,17): error CS0539: 'C.M2()' in explicit interface declaration is not found among members of the interface that can be implemented
+                //     string Base.M2() => null; // 4
+                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M2")
+                    .WithArguments("C.M2()")
+                    .WithLocation(15, 17)
+            );
             verify(SourceView(comp, assignments));
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (9,17): error CS0539: 'Derived.M1' in explicit interface declaration is not found among members of the interface that can be implemented
-                    //     string Base.M1 => null;   // 1
-                    Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M1")
-                        .WithArguments("Derived.M1")
-                        .WithLocation(9, 17),
-                    // (10,17): error CS0539: 'Derived.M2()' in explicit interface declaration is not found among members of the interface that can be implemented
-                    //     string Base.M2() => null; // 2
-                    Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M2")
-                        .WithArguments("Derived.M2()")
-                        .WithLocation(10, 17),
-                    // (14,17): error CS0539: 'C.M1' in explicit interface declaration is not found among members of the interface that can be implemented
-                    //     string Base.M1 => null;   // 3
-                    Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M1")
-                        .WithArguments("C.M1")
-                        .WithLocation(14, 17),
-                    // (15,17): error CS0539: 'C.M2()' in explicit interface declaration is not found among members of the interface that can be implemented
-                    //     string Base.M2() => null; // 4
-                    Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M2")
-                        .WithArguments("C.M2()")
-                        .WithLocation(15, 17)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (9,17): error CS0539: 'Derived.M1' in explicit interface declaration is not found among members of the interface that can be implemented
+                //     string Base.M1 => null;   // 1
+                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M1")
+                    .WithArguments("Derived.M1")
+                    .WithLocation(9, 17),
+                // (10,17): error CS0539: 'Derived.M2()' in explicit interface declaration is not found among members of the interface that can be implemented
+                //     string Base.M2() => null; // 2
+                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M2")
+                    .WithArguments("Derived.M2()")
+                    .WithLocation(10, 17),
+                // (14,17): error CS0539: 'C.M1' in explicit interface declaration is not found among members of the interface that can be implemented
+                //     string Base.M1 => null;   // 3
+                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M1")
+                    .WithArguments("C.M1")
+                    .WithLocation(14, 17),
+                // (15,17): error CS0539: 'C.M2()' in explicit interface declaration is not found among members of the interface that can be implemented
+                //     string Base.M2() => null; // 4
+                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "M2")
+                    .WithArguments("C.M2()")
+                    .WithLocation(15, 17)
+            );
             verify(SourceView(comp, assignments));
 
             static void verify(CSharpCompilation comp)
@@ -3075,9 +3035,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string P { get => string.Empty; }
@@ -3091,12 +3051,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -3112,7 +3071,7 @@ public class Program
   IL_000e:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -3163,9 +3122,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string P { get => string.Empty; }
@@ -3179,14 +3138,13 @@ public class Program
                         .WithLocation(12, 53)
                 );
             verify(SourceView(comp, assignments));
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (12,53): error CS0546: 'Derived2.P.set': cannot override because 'Derived.P' does not have an overridable set accessor
-                    //     public override string P { get => string.Empty; set { } }
-                    Diagnostic(ErrorCode.ERR_NoSetToOverride, "set")
-                        .WithArguments("Derived2.P.set", "Derived.P")
-                        .WithLocation(12, 53)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (12,53): error CS0546: 'Derived2.P.set': cannot override because 'Derived.P' does not have an overridable set accessor
+                //     public override string P { get => string.Empty; set { } }
+                Diagnostic(ErrorCode.ERR_NoSetToOverride, "set")
+                    .WithArguments("Derived2.P.set", "Derived.P")
+                    .WithLocation(12, 53)
+            );
             verify(SourceView(comp, assignments));
 
             static void verify(CSharpCompilation comp)
@@ -3251,9 +3209,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string P { get => string.Empty; }
@@ -3267,14 +3225,13 @@ public class Program
                         .WithLocation(12, 32)
                 );
             verify(SourceView(comp, assignments));
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (12,32): error CS0546: 'Derived2.P.set': cannot override because 'Derived.P' does not have an overridable set accessor
-                    //     public override string P { set { } }
-                    Diagnostic(ErrorCode.ERR_NoSetToOverride, "set")
-                        .WithArguments("Derived2.P.set", "Derived.P")
-                        .WithLocation(12, 32)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (12,32): error CS0546: 'Derived2.P.set': cannot override because 'Derived.P' does not have an overridable set accessor
+                //     public override string P { set { } }
+                Diagnostic(ErrorCode.ERR_NoSetToOverride, "set")
+                    .WithArguments("Derived2.P.set", "Derived.P")
+                    .WithLocation(12, 32)
+            );
             verify(SourceView(comp, assignments));
 
             static void verify(CSharpCompilation comp)
@@ -3333,9 +3290,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,40): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override System.IComparable P { get => string.Empty; }
@@ -3354,12 +3311,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived, Derived2)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived, Derived2)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       22 (0x16)
   .maxstack  1
@@ -3379,7 +3335,7 @@ public class Program
   IL_0015:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -3437,23 +3393,21 @@ public class Program
     }
 }
 ";
-            var comp = CreateCompilationWithoutCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (9,28): error CS0462: The inherited members 'Base<T>.M(string)' and 'Base<T>.M(T)' have the same signature in type 'Derived', so they cannot be overridden
-                    //     public override string M(string s) => null;
-                    Diagnostic(ErrorCode.ERR_AmbigOverride, "M")
-                        .WithArguments("Base<T>.M(string)", "Base<T>.M(T)", "Derived")
-                        .WithLocation(9, 28)
-                );
+            var comp = CreateCompilationWithoutCovariantReturns(source).VerifyDiagnostics(
+                // (9,28): error CS0462: The inherited members 'Base<T>.M(string)' and 'Base<T>.M(T)' have the same signature in type 'Derived', so they cannot be overridden
+                //     public override string M(string s) => null;
+                Diagnostic(ErrorCode.ERR_AmbigOverride, "M")
+                    .WithArguments("Base<T>.M(string)", "Base<T>.M(T)", "Derived")
+                    .WithLocation(9, 28)
+            );
             verify(SourceView(comp, assignments));
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (9,28): error CS0462: The inherited members 'Base<T>.M(string)' and 'Base<T>.M(T)' have the same signature in type 'Derived', so they cannot be overridden
-                    //     public override string M(string s) => null;
-                    Diagnostic(ErrorCode.ERR_AmbigOverride, "M")
-                        .WithArguments("Base<T>.M(string)", "Base<T>.M(T)", "Derived")
-                        .WithLocation(9, 28)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (9,28): error CS0462: The inherited members 'Base<T>.M(string)' and 'Base<T>.M(T)' have the same signature in type 'Derived', so they cannot be overridden
+                //     public override string M(string s) => null;
+                Diagnostic(ErrorCode.ERR_AmbigOverride, "M")
+                    .WithArguments("Base<T>.M(string)", "Base<T>.M(T)", "Derived")
+                    .WithLocation(9, 28)
+            );
             verify(SourceView(comp, assignments));
 
             static void verify(CSharpCompilation comp)
@@ -3499,9 +3453,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (8,49): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public abstract override System.IComparable M();
@@ -3520,12 +3474,11 @@ public class Program
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
             verify(RetargetingView(comp, assignments));
-            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(Base, Derived, Derived2)",
-                    source: assignments,
-                    sequencePoints: "Program.M",
-                    expectedIL: @"
+            CompileAndVerify(SourceView(comp, assignments), verify: Verification.Skipped).VerifyIL(
+                "Program.M(Base, Derived, Derived2)",
+                source: assignments,
+                sequencePoints: "Program.M",
+                expectedIL: @"
 {
   // Code size       22 (0x16)
   .maxstack  1
@@ -3545,7 +3498,7 @@ public class Program
   IL_0015:  ret
 }
 "
-                );
+            );
 
             static void verify(CSharpCompilation comp)
             {
@@ -3669,12 +3622,11 @@ End Class
 
             Assert.Equal(15, count);
 
-            CompileAndVerify(vbComp, verify: Verification.Skipped)
-                .VerifyIL(
-                    "Derived2.T(Base, Derived, Derived2)",
-                    source: vbSource,
-                    sequencePoints: "Derived2.T",
-                    expectedIL: @"
+            CompileAndVerify(vbComp, verify: Verification.Skipped).VerifyIL(
+                "Derived2.T(Base, Derived, Derived2)",
+                source: vbSource,
+                sequencePoints: "Derived2.T",
+                expectedIL: @"
 {
   // Code size      360 (0x168)
   .maxstack  7
@@ -3826,7 +3778,7 @@ End Class
   IL_0167:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -3848,10 +3800,10 @@ public class Mid : Base
 }
 ";
             var ref1a = CreateCompilationWithoutCovariantReturns(
-                    s1a,
-                    references: new[] { ref0 },
-                    assemblyName: "ref1"
-                )
+                s1a,
+                references: new[] { ref0 },
+                assemblyName: "ref1"
+            )
                 .EmitToImageReference();
 
             var s1b =
@@ -3862,10 +3814,10 @@ public class Mid : Base
 }
 ";
             var ref1b = CreateCompilationWithCovariantReturns(
-                    s1b,
-                    references: new[] { ref0 },
-                    assemblyName: "ref1"
-                )
+                s1b,
+                references: new[] { ref0 },
+                assemblyName: "ref1"
+            )
                 .EmitToImageReference();
 
             var s2 =
@@ -3902,10 +3854,10 @@ public class Program
 
             var references = new[] { ref0, ref1a };
             var comp = CreateCompilationWithCovariantReturns(
-                    s2,
-                    references,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                s2,
+                references,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (4,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string M() => null;
@@ -3968,10 +3920,10 @@ public class Mid : Base
 }
 ";
             var ref1a = CreateCompilationWithoutCovariantReturns(
-                    s1a,
-                    references: new[] { ref0 },
-                    assemblyName: "ref1"
-                )
+                s1a,
+                references: new[] { ref0 },
+                assemblyName: "ref1"
+            )
                 .EmitToImageReference();
 
             var s1b =
@@ -3982,10 +3934,10 @@ public class Mid : Base
 }
 ";
             var ref1b = CreateCompilationWithCovariantReturns(
-                    s1b,
-                    references: new[] { ref0 },
-                    assemblyName: "ref1"
-                )
+                s1b,
+                references: new[] { ref0 },
+                assemblyName: "ref1"
+            )
                 .EmitToImageReference();
 
             var s2 =
@@ -3998,10 +3950,10 @@ public class Derived : Mid
             var assignments = "";
             var references = new[] { ref0, ref1a };
             var comp = CreateCompilationWithCovariantReturns(
-                    s2,
-                    references,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                s2,
+                references,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (4,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string P => null;
@@ -4075,10 +4027,10 @@ public class Mid : Base
 }
 ";
             var ref1a = CreateCompilationWithoutCovariantReturns(
-                    s1a,
-                    references: new[] { ref0 },
-                    assemblyName: "ref1"
-                )
+                s1a,
+                references: new[] { ref0 },
+                assemblyName: "ref1"
+            )
                 .EmitToImageReference();
 
             var s1b =
@@ -4089,10 +4041,10 @@ public class Mid : Base
 }
 ";
             var ref1b = CreateCompilationWithCovariantReturns(
-                    s1b,
-                    references: new[] { ref0 },
-                    assemblyName: "ref1"
-                )
+                s1b,
+                references: new[] { ref0 },
+                assemblyName: "ref1"
+            )
                 .EmitToImageReference();
 
             var s2 =
@@ -4105,10 +4057,10 @@ public class Derived : Mid
             var assignments = "";
             var references = new[] { ref0, ref1a };
             var comp = CreateCompilationWithCovariantReturns(
-                    s2,
-                    references,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                s2,
+                references,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (4,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string M() => null;
@@ -4240,9 +4192,9 @@ public class D : C
 ";
             var assignments = "";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (14,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string get_P() => null;
@@ -4300,9 +4252,9 @@ public class C : B
 ";
             var assignments = "";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (12,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string P => null;
@@ -4353,9 +4305,9 @@ public class C : B
 ";
             var assignments = "";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (12,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string M() => null;
@@ -4808,9 +4760,9 @@ public class Program
 }
 ";
             var comp = CreateCompilationWithCovariantReturns(
-                    source,
-                    parseOptions: TestOptions.WithoutCovariantReturns
-                )
+                source,
+                parseOptions: TestOptions.WithoutCovariantReturns
+            )
                 .VerifyDiagnostics(
                     // (20,29): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
                     //     public override string? M1() => null;
@@ -4875,39 +4827,32 @@ public class Program
                 );
             verify(SourceView(comp, assignments));
 
-            comp = CreateCompilationWithCovariantReturns(source)
-                .VerifyDiagnostics(
-                    // (20,29): warning CS8764: Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
-                    //     public override string? M1() => null;
-                    Diagnostic(
-                            ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnOverride,
-                            "M1"
-                        )
-                        .WithLocation(20, 29),
-                    // (21,35): warning CS8764: Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
-                    //     public override string? P1 => null;
-                    Diagnostic(
-                            ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnOverride,
-                            "null"
-                        )
-                        .WithLocation(21, 35),
-                    // (24,35): warning CS8609: Nullability of reference types in return type doesn't match overridden member.
-                    //     public override IOut<string?> M3() => null!;
-                    Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride, "M3")
-                        .WithLocation(24, 35),
-                    // (25,41): warning CS8609: Nullability of reference types in return type doesn't match overridden member.
-                    //     public override IOut<string?> P3 => null!;
-                    Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride, "null!")
-                        .WithLocation(25, 41),
-                    // (30,33): warning CS8609: Nullability of reference types in return type doesn't match overridden member.
-                    //     public override IIn<object> M6() => null!;
-                    Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride, "M6")
-                        .WithLocation(30, 33),
-                    // (31,39): warning CS8609: Nullability of reference types in return type doesn't match overridden member.
-                    //     public override IIn<object> P6 => null!;
-                    Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride, "null!")
-                        .WithLocation(31, 39)
-                );
+            comp = CreateCompilationWithCovariantReturns(source).VerifyDiagnostics(
+                // (20,29): warning CS8764: Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
+                //     public override string? M1() => null;
+                Diagnostic(ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnOverride, "M1")
+                    .WithLocation(20, 29),
+                // (21,35): warning CS8764: Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
+                //     public override string? P1 => null;
+                Diagnostic(ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnOverride, "null")
+                    .WithLocation(21, 35),
+                // (24,35): warning CS8609: Nullability of reference types in return type doesn't match overridden member.
+                //     public override IOut<string?> M3() => null!;
+                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride, "M3")
+                    .WithLocation(24, 35),
+                // (25,41): warning CS8609: Nullability of reference types in return type doesn't match overridden member.
+                //     public override IOut<string?> P3 => null!;
+                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride, "null!")
+                    .WithLocation(25, 41),
+                // (30,33): warning CS8609: Nullability of reference types in return type doesn't match overridden member.
+                //     public override IIn<object> M6() => null!;
+                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride, "M6")
+                    .WithLocation(30, 33),
+                // (31,39): warning CS8609: Nullability of reference types in return type doesn't match overridden member.
+                //     public override IIn<object> P6 => null!;
+                Diagnostic(ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride, "null!")
+                    .WithLocation(31, 39)
+            );
             verify(SourceView(comp, assignments));
             verify(CompilationReferenceView(comp, assignments));
             verify(MetadataView(comp, assignments));
@@ -5211,30 +5156,28 @@ public class Derived : Base2<string>
                 if (!withCovariantCapableRuntime)
                 {
                     expectedDiagnostics = expectedDiagnostics.Append(
-                            // (4,28): error CS8778: 'Derived.M(ref string, out string)': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base1<string>.M(ref string, out string)'
-                            //     public override string M(ref string x, out string y) { y = null; return null; }
-                            Diagnostic(
-                                    ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
-                                    "M"
-                                )
-                                .WithArguments(
-                                    "Derived.M(ref string, out string)",
-                                    "Base1<string>.M(ref string, out string)",
-                                    "object"
-                                )
+                        // (4,28): error CS8778: 'Derived.M(ref string, out string)': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base1<string>.M(ref string, out string)'
+                        //     public override string M(ref string x, out string y) { y = null; return null; }
+                        Diagnostic(
+                            ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
+                            "M"
                         )
-                        .ToArray();
+                            .WithArguments(
+                                "Derived.M(ref string, out string)",
+                                "Base1<string>.M(ref string, out string)",
+                                "object"
+                            )
+                    ).ToArray();
                     anyErrors = true;
                 }
                 else if (!withCovariantReturnFeatureEnabled)
                 {
                     expectedDiagnostics = expectedDiagnostics.Append(
-                            // (15,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
-                            //     public override string M(ref string x, out string y) { y = null; return null; }
-                            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "M")
-                                .WithArguments("covariant returns", "9.0")
-                        )
-                        .ToArray();
+                        // (15,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
+                        //     public override string M(ref string x, out string y) { y = null; return null; }
+                        Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "M")
+                            .WithArguments("covariant returns", "9.0")
+                    ).ToArray();
                     anyErrors = true;
                 }
             }
@@ -5246,16 +5189,15 @@ public class Derived : Base2<string>
             )
             {
                 expectedDiagnostics = expectedDiagnostics.Append(
-                        // (4,27): warning CS1957: Member 'Derived.M(ref string, out string)' overrides 'Base1<string>.M(ref string, out string)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
-                        //     public virtual string M(ref Ptring x, out string y) { y = null; return null; }
-                        Diagnostic(ErrorCode.WRN_MultipleRuntimeOverrideMatches, "M")
-                            .WithArguments(
-                                "Base1<string>.M(ref string, out string)",
-                                "Derived.M(ref string, out string)"
-                            )
-                            .WithLocation(4, 27)
-                    )
-                    .ToArray();
+                    // (4,27): warning CS1957: Member 'Derived.M(ref string, out string)' overrides 'Base1<string>.M(ref string, out string)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
+                    //     public virtual string M(ref Ptring x, out string y) { y = null; return null; }
+                    Diagnostic(ErrorCode.WRN_MultipleRuntimeOverrideMatches, "M")
+                        .WithArguments(
+                            "Base1<string>.M(ref string, out string)",
+                            "Derived.M(ref string, out string)"
+                        )
+                        .WithLocation(4, 27)
+                ).ToArray();
                 warned = true;
             }
 
@@ -5386,30 +5328,28 @@ public class Derived : Base2<string>
                 if (!withCovariantCapableRuntime)
                 {
                     expectedDiagnostics = expectedDiagnostics.Append(
-                            // (4,28): error CS8778: 'Derived.M(ref string, out string)': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base1<string>.M(ref string, out string)'
-                            //     public override string M(ref string x, out string y) { y = null; return null; }
-                            Diagnostic(
-                                    ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
-                                    "M"
-                                )
-                                .WithArguments(
-                                    "Derived.M(ref string, out string)",
-                                    "Base1<string>.M(ref string, out string)",
-                                    "object"
-                                )
+                        // (4,28): error CS8778: 'Derived.M(ref string, out string)': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base1<string>.M(ref string, out string)'
+                        //     public override string M(ref string x, out string y) { y = null; return null; }
+                        Diagnostic(
+                            ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
+                            "M"
                         )
-                        .ToArray();
+                            .WithArguments(
+                                "Derived.M(ref string, out string)",
+                                "Base1<string>.M(ref string, out string)",
+                                "object"
+                            )
+                    ).ToArray();
                     anyErrors = true;
                 }
                 else if (!withCovariantReturnFeatureEnabled)
                 {
                     expectedDiagnostics = expectedDiagnostics.Append(
-                            // (15,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
-                            //     public override string M(ref string x, out string y) { y = null; return null; }
-                            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "M")
-                                .WithArguments("covariant returns", "9.0")
-                        )
-                        .ToArray();
+                        // (15,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
+                        //     public override string M(ref string x, out string y) { y = null; return null; }
+                        Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "M")
+                            .WithArguments("covariant returns", "9.0")
+                    ).ToArray();
                     anyErrors = true;
                 }
             }
@@ -5421,16 +5361,15 @@ public class Derived : Base2<string>
             )
             {
                 expectedDiagnostics = expectedDiagnostics.Append(
-                        // (5,27): warning CS1957: Member 'Derived.M(ref string, out string)' overrides 'Base1<string>.M(ref string, out string)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
-                        //     public virtual string M(ref Ptring x, out string y) { y = null; return null; }
-                        Diagnostic(ErrorCode.WRN_MultipleRuntimeOverrideMatches, "M")
-                            .WithArguments(
-                                "Base1<string>.M(ref string, out string)",
-                                "Derived.M(ref string, out string)"
-                            )
-                            .WithLocation(5, 27)
-                    )
-                    .ToArray();
+                    // (5,27): warning CS1957: Member 'Derived.M(ref string, out string)' overrides 'Base1<string>.M(ref string, out string)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
+                    //     public virtual string M(ref Ptring x, out string y) { y = null; return null; }
+                    Diagnostic(ErrorCode.WRN_MultipleRuntimeOverrideMatches, "M")
+                        .WithArguments(
+                            "Base1<string>.M(ref string, out string)",
+                            "Derived.M(ref string, out string)"
+                        )
+                        .WithLocation(5, 27)
+                ).ToArray();
                 warned = true;
             }
 
@@ -5552,30 +5491,28 @@ public class Derived : Base<string>
                 if (!withCovariantCapableRuntime)
                 {
                     expectedDiagnostics = expectedDiagnostics.Append(
-                            // (4,28): error CS8778: 'Derived.M(ref string, out string)': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base<string>.M(ref string, out string)'
-                            //     public override string M(ref string x, out string y) { y = null; return null; }
-                            Diagnostic(
-                                    ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
-                                    "M"
-                                )
-                                .WithArguments(
-                                    "Derived.M(ref string, out string)",
-                                    "Base<string>.M(ref string, out string)",
-                                    "object"
-                                )
+                        // (4,28): error CS8778: 'Derived.M(ref string, out string)': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base<string>.M(ref string, out string)'
+                        //     public override string M(ref string x, out string y) { y = null; return null; }
+                        Diagnostic(
+                            ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
+                            "M"
                         )
-                        .ToArray();
+                            .WithArguments(
+                                "Derived.M(ref string, out string)",
+                                "Base<string>.M(ref string, out string)",
+                                "object"
+                            )
+                    ).ToArray();
                     anyErrors = true;
                 }
                 else if (!withCovariantReturnFeatureEnabled)
                 {
                     expectedDiagnostics = expectedDiagnostics.Append(
-                            // (12,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
-                            //     public override string M(ref string x, out string y) { y = null; return null; }
-                            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "M")
-                                .WithArguments("covariant returns", "9.0")
-                        )
-                        .ToArray();
+                        // (12,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
+                        //     public override string M(ref string x, out string y) { y = null; return null; }
+                        Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "M")
+                            .WithArguments("covariant returns", "9.0")
+                    ).ToArray();
                     anyErrors = true;
                 }
             }
@@ -5583,16 +5520,15 @@ public class Derived : Base<string>
             if (!withCovariantCapableRuntime && !useCovariantReturns)
             {
                 expectedDiagnostics = expectedDiagnostics.Append(
-                        // (4,27): warning CS1957: Member 'Derived.M(ref string, out string)' overrides 'Base<string>.M(ref string, out string)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
-                        //     public virtual string M(ref Ptring x, out string y) { y = null; return null; }
-                        Diagnostic(ErrorCode.WRN_MultipleRuntimeOverrideMatches, "M")
-                            .WithArguments(
-                                "Base<string>.M(ref string, out string)",
-                                "Derived.M(ref string, out string)"
-                            )
-                            .WithLocation(4, 27)
-                    )
-                    .ToArray();
+                    // (4,27): warning CS1957: Member 'Derived.M(ref string, out string)' overrides 'Base<string>.M(ref string, out string)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
+                    //     public virtual string M(ref Ptring x, out string y) { y = null; return null; }
+                    Diagnostic(ErrorCode.WRN_MultipleRuntimeOverrideMatches, "M")
+                        .WithArguments(
+                            "Base<string>.M(ref string, out string)",
+                            "Derived.M(ref string, out string)"
+                        )
+                        .WithLocation(4, 27)
+                ).ToArray();
                 warned = true;
             }
 
@@ -5710,30 +5646,28 @@ public class Derived : Base<string>
                 if (!withCovariantCapableRuntime)
                 {
                     expectedDiagnostics = expectedDiagnostics.Append(
-                            // (4,28): error CS8778: 'Derived.M(ref string, out string)': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base<string>.M(ref string, out string)'
-                            //     public override string M(ref string x, out string y) { y = null; return null; }
-                            Diagnostic(
-                                    ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
-                                    "M"
-                                )
-                                .WithArguments(
-                                    "Derived.M(ref string, out string)",
-                                    "Base<string>.M(ref string, out string)",
-                                    "object"
-                                )
+                        // (4,28): error CS8778: 'Derived.M(ref string, out string)': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base<string>.M(ref string, out string)'
+                        //     public override string M(ref string x, out string y) { y = null; return null; }
+                        Diagnostic(
+                            ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
+                            "M"
                         )
-                        .ToArray();
+                            .WithArguments(
+                                "Derived.M(ref string, out string)",
+                                "Base<string>.M(ref string, out string)",
+                                "object"
+                            )
+                    ).ToArray();
                     anyErrors = true;
                 }
                 else if (!withCovariantReturnFeatureEnabled)
                 {
                     expectedDiagnostics = expectedDiagnostics.Append(
-                            // (12,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
-                            //     public override string M(ref string x, out string y) { y = null; return null; }
-                            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "M")
-                                .WithArguments("covariant returns", "9.0")
-                        )
-                        .ToArray();
+                        // (12,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
+                        //     public override string M(ref string x, out string y) { y = null; return null; }
+                        Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "M")
+                            .WithArguments("covariant returns", "9.0")
+                    ).ToArray();
                     anyErrors = true;
                 }
             }
@@ -5741,16 +5675,15 @@ public class Derived : Base<string>
             if (!withCovariantCapableRuntime && !useCovariantReturns)
             {
                 expectedDiagnostics = expectedDiagnostics.Append(
-                        // (5,27): warning CS1957: Member 'Derived.M(ref string, out string)' overrides 'Base<string>.M(ref string, out string)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
-                        //     public virtual string M(ref Ptring x, out string y) { y = null; return null; }
-                        Diagnostic(ErrorCode.WRN_MultipleRuntimeOverrideMatches, "M")
-                            .WithArguments(
-                                "Base<string>.M(ref string, out string)",
-                                "Derived.M(ref string, out string)"
-                            )
-                            .WithLocation(5, 27)
-                    )
-                    .ToArray();
+                    // (5,27): warning CS1957: Member 'Derived.M(ref string, out string)' overrides 'Base<string>.M(ref string, out string)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
+                    //     public virtual string M(ref Ptring x, out string y) { y = null; return null; }
+                    Diagnostic(ErrorCode.WRN_MultipleRuntimeOverrideMatches, "M")
+                        .WithArguments(
+                            "Base<string>.M(ref string, out string)",
+                            "Derived.M(ref string, out string)"
+                        )
+                        .WithLocation(5, 27)
+                ).ToArray();
                 warned = true;
             }
 
@@ -5876,30 +5809,25 @@ public class Derived : Base2<string>
             if (!withCovariantCapableRuntime)
             {
                 expectedDiagnostics = expectedDiagnostics.Append(
-                        // (4,28): error CS8778: 'Derived.M(out string)': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base2<string>.M(out string)'
-                        //     public override string M(out string y) { y = null; return null; }
-                        Diagnostic(
-                                ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
-                                "M"
-                            )
-                            .WithArguments(
-                                "Derived.M(out string)",
-                                "Base2<string>.M(out string)",
-                                "object"
-                            )
-                    )
-                    .ToArray();
+                    // (4,28): error CS8778: 'Derived.M(out string)': Target runtime doesn't support covariant return types in overrides. Return type must be 'object' to match overridden member 'Base2<string>.M(out string)'
+                    //     public override string M(out string y) { y = null; return null; }
+                    Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses, "M")
+                        .WithArguments(
+                            "Derived.M(out string)",
+                            "Base2<string>.M(out string)",
+                            "object"
+                        )
+                ).ToArray();
                 anyErrors = true;
             }
             else if (!withCovariantReturnFeatureEnabled)
             {
                 expectedDiagnostics = expectedDiagnostics.Append(
-                        // (14,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
-                        //     public override string M(out string y) { y = null; return null; }
-                        Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "M")
-                            .WithArguments("covariant returns", "9.0")
-                    )
-                    .ToArray();
+                    // (14,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    //     public override string M(out string y) { y = null; return null; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "M")
+                        .WithArguments("covariant returns", "9.0")
+                ).ToArray();
                 anyErrors = true;
             }
 
@@ -6022,15 +5950,14 @@ public class Derived : Base<object>
                     if (overrideProperty)
                     {
                         expectedDiagnostics = expectedDiagnostics.Append(
-                                // (4,28): error CS8779: 'Derived.Prop': Target runtime doesn't support covariant types in overrides. Type must be 'object' to match overridden member 'Base<object>.Prop'
-                                //     public override string Prop => null;
-                                Diagnostic(
-                                        ErrorCode.ERR_RuntimeDoesNotSupportCovariantPropertiesOfClasses,
-                                        "Prop"
-                                    )
-                                    .WithArguments("Derived.Prop", "Base<object>.Prop", "object")
+                            // (4,28): error CS8779: 'Derived.Prop': Target runtime doesn't support covariant types in overrides. Type must be 'object' to match overridden member 'Base<object>.Prop'
+                            //     public override string Prop => null;
+                            Diagnostic(
+                                ErrorCode.ERR_RuntimeDoesNotSupportCovariantPropertiesOfClasses,
+                                "Prop"
                             )
-                            .ToArray();
+                                .WithArguments("Derived.Prop", "Base<object>.Prop", "object")
+                        ).ToArray();
                     }
                     else
                     {
@@ -6042,12 +5969,11 @@ public class Derived : Base<object>
                     if (overrideProperty)
                     {
                         expectedDiagnostics = expectedDiagnostics.Append(
-                                // (4,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
-                                //     public override string Prop => null;
-                                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "Prop")
-                                    .WithArguments("covariant returns", "9.0")
-                            )
-                            .ToArray();
+                            // (4,28): error CS8400: Feature 'covariant returns' is not available in C# 8.0. Please use language version 9.0 or greater.
+                            //     public override string Prop => null;
+                            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "Prop")
+                                .WithArguments("covariant returns", "9.0")
+                        ).ToArray();
                     }
                     else
                     {
@@ -6067,31 +5993,29 @@ public class Derived : Base<object>
                 )
                 {
                     expectedDiagnostics = expectedDiagnostics.Append(
-                            // (4,36): error CS0462: The inherited members 'Base<Pbject>.Prop.get' and 'Base<Pbject>.get_Prop()' have the same signature in type 'Derived', so they cannot be overridden
-                            //     public override object Prop => null;
-                            Diagnostic(ErrorCode.ERR_AmbigOverride, "null")
-                                .WithArguments(
-                                    "Base<Pbject>.Prop.get",
-                                    "Base<Pbject>.get_Prop()",
-                                    "Derived"
-                                )
-                        )
-                        .ToArray();
+                        // (4,36): error CS0462: The inherited members 'Base<Pbject>.Prop.get' and 'Base<Pbject>.get_Prop()' have the same signature in type 'Derived', so they cannot be overridden
+                        //     public override object Prop => null;
+                        Diagnostic(ErrorCode.ERR_AmbigOverride, "null")
+                            .WithArguments(
+                                "Base<Pbject>.Prop.get",
+                                "Base<Pbject>.get_Prop()",
+                                "Derived"
+                            )
+                    ).ToArray();
                 }
             }
             else
             {
                 expectedDiagnostics = expectedDiagnostics.Append(
-                        // (4,28): error CS0462: The inherited members 'Base<Pbject>.get_Prop()' and 'Base<Pbject>.Prop.get' have the same signature in type 'Derived', so they cannot be overridden
-                        //     public override object get_Prop() => null;
-                        Diagnostic(ErrorCode.ERR_AmbigOverride, "get_Prop")
-                            .WithArguments(
-                                "Base<Pbject>.get_Prop()",
-                                "Base<Pbject>.Prop.get",
-                                "Derived"
-                            )
-                    )
-                    .ToArray();
+                    // (4,28): error CS0462: The inherited members 'Base<Pbject>.get_Prop()' and 'Base<Pbject>.Prop.get' have the same signature in type 'Derived', so they cannot be overridden
+                    //     public override object get_Prop() => null;
+                    Diagnostic(ErrorCode.ERR_AmbigOverride, "get_Prop")
+                        .WithArguments(
+                            "Base<Pbject>.get_Prop()",
+                            "Base<Pbject>.Prop.get",
+                            "Derived"
+                        )
+                ).ToArray();
             }
 
             bool deservesAmbiguousOverrideWarning =
@@ -6102,25 +6026,20 @@ public class Derived : Base<object>
                 if (overrideProperty)
                 {
                     expectedDiagnostics = expectedDiagnostics.Append(
-                            // (6,35): warning CS1957: Member 'Derived.Prop.get' overrides 'Base<object>.Prop.get'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
-                            //     public virtual Pbject Prop => default(Pbject);
-                            Diagnostic(
-                                    ErrorCode.WRN_MultipleRuntimeOverrideMatches,
-                                    "default(Pbject)"
-                                )
-                                .WithArguments("Base<object>.Prop.get", "Derived.Prop.get")
-                        )
-                        .ToArray();
+                        // (6,35): warning CS1957: Member 'Derived.Prop.get' overrides 'Base<object>.Prop.get'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
+                        //     public virtual Pbject Prop => default(Pbject);
+                        Diagnostic(ErrorCode.WRN_MultipleRuntimeOverrideMatches, "default(Pbject)")
+                            .WithArguments("Base<object>.Prop.get", "Derived.Prop.get")
+                    ).ToArray();
                 }
                 else
                 {
                     expectedDiagnostics = expectedDiagnostics.Append(
-                            // (5,27): warning CS1957: Member 'Derived.get_Prop()' overrides 'Base<object>.get_Prop()'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
-                            //     public virtual object get_Prop() => default(object);
-                            Diagnostic(ErrorCode.WRN_MultipleRuntimeOverrideMatches, "get_Prop")
-                                .WithArguments("Base<object>.get_Prop()", "Derived.get_Prop()")
-                        )
-                        .ToArray();
+                        // (5,27): warning CS1957: Member 'Derived.get_Prop()' overrides 'Base<object>.get_Prop()'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
+                        //     public virtual object get_Prop() => default(object);
+                        Diagnostic(ErrorCode.WRN_MultipleRuntimeOverrideMatches, "get_Prop")
+                            .WithArguments("Base<object>.get_Prop()", "Derived.get_Prop()")
+                    ).ToArray();
                 }
             }
 
@@ -6168,13 +6087,12 @@ public class Derived : Base<object>
                 retargetReferences = new[] { corlib2Ref };
                 compilationSource = baseSource + source;
                 expectedDiagnostics = expectedDiagnostics.Prepend(
-                        // (6,35): error CS0082: Type 'Base<Pbject>' already reserves a member called 'get_Prop' with the same parameter types
-                        //     public virtual Pbject Prop => default(Pbject);
-                        Diagnostic(ErrorCode.ERR_MemberReserved, "default(Pbject)")
-                            .WithArguments("get_Prop", "Base<Pbject>")
-                            .WithLocation(withPropertyDeclarationFirst ? 4 : 6, 35)
-                    )
-                    .ToArray();
+                    // (6,35): error CS0082: Type 'Base<Pbject>' already reserves a member called 'get_Prop' with the same parameter types
+                    //     public virtual Pbject Prop => default(Pbject);
+                    Diagnostic(ErrorCode.ERR_MemberReserved, "default(Pbject)")
+                        .WithArguments("get_Prop", "Base<Pbject>")
+                        .WithLocation(withPropertyDeclarationFirst ? 4 : 6, 35)
+                ).ToArray();
             }
 
             var comp = CreateCompilation(

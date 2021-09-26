@@ -1360,9 +1360,8 @@ namespace System.Data.Tests
             al.Clear();
             foreach (DataRow dr in dt.Rows)
                 if (
-                    ((DateTime)dr["ChildDateTime"]).CompareTo(
-                        new DateTime(2005, 12, 03, 17, 06, 30)
-                    ) >= 0
+                    ((DateTime)dr["ChildDateTime"])
+                        .CompareTo(new DateTime(2005, 12, 03, 17, 06, 30)) >= 0
                     || ((DateTime)dr["ChildDateTime"]).CompareTo(new DateTime(1980, 11, 03)) <= 0
                 )
                     al.Add(dr);
@@ -1401,9 +1400,14 @@ namespace System.Data.Tests
             Assert.NotNull(ex.Message);
             //-------------------------------------------------------------
             al.Clear();
-            ds.Relations.Add(
-                new DataRelation("ParentChild", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation(
+                        "ParentChild",
+                        ds.Tables[0].Columns[0],
+                        ds.Tables[1].Columns[0]
+                    )
+                );
             foreach (DataRow dr in dt.Rows)
                 if ((int)dr["ChildId"] == (int)dr.GetParentRow("ParentChild")["ParentId"])
                     al.Add(dr);

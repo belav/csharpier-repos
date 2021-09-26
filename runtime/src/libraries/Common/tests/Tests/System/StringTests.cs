@@ -1816,17 +1816,19 @@ namespace System.Tests
                 + "VERSION}, Culture=neutral, PublicKeyToken=b77a5c561934e089\u0022version=\u00221\u0022"
                 + " Flags=\u0022SkipVerification\u0022/></PermissionSet></NamedPermissionSets>";
 
-            int result = string.Compare(
-                "{Policy_PS_Nothing}",
-                0,
-                veryLongString,
-                4380,
-                19,
-                StringComparison.Ordinal
-            );
+            int result = string
+                .Compare(
+                    "{Policy_PS_Nothing}",
+                    0,
+                    veryLongString,
+                    4380,
+                    19,
+                    StringComparison.Ordinal
+                );
             Assert.True(result < 0);
 
-            result = "{Policy_PS_Nothing}".AsSpan()
+            result = "{Policy_PS_Nothing}"
+                .AsSpan()
                 .CompareTo(veryLongString.AsSpan(4380, 19), StringComparison.Ordinal);
             Assert.True(result < 0);
         }
@@ -2061,11 +2063,12 @@ namespace System.Tests
                     // However, the sign will match, which is what defines correctness.
                     Assert.Equal(
                         Math.Sign(
-                            string.Compare(
-                                firstSpan.ToString(),
-                                secondSpan.ToString(),
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Compare(
+                                    firstSpan.ToString(),
+                                    secondSpan.ToString(),
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         ),
                         Math.Sign(
                             firstSpan.CompareTo(secondSpan, StringComparison.OrdinalIgnoreCase)
@@ -2073,35 +2076,39 @@ namespace System.Tests
                     );
 
                     Assert.Equal(
-                        string.Compare(
-                            firstSpan.ToString(),
-                            secondSpan.ToString(),
-                            StringComparison.CurrentCulture
-                        ),
+                        string
+                            .Compare(
+                                firstSpan.ToString(),
+                                secondSpan.ToString(),
+                                StringComparison.CurrentCulture
+                            ),
                         firstSpan.CompareTo(secondSpan, StringComparison.CurrentCulture)
                     );
                     Assert.Equal(
-                        string.Compare(
-                            firstSpan.ToString(),
-                            secondSpan.ToString(),
-                            StringComparison.CurrentCultureIgnoreCase
-                        ),
+                        string
+                            .Compare(
+                                firstSpan.ToString(),
+                                secondSpan.ToString(),
+                                StringComparison.CurrentCultureIgnoreCase
+                            ),
                         firstSpan.CompareTo(secondSpan, StringComparison.CurrentCultureIgnoreCase)
                     );
                     Assert.Equal(
-                        string.Compare(
-                            firstSpan.ToString(),
-                            secondSpan.ToString(),
-                            StringComparison.InvariantCulture
-                        ),
+                        string
+                            .Compare(
+                                firstSpan.ToString(),
+                                secondSpan.ToString(),
+                                StringComparison.InvariantCulture
+                            ),
                         firstSpan.CompareTo(secondSpan, StringComparison.InvariantCulture)
                     );
                     Assert.Equal(
-                        string.Compare(
-                            firstSpan.ToString(),
-                            secondSpan.ToString(),
-                            StringComparison.InvariantCultureIgnoreCase
-                        ),
+                        string
+                            .Compare(
+                                firstSpan.ToString(),
+                                secondSpan.ToString(),
+                                StringComparison.InvariantCultureIgnoreCase
+                            ),
                         firstSpan.CompareTo(secondSpan, StringComparison.InvariantCultureIgnoreCase)
                     );
                 }
@@ -4067,27 +4074,29 @@ namespace System.Tests
         [Fact]
         public static void Format()
         {
-            string s = string.Format(
-                null,
-                "0 = {0} 1 = {1} 2 = {2} 3 = {3} 4 = {4}",
-                "zero",
-                "one",
-                "two",
-                "three",
-                "four"
-            );
+            string s = string
+                .Format(
+                    null,
+                    "0 = {0} 1 = {1} 2 = {2} 3 = {3} 4 = {4}",
+                    "zero",
+                    "one",
+                    "two",
+                    "three",
+                    "four"
+                );
             Assert.Equal("0 = zero 1 = one 2 = two 3 = three 4 = four", s);
 
             var testFormatter = new TestFormatter();
-            s = string.Format(
-                testFormatter,
-                "0 = {0} 1 = {1} 2 = {2} 3 = {3} 4 = {4}",
-                "zero",
-                "one",
-                "two",
-                "three",
-                "four"
-            );
+            s = string
+                .Format(
+                    testFormatter,
+                    "0 = {0} 1 = {1} 2 = {2} 3 = {3} 4 = {4}",
+                    "zero",
+                    "one",
+                    "two",
+                    "three",
+                    "four"
+                );
             Assert.Equal(
                 "0 = Test: : zero 1 = Test: : one 2 = Test: : two 3 = Test: : three 4 = Test: : four",
                 s

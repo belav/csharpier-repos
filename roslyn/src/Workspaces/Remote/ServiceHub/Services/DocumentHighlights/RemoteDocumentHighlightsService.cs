@@ -53,11 +53,11 @@ namespace Microsoft.CodeAnalysis.Remote
 
                     var service = document.GetLanguageService<IDocumentHighlightsService>();
                     var result = await service.GetDocumentHighlightsAsync(
-                            document,
-                            position,
-                            documentsToSearch,
-                            cancellationToken
-                        )
+                        document,
+                        position,
+                        documentsToSearch,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return result.SelectAsArray(SerializableDocumentHighlights.Dehydrate);

@@ -17,8 +17,9 @@ namespace System.Composition.TypedParts.ActivationFeatures
     internal sealed class PropertyInjectionFeature : ActivationFeature
     {
         private readonly AttributedModelProvider _attributeContext;
-        private static readonly MethodInfo s_activatorInvokeMethod =
-            typeof(CompositeActivator).GetTypeInfo().GetDeclaredMethod("Invoke");
+        private static readonly MethodInfo s_activatorInvokeMethod = typeof(CompositeActivator)
+            .GetTypeInfo()
+            .GetDeclaredMethod("Invoke");
 
         public PropertyInjectionFeature(AttributedModelProvider attributeContext)
         {
@@ -42,7 +43,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
                     Site = site,
                     ImportInfo = ContractHelpers.GetImportInfo(pi.PropertyType, attrs, site)
                 }
-            ).ToArray();
+            )
+                .ToArray();
 
             if (imports.Length == 0)
                 return NoDependencies;
@@ -128,7 +130,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
             var setAll = Expression.Block(new[] { typed }, statements);
             var setAction = Expression.Lambda<
                 Func<object, LifetimeContext, CompositionOperation, object>
-            >(setAll, inst, lc, op).Compile();
+            >(setAll, inst, lc, op)
+                .Compile();
 
             return (c, o) =>
             {

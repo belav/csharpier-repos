@@ -130,7 +130,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private Lazy<ParameterInfo> CreateLazyParameter()
         {
-            return typeof(SimpleConstructorInjectedObject).GetConstructors()
+            return typeof(SimpleConstructorInjectedObject)
+                .GetConstructors()
                 .First()
                 .GetParameters()
                 .First()
@@ -144,11 +145,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             string contractName = AttributedModelServices.GetContractName(type);
 
-            return string.Format(
-                "{0} (Parameter=\"\", ContractName=\"{1}\")",
-                definition.ImportingLazyParameter.Value.Member.GetDisplayName(),
-                contractName
-            );
+            return string
+                .Format(
+                    "{0} (Parameter=\"\", ContractName=\"{1}\")",
+                    definition.ImportingLazyParameter.Value.Member.GetDisplayName(),
+                    contractName
+                );
         }
 
         private static string CreateDisplayNameExpectationFromParameterName(
@@ -156,11 +158,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
             string name
         )
         {
-            return string.Format(
-                "{0} (Parameter=\"{1}\", ContractName=\"System.String\")",
-                definition.ImportingLazyParameter.Value.Member.GetDisplayName(),
-                name
-            );
+            return string
+                .Format(
+                    "{0} (Parameter=\"{1}\", ContractName=\"System.String\")",
+                    definition.ImportingLazyParameter.Value.Member.GetDisplayName(),
+                    name
+                );
         }
 
         private static ReflectionParameterImportDefinition CreateReflectionParameterImportDefinition(

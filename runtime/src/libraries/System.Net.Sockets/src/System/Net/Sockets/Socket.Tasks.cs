@@ -1034,12 +1034,13 @@ namespace System.Net.Sockets
                             {
                                 var t =
                                     ((AwaitableSocketAsyncEventArgs, Action<object?>, object))runState!;
-                                t.Item1.InvokeContinuation(
-                                    t.Item2,
-                                    t.Item3,
-                                    forceAsync: false,
-                                    requiresExecutionContextFlow: false
-                                );
+                                t.Item1
+                                    .InvokeContinuation(
+                                        t.Item2,
+                                        t.Item3,
+                                        forceAsync: false,
+                                        requiresExecutionContextFlow: false
+                                    );
                             },
                             (this, c, continuationState)
                         );
@@ -1354,13 +1355,14 @@ namespace System.Net.Sockets
                             scheduler is TaskScheduler,
                             $"Expected TaskScheduler, got {scheduler}"
                         );
-                        Task.Factory.StartNew(
-                            continuation,
-                            state,
-                            CancellationToken.None,
-                            TaskCreationOptions.DenyChildAttach,
-                            (TaskScheduler)scheduler
-                        );
+                        Task.Factory
+                            .StartNew(
+                                continuation,
+                                state,
+                                CancellationToken.None,
+                                TaskCreationOptions.DenyChildAttach,
+                                (TaskScheduler)scheduler
+                            );
                     }
                 }
                 else if (forceAsync)

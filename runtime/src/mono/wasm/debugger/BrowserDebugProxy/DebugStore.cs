@@ -365,9 +365,8 @@ namespace Microsoft.WebAssembly.Diagnostics
         {
             this.Assembly = assembly;
             this.methodDef = Assembly.asmMetadataReader.GetMethodDefinition(methodDefHandle);
-            this.DebugInformation = Assembly.pdbMetadataReader.GetMethodDebugInformation(
-                methodDefHandle.ToDebugInformationHandle()
-            );
+            this.DebugInformation = Assembly.pdbMetadataReader
+                .GetMethodDebugInformation(methodDefHandle.ToDebugInformationHandle());
             this.source = source;
             this.Token = token;
             this.methodDefHandle = methodDefHandle;
@@ -440,9 +439,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     var localVariables = localScope.GetLocalVariables();
                     foreach (var localVariableHandle in localVariables)
                     {
-                        var localVariable = Assembly.pdbMetadataReader.GetLocalVariable(
-                            localVariableHandle
-                        );
+                        var localVariable = Assembly.pdbMetadataReader
+                            .GetLocalVariable(localVariableHandle);
                         if (localVariable.Attributes != LocalVariableAttributes.DebuggerHidden)
                             res.Add(new VarInfo(localVariable, Assembly.pdbMetadataReader));
                     }
@@ -530,8 +528,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 if (embeddedPdbEntry.DataSize != 0)
                 {
                     pdbMetadataReader = peReader.ReadEmbeddedPortablePdbDebugDirectoryData(
-                            embeddedPdbEntry
-                        )
+                        embeddedPdbEntry
+                    )
                         .GetMetadataReader();
                 }
             }
@@ -633,15 +631,13 @@ namespace Microsoft.WebAssembly.Diagnostics
                 let cdi = pdbMetadataReader.GetCustomDebugInformation(cdiHandle)
                 where pdbMetadataReader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink
                 select pdbMetadataReader.GetBlobBytes(cdi.Value)
-            ).SingleOrDefault();
+            )
+                .SingleOrDefault();
 
             if (sourceLinkDebugInfo != null)
             {
-                var sourceLinkContent = System.Text.Encoding.UTF8.GetString(
-                    sourceLinkDebugInfo,
-                    0,
-                    sourceLinkDebugInfo.Length
-                );
+                var sourceLinkContent = System.Text.Encoding.UTF8
+                    .GetString(sourceLinkDebugInfo, 0, sourceLinkDebugInfo.Length);
 
                 if (sourceLinkContent != null)
                 {
@@ -867,7 +863,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 let cdi = reader.GetCustomDebugInformation(handle)
                 where reader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.EmbeddedSource
                 select reader.GetBlobBytes(cdi.Value)
-            ).SingleOrDefault();
+            )
+                .SingleOrDefault();
 
             if (bytes != null)
             {
@@ -1051,10 +1048,8 @@ namespace Microsoft.WebAssembly.Diagnostics
         public AssemblyInfo GetAssemblyByUnqualifiedName(string name) =>
             assemblies.FirstOrDefault(
                 a =>
-                    a.AssemblyNameUnqualified.Equals(
-                        name,
-                        StringComparison.InvariantCultureIgnoreCase
-                    )
+                    a.AssemblyNameUnqualified
+                        .Equals(name, StringComparison.InvariantCultureIgnoreCase)
             );
 
         /*

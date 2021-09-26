@@ -160,17 +160,16 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
             var absoluteExpiration = GetAbsoluteExpiration(creationTime, options);
 
             await _cache.ScriptEvaluateAsync(
-                    SetScript,
-                    new RedisKey[] { _instance + key },
-                    new RedisValue[]
-                    {
-                        absoluteExpiration?.Ticks ?? NotPresent,
-                        options.SlidingExpiration?.Ticks ?? NotPresent,
-                        GetExpirationInSeconds(creationTime, absoluteExpiration, options)
-                            ?? NotPresent,
-                        value
-                    }
-                )
+                SetScript,
+                new RedisKey[] { _instance + key },
+                new RedisValue[]
+                {
+                    absoluteExpiration?.Ticks ?? NotPresent,
+                    options.SlidingExpiration?.Ticks ?? NotPresent,
+                    GetExpirationInSeconds(creationTime, absoluteExpiration, options) ?? NotPresent,
+                    value
+                }
+            )
                 .ConfigureAwait(false);
         }
 
@@ -252,15 +251,15 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
                     if (_options.ConfigurationOptions != null)
                     {
                         _connection = await ConnectionMultiplexer.ConnectAsync(
-                                _options.ConfigurationOptions
-                            )
+                            _options.ConfigurationOptions
+                        )
                             .ConfigureAwait(false);
                     }
                     else
                     {
                         _connection = await ConnectionMultiplexer.ConnectAsync(
-                                _options.Configuration
-                            )
+                            _options.Configuration
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -349,20 +348,20 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
             if (getData)
             {
                 results = await _cache.HashMemberGetAsync(
-                        _instance + key,
-                        AbsoluteExpirationKey,
-                        SlidingExpirationKey,
-                        DataKey
-                    )
+                    _instance + key,
+                    AbsoluteExpirationKey,
+                    SlidingExpirationKey,
+                    DataKey
+                )
                     .ConfigureAwait(false);
             }
             else
             {
                 results = await _cache.HashMemberGetAsync(
-                        _instance + key,
-                        AbsoluteExpirationKey,
-                        SlidingExpirationKey
-                    )
+                    _instance + key,
+                    AbsoluteExpirationKey,
+                    SlidingExpirationKey
+                )
                     .ConfigureAwait(false);
             }
 

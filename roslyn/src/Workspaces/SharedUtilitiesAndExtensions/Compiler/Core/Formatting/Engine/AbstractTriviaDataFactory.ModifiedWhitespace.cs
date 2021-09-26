@@ -70,13 +70,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             {
                 if (_original == null)
                 {
-                    return base.WithLine(
-                        line,
-                        indentation,
-                        context,
-                        formattingRules,
-                        cancellationToken
-                    );
+                    return base
+                        .WithLine(line, indentation, context, formattingRules, cancellationToken);
                 }
 
                 if (_original.LineBreaks == line && _original.Spaces == indentation)
@@ -84,13 +79,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     return _original;
                 }
 
-                return base.WithLine(
-                    line,
-                    indentation,
-                    context,
-                    formattingRules,
-                    cancellationToken
-                );
+                return base
+                    .WithLine(line, indentation, context, formattingRules, cancellationToken);
             }
 
             public override TriviaData WithIndentation(
@@ -102,12 +92,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             {
                 if (_original == null)
                 {
-                    return base.WithIndentation(
-                        indentation,
-                        context,
-                        formattingRules,
-                        cancellationToken
-                    );
+                    return base
+                        .WithIndentation(indentation, context, formattingRules, cancellationToken);
                 }
 
                 if (this.LineBreaks == _original.LineBreaks && _original.Spaces == indentation)
@@ -115,12 +101,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     return _original;
                 }
 
-                return base.WithIndentation(
-                    indentation,
-                    context,
-                    formattingRules,
-                    cancellationToken
-                );
+                return base
+                    .WithIndentation(indentation, context, formattingRules, cancellationToken);
             }
 
             public override void Format(

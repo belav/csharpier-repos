@@ -49,19 +49,24 @@ namespace System.Transactions.Tests
                     typeof(IPromotableSinglePhaseNotification),
                     typeof(Guid)
                 };
-                s_enlistPromotableSinglePhaseMethodInfo = typeof(Transaction).GetTypeInfo()
+                s_enlistPromotableSinglePhaseMethodInfo = typeof(Transaction)
+                    .GetTypeInfo()
                     .GetMethod("EnlistPromotableSinglePhase", parameterTypes);
-                s_setDistributedTransactionIdentifierMethodInfo = typeof(Transaction).GetTypeInfo()
+                s_setDistributedTransactionIdentifierMethodInfo = typeof(Transaction)
+                    .GetTypeInfo()
                     .GetMethod("SetDistributedTransactionIdentifier", parameterTypes);
-                s_getPromotedTokenMethodInfo = typeof(Transaction).GetTypeInfo()
+                s_getPromotedTokenMethodInfo = typeof(Transaction)
+                    .GetTypeInfo()
                     .GetMethod("GetPromotedToken");
 
                 // And the PropertyInfo objects for PromoterType
-                s_promoterTypePropertyInfo = typeof(Transaction).GetTypeInfo()
+                s_promoterTypePropertyInfo = typeof(Transaction)
+                    .GetTypeInfo()
                     .GetProperty("PromoterType", typeof(Guid));
 
                 // And the FieldInfo for TransactionInterop.PromoterTypeDtc
-                s_promoterTypeDtcFieldInfo = typeof(TransactionInterop).GetTypeInfo()
+                s_promoterTypeDtcFieldInfo = typeof(TransactionInterop)
+                    .GetTypeInfo()
                     .GetField("PromoterTypeDtc", BindingFlags.Public | BindingFlags.Static);
             }
 
@@ -261,18 +266,20 @@ namespace System.Transactions.Tests
                 if (TxPromoterType(tx) != expectedPromoterType)
                 {
                     Trace(
-                        string.Format(
-                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
-                            ex.ToString(),
-                            TxPromoterType(tx)
-                        )
+                        string
+                            .Format(
+                                "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                                ex.ToString(),
+                                TxPromoterType(tx)
+                            )
                     );
                     throw new ApplicationException(
-                        string.Format(
-                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
-                            ex.ToString(),
-                            TxPromoterType(tx)
-                        )
+                        string
+                            .Format(
+                                "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                                ex.ToString(),
+                                TxPromoterType(tx)
+                            )
                     );
                 }
             }
@@ -291,18 +298,20 @@ namespace System.Transactions.Tests
                 if (TxPromoterType(tx) != expectedPromoterType)
                 {
                     Trace(
-                        string.Format(
-                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
-                            ex.ToString(),
-                            TxPromoterType(tx)
-                        )
+                        string
+                            .Format(
+                                "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                                ex.ToString(),
+                                TxPromoterType(tx)
+                            )
                     );
                     throw new ApplicationException(
-                        string.Format(
-                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
-                            ex.ToString(),
-                            TxPromoterType(tx)
-                        )
+                        string
+                            .Format(
+                                "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                                ex.ToString(),
+                                TxPromoterType(tx)
+                            )
                     );
                 }
             }
@@ -321,18 +330,20 @@ namespace System.Transactions.Tests
                 if (TxPromoterType(tx) != expectedPromoterType)
                 {
                     Trace(
-                        string.Format(
-                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
-                            ex.ToString(),
-                            TxPromoterType(tx)
-                        )
+                        string
+                            .Format(
+                                "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                                ex.ToString(),
+                                TxPromoterType(tx)
+                            )
                     );
                     throw new ApplicationException(
-                        string.Format(
-                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
-                            ex.ToString(),
-                            TxPromoterType(tx)
-                        )
+                        string
+                            .Format(
+                                "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                                ex.ToString(),
+                                TxPromoterType(tx)
+                            )
                     );
                 }
             }
@@ -353,18 +364,20 @@ namespace System.Transactions.Tests
                 if (TxPromoterType(tx) != expectedPromoterType)
                 {
                     Trace(
-                        string.Format(
-                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
-                            ex.ToString(),
-                            TxPromoterType(tx)
-                        )
+                        string
+                            .Format(
+                                "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                                ex.ToString(),
+                                TxPromoterType(tx)
+                            )
                     );
                     throw new ApplicationException(
-                        string.Format(
-                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
-                            ex.ToString(),
-                            TxPromoterType(tx)
-                        )
+                        string
+                            .Format(
+                                "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                                ex.ToString(),
+                                TxPromoterType(tx)
+                            )
                     );
                 }
             }
@@ -385,18 +398,20 @@ namespace System.Transactions.Tests
                 if (TxPromoterType(tx) != expectedPromoterType)
                 {
                     Trace(
-                        string.Format(
-                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
-                            ex.ToString(),
-                            TxPromoterType(tx)
-                        )
+                        string
+                            .Format(
+                                "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                                ex.ToString(),
+                                TxPromoterType(tx)
+                            )
                     );
                     throw new ApplicationException(
-                        string.Format(
-                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
-                            ex.ToString(),
-                            TxPromoterType(tx)
-                        )
+                        string
+                            .Format(
+                                "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                                ex.ToString(),
+                                TxPromoterType(tx)
+                            )
                     );
                 }
             }
@@ -740,10 +755,11 @@ namespace System.Transactions.Tests
                 if (_enlistDuringPrepare)
                 {
                     Trace(
-                        string.Format(
-                            "MyEnlistment.Prepare - attempting another enlistment with options {0}",
-                            _enlistOptions.ToString()
-                        )
+                        string
+                            .Format(
+                                "MyEnlistment.Prepare - attempting another enlistment with options {0}",
+                                _enlistOptions.ToString()
+                            )
                     );
                     try
                     {
@@ -773,11 +789,12 @@ namespace System.Transactions.Tests
                         if (_expectSuccessfulEnlist)
                         {
                             Trace(
-                                string.Format(
-                                    "MyEnlistment.Prepare - Force Rollback because second enlistment failed unexpectedly - {0}; {1}",
-                                    ex.GetType().ToString(),
-                                    ex.ToString()
-                                )
+                                string
+                                    .Format(
+                                        "MyEnlistment.Prepare - Force Rollback because second enlistment failed unexpectedly - {0}; {1}",
+                                        ex.GetType().ToString(),
+                                        ex.ToString()
+                                    )
                             );
                             // Force rollback of the transaction because the second enlistment was unsuccessful.
                             _aborted = true;
@@ -981,14 +998,15 @@ namespace System.Transactions.Tests
             Type expectedExceptionType = null
         )
         {
-            string testCaseDescription = string.Format(
-                "TestCase_VolatileEnlistments; count = {0}; expectedOutcome = {1}; options = {2}; votePrepared = {3}, expectedExceptionType = {4}",
-                count,
-                expectedOutcome.ToString(),
-                options.ToString(),
-                votePrepared,
-                expectedExceptionType
-            );
+            string testCaseDescription = string
+                .Format(
+                    "TestCase_VolatileEnlistments; count = {0}; expectedOutcome = {1}; options = {2}; votePrepared = {3}, expectedExceptionType = {4}",
+                    count,
+                    expectedOutcome.ToString(),
+                    options.ToString(),
+                    votePrepared,
+                    expectedExceptionType
+                );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1057,18 +1075,19 @@ namespace System.Transactions.Tests
             int p1AfterPromote = 0
         )
         {
-            string testCaseDescription = string.Format(
-                "TestCase_PSPENonMsdtc commit={0}; promote={1}; spcResponse= {2}; p0BeforePSPE={3}; p0AfterPSPE={4}; p1BeforePSPE={5}; p1AfterPSPE={6}; p0AfterPromote={7}; p1AfterPromote={8}",
-                commit,
-                promote,
-                spcResponse,
-                p0BeforePSPE,
-                p0AfterPSPE,
-                p1BeforePSPE,
-                p1AfterPSPE,
-                p0AfterPromote,
-                p1AfterPromote
-            );
+            string testCaseDescription = string
+                .Format(
+                    "TestCase_PSPENonMsdtc commit={0}; promote={1}; spcResponse= {2}; p0BeforePSPE={3}; p0AfterPSPE={4}; p1BeforePSPE={5}; p1AfterPSPE={6}; p0AfterPromote={7}; p1AfterPromote={8}",
+                    commit,
+                    promote,
+                    spcResponse,
+                    p0BeforePSPE,
+                    p0AfterPSPE,
+                    p1BeforePSPE,
+                    p1AfterPSPE,
+                    p0AfterPromote,
+                    p1AfterPromote
+                );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1250,11 +1269,12 @@ namespace System.Transactions.Tests
                 if (spcResponse == TransactionStatus.Committed)
                 {
                     Trace(
-                        string.Format(
-                            "Caught unexpected exception {0}:{1}",
-                            ex.GetType().ToString(),
-                            ex.ToString()
-                        )
+                        string
+                            .Format(
+                                "Caught unexpected exception {0}:{1}",
+                                ex.GetType().ToString(),
+                                ex.ToString()
+                            )
                     );
                     return;
                 }
@@ -1339,18 +1359,19 @@ namespace System.Transactions.Tests
             int blockingAfterPromote = 0
         )
         {
-            string testCaseDescription = string.Format(
-                "TestCase_PSPENonMsdtcWithClones commit={0}; promote={1}; spcResponse= {2}; abortingBeforePSPE={3}; abortingAfterPSPE={4}; blockingBeforePSPE={5}; blockingAfterPSPE={6}; abortingAfterPromote={7}; blockingAfterPromote={8}",
-                commit,
-                promote,
-                spcResponse,
-                abortingBeforePSPE,
-                abortingAfterPSPE,
-                blockingBeforePSPE,
-                blockingAfterPSPE,
-                abortingAfterPromote,
-                blockingAfterPromote
-            );
+            string testCaseDescription = string
+                .Format(
+                    "TestCase_PSPENonMsdtcWithClones commit={0}; promote={1}; spcResponse= {2}; abortingBeforePSPE={3}; abortingAfterPSPE={4}; blockingBeforePSPE={5}; blockingAfterPSPE={6}; abortingAfterPromote={7}; blockingAfterPromote={8}",
+                    commit,
+                    promote,
+                    spcResponse,
+                    abortingBeforePSPE,
+                    abortingAfterPSPE,
+                    blockingBeforePSPE,
+                    blockingAfterPSPE,
+                    abortingAfterPromote,
+                    blockingAfterPromote
+                );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1513,11 +1534,12 @@ namespace System.Transactions.Tests
             EnlistmentOptions enlistmentOptions = EnlistmentOptions.None
         )
         {
-            string testCaseDescription = string.Format(
-                "TestCase_AbortFromVolatile promote={0}; enlistmentOptions = {1}",
-                promote,
-                enlistmentOptions.ToString()
-            );
+            string testCaseDescription = string
+                .Format(
+                    "TestCase_AbortFromVolatile promote={0}; enlistmentOptions = {1}",
+                    promote,
+                    enlistmentOptions.ToString()
+                );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1581,10 +1603,8 @@ namespace System.Transactions.Tests
 
         private static void TestCase_AbortingCloneNotCompleted(bool promote)
         {
-            string testCaseDescription = string.Format(
-                "TestCase_AbortingCloneNotCompleted promote={0}",
-                promote
-            );
+            string testCaseDescription = string
+                .Format("TestCase_AbortingCloneNotCompleted promote={0}", promote);
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1639,10 +1659,8 @@ namespace System.Transactions.Tests
 
         private static void TestCase_BlockingCloneCompletedAfterCommit(bool promote)
         {
-            string testCaseDescription = string.Format(
-                "TestCase_BlockingCloneCompletedAfterCommit promote={0}",
-                promote
-            );
+            string testCaseDescription = string
+                .Format("TestCase_BlockingCloneCompletedAfterCommit promote={0}", promote);
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1704,10 +1722,8 @@ namespace System.Transactions.Tests
 
         private static void TestCase_TransactionTimeout(bool promote)
         {
-            string testCaseDescription = string.Format(
-                "TestCase_TransactionTimeout promote={0}",
-                promote
-            );
+            string testCaseDescription = string
+                .Format("TestCase_TransactionTimeout promote={0}", promote);
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1735,19 +1751,21 @@ namespace System.Transactions.Tests
                     }
 
                     NoStressTrace(
-                        string.Format(
-                            "There will be a 3 second delay here - {0}",
-                            DateTime.Now.ToString()
-                        )
+                        string
+                            .Format(
+                                "There will be a 3 second delay here - {0}",
+                                DateTime.Now.ToString()
+                            )
                     );
 
                     Task.Delay(TimeSpan.FromSeconds(3)).Wait();
 
                     NoStressTrace(
-                        string.Format(
-                            "Woke up from sleep. Attempting Commit - {0}",
-                            DateTime.Now.ToString()
-                        )
+                        string
+                            .Format(
+                                "Woke up from sleep. Attempting Commit - {0}",
+                                DateTime.Now.ToString()
+                            )
                     );
 
                     tx.Commit();
@@ -1778,14 +1796,15 @@ namespace System.Transactions.Tests
             bool expectSecondEnlistSuccess = true
         )
         {
-            string testCaseDescription = string.Format(
-                "TestCase_EnlistDuringPrepare promote={0}; beforePromote={1}, firstOptions={2}, secondOptions={3}, expectSecondEnlistSuccess={4}",
-                promote,
-                beforePromote,
-                firstOptions.ToString(),
-                secondOptions.ToString(),
-                expectSecondEnlistSuccess
-            );
+            string testCaseDescription = string
+                .Format(
+                    "TestCase_EnlistDuringPrepare promote={0}; beforePromote={1}, firstOptions={2}, secondOptions={3}, expectSecondEnlistSuccess={4}",
+                    promote,
+                    beforePromote,
+                    firstOptions.ToString(),
+                    secondOptions.ToString(),
+                    expectSecondEnlistSuccess
+                );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1932,10 +1951,8 @@ namespace System.Transactions.Tests
 
         private static void TestCase_DisposeCommittableTransaction(bool promote)
         {
-            string testCaseDescription = string.Format(
-                "TestCase_DisposeCommittableTransaction promote={0}",
-                promote
-            );
+            string testCaseDescription = string
+                .Format("TestCase_DisposeCommittableTransaction promote={0}", promote);
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1992,10 +2009,8 @@ namespace System.Transactions.Tests
 
         private static void TestCase_OutcomeRegistration(bool promote)
         {
-            string testCaseDescription = string.Format(
-                "TestCase_OutcomeRegistration promote={0}",
-                promote
-            );
+            string testCaseDescription = string
+                .Format("TestCase_OutcomeRegistration promote={0}", promote);
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -2176,11 +2191,12 @@ namespace System.Transactions.Tests
             catch (Exception ex)
             {
                 Trace(
-                    string.Format(
-                        "Caught unexpected exception {0}:{1}",
-                        ex.GetType().ToString(),
-                        ex.ToString()
-                    )
+                    string
+                        .Format(
+                            "Caught unexpected exception {0}:{1}",
+                            ex.GetType().ToString(),
+                            ex.ToString()
+                        )
                 );
                 return;
             }

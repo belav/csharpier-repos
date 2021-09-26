@@ -232,11 +232,8 @@ namespace System.Net.Http
 
                 if (
                     match is not null
-                    && string.Equals(
-                        method._method,
-                        match._method,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && string
+                        .Equals(method._method, match._method, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     return match;

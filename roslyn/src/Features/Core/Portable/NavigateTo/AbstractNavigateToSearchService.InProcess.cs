@@ -100,27 +100,27 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             // Prioritize the active documents if we have any.
             var highPriDocs = priorityDocuments.Where(d => project.ContainsDocument(d.Id)).ToSet();
             await ProcessDocumentsAsync(
-                    searchDocument,
-                    patternName,
-                    patternContainerOpt,
-                    declaredSymbolInfoKindsSet,
-                    onResultFound,
-                    highPriDocs,
-                    cancellationToken
-                )
+                searchDocument,
+                patternName,
+                patternContainerOpt,
+                declaredSymbolInfoKindsSet,
+                onResultFound,
+                highPriDocs,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Then process non-priority documents.
             var lowPriDocs = project.Documents.Where(d => !highPriDocs.Contains(d)).ToSet();
             await ProcessDocumentsAsync(
-                    searchDocument,
-                    patternName,
-                    patternContainerOpt,
-                    declaredSymbolInfoKindsSet,
-                    onResultFound,
-                    lowPriDocs,
-                    cancellationToken
-                )
+                searchDocument,
+                patternName,
+                patternContainerOpt,
+                declaredSymbolInfoKindsSet,
+                onResultFound,
+                lowPriDocs,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // if the caller is only searching a single doc, and we already covered it above, don't bother computing
@@ -136,14 +136,14 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             var generatedDocs = await project.GetSourceGeneratedDocumentsAsync(cancellationToken)
                 .ConfigureAwait(false);
             await ProcessDocumentsAsync(
-                    searchDocument,
-                    patternName,
-                    patternContainerOpt,
-                    declaredSymbolInfoKindsSet,
-                    onResultFound,
-                    generatedDocs.ToSet<Document>(),
-                    cancellationToken
-                )
+                searchDocument,
+                patternName,
+                patternContainerOpt,
+                declaredSymbolInfoKindsSet,
+                onResultFound,
+                generatedDocs.ToSet<Document>(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -197,15 +197,15 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 .ConfigureAwait(false);
 
             await ProcessIndexAsync(
-                    document.Id,
-                    document,
-                    patternName,
-                    patternContainer,
-                    kinds,
-                    onResultFound,
-                    index,
-                    cancellationToken
-                )
+                document.Id,
+                document,
+                patternName,
+                patternContainer,
+                kinds,
+                onResultFound,
+                index,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -229,27 +229,27 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             var declaredSymbolInfoKindsSet = new DeclaredSymbolInfoKindSet(kinds);
 
             await SearchCachedDocumentsInCurrentProcessAsync(
-                    workspace,
-                    priorityDocumentKeys,
-                    patternName,
-                    patternContainer,
-                    declaredSymbolInfoKindsSet,
-                    onItemFound,
-                    stringTable,
-                    cancellationToken
-                )
+                workspace,
+                priorityDocumentKeys,
+                patternName,
+                patternContainer,
+                declaredSymbolInfoKindsSet,
+                onItemFound,
+                stringTable,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             await SearchCachedDocumentsInCurrentProcessAsync(
-                    workspace,
-                    lowPriDocs,
-                    patternName,
-                    patternContainer,
-                    declaredSymbolInfoKindsSet,
-                    onItemFound,
-                    stringTable,
-                    cancellationToken
-                )
+                workspace,
+                lowPriDocs,
+                patternName,
+                patternContainer,
+                declaredSymbolInfoKindsSet,
+                onItemFound,
+                stringTable,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -273,26 +273,26 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                         async () =>
                         {
                             var index = await SyntaxTreeIndex.LoadAsync(
-                                    workspace,
-                                    documentKey,
-                                    checksum: null,
-                                    stringTable,
-                                    cancellationToken
-                                )
+                                workspace,
+                                documentKey,
+                                checksum: null,
+                                stringTable,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             if (index == null)
                                 return;
 
                             await ProcessIndexAsync(
-                                    documentKey.Id,
-                                    document: null,
-                                    patternName,
-                                    patternContainer,
-                                    kinds,
-                                    onItemFound,
-                                    index,
-                                    cancellationToken
-                                )
+                                documentKey.Id,
+                                document: null,
+                                patternName,
+                                patternContainer,
+                                kinds,
+                                onItemFound,
+                                index,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         },
                         cancellationToken
@@ -331,17 +331,17 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             foreach (var declaredSymbolInfo in index.DeclaredSymbolInfos)
             {
                 await AddResultIfMatchAsync(
-                        documentId,
-                        document,
-                        declaredSymbolInfo,
-                        nameMatcher,
-                        containerMatcher,
-                        kinds,
-                        nameMatches,
-                        containerMatches,
-                        onResultFound,
-                        cancellationToken
-                    )
+                    documentId,
+                    document,
+                    declaredSymbolInfo,
+                    nameMatcher,
+                    containerMatcher,
+                    kinds,
+                    nameMatches,
+                    containerMatches,
+                    onResultFound,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -373,13 +373,13 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             )
             {
                 var result = await ConvertResultAsync(
-                        documentId,
-                        document,
-                        declaredSymbolInfo,
-                        nameMatches,
-                        containerMatches,
-                        cancellationToken
-                    )
+                    documentId,
+                    document,
+                    declaredSymbolInfo,
+                    nameMatches,
+                    containerMatches,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 await onResultFound(result).ConfigureAwait(false);
             }
@@ -419,10 +419,10 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 document == null
                     ? ImmutableArray<ProjectId>.Empty
                     : await GetAdditionalProjectsWithMatchAsync(
-                              document,
-                              declaredSymbolInfo,
-                              cancellationToken
-                          )
+                          document,
+                          declaredSymbolInfo,
+                          cancellationToken
+                      )
                           .ConfigureAwait(false);
 
             // If we were not given a Document instance, then we're finding matches in cached data
@@ -453,9 +453,9 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             {
                 var linkedDocument = solution.GetRequiredDocument(linkedDocumentId);
                 var index = await SyntaxTreeIndex.GetRequiredIndexAsync(
-                        linkedDocument,
-                        cancellationToken
-                    )
+                    linkedDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // See if the index for the other file also contains this same info.  If so, merge the results so the

@@ -998,10 +998,9 @@ struct S : IEnumerable
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: "1")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(source, expectedOutput: "1").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       90 (0x5a)
   .maxstack  2
@@ -1054,7 +1053,7 @@ struct S : IEnumerable
   IL_0054:  call       ""void System.Console.Write(int)""
   IL_0059:  ret
 }"
-                );
+            );
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
@@ -1104,9 +1103,9 @@ struct S : IEnumerable
 }
 ";
             CompileAndVerifyException<InvalidOperationException>(
-                    source,
-                    expectedMessage: "Nullable object must have a value."
-                )
+                source,
+                expectedMessage: "Nullable object must have a value."
+            )
                 .VerifyIL(
                     "Program.Test",
                     @"
@@ -1211,9 +1210,8 @@ class Program
 }";
             var rel = CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     AssertEx.Equal(
@@ -1280,9 +1278,8 @@ struct Test
 }";
             CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     // consider: we don't really need to hoist "x" and "z", we could store the values of "<>3__x" and "<>3__z" to locals at the beginning of MoveNext.
@@ -1346,9 +1343,8 @@ struct Test
 }";
             CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     AssertEx.Equal(
@@ -1397,10 +1393,9 @@ class Test
         }
     }
 }";
-            CompileAndVerify(source, expectedOutput: "abcdef")
-                .VerifyIL(
-                    "Test.<M>d__0<T>.System.Collections.IEnumerator.MoveNext()",
-                    @"{
+            CompileAndVerify(source, expectedOutput: "abcdef").VerifyIL(
+                "Test.<M>d__0<T>.System.Collections.IEnumerator.MoveNext()",
+                @"{
   // Code size      129 (0x81)
   .maxstack  2
   .locals init (bool V_0,
@@ -1469,7 +1464,7 @@ class Test
   IL_007f:  ldloc.0
   IL_0080:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2324,11 +2319,10 @@ class Program
     }
 }";
             string expectedIL;
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C<T>.<F>d__0.System.Collections.IEnumerator.MoveNext()",
-                    expectedIL =
-                        @"{
+            CompileAndVerify(source).VerifyIL(
+                "C<T>.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                expectedIL =
+                    @"{
   // Code size      176 (0xb0)
   .maxstack  3
   .locals init (bool V_0,
@@ -2417,7 +2411,7 @@ class Program
   IL_00ae:  ldloc.0
   IL_00af:  ret
 }"
-                );
+            );
             Assert.True(expectedIL.IndexOf("<>_", StringComparison.Ordinal) < 0);
         }
 

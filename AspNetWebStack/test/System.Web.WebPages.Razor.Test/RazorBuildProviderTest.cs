@@ -137,10 +137,8 @@ namespace System.Web.WebPages.Razor.Test
 
             // Set up the base dependency
             MockAssemblyBuilder builder = new MockAssemblyBuilder();
-            typeof(BuildProvider).GetField(
-                    "_virtualPath",
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )
+            typeof(BuildProvider)
+                .GetField("_virtualPath", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(provider, CreateVirtualPath("/Samples/Foo/Baz.cshtml"));
 
             // Test that VirtualPathDependencies returns the original dependency before GenerateCode is called
@@ -181,7 +179,8 @@ namespace System.Web.WebPages.Razor.Test
 
             // Assert
             Assert.NotNull(
-                generated.Namespaces.OfType<CodeNamespace>()
+                generated.Namespaces
+                    .OfType<CodeNamespace>()
                     .SingleOrDefault(ns => String.Equals(ns.Name, "DummyNamespace"))
             );
         }
@@ -213,10 +212,8 @@ namespace System.Web.WebPages.Razor.Test
                 @"C:\Foo\Baz.cshtml"
             );
             RazorBuildProvider provider = CreateBuildProvider("foo");
-            typeof(BuildProvider).GetField(
-                    "_virtualPath",
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )
+            typeof(BuildProvider)
+                .GetField("_virtualPath", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(provider, CreateVirtualPath("/Samples/Foo/Baz.cshtml"));
             Mock.Get(provider).Setup(p => p.GetHostFromConfig()).Returns(expectedBefore);
             bool called = false;

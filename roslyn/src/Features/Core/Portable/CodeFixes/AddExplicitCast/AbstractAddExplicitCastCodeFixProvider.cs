@@ -84,9 +84,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                 .ConfigureAwait(false);
 
             var spanNode = root.FindNode(
-                    diagnostic.Location.SourceSpan,
-                    getInnermostNodeForTie: true
-                )
+                diagnostic.Location.SourceSpan,
+                getInnermostNodeForTie: true
+            )
                 .GetAncestorsOrThis<TExpressionSyntax>()
                 .FirstOrDefault();
             if (spanNode == null)
@@ -156,10 +156,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             ITypeSymbol conversionType
         )
         {
-            return string.Format(
-                FeaturesResources.Convert_type_to_0,
-                conversionType.ToMinimalDisplayString(semanticModel, position)
-            );
+            return string
+                .Format(
+                    FeaturesResources.Convert_type_to_0,
+                    conversionType.ToMinimalDisplayString(semanticModel, position)
+                );
         }
 
         private static void ReportTelemetryIfNecessary(
@@ -186,9 +187,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             ArrayBuilder<(TExpressionSyntax node, ITypeSymbol type)> mutablePotentialConversionTypes
         )
         {
-            using var _ = ArrayBuilder<(TExpressionSyntax, ITypeSymbol)>.GetInstance(
-                out var validPotentialConversionTypes
-            );
+            using var _ = ArrayBuilder<(TExpressionSyntax, ITypeSymbol)>
+                .GetInstance(out var validPotentialConversionTypes);
             foreach (var conversionTuple in mutablePotentialConversionTypes)
             {
                 var targetNode = conversionTuple.node;
@@ -250,37 +250,36 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             );
 
             await editor.ApplyExpressionLevelSemanticEditsAsync(
-                    document,
-                    spanNodes,
-                    (semanticModel, spanNode) => true,
-                    (semanticModel, currentRoot, spanNode) =>
-                    {
-                        // All diagnostics have the same error code
-                        if (
-                            TryGetTargetTypeInfo(
-                                document,
-                                semanticModel,
-                                currentRoot,
-                                diagnostics[0].Id,
-                                spanNode,
-                                cancellationToken,
-                                out var potentialConversionTypes
-                            )
-                            && potentialConversionTypes.Length == 1
+                document,
+                spanNodes,
+                (semanticModel, spanNode) => true,
+                (semanticModel, currentRoot, spanNode) =>
+                {
+                    // All diagnostics have the same error code
+                    if (
+                        TryGetTargetTypeInfo(
+                            document,
+                            semanticModel,
+                            currentRoot,
+                            diagnostics[0].Id,
+                            spanNode,
+                            cancellationToken,
+                            out var potentialConversionTypes
                         )
-                        {
-                            return ApplyFix(
-                                currentRoot,
-                                potentialConversionTypes[0].node,
-                                potentialConversionTypes[0].type
-                            );
-                        }
+                        && potentialConversionTypes.Length == 1
+                    )
+                    {
+                        return ApplyFix(
+                            currentRoot,
+                            potentialConversionTypes[0].node,
+                            potentialConversionTypes[0].type
+                        );
+                    }
 
-                        return currentRoot;
-                    },
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+                    return currentRoot;
+                },
+                cancellationToken
+            ).ConfigureAwait(false);
         }
 
         private class MyCodeAction : CodeAction.DocumentChangeAction

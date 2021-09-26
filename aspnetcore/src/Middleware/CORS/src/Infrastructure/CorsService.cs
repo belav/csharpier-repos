@@ -238,9 +238,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
                 if (result.PreflightMaxAge.HasValue)
                 {
                     headers[CorsConstants.AccessControlMaxAge] =
-                        result.PreflightMaxAge.Value.TotalSeconds.ToString(
-                            CultureInfo.InvariantCulture
-                        );
+                        result.PreflightMaxAge.Value.TotalSeconds
+                            .ToString(CultureInfo.InvariantCulture);
                 }
             }
             else

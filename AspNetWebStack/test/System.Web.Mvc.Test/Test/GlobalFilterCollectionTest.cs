@@ -50,7 +50,8 @@ namespace System.Web.Mvc.Test
                 GetFilterInstance<IAuthorizationFilter>(),
                 GetFilterInstance<IResultFilter>(),
                 GetFilterInstance<IExceptionFilter>()
-            }.ToList();
+            }
+                .ToList();
 
             // Act
             filters.ForEach(f => _collection.Add(f));

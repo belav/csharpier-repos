@@ -394,9 +394,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     ImmutableInterlocked.InterlockedInitialize(
                         ref _locations,
-                        DeclaringCompilation.MergedRootDeclaration.Declarations.SelectAsArray(
-                            d => (Location)d.Location
-                        )
+                        DeclaringCompilation.MergedRootDeclaration.Declarations
+                            .SelectAsArray(d => (Location)d.Location)
                     );
                 }
 
@@ -477,9 +476,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_lazyCustomAttributesBag == null || !_lazyCustomAttributesBag.IsSealed)
             {
-                var mergedAttributes = (
-                    (SourceAssemblySymbol)this.ContainingAssembly
-                ).GetAttributeDeclarations();
+                var mergedAttributes = ((SourceAssemblySymbol)this.ContainingAssembly)
+                    .GetAttributeDeclarations();
                 if (
                     LoadAndValidateAttributes(
                         OneOrMany.Create(mergedAttributes),
@@ -551,11 +549,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         0,
                         arguments.AttributeSyntaxOpt
                     );
-                    ((BindingDiagnosticBag)arguments.Diagnostics).Add(
-                        ErrorCode.ERR_InvalidAttributeArgument,
-                        attributeArgumentSyntax.Location,
-                        arguments.AttributeSyntaxOpt.GetErrorDisplayName()
-                    );
+                    ((BindingDiagnosticBag)arguments.Diagnostics)
+                        .Add(
+                            ErrorCode.ERR_InvalidAttributeArgument,
+                            attributeArgumentSyntax.Location,
+                            arguments.AttributeSyntaxOpt.GetErrorDisplayName()
+                        );
                 }
                 else
                 {
@@ -631,7 +630,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 CommonAssemblyWellKnownAttributeData<NamedTypeSymbol> decodedData = (
                     (SourceAssemblySymbol)this.ContainingAssembly
-                ).GetSourceDecodedWellKnownAttributeData();
+                )
+                    .GetSourceDecodedWellKnownAttributeData();
                 return decodedData != null && decodedData.HasCompilationRelaxationsAttribute;
             }
         }
@@ -642,7 +642,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 CommonAssemblyWellKnownAttributeData<NamedTypeSymbol> decodedData = (
                     (SourceAssemblySymbol)this.ContainingAssembly
-                ).GetSourceDecodedWellKnownAttributeData();
+                )
+                    .GetSourceDecodedWellKnownAttributeData();
                 return decodedData != null && decodedData.HasRuntimeCompatibilityAttribute;
             }
         }

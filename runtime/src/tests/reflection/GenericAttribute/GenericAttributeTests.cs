@@ -13,19 +13,15 @@ class Program
             CustomAttributeExtensions.GetCustomAttribute<SingleAttribute<int>>(assembly) != null
         );
         Assert(
-            ((ICustomAttributeProvider)assembly).GetCustomAttributes(
-                typeof(SingleAttribute<int>),
-                true
-            ) != null
+            ((ICustomAttributeProvider)assembly)
+                .GetCustomAttributes(typeof(SingleAttribute<int>), true) != null
         );
         Assert(
             CustomAttributeExtensions.GetCustomAttribute<SingleAttribute<bool>>(assembly) != null
         );
         Assert(
-            ((ICustomAttributeProvider)assembly).GetCustomAttributes(
-                typeof(SingleAttribute<bool>),
-                true
-            ) != null
+            ((ICustomAttributeProvider)assembly)
+                .GetCustomAttributes(typeof(SingleAttribute<bool>), true) != null
         );
         Assert(CustomAttributeExtensions.IsDefined(assembly, typeof(SingleAttribute<int>)));
         Assert(((ICustomAttributeProvider)assembly).IsDefined(typeof(SingleAttribute<int>), true));
@@ -38,34 +34,26 @@ class Program
                 != null
         );
         Assert(
-            ((ICustomAttributeProvider)programTypeInfo).GetCustomAttributes(
-                typeof(SingleAttribute<int>),
-                true
-            ) != null
+            ((ICustomAttributeProvider)programTypeInfo)
+                .GetCustomAttributes(typeof(SingleAttribute<int>), true) != null
         );
         Assert(
             CustomAttributeExtensions.GetCustomAttribute<SingleAttribute<bool>>(programTypeInfo)
                 != null
         );
         Assert(
-            ((ICustomAttributeProvider)programTypeInfo).GetCustomAttributes(
-                typeof(SingleAttribute<bool>),
-                true
-            ) != null
+            ((ICustomAttributeProvider)programTypeInfo)
+                .GetCustomAttributes(typeof(SingleAttribute<bool>), true) != null
         );
         Assert(CustomAttributeExtensions.IsDefined(programTypeInfo, typeof(SingleAttribute<int>)));
         Assert(
-            ((ICustomAttributeProvider)programTypeInfo).IsDefined(
-                typeof(SingleAttribute<int>),
-                true
-            )
+            ((ICustomAttributeProvider)programTypeInfo)
+                .IsDefined(typeof(SingleAttribute<int>), true)
         );
         Assert(CustomAttributeExtensions.IsDefined(programTypeInfo, typeof(SingleAttribute<bool>)));
         Assert(
-            ((ICustomAttributeProvider)programTypeInfo).IsDefined(
-                typeof(SingleAttribute<bool>),
-                true
-            )
+            ((ICustomAttributeProvider)programTypeInfo)
+                .IsDefined(typeof(SingleAttribute<bool>), true)
         );
 
         var propertyPropertyInfo = typeof(Class).GetTypeInfo().GetProperty(nameof(Class.Property));
@@ -74,10 +62,8 @@ class Program
                 != null
         );
         Assert(
-            ((ICustomAttributeProvider)propertyPropertyInfo).GetCustomAttributes(
-                typeof(SingleAttribute<int>),
-                true
-            ) != null
+            ((ICustomAttributeProvider)propertyPropertyInfo)
+                .GetCustomAttributes(typeof(SingleAttribute<int>), true) != null
         );
         Assert(
             CustomAttributeExtensions.GetCustomAttribute<SingleAttribute<bool>>(
@@ -85,28 +71,22 @@ class Program
             ) != null
         );
         Assert(
-            ((ICustomAttributeProvider)propertyPropertyInfo).GetCustomAttributes(
-                typeof(SingleAttribute<bool>),
-                true
-            ) != null
+            ((ICustomAttributeProvider)propertyPropertyInfo)
+                .GetCustomAttributes(typeof(SingleAttribute<bool>), true) != null
         );
         Assert(
             CustomAttributeExtensions.IsDefined(propertyPropertyInfo, typeof(SingleAttribute<int>))
         );
         Assert(
-            ((ICustomAttributeProvider)propertyPropertyInfo).IsDefined(
-                typeof(SingleAttribute<int>),
-                true
-            )
+            ((ICustomAttributeProvider)propertyPropertyInfo)
+                .IsDefined(typeof(SingleAttribute<int>), true)
         );
         Assert(
             CustomAttributeExtensions.IsDefined(propertyPropertyInfo, typeof(SingleAttribute<bool>))
         );
         Assert(
-            ((ICustomAttributeProvider)propertyPropertyInfo).IsDefined(
-                typeof(SingleAttribute<bool>),
-                true
-            )
+            ((ICustomAttributeProvider)propertyPropertyInfo)
+                .IsDefined(typeof(SingleAttribute<bool>), true)
         );
 
         var deriveTypeInfo = typeof(Class.Derive).GetTypeInfo();
@@ -117,10 +97,8 @@ class Program
             ) == null
         );
         Assert(
-            ((ICustomAttributeProvider)deriveTypeInfo).GetCustomAttributes(
-                typeof(SingleAttribute<int>),
-                true
-            ) != null
+            ((ICustomAttributeProvider)deriveTypeInfo)
+                .GetCustomAttributes(typeof(SingleAttribute<int>), true) != null
         );
         Assert(
             CustomAttributeExtensions.GetCustomAttribute<SingleAttribute<bool>>(
@@ -129,10 +107,8 @@ class Program
             ) == null
         );
         Assert(
-            ((ICustomAttributeProvider)deriveTypeInfo).GetCustomAttributes(
-                typeof(SingleAttribute<bool>),
-                true
-            ) != null
+            ((ICustomAttributeProvider)deriveTypeInfo)
+                .GetCustomAttributes(typeof(SingleAttribute<bool>), true) != null
         );
         Assert(
             !CustomAttributeExtensions.IsDefined(
@@ -169,10 +145,8 @@ class Program
             CustomAttributeExtensions.IsDefined(deriveTypeInfo, typeof(SingleAttribute<bool>), true)
         );
         Assert(
-            ((ICustomAttributeProvider)deriveTypeInfo).IsDefined(
-                typeof(SingleAttribute<bool>),
-                true
-            )
+            ((ICustomAttributeProvider)deriveTypeInfo)
+                .IsDefined(typeof(SingleAttribute<bool>), true)
         );
 
         var a1 = CustomAttributeExtensions.GetCustomAttributes(programTypeInfo, true);
@@ -225,10 +199,8 @@ class Program
         );
         AssertAny(a4, a => a is SingleAttribute<int>);
 
-        var b4 = ((ICustomAttributeProvider)programTypeInfo).GetCustomAttributes(
-            typeof(SingleAttribute<int>),
-            true
-        );
+        var b4 = ((ICustomAttributeProvider)programTypeInfo)
+            .GetCustomAttributes(typeof(SingleAttribute<int>), true);
         AssertAny(b4, a => a is SingleAttribute<int>);
 
         var a5 = CustomAttributeExtensions.GetCustomAttributes<SingleAttribute<bool>>(
@@ -236,10 +208,8 @@ class Program
         );
         AssertAny(a5, a => a is SingleAttribute<bool>);
 
-        var b5 = ((ICustomAttributeProvider)programTypeInfo).GetCustomAttributes(
-            typeof(SingleAttribute<bool>),
-            true
-        );
+        var b5 = ((ICustomAttributeProvider)programTypeInfo)
+            .GetCustomAttributes(typeof(SingleAttribute<bool>), true);
         AssertAny(b5, a => a is SingleAttribute<bool>);
 
         var a6 = CustomAttributeExtensions.GetCustomAttributes<MultiAttribute<int>>(
@@ -250,10 +220,8 @@ class Program
         AssertAny(a6, a => (a as MultiAttribute<int>)?.Value == 1);
         AssertAny(a6, a => (a as MultiAttribute<int>)?.Value == 2);
 
-        var b6 = ((ICustomAttributeProvider)programTypeInfo).GetCustomAttributes(
-            typeof(MultiAttribute<int>),
-            true
-        );
+        var b6 = ((ICustomAttributeProvider)programTypeInfo)
+            .GetCustomAttributes(typeof(MultiAttribute<int>), true);
         AssertAny(b6, a => (a as MultiAttribute<int>)?.Value == 0);
         AssertAny(b6, a => (a as MultiAttribute<int>)?.Value == 1);
         AssertAny(b6, a => (a as MultiAttribute<int>)?.Value == 2);
@@ -265,10 +233,8 @@ class Program
         AssertAny(a7, a => (a as MultiAttribute<bool>)?.Value == false);
         AssertAny(a7, a => (a as MultiAttribute<bool>)?.Value == true);
 
-        var b7 = ((ICustomAttributeProvider)programTypeInfo).GetCustomAttributes(
-            typeof(MultiAttribute<bool>),
-            true
-        );
+        var b7 = ((ICustomAttributeProvider)programTypeInfo)
+            .GetCustomAttributes(typeof(MultiAttribute<bool>), true);
         AssertAny(b7, a => (a as MultiAttribute<bool>)?.Value == false);
         AssertAny(b7, a => (a as MultiAttribute<bool>)?.Value == true);
 
@@ -278,10 +244,8 @@ class Program
         );
         AssertAny(a8, a => (a as MultiAttribute<bool?>)?.Value == null);
 
-        var b8 = ((ICustomAttributeProvider)programTypeInfo).GetCustomAttributes(
-            typeof(MultiAttribute<bool?>),
-            true
-        );
+        var b8 = ((ICustomAttributeProvider)programTypeInfo)
+            .GetCustomAttributes(typeof(MultiAttribute<bool?>), true);
         AssertAny(b8, a => (a as MultiAttribute<bool?>)?.Value == null);
 
         var a9 = CustomAttributeExtensions.GetCustomAttributes<MultiAttribute<string>>(
@@ -291,10 +255,8 @@ class Program
         AssertAny(a9, a => (a as MultiAttribute<string>)?.Value == "Ctor");
         AssertAny(a9, a => (a as MultiAttribute<string>)?.Value == "Property");
 
-        var b9 = ((ICustomAttributeProvider)programTypeInfo).GetCustomAttributes(
-            typeof(MultiAttribute<string>),
-            true
-        );
+        var b9 = ((ICustomAttributeProvider)programTypeInfo)
+            .GetCustomAttributes(typeof(MultiAttribute<string>), true);
         AssertAny(b9, a => (a as MultiAttribute<string>)?.Value == "Ctor");
         AssertAny(b9, a => (a as MultiAttribute<string>)?.Value == "Property");
 
@@ -305,10 +267,8 @@ class Program
         AssertAny(a10, a => (a as MultiAttribute<Type>)?.Value == typeof(Class));
         AssertAny(a10, a => (a as MultiAttribute<Type>)?.Value == typeof(Class.Derive));
 
-        var b10 = ((ICustomAttributeProvider)programTypeInfo).GetCustomAttributes(
-            typeof(MultiAttribute<Type>),
-            true
-        );
+        var b10 = ((ICustomAttributeProvider)programTypeInfo)
+            .GetCustomAttributes(typeof(MultiAttribute<Type>), true);
         AssertAny(b10, a => (a as MultiAttribute<Type>)?.Value == typeof(Class));
         AssertAny(b10, a => (a as MultiAttribute<Type>)?.Value == typeof(Class.Derive));
 
@@ -327,10 +287,8 @@ class Program
             ) == null
         );
         Assert(
-            !((ICustomAttributeProvider)programTypeInfo).GetCustomAttributes(
-                    typeof(MultiAttribute<>),
-                    true
-                )
+            !((ICustomAttributeProvider)programTypeInfo)
+                .GetCustomAttributes(typeof(MultiAttribute<>), true)
                 .GetEnumerator()
                 .MoveNext()
         );

@@ -122,21 +122,29 @@ namespace HttpStress
                                         HashAlgorithmName.SHA256,
                                         RSASignaturePadding.Pkcs1
                                     );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509BasicConstraintsExtension(false, false, 0, false)
-                                    );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509EnhancedKeyUsageExtension(
-                                            new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
-                                            false
-                                        )
-                                    );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509KeyUsageExtension(
-                                            X509KeyUsageFlags.DigitalSignature,
-                                            false
-                                        )
-                                    );
+                                    certReq.CertificateExtensions
+                                        .Add(
+                                            new X509BasicConstraintsExtension(
+                                                false,
+                                                false,
+                                                0,
+                                                false
+                                            )
+                                        );
+                                    certReq.CertificateExtensions
+                                        .Add(
+                                            new X509EnhancedKeyUsageExtension(
+                                                new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
+                                                false
+                                            )
+                                        );
+                                    certReq.CertificateExtensions
+                                        .Add(
+                                            new X509KeyUsageExtension(
+                                                X509KeyUsageFlags.DigitalSignature,
+                                                false
+                                            )
+                                        );
                                     X509Certificate2 cert = certReq.CreateSelfSigned(
                                         DateTimeOffset.UtcNow.AddMonths(-1),
                                         DateTimeOffset.UtcNow.AddMonths(1)
@@ -178,26 +186,28 @@ namespace HttpStress
 
                 loggerConfiguration = loggerConfiguration
                 // Output diagnostics to the file
-                .WriteTo.File("server.log", fileSizeLimitBytes: 50 << 20, rollOnFileSizeLimit: true)
+                .WriteTo
+                    .File("server.log", fileSizeLimitBytes: 50 << 20, rollOnFileSizeLimit: true)
                     .MinimumLevel.Debug();
             }
             if (configuration.LogAspNet)
             {
                 loggerConfiguration = loggerConfiguration
                 // Output only warnings and errors
-                .WriteTo.Console(Serilog.Events.LogEventLevel.Warning);
+                .WriteTo
+                    .Console(Serilog.Events.LogEventLevel.Warning);
             }
             Log.Logger = loggerConfiguration.CreateLogger();
 
             host = host.UseSerilog()
-                // Set up how each request should be handled by the server.
-                .Configure(
-                    app =>
-                    {
-                        app.UseRouting();
-                        app.UseEndpoints(MapRoutes);
-                    }
-                );
+            // Set up how each request should be handled by the server.
+            .Configure(
+                app =>
+                {
+                    app.UseRouting();
+                    app.UseEndpoints(MapRoutes);
+                }
+            );
 
             _webHost = host.Build();
             _webHost.Start();
@@ -243,21 +253,22 @@ namespace HttpStress
                 "/headers",
                 async context =>
                 {
-                    (string name, StringValues values)[] headersToEcho =
-                        context.Request.Headers.Where(h => h.Key.StartsWith("header-"))
-                            // kestrel does not seem to be splitting comma separated header values, handle here
-                            .Select(
-                                h =>
-                                    (
-                                        h.Key,
-                                        new StringValues(
-                                            h.Value.SelectMany(v => v.Split(','))
-                                                .Select(x => x.Trim())
-                                                .ToArray()
-                                        )
+                    (string name, StringValues values)[] headersToEcho = context.Request.Headers
+                        .Where(h => h.Key.StartsWith("header-"))
+                        // kestrel does not seem to be splitting comma separated header values, handle here
+                        .Select(
+                            h =>
+                                (
+                                    h.Key,
+                                    new StringValues(
+                                        h.Value
+                                            .SelectMany(v => v.Split(','))
+                                            .Select(x => x.Trim())
+                                            .ToArray()
                                     )
-                            )
-                            .ToArray();
+                                )
+                        )
+                        .ToArray();
 
                     foreach ((string name, StringValues values) in headersToEcho)
                     {
@@ -442,10 +453,8 @@ namespace HttpStress
             int GetExpectedContentLength()
             {
                 if (
-                    ctx.Request.Headers.TryGetValue(
-                        ExpectedResponseContentLength,
-                        out StringValues values
-                    )
+                    ctx.Request.Headers
+                        .TryGetValue(ExpectedResponseContentLength, out StringValues values)
                     && values.Count == 1
                     && int.TryParse(values[0], out int result)
                 )

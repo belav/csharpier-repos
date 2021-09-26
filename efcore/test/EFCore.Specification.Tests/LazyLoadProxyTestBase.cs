@@ -260,7 +260,8 @@ namespace Microsoft.EntityFrameworkCore
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
                 foreach (
-                    var child in parent.Children.Cast<object>()
+                    var child in parent.Children
+                        .Cast<object>()
                         .Concat(parent.ChildrenAk)
                         .Concat(parent.ChildrenShadowFk)
                         .Concat(parent.ChildrenCompositeKey)
@@ -316,8 +317,8 @@ namespace Microsoft.EntityFrameworkCore
                         CoreStrings.WarningAsErrorTemplate(
                             CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
                             CoreResources.LogLazyLoadOnDisposedContext(
-                                    new TestLogger<TestLoggingDefinitions>()
-                                )
+                                new TestLogger<TestLoggingDefinitions>()
+                            )
                                 .GenerateMessage("MotherProxy", "Children"),
                             "CoreEventId.LazyLoadOnDisposedContextWarning"
                         ),
@@ -398,8 +399,8 @@ namespace Microsoft.EntityFrameworkCore
                         CoreStrings.WarningAsErrorTemplate(
                             CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
                             CoreResources.LogLazyLoadOnDisposedContext(
-                                    new TestLogger<TestLoggingDefinitions>()
-                                )
+                                new TestLogger<TestLoggingDefinitions>()
+                            )
                                 .GenerateMessage("ChildProxy", "Parent"),
                             "CoreEventId.LazyLoadOnDisposedContextWarning"
                         ),
@@ -482,8 +483,8 @@ namespace Microsoft.EntityFrameworkCore
                         CoreStrings.WarningAsErrorTemplate(
                             CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
                             CoreResources.LogLazyLoadOnDisposedContext(
-                                    new TestLogger<TestLoggingDefinitions>()
-                                )
+                                new TestLogger<TestLoggingDefinitions>()
+                            )
                                 .GenerateMessage("SingleProxy", "Parent"),
                             "CoreEventId.LazyLoadOnDisposedContextWarning"
                         ),
@@ -566,8 +567,8 @@ namespace Microsoft.EntityFrameworkCore
                         CoreStrings.WarningAsErrorTemplate(
                             CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
                             CoreResources.LogLazyLoadOnDisposedContext(
-                                    new TestLogger<TestLoggingDefinitions>()
-                                )
+                                new TestLogger<TestLoggingDefinitions>()
+                            )
                                 .GenerateMessage("MotherProxy", "Single"),
                             "CoreEventId.LazyLoadOnDisposedContextWarning"
                         ),
@@ -974,7 +975,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
             var newParent =
-                context.ChangeTracker.Entries<Parent>()
+                context.ChangeTracker
+                    .Entries<Parent>()
                     .Single(e => e.Entity.Id != parent.Id).Entity;
 
             Assert.Same(child, newParent.Children.Single());
@@ -2166,14 +2168,15 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.IsNotType<Blog>(blog);
             }
 
-            var serialized = Newtonsoft.Json.JsonConvert.SerializeObject(
-                blogs,
-                new Newtonsoft.Json.JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
-                    Formatting = Newtonsoft.Json.Formatting.Indented
-                }
-            );
+            var serialized = Newtonsoft.Json.JsonConvert
+                .SerializeObject(
+                    blogs,
+                    new Newtonsoft.Json.JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                        Formatting = Newtonsoft.Json.Formatting.Indented
+                    }
+                );
 
             Assert.Equal(
                 @"[
@@ -2474,7 +2477,8 @@ namespace Microsoft.EntityFrameworkCore
                 from p in context.Set<Parent>()
                 orderby p.Id
                 select DtoFactory.CreateDto(p)
-            ).FirstOrDefault();
+            )
+                .FirstOrDefault();
 
             RecordLog();
 
@@ -2906,10 +2910,11 @@ namespace Microsoft.EntityFrameworkCore
             protected override IServiceCollection AddServices(
                 IServiceCollection serviceCollection
             ) =>
-                base.AddServices(
-                    serviceCollection.AddScoped<IChangeDetector, ChangeDetectorProxy>()
-                        .AddEntityFrameworkProxies()
-                );
+                base
+                    .AddServices(
+                        serviceCollection.AddScoped<IChangeDetector, ChangeDetectorProxy>()
+                            .AddEntityFrameworkProxies()
+                    );
 
             // By-design. Lazy loaders are not disposed when using pooling
             protected override bool UsePooling => false;

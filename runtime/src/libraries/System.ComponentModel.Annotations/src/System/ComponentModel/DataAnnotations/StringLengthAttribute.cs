@@ -77,13 +77,14 @@ namespace System.ComponentModel.DataAnnotations
 
             // it's ok to pass in the minLength even for the error message without a {2} param since string.Format will just
             // ignore extra arguments
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                errorMessage,
-                name,
-                MaximumLength,
-                MinimumLength
-            );
+            return string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    errorMessage,
+                    name,
+                    MaximumLength,
+                    MinimumLength
+                );
         }
 
         /// <summary>

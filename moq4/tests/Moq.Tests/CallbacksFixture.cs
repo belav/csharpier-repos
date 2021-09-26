@@ -71,14 +71,13 @@ namespace Moq.Tests
             var mock = new Mock<IFoo>();
             string callbackArg1 = null;
             string callbackArg2 = null;
-            mock.Setup(x => x.Submit(It.IsAny<string>(), It.IsAny<string>()))
-                .Callback(
-                    (string s1, string s2) =>
-                    {
-                        callbackArg1 = s1;
-                        callbackArg2 = s2;
-                    }
-                );
+            mock.Setup(x => x.Submit(It.IsAny<string>(), It.IsAny<string>())).Callback(
+                (string s1, string s2) =>
+                {
+                    callbackArg1 = s1;
+                    callbackArg2 = s2;
+                }
+            );
 
             mock.Object.Submit("blah1", "blah2");
             Assert.Equal("blah1", callbackArg1);
@@ -117,14 +116,14 @@ namespace Moq.Tests
             string callbackArg3 = null;
             string callbackArg4 = null;
             mock.Setup(
-                    x =>
-                        x.Submit(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
-                )
+                x =>
+                    x.Submit(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Callback(
                     (string s1, string s2, string s3, string s4) =>
                     {
@@ -152,15 +151,15 @@ namespace Moq.Tests
             string callbackArg4 = null;
             string callbackArg5 = null;
             mock.Setup(
-                    x =>
-                        x.Submit(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
-                )
+                x =>
+                    x.Submit(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5) =>
                     {
@@ -191,16 +190,16 @@ namespace Moq.Tests
             string callbackArg5 = null;
             string callbackArg6 = null;
             mock.Setup(
-                    x =>
-                        x.Submit(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
-                )
+                x =>
+                    x.Submit(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5, string s6) =>
                     {
@@ -234,17 +233,17 @@ namespace Moq.Tests
             string callbackArg6 = null;
             string callbackArg7 = null;
             mock.Setup(
-                    x =>
-                        x.Submit(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
-                )
+                x =>
+                    x.Submit(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5, string s6, string s7) =>
                     {
@@ -281,18 +280,18 @@ namespace Moq.Tests
             string callbackArg7 = null;
             string callbackArg8 = null;
             mock.Setup(
-                    x =>
-                        x.Submit(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
-                )
+                x =>
+                    x.Submit(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Callback(
                     (
                         string s1,
@@ -316,16 +315,8 @@ namespace Moq.Tests
                     }
                 );
 
-            mock.Object.Submit(
-                "blah1",
-                "blah2",
-                "blah3",
-                "blah4",
-                "blah5",
-                "blah6",
-                "blah7",
-                "blah8"
-            );
+            mock.Object
+                .Submit("blah1", "blah2", "blah3", "blah4", "blah5", "blah6", "blah7", "blah8");
             Assert.Equal("blah1", callbackArg1);
             Assert.Equal("blah2", callbackArg2);
             Assert.Equal("blah3", callbackArg3);
@@ -355,15 +346,13 @@ namespace Moq.Tests
             var mock = new Mock<IFoo>();
             string callbackArg1 = null;
             string callbackArg2 = null;
-            mock.Setup(x => x.Execute(It.IsAny<string>(), It.IsAny<string>()))
-                .Callback(
-                    (string s1, string s2) =>
-                    {
-                        callbackArg1 = s1;
-                        callbackArg2 = s2;
-                    }
-                )
-                .Returns("foo");
+            mock.Setup(x => x.Execute(It.IsAny<string>(), It.IsAny<string>())).Callback(
+                (string s1, string s2) =>
+                {
+                    callbackArg1 = s1;
+                    callbackArg2 = s2;
+                }
+            ).Returns("foo");
 
             mock.Object.Execute("blah1", "blah2");
             Assert.Equal("blah1", callbackArg1);
@@ -403,14 +392,14 @@ namespace Moq.Tests
             string callbackArg3 = null;
             string callbackArg4 = null;
             mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
-                )
+                x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Callback(
                     (string s1, string s2, string s3, string s4) =>
                     {
@@ -439,15 +428,15 @@ namespace Moq.Tests
             string callbackArg4 = null;
             string callbackArg5 = null;
             mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
-                )
+                x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5) =>
                     {
@@ -479,16 +468,16 @@ namespace Moq.Tests
             string callbackArg5 = null;
             string callbackArg6 = null;
             mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
-                )
+                x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5, string s6) =>
                     {
@@ -523,17 +512,17 @@ namespace Moq.Tests
             string callbackArg6 = null;
             string callbackArg7 = null;
             mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
-                )
+                x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Callback(
                     (string s1, string s2, string s3, string s4, string s5, string s6, string s7) =>
                     {
@@ -571,18 +560,18 @@ namespace Moq.Tests
             string callbackArg7 = null;
             string callbackArg8 = null;
             mock.Setup(
-                    x =>
-                        x.Execute(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>()
-                        )
-                )
+                x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Callback(
                     (
                         string s1,
@@ -607,16 +596,8 @@ namespace Moq.Tests
                 )
                 .Returns("foo");
 
-            mock.Object.Execute(
-                "blah1",
-                "blah2",
-                "blah3",
-                "blah4",
-                "blah5",
-                "blah6",
-                "blah7",
-                "blah8"
-            );
+            mock.Object
+                .Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6", "blah7", "blah8");
             Assert.Equal("blah1", callbackArg1);
             Assert.Equal("blah2", callbackArg2);
             Assert.Equal("blah3", callbackArg3);
@@ -635,28 +616,25 @@ namespace Moq.Tests
             bool beforeCalled = false;
             bool afterCalled = false;
 
-            mock.Setup(foo => foo.Execute("ping"))
-                .Callback(
-                    () =>
-                    {
-                        Assert.False(returnsCalled);
-                        beforeCalled = true;
-                    }
-                )
-                .Returns(
-                    () =>
-                    {
-                        returnsCalled = true;
-                        return "ack";
-                    }
-                )
-                .Callback(
-                    () =>
-                    {
-                        Assert.True(returnsCalled);
-                        afterCalled = true;
-                    }
-                );
+            mock.Setup(foo => foo.Execute("ping")).Callback(
+                () =>
+                {
+                    Assert.False(returnsCalled);
+                    beforeCalled = true;
+                }
+            ).Returns(
+                () =>
+                {
+                    returnsCalled = true;
+                    return "ack";
+                }
+            ).Callback(
+                () =>
+                {
+                    Assert.True(returnsCalled);
+                    afterCalled = true;
+                }
+            );
 
             Assert.Equal("ack", mock.Object.Execute("ping"));
 
@@ -720,15 +698,14 @@ namespace Moq.Tests
             var received = default(string);
 
             var mock = new Mock<IFoo>();
-            mock.Setup(f => f.Execute(ref input))
-                .Callback(
-                    new ExecuteRHandler(
-                        (ref string arg1) =>
-                        {
-                            received = arg1;
-                        }
-                    )
-                );
+            mock.Setup(f => f.Execute(ref input)).Callback(
+                new ExecuteRHandler(
+                    (ref string arg1) =>
+                    {
+                        received = arg1;
+                    }
+                )
+            );
 
             mock.Object.Execute(ref input);
             Assert.Equal("input", input);
@@ -741,15 +718,14 @@ namespace Moq.Tests
             var value = "input";
 
             var mock = new Mock<IFoo>();
-            mock.Setup(f => f.Execute(ref value))
-                .Callback(
-                    new ExecuteRHandler(
-                        (ref string arg1) =>
-                        {
-                            arg1 = "output";
-                        }
-                    )
-                );
+            mock.Setup(f => f.Execute(ref value)).Callback(
+                new ExecuteRHandler(
+                    (ref string arg1) =>
+                    {
+                        arg1 = "output";
+                    }
+                )
+            );
 
             Assert.Equal("input", value);
             mock.Object.Execute(ref value);
@@ -763,15 +739,14 @@ namespace Moq.Tests
             var value = "input";
 
             var mock = new Mock<IFoo>();
-            mock.Setup(f => f.Execute(ref _, value))
-                .Callback(
-                    new ExecuteRVHandler(
-                        (ref string arg1, string arg2) =>
-                        {
-                            arg2 = "output";
-                        }
-                    )
-                );
+            mock.Setup(f => f.Execute(ref _, value)).Callback(
+                new ExecuteRVHandler(
+                    (ref string arg1, string arg2) =>
+                    {
+                        arg2 = "output";
+                    }
+                )
+            );
 
             Assert.Equal("input", value);
             mock.Object.Execute(ref _, value);
@@ -785,16 +760,15 @@ namespace Moq.Tests
             int result = default(int);
 
             var mock = new Mock<IFoo>();
-            mock.SetupSet(f => f[10] = It.IsAny<int>())
-                .Callback(
-                    new Action<int, int>(
-                        (x_, result_) =>
-                        {
-                            x = x_;
-                            result = result_;
-                        }
-                    )
-                );
+            mock.SetupSet(f => f[10] = It.IsAny<int>()).Callback(
+                new Action<int, int>(
+                    (x_, result_) =>
+                    {
+                        x = x_;
+                        result = result_;
+                    }
+                )
+            );
 
             mock.Object[10] = 5;
             Assert.Equal(10, x);
@@ -809,17 +783,16 @@ namespace Moq.Tests
             int result = default(int);
 
             var mock = new Mock<IFoo>();
-            mock.SetupSet(f => f[3, 13] = It.IsAny<int>())
-                .Callback(
-                    new Action<int, int, int>(
-                        (x_, y_, result_) =>
-                        {
-                            x = x_;
-                            y = y_;
-                            result = result_;
-                        }
-                    )
-                );
+            mock.SetupSet(f => f[3, 13] = It.IsAny<int>()).Callback(
+                new Action<int, int, int>(
+                    (x_, y_, result_) =>
+                    {
+                        x = x_;
+                        y = y_;
+                        result = result_;
+                    }
+                )
+            );
 
             mock.Object[3, 13] = 2;
             Assert.Equal(3, x);
@@ -831,15 +804,14 @@ namespace Moq.Tests
         public void Type_of_exception_thrown_from_InvocationFunc_callback_should_be_preserved()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(m => m.Submit("good", "bad"))
-                .Returns(
-                    new InvocationFunc(
-                        invocation =>
-                        {
-                            throw new Exception("very bad"); // this used to be erroneously wrapped as a `TargetInvocationException`
-                        }
-                    )
-                );
+            mock.Setup(m => m.Submit("good", "bad")).Returns(
+                new InvocationFunc(
+                    invocation =>
+                    {
+                        throw new Exception("very bad"); // this used to be erroneously wrapped as a `TargetInvocationException`
+                    }
+                )
+            );
 
             var ex = Assert.Throws<Exception>(() => mock.Object.Submit("good", "bad"));
             Assert.Equal("very bad", ex.Message);

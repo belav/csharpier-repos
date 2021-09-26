@@ -851,16 +851,17 @@ namespace System.Net.Mail.Tests
         [Fact]
         public void ParseAddresses_WithManyComplexAddresses_ShouldReadCorrectly()
         {
-            string addresses = string.Format(
-                "{0},{1},{2},{3},{4},{5},{6}",
-                "\"Dr M\u00FCller\" test@mail.com",
-                "(comment)this.test.this(comment)@(comment)this.test.this(comment)",
-                "jeff@example.com",
-                "jeff2@example.org",
-                "(comment)this.test.this(comment)<(comment)this.test.this(comment)@(comment)[  test this ](comment)>",
-                "\"test\" <a..b_b@example.com>",
-                "(comment)\" asciin;,oqu o.tesws \"(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)this.test.this(comment)>"
-            );
+            string addresses = string
+                .Format(
+                    "{0},{1},{2},{3},{4},{5},{6}",
+                    "\"Dr M\u00FCller\" test@mail.com",
+                    "(comment)this.test.this(comment)@(comment)this.test.this(comment)",
+                    "jeff@example.com",
+                    "jeff2@example.org",
+                    "(comment)this.test.this(comment)<(comment)this.test.this(comment)@(comment)[  test this ](comment)>",
+                    "\"test\" <a..b_b@example.com>",
+                    "(comment)\" asciin;,oqu o.tesws \"(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)this.test.this(comment)>"
+                );
 
             IList<MailAddress> result = MailAddressParser.ParseMultipleAddresses(addresses);
 

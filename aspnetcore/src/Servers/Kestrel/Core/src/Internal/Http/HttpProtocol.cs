@@ -30,18 +30,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
     internal abstract partial class HttpProtocol : IHttpResponseControl
     {
-        private static readonly byte[] _bytesConnectionClose = Encoding.ASCII.GetBytes(
-            "\r\nConnection: close"
-        );
-        private static readonly byte[] _bytesConnectionKeepAlive = Encoding.ASCII.GetBytes(
-            "\r\nConnection: keep-alive"
-        );
-        private static readonly byte[] _bytesTransferEncodingChunked = Encoding.ASCII.GetBytes(
-            "\r\nTransfer-Encoding: chunked"
-        );
-        private static readonly byte[] _bytesServer = Encoding.ASCII.GetBytes(
-            "\r\nServer: " + Constants.ServerName
-        );
+        private static readonly byte[] _bytesConnectionClose = Encoding.ASCII
+            .GetBytes("\r\nConnection: close");
+        private static readonly byte[] _bytesConnectionKeepAlive = Encoding.ASCII
+            .GetBytes("\r\nConnection: keep-alive");
+        private static readonly byte[] _bytesTransferEncodingChunked = Encoding.ASCII
+            .GetBytes("\r\nTransfer-Encoding: chunked");
+        private static readonly byte[] _bytesServer = Encoding.ASCII
+            .GetBytes("\r\nServer: " + Constants.ServerName);
         internal const string SchemeHttp = "http";
         internal const string SchemeHttps = "https";
 
@@ -497,10 +493,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             if (shouldScheduleCancellation)
             {
                 // Potentially calling user code. CancelRequestAbortedToken logs any exceptions.
-                ServiceContext.Scheduler.Schedule(
-                    state => ((HttpProtocol)state!).CancelRequestAbortedTokenCallback(),
-                    this
-                );
+                ServiceContext.Scheduler
+                    .Schedule(
+                        state => ((HttpProtocol)state!).CancelRequestAbortedTokenCallback(),
+                        this
+                    );
             }
         }
 
@@ -855,11 +852,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     }
                     catch (Exception ex)
                     {
-                        protocol.Log.ApplicationError(
-                            protocol.ConnectionId,
-                            protocol.TraceIdentifier,
-                            ex
-                        );
+                        protocol.Log
+                            .ApplicationError(protocol.ConnectionId, protocol.TraceIdentifier, ex);
                     }
                 }
             }
@@ -962,14 +956,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             if (
                 _httpVersion != Http.HttpVersion.Http10
-                && ((IHeaderDictionary)HttpRequestHeaders).TryGetValue(
-                    HeaderNames.Expect,
-                    out var expect
-                )
-                && (expect.FirstOrDefault() ?? "").Equals(
-                    "100-continue",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && ((IHeaderDictionary)HttpRequestHeaders)
+                    .TryGetValue(HeaderNames.Expect, out var expect)
+                && (expect.FirstOrDefault() ?? "")
+                    .Equals("100-continue", StringComparison.OrdinalIgnoreCase)
             )
             {
                 return Output.Write100ContinueAsync();

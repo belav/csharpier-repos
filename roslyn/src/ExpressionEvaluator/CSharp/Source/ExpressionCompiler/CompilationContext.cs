@@ -106,9 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // Assert that the cheap check for "this" is equivalent to the expensive check for "this".
             Debug.Assert(
                 (GetThisProxy(_displayClassVariables) != null)
-                    == _displayClassVariables.Values.Any(
-                        v => v.Kind == DisplayClassVariableKind.This
-                    )
+                    == _displayClassVariables.Values
+                        .Any(v => v.Kind == DisplayClassVariableKind.This)
             );
         }
 
@@ -490,10 +489,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     // but the source method can have parameters to iterate over.
                     if (itemsAdded.Count == 0 && _sourceMethodParametersInOrder.Length != 0)
                     {
-                        var localsDictionary = PooledDictionary<
-                            string,
-                            (LocalSymbol, int)
-                        >.GetInstance();
+                        var localsDictionary = PooledDictionary<string, (LocalSymbol, int)>
+                            .GetInstance();
                         int localIndex = 0;
                         foreach (var local in _localsForBinding)
                         {
@@ -887,10 +884,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             {
                 flags |= DkmClrCompilationResultFlags.ReadOnlyResult;
                 Debug.Assert(expression.ConstantValue == null);
-                resultProperties = expression.ExpressionSymbol.GetResultProperties(
-                    flags,
-                    isConstant: false
-                );
+                resultProperties = expression.ExpressionSymbol
+                    .GetResultProperties(flags, isConstant: false);
                 return new BoundExpressionStatement(syntax, expression)
                 {
                     WasCompilerGenerated = true
@@ -906,10 +901,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 flags |= DkmClrCompilationResultFlags.ReadOnlyResult;
             }
 
-            resultProperties = expression.ExpressionSymbol.GetResultProperties(
-                flags,
-                expression.ConstantValue != null
-            );
+            resultProperties = expression.ExpressionSymbol
+                .GetResultProperties(flags, expression.ConstantValue != null);
             return new BoundReturnStatement(syntax, RefKind.None, expression)
             {
                 WasCompilerGenerated = true
@@ -1744,10 +1737,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
                 // The locals are the set of all fields from the display classes.
                 var displayClassVariableNamesInOrderBuilder = ArrayBuilder<string>.GetInstance();
-                var displayClassVariablesBuilder = PooledDictionary<
-                    string,
-                    DisplayClassVariable
-                >.GetInstance();
+                var displayClassVariablesBuilder = PooledDictionary<string, DisplayClassVariable>
+                    .GetInstance();
 
                 foreach (var instance in displayClassInstances)
                 {
@@ -2040,9 +2031,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableDictionary<string, DisplayClassVariable> displayClassVariables
         )
         {
-            return displayClassVariables.Values.FirstOrDefault(
-                v => v.Kind == DisplayClassVariableKind.This
-            );
+            return displayClassVariables.Values
+                .FirstOrDefault(v => v.Kind == DisplayClassVariableKind.This);
         }
 
         private static NamedTypeSymbol GetNonDisplayClassContainer(NamedTypeSymbol type)
@@ -2140,11 +2130,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     )
                     {
                         candidateSubstitutedSourceType = containing;
-                        sourceMethodMustBeInstance =
-                            candidateSubstitutedSourceType.MemberNames.Select(
-                                    GeneratedNames.GetKind
-                                )
-                                .Contains(GeneratedNameKind.ThisProxyField);
+                        sourceMethodMustBeInstance = candidateSubstitutedSourceType.MemberNames
+                            .Select(GeneratedNames.GetKind)
+                            .Contains(GeneratedNameKind.ThisProxyField);
                     }
                 }
 

@@ -129,7 +129,8 @@ namespace System.Net
             _backingBufferLength = size;
 
             // Zero out the contents of the buffer.
-            new Span<byte>(_backingBuffer.ToPointer(), size).Clear();
+            new Span<byte>(_backingBuffer.ToPointer(), size)
+                .Clear();
         }
     }
 }

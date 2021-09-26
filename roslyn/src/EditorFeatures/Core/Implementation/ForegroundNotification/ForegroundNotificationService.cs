@@ -52,11 +52,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
             // Only start the background processing task if foreground work is allowed
             if (threadingContext.HasMainThread)
             {
-                Task.Factory.SafeStartNewFromAsync(
-                    ProcessAsync,
-                    CancellationToken.None,
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .SafeStartNewFromAsync(
+                        ProcessAsync,
+                        CancellationToken.None,
+                        TaskScheduler.Default
+                    );
             }
         }
 

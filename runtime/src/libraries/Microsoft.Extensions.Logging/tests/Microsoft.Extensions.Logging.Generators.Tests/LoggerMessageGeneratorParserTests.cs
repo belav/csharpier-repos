@@ -755,12 +755,12 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             }
 
             var (d, r) = await RoslynTestUtils.RunGenerator(
-                    new LoggerMessageGenerator(),
-                    refs,
-                    new[] { text },
-                    includeBaseReferences: includeBaseReferences,
-                    cancellationToken: cancellationToken
-                )
+                new LoggerMessageGenerator(),
+                refs,
+                new[] { text },
+                includeBaseReferences: includeBaseReferences,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return d;

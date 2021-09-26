@@ -92,7 +92,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            var builder = ImmutableDictionary<int, string>.Empty.AddRange(
+            var builder = ImmutableDictionary<int, string>.Empty
+                .AddRange(
                     Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string>(n, null))
                 )
                 .ToBuilder();
@@ -279,11 +280,12 @@ namespace System.Collections.Immutable.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 builder
             );
-            PropertyInfo itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                    == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(
+                    pr =>
+                        pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                        == DebuggerBrowsableState.RootHidden
+                );
             KeyValuePair<int, string>[] items =
                 itemProperty.GetValue(info.Instance) as KeyValuePair<int, string>[];
             Assert.Equal(builder, items);
@@ -351,10 +353,8 @@ namespace System.Collections.Immutable.Tests
             out TKey actualKey
         )
         {
-            return ((ImmutableDictionary<TKey, TValue>.Builder)dictionary).TryGetKey(
-                equalKey,
-                out actualKey
-            );
+            return ((ImmutableDictionary<TKey, TValue>.Builder)dictionary)
+                .TryGetKey(equalKey, out actualKey);
         }
 
         protected override IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(
@@ -365,7 +365,8 @@ namespace System.Collections.Immutable.Tests
                 (ImmutableDictionary<TKey, TValue>)(
                     basis ?? GetEmptyImmutableDictionary<TKey, TValue>()
                 )
-            ).ToBuilder();
+            )
+                .ToBuilder();
         }
     }
 }

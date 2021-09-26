@@ -63,9 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             EnsureAllMembersLoaded();
 
             var memberTypes = GetMemberTypesPrivate();
-            var builder = ArrayBuilder<Symbol>.GetInstance(
-                memberTypes.Length + lazyNamespaces.Count
-            );
+            var builder = ArrayBuilder<Symbol>
+                .GetInstance(memberTypes.Length + lazyNamespaces.Count);
 
             builder.AddRange(memberTypes);
             foreach (var pair in lazyNamespaces)
@@ -327,9 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     && _lazyNoPiaLocalTypes.TryGetValue(emittedTypeName.TypeName, out typeDef)
                 )
                 {
-                    result = (NamedTypeSymbol)new MetadataDecoder(
-                        ContainingPEModule
-                    ).GetTypeOfToken(typeDef, out isNoPiaLocalType);
+                    result = (NamedTypeSymbol)new MetadataDecoder(ContainingPEModule)
+                        .GetTypeOfToken(typeDef, out isNoPiaLocalType);
                     Debug.Assert(isNoPiaLocalType);
                 }
             }

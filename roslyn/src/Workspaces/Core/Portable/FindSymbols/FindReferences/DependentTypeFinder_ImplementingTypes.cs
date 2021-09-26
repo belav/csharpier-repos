@@ -45,14 +45,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // interface).  If we hit structs/sealed-classes though we can stop as they can't have any more types
                 // that inherit from them.
                 var allTypes = await DescendInheritanceTreeAsync(
-                        type,
-                        solution,
-                        projects,
-                        typeMatches: TypeMatches,
-                        shouldContinueSearching: s_isInterfaceOrNonSealedClass,
-                        transitive: transitive,
-                        cancellationToken: cancellationToken
-                    )
+                    type,
+                    solution,
+                    projects,
+                    typeMatches: TypeMatches,
+                    shouldContinueSearching: s_isInterfaceOrNonSealedClass,
+                    transitive: transitive,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // Only classes/struct/delegates/enums implement interface types.  Derived interfaces can be found with

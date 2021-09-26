@@ -167,9 +167,8 @@ namespace Castle.DynamicProxy
         public static byte[] GetKeyPair()
         {
             using (
-                var stream = typeof(ModuleScope).Assembly.GetManifestResourceStream(
-                    "Castle.DynamicProxy.DynProxy.snk"
-                )
+                var stream = typeof(ModuleScope).Assembly
+                    .GetManifestResourceStream("Castle.DynamicProxy.DynProxy.snk")
             )
             {
                 if (stream == null)
@@ -330,11 +329,12 @@ namespace Castle.DynamicProxy
                 AssemblyBuilder assemblyBuilder;
                 try
                 {
-                    assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        assemblyName,
-                        AssemblyBuilderAccess.RunAndSave,
-                        signStrongName ? StrongNamedModuleDirectory : WeakNamedModuleDirectory
-                    );
+                    assemblyBuilder = AppDomain.CurrentDomain
+                        .DefineDynamicAssembly(
+                            assemblyName,
+                            AssemblyBuilderAccess.RunAndSave,
+                            signStrongName ? StrongNamedModuleDirectory : WeakNamedModuleDirectory
+                        );
                 }
                 catch (ArgumentException e)
                 {
@@ -346,12 +346,13 @@ namespace Castle.DynamicProxy
                         // I have no idea what that could be
                         throw;
                     }
-                    var message = string.Format(
-                        "There was an error creating dynamic assembly for your proxies - you don't have permissions "
-                            + "required to sign the assembly. To workaround it you can enforce generating non-signed assembly "
-                            + "only when creating {0}. Alternatively ensure that your account has all the required permissions.",
-                        GetType()
-                    );
+                    var message = string
+                        .Format(
+                            "There was an error creating dynamic assembly for your proxies - you don't have permissions "
+                                + "required to sign the assembly. To workaround it you can enforce generating non-signed assembly "
+                                + "only when creating {0}. Alternatively ensure that your account has all the required permissions.",
+                            GetType()
+                        );
                     throw new ArgumentException(message, e);
                 }
                 var module = assemblyBuilder.DefineDynamicModule(moduleName, moduleName, false);
@@ -361,10 +362,8 @@ namespace Castle.DynamicProxy
 #endif
             {
 #if FEATURE_APPDOMAIN
-                var assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    assemblyName,
-                    AssemblyBuilderAccess.Run
-                );
+                var assemblyBuilder = AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 #else
                 var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
                     assemblyName,
@@ -555,10 +554,11 @@ namespace Castle.DynamicProxy
 
             if (cacheMappings.Length == 0)
             {
-                var message = string.Format(
-                    "The given assembly '{0}' does not contain any cache information for generated types.",
-                    assembly.FullName
-                );
+                var message = string
+                    .Format(
+                        "The given assembly '{0}' does not contain any cache information for generated types.",
+                        assembly.FullName
+                    );
                 throw new ArgumentException(message, nameof(assembly));
             }
 

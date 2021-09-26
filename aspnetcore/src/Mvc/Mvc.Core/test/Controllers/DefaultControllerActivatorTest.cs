@@ -130,8 +130,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                     new RouteData(),
                     new ControllerActionDescriptor
                     {
-                        ControllerTypeInfo =
-                            typeof(TypeDerivingFromControllerWithServices).GetTypeInfo()
+                        ControllerTypeInfo = typeof(TypeDerivingFromControllerWithServices)
+                            .GetTypeInfo()
                     }
                 )
             );

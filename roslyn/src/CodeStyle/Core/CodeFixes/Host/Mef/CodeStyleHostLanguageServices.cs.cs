@@ -28,9 +28,8 @@ namespace Microsoft.CodeAnalysis.Host
             public static MefHostExportProvider Create(string languageName)
             {
                 var assemblies = CreateAssemblies(languageName);
-                var compositionConfiguration = new ContainerConfiguration().WithAssemblies(
-                    assemblies
-                );
+                var compositionConfiguration = new ContainerConfiguration()
+                    .WithAssemblies(assemblies);
                 return new MefHostExportProvider(compositionConfiguration.CreateContainer());
             }
 
@@ -50,9 +49,8 @@ namespace Microsoft.CodeAnalysis.Host
                         break;
                 }
 
-                return MefHostServices.DefaultAssemblies.Concat(
-                    MefHostServicesHelpers.LoadNearbyAssemblies(assemblyNames)
-                );
+                return MefHostServices.DefaultAssemblies
+                    .Concat(MefHostServicesHelpers.LoadNearbyAssemblies(assemblyNames));
             }
 
             IEnumerable<Lazy<TExtension>> IMefHostExportProvider.GetExports<TExtension>() =>

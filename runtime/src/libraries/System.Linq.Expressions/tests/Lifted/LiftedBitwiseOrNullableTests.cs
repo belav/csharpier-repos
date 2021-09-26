@@ -187,7 +187,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Or(
                     Expression.Constant(a, typeof(byte?)),
                     Expression.Constant(b, typeof(byte?)),
-                    typeof(LiftedBitwiseOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("OrNullableByte")
                 )
             );
@@ -202,7 +203,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Or(
                     Expression.Constant(a, typeof(int?)),
                     Expression.Constant(b, typeof(int?)),
-                    typeof(LiftedBitwiseOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("OrNullableInt")
                 )
             );
@@ -217,7 +219,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Or(
                     Expression.Constant(a, typeof(long?)),
                     Expression.Constant(b, typeof(long?)),
-                    typeof(LiftedBitwiseOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("OrNullableLong")
                 )
             );
@@ -232,7 +235,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Or(
                     Expression.Constant(a, typeof(sbyte?)),
                     Expression.Constant(b, typeof(sbyte?)),
-                    typeof(LiftedBitwiseOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("OrNullableSByte")
                 )
             );
@@ -247,7 +251,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Or(
                     Expression.Constant(a, typeof(short?)),
                     Expression.Constant(b, typeof(short?)),
-                    typeof(LiftedBitwiseOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("OrNullableShort")
                 )
             );
@@ -262,7 +267,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Or(
                     Expression.Constant(a, typeof(uint?)),
                     Expression.Constant(b, typeof(uint?)),
-                    typeof(LiftedBitwiseOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("OrNullableUInt")
                 )
             );
@@ -277,7 +283,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Or(
                     Expression.Constant(a, typeof(ulong?)),
                     Expression.Constant(b, typeof(ulong?)),
-                    typeof(LiftedBitwiseOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("OrNullableULong")
                 )
             );
@@ -292,7 +299,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Or(
                     Expression.Constant(a, typeof(ushort?)),
                     Expression.Constant(b, typeof(ushort?)),
-                    typeof(LiftedBitwiseOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("OrNullableUShort")
                 )
             );

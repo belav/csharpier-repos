@@ -315,8 +315,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     var invokeTask = hubConnection.InvokeAsync<int>("Foo");
 
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 3, result = 42 }
-                        )
+                        new { invocationId = "1", type = 3, result = 42 }
+                    )
                         .DefaultTimeout();
 
                     Assert.Equal(42, await invokeTask.DefaultTimeout());
@@ -341,8 +341,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     var invokeTask = hubConnection.InvokeAsync<int>("Foo");
 
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 3, error = "An error occurred" }
-                        )
+                        new { invocationId = "1", type = 3, error = "An error occurred" }
+                    )
                         .DefaultTimeout();
 
                     var ex = await Assert.ThrowsAsync<HubException>(() => invokeTask)
@@ -370,13 +370,13 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         .DefaultTimeout();
 
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 3, result = "Oops" }
-                        )
+                        new { invocationId = "1", type = 3, result = "Oops" }
+                    )
                         .DefaultTimeout();
 
                     var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => channel.ReadAndCollectAllAsync()
-                        )
+                        () => channel.ReadAndCollectAllAsync()
+                    )
                         .DefaultTimeout();
                     Assert.Equal(
                         "Server provided a result in a completion response to a streamed invocation.",
@@ -404,13 +404,13 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         .DefaultTimeout();
 
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 3, error = "An error occurred" }
-                        )
+                        new { invocationId = "1", type = 3, error = "An error occurred" }
+                    )
                         .DefaultTimeout();
 
                     var ex = await Assert.ThrowsAsync<HubException>(
-                            async () => await channel.ReadAndCollectAllAsync()
-                        )
+                        async () => await channel.ReadAndCollectAllAsync()
+                    )
                         .DefaultTimeout();
                     Assert.Equal("An error occurred", ex.Message);
                 }
@@ -434,8 +434,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     var invokeTask = hubConnection.InvokeAsync<int>("Foo");
 
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 2, item = 42 }
-                        )
+                        new { invocationId = "1", type = 2, item = 42 }
+                    )
                         .DefaultTimeout();
 
                     var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => invokeTask)
@@ -466,16 +466,16 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         .DefaultTimeout();
 
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 2, item = "1" }
-                        )
+                        new { invocationId = "1", type = 2, item = "1" }
+                    )
                         .DefaultTimeout();
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 2, item = "2" }
-                        )
+                        new { invocationId = "1", type = 2, item = "2" }
+                    )
                         .DefaultTimeout();
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 2, item = "3" }
-                        )
+                        new { invocationId = "1", type = 2, item = "3" }
+                    )
                         .DefaultTimeout();
                     await connection.ReceiveJsonMessage(new { invocationId = "1", type = 3 })
                         .DefaultTimeout();
@@ -509,8 +509,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     var args = new object[] { 1, "Foo", 2.0f };
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 1, target = "Foo", arguments = args }
-                        )
+                        new { invocationId = "1", type = 1, target = "Foo", arguments = args }
+                    )
                         .DefaultTimeout();
 
                     Assert.Equal(args, await handlerCalled.Task.DefaultTimeout());
@@ -543,8 +543,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     hubConnection.Remove("Foo");
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 1, target = "Foo", arguments = 1 }
-                        )
+                        new { invocationId = "1", type = 1, target = "Foo", arguments = 1 }
+                    )
                         .DefaultTimeout();
                     var handlerTask = handlerCalled.Task;
 
@@ -584,8 +584,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     hubConnection.Remove("Foo");
                     await connection.ReceiveJsonMessage(
-                            new { invocationId = "1", type = 1, target = "Foo", arguments = 1 }
-                        )
+                        new { invocationId = "1", type = 1, target = "Foo", arguments = 1 }
+                    )
                         .DefaultTimeout();
                     var handlerTask = handlerCalled.Task;
 

@@ -96,11 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(selectExpression, nameof(selectExpression));
             Check.NotNull(parametersValues, nameof(parametersValues));
 
-            return new SqlNullabilityProcessor(Dependencies, UseRelationalNulls).Process(
-                selectExpression,
-                parametersValues,
-                out canCache
-            );
+            return new SqlNullabilityProcessor(Dependencies, UseRelationalNulls)
+                .Process(selectExpression, parametersValues, out canCache);
         }
 
         /// <summary>
@@ -119,11 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(selectExpression, nameof(selectExpression));
             Check.NotNull(parametersValues, nameof(parametersValues));
 
-            return new FromSqlParameterExpandingExpressionVisitor(Dependencies).Expand(
-                selectExpression,
-                parametersValues,
-                out canCache
-            );
+            return new FromSqlParameterExpandingExpressionVisitor(Dependencies)
+                .Expand(selectExpression, parametersValues, out canCache);
         }
     }
 }

@@ -463,11 +463,12 @@ namespace System.DirectoryServices.AccountManagement
                     // If we initially targetted AD then those options will not be valid for the machine store.
 
 #if USE_CTX_CACHE
-                    PrincipalContext ctx = SDSCache.LocalMachine.GetContext(
-                        sidIssuerName,
-                        _credentials,
-                        DefaultContextOptions.MachineDefaultContextOption
-                    );
+                    PrincipalContext ctx = SDSCache.LocalMachine
+                        .GetContext(
+                            sidIssuerName,
+                            _credentials,
+                            DefaultContextOptions.MachineDefaultContextOption
+                        );
 #else
                     PrincipalContext ctx = (PrincipalContext)this.contexts[sidIssuerName];
                     if (ctx == null)
@@ -492,21 +493,19 @@ namespace System.DirectoryServices.AccountManagement
                 {
                     Debug.Assert(
                         (_userType == ContextType.Domain)
-                            && !string.Equals(
-                                Utils.GetComputerFlatName(),
-                                sidIssuerName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            && !string
+                                .Equals(
+                                    Utils.GetComputerFlatName(),
+                                    sidIssuerName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                     );
 
                     // It's a domain group, because it's a domain user and the SID issuer isn't the local machine
 
 #if USE_CTX_CACHE
-                    PrincipalContext ctx = SDSCache.Domain.GetContext(
-                        sidIssuerName,
-                        _credentials,
-                        _contextOptions
-                    );
+                    PrincipalContext ctx = SDSCache.Domain
+                        .GetContext(sidIssuerName, _credentials, _contextOptions);
 #else
                     PrincipalContext ctx = (PrincipalContext)this.contexts[sidIssuerName];
                     if (ctx == null)
@@ -547,11 +546,8 @@ namespace System.DirectoryServices.AccountManagement
                     ir.UrnScheme = UrnScheme.SidScheme;
                     ir.UrnValue = sidObj.ToString();
 
-                    group = (GroupPrincipal)((ADStoreCtx)ctx.QueryCtx).FindPrincipalBySID(
-                        typeof(GroupPrincipal),
-                        ir,
-                        true
-                    );
+                    group = (GroupPrincipal)((ADStoreCtx)ctx.QueryCtx)
+                        .FindPrincipalBySID(typeof(GroupPrincipal), ir, true);
                 }
 
                 if (group == null)

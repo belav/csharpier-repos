@@ -73,7 +73,8 @@ namespace Microsoft.Web.Mvc.Internal
             rvd.Add("Action", actionName);
 
             ActionLinkAreaAttribute areaAttr =
-                typeof(TController).GetCustomAttributes(
+                typeof(TController)
+                    .GetCustomAttributes(
                         typeof(ActionLinkAreaAttribute),
                         true /* inherit */
                     )
@@ -149,9 +150,9 @@ namespace Microsoft.Web.Mvc.Internal
 
             // has this been renamed?
             ActionNameAttribute nameAttr = methodInfo.GetCustomAttributes(
-                    typeof(ActionNameAttribute),
-                    true /* inherit */
-                )
+                typeof(ActionNameAttribute),
+                true /* inherit */
+            )
                 .OfType<ActionNameAttribute>()
                 .FirstOrDefault();
             if (nameAttr != null)

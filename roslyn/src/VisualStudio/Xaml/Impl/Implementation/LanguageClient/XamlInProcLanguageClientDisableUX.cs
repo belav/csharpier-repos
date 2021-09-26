@@ -62,8 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
 
         protected internal override VSServerCapabilities GetCapabilities()
         {
-            var experimentationService =
-                Workspace.Services.GetRequiredService<IExperimentationService>();
+            var experimentationService = Workspace.Services
+                .GetRequiredService<IExperimentationService>();
             var isLspExperimentEnabled = experimentationService.IsExperimentEnabled(
                 StringConstants.EnableLspIntelliSense
             );

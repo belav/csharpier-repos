@@ -92,7 +92,8 @@ namespace System.Data.Odbc
                 driverName = stringValue;
             }
 
-            Stream? XMLStream = System.Reflection.Assembly.GetExecutingAssembly()
+            Stream? XMLStream = System.Reflection.Assembly
+                .GetExecutingAssembly()
                 .GetManifestResourceStream("System.Data.Odbc.OdbcMetaData.xml");
             cacheMetaDataFactory = true;
 

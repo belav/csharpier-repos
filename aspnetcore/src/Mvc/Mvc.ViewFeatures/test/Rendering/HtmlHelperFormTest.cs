@@ -169,11 +169,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var path = "/Path";
             var queryString = "?query=string";
             var expectedAction = pathBase + path + queryString;
-            var expectedStartTag = string.Format(
-                CultureInfo.InvariantCulture,
-                "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[post]]\">",
-                expectedAction
-            );
+            var expectedStartTag = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[post]]\">",
+                    expectedAction
+                );
 
             // IUrlHelper should not be used in this scenario.
             var urlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
@@ -222,12 +223,13 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var queryString = "?query=string";
             var expectedAction = pathBase + path + queryString;
             var htmlAttributes = new { p1_name = "p1-value" };
-            var expectedStartTag = string.Format(
-                CultureInfo.InvariantCulture,
-                "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[post]]\"{1}>",
-                expectedAction,
-                GetHtmlAttributesAsString(htmlAttributes)
-            );
+            var expectedStartTag = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[post]]\"{1}>",
+                    expectedAction,
+                    GetHtmlAttributesAsString(htmlAttributes)
+                );
 
             // IUrlHelper should not be used in this scenario.
             var urlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
@@ -279,26 +281,27 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var expectedAction = "http://localhost/Hello/World";
-            var expectedStartTag = string.Format(
-                CultureInfo.InvariantCulture,
-                "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[{1}]]\"{2}>",
-                expectedAction,
-                method.ToString().ToLowerInvariant(),
-                GetHtmlAttributesAsString(htmlAttributes)
-            );
+            var expectedStartTag = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[{1}]]\"{2}>",
+                    expectedAction,
+                    method.ToString().ToLowerInvariant(),
+                    GetHtmlAttributesAsString(htmlAttributes)
+                );
 
             var urlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
             urlHelper.Setup(
-                    realHelper =>
-                        realHelper.Action(
-                            It.Is<UrlActionContext>(
-                                (context) =>
-                                    string.Equals(context.Action, actionName)
-                                    && string.Equals(context.Controller, controllerName)
-                                    && context.Values == routeValues
-                            )
+                realHelper =>
+                    realHelper.Action(
+                        It.Is<UrlActionContext>(
+                            (context) =>
+                                string.Equals(context.Action, actionName)
+                                && string.Equals(context.Controller, controllerName)
+                                && context.Values == routeValues
                         )
-                )
+                    )
+            )
                 .Returns(expectedAction)
                 .Verifiable();
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(urlHelper.Object);
@@ -336,28 +339,29 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var expectedAction = "http://localhost/Hello/World";
-            var expectedStartTag = string.Format(
-                CultureInfo.InvariantCulture,
-                "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[{1}]]\"{2}>",
-                expectedAction,
-                method.ToString().ToLowerInvariant(),
-                GetHtmlAttributesAsString(htmlAttributes)
-            );
+            var expectedStartTag = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[{1}]]\"{2}>",
+                    expectedAction,
+                    method.ToString().ToLowerInvariant(),
+                    GetHtmlAttributesAsString(htmlAttributes)
+                );
 
             var urlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
             urlHelper.Setup(
-                    realHelper =>
-                        realHelper.RouteUrl(
-                            It.Is<UrlRouteContext>(
-                                context =>
-                                    string.Equals(context.RouteName, routeName)
-                                    && context.Values == routeValues
-                                    && context.Protocol == null
-                                    && context.Host == null
-                                    && context.Fragment == null
-                            )
+                realHelper =>
+                    realHelper.RouteUrl(
+                        It.Is<UrlRouteContext>(
+                            context =>
+                                string.Equals(context.RouteName, routeName)
+                                && context.Values == routeValues
+                                && context.Protocol == null
+                                && context.Host == null
+                                && context.Fragment == null
                         )
-                )
+                    )
+            )
                 .Returns(expectedAction)
                 .Verifiable();
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(urlHelper.Object);
@@ -445,16 +449,16 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
-                    g =>
-                        g.GenerateForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                g =>
+                    g.GenerateForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
@@ -485,16 +489,16 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
-                    g =>
-                        g.GenerateForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                g =>
+                    g.GenerateForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
@@ -532,16 +536,16 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
-                    g =>
-                        g.GenerateForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                g =>
+                    g.GenerateForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
@@ -575,16 +579,16 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
-                    g =>
-                        g.GenerateForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                g =>
+                    g.GenerateForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
@@ -622,16 +626,16 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
-                    g =>
-                        g.GenerateForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                g =>
+                    g.GenerateForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
@@ -664,16 +668,16 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
-                    g =>
-                        g.GenerateForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                g =>
+                    g.GenerateForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
@@ -715,15 +719,15 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
-                    g =>
-                        g.GenerateRouteForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                g =>
+                    g.GenerateRouteForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
@@ -754,15 +758,15 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
-                    g =>
-                        g.GenerateRouteForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                g =>
+                    g.GenerateRouteForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
@@ -802,15 +806,15 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
-                    g =>
-                        g.GenerateRouteForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                g =>
+                    g.GenerateRouteForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
@@ -846,15 +850,15 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
-                    g =>
-                        g.GenerateRouteForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                g =>
+                    g.GenerateRouteForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
@@ -894,15 +898,15 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             htmlGenerator.Setup(
-                    g =>
-                        g.GenerateRouteForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                g =>
+                    g.GenerateRouteForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
@@ -938,18 +942,20 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         private string GetHtmlAttributesAsString(object htmlAttributes)
         {
             var dictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
-            return string.Join(
-                string.Empty,
-                dictionary.Select(
-                    keyValue =>
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            " {0}=\"HtmlEncode[[{1}]]\"",
-                            keyValue.Key,
-                            keyValue.Value
-                        )
-                )
-            );
+            return string
+                .Join(
+                    string.Empty,
+                    dictionary.Select(
+                        keyValue =>
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    " {0}=\"HtmlEncode[[{1}]]\"",
+                                    keyValue.Key,
+                                    keyValue.Value
+                                )
+                    )
+                );
         }
     }
 }

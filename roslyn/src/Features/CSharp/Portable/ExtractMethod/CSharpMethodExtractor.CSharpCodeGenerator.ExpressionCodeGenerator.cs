@@ -259,23 +259,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     var sourceNodeAnnotation = new SyntaxAnnotation();
                     var enclosingStatementAnnotation = new SyntaxAnnotation();
                     var newEnclosingStatement = enclosingStatement.ReplaceNode(
-                            sourceNode,
-                            sourceNode.WithAdditionalAnnotations(sourceNodeAnnotation)
-                        )
+                        sourceNode,
+                        sourceNode.WithAdditionalAnnotations(sourceNodeAnnotation)
+                    )
                         .WithAdditionalAnnotations(enclosingStatementAnnotation);
 
                     updatedDocument = await updatedDocument.ReplaceNodeAsync(
-                            enclosingStatement,
-                            newEnclosingStatement,
-                            cancellationToken
-                        )
+                        enclosingStatement,
+                        newEnclosingStatement,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     var updatedRoot = await updatedDocument.GetSyntaxRootAsync(cancellationToken)
                         .ConfigureAwait(false);
                     newEnclosingStatement = updatedRoot.GetAnnotatedNodesAndTokens(
-                            enclosingStatementAnnotation
-                        )
+                        enclosingStatementAnnotation
+                    )
                         .Single()
                         .AsNode();
 

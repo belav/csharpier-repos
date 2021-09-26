@@ -52,10 +52,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 CancellationToken cancellationToken
             ) =>
                 _callback.InvokeAsync(
-                        (callback, cancellationToken) =>
-                            callback.GetActiveStatementsAsync(_callbackId, cancellationToken),
-                        cancellationToken
-                    )
+                    (callback, cancellationToken) =>
+                        callback.GetActiveStatementsAsync(_callbackId, cancellationToken),
+                    cancellationToken
+                )
                     .AsTask();
 
             Task<ManagedEditAndContinueAvailability> IManagedEditAndContinueDebuggerService.GetAvailabilityAsync(
@@ -63,14 +63,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 CancellationToken cancellationToken
             ) =>
                 _callback.InvokeAsync(
-                        (callback, cancellationToken) =>
-                            callback.GetAvailabilityAsync(
-                                _callbackId,
-                                moduleVersionId,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    (callback, cancellationToken) =>
+                        callback.GetAvailabilityAsync(
+                            _callbackId,
+                            moduleVersionId,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .AsTask();
 
             Task IManagedEditAndContinueDebuggerService.PrepareModuleForUpdateAsync(
@@ -78,14 +78,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 CancellationToken cancellationToken
             ) =>
                 _callback.InvokeAsync(
-                        (callback, cancellationToken) =>
-                            callback.PrepareModuleForUpdateAsync(
-                                _callbackId,
-                                moduleVersionId,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    (callback, cancellationToken) =>
+                        callback.PrepareModuleForUpdateAsync(
+                            _callbackId,
+                            moduleVersionId,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .AsTask();
         }
 
@@ -272,10 +272,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     try
                     {
                         var results = await service.EmitSolutionUpdateAsync(
-                                solution,
-                                CreateSolutionActiveStatementSpanProvider(callbackId),
-                                cancellationToken
-                            )
+                            solution,
+                            CreateSolutionActiveStatementSpanProvider(callbackId),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         return results.Dehydrate(solution);
                     }

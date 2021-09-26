@@ -16,7 +16,8 @@ namespace IdentitySample
     {
         public Startup(IWebHostEnvironment env)
         {
-            var builder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath)
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
@@ -33,8 +34,8 @@ namespace IdentitySample
             services.AddDbContext<ApplicationDbContext>(
                 options =>
                     options.ConfigureWarnings(
-                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
-                        )
+                        b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                    )
                         .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
@@ -47,13 +48,12 @@ namespace IdentitySample
                 .AddDefaultTokenProviders();
 
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.DefaultScheme = IdentityConstants.ApplicationScheme;
-                        o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-                    }
-                )
-                .AddIdentityCookies(o => { });
+                o =>
+                {
+                    o.DefaultScheme = IdentityConstants.ApplicationScheme;
+                    o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+                }
+            ).AddIdentityCookies(o => { });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

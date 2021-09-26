@@ -992,12 +992,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             // NOTE: There are no errors in crefs - only warnings.  We accomplish this by wrapping every diagnostic in ErrorCode.WRN_ErrorOverride.
             if (InCref)
             {
-                SyntaxDiagnosticInfo rawInfo = base.GetExpectedTokenError(
-                    expected,
-                    actual,
-                    offset,
-                    length
-                );
+                SyntaxDiagnosticInfo rawInfo = base
+                    .GetExpectedTokenError(expected, actual, offset, length);
                 SyntaxDiagnosticInfo crefInfo = new SyntaxDiagnosticInfo(
                     rawInfo.Offset,
                     rawInfo.Width,

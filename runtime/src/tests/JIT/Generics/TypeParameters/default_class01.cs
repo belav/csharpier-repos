@@ -105,7 +105,8 @@ public class Test
                     RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>,
                     RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>
                 >
-            >().DefaultTest(true)
+            >()
+                .DefaultTest(true)
         );
         Eval(
             new Gen<
@@ -118,7 +119,8 @@ public class Test
                         string[][][][][][][][][][][]
                     >
                 >
-            >().DefaultTest(true)
+            >()
+                .DefaultTest(true)
         );
 
         Eval(new Gen<ValX1<int>>().DefaultTest(false));
@@ -137,7 +139,8 @@ public class Test
                     ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>,
                     ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>
                 >
-            >().DefaultTest(false)
+            >()
+                .DefaultTest(false)
         );
         Eval(
             new Gen<
@@ -150,7 +153,8 @@ public class Test
                         string[][][][][][][][][][][]
                     >
                 >
-            >().DefaultTest(false)
+            >()
+                .DefaultTest(false)
         );
 
         if (result)

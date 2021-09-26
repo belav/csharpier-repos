@@ -98,9 +98,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                 whenTrue = syntaxFacts.WalkDownParentheses(whenTrue);
                 whenFalse = syntaxFacts.WalkDownParentheses(whenFalse);
 
-                var whenPartIsNullable = diagnostic.Properties.ContainsKey(
-                    UseNullPropagationConstants.WhenPartIsNullable
-                );
+                var whenPartIsNullable = diagnostic.Properties
+                    .ContainsKey(UseNullPropagationConstants.WhenPartIsNullable);
                 editor.ReplaceNode(
                     conditionalExpression,
                     (c, _) =>
@@ -124,12 +123,13 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                             TMemberAccessExpression,
                             TConditionalAccessExpression,
                             TElementAccessExpression
-                        >.GetWhenPartMatch(
-                            syntaxFacts,
-                            semanticModel!,
-                            conditionalPart,
-                            currentWhenPartToCheck
-                        );
+                        >
+                            .GetWhenPartMatch(
+                                syntaxFacts,
+                                semanticModel!,
+                                conditionalPart,
+                                currentWhenPartToCheck
+                            );
                         if (match == null)
                         {
                             return c;

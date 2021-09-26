@@ -172,11 +172,8 @@ namespace System.Configuration
             ConfigurationSection configSection = (ConfigurationSection)ctor.Invoke(null);
 
             // Attach the ConfigurationSection to this record
-            configSection.SectionInformation.AttachToConfigurationRecord(
-                this,
-                factoryRecord,
-                sectionRecord
-            );
+            configSection.SectionInformation
+                .AttachToConfigurationRecord(this, factoryRecord, sectionRecord);
             configSection.CallInit();
 
             // Initialize the ConfigurationSection with XML or just its parent.
@@ -552,8 +549,8 @@ namespace System.Configuration
                 try
                 {
                     bool wasPresent = configSection.ElementPresent;
-                    PropertySourceInfo saveInfo =
-                        configSection.ElementInformation.PropertyInfoInternal();
+                    PropertySourceInfo saveInfo = configSection.ElementInformation
+                        .PropertyInfoInternal();
 
                     configSection.Reset(parentConfigSection);
                     configSection.DeserializeSection(reader);
@@ -869,11 +866,8 @@ namespace System.Configuration
             _removedSections?.Remove(configKey);
 
             // Attach the section to the configuration record.
-            configSection.SectionInformation.AttachToConfigurationRecord(
-                this,
-                factoryRecord,
-                sectionRecord
-            );
+            configSection.SectionInformation
+                .AttachToConfigurationRecord(this, factoryRecord, sectionRecord);
 
             // If there is rawXml, set it now. Note this will override any other changes to the section
             // definition made after the call to SetXml.
@@ -2035,9 +2029,10 @@ namespace System.Configuration
                                 if (!addToConfigSourceUpdates)
                                 {
                                     addToConfigSourceUpdates =
-                                        !string.IsNullOrEmpty(
-                                            configSection.SectionInformation.ConfigSource
-                                        )
+                                        !string
+                                            .IsNullOrEmpty(
+                                                configSection.SectionInformation.ConfigSource
+                                            )
                                         && (
                                             sectionContentModified
                                             || configSection.SectionInformation.ConfigSourceModified
@@ -2071,9 +2066,10 @@ namespace System.Configuration
                                     // * The section is in a location section that has non-default attributes
                                     // * The section is encrypted.
                                     if (
-                                        !string.IsNullOrEmpty(
-                                            configSection.SectionInformation.ConfigSource
-                                        )
+                                        !string
+                                            .IsNullOrEmpty(
+                                                configSection.SectionInformation.ConfigSource
+                                            )
                                         || !configSection.SectionInformation.LocationAttributesAreDefault
                                         || (
                                             configSection.SectionInformation.ProtectionProvider
@@ -2107,9 +2103,10 @@ namespace System.Configuration
                                     if (
                                         sectionAttributesModified
                                         || moved
-                                        || string.IsNullOrEmpty(
-                                            configSection.SectionInformation.ConfigSource
-                                        )
+                                        || string
+                                            .IsNullOrEmpty(
+                                                configSection.SectionInformation.ConfigSource
+                                            )
                                     )
                                         hasChanged = true;
 
@@ -2473,22 +2470,24 @@ namespace System.Configuration
         {
             // Write Header
             utilWriter.Write(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    FormatNewConfigFile,
-                    ConfigStreamInfo.StreamEncoding.WebName
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        FormatNewConfigFile,
+                        ConfigStreamInfo.StreamEncoding.WebName
+                    )
             );
 
             // Write <configuration> tag
             if (namespaceChange == NamespaceChange.Add)
             {
                 utilWriter.Write(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        FormatConfigurationNamespace,
-                        ConfigurationNamespace
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            FormatConfigurationNamespace,
+                            ConfigurationNamespace
+                        )
                 );
             }
             else
@@ -2654,24 +2653,26 @@ namespace System.Configuration
                     if (_locationSubPath == null)
                     {
                         utilWriter.Write(
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                FormatLocationNoPath,
-                                locationUpdates.OverrideMode.LocationTagXmlString,
-                                BoolToString(locationUpdates.InheritInChildApps)
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    FormatLocationNoPath,
+                                    locationUpdates.OverrideMode.LocationTagXmlString,
+                                    BoolToString(locationUpdates.InheritInChildApps)
+                                )
                         );
                     }
                     else
                     {
                         utilWriter.Write(
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                FormatLocationPath,
-                                locationUpdates.OverrideMode.LocationTagXmlString,
-                                BoolToString(locationUpdates.InheritInChildApps),
-                                _locationSubPath
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    FormatLocationPath,
+                                    locationUpdates.OverrideMode.LocationTagXmlString,
+                                    BoolToString(locationUpdates.InheritInChildApps),
+                                    _locationSubPath
+                                )
                         );
                     }
 
@@ -2707,13 +2708,14 @@ namespace System.Configuration
                 utilWriter.AppendSpacesToLinePosition(linePosition);
 
                 utilWriter.Write(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        FormatLocationPath,
-                        OverrideModeSetting.s_locationDefault.LocationTagXmlString,
-                        KeywordTrue,
-                        _locationSubPath
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            FormatLocationPath,
+                            OverrideModeSetting.s_locationDefault.LocationTagXmlString,
+                            KeywordTrue,
+                            _locationSubPath
+                        )
                 );
                 utilWriter.AppendSpacesToLinePosition(linePosition);
                 utilWriter.Write(FormatLocationEndElement);
@@ -2878,11 +2880,12 @@ namespace System.Configuration
                     string configurationStartElement;
                     if (namespaceChange == NamespaceChange.Add)
                     {
-                        configurationStartElement = string.Format(
-                            CultureInfo.InvariantCulture,
-                            FormatConfigurationNamespace,
-                            ConfigurationNamespace
-                        );
+                        configurationStartElement = string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                FormatConfigurationNamespace,
+                                ConfigurationNamespace
+                            );
                     }
                     else
                     {
@@ -3743,9 +3746,10 @@ namespace System.Configuration
                                 ConfigurationSection configSection =
                                     (ConfigurationSection)update.SectionRecord.Result;
                                 if (
-                                    string.IsNullOrEmpty(
-                                        configSection.SectionInformation.ConfigSource
-                                    ) || configSection.SectionInformation.ConfigSourceModified
+                                    string
+                                        .IsNullOrEmpty(
+                                            configSection.SectionInformation.ConfigSource
+                                        ) || configSection.SectionInformation.ConfigSourceModified
                                 )
                                 {
                                     skip = true;
@@ -3821,12 +3825,13 @@ namespace System.Configuration
 
             if (!string.IsNullOrEmpty(configSection.SectionInformation.ConfigSource))
             {
-                updatedXml = string.Format(
-                    CultureInfo.InvariantCulture,
-                    FormatSectionConfigSource,
-                    configSection.SectionInformation.Name,
-                    configSection.SectionInformation.ConfigSource
-                );
+                updatedXml = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        FormatSectionConfigSource,
+                        configSection.SectionInformation.Name,
+                        configSection.SectionInformation.ConfigSource
+                    );
             }
             else
                 updatedXml = update.UpdatedXml;
@@ -4049,11 +4054,12 @@ namespace System.Configuration
         {
             string formattedXml = XmlUtil.FormatXmlElement(updatedXml, 0, indent, true);
             utilWriter.Write(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    FormatConfigSourceFile,
-                    ConfigStreamInfo.StreamEncoding.WebName
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        FormatConfigSourceFile,
+                        ConfigStreamInfo.StreamEncoding.WebName
+                    )
             );
             utilWriter.Write(formattedXml + NewLine);
         }

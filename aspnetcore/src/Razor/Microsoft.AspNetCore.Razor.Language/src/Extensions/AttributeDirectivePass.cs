@@ -30,14 +30,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 {
                     var node = new CSharpCodeIntermediateNode { Source = token.Source };
 
-                    node.Children.Add(
-                        new IntermediateToken()
-                        {
-                            Content = token.Content,
-                            Source = token.Source,
-                            Kind = TokenKind.CSharp,
-                        }
-                    );
+                    node.Children
+                        .Add(
+                            new IntermediateToken()
+                            {
+                                Content = token.Content,
+                                Source = token.Source,
+                                Kind = TokenKind.CSharp,
+                            }
+                        );
 
                     @namespace.Children.Insert(classIndex++, node);
                 }

@@ -190,29 +190,27 @@ namespace System.Linq
                     if (genericType == typeof(IOrderedEnumerable<>))
                         equiv = pubType;
                     else if (genericType == typeof(IOrderedQueryable<>))
-                        equiv = typeof(IOrderedEnumerable<>).MakeGenericType(
-                            pubType.GenericTypeArguments[0]
-                        );
+                        equiv = typeof(IOrderedEnumerable<>)
+                            .MakeGenericType(pubType.GenericTypeArguments[0]);
                     else if (genericType == typeof(IEnumerable<>))
                         equiv = pubType;
                     else if (genericType == typeof(IQueryable<>))
-                        equiv = typeof(IEnumerable<>).MakeGenericType(
-                            pubType.GenericTypeArguments[0]
-                        );
+                        equiv = typeof(IEnumerable<>)
+                            .MakeGenericType(pubType.GenericTypeArguments[0]);
                 }
                 if (equiv == null)
                 {
                     var interfacesWithInfo = pubType.GetInterfaces();
                     var singleTypeGenInterfacesWithGetType = interfacesWithInfo.Where(
-                            i => i.IsGenericType && i.GenericTypeArguments.Length == 1
-                        )
+                        i => i.IsGenericType && i.GenericTypeArguments.Length == 1
+                    )
                         .Select(i => new { Info = i, GenType = i.GetGenericTypeDefinition() })
                         .ToArray();
                     Type? typeArg = singleTypeGenInterfacesWithGetType.Where(
-                            i =>
-                                i.GenType == typeof(IOrderedQueryable<>)
-                                || i.GenType == typeof(IOrderedEnumerable<>)
-                        )
+                        i =>
+                            i.GenType == typeof(IOrderedQueryable<>)
+                            || i.GenType == typeof(IOrderedEnumerable<>)
+                    )
                         .Select(i => i.Info.GenericTypeArguments[0])
                         .Distinct()
                         .SingleOrDefault();
@@ -221,10 +219,10 @@ namespace System.Linq
                     else
                     {
                         typeArg = singleTypeGenInterfacesWithGetType.Where(
-                                i =>
-                                    i.GenType == typeof(IQueryable<>)
-                                    || i.GenType == typeof(IEnumerable<>)
-                            )
+                            i =>
+                                i.GenType == typeof(IQueryable<>)
+                                || i.GenType == typeof(IEnumerable<>)
+                        )
                             .Select(i => i.Info.GenericTypeArguments[0])
                             .Distinct()
                             .Single();
@@ -299,8 +297,8 @@ namespace System.Linq
         {
             using (
                 IEnumerator<MethodInfo> en = type.GetMethods(
-                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-                    )
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                )
                     .Where(m => m.Name == name)
                     .GetEnumerator()
             )

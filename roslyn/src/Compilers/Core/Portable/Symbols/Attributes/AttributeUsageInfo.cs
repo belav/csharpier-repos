@@ -189,9 +189,8 @@ namespace Microsoft.CodeAnalysis
                             builder.Builder.Append(", ");
                         }
 
-                        builder.Builder.Append(
-                            CodeAnalysisResources.ResourceManager.GetString(id, culture)
-                        );
+                        builder.Builder
+                            .Append(CodeAnalysisResources.ResourceManager.GetString(id, culture));
                     }
                 }
 

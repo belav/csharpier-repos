@@ -88,9 +88,8 @@ namespace System.Xml.Xsl.XsltOld
             if (result == null && !variable.IsGlobal)
             {
                 // This was uninitialized local variable. May be we have sutable global var too?
-                VariableAction? global = _manager!.VariableScope.ResolveGlobalVariable(
-                    variable.Name!
-                );
+                VariableAction? global = _manager!.VariableScope
+                    .ResolveGlobalVariable(variable.Name!);
                 if (global != null)
                 {
                     result = _processor.GetVariableValue(global);
@@ -130,11 +129,14 @@ namespace System.Xml.Xsl.XsltOld
             for (int i = 0; i < length; i++)
             {
                 if (
-                    string.Equals(
-                        name,
-                        methods[i].Name,
-                        ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            name,
+                            methods[i].Name,
+                            ignoreCase
+                              ? StringComparison.OrdinalIgnoreCase
+                              : StringComparison.Ordinal
+                        )
                 )
                 {
                     if (!publicOnly || methods[i].GetBaseDefinition().IsPublic)
@@ -335,12 +337,13 @@ namespace System.Xml.Xsl.XsltOld
             else
             {
                 return new XPathSingletonIterator(
-                    _processor!.GetNavigator(
-                        ComposeUri(
-                            XmlConvert.ToXPathString(arg0)!,
-                            baseUri ?? _manager!.Navigator.BaseURI
+                    _processor!
+                        .GetNavigator(
+                            ComposeUri(
+                                XmlConvert.ToXPathString(arg0)!,
+                                baseUri ?? _manager!.Navigator.BaseURI
+                            )
                         )
-                    )
                 );
             }
         }
@@ -480,9 +483,8 @@ namespace System.Xml.Xsl.XsltOld
                 PrefixQName.ParseQualifiedName(formatName, out prefix, out local);
                 ns = LookupNamespace(prefix);
             }
-            DecimalFormat? formatInfo = _processor!.RootAction!.GetDecimalFormat(
-                new XmlQualifiedName(local, ns)
-            );
+            DecimalFormat? formatInfo = _processor!.RootAction!
+                .GetDecimalFormat(new XmlQualifiedName(local, ns));
             if (formatInfo == null)
             {
                 if (formatName != null)
@@ -1164,9 +1166,8 @@ namespace System.Xml.Xsl.XsltOld
                 XPathNavigator docContext
             )
             {
-                DecimalFormat formatInfo = ((XsltCompileContext)xsltContext).ResolveFormatName(
-                    args.Length == 3 ? ToString(args[2]) : null
-                );
+                DecimalFormat formatInfo = ((XsltCompileContext)xsltContext)
+                    .ResolveFormatName(args.Length == 3 ? ToString(args[2]) : null);
                 return DecimalFormatter.Format(ToNumber(args[0]), ToString(args[1]), formatInfo);
             }
         }

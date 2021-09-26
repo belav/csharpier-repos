@@ -76,7 +76,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             new object[] { GetHasProperty(1), uint.MaxValue, true, false },
             new object[] { GetHasProperty(default(short)), int.MaxValue, true, false },
             new object[] { GetHasProperty(2UL), -1, true, false }
-        }.Concat(PropertyBadAssigments);
+        }
+            .Concat(PropertyBadAssigments);
 
         [Theory, MemberData(nameof(Additions))]
         public void AddAssignment(dynamic lhs, dynamic rhs, object expected)
@@ -98,18 +99,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.SetMember(
-                    CSharpBinderFlags.ValueFromCompoundAssignment,
-                    "Prop",
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.SetMember(
+                        CSharpBinderFlags.ValueFromCompoundAssignment,
+                        "Prop",
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             object result = callSite.Target(callSite, lhs, rhs);
             Assert.Equal(expected, result);
             Assert.Equal(expected, ((dynamic)lhs).Prop);
@@ -120,18 +122,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.SetMember(
-                    CSharpBinderFlags.ValueFromCompoundAssignment,
-                    "Prop",
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.SetMember(
+                        CSharpBinderFlags.ValueFromCompoundAssignment,
+                        "Prop",
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+                        }
+                    )
+                );
             object result = callSite.Target(callSite, lhs, rhs);
             Assert.Equal(expected, result);
             Assert.Equal(expected, ((dynamic)lhs).Prop);
@@ -147,18 +150,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.SetMember(
-                    CSharpBinderFlags.ValueFromCompoundAssignment,
-                    "Prop",
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.SetMember(
+                        CSharpBinderFlags.ValueFromCompoundAssignment,
+                        "Prop",
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             if (invalidCast) // Invalid cast at runtime
             {
                 Assert.Throws<InvalidCastException>(() => callSite.Target(callSite, lhs, rhs));
@@ -186,18 +190,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.SetMember(
-                    CSharpBinderFlags.ValueFromCompoundAssignment,
-                    "Prop",
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.SetMember(
+                        CSharpBinderFlags.ValueFromCompoundAssignment,
+                        "Prop",
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+                        }
+                    )
+                );
             if (invalidCast)
             {
                 Assert.Throws<InvalidCastException>(() => callSite.Target(callSite, lhs, rhs));
@@ -218,19 +223,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.SetMember(
-                    CSharpBinderFlags.ValueFromCompoundAssignment
-                        | CSharpBinderFlags.CheckedContext,
-                    "Prop",
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.SetMember(
+                        CSharpBinderFlags.ValueFromCompoundAssignment
+                            | CSharpBinderFlags.CheckedContext,
+                        "Prop",
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             if (invalidCast)
             {
                 Assert.Throws<InvalidCastException>(() => callSite.Target(callSite, lhs, rhs));
@@ -258,19 +264,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.SetMember(
-                    CSharpBinderFlags.ValueFromCompoundAssignment
-                        | CSharpBinderFlags.CheckedContext,
-                    "Prop",
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.SetMember(
+                        CSharpBinderFlags.ValueFromCompoundAssignment
+                            | CSharpBinderFlags.CheckedContext,
+                        "Prop",
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+                        }
+                    )
+                );
             if (invalidCast) // Invalid cast at runtime
             {
                 Assert.Throws<InvalidCastException>(() => callSite.Target(callSite, lhs, rhs));

@@ -86,10 +86,10 @@ namespace R2RTest
 
             // Add all assemblies from the various SERP packages (filtered by ShouldInclude)
             _packageCompileAssemblies = Directory.GetFiles(
-                    Path.Combine(SerpDir, "App_Data\\Answers\\Services\\Packages"),
-                    "*.dll",
-                    SearchOption.AllDirectories
-                )
+                Path.Combine(SerpDir, "App_Data\\Answers\\Services\\Packages"),
+                "*.dll",
+                SearchOption.AllDirectories
+            )
                 .Where((string x) => ShouldInclude(x))
                 .ToList();
             _packageReferenceAssemblies = new List<string>();

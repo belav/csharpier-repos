@@ -35,7 +35,8 @@ public partial class C
 ",
                 sourceSymbolValidator: m =>
                 {
-                    var gooDef = m.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                    var gooDef = m.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMember<SourceOrdinaryMethodSymbol>("goo");
                     Assert.True(gooDef.IsPartial);
                     Assert.True(gooDef.IsPartialDefinition);
@@ -259,7 +260,7 @@ class C
         public void Override01()
         {
             var comp = CreateCompilationWithMscorlib45(
-                    @"
+                @"
 class B
 {
     public virtual int M() { return 0; }
@@ -268,40 +269,37 @@ class C : B
 {
     public override int M() => 1;
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void VoidExpression()
         {
             var comp = CreateCompilationWithMscorlib45(
-                    @"
+                @"
 class C
 {
     public void M() => System.Console.WriteLine(""goo"");
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void VoidExpression2()
         {
             var comp = CreateCompilationWithMscorlib45(
-                    @"
+                @"
 class C
 {
     public int M() => System.Console.WriteLine(""goo"");
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,23): error CS0029: Cannot implicitly convert type 'void' to 'int'
-                    //     public int M() => System.Console.WriteLine("goo");
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"System.Console.WriteLine(""goo"")")
-                        .WithArguments("void", "int")
-                        .WithLocation(4, 23)
-                );
+            ).VerifyDiagnostics(
+                // (4,23): error CS0029: Cannot implicitly convert type 'void' to 'int'
+                //     public int M() => System.Console.WriteLine("goo");
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"System.Console.WriteLine(""goo"")")
+                    .WithArguments("void", "int")
+                    .WithLocation(4, 23)
+            );
         }
 
         [Fact]
@@ -394,9 +392,8 @@ class C : B
         System.Console.WriteLine(c.Y());
     }
 }",
-                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseExe
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             var verifier = CompileAndVerify(
                 comp,
@@ -430,9 +427,8 @@ class C
         System.Console.WriteLine(c.N(""World""));
     }
 }",
-                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseExe
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             var verifier = CompileAndVerify(
                 comp,

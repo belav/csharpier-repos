@@ -51,7 +51,8 @@ namespace Moq
                 var baseSetter = setter.GetBaseDefinition();
                 if (baseSetter != setter)
                 {
-                    var baseProperty = baseSetter.DeclaringType.GetMember(
+                    var baseProperty = baseSetter.DeclaringType
+                        .GetMember(
                             property.Name,
                             MemberTypes.Property,
                             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
@@ -99,7 +100,8 @@ namespace Moq
                 var baseGetter = getter.GetBaseDefinition();
                 if (baseGetter != getter)
                 {
-                    var baseProperty = baseGetter.DeclaringType.GetMember(
+                    var baseProperty = baseGetter.DeclaringType
+                        .GetMember(
                             property.Name,
                             MemberTypes.Property,
                             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
@@ -359,7 +361,8 @@ namespace Moq
 
         public static string GetParameterTypeList(this MethodInfo method)
         {
-            return new StringBuilder().AppendCommaSeparated(
+            return new StringBuilder()
+                .AppendCommaSeparated(
                     method.GetParameters(),
                     StringBuilderExtensions.AppendParameterType
                 )

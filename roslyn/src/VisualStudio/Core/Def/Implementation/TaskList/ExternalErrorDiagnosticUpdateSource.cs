@@ -109,8 +109,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
             _diagnosticService = diagnosticService;
 
-            _notificationService =
-                _workspace.Services.GetRequiredService<IGlobalOperationNotificationService>();
+            _notificationService = _workspace.Services
+                .GetRequiredService<IGlobalOperationNotificationService>();
         }
 
         /// <summary>
@@ -245,10 +245,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 ClearBuildOnlyProjectErrors(solution, projectId);
 
                 await SetLiveErrorsForProjectAsync(
-                        projectId,
-                        ImmutableArray<DiagnosticData>.Empty,
-                        GetApplicableCancellationToken(state)
-                    )
+                    projectId,
+                    ImmutableArray<DiagnosticData>.Empty,
+                    GetApplicableCancellationToken(state)
+                )
                     .ConfigureAwait(false);
 
                 state?.MarkErrorsCleared(projectId);
@@ -267,9 +267,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                     _taskQueue.ScheduleTask(
                         "OnSolutionAdded",
                         () =>
-                            e.OldSolution.ProjectIds.Do(
-                                p => ClearBuildOnlyProjectErrors(e.OldSolution, p)
-                            ),
+                            e.OldSolution.ProjectIds
+                                .Do(p => ClearBuildOnlyProjectErrors(e.OldSolution, p)),
                         _disposalToken
                     );
                     break;
@@ -280,9 +279,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                     _taskQueue.ScheduleTask(
                         "OnSolutionChanged",
                         () =>
-                            e.OldSolution.ProjectIds.Do(
-                                p => ClearBuildOnlyProjectErrors(e.OldSolution, p)
-                            ),
+                            e.OldSolution.ProjectIds
+                                .Do(p => ClearBuildOnlyProjectErrors(e.OldSolution, p)),
                         _disposalToken
                     );
                     break;
@@ -356,7 +354,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                         // here we give initializeLazily: false so that solution crawler is fully initialized when we do de-dup live and build errors,
                         // otherwise, we will think none of error we have here belong to live errors since diagnostic service is not initialized yet.
                         var registrationService =
-                            (SolutionCrawlerRegistrationService)_workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+                            (SolutionCrawlerRegistrationService)_workspace.Services
+                                .GetRequiredService<ISolutionCrawlerRegistrationService>();
                         registrationService.EnsureRegistration(_workspace, initializeLazily: false);
 
                         // Mark the status as updated to refresh error list before we invoke 'SyncBuildErrorsAndReportAsync', which can take some time to complete.
@@ -368,9 +367,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                         if (_diagnosticService is DiagnosticAnalyzerService diagnosticService)
                         {
                             await SyncBuildErrorsAndReportOnBuildCompletedAsync(
-                                    diagnosticService,
-                                    inProgressState
-                                )
+                                diagnosticService,
+                                inProgressState
+                            )
                                 .ConfigureAwait(false);
                         }
 
@@ -380,9 +379,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
                     finally
                     {
-                        await _postBuildAndErrorListRefreshTaskQueue.LastScheduledTask.ConfigureAwait(
-                            false
-                        );
+                        await _postBuildAndErrorListRefreshTaskQueue.LastScheduledTask
+                            .ConfigureAwait(false);
                     }
                 },
                 GetApplicableCancellationToken(inProgressState)
@@ -428,12 +426,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
             // Report pending live errors
             await diagnosticService.SynchronizeWithBuildAsync(
-                    _workspace,
-                    pendingLiveErrorsToSync,
-                    _postBuildAndErrorListRefreshTaskQueue,
-                    onBuildCompleted: true,
-                    cancellationToken
-                )
+                _workspace,
+                pendingLiveErrorsToSync,
+                _postBuildAndErrorListRefreshTaskQueue,
+                onBuildCompleted: true,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -586,12 +584,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 // make those errors live errors
                 var map = ProjectErrorMap.Empty.Add(projectId, diagnostics);
                 await diagnosticAnalyzerService.SynchronizeWithBuildAsync(
-                        _workspace,
-                        map,
-                        _postBuildAndErrorListRefreshTaskQueue,
-                        onBuildCompleted: false,
-                        cancellationToken
-                    )
+                    _workspace,
+                    map,
+                    _postBuildAndErrorListRefreshTaskQueue,
+                    onBuildCompleted: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -846,8 +844,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
                     // set ids set
                     var builder = ImmutableHashSet.CreateBuilder<string>();
-                    var descriptorMap =
-                        Solution.State.Analyzers.GetDiagnosticDescriptorsPerReference(
+                    var descriptorMap = Solution.State.Analyzers
+                        .GetDiagnosticDescriptorsPerReference(
                             _owner._diagnosticService.AnalyzerInfoCache,
                             project
                         );
@@ -861,7 +859,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             {
                 // return errors in the order that is reported
                 return ImmutableArray.CreateRange(
-                    _projectMap.Values.SelectMany(d => d)
+                    _projectMap.Values
+                        .SelectMany(d => d)
                         .Concat(_documentMap.Values.SelectMany(d => d))
                         .OrderBy(kv => kv.Value)
                         .Select(kv => kv.Key)
@@ -1037,16 +1036,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                     var infoCache = _owner._diagnosticService.AnalyzerInfoCache;
 
                     foreach (
-                        var analyzersPerReference in project.Solution.State.Analyzers.CreateDiagnosticAnalyzersPerReference(
-                            project
-                        )
+                        var analyzersPerReference in project.Solution.State.Analyzers
+                            .CreateDiagnosticAnalyzersPerReference(project)
                     )
                     {
                         foreach (var analyzer in analyzersPerReference.Value)
                         {
                             var diagnosticIds = infoCache.GetNonCompilationEndDiagnosticDescriptors(
-                                    analyzer
-                                )
+                                analyzer
+                            )
                                 .Select(d => d.Id);
                             builder.UnionWith(diagnosticIds);
                         }

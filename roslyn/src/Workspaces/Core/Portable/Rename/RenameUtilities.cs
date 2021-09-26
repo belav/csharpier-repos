@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Rename
             CancellationToken cancellationToken
         )
         {
-            var bindableToken = semanticModel.SyntaxTree.GetRoot(cancellationToken)
+            var bindableToken = semanticModel.SyntaxTree
+                .GetRoot(cancellationToken)
                 .FindToken(position, findInsideTrivia: true);
             var semanticInfo = semanticModel.GetSemanticInfo(
                 bindableToken,
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Rename
             }
             else
             {
-                var documentsOfRenameSymbolDeclaration = symbol.Locations.Where(l => l.IsInSource)
+                var documentsOfRenameSymbolDeclaration = symbol.Locations
+                    .Where(l => l.IsInSource)
                     .Select(l => solution.GetDocument(l.SourceTree));
                 var projectIdsOfRenameSymbolDeclaration =
                     documentsOfRenameSymbolDeclaration.SelectMany(d => d.GetLinkedDocumentIds())
@@ -124,12 +126,12 @@ namespace Microsoft.CodeAnalysis.Rename
                     // We are trying to figure out the projects that directly depend on the project that contains the declaration for
                     // the rename symbol.  Other projects should not be affected by the rename.
                     var relevantProjects = projectIdsOfRenameSymbolDeclaration.Concat(
-                            projectIdsOfRenameSymbolDeclaration.SelectMany(
-                                p =>
-                                    solution.GetProjectDependencyGraph()
-                                        .GetProjectsThatDirectlyDependOnThisProject(p)
-                            )
+                        projectIdsOfRenameSymbolDeclaration.SelectMany(
+                            p =>
+                                solution.GetProjectDependencyGraph()
+                                    .GetProjectsThatDirectlyDependOnThisProject(p)
                         )
+                    )
                         .Distinct();
                     return relevantProjects.SelectMany(p => solution.GetProject(p).Documents);
                 }

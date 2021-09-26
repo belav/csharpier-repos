@@ -216,14 +216,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             var queryFilter = (Expression<Func<ReferencedEntity, bool>>)(_ => true);
-            modelBuilder.Entity<SampleEntity>()
-                .OwnsOne(
-                    s => s.ReferencedEntity,
-                    eb =>
-                    {
-                        eb.OwnedEntityType.SetQueryFilter(queryFilter);
-                    }
-                );
+            modelBuilder.Entity<SampleEntity>().OwnsOne(
+                s => s.ReferencedEntity,
+                eb =>
+                {
+                    eb.OwnedEntityType.SetQueryFilter(queryFilter);
+                }
+            );
 
             VerifyError(
                 CoreStrings.BadFilterOwnedType(queryFilter, nameof(ReferencedEntity)),
@@ -1020,10 +1019,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             );
 
             anotherEntityTypeBuilder.HasRelationship(
-                    ownedTypeBuilder.Metadata,
-                    nameof(AnotherSampleEntity.ReferencedEntity),
-                    ConfigurationSource.Convention
-                )
+                ownedTypeBuilder.Metadata,
+                nameof(AnotherSampleEntity.ReferencedEntity),
+                ConfigurationSource.Convention
+            )
                 .HasEntityTypes(
                     anotherEntityTypeBuilder.Metadata,
                     ownedTypeBuilder.Metadata,
@@ -1379,7 +1378,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 ValueGenerated.OnAdd,
-                modelBuilder.Model.FindEntityType(typeof(NonSignedIntegerKeyEntity))
+                modelBuilder.Model
+                    .FindEntityType(typeof(NonSignedIntegerKeyEntity))
                     .FindProperty(nameof(NonSignedIntegerKeyEntity.Id)).ValueGenerated
             );
             VerifyError(
@@ -1665,8 +1665,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             var message =
                 CoreResources.LogPossibleIncorrectRequiredNavigationWithQueryFilterInteraction(
-                        CreateValidationLogger()
-                    )
+                    CreateValidationLogger()
+                )
                     .GenerateMessage(nameof(Customer), nameof(Order));
 
             VerifyWarning(message, modelBuilder.Model);
@@ -1684,8 +1684,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             var message =
                 CoreResources.LogPossibleIncorrectRequiredNavigationWithQueryFilterInteraction(
-                        CreateValidationLogger()
-                    )
+                    CreateValidationLogger()
+                )
                     .GenerateMessage(nameof(Customer), nameof(Order));
 
             VerifyLogDoesNotContain(message, modelBuilder.Model);
@@ -1704,8 +1704,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             var message =
                 CoreResources.LogPossibleIncorrectRequiredNavigationWithQueryFilterInteraction(
-                        CreateValidationLogger()
-                    )
+                    CreateValidationLogger()
+                )
                     .GenerateMessage(nameof(Customer), nameof(Order));
 
             VerifyLogDoesNotContain(message, modelBuilder.Model);

@@ -528,9 +528,7 @@ namespace CSharpSyntaxGenerator
         {
             WriteLine();
             Write($"public {node.Name} Update(");
-            Write(
-                CommaJoin(
-                    node.Fields.Select(
+            Write(CommaJoin(node.Fields.Select(
                         f =>
                         {
                             var type =
@@ -548,9 +546,7 @@ namespace CSharpSyntaxGenerator
 
                             return $"{type} {CamelCase(f.Name)}";
                         }
-                    )
-                )
-            );
+                    )));
             WriteLine(")");
             OpenBlock();
 
@@ -626,9 +622,7 @@ namespace CSharpSyntaxGenerator
                 else
                 {
                     Write("=> node.Update(");
-                    Write(
-                        CommaJoin(
-                            node.Fields.Select(
+                    Write(CommaJoin(node.Fields.Select(
                                 f =>
                                 {
                                     if (IsAnyList(f.Type))
@@ -638,9 +632,7 @@ namespace CSharpSyntaxGenerator
                                     else
                                         return $"node.{f.Name}";
                                 }
-                            )
-                        )
-                    );
+                            )));
                     WriteLine(");");
                 }
 
@@ -652,7 +644,8 @@ namespace CSharpSyntaxGenerator
 
         private void WriteContextualGreenFactories()
         {
-            var nodes = Tree.Types.Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
+            var nodes = Tree.Types
+                .Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
                 .ToList();
             WriteLine();
             WriteLine("internal partial class ContextAwareSyntax");
@@ -670,7 +663,8 @@ namespace CSharpSyntaxGenerator
 
         private void WriteStaticGreenFactories()
         {
-            var nodes = Tree.Types.Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
+            var nodes = Tree.Types
+                .Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
                 .ToList();
             WriteLine();
             WriteLine("internal static partial class SyntaxFactory");
@@ -700,7 +694,8 @@ namespace CSharpSyntaxGenerator
             WriteLine("=> new Type[]");
             OpenBlock();
 
-            var nodes = Tree.Types.Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
+            var nodes = Tree.Types
+                .Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
                 .ToList();
             foreach (var node in nodes)
             {
@@ -863,10 +858,7 @@ namespace CSharpSyntaxGenerator
 
         private void WriteGreenFactoryParameters(Node nd)
         {
-            Write(
-                CommaJoin(
-                    nd.Kinds.Count > 1 ? "SyntaxKind kind" : "",
-                    nd.Fields.Select(
+            Write(CommaJoin(nd.Kinds.Count > 1 ? "SyntaxKind kind" : "", nd.Fields.Select(
                         f =>
                         {
                             var type = f.Type switch
@@ -880,9 +872,7 @@ namespace CSharpSyntaxGenerator
 
                             return $"{type} {CamelCase(f.Name)}";
                         }
-                    )
-                )
-            );
+                    )));
         }
 
         private void WriteCtorArgList(
@@ -1658,9 +1648,7 @@ namespace CSharpSyntaxGenerator
                 else
                 {
                     Write("    => node.Update(");
-                    Write(
-                        CommaJoin(
-                            node.Fields.Select(
+                    Write(CommaJoin(node.Fields.Select(
                                 f =>
                                 {
                                     if (IsNodeOrNodeList(f.Type))
@@ -1677,9 +1665,7 @@ namespace CSharpSyntaxGenerator
 
                                     return $"node.{f.Name}";
                                 }
-                            )
-                        )
-                    );
+                            )));
 
                     WriteLine(");");
                 }
@@ -1689,7 +1675,8 @@ namespace CSharpSyntaxGenerator
 
         private void WriteRedFactories()
         {
-            var nodes = Tree.Types.Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
+            var nodes = Tree.Types
+                .Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
                 .OfType<Node>()
                 .ToList();
             WriteLine();
@@ -2008,7 +1995,8 @@ namespace CSharpSyntaxGenerator
             Write(
                 CommaJoin(
                     nd.Kinds.Count > 1 ? "SyntaxKind kind" : "",
-                    nd.Fields.Where(factoryWithNoAutoCreatableTokenFields.Contains)
+                    nd.Fields
+                        .Where(factoryWithNoAutoCreatableTokenFields.Contains)
                         .Select(f => $"{GetRedPropertyType(f)} {CamelCase(f.Name)}")
                 )
             );
@@ -2018,12 +2006,13 @@ namespace CSharpSyntaxGenerator
             Write(
                 CommaJoin(
                     nd.Kinds.Count > 1 ? "kind" : "",
-                    nd.Fields.Select(
-                        f =>
-                            factoryWithNoAutoCreatableTokenFields.Contains(f)
-                                ? CamelCase(f.Name)
-                                : GetDefaultValue(nd, f)
-                    )
+                    nd.Fields
+                        .Select(
+                            f =>
+                                factoryWithNoAutoCreatableTokenFields.Contains(f)
+                                    ? CamelCase(f.Name)
+                                    : GetDefaultValue(nd, f)
+                        )
                 )
             );
 
@@ -2033,14 +2022,12 @@ namespace CSharpSyntaxGenerator
         private Field DetermineMinimalOptionalField(Node nd)
         {
             // first if there is a single list, then choose the list because it would not have been optional
-            int listCount = nd.Fields.Count(
-                f => IsAnyNodeList(f.Type) && !IsAttributeOrModifiersList(f)
-            );
+            int listCount = nd.Fields
+                .Count(f => IsAnyNodeList(f.Type) && !IsAttributeOrModifiersList(f));
             if (listCount == 1)
             {
-                return nd.Fields.First(
-                    f => IsAnyNodeList(f.Type) && !IsAttributeOrModifiersList(f)
-                );
+                return nd.Fields
+                    .First(f => IsAnyNodeList(f.Type) && !IsAttributeOrModifiersList(f));
             }
             else
             {
@@ -2115,38 +2102,34 @@ namespace CSharpSyntaxGenerator
             Write(
                 CommaJoin(
                     nd.Kinds.Count > 1 ? "SyntaxKind kind" : "",
-                    nd.Fields.Where(minimalFactoryfields.Contains)
-                        .Select(
-                            f =>
+                    nd.Fields.Where(minimalFactoryfields.Contains).Select(
+                        f =>
+                        {
+                            var type = GetRedPropertyType(f);
+
+                            if (IsRequiredFactoryField(nd, f))
                             {
-                                var type = GetRedPropertyType(f);
+                                if (withStringNames && CanAutoConvertFromString(f))
+                                    type = "string";
 
-                                if (IsRequiredFactoryField(nd, f))
-                                {
-                                    if (withStringNames && CanAutoConvertFromString(f))
-                                        type = "string";
-
-                                    return $"{type} {CamelCase(f.Name)}";
-                                }
-                                else
-                                {
-                                    if (IsNode(f.Type) && !IsOptional(f) && f.Type != "SyntaxToken")
-                                        type += "?";
-
-                                    return $"{type} {CamelCase(f.Name)} = default";
-                                }
+                                return $"{type} {CamelCase(f.Name)}";
                             }
-                        )
+                            else
+                            {
+                                if (IsNode(f.Type) && !IsOptional(f) && f.Type != "SyntaxToken")
+                                    type += "?";
+
+                                return $"{type} {CamelCase(f.Name)} = default";
+                            }
+                        }
+                    )
                 )
             );
             WriteLine(")");
 
             Write($"    => SyntaxFactory.{StripPost(nd.Name, "Syntax")}(");
 
-            Write(
-                CommaJoin(
-                    nd.Kinds.Count > 1 ? "kind" : "",
-                    nd.Fields.Select(
+            Write(CommaJoin(nd.Kinds.Count > 1 ? "kind" : "", nd.Fields.Select(
                         f =>
                         {
                             if (minimalFactoryfields.Contains(f))
@@ -2169,9 +2152,7 @@ namespace CSharpSyntaxGenerator
 
                             return GetDefaultValue(nd, f);
                         }
-                    )
-                )
-            );
+                    )));
 
             WriteLine(");");
 
@@ -2244,10 +2225,11 @@ namespace CSharpSyntaxGenerator
             {
                 foreach (XmlElement element in comment.Body)
                 {
-                    string[] lines = element.OuterXml.Split(
-                        new string[] { "\r", "\n", "\r\n" },
-                        StringSplitOptions.RemoveEmptyEntries
-                    );
+                    string[] lines = element.OuterXml
+                        .Split(
+                            new string[] { "\r", "\n", "\r\n" },
+                            StringSplitOptions.RemoveEmptyEntries
+                        );
                     foreach (string line in lines.Where(l => !string.IsNullOrWhiteSpace(l)))
                     {
                         WriteLine($"{indent}/// {line.TrimStart()}");

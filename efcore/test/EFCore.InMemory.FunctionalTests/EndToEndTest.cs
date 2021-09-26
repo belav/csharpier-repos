@@ -39,9 +39,8 @@ namespace Microsoft.EntityFrameworkCore
                 }
             );
 
-            var optionsBuilder = new DbContextOptionsBuilder().UseModel(
-                    modelBuilder.FinalizeModel()
-                )
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseModel(modelBuilder.FinalizeModel())
                 .UseInMemoryDatabase(nameof(EndToEndInMemoryTest))
                 .UseInternalServiceProvider(Fixture.ServiceProvider);
 

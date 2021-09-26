@@ -149,13 +149,14 @@ namespace TestHelper
 
                 Assert.True(
                     false,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Mismatch between number of diagnostics returned, expected \"{0}\" actual \"{1}\"\r\n\r\nDiagnostics:\r\n{2}\r\n",
-                        expectedCount,
-                        actualCount,
-                        diagnosticsOutput
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "Mismatch between number of diagnostics returned, expected \"{0}\" actual \"{1}\"\r\n\r\nDiagnostics:\r\n{2}\r\n",
+                            expectedCount,
+                            actualCount,
+                            diagnosticsOutput
+                        )
                 );
             }
 
@@ -170,11 +171,12 @@ namespace TestHelper
                     {
                         Assert.True(
                             false,
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "Expected:\nA project diagnostic with No location\nActual:\n{0}",
-                                FormatDiagnostics(analyzer, actual)
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "Expected:\nA project diagnostic with No location\nActual:\n{0}",
+                                    FormatDiagnostics(analyzer, actual)
+                                )
                         );
                     }
                 }
@@ -192,13 +194,14 @@ namespace TestHelper
                     {
                         Assert.True(
                             false,
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "Expected {0} additional locations but got {1} for Diagnostic:\r\n    {2}\r\n",
-                                expected.Locations.Length - 1,
-                                additionalLocations.Length,
-                                FormatDiagnostics(analyzer, actual)
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "Expected {0} additional locations but got {1} for Diagnostic:\r\n    {2}\r\n",
+                                    expected.Locations.Length - 1,
+                                    additionalLocations.Length,
+                                    FormatDiagnostics(analyzer, actual)
+                                )
                         );
                     }
 
@@ -217,13 +220,14 @@ namespace TestHelper
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "Expected diagnostic id to be \"{0}\" was \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
-                            expected.Id,
-                            actual.Id,
-                            FormatDiagnostics(analyzer, actual)
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "Expected diagnostic id to be \"{0}\" was \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
+                                expected.Id,
+                                actual.Id,
+                                FormatDiagnostics(analyzer, actual)
+                            )
                     );
                 }
 
@@ -231,13 +235,14 @@ namespace TestHelper
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "Expected diagnostic severity to be \"{0}\" was \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
-                            expected.Severity,
-                            actual.Severity,
-                            FormatDiagnostics(analyzer, actual)
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "Expected diagnostic severity to be \"{0}\" was \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
+                                expected.Severity,
+                                actual.Severity,
+                                FormatDiagnostics(analyzer, actual)
+                            )
                     );
                 }
 
@@ -245,13 +250,14 @@ namespace TestHelper
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "Expected diagnostic message to be \"{0}\" was \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
-                            expected.Message,
-                            actual.GetMessage(),
-                            FormatDiagnostics(analyzer, actual)
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "Expected diagnostic message to be \"{0}\" was \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
+                                expected.Message,
+                                actual.GetMessage(),
+                                FormatDiagnostics(analyzer, actual)
+                            )
                     );
                 }
             }
@@ -280,13 +286,14 @@ namespace TestHelper
                         && actualSpan.Path.Contains("Test0.")
                         && expected.Path.Contains("Test.")
                     ),
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Expected diagnostic to be in file \"{0}\" was actually in file \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
-                    expected.Path,
-                    actualSpan.Path,
-                    FormatDiagnostics(analyzer, diagnostic)
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "Expected diagnostic to be in file \"{0}\" was actually in file \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
+                        expected.Path,
+                        actualSpan.Path,
+                        FormatDiagnostics(analyzer, diagnostic)
+                    )
             );
 
             var actualLinePosition = actualSpan.StartLinePosition;
@@ -298,13 +305,14 @@ namespace TestHelper
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "Expected diagnostic to be on line \"{0}\" was actually on line \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
-                            expected.Line,
-                            actualLinePosition.Line + 1,
-                            FormatDiagnostics(analyzer, diagnostic)
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "Expected diagnostic to be on line \"{0}\" was actually on line \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
+                                expected.Line,
+                                actualLinePosition.Line + 1,
+                                FormatDiagnostics(analyzer, diagnostic)
+                            )
                     );
                 }
             }
@@ -316,13 +324,14 @@ namespace TestHelper
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "Expected diagnostic to start at column \"{0}\" was actually at column \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
-                            expected.Column,
-                            actualLinePosition.Character + 1,
-                            FormatDiagnostics(analyzer, diagnostic)
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "Expected diagnostic to start at column \"{0}\" was actually at column \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
+                                expected.Column,
+                                actualLinePosition.Character + 1,
+                                FormatDiagnostics(analyzer, diagnostic)
+                            )
                     );
                 }
             }
@@ -370,9 +379,8 @@ namespace TestHelper
                                 $"Test base does not currently handle diagnostics in metadata locations. Diagnostic in metadata: {diagnostics[i]}\r\n"
                             );
 
-                            string resultMethodName = diagnostics[
-                                i
-                            ].Location.SourceTree.FilePath.EndsWith(".cs", StringComparison.Ordinal)
+                            string resultMethodName = diagnostics[i].Location.SourceTree.FilePath
+                            .EndsWith(".cs", StringComparison.Ordinal)
                                 ? "GetCSharpResultAt"
                                 : "GetBasicResultAt";
                             var linePosition =

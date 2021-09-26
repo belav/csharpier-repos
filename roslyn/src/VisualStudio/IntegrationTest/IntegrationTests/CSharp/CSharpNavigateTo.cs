@@ -54,11 +54,12 @@ class FirstClass
 
             // Add a VB project and verify that VB files are found when searching from C#
             var vbProject = new ProjectUtils.Project("VBProject");
-            VisualStudio.SolutionExplorer.AddProject(
-                vbProject,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.VisualBasic
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    vbProject,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.VisualBasic
+                );
             VisualStudio.SolutionExplorer.AddFile(vbProject, "vbfile.vb", open: true);
 
             VisualStudio.Editor.InvokeNavigateTo("FirstClass", VirtualKey.Enter);

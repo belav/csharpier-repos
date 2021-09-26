@@ -42,12 +42,13 @@ namespace System.Speech.Internal
             // Is it normal format?
             short streamFormat;
             if (
-                short.TryParse(
-                    formatString,
-                    NumberStyles.None,
-                    CultureInfo.InvariantCulture,
-                    out streamFormat
-                )
+                short
+                    .TryParse(
+                        formatString,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out streamFormat
+                    )
             )
             {
                 // Now convert enum value into real info

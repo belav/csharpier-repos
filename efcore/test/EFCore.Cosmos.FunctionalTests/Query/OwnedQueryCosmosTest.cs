@@ -142,9 +142,10 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
             bool async
         )
         {
-            return base.Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(
-                async
-            );
+            return base
+                .Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
@@ -160,9 +161,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
             bool async
         )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(
-                async
-            );
+            return base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(async);
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
@@ -170,9 +170,10 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
             bool async
         )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
-                async
-            );
+            return base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
@@ -180,9 +181,10 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
             bool async
         )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
-                async
-            );
+            return base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
@@ -190,9 +192,10 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
             bool async
         )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(
-                async
-            );
+            return base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
@@ -200,9 +203,10 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
             bool async
         )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_count(
-                async
-            );
+            return base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_count(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
@@ -210,9 +214,10 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
             bool async
         )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
-                async
-            );
+            return base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
@@ -220,9 +225,10 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
             bool async
         )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
-                async
-            );
+            return base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
@@ -236,9 +242,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
             bool async
         )
         {
-            return base.Project_multiple_owned_navigations_with_expansion_on_owned_collections(
-                async
-            );
+            return base
+                .Project_multiple_owned_navigations_with_expansion_on_owned_collections(async);
         }
 
         [ConditionalTheory(Skip = "SelectMany #17246")]
@@ -252,9 +257,8 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
             bool async
         )
         {
-            return base.SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(
-                async
-            );
+            return base
+                .SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(async);
         }
 
         [ConditionalTheory(Skip = "SelectMany #17246")]
@@ -262,9 +266,10 @@ WHERE (c[""Discriminator""] = ""LeafA"")"
             bool async
         )
         {
-            return base.SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
-                async
-            );
+            return base
+                .SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "SelectMany #17246")]
@@ -546,9 +551,10 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
             bool async
         )
         {
-            return base.NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(
-                async
-            );
+            return base
+                .NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "No Composite index to process custom ordering #17246")]
@@ -574,9 +580,10 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
             bool isAsync
         )
         {
-            await base.Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(
-                isAsync
-            );
+            await base
+                .Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(
+                    isAsync
+                );
 
             AssertSql(" ");
         }

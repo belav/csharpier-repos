@@ -88,8 +88,8 @@ namespace System.Web.Http.Controllers
             // filters at this scope or later will be processed.
 
             FilterInfo lastOverride = overrideFilters.Where(
-                    f => ((IOverrideFilter)f.Instance).FiltersToOverride == typeof(T)
-                )
+                f => ((IOverrideFilter)f.Instance).FiltersToOverride == typeof(T)
+            )
                 .LastOrDefault();
 
             // If no override is present, the filter is not overridden (and filters at any scope, starting with

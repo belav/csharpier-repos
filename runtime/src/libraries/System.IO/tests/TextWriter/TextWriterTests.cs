@@ -198,10 +198,11 @@ namespace System.IO.Tests
             {
                 tw.Write(TestDataProvider.FormatStringOneObject, TestDataProvider.FirstObject);
                 Assert.Equal(
-                    string.Format(
-                        TestDataProvider.FormatStringOneObject,
-                        TestDataProvider.FirstObject
-                    ),
+                    string
+                        .Format(
+                            TestDataProvider.FormatStringOneObject,
+                            TestDataProvider.FirstObject
+                        ),
                     tw.Text
                 );
             }
@@ -218,11 +219,12 @@ namespace System.IO.Tests
                     TestDataProvider.SecondObject
                 );
                 Assert.Equal(
-                    string.Format(
-                        TestDataProvider.FormatStringTwoObjects,
-                        TestDataProvider.FirstObject,
-                        TestDataProvider.SecondObject
-                    ),
+                    string
+                        .Format(
+                            TestDataProvider.FormatStringTwoObjects,
+                            TestDataProvider.FirstObject,
+                            TestDataProvider.SecondObject
+                        ),
                     tw.Text
                 );
             }
@@ -240,12 +242,13 @@ namespace System.IO.Tests
                     TestDataProvider.ThirdObject
                 );
                 Assert.Equal(
-                    string.Format(
-                        TestDataProvider.FormatStringThreeObjects,
-                        TestDataProvider.FirstObject,
-                        TestDataProvider.SecondObject,
-                        TestDataProvider.ThirdObject
-                    ),
+                    string
+                        .Format(
+                            TestDataProvider.FormatStringThreeObjects,
+                            TestDataProvider.FirstObject,
+                            TestDataProvider.SecondObject,
+                            TestDataProvider.ThirdObject
+                        ),
                     tw.Text
                 );
             }
@@ -261,10 +264,11 @@ namespace System.IO.Tests
                     TestDataProvider.MultipleObjects
                 );
                 Assert.Equal(
-                    string.Format(
-                        TestDataProvider.FormatStringMultipleObjects,
-                        TestDataProvider.MultipleObjects
-                    ),
+                    string
+                        .Format(
+                            TestDataProvider.FormatStringMultipleObjects,
+                            TestDataProvider.MultipleObjects
+                        ),
                     tw.Text
                 );
             }
@@ -294,10 +298,11 @@ namespace System.IO.Tests
                     tw.WriteLine(TestDataProvider.CharData[count]);
                 }
                 Assert.Equal(
-                    string.Join(
-                        tw.NewLine,
-                        TestDataProvider.CharData.Select(ch => ch.ToString()).ToArray()
-                    ) + tw.NewLine,
+                    string
+                        .Join(
+                            tw.NewLine,
+                            TestDataProvider.CharData.Select(ch => ch.ToString()).ToArray()
+                        ) + tw.NewLine,
                     tw.Text
                 );
             }
@@ -471,10 +476,11 @@ namespace System.IO.Tests
             {
                 tw.WriteLine(TestDataProvider.FormatStringOneObject, TestDataProvider.FirstObject);
                 Assert.Equal(
-                    string.Format(
-                        TestDataProvider.FormatStringOneObject + tw.NewLine,
-                        TestDataProvider.FirstObject
-                    ),
+                    string
+                        .Format(
+                            TestDataProvider.FormatStringOneObject + tw.NewLine,
+                            TestDataProvider.FirstObject
+                        ),
                     tw.Text
                 );
             }
@@ -491,11 +497,12 @@ namespace System.IO.Tests
                     TestDataProvider.SecondObject
                 );
                 Assert.Equal(
-                    string.Format(
-                        TestDataProvider.FormatStringTwoObjects + tw.NewLine,
-                        TestDataProvider.FirstObject,
-                        TestDataProvider.SecondObject
-                    ),
+                    string
+                        .Format(
+                            TestDataProvider.FormatStringTwoObjects + tw.NewLine,
+                            TestDataProvider.FirstObject,
+                            TestDataProvider.SecondObject
+                        ),
                     tw.Text
                 );
             }
@@ -513,12 +520,13 @@ namespace System.IO.Tests
                     TestDataProvider.ThirdObject
                 );
                 Assert.Equal(
-                    string.Format(
-                        TestDataProvider.FormatStringThreeObjects + tw.NewLine,
-                        TestDataProvider.FirstObject,
-                        TestDataProvider.SecondObject,
-                        TestDataProvider.ThirdObject
-                    ),
+                    string
+                        .Format(
+                            TestDataProvider.FormatStringThreeObjects + tw.NewLine,
+                            TestDataProvider.FirstObject,
+                            TestDataProvider.SecondObject,
+                            TestDataProvider.ThirdObject
+                        ),
                     tw.Text
                 );
             }
@@ -534,10 +542,11 @@ namespace System.IO.Tests
                     TestDataProvider.MultipleObjects
                 );
                 Assert.Equal(
-                    string.Format(
-                        TestDataProvider.FormatStringMultipleObjects + tw.NewLine,
-                        TestDataProvider.MultipleObjects
-                    ),
+                    string
+                        .Format(
+                            TestDataProvider.FormatStringMultipleObjects + tw.NewLine,
+                            TestDataProvider.MultipleObjects
+                        ),
                     tw.Text
                 );
             }

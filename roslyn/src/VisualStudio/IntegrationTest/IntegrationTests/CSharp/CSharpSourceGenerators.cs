@@ -36,10 +36,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         {
             await base.InitializeAsync();
 
-            VisualStudio.SolutionExplorer.AddAnalyzerReference(
-                typeof(HelloWorldGenerator).Assembly.Location,
-                new ProjectUtils.Project(ProjectName)
-            );
+            VisualStudio.SolutionExplorer
+                .AddAnalyzerReference(
+                    typeof(HelloWorldGenerator).Assembly.Location,
+                    new ProjectUtils.Project(ProjectName)
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SourceGenerators)]
@@ -59,9 +60,10 @@ internal static class Program
             );
 
             VisualStudio.Editor.PlaceCaret(HelloWorldGenerator.GeneratedEnglishClassName);
-            VisualStudio.Editor.GoToDefinition(
-                $"{HelloWorldGenerator.GeneratedEnglishClassName}.cs {ServicesVSResources.generated_suffix}"
-            );
+            VisualStudio.Editor
+                .GoToDefinition(
+                    $"{HelloWorldGenerator.GeneratedEnglishClassName}.cs {ServicesVSResources.generated_suffix}"
+                );
             Assert.Equal(
                 HelloWorldGenerator.GeneratedEnglishClassName,
                 VisualStudio.Editor.GetSelectedText()
@@ -89,7 +91,8 @@ internal static class Program
 
             var programReferencesCaption =
                 $"'{HelloWorldGenerator.GeneratedEnglishClassName}' references";
-            var results = VisualStudio.FindReferencesWindow.GetContents(programReferencesCaption)
+            var results = VisualStudio.FindReferencesWindow
+                .GetContents(programReferencesCaption)
                 .OrderBy(r => r.Line)
                 .ToArray();
 
@@ -150,11 +153,12 @@ internal static class Program
                 $"'{HelloWorldGenerator.GeneratedEnglishClassName}' references";
             var results = VisualStudio.FindReferencesWindow.GetContents(programReferencesCaption);
             var referenceInGeneratedFile = results.Single(r => r.Code.Contains("<summary>"));
-            VisualStudio.FindReferencesWindow.NavigateTo(
-                programReferencesCaption,
-                referenceInGeneratedFile,
-                isPreview: isPreview
-            );
+            VisualStudio.FindReferencesWindow
+                .NavigateTo(
+                    programReferencesCaption,
+                    referenceInGeneratedFile,
+                    isPreview: isPreview
+                );
 
             // Assert we are in the right file now
             Assert.Equal(
@@ -167,13 +171,10 @@ internal static class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.SourceGenerators)]
         public void InvokeNavigateToForGeneratedFile()
         {
-            VisualStudio.Editor.InvokeNavigateTo(
-                HelloWorldGenerator.GeneratedEnglishClassName,
-                VirtualKey.Enter
-            );
-            VisualStudio.Editor.WaitForActiveView(
-                HelloWorldGenerator.GeneratedEnglishClassName + ".cs"
-            );
+            VisualStudio.Editor
+                .InvokeNavigateTo(HelloWorldGenerator.GeneratedEnglishClassName, VirtualKey.Enter);
+            VisualStudio.Editor
+                .WaitForActiveView(HelloWorldGenerator.GeneratedEnglishClassName + ".cs");
             Assert.Equal("HelloWorld", VisualStudio.Editor.GetSelectedText());
         }
     }

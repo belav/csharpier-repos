@@ -39,8 +39,8 @@ namespace Microsoft.Cci
         {
             return Hash.Combine(
                 _metadataWriter.GetMethodDefinitionOrReferenceHandle(
-                        methodInstanceReference.GetGenericMethod(_metadataWriter.Context)
-                    )
+                    methodInstanceReference.GetGenericMethod(_metadataWriter.Context)
+                )
                     .GetHashCode(),
                 _metadataWriter.GetMethodSpecificationSignatureHandle(methodInstanceReference)
                     .GetHashCode()

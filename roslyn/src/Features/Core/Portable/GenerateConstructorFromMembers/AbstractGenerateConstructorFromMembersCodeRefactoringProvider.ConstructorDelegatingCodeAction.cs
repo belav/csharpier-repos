@@ -49,9 +49,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 // Otherwise, just generate a normal constructor that assigns any provided
                 // parameters into fields.
                 var project = _document.Project;
-                var languageServices = project.Solution.Workspace.Services.GetLanguageServices(
-                    _state.ContainingType.Language
-                );
+                var languageServices = project.Solution.Workspace.Services
+                    .GetLanguageServices(_state.ContainingType.Language);
 
                 var semanticModel = await _document.GetSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -59,7 +58,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 var codeGenerationService = languageServices.GetService<ICodeGenerationService>();
 
                 var thisConstructorArguments = factory.CreateArguments(
-                    _state.Parameters.Take(_state.DelegatedConstructor.Parameters.Length)
+                    _state.Parameters
+                        .Take(_state.DelegatedConstructor.Parameters.Length)
                         .ToImmutableArray()
                 );
 
@@ -109,25 +109,25 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 var statements = nullCheckStatements.ToImmutable()
                     .Concat(assignStatements.ToImmutable());
                 var result = await codeGenerationService.AddMethodAsync(
-                        _document.Project.Solution,
-                        _state.ContainingType,
-                        CodeGenerationSymbolFactory.CreateConstructorSymbol(
-                            attributes: default,
-                            accessibility: _state.ContainingType.IsAbstractClass()
-                              ? Accessibility.Protected
-                              : Accessibility.Public,
-                            modifiers: new DeclarationModifiers(),
-                            typeName: _state.ContainingType.Name,
-                            parameters: _state.Parameters,
-                            statements: statements,
-                            thisConstructorArguments: thisConstructorArguments
-                        ),
-                        new CodeGenerationOptions(
-                            contextLocation: syntaxTree.GetLocation(_state.TextSpan),
-                            afterThisLocation: afterThisLocation
-                        ),
-                        cancellationToken: cancellationToken
-                    )
+                    _document.Project.Solution,
+                    _state.ContainingType,
+                    CodeGenerationSymbolFactory.CreateConstructorSymbol(
+                        attributes: default,
+                        accessibility: _state.ContainingType.IsAbstractClass()
+                          ? Accessibility.Protected
+                          : Accessibility.Public,
+                        modifiers: new DeclarationModifiers(),
+                        typeName: _state.ContainingType.Name,
+                        parameters: _state.Parameters,
+                        statements: statements,
+                        thisConstructorArguments: thisConstructorArguments
+                    ),
+                    new CodeGenerationOptions(
+                        contextLocation: syntaxTree.GetLocation(_state.TextSpan),
+                        afterThisLocation: afterThisLocation
+                    ),
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return await AddNavigationAnnotationAsync(result, cancellationToken)
@@ -138,16 +138,16 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             {
                 get
                 {
-                    var parameters = _state.Parameters.Select(
-                        p => _service.ToDisplayString(p, SimpleFormat)
-                    );
+                    var parameters = _state.Parameters
+                        .Select(p => _service.ToDisplayString(p, SimpleFormat));
                     var parameterString = string.Join(", ", parameters);
 
-                    return string.Format(
-                        FeaturesResources.Generate_delegating_constructor_0_1,
-                        _state.ContainingType.Name,
-                        parameterString
-                    );
+                    return string
+                        .Format(
+                            FeaturesResources.Generate_delegating_constructor_0_1,
+                            _state.ContainingType.Name,
+                            parameterString
+                        );
                 }
             }
         }

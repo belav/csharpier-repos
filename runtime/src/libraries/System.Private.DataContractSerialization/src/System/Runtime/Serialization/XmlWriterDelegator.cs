@@ -82,12 +82,8 @@ namespace System.Runtime.Serialization
                         string? prefix = writer.LookupPrefix(ns);
                         if (prefix == null)
                         {
-                            prefix = string.Format(
-                                CultureInfo.InvariantCulture,
-                                "d{0}p{1}",
-                                depth,
-                                _prefixes
-                            );
+                            prefix = string
+                                .Format(CultureInfo.InvariantCulture, "d{0}p{1}", depth, _prefixes);
                             _prefixes++;
                             writer.WriteAttributeString("xmlns", prefix, null, ns);
                         }
@@ -421,9 +417,8 @@ namespace System.Runtime.Serialization
                     break;
             }
             if (!handled)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    CreateInvalidPrimitiveTypeException(valueType)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(CreateInvalidPrimitiveTypeException(valueType));
         }
 
         internal void WriteExtensionData(IDataNode dataNode)
@@ -504,9 +499,8 @@ namespace System.Runtime.Serialization
 
             if (!handled)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    CreateInvalidPrimitiveTypeException(valueType)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(CreateInvalidPrimitiveTypeException(valueType));
             }
         }
 

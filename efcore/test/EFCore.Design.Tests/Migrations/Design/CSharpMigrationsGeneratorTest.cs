@@ -335,7 +335,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 )
             );
 
-            var coreAnnotations = typeof(CoreAnnotationNames).GetFields()
+            var coreAnnotations = typeof(CoreAnnotationNames)
+                .GetFields()
                 .Where(f => f.FieldType == typeof(string))
                 .ToList();
 
@@ -480,10 +481,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 }
             );
 
-            var finalizedModel = SqlServerTestHelpers.Instance.Finalize(
-                modelBuilder,
-                designTime: true
-            );
+            var finalizedModel = SqlServerTestHelpers.Instance
+                .Finalize(modelBuilder, designTime: true);
 
             var modelSnapshotCode = generator.GenerateSnapshot(
                 "MyNamespace",
@@ -785,10 +784,8 @@ namespace MyNamespace
 
             entityType.SetPrimaryKey(property2);
 
-            var finalizedModel = SqlServerTestHelpers.Instance.Finalize(
-                modelBuilder,
-                designTime: true
-            );
+            var finalizedModel = SqlServerTestHelpers.Instance
+                .Finalize(modelBuilder, designTime: true);
 
             var modelSnapshotCode = generator.GenerateSnapshot(
                 "MyNamespace",
@@ -915,10 +912,8 @@ namespace MyNamespace
                 }
             );
 
-            var finalizedModel = SqlServerTestHelpers.Instance.Finalize(
-                modelBuilder,
-                designTime: true
-            );
+            var finalizedModel = SqlServerTestHelpers.Instance
+                .Finalize(modelBuilder, designTime: true);
 
             var modelSnapshotCode = generator.GenerateSnapshot(
                 "MyNamespace",
@@ -1151,7 +1146,8 @@ namespace MyNamespace
                 testAssembly,
                 reporter,
                 new string[0]
-            ).CreateServiceCollection(SqlServerTestHelpers.Instance.CreateContext())
+            )
+                .CreateServiceCollection(SqlServerTestHelpers.Instance.CreateContext())
                 .BuildServiceProvider()
                 .GetRequiredService<IMigrationsCodeGenerator>();
         }

@@ -84,9 +84,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void PropertyTypedAsRefToRefStruct_AsPropInfo_ThrowsNSE()
         {
-            PropertyInfo pi = typeof(TestClass).GetProperty(
-                nameof(TestClass.PropertyTypedAsRefToRefStruct)
-            );
+            PropertyInfo pi = typeof(TestClass)
+                .GetProperty(nameof(TestClass.PropertyTypedAsRefToRefStruct));
             Assert.NotNull(pi);
             Assert.Throws<NotSupportedException>(() => pi.GetValue(null));
         }
@@ -148,10 +147,8 @@ namespace System.Reflection.Tests
 
         private static MethodInfo GetMethod(string name)
         {
-            MethodInfo mi = typeof(TestClass).GetMethod(
-                name,
-                BindingFlags.Static | BindingFlags.Public
-            );
+            MethodInfo mi = typeof(TestClass)
+                .GetMethod(name, BindingFlags.Static | BindingFlags.Public);
             Assert.NotNull(mi);
             return mi;
         }

@@ -28,8 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWebSite.Startup>>,
           IDisposable
     {
-        private static readonly string PreserveCompilationContextMessage =
-            HtmlEncoder.Default.Encode(
+        private static readonly string PreserveCompilationContextMessage = HtmlEncoder.Default
+            .Encode(
                 "One or more compilation references may be missing. "
                     + "If you're seeing this in a published application, set 'CopyRefAssembliesToPublishDirectory' to true in your project file to ensure files in the refs directory are published."
             );
@@ -55,16 +55,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                     b => b.UseStartup<ErrorPageMiddlewareWebSite.Startup>()
                 );
             Client = factory.WithWebHostBuilder(
-                    builder =>
-                        builder.ConfigureLogging(
-                            l => l.Services.AddSingleton<ILoggerFactory>(loggerProvider)
-                        )
-                )
+                builder =>
+                    builder.ConfigureLogging(
+                        l => l.Services.AddSingleton<ILoggerFactory>(loggerProvider)
+                    )
+            )
                 .CreateDefaultClient();
             // These tests want to verify runtime compilation and formatting in the HTML of the error page
-            Client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("text/html")
-            );
+            Client.DefaultRequestHeaders.Accept
+                .Add(new MediaTypeWithQualityHeaderValue("text/html"));
 
             _fixture = fixture;
         }
@@ -91,9 +90,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             );
 
             var client = factory.CreateDefaultClient();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("text/html")
-            );
+            client.DefaultRequestHeaders.Accept
+                .Add(new MediaTypeWithQualityHeaderValue("text/html"));
 
             var action = "CompilationFailure";
             var expected = "Cannot implicitly convert type &#x27;int&#x27; to &#x27;string&#x27;";
@@ -177,9 +175,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task RuntimeErrorAreListedByErrorPageMiddleware()
         {
             // Arrange
-            var expectedMessage = HtmlEncoder.Default.Encode(
-                "throw new Exception(\"Error from view\");"
-            );
+            var expectedMessage = HtmlEncoder.Default
+                .Encode("throw new Exception(\"Error from view\");");
             var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
 
             // Act

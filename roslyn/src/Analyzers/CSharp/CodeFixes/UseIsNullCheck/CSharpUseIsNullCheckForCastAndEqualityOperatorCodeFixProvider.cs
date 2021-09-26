@@ -77,10 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
                     continue;
                 }
 
-                var binary = (BinaryExpressionSyntax)diagnostic.Location.FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken: cancellationToken
-                );
+                var binary = (BinaryExpressionSyntax)diagnostic.Location
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken: cancellationToken);
 
                 editor.ReplaceNode(
                     binary,
@@ -101,10 +99,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
 
             // convert:  (object)expr != null   to    expr is object
             return SyntaxFactory.BinaryExpression(
-                    SyntaxKind.IsExpression,
-                    isPattern.Expression,
-                    SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword))
-                )
+                SyntaxKind.IsExpression,
+                isPattern.Expression,
+                SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword))
+            )
                 .WithTriviaFrom(isPattern);
         }
 

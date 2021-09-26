@@ -227,12 +227,10 @@ namespace System.IO.Compression.Tests
                             if (checkTimes)
                             {
                                 const int zipTimestampResolution = 2; // Zip follows the FAT timestamp resolution of two seconds for file records
-                                DateTime lower = file.LastModifiedDate.AddSeconds(
-                                    -zipTimestampResolution
-                                );
-                                DateTime upper = file.LastModifiedDate.AddSeconds(
-                                    zipTimestampResolution
-                                );
+                                DateTime lower = file.LastModifiedDate
+                                    .AddSeconds(-zipTimestampResolution);
+                                DateTime upper = file.LastModifiedDate
+                                    .AddSeconds(zipTimestampResolution);
                                 Assert.InRange(entry.LastWriteTime.Ticks, lower.Ticks, upper.Ticks);
                             }
 
@@ -250,14 +248,16 @@ namespace System.IO.Compression.Tests
                                     f =>
                                         f.IsFile
                                         && (
-                                            f.FullName.StartsWith(
-                                                entryName,
-                                                StringComparison.OrdinalIgnoreCase
-                                            )
-                                            || f.FullName.StartsWith(
-                                                entryNameOtherSlash,
-                                                StringComparison.OrdinalIgnoreCase
-                                            )
+                                            f.FullName
+                                                .StartsWith(
+                                                    entryName,
+                                                    StringComparison.OrdinalIgnoreCase
+                                                )
+                                            || f.FullName
+                                                .StartsWith(
+                                                    entryNameOtherSlash,
+                                                    StringComparison.OrdinalIgnoreCase
+                                                )
                                         )
                                 );
                                 if (requireExplicit || isEmtpy)
@@ -352,8 +352,8 @@ namespace System.IO.Compression.Tests
                 string aName = Path.GetFileName(aEntry);
 
                 var bData = expectedList.Where(
-                        f => string.Equals(f.Name, aName, StringComparison.OrdinalIgnoreCase)
-                    )
+                    f => string.Equals(f.Name, aName, StringComparison.OrdinalIgnoreCase)
+                )
                     .FirstOrDefault();
                 string bEntry = Path.GetFullPath(Path.Combine(bData.OrigFolder, bData.FullName));
                 string bName = Path.GetFileName(bEntry);

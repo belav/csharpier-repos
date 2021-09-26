@@ -69,12 +69,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         private string GetDebuggerDisplay()
         {
-            return string.Format(
-                "MetadataBlock {{ Mvid = {{{0}}}, Address = {1}, Size = {2} }}",
-                ModuleVersionId,
-                Pointer,
-                Size
-            );
+            return string
+                .Format(
+                    "MetadataBlock {{ Mvid = {{{0}}}, Address = {1}, Size = {2} }}",
+                    ModuleVersionId,
+                    Pointer,
+                    Size
+                );
         }
     }
 }

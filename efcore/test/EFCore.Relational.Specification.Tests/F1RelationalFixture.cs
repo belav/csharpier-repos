@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore
         public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-            base.AddOptions(builder)
+            base
+                .AddOptions(builder)
                 .ConfigureWarnings(w => w.Ignore(RelationalEventId.BatchSmallerThanMinBatchSize));
 
         protected override void BuildModelExternal(ModelBuilder modelBuilder)

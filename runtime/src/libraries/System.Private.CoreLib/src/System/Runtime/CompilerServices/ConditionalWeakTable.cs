@@ -249,7 +249,8 @@ namespace System.Runtime.CompilerServices
                         (IEnumerable<KeyValuePair<TKey, TValue>>)Array.Empty<
                             KeyValuePair<TKey, TValue>
                         >()
-                    ).GetEnumerator()
+                    )
+                    .GetEnumerator()
                   : new Enumerator(this);
             }
         }
@@ -580,9 +581,8 @@ namespace System.Runtime.CompilerServices
             {
                 if (index < _entries.Length)
                 {
-                    object? oKey = _entries[index].depHnd.GetPrimaryAndSecondary(
-                        out object? oValue
-                    );
+                    object? oKey = _entries[index].depHnd
+                        .GetPrimaryAndSecondary(out object? oValue);
                     GC.KeepAlive(this); // ensure we don't get finalized while accessing DependentHandles.
 
                     if (oKey != null)

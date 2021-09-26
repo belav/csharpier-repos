@@ -232,10 +232,11 @@ namespace Microsoft.CodeAnalysis.Interactive
             {
                 WriteOutputInBackground(
                     isError: true,
-                    string.Format(
-                        InteractiveHostResources.Hosting_process_exited_with_exit_code_0,
-                        exitCode.Value
-                    )
+                    string
+                        .Format(
+                            InteractiveHostResources.Hosting_process_exited_with_exit_code_0,
+                            exitCode.Value
+                        )
                 );
             }
         }
@@ -329,10 +330,10 @@ namespace Microsoft.CodeAnalysis.Interactive
             }
 
             return await InvokeRemoteAsync<TResult>(
-                    initializedRemoteService.Service,
-                    targetName,
-                    arguments
-                )
+                initializedRemoteService.Service,
+                targetName,
+                arguments
+            )
                 .ConfigureAwait(false);
         }
 
@@ -343,10 +344,10 @@ namespace Microsoft.CodeAnalysis.Interactive
         ) =>
             (
                 await InvokeRemoteAsync<RemoteExecutionResult.Data>(
-                        remoteService,
-                        targetName,
-                        arguments
-                    )
+                    remoteService,
+                    targetName,
+                    arguments
+                )
                     .ConfigureAwait(false)
             )?.Deserialize() ?? default;
 
@@ -358,7 +359,8 @@ namespace Microsoft.CodeAnalysis.Interactive
         {
             try
             {
-                return await remoteService.JsonRpc.InvokeAsync<TResult>(targetName, arguments)
+                return await remoteService.JsonRpc
+                    .InvokeAsync<TResult>(targetName, arguments)
                     .ConfigureAwait(false);
             }
             catch (Exception e)

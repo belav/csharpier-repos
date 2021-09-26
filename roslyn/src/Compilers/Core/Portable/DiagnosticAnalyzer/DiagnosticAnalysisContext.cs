@@ -1943,20 +1943,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (!ReportedDiagnostics.Contains(suppression.SuppressedDiagnostic))
             {
                 // Non-reported diagnostic with ID '{0}' cannot be suppressed.
-                var message = string.Format(
-                    CodeAnalysisResources.NonReportedDiagnosticCannotBeSuppressed,
-                    suppression.SuppressedDiagnostic.Id
-                );
+                var message = string
+                    .Format(
+                        CodeAnalysisResources.NonReportedDiagnosticCannotBeSuppressed,
+                        suppression.SuppressedDiagnostic.Id
+                    );
                 throw new ArgumentException(message);
             }
 
             if (!_isSupportedSuppressionDescriptor(suppression.Descriptor))
             {
                 // Reported suppression with ID '{0}' is not supported by the suppressor.
-                var message = string.Format(
-                    CodeAnalysisResources.UnsupportedSuppressionReported,
-                    suppression.Descriptor.Id
-                );
+                var message = string
+                    .Format(
+                        CodeAnalysisResources.UnsupportedSuppressionReported,
+                        suppression.Descriptor.Id
+                    );
                 throw new ArgumentException(message);
             }
 

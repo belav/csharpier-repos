@@ -48,8 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 return;
             }
 
-            var maxRequestBodySizeFeature =
-                context.HttpContext.Features.Get<IHttpMaxRequestBodySizeFeature>();
+            var maxRequestBodySizeFeature = context.HttpContext.Features
+                .Get<IHttpMaxRequestBodySizeFeature>();
 
             if (maxRequestBodySizeFeature == null)
             {

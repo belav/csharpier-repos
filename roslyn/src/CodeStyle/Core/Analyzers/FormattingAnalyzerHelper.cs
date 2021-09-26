@@ -55,8 +55,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     {
                         if (
                             oldText.GetSubText(
-                                    new TextSpan(change.Span.Start + offset, change.NewText.Length)
-                                )
+                                new TextSpan(change.Span.Start + offset, change.NewText.Length)
+                            )
                                 .ContentEquals(SourceText.From(change.NewText))
                         )
                         {
@@ -69,8 +69,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                             // nothing more.
                             if (
                                 oldText.GetSubText(
-                                        new TextSpan(change.Span.Start, change.NewText.Length)
-                                    )
+                                    new TextSpan(change.Span.Start, change.NewText.Length)
+                                )
                                     .ContentEquals(SourceText.From(change.NewText))
                             )
                             {

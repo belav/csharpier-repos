@@ -126,7 +126,9 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                     from attr in function.GetCustomAttributes(false)
                     where attr is PerfGoalAttribute
                     select ((PerfGoalAttribute)attr).InteractionClass
-                ).DefaultIfEmpty(InteractionClass.Undefined).First();
+                )
+                    .DefaultIfEmpty(InteractionClass.Undefined)
+                    .First();
 
                 output.Append(value);
                 output.Append(" ");

@@ -128,9 +128,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
 
         private void ToggleCheckSelection()
         {
-            var selectedItems =
-                Members.SelectedItems.OfType<ExtractInterfaceDialogViewModel.MemberSymbolViewModel>()
-                    .ToArray();
+            var selectedItems = Members.SelectedItems
+                .OfType<ExtractInterfaceDialogViewModel.MemberSymbolViewModel>()
+                .ToArray();
             var allChecked = selectedItems.All(m => m.IsChecked);
             foreach (var item in selectedItems)
             {

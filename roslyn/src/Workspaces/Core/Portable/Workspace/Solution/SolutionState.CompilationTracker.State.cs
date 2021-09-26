@@ -265,10 +265,11 @@ namespace Microsoft.CodeAnalysis
                             finalCompilationSource.TryGetValue(out var finalCompilationVal)
                         );
                         Debug.Assert(
-                            object.ReferenceEquals(
-                                finalCompilationVal.Value,
-                                compilationWithoutGeneratedFiles
-                            )
+                            object
+                                .ReferenceEquals(
+                                    finalCompilationVal.Value,
+                                    compilationWithoutGeneratedFiles
+                                )
                         );
                     }
                 }
@@ -374,8 +375,8 @@ namespace Microsoft.CodeAnalysis
                     );
 
                     // PERF: Preallocate this array so we don't have to resize it as we're adding assembly symbols.
-                    using var _ =
-                        ArrayBuilder<(int hashcode, WeakReference<ISymbol> symbol)>.GetInstance(
+                    using var _ = ArrayBuilder<(int hashcode, WeakReference<ISymbol> symbol)>
+                        .GetInstance(
                             compilation.ExternalReferences.Length
                                 + compilation.DirectiveReferences.Length,
                             out var secondarySymbols

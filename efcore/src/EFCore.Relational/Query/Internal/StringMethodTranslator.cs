@@ -18,26 +18,23 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class StringMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _isNullOrEmptyMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.IsNullOrEmpty),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _isNullOrEmptyMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.IsNullOrEmpty), new[] { typeof(string) });
 
-        private static readonly MethodInfo _concatMethodInfoTwoArgs =
-            typeof(string).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _concatMethodInfoTwoArgs = typeof(string)
+            .GetRequiredRuntimeMethod(
                 nameof(string.Concat),
                 new[] { typeof(string), typeof(string) }
             );
 
-        private static readonly MethodInfo _concatMethodInfoThreeArgs =
-            typeof(string).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _concatMethodInfoThreeArgs = typeof(string)
+            .GetRequiredRuntimeMethod(
                 nameof(string.Concat),
                 new[] { typeof(string), typeof(string), typeof(string) }
             );
 
-        private static readonly MethodInfo _concatMethodInfoFourArgs =
-            typeof(string).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _concatMethodInfoFourArgs = typeof(string)
+            .GetRequiredRuntimeMethod(
                 nameof(string.Concat),
                 new[] { typeof(string), typeof(string), typeof(string), typeof(string) }
             );

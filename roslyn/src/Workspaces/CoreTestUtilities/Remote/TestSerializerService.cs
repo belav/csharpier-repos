@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
             MetadataReference,
             string
         > s_wellKnownReferenceNames = ImmutableDictionary.Create<MetadataReference, string>(
-                ReferenceEqualityComparer.Instance
-            )
+            ReferenceEqualityComparer.Instance
+        )
             .Add(TestBase.MscorlibRef_v46, nameof(TestBase.MscorlibRef_v46))
             .Add(TestBase.SystemRef_v46, nameof(TestBase.SystemRef_v46))
             .Add(TestBase.SystemCoreRef_v46, nameof(TestBase.SystemCoreRef_v46))

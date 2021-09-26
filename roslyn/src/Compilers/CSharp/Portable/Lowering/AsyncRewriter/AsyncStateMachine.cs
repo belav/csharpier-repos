@@ -47,8 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // IAsyncEnumerable<TResult>
                     interfaces.Add(
                         compilation.GetWellKnownType(
-                                WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
-                            )
+                            WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                        )
                             .Construct(elementType)
                     );
                 }
@@ -56,16 +56,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // IAsyncEnumerator<TResult>
                 interfaces.Add(
                     compilation.GetWellKnownType(
-                            WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
-                        )
+                        WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
+                    )
                         .Construct(elementType)
                 );
 
                 // IValueTaskSource<bool>
                 interfaces.Add(
                     compilation.GetWellKnownType(
-                            WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource_T
-                        )
+                        WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource_T
+                    )
                         .Construct(compilation.GetSpecialType(SpecialType.System_Boolean))
                 );
 

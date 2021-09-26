@@ -70,13 +70,11 @@ class Program
     }
 }";
 
-            CreateCompilationWithILAndMscorlib40(csharp, il)
-                .VerifyDiagnostics(
-                    // (6,15): error CS1503: Argument 1: cannot convert from 'string' to 'int'
-                    //         B.Goo("");
-                    Diagnostic(ErrorCode.ERR_BadArgType, @"""""")
-                        .WithArguments("1", "string", "int")
-                );
+            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
+                // (6,15): error CS1503: Argument 1: cannot convert from 'string' to 'int'
+                //         B.Goo("");
+                Diagnostic(ErrorCode.ERR_BadArgType, @"""""").WithArguments("1", "string", "int")
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
@@ -131,13 +129,11 @@ class Program
     }
 }";
 
-            CreateCompilationWithILAndMscorlib40(csharp, il)
-                .VerifyDiagnostics(
-                    // (6,21): error CS1503: Argument 1: cannot convert from 'string' to 'int'
-                    //         new B().Goo("");
-                    Diagnostic(ErrorCode.ERR_BadArgType, @"""""")
-                        .WithArguments("1", "string", "int")
-                );
+            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
+                // (6,21): error CS1503: Argument 1: cannot convert from 'string' to 'int'
+                //         new B().Goo("");
+                Diagnostic(ErrorCode.ERR_BadArgType, @"""""").WithArguments("1", "string", "int")
+            );
         }
 
         [Fact]
@@ -202,10 +198,9 @@ class Program
 }";
 
             var comp = CreateCompilationWithILAndMscorlib40(csharp, il);
-            CompileAndVerify(comp)
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(comp).VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -217,7 +212,7 @@ class Program
   IL_0011:  callvirt   ""void B.M(int)""
   IL_0016:  ret
 }"
-                );
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
@@ -277,12 +272,11 @@ class Program
     }
 }";
 
-            CreateCompilationWithILAndMscorlib40(csharp, il)
-                .VerifyDiagnostics(
-                    // (6,9): error CS1501: No overload for method 'M' takes 2 arguments
-                    //         new B().M(1, 2); // This would work if B.M was not hide-by-name (since A.M is params)
-                    Diagnostic(ErrorCode.ERR_BadArgCount, "M").WithArguments("M", "2")
-                );
+            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
+                // (6,9): error CS1501: No overload for method 'M' takes 2 arguments
+                //         new B().M(1, 2); // This would work if B.M was not hide-by-name (since A.M is params)
+                Diagnostic(ErrorCode.ERR_BadArgCount, "M").WithArguments("M", "2")
+            );
         }
 
         [Fact]
@@ -470,12 +464,11 @@ class Program
     }
 }";
 
-            CreateCompilationWithILAndMscorlib40(csharp, il)
-                .VerifyDiagnostics(
-                    // (6,25): error CS1503: Argument 1: cannot convert from 'int' to 'string'
-                    //         int x = new B()[0];
-                    Diagnostic(ErrorCode.ERR_BadArgType, "0").WithArguments("1", "int", "string")
-                );
+            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
+                // (6,25): error CS1503: Argument 1: cannot convert from 'int' to 'string'
+                //         int x = new B()[0];
+                Diagnostic(ErrorCode.ERR_BadArgType, "0").WithArguments("1", "int", "string")
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
@@ -552,10 +545,9 @@ class Program
 }";
 
             var comp = CreateCompilationWithILAndMscorlib40(csharp, il);
-            CompileAndVerify(comp)
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(comp).VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  3
@@ -569,7 +561,7 @@ class Program
   IL_0013:  callvirt   ""void B.this[int].set""
   IL_0018:  ret
 }"
-                );
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
@@ -643,13 +635,11 @@ class Program
     }
 }";
 
-            CreateCompilationWithILAndMscorlib40(csharp, il)
-                .VerifyDiagnostics(
-                    // (6,17): error CS1501: No overload for method 'this' takes 2 arguments
-                    //         int x = new B()[1, 2]; // This would work if B.Item was not hide-by-name (since A.Item is params)
-                    Diagnostic(ErrorCode.ERR_BadArgCount, "new B()[1, 2]")
-                        .WithArguments("this", "2")
-                );
+            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
+                // (6,17): error CS1501: No overload for method 'this' takes 2 arguments
+                //         int x = new B()[1, 2]; // This would work if B.Item was not hide-by-name (since A.Item is params)
+                Diagnostic(ErrorCode.ERR_BadArgCount, "new B()[1, 2]").WithArguments("this", "2")
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
@@ -798,7 +788,7 @@ public class C : B, I
         public void LocalHideFieldByName()
         {
             CreateCompilation(
-                    @"
+                @"
 using System;
 
 public class M
@@ -820,11 +810,10 @@ public class M
     }
 }
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             CreateCompilation(
-                    @"
+                @"
 using System;
 
 public class M
@@ -844,11 +833,10 @@ public class M
     }
 }
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             CreateCompilation(
-                    @"
+                @"
 using System;
 
 public class M
@@ -882,8 +870,7 @@ public class M
     }
 }
 "
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
     }
 }

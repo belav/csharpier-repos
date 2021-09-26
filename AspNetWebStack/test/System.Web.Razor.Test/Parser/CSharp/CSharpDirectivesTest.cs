@@ -51,8 +51,8 @@ namespace System.Web.Razor.Test.Parser.CSharp
                     Factory.MetaCode(SyntaxConstants.CSharp.InheritsKeyword + " ")
                         .Accepts(AcceptedCharacters.None),
                     Factory.Code(
-                            "System.Web.Mvc.WebViewPage<IEnumerable<MvcApplication2.Models.RegisterModel>>"
-                        )
+                        "System.Web.Mvc.WebViewPage<IEnumerable<MvcApplication2.Models.RegisterModel>>"
+                    )
                         .AsBaseType(
                             "System.Web.Mvc.WebViewPage<IEnumerable<MvcApplication2.Models.RegisterModel>>"
                         )

@@ -114,7 +114,8 @@ namespace Microsoft.AspNetCore.Builder
                 throw new ArgumentException(Resources.Exception_CulturesShouldNotBeEmpty);
             }
 
-            var options = new RequestLocalizationOptions().AddSupportedCultures(cultures)
+            var options = new RequestLocalizationOptions()
+                .AddSupportedCultures(cultures)
                 .AddSupportedUICultures(cultures)
                 .SetDefaultCulture(cultures[0]);
 

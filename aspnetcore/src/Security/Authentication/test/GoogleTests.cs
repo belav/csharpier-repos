@@ -186,9 +186,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task ChallengeWillUseAuthenticationPropertiesParametersAsQueryArguments()
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -251,9 +250,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task ChallengeWillUseAuthenticationPropertiesItemsAsParameters()
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -314,9 +312,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task ChallengeWillUseAuthenticationPropertiesItemsAsQueryArgumentsButParametersWillOverwrite()
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -562,10 +559,11 @@ namespace Microsoft.AspNetCore.Authentication.Google
                             Assert.Equal("whyitfailed", ex.Data["error_description"]);
                             Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
                             remoteFailureCalled = true;
-                            ctx.Response.Redirect(
-                                "/error?FailureMessage="
-                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                            );
+                            ctx.Response
+                                .Redirect(
+                                    "/error?FailureMessage="
+                                        + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                                );
                             ctx.HandleResponse();
                             return Task.FromResult(0);
                         }
@@ -612,10 +610,11 @@ namespace Microsoft.AspNetCore.Authentication.Google
                                   Assert.Equal("itfailed", ex.Data["error"]);
                                   Assert.Equal("whyitfailed", ex.Data["error_description"]);
                                   Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
-                                  ctx.Response.Redirect(
-                                      "/error?FailureMessage="
-                                          + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                                  );
+                                  ctx.Response
+                                      .Redirect(
+                                          "/error?FailureMessage="
+                                              + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                                      );
                                   ctx.HandleResponse();
                                   return Task.FromResult(0);
                               }
@@ -634,9 +633,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
                 Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
                 Assert.Equal(
                     "/error?FailureMessage=itfailed"
-                        + UrlEncoder.Default.Encode(
-                            ";Description=whyitfailed;Uri=https://example.com/fail"
-                        ),
+                        + UrlEncoder.Default
+                            .Encode(";Description=whyitfailed;Uri=https://example.com/fail"),
                     transaction.Response.Headers.GetValues("Location").First()
                 );
             }
@@ -656,9 +654,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task ReplyPathWillAuthenticateValidAuthorizeCodeAndState(string claimsIssuer)
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -738,9 +735,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task ReplyPathWillThrowIfCodeIsInvalid(bool redirect)
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -763,10 +759,11 @@ namespace Microsoft.AspNetCore.Authentication.Google
                           {
                               OnRemoteFailure = ctx =>
                               {
-                                  ctx.Response.Redirect(
-                                      "/error?FailureMessage="
-                                          + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                                  );
+                                  ctx.Response
+                                      .Redirect(
+                                          "/error?FailureMessage="
+                                              + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                                      );
                                   ctx.HandleResponse();
                                   return Task.FromResult(0);
                               }
@@ -793,9 +790,10 @@ namespace Microsoft.AspNetCore.Authentication.Google
                 Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
                 Assert.Equal(
                     "/error?FailureMessage="
-                        + UrlEncoder.Default.Encode(
-                            "OAuth token endpoint failure: Status: BadRequest;Headers: ;Body: {\"Error\":\"Error\"};"
-                        ),
+                        + UrlEncoder.Default
+                            .Encode(
+                                "OAuth token endpoint failure: Status: BadRequest;Headers: ;Body: {\"Error\":\"Error\"};"
+                            ),
                     transaction.Response.Headers.GetValues("Location").First()
                 );
             }
@@ -815,9 +813,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task ReplyPathWillRejectIfAccessTokenIsMissing(bool redirect)
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -837,10 +834,11 @@ namespace Microsoft.AspNetCore.Authentication.Google
                           {
                               OnRemoteFailure = ctx =>
                               {
-                                  ctx.Response.Redirect(
-                                      "/error?FailureMessage="
-                                          + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                                  );
+                                  ctx.Response
+                                      .Redirect(
+                                          "/error?FailureMessage="
+                                              + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                                      );
                                   ctx.HandleResponse();
                                   return Task.FromResult(0);
                               }
@@ -881,9 +879,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task AuthenticatedEventCanGetRefreshToken()
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -897,20 +894,21 @@ namespace Microsoft.AspNetCore.Authentication.Google
                         OnCreatingTicket = context =>
                         {
                             var refreshToken = context.RefreshToken;
-                            context.Principal.AddIdentity(
-                                new ClaimsIdentity(
-                                    new Claim[]
-                                    {
-                                        new Claim(
-                                            "RefreshToken",
-                                            refreshToken,
-                                            ClaimValueTypes.String,
-                                            "Google"
-                                        )
-                                    },
-                                    "Google"
-                                )
-                            );
+                            context.Principal
+                                .AddIdentity(
+                                    new ClaimsIdentity(
+                                        new Claim[]
+                                        {
+                                            new Claim(
+                                                "RefreshToken",
+                                                refreshToken,
+                                                ClaimValueTypes.String,
+                                                "Google"
+                                            )
+                                        },
+                                        "Google"
+                                    )
+                                );
                             return Task.FromResult(0);
                         }
                     };
@@ -950,9 +948,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task NullRedirectUriWillRedirectToSlash()
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -999,9 +996,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task ValidateAuthenticatedContext()
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -1089,9 +1085,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task CanRedirectOnError()
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -1102,10 +1097,11 @@ namespace Microsoft.AspNetCore.Authentication.Google
                     {
                         OnRemoteFailure = ctx =>
                         {
-                            ctx.Response.Redirect(
-                                "/error?FailureMessage="
-                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                            );
+                            ctx.Response
+                                .Redirect(
+                                    "/error?FailureMessage="
+                                        + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                                );
                             ctx.HandleResponse();
                             return Task.FromResult(0);
                         }
@@ -1131,9 +1127,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task AuthenticateAutomaticWhenAlreadySignedInSucceeds()
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -1189,9 +1184,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task AuthenticateGoogleWhenAlreadySignedInSucceeds()
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -1250,9 +1244,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task AuthenticateGoogleWhenAlreadySignedWithGoogleReturnsNull()
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -1304,9 +1297,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
         public async Task ChallengeGoogleWhenAlreadySignedWithGoogleSucceeds()
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "GoogleTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("GoogleTest")
             );
             using var host = await CreateHost(
                 o =>
@@ -1376,10 +1368,11 @@ namespace Microsoft.AspNetCore.Authentication.Google
                         );
                     }
                     else if (
-                        req.RequestUri.GetComponents(
-                            UriComponents.SchemeAndServer | UriComponents.Path,
-                            UriFormat.UriEscaped
-                        ) == "https://www.googleapis.com/oauth2/v2/userinfo"
+                        req.RequestUri
+                            .GetComponents(
+                                UriComponents.SchemeAndServer | UriComponents.Path,
+                                UriFormat.UriEscaped
+                            ) == "https://www.googleapis.com/oauth2/v2/userinfo"
                     )
                     {
                         return ReturnJsonResponse(
@@ -1430,147 +1423,127 @@ namespace Microsoft.AspNetCore.Authentication.Google
             Func<HttpContext, Task> testpath = null
         )
         {
-            var host = new HostBuilder().ConfigureWebHost(
-                    builder =>
-                        builder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseAuthentication();
-                                    app.Use(
-                                        async (context, next) =>
+            var host = new HostBuilder()
+                .ConfigureWebHost(builder => builder.UseTestServer().Configure(
+                            app =>
+                            {
+                                app.UseAuthentication();
+                                app.Use(
+                                    async (context, next) =>
+                                    {
+                                        var req = context.Request;
+                                        var res = context.Response;
+                                        if (req.Path == new PathString("/challenge"))
                                         {
-                                            var req = context.Request;
-                                            var res = context.Response;
-                                            if (req.Path == new PathString("/challenge"))
-                                            {
-                                                await context.ChallengeAsync();
-                                            }
-                                            else if (
-                                                req.Path == new PathString("/challengeFacebook")
-                                            )
-                                            {
-                                                await context.ChallengeAsync("Facebook");
-                                            }
-                                            else if (req.Path == new PathString("/tokens"))
-                                            {
-                                                var result = await context.AuthenticateAsync(
-                                                    TestExtensions.CookieAuthenticationScheme
-                                                );
-                                                var tokens = result.Properties.GetTokens();
-                                                await res.DescribeAsync(tokens);
-                                            }
-                                            else if (req.Path == new PathString("/me"))
-                                            {
-                                                await res.DescribeAsync(context.User);
-                                            }
-                                            else if (req.Path == new PathString("/authenticate"))
-                                            {
-                                                var result = await context.AuthenticateAsync(
-                                                    TestExtensions.CookieAuthenticationScheme
-                                                );
-                                                await res.DescribeAsync(result.Principal);
-                                            }
-                                            else if (
-                                                req.Path == new PathString("/authenticateGoogle")
-                                            )
-                                            {
-                                                var result = await context.AuthenticateAsync(
-                                                    "Google"
-                                                );
-                                                await res.DescribeAsync(result?.Principal);
-                                            }
-                                            else if (
-                                                req.Path == new PathString("/authenticateFacebook")
-                                            )
-                                            {
-                                                var result = await context.AuthenticateAsync(
-                                                    "Facebook"
-                                                );
-                                                await res.DescribeAsync(result?.Principal);
-                                            }
-                                            else if (req.Path == new PathString("/unauthorized"))
-                                            {
-                                                // Simulate Authorization failure
-                                                var result = await context.AuthenticateAsync(
-                                                    "Google"
-                                                );
-                                                await context.ChallengeAsync("Google");
-                                            }
-                                            else if (
-                                                req.Path == new PathString("/unauthorizedAuto")
-                                            )
-                                            {
-                                                var result = await context.AuthenticateAsync(
-                                                    "Google"
-                                                );
-                                                await context.ChallengeAsync("Google");
-                                            }
-                                            else if (req.Path == new PathString("/401"))
-                                            {
-                                                res.StatusCode = 401;
-                                            }
-                                            else if (req.Path == new PathString("/signIn"))
-                                            {
-                                                await Assert.ThrowsAsync<InvalidOperationException>(
-                                                    () =>
-                                                        context.SignInAsync(
-                                                            "Google",
-                                                            new ClaimsPrincipal()
-                                                        )
-                                                );
-                                            }
-                                            else if (req.Path == new PathString("/signOut"))
-                                            {
-                                                await Assert.ThrowsAsync<InvalidOperationException>(
-                                                    () => context.SignOutAsync("Google")
-                                                );
-                                            }
-                                            else if (req.Path == new PathString("/forbid"))
-                                            {
-                                                await Assert.ThrowsAsync<InvalidOperationException>(
-                                                    () => context.ForbidAsync("Google")
-                                                );
-                                            }
-                                            else if (testpath != null)
-                                            {
-                                                await testpath(context);
-                                            }
-                                            else
-                                            {
-                                                await next();
-                                            }
+                                            await context.ChallengeAsync();
+                                        }
+                                        else if (req.Path == new PathString("/challengeFacebook"))
+                                        {
+                                            await context.ChallengeAsync("Facebook");
+                                        }
+                                        else if (req.Path == new PathString("/tokens"))
+                                        {
+                                            var result = await context.AuthenticateAsync(
+                                                TestExtensions.CookieAuthenticationScheme
+                                            );
+                                            var tokens = result.Properties.GetTokens();
+                                            await res.DescribeAsync(tokens);
+                                        }
+                                        else if (req.Path == new PathString("/me"))
+                                        {
+                                            await res.DescribeAsync(context.User);
+                                        }
+                                        else if (req.Path == new PathString("/authenticate"))
+                                        {
+                                            var result = await context.AuthenticateAsync(
+                                                TestExtensions.CookieAuthenticationScheme
+                                            );
+                                            await res.DescribeAsync(result.Principal);
+                                        }
+                                        else if (req.Path == new PathString("/authenticateGoogle"))
+                                        {
+                                            var result = await context.AuthenticateAsync("Google");
+                                            await res.DescribeAsync(result?.Principal);
+                                        }
+                                        else if (
+                                            req.Path == new PathString("/authenticateFacebook")
+                                        )
+                                        {
+                                            var result = await context.AuthenticateAsync(
+                                                "Facebook"
+                                            );
+                                            await res.DescribeAsync(result?.Principal);
+                                        }
+                                        else if (req.Path == new PathString("/unauthorized"))
+                                        {
+                                            // Simulate Authorization failure
+                                            var result = await context.AuthenticateAsync("Google");
+                                            await context.ChallengeAsync("Google");
+                                        }
+                                        else if (req.Path == new PathString("/unauthorizedAuto"))
+                                        {
+                                            var result = await context.AuthenticateAsync("Google");
+                                            await context.ChallengeAsync("Google");
+                                        }
+                                        else if (req.Path == new PathString("/401"))
+                                        {
+                                            res.StatusCode = 401;
+                                        }
+                                        else if (req.Path == new PathString("/signIn"))
+                                        {
+                                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                                () =>
+                                                    context.SignInAsync(
+                                                        "Google",
+                                                        new ClaimsPrincipal()
+                                                    )
+                                            );
+                                        }
+                                        else if (req.Path == new PathString("/signOut"))
+                                        {
+                                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                                () => context.SignOutAsync("Google")
+                                            );
+                                        }
+                                        else if (req.Path == new PathString("/forbid"))
+                                        {
+                                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                                () => context.ForbidAsync("Google")
+                                            );
+                                        }
+                                        else if (testpath != null)
+                                        {
+                                            await testpath(context);
+                                        }
+                                        else
+                                        {
+                                            await next();
+                                        }
+                                    }
+                                );
+                            }
+                        ).ConfigureServices(
+                            services =>
+                            {
+                                services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
+                                services.AddAuthentication(
+                                    TestExtensions.CookieAuthenticationScheme
+                                )
+                                    .AddCookie(
+                                        TestExtensions.CookieAuthenticationScheme,
+                                        o =>
+                                            o.ForwardChallenge = GoogleDefaults.AuthenticationScheme
+                                    )
+                                    .AddGoogle(configureOptions)
+                                    .AddFacebook(
+                                        o =>
+                                        {
+                                            o.ClientId = "Test ClientId";
+                                            o.ClientSecret = "Test AppSecrent";
                                         }
                                     );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddTransient<
-                                        IClaimsTransformation,
-                                        ClaimsTransformer
-                                    >();
-                                    services.AddAuthentication(
-                                            TestExtensions.CookieAuthenticationScheme
-                                        )
-                                        .AddCookie(
-                                            TestExtensions.CookieAuthenticationScheme,
-                                            o =>
-                                                o.ForwardChallenge =
-                                                    GoogleDefaults.AuthenticationScheme
-                                        )
-                                        .AddGoogle(configureOptions)
-                                        .AddFacebook(
-                                            o =>
-                                            {
-                                                o.ClientId = "Test ClientId";
-                                                o.ClientSecret = "Test AppSecrent";
-                                            }
-                                        );
-                                }
-                            )
-                )
+                            }
+                        ))
                 .Build();
 
             await host.StartAsync();

@@ -150,21 +150,21 @@ namespace System.Linq.Expressions.Tests
         {
             LabelTarget target = Expression.Label();
             Func<int> add = Expression.Lambda<Func<int>>(
-                    Expression.Add(
-                        Expression.Block(
-                            Expression.Continue(target),
-                            Expression.Throw(Expression.Constant(new Exception())),
-                            Expression.Label(target),
-                            Expression.Constant(10)
-                        ),
-                        Expression.Block(
-                            Expression.Continue(target),
-                            Expression.Throw(Expression.Constant(new Exception())),
-                            Expression.Label(target),
-                            Expression.Constant(5)
-                        )
+                Expression.Add(
+                    Expression.Block(
+                        Expression.Continue(target),
+                        Expression.Throw(Expression.Constant(new Exception())),
+                        Expression.Label(target),
+                        Expression.Constant(10)
+                    ),
+                    Expression.Block(
+                        Expression.Continue(target),
+                        Expression.Throw(Expression.Constant(new Exception())),
+                        Expression.Label(target),
+                        Expression.Constant(5)
                     )
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(15, add());
         }

@@ -20,9 +20,10 @@ namespace Microsoft.Extensions.DependencyInjection
             this OptionsBuilder<TOptions> optionsBuilder
         ) where TOptions : class
         {
-            optionsBuilder.Services.AddSingleton<IValidateOptions<TOptions>>(
-                new DataAnnotationValidateOptions<TOptions>(optionsBuilder.Name)
-            );
+            optionsBuilder.Services
+                .AddSingleton<IValidateOptions<TOptions>>(
+                    new DataAnnotationValidateOptions<TOptions>(optionsBuilder.Name)
+                );
             return optionsBuilder;
         }
     }

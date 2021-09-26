@@ -119,7 +119,8 @@ namespace System.ComponentModel.Composition.Hosting
                 FilteredCatalog catalog = new FilteredCatalog(
                     originalCatalog,
                     p => p.Exports<IContract1>()
-                ).IncludeDependents()
+                )
+                    .IncludeDependents()
             )
             {
                 var parts1 = catalog.GetExports<IContract1>();

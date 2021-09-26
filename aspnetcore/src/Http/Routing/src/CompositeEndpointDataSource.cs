@@ -177,8 +177,8 @@ namespace Microsoft.AspNetCore.Routing
                         sb.Append(", Defaults: new { ");
                         sb.AppendJoin(", ", FormatValues(routeEndpoint.RoutePattern.Defaults));
                         sb.Append(" }");
-                        var routeNameMetadata =
-                            routeEndpoint.Metadata.GetMetadata<IRouteNameMetadata>();
+                        var routeNameMetadata = routeEndpoint.Metadata
+                            .GetMetadata<IRouteNameMetadata>();
                         sb.Append(", Route Name: ");
                         sb.Append(routeNameMetadata?.RouteName);
                         var routeValues = routeEndpoint.RoutePattern.RequiredValues;
@@ -191,8 +191,8 @@ namespace Microsoft.AspNetCore.Routing
                         sb.Append(", Order: ");
                         sb.Append(routeEndpoint.Order);
 
-                        var httpMethodMetadata =
-                            routeEndpoint.Metadata.GetMetadata<IHttpMethodMetadata>();
+                        var httpMethodMetadata = routeEndpoint.Metadata
+                            .GetMetadata<IHttpMethodMetadata>();
                         if (httpMethodMetadata != null)
                         {
                             sb.Append(", Http Methods: ");

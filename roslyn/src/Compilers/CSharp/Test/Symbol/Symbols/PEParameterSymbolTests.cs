@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             // {
             //   void M(object, object);
             // }
-            var reference =
-                Roslyn.Test.Utilities.Desktop.DesktopRuntimeUtil.CreateReflectionEmitAssembly(
+            var reference = Roslyn.Test.Utilities.Desktop.DesktopRuntimeUtil
+                .CreateReflectionEmitAssembly(
                     moduleBuilder =>
                     {
                         var typeBuilder = moduleBuilder.DefineType(
@@ -71,7 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         public void IsOptional()
         {
             var vbComp = CreateVisualBasicCompilation(
-                    @"
+                @"
 Public Class Class1
     Public Shared Sub Test(<System.Runtime.InteropServices.Out> Optional ByRef x As Object = Nothing,
                            Optional ByRef y As Object = Nothing, Optional z As Integer = -1)
@@ -87,8 +87,7 @@ Public Interface I1
     Sub M2(Optional ByRef y2 As Object = Nothing)
 End Interface
 "
-                )
-                .EmitToImageReference();
+            ).EmitToImageReference();
 
             var source =
                 @"

@@ -70,24 +70,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string certName =
                 @"E=admin@digsigtrust.com, CN=ABA.ECOM Root CA, O=""ABA.ECOM, INC."", L=Washington, S=DC, C=US";
 
-            DateTime notBefore = new DateTime(
-                1999,
-                7,
-                12,
-                17,
-                33,
-                53,
-                DateTimeKind.Utc
-            ).ToLocalTime();
-            DateTime notAfter = new DateTime(
-                2009,
-                7,
-                9,
-                17,
-                33,
-                53,
-                DateTimeKind.Utc
-            ).ToLocalTime();
+            DateTime notBefore = new DateTime(1999, 7, 12, 17, 33, 53, DateTimeKind.Utc)
+                .ToLocalTime();
+            DateTime notAfter = new DateTime(2009, 7, 9, 17, 33, 53, DateTimeKind.Utc)
+                .ToLocalTime();
 
             using (X509Certificate2 cert2 = new X509Certificate2(TestFiles.TestCertFile))
             {

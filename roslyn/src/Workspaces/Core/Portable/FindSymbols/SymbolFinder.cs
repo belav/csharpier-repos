@@ -50,11 +50,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         )
         {
             var semanticInfo = await GetSemanticInfoAtPositionAsync(
-                    semanticModel,
-                    position,
-                    workspace,
-                    cancellationToken: cancellationToken
-                )
+                semanticModel,
+                position,
+                workspace,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             return semanticInfo.GetAnySymbol(includeType: false);
         }
@@ -67,11 +67,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         )
         {
             var token = await GetTokenAtPositionAsync(
-                    semanticModel,
-                    position,
-                    workspace,
-                    cancellationToken
-                )
+                semanticModel,
+                position,
+                workspace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (token != default && token.Span.IntersectsWith(position))
@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         )
         {
             var syntaxTree = semanticModel.SyntaxTree;
-            var syntaxFacts = workspace.Services.GetLanguageServices(semanticModel.Language)
+            var syntaxFacts = workspace.Services
+                .GetLanguageServices(semanticModel.Language)
                 .GetService<ISyntaxFactsService>();
 
             return syntaxTree.GetTouchingTokenAsync(
@@ -110,11 +111,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             return await FindSymbolAtPositionAsync(
-                    semanticModel,
-                    position,
-                    document.Project.Solution.Workspace,
-                    cancellationToken
-                )
+                semanticModel,
+                position,
+                document.Project.Solution.Workspace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -303,8 +304,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 {
                     var linkedDocument = solution.GetDocument(linkedDocumentId);
                     var linkedSyntaxRoot = await linkedDocument.GetSyntaxRootAsync(
-                            cancellationToken
-                        )
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     var linkedNode = linkedSyntaxRoot.FindNode(
                         location.Span,
@@ -312,8 +313,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     );
 
                     var semanticModel = await linkedDocument.GetSemanticModelAsync(
-                            cancellationToken
-                        )
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     var linkedSymbol = semanticModel.GetDeclaredSymbol(
                         linkedNode,

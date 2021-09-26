@@ -36,10 +36,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         )
         {
             var razorSpans = await _razorSpanMappingService.MapSpansAsync(
-                    document,
-                    spans,
-                    cancellationToken
-                )
+                document,
+                spans,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var roslynSpans = new MappedSpanResult[razorSpans.Length];
             for (var i = 0; i < razorSpans.Length; i++)

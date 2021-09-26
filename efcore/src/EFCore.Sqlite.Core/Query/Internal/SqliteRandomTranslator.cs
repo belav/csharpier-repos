@@ -19,11 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteRandomTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _methodInfo =
-            typeof(DbFunctionsExtensions).GetRequiredMethod(
-                nameof(DbFunctionsExtensions.Random),
-                typeof(DbFunctions)
-            );
+        private static readonly MethodInfo _methodInfo = typeof(DbFunctionsExtensions)
+            .GetRequiredMethod(nameof(DbFunctionsExtensions.Random), typeof(DbFunctions));
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 

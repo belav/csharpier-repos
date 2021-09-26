@@ -78,11 +78,11 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 try
                 {
                     await BuildServerConnection.MonitorDisconnectAsync(
-                            Stream,
-                            request.RequestId,
-                            Logger,
-                            DisconnectCancellationTokenSource.Token
-                        )
+                        Stream,
+                        request.RequestId,
+                        Logger,
+                        DisconnectCancellationTokenSource.Token
+                    )
                         .ConfigureAwait(false);
                 }
                 catch (Exception ex)

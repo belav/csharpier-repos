@@ -337,11 +337,12 @@ namespace Microsoft.NET.HostModel.Bundle
                     )
                     {
                         if (
-                            !string.Equals(
-                                fileSpec.SourcePath,
-                                existingFileSpec.SourcePath,
-                                StringComparison.Ordinal
-                            )
+                            !string
+                                .Equals(
+                                    fileSpec.SourcePath,
+                                    existingFileSpec.SourcePath,
+                                    StringComparison.Ordinal
+                                )
                         )
                         {
                             throw new ArgumentException(

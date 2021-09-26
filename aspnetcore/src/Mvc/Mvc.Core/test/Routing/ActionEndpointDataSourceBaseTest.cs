@@ -104,16 +104,15 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 );
 
             CancellationTokenSource cts = null;
-            actionDescriptorCollectionProviderMock.Setup(m => m.GetChangeToken())
-                .Returns(
-                    () =>
-                    {
-                        cts = new CancellationTokenSource();
-                        var changeToken = new CancellationChangeToken(cts.Token);
+            actionDescriptorCollectionProviderMock.Setup(m => m.GetChangeToken()).Returns(
+                () =>
+                {
+                    cts = new CancellationTokenSource();
+                    var changeToken = new CancellationChangeToken(cts.Token);
 
-                        return changeToken;
-                    }
-                );
+                    return changeToken;
+                }
+            );
 
             var dataSource = CreateDataSource(actionDescriptorCollectionProviderMock.Object);
 

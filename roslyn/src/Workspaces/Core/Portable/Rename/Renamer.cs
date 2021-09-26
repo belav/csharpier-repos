@@ -37,13 +37,13 @@ namespace Microsoft.CodeAnalysis.Rename
                 throw new ArgumentException(nameof(newName));
 
             var resolution = await RenameSymbolAsync(
-                    solution,
-                    symbol,
-                    newName,
-                    RenameOptionSet.From(solution, optionSet),
-                    nonConflictSymbols: null,
-                    cancellationToken
-                )
+                solution,
+                symbol,
+                newName,
+                RenameOptionSet.From(solution, optionSet),
+                nonConflictSymbols: null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // This is a public entry-point.  So if rename failed to resolve conflicts, we report that back to caller as
@@ -104,10 +104,10 @@ namespace Microsoft.CodeAnalysis.Rename
             if (newDocumentName != null && !newDocumentName.Equals(document.Name))
             {
                 var renameAction = await RenameSymbolDocumentAction.TryCreateAsync(
-                        document,
-                        newDocumentName,
-                        cancellationToken
-                    )
+                    document,
+                    newDocumentName,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 actions.AddIfNotNull(renameAction);
             }
@@ -169,9 +169,9 @@ namespace Microsoft.CodeAnalysis.Rename
                 )
                 {
                     var client = await RemoteHostClient.TryGetClientAsync(
-                            solution.Workspace,
-                            cancellationToken
-                        )
+                        solution.Workspace,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (client != null)
                     {
@@ -190,22 +190,23 @@ namespace Microsoft.CodeAnalysis.Rename
                             IRemoteRenamerService,
                             SerializableConflictResolution?
                         >(
-                                solution,
-                                (service, solutionInfo, cancellationToken) =>
-                                    service.RenameSymbolAsync(
-                                        solutionInfo,
-                                        serializedSymbol,
-                                        newName,
-                                        options,
-                                        nonConflictSymbolIds,
-                                        cancellationToken
-                                    ),
-                                cancellationToken
-                            )
+                            solution,
+                            (service, solutionInfo, cancellationToken) =>
+                                service.RenameSymbolAsync(
+                                    solutionInfo,
+                                    serializedSymbol,
+                                    newName,
+                                    options,
+                                    nonConflictSymbolIds,
+                                    cancellationToken
+                                ),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         if (result.HasValue && result.Value != null)
-                            return await result.Value.RehydrateAsync(solution, cancellationToken)
+                            return await result.Value
+                                .RehydrateAsync(solution, cancellationToken)
                                 .ConfigureAwait(false);
                         // TODO: do not fall back to in-proc if client is available (https://github.com/dotnet/roslyn/issues/47557)
                     }
@@ -213,13 +214,13 @@ namespace Microsoft.CodeAnalysis.Rename
             }
 
             return await RenameSymbolInCurrentProcessAsync(
-                    solution,
-                    symbol,
-                    newName,
-                    optionSet,
-                    nonConflictSymbols,
-                    cancellationToken
-                )
+                solution,
+                symbol,
+                newName,
+                optionSet,
+                nonConflictSymbols,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -239,17 +240,17 @@ namespace Microsoft.CodeAnalysis.Rename
             cancellationToken.ThrowIfCancellationRequested();
 
             var renameLocations = await FindRenameLocationsAsync(
-                    solution,
-                    symbol,
-                    optionSet,
-                    cancellationToken
-                )
+                solution,
+                symbol,
+                optionSet,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return await renameLocations.ResolveConflictsAsync(
-                    newName,
-                    nonConflictSymbols,
-                    cancellationToken
-                )
+                newName,
+                nonConflictSymbols,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

@@ -472,10 +472,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                             );
                         }
                         else if (
-                            !transport.TransferFormats!.Contains(
-                                transferFormatString,
-                                StringComparer.Ordinal
-                            )
+                            !transport.TransferFormats!
+                                .Contains(transferFormatString, StringComparer.Ordinal)
                         )
                         {
                             Log.TransportDoesNotSupportTransferFormat(
@@ -742,11 +740,12 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                 {
                     // Check if the key is User-Agent and remove if empty string then replace if it exists.
                     if (
-                        string.Equals(
-                            header.Key,
-                            Constants.UserAgent,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                header.Key,
+                                Constants.UserAgent,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         userSetUserAgent = true;
@@ -776,10 +775,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
             // so allowing a user to set an empty one avoids throwing on those frameworks.
             if (!userSetUserAgent)
             {
-                httpClient.DefaultRequestHeaders.Add(
-                    Constants.UserAgent,
-                    Constants.UserAgentHeader
-                );
+                httpClient.DefaultRequestHeaders
+                    .Add(Constants.UserAgent, Constants.UserAgentHeader);
             }
 
             httpClient.DefaultRequestHeaders.Remove("X-Requested-With");

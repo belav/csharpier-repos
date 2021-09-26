@@ -118,7 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 7,
-                new ClrPropertyGetterFactory().Create((IPropertyBase)idProperty)
+                new ClrPropertyGetterFactory()
+                    .Create((IPropertyBase)idProperty)
                     .GetClrValue(new Customer { Id = 7 })
             );
         }
@@ -128,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             Assert.Equal(
                 7,
-                new ClrPropertyGetterFactory().Create(typeof(Customer).GetAnyProperty("Id"))
+                new ClrPropertyGetterFactory()
+                    .Create(typeof(Customer).GetAnyProperty("Id"))
                     .GetClrValue(new Customer { Id = 7 })
             );
         }
@@ -143,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 new Fuel(1.0),
-                new ClrPropertyGetterFactory().Create((IPropertyBase)fuelProperty)
+                new ClrPropertyGetterFactory()
+                    .Create((IPropertyBase)fuelProperty)
                     .GetClrValue(new Customer { Id = 7, Fuel = new Fuel(1.0) })
             );
         }
@@ -153,7 +156,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             Assert.Equal(
                 new Fuel(1.0),
-                new ClrPropertyGetterFactory().Create(typeof(Customer).GetAnyProperty("Fuel"))
+                new ClrPropertyGetterFactory()
+                    .Create(typeof(Customer).GetAnyProperty("Fuel"))
                     .GetClrValue(new Customer { Id = 7, Fuel = new Fuel(1.0) })
             );
         }
@@ -171,12 +175,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 "ValueA",
-                new ClrPropertyGetterFactory().Create((IPropertyBase)propertyA)
+                new ClrPropertyGetterFactory()
+                    .Create((IPropertyBase)propertyA)
                     .GetClrValue(new IndexedClass { Id = 7 })
             );
             Assert.Equal(
                 123,
-                new ClrPropertyGetterFactory().Create((IPropertyBase)propertyB)
+                new ClrPropertyGetterFactory()
+                    .Create((IPropertyBase)propertyB)
                     .GetClrValue(new IndexedClass { Id = 7 })
             );
         }

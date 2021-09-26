@@ -124,9 +124,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_IList_IsReadOnly()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
-            );
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }
+                .GroupBy(i => i % 2 == 0);
             foreach (IList<int> grouping in oddsEvens)
             {
                 Assert.True(grouping.IsReadOnly);
@@ -136,9 +135,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_IList_NotSupported()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
-            );
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }
+                .GroupBy(i => i % 2 == 0);
             foreach (IList<int> grouping in oddsEvens)
             {
                 Assert.Throws<NotSupportedException>(() => grouping.Add(5));
@@ -153,9 +151,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_IList_IndexerGetter()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
-            );
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }
+                .GroupBy(i => i % 2 == 0);
             var e = oddsEvens.GetEnumerator();
 
             Assert.True(e.MoveNext());
@@ -172,9 +169,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_IList_IndexGetterOutOfRange()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
-            );
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }
+                .GroupBy(i => i % 2 == 0);
             var e = oddsEvens.GetEnumerator();
 
             Assert.True(e.MoveNext());
@@ -186,9 +182,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_ICollection_Contains()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
-            );
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }
+                .GroupBy(i => i % 2 == 0);
             var e = oddsEvens.GetEnumerator();
 
             Assert.True(e.MoveNext());
@@ -209,9 +204,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Grouping_IList_IndexOf()
         {
-            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }.GroupBy(
-                i => i % 2 == 0
-            );
+            IEnumerable<IGrouping<bool, int>> oddsEvens = new int[] { 1, 2, 3, 4 }
+                .GroupBy(i => i % 2 == 0);
             var e = oddsEvens.GetEnumerator();
 
             Assert.True(e.MoveNext());
@@ -261,7 +255,8 @@ namespace System.Linq.Tests
             int[] element = {  };
             Record[] source = {  };
             Assert.Empty(
-                new Record[] {  }.RunOnce()
+                new Record[] {  }
+                    .RunOnce()
                     .GroupBy(e => e.Name, e => e.Score, new AnagramEqualityComparer())
             );
         }
@@ -536,12 +531,13 @@ namespace System.Linq.Tests
             int[] element = {  };
             Record[] source = {  };
             Assert.Empty(
-                new Record[] {  }.GroupBy(
-                    e => e.Name,
-                    e => e.Score,
-                    (k, es) => (long)(k ?? " ").Length * es.Sum(),
-                    new AnagramEqualityComparer()
-                )
+                new Record[] {  }
+                    .GroupBy(
+                        e => e.Name,
+                        e => e.Score,
+                        (k, es) => (long)(k ?? " ").Length * es.Sum(),
+                        new AnagramEqualityComparer()
+                    )
             );
         }
 

@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                         NotificationOption2.None
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -118,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                         NotificationOption2.None
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -154,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(48070, "https://github.com/dotnet/roslyn/issues/48070")]
@@ -203,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -241,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                         NotificationOption2.None
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -279,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                         NotificationOption2.Silent
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -317,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -350,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -389,7 +397,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                         UnusedValuePreference.DiscardVariable
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -418,7 +427,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                         UnusedValuePreference.UnusedLocalVariable
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -454,7 +464,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -492,7 +503,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -559,7 +571,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -629,7 +642,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -665,7 +679,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -701,7 +716,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -741,7 +757,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -781,7 +798,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -825,7 +843,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -869,7 +888,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -913,7 +933,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -957,7 +978,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                     },
                 },
                 LanguageVersion = LanguageVersion.CSharp6,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -1000,7 +1022,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -1036,7 +1059,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -1096,7 +1120,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -1323,7 +1348,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -1417,7 +1443,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -1457,7 +1484,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -1563,7 +1591,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -1602,7 +1631,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -1642,7 +1672,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 {
                     { CSharpCodeStyleOptions.UnusedValueAssignment, (UnusedValuePreference)option },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -2886,7 +2917,8 @@ class Q
                         UnusedValuePreference.DiscardVariable
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -3113,7 +3145,8 @@ class Q
                         UnusedValuePreference.DiscardVariable
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(32271, "https://github.com/dotnet/roslyn/issues/32271")]
@@ -3254,7 +3287,8 @@ class Q
                         UnusedValuePreference.DiscardVariable
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(32271, "https://github.com/dotnet/roslyn/issues/32271")]
@@ -8580,7 +8614,8 @@ class C
                         UnusedValuePreference.DiscardVariable
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(33949, "https://github.com/dotnet/roslyn/issues/33949")]
@@ -8965,9 +9000,8 @@ class C : IDisposable
     }
 }",
                 options: PreferDiscard,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp9
-                )
+                parseOptions: CSharpParseOptions.Default
+                    .WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }
 
@@ -8991,9 +9025,8 @@ class C : IDisposable
     }
 }",
                 options: PreferDiscard,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp9
-                )
+                parseOptions: CSharpParseOptions.Default
+                    .WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }
 
@@ -9269,7 +9302,8 @@ public class Test
                         UnusedValuePreference.DiscardVariable
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(40499, "https://github.com/dotnet/roslyn/issues/40499")]
@@ -9399,7 +9433,8 @@ public class Test
                         UnusedValuePreference.DiscardVariable
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]

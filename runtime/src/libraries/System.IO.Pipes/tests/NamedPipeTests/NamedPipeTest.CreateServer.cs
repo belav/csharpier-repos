@@ -170,7 +170,8 @@ namespace System.IO.Pipes.Tests
                 PipeStreamConformanceTests.GetUniquePipeName(),
                 PipeDirection.Out,
                 1
-            ).Dispose();
+            )
+                .Dispose();
         }
 
         [Fact]

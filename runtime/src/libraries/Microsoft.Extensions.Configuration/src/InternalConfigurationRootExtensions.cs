@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.Configuration
             string path
         )
         {
-            return root.Providers.Aggregate(
+            return root.Providers
+                .Aggregate(
                     Enumerable.Empty<string>(),
                     (seed, source) => source.GetChildKeys(seed, path)
                 )

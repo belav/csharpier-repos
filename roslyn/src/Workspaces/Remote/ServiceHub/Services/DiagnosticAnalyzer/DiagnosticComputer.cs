@@ -78,10 +78,10 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         {
             var (compilationWithAnalyzers, analyzerToIdMap) =
                 await GetOrCreateCompilationWithAnalyzersAsync(
-                        _project,
-                        isDocumentAnalysis: _document != null,
-                        cancellationToken
-                    )
+                    _project,
+                    isDocumentAnalysis: _document != null,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             var analyzers = GetAnalyzers(analyzerToIdMap, analyzerIds);
@@ -93,29 +93,27 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             if (_document == null && analyzers.Length < compilationWithAnalyzers.Analyzers.Length)
             {
                 // PERF: Generate a new CompilationWithAnalyzers with trimmed analyzers for non-document analysis case.
-                compilationWithAnalyzers = compilationWithAnalyzers.Compilation.WithAnalyzers(
-                    analyzers,
-                    compilationWithAnalyzers.AnalysisOptions
-                );
+                compilationWithAnalyzers = compilationWithAnalyzers.Compilation
+                    .WithAnalyzers(analyzers, compilationWithAnalyzers.AnalysisOptions);
             }
 
-            var cacheService =
-                _project.Solution.Workspace.Services.GetRequiredService<IProjectCacheService>();
+            var cacheService = _project.Solution.Workspace.Services
+                .GetRequiredService<IProjectCacheService>();
             using var cache = cacheService.EnableCaching(_project.Id);
             var skippedAnalyzersInfo = _project.GetSkippedAnalyzersInfo(_analyzerInfoCache);
 
             try
             {
                 return await AnalyzeAsync(
-                        compilationWithAnalyzers,
-                        analyzerToIdMap,
-                        analyzers,
-                        skippedAnalyzersInfo,
-                        reportSuppressedDiagnostics,
-                        logPerformanceInfo,
-                        getTelemetryInfo,
-                        cancellationToken
-                    )
+                    compilationWithAnalyzers,
+                    analyzerToIdMap,
+                    analyzers,
+                    skippedAnalyzersInfo,
+                    reportSuppressedDiagnostics,
+                    logPerformanceInfo,
+                    getTelemetryInfo,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch
@@ -144,11 +142,11 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
             var (analysisResult, additionalPragmaSuppressionDiagnostics) =
                 await compilationWithAnalyzers.GetAnalysisResultAsync(
-                        documentAnalysisScope,
-                        _project,
-                        _analyzerInfoCache,
-                        cancellationToken
-                    )
+                    documentAnalysisScope,
+                    _project,
+                    _analyzerInfoCache,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             // Record performance if tracker is available
@@ -157,24 +155,23 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 // +1 to include project itself
                 var unitCount = documentAnalysisScope != null ? 1 : _project.DocumentIds.Count + 1;
                 _performanceTracker.AddSnapshot(
-                    analysisResult.AnalyzerTelemetryInfo.ToAnalyzerPerformanceInfo(
-                        _analyzerInfoCache
-                    ),
+                    analysisResult.AnalyzerTelemetryInfo
+                        .ToAnalyzerPerformanceInfo(_analyzerInfoCache),
                     unitCount
                 );
             }
 
             var builderMap = await analysisResult.ToResultBuilderMapAsync(
-                    additionalPragmaSuppressionDiagnostics,
-                    documentAnalysisScope,
-                    _project,
-                    VersionStamp.Default,
-                    compilationWithAnalyzers.Compilation,
-                    analyzers,
-                    skippedAnalyzersInfo,
-                    reportSuppressedDiagnostics,
-                    cancellationToken
-                )
+                additionalPragmaSuppressionDiagnostics,
+                documentAnalysisScope,
+                _project,
+                VersionStamp.Default,
+                compilationWithAnalyzers.Compilation,
+                analyzers,
+                skippedAnalyzersInfo,
+                reportSuppressedDiagnostics,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var telemetry = getTelemetryInfo
@@ -192,10 +189,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             BidirectionalMap<string, DiagnosticAnalyzer> analyzerToIdMap
         )
         {
-            using var _ =
-                ArrayBuilder<(string analyzerId, SerializableDiagnosticMap diagnosticMap)>.GetInstance(
-                    out var diagnostics
-                );
+            using var _ = ArrayBuilder<(string analyzerId, SerializableDiagnosticMap diagnosticMap)>
+                .GetInstance(out var diagnostics);
 
             foreach (var (analyzer, analyzerResults) in builderMap)
             {
@@ -205,15 +200,12 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                     (
                         analyzerId,
                         new SerializableDiagnosticMap(
-                            analyzerResults.SyntaxLocals.SelectAsArray(
-                                entry => (entry.Key, entry.Value)
-                            ),
-                            analyzerResults.SemanticLocals.SelectAsArray(
-                                entry => (entry.Key, entry.Value)
-                            ),
-                            analyzerResults.NonLocals.SelectAsArray(
-                                entry => (entry.Key, entry.Value)
-                            ),
+                            analyzerResults.SyntaxLocals
+                                .SelectAsArray(entry => (entry.Key, entry.Value)),
+                            analyzerResults.SemanticLocals
+                                .SelectAsArray(entry => (entry.Key, entry.Value)),
+                            analyzerResults.NonLocals
+                                .SelectAsArray(entry => (entry.Key, entry.Value)),
                             analyzerResults.Others
                         )
                     )
@@ -243,9 +235,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 shouldInclude = _ => true;
             }
 
-            using var _2 = ArrayBuilder<(string analyzerId, AnalyzerTelemetryInfo)>.GetInstance(
-                out var telemetryBuilder
-            );
+            using var _2 = ArrayBuilder<(string analyzerId, AnalyzerTelemetryInfo)>
+                .GetInstance(out var telemetryBuilder);
             foreach (var (analyzer, analyzerTelemetry) in analysisResult.AnalyzerTelemetryInfo)
             {
                 if (shouldInclude(analyzer))
@@ -306,9 +297,9 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 {
                     // Only use cache for document analysis.
                     return await CreateCompilationWithAnalyzersCacheEntryAsync(
-                            project,
-                            cancellationToken
-                        )
+                        project,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -318,9 +309,9 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 }
 
                 data = await CreateCompilationWithAnalyzersCacheEntryAsync(
-                        project,
-                        cancellationToken
-                    )
+                    project,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return s_compilationWithAnalyzersCache.GetValue(project, _ => data);
             }
@@ -341,9 +332,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             // This follows what we do in DiagnosticAnalyzerInfoCache.CheckAnalyzerReferenceIdentity
             using var _ = ArrayBuilder<DiagnosticAnalyzer>.GetInstance(out var analyzerBuilder);
             foreach (
-                var reference in project.Solution.AnalyzerReferences.Concat(
-                    project.AnalyzerReferences
-                )
+                var reference in project.Solution.AnalyzerReferences
+                    .Concat(project.AnalyzerReferences)
             )
             {
                 if (!referenceSet.Add(reference.Id))
@@ -357,10 +347,10 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             }
 
             var compilationWithAnalyzers = await CreateCompilationWithAnalyzerAsync(
-                    project,
-                    analyzerBuilder.ToImmutable(),
-                    cancellationToken
-                )
+                project,
+                analyzerBuilder.ToImmutable(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var analyzerToIdMap = new BidirectionalMap<string, DiagnosticAnalyzer>(
                 analyzerMapBuilder

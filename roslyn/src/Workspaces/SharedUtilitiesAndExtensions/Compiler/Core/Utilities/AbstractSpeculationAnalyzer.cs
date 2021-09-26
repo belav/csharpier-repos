@@ -195,8 +195,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 );
                 _lazyReplacedExpression =
                     (TExpressionSyntax)_lazySemanticRootOfReplacedExpression.GetAnnotatedNodesAndTokens(
-                            annotation
-                        )
+                        annotation
+                    )
                         .Single()
                         .AsNode()!;
             }
@@ -242,12 +242,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             RoslynDebug.AssertNotNull(originalExpression);
             Debug.Assert(
-                this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfOriginalExpression
+                    .DescendantNodesAndSelf()
                     .Contains(originalExpression)
             );
             RoslynDebug.AssertNotNull(newExpression);
             Debug.Assert(
-                this.SemanticRootOfReplacedExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfReplacedExpression
+                    .DescendantNodesAndSelf()
                     .Contains(newExpression)
             );
 
@@ -269,12 +271,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             RoslynDebug.AssertNotNull(originalExpression);
             Debug.Assert(
-                this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfOriginalExpression
+                    .DescendantNodesAndSelf()
                     .Contains(originalExpression)
             );
             RoslynDebug.AssertNotNull(newExpression);
             Debug.Assert(
-                this.SemanticRootOfReplacedExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfReplacedExpression
+                    .DescendantNodesAndSelf()
                     .Contains(newExpression)
             );
 
@@ -290,12 +294,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             RoslynDebug.AssertNotNull(originalExpression);
             Debug.Assert(
-                this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfOriginalExpression
+                    .DescendantNodesAndSelf()
                     .Contains(originalExpression)
             );
             RoslynDebug.AssertNotNull(newExpression);
             Debug.Assert(
-                this.SemanticRootOfReplacedExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfReplacedExpression
+                    .DescendantNodesAndSelf()
                     .Contains(newExpression)
             );
 
@@ -311,12 +317,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             RoslynDebug.AssertNotNull(originalExpression);
             Debug.Assert(
-                this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfOriginalExpression
+                    .DescendantNodesAndSelf()
                     .Contains(originalExpression)
             );
             RoslynDebug.AssertNotNull(newExpression);
             Debug.Assert(
-                this.SemanticRootOfReplacedExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfReplacedExpression
+                    .DescendantNodesAndSelf()
                     .Contains(newExpression)
             );
 
@@ -337,12 +345,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             RoslynDebug.AssertNotNull(originalExpression);
             Debug.Assert(
-                this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfOriginalExpression
+                    .DescendantNodesAndSelf()
                     .Contains(originalExpression)
             );
             RoslynDebug.AssertNotNull(newExpression);
             Debug.Assert(
-                this.SemanticRootOfReplacedExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfReplacedExpression
+                    .DescendantNodesAndSelf()
                     .Contains(newExpression)
             );
             RoslynDebug.AssertNotNull(originalTargetType);
@@ -377,7 +387,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             RoslynDebug.AssertNotNull(originalNode);
             Debug.Assert(
-                this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfOriginalExpression
+                    .DescendantNodesAndSelf()
                     .Contains(originalNode)
             );
             RoslynDebug.AssertNotNull(newNode);
@@ -563,7 +574,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         methodSymbol.ReturnType,
                         newMethodSymbol.ReturnType
                     )
-                    && methodSymbol.Parameters.Zip(newMethodSymbol.Parameters, (p1, p2) => (p1, p2))
+                    && methodSymbol.Parameters
+                        .Zip(newMethodSymbol.Parameters, (p1, p2) => (p1, p2))
                         .All(t => CompareAcrossSemanticModels(t.p1, t.p2));
             }
 
@@ -860,11 +872,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     forEachStatement,
                     _cancellationToken
                 );
-                var newLocal =
-                    (ILocalSymbol)this.SpeculativeSemanticModel.GetRequiredDeclaredSymbol(
-                        newForEachStatement,
-                        _cancellationToken
-                    );
+                var newLocal = (ILocalSymbol)this.SpeculativeSemanticModel
+                    .GetRequiredDeclaredSymbol(newForEachStatement, _cancellationToken);
                 if (!SymbolsAreCompatible(local.Type, newLocal.Type))
                 {
                     return true;
@@ -947,10 +956,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 if (getEnumerator.IsImplementableMember())
                 {
                     var expressionType =
-                        this.SpeculativeSemanticModel.GetTypeInfo(
-                            newForEachStatementExpression,
-                            _cancellationToken
-                        ).ConvertedType;
+                        this.SpeculativeSemanticModel
+                            .GetTypeInfo(
+                                newForEachStatementExpression,
+                                _cancellationToken
+                            ).ConvertedType;
                     if (expressionType != null)
                     {
                         var implementationMember =
@@ -1021,11 +1031,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     ? SpeculativeBindingOption.BindAsTypeOrNamespace
                     : SpeculativeBindingOption.BindAsExpression;
                 newSymbol =
-                    this.OriginalSemanticModel.GetSpeculativeSymbolInfo(
-                        type.SpanStart,
-                        newType,
-                        bindingOption
-                    ).Symbol;
+                    this.OriginalSemanticModel
+                        .GetSpeculativeSymbolInfo(type.SpanStart, newType, bindingOption).Symbol;
             }
 
             return symbol != null && !SymbolsAreCompatible(symbol, newSymbol);
@@ -1426,10 +1433,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 if (parameter1.HasExplicitDefaultValue && parameter2.HasExplicitDefaultValue)
                 {
                     if (
-                        !object.Equals(
-                            parameter2.ExplicitDefaultValue,
-                            parameter1.ExplicitDefaultValue
-                        )
+                        !object
+                            .Equals(
+                                parameter2.ExplicitDefaultValue,
+                                parameter1.ExplicitDefaultValue
+                            )
                     )
                     {
                         return false;
@@ -1439,12 +1447,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     {
                         RoslynDebug.Assert(object.Equals(parameter2.ExplicitDefaultValue, 0.0));
 
-                        var isParam1DefaultValueNegativeZero = double.IsNegativeInfinity(
-                            1.0 / (double)parameter1.ExplicitDefaultValue
-                        );
-                        var isParam2DefaultValueNegativeZero = double.IsNegativeInfinity(
-                            1.0 / (double)parameter2.ExplicitDefaultValue
-                        );
+                        var isParam1DefaultValueNegativeZero = double
+                            .IsNegativeInfinity(1.0 / (double)parameter1.ExplicitDefaultValue);
+                        var isParam2DefaultValueNegativeZero = double
+                            .IsNegativeInfinity(1.0 / (double)parameter2.ExplicitDefaultValue);
                         if (isParam1DefaultValueNegativeZero != isParam2DefaultValueNegativeZero)
                         {
                             return false;

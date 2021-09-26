@@ -1152,8 +1152,8 @@ class C1 { }
             );
             var tree = compilation.SyntaxTrees.Single();
             var usingDirective = (UsingDirectiveSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.UsingDirective
-                )
+                SyntaxKind.UsingDirective
+            )
                 .AsNode();
             var model = compilation.GetSemanticModel(tree);
             var type = model.GetTypeInfo(usingDirective.Name);
@@ -1536,10 +1536,10 @@ class D<T>
             Assert.Equal(
                 9,
                 symbolsInC.Where(
-                        s =>
-                            s.ContainingType == null
-                            || s.ContainingType.SpecialType != SpecialType.System_Object
-                    )
+                    s =>
+                        s.ContainingType == null
+                        || s.ContainingType.SpecialType != SpecialType.System_Object
+                )
                     .Count()
             );
             Assert.True(symbolsInC.Any(s => s.Name == "A" && s.Kind == SymbolKind.NamedType));
@@ -1980,11 +1980,11 @@ static class S2
 
             // All extension methods available for specific type.
             var symbols = model.LookupSymbols(
-                    typeDeclStart,
-                    type,
-                    name: null,
-                    includeReducedExtensionMethods: true
-                )
+                typeDeclStart,
+                type,
+                name: null,
+                includeReducedExtensionMethods: true
+            )
                 .WhereAsArray(isExtensionMethod);
             CheckSymbolsUnordered(
                 symbols,
@@ -2040,11 +2040,11 @@ static class S2
             // All extension methods for base type.
             var baseType = compilation.GetSpecialType(SpecialType.System_Object);
             symbols = model.LookupSymbols(
-                    namespaceStart,
-                    baseType,
-                    name: null,
-                    includeReducedExtensionMethods: true
-                )
+                namespaceStart,
+                baseType,
+                name: null,
+                includeReducedExtensionMethods: true
+            )
                 .WhereAsArray(isExtensionMethod);
             CheckSymbolsUnordered(
                 symbols,
@@ -2057,31 +2057,31 @@ static class S2
             // All extension methods of specific name for value type.
             var valueType = compilation.GetSpecialType(SpecialType.System_Int32);
             symbols = model.LookupSymbols(
-                    typeDeclStart,
-                    valueType,
-                    name: "E",
-                    includeReducedExtensionMethods: true
-                )
+                typeDeclStart,
+                valueType,
+                name: "E",
+                includeReducedExtensionMethods: true
+            )
                 .WhereAsArray(isExtensionMethod);
             CheckSymbolsUnordered(symbols, "void object.E(int x)");
 
             // Skip extension methods for which there are no "this" arg conversions.
             symbols = model.LookupSymbols(
-                    namespaceStart,
-                    valueType,
-                    name: "H",
-                    includeReducedExtensionMethods: true
-                )
+                namespaceStart,
+                valueType,
+                name: "H",
+                includeReducedExtensionMethods: true
+            )
                 .WhereAsArray(isExtensionMethod);
             CheckSymbolsUnordered(symbols, "void int.H()");
 
             // All extension methods of unrecognized name.
             symbols = model.LookupSymbols(
-                    typeDeclStart,
-                    type,
-                    name: "C",
-                    includeReducedExtensionMethods: true
-                )
+                typeDeclStart,
+                type,
+                name: "C",
+                includeReducedExtensionMethods: true
+            )
                 .WhereAsArray(isExtensionMethod);
             CheckSymbolsUnordered(symbols);
         }
@@ -2209,11 +2209,11 @@ static class S
 
             // Extension methods for B<string>
             symbols = model.LookupSymbols(
-                    methodStart,
-                    typeB,
-                    name: null,
-                    includeReducedExtensionMethods: true
-                )
+                methodStart,
+                typeB,
+                name: null,
+                includeReducedExtensionMethods: true
+            )
                 .WhereAsArray(isExtensionMethod);
             CheckSymbolsUnordered(
                 symbols,
@@ -2229,11 +2229,11 @@ static class S
 
             // Extension methods for A<int>
             symbols = model.LookupSymbols(
-                    methodStart,
-                    typeA,
-                    name: null,
-                    includeReducedExtensionMethods: true
-                )
+                methodStart,
+                typeA,
+                name: null,
+                includeReducedExtensionMethods: true
+            )
                 .WhereAsArray(isExtensionMethod);
             CheckSymbolsUnordered(
                 symbols,
@@ -2273,7 +2273,8 @@ static class E
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
             var position = source.IndexOf("a.F()", StringComparison.Ordinal);
-            var method = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("E")
+            var method = compilation.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("E")
                 .GetMember<IMethodSymbol>("M");
 
             // No type.
@@ -2332,7 +2333,8 @@ static class E
             tree = compilation.SyntaxTrees.Single();
             model = compilation.GetSemanticModel(tree);
             position = source.IndexOf("a.F()", StringComparison.Ordinal);
-            method = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            method = compilation.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>("M");
 
             // No type.
@@ -5301,7 +5303,8 @@ class C
 
             var compilation = (Compilation)CreateCompilation(source);
 
-            var conversion = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var conversion = compilation.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>(WellKnownMemberNames.ImplicitConversionName);
             Assert.Equal(MethodKind.Conversion, conversion.MethodKind);
 
@@ -5340,7 +5343,8 @@ class C
 
             var compilation = (Compilation)CreateCompilation(source);
 
-            var conversion = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var conversion = compilation.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>(WellKnownMemberNames.ExplicitConversionName);
             Assert.Equal(MethodKind.Conversion, conversion.MethodKind);
 
@@ -5379,7 +5383,8 @@ class C
 
             var compilation = (Compilation)CreateCompilation(source);
 
-            var @operator = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var @operator = compilation.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>(WellKnownMemberNames.AdditionOperatorName);
             Assert.Equal(MethodKind.UserDefinedOperator, @operator.MethodKind);
 
@@ -5568,7 +5573,8 @@ class Other
                     .WithArguments("Enclosing.Declaring.E")
             );
 
-            var declaringType = compilation.GlobalNamespace.GetMember<ITypeSymbol>("Enclosing")
+            var declaringType = compilation.GlobalNamespace
+                .GetMember<ITypeSymbol>("Enclosing")
                 .GetMember<ITypeSymbol>("Declaring");
             var fieldLikeEvent = declaringType.GetMember<IEventSymbol>("E");
             var customEvent = declaringType.GetMember<IEventSymbol>("F");

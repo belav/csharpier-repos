@@ -175,10 +175,8 @@ class TypeToString
             string typeName = testType.ToString();
             actualValue = (
                 0
-                == string.CompareOrdinal(
-                    typeName,
-                    "System.Collections.Generic.List`1[System.String]"
-                )
+                == string
+                    .CompareOrdinal(typeName, "System.Collections.Generic.List`1[System.String]")
             );
             if (actualValue != expectedValue)
             {
@@ -218,10 +216,11 @@ class TypeToString
             string typeName = testType.ToString();
             actualValue = (
                 0
-                == string.CompareOrdinal(
-                    typeName,
-                    "TestHelper.Foo`2[System.Collections.Generic.List`1[System.Int32],System.String]"
-                )
+                == string
+                    .CompareOrdinal(
+                        typeName,
+                        "TestHelper.Foo`2[System.Collections.Generic.List`1[System.Int32],System.String]"
+                    )
             );
             if (actualValue != expectedValue)
             {

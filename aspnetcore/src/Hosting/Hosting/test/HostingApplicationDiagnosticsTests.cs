@@ -105,10 +105,11 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                 new CallbackDiagnosticListener(
                     pair =>
                     {
-                        eventsFired |= pair.Key.StartsWith(
-                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                            StringComparison.Ordinal
-                        );
+                        eventsFired |= pair.Key
+                            .StartsWith(
+                                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                                StringComparison.Ordinal
+                            );
                     }
                 ),
                 (s, o, arg3) =>
@@ -150,10 +151,11 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                 new CallbackDiagnosticListener(
                     pair =>
                     {
-                        eventsFired |= pair.Key.StartsWith(
-                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                            StringComparison.Ordinal
-                        );
+                        eventsFired |= pair.Key
+                            .StartsWith(
+                                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                                StringComparison.Ordinal
+                            );
                     }
                 ),
                 (s, o, arg3) =>

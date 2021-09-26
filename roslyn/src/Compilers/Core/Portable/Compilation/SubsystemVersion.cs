@@ -109,12 +109,13 @@ namespace Microsoft.CodeAnalysis
 
                 if (
                     major != major.Trim()
-                    || !int.TryParse(
-                        major,
-                        NumberStyles.None,
-                        CultureInfo.InvariantCulture,
-                        out majorValue
-                    )
+                    || !int
+                        .TryParse(
+                            major,
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out majorValue
+                        )
                     || majorValue >= 65356
                     || majorValue < 0
                 )
@@ -130,12 +131,13 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (
                         minor != minor.Trim()
-                        || !int.TryParse(
-                            minor,
-                            NumberStyles.None,
-                            CultureInfo.InvariantCulture,
-                            out minorValue
-                        )
+                        || !int
+                            .TryParse(
+                                minor,
+                                NumberStyles.None,
+                                CultureInfo.InvariantCulture,
+                                out minorValue
+                            )
                         || minorValue >= 65356
                         || minorValue < 0
                     )

@@ -51,20 +51,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return Array.Empty<SymbolInformation>();
             }
 
-            var navBarService =
-                document.Project.LanguageServices.GetRequiredService<INavigationBarItemService>();
+            var navBarService = document.Project.LanguageServices
+                .GetRequiredService<INavigationBarItemService>();
             var navBarItems = await navBarService.GetItemsAsync(
-                    document,
-                    supportsCodeGeneration: false,
-                    cancellationToken
-                )
+                document,
+                supportsCodeGeneration: false,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (navBarItems.IsEmpty)
             {
                 return Array.Empty<object>();
             }
 
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -83,12 +84,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     // only top level ones
                     symbols.AddIfNotNull(
                         await GetDocumentSymbolAsync(
-                                item,
-                                compilation,
-                                tree,
-                                text,
-                                cancellationToken
-                            )
+                            item,
+                            compilation,
+                            tree,
+                            text,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     );
                 }
@@ -214,12 +215,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Range = ProtocolConversions.TextSpanToRange(item.Spans.First(), text),
                 SelectionRange = ProtocolConversions.TextSpanToRange(location.SourceSpan, text),
                 Children = await GetChildrenAsync(
-                        item.ChildItems,
-                        compilation,
-                        tree,
-                        text,
-                        cancellationToken
-                    )
+                    item.ChildItems,
+                    compilation,
+                    tree,
+                    text,
+                    cancellationToken
+                )
                     .ConfigureAwait(false),
             };
 
@@ -236,12 +237,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 {
                     list.AddIfNotNull(
                         await GetDocumentSymbolAsync(
-                                item,
-                                compilation,
-                                tree,
-                                text,
-                                cancellationToken
-                            )
+                            item,
+                            compilation,
+                            tree,
+                            text,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     );
                 }
@@ -256,7 +257,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             )
             {
                 var model = compilation.GetSemanticModel(location.SourceTree);
-                var root = await model.SyntaxTree.GetRootAsync(cancellationToken)
+                var root = await model.SyntaxTree
+                    .GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var node = root.FindNode(location.SourceSpan);
 
@@ -288,10 +290,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (item is not RoslynNavigationBarItem.SymbolItem symbolItem)
                 return null;
 
-            var symbols = symbolItem.NavigationSymbolId.Resolve(
-                compilation,
-                cancellationToken: cancellationToken
-            );
+            var symbols = symbolItem.NavigationSymbolId
+                .Resolve(compilation, cancellationToken: cancellationToken);
             var symbol = symbols.Symbol;
 
             if (symbol == null)

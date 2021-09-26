@@ -104,19 +104,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
 
             var expectedOutput = new List<string>();
             expectedOutput.Add(
-                string.Format(
-                    CSharpScriptingResources.LogoLine1,
-                    CommonCompiler.GetProductVersion(typeof(CSharpReplServiceProvider))
-                )
+                string
+                    .Format(
+                        CSharpScriptingResources.LogoLine1,
+                        CommonCompiler.GetProductVersion(typeof(CSharpReplServiceProvider))
+                    )
             );
 
             if (UseDefaultInitializationFile)
             {
                 expectedOutput.Add(
-                    string.Format(
-                        InteractiveHostResources.Loading_context_from_0,
-                        initializationFileName
-                    )
+                    string
+                        .Format(
+                            InteractiveHostResources.Loading_context_from_0,
+                            initializationFileName
+                        )
                 );
             }
 
@@ -217,7 +219,8 @@ STDOUT: {_synchronizedOutput}
             var markPrefix = '\uFFFF';
             var mark = markPrefix + Guid.NewGuid().ToString();
 
-            await remoteService!.JsonRpc.InvokeAsync(
+            await remoteService!.JsonRpc
+                .InvokeAsync(
                     nameof(InteractiveHost.Service.RemoteConsoleWriteAsync),
                     InteractiveHost.OutputEncoding.GetBytes(mark),
                     isError
@@ -271,9 +274,8 @@ STDOUT: {_synchronizedOutput}
         {
             var remoteService = await Host.TryGetServiceAsync().ConfigureAwait(false);
             Assert.NotNull(remoteService);
-            return await remoteService!.JsonRpc.InvokeAsync<string>(
-                    nameof(InteractiveHost.Service.GetRuntimeDirectoryAsync)
-                )
+            return await remoteService!.JsonRpc
+                .InvokeAsync<string>(nameof(InteractiveHost.Service.GetRuntimeDirectoryAsync))
                 .ConfigureAwait(false);
         }
     }

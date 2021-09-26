@@ -453,11 +453,12 @@ namespace System.Collections.Concurrent.Tests
                 {
                     Assert.True(
                         s_enumerators[i].IsDisposed(),
-                        string.Format(
-                            "AreEnumeratorsDisposed:  FAILED.  enumerator {0} was not disposed for SCENARIO: {1}.",
-                            i,
-                            scenario
-                        )
+                        string
+                            .Format(
+                                "AreEnumeratorsDisposed:  FAILED.  enumerator {0} was not disposed for SCENARIO: {1}.",
+                                i,
+                                scenario
+                            )
                     );
                 }
             }

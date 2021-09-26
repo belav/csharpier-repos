@@ -113,11 +113,12 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 // the first entry.
                 if (
                     _namedEntries.TryGetValue(entry.RouteName, out var namedMatch)
-                    && !string.Equals(
-                        namedMatch.Entry.RouteTemplate.TemplateText,
-                        entry.RouteTemplate.TemplateText,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !string
+                        .Equals(
+                            namedMatch.Entry.RouteTemplate.TemplateText,
+                            entry.RouteTemplate.TemplateText,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     throw new ArgumentException(
@@ -198,11 +199,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
 
                 // Create a snapshot before processing the route. We'll restore this snapshot before running each
                 // to restore the state. This is likely an "empty" snapshot, which doesn't allocate.
-                var snapshot = context.RouteData.PushState(
-                    router: null,
-                    values: null,
-                    dataTokens: null
-                );
+                var snapshot = context.RouteData
+                    .PushState(router: null, values: null, dataTokens: null);
 
                 while (treeEnumerator.MoveNext())
                 {

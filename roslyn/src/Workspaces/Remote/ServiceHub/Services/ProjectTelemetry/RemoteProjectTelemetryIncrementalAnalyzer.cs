@@ -80,14 +80,10 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             await _callback.InvokeAsync(
-                    (callback, cancellationToken) =>
-                        callback.ReportProjectTelemetryDataAsync(
-                            _callbackId,
-                            info,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                (callback, cancellationToken) =>
+                    callback.ReportProjectTelemetryDataAsync(_callbackId, info, cancellationToken),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

@@ -38,12 +38,11 @@ public readonly struct A
     static int rws {get; set;}
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (11,9): error CS8341: Auto-implemented instance properties in readonly structs must be readonly.
-                    //     int rw {get; set;}
-                    Diagnostic(ErrorCode.ERR_AutoPropsInRoStruct, "rw").WithLocation(11, 9)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (11,9): error CS8341: Auto-implemented instance properties in readonly structs must be readonly.
+                //     int rw {get; set;}
+                Diagnostic(ErrorCode.ERR_AutoPropsInRoStruct, "rw").WithLocation(11, 9)
+            );
         }
 
         [Fact()]
@@ -75,22 +74,21 @@ public readonly struct A
     }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (11,9): error CS8340: Instance fields of readonly structs must be readonly.
-                    //     int x;
-                    Diagnostic(ErrorCode.ERR_FieldsInRoStruct, "x").WithLocation(11, 9),
-                    // (16,9): error CS1604: Cannot assign to 'this' because it is read-only
-                    //         this = default;
-                    Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "this")
-                        .WithArguments("this")
-                        .WithLocation(16, 9),
-                    // (18,9): error CS1604: Cannot assign to 'this.x' because it is read-only
-                    //         this.x = 1;
-                    Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "this.x")
-                        .WithArguments("this.x")
-                        .WithLocation(18, 9)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (11,9): error CS8340: Instance fields of readonly structs must be readonly.
+                //     int x;
+                Diagnostic(ErrorCode.ERR_FieldsInRoStruct, "x").WithLocation(11, 9),
+                // (16,9): error CS1604: Cannot assign to 'this' because it is read-only
+                //         this = default;
+                Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "this")
+                    .WithArguments("this")
+                    .WithLocation(16, 9),
+                // (18,9): error CS1604: Cannot assign to 'this.x' because it is read-only
+                //         this.x = 1;
+                Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "this.x")
+                    .WithArguments("this.x")
+                    .WithLocation(18, 9)
+            );
         }
 
         [Fact()]
@@ -156,25 +154,24 @@ interface I1
     event System.Action ei2;
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (7,32): error CS8342: Field-like events are not allowed in readonly structs.
-                    //     public event System.Action e;
-                    Diagnostic(ErrorCode.ERR_FieldlikeEventsInRoStruct, "e").WithLocation(7, 32),
-                    // (10,25): error CS8342: Field-like events are not allowed in readonly structs.
-                    //     public event Action ei1;
-                    Diagnostic(ErrorCode.ERR_FieldlikeEventsInRoStruct, "ei1").WithLocation(10, 25),
-                    // (43,9): error CS1604: Cannot assign to 'e' because it is read-only
-                    //         e = () => { };
-                    Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "e")
-                        .WithArguments("e")
-                        .WithLocation(43, 9),
-                    // (46,16): error CS1605: Cannot use 'e' as a ref or out value because it is read-only
-                    //         M1(ref e);
-                    Diagnostic(ErrorCode.ERR_RefReadonlyLocal, "e")
-                        .WithArguments("e")
-                        .WithLocation(46, 16)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (7,32): error CS8342: Field-like events are not allowed in readonly structs.
+                //     public event System.Action e;
+                Diagnostic(ErrorCode.ERR_FieldlikeEventsInRoStruct, "e").WithLocation(7, 32),
+                // (10,25): error CS8342: Field-like events are not allowed in readonly structs.
+                //     public event Action ei1;
+                Diagnostic(ErrorCode.ERR_FieldlikeEventsInRoStruct, "ei1").WithLocation(10, 25),
+                // (43,9): error CS1604: Cannot assign to 'e' because it is read-only
+                //         e = () => { };
+                Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "e")
+                    .WithArguments("e")
+                    .WithLocation(43, 9),
+                // (46,16): error CS1605: Cannot use 'e' as a ref or out value because it is read-only
+                //         M1(ref e);
+                Diagnostic(ErrorCode.ERR_RefReadonlyLocal, "e")
+                    .WithArguments("e")
+                    .WithLocation(46, 16)
+            );
         }
 
         [Fact]
@@ -203,19 +200,18 @@ public struct A
     }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (11,9): error CS1604: Cannot assign to 'this' because it is read-only
-                    //         this = default;
-                    Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "this")
-                        .WithArguments("this")
-                        .WithLocation(11, 9),
-                    // (13,9): error CS1604: Cannot assign to 'this.x' because it is read-only
-                    //         this.x = 1;
-                    Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "this.x")
-                        .WithArguments("this.x")
-                        .WithLocation(13, 9)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (11,9): error CS1604: Cannot assign to 'this' because it is read-only
+                //         this = default;
+                Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "this")
+                    .WithArguments("this")
+                    .WithLocation(11, 9),
+                // (13,9): error CS1604: Cannot assign to 'this.x' because it is read-only
+                //         this.x = 1;
+                Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "this.x")
+                    .WithArguments("this.x")
+                    .WithLocation(13, 9)
+            );
         }
 
         [Fact]
@@ -466,7 +462,8 @@ public partial struct S
             comp.VerifyDiagnostics(
                 // (10,27): error CS8662: Both partial method declarations must be readonly or neither may be readonly
                 //     readonly partial void M()
-                Diagnostic(ErrorCode.ERR_PartialMethodReadOnlyDifference, "M").WithLocation(10, 27),
+                Diagnostic(ErrorCode.ERR_PartialMethodReadOnlyDifference, "M")
+                    .WithLocation(10, 27),
                 // (12,9): error CS1604: Cannot assign to 'i' because it is read-only
                 //         i++;
                 Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "i")
@@ -503,7 +500,8 @@ public partial struct S
             comp.VerifyDiagnostics(
                 // (10,18): error CS8662: Both partial method declarations must be readonly or neither may be readonly
                 //     partial void M()
-                Diagnostic(ErrorCode.ERR_PartialMethodReadOnlyDifference, "M").WithLocation(10, 18)
+                Diagnostic(ErrorCode.ERR_PartialMethodReadOnlyDifference, "M")
+                    .WithLocation(10, 18)
             );
 
             var method = comp.GetMember<NamedTypeSymbol>("S").GetMethod("M");
@@ -1412,7 +1410,8 @@ public static class C
             Compilation comp = CreateCompilation(csharp);
 
             var c = comp.GetMember<IMethodSymbol>("C.Test");
-            var testMethodSyntax = (MethodDeclarationSyntax)c.DeclaringSyntaxReferences.Single()
+            var testMethodSyntax = (MethodDeclarationSyntax)c.DeclaringSyntaxReferences
+                .Single()
                 .GetSyntax();
 
             var semanticModel = comp.GetSemanticModel(testMethodSyntax.SyntaxTree);
@@ -1841,20 +1840,20 @@ public struct S
 }
 ";
             var moduleMetadata = CreateCompilation(
-                    csharp,
-                    options: TestOptions.DebugModule,
-                    targetFramework: TargetFramework.Mscorlib45
-                )
+                csharp,
+                options: TestOptions.DebugModule,
+                targetFramework: TargetFramework.Mscorlib45
+            )
                 .EmitToImageReference();
             var moduleComp = CreateCompilation("", new[] { moduleMetadata });
             var moduleGetter = moduleComp.GetMember<PropertySymbol>("S.P1").GetMethod;
             Assert.False(moduleGetter.IsDeclaredReadOnly);
 
             var dllMetadata = CreateCompilation(
-                    csharp,
-                    options: TestOptions.DebugDll,
-                    targetFramework: TargetFramework.Mscorlib45
-                )
+                csharp,
+                options: TestOptions.DebugDll,
+                targetFramework: TargetFramework.Mscorlib45
+            )
                 .EmitToImageReference();
             var dllComp = CreateCompilation("", new[] { dllMetadata });
             var dllGetter = dllComp.GetMember<PropertySymbol>("S.P1").GetMethod;
@@ -1880,20 +1879,20 @@ public struct S
 }
 ";
             var moduleMetadata = CreateCompilation(
-                    csharp,
-                    options: TestOptions.DebugModule,
-                    targetFramework: TargetFramework.Mscorlib45
-                )
+                csharp,
+                options: TestOptions.DebugModule,
+                targetFramework: TargetFramework.Mscorlib45
+            )
                 .EmitToImageReference();
             var moduleComp = CreateCompilation("", new[] { moduleMetadata });
             var moduleGetter = moduleComp.GetMember<PropertySymbol>("S.P1").GetMethod;
             Assert.False(moduleGetter.IsDeclaredReadOnly);
 
             var dllMetadata = CreateCompilation(
-                    csharp,
-                    options: TestOptions.DebugDll,
-                    targetFramework: TargetFramework.Mscorlib45
-                )
+                csharp,
+                options: TestOptions.DebugDll,
+                targetFramework: TargetFramework.Mscorlib45
+            )
                 .EmitToImageReference();
             var dllComp = CreateCompilation("", new[] { dllMetadata });
             var dllGetter = dllComp.GetMember<PropertySymbol>("S.P1").GetMethod;
@@ -2340,17 +2339,17 @@ public struct S2
                 // (6,14): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x'.
                 //         var (x, y) = this; // error
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "x"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "x"
+                )
                     .WithArguments("x")
                     .WithLocation(6, 14),
                 // (6,17): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'y'.
                 //         var (x, y) = this; // error
                 Diagnostic(
-                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                        "y"
-                    )
+                    ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                    "y"
+                )
                     .WithArguments("y")
                     .WithLocation(6, 17),
                 // (6,22): error CS1061: 'S2' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'S2' could be found (are you missing a using directive or an assembly reference?)

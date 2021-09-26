@@ -22,10 +22,10 @@ namespace HealthChecksSample
         {
             // Registers required services for health checks
             services.AddHealthChecks()
-                // Registers a health check for the MyContext type. By default the name of the health check will be the
-                // name of the DbContext type. There are other options available through AddDbContextCheck to configure
-                // failure status, tags, and custom test query.
-                .AddDbContextCheck<MyContext>();
+            // Registers a health check for the MyContext type. By default the name of the health check will be the
+            // name of the DbContext type. There are other options available through AddDbContextCheck to configure
+            // failure status, tags, and custom test query.
+            .AddDbContextCheck<MyContext>();
 
             // Registers the MyContext type and configures the database provider.
             //
@@ -61,9 +61,8 @@ namespace HealthChecksSample
                             await myContext.Database.EnsureCreatedAsync();
 
                             await context.Response.WriteAsync("Done\n");
-                            await context.Response.WriteAsync(
-                                "Go to /health to see the health status\n"
-                            );
+                            await context.Response
+                                .WriteAsync("Go to /health to see the health status\n");
                         }
                     )
             );
@@ -81,9 +80,8 @@ namespace HealthChecksSample
                             await myContext.Database.EnsureDeletedAsync();
 
                             await context.Response.WriteAsync("Done\n");
-                            await context.Response.WriteAsync(
-                                "Go to /health to see the health status\n"
-                            );
+                            await context.Response
+                                .WriteAsync("Go to /health to see the health status\n");
                         }
                     )
             );
@@ -92,12 +90,10 @@ namespace HealthChecksSample
                 async (context) =>
                 {
                     await context.Response.WriteAsync("Go to /health to see the health status\n");
-                    await context.Response.WriteAsync(
-                        "Go to /createdatabase to create the database\n"
-                    );
-                    await context.Response.WriteAsync(
-                        "Go to /deletedatabase to delete the database\n"
-                    );
+                    await context.Response
+                        .WriteAsync("Go to /createdatabase to create the database\n");
+                    await context.Response
+                        .WriteAsync("Go to /deletedatabase to delete the database\n");
                 }
             );
         }

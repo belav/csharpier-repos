@@ -186,11 +186,12 @@ namespace System.Net.Sockets.Tests
                         0 => listener.AcceptSocket(),
                         1 => await listener.AcceptSocketAsync(),
                         _
-                          => await Task.Factory.FromAsync(
-                              listener.BeginAcceptSocket,
-                              listener.EndAcceptSocket,
-                              null
-                          ),
+                          => await Task.Factory
+                              .FromAsync(
+                                  listener.BeginAcceptSocket,
+                                  listener.EndAcceptSocket,
+                                  null
+                              ),
                     }
                 )
                 {
@@ -211,11 +212,12 @@ namespace System.Net.Sockets.Tests
                         0 => listener.AcceptTcpClient(),
                         1 => await listener.AcceptTcpClientAsync(),
                         _
-                          => await Task.Factory.FromAsync(
-                              listener.BeginAcceptTcpClient,
-                              listener.EndAcceptTcpClient,
-                              null
-                          ),
+                          => await Task.Factory
+                              .FromAsync(
+                                  listener.BeginAcceptTcpClient,
+                                  listener.EndAcceptTcpClient,
+                                  null
+                              ),
                     }
                 )
                 {

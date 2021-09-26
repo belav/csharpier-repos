@@ -246,7 +246,8 @@ namespace Microsoft.AspNetCore.Internal
 
         private static string GetNugetPackagesRestorePath() =>
             (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NUGET_RESTORE")))
-                ? typeof(ProcessEx).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                ? typeof(ProcessEx).Assembly
+                      .GetCustomAttributes<AssemblyMetadataAttribute>()
                       .FirstOrDefault(attribute => attribute.Key == "TestPackageRestorePath")?.Value
                 : Environment.GetEnvironmentVariable("NUGET_RESTORE");
 

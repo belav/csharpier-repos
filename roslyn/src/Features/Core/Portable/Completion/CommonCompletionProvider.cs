@@ -55,11 +55,11 @@ namespace Microsoft.CodeAnalysis.Completion
             var description = await GetDescriptionWorkerAsync(document, item, cancellationToken)
                 .ConfigureAwait(false);
             var parts = await TryAddSnippetInvocationPartAsync(
-                    document,
-                    item,
-                    description.TaggedParts,
-                    cancellationToken
-                )
+                document,
+                item,
+                description.TaggedParts,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return description.WithTaggedParts(parts);
@@ -78,11 +78,11 @@ namespace Microsoft.CodeAnalysis.Completion
             {
                 var change =
                     await GetTextChangeAsync(
-                            document,
-                            item,
-                            ch: '\t',
-                            cancellationToken: cancellationToken
-                        )
+                        document,
+                        item,
+                        ch: '\t',
+                        cancellationToken: cancellationToken
+                    )
                         .ConfigureAwait(false) ?? new TextChange(item.Span, item.DisplayText);
                 var insertionText = change.NewText;
 
@@ -91,10 +91,11 @@ namespace Microsoft.CodeAnalysis.Completion
                     && snippetService.SnippetShortcutExists_NonBlocking(insertionText)
                 )
                 {
-                    var note = string.Format(
-                        FeaturesResources.Note_colon_Tab_twice_to_insert_the_0_snippet,
-                        insertionText
-                    );
+                    var note = string
+                        .Format(
+                            FeaturesResources.Note_colon_Tab_twice_to_insert_the_0_snippet,
+                            insertionText
+                        );
 
                     if (parts.Any())
                     {

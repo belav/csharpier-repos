@@ -9,10 +9,11 @@ namespace System.Linq.Expressions.Tests
 {
     public static class DebugViewTests
     {
-        private static readonly PropertyInfo s_debugView = typeof(Expression).GetProperty(
-            "DebugView",
-            BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
-        );
+        private static readonly PropertyInfo s_debugView = typeof(Expression)
+            .GetProperty(
+                "DebugView",
+                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+            );
 
         [Fact]
         public static void Constant_Null()
@@ -410,9 +411,8 @@ namespace System.Linq.Expressions.Tests
             Check(
                 ".New System.TimeSpan(\\r\\n    $x,\\r\\n    $y,\\r\\n    $z)",
                 Expression.New(
-                    typeof(TimeSpan).GetConstructor(
-                        new[] { typeof(int), typeof(int), typeof(int) }
-                    ),
+                    typeof(TimeSpan)
+                        .GetConstructor(new[] { typeof(int), typeof(int), typeof(int) }),
                     x,
                     y,
                     z

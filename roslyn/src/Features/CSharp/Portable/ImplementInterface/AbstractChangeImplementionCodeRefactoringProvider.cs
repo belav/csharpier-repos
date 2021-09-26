@@ -91,10 +91,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             );
 
             var codeAction = new MyCodeAction(
-                string.Format(
-                    Implement_0,
-                    member.ExplicitOrImplicitInterfaceImplementations().First().Name
-                ),
+                string
+                    .Format(
+                        Implement_0,
+                        member.ExplicitOrImplicitInterfaceImplementations().First().Name
+                    ),
                 c => ChangeImplementationAsync(project, directlyImplementedMembers, c)
             );
 
@@ -288,12 +289,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             foreach (var (implMember, interfaceMembers) in implMemberToInterfaceMembers)
             {
                 await UpdateReferencesAsync(
-                        project,
-                        solutionEditor,
-                        implMember,
-                        interfaceMembers.First().ContainingType,
-                        cancellationToken
-                    )
+                    project,
+                    solutionEditor,
+                    implMember,
+                    interfaceMembers.First().ContainingType,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -317,9 +318,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             foreach (var (document, declsAndSymbol) in documentToImplDeclarations)
             {
                 var editor = await solutionEditor.GetDocumentEditorAsync(
-                        document.Id,
-                        cancellationToken
-                    )
+                    document.Id,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var (decl, symbols) in declsAndSymbol)

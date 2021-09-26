@@ -32,7 +32,8 @@ namespace System.CommandLine.Tests
                 )
             };
 
-            var parser = new CommandLineBuilder(rootCommand).UseEnvironmentVariableDirective()
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseEnvironmentVariableDirective()
                 .Build();
 
             await parser.InvokeAsync(new[] { $"[env:{variable}={value}]" });
@@ -57,7 +58,8 @@ namespace System.CommandLine.Tests
                 )
             };
 
-            var parser = new CommandLineBuilder(rootCommand).UseEnvironmentVariableDirective()
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseEnvironmentVariableDirective()
                 .Build();
 
             await parser.InvokeAsync(new[] { $"[env:     {variable}    ={value}]" });
@@ -82,7 +84,8 @@ namespace System.CommandLine.Tests
                 )
             };
 
-            var parser = new CommandLineBuilder(rootCommand).UseEnvironmentVariableDirective()
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseEnvironmentVariableDirective()
                 .Build();
 
             await parser.InvokeAsync(new[] { $"[env:{variable}=    {value}     ]" });
@@ -107,7 +110,8 @@ namespace System.CommandLine.Tests
                 )
             };
 
-            var parser = new CommandLineBuilder(rootCommand).UseEnvironmentVariableDirective()
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseEnvironmentVariableDirective()
                 .Build();
 
             await parser.InvokeAsync(new[] { $"[env:{variable}={value}]" });
@@ -131,7 +135,8 @@ namespace System.CommandLine.Tests
                 )
             };
 
-            var parser = new CommandLineBuilder(rootCommand).UseEnvironmentVariableDirective()
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseEnvironmentVariableDirective()
                 .Build();
 
             await parser.InvokeAsync(new[] { $"[env:{variable}]" });
@@ -156,7 +161,8 @@ namespace System.CommandLine.Tests
                 )
             };
 
-            var parser = new CommandLineBuilder(rootCommand).UseEnvironmentVariableDirective()
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseEnvironmentVariableDirective()
                 .Build();
 
             await parser.InvokeAsync(new[] { $"[env:={value}]" });
@@ -181,7 +187,8 @@ namespace System.CommandLine.Tests
                 )
             };
 
-            var parser = new CommandLineBuilder(rootCommand).UseEnvironmentVariableDirective()
+            var parser = new CommandLineBuilder(rootCommand)
+                .UseEnvironmentVariableDirective()
                 .Build();
 
             await parser.InvokeAsync(new[] { $"[env:    ={value}]" });

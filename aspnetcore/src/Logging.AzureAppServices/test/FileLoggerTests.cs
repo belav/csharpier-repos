@@ -150,7 +150,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
             provider.IntervalControl.Resume();
             await provider.IntervalControl.Pause;
 
-            var actualFiles = new DirectoryInfo(TempPath).GetFiles()
+            var actualFiles = new DirectoryInfo(TempPath)
+                .GetFiles()
                 .Select(f => f.Name)
                 .OrderBy(f => f)
                 .ToArray();

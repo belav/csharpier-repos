@@ -35,9 +35,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
             using var testLspServer = CreateTestLspServer(markup, out var locations);
             var renameLocation = locations["caret"].First();
             var renameValue = "RENAME";
-            var expectedEdits = locations["renamed"].Select(
-                location => new LSP.TextEdit() { NewText = renameValue, Range = location.Range }
-            );
+            var expectedEdits = locations["renamed"]
+                .Select(
+                    location => new LSP.TextEdit() { NewText = renameValue, Range = location.Range }
+                );
 
             var results = await RunRenameAsync(
                 testLspServer,
@@ -77,9 +78,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
             using var testLspServer = CreateXmlTestLspServer(workspaceXml, out var locations);
             var renameLocation = locations["caret"].First();
             var renameValue = "RENAME";
-            var expectedEdits = locations["renamed"].Select(
-                location => new LSP.TextEdit() { NewText = renameValue, Range = location.Range }
-            );
+            var expectedEdits = locations["renamed"]
+                .Select(
+                    location => new LSP.TextEdit() { NewText = renameValue, Range = location.Range }
+                );
 
             var results = await RunRenameAsync(
                 testLspServer,
@@ -131,9 +133,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
             using var testLspServer = CreateXmlTestLspServer(workspaceXml, out var locations);
             var renameLocation = locations["caret"].First();
             var renameValue = "RENAME";
-            var expectedEdits = locations["renamed"].Select(
-                location => new LSP.TextEdit() { NewText = renameValue, Range = location.Range }
-            );
+            var expectedEdits = locations["renamed"]
+                .Select(
+                    location => new LSP.TextEdit() { NewText = renameValue, Range = location.Range }
+                );
 
             var results = await RunRenameAsync(
                 testLspServer,

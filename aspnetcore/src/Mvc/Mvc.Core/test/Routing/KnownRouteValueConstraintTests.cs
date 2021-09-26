@@ -328,13 +328,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             actionProvider.SetupGet(p => p.Order).Returns(-1000);
 
             actionProvider.Setup(
-                    p => p.OnProvidersExecuting(It.IsAny<ActionDescriptorProviderContext>())
-                )
+                p => p.OnProvidersExecuting(It.IsAny<ActionDescriptorProviderContext>())
+            )
                 .Callback<ActionDescriptorProviderContext>(c => c.Results.Add(actionDescriptor));
 
             actionProvider.Setup(
-                    p => p.OnProvidersExecuted(It.IsAny<ActionDescriptorProviderContext>())
-                )
+                p => p.OnProvidersExecuted(It.IsAny<ActionDescriptorProviderContext>())
+            )
                 .Verifiable();
 
             var descriptorCollectionProvider = new DefaultActionDescriptorCollectionProvider(
@@ -352,13 +352,14 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         {
             var actionDescriptor = new ControllerActionDescriptor()
             {
-                ActionName = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Area: {0}, Controller: {1}, Action: {2}",
-                    area,
-                    controller,
-                    action
-                ),
+                ActionName = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "Area: {0}, Controller: {1}, Action: {2}",
+                        area,
+                        controller,
+                        action
+                    ),
             };
 
             actionDescriptor.RouteValues.Add("area", area);

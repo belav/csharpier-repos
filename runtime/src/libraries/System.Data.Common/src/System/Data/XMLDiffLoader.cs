@@ -192,10 +192,8 @@ namespace System.Data
 
             while (iSsyncDepth < ssync.Depth)
             {
-                table = ds.Tables.GetTable(
-                    XmlConvert.DecodeName(ssync.LocalName),
-                    ssync.NamespaceURI
-                );
+                table = ds.Tables
+                    .GetTable(XmlConvert.DecodeName(ssync.LocalName), ssync.NamespaceURI);
                 if (table == null)
                     throw ExceptionBuilder.DiffgramMissingSQL();
                 string diffId = ssync.GetAttribute(Keywords.DIFFID, Keywords.DFFNS);

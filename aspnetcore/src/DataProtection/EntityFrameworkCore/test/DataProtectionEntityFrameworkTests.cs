@@ -79,9 +79,8 @@ namespace Microsoft.AspNetCore.DataProtection
             );
 
         private IServiceProvider GetServices(string dbName) =>
-            new ServiceCollection().AddDbContext<DataProtectionKeyContext>(
-                    o => o.UseInMemoryDatabase(dbName)
-                )
+            new ServiceCollection()
+                .AddDbContext<DataProtectionKeyContext>(o => o.UseInMemoryDatabase(dbName))
                 .BuildServiceProvider(validateScopes: true);
     }
 }

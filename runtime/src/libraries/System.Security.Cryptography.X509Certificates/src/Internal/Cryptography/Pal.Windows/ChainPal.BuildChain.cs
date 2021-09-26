@@ -51,9 +51,8 @@ namespace Internal.Cryptography.Pal
 
                     int applicationPolicyCount;
                     using (
-                        SafeHandle applicationPolicyOids = applicationPolicy!.ToLpstrArray(
-                            out applicationPolicyCount
-                        )
+                        SafeHandle applicationPolicyOids = applicationPolicy!
+                            .ToLpstrArray(out applicationPolicyCount)
                     )
                     {
                         if (!applicationPolicyOids.IsInvalid)
@@ -68,9 +67,8 @@ namespace Internal.Cryptography.Pal
 
                         int certificatePolicyCount;
                         using (
-                            SafeHandle certificatePolicyOids = certificatePolicy!.ToLpstrArray(
-                                out certificatePolicyCount
-                            )
+                            SafeHandle certificatePolicyOids = certificatePolicy!
+                                .ToLpstrArray(out certificatePolicyCount)
                         )
                         {
                             if (!certificatePolicyOids.IsInvalid)
@@ -95,16 +93,17 @@ namespace Internal.Cryptography.Pal
                             );
                             SafeX509ChainHandle chain;
                             if (
-                                !Interop.crypt32.CertGetCertificateChain(
-                                    storeHandle.DangerousGetHandle(),
-                                    certificatePal.CertContext,
-                                    &ft,
-                                    extraStoreHandle,
-                                    ref chainPara,
-                                    flags,
-                                    IntPtr.Zero,
-                                    out chain
-                                )
+                                !Interop.crypt32
+                                    .CertGetCertificateChain(
+                                        storeHandle.DangerousGetHandle(),
+                                        certificatePal.CertContext,
+                                        &ft,
+                                        extraStoreHandle,
+                                        ref chainPara,
+                                        flags,
+                                        IntPtr.Zero,
+                                        out chain
+                                    )
                             )
                             {
                                 return null;
@@ -137,9 +136,8 @@ namespace Internal.Cryptography.Pal
                     CERT_CHAIN_ENGINE_CONFIG customChainEngine = default;
                     customChainEngine.cbSize = Marshal.SizeOf<CERT_CHAIN_ENGINE_CONFIG>();
                     customChainEngine.hExclusiveRoot = customTrustStoreHandle.DangerousGetHandle();
-                    chainEngineHandle = Interop.crypt32.CertCreateCertificateChainEngine(
-                        ref customChainEngine
-                    );
+                    chainEngineHandle = Interop.crypt32
+                        .CertCreateCertificateChainEngine(ref customChainEngine);
                 }
             }
             else

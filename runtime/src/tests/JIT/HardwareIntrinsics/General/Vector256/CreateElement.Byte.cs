@@ -104,7 +104,8 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            object result = typeof(Vector256).GetMethod(nameof(Vector256.Create), operandTypes)
+            object result = typeof(Vector256)
+                .GetMethod(nameof(Vector256.Create), operandTypes)
                 .Invoke(
                     null,
                     new object[]
@@ -177,15 +178,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256.Create(Byte): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", expectedValues)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector256.Create(Byte): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", expectedValues)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

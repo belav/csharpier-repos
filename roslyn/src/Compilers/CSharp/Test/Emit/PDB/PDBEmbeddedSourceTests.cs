@@ -139,7 +139,8 @@ class C
                             FilePath = pdbReader.GetString(document.Name),
                             Text = pdbReader.GetEmbeddedSource(documentHandle)
                         }
-                    ).Single();
+                    )
+                        .Single();
 
                     Assert.Equal("f:/build/goo.cs", embeddedSource.FilePath);
                     Assert.Equal(source, embeddedSource.Text.ToString());

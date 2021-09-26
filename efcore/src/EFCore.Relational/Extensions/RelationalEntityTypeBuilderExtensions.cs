@@ -140,11 +140,8 @@ namespace Microsoft.EntityFrameworkCore
             string? schema,
             Action<TableBuilder> buildAction
         ) where TEntity : class =>
-            (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).ToTable(
-                name,
-                schema,
-                buildAction
-            );
+            (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder)
+                .ToTable(name, schema, buildAction);
 
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
@@ -311,9 +308,8 @@ namespace Microsoft.EntityFrameworkCore
 
             if (excludedFromMigrations.HasValue)
             {
-                referenceOwnershipBuilder.OwnedEntityType.SetIsTableExcludedFromMigrations(
-                    excludedFromMigrations.Value
-                );
+                referenceOwnershipBuilder.OwnedEntityType
+                    .SetIsTableExcludedFromMigrations(excludedFromMigrations.Value);
             }
 
             return referenceOwnershipBuilder;
@@ -523,10 +519,8 @@ namespace Microsoft.EntityFrameworkCore
                 return null;
             }
 
-            entityTypeBuilder.Metadata.SetIsTableExcludedFromMigrations(
-                excludedFromMigrations,
-                fromDataAnnotation
-            );
+            entityTypeBuilder.Metadata
+                .SetIsTableExcludedFromMigrations(excludedFromMigrations, fromDataAnnotation);
             return entityTypeBuilder;
         }
 
@@ -592,10 +586,8 @@ namespace Microsoft.EntityFrameworkCore
 
             entityTypeBuilder.Metadata.SetViewName(name);
             entityTypeBuilder.Metadata.SetViewSchema(schema);
-            entityTypeBuilder.Metadata.SetAnnotation(
-                RelationalAnnotationNames.ViewDefinitionSql,
-                null
-            );
+            entityTypeBuilder.Metadata
+                .SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
 
             return entityTypeBuilder;
         }
@@ -983,9 +975,8 @@ namespace Microsoft.EntityFrameworkCore
                 ? model.FindDbFunction(name)
                   ?? model.AddDbFunction(
                       name,
-                      typeof(IQueryable<>).MakeGenericType(
-                          entityType.ClrType ?? typeof(Dictionary<string, object>)
-                      )
+                      typeof(IQueryable<>)
+                          .MakeGenericType(entityType.ClrType ?? typeof(Dictionary<string, object>))
                   )
                 : null;
 
@@ -1018,11 +1009,12 @@ namespace Microsoft.EntityFrameworkCore
 
             if (name is null)
             {
-                entityType.Model.Builder.HasDbFunction(
-                    name,
-                    typeof(IQueryable<>).MakeGenericType(entityType.ClrType),
-                    fromDataAnnotation
-                );
+                entityType.Model.Builder
+                    .HasDbFunction(
+                        name,
+                        typeof(IQueryable<>).MakeGenericType(entityType.ClrType),
+                        fromDataAnnotation
+                    );
             }
 
             return entityTypeBuilder;
@@ -1075,9 +1067,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 if (constraint.Sql == sql)
                 {
-                    ((CheckConstraint)constraint).UpdateConfigurationSource(
-                        ConfigurationSource.Explicit
-                    );
+                    ((CheckConstraint)constraint)
+                        .UpdateConfigurationSource(ConfigurationSource.Explicit);
                     return entityTypeBuilder;
                 }
 
@@ -1140,11 +1131,12 @@ namespace Microsoft.EntityFrameworkCore
             {
                 if (constraint.Sql == sql)
                 {
-                    ((CheckConstraint)constraint).UpdateConfigurationSource(
-                        fromDataAnnotation
-                          ? ConfigurationSource.DataAnnotation
-                          : ConfigurationSource.Convention
-                    );
+                    ((CheckConstraint)constraint)
+                        .UpdateConfigurationSource(
+                            fromDataAnnotation
+                              ? ConfigurationSource.DataAnnotation
+                              : ConfigurationSource.Convention
+                        );
                     return entityTypeBuilder;
                 }
 
@@ -1153,7 +1145,8 @@ namespace Microsoft.EntityFrameworkCore
                         fromDataAnnotation
                             ? ConfigurationSource.DataAnnotation
                             : ConfigurationSource.Convention
-                    ).Overrides(constraint.GetConfigurationSource())
+                    )
+                        .Overrides(constraint.GetConfigurationSource())
                 )
                 {
                     return null;
@@ -1197,7 +1190,8 @@ namespace Microsoft.EntityFrameworkCore
                     fromDataAnnotation
                         ? ConfigurationSource.DataAnnotation
                         : ConfigurationSource.Convention
-                ).Overrides(constraint.GetConfigurationSource());
+                )
+                    .Overrides(constraint.GetConfigurationSource());
         }
 
         /// <summary>

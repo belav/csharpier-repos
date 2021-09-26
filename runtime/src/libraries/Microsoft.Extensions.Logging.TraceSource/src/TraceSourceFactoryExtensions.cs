@@ -89,9 +89,8 @@ namespace Microsoft.Extensions.Logging
                 throw new ArgumentNullException(nameof(sourceSwitch));
             }
 
-            builder.Services.AddSingleton<ILoggerProvider>(
-                _ => new TraceSourceLoggerProvider(sourceSwitch)
-            );
+            builder.Services
+                .AddSingleton<ILoggerProvider>(_ => new TraceSourceLoggerProvider(sourceSwitch));
 
             return builder;
         }
@@ -124,9 +123,10 @@ namespace Microsoft.Extensions.Logging
                 throw new ArgumentNullException(nameof(listener));
             }
 
-            builder.Services.AddSingleton<ILoggerProvider>(
-                _ => new TraceSourceLoggerProvider(sourceSwitch, listener)
-            );
+            builder.Services
+                .AddSingleton<ILoggerProvider>(
+                    _ => new TraceSourceLoggerProvider(sourceSwitch, listener)
+                );
 
             return builder;
         }

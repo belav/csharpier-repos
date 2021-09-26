@@ -47,28 +47,28 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         internal static Exception AttributeConflict(string propertyName)
         {
-            var message = string.Format(
-                "The behaviors defined for property '{0}' are ambiguous or conflicting.",
-                propertyName
-            );
+            var message = string
+                .Format(
+                    "The behaviors defined for property '{0}' are ambiguous or conflicting.",
+                    propertyName
+                );
             return new InvalidOperationException(message);
         }
 
         internal static Exception SeparateGetterSetterOnComplexType(string propertyName)
         {
-            var message = string.Format(
-                "Cannot apply getter/setter behaviors for property '{0}'.  Separate getters/setters are supported for simple types only.",
-                propertyName
-            );
+            var message = string
+                .Format(
+                    "Cannot apply getter/setter behaviors for property '{0}'.  Separate getters/setters are supported for simple types only.",
+                    propertyName
+                );
             return new InvalidOperationException(message);
         }
 
         internal static Exception XmlMetadataNotAvailable(Type clrType)
         {
-            var message = string.Format(
-                "XML metadata is not available for type '{0}'.",
-                clrType.FullName
-            );
+            var message = string
+                .Format("XML metadata is not available for type '{0}'.", clrType.FullName);
             return new InvalidOperationException(message);
         }
 
@@ -92,10 +92,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         internal static Exception NotRealizable<T>()
         {
-            var message = string.Format(
-                "The given node cannot provide an underlying object of type {0}.",
-                typeof(T).FullName
-            );
+            var message = string
+                .Format(
+                    "The given node cannot provide an underlying object of type {0}.",
+                    typeof(T).FullName
+                );
             return new NotSupportedException(message);
         }
 
@@ -138,19 +139,15 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         internal static Exception CannotSetAttribute(IXmlIdentity identity)
         {
-            var message = string.Format(
-                "Cannot set attribute on node '{0}'.",
-                identity.Name.ToString()
-            );
+            var message = string
+                .Format("Cannot set attribute on node '{0}'.", identity.Name.ToString());
             return new InvalidOperationException(message);
         }
 
         internal static Exception NotXmlKnownType(Type clrType)
         {
-            var message = string.Format(
-                "No XML type is defined for CLR type {0}.",
-                clrType.FullName
-            );
+            var message = string
+                .Format("No XML type is defined for CLR type {0}.", clrType.FullName);
             return new SerializationException(message);
         }
 
@@ -186,19 +183,18 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         internal static Exception XPathNotCreatable(CompiledXPath path)
         {
-            var message = string.Format(
-                "The path '{0}' is not a creatable XPath expression.",
-                path.Path.Expression
-            );
+            var message = string
+                .Format(
+                    "The path '{0}' is not a creatable XPath expression.",
+                    path.Path.Expression
+                );
             return new XPathException(message);
         }
 
         internal static Exception XPathNavigationFailed(XPathExpression path)
         {
-            var message = string.Format(
-                "Failed navigation to {0} element after creation.",
-                path.Expression
-            );
+            var message = string
+                .Format("Failed navigation to {0} element after creation.", path.Expression);
             return new XPathException(message);
         }
 

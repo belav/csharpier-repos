@@ -203,21 +203,23 @@ namespace Newtonsoft.Json.Converters
                         }
 
                         if (
-                            string.Equals(
-                                propertyName,
-                                PatternName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    propertyName,
+                                    PatternName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             pattern = (string?)reader.Value;
                         }
                         else if (
-                            string.Equals(
-                                propertyName,
-                                OptionsName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    propertyName,
+                                    OptionsName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             options = serializer.Deserialize<RegexOptions>(reader);

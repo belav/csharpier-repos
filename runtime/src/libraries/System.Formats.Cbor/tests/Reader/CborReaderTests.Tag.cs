@@ -489,10 +489,8 @@ namespace System.Formats.Cbor.Tests
             string hexEncoding
         )
         {
-            decimal expectedValue = decimal.Parse(
-                expectedStringValue,
-                Globalization.CultureInfo.InvariantCulture
-            );
+            decimal expectedValue = decimal
+                .Parse(expectedStringValue, Globalization.CultureInfo.InvariantCulture);
             byte[] data = hexEncoding.HexToByteArray();
 
             var reader = new CborReader(data);

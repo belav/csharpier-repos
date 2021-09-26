@@ -161,8 +161,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             // Pkcs9AttributeObject.CopyFrom(AsnEncodedData) refuses to accept any AsnEncodedData that isn't a Pkcs9AttributeObject-derived class.
             Pkcs9AttributeObject p = new Pkcs9AttributeObject();
-            byte[] rawData =
-                "041e4d00790020004400650073006300720069007000740069006f006e000000".HexToByteArray();
+            byte[] rawData = "041e4d00790020004400650073006300720069007000740069006f006e000000"
+                .HexToByteArray();
             AsnEncodedData a = new AsnEncodedData(Oids.DocumentName, rawData);
             AssertExtensions.Throws<ArgumentException>(null, () => p.CopyFrom(a));
         }
@@ -188,8 +188,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void DocumentDescriptionFromRawData()
         {
-            byte[] rawData =
-                "041e4d00790020004400650073006300720069007000740069006f006e000000".HexToByteArray();
+            byte[] rawData = "041e4d00790020004400650073006300720069007000740069006f006e000000"
+                .HexToByteArray();
             Pkcs9DocumentDescription p = new Pkcs9DocumentDescription(rawData);
             Assert.Equal(rawData, p.RawData);
             string cookedData = p.DocumentDescription;
@@ -205,8 +205,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         )]
         public static void DocumentDescriptionMissingTerminator()
         {
-            byte[] rawData =
-                "041e4d00790020004400650073006300720069007000740069006f006e002100".HexToByteArray();
+            byte[] rawData = "041e4d00790020004400650073006300720069007000740069006f006e002100"
+                .HexToByteArray();
             Pkcs9DocumentDescription p = new Pkcs9DocumentDescription(rawData);
             Assert.Equal(rawData, p.RawData);
             string cookedData = p.DocumentDescription;
@@ -218,8 +218,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void DocumentDescriptionEmbeddedTerminator()
         {
-            byte[] rawData =
-                "041e4d00790020004400650073006300720000007000740069006f006e000000".HexToByteArray();
+            byte[] rawData = "041e4d00790020004400650073006300720000007000740069006f006e000000"
+                .HexToByteArray();
             Pkcs9DocumentDescription p = new Pkcs9DocumentDescription(rawData);
             Assert.Equal(rawData, p.RawData);
             string cookedData = p.DocumentDescription;

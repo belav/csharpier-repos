@@ -125,27 +125,17 @@ namespace System.Net
                 CheckDisposed();
                 int i;
                 if (
-                    string.Compare(
-                        uriPrefix,
-                        0,
-                        "http://",
-                        0,
-                        7,
-                        StringComparison.OrdinalIgnoreCase
-                    ) == 0
+                    string
+                        .Compare(uriPrefix, 0, "http://", 0, 7, StringComparison.OrdinalIgnoreCase)
+                    == 0
                 )
                 {
                     i = 7;
                 }
                 else if (
-                    string.Compare(
-                        uriPrefix,
-                        0,
-                        "https://",
-                        0,
-                        8,
-                        StringComparison.OrdinalIgnoreCase
-                    ) == 0
+                    string
+                        .Compare(uriPrefix, 0, "https://", 0, 8, StringComparison.OrdinalIgnoreCase)
+                    == 0
                 )
                 {
                     i = 8;
@@ -305,11 +295,12 @@ namespace System.Net
 
         public Task<HttpListenerContext> GetContextAsync()
         {
-            return Task.Factory.FromAsync(
-                (callback, state) => ((HttpListener)state!).BeginGetContext(callback, state),
-                iar => ((HttpListener)iar!.AsyncState!).EndGetContext(iar),
-                this
-            );
+            return Task.Factory
+                .FromAsync(
+                    (callback, state) => ((HttpListener)state!).BeginGetContext(callback, state),
+                    iar => ((HttpListener)iar!.AsyncState!).EndGetContext(iar),
+                    this
+                );
         }
 
         public void Close()

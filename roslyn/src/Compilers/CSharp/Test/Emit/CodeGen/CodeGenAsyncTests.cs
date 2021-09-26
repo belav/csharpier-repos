@@ -51,11 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         )
         {
             var compilation = CreateCompilation(source, references: references, options: options);
-            return base.CompileAndVerify(
-                compilation,
-                expectedOutput: expectedOutput,
-                verify: verify
-            );
+            return base
+                .CompileAndVerify(compilation, expectedOutput: expectedOutput, verify: verify);
         }
 
         [Fact]
@@ -89,7 +86,8 @@ class Test
                 c.WithOptions(options),
                 symbolValidator: module =>
                 {
-                    var stateMachine = module.GlobalNamespace.GetMember<NamedTypeSymbol>("Test")
+                    var stateMachine = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("Test")
                         .GetMember<NamedTypeSymbol>("<F>d__0");
                     Assert.Equal(TypeKind.Struct, stateMachine.TypeKind);
                 },
@@ -103,7 +101,8 @@ class Test
                 c.WithOptions(options),
                 symbolValidator: module =>
                 {
-                    var stateMachine = module.GlobalNamespace.GetMember<NamedTypeSymbol>("Test")
+                    var stateMachine = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("Test")
                         .GetMember<NamedTypeSymbol>("<F>d__0");
                     Assert.Equal(TypeKind.Struct, stateMachine.TypeKind);
                 },
@@ -117,7 +116,8 @@ class Test
                 c.WithOptions(options),
                 symbolValidator: module =>
                 {
-                    var stateMachine = module.GlobalNamespace.GetMember<NamedTypeSymbol>("Test")
+                    var stateMachine = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("Test")
                         .GetMember<NamedTypeSymbol>("<F>d__0");
                     Assert.Equal(TypeKind.Class, stateMachine.TypeKind);
                 },
@@ -2718,10 +2718,9 @@ class Test
                 @"
 42
 ";
-            CompileAndVerify(source, expectedOutput: expected)
-                .VerifyIL(
-                    "Test.F",
-                    @"
+            CompileAndVerify(source, expectedOutput: expected).VerifyIL(
+                "Test.F",
+                @"
 {
   // Code size       43 (0x2b)
   .maxstack  2
@@ -2742,10 +2741,9 @@ class Test
   IL_002a:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Test.<F>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Test.<F>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      190 (0xbe)
   .maxstack  3
@@ -2829,7 +2827,7 @@ class Test
   IL_00bd:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -3829,12 +3827,12 @@ class Program {{
 
 {AsyncBuilderCode("B0", "T0").Replace("public static B0 Create()", "public static B0 Create()")}
 {AsyncBuilderCode("B1", "T1").Replace("public static B1 Create()", "private static B1 Create()")}
-{AsyncBuilderCode("B2", "T2").Replace("public static B2 Create() => default(B2);", "public static void Create() { }")}
-{AsyncBuilderCode("B3", "T3").Replace("public static B3 Create() => default(B3);", "public static B1 Create() => default(B1);")}
-{AsyncBuilderCode("B4", "T4").Replace("public static B4 Create()", "public static B4 Create(int i)")}
+{AsyncBuilderCode("B2", "T2") .Replace("public static B2 Create() => default(B2);", "public static void Create() { }")}
+{AsyncBuilderCode("B3", "T3") .Replace("public static B3 Create() => default(B3);", "public static B1 Create() => default(B1);")}
+{AsyncBuilderCode("B4", "T4") .Replace("public static B4 Create()", "public static B4 Create(int i)")}
 {AsyncBuilderCode("B5", "T5").Replace("public static B5 Create()", "public static B5 Create<T>()")}
-{AsyncBuilderCode("B6", "T6").Replace("public static B6 Create()", "public static B6 Create(object arg = null)")}
-{AsyncBuilderCode("B7", "T7").Replace("public static B7 Create()", "public static B7 Create(params object[] arg)")}
+{AsyncBuilderCode("B6", "T6") .Replace("public static B6 Create()", "public static B6 Create(object arg = null)")}
+{AsyncBuilderCode("B7", "T7") .Replace("public static B7 Create()", "public static B7 Create(params object[] arg)")}
 {AsyncBuilderCode("B8", "T8").Replace("public static B8 Create()", "public B8 Create()")}
 
 namespace System.Runtime.CompilerServices {{ class AsyncMethodBuilderAttribute : System.Attribute {{ public AsyncMethodBuilderAttribute(System.Type t) {{ }} }} }}
@@ -3927,7 +3925,7 @@ using System.Threading.Tasks;
 
 {AsyncBuilderCode("B1", "T1").Replace("public class B1", "public class B1")}
 {AsyncBuilderCode("B2", "T2").Replace("public class B2", "internal class B2")}
-{AsyncBuilderCode("B3", "T3").Replace("public class B3", "public class B3").Replace("public T3 Task { get; }", "internal T3 Task {get; }")}
+{AsyncBuilderCode("B3", "T3") .Replace("public class B3", "public class B3") .Replace("public T3 Task { get; }", "internal T3 Task {get; }")}
 {AsyncBuilderCode("B4", "T4").Replace("public class B4", "internal class B4")}
 
 class Program {{
@@ -4171,9 +4169,9 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
                 // (8,22): error CS0311: The type 'C.<f>d__1' cannot be used as type parameter 'TSM' in the generic type or method 'MyTaskBuilder.Start<TSM>(ref TSM)'. There is no implicit reference conversion from 'C.<f>d__1' to 'I'.
                 //     async MyTask f() { await (Task)null; }
                 Diagnostic(
-                        ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
-                        "{ await (Task)null; }"
-                    )
+                    ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                    "{ await (Task)null; }"
+                )
                     .WithArguments("MyTaskBuilder.Start<TSM>(ref TSM)", "I", "TSM", "C.<f>d__1")
                     .WithLocation(8, 22)
             );
@@ -4712,9 +4710,9 @@ int y = x +
                 // (2,5): error CS8100: The 'await' operator cannot be used in a static script variable initializer.
                 //     await System.Threading.Tasks.Task.FromResult(1);
                 Diagnostic(
-                        ErrorCode.ERR_BadAwaitInStaticVariableInitializer,
-                        "await System.Threading.Tasks.Task.FromResult(1)"
-                    )
+                    ErrorCode.ERR_BadAwaitInStaticVariableInitializer,
+                    "await System.Threading.Tasks.Task.FromResult(1)"
+                )
                     .WithLocation(2, 5)
             );
         }
@@ -4787,10 +4785,9 @@ class Program
 }
 ";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp)
-                .VerifyIL(
-                    "Program.M(int)",
-                    @"
+            CompileAndVerify(comp).VerifyIL(
+                "Program.M(int)",
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  2
@@ -4815,7 +4812,7 @@ class Program
   }
   IL_000f:  ret
 }"
-                );
+            );
         }
 
         [Fact, WorkItem(4839, "https://github.com/dotnet/roslyn/issues/4839")]
@@ -5216,9 +5213,9 @@ namespace System.Runtime.CompilerServices
                 // (8,53): error CS1983: The return type of an async method must be void, Task or Task<T>
                 //     public async MyAwesomeType<string> CustomTask() { await Task.Delay(1000); return string.Empty; }
                 Diagnostic(
-                        ErrorCode.ERR_BadAsyncReturn,
-                        "{ await Task.Delay(1000); return string.Empty; }"
-                    )
+                    ErrorCode.ERR_BadAsyncReturn,
+                    "{ await Task.Delay(1000); return string.Empty; }"
+                )
                     .WithLocation(8, 53)
             );
         }
@@ -5267,9 +5264,9 @@ namespace System.Runtime.CompilerServices
                 // (8,37): error CS8204: For type 'AsyncValueTaskMethodBuilder' to be used as an AsyncMethodBuilder for type 'G<T>.ValueTask', its Task property should return type 'G<T>.ValueTask' instead of type 'G<int>.ValueTask'.
                 //     public async ValueTask Method() { await Task.Delay(5); return; }
                 Diagnostic(
-                        ErrorCode.ERR_BadAsyncMethodBuilderTaskProperty,
-                        "{ await Task.Delay(5); return; }"
-                    )
+                    ErrorCode.ERR_BadAsyncMethodBuilderTaskProperty,
+                    "{ await Task.Delay(5); return; }"
+                )
                     .WithArguments(
                         "AsyncValueTaskMethodBuilder",
                         "G<T>.ValueTask",
@@ -5311,9 +5308,9 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
                 // (7,29): error CS8204: For type 'MyTaskBuilder' to be used as an AsyncMethodBuilder for type 'MyTask', its Task property should return type 'MyTask' instead of type 'int'.
                 //     static async MyTask M() { await Task.Delay(5); throw null; }
                 Diagnostic(
-                        ErrorCode.ERR_BadAsyncMethodBuilderTaskProperty,
-                        "{ await Task.Delay(5); throw null; }"
-                    )
+                    ErrorCode.ERR_BadAsyncMethodBuilderTaskProperty,
+                    "{ await Task.Delay(5); throw null; }"
+                )
                     .WithArguments("MyTaskBuilder", "MyTask", "int")
                     .WithLocation(7, 29)
             );
@@ -5518,10 +5515,9 @@ namespace Test
 }
 ";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp)
-                .VerifyIL(
-                    "Test.Program.<M>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-                    @"
+            CompileAndVerify(comp).VerifyIL(
+                "Test.Program.<M>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      315 (0x13b)
   .maxstack  4
@@ -5657,7 +5653,7 @@ namespace Test
   IL_0135:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_013a:  ret
 }"
-                );
+            );
         }
 
         [Fact, WorkItem(13759, "https://github.com/dotnet/roslyn/issues/13759")]
@@ -5695,10 +5691,9 @@ namespace Test
 }
 ";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp)
-                .VerifyIL(
-                    "Test.Program.<M>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-                    @"
+            CompileAndVerify(comp).VerifyIL(
+                "Test.Program.<M>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      175 (0xaf)
   .maxstack  3
@@ -5785,7 +5780,7 @@ namespace Test
   IL_00a9:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00ae:  ret
 }"
-                );
+            );
         }
 
         [Fact, WorkItem(25991, "https://github.com/dotnet/roslyn/issues/25991")]
@@ -5959,9 +5954,9 @@ class Program
                 // (8,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         b ? await Task.Delay(1) : await Task.Delay(2));
                 Diagnostic(
-                        ErrorCode.ERR_IllegalStatement,
-                        "b ? await Task.Delay(1) : await Task.Delay(2)"
-                    )
+                    ErrorCode.ERR_IllegalStatement,
+                    "b ? await Task.Delay(1) : await Task.Delay(2)"
+                )
                     .WithLocation(8, 9)
             );
         }
@@ -6084,18 +6079,18 @@ class IntCode
             };
 
             CompileAndVerify(
-                    source,
-                    options: TestOptions.DebugExe,
-                    verify: Verification.Skipped,
-                    expectedOutput: "0123"
-                )
+                source,
+                options: TestOptions.DebugExe,
+                verify: Verification.Skipped,
+                expectedOutput: "0123"
+            )
                 .VerifyDiagnostics(diags);
             CompileAndVerify(
-                    source,
-                    options: TestOptions.ReleaseExe,
-                    verify: Verification.Skipped,
-                    expectedOutput: "0123"
-                )
+                source,
+                options: TestOptions.ReleaseExe,
+                verify: Verification.Skipped,
+                expectedOutput: "0123"
+            )
                 .VerifyDiagnostics(diags);
         }
 

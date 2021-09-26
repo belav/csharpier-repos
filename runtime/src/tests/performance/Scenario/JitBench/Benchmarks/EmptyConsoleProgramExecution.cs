@@ -106,10 +106,8 @@ namespace JitBench
                 FileTasks.DeleteDirectory(publishDir, output);
 
             string dotNetExePath = dotNetInstall.DotNetExe;
-            await new ProcessRunner(
-                dotNetExePath,
-                $"publish -c Release -f {tfm}"
-            ).WithWorkingDirectory(GetAppSrcDirectory(outputDir))
+            await new ProcessRunner(dotNetExePath, $"publish -c Release -f {tfm}")
+                .WithWorkingDirectory(GetAppSrcDirectory(outputDir))
                 .WithEnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "0")
                 .WithEnvironmentVariable("UseSharedCompilation", "false")
                 .WithLog(output)

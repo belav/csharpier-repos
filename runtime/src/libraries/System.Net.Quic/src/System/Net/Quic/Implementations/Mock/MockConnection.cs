@@ -207,9 +207,8 @@ namespace System.Net.Quic.Implementations.Mock
 
             try
             {
-                MockStream.StreamState streamState = await streamChannel.Reader.ReadAsync(
-                        cancellationToken
-                    )
+                MockStream.StreamState streamState = await streamChannel.Reader
+                    .ReadAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return new MockStream(streamState, false);
             }

@@ -1214,12 +1214,8 @@ namespace System.Xml.Xsl.Xslt
                         funcFlags = XslFlags.AnyType;
                         if (_compiler.Settings.EnableScript && ns != null)
                         {
-                            XmlExtensionFunction? scrFunc = _compiler.Scripts.ResolveFunction(
-                                name,
-                                ns,
-                                args.Count,
-                                default(NullErrorHelper)
-                            );
+                            XmlExtensionFunction? scrFunc = _compiler.Scripts
+                                .ResolveFunction(name, ns, args.Count, default(NullErrorHelper));
                             if (scrFunc != null)
                             {
                                 XmlQueryType xt = scrFunc.XmlReturnType;

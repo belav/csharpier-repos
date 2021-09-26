@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                 return;
             }
 
-            var activeStatementTrackingService =
-                document.Project.Solution.Workspace.Services.GetService<IActiveStatementTrackingService>();
+            var activeStatementTrackingService = document.Project.Solution.Workspace.Services
+                .GetService<IActiveStatementTrackingService>();
             if (activeStatementTrackingService == null)
             {
                 return;
@@ -89,10 +89,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
 
             var activeStatementSpans =
                 await activeStatementTrackingService.GetAdjustedTrackingSpansAsync(
-                        document,
-                        snapshot,
-                        context.CancellationToken
-                    )
+                    document,
+                    snapshot,
+                    context.CancellationToken
+                )
                     .ConfigureAwait(false);
             foreach (var activeStatementSpan in activeStatementSpans)
             {

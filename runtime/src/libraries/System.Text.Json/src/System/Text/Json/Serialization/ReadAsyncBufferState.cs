@@ -17,9 +17,8 @@ namespace System.Text.Json.Serialization
 
         public ReadAsyncBufferState(int defaultBufferSize)
         {
-            Buffer = ArrayPool<byte>.Shared.Rent(
-                Math.Max(defaultBufferSize, JsonConstants.Utf8Bom.Length)
-            );
+            Buffer = ArrayPool<byte>.Shared
+                .Rent(Math.Max(defaultBufferSize, JsonConstants.Utf8Bom.Length));
             BytesInBuffer = ClearMax = 0;
             IsFirstIteration = true;
             IsFinalBlock = false;
@@ -28,7 +27,8 @@ namespace System.Text.Json.Serialization
         public void Dispose()
         {
             // Clear only what we used and return the buffer to the pool
-            new Span<byte>(Buffer, 0, ClearMax).Clear();
+            new Span<byte>(Buffer, 0, ClearMax)
+                .Clear();
             ArrayPool<byte>.Shared.Return(Buffer);
             Buffer = null!;
         }

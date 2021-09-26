@@ -324,8 +324,8 @@ namespace Microsoft.AspNetCore.Routing
         {
             if (_binder == null)
             {
-                var binderFactory =
-                    context.RequestServices.GetRequiredService<TemplateBinderFactory>();
+                var binderFactory = context.RequestServices
+                    .GetRequiredService<TemplateBinderFactory>();
                 _binder = binderFactory.Create(ParsedTemplate, Defaults);
             }
         }

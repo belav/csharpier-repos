@@ -30,9 +30,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         protected override OptionSet WithChangedOptions(OptionSet options)
         {
             return options.WithChangedOption(
-                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
-                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
-                )
+                CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            )
                 .WithChangedOption(
                     CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
                     CSharpCodeStyleOptions.NeverWithSilentEnforcement
@@ -2795,9 +2795,8 @@ End Class
                 position,
                 triggerInfo
             );
-            var completionItem = completionList.Items.First(
-                i => CompareItems(i.DisplayText, "Bar[int bay]")
-            );
+            var completionItem = completionList.Items
+                .First(i => CompareItems(i.DisplayText, "Bar[int bay]"));
 
             if (
                 service.GetProvider(completionItem)
@@ -3119,9 +3118,8 @@ int bar;
                 position,
                 triggerInfo
             );
-            var completionItem = completionList.Items.First(
-                i => CompareItems(i.DisplayText, "Equals(object obj)")
-            );
+            var completionItem = completionList.Items
+                .First(i => CompareItems(i.DisplayText, "Equals(object obj)"));
 
             if (
                 service.GetProvider(completionItem)
@@ -3206,9 +3204,8 @@ int bar;
                 cursorPosition,
                 triggerInfo
             );
-            var completionItem = completionList.Items.First(
-                i => CompareItems(i.DisplayText, "Equals(object obj)")
-            );
+            var completionItem = completionList.Items
+                .First(i => CompareItems(i.DisplayText, "Equals(object obj)"));
 
             if (
                 service.GetProvider(completionItem)
@@ -3481,7 +3478,8 @@ namespace ClassLibrary7
             // reference to P2. If we try to override Goo, the missing "Missing" type will
             // prevent round tripping the symbolkey.
             using var workspace = TestWorkspace.Create(text, exportProvider: ExportProvider);
-            var compilation = await workspace.CurrentSolution.Projects.First(p => p.Name == "P3")
+            var compilation = await workspace.CurrentSolution.Projects
+                .First(p => p.Name == "P3")
                 .GetCompilationAsync();
 
             // CompilationExtensions is in the Microsoft.CodeAnalysis.Test.Utilities namespace
@@ -3545,7 +3543,8 @@ public class SomeClass : Base
 }
 ";
 
-            var origComp = await workspace.CurrentSolution.Projects.Single()
+            var origComp = await workspace.CurrentSolution.Projects
+                .Single()
                 .GetRequiredCompilationAsync(CancellationToken.None);
             var options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Latest);
             var libComp = origComp.RemoveAllSyntaxTrees()
@@ -3569,7 +3568,8 @@ public class SomeClass : Base
                 testDocument.CursorPosition.Value,
                 CompletionTrigger.Invoke
             );
-            var completionItem = completionList.Items.Where(c => c.DisplayText == "M(in int x)")
+            var completionItem = completionList.Items
+                .Where(c => c.DisplayText == "M(in int x)")
                 .Single();
 
             var commit = await service.GetChangeAsync(
@@ -3697,10 +3697,8 @@ namespace NS3
             // could hardcode in the value "<Clone>$", however if the compiler ever changed the name and we somehow
             // started showing it in completion, this test would continue to pass.  So this allows us to at least go
             // back and explicitly validate this scenario even in that event.
-            var cloneMemberName = (string)typeof(WellKnownMemberNames).GetField(
-                    "CloneMethodName",
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )
+            var cloneMemberName = (string)typeof(WellKnownMemberNames)
+                .GetField("CloneMethodName", BindingFlags.NonPublic | BindingFlags.Static)
                 .GetValue(null);
             Assert.Equal("<Clone>$", cloneMemberName);
 

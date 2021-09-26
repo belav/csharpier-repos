@@ -2015,10 +2015,11 @@ class C { }";
 
         internal override ICommandHandler CreateCommandHandler(TestWorkspace workspace)
         {
-            return workspace.ExportProvider.GetCommandHandler<DocumentationCommentCommandHandler>(
-                PredefinedCommandHandlerNames.DocumentationComments,
-                ContentTypeNames.CSharpContentType
-            );
+            return workspace.ExportProvider
+                .GetCommandHandler<DocumentationCommentCommandHandler>(
+                    PredefinedCommandHandlerNames.DocumentationComments,
+                    ContentTypeNames.CSharpContentType
+                );
         }
 
         protected override TestWorkspace CreateTestWorkspace(string code) =>

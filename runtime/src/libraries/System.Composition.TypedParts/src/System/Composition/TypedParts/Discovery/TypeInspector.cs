@@ -263,9 +263,8 @@ namespace System.Composition.TypedParts.Discovery
                     if (
                         !(
                             mappedType == partType
-                            || mappedType.GenericTypeArguments.SequenceEqual(
-                                partType.GenericTypeParameters
-                            )
+                            || mappedType.GenericTypeArguments
+                                .SequenceEqual(partType.GenericTypeParameters)
                         )
                     )
                     {

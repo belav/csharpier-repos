@@ -42,21 +42,20 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             Check.NotNull(selectExpression, nameof(selectExpression));
             Check.NotNull(parametersValues, nameof(parametersValues));
 
-            var optimizedSelectExpression = base.Optimize(
-                selectExpression,
-                parametersValues,
-                out canCache
-            );
+            var optimizedSelectExpression = base
+                .Optimize(selectExpression, parametersValues, out canCache);
 
             optimizedSelectExpression = new SkipTakeCollapsingExpressionVisitor(
                 Dependencies.SqlExpressionFactory
-            ).Process(optimizedSelectExpression, parametersValues, out var canCache2);
+            )
+                .Process(optimizedSelectExpression, parametersValues, out var canCache2);
 
             canCache &= canCache2;
 
             return (SelectExpression)new SearchConditionConvertingExpressionVisitor(
                 Dependencies.SqlExpressionFactory
-            ).Visit(optimizedSelectExpression);
+            )
+                .Visit(optimizedSelectExpression);
         }
     }
 }

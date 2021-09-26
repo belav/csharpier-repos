@@ -42,8 +42,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             var inprocServices = new InProcRemoteServices(services, traceListener, testData);
 
             var remoteHostStream = await inprocServices.RequestServiceAsync(
-                    WellKnownServiceHubService.RemoteHost
-                )
+                WellKnownServiceHubService.RemoteHost
+            )
                 .ConfigureAwait(false);
 
             var instance = new InProcRemoteHostClient(
@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             var uiCultureLCIDE = 0;
             var cultureLCID = 0;
 
-            await instance._endPoint.InvokeAsync(
+            await instance._endPoint
+                .InvokeAsync(
                     nameof(IRemoteHostService.InitializeGlobalState),
                     new object?[] { uiCultureLCIDE, cultureLCID },
                     CancellationToken.None
@@ -91,9 +92,9 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         public static async Task<InProcRemoteHostClient> GetTestClientAsync(Workspace workspace)
         {
             var client = (InProcRemoteHostClient?)await TryGetClientAsync(
-                    workspace,
-                    CancellationToken.None
-                )
+                workspace,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
             Contract.ThrowIfNull(client);
             return client;
@@ -133,7 +134,7 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             CancellationToken cancellationToken
         ) =>
             _workspaceServices.GetRequiredService<IExperimentationService>()
-                .IsExperimentEnabled(experimentName)
+            .IsExperimentEnabled(experimentName)
                 ? SpecializedTasks.True
                 : SpecializedTasks.False;
 
@@ -147,11 +148,12 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         public override RemoteServiceConnection<T> CreateConnection<T>(object? callbackTarget)
             where T : class
         {
-            var descriptor = ServiceDescriptors.Instance.GetServiceDescriptor(
-                typeof(T),
-                isRemoteHost64Bit: IntPtr.Size == 8,
-                isRemoteHostServerGC: GCSettings.IsServerGC
-            );
+            var descriptor = ServiceDescriptors.Instance
+                .GetServiceDescriptor(
+                    typeof(T),
+                    isRemoteHost64Bit: IntPtr.Size == 8,
+                    isRemoteHostServerGC: GCSettings.IsServerGC
+                );
             var callbackDispatcher =
                 (descriptor.ClientInterface != null)
                     ? _callbackDispatchers.GetDispatcher(typeof(T))
@@ -259,8 +261,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 var pipePair = FullDuplexStream.CreatePipePair();
 
                 var clientConnection = descriptor.WithTraceSource(
-                        _services.ServiceProvider.TraceSource
-                    )
+                    _services.ServiceProvider.TraceSource
+                )
                     .ConstructRpcConnection(pipePair.Item2);
 
                 Contract.ThrowIfFalse(
@@ -418,9 +420,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             public void RegisterRemoteBrokeredService(BrokeredServiceBase.IFactory serviceFactory)
             {
                 var moniker =
-                    ServiceDescriptors.Instance.GetServiceDescriptorForServiceFactory(
-                        serviceFactory.ServiceType
-                    ).Moniker;
+                    ServiceDescriptors.Instance
+                        .GetServiceDescriptorForServiceFactory(serviceFactory.ServiceType).Moniker;
                 _remoteBrokeredServicesMap.Add(moniker, serviceFactory);
             }
 

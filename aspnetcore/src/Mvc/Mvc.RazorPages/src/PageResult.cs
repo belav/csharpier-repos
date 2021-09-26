@@ -53,8 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 );
             }
 
-            var executor =
-                context.HttpContext.RequestServices.GetRequiredService<PageResultExecutor>();
+            var executor = context.HttpContext.RequestServices
+                .GetRequiredService<PageResultExecutor>();
             return executor.ExecuteAsync(pageContext, this);
         }
     }

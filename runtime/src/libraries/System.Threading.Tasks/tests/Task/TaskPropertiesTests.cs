@@ -68,14 +68,15 @@ namespace System.Threading.Tasks.Tests
                     if (id.Equals(testID) && i != j)
                         Assert.True(
                             false,
-                            string.Format(
-                                "Found matching Task.ID for different tasks at index i ["
-                                    + i
-                                    + "] and j ["
-                                    + j
-                                    + "].  ID: "
-                                    + id
-                            )
+                            string
+                                .Format(
+                                    "Found matching Task.ID for different tasks at index i ["
+                                        + i
+                                        + "] and j ["
+                                        + j
+                                        + "].  ID: "
+                                        + id
+                                )
                         );
                 }
             }

@@ -39,10 +39,8 @@ End Interface"
             );
             VisualStudio.Editor.PlaceCaret("Interface IGoo");
             VisualStudio.Editor.GoToImplementation("FileImplementation.vb");
-            VisualStudio.Editor.Verify.TextContains(
-                @"Class Implementation$$",
-                assertCaretPosition: true
-            );
+            VisualStudio.Editor.Verify
+                .TextContains(@"Class Implementation$$", assertCaretPosition: true);
             Assert.False(VisualStudio.Shell.IsActiveTabProvisional());
         }
     }

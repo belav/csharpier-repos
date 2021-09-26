@@ -31,15 +31,16 @@ namespace SIMD
             int which
         )
         {
-            return Algorithms.FractalRenderer.SelectRender(
-                draw,
-                Abort,
-                IsVector(which),
-                IsDouble(which),
-                IsMulti(which),
-                UsesADT(which),
-                !UseIntTypes(which)
-            );
+            return Algorithms.FractalRenderer
+                .SelectRender(
+                    draw,
+                    Abort,
+                    IsVector(which),
+                    IsDouble(which),
+                    IsMulti(which),
+                    UsesADT(which),
+                    !UseIntTypes(which)
+                );
         }
 
         private static bool Abort()

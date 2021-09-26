@@ -942,10 +942,11 @@ namespace Microsoft.CodeAnalysis
                 throw new ArgumentOutOfRangeException(nameof(span));
             }
 
-            var node = FindToken(span.Start, findInsideTrivia).Parent!.FirstAncestorOrSelf<
-                SyntaxNode,
-                TextSpan
-            >((a, span) => a.FullSpan.Contains(span), span);
+            var node = FindToken(span.Start, findInsideTrivia).Parent!
+                .FirstAncestorOrSelf<SyntaxNode, TextSpan>(
+                    (a, span) => a.FullSpan.Contains(span),
+                    span
+                );
 
             RoslynDebug.Assert(node is object);
             SyntaxNode? cuRoot = node.SyntaxTree?.GetRoot();
@@ -996,13 +997,14 @@ namespace Microsoft.CodeAnalysis
             bool includeDocumentationComments = false
         )
         {
-            return SyntaxNavigator.Instance.GetFirstToken(
-                this,
-                includeZeroWidth,
-                includeSkipped,
-                includeDirectives,
-                includeDocumentationComments
-            );
+            return SyntaxNavigator.Instance
+                .GetFirstToken(
+                    this,
+                    includeZeroWidth,
+                    includeSkipped,
+                    includeDirectives,
+                    includeDocumentationComments
+                );
         }
 
         /// <summary>
@@ -1016,13 +1018,14 @@ namespace Microsoft.CodeAnalysis
             bool includeDocumentationComments = false
         )
         {
-            return SyntaxNavigator.Instance.GetLastToken(
-                this,
-                includeZeroWidth,
-                includeSkipped,
-                includeDirectives,
-                includeDocumentationComments
-            );
+            return SyntaxNavigator.Instance
+                .GetLastToken(
+                    this,
+                    includeZeroWidth,
+                    includeSkipped,
+                    includeDirectives,
+                    includeDocumentationComments
+                );
         }
 
         /// <summary>
@@ -1285,9 +1288,9 @@ namespace Microsoft.CodeAnalysis
         public IEnumerable<SyntaxNodeOrToken> GetAnnotatedNodesAndTokens(string annotationKind)
         {
             return this.DescendantNodesAndTokensAndSelf(
-                    n => n.ContainsAnnotations,
-                    descendIntoTrivia: true
-                )
+                n => n.ContainsAnnotations,
+                descendIntoTrivia: true
+            )
                 .Where(t => t.HasAnnotations(annotationKind));
         }
 
@@ -1299,9 +1302,9 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return this.DescendantNodesAndTokensAndSelf(
-                    n => n.ContainsAnnotations,
-                    descendIntoTrivia: true
-                )
+                n => n.ContainsAnnotations,
+                descendIntoTrivia: true
+            )
                 .Where(t => t.HasAnnotations(annotationKinds));
         }
 
@@ -1313,9 +1316,9 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return this.DescendantNodesAndTokensAndSelf(
-                    n => n.ContainsAnnotations,
-                    descendIntoTrivia: true
-                )
+                n => n.ContainsAnnotations,
+                descendIntoTrivia: true
+            )
                 .Where(t => t.HasAnnotation(annotation));
         }
 
@@ -1724,9 +1727,8 @@ namespace Microsoft.CodeAnalysis
 
         private bool HasErrorsSlow()
         {
-            return new Syntax.InternalSyntax.SyntaxDiagnosticInfoList(this.Green).Any(
-                info => info.Severity == DiagnosticSeverity.Error
-            );
+            return new Syntax.InternalSyntax.SyntaxDiagnosticInfoList(this.Green)
+                .Any(info => info.Severity == DiagnosticSeverity.Error);
         }
 
         /// <summary>

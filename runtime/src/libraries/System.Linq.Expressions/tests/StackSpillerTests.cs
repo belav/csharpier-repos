@@ -166,10 +166,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Spill_Call_Static()
         {
-            Reflection.MethodInfo max = typeof(Math).GetMethod(
-                nameof(Math.Max),
-                new[] { typeof(int), typeof(int) }
-            );
+            Reflection.MethodInfo max = typeof(Math)
+                .GetMethod(nameof(Math.Max), new[] { typeof(int), typeof(int) });
 
             Test(
                 (x, y) => Expression.Call(max, x, y),
@@ -181,10 +179,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Spill_Call_Instance()
         {
-            Reflection.MethodInfo substring = typeof(string).GetMethod(
-                nameof(string.Substring),
-                new[] { typeof(int), typeof(int) }
-            );
+            Reflection.MethodInfo substring = typeof(string)
+                .GetMethod(nameof(string.Substring), new[] { typeof(int), typeof(int) });
 
             Test(
                 (s, i, j) => Expression.Call(s, substring, i, j),
@@ -222,9 +218,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Spill_New()
         {
-            Reflection.ConstructorInfo ctor = typeof(TimeSpan).GetConstructor(
-                new[] { typeof(int), typeof(int), typeof(int) }
-            );
+            Reflection.ConstructorInfo ctor = typeof(TimeSpan)
+                .GetConstructor(new[] { typeof(int), typeof(int), typeof(int) });
 
             Test(
                 (h, m, s) => Expression.New(ctor, h, m, s),
@@ -263,9 +258,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Spill_NewArrayBounds()
         {
-            Reflection.MethodInfo getUpperBound = typeof(Array).GetMethod(
-                nameof(Array.GetUpperBound)
-            );
+            Reflection.MethodInfo getUpperBound = typeof(Array)
+                .GetMethod(nameof(Array.GetUpperBound));
 
             Test(
                 (a, b, c) =>
@@ -2021,10 +2015,8 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<string>> e = Expression.Lambda<Func<string>>(
                 Expression.Call(
-                    typeof(string).GetMethod(
-                        nameof(string.Concat),
-                        new[] { typeof(string), typeof(string) }
-                    ),
+                    typeof(string)
+                        .GetMethod(nameof(string.Concat), new[] { typeof(string), typeof(string) }),
                     Expression.Field(null, typeof(bool).GetField(nameof(bool.TrueString))),
                     Spill(Expression.Constant("!"))
                 )

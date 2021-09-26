@@ -17,12 +17,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             modelBuilder.Entity<Order>();
 
             Assert.True(
-                modelBuilder.Model.FindEntityType(typeof(Order))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Order))
                     .GetKeys()
                     .All(k => k.IsClustered() == null)
             );
             Assert.True(
-                modelBuilder.Model.FindEntityType(typeof(Order))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Order))
                     .GetIndexes()
                     .All(k => k.IsClustered() == null)
             );
@@ -33,12 +35,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             modelBuilder.Entity<Order>().HasIndex(o => o.CustomerId);
 
             Assert.True(
-                modelBuilder.Model.FindEntityType(typeof(Order))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Order))
                     .GetKeys()
                     .All(k => k.IsClustered() == false)
             );
             Assert.True(
-                modelBuilder.Model.FindEntityType(typeof(Order))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Order))
                     .GetIndexes()
                     .All(k => k.IsClustered() == false)
             );
@@ -46,12 +50,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             modelBuilder.Entity<Order>().IsMemoryOptimized(false);
 
             Assert.True(
-                modelBuilder.Model.FindEntityType(typeof(Order))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Order))
                     .GetKeys()
                     .All(k => k.IsClustered() == null)
             );
             Assert.True(
-                modelBuilder.Model.FindEntityType(typeof(Order))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Order))
                     .GetIndexes()
                     .All(k => k.IsClustered() == null)
             );

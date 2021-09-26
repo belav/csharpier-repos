@@ -50,10 +50,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 { typeof(ReferencedEntity), e => ((ReferencedEntity)e)?.Id },
                 { typeof(ReferenceOnBase), e => ((ReferenceOnBase)e)?.Id },
                 { typeof(ReferenceOnDerived), e => ((ReferenceOnDerived)e)?.Id },
-            }.ToDictionary(e => e.Key, e => (object)e.Value);
+            }
+                .ToDictionary(e => e.Key, e => (object)e.Value);
 
-        public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
-            new Dictionary<Type, Action<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntityAsserters() => new Dictionary<
+                Type,
+                Action<object, object>
+            >
             {
                 {
                     typeof(BaseCollectionOnBase),
@@ -150,9 +153,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                             );
                             if (ee.OwnedCollectionOnBase?.Count > 0)
                             {
-                                var orderedExpected = ee.OwnedCollectionOnBase.OrderBy(x => x.Id)
+                                var orderedExpected = ee.OwnedCollectionOnBase
+                                    .OrderBy(x => x.Id)
                                     .ToList();
-                                var orderedActual = aa.OwnedCollectionOnBase.OrderBy(x => x.Id)
+                                var orderedActual = aa.OwnedCollectionOnBase
+                                    .OrderBy(x => x.Id)
                                     .ToList();
                                 for (var i = 0; i < orderedExpected.Count; i++)
                                 {
@@ -199,9 +204,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                             );
                             if (ee.OwnedCollectionOnBase?.Count > 0)
                             {
-                                var orderedExpected = ee.OwnedCollectionOnBase.OrderBy(x => x.Id)
+                                var orderedExpected = ee.OwnedCollectionOnBase
+                                    .OrderBy(x => x.Id)
                                     .ToList();
-                                var orderedActual = aa.OwnedCollectionOnBase.OrderBy(x => x.Id)
+                                var orderedActual = aa.OwnedCollectionOnBase
+                                    .OrderBy(x => x.Id)
                                     .ToList();
                                 for (var i = 0; i < orderedExpected.Count; i++)
                                 {
@@ -216,9 +223,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                             );
                             if (ee.OwnedCollectionOnDerived?.Count > 0)
                             {
-                                var orderedExpected = ee.OwnedCollectionOnDerived.OrderBy(x => x.Id)
+                                var orderedExpected = ee.OwnedCollectionOnDerived
+                                    .OrderBy(x => x.Id)
                                     .ToList();
-                                var orderedActual = aa.OwnedCollectionOnDerived.OrderBy(x => x.Id)
+                                var orderedActual = aa.OwnedCollectionOnDerived
+                                    .OrderBy(x => x.Id)
                                     .ToList();
                                 for (var i = 0; i < orderedExpected.Count; i++)
                                 {

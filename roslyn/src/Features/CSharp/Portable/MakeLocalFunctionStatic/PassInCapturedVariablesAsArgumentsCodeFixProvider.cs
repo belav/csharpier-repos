@@ -112,12 +112,12 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
 
             // Find all unique local functions that contain the error.
             var localFunctions = diagnostics.Select(
-                    d =>
-                        root.FindNode(d.Location.SourceSpan)
-                            .AncestorsAndSelf()
-                            .OfType<LocalFunctionStatementSyntax>()
-                            .FirstOrDefault()
-                )
+                d =>
+                    root.FindNode(d.Location.SourceSpan)
+                        .AncestorsAndSelf()
+                        .OfType<LocalFunctionStatementSyntax>()
+                        .FirstOrDefault()
+            )
                 .WhereNotNull()
                 .Distinct()
                 .ToImmutableArrayOrEmpty();

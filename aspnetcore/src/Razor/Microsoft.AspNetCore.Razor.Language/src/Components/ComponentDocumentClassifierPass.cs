@@ -79,12 +79,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             if (char.IsLower(computedClass, 0))
             {
                 // We don't allow component names to start with a lowercase character.
-                documentNode.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_ComponentNamesCannotStartWithLowerCase(
-                        computedClass,
-                        documentNode.Source
-                    )
-                );
+                documentNode.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_ComponentNamesCannotStartWithLowerCase(
+                            computedClass,
+                            documentNode.Source
+                        )
+                    );
             }
 
             if (MangleClassNames)
@@ -126,13 +127,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         continue;
                     }
 
-                    @class.TypeParameters.Add(
-                        new TypeParameter()
-                        {
-                            ParameterName = typeParamNode.Tokens.First().Content,
-                            Constraints = typeParamNode.Tokens.Skip(1).FirstOrDefault()?.Content
-                        }
-                    );
+                    @class.TypeParameters
+                        .Add(
+                            new TypeParameter()
+                            {
+                                ParameterName = typeParamNode.Tokens.First().Content,
+                                Constraints = typeParamNode.Tokens.Skip(1).FirstOrDefault()?.Content
+                            }
+                        );
                 }
 
                 method.ReturnType = "void";
@@ -142,13 +144,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 method.Modifiers.Add("override");
 
                 method.Parameters.Clear();
-                method.Parameters.Add(
-                    new MethodParameter()
-                    {
-                        ParameterName = ComponentsApi.RenderTreeBuilder.BuilderParameter,
-                        TypeName = ComponentsApi.RenderTreeBuilder.FullTypeName,
-                    }
-                );
+                method.Parameters
+                    .Add(
+                        new MethodParameter()
+                        {
+                            ParameterName = ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                            TypeName = ComponentsApi.RenderTreeBuilder.FullTypeName,
+                        }
+                    );
             }
         }
 

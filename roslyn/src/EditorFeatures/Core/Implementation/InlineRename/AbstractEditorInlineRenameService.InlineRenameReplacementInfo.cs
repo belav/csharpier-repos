@@ -46,8 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 if (modifiedSpans.Any())
                 {
                     return locationsForDocument.Where(
-                            loc => modifiedSpans.ContainsKey(loc.ConflictCheckSpan)
-                        )
+                        loc => modifiedSpans.ContainsKey(loc.ConflictCheckSpan)
+                    )
                         .Select(
                             loc =>
                                 new InlineRenameReplacement(

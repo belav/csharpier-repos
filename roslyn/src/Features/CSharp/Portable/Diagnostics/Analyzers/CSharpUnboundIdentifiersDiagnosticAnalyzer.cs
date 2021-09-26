@@ -80,9 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics
             }
 
             var count =
-                constructors.Value.WhereAsArray(
-                        constructor => constructor.Parameters.Length == args.Count
-                    )
+                constructors.Value
+                    .WhereAsArray(constructor => constructor.Parameters.Length == args.Count)
                     .WhereAsArray(
                         constructor =>
                         {

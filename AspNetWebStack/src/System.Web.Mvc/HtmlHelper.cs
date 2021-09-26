@@ -57,7 +57,8 @@ namespace System.Web.Mvc
             ViewDataContainer = viewDataContainer;
             RouteCollection = routeCollection;
             ClientValidationRuleFactory = (name, metadata) =>
-                ModelValidatorProviders.Providers.GetValidators(
+                ModelValidatorProviders.Providers
+                    .GetValidators(
                         metadata ?? ModelMetadata.FromStringExpression(name, ViewData),
                         ViewContext
                     )
@@ -159,9 +160,8 @@ namespace System.Web.Mvc
         /// <returns>A dictionary that represents HTML attributes.</returns>
         public static RouteValueDictionary AnonymousObjectToHtmlAttributes(object htmlAttributes)
         {
-            return System.Web.WebPages.Html.HtmlHelper.AnonymousObjectToHtmlAttributes(
-                htmlAttributes
-            );
+            return System.Web.WebPages.Html.HtmlHelper
+                .AnonymousObjectToHtmlAttributes(htmlAttributes);
         }
 
         [SuppressMessage(
@@ -629,10 +629,11 @@ namespace System.Web.Mvc
             {
                 if (modelState.Value != null)
                 {
-                    return modelState.Value.ConvertTo(
-                        destinationType,
-                        null /* culture */
-                    );
+                    return modelState.Value
+                        .ConvertTo(
+                            destinationType,
+                            null /* culture */
+                        );
                 }
             }
             return null;

@@ -22,7 +22,8 @@ namespace System.Net.Http.Tests
             );
             TransferCodingWithQualityHeaderValue clone = (TransferCodingWithQualityHeaderValue)(
                 (ICloneable)source
-            ).Clone();
+            )
+                .Clone();
             Assert.Equal(source.Value, clone.Value);
             Assert.Equal(0, clone.Parameters.Count);
 

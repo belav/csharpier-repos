@@ -64,16 +64,17 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void BufferSize_RoundTrips()
         {
-            Assert.Reflection.IntegerProperty(
-                new MockBufferedMediaTypeFormatter(),
-                c => c.BufferSize,
-                expectedDefaultValue: 16 * 1024,
-                minLegalValue: 0,
-                illegalLowerValue: -1,
-                maxLegalValue: null,
-                illegalUpperValue: null,
-                roundTripTestValue: 1024
-            );
+            Assert.Reflection
+                .IntegerProperty(
+                    new MockBufferedMediaTypeFormatter(),
+                    c => c.BufferSize,
+                    expectedDefaultValue: 16 * 1024,
+                    minLegalValue: 0,
+                    illegalLowerValue: -1,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 1024
+                );
         }
 
         [Fact]
@@ -167,11 +168,8 @@ namespace System.Net.Http.Formatting
         {
             // Arrange
             MediaTypeFormatter formatter = new MockBufferedMediaTypeFormatter();
-            string mediaType = string.Format(
-                "{0}; charset={1}",
-                ExpectedSupportedMediaType,
-                encoding
-            );
+            string mediaType = string
+                .Format("{0}; charset={1}", ExpectedSupportedMediaType, encoding);
 
             // Act & assert
             return ReadFromStreamAsync_UsesCorrectCharacterEncodingHelper(
@@ -192,11 +190,8 @@ namespace System.Net.Http.Formatting
         {
             // Arrange
             MediaTypeFormatter formatter = new MockBufferedMediaTypeFormatter();
-            string mediaType = string.Format(
-                "{0}; charset={1}",
-                ExpectedSupportedMediaType,
-                encoding
-            );
+            string mediaType = string
+                .Format("{0}; charset={1}", ExpectedSupportedMediaType, encoding);
 
             // Act & assert
             return WriteToStreamAsync_UsesCorrectCharacterEncodingHelper(

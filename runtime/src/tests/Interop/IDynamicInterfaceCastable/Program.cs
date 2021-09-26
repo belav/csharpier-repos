@@ -404,10 +404,11 @@ namespace IDynamicInterfaceCastableTests
                 }
             );
             Assert.AreEqual(
-                string.Format(
-                    DynamicInterfaceCastableException.ErrorFormat,
-                    typeof(ITestGeneric<bool>)
-                ),
+                string
+                    .Format(
+                        DynamicInterfaceCastableException.ErrorFormat,
+                        typeof(ITestGeneric<bool>)
+                    ),
                 ex.Message
             );
 
@@ -518,10 +519,8 @@ namespace IDynamicInterfaceCastableTests
                 }
             );
             Assert.AreEqual(
-                string.Format(
-                    DynamicInterfaceCastableException.ErrorFormat,
-                    typeof(INotImplemented)
-                ),
+                string
+                    .Format(DynamicInterfaceCastableException.ErrorFormat, typeof(INotImplemented)),
                 ex.Message
             );
         }

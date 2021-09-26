@@ -97,8 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         {
             // Arrange
             var expectedMediaTypes = expected.Select(
-                    e => new MediaTypeSegmentWithQuality(new StringSegment(e), 1.0)
-                )
+                e => new MediaTypeSegmentWithQuality(new StringSegment(e), 1.0)
+            )
                 .ToList();
 
             // Act

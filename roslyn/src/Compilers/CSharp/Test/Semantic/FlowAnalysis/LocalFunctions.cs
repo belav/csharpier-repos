@@ -1802,7 +1802,7 @@ class c
         public void UseOfCapturedVariableAssignedByOutParameter()
         {
             CreateCompilation(
-                    @"
+                @"
 public class C
 {
     void M()
@@ -1817,21 +1817,20 @@ public class C
         }
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (7,9): error CS0165: Use of unassigned local variable 's0'
-                    //         local1(out s0);
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "local1(out s0)")
-                        .WithArguments("s0")
-                        .WithLocation(7, 9)
-                );
+            ).VerifyDiagnostics(
+                // (7,9): error CS0165: Use of unassigned local variable 's0'
+                //         local1(out s0);
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "local1(out s0)")
+                    .WithArguments("s0")
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
         public void OutParameterIsAssignedByLocalFunction()
         {
             CreateCompilation(
-                    @"
+                @"
 public class C
 {
     void M()
@@ -1846,15 +1845,14 @@ public class C
         }
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void UseOfCapturedVariableAssignedInArgument()
         {
             CreateCompilation(
-                    @"
+                @"
 public class C
 {
     void M()
@@ -1869,8 +1867,7 @@ public class C
         }
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
     }
 }

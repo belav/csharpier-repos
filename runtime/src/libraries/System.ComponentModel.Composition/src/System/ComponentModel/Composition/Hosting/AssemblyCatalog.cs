@@ -453,7 +453,7 @@ namespace System.ComponentModel.Composition.Hosting
                     var assembly =
                         (catalogReflectionContextAttribute != null)
                             ? catalogReflectionContextAttribute.CreateReflectionContext()
-                                  .MapAssembly(_assembly)
+                              .MapAssembly(_assembly)
                             : _assembly;
                     lock (_thisLock)
                     {

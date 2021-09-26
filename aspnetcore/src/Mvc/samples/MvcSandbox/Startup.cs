@@ -57,19 +57,18 @@ namespace MvcSandbox
                     );
 
                     builder.MapGet(
-                            "/graph",
-                            async (httpContext) =>
-                            {
-                                await using var writer = new StringWriter();
-                                var graphWriter =
-                                    httpContext.RequestServices.GetRequiredService<DfaGraphWriter>();
-                                var dataSource =
-                                    httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
-                                graphWriter.Write(dataSource, writer);
-                                await httpContext.Response.WriteAsync(writer.ToString());
-                            }
-                        )
-                        .WithDisplayName("DFA Graph");
+                        "/graph",
+                        async (httpContext) =>
+                        {
+                            await using var writer = new StringWriter();
+                            var graphWriter = httpContext.RequestServices
+                                .GetRequiredService<DfaGraphWriter>();
+                            var dataSource = httpContext.RequestServices
+                                .GetRequiredService<EndpointDataSource>();
+                            graphWriter.Write(dataSource, writer);
+                            await httpContext.Response.WriteAsync(writer.ToString());
+                        }
+                    ).WithDisplayName("DFA Graph");
 
                     builder.MapControllers();
                     builder.MapRazorPages();
@@ -86,7 +85,8 @@ namespace MvcSandbox
             var sb = new StringBuilder();
             sb.AppendLine("Endpoints:");
             foreach (
-                var endpoint in dataSource.Endpoints.OfType<RouteEndpoint>()
+                var endpoint in dataSource.Endpoints
+                    .OfType<RouteEndpoint>()
                     .OrderBy(e => e.RoutePattern.RawText, StringComparer.OrdinalIgnoreCase)
             )
             {
@@ -107,16 +107,12 @@ namespace MvcSandbox
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder().UseContentRoot(Directory.GetCurrentDirectory())
-                .ConfigureLogging(
-                    factory =>
-                    {
-                        factory.AddConsole().AddDebug();
-                    }
-                )
-                .UseIISIntegration()
-                .UseKestrel()
-                .UseStartup<Startup>();
+            new WebHostBuilder().UseContentRoot(Directory.GetCurrentDirectory()).ConfigureLogging(
+                factory =>
+                {
+                    factory.AddConsole().AddDebug();
+                }
+            ).UseIISIntegration().UseKestrel().UseStartup<Startup>();
     }
 }
 

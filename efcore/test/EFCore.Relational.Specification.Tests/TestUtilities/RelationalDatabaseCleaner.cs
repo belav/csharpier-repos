@@ -68,9 +68,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 }
 
                 foreach (
-                    var foreignKey in databaseModel.Tables.SelectMany(
-                        t => t.ForeignKeys.Where(AcceptForeignKey)
-                    )
+                    var foreignKey in databaseModel.Tables
+                        .SelectMany(t => t.ForeignKeys.Where(AcceptForeignKey))
                 )
                 {
                     operations.Add(Drop(foreignKey));

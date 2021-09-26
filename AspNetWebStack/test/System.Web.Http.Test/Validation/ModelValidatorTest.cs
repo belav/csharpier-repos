@@ -72,10 +72,8 @@ namespace System.Web.Http.Validation
                 new ObservableModelValidatorProvider()
             };
             ObservableModel model = new ObservableModel();
-            ModelMetadata metadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                () => model,
-                typeof(ObservableModel)
-            );
+            ModelMetadata metadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(() => model, typeof(ObservableModel));
 
             // Act
             ModelValidator validator = ModelValidator.GetModelValidator(validatorProviders);

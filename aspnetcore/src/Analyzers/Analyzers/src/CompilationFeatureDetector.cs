@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Analyzers
                         syntaxReferences[j].SyntaxTree
                     );
 
-                    var syntax = await syntaxReferences[j].GetSyntaxAsync(cancellationToken)
+                    var syntax = await syntaxReferences[j]
+                        .GetSyntaxAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var operation = semanticModel.GetOperation(syntax);
 

@@ -58,13 +58,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             }
 
             var codeActions = await CodeActionHelpers.GetVSCodeActionsAsync(
-                    request,
-                    _codeActionsCache,
-                    document,
-                    _codeFixService,
-                    _codeRefactoringService,
-                    cancellationToken
-                )
+                request,
+                _codeActionsCache,
+                document,
+                _codeFixService,
+                _codeRefactoringService,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return codeActions;

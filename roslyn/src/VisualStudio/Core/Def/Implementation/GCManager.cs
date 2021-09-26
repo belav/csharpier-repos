@@ -101,10 +101,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     s_delayMilliseconds,
                     AsynchronousOperationListenerProvider.NullListener
                 );
-                currentDelay.Task.SafeContinueWith(
-                    _ => RestoreGCLatencyMode(currentMode),
-                    TaskScheduler.Default
-                );
+                currentDelay.Task
+                    .SafeContinueWith(
+                        _ => RestoreGCLatencyMode(currentMode),
+                        TaskScheduler.Default
+                    );
                 s_delay = currentDelay;
             }
 

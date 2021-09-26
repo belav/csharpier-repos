@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
                 where tok.RawKind == _openBrace.Kind || tok.RawKind == _closeBrace.Kind
                 where tok.Span.Length > 0
                 select tok
-            ).ToList();
+            )
+                .ToList();
 
             if (
                 braceTokens.Count == 2

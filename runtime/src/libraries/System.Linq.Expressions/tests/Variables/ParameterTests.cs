@@ -107,16 +107,16 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression param = Expression.Parameter(type);
             Assert.True(
                 Expression.Lambda<Func<bool>>(
-                        Expression.Equal(
-                            Expression.Constant(value),
-                            Expression.Block(
-                                type,
-                                new[] { param },
-                                Expression.Assign(param, Expression.Constant(value)),
-                                param
-                            )
+                    Expression.Equal(
+                        Expression.Constant(value),
+                        Expression.Block(
+                            type,
+                            new[] { param },
+                            Expression.Assign(param, Expression.Constant(value)),
+                            param
                         )
                     )
+                )
                     .Compile(useInterpreter)()
             );
         }
@@ -127,9 +127,9 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression param = Expression.Parameter(typeof(int));
             Func<int, int> addOne = Expression.Lambda<Func<int, int>>(
-                    Expression.Add(param, Expression.Constant(1)),
-                    param
-                )
+                Expression.Add(param, Expression.Constant(1)),
+                param
+            )
                 .Compile(useInterpreter);
             Assert.Equal(3, addOne(2));
         }
@@ -142,9 +142,9 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression param = Expression.Parameter(typeof(int).MakeByRefType());
             ByRefFunc<int> addOneInPlace = Expression.Lambda<ByRefFunc<int>>(
-                    Expression.PreIncrementAssign(param),
-                    param
-                )
+                Expression.PreIncrementAssign(param),
+                param
+            )
                 .Compile(useInterpreter);
             int argument = 5;
             addOneInPlace(ref argument);
@@ -157,15 +157,15 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression param = Expression.Parameter(typeof(string).MakeByRefType());
             ByRefFunc<string> f = Expression.Lambda<ByRefFunc<string>>(
-                    Expression.Assign(
+                Expression.Assign(
+                    param,
+                    Expression.Call(
                         param,
-                        Expression.Call(
-                            param,
-                            typeof(string).GetMethod(nameof(string.ToUpper), Type.EmptyTypes)
-                        )
-                    ),
-                    param
-                )
+                        typeof(string).GetMethod(nameof(string.ToUpper), Type.EmptyTypes)
+                    )
+                ),
+                param
+            )
                 .Compile(useInterpreter);
             string argument = "bar";
             f(ref argument);
@@ -178,15 +178,15 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression param = Expression.Parameter(typeof(char).MakeByRefType());
             ByRefFunc<char> f = Expression.Lambda<ByRefFunc<char>>(
-                    Expression.Assign(
-                        param,
-                        Expression.Call(
-                            typeof(char).GetMethod(nameof(char.ToUpper), new[] { typeof(char) }),
-                            param
-                        )
-                    ),
-                    param
-                )
+                Expression.Assign(
+                    param,
+                    Expression.Call(
+                        typeof(char).GetMethod(nameof(char.ToUpper), new[] { typeof(char) }),
+                        param
+                    )
+                ),
+                param
+            )
                 .Compile(useInterpreter);
             char argument = 'a';
             f(ref argument);
@@ -199,9 +199,9 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression param = Expression.Parameter(typeof(bool).MakeByRefType());
             ByRefFunc<bool> f = Expression.Lambda<ByRefFunc<bool>>(
-                    Expression.ExclusiveOrAssign(param, Expression.Constant(true)),
-                    param
-                )
+                Expression.ExclusiveOrAssign(param, Expression.Constant(true)),
+                param
+            )
                 .Compile(useInterpreter);
 
             bool b1 = false;
@@ -325,10 +325,10 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression val = Expression.Parameter(typeof(T));
 
             ByRefWriteAction<T> f = Expression.Lambda<ByRefWriteAction<T>>(
-                    Expression.Assign(@ref, val),
-                    @ref,
-                    val
-                )
+                Expression.Assign(@ref, val),
+                @ref,
+                val
+            )
                 .Compile(useInterpreter);
 
             T res = original;
@@ -370,10 +370,11 @@ namespace System.Linq.Expressions.Tests
         {
             Type type = value.GetType();
 
-            MethodInfo method = typeof(ParameterTests).GetMethod(
-                nameof(AssertReadAndWriteRefParameters),
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            MethodInfo method = typeof(ParameterTests)
+                .GetMethod(
+                    nameof(AssertReadAndWriteRefParameters),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                );
 
             method.MakeGenericMethod(type)
                 .Invoke(null, new object[] { useInterpreter, value, increment, result });
@@ -388,9 +389,9 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression param = Expression.Parameter(typeof(T).MakeByRefType());
             ByRefFunc<T> addOneInPlace = Expression.Lambda<ByRefFunc<T>>(
-                    Expression.AddAssign(param, Expression.Constant(increment, typeof(T))),
-                    param
-                )
+                Expression.AddAssign(param, Expression.Constant(increment, typeof(T))),
+                param
+            )
                 .Compile(useInterpreter);
             T argument = value;
             addOneInPlace(ref argument);

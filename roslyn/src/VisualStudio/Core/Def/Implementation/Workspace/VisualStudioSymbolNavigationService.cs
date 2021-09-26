@@ -85,8 +85,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 if (targetDocument != null)
                 {
                     var editorWorkspace = targetDocument.Project.Solution.Workspace;
-                    var navigationService =
-                        editorWorkspace.Services.GetRequiredService<IDocumentNavigationService>();
+                    var navigationService = editorWorkspace.Services
+                        .GetRequiredService<IDocumentNavigationService>();
                     return navigationService.TryNavigateToSpan(
                         editorWorkspace,
                         targetDocument.Id,
@@ -124,11 +124,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                 var compilation = project.GetCompilationAsync(cancellationToken)
                     .WaitAndGetResult(cancellationToken);
-                var navInfo = libraryService.NavInfoFactory.CreateForSymbol(
-                    symbol,
-                    project,
-                    compilation
-                );
+                var navInfo = libraryService.NavInfoFactory
+                    .CreateForSymbol(symbol, project, compilation);
                 if (navInfo == null)
                 {
                     navInfo = libraryService.NavInfoFactory.CreateForProject(project);
@@ -151,21 +148,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // Check whether decompilation is supported for the project. We currently only support this for C# projects.
             if (project.LanguageServices.GetService<IDecompiledSourceService>() != null)
             {
-                var eulaService =
-                    project.Solution.Workspace.Services.GetRequiredService<IDecompilerEulaService>();
+                var eulaService = project.Solution.Workspace.Services
+                    .GetRequiredService<IDecompilerEulaService>();
                 allowDecompilation =
-                    project.Solution.Workspace.Options.GetOption(
-                        FeatureOnOffOptions.NavigateToDecompiledSources
-                    ) && !symbol.IsFromSource();
+                    project.Solution.Workspace.Options
+                        .GetOption(FeatureOnOffOptions.NavigateToDecompiledSources)
+                    && !symbol.IsFromSource();
                 if (
                     allowDecompilation
-                    && !ThreadingContext.JoinableTaskFactory.Run(
-                        () => eulaService.IsAcceptedAsync(cancellationToken)
-                    )
+                    && !ThreadingContext.JoinableTaskFactory
+                        .Run(() => eulaService.IsAcceptedAsync(cancellationToken))
                 )
                 {
-                    var notificationService =
-                        project.Solution.Workspace.Services.GetRequiredService<INotificationService>();
+                    var notificationService = project.Solution.Workspace.Services
+                        .GetRequiredService<INotificationService>();
                     allowDecompilation = notificationService.ConfirmMessageBox(
                         ServicesVSResources.Decompiler_Legal_Notice_Message,
                         ServicesVSResources.Decompiler_Legal_Notice_Title,
@@ -173,19 +169,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     );
                     if (allowDecompilation)
                     {
-                        ThreadingContext.JoinableTaskFactory.Run(
-                            () => eulaService.MarkAcceptedAsync(cancellationToken)
-                        );
+                        ThreadingContext.JoinableTaskFactory
+                            .Run(() => eulaService.MarkAcceptedAsync(cancellationToken));
                     }
                 }
             }
 
             var result = _metadataAsSourceFileService.GetGeneratedFileAsync(
-                    project,
-                    symbol,
-                    allowDecompilation,
-                    cancellationToken
-                )
+                project,
+                symbol,
+                allowDecompilation,
+                cancellationToken
+            )
                 .WaitAndGetResult(cancellationToken);
 
             var vsRunningDocumentTable4 = IServiceProviderExtensions.GetService<
@@ -243,8 +238,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             if (openedDocument != null)
             {
                 var editorWorkspace = openedDocument.Project.Solution.Workspace;
-                var navigationService =
-                    editorWorkspace.Services.GetRequiredService<IDocumentNavigationService>();
+                var navigationService = editorWorkspace.Services
+                    .GetRequiredService<IDocumentNavigationService>();
 
                 return navigationService.TryNavigateToSpan(
                     editorWorkspace,
@@ -264,9 +259,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             CancellationToken cancellationToken
         )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext.JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
 
             AssertIsForeground();
 

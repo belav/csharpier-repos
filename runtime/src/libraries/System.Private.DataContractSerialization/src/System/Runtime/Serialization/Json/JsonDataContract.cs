@@ -184,7 +184,8 @@ namespace System.Runtime.Serialization.Json
                 AddCollectionItemContractsToKnownDataContracts();
                 _typeName = string.IsNullOrEmpty(traditionalDataContract.Namespace.Value)
                     ? traditionalDataContract.Name.Value
-                    : string.Concat(
+                    : string
+                      .Concat(
                           traditionalDataContract.Name.Value,
                           JsonGlobals.NameValueSeparatorString,
                           XmlObjectSerializerWriteContextComplexJson.TruncateDefaultDataContractNamespace(
@@ -241,10 +242,8 @@ namespace System.Runtime.Serialization.Json
                         }
                         catch (Exception ex)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(
-                                ex.Message,
-                                ex
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperFatal(ex.Message, ex);
                         }
                     }
                     return id.Value;
@@ -379,9 +378,10 @@ namespace System.Runtime.Serialization.Json
                             )
                             {
                                 DataContract itemDataContract = DataContract.GetDataContract(
-                                    Globals.TypeOfKeyValuePair.MakeGenericType(
-                                        collectionDataContract.ItemType.GenericTypeArguments
-                                    )
+                                    Globals.TypeOfKeyValuePair
+                                        .MakeGenericType(
+                                            collectionDataContract.ItemType.GenericTypeArguments
+                                        )
                                 );
                                 _knownDataContracts.TryAdd(
                                     itemDataContract.StableName,

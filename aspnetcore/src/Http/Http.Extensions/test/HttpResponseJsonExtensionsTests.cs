@@ -120,11 +120,8 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
             context.Response.Body = body;
 
             // Act
-            await context.Response.WriteAsJsonAsync(
-                1,
-                options: null,
-                contentType: "application/custom-type"
-            );
+            await context.Response
+                .WriteAsJsonAsync(1, options: null, contentType: "application/custom-type");
 
             // Assert
             Assert.Equal("application/custom-type", context.Response.ContentType);

@@ -131,9 +131,10 @@ namespace System.Drawing.Printing
                 }
                 if (destinationType == typeof(InstanceDescriptor))
                 {
-                    ConstructorInfo? ctor = typeof(Margins).GetConstructor(
-                        new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }
-                    );
+                    ConstructorInfo? ctor = typeof(Margins)
+                        .GetConstructor(
+                            new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }
+                        );
 
                     if (ctor != null)
                     {

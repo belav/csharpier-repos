@@ -26,7 +26,8 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Load((IXPathNavigable)null);
+                new XslTransform()
+                    .Load((IXPathNavigable)null);
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -48,7 +49,8 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Load((XmlReader)null);
+                new XslTransform()
+                    .Load((XmlReader)null);
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -70,7 +72,8 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Load((IXPathNavigable)null, (XmlResolver)null);
+                new XslTransform()
+                    .Load((IXPathNavigable)null, (XmlResolver)null);
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -92,7 +95,8 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Load((XmlReader)null, (XmlResolver)null);
+                new XslTransform()
+                    .Load((XmlReader)null, (XmlResolver)null);
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -158,7 +162,8 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform((IXPathNavigable)null, (XsltArgumentList)null);
+                new XslTransform()
+                    .Transform((IXPathNavigable)null, (XsltArgumentList)null);
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -180,11 +185,8 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform(
-                    (IXPathNavigable)null,
-                    (XsltArgumentList)null,
-                    (XmlResolver)null
-                );
+                new XslTransform()
+                    .Transform((IXPathNavigable)null, (XsltArgumentList)null, (XmlResolver)null);
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -206,11 +208,8 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform(
-                    (IXPathNavigable)null,
-                    (XsltArgumentList)null,
-                    (TextWriter)null
-                );
+                new XslTransform()
+                    .Transform((IXPathNavigable)null, (XsltArgumentList)null, (TextWriter)null);
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -232,12 +231,13 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform(
-                    (IXPathNavigable)null,
-                    (XsltArgumentList)null,
-                    (TextWriter)null,
-                    (XmlResolver)null
-                );
+                new XslTransform()
+                    .Transform(
+                        (IXPathNavigable)null,
+                        (XsltArgumentList)null,
+                        (TextWriter)null,
+                        (XmlResolver)null
+                    );
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -259,11 +259,8 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform(
-                    (IXPathNavigable)null,
-                    (XsltArgumentList)null,
-                    (Stream)null
-                );
+                new XslTransform()
+                    .Transform((IXPathNavigable)null, (XsltArgumentList)null, (Stream)null);
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -285,12 +282,13 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform(
-                    (IXPathNavigable)null,
-                    (XsltArgumentList)null,
-                    (Stream)null,
-                    (XmlResolver)null
-                );
+                new XslTransform()
+                    .Transform(
+                        (IXPathNavigable)null,
+                        (XsltArgumentList)null,
+                        (Stream)null,
+                        (XmlResolver)null
+                    );
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -312,11 +310,8 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform(
-                    (IXPathNavigable)null,
-                    (XsltArgumentList)null,
-                    (XmlWriter)null
-                );
+                new XslTransform()
+                    .Transform((IXPathNavigable)null, (XsltArgumentList)null, (XmlWriter)null);
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -338,12 +333,13 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform(
-                    (IXPathNavigable)null,
-                    (XsltArgumentList)null,
-                    (XmlWriter)null,
-                    (XmlResolver)null
-                );
+                new XslTransform()
+                    .Transform(
+                        (IXPathNavigable)null,
+                        (XsltArgumentList)null,
+                        (XmlWriter)null,
+                        (XmlResolver)null
+                    );
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)

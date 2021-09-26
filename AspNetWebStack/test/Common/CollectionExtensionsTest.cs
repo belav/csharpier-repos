@@ -58,9 +58,8 @@ namespace System.Collections.Generic
         {
             Collection<object> collection = new Collection<object>() { new object(), new object() };
 
-            Collection<object> collectionAsCollection = (
-                (IEnumerable<object>)collection
-            ).AsCollection();
+            Collection<object> collectionAsCollection = ((IEnumerable<object>)collection)
+                .AsCollection();
 
             Assert.Same(collection, collectionAsCollection);
         }
@@ -72,9 +71,8 @@ namespace System.Collections.Generic
                 new object[] { new object(), new object() }
             );
 
-            Collection<object> enumerableAsCollection = (
-                (IEnumerable<object>)enumerable
-            ).AsCollection();
+            Collection<object> enumerableAsCollection = ((IEnumerable<object>)enumerable)
+                .AsCollection();
 
             Assert.Equal(enumerable, ((IEnumerable<object>)enumerableAsCollection));
         }
@@ -356,10 +354,8 @@ namespace System.Collections.Generic
             var expectedOutput = new Dictionary<string, string>() { { "A", "AA" }, { "B", "BB" } };
             Func<string, string> keySelector = (string value) => value.Substring(1);
 
-            var arrayResult = ((IEnumerable<string>)input).ToDictionaryFast(
-                keySelector,
-                StringComparer.OrdinalIgnoreCase
-            );
+            var arrayResult = ((IEnumerable<string>)input)
+                .ToDictionaryFast(keySelector, StringComparer.OrdinalIgnoreCase);
 
             Assert.Equal(expectedOutput, arrayResult);
             Assert.Equal(StringComparer.OrdinalIgnoreCase, arrayResult.Comparer);
@@ -373,10 +369,8 @@ namespace System.Collections.Generic
             Func<string, string> keySelector = (string value) => value.Substring(1);
             List<string> listInput = new List<string>(input);
 
-            var listResult = ((IEnumerable<string>)listInput).ToDictionaryFast(
-                keySelector,
-                StringComparer.OrdinalIgnoreCase
-            );
+            var listResult = ((IEnumerable<string>)listInput)
+                .ToDictionaryFast(keySelector, StringComparer.OrdinalIgnoreCase);
 
             Assert.Equal(expectedOutput, listResult);
             Assert.Equal(StringComparer.OrdinalIgnoreCase, listResult.Comparer);
@@ -390,10 +384,8 @@ namespace System.Collections.Generic
             Func<string, string> keySelector = (string value) => value.Substring(1);
             LinkedList<string> linkedListInput = new LinkedList<string>(input);
 
-            var enumerableResult = ((IEnumerable<string>)linkedListInput).ToDictionaryFast(
-                keySelector,
-                StringComparer.OrdinalIgnoreCase
-            );
+            var enumerableResult = ((IEnumerable<string>)linkedListInput)
+                .ToDictionaryFast(keySelector, StringComparer.OrdinalIgnoreCase);
 
             Assert.Equal(expectedOutput, enumerableResult);
             Assert.Equal(StringComparer.OrdinalIgnoreCase, enumerableResult.Comparer);

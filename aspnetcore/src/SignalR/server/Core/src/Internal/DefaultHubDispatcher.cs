@@ -216,10 +216,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                     // Check if there is an associated active stream and cancel it if it exists.
                     // The cts will be removed when the streaming method completes executing
                     if (
-                        connection.ActiveRequestCancellationSources.TryGetValue(
-                            cancelInvocationMessage.InvocationId!,
-                            out var cts
-                        )
+                        connection.ActiveRequestCancellationSources
+                            .TryGetValue(cancelInvocationMessage.InvocationId!, out var cts)
                     )
                     {
                         Log.CancelStream(_logger, cancelInvocationMessage.InvocationId!);
@@ -331,11 +329,11 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                 {
                     // Send an error to the client. Then let the normal completion process occur
                     return connection.WriteAsync(
-                            CompletionMessage.WithError(
-                                hubMethodInvocationMessage.InvocationId,
-                                $"Unknown hub method '{hubMethodInvocationMessage.Target}'"
-                            )
+                        CompletionMessage.WithError(
+                            hubMethodInvocationMessage.InvocationId,
+                            $"Unknown hub method '{hubMethodInvocationMessage.Target}'"
                         )
+                    )
                         .AsTask();
                 }
                 else
@@ -953,11 +951,12 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                     hubMethodInvocationMessage.Arguments?.Length > hubInvocationArgumentPointer
                     && (
                         hubMethodInvocationMessage.Arguments[hubInvocationArgumentPointer] == null
-                        || descriptor.OriginalParameterTypes[parameterPointer].IsAssignableFrom(
-                            hubMethodInvocationMessage.Arguments[
-                                hubInvocationArgumentPointer
-                            ]?.GetType()
-                        )
+                        || descriptor.OriginalParameterTypes[parameterPointer]
+                            .IsAssignableFrom(
+                                hubMethodInvocationMessage.Arguments[
+                                    hubInvocationArgumentPointer
+                                ]?.GetType()
+                            )
                     )
                 )
                 {
@@ -992,11 +991,12 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                             hubMethodInvocationMessage.StreamIds![streamPointer]
                         );
                         var itemType = descriptor.StreamingParameters![streamPointer];
-                        arguments[parameterPointer] = connection.StreamTracker.AddStream(
-                            hubMethodInvocationMessage.StreamIds[streamPointer],
-                            itemType,
-                            descriptor.OriginalParameterTypes[parameterPointer]
-                        );
+                        arguments[parameterPointer] = connection.StreamTracker
+                            .AddStream(
+                                hubMethodInvocationMessage.StreamIds[streamPointer],
+                                itemType,
+                                descriptor.OriginalParameterTypes[parameterPointer]
+                            );
 
                         streamPointer++;
                     }

@@ -121,9 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     SpeculativeBindingOption.BindAsExpression
                 );
                 if (
-                    Microsoft.CodeAnalysis.Shared.Extensions.ISymbolExtensions.IsErrorType(
-                        info.Type
-                    )
+                    Microsoft.CodeAnalysis.Shared.Extensions.ISymbolExtensions
+                        .IsErrorType(info.Type)
                 )
                 {
                     return null;
@@ -189,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                         if (AreAllReferencesNotNull(references))
                         {
-                            return base.GetSymbolType(semanticModel, symbol)
+                            return base
+                                .GetSymbolType(semanticModel, symbol)
                                 .WithNullableAnnotation(NullableAnnotation.NotAnnotated);
                         }
 

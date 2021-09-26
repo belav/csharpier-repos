@@ -364,9 +364,8 @@ namespace System.Linq.Tests
             yield return new object[] { new decimal[] { 3000, 100, 200, 1000 }, 100m };
             yield return new object[]
             {
-                new decimal[] { 3000, 100, 200, 1000 }.Concat(
-                    Enumerable.Repeat(decimal.MinValue, 1)
-                ),
+                new decimal[] { 3000, 100, 200, 1000 }
+                    .Concat(Enumerable.Repeat(decimal.MinValue, 1)),
                 decimal.MinValue
             };
 
@@ -416,9 +415,8 @@ namespace System.Linq.Tests
             yield return new object[] { new int?[] { null, 3000, 100, 200, 1000 }, 100 };
             yield return new object[]
             {
-                new int?[] { null, 3000, 100, 200, 1000 }.Concat(
-                    Enumerable.Repeat((int?)int.MinValue, 1)
-                ),
+                new int?[] { null, 3000, 100, 200, 1000 }
+                    .Concat(Enumerable.Repeat((int?)int.MinValue, 1)),
                 int.MinValue
             };
             yield return new object[] { Enumerable.Repeat(default(int?), 100), null };
@@ -469,9 +467,8 @@ namespace System.Linq.Tests
             yield return new object[] { new long?[] { null, 3000, 100, 200, 1000 }, 100L };
             yield return new object[]
             {
-                new long?[] { null, 3000, 100, 200, 1000 }.Concat(
-                    Enumerable.Repeat((long?)long.MinValue, 1)
-                ),
+                new long?[] { null, 3000, 100, 200, 1000 }
+                    .Concat(Enumerable.Repeat((long?)long.MinValue, 1)),
                 long.MinValue
             };
             yield return new object[] { Enumerable.Repeat(default(long?), 100), null };
@@ -524,9 +521,8 @@ namespace System.Linq.Tests
             yield return new object[] { new float?[] { null, 3000, 100, 200, 1000 }, 100f };
             yield return new object[]
             {
-                new float?[] { null, 3000, 100, 200, 1000 }.Concat(
-                    Enumerable.Repeat((float?)float.MinValue, 1)
-                ),
+                new float?[] { null, 3000, 100, 200, 1000 }
+                    .Concat(Enumerable.Repeat((float?)float.MinValue, 1)),
                 float.MinValue
             };
             yield return new object[] { Enumerable.Repeat(default(float?), 100), null };
@@ -619,9 +615,8 @@ namespace System.Linq.Tests
             yield return new object[] { new double?[] { null, 3000, 100, 200, 1000 }, 100.0 };
             yield return new object[]
             {
-                new double?[] { null, 3000, 100, 200, 1000 }.Concat(
-                    Enumerable.Repeat((double?)double.MinValue, 1)
-                ),
+                new double?[] { null, 3000, 100, 200, 1000 }
+                    .Concat(Enumerable.Repeat((double?)double.MinValue, 1)),
                 double.MinValue
             };
             yield return new object[] { Enumerable.Repeat(default(double?), 100), null };
@@ -718,9 +713,8 @@ namespace System.Linq.Tests
             yield return new object[] { new decimal?[] { null, 3000, 100, 200, 1000 }, 100m };
             yield return new object[]
             {
-                new decimal?[] { null, 3000, 100, 200, 1000 }.Concat(
-                    Enumerable.Repeat((decimal?)decimal.MinValue, 1)
-                ),
+                new decimal?[] { null, 3000, 100, 200, 1000 }
+                    .Concat(Enumerable.Repeat((decimal?)decimal.MinValue, 1)),
                 decimal.MinValue
             };
             yield return new object[] { Enumerable.Repeat(default(decimal?), 100), null };

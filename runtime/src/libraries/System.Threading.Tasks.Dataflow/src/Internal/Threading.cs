@@ -18,19 +18,18 @@ namespace System.Threading.Tasks.Dataflow.Internal.Threading
         internal Timer(TimerCallback callback, object state, int dueTime, int period)
         {
             Debug.Assert(period == -1, "This stub implementation only supports dueTime.");
-            Task.Delay(dueTime, Token)
-                .ContinueWith(
-                    (t, s) =>
-                    {
-                        var tuple = (Tuple<TimerCallback, object>)s;
-                        tuple.Item1(tuple.Item2);
-                    },
-                    Tuple.Create(callback, state),
-                    CancellationToken.None,
-                    TaskContinuationOptions.ExecuteSynchronously
-                        | TaskContinuationOptions.OnlyOnRanToCompletion,
-                    TaskScheduler.Default
-                );
+            Task.Delay(dueTime, Token).ContinueWith(
+                (t, s) =>
+                {
+                    var tuple = (Tuple<TimerCallback, object>)s;
+                    tuple.Item1(tuple.Item2);
+                },
+                Tuple.Create(callback, state),
+                CancellationToken.None,
+                TaskContinuationOptions.ExecuteSynchronously
+                    | TaskContinuationOptions.OnlyOnRanToCompletion,
+                TaskScheduler.Default
+            );
         }
 
         public new void Dispose()

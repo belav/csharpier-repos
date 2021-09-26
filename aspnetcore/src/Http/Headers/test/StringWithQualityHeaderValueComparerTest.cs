@@ -65,9 +65,9 @@ namespace Microsoft.Net.Http.Headers
             );
 
             var actualSorted = unsortedValues.OrderByDescending(
-                    k => k,
-                    StringWithQualityHeaderValueComparer.QualityComparer
-                )
+                k => k,
+                StringWithQualityHeaderValueComparer.QualityComparer
+            )
                 .ToList();
 
             Assert.True(expectedSortedValues.SequenceEqual(actualSorted));

@@ -80,7 +80,8 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            object result = typeof(Vector64).GetMethod(nameof(Vector64.Create), operandTypes)
+            object result = typeof(Vector64)
+                .GetMethod(nameof(Vector64.Create), operandTypes)
                 .Invoke(
                     null,
                     new object[]
@@ -129,15 +130,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64.Create(Byte): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", expectedValues)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector64.Create(Byte): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", expectedValues)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -79,11 +79,11 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             }
 
             var state = await State.GenerateAsync(
-                    (TService)this,
-                    document,
-                    statement,
-                    cancellationToken
-                )
+                (TService)this,
+                document,
+                statement,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (state == null)
             {
@@ -118,10 +118,10 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
         )
         {
             var state = await ComputeStateAsync(
-                    document,
-                    localDeclarationStatement,
-                    cancellationToken
-                )
+                document,
+                localDeclarationStatement,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (state == null)
             {
@@ -139,10 +139,10 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 : null;
 
             var canMergeDeclarationAndAssignment = await CanMergeDeclarationAndAssignmentAsync(
-                    document,
-                    state,
-                    cancellationToken
-                )
+                document,
+                state,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (canMergeDeclarationAndAssignment)
             {
@@ -151,9 +151,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             }
             else
             {
-                var statementIndex = state.OutermostBlockStatements.IndexOf(
-                    state.DeclarationStatement
-                );
+                var statementIndex = state.OutermostBlockStatements
+                    .IndexOf(state.DeclarationStatement);
                 if (
                     statementIndex + 1 < state.OutermostBlockStatements.Count
                     && state.OutermostBlockStatements[statementIndex + 1]
@@ -166,12 +165,12 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
 
                 editor.RemoveNode(state.DeclarationStatement);
                 await MoveDeclarationToFirstReferenceAsync(
-                        document,
-                        state,
-                        editor,
-                        warningAnnotation,
-                        cancellationToken
-                    )
+                    document,
+                    state,
+                    editor,
+                    warningAnnotation,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -190,10 +189,10 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             // If we're not merging with an existing declaration, make the declaration semantically
             // explicit to improve the chances that it won't break code.
             var explicitDeclarationStatement = await Simplifier.ExpandAsync(
-                    state.DeclarationStatement,
-                    document,
-                    cancellationToken: cancellationToken
-                )
+                state.DeclarationStatement,
+                document,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // place the declaration above the first statement that references it.
@@ -330,12 +329,12 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                         if (syntaxFacts.StringComparer.Equals(name, localSymbol.Name))
                         {
                             return await TypesAreCompatibleAsync(
-                                    document,
-                                    localSymbol,
-                                    state.DeclarationStatement,
-                                    right,
-                                    cancellationToken
-                                )
+                                document,
+                                localSymbol,
+                                state.DeclarationStatement,
+                                right,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         }
                     }
@@ -360,14 +359,15 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 out var right
             );
 
-            return state.DeclarationStatement.ReplaceNode(
-                state.VariableDeclarator,
-                generator.WithInitializer(
+            return state.DeclarationStatement
+                .ReplaceNode(
+                    state.VariableDeclarator,
+                    generator.WithInitializer(
                         state.VariableDeclarator.WithoutTrailingTrivia(),
                         generator.EqualsValueClause(operatorToken, right)
                     )
-                    .WithTrailingTrivia(state.VariableDeclarator.GetTrailingTrivia())
-            );
+                        .WithTrailingTrivia(state.VariableDeclarator.GetTrailingTrivia())
+                );
         }
     }
 }

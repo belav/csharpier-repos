@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
                 {
                     ImmutableInterlocked.InterlockedCompareExchange(
                         ref _lazyTypeArguments,
-                        UnderlyingNamedTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.GetPublicSymbols(),
+                        UnderlyingNamedTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                            .GetPublicSymbols(),
                         default
                     );
                 }
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         {
             get
             {
-                return UnderlyingNamedTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.ToPublicAnnotations();
+                return UnderlyingNamedTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    .ToPublicAnnotations();
             }
         }
 
@@ -106,9 +108,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         INamedTypeSymbol INamedTypeSymbol.Construct(params ITypeSymbol[] typeArguments)
         {
             return UnderlyingNamedTypeSymbol.Construct(
-                    ConstructTypeArguments(typeArguments),
-                    unbound: false
-                )
+                ConstructTypeArguments(typeArguments),
+                unbound: false
+            )
                 .GetPublicSymbol();
         }
 
@@ -118,9 +120,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         )
         {
             return UnderlyingNamedTypeSymbol.Construct(
-                    ConstructTypeArguments(typeArguments, typeArgumentNullableAnnotations),
-                    unbound: false
-                )
+                ConstructTypeArguments(typeArguments, typeArgumentNullableAnnotations),
+                unbound: false
+            )
                 .GetPublicSymbol();
         }
 

@@ -522,10 +522,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 GeneratedNames.MakeIteratorFinallyMethodName(state)
             );
 
-            F.ModuleBuilderOpt.AddSynthesizedDefinition(
-                stateMachineType,
-                finallyMethod.GetCciAdapter()
-            );
+            F.ModuleBuilderOpt
+                .AddSynthesizedDefinition(stateMachineType, finallyMethod.GetCciAdapter());
             return finallyMethod;
         }
         #endregion

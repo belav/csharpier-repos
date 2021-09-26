@@ -68,10 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
 
             var surfaceBufferFieldSpan = new VsTextSpan[1];
             if (
-                snippetExpansionClient.ExpansionSession.GetFieldSpan(
-                    SwitchExpressionField,
-                    surfaceBufferFieldSpan
-                ) != VSConstants.S_OK
+                snippetExpansionClient.ExpansionSession
+                    .GetFieldSpan(SwitchExpressionField, surfaceBufferFieldSpan) != VSConstants.S_OK
             )
             {
                 return false;

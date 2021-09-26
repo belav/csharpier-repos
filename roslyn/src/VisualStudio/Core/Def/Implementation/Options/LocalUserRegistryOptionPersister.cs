@@ -50,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         private static bool TryGetKeyPathAndName(IOption option, out string path, out string key)
         {
-            var serialization = option.StorageLocations.OfType<LocalUserProfileStorageLocation>()
+            var serialization = option.StorageLocations
+                .OfType<LocalUserProfileStorageLocation>()
                 .SingleOrDefault();
 
             if (serialization == null)
@@ -89,9 +90,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 if (optionKey.Option.Type == typeof(bool))
                 {
                     value = subKey.GetValue(
-                            key,
-                            defaultValue: (bool)optionKey.Option.DefaultValue ? 1 : 0
-                        )
+                        key,
+                        defaultValue: (bool)optionKey.Option.DefaultValue ? 1 : 0
+                    )
                         .Equals(1);
                     return true;
                 }

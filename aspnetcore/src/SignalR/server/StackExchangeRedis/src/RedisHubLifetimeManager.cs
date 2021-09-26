@@ -83,7 +83,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
             }
             else
             {
-                var supportedProtocols = hubProtocolResolver.AllProtocols.Select(p => p.Name)
+                var supportedProtocols = hubProtocolResolver.AllProtocols
+                    .Select(p => p.Name)
                     .ToList();
                 _protocol = new RedisProtocol(
                     new DefaultHubMessageSerializer(hubProtocolResolver, supportedProtocols, null)
@@ -494,9 +495,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
                         {
                             if (
                                 invocation.ExcludedConnectionIds == null
-                                || !invocation.ExcludedConnectionIds.Contains(
-                                    connection.ConnectionId
-                                )
+                                || !invocation.ExcludedConnectionIds
+                                    .Contains(connection.ConnectionId)
                             )
                             {
                                 tasks.Add(connection.WriteAsync(invocation.Message).AsTask());

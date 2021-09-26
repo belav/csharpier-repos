@@ -42,9 +42,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var expires = context.Request.Query["Expires"];
             if (!string.IsNullOrEmpty(expires))
             {
-                headers.Expires = DateTimeOffset.Now.AddSeconds(
-                    int.Parse(expires, CultureInfo.InvariantCulture)
-                );
+                headers.Expires = DateTimeOffset.Now
+                    .AddSeconds(int.Parse(expires, CultureInfo.InvariantCulture));
             }
 
             if (headers.CacheControl == null)
@@ -185,34 +184,32 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                 yield return new HostBuilder().ConfigureWebHost(
                     webHostBuilder =>
                     {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddResponseCaching(
-                                        responseCachingOptions =>
+                        webHostBuilder.UseTestServer().ConfigureServices(
+                            services =>
+                            {
+                                services.AddResponseCaching(
+                                    responseCachingOptions =>
+                                    {
+                                        if (options != null)
                                         {
-                                            if (options != null)
-                                            {
-                                                responseCachingOptions.MaximumBodySize =
-                                                    options.MaximumBodySize;
-                                                responseCachingOptions.UseCaseSensitivePaths =
-                                                    options.UseCaseSensitivePaths;
-                                                responseCachingOptions.SystemClock =
-                                                    options.SystemClock;
-                                            }
+                                            responseCachingOptions.MaximumBodySize =
+                                                options.MaximumBodySize;
+                                            responseCachingOptions.UseCaseSensitivePaths =
+                                                options.UseCaseSensitivePaths;
+                                            responseCachingOptions.SystemClock =
+                                                options.SystemClock;
                                         }
-                                    );
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    configureDelegate(app);
-                                    app.UseResponseCaching();
-                                    app.Run(requestDelegate);
-                                }
-                            );
+                                    }
+                                );
+                            }
+                        ).Configure(
+                            app =>
+                            {
+                                configureDelegate(app);
+                                app.UseResponseCaching();
+                                app.Run(requestDelegate);
+                            }
+                        );
                     }
                 );
             }

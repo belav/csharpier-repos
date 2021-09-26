@@ -47,18 +47,21 @@ public class Test
             GenClass<FooClass>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>))
         );
         Eval(
-            GenClass<FooStruct>.TransitiveConstraint()
+            GenClass<FooStruct>
+                .TransitiveConstraint()
                 .GetType()
                 .Equals(typeof(Transition<FooStruct>))
         );
 
         Eval(
-            GenStruct<FooClass>.TransitiveConstraint()
+            GenStruct<FooClass>
+                .TransitiveConstraint()
                 .GetType()
                 .Equals(typeof(Transition<FooClass>))
         );
         Eval(
-            GenStruct<FooStruct>.TransitiveConstraint()
+            GenStruct<FooStruct>
+                .TransitiveConstraint()
                 .GetType()
                 .Equals(typeof(Transition<FooStruct>))
         );

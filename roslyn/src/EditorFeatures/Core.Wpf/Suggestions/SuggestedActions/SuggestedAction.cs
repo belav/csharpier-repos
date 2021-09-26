@@ -146,9 +146,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             // that end up causing VS to pump the messages that the test harness enqueues
             // to the UI thread as well.
             using (
-                SourceProvider.OperationListener.BeginAsyncOperation(
-                    $"{nameof(SuggestedAction)}.{nameof(Invoke)}"
-                )
+                SourceProvider.OperationListener
+                    .BeginAsyncOperation($"{nameof(SuggestedAction)}.{nameof(Invoke)}")
             )
             {
                 InnerInvoke(progressTracker, cancellationToken);

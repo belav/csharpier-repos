@@ -128,7 +128,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<float>)typeof(Avx2).GetMethod(
+                        (Vector128<float>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -276,7 +277,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vd =
-                        (Vector128<double>)typeof(Avx2).GetMethod(
+                        (Vector128<double>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -417,7 +419,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<int>)typeof(Avx2).GetMethod(
+                        (Vector128<int>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -544,7 +547,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<uint>)typeof(Avx2).GetMethod(
+                        (Vector128<uint>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -671,7 +675,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<long>)typeof(Avx2).GetMethod(
+                        (Vector128<long>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -798,7 +803,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<ulong>)typeof(Avx2).GetMethod(
+                        (Vector128<ulong>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -927,7 +933,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<int>)typeof(Avx2).GetMethod(
+                        (Vector128<int>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -1056,7 +1063,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<uint>)typeof(Avx2).GetMethod(
+                        (Vector128<uint>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -1185,7 +1193,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<long>)typeof(Avx2).GetMethod(
+                        (Vector128<long>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -1314,7 +1323,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<ulong>)typeof(Avx2).GetMethod(
+                        (Vector128<ulong>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -1450,7 +1460,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<float>)typeof(Avx2).GetMethod(
+                        (Vector128<float>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -1600,7 +1611,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vd =
-                        (Vector128<double>)typeof(Avx2).GetMethod(
+                        (Vector128<double>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -1743,7 +1755,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<int>)typeof(Avx2).GetMethod(
+                        (Vector128<int>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -1872,7 +1885,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<uint>)typeof(Avx2).GetMethod(
+                        (Vector128<uint>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {
@@ -2008,7 +2022,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<float>)typeof(Avx2).GetMethod(
+                        (Vector128<float>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector128),
                                 new Type[]
                                 {

@@ -12,8 +12,8 @@ namespace FormatterWebSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers(
-                    options => options.ValidateComplexTypesIfChildValidationFails = true
-                )
+                options => options.ValidateComplexTypesIfChildValidationFails = true
+            )
                 .AddNewtonsoftJson(
                     options =>
                         options.SerializerSettings.Converters.Insert(0, new IModelConverter())

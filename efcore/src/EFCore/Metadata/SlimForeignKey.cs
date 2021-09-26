@@ -126,13 +126,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual DebugView DebugView =>
             new(
                 () =>
-                    ((IReadOnlyForeignKey)this).ToDebugString(
-                        MetadataDebugStringOptions.ShortDefault
-                    ),
+                    ((IReadOnlyForeignKey)this)
+                        .ToDebugString(MetadataDebugStringOptions.ShortDefault),
                 () =>
-                    ((IReadOnlyForeignKey)this).ToDebugString(
-                        MetadataDebugStringOptions.LongDefault
-                    )
+                    ((IReadOnlyForeignKey)this)
+                        .ToDebugString(MetadataDebugStringOptions.LongDefault)
             );
 
         /// <summary>

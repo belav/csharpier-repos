@@ -246,12 +246,13 @@ namespace System.Net
                 if (scopeId?.Length > 1)
                 {
                     if (
-                        uint.TryParse(
-                            scopeId.AsSpan(1),
-                            NumberStyles.None,
-                            CultureInfo.InvariantCulture,
-                            out scope
-                        )
+                        uint
+                            .TryParse(
+                                scopeId.AsSpan(1),
+                                NumberStyles.None,
+                                CultureInfo.InvariantCulture,
+                                out scope
+                            )
                     )
                     {
                         return true; // scopeId is a numeric value

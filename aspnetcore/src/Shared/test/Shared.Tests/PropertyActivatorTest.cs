@@ -58,12 +58,13 @@ namespace Microsoft.Extensions.Internal
             var expectedPropertyInfo = typeInfo.GetDeclaredProperty("ActivatableProperty");
 
             // Act
-            var propertiesToActivate = PropertyActivator<int>.GetPropertiesToActivate(
-                type: typeof(TestClass),
-                activateAttributeType: typeof(TestActivateAttribute),
-                createActivateInfo: (propertyInfo) =>
-                    new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val + 1)
-            );
+            var propertiesToActivate = PropertyActivator<int>
+                .GetPropertiesToActivate(
+                    type: typeof(TestClass),
+                    activateAttributeType: typeof(TestActivateAttribute),
+                    createActivateInfo: (propertyInfo) =>
+                        new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val + 1)
+                );
 
             // Assert
             Assert.Collection(
@@ -84,15 +85,16 @@ namespace Microsoft.Extensions.Internal
             var expectedPropertyInfo = typeInfo.GetDeclaredProperty("IntProperty");
 
             // Act
-            var propertiesToActivate = PropertyActivator<int>.GetPropertiesToActivate(
-                type: typeof(TestClass),
-                activateAttributeType: typeof(TestActivateAttribute),
-                createActivateInfo: (propertyInfo) =>
-                    new PropertyActivator<int>(
-                        expectedPropertyInfo,
-                        valueAccessor: (val) => val + 1
-                    )
-            );
+            var propertiesToActivate = PropertyActivator<int>
+                .GetPropertiesToActivate(
+                    type: typeof(TestClass),
+                    activateAttributeType: typeof(TestActivateAttribute),
+                    createActivateInfo: (propertyInfo) =>
+                        new PropertyActivator<int>(
+                            expectedPropertyInfo,
+                            valueAccessor: (val) => val + 1
+                        )
+                );
 
             // Assert
             Assert.Collection(
@@ -113,12 +115,13 @@ namespace Microsoft.Extensions.Internal
             var expectedPropertyInfo = typeInfo.GetDeclaredProperty("Public");
 
             // Act
-            var propertiesToActivate = PropertyActivator<int>.GetPropertiesToActivate(
-                typeof(TestClassWithPropertyVisiblity),
-                typeof(TestActivateAttribute),
-                (propertyInfo) =>
-                    new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val)
-            );
+            var propertiesToActivate = PropertyActivator<int>
+                .GetPropertiesToActivate(
+                    typeof(TestClassWithPropertyVisiblity),
+                    typeof(TestActivateAttribute),
+                    (propertyInfo) =>
+                        new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val)
+                );
 
             // Assert
             Assert.Single(propertiesToActivate);
@@ -133,13 +136,14 @@ namespace Microsoft.Extensions.Internal
             var typeInfo = instance.GetType().GetTypeInfo();
 
             // Act
-            var propertiesToActivate = PropertyActivator<int>.GetPropertiesToActivate(
-                typeof(TestClassWithPropertyVisiblity),
-                typeof(TestActivateAttribute),
-                (propertyInfo) =>
-                    new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val),
-                includeNonPublic: true
-            );
+            var propertiesToActivate = PropertyActivator<int>
+                .GetPropertiesToActivate(
+                    typeof(TestClassWithPropertyVisiblity),
+                    typeof(TestActivateAttribute),
+                    (propertyInfo) =>
+                        new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val),
+                    includeNonPublic: true
+                );
 
             // Assert
             Assert.Equal(5, propertiesToActivate.Length);

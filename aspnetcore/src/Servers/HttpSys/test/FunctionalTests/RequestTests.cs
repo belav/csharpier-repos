@@ -58,8 +58,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             Assert.NotNull(connectionInfo.ConnectionId);
 
                             // Trace identifier
-                            var requestIdentifierFeature =
-                                httpContext.Features.Get<IHttpRequestIdentifierFeature>();
+                            var requestIdentifierFeature = httpContext.Features
+                                .Get<IHttpRequestIdentifierFeature>();
                             Assert.NotNull(requestIdentifierFeature);
                             Assert.NotNull(requestIdentifierFeature.TraceIdentifier);
                             // Note: Response keys are validated in the ResponseTests
@@ -127,8 +127,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             Assert.Equal("CustomId", connectionInfo.ConnectionId);
 
                             // Trace identifier
-                            var requestIdentifierFeature =
-                                httpContext.Features.Get<IHttpRequestIdentifierFeature>();
+                            var requestIdentifierFeature = httpContext.Features
+                                .Get<IHttpRequestIdentifierFeature>();
                             Assert.NotNull(requestIdentifierFeature);
                             requestIdentifierFeature.TraceIdentifier = "customTrace";
                             Assert.Equal("customTrace", requestIdentifierFeature.TraceIdentifier);
@@ -196,8 +196,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             Assert.Null(connectionInfo.ConnectionId);
 
                             // Trace identifier
-                            var requestIdentifierFeature =
-                                httpContext.Features.Get<IHttpRequestIdentifierFeature>();
+                            var requestIdentifierFeature = httpContext.Features
+                                .Get<IHttpRequestIdentifierFeature>();
                             Assert.NotNull(requestIdentifierFeature);
                             requestIdentifierFeature.TraceIdentifier = null;
                             Assert.Null(requestIdentifierFeature.TraceIdentifier);
@@ -249,8 +249,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         {
                             var requestInfo = httpContext.Features.Get<IHttpRequestFeature>();
                             var connectionInfo = httpContext.Features.Get<IHttpConnectionFeature>();
-                            var requestIdentifierFeature =
-                                httpContext.Features.Get<IHttpRequestIdentifierFeature>();
+                            var requestIdentifierFeature = httpContext.Features
+                                .Get<IHttpRequestIdentifierFeature>();
 
                             // Request Keys
                             Assert.Equal("http", requestInfo.Scheme);
@@ -382,8 +382,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     httpContext =>
                     {
                         var requestInfo = httpContext.Features.Get<IHttpRequestFeature>();
-                        var requestIdentifierFeature =
-                            httpContext.Features.Get<IHttpRequestIdentifierFeature>();
+                        var requestIdentifierFeature = httpContext.Features
+                            .Get<IHttpRequestIdentifierFeature>();
                         try
                         {
                             Assert.Equal(expectedPath, requestInfo.Path);
@@ -601,9 +601,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
             foreach (string path in new[] { "/", "/11", "/2/3", "/2", "/11/2" })
             {
-                server.Listener.Options.UrlPrefixes.Add(
-                    UrlPrefix.Create(rootUri.Scheme, rootUri.Host, rootUri.Port, path)
-                );
+                server.Listener.Options.UrlPrefixes
+                    .Add(UrlPrefix.Create(rootUri.Scheme, rootUri.Host, rootUri.Port, path));
             }
 
             server.StartAsync(new DummyApplication(app), CancellationToken.None).Wait();

@@ -2092,10 +2092,9 @@ class C
 }
 ";
 
-            CompileAndVerify(source, expectedOutput: "1 2")
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(source, expectedOutput: "1 2").VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       61 (0x3d)
   .maxstack  4
@@ -2126,7 +2125,7 @@ class C
   IL_0037:  call       ""void System.Console.Write(string, object, object)""
   IL_003c:  ret
 }"
-                );
+            );
         }
 
         [Fact, WorkItem(1073330, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073330")]
@@ -2146,10 +2145,9 @@ class C
 }
 ";
 
-            CompileAndVerify(source, expectedOutput: "1 2 3 4")
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(source, expectedOutput: "1 2 3 4").VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size      163 (0xa3)
   .maxstack  7
@@ -2222,7 +2220,7 @@ class C
   IL_009d:  call       ""void System.Console.Write(string, params object[])""
   IL_00a2:  ret
 }"
-                );
+            );
         }
 
         [Fact, WorkItem(1073330, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073330")]
@@ -2242,10 +2240,9 @@ class C
 }
 ";
 
-            CompileAndVerify(source, expectedOutput: "1 2")
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(source, expectedOutput: "1 2").VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       69 (0x45)
   .maxstack  4
@@ -2284,7 +2281,7 @@ class C
   IL_003f:  call       ""void System.Console.Write(string, object, object)""
   IL_0044:  ret
 }"
-                );
+            );
         }
 
         [Fact, WorkItem(1073330, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073330")]
@@ -2312,10 +2309,9 @@ class C
 }
 ";
 
-            CompileAndVerify(source, expectedOutput: "1 2")
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(source, expectedOutput: "1 2").VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       82 (0x52)
   .maxstack  4
@@ -2351,7 +2347,7 @@ class C
   IL_004c:  call       ""void System.Console.Write(string, object, object)""
   IL_0051:  ret
 }"
-                );
+            );
         }
 
         #endregion
@@ -3536,10 +3532,9 @@ partial class C : IEnumerable
         Console.WriteLine(new C { 'a', 'b', 'c' }); // none removed
     }
 }";
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       63 (0x3f)
   .maxstack  3
@@ -3564,7 +3559,7 @@ partial class C : IEnumerable
   IL_003e:  ret
 }
 "
-                );
+            );
         }
 
         [Fact, WorkItem(1089276, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1089276")]

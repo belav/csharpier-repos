@@ -93,10 +93,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     else
                     {
                         if (
-                            !_modelMetadata.BoundConstructorParameterMapping.TryGetValue(
-                                parameter,
-                                out var property
-                            )
+                            !_modelMetadata.BoundConstructorParameterMapping
+                                .TryGetValue(parameter, out var property)
                         )
                         {
                             throw new InvalidOperationException(

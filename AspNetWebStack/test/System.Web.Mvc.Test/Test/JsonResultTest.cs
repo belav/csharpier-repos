@@ -42,12 +42,12 @@ namespace System.Web.Mvc.Test
                 .Returns("POST")
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentType = "application/json"
-                )
+                c => c.HttpContext.Response.ContentType = "application/json"
+            )
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentEncoding = contentEncoding
-                )
+                c => c.HttpContext.Response.ContentEncoding = contentEncoding
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(_jsonSerializedData))
                 .Verifiable();
@@ -84,8 +84,8 @@ namespace System.Web.Mvc.Test
             mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType)
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentEncoding = contentEncoding
-                )
+                c => c.HttpContext.Response.ContentEncoding = contentEncoding
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(_jsonSerializedData))
                 .Verifiable();
@@ -110,9 +110,10 @@ namespace System.Web.Mvc.Test
             Assert.ThrowsArgumentNull(
                 delegate
                 {
-                    new JsonResult().ExecuteResult(
-                        null /* context */
-                    );
+                    new JsonResult()
+                        .ExecuteResult(
+                            null /* context */
+                        );
                 },
                 "context"
             );
@@ -197,12 +198,12 @@ namespace System.Web.Mvc.Test
                 .Returns("POST")
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentType = "application/json"
-                )
+                c => c.HttpContext.Response.ContentType = "application/json"
+            )
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentEncoding = contentEncoding
-                )
+                c => c.HttpContext.Response.ContentEncoding = contentEncoding
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(_jsonSerializedData))
                 .Verifiable();
@@ -254,8 +255,8 @@ namespace System.Web.Mvc.Test
                 .Returns("POST")
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentType = "application/json"
-                )
+                c => c.HttpContext.Response.ContentType = "application/json"
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(jsonData)).Verifiable();
 
@@ -290,8 +291,8 @@ namespace System.Web.Mvc.Test
                 .Returns("POST")
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentType = "application/json"
-                )
+                c => c.HttpContext.Response.ContentType = "application/json"
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(jsonData)).Verifiable();
 
@@ -326,8 +327,8 @@ namespace System.Web.Mvc.Test
                 .Returns("POST")
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentType = "application/json"
-                )
+                c => c.HttpContext.Response.ContentType = "application/json"
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(jsonData)).Verifiable();
 

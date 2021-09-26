@@ -78,9 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class E
         {
-            public static readonly PropertyInfo DeceptionProperty = typeof(E).GetProperty(
-                nameof(Deception)
-            );
+            public static readonly PropertyInfo DeceptionProperty = typeof(E)
+                .GetProperty(nameof(Deception));
 
             public E Deception { get; set; }
         }

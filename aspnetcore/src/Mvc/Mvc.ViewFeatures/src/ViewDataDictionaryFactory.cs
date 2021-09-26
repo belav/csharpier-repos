@@ -37,13 +37,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             return Expression.Lambda<
                 Func<IModelMetadataProvider, ModelStateDictionary, ViewDataDictionary>
             >(
-                    Expression.Convert(
-                        Expression.New(constructor, parameter1, parameter2),
-                        typeof(ViewDataDictionary)
-                    ),
-                    parameter1,
-                    parameter2
-                )
+                Expression.Convert(
+                    Expression.New(constructor, parameter1, parameter2),
+                    typeof(ViewDataDictionary)
+                ),
+                parameter1,
+                parameter2
+            )
                 .Compile();
         }
 
@@ -63,12 +63,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var parameter = Expression.Parameter(typeof(ViewDataDictionary), "viewDataDictionary");
 
             return Expression.Lambda<Func<ViewDataDictionary, ViewDataDictionary>>(
-                    Expression.Convert(
-                        Expression.New(constructor, parameter),
-                        typeof(ViewDataDictionary)
-                    ),
-                    parameter
-                )
+                Expression.Convert(
+                    Expression.New(constructor, parameter),
+                    typeof(ViewDataDictionary)
+                ),
+                parameter
+            )
                 .Compile();
         }
     }

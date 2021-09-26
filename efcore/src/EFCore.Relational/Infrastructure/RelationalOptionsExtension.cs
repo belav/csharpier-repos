@@ -348,8 +348,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             Check.NotNull(options, nameof(options));
 
-            var relationalOptionsExtensions =
-                options.Extensions.OfType<RelationalOptionsExtension>().ToList();
+            var relationalOptionsExtensions = options.Extensions
+                .OfType<RelationalOptionsExtension>()
+                .ToList();
 
             if (relationalOptionsExtensions.Count == 0)
             {
@@ -390,7 +391,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             CoreOptionsExtension coreOptionsExtension
         ) =>
             coreOptionsExtension.WithWarningsConfiguration(
-                coreOptionsExtension.WarningsConfiguration.TryWithExplicit(
+                coreOptionsExtension.WarningsConfiguration
+                    .TryWithExplicit(
                         RelationalEventId.AmbientTransactionWarning,
                         WarningBehavior.Throw
                     )
@@ -499,9 +501,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             }
 
                             builder.Append(
-                                    Extension._migrationsHistoryTableName
-                                        ?? HistoryRepository.DefaultTableName
-                                )
+                                Extension._migrationsHistoryTableName
+                                    ?? HistoryRepository.DefaultTableName
+                            )
                                 .Append(' ');
                         }
 

@@ -200,8 +200,8 @@ namespace System.Net.Http
             var oc = new TestableObjectContent(typeof(string), "abc", formatterMock.Object);
             var task = new Task(() => { });
             formatterMock.Setup(
-                    f => f.WriteToStreamAsync(typeof(string), "abc", stream, oc, context)
-                )
+                f => f.WriteToStreamAsync(typeof(string), "abc", stream, oc, context)
+            )
                 .Returns(task)
                 .Verifiable();
 

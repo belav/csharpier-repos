@@ -15,9 +15,8 @@ class Program
             // jit should devirtualize, remove the box,
             // and change to call unboxed entry, passing
             // extra context argument.
-            await new ValueTask<string>(
-                Task.Delay(1).ContinueWith(_ => default(string))
-            ).ConfigureAwait(false);
+            await new ValueTask<string>(Task.Delay(1).ContinueWith(_ => default(string)))
+                .ConfigureAwait(false);
         }
 
         return 100;

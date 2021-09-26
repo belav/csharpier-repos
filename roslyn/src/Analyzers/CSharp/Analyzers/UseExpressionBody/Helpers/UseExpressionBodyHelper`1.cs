@@ -297,9 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                     out var semicolonToken
                 );
 
-                var trailingTrivia = semicolonToken.TrailingTrivia.Where(
-                        t => t.Kind() != SyntaxKind.EndOfLineTrivia
-                    )
+                var trailingTrivia = semicolonToken.TrailingTrivia
+                    .Where(t => t.Kind() != SyntaxKind.EndOfLineTrivia)
                     .Concat(declaration.GetTrailingTrivia());
                 semicolonToken = semicolonToken.WithTrailingTrivia(trailingTrivia);
 
@@ -389,7 +388,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 block != null
                     ? accessor.WithBody(block)
                     : accessor.WithExpressionBody(expressionBody)
-                          .WithSemicolonToken(semicolonToken);
+                      .WithSemicolonToken(semicolonToken);
 
             return WithAccessorList(
                 declaration,

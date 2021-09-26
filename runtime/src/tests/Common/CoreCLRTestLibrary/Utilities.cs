@@ -316,7 +316,8 @@ namespace TestLibrary
                 if (RtlGetVersionEx(out RTL_OSVERSIONINFOEX osvi) == 0)
                 {
                     return osvi.szCSDVersion[0] != '\0'
-                      ? string.Format(
+                      ? string
+                        .Format(
                             "{0} {1}.{2}.{3} {4}",
                             Version,
                             osvi.dwMajorVersion,
@@ -324,7 +325,8 @@ namespace TestLibrary
                             osvi.dwBuildNumber,
                             new string(&(osvi.szCSDVersion[0]))
                         )
-                      : string.Format(
+                      : string
+                        .Format(
                             "{0} {1}.{2}.{3}",
                             Version,
                             osvi.dwMajorVersion,

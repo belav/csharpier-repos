@@ -64,10 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
         )
         {
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    FeaturesResources.Change_signature
-                )
+                context.OperationContext
+                    .AddScope(allowCancellation: true, FeaturesResources.Change_signature)
             )
             {
                 if (!IsAvailable(subjectBuffer, out var workspace))
@@ -81,8 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
                     return false;
                 }
 
-                var document =
-                    subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                var document = subjectBuffer.CurrentSnapshot
+                    .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                         context.OperationContext,
                         _threadingContext
                     );
@@ -98,11 +96,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
 
                 // Async operation to determine the change signature
                 var changeSignatureContext = changeSignatureService.GetChangeSignatureContextAsync(
-                        document,
-                        caretPoint.Value.Position,
-                        restrictToDeclarations: false,
-                        cancellationToken
-                    )
+                    document,
+                    caretPoint.Value.Position,
+                    restrictToDeclarations: false,
+                    cancellationToken
+                )
                     .WaitAndGetResult(context.OperationContext.UserCancellationToken);
 
                 // UI thread bound operation to show the change signature dialog.
@@ -113,10 +111,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
 
                 // Async operation to compute the new solution created from the specified options.
                 var result = changeSignatureService.ChangeSignatureWithContextAsync(
-                        changeSignatureContext,
-                        changeSignatureOptions,
-                        cancellationToken
-                    )
+                    changeSignatureContext,
+                    changeSignatureOptions,
+                    cancellationToken
+                )
                     .WaitAndGetResult(cancellationToken);
 
                 // UI thread bound operation to show preview changes dialog / show error message, then apply the solution changes (if applicable).
@@ -169,10 +167,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
                 // and also will take it into consideration when measuring command handling duration.
                 context.OperationContext.TakeOwnership();
                 finalSolution = previewService.PreviewChanges(
-                    string.Format(
-                        EditorFeaturesResources.Preview_Changes_0,
-                        EditorFeaturesResources.Change_Signature
-                    ),
+                    string
+                        .Format(
+                            EditorFeaturesResources.Preview_Changes_0,
+                            EditorFeaturesResources.Change_Signature
+                        ),
                     "vs.csharp.refactoring.preview",
                     EditorFeaturesResources.Change_Signature_colon,
                     result.Name,

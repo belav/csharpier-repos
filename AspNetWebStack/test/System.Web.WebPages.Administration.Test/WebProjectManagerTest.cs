@@ -46,8 +46,8 @@ namespace System.Web.WebPages.Administration.Test
             // Arrange
             var projectManager = new Mock<IProjectManager>();
             projectManager.Setup(
-                    p => p.AddPackageReference("A", new SemanticVersion("1.0"), false, false)
-                )
+                p => p.AddPackageReference("A", new SemanticVersion("1.0"), false, false)
+            )
                 .Verifiable();
 
             var webProjectManager = new WebProjectManager(projectManager.Object, @"x:\")

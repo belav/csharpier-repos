@@ -545,8 +545,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     )
                 );
             mockCacheableKeyRingProvider.Setup(
-                    o => o.GetCacheableKeyRing(now + TimeSpan.FromMinutes(1))
-                )
+                o => o.GetCacheableKeyRing(now + TimeSpan.FromMinutes(1))
+            )
                 .Returns(
                     new CacheableKeyRing(
                         expirationToken: CancellationToken.None,
@@ -555,8 +555,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     )
                 );
             mockCacheableKeyRingProvider.Setup(
-                    o => o.GetCacheableKeyRing(now + TimeSpan.FromMinutes(2))
-                )
+                o => o.GetCacheableKeyRing(now + TimeSpan.FromMinutes(2))
+            )
                 .Returns(
                     new CacheableKeyRing(
                         expirationToken: CancellationToken.None,
@@ -602,8 +602,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     )
                 );
             mockCacheableKeyRingProvider.Setup(
-                    o => o.GetCacheableKeyRing(now + TimeSpan.FromHours(1))
-                )
+                o => o.GetCacheableKeyRing(now + TimeSpan.FromHours(1))
+            )
                 .Returns(
                     new CacheableKeyRing(
                         expirationToken: CancellationToken.None,
@@ -651,28 +651,26 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             var backgroundGetKeyRingTask = Task.Run(
                 () =>
                 {
-                    mockCacheableKeyRingProvider.Setup(o => o.GetCacheableKeyRing(now))
-                        .Returns(
-                            () =>
-                            {
-                                mreBackgroundThreadHasCalledGetCurrentKeyRing.Set();
-                                Assert.True(
-                                    mreForegroundThreadIsCallingGetCurrentKeyRing.Wait(testTimeout),
-                                    "Test timed out."
-                                );
-                                SpinWait.SpinUntil(
-                                    () =>
-                                        (foregroundThread.ThreadState & ThreadState.WaitSleepJoin)
-                                        != 0,
-                                    testTimeout
-                                );
-                                return new CacheableKeyRing(
-                                    expirationToken: CancellationToken.None,
-                                    expirationTime: StringToDateTime("2015-03-02 00:00:00Z"),
-                                    keyRing: expectedKeyRing
-                                );
-                            }
-                        );
+                    mockCacheableKeyRingProvider.Setup(o => o.GetCacheableKeyRing(now)).Returns(
+                        () =>
+                        {
+                            mreBackgroundThreadHasCalledGetCurrentKeyRing.Set();
+                            Assert.True(
+                                mreForegroundThreadIsCallingGetCurrentKeyRing.Wait(testTimeout),
+                                "Test timed out."
+                            );
+                            SpinWait.SpinUntil(
+                                () =>
+                                    (foregroundThread.ThreadState & ThreadState.WaitSleepJoin) != 0,
+                                testTimeout
+                            );
+                            return new CacheableKeyRing(
+                                expirationToken: CancellationToken.None,
+                                expirationTime: StringToDateTime("2015-03-02 00:00:00Z"),
+                                keyRing: expectedKeyRing
+                            );
+                        }
+                    );
 
                     return keyRingProvider.GetCurrentKeyRingCore(now);
                 }
@@ -828,33 +826,31 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             var getCacheExpirationTokenReturnValuesEnumerator =
                 getCacheExpirationTokenReturnValues.GetEnumerator();
             var mockKeyManager = new Mock<IKeyManager>(MockBehavior.Strict);
-            mockKeyManager.Setup(o => o.GetCacheExpirationToken())
-                .Returns(
-                    () =>
-                    {
-                        callSequence.Add("GetCacheExpirationToken");
-                        getCacheExpirationTokenReturnValuesEnumerator.MoveNext();
-                        return getCacheExpirationTokenReturnValuesEnumerator.Current;
-                    }
-                );
+            mockKeyManager.Setup(o => o.GetCacheExpirationToken()).Returns(
+                () =>
+                {
+                    callSequence.Add("GetCacheExpirationToken");
+                    getCacheExpirationTokenReturnValuesEnumerator.MoveNext();
+                    return getCacheExpirationTokenReturnValuesEnumerator.Current;
+                }
+            );
 
             var getAllKeysReturnValuesEnumerator = getAllKeysReturnValues.GetEnumerator();
-            mockKeyManager.Setup(o => o.GetAllKeys())
-                .Returns(
-                    () =>
-                    {
-                        callSequence.Add("GetAllKeys");
-                        getAllKeysReturnValuesEnumerator.MoveNext();
-                        return getAllKeysReturnValuesEnumerator.Current;
-                    }
-                );
+            mockKeyManager.Setup(o => o.GetAllKeys()).Returns(
+                () =>
+                {
+                    callSequence.Add("GetAllKeys");
+                    getAllKeysReturnValuesEnumerator.MoveNext();
+                    return getAllKeysReturnValuesEnumerator.Current;
+                }
+            );
 
             if (createNewKeyCallbacks != null)
             {
                 var createNewKeyCallbacksEnumerator = createNewKeyCallbacks.GetEnumerator();
                 mockKeyManager.Setup(
-                        o => o.CreateNewKey(It.IsAny<DateTimeOffset>(), It.IsAny<DateTimeOffset>())
-                    )
+                    o => o.CreateNewKey(It.IsAny<DateTimeOffset>(), It.IsAny<DateTimeOffset>())
+                )
                     .Returns<DateTimeOffset, DateTimeOffset>(
                         (activationDate, expirationDate) =>
                         {
@@ -877,12 +873,12 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 resolveDefaultKeyPolicyReturnValues.GetEnumerator();
             var mockDefaultKeyResolver = new Mock<IDefaultKeyResolver>(MockBehavior.Strict);
             mockDefaultKeyResolver.Setup(
-                    o =>
-                        o.ResolveDefaultKeyPolicy(
-                            It.IsAny<DateTimeOffset>(),
-                            It.IsAny<IEnumerable<IKey>>()
-                        )
-                )
+                o =>
+                    o.ResolveDefaultKeyPolicy(
+                        It.IsAny<DateTimeOffset>(),
+                        It.IsAny<IEnumerable<IKey>>()
+                    )
+            )
                 .Returns<DateTimeOffset, IEnumerable<IKey>>(
                     (now, allKeys) =>
                     {

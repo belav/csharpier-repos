@@ -8443,7 +8443,7 @@ Block[B6] - Exit
         public void VerifyRangeOperator_Int_Create()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M()
@@ -8451,8 +8451,7 @@ class Test
         var x = /*<bind>*/1..2/*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"
@@ -8481,7 +8480,7 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '1..2')
         public void VerifyRangeOperator_Int_Create_WithHat()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M(int arg)
@@ -8489,8 +8488,7 @@ class Test
         var x = /*<bind>*/0..^1/*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"
@@ -8518,7 +8516,7 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '0..^1')
         public void VerifyRangeOperator_Int_ToEnd()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M()
@@ -8526,8 +8524,7 @@ class Test
         var x = /*<bind>*/..2/*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"
@@ -8553,7 +8550,7 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '..2')
         public void VerifyRangeOperator_Int_FromStart()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M()
@@ -8561,8 +8558,7 @@ class Test
         var x = /*<bind>*/1../*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"
@@ -8588,7 +8584,7 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '1..')
         public void VerifyRangeOperator_Int_All()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M()
@@ -8596,8 +8592,7 @@ class Test
         var x = /*<bind>*/../*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"
@@ -8620,7 +8615,7 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '..')
         public void VerifyRangeOperator_NullableInt_Create()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M(int? start, int? end)
@@ -8628,8 +8623,7 @@ class Test
         var x = /*<bind>*/start..end/*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"
@@ -8658,7 +8652,7 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         public void VerifyRangeOperator_NullableInt_Create_WithHat()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M(int? start, int? end)
@@ -8666,8 +8660,7 @@ class Test
         var x = /*<bind>*/start..^end/*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"
@@ -8695,7 +8688,7 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         public void VerifyRangeOperator_NullableInt_ToEnd()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M(int? end)
@@ -8703,8 +8696,7 @@ class Test
         var x = /*<bind>*/..end/*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"
@@ -8730,7 +8722,7 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         public void VerifyRangeOperator_NullableInt_FromStart()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class Test
 {
     void M(int? start)
@@ -8738,8 +8730,7 @@ class Test
         var x = /*<bind>*/start../*</bind>*/;
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             string expectedOperationTree =
                 @"

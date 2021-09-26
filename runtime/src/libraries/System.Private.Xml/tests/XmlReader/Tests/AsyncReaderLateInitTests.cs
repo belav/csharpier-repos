@@ -153,34 +153,29 @@ namespace System.Xml.Tests
         public static void SynchronizationContextCurrent_NotUsedForAsyncOperations()
         {
             Task.Run(
-                    () =>
-                    {
-                        var sc = new TrackingSynchronizationContext();
-                        SynchronizationContext.SetSynchronizationContext(sc);
+                () =>
+                {
+                    var sc = new TrackingSynchronizationContext();
+                    SynchronizationContext.SetSynchronizationContext(sc);
 
-                        using (
-                            XmlReader reader = XmlReader.Create(
-                                new DribbleReadXmlAsyncStream(_dummyXml),
-                                new XmlReaderSettings { Async = true, }
-                            )
+                    using (
+                        XmlReader reader = XmlReader.Create(
+                            new DribbleReadXmlAsyncStream(_dummyXml),
+                            new XmlReaderSettings { Async = true, }
                         )
-                        {
-                            while (reader.ReadAsync().GetAwaiter().GetResult())
-                                ;
-                        }
-
-                        Assert.True(
-                            sc.CallStacks.Count == 0,
-                            "Sync Ctx used: "
-                                + string.Join(
-                                    Environment.NewLine + Environment.NewLine,
-                                    sc.CallStacks
-                                )
-                        );
+                    )
+                    {
+                        while (reader.ReadAsync().GetAwaiter().GetResult())
+                            ;
                     }
-                )
-                .GetAwaiter()
-                .GetResult();
+
+                    Assert.True(
+                        sc.CallStacks.Count == 0,
+                        "Sync Ctx used: "
+                            + string.Join(Environment.NewLine + Environment.NewLine, sc.CallStacks)
+                    );
+                }
+            ).GetAwaiter().GetResult();
         }
 
         private sealed class DribbleReadXmlAsyncStream : Stream

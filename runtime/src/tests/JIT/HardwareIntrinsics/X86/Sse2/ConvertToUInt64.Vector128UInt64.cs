@@ -206,10 +206,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Sse2).GetMethod(
-                    nameof(Sse2.ConvertToUInt64),
-                    new Type[] { typeof(Vector128<UInt64>) }
-                )
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.ConvertToUInt64), new Type[] { typeof(Vector128<UInt64>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector128<UInt64>>(_dataTable.inArrayPtr) }
@@ -222,10 +220,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse2).GetMethod(
-                    nameof(Sse2.ConvertToUInt64),
-                    new Type[] { typeof(Vector128<UInt64>) }
-                )
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.ConvertToUInt64), new Type[] { typeof(Vector128<UInt64>) })
                 .Invoke(
                     null,
                     new object[] { Sse2.LoadVector128((UInt64*)(_dataTable.inArrayPtr)) }
@@ -238,10 +234,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse2).GetMethod(
-                    nameof(Sse2.ConvertToUInt64),
-                    new Type[] { typeof(Vector128<UInt64>) }
-                )
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.ConvertToUInt64), new Type[] { typeof(Vector128<UInt64>) })
                 .Invoke(
                     null,
                     new object[] { Sse2.LoadAlignedVector128((UInt64*)(_dataTable.inArrayPtr)) }
@@ -388,12 +382,12 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse2)}.{nameof(Sse2.ConvertToUInt64)}<UInt64>(Vector128<UInt64>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse2)}.{nameof(Sse2.ConvertToUInt64)}<UInt64>(Vector128<UInt64>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($"   result: result");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

@@ -284,7 +284,8 @@ class C
             );
 
             var srcTypes = sourceModule.GlobalNamespace.GetTypeMembers();
-            var peTypes = peModule.GlobalNamespace.GetTypeMembers()
+            var peTypes = peModule.GlobalNamespace
+                .GetTypeMembers()
                 .WhereAsArray(t => t.Name != "<Module>");
 
             Assert.Equal(srcTypes.Length, peTypes.Length);
@@ -335,10 +336,13 @@ class C
                     typeSymbols.Add(((EventSymbol)symbol).Type);
                     break;
             }
-            var symbolString = string.Join(
-                " | ",
-                typeSymbols.Select(s => s.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat))
-            );
+            var symbolString = string
+                .Join(
+                    " | ",
+                    typeSymbols.Select(
+                        s => s.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                    )
+                );
             typeSymbols.Free();
             return $"{symbol.Name}: {symbolString}";
         }
@@ -422,24 +426,25 @@ class C
                     expectedElementNames: expectedElementNames
                 );
 
-                AttributeTests_Dynamic.DynamicAttributeValidator.ValidateDynamicAttribute(
-                    args.GetAttributes(),
-                    expectedDynamicAttribute: true,
-                    expectedTransformFlags: new[]
-                    {
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        true,
-                        false,
-                        true,
-                        false,
-                        true,
-                        false
-                    }
-                );
+                AttributeTests_Dynamic.DynamicAttributeValidator
+                    .ValidateDynamicAttribute(
+                        args.GetAttributes(),
+                        expectedDynamicAttribute: true,
+                        expectedTransformFlags: new[]
+                        {
+                            false,
+                            false,
+                            false,
+                            false,
+                            true,
+                            true,
+                            false,
+                            true,
+                            false,
+                            true,
+                            false
+                        }
+                    );
             }
 
             private void ValidateAttributesOnEvents()
@@ -454,21 +459,22 @@ class C
                     expectedTupleNamesAttribute: true,
                     expectedElementNames: new[] { "e1", "e4", null, "e2", "e3" }
                 );
-                AttributeTests_Dynamic.DynamicAttributeValidator.ValidateDynamicAttribute(
-                    event1.GetAttributes(),
-                    expectedDynamicAttribute: true,
-                    expectedTransformFlags: new[]
-                    {
-                        false,
-                        false,
-                        false,
-                        true,
-                        false,
-                        false,
-                        true,
-                        true
-                    }
-                );
+                AttributeTests_Dynamic.DynamicAttributeValidator
+                    .ValidateDynamicAttribute(
+                        event1.GetAttributes(),
+                        expectedDynamicAttribute: true,
+                        expectedTransformFlags: new[]
+                        {
+                            false,
+                            false,
+                            false,
+                            true,
+                            false,
+                            false,
+                            true,
+                            true
+                        }
+                    );
             }
 
             private void ValidateAttributesOnNamedTypes()
@@ -573,23 +579,24 @@ class C
                     expectedTupleNamesAttribute: true,
                     expectedElementNames: expectedElementNames
                 );
-                AttributeTests_Dynamic.DynamicAttributeValidator.ValidateDynamicAttribute(
-                    field4.GetAttributes(),
-                    expectedDynamicAttribute: true,
-                    expectedTransformFlags: new[]
-                    {
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        true,
-                        false
-                    }
-                );
+                AttributeTests_Dynamic.DynamicAttributeValidator
+                    .ValidateDynamicAttribute(
+                        field4.GetAttributes(),
+                        expectedDynamicAttribute: true,
+                        expectedTransformFlags: new[]
+                        {
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            true,
+                            true,
+                            false
+                        }
+                    );
 
                 // public static Outer<(object e1, dynamic e2)>
                 //     .Inner<(dynamic e3, object e4),
@@ -601,23 +608,24 @@ class C
                     expectedTupleNamesAttribute: true,
                     expectedElementNames: expectedElementNames
                 );
-                AttributeTests_Dynamic.DynamicAttributeValidator.ValidateDynamicAttribute(
-                    field5.GetAttributes(),
-                    expectedDynamicAttribute: true,
-                    expectedTransformFlags: new[]
-                    {
-                        false,
-                        false,
-                        false,
-                        true,
-                        false,
-                        true,
-                        false,
-                        false,
-                        true,
-                        true
-                    }
-                );
+                AttributeTests_Dynamic.DynamicAttributeValidator
+                    .ValidateDynamicAttribute(
+                        field5.GetAttributes(),
+                        expectedDynamicAttribute: true,
+                        expectedTransformFlags: new[]
+                        {
+                            false,
+                            false,
+                            false,
+                            true,
+                            false,
+                            true,
+                            false,
+                            false,
+                            true,
+                            true
+                        }
+                    );
 
                 // public static Base1<(int, ValueTuple<int, ValueTuple>)> Field6;
                 var field6 = _derivedClass.GetMember<FieldSymbol>("Field6");
@@ -827,11 +835,12 @@ class C
             {
                 var synthesizedTupleElementNamesAttr = attributes.Where(
                     attr =>
-                        string.Equals(
-                            attr.AttributeClass.Name,
-                            "TupleElementNamesAttribute",
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(
+                                attr.AttributeClass.Name,
+                                "TupleElementNamesAttribute",
+                                StringComparison.Ordinal
+                            )
                 );
 
                 if (!expectedTupleNamesAttribute)
@@ -848,7 +857,8 @@ class C
                     );
                     Assert.Equal(
                         "System.String[]",
-                        tupleAttr.AttributeConstructor.Parameters.Single()
+                        tupleAttr.AttributeConstructor.Parameters
+                            .Single()
                             .TypeWithAnnotations.ToTestDisplayString()
                     );
 
@@ -895,9 +905,9 @@ class C
                 // (16,33): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 // public class Derived<T> : Outer<(int e1, (int e2, int e3) e4)>.Inner<
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        "(int e1, (int e2, int e3) e4)"
-                    )
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    "(int e1, (int e2, int e3) e4)"
+                )
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(16, 33),
                 // (17,11): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
@@ -923,9 +933,9 @@ class C
                 // (18,5): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     ((int e11, int e12) e13, int e14)>
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        "((int e11, int e12) e13, int e14)"
-                    )
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    "((int e11, int e12) e13, int e14)"
+                )
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(18, 5),
                 // (19,18): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
@@ -941,17 +951,17 @@ class C
                 // (19,42): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     .InnerInner<((int e15, int e16) e17, (int e18, Base1<(int e19, int e20)> e21) e22)>
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        "(int e18, Base1<(int e19, int e20)> e21)"
-                    )
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    "(int e18, Base1<(int e19, int e20)> e21)"
+                )
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(19, 42),
                 // (19,17): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     .InnerInner<((int e15, int e16) e17, (int e18, Base1<(int e19, int e20)> e21) e22)>
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        "((int e15, int e16) e17, (int e18, Base1<(int e19, int e20)> e21) e22)"
-                    )
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    "((int e15, int e16) e17, (int e18, Base1<(int e19, int e20)> e21) e22)"
+                )
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(19, 17),
                 // (10,38): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
@@ -967,20 +977,18 @@ class C
                 // (72,47): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //                                    ValueTuple<(dynamic e2, dynamic e3)> e4)> Event1
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        "(dynamic e2, dynamic e3)"
-                    )
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    "(dynamic e2, dynamic e3)"
+                )
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(72, 47),
                 // (71,35): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     public static event Delegate1<(dynamic e1,
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        @"(dynamic e1,
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    @"(dynamic e1,
                                    ValueTuple<(dynamic e2, dynamic e3)> e4)"
-                    )
-                    .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
-                    .WithLocation(71, 35),
+                ).WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute").WithLocation(71, 35),
                 // (41,19): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     public static (int e1, int e2) Method1() => (0, 0);
                 Diagnostic(ErrorCode.ERR_TupleElementNamesAttributeMissing, "(int e1, int e2)")
@@ -1014,12 +1022,10 @@ class C
                 // (53,19): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     public static (int e1, int e2, int e3, int e4, int e5,
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        @"(int e1, int e2, int e3, int e4, int e5,
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    @"(int e1, int e2, int e3, int e4, int e5,
                    int e6, int e7, int e8, int e9)"
-                    )
-                    .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
-                    .WithLocation(53, 19),
+                ).WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute").WithLocation(53, 19),
                 // (57,19): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     public static (int e1, int e2) Prop1 => (0, 0);
                 Diagnostic(ErrorCode.ERR_TupleElementNamesAttributeMissing, "(int e1, int e2)")
@@ -1043,17 +1049,17 @@ class C
                 // (68,14): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //             ((dynamic e1, dynamic e2, object e3) e4, dynamic e5),
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        "(dynamic e1, dynamic e2, object e3)"
-                    )
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    "(dynamic e1, dynamic e2, object e3)"
+                )
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(68, 14),
                 // (68,13): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //             ((dynamic e1, dynamic e2, object e3) e4, dynamic e5),
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        "((dynamic e1, dynamic e2, object e3) e4, dynamic e5)"
-                    )
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    "((dynamic e1, dynamic e2, object e3) e4, dynamic e5)"
+                )
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(68, 13),
                 // (22,19): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
@@ -1069,53 +1075,49 @@ class C
                 // (23,25): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     public static Base1<(int e1, (int e2, int e3) e4)> Field3;
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        "(int e1, (int e2, int e3) e4)"
-                    )
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    "(int e1, (int e2, int e3) e4)"
+                )
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(23, 25),
                 // (25,36): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     public static ValueTuple<Base1<(int e1, (int, (dynamic, dynamic)) e2)>, int> Field4;
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        "(int e1, (int, (dynamic, dynamic)) e2)"
-                    )
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    "(int e1, (int, (dynamic, dynamic)) e2)"
+                )
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(25, 36),
                 // (27,25): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     public static Outer<(object e1, dynamic e2)>
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        "(object e1, dynamic e2)"
-                    )
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    "(object e1, dynamic e2)"
+                )
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(27, 25),
                 // (28,16): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //         .Inner<(dynamic e3, object e4),
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        "(dynamic e3, object e4)"
-                    )
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    "(dynamic e3, object e4)"
+                )
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(28, 16),
                 // (36,19): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     public static (int e1, int e2, int e3, int e4, int e5,
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        @"(int e1, int e2, int e3, int e4, int e5,
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    @"(int e1, int e2, int e3, int e4, int e5,
                    int e6, int e7, int e8, int e9)"
-                    )
-                    .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
-                    .WithLocation(36, 19),
+                ).WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute").WithLocation(36, 19),
                 // (38,25): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     public static Base1<(int e1, int e2, int e3, int e4, int e5,
                 Diagnostic(
-                        ErrorCode.ERR_TupleElementNamesAttributeMissing,
-                        @"(int e1, int e2, int e3, int e4, int e5,
+                    ErrorCode.ERR_TupleElementNamesAttributeMissing,
+                    @"(int e1, int e2, int e3, int e4, int e5,
                          int e6, int e7, int e8, int e9)"
-                    )
-                    .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
-                    .WithLocation(38, 25),
+                ).WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute").WithLocation(38, 25),
                 // (21,19): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
                 //     public static (int e1, int e2) Field1;
                 Diagnostic(ErrorCode.ERR_TupleElementNamesAttributeMissing, "(int e1, int e2)")
@@ -1167,44 +1169,44 @@ public struct S
                 // (31,2): error CS8331: Cannot reference 'System.Runtime.CompilerServices.TupleElementNamesAttribute' explicitly. Use the tuple syntax to define tuple names.
                 // [TupleElementNames(new[] { "a", "b" })]
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
-                        @"TupleElementNames(new[] { ""a"", ""b"" })"
-                    )
+                    ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
+                    @"TupleElementNames(new[] { ""a"", ""b"" })"
+                )
                     .WithLocation(31, 2),
                 // (5,2): error CS8331: Cannot reference 'System.Runtime.CompilerServices.TupleElementNamesAttribute' explicitly. Use the tuple syntax to define tuple names.
                 // [TupleElementNames(new[] { "a", "b" })]
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
-                        @"TupleElementNames(new[] { ""a"", ""b"" })"
-                    )
+                    ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
+                    @"TupleElementNames(new[] { ""a"", ""b"" })"
+                )
                     .WithLocation(5, 2),
                 // (18,10): error CS8331: Cannot reference 'System.Runtime.CompilerServices.TupleElementNamesAttribute' explicitly. Use the tuple syntax to define tuple names.
                 //         [TupleElementNames(new[] { "x" })]ValueTuple<T> args);
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
-                        @"TupleElementNames(new[] { ""x"" })"
-                    )
+                    ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
+                    @"TupleElementNames(new[] { ""x"" })"
+                )
                     .WithLocation(18, 10),
                 // (11,6): error CS8331: Cannot reference 'System.Runtime.CompilerServices.TupleElementNamesAttribute' explicitly. Use the tuple syntax to define tuple names.
                 //     [TupleElementNames(new[] { "x", "y" })]
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
-                        @"TupleElementNames(new[] { ""x"", ""y"" })"
-                    )
+                    ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
+                    @"TupleElementNames(new[] { ""x"", ""y"" })"
+                )
                     .WithLocation(11, 6),
                 // (14,14): error CS8331: Cannot reference 'System.Runtime.CompilerServices.TupleElementNamesAttribute' explicitly. Use the tuple syntax to define tuple names.
                 //     [return: TupleElementNames(new string[] { null, null })]
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
-                        "TupleElementNames(new string[] { null, null })"
-                    )
+                    ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
+                    "TupleElementNames(new string[] { null, null })"
+                )
                     .WithLocation(14, 14),
                 // (15,36): error CS8331: Cannot reference 'System.Runtime.CompilerServices.TupleElementNamesAttribute' explicitly. Use the tuple syntax to define tuple names.
                 //     public ValueTuple<int, int> M([TupleElementNames(new string[] { null})] ValueTuple x) => (0, 0);
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
-                        "TupleElementNames(new string[] { null})"
-                    )
+                    ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
+                    "TupleElementNames(new string[] { null})"
+                )
                     .WithLocation(15, 36),
                 // (20,6): error CS0592: Attribute 'TupleElementNames' is not valid on this declaration type. It is only valid on 'class, struct, property, indexer, field, parameter, return' declarations.
                 //     [TupleElementNames(new[] { "y" })]
@@ -1217,9 +1219,9 @@ public struct S
                 // (27,6): error CS8331: Cannot reference 'System.Runtime.CompilerServices.TupleElementNamesAttribute' explicitly. Use the tuple syntax to define tuple names.
                 //     [TupleElementNames(new[] { "a", "b" })]
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
-                        @"TupleElementNames(new[] { ""a"", ""b"" })"
-                    )
+                    ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
+                    @"TupleElementNames(new[] { ""a"", ""b"" })"
+                )
                     .WithLocation(27, 6),
                 // (28,33): error CS8331: Cannot reference 'System.Runtime.CompilerServices.TupleElementNamesAttribute' explicitly. Use the tuple syntax to define tuple names.
                 //     public (int x, int y) this[[TupleElementNames](int a, int b) t] => t;
@@ -1228,9 +1230,9 @@ public struct S
                 // (8,6): error CS8331: Cannot reference 'System.Runtime.CompilerServices.TupleElementNamesAttribute' explicitly. Use the tuple syntax to define tuple names.
                 //     [TupleElementNames(new string[] { null, null })]
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
-                        "TupleElementNames(new string[] { null, null })"
-                    )
+                    ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
+                    "TupleElementNames(new string[] { null, null })"
+                )
                     .WithLocation(8, 6)
             );
         }

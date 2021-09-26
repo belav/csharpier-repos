@@ -137,9 +137,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         protected static readonly byte[] _worldBytes = Encoding.ASCII.GetBytes("world");
         protected static readonly byte[] _helloWorldBytes = Encoding.ASCII.GetBytes("hello, world");
         protected static readonly byte[] _noData = new byte[0];
-        protected static readonly byte[] _maxData = Encoding.ASCII.GetBytes(
-            new string('a', Http2PeerSettings.MinAllowedMaxFrameSize)
-        );
+        protected static readonly byte[] _maxData = Encoding.ASCII
+            .GetBytes(new string('a', Http2PeerSettings.MinAllowedMaxFrameSize));
 
         private readonly MemoryPool<byte> _memoryPool = PinnedBlockMemoryPoolFactory.Create();
 
@@ -222,8 +221,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             _mockKestrelTrace.Setup(m => m.Http2ConnectionClosing(It.IsAny<string>()))
                 .Callback(() => _closingStateReached.SetResult());
             _mockKestrelTrace.Setup(
-                    m => m.Http2ConnectionClosed(It.IsAny<string>(), It.IsAny<int>())
-                )
+                m => m.Http2ConnectionClosed(It.IsAny<string>(), It.IsAny<int>())
+            )
                 .Callback(() => _closedStateReached.SetResult());
 
             _mockConnectionContext.Setup(c => c.Abort(It.IsAny<ConnectionAbortedException>()))
@@ -395,10 +394,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             _readRateApplication = async context =>
             {
-                var expectedBytes = int.Parse(
-                    context.Request.Path.Value.Substring(1),
-                    CultureInfo.InvariantCulture
-                );
+                var expectedBytes = int
+                    .Parse(context.Request.Path.Value.Substring(1), CultureInfo.InvariantCulture);
 
                 var buffer = new byte[Http2PeerSettings.MinAllowedMaxFrameSize];
                 var received = 0;

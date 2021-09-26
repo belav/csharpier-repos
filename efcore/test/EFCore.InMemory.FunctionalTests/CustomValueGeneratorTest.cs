@@ -43,10 +43,10 @@ namespace Microsoft.EntityFrameworkCore
 
         private class CustomValueGeneratorContext : DbContext
         {
-            private static readonly IServiceProvider _serviceProvider =
-                new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
-                    .AddScoped<IValueGeneratorSelector, CustomInMemoryValueGeneratorSelector>()
-                    .BuildServiceProvider();
+            private static readonly IServiceProvider _serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
+                .AddScoped<IValueGeneratorSelector, CustomInMemoryValueGeneratorSelector>()
+                .BuildServiceProvider();
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder.UseInternalServiceProvider(_serviceProvider)
@@ -91,8 +91,9 @@ namespace Microsoft.EntityFrameworkCore
 
         private class CustomValueGeneratorContextAnnotateType : DbContext
         {
-            private static readonly IServiceProvider _serviceProvider =
-                new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
+            private static readonly IServiceProvider _serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder.UseInternalServiceProvider(_serviceProvider)
@@ -136,8 +137,9 @@ namespace Microsoft.EntityFrameworkCore
 
         private class CustomValueGeneratorContextAnnotateFactory : DbContext
         {
-            private static readonly IServiceProvider _serviceProvider =
-                new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
+            private static readonly IServiceProvider _serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder.UseInternalServiceProvider(_serviceProvider)

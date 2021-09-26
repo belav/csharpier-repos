@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             PreallocatedTagHelperHtmlAttributeValueIntermediateNode node
         )
         {
-            context.CodeWriter.Write("private static readonly global::")
+            context.CodeWriter
+                .Write("private static readonly global::")
                 .Write(TagHelperAttributeTypeName)
                 .Write(" ")
                 .Write(node.VariableName)
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             }
             else
             {
-                context.CodeWriter.WriteParameterSeparator()
+                context.CodeWriter
+                    .WriteParameterSeparator()
                     .WriteStartNewObject("global::" + EncodedHtmlStringTypeName)
                     .WriteStringLiteral(node.Value)
                     .WriteEndMethodInvocation(endLine: false)
@@ -71,7 +73,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 throw new InvalidOperationException(message);
             }
 
-            context.CodeWriter.WriteStartInstanceMethodInvocation(
+            context.CodeWriter
+                .WriteStartInstanceMethodInvocation(
                     ExecutionContextVariableName,
                     ExecutionContextAddHtmlAttributeMethodName
                 )
@@ -84,7 +87,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             PreallocatedTagHelperPropertyValueIntermediateNode node
         )
         {
-            context.CodeWriter.Write("private static readonly global::")
+            context.CodeWriter
+                .Write("private static readonly global::")
                 .Write(TagHelperAttributeTypeName)
                 .Write(" ")
                 .Write(node.VariableName)
@@ -122,7 +126,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             )
             {
                 // Throw a reasonable Exception at runtime if the dictionary property is null.
-                context.CodeWriter.Write("if (")
+                context.CodeWriter
+                    .Write("if (")
                     .Write(node.FieldName)
                     .Write(".")
                     .Write(node.PropertyName)
@@ -131,7 +136,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 {
                     // System is in Host.NamespaceImports for all MVC scenarios. No need to generate FullName
                     // of InvalidOperationException type.
-                    context.CodeWriter.Write("throw ")
+                    context.CodeWriter
+                        .Write("throw ")
                         .WriteStartNewObject(nameof(InvalidOperationException))
                         .WriteStartMethodInvocation(FormatInvalidIndexerAssignmentMethodName)
                         .WriteStringLiteral(node.AttributeName)
@@ -144,7 +150,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 }
             }
 
-            context.CodeWriter.WriteStartAssignment(GetPropertyAccessor(node))
+            context.CodeWriter
+                .WriteStartAssignment(GetPropertyAccessor(node))
                 .Write("(string)")
                 .Write($"{node.VariableName}.Value")
                 .WriteLine(";")
@@ -190,9 +197,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
             if (node.IsIndexerNameMatch)
             {
-                var dictionaryKey = node.AttributeName.Substring(
-                    node.BoundAttribute.IndexerNamePrefix.Length
-                );
+                var dictionaryKey = node.AttributeName
+                    .Substring(node.BoundAttribute.IndexerNamePrefix.Length);
                 propertyAccessor += $"[\"{dictionaryKey}\"]";
             }
 

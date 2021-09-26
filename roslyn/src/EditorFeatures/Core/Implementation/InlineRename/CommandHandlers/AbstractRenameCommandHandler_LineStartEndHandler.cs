@@ -78,10 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             if (caretPoint.HasValue)
             {
                 if (
-                    _renameService.ActiveSession.TryGetContainingEditableSpan(
-                        caretPoint.Value,
-                        out var span
-                    )
+                    _renameService.ActiveSession
+                        .TryGetContainingEditableSpan(caretPoint.Value, out var span)
                 )
                 {
                     var newPoint = lineStart ? span.Start : span.End;
@@ -93,12 +91,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                     // The PointTrackingMode should not matter because we are not tracking between
                     // versions, and the PositionAffinity is set towards the identifier.
-                    var newPointInView = view.BufferGraph.MapUpToBuffer(
-                        newPoint,
-                        PointTrackingMode.Negative,
-                        lineStart ? PositionAffinity.Successor : PositionAffinity.Predecessor,
-                        view.TextBuffer
-                    );
+                    var newPointInView = view.BufferGraph
+                        .MapUpToBuffer(
+                            newPoint,
+                            PointTrackingMode.Negative,
+                            lineStart ? PositionAffinity.Successor : PositionAffinity.Predecessor,
+                            view.TextBuffer
+                        );
 
                     if (!newPointInView.HasValue)
                     {
@@ -107,10 +106,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                     if (extendSelection)
                     {
-                        view.Selection.Select(
-                            view.Selection.AnchorPoint,
-                            new VirtualSnapshotPoint(newPointInView.Value)
-                        );
+                        view.Selection
+                            .Select(
+                                view.Selection.AnchorPoint,
+                                new VirtualSnapshotPoint(newPointInView.Value)
+                            );
                     }
                     else
                     {

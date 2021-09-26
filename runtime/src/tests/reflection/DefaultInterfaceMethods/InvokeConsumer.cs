@@ -24,53 +24,65 @@ class Program
 
         if (
             !(
-                (RuntimeTypeHandle)typeof(IFoo<Fooer>).GetMethod("StaticMethod")
+                (RuntimeTypeHandle)typeof(IFoo<Fooer>)
+                    .GetMethod("StaticMethod")
                     .Invoke(null, new object[] {  })
-            ).Equals(typeof(Fooer[,]).TypeHandle)
+            )
+                .Equals(typeof(Fooer[,]).TypeHandle)
         )
             return 11;
 
         if (
             !(
-                (RuntimeTypeHandle)typeof(IFoo<Fooer>).GetMethod("DefaultMethod")
+                (RuntimeTypeHandle)typeof(IFoo<Fooer>)
+                    .GetMethod("DefaultMethod")
                     .Invoke(new Fooer(), new object[] {  })
-            ).Equals(typeof(Fooer).TypeHandle)
+            )
+                .Equals(typeof(Fooer).TypeHandle)
         )
             return 12;
 
         if (
             !(
-                (RuntimeTypeHandle)typeof(IFoo<Fooer>).GetMethod("InstanceMethod")
+                (RuntimeTypeHandle)typeof(IFoo<Fooer>)
+                    .GetMethod("InstanceMethod")
                     .Invoke(new Fooer(), new object[] {  })
-            ).Equals(typeof(Fooer[]).TypeHandle)
+            )
+                .Equals(typeof(Fooer[]).TypeHandle)
         )
             return 13;
 
         if (
-            (int)typeof(IFoo).GetMethod("DefaultMethod")
+            (int)typeof(IFoo)
+                .GetMethod("DefaultMethod")
                 .Invoke(new ValueFooer(), new object[] { 1 }) != 51
         )
             return 22;
 
         if (
-            (int)typeof(IFoo).GetMethod("InstanceMethod")
+            (int)typeof(IFoo)
+                .GetMethod("InstanceMethod")
                 .Invoke(new ValueFooer(), new object[] { 1 }) != 21
         )
             return 23;
 
         if (
             !(
-                (RuntimeTypeHandle)typeof(IFoo<Fooer>).GetMethod("DefaultMethod")
+                (RuntimeTypeHandle)typeof(IFoo<Fooer>)
+                    .GetMethod("DefaultMethod")
                     .Invoke(new ValueFooer(), new object[] {  })
-            ).Equals(typeof(Fooer).TypeHandle)
+            )
+                .Equals(typeof(Fooer).TypeHandle)
         )
             return 32;
 
         if (
             !(
-                (RuntimeTypeHandle)typeof(IFoo<Fooer>).GetMethod("InstanceMethod")
+                (RuntimeTypeHandle)typeof(IFoo<Fooer>)
+                    .GetMethod("InstanceMethod")
                     .Invoke(new ValueFooer(), new object[] {  })
-            ).Equals(typeof(Fooer[]).TypeHandle)
+            )
+                .Equals(typeof(Fooer[]).TypeHandle)
         )
             return 33;
 

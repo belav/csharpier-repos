@@ -145,9 +145,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         )
         {
             var response = await Client.CreateDatabaseIfNotExistsAsync(
-                    _databaseId,
-                    cancellationToken: cancellationToken
-                )
+                _databaseId,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return response.StatusCode == HttpStatusCode.Created;
@@ -323,11 +323,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             var partitionKey = CreatePartitionKey(entry);
 
             using var response = await container.CreateItemStreamAsync(
-                    stream,
-                    partitionKey,
-                    itemRequestOptions,
-                    cancellationToken
-                )
+                stream,
+                partitionKey,
+                itemRequestOptions,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             ProcessResponse(response, entry);
 
@@ -398,12 +398,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             var partitionKey = CreatePartitionKey(entry);
 
             using var response = await container.ReplaceItemStreamAsync(
-                    stream,
-                    parameters.ItemId,
-                    partitionKey,
-                    itemRequestOptions,
-                    cancellationToken
-                )
+                stream,
+                parameters.ItemId,
+                partitionKey,
+                itemRequestOptions,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             ProcessResponse(response, entry);
 
@@ -470,11 +470,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             var partitionKey = CreatePartitionKey(entry);
 
             using var response = await items.DeleteItemStreamAsync(
-                    parameters.DocumentId,
-                    partitionKey,
-                    itemRequestOptions,
-                    cancellationToken: cancellationToken
-                )
+                parameters.DocumentId,
+                partitionKey,
+                itemRequestOptions,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             ProcessResponse(response, entry);
 
@@ -498,9 +498,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 
             var enabledContentResponse =
                 _enableContentResponseOnWrite
-                ?? entry.EntityType.FindProperty(
-                    StoreKeyConvention.JObjectPropertyName
-                )?.ValueGenerated == ValueGenerated.OnAddOrUpdate;
+                ?? entry.EntityType
+                    .FindProperty(StoreKeyConvention.JObjectPropertyName)?.ValueGenerated
+                    == ValueGenerated.OnAddOrUpdate;
 
             return new ItemRequestOptions
             {
@@ -539,9 +539,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 entry.SetStoreGeneratedValue(etagProperty, response.Headers.ETag);
             }
 
-            var jObjectProperty = entry.EntityType.FindProperty(
-                StoreKeyConvention.JObjectPropertyName
-            );
+            var jObjectProperty = entry.EntityType
+                .FindProperty(StoreKeyConvention.JObjectPropertyName);
             if (
                 jObjectProperty != null
                 && jObjectProperty.ValueGenerated == ValueGenerated.OnAddOrUpdate
@@ -629,11 +628,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             _commandLogger.ExecutingReadItem(containerId, partitionKey, resourceId);
 
             var responseMessage = await CreateSingleItemQuery(
-                    containerId,
-                    partitionKey,
-                    resourceId,
-                    cancellationToken
-                )
+                containerId,
+                partitionKey,
+                resourceId,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return JObjectFromReadItemResponseMessage(responseMessage);
@@ -667,10 +666,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             var container = Client.GetDatabase(_databaseId).GetContainer(containerId);
             var queryDefinition = new QueryDefinition(query.Query);
 
-            queryDefinition = query.Parameters.Aggregate(
-                queryDefinition,
-                (current, parameter) => current.WithParameter(parameter.Name, parameter.Value)
-            );
+            queryDefinition = query.Parameters
+                .Aggregate(
+                    queryDefinition,
+                    (current, parameter) => current.WithParameter(parameter.Name, parameter.Value)
+                );
 
             if (string.IsNullOrEmpty(partitionKey))
             {
@@ -698,12 +698,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             var container = Client.GetDatabase(_databaseId).GetContainer(containerId);
 
             return await container.ReadItemStreamAsync(
-                    resourceId,
-                    string.IsNullOrEmpty(partitionKey)
-                      ? PartitionKey.None
-                      : new PartitionKey(partitionKey),
-                    cancellationToken: cancellationToken
-                )
+                resourceId,
+                string.IsNullOrEmpty(partitionKey)
+                  ? PartitionKey.None
+                  : new PartitionKey(partitionKey),
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

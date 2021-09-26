@@ -1471,9 +1471,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.Contains(
                 LogMessages,
                 m =>
-                    m.Message.Contains(
-                        "the application completed without reading the entire request body."
-                    )
+                    m.Message
+                        .Contains(
+                            "the application completed without reading the entire request body."
+                        )
             );
 
             // Writing over half the initial window size induces a connection-level window update.
@@ -1515,17 +1516,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     var readResult = await context.Request.BodyReader.ReadAsync();
                     while (readResult.Buffer.Length != _maxData.Length * 4)
                     {
-                        context.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        context.Request.BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                         readResult = await context.Request.BodyReader.ReadAsync();
                     }
 
-                    context.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    context.Request.BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                     readResult = await context.Request.BodyReader.ReadAsync();
                     Assert.Equal(readResult.Buffer.Length, _maxData.Length * 5);
@@ -2035,11 +2032,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                         {
                             for (var i = 0; i < expectedFullFrameCountBeforeBackpressure + 1; i++)
                             {
-                                await context.Response.Body.WriteAsync(
-                                    _maxData,
-                                    0,
-                                    _maxData.Length
-                                );
+                                await context.Response.Body
+                                    .WriteAsync(_maxData, 0, _maxData.Length);
                             }
                         }
 
@@ -2126,66 +2120,65 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             );
 
             await InitializeConnectionAsync(
-                    async context =>
+                async context =>
+                {
+                    // Exceed connection window size
+                    await context.Response.WriteAsync(new string('!', 65536));
+
+                    await connectionAbortedTcs.Task;
+
+                    try
                     {
-                        // Exceed connection window size
-                        await context.Response.WriteAsync(new string('!', 65536));
-
-                        await connectionAbortedTcs.Task;
-
-                        try
-                        {
-                            context.Abort();
-                            requestAbortedTcs.SetResult();
-                        }
-                        catch (Exception ex)
-                        {
-                            requestAbortedTcs.SetException(ex);
-                        }
+                        context.Abort();
+                        requestAbortedTcs.SetResult();
                     }
-                )
-                .DefaultTimeout();
+                    catch (Exception ex)
+                    {
+                        requestAbortedTcs.SetException(ex);
+                    }
+                }
+            ).DefaultTimeout();
 
             await StartStreamAsync(1, _browserRequestHeaders, endStream: true).DefaultTimeout();
 
             await ExpectAsync(
-                    Http2FrameType.HEADERS,
-                    withLength: 32,
-                    withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
-                    withStreamId: 1
-                )
+                Http2FrameType.HEADERS,
+                withLength: 32,
+                withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS),
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             await ExpectAsync(
-                    Http2FrameType.DATA,
-                    withLength: 16384,
-                    withFlags: (byte)(Http2DataFrameFlags.NONE),
-                    withStreamId: 1
-                )
+                Http2FrameType.DATA,
+                withLength: 16384,
+                withFlags: (byte)(Http2DataFrameFlags.NONE),
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             await ExpectAsync(
-                    Http2FrameType.DATA,
-                    withLength: 16384,
-                    withFlags: (byte)(Http2DataFrameFlags.NONE),
-                    withStreamId: 1
-                )
+                Http2FrameType.DATA,
+                withLength: 16384,
+                withFlags: (byte)(Http2DataFrameFlags.NONE),
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             await ExpectAsync(
-                    Http2FrameType.DATA,
-                    withLength: 16384,
-                    withFlags: (byte)(Http2DataFrameFlags.NONE),
-                    withStreamId: 1
-                )
+                Http2FrameType.DATA,
+                withLength: 16384,
+                withFlags: (byte)(Http2DataFrameFlags.NONE),
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             await ExpectAsync(
-                    Http2FrameType.DATA,
-                    withLength: 16383,
-                    withFlags: (byte)(Http2DataFrameFlags.NONE),
-                    withStreamId: 1
-                )
+                Http2FrameType.DATA,
+                withLength: 16383,
+                withFlags: (byte)(Http2DataFrameFlags.NONE),
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             _connection.HandleReadDataRateTimeout();
@@ -3477,11 +3470,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                             await context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length);
                         }
 
-                        await context.Response.Body.WriteAsync(
-                            _maxData,
-                            0,
-                            remainingBytesBeforeBackpressure + 1
-                        );
+                        await context.Response.Body
+                            .WriteAsync(_maxData, 0, remainingBytesBeforeBackpressure + 1);
 
                         writeTcs.SetResult();
 
@@ -3610,11 +3600,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     try
                     {
                         writeTasks[streamId] = writeTcs.Task;
-                        await context.Response.Body.WriteAsync(
-                            _helloWorldBytes,
-                            0,
-                            _helloWorldBytes.Length
-                        );
+                        await context.Response.Body
+                            .WriteAsync(_helloWorldBytes, 0, _helloWorldBytes.Length);
                         writeTcs.SetResult();
 
                         await abortedTcs.Task;
@@ -4274,11 +4261,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 {
                     context.Response.Headers["A"] = new string('a', headerValueLength);
                     context.Response.Headers["B"] = new string('b', headerValueLength);
-                    return context.Response.Body.WriteAsync(
-                        new byte[payloadLength],
-                        0,
-                        payloadLength
-                    );
+                    return context.Response.Body
+                        .WriteAsync(new byte[payloadLength], 0, payloadLength);
                 },
                 expectedSettingsCount: 4
             );
@@ -4341,11 +4325,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             await InitializeConnectionAsync(
                 context =>
                 {
-                    return context.Response.Body.WriteAsync(
-                        new byte[clientMaxFrame],
-                        0,
-                        clientMaxFrame
-                    );
+                    return context.Response.Body
+                        .WriteAsync(new byte[clientMaxFrame], 0, clientMaxFrame);
                 },
                 expectedSettingsCount: 4
             );
@@ -4681,11 +4662,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                             await context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length);
                         }
 
-                        await context.Response.Body.WriteAsync(
-                            _maxData,
-                            0,
-                            remainingBytesBeforeBackpressure + 1
-                        );
+                        await context.Response.Body
+                            .WriteAsync(_maxData, 0, remainingBytesBeforeBackpressure + 1);
 
                         writeTcs.SetResult();
 
@@ -4796,11 +4774,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     try
                     {
                         writeTasks[streamId] = writeTcs.Task;
-                        await context.Response.Body.WriteAsync(
-                            _helloWorldBytes,
-                            0,
-                            _helloWorldBytes.Length
-                        );
+                        await context.Response.Body
+                            .WriteAsync(_helloWorldBytes, 0, _helloWorldBytes.Length);
                         writeTcs.SetResult();
 
                         await abortedTcs.Task;
@@ -5080,20 +5055,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                         {
                             await expectingDataSem.WaitAsync();
                             Assert.True(
-                                context.Response.Body.WriteAsync(
-                                    _maxData,
-                                    0,
-                                    _maxData.Length
-                                ).IsCompleted
+                                context.Response.Body
+                                    .WriteAsync(_maxData, 0, _maxData.Length).IsCompleted
                             );
                         }
 
                         await expectingDataSem.WaitAsync();
-                        var lastWriteTask = context.Response.Body.WriteAsync(
-                            _maxData,
-                            0,
-                            _maxData.Length
-                        );
+                        var lastWriteTask = context.Response.Body
+                            .WriteAsync(_maxData, 0, _maxData.Length);
 
                         Assert.False(lastWriteTask.IsCompleted);
                         backpressureObservedTcs.TrySetResult();
@@ -5355,7 +5324,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             // Trailers encoded as Literal Header Field without Indexing - New Name
             //   trailer-1: 1
             //   trailer-2: 2
-            var trailers = new byte[] { 0x00, 0x09 }.Concat(Encoding.ASCII.GetBytes("trailer-1"))
+            var trailers = new byte[] { 0x00, 0x09 }
+                .Concat(Encoding.ASCII.GetBytes("trailer-1"))
                 .Concat(new byte[] { 0x01, (byte)'1' })
                 .Concat(new byte[] { 0x00, 0x09 })
                 .Concat(Encoding.ASCII.GetBytes("trailer-2"))
@@ -5932,9 +5902,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.Contains(
                 LogMessages,
                 m =>
-                    m.Message.Contains(
-                        "the application completed without reading the entire request body."
-                    )
+                    m.Message
+                        .Contains(
+                            "the application completed without reading the entire request body."
+                        )
             );
 
             // These would be refused if the cool-down period had expired
@@ -6668,14 +6639,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
                 // Literal Header Field without Indexing - Indexed Name - :authority: 127.0.0.1
                 data.Add(
-                    new byte[] { 0x01, 0x09 }.Concat(Encoding.ASCII.GetBytes("127.0.0.1"))
+                    new byte[] { 0x01, 0x09 }
+                        .Concat(Encoding.ASCII.GetBytes("127.0.0.1"))
                         .ToArray(),
                     CoreStrings.Http2ErrorTrailersContainPseudoHeaderField
                 );
 
                 // Literal Header Field without Indexing - New Name - contains-Uppercase: 0
                 data.Add(
-                    new byte[] { 0x00, 0x12 }.Concat(Encoding.ASCII.GetBytes("contains-Uppercase"))
+                    new byte[] { 0x00, 0x12 }
+                        .Concat(Encoding.ASCII.GetBytes("contains-Uppercase"))
                         .Concat(new byte[] { 0x01, (byte)'0' })
                         .ToArray(),
                     CoreStrings.Http2ErrorTrailerNameUppercase

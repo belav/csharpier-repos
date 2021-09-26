@@ -48,12 +48,12 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 var parts = new List<TaggedText>();
 
                 var groups = await symbolDisplayService.ToDescriptionGroupsAsync(
-                        workspace,
-                        semanticModel,
-                        position,
-                        ImmutableArray.Create(symbol),
-                        cancellationToken
-                    )
+                    workspace,
+                    semanticModel,
+                    position,
+                    ImmutableArray.Create(symbol),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 parts.AddRange(groups[SymbolDescriptionGroups.MainDescription]);

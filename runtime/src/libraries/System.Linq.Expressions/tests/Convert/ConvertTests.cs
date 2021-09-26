@@ -19125,7 +19125,8 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            List<MethodInfo> opMethods = typeof(ImplicitHalfLiftedOverloaded).GetMethods()
+            List<MethodInfo> opMethods = typeof(ImplicitHalfLiftedOverloaded)
+                .GetMethods()
                 .Where(m => m.Name == "op_Implicit")
                 .ToList();
             MethodInfo direct = opMethods.First(
@@ -19305,9 +19306,8 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameTo(bool useInterpreter)
         {
             Expression operand = Expression.Constant(new CustomConversions { Value = 9 });
-            MethodInfo method = typeof(CustomConversions).GetMethod(
-                nameof(CustomConversions.ConvertToInt)
-            );
+            MethodInfo method = typeof(CustomConversions)
+                .GetMethod(nameof(CustomConversions.ConvertToInt));
             Expression<Func<int>> lambda = Expression.Lambda<Func<int>>(
                 Expression.Convert(operand, typeof(int), method)
             );
@@ -19319,9 +19319,8 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameFrom(bool useInterpreter)
         {
             Expression operand = Expression.Constant(4);
-            MethodInfo method = typeof(CustomConversions).GetMethod(
-                nameof(CustomConversions.ConvertFromInt)
-            );
+            MethodInfo method = typeof(CustomConversions)
+                .GetMethod(nameof(CustomConversions.ConvertFromInt));
             Expression<Func<CustomConversions>> lambda = Expression.Lambda<Func<CustomConversions>>(
                 Expression.Convert(operand, typeof(CustomConversions), method)
             );
@@ -19333,9 +19332,8 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameFromLifted(bool useInterpreter)
         {
             Expression operand = Expression.Constant(4, typeof(int?));
-            MethodInfo method = typeof(CustomConversions).GetMethod(
-                nameof(CustomConversions.ConvertFromInt)
-            );
+            MethodInfo method = typeof(CustomConversions)
+                .GetMethod(nameof(CustomConversions.ConvertFromInt));
             Expression<Func<CustomConversions>> lambda = Expression.Lambda<Func<CustomConversions>>(
                 Expression.Convert(operand, typeof(CustomConversions), method)
             );
@@ -19347,9 +19345,8 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameFromLiftedNullOperand(bool useInterpreter)
         {
             Expression operand = Expression.Constant(null, typeof(int?));
-            MethodInfo method = typeof(CustomConversions).GetMethod(
-                nameof(CustomConversions.ConvertFromInt)
-            );
+            MethodInfo method = typeof(CustomConversions)
+                .GetMethod(nameof(CustomConversions.ConvertFromInt));
             Expression<Func<CustomConversions>> lambda = Expression.Lambda<Func<CustomConversions>>(
                 Expression.Convert(operand, typeof(CustomConversions), method)
             );
@@ -19363,9 +19360,8 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameFromLiftedByRef(bool useInterpreter)
         {
             var param = Expression.Parameter(typeof(int?).MakeByRefType());
-            MethodInfo method = typeof(CustomConversions).GetMethod(
-                nameof(CustomConversions.ConvertFromRefInt)
-            );
+            MethodInfo method = typeof(CustomConversions)
+                .GetMethod(nameof(CustomConversions.ConvertFromRefInt));
             Expression<ByRefFunc<int?, CustomConversions>> lambda = Expression.Lambda<
                 ByRefFunc<int?, CustomConversions>
             >(Expression.Convert(param, typeof(CustomConversions), method), param);
@@ -19379,9 +19375,8 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameFromByRef(bool useInterpreter)
         {
             var param = Expression.Parameter(typeof(int).MakeByRefType());
-            MethodInfo method = typeof(CustomConversions).GetMethod(
-                nameof(CustomConversions.ConvertFromRefInt)
-            );
+            MethodInfo method = typeof(CustomConversions)
+                .GetMethod(nameof(CustomConversions.ConvertFromRefInt));
             Expression<ByRefFunc<int, CustomConversions>> lambda = Expression.Lambda<
                 ByRefFunc<int, CustomConversions>
             >(Expression.Convert(param, typeof(CustomConversions), method), param);
@@ -19395,9 +19390,8 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameToWrongType()
         {
             Expression operand = Expression.Constant(new CustomConversions { Value = 9 });
-            MethodInfo method = typeof(CustomConversions).GetMethod(
-                nameof(CustomConversions.ConvertToInt)
-            );
+            MethodInfo method = typeof(CustomConversions)
+                .GetMethod(nameof(CustomConversions.ConvertToInt));
             Assert.Throws<InvalidOperationException>(
                 () => Expression.Convert(operand, typeof(long), method)
             );
@@ -19407,9 +19401,8 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameFromWrongType()
         {
             Expression operand = Expression.Constant(4L);
-            MethodInfo method = typeof(CustomConversions).GetMethod(
-                nameof(CustomConversions.ConvertFromInt)
-            );
+            MethodInfo method = typeof(CustomConversions)
+                .GetMethod(nameof(CustomConversions.ConvertFromInt));
             Assert.Throws<InvalidOperationException>(
                 () => Expression.Convert(operand, typeof(CustomConversions), method)
             );
@@ -19419,9 +19412,8 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameToVoidReturn()
         {
             Expression operand = Expression.Constant(new CustomConversions { Value = 9 });
-            MethodInfo method = typeof(CustomConversions).GetMethod(
-                nameof(CustomConversions.DoNothing)
-            );
+            MethodInfo method = typeof(CustomConversions)
+                .GetMethod(nameof(CustomConversions.DoNothing));
             AssertExtensions.Throws<ArgumentException>(
                 "method",
                 () => Expression.Convert(operand, typeof(int), method)
@@ -19432,9 +19424,8 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameToNullary()
         {
             Expression operand = Expression.Constant(new CustomConversions { Value = 9 });
-            MethodInfo method = typeof(CustomConversions).GetMethod(
-                nameof(CustomConversions.Create)
-            );
+            MethodInfo method = typeof(CustomConversions)
+                .GetMethod(nameof(CustomConversions.Create));
             AssertExtensions.Throws<ArgumentException>(
                 "method",
                 () => Expression.Convert(operand, typeof(int), method)
@@ -19445,9 +19436,8 @@ namespace System.Linq.Expressions.Tests
         public static void CustomConversionNotStandardNameToExcessiveArity()
         {
             Expression operand = Expression.Constant(new CustomConversions { Value = 9 });
-            MethodInfo method = typeof(CustomConversions).GetMethod(
-                nameof(CustomConversions.FromAddition)
-            );
+            MethodInfo method = typeof(CustomConversions)
+                .GetMethod(nameof(CustomConversions.FromAddition));
             AssertExtensions.Throws<ArgumentException>(
                 "method",
                 () => Expression.Convert(operand, typeof(int), method)
@@ -19472,8 +19462,8 @@ namespace System.Linq.Expressions.Tests
         public static void ConvertVoidToVoid(bool useInterpreter)
         {
             Action act = Expression.Lambda<Action>(
-                    Expression.Convert(Expression.Empty(), typeof(void))
-                )
+                Expression.Convert(Expression.Empty(), typeof(void))
+            )
                 .Compile(useInterpreter);
             act();
         }

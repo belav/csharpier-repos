@@ -21,10 +21,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(SimpleModel)
-                ),
+                ModelMetadata = new DataAnnotationsModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(SimpleModel)),
                 PropertyFilter = (new BindAttribute { Include = "FirstName " }).IsPropertyAllowed
             };
 
@@ -54,10 +52,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new DataAnnotationsModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelName = "someName",
                 ModelState = controllerContext.Controller.ViewData.ModelState,
                 PropertyFilter = _ => true,
@@ -66,8 +62,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -115,10 +111,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(List<int>)
-                ),
+                ModelMetadata = new DataAnnotationsModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(List<int>)),
                 ModelName = "someName",
                 ModelState = controllerContext.Controller.ViewData.ModelState,
                 PropertyFilter = _ => true,
@@ -127,8 +121,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -171,8 +165,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = GetControllerContext();
             Mock<IExtensibleModelBinder> mockListBinder = new Mock<IExtensibleModelBinder>();
             mockListBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(false)
                 .Verifiable();
 
@@ -189,10 +183,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = false,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(List<int>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(List<int>)),
                 ModelState = controllerContext.Controller.ViewData.ModelState
             };
 
@@ -212,8 +204,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = GetControllerContext();
             Mock<ModelBinderProvider> mockBinderProvider = new Mock<ModelBinderProvider>();
             mockBinderProvider.Setup(
-                    o => o.GetBinder(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.GetBinder(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns((IExtensibleModelBinder)null)
                 .Verifiable();
             ModelBinderProviderCollection binderProviders = new ModelBinderProviderCollection
@@ -227,10 +219,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new DataAnnotationsModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelState = controllerContext.Controller.ViewData.ModelState
             };
 

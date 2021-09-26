@@ -28,9 +28,13 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 // By specifying OidGroup.PublicKeyAlgorithm, no caches are used
                 // Note: this throws when there is no oid value, even when friendly name is valid
                 // so it cannot be used for curves with no oid value such as curve25519
-                return !string.IsNullOrEmpty(
-                    Oid.FromFriendlyName(oidFriendlyName, OidGroup.PublicKeyAlgorithm).FriendlyName
-                );
+                return !string
+                    .IsNullOrEmpty(
+                        Oid.FromFriendlyName(
+                            oidFriendlyName,
+                            OidGroup.PublicKeyAlgorithm
+                        ).FriendlyName
+                    );
             }
             catch (Exception)
             {

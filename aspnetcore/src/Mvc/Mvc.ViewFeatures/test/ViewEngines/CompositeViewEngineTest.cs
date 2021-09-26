@@ -58,13 +58,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
             var viewName = "test-view";
             var engine = new Mock<IViewEngine>(MockBehavior.Strict);
             engine.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "controller/test-view" }));
             var optionsAccessor = Options.Create(new MvcViewOptions());
             optionsAccessor.Value.ViewEngines.Add(engine.Object);
@@ -90,13 +90,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
             var engine = new Mock<IViewEngine>(MockBehavior.Strict);
             var view = Mock.Of<IView>();
             engine.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.Found(viewName, view));
             var optionsAccessor = Options.Create(new MvcViewOptions());
             optionsAccessor.Value.ViewEngines.Add(engine.Object);
@@ -125,31 +125,31 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
             var view2 = Mock.Of<IView>();
             var view3 = Mock.Of<IView>();
             engine1.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, Enumerable.Empty<string>()));
             engine2.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.Found(viewName, view2));
             engine3.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.Found(viewName, view3));
 
             var optionsAccessor = Options.Create(new MvcViewOptions());
@@ -180,31 +180,31 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
             var engine2 = new Mock<IViewEngine>(MockBehavior.Strict);
             var engine3 = new Mock<IViewEngine>(MockBehavior.Strict);
             engine1.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "1", "2" }));
             engine2.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "3" }));
             engine3.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "4", "5" }));
 
             var optionsAccessor = Options.Create(new MvcViewOptions());
@@ -388,13 +388,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
             var viewName = "partial-view";
             var engine = new Mock<IViewEngine>(MockBehavior.Strict);
             engine.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "Shared/partial-view" }));
             var optionsAccessor = Options.Create(new MvcViewOptions());
             optionsAccessor.Value.ViewEngines.Add(engine.Object);
@@ -420,13 +420,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
             var engine = new Mock<IViewEngine>(MockBehavior.Strict);
             var view = Mock.Of<IView>();
             engine.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.Found(viewName, view));
             var optionsAccessor = Options.Create(new MvcViewOptions());
             optionsAccessor.Value.ViewEngines.Add(engine.Object);
@@ -455,31 +455,31 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
             var view2 = Mock.Of<IView>();
             var view3 = Mock.Of<IView>();
             engine1.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, Enumerable.Empty<string>()));
             engine2.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.Found(viewName, view2));
             engine3.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.Found(viewName, view3));
 
             var optionsAccessor = Options.Create(new MvcViewOptions());
@@ -510,31 +510,31 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
             var engine2 = new Mock<IViewEngine>(MockBehavior.Strict);
             var engine3 = new Mock<IViewEngine>(MockBehavior.Strict);
             engine1.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "1", "2" }));
             engine2.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "3" }));
             engine3.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "4", "5" }));
 
             var optionsAccessor = Options.Create(new MvcViewOptions());

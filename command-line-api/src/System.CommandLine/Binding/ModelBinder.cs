@@ -204,10 +204,8 @@ namespace System.CommandLine.Binding
             for (var i = 0; i < boundValues.Count; i++)
             {
                 var boundValue = boundValues[i];
-                ((PropertyDescriptor)boundValue.ValueDescriptor).SetValue(
-                    instance,
-                    boundValue.Value
-                );
+                ((PropertyDescriptor)boundValue.ValueDescriptor)
+                    .SetValue(instance, boundValue.Value);
             }
 
             return anyNonDefaults;
@@ -215,9 +213,8 @@ namespace System.CommandLine.Binding
 
         private ConstructorAndArgs? GetBestConstructorAndArgs(BindingContext bindingContext)
         {
-            var constructorDescriptors = ModelDescriptor.ConstructorDescriptors.OrderByDescending(
-                d => d.ParameterDescriptors.Count
-            );
+            var constructorDescriptors = ModelDescriptor.ConstructorDescriptors
+                .OrderByDescending(d => d.ParameterDescriptors.Count);
 
             ConstructorAndArgs? bestNonMatching = null;
 
@@ -383,13 +380,13 @@ namespace System.CommandLine.Binding
         {
             var constructorParameters = constructorInfo.GetParameters();
 
-            return ModelDescriptor.ConstructorDescriptors.FirstOrDefault(
-                ctorDesc =>
-                    ModelDescriptor.ModelType == constructorInfo.DeclaringType
-                    && ctorDesc.ParameterDescriptors.Any(
-                        x => constructorParameters.Any(y => MatchParameter(x, y))
-                    )
-            );
+            return ModelDescriptor.ConstructorDescriptors
+                .FirstOrDefault(
+                    ctorDesc =>
+                        ModelDescriptor.ModelType == constructorInfo.DeclaringType
+                        && ctorDesc.ParameterDescriptors
+                            .Any(x => constructorParameters.Any(y => MatchParameter(x, y)))
+                );
 
             static bool MatchParameter(ParameterDescriptor desc, ParameterInfo info)
             {
@@ -405,11 +402,12 @@ namespace System.CommandLine.Binding
             string propertyName
         )
         {
-            return ModelDescriptor.PropertyDescriptors.FirstOrDefault(
-                desc =>
-                    desc.ValueType == propertyType
-                    && string.Equals(desc.ValueName, propertyName, StringComparison.Ordinal)
-            );
+            return ModelDescriptor.PropertyDescriptors
+                .FirstOrDefault(
+                    desc =>
+                        desc.ValueType == propertyType
+                        && string.Equals(desc.ValueName, propertyName, StringComparison.Ordinal)
+                );
         }
 
         private ConstructorInfo FindConstructorOrThrow(ParameterInfo parameter, string message)

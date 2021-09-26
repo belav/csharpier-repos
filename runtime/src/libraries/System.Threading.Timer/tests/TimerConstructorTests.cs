@@ -118,7 +118,8 @@ namespace System.Threading.Tests
                 null,
                 TimeSpan.FromMilliseconds(Timeout),
                 TimeSpan.FromMilliseconds(Timeout)
-            ).Dispose();
+            )
+                .Dispose();
         }
     }
 }

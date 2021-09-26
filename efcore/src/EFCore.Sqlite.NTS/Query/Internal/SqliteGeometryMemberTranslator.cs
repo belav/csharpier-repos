@@ -72,10 +72,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.SRID)), "SRID" }
             };
 
-        private static readonly MemberInfo _geometryType =
-            typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.GeometryType));
-        private static readonly MemberInfo _ogcGeometryType =
-            typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.OgcGeometryType));
+        private static readonly MemberInfo _geometryType = typeof(Geometry)
+            .GetRequiredRuntimeProperty(nameof(Geometry.GeometryType));
+        private static readonly MemberInfo _ogcGeometryType = typeof(Geometry)
+            .GetRequiredRuntimeProperty(nameof(Geometry.OgcGeometryType));
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
         /// <summary>

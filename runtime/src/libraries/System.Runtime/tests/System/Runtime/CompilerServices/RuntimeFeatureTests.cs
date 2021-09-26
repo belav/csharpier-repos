@@ -56,9 +56,8 @@ namespace System.Runtime.CompilerServices.Tests
         public static IEnumerable<object[]> GetStaticFeatureNames()
         {
             foreach (
-                var field in typeof(RuntimeFeature).GetFields(
-                    BindingFlags.Public | BindingFlags.Static
-                )
+                var field in typeof(RuntimeFeature)
+                    .GetFields(BindingFlags.Public | BindingFlags.Static)
             )
             {
                 if (!field.IsLiteral)

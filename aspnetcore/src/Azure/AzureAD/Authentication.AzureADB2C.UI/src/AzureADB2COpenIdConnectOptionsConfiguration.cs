@@ -67,10 +67,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
             var domain = AzureADB2COptions.Domain;
             var policy = AzureADB2COptions.DefaultPolicy;
 
-            return new Uri(
-                baseUri,
-                new PathString($"{pathBase}/{domain}/{policy}/v2.0")
-            ).ToString();
+            return new Uri(baseUri, new PathString($"{pathBase}/{domain}/{policy}/v2.0"))
+                .ToString();
         }
 
         private string GetAzureADB2CScheme(string name)

@@ -62,146 +62,123 @@ namespace System.CodeDom.Compiler.Tests
         public void ExecWait_OutputCaptured()
         {
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    using (var tfc = new TempFileCollection(TestDirectory))
                     {
-                        using (var tfc = new TempFileCollection(TestDirectory))
-                        {
-                            Executor.ExecWait(s_cmd, tfc);
-                            Assert.Equal(3, tfc.Count);
-                            Assert.NotEmpty(File.ReadAllText(tfc.BasePath + ".out"));
-                            Assert.Empty(File.ReadAllText(tfc.BasePath + ".err"));
-                        }
+                        Executor.ExecWait(s_cmd, tfc);
+                        Assert.Equal(3, tfc.Count);
+                        Assert.NotEmpty(File.ReadAllText(tfc.BasePath + ".out"));
+                        Assert.Empty(File.ReadAllText(tfc.BasePath + ".err"));
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void ExecWaitWithCapture_NullNames_OutputCaptured()
         {
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    using (var tfc = new TempFileCollection())
                     {
-                        using (var tfc = new TempFileCollection())
-                        {
-                            string outputName = null,
-                                errorName = null;
+                        string outputName = null,
+                            errorName = null;
 
-                            Assert.Equal(
-                                0,
-                                Executor.ExecWaitWithCapture(
-                                    s_cmd,
-                                    tfc,
-                                    ref outputName,
-                                    ref errorName
-                                )
-                            );
+                        Assert.Equal(
+                            0,
+                            Executor.ExecWaitWithCapture(s_cmd, tfc, ref outputName, ref errorName)
+                        );
 
-                            Assert.Equal(3, tfc.Count);
+                        Assert.Equal(3, tfc.Count);
 
-                            Assert.NotEmpty(outputName);
-                            Assert.NotEmpty(errorName);
+                        Assert.NotEmpty(outputName);
+                        Assert.NotEmpty(errorName);
 
-                            Assert.Contains(outputName, tfc.Cast<string>());
-                            Assert.Contains(errorName, tfc.Cast<string>());
+                        Assert.Contains(outputName, tfc.Cast<string>());
+                        Assert.Contains(errorName, tfc.Cast<string>());
 
-                            Assert.NotEmpty(File.ReadAllText(outputName));
-                            Assert.Empty(File.ReadAllText(errorName));
-                        }
+                        Assert.NotEmpty(File.ReadAllText(outputName));
+                        Assert.Empty(File.ReadAllText(errorName));
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void ExecWaitWithCapture_SpecifiedNames_OutputCaptured()
         {
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    using (var tfc = new TempFileCollection())
                     {
-                        using (var tfc = new TempFileCollection())
-                        {
-                            string outputName = GetTestFilePath();
-                            string errorName = GetTestFilePath();
+                        string outputName = GetTestFilePath();
+                        string errorName = GetTestFilePath();
 
-                            Assert.Equal(
-                                0,
-                                Executor.ExecWaitWithCapture(
-                                    s_cmd,
-                                    tfc,
-                                    ref outputName,
-                                    ref errorName
-                                )
-                            );
+                        Assert.Equal(
+                            0,
+                            Executor.ExecWaitWithCapture(s_cmd, tfc, ref outputName, ref errorName)
+                        );
 
-                            Assert.Equal(0, tfc.Count);
+                        Assert.Equal(0, tfc.Count);
 
-                            Assert.NotEmpty(File.ReadAllText(outputName));
-                            Assert.Empty(File.ReadAllText(errorName));
-                        }
+                        Assert.NotEmpty(File.ReadAllText(outputName));
+                        Assert.Empty(File.ReadAllText(errorName));
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void ExecWaitWithCapture_CurrentDirectorySpecified_OutputIncludesSpecifiedDirectory()
         {
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    using (var tfc = new TempFileCollection(TestDirectory))
                     {
-                        using (var tfc = new TempFileCollection(TestDirectory))
-                        {
-                            string outputName = GetTestFilePath();
-                            string errorName = GetTestFilePath();
+                        string outputName = GetTestFilePath();
+                        string errorName = GetTestFilePath();
 
-                            Assert.Equal(
-                                0,
-                                Executor.ExecWaitWithCapture(
-                                    s_cmd,
-                                    TestDirectory,
-                                    tfc,
-                                    ref outputName,
-                                    ref errorName
-                                )
-                            );
+                        Assert.Equal(
+                            0,
+                            Executor.ExecWaitWithCapture(
+                                s_cmd,
+                                TestDirectory,
+                                tfc,
+                                ref outputName,
+                                ref errorName
+                            )
+                        );
 
-                            Assert.Contains(TestDirectory, File.ReadAllText(outputName));
-                        }
+                        Assert.Contains(TestDirectory, File.ReadAllText(outputName));
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void ExecWaitWithCapture_OutputIncludesCurrentDirectory()
         {
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    using (var tfc = new TempFileCollection(TestDirectory))
                     {
-                        using (var tfc = new TempFileCollection(TestDirectory))
-                        {
-                            string outputName = GetTestFilePath();
-                            string errorName = GetTestFilePath();
+                        string outputName = GetTestFilePath();
+                        string errorName = GetTestFilePath();
 
-                            Assert.Equal(
-                                0,
-                                Executor.ExecWaitWithCapture(
-                                    s_cmd,
-                                    tfc,
-                                    ref outputName,
-                                    ref errorName
-                                )
-                            );
+                        Assert.Equal(
+                            0,
+                            Executor.ExecWaitWithCapture(s_cmd, tfc, ref outputName, ref errorName)
+                        );
 
-                            Assert.Contains(
-                                Environment.CurrentDirectory,
-                                File.ReadAllText(outputName)
-                            );
-                        }
+                        Assert.Contains(Environment.CurrentDirectory, File.ReadAllText(outputName));
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
     }
 }

@@ -57,13 +57,14 @@ namespace System.Net.NetworkInformation
 
         public sealed override Task<UnicastIPAddressInformationCollection> GetUnicastAddressesAsync()
         {
-            return Task.Factory.StartNew(
-                s => ((UnixIPGlobalProperties)s!).GetUnicastAddresses(),
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    s => ((UnixIPGlobalProperties)s!).GetUnicastAddresses(),
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         public unsafe override UnicastIPAddressInformationCollection GetUnicastAddresses()

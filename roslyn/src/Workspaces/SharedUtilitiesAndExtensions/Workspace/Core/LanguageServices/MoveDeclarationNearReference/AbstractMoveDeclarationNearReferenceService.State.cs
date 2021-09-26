@@ -99,10 +99,10 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 }
 
                 var findReferencesResult = await SymbolFinder.FindReferencesAsync(
-                        LocalSymbol,
-                        document.Project.Solution,
-                        cancellationToken
-                    )
+                    LocalSymbol,
+                    document.Project.Solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var findReferencesList = findReferencesResult.ToList();
                 if (findReferencesList.Count != 1)
@@ -124,7 +124,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                     let statement = token.GetAncestor<TStatementSyntax>()
                     where statement != null
                     select statement
-                ).ToSet();
+                )
+                    .ToSet();
 
                 if (referencingStatements.Count == 0)
                 {

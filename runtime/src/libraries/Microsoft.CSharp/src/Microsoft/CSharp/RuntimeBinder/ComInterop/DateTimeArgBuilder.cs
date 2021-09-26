@@ -28,9 +28,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         internal override Expression UnmarshalFromRef(Expression value)
         {
             // DateTime.FromOADate(value)
-            return base.UnmarshalFromRef(
-                Expression.Call(typeof(DateTime).GetMethod(nameof(DateTime.FromOADate)), value)
-            );
+            return base
+                .UnmarshalFromRef(
+                    Expression.Call(typeof(DateTime).GetMethod(nameof(DateTime.FromOADate)), value)
+                );
         }
     }
 }

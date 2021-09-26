@@ -114,7 +114,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             if (IsUnderAppCode(path))
             {
                 // There is an invisible folder called Generated___Files under app code that we want to exclude from our search
-                return base.GetDirectories(path)
+                return base
+                    .GetDirectories(path)
                     .Except(_generatedFilesFolder, StringComparer.OrdinalIgnoreCase);
             }
             return base.GetDirectories(path);
@@ -195,7 +196,8 @@ namespace System.Web.WebPages.Administration.PackageManager
                 let assemblyName = new AssemblyName(item.Attribute("assembly").Value).Name
                 where String.Equals(assemblyName, references, StringComparison.OrdinalIgnoreCase)
                 select item
-            ).Any();
+            )
+                .Any();
 
             if (!existingAssembly)
             {

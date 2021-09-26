@@ -12003,21 +12003,20 @@ class C
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            active.OldStatements[0] = active.OldStatements[0].WithFlags(
-                ActiveStatementFlags.PartiallyExecuted | ActiveStatementFlags.IsLeafFrame
-            );
-            active.OldStatements[1] = active.OldStatements[1].WithFlags(
-                ActiveStatementFlags.PartiallyExecuted | ActiveStatementFlags.IsNonLeafFrame
-            );
-            active.OldStatements[2] = active.OldStatements[2].WithFlags(
-                ActiveStatementFlags.IsLeafFrame
-            );
-            active.OldStatements[3] = active.OldStatements[3].WithFlags(
-                ActiveStatementFlags.IsNonLeafFrame
-            );
-            active.OldStatements[4] = active.OldStatements[4].WithFlags(
-                ActiveStatementFlags.IsNonLeafFrame | ActiveStatementFlags.IsLeafFrame
-            );
+            active.OldStatements[0] = active.OldStatements[0]
+                .WithFlags(
+                    ActiveStatementFlags.PartiallyExecuted | ActiveStatementFlags.IsLeafFrame
+                );
+            active.OldStatements[1] = active.OldStatements[1]
+                .WithFlags(
+                    ActiveStatementFlags.PartiallyExecuted | ActiveStatementFlags.IsNonLeafFrame
+                );
+            active.OldStatements[2] = active.OldStatements[2]
+                .WithFlags(ActiveStatementFlags.IsLeafFrame);
+            active.OldStatements[3] = active.OldStatements[3]
+                .WithFlags(ActiveStatementFlags.IsNonLeafFrame);
+            active.OldStatements[4] = active.OldStatements[4]
+                .WithFlags(ActiveStatementFlags.IsNonLeafFrame | ActiveStatementFlags.IsLeafFrame);
 
             edits.VerifyRudeDiagnostics(
                 active,
@@ -12054,9 +12053,10 @@ class C
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            active.OldStatements[0] = active.OldStatements[0].WithFlags(
-                ActiveStatementFlags.PartiallyExecuted | ActiveStatementFlags.IsLeafFrame
-            );
+            active.OldStatements[0] = active.OldStatements[0]
+                .WithFlags(
+                    ActiveStatementFlags.PartiallyExecuted | ActiveStatementFlags.IsLeafFrame
+                );
 
             edits.VerifyRudeDiagnostics(
                 active,
@@ -12091,9 +12091,8 @@ class C
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            active.OldStatements[0] = active.OldStatements[0].WithFlags(
-                ActiveStatementFlags.IsNonLeafFrame | ActiveStatementFlags.IsLeafFrame
-            );
+            active.OldStatements[0] = active.OldStatements[0]
+                .WithFlags(ActiveStatementFlags.IsNonLeafFrame | ActiveStatementFlags.IsLeafFrame);
 
             edits.VerifyRudeDiagnostics(
                 active,

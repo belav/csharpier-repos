@@ -83,14 +83,15 @@ namespace Microsoft.CodeAnalysis.TodoComments
             {
                 var token = commentDescriptor.Text;
                 if (
-                    string.Compare(
-                        normalized,
-                        index,
-                        token,
-                        indexB: 0,
-                        length: token.Length,
-                        comparisonType: StringComparison.OrdinalIgnoreCase
-                    ) != 0
+                    string
+                        .Compare(
+                            normalized,
+                            index,
+                            token,
+                            indexB: 0,
+                            length: token.Length,
+                            comparisonType: StringComparison.OrdinalIgnoreCase
+                        ) != 0
                 )
                 {
                     continue;

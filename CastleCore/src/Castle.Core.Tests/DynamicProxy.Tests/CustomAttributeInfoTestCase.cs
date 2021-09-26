@@ -267,9 +267,8 @@ namespace Castle.DynamicProxy.Tests
         public static IEnumerable<object[]> FromExpressionTestCases()
         {
             var defaultCtor = typeof(MyAttribute1).GetConstructor(Type.EmptyTypes);
-            var ctorWithArgs = typeof(MyAttribute1).GetConstructor(
-                new[] { typeof(int), typeof(string), typeof(int[]) }
-            );
+            var ctorWithArgs = typeof(MyAttribute1)
+                .GetConstructor(new[] { typeof(int), typeof(string), typeof(int[]) });
             var intProperty = typeof(MyAttribute1).GetProperty("IntProperty");
             var stringProperty = typeof(MyAttribute1).GetProperty("StringProperty");
             var arrayProperty = typeof(MyAttribute1).GetProperty("ArrayProperty");

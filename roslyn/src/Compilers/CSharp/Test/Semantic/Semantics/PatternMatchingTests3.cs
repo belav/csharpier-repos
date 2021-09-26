@@ -574,9 +574,9 @@ class Program
                 // (6,21): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         return ref (b switch { true => x, false => y });
                 Diagnostic(
-                        ErrorCode.ERR_RefReturnLvalueExpected,
-                        "b switch { true => x, false => y }"
-                    )
+                    ErrorCode.ERR_RefReturnLvalueExpected,
+                    "b switch { true => x, false => y }"
+                )
                     .WithLocation(6, 21)
             );
         }
@@ -661,9 +661,8 @@ class Source2
             var expectedOutput = "Source1 Source1 Source2 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -709,9 +708,8 @@ class Source2
             var expectedOutput = "Source1 Source1 Source2 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -757,9 +755,8 @@ class Source2
             var expectedOutput = "Source1 Source1 Source2 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -805,9 +802,8 @@ class Source2
             var expectedOutput = "Source1 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -834,9 +830,8 @@ class Program
             var expectedOutput = "Int16";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -862,9 +857,8 @@ class Program
             var expectedOutput = "Int16";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -910,9 +904,8 @@ class Source2
             var expectedOutput = "Source1 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -957,9 +950,8 @@ class Source2
             var expectedOutput = "Source1 Source1 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -1010,9 +1002,8 @@ class Source2
 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics(
                 // (10,42): error CS0029: Cannot implicitly convert type 'Source1' to 'Ultimate'
@@ -1084,9 +1075,8 @@ class Source2
 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics(
                 // (11,42): error CS0029: Cannot implicitly convert type 'Source1' to 'Ultimate'
@@ -1127,9 +1117,8 @@ class Program
 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics(
                 // (6,18): error CS8506: No best type was found for the switch expression.
@@ -1182,9 +1171,8 @@ TargetSubtype
 TargetSubtype";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -1241,9 +1229,8 @@ Target->Ultimate
 Ultimate";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -1300,9 +1287,8 @@ Target->Ultimate
 Ultimate";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -1359,9 +1345,8 @@ Target->Ultimate
 (2, Ultimate)";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -1396,10 +1381,10 @@ Target->Ultimate
     }
 }";
             CreateCompilation(
-                    source,
-                    options: TestOptions.DebugExe.WithAllowUnsafe(true),
-                    parseOptions: TestOptions.Regular7_3
-                )
+                source,
+                options: TestOptions.DebugExe.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular7_3
+            )
                 .VerifyDiagnostics(
                     // (6,29): error CS8370: Feature 'null pointer constant pattern' is not available in C# 7.3. Please use language version 8.0 or greater.
                     //     bool M1(int* p) => p is null; // 1
@@ -1421,10 +1406,10 @@ Target->Ultimate
                         .WithLocation(20, 18)
                 );
             CreateCompilation(
-                    source,
-                    options: TestOptions.DebugExe.WithAllowUnsafe(true),
-                    parseOptions: TestOptions.Regular8
-                )
+                source,
+                options: TestOptions.DebugExe.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular8
+            )
                 .VerifyDiagnostics();
         }
 
@@ -1510,13 +1495,11 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,27): error CS8506: No best type was found for the switch expression.
-                    //         var result = name switch
-                    Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
-                        .WithLocation(6, 27)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,27): error CS8506: No best type was found for the switch expression.
+                //         var result = name switch
+                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(6, 27)
+            );
         }
 
         [Fact, WorkItem(38226, "https://github.com/dotnet/roslyn/issues/38226")]
@@ -1609,9 +1592,9 @@ public static class C {
                 // (7,12): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 //         _= (C)(o switch { _ => default });
                 Diagnostic(
-                        ErrorCode.WRN_ConvertingNullableToNonNullable,
-                        "(C)(o switch { _ => default })"
-                    )
+                    ErrorCode.WRN_ConvertingNullableToNonNullable,
+                    "(C)(o switch { _ => default })"
+                )
                     .WithLocation(7, 12),
                 // (8,12): error CS0716: Cannot convert to static type 'C'
                 //         _= (C)(o switch { _ => throw null! });
@@ -1839,19 +1822,18 @@ public static class C {
         var x = ((Func<int, decimal>)(0 switch { 0 => _ => {}}))(0);
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,41): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '1' is not covered.
-                    //         var x = ((Func<int, decimal>)(0 switch { 0 => _ => {}}))(0);
-                    Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
-                        .WithArguments("1")
-                        .WithLocation(5, 41),
-                    // (5,57): error CS1643: Not all code paths return a value in lambda expression of type 'Func<int, decimal>'
-                    //         var x = ((Func<int, decimal>)(0 switch { 0 => _ => {}}))(0);
-                    Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "=>")
-                        .WithArguments("lambda expression", "System.Func<int, decimal>")
-                        .WithLocation(5, 57)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (5,41): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '1' is not covered.
+                //         var x = ((Func<int, decimal>)(0 switch { 0 => _ => {}}))(0);
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("1")
+                    .WithLocation(5, 41),
+                // (5,57): error CS1643: Not all code paths return a value in lambda expression of type 'Func<int, decimal>'
+                //         var x = ((Func<int, decimal>)(0 switch { 0 => _ => {}}))(0);
+                Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "=>")
+                    .WithArguments("lambda expression", "System.Func<int, decimal>")
+                    .WithLocation(5, 57)
+            );
         }
 
         [Fact, WorkItem(39082, "https://github.com/dotnet/roslyn/issues/39082")]
@@ -1866,19 +1848,18 @@ public static class C {
     }
     static void M(int x) {}
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,41): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '1' is not covered.
-                    //         var x = ((Func<int, decimal>)(0 switch { 0 => M }))(0);
-                    Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
-                        .WithArguments("1")
-                        .WithLocation(5, 41),
-                    // (5,55): error CS0407: 'void C.M(int)' has the wrong return type
-                    //         var x = ((Func<int, decimal>)(0 switch { 0 => M }))(0);
-                    Diagnostic(ErrorCode.ERR_BadRetType, "M")
-                        .WithArguments("C.M(int)", "void")
-                        .WithLocation(5, 55)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (5,41): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '1' is not covered.
+                //         var x = ((Func<int, decimal>)(0 switch { 0 => M }))(0);
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("1")
+                    .WithLocation(5, 41),
+                // (5,55): error CS0407: 'void C.M(int)' has the wrong return type
+                //         var x = ((Func<int, decimal>)(0 switch { 0 => M }))(0);
+                Diagnostic(ErrorCode.ERR_BadRetType, "M")
+                    .WithArguments("C.M(int)", "void")
+                    .WithLocation(5, 55)
+            );
         }
 
         [Fact, WorkItem(39767, "https://github.com/dotnet/roslyn/issues/39767")]
@@ -3121,7 +3102,9 @@ class C
             compilation.VerifyDiagnostics(
                 // (5,6): error CS1525: Invalid expression term '|'
                 //     {
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "").WithArguments("|").WithLocation(5, 6),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "")
+                    .WithArguments("|")
+                    .WithLocation(5, 6),
                 // (6,18): error CS1525: Invalid expression term '||'
                 //         | 3 => 3,
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "")
@@ -3315,9 +3298,8 @@ class C
 }";
                     var compilation = CreateCompilation(
                         source,
-                        parseOptions: TestOptions.Regular.WithLanguageVersion(
-                            LanguageVersion.CSharp9
-                        )
+                        parseOptions: TestOptions.Regular
+                            .WithLanguageVersion(LanguageVersion.CSharp9)
                     );
                     if (withExhaustive)
                     {
@@ -6612,10 +6594,10 @@ enum Color { Red, Greed, Blue }
                 // (4,33): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(Color)3' is not covered.
                 //     int M(Color color) => color switch
                 Diagnostic(
-                        ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
-                        "switch",
-                        isSuppressed: false
-                    )
+                    ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
+                    "switch",
+                    isSuppressed: false
+                )
                     .WithArguments("(Color)3")
                     .WithLocation(4, 33)
             );
@@ -6646,10 +6628,10 @@ enum Color { Red, Greed, Blue }
                 // (4,21): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(_, (Color)3)' is not covered.
                 //     int M() => this switch
                 Diagnostic(
-                        ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
-                        "switch",
-                        isSuppressed: false
-                    )
+                    ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
+                    "switch",
+                    isSuppressed: false
+                )
                     .WithArguments("(_, (Color)3)")
                     .WithLocation(4, 21)
             );
@@ -6681,10 +6663,10 @@ enum Color { Red, Greed, Blue }
                 // (4,21): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '{ Color: (Color)3 }' is not covered.
                 //     int M() => this switch
                 Diagnostic(
-                        ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
-                        "switch",
-                        isSuppressed: false
-                    )
+                    ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
+                    "switch",
+                    isSuppressed: false
+                )
                     .WithArguments("{ Color: (Color)3 }")
                     .WithLocation(4, 21)
             );
@@ -6715,10 +6697,10 @@ enum Color { Red, Greed, Blue }
                 // (4,37): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(_, (Color)3)' is not covered.
                 //     int M(int i, Color c) => (i, c) switch
                 Diagnostic(
-                        ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
-                        "switch",
-                        isSuppressed: false
-                    )
+                    ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
+                    "switch",
+                    isSuppressed: false
+                )
                     .WithArguments("(_, (Color)3)")
                     .WithLocation(4, 37)
             );
@@ -8427,7 +8409,7 @@ class Q
     static int M(string s) => s switch
     {{
         """" => 0,
-        {Enumerable.Range((int)'A', (int)('z' - 'A') + 1).Select(x => (char)x).Aggregate("", (s, c) => s + $"{ObjectDisplay.FormatPrimitive(c.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, ")}
+        {Enumerable.Range((int)'A', (int)('z' - 'A') + 1) .Select(x => (char)x) .Aggregate("", (s, c) => s + $"{ObjectDisplay.FormatPrimitive(c.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, ")}
     }};
 }}";
             var compilation = CreateCompilation(
@@ -8452,8 +8434,8 @@ class Q
     static int M(string s) => s switch
     {{
         """" => 0,
-        {Enumerable.Range((int)'A', (int)('z' - 'A') + 1).Select(x => (char)x).Aggregate("", (s, c) => s + $"{ObjectDisplay.FormatPrimitive(c.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, ")}
-        {Enumerable.Range(0, 20).Aggregate("", (s, i) => s + $"{ObjectDisplay.FormatPrimitive(i.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, ")}
+        {Enumerable.Range((int)'A', (int)('z' - 'A') + 1) .Select(x => (char)x) .Aggregate("", (s, c) => s + $"{ObjectDisplay.FormatPrimitive(c.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, ")}
+        {Enumerable.Range(0, 20) .Aggregate("", (s, i) => s + $"{ObjectDisplay.FormatPrimitive(i.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, ")}
     }};
 }}";
             var compilation = CreateCompilation(

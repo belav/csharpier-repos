@@ -117,10 +117,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
                 httpContext.Request.Headers.Add("Origin", StringValues.Empty);
                 if (accessControlMethod != string.Empty)
                 {
-                    httpContext.Request.Headers.Add(
-                        "Access-Control-Request-Method",
-                        accessControlMethod
-                    );
+                    httpContext.Request.Headers
+                        .Add("Access-Control-Request-Method", accessControlMethod);
                 }
             }
 

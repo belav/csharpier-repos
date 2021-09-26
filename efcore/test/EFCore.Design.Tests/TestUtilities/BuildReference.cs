@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 from r in l.ResolveReferencePaths()
                 where IOPath.GetFileNameWithoutExtension(r) == name
                 select MetadataReference.CreateFromFile(r)
-            ).ToList();
+            )
+                .ToList();
             if (references.Count == 0)
             {
                 throw new InvalidOperationException($"Assembly '{name}' not found.");

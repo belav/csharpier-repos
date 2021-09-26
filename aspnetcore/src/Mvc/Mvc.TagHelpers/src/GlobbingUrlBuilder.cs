@@ -234,14 +234,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     if (xExtIndex >= 0 && yExtIndex >= 0)
                     {
                         var length = x.Length - xExtIndex;
-                        return string.Compare(
-                            x,
-                            xExtIndex,
-                            y,
-                            yExtIndex,
-                            length,
-                            StringComparison.Ordinal
-                        );
+                        return string
+                            .Compare(x, xExtIndex, y, yExtIndex, length, StringComparison.Ordinal);
                     }
 
                     return xExtIndex - yExtIndex;
@@ -270,14 +264,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     }
 
                     var length = Math.Max(xSegment.Length, ySegment.Length);
-                    result = string.Compare(
-                        xSegment.Buffer,
-                        xSegment.Offset,
-                        ySegment.Buffer,
-                        ySegment.Offset,
-                        length,
-                        StringComparison.Ordinal
-                    );
+                    result = string
+                        .Compare(
+                            xSegment.Buffer,
+                            xSegment.Offset,
+                            ySegment.Buffer,
+                            ySegment.Offset,
+                            length,
+                            StringComparison.Ordinal
+                        );
                 }
 
                 if (TryGetNextSegment(ref yEnumerator, out ySegment))

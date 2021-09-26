@@ -17,9 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CancellationToken cancellationToken
         )
         {
-            return context.SyntaxTree.IsFunctionPointerCallingConventionContext(
-                context.TargetToken
-            );
+            return context.SyntaxTree
+                .IsFunctionPointerCallingConventionContext(context.TargetToken);
         }
     }
 }

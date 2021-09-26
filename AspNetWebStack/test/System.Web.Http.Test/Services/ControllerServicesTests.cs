@@ -23,9 +23,8 @@ namespace System.Web.Http.Services
             IActionValueBinder localVal = (IActionValueBinder)cs.GetService(
                 typeof(IActionValueBinder)
             );
-            IActionValueBinder globalVal = (IActionValueBinder)config.Services.GetService(
-                typeof(IActionValueBinder)
-            );
+            IActionValueBinder globalVal = (IActionValueBinder)config.Services
+                .GetService(typeof(IActionValueBinder));
 
             // Assert
             // Local controller didn't override, should get same value as global case.
@@ -45,9 +44,8 @@ namespace System.Web.Http.Services
             IActionValueBinder localVal = (IActionValueBinder)cs.GetService(
                 typeof(IActionValueBinder)
             );
-            IActionValueBinder globalVal = (IActionValueBinder)config.Services.GetService(
-                typeof(IActionValueBinder)
-            );
+            IActionValueBinder globalVal = (IActionValueBinder)config.Services
+                .GetService(typeof(IActionValueBinder));
 
             // Assert
             // Local controller didn't override, should get same value as global case.
@@ -76,9 +74,8 @@ namespace System.Web.Http.Services
             IActionValueBinder localVal = (IActionValueBinder)cs.GetService(
                 typeof(IActionValueBinder)
             );
-            IActionValueBinder globalVal = (IActionValueBinder)config.Services.GetService(
-                typeof(IActionValueBinder)
-            );
+            IActionValueBinder globalVal = (IActionValueBinder)config.Services
+                .GetService(typeof(IActionValueBinder));
 
             // Assert
             // Local controller didn't override, should get same value as global case.
@@ -128,9 +125,8 @@ namespace System.Web.Http.Services
             IActionValueBinder localVal = (IActionValueBinder)cs.GetService(
                 typeof(IActionValueBinder)
             );
-            IActionValueBinder globalVal = (IActionValueBinder)config.Services.GetService(
-                typeof(IActionValueBinder)
-            );
+            IActionValueBinder globalVal = (IActionValueBinder)config.Services
+                .GetService(typeof(IActionValueBinder));
 
             Assert.Same(globalVal, localVal);
         }

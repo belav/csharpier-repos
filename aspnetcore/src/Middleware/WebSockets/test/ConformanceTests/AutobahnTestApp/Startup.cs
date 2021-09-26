@@ -33,9 +33,8 @@ namespace AutobahnTestApp
                         var wsScheme = context.Request.IsHttps ? "wss" : "ws";
                         var wsUrl =
                             $"{wsScheme}://{context.Request.Host.Host}:{context.Request.Host.Port}{context.Request.Path}";
-                        await context.Response.WriteAsync(
-                            $"Ready to accept a WebSocket request at: {wsUrl}"
-                        );
+                        await context.Response
+                            .WriteAsync($"Ready to accept a WebSocket request at: {wsUrl}");
                     }
                 }
             );

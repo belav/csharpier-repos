@@ -291,7 +291,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(a, typeof(byte?)),
                     Expression.Constant(b, typeof(byte?)),
-                    typeof(LiftedAddNullableTests).GetTypeInfo()
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddNullableByte")
                 )
             );
@@ -306,7 +307,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(a, typeof(char?)),
                     Expression.Constant(b, typeof(char?)),
-                    typeof(LiftedAddNullableTests).GetTypeInfo()
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddNullableChar")
                 )
             );
@@ -321,7 +323,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(a, typeof(decimal?)),
                     Expression.Constant(b, typeof(decimal?)),
-                    typeof(LiftedAddNullableTests).GetTypeInfo()
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddNullableDecimal")
                 )
             );
@@ -347,7 +350,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(a, typeof(double?)),
                     Expression.Constant(b, typeof(double?)),
-                    typeof(LiftedAddNullableTests).GetTypeInfo()
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddNullableDouble")
                 )
             );
@@ -362,7 +366,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(a, typeof(float?)),
                     Expression.Constant(b, typeof(float?)),
-                    typeof(LiftedAddNullableTests).GetTypeInfo()
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddNullableFloat")
                 )
             );
@@ -391,7 +396,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(a, typeof(long?)),
                     Expression.Constant(b, typeof(long?)),
-                    typeof(LiftedAddNullableTests).GetTypeInfo()
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddNullableLong")
                 )
             );
@@ -406,7 +412,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(a, typeof(sbyte?)),
                     Expression.Constant(b, typeof(sbyte?)),
-                    typeof(LiftedAddNullableTests).GetTypeInfo()
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddNullableSByte")
                 )
             );
@@ -421,7 +428,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(a, typeof(short?)),
                     Expression.Constant(b, typeof(short?)),
-                    typeof(LiftedAddNullableTests).GetTypeInfo()
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddNullableShort")
                 )
             );
@@ -436,7 +444,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(a, typeof(uint?)),
                     Expression.Constant(b, typeof(uint?)),
-                    typeof(LiftedAddNullableTests).GetTypeInfo()
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddNullableUInt")
                 )
             );
@@ -451,7 +460,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(a, typeof(ulong?)),
                     Expression.Constant(b, typeof(ulong?)),
-                    typeof(LiftedAddNullableTests).GetTypeInfo()
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddNullableULong")
                 )
             );
@@ -466,7 +476,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(
                     Expression.Constant(a, typeof(ushort?)),
                     Expression.Constant(b, typeof(ushort?)),
-                    typeof(LiftedAddNullableTests).GetTypeInfo()
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AddNullableUShort")
                 )
             );

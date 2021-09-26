@@ -1092,12 +1092,16 @@ namespace System.Globalization
                             if (EnglishLanguageName[^1] == ')')
                             {
                                 // "Azeri (Latin)" + "Azerbaijan" -> "Azeri (Latin, Azerbaijan)"
-                                englishDisplayName = string.Concat(
-                                    EnglishLanguageName.AsSpan(0, _sEnglishLanguage!.Length - 1),
-                                    ", ",
-                                    EnglishCountryName,
-                                    ")"
-                                );
+                                englishDisplayName = string
+                                    .Concat(
+                                        EnglishLanguageName.AsSpan(
+                                            0,
+                                            _sEnglishLanguage!.Length - 1
+                                        ),
+                                        ", ",
+                                        EnglishCountryName,
+                                        ")"
+                                    );
                             }
                             else
                             {

@@ -54,10 +54,8 @@ namespace R2RTest
         public bool Matches(string[] pathComponents, int firstComponent)
         {
             if (
-                pathComponents[firstComponent].Equals(
-                    PathComponents[0],
-                    StringComparison.OrdinalIgnoreCase
-                )
+                pathComponents[firstComponent]
+                    .Equals(PathComponents[0], StringComparison.OrdinalIgnoreCase)
                 && pathComponents.Length >= firstComponent + PathComponents.Length
                 && (OpenEnd || pathComponents.Length == firstComponent + PathComponents.Length)
             )
@@ -65,10 +63,8 @@ namespace R2RTest
                 for (int matchIndex = 1; matchIndex < PathComponents.Length; matchIndex++)
                 {
                     if (
-                        !pathComponents[firstComponent + matchIndex].Equals(
-                            PathComponents[matchIndex],
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        !pathComponents[firstComponent + matchIndex]
+                            .Equals(PathComponents[matchIndex], StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         return false;
@@ -171,9 +167,8 @@ namespace R2RTest
                     string issuesProjectPath = issuesProject.FullName;
                     XDocument issuesXml = XDocument.Load(issuesProjectPath);
                     foreach (
-                        XElement itemGroupElement in issuesXml.Root.Elements(
-                            s_xmlNamespace + "ItemGroup"
-                        )
+                        XElement itemGroupElement in issuesXml.Root
+                            .Elements(s_xmlNamespace + "ItemGroup")
                     )
                     {
                         string condition = itemGroupElement.Attribute("Condition")?.Value ?? "";

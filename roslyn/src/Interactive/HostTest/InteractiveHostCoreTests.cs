@@ -50,10 +50,11 @@ goo(0,1,2,3,4,5,6,7,8,9)
             Assert.True(errorOutput.StartsWith("Stack overflow.\n"));
             Assert.True(
                 errorOutput.EndsWith(
-                    string.Format(
-                        InteractiveHostResources.Hosting_process_exited_with_exit_code_0,
-                        process!.ExitCode
-                    )
+                    string
+                        .Format(
+                            InteractiveHostResources.Hosting_process_exited_with_exit_code_0,
+                            process!.ExitCode
+                        )
                 )
             );
 

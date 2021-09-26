@@ -29,16 +29,14 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         public async Task Non_migration_requests_pass_thru()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                    app.UseMigrationsEndPoint().UseMiddleware<SuccessMiddleware>()
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer()
+                        .Configure(
+                            app => app.UseMigrationsEndPoint().UseMiddleware<SuccessMiddleware>()
+                        );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -90,38 +88,35 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
                     : MigrationsEndPointOptions.DefaultPath;
 
                 using var host = new HostBuilder().ConfigureWebHost(
-                        webHostBuilder =>
-                        {
-                            webHostBuilder.UseTestServer()
-                                .Configure(
-                                    app =>
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseTestServer().Configure(
+                            app =>
+                            {
+                                if (useCustomPath)
+                                {
+                                    app.UseMigrationsEndPoint(
+                                        new MigrationsEndPointOptions { Path = path }
+                                    );
+                                }
+                                else
+                                {
+                                    app.UseMigrationsEndPoint();
+                                }
+                            }
+                        ).ConfigureServices(
+                            services =>
+                            {
+                                services.AddDbContext<BloggingContextWithMigrations>(
+                                    options =>
                                     {
-                                        if (useCustomPath)
-                                        {
-                                            app.UseMigrationsEndPoint(
-                                                new MigrationsEndPointOptions { Path = path }
-                                            );
-                                        }
-                                        else
-                                        {
-                                            app.UseMigrationsEndPoint();
-                                        }
-                                    }
-                                )
-                                .ConfigureServices(
-                                    services =>
-                                    {
-                                        services.AddDbContext<BloggingContextWithMigrations>(
-                                            options =>
-                                            {
-                                                options.UseSqlite(database.ConnectionString);
-                                            }
-                                        );
+                                        options.UseSqlite(database.ConnectionString);
                                     }
                                 );
-                        }
-                    )
-                    .Build();
+                            }
+                        );
+                    }
+                ).Build();
 
                 await host.StartAsync();
 
@@ -172,18 +167,16 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         public async Task Context_type_not_specified()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseMigrationsEndPoint();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseMigrationsEndPoint();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -207,18 +200,16 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         public async Task Invalid_context_type_specified()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseMigrationsEndPoint();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseMigrationsEndPoint();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -251,14 +242,13 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         public async Task Context_not_registered_in_services()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(app => app.UseMigrationsEndPoint())
-                            .ConfigureServices(services => services.AddEntityFrameworkSqlite());
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer()
+                        .Configure(app => app.UseMigrationsEndPoint())
+                        .ConfigureServices(services => services.AddEntityFrameworkSqlite());
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -297,24 +287,23 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
             using (var database = SqlTestStore.CreateScratch())
             {
                 using var host = new HostBuilder().ConfigureWebHost(
-                        webHostBuilder =>
-                        {
-                            webHostBuilder.UseTestServer()
-                                .Configure(app => app.UseMigrationsEndPoint())
-                                .ConfigureServices(
-                                    services =>
-                                    {
-                                        services.AddDbContext<BloggingContextWithSnapshotThatThrows>(
-                                            optionsBuilder =>
-                                            {
-                                                optionsBuilder.UseSqlite(database.ConnectionString);
-                                            }
-                                        );
-                                    }
-                                );
-                        }
-                    )
-                    .Build();
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseTestServer()
+                            .Configure(app => app.UseMigrationsEndPoint())
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddDbContext<BloggingContextWithSnapshotThatThrows>(
+                                        optionsBuilder =>
+                                        {
+                                            optionsBuilder.UseSqlite(database.ConnectionString);
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                ).Build();
 
                 await host.StartAsync();
 

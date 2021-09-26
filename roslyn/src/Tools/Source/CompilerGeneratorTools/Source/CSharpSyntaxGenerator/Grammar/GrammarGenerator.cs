@@ -62,7 +62,8 @@ namespace CSharpSyntaxGenerator.Grammar
             }
 
             // The grammar will bottom out with certain lexical productions. Create rules for these.
-            var lexicalRules = rules.Values.SelectMany(ps => ps)
+            var lexicalRules = rules.Values
+                .SelectMany(ps => ps)
                 .SelectMany(p => p.ReferencedRules)
                 .Where(r => !rules.TryGetValue(r, out var productions) || productions.Count == 0)
                 .ToArray();
@@ -139,8 +140,8 @@ namespace CSharpSyntaxGenerator.Grammar
                     child =>
                         child is Choice c
                             ? HandleChildren(c.Children, delim: " | ")
-                                  .Parenthesize()
-                                  .Suffix("?", when: c.Optional)
+                              .Parenthesize()
+                              .Suffix("?", when: c.Optional)
                             : child is Sequence s
                                 ? HandleChildren(s.Children).Parenthesize()
                                 : child is Field f
@@ -186,13 +187,14 @@ namespace CSharpSyntaxGenerator.Grammar
                             : field.Name == "TextTokens"
                                 ? RuleReference(nameof(SyntaxKind.XmlTextLiteralToken))
                                 : RuleReference(elementType)
-            ).Suffix(field.MinCount == 0 ? "*" : "+");
+            )
+                .Suffix(field.MinCount == 0 ? "*" : "+");
 
         private static Production HandleTokenField(Field field) =>
             field.Kinds.Count == 0
                 ? HandleTokenName(field.Name)
                 : Join(" | ", field.Kinds.Select(k => HandleTokenName(k.Name)))
-                      .Parenthesize(when: field.Kinds.Count >= 2);
+                  .Parenthesize(when: field.Kinds.Count >= 2);
 
         private static Production HandleTokenName(string tokenName) =>
             GetSyntaxKind(tokenName) is var kind && kind == SyntaxKind.None
@@ -214,9 +216,9 @@ namespace CSharpSyntaxGenerator.Grammar
         private static Production RuleReference(string name) =>
             new Production(
                 s_normalizationRegex.Replace(
-                        name.EndsWith("Syntax") ? name[..^"Syntax".Length] : name,
-                        "_"
-                    )
+                    name.EndsWith("Syntax") ? name[..^"Syntax".Length] : name,
+                    "_"
+                )
                     .ToLower(),
                 ImmutableArray.Create(name)
             );

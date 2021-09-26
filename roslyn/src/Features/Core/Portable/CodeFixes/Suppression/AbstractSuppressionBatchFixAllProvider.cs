@@ -69,9 +69,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 );
 
                 var diagnosticsAndCodeActions = await GetDiagnosticsAndCodeActionsAsync(
-                        documentsAndDiagnosticsToFixMap,
-                        fixAllContext
-                    )
+                    documentsAndDiagnosticsToFixMap,
+                    fixAllContext
+                )
                     .ConfigureAwait(false);
 
                 if (diagnosticsAndCodeActions.Length > 0)
@@ -92,10 +92,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                             diagnosticsAndCodeActions.Length
                         );
                         return await TryGetMergedFixAsync(
-                                diagnosticsAndCodeActions,
-                                fixAllState,
-                                cancellationToken
-                            )
+                            diagnosticsAndCodeActions,
+                            fixAllState,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -176,12 +176,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             try
             {
                 await this.AddDocumentFixesAsync(
-                        document,
-                        diagnostics,
-                        fixes,
-                        fixAllState,
-                        cancellationToken
-                    )
+                    document,
+                    diagnostics,
+                    fixes,
+                    fixAllState,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -258,15 +258,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 {
                     var projects = projectsAndDiagnosticsToFixMap.Keys;
                     var tasks = projects.Select(
-                            p =>
-                                AddProjectFixesAsync(
-                                    p,
-                                    projectsAndDiagnosticsToFixMap[p],
-                                    bag,
-                                    fixAllState,
-                                    cancellationToken
-                                )
-                        )
+                        p =>
+                            AddProjectFixesAsync(
+                                p,
+                                projectsAndDiagnosticsToFixMap[p],
+                                bag,
+                                fixAllState,
+                                cancellationToken
+                            )
+                    )
                         .ToArray();
 
                     await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -342,11 +342,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
             var solution = fixAllState.Solution;
             var newSolution = await TryMergeFixesAsync(
-                    solution,
-                    batchOfFixes,
-                    fixAllState,
-                    cancellationToken
-                )
+                solution,
+                batchOfFixes,
+                fixAllState,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (newSolution != null && newSolution != solution)
             {
@@ -376,10 +376,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         )
         {
             var documentIdToChangedDocuments = await GetDocumentIdToChangedDocumentsAsync(
-                    oldSolution,
-                    diagnosticsAndCodeActions,
-                    cancellationToken
-                )
+                oldSolution,
+                diagnosticsAndCodeActions,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -387,11 +387,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             // Now, in parallel, process all the changes to any individual document, producing
             // the final source text for any given document.
             var documentIdToFinalText = await GetDocumentIdToFinalTextAsync(
-                    oldSolution,
-                    documentIdToChangedDocuments,
-                    diagnosticsAndCodeActions,
-                    cancellationToken
-                )
+                oldSolution,
+                documentIdToChangedDocuments,
+                diagnosticsAndCodeActions,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Finally, apply the changes to each document to the solution, producing the
@@ -488,8 +488,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             // into the final text for that document.
 
             var orderedDocuments = changedDocuments.OrderBy(
-                    t => codeActionToDiagnosticLocation[t.action]
-                )
+                t => codeActionToDiagnosticLocation[t.action]
+            )
                 .ThenBy(t => t.action.Title)
                 .ToImmutableArray();
 
@@ -543,8 +543,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             cancellationToken.ThrowIfCancellationRequested();
 
             var changedSolution = await codeAction.GetChangedSolutionInternalAsync(
-                    cancellationToken: cancellationToken
-                )
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             if (changedSolution is null)
             {

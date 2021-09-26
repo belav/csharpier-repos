@@ -111,10 +111,10 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             _ = await client.TryInvokeAsync<IRemoteGlobalNotificationDeliveryService>(
-                    (service, cancellationToken) =>
-                        service.OnGlobalOperationStartedAsync(cancellationToken),
-                    _cancellationToken
-                )
+                (service, cancellationToken) =>
+                    service.OnGlobalOperationStartedAsync(cancellationToken),
+                _cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return GlobalNotificationState.Started;
@@ -157,10 +157,10 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             _ = await client.TryInvokeAsync<IRemoteGlobalNotificationDeliveryService>(
-                    (service, cancellationToken) =>
-                        service.OnGlobalOperationStoppedAsync(e.Operations, cancellationToken),
-                    _cancellationToken
-                )
+                (service, cancellationToken) =>
+                    service.OnGlobalOperationStoppedAsync(e.Operations, cancellationToken),
+                _cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Mark that we're stopped now.

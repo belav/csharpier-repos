@@ -325,9 +325,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     }
 
                     ((List<IProperty>)foreignKeyProperties).Remove(dependentProperty);
-                    ((List<IProperty>)principalKeyProperties).Remove(
-                        foreignKey.PrincipalKey.Properties[i]
-                    );
+                    ((List<IProperty>)principalKeyProperties)
+                        .Remove(foreignKey.PrincipalKey.Properties[i]);
                 }
             }
 

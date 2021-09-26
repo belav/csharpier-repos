@@ -52,8 +52,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return completionItem;
             }
 
-            var completionService =
-                document.Project.LanguageServices.GetRequiredService<CompletionService>();
+            var completionService = document.Project.LanguageServices
+                .GetRequiredService<CompletionService>();
             var cacheEntry = GetCompletionListCacheEntry(completionItem);
             if (cacheEntry == null)
             {
@@ -67,28 +67,30 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var list = cacheEntry.CompletionList;
 
             // Find the matching completion item in the completion list
-            var selectedItem = list.Items.FirstOrDefault(
-                cachedCompletionItem =>
-                    MatchesLSPCompletionItem(completionItem, cachedCompletionItem)
-            );
+            var selectedItem = list.Items
+                .FirstOrDefault(
+                    cachedCompletionItem =>
+                        MatchesLSPCompletionItem(completionItem, cachedCompletionItem)
+                );
             if (selectedItem == null)
             {
                 return completionItem;
             }
 
             var description = await completionService.GetDescriptionAsync(
-                    document,
-                    selectedItem,
-                    cancellationToken
-                )
+                document,
+                selectedItem,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (completionItem is LSP.VSCompletionItem vsCompletionItem)
             {
                 vsCompletionItem.Description = new ClassifiedTextElement(
-                    description.TaggedParts.Select(
-                        tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
-                    )
+                    description.TaggedParts
+                        .Select(
+                            tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
+                        )
                 );
             }
 
@@ -107,12 +109,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     ?? false;
 
                 completionItem.TextEdit = await GenerateTextEditAsync(
-                        document,
-                        completionService,
-                        selectedItem,
-                        snippetsSupported,
-                        cancellationToken
-                    )
+                    document,
+                    completionService,
+                    selectedItem,
+                    snippetsSupported,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -126,34 +128,31 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         )
         {
             if (
-                !lspCompletionItem.Label.StartsWith(
-                    completionItem.DisplayTextPrefix,
-                    StringComparison.Ordinal
-                )
+                !lspCompletionItem.Label
+                    .StartsWith(completionItem.DisplayTextPrefix, StringComparison.Ordinal)
             )
             {
                 return false;
             }
 
             if (
-                !lspCompletionItem.Label.EndsWith(
-                    completionItem.DisplayTextSuffix,
-                    StringComparison.Ordinal
-                )
+                !lspCompletionItem.Label
+                    .EndsWith(completionItem.DisplayTextSuffix, StringComparison.Ordinal)
             )
             {
                 return false;
             }
 
             if (
-                string.Compare(
-                    lspCompletionItem.Label,
-                    completionItem.DisplayTextPrefix.Length,
-                    completionItem.DisplayText,
-                    0,
-                    completionItem.DisplayText.Length,
-                    StringComparison.Ordinal
-                ) != 0
+                string
+                    .Compare(
+                        lspCompletionItem.Label,
+                        completionItem.DisplayTextPrefix.Length,
+                        completionItem.DisplayText,
+                        0,
+                        completionItem.DisplayText.Length,
+                        StringComparison.Ordinal
+                    ) != 0
             )
             {
                 return false;
@@ -175,10 +174,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var documentText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
             var completionChange = await completionService.GetChangeAsync(
-                    document,
-                    selectedItem,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                selectedItem,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             var completionChangeSpan = completionChange.TextChange.Span;
             var newText = completionChange.TextChange.NewText;

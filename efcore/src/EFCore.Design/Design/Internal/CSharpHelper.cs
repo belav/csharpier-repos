@@ -389,26 +389,24 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual string Literal(DateTime value) =>
-            string.Format(
-                CultureInfo.InvariantCulture,
-                "new DateTime({0}, {1}, {2}, {3}, {4}, {5}, {6}, DateTimeKind.{7})",
-                value.Year,
-                value.Month,
-                value.Day,
-                value.Hour,
-                value.Minute,
-                value.Second,
-                value.Millisecond,
-                value.Kind
-            )
+            string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "new DateTime({0}, {1}, {2}, {3}, {4}, {5}, {6}, DateTimeKind.{7})",
+                    value.Year,
+                    value.Month,
+                    value.Day,
+                    value.Hour,
+                    value.Minute,
+                    value.Second,
+                    value.Millisecond,
+                    value.Kind
+                )
             + (
                 value.Ticks % 10000 == 0
                     ? ""
-                    : string.Format(
-                          CultureInfo.InvariantCulture,
-                          ".AddTicks({0})",
-                          value.Ticks % 10000
-                      )
+                    : string
+                      .Format(CultureInfo.InvariantCulture, ".AddTicks({0})", value.Ticks % 10000)
             );
 
         /// <summary>
@@ -519,7 +517,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         /// </summary>
         public virtual string Literal(TimeSpan value) =>
             value.Ticks % 10000 == 0
-                ? string.Format(
+                ? string
+                  .Format(
                       CultureInfo.InvariantCulture,
                       "new TimeSpan({0}, {1}, {2}, {3}, {4})",
                       value.Days,

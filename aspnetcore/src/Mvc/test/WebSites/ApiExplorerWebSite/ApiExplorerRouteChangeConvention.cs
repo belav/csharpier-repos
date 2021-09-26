@@ -25,12 +25,13 @@ namespace ApiExplorerWebSite
             {
                 action.ActionName = "NewIndex";
                 action.Selectors.Clear();
-                action.Selectors.Add(
-                    new SelectorModel
-                    {
-                        AttributeRouteModel = new AttributeRouteModel { Template = "NewIndex" }
-                    }
-                );
+                action.Selectors
+                    .Add(
+                        new SelectorModel
+                        {
+                            AttributeRouteModel = new AttributeRouteModel { Template = "NewIndex" }
+                        }
+                    );
             }
         }
     }

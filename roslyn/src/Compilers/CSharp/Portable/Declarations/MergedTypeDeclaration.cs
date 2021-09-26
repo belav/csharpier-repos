@@ -42,9 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public ImmutableArray<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations()
         {
-            var attributeSyntaxListBuilder = ArrayBuilder<
-                SyntaxList<AttributeListSyntax>
-            >.GetInstance();
+            var attributeSyntaxListBuilder = ArrayBuilder<SyntaxList<AttributeListSyntax>>
+                .GetInstance();
 
             foreach (var decl in _declarations)
             {
@@ -217,10 +216,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_lazyMemberNames == null)
                 {
-                    var names = UnionCollection<string>.Create(
-                        this.Declarations,
-                        d => d.MemberNames
-                    );
+                    var names = UnionCollection<string>
+                        .Create(this.Declarations, d => d.MemberNames);
                     Interlocked.CompareExchange(ref _lazyMemberNames, names, null);
                 }
 

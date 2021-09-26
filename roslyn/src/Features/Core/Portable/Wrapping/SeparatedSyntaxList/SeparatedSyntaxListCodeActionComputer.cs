@@ -144,9 +144,9 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 // MethodName(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j)
                 unwrapActions.Add(
                     await GetUnwrapAllCodeActionAsync(
-                            parentTitle,
-                            WrappingStyle.UnwrapFirst_IndentRest
-                        )
+                        parentTitle,
+                        WrappingStyle.UnwrapFirst_IndentRest
+                    )
                         .ConfigureAwait(false)
                 );
 
@@ -154,9 +154,9 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 //      int a, int b, int c, int d, int e, int f, int g, int h, int i, int j)
                 unwrapActions.Add(
                     await GetUnwrapAllCodeActionAsync(
-                            parentTitle,
-                            WrappingStyle.WrapFirst_IndentRest
-                        )
+                        parentTitle,
+                        WrappingStyle.WrapFirst_IndentRest
+                    )
                         .ConfigureAwait(false)
                 );
 
@@ -211,9 +211,9 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 //            int j)
                 codeActions.Add(
                     await GetWrapLongLineCodeActionAsync(
-                            parentTitle,
-                            WrappingStyle.UnwrapFirst_AlignRest
-                        )
+                        parentTitle,
+                        WrappingStyle.UnwrapFirst_AlignRest
+                    )
                         .ConfigureAwait(false)
                 );
 
@@ -222,9 +222,9 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 //     int f, int g, int h, int i, int j)
                 codeActions.Add(
                     await GetWrapLongLineCodeActionAsync(
-                            parentTitle,
-                            WrappingStyle.WrapFirst_IndentRest
-                        )
+                        parentTitle,
+                        WrappingStyle.WrapFirst_IndentRest
+                    )
                         .ConfigureAwait(false)
                 );
 
@@ -233,9 +233,9 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 //     int h, int i, int j)
                 codeActions.Add(
                     await GetWrapLongLineCodeActionAsync(
-                            parentTitle,
-                            WrappingStyle.UnwrapFirst_IndentRest
-                        )
+                        parentTitle,
+                        WrappingStyle.UnwrapFirst_IndentRest
+                    )
                         .ConfigureAwait(false)
                 );
 
@@ -350,9 +350,9 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 //            int j);
                 codeActions.Add(
                     await GetWrapEveryNestedCodeActionAsync(
-                            parentTitle,
-                            WrappingStyle.UnwrapFirst_AlignRest
-                        )
+                        parentTitle,
+                        WrappingStyle.UnwrapFirst_AlignRest
+                    )
                         .ConfigureAwait(false)
                 );
 
@@ -363,9 +363,9 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 //     int j)
                 codeActions.Add(
                     await GetWrapEveryNestedCodeActionAsync(
-                            parentTitle,
-                            WrappingStyle.WrapFirst_IndentRest
-                        )
+                        parentTitle,
+                        WrappingStyle.WrapFirst_IndentRest
+                    )
                         .ConfigureAwait(false)
                 );
 
@@ -375,9 +375,9 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 //     int j)
                 codeActions.Add(
                     await GetWrapEveryNestedCodeActionAsync(
-                            parentTitle,
-                            WrappingStyle.UnwrapFirst_IndentRest
-                        )
+                        parentTitle,
+                        WrappingStyle.UnwrapFirst_IndentRest
+                    )
                         .ConfigureAwait(false)
                 );
 

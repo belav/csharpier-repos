@@ -41,9 +41,9 @@ namespace System.Linq.Expressions.Tests
                 yield return new object[]
                 {
                     Enumerable.Repeat(
-                            typeof(List<>).MakeGenericType(typeof(List<>).GetGenericArguments()),
-                            i
-                        )
+                        typeof(List<>).MakeGenericType(typeof(List<>).GetGenericArguments()),
+                        i
+                    )
                         .ToArray()
                 };
             }

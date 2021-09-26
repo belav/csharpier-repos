@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
             //
             // When the 'break' moves into the switch, it will have different flow control impact.
             public override bool CanConvert(IConditionalOperation operation) =>
-                !operation.SemanticModel.AnalyzeControlFlow(operation.Syntax)
+                !operation.SemanticModel
+                    .AnalyzeControlFlow(operation.Syntax)
                     .ExitPoints.Any(n => n.IsKind(SyntaxKind.BreakStatement));
         }
     }

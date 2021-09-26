@@ -41,11 +41,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 _languageService = languageService;
                 _codeWindow = codeWindow;
 
-                _threadingContext =
-                    languageService.Package.ComponentModel.GetService<IThreadingContext>();
+                _threadingContext = languageService.Package.ComponentModel
+                    .GetService<IThreadingContext>();
 
-                var listenerProvider =
-                    languageService.Package.ComponentModel.GetService<IAsynchronousOperationListenerProvider>();
+                var listenerProvider = languageService.Package.ComponentModel
+                    .GetService<IAsynchronousOperationListenerProvider>();
                 _asynchronousOperationListener = listenerProvider.GetListener(
                     FeatureAttribute.NavigationBar
                 );
@@ -134,9 +134,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     return;
                 }
 
-                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    buffer
-                );
+                var textBuffer = _languageService.EditorAdaptersFactoryService
+                    .GetDataBuffer(buffer);
                 var document = textBuffer?.AsTextContainer()?.GetRelatedDocuments()
                     .FirstOrDefault();
                 // TODO - Remove the TS check once they move the liveshare navbar to LSP.  Then we can also switch to LSP
@@ -240,11 +239,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     _languageService.SystemServiceProvider,
                     _languageService.Workspace
                 );
-                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    buffer
-                );
-                var controllerFactoryService =
-                    _languageService.Package.ComponentModel.GetService<INavigationBarControllerFactoryService>();
+                var textBuffer = _languageService.EditorAdaptersFactoryService
+                    .GetDataBuffer(buffer);
+                var controllerFactoryService = _languageService.Package.ComponentModel
+                    .GetService<INavigationBarControllerFactoryService>();
                 var newController = controllerFactoryService.CreateController(
                     navigationBarClient,
                     textBuffer
@@ -293,12 +291,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 }
 
                 ErrorHandler.ThrowOnFailure(_codeWindow.GetBuffer(out var buffer));
-                var textContainer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    buffer
-                )?.AsTextContainer();
-                _workspaceRegistration = CodeAnalysis.Workspace.GetWorkspaceRegistration(
-                    textContainer
-                );
+                var textContainer = _languageService.EditorAdaptersFactoryService
+                    .GetDataBuffer(buffer)?.AsTextContainer();
+                _workspaceRegistration = CodeAnalysis.Workspace
+                    .GetWorkspaceRegistration(textContainer);
                 _workspaceRegistration.WorkspaceChanged += OnWorkspaceRegistrationChanged;
 
                 UpdateOptionChangedSource(_workspaceRegistration.Workspace);

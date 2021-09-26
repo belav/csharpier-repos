@@ -62,10 +62,8 @@ namespace System.Net.Http
             try
             {
                 HttpRequestMessage newRequestMessage = ProcessRequest(request, cancellationToken);
-                Task<HttpResponseMessage> sendAsyncTask = base.SendAsync(
-                    newRequestMessage,
-                    cancellationToken
-                );
+                Task<HttpResponseMessage> sendAsyncTask = base
+                    .SendAsync(newRequestMessage, cancellationToken);
 
                 // We schedule a continuation task once the inner handler completes in order to trigger the response
                 // processing method. ProcessResponse() is only called if the task wasn't canceled before.

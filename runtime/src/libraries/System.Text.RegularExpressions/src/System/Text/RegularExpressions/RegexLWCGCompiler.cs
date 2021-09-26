@@ -59,12 +59,13 @@ namespace System.Text.RegularExpressions
             if (s_includePatternInName)
             {
                 const int DescriptionLimit = 100; // arbitrary limit to avoid very long method names
-                description = string.Concat(
-                    "_",
-                    pattern.Length > DescriptionLimit
-                      ? pattern.AsSpan(0, DescriptionLimit)
-                      : pattern
-                );
+                description = string
+                    .Concat(
+                        "_",
+                        pattern.Length > DescriptionLimit
+                          ? pattern.AsSpan(0, DescriptionLimit)
+                          : pattern
+                    );
             }
 
             DynamicMethod goMethod = DefineDynamicMethod(

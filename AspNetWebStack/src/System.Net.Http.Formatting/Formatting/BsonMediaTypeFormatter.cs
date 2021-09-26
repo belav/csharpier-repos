@@ -147,12 +147,13 @@ namespace System.Net.Http.Formatting
                     new Type[] { typeof(string), type }
                 );
                 IDictionary dictionary =
-                    base.ReadFromStream(
-                        dictionaryType,
-                        readStream,
-                        effectiveEncoding,
-                        formatterLogger
-                    ) as IDictionary;
+                    base
+                        .ReadFromStream(
+                            dictionaryType,
+                            readStream,
+                            effectiveEncoding,
+                            formatterLogger
+                        ) as IDictionary;
                 if (dictionary == null)
                 {
                     // Not valid since BaseJsonMediaTypeFormatter.ReadFromStream(Type, Stream, HttpContent, IFormatterLogger)
@@ -230,7 +231,8 @@ namespace System.Net.Http.Formatting
             catch
             {
                 // Ensure instance is cleaned up in case of an issue
-                ((IDisposable)reader).Dispose();
+                ((IDisposable)reader)
+                    .Dispose();
                 throw;
             }
 
@@ -294,12 +296,13 @@ namespace System.Net.Http.Formatting
                 {
                     { "Value", value },
                 };
-                base.WriteToStream(
-                    typeof(Dictionary<string, object>),
-                    temporaryDictionary,
-                    writeStream,
-                    effectiveEncoding
-                );
+                base
+                    .WriteToStream(
+                        typeof(Dictionary<string, object>),
+                        temporaryDictionary,
+                        writeStream,
+                        effectiveEncoding
+                    );
             }
             else
             {

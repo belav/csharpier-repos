@@ -797,9 +797,10 @@ WHERE [c].[CustomerID] LIKE N'A%'"
             bool async
         )
         {
-            await base.Collection_select_nav_prop_first_or_default_then_nav_prop_nested_using_property_method(
-                async
-            );
+            await base
+                .Collection_select_nav_prop_first_or_default_then_nav_prop_nested_using_property_method(
+                    async
+                );
 
             AssertSql(
                 @"SELECT (
@@ -816,9 +817,10 @@ WHERE [c].[CustomerID] LIKE N'A%'"
             bool async
         )
         {
-            await base.Collection_select_nav_prop_first_or_default_then_nav_prop_nested_with_orderby(
-                async
-            );
+            await base
+                .Collection_select_nav_prop_first_or_default_then_nav_prop_nested_with_orderby(
+                    async
+                );
 
             AssertSql(
                 @"SELECT (
@@ -984,9 +986,10 @@ ORDER BY [c].[CustomerID]"
             bool async
         )
         {
-            await base.Project_single_scalar_value_subquery_in_query_with_optional_navigation_works(
-                async
-            );
+            await base
+                .Project_single_scalar_value_subquery_in_query_with_optional_navigation_works(
+                    async
+                );
 
             AssertSql(
                 @"@__p_0='3'

@@ -774,7 +774,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     $@"
 <Project>
     <PropertyGroup>
-        <EmitCompilerGeneratedFiles>{(emitGeneratedFiles.ToString().ToLower())}</EmitCompilerGeneratedFiles>
+        <EmitCompilerGeneratedFiles>{(emitGeneratedFiles.ToString() .ToLower())}</EmitCompilerGeneratedFiles>
         <CompilerGeneratedFilesOutputPath>{generatedFilesDir}</CompilerGeneratedFilesOutputPath>
         <IntermediateOutputPath>fallbackDirectory</IntermediateOutputPath>
     </PropertyGroup>
@@ -935,11 +935,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 Dictionary<string, string> parameters
             )
             {
-                var task = proj.Xml.AddUsingTask(
-                    taskName,
-                    string.Empty,
-                    Assembly.GetExecutingAssembly().FullName
-                );
+                var task = proj.Xml
+                    .AddUsingTask(taskName, string.Empty, Assembly.GetExecutingAssembly().FullName);
                 task.TaskFactory = nameof(DummyTaskFactory);
 
                 var taskParams = task.AddParameterGroup();

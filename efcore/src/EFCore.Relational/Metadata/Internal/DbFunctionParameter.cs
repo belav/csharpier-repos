@@ -164,7 +164,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                           {
                               var relationalTypeMappingSource = (IRelationalTypeMappingSource)(
                                   (IModel)parameter.Function.Model
-                              ).GetModelDependencies().TypeMappingSource;
+                              )
+                                  .GetModelDependencies().TypeMappingSource;
                               return !string.IsNullOrEmpty(parameter._storeType)
                                 ? relationalTypeMappingSource.FindMapping(parameter._storeType)!
                                 : relationalTypeMappingSource.FindMapping(parameter.ClrType)!;
@@ -259,9 +260,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public override string ToString() =>
-            ((IDbFunctionParameter)this).ToDebugString(
-                MetadataDebugStringOptions.SingleLineDefault
-            );
+            ((IDbFunctionParameter)this)
+                .ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <inheritdoc />
         IConventionDbFunctionParameterBuilder IConventionDbFunctionParameter.Builder

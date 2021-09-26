@@ -157,10 +157,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             if (
                 ErrorHandler.Succeeded(
-                    _lazyTextManager.Value.MapFilenameToLanguageSID(
-                        filename,
-                        out var fileLanguageGuid
-                    )
+                    _lazyTextManager.Value
+                        .MapFilenameToLanguageSID(filename, out var fileLanguageGuid)
                 )
             )
             {
@@ -472,7 +470,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return parseOptionsOpt.Kind;
             }
 
-            return string.Equals(
+            return string
+            .Equals(
                 fileExtension,
                 languageInformation.ScriptExtension,
                 StringComparison.OrdinalIgnoreCase
@@ -493,7 +492,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _monikersToProjectIdAndContainer.TryGetValue(moniker, out var projectIdAndContainer)
             )
             {
-                var document = this.CurrentSolution.GetProject(projectIdAndContainer.projectId)
+                var document = this.CurrentSolution
+                    .GetProject(projectIdAndContainer.projectId)
                     .Documents.Single();
 
                 // We must close the document prior to deleting the project

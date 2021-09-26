@@ -349,11 +349,10 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -772,12 +771,11 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 11
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -821,12 +819,11 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 11
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -902,7 +899,8 @@ class H
                     Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(8, 1),
                     // (11,1): error CS7020: Cannot use 'yield' in top-level script code
                     // yield return H.Dummy((41 is int x4),
-                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(11, 1),
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield")
+                        .WithLocation(11, 1),
                     // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
                     //     H.Dummy(x1, x2, x3, x4);
                     Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
@@ -1071,7 +1069,8 @@ class H
                     Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(8, 1),
                     // (11,1): error CS7020: Cannot use 'yield' in top-level script code
                     // yield return H.Dummy((41 is var x4),
-                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(11, 1),
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield")
+                        .WithLocation(11, 1),
                     // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
                     //     H.Dummy(x1, x2, x3, x4);
                     Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
@@ -1100,7 +1099,8 @@ class H
                     "System.Int32",
                     (
                         (IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)
-                    ).Type.ToTestDisplayString()
+                    ).Type
+                        .ToTestDisplayString()
                 );
 
                 var x2Decl = GetPatternDeclarations(tree, "x2").Single();
@@ -1546,12 +1546,11 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 0
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -1798,7 +1797,8 @@ class H
                     "System.Int32",
                     (
                         (IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)
-                    ).Type.ToTestDisplayString()
+                    ).Type
+                        .ToTestDisplayString()
                 );
 
                 var x2Decl = GetPatternDeclarations(tree, "x2").Single();
@@ -2266,12 +2266,11 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 11
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3196,12 +3195,11 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"1
+                compilation,
+                expectedOutput: @"1
 2
 3"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3599,12 +3597,11 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 11
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3652,12 +3649,11 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 11
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4254,21 +4250,20 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 1"
-                )
-                .VerifyDiagnostics(
-                    // (3,1): warning CS0164: This label has not been referenced
-                    // a:b:c:(1 is var x1);
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
-                    // (3,3): warning CS0164: This label has not been referenced
-                    // a:b:c:(1 is var x1);
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
-                    // (3,5): warning CS0164: This label has not been referenced
-                    // a:b:c:(1 is var x1);
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
-                );
+            ).VerifyDiagnostics(
+                // (3,1): warning CS0164: This label has not been referenced
+                // a:b:c:(1 is var x1);
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
+                // (3,3): warning CS0164: This label has not been referenced
+                // a:b:c:(1 is var x1);
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
+                // (3,5): warning CS0164: This label has not been referenced
+                // a:b:c:(1 is var x1);
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4711,21 +4706,20 @@ void Test()
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 1"
-                )
-                .VerifyDiagnostics(
-                    // (3,1): warning CS0164: This label has not been referenced
-                    // a:b:c:
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
-                    // (3,3): warning CS0164: This label has not been referenced
-                    // a:b:c:
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
-                    // (3,5): warning CS0164: This label has not been referenced
-                    // a:b:c:
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
-                );
+            ).VerifyDiagnostics(
+                // (3,1): warning CS0164: This label has not been referenced
+                // a:b:c:
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
+                // (3,3): warning CS0164: This label has not been referenced
+                // a:b:c:
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
+                // (3,5): warning CS0164: This label has not been referenced
+                // a:b:c:
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5241,21 +5235,20 @@ void Test()
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 1"
-                )
-                .VerifyDiagnostics(
-                    // (3,1): warning CS0164: This label has not been referenced
-                    // a:b:c:
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
-                    // (3,3): warning CS0164: This label has not been referenced
-                    // a:b:c:
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
-                    // (3,5): warning CS0164: This label has not been referenced
-                    // a:b:c:
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
-                );
+            ).VerifyDiagnostics(
+                // (3,1): warning CS0164: This label has not been referenced
+                // a:b:c:
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
+                // (3,3): warning CS0164: This label has not been referenced
+                // a:b:c:
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
+                // (3,5): warning CS0164: This label has not been referenced
+                // a:b:c:
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5710,11 +5703,10 @@ void Test()
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5761,13 +5753,12 @@ static object InitB()
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"InitA 0
+                compilation,
+                expectedOutput: @"InitA 0
 InitB 1
 1
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5895,12 +5886,11 @@ bool Test()
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0 0
+                compilation,
+                expectedOutput: @"0 0
 1 0
 1 2"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6344,11 +6334,10 @@ void Test()
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6395,13 +6384,12 @@ static object InitB()
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"InitA 0
+                compilation,
+                expectedOutput: @"InitA 0
 InitB 1
 1
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6987,11 +6975,10 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0
+                compilation,
+                expectedOutput: @"0
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7043,13 +7030,12 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"InitA 0
+                compilation,
+                expectedOutput: @"InitA 0
 InitB 1
 1
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7182,12 +7168,11 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"0 0
+                compilation,
+                expectedOutput: @"0 0
 1 0
 1 2"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7649,14 +7634,13 @@ class H
                 parseOptions: TestOptions.Script
             );
 
-            compilation.GetDeclarationDiagnostics()
-                .Verify(
-                    // (3,17): error CS0610: Field or property cannot be of type 'ArgIterator'
-                    // H.Dummy(null is System.ArgIterator x1);
-                    Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator")
-                        .WithArguments("System.ArgIterator")
-                        .WithLocation(3, 17)
-                );
+            compilation.GetDeclarationDiagnostics().Verify(
+                // (3,17): error CS0610: Field or property cannot be of type 'ArgIterator'
+                // H.Dummy(null is System.ArgIterator x1);
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator")
+                    .WithArguments("System.ArgIterator")
+                    .WithLocation(3, 17)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7685,14 +7669,13 @@ static class StaticType{}
                 parseOptions: TestOptions.Script
             );
 
-            compilation.GetDeclarationDiagnostics()
-                .Verify(
-                    // (2,28): error CS0723: Cannot declare a variable of static type 'StaticType'
-                    // H.Dummy(null is StaticType x1);
-                    Diagnostic(ErrorCode.ERR_VarDeclIsStaticClass, "x1")
-                        .WithArguments("StaticType")
-                        .WithLocation(2, 28)
-                );
+            compilation.GetDeclarationDiagnostics().Verify(
+                // (2,28): error CS0723: Cannot declare a variable of static type 'StaticType'
+                // H.Dummy(null is StaticType x1);
+                Diagnostic(ErrorCode.ERR_VarDeclIsStaticClass, "x1")
+                    .WithArguments("StaticType")
+                    .WithLocation(2, 28)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -8278,11 +8261,10 @@ class H
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"1
+                compilation,
+                expectedOutput: @"1
 1"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -8396,7 +8378,8 @@ for (
                 compilation.VerifyDiagnostics(
                     // (74,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(74, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(74, 5),
                     // (25,15): error CS0841: Cannot use local variable 'x6' before it is declared
                     //         Dummy(x6 && true is var x6)
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -8516,7 +8499,8 @@ for (
                         .WithLocation(20, 27),
                     // (74,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(74, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(74, 5),
                     // (25,15): error CS0841: Cannot use local variable 'x6' before it is declared
                     //         Dummy(x6 && true is var x6)
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -8761,7 +8745,8 @@ foreach (var x15 in
                 compilation.VerifyDiagnostics(
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(52, 5),
                     // (18,25): error CS0841: Cannot use local variable 'x6' before it is declared
                     // foreach (var i in Dummy(x6 && true is var x6))
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -8889,7 +8874,8 @@ foreach (var x15 in
                         .WithLocation(15, 37),
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(52, 5),
                     // (18,25): error CS0841: Cannot use local variable 'x6' before it is declared
                     // foreach (var i in Dummy(x6 && true is var x6))
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -10223,7 +10209,8 @@ using (Dummy(1 is var x14,
                 compilation.VerifyDiagnostics(
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(52, 5),
                     // (18,14): error CS0841: Cannot use local variable 'x6' before it is declared
                     // using (Dummy(x6 && true is var x6))
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -10374,7 +10361,8 @@ using (Dummy(1 is var x14,
                         .WithLocation(51, 14),
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(52, 5),
                     // (52,9): warning CS0219: The variable 'y12' is assigned but its value is never used
                     //     var y12 = 12;
                     Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")

@@ -98,7 +98,8 @@ namespace M
             var portableCompilation = await GetPortableProject(solution).GetCompilationAsync();
             var baseClassSymbol = portableCompilation.GetTypeByMetadataName("N.BaseClass");
 
-            var normalCompilation = await solution.Projects.Single(p => p.Name == "NormalProject")
+            var normalCompilation = await solution.Projects
+                .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var derivedClassSymbol = normalCompilation.GetTypeByMetadataName("M.DerivedClass");
 
@@ -157,7 +158,8 @@ namespace M
             var portableCompilation = await GetPortableProject(solution).GetCompilationAsync();
             var baseClassSymbol = portableCompilation.GetTypeByMetadataName("N.BaseInterface");
 
-            var normalCompilation = await solution.Projects.Single(p => p.Name == "NormalProject")
+            var normalCompilation = await solution.Projects
+                .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var derivedClassSymbol = normalCompilation.GetTypeByMetadataName("M.DerivedInterface");
 
@@ -226,7 +228,8 @@ namespace M
             var portableCompilation = await GetPortableProject(solution).GetCompilationAsync();
             var baseClassSymbol = portableCompilation.GetTypeByMetadataName("N.BaseClass");
 
-            var normalCompilation = await solution.Projects.Single(p => p.Name == "NormalProject")
+            var normalCompilation = await solution.Projects
+                .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var derivedClassSymbol = normalCompilation.GetTypeByMetadataName("M.DerivedClass");
 
@@ -285,7 +288,8 @@ namespace M
             var portableCompilation = await GetPortableProject(solution).GetCompilationAsync();
             var baseClassSymbol = portableCompilation.GetTypeByMetadataName("N.BaseClass");
 
-            var normalCompilation = await solution.Projects.Single(p => p.Name == "NormalProject")
+            var normalCompilation = await solution.Projects
+                .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var derivedClassSymbol = normalCompilation.GetTypeByMetadataName("M.DerivedClass");
 
@@ -345,7 +349,8 @@ End Namespace
             var portableCompilation = await GetPortableProject(solution).GetCompilationAsync();
             var baseClassSymbol = portableCompilation.GetTypeByMetadataName("N.BaseClass");
 
-            var normalCompilation = await solution.Projects.Single(p => p.Name == "NormalProject")
+            var normalCompilation = await solution.Projects
+                .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var derivedClassSymbol = normalCompilation.GetTypeByMetadataName("M.DerivedClass");
 
@@ -405,7 +410,8 @@ End Namespace
             var portableCompilation = await GetPortableProject(solution).GetCompilationAsync();
             var baseClassSymbol = portableCompilation.GetTypeByMetadataName("N.BaseClass");
 
-            var normalCompilation = await solution.Projects.Single(p => p.Name == "NormalProject")
+            var normalCompilation = await solution.Projects
+                .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var derivedClassSymbol = normalCompilation.GetTypeByMetadataName("M.DerivedClass");
 
@@ -464,7 +470,8 @@ namespace M
             var portableCompilation = await GetPortableProject(solution).GetCompilationAsync();
             var baseInterfaceSymbol = portableCompilation.GetTypeByMetadataName("N.IBaseInterface");
 
-            var normalCompilation = await solution.Projects.Single(p => p.Name == "NormalProject")
+            var normalCompilation = await solution.Projects
+                .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var implementingClassSymbol = normalCompilation.GetTypeByMetadataName(
                 "M.ImplementingClass"
@@ -525,7 +532,8 @@ End Namespace
             var portableCompilation = await GetPortableProject(solution).GetCompilationAsync();
             var baseInterfaceSymbol = portableCompilation.GetTypeByMetadataName("N.IBaseInterface");
 
-            var normalCompilation = await solution.Projects.Single(p => p.Name == "NormalProject")
+            var normalCompilation = await solution.Projects
+                .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var implementingClassSymbol = normalCompilation.GetTypeByMetadataName(
                 "M.ImplementingClass"
@@ -585,7 +593,8 @@ namespace M
             var portableCompilation = await GetPortableProject(solution).GetCompilationAsync();
             var baseInterfaceSymbol = portableCompilation.GetTypeByMetadataName("N.IBaseInterface");
 
-            var normalCompilation = await solution.Projects.Single(p => p.Name == "NormalProject")
+            var normalCompilation = await solution.Projects
+                .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var implementingClassSymbol = normalCompilation.GetTypeByMetadataName(
                 "M.ImplementingClass"

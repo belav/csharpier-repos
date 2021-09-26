@@ -35,11 +35,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 {
                     listener.ListenSocket = listener.CreateListenSocket();
 #pragma warning disable CS0618
-                    listener.ListenSocket.Listen(
-                        TransportContext.Options.Backlog,
-                        ConnectionCallback,
-                        listener
-                    );
+                    listener.ListenSocket
+                        .Listen(TransportContext.Options.Backlog, ConnectionCallback, listener);
 #pragma warning restore CS0618
                 },
                 this
@@ -216,17 +213,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             if (Thread.FatalError == null && ListenSocket != null)
             {
                 await Thread.PostAsync(
-                        listener =>
-                        {
-                            listener.ListenSocket.Dispose();
+                    listener =>
+                    {
+                        listener.ListenSocket.Dispose();
 
-                            listener._closed = true;
+                        listener._closed = true;
 
-                            listener.StopAcceptingConnections();
-                        },
-                        this
-                    )
-                    .ConfigureAwait(false);
+                        listener.StopAcceptingConnections();
+                    },
+                    this
+                ).ConfigureAwait(false);
             }
 
             ListenSocket = null;

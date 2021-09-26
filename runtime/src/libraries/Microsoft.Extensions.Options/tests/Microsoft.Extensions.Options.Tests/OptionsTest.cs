@@ -22,10 +22,10 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void UsesFactory()
         {
-            var services = new ServiceCollection().AddSingleton<
-                IOptionsFactory<FakeOptions>,
-                FakeOptionsFactory
-            >().Configure<FakeOptions>(o => o.Message = "Ignored").BuildServiceProvider();
+            var services = new ServiceCollection()
+                .AddSingleton<IOptionsFactory<FakeOptions>, FakeOptionsFactory>()
+                .Configure<FakeOptions>(o => o.Message = "Ignored")
+                .BuildServiceProvider();
 
             var snap = services.GetRequiredService<IOptions<FakeOptions>>();
             Assert.Equal(FakeOptionsFactory.Options, snap.Value);
@@ -185,9 +185,10 @@ namespace Microsoft.Extensions.Options.Tests
                             { nameof(NullableOptions.MyNullableInt), "1" },
                             {
                                 nameof(NullableOptions.MyNullableDateTime),
-                                new DateTime(2015, 1, 1).ToString(
-                                    CultureInfo.InvariantCulture.DateTimeFormat.ShortDatePattern
-                                )
+                                new DateTime(2015, 1, 1)
+                                    .ToString(
+                                        CultureInfo.InvariantCulture.DateTimeFormat.ShortDatePattern
+                                    )
                             }
                         },
                         new Dictionary<string, object>
@@ -204,9 +205,10 @@ namespace Microsoft.Extensions.Options.Tests
                             { nameof(NullableOptions.MyNullableInt), "-1" },
                             {
                                 nameof(NullableOptions.MyNullableDateTime),
-                                new DateTime(1995, 12, 31).ToString(
-                                    CultureInfo.InvariantCulture.DateTimeFormat.ShortDatePattern
-                                )
+                                new DateTime(1995, 12, 31)
+                                    .ToString(
+                                        CultureInfo.InvariantCulture.DateTimeFormat.ShortDatePattern
+                                    )
                             }
                         },
                         new Dictionary<string, object>
@@ -384,7 +386,8 @@ namespace Microsoft.Extensions.Options.Tests
             var sp = services.BuildServiceProvider();
             var optionsWithoutDefaultCtor = sp.GetRequiredService<
                 IOptionsMonitor<OptionsWithoutDefaultCtor>
-            >().Get("Named");
+            >()
+                .Get("Named");
             Assert.Equal("Initial value", optionsWithoutDefaultCtor.Message);
             Assert.Equal("Named", optionsWithoutDefaultCtor.Name);
         }

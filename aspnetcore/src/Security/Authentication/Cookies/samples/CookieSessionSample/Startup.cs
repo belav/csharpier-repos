@@ -16,19 +16,18 @@ namespace CookieSessionSample
         {
             // This can be removed after https://github.com/aspnet/IISIntegration/issues/371
             services.AddAuthentication(
-                    options =>
-                    {
-                        options.DefaultAuthenticateScheme =
-                            CookieAuthenticationDefaults.AuthenticationScheme;
-                        options.DefaultChallengeScheme =
-                            CookieAuthenticationDefaults.AuthenticationScheme;
-                    }
-                )
-                .AddCookie();
+                options =>
+                {
+                    options.DefaultAuthenticateScheme =
+                        CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme =
+                        CookieAuthenticationDefaults.AuthenticationScheme;
+                }
+            ).AddCookie();
 
             services.AddOptions<CookieAuthenticationOptions>(
-                    CookieAuthenticationDefaults.AuthenticationScheme
-                )
+                CookieAuthenticationDefaults.AuthenticationScheme
+            )
                 .Configure<MemoryCacheTicketStore>(
                     (o, ticketStore) => o.SessionStore = ticketStore
                 );

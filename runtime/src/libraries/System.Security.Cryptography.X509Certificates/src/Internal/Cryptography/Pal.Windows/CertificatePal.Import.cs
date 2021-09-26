@@ -73,19 +73,20 @@ namespace Internal.Cryptography.Pal
                                 : CertQueryObjectType.CERT_QUERY_OBJECT_BLOB;
                             void* pvObject = loadFromFile ? (void*)pFileName : (void*)&certBlob;
 
-                            bool success = Interop.crypt32.CryptQueryObject(
-                                objectType,
-                                pvObject,
-                                X509ExpectedContentTypeFlags,
-                                X509ExpectedFormatTypeFlags,
-                                0,
-                                out msgAndCertEncodingType,
-                                out contentType,
-                                out formatType,
-                                out hCertStore,
-                                out hCryptMsg,
-                                out pCertContext
-                            );
+                            bool success = Interop.crypt32
+                                .CryptQueryObject(
+                                    objectType,
+                                    pvObject,
+                                    X509ExpectedContentTypeFlags,
+                                    X509ExpectedFormatTypeFlags,
+                                    0,
+                                    out msgAndCertEncodingType,
+                                    out contentType,
+                                    out formatType,
+                                    out hCertStore,
+                                    out hCryptMsg,
+                                    out pCertContext
+                                );
                             if (!success)
                             {
                                 int hr = Marshal.GetHRForLastWin32Error();
@@ -141,13 +142,14 @@ namespace Internal.Cryptography.Pal
             int dwSigners;
             int cbSigners = sizeof(int);
             if (
-                !Interop.crypt32.CryptMsgGetParam(
-                    hCryptMsg,
-                    CryptMessageParameterType.CMSG_SIGNER_COUNT_PARAM,
-                    0,
-                    out dwSigners,
-                    ref cbSigners
-                )
+                !Interop.crypt32
+                    .CryptMsgGetParam(
+                        hCryptMsg,
+                        CryptMessageParameterType.CMSG_SIGNER_COUNT_PARAM,
+                        0,
+                        out dwSigners,
+                        ref cbSigners
+                    )
             )
                 throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
             if (dwSigners == 0)
@@ -156,26 +158,28 @@ namespace Internal.Cryptography.Pal
             // get the first signer from the store, and use that as the loaded certificate
             int cbData = 0;
             if (
-                !Interop.crypt32.CryptMsgGetParam(
-                    hCryptMsg,
-                    CryptMessageParameterType.CMSG_SIGNER_INFO_PARAM,
-                    0,
-                    null,
-                    ref cbData
-                )
+                !Interop.crypt32
+                    .CryptMsgGetParam(
+                        hCryptMsg,
+                        CryptMessageParameterType.CMSG_SIGNER_INFO_PARAM,
+                        0,
+                        null,
+                        ref cbData
+                    )
             )
                 throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
 
             fixed (byte* pCmsgSignerBytes = new byte[cbData])
             {
                 if (
-                    !Interop.crypt32.CryptMsgGetParam(
-                        hCryptMsg,
-                        CryptMessageParameterType.CMSG_SIGNER_INFO_PARAM,
-                        0,
-                        pCmsgSignerBytes,
-                        ref cbData
-                    )
+                    !Interop.crypt32
+                        .CryptMsgGetParam(
+                            hCryptMsg,
+                            CryptMessageParameterType.CMSG_SIGNER_INFO_PARAM,
+                            0,
+                            pCmsgSignerBytes,
+                            ref cbData
+                        )
                 )
                     throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
 
@@ -190,12 +194,13 @@ namespace Internal.Cryptography.Pal
 
                 SafeCertContextHandle? pCertContext = null;
                 if (
-                    !Interop.crypt32.CertFindCertificateInStore(
-                        hCertStore,
-                        CertFindType.CERT_FIND_SUBJECT_CERT,
-                        &certInfo,
-                        ref pCertContext
-                    )
+                    !Interop.crypt32
+                        .CertFindCertificateInStore(
+                            hCertStore,
+                            CertFindType.CERT_FIND_SUBJECT_CERT,
+                            &certInfo,
+                            ref pCertContext
+                        )
                 )
                     throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
                 return pCertContext;
@@ -214,11 +219,8 @@ namespace Internal.Cryptography.Pal
                 fixed (byte* pbRawData = rawData)
                 {
                     CRYPTOAPI_BLOB certBlob = new CRYPTOAPI_BLOB(rawData.Length, pbRawData);
-                    hStore = Interop.crypt32.PFXImportCertStore(
-                        ref certBlob,
-                        password,
-                        pfxCertStoreFlags
-                    );
+                    hStore = Interop.crypt32
+                        .PFXImportCertStore(ref certBlob, password, pfxCertStoreFlags);
                     if (hStore.IsInvalid)
                     {
                         throw Marshal.GetHRForLastWin32Error().ToCryptographicException();

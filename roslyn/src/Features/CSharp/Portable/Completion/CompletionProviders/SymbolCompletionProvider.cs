@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             )
             {
                 // '<' should not filter the completion list, even though it's in generic items like IList<>
-                var generalBaseline = CompletionItemRules.Default.WithFilterCharacterRule(
+                var generalBaseline = CompletionItemRules.Default
+                    .WithFilterCharacterRule(
                         CharacterSetModificationRule.Create(
                             CharacterSetModificationKind.Remove,
                             '<'
@@ -120,10 +121,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     context.Trigger.Kind == CompletionTriggerKind.Insertion
                     && position > 0
                     && await IsTriggerInArgumentListAsync(
-                            context.Document,
-                            position - 1,
-                            cancellationToken
-                        )
+                        context.Document,
+                        position - 1,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false) == true
                 )
                 {
@@ -163,10 +164,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (trigger.Kind == CompletionTriggerKind.Insertion && caretPosition > 0)
             {
                 var result = await IsTriggerOnDotAsync(
-                        document,
-                        caretPosition - 1,
-                        cancellationToken
-                    )
+                    document,
+                    caretPosition - 1,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (result.HasValue)
                     return result.Value;
@@ -178,10 +179,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 )
                 {
                     result = await IsTriggerInArgumentListAsync(
-                            document,
-                            caretPosition - 1,
-                            cancellationToken
-                        )
+                        document,
+                        caretPosition - 1,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (result.HasValue)
                         return result.Value;
@@ -225,12 +226,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var token = root.FindToken(characterPosition);
 
             if (
-                !token.Parent.IsKind(
-                    SyntaxKind.ArgumentList,
-                    SyntaxKind.BracketedArgumentList,
-                    SyntaxKind.AttributeArgumentList,
-                    SyntaxKind.ArrayRankSpecifier
-                )
+                !token.Parent
+                    .IsKind(
+                        SyntaxKind.ArgumentList,
+                        SyntaxKind.BracketedArgumentList,
+                        SyntaxKind.AttributeArgumentList,
+                        SyntaxKind.ArrayRankSpecifier
+                    )
             )
             {
                 return false;
@@ -287,15 +289,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SupportedPlatformData? supportedPlatformData
         )
         {
-            var item = base.CreateItem(
-                completionContext,
-                displayText,
-                displayTextSuffix,
-                insertionText,
-                symbols,
-                context,
-                supportedPlatformData
-            );
+            var item = base
+                .CreateItem(
+                    completionContext,
+                    displayText,
+                    displayTextSuffix,
+                    insertionText,
+                    symbols,
+                    context,
+                    supportedPlatformData
+                );
 
             var symbol = symbols[0].symbol;
             // If it is a method symbol, also consider appending parenthesis when later, it is committed by using special characters.
@@ -310,9 +313,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // e.g. Action c = = Bar;
             if (symbol.IsKind(SymbolKind.Method) && !context.IsNameOfContext)
             {
-                var isInferredTypeDelegateOrFunctionPointer = context.InferredTypes.Any(
-                    type => type.IsDelegateType() || type.IsFunctionPointerType()
-                );
+                var isInferredTypeDelegateOrFunctionPointer = context.InferredTypes
+                    .Any(type => type.IsDelegateType() || type.IsFunctionPointerType());
                 if (!isInferredTypeDelegateOrFunctionPointer)
                 {
                     item = SymbolCompletionItem.AddShouldProvideParenthesisCompletion(item);

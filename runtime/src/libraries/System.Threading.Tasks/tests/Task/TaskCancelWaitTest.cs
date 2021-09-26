@@ -82,9 +82,8 @@ namespace System.Threading.Tasks.Tests.CancelWait
                                 _taskCompleted = _taskTree.Task.Wait(_waitTimeout);
                                 break;
                             case WaitBy.TimeSpan:
-                                _taskCompleted = _taskTree.Task.Wait(
-                                    new TimeSpan(0, 0, 0, 0, _waitTimeout)
-                                );
+                                _taskCompleted = _taskTree.Task
+                                    .Wait(new TimeSpan(0, 0, 0, 0, _waitTimeout));
                                 break;
                         }
                         break;
@@ -285,9 +284,10 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 else if (_countdownEvent.IsSet && ti.Task.IsCanceled)
                     Assert.True(
                         false,
-                        string.Format(
-                            "Root task should not be cancelled when the whole tree has been created"
-                        )
+                        string
+                            .Format(
+                                "Root task should not be cancelled when the whole tree has been created"
+                            )
                     );
             }
             else if (current.Parent.CancelChildren)
@@ -296,9 +296,10 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 if (!ti.CancellationToken.IsCancellationRequested)
                     Assert.True(
                         false,
-                        string.Format(
-                            "Task which has been explicitly cancel-requested either by parent must have CancellationRequested set as true"
-                        )
+                        string
+                            .Format(
+                                "Task which has been explicitly cancel-requested either by parent must have CancellationRequested set as true"
+                            )
                     );
             }
             else if (ti.IsRespectParentCancellation)
@@ -317,9 +318,10 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 if (ti.CancellationToken.IsCancellationRequested || ti.Task.IsCanceled)
                     Assert.True(
                         false,
-                        string.Format(
-                            "Inner non-directly canceled task which opts out RespectParentCancellationshould not be cancelled"
-                        )
+                        string
+                            .Format(
+                                "Inner non-directly canceled task which opts out RespectParentCancellationshould not be cancelled"
+                            )
                     );
             }
             // verify IsCanceled indicate successfully dequeued based on the observing that
@@ -416,10 +418,11 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 if (!expCaught)
                     Assert.True(
                         false,
-                        string.Format(
-                            "expected TPLTestException in Task.Name = Task{0} NOT caught",
-                            current.Name
-                        )
+                        string
+                            .Format(
+                                "expected TPLTestException in Task.Name = Task{0} NOT caught",
+                                current.Name
+                            )
                     );
             }
             else
@@ -427,11 +430,12 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 if (ti.Task.Exception != null && _api == API.Wait)
                     Assert.True(
                         false,
-                        string.Format(
-                            "UNEXPECTED exception in Task.Name = Task{0} caught. Exception: {1}",
-                            current.Name,
-                            ti.Task.Exception
-                        )
+                        string
+                            .Format(
+                                "UNEXPECTED exception in Task.Name = Task{0} caught. Exception: {1}",
+                                current.Name,
+                                ti.Task.Exception
+                            )
                     );
 
                 if (ti.Task.IsCanceled && ti.Result != -42)
@@ -454,14 +458,15 @@ namespace System.Threading.Tasks.Tests.CancelWait
                     if (ti.Result < minLimit || ti.Result > maxLimit)
                         Assert.True(
                             ti.Task.IsCanceled || ti.Task.IsFaulted,
-                            string.Format(
-                                "Expected Result to lie between {0} and {1} for completed task. Actual Result {2}. Using n={3} IsCanceled={4}",
-                                minLimit,
-                                maxLimit,
-                                ti.Result,
-                                workType,
-                                ti.Task.IsCanceled
-                            )
+                            string
+                                .Format(
+                                    "Expected Result to lie between {0} and {1} for completed task. Actual Result {2}. Using n={3} IsCanceled={4}",
+                                    minLimit,
+                                    maxLimit,
+                                    ti.Result,
+                                    workType,
+                                    ti.Task.IsCanceled
+                                )
                         );
                 }
             }

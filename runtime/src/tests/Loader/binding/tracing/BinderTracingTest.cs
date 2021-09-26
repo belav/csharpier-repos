@@ -80,9 +80,8 @@ namespace BinderTracingTests
 
         public static bool RunAllTests()
         {
-            MethodInfo[] methods = typeof(BinderTracingTest).GetMethods(
-                    BindingFlags.Public | BindingFlags.Static
-                )
+            MethodInfo[] methods = typeof(BinderTracingTest)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
                 .Where(
                     m =>
                         m.GetCustomAttribute<BinderTestAttribute>() != null
@@ -123,10 +122,8 @@ namespace BinderTracingTests
                 else
                 {
                     // Run specific test - first argument should be the test method name
-                    MethodInfo method = typeof(BinderTracingTest).GetMethod(
-                        args[0],
-                        BindingFlags.Public | BindingFlags.Static
-                    );
+                    MethodInfo method = typeof(BinderTracingTest)
+                        .GetMethod(args[0], BindingFlags.Public | BindingFlags.Static);
                     Assert.IsTrue(
                         method != null
                             && method.GetCustomAttribute<BinderTestAttribute>() != null
@@ -170,10 +167,11 @@ namespace BinderTracingTests
                 BinderTestAttribute attribute = method.GetCustomAttribute<BinderTestAttribute>();
                 if (!string.IsNullOrEmpty(attribute.TestSetup))
                 {
-                    MethodInfo setupMethod = method.DeclaringType.GetMethod(
-                        attribute.TestSetup,
-                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-                    );
+                    MethodInfo setupMethod = method.DeclaringType
+                        .GetMethod(
+                            attribute.TestSetup,
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                        );
                     Assert.IsTrue(setupMethod != null);
                     setupMethod.Invoke(null, new object[0]);
                 }

@@ -42,7 +42,8 @@ class Program
                 TestCode = InitialMarkup,
                 FixedCode = ExpectedMarkup,
                 CodeActionValidationMode = CodeActionValidationMode.Full,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -62,7 +63,8 @@ class Program
                 TestCode = InitialMarkup,
                 CompilerDiagnostics = CompilerDiagnostics.None, // CS0077 is present, but we present the refactoring anyway (this may overlap with a diagnostic fixer)
                 CodeActionValidationMode = CodeActionValidationMode.Full,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -84,7 +86,8 @@ class Program
                 CompilerDiagnostics = CompilerDiagnostics.None,
                 OffersEmptyRefactoring = false,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory]
@@ -121,7 +124,8 @@ class Program
                 TestCode = initialMarkup,
                 FixedCode = expectedMarkup,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory]
@@ -157,7 +161,8 @@ class Program
                 TestCode = initialMarkup,
                 FixedCode = expectedMarkup,
                 CodeActionValidationMode = CodeActionValidationMode.Full,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory]
@@ -196,7 +201,8 @@ class Program
                 TestCode = initialMarkup,
                 FixedCode = expectedMarkup,
                 CodeActionValidationMode = CodeActionValidationMode.SemanticStructure,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
     }
 }

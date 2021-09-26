@@ -34,9 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 source,
                 references,
                 targetFramework: TargetFramework.Mscorlib40,
-                options: (options ?? TestOptions.ReleaseDll).WithXmlReferenceResolver(
-                    XmlFileResolver.Default
-                ),
+                options: (options ?? TestOptions.ReleaseDll)
+                    .WithXmlReferenceResolver(XmlFileResolver.Default),
                 parseOptions: TestOptions.RegularWithDocumentationComments,
                 assemblyName: assemblyName
             );
@@ -1215,170 +1214,168 @@ enum E : byte
 }
 ";
 
-            var revisedSource = new DocumentationCommentAdder().Visit(
-                    Parse(source).GetCompilationUnitRoot()
-                )
+            var revisedSource = new DocumentationCommentAdder()
+                .Visit(Parse(source).GetCompilationUnitRoot())
                 .ToFullString();
             // Manually verified that positions match dev11.
-            CreateCompilationUtil(revisedSource)
-                .VerifyDiagnostics(
-                    // (2,15): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (2,24): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (2,33): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (2,42): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (2,52): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (2,62): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (2,77): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (2,91): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (2,101): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (2,111): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 11 */{
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 12 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,17): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,27): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,37): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,47): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,58): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,68): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,79): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,94): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,105): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,116): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 24 */{
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 25 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,20): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 26 */interface /** 27 */I
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (13,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 28 */{
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (15,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 29 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,19): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,33): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,43): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,53): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,63): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,74): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,84): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,94): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,104): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,115): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,125): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,136): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,147): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,157): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,168): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,183): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,194): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,205): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,215): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (19,15): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (19,26): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (19,37): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (20,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 54 */{
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (22,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 55 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (23,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 56 */
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
-                );
+            CreateCompilationUtil(revisedSource).VerifyDiagnostics(
+                // (2,15): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (2,24): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (2,33): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (2,42): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (2,52): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (2,62): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (2,77): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (2,91): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (2,101): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (2,111): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 11 */{
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 12 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,17): warning CS1587: XML comment is not placed on a valid language element
+                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,27): warning CS1587: XML comment is not placed on a valid language element
+                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,37): warning CS1587: XML comment is not placed on a valid language element
+                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,47): warning CS1587: XML comment is not placed on a valid language element
+                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,58): warning CS1587: XML comment is not placed on a valid language element
+                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,68): warning CS1587: XML comment is not placed on a valid language element
+                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,79): warning CS1587: XML comment is not placed on a valid language element
+                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,94): warning CS1587: XML comment is not placed on a valid language element
+                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,105): warning CS1587: XML comment is not placed on a valid language element
+                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,116): warning CS1587: XML comment is not placed on a valid language element
+                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 24 */{
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 25 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,20): warning CS1587: XML comment is not placed on a valid language element
+                // /** 26 */interface /** 27 */I
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (13,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 28 */{
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (15,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 29 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,19): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,33): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,43): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,53): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,63): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,74): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,84): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,94): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,104): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,115): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,125): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,136): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,147): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,157): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,168): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,183): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,194): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,205): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,215): warning CS1587: XML comment is not placed on a valid language element
+                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (19,15): warning CS1587: XML comment is not placed on a valid language element
+                // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (19,26): warning CS1587: XML comment is not placed on a valid language element
+                // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (19,37): warning CS1587: XML comment is not placed on a valid language element
+                // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (20,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 54 */{
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (22,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 55 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (23,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 56 */
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+            );
         }
 
         [Fact]
@@ -1405,357 +1402,355 @@ enum E
 }
 ";
 
-            var revisedSource = new DocumentationCommentAdder().Visit(
-                    Parse(source).GetCompilationUnitRoot()
-                )
+            var revisedSource = new DocumentationCommentAdder()
+                .Visit(Parse(source).GetCompilationUnitRoot())
                 .ToFullString();
             // Manually verified that positions match dev11.
-            CreateCompilationUtil(revisedSource)
-                .VerifyDiagnostics(
-                    // (4,41): warning CS0169: The field 'C.field' is never used
-                    //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "field").WithArguments("C.field"),
-                    // (7,87): warning CS0067: The event 'C.FieldLikeEvent' is never used
-                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "FieldLikeEvent")
-                        .WithArguments("C.FieldLikeEvent"),
-                    // (2,15): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 2 */{
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (4,21): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (4,33): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (4,46): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,21): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,33): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,50): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,61): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,73): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,84): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,96): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,107): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,22): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,35): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,48): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,58): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,71): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,81): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,92): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,103): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,116): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,127): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,143): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,153): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,164): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,175): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,188): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,199): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,210): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,22): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,37): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,52): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,62): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,78): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,101): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,22): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,37): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,52): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,62): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,78): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,99): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,110): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,123): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,134): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,145): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,161): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,172): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,183): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,22): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,36): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,51): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,61): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,71): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,82): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,92): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,102): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,112): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,123): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,133): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,144): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,155): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,165): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,176): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,191): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,202): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,213): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,224): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,235): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,21): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,37): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,50): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,68): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,78): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,88): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,99): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,109): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,120): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,131): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,147): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,157): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,168): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,21): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,37): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,55): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,73): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,85): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,95): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,106): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,116): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,127): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,138): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,155): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,166): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,178): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,23): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,34): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,45): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,59): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,70): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,82): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,94): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,108): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,119): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,131): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (12,143): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (13,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 116 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (15,16): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 117 */enum /** 118 */E
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (16,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 119 */{
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,16): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 120 */A/** 121 */,
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (18,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 122 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (19,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 123 */
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
-                );
+            CreateCompilationUtil(revisedSource).VerifyDiagnostics(
+                // (4,41): warning CS0169: The field 'C.field' is never used
+                //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "field").WithArguments("C.field"),
+                // (7,87): warning CS0067: The event 'C.FieldLikeEvent' is never used
+                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "FieldLikeEvent")
+                    .WithArguments("C.FieldLikeEvent"),
+                // (2,15): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 2 */{
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (4,21): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (4,33): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (4,46): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,21): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,33): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,50): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,61): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,73): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,84): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,96): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,107): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,22): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,35): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,48): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,58): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,71): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,81): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,92): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,103): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,116): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,127): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,143): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,153): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,164): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,175): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,188): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,199): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,210): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,22): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,37): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,52): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,62): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,78): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,101): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,22): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,37): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,52): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,62): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,78): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,99): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,110): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,123): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,134): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,145): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,161): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,172): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,183): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,22): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,36): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,51): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,61): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,71): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,82): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,92): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,102): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,112): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,123): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,133): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,144): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,155): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,165): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,176): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,191): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,202): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,213): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,224): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,235): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,21): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,37): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,50): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,68): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,78): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,88): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,99): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,109): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,120): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,131): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,147): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,157): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,168): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,21): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,37): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,55): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,73): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,85): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,95): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,106): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,116): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,127): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,138): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,155): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,166): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,178): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,23): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,34): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,45): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,59): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,70): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,82): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,94): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,108): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,119): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,131): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (12,143): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (13,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 116 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (15,16): warning CS1587: XML comment is not placed on a valid language element
+                // /** 117 */enum /** 118 */E
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (16,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 119 */{
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,16): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 120 */A/** 121 */,
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (18,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 122 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (19,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 123 */
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+            );
         }
 
         [Fact]
@@ -1780,219 +1775,216 @@ enum E
 }
 ";
 
-            var revisedSource = new DocumentationCommentAdder().Visit(
-                    Parse(source).GetCompilationUnitRoot()
-                )
+            var revisedSource = new DocumentationCommentAdder()
+                .Visit(Parse(source).GetCompilationUnitRoot())
                 .ToFullString();
             // Manually verified that positions match dev11.
-            CreateCompilationUtil(revisedSource)
-                .VerifyDiagnostics(
-                    // (4,41): warning CS0414: The field 'C.field' is assigned but its value is never used
-                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "field")
-                        .WithArguments("C.field"),
-                    // (2,15): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 0 */class /** 1 */C
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 2 */{
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (4,21): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (4,33): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (4,47): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (4,57): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (4,66): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,21): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,36): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,51): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,61): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,77): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,101): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,112): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,122): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,133): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,145): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,156): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,171): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,182): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (5,192): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,22): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,32): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,42): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,55): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,66): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,77): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,87): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,98): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,111): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,122): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,133): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,143): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,154): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (6,165): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,22): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,32): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,42): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,55): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,65): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,76): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,87): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,100): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,110): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,120): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,131): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,142): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,153): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (7,163): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (8,5): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 54 */{
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,9): warning CS1587: XML comment is not placed on a valid language element
-                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,22): warning CS1587: XML comment is not placed on a valid language element
-                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,33): warning CS1587: XML comment is not placed on a valid language element
-                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,44): warning CS1587: XML comment is not placed on a valid language element
-                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,54): warning CS1587: XML comment is not placed on a valid language element
-                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (9,65): warning CS1587: XML comment is not placed on a valid language element
-                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (10,5): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 61 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (11,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 62 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (13,15): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 63 */enum /** 64 */E
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (14,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 65 */{
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (15,16): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (15,27): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (15,38): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (15,49): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (15,59): warning CS1587: XML comment is not placed on a valid language element
-                    //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (16,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 72 */}
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                    // (17,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /** 73 */
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
-                );
+            CreateCompilationUtil(revisedSource).VerifyDiagnostics(
+                // (4,41): warning CS0414: The field 'C.field' is assigned but its value is never used
+                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "field").WithArguments("C.field"),
+                // (2,15): warning CS1587: XML comment is not placed on a valid language element
+                // /** 0 */class /** 1 */C
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 2 */{
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (4,21): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (4,33): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (4,47): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (4,57): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (4,66): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,21): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,36): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,51): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,61): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,77): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,101): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,112): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,122): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,133): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,145): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,156): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,171): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,182): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (5,192): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,22): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,32): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,42): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,55): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,66): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,77): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,87): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,98): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,111): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,122): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,133): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,143): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,154): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (6,165): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,22): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,32): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,42): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,55): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,65): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,76): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,87): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,100): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,110): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,120): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,131): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,142): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,153): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (7,163): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (8,5): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 54 */{
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,9): warning CS1587: XML comment is not placed on a valid language element
+                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,22): warning CS1587: XML comment is not placed on a valid language element
+                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,33): warning CS1587: XML comment is not placed on a valid language element
+                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,44): warning CS1587: XML comment is not placed on a valid language element
+                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,54): warning CS1587: XML comment is not placed on a valid language element
+                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (9,65): warning CS1587: XML comment is not placed on a valid language element
+                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (10,5): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 61 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (11,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 62 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (13,15): warning CS1587: XML comment is not placed on a valid language element
+                // /** 63 */enum /** 64 */E
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (14,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 65 */{
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (15,16): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (15,27): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (15,38): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (15,49): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (15,59): warning CS1587: XML comment is not placed on a valid language element
+                //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (16,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 72 */}
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                // (17,1): warning CS1587: XML comment is not placed on a valid language element
+                // /** 73 */
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+            );
         }
 
         [Fact]
@@ -2006,12 +1998,11 @@ class C
 {
 }
 ";
-            CreateCompilationUtil(source)
-                .VerifyDiagnostics(
-                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /// Comment
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
-                );
+            CreateCompilationUtil(source).VerifyDiagnostics(
+                // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                // /// Comment
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+            );
         }
 
         [Fact]
@@ -2050,20 +2041,16 @@ partial class C
             var tree2 = Parse(source2, options: TestOptions.RegularWithDocumentationComments);
 
             var comp = CreateCompilation(new[] { tree1, tree2 });
-            comp.GetSemanticModel(tree1)
-                .GetDiagnostics()
-                .Verify(
-                    // (4,5): warning CS1587: XML comment is not placed on a valid language element
-                    //     /// Unprocessed 1
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
-                );
-            comp.GetSemanticModel(tree2)
-                .GetDiagnostics()
-                .Verify(
-                    // (4,5): warning CS1587: XML comment is not placed on a valid language element
-                    //     /// Unprocessed 2
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
-                );
+            comp.GetSemanticModel(tree1).GetDiagnostics().Verify(
+                // (4,5): warning CS1587: XML comment is not placed on a valid language element
+                //     /// Unprocessed 1
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+            );
+            comp.GetSemanticModel(tree2).GetDiagnostics().Verify(
+                // (4,5): warning CS1587: XML comment is not placed on a valid language element
+                //     /// Unprocessed 2
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+            );
         }
 
         [Fact]
@@ -2096,12 +2083,11 @@ class MyClass
     }
 }
 ";
-            CreateCompilationUtil(source)
-                .VerifyDiagnostics(
-                    // (7,9): warning CS1587: XML comment is not placed on a valid language element
-                    //         /// <param name="a" />
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
-                );
+            CreateCompilationUtil(source).VerifyDiagnostics(
+                // (7,9): warning CS1587: XML comment is not placed on a valid language element
+                //         /// <param name="a" />
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+            );
         }
 
         /// <summary>
@@ -2842,10 +2828,11 @@ class C {{ }}
                         .WithArguments(
                             xmlFilePath,
                             "path",
-                            string.Format(
-                                "The process cannot access the file '{0}' because it is being used by another process.",
-                                xmlFilePath
-                            )
+                            string
+                                .Format(
+                                    "The process cannot access the file '{0}' because it is being used by another process.",
+                                    xmlFilePath
+                                )
                         )
                 );
                 var expectedTemplate = (
@@ -2892,10 +2879,11 @@ class C {{ }}
                         .WithArguments(
                             xmlFilePath1,
                             "path",
-                            string.Format(
-                                "The process cannot access the file '{0}' because it is being used by another process.",
-                                xmlFilePath1
-                            )
+                            string
+                                .Format(
+                                    "The process cannot access the file '{0}' because it is being used by another process.",
+                                    xmlFilePath1
+                                )
                         )
                 );
                 var expectedTemplate = (
@@ -3134,10 +3122,11 @@ class C {{ }}
             var xmlFilePath = xmlFile.Path;
 
             xmlFile.WriteAllText(
-                string.Format(
-                    @"<parent><include file=""{0}"" path=""//parent""/></parent>",
-                    xmlFilePath
-                )
+                string
+                    .Format(
+                        @"<parent><include file=""{0}"" path=""//parent""/></parent>",
+                        xmlFilePath
+                    )
             ); //Includes its parent.
 
             var sourceTemplate =
@@ -3178,15 +3167,13 @@ class C {{ }}
             var xmlFile = Temp.CreateFile(extension: ".xml");
             var xmlFilePath = xmlFile.Path;
 
-            xmlFile.WriteAllText(
-                string.Format(
+            xmlFile.WriteAllText(string.Format(
                     @"
 <include file=""{0}"" path=""//include"">
     <include file=""{0}"" path=""//include"" />
 </include>",
                     xmlFilePath
-                )
-            ); //Everything includes everything, includes within includes.
+                )); //Everything includes everything, includes within includes.
 
             var sourceTemplate =
                 @"
@@ -3365,9 +3352,9 @@ enum D {{ }}
                 // (2,5): warning CS1589: Unable to include XML fragment '/' of file '012bf028d62c.xml' -- The XPath expression evaluated to unexpected type System.Xml.Linq.XDocument.
                 // /// <include file="012bf028d62c.xml" path="/"/>
                 Diagnostic(
-                        ErrorCode.WRN_FailedInclude,
-                        string.Format(@"<include file=""{0}"" path=""/""/>", xmlFilePath)
-                    )
+                    ErrorCode.WRN_FailedInclude,
+                    string.Format(@"<include file=""{0}"" path=""/""/>", xmlFilePath)
+                )
                     .WithArguments(
                         xmlFilePath,
                         "/",
@@ -3376,9 +3363,9 @@ enum D {{ }}
                 // (5,5): warning CS1589: Unable to include XML fragment '.' of file '012bf028d62c.xml' -- The XPath expression evaluated to unexpected type System.Xml.Linq.XDocument.
                 // /// <include file="012bf028d62c.xml" path="."/>
                 Diagnostic(
-                        ErrorCode.WRN_FailedInclude,
-                        string.Format(@"<include file=""{0}"" path="".""/>", xmlFilePath)
-                    )
+                    ErrorCode.WRN_FailedInclude,
+                    string.Format(@"<include file=""{0}"" path="".""/>", xmlFilePath)
+                )
                     .WithArguments(
                         xmlFilePath,
                         ".",
@@ -3921,7 +3908,8 @@ delegate void D<U, V>(U u, V v) {{ }}
                 Diagnostic(ErrorCode.WRN_DuplicateParamTag, includeElement).WithArguments("v"),
                 // (10,5): warning CS1710: XML comment has a duplicate typeparam tag for 'U'
                 // /// <include file='f59a2ef50b4d.xml' path='root/*'/>
-                Diagnostic(ErrorCode.WRN_DuplicateTypeParamTag, includeElement).WithArguments("U"),
+                Diagnostic(ErrorCode.WRN_DuplicateTypeParamTag, includeElement)
+                    .WithArguments("U"),
                 // (10,5): warning CS1710: XML comment has a duplicate typeparam tag for 'V'
                 // /// <include file='f59a2ef50b4d.xml' path='root/*'/>
                 Diagnostic(ErrorCode.WRN_DuplicateTypeParamTag, includeElement).WithArguments("V")
@@ -4788,7 +4776,8 @@ class Generic<T>
 
                 // (31,29): warning CS0067: The event 'Generic<T>.C.E' is never used
                 //         event System.Action E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("Generic<T>.C.E"),
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
+                    .WithArguments("Generic<T>.C.E"),
                 // (30,13): warning CS0169: The field 'Generic<T>.C.f' is never used
                 //         int f;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "f").WithArguments("Generic<T>.C.f"),
@@ -5059,9 +5048,8 @@ public class C { }
             var warnDict = new Dictionary<string, ReportDiagnostic>
             {
                 {
-                    MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingXMLComment
-                    ),
+                    MessageProvider.Instance
+                        .GetIdForErrorCode((int)ErrorCode.WRN_MissingXMLComment),
                     ReportDiagnostic.Suppress
                 }
             };
@@ -5859,9 +5847,9 @@ class C { }
                 // (19,11): warning CS1574: XML comment has cref attribute 'SemanticModel.GetDeclaredSymbol(MemberDeclarationSyntax, CancellationToken)' that could not be resolved
                 // /// cref="SemanticModel.GetDeclaredSymbol(MemberDeclarationSyntax, CancellationToken)"/>.
                 Diagnostic(
-                        ErrorCode.WRN_BadXMLRef,
-                        "SemanticModel.GetDeclaredSymbol(MemberDeclarationSyntax, CancellationToken)"
-                    )
+                    ErrorCode.WRN_BadXMLRef,
+                    "SemanticModel.GetDeclaredSymbol(MemberDeclarationSyntax, CancellationToken)"
+                )
                     .WithArguments("GetDeclaredSymbol(MemberDeclarationSyntax, CancellationToken)")
             );
 
@@ -6331,9 +6319,8 @@ public class C { }
 
             // Don't embed.
             {
-                var reference = TestReferences.SymbolsTests.NoPia.GeneralPia.WithEmbedInteropTypes(
-                    false
-                );
+                var reference = TestReferences.SymbolsTests.NoPia.GeneralPia
+                    .WithEmbedInteropTypes(false);
                 var comp = CreateCompilationUtil(source, new[] { reference });
                 var actual = GetDocumentationCommentText(comp);
                 Assert.Equal(expected, actual);
@@ -6343,9 +6330,8 @@ public class C { }
 
             // Do embed.
             {
-                var reference = TestReferences.SymbolsTests.NoPia.GeneralPia.WithEmbedInteropTypes(
-                    true
-                );
+                var reference = TestReferences.SymbolsTests.NoPia.GeneralPia
+                    .WithEmbedInteropTypes(true);
                 var comp = CreateCompilationUtil(source, new[] { reference });
                 var actual = GetDocumentationCommentText(comp);
                 Assert.Equal(expected, actual);
@@ -6532,17 +6518,15 @@ public class C {} // CS1587
 ";
 
             var tree = Parse(source, options: TestOptions.RegularWithDocumentationComments);
-            var compOptions = TestOptions.ReleaseDll.WithGeneralDiagnosticOption(
-                ReportDiagnostic.Error
+            var compOptions = TestOptions.ReleaseDll
+                .WithGeneralDiagnosticOption(ReportDiagnostic.Error);
+            CreateCompilation(tree, options: compOptions).VerifyDiagnostics(
+                // (2,14): error CS1591: Warning as Error: Missing XML comment for publicly visible type or member 'C'
+                // public class C {} // CS1587
+                Diagnostic(ErrorCode.WRN_MissingXMLComment, "C")
+                    .WithArguments("C")
+                    .WithWarningAsError(true)
             );
-            CreateCompilation(tree, options: compOptions)
-                .VerifyDiagnostics(
-                    // (2,14): error CS1591: Warning as Error: Missing XML comment for publicly visible type or member 'C'
-                    // public class C {} // CS1587
-                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "C")
-                        .WithArguments("C")
-                        .WithWarningAsError(true)
-                );
         }
 
         [ConditionalFact(typeof(ClrOnly), typeof(DesktopOnly))]
@@ -6710,7 +6694,8 @@ namespace Demo
                 comp,
                 // (4,18): warning CS1591: Missing XML comment for publicly visible type or member 'Demo.Example'
                 //     public class Example
-                Diagnostic(ErrorCode.WRN_MissingXMLComment, "Example").WithArguments("Demo.Example")
+                Diagnostic(ErrorCode.WRN_MissingXMLComment, "Example")
+                    .WithArguments("Demo.Example")
             );
             var expected = @"
 <?xml version=""1.0""?>
@@ -6776,16 +6761,15 @@ class C { }
 class C { }
 ";
 
-            CreateCompilationUtil(source)
-                .VerifyDiagnostics(
-                    // (2,5): warning CS1589: Unable to include XML fragment 'hello' of file '' -- Unable to find the specified file.
-                    Diagnostic(
-                            ErrorCode.WRN_FailedInclude,
-                            @"<include file='file://" + xmlFile.Path + @"' path='hello'/>"
-                        )
-                        .WithArguments("file://" + xmlFile.Path, "hello", "File not found.")
-                        .WithLocation(2, 5)
-                );
+            CreateCompilationUtil(source).VerifyDiagnostics(
+                // (2,5): warning CS1589: Unable to include XML fragment 'hello' of file '' -- Unable to find the specified file.
+                Diagnostic(
+                    ErrorCode.WRN_FailedInclude,
+                    @"<include file='file://" + xmlFile.Path + @"' path='hello'/>"
+                )
+                    .WithArguments("file://" + xmlFile.Path, "hello", "File not found.")
+                    .WithLocation(2, 5)
+            );
         }
 
         [Fact]
@@ -6814,9 +6798,8 @@ class C { }
                     options: TestOptions.RegularWithDocumentationComments,
                     filename: sourcePath
                 ),
-                options: TestOptions.ReleaseDll.WithSourceReferenceResolver(
-                        SourceFileResolver.Default
-                    )
+                options: TestOptions.ReleaseDll
+                    .WithSourceReferenceResolver(SourceFileResolver.Default)
                     .WithXmlReferenceResolver(XmlFileResolver.Default),
                 assemblyName: "Test"
             );
@@ -6842,9 +6825,8 @@ class C { }
         [WorkItem(18610, "https://github.com/dotnet/roslyn/issues/18610")]
         public void DtdDenialOfService()
         {
-            var xmlFile = Temp.CreateFile(extension: ".xml")
-                .WriteAllText(
-                    @"<?xml version=""1.0""?>
+            var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(
+                @"<?xml version=""1.0""?>
 <!DOCTYPE root [
   <!ENTITY expand ""expand"">
   <!ENTITY expand2 ""&expand;&expand;&expand;&expand;&expand;&expand;&expand;&expand;&expand;&expand;"">
@@ -6858,7 +6840,7 @@ class C { }
 ]>
 <root>&expand9;</root>
 "
-                );
+            );
             var source =
                 @"
 /// <include file='"
@@ -6939,14 +6921,16 @@ class C
                 comp,
                 // (2,5): warning CS1711: XML comment has a typeparam tag for 'T', but there is no type parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("T"),
+                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                    .WithArguments("T"),
                 // (2,5): warning CS1711: XML comment has a typeparam tag for 'TComparator', but there is no type parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
                 Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
                     .WithArguments("TComparator"),
                 // (2,5): warning CS1572: XML comment has a param tag for 'array', but there is no parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
-                Diagnostic(ErrorCode.WRN_UnmatchedParamTag, includeElement).WithArguments("array"),
+                Diagnostic(ErrorCode.WRN_UnmatchedParamTag, includeElement)
+                    .WithArguments("array"),
                 // (2,5): warning CS1572: XML comment has a param tag for 'value', but there is no parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, includeElement).WithArguments("value")
@@ -7068,19 +7052,18 @@ class Module1
 }";
             var comp = CreateCompilationUtil(source, options: TestOptions.ReleaseExe);
 
-            CompileAndVerify(comp, expectedOutput: "Here")
-                .VerifyDiagnostics(
-                    // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
-                    //     static void Main()
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "")
-                        .WithArguments("summary")
-                        .WithLocation(7, 1),
-                    // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
-                    //     static void Main()
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "")
-                        .WithArguments("summary")
-                        .WithLocation(7, 1)
-                );
+            CompileAndVerify(comp, expectedOutput: "Here").VerifyDiagnostics(
+                // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+                //     static void Main()
+                Diagnostic(ErrorCode.WRN_XMLParseError, "")
+                    .WithArguments("summary")
+                    .WithLocation(7, 1),
+                // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+                //     static void Main()
+                Diagnostic(ErrorCode.WRN_XMLParseError, "")
+                    .WithArguments("summary")
+                    .WithLocation(7, 1)
+            );
         }
 
         /// <summary>

@@ -79,8 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         {
             var command = (OleMenuCommand)sender;
 
-            var experimentationService =
-                _workspace.Services.GetRequiredService<IExperimentationService>();
+            var experimentationService = _workspace.Services
+                .GetRequiredService<IExperimentationService>();
 
             // If the option hasn't been expicitly set then fallback to whether this is enabled as part of an experiment.
             var isOptionEnabled =
@@ -172,10 +172,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 // If we are removing, then that is a change or if we are newly marking a reference as TreatAsUsed,
                 // then that is a change.
                 var referenceChanges = referenceUpdates.Where(
-                        update =>
-                            update.Action != UpdateAction.TreatAsUsed
-                            || !update.ReferenceInfo.TreatAsUsed
-                    )
+                    update =>
+                        update.Action != UpdateAction.TreatAsUsed
+                        || !update.ReferenceInfo.TreatAsUsed
+                )
                     .ToImmutableArray();
 
                 // If there are no changes, then we can return
@@ -259,34 +259,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             var unusedReferences = ThreadHelper.JoinableTaskFactory.Run(
                 async () =>
                 {
-                    var projectReferences =
-                        await _lazyReferenceCleanupService.Value.GetProjectReferencesAsync(
-                                projectFilePath,
-                                cancellationToken
-                            )
-                            .ConfigureAwait(true);
+                    var projectReferences = await _lazyReferenceCleanupService.Value
+                        .GetProjectReferencesAsync(projectFilePath, cancellationToken)
+                        .ConfigureAwait(true);
                     var references = ProjectAssetsReader.ReadReferences(
                         projectReferences,
                         projectAssetsFile
                     );
 
                     return await UnusedReferencesRemover.GetUnusedReferencesAsync(
-                            solution,
-                            projectFilePath,
-                            references,
-                            cancellationToken
-                        )
+                        solution,
+                        projectFilePath,
+                        references,
+                        cancellationToken
+                    )
                         .ConfigureAwait(true);
                 }
             );
 
             var referenceUpdates = unusedReferences.Select(
-                    reference =>
-                        new ReferenceUpdate(
-                            reference.TreatAsUsed ? UpdateAction.TreatAsUsed : UpdateAction.Remove,
-                            reference
-                        )
-                )
+                reference =>
+                    new ReferenceUpdate(
+                        reference.TreatAsUsed ? UpdateAction.TreatAsUsed : UpdateAction.Remove,
+                        reference
+                    )
+            )
                 .ToImmutableArray();
 
             return referenceUpdates;
@@ -299,15 +296,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             CancellationToken cancellationToken
         )
         {
-            ThreadHelper.JoinableTaskFactory.Run(
-                () =>
-                    UnusedReferencesRemover.UpdateReferencesAsync(
-                        solution,
-                        projectFilePath,
-                        referenceUpdates,
-                        cancellationToken
-                    )
-            );
+            ThreadHelper.JoinableTaskFactory
+                .Run(
+                    () =>
+                        UnusedReferencesRemover.UpdateReferencesAsync(
+                            solution,
+                            projectFilePath,
+                            referenceUpdates,
+                            cancellationToken
+                        )
+                );
         }
 
         private static bool TryGetPropertyValue(

@@ -16,9 +16,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void Constructor()
         {
-            PropertyInfo expectedMember = typeof(PublicImportsExpectingPublicExports).GetProperty(
-                "PublicImportPublicProperty"
-            );
+            PropertyInfo expectedMember = typeof(PublicImportsExpectingPublicExports)
+                .GetProperty("PublicImportPublicProperty");
             LazyMemberInfo expectedImportingMemberInfo = new LazyMemberInfo(expectedMember);
             IEnumerable<KeyValuePair<string, Type>> requiredMetadata = new KeyValuePair<
                 string,
@@ -104,9 +103,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private static LazyMemberInfo CreateLazyMemberInfo()
         {
-            PropertyInfo expectedMember = typeof(PublicImportsExpectingPublicExports).GetProperty(
-                "PublicImportPublicProperty"
-            );
+            PropertyInfo expectedMember = typeof(PublicImportsExpectingPublicExports)
+                .GetProperty("PublicImportPublicProperty");
             return new LazyMemberInfo(expectedMember);
         }
     }

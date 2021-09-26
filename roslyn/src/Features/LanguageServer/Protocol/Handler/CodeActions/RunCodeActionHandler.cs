@@ -69,13 +69,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             Contract.ThrowIfNull(document);
 
             var codeActions = await CodeActionHelpers.GetCodeActionsAsync(
-                    _codeActionsCache,
-                    document,
-                    runRequest.Range,
-                    _codeFixService,
-                    _codeRefactoringService,
-                    cancellationToken
-                )
+                _codeActionsCache,
+                document,
+                runRequest.Range,
+                _codeFixService,
+                _codeRefactoringService,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var actionToRun = CodeActionHelpers.GetCodeActionToResolve(

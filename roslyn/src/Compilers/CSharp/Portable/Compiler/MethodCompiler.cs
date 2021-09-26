@@ -117,11 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (emittingPdb || emitTestCoverageData)
             {
                 _debugDocumentProvider = (path, basePath) =>
-                    moduleBeingBuiltOpt.DebugDocumentsBuilder.GetOrAddDebugDocument(
-                        path,
-                        basePath,
-                        CreateDebugDocumentForFile
-                    );
+                    moduleBeingBuiltOpt.DebugDocumentsBuilder
+                        .GetOrAddDebugDocument(path, basePath, CreateDebugDocumentForFile);
             }
 
             _emitTestCoverageData = emitTestCoverageData;
@@ -201,11 +198,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (emitMethodBodies)
                 {
                     // By this time we have processed all types reachable from module's global namespace
-                    compilation.AnonymousTypeManager.AssignTemplatesNamesAndCompile(
-                        methodCompiler,
-                        moduleBeingBuiltOpt,
-                        diagnostics
-                    );
+                    compilation.AnonymousTypeManager
+                        .AssignTemplatesNamesAndCompile(
+                            methodCompiler,
+                            moduleBeingBuiltOpt,
+                            diagnostics
+                        );
                 }
 
                 methodCompiler.WaitForWorkers();
@@ -749,11 +747,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 Debug.Assert(
-                    processedStaticInitializers.BoundInitializers.All(
-                        (init) =>
-                            (init.Kind == BoundKind.FieldEqualsValue)
-                            && !((BoundFieldEqualsValue)init).Field.IsMetadataConstant
-                    )
+                    processedStaticInitializers.BoundInitializers
+                        .All(
+                            (init) =>
+                                (init.Kind == BoundKind.FieldEqualsValue)
+                                && !((BoundFieldEqualsValue)init).Field.IsMetadataConstant
+                        )
                 );
 
                 MethodSymbol method = new SynthesizedStaticConstructor(sourceTypeSymbol);
@@ -1537,13 +1536,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                         );
                     }
 
-                    _compilation.EventQueue.TryEnqueue(
-                        new SymbolDeclaredCompilationEvent(
-                            _compilation,
-                            methodSymbol.GetPublicSymbol(),
-                            semanticModelWithCachedBoundNodes
-                        )
-                    );
+                    _compilation.EventQueue
+                        .TryEnqueue(
+                            new SymbolDeclaredCompilationEvent(
+                                _compilation,
+                                methodSymbol.GetPublicSymbol(),
+                                semanticModelWithCachedBoundNodes
+                            )
+                        );
                 }
 
                 // Don't lower if we're not emitting or if there were errors.
@@ -1827,12 +1827,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (lazyVariableSlotAllocator == null)
                 {
-                    lazyVariableSlotAllocator =
-                        compilationState.ModuleBuilderOpt.TryCreateVariableSlotAllocator(
-                            method,
-                            method,
-                            diagnostics.DiagnosticBag
-                        );
+                    lazyVariableSlotAllocator = compilationState.ModuleBuilderOpt
+                        .TryCreateVariableSlotAllocator(method, method, diagnostics.DiagnosticBag);
                 }
 
                 BoundStatement bodyWithoutLambdas = loweredBody;

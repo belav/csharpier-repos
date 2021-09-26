@@ -127,10 +127,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Error reading JProperty from JsonReader. Current JsonReader item is not a property: {0}".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Error reading JProperty from JsonReader. Current JsonReader item is not a property: {0}"
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
 

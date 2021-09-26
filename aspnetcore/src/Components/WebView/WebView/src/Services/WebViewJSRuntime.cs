@@ -13,9 +13,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Services
         public WebViewJSRuntime()
         {
             ElementReferenceContext = new WebElementReferenceContext(this);
-            JsonSerializerOptions.Converters.Add(
-                new ElementReferenceJsonConverter(new WebElementReferenceContext(this))
-            );
+            JsonSerializerOptions.Converters
+                .Add(new ElementReferenceJsonConverter(new WebElementReferenceContext(this)));
         }
 
         public void AttachToWebView(IpcSender ipcSender)

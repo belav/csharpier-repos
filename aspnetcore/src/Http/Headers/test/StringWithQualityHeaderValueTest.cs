@@ -253,7 +253,8 @@ namespace Microsoft.Net.Http.Headers
                 new StringWithQualityHeaderValue("text8", 0.5),
                 new StringWithQualityHeaderValue("text9"),
                 new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -291,7 +292,8 @@ namespace Microsoft.Net.Http.Headers
                 new StringWithQualityHeaderValue("text8", 0.5),
                 new StringWithQualityHeaderValue("text9"),
                 new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -328,7 +330,8 @@ namespace Microsoft.Net.Http.Headers
                 new StringWithQualityHeaderValue("text8", 0.5),
                 new StringWithQualityHeaderValue("text9"),
                 new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -365,7 +368,8 @@ namespace Microsoft.Net.Http.Headers
                 new StringWithQualityHeaderValue("text8", 0.5),
                 new StringWithQualityHeaderValue("text9"),
                 new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -403,7 +407,8 @@ namespace Microsoft.Net.Http.Headers
                 new StringWithQualityHeaderValue("text8", 0.5),
                 new StringWithQualityHeaderValue("text9"),
                 new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -463,7 +468,8 @@ namespace Microsoft.Net.Http.Headers
                 new StringWithQualityHeaderValue("text8", 0.5),
                 new StringWithQualityHeaderValue("text9"),
                 new StringWithQualityHeaderValue("text10", 0.5),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }

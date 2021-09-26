@@ -15,9 +15,8 @@ namespace System.Web.Mvc.Test
         public void BinderProperty()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod(
-                    "ParameterHasSingleModelBinderAttribute"
-                )
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasSingleModelBinderAttribute")
                 .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
@@ -32,9 +31,8 @@ namespace System.Web.Mvc.Test
         public void BinderPropertyThrowsIfMultipleBinderAttributesFound()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod(
-                    "ParameterHasMultipleModelBinderAttributes"
-                )
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasMultipleModelBinderAttributes")
                 .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
@@ -52,7 +50,8 @@ namespace System.Web.Mvc.Test
         public void ExcludeProperty()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasBindAttribute")
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasBindAttribute")
                 .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
@@ -72,7 +71,8 @@ namespace System.Web.Mvc.Test
         public void ExcludePropertyReturnsEmptyArrayIfNoBindAttributeSpecified()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasNoBindAttributes")
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasNoBindAttributes")
                 .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
@@ -88,7 +88,8 @@ namespace System.Web.Mvc.Test
         public void IncludeProperty()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasBindAttribute")
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasBindAttribute")
                 .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
@@ -108,7 +109,8 @@ namespace System.Web.Mvc.Test
         public void IncludePropertyReturnsEmptyArrayIfNoBindAttributeSpecified()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasNoBindAttributes")
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasNoBindAttributes")
                 .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
@@ -124,7 +126,8 @@ namespace System.Web.Mvc.Test
         public void PrefixProperty()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasBindAttribute")
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasBindAttribute")
                 .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 
@@ -139,7 +142,8 @@ namespace System.Web.Mvc.Test
         public void PrefixPropertyReturnsNullIfNoBindAttributeSpecified()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("ParameterHasNoBindAttributes")
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod("ParameterHasNoBindAttributes")
                 .GetParameters()[0];
             ReflectedParameterBindingInfo bindingInfo = new ReflectedParameterBindingInfo(pInfo);
 

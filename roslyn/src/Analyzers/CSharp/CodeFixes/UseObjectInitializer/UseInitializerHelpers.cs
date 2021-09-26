@@ -18,9 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
             var openBrace = SyntaxFactory.Token(SyntaxKind.OpenBraceToken)
                 .WithTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed);
             var initializer = SyntaxFactory.InitializerExpression(
-                    SyntaxKind.ObjectInitializerExpression,
-                    expressions
-                )
+                SyntaxKind.ObjectInitializerExpression,
+                expressions
+            )
                 .WithOpenBraceToken(openBrace);
 
             if (
@@ -29,10 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
             )
             {
                 objectCreation = objectCreation.WithType(
-                        objectCreation.Type.WithTrailingTrivia(
-                            objectCreation.ArgumentList.GetTrailingTrivia()
-                        )
-                    )
+                    objectCreation.Type
+                        .WithTrailingTrivia(objectCreation.ArgumentList.GetTrailingTrivia())
+                )
                     .WithArgumentList(null);
             }
 

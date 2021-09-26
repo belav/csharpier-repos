@@ -52,11 +52,8 @@ namespace Microsoft.CodeAnalysis
             );
 
             private static readonly ImmutableDictionary<string, string> s_properties =
-                new Dictionary<string, string>
-                {
-                    { "Key1", "Value1" },
-                    { "Key2", "Value2" }
-                }.ToImmutableDictionary();
+                new Dictionary<string, string> { { "Key1", "Value1" }, { "Key2", "Value2" } }
+                    .ToImmutableDictionary();
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
@@ -69,7 +66,8 @@ namespace Microsoft.CodeAnalysis
                     compilationContext =>
                     {
                         // With location diagnostic.
-                        var location = compilationContext.Compilation.SyntaxTrees.First()
+                        var location = compilationContext.Compilation.SyntaxTrees
+                            .First()
                             .GetRoot()
                             .GetLocation();
                         compilationContext.ReportDiagnostic(
@@ -1575,7 +1573,8 @@ namespace Microsoft.CodeAnalysis
             public ImmutableArray<(ControlFlowGraph Graph, ISymbol AssociatedSymbol)> GetControlFlowGraphs()
             {
                 Assert.True(_verifyGetControlFlowGraph);
-                return _controlFlowGraphMapOpt.Values.OrderBy(
+                return _controlFlowGraphMapOpt.Values
+                    .OrderBy(
                         flowGraphAndSymbol =>
                             flowGraphAndSymbol.Graph.OriginalOperation.Syntax.SpanStart
                     )
@@ -2520,14 +2519,10 @@ namespace Microsoft.CodeAnalysis
                     if (!SymbolsStarted.SetEquals(symbolsEnded))
                     {
                         // Symbols Started: '{0}', Symbols Ended: '{1}', Analyzer: {2}
-                        var symbolsStartedStr = string.Join(
-                            ", ",
-                            SymbolsStarted.Select(s => s.ToDisplayString()).Order()
-                        );
-                        var symbolsEndedStr = string.Join(
-                            ", ",
-                            symbolsEnded.Select(s => s.ToDisplayString()).Order()
-                        );
+                        var symbolsStartedStr = string
+                            .Join(", ", SymbolsStarted.Select(s => s.ToDisplayString()).Order());
+                        var symbolsEndedStr = string
+                            .Join(", ", symbolsEnded.Select(s => s.ToDisplayString()).Order());
                         compilationEndContext.ReportDiagnostic(
                             Diagnostic.Create(
                                 SymbolStartedEndedDifferRule,
@@ -2603,8 +2598,8 @@ namespace Microsoft.CodeAnalysis
                 )
                 {
                     var containingSymbols = GetContainingSymbolsAndThis(
-                            operationContext.ContainingSymbol
-                        )
+                        operationContext.ContainingSymbol
+                    )
                         .ToSet();
                     seenOperationContainers.Add(operationContext, containingSymbols);
                     Assert.Contains(symbolStartContext.Symbol, containingSymbols);
@@ -3206,7 +3201,8 @@ namespace Microsoft.CodeAnalysis
                     context.RegisterSyntaxTreeAction(
                         context =>
                         {
-                            var fields = context.Tree.GetRoot()
+                            var fields = context.Tree
+                                .GetRoot()
                                 .DescendantNodes()
                                 .OfType<CSharp.Syntax.FieldDeclarationSyntax>();
                             foreach (

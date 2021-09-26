@@ -364,10 +364,8 @@ namespace Internal.Cryptography
         {
             return new PinAndClear
             {
-                _gcHandle = System.Runtime.InteropServices.GCHandle.Alloc(
-                    data,
-                    System.Runtime.InteropServices.GCHandleType.Pinned
-                ),
+                _gcHandle = System.Runtime.InteropServices.GCHandle
+                    .Alloc(data, System.Runtime.InteropServices.GCHandleType.Pinned),
                 _data = data,
             };
         }

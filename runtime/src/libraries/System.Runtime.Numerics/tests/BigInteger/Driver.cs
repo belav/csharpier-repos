@@ -906,12 +906,13 @@ namespace System.Numerics.Tests
 
                 Assert.True(
                     Valid,
-                    string.Format(
-                        "Cycle {0} corrupted with operation {1} on order {2}",
-                        id,
-                        op,
-                        order
-                    )
+                    string
+                        .Format(
+                            "Cycle {0} corrupted with operation {1} on order {2}",
+                            id,
+                            op,
+                            order
+                        )
                 );
             }
         }

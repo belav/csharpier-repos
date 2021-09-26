@@ -17,9 +17,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
         public void GetClients_DoesNothingIfThereAreNoConfiguredClients()
         {
             // Arrange
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
-                    new Dictionary<string, string> {  }
-                )
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(new Dictionary<string, string> {  })
                 .Build();
 
             var resources = Array.Empty<ApiResource>();
@@ -36,7 +35,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
         public void GetClients_ReadsIdentityServerSPAFromConfiguration()
         {
             // Arrange
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new Dictionary<string, string> { ["MyClient:Profile"] = "IdentityServerSPA" }
                 )
                 .Build();
@@ -73,7 +73,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
         public void GetClients_ReadsNativeAppFromConfiguration()
         {
             // Arrange
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new Dictionary<string, string> { ["MyClient:Profile"] = "NativeApp" }
                 )
                 .Build();
@@ -116,7 +117,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
             var expectedLogoutUrl = "https://www.example.com/logout";
             var expectedAllowedOrigins = "https://www.example.com";
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new Dictionary<string, string>
                     {
                         ["MyClient:Profile"] = "SPA",
@@ -155,7 +157,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
         public void Configure_AddsClientsToExistingClientsList()
         {
             // Arrange
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new Dictionary<string, string> { ["MyClient:Profile"] = "IdentityServerSPA" }
                 )
                 .Build();

@@ -42,9 +42,8 @@ namespace Microsoft.Extensions.DependencyInjection
             );
             options.PageViewLocationFormats.Add(pagesSharedDirectory);
 
-            options.PageViewLocationFormats.Add(
-                "/Views/Shared/{0}" + RazorViewEngine.ViewExtension
-            );
+            options.PageViewLocationFormats
+                .Add("/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
 
             var areaDirectory = CombinePath("/Areas/", "{2}");
             // Areas/{2}/Pages/
@@ -74,9 +73,8 @@ namespace Microsoft.Extensions.DependencyInjection
             options.AreaPageViewLocationFormats.Add(areaViewsSharedSearchPath);
 
             options.AreaPageViewLocationFormats.Add(pagesSharedDirectory);
-            options.AreaPageViewLocationFormats.Add(
-                "/Views/Shared/{0}" + RazorViewEngine.ViewExtension
-            );
+            options.AreaPageViewLocationFormats
+                .Add("/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
 
             options.ViewLocationFormats.Add(pagesSharedDirectory);
             options.AreaViewLocationFormats.Add(pagesSharedDirectory);

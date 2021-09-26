@@ -30,11 +30,11 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var semanticInfo = await SymbolFinder.GetSemanticInfoAtPositionAsync(
-                    semanticModel,
-                    position,
-                    workspace,
-                    cancellationToken
-                )
+                semanticModel,
+                position,
+                workspace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var symbol = GetSymbol(semanticInfo, includeType);
 

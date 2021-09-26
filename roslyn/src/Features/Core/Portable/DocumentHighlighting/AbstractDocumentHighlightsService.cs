@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             var solution = document.Project.Solution;
 
             var client = await RemoteHostClient.TryGetClientAsync(
-                    document.Project,
-                    cancellationToken
-                )
+                document.Project,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (client != null)
             {
@@ -45,17 +45,17 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                     IRemoteDocumentHighlightsService,
                     ImmutableArray<SerializableDocumentHighlights>
                 >(
-                        solution,
-                        (service, solutionInfo, cancellationToken) =>
-                            service.GetDocumentHighlightsAsync(
-                                solutionInfo,
-                                document.Id,
-                                position,
-                                documentsToSearch.SelectAsArray(d => d.Id),
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    solution,
+                    (service, solutionInfo, cancellationToken) =>
+                        service.GetDocumentHighlightsAsync(
+                            solutionInfo,
+                            document.Id,
+                            position,
+                            documentsToSearch.SelectAsArray(d => d.Id),
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!result.HasValue)
@@ -67,11 +67,11 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             }
 
             return await GetDocumentHighlightsInCurrentProcessAsync(
-                    document,
-                    position,
-                    documentsToSearch,
-                    cancellationToken
-                )
+                document,
+                position,
+                documentsToSearch,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -85,11 +85,11 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
         )
         {
             var result = await TryGetEmbeddedLanguageHighlightsAsync(
-                    document,
-                    position,
-                    documentsToSearch,
-                    cancellationToken
-                )
+                document,
+                position,
+                documentsToSearch,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!result.IsDefaultOrEmpty)
             {
@@ -101,11 +101,11 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var symbol = await SymbolFinder.FindSymbolAtPositionAsync(
-                    semanticModel,
-                    position,
-                    solution.Workspace,
-                    cancellationToken
-                )
+                semanticModel,
+                position,
+                solution.Workspace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (symbol == null)
             {
@@ -114,11 +114,11 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
 
             // Get unique tags for referenced symbols
             return await GetTagsForReferencedSymbolAsync(
-                    symbol,
-                    document,
-                    documentsToSearch,
-                    cancellationToken
-                )
+                symbol,
+                document,
+                documentsToSearch,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -142,11 +142,11 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                     if (highlighter != null)
                     {
                         var highlights = await highlighter.GetDocumentHighlightsAsync(
-                                document,
-                                position,
-                                documentsToSearch,
-                                cancellationToken
-                            )
+                            document,
+                            position,
+                            documentsToSearch,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         if (!highlights.IsDefaultOrEmpty)
@@ -172,28 +172,26 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             {
                 var progress = new StreamingProgressCollector();
 
-                var options =
-                    FindSymbols.FindReferencesSearchOptions.GetFeatureOptionsForStartingSymbol(
-                        symbol
-                    );
+                var options = FindSymbols.FindReferencesSearchOptions
+                    .GetFeatureOptionsForStartingSymbol(symbol);
                 await SymbolFinder.FindReferencesAsync(
-                        symbol,
-                        document.Project.Solution,
-                        progress,
-                        documentsToSearch,
-                        options,
-                        cancellationToken
-                    )
+                    symbol,
+                    document.Project.Solution,
+                    progress,
+                    documentsToSearch,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return await FilterAndCreateSpansAsync(
-                        progress.GetReferencedSymbols(),
-                        document,
-                        documentsToSearch,
-                        symbol,
-                        options,
-                        cancellationToken
-                    )
+                    progress.GetReferencedSymbols(),
+                    document,
+                    documentsToSearch,
+                    symbol,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -257,23 +255,23 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                 {
                     additionalReferences.AddRange(
                         await GetAdditionalReferencesAsync(
-                                currentDocument,
-                                symbol,
-                                cancellationToken
-                            )
+                            currentDocument,
+                            symbol,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     );
                 }
             }
 
             return await CreateSpansAsync(
-                    solution,
-                    symbol,
-                    references,
-                    additionalReferences,
-                    documentsToSearch,
-                    cancellationToken
-                )
+                solution,
+                symbol,
+                references,
+                additionalReferences,
+                documentsToSearch,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -309,13 +307,13 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                 {
                     // For alias symbol we want to get the tag only for the alias definition, not the target symbol's definition.
                     await AddLocationSpanAsync(
-                            symbol.Locations.First(),
-                            solution,
-                            spanSet,
-                            tagMap,
-                            HighlightSpanKind.Definition,
-                            cancellationToken
-                        )
+                        symbol.Locations.First(),
+                        solution,
+                        spanSet,
+                        tagMap,
+                        HighlightSpanKind.Definition,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -347,13 +345,13 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                             if (documentToSearch.Contains(document))
                             {
                                 await AddLocationSpanAsync(
-                                        location,
-                                        solution,
-                                        spanSet,
-                                        tagMap,
-                                        HighlightSpanKind.Definition,
-                                        cancellationToken
-                                    )
+                                    location,
+                                    solution,
+                                    spanSet,
+                                    tagMap,
+                                    HighlightSpanKind.Definition,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                             }
                         }
@@ -366,13 +364,13 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                         ? HighlightSpanKind.WrittenReference
                         : HighlightSpanKind.Reference;
                     await AddLocationSpanAsync(
-                            referenceLocation.Location,
-                            solution,
-                            spanSet,
-                            tagMap,
-                            referenceKind,
-                            cancellationToken
-                        )
+                        referenceLocation.Location,
+                        solution,
+                        spanSet,
+                        tagMap,
+                        referenceKind,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -381,26 +379,22 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             foreach (var location in additionalReferences)
             {
                 await AddLocationSpanAsync(
-                        location,
-                        solution,
-                        spanSet,
-                        tagMap,
-                        HighlightSpanKind.Reference,
-                        cancellationToken
-                    )
+                    location,
+                    solution,
+                    spanSet,
+                    tagMap,
+                    HighlightSpanKind.Reference,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
-            using var listDisposer = ArrayBuilder<DocumentHighlights>.GetInstance(
-                tagMap.Count,
-                out var list
-            );
+            using var listDisposer = ArrayBuilder<DocumentHighlights>
+                .GetInstance(tagMap.Count, out var list);
             foreach (var kvp in tagMap)
             {
-                using var spansDisposer = ArrayBuilder<HighlightSpan>.GetInstance(
-                    kvp.Value.Count,
-                    out var spans
-                );
+                using var spansDisposer = ArrayBuilder<HighlightSpan>
+                    .GetInstance(kvp.Value.Count, out var spans);
                 foreach (var span in kvp.Value)
                 {
                     spans.Add(span);

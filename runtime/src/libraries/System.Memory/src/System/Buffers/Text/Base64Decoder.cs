@@ -405,8 +405,8 @@ namespace System.Buffers.Text
                 s_avxDecodePackBytesInLaneMask
             );
             Vector256<int> packLanesControl = ReadVector<Vector256<sbyte>>(
-                    s_avxDecodePackLanesControl
-                )
+                s_avxDecodePackLanesControl
+            )
                 .AsInt32();
 
             byte* src = srcBytes;

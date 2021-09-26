@@ -124,7 +124,8 @@ namespace System.Composition.Convention.Tests
         {
             Attribute[] list = builder.GetDeclaredAttributes(
                 typeof(FooImpl),
-                typeof(FooImpl).GetRuntimeProperties()
+                typeof(FooImpl)
+                    .GetRuntimeProperties()
                     .Where((m) => m.Name == "IFooProperty")
                     .First()
             );
@@ -136,7 +137,8 @@ namespace System.Composition.Convention.Tests
         {
             Attribute[] list = builder.GetDeclaredAttributes(
                 typeof(FooImpl),
-                typeof(FooImpl).GetRuntimeProperties()
+                typeof(FooImpl)
+                    .GetRuntimeProperties()
                     .Where((m) => m.Name == "IFooProperty")
                     .First()
             );
@@ -150,7 +152,8 @@ namespace System.Composition.Convention.Tests
         {
             Attribute[] list = builder.GetDeclaredAttributes(
                 typeof(FooImpl),
-                typeof(FooImpl).GetRuntimeProperties()
+                typeof(FooImpl)
+                    .GetRuntimeProperties()
                     .Where((m) => m.Name == "IFooProperty")
                     .First()
             );

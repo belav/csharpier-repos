@@ -160,7 +160,8 @@ namespace System.Text.Tests
 
             // Fill the source with [deterministic] pseudo-random bytes, then make readonly.
 
-            new Random(0x12345).NextBytes(latin1Mem.Span);
+            new Random(0x12345)
+                .NextBytes(latin1Mem.Span);
             latin1Mem.MakeReadonly();
 
             // We'll write to the UTF-16 span.

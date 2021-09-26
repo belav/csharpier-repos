@@ -748,7 +748,8 @@ namespace System.Tests
             // updated, this test will need to be updated as well.
 
             // One and only one of Xoshiro128StarStar and Xoshiro256StarStar should be in a given build.
-            Type implType = typeof(Random).GetNestedTypes(BindingFlags.NonPublic)
+            Type implType = typeof(Random)
+                .GetNestedTypes(BindingFlags.NonPublic)
                 .Single(t => t.Name.StartsWith("Xoshiro", StringComparison.Ordinal));
             Assert.NotNull(implType);
 

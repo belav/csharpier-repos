@@ -1757,7 +1757,8 @@ public sealed class MyClass
             {
                 // file.cs(6,13): error CS8716: There is no target type for the default literal.
                 //             default:
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 13),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
+                    .WithLocation(6, 13),
                 // file.cs(6,20): error CS1002: ; expected
                 //             default:
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ":").WithLocation(6, 20),

@@ -757,13 +757,15 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         [Fact]
         public static void VerifyInPlaceDecryption()
         {
-            byte[] key =
-                "1ed2f625c187b993256a8b3ccf9dcbfa5b44b4795c731012f70e4e64732efd5d".HexToByteArray();
+            byte[] key = "1ed2f625c187b993256a8b3ccf9dcbfa5b44b4795c731012f70e4e64732efd5d"
+                .HexToByteArray();
             byte[] iv = "47d1e060ba3c8643f9f8b65feeda4b30".HexToByteArray();
             byte[] plainText =
-                "f238882f6530ae9191c294868feed0b0df4058b322377dec14690c3b6bbf6ad1dd5b7c063a28e2cca2a6dce8cc2e668ea6ce80cee4c1a1a955ff46c530f3801b".HexToByteArray();
+                "f238882f6530ae9191c294868feed0b0df4058b322377dec14690c3b6bbf6ad1dd5b7c063a28e2cca2a6dce8cc2e668ea6ce80cee4c1a1a955ff46c530f3801b"
+                    .HexToByteArray();
             byte[] cipher =
-                "7c6e1bcd3c30d2fb2d92e3346048307dc6719a6b96a945b4d987af09469ec68f5ca535fab7f596fffa80f7cfaeb26eefaf8d4ca8be190393b2569249d673f042".HexToByteArray();
+                "7c6e1bcd3c30d2fb2d92e3346048307dc6719a6b96a945b4d987af09469ec68f5ca535fab7f596fffa80f7cfaeb26eefaf8d4ca8be190393b2569249d673f042"
+                    .HexToByteArray();
 
             using (Aes a = AesFactory.Create())
             using (MemoryStream cipherStream = new MemoryStream(cipher))
@@ -2545,7 +2547,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
             TestAesTransformDirectKey(
                 CipherMode.CFB,
                 paddingMode,
-                key: "34e8091cee09f1bd3ebf1e8f05f51bfbd4899ef2ae006a3a0f7875052cdd46c8".HexToByteArray(),
+                key: "34e8091cee09f1bd3ebf1e8f05f51bfbd4899ef2ae006a3a0f7875052cdd46c8"
+                    .HexToByteArray(),
                 iv: "43eb4dcc4b04a80216a20e4a09a7abb5".HexToByteArray(),
                 plainBytes: ("f9" + "000000000000000000000000000000").HexToByteArray(),
                 cipherBytes: ("28" + "26199F76D20BE53AB4D146CFC6D281").HexToByteArray(),
@@ -2566,7 +2569,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
             TestAesTransformDirectKey(
                 CipherMode.CFB,
                 paddingMode,
-                key: "ebbb4566b5e182e0f072466b0b311df38f9175bc0213a5530bce2ec4d74f400d".HexToByteArray(),
+                key: "ebbb4566b5e182e0f072466b0b311df38f9175bc0213a5530bce2ec4d74f400d"
+                    .HexToByteArray(),
                 iv: "0956a48e01002c9e16376d6e308dbad1".HexToByteArray(),
                 plainBytes: ("b0fe25ac8d3d28a2f471" + "000000000000").HexToByteArray(),
                 cipherBytes: ("638c6823e7256fb5626e" + "5EE5C1D7FA17").HexToByteArray(),
@@ -2598,8 +2602,10 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 PaddingMode.None,
                 key: "701ccc4c0e36e512ce077f5af6ccb957".HexToByteArray(),
                 iv: "5337ddeaf89a00dd4d58d860de968469".HexToByteArray(),
-                plainBytes: "cc1172f2f80866d0768b25f70fcf6361aab7c627c8488f97525d7d88949beeea".HexToByteArray(),
-                cipherBytes: "cdcf093bb7840df225683b58a479b00d5de5553a7e85eae4b70bf46dc729dd31".HexToByteArray(),
+                plainBytes: "cc1172f2f80866d0768b25f70fcf6361aab7c627c8488f97525d7d88949beeea"
+                    .HexToByteArray(),
+                cipherBytes: "cdcf093bb7840df225683b58a479b00d5de5553a7e85eae4b70bf46dc729dd31"
+                    .HexToByteArray(),
                 feedbackSize: 128
             );
         }
@@ -2628,8 +2634,10 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 PaddingMode.None,
                 key: "69f9d29885743826d7c5afc53637e6b1fa9512a10eea9ca9".HexToByteArray(),
                 iv: "3743793c7144a755768437f4ef5a33c8".HexToByteArray(),
-                plainBytes: "f84ebf42a758971c369949e288f775c9cf6a82ab51b286576b45652cd68c3ce6".HexToByteArray(),
-                cipherBytes: "a3bd28bb817bdb3f6492827f2aa3e6e134c254129d8f20dbc92389b7d89702d6".HexToByteArray(),
+                plainBytes: "f84ebf42a758971c369949e288f775c9cf6a82ab51b286576b45652cd68c3ce6"
+                    .HexToByteArray(),
+                cipherBytes: "a3bd28bb817bdb3f6492827f2aa3e6e134c254129d8f20dbc92389b7d89702d6"
+                    .HexToByteArray(),
                 feedbackSize: 128
             );
         }
@@ -2680,8 +2688,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
             var input = "2981761d979bb1765a28b2dd19125b54".HexToByteArray();
-            var key =
-                "e1c6e6884eee69552dbfee21f22ca92685d5d08ef0e3f37e5b338c533bb8d72c".HexToByteArray();
+            var key = "e1c6e6884eee69552dbfee21f22ca92685d5d08ef0e3f37e5b338c533bb8d72c"
+                .HexToByteArray();
             var iv = "cea9f23ae87a637ab0cda6381ecc1202".HexToByteArray();
 
             using (Aes aes = AesFactory.Create())
@@ -2713,7 +2721,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
             TestAesTransformDirectKey(
                 CipherMode.CFB,
                 PaddingMode.None,
-                key: "e1c6e6884eee69552dbfee21f22ca92685d5d08ef0e3f37e5b338c533bb8d72c".HexToByteArray(),
+                key: "e1c6e6884eee69552dbfee21f22ca92685d5d08ef0e3f37e5b338c533bb8d72c"
+                    .HexToByteArray(),
                 iv: "cea9f23ae87a637ab0cda6381ecc1202".HexToByteArray(),
                 plainBytes: "b72606c98d8e4fabf08839abf7a0ac61".HexToByteArray(),
                 cipherBytes: "2981761d979bb1765a28b2dd19125b54".HexToByteArray(),
@@ -2728,10 +2737,13 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
             TestAesTransformDirectKey(
                 CipherMode.CFB,
                 PaddingMode.None,
-                key: "ae59254c66d8f533e7f5002ced480c33984a421d7816e27be66c34c19bfbc2a8".HexToByteArray(),
+                key: "ae59254c66d8f533e7f5002ced480c33984a421d7816e27be66c34c19bfbc2a8"
+                    .HexToByteArray(),
                 iv: "821dd21653ece3af675cd25d26017ae3".HexToByteArray(),
-                plainBytes: "3cb4f17e775c2d6d06dd60f15d6c3a103e5131727f9c6cb80d13e00f316eb904".HexToByteArray(),
-                cipherBytes: "ae375db9f28148c460f6c6b6665fcc2ff6b50b8eaf82c64bba8c649efd4731bc".HexToByteArray(),
+                plainBytes: "3cb4f17e775c2d6d06dd60f15d6c3a103e5131727f9c6cb80d13e00f316eb904"
+                    .HexToByteArray(),
+                cipherBytes: "ae375db9f28148c460f6c6b6665fcc2ff6b50b8eaf82c64bba8c649efd4731bc"
+                    .HexToByteArray(),
                 feedbackSize: 128
             );
         }
@@ -3073,8 +3085,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
             byte[] key = "0123456789ABCDEFFEDCBA9876543210".HexToByteArray();
             byte[] iv = "0123456789ABCDEF0123456789ABCDEF".HexToByteArray();
             byte[] outputBytes = new byte[iv.Length * 2 + outputPadding];
-            byte[] input =
-                "D1BF87C650FCD10B758445BE0E0A99D14652480DF53423A8B727D30C8C010EDE".HexToByteArray();
+            byte[] input = "D1BF87C650FCD10B758445BE0E0A99D14652480DF53423A8B727D30C8C010EDE"
+                .HexToByteArray();
             int outputOffset = 0;
 
             using (Aes alg = AesFactory.Create())

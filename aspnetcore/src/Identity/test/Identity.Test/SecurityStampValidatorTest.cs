@@ -72,7 +72,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 new AuthenticationSchemeBuilder(IdentityConstants.ApplicationScheme)
                 {
                     HandlerType = typeof(NoopHandler)
-                }.Build(),
+                }
+                    .Build(),
                 new CookieAuthenticationOptions(),
                 ticket
             );
@@ -114,7 +115,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                         new AuthenticationSchemeBuilder(IdentityConstants.ApplicationScheme)
                         {
                             HandlerType = typeof(NoopHandler)
-                        }.Build(),
+                        }
+                            .Build(),
                         new CookieAuthenticationOptions(),
                         ticket
                     );
@@ -211,7 +213,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                         new AuthenticationSchemeBuilder(IdentityConstants.ApplicationScheme)
                         {
                             HandlerType = typeof(NoopHandler)
-                        }.Build(),
+                        }
+                            .Build(),
                         new CookieAuthenticationOptions(),
                         ticket
                     );
@@ -282,7 +285,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 new AuthenticationSchemeBuilder(IdentityConstants.ApplicationScheme)
                 {
                     HandlerType = typeof(NoopHandler)
-                }.Build(),
+                }
+                    .Build(),
                 new CookieAuthenticationOptions(),
                 ticket
             );
@@ -347,7 +351,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 new AuthenticationSchemeBuilder(IdentityConstants.ApplicationScheme)
                 {
                     HandlerType = typeof(NoopHandler)
-                }.Build(),
+                }
+                    .Build(),
                 new CookieAuthenticationOptions(),
                 ticket
             );
@@ -413,7 +418,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 new AuthenticationSchemeBuilder(IdentityConstants.ApplicationScheme)
                 {
                     HandlerType = typeof(NoopHandler)
-                }.Build(),
+                }
+                    .Build(),
                 new CookieAuthenticationOptions(),
                 ticket
             );
@@ -451,8 +457,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 new DefaultUserConfirmation<PocoUser>()
             );
             signInManager.Setup(
-                    s => s.ValidateTwoFactorSecurityStampAsync(It.IsAny<ClaimsPrincipal>())
-                )
+                s => s.ValidateTwoFactorSecurityStampAsync(It.IsAny<ClaimsPrincipal>())
+            )
                 .ReturnsAsync(shouldStampValidate ? user : default)
                 .Verifiable();
 
@@ -480,7 +486,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 new AuthenticationSchemeBuilder(IdentityConstants.ApplicationScheme)
                 {
                     HandlerType = typeof(NoopHandler)
-                }.Build(),
+                }
+                    .Build(),
                 new CookieAuthenticationOptions(),
                 ticket
             );

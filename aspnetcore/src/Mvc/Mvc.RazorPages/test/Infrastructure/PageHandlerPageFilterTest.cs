@@ -46,8 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var modelAsFilter = model.As<IAsyncPageFilter>();
             modelAsFilter.Setup(
-                    f => f.OnPageHandlerExecutionAsync(pageHandlerExecutingContext, next)
-                )
+                f => f.OnPageHandlerExecutionAsync(pageHandlerExecutingContext, next)
+            )
                 .Returns(Task.CompletedTask)
                 .Verifiable();
 
@@ -79,13 +79,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var modelAsFilter = model.As<IPageFilter>();
             modelAsFilter.Setup(
-                    f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())
-                )
+                f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())
+            )
                 .Verifiable();
 
             modelAsFilter.Setup(
-                    f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>())
-                )
+                f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>())
+            )
                 .Verifiable();
 
             var pageHandlerExecutingContext = new PageHandlerExecutingContext(
@@ -131,16 +131,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var modelAsFilter = model.As<IPageFilter>();
             modelAsFilter.Setup(
-                    f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())
-                )
+                f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())
+            )
                 .Callback(
                     (PageHandlerExecutingContext context) => context.Result = new PageResult()
                 )
                 .Verifiable();
 
             modelAsFilter.Setup(
-                    f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>())
-                )
+                f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>())
+            )
                 .Throws(new Exception("Shouldn't be called"));
 
             var pageHandlerExecutingContext = new PageHandlerExecutingContext(

@@ -60,10 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             {
                 if (
                     !secondEnumerator.MoveNext()
-                    || !StructuralComparisons.StructuralEqualityComparer.Equals(
-                        firstEnumerator.Current,
-                        secondEnumerator.Current
-                    )
+                    || !StructuralComparisons.StructuralEqualityComparer
+                        .Equals(firstEnumerator.Current, secondEnumerator.Current)
                 )
                 {
                     return false;

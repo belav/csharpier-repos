@@ -45,15 +45,8 @@ namespace System.Globalization.Tests
         )
         {
             KoreanCalendar calendar = new KoreanCalendar();
-            DateTime expected = new GregorianCalendar().ToDateTime(
-                year,
-                month,
-                day,
-                hour,
-                minute,
-                second,
-                millisecond
-            );
+            DateTime expected = new GregorianCalendar()
+                .ToDateTime(year, month, day, hour, minute, second, millisecond);
             Assert.Equal(
                 expected,
                 calendar.ToDateTime(year + 2333, month, day, hour, minute, second, millisecond)

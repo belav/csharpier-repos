@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                 .GetMethod(nameof(InjectedMethod), BindingFlags.NonPublic | BindingFlags.Static);
             Assert.NotNull(methodInfo);
 
-            var services = new ServiceCollection().AddSingleton<CrasherService>()
+            var services = new ServiceCollection()
+                .AddSingleton<CrasherService>()
                 .BuildServiceProvider();
 
             var applicationBuilder = new ApplicationBuilder(services);

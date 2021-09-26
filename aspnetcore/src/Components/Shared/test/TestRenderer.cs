@@ -131,7 +131,8 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
 
             // Clone other data, as underlying storage will get reused by later batches
             capturedBatch.ReferenceFrames = renderBatch.ReferenceFrames.AsEnumerable().ToArray();
-            capturedBatch.DisposedComponentIDs = renderBatch.DisposedComponentIDs.AsEnumerable()
+            capturedBatch.DisposedComponentIDs = renderBatch.DisposedComponentIDs
+                .AsEnumerable()
                 .ToList();
 
             // This renderer updates the UI synchronously, like the WebAssembly one.

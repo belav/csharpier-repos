@@ -355,9 +355,8 @@ namespace Microsoft.Net.Http.Headers
                 AppendValueWithSeparatorIfRequired(sb, MaxAgeString);
                 sb.Append('=');
                 sb.Append(
-                    ((int)_maxAge.GetValueOrDefault().TotalSeconds).ToString(
-                        NumberFormatInfo.InvariantInfo
-                    )
+                    ((int)_maxAge.GetValueOrDefault().TotalSeconds)
+                        .ToString(NumberFormatInfo.InvariantInfo)
                 );
             }
 
@@ -366,9 +365,8 @@ namespace Microsoft.Net.Http.Headers
                 AppendValueWithSeparatorIfRequired(sb, SharedMaxAgeString);
                 sb.Append('=');
                 sb.Append(
-                    ((int)_sharedMaxAge.GetValueOrDefault().TotalSeconds).ToString(
-                        NumberFormatInfo.InvariantInfo
-                    )
+                    ((int)_sharedMaxAge.GetValueOrDefault().TotalSeconds)
+                        .ToString(NumberFormatInfo.InvariantInfo)
                 );
             }
 
@@ -379,9 +377,8 @@ namespace Microsoft.Net.Http.Headers
                 {
                     sb.Append('=');
                     sb.Append(
-                        ((int)_maxStaleLimit.GetValueOrDefault().TotalSeconds).ToString(
-                            NumberFormatInfo.InvariantInfo
-                        )
+                        ((int)_maxStaleLimit.GetValueOrDefault().TotalSeconds)
+                            .ToString(NumberFormatInfo.InvariantInfo)
                     );
                 }
             }
@@ -391,9 +388,8 @@ namespace Microsoft.Net.Http.Headers
                 AppendValueWithSeparatorIfRequired(sb, MinFreshString);
                 sb.Append('=');
                 sb.Append(
-                    ((int)_minFresh.GetValueOrDefault().TotalSeconds).ToString(
-                        NumberFormatInfo.InvariantInfo
-                    )
+                    ((int)_minFresh.GetValueOrDefault().TotalSeconds)
+                        .ToString(NumberFormatInfo.InvariantInfo)
                 );
             }
 
@@ -591,11 +587,8 @@ namespace Microsoft.Net.Http.Headers
             while (current < input.Length)
             {
                 if (
-                    !NameValueHeaderValue.MultipleValueParser.TryParseValue(
-                        input,
-                        ref current,
-                        out var nameValue
-                    )
+                    !NameValueHeaderValue.MultipleValueParser
+                        .TryParseValue(input, ref current, out var nameValue)
                 )
                 {
                     return 0;

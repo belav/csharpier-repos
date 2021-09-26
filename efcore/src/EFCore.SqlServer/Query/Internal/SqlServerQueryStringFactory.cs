@@ -63,9 +63,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         (parameter.Value == DBNull.Value || parameter.Value == null)
                           ? "NULL"
                           : parameter.Value is SqlBytes sqlBytes
-                              ? new SqlServerByteArrayTypeMapping(typeName).GenerateSqlLiteral(
-                                    sqlBytes.Value
-                                )
+                              ? new SqlServerByteArrayTypeMapping(typeName)
+                                .GenerateSqlLiteral(sqlBytes.Value)
                               : typeMapping != null
                                   ? typeMapping.GenerateSqlLiteral(parameter.Value)
                                   : parameter.Value.ToString()

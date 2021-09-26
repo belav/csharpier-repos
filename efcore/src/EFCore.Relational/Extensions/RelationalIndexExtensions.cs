@@ -58,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var tableName = index.DeclaringEntityType.GetTableName();
             var schema = index.DeclaringEntityType.GetSchema();
-            var baseName = new StringBuilder().Append("IX_")
+            var baseName = new StringBuilder()
+                .Append("IX_")
                 .Append(tableName)
                 .Append("_")
                 .AppendJoin(index.Properties.Select(p => p.GetColumnBaseName()), "_")
@@ -107,9 +108,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 IReadOnlyIndex? linkedIndex = null;
                 foreach (
-                    var otherIndex in rootIndex.DeclaringEntityType.FindRowInternalForeignKeys(
-                            storeObject
-                        )
+                    var otherIndex in rootIndex.DeclaringEntityType
+                        .FindRowInternalForeignKeys(storeObject)
                         .SelectMany(fk => fk.PrincipalEntityType.GetIndexes())
                 )
                 {
@@ -134,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore
                 return rootIndex.GetDatabaseName(storeObject);
             }
 
-            var baseName = new StringBuilder().Append("IX_")
+            var baseName = new StringBuilder()
+                .Append("IX_")
                 .Append(storeObject.Name)
                 .Append("_")
                 .AppendJoin(columnNames, "_")
@@ -335,9 +336,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 IReadOnlyIndex? linkedIndex = null;
                 foreach (
-                    var otherIndex in rootIndex.DeclaringEntityType.FindRowInternalForeignKeys(
-                            storeObject
-                        )
+                    var otherIndex in rootIndex.DeclaringEntityType
+                        .FindRowInternalForeignKeys(storeObject)
                         .SelectMany(fk => fk.PrincipalEntityType.GetIndexes())
                 )
                 {

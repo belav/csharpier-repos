@@ -31,10 +31,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             // Create a new context that knows the directory where the assembly was loaded from
             // and uses it to resolve dependencies of the assembly. We could create one context per directory,
             // but there is no need to reuse contexts.
-            var assembly = new LoadContext(
-                Loader,
-                Path.GetDirectoryName(path)
-            ).LoadFromAssemblyPath(path);
+            var assembly = new LoadContext(Loader, Path.GetDirectoryName(path))
+                .LoadFromAssemblyPath(path);
 
             return new AssemblyAndLocation(assembly, path, fromGac: false);
         }

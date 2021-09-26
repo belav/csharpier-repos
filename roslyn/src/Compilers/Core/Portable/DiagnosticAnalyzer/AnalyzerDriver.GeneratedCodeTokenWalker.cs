@@ -35,11 +35,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 HasGeneratedCodeIdentifier |=
                     string.Equals(token.ValueText, "GeneratedCode", StringComparison.Ordinal)
-                    || string.Equals(
-                        token.ValueText,
-                        nameof(GeneratedCodeAttribute),
-                        StringComparison.Ordinal
-                    );
+                    || string
+                        .Equals(
+                            token.ValueText,
+                            nameof(GeneratedCodeAttribute),
+                            StringComparison.Ordinal
+                        );
             }
         }
     }

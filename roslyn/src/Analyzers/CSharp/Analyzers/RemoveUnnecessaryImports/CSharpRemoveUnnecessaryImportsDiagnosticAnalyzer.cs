@@ -65,12 +65,10 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 }
 
                 yield return nodeContainingUnnecessaryUsings is NamespaceDeclarationSyntax
-                    ? (
-                          (NamespaceDeclarationSyntax)nodeContainingUnnecessaryUsings
-                      ).Usings.GetContainedSpan()
-                    : (
-                          (CompilationUnitSyntax)nodeContainingUnnecessaryUsings
-                      ).Usings.GetContainedSpan();
+                    ? ((NamespaceDeclarationSyntax)nodeContainingUnnecessaryUsings).Usings
+                      .GetContainedSpan()
+                    : ((CompilationUnitSyntax)nodeContainingUnnecessaryUsings).Usings
+                      .GetContainedSpan();
             }
         }
     }

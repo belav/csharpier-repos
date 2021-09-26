@@ -191,7 +191,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     into grouping
                 from pv in grouping.DefaultIfEmpty()
                 select new { Order = o, ProductView = pv }
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(830, results.Count);
         }

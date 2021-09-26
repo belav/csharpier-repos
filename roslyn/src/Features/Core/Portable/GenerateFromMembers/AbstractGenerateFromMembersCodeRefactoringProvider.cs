@@ -36,11 +36,11 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
 
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             var selectedDeclarations = await syntaxFacts.GetSelectedFieldsAndPropertiesAsync(
-                    tree,
-                    textSpan,
-                    allowPartialSelection,
-                    cancellationToken
-                )
+                tree,
+                textSpan,
+                allowPartialSelection,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (selectedDeclarations.Length > 0)
@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
                 var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var selectedMembers = selectedDeclarations.Select(
-                        d => semanticModel.GetDeclaredSymbol(d, cancellationToken)
-                    )
+                    d => semanticModel.GetDeclaredSymbol(d, cancellationToken)
+                )
                     .WhereNotNull()
                     .ToImmutableArray();
                 if (selectedMembers.Length > 0)
@@ -126,16 +126,13 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
                 }
 
                 var parameterNamingRule = rules.Where(
-                        rule =>
-                            rule.SymbolSpecification.AppliesTo(
-                                SymbolKind.Parameter,
-                                Accessibility.NotApplicable
-                            )
-                    )
+                    rule =>
+                        rule.SymbolSpecification
+                            .AppliesTo(SymbolKind.Parameter, Accessibility.NotApplicable)
+                )
                     .First();
-                var parameterName = parameterNamingRule.NamingStyle.MakeCompliant(
-                        identifierNameParts.BaseName
-                    )
+                var parameterName = parameterNamingRule.NamingStyle
+                    .MakeCompliant(identifierNameParts.BaseName)
                     .First();
 
                 parameters.Add(

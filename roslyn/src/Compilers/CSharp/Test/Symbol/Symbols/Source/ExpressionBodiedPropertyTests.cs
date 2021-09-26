@@ -157,104 +157,99 @@ class C
         public void Syntax08()
         {
             CreateCompilationWithMscorlib45(
-                    @"
+                @"
 interface I
 {
     int P { get; };
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,19): error CS1597: Semicolon after method or accessor block is not valid
-                    //     int P { get; };
-                    Diagnostic(ErrorCode.ERR_UnexpectedSemicolon, ";").WithLocation(4, 19)
-                );
+            ).VerifyDiagnostics(
+                // (4,19): error CS1597: Semicolon after method or accessor block is not valid
+                //     int P { get; };
+                Diagnostic(ErrorCode.ERR_UnexpectedSemicolon, ";").WithLocation(4, 19)
+            );
         }
 
         [Fact]
         public void Syntax09()
         {
             CreateCompilationWithMscorlib45(
-                    @"
+                @"
 class C
 {
     int P => 2
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,15): error CS1002: ; expected
-                    //     int P => 2
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 15)
-                );
+            ).VerifyDiagnostics(
+                // (4,15): error CS1002: ; expected
+                //     int P => 2
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 15)
+            );
         }
 
         [Fact]
         public void Syntax10()
         {
             CreateCompilationWithMscorlib45(
-                    @"
+                @"
 interface I
 {
     int this[int i]
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,20): error CS1514: { expected
-                    //     int this[int i]
-                    Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(4, 20),
-                    // (5,2): error CS1513: } expected
-                    // }
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 2),
-                    // (4,9): error CS0548: 'I.this[int]': property or indexer must have at least one accessor
-                    //     int this[int i]
-                    Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this")
-                        .WithArguments("I.this[int]")
-                        .WithLocation(4, 9)
-                );
+            ).VerifyDiagnostics(
+                // (4,20): error CS1514: { expected
+                //     int this[int i]
+                Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(4, 20),
+                // (5,2): error CS1513: } expected
+                // }
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 2),
+                // (4,9): error CS0548: 'I.this[int]': property or indexer must have at least one accessor
+                //     int this[int i]
+                Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this")
+                    .WithArguments("I.this[int]")
+                    .WithLocation(4, 9)
+            );
         }
 
         [Fact]
         public void Syntax11()
         {
             CreateCompilationWithMscorlib45(
-                    @"
+                @"
 interface I
 {
     int this[int i];
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,20): error CS1514: { expected
-                    //     int this[int i];
-                    Diagnostic(ErrorCode.ERR_LbraceExpected, ";").WithLocation(4, 20),
-                    // (4,20): error CS1014: A get, set or init accessor expected
-                    //     int this[int i];
-                    Diagnostic(ErrorCode.ERR_GetOrSetExpected, ";").WithLocation(4, 20),
-                    // (5,2): error CS1513: } expected
-                    // }
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 2),
-                    // (4,9): error CS0548: 'I.this[int]': property or indexer must have at least one accessor
-                    //     int this[int i];
-                    Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this")
-                        .WithArguments("I.this[int]")
-                        .WithLocation(4, 9)
-                );
+            ).VerifyDiagnostics(
+                // (4,20): error CS1514: { expected
+                //     int this[int i];
+                Diagnostic(ErrorCode.ERR_LbraceExpected, ";").WithLocation(4, 20),
+                // (4,20): error CS1014: A get, set or init accessor expected
+                //     int this[int i];
+                Diagnostic(ErrorCode.ERR_GetOrSetExpected, ";").WithLocation(4, 20),
+                // (5,2): error CS1513: } expected
+                // }
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 2),
+                // (4,9): error CS0548: 'I.this[int]': property or indexer must have at least one accessor
+                //     int this[int i];
+                Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this")
+                    .WithArguments("I.this[int]")
+                    .WithLocation(4, 9)
+            );
         }
 
         [Fact]
         public void Syntax12()
         {
             CreateCompilationWithMscorlib45(
-                    @"
+                @"
 interface I
 {
     int this[int i] { get; };
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,29): error CS1597: Semicolon after method or accessor block is not valid
-                    //     int this[int i] { get; };
-                    Diagnostic(ErrorCode.ERR_UnexpectedSemicolon, ";").WithLocation(4, 29)
-                );
+            ).VerifyDiagnostics(
+                // (4,29): error CS1597: Semicolon after method or accessor block is not valid
+                //     int this[int i] { get; };
+                Diagnostic(ErrorCode.ERR_UnexpectedSemicolon, ";").WithLocation(4, 29)
+            );
         }
 
         [Fact]
@@ -262,39 +257,37 @@ interface I
         {
             // End the property declaration at the semicolon after the accessor list
             CreateCompilationWithMscorlib45(
-                    @"
+                @"
 class C
 {
     int P { get; set; }; => 2;
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,24): error CS1597: Semicolon after method or accessor block is not valid
-                    //     int P { get; set; }; => 2;
-                    Diagnostic(ErrorCode.ERR_UnexpectedSemicolon, ";").WithLocation(4, 24),
-                    // (4,26): error CS1519: Invalid token '=>' in class, record, struct, or interface member declaration
-                    //     int P { get; set; }; => 2;
-                    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=>")
-                        .WithArguments("=>")
-                        .WithLocation(4, 26)
-                );
+            ).VerifyDiagnostics(
+                // (4,24): error CS1597: Semicolon after method or accessor block is not valid
+                //     int P { get; set; }; => 2;
+                Diagnostic(ErrorCode.ERR_UnexpectedSemicolon, ";").WithLocation(4, 24),
+                // (4,26): error CS1519: Invalid token '=>' in class, record, struct, or interface member declaration
+                //     int P { get; set; }; => 2;
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=>")
+                    .WithArguments("=>")
+                    .WithLocation(4, 26)
+            );
         }
 
         [Fact]
         public void Syntax14()
         {
             CreateCompilationWithMscorlib45(
-                    @"
+                @"
 class C
 {
     int this[int i] => 2
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,25): error CS1002: ; expected
-                    //     int this[int i] => 2
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 25)
-                );
+            ).VerifyDiagnostics(
+                // (4,25): error CS1002: ; expected
+                //     int this[int i] => 2
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 25)
+            );
         }
 
         [Fact]
@@ -352,7 +345,7 @@ class C
         public void Override01()
         {
             var comp = CreateCompilationWithMscorlib45(
-                    @"
+                @"
 class B
 {
     public virtual int P { get; set; }
@@ -361,15 +354,14 @@ class C : B
 {
     public override int P => 1;
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void Override02()
         {
             CreateCompilationWithMscorlib45(
-                    @"
+                @"
 class B
 {
     public int P => 10;
@@ -380,26 +372,25 @@ class C : B
     public override int P => 20;
     public override int this[int i] => i * 2;
 }"
-                )
-                .VerifyDiagnostics(
-                    // (10,25): error CS0506: 'C.this[int]': cannot override inherited member 'B.this[int]' because it is not marked virtual, abstract, or override
-                    //     public override int this[int i] => i * 2;
-                    Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "this")
-                        .WithArguments("C.this[int]", "B.this[int]")
-                        .WithLocation(10, 25),
-                    // (9,25): error CS0506: 'C.P': cannot override inherited member 'B.P' because it is not marked virtual, abstract, or override
-                    //     public override int P => 20;
-                    Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "P")
-                        .WithArguments("C.P", "B.P")
-                        .WithLocation(9, 25)
-                );
+            ).VerifyDiagnostics(
+                // (10,25): error CS0506: 'C.this[int]': cannot override inherited member 'B.this[int]' because it is not marked virtual, abstract, or override
+                //     public override int this[int i] => i * 2;
+                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "this")
+                    .WithArguments("C.this[int]", "B.this[int]")
+                    .WithLocation(10, 25),
+                // (9,25): error CS0506: 'C.P': cannot override inherited member 'B.P' because it is not marked virtual, abstract, or override
+                //     public override int P => 20;
+                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "P")
+                    .WithArguments("C.P", "B.P")
+                    .WithLocation(9, 25)
+            );
         }
 
         [Fact]
         public void Override03()
         {
             CreateCompilationWithMscorlib45(
-                    @"
+                @"
 class B
 {
     public virtual int P => 10;
@@ -410,46 +401,43 @@ class C : B
     public override int P => 20;
     public override int this[int i] => i * 2;
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void VoidExpression()
         {
             var comp = CreateCompilationWithMscorlib45(
-                    @"
+                @"
 class C
 {
     public void P => System.Console.WriteLine(""goo"");
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,17): error CS0547: 'C.P': property or indexer cannot have void type
-                    //     public void P => System.Console.WriteLine("goo");
-                    Diagnostic(ErrorCode.ERR_PropertyCantHaveVoidType, "P")
-                        .WithArguments("C.P")
-                        .WithLocation(4, 17)
-                );
+            ).VerifyDiagnostics(
+                // (4,17): error CS0547: 'C.P': property or indexer cannot have void type
+                //     public void P => System.Console.WriteLine("goo");
+                Diagnostic(ErrorCode.ERR_PropertyCantHaveVoidType, "P")
+                    .WithArguments("C.P")
+                    .WithLocation(4, 17)
+            );
         }
 
         [Fact]
         public void VoidExpression2()
         {
             var comp = CreateCompilationWithMscorlib45(
-                    @"
+                @"
 class C
 {
     public int P => System.Console.WriteLine(""goo"");
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,21): error CS0029: Cannot implicitly convert type 'void' to 'int'
-                    //     public int P => System.Console.WriteLine("goo");
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"System.Console.WriteLine(""goo"")")
-                        .WithArguments("void", "int")
-                        .WithLocation(4, 21)
-                );
+            ).VerifyDiagnostics(
+                // (4,21): error CS0029: Cannot implicitly convert type 'void' to 'int'
+                //     public int P => System.Console.WriteLine("goo");
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"System.Console.WriteLine(""goo"")")
+                    .WithArguments("void", "int")
+                    .WithLocation(4, 21)
+            );
         }
 
         [Fact]
@@ -541,9 +529,8 @@ class C : B
         System.Console.WriteLine(c[10]);
     }
 }",
-                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseExe
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             var verifier = CompileAndVerify(
                 comp,

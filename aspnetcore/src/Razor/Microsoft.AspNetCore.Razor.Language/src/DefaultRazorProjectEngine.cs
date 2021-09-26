@@ -129,15 +129,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                     }
                 );
             var codeGenerationOptions =
-                GetRequiredFeature<IRazorCodeGenerationOptionsFactoryProjectFeature>()
-                    .Create(
-                        fileKind,
-                        builder =>
-                        {
-                            ConfigureCodeGenerationOptions(builder);
-                            configureCodeGeneration?.Invoke(builder);
-                        }
-                    );
+                GetRequiredFeature<IRazorCodeGenerationOptionsFactoryProjectFeature>().Create(
+                    fileKind,
+                    builder =>
+                    {
+                        ConfigureCodeGenerationOptions(builder);
+                        configureCodeGeneration?.Invoke(builder);
+                    }
+                );
 
             var codeDocument = RazorCodeDocument.Create(
                 sourceDocument,
@@ -234,15 +233,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                     }
                 );
             var codeGenerationOptions =
-                GetRequiredFeature<IRazorCodeGenerationOptionsFactoryProjectFeature>()
-                    .Create(
-                        fileKind,
-                        builder =>
-                        {
-                            ConfigureDesignTimeCodeGenerationOptions(builder);
-                            configureCodeGeneration?.Invoke(builder);
-                        }
-                    );
+                GetRequiredFeature<IRazorCodeGenerationOptionsFactoryProjectFeature>().Create(
+                    fileKind,
+                    builder =>
+                    {
+                        ConfigureDesignTimeCodeGenerationOptions(builder);
+                        configureCodeGeneration?.Invoke(builder);
+                    }
+                );
 
             var codeDocument = RazorCodeDocument.Create(
                 sourceDocument,

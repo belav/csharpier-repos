@@ -32,10 +32,10 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             var (document, textSpan, cancellationToken) = context;
             var service = document.GetLanguageService<AbstractExtractInterfaceService>();
             var actions = await service.GetExtractInterfaceCodeActionAsync(
-                    document,
-                    textSpan,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
         }

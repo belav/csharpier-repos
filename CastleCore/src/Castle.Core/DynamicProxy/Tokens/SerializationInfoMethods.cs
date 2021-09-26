@@ -28,34 +28,26 @@ namespace Castle.DynamicProxy.Tokens
         /// <summary>
 		///   <see cref = "SerializationInfo.AddValue(string,bool)" />
 		/// </summary>
-        public static readonly MethodInfo AddValue_Bool = typeof(SerializationInfo).GetMethod(
-            "AddValue",
-            new[] { typeof(string), typeof(bool) }
-        );
+        public static readonly MethodInfo AddValue_Bool = typeof(SerializationInfo)
+            .GetMethod("AddValue", new[] { typeof(string), typeof(bool) });
 
         /// <summary>
 		///   <see cref = "SerializationInfo.AddValue(string,int)" />
 		/// </summary>
-        public static readonly MethodInfo AddValue_Int32 = typeof(SerializationInfo).GetMethod(
-            "AddValue",
-            new[] { typeof(string), typeof(int) }
-        );
+        public static readonly MethodInfo AddValue_Int32 = typeof(SerializationInfo)
+            .GetMethod("AddValue", new[] { typeof(string), typeof(int) });
 
         /// <summary>
 		///   <see cref = "SerializationInfo.AddValue(string,object)" />
 		/// </summary>
-        public static readonly MethodInfo AddValue_Object = typeof(SerializationInfo).GetMethod(
-            "AddValue",
-            new[] { typeof(string), typeof(object) }
-        );
+        public static readonly MethodInfo AddValue_Object = typeof(SerializationInfo)
+            .GetMethod("AddValue", new[] { typeof(string), typeof(object) });
 
         /// <summary>
 		///   <see cref = "SerializationInfo.GetValue" />
 		/// </summary>
-        public static readonly MethodInfo GetValue = typeof(SerializationInfo).GetMethod(
-            "GetValue",
-            new[] { typeof(string), typeof(Type) }
-        );
+        public static readonly MethodInfo GetValue = typeof(SerializationInfo)
+            .GetMethod("GetValue", new[] { typeof(string), typeof(Type) });
 
         /// <summary>
 		///   <see cref = "SerializationInfo.SetType" />

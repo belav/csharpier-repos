@@ -103,9 +103,8 @@ namespace System.Diagnostics
             string stackTrace;
             try
             {
-                stackTrace = new StackTrace(2, true).ToString(
-                    System.Diagnostics.StackTrace.TraceFormat.Normal
-                );
+                stackTrace = new StackTrace(2, true)
+                    .ToString(System.Diagnostics.StackTrace.TraceFormat.Normal);
             }
             catch
             {

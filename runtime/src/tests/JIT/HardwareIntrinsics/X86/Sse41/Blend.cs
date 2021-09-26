@@ -114,7 +114,8 @@ namespace IntelHardwareIntrinsicTest
 
                     // SDDD
                     vf3 =
-                        (Vector128<float>)typeof(Sse41).GetMethod(
+                        (Vector128<float>)typeof(Sse41)
+                            .GetMethod(
                                 nameof(Sse41.Blend),
                                 new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
                             )
@@ -211,7 +212,8 @@ namespace IntelHardwareIntrinsicTest
 
                     // SDDD
                     vf3 =
-                        (Vector128<double>)typeof(Sse41).GetMethod(
+                        (Vector128<double>)typeof(Sse41)
+                            .GetMethod(
                                 nameof(Sse41.Blend),
                                 new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
                             )
@@ -351,7 +353,8 @@ namespace IntelHardwareIntrinsicTest
 
                     // SDDD DDDD
                     vf3 =
-                        (Vector128<short>)typeof(Sse41).GetMethod(
+                        (Vector128<short>)typeof(Sse41)
+                            .GetMethod(
                                 nameof(Sse41.Blend),
                                 new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
                             )
@@ -503,7 +506,8 @@ namespace IntelHardwareIntrinsicTest
 
                     // SDDD DDDD
                     vf3 =
-                        (Vector128<ushort>)typeof(Sse41).GetMethod(
+                        (Vector128<ushort>)typeof(Sse41)
+                            .GetMethod(
                                 nameof(Sse41.Blend),
                                 new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
                             )

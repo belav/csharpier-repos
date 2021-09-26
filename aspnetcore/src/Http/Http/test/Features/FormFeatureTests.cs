@@ -609,9 +609,8 @@ namespace Microsoft.AspNetCore.Http.Features
         [Fact]
         public async Task ReadFormAsync_MultipartWithInvalidContentDisposition_Throw()
         {
-            var formContent = Encoding.UTF8.GetBytes(
-                MultipartFormWithInvalidContentDispositionValue
-            );
+            var formContent = Encoding.UTF8
+                .GetBytes(MultipartFormWithInvalidContentDispositionValue);
             var context = new DefaultHttpContext();
             var responseFeature = new FakeResponseFeature();
             context.Features.Set<IHttpResponseFeature>(responseFeature);
@@ -635,9 +634,10 @@ namespace Microsoft.AspNetCore.Http.Features
         private Stream CreateFile(int size)
         {
             var stream = new MemoryStream(size);
-            var bytes = Encoding.ASCII.GetBytes(
-                "HelloWorld_ABCDEFGHIJKLMNOPQRSTUVWXYZ.abcdefghijklmnopqrstuvwxyz,0123456789;"
-            );
+            var bytes = Encoding.ASCII
+                .GetBytes(
+                    "HelloWorld_ABCDEFGHIJKLMNOPQRSTUVWXYZ.abcdefghijklmnopqrstuvwxyz,0123456789;"
+                );
             int written = 0;
             while (written < size)
             {

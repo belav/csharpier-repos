@@ -82,18 +82,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(MiddleWare, "2.1.0")
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.1"),
-                    dotnetCustomizer =>
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                                        .WithApplyPatches(applyPatches).Version = versionReference
-                            )
-                )
+                runtimeConfig =>
+                    runtimeConfig.WithFramework(MiddleWare, "2.1.0")
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.1"),
+                dotnetCustomizer =>
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp)
+                                    .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                                    .WithApplyPatches(applyPatches).Version = versionReference
+                        )
+            )
                 .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
                     MicrosoftNETCoreApp,
                     resolvedFramework,
@@ -126,18 +126,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.1")
-                            .WithFramework(MiddleWare, "2.1.0"),
-                    dotnetCustomizer =>
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                                        .WithApplyPatches(applyPatches).Version = versionReference
-                            )
-                )
+                runtimeConfig =>
+                    runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.1")
+                        .WithFramework(MiddleWare, "2.1.0"),
+                dotnetCustomizer =>
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp)
+                                    .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                                    .WithApplyPatches(applyPatches).Version = versionReference
+                        )
+            )
                 .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
                     MicrosoftNETCoreApp,
                     resolvedFramework,
@@ -159,18 +159,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(MiddleWare, "2.1.0")
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.1"),
-                    dotnetCustomizer =>
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                                        .WithApplyPatches(applyPatches).Version = versionReference
-                            )
-                )
+                runtimeConfig =>
+                    runtimeConfig.WithFramework(MiddleWare, "2.1.0")
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.1"),
+                dotnetCustomizer =>
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp)
+                                    .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                                    .WithApplyPatches(applyPatches).Version = versionReference
+                        )
+            )
                 .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
                     MicrosoftNETCoreApp,
                     resolvedFramework,
@@ -195,18 +195,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.1")
-                            .WithFramework(MiddleWare, "2.1.0"),
-                    dotnetCustomizer =>
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                                        .WithApplyPatches(applyPatches).Version = versionReference
-                            )
-                )
+                runtimeConfig =>
+                    runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.1")
+                        .WithFramework(MiddleWare, "2.1.0"),
+                dotnetCustomizer =>
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp)
+                                    .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                                    .WithApplyPatches(applyPatches).Version = versionReference
+                        )
+            )
                 .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
                     MicrosoftNETCoreApp,
                     resolvedFramework,
@@ -239,18 +239,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "6.1.1-preview.1")
-                            .WithFramework(MiddleWare, "2.1.0"),
-                    dotnetCustomizer =>
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                                        .WithApplyPatches(applyPatches).Version = versionReference
-                            )
-                )
+                runtimeConfig =>
+                    runtimeConfig.WithFramework(MicrosoftNETCoreApp, "6.1.1-preview.1")
+                        .WithFramework(MiddleWare, "2.1.0"),
+                dotnetCustomizer =>
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp)
+                                    .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                                    .WithApplyPatches(applyPatches).Version = versionReference
+                        )
+            )
                 .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
                     MicrosoftNETCoreApp,
                     resolvedFramework,
@@ -281,23 +281,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(MiddleWare, "2.1.0")
-                            .WithFramework(
-                                new RuntimeConfig.Framework(
-                                    MicrosoftNETCoreApp,
-                                    versionReference
-                                ).WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                                    .WithApplyPatches(applyPatches)
-                            ),
-                    dotnetCustomizer =>
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.1.1"
-                            )
-                )
+                runtimeConfig =>
+                    runtimeConfig.WithFramework(MiddleWare, "2.1.0")
+                        .WithFramework(
+                            new RuntimeConfig.Framework(MicrosoftNETCoreApp, versionReference)
+                                .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                                .WithApplyPatches(applyPatches)
+                        ),
+                dotnetCustomizer =>
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.1.1"
+                        )
+            )
                 .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
                     MicrosoftNETCoreApp,
                     resolvedFramework,
@@ -331,23 +328,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(
-                                new RuntimeConfig.Framework(
-                                    MicrosoftNETCoreApp,
-                                    versionReference
-                                ).WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                                    .WithApplyPatches(applyPatches)
-                            )
-                            .WithFramework(MiddleWare, "2.1.0"),
-                    dotnetCustomizer =>
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.1.1"
-                            )
-                )
+                runtimeConfig =>
+                    runtimeConfig.WithFramework(
+                        new RuntimeConfig.Framework(MicrosoftNETCoreApp, versionReference)
+                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                            .WithApplyPatches(applyPatches)
+                    )
+                        .WithFramework(MiddleWare, "2.1.0"),
+                dotnetCustomizer =>
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.1.1"
+                        )
+            )
                 // Note that in this case (since the app reference is first) if the app's framework reference
                 // can't be resolved against the available frameworks, the error is actually a regular
                 // "can't find framework" and not a framework reconcile event.
@@ -368,23 +362,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(MiddleWare, "2.1.0")
-                            .WithFramework(
-                                new RuntimeConfig.Framework(
-                                    MicrosoftNETCoreApp,
-                                    versionReference
-                                ).WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                                    .WithApplyPatches(applyPatches)
-                            ),
-                    dotnetCustomizer =>
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.1.1"
-                            )
-                )
+                runtimeConfig =>
+                    runtimeConfig.WithFramework(MiddleWare, "2.1.0")
+                        .WithFramework(
+                            new RuntimeConfig.Framework(MicrosoftNETCoreApp, versionReference)
+                                .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                                .WithApplyPatches(applyPatches)
+                        ),
+                dotnetCustomizer =>
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.1.1"
+                        )
+            )
                 .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
                     MicrosoftNETCoreApp,
                     resolvedFramework,
@@ -410,23 +401,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(
-                                new RuntimeConfig.Framework(
-                                    MicrosoftNETCoreApp,
-                                    versionReference
-                                ).WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                                    .WithApplyPatches(applyPatches)
-                            )
-                            .WithFramework(MiddleWare, "2.1.0"),
-                    dotnetCustomizer =>
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.1.1"
-                            )
-                )
+                runtimeConfig =>
+                    runtimeConfig.WithFramework(
+                        new RuntimeConfig.Framework(MicrosoftNETCoreApp, versionReference)
+                            .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                            .WithApplyPatches(applyPatches)
+                    )
+                        .WithFramework(MiddleWare, "2.1.0"),
+                dotnetCustomizer =>
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.1.1"
+                        )
+            )
                 .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
                     MicrosoftNETCoreApp,
                     resolvedFramework,
@@ -454,30 +442,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    runtimeConfig => runtimeConfig.WithFramework(HighWare, "7.0.0"),
-                    dotnetCustomizer =>
-                    {
-                        dotnetCustomizer.Framework(HighWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.1.1"
-                            );
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                                        .WithApplyPatches(applyPatches).Version = versionReference
-                            );
-                    }
-                )
-                .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
-                    MicrosoftNETCoreApp,
-                    resolvedFramework,
-                    versionReference,
-                    "5.1.1"
-                );
+                runtimeConfig => runtimeConfig.WithFramework(HighWare, "7.0.0"),
+                dotnetCustomizer =>
+                {
+                    dotnetCustomizer.Framework(HighWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.1.1"
+                        );
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp)
+                                    .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                                    .WithApplyPatches(applyPatches).Version = versionReference
+                        );
+                }
+            ).ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(MicrosoftNETCoreApp, resolvedFramework, versionReference, "5.1.1");
         }
 
         // Verify that inner framework reference 5.1.1 (defaults = RollForward:Minor)
@@ -494,30 +475,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    runtimeConfig => runtimeConfig.WithFramework(HighWare, "7.0.0"),
-                    dotnetCustomizer =>
-                    {
-                        dotnetCustomizer.Framework(HighWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.1.1"
-                            );
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
-                                        .WithApplyPatches(applyPatches).Version = versionReference
-                            );
-                    }
-                )
-                .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
-                    MicrosoftNETCoreApp,
-                    resolvedFramework,
-                    "5.1.1",
-                    versionReference
-                );
+                runtimeConfig => runtimeConfig.WithFramework(HighWare, "7.0.0"),
+                dotnetCustomizer =>
+                {
+                    dotnetCustomizer.Framework(HighWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.1.1"
+                        );
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp)
+                                    .WithRollForwardOnNoCandidateFx(rollForwardOnNoCandidateFx)
+                                    .WithApplyPatches(applyPatches).Version = versionReference
+                        );
+                }
+            ).ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(MicrosoftNETCoreApp, resolvedFramework, "5.1.1", versionReference);
         }
 
         // This test:
@@ -530,31 +504,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void FrameworkResolutionRetry_FrameworkChain()
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithRollForwardOnNoCandidateFx(2)
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.1")
-                            .WithFramework(HighWare, "7.3.1"),
-                    dotnetCustomizer =>
-                    {
-                        dotnetCustomizer.Framework(HighWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.4.1"
-                            );
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.6.0"
-                            );
-                    }
-                )
-                .Should()
-                .Pass()
-                .And.RestartedFrameworkResolution("5.1.1", "5.4.1")
-                .And.RestartedFrameworkResolution("5.4.1", "5.6.0")
-                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
+                runtimeConfig =>
+                    runtimeConfig.WithRollForwardOnNoCandidateFx(2)
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.1")
+                        .WithFramework(HighWare, "7.3.1"),
+                dotnetCustomizer =>
+                {
+                    dotnetCustomizer.Framework(HighWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.4.1"
+                        );
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.6.0"
+                        );
+                }
+            ).Should().Pass().And.RestartedFrameworkResolution("5.1.1", "5.4.1").And.RestartedFrameworkResolution("5.4.1", "5.6.0").And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
         }
 
         // This test:
@@ -567,32 +534,25 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void FrameworkResolutionRetry_FrameworkTree()
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithRollForwardOnNoCandidateFx(2)
-                            .WithFramework(MicrosoftNETCoreApp, "5.1.1")
-                            .WithFramework(MiddleWare, "2.1.2")
-                            .WithFramework(AnotherMiddleWare, "3.0.0"),
-                    dotnetCustomizer =>
-                    {
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.4.1"
-                            );
-                        dotnetCustomizer.Framework(AnotherMiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.6.0"
-                            );
-                    }
-                )
-                .Should()
-                .Pass()
-                .And.RestartedFrameworkResolution("5.1.1", "5.4.1")
-                .And.RestartedFrameworkResolution("5.4.1", "5.6.0")
-                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
+                runtimeConfig =>
+                    runtimeConfig.WithRollForwardOnNoCandidateFx(2)
+                        .WithFramework(MicrosoftNETCoreApp, "5.1.1")
+                        .WithFramework(MiddleWare, "2.1.2")
+                        .WithFramework(AnotherMiddleWare, "3.0.0"),
+                dotnetCustomizer =>
+                {
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.4.1"
+                        );
+                    dotnetCustomizer.Framework(AnotherMiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.6.0"
+                        );
+                }
+            ).Should().Pass().And.RestartedFrameworkResolution("5.1.1", "5.4.1").And.RestartedFrameworkResolution("5.4.1", "5.6.0").And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
         }
 
         // Verifies that roll forward acts on all framework references (3 frameworks in chain)
@@ -600,34 +560,26 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void RollForwardOnAllFrameworks()
         {
             RunTest(
-                    runtimeConfig =>
-                        runtimeConfig.WithFramework(MiddleWare, "2.0.0")
-                            .WithFramework(HighWare, "7.0.0")
-                            .WithFramework(MicrosoftNETCoreApp, "5.0.0"),
-                    dotnetCustomizer =>
-                    {
-                        dotnetCustomizer.Framework(MiddleWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.0.0"
-                            );
-                        dotnetCustomizer.Framework(HighWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                {
-                                    runtimeConfig.GetFramework(MiddleWare).Version = "2.0.0";
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.0.0";
-                                }
-                            );
-                    }
-                )
-                .Should()
-                .Pass()
-                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3")
-                .And.HaveResolvedFramework(MiddleWare, "2.1.2")
-                .And.HaveResolvedFramework(HighWare, "7.3.1");
+                runtimeConfig =>
+                    runtimeConfig.WithFramework(MiddleWare, "2.0.0")
+                        .WithFramework(HighWare, "7.0.0")
+                        .WithFramework(MicrosoftNETCoreApp, "5.0.0"),
+                dotnetCustomizer =>
+                {
+                    dotnetCustomizer.Framework(MiddleWare)
+                        .RuntimeConfig(
+                            runtimeConfig =>
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.0.0"
+                        );
+                    dotnetCustomizer.Framework(HighWare).RuntimeConfig(
+                        runtimeConfig =>
+                        {
+                            runtimeConfig.GetFramework(MiddleWare).Version = "2.0.0";
+                            runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.0.0";
+                        }
+                    );
+                }
+            ).Should().Pass().And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3").And.HaveResolvedFramework(MiddleWare, "2.1.2").And.HaveResolvedFramework(HighWare, "7.3.1");
         }
 
         private CommandResult RunTest(
@@ -638,7 +590,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             return RunTest(
                 SharedState.DotNetWithMultipleFrameworks,
                 SharedState.FrameworkReferenceApp,
-                new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig)
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(runtimeConfig)
                     .WithDotnetCustomizer(customizeDotNet)
             );
         }

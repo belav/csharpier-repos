@@ -215,9 +215,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (selectExpression.Projection.Count > 0)
             {
                 if (
-                    selectExpression.Projection.Any(
-                        p => !string.IsNullOrEmpty(p.Alias) && p.Alias != p.Name
-                    )
+                    selectExpression.Projection
+                        .Any(p => !string.IsNullOrEmpty(p.Alias) && p.Alias != p.Name)
                     && !selectExpression.Projection.Any(p => p.Expression is SqlFunctionExpression)
                 ) // Aggregates are not allowed
                 {
@@ -491,7 +490,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             _sqlBuilder.Append(inExpression.IsNegated ? " NOT IN " : " IN ");
             _sqlBuilder.Append("(");
             var valuesConstant = (SqlConstantExpression)inExpression.Values;
-            var valuesList = ((IEnumerable<object>)valuesConstant.Value).Select(
+            var valuesList = ((IEnumerable<object>)valuesConstant.Value)
+                .Select(
                     v =>
                         new SqlConstantExpression(
                             Expression.Constant(v),

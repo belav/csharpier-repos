@@ -273,11 +273,8 @@ namespace System.Net.Http
             );
             Assert.ThrowsArgument(
                 () =>
-                    new StringContent(
-                        String.Empty,
-                        Encoding.UTF8,
-                        "application/http"
-                    ).ReadAsHttpRequestMessageAsync(),
+                    new StringContent(String.Empty, Encoding.UTF8, "application/http")
+                        .ReadAsHttpRequestMessageAsync(),
                 "content"
             );
 
@@ -344,11 +341,8 @@ namespace System.Net.Http
             );
             Assert.ThrowsArgument(
                 () =>
-                    new StringContent(
-                        String.Empty,
-                        Encoding.UTF8,
-                        "application/http"
-                    ).ReadAsHttpResponseMessageAsync(),
+                    new StringContent(String.Empty, Encoding.UTF8, "application/http")
+                        .ReadAsHttpResponseMessageAsync(),
                 "content"
             );
 

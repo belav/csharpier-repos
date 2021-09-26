@@ -60,13 +60,14 @@ namespace Internal.Cryptography.Pal
                 return ImportPkcs12(rawData, password, exportable, keychain);
             }
 
-            SafeCFArrayHandle certs = Interop.AppleCrypto.X509ImportCollection(
-                rawData,
-                contentType,
-                password,
-                SafeTemporaryKeychainHandle.InvalidHandle,
-                exportable: true
-            );
+            SafeCFArrayHandle certs = Interop.AppleCrypto
+                .X509ImportCollection(
+                    rawData,
+                    contentType,
+                    password,
+                    SafeTemporaryKeychainHandle.InvalidHandle,
+                    exportable: true
+                );
 
             return new AppleCertLoader(certs, null);
         }
@@ -218,11 +219,8 @@ namespace Internal.Cryptography.Pal
                 SafeSecIdentityHandle identityHandle;
 
                 if (
-                    Interop.AppleCrypto.X509DemuxAndRetainHandle(
-                        handle,
-                        out certHandle,
-                        out identityHandle
-                    )
+                    Interop.AppleCrypto
+                        .X509DemuxAndRetainHandle(handle, out certHandle, out identityHandle)
                 )
                 {
                     X509Certificate2 cert;

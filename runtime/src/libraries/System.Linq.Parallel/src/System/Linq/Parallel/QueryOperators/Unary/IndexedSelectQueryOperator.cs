@@ -104,8 +104,8 @@ namespace System.Linq.Parallel
             PartitionedStream<TInput, int> inputStreamInt;
             if (_prematureMerge)
             {
-                ListQueryResults<TInput> listResults =
-                    QueryOperator<TInput>.ExecuteAndCollectResults(
+                ListQueryResults<TInput> listResults = QueryOperator<TInput>
+                    .ExecuteAndCollectResults(
                         inputStream,
                         partitionCount,
                         Child.OutputOrdered,

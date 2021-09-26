@@ -2392,15 +2392,15 @@ namespace System.Text.RegularExpressions.Tests
             {
                 string pattern =
                     "[123]"
-                    + string.Concat(
-                        Enumerable.Range(0, length).Select(i => (char)('A' + (i % 26)))
-                    );
+                    + string
+                        .Concat(Enumerable.Range(0, length).Select(i => (char)('A' + (i % 26))));
                 string input =
                     "2"
-                    + string.Concat(
-                        Enumerable.Range(0, length)
-                            .Select(i => (char)((caseInsensitive ? 'a' : 'A') + (i % 26)))
-                    );
+                    + string
+                        .Concat(
+                            Enumerable.Range(0, length)
+                                .Select(i => (char)((caseInsensitive ? 'a' : 'A') + (i % 26)))
+                        );
                 Match(
                     pattern,
                     input,
@@ -2491,111 +2491,96 @@ namespace System.Text.RegularExpressions.Tests
         public void Match_DefaultTimeout_Throws(RegexOptions options)
         {
             RemoteExecutor.Invoke(
-                    optionsString =>
-                    {
-                        const string Pattern =
-                            @"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9})$";
-                        string input = new string('a', 50) + "@a.a";
+                optionsString =>
+                {
+                    const string Pattern =
+                        @"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9})$";
+                    string input = new string('a', 50) + "@a.a";
 
-                        AppDomain.CurrentDomain.SetData(
+                    AppDomain.CurrentDomain
+                        .SetData(
                             RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
                             TimeSpan.FromMilliseconds(100)
                         );
 
-                        if (
-                            (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
-                            == RegexOptions.None
-                        )
-                        {
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => new Regex(Pattern).Match(input)
-                            );
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => new Regex(Pattern).IsMatch(input)
-                            );
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => new Regex(Pattern).Matches(input).Count
-                            );
-
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => Regex.Match(input, Pattern)
-                            );
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => Regex.IsMatch(input, Pattern)
-                            );
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => Regex.Matches(input, Pattern).Count
-                            );
-                        }
-
+                    if (
+                        (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                        == RegexOptions.None
+                    )
+                    {
                         Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                new Regex(
-                                    Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
-                                    )
-                                ).Match(input)
+                            () => new Regex(Pattern).Match(input)
                         );
                         Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                new Regex(
-                                    Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
-                                    )
-                                ).IsMatch(input)
+                            () => new Regex(Pattern).IsMatch(input)
                         );
                         Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                new Regex(
-                                    Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
-                                    )
-                                ).Matches(input).Count
+                            () => new Regex(Pattern).Matches(input).Count
                         );
 
                         Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                Regex.Match(
-                                    input,
-                                    Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
-                                    )
-                                )
+                            () => Regex.Match(input, Pattern)
                         );
                         Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                Regex.IsMatch(
-                                    input,
-                                    Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
-                                    )
-                                )
+                            () => Regex.IsMatch(input, Pattern)
                         );
                         Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                Regex.Matches(
-                                    input,
-                                    Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
-                                    )
-                                ).Count
+                            () => Regex.Matches(input, Pattern).Count
                         );
-                    },
-                    ((int)options).ToString(CultureInfo.InvariantCulture)
-                )
-                .Dispose();
+                    }
+
+                    Assert.Throws<RegexMatchTimeoutException>(
+                        () =>
+                            new Regex(
+                                Pattern,
+                                (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                            )
+                                .Match(input)
+                    );
+                    Assert.Throws<RegexMatchTimeoutException>(
+                        () =>
+                            new Regex(
+                                Pattern,
+                                (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                            )
+                                .IsMatch(input)
+                    );
+                    Assert.Throws<RegexMatchTimeoutException>(
+                        () =>
+                            new Regex(
+                                Pattern,
+                                (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                            )
+                                .Matches(input).Count
+                    );
+
+                    Assert.Throws<RegexMatchTimeoutException>(
+                        () =>
+                            Regex.Match(
+                                input,
+                                Pattern,
+                                (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                            )
+                    );
+                    Assert.Throws<RegexMatchTimeoutException>(
+                        () =>
+                            Regex.IsMatch(
+                                input,
+                                Pattern,
+                                (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                            )
+                    );
+                    Assert.Throws<RegexMatchTimeoutException>(
+                        () =>
+                            Regex.Matches(
+                                input,
+                                Pattern,
+                                (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                            ).Count
+                    );
+                },
+                ((int)options).ToString(CultureInfo.InvariantCulture)
+            ).Dispose();
         }
 
         [Theory]
@@ -3272,29 +3257,28 @@ namespace System.Text.RegularExpressions.Tests
         public void Match_ExcessPrefix(RegexOptions options)
         {
             RemoteExecutor.Invoke(
-                    optionsString =>
+                optionsString =>
+                {
+                    var options = (RegexOptions)Enum.Parse(typeof(RegexOptions), optionsString);
+
+                    // Should not throw out of memory
+
+                    // Repeaters
+                    Assert.False(Regex.IsMatch("a", @"a{2147483647,}", options));
+                    Assert.False(Regex.IsMatch("a", @"a{50,}", options)); // cutoff for Boyer-Moore prefix in debug
+                    Assert.False(Regex.IsMatch("a", @"a{51,}", options));
+                    Assert.False(Regex.IsMatch("a", @"a{50_000,}", options)); // cutoff for Boyer-Moore prefix in release
+                    Assert.False(Regex.IsMatch("a", @"a{50_001,}", options));
+
+                    // Multis
+                    foreach (int length in new[] { 50, 51, 50_000, 50_001, char.MaxValue + 1 }) // based on knowledge of cut-offs used in Boyer-Moore
                     {
-                        var options = (RegexOptions)Enum.Parse(typeof(RegexOptions), optionsString);
-
-                        // Should not throw out of memory
-
-                        // Repeaters
-                        Assert.False(Regex.IsMatch("a", @"a{2147483647,}", options));
-                        Assert.False(Regex.IsMatch("a", @"a{50,}", options)); // cutoff for Boyer-Moore prefix in debug
-                        Assert.False(Regex.IsMatch("a", @"a{51,}", options));
-                        Assert.False(Regex.IsMatch("a", @"a{50_000,}", options)); // cutoff for Boyer-Moore prefix in release
-                        Assert.False(Regex.IsMatch("a", @"a{50_001,}", options));
-
-                        // Multis
-                        foreach (int length in new[] { 50, 51, 50_000, 50_001, char.MaxValue + 1 }) // based on knowledge of cut-offs used in Boyer-Moore
-                        {
-                            string s = "bcd" + new string('a', length) + "efg";
-                            Assert.True(Regex.IsMatch(s, @$"a{{{length}}}", options));
-                        }
-                    },
-                    options.ToString()
-                )
-                .Dispose();
+                        string s = "bcd" + new string('a', length) + "efg";
+                        Assert.True(Regex.IsMatch(s, @$"a{{{length}}}", options));
+                    }
+                },
+                options.ToString()
+            ).Dispose();
         }
 
         [Fact]

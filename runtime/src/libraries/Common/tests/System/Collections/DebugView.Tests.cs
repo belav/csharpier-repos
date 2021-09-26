@@ -103,11 +103,12 @@ namespace System.Collections.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 obj
             );
-            PropertyInfo itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                    == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(
+                    pr =>
+                        pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                        == DebuggerBrowsableState.RootHidden
+                );
             Array items = itemProperty.GetValue(info.Instance) as Array;
             Assert.Equal((obj as IEnumerable).Cast<object>().ToArray(), items.Cast<object>());
         }

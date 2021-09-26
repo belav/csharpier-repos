@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             query = new SelectExpressionProjectionApplyingExpressionVisitor().Visit(query);
             query = new CollectionJoinApplyingExpressionVisitor(
                 (RelationalQueryCompilationContext)QueryCompilationContext
-            ).Visit(query);
+            )
+                .Visit(query);
 #if DEBUG
             // TODO: 24460 blocks from enabling this
             //query = new TableAliasVerifyingExpressionVisitor().Visit(query);
@@ -61,10 +62,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             query = new SqlExpressionSimplifyingExpressionVisitor(
                 RelationalDependencies.SqlExpressionFactory,
                 _useRelationalNulls
-            ).Visit(query);
+            )
+                .Visit(query);
             query = new RelationalValueConverterCompensatingExpressionVisitor(
                 RelationalDependencies.SqlExpressionFactory
-            ).Visit(query);
+            )
+                .Visit(query);
 
 #pragma warning disable 618
             query = OptimizeSqlExpression(query);

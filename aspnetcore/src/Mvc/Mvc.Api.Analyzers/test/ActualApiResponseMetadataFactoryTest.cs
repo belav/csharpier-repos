@@ -25,8 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             // Arrange
             var compilation = await GetCompilation("GetDefaultStatusCodeTest");
             var attribute = compilation.GetTypeByMetadataName(
-                    typeof(TestActionResultUsingStatusCodesConstants).FullName
-                )
+                typeof(TestActionResultUsingStatusCodesConstants).FullName
+            )
                 .GetAttributes()[0];
 
             // Act
@@ -42,8 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             // Arrange
             var compilation = await GetCompilation("GetDefaultStatusCodeTest");
             var attribute = compilation.GetTypeByMetadataName(
-                    typeof(TestActionResultUsingHttpStatusCodeCast).FullName
-                )
+                typeof(TestActionResultUsingHttpStatusCodeCast).FullName
+            )
                 .GetAttributes()[0];
 
             // Act

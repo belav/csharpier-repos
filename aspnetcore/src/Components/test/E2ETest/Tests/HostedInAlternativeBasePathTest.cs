@@ -18,9 +18,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             ITestOutputHelper output
         ) : base(browserFixture, serverFixture, output)
         {
-            serverFixture.AdditionalArguments.AddRange(
-                new[] { "--UseAlternativeBasePath", "true" }
-            );
+            serverFixture.AdditionalArguments
+                .AddRange(new[] { "--UseAlternativeBasePath", "true" });
             serverFixture.BuildWebHostMethod = HostedInAspNet.Server.Program.BuildWebHost;
             serverFixture.Environment = AspNetEnvironment.Development;
         }

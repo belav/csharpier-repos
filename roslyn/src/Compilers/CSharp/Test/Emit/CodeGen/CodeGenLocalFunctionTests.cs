@@ -5904,9 +5904,9 @@ class C
             CreateCompilation(source, parseOptions: TestOptions.Regular9).VerifyDiagnostics();
 
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular9.WithPreprocessorSymbols("DEBUG")
-                )
+                source,
+                parseOptions: TestOptions.Regular9.WithPreprocessorSymbols("DEBUG")
+            )
                 .VerifyDiagnostics();
         }
 
@@ -5931,19 +5931,18 @@ class C
     }
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular9)
-                .VerifyDiagnostics(
-                    // (11,21): warning CS8321: The local function 'local1' is declared but never used
-                    //         static void local1() // 1
-                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local1")
-                        .WithArguments("local1")
-                        .WithLocation(11, 21)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular9).VerifyDiagnostics(
+                // (11,21): warning CS8321: The local function 'local1' is declared but never used
+                //         static void local1() // 1
+                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local1")
+                    .WithArguments("local1")
+                    .WithLocation(11, 21)
+            );
 
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular9.WithPreprocessorSymbols("DEBUG")
-                )
+                source,
+                parseOptions: TestOptions.Regular9.WithPreprocessorSymbols("DEBUG")
+            )
                 .VerifyDiagnostics();
         }
 
@@ -6120,11 +6119,11 @@ class C
             var semanticModel = comp.GetSemanticModel(syntaxTree);
 
             var localFunction = semanticModel.GetDeclaredSymbol(
-                    syntaxTree.GetRoot()
-                        .DescendantNodes()
-                        .OfType<LocalFunctionStatementSyntax>()
-                        .Single()
-                )
+                syntaxTree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<LocalFunctionStatementSyntax>()
+                    .Single()
+            )
                 .GetSymbol<LocalFunctionSymbol>();
 
             Assert.Equal(
@@ -6208,11 +6207,11 @@ class C
             var semanticModel = comp.GetSemanticModel(syntaxTree);
 
             var localFunction = semanticModel.GetDeclaredSymbol(
-                    syntaxTree.GetRoot()
-                        .DescendantNodes()
-                        .OfType<LocalFunctionStatementSyntax>()
-                        .Single()
-                )
+                syntaxTree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<LocalFunctionStatementSyntax>()
+                    .Single()
+            )
                 .GetSymbol<LocalFunctionSymbol>();
 
             Assert.Equal(

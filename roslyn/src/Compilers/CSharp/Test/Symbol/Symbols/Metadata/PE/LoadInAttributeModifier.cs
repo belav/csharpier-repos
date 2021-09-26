@@ -43,20 +43,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M(D d) => d(0);
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (4,20): error CS0570: 'D.Invoke(in int)' is not supported by the language
-                    //     void M(D d) => d(0);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "d(0)")
-                        .WithArguments("D.Invoke(in int)")
-                        .WithLocation(4, 20)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (4,20): error CS0570: 'D.Invoke(in int)' is not supported by the language
+                //     void M(D d) => d(0);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "d(0)")
+                    .WithArguments("D.Invoke(in int)")
+                    .WithLocation(4, 20)
+            );
         }
 
         [Fact]
@@ -97,20 +96,19 @@ class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M(D d) => d(0);
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (4,20): error CS0570: 'D.Invoke(in int)' is not supported by the language
-                    //     void M(D d) => d(0);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "d(0)")
-                        .WithArguments("D.Invoke(in int)")
-                        .WithLocation(4, 20)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (4,20): error CS0570: 'D.Invoke(in int)' is not supported by the language
+                //     void M(D d) => d(0);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "d(0)")
+                    .WithArguments("D.Invoke(in int)")
+                    .WithLocation(4, 20)
+            );
         }
 
         [Fact]
@@ -140,20 +138,19 @@ class Test
             );
 
             var c = CreateCompilation(
-                    @"
+                @"
 class Test
 {
     ref readonly int M(D d) => ref d();
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (4,36): error CS0570: 'D.Invoke()' is not supported by the language
-                    //     ref readonly int M(D d) => ref d();
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "d()")
-                        .WithArguments("D.Invoke()")
-                        .WithLocation(4, 36)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (4,36): error CS0570: 'D.Invoke()' is not supported by the language
+                //     ref readonly int M(D d) => ref d();
+                Diagnostic(ErrorCode.ERR_BindToBogus, "d()")
+                    .WithArguments("D.Invoke()")
+                    .WithLocation(4, 36)
+            );
         }
 
         [Fact]
@@ -183,20 +180,19 @@ class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     ref readonly int M(D d) => ref d();
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (4,36): error CS0570: 'D.Invoke()' is not supported by the language
-                    //     ref readonly int M(D d) => ref d();
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "d()")
-                        .WithArguments("D.Invoke()")
-                        .WithLocation(4, 36)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (4,36): error CS0570: 'D.Invoke()' is not supported by the language
+                //     ref readonly int M(D d) => ref d();
+                Diagnostic(ErrorCode.ERR_BindToBogus, "d()")
+                    .WithArguments("D.Invoke()")
+                    .WithLocation(4, 36)
+            );
         }
 
         [Fact]
@@ -234,20 +230,19 @@ class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public ref readonly int M(RefTest obj) => ref obj.X;
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (4,55): error CS0570: 'RefTest.X' is not supported by the language
-                    //     public ref readonly int M(RefTest obj) => ref obj.X;
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "X")
-                        .WithArguments("RefTest.X")
-                        .WithLocation(4, 55)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (4,55): error CS0570: 'RefTest.X' is not supported by the language
+                //     public ref readonly int M(RefTest obj) => ref obj.X;
+                Diagnostic(ErrorCode.ERR_BindToBogus, "X")
+                    .WithArguments("RefTest.X")
+                    .WithLocation(4, 55)
+            );
         }
 
         [Fact]
@@ -285,20 +280,19 @@ class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public ref readonly int M(RefTest obj) => ref obj.X;
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (4,55): error CS0570: 'RefTest.X' is not supported by the language
-                    //     public ref readonly int M(RefTest obj) => ref obj.X;
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "X")
-                        .WithArguments("RefTest.X")
-                        .WithLocation(4, 55)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (4,55): error CS0570: 'RefTest.X' is not supported by the language
+                //     public ref readonly int M(RefTest obj) => ref obj.X;
+                Diagnostic(ErrorCode.ERR_BindToBogus, "X")
+                    .WithArguments("RefTest.X")
+                    .WithLocation(4, 55)
+            );
         }
 
         [Fact]
@@ -329,20 +323,19 @@ class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public int M(RefTest obj) => obj.M(0);
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (4,38): error CS0570: 'RefTest.M(in int)' is not supported by the language
-                    //     public int M(RefTest obj) => obj.M(0);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("RefTest.M(in int)")
-                        .WithLocation(4, 38)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (4,38): error CS0570: 'RefTest.M(in int)' is not supported by the language
+                //     public int M(RefTest obj) => obj.M(0);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("RefTest.M(in int)")
+                    .WithLocation(4, 38)
+            );
         }
 
         [Fact]
@@ -373,20 +366,19 @@ class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public int M(RefTest obj) => obj.M(0);
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (4,38): error CS0570: 'RefTest.M(in int)' is not supported by the language
-                    //     public int M(RefTest obj) => obj.M(0);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("RefTest.M(in int)")
-                        .WithLocation(4, 38)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (4,38): error CS0570: 'RefTest.M(in int)' is not supported by the language
+                //     public int M(RefTest obj) => obj.M(0);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("RefTest.M(in int)")
+                    .WithLocation(4, 38)
+            );
         }
 
         [Fact]
@@ -462,12 +454,12 @@ Parent
 Parent",
                 symbolValidator: module =>
                 {
-                    var method = module.ContainingAssembly.BoundReferences()
+                    var method = module.ContainingAssembly
+                        .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly.Identity.Equals(
-                                    module.ContainingAssembly.CorLibrary.Identity
-                                )
+                                !assembly.Identity
+                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M");
@@ -535,7 +527,7 @@ Parent",
             );
 
             CreateCompilation(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -544,15 +536,14 @@ class Test
         Console.WriteLine(new Parent().M(0));
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (7,40): error CS0570: 'Parent.M(in int)' is not supported by the language
-                    //         Console.WriteLine(new Parent().M(0));
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("Parent.M(in int)")
-                        .WithLocation(7, 40)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (7,40): error CS0570: 'Parent.M(in int)' is not supported by the language
+                //         Console.WriteLine(new Parent().M(0));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("Parent.M(in int)")
+                    .WithLocation(7, 40)
+            );
 
             var code =
                 @"
@@ -641,12 +632,12 @@ Parent
 Parent",
                 symbolValidator: module =>
                 {
-                    var method = module.ContainingAssembly.BoundReferences()
+                    var method = module.ContainingAssembly
+                        .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly.Identity.Equals(
-                                    module.ContainingAssembly.CorLibrary.Identity
-                                )
+                                !assembly.Identity
+                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M");
@@ -714,7 +705,7 @@ Parent",
             );
 
             CreateCompilation(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -723,15 +714,14 @@ class Test
         Console.WriteLine(new Parent().M(0));
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (7,40): error CS0570: 'Parent.M(in int)' is not supported by the language
-                    //         Console.WriteLine(new Parent().M(0));
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("Parent.M(in int)")
-                        .WithLocation(7, 40)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (7,40): error CS0570: 'Parent.M(in int)' is not supported by the language
+                //         Console.WriteLine(new Parent().M(0));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("Parent.M(in int)")
+                    .WithLocation(7, 40)
+            );
 
             var code =
                 @"
@@ -772,20 +762,19 @@ class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public int M(RefTest obj) => obj.M(0);
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (4,38): error CS0570: 'RefTest.M(in int)' is not supported by the language
-                    //     public int M(RefTest obj) => obj.M(0);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("RefTest.M(in int)")
-                        .WithLocation(4, 38)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (4,38): error CS0570: 'RefTest.M(in int)' is not supported by the language
+                //     public int M(RefTest obj) => obj.M(0);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("RefTest.M(in int)")
+                    .WithLocation(4, 38)
+            );
         }
 
         [Fact]
@@ -813,20 +802,19 @@ class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public int M(RefTest obj) => obj.M(0);
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (4,38): error CS0570: 'RefTest.M(in int)' is not supported by the language
-                    //     public int M(RefTest obj) => obj.M(0);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("RefTest.M(in int)")
-                        .WithLocation(4, 38)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (4,38): error CS0570: 'RefTest.M(in int)' is not supported by the language
+                //     public int M(RefTest obj) => obj.M(0);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("RefTest.M(in int)")
+                    .WithLocation(4, 38)
+            );
         }
 
         [Fact]
@@ -868,7 +856,7 @@ class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -876,20 +864,19 @@ public class Test
         obj[0] = obj[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 9),
-                    // (6,18): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 18)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 9),
+                // (6,18): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 18)
+            );
         }
 
         [Fact]
@@ -924,7 +911,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -932,15 +919,14 @@ public class Test
         int x = obj[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,17): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         int x = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 17)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,17): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         int x = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 17)
+            );
         }
 
         [Fact]
@@ -975,7 +961,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -983,15 +969,14 @@ public class Test
         obj[0] = 0;
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = 0;
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 9)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = 0;
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -1033,7 +1018,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -1041,20 +1026,19 @@ public class Test
         obj[0] = obj[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 9),
-                    // (6,18): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 18)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 9),
+                // (6,18): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 18)
+            );
         }
 
         [Fact]
@@ -1089,7 +1073,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -1097,15 +1081,14 @@ public class Test
         int x = obj[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,17): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         int x = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 17)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,17): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         int x = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 17)
+            );
         }
 
         [Fact]
@@ -1140,7 +1123,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -1148,15 +1131,14 @@ public class Test
         obj[0] = 0;
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = 0;
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 9)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = 0;
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -1206,7 +1188,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -1214,20 +1196,19 @@ public class Test
         obj[0] = obj[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 9),
-                    // (6,18): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 18)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 9),
+                // (6,18): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 18)
+            );
         }
 
         [Fact]
@@ -1266,7 +1247,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -1274,15 +1255,14 @@ public class Test
         int x = obj[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,17): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         int x = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 17)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,17): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         int x = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 17)
+            );
         }
 
         [Fact]
@@ -1321,7 +1301,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -1329,15 +1309,14 @@ public class Test
         obj[0] = 0;
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = 0;
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 9)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = 0;
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -1387,7 +1366,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -1395,20 +1374,19 @@ public class Test
         obj[0] = obj[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 9),
-                    // (6,18): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 18)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 9),
+                // (6,18): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 18)
+            );
         }
 
         [Fact]
@@ -1447,7 +1425,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -1455,15 +1433,14 @@ public class Test
         int x = obj[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,17): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         int x = obj[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 17)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,17): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         int x = obj[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[1]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 17)
+            );
         }
 
         [Fact]
@@ -1502,7 +1479,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -1510,15 +1487,14 @@ public class Test
         obj[0] = 0;
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
-                    //         obj[0] = 0;
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
-                        .WithArguments("RefTest.this[in int]")
-                        .WithLocation(6, 9)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,9): error CS0570: 'RefTest.this[in int]' is not supported by the language
+                //         obj[0] = 0;
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
+                    .WithArguments("RefTest.this[in int]")
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -1661,12 +1637,12 @@ Parent Get
 Parent Set",
                 symbolValidator: module =>
                 {
-                    var indexer = module.ContainingAssembly.BoundReferences()
+                    var indexer = module.ContainingAssembly
+                        .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly.Identity.Equals(
-                                    module.ContainingAssembly.CorLibrary.Identity
-                                )
+                                !assembly.Identity
+                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");
@@ -1796,7 +1772,7 @@ Parent Set",
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public static void Main()
@@ -1805,20 +1781,19 @@ class Test
         parent[0] = parent[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (7,9): error CS0570: 'Parent.this[in int]' is not supported by the language
-                    //         parent[0] = parent[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "parent[0]")
-                        .WithArguments("Parent.this[in int]")
-                        .WithLocation(7, 9),
-                    // (7,21): error CS0570: 'Parent.this[in int]' is not supported by the language
-                    //         parent[0] = parent[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "parent[1]")
-                        .WithArguments("Parent.this[in int]")
-                        .WithLocation(7, 21)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (7,9): error CS0570: 'Parent.this[in int]' is not supported by the language
+                //         parent[0] = parent[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "parent[0]")
+                    .WithArguments("Parent.this[in int]")
+                    .WithLocation(7, 9),
+                // (7,21): error CS0570: 'Parent.this[in int]' is not supported by the language
+                //         parent[0] = parent[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "parent[1]")
+                    .WithArguments("Parent.this[in int]")
+                    .WithLocation(7, 21)
+            );
 
             var code =
                 @"
@@ -1949,12 +1924,12 @@ Parent Get
 Parent Get",
                 symbolValidator: module =>
                 {
-                    var indexer = module.ContainingAssembly.BoundReferences()
+                    var indexer = module.ContainingAssembly
+                        .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly.Identity.Equals(
-                                    module.ContainingAssembly.CorLibrary.Identity
-                                )
+                                !assembly.Identity
+                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");
@@ -2055,7 +2030,7 @@ Parent Get",
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public static void Main()
@@ -2064,15 +2039,14 @@ class Test
         int x = parent[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (7,17): error CS0570: 'Parent.this[in int]' is not supported by the language
-                    //         int x = parent[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "parent[1]")
-                        .WithArguments("Parent.this[in int]")
-                        .WithLocation(7, 17)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (7,17): error CS0570: 'Parent.this[in int]' is not supported by the language
+                //         int x = parent[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "parent[1]")
+                    .WithArguments("Parent.this[in int]")
+                    .WithLocation(7, 17)
+            );
 
             var code =
                 @"
@@ -2187,12 +2161,12 @@ Parent Set
 Parent Set",
                 symbolValidator: module =>
                 {
-                    var indexer = module.ContainingAssembly.BoundReferences()
+                    var indexer = module.ContainingAssembly
+                        .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly.Identity.Equals(
-                                    module.ContainingAssembly.CorLibrary.Identity
-                                )
+                                !assembly.Identity
+                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");
@@ -2283,7 +2257,7 @@ Parent Set",
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public static void Main()
@@ -2292,15 +2266,14 @@ class Test
         parent[0] = 0;
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (7,9): error CS0570: 'Parent.this[in int]' is not supported by the language
-                    //         parent[0] = 0;
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "parent[0]")
-                        .WithArguments("Parent.this[in int]")
-                        .WithLocation(7, 9)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (7,9): error CS0570: 'Parent.this[in int]' is not supported by the language
+                //         parent[0] = 0;
+                Diagnostic(ErrorCode.ERR_BindToBogus, "parent[0]")
+                    .WithArguments("Parent.this[in int]")
+                    .WithLocation(7, 9)
+            );
 
             var code =
                 @"
@@ -2456,12 +2429,12 @@ Parent Get
 Parent Set",
                 symbolValidator: module =>
                 {
-                    var indexer = module.ContainingAssembly.BoundReferences()
+                    var indexer = module.ContainingAssembly
+                        .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly.Identity.Equals(
-                                    module.ContainingAssembly.CorLibrary.Identity
-                                )
+                                !assembly.Identity
+                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");
@@ -2591,7 +2564,7 @@ Parent Set",
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public static void Main()
@@ -2600,20 +2573,19 @@ class Test
         parent[0] = parent[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (7,9): error CS0570: 'Parent.this[in int]' is not supported by the language
-                    //         parent[0] = parent[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "parent[0]")
-                        .WithArguments("Parent.this[in int]")
-                        .WithLocation(7, 9),
-                    // (7,21): error CS0570: 'Parent.this[in int]' is not supported by the language
-                    //         parent[0] = parent[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "parent[1]")
-                        .WithArguments("Parent.this[in int]")
-                        .WithLocation(7, 21)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (7,9): error CS0570: 'Parent.this[in int]' is not supported by the language
+                //         parent[0] = parent[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "parent[0]")
+                    .WithArguments("Parent.this[in int]")
+                    .WithLocation(7, 9),
+                // (7,21): error CS0570: 'Parent.this[in int]' is not supported by the language
+                //         parent[0] = parent[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "parent[1]")
+                    .WithArguments("Parent.this[in int]")
+                    .WithLocation(7, 21)
+            );
 
             var code =
                 @"
@@ -2744,12 +2716,12 @@ Parent Get
 Parent Get",
                 symbolValidator: module =>
                 {
-                    var indexer = module.ContainingAssembly.BoundReferences()
+                    var indexer = module.ContainingAssembly
+                        .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly.Identity.Equals(
-                                    module.ContainingAssembly.CorLibrary.Identity
-                                )
+                                !assembly.Identity
+                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");
@@ -2850,7 +2822,7 @@ Parent Get",
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public static void Main()
@@ -2859,15 +2831,14 @@ class Test
         int x = parent[1];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (7,17): error CS0570: 'Parent.this[in int]' is not supported by the language
-                    //         int x = parent[1];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "parent[1]")
-                        .WithArguments("Parent.this[in int]")
-                        .WithLocation(7, 17)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (7,17): error CS0570: 'Parent.this[in int]' is not supported by the language
+                //         int x = parent[1];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "parent[1]")
+                    .WithArguments("Parent.this[in int]")
+                    .WithLocation(7, 17)
+            );
 
             var code =
                 @"
@@ -2982,12 +2953,12 @@ Parent Set
 Parent Set",
                 symbolValidator: module =>
                 {
-                    var indexer = module.ContainingAssembly.BoundReferences()
+                    var indexer = module.ContainingAssembly
+                        .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly.Identity.Equals(
-                                    module.ContainingAssembly.CorLibrary.Identity
-                                )
+                                !assembly.Identity
+                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");
@@ -3078,7 +3049,7 @@ Parent Set",
             );
 
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     public static void Main()
@@ -3087,15 +3058,14 @@ class Test
         parent[0] = 0;
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (7,9): error CS0570: 'Parent.this[in int]' is not supported by the language
-                    //         parent[0] = 0;
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "parent[0]")
-                        .WithArguments("Parent.this[in int]")
-                        .WithLocation(7, 9)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (7,9): error CS0570: 'Parent.this[in int]' is not supported by the language
+                //         parent[0] = 0;
+                Diagnostic(ErrorCode.ERR_BindToBogus, "parent[0]")
+                    .WithArguments("Parent.this[in int]")
+                    .WithLocation(7, 9)
+            );
 
             var code =
                 @"
@@ -3148,7 +3118,7 @@ class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -3156,15 +3126,14 @@ public class Test
         ref readonly int x = ref obj[0];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,34): error CS0570: 'RefTest.this[int]' is not supported by the language
-                    //         ref readonly int x = ref obj[0];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
-                        .WithArguments("RefTest.this[int]")
-                        .WithLocation(6, 34)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,34): error CS0570: 'RefTest.this[int]' is not supported by the language
+                //         ref readonly int x = ref obj[0];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
+                    .WithArguments("RefTest.this[int]")
+                    .WithLocation(6, 34)
+            );
         }
 
         [Fact]
@@ -3204,7 +3173,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -3212,15 +3181,14 @@ public class Test
         ref readonly int x = ref obj[0];
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,34): error CS0570: 'RefTest.this[int]' is not supported by the language
-                    //         ref readonly int x = ref obj[0];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
-                        .WithArguments("RefTest.this[int]")
-                        .WithLocation(6, 34)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,34): error CS0570: 'RefTest.this[int]' is not supported by the language
+                //         ref readonly int x = ref obj[0];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[0]")
+                    .WithArguments("RefTest.this[int]")
+                    .WithLocation(6, 34)
+            );
         }
 
         [Fact]
@@ -3252,7 +3220,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -3260,15 +3228,14 @@ public class Test
         ref readonly int x = ref obj.M();
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,38): error CS0570: 'RefTest.M()' is not supported by the language
-                    //         ref readonly int x = ref obj.M();
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("RefTest.M()")
-                        .WithLocation(6, 38)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,38): error CS0570: 'RefTest.M()' is not supported by the language
+                //         ref readonly int x = ref obj.M();
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("RefTest.M()")
+                    .WithLocation(6, 38)
+            );
         }
 
         [Fact]
@@ -3300,7 +3267,7 @@ public class Test
             );
 
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public void M(RefTest obj)
@@ -3308,15 +3275,14 @@ public class Test
         ref readonly int x = ref obj.M();
     }
 }",
-                    references: new[] { reference }
-                )
-                .VerifyDiagnostics(
-                    // (6,38): error CS0570: 'RefTest.M()' is not supported by the language
-                    //         ref readonly int x = ref obj.M();
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("RefTest.M()")
-                        .WithLocation(6, 38)
-                );
+                references: new[] { reference }
+            ).VerifyDiagnostics(
+                // (6,38): error CS0570: 'RefTest.M()' is not supported by the language
+                //         ref readonly int x = ref obj.M();
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("RefTest.M()")
+                    .WithLocation(6, 38)
+            );
         }
     }
 }

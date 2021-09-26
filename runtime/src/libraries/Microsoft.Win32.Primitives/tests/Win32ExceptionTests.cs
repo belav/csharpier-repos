@@ -62,14 +62,15 @@ namespace System.ComponentModel.Tests
         {
             int error = 5;
             string message = "This is an error message.";
-            string toStringStart = string.Format(
-                CultureInfo.InvariantCulture,
-                "{0} ({1})",
-                typeof(Win32Exception).ToString(),
-                PlatformDetection.IsNetFramework
-                  ? $"0x{E_FAIL:X8}"
-                  : error.ToString(CultureInfo.InvariantCulture)
-            );
+            string toStringStart = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "{0} ({1})",
+                    typeof(Win32Exception).ToString(),
+                    PlatformDetection.IsNetFramework
+                      ? $"0x{E_FAIL:X8}"
+                      : error.ToString(CultureInfo.InvariantCulture)
+                );
 
             Exception innerException = new FormatException();
 

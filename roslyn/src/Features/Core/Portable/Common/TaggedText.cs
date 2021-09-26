@@ -296,10 +296,11 @@ namespace Microsoft.CodeAnalysis
             bool includeLeftToRightMarker
         )
         {
-            return string.Join(
-                string.Empty,
-                parts.Select(p => p.ToVisibleDisplayString(includeLeftToRightMarker))
-            );
+            return string
+                .Join(
+                    string.Empty,
+                    parts.Select(p => p.ToVisibleDisplayString(includeLeftToRightMarker))
+                );
         }
 
         public static string GetFullText(this IEnumerable<TaggedText> parts) =>

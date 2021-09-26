@@ -586,10 +586,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             MarkupTestFile.GetSpans(candidate, out candidate, out ImmutableArray<TextSpan> spans);
 
             var match = PatternMatcher.CreatePatternMatcher(
-                    pattern,
-                    includeMatchedSpans: true,
-                    allowFuzzyMatching: false
-                )
+                pattern,
+                includeMatchedSpans: true,
+                allowFuzzyMatching: false
+            )
                 .GetFirstMatch(candidate);
 
             if (match == null)

@@ -38,8 +38,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public TextChangeMerger(Document document)
         {
             _oldDocument = document;
-            _differenceService =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IDocumentTextDifferencingService>();
+            _differenceService = document.Project.Solution.Workspace.Services
+                .GetRequiredService<IDocumentTextDifferencingService>();
         }
 
         /// <summary>
@@ -55,10 +55,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
             cancellationToken.ThrowIfCancellationRequested();
             var currentChanges = await _differenceService.GetTextChangesAsync(
-                    _oldDocument,
-                    newDocument,
-                    cancellationToken
-                )
+                _oldDocument,
+                newDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (AllChangesCanBeApplied(_totalChangesIntervalTree, currentChanges))

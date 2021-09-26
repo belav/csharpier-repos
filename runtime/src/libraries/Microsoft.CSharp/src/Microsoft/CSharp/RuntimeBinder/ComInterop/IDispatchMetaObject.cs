@@ -77,12 +77,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 Expression.Constant(method),
                 Expression.Property(
                     Helpers.Convert(Expression, typeof(IDispatchComObject)),
-                    typeof(IDispatchComObject).GetProperty(
-                        nameof(IDispatchComObject.DispatchObject)
-                    )
+                    typeof(IDispatchComObject)
+                        .GetProperty(nameof(IDispatchComObject.DispatchObject))
                 ),
                 method
-            ).Invoke();
+            )
+                .Invoke();
         }
 
         [UnconditionalSuppressMessage(
@@ -148,9 +148,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
             return new DynamicMetaObject(
                 Expression.Call(
-                    typeof(ComRuntimeHelpers).GetMethod(
-                        nameof(ComRuntimeHelpers.CreateDispCallable)
-                    ),
+                    typeof(ComRuntimeHelpers)
+                        .GetMethod(nameof(ComRuntimeHelpers.CreateDispCallable)),
                     Helpers.Convert(Expression, typeof(IDispatchComObject)),
                     Expression.Constant(method)
                 ),
@@ -276,9 +275,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 BindingRestrictions restrictions = IDispatchRestriction();
                 Expression dispatch = Expression.Property(
                     Helpers.Convert(Expression, typeof(IDispatchComObject)),
-                    typeof(IDispatchComObject).GetProperty(
-                        nameof(IDispatchComObject.DispatchObject)
-                    )
+                    typeof(IDispatchComObject)
+                        .GetProperty(nameof(IDispatchComObject.DispatchObject))
                 );
 
                 DynamicMetaObject result = new ComInvokeBinder(
@@ -289,7 +287,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     Expression.Constant(method),
                     dispatch,
                     method
-                ).Invoke();
+                )
+                    .Invoke();
 
                 // Make sure to return the value; some languages need it.
                 return new DynamicMetaObject(
@@ -318,7 +317,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 // Drop the event property set.
                 return new DynamicMetaObject(
                     Expression.Constant(null),
-                    value.Restrictions.Merge(IDispatchRestriction())
+                    value.Restrictions
+                        .Merge(IDispatchRestriction())
                         .Merge(
                             BindingRestrictions.GetTypeRestriction(
                                 value.Expression,
@@ -347,9 +347,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                         Expression.Equal(
                             Expression.Property(
                                 Helpers.Convert(expr, typeof(IDispatchComObject)),
-                                typeof(IDispatchComObject).GetProperty(
-                                    nameof(IDispatchComObject.ComTypeDesc)
-                                )
+                                typeof(IDispatchComObject)
+                                    .GetProperty(nameof(IDispatchComObject.ComTypeDesc))
                             ),
                             Expression.Constant(typeDesc)
                         )

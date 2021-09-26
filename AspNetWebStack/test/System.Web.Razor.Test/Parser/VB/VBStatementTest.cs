@@ -46,8 +46,8 @@ namespace System.Web.Razor.Test.Parser.VB
                     Factory.CodeTransition(),
                     Factory.MetaCode("Inherits ").Accepts(AcceptedCharacters.None),
                     Factory.Code(
-                            "System.Web.Mvc.WebViewPage(Of IEnumerable(Of MvcApplication2.Models.RegisterModel))"
-                        )
+                        "System.Web.Mvc.WebViewPage(Of IEnumerable(Of MvcApplication2.Models.RegisterModel))"
+                    )
                         .AsBaseType(
                             "System.Web.Mvc.WebViewPage(Of IEnumerable(Of MvcApplication2.Models.RegisterModel))"
                         )
@@ -182,8 +182,8 @@ namespace System.Web.Razor.Test.Parser.VB
                 new StatementBlock(
                     Factory.CodeTransition(),
                     Factory.Code(
-                            "If True Then\r\n    foo()\r\nElseIf False Then\r\n    bar()\r\nElse\r\n    baz()\r\nEnd If"
-                        )
+                        "If True Then\r\n    foo()\r\nElseIf False Then\r\n    bar()\r\nElse\r\n    baz()\r\nEnd If"
+                    )
                         .AsStatement()
                         .Accepts(AcceptedCharacters.None)
                 )
@@ -212,8 +212,8 @@ namespace System.Web.Razor.Test.Parser.VB
                 new StatementBlock(
                     Factory.CodeTransition(),
                     Factory.Code(
-                            "Select Case foo\r\n    Case 1\r\n        foo()\r\n    Case 2\r\n        bar()\r\n    Case Else\r\n        baz()\r\nEnd Select"
-                        )
+                        "Select Case foo\r\n    Case 1\r\n        foo()\r\n    Case 2\r\n        bar()\r\n    Case Else\r\n        baz()\r\nEnd Select"
+                    )
                         .AsStatement()
                         .Accepts(AcceptedCharacters.None)
                 )
@@ -258,8 +258,8 @@ namespace System.Web.Razor.Test.Parser.VB
                 new StatementBlock(
                     Factory.CodeTransition(),
                     Factory.Code(
-                            "Try\r\n    foo()\r\nCatch ex as Exception\r\n    bar()\r\nFinally\r\n    baz()\r\nEnd Try"
-                        )
+                        "Try\r\n    foo()\r\nCatch ex as Exception\r\n    bar()\r\nFinally\r\n    baz()\r\nEnd Try"
+                    )
                         .AsStatement()
                         .Accepts(AcceptedCharacters.None)
                 )

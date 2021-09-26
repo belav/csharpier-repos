@@ -196,10 +196,8 @@ namespace System.Xml.Schema
 
         private void Compile()
         {
-            _schema!.SchemaTypes.Insert(
-                DatatypeImplementation.QnAnyType,
-                XmlSchemaComplexType.AnyType
-            );
+            _schema!.SchemaTypes
+                .Insert(DatatypeImplementation.QnAnyType, XmlSchemaComplexType.AnyType);
 
             foreach (XmlSchemaSubstitutionGroupV1Compat? substitutionGroup in _examplars.Values)
             {
@@ -892,10 +890,8 @@ namespace System.Xml.Schema
                 {
                     if (!decl.ProhibitedAttributes.ContainsKey(attribute.QualifiedName))
                     {
-                        decl.ProhibitedAttributes.Add(
-                            attribute.QualifiedName,
-                            attribute.QualifiedName
-                        );
+                        decl.ProhibitedAttributes
+                            .Add(attribute.QualifiedName, attribute.QualifiedName);
                     }
                 }
                 else
@@ -2212,10 +2208,8 @@ namespace System.Xml.Schema
                         {
                             if (attributeGroup.AttributeUses[attributeValue!.QualifiedName] == null)
                             {
-                                attributeGroup.AttributeUses.Add(
-                                    attributeValue.QualifiedName,
-                                    attributeValue
-                                );
+                                attributeGroup.AttributeUses
+                                    .Add(attributeValue.QualifiedName, attributeValue);
                             }
                             else
                             {
@@ -2323,10 +2317,8 @@ namespace System.Xml.Schema
                             {
                                 if (derivedType.AttributeUses[attributeValue.QualifiedName] == null)
                                 {
-                                    derivedType.AttributeUses.Add(
-                                        attributeValue.QualifiedName,
-                                        attributeValue
-                                    );
+                                    derivedType.AttributeUses
+                                        .Add(attributeValue.QualifiedName, attributeValue);
                                 }
                                 else
                                 {
@@ -2390,10 +2382,8 @@ namespace System.Xml.Schema
                         }
                         else
                         {
-                            derivedType.AttributeUses.Add(
-                                attributeBase.QualifiedName,
-                                attributeBase
-                            );
+                            derivedType.AttributeUses
+                                .Add(attributeBase.QualifiedName, attributeBase);
                         }
                     }
                 }
@@ -2424,10 +2414,8 @@ namespace System.Xml.Schema
                             ];
                         if (attribute == null)
                         {
-                            derivedType.AttributeUses.Add(
-                                attributeBase.QualifiedName,
-                                attributeBase
-                            );
+                            derivedType.AttributeUses
+                                .Add(attributeBase.QualifiedName, attributeBase);
                         }
                         else
                         {
@@ -2600,12 +2588,13 @@ namespace System.Xml.Schema
                             {
                                 decl.Presence = SchemaDeclBase.Use.Fixed;
                                 decl.DefaultValueRaw = decl.DefaultValueExpanded = a.FixedValue;
-                                decl.DefaultValueTyped = decl.Datatype.ParseValue(
-                                    decl.DefaultValueRaw,
-                                    NameTable,
-                                    new SchemaNamespaceManager(xa),
-                                    true
-                                );
+                                decl.DefaultValueTyped = decl.Datatype
+                                    .ParseValue(
+                                        decl.DefaultValueRaw,
+                                        NameTable,
+                                        new SchemaNamespaceManager(xa),
+                                        true
+                                    );
                             }
                         }
                         else if (a.DefaultValue != null)
@@ -2614,12 +2603,13 @@ namespace System.Xml.Schema
                             {
                                 decl.Presence = SchemaDeclBase.Use.Default;
                                 decl.DefaultValueRaw = decl.DefaultValueExpanded = a.DefaultValue;
-                                decl.DefaultValueTyped = decl.Datatype.ParseValue(
-                                    decl.DefaultValueRaw,
-                                    NameTable,
-                                    new SchemaNamespaceManager(xa),
-                                    true
-                                );
+                                decl.DefaultValueTyped = decl.Datatype
+                                    .ParseValue(
+                                        decl.DefaultValueRaw,
+                                        NameTable,
+                                        new SchemaNamespaceManager(xa),
+                                        true
+                                    );
                             }
                         }
                     }
@@ -2678,12 +2668,13 @@ namespace System.Xml.Schema
                     }
                     if (decl.Datatype != null)
                     {
-                        decl.DefaultValueTyped = decl.Datatype.ParseValue(
-                            decl.DefaultValueRaw,
-                            NameTable,
-                            new SchemaNamespaceManager(xa),
-                            true
-                        );
+                        decl.DefaultValueTyped = decl.Datatype
+                            .ParseValue(
+                                decl.DefaultValueRaw,
+                                NameTable,
+                                new SchemaNamespaceManager(xa),
+                                true
+                            );
                     }
                 }
                 else
@@ -2952,12 +2943,13 @@ namespace System.Xml.Schema
                             }
                             if (decl.Datatype != null)
                             {
-                                decl.DefaultValueTyped = decl.Datatype.ParseValue(
-                                    decl.DefaultValueRaw,
-                                    NameTable,
-                                    new SchemaNamespaceManager(xe),
-                                    true
-                                );
+                                decl.DefaultValueTyped = decl.Datatype
+                                    .ParseValue(
+                                        decl.DefaultValueRaw,
+                                        NameTable,
+                                        new SchemaNamespaceManager(xe),
+                                        true
+                                    );
                             }
                         }
                         else if (

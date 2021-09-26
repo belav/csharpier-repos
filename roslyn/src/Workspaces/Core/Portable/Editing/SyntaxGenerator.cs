@@ -981,13 +981,14 @@ namespace Microsoft.CodeAnalysis.Editing
         /// </summary>
         public SyntaxNode Attribute(AttributeData attribute)
         {
-            var args = attribute.ConstructorArguments.Select(
-                    a => this.AttributeArgument(this.TypedConstantExpression(a))
-                )
+            var args = attribute.ConstructorArguments
+                .Select(a => this.AttributeArgument(this.TypedConstantExpression(a)))
                 .Concat(
-                    attribute.NamedArguments.Select(
-                        n => this.AttributeArgument(n.Key, this.TypedConstantExpression(n.Value))
-                    )
+                    attribute.NamedArguments
+                        .Select(
+                            n =>
+                                this.AttributeArgument(n.Key, this.TypedConstantExpression(n.Value))
+                        )
                 )
                 .ToBoxedImmutableArray();
 
@@ -1565,8 +1566,8 @@ namespace Microsoft.CodeAnalysis.Editing
             else
             {
                 return changedNode.WithLeadingTrivia(
-                        node.GetLeadingTrivia().Concat(changedNode.GetLeadingTrivia())
-                    )
+                    node.GetLeadingTrivia().Concat(changedNode.GetLeadingTrivia())
+                )
                     .WithTrailingTrivia(
                         changedNode.GetTrailingTrivia().Concat(node.GetTrailingTrivia())
                     );
@@ -1580,8 +1581,8 @@ namespace Microsoft.CodeAnalysis.Editing
         )
         {
             var combinedTriviaReplacement = replacement.WithLeadingTrivia(
-                    original.GetLeadingTrivia().AddRange(replacement.GetLeadingTrivia())
-                )
+                original.GetLeadingTrivia().AddRange(replacement.GetLeadingTrivia())
+            )
                 .WithTrailingTrivia(
                     replacement.GetTrailingTrivia().AddRange(original.GetTrailingTrivia())
                 );
@@ -1605,8 +1606,8 @@ namespace Microsoft.CodeAnalysis.Editing
         )
         {
             var combinedTriviaReplacement = replacement.WithLeadingTrivia(
-                    original.LeadingTrivia.AddRange(replacement.LeadingTrivia)
-                )
+                original.LeadingTrivia.AddRange(replacement.LeadingTrivia)
+            )
                 .WithTrailingTrivia(replacement.TrailingTrivia.AddRange(original.TrailingTrivia));
 
             return root.ReplaceToken(original, combinedTriviaReplacement);

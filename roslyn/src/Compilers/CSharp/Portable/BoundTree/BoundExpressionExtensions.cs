@@ -159,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.DelegateCreationExpression:
                     var expr = (BoundDelegateCreationExpression)node;
-                    var ctor = expr.Type.GetMembers(WellKnownMemberNames.InstanceConstructorName)
+                    var ctor = expr.Type
+                        .GetMembers(WellKnownMemberNames.InstanceConstructorName)
                         .FirstOrDefault();
                     if (ctor is { })
                     {

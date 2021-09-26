@@ -380,9 +380,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator
             }
 
             if (
-                string.IsNullOrWhiteSpace(
-                    syntaxTree.GetText(cancellationToken).Lines[line + 1].ToString()
-                )
+                string
+                    .IsNullOrWhiteSpace(
+                        syntaxTree.GetText(cancellationToken).Lines[line + 1].ToString()
+                    )
             )
             {
                 return true;

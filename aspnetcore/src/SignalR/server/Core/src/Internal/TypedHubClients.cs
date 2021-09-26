@@ -35,9 +35,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
 
         public T GroupExcept(string groupName, IReadOnlyList<string> excludedConnectionIds)
         {
-            return TypedClientBuilder<T>.Build(
-                _hubClients.GroupExcept(groupName, excludedConnectionIds)
-            );
+            return TypedClientBuilder<T>
+                .Build(_hubClients.GroupExcept(groupName, excludedConnectionIds));
         }
 
         public T Clients(IReadOnlyList<string> connectionIds)

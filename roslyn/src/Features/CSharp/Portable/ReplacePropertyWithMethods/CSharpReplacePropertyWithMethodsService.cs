@@ -175,9 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
         )
         {
             var setAccessorDeclaration =
-                (AccessorDeclarationSyntax)setMethod.DeclaringSyntaxReferences[0].GetSyntax(
-                    cancellationToken
-                );
+                (AccessorDeclarationSyntax)setMethod.DeclaringSyntaxReferences[0]
+                    .GetSyntax(cancellationToken);
             var methodDeclaration = (MethodDeclarationSyntax)generator.MethodDeclaration(
                 setMethod,
                 desiredSetMethodName
@@ -312,13 +311,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             )
             {
                 if (
-                    methodDeclaration.Body.TryConvertToArrowExpressionBody(
-                        methodDeclaration.Kind(),
-                        parseOptions,
-                        expressionBodyPreference,
-                        out var arrowExpression,
-                        out var semicolonToken
-                    )
+                    methodDeclaration.Body
+                        .TryConvertToArrowExpressionBody(
+                            methodDeclaration.Kind(),
+                            parseOptions,
+                            expressionBodyPreference,
+                            out var arrowExpression,
+                            out var semicolonToken
+                        )
                 )
                 {
                     return methodDeclaration.WithBody(null)
@@ -333,11 +333,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             )
             {
                 if (
-                    methodDeclaration.ExpressionBody.TryConvertToBlock(
-                        methodDeclaration.SemicolonToken,
-                        createReturnStatementForExpression,
-                        out var block
-                    )
+                    methodDeclaration.ExpressionBody
+                        .TryConvertToBlock(
+                            methodDeclaration.SemicolonToken,
+                            createReturnStatementForExpression,
+                            out var block
+                        )
                 )
                 {
                     return methodDeclaration.WithExpressionBody(null)
@@ -384,9 +385,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             else
             {
                 var getAccessorDeclaration =
-                    (AccessorDeclarationSyntax)getMethod.DeclaringSyntaxReferences[0].GetSyntax(
-                        cancellationToken
-                    );
+                    (AccessorDeclarationSyntax)getMethod.DeclaringSyntaxReferences[0]
+                        .GetSyntax(cancellationToken);
                 if (getAccessorDeclaration?.ExpressionBody != null)
                 {
                     return methodDeclaration.WithBody(null)

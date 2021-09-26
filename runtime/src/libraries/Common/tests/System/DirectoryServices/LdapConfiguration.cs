@@ -88,9 +88,8 @@ namespace System.DirectoryServices.Tests
                         )
                     )
                     {
-                        return rootDse.Properties["supportedCapabilities"].Contains(
-                            LDAP_CAP_ACTIVE_DIRECTORY_OID
-                        );
+                        return rootDse.Properties["supportedCapabilities"]
+                            .Contains(LDAP_CAP_ACTIVE_DIRECTORY_OID);
                     }
                 }
                 catch
@@ -108,10 +107,11 @@ namespace System.DirectoryServices.Tests
             // To use test servers, set an environment variable LDAP_TEST_SERVER_INDEX
             // to the 0-based index of the <Connection> element in LDAP.Configuration.xml
             if (
-                !int.TryParse(
-                    Environment.GetEnvironmentVariable("LDAP_TEST_SERVER_INDEX"),
-                    out int serverIndex
-                )
+                !int
+                    .TryParse(
+                        Environment.GetEnvironmentVariable("LDAP_TEST_SERVER_INDEX"),
+                        out int serverIndex
+                    )
             )
             {
                 return null;

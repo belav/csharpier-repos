@@ -197,12 +197,10 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         {
             public void ConfigureContainer(MyContainer services)
             {
-                services.Services.TryAddSingleton(
-                    new ServiceBefore { Message = "Configure container" }
-                );
-                services.Services.TryAddSingleton(
-                    new ServiceAfter { Message = "Configure container" }
-                );
+                services.Services
+                    .TryAddSingleton(new ServiceBefore { Message = "Configure container" });
+                services.Services
+                    .TryAddSingleton(new ServiceAfter { Message = "Configure container" });
             }
 
             public void Configure(IApplicationBuilder builder) { }
@@ -218,12 +216,10 @@ namespace Microsoft.AspNetCore.Hosting.Tests
 
             public void ConfigureContainer(MyContainer services)
             {
-                services.Services.TryAddSingleton(
-                    new ServiceBefore { Message = "Configure container" }
-                );
-                services.Services.TryAddSingleton(
-                    new ServiceAfter { Message = "Configure container" }
-                );
+                services.Services
+                    .TryAddSingleton(new ServiceBefore { Message = "Configure container" });
+                services.Services
+                    .TryAddSingleton(new ServiceAfter { Message = "Configure container" });
             }
 
             public void Configure(IApplicationBuilder builder) { }
@@ -246,33 +242,36 @@ namespace Microsoft.AspNetCore.Hosting.Tests
             {
                 return services =>
                 {
-                    services.Services.TryAddSingleton(
-                        new ServiceBefore
-                        {
-                            Message = $"ConfigureContainerFilter Before {AdditionalData}"
-                        }
-                    );
+                    services.Services
+                        .TryAddSingleton(
+                            new ServiceBefore
+                            {
+                                Message = $"ConfigureContainerFilter Before {AdditionalData}"
+                            }
+                        );
 
                     next(services);
 
                     // Ensures we can always override.
                     if (OverrideAfterService)
                     {
-                        services.Services.AddSingleton(
-                            new ServiceAfter
-                            {
-                                Message = $"ConfigureContainerFilter After {AdditionalData}"
-                            }
-                        );
+                        services.Services
+                            .AddSingleton(
+                                new ServiceAfter
+                                {
+                                    Message = $"ConfigureContainerFilter After {AdditionalData}"
+                                }
+                            );
                     }
                     else
                     {
-                        services.Services.TryAddSingleton(
-                            new ServiceAfter
-                            {
-                                Message = $"ConfigureContainerFilter After {AdditionalData}"
-                            }
-                        );
+                        services.Services
+                            .TryAddSingleton(
+                                new ServiceAfter
+                                {
+                                    Message = $"ConfigureContainerFilter After {AdditionalData}"
+                                }
+                            );
                     }
                 };
             }
@@ -426,10 +425,12 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         [InlineData("BaseClass")]
         public void StartupClassAddsConfigureServicesToApplicationServices(string environment)
         {
-            var services = new ServiceCollection().AddSingleton<
-                IServiceProviderFactory<IServiceCollection>,
-                DefaultServiceProviderFactory
-            >().BuildServiceProvider();
+            var services = new ServiceCollection()
+                .AddSingleton<
+                    IServiceProviderFactory<IServiceCollection>,
+                    DefaultServiceProviderFactory
+                >()
+                .BuildServiceProvider();
             var type = StartupLoader.FindStartupType(
                 "Microsoft.AspNetCore.Hosting.Tests",
                 environment
@@ -490,10 +491,12 @@ namespace Microsoft.AspNetCore.Hosting.Tests
             string environment
         )
         {
-            var services = new ServiceCollection().AddSingleton<
-                IServiceProviderFactory<IServiceCollection>,
-                DefaultServiceProviderFactory
-            >().BuildServiceProvider();
+            var services = new ServiceCollection()
+                .AddSingleton<
+                    IServiceProviderFactory<IServiceCollection>,
+                    DefaultServiceProviderFactory
+                >()
+                .BuildServiceProvider();
             var type = StartupLoader.FindStartupType(
                 "Microsoft.AspNetCore.Hosting.Tests",
                 environment
@@ -629,8 +632,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
             app.ApplicationServices = startup.ConfigureServicesDelegate(serviceCollection);
             startup.ConfigureDelegate(app);
 
-            var foo =
-                app.ApplicationServices.GetRequiredService<StartupWithConfigureServices.IFoo>();
+            var foo = app.ApplicationServices
+                .GetRequiredService<StartupWithConfigureServices.IFoo>();
             Assert.True(foo.Invoked);
         }
 

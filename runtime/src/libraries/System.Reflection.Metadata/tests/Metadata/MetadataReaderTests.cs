@@ -552,10 +552,8 @@ namespace System.Reflection.Metadata.Tests
 
             Assert.Equal("NSTests.WithNestedType", reader.GetString(handle));
             Assert.True(
-                reader.StringComparer.Equals(
-                    handle.WithWinRTPrefix(),
-                    "<WinRT>NSTests.WithNestedType"
-                )
+                reader.StringComparer
+                    .Equals(handle.WithWinRTPrefix(), "<WinRT>NSTests.WithNestedType")
             );
             Assert.True(reader.StringComparer.StartsWith(handle.WithWinRTPrefix(), "<WinRT>N"));
 
@@ -585,10 +583,8 @@ namespace System.Reflection.Metadata.Tests
                 reader.StringComparer.StartsWith(handle.WithWinRTPrefix(), "<WinRT>\uFFFDS")
             );
             Assert.True(
-                reader.StringComparer.Equals(
-                    handle.WithWinRTPrefix(),
-                    "<WinRT>\uFFFDSTests.WithNestedType"
-                )
+                reader.StringComparer
+                    .Equals(handle.WithWinRTPrefix(), "<WinRT>\uFFFDSTests.WithNestedType")
             );
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1823,17 +1819,17 @@ namespace System.Reflection.Metadata.Tests
             if (isGlobalNamespace)
             {
                 expChildren = allNamespaces.Where(
-                        ns => !String.IsNullOrEmpty(ns) && !ns.Contains('.')
-                    )
+                    ns => !String.IsNullOrEmpty(ns) && !ns.Contains('.')
+                )
                     .ToList();
             }
             else
             {
                 expChildren = allNamespaces.Where(
-                        ns =>
-                            ns.StartsWith(rootNamespaceName)
-                            && ns.LastIndexOf('.') == rootNamespaceName.Length
-                    )
+                    ns =>
+                        ns.StartsWith(rootNamespaceName)
+                        && ns.LastIndexOf('.') == rootNamespaceName.Length
+                )
                     .ToList();
             }
 
@@ -1851,10 +1847,11 @@ namespace System.Reflection.Metadata.Tests
                 Assert.True(reader.StringComparer.Equals(subNamespace.Name, subNamespaceName));
                 Assert.True(reader.StringComparer.StartsWith(subNamespace.Name, subNamespaceName));
                 Assert.True(
-                    reader.StringComparer.StartsWith(
-                        subNamespace.Name,
-                        subNamespaceName.Substring(0, subNamespaceName.Length - 1)
-                    )
+                    reader.StringComparer
+                        .StartsWith(
+                            subNamespace.Name,
+                            subNamespaceName.Substring(0, subNamespaceName.Length - 1)
+                        )
                 );
 
                 Assert.Equal(subNamespace.Parent, initHandle);
@@ -1965,10 +1962,8 @@ namespace System.Reflection.Metadata.Tests
                 Assert.NotNull(fullyQualifiedName);
                 Assert.Equal(fullyQualifiedName, expFullyQualifiedName);
                 Assert.False(reader.NamespaceCache.CacheIsRealized);
-                var comparisonResult = reader.StringComparer.Equals(
-                    namespaceHandle,
-                    fullyQualifiedName
-                );
+                var comparisonResult = reader.StringComparer
+                    .Equals(namespaceHandle, fullyQualifiedName);
                 Assert.True(comparisonResult);
                 Assert.False(reader.NamespaceCache.CacheIsRealized);
             }
@@ -3146,8 +3141,8 @@ namespace System.Reflection.Metadata.Tests
             for (int i = 0; i < comClassRids.Length; i++)
             {
                 var impls = reader.GetTypeDefinition(
-                        TypeDefinitionHandle.FromRowId(comClassRids[i])
-                    )
+                    TypeDefinitionHandle.FromRowId(comClassRids[i])
+                )
                     .GetInterfaceImplementations();
                 Assert.Equal(
                     comInterface[i],
@@ -3159,8 +3154,8 @@ namespace System.Reflection.Metadata.Tests
             for (int i = 0; i < modClassRids.Length; i++)
             {
                 var impls = reader.GetTypeDefinition(
-                        TypeDefinitionHandle.FromRowId(modClassRids[i])
-                    )
+                    TypeDefinitionHandle.FromRowId(modClassRids[i])
+                )
                     .GetInterfaceImplementations();
                 Assert.Equal(
                     modInterface[i],
@@ -3871,7 +3866,8 @@ namespace System.Reflection.Metadata.Tests
             var otherAccessorNames = (
                 from methodHandle in eventAccessors.Others
                 select reader.GetString(reader.GetMethodDefinition(methodHandle).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(
                 "add_Notification",
@@ -3986,22 +3982,26 @@ namespace System.Reflection.Metadata.Tests
             var methodNames = (
                 from m in reader.MethodDefinitions
                 select reader.GetString(reader.GetMethodDefinition(m).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var fieldNames = (
                 from f in reader.FieldDefinitions
                 select reader.GetString(reader.GetFieldDefinition(f).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var eventNames = (
                 from e in reader.EventDefinitions
                 select reader.GetString(reader.GetEventDefinition(e).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var propertyNames = (
                 from p in reader.PropertyDefinitions
                 select reader.GetString(reader.GetPropertyDefinition(p).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(
                 new[]
@@ -4050,22 +4050,26 @@ namespace System.Reflection.Metadata.Tests
             var methodNames = (
                 from m in typeModule.GetMethods()
                 select reader.GetString(reader.GetMethodDefinition(m).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var fieldNames = (
                 from f in typeModule.GetFields()
                 select reader.GetString(reader.GetFieldDefinition(f).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var eventNames = (
                 from e in typeModule.GetEvents()
                 select reader.GetString(reader.GetEventDefinition(e).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var propertyNames = (
                 from p in typeModule.GetProperties()
                 select reader.GetString(reader.GetPropertyDefinition(p).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(new string[0], methodNames);
             Assert.Equal(new string[0], fieldNames);
@@ -4078,31 +4082,34 @@ namespace System.Reflection.Metadata.Tests
         {
             var reader = GetMetadataReader(Misc.Members);
             var typeC = reader.GetTypeDefinition(
-                reader.TypeDefinitions.Where(
-                        t => reader.GetString(reader.GetTypeDefinition(t).Name) == "C"
-                    )
+                reader.TypeDefinitions
+                    .Where(t => reader.GetString(reader.GetTypeDefinition(t).Name) == "C")
                     .Single()
             );
 
             var methodNames = (
                 from m in typeC.GetMethods()
                 select reader.GetString(reader.GetMethodDefinition(m).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var fieldNames = (
                 from f in typeC.GetFields()
                 select reader.GetString(reader.GetFieldDefinition(f).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var eventNames = (
                 from e in typeC.GetEvents()
                 select reader.GetString(reader.GetEventDefinition(e).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var propertyNames = (
                 from p in typeC.GetProperties()
                 select reader.GetString(reader.GetPropertyDefinition(p).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(
                 new[]
@@ -4137,22 +4144,26 @@ namespace System.Reflection.Metadata.Tests
             var methodNames = (
                 from m in typeE.GetMethods()
                 select reader.GetString(reader.GetMethodDefinition(m).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var fieldNames = (
                 from f in typeE.GetFields()
                 select reader.GetString(reader.GetFieldDefinition(f).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var eventNames = (
                 from e in typeE.GetEvents()
                 select reader.GetString(reader.GetEventDefinition(e).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             var propertyNames = (
                 from p in typeE.GetProperties()
                 select reader.GetString(reader.GetPropertyDefinition(p).Name)
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(
                 new[] { "get_PE1", "set_PE1", "get_PE2", "set_PE2", ".ctor" },

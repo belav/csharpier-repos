@@ -679,10 +679,8 @@ namespace System.Threading
                     nextWaiterNode = waiterNode.Next;
 
                     if (
-                        waiterNode.WaitInfo.TrySignalToSatisfyWait(
-                            waiterNode,
-                            isAbandonedMutex: false
-                        )
+                        waiterNode.WaitInfo
+                            .TrySignalToSatisfyWait(waiterNode, isAbandonedMutex: false)
                     )
                     {
                         return;
@@ -740,10 +738,8 @@ namespace System.Threading
                     nextWaiterNode = waiterNode.Next;
 
                     if (
-                        waiterNode.WaitInfo.TrySignalToSatisfyWait(
-                            waiterNode,
-                            isAbandonedMutex: false
-                        )
+                        waiterNode.WaitInfo
+                            .TrySignalToSatisfyWait(waiterNode, isAbandonedMutex: false)
                         && --count == 0
                     )
                     {

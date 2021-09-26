@@ -402,9 +402,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             if (parseOptions == null)
             {
-                parseOptions = CSharp.CSharpParseOptions.Default.WithLanguageVersion(
-                        CSharp.LanguageVersion.Default
-                    )
+                parseOptions = CSharp.CSharpParseOptions.Default
+                    .WithLanguageVersion(CSharp.LanguageVersion.Default)
                     .WithDocumentationMode(DocumentationMode.None);
             }
 
@@ -434,12 +433,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             var tree = CSharp.SyntaxFactory.ParseSyntaxTree(code, options: parseOptions);
 
-            return CSharp.CSharpCompilation.Create(
-                assemblyName,
-                new[] { tree },
-                references,
-                compilationOptions
-            );
+            return CSharp.CSharpCompilation
+                .Create(assemblyName, new[] { tree }, references, compilationOptions);
         }
 
         protected VisualBasic.VisualBasicCompilation CreateVisualBasicCompilation(
@@ -506,19 +501,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             AddReferencedCompilations(referencedCompilations, references);
 
-            var tree = VisualBasic.VisualBasicSyntaxTree.ParseText(
-                code,
-                options: parseOptions,
-                encoding: encoding,
-                path: sourceFileName
-            );
+            var tree = VisualBasic.VisualBasicSyntaxTree
+                .ParseText(code, options: parseOptions, encoding: encoding, path: sourceFileName);
 
-            return VisualBasic.VisualBasicCompilation.Create(
-                assemblyName,
-                new[] { tree },
-                references,
-                compilationOptions
-            );
+            return VisualBasic.VisualBasicCompilation
+                .Create(assemblyName, new[] { tree }, references, compilationOptions);
         }
 
         private void AddReferencedCompilations(

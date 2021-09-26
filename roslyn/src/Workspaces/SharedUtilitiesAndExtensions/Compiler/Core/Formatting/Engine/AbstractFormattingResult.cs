@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // create a map
                 using var pooledObject = SharedPools.Default<
                     Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData>
-                >().GetPooledObject();
+                >()
+                    .GetPooledObject();
 
                 var map = pooledObject.Object;
                 changes.Do(change => map.Add(change.Item1, change.Item2));

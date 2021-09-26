@@ -54,16 +54,15 @@ class C
                     var testData = new CompilationTestData();
                     var result = context.CompileExpression("this", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        2 (0x2)
   .maxstack  1
   .locals init (I V_0) //o
   IL_0000:  ldarg.0
   IL_0001:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -107,16 +106,15 @@ public interface I
                     var testData = new CompilationTestData();
                     var result = context.CompileExpression("o", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        2 (0x2)
   .maxstack  1
   .locals init (I V_0) //o
   IL_0000:  ldloc.0
   IL_0001:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -159,18 +157,18 @@ public interface I
 
             // csc /t:library /l:PIA.dll A.cs
             var moduleA = CreateCompilation(
-                    sourceA,
-                    options: TestOptions.DebugDll,
-                    references: new[] { modulePIA.GetReference().WithEmbedInteropTypes(true) }
-                )
+                sourceA,
+                options: TestOptions.DebugDll,
+                references: new[] { modulePIA.GetReference().WithEmbedInteropTypes(true) }
+            )
                 .ToModuleInstance();
 
             // csc /r:A.dll /r:PIA.dll B.cs
             var moduleB = CreateCompilation(
-                    sourceB,
-                    options: TestOptions.DebugExe,
-                    references: new[] { moduleA.GetReference(), modulePIA.GetReference() }
-                )
+                sourceB,
+                options: TestOptions.DebugExe,
+                references: new[] { moduleA.GetReference(), modulePIA.GetReference() }
+            )
                 .ToModuleInstance();
 
             var runtime = CreateRuntimeInstance(
@@ -184,15 +182,14 @@ public interface I
             var testData = new CompilationTestData();
             context.CompileExpression("x", out error, testData);
             Assert.Null(error);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ret
 }"
-                );
+            );
 
             // Binding to method on original PIA should fail
             // since it was not included in embedded type.
@@ -220,9 +217,8 @@ public interface I
             testData = new CompilationTestData();
             context.CompileExpression("y.F()", out error, testData);
             Assert.Null(error);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
 // Code size        7 (0x7)
 .maxstack  1
 .locals init (I V_0) //y
@@ -230,7 +226,7 @@ IL_0000:  ldloc.0
 IL_0001:  callvirt   ""object I.F()""
 IL_0006:  ret
 }"
-                );
+            );
         }
     }
 }

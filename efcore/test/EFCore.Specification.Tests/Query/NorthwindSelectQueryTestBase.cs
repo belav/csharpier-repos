@@ -523,12 +523,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level()
         {
             using var context = CreateContext();
-            var customers = context.Customers.Where(c => c.CustomerID.StartsWith("A"))
+            var customers = context.Customers
+                .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
                         new
                         {
-                            OrderDates = c.Orders.Where(o => o.OrderID < 10500)
+                            OrderDates = c.Orders
+                                .Where(o => o.OrderID < 10500)
                                 .Take(3)
                                 .Select(o => new { Date = o.OrderDate })
                         }
@@ -543,12 +545,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level2()
         {
             using var context = CreateContext();
-            var customers = context.Customers.Where(c => c.CustomerID.StartsWith("A"))
+            var customers = context.Customers
+                .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
                         new
                         {
-                            OrderDates = c.Orders.Where(o => o.OrderID < 10500)
+                            OrderDates = c.Orders
+                                .Where(o => o.OrderID < 10500)
                                 .Select(o => o.OrderDate)
                                 .FirstOrDefault()
                         }
@@ -563,12 +567,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level3()
         {
             using var context = CreateContext();
-            var customers = context.Customers.Where(c => c.CustomerID.StartsWith("A"))
+            var customers = context.Customers
+                .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
                         new
                         {
-                            OrderDates = context.Orders.Where(o => o.OrderID < 10500)
+                            OrderDates = context.Orders
+                                .Where(o => o.OrderID < 10500)
                                 .Where(o => c.CustomerID == o.CustomerID)
                                 .Select(o => o.OrderDate)
                                 .FirstOrDefault()
@@ -584,15 +590,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level4()
         {
             using var context = CreateContext();
-            var customers = context.Customers.Where(c => c.CustomerID.StartsWith("A"))
+            var customers = context.Customers
+                .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
                         new
                         {
-                            Order = (int?)c.Orders.Where(o => o.OrderID < 10500)
+                            Order = (int?)c.Orders
+                                .Where(o => o.OrderID < 10500)
                                 .Select(
                                     o =>
-                                        o.OrderDetails.Where(od => od.OrderID > 10)
+                                        o.OrderDetails
+                                            .Where(od => od.OrderID > 10)
                                             .Select(od => od.ProductID)
                                             .Count()
                                 )
@@ -609,15 +618,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level5()
         {
             using var context = CreateContext();
-            var customers = context.Customers.Where(c => c.CustomerID.StartsWith("A"))
+            var customers = context.Customers
+                .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
                         new
                         {
-                            Order = (int?)c.Orders.Where(o => o.OrderID < 10500)
+                            Order = (int?)c.Orders
+                                .Where(o => o.OrderID < 10500)
                                 .Select(
                                     o =>
-                                        o.OrderDetails.Where(od => od.OrderID != c.Orders.Count)
+                                        o.OrderDetails
+                                            .Where(od => od.OrderID != c.Orders.Count)
                                             .Select(od => od.ProductID)
                                             .FirstOrDefault()
                                 )
@@ -634,17 +646,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level6()
         {
             using var context = CreateContext();
-            var customers = context.Customers.Where(c => c.CustomerID.StartsWith("A"))
+            var customers = context.Customers
+                .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
                         new
                         {
-                            Order = (int?)c.Orders.Where(o => o.OrderID < 10500)
+                            Order = (int?)c.Orders
+                                .Where(o => o.OrderID < 10500)
                                 .Select(
                                     o =>
-                                        o.OrderDetails.Where(
-                                                od => od.OrderID != c.CustomerID.Length
-                                            )
+                                        o.OrderDetails
+                                            .Where(od => od.OrderID != c.CustomerID.Length)
                                             .Select(od => od.ProductID)
                                             .FirstOrDefault()
                                 )
@@ -690,8 +703,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                             where o1.CustomerID == c.CustomerID
                             orderby o2.OrderID
                             select o1.OrderID
-                        ).ToList()
-                    ).ToList(),
+                        )
+                            .ToList()
+                    )
+                        .ToList(),
                 assertOrder: true,
                 elementAsserter: (e, a) =>
                     AssertCollection(
@@ -715,7 +730,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         where c.City == "London"
                         orderby c.CustomerID
                         select new { c.City }
-                    ).Distinct()
+                    )
+                        .Distinct()
                         .Select(
                             x =>
                                 (
@@ -726,7 +742,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                             && o1.OrderDate.Value.Year == 1997
                                         orderby o1.OrderID
                                         select o1
-                                    ).Distinct()
+                                    )
+                                        .Distinct()
                                         .Select(
                                             xx =>
                                                 (
@@ -734,7 +751,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                                     where xx.CustomerID == x.City
                                                     orderby o2.OrderID
                                                     select xx.OrderID
-                                                ).ToList()
+                                                )
+                                                    .ToList()
                                         )
                                         .ToList()
                                 )
@@ -1083,7 +1101,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .Take(1)
                                     .FirstOrDefault()
@@ -1103,7 +1122,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .Skip(1)
                                     .FirstOrDefault()
@@ -1123,7 +1143,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .Distinct()
                                     .FirstOrDefault()
@@ -1143,7 +1164,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .Distinct()
                                     .FirstOrDefault()
@@ -1153,7 +1175,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .Distinct()
                                     .FirstOrDefault()
@@ -1175,7 +1198,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(c => c.CustomerID == "ALFKI")
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .Take(1)
                                     .SingleOrDefault()
@@ -1196,7 +1220,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .Take(i)
                                     .FirstOrDefault()
@@ -1216,7 +1241,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .ThenByDescending(o => o.OrderDate)
                                     .Select(o => o.CustomerID)
                                     .Take(2)
@@ -1237,7 +1263,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .ThenByDescending(o => o.OrderDate)
                                     .Select(o => o.CustomerID)
                                     .Take(2)
@@ -1258,7 +1285,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.CustomerID)
+                                c.Orders
+                                    .OrderBy(o => o.CustomerID)
                                     .ThenByDescending(o => o.OrderDate)
                                     .Select(o => o.CustomerID)
                                     .Take(2)
@@ -1280,7 +1308,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(o => o.OrderID < 10300)
                         .Select(
                             o =>
-                                o.OrderDetails.OrderBy(od => od.Product.ProductName)
+                                o.OrderDetails
+                                    .OrderBy(od => od.Product.ProductName)
                                     .Select(od => od.OrderID)
                                     .Take(1)
                                     .FirstOrDefault()
@@ -1301,7 +1330,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(o => o.OrderID < 10250)
                         .Select(
                             o =>
-                                o.OrderDetails.OrderBy(od => od.Product.ProductName)
+                                o.OrderDetails
+                                    .OrderBy(od => od.Product.ProductName)
                                     .Take(1)
                                     .FirstOrDefault()
                         ),
@@ -1799,7 +1829,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     select new
                     {
                         c.CustomerID,
-                        OrderId = c.Orders.OrderBy(o => o.OrderID)
+                        OrderId = c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Select(o => o.OrderID)
                             .FirstOrDefault()
                     }
@@ -1878,7 +1909,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task Filtered_collection_projection_is_tracked(bool async)
         {
             using var context = CreateContext();
-            var query = context.Customers.Where(c => c.CustomerID.StartsWith("A"))
+            var query = context.Customers
+                .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
                         new
@@ -1902,7 +1934,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task Filtered_collection_projection_with_to_list_is_tracked(bool async)
         {
             using var context = CreateContext();
-            var query = context.Customers.Where(c => c.CustomerID.StartsWith("A"))
+            var query = context.Customers
+                .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
                         new
@@ -1931,14 +1964,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .SelectMany(
                             c =>
-                                c.Orders.Select(
-                                    o =>
-                                        new
-                                        {
-                                            OrderProperty = o.CustomerID,
-                                            CustomerProperty = c.CustomerID
-                                        }
-                                )
+                                c.Orders
+                                    .Select(
+                                        o =>
+                                            new
+                                            {
+                                                OrderProperty = o.CustomerID,
+                                                CustomerProperty = c.CustomerID
+                                            }
+                                    )
                         )
             );
         }
@@ -1955,14 +1989,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .SelectMany(
                             c =>
-                                c.Orders.Select(
-                                    o =>
-                                        new
-                                        {
-                                            OrderProperty = o.ShipName,
-                                            CustomerProperty = c.ContactName
-                                        }
-                                )
+                                c.Orders
+                                    .Select(
+                                        o =>
+                                            new
+                                            {
+                                                OrderProperty = o.ShipName,
+                                                CustomerProperty = c.ContactName
+                                            }
+                                    )
                         )
             );
         }
@@ -2071,7 +2106,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.EmployeeID)
                                     .FirstOrDefault()
                         )
@@ -2114,7 +2150,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     c,
-                                    c.Orders.OrderByDescending(o => o.OrderID)
+                                    c.Orders
+                                        .OrderByDescending(o => o.OrderID)
                                         .LastOrDefault().OrderDate
                                 }
                         ),
@@ -2181,7 +2218,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             c.CustomerID,
                             Orders = c.Orders.Select(o => o.OrderDate).ToList()
                         }
-                    ).AsNoTracking().OrderBy(a => a.CustomerID),
+                    )
+                        .AsNoTracking()
+                        .OrderBy(a => a.CustomerID),
                 assertOrder: true,
                 elementAsserter: (e, a) =>
                 {
@@ -2332,9 +2371,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     c.CustomerID,
-                                    Orders = c.Orders.Where(
-                                            x => filteredOrderIds.Contains(x.OrderID)
-                                        )
+                                    Orders = c.Orders
+                                        .Where(x => filteredOrderIds.Contains(x.OrderID))
                                         .OrderBy(x => x.OrderID)
                                         .Select(x => new { c.CustomerID, x.OrderID, x.OrderDate })
                                 }
@@ -2379,7 +2417,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                             Inner = x.OrderID,
                                             x.OrderDate
                                         }
-                                    ).ToList()
+                                    )
+                                        .ToList()
                                 }
                         ),
                 elementSorter: e => e.OrderID,
@@ -2424,7 +2463,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                             Inner = x.OrderID,
                                             x.OrderDate
                                         }
-                                    ).ToList()
+                                    )
+                                        .ToList()
                                 }
                         ),
                 elementSorter: e => (e.OrderDate, e.CustomerID),
@@ -2478,7 +2518,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                             Inner = x.OrderID,
                                             x.OrderDate
                                         }
-                                    ).ToList()
+                                    )
+                                        .ToList()
                                 }
                         ),
                 elementSorter: e => (e.OrderDate, e.CustomerID, e.Complex),
@@ -2528,7 +2569,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                             Inner = x.OrderID,
                                             x.OrderDate
                                         }
-                                    ).ToList()
+                                    )
+                                        .ToList()
                                 }
                         ),
                 elementSorter: e => e.OrderID,
@@ -2583,7 +2625,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(c => c.CustomerID)
                         .Select(
                             c =>
-                                (int?)c.Orders.OrderBy(o => o.OrderID)
+                                (int?)c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .FirstOrDefault().Length
                         ),
@@ -2592,7 +2635,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(c => c.CustomerID)
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .FirstOrDefault()
                                     .MaybeScalar(x => x.Length)
@@ -2684,9 +2728,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 {
                                     OrderID = o.OrderID,
                                     Order = o,
-                                    Property1 = o.OrderDetails.FirstOrDefault(
-                                        e => e.UnitPrice > 10
-                                    ),
+                                    Property1 = o.OrderDetails
+                                        .FirstOrDefault(e => e.UnitPrice > 10),
                                     Property2 = o.OrderDetails.Where(e => e.UnitPrice < 10),
                                 }
                         ),
@@ -2877,7 +2920,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                             Inner = x.OrderID,
                                             x.OrderDate
                                         }
-                                    ).ToList()
+                                    )
+                                        .ToList()
                                 }
                         ),
                 elementSorter: e => (e.CustomerID, e.Complex),
@@ -2906,7 +2950,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     c,
-                                    SingleOrder = c.Orders.OrderBy(o => o.OrderDate)
+                                    SingleOrder = c.Orders
+                                        .OrderBy(o => o.OrderDate)
                                         .FirstOrDefault()
                                 }
                         ),
@@ -2975,7 +3020,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 {
                                     OrderID = o.OrderID,
                                     OrderDate = o.OrderDate,
-                                    OrderDetails = o.OrderDetails.Select(
+                                    OrderDetails = o.OrderDetails
+                                        .Select(
                                             e =>
                                                 new OrderDetail
                                                 {
@@ -3008,7 +3054,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             o =>
                                 new
                                 {
-                                    Orders = o.Orders.OrderBy(a => a.OrderDate)
+                                    Orders = o.Orders
+                                        .OrderBy(a => a.OrderDate)
                                         .Take(1)
                                         .Select(
                                             e =>

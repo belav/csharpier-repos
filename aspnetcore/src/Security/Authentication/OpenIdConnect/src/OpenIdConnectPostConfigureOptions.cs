@@ -43,22 +43,20 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
 
             if (options.StateDataFormat == null)
             {
-                var dataProtector = options.DataProtectionProvider.CreateProtector(
-                    typeof(OpenIdConnectHandler).FullName!,
-                    name,
-                    "v1"
-                );
+                var dataProtector = options.DataProtectionProvider
+                    .CreateProtector(typeof(OpenIdConnectHandler).FullName!, name, "v1");
                 options.StateDataFormat = new PropertiesDataFormat(dataProtector);
             }
 
             if (options.StringDataFormat == null)
             {
-                var dataProtector = options.DataProtectionProvider.CreateProtector(
-                    typeof(OpenIdConnectHandler).FullName!,
-                    typeof(string).FullName!,
-                    name,
-                    "v1"
-                );
+                var dataProtector = options.DataProtectionProvider
+                    .CreateProtector(
+                        typeof(OpenIdConnectHandler).FullName!,
+                        typeof(string).FullName!,
+                        name,
+                        "v1"
+                    );
 
                 options.StringDataFormat = new SecureDataFormat<string>(
                     new StringSerializer(),
@@ -79,9 +77,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                 options.Backchannel = new HttpClient(
                     options.BackchannelHttpHandler ?? new HttpClientHandler()
                 );
-                options.Backchannel.DefaultRequestHeaders.UserAgent.ParseAdd(
-                    "Microsoft ASP.NET Core OpenIdConnect handler"
-                );
+                options.Backchannel.DefaultRequestHeaders.UserAgent
+                    .ParseAdd("Microsoft ASP.NET Core OpenIdConnect handler");
                 options.Backchannel.Timeout = options.BackchannelTimeout;
                 options.Backchannel.MaxResponseContentBufferSize = 1024 * 1024 * 10; // 10 MB
             }

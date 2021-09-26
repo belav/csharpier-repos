@@ -516,9 +516,8 @@ namespace Microsoft.CodeAnalysis
         {
             referencedAssembliesMap = new Dictionary<MetadataReference, int>(referenceMap.Length);
             referencedModulesMap = new Dictionary<MetadataReference, int>(referencedModuleCount);
-            var aliasesOfReferencedAssembliesBuilder = ArrayBuilder<
-                ImmutableArray<string>
-            >.GetInstance(referenceMap.Length - referencedModuleCount);
+            var aliasesOfReferencedAssembliesBuilder = ArrayBuilder<ImmutableArray<string>>
+                .GetInstance(referenceMap.Length - referencedModuleCount);
             bool hasRecursiveAliases = false;
 
             mergedAssemblyReferencesMapOpt = null;
@@ -553,7 +552,8 @@ namespace Microsoft.CodeAnalysis
                                 MetadataReference,
                                 ImmutableArray<MetadataReference>
                             >()
-                        ).Add(reference, referenceMap[i].MergedReferences);
+                        )
+                            .Add(reference, referenceMap[i].MergedReferences);
                     }
 
                     hasRecursiveAliases |= !referenceMap[i].RecursiveAliasesOpt.IsDefault;
@@ -578,9 +578,8 @@ namespace Microsoft.CodeAnalysis
                     // the item in the list is the highest version, by construction
                     for (int i = 1; i < assemblyReference.Value.Count; i++)
                     {
-                        int assemblyIndex = assemblyReference.Value[i].GetAssemblyIndex(
-                            explicitlyReferencedAssemblyCount
-                        );
+                        int assemblyIndex = assemblyReference.Value[i]
+                            .GetAssemblyIndex(explicitlyReferencedAssemblyCount);
                         aliasesOfReferencedAssembliesBuilder[assemblyIndex] = s_supersededAlias;
                     }
                 }

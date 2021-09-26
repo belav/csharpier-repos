@@ -16,11 +16,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool
 
             var console = GetConsole();
 
-            return new Program(console).Run(
-                args,
-                new GetDocumentCommand(console),
-                throwOnUnexpectedArg: true
-            );
+            return new Program(console)
+                .Run(args, new GetDocumentCommand(console), throwOnUnexpectedArg: true);
         }
     }
 }

@@ -18,10 +18,8 @@ namespace AutoMapper.Internal.Mappers
             Expression destExpression
         )
         {
-            var convertMethod = typeof(Convert).GetMethod(
-                "To" + destExpression.Type.Name,
-                new[] { sourceExpression.Type }
-            );
+            var convertMethod = typeof(Convert)
+                .GetMethod("To" + destExpression.Type.Name, new[] { sourceExpression.Type });
             return Call(convertMethod, sourceExpression);
         }
     }

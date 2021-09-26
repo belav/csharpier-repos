@@ -284,10 +284,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
-                    nameof(AdvSimd.Arm64.Abs),
-                    new Type[] { typeof(Vector128<Int64>) }
-                )
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(nameof(AdvSimd.Arm64.Abs), new Type[] { typeof(Vector128<Int64>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector128<Int64>>(_dataTable.inArray1Ptr) }
@@ -301,10 +299,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
-                    nameof(AdvSimd.Arm64.Abs),
-                    new Type[] { typeof(Vector128<Int64>) }
-                )
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(nameof(AdvSimd.Arm64.Abs), new Type[] { typeof(Vector128<Int64>) })
                 .Invoke(
                     null,
                     new object[] { AdvSimd.LoadVector128((Int64*)(_dataTable.inArray1Ptr)) }
@@ -524,15 +520,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.Abs)}<UInt64>(Vector128<Int64>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.Abs)}<UInt64>(Vector128<Int64>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -12,8 +12,9 @@ namespace System.Composition.Hosting.Providers.Metadata
 {
     internal static class MetadataViewProvider
     {
-        private static readonly MethodInfo s_getMetadataValueMethod =
-            typeof(MetadataViewProvider).GetTypeInfo().GetDeclaredMethod(nameof(GetMetadataValue));
+        private static readonly MethodInfo s_getMetadataValueMethod = typeof(MetadataViewProvider)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(GetMetadataValue));
 
         // While not called through the composition pipeline, we use the dependency mechanism to surface errors
         // with appropriate context information.
@@ -51,15 +52,14 @@ namespace System.Composition.Hosting.Providers.Metadata
                     "metadata"
                 );
                 return Expression.Lambda<Func<IDictionary<string, object>, TMetadata>>(
-                        Expression.New(dictionaryConstructor, providerArg),
-                        providerArg
-                    )
+                    Expression.New(dictionaryConstructor, providerArg),
+                    providerArg
+                )
                     .Compile();
             }
 
-            var parameterlessConstructor = ti.DeclaredConstructors.SingleOrDefault(
-                ci => ci.IsPublic && ci.GetParameters().Length == 0
-            );
+            var parameterlessConstructor = ti.DeclaredConstructors
+                .SingleOrDefault(ci => ci.IsPublic && ci.GetParameters().Length == 0);
             if (parameterlessConstructor != null)
             {
                 var providerArg = Expression.Parameter(
@@ -74,7 +74,8 @@ namespace System.Composition.Hosting.Providers.Metadata
                 );
 
                 foreach (
-                    var prop in typeof(TMetadata).GetTypeInfo()
+                    var prop in typeof(TMetadata)
+                        .GetTypeInfo()
                         .DeclaredProperties.Where(
                             prop =>
                                 prop.GetMethod != null
@@ -102,9 +103,9 @@ namespace System.Composition.Hosting.Providers.Metadata
                 blockExprs.Add(resultVar);
 
                 return Expression.Lambda<Func<IDictionary<string, object>, TMetadata>>(
-                        Expression.Block(new[] { resultVar }, blockExprs),
-                        providerArg
-                    )
+                    Expression.Block(new[] { resultVar }, blockExprs),
+                    providerArg
+                )
                     .Compile();
             }
 

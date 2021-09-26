@@ -33,12 +33,12 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             )!;
             var syntaxEditor = new SyntaxEditor(root, document.Project.Solution.Workspace);
             await MakeLocalFunctionStaticAsync(
-                    document,
-                    localFunction,
-                    captures,
-                    syntaxEditor,
-                    cancellationToken
-                )
+                document,
+                localFunction,
+                captures,
+                syntaxEditor,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return document.WithSyntaxRoot(syntaxEditor.GetChangedRoot());
         }
@@ -65,18 +65,17 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
 
             // Finds all the call sites of the local function
             var referencedSymbols = await SymbolFinder.FindReferencesAsync(
-                    localFunctionSymbol,
-                    document.Project.Solution,
-                    documentImmutableSet,
-                    cancellationToken
-                )
+                localFunctionSymbol,
+                document.Project.Solution,
+                documentImmutableSet,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Now we need to find all the references to the local function that we might need to fix.
             var shouldWarn = false;
-            using var builderDisposer = ArrayBuilder<InvocationExpressionSyntax>.GetInstance(
-                out var invocations
-            );
+            using var builderDisposer = ArrayBuilder<InvocationExpressionSyntax>
+                .GetInstance(out var invocations);
 
             foreach (var referencedSymbol in referencedSymbols)
             {
@@ -115,9 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                     (node, generator) =>
                     {
                         var currentInvocation = (InvocationExpressionSyntax)node;
-                        var seenNamedArgument = currentInvocation.ArgumentList.Arguments.Any(
-                            a => a.NameColon != null
-                        );
+                        var seenNamedArgument = currentInvocation.ArgumentList.Arguments
+                            .Any(a => a.NameColon != null);
                         var seenDefaultArgumentValue =
                             currentInvocation.ArgumentList.Arguments.Count
                             < localFunction.ParameterList.Parameters.Count;
@@ -133,9 +131,10 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                                 )
                         );
 
-                        var newArgList = currentInvocation.ArgumentList.WithArguments(
-                            currentInvocation.ArgumentList.Arguments.AddRange(newArguments)
-                        );
+                        var newArgList = currentInvocation.ArgumentList
+                            .WithArguments(
+                                currentInvocation.ArgumentList.Arguments.AddRange(newArguments)
+                            );
                         return currentInvocation.WithArgumentList(newArgList);
                     }
                 );
@@ -151,11 +150,11 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                 }
 
                 var referencedCaptureSymbols = await SymbolFinder.FindReferencesAsync(
-                        capture,
-                        document.Project.Solution,
-                        documentImmutableSet,
-                        cancellationToken
-                    )
+                    capture,
+                    document.Project.Solution,
+                    documentImmutableSet,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var referencedSymbol in referencedCaptureSymbols)

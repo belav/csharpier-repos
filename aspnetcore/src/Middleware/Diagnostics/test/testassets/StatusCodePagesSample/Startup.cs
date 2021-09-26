@@ -38,10 +38,8 @@ namespace StatusCodePagesSample
                     var requestedStatusCode = context.Request.Query["statuscode"];
                     if (!string.IsNullOrEmpty(requestedStatusCode))
                     {
-                        context.Response.StatusCode = int.Parse(
-                            requestedStatusCode,
-                            CultureInfo.InvariantCulture
-                        );
+                        context.Response.StatusCode = int
+                            .Parse(requestedStatusCode, CultureInfo.InvariantCulture);
 
                         // To turn off the StatusCode feature - For example the below code turns off the StatusCode middleware
                         // if the query contains a disableStatusCodePages=true parameter.
@@ -50,8 +48,8 @@ namespace StatusCodePagesSample
                         ];
                         if (disableStatusCodePages == "true")
                         {
-                            var statusCodePagesFeature =
-                                context.Features.Get<IStatusCodePagesFeature>();
+                            var statusCodePagesFeature = context.Features
+                                .Get<IStatusCodePagesFeature>();
                             if (statusCodePagesFeature != null)
                             {
                                 statusCodePagesFeature.Enabled = false;
@@ -79,9 +77,8 @@ namespace StatusCodePagesSample
                             builder.AppendLine("<html><body>");
                             builder.AppendLine(
                                 "An error occurred, Status Code: "
-                                    + HtmlEncoder.Default.Encode(
-                                        context.Request.Path.ToString().Substring(1)
-                                    )
+                                    + HtmlEncoder.Default
+                                        .Encode(context.Request.Path.ToString().Substring(1))
                                     + "<br>"
                             );
                             var referrer = context.Request.Headers["referer"];
@@ -132,18 +129,20 @@ namespace StatusCodePagesSample
                             "{0}{1}{2}{3}<br>",
                             statusCode,
                             space + space,
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "<a href=\"?statuscode={0}\">[Enabled]</a>{1}",
-                                statusCode,
-                                space
-                            ),
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "<a href=\"?statuscode={0}&disableStatusCodePages=true\">[Disabled]</a>{1}",
-                                statusCode,
-                                space
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "<a href=\"?statuscode={0}\">[Enabled]</a>{1}",
+                                    statusCode,
+                                    space
+                                ),
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "<a href=\"?statuscode={0}&disableStatusCodePages=true\">[Disabled]</a>{1}",
+                                    statusCode,
+                                    space
+                                )
                         );
                     }
 
@@ -157,12 +156,11 @@ namespace StatusCodePagesSample
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel().UseIISIntegration().UseStartup<Startup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel().UseIISIntegration().UseStartup<Startup>();
+                }
+            ).Build();
 
             return host.RunAsync();
         }

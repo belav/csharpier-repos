@@ -74,9 +74,10 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64<Single.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"Vector64<Single.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                    );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -98,9 +99,10 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64<Single.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"Vector64<Single.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                    );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -124,7 +126,8 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                object result = typeof(Vector64).GetMethod(nameof(Vector64.GetElement))
+                object result = typeof(Vector64)
+                    .GetMethod(nameof(Vector64.GetElement))
                     .MakeGenericMethod(typeof(Single))
                     .Invoke(null, new object[] { value, imm });
                 ValidateGetResult((Single)(result), values);
@@ -137,9 +140,10 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64<Single.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"Vector64<Single.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                    );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -151,7 +155,8 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                object result2 = typeof(Vector64).GetMethod(nameof(Vector64.WithElement))
+                object result2 = typeof(Vector64)
+                    .GetMethod(nameof(Vector64.WithElement))
                     .MakeGenericMethod(typeof(Single))
                     .Invoke(null, new object[] { value, imm, insertedValue });
                 ValidateWithResult((Vector64<Single>)(result2), values, insertedValue);
@@ -164,9 +169,10 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64<Single.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"Vector64<Single.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                    );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -192,12 +198,10 @@ namespace JIT.HardwareIntrinsics.General
             {
                 Succeeded = false;
 
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64<Single.GetElement(0): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", values)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector64<Single.GetElement(0): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", values)})");
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }
@@ -240,16 +244,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64<Single.WithElement(0): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", values)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector64<Single.WithElement(0): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", values)})");
                 TestLibrary.TestFramework.LogInformation($"  insert: insertedValue");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

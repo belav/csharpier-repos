@@ -61,10 +61,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 var stateSets = _stateManager.GetOrUpdateStateSets(document.Project);
                 var compilationWithAnalyzers = await GetOrCreateCompilationWithAnalyzersAsync(
-                        document.Project,
-                        stateSets,
-                        cancellationToken
-                    )
+                    document.Project,
+                    stateSets,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // We split the diagnostic computation for document into following steps:
@@ -79,11 +79,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 foreach (var stateSet in stateSets)
                 {
                     var data = await TryGetCachedDocumentAnalysisDataAsync(
-                            document,
-                            stateSet,
-                            kind,
-                            cancellationToken
-                        )
+                        document,
+                        stateSet,
+                        kind,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (data.HasValue)
                     {
@@ -115,10 +115,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     foreach (var stateSet in nonCachedStateSets)
                     {
                         var computedData = await ComputeDocumentAnalysisDataAsync(
-                                executor,
-                                stateSet,
-                                cancellationToken
-                            )
+                            executor,
+                            stateSet,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         PersistAndRaiseDiagnosticsIfNeeded(computedData, stateSet);
                     }
@@ -189,9 +189,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             try
             {
                 var stateSets = GetStateSetsForFullSolutionAnalysis(
-                        _stateManager.GetOrUpdateStateSets(project),
-                        project
-                    )
+                    _stateManager.GetOrUpdateStateSets(project),
+                    project
+                )
                     .ToList();
                 var options = project.Solution.Options;
 
@@ -207,20 +207,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 // get driver only with active analyzers.
                 var compilationWithAnalyzers =
                     await AnalyzerHelper.CreateCompilationWithAnalyzersAsync(
-                            project,
-                            activeAnalyzers,
-                            includeSuppressedDiagnostics: true,
-                            cancellationToken
-                        )
+                        project,
+                        activeAnalyzers,
+                        includeSuppressedDiagnostics: true,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 var result = await GetProjectAnalysisDataAsync(
-                        compilationWithAnalyzers,
-                        project,
-                        stateSets,
-                        forceAnalyzerRun,
-                        cancellationToken
-                    )
+                    compilationWithAnalyzers,
+                    project,
+                    stateSets,
+                    forceAnalyzerRun,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (result.OldResult == null)
                 {
@@ -246,10 +246,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     var state = stateSet.GetOrCreateProjectState(project.Id);
 
                     await state.SaveAsync(
-                            PersistentStorageService,
-                            project,
-                            result.GetResult(stateSet.Analyzer)
-                        )
+                        PersistentStorageService,
+                        project,
+                        result.GetResult(stateSet.Analyzer)
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -325,9 +325,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 // let other components knows about this event
                 ClearCompilationsWithAnalyzersCache();
                 var documentHadDiagnostics = await _stateManager.OnDocumentClosedAsync(
-                        stateSets,
-                        document
-                    )
+                    stateSets,
+                    document
+                )
                     .ConfigureAwait(false);
                 RaiseDiagnosticsRemovedIfRequiredForClosedOrResetDocument(
                     document,
@@ -390,10 +390,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 return;
             }
 
-            var removeDiagnosticsOnDocumentClose = document.Project.Solution.Options.GetOption(
-                ServiceFeatureOnOffOptions.RemoveDocumentDiagnosticsOnDocumentClose,
-                document.Project.Language
-            );
+            var removeDiagnosticsOnDocumentClose = document.Project.Solution.Options
+                .GetOption(
+                    ServiceFeatureOnOffOptions.RemoveDocumentDiagnosticsOnDocumentClose,
+                    document.Project.Language
+                );
 
             if (!removeDiagnosticsOnDocumentClose)
             {
@@ -557,9 +558,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             // include all analyzers if option is on
             if (
-                project.Solution.Workspace.Options.GetOption(
-                    InternalDiagnosticsOptions.ProcessHiddenDiagnostics
-                )
+                project.Solution.Workspace.Options
+                    .GetOption(InternalDiagnosticsOptions.ProcessHiddenDiagnostics)
             )
             {
                 return stateSets;
@@ -706,9 +706,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         RoslynDebug.Assert(newAnalysisResult.DocumentIds != null);
 
                         // first remove ones no longer needed.
-                        var documentsToRemove = oldAnalysisResult.DocumentIds.Except(
-                            newAnalysisResult.DocumentIds
-                        );
+                        var documentsToRemove = oldAnalysisResult.DocumentIds
+                            .Except(newAnalysisResult.DocumentIds);
                         RaiseProjectDiagnosticsRemoved(
                             stateSet,
                             oldAnalysisResult.ProjectId,

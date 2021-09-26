@@ -360,7 +360,8 @@ namespace System.Net.Http.Functional.Tests
                         remoteServer.EchoUri,
                         HttpCompletionOption.ResponseHeadersRead
                     )
-                ).ToArray();
+                )
+                    .ToArray();
                 for (int i = responseTasks.Length - 1; i >= 0; i--) // read backwards to increase likelihood that we wait on a different task than has data available
                 {
                     using (HttpResponseMessage response = await responseTasks[i])
@@ -888,9 +889,8 @@ namespace System.Net.Http.Functional.Tests
 
                     if (expectRedirectToPost)
                     {
-                        IEnumerable<string> headerValue = response.Headers.GetValues(
-                            "X-HttpRequest-Method"
-                        );
+                        IEnumerable<string> headerValue = response.Headers
+                            .GetValues("X-HttpRequest-Method");
                         Assert.Equal("POST", headerValue.First());
                     }
                 }
@@ -1069,7 +1069,8 @@ namespace System.Net.Http.Functional.Tests
                             $"\"Content-Length\": \"{request.Content.Headers.ContentLength.Value}\"",
                             responseContent
                         );
-                        string bodyContent = System.Text.Json.JsonDocument.Parse(responseContent)
+                        string bodyContent = System.Text.Json.JsonDocument
+                            .Parse(responseContent)
                             .RootElement.GetProperty("BodyContent")
                             .GetString();
                         Assert.Contains(stringContent.Substring(startingPosition), bodyContent);

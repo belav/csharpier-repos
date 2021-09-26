@@ -140,12 +140,8 @@ namespace System.Configuration.Internal
                 if (index == parts.Length)
                     return currentRecord;
 
-                string currentConfigPath = string.Join(
-                    BaseConfigurationRecord.ConfigPathSeparatorString,
-                    parts,
-                    0,
-                    index
-                );
+                string currentConfigPath = string
+                    .Join(BaseConfigurationRecord.ConfigPathSeparatorString, parts, 0, index);
 
                 // Create new records
                 while ((index < parts.Length) && currentRecord.HlNeedsChildFor(parts[index]))

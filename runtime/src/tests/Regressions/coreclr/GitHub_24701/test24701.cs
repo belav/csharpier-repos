@@ -98,19 +98,15 @@ public class Program
         d._c = 456;
 
         var ReturnsIntNoParams = typeof(StructAPITest<string>).GetMethod("ReturnsIntNoParams");
-        var ReturnNeedBufferNoParams = typeof(StructAPITest<string>).GetMethod(
-            "ReturnNeedBufferNoParams"
-        );
+        var ReturnNeedBufferNoParams = typeof(StructAPITest<string>)
+            .GetMethod("ReturnNeedBufferNoParams");
         var ReturnsIntSmallParam = typeof(StructAPITest<string>).GetMethod("ReturnsIntSmallParam");
-        var ReturnsIntDoubleRegisterParam = typeof(StructAPITest<string>).GetMethod(
-            "ReturnsIntDoubleRegisterParam"
-        );
-        var ReturnNeedBufferSmallParam = typeof(StructAPITest<string>).GetMethod(
-            "ReturnNeedBufferSmallParam"
-        );
-        var ReturnNeedBufferLargeParam = typeof(StructAPITest<string>).GetMethod(
-            "ReturnNeedBufferLargeParam"
-        );
+        var ReturnsIntDoubleRegisterParam = typeof(StructAPITest<string>)
+            .GetMethod("ReturnsIntDoubleRegisterParam");
+        var ReturnNeedBufferSmallParam = typeof(StructAPITest<string>)
+            .GetMethod("ReturnNeedBufferSmallParam");
+        var ReturnNeedBufferLargeParam = typeof(StructAPITest<string>)
+            .GetMethod("ReturnNeedBufferLargeParam");
 
         s_InstStr = "";
         numFailures += AssertEqual(ReturnsIntNoParams.Invoke(foo, new object[] {  }), 123);

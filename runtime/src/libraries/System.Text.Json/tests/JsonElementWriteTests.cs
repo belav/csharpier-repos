@@ -314,12 +314,8 @@ namespace System.Text.Json.Tests
                         // If it doesn't hit a 100% overlap then we're not testing what we thought we were.
                         Assert.Equal(
                             utf8Data.Length,
-                            Encoding.UTF8.GetBytes(
-                                inputPtr,
-                                overwriteJson.Length,
-                                dataPtr,
-                                utf8Data.Length
-                            )
+                            Encoding.UTF8
+                                .GetBytes(inputPtr, overwriteJson.Length, dataPtr, utf8Data.Length)
                         );
                     }
                 }
@@ -447,22 +443,17 @@ namespace System.Text.Json.Tests
         [InlineData(true)]
         public void WriteSimpleArray(bool indented)
         {
-            WriteComplexValue(
-                indented,
-                @"[ 2, 4,
+            WriteComplexValue(indented, @"[ 2, 4,
 6                       , 0
 
 
-, 1       ]".NormalizeLineEndings(),
-                @"[
+, 1       ]".NormalizeLineEndings(), @"[
   2,
   4,
   6,
   0,
   1
-]".NormalizeLineEndings(),
-                "[2,4,6,0,1]"
-            );
+]".NormalizeLineEndings(), "[2,4,6,0,1]");
         }
 
         [Theory]
@@ -470,19 +461,14 @@ namespace System.Text.Json.Tests
         [InlineData(true)]
         public void WriteSimpleObject(bool indented)
         {
-            WriteComplexValue(
-                indented,
-                @"{ ""r""   : 2,
+            WriteComplexValue(indented, @"{ ""r""   : 2,
 // Comments make everything more interesting.
             ""d"":
 2
-}".NormalizeLineEndings(),
-                @"{
+}".NormalizeLineEndings(), @"{
   ""r"": 2,
   ""d"": 2
-}".NormalizeLineEndings(),
-                "{\"r\":2,\"d\":2}"
-            );
+}".NormalizeLineEndings(), "{\"r\":2,\"d\":2}");
         }
 
         [Theory]
@@ -509,9 +495,7 @@ namespace System.Text.Json.Tests
         [InlineData(true)]
         public void WriteEverythingArray(bool indented)
         {
-            WriteComplexValue(
-                indented,
-                (
+            WriteComplexValue(indented, (
                     @"
 
 [
@@ -544,8 +528,7 @@ null,
 ], ""more deep"": false },
 12 ], ""second property"": null }]
 "
-                ).NormalizeLineEndings(),
-                @"[
+                ).NormalizeLineEndings(), @"[
   ""Once upon a midnight dreary"",
   42,
   1e400,
@@ -583,15 +566,7 @@ null,
     ],
     ""second property"": null
   }
-]".NormalizeLineEndings(),
-                "[\"Once upon a midnight dreary\",42,1e400,3.141592653589793238462643383279,"
-                    + "false,true,null,\"Escaping is not required\","
-                    + "\"Some things get lost in the m\\u00EAl\\u00E9e\",[2,3,5,7,11],"
-                    + "{\"obj\":[21,{\"deep obj\":[\"Once upon a midnight dreary\",42,1e400,"
-                    + "3.141592653589793238462643383279,false,true,null,\"Escaping is not required\","
-                    + "\"Some things get lost in the m\\u00EAl\\u00E9e\"],\"more deep\":false},12],"
-                    + "\"second property\":null}]"
-            );
+]".NormalizeLineEndings(), "[\"Once upon a midnight dreary\",42,1e400,3.141592653589793238462643383279," + "false,true,null,\"Escaping is not required\"," + "\"Some things get lost in the m\\u00EAl\\u00E9e\",[2,3,5,7,11]," + "{\"obj\":[21,{\"deep obj\":[\"Once upon a midnight dreary\",42,1e400," + "3.141592653589793238462643383279,false,true,null,\"Escaping is not required\"," + "\"Some things get lost in the m\\u00EAl\\u00E9e\"],\"more deep\":false},12]," + "\"second property\":null}]");
         }
 
         [Theory]
@@ -674,15 +649,9 @@ null,
         [InlineData(true)]
         public void WriteNumberAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "ectoplasm",
-                "42",
-                @"{
+            WritePropertyValueBothForms(indented, "ectoplasm", "42", @"{
   ""ectoplasm"": 42
-}".NormalizeLineEndings(),
-                "{\"ectoplasm\":42}"
-            );
+}".NormalizeLineEndings(), "{\"ectoplasm\":42}");
         }
 
         [Theory]
@@ -695,19 +664,13 @@ null,
             charArray[0] = (char)0xEA;
             var propertyName = new string(charArray);
 
-            WritePropertyValueBothForms(
-                indented,
-                propertyName,
-                "42",
-                (
+            WritePropertyValueBothForms(indented, propertyName, "42", (
                     @"{
   ""\u00EA"
                     + propertyName.Substring(1)
                     + @""": 42
 }"
-                ).NormalizeLineEndings(),
-                $"{{\"\\u00EA{propertyName.Substring(1)}\":42}}"
-            );
+                ).NormalizeLineEndings(), $"{{\"\\u00EA{propertyName.Substring(1)}\":42}}");
         }
 
         [Theory]
@@ -715,15 +678,9 @@ null,
         [InlineData(true)]
         public void WriteNumberScientificAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "m\u00EAl\u00E9e",
-                "1e6",
-                @"{
+            WritePropertyValueBothForms(indented, "m\u00EAl\u00E9e", "1e6", @"{
   ""m\u00EAl\u00E9e"": 1e6
-}".NormalizeLineEndings(),
-                "{\"m\\u00EAl\\u00E9e\":1e6}"
-            );
+}".NormalizeLineEndings(), "{\"m\\u00EAl\\u00E9e\":1e6}");
         }
 
         [Fact]
@@ -783,15 +740,9 @@ null,
         [InlineData(true)]
         public void WriteAsciiStringAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "dinner",
-                "\"pizza\"",
-                @"{
+            WritePropertyValueBothForms(indented, "dinner", "\"pizza\"", @"{
   ""dinner"": ""pizza""
-}".NormalizeLineEndings(),
-                "{\"dinner\":\"pizza\"}"
-            );
+}".NormalizeLineEndings(), "{\"dinner\":\"pizza\"}");
         }
 
         [Theory]
@@ -799,15 +750,9 @@ null,
         [InlineData(true)]
         public void WriteEscapedStringAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "dinner",
-                "\"p\\u0069zza\"",
-                @"{
+            WritePropertyValueBothForms(indented, "dinner", "\"p\\u0069zza\"", @"{
   ""dinner"": ""pizza""
-}".NormalizeLineEndings(),
-                "{\"dinner\":\"pizza\"}"
-            );
+}".NormalizeLineEndings(), "{\"dinner\":\"pizza\"}");
         }
 
         [Theory]
@@ -815,15 +760,9 @@ null,
         [InlineData(true)]
         public void WriteNonAsciiStringAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "lunch",
-                "\"p\u00CDzza\"",
-                @"{
+            WritePropertyValueBothForms(indented, "lunch", "\"p\u00CDzza\"", @"{
   ""lunch"": ""p\u00CDzza""
-}".NormalizeLineEndings(),
-                "{\"lunch\":\"p\\u00CDzza\"}"
-            );
+}".NormalizeLineEndings(), "{\"lunch\":\"p\\u00CDzza\"}");
         }
 
         [Theory]
@@ -831,15 +770,9 @@ null,
         [InlineData(true)]
         public void WriteEscapedNonAsciiStringAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "lunch",
-                "\"p\u00CDz\\u007Aa\"",
-                @"{
+            WritePropertyValueBothForms(indented, "lunch", "\"p\u00CDz\\u007Aa\"", @"{
   ""lunch"": ""p\u00CDzza""
-}".NormalizeLineEndings(),
-                "{\"lunch\":\"p\\u00CDzza\"}"
-            );
+}".NormalizeLineEndings(), "{\"lunch\":\"p\\u00CDzza\"}");
         }
 
         [Theory]
@@ -847,15 +780,9 @@ null,
         [InlineData(true)]
         public void WriteTrueAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                " boolean ",
-                "true",
-                @"{
+            WritePropertyValueBothForms(indented, " boolean ", "true", @"{
   "" boolean "": true
-}".NormalizeLineEndings(),
-                "{\" boolean \":true}"
-            );
+}".NormalizeLineEndings(), "{\" boolean \":true}");
         }
 
         [Theory]
@@ -863,15 +790,9 @@ null,
         [InlineData(true)]
         public void WriteFalseAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                " boolean ",
-                "false",
-                @"{
+            WritePropertyValueBothForms(indented, " boolean ", "false", @"{
   "" boolean "": false
-}".NormalizeLineEndings(),
-                "{\" boolean \":false}"
-            );
+}".NormalizeLineEndings(), "{\" boolean \":false}");
         }
 
         [Theory]
@@ -879,15 +800,9 @@ null,
         [InlineData(true)]
         public void WriteNullAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "someProp",
-                "null",
-                @"{
+            WritePropertyValueBothForms(indented, "someProp", "null", @"{
   ""someProp"": null
-}".NormalizeLineEndings(),
-                "{\"someProp\":null}"
-            );
+}".NormalizeLineEndings(), "{\"someProp\":null}");
         }
 
         [Theory]
@@ -895,15 +810,9 @@ null,
         [InlineData(true)]
         public void WriteEmptyArrayAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "arr",
-                "[        ]",
-                @"{
+            WritePropertyValueBothForms(indented, "arr", "[        ]", @"{
   ""arr"": []
-}".NormalizeLineEndings(),
-                "{\"arr\":[]}"
-            );
+}".NormalizeLineEndings(), "{\"arr\":[]}");
         }
 
         [Theory]
@@ -911,15 +820,9 @@ null,
         [InlineData(true)]
         public void WriteEmptyObjectAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "obj",
-                "{       }",
-                @"{
+            WritePropertyValueBothForms(indented, "obj", "{       }", @"{
   ""obj"": {}
-}".NormalizeLineEndings(),
-                "{\"obj\":{}}"
-            );
+}".NormalizeLineEndings(), "{\"obj\":{}}");
         }
 
         [Theory]
@@ -927,15 +830,9 @@ null,
         [InlineData(true)]
         public void WriteEmptyCommentedArrayAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "arr",
-                "[   /* 5 */     ]",
-                @"{
+            WritePropertyValueBothForms(indented, "arr", "[   /* 5 */     ]", @"{
   ""arr"": []
-}".NormalizeLineEndings(),
-                "{\"arr\":[]}"
-            );
+}".NormalizeLineEndings(), "{\"arr\":[]}");
         }
 
         [Theory]
@@ -943,15 +840,9 @@ null,
         [InlineData(true)]
         public void WriteEmptyCommentedObjectAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "obj",
-                "{ /* Technically empty */ }",
-                @"{
+            WritePropertyValueBothForms(indented, "obj", "{ /* Technically empty */ }", @"{
   ""obj"": {}
-}".NormalizeLineEndings(),
-                "{\"obj\":{}}"
-            );
+}".NormalizeLineEndings(), "{\"obj\":{}}");
         }
 
         [Theory]
@@ -981,22 +872,16 @@ null,
         [InlineData(true)]
         public void WriteSimpleObjectAsProperty(bool indented)
         {
-            WritePropertyValueBothForms(
-                indented,
-                "bestMinorCharacter",
-                @"{ ""r""   : 2,
+            WritePropertyValueBothForms(indented, "bestMinorCharacter", @"{ ""r""   : 2,
 // Comments make everything more interesting.
             ""d"":
 2
-}".NormalizeLineEndings(),
-                @"{
+}".NormalizeLineEndings(), @"{
   ""bestMinorCharacter"": {
     ""r"": 2,
     ""d"": 2
   }
-}".NormalizeLineEndings(),
-                "{\"bestMinorCharacter\":{\"r\":2,\"d\":2}}"
-            );
+}".NormalizeLineEndings(), "{\"bestMinorCharacter\":{\"r\":2,\"d\":2}}");
         }
 
         [Theory]

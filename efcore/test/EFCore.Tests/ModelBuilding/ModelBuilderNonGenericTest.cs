@@ -49,7 +49,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                     Dr,
                                     Dre
                                 >)modelBuilder.Entity<Dr>().OwnsOne(e => e.Dre)
-                            ).GetInfrastructure().HasOne("Snoop")
+                            )
+                                .GetInfrastructure()
+                                .HasOne("Snoop")
                     ).Message
                 );
             }
@@ -69,9 +71,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     CoreStrings.NoClrNavigation("Snoop", nameof(Dr)),
                     Assert.Throws<InvalidOperationException>(
                         () =>
-                            (
-                                (NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>()
-                            ).GetInfrastructure().HasOne("Snoop")
+                            ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
+                                .GetInfrastructure()
+                                .HasOne("Snoop")
                     ).Message
                 );
             }
@@ -85,9 +87,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     CoreStrings.NoClrNavigation("Snoop", nameof(Dr)),
                     Assert.Throws<InvalidOperationException>(
                         () =>
-                            (
-                                (NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>()
-                            ).GetInfrastructure().HasMany("Snoop")
+                            ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
+                                .GetInfrastructure()
+                                .HasMany("Snoop")
                     ).Message
                 );
             }
@@ -106,9 +108,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     ),
                     Assert.Throws<InvalidOperationException>(
                         () =>
-                            (
-                                (NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>()
-                            ).GetInfrastructure().HasMany("Dre")
+                            ((NonGenericTestEntityTypeBuilder<Dr>)modelBuilder.Entity<Dr>())
+                                .GetInfrastructure()
+                                .HasMany("Dre")
                     ).Message
                 );
             }
@@ -122,9 +124,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     e =>
                     {
                         e.HasKey(c => c.Key);
-                        (
-                            (NonGenericTestEntityTypeBuilder<ComplexCaseChild13108>)e
-                        ).GetInfrastructure().Property("ParentKey");
+                        ((NonGenericTestEntityTypeBuilder<ComplexCaseChild13108>)e)
+                            .GetInfrastructure()
+                            .Property("ParentKey");
                         e.HasOne(c => c.Parent)
                             .WithMany(c => c.Children)
                             .HasForeignKey("ParentKey");
@@ -135,7 +137,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 var model = (IConventionModel)modelBuilder.FinalizeModel(designTime: true);
 
-                var property = model.FindEntityType(typeof(ComplexCaseChild13108))!.GetProperties()
+                var property = model.FindEntityType(typeof(ComplexCaseChild13108))!
+                    .GetProperties()
                     .Single(p => p.Name == "ParentKey");
                 Assert.Equal(typeof(int), property.ClrType);
                 Assert.Equal(ConfigurationSource.Explicit, property.GetTypeConfigurationSource());

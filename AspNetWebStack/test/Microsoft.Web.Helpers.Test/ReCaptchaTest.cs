@@ -144,10 +144,10 @@ namespace Microsoft.Web.Helpers.Test
                 () =>
                 {
                     ReCaptcha.Validate(
-                            context,
-                            privateKey: "PRIVATE_KEY",
-                            virtualPathUtility: virtualPathUtility
-                        )
+                        context,
+                        privateKey: "PRIVATE_KEY",
+                        virtualPathUtility: virtualPathUtility
+                    )
                         .ToString();
                 },
                 "The captcha cannot be validated because the remote address was not found in the request."

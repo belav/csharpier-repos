@@ -706,10 +706,8 @@ namespace System.Data.OleDb
                         }
                         executeResult = null;
                         _hasDataReader = true;
-                        _connection!.AddWeakReference(
-                            dataReader,
-                            OleDbReferenceCollection.DataReaderTag
-                        );
+                        _connection!
+                            .AddWeakReference(dataReader, OleDbReferenceCollection.DataReaderTag);
 
                         // command stays in the executing state until the connection
                         // has a datareader to track for it being closed
@@ -897,13 +895,14 @@ namespace System.Data.OleDb
                 "SingleRow implies SingleResult"
             );
             OleDbHResult hr;
-            hr = _icommandText!.Execute(
-                ADP.PtrZero,
-                ref ODB.IID_IMultipleResults,
-                dbParams,
-                out _recordsAffected,
-                out executeResult
-            );
+            hr = _icommandText!
+                .Execute(
+                    ADP.PtrZero,
+                    ref ODB.IID_IMultipleResults,
+                    dbParams,
+                    out _recordsAffected,
+                    out executeResult
+                );
 
             if (OleDbHResult.E_NOINTERFACE != hr)
             {
@@ -924,23 +923,25 @@ namespace System.Data.OleDb
             // (Microsoft.Jet.OLEDB.4.0 returns 0 for recordsAffected instead of -1)
             if (_executeQuery)
             {
-                hr = _icommandText!.Execute(
-                    ADP.PtrZero,
-                    ref ODB.IID_IRowset,
-                    dbParams,
-                    out _recordsAffected,
-                    out executeResult
-                );
+                hr = _icommandText!
+                    .Execute(
+                        ADP.PtrZero,
+                        ref ODB.IID_IRowset,
+                        dbParams,
+                        out _recordsAffected,
+                        out executeResult
+                    );
             }
             else
             {
-                hr = _icommandText!.Execute(
-                    ADP.PtrZero,
-                    ref ODB.IID_NULL,
-                    dbParams,
-                    out _recordsAffected,
-                    out executeResult
-                );
+                hr = _icommandText!
+                    .Execute(
+                        ADP.PtrZero,
+                        ref ODB.IID_NULL,
+                        dbParams,
+                        out _recordsAffected,
+                        out executeResult
+                    );
             }
             ExecuteCommandTextErrorHandling(hr);
             return ODB.ExecutedIRowset;
@@ -956,13 +957,14 @@ namespace System.Data.OleDb
             if (_connection!.SupportIRow(this))
             {
                 OleDbHResult hr;
-                hr = _icommandText!.Execute(
-                    ADP.PtrZero,
-                    ref ODB.IID_IRow,
-                    dbParams,
-                    out _recordsAffected,
-                    out executeResult
-                );
+                hr = _icommandText!
+                    .Execute(
+                        ADP.PtrZero,
+                        ref ODB.IID_IRow,
+                        dbParams,
+                        out _recordsAffected,
+                        out executeResult
+                    );
 
                 if (OleDbHResult.DB_E_NOTFOUND == hr)
                 {
@@ -1071,15 +1073,16 @@ namespace System.Data.OleDb
                                 try
                                 {
                                     propSet.DangerousAddRef(ref mustRelease);
-                                    hr = iopenRowset.Value.OpenRowset(
-                                        ADP.PtrZero,
-                                        tableID,
-                                        ADP.PtrZero,
-                                        ref ODB.IID_IRowset,
-                                        propSet.PropertySetCount,
-                                        propSet.DangerousGetHandle(),
-                                        out executeResult
-                                    );
+                                    hr = iopenRowset.Value
+                                        .OpenRowset(
+                                            ADP.PtrZero,
+                                            tableID,
+                                            ADP.PtrZero,
+                                            ref ODB.IID_IRowset,
+                                            propSet.PropertySetCount,
+                                            propSet.DangerousGetHandle(),
+                                            out executeResult
+                                        );
                                 }
 
                                 finally
@@ -1092,7 +1095,22 @@ namespace System.Data.OleDb
 
                                 if (OleDbHResult.DB_E_ERRORSOCCURRED == hr)
                                 {
-                                    hr = iopenRowset.Value.OpenRowset(
+                                    hr = iopenRowset.Value
+                                        .OpenRowset(
+                                            ADP.PtrZero,
+                                            tableID,
+                                            ADP.PtrZero,
+                                            ref ODB.IID_IRowset,
+                                            0,
+                                            IntPtr.Zero,
+                                            out executeResult
+                                        );
+                                }
+                            }
+                            else
+                            {
+                                hr = iopenRowset.Value
+                                    .OpenRowset(
                                         ADP.PtrZero,
                                         tableID,
                                         ADP.PtrZero,
@@ -1101,19 +1119,6 @@ namespace System.Data.OleDb
                                         IntPtr.Zero,
                                         out executeResult
                                     );
-                                }
-                            }
-                            else
-                            {
-                                hr = iopenRowset.Value.OpenRowset(
-                                    ADP.PtrZero,
-                                    tableID,
-                                    ADP.PtrZero,
-                                    ref ODB.IID_IRowset,
-                                    0,
-                                    IntPtr.Zero,
-                                    out executeResult
-                                );
                             }
                         }
                     }

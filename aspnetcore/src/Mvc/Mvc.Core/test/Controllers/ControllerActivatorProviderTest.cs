@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             {
                 ControllerTypeInfo = typeof(TestController).GetTypeInfo(),
             };
-            var serviceProvider = new ServiceCollection().AddSingleton(expected)
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton(expected)
                 .BuildServiceProvider();
             var context = new ControllerContext
             {

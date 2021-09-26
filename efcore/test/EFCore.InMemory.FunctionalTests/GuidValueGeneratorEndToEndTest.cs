@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_GUIDs_end_to_end_async()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             var guids = new List<Guid>();

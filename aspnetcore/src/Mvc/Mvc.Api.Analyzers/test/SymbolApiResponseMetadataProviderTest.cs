@@ -24,8 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 $"{Namespace}.{nameof(GetResponseMetadata_ControllerWithoutConvention)}"
             );
             var method = (IMethodSymbol)controller.GetMembers(
-                    nameof(GetResponseMetadata_ControllerWithoutConvention.GetPerson)
-                )
+                nameof(GetResponseMetadata_ControllerWithoutConvention.GetPerson)
+            )
                 .First();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -48,8 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 $"{Namespace}.{nameof(GetResponseMetadata_ControllerWithoutConvention)}"
             );
             var method = (IMethodSymbol)controller.GetMembers(
-                    nameof(GetResponseMetadata_ControllerWithoutConvention.PostPerson)
-                )
+                nameof(GetResponseMetadata_ControllerWithoutConvention.PostPerson)
+            )
                 .First();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -72,10 +72,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 $"{Namespace}.{nameof(GetResponseMetadata_ControllerActionWithAttributes)}"
             );
             var method = (IMethodSymbol)controller.GetMembers(
-                    nameof(
-                        GetResponseMetadata_ControllerActionWithAttributes.ActionWithProducesAttribute
-                    )
+                nameof(
+                    GetResponseMetadata_ControllerActionWithAttributes.ActionWithProducesAttribute
                 )
+            )
                 .First();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -98,10 +98,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 $"{Namespace}.{nameof(GetResponseMetadata_ControllerActionWithAttributes)}"
             );
             var method = (IMethodSymbol)controller.GetMembers(
-                    nameof(
-                        GetResponseMetadata_ControllerActionWithAttributes.ActionWithProducesResponseType_StatusCodeInConstructor
-                    )
+                nameof(
+                    GetResponseMetadata_ControllerActionWithAttributes.ActionWithProducesResponseType_StatusCodeInConstructor
                 )
+            )
                 .First();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -132,10 +132,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 $"{Namespace}.{nameof(GetResponseMetadata_ControllerActionWithAttributes)}"
             );
             var method = (IMethodSymbol)controller.GetMembers(
-                    nameof(
-                        GetResponseMetadata_ControllerActionWithAttributes.ActionWithProducesResponseType_StatusCodeAndTypeInConstructor
-                    )
+                nameof(
+                    GetResponseMetadata_ControllerActionWithAttributes.ActionWithProducesResponseType_StatusCodeAndTypeInConstructor
                 )
+            )
                 .First();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -166,10 +166,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 $"{Namespace}.{nameof(GetResponseMetadata_ControllerActionWithAttributes)}"
             );
             var method = (IMethodSymbol)controller.GetMembers(
-                    nameof(
-                        GetResponseMetadata_ControllerActionWithAttributes.ActionWithProducesResponseType_StatusCodeInConstructorAndProperty
-                    )
+                nameof(
+                    GetResponseMetadata_ControllerActionWithAttributes.ActionWithProducesResponseType_StatusCodeInConstructorAndProperty
                 )
+            )
                 .First();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -200,10 +200,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 $"{Namespace}.{nameof(GetResponseMetadata_ControllerActionWithAttributes)}"
             );
             var method = (IMethodSymbol)controller.GetMembers(
-                    nameof(
-                        GetResponseMetadata_ControllerActionWithAttributes.ActionWithProducesResponseType_StatusCodeAndTypeInConstructorAndProperty
-                    )
+                nameof(
+                    GetResponseMetadata_ControllerActionWithAttributes.ActionWithProducesResponseType_StatusCodeAndTypeInConstructorAndProperty
                 )
+            )
                 .First();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -234,10 +234,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 $"{Namespace}.{nameof(GetResponseMetadata_ControllerActionWithAttributes)}"
             );
             var method = (IMethodSymbol)controller.GetMembers(
-                    nameof(
-                        GetResponseMetadata_ControllerActionWithAttributes.ActionWithCustomProducesResponseTypeAttributeWithArguments
-                    )
+                nameof(
+                    GetResponseMetadata_ControllerActionWithAttributes.ActionWithCustomProducesResponseTypeAttributeWithArguments
                 )
+            )
                 .First();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -267,10 +267,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 $"{Namespace}.{nameof(GetResponseMetadata_ControllerActionWithAttributes)}"
             );
             var method = (IMethodSymbol)controller.GetMembers(
-                    nameof(
-                        GetResponseMetadata_ControllerActionWithAttributes.GetResponseMetadata_ReturnsValuesFromApiConventionMethodAttribute
-                    )
+                nameof(
+                    GetResponseMetadata_ControllerActionWithAttributes.GetResponseMetadata_ReturnsValuesFromApiConventionMethodAttribute
                 )
+            )
                 .First();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -309,10 +309,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 $"{Namespace}.{nameof(GetResponseMetadata_ControllerActionWithAttributes)}"
             );
             var method = (IMethodSymbol)controller.GetMembers(
-                    nameof(
-                        GetResponseMetadata_ControllerActionWithAttributes.GetResponseMetadata_WithProducesResponseTypeAndApiConventionMethod
-                    )
+                nameof(
+                    GetResponseMetadata_ControllerActionWithAttributes.GetResponseMetadata_WithProducesResponseTypeAndApiConventionMethod
                 )
+            )
                 .First();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -342,10 +342,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 $"{Namespace}.{nameof(GetResponseMetadata_ControllerActionWithAttributes)}"
             );
             var method = (IMethodSymbol)controller.GetMembers(
-                    nameof(
-                        GetResponseMetadata_ControllerActionWithAttributes.ActionWithCustomApiResponseMetadataProvider
-                    )
+                nameof(
+                    GetResponseMetadata_ControllerActionWithAttributes.ActionWithCustomApiResponseMetadataProvider
                 )
+            )
                 .First();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 

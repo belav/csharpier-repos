@@ -41,26 +41,14 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
         {
             context.Response.Cookies.Append("A", "A");
             context.Response.Cookies.Append("B", "B", new CookieOptions());
-            context.Response.Cookies.Append(
-                "C",
-                "C",
-                new CookieOptions { SameSite = Http.SameSiteMode.None }
-            );
-            context.Response.Cookies.Append(
-                "D",
-                "D",
-                new CookieOptions { SameSite = Http.SameSiteMode.Lax }
-            );
-            context.Response.Cookies.Append(
-                "E",
-                "E",
-                new CookieOptions { SameSite = Http.SameSiteMode.Strict }
-            );
-            context.Response.Cookies.Append(
-                "F",
-                "F",
-                new CookieOptions { SameSite = (Http.SameSiteMode)(-1) }
-            );
+            context.Response.Cookies
+                .Append("C", "C", new CookieOptions { SameSite = Http.SameSiteMode.None });
+            context.Response.Cookies
+                .Append("D", "D", new CookieOptions { SameSite = Http.SameSiteMode.Lax });
+            context.Response.Cookies
+                .Append("E", "E", new CookieOptions { SameSite = Http.SameSiteMode.Strict });
+            context.Response.Cookies
+                .Append("F", "F", new CookieOptions { SameSite = (Http.SameSiteMode)(-1) });
             return Task.FromResult(0);
         };
 
@@ -273,49 +261,41 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
         public async Task CookiePolicyCanHijackAppend()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.Configure(
+                        app =>
+                        {
+                            app.UseCookiePolicy(
+                                new CookiePolicyOptions
                                 {
-                                    app.UseCookiePolicy(
-                                        new CookiePolicyOptions
-                                        {
-                                            OnAppendCookie = ctx =>
-                                                ctx.CookieName = ctx.CookieValue = "Hao"
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            context.Response.Cookies.Append("A", "A");
-                                            context.Response.Cookies.Append(
-                                                "B",
-                                                "B",
-                                                new CookieOptions { Secure = false }
-                                            );
-                                            context.Response.Cookies.Append(
-                                                "C",
-                                                "C",
-                                                new CookieOptions()
-                                                {
-                                                    SameSite = Http.SameSiteMode.Strict
-                                                }
-                                            );
-                                            context.Response.Cookies.Append(
-                                                "D",
-                                                "D",
-                                                new CookieOptions { Secure = true }
-                                            );
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                                    OnAppendCookie = ctx => ctx.CookieName = ctx.CookieValue = "Hao"
                                 }
-                            )
-                            .UseTestServer();
-                    }
-                )
-                .Build();
+                            );
+                            app.Run(
+                                context =>
+                                {
+                                    context.Response.Cookies.Append("A", "A");
+                                    context.Response.Cookies
+                                        .Append("B", "B", new CookieOptions { Secure = false });
+                                    context.Response.Cookies
+                                        .Append(
+                                            "C",
+                                            "C",
+                                            new CookieOptions()
+                                            {
+                                                SameSite = Http.SameSiteMode.Strict
+                                            }
+                                        );
+                                    context.Response.Cookies
+                                        .Append("D", "D", new CookieOptions { Secure = true });
+                                    return Task.FromResult(0);
+                                }
+                            );
+                        }
+                    ).UseTestServer();
+                }
+            ).Build();
 
             var server = host.GetTestServer();
 
@@ -334,42 +314,33 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
         public async Task CookiePolicyCanHijackDelete()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.Configure(
+                        app =>
+                        {
+                            app.UseCookiePolicy(
+                                new CookiePolicyOptions
                                 {
-                                    app.UseCookiePolicy(
-                                        new CookiePolicyOptions
-                                        {
-                                            OnDeleteCookie = ctx => ctx.CookieName = "A"
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            context.Response.Cookies.Delete("A");
-                                            context.Response.Cookies.Delete(
-                                                "B",
-                                                new CookieOptions { Secure = false }
-                                            );
-                                            context.Response.Cookies.Delete(
-                                                "C",
-                                                new CookieOptions()
-                                            );
-                                            context.Response.Cookies.Delete(
-                                                "D",
-                                                new CookieOptions { Secure = true }
-                                            );
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                                    OnDeleteCookie = ctx => ctx.CookieName = "A"
                                 }
-                            )
-                            .UseTestServer();
-                    }
-                )
-                .Build();
+                            );
+                            app.Run(
+                                context =>
+                                {
+                                    context.Response.Cookies.Delete("A");
+                                    context.Response.Cookies
+                                        .Delete("B", new CookieOptions { Secure = false });
+                                    context.Response.Cookies.Delete("C", new CookieOptions());
+                                    context.Response.Cookies
+                                        .Delete("D", new CookieOptions { Secure = true });
+                                    return Task.FromResult(0);
+                                }
+                            );
+                        }
+                    ).UseTestServer();
+                }
+            ).Build();
 
             var server = host.GetTestServer();
 
@@ -389,60 +360,52 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
         public async Task CookiePolicyCallsCookieFeature()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.Configure(
+                        app =>
+                        {
+                            app.Use(
+                                next =>
+                                    context =>
+                                    {
+                                        context.Features
+                                            .Set<IResponseCookiesFeature>(new TestCookieFeature());
+                                        return next(context);
+                                    }
+                            );
+                            app.UseCookiePolicy(
+                                new CookiePolicyOptions
                                 {
-                                    app.Use(
-                                        next =>
-                                            context =>
-                                            {
-                                                context.Features.Set<IResponseCookiesFeature>(
-                                                    new TestCookieFeature()
-                                                );
-                                                return next(context);
-                                            }
-                                    );
-                                    app.UseCookiePolicy(
-                                        new CookiePolicyOptions
-                                        {
-                                            OnDeleteCookie = ctx => ctx.CookieName = "A"
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.Throws<NotImplementedException>(
-                                                () => context.Response.Cookies.Delete("A")
-                                            );
-                                            Assert.Throws<NotImplementedException>(
-                                                () =>
-                                                    context.Response.Cookies.Delete(
-                                                        "A",
-                                                        new CookieOptions()
-                                                    )
-                                            );
-                                            Assert.Throws<NotImplementedException>(
-                                                () => context.Response.Cookies.Append("A", "A")
-                                            );
-                                            Assert.Throws<NotImplementedException>(
-                                                () =>
-                                                    context.Response.Cookies.Append(
-                                                        "A",
-                                                        "A",
-                                                        new CookieOptions()
-                                                    )
-                                            );
-                                            return context.Response.WriteAsync("Done");
-                                        }
-                                    );
+                                    OnDeleteCookie = ctx => ctx.CookieName = "A"
                                 }
-                            )
-                            .UseTestServer();
-                    }
-                )
-                .Build();
+                            );
+                            app.Run(
+                                context =>
+                                {
+                                    Assert.Throws<NotImplementedException>(
+                                        () => context.Response.Cookies.Delete("A")
+                                    );
+                                    Assert.Throws<NotImplementedException>(
+                                        () =>
+                                            context.Response.Cookies
+                                                .Delete("A", new CookieOptions())
+                                    );
+                                    Assert.Throws<NotImplementedException>(
+                                        () => context.Response.Cookies.Append("A", "A")
+                                    );
+                                    Assert.Throws<NotImplementedException>(
+                                        () =>
+                                            context.Response.Cookies
+                                                .Append("A", "A", new CookieOptions())
+                                    );
+                                    return context.Response.WriteAsync("Done");
+                                }
+                            );
+                        }
+                    ).UseTestServer();
+                }
+            ).Build();
 
             var server = host.GetTestServer();
 
@@ -456,52 +419,48 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
         public async Task CookiePolicyAppliesToCookieAuth()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.Configure(
+                        app =>
+                        {
+                            app.UseCookiePolicy(
+                                new CookiePolicyOptions
                                 {
-                                    app.UseCookiePolicy(
-                                        new CookiePolicyOptions
-                                        {
-                                            HttpOnly = HttpOnlyPolicy.Always,
-                                            Secure = CookieSecurePolicy.Always,
-                                        }
-                                    );
-                                    app.UseAuthentication();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            return context.SignInAsync(
-                                                CookieAuthenticationDefaults.AuthenticationScheme,
-                                                new ClaimsPrincipal(
-                                                    new ClaimsIdentity(
-                                                        new GenericIdentity("TestUser", "Cookies")
-                                                    )
-                                                )
-                                            );
-                                        }
-                                    );
-                                }
-                            )
-                            .UseTestServer();
-                    }
-                )
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddAuthentication()
-                            .AddCookie(
-                                o =>
-                                {
-                                    o.Cookie.Name = "TestCookie";
-                                    o.Cookie.HttpOnly = false;
-                                    o.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                                    HttpOnly = HttpOnlyPolicy.Always,
+                                    Secure = CookieSecurePolicy.Always,
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.UseAuthentication();
+                            app.Run(
+                                context =>
+                                {
+                                    return context.SignInAsync(
+                                        CookieAuthenticationDefaults.AuthenticationScheme,
+                                        new ClaimsPrincipal(
+                                            new ClaimsIdentity(
+                                                new GenericIdentity("TestUser", "Cookies")
+                                            )
+                                        )
+                                    );
+                                }
+                            );
+                        }
+                    ).UseTestServer();
+                }
+            ).ConfigureServices(
+                services =>
+                {
+                    services.AddAuthentication().AddCookie(
+                        o =>
+                        {
+                            o.Cookie.Name = "TestCookie";
+                            o.Cookie.HttpOnly = false;
+                            o.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                        }
+                    );
+                }
+            ).Build();
 
             var server = host.GetTestServer();
 
@@ -522,55 +481,51 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
         public async Task CookiePolicyAppliesToCookieAuthChunks()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.Configure(
+                        app =>
+                        {
+                            app.UseCookiePolicy(
+                                new CookiePolicyOptions
                                 {
-                                    app.UseCookiePolicy(
-                                        new CookiePolicyOptions
-                                        {
-                                            HttpOnly = HttpOnlyPolicy.Always,
-                                            Secure = CookieSecurePolicy.Always,
-                                        }
-                                    );
-                                    app.UseAuthentication();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            return context.SignInAsync(
-                                                CookieAuthenticationDefaults.AuthenticationScheme,
-                                                new ClaimsPrincipal(
-                                                    new ClaimsIdentity(
-                                                        new GenericIdentity(
-                                                            new string('c', 1024 * 5),
-                                                            "Cookies"
-                                                        )
-                                                    )
-                                                )
-                                            );
-                                        }
-                                    );
-                                }
-                            )
-                            .UseTestServer();
-                    }
-                )
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddAuthentication()
-                            .AddCookie(
-                                o =>
-                                {
-                                    o.Cookie.Name = "TestCookie";
-                                    o.Cookie.HttpOnly = false;
-                                    o.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                                    HttpOnly = HttpOnlyPolicy.Always,
+                                    Secure = CookieSecurePolicy.Always,
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.UseAuthentication();
+                            app.Run(
+                                context =>
+                                {
+                                    return context.SignInAsync(
+                                        CookieAuthenticationDefaults.AuthenticationScheme,
+                                        new ClaimsPrincipal(
+                                            new ClaimsIdentity(
+                                                new GenericIdentity(
+                                                    new string('c', 1024 * 5),
+                                                    "Cookies"
+                                                )
+                                            )
+                                        )
+                                    );
+                                }
+                            );
+                        }
+                    ).UseTestServer();
+                }
+            ).ConfigureServices(
+                services =>
+                {
+                    services.AddAuthentication().AddCookie(
+                        o =>
+                        {
+                            o.Cookie.Name = "TestCookie";
+                            o.Cookie.HttpOnly = false;
+                            o.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                        }
+                    );
+                }
+            ).Build();
 
             var server = host.GetTestServer();
 
@@ -655,25 +610,23 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.Configure(
+                        app =>
+                        {
+                            app.Map(
+                                path,
+                                map =>
                                 {
-                                    app.Map(
-                                        path,
-                                        map =>
-                                        {
-                                            map.UseCookiePolicy(cookiePolicy);
-                                            map.Run(configureSetup);
-                                        }
-                                    );
+                                    map.UseCookiePolicy(cookiePolicy);
+                                    map.Run(configureSetup);
                                 }
-                            )
-                            .UseTestServer();
-                    }
-                )
-                .Build();
+                            );
+                        }
+                    ).UseTestServer();
+                }
+            ).Build();
 
             var server = host.GetTestServer();
 

@@ -76,9 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                         )
                         {
                             return node.Update(
-                                node.Identifier.WithAdditionalAnnotations(
-                                    CreateConflictAnnotation()
-                                )
+                                node.Identifier
+                                    .WithAdditionalAnnotations(CreateConflictAnnotation())
                             );
                         }
                     }

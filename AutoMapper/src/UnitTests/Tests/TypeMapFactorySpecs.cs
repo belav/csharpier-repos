@@ -100,15 +100,13 @@ namespace AutoMapper.UnitTests.Tests
             };
 
             var profile = new TestProfile();
-            profile.Internal()
-                .AddMemberConfiguration()
-                .AddMember<NameSplitMember>(
-                    _ =>
-                    {
-                        _.SourceMemberNamingConvention = namingConvention;
-                        _.DestinationMemberNamingConvention = new PascalCaseNamingConvention();
-                    }
-                );
+            profile.Internal().AddMemberConfiguration().AddMember<NameSplitMember>(
+                _ =>
+                {
+                    _.SourceMemberNamingConvention = namingConvention;
+                    _.DestinationMemberNamingConvention = new PascalCaseNamingConvention();
+                }
+            );
             _mappingOptions = new ProfileMap(profile);
         }
 
@@ -158,15 +156,13 @@ namespace AutoMapper.UnitTests.Tests
             };
 
             var profile = new TestProfile();
-            profile.Internal()
-                .AddMemberConfiguration()
-                .AddMember<NameSplitMember>(
-                    _ =>
-                    {
-                        _.SourceMemberNamingConvention = new PascalCaseNamingConvention();
-                        _.DestinationMemberNamingConvention = namingConvention;
-                    }
-                );
+            profile.Internal().AddMemberConfiguration().AddMember<NameSplitMember>(
+                _ =>
+                {
+                    _.SourceMemberNamingConvention = new PascalCaseNamingConvention();
+                    _.DestinationMemberNamingConvention = namingConvention;
+                }
+            );
             _mappingOptions = new ProfileMap(profile);
         }
 

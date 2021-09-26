@@ -24,10 +24,10 @@ namespace ServerComparison.FunctionalTests
 
         public static TestMatrix TestVariants =>
             TestMatrix.ForServers( /* ServerType.IISExpress, https://github.com/dotnet/aspnetcore/issues/6168, */
-                    ServerType.Kestrel,
-                    ServerType.Nginx,
-                    ServerType.HttpSys
-                )
+                ServerType.Kestrel,
+                ServerType.Nginx,
+                ServerType.HttpSys
+            )
                 .WithTfms(Tfm.Default)
                 .WithAllHostingModels();
 

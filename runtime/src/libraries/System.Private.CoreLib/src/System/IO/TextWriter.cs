@@ -536,8 +536,7 @@ namespace System.IO
         }
 
         #region Task based Async APIs
-        public virtual Task WriteAsync(char value) =>
-            Task.Factory.StartNew(
+        public virtual Task WriteAsync(char value) => Task.Factory.StartNew(
                 static state =>
                 {
                     var t = (TupleSlim<TextWriter, char>)state!;
@@ -549,8 +548,7 @@ namespace System.IO
                 TaskScheduler.Default
             );
 
-        public virtual Task WriteAsync(string? value) =>
-            Task.Factory.StartNew(
+        public virtual Task WriteAsync(string? value) => Task.Factory.StartNew(
                 static state =>
                 {
                     var t = (TupleSlim<TextWriter, string?>)state!;
@@ -629,8 +627,7 @@ namespace System.IO
                           TaskScheduler.Default
                       );
 
-        public virtual Task WriteLineAsync(char value) =>
-            Task.Factory.StartNew(
+        public virtual Task WriteLineAsync(char value) => Task.Factory.StartNew(
                 static state =>
                 {
                     var t = (TupleSlim<TextWriter, char>)state!;
@@ -642,8 +639,7 @@ namespace System.IO
                 TaskScheduler.Default
             );
 
-        public virtual Task WriteLineAsync(string? value) =>
-            Task.Factory.StartNew(
+        public virtual Task WriteLineAsync(string? value) => Task.Factory.StartNew(
                 static state =>
                 {
                     var t = (TupleSlim<TextWriter, string?>)state!;
@@ -732,13 +728,14 @@ namespace System.IO
 
         public virtual Task FlushAsync()
         {
-            return Task.Factory.StartNew(
-                static state => ((TextWriter)state!).Flush(),
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    static state => ((TextWriter)state!).Flush(),
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
         #endregion
 

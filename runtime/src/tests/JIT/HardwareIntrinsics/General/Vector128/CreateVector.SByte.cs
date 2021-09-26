@@ -68,7 +68,8 @@ namespace JIT.HardwareIntrinsics.General
             SByte upperValue = TestLibrary.Generator.GetSByte();
             Vector64<SByte> upper = Vector64.Create(upperValue);
 
-            object result = typeof(Vector128).GetMethod(
+            object result = typeof(Vector128)
+                .GetMethod(
                     nameof(Vector128.Create),
                     new Type[] { typeof(Vector64<SByte>), typeof(Vector64<SByte>) }
                 )
@@ -118,14 +119,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128.Create(SByte): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128.Create(SByte): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   lower: {expectedLowerValue}");
                 TestLibrary.TestFramework.LogInformation($"   upper: {expectedUpperValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

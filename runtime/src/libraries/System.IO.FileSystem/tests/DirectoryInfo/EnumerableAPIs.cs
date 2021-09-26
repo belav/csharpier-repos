@@ -28,9 +28,8 @@ namespace System.IO.Tests
         public override string[] GetEntries(string path, string searchPattern)
         {
             return (
-                (
-                    new DirectoryInfo(path).EnumerateFiles(searchPattern).Select(x => x.FullName)
-                ).ToArray()
+                (new DirectoryInfo(path).EnumerateFiles(searchPattern).Select(x => x.FullName))
+                    .ToArray()
             );
         }
     }
@@ -43,9 +42,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).EnumerateFiles("*", SearchOption.TopDirectoryOnly)
+                    new DirectoryInfo(path)
+                        .EnumerateFiles("*", SearchOption.TopDirectoryOnly)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
 
@@ -53,12 +54,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).EnumerateFiles(
-                            searchPattern,
-                            SearchOption.TopDirectoryOnly
-                        )
+                    new DirectoryInfo(path)
+                        .EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
 
@@ -66,9 +66,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).EnumerateFiles(searchPattern, option)
+                    new DirectoryInfo(path)
+                        .EnumerateFiles(searchPattern, option)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
     }
@@ -82,9 +84,8 @@ namespace System.IO.Tests
         public override string[] GetEntries(string path)
         {
             return (
-                (
-                    new DirectoryInfo(path).EnumerateFileSystemInfos().Select(x => x.FullName)
-                ).ToArray()
+                (new DirectoryInfo(path).EnumerateFileSystemInfos().Select(x => x.FullName))
+                    .ToArray()
             );
         }
     }
@@ -94,9 +95,8 @@ namespace System.IO.Tests
         public override string[] GetEntries(string path)
         {
             return (
-                (
-                    new DirectoryInfo(path).EnumerateFileSystemInfos("*").Select(x => x.FullName)
-                ).ToArray()
+                (new DirectoryInfo(path).EnumerateFileSystemInfos("*").Select(x => x.FullName))
+                    .ToArray()
             );
         }
 
@@ -104,9 +104,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).EnumerateFileSystemInfos(searchPattern)
+                    new DirectoryInfo(path)
+                        .EnumerateFileSystemInfos(searchPattern)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
     }
@@ -117,12 +119,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).EnumerateFileSystemInfos(
-                            "*",
-                            SearchOption.TopDirectoryOnly
-                        )
+                    new DirectoryInfo(path)
+                        .EnumerateFileSystemInfos("*", SearchOption.TopDirectoryOnly)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
 
@@ -130,12 +131,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).EnumerateFileSystemInfos(
-                            searchPattern,
-                            SearchOption.TopDirectoryOnly
-                        )
+                    new DirectoryInfo(path)
+                        .EnumerateFileSystemInfos(searchPattern, SearchOption.TopDirectoryOnly)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
 
@@ -143,9 +143,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).EnumerateFileSystemInfos(searchPattern, option)
+                    new DirectoryInfo(path)
+                        .EnumerateFileSystemInfos(searchPattern, option)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
     }
@@ -169,9 +171,8 @@ namespace System.IO.Tests
         public override string[] GetEntries(string path)
         {
             return (
-                (
-                    new DirectoryInfo(path).EnumerateDirectories("*").Select(x => x.FullName)
-                ).ToArray()
+                (new DirectoryInfo(path).EnumerateDirectories("*").Select(x => x.FullName))
+                    .ToArray()
             );
         }
 
@@ -179,9 +180,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).EnumerateDirectories(searchPattern)
+                    new DirectoryInfo(path)
+                        .EnumerateDirectories(searchPattern)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
     }
@@ -192,9 +195,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
+                    new DirectoryInfo(path)
+                        .EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
 
@@ -202,12 +207,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).EnumerateDirectories(
-                            searchPattern,
-                            SearchOption.TopDirectoryOnly
-                        )
+                    new DirectoryInfo(path)
+                        .EnumerateDirectories(searchPattern, SearchOption.TopDirectoryOnly)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
 
@@ -215,9 +219,11 @@ namespace System.IO.Tests
         {
             return (
                 (
-                    new DirectoryInfo(path).EnumerateDirectories(searchPattern, option)
+                    new DirectoryInfo(path)
+                        .EnumerateDirectories(searchPattern, option)
                         .Select(x => x.FullName)
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
     }

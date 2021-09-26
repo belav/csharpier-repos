@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 options: null,
                 // (1,8): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 // private
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(1, 8)
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
+                    .WithArguments("")
+                    .WithLocation(1, 8)
             );
             N(SyntaxKind.IncompleteMember);
             {
@@ -78,11 +80,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var d = SyntaxFactory.ParseMemberDeclaration(sb.ToString());
             if (d.GetDiagnostics().Any()) // some platforms have extra deep stacks and can parse this
             {
-                d.GetDiagnostics()
-                    .Verify(
-                        // error CS8078: An expression is too long or complex to compile
-                        Diagnostic(ErrorCode.ERR_InsufficientStack, "")
-                    );
+                d.GetDiagnostics().Verify(
+                    // error CS8078: An expression is too long or complex to compile
+                    Diagnostic(ErrorCode.ERR_InsufficientStack, "")
+                );
             }
         }
 
@@ -105,11 +106,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var cu = SyntaxFactory.ParseCompilationUnit(sb.ToString());
             if (cu.GetDiagnostics().Any()) // some platforms have extra deep stacks and can parse this
             {
-                cu.GetDiagnostics()
-                    .Verify(
-                        // error CS8078: An expression is too long or complex to compile
-                        Diagnostic(ErrorCode.ERR_InsufficientStack, "")
-                    );
+                cu.GetDiagnostics().Verify(
+                    // error CS8078: An expression is too long or complex to compile
+                    Diagnostic(ErrorCode.ERR_InsufficientStack, "")
+                );
             }
         }
 
@@ -503,9 +503,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     // (1,1): error CS1073: Unexpected token '('
                     // async Task<SomeNamespace.SomeType Method();
                     Diagnostic(
-                            ErrorCode.ERR_UnexpectedToken,
-                            "async Task<SomeNamespace.SomeType Method"
-                        )
+                        ErrorCode.ERR_UnexpectedToken,
+                        "async Task<SomeNamespace.SomeType Method"
+                    )
                         .WithArguments("(")
                         .WithLocation(1, 1),
                     // (1,35): error CS1003: Syntax error, ',' expected
@@ -565,9 +565,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     // (1,1): error CS1073: Unexpected token '('
                     // public Task<SomeNamespace.SomeType Method();
                     Diagnostic(
-                            ErrorCode.ERR_UnexpectedToken,
-                            "public Task<SomeNamespace.SomeType Method"
-                        )
+                        ErrorCode.ERR_UnexpectedToken,
+                        "public Task<SomeNamespace.SomeType Method"
+                    )
                         .WithArguments("(")
                         .WithLocation(1, 1),
                     // (1,36): error CS1003: Syntax error, ',' expected

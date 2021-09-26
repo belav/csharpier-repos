@@ -145,18 +145,20 @@ internal static partial class Interop
                 if (pos > 0)
                 {
                     if (
-                        long.TryParse(
-                            s.AsSpan(start, pos),
-                            NumberStyles.HexNumber,
-                            CultureInfo.InvariantCulture,
-                            out long startingAddress
-                        )
-                        && long.TryParse(
-                            s.AsSpan(pos + 1, end - (pos + 1)),
-                            NumberStyles.HexNumber,
-                            CultureInfo.InvariantCulture,
-                            out long endingAddress
-                        )
+                        long
+                            .TryParse(
+                                s.AsSpan(start, pos),
+                                NumberStyles.HexNumber,
+                                CultureInfo.InvariantCulture,
+                                out long startingAddress
+                            )
+                        && long
+                            .TryParse(
+                                s.AsSpan(pos + 1, end - (pos + 1)),
+                                NumberStyles.HexNumber,
+                                CultureInfo.InvariantCulture,
+                                out long endingAddress
+                            )
                     )
                     {
                         return (startingAddress, (int)(endingAddress - startingAddress));

@@ -247,15 +247,14 @@ namespace Microsoft.AspNetCore.Authentication
         {
             var services = new ServiceCollection().AddLogging();
             var transform = new RunOnce();
-            var builder = services.AddSingleton<IClaimsTransformation>(transform)
-                .AddAuthentication(
-                    o =>
-                    {
-                        o.DefaultScheme = DefaultScheme;
-                        o.AddScheme<TestHandler2>("auth1", "auth1");
-                        o.AddScheme<TestHandler>("specific", "specific");
-                    }
-                );
+            var builder = services.AddSingleton<IClaimsTransformation>(transform).AddAuthentication(
+                o =>
+                {
+                    o.DefaultScheme = DefaultScheme;
+                    o.AddScheme<TestHandler2>("auth1", "auth1");
+                    o.AddScheme<TestHandler>("specific", "specific");
+                }
+            );
             RegisterAuth(
                 builder,
                 o =>

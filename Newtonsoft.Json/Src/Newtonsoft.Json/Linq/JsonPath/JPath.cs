@@ -204,9 +204,9 @@ namespace Newtonsoft.Json.Linq.JsonPath
             if (_currentIndex > currentPartStartIndex)
             {
                 string? member = _expression.Substring(
-                        currentPartStartIndex,
-                        _currentIndex - currentPartStartIndex
-                    )
+                    currentPartStartIndex,
+                    _currentIndex - currentPartStartIndex
+                )
                     .TrimEnd();
                 if (member == "*")
                 {
@@ -651,23 +651,25 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
                         if (numberText.IndexOfAny(FloatCharacters) != -1)
                         {
-                            bool result = double.TryParse(
-                                numberText,
-                                NumberStyles.Float | NumberStyles.AllowThousands,
-                                CultureInfo.InvariantCulture,
-                                out var d
-                            );
+                            bool result = double
+                                .TryParse(
+                                    numberText,
+                                    NumberStyles.Float | NumberStyles.AllowThousands,
+                                    CultureInfo.InvariantCulture,
+                                    out var d
+                                );
                             value = d;
                             return result;
                         }
                         else
                         {
-                            bool result = long.TryParse(
-                                numberText,
-                                NumberStyles.Integer,
-                                CultureInfo.InvariantCulture,
-                                out var l
-                            );
+                            bool result = long
+                                .TryParse(
+                                    numberText,
+                                    NumberStyles.Integer,
+                                    CultureInfo.InvariantCulture,
+                                    out var l
+                                );
                             value = l;
                             return result;
                         }

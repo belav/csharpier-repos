@@ -33,17 +33,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [Shared]
     internal partial class EnumAndCompletionListTagCompletionProvider : LSPCompletionProvider
     {
-        private static readonly CompletionItemRules s_enumTypeRules =
-            CompletionItemRules.Default.WithCommitCharacterRules(
-                    ImmutableArray.Create(
-                        CharacterSetModificationRule.Create(
-                            CharacterSetModificationKind.Replace,
-                            '.'
-                        )
-                    )
+        private static readonly CompletionItemRules s_enumTypeRules = CompletionItemRules.Default
+            .WithCommitCharacterRules(
+                ImmutableArray.Create(
+                    CharacterSetModificationRule.Create(CharacterSetModificationKind.Replace, '.')
                 )
-                .WithMatchPriority(MatchPriority.Preselect)
-                .WithSelectionBehavior(CompletionItemSelectionBehavior.HardSelection);
+            )
+            .WithMatchPriority(MatchPriority.Preselect)
+            .WithSelectionBehavior(CompletionItemSelectionBehavior.HardSelection);
 
         private static readonly ImmutableHashSet<char> s_triggerCharacters =
             ImmutableHashSet.Create(' ', '[', '(', '~');
@@ -109,9 +106,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 Contract.ThrowIfNull(typeInferenceService, nameof(typeInferenceService));
 
                 var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                        position,
-                        cancellationToken
-                    )
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var types = typeInferenceService.InferTypes(
                     semanticModel,
@@ -126,12 +123,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 foreach (var type in types)
                     await HandleSingleTypeAsync(
-                            context,
-                            semanticModel,
-                            token,
-                            type,
-                            cancellationToken
-                        )
+                        context,
+                        semanticModel,
+                        token,
+                        type,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
@@ -213,10 +210,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             // Does type have any aliases?
             var alias = await type.FindApplicableAliasAsync(
-                    position,
-                    semanticModel,
-                    cancellationToken
-                )
+                position,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var displayText =
@@ -413,18 +410,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             )
                 return null;
 
-            var documentation = CodeAnalysis.Shared.Utilities.DocumentationComment.FromXmlFragment(
-                xmlText
-            );
+            var documentation = CodeAnalysis.Shared.Utilities.DocumentationComment
+                .FromXmlFragment(xmlText);
 
             var completionListType =
                 documentation.CompletionListCref != null
                     ? DocumentationCommentId.GetSymbolsForDeclarationId(
-                              documentation.CompletionListCref,
-                              compilation
-                          )
-                          .OfType<INamedTypeSymbol>()
-                          .FirstOrDefault()
+                          documentation.CompletionListCref,
+                          compilation
+                      )
+                      .OfType<INamedTypeSymbol>()
+                      .FirstOrDefault()
                     : null;
 
             return completionListType != null && completionListType.IsAccessibleWithin(within)

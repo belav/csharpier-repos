@@ -23,11 +23,11 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             CreateTestData("Uint8", 180, 0x91, 0xCC, 0xB4),
             CreateTestData("Uint16", 384, 0x91, 0xCD, 0x01, 0x80),
             CreateTestData("Uint32", 70_000, 0x91, 0xCE, 0x00, 0x01, 0x11, 0x70),
-        }.ToDictionary(t => t.Name);
+        }
+            .ToDictionary(t => t.Name);
 
-        public static IEnumerable<object[]> AckTestData = _ackTestData.Keys.Select(
-            k => new object[] { k }
-        );
+        public static IEnumerable<object[]> AckTestData = _ackTestData.Keys
+            .Select(k => new object[] { k });
 
         [Theory]
         [MemberData(nameof(AckTestData))]
@@ -84,10 +84,11 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
                 0xA1,
                 (byte)'C'
             ),
-        }.ToDictionary(t => t.Name);
+        }
+            .ToDictionary(t => t.Name);
 
-        public static IEnumerable<object[]> GroupCommandTestData =
-            _groupCommandTestData.Keys.Select(k => new object[] { k });
+        public static IEnumerable<object[]> GroupCommandTestData = _groupCommandTestData.Keys
+            .Select(k => new object[] { k });
 
         [Theory]
         [MemberData(nameof(GroupCommandTestData))]
@@ -204,11 +205,11 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
                 0x01,
                 0x2A
             ),
-        }.ToDictionary(t => t.Name);
+        }
+            .ToDictionary(t => t.Name);
 
-        public static IEnumerable<object[]> InvocationTestData = _invocationTestData.Keys.Select(
-            k => new object[] { k }
-        );
+        public static IEnumerable<object[]> InvocationTestData = _invocationTestData.Keys
+            .Select(k => new object[] { k });
 
         [Theory]
         [MemberData(nameof(InvocationTestData))]

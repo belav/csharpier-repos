@@ -74,20 +74,16 @@ namespace System.Buffers
                     Debug.Assert(positionObject is string);
 
                     memory =
-                        (ReadOnlyMemory<T>)(object)((string)positionObject).AsMemory(
-                            startIndex,
-                            endIndex - startIndex
-                        );
+                        (ReadOnlyMemory<T>)(object)((string)positionObject)
+                            .AsMemory(startIndex, endIndex - startIndex);
                 }
                 else // type == SequenceType.MemoryManager
                 {
                     Debug.Assert(type == SequenceType.MemoryManager);
                     Debug.Assert(positionObject is MemoryManager<T>);
 
-                    memory = ((MemoryManager<T>)positionObject).Memory.Slice(
-                        startIndex,
-                        endIndex - startIndex
-                    );
+                    memory = ((MemoryManager<T>)positionObject).Memory
+                        .Slice(startIndex, endIndex - startIndex);
                 }
             }
 
@@ -164,18 +160,17 @@ namespace System.Buffers
                 if (typeof(T) == typeof(char) && endIndex < 0)
                 {
                     // No need to remove the FlagBitMask since (endIndex - startIndex) == (endIndex & ReadOnlySequence.IndexBitMask) - (startIndex & ReadOnlySequence.IndexBitMask)
-                    return (ReadOnlyMemory<T>)(object)((string)startObject).AsMemory(
-                        startIndex & ReadOnlySequence.IndexBitMask,
-                        endIndex - startIndex
-                    );
+                    return (ReadOnlyMemory<T>)(object)((string)startObject)
+                        .AsMemory(
+                            startIndex & ReadOnlySequence.IndexBitMask,
+                            endIndex - startIndex
+                        );
                 }
                 else // endIndex >= 0, A == 1 && B == 0 means SequenceType.MemoryManager
                 {
                     startIndex &= ReadOnlySequence.IndexBitMask;
-                    return ((MemoryManager<T>)startObject).Memory.Slice(
-                        startIndex,
-                        endIndex - startIndex
-                    );
+                    return ((MemoryManager<T>)startObject).Memory
+                        .Slice(startIndex, endIndex - startIndex);
                 }
             }
         }
@@ -251,18 +246,14 @@ namespace System.Buffers
                 {
                     var memory = (ReadOnlyMemory<T>)(object)((string)startObject).AsMemory();
                     // No need to remove the FlagBitMask since (endIndex - startIndex) == (endIndex & ReadOnlySequence.IndexBitMask) - (startIndex & ReadOnlySequence.IndexBitMask)
-                    return memory.Span.Slice(
-                        startIndex & ReadOnlySequence.IndexBitMask,
-                        endIndex - startIndex
-                    );
+                    return memory.Span
+                        .Slice(startIndex & ReadOnlySequence.IndexBitMask, endIndex - startIndex);
                 }
                 else // endIndex >= 0, A == 1 && B == 0 means SequenceType.MemoryManager
                 {
                     startIndex &= ReadOnlySequence.IndexBitMask;
-                    return ((MemoryManager<T>)startObject).Memory.Span.Slice(
-                        startIndex,
-                        endIndex - startIndex
-                    );
+                    return ((MemoryManager<T>)startObject).Memory.Span
+                        .Slice(startIndex, endIndex - startIndex);
                 }
             }
         }
@@ -809,10 +800,8 @@ namespace System.Buffers
             if (typeof(T) == typeof(char) && endIndex < 0)
             {
                 // Negative start and negative end index == string
-                ReadOnlySpan<char> spanOfChar = ((string)startObject).AsSpan(
-                    startIndex & ReadOnlySequence.IndexBitMask,
-                    endIndex - startIndex
-                );
+                ReadOnlySpan<char> spanOfChar = ((string)startObject)
+                    .AsSpan(startIndex & ReadOnlySequence.IndexBitMask, endIndex - startIndex);
                 return MemoryMarshal.CreateReadOnlySpan(
                     ref Unsafe.As<char, T>(ref MemoryMarshal.GetReference(spanOfChar)),
                     spanOfChar.Length
@@ -822,10 +811,8 @@ namespace System.Buffers
             {
                 // Negative start and positive end index == MemoryManager<T>
                 startIndex &= ReadOnlySequence.IndexBitMask;
-                return ((MemoryManager<T>)startObject).Memory.Span.Slice(
-                    startIndex,
-                    endIndex - startIndex
-                );
+                return ((MemoryManager<T>)startObject).Memory.Span
+                    .Slice(startIndex, endIndex - startIndex);
             }
         }
     }

@@ -120,7 +120,8 @@ class C
                         let cdi = pdbReader.GetCustomDebugInformation(cdiHandle)
                         where pdbReader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink
                         select pdbReader.GetBlobBytes(cdi.Value)
-                    ).Single();
+                    )
+                        .Single();
 
                     AssertEx.Equal(sourceLinkBlob, actualBlob);
                 }
@@ -218,10 +219,11 @@ class C
                 // error CS0041: Unexpected error writing debug information -- 'Windows PDB writer doesn't support SourceLink feature: '<lib name>''
                 Diagnostic(ErrorCode.FTL_DebugEmitFailure)
                     .WithArguments(
-                        string.Format(
-                            CodeAnalysisResources.SymWriterDoesNotSupportSourceLink,
-                            "<lib name>"
-                        )
+                        string
+                            .Format(
+                                CodeAnalysisResources.SymWriterDoesNotSupportSourceLink,
+                                "<lib name>"
+                            )
                     )
             );
         }

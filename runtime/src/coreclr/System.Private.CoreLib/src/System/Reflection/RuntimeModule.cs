@@ -153,10 +153,10 @@ namespace System.Reflection
 
                 ModuleHandle moduleHandle = new ModuleHandle(this);
                 IRuntimeMethodInfo methodHandle = moduleHandle.ResolveMethodHandle(
-                        tk,
-                        typeArgs,
-                        methodArgs
-                    )
+                    tk,
+                    typeArgs,
+                    methodArgs
+                )
                     .GetMethodInfo();
 
                 Type declaringType = RuntimeMethodHandle.GetDeclaringType(methodHandle);
@@ -283,10 +283,10 @@ namespace System.Reflection
                 }
 
                 IRuntimeFieldInfo fieldHandle = moduleHandle.ResolveFieldHandle(
-                        metadataToken,
-                        typeArgs,
-                        methodArgs
-                    )
+                    metadataToken,
+                    typeArgs,
+                    methodArgs
+                )
                     .GetRuntimeFieldInfo();
 
                 RuntimeType declaringType = RuntimeFieldHandle.GetApproxDeclaringType(

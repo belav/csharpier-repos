@@ -172,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
                         _exportProvider.GetExports<
                             ILanguageServiceFactory,
                             LanguageServiceMetadata
-                        >().Select(lz => lz.Metadata.Language)
+                        >()
+                            .Select(lz => lz.Metadata.Language)
                     )
                     .Distinct();
 

@@ -113,7 +113,8 @@ namespace SslStress
                 }
             ) {
                 IsBackground = true
-            }.Start();
+            }
+                .Start();
 
             IEnumerable<Task> workers = CreateWorkerSeeds()
                 .Select(x => RunSingleWorker(x.workerId, x.random));

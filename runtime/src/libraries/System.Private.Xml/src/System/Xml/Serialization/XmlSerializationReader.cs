@@ -835,11 +835,12 @@ namespace System.Xml.Serialization
                 }
                 else
                 {
-                    attr.Value = string.Concat(
-                        _r.LookupNamespace(attr.Value.Substring(0, colon)),
-                        ":",
-                        attr.Value.AsSpan(colon + 1)
-                    );
+                    attr.Value = string
+                        .Concat(
+                            _r.LookupNamespace(attr.Value.Substring(0, colon)),
+                            ":",
+                            attr.Value.AsSpan(colon + 1)
+                        );
                 }
             }
             return;
@@ -1146,10 +1147,8 @@ namespace System.Xml.Serialization
                     {
                         try
                         {
-                            soapArrayInfo.length = int.Parse(
-                                dimensions[i],
-                                CultureInfo.InvariantCulture
-                            );
+                            soapArrayInfo.length = int
+                                .Parse(dimensions[i], CultureInfo.InvariantCulture);
                             soapArrayInfo.dimensions++;
                         }
                         catch (Exception e)
@@ -2441,18 +2440,17 @@ namespace System.Xml.Serialization
                             + ", "
                             + c
                             + ", "
-                            + outerClass.RaCodeGen.GetStringForTypeof(
-                                choiceTypeFullName,
-                                choiceUseReflection
-                            )
+                            + outerClass.RaCodeGen
+                                .GetStringForTypeof(choiceTypeFullName, choiceUseReflection)
                             + ");";
                         _choiceArraySource =
                             init
-                            + outerClass.RaCodeGen.GetStringForArrayMember(
-                                a,
-                                c + "++",
-                                mapping.ChoiceIdentifier.Mapping.TypeDesc
-                            );
+                            + outerClass.RaCodeGen
+                                .GetStringForArrayMember(
+                                    a,
+                                    c + "++",
+                                    mapping.ChoiceIdentifier.Mapping.TypeDesc
+                                );
                     }
                     else
                     {

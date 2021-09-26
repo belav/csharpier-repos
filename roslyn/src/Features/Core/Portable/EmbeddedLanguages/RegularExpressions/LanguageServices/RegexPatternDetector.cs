@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             );
 
         private static readonly Dictionary<string, RegexOptions> s_nameToOption =
-            typeof(RegexOptions).GetTypeInfo()
+            typeof(RegexOptions)
+                .GetTypeInfo()
                 .DeclaredFields.Where(f => f.FieldType == typeof(RegexOptions))
                 .ToDictionary(
                     f => f.Name,
@@ -330,9 +331,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
                     if (syntaxFacts.StringComparer.Compare(nameof(Regex), name) == 0)
                     {
                         var constructor = semanticModel.GetSymbolInfo(
-                                invocationOrCreation,
-                                cancellationToken
-                            )
+                            invocationOrCreation,
+                            cancellationToken
+                        )
                             .GetAnySymbol();
                         if (_regexType.Equals(constructor?.ContainingType))
                         {
@@ -350,9 +351,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             else if (syntaxFacts.IsImplicitObjectCreationExpression(invocationOrCreation))
             {
                 var constructor = semanticModel.GetSymbolInfo(
-                        invocationOrCreation,
-                        cancellationToken
-                    )
+                    invocationOrCreation,
+                    cancellationToken
+                )
                     .GetAnySymbol();
                 if (_regexType.Equals(constructor?.ContainingType))
                 {
@@ -420,11 +421,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         {
             options = default;
 
-            var parameter = _info.SemanticFacts.FindParameterForArgument(
-                semanticModel,
-                argumentNode,
-                cancellationToken
-            );
+            var parameter = _info.SemanticFacts
+                .FindParameterForArgument(semanticModel, argumentNode, cancellationToken);
             if (parameter?.Name != _patternName)
             {
                 return false;

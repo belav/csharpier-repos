@@ -54,13 +54,13 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         )
         {
             var parts = await ToDescriptionPartsAsync(
-                    workspace,
-                    semanticModel,
-                    position,
-                    symbols,
-                    groups,
-                    cancellationToken
-                )
+                workspace,
+                semanticModel,
+                position,
+                symbols,
+                groups,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return parts.ToDisplayString();
         }

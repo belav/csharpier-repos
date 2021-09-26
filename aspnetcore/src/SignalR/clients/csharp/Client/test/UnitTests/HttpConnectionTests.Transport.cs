@@ -87,12 +87,10 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     async (connection) =>
                     {
                         await connection.StartAsync().DefaultTimeout();
-                        await connection.Transport.Output.WriteAsync(
-                            Encoding.UTF8.GetBytes("Hello world 1")
-                        );
-                        await connection.Transport.Output.WriteAsync(
-                            Encoding.UTF8.GetBytes("Hello world 2")
-                        );
+                        await connection.Transport.Output
+                            .WriteAsync(Encoding.UTF8.GetBytes("Hello world 1"));
+                        await connection.Transport.Output
+                            .WriteAsync(Encoding.UTF8.GetBytes("Hello world 2"));
                     }
                 );
                 // Fail safe in case the code is modified and some requests don't execute as a result
@@ -134,8 +132,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         {
                             await connection.StartAsync().DefaultTimeout();
 
-                            var feature =
-                                connection.Features.Get<IConnectionInherentKeepAliveFeature>();
+                            var feature = connection.Features
+                                .Get<IConnectionInherentKeepAliveFeature>();
                             Assert.NotNull(feature);
                             Assert.Equal(expectedValue, feature.HasInherentKeepAlive);
                         }
@@ -172,8 +170,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         Assert.StartsWith("Microsoft SignalR/", userAgentHeader);
 
                         // user agent version should come from version embedded in assembly metadata
-                        var assemblyVersion =
-                            typeof(Constants).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+                        var assemblyVersion = typeof(Constants).Assembly
+                            .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
 
                         Assert.Contains(assemblyVersion.InformationalVersion, userAgentHeader);
 
@@ -197,9 +195,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     async (connection) =>
                     {
                         await connection.StartAsync().DefaultTimeout();
-                        await connection.Transport.Output.WriteAsync(
-                            Encoding.UTF8.GetBytes("Hello World")
-                        );
+                        await connection.Transport.Output
+                            .WriteAsync(Encoding.UTF8.GetBytes("Hello World"));
                     }
                 );
                 // Fail safe in case the code is modified and some requests don't execute as a result
@@ -229,9 +226,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 testHttpHandler.OnRequest(
                     async (request, next, token) =>
                     {
-                        var requestedWithHeader = request.Headers.GetValues(
-                            HeaderNames.XRequestedWith
-                        );
+                        var requestedWithHeader = request.Headers
+                            .GetValues(HeaderNames.XRequestedWith);
                         var requestedWithValue = Assert.Single(requestedWithHeader);
                         Assert.Equal("XMLHttpRequest", requestedWithValue);
 
@@ -255,9 +251,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     async (connection) =>
                     {
                         await connection.StartAsync().DefaultTimeout();
-                        await connection.Transport.Output.WriteAsync(
-                            Encoding.UTF8.GetBytes("Hello World")
-                        );
+                        await connection.Transport.Output
+                            .WriteAsync(Encoding.UTF8.GetBytes("Hello World"));
                     }
                 );
                 // Fail safe in case the code is modified and some requests don't execute as a result

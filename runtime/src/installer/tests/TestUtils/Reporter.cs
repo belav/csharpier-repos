@@ -47,11 +47,9 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         public void WriteBanner(string content)
         {
             string border = new string('*', content.Length + 6);
-            WriteLine(
-                $@"{border}
+            WriteLine($@"{border}
 *  {content}  *
-{border}".Green()
-            );
+{border}".Green());
         }
     }
 }

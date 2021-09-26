@@ -33,11 +33,11 @@ namespace Microsoft.CodeAnalysis.UnitTesting.ExternalAccess
         {
             var callerMethods =
                 await callbackService.InvokeAsync<ImmutableArray<ReferenceMethodDescriptor>?>(
-                        provider,
-                        nameof(ICodeLensContext.FindReferenceMethodsAsync),
-                        new object[] { descriptor, descriptorContext },
-                        cancellationToken
-                    )
+                    provider,
+                    nameof(ICodeLensContext.FindReferenceMethodsAsync),
+                    new object[] { descriptor, descriptorContext },
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             if (!callerMethods.HasValue || callerMethods.Value.IsEmpty)
@@ -45,14 +45,15 @@ namespace Microsoft.CodeAnalysis.UnitTesting.ExternalAccess
                 return Empty;
             }
 
-            return callerMethods.Value.SelectAsArray(
-                m =>
-                    (
-                        MethodFullyQualifiedName: m.FullName,
-                        MethodFilePath: m.FilePath,
-                        MethodOutputFilePath: m.OutputFilePath
-                    )
-            );
+            return callerMethods.Value
+                .SelectAsArray(
+                    m =>
+                        (
+                            MethodFullyQualifiedName: m.FullName,
+                            MethodFilePath: m.FilePath,
+                            MethodOutputFilePath: m.OutputFilePath
+                        )
+                );
         }
     }
 }

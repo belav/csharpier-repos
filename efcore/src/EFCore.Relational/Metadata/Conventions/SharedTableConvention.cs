@@ -102,8 +102,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (
                     entityTypes.Count > 0
                     && !entityType.FindRowInternalForeignKeys(
-                            StoreObjectIdentifier.Table(table.Name, table.Schema)
-                        )
+                        StoreObjectIdentifier.Table(table.Name, table.Schema)
+                    )
                         .Any()
                     && !entityTypes.Any(t => t.IsAssignableFrom(entityType))
                 )
@@ -234,12 +234,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (
                     !usePrefix
                     || (
-                        !property.DeclaringEntityType.IsStrictlyDerivedFrom(
-                            otherProperty.DeclaringEntityType
-                        )
-                        && !otherProperty.DeclaringEntityType.IsStrictlyDerivedFrom(
-                            property.DeclaringEntityType
-                        )
+                        !property.DeclaringEntityType
+                            .IsStrictlyDerivedFrom(otherProperty.DeclaringEntityType)
+                        && !otherProperty.DeclaringEntityType
+                            .IsStrictlyDerivedFrom(property.DeclaringEntityType)
                     )
                     || property.DeclaringEntityType.FindRowInternalForeignKeys(storeObject).Any()
                 )
@@ -261,14 +259,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (
                     !usePrefix
                     || (
-                        !property.DeclaringEntityType.IsStrictlyDerivedFrom(
-                            otherProperty.DeclaringEntityType
-                        )
-                        && !otherProperty.DeclaringEntityType.IsStrictlyDerivedFrom(
-                            property.DeclaringEntityType
-                        )
+                        !property.DeclaringEntityType
+                            .IsStrictlyDerivedFrom(otherProperty.DeclaringEntityType)
+                        && !otherProperty.DeclaringEntityType
+                            .IsStrictlyDerivedFrom(property.DeclaringEntityType)
                     )
-                    || otherProperty.DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
+                    || otherProperty.DeclaringEntityType
+                        .FindRowInternalForeignKeys(storeObject)
                         .Any()
                 )
                 {

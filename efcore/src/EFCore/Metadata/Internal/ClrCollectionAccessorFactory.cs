@@ -21,32 +21,35 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class ClrCollectionAccessorFactory
     {
-        private static readonly MethodInfo _genericCreate =
-            typeof(ClrCollectionAccessorFactory).GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateGeneric))!;
+        private static readonly MethodInfo _genericCreate = typeof(ClrCollectionAccessorFactory)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(CreateGeneric))!;
 
-        private static readonly MethodInfo _createAndSet =
-            typeof(ClrCollectionAccessorFactory).GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateAndSet))!;
+        private static readonly MethodInfo _createAndSet = typeof(ClrCollectionAccessorFactory)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(CreateAndSet))!;
 
-        private static readonly MethodInfo _create =
-            typeof(ClrCollectionAccessorFactory).GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateCollection))!;
+        private static readonly MethodInfo _create = typeof(ClrCollectionAccessorFactory)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(CreateCollection))!;
 
         private static readonly MethodInfo _createAndSetHashSet =
-            typeof(ClrCollectionAccessorFactory).GetTypeInfo()
+            typeof(ClrCollectionAccessorFactory)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(CreateAndSetHashSet))!;
 
-        private static readonly MethodInfo _createHashSet =
-            typeof(ClrCollectionAccessorFactory).GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateHashSet))!;
+        private static readonly MethodInfo _createHashSet = typeof(ClrCollectionAccessorFactory)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(CreateHashSet))!;
 
         private static readonly MethodInfo _createAndSetObservableHashSet =
-            typeof(ClrCollectionAccessorFactory).GetTypeInfo()
+            typeof(ClrCollectionAccessorFactory)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(CreateAndSetObservableHashSet))!;
 
         private static readonly MethodInfo _createObservableHashSet =
-            typeof(ClrCollectionAccessorFactory).GetTypeInfo()
+            typeof(ClrCollectionAccessorFactory)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(CreateObservableHashSet))!;
 
         /// <summary>
@@ -171,9 +174,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             var getterDelegate = Expression.Lambda<Func<TEntity, TCollection>>(
-                    memberAccessForRead,
-                    entityParameter
-                )
+                memberAccessForRead,
+                entityParameter
+            )
                 .Compile();
 
             Action<TEntity, TCollection>? setterDelegate = null;
@@ -199,13 +202,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 );
             }
 
-            var concreteType = new CollectionTypeFactory().TryFindTypeToInstantiate(
-                typeof(TEntity),
-                typeof(TCollection),
-                navigation.DeclaringEntityType.Model[
-                    CoreAnnotationNames.FullChangeTrackingNotificationsRequiredAnnotation
-                ] != null
-            );
+            var concreteType = new CollectionTypeFactory()
+                .TryFindTypeToInstantiate(
+                    typeof(TEntity),
+                    typeof(TCollection),
+                    navigation.DeclaringEntityType.Model[
+                        CoreAnnotationNames.FullChangeTrackingNotificationsRequiredAnnotation
+                    ] != null
+                );
 
             if (concreteType != null)
             {
@@ -222,10 +226,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 Action<TEntity, TCollection>,
                                 TCollection
                             >)_createAndSetHashSet.MakeGenericMethod(
-                                    typeof(TEntity),
-                                    typeof(TCollection),
-                                    typeof(TElement)
-                                )
+                                typeof(TEntity),
+                                typeof(TCollection),
+                                typeof(TElement)
+                            )
                                 .CreateDelegate(
                                     typeof(Func<TEntity, Action<TEntity, TCollection>, TCollection>)
                                 );
@@ -238,10 +242,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 Action<TEntity, TCollection>,
                                 TCollection
                             >)_createAndSetObservableHashSet.MakeGenericMethod(
-                                    typeof(TEntity),
-                                    typeof(TCollection),
-                                    typeof(TElement)
-                                )
+                                typeof(TEntity),
+                                typeof(TCollection),
+                                typeof(TElement)
+                            )
                                 .CreateDelegate(
                                     typeof(Func<TEntity, Action<TEntity, TCollection>, TCollection>)
                                 );
@@ -254,10 +258,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 Action<TEntity, TCollection>,
                                 TCollection
                             >)_createAndSet.MakeGenericMethod(
-                                    typeof(TEntity),
-                                    typeof(TCollection),
-                                    concreteType
-                                )
+                                typeof(TEntity),
+                                typeof(TCollection),
+                                concreteType
+                            )
                                 .CreateDelegate(
                                     typeof(Func<TEntity, Action<TEntity, TCollection>, TCollection>)
                                 );
@@ -268,27 +272,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     createDelegate =
                         (Func<TCollection>)_createHashSet.MakeGenericMethod(
-                                typeof(TCollection),
-                                typeof(TElement)
-                            )
+                            typeof(TCollection),
+                            typeof(TElement)
+                        )
                             .CreateDelegate(typeof(Func<TCollection>));
                 }
                 else if (IsObservableHashSet(concreteType))
                 {
                     createDelegate =
                         (Func<TCollection>)_createObservableHashSet.MakeGenericMethod(
-                                typeof(TCollection),
-                                typeof(TElement)
-                            )
+                            typeof(TCollection),
+                            typeof(TElement)
+                        )
                             .CreateDelegate(typeof(Func<TCollection>));
                 }
                 else
                 {
                     createDelegate =
                         (Func<TCollection>)_create.MakeGenericMethod(
-                                typeof(TCollection),
-                                concreteType
-                            )
+                            typeof(TCollection),
+                            concreteType
+                        )
                             .CreateDelegate(typeof(Func<TCollection>));
                 }
             }
@@ -308,13 +312,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ParameterExpression valueParameter1
             ) =>
                 Expression.Lambda<Action<TEntity, TCollection>>(
-                        Expression.MakeMemberAccess(parameterExpression, memberInfo)
-                            .Assign(
-                                Expression.Convert(valueParameter1, memberInfo.GetMemberType())
-                            ),
-                        parameterExpression,
-                        valueParameter1
-                    )
+                    Expression.MakeMemberAccess(parameterExpression, memberInfo)
+                        .Assign(Expression.Convert(valueParameter1, memberInfo.GetMemberType())),
+                    parameterExpression,
+                    valueParameter1
+                )
                     .Compile();
         }
 

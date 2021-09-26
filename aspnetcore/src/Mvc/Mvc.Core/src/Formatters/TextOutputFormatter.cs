@@ -201,11 +201,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         private string GetMediaTypeWithCharset(string mediaType, Encoding encoding)
         {
             if (
-                string.Equals(
-                    encoding.WebName,
-                    Encoding.UTF8.WebName,
-                    StringComparison.OrdinalIgnoreCase
-                ) && OutputMediaTypeCache.ContainsKey(mediaType)
+                string
+                    .Equals(
+                        encoding.WebName,
+                        Encoding.UTF8.WebName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) && OutputMediaTypeCache.ContainsKey(mediaType)
             )
             {
                 return OutputMediaTypeCache[mediaType];

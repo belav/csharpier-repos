@@ -51,9 +51,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            HttpControllerDescriptor controllerDescriptor = (
-                (IHttpControllerSelector)tracer
-            ).SelectController(_request);
+            HttpControllerDescriptor controllerDescriptor = ((IHttpControllerSelector)tracer)
+                .SelectController(_request);
 
             // Assert
             Assert.Equal<TraceRecord>(

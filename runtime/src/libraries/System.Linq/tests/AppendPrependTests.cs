@@ -150,7 +150,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Combined()
         {
-            var v = "foo".Append('1')
+            var v = "foo"
+                .Append('1')
                 .Append('2')
                 .Prepend('3')
                 .Concat("qq".Append('Q').Prepend('W'));

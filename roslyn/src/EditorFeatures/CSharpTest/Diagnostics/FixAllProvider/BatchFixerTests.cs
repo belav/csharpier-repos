@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.SimplifyTyp
 
             public override async Task RegisterCodeFixesAsync(CodeFixContext context)
             {
-                var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken)
+                var root = await context.Document
+                    .GetSyntaxRootAsync(context.CancellationToken)
                     .ConfigureAwait(false);
                 if (
                     root.FindNode(context.Span, getInnermostNodeForTie: true)
@@ -75,10 +76,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.SimplifyTyp
                 {
                     var leadingTrivia = node.GetLeadingTrivia();
                     var newNode = SyntaxFactory.MemberAccessExpression(
-                            SyntaxKind.SimpleMemberAccessExpression,
-                            SyntaxFactory.ThisExpression(),
-                            node.WithoutLeadingTrivia()
-                        )
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        SyntaxFactory.ThisExpression(),
+                        node.WithoutLeadingTrivia()
+                    )
                         .WithLeadingTrivia(leadingTrivia);
 
                     var newRoot = root.ReplaceNode(node, newNode);

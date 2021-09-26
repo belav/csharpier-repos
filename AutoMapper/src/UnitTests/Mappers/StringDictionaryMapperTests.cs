@@ -211,15 +211,11 @@ namespace AutoMapper.UnitTests.Mappers
         public void Should_throw_when_mapping()
         {
             Should.Throw<AutoMapperMappingException>(
-                    () =>
-                    {
-                        Mapper.Map<Destination>(_source);
-                    }
-                )
-                .InnerException.ShouldBeOfType<AutoMapperMappingException>()
-                .Types.ShouldBe(
-                    new TypePair(typeof(IDictionary<string, object>), typeof(Destination))
-                );
+                () =>
+                {
+                    Mapper.Map<Destination>(_source);
+                }
+            ).InnerException.ShouldBeOfType<AutoMapperMappingException>().Types.ShouldBe(new TypePair(typeof(IDictionary<string, object>), typeof(Destination)));
         }
     }
 
@@ -396,14 +392,14 @@ namespace AutoMapper.UnitTests.Mappers
         [Fact]
         public void Should_throw()
         {
-            new Action(
-                () => Mapper.Map<SomeBase>(new StringDictionary())
-            ).ShouldThrowException<AutoMapperMappingException>(
-                ex =>
-                    ex.InnerException.Message.ShouldStartWith(
-                        $"Cannot create an instance of abstract type {typeof(SomeBase)}."
-                    )
-            );
+            new Action(() => Mapper.Map<SomeBase>(new StringDictionary()))
+                .ShouldThrowException<AutoMapperMappingException>(
+                    ex =>
+                        ex.InnerException.Message
+                            .ShouldStartWith(
+                                $"Cannot create an instance of abstract type {typeof(SomeBase)}."
+                            )
+                );
         }
     }
 }

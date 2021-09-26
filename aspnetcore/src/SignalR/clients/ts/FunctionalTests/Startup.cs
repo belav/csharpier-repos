@@ -41,20 +41,18 @@ namespace FunctionalTests
         {
             services.AddConnections();
             services.AddSignalR(
-                    options =>
-                    {
-                        options.EnableDetailedErrors = true;
-                    }
-                )
-                .AddJsonProtocol(
-                    options =>
-                    {
-                        // we are running the same tests with JSON and MsgPack protocols and having
-                        // consistent casing makes it cleaner to verify results
-                        options.PayloadSerializerOptions.PropertyNamingPolicy = null;
-                    }
-                )
-                .AddMessagePackProtocol();
+                options =>
+                {
+                    options.EnableDetailedErrors = true;
+                }
+            ).AddJsonProtocol(
+                options =>
+                {
+                    // we are running the same tests with JSON and MsgPack protocols and having
+                    // consistent casing makes it cleaner to verify results
+                    options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+                }
+            ).AddMessagePackProtocol();
 
             services.AddCors();
 
@@ -72,58 +70,57 @@ namespace FunctionalTests
                 }
             );
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(
-                    options =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+                options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidateAudience = false,
-                            ValidateIssuer = false,
-                            ValidateActor = false,
-                            ValidateLifetime = true,
-                            IssuerSigningKey = SecurityKey
-                        };
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        ValidateActor = false,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = SecurityKey
+                    };
 
-                        options.Events = new JwtBearerEvents
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
                         {
-                            OnMessageReceived = context =>
+                            var endpoint = context.HttpContext.Features
+                                .Get<IEndpointFeature>()?.Endpoint;
+                            if (
+                                endpoint != null
+                                && endpoint.Metadata.GetMetadata<HubMetadata>() != null
+                            )
                             {
-                                var endpoint =
-                                    context.HttpContext.Features.Get<IEndpointFeature>()?.Endpoint;
-                                if (
-                                    endpoint != null
-                                    && endpoint.Metadata.GetMetadata<HubMetadata>() != null
-                                )
+                                var request = context.HttpContext.Request;
+                                string token = request.Headers["Authorization"];
+
+                                if (!string.IsNullOrEmpty(token))
                                 {
-                                    var request = context.HttpContext.Request;
-                                    string token = request.Headers["Authorization"];
-
-                                    if (!string.IsNullOrEmpty(token))
-                                    {
-                                        if (
-                                            token.StartsWith(
-                                                "Bearer ",
-                                                StringComparison.OrdinalIgnoreCase
-                                            )
+                                    if (
+                                        token.StartsWith(
+                                            "Bearer ",
+                                            StringComparison.OrdinalIgnoreCase
                                         )
-                                        {
-                                            token = token.Substring("Bearer ".Length).Trim();
-                                        }
-                                    }
-                                    else
+                                    )
                                     {
-                                        token = context.Request.Query["access_token"];
+                                        token = token.Substring("Bearer ".Length).Trim();
                                     }
-
-                                    context.Token = token;
+                                }
+                                else
+                                {
+                                    token = context.Request.Query["access_token"];
                                 }
 
-                                return Task.CompletedTask;
+                                context.Token = token;
                             }
-                        };
-                    }
-                );
+
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
         }
 
         public void Configure(
@@ -238,11 +235,8 @@ namespace FunctionalTests
                         context.Response.Cookies.Append("testCookie2", "testValue2", cookieOptions);
 
                         cookieOptions.Expires = DateTimeOffset.Now.AddHours(-1);
-                        context.Response.Cookies.Append(
-                            "expiredCookie",
-                            "doesntmatter",
-                            expiredCookieOptions
-                        );
+                        context.Response.Cookies
+                            .Append("expiredCookie", "doesntmatter", expiredCookieOptions);
                     }
 
                     await next.Invoke();
@@ -270,10 +264,10 @@ namespace FunctionalTests
                 policy =>
                 {
                     policy.SetIsOriginAllowed(
-                            host =>
-                                host.StartsWith("http://localhost:", StringComparison.Ordinal)
-                                || host.StartsWith("http://127.0.0.1:", StringComparison.Ordinal)
-                        )
+                        host =>
+                            host.StartsWith("http://localhost:", StringComparison.Ordinal)
+                            || host.StartsWith("http://127.0.0.1:", StringComparison.Ordinal)
+                    )
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();

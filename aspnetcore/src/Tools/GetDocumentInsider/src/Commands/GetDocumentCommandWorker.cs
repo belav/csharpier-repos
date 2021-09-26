@@ -286,10 +286,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
             {
                 // Sanitize the document name because it may contain almost any character, including illegal filename
                 // characters such as '/' and '?' and the string "..". Do not treat slashes as folder separators.
-                var sanitizedDocumentName = string.Join(
-                    UnderscoreString,
-                    documentName.Split(InvalidFilenameCharacters)
-                );
+                var sanitizedDocumentName = string
+                    .Join(UnderscoreString, documentName.Split(InvalidFilenameCharacters));
 
                 while (sanitizedDocumentName.Contains(InvalidFilenameString))
                 {

@@ -138,14 +138,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             );
             // Ensure the next token is the "Pages" directory
             if (
-                string.Compare(
-                    relativePath,
-                    areaEndIndex,
-                    AreaPagesRoot,
-                    0,
-                    AreaPagesRoot.Length,
-                    StringComparison.OrdinalIgnoreCase
-                ) != 0
+                string
+                    .Compare(
+                        relativePath,
+                        areaEndIndex,
+                        AreaPagesRoot,
+                        0,
+                        AreaPagesRoot.Length,
+                        StringComparison.OrdinalIgnoreCase
+                    ) != 0
             )
             {
                 _unsupportedAreaPath(_logger, relativePath, null);

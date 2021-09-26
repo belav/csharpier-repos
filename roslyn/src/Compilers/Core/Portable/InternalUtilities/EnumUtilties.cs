@@ -48,10 +48,11 @@ namespace Roslyn.Utilities
                         // not using ExceptionUtilities.UnexpectedValue() because this is used by the Services layer
                         // which doesn't have those utilities.
                         throw new InvalidOperationException(
-                            string.Format(
-                                "{0} is not a valid underlying type for an enum",
-                                specialType
-                            )
+                            string
+                                .Format(
+                                    "{0} is not a valid underlying type for an enum",
+                                    specialType
+                                )
                         );
                 }
             }

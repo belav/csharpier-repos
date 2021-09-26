@@ -287,9 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (argument.Kind == BoundKind.OutVariablePendingInference)
                 {
-                    analyzedArguments.Arguments[i] = (
-                        (OutVariablePendingInference)argument
-                    ).FailInference(this, diagnostics);
+                    analyzedArguments.Arguments[i] = ((OutVariablePendingInference)argument)
+                        .FailInference(this, diagnostics);
                 }
                 else if ((object)argument.Type == null && !argument.HasAnyErrors)
                 {
@@ -494,7 +493,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         node,
                                         null,
                                         this.ContainingType
-                                    ).MakeCompilerGenerated(),
+                                    )
+                                        .MakeCompilerGenerated(),
                                     resultKind: methodGroup.ResultKind
                                 );
                             }
@@ -1157,15 +1157,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                         )
                         && (
                             typeArgumentsOpt.IsDefault
-                            || ((MethodSymbol)(object)result.Member).CheckConstraints(
-                                new ConstraintsHelper.CheckConstraintsArgs(
-                                    this.Compilation,
-                                    this.Conversions,
-                                    includeNullability: false,
-                                    syntax.Location,
-                                    candidateDiagnostics
+                            || ((MethodSymbol)(object)result.Member)
+                                .CheckConstraints(
+                                    new ConstraintsHelper.CheckConstraintsArgs(
+                                        this.Compilation,
+                                        this.Conversions,
+                                        includeNullability: false,
+                                        syntax.Location,
+                                        candidateDiagnostics
+                                    )
                                 )
-                            )
                         )
                     )
                     {
@@ -1955,9 +1956,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression defaultValue;
                 if (callerSourceLocation is object && parameter.IsCallerLineNumber)
                 {
-                    int line = callerSourceLocation.SourceTree.GetDisplayLineNumber(
-                        callerSourceLocation.SourceSpan
-                    );
+                    int line = callerSourceLocation.SourceTree
+                        .GetDisplayLineNumber(callerSourceLocation.SourceSpan);
                     defaultValue = new BoundLiteral(
                         syntax,
                         ConstantValue.Create(line),
@@ -1968,10 +1968,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (callerSourceLocation is object && parameter.IsCallerFilePath)
                 {
-                    string path = callerSourceLocation.SourceTree.GetDisplayPath(
-                        callerSourceLocation.SourceSpan,
-                        Compilation.Options.SourceReferenceResolver
-                    );
+                    string path = callerSourceLocation.SourceTree
+                        .GetDisplayPath(
+                            callerSourceLocation.SourceSpan,
+                            Compilation.Options.SourceReferenceResolver
+                        );
                     defaultValue = new BoundLiteral(
                         syntax,
                         ConstantValue.Create(path),
@@ -2362,9 +2363,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var discardedDiagnostics = DiagnosticBag.GetInstance();
             int argumentCount = analyzedArguments.Arguments.Count;
-            ArrayBuilder<BoundExpression> newArguments = ArrayBuilder<BoundExpression>.GetInstance(
-                argumentCount
-            );
+            ArrayBuilder<BoundExpression> newArguments = ArrayBuilder<BoundExpression>
+                .GetInstance(argumentCount);
             newArguments.AddRange(analyzedArguments.Arguments);
             for (int i = 0; i < argumentCount; i++)
             {
@@ -2410,45 +2410,39 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             if ((object)candidateType == null)
                             {
-                                newArguments[i] = (
-                                    (OutVariablePendingInference)argument
-                                ).FailInference(this, null);
+                                newArguments[i] = ((OutVariablePendingInference)argument)
+                                    .FailInference(this, null);
                             }
                             else
                             {
-                                newArguments[i] = (
-                                    (OutVariablePendingInference)argument
-                                ).SetInferredTypeWithAnnotations(
-                                    TypeWithAnnotations.Create(candidateType),
-                                    null
-                                );
+                                newArguments[i] = ((OutVariablePendingInference)argument)
+                                    .SetInferredTypeWithAnnotations(
+                                        TypeWithAnnotations.Create(candidateType),
+                                        null
+                                    );
                             }
                         }
                         else if (argument.Kind == BoundKind.DiscardExpression)
                         {
                             if ((object)candidateType == null)
                             {
-                                newArguments[i] = ((BoundDiscardExpression)argument).FailInference(
-                                    this,
-                                    null
-                                );
+                                newArguments[i] = ((BoundDiscardExpression)argument)
+                                    .FailInference(this, null);
                             }
                             else
                             {
-                                newArguments[i] = (
-                                    (BoundDiscardExpression)argument
-                                ).SetInferredTypeWithAnnotations(
-                                    TypeWithAnnotations.Create(candidateType)
-                                );
+                                newArguments[i] = ((BoundDiscardExpression)argument)
+                                    .SetInferredTypeWithAnnotations(
+                                        TypeWithAnnotations.Create(candidateType)
+                                    );
                             }
                         }
                         break;
                     }
                     case BoundKind.OutDeconstructVarPendingInference:
                     {
-                        newArguments[i] = (
-                            (OutDeconstructVarPendingInference)argument
-                        ).FailInference(this);
+                        newArguments[i] = ((OutDeconstructVarPendingInference)argument)
+                            .FailInference(this);
                         break;
                     }
                     case BoundKind.Parameter:
@@ -2833,8 +2827,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var funcPtr = (FunctionPointerTypeSymbol)boundExpression.Type;
 
-            var overloadResolutionResult =
-                OverloadResolutionResult<FunctionPointerMethodSymbol>.GetInstance();
+            var overloadResolutionResult = OverloadResolutionResult<FunctionPointerMethodSymbol>
+                .GetInstance();
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );

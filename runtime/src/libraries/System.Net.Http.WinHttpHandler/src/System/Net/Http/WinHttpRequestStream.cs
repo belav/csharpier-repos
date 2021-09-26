@@ -261,22 +261,24 @@ namespace System.Net.Http
             lock (_state.Lock)
             {
                 if (
-                    !Interop.WinHttp.WinHttpWriteData(
-                        _state.RequestHandle,
-                        Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
-                        (uint)count,
-                        IntPtr.Zero
-                    )
+                    !Interop.WinHttp
+                        .WinHttpWriteData(
+                            _state.RequestHandle,
+                            Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
+                            (uint)count,
+                            IntPtr.Zero
+                        )
                 )
                 {
-                    _state.TcsInternalWriteDataToRequestStream.TrySetException(
-                        new IOException(
-                            SR.net_http_io_write,
-                            WinHttpException.CreateExceptionUsingLastError(
-                                nameof(Interop.WinHttp.WinHttpWriteData)
+                    _state.TcsInternalWriteDataToRequestStream
+                        .TrySetException(
+                            new IOException(
+                                SR.net_http_io_write,
+                                WinHttpException.CreateExceptionUsingLastError(
+                                    nameof(Interop.WinHttp.WinHttpWriteData)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 

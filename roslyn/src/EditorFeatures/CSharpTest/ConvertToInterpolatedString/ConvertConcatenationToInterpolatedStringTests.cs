@@ -987,14 +987,16 @@ class C
                 LanguageVersion = CSharpLanguageVersion.CSharp9,
                 TestCode = code,
                 FixedCode = code,
-            }.RunAsync();
+            }
+                .RunAsync();
 
             await new VerifyCS.Test
             {
                 LanguageVersion = CSharpLanguageVersion.Preview,
                 TestCode = code,
                 FixedCode = fixedCode,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(40413, "https://github.com/dotnet/roslyn/issues/40413")]
@@ -1027,14 +1029,16 @@ class C
                 LanguageVersion = CSharpLanguageVersion.CSharp9,
                 TestCode = code,
                 FixedCode = code,
-            }.RunAsync();
+            }
+                .RunAsync();
 
             await new VerifyCS.Test
             {
                 LanguageVersion = CSharpLanguageVersion.Preview,
                 TestCode = code,
                 FixedCode = fixedCode,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(40413, "https://github.com/dotnet/roslyn/issues/40413")]

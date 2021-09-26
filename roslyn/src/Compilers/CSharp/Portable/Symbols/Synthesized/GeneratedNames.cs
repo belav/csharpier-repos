@@ -101,12 +101,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (name.StartsWith(AnonymousNamePrefix, StringComparison.Ordinal))
             {
                 if (
-                    int.TryParse(
-                        name.Substring(AnonymousNamePrefix.Length),
-                        NumberStyles.None,
-                        CultureInfo.InvariantCulture,
-                        out index
-                    )
+                    int
+                        .TryParse(
+                            name.Substring(AnonymousNamePrefix.Length),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out index
+                        )
                 )
                 {
                     return true;
@@ -488,12 +489,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             if (
-                int.TryParse(
-                    fieldName.Substring(lastUnder + 1),
-                    NumberStyles.None,
-                    CultureInfo.InvariantCulture,
-                    out slotIndex
-                )
+                int
+                    .TryParse(
+                        fieldName.Substring(lastUnder + 1),
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out slotIndex
+                    )
                 && slotIndex >= 1
             )
             {

@@ -375,17 +375,13 @@ namespace @return
             var attributes = new[] { true };
             Assert.Equal(
                 "dynamic",
-                typeof(object).GetTypeName(
-                    MakeCustomTypeInfo(attributes),
-                    escapeKeywordIdentifiers: false
-                )
+                typeof(object)
+                    .GetTypeName(MakeCustomTypeInfo(attributes), escapeKeywordIdentifiers: false)
             );
             Assert.Equal(
                 "dynamic",
-                typeof(object).GetTypeName(
-                    MakeCustomTypeInfo(attributes),
-                    escapeKeywordIdentifiers: true
-                )
+                typeof(object)
+                    .GetTypeName(MakeCustomTypeInfo(attributes), escapeKeywordIdentifiers: true)
             );
         }
 

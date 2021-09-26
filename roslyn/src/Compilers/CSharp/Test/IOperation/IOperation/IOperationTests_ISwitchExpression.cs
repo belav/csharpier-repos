@@ -754,7 +754,9 @@ ISwitchExpressionOperation (1 arms) (OperationKind.SwitchExpression, Type: Syste
             {
                 // file.cs(7,54): error CS0128: A local variable or function named 'z' is already defined in this scope
                 //         y = /*<bind>*/x switch { int z when x is int z => 5 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "z").WithArguments("z").WithLocation(7, 54)
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "z")
+                    .WithArguments("z")
+                    .WithLocation(7, 54)
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,

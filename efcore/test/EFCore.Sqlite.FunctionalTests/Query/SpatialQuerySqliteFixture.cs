@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
         protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
-            base.AddServices(serviceCollection)
+            base
+                .AddServices(serviceCollection)
                 .AddEntityFrameworkSqliteNetTopologySuite()
                 .AddSingleton<IRelationalTypeMappingSource, ReplacementTypeMappingSource>();
 
@@ -71,9 +72,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             ) =>
                 mappingInfo.ClrType == typeof(GeoPoint)
                     ? (
-                          (RelationalTypeMapping)base.FindMapping(typeof(Point))
+                          (RelationalTypeMapping)base
+                              .FindMapping(typeof(Point))
                               .Clone(new GeoPointConverter())
-                      ).Clone("geometry", null)
+                      )
+                      .Clone("geometry", null)
                     : base.FindMapping(mappingInfo);
         }
     }

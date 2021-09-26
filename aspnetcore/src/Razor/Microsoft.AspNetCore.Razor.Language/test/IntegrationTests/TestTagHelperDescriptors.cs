@@ -126,16 +126,16 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                         {
                             builder =>
                                 builder.RequireAttributeDescriptor(
-                                        attribute =>
-                                            attribute.Name("href")
-                                                .NameComparisonMode(
-                                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch
-                                                )
-                                                .Value("~/")
-                                                .ValueComparisonMode(
-                                                    RequiredAttributeDescriptor.ValueComparisonMode.PrefixMatch
-                                                )
-                                    )
+                                    attribute =>
+                                        attribute.Name("href")
+                                            .NameComparisonMode(
+                                                RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                            )
+                                            .Value("~/")
+                                            .ValueComparisonMode(
+                                                RequiredAttributeDescriptor.ValueComparisonMode.PrefixMatch
+                                            )
+                                )
                                     .RequireAttributeDescriptor(
                                         attribute =>
                                             attribute.Name("href")
@@ -376,8 +376,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                         {
                             builder =>
                                 builder.RequireAttributeDescriptor(
-                                        attribute => attribute.Name("input-bound-required-string")
-                                    )
+                                    attribute => attribute.Name("input-bound-required-string")
+                                )
                                     .RequireAttributeDescriptor(
                                         attribute => attribute.Name("input-unbound-required")
                                     ),
@@ -569,8 +569,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                         {
                             builder =>
                                 builder.RequireAttributeDescriptor(
-                                        attribute => attribute.Name("type")
-                                    )
+                                    attribute => attribute.Name("type")
+                                )
                                     .RequireAttributeDescriptor(
                                         attribute => attribute.Name("checked")
                                     ),

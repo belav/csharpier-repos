@@ -102,8 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             if (builder == null)
                             {
-                                builder =
-                                    ArrayBuilder<DocumentationCommentTriviaSyntax>.GetInstance();
+                                builder = ArrayBuilder<DocumentationCommentTriviaSyntax>
+                                    .GetInstance();
                             }
 
                             builder.Add((DocumentationCommentTriviaSyntax)trivia.GetStructure());

@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_specify_no_connection_string_in_OnConfiguring()
         {
-            var serviceProvider = new ServiceCollection().AddDbContext<NoneInOnConfiguringContext>()
+            var serviceProvider = new ServiceCollection()
+                .AddDbContext<NoneInOnConfiguringContext>()
                 .BuildServiceProvider();
 
             using (SqlServerTestStore.GetNorthwindStore())
@@ -31,9 +32,10 @@ namespace Microsoft.EntityFrameworkCore
                 using var context =
                     serviceProvider.GetRequiredService<NoneInOnConfiguringContext>();
 
-                context.Database.SetConnectionString(
-                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                );
+                context.Database
+                    .SetConnectionString(
+                        SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                    );
 
                 Assert.True(context.Customers.Any());
             }
@@ -46,9 +48,10 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using var context = new NoneInOnConfiguringContext();
 
-                context.Database.SetConnectionString(
-                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                );
+                context.Database
+                    .SetConnectionString(
+                        SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                    );
 
                 Assert.True(context.Customers.Any());
             }
@@ -78,9 +81,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_specify_connection_string_in_OnConfiguring()
         {
-            var serviceProvider =
-                new ServiceCollection().AddDbContext<StringInOnConfiguringContext>()
-                    .BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddDbContext<StringInOnConfiguringContext>()
+                .BuildServiceProvider();
 
             using (SqlServerTestStore.GetNorthwindStore())
             {
@@ -113,7 +116,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_specify_no_connection_in_OnConfiguring()
         {
-            var serviceProvider = new ServiceCollection().AddScoped(
+            var serviceProvider = new ServiceCollection()
+                .AddScoped(
                     p =>
                         new SqlConnection(
                             SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
@@ -155,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_specify_connection_in_OnConfiguring()
         {
-            var serviceProvider = new ServiceCollection().AddScoped(
+            var serviceProvider = new ServiceCollection()
+                .AddScoped(
                     p =>
                         new SqlConnection(
                             SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
@@ -193,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore
                 SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
             );
 
-            var serviceProvider = new ServiceCollection().AddScoped(p => connection)
+            var serviceProvider = new ServiceCollection()
+                .AddScoped(p => connection)
                 .AddDbContext<ConnectionInOnConfiguringContext>()
                 .BuildServiceProvider();
 
@@ -222,7 +228,8 @@ namespace Microsoft.EntityFrameworkCore
                 SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
             );
 
-            var serviceProvider = new ServiceCollection().AddScoped(p => connection)
+            var serviceProvider = new ServiceCollection()
+                .AddScoped(p => connection)
                 .AddDbContext<ConnectionInOnConfiguringContext>()
                 .BuildServiceProvider();
 
@@ -278,7 +285,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_if_no_connection_found_in_config_without_UseSqlServer()
         {
-            var serviceProvider = new ServiceCollection().AddDbContext<NoUseSqlServerContext>()
+            var serviceProvider = new ServiceCollection()
+                .AddDbContext<NoUseSqlServerContext>()
                 .BuildServiceProvider();
 
             using var context = serviceProvider.GetRequiredService<NoUseSqlServerContext>();
@@ -291,7 +299,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_if_no_config_without_UseSqlServer()
         {
-            var serviceProvider = new ServiceCollection().AddDbContext<NoUseSqlServerContext>()
+            var serviceProvider = new ServiceCollection()
+                .AddDbContext<NoUseSqlServerContext>()
                 .BuildServiceProvider();
 
             using var context = serviceProvider.GetRequiredService<NoUseSqlServerContext>();
@@ -310,7 +319,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_depend_on_DbContextOptions()
         {
-            var serviceProvider = new ServiceCollection().AddScoped(
+            var serviceProvider = new ServiceCollection()
+                .AddScoped(
                     p =>
                         new SqlConnection(
                             SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
@@ -378,7 +388,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_depend_on_non_generic_options_when_only_one_context()
         {
-            var serviceProvider = new ServiceCollection().AddDbContext<NonGenericOptionsContext>()
+            var serviceProvider = new ServiceCollection()
+                .AddDbContext<NonGenericOptionsContext>()
                 .BuildServiceProvider();
 
             using (SqlServerTestStore.GetNorthwindStore())
@@ -436,16 +447,16 @@ namespace Microsoft.EntityFrameworkCore
             string connectionString
         )
         {
-            var configBuilder = new ConfigurationBuilder().AddInMemoryCollection(
-                new Dictionary<string, string>
-                {
-                    { key, SqlServerNorthwindTestStoreFactory.NorthwindConnectionString }
-                }
-            );
+            var configBuilder = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new Dictionary<string, string>
+                    {
+                        { key, SqlServerNorthwindTestStoreFactory.NorthwindConnectionString }
+                    }
+                );
 
-            var serviceProvider = new ServiceCollection().AddSingleton<IConfiguration>(
-                    configBuilder.Build()
-                )
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<IConfiguration>(configBuilder.Build())
                 .AddDbContext<UseConfigurationContext>(
                     b => b.UseSqlServer(connectionString).EnableServiceProviderCaching(false)
                 )
@@ -455,8 +466,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>()
                     .CreateScope();
-                using var context =
-                    serviceScope.ServiceProvider.GetRequiredService<UseConfigurationContext>();
+                using var context = serviceScope.ServiceProvider
+                    .GetRequiredService<UseConfigurationContext>();
                 Assert.True(context.Customers.Any());
             }
         }
@@ -502,7 +513,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(false)]
         public async Task Can_use_an_existing_closed_connection_test(bool openConnection)
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using var store = SqlServerTestStore.GetNorthwindStore();

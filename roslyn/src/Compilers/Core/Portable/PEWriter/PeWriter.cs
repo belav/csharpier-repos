@@ -319,7 +319,8 @@ namespace Microsoft.Cci
         {
             if (s_calculateChecksumMethod == null)
             {
-                s_calculateChecksumMethod = typeof(PEBuilder).GetRuntimeMethods()
+                s_calculateChecksumMethod = typeof(PEBuilder)
+                    .GetRuntimeMethods()
                     .Where(m => m.Name == "CalculateChecksum" && m.GetParameters().Length == 2)
                     .Single();
             }

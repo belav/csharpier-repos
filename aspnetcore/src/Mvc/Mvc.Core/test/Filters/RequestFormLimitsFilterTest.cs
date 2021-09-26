@@ -51,8 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             requestFormLimitsFilter.OnAuthorization(authorizationFilterContext);
 
             // Assert
-            var actualFormFeature =
-                authorizationFilterContext.HttpContext.Features.Get<IFormFeature>();
+            var actualFormFeature = authorizationFilterContext.HttpContext.Features
+                .Get<IFormFeature>();
             Assert.NotSame(oldFormFeature, actualFormFeature);
         }
 
@@ -122,9 +122,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 new IFilterMetadata[] { requestFormLimitsFilter }
             );
             // Set to null explicitly as we want to make sure the filter adds one
-            authorizationFilterContext.HttpContext.Features.Set<IFormFeature>(
-                new FormFeature(authorizationFilterContext.HttpContext.Request)
-            );
+            authorizationFilterContext.HttpContext.Features
+                .Set<IFormFeature>(new FormFeature(authorizationFilterContext.HttpContext.Request));
 
             // Act
             requestFormLimitsFilter.OnAuthorization(authorizationFilterContext);

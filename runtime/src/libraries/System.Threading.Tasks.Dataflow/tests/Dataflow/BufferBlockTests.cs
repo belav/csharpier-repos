@@ -344,11 +344,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.True(((ISourceBlock<int>)block).ReserveMessage(messageHeader, target));
             ((ISourceBlock<int>)block).ReleaseReservation(messageHeader, target);
 
-            ((ISourceBlock<int>)block).ConsumeMessage(
-                messageHeader,
-                DataflowBlock.NullTarget<int>(),
-                out consumed
-            );
+            ((ISourceBlock<int>)block)
+                .ConsumeMessage(messageHeader, DataflowBlock.NullTarget<int>(), out consumed);
 
             Assert.True(consumed);
             Assert.Equal(expected: 0, actual: block.Count);
@@ -604,12 +601,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             };
             Assert.Equal(
                 expected: DataflowMessageStatus.Postponed,
-                actual: ((ITargetBlock<int>)bb).OfferMessage(
-                    new DataflowMessageHeader(1),
-                    2,
-                    source,
-                    true
-                )
+                actual: ((ITargetBlock<int>)bb)
+                    .OfferMessage(new DataflowMessageHeader(1), 2, source, true)
             );
             Assert.Equal(expected: 1, actual: bb.Receive());
             await Assert.ThrowsAsync<FormatException>(() => bb.Completion);
@@ -658,12 +651,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             };
 
             // Offer a message from the source. It'll be postponed.
-            ((ITargetBlock<int>)bb).OfferMessage(
-                new DataflowMessageHeader(1),
-                1,
-                source,
-                consumeToAccept: false
-            );
+            ((ITargetBlock<int>)bb)
+                .OfferMessage(new DataflowMessageHeader(1), 1, source, consumeToAccept: false);
 
             // Mark the block as complete.  This should cause the block to reserve/release any postponed messages,
             // which will cause the block to fault.

@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         public void EnsureDefaultServicesDefaultsWithStoreWorks()
         {
             var config = new ConfigurationBuilder().Build();
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(config)
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(config)
                 .AddTransient<IUserStore<PocoUser>, NoopUserStore>();
             services.AddIdentity<PocoUser, PocoRole>();
             services.AddHttpContextAccessor();
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         public void AddUserManagerWithCustomManagerReturnsSameInstance()
         {
             var config = new ConfigurationBuilder().Build();
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(config)
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(config)
                 .AddTransient<IUserStore<PocoUser>, NoopUserStore>()
                 .AddHttpContextAccessor();
 
@@ -92,13 +94,13 @@ namespace Microsoft.AspNetCore.Identity.Test
                 .Returns(Task.FromResult(user.UserName))
                 .Verifiable();
             store.Setup(
-                    s =>
-                        s.SetNormalizedUserNameAsync(
-                            user,
-                            user.UserName.ToUpperInvariant(),
-                            CancellationToken.None
-                        )
-                )
+                s =>
+                    s.SetNormalizedUserNameAsync(
+                        user,
+                        user.UserName.ToUpperInvariant(),
+                        CancellationToken.None
+                    )
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             var userManager = MockHelpers.TestUserManager<PocoUser>(store.Object);
@@ -124,8 +126,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 .Returns(Task.FromResult(user.SecurityStamp))
                 .Verifiable();
             store.Setup(
-                    s => s.SetSecurityStampAsync(user, It.IsAny<string>(), CancellationToken.None)
-                )
+                s => s.SetSecurityStampAsync(user, It.IsAny<string>(), CancellationToken.None)
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             var userManager = MockHelpers.TestUserManager<PocoUser>(store.Object);
@@ -154,23 +156,23 @@ namespace Microsoft.AspNetCore.Identity.Test
                 .Returns(Task.FromResult(user.Email))
                 .Verifiable();
             store.Setup(
-                    s =>
-                        s.SetNormalizedEmailAsync(
-                            user,
-                            user.Email.ToUpperInvariant(),
-                            CancellationToken.None
-                        )
-                )
+                s =>
+                    s.SetNormalizedEmailAsync(
+                        user,
+                        user.Email.ToUpperInvariant(),
+                        CancellationToken.None
+                    )
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             store.Setup(
-                    s =>
-                        s.SetNormalizedUserNameAsync(
-                            user,
-                            user.UserName.ToUpperInvariant(),
-                            CancellationToken.None
-                        )
-                )
+                s =>
+                    s.SetNormalizedUserNameAsync(
+                        user,
+                        user.UserName.ToUpperInvariant(),
+                        CancellationToken.None
+                    )
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             var userManager = MockHelpers.TestUserManager<PocoUser>(store.Object);
@@ -212,13 +214,13 @@ namespace Microsoft.AspNetCore.Identity.Test
                 .Returns(Task.FromResult(user.UserName))
                 .Verifiable();
             store.Setup(
-                    s =>
-                        s.SetNormalizedUserNameAsync(
-                            user,
-                            user.UserName.ToUpperInvariant(),
-                            CancellationToken.None
-                        )
-                )
+                s =>
+                    s.SetNormalizedUserNameAsync(
+                        user,
+                        user.UserName.ToUpperInvariant(),
+                        CancellationToken.None
+                    )
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             store.Setup(s => s.UpdateAsync(user, CancellationToken.None))
@@ -247,23 +249,23 @@ namespace Microsoft.AspNetCore.Identity.Test
                 .Returns(Task.FromResult(user.Email))
                 .Verifiable();
             store.Setup(
-                    s =>
-                        s.SetNormalizedUserNameAsync(
-                            user,
-                            user.UserName.ToUpperInvariant(),
-                            CancellationToken.None
-                        )
-                )
+                s =>
+                    s.SetNormalizedUserNameAsync(
+                        user,
+                        user.UserName.ToUpperInvariant(),
+                        CancellationToken.None
+                    )
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             store.Setup(
-                    s =>
-                        s.SetNormalizedEmailAsync(
-                            user,
-                            user.Email.ToUpperInvariant(),
-                            CancellationToken.None
-                        )
-                )
+                s =>
+                    s.SetNormalizedEmailAsync(
+                        user,
+                        user.Email.ToUpperInvariant(),
+                        CancellationToken.None
+                    )
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             store.Setup(s => s.UpdateAsync(user, CancellationToken.None))
@@ -333,8 +335,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             var store = new Mock<IUserStore<PocoUser>>();
             var user = new PocoUser { UserName = "Foo" };
             store.Setup(
-                    s => s.FindByNameAsync(user.UserName.ToUpperInvariant(), CancellationToken.None)
-                )
+                s => s.FindByNameAsync(user.UserName.ToUpperInvariant(), CancellationToken.None)
+            )
                 .Returns(Task.FromResult(user))
                 .Verifiable();
             var userManager = MockHelpers.TestUserManager<PocoUser>(store.Object);
@@ -374,8 +376,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             var store = new Mock<IUserEmailStore<PocoUser>>();
             var user = new PocoUser { Email = "Foo" };
             store.Setup(
-                    s => s.FindByEmailAsync(user.Email.ToUpperInvariant(), CancellationToken.None)
-                )
+                s => s.FindByEmailAsync(user.Email.ToUpperInvariant(), CancellationToken.None)
+            )
                 .Returns(Task.FromResult(user))
                 .Verifiable();
             var userManager = MockHelpers.TestUserManager(store.Object);
@@ -661,13 +663,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             var user = new PocoUser { UserName = "Foo" };
             var claim = new Claim("1", "1");
             store.Setup(
-                    s =>
-                        s.AddClaimsAsync(
-                            user,
-                            It.IsAny<IEnumerable<Claim>>(),
-                            CancellationToken.None
-                        )
-                )
+                s => s.AddClaimsAsync(user, It.IsAny<IEnumerable<Claim>>(), CancellationToken.None)
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             store.Setup(s => s.UpdateAsync(user, CancellationToken.None))
@@ -692,14 +689,14 @@ namespace Microsoft.AspNetCore.Identity.Test
             var claim = new Claim("1", "1");
             var newClaim = new Claim("1", "2");
             store.Setup(
-                    s =>
-                        s.ReplaceClaimAsync(
-                            user,
-                            It.IsAny<Claim>(),
-                            It.IsAny<Claim>(),
-                            CancellationToken.None
-                        )
-                )
+                s =>
+                    s.ReplaceClaimAsync(
+                        user,
+                        It.IsAny<Claim>(),
+                        It.IsAny<Claim>(),
+                        CancellationToken.None
+                    )
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             store.Setup(s => s.UpdateAsync(user, CancellationToken.None))
@@ -730,8 +727,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 .ReturnsAsync(hashed)
                 .Verifiable();
             store.Setup(
-                    s => s.SetPasswordHashAsync(user, It.IsAny<string>(), CancellationToken.None)
-                )
+                s => s.SetPasswordHashAsync(user, It.IsAny<string>(), CancellationToken.None)
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             store.Setup(x => x.UpdateAsync(It.IsAny<PocoUser>(), It.IsAny<CancellationToken>()))
@@ -831,13 +828,13 @@ namespace Microsoft.AspNetCore.Identity.Test
             var user = new PocoUser { UserName = "Foo" };
             var claim = new Claim("1", "1");
             store.Setup(
-                    s =>
-                        s.RemoveClaimsAsync(
-                            user,
-                            It.IsAny<IEnumerable<Claim>>(),
-                            CancellationToken.None
-                        )
-                )
+                s =>
+                    s.RemoveClaimsAsync(
+                        user,
+                        It.IsAny<IEnumerable<Claim>>(),
+                        CancellationToken.None
+                    )
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             store.Setup(s => s.UpdateAsync(user, CancellationToken.None))
@@ -1031,19 +1028,21 @@ namespace Microsoft.AspNetCore.Identity.Test
         {
             var provider = new ATokenProvider();
             var config = new ConfigurationBuilder().Build();
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(config)
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(config)
                 .AddLogging();
 
             services.AddIdentity<PocoUser, PocoRole>(
-                    o =>
-                        o.Tokens.ProviderMap.Add(
+                o =>
+                    o.Tokens.ProviderMap
+                        .Add(
                             "A",
                             new TokenProviderDescriptor(typeof(ATokenProvider))
                             {
                                 ProviderInstance = provider
                             }
                         )
-                )
+            )
                 .AddUserStore<NoopUserStore>();
             var manager = services.BuildServiceProvider().GetService<UserManager<PocoUser>>();
             Assert.ThrowsAsync<NotImplementedException>(
@@ -1161,19 +1160,21 @@ namespace Microsoft.AspNetCore.Identity.Test
         {
             var provider = new ATokenProvider();
             var config = new ConfigurationBuilder().Build();
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(config)
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(config)
                 .AddLogging();
 
             services.AddIdentity<PocoUser, PocoRole>(
-                    o =>
-                        o.Tokens.ProviderMap.Add(
+                o =>
+                    o.Tokens.ProviderMap
+                        .Add(
                             TokenOptions.DefaultProvider,
                             new TokenProviderDescriptor(typeof(ATokenProvider))
                             {
                                 ProviderInstance = provider
                             }
                         )
-                )
+            )
                 .AddUserStore<NoopUserStore>()
                 .AddDefaultTokenProviders();
             var manager = services.BuildServiceProvider().GetService<UserManager<PocoUser>>();
@@ -2624,7 +2625,8 @@ namespace Microsoft.AspNetCore.Identity.Test
             var store = new Mock<IUserEmailStore<PocoUser>>();
             var describer = new TestErrorDescriber();
             var config = new ConfigurationBuilder().Build();
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(config)
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(config)
                 .AddLogging()
                 .AddSingleton<IdentityErrorDescriber>(describer)
                 .AddSingleton<IUserStore<PocoUser>>(store.Object)

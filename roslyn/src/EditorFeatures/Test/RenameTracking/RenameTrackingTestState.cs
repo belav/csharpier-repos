@@ -108,9 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
 
             _hostDocument = Workspace.Documents.First();
             _view = _hostDocument.GetTextView();
-            _view.Caret.MoveTo(
-                new SnapshotPoint(_view.TextSnapshot, _hostDocument.CursorPosition.Value)
-            );
+            _view.Caret
+                .MoveTo(new SnapshotPoint(_view.TextSnapshot, _hostDocument.CursorPosition.Value));
             _editorOperations = Workspace.GetService<IEditorOperationsFactoryService>()
                 .GetEditorOperations(_view);
             _historyRegistry = Workspace.ExportProvider.GetExport<ITextUndoHistoryRegistry>().Value;
@@ -121,8 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             };
 
             // Mock the action taken by the workspace INotificationService
-            var notificationService =
-                (INotificationServiceCallback)Workspace.Services.GetRequiredService<INotificationService>();
+            var notificationService = (INotificationServiceCallback)Workspace.Services
+                .GetRequiredService<INotificationService>();
             var callback = new Action<string, string, NotificationSeverity>(
                 (message, title, severity) => _notificationMessage = message
             );
@@ -155,8 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
 
         private static TestWorkspace CreateTestWorkspace(string code, string languageName)
         {
-            return CreateTestWorkspace(
-                string.Format(
+            return CreateTestWorkspace(string.Format(
                     @"
 <Workspace>
     <Project Language=""{0}"" CommonReferences=""true"">
@@ -165,8 +163,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
 </Workspace>",
                     languageName,
                     code
-                )
-            );
+                ));
         }
 
         private static TestWorkspace CreateTestWorkspace(string xml)
@@ -248,26 +245,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             var codeAction = await TryGetCodeActionAsync(tag.Span.Span.ToTextSpan());
             Assert.NotNull(codeAction);
             Assert.Equal(
-                string.Format(
-                    EditorFeaturesResources.Rename_0_to_1,
-                    expectedFromName,
-                    expectedToName
-                ),
+                string
+                    .Format(
+                        EditorFeaturesResources.Rename_0_to_1,
+                        expectedFromName,
+                        expectedToName
+                    ),
                 codeAction.Title
             );
 
             if (invokeAction)
             {
-                var operations = (
-                    await codeAction.GetOperationsAsync(CancellationToken.None)
-                ).ToArray();
+                var operations = (await codeAction.GetOperationsAsync(CancellationToken.None))
+                    .ToArray();
                 Assert.Equal(1, operations.Length);
 
-                operations[0].TryApply(
-                    this.Workspace,
-                    new ProgressTracker(),
-                    CancellationToken.None
-                );
+                operations[0]
+                    .TryApply(this.Workspace, new ProgressTracker(), CancellationToken.None);
             }
         }
 
@@ -277,8 +271,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
 
         private async Task WaitForAsyncOperationsAsync()
         {
-            var provider =
-                Workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var provider = Workspace.ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             await provider.WaitAllDispatcherOperationAndTasksAsync(
                 Workspace,
                 FeatureAttribute.RenameTracking,

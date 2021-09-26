@@ -760,10 +760,10 @@ null";
     }
 }";
             CreateCompilation(
-                    source,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.Regular6
-                )
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular6
+            )
                 .VerifyDiagnostics(
                     // (10,18): error CS0029: Cannot implicitly convert type 'string' to 'bool'
                     //             case "goo": // wrong type
@@ -771,14 +771,13 @@ null";
                         .WithArguments("string", "bool")
                         .WithLocation(11, 18)
                 );
-            CreateCompilation(source, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (10,18): error CS0029: Cannot implicitly convert type 'string' to 'bool'
-                    //             case "goo": // wrong type
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""goo""")
-                        .WithArguments("string", "bool")
-                        .WithLocation(11, 18)
-                );
+            CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (10,18): error CS0029: Cannot implicitly convert type 'string' to 'bool'
+                //             case "goo": // wrong type
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""goo""")
+                    .WithArguments("string", "bool")
+                    .WithLocation(11, 18)
+            );
         }
 
         [Fact]
@@ -808,17 +807,17 @@ class Program
     }
 }";
             CreateCompilation(
-                    source,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.Regular6
-                )
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular6
+            )
                 .VerifyDiagnostics(
                     // (18,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
                     //             case Color x when false:
                     Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "case Color x when false:"
-                        )
+                        ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                        "case Color x when false:"
+                    )
                         .WithArguments("pattern matching", "7.0")
                         .WithLocation(18, 13),
                     // (11,17): warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
@@ -1722,9 +1721,9 @@ class Program
                 // (50,22): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             if (o is (System.Int32 x, System.Int32 y)) {}
                 Diagnostic(
-                        ErrorCode.ERR_NoSuchMemberOrExtension,
-                        "(System.Int32 x, System.Int32 y)"
-                    )
+                    ErrorCode.ERR_NoSuchMemberOrExtension,
+                    "(System.Int32 x, System.Int32 y)"
+                )
                     .WithArguments("object", "Deconstruct")
                     .WithLocation(50, 22),
                 // (50,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
@@ -1745,9 +1744,9 @@ class Program
                 // (52,22): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             if (o is (System.Int32 a, System.Int32 b) c) {}
                 Diagnostic(
-                        ErrorCode.ERR_NoSuchMemberOrExtension,
-                        "(System.Int32 a, System.Int32 b)"
-                    )
+                    ErrorCode.ERR_NoSuchMemberOrExtension,
+                    "(System.Int32 a, System.Int32 b)"
+                )
                     .WithArguments("object", "Deconstruct")
                     .WithLocation(52, 22),
                 // (52,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
@@ -2642,7 +2641,8 @@ class Test
             compilation.VerifyDiagnostics(
                 // (12,38): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                 //     public static async Task<string> SendMessageAsync<T>(object response)
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "SendMessageAsync").WithLocation(12, 38)
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "SendMessageAsync")
+                    .WithLocation(12, 38)
             );
             var comp = CompileAndVerify(
                 compilation,
@@ -3232,13 +3232,11 @@ static class Ex
                 // (8,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
                 //             case
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                        @"case
+                    ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                    @"case
 
         var q "
-                    )
-                    .WithArguments("pattern matching", "7.0")
-                    .WithLocation(8, 13),
+                ).WithArguments("pattern matching", "7.0").WithLocation(8, 13),
                 // (10,15): error CS1003: Syntax error, ':' expected
                 //         var q = 3;
                 Diagnostic(ErrorCode.ERR_SyntaxError, "=")
@@ -3255,17 +3253,15 @@ static class Ex
                 // (8,13): error CS8070: Control cannot fall out of switch from final case label ('case
                 //             case
                 Diagnostic(
-                        ErrorCode.ERR_SwitchFallOut,
-                        @"case
+                    ErrorCode.ERR_SwitchFallOut,
+                    @"case
 
         var q "
-                    )
-                    .WithArguments(
-                        @"case
+                ).WithArguments(
+                    @"case
 
         var q "
-                    )
-                    .WithLocation(8, 13)
+                ).WithLocation(8, 13)
             );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);

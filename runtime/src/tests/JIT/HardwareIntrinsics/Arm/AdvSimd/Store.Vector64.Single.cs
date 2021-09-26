@@ -290,7 +290,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            typeof(AdvSimd).GetMethod(
+            typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.Store),
                     new Type[] { typeof(Single*), typeof(Vector64<Single>) }
                 )
@@ -310,7 +311,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            typeof(AdvSimd).GetMethod(
+            typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.Store),
                     new Type[] { typeof(Single*), typeof(Vector64<Single>) }
                 )
@@ -541,15 +543,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.Store)}<Single>(Vector64<Single>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.Store)}<Single>(Vector64<Single>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

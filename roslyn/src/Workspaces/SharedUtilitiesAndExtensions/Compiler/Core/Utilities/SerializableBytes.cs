@@ -51,11 +51,11 @@ namespace Microsoft.CodeAnalysis
                     while (count > 0)
                     {
                         var bytesRead = await stream.ReadAsync(
-                                chunk,
-                                chunkOffset,
-                                count,
-                                cancellationToken
-                            )
+                            chunk,
+                            chunkOffset,
+                            count,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (bytesRead > 0)
                         {

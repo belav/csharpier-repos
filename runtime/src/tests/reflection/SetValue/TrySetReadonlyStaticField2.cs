@@ -23,7 +23,8 @@ class Test
 
         try
         {
-            typeof(TestSetValue).GetField(nameof(TestSetValue.MagicNumber))
+            typeof(TestSetValue)
+                .GetField(nameof(TestSetValue.MagicNumber))
                 .SetValue(null, 0x123456789);
             Console.WriteLine("FAILED: TestSetValue - Exception expected");
             return -1;
@@ -36,7 +37,8 @@ class Test
         try
         {
             int i = 0;
-            typeof(TestSetValueDirect).GetField(nameof(TestSetValueDirect.MagicString))
+            typeof(TestSetValueDirect)
+                .GetField(nameof(TestSetValueDirect.MagicString))
                 .SetValueDirect(__makeref(i), "Hello");
             Console.WriteLine("FAILED: TestSetValueDirect - Exception expected");
             return -1;

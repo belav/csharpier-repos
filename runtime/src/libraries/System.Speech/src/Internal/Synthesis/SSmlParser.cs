@@ -160,14 +160,15 @@ namespace System.Speech.Internal.Synthesis
                 {
                     if (reader.Value != xmlNamespaceSsml && reader.Value != xmlNamespacePrompt)
                     {
-                        ssmlAttributes._unknownNamespaces.Add(
-                            new SsmlXmlAttribute(
-                                reader.Prefix,
-                                reader.LocalName,
-                                reader.Value,
-                                reader.NamespaceURI
-                            )
-                        );
+                        ssmlAttributes._unknownNamespaces
+                            .Add(
+                                new SsmlXmlAttribute(
+                                    reader.Prefix,
+                                    reader.LocalName,
+                                    reader.Value,
+                                    reader.NamespaceURI
+                                )
+                            );
                     }
                     else if (reader.Value == xmlNamespacePrompt)
                     {
@@ -1012,14 +1013,15 @@ namespace System.Speech.Internal.Synthesis
                 {
                     case AlphabetType.Sapi:
                         aPhoneIds = PhonemeConverter.ConvertPronToId(
-                                sPh,
-                                ssmlAttributes._fragmentState.LangId
-                            )
+                            sPh,
+                            ssmlAttributes._fragmentState.LangId
+                        )
                             .ToCharArray();
                         break;
 
                     case AlphabetType.Ups:
-                        aPhoneIds = PhonemeConverter.UpsConverter.ConvertPronToId(sPh)
+                        aPhoneIds = PhonemeConverter.UpsConverter
+                            .ConvertPronToId(sPh)
                             .ToCharArray();
                         alphabet = AlphabetType.Ipa;
                         break;
@@ -1042,9 +1044,9 @@ namespace System.Speech.Internal.Synthesis
                                 // try with sapi (backward compatibility)
                                 // if not a sapi phoneme either throw the IPA exception
                                 aPhoneIds = PhonemeConverter.ConvertPronToId(
-                                        sPh,
-                                        ssmlAttributes._fragmentState.LangId
-                                    )
+                                    sPh,
+                                    ssmlAttributes._fragmentState.LangId
+                                )
                                     .ToCharArray();
                                 alphabet = AlphabetType.Sapi;
                             }
@@ -1339,11 +1341,12 @@ namespace System.Speech.Internal.Synthesis
                             XmlTextReader textReader = reader as XmlTextReader;
                             if (textReader != null && engine.Ssml != null)
                             {
-                                textPosition = engine.Ssml.IndexOf(
-                                    reader.Value,
-                                    textReader.LinePosition + reader.LocalName.Length,
-                                    StringComparison.Ordinal
-                                );
+                                textPosition = engine.Ssml
+                                    .IndexOf(
+                                        reader.Value,
+                                        textReader.LinePosition + reader.LocalName.Length,
+                                        StringComparison.Ordinal
+                                    );
                             }
                             break;
 

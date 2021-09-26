@@ -46,22 +46,19 @@ namespace Microsoft.CodeAnalysis.AddImport
                 CancellationToken cancellationToken
             )
             {
-                var (description, hasExistingImport) = base.GetDescription(
-                    document,
-                    node,
-                    semanticModel,
-                    cancellationToken
-                );
+                var (description, hasExistingImport) = base
+                    .GetDescription(document, node, semanticModel, cancellationToken);
                 if (description == null)
                 {
                     return (null, false);
                 }
 
                 return (
-                    string.Format(
-                        FeaturesResources.Add_reference_to_0,
-                        Path.GetFileName(_reference.FilePath)
-                    ),
+                    string
+                        .Format(
+                            FeaturesResources.Add_reference_to_0,
+                            Path.GetFileName(_reference.FilePath)
+                        ),
                     hasExistingImport
                 );
             }
@@ -95,10 +92,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             {
                 var reference = obj as MetadataSymbolReference;
                 return base.Equals(reference)
-                    && StringComparer.OrdinalIgnoreCase.Equals(
-                        _reference.FilePath,
-                        reference._reference.FilePath
-                    );
+                    && StringComparer.OrdinalIgnoreCase
+                        .Equals(_reference.FilePath, reference._reference.FilePath);
             }
 
             public override int GetHashCode() =>

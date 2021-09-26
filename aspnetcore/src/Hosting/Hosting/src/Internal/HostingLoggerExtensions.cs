@@ -155,19 +155,21 @@ namespace Microsoft.AspNetCore.Hosting
                     httpContext.Request.PathBase.HasValue
                         ? httpContext.Request.PathBase + httpContext.Request.Path
                         : httpContext.Request.Path
-                ).ToString();
+                )
+                    .ToString();
             }
 
             public override string ToString()
             {
                 if (_cachedToString == null)
                 {
-                    _cachedToString = string.Format(
-                        CultureInfo.InvariantCulture,
-                        "RequestPath:{0} RequestId:{1}",
-                        _path,
-                        _traceIdentifier
-                    );
+                    _cachedToString = string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "RequestPath:{0} RequestId:{1}",
+                            _path,
+                            _traceIdentifier
+                        );
                 }
 
                 return _cachedToString;

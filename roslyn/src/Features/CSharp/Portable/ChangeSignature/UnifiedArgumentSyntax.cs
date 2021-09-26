@@ -47,9 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             return _argument.IsKind(SyntaxKind.Argument, out ArgumentSyntax argument)
               ? Create(argument.WithNameColon((NameColonSyntax)nameColonSyntax))
               : Create(
-                    ((AttributeArgumentSyntax)_argument).WithNameColon(
-                        (NameColonSyntax)nameColonSyntax
-                    )
+                    ((AttributeArgumentSyntax)_argument)
+                        .WithNameColon((NameColonSyntax)nameColonSyntax)
                 );
         }
 
@@ -67,9 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     )
                 )
               : Create(
-                    ((AttributeArgumentSyntax)_argument).WithNameColon(
-                        SyntaxFactory.NameColon(SyntaxFactory.IdentifierName(name))
-                    )
+                    ((AttributeArgumentSyntax)_argument)
+                        .WithNameColon(SyntaxFactory.NameColon(SyntaxFactory.IdentifierName(name)))
                 );
         }
 

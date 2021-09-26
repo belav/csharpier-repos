@@ -20,11 +20,11 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
         {
             var symbolService = document.GetRequiredLanguageService<IGoToDefinitionSymbolService>();
             var (symbol, _) = await symbolService.GetSymbolAndBoundSpanAsync(
-                    document,
-                    position,
-                    includeType: true,
-                    cancellationToken
-                )
+                document,
+                position,
+                includeType: true,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Try to compute source definitions from symbol.

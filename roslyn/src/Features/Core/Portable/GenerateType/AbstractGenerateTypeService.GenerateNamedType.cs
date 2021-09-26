@@ -151,11 +151,13 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 // caller.
                 if (
                     _state.IsException
-                    && _state.BaseTypeOrInterfaceOpt.InstanceConstructors.Any(
-                        c =>
-                            c.Parameters.Select(p => p.Type)
-                                .SequenceEqual(parameterTypes, SymbolEqualityComparer.Default)
-                    )
+                    && _state.BaseTypeOrInterfaceOpt.InstanceConstructors
+                        .Any(
+                            c =>
+                                c.Parameters
+                                    .Select(p => p.Type)
+                                    .SequenceEqual(parameterTypes, SymbolEqualityComparer.Default)
+                        )
                 )
                 {
                     return;
@@ -178,21 +180,20 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     // Synthesize some parameter symbols so we can see if these particular parameters could map to the
                     // parameters of any of the constructors we have in our base class.  This will have the added
                     // benefit of allowing us to infer better types for complex type-less expressions (like lambdas).
-                    var syntaxFacts =
-                        _semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                    var syntaxFacts = _semanticDocument.Document
+                        .GetLanguageService<ISyntaxFactsService>();
                     var refKinds = argumentList.SelectAsArray(
                         a => syntaxFacts.GetRefKindOfArgument(a)
                     );
                     var parameters = parameterTypes.Zip(
-                            refKinds,
-                            (t, r) =>
-                                CodeGenerationSymbolFactory.CreateParameterSymbol(r, t, name: "")
-                        )
+                        refKinds,
+                        (t, r) => CodeGenerationSymbolFactory.CreateParameterSymbol(r, t, name: "")
+                    )
                         .ToImmutableArray();
 
                     var expressions = GetArgumentExpressions(argumentList);
-                    var delegatedConstructor =
-                        _state.BaseTypeOrInterfaceOpt.InstanceConstructors.FirstOrDefault(
+                    var delegatedConstructor = _state.BaseTypeOrInterfaceOpt.InstanceConstructors
+                        .FirstOrDefault(
                             c =>
                                 GenerateConstructorHelpers.CanDelegateTo(
                                     _semanticDocument,
@@ -206,8 +207,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     {
                         // There was a constructor match in the base class.  Synthesize a constructor of our own with
                         // the same parameter types that calls into that.
-                        var factory =
-                            _semanticDocument.Document.GetLanguageService<SyntaxGenerator>();
+                        var factory = _semanticDocument.Document
+                            .GetLanguageService<SyntaxGenerator>();
                         members.Add(
                             factory.CreateBaseDelegatingConstructor(
                                 delegatedConstructor,
@@ -226,8 +227,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
 
             private void AddProperties(ArrayBuilder<ISymbol> members)
             {
-                var typeInference =
-                    _semanticDocument.Document.GetLanguageService<ITypeInferenceService>();
+                var typeInference = _semanticDocument.Document
+                    .GetLanguageService<ITypeInferenceService>();
                 foreach (var property in _state.PropertiesToGenerate)
                 {
                     if (
@@ -273,8 +274,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 >();
                 var parameterToNewFieldMap = ImmutableDictionary.CreateBuilder<string, string>();
 
-                var syntaxFacts =
-                    _semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = _semanticDocument.Document
+                    .GetLanguageService<ISyntaxFactsService>();
                 for (var i = 0; i < parameterNames.Count; i++)
                 {
                     var refKind = syntaxFacts.GetRefKindOfArgument(argumentList[i]);
@@ -287,11 +288,11 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     );
 
                     await FindExistingOrCreateNewMemberAsync(
-                            parameterName,
-                            parameterType,
-                            parameterToExistingFieldMap,
-                            parameterToNewFieldMap
-                        )
+                        parameterName,
+                        parameterType,
+                        parameterToExistingFieldMap,
+                        parameterToNewFieldMap
+                    )
                         .ConfigureAwait(false);
 
                     parameters.Add(
@@ -338,7 +339,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             {
                 var factory = _semanticDocument.Document.GetLanguageService<SyntaxGenerator>();
                 var exceptionType = _semanticDocument.SemanticModel.Compilation.ExceptionType();
-                var constructors = exceptionType.InstanceConstructors.Where(
+                var constructors = exceptionType.InstanceConstructors
+                    .Where(
                         c =>
                             c.DeclaredAccessibility == Accessibility.Public
                             || c.DeclaredAccessibility == Accessibility.Protected
@@ -364,8 +366,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             {
                 if (_state.IsException)
                 {
-                    var serializableType =
-                        _semanticDocument.SemanticModel.Compilation.SerializableAttributeType();
+                    var serializableType = _semanticDocument.SemanticModel.Compilation
+                        .SerializableAttributeType();
                     if (serializableType != null)
                     {
                         var attribute = CodeGenerationSymbolFactory.CreateAttributeData(

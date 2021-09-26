@@ -443,11 +443,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 if (parameter.HasName(QualityParameter))
                 {
                     // If media type contains two `q` values i.e. it's invalid in an uncommon way, pick last value.
-                    quality = double.Parse(
-                        parameter.Value.Value,
-                        NumberStyles.AllowDecimalPoint,
-                        NumberFormatInfo.InvariantInfo
-                    );
+                    quality = double
+                        .Parse(
+                            parameter.Value.Value,
+                            NumberStyles.AllowDecimalPoint,
+                            NumberFormatInfo.InvariantInfo
+                        );
                 }
             }
 
@@ -531,10 +532,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         private bool MatchesSubtypeWithoutSuffix(MediaType set)
         {
             return set.MatchesAllSubTypesWithoutSuffix
-                || set.SubTypeWithoutSuffix.Equals(
-                    SubTypeWithoutSuffix,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                || set.SubTypeWithoutSuffix
+                    .Equals(SubTypeWithoutSuffix, StringComparison.OrdinalIgnoreCase);
         }
 
         private bool MatchesSubtypeSuffix(MediaType set)

@@ -116,11 +116,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateChangedDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredDocument(documentId),
-                                            newSolution.GetRequiredDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
+                                        oldSolution.GetRequiredDocument(documentId),
+                                        newSolution.GetRequiredDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
                                         .ConfigureAwaitRunInline()
                             )
                         );
@@ -135,10 +135,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateAddedDocumentPreviewViewAsync(
-                                            newSolution.GetRequiredDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
+                                        newSolution.GetRequiredDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
                                         .ConfigureAwaitRunInline()
                             )
                         );
@@ -153,10 +153,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateRemovedDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
+                                        oldSolution.GetRequiredDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
                                         .ConfigureAwaitRunInline()
                             )
                         );
@@ -171,11 +171,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateChangedAdditionalDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredAdditionalDocument(documentId),
-                                            newSolution.GetRequiredAdditionalDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
+                                        oldSolution.GetRequiredAdditionalDocument(documentId),
+                                        newSolution.GetRequiredAdditionalDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
                                         .ConfigureAwaitRunInline()
                             )
                         );
@@ -190,10 +190,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateAddedAdditionalDocumentPreviewViewAsync(
-                                            newSolution.GetRequiredAdditionalDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
+                                        newSolution.GetRequiredAdditionalDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
                                         .ConfigureAwaitRunInline()
                             )
                         );
@@ -208,10 +208,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateRemovedAdditionalDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredAdditionalDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
+                                        oldSolution.GetRequiredAdditionalDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
                                         .ConfigureAwaitRunInline()
                             )
                         );
@@ -226,15 +226,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateChangedAnalyzerConfigDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
-                                            newSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
-                                            zoomLevel,
-                                            c
-                                        )
+                                        oldSolution.GetRequiredAnalyzerConfigDocument(documentId),
+                                        newSolution.GetRequiredAnalyzerConfigDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
                                         .ConfigureAwaitRunInline()
                             )
                         );
@@ -249,12 +245,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateAddedAnalyzerConfigDocumentPreviewViewAsync(
-                                            newSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
-                                            zoomLevel,
-                                            c
-                                        )
+                                        newSolution.GetRequiredAnalyzerConfigDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
                                         .ConfigureAwaitRunInline()
                             )
                         );
@@ -269,12 +263,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateRemovedAnalyzerConfigDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
-                                            zoomLevel,
-                                            c
-                                        )
+                                        oldSolution.GetRequiredAnalyzerConfigDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
                                         .ConfigureAwaitRunInline()
                             )
                         );
@@ -287,11 +279,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                             new SolutionPreviewItem(
                                 oldProject.Id,
                                 null,
-                                string.Format(
-                                    EditorFeaturesResources.Adding_reference_0_to_1,
-                                    metadataReference.Display,
-                                    oldProject.Name
-                                )
+                                string
+                                    .Format(
+                                        EditorFeaturesResources.Adding_reference_0_to_1,
+                                        metadataReference.Display,
+                                        oldProject.Name
+                                    )
                             )
                         );
                     }
@@ -303,11 +296,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                             new SolutionPreviewItem(
                                 oldProject.Id,
                                 null,
-                                string.Format(
-                                    EditorFeaturesResources.Removing_reference_0_from_1,
-                                    metadataReference.Display,
-                                    oldProject.Name
-                                )
+                                string
+                                    .Format(
+                                        EditorFeaturesResources.Removing_reference_0_from_1,
+                                        metadataReference.Display,
+                                        oldProject.Name
+                                    )
                             )
                         );
                     }
@@ -319,11 +313,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                             new SolutionPreviewItem(
                                 oldProject.Id,
                                 null,
-                                string.Format(
-                                    EditorFeaturesResources.Adding_reference_0_to_1,
-                                    newSolution.GetRequiredProject(projectReference.ProjectId).Name,
-                                    oldProject.Name
-                                )
+                                string
+                                    .Format(
+                                        EditorFeaturesResources.Adding_reference_0_to_1,
+                                        newSolution.GetRequiredProject(
+                                            projectReference.ProjectId
+                                        ).Name,
+                                        oldProject.Name
+                                    )
                             )
                         );
                     }
@@ -335,11 +332,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                             new SolutionPreviewItem(
                                 oldProject.Id,
                                 null,
-                                string.Format(
-                                    EditorFeaturesResources.Removing_reference_0_from_1,
-                                    oldSolution.GetRequiredProject(projectReference.ProjectId).Name,
-                                    oldProject.Name
-                                )
+                                string
+                                    .Format(
+                                        EditorFeaturesResources.Removing_reference_0_from_1,
+                                        oldSolution.GetRequiredProject(
+                                            projectReference.ProjectId
+                                        ).Name,
+                                        oldProject.Name
+                                    )
                             )
                         );
                     }
@@ -351,11 +351,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                             new SolutionPreviewItem(
                                 oldProject.Id,
                                 null,
-                                string.Format(
-                                    EditorFeaturesResources.Adding_analyzer_reference_0_to_1,
-                                    analyzer.Display,
-                                    oldProject.Name
-                                )
+                                string
+                                    .Format(
+                                        EditorFeaturesResources.Adding_analyzer_reference_0_to_1,
+                                        analyzer.Display,
+                                        oldProject.Name
+                                    )
                             )
                         );
                     }
@@ -367,11 +368,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                             new SolutionPreviewItem(
                                 oldProject.Id,
                                 null,
-                                string.Format(
-                                    EditorFeaturesResources.Removing_analyzer_reference_0_from_1,
-                                    analyzer.Display,
-                                    oldProject.Name
-                                )
+                                string
+                                    .Format(
+                                        EditorFeaturesResources.Removing_analyzer_reference_0_from_1,
+                                        analyzer.Display,
+                                        oldProject.Name
+                                    )
                             )
                         );
                     }
@@ -411,10 +413,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                         new SolutionPreviewItem(
                             projectChanges.OldProject.Id,
                             null,
-                            string.Format(
-                                EditorFeaturesResources.Changing_project_references_for_0,
-                                projectChanges.OldProject.Name
-                            )
+                            string
+                                .Format(
+                                    EditorFeaturesResources.Changing_project_references_for_0,
+                                    projectChanges.OldProject.Name
+                                )
                         )
                     );
                 }
@@ -431,18 +434,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
         private bool ProjectReferencesChanged(ProjectChanges projectChanges)
         {
-            var oldProjectReferences = projectChanges.OldProject.ProjectReferences.ToDictionary(
-                r => r.ProjectId
-            );
-            var newProjectReferences = projectChanges.NewProject.ProjectReferences.ToDictionary(
-                r => r.ProjectId
-            );
+            var oldProjectReferences = projectChanges.OldProject.ProjectReferences
+                .ToDictionary(r => r.ProjectId);
+            var newProjectReferences = projectChanges.NewProject.ProjectReferences
+                .ToDictionary(r => r.ProjectId);
 
             // These are the set of project reference that remained in the project. We don't care
             // about project references that were added or removed.  Those will already be reported.
-            var preservedProjectIds = oldProjectReferences.Keys.Intersect(
-                newProjectReferences.Keys
-            );
+            var preservedProjectIds = oldProjectReferences.Keys
+                .Intersect(newProjectReferences.Keys);
 
             foreach (var projectId in preservedProjectIds)
             {
@@ -474,11 +474,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             // IProjectionBufferFactoryService is a Visual Studio API which is not documented as free-threaded
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var firstLine = string.Format(
-                EditorFeaturesResources.Adding_0_to_1_with_content_colon,
-                document.Name,
-                document.Project.Name
-            );
+            var firstLine = string
+                .Format(
+                    EditorFeaturesResources.Adding_0_to_1_with_content_colon,
+                    document.Name,
+                    document.Project.Name
+                );
 
             var originalBuffer = _projectionBufferFactoryService.CreatePreviewProjectionBuffer(
                 sourceSpans: new List<object> { firstLine, "\r\n" },
@@ -488,7 +489,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             var span = new SnapshotSpan(
                 newBuffer.CurrentSnapshot,
                 Span.FromBounds(0, newBuffer.CurrentSnapshot.Length)
-            ).CreateTrackingSpan(SpanTrackingMode.EdgeExclusive);
+            )
+                .CreateTrackingSpan(SpanTrackingMode.EdgeExclusive);
             var changedBuffer = _projectionBufferFactoryService.CreatePreviewProjectionBuffer(
                 sourceSpans: new List<object> { firstLine, "\r\n", span },
                 registryService: _contentTypeRegistryService
@@ -595,16 +597,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             // IProjectionBufferFactoryService is a Visual Studio API which is not documented as free-threaded
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var firstLine = string.Format(
-                EditorFeaturesResources.Removing_0_from_1_with_content_colon,
-                document.Name,
-                document.Project.Name
-            );
+            var firstLine = string
+                .Format(
+                    EditorFeaturesResources.Removing_0_from_1_with_content_colon,
+                    document.Name,
+                    document.Project.Name
+                );
 
             var span = new SnapshotSpan(
                 oldBuffer.CurrentSnapshot,
                 Span.FromBounds(0, oldBuffer.CurrentSnapshot.Length)
-            ).CreateTrackingSpan(SpanTrackingMode.EdgeExclusive);
+            )
+                .CreateTrackingSpan(SpanTrackingMode.EdgeExclusive);
             var originalBuffer = _projectionBufferFactoryService.CreatePreviewProjectionBuffer(
                 sourceSpans: new List<object> { firstLine, "\r\n", span },
                 registryService: _contentTypeRegistryService
@@ -766,16 +770,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 var conflictNodes = newRoot.GetAnnotatedNodesAndTokens(ConflictAnnotation.Kind);
                 var conflictSpans = conflictNodes.Select(n => n.Span.ToSpan()).ToList();
                 var conflictDescriptions = conflictNodes.SelectMany(
-                        n => n.GetAnnotations(ConflictAnnotation.Kind)
-                    )
+                    n => n.GetAnnotations(ConflictAnnotation.Kind)
+                )
                     .Select(a => $"❌ {ConflictAnnotation.GetDescription(a)}")
                     .Distinct();
 
                 var warningNodes = newRoot.GetAnnotatedNodesAndTokens(WarningAnnotation.Kind);
                 var warningSpans = warningNodes.Select(n => n.Span.ToSpan()).ToList();
                 var warningDescriptions = warningNodes.SelectMany(
-                        n => n.GetAnnotations(WarningAnnotation.Kind)
-                    )
+                    n => n.GetAnnotations(WarningAnnotation.Kind)
+                )
                     .Select(a => $"⚠ {WarningAnnotation.GetDescription(a)}")
                     .Distinct();
 
@@ -794,7 +798,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 description =
                     conflictSpans.Count == 0 && warningSpans.Count == 0
                         ? null
-                        : string.Join(
+                        : string
+                          .Join(
                               Environment.NewLine,
                               conflictDescriptions.Concat(warningDescriptions)
                           );
@@ -1022,21 +1027,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         )
         {
             // Attach the spans to the buffer.
-            newBuffer.Properties.AddProperty(
-                PredefinedPreviewTaggerKeys.ConflictSpansKey,
-                new NormalizedSnapshotSpanCollection(newBuffer.CurrentSnapshot, conflictSpans)
-            );
-            newBuffer.Properties.AddProperty(
-                PredefinedPreviewTaggerKeys.WarningSpansKey,
-                new NormalizedSnapshotSpanCollection(newBuffer.CurrentSnapshot, warningSpans)
-            );
-            newBuffer.Properties.AddProperty(
-                PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
-                new NormalizedSnapshotSpanCollection(
-                    newBuffer.CurrentSnapshot,
-                    suppressDiagnosticsSpans
-                )
-            );
+            newBuffer.Properties
+                .AddProperty(
+                    PredefinedPreviewTaggerKeys.ConflictSpansKey,
+                    new NormalizedSnapshotSpanCollection(newBuffer.CurrentSnapshot, conflictSpans)
+                );
+            newBuffer.Properties
+                .AddProperty(
+                    PredefinedPreviewTaggerKeys.WarningSpansKey,
+                    new NormalizedSnapshotSpanCollection(newBuffer.CurrentSnapshot, warningSpans)
+                );
+            newBuffer.Properties
+                .AddProperty(
+                    PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
+                    new NormalizedSnapshotSpanCollection(
+                        newBuffer.CurrentSnapshot,
+                        suppressDiagnosticsSpans
+                    )
+                );
         }
 
         private async ValueTask<ITextBuffer> CreateNewBufferAsync(
@@ -1112,12 +1120,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                         : DifferenceViewMode.Inline;
 
             var diffViewer = await CreateDifferenceViewAsync(
-                    diffBuffer,
-                    _previewRoleSet,
-                    mode,
-                    zoomLevel,
-                    cancellationToken
-                )
+                diffBuffer,
+                _previewRoleSet,
+                mode,
+                zoomLevel,
+                cancellationToken
+            )
                 .ConfigureAwait(true);
 
             diffViewer.Closed += (s, e) =>
@@ -1225,7 +1233,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             // Defer to the editor to figure out what changes the client made.
             var diffService = _differenceSelectorService.GetTextDifferencingService(
-                oldDocument.Project.LanguageServices.GetRequiredService<IContentTypeLanguageService>()
+                oldDocument.Project.LanguageServices
+                    .GetRequiredService<IContentTypeLanguageService>()
                     .GetDefaultContentType()
             );
 

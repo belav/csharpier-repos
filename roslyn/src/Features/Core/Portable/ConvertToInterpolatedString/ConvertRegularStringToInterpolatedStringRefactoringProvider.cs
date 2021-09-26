@@ -113,10 +113,10 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             );
 
             return generator.InterpolatedStringExpression(
-                    generator.CreateInterpolatedStringStartToken(isVerbatim),
-                    new[] { newNode },
-                    generator.CreateInterpolatedStringEndToken()
-                )
+                generator.CreateInterpolatedStringStartToken(isVerbatim),
+                new[] { newNode },
+                generator.CreateInterpolatedStringEndToken()
+            )
                 .WithTriviaFrom(literalExpression);
         }
 

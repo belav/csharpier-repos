@@ -179,11 +179,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 // waiting for the foreground thread to release its lock on the file change service.
                 // To avoid this, just queue up a Task to do the work on the foreground thread later, after
                 // the lock on the file change service has been released.
-                _ruleSetManager._foregroundNotificationService.RegisterNotification(
-                    () => IncludeUpdateCore(),
-                    _ruleSetManager._listener.BeginAsyncOperation("IncludeUpdated"),
-                    _disposalToken
-                );
+                _ruleSetManager._foregroundNotificationService
+                    .RegisterNotification(
+                        () => IncludeUpdateCore(),
+                        _ruleSetManager._listener.BeginAsyncOperation("IncludeUpdated"),
+                        _disposalToken
+                    );
             }
 
             private void IncludeUpdateCore()

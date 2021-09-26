@@ -109,19 +109,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
 
                 // Creating a new VSReferenceItem for the definition
                 var definitionItem = await GenerateVSReferenceItemAsync(
-                        _id,
-                        definitionId: _id,
-                        _document,
-                        _position,
-                        definition.SourceSpans.FirstOrDefault(),
-                        definition.DisplayableProperties,
-                        _metadataAsSourceFileService,
-                        definition.GetClassifiedText(),
-                        definition.Tags.GetFirstGlyph(),
-                        symbolUsageInfo: null,
-                        isWrittenTo: false,
-                        CancellationToken
-                    )
+                    _id,
+                    definitionId: _id,
+                    _document,
+                    _position,
+                    definition.SourceSpans.FirstOrDefault(),
+                    definition.DisplayableProperties,
+                    _metadataAsSourceFileService,
+                    definition.GetClassifiedText(),
+                    definition.Tags.GetFirstGlyph(),
+                    symbolUsageInfo: null,
+                    isWrittenTo: false,
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (definitionItem != null)
@@ -169,19 +169,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
 
                 // Creating a new VSReferenceItem for the reference
                 var referenceItem = await GenerateVSReferenceItemAsync(
-                        _id,
-                        definitionId,
-                        _document,
-                        _position,
-                        reference.SourceSpan,
-                        reference.AdditionalProperties,
-                        _metadataAsSourceFileService,
-                        definitionText: null,
-                        definitionGlyph: Glyph.None,
-                        reference.SymbolUsageInfo,
-                        reference.IsWrittenTo,
-                        CancellationToken
-                    )
+                    _id,
+                    definitionId,
+                    _document,
+                    _position,
+                    reference.SourceSpan,
+                    reference.AdditionalProperties,
+                    _metadataAsSourceFileService,
+                    definitionText: null,
+                    definitionGlyph: Glyph.None,
+                    reference.SymbolUsageInfo,
+                    reference.IsWrittenTo,
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (referenceItem != null)
@@ -207,24 +207,24 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
         )
         {
             var location = await ComputeLocationAsync(
-                    document,
-                    position,
-                    documentSpan,
-                    metadataAsSourceFileService,
-                    cancellationToken
-                )
+                document,
+                position,
+                documentSpan,
+                metadataAsSourceFileService,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Getting the text for the Text property. If we somehow can't compute the text, that means we're probably dealing with a metadata
             // reference, and those don't show up in the results list in Roslyn FAR anyway.
             var text = await ComputeTextAsync(
-                    id,
-                    definitionId,
-                    documentSpan,
-                    definitionText,
-                    isWrittenTo,
-                    cancellationToken
-                )
+                id,
+                definitionId,
+                documentSpan,
+                definitionText,
+                isWrittenTo,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (text == null)
             {
@@ -291,18 +291,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
                 {
                     // We do have a document span, so compute location normally.
                     return await ProtocolConversions.DocumentSpanToLocationAsync(
-                            documentSpan,
-                            cancellationToken
-                        )
+                        documentSpan,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
                 // If we have no document span, our location may be in metadata or may be a namespace.
                 var symbol = await SymbolFinder.FindSymbolAtPositionAsync(
-                        document,
-                        position,
-                        cancellationToken
-                    )
+                    document,
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (
                     symbol == null
@@ -317,11 +317,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
                 }
 
                 var declarationFile = await metadataAsSourceFileService.GetGeneratedFileAsync(
-                        document.Project,
-                        symbol,
-                        allowDecompilation: false,
-                        cancellationToken
-                    )
+                    document.Project,
+                    symbol,
+                    allowDecompilation: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var linePosSpan = declarationFile.IdentifierLocation.GetLineSpan().Span;
@@ -360,12 +360,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
                 {
                     var classifiedSpansAndHighlightSpan =
                         await ClassifiedSpansAndHighlightSpanFactory.ClassifyAsync(
-                                documentSpan,
-                                cancellationToken
-                            )
+                            documentSpan,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     var classifiedSpans = classifiedSpansAndHighlightSpan.ClassifiedSpans;
-                    var docText = await documentSpan.Document.GetTextAsync(cancellationToken)
+                    var docText = await documentSpan.Document
+                        .GetTextAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var classifiedTextRuns = GetClassifiedTextRuns(
                         id,
@@ -396,9 +397,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
                     SourceText docText
                 )
                 {
-                    using var _ = ArrayBuilder<ClassifiedTextRun>.GetInstance(
-                        out var classifiedTextRuns
-                    );
+                    using var _ = ArrayBuilder<ClassifiedTextRun>
+                        .GetInstance(out var classifiedTextRuns);
                     foreach (var span in classifiedSpans)
                     {
                         // Default case: Don't highlight. For example, if the user invokes FAR on 'x' in 'var x = 1', then 'var',

@@ -117,35 +117,21 @@ internal partial class VectorTest
     {
         int returnVal = Pass;
         if (
-            VectorMulTest<float>.VectorMul(
-                2,
-                3,
-                (float)(2 * 3),
-                (float)(2 * 3) * (2 * 3),
-                (float)(3 * 3)
-            ) != Pass
+            VectorMulTest<float>
+                .VectorMul(2, 3, (float)(2 * 3), (float)(2 * 3) * (2 * 3), (float)(3 * 3)) != Pass
         )
             returnVal = Fail;
         if (
-            VectorMulTest<double>.VectorMul(
-                2,
-                3,
-                (double)(2 * 3),
-                (double)(2 * 3) * (2 * 3),
-                (double)(3 * 3)
-            ) != Pass
+            VectorMulTest<double>
+                .VectorMul(2, 3, (double)(2 * 3), (double)(2 * 3) * (2 * 3), (double)(3 * 3))
+            != Pass
         )
             returnVal = Fail;
         if (VectorMulTest<int>.VectorMul(2, 3, (2 * 3), (2 * 3) * (2 * 3), (3 * 3)) != Pass)
             returnVal = Fail;
         if (
-            VectorMulTest<long>.VectorMul(
-                2,
-                3,
-                (long)(2 * 3),
-                (long)(2 * 3) * (2 * 3),
-                (long)(3 * 3)
-            ) != Pass
+            VectorMulTest<long>
+                .VectorMul(2, 3, (long)(2 * 3), (long)(2 * 3) * (2 * 3), (long)(3 * 3)) != Pass
         )
             returnVal = Fail;
         if (Vector4Test.VectorMul(2, 3, (float)(2 * 3)) != Pass)
@@ -155,43 +141,24 @@ internal partial class VectorTest
         if (Vector2Test.VectorMul(2, 3, (float)(2 * 3)) != Pass)
             returnVal = Fail;
         if (
-            VectorMulTest<ushort>.VectorMul(
-                2,
-                3,
-                (ushort)(2 * 3),
-                (ushort)(2 * 3) * (2 * 3),
-                (ushort)(3 * 3)
-            ) != Pass
+            VectorMulTest<ushort>
+                .VectorMul(2, 3, (ushort)(2 * 3), (ushort)(2 * 3) * (2 * 3), (ushort)(3 * 3))
+            != Pass
         )
             returnVal = Fail;
         if (
-            VectorMulTest<byte>.VectorMul(
-                2,
-                3,
-                (byte)(2 * 3),
-                (byte)(2 * 3) * (2 * 3),
-                (byte)(3 * 3)
-            ) != Pass
+            VectorMulTest<byte>
+                .VectorMul(2, 3, (byte)(2 * 3), (byte)(2 * 3) * (2 * 3), (byte)(3 * 3)) != Pass
         )
             returnVal = Fail;
         if (
-            VectorMulTest<short>.VectorMul(
-                2,
-                3,
-                (short)(2 * 3),
-                (short)(2 * 3) * (2 * 3),
-                (short)(3 * 3)
-            ) != Pass
+            VectorMulTest<short>
+                .VectorMul(2, 3, (short)(2 * 3), (short)(2 * 3) * (2 * 3), (short)(3 * 3)) != Pass
         )
             returnVal = Fail;
         if (
-            VectorMulTest<sbyte>.VectorMul(
-                2,
-                3,
-                (sbyte)(2 * 3),
-                (sbyte)(2 * 3) * (2 * 3),
-                (sbyte)(3 * 3)
-            ) != Pass
+            VectorMulTest<sbyte>
+                .VectorMul(2, 3, (sbyte)(2 * 3), (sbyte)(2 * 3) * (2 * 3), (sbyte)(3 * 3)) != Pass
         )
             returnVal = Fail;
         if (
@@ -199,13 +166,8 @@ internal partial class VectorTest
         )
             returnVal = Fail;
         if (
-            VectorMulTest<ulong>.VectorMul(
-                2ul,
-                3ul,
-                2ul * 3ul,
-                (2ul * 3ul) * (2ul * 3ul),
-                (3ul * 3ul)
-            ) != Pass
+            VectorMulTest<ulong>
+                .VectorMul(2ul, 3ul, 2ul * 3ul, (2ul * 3ul) * (2ul * 3ul), (3ul * 3ul)) != Pass
         )
             returnVal = Fail;
 

@@ -84,13 +84,14 @@ namespace Microsoft.Win32
                     Interop.User32.USEROBJECTFLAGS flags = default;
 
                     if (
-                        Interop.User32.GetUserObjectInformationW(
-                            hwinsta,
-                            Interop.User32.UOI_FLAGS,
-                            &flags,
-                            (uint)sizeof(Interop.User32.USEROBJECTFLAGS),
-                            ref dummy
-                        )
+                        Interop.User32
+                            .GetUserObjectInformationW(
+                                hwinsta,
+                                Interop.User32.UOI_FLAGS,
+                                &flags,
+                                (uint)sizeof(Interop.User32.USEROBJECTFLAGS),
+                                ref dummy
+                            )
                     )
                     {
                         if ((flags.dwFlags & Interop.User32.WSF_VISIBLE) == 0)
@@ -320,10 +321,11 @@ namespace Microsoft.Win32
             {
                 if (s_defWindowProc == IntPtr.Zero)
                 {
-                    s_defWindowProc = Interop.Kernel32.GetProcAddress(
-                        Interop.Kernel32.GetModuleHandle("user32.dll"),
-                        "DefWindowProcW"
-                    );
+                    s_defWindowProc = Interop.Kernel32
+                        .GetProcAddress(
+                            Interop.Kernel32.GetModuleHandle("user32.dll"),
+                            "DefWindowProcW"
+                        );
                 }
                 return s_defWindowProc;
             }
@@ -347,12 +349,13 @@ namespace Microsoft.Win32
             }
 
             EnsureSystemEvents(requireHandle: true);
-            IntPtr timerId = Interop.User32.SendMessageW(
-                new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
-                Interop.User32.WM_CREATETIMER,
-                (IntPtr)interval,
-                IntPtr.Zero
-            );
+            IntPtr timerId = Interop.User32
+                .SendMessageW(
+                    new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
+                    Interop.User32.WM_CREATETIMER,
+                    (IntPtr)interval,
+                    IntPtr.Zero
+                );
 
             if (timerId == IntPtr.Zero)
             {
@@ -367,9 +370,10 @@ namespace Microsoft.Win32
             {
                 if (s_registeredSessionNotification)
                 {
-                    Interop.Wtsapi32.WTSUnRegisterSessionNotification(
-                        new HandleRef(s_systemEvents, s_systemEvents!._windowHandle)
-                    );
+                    Interop.Wtsapi32
+                        .WTSUnRegisterSessionNotification(
+                            new HandleRef(s_systemEvents, s_systemEvents!._windowHandle)
+                        );
                 }
 
                 IntPtr handle = _windowHandle;
@@ -386,29 +390,17 @@ namespace Microsoft.Win32
                     if (IntPtr.Size == 4)
                     {
                         // In a 32-bit process we must call the non-'ptr' version of these APIs
-                        Interop.User32.SetWindowLongW(
-                            handle,
-                            Interop.User32.GWL_WNDPROC,
-                            DefWndProc
-                        );
-                        Interop.User32.SetClassLongW(
-                            handle,
-                            Interop.User32.GCL_WNDPROC,
-                            DefWndProc
-                        );
+                        Interop.User32
+                            .SetWindowLongW(handle, Interop.User32.GWL_WNDPROC, DefWndProc);
+                        Interop.User32
+                            .SetClassLongW(handle, Interop.User32.GCL_WNDPROC, DefWndProc);
                     }
                     else
                     {
-                        Interop.User32.SetWindowLongPtrW(
-                            handle,
-                            Interop.User32.GWL_WNDPROC,
-                            DefWndProc
-                        );
-                        Interop.User32.SetClassLongPtrW(
-                            handle,
-                            Interop.User32.GCL_WNDPROC,
-                            DefWndProc
-                        );
+                        Interop.User32
+                            .SetWindowLongPtrW(handle, Interop.User32.GWL_WNDPROC, DefWndProc);
+                        Interop.User32
+                            .SetClassLongPtrW(handle, Interop.User32.GCL_WNDPROC, DefWndProc);
                     }
                 }
 
@@ -417,12 +409,8 @@ namespace Microsoft.Win32
                     // We may not have been able to destroy the window if we're shutdown from another thread.
                     // Attempt to close the window by posting a WM_CLOSE message instead. (Messages always
                     // fire on the same thread.)
-                    Interop.User32.PostMessageW(
-                        handle,
-                        Interop.User32.WM_CLOSE,
-                        IntPtr.Zero,
-                        IntPtr.Zero
-                    );
+                    Interop.User32
+                        .PostMessageW(handle, Interop.User32.WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
                 }
                 else
                 {
@@ -502,10 +490,11 @@ namespace Microsoft.Win32
 
                 if (retval != IntPtr.Zero)
                 {
-                    Interop.Wtsapi32.WTSRegisterSessionNotification(
-                        new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
-                        Interop.Wtsapi32.NOTIFY_FOR_THIS_SESSION
-                    );
+                    Interop.Wtsapi32
+                        .WTSRegisterSessionNotification(
+                            new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
+                            Interop.Wtsapi32.NOTIFY_FOR_THIS_SESSION
+                        );
                     s_registeredSessionNotification = true;
                     Interop.Kernel32.FreeLibrary(retval);
                 }
@@ -687,20 +676,21 @@ namespace Microsoft.Win32
                 else
                 {
                     // And create an instance of the window.
-                    _windowHandle = Interop.User32.CreateWindowExW(
-                        0,
-                        s_className,
-                        s_className,
-                        Interop.User32.WS_POPUP,
-                        0,
-                        0,
-                        0,
-                        0,
-                        IntPtr.Zero,
-                        IntPtr.Zero,
-                        hInstance,
-                        IntPtr.Zero
-                    );
+                    _windowHandle = Interop.User32
+                        .CreateWindowExW(
+                            0,
+                            s_className,
+                            s_className,
+                            Interop.User32.WS_POPUP,
+                            0,
+                            0,
+                            0,
+                            0,
+                            IntPtr.Zero,
+                            IntPtr.Zero,
+                            hInstance,
+                            IntPtr.Zero
+                        );
                 }
             }
 
@@ -767,10 +757,11 @@ namespace Microsoft.Win32
 
 #if DEBUG
             int pid;
-            int thread = Interop.User32.GetWindowThreadProcessId(
-                new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
-                out pid
-            );
+            int thread = Interop.User32
+                .GetWindowThreadProcessId(
+                    new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
+                    out pid
+                );
             Debug.Assert(
                 s_windowThread == null || thread != Interop.Kernel32.GetCurrentThreadId(),
                 "Don't call MarshaledInvoke on the system events thread"
@@ -783,9 +774,8 @@ namespace Microsoft.Win32
                 {
                     if (s_threadCallbackList == null)
                     {
-                        s_threadCallbackMessage = Interop.User32.RegisterWindowMessageW(
-                            "SystemEventsThreadCallbackMessage"
-                        );
+                        s_threadCallbackMessage = Interop.User32
+                            .RegisterWindowMessageW("SystemEventsThreadCallbackMessage");
                         s_threadCallbackList = new Queue<Delegate>();
                     }
                 }
@@ -801,12 +791,13 @@ namespace Microsoft.Win32
                 s_threadCallbackList.Enqueue(method);
             }
 
-            Interop.User32.PostMessageW(
-                new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
-                s_threadCallbackMessage,
-                IntPtr.Zero,
-                IntPtr.Zero
-            );
+            Interop.User32
+                .PostMessageW(
+                    new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
+                    s_threadCallbackMessage,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
         }
 
         /// <summary>
@@ -817,12 +808,13 @@ namespace Microsoft.Win32
             EnsureSystemEvents(requireHandle: true);
             if (s_systemEvents!._windowHandle != IntPtr.Zero)
             {
-                int res = (int)Interop.User32.SendMessageW(
-                    new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
-                    Interop.User32.WM_KILLTIMER,
-                    timerId,
-                    IntPtr.Zero
-                );
+                int res = (int)Interop.User32
+                    .SendMessageW(
+                        new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
+                        Interop.User32.WM_KILLTIMER,
+                        timerId,
+                        IntPtr.Zero
+                    );
 
                 if (res == 0)
                     throw new ExternalException(SR.ErrorKillTimer);
@@ -1139,21 +1131,23 @@ namespace Microsoft.Win32
 
 #if DEBUG
                             int pid;
-                            int thread = Interop.User32.GetWindowThreadProcessId(
-                                new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
-                                out pid
-                            );
+                            int thread = Interop.User32
+                                .GetWindowThreadProcessId(
+                                    new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
+                                    out pid
+                                );
                             Debug.Assert(
                                 thread != Interop.Kernel32.GetCurrentThreadId(),
                                 "Don't call Shutdown on the system events thread"
                             );
 #endif
-                            Interop.User32.PostMessageW(
-                                new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
-                                Interop.User32.WM_QUIT,
-                                IntPtr.Zero,
-                                IntPtr.Zero
-                            );
+                            Interop.User32
+                                .PostMessageW(
+                                    new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
+                                    Interop.User32.WM_QUIT,
+                                    IntPtr.Zero,
+                                    IntPtr.Zero
+                                );
 
                             s_eventThreadTerminated.WaitOne();
                             s_windowThread.Join(); // avoids an AppDomainUnloaded exception on our background thread.
@@ -1194,12 +1188,13 @@ namespace Microsoft.Win32
                             newStringPtr = Marshal.StringToHGlobalUni(newString);
                         }
                     }
-                    Interop.User32.PostMessageW(
-                        _windowHandle,
-                        Interop.User32.WM_REFLECT + msg,
-                        wParam,
-                        newStringPtr
-                    );
+                    Interop.User32
+                        .PostMessageW(
+                            _windowHandle,
+                            Interop.User32.WM_REFLECT + msg,
+                            wParam,
+                            newStringPtr
+                        );
                     break;
                 case Interop.User32.WM_WTSSESSION_CHANGE:
                     OnSessionSwitch((int)wParam);
@@ -1212,12 +1207,13 @@ namespace Microsoft.Win32
                 case Interop.User32.WM_TIMECHANGE:
                 case Interop.User32.WM_TIMER:
                 case Interop.User32.WM_THEMECHANGED:
-                    Interop.User32.PostMessageW(
-                        _windowHandle,
-                        Interop.User32.WM_REFLECT + msg,
-                        wParam,
-                        lParam
-                    );
+                    Interop.User32
+                        .PostMessageW(
+                            _windowHandle,
+                            Interop.User32.WM_REFLECT + msg,
+                            wParam,
+                            lParam
+                        );
                     break;
 
                 case Interop.User32.WM_CREATETIMER:
@@ -1332,13 +1328,14 @@ namespace Microsoft.Win32
                     // and sleep so we always block in managed code instead.
                     while (keepRunning)
                     {
-                        int ret = Interop.User32.MsgWaitForMultipleObjectsEx(
-                            0,
-                            IntPtr.Zero,
-                            100,
-                            Interop.User32.QS_ALLINPUT,
-                            Interop.User32.MWMO_INPUTAVAILABLE
-                        );
+                        int ret = Interop.User32
+                            .MsgWaitForMultipleObjectsEx(
+                                0,
+                                IntPtr.Zero,
+                                100,
+                                Interop.User32.QS_ALLINPUT,
+                                Interop.User32.MWMO_INPUTAVAILABLE
+                            );
 
                         if (ret == Interop.User32.WAIT_TIMEOUT)
                         {
@@ -1347,13 +1344,14 @@ namespace Microsoft.Win32
                         else
                         {
                             while (
-                                Interop.User32.PeekMessageW(
-                                    ref msg,
-                                    IntPtr.Zero,
-                                    0,
-                                    0,
-                                    Interop.User32.PM_REMOVE
-                                )
+                                Interop.User32
+                                    .PeekMessageW(
+                                        ref msg,
+                                        IntPtr.Zero,
+                                        0,
+                                        0,
+                                        Interop.User32.PM_REMOVE
+                                    )
                             )
                             {
                                 if (msg.message == Interop.User32.WM_QUIT)

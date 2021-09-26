@@ -42,8 +42,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             _context = context;
             _serverPeerSettings = context.ServerSettings;
             _streamIdFeature = context.ConnectionFeatures.Get<IStreamIdFeature>()!;
-            _protocolErrorCodeFeature =
-                context.ConnectionFeatures.Get<IProtocolErrorCodeFeature>()!;
+            _protocolErrorCodeFeature = context.ConnectionFeatures
+                .Get<IProtocolErrorCodeFeature>()!;
 
             _frameWriter = new Http3FrameWriter(
                 context.Transport.Output,
@@ -328,10 +328,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             }
 
             _haveReceivedSettingsFrame = true;
-            using var closedRegistration = _context.StreamContext.ConnectionClosed.Register(
-                state => ((Http3ControlStream)state!).OnStreamClosed(),
-                this
-            );
+            using var closedRegistration = _context.StreamContext.ConnectionClosed
+                .Register(state => ((Http3ControlStream)state!).OnStreamClosed(), this);
 
             while (true)
             {

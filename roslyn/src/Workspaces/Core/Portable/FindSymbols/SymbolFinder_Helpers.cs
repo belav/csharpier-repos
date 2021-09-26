@@ -45,11 +45,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             if (
                 await OriginalSymbolsMatchCoreAsync(
-                        solution,
-                        searchSymbol,
-                        symbolToMatch,
-                        cancellationToken
-                    )
+                    solution,
+                    searchSymbol,
+                    symbolToMatch,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             )
                 return true;
@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     if (
                         (
                             namespace1Count > 1
-                            && await namespace1.ConstituentNamespaces.AnyAsync(
+                            && await namespace1.ConstituentNamespaces
+                                .AnyAsync(
                                     static (n, arg) =>
                                         NamespaceSymbolsMatchAsync(
                                             arg.solution,
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         )
                         || (
                             namespace2Count > 1
-                            && await namespace2.ConstituentNamespaces.AnyAsync(
+                            && await namespace2.ConstituentNamespaces
+                                .AnyAsync(
                                     static (n2, arg) =>
                                         NamespaceSymbolsMatchAsync(
                                             arg.solution,
@@ -139,17 +141,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             //          forwarded from reference assembly A (version v2) to assembly B in compilation C2.
             //      (b) Otherwise, if no such named type pairs were encountered, symbols ARE equivalent.
 
-            using var _ = PooledDictionary<INamedTypeSymbol, INamedTypeSymbol>.GetInstance(
-                out var equivalentTypesWithDifferingAssemblies
-            );
+            using var _ = PooledDictionary<INamedTypeSymbol, INamedTypeSymbol>
+                .GetInstance(out var equivalentTypesWithDifferingAssemblies);
 
             // 1) Compare searchSymbol and symbolToMatch using SymbolEquivalenceComparer.IgnoreAssembliesInstance
             if (
-                !SymbolEquivalenceComparer.IgnoreAssembliesInstance.Equals(
-                    searchSymbol,
-                    symbolToMatch,
-                    equivalentTypesWithDifferingAssemblies
-                )
+                !SymbolEquivalenceComparer.IgnoreAssembliesInstance
+                    .Equals(searchSymbol, symbolToMatch, equivalentTypesWithDifferingAssemblies)
             )
             {
                 // 2) If the symbols are NOT equivalent ignoring assemblies, then they cannot be equivalent.
@@ -161,10 +159,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 // Step 3a) Ensure that all pairs of named types in equivalentTypesWithDifferingAssemblies are indeed equivalent types.
                 return await VerifyForwardedTypesAsync(
-                        solution,
-                        equivalentTypesWithDifferingAssemblies,
-                        cancellationToken
-                    )
+                    solution,
+                    equivalentTypesWithDifferingAssemblies,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -198,10 +196,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Contract.ThrowIfFalse(
                 equivalentTypesWithDifferingAssemblies.All(
                     kvp =>
-                        !SymbolEquivalenceComparer.Instance.Equals(
-                            kvp.Key.ContainingAssembly,
-                            kvp.Value.ContainingAssembly
-                        )
+                        !SymbolEquivalenceComparer.Instance
+                            .Equals(kvp.Key.ContainingAssembly, kvp.Value.ContainingAssembly)
                 )
             );
 
@@ -223,20 +219,20 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // that are unordered.
                 if (
                     !await VerifyForwardedTypeAsync(
-                            solution,
-                            candidate: type1,
-                            forwardedTo: type2,
-                            compilationSet,
-                            cancellationToken
-                        )
+                        solution,
+                        candidate: type1,
+                        forwardedTo: type2,
+                        compilationSet,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                     && !await VerifyForwardedTypeAsync(
-                            solution,
-                            candidate: type2,
-                            forwardedTo: type1,
-                            compilationSet,
-                            cancellationToken
-                        )
+                        solution,
+                        candidate: type2,
+                        forwardedTo: type1,
+                        compilationSet,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {

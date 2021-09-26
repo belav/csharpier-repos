@@ -27,13 +27,15 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_add_update_delete_end_to_end()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddSingleton<ILoggerFactory>(new ListLoggerFactory())
                 .AddSingleton(TestModelSource.GetFactory(OnModelCreating))
                 .BuildServiceProvider();
 
             var options =
-                new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider)
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(serviceProvider)
                     .UseInMemoryDatabase(nameof(DatabaseInMemoryTest)).Options;
 
             var customer = new Customer { Id = 42, Name = "Theon" };

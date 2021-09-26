@@ -246,8 +246,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 SimpleTernaryOpTest__MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate_Vector64_Int32_Vector64_Int32_1 testClass
             )
             {
-                var result =
-                    AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+                var result = AdvSimd.Arm64
+                    .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                         _fld1,
                         _fld2,
                         _fld3,
@@ -266,8 +266,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 fixed (Vector64<Int32>* pFld2 = &_fld2)
                 fixed (Vector64<Int32>* pFld3 = &_fld3)
                 {
-                    var result =
-                        AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+                    var result = AdvSimd.Arm64
+                        .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                             AdvSimd.LoadVector64((Int64*)(pFld1)),
                             AdvSimd.LoadVector64((Int32*)(pFld2)),
                             AdvSimd.LoadVector64((Int32*)(pFld3)),
@@ -398,8 +398,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result =
-                AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+            var result = AdvSimd.Arm64
+                .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                     Unsafe.Read<Vector64<Int64>>(_dataTable.inArray1Ptr),
                     Unsafe.Read<Vector64<Int32>>(_dataTable.inArray2Ptr),
                     Unsafe.Read<Vector64<Int32>>(_dataTable.inArray3Ptr),
@@ -419,8 +419,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result =
-                AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+            var result = AdvSimd.Arm64
+                .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                     AdvSimd.LoadVector64((Int64*)(_dataTable.inArray1Ptr)),
                     AdvSimd.LoadVector64((Int32*)(_dataTable.inArray2Ptr)),
                     AdvSimd.LoadVector64((Int32*)(_dataTable.inArray3Ptr)),
@@ -440,7 +440,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(
                     nameof(
                         AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate
                     ),
@@ -476,7 +477,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(
                     nameof(
                         AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate
                     ),
@@ -512,8 +514,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result =
-                AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+            var result = AdvSimd.Arm64
+                .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                     _clsVar1,
                     _clsVar2,
                     _clsVar3,
@@ -532,8 +534,8 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Int32>* pClsVar2 = &_clsVar2)
             fixed (Vector64<Int32>* pClsVar3 = &_clsVar3)
             {
-                var result =
-                    AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+                var result = AdvSimd.Arm64
+                    .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                         AdvSimd.LoadVector64((Int64*)(pClsVar1)),
                         AdvSimd.LoadVector64((Int32*)(pClsVar2)),
                         AdvSimd.LoadVector64((Int32*)(pClsVar3)),
@@ -552,8 +554,8 @@ namespace JIT.HardwareIntrinsics.Arm
             var op1 = Unsafe.Read<Vector64<Int64>>(_dataTable.inArray1Ptr);
             var op2 = Unsafe.Read<Vector64<Int32>>(_dataTable.inArray2Ptr);
             var op3 = Unsafe.Read<Vector64<Int32>>(_dataTable.inArray3Ptr);
-            var result =
-                AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+            var result = AdvSimd.Arm64
+                .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                     op1,
                     op2,
                     op3,
@@ -571,8 +573,8 @@ namespace JIT.HardwareIntrinsics.Arm
             var op1 = AdvSimd.LoadVector64((Int64*)(_dataTable.inArray1Ptr));
             var op2 = AdvSimd.LoadVector64((Int32*)(_dataTable.inArray2Ptr));
             var op3 = AdvSimd.LoadVector64((Int32*)(_dataTable.inArray3Ptr));
-            var result =
-                AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+            var result = AdvSimd.Arm64
+                .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                     op1,
                     op2,
                     op3,
@@ -589,8 +591,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test =
                 new SimpleTernaryOpTest__MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate_Vector64_Int32_Vector64_Int32_1();
-            var result =
-                AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+            var result = AdvSimd.Arm64
+                .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                     test._fld1,
                     test._fld2,
                     test._fld3,
@@ -612,8 +614,8 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Int32>* pFld2 = &test._fld2)
             fixed (Vector64<Int32>* pFld3 = &test._fld3)
             {
-                var result =
-                    AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+                var result = AdvSimd.Arm64
+                    .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                         AdvSimd.LoadVector64((Int64*)(pFld1)),
                         AdvSimd.LoadVector64((Int32*)(pFld2)),
                         AdvSimd.LoadVector64((Int32*)(pFld3)),
@@ -629,8 +631,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario));
 
-            var result =
-                AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+            var result = AdvSimd.Arm64
+                .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                     _fld1,
                     _fld2,
                     _fld3,
@@ -649,8 +651,8 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Int32>* pFld2 = &_fld2)
             fixed (Vector64<Int32>* pFld3 = &_fld3)
             {
-                var result =
-                    AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+                var result = AdvSimd.Arm64
+                    .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                         AdvSimd.LoadVector64((Int64*)(pFld1)),
                         AdvSimd.LoadVector64((Int32*)(pFld2)),
                         AdvSimd.LoadVector64((Int32*)(pFld3)),
@@ -667,8 +669,8 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario));
 
             var test = TestStruct.Create();
-            var result =
-                AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+            var result = AdvSimd.Arm64
+                .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                     test._fld1,
                     test._fld2,
                     test._fld3,
@@ -684,8 +686,8 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result =
-                AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
+            var result = AdvSimd.Arm64
+                .MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate(
                     AdvSimd.LoadVector64((Int64*)(&test._fld1)),
                     AdvSimd.LoadVector64((Int32*)(&test._fld2)),
                     AdvSimd.LoadVector64((Int32*)(&test._fld3)),
@@ -829,21 +831,18 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate)}<Int64>(Vector64<Int64>, Vector64<Int32>, Vector64<Int32>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"secondOp: ({string.Join(", ", secondOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" thirdOp: ({string.Join(", ", thirdOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate)}<Int64>(Vector64<Int64>, Vector64<Int32>, Vector64<Int32>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"secondOp: ({string.Join(", ", secondOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($" thirdOp: ({string.Join(", ", thirdOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

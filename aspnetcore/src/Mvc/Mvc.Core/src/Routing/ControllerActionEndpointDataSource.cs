@@ -149,29 +149,27 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 order ??= _orderSequence.GetNext();
 
                 endpoints.Map(
-                        pattern,
-                        context =>
-                        {
-                            throw new InvalidOperationException(
-                                "This endpoint is not expected to be executed directly."
-                            );
-                        }
-                    )
-                    .Add(
-                        b =>
-                        {
-                            ((RouteEndpointBuilder)b).Order = order.Value;
-                            b.Metadata.Add(
+                    pattern,
+                    context =>
+                    {
+                        throw new InvalidOperationException(
+                            "This endpoint is not expected to be executed directly."
+                        );
+                    }
+                ).Add(
+                    b =>
+                    {
+                        ((RouteEndpointBuilder)b).Order = order.Value;
+                        b.Metadata
+                            .Add(
                                 new DynamicControllerRouteValueTransformerMetadata(
                                     transformerType,
                                     state
                                 )
                             );
-                            b.Metadata.Add(
-                                new ControllerEndpointDataSourceIdMetadata(DataSourceId)
-                            );
-                        }
-                    );
+                        b.Metadata.Add(new ControllerEndpointDataSourceIdMetadata(DataSourceId));
+                    }
+                );
             }
         }
     }

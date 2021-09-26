@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             }
 
             var activeInlineRenameSession =
-                workspace.Services.GetService<ICodeRefactoringHelpersService>().ActiveInlineRenameSession;
+                workspace.Services
+                    .GetService<ICodeRefactoringHelpersService>().ActiveInlineRenameSession;
             if (activeInlineRenameSession)
             {
                 return;
@@ -66,10 +67,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             }
 
             var actions = await GetCodeActionsAsync(
-                    document,
-                    textSpan,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                textSpan,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
         }
@@ -86,10 +87,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             actions.AddIfNotNull(methodAction);
 
             var localFunctionAction = await ExtractLocalFunctionAsync(
-                    document,
-                    textSpan,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             actions.AddIfNotNull(localFunctionAction);
 
@@ -103,11 +104,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
         )
         {
             var result = await ExtractMethodService.ExtractMethodAsync(
-                    document,
-                    textSpan,
-                    localFunction: false,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                textSpan,
+                localFunction: false,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             Contract.ThrowIfNull(result);
 
@@ -135,11 +136,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             }
 
             var localFunctionResult = await ExtractMethodService.ExtractMethodAsync(
-                    document,
-                    textSpan,
-                    localFunction: true,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                textSpan,
+                localFunction: true,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             Contract.ThrowIfNull(localFunctionResult);
 

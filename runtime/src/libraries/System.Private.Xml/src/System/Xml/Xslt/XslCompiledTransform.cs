@@ -184,11 +184,8 @@ namespace System.Xml.Xsl
             XmlResolver? stylesheetResolver
         )
         {
-            _compilerErrorColl = new Compiler(settings, _enableDebug, null).Compile(
-                stylesheet,
-                stylesheetResolver,
-                out _qil
-            );
+            _compilerErrorColl = new Compiler(settings, _enableDebug, null)
+                .Compile(stylesheet, stylesheetResolver, out _qil);
         }
 
         /// <summary>
@@ -208,10 +205,11 @@ namespace System.Xml.Xsl
 
         private void CompileQilToMsil(XsltSettings settings)
         {
-            _command = new XmlILGenerator().Generate(
-                _qil!, /*typeBuilder:*/
-                null
-            )!;
+            _command = new XmlILGenerator()
+                .Generate(
+                    _qil!, /*typeBuilder:*/
+                    null
+                )!;
             _outputSettings = _command.StaticData.DefaultWriterSettings;
             _qil = null;
         }

@@ -77,19 +77,21 @@ namespace Microsoft.AspNetCore.Authentication
 
             builder.Services.Configure(TryAddJwtBearerSchemeMapping(scheme, jwtBearerScheme));
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IConfigureOptions<AzureADB2COptions>,
-                    AzureADB2COptionsConfiguration
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IConfigureOptions<AzureADB2COptions>,
+                        AzureADB2COptionsConfiguration
+                    >()
+                );
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IConfigureOptions<JwtBearerOptions>,
-                    AzureADB2CJwtBearerOptionsConfiguration
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IConfigureOptions<JwtBearerOptions>,
+                        AzureADB2CJwtBearerOptionsConfiguration
+                    >()
+                );
 
             builder.Services.Configure(scheme, configureOptions);
             builder.AddJwtBearer(jwtBearerScheme, o => { });
@@ -155,30 +157,34 @@ namespace Microsoft.AspNetCore.Authentication
                 }
             );
 
-            builder.Services.Configure(
-                TryAddOpenIDCookieSchemeMappings(scheme, openIdConnectScheme, cookieScheme)
-            );
+            builder.Services
+                .Configure(
+                    TryAddOpenIDCookieSchemeMappings(scheme, openIdConnectScheme, cookieScheme)
+                );
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IConfigureOptions<AzureADB2COptions>,
-                    AzureADB2COptionsConfiguration
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IConfigureOptions<AzureADB2COptions>,
+                        AzureADB2COptionsConfiguration
+                    >()
+                );
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IConfigureOptions<OpenIdConnectOptions>,
-                    AzureADB2COpenIdConnectOptionsConfiguration
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IConfigureOptions<OpenIdConnectOptions>,
+                        AzureADB2COpenIdConnectOptionsConfiguration
+                    >()
+                );
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IConfigureOptions<CookieAuthenticationOptions>,
-                    AzureADB2CCookieOptionsConfiguration
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IConfigureOptions<CookieAuthenticationOptions>,
+                        AzureADB2CCookieOptionsConfiguration
+                    >()
+                );
 
             builder.Services.Configure(scheme, configureOptions);
 
@@ -213,13 +219,14 @@ namespace Microsoft.AspNetCore.Authentication
                         );
                     }
                 }
-                o.JwtBearerMappings.Add(
-                    scheme,
-                    new AzureADB2CSchemeOptions.JwtBearerSchemeMapping
-                    {
-                        JwtBearerScheme = jwtBearerScheme
-                    }
-                );
+                o.JwtBearerMappings
+                    .Add(
+                        scheme,
+                        new AzureADB2CSchemeOptions.JwtBearerSchemeMapping
+                        {
+                            JwtBearerScheme = jwtBearerScheme
+                        }
+                    );
             }
             ;
         }
@@ -258,14 +265,15 @@ namespace Microsoft.AspNetCore.Authentication
                         );
                     }
                 }
-                o.OpenIDMappings.Add(
-                    scheme,
-                    new AzureADB2CSchemeOptions.AzureADB2COpenIDSchemeMapping
-                    {
-                        OpenIdConnectScheme = openIdConnectScheme,
-                        CookieScheme = cookieScheme
-                    }
-                );
+                o.OpenIDMappings
+                    .Add(
+                        scheme,
+                        new AzureADB2CSchemeOptions.AzureADB2COpenIDSchemeMapping
+                        {
+                            OpenIdConnectScheme = openIdConnectScheme,
+                            CookieScheme = cookieScheme
+                        }
+                    );
             }
             ;
         }
@@ -273,21 +281,20 @@ namespace Microsoft.AspNetCore.Authentication
         private static void AddAdditionalMvcApplicationParts(IServiceCollection services)
         {
             var additionalParts = GetAdditionalParts();
-            var mvcBuilder = services.AddMvc()
-                .ConfigureApplicationPartManager(
-                    apm =>
+            var mvcBuilder = services.AddMvc().ConfigureApplicationPartManager(
+                apm =>
+                {
+                    foreach (var part in additionalParts)
                     {
-                        foreach (var part in additionalParts)
+                        if (!apm.ApplicationParts.Any(ap => HasSameName(ap.Name, part.Name)))
                         {
-                            if (!apm.ApplicationParts.Any(ap => HasSameName(ap.Name, part.Name)))
-                            {
-                                apm.ApplicationParts.Add(part);
-                            }
+                            apm.ApplicationParts.Add(part);
                         }
-
-                        apm.FeatureProviders.Add(new AzureADB2CAccountControllerFeatureProvider());
                     }
-                );
+
+                    apm.FeatureProviders.Add(new AzureADB2CAccountControllerFeatureProvider());
+                }
+            );
 
             bool HasSameName(string left, string right) =>
                 string.Equals(left, right, StringComparison.Ordinal);

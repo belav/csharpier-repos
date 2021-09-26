@@ -43,12 +43,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
             {
                 UserName = useNamePrefixAsUserName
                     ? namePrefix
-                    : string.Format(
-                          CultureInfo.InvariantCulture,
-                          "{0}{1}",
-                          namePrefix,
-                          Guid.NewGuid()
-                      ),
+                    : string
+                      .Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
                 Email = email,
                 PhoneNumber = phoneNumber,
                 LockoutEnabled = lockoutEnabled,

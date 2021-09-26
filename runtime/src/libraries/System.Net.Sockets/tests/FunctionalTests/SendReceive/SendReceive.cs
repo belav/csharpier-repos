@@ -47,7 +47,8 @@ namespace System.Net.Sockets.Tests
                     Array = length != null ? new byte[length.Value] : null,
                     Offset = offset,
                     Count = count
-                }.ToActual();
+                }
+                    .ToActual();
 
                 await Assert.ThrowsAsync(
                     expectedExceptionType,
@@ -1537,69 +1538,67 @@ namespace System.Net.Sockets.Tests
         public void BlockingRead_DoesntRequireAnotherThreadPoolThread()
         {
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    // Set the max number of worker threads to a low value.
+                    ThreadPool.GetMaxThreads(out int workerThreads, out int completionPortThreads);
+                    ThreadPool.SetMaxThreads(Environment.ProcessorCount, completionPortThreads);
+
+                    // Create twice that many socket pairs, for good measure.
+                    (Socket, Socket)[] socketPairs = Enumerable.Range(
+                        0,
+                        Environment.ProcessorCount * 2
+                    )
+                        .Select(_ => SocketTestExtensions.CreateConnectedSocketPair())
+                        .ToArray();
+                    try
                     {
-                        // Set the max number of worker threads to a low value.
-                        ThreadPool.GetMaxThreads(
-                            out int workerThreads,
-                            out int completionPortThreads
-                        );
-                        ThreadPool.SetMaxThreads(Environment.ProcessorCount, completionPortThreads);
-
-                        // Create twice that many socket pairs, for good measure.
-                        (Socket, Socket)[] socketPairs = Enumerable.Range(
-                                0,
-                                Environment.ProcessorCount * 2
-                            )
-                            .Select(_ => SocketTestExtensions.CreateConnectedSocketPair())
-                            .ToArray();
-                        try
+                        // Ensure that on Unix all of the first socket in each pair are configured for sync-over-async.
+                        foreach ((Socket, Socket) pair in socketPairs)
                         {
-                            // Ensure that on Unix all of the first socket in each pair are configured for sync-over-async.
-                            foreach ((Socket, Socket) pair in socketPairs)
-                            {
-                                pair.Item1.ForceNonBlocking(force: true);
-                            }
+                            pair.Item1.ForceNonBlocking(force: true);
+                        }
 
-                            // Queue a work item for each first socket to do a blocking receive.
-                            Task[] receives = (
-                                from pair in socketPairs
-                                select Task.Factory.StartNew(
+                        // Queue a work item for each first socket to do a blocking receive.
+                        Task[] receives = (
+                            from pair in socketPairs
+                            select Task.Factory
+                                .StartNew(
                                     () => pair.Item1.Receive(new byte[1]),
                                     CancellationToken.None,
                                     TaskCreationOptions.PreferFairness,
                                     TaskScheduler.Default
                                 )
-                            ).ToArray();
+                        )
+                            .ToArray();
 
-                            // Give a bit of time for the pool to start executing the receives.  It's possible this won't be enough,
-                            // in which case the test we could get a false negative on the test, but we won't get spurious failures.
-                            Thread.Sleep(1000);
+                        // Give a bit of time for the pool to start executing the receives.  It's possible this won't be enough,
+                        // in which case the test we could get a false negative on the test, but we won't get spurious failures.
+                        Thread.Sleep(1000);
 
-                            // Now send to each socket.
-                            foreach ((Socket, Socket) pair in socketPairs)
-                            {
-                                pair.Item2.Send(new byte[1]);
-                            }
-
-                            // And wait for all the receives to complete.
-                            Assert.True(
-                                Task.WaitAll(receives, 60_000),
-                                "Expected all receives to complete within timeout"
-                            );
+                        // Now send to each socket.
+                        foreach ((Socket, Socket) pair in socketPairs)
+                        {
+                            pair.Item2.Send(new byte[1]);
                         }
 
-                        finally
+                        // And wait for all the receives to complete.
+                        Assert.True(
+                            Task.WaitAll(receives, 60_000),
+                            "Expected all receives to complete within timeout"
+                        );
+                    }
+
+                    finally
+                    {
+                        foreach ((Socket, Socket) pair in socketPairs)
                         {
-                            foreach ((Socket, Socket) pair in socketPairs)
-                            {
-                                pair.Item1.Dispose();
-                                pair.Item2.Dispose();
-                            }
+                            pair.Item1.Dispose();
+                            pair.Item2.Dispose();
                         }
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
     }
 

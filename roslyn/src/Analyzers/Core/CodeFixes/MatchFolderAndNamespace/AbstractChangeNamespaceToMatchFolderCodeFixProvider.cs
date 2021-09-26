@@ -51,9 +51,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
             // All the target namespaces should be the same for a given document
             Debug.Assert(
                 diagnostics.Select(
-                        diagnostic =>
-                            diagnostic.Properties[MatchFolderAndNamespaceConstants.TargetNamespace]
-                    )
+                    diagnostic =>
+                        diagnostic.Properties[MatchFolderAndNamespaceConstants.TargetNamespace]
+                )
                     .Distinct()
                     .Count() == 1
             );
@@ -70,17 +70,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
             var targetFolders = PathMetadataUtilities.BuildFoldersFromNamespace(targetNamespace);
             var documentWithNoFolders = document.WithFolders(Array.Empty<string>());
             var renameActionSet = await Renamer.RenameDocumentAsync(
-                    documentWithNoFolders,
-                    documentWithNoFolders.Name,
-                    newDocumentFolders: targetFolders,
-                    cancellationToken: cancellationToken
-                )
+                documentWithNoFolders,
+                documentWithNoFolders.Name,
+                newDocumentFolders: targetFolders,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var newSolution = await renameActionSet.UpdateSolutionAsync(
-                    documentWithNoFolders.Project.Solution,
-                    cancellationToken
-                )
+                documentWithNoFolders.Project.Solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             Debug.Assert(newSolution != document.Project.Solution);
             return newSolution;

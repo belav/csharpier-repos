@@ -105,11 +105,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             document = document.WithSyntaxRoot(annotatedRoot);
 
             var memberContainingDocument = await GenerateMemberAndUsingsAsync(
-                    document,
-                    completionItem,
-                    line,
-                    cancellationToken
-                )
+                document,
+                completionItem,
+                line,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (memberContainingDocument == null)
             {
@@ -120,14 +120,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             var insertionRoot = await GetTreeWithAddedSyntaxNodeRemovedAsync(
-                    memberContainingDocument,
-                    cancellationToken
-                )
+                memberContainingDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var insertionText = await GenerateInsertionTextAsync(
-                    memberContainingDocument,
-                    cancellationToken
-                )
+                memberContainingDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var destinationSpan = ComputeDestinationSpan(insertionRoot);
@@ -144,10 +144,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 newRoot.ReplaceNode(declaration, declaration.WithAdditionalAnnotations(_annotation))
             );
             return await Formatter.FormatAsync(
-                    document,
-                    _annotation,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                _annotation,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -168,10 +168,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 cancellationToken
             );
             var symbols = await SymbolCompletionItem.GetSymbolsAsync(
-                    completionItem,
-                    document,
-                    cancellationToken
-                )
+                completionItem,
+                document,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var overriddenMember = symbols.FirstOrDefault();
 
@@ -183,19 +183,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             // CodeGenerationOptions containing before and after
             var options = new CodeGenerationOptions(
-                contextLocation: semanticModel.SyntaxTree.GetLocation(
-                    TextSpan.FromBounds(line.Start, line.Start)
-                ),
+                contextLocation: semanticModel.SyntaxTree
+                    .GetLocation(TextSpan.FromBounds(line.Start, line.Start)),
                 options: await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false)
             );
 
             var generatedMember = await GenerateMemberAsync(
-                    overriddenMember,
-                    containingType,
-                    document,
-                    completionItem,
-                    cancellationToken
-                )
+                overriddenMember,
+                containingType,
+                document,
+                completionItem,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             generatedMember = _annotation.AddAnnotationToSymbol(generatedMember);
 
@@ -203,34 +202,34 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (generatedMember.Kind == SymbolKind.Method)
             {
                 memberContainingDocument = await codeGenService.AddMethodAsync(
-                        document.Project.Solution,
-                        containingType,
-                        (IMethodSymbol)generatedMember,
-                        options,
-                        cancellationToken
-                    )
+                    document.Project.Solution,
+                    containingType,
+                    (IMethodSymbol)generatedMember,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else if (generatedMember.Kind == SymbolKind.Property)
             {
                 memberContainingDocument = await codeGenService.AddPropertyAsync(
-                        document.Project.Solution,
-                        containingType,
-                        (IPropertySymbol)generatedMember,
-                        options,
-                        cancellationToken
-                    )
+                    document.Project.Solution,
+                    containingType,
+                    (IPropertySymbol)generatedMember,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else if (generatedMember.Kind == SymbolKind.Event)
             {
                 memberContainingDocument = await codeGenService.AddEventAsync(
-                        document.Project.Solution,
-                        containingType,
-                        (IEventSymbol)generatedMember,
-                        options,
-                        cancellationToken
-                    )
+                    document.Project.Solution,
+                    containingType,
+                    (IEventSymbol)generatedMember,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -266,17 +265,17 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         )
         {
             memberContainingDocument = await Simplifier.ReduceAsync(
-                    memberContainingDocument,
-                    Simplifier.Annotation,
-                    optionSet: null,
-                    cancellationToken
-                )
+                memberContainingDocument,
+                Simplifier.Annotation,
+                optionSet: null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             memberContainingDocument = await Formatter.FormatAsync(
-                    memberContainingDocument,
-                    Formatter.Annotation,
-                    cancellationToken: cancellationToken
-                )
+                memberContainingDocument,
+                Formatter.Annotation,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var root = await memberContainingDocument.GetSyntaxRootAsync(cancellationToken)
@@ -292,11 +291,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             // Added imports are annotated for simplification too. Therefore, we simplify the document
             // before removing added member node to preserve those imports in the document.
             document = await Simplifier.ReduceAsync(
-                    document,
-                    Simplifier.Annotation,
-                    optionSet: null,
-                    cancellationToken
-                )
+                document,
+                Simplifier.Annotation,
+                optionSet: null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -309,10 +308,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var dismemberedDocument = document.WithSyntaxRoot(root);
 
             dismemberedDocument = await Formatter.FormatAsync(
-                    dismemberedDocument,
-                    Formatter.Annotation,
-                    cancellationToken: cancellationToken
-                )
+                dismemberedDocument,
+                Formatter.Annotation,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             return await dismemberedDocument.GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);

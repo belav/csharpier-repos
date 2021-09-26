@@ -82,11 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 // Complain about unembeddable types from linked assemblies.
-                Emit.NoPia.EmbeddedTypesManager.IsValidEmbeddableType(
-                    underlyingType,
-                    syntax,
-                    diagnostics.DiagnosticBag
-                );
+                Emit.NoPia.EmbeddedTypesManager
+                    .IsValidEmbeddableType(underlyingType, syntax, diagnostics.DiagnosticBag);
             }
 
             var locations = locationOpt is null
@@ -358,10 +355,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             while (loop > 0)
             {
                 var chainedTypes = ImmutableArray.Create(
-                        elementTypes,
-                        (loop - 1) * (ValueTupleRestPosition - 1),
-                        ValueTupleRestPosition - 1
-                    )
+                    elementTypes,
+                    (loop - 1) * (ValueTupleRestPosition - 1),
+                    ValueTupleRestPosition - 1
+                )
                     .Add(TypeWithAnnotations.Create(currentSymbol));
                 currentSymbol = chainedTupleTypeOpt!.Construct(chainedTypes);
                 loop--;
@@ -634,11 +631,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     {
                         if (
                             number > 0
-                            && string.Equals(
-                                name,
-                                TupleMemberName(number),
-                                StringComparison.Ordinal
-                            )
+                            && string
+                                .Equals(name, TupleMemberName(number), StringComparison.Ordinal)
                         )
                         {
                             return number;
@@ -802,10 +796,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(currentMembers.All(m => !(m is TupleVirtualElementFieldSymbol)));
 
             var elementTypes = TupleElementTypesWithAnnotations;
-            var elementsMatchedByFields = ArrayBuilder<bool>.GetInstance(
-                elementTypes.Length,
-                fillWithValue: false
-            );
+            var elementsMatchedByFields = ArrayBuilder<bool>
+                .GetInstance(elementTypes.Length, fillWithValue: false);
             var members = ArrayBuilder<Symbol>.GetInstance(currentMembers.Length);
             var nonFieldMembers = ArrayBuilder<Symbol>.GetInstance();
 
@@ -818,9 +810,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol currentValueTuple = this;
             int currentNestingLevel = 0;
 
-            var currentFieldsForElements = ArrayBuilder<FieldSymbol?>.GetInstance(
-                currentValueTuple.Arity
-            );
+            var currentFieldsForElements = ArrayBuilder<FieldSymbol?>
+                .GetInstance(currentValueTuple.Arity);
 
             // Lookup field definitions that we are interested in
             collectTargetTupleFields(
@@ -1350,9 +1341,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
                                 ValueTupleRestPosition - 1
                             ].Type.TupleElementTypesWithAnnotations;
-                        var typesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                            ValueTupleRestPosition - 1 + extensionTupleElementTypes.Length
-                        );
+                        var typesBuilder = ArrayBuilder<TypeWithAnnotations>
+                            .GetInstance(
+                                ValueTupleRestPosition - 1 + extensionTupleElementTypes.Length
+                            );
                         typesBuilder.AddRange(
                             tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics,
                             ValueTupleRestPosition - 1
@@ -1384,10 +1376,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 ImmutableArray<FieldSymbol> collectTupleElementFields(NamedTypeSymbol tuple)
                 {
-                    var builder = ArrayBuilder<FieldSymbol>.GetInstance(
-                        TupleElementTypesWithAnnotations(tuple).Length,
-                        fillWithValue: null!
-                    );
+                    var builder = ArrayBuilder<FieldSymbol>
+                        .GetInstance(
+                            TupleElementTypesWithAnnotations(tuple).Length,
+                            fillWithValue: null!
+                        );
 
                     foreach (var member in tuple.GetMembers())
                     {
@@ -1489,8 +1482,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                         );
                                         Debug.Assert(
                                             TupleUnderlyingType.GetMembers(
-                                                    underlyingAssociatedField.Name
-                                                )
+                                                underlyingAssociatedField.Name
+                                            )
                                                 .IndexOf(underlyingAssociatedField) < 0
                                         );
                                         map.Add(

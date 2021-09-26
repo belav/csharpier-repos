@@ -68,12 +68,13 @@ namespace Roslyn.Test.Utilities
             ISymbol symbol = (
                 (reference as ISymbolInternal) ?? (reference as Cci.IReference)?.GetInternalSymbol()
             )?.GetISymbol();
-            return string.Format(
-                "\"{0}\"",
-                symbol == null
-                  ? (object)reference
-                  : symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
-            );
+            return string
+                .Format(
+                    "\"{0}\"",
+                    symbol == null
+                      ? (object)reference
+                      : symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
+                );
         }
 
         public override string VisualizeLocalType(object type)
@@ -264,13 +265,14 @@ namespace Roslyn.Test.Utilities
             if (instrCnt != 0)
             {
                 var il = block.RegularInstructions.ToImmutableArray();
-                new ILBuilderVisualizer(block.builder.module).DumpILBlock(
-                    il,
-                    instrCnt,
-                    sb,
-                    Array.Empty<ILVisualizer.HandlerSpan>(),
-                    block.Start
-                );
+                new ILBuilderVisualizer(block.builder.module)
+                    .DumpILBlock(
+                        il,
+                        instrCnt,
+                        sb,
+                        Array.Empty<ILVisualizer.HandlerSpan>(),
+                        block.Start
+                    );
             }
 
             if (block.BranchCode != ILOpCode.Nop)
@@ -301,13 +303,8 @@ namespace Roslyn.Test.Utilities
         private static void DumpSwitchBlockIL(ILBuilder.SwitchBlock block, StringBuilder sb)
         {
             var il = block.RegularInstructions.ToImmutableArray();
-            new ILBuilderVisualizer(block.builder.module).DumpILBlock(
-                il,
-                il.Length,
-                sb,
-                Array.Empty<HandlerSpan>(),
-                block.Start
-            );
+            new ILBuilderVisualizer(block.builder.module)
+                .DumpILBlock(il, il.Length, sb, Array.Empty<HandlerSpan>(), block.Start);
 
             // switch (N, t1, t2... tN)
             //  IL ==> ILOpCode.Switch < unsigned int32 > < int32 >... < int32 >

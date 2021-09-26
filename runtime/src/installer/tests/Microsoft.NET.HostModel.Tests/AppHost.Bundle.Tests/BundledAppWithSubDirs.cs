@@ -156,8 +156,8 @@ namespace AppHost.Bundle.Tests
                 );
                 BundleHelper.AddLongNameContentToAppWithSubDirs(TestFrameworkDependentFixture);
                 TestFrameworkDependentFixture.EnsureRestoredForRid(
-                        TestFrameworkDependentFixture.CurrentRid
-                    )
+                    TestFrameworkDependentFixture.CurrentRid
+                )
                     .PublishProject(
                         runtime: TestFrameworkDependentFixture.CurrentRid,
                         selfContained: false,
@@ -182,8 +182,8 @@ namespace AppHost.Bundle.Tests
                 BundleHelper.AddLongNameContentToAppWithSubDirs(TestAppWithEmptyFileFixture);
                 BundleHelper.AddEmptyContentToApp(TestAppWithEmptyFileFixture);
                 TestAppWithEmptyFileFixture.EnsureRestoredForRid(
-                        TestAppWithEmptyFileFixture.CurrentRid
-                    )
+                    TestAppWithEmptyFileFixture.CurrentRid
+                )
                     .PublishProject(
                         runtime: TestAppWithEmptyFileFixture.CurrentRid,
                         outputDirectory: BundleHelper.GetPublishPath(TestAppWithEmptyFileFixture)

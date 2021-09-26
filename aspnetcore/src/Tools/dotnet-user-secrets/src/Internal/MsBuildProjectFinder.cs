@@ -31,16 +31,14 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
             if (Directory.Exists(projectPath))
             {
                 var projects = Directory.EnumerateFileSystemEntries(
-                        projectPath,
-                        "*.*proj",
-                        SearchOption.TopDirectoryOnly
-                    )
+                    projectPath,
+                    "*.*proj",
+                    SearchOption.TopDirectoryOnly
+                )
                     .Where(
                         f =>
-                            !".xproj".Equals(
-                                Path.GetExtension(f),
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            !".xproj"
+                                .Equals(Path.GetExtension(f), StringComparison.OrdinalIgnoreCase)
                     )
                     .ToList();
 

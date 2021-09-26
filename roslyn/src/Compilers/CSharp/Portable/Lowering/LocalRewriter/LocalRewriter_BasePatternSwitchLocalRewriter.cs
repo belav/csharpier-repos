@@ -25,10 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private readonly PooledDictionary<
                 SyntaxNode,
                 ArrayBuilder<BoundStatement>
-            > _switchArms = PooledDictionary<
-                SyntaxNode,
-                ArrayBuilder<BoundStatement>
-            >.GetInstance();
+            > _switchArms = PooledDictionary<SyntaxNode, ArrayBuilder<BoundStatement>>
+                .GetInstance();
 
             protected override ArrayBuilder<BoundStatement> BuilderForSection(
                 SyntaxNode whenClauseSyntax

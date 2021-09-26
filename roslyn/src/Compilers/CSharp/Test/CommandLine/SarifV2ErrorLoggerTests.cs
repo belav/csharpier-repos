@@ -391,7 +391,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
                 compiler.GetAssemblyVersion(),
                 compiler.GetAssemblyVersion().ToString(fieldCount: 3),
                 compiler.GetCultureName()
-            }.Concat(additionalArguments).ToArray();
+            }
+                .Concat(additionalArguments)
+                .ToArray();
 
             return string.Format(CultureInfo.InvariantCulture, s, arguments);
         }

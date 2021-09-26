@@ -235,10 +235,8 @@ public class LoaderClass
                     )
                         handle = AppDomain.CurrentDomain.CreateInstance(assembly, t.FullName);
                     else
-                        handle = AppDomain.CurrentDomain.CreateInstanceFrom(
-                            ".\\" + assembly,
-                            t.FullName
-                        );
+                        handle = AppDomain.CurrentDomain
+                            .CreateInstanceFrom(".\\" + assembly, t.FullName);
                     if (handle != null)
                     {
                         ourObj = handle.Unwrap();

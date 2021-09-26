@@ -390,7 +390,8 @@ namespace System.Reflection.Tests
         [InlineData(nameof(PropertyInfoMembers.PublicGetPrivateSetProperty))]
         public static void GetRequiredCustomModifiers_GetOptionalCustomModifiers(string name)
         {
-            PropertyInfo property = typeof(PropertyInfoMembers).GetTypeInfo()
+            PropertyInfo property = typeof(PropertyInfoMembers)
+                .GetTypeInfo()
                 .GetProperty(
                     name,
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
@@ -414,7 +415,8 @@ namespace System.Reflection.Tests
             int accessorPublicAndNonPublicCount
         )
         {
-            PropertyInfo pi = typeof(PropertyInfoMembers).GetTypeInfo()
+            PropertyInfo pi = typeof(PropertyInfoMembers)
+                .GetTypeInfo()
                 .GetProperty(
                     name,
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
@@ -452,7 +454,8 @@ namespace System.Reflection.Tests
             bool nonPublicSet
         )
         {
-            PropertyInfo pi = typeof(PropertyInfoMembers).GetTypeInfo()
+            PropertyInfo pi = typeof(PropertyInfoMembers)
+                .GetTypeInfo()
                 .GetProperty(
                     name,
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance

@@ -832,10 +832,8 @@ namespace System.Net.Sockets
                                 )
                             )
                             {
-                                await new ValueTask(
-                                    internalArgs,
-                                    internalArgs.Version
-                                ).ConfigureAwait(false);
+                                await new ValueTask(internalArgs, internalArgs.Version)
+                                    .ConfigureAwait(false);
                             }
                         }
 

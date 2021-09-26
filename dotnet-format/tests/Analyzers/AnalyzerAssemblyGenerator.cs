@@ -86,11 +86,8 @@ public class {typeName} : DiagnosticAnalyzer
                 MetadataReference.CreateFromFile(typeof(CodeFixProvider).Assembly.Location),
             };
 
-            var netstandardMetaDataReferences =
-                await ReferenceAssemblies.NetStandard.NetStandard20.ResolveAsync(
-                    LanguageNames.CSharp,
-                    CancellationToken.None
-                );
+            var netstandardMetaDataReferences = await ReferenceAssemblies.NetStandard.NetStandard20
+                .ResolveAsync(LanguageNames.CSharp, CancellationToken.None);
             references.AddRange(netstandardMetaDataReferences);
             var compilation = CSharpCompilation.Create(
                 assemblyName,
@@ -103,7 +100,8 @@ public class {typeName} : DiagnosticAnalyzer
             var result = compilation.Emit(ms);
             if (!result.Success)
             {
-                var failures = result.Diagnostics.Where(
+                var failures = result.Diagnostics
+                    .Where(
                         diagnostic =>
                             diagnostic.IsWarningAsError
                             || diagnostic.Severity == DiagnosticSeverity.Error

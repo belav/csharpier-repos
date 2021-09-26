@@ -18,10 +18,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => new ReadOnlyCollection<int>(new int[0]),
-                    typeof(ICollection<int>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(
+                        () => new ReadOnlyCollection<int>(new int[0]),
+                        typeof(ICollection<int>)
+                    )
             };
 
             // Act
@@ -43,10 +44,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             List<int> originalInstance = new List<int> { 10, 20, 30 };
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => originalInstance,
-                    typeof(ICollection<int>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => originalInstance, typeof(ICollection<int>))
             };
 
             // Act
@@ -67,10 +66,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(ICollection<int>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(ICollection<int>))
             };
 
             // Act
@@ -91,10 +88,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(Dictionary<string, int>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(Dictionary<string, int>))
             };
 
             // Act
@@ -121,10 +116,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(Dictionary<string, int>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(Dictionary<string, int>))
             };
 
             // Act
@@ -155,10 +148,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => originalModel,
-                    typeof(IDictionary<string, string>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => originalModel, typeof(IDictionary<string, string>))
             };
 
             // Act
@@ -187,10 +178,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             };
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => originalInstance,
-                    typeof(IDictionary<string, string>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => originalInstance, typeof(IDictionary<string, string>))
             };
 
             // Act
@@ -213,10 +202,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(IDictionary<string, string>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(IDictionary<string, string>))
             };
 
             // Act
@@ -296,10 +283,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetTypeArgumentsForUpdatableGenericCollection_ModelTypeNotGeneric_Fail()
         {
             // Arrange
-            ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                null,
-                typeof(int)
-            );
+            ModelMetadata modelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(null, typeof(int));
 
             // Act
             Type[] typeArguments =
@@ -317,10 +302,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetTypeArgumentsForUpdatableGenericCollection_ModelTypeOpenGeneric_Fail()
         {
             // Arrange
-            ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                null,
-                typeof(IList<>)
-            );
+            ModelMetadata modelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(null, typeof(IList<>));
 
             // Act
             Type[] typeArguments =
@@ -338,10 +321,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetTypeArgumentsForUpdatableGenericCollection_ModelTypeWrongNumberOfGenericArguments_Fail()
         {
             // Arrange
-            ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                null,
-                typeof(KeyValuePair<int, string>)
-            );
+            ModelMetadata modelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(null, typeof(KeyValuePair<int, string>));
 
             // Act
             Type[] typeArguments =
@@ -359,10 +340,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetTypeArgumentsForUpdatableGenericCollection_ReadOnlyReference_ModelInstanceImmutable_Valid()
         {
             // Arrange
-            ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                () => new int[0],
-                typeof(IList<int>)
-            );
+            ModelMetadata modelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(() => new int[0], typeof(IList<int>));
             modelMetadata.IsReadOnly = true;
 
             // Act
@@ -381,10 +360,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetTypeArgumentsForUpdatableGenericCollection_ReadOnlyReference_ModelInstanceMutable_Valid()
         {
             // Arrange
-            ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                () => new List<int>(),
-                typeof(IList<int>)
-            );
+            ModelMetadata modelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(() => new List<int>(), typeof(IList<int>));
             modelMetadata.IsReadOnly = true;
 
             // Act
@@ -403,10 +380,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetTypeArgumentsForUpdatableGenericCollection_ReadOnlyReference_ModelInstanceOfWrongType_Fail()
         {
             // Arrange
-            ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                () => new HashSet<int>(),
-                typeof(ICollection<int>)
-            );
+            ModelMetadata modelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(() => new HashSet<int>(), typeof(ICollection<int>));
             modelMetadata.IsReadOnly = true;
 
             // Act
@@ -426,10 +401,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetTypeArgumentsForUpdatableGenericCollection_ReadOnlyReference_ModelIsNull_Fail()
         {
             // Arrange
-            ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                null,
-                typeof(IList<int>)
-            );
+            ModelMetadata modelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(null, typeof(IList<int>));
             modelMetadata.IsReadOnly = true;
 
             // Act
@@ -448,10 +421,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetTypeArgumentsForUpdatableGenericCollection_ReadWriteReference_NewInstanceAssignableToModelType_Success()
         {
             // Arrange
-            ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                null,
-                typeof(IList<int>)
-            );
+            ModelMetadata modelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(null, typeof(IList<int>));
             modelMetadata.IsReadOnly = false;
 
             // Act
@@ -470,10 +441,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetTypeArgumentsForUpdatableGenericCollection_ReadWriteReference_NewInstanceNotAssignableToModelType_MutableInstance_Success()
         {
             // Arrange
-            ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                () => new Collection<int>(),
-                typeof(Collection<int>)
-            );
+            ModelMetadata modelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(() => new Collection<int>(), typeof(Collection<int>));
             modelMetadata.IsReadOnly = false;
 
             // Act

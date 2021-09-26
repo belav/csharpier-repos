@@ -1676,13 +1676,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var stringLocalizer = new Mock<IStringLocalizer>();
-            stringLocalizer.Setup(s => s[It.IsAny<string>()])
-                .Returns<string>(
-                    (s) =>
-                    {
-                        return new LocalizedString(s, s + " " + CultureInfo.CurrentCulture);
-                    }
-                );
+            stringLocalizer.Setup(s => s[It.IsAny<string>()]).Returns<string>(
+                (s) =>
+                {
+                    return new LocalizedString(s, s + " " + CultureInfo.CurrentCulture);
+                }
+            );
             var stringLocalizerFactory = new Mock<IStringLocalizerFactory>();
             stringLocalizerFactory.Setup(s => s.Create(It.IsAny<Type>()))
                 .Returns(stringLocalizer.Object);

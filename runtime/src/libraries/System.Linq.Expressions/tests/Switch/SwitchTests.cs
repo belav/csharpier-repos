@@ -1046,10 +1046,11 @@ namespace System.Linq.Expressions.Tests
                 Expression.Constant(1),
                 Expression.Constant(2)
             );
-            MethodInfo method = typeof(GenClass<>).GetMethod(
-                nameof(GenClass<int>.WithinTwo),
-                BindingFlags.Static | BindingFlags.Public
-            );
+            MethodInfo method = typeof(GenClass<>)
+                .GetMethod(
+                    nameof(GenClass<int>.WithinTwo),
+                    BindingFlags.Static | BindingFlags.Public
+                );
             AssertExtensions.Throws<ArgumentException>(
                 "comparison",
                 () => Expression.Switch(switchVal, defaultExp, method, switchCase)
@@ -1062,28 +1063,26 @@ namespace System.Linq.Expressions.Tests
         public void LiftedCall(bool useInterpreter)
         {
             Func<int> f = Expression.Lambda<Func<int>>(
-                    Expression.Switch(
-                        Expression.Constant(30, typeof(int?)),
-                        Expression.Constant(0),
-                        typeof(SwitchTests).GetMethod(
-                            nameof(WithinTen),
-                            BindingFlags.Static | BindingFlags.NonPublic
-                        ),
-                        Expression.SwitchCase(
-                            Expression.Constant(1),
-                            Expression.Constant(2, typeof(int?))
-                        ),
-                        Expression.SwitchCase(
-                            Expression.Constant(2),
-                            Expression.Constant(9, typeof(int?)),
-                            Expression.Constant(28, typeof(int?))
-                        ),
-                        Expression.SwitchCase(
-                            Expression.Constant(3),
-                            Expression.Constant(49, typeof(int?))
-                        )
+                Expression.Switch(
+                    Expression.Constant(30, typeof(int?)),
+                    Expression.Constant(0),
+                    typeof(SwitchTests)
+                        .GetMethod(nameof(WithinTen), BindingFlags.Static | BindingFlags.NonPublic),
+                    Expression.SwitchCase(
+                        Expression.Constant(1),
+                        Expression.Constant(2, typeof(int?))
+                    ),
+                    Expression.SwitchCase(
+                        Expression.Constant(2),
+                        Expression.Constant(9, typeof(int?)),
+                        Expression.Constant(28, typeof(int?))
+                    ),
+                    Expression.SwitchCase(
+                        Expression.Constant(3),
+                        Expression.Constant(49, typeof(int?))
                     )
                 )
+            )
                 .Compile(useInterpreter);
 
             Assert.Equal(2, f());
@@ -1098,10 +1097,11 @@ namespace System.Linq.Expressions.Tests
                     Expression.Switch(
                         Expression.Constant(30, typeof(int?)),
                         Expression.Constant(0),
-                        typeof(SwitchTests).GetMethod(
-                            nameof(WithinTen),
-                            BindingFlags.Static | BindingFlags.NonPublic
-                        ),
+                        typeof(SwitchTests)
+                            .GetMethod(
+                                nameof(WithinTen),
+                                BindingFlags.Static | BindingFlags.NonPublic
+                            ),
                         Expression.SwitchCase(Expression.Constant(1), Expression.Constant(2))
                     )
             );
@@ -1138,10 +1138,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NonBooleanComparer()
         {
-            MethodInfo comparer = typeof(SwitchTests).GetMethod(
-                nameof(NonBooleanMethod),
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            MethodInfo comparer = typeof(SwitchTests)
+                .GetMethod(nameof(NonBooleanMethod), BindingFlags.Static | BindingFlags.NonPublic);
             AssertExtensions.Throws<ArgumentException>(
                 "comparison",
                 () =>
@@ -1241,18 +1239,18 @@ namespace System.Linq.Expressions.Tests
         public void MismatchingAllowedIfExplicitlyVoidIntgralValueType(bool useInterpreter)
         {
             Expression.Lambda<Action>(
-                    Expression.Switch(
-                        typeof(void),
-                        Expression.Constant(0),
-                        Expression.Constant(1),
-                        null,
-                        Expression.SwitchCase(Expression.Constant("Foo"), Expression.Constant(2)),
-                        Expression.SwitchCase(
-                            Expression.Constant(DateTime.MinValue),
-                            Expression.Constant(3)
-                        )
+                Expression.Switch(
+                    typeof(void),
+                    Expression.Constant(0),
+                    Expression.Constant(1),
+                    null,
+                    Expression.SwitchCase(Expression.Constant("Foo"), Expression.Constant(2)),
+                    Expression.SwitchCase(
+                        Expression.Constant(DateTime.MinValue),
+                        Expression.Constant(3)
                     )
                 )
+            )
                 .Compile(useInterpreter)();
         }
 
@@ -1260,21 +1258,18 @@ namespace System.Linq.Expressions.Tests
         public void MismatchingAllowedIfExplicitlyVoidStringValueType(bool useInterpreter)
         {
             Expression.Lambda<Action>(
-                    Expression.Switch(
-                        typeof(void),
-                        Expression.Constant("Foo"),
-                        Expression.Constant(1),
-                        null,
-                        Expression.SwitchCase(
-                            Expression.Constant("Foo"),
-                            Expression.Constant("Bar")
-                        ),
-                        Expression.SwitchCase(
-                            Expression.Constant(DateTime.MinValue),
-                            Expression.Constant("Foo")
-                        )
+                Expression.Switch(
+                    typeof(void),
+                    Expression.Constant("Foo"),
+                    Expression.Constant(1),
+                    null,
+                    Expression.SwitchCase(Expression.Constant("Foo"), Expression.Constant("Bar")),
+                    Expression.SwitchCase(
+                        Expression.Constant(DateTime.MinValue),
+                        Expression.Constant("Foo")
                     )
                 )
+            )
                 .Compile(useInterpreter)();
         }
 
@@ -1282,21 +1277,21 @@ namespace System.Linq.Expressions.Tests
         public void MismatchingAllowedIfExplicitlyVoidDateTimeValueType(bool useInterpreter)
         {
             Expression.Lambda<Action>(
-                    Expression.Switch(
-                        typeof(void),
+                Expression.Switch(
+                    typeof(void),
+                    Expression.Constant(DateTime.MinValue),
+                    Expression.Constant(1),
+                    null,
+                    Expression.SwitchCase(
+                        Expression.Constant("Foo"),
+                        Expression.Constant(DateTime.MinValue)
+                    ),
+                    Expression.SwitchCase(
                         Expression.Constant(DateTime.MinValue),
-                        Expression.Constant(1),
-                        null,
-                        Expression.SwitchCase(
-                            Expression.Constant("Foo"),
-                            Expression.Constant(DateTime.MinValue)
-                        ),
-                        Expression.SwitchCase(
-                            Expression.Constant(DateTime.MinValue),
-                            Expression.Constant(DateTime.MaxValue)
-                        )
+                        Expression.Constant(DateTime.MaxValue)
                     )
                 )
+            )
                 .Compile(useInterpreter)();
         }
 
@@ -1562,10 +1557,8 @@ namespace System.Linq.Expressions.Tests
                     Expression.Switch(
                         value,
                         Expression.Constant(-1),
-                        typeof(string).GetMethod(
-                            "Equals",
-                            new[] { typeof(string), typeof(string) }
-                        ),
+                        typeof(string)
+                            .GetMethod("Equals", new[] { typeof(string), typeof(string) }),
                         cases
                     ),
                     value

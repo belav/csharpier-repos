@@ -30,12 +30,12 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
             var modelAsFilter = model.As<IAsyncResultFilter>();
             modelAsFilter.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns(Task.CompletedTask)
                 .Verifiable();
 

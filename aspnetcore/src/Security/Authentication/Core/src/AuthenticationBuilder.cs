@@ -49,14 +49,13 @@ namespace Microsoft.AspNetCore.Authentication
             {
                 Services.Configure(authenticationScheme, configureOptions);
             }
-            Services.AddOptions<TOptions>(authenticationScheme)
-                .Validate(
-                    o =>
-                    {
-                        o.Validate(authenticationScheme);
-                        return true;
-                    }
-                );
+            Services.AddOptions<TOptions>(authenticationScheme).Validate(
+                o =>
+                {
+                    o.Validate(authenticationScheme);
+                    return true;
+                }
+            );
             Services.AddTransient<THandler>();
             return this;
         }

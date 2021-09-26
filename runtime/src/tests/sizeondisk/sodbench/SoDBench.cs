@@ -495,7 +495,10 @@ namespace SoDBench
                         "shared",
                         "Microsoft.NETCore.App"
                     )
-                ).GetDirectories("*").OrderBy(s => s.Name).Last().FullName
+                )
+                    .GetDirectories("*")
+                    .OrderBy(s => s.Name)
+                    .Last().FullName
             );
 
             Console.WriteLine($"| Source : {sourcedi.FullName}");
@@ -708,7 +711,8 @@ namespace SoDBench
                                         case ErrorType.VersionRequestedError:
                                             Console.WriteLine(
                                                 new AssemblyName(
-                                                    typeof(SoDBenchOptions).GetTypeInfo().Assembly.FullName
+                                                    typeof(SoDBenchOptions)
+                                                        .GetTypeInfo().Assembly.FullName
                                                 ).Version
                                             );
                                             Environment.Exit(0);
@@ -764,7 +768,8 @@ namespace SoDBench
                     AdditionalNewLineAfterOption = false,
                     Heading = "SoDBench",
                     MaximumDisplayWidth = 80,
-                }.AddOptions(parser.ParseArguments<SoDBenchOptions>(new string[] { "--help" }))
+                }
+                    .AddOptions(parser.ParseArguments<SoDBenchOptions>(new string[] { "--help" }))
                     .ToString();
                 return helpTextString;
             }

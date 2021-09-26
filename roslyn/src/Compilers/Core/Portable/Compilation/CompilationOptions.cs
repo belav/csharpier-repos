@@ -687,11 +687,12 @@ namespace Microsoft.CodeAnalysis
                 && this.Deterministic == other.Deterministic
                 && this.CurrentLocalTime == other.CurrentLocalTime
                 && this.DebugPlusMode == other.DebugPlusMode
-                && string.Equals(
-                    this.CryptoKeyContainer,
-                    other.CryptoKeyContainer,
-                    StringComparison.Ordinal
-                )
+                && string
+                    .Equals(
+                        this.CryptoKeyContainer,
+                        other.CryptoKeyContainer,
+                        StringComparison.Ordinal
+                    )
                 && string.Equals(this.CryptoKeyFile, other.CryptoKeyFile, StringComparison.Ordinal)
                 && this.CryptoPublicKey.SequenceEqual(other.CryptoPublicKey)
                 && this.DelaySign == other.DelaySign
@@ -704,15 +705,13 @@ namespace Microsoft.CodeAnalysis
                 && this.OutputKind == other.OutputKind
                 && this.Platform == other.Platform
                 && this.ReportSuppressedDiagnostics == other.ReportSuppressedDiagnostics
-                && string.Equals(
-                    this.ScriptClassName,
-                    other.ScriptClassName,
-                    StringComparison.Ordinal
-                )
-                && this.SpecificDiagnosticOptions.SequenceEqual(
-                    other.SpecificDiagnosticOptions,
-                    (left, right) => (left.Key == right.Key) && (left.Value == right.Value)
-                )
+                && string
+                    .Equals(this.ScriptClassName, other.ScriptClassName, StringComparison.Ordinal)
+                && this.SpecificDiagnosticOptions
+                    .SequenceEqual(
+                        other.SpecificDiagnosticOptions,
+                        (left, right) => (left.Key == right.Key) && (left.Value == right.Value)
+                    )
                 && this.WarningLevel == other.WarningLevel
                 && object.Equals(this.MetadataReferenceResolver, other.MetadataReferenceResolver)
                 && object.Equals(this.XmlReferenceResolver, other.XmlReferenceResolver)
@@ -754,9 +753,8 @@ namespace Microsoft.CodeAnalysis
                                                 (int)this.GeneralDiagnosticOption,
                                                 Hash.Combine(
                                                     this.MainTypeName != null
-                                                      ? StringComparer.Ordinal.GetHashCode(
-                                                            this.MainTypeName
-                                                        )
+                                                      ? StringComparer.Ordinal
+                                                        .GetHashCode(this.MainTypeName)
                                                       : 0,
                                                     Hash.Combine(
                                                         (int)this.MetadataImportOptions,
@@ -764,9 +762,8 @@ namespace Microsoft.CodeAnalysis
                                                             this.ReferencesSupersedeLowerVersions,
                                                             Hash.Combine(
                                                                 this.ModuleName != null
-                                                                  ? StringComparer.Ordinal.GetHashCode(
-                                                                        this.ModuleName
-                                                                    )
+                                                                  ? StringComparer.Ordinal
+                                                                    .GetHashCode(this.ModuleName)
                                                                   : 0,
                                                                 Hash.Combine(
                                                                     (int)this.OptimizationLevel,
@@ -779,7 +776,8 @@ namespace Microsoft.CodeAnalysis
                                                                                 Hash.Combine(
                                                                                     this.ScriptClassName
                                                                                         != null
-                                                                                      ? StringComparer.Ordinal.GetHashCode(
+                                                                                      ? StringComparer.Ordinal
+                                                                                        .GetHashCode(
                                                                                             this.ScriptClassName
                                                                                         )
                                                                                       : 0,

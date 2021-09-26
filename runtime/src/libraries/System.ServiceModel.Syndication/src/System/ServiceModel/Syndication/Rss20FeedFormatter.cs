@@ -273,10 +273,11 @@ namespace System.ServiceModel.Syndication
                     {
                         if (preserveAttributeExtensions)
                         {
-                            link.AttributeExtensions.Add(
-                                new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
-                                reader.Value
-                            );
+                            link.AttributeExtensions
+                                .Add(
+                                    new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
+                                    reader.Value
+                                );
                         }
                     }
                 }
@@ -413,14 +414,15 @@ namespace System.ServiceModel.Syndication
                                 )
                             )
                             {
-                                result.Links.Add(
-                                    ReadAlternateLink(
-                                        reader,
-                                        result.BaseUri,
-                                        UriParser,
-                                        PreserveAttributeExtensions
-                                    )
-                                );
+                                result.Links
+                                    .Add(
+                                        ReadAlternateLink(
+                                            reader,
+                                            result.BaseUri,
+                                            UriParser,
+                                            PreserveAttributeExtensions
+                                        )
+                                    );
                                 readAlternateLink = true;
                             }
                             else if (
@@ -539,26 +541,25 @@ namespace System.ServiceModel.Syndication
                                             && ns == Rss20Constants.Rss20Namespace
                                         )
                                         {
-                                            feed.Links.Add(
-                                                SyndicationLink.CreateSelfLink(
-                                                    UriFromString(
-                                                        val,
-                                                        UriKind.RelativeOrAbsolute,
-                                                        Rss20Constants.UrlTag,
-                                                        Rss20Constants.Rss20Namespace,
-                                                        reader
+                                            feed.Links
+                                                .Add(
+                                                    SyndicationLink.CreateSelfLink(
+                                                        UriFromString(
+                                                            val,
+                                                            UriKind.RelativeOrAbsolute,
+                                                            Rss20Constants.UrlTag,
+                                                            Rss20Constants.Rss20Namespace,
+                                                            reader
+                                                        )
                                                     )
-                                                )
-                                            );
+                                                );
                                         }
                                         else if (!FeedUtils.IsXmlns(name, ns))
                                         {
                                             if (PreserveAttributeExtensions)
                                             {
-                                                feed.AttributeExtensions.Add(
-                                                    new XmlQualifiedName(name, ns),
-                                                    val
-                                                );
+                                                feed.AttributeExtensions
+                                                    .Add(new XmlQualifiedName(name, ns), val);
                                             }
                                         }
                                     }
@@ -606,17 +607,18 @@ namespace System.ServiceModel.Syndication
                     reader.ReadEndElement(); // item
                     if (!readAlternateLink && fallbackAlternateLink != null)
                     {
-                        result.Links.Add(
-                            SyndicationLink.CreateAlternateLink(
-                                UriFromString(
-                                    fallbackAlternateLink,
-                                    UriKind.RelativeOrAbsolute,
-                                    fallbackAlternateLinkLocalName,
-                                    fallbackAlternateLinkNamespace,
-                                    reader
+                        result.Links
+                            .Add(
+                                SyndicationLink.CreateAlternateLink(
+                                    UriFromString(
+                                        fallbackAlternateLink,
+                                        UriKind.RelativeOrAbsolute,
+                                        fallbackAlternateLinkLocalName,
+                                        fallbackAlternateLinkNamespace,
+                                        reader
+                                    )
                                 )
-                            )
-                        );
+                            );
                         readAlternateLink = true;
                     }
 
@@ -850,14 +852,15 @@ namespace System.ServiceModel.Syndication
                             )
                         )
                         {
-                            result.Links.Add(
-                                ReadAlternateLink(
-                                    reader,
-                                    result.BaseUri,
-                                    UriParser,
-                                    PreserveAttributeExtensions
-                                )
-                            );
+                            result.Links
+                                .Add(
+                                    ReadAlternateLink(
+                                        reader,
+                                        result.BaseUri,
+                                        UriParser,
+                                        PreserveAttributeExtensions
+                                    )
+                                );
                         }
                         else if (
                             reader.IsStartElement(

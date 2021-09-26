@@ -476,8 +476,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(contentInfo, detached);
 
             using (
-                X509Certificate2 signerCert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates.RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(identifierType, signerCert);
@@ -528,8 +528,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(contentInfo, false);
 
             using (
-                X509Certificate2 cert =
-                    Certificates.NegativeSerialNumber.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates.NegativeSerialNumber
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 Assert.Equal(expectedSerial, cert.SerialNumber);
@@ -645,8 +645,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(contentInfo, detached);
 
             using (
-                X509Certificate2 signerCert =
-                    Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates.ECDsaP256Win
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(identifierType, signerCert);
@@ -819,8 +819,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(contentInfo, detached);
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 cms.ComputeSignature(
@@ -852,8 +852,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(contentInfo, detached);
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 cms.ComputeSignature(
@@ -898,8 +898,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(contentInfo, detached);
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 cms.ComputeSignature(
@@ -979,8 +979,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             byte[] firstEncoding;
 
             using (
-                X509Certificate2 signerCert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates.RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(first, signerCert);
@@ -1034,8 +1034,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms();
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates.RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, cert);
@@ -1102,8 +1102,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (X509Certificate2 unrelated2 = Certificates.RSAKeyTransfer2.GetCertificate())
             using (X509Certificate2 unrelated3 = Certificates.RSAKeyTransfer3.GetCertificate())
             using (
-                X509Certificate2 signerCert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 var signer = new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, signerCert);
@@ -1206,8 +1206,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SubjectIdentifierType secondType = SubjectIdentifierType.SubjectKeyIdentifier;
 
             using (
-                X509Certificate2 signerCert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates.RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(firstType, signerCert);
@@ -1223,8 +1223,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             cms.CheckSignature(true);
 
             using (
-                X509Certificate2 signerCert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates.RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(secondType, signerCert);
@@ -1235,14 +1235,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
             }
 
             // They should have the same content digests.
-            AsnEncodedData firstDigest = cms.SignerInfos[
-                0
-            ].SignedAttributes.OfType<CryptographicAttributeObject>()
+            AsnEncodedData firstDigest = cms.SignerInfos[0].SignedAttributes
+                .OfType<CryptographicAttributeObject>()
                 .First(cao => cao.Oid.Value == Oids.MessageDigest).Values[0];
 
-            AsnEncodedData secondDigest = cms.SignerInfos[
-                1
-            ].SignedAttributes.OfType<CryptographicAttributeObject>()
+            AsnEncodedData secondDigest = cms.SignerInfos[1].SignedAttributes
+                .OfType<CryptographicAttributeObject>()
                 .First(cao => cao.Oid.Value == Oids.MessageDigest).Values[0];
 
             Assert.Equal(
@@ -1285,8 +1283,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(contentInfo, false);
 
             using (
-                X509Certificate2 signerCert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 // This cert has no Subject Key Identifier extension.
@@ -1324,8 +1322,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void SignEnveloped(SubjectIdentifierType signerType)
         {
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 EnvelopedCms envelopedCms = new EnvelopedCms(new ContentInfo(new byte[] { 3 }));
@@ -1384,8 +1382,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             );
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 try
@@ -1449,8 +1447,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             cms.CheckSignature(true);
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 cms.ComputeSignature(
@@ -1518,8 +1516,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             );
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 Action signAction = () => signedCms.ComputeSignature(new CmsSigner(cert));
@@ -1616,8 +1614,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             envelopedCms.Decode(signedCms.ContentInfo.Content);
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 envelopedCms.Decrypt(new X509Certificate2Collection(cert));
@@ -1636,7 +1634,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "020100300D06096086480165030402010500300C06082B060105050706020500"
                 + "0420AF5F6F5C5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C02"
                 + "8674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             CheckNoSignature(encoded);
         }
@@ -1653,7 +1652,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "020100300D06096086480165030402010500300C06082B0601050507060A0500"
                 + "0420AF5F6F5C5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C02"
                 + "8674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             CheckNoSignature(encoded, badOid: true);
         }
@@ -1667,7 +1667,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "020101301C3017311530130603550403130C44756D6D79205369676E65720201"
                 + "00300B0609608648016503040201300A06082B060105050706020420AF5F6F5C"
                 + "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             CheckNoSignature(encoded);
         }
@@ -1683,7 +1684,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "020101301C3017311530130603550403130C44756D6D79205369676E65720201"
                 + "00300B0609608648016503040201300A06082B0601050507060A0420AF5F6F5C"
                 + "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             CheckNoSignature(encoded, badOid: true);
         }
@@ -1699,7 +1701,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "020101301C3017311530130603550403130C44756D6E79205369676E65720201"
                 + "00300B0609608648016503040201300A06082B060105050706020420AF5F6F5C"
                 + "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             SignedCms cms = new SignedCms();
             cms.Decode(encoded);

@@ -120,8 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                 },
             };
 
-        private static readonly ParseOptions CSharp7_1 =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_1);
+        private static readonly ParseOptions CSharp7_1 = CSharpParseOptions.Default
+            .WithLanguageVersion(LanguageVersion.CSharp7_1);
 
         private const string NullableAttributesCode =
             @"
@@ -7189,16 +7189,16 @@ partial class C
         }}
     }}
 
-    // // {string.Format(FeaturesResources.TODO_colon_override_finalizer_only_if_0_has_code_to_free_unmanaged_resources, "Dispose(bool disposing)")}
+    // // {string .Format(FeaturesResources.TODO_colon_override_finalizer_only_if_0_has_code_to_free_unmanaged_resources, "Dispose(bool disposing)")}
     // ~{className}()
     // {{
-    //     // {string.Format(FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method, "Dispose(bool disposing)")}
+    //     // {string .Format(FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method, "Dispose(bool disposing)")}
     //     Dispose(disposing: false);
     // }}
 
     {implementationVisibility}Dispose()
     {{
-        // {string.Format(FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method, "Dispose(bool disposing)")}
+        // {string .Format(FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method, "Dispose(bool disposing)")}
         Dispose(disposing: true);
         {gcPrefix}GC.SuppressFinalize(this);
     }}";

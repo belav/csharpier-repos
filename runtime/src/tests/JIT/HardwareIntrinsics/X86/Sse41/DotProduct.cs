@@ -122,7 +122,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf3 =
-                        (Vector128<float>)typeof(Sse41).GetMethod(
+                        (Vector128<float>)typeof(Sse41)
+                            .GetMethod(
                                 nameof(Sse41.DotProduct),
                                 new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
                             )
@@ -229,7 +230,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf3 =
-                        (Vector128<double>)typeof(Sse41).GetMethod(
+                        (Vector128<double>)typeof(Sse41)
+                            .GetMethod(
                                 nameof(Sse41.DotProduct),
                                 new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
                             )

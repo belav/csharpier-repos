@@ -186,12 +186,11 @@ class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public void M()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"public void M()
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"public void M()
     { throw null; }
     => throw null;"
-                    )
-                    .WithLocation(4, 5)
+                ).WithLocation(4, 5)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -376,12 +375,11 @@ class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public void M(int i, int j)
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"public void M(int i1, int i2, int j1, int j2)
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"public void M(int i1, int i2, int j1, int j2)
     { i1 = j1; }
     => i2 = j2;"
-                    )
-                    .WithLocation(4, 5)
+                ).WithLocation(4, 5)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -455,12 +453,11 @@ class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public void M()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"public void M()
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"public void M()
     { return; }
     => throw null;"
-                    )
-                    .WithLocation(4, 5)
+                ).WithLocation(4, 5)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -580,12 +577,11 @@ class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public void M()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"public void M()
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"public void M()
     { }
     => M2(out int x);"
-                    )
-                    .WithLocation(4, 5)
+                ).WithLocation(4, 5)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -760,12 +756,11 @@ class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public static C operator ! (C x)
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"public static C operator ! (C x)
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"public static C operator ! (C x)
     { throw null; }
     => throw null;"
-                    )
-                    .WithLocation(4, 5)
+                ).WithLocation(4, 5)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -930,12 +925,11 @@ class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public static implicit operator int(C x)
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"public static implicit operator int(C x)
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"public static implicit operator int(C x)
     { throw null; }
     => throw null;"
-                    )
-                    .WithLocation(4, 5)
+                ).WithLocation(4, 5)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -1097,12 +1091,11 @@ class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     ~C()
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"~C()
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"~C()
     { throw null; }
     => throw null;"
-                    )
-                    .WithLocation(4, 5)
+                ).WithLocation(4, 5)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -1265,12 +1258,11 @@ class C
                 // (6,9): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //         remove
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        @"remove 
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    @"remove 
         { throw null; }
         => throw null;"
-                    )
-                    .WithLocation(6, 9)
+                ).WithLocation(6, 9)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -1319,9 +1311,9 @@ abstract class C
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     int P { get; } => throw null;
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        "int P { get; } => throw null;"
-                    )
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    "int P { get; } => throw null;"
+                )
                     .WithLocation(4, 5)
             );
 

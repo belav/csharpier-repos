@@ -93,10 +93,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 );
 
                 var symbol = await TryGetSymbolAsync(
-                        solutionWithOriginalName,
-                        document.Id,
-                        cancellationToken
-                    )
+                    solutionWithOriginalName,
+                    document.Id,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 Contract.ThrowIfNull(
                     symbol,
@@ -111,12 +111,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 }
 
                 var renamedSolution = await Renamer.RenameSymbolAsync(
-                        solutionWithOriginalName,
-                        symbol,
-                        newName,
-                        optionSet,
-                        cancellationToken
-                    )
+                    solutionWithOriginalName,
+                    symbol,
+                    newName,
+                    optionSet,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return new RenameTrackingSolutionSet(
                     symbol,
@@ -163,10 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 // text changes caused by undo and redo actions as potential renames, so carefully
                 // update the state machine after undo/redo actions.
 
-                var changedDocuments =
-                    renameTrackingSolutionSet.RenamedSolution.GetChangedDocuments(
-                        renameTrackingSolutionSet.OriginalSolution
-                    );
+                var changedDocuments = renameTrackingSolutionSet.RenamedSolution
+                    .GetChangedDocuments(renameTrackingSolutionSet.OriginalSolution);
 
                 // When this action is undone (the user has undone twice), restore the state
                 // machine to so that they can continue their original rename tracking session.
@@ -207,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 {
                     // because changes have already been made to the workspace (UpdateWorkspaceForResetOfTypedIdentifier() above),
                     // these calls can't be cancelled and must be allowed to complete.
-                    var root = renameTrackingSolutionSet.RenamedSolution.GetDocument(docId)
+                    var root = renameTrackingSolutionSet.RenamedSolution
+                        .GetDocument(docId)
                         .GetSyntaxRootSynchronously(CancellationToken.None);
                     finalSolution = finalSolution.WithDocumentSyntaxRoot(docId, root);
                 }
@@ -271,8 +270,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             {
                 var documentWithOriginalName = solutionWithOriginalName.GetDocument(documentId);
                 var syntaxTreeWithOriginalName = await documentWithOriginalName.GetSyntaxTreeAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var syntaxFacts =
@@ -280,15 +279,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 var semanticFacts =
                     documentWithOriginalName.GetLanguageService<ISemanticFactsService>();
                 var semanticModel = await documentWithOriginalName.GetSemanticModelAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var token = await syntaxTreeWithOriginalName.GetTouchingWordAsync(
-                        _snapshotSpan.Start,
-                        syntaxFacts,
-                        cancellationToken
-                    )
+                    _snapshotSpan.Start,
+                    syntaxFacts,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var tokenRenameInfo = RenameUtilities.GetTokenRenameInfo(
                     semanticFacts,

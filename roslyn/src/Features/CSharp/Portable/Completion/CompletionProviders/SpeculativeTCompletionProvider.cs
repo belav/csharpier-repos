@@ -50,10 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 var showSpeculativeT =
                     await document.IsValidContextForDocumentOrLinkedDocumentsAsync(
-                            (doc, ct) =>
-                                ShouldShowSpeculativeTCompletionItemAsync(doc, position, ct),
-                            cancellationToken
-                        )
+                        (doc, ct) => ShouldShowSpeculativeTCompletionItemAsync(doc, position, ct),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 if (showSpeculativeT)
@@ -96,9 +95,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             var token = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken);
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    token.Parent,
-                    cancellationToken
-                )
+                token.Parent,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var spanStart = position;

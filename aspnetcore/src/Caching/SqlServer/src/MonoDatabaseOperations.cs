@@ -38,7 +38,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(query, connection);
-                command.Parameters.AddCacheItemId(key)
+                command.Parameters
+                    .AddCacheItemId(key)
                     .AddWithValue("UtcNow", SqlDbType.DateTime, utcNow.UtcDateTime);
 
                 connection.Open();
@@ -87,15 +88,16 @@ namespace Microsoft.Extensions.Caching.SqlServer
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(query, connection);
-                command.Parameters.AddCacheItemId(key)
+                command.Parameters
+                    .AddCacheItemId(key)
                     .AddWithValue("UtcNow", SqlDbType.DateTime, utcNow.UtcDateTime);
 
                 await connection.OpenAsync(token).ConfigureAwait(false);
 
                 var reader = await command.ExecuteReaderAsync(
-                        CommandBehavior.SingleRow | CommandBehavior.SingleResult,
-                        token
-                    )
+                    CommandBehavior.SingleRow | CommandBehavior.SingleResult,
+                    token
+                )
                     .ConfigureAwait(false);
 
                 if (await reader.ReadAsync(token).ConfigureAwait(false))
@@ -128,7 +130,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection);
-                upsertCommand.Parameters.AddCacheItemId(key)
+                upsertCommand.Parameters
+                    .AddCacheItemId(key)
                     .AddCacheItemValue(value)
                     .AddSlidingExpirationInSeconds(options.SlidingExpiration)
                     .AddAbsoluteExpirationMono(absoluteExpiration)
@@ -172,7 +175,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection);
-                upsertCommand.Parameters.AddCacheItemId(key)
+                upsertCommand.Parameters
+                    .AddCacheItemId(key)
                     .AddCacheItemValue(value)
                     .AddSlidingExpirationInSeconds(options.SlidingExpiration)
                     .AddAbsoluteExpirationMono(absoluteExpiration)

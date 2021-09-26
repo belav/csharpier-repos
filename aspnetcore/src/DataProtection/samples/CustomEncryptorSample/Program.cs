@@ -15,9 +15,8 @@ namespace CustomEncryptorSample
         {
             var keysFolder = Path.Combine(Directory.GetCurrentDirectory(), "temp-keys");
             using (
-                var services = new ServiceCollection().AddLogging(
-                        o => o.AddConsole().SetMinimumLevel(LogLevel.Debug)
-                    )
+                var services = new ServiceCollection()
+                    .AddLogging(o => o.AddConsole().SetMinimumLevel(LogLevel.Debug))
                     .AddDataProtection()
                     .PersistKeysToFileSystem(new DirectoryInfo(keysFolder))
                     .UseXmlEncryptor(s => new CustomXmlEncryptor(s))

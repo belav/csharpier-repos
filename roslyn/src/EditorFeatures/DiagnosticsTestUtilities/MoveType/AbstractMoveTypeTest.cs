@@ -30,9 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MoveType
 
         // TODO: Requires WPF due to IInlineRenameService dependency (https://github.com/dotnet/roslyn/issues/46153)
         protected override TestComposition GetComposition() =>
-            EditorTestCompositions.EditorFeaturesWpf.AddExcludedPartTypes(
-                    typeof(IDiagnosticUpdateSourceRegistrationService)
-                )
+            EditorTestCompositions.EditorFeaturesWpf
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
@@ -61,10 +60,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MoveType
                     var documentName = workspace.Documents[0].Name;
                     MarkupTestFile.GetSpan(expectedCode, out var expectedText, out var span);
 
-                    var codeActionTitle = string.Format(
-                        RenameTypeCodeActionTitle,
-                        expectedText.Substring(span.Start, span.Length)
-                    );
+                    var codeActionTitle = string
+                        .Format(
+                            RenameTypeCodeActionTitle,
+                            expectedText.Substring(span.Start, span.Length)
+                        );
 
                     var oldSolutionAndNewSolution = await TestOperationAsync(
                         testOptions,
@@ -117,14 +117,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MoveType
                     );
 
                     var oldDocumentId = workspace.Documents[0].Id;
-                    var expectedText = workspace.Documents[0].GetTextBuffer()
+                    var expectedText = workspace.Documents[0]
+                        .GetTextBuffer()
                         .CurrentSnapshot.GetText();
                     var spans = workspace.Documents[0].SelectedSpans;
 
-                    var codeActionTitle = string.Format(
-                        RenameFileCodeActionTitle,
-                        expectedDocumentName
-                    );
+                    var codeActionTitle = string
+                        .Format(RenameFileCodeActionTitle, expectedDocumentName);
 
                     var oldSolutionAndNewSolution = await TestOperationAsync(
                         testOptions,
@@ -231,9 +230,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MoveType
                 );
 
                 var modifiedSourceDocument = newSolution.GetDocument(sourceDocumentId);
-                var actualSourceTextAfterRefactoring = (
-                    await modifiedSourceDocument.GetTextAsync()
-                ).ToString();
+                var actualSourceTextAfterRefactoring = (await modifiedSourceDocument.GetTextAsync())
+                    .ToString();
                 Assert.Equal(expectedSourceTextAfterRefactoring, actualSourceTextAfterRefactoring);
             }
             else

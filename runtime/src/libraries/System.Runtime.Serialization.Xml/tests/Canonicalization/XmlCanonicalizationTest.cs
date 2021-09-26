@@ -115,11 +115,12 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 {
                     Assert.False(
                         mustSupportV14N,
-                        string.Format(
-                            "Error, writer {0},{1} should support C14N, but it doesn't!",
-                            rwTypeStr,
-                            encoding.ToString()
-                        )
+                        string
+                            .Format(
+                                "Error, writer {0},{1} should support C14N, but it doesn't!",
+                                rwTypeStr,
+                                encoding.ToString()
+                            )
                     );
                     continue;
                 }

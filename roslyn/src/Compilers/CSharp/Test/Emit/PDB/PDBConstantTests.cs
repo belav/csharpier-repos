@@ -312,10 +312,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyPdb(
-                    "C.M",
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                "C.M",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -342,7 +341,7 @@ class C
     </method>
   </methods>
 </symbols>"
-                );
+            );
         }
 
         [Fact]
@@ -533,10 +532,9 @@ class C
 ";
             using (new CultureContext(new CultureInfo("en-US", useUserOverride: false)))
             {
-                CompileAndVerify(text, options: TestOptions.DebugDll)
-                    .VerifyPdb(
-                        "C.M",
-                        @"
+                CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                    "C.M",
+                    @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -561,7 +559,7 @@ class C
     </method>
   </methods>
 </symbols>"
-                    );
+                );
             }
         }
 
@@ -872,10 +870,9 @@ class C
 ";
             using (new CultureContext(new CultureInfo("en-US", useUserOverride: false)))
             {
-                CompileAndVerify(text, options: TestOptions.DebugDll)
-                    .VerifyPdb(
-                        "C.M",
-                        @"
+                CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                    "C.M",
+                    @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -897,7 +894,7 @@ class C
     </method>
   </methods>
 </symbols>"
-                    );
+                );
             }
         }
     }

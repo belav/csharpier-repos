@@ -74,8 +74,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
             principal = principal ?? new ClaimsPrincipal(new ClaimsIdentity());
             var mock = new Mock<IAuthenticationService>();
             mock.Setup(
-                    authS => authS.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>())
-                )
+                authS => authS.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>())
+            )
                 .ReturnsAsync<HttpContext, string, IAuthenticationService, AuthenticateResult>(
                     (ctx, scheme) =>
                     {
@@ -95,7 +95,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
             {
                 HttpContext = new DefaultHttpContext()
                 {
-                    RequestServices = new ServiceCollection().AddSingleton(mock.Object)
+                    RequestServices = new ServiceCollection()
+                        .AddSingleton(mock.Object)
                         .BuildServiceProvider()
                 }
             };

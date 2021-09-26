@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
 
         private static Dictionary<string, string> FindProjects()
         {
-            return typeof(ServerFixture).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+            return typeof(ServerFixture).Assembly
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
                 .Where(m => m.Key.StartsWith("TestAssemblyApplication[", StringComparison.Ordinal))
                 .ToDictionary(
                     m => m.Key.Replace("TestAssemblyApplication", "").TrimStart('[').TrimEnd(']'),

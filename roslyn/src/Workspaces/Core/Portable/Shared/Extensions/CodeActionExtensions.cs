@@ -19,17 +19,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         )
         {
             var solution = await codeAction.GetChangedSolutionAsync(
-                    progressTracker,
-                    cancellationToken
-                )
+                progressTracker,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (solution is null)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        WorkspacesResources.CodeAction__0__did_not_produce_a_changed_solution,
-                        codeAction.Title
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources.CodeAction__0__did_not_produce_a_changed_solution,
+                            codeAction.Title
+                        )
                 );
             }
 

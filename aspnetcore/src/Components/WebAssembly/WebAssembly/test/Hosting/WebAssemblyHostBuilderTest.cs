@@ -22,9 +22,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             // Arrange
             var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime());
 
-            builder.Configuration.AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("key", "value"), }
-            );
+            builder.Configuration
+                .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("key", "value"), });
 
             // Act
             var host = builder.Build();
@@ -207,9 +206,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             // Arrange
             var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime());
 
-            builder.Configuration.AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("key", "value"), }
-            );
+            builder.Configuration
+                .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("key", "value"), });
 
             // Act
             var host = builder.Build();

@@ -38,12 +38,8 @@ namespace Test
                 BB[] bb = new BB[7];
                 int N = -9;
                 while (bb[0].Method2())
-                    new BB().Method3(
-                        Static1(ref ab[N], ref ab[N]),
-                        bb[N].m_adField5,
-                        bb,
-                        Static2()
-                    );
+                    new BB()
+                        .Method3(Static1(ref ab[N], ref ab[N]), bb[N].m_adField5, bb, Static2());
             }
         }
         static int Main()

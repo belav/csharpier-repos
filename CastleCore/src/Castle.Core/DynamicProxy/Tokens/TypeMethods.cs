@@ -19,13 +19,10 @@ namespace Castle.DynamicProxy.Tokens
 
     internal static class TypeMethods
     {
-        public static readonly MethodInfo GetTypeFromHandle = typeof(Type).GetMethod(
-            "GetTypeFromHandle"
-        );
+        public static readonly MethodInfo GetTypeFromHandle = typeof(Type)
+            .GetMethod("GetTypeFromHandle");
 
-        public static readonly MethodInfo StaticGetType = typeof(Type).GetMethod(
-            "GetType",
-            new[] { typeof(string), typeof(bool), typeof(bool) }
-        );
+        public static readonly MethodInfo StaticGetType = typeof(Type)
+            .GetMethod("GetType", new[] { typeof(string), typeof(bool), typeof(bool) });
     }
 }

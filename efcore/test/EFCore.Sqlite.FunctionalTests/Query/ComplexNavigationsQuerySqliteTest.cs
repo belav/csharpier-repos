@@ -28,9 +28,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Filtered_include_after_different_filtered_include_different_level(
-                                async
-                            )
+                            base
+                                .Filtered_include_after_different_filtered_include_different_level(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -55,9 +56,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Filtered_include_and_non_filtered_include_followed_by_then_include_on_same_navigation(
-                                async
-                            )
+                            base
+                                .Filtered_include_and_non_filtered_include_followed_by_then_include_on_same_navigation(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -70,9 +72,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Filtered_include_multiple_multi_level_includes_with_first_level_using_filter_include_on_one_of_the_chains_only(
-                                async
-                            )
+                            base
+                                .Filtered_include_multiple_multi_level_includes_with_first_level_using_filter_include_on_one_of_the_chains_only(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -85,9 +88,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Filtered_include_same_filter_set_on_same_navigation_twice_followed_by_ThenIncludes(
-                                async
-                            )
+                            base
+                                .Filtered_include_same_filter_set_on_same_navigation_twice_followed_by_ThenIncludes(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -100,9 +104,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Filtered_include_complex_three_level_with_middle_having_filter1(
-                                async
-                            )
+                            base
+                                .Filtered_include_complex_three_level_with_middle_having_filter1(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -115,9 +120,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Filtered_include_complex_three_level_with_middle_having_filter2(
-                                async
-                            )
+                            base
+                                .Filtered_include_complex_three_level_with_middle_having_filter2(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -130,9 +136,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Filtered_include_and_non_filtered_include_followed_by_then_include_on_same_navigation_split(
-                                async
-                            )
+                            base
+                                .Filtered_include_and_non_filtered_include_followed_by_then_include_on_same_navigation_split(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -145,9 +152,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Filtered_include_multiple_multi_level_includes_with_first_level_using_filter_include_on_one_of_the_chains_only_split(
-                                async
-                            )
+                            base
+                                .Filtered_include_multiple_multi_level_includes_with_first_level_using_filter_include_on_one_of_the_chains_only_split(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -160,9 +168,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Filtered_include_same_filter_set_on_same_navigation_twice_followed_by_ThenIncludes_split(
-                                async
-                            )
+                            base
+                                .Filtered_include_same_filter_set_on_same_navigation_twice_followed_by_ThenIncludes_split(
+                                    async
+                                )
                     )
                 ).Message
             );

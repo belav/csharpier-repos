@@ -156,16 +156,15 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 CancellationToken cancellationToken
             )
             {
-                var compilation = await document.Project.GetRequiredCompilationAsync(
-                        cancellationToken
-                    )
+                var compilation = await document.Project
+                    .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var disposedValueField = await CreateDisposedValueFieldAsync(
-                        document,
-                        classType,
-                        cancellationToken
-                    )
+                    document,
+                    classType,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var disposeMethod = TryGetIDisposableDispose(compilation)!;
@@ -179,27 +178,27 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
 
                 // First, implement all the interfaces (except for IDisposable).
                 var docWithCoreMembers = await GetUpdatedDocumentAsync(
-                        document,
-                        unimplementedMembers.WhereAsArray(
-                            m => !m.type.Equals(disposeMethod.ContainingType)
-                        ),
-                        classType,
-                        classDecl,
-                        extraMembers: ImmutableArray.Create<ISymbol>(disposedValueField),
-                        cancellationToken
-                    )
+                    document,
+                    unimplementedMembers.WhereAsArray(
+                        m => !m.type.Equals(disposeMethod.ContainingType)
+                    ),
+                    classType,
+                    classDecl,
+                    extraMembers: ImmutableArray.Create<ISymbol>(disposedValueField),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // Next, add the Dispose pattern methods at the end of the type (we want to keep all
                 // the members together).
                 var rootWithCoreMembers = await docWithCoreMembers.GetRequiredSyntaxRootAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var firstGeneratedMember = rootWithCoreMembers.GetAnnotatedNodes(
-                        CodeGenerator.Annotation
-                    )
+                    CodeGenerator.Annotation
+                )
                     .First();
                 var typeDeclarationWithCoreMembers = firstGeneratedMember.Parent!;
 
@@ -226,10 +225,10 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 // this ourselves as our code-gen helpers can create real methods, but not commented
                 // out ones.
                 return await AddFinalizerCommentAsync(
-                        docWithAllMembers,
-                        finalizer,
-                        cancellationToken
-                    )
+                    docWithAllMembers,
+                    finalizer,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -278,10 +277,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     disposedValueField
                 );
 
-                var disposeMethodDisplayString = this.Service.ToDisplayString(
-                    disposeImplMethod,
-                    s_format
-                );
+                var disposeMethodDisplayString = this.Service
+                    .ToDisplayString(disposeImplMethod, s_format);
 
                 var disposeInterfaceMethod = CreateDisposeInterfaceMethod(
                     compilation,
@@ -328,12 +325,12 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     Array.Empty<SyntaxNode>()
                 );
                 ifDisposingStatement = Service.AddCommentInsideIfStatement(
-                        ifDisposingStatement,
-                        CreateCommentTrivia(
-                            g,
-                            FeaturesResources.TODO_colon_dispose_managed_state_managed_objects
-                        )
+                    ifDisposingStatement,
+                    CreateCommentTrivia(
+                        g,
+                        FeaturesResources.TODO_colon_dispose_managed_state_managed_objects
                     )
+                )
                     .WithoutTrivia()
                     .WithTrailingTrivia(g.CarriageReturnLineFeed, g.CarriageReturnLineFeed);
 
@@ -390,10 +387,11 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 statements.Add(
                     AddComment(
                         g,
-                        string.Format(
-                            FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method,
-                            disposeMethodDisplayString
-                        ),
+                        string
+                            .Format(
+                                FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method,
+                                disposeMethodDisplayString
+                            ),
                         g.ExpressionStatement(
                             g.InvocationExpression(
                                 g.IdentifierName(nameof(IDisposable.Dispose)),
@@ -444,10 +442,10 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             )
             {
                 var rule = await document.GetApplicableNamingRuleAsync(
-                        SymbolKind.Field,
-                        Accessibility.Private,
-                        cancellationToken
-                    )
+                    SymbolKind.Field,
+                    Accessibility.Private,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var options = await document.GetOptionsAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -455,9 +453,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     CodeStyleOptions2.RequireAccessibilityModifiers
                 );
 
-                var compilation = await document.Project.GetRequiredCompilationAsync(
-                        cancellationToken
-                    )
+                var compilation = await document.Project
+                    .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var boolType = compilation.GetSpecialType(SpecialType.System_Boolean);
                 var accessibilityLevel =

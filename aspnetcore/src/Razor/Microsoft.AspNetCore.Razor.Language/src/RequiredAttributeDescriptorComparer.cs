@@ -43,11 +43,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                 && descriptorX.ValueComparison == descriptorY.ValueComparison
                 && string.Equals(descriptorX.Name, descriptorY.Name, StringComparison.Ordinal)
                 && string.Equals(descriptorX.Value, descriptorY.Value, StringComparison.Ordinal)
-                && string.Equals(
-                    descriptorX.DisplayName,
-                    descriptorY.DisplayName,
-                    StringComparison.Ordinal
-                );
+                && string
+                    .Equals(
+                        descriptorX.DisplayName,
+                        descriptorY.DisplayName,
+                        StringComparison.Ordinal
+                    );
         }
 
         /// <inheritdoc />

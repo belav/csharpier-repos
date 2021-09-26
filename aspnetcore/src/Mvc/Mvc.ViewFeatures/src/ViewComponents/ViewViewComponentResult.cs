@@ -109,12 +109,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 //
                 // This supports a controller or area providing an override for component views.
                 var viewName = isNullOrEmptyViewName ? DefaultViewName : ViewName;
-                var qualifiedViewName = string.Format(
-                    CultureInfo.InvariantCulture,
-                    ViewPathFormat,
-                    context.ViewComponentDescriptor.ShortName,
-                    viewName
-                );
+                var qualifiedViewName = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        ViewPathFormat,
+                        context.ViewComponentDescriptor.ShortName,
+                        viewName
+                    );
 
                 result = viewEngine.FindView(viewContext, qualifiedViewName, isMainPage: false);
             }
@@ -124,8 +125,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             {
                 if (_diagnosticListener == null)
                 {
-                    _diagnosticListener =
-                        viewContext.HttpContext.RequestServices.GetRequiredService<DiagnosticListener>();
+                    _diagnosticListener = viewContext.HttpContext.RequestServices
+                        .GetRequiredService<DiagnosticListener>();
                 }
 
                 _diagnosticListener.ViewComponentBeforeViewExecute(context, view);
@@ -144,7 +145,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
         private static IViewEngine ResolveViewEngine(ViewComponentContext context)
         {
-            return context.ViewContext.HttpContext.RequestServices.GetRequiredService<ICompositeViewEngine>();
+            return context.ViewContext.HttpContext.RequestServices
+                .GetRequiredService<ICompositeViewEngine>();
         }
     }
 }

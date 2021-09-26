@@ -30,9 +30,8 @@ namespace Microsoft.EntityFrameworkCore
                             eb => eb.Property(p => p.Property).IsRequired()
                         );
 
-                        var optionsBuilder = new DbContextOptionsBuilder().UseModel(
-                                modelBuilder.FinalizeModel()
-                            )
+                        var optionsBuilder = new DbContextOptionsBuilder()
+                            .UseModel(modelBuilder.FinalizeModel())
                             .UseInMemoryDatabase(
                                 nameof(NullabilityCheckInMemoryTest),
                                 b => b.EnableNullabilityCheck()
@@ -64,9 +63,8 @@ namespace Microsoft.EntityFrameworkCore
                             eb => eb.Property(p => p.Property).IsRequired()
                         );
 
-                        var optionsBuilder = new DbContextOptionsBuilder().UseModel(
-                                modelBuilder.FinalizeModel()
-                            )
+                        var optionsBuilder = new DbContextOptionsBuilder()
+                            .UseModel(modelBuilder.FinalizeModel())
                             .UseInMemoryDatabase(
                                 nameof(NullabilityCheckInMemoryTest),
                                 b => b.EnableNullabilityCheck()
@@ -105,9 +103,8 @@ namespace Microsoft.EntityFrameworkCore
                             }
                         );
 
-                        var optionsBuilder = new DbContextOptionsBuilder().UseModel(
-                                modelBuilder.FinalizeModel()
-                            )
+                        var optionsBuilder = new DbContextOptionsBuilder()
+                            .UseModel(modelBuilder.FinalizeModel())
                             .UseInMemoryDatabase(
                                 nameof(NullabilityCheckInMemoryTest),
                                 b => b.EnableNullabilityCheck()
@@ -139,9 +136,8 @@ namespace Microsoft.EntityFrameworkCore
                         var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
                         modelBuilder.Entity<EntityWithRequiredAttribute>();
 
-                        var optionsBuilder = new DbContextOptionsBuilder().UseModel(
-                                modelBuilder.FinalizeModel()
-                            )
+                        var optionsBuilder = new DbContextOptionsBuilder()
+                            .UseModel(modelBuilder.FinalizeModel())
                             .UseInMemoryDatabase(
                                 nameof(NullabilityCheckInMemoryTest),
                                 b => b.EnableNullabilityCheck()
@@ -172,9 +168,8 @@ namespace Microsoft.EntityFrameworkCore
                             eb => eb.Property(p => p.Property).IsRequired()
                         );
 
-                        var optionsBuilder = new DbContextOptionsBuilder().UseModel(
-                                modelBuilder.FinalizeModel()
-                            )
+                        var optionsBuilder = new DbContextOptionsBuilder()
+                            .UseModel(modelBuilder.FinalizeModel())
                             .UseInMemoryDatabase(
                                 nameof(NullabilityCheckInMemoryTest),
                                 b => b.EnableNullabilityCheck()
@@ -195,9 +190,8 @@ namespace Microsoft.EntityFrameworkCore
             var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
             modelBuilder.Entity<SomeEntity>(eb => eb.Property(p => p.Property).IsRequired());
 
-            var optionsBuilder = new DbContextOptionsBuilder().UseModel(
-                    modelBuilder.FinalizeModel()
-                )
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseModel(modelBuilder.FinalizeModel())
                 .UseInMemoryDatabase(
                     Guid.NewGuid().ToString(),
                     b => b.EnableNullabilityCheck(false)
@@ -217,9 +211,8 @@ namespace Microsoft.EntityFrameworkCore
             var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
             modelBuilder.Entity<EntityWithRequiredAttribute>();
 
-            var optionsBuilder = new DbContextOptionsBuilder().UseModel(
-                    modelBuilder.FinalizeModel()
-                )
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseModel(modelBuilder.FinalizeModel())
                 .UseInMemoryDatabase(
                     nameof(NullabilityCheckInMemoryTest),
                     b => b.EnableNullabilityCheck(false)
@@ -241,9 +234,8 @@ namespace Microsoft.EntityFrameworkCore
                 eb => eb.Property(p => p.Property).IsRequired()
             );
 
-            var optionsBuilder = new DbContextOptionsBuilder().UseModel(
-                    modelBuilder.FinalizeModel()
-                )
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseModel(modelBuilder.FinalizeModel())
                 .UseInMemoryDatabase(
                     nameof(NullabilityCheckInMemoryTest),
                     b => b.EnableNullabilityCheck(false)

@@ -220,15 +220,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             // (Tools > Options setting) and call "value.ToString()" if appropriate.
             return IncludeObjectId(
                 value,
-                string.Format(
-                    _defaultFormat,
-                    value.EvaluateToString(inspectionContext)
-                        ?? inspectionContext.GetTypeName(
-                            value.Type,
-                            CustomTypeInfo: null,
-                            FormatSpecifiers: NoFormatSpecifiers
-                        )
-                ),
+                string
+                    .Format(
+                        _defaultFormat,
+                        value.EvaluateToString(inspectionContext)
+                            ?? inspectionContext.GetTypeName(
+                                value.Type,
+                                CustomTypeInfo: null,
+                                FormatSpecifiers: NoFormatSpecifiers
+                            )
+                    ),
                 flags
             );
         }

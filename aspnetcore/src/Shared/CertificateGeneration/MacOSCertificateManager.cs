@@ -187,11 +187,12 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             using var checkTrustProcess = Process.Start(
                 new ProcessStartInfo(
                     MacOSFindCertificateCommandLine,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        MacOSFindCertificateCommandLineArgumentsFormat,
-                        subject
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            MacOSFindCertificateCommandLineArgumentsFormat,
+                            subject
+                        )
                 ) {
                     RedirectStandardOutput = true
                 }
@@ -246,11 +247,12 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                 File.WriteAllBytes(certificatePath, certBytes);
                 var processInfo = new ProcessStartInfo(
                     MacOSRemoveCertificateTrustCommandLine,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        MacOSRemoveCertificateTrustCommandLineArgumentsFormat,
-                        certificatePath
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            MacOSRemoveCertificateTrustCommandLineArgumentsFormat,
+                            certificatePath
+                        )
                 );
                 using var process = Process.Start(processInfo);
                 process!.WaitForExit();
@@ -284,12 +286,13 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         {
             var processInfo = new ProcessStartInfo(
                 MacOSDeleteCertificateCommandLine,
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    MacOSDeleteCertificateCommandLineArgumentsFormat,
-                    certificate.Thumbprint.ToUpperInvariant(),
-                    keyChain
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        MacOSDeleteCertificateCommandLineArgumentsFormat,
+                        certificate.Thumbprint.ToUpperInvariant(),
+                        keyChain
+                    )
             ) {
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
@@ -335,12 +338,13 @@ namespace Microsoft.AspNetCore.Certificates.Generation
 
             var processInfo = new ProcessStartInfo(
                 MacOSAddCertificateToKeyChainCommandLine,
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    MacOSAddCertificateToKeyChainCommandLineArgumentsFormat,
-                    certificatePath,
-                    password
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        MacOSAddCertificateToKeyChainCommandLineArgumentsFormat,
+                        certificatePath,
+                        password
+                    )
             ) {
                 RedirectStandardOutput = true,
                 RedirectStandardError = true

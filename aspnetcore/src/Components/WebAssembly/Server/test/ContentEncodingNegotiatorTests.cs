@@ -31,10 +31,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests
 
             Assert.Equal(expectedPath, httpContext.Request.Path);
             Assert.True(
-                httpContext.Response.Headers.TryGetValue(
-                    HeaderNames.ContentEncoding,
-                    out var selectedEncoding
-                )
+                httpContext.Response.Headers
+                    .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
             );
             Assert.Equal(expectedEncoding, selectedEncoding);
             Assert.True(
@@ -60,10 +58,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests
 
             Assert.Equal(expectedPath, httpContext.Request.Path);
             Assert.False(
-                httpContext.Response.Headers.TryGetValue(
-                    HeaderNames.ContentEncoding,
-                    out var selectedEncoding
-                )
+                httpContext.Response.Headers
+                    .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
             );
             Assert.False(
                 httpContext.Response.Headers.TryGetValue(HeaderNames.Vary, out var varyHeader)
@@ -91,10 +87,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests
 
             Assert.Equal(expectedPath, httpContext.Request.Path);
             Assert.True(
-                httpContext.Response.Headers.TryGetValue(
-                    HeaderNames.ContentEncoding,
-                    out var selectedEncoding
-                )
+                httpContext.Response.Headers
+                    .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
             );
             Assert.Equal(expectedEncoding, selectedEncoding);
             Assert.True(
@@ -121,10 +115,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests
 
             Assert.Equal(expectedPath, httpContext.Request.Path);
             Assert.True(
-                httpContext.Response.Headers.TryGetValue(
-                    HeaderNames.ContentEncoding,
-                    out var selectedEncoding
-                )
+                httpContext.Response.Headers
+                    .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
             );
             Assert.Equal(expectedEncoding, selectedEncoding);
             Assert.True(
@@ -154,10 +146,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests
 
             Assert.Equal(expectedPath, httpContext.Request.Path);
             Assert.True(
-                httpContext.Response.Headers.TryGetValue(
-                    HeaderNames.ContentEncoding,
-                    out var selectedEncoding
-                )
+                httpContext.Response.Headers
+                    .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
             );
             Assert.Equal(expectedEncoding, selectedEncoding);
             Assert.True(
@@ -184,10 +174,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests
 
             Assert.Equal(expectedPath, httpContext.Request.Path);
             Assert.True(
-                httpContext.Response.Headers.TryGetValue(
-                    HeaderNames.ContentEncoding,
-                    out var selectedEncoding
-                )
+                httpContext.Response.Headers
+                    .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
             );
             Assert.Equal(expectedEncoding, selectedEncoding);
             Assert.True(
@@ -217,10 +205,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests
 
             Assert.Equal(expectedPath, httpContext.Request.Path);
             Assert.True(
-                httpContext.Response.Headers.TryGetValue(
-                    HeaderNames.ContentEncoding,
-                    out var selectedEncoding
-                )
+                httpContext.Response.Headers
+                    .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
             );
             Assert.Equal(expectedEncoding, selectedEncoding);
             Assert.True(
@@ -249,10 +235,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests
 
             Assert.Equal(expectedPath, httpContext.Request.Path);
             Assert.False(
-                httpContext.Response.Headers.TryGetValue(
-                    HeaderNames.ContentEncoding,
-                    out var selectedEncoding
-                )
+                httpContext.Response.Headers
+                    .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
             );
             Assert.False(
                 httpContext.Response.Headers.TryGetValue(HeaderNames.Vary, out var varyHeader)
@@ -277,10 +261,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests
 
             Assert.Equal(expectedPath, httpContext.Request.Path);
             Assert.True(
-                httpContext.Response.Headers.TryGetValue(
-                    HeaderNames.ContentEncoding,
-                    out var selectedEncoding
-                )
+                httpContext.Response.Headers
+                    .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
             );
             Assert.Equal(expectedEncoding, selectedEncoding);
             Assert.True(

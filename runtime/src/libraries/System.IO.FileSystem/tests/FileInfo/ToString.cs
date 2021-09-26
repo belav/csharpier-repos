@@ -35,10 +35,10 @@ namespace System.IO.Tests
         public void AlternateDirectoryDividerChar()
         {
             string path = Path.Combine(
-                    Path.GetPathRoot(Directory.GetCurrentDirectory()),
-                    "Directory",
-                    "File"
-                )
+                Path.GetPathRoot(Directory.GetCurrentDirectory()),
+                "Directory",
+                "File"
+            )
                 .Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
             var info = new FileInfo(path);
             Assert.Equal(path, info.ToString());

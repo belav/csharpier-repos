@@ -127,7 +127,8 @@ namespace InteropTestsClient
 
         public static void Run(string[] args)
         {
-            var parserResult = Parser.Default.ParseArguments<ClientOptions>(args)
+            var parserResult = Parser.Default
+                .ParseArguments<ClientOptions>(args)
                 .WithNotParsed(errors => Environment.Exit(1))
                 .WithParsed(
                     options =>
@@ -344,9 +345,10 @@ namespace InteropTestsClient
         {
             Console.WriteLine("running client_streaming");
 
-            var bodySizes = new List<int> { 27182, 8, 1828, 45904 }.Select(
-                (size) => new StreamingInputCallRequest { Payload = CreateZerosPayload(size) }
-            );
+            var bodySizes = new List<int> { 27182, 8, 1828, 45904 }
+                .Select(
+                    (size) => new StreamingInputCallRequest { Payload = CreateZerosPayload(size) }
+                );
 
             using (var call = client.StreamingInputCall())
             {
@@ -389,46 +391,50 @@ namespace InteropTestsClient
 
             using (var call = client.FullDuplexCall())
             {
-                await call.RequestStream.WriteAsync(
-                    new StreamingOutputCallRequest
-                    {
-                        ResponseParameters = { new ResponseParameters { Size = 31415 } },
-                        Payload = CreateZerosPayload(27182)
-                    }
-                );
+                await call.RequestStream
+                    .WriteAsync(
+                        new StreamingOutputCallRequest
+                        {
+                            ResponseParameters = { new ResponseParameters { Size = 31415 } },
+                            Payload = CreateZerosPayload(27182)
+                        }
+                    );
 
                 Assert.IsTrue(await call.ResponseStream.MoveNext());
                 Assert.AreEqual(31415, call.ResponseStream.Current.Payload.Body.Length);
 
-                await call.RequestStream.WriteAsync(
-                    new StreamingOutputCallRequest
-                    {
-                        ResponseParameters = { new ResponseParameters { Size = 9 } },
-                        Payload = CreateZerosPayload(8)
-                    }
-                );
+                await call.RequestStream
+                    .WriteAsync(
+                        new StreamingOutputCallRequest
+                        {
+                            ResponseParameters = { new ResponseParameters { Size = 9 } },
+                            Payload = CreateZerosPayload(8)
+                        }
+                    );
 
                 Assert.IsTrue(await call.ResponseStream.MoveNext());
                 Assert.AreEqual(9, call.ResponseStream.Current.Payload.Body.Length);
 
-                await call.RequestStream.WriteAsync(
-                    new StreamingOutputCallRequest
-                    {
-                        ResponseParameters = { new ResponseParameters { Size = 2653 } },
-                        Payload = CreateZerosPayload(1828)
-                    }
-                );
+                await call.RequestStream
+                    .WriteAsync(
+                        new StreamingOutputCallRequest
+                        {
+                            ResponseParameters = { new ResponseParameters { Size = 2653 } },
+                            Payload = CreateZerosPayload(1828)
+                        }
+                    );
 
                 Assert.IsTrue(await call.ResponseStream.MoveNext());
                 Assert.AreEqual(2653, call.ResponseStream.Current.Payload.Body.Length);
 
-                await call.RequestStream.WriteAsync(
-                    new StreamingOutputCallRequest
-                    {
-                        ResponseParameters = { new ResponseParameters { Size = 58979 } },
-                        Payload = CreateZerosPayload(45904)
-                    }
-                );
+                await call.RequestStream
+                    .WriteAsync(
+                        new StreamingOutputCallRequest
+                        {
+                            ResponseParameters = { new ResponseParameters { Size = 58979 } },
+                            Payload = CreateZerosPayload(45904)
+                        }
+                    );
 
                 Assert.IsTrue(await call.ResponseStream.MoveNext());
                 Assert.AreEqual(58979, call.ResponseStream.Current.Payload.Body.Length);
@@ -504,9 +510,8 @@ namespace InteropTestsClient
         )
         {
             Console.WriteLine("running oauth2_auth_token");
-            ITokenAccess credential = (
-                await GoogleCredential.GetApplicationDefaultAsync()
-            ).CreateScoped(new[] { oauthScope });
+            ITokenAccess credential = (await GoogleCredential.GetApplicationDefaultAsync())
+                .CreateScoped(new[] { oauthScope });
             string oauth2Token = await credential.GetAccessTokenForRequestAsync();
 
             var credentials = GoogleGrpcCredentials.FromAccessToken(oauth2Token);
@@ -563,13 +568,14 @@ namespace InteropTestsClient
             var cts = new CancellationTokenSource();
             using (var call = client.FullDuplexCall(cancellationToken: cts.Token))
             {
-                await call.RequestStream.WriteAsync(
-                    new StreamingOutputCallRequest
-                    {
-                        ResponseParameters = { new ResponseParameters { Size = 31415 } },
-                        Payload = CreateZerosPayload(27182)
-                    }
-                );
+                await call.RequestStream
+                    .WriteAsync(
+                        new StreamingOutputCallRequest
+                        {
+                            ResponseParameters = { new ResponseParameters { Size = 31415 } },
+                            Payload = CreateZerosPayload(27182)
+                        }
+                    );
 
                 Assert.IsTrue(await call.ResponseStream.MoveNext());
                 Assert.AreEqual(31415, call.ResponseStream.Current.Payload.Body.Length);
@@ -601,9 +607,10 @@ namespace InteropTestsClient
             {
                 try
                 {
-                    await call.RequestStream.WriteAsync(
-                        new StreamingOutputCallRequest { Payload = CreateZerosPayload(27182) }
-                    );
+                    await call.RequestStream
+                        .WriteAsync(
+                            new StreamingOutputCallRequest { Payload = CreateZerosPayload(27182) }
+                        );
                 }
                 catch (InvalidOperationException)
                 {
@@ -822,13 +829,14 @@ namespace InteropTestsClient
             try
             {
                 var probeCall = client.StreamingInputCall(CreateClientCompressionMetadata(false));
-                await probeCall.RequestStream.WriteAsync(
-                    new StreamingInputCallRequest
-                    {
-                        ExpectCompressed = new BoolValue { Value = true },
-                        Payload = CreateZerosPayload(27182)
-                    }
-                );
+                await probeCall.RequestStream
+                    .WriteAsync(
+                        new StreamingInputCallRequest
+                        {
+                            ExpectCompressed = new BoolValue { Value = true },
+                            Payload = CreateZerosPayload(27182)
+                        }
+                    );
 
                 // cannot use Assert.ThrowsAsync because it uses Task.Wait and would deadlock.
                 await probeCall;
@@ -840,22 +848,24 @@ namespace InteropTestsClient
             }
 
             var call = client.StreamingInputCall(CreateClientCompressionMetadata(true));
-            await call.RequestStream.WriteAsync(
-                new StreamingInputCallRequest
-                {
-                    ExpectCompressed = new BoolValue { Value = true },
-                    Payload = CreateZerosPayload(27182)
-                }
-            );
+            await call.RequestStream
+                .WriteAsync(
+                    new StreamingInputCallRequest
+                    {
+                        ExpectCompressed = new BoolValue { Value = true },
+                        Payload = CreateZerosPayload(27182)
+                    }
+                );
 
             call.RequestStream.WriteOptions = new WriteOptions(WriteFlags.NoCompress);
-            await call.RequestStream.WriteAsync(
-                new StreamingInputCallRequest
-                {
-                    ExpectCompressed = new BoolValue { Value = false },
-                    Payload = CreateZerosPayload(45904)
-                }
-            );
+            await call.RequestStream
+                .WriteAsync(
+                    new StreamingInputCallRequest
+                    {
+                        ExpectCompressed = new BoolValue { Value = false },
+                        Payload = CreateZerosPayload(45904)
+                    }
+                );
             await call.RequestStream.CompleteAsync();
 
             var response = await call.ResponseAsync;
@@ -968,11 +978,8 @@ namespace InteropTestsClient
         // Consider providing ca file in a different format and removing method
         private byte[]? GetBytesFromPem(string pemString, string section)
         {
-            var header = string.Format(
-                CultureInfo.InvariantCulture,
-                "-----BEGIN {0}-----",
-                section
-            );
+            var header = string
+                .Format(CultureInfo.InvariantCulture, "-----BEGIN {0}-----", section);
             var footer = string.Format(CultureInfo.InvariantCulture, "-----END {0}-----", section);
 
             var start = pemString.IndexOf(header, StringComparison.Ordinal);

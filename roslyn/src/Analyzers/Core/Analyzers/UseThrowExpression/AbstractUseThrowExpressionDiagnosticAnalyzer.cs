@@ -72,9 +72,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
             context.RegisterCompilationStartAction(
                 startContext =>
                 {
-                    var expressionTypeOpt = startContext.Compilation.GetTypeByMetadataName(
-                        "System.Linq.Expressions.Expression`1"
-                    );
+                    var expressionTypeOpt = startContext.Compilation
+                        .GetTypeByMetadataName("System.Linq.Expressions.Expression`1");
                     startContext.RegisterOperationAction(
                         operationContext => AnalyzeOperation(operationContext, expressionTypeOpt),
                         OperationKind.Throw

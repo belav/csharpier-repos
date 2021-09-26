@@ -140,22 +140,25 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     _lValueFlowCapturesMap = PooledDictionary<
                         CaptureId,
                         PooledHashSet<(ISymbol, IOperation)>
-                    >.GetInstance();
+                    >
+                        .GetInstance();
                     LValueFlowCapturesInGraph = LValueFlowCapturesProvider.CreateLValueFlowCaptures(
                         controlFlowGraph
                     );
                     Debug.Assert(
-                        LValueFlowCapturesInGraph.Values.All(
-                            kind =>
-                                kind == FlowCaptureKind.LValueCapture
-                                || kind == FlowCaptureKind.LValueAndRValueCapture
-                        )
+                        LValueFlowCapturesInGraph.Values
+                            .All(
+                                kind =>
+                                    kind == FlowCaptureKind.LValueCapture
+                                    || kind == FlowCaptureKind.LValueAndRValueCapture
+                            )
                     );
 
                     _symbolWritesInsideBlockRangeMap = PooledDictionary<
                         (int firstBlockOrdinal, int lastBlockOrdinal),
                         PooledHashSet<(ISymbol, IOperation)>
-                    >.GetInstance();
+                    >
+                        .GetInstance();
                 }
 
                 public ISymbol OwningSymbol { get; }
@@ -191,20 +194,24 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         analysisDataByBasicBlockMap: CreateAnalysisDataByBasicBlockMap(cfg),
                         symbolsWriteMap: CreateSymbolsWriteMap(parameters),
                         symbolsRead: PooledHashSet<ISymbol>.GetInstance(),
-                        lambdaOrLocalFunctionsBeingAnalyzed: PooledHashSet<IMethodSymbol>.GetInstance(),
+                        lambdaOrLocalFunctionsBeingAnalyzed: PooledHashSet<IMethodSymbol>
+                            .GetInstance(),
                         analyzeLocalFunctionOrLambdaInvocation,
                         reachingDelegateCreationTargets: PooledDictionary<
                             IOperation,
                             PooledHashSet<IOperation>
-                        >.GetInstance(),
+                        >
+                            .GetInstance(),
                         localFunctionTargetsToAccessingCfgMap: PooledDictionary<
                             IMethodSymbol,
                             ControlFlowGraph
-                        >.GetInstance(),
+                        >
+                            .GetInstance(),
                         lambdaTargetsToAccessingCfgMap: PooledDictionary<
                             IFlowAnonymousFunctionOperation,
                             ControlFlowGraph
-                        >.GetInstance()
+                        >
+                            .GetInstance()
                     );
                 }
 
@@ -245,10 +252,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     BasicBlockAnalysisData
                 > CreateAnalysisDataByBasicBlockMap(ControlFlowGraph cfg)
                 {
-                    var builder = PooledDictionary<
-                        BasicBlock,
-                        BasicBlockAnalysisData
-                    >.GetInstance();
+                    var builder = PooledDictionary<BasicBlock, BasicBlockAnalysisData>
+                        .GetInstance();
                     foreach (var block in cfg.Blocks)
                     {
                         builder.Add(block, null);

@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
             var settingsFolder = Path.Combine(context.HomeFolder, "site", "diagnostics");
             var settingsFile = Path.Combine(settingsFolder, "settings.json");
 
-            return new ConfigurationBuilder().AddEnvironmentVariables()
+            return new ConfigurationBuilder()
+                .AddEnvironmentVariables()
                 .AddJsonFile(settingsFile, optional: true, reloadOnChange: true)
                 .Build();
         }

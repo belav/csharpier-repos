@@ -2353,7 +2353,8 @@ namespace Microsoft.EntityFrameworkCore
         #region Include
 
         internal static readonly MethodInfo IncludeMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethods(nameof(Include))
                 .Single(
                     mi =>
@@ -2367,7 +2368,8 @@ namespace Microsoft.EntityFrameworkCore
                 );
 
         internal static readonly MethodInfo NotQuiteIncludeMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethods(nameof(NotQuiteInclude))
                 .Single(
                     mi =>
@@ -2437,7 +2439,8 @@ namespace Microsoft.EntityFrameworkCore
 
             return new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source.Provider.CreateQuery<TEntity>(
+                  ? source.Provider
+                    .CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: IncludeMethodInfo.MakeGenericMethod(
@@ -2466,7 +2469,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             return new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source.Provider.CreateQuery<TEntity>(
+                  ? source.Provider
+                    .CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: NotQuiteIncludeMethodInfo.MakeGenericMethod(
@@ -2485,7 +2489,8 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         internal static readonly MethodInfo ThenIncludeAfterEnumerableMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethods(nameof(ThenInclude))
                 .Where(mi => mi.GetGenericArguments().Count() == 3)
                 .Single(
@@ -2498,7 +2503,8 @@ namespace Microsoft.EntityFrameworkCore
                 );
 
         internal static readonly MethodInfo ThenIncludeAfterReferenceMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethods(nameof(ThenInclude))
                 .Single(
                     mi =>
@@ -2560,7 +2566,8 @@ namespace Microsoft.EntityFrameworkCore
         ) where TEntity : class =>
             new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source.Provider.CreateQuery<TEntity>(
+                  ? source.Provider
+                    .CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: ThenIncludeAfterEnumerableMethodInfo.MakeGenericMethod(
@@ -2626,7 +2633,8 @@ namespace Microsoft.EntityFrameworkCore
         ) where TEntity : class =>
             new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source.Provider.CreateQuery<TEntity>(
+                  ? source.Provider
+                    .CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: ThenIncludeAfterReferenceMethodInfo.MakeGenericMethod(
@@ -2671,7 +2679,8 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         internal static readonly MethodInfo StringIncludeMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethods(nameof(Include))
                 .Single(
                     mi =>
@@ -2723,7 +2732,8 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotEmpty(navigationPropertyPath, nameof(navigationPropertyPath));
 
             return source.Provider is EntityQueryProvider
-              ? source.Provider.CreateQuery<TEntity>(
+              ? source.Provider
+                .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
                         method: StringIncludeMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -2739,9 +2749,8 @@ namespace Microsoft.EntityFrameworkCore
         #region Auto included navigations
 
         internal static readonly MethodInfo IgnoreAutoIncludesMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetRequiredDeclaredMethod(
-                nameof(IgnoreAutoIncludes)
-            );
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetRequiredDeclaredMethod(nameof(IgnoreAutoIncludes));
 
         /// <summary>
         ///     Specifies that the current Entity Framework LINQ query should not have any model-level eager loaded navigations applied.
@@ -2756,7 +2765,8 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(source, nameof(source));
 
             return source.Provider is EntityQueryProvider
-              ? source.Provider.CreateQuery<TEntity>(
+              ? source.Provider
+                .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
                         method: IgnoreAutoIncludesMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -2771,9 +2781,8 @@ namespace Microsoft.EntityFrameworkCore
         #region Query Filters
 
         internal static readonly MethodInfo IgnoreQueryFiltersMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetRequiredDeclaredMethod(
-                nameof(IgnoreQueryFilters)
-            );
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetRequiredDeclaredMethod(nameof(IgnoreQueryFilters));
 
         /// <summary>
         ///     Specifies that the current Entity Framework LINQ query should not have any model-level entity query filters applied.
@@ -2789,7 +2798,8 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(source, nameof(source));
 
             return source.Provider is EntityQueryProvider
-              ? source.Provider.CreateQuery<TEntity>(
+              ? source.Provider
+                .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
                         method: IgnoreQueryFiltersMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -2804,9 +2814,8 @@ namespace Microsoft.EntityFrameworkCore
         #region Tracking
 
         internal static readonly MethodInfo AsNoTrackingMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetRequiredDeclaredMethod(
-                nameof(AsNoTracking)
-            );
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetRequiredDeclaredMethod(nameof(AsNoTracking));
 
         /// <summary>
         ///     <para>
@@ -2838,7 +2847,8 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(source, nameof(source));
 
             return source.Provider is EntityQueryProvider
-              ? source.Provider.CreateQuery<TEntity>(
+              ? source.Provider
+                .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
                         method: AsNoTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -2849,9 +2859,8 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         internal static readonly MethodInfo AsNoTrackingWithIdentityResolutionMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetRequiredDeclaredMethod(
-                nameof(AsNoTrackingWithIdentityResolution)
-            );
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetRequiredDeclaredMethod(nameof(AsNoTrackingWithIdentityResolution));
 
         /// <summary>
         ///     <para>
@@ -2884,7 +2893,8 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(source, nameof(source));
 
             return source.Provider is EntityQueryProvider
-              ? source.Provider.CreateQuery<TEntity>(
+              ? source.Provider
+                .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
                         method: AsNoTrackingWithIdentityResolutionMethodInfo.MakeGenericMethod(
@@ -2897,7 +2907,8 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         internal static readonly MethodInfo AsTrackingMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethods(nameof(AsTracking))
                 .Single(m => m.GetParameters().Length == 1);
 
@@ -2921,7 +2932,8 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(source, nameof(source));
 
             return source.Provider is EntityQueryProvider
-              ? source.Provider.CreateQuery<TEntity>(
+              ? source.Provider
+                .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
                         method: AsTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -2989,7 +3001,8 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotEmpty(tag, nameof(tag));
 
             return source.Provider is EntityQueryProvider
-              ? source.Provider.CreateQuery<T>(
+              ? source.Provider
+                .CreateQuery<T>(
                     Expression.Call(
                         instance: null,
                         method: TagWithMethodInfo.MakeGenericMethod(typeof(T)),

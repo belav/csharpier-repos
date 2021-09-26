@@ -224,11 +224,11 @@ namespace System.Net.Http.Json
             int count = _byteBuffer.Array.Length - _byteBuffer.Count;
 
             int bytesRead = await _stream.ReadAsync(
-                    _byteBuffer.Array,
-                    offset,
-                    count,
-                    cancellationToken
-                )
+                _byteBuffer.Array,
+                offset,
+                count,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             _byteBuffer = new ArraySegment<byte>(_byteBuffer.Array, 0, offset + bytesRead);

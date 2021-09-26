@@ -92,11 +92,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         private class Category
         {
-            public static readonly PropertyInfo ProductsProperty = typeof(Category).GetProperty(
-                nameof(Products)
-            );
-            public static readonly PropertyInfo FeaturedProductProperty =
-                typeof(Category).GetProperty(nameof(FeaturedProduct));
+            public static readonly PropertyInfo ProductsProperty = typeof(Category)
+                .GetProperty(nameof(Products));
+            public static readonly PropertyInfo FeaturedProductProperty = typeof(Category)
+                .GetProperty(nameof(FeaturedProduct));
 
             public int Id { get; set; }
 
@@ -108,12 +107,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         private class Product
         {
-            public static readonly PropertyInfo CategoryProperty = typeof(Product).GetProperty(
-                nameof(Category)
-            );
+            public static readonly PropertyInfo CategoryProperty = typeof(Product)
+                .GetProperty(nameof(Category));
 
-            public static readonly PropertyInfo FeaturedProductCategoryProperty =
-                typeof(Product).GetProperty(nameof(FeaturedProductCategory));
+            public static readonly PropertyInfo FeaturedProductCategoryProperty = typeof(Product)
+                .GetProperty(nameof(FeaturedProductCategory));
 
             public int Id { get; set; }
 

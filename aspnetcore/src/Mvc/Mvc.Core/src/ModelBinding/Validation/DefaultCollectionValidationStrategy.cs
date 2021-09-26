@@ -42,10 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
     internal class DefaultCollectionValidationStrategy : IValidationStrategy
     {
         private static readonly MethodInfo _getEnumerator =
-            typeof(DefaultCollectionValidationStrategy).GetMethod(
-                nameof(GetEnumerator),
-                BindingFlags.Static | BindingFlags.NonPublic
-            )!;
+            typeof(DefaultCollectionValidationStrategy)
+                .GetMethod(nameof(GetEnumerator), BindingFlags.Static | BindingFlags.NonPublic)!;
 
         /// <summary>
         /// Gets an instance of <see cref="DefaultCollectionValidationStrategy"/>.

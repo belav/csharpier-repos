@@ -58,10 +58,8 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             Int16 value = TestLibrary.Generator.GetInt16();
-            object result = typeof(Vector128).GetMethod(
-                    nameof(Vector128.Create),
-                    new Type[] { typeof(Int16) }
-                )
+            object result = typeof(Vector128)
+                .GetMethod(nameof(Vector128.Create), new Type[] { typeof(Int16) })
                 .Invoke(null, new object[] { value });
 
             ValidateResult((Vector128<Int16>)(result), value);
@@ -104,13 +102,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128.Create(Int16): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128.Create(Int16): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

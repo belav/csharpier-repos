@@ -229,9 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     {
                         AssertEx.Equal(
                             expectedSymbolCandidates,
-                            semanticInfo.MemberGroup.Select(
-                                s => s.ToTestDisplayString(includeNonNullable: false)
-                            )
+                            semanticInfo.MemberGroup
+                                .Select(s => s.ToTestDisplayString(includeNonNullable: false))
                         );
                     }
                     else
@@ -275,9 +274,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     Assert.Equal(expectedReason, semanticInfo.CandidateReason);
                     AssertEx.Equal(
                         expectedSymbolCandidates,
-                        semanticInfo.CandidateSymbols.Select(
-                            s => s.ToTestDisplayString(includeNonNullable: false)
-                        )
+                        semanticInfo.CandidateSymbols
+                            .Select(s => s.ToTestDisplayString(includeNonNullable: false))
                     );
                 }
                 else

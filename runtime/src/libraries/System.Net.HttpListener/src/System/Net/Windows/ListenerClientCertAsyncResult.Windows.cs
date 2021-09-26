@@ -64,11 +64,8 @@ namespace System.Net
                 return;
             }
             _backingBuffer = new byte[checked((int)size)];
-            _pOverlapped = _boundHandle!.AllocateNativeOverlapped(
-                s_IOCallback,
-                state: this,
-                pinData: _backingBuffer
-            );
+            _pOverlapped = _boundHandle!
+                .AllocateNativeOverlapped(s_IOCallback, state: this, pinData: _backingBuffer);
             _memoryBlob =
                 (Interop.HttpApi.HTTP_SSL_CLIENT_CERT_INFO*)Marshal.UnsafeAddrOfPinnedArrayElement(
                     _backingBuffer,
@@ -102,15 +99,16 @@ namespace System.Net
                     asyncResult.Reset(numBytes + pClientCertInfo->CertEncodedSize);
 
                     uint bytesReceived = 0;
-                    errorCode = Interop.HttpApi.HttpReceiveClientCertificate(
-                        httpListenerRequest.HttpListenerContext.RequestQueueHandle,
-                        httpListenerRequest._connectionId,
-                        (uint)Interop.HttpApi.HTTP_FLAGS.NONE,
-                        asyncResult._memoryBlob,
-                        asyncResult._size,
-                        &bytesReceived,
-                        asyncResult._pOverlapped
-                    );
+                    errorCode = Interop.HttpApi
+                        .HttpReceiveClientCertificate(
+                            httpListenerRequest.HttpListenerContext.RequestQueueHandle,
+                            httpListenerRequest._connectionId,
+                            (uint)Interop.HttpApi.HTTP_FLAGS.NONE,
+                            asyncResult._memoryBlob,
+                            asyncResult._size,
+                            &bytesReceived,
+                            asyncResult._pOverlapped
+                        );
 
                     if (
                         errorCode == Interop.HttpApi.ERROR_IO_PENDING

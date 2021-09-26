@@ -575,11 +575,12 @@ namespace System.Net.Mail
             for (int i = 0; i < Headers.Count; i++)
             {
                 if (
-                    string.Equals(
-                        Headers.GetKey(i),
-                        headerName,
-                        StringComparison.InvariantCultureIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            Headers.GetKey(i),
+                            headerName,
+                            StringComparison.InvariantCultureIgnoreCase
+                        )
                 )
                 {
                     return true;

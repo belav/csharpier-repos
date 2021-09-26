@@ -25,9 +25,8 @@ namespace Microsoft.AspNetCore.SpaProxy
         public SpaProxyLaunchManager(ILogger<SpaProxyLaunchManager> logger)
         {
             _options = new SpaDevelopmentServerOptions();
-            var configuration = new ConfigurationBuilder().AddJsonFile(
-                    Path.Combine(AppContext.BaseDirectory, "spa.proxy.json")
-                )
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile(Path.Combine(AppContext.BaseDirectory, "spa.proxy.json"))
                 .Build();
             configuration.GetSection("SpaProxyServer").Bind(_options);
             _logger = logger;

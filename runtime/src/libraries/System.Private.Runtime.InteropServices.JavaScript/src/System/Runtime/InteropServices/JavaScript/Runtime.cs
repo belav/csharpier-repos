@@ -26,9 +26,8 @@ namespace System.Runtime.InteropServices.JavaScript
             new ConditionalWeakTable<Delegate, JSObject>();
 
         private const string TaskGetResultName = "get_Result";
-        private static readonly MethodInfo _taskGetResultMethodInfo = typeof(Task<>).GetMethod(
-            TaskGetResultName
-        )!;
+        private static readonly MethodInfo _taskGetResultMethodInfo = typeof(Task<>)
+            .GetMethod(TaskGetResultName)!;
 
         // <summary>
         // Execute the provided string in the JavaScript context

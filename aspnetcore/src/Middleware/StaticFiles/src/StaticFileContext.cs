@@ -135,7 +135,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                     last.Minute,
                     last.Second,
                     last.Offset
-                ).ToUniversalTime();
+                )
+                    .ToUniversalTime();
 
                 long etagHash = _lastModified.ToFileTime() ^ _length;
                 _etag = new EntityTagHeaderValue('\"' + Convert.ToString(etagHash, 16) + '\"');
@@ -382,12 +383,8 @@ namespace Microsoft.AspNetCore.StaticFiles
             ApplyResponseHeaders(StatusCodes.Status200OK);
             try
             {
-                await _context.Response.SendFileAsync(
-                    _fileInfo,
-                    0,
-                    _length,
-                    _context.RequestAborted
-                );
+                await _context.Response
+                    .SendFileAsync(_fileInfo, 0, _length, _context.RequestAborted);
             }
             catch (OperationCanceledException ex)
             {
@@ -426,12 +423,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                     ? _fileInfo.PhysicalPath
                     : SubPath;
                 _logger.SendingFileRange(_response.Headers[HeaderNames.ContentRange], logPath);
-                await _context.Response.SendFileAsync(
-                    _fileInfo,
-                    start,
-                    length,
-                    _context.RequestAborted
-                );
+                await _context.Response
+                    .SendFileAsync(_fileInfo, start, length, _context.RequestAborted);
             }
             catch (OperationCanceledException ex)
             {

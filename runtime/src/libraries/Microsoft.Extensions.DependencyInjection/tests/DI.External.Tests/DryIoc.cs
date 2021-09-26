@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             IServiceCollection serviceCollection
         )
         {
-            return new Container().WithDependencyInjectionAdapter(serviceCollection)
+            return new Container()
+                .WithDependencyInjectionAdapter(serviceCollection)
                 .BuildServiceProvider();
         }
     }

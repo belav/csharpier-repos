@@ -457,19 +457,15 @@ namespace XLinqTests
                 if (doc is XDocument)
                 {
                     ((XDocument)doc).Save(FilePathUtil.getStream(file0));
-                    ((XDocument)doc).Save(
-                        FilePathUtil.getStream(file1),
-                        SaveOptions.DisableFormatting
-                    );
+                    ((XDocument)doc)
+                        .Save(FilePathUtil.getStream(file1), SaveOptions.DisableFormatting);
                     ((XDocument)doc).Save(FilePathUtil.getStream(file2), SaveOptions.None);
                 }
                 else if (doc is XElement)
                 {
                     ((XElement)doc).Save(FilePathUtil.getStream(file0));
-                    ((XElement)doc).Save(
-                        FilePathUtil.getStream(file1),
-                        SaveOptions.DisableFormatting
-                    );
+                    ((XElement)doc)
+                        .Save(FilePathUtil.getStream(file1), SaveOptions.DisableFormatting);
                     ((XElement)doc).Save(FilePathUtil.getStream(file2), SaveOptions.None);
                 }
                 else

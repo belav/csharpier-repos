@@ -73,9 +73,8 @@ class B
                 methodName: "B.M",
                 expr: "F(new A.S())"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       15 (0xf)
   .maxstack  1
   .locals init (A.S V_0)
@@ -85,7 +84,7 @@ class B
   IL_0009:  call       ""A.S B.F<A.S>(A.S)""
   IL_000e:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -108,9 +107,8 @@ class B
                 methodName: "C.M",
                 expr: "F(new { P = 1 })"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       12 (0xc)
   .maxstack  1
   IL_0000:  ldc.i4.1
@@ -118,7 +116,7 @@ class B
   IL_0006:  call       ""<anonymous type: int P> C.F<<anonymous type: int P>>(<anonymous type: int P>)""
   IL_000b:  ret
 }"
-                );
+            );
         }
 
         /// <summary>
@@ -164,9 +162,8 @@ internal class C : B
                     var testData = new CompilationTestData();
                     context.CompileExpression("this.M(this.P)", out error, testData);
 
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -178,7 +175,7 @@ internal class C : B
   IL_000c:  ret
 }
 "
-                        );
+                    );
                 }
             );
         }
@@ -204,9 +201,8 @@ internal class C : B
                 methodName: "C.M",
                 expr: "F(new { A = 2 }, new { B = 3 })"
             ); // new and existing types
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       18 (0x12)
   .maxstack  2
   IL_0000:  ldc.i4.2
@@ -216,7 +212,7 @@ internal class C : B
   IL_000c:  call       ""object C.F<<anonymous type: int A>, <anonymous type: int B>>(<anonymous type: int A>, <anonymous type: int B>)""
   IL_0011:  ret
 }"
-                );
+            );
         }
     }
 }

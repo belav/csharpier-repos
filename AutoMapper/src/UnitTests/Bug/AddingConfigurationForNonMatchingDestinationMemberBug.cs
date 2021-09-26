@@ -29,9 +29,8 @@ namespace AutoMapper.UnitTests.Bug
             [Fact]
             public void Should_show_configuration_error()
             {
-                typeof(AutoMapperConfigurationException).ShouldBeThrownBy(
-                    Configuration.AssertConfigurationIsValid
-                );
+                typeof(AutoMapperConfigurationException)
+                    .ShouldBeThrownBy(Configuration.AssertConfigurationIsValid);
             }
         }
     }

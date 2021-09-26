@@ -67,9 +67,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             );
 
             var selectorModel = new SelectorModel();
-            selectorModel.ActionConstraints.Add(
-                new HttpMethodActionConstraint(new string[] { "GET" })
-            );
+            selectorModel.ActionConstraints
+                .Add(new HttpMethodActionConstraint(new string[] { "GET" }));
             action.Selectors.Add(selectorModel);
             action.ActionName = "Edit";
 

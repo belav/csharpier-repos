@@ -114,9 +114,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         {
             var parenthesized = expression.Parenthesize();
             var castExpression = SyntaxFactory.CastExpression(
-                    targetType.GenerateTypeSyntax(),
-                    parenthesized.WithoutTrivia()
-                )
+                targetType.GenerateTypeSyntax(),
+                parenthesized.WithoutTrivia()
+            )
                 .WithTriviaFrom(parenthesized);
 
             return castExpression.WithAdditionalAnnotations(Simplifier.Annotation);

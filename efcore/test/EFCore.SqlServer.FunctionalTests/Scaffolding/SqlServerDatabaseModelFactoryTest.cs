@@ -56,9 +56,8 @@ CREATE SEQUENCE db2.CustomFacetsSequence
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var defaultSequence = dbModel.Sequences.First(
-                        ds => ds.Name == "DefaultFacetsSequence"
-                    );
+                    var defaultSequence = dbModel.Sequences
+                        .First(ds => ds.Name == "DefaultFacetsSequence");
                     Assert.Equal("dbo", defaultSequence.Schema);
                     Assert.Equal("DefaultFacetsSequence", defaultSequence.Name);
                     Assert.Equal("bigint", defaultSequence.StoreType);
@@ -68,9 +67,8 @@ CREATE SEQUENCE db2.CustomFacetsSequence
                     Assert.Null(defaultSequence.MinValue);
                     Assert.Null(defaultSequence.MaxValue);
 
-                    var customSequence = dbModel.Sequences.First(
-                        ds => ds.Name == "CustomFacetsSequence"
-                    );
+                    var customSequence = dbModel.Sequences
+                        .First(ds => ds.Name == "CustomFacetsSequence");
                     Assert.Equal("db2", customSequence.Schema);
                     Assert.Equal("CustomFacetsSequence", customSequence.Name);
                     Assert.Equal("int", customSequence.StoreType);
@@ -282,9 +280,8 @@ DROP SEQUENCE [db2].[Sequence];"
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var defaultSchema = Fixture.TestStore.ExecuteScalar<string>(
-                        "SELECT SCHEMA_NAME()"
-                    );
+                    var defaultSchema = Fixture.TestStore
+                        .ExecuteScalar<string>("SELECT SCHEMA_NAME()");
                     Assert.Equal(defaultSchema, dbModel.DefaultSchema);
                 },
                 null
@@ -1665,7 +1662,8 @@ CREATE TABLE RowversionType (
 
                     Assert.Equal(
                         "rowversion",
-                        dbModel.Tables.Single(t => t.Name == "RowversionType")
+                        dbModel.Tables
+                            .Single(t => t.Name == "RowversionType")
                             .Columns.Single(c => c.Name == "rowversionColumn").StoreType
                     );
                 },
@@ -2688,8 +2686,8 @@ CREATE TABLE Blank (
                     );
                     Assert.Equal(
                         SqlServerResources.LogMissingSchema(
-                                new TestLogger<SqlServerLoggingDefinitions>()
-                            )
+                            new TestLogger<SqlServerLoggingDefinitions>()
+                        )
                             .GenerateMessage("MySchema"),
                         Message
                     );
@@ -2724,8 +2722,8 @@ CREATE TABLE Blank (
                     );
                     Assert.Equal(
                         SqlServerResources.LogMissingTable(
-                                new TestLogger<SqlServerLoggingDefinitions>()
-                            )
+                            new TestLogger<SqlServerLoggingDefinitions>()
+                        )
                             .GenerateMessage("MyTable"),
                         Message
                     );
@@ -2764,8 +2762,8 @@ CREATE TABLE DependentTable (
                     );
                     Assert.Equal(
                         SqlServerResources.LogPrincipalTableNotInSelectionSet(
-                                new TestLogger<SqlServerLoggingDefinitions>()
-                            )
+                            new TestLogger<SqlServerLoggingDefinitions>()
+                        )
                             .GenerateMessage("MYFK", "dbo.DependentTable", "dbo.PrincipalTable"),
                         Message
                     );
@@ -2796,8 +2794,8 @@ CREATE TABLE PrincipalTable (
                     Assert.Equal(LogLevel.Debug, level);
                     Assert.Equal(
                         SqlServerResources.LogReflexiveConstraintIgnored(
-                                new TestLogger<SqlServerLoggingDefinitions>()
-                            )
+                            new TestLogger<SqlServerLoggingDefinitions>()
+                        )
                             .GenerateMessage("MYFK", "dbo.PrincipalTable"),
                         message
                     );

@@ -885,17 +885,15 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(
                 new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C"),
                 (
-                    new JValue(new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C")).ToObject(
-                        typeof(Guid)
-                    )
+                    new JValue(new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C"))
+                        .ToObject(typeof(Guid))
                 )
             );
             Assert.AreEqual(
                 new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C"),
                 (
-                    new JValue(new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C")).ToObject(
-                        typeof(Guid?)
-                    )
+                    new JValue(new Guid("A34B2080-B5F0-488E-834D-45D44ECB9E5C"))
+                        .ToObject(typeof(Guid?))
                 )
             );
             Assert.AreEqual(

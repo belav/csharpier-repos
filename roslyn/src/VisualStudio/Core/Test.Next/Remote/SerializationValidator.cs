@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
         public async Task<Solution> GetSolutionAsync(SolutionAssetStorage.Scope scope)
         {
-            var (solutionInfo, _) = await new AssetProvider(this).CreateSolutionInfoAndOptionsAsync(
+            var (solutionInfo, _) = await new AssetProvider(this)
+                .CreateSolutionInfoAndOptionsAsync(
                     scope.SolutionInfo.SolutionChecksum,
                     CancellationToken.None
                 )
@@ -141,10 +142,10 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         internal async Task VerifyAssetAsync(SolutionStateChecksums solutionObject)
         {
             await VerifyAssetSerializationAsync<SolutionInfo.SolutionAttributes>(
-                    solutionObject.Attributes,
-                    WellKnownSynchronizationKind.SolutionAttributes,
-                    (v, k, s) => new SolutionAsset(s.CreateChecksum(v, CancellationToken.None), v)
-                )
+                solutionObject.Attributes,
+                WellKnownSynchronizationKind.SolutionAttributes,
+                (v, k, s) => new SolutionAsset(s.CreateChecksum(v, CancellationToken.None), v)
+            )
                 .ConfigureAwait(false);
 
             foreach (var projectChecksum in solutionObject.Projects)
@@ -158,10 +159,10 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         internal async Task VerifyAssetAsync(ProjectStateChecksums projectObject)
         {
             var info = await VerifyAssetSerializationAsync<ProjectInfo.ProjectAttributes>(
-                    projectObject.Info,
-                    WellKnownSynchronizationKind.ProjectAttributes,
-                    (v, k, s) => new SolutionAsset(s.CreateChecksum(v, CancellationToken.None), v)
-                )
+                projectObject.Info,
+                WellKnownSynchronizationKind.ProjectAttributes,
+                (v, k, s) => new SolutionAsset(s.CreateChecksum(v, CancellationToken.None), v)
+            )
                 .ConfigureAwait(false);
 
             await VerifyAssetSerializationAsync<CompilationOptions>(
@@ -228,10 +229,10 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         internal async Task VerifyAssetAsync(DocumentStateChecksums documentObject)
         {
             var info = await VerifyAssetSerializationAsync<DocumentInfo.DocumentAttributes>(
-                    documentObject.Info,
-                    WellKnownSynchronizationKind.DocumentAttributes,
-                    (v, k, s) => new SolutionAsset(s.CreateChecksum(v, CancellationToken.None), v)
-                )
+                documentObject.Info,
+                WellKnownSynchronizationKind.DocumentAttributes,
+                (v, k, s) => new SolutionAsset(s.CreateChecksum(v, CancellationToken.None), v)
+            )
                 .ConfigureAwait(false);
 
             await VerifyAssetSerializationAsync<SerializableSourceText>(
@@ -375,55 +376,55 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         )
         {
             await VerifyChecksumInServiceAsync(
-                    projectObject.Checksum,
-                    projectObject.GetWellKnownSynchronizationKind()
-                )
+                projectObject.Checksum,
+                projectObject.GetWellKnownSynchronizationKind()
+            )
                 .ConfigureAwait(false);
             await VerifyChecksumInServiceAsync(
-                    projectObject.Info,
-                    WellKnownSynchronizationKind.ProjectAttributes
-                )
+                projectObject.Info,
+                WellKnownSynchronizationKind.ProjectAttributes
+            )
                 .ConfigureAwait(false);
             await VerifyChecksumInServiceAsync(
-                    projectObject.CompilationOptions,
-                    WellKnownSynchronizationKind.CompilationOptions
-                )
+                projectObject.CompilationOptions,
+                WellKnownSynchronizationKind.CompilationOptions
+            )
                 .ConfigureAwait(false);
             await VerifyChecksumInServiceAsync(
-                    projectObject.ParseOptions,
-                    WellKnownSynchronizationKind.ParseOptions
-                )
+                projectObject.ParseOptions,
+                WellKnownSynchronizationKind.ParseOptions
+            )
                 .ConfigureAwait(false);
 
             await VerifyCollectionInService(
-                    ToDocumentObjects(projectObject.Documents),
-                    expectedDocumentCount
-                )
+                ToDocumentObjects(projectObject.Documents),
+                expectedDocumentCount
+            )
                 .ConfigureAwait(false);
 
             await VerifyCollectionInService(
-                    projectObject.ProjectReferences,
-                    expectedProjectReferenceCount,
-                    WellKnownSynchronizationKind.ProjectReference
-                )
+                projectObject.ProjectReferences,
+                expectedProjectReferenceCount,
+                WellKnownSynchronizationKind.ProjectReference
+            )
                 .ConfigureAwait(false);
             await VerifyCollectionInService(
-                    projectObject.MetadataReferences,
-                    expectedMetadataReferenceCount,
-                    WellKnownSynchronizationKind.MetadataReference
-                )
+                projectObject.MetadataReferences,
+                expectedMetadataReferenceCount,
+                WellKnownSynchronizationKind.MetadataReference
+            )
                 .ConfigureAwait(false);
             await VerifyCollectionInService(
-                    projectObject.AnalyzerReferences,
-                    expectedAnalyzerReferenceCount,
-                    WellKnownSynchronizationKind.AnalyzerReference
-                )
+                projectObject.AnalyzerReferences,
+                expectedAnalyzerReferenceCount,
+                WellKnownSynchronizationKind.AnalyzerReference
+            )
                 .ConfigureAwait(false);
 
             await VerifyCollectionInService(
-                    ToDocumentObjects(projectObject.AdditionalDocuments),
-                    expectedAdditionalDocumentCount
-                )
+                ToDocumentObjects(projectObject.AdditionalDocuments),
+                expectedAdditionalDocumentCount
+            )
                 .ConfigureAwait(false);
         }
 
@@ -434,9 +435,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         )
         {
             await VerifyChecksumInServiceAsync(
-                    checksums.Checksum,
-                    checksums.GetWellKnownSynchronizationKind()
-                )
+                checksums.Checksum,
+                checksums.GetWellKnownSynchronizationKind()
+            )
                 .ConfigureAwait(false);
             Assert.Equal(checksums.Count, expectedCount);
 
@@ -464,19 +465,19 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         internal async Task VerifySnapshotInServiceAsync(DocumentStateChecksums documentObject)
         {
             await VerifyChecksumInServiceAsync(
-                    documentObject.Checksum,
-                    documentObject.GetWellKnownSynchronizationKind()
-                )
+                documentObject.Checksum,
+                documentObject.GetWellKnownSynchronizationKind()
+            )
                 .ConfigureAwait(false);
             await VerifyChecksumInServiceAsync(
-                    documentObject.Info,
-                    WellKnownSynchronizationKind.DocumentAttributes
-                )
+                documentObject.Info,
+                WellKnownSynchronizationKind.DocumentAttributes
+            )
                 .ConfigureAwait(false);
             await VerifyChecksumInServiceAsync(
-                    documentObject.Text,
-                    WellKnownSynchronizationKind.SerializableSourceText
-                )
+                documentObject.Text,
+                WellKnownSynchronizationKind.SerializableSourceText
+            )
                 .ConfigureAwait(false);
         }
 

@@ -36,7 +36,8 @@ namespace System.CommandLine.DragonFruit
             else
             {
                 foreach (
-                    var type in assembly.DefinedTypes.Where(t => t.IsClass)
+                    var type in assembly.DefinedTypes
+                        .Where(t => t.IsClass)
                         .Where(t => !t.IsDefined(typeof(CompilerGeneratedAttribute)))
                 )
                 {
@@ -72,8 +73,8 @@ namespace System.CommandLine.DragonFruit
         {
             foreach (
                 var method in type.GetMethods(
-                        BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
-                    )
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+                )
                     .Where(m => string.Equals("Main", m.Name, StringComparison.OrdinalIgnoreCase))
             )
             {

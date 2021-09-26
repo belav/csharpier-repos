@@ -399,10 +399,8 @@ namespace System.Web.WebPages.Test
         {
             internal object GetBuildManager()
             {
-                return typeof(BuildManager).GetField(
-                        "_theBuildManager",
-                        BindingFlags.Static | BindingFlags.NonPublic
-                    )
+                return typeof(BuildManager)
+                    .GetField("_theBuildManager", BindingFlags.Static | BindingFlags.NonPublic)
                     .GetValue(null);
             }
         }
@@ -420,7 +418,8 @@ namespace System.Web.WebPages.Test
                         typeof(BuildManager).Assembly.GetType("System.Web.Util.StringSet"),
                         true
                     );
-                    typeof(BuildManager).GetField(
+                    typeof(BuildManager)
+                        .GetField(
                             "_forbiddenTopLevelDirectories",
                             BindingFlags.Instance | BindingFlags.NonPublic
                         )

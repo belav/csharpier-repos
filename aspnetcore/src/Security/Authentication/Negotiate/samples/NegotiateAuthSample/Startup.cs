@@ -22,13 +22,12 @@ namespace NegotiateAuthSample
                     options.FallbackPolicy = options.DefaultPolicy;
                 }
             );
-            services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-                .AddNegotiate(
-                    options =>
+            services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate(
+                options =>
+                {
+                    if (OperatingSystem.IsLinux())
                     {
-                        if (OperatingSystem.IsLinux())
-                        {
-                            /*
+                        /*
                         options.EnableLdap("DOMAIN.net");
 
                         options.EnableLdap(settings =>
@@ -41,18 +40,18 @@ namespace NegotiateAuthSample
                             settings.IgnoreNestedGroups = true;
                         });
                         */
-                        }
-
-                        options.Events = new NegotiateEvents()
-                        {
-                            OnAuthenticationFailed = context =>
-                            {
-                                // context.SkipHandler();
-                                return Task.CompletedTask;
-                            }
-                        };
                     }
-                );
+
+                    options.Events = new NegotiateEvents()
+                    {
+                        OnAuthenticationFailed = context =>
+                        {
+                            // context.SkipHandler();
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -66,9 +65,10 @@ namespace NegotiateAuthSample
         public async Task HandleRequest(HttpContext context)
         {
             var user = context.User.Identity;
-            await context.Response.WriteAsync(
-                $"Authenticated? {user.IsAuthenticated}, Name: {user.Name}, Protocol: {context.Request.Protocol}"
-            );
+            await context.Response
+                .WriteAsync(
+                    $"Authenticated? {user.IsAuthenticated}, Name: {user.Name}, Protocol: {context.Request.Protocol}"
+                );
         }
     }
 }

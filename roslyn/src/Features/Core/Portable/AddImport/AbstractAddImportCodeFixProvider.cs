@@ -75,15 +75,15 @@ namespace Microsoft.CodeAnalysis.AddImport
                     : ImmutableArray<PackageSource>.Empty;
 
             var fixesForDiagnostic = await addImportService.GetFixesForDiagnosticsAsync(
-                    document,
-                    span,
-                    diagnostics,
-                    MaxResults,
-                    symbolSearchService,
-                    searchReferenceAssemblies,
-                    packageSources,
-                    cancellationToken
-                )
+                document,
+                span,
+                diagnostics,
+                MaxResults,
+                symbolSearchService,
+                searchReferenceAssemblies,
+                packageSources,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             foreach (var (diagnostic, fixes) in fixesForDiagnostic)

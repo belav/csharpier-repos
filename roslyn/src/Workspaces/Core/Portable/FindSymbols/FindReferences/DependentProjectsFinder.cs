@@ -38,10 +38,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             else
             {
                 var dependentProjects = await GetDependentProjectsWorkerAsync(
-                        solution,
-                        symbol,
-                        cancellationToken
-                    )
+                    solution,
+                    symbol,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return projects != null
                   ? dependentProjects.WhereAsArray(projects.Contains)
@@ -78,11 +78,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // 1) Compute all the dependent projects (submission + non-submission) and their InternalsVisibleTo semantics to the definition project.
             var symbolVisibility = symbol.GetResultantVisibility();
             var dependentProjects = await ComputeDependentProjectsAsync(
-                    solution,
-                    symbolOrigination,
-                    symbolVisibility,
-                    cancellationToken
-                )
+                solution,
+                symbolOrigination,
+                symbolVisibility,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // 2) Filter the above computed dependent projects based on symbol visibility.
@@ -141,11 +141,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // submission projects are special here. The fields generated inside the Script object is private, but
             // further submissions can bind to them.
             await AddSubmissionDependentProjectsAsync(
-                    solution,
-                    symbolOrigination.sourceProject,
-                    dependentProjects,
-                    cancellationToken
-                )
+                solution,
+                symbolOrigination.sourceProject,
+                dependentProjects,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return dependentProjects.ToImmutableArray();
@@ -317,9 +317,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             // If our symbol was from a project, then just check if this current project has a direct reference to it.
             if (symbolOrigination.sourceProject != null)
-                return project.ProjectReferences.Any(
-                    p => p.ProjectId == symbolOrigination.sourceProject.Id
-                );
+                return project.ProjectReferences
+                    .Any(p => p.ProjectId == symbolOrigination.sourceProject.Id);
 
             // Otherwise, if the symbol is from metadata, see if the project's compilation references that metadata assembly.
             return HasReferenceToAssembly(
@@ -341,10 +340,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 // WORKAROUND:
                 // perf check metadata reference using newly created empty compilation with only metadata references.
-                compilation = project.LanguageServices.CompilationFactory!.CreateCompilation(
-                    project.AssemblyName,
-                    project.CompilationOptions!
-                );
+                compilation = project.LanguageServices.CompilationFactory!
+                    .CreateCompilation(project.AssemblyName, project.CompilationOptions!);
 
                 compilation = compilation.AddReferences(project.MetadataReferences);
             }

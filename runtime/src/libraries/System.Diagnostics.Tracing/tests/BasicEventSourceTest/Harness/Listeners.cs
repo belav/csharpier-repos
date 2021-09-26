@@ -75,12 +75,13 @@ namespace BasicEventSourceTests
 
         public override string ToString()
         {
-            return string.Format(
-                "<Options Keywords='{0}' Level'{1}' ArgsCount='{2}'",
-                ((ulong)Keywords).ToString("x"),
-                Level,
-                Args.Count
-            );
+            return string
+                .Format(
+                    "<Options Keywords='{0}' Level'{1}' ArgsCount='{2}'",
+                    ((ulong)Keywords).ToString("x"),
+                    Level,
+                    Args.Count
+                );
         }
     }
 

@@ -68,11 +68,12 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
             {
                 var candidateProject = project.Solution.GetProject(candidateProjectId);
                 if (
-                    string.Equals(
-                        missingAssemblyIdentity.Name,
-                        candidateProject.AssemblyName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            missingAssemblyIdentity.Name,
+                            candidateProject.AssemblyName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     // The name matches, so let's see if the full identities are equal.
@@ -83,10 +84,11 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
                         // It matches, so just add a reference to this
                         return new AddMissingReferenceCodeAction(
                             project,
-                            string.Format(
-                                FeaturesResources.Add_project_reference_to_0,
-                                candidateProject.Name
-                            ),
+                            string
+                                .Format(
+                                    FeaturesResources.Add_project_reference_to_0,
+                                    candidateProject.Name
+                                ),
                             new ProjectReference(candidateProjectId),
                             missingAssemblyIdentity
                         );
@@ -95,10 +97,11 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
             }
 
             // No matching project, so metadata reference
-            var description = string.Format(
-                FeaturesResources.Add_reference_to_0,
-                missingAssemblyIdentity.GetDisplayName()
-            );
+            var description = string
+                .Format(
+                    FeaturesResources.Add_reference_to_0,
+                    missingAssemblyIdentity.GetDisplayName()
+                );
             return new AddMissingReferenceCodeAction(
                 project,
                 description,
@@ -126,8 +129,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
             else
             {
                 // We didn't have any project, so we need to try adding a metadata reference
-                var factoryService =
-                    _project.Solution.Workspace.Services.GetRequiredService<IAddMetadataReferenceCodeActionOperationFactoryWorkspaceService>();
+                var factoryService = _project.Solution.Workspace.Services
+                    .GetRequiredService<IAddMetadataReferenceCodeActionOperationFactoryWorkspaceService>();
                 var operation = factoryService.CreateAddMetadataReferenceOperation(
                     _project.Id,
                     _missingAssemblyIdentity

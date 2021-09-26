@@ -62,12 +62,10 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
 
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var memberAccessNodes = diagnostics.Select(
-                    d =>
-                        (TMemberAccessExpressionSyntax)d.AdditionalLocations[0].FindNode(
-                            getInnermostNodeForTie: true,
-                            cancellationToken
-                        )
-                )
+                d =>
+                    (TMemberAccessExpressionSyntax)d.AdditionalLocations[0]
+                        .FindNode(getInnermostNodeForTie: true, cancellationToken)
+            )
                 .ToSet();
 
             var newRoot = Rewrite(root, memberAccessNodes);

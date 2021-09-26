@@ -42,19 +42,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (document != null)
             {
                 var oldSolution = document.Project.Solution;
-                var renameService =
-                    document.Project.LanguageServices.GetRequiredService<IEditorInlineRenameService>();
+                var renameService = document.Project.LanguageServices
+                    .GetRequiredService<IEditorInlineRenameService>();
                 var position = await document.GetPositionFromLinePositionAsync(
-                        ProtocolConversions.PositionToLinePosition(request.Position),
-                        cancellationToken
-                    )
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var renameInfo = await renameService.GetRenameInfoAsync(
-                        document,
-                        position,
-                        cancellationToken
-                    )
+                    document,
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (!renameInfo.CanRename)
                 {
@@ -62,15 +62,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 }
 
                 var renameLocationSet = await renameInfo.FindRenameLocationsAsync(
-                        oldSolution.Workspace.Options,
-                        cancellationToken
-                    )
+                    oldSolution.Workspace.Options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var renameReplacementInfo = await renameLocationSet.GetReplacementsAsync(
-                        request.NewName,
-                        oldSolution.Workspace.Options,
-                        cancellationToken
-                    )
+                    request.NewName,
+                    oldSolution.Workspace.Options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var renamedSolution = renameReplacementInfo.NewSolution;
@@ -79,10 +79,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // Linked files can correspond to multiple roslyn documents each with changes.  Merge the changes in the linked files so that all linked documents have the same text.
                 // Then we can just take the text changes from the first document to avoid returning duplicate edits.
                 renamedSolution = await renamedSolution.WithMergedLinkedFileChangesAsync(
-                        oldSolution,
-                        solutionChanges,
-                        cancellationToken: cancellationToken
-                    )
+                    oldSolution,
+                    solutionChanges,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 solutionChanges = renamedSolution.GetChanges(oldSolution);
                 var changedDocuments = solutionChanges.GetProjectChanges()
@@ -93,17 +93,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     )
                     .Select(group => group.First());
 
-                var textDiffService =
-                    renamedSolution.Workspace.Services.GetRequiredService<IDocumentTextDifferencingService>();
+                var textDiffService = renamedSolution.Workspace.Services
+                    .GetRequiredService<IDocumentTextDifferencingService>();
 
                 var documentEdits =
                     await ProtocolConversions.ChangedDocumentsToTextDocumentEditsAsync(
-                            changedDocuments,
-                            renamedSolution.GetRequiredDocument,
-                            oldSolution.GetRequiredDocument,
-                            textDiffService,
-                            cancellationToken
-                        )
+                        changedDocuments,
+                        renamedSolution.GetRequiredDocument,
+                        oldSolution.GetRequiredDocument,
+                        textDiffService,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 return new WorkspaceEdit { DocumentChanges = documentEdits };

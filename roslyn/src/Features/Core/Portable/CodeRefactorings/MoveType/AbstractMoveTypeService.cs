@@ -245,8 +245,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             SyntaxNode root
         ) =>
             root.DescendantNodes(
-                    n => n is TCompilationUnitSyntax || n is TNamespaceDeclarationSyntax
-                )
+                n => n is TCompilationUnitSyntax || n is TNamespaceDeclarationSyntax
+            )
                 .OfType<TTypeDeclarationSyntax>();
 
         private static bool AnyTopLevelTypeMatchesDocumentName(
@@ -257,24 +257,20 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             var root = state.SemanticDocument.Root;
             var semanticModel = state.SemanticDocument.SemanticModel;
 
-            return TopLevelTypeDeclarations(root)
-                .Any(
-                    typeDeclaration =>
-                    {
-                        var typeName =
-                            semanticModel.GetDeclaredSymbol(
-                                typeDeclaration,
-                                cancellationToken
-                            ).Name;
-                        return TypeMatchesDocumentName(
-                            typeDeclaration,
-                            typeName,
-                            state.DocumentNameWithoutExtension,
-                            semanticModel,
-                            cancellationToken
-                        );
-                    }
-                );
+            return TopLevelTypeDeclarations(root).Any(
+                typeDeclaration =>
+                {
+                    var typeName =
+                        semanticModel.GetDeclaredSymbol(typeDeclaration, cancellationToken).Name;
+                    return TypeMatchesDocumentName(
+                        typeDeclaration,
+                        typeName,
+                        state.DocumentNameWithoutExtension,
+                        semanticModel,
+                        cancellationToken
+                    );
+                }
+            );
         }
 
         /// <summary>

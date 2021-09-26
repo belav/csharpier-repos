@@ -83,10 +83,8 @@ namespace GitHub_23438
 
         private static bool TestSseX64ConvertScalarToVector128Single()
         {
-            Vector128<float> val = Sse.X64.ConvertScalarToVector128Single(
-                Vector128<float>.Zero,
-                long.MaxValue
-            );
+            Vector128<float> val = Sse.X64
+                .ConvertScalarToVector128Single(Vector128<float>.Zero, long.MaxValue);
             float result = val.GetElement(0);
             return AreEqual(0x5F000000, BitConverter.SingleToInt32Bits(result));
         }
@@ -107,10 +105,8 @@ namespace GitHub_23438
 
         private static bool TestSse2X64ConvertScalarToVector128Double()
         {
-            Vector128<double> val = Sse2.X64.ConvertScalarToVector128Double(
-                Vector128<double>.Zero,
-                long.MaxValue
-            );
+            Vector128<double> val = Sse2.X64
+                .ConvertScalarToVector128Double(Vector128<double>.Zero, long.MaxValue);
             double result = val.GetElement(0);
             return AreEqual(0x43E0000000000000, BitConverter.DoubleToInt64Bits(result));
         }

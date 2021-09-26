@@ -39,9 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxTree tree,
             params (string, ReportDiagnostic)[] options
         ) =>
-            TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(tree, options)
-            );
+            TestOptions.DebugDll
+                .WithSyntaxTreeOptionsProvider(new TestSyntaxTreeOptionsProvider(tree, options));
 
         [Fact]
         public void TreeDiagnosticOptionsDoNotAffectTreeDiagnostics()
@@ -57,12 +56,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 cancellationToken: default
             );
 
-            tree.GetDiagnostics()
-                .Verify(
-                    // (1,22): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-                    // class C { long _f = 0l;}
-                    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 22)
-                );
+            tree.GetDiagnostics().Verify(
+                // (1,22): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                // class C { long _f = 0l;}
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 22)
+            );
 #pragma warning restore CS0618
         }
 
@@ -70,9 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void PerTreeVsGlobalSuppress()
         {
             var tree = SyntaxFactory.ParseSyntaxTree("class C { long _f = 0l;}");
-            var options = TestOptions.DebugDll.WithGeneralDiagnosticOption(
-                ReportDiagnostic.Suppress
-            );
+            var options = TestOptions.DebugDll
+                .WithGeneralDiagnosticOption(ReportDiagnostic.Suppress);
             var comp = CreateCompilation(tree, options: options);
             comp.VerifyDiagnostics();
 
@@ -130,12 +127,11 @@ long _f = 0l;
 #pragma warning restore CS0078
 }"
             );
-            tree.GetDiagnostics()
-                .Verify(
-                    // (4,12): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-                    // long _f = 0l;
-                    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(4, 12)
-                );
+            tree.GetDiagnostics().Verify(
+                // (4,12): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                // long _f = 0l;
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(4, 12)
+            );
 
             var comp = CreateCompilation(tree);
             comp.VerifyDiagnostics(
@@ -198,12 +194,13 @@ long _f = 0l;
         {
             var tree = SyntaxFactory.ParseSyntaxTree(@" class C { long _f = 0l; }");
             var newTree = SyntaxFactory.ParseSyntaxTree(@" class D { long _f = 0l; }");
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    (tree, new[] { ("CS0078", ReportDiagnostic.Suppress) }),
-                    (newTree, new[] { ("CS0078", ReportDiagnostic.Error) })
-                )
-            );
+            var options = TestOptions.DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        (tree, new[] { ("CS0078", ReportDiagnostic.Suppress) }),
+                        (newTree, new[] { ("CS0078", ReportDiagnostic.Error) })
+                    )
+                );
 
             var comp = CreateCompilation(new[] { tree, newTree }, options: options);
             comp.VerifyDiagnostics(
@@ -231,52 +228,51 @@ long _f = 0l;
             var tree = SyntaxFactory.ParseSyntaxTree(@" class C { long _f = 0l; }");
 
             // Default options have case insensitivity
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    (tree, new[] { ("cs0078", ReportDiagnostic.Suppress) })
-                )
-            );
-
-            CreateCompilation(tree, options: options)
-                .VerifyDiagnostics(
-                    // (1,17): warning CS0414: The field 'C._f' is assigned but its value is never used
-                    //  class C { long _f = 0l; }
-                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "_f")
-                        .WithArguments("C._f")
-                        .WithLocation(1, 17)
+            var options = TestOptions.DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        (tree, new[] { ("cs0078", ReportDiagnostic.Suppress) })
+                    )
                 );
 
-            options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    StringComparer.Ordinal,
-                    globalOption: default,
-                    (tree, new[] { ("cs0078", ReportDiagnostic.Suppress) })
-                )
+            CreateCompilation(tree, options: options).VerifyDiagnostics(
+                // (1,17): warning CS0414: The field 'C._f' is assigned but its value is never used
+                //  class C { long _f = 0l; }
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "_f")
+                    .WithArguments("C._f")
+                    .WithLocation(1, 17)
             );
 
-            CreateCompilation(tree, options: options)
-                .VerifyDiagnostics(
-                    // (1,23): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-                    //  class C { long _f = 0l; }
-                    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 23),
-                    // (1,17): warning CS0414: The field 'C._f' is assigned but its value is never used
-                    //  class C { long _f = 0l; }
-                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "_f")
-                        .WithArguments("C._f")
-                        .WithLocation(1, 17)
+            options = TestOptions.DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        StringComparer.Ordinal,
+                        globalOption: default,
+                        (tree, new[] { ("cs0078", ReportDiagnostic.Suppress) })
+                    )
                 );
+
+            CreateCompilation(tree, options: options).VerifyDiagnostics(
+                // (1,23): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                //  class C { long _f = 0l; }
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 23),
+                // (1,17): warning CS0414: The field 'C._f' is assigned but its value is never used
+                //  class C { long _f = 0l; }
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "_f")
+                    .WithArguments("C._f")
+                    .WithLocation(1, 17)
+            );
         }
 
         [Fact]
         public void WarningLevelRespectedForLexerWarnings()
         {
             var source = @"public class C { public long Field = 0l; }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (1,39): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-                    // public class C { public long Field = 0l; }
-                    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 39)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (1,39): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                // public class C { public long Field = 0l; }
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 39)
+            );
             CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(0))
                 .VerifyDiagnostics();
         }
@@ -303,9 +299,9 @@ long _f = 0l;
         public void PublicSignWithEmptyKeyPath()
         {
             CreateCompilation(
-                    "",
-                    options: TestOptions.ReleaseDll.WithPublicSign(true).WithCryptoKeyFile("")
-                )
+                "",
+                options: TestOptions.ReleaseDll.WithPublicSign(true).WithCryptoKeyFile("")
+            )
                 .VerifyDiagnostics(
                     // error CS8102: Public signing was specified and requires a public key, but no public key was specified.
                     Diagnostic(ErrorCode.ERR_PublicSignButNoKey).WithLocation(1, 1)
@@ -317,9 +313,9 @@ long _f = 0l;
         public void PublicSignWithEmptyKeyPath2()
         {
             CreateCompilation(
-                    "",
-                    options: TestOptions.ReleaseDll.WithPublicSign(true).WithCryptoKeyFile("\"\"")
-                )
+                "",
+                options: TestOptions.ReleaseDll.WithPublicSign(true).WithCryptoKeyFile("\"\"")
+            )
                 .VerifyDiagnostics(
                     // error CS8106: Option 'CryptoKeyFile' must be an absolute path.
                     Diagnostic(ErrorCode.ERR_OptionMustBeAbsolutePath)
@@ -336,25 +332,22 @@ long _f = 0l;
         {
             // report an error, rather then silently ignoring the directory
             // (see cli partition II 22.30)
-            CSharpCompilation.Create(@"C:/goo/Test.exe")
-                .VerifyEmitDiagnostics(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
-                    // error CS8203: Invalid assembly name: Name contains invalid characters.
-                    Diagnostic(ErrorCode.ERR_BadAssemblyName)
-                        .WithArguments("Name contains invalid characters.")
-                        .WithLocation(1, 1),
-                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                    Diagnostic(ErrorCode.ERR_NoEntryPoint).WithLocation(1, 1)
-                );
-            CSharpCompilation.Create(@"C:\goo\Test.exe")
-                .GetDeclarationDiagnostics()
-                .Verify(
-                    // error CS8203: Invalid assembly name: Name contains invalid characters.
-                    Diagnostic(ErrorCode.ERR_BadAssemblyName)
-                        .WithArguments("Name contains invalid characters.")
-                        .WithLocation(1, 1)
-                );
+            CSharpCompilation.Create(@"C:/goo/Test.exe").VerifyEmitDiagnostics(
+                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
+                // error CS8203: Invalid assembly name: Name contains invalid characters.
+                Diagnostic(ErrorCode.ERR_BadAssemblyName)
+                    .WithArguments("Name contains invalid characters.")
+                    .WithLocation(1, 1),
+                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                Diagnostic(ErrorCode.ERR_NoEntryPoint).WithLocation(1, 1)
+            );
+            CSharpCompilation.Create(@"C:\goo\Test.exe").GetDeclarationDiagnostics().Verify(
+                // error CS8203: Invalid assembly name: Name contains invalid characters.
+                Diagnostic(ErrorCode.ERR_BadAssemblyName)
+                    .WithArguments("Name contains invalid characters.")
+                    .WithLocation(1, 1)
+            );
             var compilationOptions = TestOptions.DebugDll.WithWarningLevel(0);
             CSharpCompilation.Create(@"\goo/Test.exe", options: compilationOptions)
                 .VerifyEmitDiagnostics(
@@ -377,41 +370,36 @@ long _f = 0l;
                         .WithArguments("Name contains invalid characters.")
                         .WithLocation(1, 1)
                 );
-            CSharpCompilation.Create(@"   \t  ", options: compilationOptions)
-                .VerifyEmitDiagnostics(
-                    // error CS8203: Invalid assembly name: Name cannot start with whitespace.
-                    Diagnostic(ErrorCode.ERR_BadAssemblyName)
-                        .WithArguments("Name cannot start with whitespace.")
-                        .WithLocation(1, 1)
-                );
-            CSharpCompilation.Create(@"\uD800", options: compilationOptions)
-                .VerifyEmitDiagnostics(
-                    // error CS8203: Invalid assembly name: Name contains invalid characters.
-                    Diagnostic(ErrorCode.ERR_BadAssemblyName)
-                        .WithArguments("Name contains invalid characters.")
-                        .WithLocation(1, 1)
-                );
-            CSharpCompilation.Create(@"", options: compilationOptions)
-                .VerifyEmitDiagnostics(
-                    // error CS8203: Invalid assembly name: Name cannot be empty.
-                    Diagnostic(ErrorCode.ERR_BadAssemblyName)
-                        .WithArguments("Name cannot be empty.")
-                        .WithLocation(1, 1)
-                );
-            CSharpCompilation.Create(@" a", options: compilationOptions)
-                .VerifyEmitDiagnostics(
-                    // error CS8203: Invalid assembly name: Name cannot start with whitespace.
-                    Diagnostic(ErrorCode.ERR_BadAssemblyName)
-                        .WithArguments("Name cannot start with whitespace.")
-                        .WithLocation(1, 1)
-                );
-            CSharpCompilation.Create(@"\u2000a", options: compilationOptions)
-                .VerifyEmitDiagnostics( // U+20700 is whitespace
-                    // error CS8203: Invalid assembly name: Name contains invalid characters.
-                    Diagnostic(ErrorCode.ERR_BadAssemblyName)
-                        .WithArguments("Name contains invalid characters.")
-                        .WithLocation(1, 1)
-                );
+            CSharpCompilation.Create(@"   \t  ", options: compilationOptions).VerifyEmitDiagnostics(
+                // error CS8203: Invalid assembly name: Name cannot start with whitespace.
+                Diagnostic(ErrorCode.ERR_BadAssemblyName)
+                    .WithArguments("Name cannot start with whitespace.")
+                    .WithLocation(1, 1)
+            );
+            CSharpCompilation.Create(@"\uD800", options: compilationOptions).VerifyEmitDiagnostics(
+                // error CS8203: Invalid assembly name: Name contains invalid characters.
+                Diagnostic(ErrorCode.ERR_BadAssemblyName)
+                    .WithArguments("Name contains invalid characters.")
+                    .WithLocation(1, 1)
+            );
+            CSharpCompilation.Create(@"", options: compilationOptions).VerifyEmitDiagnostics(
+                // error CS8203: Invalid assembly name: Name cannot be empty.
+                Diagnostic(ErrorCode.ERR_BadAssemblyName)
+                    .WithArguments("Name cannot be empty.")
+                    .WithLocation(1, 1)
+            );
+            CSharpCompilation.Create(@" a", options: compilationOptions).VerifyEmitDiagnostics(
+                // error CS8203: Invalid assembly name: Name cannot start with whitespace.
+                Diagnostic(ErrorCode.ERR_BadAssemblyName)
+                    .WithArguments("Name cannot start with whitespace.")
+                    .WithLocation(1, 1)
+            );
+            CSharpCompilation.Create(@"\u2000a", options: compilationOptions).VerifyEmitDiagnostics( // U+20700 is whitespace
+                // error CS8203: Invalid assembly name: Name contains invalid characters.
+                Diagnostic(ErrorCode.ERR_BadAssemblyName)
+                    .WithArguments("Name contains invalid characters.")
+                    .WithLocation(1, 1)
+            );
             CSharpCompilation.Create("..\\..\\RelativePath", options: compilationOptions)
                 .VerifyEmitDiagnostics(
                     // error CS8203: Invalid assembly name: Name contains invalid characters.
@@ -583,9 +571,8 @@ namespace A.B {
                     comp.Emit(
                         peStream: new MemoryStream(),
                         pdbStream: new MemoryStream(),
-                        options: EmitOptions.Default.WithDebugInformationFormat(
-                            DebugInformationFormat.Embedded
-                        )
+                        options: EmitOptions.Default
+                            .WithDebugInformationFormat(DebugInformationFormat.Embedded)
                     )
             );
 
@@ -595,9 +582,8 @@ namespace A.B {
                     comp.Emit(
                         peStream: new MemoryStream(),
                         pdbStream: new MemoryStream(),
-                        options: EmitOptions.Default.WithDebugInformationFormat(
-                            DebugInformationFormat.PortablePdb
-                        ),
+                        options: EmitOptions.Default
+                            .WithDebugInformationFormat(DebugInformationFormat.PortablePdb),
                         sourceLinkStream: new TestStream(
                             canRead: false,
                             canWrite: true,
@@ -623,9 +609,8 @@ namespace A.B {
                     comp.Emit(
                         peStream: new MemoryStream(),
                         pdbStream: null,
-                        options: EmitOptions.Default.WithDebugInformationFormat(
-                            DebugInformationFormat.PortablePdb
-                        ),
+                        options: EmitOptions.Default
+                            .WithDebugInformationFormat(DebugInformationFormat.PortablePdb),
                         embeddedTexts: new[] { EmbeddedText.FromStream("_", new MemoryStream()) }
                     )
             );
@@ -806,15 +791,16 @@ namespace A.B {
 
             var c = CreateCompilationWithMscorlib45(
                 new[] { t1, t2 },
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new TestMetadataReferenceResolver(
-                        files: new Dictionary<string, PortableExecutableReference>()
-                        {
-                            { @"a.dll", Net451.MicrosoftCSharp },
-                            { @"b.dll", Net451.MicrosoftVisualBasic },
-                        }
+                options: TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(
+                        new TestMetadataReferenceResolver(
+                            files: new Dictionary<string, PortableExecutableReference>()
+                            {
+                                { @"a.dll", Net451.MicrosoftCSharp },
+                                { @"b.dll", Net451.MicrosoftVisualBasic },
+                            }
+                        )
                     )
-                )
             );
 
             c.VerifyDiagnostics();
@@ -991,9 +977,9 @@ namespace A.B {
                 // (1,1): error CS8059: Feature 'top-level statements' is not available in C# 6. Please use language version 9.0 or greater.
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                        "extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}"
-                    )
+                    ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                    "extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}"
+                )
                     .WithArguments("top-level statements", "9.0")
                     .WithLocation(1, 1),
                 // (1,1): error CS8059: Feature 'extern local functions' is not available in C# 6. Please use language version 9.0 or greater.
@@ -2061,7 +2047,8 @@ class A
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
 
-            var mainMethod = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var mainMethod = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("A")
                 .GetMember<MethodSymbol>("Main");
 
             Assert.Equal(mainMethod, compilation.GetEntryPoint(default(CancellationToken)));
@@ -2194,19 +2181,19 @@ class A
             }
 
             var firstCompilation = CSharpCompilation.CreateScriptCompilation(
-                    "submission-assembly-1",
-                    references: new[] { MinAsyncCorlibRef },
-                    syntaxTree: Parse("true", options: TestOptions.Script)
-                )
+                "submission-assembly-1",
+                references: new[] { MinAsyncCorlibRef },
+                syntaxTree: Parse("true", options: TestOptions.Script)
+            )
                 .VerifyDiagnostics();
 
             AssertCompilationCorlib(firstCompilation);
 
             var secondCompilation = CSharpCompilation.CreateScriptCompilation(
-                    "submission-assembly-2",
-                    previousScriptCompilation: firstCompilation,
-                    syntaxTree: Parse("false", options: TestOptions.Script)
-                )
+                "submission-assembly-2",
+                previousScriptCompilation: firstCompilation,
+                syntaxTree: Parse("false", options: TestOptions.Script)
+            )
                 .WithScriptCompilationInfo(
                     new CSharpScriptCompilationInfo(firstCompilation, null, null)
                 )
@@ -2217,9 +2204,8 @@ class A
             Assert.Same(firstCompilation.ObjectType, secondCompilation.ObjectType);
 
             Assert.Null(
-                new CSharpScriptCompilationInfo(null, null, null).WithPreviousScriptCompilation(
-                    firstCompilation
-                ).ReturnTypeOpt
+                new CSharpScriptCompilationInfo(null, null, null)
+                    .WithPreviousScriptCompilation(firstCompilation).ReturnTypeOpt
             );
         }
 
@@ -2361,7 +2347,8 @@ class B
             );
             compilation.VerifyDiagnostics();
 
-            var mainMethod = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("B")
+            var mainMethod = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("B")
                 .GetMember<MethodSymbol>("Main");
 
             Assert.Equal(mainMethod, compilation.GetEntryPoint(default(CancellationToken)));
@@ -2436,17 +2423,16 @@ public class TestClass
                 var model2 = compilation.GetSemanticModel(tree2);
 
                 model2.GetDiagnostics().Verify(); // None, since the file is empty.
-                compilation.GetDiagnostics()
-                    .Verify(
-                        // (8,2): error CS1614: 'MyAttribute' is ambiguous between 'MyAttribute2Attribute' and 'MyAttributeAttribute'; use either '@MyAttribute' or 'MyAttributeAttribute'
-                        // [MyAttribute]
-                        Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "MyAttribute")
-                            .WithArguments(
-                                "MyAttribute",
-                                "MyAttribute2Attribute",
-                                "MyAttributeAttribute"
-                            )
-                    );
+                compilation.GetDiagnostics().Verify(
+                    // (8,2): error CS1614: 'MyAttribute' is ambiguous between 'MyAttribute2Attribute' and 'MyAttributeAttribute'; use either '@MyAttribute' or 'MyAttributeAttribute'
+                    // [MyAttribute]
+                    Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "MyAttribute")
+                        .WithArguments(
+                            "MyAttribute",
+                            "MyAttribute2Attribute",
+                            "MyAttributeAttribute"
+                        )
+                );
             }
 
             // Ask for compilation diagnostics first.
@@ -2456,17 +2442,16 @@ public class TestClass
                 var tree2 = compilation.SyntaxTrees[1]; //tree for empty file
                 var model2 = compilation.GetSemanticModel(tree2);
 
-                compilation.GetDiagnostics()
-                    .Verify(
-                        // (10,2): error CS1614: 'MyAttribute' is ambiguous between 'MyAttribute2Attribute' and 'MyAttributeAttribute'; use either '@MyAttribute' or 'MyAttributeAttribute'
-                        // [MyAttribute]
-                        Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "MyAttribute")
-                            .WithArguments(
-                                "MyAttribute",
-                                "MyAttribute2Attribute",
-                                "MyAttributeAttribute"
-                            )
-                    );
+                compilation.GetDiagnostics().Verify(
+                    // (10,2): error CS1614: 'MyAttribute' is ambiguous between 'MyAttribute2Attribute' and 'MyAttributeAttribute'; use either '@MyAttribute' or 'MyAttributeAttribute'
+                    // [MyAttribute]
+                    Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "MyAttribute")
+                        .WithArguments(
+                            "MyAttribute",
+                            "MyAttribute2Attribute",
+                            "MyAttributeAttribute"
+                        )
+                );
                 model2.GetDiagnostics().Verify(); // None, since the file is empty.
             }
         }
@@ -2516,17 +2501,15 @@ public class TestClass
             var c1 = CSharpCompilation.Create("c", options: TestOptions.ReleaseDll);
 
             var c2 = c1.WithOptions(
-                TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new TestMetadataReferenceResolver()
-                )
+                TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(new TestMetadataReferenceResolver())
             );
 
             Assert.False(c1.ReferenceManagerEquals(c2));
 
             var c3 = c1.WithOptions(
-                TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    c1.Options.MetadataReferenceResolver
-                )
+                TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(c1.Options.MetadataReferenceResolver)
             );
             Assert.True(c1.ReferenceManagerEquals(c3));
         }
@@ -2852,9 +2835,8 @@ class C { }",
             var compilation = CreateEmptyCompilation(
                 new[] { Parse("") },
                 references,
-                options: TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
-                    DesktopAssemblyIdentityComparer.Default
-                )
+                options: TestOptions.ReleaseDll
+                    .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
             );
 
             compilation.VerifyDiagnostics(
@@ -2863,8 +2845,7 @@ class C { }",
                     .WithArguments("System.dll (net451)", "System.v5.0.5.0_silverlight.dll")
             );
 
-            var appConfig = new MemoryStream(
-                Encoding.UTF8.GetBytes(
+            var appConfig = new MemoryStream(Encoding.UTF8.GetBytes(
                     @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
   <runtime>
@@ -2873,8 +2854,7 @@ class C { }",
     </assemblyBinding>
   </runtime>
 </configuration>"
-                )
-            );
+                ));
 
             var comparer = DesktopAssemblyIdentityComparer.LoadFromXml(appConfig);
 
@@ -2920,9 +2900,8 @@ public class C { public static FrameworkName Goo() { return null; }}";
             var c1 = CreateEmptyCompilation(
                 new[] { Parse(src1) },
                 references,
-                options: TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
-                    DesktopAssemblyIdentityComparer.Default
-                )
+                options: TestOptions.ReleaseDll
+                    .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
             );
 
             c1.VerifyDiagnostics(
@@ -2934,8 +2913,7 @@ public class C { public static FrameworkName Goo() { return null; }}";
                     .WithArguments("System.Runtime.Versioning.FrameworkName", "System")
             );
 
-            var appConfig = new MemoryStream(
-                Encoding.UTF8.GetBytes(
+            var appConfig = new MemoryStream(Encoding.UTF8.GetBytes(
                     @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
   <runtime>
@@ -2944,8 +2922,7 @@ public class C { public static FrameworkName Goo() { return null; }}";
     </assemblyBinding>
   </runtime>
 </configuration>"
-                )
-            );
+                ));
 
             var comparer = DesktopAssemblyIdentityComparer.LoadFromXml(appConfig);
 
@@ -3101,27 +3078,24 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 () =>
                     CSharpCompilation.CreateScriptCompilation(
                         "a",
-                        options: TestOptions.ReleaseDll.WithOutputKind(
-                            OutputKind.WindowsRuntimeMetadata
-                        )
+                        options: TestOptions.ReleaseDll
+                            .WithOutputKind(OutputKind.WindowsRuntimeMetadata)
                     )
             );
             Assert.Throws<ArgumentException>(
                 () =>
                     CSharpCompilation.CreateScriptCompilation(
                         "a",
-                        options: TestOptions.ReleaseDll.WithOutputKind(
-                            OutputKind.WindowsRuntimeApplication
-                        )
+                        options: TestOptions.ReleaseDll
+                            .WithOutputKind(OutputKind.WindowsRuntimeApplication)
                     )
             );
             Assert.Throws<ArgumentException>(
                 () =>
                     CSharpCompilation.CreateScriptCompilation(
                         "a",
-                        options: TestOptions.ReleaseDll.WithOutputKind(
-                            OutputKind.WindowsApplication
-                        )
+                        options: TestOptions.ReleaseDll
+                            .WithOutputKind(OutputKind.WindowsApplication)
                     )
             );
             Assert.Throws<ArgumentException>(
@@ -3682,16 +3656,14 @@ public class C { public static FrameworkName Goo() { return null; }}";
             ITypeSymbol type
         )
         {
-            return type.GetMembers()
-                .OfType<IPropertySymbol>()
-                .SelectAsArray(
-                    p =>
-                    {
-                        var result = p.Type.NullableAnnotation;
-                        Assert.Equal(result, p.NullableAnnotation);
-                        return result;
-                    }
-                );
+            return type.GetMembers().OfType<IPropertySymbol>().SelectAsArray(
+                p =>
+                {
+                    var result = p.Type.NullableAnnotation;
+                    Assert.Equal(result, p.NullableAnnotation);
+                    return result;
+                }
+            );
         }
 
         [Fact]
@@ -3984,9 +3956,9 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 // (1,8): error CS0029: Cannot implicitly convert type 'int' to 'System.Threading.Tasks.Task<int>'
                 // return await System.Threading.Tasks.Task.FromResult(42);
                 Diagnostic(
-                        ErrorCode.ERR_NoImplicitConv,
-                        "await System.Threading.Tasks.Task.FromResult(42)"
-                    )
+                    ErrorCode.ERR_NoImplicitConv,
+                    "await System.Threading.Tasks.Task.FromResult(42)"
+                )
                     .WithArguments("int", "System.Threading.Tasks.Task<int>")
                     .WithLocation(1, 8)
             );
@@ -4004,9 +3976,9 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 // (1,8): error CS4016: Since this is an async method, the return expression must be of type 'int' rather than 'Task<int>'
                 // return System.Threading.Tasks.Task.FromResult(42);
                 Diagnostic(
-                        ErrorCode.ERR_BadAsyncReturnExpression,
-                        "System.Threading.Tasks.Task.FromResult(42)"
-                    )
+                    ErrorCode.ERR_BadAsyncReturnExpression,
+                    "System.Threading.Tasks.Task.FromResult(42)"
+                )
                     .WithArguments("int")
                     .WithLocation(1, 8)
             );

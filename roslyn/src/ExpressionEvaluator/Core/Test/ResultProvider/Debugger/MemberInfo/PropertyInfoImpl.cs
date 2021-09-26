@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override MethodInfo[] GetAccessors(bool nonPublic)
         {
-            return this.Property.GetAccessors(nonPublic)
+            return this.Property
+                .GetAccessors(nonPublic)
                 .Select(a => new MethodInfoImpl(a))
                 .ToArray();
         }
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return this.Property.GetCustomAttributesData()
+            return this.Property
+                .GetCustomAttributesData()
                 .Select(a => new CustomAttributeDataImpl(a))
                 .ToArray();
         }
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override ParameterInfo[] GetIndexParameters()
         {
-            return this.Property.GetIndexParameters()
+            return this.Property
+                .GetIndexParameters()
                 .Select(p => new ParameterInfoImpl(p))
                 .ToArray();
         }
@@ -138,13 +141,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Debug.Assert(binder == null, "NYI");
             Debug.Assert(index == null, "NYI");
             Debug.Assert(culture == null, "NYI");
-            return this.Property.GetValue(
-                obj,
-                (System.Reflection.BindingFlags)invokeAttr,
-                null,
-                null,
-                null
-            );
+            return this.Property
+                .GetValue(obj, (System.Reflection.BindingFlags)invokeAttr, null, null, null);
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)

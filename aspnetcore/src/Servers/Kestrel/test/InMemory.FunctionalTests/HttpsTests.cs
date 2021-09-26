@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         private KestrelServerOptions CreateServerOptions()
         {
             var serverOptions = new KestrelServerOptions();
-            serverOptions.ApplicationServices = new ServiceCollection().AddLogging()
+            serverOptions.ApplicationServices = new ServiceCollection()
+                .AddLogging()
                 .BuildServiceProvider();
             return serverOptions;
         }
@@ -224,10 +225,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             Assert.Equal(LogLevel.Debug, loggerProvider.FilterLogger.LastLogLevel);
             Assert.True(
                 loggerProvider.ErrorLogger.ErrorMessages.Count == 0,
-                userMessage: string.Join(
-                    Environment.NewLine,
-                    loggerProvider.ErrorLogger.ErrorMessages
-                )
+                userMessage: string
+                    .Join(Environment.NewLine, loggerProvider.ErrorLogger.ErrorMessages)
             );
         }
 
@@ -262,10 +261,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             Assert.Equal(LogLevel.Debug, loggerProvider.FilterLogger.LastLogLevel);
             Assert.True(
                 loggerProvider.ErrorLogger.ErrorMessages.Count == 0,
-                userMessage: string.Join(
-                    Environment.NewLine,
-                    loggerProvider.ErrorLogger.ErrorMessages
-                )
+                userMessage: string
+                    .Join(Environment.NewLine, loggerProvider.ErrorLogger.ErrorMessages)
             );
         }
 

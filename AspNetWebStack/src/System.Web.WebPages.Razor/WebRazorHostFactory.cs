@@ -162,7 +162,8 @@ namespace System.Web.WebPages.Razor
 
             // Add imports
             foreach (
-                string import in config.Namespaces.OfType<NamespaceInfo>()
+                string import in config.Namespaces
+                    .OfType<NamespaceInfo>()
                     .Select(ns => ns.Namespace)
             )
             {

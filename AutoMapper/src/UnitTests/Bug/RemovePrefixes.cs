@@ -28,9 +28,8 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void Should_not_map_with_default_postfix()
         {
-            new Action(
-                Configuration.AssertConfigurationIsValid
-            ).ShouldThrow<AutoMapperConfigurationException>();
+            new Action(Configuration.AssertConfigurationIsValid)
+                .ShouldThrow<AutoMapperConfigurationException>();
         }
     }
 }

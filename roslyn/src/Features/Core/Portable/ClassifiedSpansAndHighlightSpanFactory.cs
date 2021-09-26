@@ -23,10 +23,8 @@ namespace Microsoft.CodeAnalysis.Classification
             var classifiedSpans = await ClassifyAsync(document, sourceSpan, cancellationToken)
                 .ConfigureAwait(false);
 
-            var properties = ImmutableDictionary<string, object>.Empty.Add(
-                ClassifiedSpansAndHighlightSpan.Key,
-                classifiedSpans
-            );
+            var properties = ImmutableDictionary<string, object>.Empty
+                .Add(ClassifiedSpansAndHighlightSpan.Key, classifiedSpans);
 
             return new DocumentSpan(document, sourceSpan, properties);
         }
@@ -41,20 +39,18 @@ namespace Microsoft.CodeAnalysis.Classification
             // the document span is on.
             if (
                 documentSpan.Properties != null
-                && documentSpan.Properties.TryGetValue(
-                    ClassifiedSpansAndHighlightSpan.Key,
-                    out var value
-                )
+                && documentSpan.Properties
+                    .TryGetValue(ClassifiedSpansAndHighlightSpan.Key, out var value)
             )
             {
                 return (ClassifiedSpansAndHighlightSpan)value;
             }
 
             return await ClassifyAsync(
-                    documentSpan.Document,
-                    documentSpan.SourceSpan,
-                    cancellationToken
-                )
+                documentSpan.Document,
+                documentSpan.SourceSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -70,11 +66,11 @@ namespace Microsoft.CodeAnalysis.Classification
             var lineSpan = GetLineSpanForReference(sourceText, narrowSpan);
 
             var taggedLineParts = await GetTaggedTextForDocumentRegionAsync(
-                    document,
-                    narrowSpan,
-                    lineSpan,
-                    cancellationToken
-                )
+                document,
+                narrowSpan,
+                lineSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return taggedLineParts;
         }
@@ -103,11 +99,11 @@ namespace Microsoft.CodeAnalysis.Classification
             );
 
             var classifiedSpans = await GetClassifiedSpansAsync(
-                    document,
-                    narrowSpan,
-                    widenedSpan,
-                    cancellationToken
-                )
+                document,
+                narrowSpan,
+                widenedSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return new ClassifiedSpansAndHighlightSpan(classifiedSpans, highlightSpan);
         }
@@ -120,10 +116,10 @@ namespace Microsoft.CodeAnalysis.Classification
         )
         {
             var result = await ClassifierHelper.GetClassifiedSpansAsync(
-                    document,
-                    widenedSpan,
-                    cancellationToken
-                )
+                document,
+                widenedSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!result.IsDefault)
             {

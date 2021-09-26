@@ -110,9 +110,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             [MaybeNullWhen(false)] out T value
         )
         {
-            var configOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                syntaxTree
-            );
+            var configOptions = analyzerOptions.AnalyzerConfigOptionsProvider
+                .GetOptions(syntaxTree);
             return configOptions.TryGetEditorConfigOption(option, out value);
         }
     }

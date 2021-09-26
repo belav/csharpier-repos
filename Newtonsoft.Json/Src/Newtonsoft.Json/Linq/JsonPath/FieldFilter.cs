@@ -34,10 +34,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                         else if (settings?.ErrorWhenNoMatch ?? false)
                         {
                             throw new JsonException(
-                                "Property '{0}' does not exist on JObject.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    Name
-                                )
+                                "Property '{0}' does not exist on JObject."
+                                    .FormatWith(CultureInfo.InvariantCulture, Name)
                             );
                         }
                     }
@@ -54,11 +52,12 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     if (settings?.ErrorWhenNoMatch ?? false)
                     {
                         throw new JsonException(
-                            "Property '{0}' not valid on {1}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                Name ?? "*",
-                                t.GetType().Name
-                            )
+                            "Property '{0}' not valid on {1}."
+                                .FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    Name ?? "*",
+                                    t.GetType().Name
+                                )
                         );
                     }
                 }

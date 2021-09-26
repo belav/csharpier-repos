@@ -53,18 +53,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             string binOutputPath
         )
         {
-            return _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    this.CreateProjectContextAsync(
-                        languageName,
-                        projectUniqueName,
-                        projectFilePath,
-                        projectGuid,
-                        hierarchy,
-                        binOutputPath,
-                        CancellationToken.None
-                    )
-            );
+            return _threadingContext.JoinableTaskFactory
+                .Run(
+                    () =>
+                        this.CreateProjectContextAsync(
+                            languageName,
+                            projectUniqueName,
+                            projectFilePath,
+                            projectGuid,
+                            hierarchy,
+                            binOutputPath,
+                            CancellationToken.None
+                        )
+                );
         }
 
         public async Task<IWorkspaceProjectContext> CreateProjectContextAsync(
@@ -87,11 +88,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             };
 
             var visualStudioProject = await _projectFactory.CreateAndAddToWorkspaceAsync(
-                    projectUniqueName,
-                    languageName,
-                    creationInfo,
-                    cancellationToken
-                )
+                projectUniqueName,
+                languageName,
+                creationInfo,
+                cancellationToken
+            )
                 .ConfigureAwait(true);
 
 #pragma warning disable IDE0059 // Unnecessary assignment of a value

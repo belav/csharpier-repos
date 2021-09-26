@@ -88,10 +88,8 @@ namespace Newtonsoft.Json.Converters
                     {
                         throw JsonSerializationException.Create(
                             reader,
-                            "Error parsing version string: {0}".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                reader.Value
-                            ),
+                            "Error parsing version string: {0}"
+                                .FormatWith(CultureInfo.InvariantCulture, reader.Value),
                             ex
                         );
                     }
@@ -100,11 +98,12 @@ namespace Newtonsoft.Json.Converters
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Unexpected token or value when parsing version. Token: {0}, Value: {1}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            reader.TokenType,
-                            reader.Value
-                        )
+                        "Unexpected token or value when parsing version. Token: {0}, Value: {1}"
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                reader.TokenType,
+                                reader.Value
+                            )
                     );
                 }
             }

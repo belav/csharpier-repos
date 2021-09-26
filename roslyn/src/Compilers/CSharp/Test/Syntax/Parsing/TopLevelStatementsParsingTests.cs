@@ -134,7 +134,9 @@ class C
                     .WithLocation(15, 1),
                 // (16,3): error CS1003: Syntax error, ']' expected
                 // [b
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("]", "").WithLocation(16, 3)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "")
+                    .WithArguments("]", "")
+                    .WithLocation(16, 3)
             );
 
             N(SyntaxKind.CompilationUnit);
@@ -681,13 +683,12 @@ class Test : Itest
                 // (7,4): error CS8803: Top-level statements must precede namespace and type declarations.
                 //    public static int Main()
                 Diagnostic(
-                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
-                        @"public static int Main()
+                    ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                    @"public static int Main()
    {
        return 1;
    }"
-                    )
-                    .WithLocation(7, 4),
+                ).WithLocation(7, 4),
                 // (7,4): error CS0106: The modifier 'public' is not valid for this item
                 //    public static int Main()
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "public")
@@ -826,11 +827,10 @@ class Test : Itest
                 // (2,1): error CS8803: Top-level statements must precede namespace and type declarations.
                 // {
                 Diagnostic(
-                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
-                        @"{
+                    ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                    @"{
 "
-                    )
-                    .WithLocation(2, 1),
+                ).WithLocation(2, 1),
                 // (2,2): error CS1513: } expected
                 // {
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 2),
@@ -1223,9 +1223,9 @@ public class A
                 // (5,2): error CS8803: Top-level statements must precede namespace and type declarations.
                 // 	static int Main() {	return 1;    }
                 Diagnostic(
-                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
-                        "static int Main() {	return 1;    }"
-                    )
+                    ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                    "static int Main() {	return 1;    }"
+                )
                     .WithLocation(5, 2),
                 // (6,1): error CS1022: Type or namespace definition, or end-of-file expected
                 // }

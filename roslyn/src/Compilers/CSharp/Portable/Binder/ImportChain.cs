@@ -127,11 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var ns = (NamespaceSymbol)target;
                         var assemblyRef = TryGetAssemblyScope(ns, moduleBuilder, diagnostics);
                         usedNamespaces.Add(
-                            Cci.UsedNamespaceOrType.CreateNamespace(
-                                ns.GetCciAdapter(),
-                                assemblyRef,
-                                alias
-                            )
+                            Cci.UsedNamespaceOrType
+                                .CreateNamespace(ns.GetCciAdapter(), assemblyRef, alias)
                         );
                     }
                     else if (!target.ContainingAssembly.IsLinked)
@@ -176,9 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && (object)containingAssembly != moduleBuilder.CommonCompilation.Assembly
             )
             {
-                var referenceManager = (
-                    (CSharpCompilation)moduleBuilder.CommonCompilation
-                ).GetBoundReferenceManager();
+                var referenceManager = ((CSharpCompilation)moduleBuilder.CommonCompilation)
+                    .GetBoundReferenceManager();
 
                 for (int i = 0; i < referenceManager.ReferencedAssemblies.Length; i++)
                 {

@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.DataProtection.Test
                 .Returns(Mock.Of<IKeyRing>())
                 .Callback(() => tcs.TrySetResult(null));
 
-            var builder = new WebHostBuilder().UseStartup<TestStartup>()
+            var builder = new WebHostBuilder()
+                .UseStartup<TestStartup>()
                 .ConfigureServices(
                     s =>
                         s.AddDataProtection()
@@ -64,7 +65,8 @@ namespace Microsoft.AspNetCore.DataProtection.Test
                 .Returns(Mock.Of<IKeyRing>())
                 .Callback(() => tcs.TrySetResult(null));
 
-            var builder = new HostBuilder().ConfigureServices(
+            var builder = new HostBuilder()
+                .ConfigureServices(
                     s =>
                         s.AddDataProtection()
                             .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
@@ -105,7 +107,8 @@ namespace Microsoft.AspNetCore.DataProtection.Test
             var mockServer = new Mock<IServer>();
             mockServer.Setup(m => m.Features).Returns(new FeatureCollection());
 
-            var builder = new HostBuilder().ConfigureServices(
+            var builder = new HostBuilder()
+                .ConfigureServices(
                     s =>
                         s.AddDataProtection()
                             .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))

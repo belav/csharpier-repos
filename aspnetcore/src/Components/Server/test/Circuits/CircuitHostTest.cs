@@ -73,8 +73,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             var serviceScope = new Mock<IServiceScope>();
             var handler = new Mock<CircuitHandler>();
             handler.Setup(
-                    h => h.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>())
-                )
+                h => h.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>())
+            )
                 .Throws<InvalidTimeZoneException>();
             var remoteRenderer = GetRemoteRenderer();
             var circuitHost = TestCircuitHost.Create(
@@ -180,8 +180,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             var reportedErrors = new List<UnhandledExceptionEventArgs>();
 
             handler.Setup(
-                    h => h.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>())
-                )
+                h => h.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(tcs.Task)
                 .Verifiable();
 

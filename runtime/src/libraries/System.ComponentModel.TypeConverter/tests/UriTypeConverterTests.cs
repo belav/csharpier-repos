@@ -101,14 +101,10 @@ namespace System.ComponentModel.Tests
                 UriTypeConverterTests.s_converter
             );
 
-            var actualInstanceDescriptor =
-                (InstanceDescriptor)UriTypeConverterTests.s_converter.ConvertTo(
-                    new Uri("http://www.Microsoft.com/"),
-                    typeof(InstanceDescriptor)
-                );
-            var expectedMemberInfo = typeof(Uri).GetConstructor(
-                new[] { typeof(string), typeof(UriKind) }
-            );
+            var actualInstanceDescriptor = (InstanceDescriptor)UriTypeConverterTests.s_converter
+                .ConvertTo(new Uri("http://www.Microsoft.com/"), typeof(InstanceDescriptor));
+            var expectedMemberInfo = typeof(Uri)
+                .GetConstructor(new[] { typeof(string), typeof(UriKind) });
             Assert.Equal(expectedMemberInfo, actualInstanceDescriptor.MemberInfo);
             Assert.Equal(
                 new object[] { "http://www.Microsoft.com/", UriKind.Absolute },
@@ -118,10 +114,8 @@ namespace System.ComponentModel.Tests
             Assert.Equal(new Uri("http://www.Microsoft.com/"), actualInstanceDescriptor.Invoke());
 
             var actualRelativeInstanceDescriptor =
-                (InstanceDescriptor)UriTypeConverterTests.s_converter.ConvertTo(
-                    new Uri("relative", UriKind.Relative),
-                    typeof(InstanceDescriptor)
-                );
+                (InstanceDescriptor)UriTypeConverterTests.s_converter
+                    .ConvertTo(new Uri("relative", UriKind.Relative), typeof(InstanceDescriptor));
             Assert.Equal(expectedMemberInfo, actualRelativeInstanceDescriptor.MemberInfo);
             Assert.Equal(
                 new object[] { "relative", UriKind.Relative },
@@ -139,19 +133,13 @@ namespace System.ComponentModel.Tests
         {
             Assert.Throws<NotSupportedException>(
                 () =>
-                    UriTypeConverterTests.s_converter.ConvertFrom(
-                        TypeConverterTests.s_context,
-                        null,
-                        null
-                    )
+                    UriTypeConverterTests.s_converter
+                        .ConvertFrom(TypeConverterTests.s_context, null, null)
             );
             Assert.Throws<UriFormatException>(
                 () =>
-                    UriTypeConverterTests.s_converter.ConvertFrom(
-                        TypeConverterTests.s_context,
-                        null,
-                        "mailto:User@"
-                    )
+                    UriTypeConverterTests.s_converter
+                        .ConvertFrom(TypeConverterTests.s_context, null, "mailto:User@")
             );
         }
     }

@@ -459,9 +459,8 @@ END:VCARD
                 "http://localhost/FallbackOnTypeBasedMatch/FallbackGivesNoMatch/?input=1234";
             var content = new StringContent("1234", Encoding.UTF8, "application/custom");
             var request = new HttpRequestMessage(HttpMethod.Post, targetUri);
-            request.Headers.Accept.Add(
-                MediaTypeWithQualityHeaderValue.Parse("application/custom1")
-            );
+            request.Headers.Accept
+                .Add(MediaTypeWithQualityHeaderValue.Parse("application/custom1"));
             request.Content = content;
 
             // Act
@@ -477,9 +476,8 @@ END:VCARD
             // Arrange
             var targetUri = "http://localhost/InvalidContentType/SetResponseContentTypeJson";
             var request = new HttpRequestMessage(HttpMethod.Get, targetUri);
-            request.Headers.Accept.Add(
-                MediaTypeWithQualityHeaderValue.Parse("application/custom1")
-            );
+            request.Headers.Accept
+                .Add(MediaTypeWithQualityHeaderValue.Parse("application/custom1"));
 
             // Act
             var response = await Client.SendAsync(request);

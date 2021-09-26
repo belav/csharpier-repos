@@ -23,9 +23,8 @@ namespace Microsoft.Extensions.Logging.Test
             testSwitch.Level = SourceLevels.Warning;
             var listener = new BufferedConsoleTraceListener();
 
-            var serviceProvider = new ServiceCollection().AddLogging(
-                    builder => builder.AddTraceSource(testSwitch, listener)
-                )
+            var serviceProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddTraceSource(testSwitch, listener))
                 .BuildServiceProvider();
 
             var factory = serviceProvider.GetRequiredService<ILoggerFactory>();

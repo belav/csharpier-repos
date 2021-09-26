@@ -98,13 +98,14 @@ namespace System.Web.Http.Results
         private HttpResponseMessage Execute()
         {
             HttpError error = new HttpError(_message);
-            return NegotiatedContentResult<HttpError>.Execute(
-                HttpStatusCode.BadRequest,
-                error,
-                _dependencies.ContentNegotiator,
-                _dependencies.Request,
-                _dependencies.Formatters
-            );
+            return NegotiatedContentResult<HttpError>
+                .Execute(
+                    HttpStatusCode.BadRequest,
+                    error,
+                    _dependencies.ContentNegotiator,
+                    _dependencies.Request,
+                    _dependencies.Formatters
+                );
         }
     }
 }

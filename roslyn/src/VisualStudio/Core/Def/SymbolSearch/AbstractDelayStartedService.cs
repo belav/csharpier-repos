@@ -90,8 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
                 return;
             }
 
-            var listenerProvider =
-                Workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+            var listenerProvider = Workspace.Services
+                .GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
             var asyncToken = listenerProvider.GetListener()
                 .BeginAsyncOperation(
                     nameof(AbstractDelayStartedService.EnableServiceAsync),

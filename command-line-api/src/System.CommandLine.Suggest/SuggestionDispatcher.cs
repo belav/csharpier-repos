@@ -75,7 +75,8 @@ namespace System.CommandLine.Suggest
                 CompleteScriptCommand
             };
 
-            Parser = new CommandLineBuilder(root).UseVersionOption()
+            Parser = new CommandLineBuilder(root)
+                .UseVersionOption()
                 .UseHelp()
                 .UseParseDirective()
                 .UseDebugDirective()
@@ -93,7 +94,8 @@ namespace System.CommandLine.Suggest
             new Option<FileInfo>(
                 new[] { "-e", "--executable" },
                 "The executable to call for suggestions"
-            ).LegalFilePathsOnly();
+            )
+                .LegalFilePathsOnly();
 
         private Command ListCommand { get; }
 

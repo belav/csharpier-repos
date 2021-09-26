@@ -187,9 +187,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             );
 
             // Exception will cause the cookieToken to be null.
-            context.TokenSerializer.Setup(
-                    o => o.Deserialize(context.TestTokenSet.OldCookieTokenString)
-                )
+            context.TokenSerializer
+                .Setup(o => o.Deserialize(context.TestTokenSet.OldCookieTokenString))
                 .Throws(new Exception("should be swallowed"));
             context.TokenGenerator.Setup(o => o.IsCookieTokenValid(null)).Returns(false);
 
@@ -266,10 +265,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             // Token serializer not used.
             context.TokenSerializer.Verify(o => o.Deserialize(It.IsAny<string>()), Times.Never);
-            context.TokenSerializer.Verify(
-                o => o.Serialize(It.IsAny<AntiforgeryToken>()),
-                Times.Never
-            );
+            context.TokenSerializer
+                .Verify(o => o.Serialize(It.IsAny<AntiforgeryToken>()), Times.Never);
         }
 
         [Fact]
@@ -290,10 +287,11 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             // Assert
             // We shouldn't have saved the cookie because it already existed.
-            context.TokenStore.Verify(
-                t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
-                Times.Never
-            );
+            context.TokenStore
+                .Verify(
+                    t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
+                    Times.Never
+                );
 
             Assert.Null(tokenSet.CookieToken);
             Assert.Equal(context.TestTokenSet.FormTokenString, tokenSet.RequestToken);
@@ -328,10 +326,11 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             // Assert
             // We shouldn't have saved the cookie because it already existed.
-            context.TokenStore.Verify(
-                t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
-                Times.Never
-            );
+            context.TokenStore
+                .Verify(
+                    t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
+                    Times.Never
+                );
 
             Assert.Null(tokenSet.CookieToken);
             Assert.Equal(context.TestTokenSet.FormTokenString, tokenSet.RequestToken);
@@ -364,10 +363,11 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             // Assert
             // We shouldn't have saved the cookie because it already existed.
-            context.TokenStore.Verify(
-                t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
-                Times.Never
-            );
+            context.TokenStore
+                .Verify(
+                    t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
+                    Times.Never
+                );
 
             Assert.Null(tokenSet.CookieToken);
             Assert.Equal(context.TestTokenSet.FormTokenString, tokenSet.RequestToken);
@@ -429,7 +429,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             // Assert
             Assert.Equal(headerValue, actualHeaderValue);
 
-            var hasWarningMessage = testSink.Writes.Where(wc => wc.LogLevel == LogLevel.Warning)
+            var hasWarningMessage = testSink.Writes
+                .Where(wc => wc.LogLevel == LogLevel.Warning)
                 .Select(wc => wc.State?.ToString())
                 .Contains(ResponseCacheHeadersOverrideWarningMessage);
             Assert.False(hasWarningMessage);
@@ -453,7 +454,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             // Assert
             Assert.NotEqual(headerValue, actualHeaderValue);
 
-            var hasWarningMessage = testSink.Writes.Where(wc => wc.LogLevel == LogLevel.Warning)
+            var hasWarningMessage = testSink.Writes
+                .Where(wc => wc.LogLevel == LogLevel.Warning)
                 .Select(wc => wc.State?.ToString())
                 .Contains(ResponseCacheHeadersOverrideWarningMessage);
             Assert.True(hasWarningMessage);
@@ -477,7 +479,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             // Assert
             Assert.NotEqual(headerValue, actualHeaderValue);
 
-            var hasWarningMessage = testSink.Writes.Where(wc => wc.LogLevel == LogLevel.Warning)
+            var hasWarningMessage = testSink.Writes
+                .Where(wc => wc.LogLevel == LogLevel.Warning)
                 .Select(wc => wc.State?.ToString())
                 .Contains(ResponseCacheHeadersOverrideWarningMessage);
             Assert.True(hasWarningMessage);
@@ -501,7 +504,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             // Assert
             Assert.Equal(headerValue, actualHeaderValue);
 
-            var hasWarningMessage = testSink.Writes.Where(wc => wc.LogLevel == LogLevel.Warning)
+            var hasWarningMessage = testSink.Writes
+                .Where(wc => wc.LogLevel == LogLevel.Warning)
                 .Select(wc => wc.State?.ToString())
                 .Contains(ResponseCacheHeadersOverrideWarningMessage);
             Assert.False(hasWarningMessage);
@@ -524,14 +528,15 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             var tokenSet = antiforgery.GetAndStoreTokens(context.HttpContext);
 
             // Assert
-            context.TokenStore.Verify(
-                t =>
-                    t.SaveCookieToken(
-                        It.IsAny<HttpContext>(),
-                        context.TestTokenSet.NewCookieTokenString
-                    ),
-                Times.Once
-            );
+            context.TokenStore
+                .Verify(
+                    t =>
+                        t.SaveCookieToken(
+                            It.IsAny<HttpContext>(),
+                            context.TestTokenSet.NewCookieTokenString
+                        ),
+                    Times.Once
+                );
 
             Assert.Equal(context.TestTokenSet.NewCookieTokenString, tokenSet.CookieToken);
             Assert.Equal(context.TestTokenSet.FormTokenString, tokenSet.RequestToken);
@@ -570,14 +575,15 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             var tokenSet = antiforgery.GetAndStoreTokens(context.HttpContext);
 
             // Assert
-            context.TokenStore.Verify(
-                t =>
-                    t.SaveCookieToken(
-                        It.IsAny<HttpContext>(),
-                        context.TestTokenSet.NewCookieTokenString
-                    ),
-                Times.Once
-            );
+            context.TokenStore
+                .Verify(
+                    t =>
+                        t.SaveCookieToken(
+                            It.IsAny<HttpContext>(),
+                            context.TestTokenSet.NewCookieTokenString
+                        ),
+                    Times.Once
+                );
 
             Assert.Equal(context.TestTokenSet.NewCookieTokenString, tokenSet.CookieToken);
             Assert.Equal(context.TestTokenSet.FormTokenString, tokenSet.RequestToken);
@@ -613,7 +619,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             );
             var antiforgery = GetAntiforgery(context);
 
-            context.TokenStore.Setup(
+            context.TokenStore
+                .Setup(
                     t =>
                         t.SaveCookieToken(
                             context.HttpContext,
@@ -628,17 +635,20 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             // Assert
             // Token store used once, with expected arguments.
             // Passed context's cookie token though request's cookie token was valid.
-            context.TokenStore.Verify(
-                t => t.SaveCookieToken(context.HttpContext, "serialized-cookie-token-from-context"),
-                Times.Once
-            );
+            context.TokenStore
+                .Verify(
+                    t =>
+                        t.SaveCookieToken(
+                            context.HttpContext,
+                            "serialized-cookie-token-from-context"
+                        ),
+                    Times.Once
+                );
 
             // Token serializer not used.
             context.TokenSerializer.Verify(o => o.Deserialize(It.IsAny<string>()), Times.Never);
-            context.TokenSerializer.Verify(
-                o => o.Serialize(It.IsAny<AntiforgeryToken>()),
-                Times.Never
-            );
+            context.TokenSerializer
+                .Verify(o => o.Serialize(It.IsAny<AntiforgeryToken>()), Times.Never);
 
             Assert.Equal("serialized-cookie-token-from-context", tokenset.CookieToken);
             Assert.Equal("serialized-form-token-from-context", tokenset.RequestToken);
@@ -673,17 +683,16 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             // Assert
             // Token store not used.
-            context.TokenStore.Verify(
-                t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
-                Times.Never
-            );
+            context.TokenStore
+                .Verify(
+                    t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
+                    Times.Never
+                );
 
             // Token serializer not used.
             context.TokenSerializer.Verify(o => o.Deserialize(It.IsAny<string>()), Times.Never);
-            context.TokenSerializer.Verify(
-                o => o.Serialize(It.IsAny<AntiforgeryToken>()),
-                Times.Never
-            );
+            context.TokenSerializer
+                .Verify(o => o.Serialize(It.IsAny<AntiforgeryToken>()), Times.Never);
 
             Assert.Equal("serialized-cookie-token-from-context", tokenset.CookieToken);
             Assert.Equal("serialized-form-token-from-context", tokenset.RequestToken);
@@ -700,7 +709,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             );
 
             string? message;
-            context.TokenGenerator.Setup(
+            context.TokenGenerator
+                .Setup(
                     o =>
                         o.TryValidateTokenSet(
                             context.HttpContext,
@@ -740,7 +750,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             context.HttpContext.Request.Method = "POST";
 
             string? message;
-            context.TokenGenerator.Setup(
+            context.TokenGenerator
+                .Setup(
                     o =>
                         o.TryValidateTokenSet(
                             context.HttpContext,
@@ -786,7 +797,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             context.HttpContext.Request.Method = "POST";
 
             string? message;
-            context.TokenGenerator.Setup(
+            context.TokenGenerator
+                .Setup(
                     o =>
                         o.TryValidateTokenSet(
                             context.HttpContext,
@@ -809,10 +821,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             // Token serializer not used.
             context.TokenSerializer.Verify(o => o.Deserialize(It.IsAny<string>()), Times.Never);
-            context.TokenSerializer.Verify(
-                o => o.Serialize(It.IsAny<AntiforgeryToken>()),
-                Times.Never
-            );
+            context.TokenSerializer
+                .Verify(o => o.Serialize(It.IsAny<AntiforgeryToken>()), Times.Never);
         }
 
         [Theory]
@@ -827,7 +837,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             context.HttpContext.Request.Method = httpMethod;
 
             string? message;
-            context.TokenGenerator.Setup(
+            context.TokenGenerator
+                .Setup(
                     o =>
                         o.TryValidateTokenSet(
                             context.HttpContext,
@@ -846,16 +857,17 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             // Assert
             Assert.True(result);
-            context.TokenGenerator.Verify(
-                o =>
-                    o.TryValidateTokenSet(
-                        context.HttpContext,
-                        It.IsAny<AntiforgeryToken>(),
-                        It.IsAny<AntiforgeryToken>(),
-                        out message
-                    ),
-                Times.Never
-            );
+            context.TokenGenerator
+                .Verify(
+                    o =>
+                        o.TryValidateTokenSet(
+                            context.HttpContext,
+                            It.IsAny<AntiforgeryToken>(),
+                            It.IsAny<AntiforgeryToken>(),
+                            out message
+                        ),
+                    Times.Never
+                );
         }
 
         [Theory]
@@ -872,7 +884,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             context.HttpContext.Request.Method = httpMethod;
 
             string? message;
-            context.TokenGenerator.Setup(
+            context.TokenGenerator
+                .Setup(
                     o =>
                         o.TryValidateTokenSet(
                             context.HttpContext,
@@ -905,7 +918,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             );
 
             var message = "my-message";
-            context.TokenGenerator.Setup(
+            context.TokenGenerator
+                .Setup(
                     o =>
                         o.TryValidateTokenSet(
                             context.HttpContext,
@@ -944,7 +958,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             );
 
             string? message;
-            context.TokenGenerator.Setup(
+            context.TokenGenerator
+                .Setup(
                     o =>
                         o.TryValidateTokenSet(
                             context.HttpContext,
@@ -985,7 +1000,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             );
 
             var tokenSet = new AntiforgeryTokenSet(null, null, "form-field-name", null);
-            context.TokenStore.Setup(s => s.GetRequestTokensAsync(context.HttpContext))
+            context.TokenStore
+                .Setup(s => s.GetRequestTokensAsync(context.HttpContext))
                 .Returns(Task.FromResult(tokenSet));
 
             var antiforgery = GetAntiforgery(context);
@@ -1014,7 +1030,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             );
 
             var tokenSet = new AntiforgeryTokenSet(null, "cookie-token", "form-field-name", null);
-            context.TokenStore.Setup(s => s.GetRequestTokensAsync(context.HttpContext))
+            context.TokenStore
+                .Setup(s => s.GetRequestTokensAsync(context.HttpContext))
                 .Returns(Task.FromResult(tokenSet));
 
             var antiforgery = GetAntiforgery(context);
@@ -1050,7 +1067,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
                 "form-field-name",
                 "header-name"
             );
-            context.TokenStore.Setup(s => s.GetRequestTokensAsync(context.HttpContext))
+            context.TokenStore
+                .Setup(s => s.GetRequestTokensAsync(context.HttpContext))
                 .Returns(Task.FromResult(tokenSet));
 
             var antiforgery = GetAntiforgery(context);
@@ -1086,7 +1104,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
                 "form-field-name",
                 "header-name"
             );
-            context.TokenStore.Setup(s => s.GetRequestTokensAsync(context.HttpContext))
+            context.TokenStore
+                .Setup(s => s.GetRequestTokensAsync(context.HttpContext))
                 .Returns(Task.FromResult(tokenSet));
 
             var antiforgery = GetAntiforgery(context);
@@ -1119,7 +1138,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             );
 
             string? message;
-            context.TokenGenerator.Setup(
+            context.TokenGenerator
+                .Setup(
                     o =>
                         o.TryValidateTokenSet(
                             context.HttpContext,
@@ -1141,10 +1161,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             // Token serializer not used.
             context.TokenSerializer.Verify(o => o.Deserialize(It.IsAny<string>()), Times.Never);
-            context.TokenSerializer.Verify(
-                o => o.Serialize(It.IsAny<AntiforgeryToken>()),
-                Times.Never
-            );
+            context.TokenSerializer
+                .Verify(o => o.Serialize(It.IsAny<AntiforgeryToken>()), Times.Never);
         }
 
         [Fact]
@@ -1319,7 +1337,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             );
             var antiforgery = GetAntiforgery(context);
 
-            context.TokenStore.Setup(
+            context.TokenStore
+                .Setup(
                     t =>
                         t.SaveCookieToken(
                             context.HttpContext,
@@ -1334,17 +1353,20 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             // Assert
             // Token store used once, with expected arguments.
             // Passed context's cookie token though request's cookie token was valid.
-            context.TokenStore.Verify(
-                t => t.SaveCookieToken(context.HttpContext, "serialized-cookie-token-from-context"),
-                Times.Once
-            );
+            context.TokenStore
+                .Verify(
+                    t =>
+                        t.SaveCookieToken(
+                            context.HttpContext,
+                            "serialized-cookie-token-from-context"
+                        ),
+                    Times.Once
+                );
 
             // Token serializer not used.
             context.TokenSerializer.Verify(o => o.Deserialize(It.IsAny<string>()), Times.Never);
-            context.TokenSerializer.Verify(
-                o => o.Serialize(It.IsAny<AntiforgeryToken>()),
-                Times.Never
-            );
+            context.TokenSerializer
+                .Verify(o => o.Serialize(It.IsAny<AntiforgeryToken>()), Times.Never);
         }
 
         [Fact]
@@ -1375,16 +1397,15 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             // Assert
             // Token serializer not used.
             context.TokenSerializer.Verify(o => o.Deserialize(It.IsAny<string>()), Times.Never);
-            context.TokenSerializer.Verify(
-                o => o.Serialize(It.IsAny<AntiforgeryToken>()),
-                Times.Never
-            );
+            context.TokenSerializer
+                .Verify(o => o.Serialize(It.IsAny<AntiforgeryToken>()), Times.Never);
 
             // Token store not used.
-            context.TokenStore.Verify(
-                t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
-                Times.Never
-            );
+            context.TokenStore
+                .Verify(
+                    t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
+                    Times.Never
+                );
         }
 
         [Fact]
@@ -1487,7 +1508,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             var tokenSet = antiforgery.GetAndStoreTokens(context.HttpContext);
 
             // Assert
-            var hasWarningMessage = testSink.Writes.Where(wc => wc.LogLevel == LogLevel.Warning)
+            var hasWarningMessage = testSink.Writes
+                .Where(wc => wc.LogLevel == LogLevel.Warning)
                 .Select(wc => wc.State?.ToString())
                 .Contains(ResponseCacheHeadersOverrideWarningMessage);
             Assert.False(hasWarningMessage);
@@ -1528,7 +1550,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             var tokenSet = antiforgery.GetAndStoreTokens(context.HttpContext);
 
             // Assert
-            var hasWarningMessage = testSink.Writes.Where(wc => wc.LogLevel == LogLevel.Warning)
+            var hasWarningMessage = testSink.Writes
+                .Where(wc => wc.LogLevel == LogLevel.Warning)
                 .Select(wc => wc.State?.ToString())
                 .Contains(ResponseCacheHeadersOverrideWarningMessage);
             Assert.True(hasWarningMessage);
@@ -1564,7 +1587,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             var tokenSet = antiforgery.GetAndStoreTokens(context.HttpContext);
 
             // Assert
-            var hasWarningMessage = testSink.Writes.Where(wc => wc.LogLevel == LogLevel.Warning)
+            var hasWarningMessage = testSink.Writes
+                .Where(wc => wc.LogLevel == LogLevel.Warning)
                 .Select(wc => wc.State?.ToString())
                 .Contains(ResponseCacheHeadersOverrideWarningMessage);
             Assert.False(hasWarningMessage);
@@ -1687,12 +1711,12 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             var mockGenerator = new Mock<IAntiforgeryTokenGenerator>(MockBehavior.Strict);
             mockGenerator.Setup(
-                    o =>
-                        o.GenerateRequestToken(
-                            httpContext,
-                            useOldCookie ? testTokenSet.OldCookieToken : testTokenSet.NewCookieToken
-                        )
-                )
+                o =>
+                    o.GenerateRequestToken(
+                        httpContext,
+                        useOldCookie ? testTokenSet.OldCookieToken : testTokenSet.NewCookieToken
+                    )
+            )
                 .Returns(testTokenSet.RequestToken);
 
             mockGenerator.Setup(o => o.GenerateCookieToken())

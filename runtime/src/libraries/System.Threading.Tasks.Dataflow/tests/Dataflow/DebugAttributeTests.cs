@@ -394,7 +394,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     Tuple.Create<bool, bool, object>(
                         true,
                         false,
-                        new BufferBlock<int>().AsObservable()
+                        new BufferBlock<int>()
+                            .AsObservable()
                             .Subscribe(DataflowBlock.NullTarget<int>().AsObserver())
                     ),
                     // Other

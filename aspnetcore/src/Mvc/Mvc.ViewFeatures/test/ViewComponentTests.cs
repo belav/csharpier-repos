@@ -269,9 +269,8 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var httpContext = new DefaultHttpContext();
-            httpContext.Features.Set<ISessionFeature>(
-                new SessionFeature() { Session = new TestSession() }
-            );
+            httpContext.Features
+                .Set<ISessionFeature>(new SessionFeature() { Session = new TestSession() });
             var viewContext = new ViewContext();
             viewContext.TempData = new TempDataDictionary(
                 httpContext,

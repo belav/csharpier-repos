@@ -74,10 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             );
                         }
 
-                        var removed = key.DeclaringEntityType.Builder.HasNoKey(
-                            key,
-                            configurationSource
-                        );
+                        var removed = key.DeclaringEntityType.Builder
+                            .HasNoKey(key, configurationSource);
                         Check.DebugAssert(removed != null, "removed is null");
                     }
 
@@ -105,9 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             (
                 (
                     configurationSource.HasValue
-                    && configurationSource.Value.Overrides(
-                        Metadata.GetIsNullableConfigurationSource()
-                    )
+                    && configurationSource.Value
+                        .Overrides(Metadata.GetIsNullableConfigurationSource())
                 ) || (Metadata.IsNullable == !required)
             ) && (required != false || Metadata.ClrType.IsNullableType());
 
@@ -210,10 +207,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             PropertyAccessMode? propertyAccessMode,
             ConfigurationSource configurationSource
         ) =>
-            (InternalPropertyBuilder?)base.UsePropertyAccessMode(
-                propertyAccessMode,
-                configurationSource
-            );
+            (InternalPropertyBuilder?)base
+                .UsePropertyAccessMode(propertyAccessMode, configurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

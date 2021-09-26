@@ -21,9 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var attributes = new object[] { new DataMemberAttribute() { IsRequired = true, } };
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(ClassWithDataMemberIsRequiredTrue).GetProperty(
-                    nameof(ClassWithDataMemberIsRequiredTrue.StringProperty)
-                ),
+                typeof(ClassWithDataMemberIsRequiredTrue)
+                    .GetProperty(nameof(ClassWithDataMemberIsRequiredTrue.StringProperty)),
                 typeof(string),
                 typeof(ClassWithDataMemberIsRequiredTrue)
             );
@@ -50,9 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var attributes = new object[] { new DataMemberAttribute() { IsRequired = false, } };
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(ClassWithDataMemberIsRequiredFalse).GetProperty(
-                    nameof(ClassWithDataMemberIsRequiredFalse.StringProperty)
-                ),
+                typeof(ClassWithDataMemberIsRequiredFalse)
+                    .GetProperty(nameof(ClassWithDataMemberIsRequiredFalse.StringProperty)),
                 typeof(string),
                 typeof(ClassWithDataMemberIsRequiredFalse)
             );
@@ -104,9 +102,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = new DataMemberRequiredBindingMetadataProvider();
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(ClassWithoutAttributes).GetProperty(
-                    nameof(ClassWithoutAttributes.StringProperty)
-                ),
+                typeof(ClassWithoutAttributes)
+                    .GetProperty(nameof(ClassWithoutAttributes.StringProperty)),
                 typeof(string),
                 typeof(ClassWithoutAttributes)
             );
@@ -135,9 +132,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var attributes = new object[] { new DataMemberAttribute() { IsRequired = true, } };
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract).GetProperty(
-                    nameof(ClassWithDataMemberIsRequiredTrueWithoutDataContract.StringProperty)
-                ),
+                typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract)
+                    .GetProperty(
+                        nameof(ClassWithDataMemberIsRequiredTrueWithoutDataContract.StringProperty)
+                    ),
                 typeof(string),
                 typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract)
             );

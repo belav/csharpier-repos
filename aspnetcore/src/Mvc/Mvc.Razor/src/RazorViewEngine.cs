@@ -400,13 +400,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var expirationTokens = new HashSet<IChangeToken>();
             foreach (var location in viewLocations)
             {
-                var path = string.Format(
-                    CultureInfo.InvariantCulture,
-                    location,
-                    expanderContext.ViewName,
-                    expanderContext.ControllerName,
-                    expanderContext.AreaName
-                );
+                var path = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        location,
+                        expanderContext.ViewName,
+                        expanderContext.ControllerName,
+                        expanderContext.AreaName
+                    );
 
                 path = ViewEnginePath.ResolvePath(path);
 

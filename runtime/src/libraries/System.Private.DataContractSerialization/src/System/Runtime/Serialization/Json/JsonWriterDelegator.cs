@@ -233,12 +233,13 @@ namespace System.Runtime.Serialization.Json
                     //TimeSpan ts = TimeZone.CurrentTimeZone.GetUtcOffset(value.ToLocalTime());
                     TimeSpan ts = TimeZoneInfo.Local.GetUtcOffset(value.ToLocalTime());
                     writer.WriteString(
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "{0:+00;-00}{1:00;00}",
-                            ts.Hours,
-                            ts.Minutes
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "{0:+00;-00}{1:00;00}",
+                                ts.Hours,
+                                ts.Minutes
+                            )
                     );
                     break;
                 case DateTimeKind.Utc:

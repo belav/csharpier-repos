@@ -669,10 +669,8 @@ namespace R2RDump
                     )
                 )
                 {
-                    string runtimeFunctionName = string.Format(
-                        "RUNTIME_FUNCTION[{0}]",
-                        runtimeFunctionIndex
-                    );
+                    string runtimeFunctionName = string
+                        .Format("RUNTIME_FUNCTION[{0}]", runtimeFunctionIndex);
 
                     if (_options.Naked)
                     {
@@ -1156,10 +1154,8 @@ namespace R2RDump
                     )
                 )
                 {
-                    string runtimeFunctionName = string.Format(
-                        "RUNTIME_FUNCTION[{0}]",
-                        runtimeFunctionIndex
-                    );
+                    string runtimeFunctionName = string
+                        .Format("RUNTIME_FUNCTION[{0}]", runtimeFunctionIndex);
                     var translated = new StringBuilder();
 
                     if (_options.Naked)

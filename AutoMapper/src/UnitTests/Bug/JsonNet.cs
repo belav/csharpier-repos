@@ -24,7 +24,8 @@ namespace AutoMapper.UnitTests.Bug
                         from pair in json.Split('&')
                         let items = pair.Split(',')
                         select new StringKeyValuePair(items[0], items[1])
-                    ).ToDictionary(kvp => kvp.Key, kvp => kvp.Value)
+                    )
+                        .ToDictionary(kvp => kvp.Key, kvp => kvp.Value)
                 ) { }
         }
 

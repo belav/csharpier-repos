@@ -38,12 +38,8 @@ namespace System.Web.Http.Tracing.Tracers
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
             int calls = 0;
             mock.Setup(
-                    f =>
-                        f.AuthenticateAsync(
-                            expectedAuthenticationContext,
-                            expectedCancellationToken
-                        )
-                )
+                f => f.AuthenticateAsync(expectedAuthenticationContext, expectedCancellationToken)
+            )
                 .Callback(
                     () =>
                     {
@@ -80,12 +76,12 @@ namespace System.Web.Http.Tracing.Tracers
             CancellationToken cancellationToken = CreateCancellationToken();
             Mock<IAuthenticationFilter> filterMock = new Mock<IAuthenticationFilter>();
             filterMock.Setup(
-                    f =>
-                        f.AuthenticateAsync(
-                            It.IsAny<HttpAuthenticationContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback(
                     (HttpAuthenticationContext context, CancellationToken token) =>
                         context.Principal = CreateDummyPrincipal(withIdentity)
@@ -133,12 +129,12 @@ namespace System.Web.Http.Tracing.Tracers
             CancellationToken cancellationToken = CreateCancellationToken();
             Mock<IAuthenticationFilter> filterMock = new Mock<IAuthenticationFilter>();
             filterMock.Setup(
-                    f =>
-                        f.AuthenticateAsync(
-                            It.IsAny<HttpAuthenticationContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback(
                     (HttpAuthenticationContext context, CancellationToken token) =>
                         context.ErrorResult = result
@@ -438,20 +434,20 @@ namespace System.Web.Http.Tracing.Tracers
         {
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
             mock.Setup(
-                    f =>
-                        f.AuthenticateAsync(
-                            It.IsAny<HttpAuthenticationContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(Task.FromResult<object>(null));
             mock.Setup(
-                    f =>
-                        f.ChallengeAsync(
-                            It.IsAny<HttpAuthenticationChallengeContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                f =>
+                    f.ChallengeAsync(
+                        It.IsAny<HttpAuthenticationChallengeContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(Task.FromResult<object>(null));
             return mock.Object;
         }
@@ -466,14 +462,14 @@ namespace System.Web.Http.Tracing.Tracers
             Mock<ITraceWriter> mock = new Mock<ITraceWriter>(MockBehavior.Strict);
             TraceRecord record = null;
             mock.Setup(
-                    t =>
-                        t.Trace(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<string>(),
-                            It.IsAny<TraceLevel>(),
-                            It.IsAny<Action<TraceRecord>>()
-                        )
-                )
+                t =>
+                    t.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
+            )
                 .Callback<HttpRequestMessage, string, TraceLevel, Action<TraceRecord>>(
                     (r, c, l, a) =>
                     {

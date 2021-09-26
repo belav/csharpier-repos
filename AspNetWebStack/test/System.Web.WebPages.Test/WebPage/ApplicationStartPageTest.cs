@@ -86,10 +86,11 @@ namespace System.Web.WebPages.Test
                         new HttpRequest("default.cshtml", "http://localhost/default.cshtml", null),
                         new HttpResponse(new StringWriter(new StringBuilder()))
                     );
-                    var hideRequestResponse = typeof(HttpContext).GetField(
-                        "HideRequestResponse",
-                        BindingFlags.NonPublic | BindingFlags.Instance
-                    );
+                    var hideRequestResponse = typeof(HttpContext)
+                        .GetField(
+                            "HideRequestResponse",
+                            BindingFlags.NonPublic | BindingFlags.Instance
+                        );
                     hideRequestResponse.SetValue(context, true);
 
                     HttpContext.Current = context;

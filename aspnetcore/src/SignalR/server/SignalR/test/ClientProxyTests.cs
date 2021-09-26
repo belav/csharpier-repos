@@ -24,14 +24,14 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
             o.Setup(
-                    m =>
-                        m.SendUserAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                m =>
+                    m.SendUserAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<string, string, object[], CancellationToken>(
                     (userId, methodName, args, _) =>
                     {
@@ -58,14 +58,14 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
             o.Setup(
-                    m =>
-                        m.SendUsersAsync(
-                            It.IsAny<IReadOnlyList<string>>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                m =>
+                    m.SendUsersAsync(
+                        It.IsAny<IReadOnlyList<string>>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<IReadOnlyList<string>, string, object[], CancellationToken>(
                     (userIds, methodName, args, _) =>
                     {
@@ -92,14 +92,14 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
             o.Setup(
-                    m =>
-                        m.SendGroupAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                m =>
+                    m.SendGroupAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<string, string, object[], CancellationToken>(
                     (groupName, methodName, args, _) =>
                     {
@@ -126,14 +126,14 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
             o.Setup(
-                    m =>
-                        m.SendGroupsAsync(
-                            It.IsAny<IReadOnlyList<string>>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                m =>
+                    m.SendGroupsAsync(
+                        It.IsAny<IReadOnlyList<string>>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<IReadOnlyList<string>, string, object[], CancellationToken>(
                     (groupNames, methodName, args, _) =>
                     {
@@ -160,15 +160,15 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
             o.Setup(
-                    m =>
-                        m.SendGroupExceptAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<IReadOnlyList<string>>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                m =>
+                    m.SendGroupExceptAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<IReadOnlyList<string>>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<string, string, object[], IReadOnlyList<string>, CancellationToken>(
                     (groupName, methodName, args, excludedConnectionIds, _) =>
                     {
@@ -195,13 +195,13 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
             o.Setup(
-                    m =>
-                        m.SendAllAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                m =>
+                    m.SendAllAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<string, object[], CancellationToken>(
                     (methodName, args, _) =>
                     {
@@ -228,14 +228,14 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
             o.Setup(
-                    m =>
-                        m.SendAllExceptAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<IReadOnlyList<string>>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                m =>
+                    m.SendAllExceptAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<IReadOnlyList<string>>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<string, object[], IReadOnlyList<string>, CancellationToken>(
                     (methodName, args, excludedConnectionIds, _) =>
                     {
@@ -262,14 +262,14 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
             o.Setup(
-                    m =>
-                        m.SendConnectionAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                m =>
+                    m.SendConnectionAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<string, string, object[], CancellationToken>(
                     (connectionId, methodName, args, _) =>
                     {
@@ -296,14 +296,14 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var o = new Mock<HubLifetimeManager<FakeHub>>();
             o.Setup(
-                    m =>
-                        m.SendConnectionsAsync(
-                            It.IsAny<IReadOnlyList<string>>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                m =>
+                    m.SendConnectionsAsync(
+                        It.IsAny<IReadOnlyList<string>>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<IReadOnlyList<string>, string, object[], CancellationToken>(
                     (connectionIds, methodName, args, _) =>
                     {

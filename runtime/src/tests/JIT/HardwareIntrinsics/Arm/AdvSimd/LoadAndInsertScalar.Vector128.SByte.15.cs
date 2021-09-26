@@ -322,7 +322,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             SByte op3 = TestLibrary.Generator.GetSByte();
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.LoadAndInsertScalar),
                     new Type[] { typeof(Vector128<SByte>), typeof(byte), typeof(SByte*) }
                 )
@@ -346,7 +347,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             SByte op3 = TestLibrary.Generator.GetSByte();
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.LoadAndInsertScalar),
                     new Type[] { typeof(Vector128<SByte>), typeof(byte), typeof(SByte*) }
                 )
@@ -612,16 +614,15 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.LoadAndInsertScalar)}<SByte>(Vector128<SByte>, 15, SByte*): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.LoadAndInsertScalar)}<SByte>(Vector128<SByte>, 15, SByte*): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($" thirdOp: {thirdOp}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

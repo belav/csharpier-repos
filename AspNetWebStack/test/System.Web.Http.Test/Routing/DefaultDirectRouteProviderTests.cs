@@ -328,12 +328,13 @@ namespace System.Web.Http.Routing
                 IInlineConstraintResolver constraintResolver
             )
             {
-                return base.GetControllerDirectRoutes(
-                    controllerDescriptor,
-                    actionDescriptors,
-                    factories,
-                    constraintResolver
-                );
+                return base
+                    .GetControllerDirectRoutes(
+                        controllerDescriptor,
+                        actionDescriptors,
+                        factories,
+                        constraintResolver
+                    );
             }
 
             public new IReadOnlyList<RouteEntry> GetActionDirectRoutes(

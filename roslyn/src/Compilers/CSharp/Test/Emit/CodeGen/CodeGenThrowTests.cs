@@ -373,12 +373,11 @@ class X
     public static implicit operator System.NullReferenceException(X x) => new System.NullReferenceException();
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7_3)
-                .VerifyDiagnostics(
-                    // (6,15): error CS0155: The type caught or thrown must be derived from System.Exception
-                    //         throw x;
-                    Diagnostic(ErrorCode.ERR_BadExceptionType, "x").WithLocation(6, 15)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular7_3).VerifyDiagnostics(
+                // (6,15): error CS0155: The type caught or thrown must be derived from System.Exception
+                //         throw x;
+                Diagnostic(ErrorCode.ERR_BadExceptionType, "x").WithLocation(6, 15)
+            );
             var compilation = CompileAndVerify(source);
             compilation.VerifyDiagnostics();
 
@@ -444,14 +443,13 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,15): error CS0029: Cannot implicitly convert type 'T' to 'System.Exception'
-                    //         throw t;
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "t")
-                        .WithArguments("T", "System.Exception")
-                        .WithLocation(6, 15)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,15): error CS0029: Cannot implicitly convert type 'T' to 'System.Exception'
+                //         throw t;
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "t")
+                    .WithArguments("T", "System.Exception")
+                    .WithLocation(6, 15)
+            );
         }
     }
 }

@@ -277,20 +277,18 @@ namespace System.IO.Ports.Tests
                 // we can check if data was received on the other side though
                 Action read = () =>
                 {
-                    com2.BaseStream.Read(
-                        new byte[DEFAULT_NUM_BYTES_TO_WRITE],
-                        0,
-                        DEFAULT_NUM_BYTES_TO_WRITE
-                    );
+                    com2.BaseStream
+                        .Read(new byte[DEFAULT_NUM_BYTES_TO_WRITE], 0, DEFAULT_NUM_BYTES_TO_WRITE);
                 };
 
-                IAsyncResult writeAsyncResult = com1.BaseStream.BeginWrite(
-                    new byte[DEFAULT_NUM_BYTES_TO_WRITE],
-                    0,
-                    DEFAULT_NUM_BYTES_TO_WRITE,
-                    callbackHandler.Callback,
-                    this
-                );
+                IAsyncResult writeAsyncResult = com1.BaseStream
+                    .BeginWrite(
+                        new byte[DEFAULT_NUM_BYTES_TO_WRITE],
+                        0,
+                        DEFAULT_NUM_BYTES_TO_WRITE,
+                        callbackHandler.Callback,
+                        this
+                    );
                 callbackHandler.BeginWriteAysncResult = writeAsyncResult;
 
                 Assert.Equal(this, writeAsyncResult.AsyncState);
@@ -351,20 +349,18 @@ namespace System.IO.Ports.Tests
 
                 Action read = () =>
                 {
-                    com2.BaseStream.Read(
-                        new byte[DEFAULT_NUM_BYTES_TO_WRITE],
-                        0,
-                        DEFAULT_NUM_BYTES_TO_WRITE
-                    );
+                    com2.BaseStream
+                        .Read(new byte[DEFAULT_NUM_BYTES_TO_WRITE], 0, DEFAULT_NUM_BYTES_TO_WRITE);
                 };
 
-                IAsyncResult writeAsyncResult = com1.BaseStream.BeginWrite(
-                    new byte[DEFAULT_NUM_BYTES_TO_WRITE],
-                    0,
-                    DEFAULT_NUM_BYTES_TO_WRITE,
-                    callbackHandler.Callback,
-                    this
-                );
+                IAsyncResult writeAsyncResult = com1.BaseStream
+                    .BeginWrite(
+                        new byte[DEFAULT_NUM_BYTES_TO_WRITE],
+                        0,
+                        DEFAULT_NUM_BYTES_TO_WRITE,
+                        callbackHandler.Callback,
+                        this
+                    );
                 callbackHandler.BeginWriteAysncResult = writeAsyncResult;
 
                 Assert.Throws<TimeoutException>(read);
@@ -537,13 +533,8 @@ namespace System.IO.Ports.Tests
 
             for (int i = 0; i < numWrites; i++)
             {
-                IAsyncResult writeAsyncResult = com1.BaseStream.BeginWrite(
-                    buffer,
-                    offset,
-                    count,
-                    callbackHandler.Callback,
-                    this
-                );
+                IAsyncResult writeAsyncResult = com1.BaseStream
+                    .BeginWrite(buffer, offset, count, callbackHandler.Callback, this);
                 com1.BaseStream.EndWrite(writeAsyncResult);
                 callbackHandler.BeginWriteAysncResult = writeAsyncResult;
 

@@ -696,11 +696,12 @@ namespace System.Management
 
                     if (this is ManagementObject && obj is ManagementObject)
                     {
-                        int compareRes = string.Compare(
-                            ((ManagementObject)this).Path.Path,
-                            ((ManagementObject)obj).Path.Path,
-                            StringComparison.OrdinalIgnoreCase
-                        );
+                        int compareRes = string
+                            .Compare(
+                                ((ManagementObject)this).Path.Path,
+                                ((ManagementObject)obj).Path.Path,
+                                StringComparison.OrdinalIgnoreCase
+                            );
                         return (compareRes == 0);
                     }
                 }

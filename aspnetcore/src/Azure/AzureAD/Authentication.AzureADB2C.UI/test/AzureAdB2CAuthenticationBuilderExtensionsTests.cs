@@ -42,20 +42,19 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddAzureADB2C(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com/tfp";
-                        o.ClientId = "ClientId";
-                        o.ClientSecret = "ClientSecret";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                        o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
-                        o.ResetPasswordPolicyId = "B2C_1_SSPR";
-                        o.EditProfilePolicyId = "B2C_1_SiPe";
-                    }
-                );
+            services.AddAuthentication().AddAzureADB2C(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com/tfp";
+                    o.ClientId = "ClientId";
+                    o.ClientSecret = "ClientSecret";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                    o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
+                    o.ResetPasswordPolicyId = "B2C_1_SSPR";
+                    o.EditProfilePolicyId = "B2C_1_SiPe";
+                }
+            );
             var provider = services.BuildServiceProvider();
 
             // Assert
@@ -131,17 +130,16 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddAzureADB2C(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com";
-                        o.ClientId = "ClientId";
-                        o.ClientSecret = "ClientSecret";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                    }
-                );
+            services.AddAuthentication().AddAzureADB2C(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com";
+                    o.ClientId = "ClientId";
+                    o.ClientSecret = "ClientSecret";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                }
+            );
 
             services.Configure<OpenIdConnectOptions>(
                 AzureADB2CDefaults.OpenIdScheme,
@@ -190,19 +188,16 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddCookie()
-                .AddOpenIdConnect()
-                .AddAzureADB2C(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com";
-                        o.ClientId = "ClientId";
-                        o.ClientSecret = "ClientSecret";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                    }
-                );
+            services.AddAuthentication().AddCookie().AddOpenIdConnect().AddAzureADB2C(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com";
+                    o.ClientId = "ClientId";
+                    o.ClientSecret = "ClientSecret";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                }
+            );
 
             services.Configure<OpenIdConnectOptions>(
                 AzureADB2CDefaults.OpenIdScheme,
@@ -348,17 +343,16 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddAzureADB2CBearer(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com/tfp";
-                        o.ClientId = "ClientId";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                        o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
-                    }
-                );
+            services.AddAuthentication().AddAzureADB2CBearer(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com/tfp";
+                    o.ClientId = "ClientId";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                    o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
+                }
+            );
             var provider = services.BuildServiceProvider();
 
             // Assert
@@ -398,17 +392,16 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddAzureADB2CBearer(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com/";
-                        o.ClientId = "ClientId";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                        o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
-                    }
-                );
+            services.AddAuthentication().AddAzureADB2CBearer(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com/";
+                    o.ClientId = "ClientId";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                    o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
+                }
+            );
 
             services.Configure<JwtBearerOptions>(
                 AzureADB2CDefaults.JwtBearerAuthenticationScheme,
@@ -441,18 +434,16 @@ namespace Microsoft.AspNetCore.Authentication
             services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             // Act
-            services.AddAuthentication()
-                .AddJwtBearer()
-                .AddAzureADB2CBearer(
-                    o =>
-                    {
-                        o.Instance = "https://login.microsoftonline.com/";
-                        o.ClientId = "ClientId";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "domain.onmicrosoft.com";
-                        o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
-                    }
-                );
+            services.AddAuthentication().AddJwtBearer().AddAzureADB2CBearer(
+                o =>
+                {
+                    o.Instance = "https://login.microsoftonline.com/";
+                    o.ClientId = "ClientId";
+                    o.CallbackPath = "/signin-oidc";
+                    o.Domain = "domain.onmicrosoft.com";
+                    o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
+                }
+            );
 
             services.Configure<JwtBearerOptions>(
                 AzureADB2CDefaults.JwtBearerAuthenticationScheme,

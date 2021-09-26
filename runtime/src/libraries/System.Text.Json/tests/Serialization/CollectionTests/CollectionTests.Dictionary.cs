@@ -1094,11 +1094,8 @@ namespace System.Text.Json.Serialization.Tests
                 string json = JsonSerializer.Serialize(obj);
 
                 // Duplicate the unicode character 'charsInProperty' times.
-                string longPropertyNameEscaped = new StringBuilder().Insert(
-                        0,
-                        @"\u0467",
-                        charsInProperty
-                    )
+                string longPropertyNameEscaped = new StringBuilder()
+                    .Insert(0, @"\u0467", charsInProperty)
                     .ToString();
 
                 string expectedJson = $"{{\"{longPropertyNameEscaped}\":1}}";

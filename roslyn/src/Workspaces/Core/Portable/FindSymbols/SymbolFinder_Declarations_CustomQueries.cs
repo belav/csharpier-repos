@@ -44,11 +44,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             using var query = SearchQuery.CreateCustom(predicate);
             var declarations = await FindSourceDeclarationsWithCustomQueryAsync(
-                    solution,
-                    query,
-                    filter,
-                    cancellationToken
-                )
+                solution,
+                query,
+                filter,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return declarations;
@@ -85,11 +85,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 {
                     var project = solution.GetProject(projectId);
                     var symbols = await FindSourceDeclarationsWithCustomQueryAsync(
-                            project,
-                            query,
-                            filter,
-                            cancellationToken
-                        )
+                        project,
+                        query,
+                        filter,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     result.AddRange(symbols);
                 }
@@ -119,11 +119,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             using var query = SearchQuery.CreateCustom(predicate);
             var declarations = await FindSourceDeclarationsWithCustomQueryAsync(
-                    project,
-                    query,
-                    filter,
-                    cancellationToken
-                )
+                project,
+                query,
+                filter,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return declarations;
@@ -157,10 +157,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 if (
                     await project.ContainsSymbolsWithNameAsync(
-                            query.GetPredicate(),
-                            filter,
-                            cancellationToken
-                        )
+                        query.GetPredicate(),
+                        filter,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -168,10 +168,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         .ConfigureAwait(false);
 
                     var unfiltered = compilation.GetSymbolsWithName(
-                            query.GetPredicate(),
-                            filter,
-                            cancellationToken
-                        )
+                        query.GetPredicate(),
+                        filter,
+                        cancellationToken
+                    )
                         .ToImmutableArray();
 
                     return DeclarationFinder.FilterByCriteria(unfiltered, filter);

@@ -105,8 +105,8 @@ namespace System.Linq.Expressions.Tests
                     ? type == typeof(void)
                     : type.IsInstanceOfType(
                           Expression.Lambda<Func<object>>(
-                                  Expression.Convert(expression, typeof(object))
-                              )
+                              Expression.Convert(expression, typeof(object))
+                          )
                               .Compile()()
                       );
 
@@ -133,20 +133,20 @@ namespace System.Linq.Expressions.Tests
                     ? type == typeof(void)
                     : type.IsInstanceOfType(
                           Expression.Lambda<Func<object>>(
-                                  Expression.Convert(expression, typeof(object))
-                              )
+                              Expression.Convert(expression, typeof(object))
+                          )
                               .Compile()()
                       );
 
             ParameterExpression param = Expression.Parameter(expression.Type);
 
             Func<bool> func = Expression.Lambda<Func<bool>>(
-                    Expression.Block(
-                        new[] { param },
-                        Expression.Assign(param, expression),
-                        Expression.TypeIs(param, type)
-                    )
+                Expression.Block(
+                    new[] { param },
+                    Expression.Assign(param, expression),
+                    Expression.TypeIs(param, type)
                 )
+            )
                 .Compile(useInterpreter);
 
             Assert.Equal(expected, func());

@@ -56,11 +56,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     {
                         var span = diagnostic.Location.SourceSpan;
                         var removeSuppressionFixes = await _suppressionFixProvider.GetFixesAsync(
-                                document,
-                                span,
-                                SpecializedCollections.SingletonEnumerable(diagnostic),
-                                cancellationToken
-                            )
+                            document,
+                            span,
+                            SpecializedCollections.SingletonEnumerable(diagnostic),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         var removeSuppressionFix = removeSuppressionFixes.SingleOrDefault();
                         if (removeSuppressionFix != null)
@@ -119,10 +119,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     )
                     {
                         var removeSuppressionFixes = await _suppressionFixProvider.GetFixesAsync(
-                                project,
-                                SpecializedCollections.SingletonEnumerable(diagnostic),
-                                cancellationToken
-                            )
+                            project,
+                            SpecializedCollections.SingletonEnumerable(diagnostic),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (
                             removeSuppressionFixes.SingleOrDefault()?.Action
@@ -182,9 +182,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                                 removeSuppressionFixesForTree.OfType<AttributeRemoveAction>()
                                     .ToImmutableArray();
                             var attributesToRemove = await GetAttributeNodesToFixAsync(
-                                    attributeRemoveFixesForTree,
-                                    cancellationToken
-                                )
+                                attributeRemoveFixesForTree,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             var document = oldSolution.GetDocument(tree);
                             var root = await document.GetSyntaxRootAsync(cancellationToken)
@@ -212,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         newBatchOfFixes.Insert(0, (diagnostic: null, batchAttributeRemoveFix));
                     }
 
-                    return await base.TryGetMergedFixAsync(
+                    return await base
+                        .TryGetMergedFixAsync(
                             newBatchOfFixes.ToImmutableArray(),
                             fixAllState,
                             cancellationToken
@@ -225,15 +226,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     CancellationToken cancellationToken
                 )
                 {
-                    using var builderDisposer = ArrayBuilder<SyntaxNode>.GetInstance(
-                        attributeRemoveFixes.Length,
-                        out var builder
-                    );
+                    using var builderDisposer = ArrayBuilder<SyntaxNode>
+                        .GetInstance(attributeRemoveFixes.Length, out var builder);
                     foreach (var attributeRemoveFix in attributeRemoveFixes)
                     {
                         var attributeToRemove = await attributeRemoveFix.GetAttributeToRemoveAsync(
-                                cancellationToken
-                            )
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         builder.Add(attributeToRemove);
                     }

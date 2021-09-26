@@ -327,7 +327,8 @@ namespace @foreach { }
             CSharpCompilation comp = CreateCompilation(syntaxTree);
             UsingDirectiveSyntax usingAlias = (
                 syntaxTree.GetCompilationUnitRoot() as CompilationUnitSyntax
-            ).Usings.First();
+            ).Usings
+                .First();
             var alias = comp.GetSemanticModel(syntaxTree).GetDeclaredSymbol(usingAlias);
             Assert.Equal("for", alias.Name);
             Assert.Equal("@for", alias.ToString());

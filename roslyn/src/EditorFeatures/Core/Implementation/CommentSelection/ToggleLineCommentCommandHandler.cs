@@ -88,10 +88,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             )
             {
                 var commentInfo = await service.GetInfoAsync(
-                        document,
-                        selectedSpans.First().Span.ToTextSpan(),
-                        cancellationToken
-                    )
+                    document,
+                    selectedSpans.First().Span.ToTextSpan(),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (commentInfo.SupportsSingleLineComment)
                 {
@@ -120,9 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
             Operation operation;
             // If any of the lines are uncommented, add comments.
             if (
-                linesInSelections.Values.Any(
-                    lines => SelectionHasUncommentedLines(lines, commentInfo)
-                )
+                linesInSelections.Values
+                    .Any(lines => SelectionHasUncommentedLines(lines, commentInfo))
             )
             {
                 foreach (var selection in linesInSelections)

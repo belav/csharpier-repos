@@ -27,9 +27,9 @@ namespace System.Web.Mvc.Test
 
             // Act
             ModelValidator[] validators = validatorProvider.GetValidators(
-                    metadata,
-                    new ControllerContext()
-                )
+                metadata,
+                new ControllerContext()
+            )
                 .ToArray();
 
             // Assert
@@ -233,10 +233,8 @@ namespace System.Web.Mvc.Test
             ControllerContext controllerContext = new ControllerContext();
 
             // Act
-            ModelValidator[] validators = new DataErrorInfoModelValidatorProvider().GetValidators(
-                    metadata,
-                    controllerContext
-                )
+            ModelValidator[] validators = new DataErrorInfoModelValidatorProvider()
+                .GetValidators(metadata, controllerContext)
                 .ToArray();
             ModelValidationResult[] results = validators.SelectMany(o => o.Validate(model))
                 .ToArray();

@@ -173,9 +173,8 @@ namespace Microsoft.AspNetCore.Tests
                     )
                 )
                 {
-                    var factory = (ILoggerFactory)webHost.Services.GetService(
-                        typeof(ILoggerFactory)
-                    );
+                    var factory = (ILoggerFactory)webHost.Services
+                        .GetService(typeof(ILoggerFactory));
                     var logger = factory.CreateLogger("Test");
 
                     logger.Log(
@@ -331,12 +330,10 @@ namespace Microsoft.AspNetCore.Tests
             string environment
         )
         {
-            deploymentParameters.EnvironmentVariables.Add(
-                new KeyValuePair<string, string>("aspnetcore_environment", environment)
-            );
-            deploymentParameters.EnvironmentVariables.Add(
-                new KeyValuePair<string, string>("envKey", "envValue")
-            );
+            deploymentParameters.EnvironmentVariables
+                .Add(new KeyValuePair<string, string>("aspnetcore_environment", environment));
+            deploymentParameters.EnvironmentVariables
+                .Add(new KeyValuePair<string, string>("envKey", "envValue"));
         }
 
         private static string GetTestSitesPath()

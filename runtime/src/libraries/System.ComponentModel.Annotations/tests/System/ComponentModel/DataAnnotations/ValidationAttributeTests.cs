@@ -304,10 +304,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
             );
             Assert.Equal("Invalid Value", exception.Value);
             Assert.Equal(
-                string.Format(
-                    ValidationAttributeOverrideBothIsValids.PublicErrorMessageTestPropertyWithName,
-                    "Error Message Name"
-                ),
+                string
+                    .Format(
+                        ValidationAttributeOverrideBothIsValids.PublicErrorMessageTestPropertyWithName,
+                        "Error Message Name"
+                    ),
                 exception.ValidationResult.ErrorMessage
             );
         }

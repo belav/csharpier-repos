@@ -74,10 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             CancellationToken cancellationToken
         )
         {
-            using var spansDisposer = ArrayBuilder<TextSpan>.GetInstance(
-                diagnostics.Length,
-                out var spans
-            );
+            using var spansDisposer = ArrayBuilder<TextSpan>
+                .GetInstance(diagnostics.Length, out var spans);
             foreach (var diagnostic in diagnostics)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -93,12 +91,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
                 var properties = diagnostic.Properties;
                 var nodeToGenerate = (SyntaxKind)int.Parse(properties[Constants.NodeToGenerateKey]);
-                var shouldRemoveNextStatement = bool.Parse(
-                    properties[Constants.ShouldRemoveNextStatementKey]
-                );
+                var shouldRemoveNextStatement = bool
+                    .Parse(properties[Constants.ShouldRemoveNextStatementKey]);
 
-                var declaratorToRemoveLocationOpt =
-                    diagnostic.AdditionalLocations.ElementAtOrDefault(1);
+                var declaratorToRemoveLocationOpt = diagnostic.AdditionalLocations
+                    .ElementAtOrDefault(1);
                 var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -111,9 +108,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                         cancellationToken
                     );
                     declaratorToRemoveTypeOpt = semanticModel.GetDeclaredSymbol(
-                            declaratorToRemoveNodeOpt,
-                            cancellationToken
-                        )
+                        declaratorToRemoveNodeOpt,
+                        cancellationToken
+                    )
                         .GetSymbolType();
                 }
 

@@ -186,11 +186,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario));
 
-            var result = Sse41.X64.Insert(
-                Unsafe.Read<Vector128<UInt64>>(_dataTable.inArrayPtr),
-                (ulong)2,
-                1
-            );
+            var result = Sse41.X64
+                .Insert(Unsafe.Read<Vector128<UInt64>>(_dataTable.inArrayPtr), (ulong)2, 1);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, (ulong)2, _dataTable.outArrayPtr);
@@ -203,11 +200,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64 localData = (ulong)2;
             UInt64* ptr = &localData;
 
-            var result = Sse41.X64.Insert(
-                Sse2.LoadVector128((UInt64*)(_dataTable.inArrayPtr)),
-                *ptr,
-                1
-            );
+            var result = Sse41.X64
+                .Insert(Sse2.LoadVector128((UInt64*)(_dataTable.inArrayPtr)), *ptr, 1);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, *ptr, _dataTable.outArrayPtr);
@@ -220,11 +214,8 @@ namespace JIT.HardwareIntrinsics.X86
             UInt64 localData = (ulong)2;
             UInt64* ptr = &localData;
 
-            var result = Sse41.X64.Insert(
-                Sse2.LoadAlignedVector128((UInt64*)(_dataTable.inArrayPtr)),
-                *ptr,
-                1
-            );
+            var result = Sse41.X64
+                .Insert(Sse2.LoadAlignedVector128((UInt64*)(_dataTable.inArrayPtr)), *ptr, 1);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, *ptr, _dataTable.outArrayPtr);
@@ -234,7 +225,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
-            var result = typeof(Sse41.X64).GetMethod(
+            var result = typeof(Sse41.X64)
+                .GetMethod(
                     nameof(Sse41.X64.Insert),
                     new Type[] { typeof(Vector128<UInt64>), typeof(UInt64), typeof(byte) }
                 )
@@ -256,7 +248,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse41.X64).GetMethod(
+            var result = typeof(Sse41.X64)
+                .GetMethod(
                     nameof(Sse41.X64.Insert),
                     new Type[] { typeof(Vector128<UInt64>), typeof(UInt64), typeof(byte) }
                 )
@@ -278,7 +271,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse41.X64).GetMethod(
+            var result = typeof(Sse41.X64)
+                .GetMethod(
                     nameof(Sse41.X64.Insert),
                     new Type[] { typeof(Vector128<UInt64>), typeof(UInt64), typeof(byte) }
                 )
@@ -470,15 +464,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse41.X64)}.{nameof(Sse41.X64.Insert)}<UInt64>(Vector128<UInt64><9>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse41.X64)}.{nameof(Sse41.X64.Insert)}<UInt64>(Vector128<UInt64><9>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"   result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

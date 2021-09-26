@@ -142,11 +142,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             }
 
             return new MyCodeAction(
-                string.Format(
-                    CSharpFeaturesResources.Change_return_type_from_0_to_1,
-                    type.ToMinimalDisplayString(model, node.SpanStart),
-                    ienumerableGenericSymbol.ToMinimalDisplayString(model, node.SpanStart)
-                ),
+                string
+                    .Format(
+                        CSharpFeaturesResources.Change_return_type_from_0_to_1,
+                        type.ToMinimalDisplayString(model, node.SpanStart),
+                        ienumerableGenericSymbol.ToMinimalDisplayString(model, node.SpanStart)
+                    ),
                 newDocument
             );
         }
@@ -157,12 +158,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             out INamedTypeSymbol ienumerableGenericSymbol
         )
         {
-            ienumerableSymbol = model.Compilation.GetTypeByMetadataName(
-                typeof(IEnumerable).FullName
-            );
-            ienumerableGenericSymbol = model.Compilation.GetTypeByMetadataName(
-                typeof(IEnumerable<>).FullName
-            );
+            ienumerableSymbol = model.Compilation
+                .GetTypeByMetadataName(typeof(IEnumerable).FullName);
+            ienumerableGenericSymbol = model.Compilation
+                .GetTypeByMetadataName(typeof(IEnumerable<>).FullName);
 
             if (ienumerableGenericSymbol == null || ienumerableSymbol == null)
             {

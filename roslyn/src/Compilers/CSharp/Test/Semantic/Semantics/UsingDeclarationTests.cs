@@ -51,16 +51,15 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,9): error CS8641: A goto target within the same block can not cross a using declaration.
-                    //         goto label1;
-                    Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label1;")
-                        .WithLocation(7, 9),
-                    // (8,9): warning CS0162: Unreachable code detected
-                    //         using var x = (IDisposable)null;
-                    Diagnostic(ErrorCode.WRN_UnreachableCode, "using").WithLocation(8, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,9): error CS8641: A goto target within the same block can not cross a using declaration.
+                //         goto label1;
+                Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label1;")
+                    .WithLocation(7, 9),
+                // (8,9): warning CS0162: Unreachable code detected
+                //         using var x = (IDisposable)null;
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "using").WithLocation(8, 9)
+            );
         }
 
         [Fact]
@@ -83,16 +82,15 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,9): error CS8641: A goto target within the same block can not cross a using declaration.
-                    //         goto label1;
-                    Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label1;")
-                        .WithLocation(8, 13),
-                    // (8,9): warning CS0162: Unreachable code detected
-                    //         using var x = (IDisposable)null;
-                    Diagnostic(ErrorCode.WRN_UnreachableCode, "using").WithLocation(10, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,9): error CS8641: A goto target within the same block can not cross a using declaration.
+                //         goto label1;
+                Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label1;")
+                    .WithLocation(8, 13),
+                // (8,9): warning CS0162: Unreachable code detected
+                //         using var x = (IDisposable)null;
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "using").WithLocation(10, 9)
+            );
         }
 
         [Fact]
@@ -114,16 +112,15 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,9): error CS8641: A goto target within the same block can not cross a using declaration.
-                    //         goto label1;
-                    Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label1;")
-                        .WithLocation(7, 9),
-                    // (8,9): warning CS0162: Unreachable code detected
-                    //         using var x = (IDisposable)null;
-                    Diagnostic(ErrorCode.WRN_UnreachableCode, "using").WithLocation(8, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,9): error CS8641: A goto target within the same block can not cross a using declaration.
+                //         goto label1;
+                Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label1;")
+                    .WithLocation(7, 9),
+                // (8,9): warning CS0162: Unreachable code detected
+                //         using var x = (IDisposable)null;
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "using").WithLocation(8, 9)
+            );
         }
 
         [Fact]
@@ -147,20 +144,19 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,9): error CS8641: A goto target within the same block can not cross a using declaration.
-                    //         goto label1;
-                    Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label1;")
-                        .WithLocation(7, 9),
-                    // (8,9): warning CS0162: Unreachable code detected
-                    //         using var x = (IDisposable)null;
-                    Diagnostic(ErrorCode.WRN_UnreachableCode, "using").WithLocation(8, 9),
-                    // (9,9): error CS8641: A goto target can not be after any using declarations.
-                    //         goto label2;
-                    Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label2;")
-                        .WithLocation(9, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,9): error CS8641: A goto target within the same block can not cross a using declaration.
+                //         goto label1;
+                Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label1;")
+                    .WithLocation(7, 9),
+                // (8,9): warning CS0162: Unreachable code detected
+                //         using var x = (IDisposable)null;
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "using").WithLocation(8, 9),
+                // (9,9): error CS8641: A goto target can not be after any using declarations.
+                //         goto label2;
+                Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label2;")
+                    .WithLocation(9, 9)
+            );
         }
 
         [Fact]
@@ -180,13 +176,12 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (10,9): error CS8641: A goto target within the same block can not cross a using declaration.
-                    //         goto label1;
-                    Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
-                        .WithLocation(10, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (10,9): error CS8641: A goto target within the same block can not cross a using declaration.
+                //         goto label1;
+                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
+                    .WithLocation(10, 9)
+            );
         }
 
         [Fact]
@@ -208,19 +203,18 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,9): warning CS0164: This label has not been referenced
-                    //         label1:
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "label1").WithLocation(7, 9),
-                    // (8,9): warning CS0164: This label has not been referenced
-                    //         label2:
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "label2").WithLocation(8, 9),
-                    // (10,9): error CS8641: A goto target within the same block can not cross a using declaration.
-                    //         goto label3; // disallowed
-                    Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label3;")
-                        .WithLocation(12, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,9): warning CS0164: This label has not been referenced
+                //         label1:
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "label1").WithLocation(7, 9),
+                // (8,9): warning CS0164: This label has not been referenced
+                //         label2:
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "label2").WithLocation(8, 9),
+                // (10,9): error CS8641: A goto target within the same block can not cross a using declaration.
+                //         goto label3; // disallowed
+                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label3;")
+                    .WithLocation(12, 9)
+            );
         }
 
         [Fact]
@@ -279,25 +273,24 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (14,13): error CS8642: A goto cannot jump to a location before a using declaration within the same block.
-                    //             goto label2; // disallowed 1
-                    Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label2;")
-                        .WithLocation(14, 13),
-                    // (20,13): error CS8642: A goto cannot jump to a location before a using declaration within the same block.
-                    //             goto label3; // disallowed 2
-                    Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label3;")
-                        .WithLocation(20, 13),
-                    // (25,13): error CS8641: A goto cannot jump to a location after a using declaration.
-                    //             goto label5; // disallowed 3
-                    Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label5;")
-                        .WithLocation(25, 13),
-                    // (45,25): error CS8642: A goto cannot jump to a location before a using declaration within the same block.
-                    //                         goto label8; // disallowed 4
-                    Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label8;")
-                        .WithLocation(45, 25)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (14,13): error CS8642: A goto cannot jump to a location before a using declaration within the same block.
+                //             goto label2; // disallowed 1
+                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label2;")
+                    .WithLocation(14, 13),
+                // (20,13): error CS8642: A goto cannot jump to a location before a using declaration within the same block.
+                //             goto label3; // disallowed 2
+                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label3;")
+                    .WithLocation(20, 13),
+                // (25,13): error CS8641: A goto cannot jump to a location after a using declaration.
+                //             goto label5; // disallowed 3
+                Diagnostic(ErrorCode.ERR_GoToForwardJumpOverUsingVar, "goto label5;")
+                    .WithLocation(25, 13),
+                // (45,25): error CS8642: A goto cannot jump to a location before a using declaration within the same block.
+                //                         goto label8; // disallowed 4
+                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label8;")
+                    .WithLocation(45, 25)
+            );
         }
 
         [Fact]
@@ -361,12 +354,11 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,9): warning CS0162: Unreachable code detected
-                    //         using var x = (IDisposable)null;
-                    Diagnostic(ErrorCode.WRN_UnreachableCode, "using").WithLocation(9, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,9): warning CS0162: Unreachable code detected
+                //         using var x = (IDisposable)null;
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "using").WithLocation(9, 13)
+            );
         }
 
         [Fact]
@@ -488,14 +480,13 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,9): error CS1656: Cannot assign to 'x' because it is a 'using variable'
-                    //         x = null;
-                    Diagnostic(ErrorCode.ERR_AssgReadonlyLocalCause, "x")
-                        .WithArguments("x", "using variable")
-                        .WithLocation(8, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,9): error CS1656: Cannot assign to 'x' because it is a 'using variable'
+                //         x = null;
+                Diagnostic(ErrorCode.ERR_AssgReadonlyLocalCause, "x")
+                    .WithArguments("x", "using variable")
+                    .WithLocation(8, 9)
+            );
         }
 
         [Fact]
@@ -518,14 +509,13 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (13,21): error CS1657: Cannot use 'x' as a ref or out value because it is a 'using variable'
-                    //         Consume(out x);
-                    Diagnostic(ErrorCode.ERR_RefReadonlyLocalCause, "x")
-                        .WithArguments("x", "using variable")
-                        .WithLocation(13, 21)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (13,21): error CS1657: Cannot use 'x' as a ref or out value because it is a 'using variable'
+                //         Consume(out x);
+                Diagnostic(ErrorCode.ERR_RefReadonlyLocalCause, "x")
+                    .WithArguments("x", "using variable")
+                    .WithLocation(13, 21)
+            );
         }
 
         [Fact]
@@ -542,12 +532,11 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,27): error CS0210: You must provide an initializer in a fixed or using statement declaration
-                    //         using IDisposable x;
-                    Diagnostic(ErrorCode.ERR_FixedMustInit, "x").WithLocation(7, 27)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,27): error CS0210: You must provide an initializer in a fixed or using statement declaration
+                //         using IDisposable x;
+                Diagnostic(ErrorCode.ERR_FixedMustInit, "x").WithLocation(7, 27)
+            );
         }
 
         [Fact]
@@ -636,13 +625,12 @@ class C2
         }
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (15,21): error CS8389: A using variable cannot be used directly within a switch section (consider using braces).
-                    //                     using C1 o1 = new C1();
-                    Diagnostic(ErrorCode.ERR_UsingVarInSwitchCase, "using C1 o1 = new C1();")
-                        .WithLocation(15, 17)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (15,21): error CS8389: A using variable cannot be used directly within a switch section (consider using braces).
+                //                     using C1 o1 = new C1();
+                Diagnostic(ErrorCode.ERR_UsingVarInSwitchCase, "using C1 o1 = new C1();")
+                    .WithLocation(15, 17)
+            );
         }
 
         [Fact]
@@ -662,16 +650,15 @@ class C2
         using var c1 = new C1(), c2 = new C2();
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (11,15): error CS0819: Implicitly-typed variables cannot have multiple declarators
-                    //         using var c1 = new C1(), c2 = new C2();
-                    Diagnostic(
-                            ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
-                            "var c1 = new C1(), c2 = new C2()"
-                        )
-                        .WithLocation(11, 15)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (11,15): error CS0819: Implicitly-typed variables cannot have multiple declarators
+                //         using var c1 = new C1(), c2 = new C2();
+                Diagnostic(
+                    ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
+                    "var c1 = new C1(), c2 = new C2()"
+                )
+                    .WithLocation(11, 15)
+            );
         }
 
         [Fact]
@@ -708,9 +695,9 @@ class C
 }
 ";
             var compilation = CreateCompilationWithTasksExtensions(
-                    source,
-                    options: TestOptions.DebugExe
-                )
+                source,
+                options: TestOptions.DebugExe
+            )
                 .VerifyDiagnostics();
 
             CompileAndVerify(
@@ -773,15 +760,15 @@ class C
             };
 
             CreateCompilationWithTasksExtensions(
-                    new[] { source, IAsyncDisposableDefinition },
-                    parseOptions: TestOptions.Regular7_3
-                )
+                new[] { source, IAsyncDisposableDefinition },
+                parseOptions: TestOptions.Regular7_3
+            )
                 .VerifyDiagnostics(expected);
 
             CreateCompilationWithTasksExtensions(
-                    new[] { source, IAsyncDisposableDefinition },
-                    parseOptions: TestOptions.Regular8
-                )
+                new[] { source, IAsyncDisposableDefinition },
+                parseOptions: TestOptions.Regular8
+            )
                 .VerifyDiagnostics();
         }
 
@@ -832,24 +819,23 @@ class C4
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (34,15): warning CS0612: 'C1' is obsolete
-                    //         using C1 c1 = new C1();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "C1")
-                        .WithArguments("C1")
-                        .WithLocation(34, 15),
-                    // (34,27): warning CS0612: 'C1' is obsolete
-                    //         using C1 c1 = new C1();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "C1")
-                        .WithArguments("C1")
-                        .WithLocation(34, 27),
-                    // (40,15): warning CS0612: 'S3.Dispose()' is obsolete
-                    //         using S3 S3 = new S3();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "using S3 S3 = new S3();")
-                        .WithArguments("S3.Dispose()")
-                        .WithLocation(40, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (34,15): warning CS0612: 'C1' is obsolete
+                //         using C1 c1 = new C1();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "C1")
+                    .WithArguments("C1")
+                    .WithLocation(34, 15),
+                // (34,27): warning CS0612: 'C1' is obsolete
+                //         using C1 c1 = new C1();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "C1")
+                    .WithArguments("C1")
+                    .WithLocation(34, 27),
+                // (40,15): warning CS0612: 'S3.Dispose()' is obsolete
+                //         using S3 S3 = new S3();
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "using S3 S3 = new S3();")
+                    .WithArguments("S3.Dispose()")
+                    .WithLocation(40, 9)
+            );
         }
 
         [Fact]
@@ -867,19 +853,18 @@ class C
     }
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular8)
-                .VerifyDiagnostics(
-                    // (7,15): error CS0106: The modifier 'public' is not valid for this item
-                    //         using public readonly var x = (IDisposable)null;
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "public")
-                        .WithArguments("public")
-                        .WithLocation(7, 15),
-                    // (7,22): error CS0106: The modifier 'readonly' is not valid for this item
-                    //         using public readonly var x = (IDisposable)null;
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly")
-                        .WithArguments("readonly")
-                        .WithLocation(7, 22)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular8).VerifyDiagnostics(
+                // (7,15): error CS0106: The modifier 'public' is not valid for this item
+                //         using public readonly var x = (IDisposable)null;
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "public")
+                    .WithArguments("public")
+                    .WithLocation(7, 15),
+                // (7,22): error CS0106: The modifier 'readonly' is not valid for this item
+                //         using public readonly var x = (IDisposable)null;
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(7, 22)
+            );
         }
     }
 }

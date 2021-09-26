@@ -31,10 +31,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 { typeof(PolygonEntity), e => ((PolygonEntity)e)?.Id },
                 { typeof(MultiLineStringEntity), e => ((MultiLineStringEntity)e)?.Id },
                 { typeof(GeoPointEntity), e => ((GeoPointEntity)e)?.Id },
-            }.ToDictionary(e => e.Key, e => (object)e.Value);
+            }
+                .ToDictionary(e => e.Key, e => (object)e.Value);
 
-        public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
-            new Dictionary<Type, Action<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntityAsserters() => new Dictionary<
+                Type,
+                Action<object, object>
+            >
             {
                 {
                     typeof(PointEntity),

@@ -34,14 +34,13 @@ namespace JwtClientSample
             _tokens[userId] = GetJwtToken(userId);
 
             var hubConnection = new HubConnectionBuilder().WithUrl(
-                    ServerUrl + "/broadcast",
-                    options =>
-                    {
-                        options.Transports = transportType;
-                        options.AccessTokenProvider = () => _tokens[userId];
-                    }
-                )
-                .Build();
+                ServerUrl + "/broadcast",
+                options =>
+                {
+                    options.Transports = transportType;
+                    options.AccessTokenProvider = () => _tokens[userId];
+                }
+            ).Build();
 
             var closedTcs = new TaskCompletionSource();
             hubConnection.Closed += e =>
@@ -95,9 +94,8 @@ namespace JwtClientSample
 
         private async Task<string> GetJwtToken(string userId)
         {
-            var httpResponse = await new HttpClient().GetAsync(
-                ServerUrl + $"/generatetoken?user={userId}"
-            );
+            var httpResponse = await new HttpClient()
+                .GetAsync(ServerUrl + $"/generatetoken?user={userId}");
             httpResponse.EnsureSuccessStatusCode();
             return await httpResponse.Content.ReadAsStringAsync();
         }

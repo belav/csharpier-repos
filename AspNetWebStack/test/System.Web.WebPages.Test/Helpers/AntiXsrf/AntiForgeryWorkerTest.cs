@@ -110,8 +110,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
                 MockBehavior.Strict
             );
             mockValidator.Setup(
-                    o => o.GenerateFormToken(mockHttpContext.Object, identity, newCookieToken)
-                )
+                o => o.GenerateFormToken(mockHttpContext.Object, identity, newCookieToken)
+            )
                 .Returns(formToken);
             mockValidator.Setup(o => o.IsCookieTokenValid(oldCookieToken)).Returns(false);
             mockValidator.Setup(o => o.IsCookieTokenValid(newCookieToken)).Returns(true);
@@ -173,8 +173,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
                 MockBehavior.Strict
             );
             mockValidator.Setup(
-                    o => o.GenerateFormToken(mockHttpContext.Object, identity, newCookieToken)
-                )
+                o => o.GenerateFormToken(mockHttpContext.Object, identity, newCookieToken)
+            )
                 .Returns(formToken);
             mockValidator.Setup(o => o.IsCookieTokenValid(null)).Returns(false);
             mockValidator.Setup(o => o.IsCookieTokenValid(newCookieToken)).Returns(true);
@@ -233,8 +233,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
                 MockBehavior.Strict
             );
             mockValidator.Setup(
-                    o => o.GenerateFormToken(mockHttpContext.Object, identity, cookieToken)
-                )
+                o => o.GenerateFormToken(mockHttpContext.Object, identity, cookieToken)
+            )
                 .Returns(formToken);
             mockValidator.Setup(o => o.IsCookieTokenValid(cookieToken)).Returns(true);
 
@@ -307,8 +307,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
                 MockBehavior.Strict
             );
             mockValidator.Setup(
-                    o => o.GenerateFormToken(mockHttpContext.Object, identity, newCookieToken)
-                )
+                o => o.GenerateFormToken(mockHttpContext.Object, identity, newCookieToken)
+            )
                 .Returns(formToken);
             mockValidator.Setup(o => o.IsCookieTokenValid(oldCookieToken)).Returns(false);
             mockValidator.Setup(o => o.IsCookieTokenValid(newCookieToken)).Returns(true);
@@ -355,8 +355,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
                 MockBehavior.Strict
             );
             mockValidator.Setup(
-                    o => o.GenerateFormToken(mockHttpContext.Object, identity, newCookieToken)
-                )
+                o => o.GenerateFormToken(mockHttpContext.Object, identity, newCookieToken)
+            )
                 .Returns(formToken);
             mockValidator.Setup(o => o.IsCookieTokenValid(oldCookieToken)).Returns(false);
             mockValidator.Setup(o => o.IsCookieTokenValid(newCookieToken)).Returns(true);
@@ -409,8 +409,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
                 MockBehavior.Strict
             );
             mockValidator.Setup(
-                    o => o.GenerateFormToken(mockHttpContext.Object, identity, newCookieToken)
-                )
+                o => o.GenerateFormToken(mockHttpContext.Object, identity, newCookieToken)
+            )
                 .Returns(formToken);
             mockValidator.Setup(o => o.IsCookieTokenValid(null)).Returns(false);
             mockValidator.Setup(o => o.IsCookieTokenValid(newCookieToken)).Returns(true);
@@ -460,8 +460,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
                 MockBehavior.Strict
             );
             mockValidator.Setup(
-                    o => o.GenerateFormToken(mockHttpContext.Object, identity, cookieToken)
-                )
+                o => o.GenerateFormToken(mockHttpContext.Object, identity, cookieToken)
+            )
                 .Returns(formToken);
             mockValidator.Setup(o => o.IsCookieTokenValid(cookieToken)).Returns(true);
 
@@ -506,8 +506,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             Mock<MockableTokenValidator> mockValidator = new Mock<MockableTokenValidator>();
             mockValidator.Setup(
-                    o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
-                )
+                o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
+            )
                 .Throws(new HttpAntiForgeryException("my-message"));
 
             AntiForgeryWorker worker = new AntiForgeryWorker(
@@ -543,8 +543,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             Mock<MockableTokenValidator> mockValidator = new Mock<MockableTokenValidator>();
             mockValidator.Setup(
-                    o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
-                )
+                o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
+            )
                 .Verifiable();
 
             AntiForgeryWorker worker = new AntiForgeryWorker(
@@ -580,8 +580,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             Mock<MockableTokenValidator> mockValidator = new Mock<MockableTokenValidator>();
             mockValidator.Setup(
-                    o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
-                )
+                o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
+            )
                 .Throws(new HttpAntiForgeryException("my-message"));
 
             AntiForgeryWorker worker = new AntiForgeryWorker(
@@ -617,8 +617,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             Mock<MockableTokenValidator> mockValidator = new Mock<MockableTokenValidator>();
             mockValidator.Setup(
-                    o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
-                )
+                o => o.ValidateTokens(mockHttpContext.Object, identity, cookieToken, formToken)
+            )
                 .Verifiable();
 
             AntiForgeryWorker worker = new AntiForgeryWorker(

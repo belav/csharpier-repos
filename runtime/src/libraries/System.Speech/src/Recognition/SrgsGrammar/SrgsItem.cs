@@ -262,12 +262,13 @@ namespace System.Speech.Recognition.SrgsGrammar
                         // Max Value Set and maybe MinValue
                         int minRepeat = _minRepeat == NotSet ? 1 : _minRepeat;
                         sb.Append(
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "{0},{1}",
-                                minRepeat,
-                                _maxRepeat
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "{0},{1}",
+                                    minRepeat,
+                                    _maxRepeat
+                                )
                         );
                     }
                     sb.Append("] ");

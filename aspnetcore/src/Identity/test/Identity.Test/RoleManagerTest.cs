@@ -26,13 +26,13 @@ namespace Microsoft.AspNetCore.Identity.Test
                 .Returns(Task.FromResult(role.Name))
                 .Verifiable();
             store.Setup(
-                    s =>
-                        s.SetNormalizedRoleNameAsync(
-                            role,
-                            role.Name.ToUpperInvariant(),
-                            CancellationToken.None
-                        )
-                )
+                s =>
+                    s.SetNormalizedRoleNameAsync(
+                        role,
+                        role.Name.ToUpperInvariant(),
+                        CancellationToken.None
+                    )
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             var roleManager = MockHelpers.TestRoleManager(store.Object);
@@ -58,13 +58,13 @@ namespace Microsoft.AspNetCore.Identity.Test
                 .Returns(Task.FromResult(role.Name))
                 .Verifiable();
             store.Setup(
-                    s =>
-                        s.SetNormalizedRoleNameAsync(
-                            role,
-                            role.Name.ToUpperInvariant(),
-                            CancellationToken.None
-                        )
-                )
+                s =>
+                    s.SetNormalizedRoleNameAsync(
+                        role,
+                        role.Name.ToUpperInvariant(),
+                        CancellationToken.None
+                    )
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             var roleManager = MockHelpers.TestRoleManager(store.Object);

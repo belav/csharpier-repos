@@ -349,7 +349,8 @@ namespace System.Text.Json.Node.Tests
             Verify();
 
             // Verify the values are round-trippable.
-            ((JsonArray)obj["MyArray"]).RemoveAt(2);
+            ((JsonArray)obj["MyArray"])
+                .RemoveAt(2);
             Verify();
 
             void Verify()
@@ -371,7 +372,8 @@ namespace System.Text.Json.Node.Tests
                 obj["MyArray"][1] = JsonValue.Create(3);
 
                 // Add an element.
-                ((JsonArray)obj["MyArray"]).Add(JsonValue.Create(42));
+                ((JsonArray)obj["MyArray"])
+                    .Add(JsonValue.Create(42));
 
                 string json = obj.ToJsonString();
                 JsonTestHelper.AssertJsonEqual(JsonNodeTests.ExpectedDomJson, json);
@@ -457,16 +459,16 @@ namespace System.Text.Json.Node.Tests
 
             // Convert nested JSON to a flat POCO.
             IList<BlogPost> blogPosts = arr.Select(
-                    p =>
-                        new BlogPost
-                        {
-                            Title = p["Title"].GetValue<string>(),
-                            AuthorName = p["Author"]["Name"].GetValue<string>(),
-                            AuthorTwitter = p["Author"]["Mail"].GetValue<string>(),
-                            PostedDate = p["Date"].GetValue<DateTime>(),
-                            Body = p["BodyHtml"].GetValue<string>()
-                        }
-                )
+                p =>
+                    new BlogPost
+                    {
+                        Title = p["Title"].GetValue<string>(),
+                        AuthorName = p["Author"]["Name"].GetValue<string>(),
+                        AuthorTwitter = p["Author"]["Mail"].GetValue<string>(),
+                        PostedDate = p["Date"].GetValue<DateTime>(),
+                        Body = p["BodyHtml"].GetValue<string>()
+                    }
+            )
                 .ToList();
 
             const string expected =

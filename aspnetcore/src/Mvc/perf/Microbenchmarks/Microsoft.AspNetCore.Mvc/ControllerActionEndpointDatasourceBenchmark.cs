@@ -86,9 +86,9 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
             };
 
             var template = DefaultRoute.Replace(
-                    ControllerReplacementToken,
-                    routeValues["Controller"]
-                )
+                ControllerReplacementToken,
+                routeValues["Controller"]
+            )
                 .Replace(ActionReplacementToken, routeValues["Action"]);
 
             return new ActionDescriptor

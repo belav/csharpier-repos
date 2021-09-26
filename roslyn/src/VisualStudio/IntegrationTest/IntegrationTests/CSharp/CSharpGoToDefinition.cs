@@ -49,10 +49,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             );
             VisualStudio.Editor.PlaceCaret("SomeClass");
             VisualStudio.Editor.GoToDefinition("FileDef.cs");
-            VisualStudio.Editor.Verify.TextContains(
-                @"class SomeClass$$",
-                assertCaretPosition: true
-            );
+            VisualStudio.Editor.Verify
+                .TextContains(@"class SomeClass$$", assertCaretPosition: true);
             Assert.False(VisualStudio.Shell.IsActiveTabProvisional());
         }
 
@@ -83,10 +81,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             );
             VisualStudio.Editor.PlaceCaret("SomeClass");
             VisualStudio.Editor.GoToDefinition("FileDef.cs");
-            VisualStudio.Editor.Verify.TextContains(
-                @"class SomeClass$$",
-                assertCaretPosition: true
-            );
+            VisualStudio.Editor.Verify
+                .TextContains(@"class SomeClass$$", assertCaretPosition: true);
             Assert.True(VisualStudio.Shell.IsActiveTabProvisional());
         }
 

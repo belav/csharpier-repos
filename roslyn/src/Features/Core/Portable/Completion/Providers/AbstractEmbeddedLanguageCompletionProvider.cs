@@ -39,13 +39,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var embeddedLanguageServiceType =
                 typeof(IEmbeddedLanguagesProvider).AssemblyQualifiedName;
             TriggerCharacters = languageServices.Where(
-                    lazyLanguageService =>
-                        IsEmbeddedLanguageProvider(
-                            lazyLanguageService,
-                            languageName,
-                            embeddedLanguageServiceType
-                        )
-                )
+                lazyLanguageService =>
+                    IsEmbeddedLanguageProvider(
+                        lazyLanguageService,
+                        languageName,
+                        embeddedLanguageServiceType
+                    )
+            )
                 .SelectMany(
                     lazyLanguageService =>
                         ((IEmbeddedLanguagesProvider)lazyLanguageService.Value).Languages
@@ -155,16 +155,16 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             char? commitKey,
             CancellationToken cancellationToken
         ) =>
-            GetLanguage(item)
-                .CompletionProvider.GetChangeAsync(document, item, commitKey, cancellationToken);
+            GetLanguage(item).CompletionProvider
+                .GetChangeAsync(document, item, commitKey, cancellationToken);
 
         public override Task<CompletionDescription?> GetDescriptionAsync(
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
         ) =>
-            GetLanguage(item)
-                .CompletionProvider.GetDescriptionAsync(document, item, cancellationToken);
+            GetLanguage(item).CompletionProvider
+                .GetDescriptionAsync(document, item, cancellationToken);
 
         private IEmbeddedLanguageFeatures GetLanguage(CompletionItem item)
         {

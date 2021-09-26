@@ -20,8 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.UnitTests
 {
     public abstract class AbstractLiveShareRequestHandlerTests : AbstractLanguageServerProtocolTests
     {
-        private static readonly TestComposition s_composition =
-            LiveShareTestCompositions.Features.AddParts(
+        private static readonly TestComposition s_composition = LiveShareTestCompositions.Features
+            .AddParts(
                 typeof(MockDocumentNavigationServiceFactory),
                 typeof(TestLspWorkspaceRegistrationService)
             );
@@ -92,9 +92,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.UnitTests
         >(Solution solution, string methodName)
         {
             var workspace = (TestWorkspace)solution.Workspace;
-            var handlers = workspace.ExportProvider.GetExportedValues<ILspRequestHandler>(
-                LiveShareConstants.RoslynContractName
-            );
+            var handlers = workspace.ExportProvider
+                .GetExportedValues<ILspRequestHandler>(LiveShareConstants.RoslynContractName);
             return (ILspRequestHandler<RequestType, ResponseType, Solution>)handlers.Single(
                 handler =>
                     handler is ILspRequestHandler<RequestType, ResponseType, Solution>

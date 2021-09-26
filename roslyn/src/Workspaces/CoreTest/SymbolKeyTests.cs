@@ -651,23 +651,20 @@ public class A<T1>
             TestRoundTrip(a_string_b_int, compilation);
             TestRoundTrip(a_string_b_int_m, compilation);
 
-            var a_string_b_int_m_datetime = ((IMethodSymbol)a_string_b_int_m).Construct(
-                compilation.GetSpecialType(SpecialType.System_DateTime)
-            );
+            var a_string_b_int_m_datetime = ((IMethodSymbol)a_string_b_int_m)
+                .Construct(compilation.GetSpecialType(SpecialType.System_DateTime));
             TestRoundTrip(a_string_b_int_m_datetime, compilation);
 
             var a_b_int = a_b.Construct(compilation.GetSpecialType(SpecialType.System_Int32));
             var a_b_int_m = a_b_int.GetMembers().Single(s => s.Name == "M");
-            var a_b_int_m_datetime = ((IMethodSymbol)a_b_int_m).Construct(
-                compilation.GetSpecialType(SpecialType.System_DateTime)
-            );
+            var a_b_int_m_datetime = ((IMethodSymbol)a_b_int_m)
+                .Construct(compilation.GetSpecialType(SpecialType.System_DateTime));
             TestRoundTrip(a_b_int, compilation);
             TestRoundTrip(a_b_int_m, compilation);
             TestRoundTrip(a_b_int_m_datetime, compilation);
 
-            var a_b_m_datetime = ((IMethodSymbol)a_b_m).Construct(
-                compilation.GetSpecialType(SpecialType.System_DateTime)
-            );
+            var a_b_m_datetime = ((IMethodSymbol)a_b_m)
+                .Construct(compilation.GetSpecialType(SpecialType.System_DateTime));
             TestRoundTrip(a_b_m_datetime, compilation);
         }
 
@@ -923,9 +920,9 @@ class C
             var compilation2 = GetCompilation(source, LanguageNames.CSharp, "File2.cs");
 
             var symbol = GetAllSymbols(
-                    compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                    n => n is CSharp.Syntax.MethodDeclarationSyntax
-                )
+                compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
+                n => n is CSharp.Syntax.MethodDeclarationSyntax
+            )
                 .Single();
 
             // Ensure we don't crash getting these symbol keys.
@@ -963,9 +960,9 @@ class C
             var compilation2 = GetCompilation(source, LanguageNames.CSharp, "File2.cs");
 
             var symbol = GetAllSymbols(
-                    compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                    n => n is CSharp.Syntax.MethodDeclarationSyntax
-                )
+                compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
+                n => n is CSharp.Syntax.MethodDeclarationSyntax
+            )
                 .Single();
 
             // Ensure we don't crash getting these symbol keys.
@@ -1009,9 +1006,9 @@ class C
             );
 
             var symbol = (IPropertySymbol)GetAllSymbols(
-                    compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                    n => n is CSharp.Syntax.PropertyDeclarationSyntax
-                )
+                compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
+                n => n is CSharp.Syntax.PropertyDeclarationSyntax
+            )
                 .Single();
 
             var propType = symbol.Type;
@@ -1057,9 +1054,9 @@ end class";
             );
 
             var symbol = (IPropertySymbol)GetAllSymbols(
-                    compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                    n => n is VisualBasic.Syntax.PropertyStatementSyntax
-                )
+                compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
+                n => n is VisualBasic.Syntax.PropertyStatementSyntax
+            )
                 .Single();
 
             var propType = symbol.Type;
@@ -1112,9 +1109,9 @@ class X
             );
 
             var symbol = (IPropertySymbol)GetAllSymbols(
-                    compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
-                    n => n is CSharp.Syntax.MemberAccessExpressionSyntax
-                )
+                compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
+                n => n is CSharp.Syntax.MemberAccessExpressionSyntax
+            )
                 .Single();
 
             var propType = symbol.Type;
@@ -1167,9 +1164,9 @@ end class";
             );
 
             var symbol = (IPropertySymbol)GetAllSymbols(
-                    compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
-                    n => n is VisualBasic.Syntax.MemberAccessExpressionSyntax
-                )
+                compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
+                n => n is VisualBasic.Syntax.MemberAccessExpressionSyntax
+            )
                 .Single();
 
             var propType = symbol.Type;
@@ -1308,20 +1305,14 @@ public class C
             if (language == LanguageNames.CSharp)
             {
                 var tree = CSharp.SyntaxFactory.ParseSyntaxTree(source, path: path);
-                return CSharp.CSharpCompilation.Create(
-                    "Test",
-                    syntaxTrees: new[] { tree },
-                    references: references
-                );
+                return CSharp.CSharpCompilation
+                    .Create("Test", syntaxTrees: new[] { tree }, references: references);
             }
             else if (language == LanguageNames.VisualBasic)
             {
                 var tree = VisualBasic.SyntaxFactory.ParseSyntaxTree(source, path: path);
-                return VisualBasic.VisualBasicCompilation.Create(
-                    "Test",
-                    syntaxTrees: new[] { tree },
-                    references: references
-                );
+                return VisualBasic.VisualBasicCompilation
+                    .Create("Test", syntaxTrees: new[] { tree }, references: references);
             }
 
             throw new NotSupportedException();

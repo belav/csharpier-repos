@@ -1148,10 +1148,10 @@ class Program
             string expectedIL6 = expectedIL4;
 
             CompileAndVerify(
-                    source,
-                    expectedOutput: expectedOutput,
-                    options: TestOptions.ReleaseExe.WithWarningLevel(4)
-                )
+                source,
+                expectedOutput: expectedOutput,
+                options: TestOptions.ReleaseExe.WithWarningLevel(4)
+            )
                 .VerifyDiagnostics(
                     // (21,16): warning CS0472: The result of the expression is always 'false' since a value of type 'int' is never equal to 'null' of type 'short?'
                     //         return new int?(N1()) == new short?();
@@ -1161,9 +1161,9 @@ class Program
                     // (25,16): warning CS0472: The result of the expression is always 'true' since a value of type 'double' is never equal to 'null' of type 'double?'
                     //         return default(double?) != new short?(N2());
                     Diagnostic(
-                            ErrorCode.WRN_NubExprIsConstBool,
-                            "default(double?) != new short?(N2())"
-                        )
+                        ErrorCode.WRN_NubExprIsConstBool,
+                        "default(double?) != new short?(N2())"
+                    )
                         .WithArguments("true", "double", "double?")
                         .WithLocation(25, 16),
                     // (29,16): warning CS0464: Comparing with null of type 'int?' always produces 'false'
@@ -2345,8 +2345,8 @@ class Program
 ";
 
             var comp = CompileAndVerify(
-                    source,
-                    expectedOutput: @"
+                source,
+                expectedOutput: @"
 42
 42
 -42
@@ -2355,10 +2355,9 @@ class Program
 0
 42
 42"
-                )
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            ).VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size      349 (0x15d)
   .maxstack  3
@@ -2479,7 +2478,7 @@ class Program
   IL_0157:  call       ""void System.Console.WriteLine(object)""
   IL_015c:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2507,8 +2506,8 @@ class Program
 ";
 
             var comp = CompileAndVerify(
-                    source,
-                    expectedOutput: @"
+                source,
+                expectedOutput: @"
 42
 42
 -42
@@ -2517,10 +2516,9 @@ class Program
 0
 42
 42"
-                )
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            ).VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       97 (0x61)
   .maxstack  2
@@ -2552,7 +2550,7 @@ class Program
   IL_005b:  call       ""void System.Console.WriteLine(object)""
   IL_0060:  ret
 }"
-                );
+            );
         }
     }
 }

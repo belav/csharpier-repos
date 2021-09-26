@@ -207,10 +207,8 @@ namespace Newtonsoft.Json.Converters
                     throw JsonSerializationException.Create(
                         null,
                         writer.ContainerPath,
-                        "Integer value {0} is not allowed.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            e.ToString("D")
-                        ),
+                        "Integer value {0} is not allowed."
+                            .FormatWith(CultureInfo.InvariantCulture, e.ToString("D")),
                         null
                     );
                 }
@@ -245,10 +243,8 @@ namespace Newtonsoft.Json.Converters
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Cannot convert null value to {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            objectType
-                        )
+                        "Cannot convert null value to {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, objectType)
                     );
                 }
 
@@ -278,10 +274,8 @@ namespace Newtonsoft.Json.Converters
                     {
                         throw JsonSerializationException.Create(
                             reader,
-                            "Integer value {0} is not allowed.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                reader.Value
-                            )
+                            "Integer value {0} is not allowed."
+                                .FormatWith(CultureInfo.InvariantCulture, reader.Value)
                         );
                     }
 
@@ -296,11 +290,12 @@ namespace Newtonsoft.Json.Converters
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "Error converting value {0} to type '{1}'.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        MiscellaneousUtils.ToString(reader.Value),
-                        objectType
-                    ),
+                    "Error converting value {0} to type '{1}'."
+                        .FormatWith(
+                            CultureInfo.InvariantCulture,
+                            MiscellaneousUtils.ToString(reader.Value),
+                            objectType
+                        ),
                     ex
                 );
             }
@@ -308,10 +303,8 @@ namespace Newtonsoft.Json.Converters
             // we don't actually expect to get here.
             throw JsonSerializationException.Create(
                 reader,
-                "Unexpected token {0} when parsing enum.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    reader.TokenType
-                )
+                "Unexpected token {0} when parsing enum."
+                    .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
             );
         }
 

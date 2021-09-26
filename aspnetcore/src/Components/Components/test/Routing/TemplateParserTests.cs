@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Components.Routing
             // Arrange
             var template = "awesome/cool/super";
 
-            var expected = new ExpectedTemplateBuilder().Literal("awesome")
+            var expected = new ExpectedTemplateBuilder()
+                .Literal("awesome")
                 .Literal("cool")
                 .Literal("super");
 
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.Components.Routing
             // Arrange
             var template = "{p1}/{p2}/{p3}";
 
-            var expected = new ExpectedTemplateBuilder().Parameter("p1")
+            var expected = new ExpectedTemplateBuilder()
+                .Parameter("p1")
                 .Parameter("p2")
                 .Parameter("p3");
 
@@ -78,7 +80,8 @@ namespace Microsoft.AspNetCore.Components.Routing
             // Arrange
             var template = "{p1?}/{p2?}/{p3?}";
 
-            var expected = new ExpectedTemplateBuilder().Parameter("p1?")
+            var expected = new ExpectedTemplateBuilder()
+                .Parameter("p1?")
                 .Parameter("p2?")
                 .Parameter("p3?");
 
@@ -106,7 +109,8 @@ namespace Microsoft.AspNetCore.Components.Routing
         public void Parse_MixedLiteralAndCatchAllParameter()
         {
             // Arrange
-            var expected = new ExpectedTemplateBuilder().Literal("awesome")
+            var expected = new ExpectedTemplateBuilder()
+                .Literal("awesome")
                 .Literal("wow")
                 .Parameter("p");
 
@@ -121,7 +125,8 @@ namespace Microsoft.AspNetCore.Components.Routing
         public void Parse_MixedLiteralParameterAndCatchAllParameter()
         {
             // Arrange
-            var expected = new ExpectedTemplateBuilder().Literal("awesome")
+            var expected = new ExpectedTemplateBuilder()
+                .Literal("awesome")
                 .Parameter("p1")
                 .Parameter("p2");
 
@@ -354,11 +359,12 @@ namespace Microsoft.AspNetCore.Components.Routing
                         return false;
                     }
                     if (
-                        !string.Equals(
-                            xSegment.Value,
-                            ySegment.Value,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        !string
+                            .Equals(
+                                xSegment.Value,
+                                ySegment.Value,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         return false;

@@ -161,26 +161,26 @@ namespace System.Net.Http.Functional.Tests
                     RSASignaturePadding.Pkcs1
                 );
 
-                req.CertificateExtensions.Add(
-                    new X509BasicConstraintsExtension(true, false, 0, true)
-                );
-                req.CertificateExtensions.Add(
-                    new X509SubjectKeyIdentifierExtension(req.PublicKey, false)
-                );
-                req.CertificateExtensions.Add(
-                    new X509KeyUsageExtension(
-                        X509KeyUsageFlags.DigitalSignature
-                            | X509KeyUsageFlags.KeyEncipherment
-                            | X509KeyUsageFlags.DataEncipherment,
-                        false
-                    )
-                );
-                req.CertificateExtensions.Add(
-                    new X509EnhancedKeyUsageExtension(
-                        new OidCollection() { new Oid("1.3.6.1.5.5.7.3.1", null), },
-                        false
-                    )
-                );
+                req.CertificateExtensions
+                    .Add(new X509BasicConstraintsExtension(true, false, 0, true));
+                req.CertificateExtensions
+                    .Add(new X509SubjectKeyIdentifierExtension(req.PublicKey, false));
+                req.CertificateExtensions
+                    .Add(
+                        new X509KeyUsageExtension(
+                            X509KeyUsageFlags.DigitalSignature
+                                | X509KeyUsageFlags.KeyEncipherment
+                                | X509KeyUsageFlags.DataEncipherment,
+                            false
+                        )
+                    );
+                req.CertificateExtensions
+                    .Add(
+                        new X509EnhancedKeyUsageExtension(
+                            new OidCollection() { new Oid("1.3.6.1.5.5.7.3.1", null), },
+                            false
+                        )
+                    );
 
                 SubjectAlternativeNameBuilder builder = new SubjectAlternativeNameBuilder();
                 builder.AddDnsName(name);

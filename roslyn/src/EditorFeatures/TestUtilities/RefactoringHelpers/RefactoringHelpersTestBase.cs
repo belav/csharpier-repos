@@ -47,10 +47,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
         {
             text = GetSelectionSpan(text, out var selection);
             var resultNode = await GetNodeForSelectionAsync<TNode>(
-                    text,
-                    selection,
-                    Functions<TNode>.True
-                )
+                text,
+                selection,
+                Functions<TNode>.True
+            )
                 .ConfigureAwait(false);
 
             Assert.NotNull(resultNode);
@@ -61,10 +61,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
         {
             text = GetSelectionAndResultSpans(text, out var selection, out var result);
             var resultNode = await GetNodeForSelectionAsync<TNode>(
-                    text,
-                    selection,
-                    Functions<TNode>.True
-                )
+                text,
+                selection,
+                Functions<TNode>.True
+            )
                 .ConfigureAwait(false);
 
             Assert.Equal(result, resultNode.Span);
@@ -147,9 +147,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
 
             var document = workspaceFixture.Target.UpdateDocument(text, SourceCodeKind.Regular);
             var relevantNodes = await document.GetRelevantNodesAsync<TNode>(
-                    selection,
-                    CancellationToken.None
-                )
+                selection,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             return relevantNodes.FirstOrDefault(predicate);

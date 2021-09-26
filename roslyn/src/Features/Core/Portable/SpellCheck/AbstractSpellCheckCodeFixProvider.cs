@@ -91,11 +91,11 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                     if (symbolInfo.Symbol == null)
                     {
                         await CreateSpellCheckCodeIssueAsync(
-                                context,
-                                token,
-                                IsGeneric(name),
-                                cancellationToken
-                            )
+                            context,
+                            token,
+                            IsGeneric(name),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -119,11 +119,11 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             if (nameText?.Length >= MinTokenLength)
             {
                 await CreateSpellCheckCodeIssueAsync(
-                        context,
-                        token,
-                        IsGeneric(token),
-                        cancellationToken
-                    )
+                    context,
+                    token,
+                    IsGeneric(token),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -148,10 +148,10 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             var originalOptions = await document.GetOptionsAsync(cancellationToken)
                 .ConfigureAwait(false);
             var options = originalOptions.WithChangedOption(
-                    CompletionOptions.SnippetsBehavior,
-                    document.Project.Language,
-                    SnippetsRule.NeverInclude
-                )
+                CompletionOptions.SnippetsBehavior,
+                document.Project.Language,
+                SnippetsRule.NeverInclude
+            )
                 .WithChangedOption(
                     CompletionOptions.ShowItemsFromUnimportedNamespaces,
                     document.Project.Language,
@@ -160,11 +160,11 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                 .WithChangedOption(CompletionServiceOptions.IsExpandedCompletion, false);
 
             var completionList = await service.GetCompletionsAsync(
-                    document,
-                    nameToken.SpanStart,
-                    options: options,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                nameToken.SpanStart,
+                options: options,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             if (completionList == null)
             {
@@ -179,12 +179,12 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             try
             {
                 await CheckItemsAsync(
-                        context,
-                        nameToken,
-                        isGeneric,
-                        completionList,
-                        similarityChecker
-                    )
+                    context,
+                    nameToken,
+                    isGeneric,
+                    completionList,
+                    similarityChecker
+                )
                     .ConfigureAwait(false);
             }
 
@@ -222,11 +222,11 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                 }
 
                 var insertionText = await GetInsertionTextAsync(
-                        document,
-                        item,
-                        completionList.Span,
-                        cancellationToken: cancellationToken
-                    )
+                    document,
+                    item,
+                    completionList.Span,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 results.Add(matchCost, insertionText);
             }
@@ -268,13 +268,13 @@ namespace Microsoft.CodeAnalysis.SpellCheck
         {
             var service = CompletionService.GetService(document);
             var change = await service.GetChangeAsync(
-                    document,
-                    item,
-                    completionListSpan,
-                    commitCharacter: null,
-                    disallowAddingImports: false,
-                    cancellationToken
-                )
+                document,
+                item,
+                completionListSpan,
+                commitCharacter: null,
+                disallowAddingImports: false,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var text = change.TextChange.NewText;
             var nonCharIndex = text.IndexOfAny(s_punctuation);

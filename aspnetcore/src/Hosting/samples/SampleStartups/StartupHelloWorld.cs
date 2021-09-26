@@ -25,12 +25,11 @@ namespace SampleStartups
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel().UseStartup<StartupHelloWorld>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel().UseStartup<StartupHelloWorld>();
+                }
+            ).Build();
 
             return host.RunAsync();
         }

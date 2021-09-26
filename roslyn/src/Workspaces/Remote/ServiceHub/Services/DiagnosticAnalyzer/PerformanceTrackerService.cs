@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         {
             using var pooledRaw = SharedPools.Default<
                 Dictionary<string, (double average, double stddev)>
-            >().GetPooledObject();
+            >()
+                .GetPooledObject();
 
             var rawPerformanceData = pooledRaw.Object;
 

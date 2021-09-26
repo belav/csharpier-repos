@@ -331,10 +331,8 @@ namespace ILVerify
                         (string)attribute.FixedArguments[0].Value
                     );
                     if (
-                        !friendName.Name.Equals(
-                            friendAttributeName.Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        !friendName.Name
+                            .Equals(friendAttributeName.Name, StringComparison.OrdinalIgnoreCase)
                     )
                         continue;
 

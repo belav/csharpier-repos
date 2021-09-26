@@ -48,9 +48,8 @@ namespace Microsoft.AspNetCore.DataProtection
             {
                 ["KeyEscrowSinks"] = String.Join(
                     " ;; ; ",
-                    new Type[] { typeof(MyKeyEscrowSink1), typeof(MyKeyEscrowSink2) }.Select(
-                        t => t.AssemblyQualifiedName
-                    )
+                    new Type[] { typeof(MyKeyEscrowSink1), typeof(MyKeyEscrowSink2) }
+                        .Select(t => t.AssemblyQualifiedName)
                 )
             };
 

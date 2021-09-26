@@ -260,7 +260,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     from kv in _dispatches
                     orderby kv.Value[0]
                     select F.SwitchSection(kv.Value, F.Goto(kv.Key))
-                ).ToImmutableArray()
+                )
+                    .ToImmutableArray()
             );
         }
 
@@ -736,11 +737,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (refKind != RefKind.None && refKind != RefKind.In)
                     {
                         Debug.Assert(call.Method.RefKind != RefKind.None);
-                        F.Diagnostics.Add(
-                            ErrorCode.ERR_RefReturningCallAndAwait,
-                            F.Syntax.Location,
-                            call.Method
-                        );
+                        F.Diagnostics
+                            .Add(
+                                ErrorCode.ERR_RefReturningCallAndAwait,
+                                F.Syntax.Location,
+                                call.Method
+                            );
                     }
                     // method call is not referentially transparent, we can only spill the result value.
                     refKind = RefKind.None;
@@ -795,11 +797,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                             slotAllocatorOpt == null
                             || !slotAllocatorOpt.TryGetPreviousHoistedLocalSlotIndex(
                                 awaitSyntaxOpt,
-                                F.ModuleBuilderOpt.Translate(
-                                    fieldType,
-                                    awaitSyntaxOpt,
-                                    Diagnostics.DiagnosticBag
-                                ),
+                                F.ModuleBuilderOpt
+                                    .Translate(
+                                        fieldType,
+                                        awaitSyntaxOpt,
+                                        Diagnostics.DiagnosticBag
+                                    ),
                                 kind,
                                 id,
                                 Diagnostics.DiagnosticBag,

@@ -72,9 +72,8 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var executor = context.HttpContext.RequestServices.GetRequiredService<
-                IActionResultExecutor<FileContentResult>
-            >();
+            var executor = context.HttpContext.RequestServices
+                .GetRequiredService<IActionResultExecutor<FileContentResult>>();
             return executor.ExecuteAsync(context, this);
         }
     }

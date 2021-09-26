@@ -117,8 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             // Escape hatch feature flag to let us disable this feature remotely if we run into any issues with it,
             var workspace = document.Project.Solution.Workspace;
-            var experimentationService =
-                workspace.Services.GetRequiredService<IExperimentationService>();
+            var experimentationService = workspace.Services
+                .GetRequiredService<IExperimentationService>();
             var disabled = experimentationService.IsExperimentEnabled(
                 WellKnownExperimentNames.UnnamedSymbolCompletionDisabled
             );
@@ -136,11 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            var options =
-                CodeAnalysis.Completion.Providers.CompletionUtilities.GetUpdatedRecommendationOptions(
-                    context.Options,
-                    document.Project.Language
-                );
+            var options = CodeAnalysis.Completion.Providers.CompletionUtilities
+                .GetUpdatedRecommendationOptions(context.Options, document.Project.Language);
             var recommendedSymbols = recommender.GetRecommendedSymbolsAtPosition(
                 workspace,
                 semanticModel,

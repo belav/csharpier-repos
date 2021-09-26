@@ -331,10 +331,11 @@ namespace System.IO.Ports.Tests
 
                 Assert.True(
                     1 == (bytesRead = com1.Read(rcvBytes, 0, rcvBytes.Length)),
-                    string.Format(
-                        "Err_31597ahpba, Expected to Read to return 1 actual={0}",
-                        bytesRead
-                    )
+                    string
+                        .Format(
+                            "Err_31597ahpba, Expected to Read to return 1 actual={0}",
+                            bytesRead
+                        )
                 );
 
                 Assert.True(
@@ -369,10 +370,8 @@ namespace System.IO.Ports.Tests
 
                 Assert.True(
                     50 == (byteRead = com1.ReadByte()),
-                    string.Format(
-                        "Err_05949aypa, Expected to Read to return 50 actual={0}",
-                        byteRead
-                    )
+                    string
+                        .Format("Err_05949aypa, Expected to Read to return 50 actual={0}", byteRead)
                 );
             }
         }
@@ -432,11 +431,12 @@ namespace System.IO.Ports.Tests
 
                 Assert.True(
                     readTimeout == com1.BaseStream.ReadTimeout,
-                    string.Format(
-                        "Err_7071ahpsb!!! Expected ReadTimeout to be {0} actual {1}",
-                        readTimeout,
-                        com1.BaseStream.ReadTimeout
-                    )
+                    string
+                        .Format(
+                            "Err_7071ahpsb!!! Expected ReadTimeout to be {0} actual {1}",
+                            readTimeout,
+                            com1.BaseStream.ReadTimeout
+                        )
                 );
 
                 VerifyLongTimeout(readMethod, com1, com2);
@@ -457,11 +457,12 @@ namespace System.IO.Ports.Tests
 
             Assert.False(
                 t.IsCompleted,
-                string.Format(
-                    "Err_17071ahpa!!! {0} terminated with a long timeout of {1}ms",
-                    readMethod.Method.Name,
-                    com1.BaseStream.ReadTimeout
-                )
+                string
+                    .Format(
+                        "Err_17071ahpa!!! {0} terminated with a long timeout of {1}ms",
+                        readMethod.Method.Name,
+                        com1.BaseStream.ReadTimeout
+                    )
             );
 
             com2.Write(new byte[8], 0, 8);
@@ -483,11 +484,12 @@ namespace System.IO.Ports.Tests
 
                 Assert.True(
                     readTimeout == com1.BaseStream.ReadTimeout,
-                    string.Format(
-                        "Err_236897ahpbm!!! Expected ReadTimeout to be {0} actual {1}",
-                        readTimeout,
-                        com1.BaseStream.ReadTimeout
-                    )
+                    string
+                        .Format(
+                            "Err_236897ahpbm!!! Expected ReadTimeout to be {0} actual {1}",
+                            readTimeout,
+                            com1.BaseStream.ReadTimeout
+                        )
                 );
 
                 VerifyTimeout(readMethod, com1.BaseStream);
@@ -515,12 +517,13 @@ namespace System.IO.Ports.Tests
             // Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
             Assert.True(
                 percentageDifference <= MAX_ACCEPTABLE_WARMUP_PERCENTAGE_DIFFERENCE,
-                string.Format(
-                    "Err_88558amuph!!!: The read method timedout in {0} expected {1} percentage difference: {2} when called for the first time",
-                    actualTime,
-                    expectedTime,
-                    percentageDifference
-                )
+                string
+                    .Format(
+                        "Err_88558amuph!!!: The read method timedout in {0} expected {1} percentage difference: {2} when called for the first time",
+                        actualTime,
+                        expectedTime,
+                        percentageDifference
+                    )
             );
 
             actualTime = 0;
@@ -550,12 +553,13 @@ namespace System.IO.Ports.Tests
             // Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
             Assert.True(
                 percentageDifference <= MAX_ACCEPTABLE_PERCENTAGE_DIFFERENCE,
-                string.Format(
-                    "Err_56485ahpbz!!!: The read method timedout in {0} expected {1} percentage difference: {2}",
-                    actualTime,
-                    expectedTime,
-                    percentageDifference
-                )
+                string
+                    .Format(
+                        "Err_56485ahpbz!!!: The read method timedout in {0} expected {1} percentage difference: {2}",
+                        actualTime,
+                        expectedTime,
+                        percentageDifference
+                    )
             );
         }
 
@@ -573,11 +577,12 @@ namespace System.IO.Ports.Tests
 
                 Assert.True(
                     0 == com1.BaseStream.ReadTimeout,
-                    string.Format(
-                        "Err_72072ahps!!! Expected ReadTimeout to be {0} actual {1}",
-                        0,
-                        com1.BaseStream.ReadTimeout
-                    )
+                    string
+                        .Format(
+                            "Err_72072ahps!!! Expected ReadTimeout to be {0} actual {1}",
+                            0,
+                            com1.BaseStream.ReadTimeout
+                        )
                 );
 
                 Verify0Timeout(readMethod, com1.BaseStream);
@@ -602,11 +607,12 @@ namespace System.IO.Ports.Tests
             // Verify that the time the method took to timeout is less then the maximum acceptable time
             Assert.True(
                 actualTime <= MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT,
-                string.Format(
-                    "Err_277a0ahpsb!!!: With a timeout of 0 the read method timedout in {0} expected something less then {1} when called for the first time",
-                    actualTime,
-                    MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT
-                )
+                string
+                    .Format(
+                        "Err_277a0ahpsb!!!: With a timeout of 0 the read method timedout in {0} expected something less then {1} when called for the first time",
+                        actualTime,
+                        MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT
+                    )
             );
 
             actualTime = 0;
@@ -635,11 +641,12 @@ namespace System.IO.Ports.Tests
             // Verify that the time the method took to timeout is less then the maximum acceptable time
             Assert.True(
                 actualTime <= MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT,
-                string.Format(
-                    "Err_112389ahbp!!!: With a timeout of 0 the read method timedout in {0} expected something less then {1}",
-                    actualTime,
-                    MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT
-                )
+                string
+                    .Format(
+                        "Err_112389ahbp!!!: With a timeout of 0 the read method timedout in {0} expected something less then {1}",
+                        actualTime,
+                        MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT
+                    )
             );
         }
 

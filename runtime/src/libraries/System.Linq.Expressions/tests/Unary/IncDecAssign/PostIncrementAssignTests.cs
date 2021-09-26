@@ -43,8 +43,8 @@ namespace System.Linq.Expressions.Tests
             );
             Assert.True(
                 Expression.Lambda<Func<bool>>(
-                        Expression.Equal(Expression.Constant(value, type), block)
-                    )
+                    Expression.Equal(Expression.Constant(value, type), block)
+                )
                     .Compile(useInterpreter)()
             );
         }
@@ -86,8 +86,8 @@ namespace System.Linq.Expressions.Tests
             );
             Assert.True(
                 Expression.Lambda<Func<bool>>(
-                        Expression.Equal(Expression.Constant(result, type), block)
-                    )
+                    Expression.Equal(Expression.Constant(result, type), block)
+                )
                     .Compile(useInterpreter)()
             );
         }
@@ -99,8 +99,9 @@ namespace System.Linq.Expressions.Tests
             TestPropertyClass<float> instance = new TestPropertyClass<float>();
             instance.TestInstance = float.NaN;
             Assert.True(
-                float.IsNaN(
-                    Expression.Lambda<Func<float>>(
+                float
+                    .IsNaN(
+                        Expression.Lambda<Func<float>>(
                             Expression.PostIncrementAssign(
                                 Expression.Property(
                                     Expression.Constant(instance),
@@ -109,8 +110,8 @@ namespace System.Linq.Expressions.Tests
                                 )
                             )
                         )
-                        .Compile(useInterpreter)()
-                )
+                            .Compile(useInterpreter)()
+                    )
             );
             Assert.True(float.IsNaN(instance.TestInstance));
         }
@@ -122,8 +123,9 @@ namespace System.Linq.Expressions.Tests
             TestPropertyClass<double> instance = new TestPropertyClass<double>();
             instance.TestInstance = double.NaN;
             Assert.True(
-                double.IsNaN(
-                    Expression.Lambda<Func<double>>(
+                double
+                    .IsNaN(
+                        Expression.Lambda<Func<double>>(
                             Expression.PostIncrementAssign(
                                 Expression.Property(
                                     Expression.Constant(instance),
@@ -132,8 +134,8 @@ namespace System.Linq.Expressions.Tests
                                 )
                             )
                         )
-                        .Compile(useInterpreter)()
-                )
+                            .Compile(useInterpreter)()
+                    )
             );
             Assert.True(double.IsNaN(instance.TestInstance));
         }
@@ -144,13 +146,13 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression variable = Expression.Variable(value.GetType());
             Action overflow = Expression.Lambda<Action>(
-                    Expression.Block(
-                        typeof(void),
-                        new[] { variable },
-                        Expression.Assign(variable, Expression.Constant(value)),
-                        Expression.PostIncrementAssign(variable)
-                    )
+                Expression.Block(
+                    typeof(void),
+                    new[] { variable },
+                    Expression.Assign(variable, Expression.Constant(value)),
+                    Expression.PostIncrementAssign(variable)
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Throws<OverflowException>(overflow);
         }
@@ -207,7 +209,8 @@ namespace System.Linq.Expressions.Tests
         public void IncorrectMethodType()
         {
             Expression variable = Expression.Variable(typeof(int));
-            MethodInfo method = typeof(IncDecAssignTests).GetTypeInfo()
+            MethodInfo method = typeof(IncDecAssignTests)
+                .GetTypeInfo()
                 .GetDeclaredMethod("SillyMethod");
             Assert.Throws<InvalidOperationException>(
                 () => Expression.PostIncrementAssign(variable, method)
@@ -229,7 +232,8 @@ namespace System.Linq.Expressions.Tests
         public void IncorrectMethodReturnType()
         {
             Expression variable = Expression.Variable(typeof(int));
-            MethodInfo method = typeof(IncDecAssignTests).GetTypeInfo()
+            MethodInfo method = typeof(IncDecAssignTests)
+                .GetTypeInfo()
                 .GetDeclaredMethod("GetString");
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -245,10 +249,10 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(
                 2L,
                 Expression.Lambda<Func<long>>(
-                        Expression.PostIncrementAssign(
-                            Expression.Property(null, typeof(TestPropertyClass<long>), "TestStatic")
-                        )
+                    Expression.PostIncrementAssign(
+                        Expression.Property(null, typeof(TestPropertyClass<long>), "TestStatic")
                     )
+                )
                     .Compile(useInterpreter)()
             );
             Assert.Equal(3L, TestPropertyClass<long>.TestStatic);
@@ -263,14 +267,14 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(
                 2,
                 Expression.Lambda<Func<int>>(
-                        Expression.PostIncrementAssign(
-                            Expression.Property(
-                                Expression.Constant(instance),
-                                typeof(TestPropertyClass<int>),
-                                "TestInstance"
-                            )
+                    Expression.PostIncrementAssign(
+                        Expression.Property(
+                            Expression.Constant(instance),
+                            typeof(TestPropertyClass<int>),
+                            "TestInstance"
                         )
                     )
+                )
                     .Compile(useInterpreter)()
             );
             Assert.Equal(3, instance.TestInstance);
@@ -285,13 +289,10 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(
                 2,
                 Expression.Lambda<Func<int>>(
-                        Expression.PostIncrementAssign(
-                            Expression.ArrayAccess(
-                                Expression.Constant(array),
-                                Expression.Constant(0)
-                            )
-                        )
+                    Expression.PostIncrementAssign(
+                        Expression.ArrayAccess(Expression.Constant(array), Expression.Constant(0))
                     )
+                )
                     .Compile(useInterpreter)()
             );
             Assert.Equal(3, array[0]);

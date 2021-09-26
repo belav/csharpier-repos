@@ -1177,7 +1177,8 @@ class C
             comp.VerifyDiagnostics(
                 // (6,21): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x = new (int, int)(1, 2);
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(6, 21),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
+                    .WithLocation(6, 21),
                 // (9,17): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         x = new (int, int)();
                 Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(9, 17)
@@ -1252,7 +1253,8 @@ class C
                     .WithLocation(12, 22),
                 // (12,55): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x2 = new (int a, (int b, int c) d)(1, new (int, int)(2, 3)) { a = 5, d = {b = 6, c = 7}};
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(12, 55)
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
+                    .WithLocation(12, 55)
             );
         }
 
@@ -1295,16 +1297,20 @@ class C
                     .WithLocation(6, 22),
                 // (9,22): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x1 = new (int, int)(1, 2, 3);
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(9, 22),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
+                    .WithLocation(9, 22),
                 // (12,22): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x2 = new (int, int)(1, "2");
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(12, 22),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
+                    .WithLocation(12, 22),
                 // (15,22): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x3 = new (int, int)(1);
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(15, 22),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
+                    .WithLocation(15, 22),
                 // (18,22): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x4 = new (int, int)(1, 1) {a = 1, Item3 = 2} ;
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(18, 22),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
+                    .WithLocation(18, 22),
                 // (18,40): error CS0117: '(int, int)' does not contain a definition for 'a'
                 //         var x4 = new (int, int)(1, 1) {a = 1, Item3 = 2} ;
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "a")
@@ -1715,14 +1721,13 @@ class C
                 + trivial3uple
                 + tupleattributes_cs;
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,27): error CS0029: Cannot implicitly convert type '(int, string, int)' to '(int, string)'
-                    //         (int, string) x = (1, "hello", 2);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"(1, ""hello"", 2)")
-                        .WithArguments("(int, string, int)", "(int, string)")
-                        .WithLocation(6, 27)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,27): error CS0029: Cannot implicitly convert type '(int, string, int)' to '(int, string)'
+                //         (int, string) x = (1, "hello", 2);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"(1, ""hello"", 2)")
+                    .WithArguments("(int, string, int)", "(int, string)")
+                    .WithLocation(6, 27)
+            );
         }
 
         [Fact]
@@ -1743,14 +1748,13 @@ class C
                 + trivial3uple
                 + tupleattributes_cs;
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,27): error CS8135: Tuple with 3 elements cannot be converted to type '(int, string)'.
-                    //         (int, string) x = (1, null, 2);
-                    Diagnostic(ErrorCode.ERR_ConversionNotTupleCompatible, "(1, null, 2)")
-                        .WithArguments("3", "(int, string)")
-                        .WithLocation(6, 27)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,27): error CS8135: Tuple with 3 elements cannot be converted to type '(int, string)'.
+                //         (int, string) x = (1, null, 2);
+                Diagnostic(ErrorCode.ERR_ConversionNotTupleCompatible, "(1, null, 2)")
+                    .WithArguments("3", "(int, string)")
+                    .WithLocation(6, 27)
+            );
         }
 
         [Fact]
@@ -1770,9 +1774,9 @@ class C
 ";
 
             CreateCompilationWithMscorlib40(
-                    source,
-                    references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
-                )
+                source,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            )
                 .VerifyDiagnostics(
                     // (6,55): error CS0029: Cannot implicitly convert type 'string' to 'int'
                     //         (int, int, int, int, int, int, int, int) x = ("Alice", 2, 3, 4, 5, 6, 7, 8);
@@ -3776,9 +3780,9 @@ class C
                 // (12,16): error CS8179: Predefined type 'System.ValueTuple`2' is not defined or imported
                 //         return (default(T1), default(T2));
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
-                        "(default(T1), default(T2))"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
+                    "(default(T1), default(T2))"
+                )
                     .WithArguments("System.ValueTuple`2")
                     .WithLocation(12, 16)
             );
@@ -3866,9 +3870,9 @@ class C
                 // (8,12): error CS8179: Predefined type 'System.ValueTuple`8' is not defined or imported
                 //     static (T1, T2, T3, T4, T5, T6, T7, T8, T9) M<T1, T2, T3, T4, T5, T6, T7, T8, T9>()
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
-                        "(T1, T2, T3, T4, T5, T6, T7, T8, T9)"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
+                    "(T1, T2, T3, T4, T5, T6, T7, T8, T9)"
+                )
                     .WithArguments("System.ValueTuple`8")
                     .WithLocation(8, 12)
             );
@@ -4038,14 +4042,13 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,41): error CS1736: Default parameter value for 'y' must be a compile-time constant
-                    //     void M(int x, (int a, string b) y = (42, "Alice"))
-                    Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, @"(42, ""Alice"")")
-                        .WithArguments("y")
-                        .WithLocation(4, 41)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,41): error CS1736: Default parameter value for 'y' must be a compile-time constant
+                //     void M(int x, (int a, string b) y = (42, "Alice"))
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, @"(42, ""Alice"")")
+                    .WithArguments("y")
+                    .WithLocation(4, 41)
+            );
         }
 
         [Fact]
@@ -4580,13 +4583,19 @@ class C2
             compilation.VerifyDiagnostics(
                 // (12,27): error CS0122: 'C.e' is inaccessible due to its protection level
                 //         var y = (instance?.e, (instance.e, instance2.M(), checked(instance.e), default(int)));
-                Diagnostic(ErrorCode.ERR_BadAccess, ".e").WithArguments("C.e").WithLocation(12, 27),
+                Diagnostic(ErrorCode.ERR_BadAccess, ".e")
+                    .WithArguments("C.e")
+                    .WithLocation(12, 27),
                 // (12,41): error CS0122: 'C.e' is inaccessible due to its protection level
                 //         var y = (instance?.e, (instance.e, instance2.M(), checked(instance.e), default(int)));
-                Diagnostic(ErrorCode.ERR_BadAccess, "e").WithArguments("C.e").WithLocation(12, 41),
+                Diagnostic(ErrorCode.ERR_BadAccess, "e")
+                    .WithArguments("C.e")
+                    .WithLocation(12, 41),
                 // (12,76): error CS0122: 'C.e' is inaccessible due to its protection level
                 //         var y = (instance?.e, (instance.e, instance2.M(), checked(instance.e), default(int)));
-                Diagnostic(ErrorCode.ERR_BadAccess, "e").WithArguments("C.e").WithLocation(12, 76),
+                Diagnostic(ErrorCode.ERR_BadAccess, "e")
+                    .WithArguments("C.e")
+                    .WithLocation(12, 76),
                 // (4,17): warning CS0414: The field 'C.e' is assigned but its value is never used
                 //     private int e = 5;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "e").WithArguments("C.e")
@@ -5421,9 +5430,9 @@ namespace System
                     .WithLocation(16, 39)
             );
 
-            var mTuple =
-                (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
-                    .GetMember<MethodSymbol>("M").ReturnType;
+            var mTuple = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
+                .GetMember<MethodSymbol>("M").ReturnType;
             AssertTupleTypeEquality(mTuple);
 
             var mItem1 = (FieldSymbol)mTuple.GetMembers("Item1").Single();
@@ -5457,9 +5466,9 @@ namespace System
                 "(System.String, System.String)..ctor()"
             );
 
-            var m2Tuple =
-                (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
-                    .GetMember<MethodSymbol>("M2").Parameters[0].Type;
+            var m2Tuple = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
+                .GetMember<MethodSymbol>("M2").Parameters[0].Type;
             AssertTupleTypeEquality(m2Tuple);
             AssertTestDisplayString(
                 m2Tuple.GetMembers(),
@@ -7711,10 +7720,10 @@ namespace System
             Assert.False(ns.IsGlobalNamespace);
 
             vt2 = comp.CreateErrorTypeSymbol(
-                    comp.CreateErrorNamespaceSymbol(comp.GlobalNamespace, "System"),
-                    "ValueTuple",
-                    2
-                )
+                comp.CreateErrorNamespaceSymbol(comp.GlobalNamespace, "System"),
+                "ValueTuple",
+                2
+            )
                 .Construct(intType, intType);
             Assert.Equal(
                 "(System.Int32, System.Int32)[missing]",
@@ -7722,10 +7731,10 @@ namespace System
             );
 
             vt2 = comp.CreateErrorTypeSymbol(
-                    comp.CreateErrorNamespaceSymbol(comp.Assembly.GlobalNamespace, "System"),
-                    "ValueTuple",
-                    2
-                )
+                comp.CreateErrorNamespaceSymbol(comp.Assembly.GlobalNamespace, "System"),
+                "ValueTuple",
+                2
+            )
                 .Construct(intType, intType);
             Assert.Equal(
                 "(System.Int32, System.Int32)[missing]",
@@ -7733,10 +7742,10 @@ namespace System
             );
 
             vt2 = comp.CreateErrorTypeSymbol(
-                    comp.CreateErrorNamespaceSymbol(comp.SourceModule.GlobalNamespace, "System"),
-                    "ValueTuple",
-                    2
-                )
+                comp.CreateErrorNamespaceSymbol(comp.SourceModule.GlobalNamespace, "System"),
+                "ValueTuple",
+                2
+            )
                 .Construct(intType, intType);
             Assert.Equal(
                 "(System.Int32, System.Int32)[missing]",
@@ -7804,7 +7813,8 @@ End Class";
             );
 
             vbComp.VerifyDiagnostics();
-            INamedTypeSymbol vbType = (INamedTypeSymbol)vbComp.GlobalNamespace.GetMembers("C")
+            INamedTypeSymbol vbType = (INamedTypeSymbol)vbComp.GlobalNamespace
+                .GetMembers("C")
                 .Single();
 
             var comp = CSharpCompilation.Create("test", references: new[] { MscorlibRef });
@@ -8360,9 +8370,9 @@ class C
 ";
 
             var comp = (Compilation)CreateCompilation(source);
-            var tuple1 =
-                (INamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
-                    .GetMember<IFieldSymbol>("F").Type;
+            var tuple1 = (INamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
+                .GetMember<IFieldSymbol>("F").Type;
 
             var intType = comp.GetSpecialType(SpecialType.System_Int32);
             var stringType = comp.GetSpecialType(SpecialType.System_String);
@@ -8632,9 +8642,8 @@ class C
     (int, string) F;
 }";
             var comp = CreateCompilation(source);
-            var tuple1 = (INamedTypeSymbol)(
-                (FieldSymbol)comp.GetMember("Program.F")
-            ).GetPublicSymbol().Type;
+            var tuple1 = (INamedTypeSymbol)((FieldSymbol)comp.GetMember("Program.F"))
+                .GetPublicSymbol().Type;
             Assert.Null(tuple1.TupleUnderlyingType);
             var underlyingType = tuple1;
 
@@ -9063,59 +9072,58 @@ class C
                 + trivial3uple
                 + tupleattributes_cs;
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,20): error CS1525: Invalid expression term ')'
-                    //         x = (1, 1, );
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
-                        .WithArguments(")")
-                        .WithLocation(12, 20),
-                    // (8,13): error CS8129: Tuple with 3 elements cannot be converted to type '(int, int)'.
-                    //         x = (null, null, null);
-                    Diagnostic(ErrorCode.ERR_ConversionNotTupleCompatible, "(null, null, null)")
-                        .WithArguments("3", "(int, int)")
-                        .WithLocation(8, 13),
-                    // (9,13): error CS0029: Cannot implicitly convert type '(int, int, int)' to '(int, int)'
-                    //         x = (1, 1, 1);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "(1, 1, 1)")
-                        .WithArguments("(int, int, int)", "(int, int)")
-                        .WithLocation(9, 13),
-                    // (10,17): error CS0029: Cannot implicitly convert type 'string' to 'int'
-                    //         x = (1, "string");
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""string""")
-                        .WithArguments("string", "int")
-                        .WithLocation(10, 17),
-                    // (11,20): error CS0103: The name 'garbage' does not exist in the current context
-                    //         x = (1, 1, garbage);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "garbage")
-                        .WithArguments("garbage")
-                        .WithLocation(11, 20),
-                    // (13,14): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = (null, null);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(13, 14),
-                    // (13,20): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = (null, null);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(13, 20),
-                    // (14,17): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = (1, null);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(14, 17),
-                    // (15,17): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
-                    //         x = (1, (t)=>t);
-                    Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(t)=>t")
-                        .WithArguments("lambda expression", "int")
-                        .WithLocation(15, 17),
-                    // (16,13): error CS0037: Cannot convert null to '(int, int)' because it is a non-nullable value type
-                    //         x = null;
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("(int, int)")
-                        .WithLocation(16, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,20): error CS1525: Invalid expression term ')'
+                //         x = (1, 1, );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(12, 20),
+                // (8,13): error CS8129: Tuple with 3 elements cannot be converted to type '(int, int)'.
+                //         x = (null, null, null);
+                Diagnostic(ErrorCode.ERR_ConversionNotTupleCompatible, "(null, null, null)")
+                    .WithArguments("3", "(int, int)")
+                    .WithLocation(8, 13),
+                // (9,13): error CS0029: Cannot implicitly convert type '(int, int, int)' to '(int, int)'
+                //         x = (1, 1, 1);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "(1, 1, 1)")
+                    .WithArguments("(int, int, int)", "(int, int)")
+                    .WithLocation(9, 13),
+                // (10,17): error CS0029: Cannot implicitly convert type 'string' to 'int'
+                //         x = (1, "string");
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""string""")
+                    .WithArguments("string", "int")
+                    .WithLocation(10, 17),
+                // (11,20): error CS0103: The name 'garbage' does not exist in the current context
+                //         x = (1, 1, garbage);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "garbage")
+                    .WithArguments("garbage")
+                    .WithLocation(11, 20),
+                // (13,14): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = (null, null);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(13, 14),
+                // (13,20): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = (null, null);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(13, 20),
+                // (14,17): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = (1, null);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(14, 17),
+                // (15,17): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
+                //         x = (1, (t)=>t);
+                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(t)=>t")
+                    .WithArguments("lambda expression", "int")
+                    .WithLocation(15, 17),
+                // (16,13): error CS0037: Cannot convert null to '(int, int)' because it is a non-nullable value type
+                //         x = null;
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("(int, int)")
+                    .WithLocation(16, 13)
+            );
         }
 
         [Fact]
@@ -9145,62 +9153,61 @@ class C
                 + trivial3uple
                 + tupleattributes_cs;
 
-            CreateCompilation(source, parseOptions: TestOptions.Regular)
-                .VerifyDiagnostics(
-                    // (12,32): error CS1525: Invalid expression term ')'
-                    //         x = ((int, int))(1, 1, );
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
-                        .WithArguments(")")
-                        .WithLocation(12, 32),
-                    // (8,13): error CS8129: Tuple with 3 elements cannot be converted to type '(int, int)'.
-                    //         x = ((int, int))(null, null, null);
-                    Diagnostic(
-                            ErrorCode.ERR_ConversionNotTupleCompatible,
-                            "((int, int))(null, null, null)"
-                        )
-                        .WithArguments("3", "(int, int)")
-                        .WithLocation(8, 13),
-                    // (9,13): error CS0030: Cannot convert type '(int, int, int)' to '(int, int)'
-                    //         x = ((int, int))(1, 1, 1);
-                    Diagnostic(ErrorCode.ERR_NoExplicitConv, "((int, int))(1, 1, 1)")
-                        .WithArguments("(int, int, int)", "(int, int)")
-                        .WithLocation(9, 13),
-                    // (10,29): error CS0030: Cannot convert type 'string' to 'int'
-                    //         x = ((int, int))(1, "string");
-                    Diagnostic(ErrorCode.ERR_NoExplicitConv, @"""string""")
-                        .WithArguments("string", "int")
-                        .WithLocation(10, 29),
-                    // (11,32): error CS0103: The name 'garbage' does not exist in the current context
-                    //         x = ((int, int))(1, 1, garbage);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "garbage")
-                        .WithArguments("garbage")
-                        .WithLocation(11, 32),
-                    // (13,26): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = ((int, int))(null, null);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(13, 26),
-                    // (13,32): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = ((int, int))(null, null);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(13, 32),
-                    // (14,29): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = ((int, int))(1, null);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(14, 29),
-                    // (15,29): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
-                    //         x = ((int, int))(1, (t)=>t);
-                    Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(t)=>t")
-                        .WithArguments("lambda expression", "int")
-                        .WithLocation(15, 29),
-                    // (16,13): error CS0037: Cannot convert null to '(int, int)' because it is a non-nullable value type
-                    //         x = ((int, int))null;
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "((int, int))null")
-                        .WithArguments("(int, int)")
-                        .WithLocation(16, 13)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular).VerifyDiagnostics(
+                // (12,32): error CS1525: Invalid expression term ')'
+                //         x = ((int, int))(1, 1, );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(12, 32),
+                // (8,13): error CS8129: Tuple with 3 elements cannot be converted to type '(int, int)'.
+                //         x = ((int, int))(null, null, null);
+                Diagnostic(
+                    ErrorCode.ERR_ConversionNotTupleCompatible,
+                    "((int, int))(null, null, null)"
+                )
+                    .WithArguments("3", "(int, int)")
+                    .WithLocation(8, 13),
+                // (9,13): error CS0030: Cannot convert type '(int, int, int)' to '(int, int)'
+                //         x = ((int, int))(1, 1, 1);
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "((int, int))(1, 1, 1)")
+                    .WithArguments("(int, int, int)", "(int, int)")
+                    .WithLocation(9, 13),
+                // (10,29): error CS0030: Cannot convert type 'string' to 'int'
+                //         x = ((int, int))(1, "string");
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, @"""string""")
+                    .WithArguments("string", "int")
+                    .WithLocation(10, 29),
+                // (11,32): error CS0103: The name 'garbage' does not exist in the current context
+                //         x = ((int, int))(1, 1, garbage);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "garbage")
+                    .WithArguments("garbage")
+                    .WithLocation(11, 32),
+                // (13,26): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = ((int, int))(null, null);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(13, 26),
+                // (13,32): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = ((int, int))(null, null);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(13, 32),
+                // (14,29): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = ((int, int))(1, null);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(14, 29),
+                // (15,29): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
+                //         x = ((int, int))(1, (t)=>t);
+                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(t)=>t")
+                    .WithArguments("lambda expression", "int")
+                    .WithLocation(15, 29),
+                // (16,13): error CS0037: Cannot convert null to '(int, int)' because it is a non-nullable value type
+                //         x = ((int, int))null;
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "((int, int))null")
+                    .WithArguments("(int, int)")
+                    .WithLocation(16, 13)
+            );
         }
 
         [Fact]
@@ -9231,59 +9238,58 @@ class C
                 + trivial3uple
                 + tupleattributes_cs;
 
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (12,20): error CS1525: Invalid expression term ')'
-                    //         x = (1, 1, );
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
-                        .WithArguments(")")
-                        .WithLocation(12, 20),
-                    // (8,13): error CS8129: Tuple with 3 elements cannot be converted to type '(int, int)'.
-                    //         x = (null, null, null);
-                    Diagnostic(ErrorCode.ERR_ConversionNotTupleCompatible, "(null, null, null)")
-                        .WithArguments("3", "(int, int)")
-                        .WithLocation(8, 13),
-                    // (9,13): error CS0029: Cannot implicitly convert type '(int, int, int)' to '(int, int)'
-                    //         x = (1, 1, 1);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "(1, 1, 1)")
-                        .WithArguments("(int, int, int)", "(int, int)")
-                        .WithLocation(9, 13),
-                    // (10,17): error CS0029: Cannot implicitly convert type 'string' to 'int'
-                    //         x = (1, "string");
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""string""")
-                        .WithArguments("string", "int")
-                        .WithLocation(10, 17),
-                    // (11,20): error CS0103: The name 'garbage' does not exist in the current context
-                    //         x = (1, 1, garbage);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "garbage")
-                        .WithArguments("garbage")
-                        .WithLocation(11, 20),
-                    // (13,14): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = (null, null);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(13, 14),
-                    // (13,20): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = (null, null);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(13, 20),
-                    // (14,17): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = (1, null);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(14, 17),
-                    // (15,17): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
-                    //         x = (1, (t)=>t);
-                    Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(t)=>t")
-                        .WithArguments("lambda expression", "int")
-                        .WithLocation(15, 17),
-                    // (16,13): error CS0037: Cannot convert null to '(int, int)' because it is a non-nullable value type
-                    //         x = null;
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("(int, int)")
-                        .WithLocation(16, 13)
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (12,20): error CS1525: Invalid expression term ')'
+                //         x = (1, 1, );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(12, 20),
+                // (8,13): error CS8129: Tuple with 3 elements cannot be converted to type '(int, int)'.
+                //         x = (null, null, null);
+                Diagnostic(ErrorCode.ERR_ConversionNotTupleCompatible, "(null, null, null)")
+                    .WithArguments("3", "(int, int)")
+                    .WithLocation(8, 13),
+                // (9,13): error CS0029: Cannot implicitly convert type '(int, int, int)' to '(int, int)'
+                //         x = (1, 1, 1);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "(1, 1, 1)")
+                    .WithArguments("(int, int, int)", "(int, int)")
+                    .WithLocation(9, 13),
+                // (10,17): error CS0029: Cannot implicitly convert type 'string' to 'int'
+                //         x = (1, "string");
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""string""")
+                    .WithArguments("string", "int")
+                    .WithLocation(10, 17),
+                // (11,20): error CS0103: The name 'garbage' does not exist in the current context
+                //         x = (1, 1, garbage);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "garbage")
+                    .WithArguments("garbage")
+                    .WithLocation(11, 20),
+                // (13,14): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = (null, null);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(13, 14),
+                // (13,20): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = (null, null);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(13, 20),
+                // (14,17): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = (1, null);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(14, 17),
+                // (15,17): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
+                //         x = (1, (t)=>t);
+                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(t)=>t")
+                    .WithArguments("lambda expression", "int")
+                    .WithLocation(15, 17),
+                // (16,13): error CS0037: Cannot convert null to '(int, int)' because it is a non-nullable value type
+                //         x = null;
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("(int, int)")
+                    .WithLocation(16, 13)
+            );
         }
 
         [Fact]
@@ -9314,54 +9320,53 @@ class C
                 + trivial3uple
                 + tupleattributes_cs;
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,20): error CS1525: Invalid expression term ')'
-                    //         x = (1, 1, );
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
-                        .WithArguments(")")
-                        .WithLocation(12, 20),
-                    // (8,13): error CS8129: Tuple with 3 elements cannot be converted to type '(string, string)'.
-                    //         x = (null, null, null);
-                    Diagnostic(ErrorCode.ERR_ConversionNotTupleCompatible, "(null, null, null)")
-                        .WithArguments("3", "(string, string)")
-                        .WithLocation(8, 13),
-                    // (9,13): error CS0029: Cannot implicitly convert type '(int, int, int)' to '(string, string)'
-                    //         x = (1, 1, 1);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "(1, 1, 1)")
-                        .WithArguments("(int, int, int)", "(string, string)")
-                        .WithLocation(9, 13),
-                    // (10,14): error CS0029: Cannot implicitly convert type 'int' to 'string'
-                    //         x = (1, "string");
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
-                        .WithArguments("int", "string")
-                        .WithLocation(10, 14),
-                    // (11,20): error CS0103: The name 'garbage' does not exist in the current context
-                    //         x = (1, 1, garbage);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "garbage")
-                        .WithArguments("garbage")
-                        .WithLocation(11, 20),
-                    // (14,14): error CS0029: Cannot implicitly convert type 'int' to 'string'
-                    //         x = (1, null);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
-                        .WithArguments("int", "string")
-                        .WithLocation(14, 14),
-                    // (15,14): error CS0029: Cannot implicitly convert type 'int' to 'string'
-                    //         x = (1, (t)=>t);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
-                        .WithArguments("int", "string")
-                        .WithLocation(15, 14),
-                    // (15,17): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
-                    //         x = (1, (t)=>t);
-                    Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(t)=>t")
-                        .WithArguments("lambda expression", "string")
-                        .WithLocation(15, 17),
-                    // (16,13): error CS0037: Cannot convert null to '(string, string)' because it is a non-nullable value type
-                    //         x = null;
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("(string, string)")
-                        .WithLocation(16, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,20): error CS1525: Invalid expression term ')'
+                //         x = (1, 1, );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(12, 20),
+                // (8,13): error CS8129: Tuple with 3 elements cannot be converted to type '(string, string)'.
+                //         x = (null, null, null);
+                Diagnostic(ErrorCode.ERR_ConversionNotTupleCompatible, "(null, null, null)")
+                    .WithArguments("3", "(string, string)")
+                    .WithLocation(8, 13),
+                // (9,13): error CS0029: Cannot implicitly convert type '(int, int, int)' to '(string, string)'
+                //         x = (1, 1, 1);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "(1, 1, 1)")
+                    .WithArguments("(int, int, int)", "(string, string)")
+                    .WithLocation(9, 13),
+                // (10,14): error CS0029: Cannot implicitly convert type 'int' to 'string'
+                //         x = (1, "string");
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "string")
+                    .WithLocation(10, 14),
+                // (11,20): error CS0103: The name 'garbage' does not exist in the current context
+                //         x = (1, 1, garbage);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "garbage")
+                    .WithArguments("garbage")
+                    .WithLocation(11, 20),
+                // (14,14): error CS0029: Cannot implicitly convert type 'int' to 'string'
+                //         x = (1, null);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "string")
+                    .WithLocation(14, 14),
+                // (15,14): error CS0029: Cannot implicitly convert type 'int' to 'string'
+                //         x = (1, (t)=>t);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "string")
+                    .WithLocation(15, 14),
+                // (15,17): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
+                //         x = (1, (t)=>t);
+                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(t)=>t")
+                    .WithArguments("lambda expression", "string")
+                    .WithLocation(15, 17),
+                // (16,13): error CS0037: Cannot convert null to '(string, string)' because it is a non-nullable value type
+                //         x = null;
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("(string, string)")
+                    .WithLocation(16, 13)
+            );
         }
 
         [Fact]
@@ -9392,59 +9397,58 @@ class C
                 + trivial3uple
                 + tupleattributes_cs;
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,21): error CS1525: Invalid expression term ')'
-                    //         x = ((1, 1, ), 1);
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
-                        .WithArguments(")")
-                        .WithLocation(12, 21),
-                    // (8,14): error CS8129: Tuple with 3 elements cannot be converted to type '(int, int)'.
-                    //         x = ((null, null, null), 1);
-                    Diagnostic(ErrorCode.ERR_ConversionNotTupleCompatible, "(null, null, null)")
-                        .WithArguments("3", "(int, int)")
-                        .WithLocation(8, 14),
-                    // (9,14): error CS0029: Cannot implicitly convert type '(int, int, int)' to '(int, int)'
-                    //         x = ((1, 1, 1), 1);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "(1, 1, 1)")
-                        .WithArguments("(int, int, int)", "(int, int)")
-                        .WithLocation(9, 14),
-                    // (10,18): error CS0029: Cannot implicitly convert type 'string' to 'int'
-                    //         x = ((1, "string"), 1);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""string""")
-                        .WithArguments("string", "int")
-                        .WithLocation(10, 18),
-                    // (11,21): error CS0103: The name 'garbage' does not exist in the current context
-                    //         x = ((1, 1, garbage), 1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "garbage")
-                        .WithArguments("garbage")
-                        .WithLocation(11, 21),
-                    // (13,15): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = ((null, null), 1);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(13, 15),
-                    // (13,21): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = ((null, null), 1);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(13, 21),
-                    // (14,18): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    //         x = ((1, null), 1);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("int")
-                        .WithLocation(14, 18),
-                    // (15,18): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
-                    //         x = ((1, (t)=>t), 1);
-                    Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(t)=>t")
-                        .WithArguments("lambda expression", "int")
-                        .WithLocation(15, 18),
-                    // (16,14): error CS0037: Cannot convert null to '(int, int)' because it is a non-nullable value type
-                    //         x = (null, 1);
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
-                        .WithArguments("(int, int)")
-                        .WithLocation(16, 14)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,21): error CS1525: Invalid expression term ')'
+                //         x = ((1, 1, ), 1);
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(12, 21),
+                // (8,14): error CS8129: Tuple with 3 elements cannot be converted to type '(int, int)'.
+                //         x = ((null, null, null), 1);
+                Diagnostic(ErrorCode.ERR_ConversionNotTupleCompatible, "(null, null, null)")
+                    .WithArguments("3", "(int, int)")
+                    .WithLocation(8, 14),
+                // (9,14): error CS0029: Cannot implicitly convert type '(int, int, int)' to '(int, int)'
+                //         x = ((1, 1, 1), 1);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "(1, 1, 1)")
+                    .WithArguments("(int, int, int)", "(int, int)")
+                    .WithLocation(9, 14),
+                // (10,18): error CS0029: Cannot implicitly convert type 'string' to 'int'
+                //         x = ((1, "string"), 1);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""string""")
+                    .WithArguments("string", "int")
+                    .WithLocation(10, 18),
+                // (11,21): error CS0103: The name 'garbage' does not exist in the current context
+                //         x = ((1, 1, garbage), 1);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "garbage")
+                    .WithArguments("garbage")
+                    .WithLocation(11, 21),
+                // (13,15): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = ((null, null), 1);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(13, 15),
+                // (13,21): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = ((null, null), 1);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(13, 21),
+                // (14,18): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         x = ((1, null), 1);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(14, 18),
+                // (15,18): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
+                //         x = ((1, (t)=>t), 1);
+                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "(t)=>t")
+                    .WithArguments("lambda expression", "int")
+                    .WithLocation(15, 18),
+                // (16,14): error CS0037: Cannot convert null to '(int, int)' because it is a non-nullable value type
+                //         x = (null, 1);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("(int, int)")
+                    .WithLocation(16, 14)
+            );
         }
 
         [Fact]
@@ -9478,102 +9482,99 @@ class C
                 + trivialRemainingTuples
                 + tupleattributes_cs; //intentionally not including 3-tuple for usesite errors
 
-            CreateCompilationWithMscorlib46(source)
-                .VerifyDiagnostics(
-                    // (13,37): error CS1525: Invalid expression term ';'
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8,;
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
-                        .WithArguments(";")
-                        .WithLocation(13, 37),
-                    // (13,37): error CS1026: ) expected
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8,;
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(13, 37),
-                    // (14,38): error CS1026: ) expected
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8,9
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(14, 38),
-                    // (14,38): error CS1002: ; expected
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8,9
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(14, 38),
-                    // (8,14): error CS0029: Cannot implicitly convert type 'int' to '(int, int)'
-                    //         x = (0,1,2,3,4,5,6,7,8,9,10);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "0")
-                        .WithArguments("int", "(int, int)")
-                        .WithLocation(8, 14),
-                    // (9,18): error CS0029: Cannot implicitly convert type 'double' to 'int'
-                    //         x = ((0, 0.0),1,2,3,4,5,6,7,8,9,10);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "0.0")
-                        .WithArguments("double", "int")
-                        .WithLocation(9, 18),
-                    // (10,13): error CS0029: Cannot implicitly convert type '((int, int), int, int, int, int, int, int, int, int, int, int, int)' to '((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)'
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8,9,10,11);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "((0, 0),1,2,3,4,5,6,7,8,9,10,11)")
-                        .WithArguments(
-                            "((int, int), int, int, int, int, int, int, int, int, int, int, int)",
-                            "((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)"
-                        )
-                        .WithLocation(10, 13),
-                    // (11,13): error CS0029: Cannot implicitly convert type '((int, int), int, int, int, int, int, int, int, int)' to '((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)'
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "((0, 0),1,2,3,4,5,6,7,8)")
-                        .WithArguments(
-                            "((int, int), int, int, int, int, int, int, int, int)",
-                            "((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)"
-                        )
-                        .WithLocation(11, 13),
-                    // (12,37): error CS0029: Cannot implicitly convert type 'double' to 'int'
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8,9.1,10);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "9.1")
-                        .WithArguments("double", "int")
-                        .WithLocation(12, 37),
-                    // (13,13): error CS8179: Predefined type 'System.ValueTuple`3' is not defined or imported
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8,;
-                    Diagnostic(
-                            ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
-                            "((0, 0),1,2,3,4,5,6,7,8,"
-                        )
-                        .WithArguments("System.ValueTuple`3")
-                        .WithLocation(13, 13),
-                    // (14,13): error CS8179: Predefined type 'System.ValueTuple`3' is not defined or imported
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8,9
-                    Diagnostic(
-                            ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
-                            @"((0, 0),1,2,3,4,5,6,7,8,9
+            CreateCompilationWithMscorlib46(source).VerifyDiagnostics(
+                // (13,37): error CS1525: Invalid expression term ';'
+                //         x = ((0, 0),1,2,3,4,5,6,7,8,;
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(13, 37),
+                // (13,37): error CS1026: ) expected
+                //         x = ((0, 0),1,2,3,4,5,6,7,8,;
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(13, 37),
+                // (14,38): error CS1026: ) expected
+                //         x = ((0, 0),1,2,3,4,5,6,7,8,9
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(14, 38),
+                // (14,38): error CS1002: ; expected
+                //         x = ((0, 0),1,2,3,4,5,6,7,8,9
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(14, 38),
+                // (8,14): error CS0029: Cannot implicitly convert type 'int' to '(int, int)'
+                //         x = (0,1,2,3,4,5,6,7,8,9,10);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "0")
+                    .WithArguments("int", "(int, int)")
+                    .WithLocation(8, 14),
+                // (9,18): error CS0029: Cannot implicitly convert type 'double' to 'int'
+                //         x = ((0, 0.0),1,2,3,4,5,6,7,8,9,10);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "0.0")
+                    .WithArguments("double", "int")
+                    .WithLocation(9, 18),
+                // (10,13): error CS0029: Cannot implicitly convert type '((int, int), int, int, int, int, int, int, int, int, int, int, int)' to '((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)'
+                //         x = ((0, 0),1,2,3,4,5,6,7,8,9,10,11);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "((0, 0),1,2,3,4,5,6,7,8,9,10,11)")
+                    .WithArguments(
+                        "((int, int), int, int, int, int, int, int, int, int, int, int, int)",
+                        "((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)"
+                    )
+                    .WithLocation(10, 13),
+                // (11,13): error CS0029: Cannot implicitly convert type '((int, int), int, int, int, int, int, int, int, int)' to '((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)'
+                //         x = ((0, 0),1,2,3,4,5,6,7,8);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "((0, 0),1,2,3,4,5,6,7,8)")
+                    .WithArguments(
+                        "((int, int), int, int, int, int, int, int, int, int)",
+                        "((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)"
+                    )
+                    .WithLocation(11, 13),
+                // (12,37): error CS0029: Cannot implicitly convert type 'double' to 'int'
+                //         x = ((0, 0),1,2,3,4,5,6,7,8,9.1,10);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "9.1")
+                    .WithArguments("double", "int")
+                    .WithLocation(12, 37),
+                // (13,13): error CS8179: Predefined type 'System.ValueTuple`3' is not defined or imported
+                //         x = ((0, 0),1,2,3,4,5,6,7,8,;
+                Diagnostic(
+                    ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
+                    "((0, 0),1,2,3,4,5,6,7,8,"
+                )
+                    .WithArguments("System.ValueTuple`3")
+                    .WithLocation(13, 13),
+                // (14,13): error CS8179: Predefined type 'System.ValueTuple`3' is not defined or imported
+                //         x = ((0, 0),1,2,3,4,5,6,7,8,9
+                Diagnostic(
+                    ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
+                    @"((0, 0),1,2,3,4,5,6,7,8,9
 "
-                        )
-                        .WithArguments("System.ValueTuple`3")
-                        .WithLocation(14, 13),
-                    // (15,29): error CS0103: The name 'oops' does not exist in the current context
-                    //         x = ((0, 0),1,2,3,4,oops,6,7,oopsss,9,10);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "oops")
-                        .WithArguments("oops")
-                        .WithLocation(15, 29),
-                    // (15,38): error CS0103: The name 'oopsss' does not exist in the current context
-                    //         x = ((0, 0),1,2,3,4,oops,6,7,oopsss,9,10);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "oopsss")
-                        .WithArguments("oopsss")
-                        .WithLocation(15, 38),
-                    // (17,13): error CS8179: Predefined type 'System.ValueTuple`3' is not defined or imported
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8,9);
-                    Diagnostic(
-                            ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
-                            "((0, 0),1,2,3,4,5,6,7,8,9)"
-                        )
-                        .WithArguments("System.ValueTuple`3")
-                        .WithLocation(17, 13),
-                    // (17,13): error CS0029: Cannot implicitly convert type 'System.ValueTuple<(int, int), int, int, int, int, int, int, (int, int, int)>' to '((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)'
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8,9);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "((0, 0),1,2,3,4,5,6,7,8,9)")
-                        .WithArguments(
-                            "System.ValueTuple<(int, int), int, int, int, int, int, int, (int, int, int)>",
-                            "((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)"
-                        )
-                        .WithLocation(17, 13),
-                    // (18,37): error CS8179: Predefined type 'System.ValueTuple`3' is not defined or imported
-                    //         x = ((0, 0),1,2,3,4,5,6,7,8,(1,1,1), 10);
-                    Diagnostic(ErrorCode.ERR_PredefinedValueTupleTypeNotFound, "(1,1,1)")
-                        .WithArguments("System.ValueTuple`3")
-                        .WithLocation(18, 37)
-                );
+                ).WithArguments("System.ValueTuple`3").WithLocation(14, 13),
+                // (15,29): error CS0103: The name 'oops' does not exist in the current context
+                //         x = ((0, 0),1,2,3,4,oops,6,7,oopsss,9,10);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "oops")
+                    .WithArguments("oops")
+                    .WithLocation(15, 29),
+                // (15,38): error CS0103: The name 'oopsss' does not exist in the current context
+                //         x = ((0, 0),1,2,3,4,oops,6,7,oopsss,9,10);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "oopsss")
+                    .WithArguments("oopsss")
+                    .WithLocation(15, 38),
+                // (17,13): error CS8179: Predefined type 'System.ValueTuple`3' is not defined or imported
+                //         x = ((0, 0),1,2,3,4,5,6,7,8,9);
+                Diagnostic(
+                    ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
+                    "((0, 0),1,2,3,4,5,6,7,8,9)"
+                )
+                    .WithArguments("System.ValueTuple`3")
+                    .WithLocation(17, 13),
+                // (17,13): error CS0029: Cannot implicitly convert type 'System.ValueTuple<(int, int), int, int, int, int, int, int, (int, int, int)>' to '((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)'
+                //         x = ((0, 0),1,2,3,4,5,6,7,8,9);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "((0, 0),1,2,3,4,5,6,7,8,9)")
+                    .WithArguments(
+                        "System.ValueTuple<(int, int), int, int, int, int, int, int, (int, int, int)>",
+                        "((int, int) x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9, int x10)"
+                    )
+                    .WithLocation(17, 13),
+                // (18,37): error CS8179: Predefined type 'System.ValueTuple`3' is not defined or imported
+                //         x = ((0, 0),1,2,3,4,5,6,7,8,(1,1,1), 10);
+                Diagnostic(ErrorCode.ERR_PredefinedValueTupleTypeNotFound, "(1,1,1)")
+                    .WithArguments("System.ValueTuple`3")
+                    .WithLocation(18, 37)
+            );
         }
 
         [Fact]
@@ -9602,49 +9603,48 @@ class C
                 + trivial3uple
                 + tupleattributes_cs;
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,30): error CS0029: Cannot implicitly convert type 'int' to 'string'
-                    //         Func<string> l = ()=>1; // reference
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
-                        .WithArguments("int", "string")
-                        .WithLocation(8, 30),
-                    // (8,30): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-                    //         Func<string> l = ()=>1; // reference
-                    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "1")
-                        .WithArguments("lambda expression")
-                        .WithLocation(8, 30),
-                    // (10,47): error CS0029: Cannot implicitly convert type 'int' to 'string'
-                    //         (string, Func<string>) x = (null, ()=>1);  // actual error, should be the same as above.
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
-                        .WithArguments("int", "string")
-                        .WithLocation(10, 47),
-                    // (10,47): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-                    //         (string, Func<string>) x = (null, ()=>1);  // actual error, should be the same as above.
-                    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "1")
-                        .WithArguments("lambda expression")
-                        .WithLocation(10, 47),
-                    // (12,48): error CS0029: Cannot implicitly convert type 'double' to 'string'
-                    //         Func<(string, string)> l1 = ()=>(null, 1.1); // reference
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1.1")
-                        .WithArguments("double", "string")
-                        .WithLocation(12, 48),
-                    // (12,41): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-                    //         Func<(string, string)> l1 = ()=>(null, 1.1); // reference
-                    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "(null, 1.1)")
-                        .WithArguments("lambda expression")
-                        .WithLocation(12, 41),
-                    // (14,65): error CS0029: Cannot implicitly convert type 'double' to 'string'
-                    //         (string, Func<(string, string)>) x1 = (null, ()=>(null, 1.1));  // actual error, should be the same as above.
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1.1")
-                        .WithArguments("double", "string")
-                        .WithLocation(14, 65),
-                    // (14,58): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-                    //         (string, Func<(string, string)>) x1 = (null, ()=>(null, 1.1));  // actual error, should be the same as above.
-                    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "(null, 1.1)")
-                        .WithArguments("lambda expression")
-                        .WithLocation(14, 58)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,30): error CS0029: Cannot implicitly convert type 'int' to 'string'
+                //         Func<string> l = ()=>1; // reference
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "string")
+                    .WithLocation(8, 30),
+                // (8,30): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                //         Func<string> l = ()=>1; // reference
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "1")
+                    .WithArguments("lambda expression")
+                    .WithLocation(8, 30),
+                // (10,47): error CS0029: Cannot implicitly convert type 'int' to 'string'
+                //         (string, Func<string>) x = (null, ()=>1);  // actual error, should be the same as above.
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "string")
+                    .WithLocation(10, 47),
+                // (10,47): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                //         (string, Func<string>) x = (null, ()=>1);  // actual error, should be the same as above.
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "1")
+                    .WithArguments("lambda expression")
+                    .WithLocation(10, 47),
+                // (12,48): error CS0029: Cannot implicitly convert type 'double' to 'string'
+                //         Func<(string, string)> l1 = ()=>(null, 1.1); // reference
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1.1")
+                    .WithArguments("double", "string")
+                    .WithLocation(12, 48),
+                // (12,41): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                //         Func<(string, string)> l1 = ()=>(null, 1.1); // reference
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "(null, 1.1)")
+                    .WithArguments("lambda expression")
+                    .WithLocation(12, 41),
+                // (14,65): error CS0029: Cannot implicitly convert type 'double' to 'string'
+                //         (string, Func<(string, string)>) x1 = (null, ()=>(null, 1.1));  // actual error, should be the same as above.
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1.1")
+                    .WithArguments("double", "string")
+                    .WithLocation(14, 65),
+                // (14,58): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                //         (string, Func<(string, string)>) x1 = (null, ()=>(null, 1.1));  // actual error, should be the same as above.
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "(null, 1.1)")
+                    .WithArguments("lambda expression")
+                    .WithLocation(14, 58)
+            );
         }
 
         [Fact]
@@ -9672,49 +9672,48 @@ class C
                 + trivial3uple
                 + tupleattributes_cs;
 
-            CreateCompilation(source, parseOptions: TestOptions.Regular)
-                .VerifyDiagnostics(
-                    // (8,45): error CS0029: Cannot implicitly convert type 'int' to 'string'
-                    //         Func<string> l = (Func<string>)(()=>1); // reference
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
-                        .WithArguments("int", "string")
-                        .WithLocation(8, 45),
-                    // (8,45): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-                    //         Func<string> l = (Func<string>)(()=>1); // reference
-                    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "1")
-                        .WithArguments("lambda expression")
-                        .WithLocation(8, 45),
-                    // (10,73): error CS0029: Cannot implicitly convert type 'int' to 'string'
-                    //         (string, Func<string>) x = ((string, Func<string>))(null, () => 1);  // actual error, should be the same as above.
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
-                        .WithArguments("int", "string")
-                        .WithLocation(10, 73),
-                    // (10,73): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-                    //         (string, Func<string>) x = ((string, Func<string>))(null, () => 1);  // actual error, should be the same as above.
-                    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "1")
-                        .WithArguments("lambda expression")
-                        .WithLocation(10, 73),
-                    // (12,73): error CS0029: Cannot implicitly convert type 'double' to 'string'
-                    //         Func<(string, string)> l1 = (Func<(string, string)>)(()=>(null, 1.1)); // reference
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1.1")
-                        .WithArguments("double", "string")
-                        .WithLocation(12, 73),
-                    // (12,66): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-                    //         Func<(string, string)> l1 = (Func<(string, string)>)(()=>(null, 1.1)); // reference
-                    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "(null, 1.1)")
-                        .WithArguments("lambda expression")
-                        .WithLocation(12, 66),
-                    // (14,101): error CS0029: Cannot implicitly convert type 'double' to 'string'
-                    //         (string, Func<(string, string)>) x1 = ((string, Func<(string, string)>))(null, () => (null, 1.1));  // actual error, should be the same as above.
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1.1")
-                        .WithArguments("double", "string")
-                        .WithLocation(14, 101),
-                    // (14,94): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-                    //         (string, Func<(string, string)>) x1 = ((string, Func<(string, string)>))(null, () => (null, 1.1));  // actual error, should be the same as above.
-                    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "(null, 1.1)")
-                        .WithArguments("lambda expression")
-                        .WithLocation(14, 94)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular).VerifyDiagnostics(
+                // (8,45): error CS0029: Cannot implicitly convert type 'int' to 'string'
+                //         Func<string> l = (Func<string>)(()=>1); // reference
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "string")
+                    .WithLocation(8, 45),
+                // (8,45): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                //         Func<string> l = (Func<string>)(()=>1); // reference
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "1")
+                    .WithArguments("lambda expression")
+                    .WithLocation(8, 45),
+                // (10,73): error CS0029: Cannot implicitly convert type 'int' to 'string'
+                //         (string, Func<string>) x = ((string, Func<string>))(null, () => 1);  // actual error, should be the same as above.
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "string")
+                    .WithLocation(10, 73),
+                // (10,73): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                //         (string, Func<string>) x = ((string, Func<string>))(null, () => 1);  // actual error, should be the same as above.
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "1")
+                    .WithArguments("lambda expression")
+                    .WithLocation(10, 73),
+                // (12,73): error CS0029: Cannot implicitly convert type 'double' to 'string'
+                //         Func<(string, string)> l1 = (Func<(string, string)>)(()=>(null, 1.1)); // reference
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1.1")
+                    .WithArguments("double", "string")
+                    .WithLocation(12, 73),
+                // (12,66): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                //         Func<(string, string)> l1 = (Func<(string, string)>)(()=>(null, 1.1)); // reference
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "(null, 1.1)")
+                    .WithArguments("lambda expression")
+                    .WithLocation(12, 66),
+                // (14,101): error CS0029: Cannot implicitly convert type 'double' to 'string'
+                //         (string, Func<(string, string)>) x1 = ((string, Func<(string, string)>))(null, () => (null, 1.1));  // actual error, should be the same as above.
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1.1")
+                    .WithArguments("double", "string")
+                    .WithLocation(14, 101),
+                // (14,94): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                //         (string, Func<(string, string)>) x1 = ((string, Func<(string, string)>))(null, () => (null, 1.1));  // actual error, should be the same as above.
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "(null, 1.1)")
+                    .WithArguments("lambda expression")
+                    .WithLocation(14, 94)
+            );
         }
 
         [Fact]
@@ -9984,17 +9983,16 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (26,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.Test(Func<(Func<short>, int)>)' and 'C.Test(Func<(Func<byte>, int)>)'
-                    //         Test(()=>(()=>1, 1));
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Test")
-                        .WithArguments(
-                            "C.Test(System.Func<(System.Func<short>, int)>)",
-                            "C.Test(System.Func<(System.Func<byte>, int)>)"
-                        )
-                        .WithLocation(26, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (26,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.Test(Func<(Func<short>, int)>)' and 'C.Test(Func<(Func<byte>, int)>)'
+                //         Test(()=>(()=>1, 1));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Test")
+                    .WithArguments(
+                        "C.Test(System.Func<(System.Func<short>, int)>)",
+                        "C.Test(System.Func<(System.Func<byte>, int)>)"
+                    )
+                    .WithLocation(26, 9)
+            );
         }
 
         [Fact]
@@ -10304,54 +10302,53 @@ class C
                 + trivial2uple
                 + tupleattributes_cs;
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,48): warning CS8123: The tuple element name 'e' is ignored because a different name or no name is specified by the target type '(long c, long d)'.
-                    //         (int a, int b) x1 = ((long c, long d))(e: 1, f:2);
-                    Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "e: 1")
-                        .WithArguments("e", "(long c, long d)")
-                        .WithLocation(7, 48),
-                    // (7,54): warning CS8123: The tuple element name 'f' is ignored because a different name or no name is specified by the target type '(long c, long d)'.
-                    //         (int a, int b) x1 = ((long c, long d))(e: 1, f:2);
-                    Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "f:2")
-                        .WithArguments("f", "(long c, long d)")
-                        .WithLocation(7, 54),
-                    // (7,29): error CS0266: Cannot implicitly convert type '(long c, long d)' to '(int a, int b)'. An explicit conversion exists (are you missing a cast?)
-                    //         (int a, int b) x1 = ((long c, long d))(e: 1, f:2);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "((long c, long d))(e: 1, f:2)")
-                        .WithArguments("(long c, long d)", "(int a, int b)")
-                        .WithLocation(7, 29),
-                    // (9,50): warning CS8123: The tuple element name 'e' is ignored because a different name or no name is specified by the target type '(int c, int d)'.
-                    //         (short a, short b) x2 = ((int c, int d))(e: 1, f:2);
-                    Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "e: 1")
-                        .WithArguments("e", "(int c, int d)")
-                        .WithLocation(9, 50),
-                    // (9,56): warning CS8123: The tuple element name 'f' is ignored because a different name or no name is specified by the target type '(int c, int d)'.
-                    //         (short a, short b) x2 = ((int c, int d))(e: 1, f:2);
-                    Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "f:2")
-                        .WithArguments("f", "(int c, int d)")
-                        .WithLocation(9, 56),
-                    // (9,33): error CS0266: Cannot implicitly convert type '(int c, int d)' to '(short a, short b)'. An explicit conversion exists (are you missing a cast?)
-                    //         (short a, short b) x2 = ((int c, int d))(e: 1, f:2);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "((int c, int d))(e: 1, f:2)")
-                        .WithArguments("(int c, int d)", "(short a, short b)")
-                        .WithLocation(9, 33),
-                    // (12,56): error CS0030: Cannot convert type 'string' to 'long'
-                    //         (int a, int b) x3 = ((long c, long d))(e: 1, f:"qq");
-                    Diagnostic(ErrorCode.ERR_NoExplicitConv, @"""qq""")
-                        .WithArguments("string", "long")
-                        .WithLocation(12, 56),
-                    // (7,24): warning CS0219: The variable 'x1' is assigned but its value is never used
-                    //         (int a, int b) x1 = ((long c, long d))(e: 1, f:2);
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x1")
-                        .WithArguments("x1")
-                        .WithLocation(7, 24),
-                    // (9,28): warning CS0219: The variable 'x2' is assigned but its value is never used
-                    //         (short a, short b) x2 = ((int c, int d))(e: 1, f:2);
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x2")
-                        .WithArguments("x2")
-                        .WithLocation(9, 28)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,48): warning CS8123: The tuple element name 'e' is ignored because a different name or no name is specified by the target type '(long c, long d)'.
+                //         (int a, int b) x1 = ((long c, long d))(e: 1, f:2);
+                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "e: 1")
+                    .WithArguments("e", "(long c, long d)")
+                    .WithLocation(7, 48),
+                // (7,54): warning CS8123: The tuple element name 'f' is ignored because a different name or no name is specified by the target type '(long c, long d)'.
+                //         (int a, int b) x1 = ((long c, long d))(e: 1, f:2);
+                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "f:2")
+                    .WithArguments("f", "(long c, long d)")
+                    .WithLocation(7, 54),
+                // (7,29): error CS0266: Cannot implicitly convert type '(long c, long d)' to '(int a, int b)'. An explicit conversion exists (are you missing a cast?)
+                //         (int a, int b) x1 = ((long c, long d))(e: 1, f:2);
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "((long c, long d))(e: 1, f:2)")
+                    .WithArguments("(long c, long d)", "(int a, int b)")
+                    .WithLocation(7, 29),
+                // (9,50): warning CS8123: The tuple element name 'e' is ignored because a different name or no name is specified by the target type '(int c, int d)'.
+                //         (short a, short b) x2 = ((int c, int d))(e: 1, f:2);
+                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "e: 1")
+                    .WithArguments("e", "(int c, int d)")
+                    .WithLocation(9, 50),
+                // (9,56): warning CS8123: The tuple element name 'f' is ignored because a different name or no name is specified by the target type '(int c, int d)'.
+                //         (short a, short b) x2 = ((int c, int d))(e: 1, f:2);
+                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "f:2")
+                    .WithArguments("f", "(int c, int d)")
+                    .WithLocation(9, 56),
+                // (9,33): error CS0266: Cannot implicitly convert type '(int c, int d)' to '(short a, short b)'. An explicit conversion exists (are you missing a cast?)
+                //         (short a, short b) x2 = ((int c, int d))(e: 1, f:2);
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "((int c, int d))(e: 1, f:2)")
+                    .WithArguments("(int c, int d)", "(short a, short b)")
+                    .WithLocation(9, 33),
+                // (12,56): error CS0030: Cannot convert type 'string' to 'long'
+                //         (int a, int b) x3 = ((long c, long d))(e: 1, f:"qq");
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, @"""qq""")
+                    .WithArguments("string", "long")
+                    .WithLocation(12, 56),
+                // (7,24): warning CS0219: The variable 'x1' is assigned but its value is never used
+                //         (int a, int b) x1 = ((long c, long d))(e: 1, f:2);
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(7, 24),
+                // (9,28): warning CS0219: The variable 'x2' is assigned but its value is never used
+                //         (short a, short b) x2 = ((int c, int d))(e: 1, f:2);
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(9, 28)
+            );
         }
 
         [Fact]
@@ -10372,17 +10369,16 @@ class C
                 + trivial3uple
                 + tupleattributes_cs;
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,29): error CS8135: Tuple with 3 elements cannot be converted to type '(long c, long d)'.
-                    //         (int a, int b) x4 = ((long c, long d))(1, null, 2);
-                    Diagnostic(
-                            ErrorCode.ERR_ConversionNotTupleCompatible,
-                            "((long c, long d))(1, null, 2)"
-                        )
-                        .WithArguments("3", "(long c, long d)")
-                        .WithLocation(6, 29)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,29): error CS8135: Tuple with 3 elements cannot be converted to type '(long c, long d)'.
+                //         (int a, int b) x4 = ((long c, long d))(1, null, 2);
+                Diagnostic(
+                    ErrorCode.ERR_ConversionNotTupleCompatible,
+                    "((long c, long d))(1, null, 2)"
+                )
+                    .WithArguments("3", "(long c, long d)")
+                    .WithLocation(6, 29)
+            );
         }
 
         [Fact]
@@ -13268,9 +13264,9 @@ class C
                 // (45,9): error CS0452: The type 'ValueTuple<int>' must be a reference type in order to use it as parameter 'TRest' in the generic type or method 'ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>'
                 //         (int, int, int, int, int, int, int, int) t1 = t0;
                 Diagnostic(
-                        ErrorCode.ERR_RefConstraintNotSatisfied,
-                        "(int, int, int, int, int, int, int, int)"
-                    )
+                    ErrorCode.ERR_RefConstraintNotSatisfied,
+                    "(int, int, int, int, int, int, int, int)"
+                )
                     .WithArguments(
                         "System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>",
                         "TRest",
@@ -13844,7 +13840,8 @@ class C
                     "System.ITupleInternal.ToStringEnd",
                     "ToString"
                 },
-                m1Tuple.TupleData.UnderlyingDefinitionToMemberMap.Values.Select(s => s.Name)
+                m1Tuple.TupleData.UnderlyingDefinitionToMemberMap.Values
+                    .Select(s => s.Name)
                     .OrderBy(n => n)
                     .ToArray()
             );
@@ -13893,7 +13890,8 @@ class C
                     "System.ITupleInternal.ToStringEnd",
                     "ToString"
                 },
-                m2Tuple.TupleData.UnderlyingDefinitionToMemberMap.Values.Select(s => s.Name)
+                m2Tuple.TupleData.UnderlyingDefinitionToMemberMap.Values
+                    .Select(s => s.Name)
                     .OrderBy(n => n)
                     .ToArray()
             );
@@ -13942,7 +13940,8 @@ class C
                     "System.ITupleInternal.ToStringEnd",
                     "ToString"
                 },
-                m6Tuple.TupleData.UnderlyingDefinitionToMemberMap.Values.Select(s => s.Name)
+                m6Tuple.TupleData.UnderlyingDefinitionToMemberMap.Values
+                    .Select(s => s.Name)
                     .OrderBy(n => n)
                     .ToArray()
             );
@@ -13956,9 +13955,8 @@ class C
             Assert.True(
                 m1Tuple.Equals(m1Tuple.TupleUnderlyingType, TypeCompareKind.ConsiderEverything)
             );
-            var tupleType = comp.Compilation.CommonGetWellKnownType(
-                WellKnownType.System_ValueTuple_T2
-            );
+            var tupleType = comp.Compilation
+                .CommonGetWellKnownType(WellKnownType.System_ValueTuple_T2);
             Assert.Same(tupleType, m1Tuple.ConstructedFrom);
             Assert.False(m1Tuple.IsDefinition);
             Assert.Same(tupleType, m1Tuple.OriginalDefinition);
@@ -14020,16 +14018,14 @@ class C
             Assert.Equal("System.ValueType", m1Tuple.BaseType().ToTestDisplayString());
             Assert.Null(m1Tuple.ComImportCoClass);
             Assert.True(
-                m1Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.All(
-                    t => t.CustomModifiers.IsEmpty
-                )
+                m1Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    .All(t => t.CustomModifiers.IsEmpty)
             );
             Assert.False(m1Tuple.IsComImport);
             Assert.Equal(
                 new[] { "System.Int32", "System.Int32" },
-                m1Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Select(
-                    t => t.ToTestDisplayString()
-                )
+                m1Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    .Select(t => t.ToTestDisplayString())
             );
             Assert.True(m1Tuple.GetAttributes().IsEmpty);
             Assert.Equal(
@@ -14085,10 +14081,8 @@ class C
             );
             Assert.Equal("T1 (T1, T2).Item1", m1Item1.OriginalDefinition.ToTestDisplayString());
             Assert.True(
-                m1Item1.ContainingType.OriginalDefinition.TupleElements[0].Equals(
-                    m1Item1.OriginalDefinition,
-                    TypeCompareKind.ConsiderEverything
-                )
+                m1Item1.ContainingType.OriginalDefinition.TupleElements[0]
+                    .Equals(m1Item1.OriginalDefinition, TypeCompareKind.ConsiderEverything)
             );
             Assert.True(m1Item1.Equals(m1Item1));
             Assert.Equal(
@@ -14116,10 +14110,8 @@ class C
             );
             Assert.Equal("T1 (T1, T2).Item1", m2Item1.OriginalDefinition.ToTestDisplayString());
             Assert.True(
-                m2Item1.ContainingType.OriginalDefinition.TupleElements[0].Equals(
-                    m2Item1.OriginalDefinition,
-                    TypeCompareKind.ConsiderEverything
-                )
+                m2Item1.ContainingType.OriginalDefinition.TupleElements[0]
+                    .Equals(m2Item1.OriginalDefinition, TypeCompareKind.ConsiderEverything)
             );
             Assert.True(m2Item1.Equals(m2Item1));
             Assert.Equal(
@@ -14156,10 +14148,8 @@ class C
                 m2a2.ToTestDisplayString()
             );
             Assert.True(
-                m2a2.ContainingType.OriginalDefinition.TupleElements[0].Equals(
-                    m1Item1.OriginalDefinition,
-                    TypeCompareKind.ConsiderEverything
-                )
+                m2a2.ContainingType.OriginalDefinition.TupleElements[0]
+                    .Equals(m1Item1.OriginalDefinition, TypeCompareKind.ConsiderEverything)
             );
             Assert.Equal(
                 "System.Int32 (System.Int32 a2, System.Int32 b2).Item1",
@@ -14399,9 +14389,8 @@ class C
             Assert.Equal("System.ValueType", m1Tuple.BaseType().ToTestDisplayString());
             Assert.Null(m1Tuple.ComImportCoClass);
             Assert.True(
-                m1Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.All(
-                    t => t.CustomModifiers.IsEmpty
-                )
+                m1Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    .All(t => t.CustomModifiers.IsEmpty)
             );
             Assert.False(m1Tuple.IsComImport);
             AssertEx.Equal(
@@ -15901,9 +15890,8 @@ class C
             Assert.Equal("System.ValueType", m1Tuple.BaseType().ToTestDisplayString());
             Assert.Null(m1Tuple.ComImportCoClass);
             Assert.True(
-                m1Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.All(
-                    t => t.CustomModifiers.IsEmpty
-                )
+                m1Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    .All(t => t.CustomModifiers.IsEmpty)
             );
             Assert.False(m1Tuple.IsComImport);
             Assert.Equal(
@@ -15944,7 +15932,8 @@ class C
             Assert.True(m1Tuple.TupleUnderlyingType.DeclaringSyntaxReferences.IsEmpty);
             Assert.Equal(
                 "public struct ValueTuple<T1, T2>",
-                m1Tuple.OriginalDefinition.DeclaringSyntaxReferences.Single()
+                m1Tuple.OriginalDefinition.DeclaringSyntaxReferences
+                    .Single()
                     .GetSyntax()
                     .ToString()
                     .Substring(0, 32)
@@ -15971,10 +15960,8 @@ class C
             Assert.Equal("TupleElementFieldSymbol", m1Item1.GetType().Name);
             Assert.NotSame(m1Item1, m1Item1.OriginalDefinition);
             Assert.True(
-                m1Item1.ContainingType.OriginalDefinition.TupleElements[0].Equals(
-                    m1Item1.OriginalDefinition,
-                    TypeCompareKind.ConsiderEverything
-                )
+                m1Item1.ContainingType.OriginalDefinition.TupleElements[0]
+                    .Equals(m1Item1.OriginalDefinition, TypeCompareKind.ConsiderEverything)
             );
             Assert.Equal("T1 (T1, T2).Item1", m1Item1.OriginalDefinition.ToTestDisplayString());
             Assert.IsType<SourceMemberFieldSymbolFromDeclarator>(m1Item1.OriginalDefinition);
@@ -15993,7 +15980,8 @@ class C
             Assert.True(m1Item1.DeclaringSyntaxReferences.IsEmpty);
             Assert.Equal(
                 "Item1",
-                m1Item1.TupleUnderlyingField.DeclaringSyntaxReferences.Single()
+                m1Item1.TupleUnderlyingField.DeclaringSyntaxReferences
+                    .Single()
                     .GetSyntax()
                     .ToString()
             );
@@ -16003,10 +15991,8 @@ class C
             Assert.Equal("TupleElementFieldSymbol", m2Item1.GetType().Name);
             Assert.NotSame(m2Item1, m2Item1.OriginalDefinition);
             Assert.True(
-                m2Item1.ContainingType.OriginalDefinition.TupleElements[0].Equals(
-                    m2Item1.OriginalDefinition,
-                    TypeCompareKind.ConsiderEverything
-                )
+                m2Item1.ContainingType.OriginalDefinition.TupleElements[0]
+                    .Equals(m2Item1.OriginalDefinition, TypeCompareKind.ConsiderEverything)
             );
             Assert.Equal("T1 (T1, T2).Item1", m2Item1.OriginalDefinition.ToTestDisplayString());
             Assert.IsType<SourceMemberFieldSymbolFromDeclarator>(m2Item1.OriginalDefinition);
@@ -16025,7 +16011,8 @@ class C
             Assert.True(m2Item1.DeclaringSyntaxReferences.IsEmpty);
             Assert.Equal(
                 "Item1",
-                m2Item1.TupleUnderlyingField.DeclaringSyntaxReferences.Single()
+                m2Item1.TupleUnderlyingField.DeclaringSyntaxReferences
+                    .Single()
                     .GetSyntax()
                     .ToString()
             );
@@ -16090,7 +16077,8 @@ class C
             Assert.False(m1ToString.Locations.IsEmpty);
             Assert.Equal(
                 "public override string ToString()",
-                m1ToString.DeclaringSyntaxReferences.Single()
+                m1ToString.DeclaringSyntaxReferences
+                    .Single()
                     .GetSyntax()
                     .ToString()
                     .Substring(0, 33)
@@ -16324,9 +16312,9 @@ partial class C
                 // (13,12): warning CS0612: '(T1, T2)' is obsolete
                 //     static (int, int, int, int, int, int, int, int, int) M101()
                 Diagnostic(
-                        ErrorCode.WRN_DeprecatedSymbol,
-                        "(int, int, int, int, int, int, int, int, int)"
-                    )
+                    ErrorCode.WRN_DeprecatedSymbol,
+                    "(int, int, int, int, int, int, int, int, int)"
+                )
                     .WithArguments("(T1, T2)")
                     .WithLocation(13, 12),
                 // (23,12): warning CS0612: '(T1, T2)' is obsolete
@@ -16347,24 +16335,24 @@ partial class C
                 // (35,12): warning CS0612: '(T1, T2)' is obsolete
                 //     static (int a, int b, int c, int d, int e, int f, int g, int h, int Item2) M103()
                 Diagnostic(
-                        ErrorCode.WRN_DeprecatedSymbol,
-                        "(int a, int b, int c, int d, int e, int f, int g, int h, int Item2)"
-                    )
+                    ErrorCode.WRN_DeprecatedSymbol,
+                    "(int a, int b, int c, int d, int e, int f, int g, int h, int Item2)"
+                )
                     .WithArguments("(T1, T2)")
                     .WithLocation(35, 12),
                 // (55,10): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
                 //         [System.Runtime.InteropServices.FieldOffsetAttribute(20)]
                 Diagnostic(
-                        ErrorCode.ERR_StructOffsetOnBadStruct,
-                        "System.Runtime.InteropServices.FieldOffsetAttribute"
-                    )
+                    ErrorCode.ERR_StructOffsetOnBadStruct,
+                    "System.Runtime.InteropServices.FieldOffsetAttribute"
+                )
                     .WithLocation(55, 10),
                 // (78,10): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
                 //         [System.Runtime.InteropServices.FieldOffsetAttribute(21)]
                 Diagnostic(
-                        ErrorCode.ERR_StructOffsetOnBadStruct,
-                        "System.Runtime.InteropServices.FieldOffsetAttribute"
-                    )
+                    ErrorCode.ERR_StructOffsetOnBadStruct,
+                    "System.Runtime.InteropServices.FieldOffsetAttribute"
+                )
                     .WithLocation(78, 10),
                 // (10,16): warning CS0612: '(T1, T2)' is obsolete
                 //         return (101, 102);
@@ -16864,17 +16852,19 @@ namespace System
                 AssertTupleTypeMembersEquality(t9, t10);
 
                 var t11 = NamedTypeSymbol.CreateTuple(
-                    m2Tuple.OriginalDefinition.Construct(
-                        m2Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.RemoveAt(7)
-                            .Add(
-                                TypeWithAnnotations.Create(
-                                    NamedTypeSymbol.CreateTuple(
-                                        m1Tuple,
-                                        ImmutableArray.Create("a", "b")
+                    m2Tuple.OriginalDefinition
+                        .Construct(
+                            m2Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                                .RemoveAt(7)
+                                .Add(
+                                    TypeWithAnnotations.Create(
+                                        NamedTypeSymbol.CreateTuple(
+                                            m1Tuple,
+                                            ImmutableArray.Create("a", "b")
+                                        )
                                     )
                                 )
-                            )
-                    )
+                        )
                 );
 
                 Assert.False(t1.Equals(t11));
@@ -16929,17 +16919,19 @@ namespace System
                 );
 
                 var t12 = NamedTypeSymbol.CreateTuple(
-                    m2Tuple.OriginalDefinition.Construct(
-                        m2Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.RemoveAt(7)
-                            .Add(
-                                TypeWithAnnotations.Create(
-                                    NamedTypeSymbol.CreateTuple(
-                                        m1Tuple,
-                                        ImmutableArray.Create("Item1", "Item2")
+                    m2Tuple.OriginalDefinition
+                        .Construct(
+                            m2Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                                .RemoveAt(7)
+                                .Add(
+                                    TypeWithAnnotations.Create(
+                                        NamedTypeSymbol.CreateTuple(
+                                            m1Tuple,
+                                            ImmutableArray.Create("Item1", "Item2")
+                                        )
                                     )
                                 )
-                            )
-                    ),
+                        ),
                     ImmutableArray.Create(
                         "Item1",
                         "Item2",
@@ -16959,17 +16951,13 @@ namespace System
                 Assert.True(t12.Equals(t1, TypeCompareKind.IgnoreDynamicAndTupleNames));
                 Assert.False(t1.TupleUnderlyingType.Equals(t12.TupleUnderlyingType));
                 Assert.True(
-                    t1.TupleUnderlyingType.Equals(
-                        t12.TupleUnderlyingType,
-                        TypeCompareKind.IgnoreDynamicAndTupleNames
-                    )
+                    t1.TupleUnderlyingType
+                        .Equals(t12.TupleUnderlyingType, TypeCompareKind.IgnoreDynamicAndTupleNames)
                 );
                 Assert.False(t12.TupleUnderlyingType.Equals(t1.TupleUnderlyingType));
                 Assert.True(
-                    t12.TupleUnderlyingType.Equals(
-                        t1.TupleUnderlyingType,
-                        TypeCompareKind.IgnoreDynamicAndTupleNames
-                    )
+                    t12.TupleUnderlyingType
+                        .Equals(t1.TupleUnderlyingType, TypeCompareKind.IgnoreDynamicAndTupleNames)
                 );
 
                 Assert.False(t1.Equals(t12));
@@ -17019,17 +17007,19 @@ namespace System
                 );
 
                 var t13 = NamedTypeSymbol.CreateTuple(
-                    m2Tuple.OriginalDefinition.Construct(
-                        m2Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.RemoveAt(7)
-                            .Add(
-                                TypeWithAnnotations.Create(
-                                    NamedTypeSymbol.CreateTuple(
-                                        m1Tuple,
-                                        ImmutableArray.Create("a", "b")
+                    m2Tuple.OriginalDefinition
+                        .Construct(
+                            m2Tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                                .RemoveAt(7)
+                                .Add(
+                                    TypeWithAnnotations.Create(
+                                        NamedTypeSymbol.CreateTuple(
+                                            m1Tuple,
+                                            ImmutableArray.Create("a", "b")
+                                        )
                                     )
                                 )
-                            )
-                    ),
+                        ),
                     ImmutableArray.Create(
                         "Item1",
                         "Item2",
@@ -17243,9 +17233,8 @@ System.ValueTuple`8[T1,T2,T3,T4,T5,T6,T7,TRest]
                 .Where(id => id.Identifier.ValueText == "nameof")
                 .Single();
             var nameofArg =
-                (
-                    (InvocationExpressionSyntax)nameofNode.Parent
-                ).ArgumentList.Arguments.Single().Expression;
+                ((InvocationExpressionSyntax)nameofNode.Parent).ArgumentList.Arguments
+                    .Single().Expression;
             var nameofArgSymbolInfo = model.GetSymbolInfo(nameofArg);
             Assert.True(((ITypeSymbol)nameofArgSymbolInfo.Symbol).IsTupleType);
             Assert.Equal(
@@ -17328,7 +17317,8 @@ class C
                     .WithLocation(7, 49),
                 // (7,41): error CS8081: Expression does not have a name.
                 //         System.Console.WriteLine(nameof((int a, int b)));
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "(int a, int b)").WithLocation(7, 41)
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "(int a, int b)")
+                    .WithLocation(7, 41)
             );
         }
 
@@ -17712,9 +17702,8 @@ static class Test4
                 .Where(id => id.Identifier.ValueText == "M5")
                 .Single();
             symbolInfo = model.GetSymbolInfo(m5);
-            var m5Tuple = ((IMethodSymbol)symbolInfo.Symbol).TypeParameters[
-                0
-            ].ConstraintTypes.Single();
+            var m5Tuple = ((IMethodSymbol)symbolInfo.Symbol).TypeParameters[0].ConstraintTypes
+                .Single();
             Assert.True(m5Tuple.IsTupleType);
             Assert.Equal(
                 "(System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32)",
@@ -17797,9 +17786,9 @@ interface ITest2<T> : ValueTuple<int, int, int, int, int, int, int, T> where T :
                 // (31,18): error CS0509: 'Test1<T>': cannot derive from sealed type 'ValueTuple<int, int, int, int, int, int, int, T>'
                 // class Test1<T> : ValueTuple<int, int, int, int, int, int, int, T> where T : struct
                 Diagnostic(
-                        ErrorCode.ERR_CantDeriveFromSealedType,
-                        "ValueTuple<int, int, int, int, int, int, int, T>"
-                    )
+                    ErrorCode.ERR_CantDeriveFromSealedType,
+                    "ValueTuple<int, int, int, int, int, int, int, T>"
+                )
                     .WithArguments(
                         "Test1<T>",
                         "System.ValueTuple<int, int, int, int, int, int, int, T>"
@@ -17808,9 +17797,9 @@ interface ITest2<T> : ValueTuple<int, int, int, int, int, int, int, T> where T :
                 // (35,23): error CS0527: Type 'ValueTuple<int, int, int, int, int, int, int, T>' in interface list is not an interface
                 // interface ITest2<T> : ValueTuple<int, int, int, int, int, int, int, T> where T : struct
                 Diagnostic(
-                        ErrorCode.ERR_NonInterfaceInInterfaceList,
-                        "ValueTuple<int, int, int, int, int, int, int, T>"
-                    )
+                    ErrorCode.ERR_NonInterfaceInInterfaceList,
+                    "ValueTuple<int, int, int, int, int, int, int, T>"
+                )
                     .WithArguments("System.ValueTuple<int, int, int, int, int, int, int, T>")
                     .WithLocation(35, 23),
                 // (25,69): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('ValueTuple<int, int, int, int, int, int, int, T>')
@@ -19629,10 +19618,11 @@ null
             Assert.True(m1E1.GetAttributes().IsEmpty);
             Assert.Null(m1E1.GetUseSiteDiagnostic());
             Assert.True(
-                m1E1.DeclaringSyntaxReferences.SequenceEqual(
-                    m1E1.DeclaringSyntaxReferences,
-                    SyntaxReferenceEqualityComparer.Instance
-                )
+                m1E1.DeclaringSyntaxReferences
+                    .SequenceEqual(
+                        m1E1.DeclaringSyntaxReferences,
+                        SyntaxReferenceEqualityComparer.Instance
+                    )
             );
             Assert.False(m1E1.IsImplicitlyDeclared);
             Assert.True(m1E1Add.Equals(m1E1.AddMethod, TypeCompareKind.ConsiderEverything));
@@ -19678,10 +19668,11 @@ null
             Assert.True(m1E2.GetAttributes().IsEmpty);
             Assert.Null(m1E2.GetUseSiteDiagnostic());
             Assert.True(
-                m1E2.DeclaringSyntaxReferences.SequenceEqual(
-                    m1E2.DeclaringSyntaxReferences,
-                    SyntaxReferenceEqualityComparer.Instance
-                )
+                m1E2.DeclaringSyntaxReferences
+                    .SequenceEqual(
+                        m1E2.DeclaringSyntaxReferences,
+                        SyntaxReferenceEqualityComparer.Instance
+                    )
             );
             Assert.False(m1E2.IsImplicitlyDeclared);
             Assert.NotSame(m1E2Add, m1E2.AddMethod);
@@ -20109,7 +20100,9 @@ class TestAttribute : System.Attribute
                     .WithLocation(14, 20),
                 // (19,16): error CS8129: Type of the tuple element cannot be inferred from '<null>'.
                 //         await (null, "6");
-                Diagnostic(ErrorCode.Unknown, "null").WithArguments("<null>").WithLocation(19, 16),
+                Diagnostic(ErrorCode.Unknown, "null")
+                    .WithArguments("<null>")
+                    .WithLocation(19, 16),
                 // (20,9): error CS1061: '(int, string)' does not contain a definition for 'GetAwaiter' and no extension method 'GetAwaiter' accepting a first argument of type '(int, string)' could be found (are you missing a using directive or an assembly reference?)
                 //         await (7, "7");
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, @"await (7, ""7"")")
@@ -20157,7 +20150,9 @@ class TestAttribute : System.Attribute
                     .WithLocation(36, 14),
                 // (41,28): error CS8129: Type of the tuple element cannot be inferred from '<null>'.
                 //         var x = (16, (16 , null));
-                Diagnostic(ErrorCode.Unknown, "null").WithArguments("<null>").WithLocation(41, 28),
+                Diagnostic(ErrorCode.Unknown, "null")
+                    .WithArguments("<null>")
+                    .WithLocation(41, 28),
                 // (44,17): error CS8330: Cannot implicitly convert tuple expression to 'TypedReference'
                 //         var u = __refvalue((17, null), (int, string));
                 Diagnostic(ErrorCode.Unknown, "__refvalue((17, null), (int, string))")
@@ -20281,16 +20276,19 @@ class C
                     "System.Int32 (System.Int32, System.Int32)[missing].Item1",
                     "System.Int32 (System.Int32, System.Int32)[missing].Item2"
                 },
-                (
-                    (ErrorTypeSymbol)((Symbols.PublicModel.ErrorTypeSymbol)xSymbol).UnderlyingSymbol
-                ).GetMembersUnordered().ToTestDisplayStrings().ToImmutableArray().Sort()
+                ((ErrorTypeSymbol)((Symbols.PublicModel.ErrorTypeSymbol)xSymbol).UnderlyingSymbol)
+                    .GetMembersUnordered()
+                    .ToTestDisplayStrings()
+                    .ToImmutableArray()
+                    .Sort()
             );
 
             AssertEx.Equal(
                 "System.Int32 (System.Int32, System.Int32)[missing].Item1",
-                (
-                    (NamedTypeSymbol)((Symbols.PublicModel.ErrorTypeSymbol)xSymbol).UnderlyingSymbol
-                ).GetMembers("Item1").Single().ToTestDisplayString()
+                ((NamedTypeSymbol)((Symbols.PublicModel.ErrorTypeSymbol)xSymbol).UnderlyingSymbol)
+                    .GetMembers("Item1")
+                    .Single()
+                    .ToTestDisplayString()
             );
         }
 
@@ -20334,23 +20332,27 @@ class C
                     "System.Int32 (System.Int32 a, System.Int32 b)[missing].Item1",
                     "System.Int32 (System.Int32 a, System.Int32 b)[missing].Item2"
                 },
-                (
-                    (ErrorTypeSymbol)((Symbols.PublicModel.ErrorTypeSymbol)xSymbol).UnderlyingSymbol
-                ).GetMembersUnordered().ToTestDisplayStrings().ToImmutableArray().Sort()
+                ((ErrorTypeSymbol)((Symbols.PublicModel.ErrorTypeSymbol)xSymbol).UnderlyingSymbol)
+                    .GetMembersUnordered()
+                    .ToTestDisplayStrings()
+                    .ToImmutableArray()
+                    .Sort()
             );
 
             AssertEx.Equal(
                 "System.Int32 (System.Int32 a, System.Int32 b)[missing].Item1",
-                (
-                    (NamedTypeSymbol)((Symbols.PublicModel.ErrorTypeSymbol)xSymbol).UnderlyingSymbol
-                ).GetMembers("Item1").Single().ToTestDisplayString()
+                ((NamedTypeSymbol)((Symbols.PublicModel.ErrorTypeSymbol)xSymbol).UnderlyingSymbol)
+                    .GetMembers("Item1")
+                    .Single()
+                    .ToTestDisplayString()
             );
 
             AssertEx.Equal(
                 "System.Int32 (System.Int32 a, System.Int32 b)[missing].a",
-                (
-                    (NamedTypeSymbol)((Symbols.PublicModel.ErrorTypeSymbol)xSymbol).UnderlyingSymbol
-                ).GetMembers("a").Single().ToTestDisplayString()
+                ((NamedTypeSymbol)((Symbols.PublicModel.ErrorTypeSymbol)xSymbol).UnderlyingSymbol)
+                    .GetMembers("a")
+                    .Single()
+                    .ToTestDisplayString()
             );
         }
 
@@ -20468,16 +20470,16 @@ class C
                 // (6,21): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var x = new (int, int, int, int, int, int, int, int)(1, 2, 3, 4, 5, 6, 7, 8);
                 Diagnostic(
-                        ErrorCode.ERR_NewWithTupleTypeSyntax,
-                        "(int, int, int, int, int, int, int, int)"
-                    )
+                    ErrorCode.ERR_NewWithTupleTypeSyntax,
+                    "(int, int, int, int, int, int, int, int)"
+                )
                     .WithLocation(6, 21),
                 // (7,21): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 //         var y = new (int, int, int, int, int, int, int, int, int)(1, 2, 3, 4, 5, 6, 7, 8, 9);
                 Diagnostic(
-                        ErrorCode.ERR_NewWithTupleTypeSyntax,
-                        "(int, int, int, int, int, int, int, int, int)"
-                    )
+                    ErrorCode.ERR_NewWithTupleTypeSyntax,
+                    "(int, int, int, int, int, int, int, int, int)"
+                )
                     .WithLocation(7, 21)
             );
         }
@@ -20756,9 +20758,9 @@ class C3
                 // (6,16): error CS8356: Predefined type 'System.ValueTuple`3' is declared in multiple referenced assemblies: 'comp1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' and 'comp2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
                 //         "x".M1((1, null, 1, null, 1, null, 1, null, 1, null));
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeAmbiguous3,
-                        "(1, null, 1, null, 1, null, 1, null, 1, null)"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeAmbiguous3,
+                    "(1, null, 1, null, 1, null, 1, null, 1, null)"
+                )
                     .WithArguments(
                         "System.ValueTuple`3",
                         "comp1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -20768,9 +20770,9 @@ class C3
                 // (6,16): error CS8356: Predefined type 'System.ValueTuple`8' is declared in multiple referenced assemblies: 'comp1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' and 'comp2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
                 //         "x".M1((1, null, 1, null, 1, null, 1, null, 1, null));
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeAmbiguous3,
-                        "(1, null, 1, null, 1, null, 1, null, 1, null)"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeAmbiguous3,
+                    "(1, null, 1, null, 1, null, 1, null, 1, null)"
+                )
                     .WithArguments(
                         "System.ValueTuple`8",
                         "comp1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -21997,9 +21999,9 @@ class C
                 // (16,96): error CS0030: Cannot convert type 'C.C1' to '(int, (int, (int, (int, (int, (int, (int, (int, (int, (int, (int, int)))))))))))'
                 //         (int, (int, (int, (int, (int, (int, (int, (int, (int, (int, (int, int))))))))))) x12 = ((int, (int, (int, (int, (int, (int, (int, (int, (int, (int, (int, int))))))))))))y;
                 Diagnostic(
-                        ErrorCode.ERR_NoExplicitConv,
-                        "((int, (int, (int, (int, (int, (int, (int, (int, (int, (int, (int, int))))))))))))y"
-                    )
+                    ErrorCode.ERR_NoExplicitConv,
+                    "((int, (int, (int, (int, (int, (int, (int, (int, (int, (int, (int, int))))))))))))y"
+                )
                     .WithArguments(
                         "C.C1",
                         "(int, (int, (int, (int, (int, (int, (int, (int, (int, (int, (int, int)))))))))))"
@@ -22226,12 +22228,10 @@ class C
                 // (14,70): error CS0030: Cannot convert type 'C.C1' to '(int, C.C1)?'
                 //                                                                      ((int, C1)?)
                 Diagnostic(
-                        ErrorCode.ERR_NoExplicitConv,
-                        @"((int, C1)?)
+                    ErrorCode.ERR_NoExplicitConv,
+                    @"((int, C1)?)
                                                                      (C1)y"
-                    )
-                    .WithArguments("C.C1", "(int, C.C1)?")
-                    .WithLocation(14, 70)
+                ).WithArguments("C.C1", "(int, C.C1)?").WithLocation(14, 70)
             );
         }
 
@@ -25464,21 +25464,20 @@ public class C2 : C1, I1<(int c, int d)>
                 Assert.Equal(
                     "void C2.M1()",
                     c2.FindImplementationForInterfaceMember(
-                            ((TypeSymbol)c2Interfaces[0]).GetMember("M1")
-                        )
+                        ((TypeSymbol)c2Interfaces[0]).GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "void C2.M1()",
                     c2.FindImplementationForInterfaceMember(
-                            ((TypeSymbol)c1Interfaces[0]).GetMember("M1")
-                        )
+                        ((TypeSymbol)c1Interfaces[0]).GetMember("M1")
+                    )
                         .ToTestDisplayString()
                 );
 
-                var m2 = (MethodSymbol)((TypeSymbol)c2).GetMember(
-                    "I1<(System.Int32c,System.Int32d)>.M2"
-                );
+                var m2 = (MethodSymbol)((TypeSymbol)c2)
+                    .GetMember("I1<(System.Int32c,System.Int32d)>.M2");
                 var m2Implementations = m2.ExplicitInterfaceImplementations;
                 Assert.Equal(1, m2Implementations.Length);
                 Assert.Equal(
@@ -25782,9 +25781,8 @@ public class C4 : I1<(int c, int d)>
             );
 
             var mImplementations =
-                (
-                    (MethodSymbol)c3.GetMember("I1<(System.Int32c,System.Int32d)>.M")
-                ).GetPublicSymbol().ExplicitInterfaceImplementations;
+                ((MethodSymbol)c3.GetMember("I1<(System.Int32c,System.Int32d)>.M"))
+                    .GetPublicSymbol().ExplicitInterfaceImplementations;
             Assert.Equal(1, mImplementations.Length);
             Assert.Equal(
                 "void I1<(System.Int32 c, System.Int32 d)>.M()",
@@ -25794,17 +25792,16 @@ public class C4 : I1<(int c, int d)>
             Assert.Equal(
                 "void C3.I1<(System.Int32 c, System.Int32 d)>.M()",
                 c3.FindImplementationForInterfaceMember(
-                        ((TypeSymbol)c3Interfaces[0]).GetMember("M")
-                    )
+                    ((TypeSymbol)c3Interfaces[0]).GetMember("M")
+                )
                     .ToTestDisplayString()
             );
             Assert.Equal(
                 "void C3.I1<(System.Int32 c, System.Int32 d)>.M()",
                 c3.FindImplementationForInterfaceMember(
-                        comp.GetTypeByMetadataName("C4").InterfacesNoUseSiteDiagnostics()[
-                            0
-                        ].GetMember("M")
-                    )
+                    comp.GetTypeByMetadataName("C4").InterfacesNoUseSiteDiagnostics()[0]
+                        .GetMember("M")
+                )
                     .ToTestDisplayString()
             );
         }
@@ -25834,7 +25831,9 @@ public class C2
             comp.VerifyDiagnostics(
                 // (11,9): error CS0122: 'C2.C3' is inaccessible due to its protection level
                 //     (C2.C3, int) M() { throw new System.Exception(); }
-                Diagnostic(ErrorCode.ERR_BadAccess, "C3").WithArguments("C2.C3").WithLocation(11, 9)
+                Diagnostic(ErrorCode.ERR_BadAccess, "C3")
+                    .WithArguments("C2.C3")
+                    .WithLocation(11, 9)
             );
         }
 
@@ -27078,8 +27077,8 @@ namespace System
                 // (8,13): error CS8128: Member 'Rest' was not found on type 'ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>' from assembly 'comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //             (string I1,
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
-                        @"(string I1,
+                    ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
+                    @"(string I1,
                 string I2,
                 string I3,
                 string I4,
@@ -27087,18 +27086,12 @@ namespace System
                 string I6,
                 string I7,
                 string I8)"
-                    )
-                    .WithArguments(
-                        "Rest",
-                        "System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>",
-                        "comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                    )
-                    .WithLocation(8, 13),
+                ).WithArguments("Rest", "System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>", "comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(8, 13),
                 // (30,13): error CS8128: Member 'Rest' was not found on type 'ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>' from assembly 'comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //             (string I1,
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
-                        @"(string I1,
+                    ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
+                    @"(string I1,
                 string I2,
                 string I3,
                 string I4,
@@ -27106,18 +27099,12 @@ namespace System
                 string I6,
                 string I7,
                 string I8)"
-                    )
-                    .WithArguments(
-                        "Rest",
-                        "System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>",
-                        "comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                    )
-                    .WithLocation(30, 13),
+                ).WithArguments("Rest", "System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>", "comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(30, 13),
                 // (52,13): error CS8128: Member 'Rest' was not found on type 'ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>' from assembly 'comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //             (string I1,
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
-                        @"(string I1,
+                    ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
+                    @"(string I1,
                 string I2,
                 string I3,
                 string I4,
@@ -27125,13 +27112,7 @@ namespace System
                 string I6,
                 string I7,
                 string I8)"
-                    )
-                    .WithArguments(
-                        "Rest",
-                        "System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>",
-                        "comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                    )
-                    .WithLocation(52, 13),
+                ).WithArguments("Rest", "System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>", "comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(52, 13),
                 // (70,38): error CS0165: Use of unassigned local variable 'ss'
                 //             System.Console.WriteLine(ss); // should fail
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "ss")
@@ -27921,9 +27902,9 @@ public class C
                 // (26,28): error CS8128: Member 'Item1' was not found on type '(T1, T2)' from assembly 'comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         (int x2, int y2) = GetCoordinates2();
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
-                        "GetCoordinates2()"
-                    )
+                    ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
+                    "GetCoordinates2()"
+                )
                     .WithArguments(
                         "Item1",
                         "(T1, T2)",
@@ -27933,9 +27914,9 @@ public class C
                 // (26,28): error CS8128: Member 'Item2' was not found on type '(T1, T2)' from assembly 'comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         (int x2, int y2) = GetCoordinates2();
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
-                        "GetCoordinates2()"
-                    )
+                    ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
+                    "GetCoordinates2()"
+                )
                     .WithArguments(
                         "Item2",
                         "(T1, T2)",
@@ -28348,9 +28329,9 @@ namespace System
                 // (23,9): error CS8182: Predefined type 'ValueTuple`2' must be a struct.
                 //         public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
-                        "public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
+                    "public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }"
+                )
                     .WithArguments("ValueTuple`2")
                     .WithLocation(23, 9)
             );
@@ -28424,25 +28405,25 @@ namespace System
                 // (6,13): error CS8182: Predefined type 'ValueTuple`8' must be a struct.
                 //         var x = (1,2,3,4,5,6,7,8,9);
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
-                        "x = (1,2,3,4,5,6,7,8,9)"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
+                    "x = (1,2,3,4,5,6,7,8,9)"
+                )
                     .WithArguments("ValueTuple`8")
                     .WithLocation(6, 13),
                 // (6,13): error CS8182: Predefined type 'ValueTuple`2' must be a struct.
                 //         var x = (1,2,3,4,5,6,7,8,9);
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
-                        "x = (1,2,3,4,5,6,7,8,9)"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
+                    "x = (1,2,3,4,5,6,7,8,9)"
+                )
                     .WithArguments("ValueTuple`2")
                     .WithLocation(6, 13),
                 // (19,9): error CS8182: Predefined type 'ValueTuple`2' must be a struct.
                 //         public ValueTuple(T1 item1, T2 item2)
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
-                        @"public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
+                    @"public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }"
+                )
                     .WithArguments("ValueTuple`2")
                     .WithLocation(19, 9)
             );
@@ -28488,9 +28469,9 @@ namespace System
                 // (20,9): error CS8182: Predefined type 'ValueTuple`2' must be a struct.
                 //         public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
-                        "public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
+                    "public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }"
+                )
                     .WithArguments("ValueTuple`2")
                     .WithLocation(20, 9)
             );
@@ -28588,9 +28569,9 @@ namespace System
                 // (23,9): error CS8182: Predefined type 'ValueTuple`2' must be a struct.
                 //         public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
-                        "public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
+                    "public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }"
+                )
                     .WithArguments("ValueTuple`2")
                     .WithLocation(23, 9)
             );
@@ -28644,9 +28625,9 @@ namespace System
                 // (18,9): error CS8182: Predefined type 'ValueTuple`2' must be a struct.
                 //         public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
-                        "public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeMustBeStruct,
+                    "public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }"
+                )
                     .WithArguments("ValueTuple`2")
                     .WithLocation(18, 9)
             );
@@ -28770,9 +28751,8 @@ namespace System
 public class A
 {
 }";
-            var signedDllOptions = TestOptions.SigningReleaseDll.WithCryptoKeyFile(
-                SigningTestHelpers.KeyPairFile
-            );
+            var signedDllOptions = TestOptions.SigningReleaseDll
+                .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile);
             var comp0v1 = CreateCompilationWithMscorlib40(
                 source0v1,
                 assemblyName: "A",
@@ -29045,9 +29025,8 @@ namespace ConsoleApplication5
             );
 
             var m = (MethodSymbol)(
-                ((CSharpCompilation)comp.Compilation).GetTypeByMetadataName(
-                        "ConsoleApplication5.C2"
-                    )
+                ((CSharpCompilation)comp.Compilation)
+                    .GetTypeByMetadataName("ConsoleApplication5.C2")
                     .GetMembers("Goo")
                     .First()
             );
@@ -29125,7 +29104,8 @@ namespace ConsoleApplication5
             );
 
             var m = (IMethodSymbol)(
-                comp.Compilation.GetTypeByMetadataName("ConsoleApplication5.C2")
+                comp.Compilation
+                    .GetTypeByMetadataName("ConsoleApplication5.C2")
                     .GetMembers("Goo")
                     .First()
             );
@@ -29577,9 +29557,8 @@ namespace ConsoleApplication5
             );
 
             var m = (PropertySymbol)(
-                ((CSharpCompilation)comp.Compilation).GetTypeByMetadataName(
-                        "ConsoleApplication5.C2"
-                    )
+                ((CSharpCompilation)comp.Compilation)
+                    .GetTypeByMetadataName("ConsoleApplication5.C2")
                     .GetMembers("Goo")
                     .First()
             );
@@ -29720,14 +29699,10 @@ public class C
         [WorkItem(14649, "https://github.com/dotnet/roslyn/issues/14649")]
         public void ParseLongLambda()
         {
-            string filler = string.Join(
-                "\r\n",
-                Enumerable.Range(1, 1000).Select(i => $"int y{i};")
-            );
-            string parameters = string.Join(
-                ", ",
-                Enumerable.Range(1, 2000).Select(i => $"int x{i}")
-            );
+            string filler = string
+                .Join("\r\n", Enumerable.Range(1, 1000).Select(i => $"int y{i};"));
+            string parameters = string
+                .Join(", ", Enumerable.Range(1, 2000).Select(i => $"int x{i}"));
             string text =
                 @"
 class C
@@ -31358,22 +31333,21 @@ namespace System
             Assert.Equal(libWithVTRef.Display, tuple2.ContainingAssembly.MetadataName.ToString());
 
             var comp3 = CSharpCompilation.Create(
-                    "test",
-                    references: new[] { corlibWithVTRef, libWithVTRef }
-                ) // order reversed
+                "test",
+                references: new[] { corlibWithVTRef, libWithVTRef }
+            ) // order reversed
                 .WithOptions(
-                    comp.Options.WithTopLevelBinderFlags(
-                        BinderFlags.IgnoreCorLibraryDuplicatedTypes
-                    )
+                    comp.Options
+                        .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
                 );
             var tuple3 = comp3.GetWellKnownType(WellKnownType.System_ValueTuple_T2);
             Assert.False(tuple3.IsErrorType());
             Assert.Equal(libWithVTRef.Display, tuple3.ContainingAssembly.MetadataName.ToString());
 
             var libWithVTRef2 = CreateEmptyCompilation(
-                    valuetuple_cs,
-                    references: new[] { corlibWithoutVTRef }
-                )
+                valuetuple_cs,
+                references: new[] { corlibWithoutVTRef }
+            )
                 .EmitToImageReference();
             var comp4 = CreateEmptyCompilation(
                 "",
@@ -32294,16 +32268,15 @@ public class C
     public static void M1<T1, T2, T3, T4, T5, T6, T7, TRest>(ValueTuple<Func<T1>, Func<T2>, Func<T3>, Func<T4>, Func<T5>, Func<T6>, Func<T7>, TRest> a) where TRest : struct { Console.Write(1); }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,9): error CS0411: The type arguments for method 'C.M1<T1, T2, T3, T4, T5, T6, T7, TRest>(ValueTuple<Func<T1>, Func<T2>, Func<T3>, Func<T4>, Func<T5>, Func<T6>, Func<T7>, TRest>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         M1((()=>1, ()=>2, ()=>3, ()=>4, ()=>5, ()=>6, ()=>7, ()=>8));
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
-                        .WithArguments(
-                            "C.M1<T1, T2, T3, T4, T5, T6, T7, TRest>(System.ValueTuple<System.Func<T1>, System.Func<T2>, System.Func<T3>, System.Func<T4>, System.Func<T5>, System.Func<T6>, System.Func<T7>, TRest>)"
-                        )
-                        .WithLocation(6, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,9): error CS0411: The type arguments for method 'C.M1<T1, T2, T3, T4, T5, T6, T7, TRest>(ValueTuple<Func<T1>, Func<T2>, Func<T3>, Func<T4>, Func<T5>, Func<T6>, Func<T7>, TRest>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         M1((()=>1, ()=>2, ()=>3, ()=>4, ()=>5, ()=>6, ()=>7, ()=>8));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
+                    .WithArguments(
+                        "C.M1<T1, T2, T3, T4, T5, T6, T7, TRest>(System.ValueTuple<System.Func<T1>, System.Func<T2>, System.Func<T3>, System.Func<T4>, System.Func<T5>, System.Func<T6>, System.Func<T7>, TRest>)"
+                    )
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -32368,17 +32341,16 @@ public class C
     public static void M1<T, U>(((T, int), int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, U) a)
         { Console.Write(4); }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.M1<T, U>((T, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, (U, int)))' and 'C.M1<T, U>(((T, int), int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, U))'
-                    //         M1(b); // error: ambiguous
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
-                        .WithArguments(
-                            "C.M1<T, U>((T, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, (U, int)))",
-                            "C.M1<T, U>(((T, int), int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, U))"
-                        )
-                        .WithLocation(7, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.M1<T, U>((T, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, (U, int)))' and 'C.M1<T, U>(((T, int), int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, U))'
+                //         M1(b); // error: ambiguous
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
+                    .WithArguments(
+                        "C.M1<T, U>((T, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, (U, int)))",
+                        "C.M1<T, U>(((T, int), int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, U))"
+                    )
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
@@ -32446,12 +32418,11 @@ namespace System
 }
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (10,9): error CS0191: A readonly field cannot be assigned to (except in the constructor of the class in which the field is defined or a variable initializer))
-                    //         tuple.Item1 = 3;
-                    Diagnostic(ErrorCode.ERR_AssgReadonly, "tuple.Item1").WithLocation(8, 9)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (10,9): error CS0191: A readonly field cannot be assigned to (except in the constructor of the class in which the field is defined or a variable initializer))
+                //         tuple.Item1 = 3;
+                Diagnostic(ErrorCode.ERR_AssgReadonly, "tuple.Item1").WithLocation(8, 9)
+            );
         }
 
         [Fact, WorkItem(24781, "https://github.com/dotnet/roslyn/issues/24781")]
@@ -33578,7 +33549,8 @@ class Program
                 var field = comp.GetMember<FieldSymbol>("System.ValueTuple.F1");
                 Assert.NotNull(field.TupleUnderlyingField);
                 Assert.Same(field, field.TupleUnderlyingField);
-                var toEmit = field.ContainingType.GetFieldsToEmit()
+                var toEmit = field.ContainingType
+                    .GetFieldsToEmit()
                     .Where(f => f.Name == "F1")
                     .Single();
                 Assert.Same(toEmit, toEmit.TupleUnderlyingField);
@@ -33690,7 +33662,8 @@ class Program
                 var field = comp.GetMember<FieldSymbol>("System.ValueTuple.F1");
                 Assert.NotNull(field.TupleUnderlyingField);
                 Assert.Same(field, field.TupleUnderlyingField);
-                var toEmit = field.ContainingType.GetFieldsToEmit()
+                var toEmit = field.ContainingType
+                    .GetFieldsToEmit()
                     .Where(f => f.Name == "F1")
                     .Single();
                 Assert.Same(toEmit, toEmit.TupleUnderlyingField);
@@ -34721,10 +34694,10 @@ class C
                 references: new[] { comp.ToMetadataReference() },
                 targetFramework: TargetFramework.Mscorlib46
             );
-            var retargetingValueTupleType =
-                (NamedTypeSymbol)comp3.GlobalNamespace.GetMember<NamespaceSymbol>("System")
-                    .GetMembers("ValueTuple")
-                    .Single();
+            var retargetingValueTupleType = (NamedTypeSymbol)comp3.GlobalNamespace
+                .GetMember<NamespaceSymbol>("System")
+                .GetMembers("ValueTuple")
+                .Single();
             Assert.IsType<RetargetingNamedTypeSymbol>(retargetingValueTupleType);
             Assert.Empty(retargetingValueTupleType.GetFieldsToEmit());
             verify(
@@ -34751,9 +34724,8 @@ class C
 
             static void verifyModule(ModuleSymbol module)
             {
-                var type = (NamedTypeSymbol)module.GlobalNamespace.GetMember<NamespaceSymbol>(
-                        "System"
-                    )
+                var type = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMembers("ValueTuple")
                     .Single();
                 Assert.Empty(type.GetFieldsToEmit());
@@ -34855,9 +34827,8 @@ class C
 
             static void verifyModule(ModuleSymbol module)
             {
-                var type = (NamedTypeSymbol)module.GlobalNamespace.GetMember<NamespaceSymbol>(
-                        "System"
-                    )
+                var type = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMembers("ValueTuple")
                     .Single();
                 Assert.Equal("(T1, T2)", type.ToTestDisplayString());
@@ -34907,22 +34878,19 @@ namespace System
             {
                 var isSourceSymbol = module is SourceModuleSymbol;
 
-                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "System.ValueTuple.M"
-                ).ReturnType;
+                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("System.ValueTuple.M").ReturnType;
                 if (isSourceSymbol)
                     Assert.Equal("SourceNamedTypeSymbol: (T1, T2)", print(tuple1));
                 else
                     Assert.Equal("PENamedTypeSymbolGeneric: (T1, T2)", print(tuple1));
 
-                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "System.ValueTuple.M2"
-                ).ReturnType;
+                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("System.ValueTuple.M2").ReturnType;
                 Assert.Equal("ConstructedNamedTypeSymbol: (T1 Item1, T2 Item2)", print(tuple2));
 
-                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "System.ValueTuple.M3"
-                ).ReturnType;
+                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("System.ValueTuple.M3").ReturnType;
                 Assert.Equal("ConstructedNamedTypeSymbol: (T1, T2 Item2)", print(tuple3));
             }
 
@@ -34963,22 +34931,19 @@ namespace System
             {
                 var isSourceSymbol = module is SourceModuleSymbol;
 
-                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "System.ValueTuple.M"
-                ).ReturnType;
+                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("System.ValueTuple.M").ReturnType;
                 if (isSourceSymbol)
                     Assert.Equal("SourceNamedTypeSymbol: (T1, T2)", print(tuple1));
                 else
                     Assert.Equal("PENamedTypeSymbolGeneric: (T1, T2)", print(tuple1));
 
-                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "System.ValueTuple.M2"
-                ).ReturnType;
+                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("System.ValueTuple.M2").ReturnType;
                 Assert.Equal("ConstructedNamedTypeSymbol: (T1 Item1, T2 Item2)", print(tuple2));
 
-                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "System.ValueTuple.M3"
-                ).ReturnType;
+                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("System.ValueTuple.M3").ReturnType;
                 Assert.Equal("ConstructedNamedTypeSymbol: (T1, T2 Item2)", print(tuple3));
             }
 
@@ -35007,15 +34972,15 @@ namespace System
                 targetFramework: TargetFramework.Mscorlib46,
                 references: new[] { comp.ToMetadataReference() }
             );
-            var retargetingValueTupleTypes = comp2.GlobalNamespace.GetMember<NamespaceSymbol>(
-                    "System"
-                )
+            var retargetingValueTupleTypes = comp2.GlobalNamespace
+                .GetMember<NamespaceSymbol>("System")
                 .GetMembers("ValueTuple");
             verifyTupleTypes(retargetingValueTupleTypes, retargeting: true);
 
             static void verifyModule(ModuleSymbol module)
             {
-                var valueTupleTypes = module.GlobalNamespace.GetMember<NamespaceSymbol>("System")
+                var valueTupleTypes = module.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMembers("ValueTuple");
                 verifyTupleTypes(valueTupleTypes, retargeting: false);
             }
@@ -35158,15 +35123,15 @@ namespace System
                 targetFramework: TargetFramework.Mscorlib46,
                 references: new[] { comp.ToMetadataReference() }
             );
-            var retargetingValueTupleTypes = comp2.GlobalNamespace.GetMember<NamespaceSymbol>(
-                    "System"
-                )
+            var retargetingValueTupleTypes = comp2.GlobalNamespace
+                .GetMember<NamespaceSymbol>("System")
                 .GetMembers("ValueTuple");
             verifyTuple8Type(retargetingValueTupleTypes[5], retargeting: true);
 
             static void verifyModule(ModuleSymbol module)
             {
-                var valueTupleTypes = module.GlobalNamespace.GetMember<NamespaceSymbol>("System")
+                var valueTupleTypes = module.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMembers("ValueTuple")
                     .As<NamedTypeSymbol>();
                 AssertEx.SetEqual(
@@ -35276,18 +35241,17 @@ namespace System
                 references: new[] { comp.ToMetadataReference() },
                 targetFramework: TargetFramework.Mscorlib46
             );
-            var retargetingValueTupleType =
-                (NamedTypeSymbol)comp3.GlobalNamespace.GetMember<NamespaceSymbol>("System")
-                    .GetMembers("ValueTuple")
-                    .Single();
+            var retargetingValueTupleType = (NamedTypeSymbol)comp3.GlobalNamespace
+                .GetMember<NamespaceSymbol>("System")
+                .GetMembers("ValueTuple")
+                .Single();
             Assert.IsType<RetargetingNamedTypeSymbol>(retargetingValueTupleType);
             verifyTupleType(retargetingValueTupleType, retargeting: true);
 
             static void verifyModule(ModuleSymbol module)
             {
-                var type = (NamedTypeSymbol)module.GlobalNamespace.GetMember<NamespaceSymbol>(
-                        "System"
-                    )
+                var type = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMembers("ValueTuple")
                     .Single();
                 verifyTupleType(type, retargeting: false);
@@ -35407,9 +35371,8 @@ namespace System
 
             static void verifyModule(ModuleSymbol module)
             {
-                var namedType = (NamedTypeSymbol)module.GlobalNamespace.GetMember<NamespaceSymbol>(
-                        "System"
-                    )
+                var namedType = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMembers("ValueTuple")
                     .Single();
                 var isSourceSymbol = namedType.ContainingModule is SourceModuleSymbol;
@@ -35495,9 +35458,8 @@ class C
 
             static void verifyModule(ModuleSymbol module)
             {
-                var type = (NamedTypeSymbol)module.GlobalNamespace.GetMember<NamespaceSymbol>(
-                        "System"
-                    )
+                var type = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMembers("ValueTuple")
                     .Single();
                 var item2 = type.GetMember<FieldSymbol>("Item2");
@@ -35637,9 +35599,8 @@ namespace System
             {
                 var isSourceSymbol = module is SourceModuleSymbol;
 
-                var type = (NamedTypeSymbol)module.GlobalNamespace.GetMember<NamespaceSymbol>(
-                        "System"
-                    )
+                var type = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMembers("ValueTuple")
                     .Single();
                 assertValueTupleUnderlyingFields(type, isSourceSymbol);
@@ -35670,9 +35631,8 @@ namespace System
                     );
                 }
 
-                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "C.M"
-                ).ReturnType;
+                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("C.M").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32, System.Int32)",
                     print(tuple1)
@@ -35698,9 +35658,8 @@ namespace System
                     tuple1Item1.OriginalDefinition.GetType().Name
                 );
 
-                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "C.M2"
-                ).ReturnType;
+                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("C.M2").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32 Item1, System.Int32 Item2)",
                     print(tuple2)
@@ -35726,9 +35685,8 @@ namespace System
                     tuple2Item1.OriginalDefinition.GetType().Name
                 );
 
-                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "C.M3"
-                ).ReturnType;
+                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("C.M3").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32 a, System.Int32 b)",
                     print(tuple3)
@@ -35838,9 +35796,8 @@ public class C
 
             static void verifyModule(ModuleSymbol module)
             {
-                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "C.M"
-                ).ReturnType;
+                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("C.M").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32)",
                     print(tuple1)
@@ -35870,9 +35827,8 @@ public class C
                 Assert.True(tuple1.GetMember<FieldSymbol>("Item7").IsDefinition);
                 Assert.True(tuple1.GetMember<FieldSymbol>("Item8").IsDefinition);
 
-                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "C.M2"
-                ).ReturnType;
+                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("C.M2").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32 Item1, System.Int32 Item2, System.Int32 Item3, System.Int32 Item4, System.Int32 Item5, System.Int32 Item6, System.Int32 Item7, System.Int32 Item8)",
                     print(tuple2)
@@ -35905,9 +35861,8 @@ public class C
                 Assert.True(tuple2.GetMember<FieldSymbol>("Item7").IsDefinition);
                 Assert.True(tuple2.GetMember<FieldSymbol>("Item8").IsDefinition);
 
-                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "C.M3"
-                ).ReturnType;
+                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("C.M3").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32 a, System.Int32 b, System.Int32 c, System.Int32 d, System.Int32 e, System.Int32 f, System.Int32 g, System.Int32 h)",
                     print(tuple3)
@@ -35976,9 +35931,8 @@ public class C
                     printFields(tuple3.TupleUnderlyingType)
                 );
 
-                var tuple4 = (NamedTypeSymbol)module.GlobalNamespace.GetMember<MethodSymbol>(
-                    "C.M4"
-                ).ReturnType;
+                var tuple4 = (NamedTypeSymbol)module.GlobalNamespace
+                    .GetMember<MethodSymbol>("C.M4").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32)",
                     print(tuple4)

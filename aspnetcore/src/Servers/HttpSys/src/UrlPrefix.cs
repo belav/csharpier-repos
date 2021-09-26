@@ -29,14 +29,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             PortValue = portValue;
             Path = path;
             PathWithoutTrailingSlash = Path.Length > 1 ? Path[0..^1] : string.Empty;
-            FullPrefix = string.Format(
-                CultureInfo.InvariantCulture,
-                "{0}://{1}:{2}{3}",
-                Scheme,
-                Host,
-                Port,
-                Path
-            );
+            FullPrefix = string
+                .Format(CultureInfo.InvariantCulture, "{0}://{1}:{2}{3}", Scheme, Host, Port, Path);
         }
 
         /// <summary>
@@ -166,12 +160,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             {
                 var portValueString = portString.Substring(1); // Trim the leading ":"
                 if (
-                    int.TryParse(
-                        portValueString,
-                        NumberStyles.Integer,
-                        CultureInfo.InvariantCulture,
-                        out portValue
-                    )
+                    int
+                        .TryParse(
+                            portValueString,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out portValue
+                        )
                 )
                 {
                     host = whole.Substring(
@@ -237,11 +232,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         /// <inheritdoc />
         public override bool Equals(object? obj)
         {
-            return string.Equals(
-                FullPrefix,
-                Convert.ToString(obj, CultureInfo.InvariantCulture),
-                StringComparison.OrdinalIgnoreCase
-            );
+            return string
+                .Equals(
+                    FullPrefix,
+                    Convert.ToString(obj, CultureInfo.InvariantCulture),
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
         /// <inheritdoc />

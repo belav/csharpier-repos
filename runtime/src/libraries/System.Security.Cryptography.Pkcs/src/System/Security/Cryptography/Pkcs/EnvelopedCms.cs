@@ -101,13 +101,14 @@ namespace System.Security.Cryptography.Pkcs
                 _decryptorPal.Dispose();
                 _decryptorPal = null;
             }
-            _encodedMessage = PkcsPal.Instance.Encrypt(
-                recipients,
-                ContentInfo,
-                ContentEncryptionAlgorithm,
-                Certificates,
-                UnprotectedAttributes
-            );
+            _encodedMessage = PkcsPal.Instance
+                .Encrypt(
+                    recipients,
+                    ContentInfo,
+                    ContentEncryptionAlgorithm,
+                    Certificates,
+                    UnprotectedAttributes
+                );
             _lastCall = LastCall.Encrypt;
         }
 
@@ -155,14 +156,15 @@ namespace System.Security.Cryptography.Pkcs
             AlgorithmIdentifier contentEncryptionAlgorithm;
             X509Certificate2Collection originatorCerts;
             CryptographicAttributeObjectCollection unprotectedAttributes;
-            _decryptorPal = PkcsPal.Instance.Decode(
-                encodedMessage,
-                out version,
-                out contentInfo,
-                out contentEncryptionAlgorithm,
-                out originatorCerts,
-                out unprotectedAttributes
-            );
+            _decryptorPal = PkcsPal.Instance
+                .Decode(
+                    encodedMessage,
+                    out version,
+                    out contentInfo,
+                    out contentEncryptionAlgorithm,
+                    out originatorCerts,
+                    out unprotectedAttributes
+                );
             Version = version;
             ContentInfo = contentInfo;
             ContentEncryptionAlgorithm = contentEncryptionAlgorithm;
@@ -218,14 +220,15 @@ namespace System.Security.Cryptography.Pkcs
             CheckStateForDecryption();
 
             X509Certificate2Collection extraStore = new X509Certificate2Collection();
-            ContentInfo? contentInfo = _decryptorPal!.TryDecrypt(
-                recipientInfo,
-                null,
-                privateKey,
-                Certificates,
-                extraStore,
-                out Exception? exception
-            );
+            ContentInfo? contentInfo = _decryptorPal!
+                .TryDecrypt(
+                    recipientInfo,
+                    null,
+                    privateKey,
+                    Certificates,
+                    extraStore,
+                    out Exception? exception
+                );
 
             if (exception != null)
                 throw exception;
@@ -260,14 +263,15 @@ namespace System.Security.Cryptography.Pkcs
                     continue;
                 }
 
-                newContentInfo = _decryptorPal!.TryDecrypt(
-                    recipientInfo,
-                    cert,
-                    null,
-                    originatorCerts,
-                    extraStore,
-                    out exception
-                );
+                newContentInfo = _decryptorPal!
+                    .TryDecrypt(
+                        recipientInfo,
+                        cert,
+                        null,
+                        originatorCerts,
+                        extraStore,
+                        out exception
+                    );
 
                 if (exception != null)
                     continue;

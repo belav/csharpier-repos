@@ -122,9 +122,9 @@ namespace Microsoft.AspNetCore.Mvc.Core
             var provider = new EmptyModelMetadataProvider();
 
             var modelExplorer = provider.GetModelExplorerForType(
-                    typeof(DefaultTemplatesUtilities.ObjectTemplateModel),
-                    model: null
-                )
+                typeof(DefaultTemplatesUtilities.ObjectTemplateModel),
+                model: null
+            )
                 .GetExplorerForProperty(propertyName);
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
@@ -325,9 +325,9 @@ namespace Microsoft.AspNetCore.Mvc.Core
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<string>(provider: provider);
             helper.ViewData.ModelExplorer = provider.GetModelExplorerForType(
-                    typeof(DefaultTemplatesUtilities.ObjectTemplateModel),
-                    model: null
-                )
+                typeof(DefaultTemplatesUtilities.ObjectTemplateModel),
+                model: null
+            )
                 .GetExplorerForProperty(
                     nameof(DefaultTemplatesUtilities.ObjectTemplateModel.Property1)
                 );

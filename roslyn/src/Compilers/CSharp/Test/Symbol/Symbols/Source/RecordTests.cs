@@ -22,8 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private CompilationVerifier CompileAndVerify(
             CSharpTestSource src,
             string? expectedOutput = null
-        ) =>
-            base.CompileAndVerify(
+        ) => base.CompileAndVerify(
                 new[] { src, IsExternalInitTypeDefinition },
                 expectedOutput: expectedOutput,
                 parseOptions: TestOptions.Regular9,
@@ -290,7 +289,7 @@ record D : C
             );
 
             CompileAndVerify(
-                    @"
+                @"
 using System;
 record C(int X, int Y)
 {
@@ -301,22 +300,21 @@ record C(int X, int Y)
     }
     public virtual bool Equals(C c) => false;
 }",
-                    expectedOutput: "False"
-                )
-                .VerifyDiagnostics(
-                    // (10,25): warning CS8851: 'C' defines 'Equals' but not 'GetHashCode'
-                    //     public virtual bool Equals(C c) => false;
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("C")
-                        .WithLocation(10, 25)
-                );
+                expectedOutput: "False"
+            ).VerifyDiagnostics(
+                // (10,25): warning CS8851: 'C' defines 'Equals' but not 'GetHashCode'
+                //     public virtual bool Equals(C c) => false;
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("C")
+                    .WithLocation(10, 25)
+            );
         }
 
         [Fact]
         public void RecordEquals_02()
         {
             CompileAndVerify(
-                    @"
+                @"
 using System;
 record C(int X, int Y)
 {
@@ -328,17 +326,16 @@ record C(int X, int Y)
         Console.WriteLine(c.Equals(c2));
     }
 }",
-                    expectedOutput: @"True
+                expectedOutput: @"True
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void RecordEquals_03()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 using System;
 sealed record C(int X, int Y)
 {
@@ -352,16 +349,15 @@ sealed record C(int X, int Y)
     }
     public bool Equals(C c) => X == c.X && Y == c.Y;
 }",
-                    expectedOutput: @"True
+                expectedOutput: @"True
 False"
-                )
-                .VerifyDiagnostics(
-                    // (13,17): warning CS8851: 'C' defines 'Equals' but not 'GetHashCode'
-                    //     public bool Equals(C c) => X == c.X && Y == c.Y;
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
-                        .WithArguments("C")
-                        .WithLocation(13, 17)
-                );
+            ).VerifyDiagnostics(
+                // (13,17): warning CS8851: 'C' defines 'Equals' but not 'GetHashCode'
+                //     public bool Equals(C c) => X == c.X && Y == c.Y;
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("C")
+                    .WithLocation(13, 17)
+            );
 
             verifier.VerifyIL(
                 "C.Equals(object)",
@@ -403,7 +399,7 @@ False"
         public void RecordEquals_04()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 using System;
 record C(int X, int Y)
 {
@@ -416,10 +412,9 @@ record C(int X, int Y)
         Console.WriteLine(c.Equals(c3));
     }
 }",
-                    expectedOutput: @"True
+                expectedOutput: @"True
 False"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.Equals(object)",
@@ -477,7 +472,7 @@ False"
         public void RecordEquals_06()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 using System;
 record C(int X, int Y)
 {
@@ -490,17 +485,16 @@ record C(int X, int Y)
         Console.WriteLine(c.Equals(c3));
     }
 }",
-                    expectedOutput: @"False
+                expectedOutput: @"False
 False"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void RecordEquals_07()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 using System;
 record C(int[] X, string Y)
 {
@@ -514,17 +508,16 @@ record C(int[] X, string Y)
         Console.WriteLine(c.Equals(c3));
     }
 }",
-                    expectedOutput: @"False
+                expectedOutput: @"False
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void RecordEquals_08()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 using System;
 record C(int X, int Y)
 {
@@ -542,12 +535,11 @@ record C(int X, int Y)
         Console.WriteLine(c.Equals((object)c2));
     }
 }",
-                    expectedOutput: @"False
+                expectedOutput: @"False
 False
 True
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.Equals(C)",
@@ -599,7 +591,7 @@ True"
         public void RecordEquals_09()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 using System;
 record C(int X, int Y)
 {
@@ -617,19 +609,18 @@ record C(int X, int Y)
         Console.WriteLine(c.Equals((object)c2));
     }
 }",
-                    expectedOutput: @"False
+                expectedOutput: @"False
 False
 True
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void RecordEquals_10()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 using System;
 record C(int X, int Y)
 {
@@ -647,12 +638,11 @@ record C(int X, int Y)
         Console.WriteLine(c.Equals((object)c2));
     }
 }",
-                    expectedOutput: @"True
+                expectedOutput: @"True
 True
 True
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.Equals(C)",
@@ -765,7 +755,7 @@ True"
         public void RecordEquals_12()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 using System;
 record C(int X, int Y)
 {
@@ -783,12 +773,11 @@ record C(int X, int Y)
         Console.WriteLine(c.Equals((object)c2));
     }
 }",
-                    expectedOutput: @"False
+                expectedOutput: @"False
 False
 True
 True"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.Equals(C)",
@@ -1025,14 +1014,13 @@ public record C(int x, int y)
             Assert.Equal(1, ctor.ParameterCount);
             Assert.True(ctor.Parameters[0].Type.Equals(c, TypeCompareKind.ConsiderEverything));
 
-            var verifier = CompileAndVerify(comp, verify: Verification.Fails)
-                .VerifyDiagnostics(
-                    // (5,25): warning CS0067: The event 'C.E' is never used
-                    //     public event Action E;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
-                        .WithArguments("C.E")
-                        .WithLocation(5, 25)
-                );
+            var verifier = CompileAndVerify(comp, verify: Verification.Fails).VerifyDiagnostics(
+                // (5,25): warning CS0067: The event 'C.E' is never used
+                //     public event Action E;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
+                    .WithArguments("C.E")
+                    .WithLocation(5, 25)
+            );
 
             verifier.VerifyIL(
                 "C." + WellKnownMemberNames.CloneMethodName,
@@ -1155,7 +1143,7 @@ public data struct S(int x, int y)
         public void NominalRecordEquals()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 using System;
 record C
 {
@@ -1176,18 +1164,17 @@ record C
         Console.WriteLine(c.Equals((object)c2));
     }
 }",
-                    expectedOutput: @"False
+                expectedOutput: @"False
 False
 True
 True"
-                )
-                .VerifyDiagnostics(
-                    // (5,17): warning CS0414: The field 'C.X' is assigned but its value is never used
-                    //     private int X;
-                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "X")
-                        .WithArguments("C.X")
-                        .WithLocation(5, 17)
-                );
+            ).VerifyDiagnostics(
+                // (5,17): warning CS0414: The field 'C.X' is assigned but its value is never used
+                //     private int X;
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "X")
+                    .WithArguments("C.X")
+                    .WithLocation(5, 17)
+            );
 
             verifier.VerifyIL(
                 "C.Equals(object)",
@@ -1252,24 +1239,23 @@ True"
         public void PositionalAndNominalSameEquals()
         {
             var v1 = CompileAndVerify(
-                    @"
+                @"
 using System;
 record C(int X, string Y)
 {
     public event Action E;
 }
 "
-                )
-                .VerifyDiagnostics(
-                    // (5,25): warning CS0067: The event 'C.E' is never used
-                    //     public event Action E;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
-                        .WithArguments("C.E")
-                        .WithLocation(5, 25)
-                );
+            ).VerifyDiagnostics(
+                // (5,25): warning CS0067: The event 'C.E' is never used
+                //     public event Action E;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
+                    .WithArguments("C.E")
+                    .WithLocation(5, 25)
+            );
 
             var v2 = CompileAndVerify(
-                    @"
+                @"
 using System;
 record C
 {
@@ -1277,14 +1263,13 @@ record C
     public string Y { get; }
     public event Action E;
 }"
-                )
-                .VerifyDiagnostics(
-                    // (7,25): warning CS0067: The event 'C.E' is never used
-                    //     public event Action E;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
-                        .WithArguments("C.E")
-                        .WithLocation(7, 25)
-                );
+            ).VerifyDiagnostics(
+                // (7,25): warning CS0067: The event 'C.E' is never used
+                //     public event Action E;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
+                    .WithArguments("C.E")
+                    .WithLocation(7, 25)
+            );
 
             Assert.Equal(v1.VisualizeIL("C.Equals(C)"), v2.VisualizeIL("C.Equals(C)"));
             Assert.Equal(v1.VisualizeIL("C.Equals(object)"), v2.VisualizeIL("C.Equals(object)"));
@@ -1447,12 +1432,11 @@ partial public record C
 {
 }
 ";
-            CreateCompilation(src)
-                .VerifyDiagnostics(
-                    // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                    // partial public record C
-                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(2, 1)
-                );
+            CreateCompilation(src).VerifyDiagnostics(
+                // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                // partial public record C
+                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(2, 1)
+            );
         }
 
         [Fact]
@@ -1547,7 +1531,9 @@ data struct S2(int X, int Y);";
                     .WithLocation(5, 23),
                 // (5,27): error CS0128: A local variable or function named 'Y' is already defined in this scope
                 // data struct S2(int X, int Y);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "Y").WithArguments("Y").WithLocation(5, 27)
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "Y")
+                    .WithArguments("Y")
+                    .WithLocation(5, 27)
             );
         }
 
@@ -1717,14 +1703,13 @@ class P
     }
 }";
             CompileAndVerify(
-                    src,
-                    expectedOutput: @"
+                src,
+                expectedOutput: @"
 1 2
 3 4
 6 5
 8 7"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -2058,9 +2043,9 @@ class Test
             CompileAndVerify(src1 + src2 + src3, expectedOutput: "C { Y = 22, X = 11, Z = 33 }")
                 .VerifyDiagnostics();
             CompileAndVerify(
-                    new[] { src1, src2, src3 },
-                    expectedOutput: "C { Y = 22, X = 11, Z = 33 }"
-                )
+                new[] { src1, src2, src3 },
+                expectedOutput: "C { Y = 22, X = 11, Z = 33 }"
+            )
                 .VerifyDiagnostics();
         }
 
@@ -2159,14 +2144,14 @@ class Test
 }
 ";
             CompileAndVerify(
-                    src1 + src2 + src3,
-                    expectedOutput: "C { Y = 22, X = 11, U = 44, Z = 33 }"
-                )
+                src1 + src2 + src3,
+                expectedOutput: "C { Y = 22, X = 11, U = 44, Z = 33 }"
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(
-                    new[] { src1, src2, src3 },
-                    expectedOutput: "C { Y = 22, X = 11, U = 44, Z = 33 }"
-                )
+                new[] { src1, src2, src3 },
+                expectedOutput: "C { Y = 22, X = 11, U = 44, Z = 33 }"
+            )
                 .VerifyDiagnostics();
         }
     }

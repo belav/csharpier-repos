@@ -252,11 +252,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
         {
             // Arrange
             var authorizeFilter = new AuthorizeFilter(
-                new AuthorizationPolicyBuilder().RequireClaim(
-                        "Permission",
-                        "CanViewComment",
-                        "CanViewPage"
-                    )
+                new AuthorizationPolicyBuilder()
+                    .RequireClaim("Permission", "CanViewComment", "CanViewPage")
                     .Build()
             );
             var authorizationContext = GetAuthorizationContext();
@@ -270,10 +267,12 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
 
         private class TestPolicyProvider : IAuthorizationPolicyProvider
         {
-            private readonly AuthorizationPolicy _true =
-                new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
-            private readonly AuthorizationPolicy _false =
-                new AuthorizationPolicyBuilder().RequireAssertion(_ => false).Build();
+            private readonly AuthorizationPolicy _true = new AuthorizationPolicyBuilder()
+                .RequireAssertion(_ => true)
+                .Build();
+            private readonly AuthorizationPolicy _false = new AuthorizationPolicyBuilder()
+                .RequireAssertion(_ => false)
+                .Build();
 
             public int GetPolicyCalls = 0;
 
@@ -437,9 +436,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
         {
             // Arrange
             var authorizeFilter = new AuthorizeFilter(
-                new AuthorizationPolicyBuilder().RequireAssertion(
-                        c => c.Resource is AuthorizationFilterContext
-                    )
+                new AuthorizationPolicyBuilder()
+                    .RequireAssertion(c => c.Resource is AuthorizationFilterContext)
                     .Build()
             );
             var authorizationContext = GetAuthorizationContext();
@@ -473,7 +471,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
         {
             // Arrange
             var authorizeFilter = new AuthorizeFilter(
-                new AuthorizationPolicyBuilder().RequireClaim("Permission", "CanViewComment")
+                new AuthorizationPolicyBuilder()
+                    .RequireClaim("Permission", "CanViewComment")
                     .Build()
             );
             var authorizationContext = GetAuthorizationContext();
@@ -538,16 +537,15 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
         {
             // Arrange
             var factory = (IFilterFactory)authorizeFilter;
-            var serviceProvider = new ServiceCollection().AddOptions()
-                .AddAuthorization(
-                    options =>
-                    {
-                        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true)
-                            .Build();
-                        options.AddPolicy("some-policy", policy);
-                    }
-                )
-                .BuildServiceProvider();
+            var serviceProvider = new ServiceCollection().AddOptions().AddAuthorization(
+                options =>
+                {
+                    var policy = new AuthorizationPolicyBuilder()
+                        .RequireAssertion(_ => true)
+                        .Build();
+                    options.AddPolicy("some-policy", policy);
+                }
+            ).BuildServiceProvider();
 
             // Act
             var result = factory.CreateInstance(serviceProvider);
@@ -567,7 +565,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
             // Arrange
             var factory = (IFilterFactory)authorizeFilter;
             var policyProvider = Mock.Of<IAuthorizationPolicyProvider>();
-            var serviceProvider = new ServiceCollection().AddSingleton(policyProvider)
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton(policyProvider)
                 .BuildServiceProvider();
 
             // Act
@@ -599,7 +598,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
             Assert.NotSame(policy2, effectivePolicy);
             Assert.Equal(
                 new[] { "Claim1", "Claim2" },
-                effectivePolicy.Requirements.Cast<ClaimsAuthorizationRequirement>()
+                effectivePolicy.Requirements
+                    .Cast<ClaimsAuthorizationRequirement>()
                     .Select(c => c.ClaimType)
             );
         }
@@ -617,17 +617,18 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
             options.AddPolicy("policy2", policy2);
             var policyProvider = new DefaultAuthorizationPolicyProvider(Options.Create(options));
 
-            ActionContext.HttpContext.RequestServices =
-                new ServiceCollection().AddSingleton<IAuthorizationPolicyProvider>(policyProvider)
-                    .BuildServiceProvider();
+            ActionContext.HttpContext.RequestServices = new ServiceCollection()
+                .AddSingleton<IAuthorizationPolicyProvider>(policyProvider)
+                .BuildServiceProvider();
 
-            ActionContext.HttpContext.SetEndpoint(
-                new Endpoint(
-                    _ => null,
-                    new EndpointMetadataCollection(new AuthorizeAttribute("policy2")),
-                    "test"
-                )
-            );
+            ActionContext.HttpContext
+                .SetEndpoint(
+                    new Endpoint(
+                        _ => null,
+                        new EndpointMetadataCollection(new AuthorizeAttribute("policy2")),
+                        "test"
+                    )
+                );
             var context = new AuthorizationFilterContext(ActionContext, new[] { filter, });
 
             // Act
@@ -638,7 +639,8 @@ namespace Microsoft.AspNetCore.Mvc.Authorization
             Assert.NotSame(policy2, effectivePolicy);
             Assert.Equal(
                 new[] { "Claim1", "Claim2" },
-                effectivePolicy.Requirements.Cast<ClaimsAuthorizationRequirement>()
+                effectivePolicy.Requirements
+                    .Cast<ClaimsAuthorizationRequirement>()
                     .Select(c => c.ClaimType)
             );
         }

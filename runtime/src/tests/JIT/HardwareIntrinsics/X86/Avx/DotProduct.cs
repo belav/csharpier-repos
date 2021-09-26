@@ -126,7 +126,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf3 =
-                        (Vector256<float>)typeof(Avx).GetMethod(
+                        (Vector256<float>)typeof(Avx)
+                            .GetMethod(
                                 nameof(Avx.DotProduct),
                                 new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
                             )

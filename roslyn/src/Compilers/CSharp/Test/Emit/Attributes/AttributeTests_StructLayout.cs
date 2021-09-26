@@ -255,30 +255,23 @@ using System.Runtime.InteropServices;
 [StructLayout(LayoutKind.Sequential, Size = 1, Pack = 512  )] class P512   {}
 [StructLayout(LayoutKind.Sequential, Size = 1, Pack = Int32.MaxValue  )] class PMax   {}
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,48): error CS0599: Invalid value for named attribute argument 'Pack'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = -1")
-                        .WithArguments("Pack"),
-                    // (6,48): error CS0599: Invalid value for named attribute argument 'Pack'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = 3")
-                        .WithArguments("Pack"),
-                    // (7,48): error CS0599: Invalid value for named attribute argument 'Pack'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = 5")
-                        .WithArguments("Pack"),
-                    // (8,48): error CS0599: Invalid value for named attribute argument 'Pack'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = 6")
-                        .WithArguments("Pack"),
-                    // (9,48): error CS0599: Invalid value for named attribute argument 'Pack'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = 256")
-                        .WithArguments("Pack"),
-                    // (10,48): error CS0599: Invalid value for named attribute argument 'Pack'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = 512")
-                        .WithArguments("Pack"),
-                    // (11,48): error CS0599: Invalid value for named attribute argument 'Pack'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = Int32.MaxValue")
-                        .WithArguments("Pack")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (5,48): error CS0599: Invalid value for named attribute argument 'Pack'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = -1").WithArguments("Pack"),
+                // (6,48): error CS0599: Invalid value for named attribute argument 'Pack'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = 3").WithArguments("Pack"),
+                // (7,48): error CS0599: Invalid value for named attribute argument 'Pack'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = 5").WithArguments("Pack"),
+                // (8,48): error CS0599: Invalid value for named attribute argument 'Pack'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = 6").WithArguments("Pack"),
+                // (9,48): error CS0599: Invalid value for named attribute argument 'Pack'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = 256").WithArguments("Pack"),
+                // (10,48): error CS0599: Invalid value for named attribute argument 'Pack'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = 512").WithArguments("Pack"),
+                // (11,48): error CS0599: Invalid value for named attribute argument 'Pack'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Pack = Int32.MaxValue")
+                    .WithArguments("Pack")
+            );
         }
 
         [Fact]
@@ -290,12 +283,10 @@ using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Sequential, Size = -1)] class S {}
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,38): error CS0599: Invalid value for named attribute argument 'Size'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Size = -1")
-                        .WithArguments("Size")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,38): error CS0599: Invalid value for named attribute argument 'Size'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "Size = -1").WithArguments("Size")
+            );
         }
 
         [Fact]
@@ -321,27 +312,23 @@ public class C4 { }
 [StructLayout(LayoutKind.Sequential, CharSet = (CharSet)Int32.MaxValue)]
 public class C5 { }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,15): error CS0591: Invalid value for argument to 'StructLayout' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(LayoutKind)(-1)")
-                        .WithArguments("StructLayout"),
-                    // (8,15): error CS0591: Invalid value for argument to 'StructLayout' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(LayoutKind)4")
-                        .WithArguments("StructLayout"),
-                    // (11,38): error CS0599: Invalid value for named attribute argument 'CharSet'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "CharSet = (CharSet)(-1)")
-                        .WithArguments("CharSet"),
-                    // (14,38): error CS0599: Invalid value for named attribute argument 'CharSet'
-                    Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "CharSet = (CharSet)5")
-                        .WithArguments("CharSet"),
-                    // (17,38): error CS0599: Invalid value for named attribute argument 'CharSet'
-                    Diagnostic(
-                            ErrorCode.ERR_InvalidNamedArgument,
-                            "CharSet = (CharSet)Int32.MaxValue"
-                        )
-                        .WithArguments("CharSet")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (5,15): error CS0591: Invalid value for argument to 'StructLayout' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(LayoutKind)(-1)")
+                    .WithArguments("StructLayout"),
+                // (8,15): error CS0591: Invalid value for argument to 'StructLayout' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(LayoutKind)4")
+                    .WithArguments("StructLayout"),
+                // (11,38): error CS0599: Invalid value for named attribute argument 'CharSet'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "CharSet = (CharSet)(-1)")
+                    .WithArguments("CharSet"),
+                // (14,38): error CS0599: Invalid value for named attribute argument 'CharSet'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "CharSet = (CharSet)5")
+                    .WithArguments("CharSet"),
+                // (17,38): error CS0599: Invalid value for named attribute argument 'CharSet'
+                Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "CharSet = (CharSet)Int32.MaxValue")
+                    .WithArguments("CharSet")
+            );
         }
 
         /// <summary>
@@ -549,37 +536,36 @@ enum En
     A = 1
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,6): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
-                    Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset"),
-                    // (14,6): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
-                    Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset"),
-                    // (17,18): error CS0591: Invalid value for argument to 'FieldOffset' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
-                        .WithArguments("FieldOffset"),
-                    // (17,6): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
-                    Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset"),
-                    // (24,18): error CS0591: Invalid value for argument to 'FieldOffset' attribute
-                    Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
-                        .WithArguments("FieldOffset"),
-                    // (27,6): error CS0637: The FieldOffset attribute is not allowed on static or const fields
-                    Diagnostic(ErrorCode.ERR_StructOffsetOnBadField, "FieldOffset")
-                        .WithArguments("FieldOffset"),
-                    // (30,9): error CS0625: 'E.c1': instance field types marked with StructLayout(LayoutKind.Explicit) must have a FieldOffset attribute
-                    Diagnostic(ErrorCode.ERR_MissingStructOffset, "c1").WithArguments("E.c1"),
-                    // (30,13): error CS0625: 'E.c2': instance field types marked with StructLayout(LayoutKind.Explicit) must have a FieldOffset attribute
-                    Diagnostic(ErrorCode.ERR_MissingStructOffset, "c2").WithArguments("E.c2"),
-                    // (39,6): error CS0637: The FieldOffset attribute is not allowed on static or const fields
-                    Diagnostic(ErrorCode.ERR_StructOffsetOnBadField, "FieldOffset")
-                        .WithArguments("FieldOffset"),
-                    // (42,6): error CS0637: The FieldOffset attribute is not allowed on static or const fields
-                    Diagnostic(ErrorCode.ERR_StructOffsetOnBadField, "FieldOffset")
-                        .WithArguments("FieldOffset"),
-                    // (48,6): error CS0637: The FieldOffset attribute is not allowed on static or const fields
-                    Diagnostic(ErrorCode.ERR_StructOffsetOnBadField, "FieldOffset")
-                        .WithArguments("FieldOffset")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,6): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
+                Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset"),
+                // (14,6): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
+                Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset"),
+                // (17,18): error CS0591: Invalid value for argument to 'FieldOffset' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
+                    .WithArguments("FieldOffset"),
+                // (17,6): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
+                Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset"),
+                // (24,18): error CS0591: Invalid value for argument to 'FieldOffset' attribute
+                Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "-1")
+                    .WithArguments("FieldOffset"),
+                // (27,6): error CS0637: The FieldOffset attribute is not allowed on static or const fields
+                Diagnostic(ErrorCode.ERR_StructOffsetOnBadField, "FieldOffset")
+                    .WithArguments("FieldOffset"),
+                // (30,9): error CS0625: 'E.c1': instance field types marked with StructLayout(LayoutKind.Explicit) must have a FieldOffset attribute
+                Diagnostic(ErrorCode.ERR_MissingStructOffset, "c1").WithArguments("E.c1"),
+                // (30,13): error CS0625: 'E.c2': instance field types marked with StructLayout(LayoutKind.Explicit) must have a FieldOffset attribute
+                Diagnostic(ErrorCode.ERR_MissingStructOffset, "c2").WithArguments("E.c2"),
+                // (39,6): error CS0637: The FieldOffset attribute is not allowed on static or const fields
+                Diagnostic(ErrorCode.ERR_StructOffsetOnBadField, "FieldOffset")
+                    .WithArguments("FieldOffset"),
+                // (42,6): error CS0637: The FieldOffset attribute is not allowed on static or const fields
+                Diagnostic(ErrorCode.ERR_StructOffsetOnBadField, "FieldOffset")
+                    .WithArguments("FieldOffset"),
+                // (48,6): error CS0637: The FieldOffset attribute is not allowed on static or const fields
+                Diagnostic(ErrorCode.ERR_StructOffsetOnBadField, "FieldOffset")
+                    .WithArguments("FieldOffset")
+            );
         }
 
         [
@@ -636,11 +622,10 @@ partial struct S
     public int x;
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,15): warning CS0282: There is no defined ordering between fields in multiple declarations of partial struct 'C'. To specify an ordering, all instance fields must be in the same declaration.
-                    Diagnostic(ErrorCode.WRN_SequentialOnPartialClass, "C").WithArguments("C")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (5,15): warning CS0282: There is no defined ordering between fields in multiple declarations of partial struct 'C'. To specify an ordering, all instance fields must be in the same declaration.
+                Diagnostic(ErrorCode.WRN_SequentialOnPartialClass, "C").WithArguments("C")
+            );
         }
 
         [Fact, WorkItem(631467, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/631467")]
@@ -759,9 +744,8 @@ partial struct C
                 assemblyValidator: (assembly) =>
                 {
                     var reader = assembly.GetMetadataReader();
-                    var type = reader.TypeDefinitions.Select(
-                            handle => reader.GetTypeDefinition(handle)
-                        )
+                    var type = reader.TypeDefinitions
+                        .Select(handle => reader.GetTypeDefinition(handle))
                         .Where(typeDef => reader.GetString(typeDef.Name) == "S")
                         .Single();
 

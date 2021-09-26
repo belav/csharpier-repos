@@ -41,10 +41,10 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.OrganizeImports
                 GenerationOptions.PlaceSystemNamespaceFirst
             );
             return await _organizeService.OrganizeNamespacesAsync(
-                        document,
-                        placeSystemNamespaceFirst,
-                        cancellationToken
-                    )
+                    document,
+                    placeSystemNamespaceFirst,
+                    cancellationToken
+                )
                     .ConfigureAwait(false) ?? document;
         }
 

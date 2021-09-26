@@ -123,11 +123,12 @@ namespace System.Net.Http.Tests
             object result = null;
             Assert.True(
                 parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format(
-                    "TryParse returned false. Input: '{0}', AllowMultipleValues/Any: {1}",
-                    input,
-                    supportsMultipleValues
-                )
+                string
+                    .Format(
+                        "TryParse returned false. Input: '{0}', AllowMultipleValues/Any: {1}",
+                        input,
+                        supportsMultipleValues
+                    )
             );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(result, expectedResult);
@@ -153,11 +154,12 @@ namespace System.Net.Http.Tests
             int newIndex = startIndex;
             Assert.False(
                 parser.TryParseValue(input, null, ref newIndex, out result),
-                string.Format(
-                    "TryParse returned true. Input: '{0}', AllowMultipleValues/Any: {1}",
-                    input,
-                    supportsMultipleValues
-                )
+                string
+                    .Format(
+                        "TryParse returned true. Input: '{0}', AllowMultipleValues/Any: {1}",
+                        input,
+                        supportsMultipleValues
+                    )
             );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);

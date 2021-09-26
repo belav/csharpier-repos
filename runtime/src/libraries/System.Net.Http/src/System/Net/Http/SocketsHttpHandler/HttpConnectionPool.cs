@@ -675,13 +675,12 @@ namespace System.Net.Http
                 ValueStopwatch stopwatch = ValueStopwatch.StartNew();
 
                 HttpConnection? connection = await waiter.WaitWithCancellationAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
-                HttpTelemetry.Log.Http11RequestLeftQueue(
-                    stopwatch.GetElapsedTime().TotalMilliseconds
-                );
+                HttpTelemetry.Log
+                    .Http11RequestLeftQueue(stopwatch.GetElapsedTime().TotalMilliseconds);
                 return connection;
             }
         }
@@ -693,9 +692,9 @@ namespace System.Net.Http
         )
         {
             HttpConnection? connection = await GetOrReserveHttp11ConnectionAsync(
-                    async,
-                    cancellationToken
-                )
+                async,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (connection != null)
             {
@@ -779,10 +778,10 @@ namespace System.Net.Http
                     }
 
                     (socket, stream, transportContext) = await ConnectAsync(
-                            request,
-                            async,
-                            cancellationToken
-                        )
+                        request,
+                        async,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     Debug.Assert(stream != null);
@@ -792,10 +791,10 @@ namespace System.Net.Http
                     if (_kind == HttpConnectionKind.Http)
                     {
                         http2Connection = await ConstructHttp2ConnectionAsync(
-                                stream,
-                                request,
-                                cancellationToken
-                            )
+                            stream,
+                            request,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         if (NetEventSource.Log.IsEnabled())
@@ -821,10 +820,10 @@ namespace System.Net.Http
                         }
 
                         http2Connection = await ConstructHttp2ConnectionAsync(
-                                stream,
-                                request,
-                                cancellationToken
-                            )
+                            stream,
+                            request,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         if (NetEventSource.Log.IsEnabled())
@@ -893,13 +892,13 @@ namespace System.Net.Http
                 {
                     return (
                         await ConstructHttp11ConnectionAsync(
-                                async,
-                                socket,
-                                stream!,
-                                transportContext,
-                                request,
-                                cancellationToken
-                            )
+                            async,
+                            socket,
+                            stream!,
+                            transportContext,
+                            request,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false),
                         true
                     );
@@ -1061,12 +1060,11 @@ namespace System.Net.Http
                 try
                 {
                     quicConnection = await ConnectHelper.ConnectQuicAsync(
-                            Settings._quicImplementationProvider
-                                ?? QuicImplementationProviders.Default,
-                            new DnsEndPoint(authority.IdnHost, authority.Port),
-                            _sslOptionsHttp3,
-                            cancellationToken
-                        )
+                        Settings._quicImplementationProvider ?? QuicImplementationProviders.Default,
+                        new DnsEndPoint(authority.IdnHost, authority.Port),
+                        _sslOptionsHttp3,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 catch
@@ -1119,10 +1117,10 @@ namespace System.Net.Http
                 // Loop on connection failures and retry if possible.
 
                 (HttpConnectionBase connection, bool isNewConnection) = await GetConnectionAsync(
-                        request,
-                        async,
-                        cancellationToken
-                    )
+                    request,
+                    async,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 HttpResponseMessage response;
@@ -1150,7 +1148,8 @@ namespace System.Net.Http
                                           async,
                                           cancellationToken
                                       )
-                            ).ConfigureAwait(false);
+                            )
+                                .ConfigureAwait(false);
                         }
 
                         finally
@@ -1160,7 +1159,8 @@ namespace System.Net.Http
                     }
                     else
                     {
-                        response = await connection!.SendAsync(request, async, cancellationToken)
+                        response = await connection!
+                            .SendAsync(request, async, cancellationToken)
                             .ConfigureAwait(false);
                     }
                 }
@@ -1221,10 +1221,11 @@ namespace System.Net.Http
                 // Check for the Alt-Svc header, to upgrade to HTTP/3.
                 if (
                     _altSvcEnabled
-                    && response.Headers.TryGetValues(
-                        KnownHeaders.AltSvc.Descriptor,
-                        out IEnumerable<string>? altSvcHeaderValues
-                    )
+                    && response.Headers
+                        .TryGetValues(
+                            KnownHeaders.AltSvc.Descriptor,
+                            out IEnumerable<string>? altSvcHeaderValues
+                        )
                 )
                 {
                     HandleAltSvc(altSvcHeaderValues, response.Headers.Age);
@@ -1271,12 +1272,13 @@ namespace System.Net.Http
                 int parseIdx = 0;
 
                 if (
-                    AltSvcHeaderParser.Parser.TryParseValue(
-                        altSvcHeaderValue,
-                        null,
-                        ref parseIdx,
-                        out object? parsedValue
-                    )
+                    AltSvcHeaderParser.Parser
+                        .TryParseValue(
+                            altSvcHeaderValue,
+                            null,
+                            ref parseIdx,
+                            out object? parsedValue
+                        )
                 )
                 {
                     var value = (AltSvcHeaderValue?)parsedValue;
@@ -1464,33 +1466,31 @@ namespace System.Net.Http
             Debug.Assert(_altSvcBlocklistTimerCancellation != null);
             if (added)
             {
-                _ = Task.Delay(AltSvcBlocklistTimeoutInMilliseconds)
-                    .ContinueWith(
-                        t =>
+                _ = Task.Delay(AltSvcBlocklistTimeoutInMilliseconds).ContinueWith(
+                    t =>
+                    {
+                        lock (altSvcBlocklist)
                         {
-                            lock (altSvcBlocklist)
-                            {
-                                altSvcBlocklist.Remove(badAuthority);
-                            }
-                        },
-                        _altSvcBlocklistTimerCancellation.Token,
-                        TaskContinuationOptions.ExecuteSynchronously,
-                        TaskScheduler.Default
-                    );
+                            altSvcBlocklist.Remove(badAuthority);
+                        }
+                    },
+                    _altSvcBlocklistTimerCancellation.Token,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
             }
 
             if (disabled)
             {
-                _ = Task.Delay(AltSvcBlocklistTimeoutInMilliseconds)
-                    .ContinueWith(
-                        t =>
-                        {
-                            _altSvcEnabled = true;
-                        },
-                        _altSvcBlocklistTimerCancellation.Token,
-                        TaskContinuationOptions.ExecuteSynchronously,
-                        TaskScheduler.Default
-                    );
+                _ = Task.Delay(AltSvcBlocklistTimeoutInMilliseconds).ContinueWith(
+                    t =>
+                    {
+                        _altSvcEnabled = true;
+                    },
+                    _altSvcBlocklistTimerCancellation.Token,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
             }
         }
 
@@ -1521,13 +1521,13 @@ namespace System.Net.Http
                 if (doRequestAuth && Settings._credentials != null)
                 {
                     return await AuthenticationHelper.SendWithNtConnectionAuthAsync(
-                            request,
-                            async,
-                            Settings._credentials,
-                            connection,
-                            this,
-                            cancellationToken
-                        )
+                        request,
+                        async,
+                        Settings._credentials,
+                        connection,
+                        this,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -1641,33 +1641,33 @@ namespace System.Net.Http
                     case HttpConnectionKind.ProxyConnect:
                         Debug.Assert(_originAuthority != null);
                         (socket, stream) = await ConnectToTcpHostAsync(
-                                _originAuthority.IdnHost,
-                                _originAuthority.Port,
-                                request,
-                                async,
-                                cancellationToken
-                            )
+                            _originAuthority.IdnHost,
+                            _originAuthority.Port,
+                            request,
+                            async,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         break;
 
                     case HttpConnectionKind.Proxy:
                         (socket, stream) = await ConnectToTcpHostAsync(
-                                _proxyUri!.IdnHost,
-                                _proxyUri.Port,
-                                request,
-                                async,
-                                cancellationToken
-                            )
+                            _proxyUri!.IdnHost,
+                            _proxyUri.Port,
+                            request,
+                            async,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         break;
 
                     case HttpConnectionKind.ProxyTunnel:
                     case HttpConnectionKind.SslProxyTunnel:
                         stream = await EstablishProxyTunnelAsync(
-                                async,
-                                request.HasHeaders ? request.Headers : null,
-                                cancellationToken
-                            )
+                            async,
+                            request.HasHeaders ? request.Headers : null,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         break;
                 }
@@ -1684,12 +1684,12 @@ namespace System.Net.Http
                 if (IsSecure)
                 {
                     SslStream sslStream = await ConnectHelper.EstablishSslConnectionAsync(
-                            GetSslOptionsForRequest(request),
-                            request,
-                            async,
-                            stream,
-                            cancellationToken
-                        )
+                        GetSslOptionsForRequest(request),
+                        request,
+                        async,
+                        stream,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     transportContext = sslStream.TransportContext;
                     stream = sslStream;
@@ -1798,13 +1798,13 @@ namespace System.Net.Http
                 await ConnectAsync(request, async, cancellationToken).ConfigureAwait(false);
 
             return await ConstructHttp11ConnectionAsync(
-                    async,
-                    socket,
-                    stream!,
-                    transportContext,
-                    request,
-                    cancellationToken
-                )
+                async,
+                socket,
+                stream!,
+                transportContext,
+                request,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -1890,12 +1890,12 @@ namespace System.Net.Http
         )
         {
             Stream newStream = await ApplyPlaintextFilterAsync(
-                    async,
-                    stream,
-                    HttpVersion.Version11,
-                    request,
-                    cancellationToken
-                )
+                async,
+                stream,
+                HttpVersion.Version11,
+                request,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (newStream != stream)
             {
@@ -1912,12 +1912,12 @@ namespace System.Net.Http
         )
         {
             stream = await ApplyPlaintextFilterAsync(
-                    async: true,
-                    stream,
-                    HttpVersion.Version20,
-                    request,
-                    cancellationToken
-                )
+                async: true,
+                stream,
+                HttpVersion.Version20,
+                request,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             Http2Connection http2Connection = new Http2Connection(this, stream);
@@ -1951,18 +1951,16 @@ namespace System.Net.Http
                 )
             )
             {
-                tunnelRequest.Headers.TryAddWithoutValidation(
-                    HttpKnownHeaderNames.UserAgent,
-                    values
-                );
+                tunnelRequest.Headers
+                    .TryAddWithoutValidation(HttpKnownHeaderNames.UserAgent, values);
             }
 
             HttpResponseMessage tunnelResponse = await _poolManager.SendProxyConnectAsync(
-                    tunnelRequest,
-                    _proxyUri!,
-                    async,
-                    cancellationToken
-                )
+                tunnelRequest,
+                _proxyUri!,
+                async,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (tunnelResponse.StatusCode != HttpStatusCode.OK)
@@ -2361,11 +2359,8 @@ namespace System.Net.Http
                 int freeIndex = 0;
                 while (
                     freeIndex < list.Count
-                    && list[freeIndex].IsUsable(
-                        nowTicks,
-                        pooledConnectionLifetime,
-                        pooledConnectionIdleTimeout
-                    )
+                    && list[freeIndex]
+                        .IsUsable(nowTicks, pooledConnectionLifetime, pooledConnectionIdleTimeout)
                 )
                 {
                     freeIndex++;
@@ -2386,11 +2381,12 @@ namespace System.Net.Http
                         // that shouldn't be kept are disposed of.
                         while (
                             current < list.Count
-                            && !list[current].IsUsable(
-                                nowTicks,
-                                pooledConnectionLifetime,
-                                pooledConnectionIdleTimeout
-                            )
+                            && !list[current]
+                                .IsUsable(
+                                    nowTicks,
+                                    pooledConnectionLifetime,
+                                    pooledConnectionIdleTimeout
+                                )
                         )
                         {
                             toDispose.Add(list[current]._connection);
@@ -2503,13 +2499,14 @@ namespace System.Net.Http
             );
 
         private void Trace(string? message, [CallerMemberName] string? memberName = null) =>
-            NetEventSource.Log.HandlerMessage(
-                GetHashCode(), // pool ID
-                0, // connection ID
-                0, // request ID
-                memberName, // method name
-                message
-            ); // message
+            NetEventSource.Log
+                .HandlerMessage(
+                    GetHashCode(), // pool ID
+                    0, // connection ID
+                    0, // request ID
+                    memberName, // method name
+                    message
+                ); // message
 
         /// <summary>A cached idle connection and metadata about it.</summary>
         [StructLayout(LayoutKind.Auto)]

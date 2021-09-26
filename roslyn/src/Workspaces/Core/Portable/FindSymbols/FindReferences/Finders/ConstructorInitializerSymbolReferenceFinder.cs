@@ -74,32 +74,32 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             var typeName = methodSymbol.ContainingType.Name;
 
             var tokens = await document.GetConstructorInitializerTokensAsync(
-                    semanticModel,
-                    cancellationToken
-                )
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (semanticModel.Language == LanguageNames.VisualBasic)
             {
                 tokens = tokens.Concat(
-                        await GetIdentifierOrGlobalNamespaceTokensWithTextAsync(
-                                document,
-                                semanticModel,
-                                "New",
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false)
+                    await GetIdentifierOrGlobalNamespaceTokensWithTextAsync(
+                        document,
+                        semanticModel,
+                        "New",
+                        cancellationToken
                     )
+                        .ConfigureAwait(false)
+                )
                     .Distinct();
             }
 
             return await FindReferencesInTokensAsync(
-                    methodSymbol,
-                    document,
-                    semanticModel,
-                    tokens,
-                    TokensMatch,
-                    cancellationToken
-                )
+                methodSymbol,
+                document,
+                semanticModel,
+                tokens,
+                TokensMatch,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // local functions

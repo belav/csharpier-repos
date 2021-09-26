@@ -17,10 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         private static readonly ImmutableDictionary<string, string> s_properties =
-            ImmutableDictionary<string, string>.Empty.Add(
-                UseIsNullConstants.Kind,
-                UseIsNullConstants.CastAndEqualityKey
-            );
+            ImmutableDictionary<string, string>.Empty
+                .Add(UseIsNullConstants.Kind, UseIsNullConstants.CastAndEqualityKey);
 
         public CSharpUseIsNullCheckForCastAndEqualityOperatorDiagnosticAnalyzer()
             : base(
@@ -57,12 +55,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
                 return;
             }
 
-            var option = context.Options.GetOption(
-                CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod,
-                semanticModel.Language,
-                syntaxTree,
-                cancellationToken
-            );
+            var option = context.Options
+                .GetOption(
+                    CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod,
+                    semanticModel.Language,
+                    syntaxTree,
+                    cancellationToken
+                );
             if (!option.Value)
             {
                 return;

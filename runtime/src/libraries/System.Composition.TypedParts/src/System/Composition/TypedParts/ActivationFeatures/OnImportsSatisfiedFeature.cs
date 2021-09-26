@@ -64,9 +64,9 @@ namespace System.Composition.TypedParts.ActivationFeatures
 
                 var ois = Expression.Parameter(typeof(object), "ois");
                 var call = Expression.Lambda<Action<object>>(
-                        Expression.Call(Expression.Convert(ois, partType.AsType()), m),
-                        ois
-                    )
+                    Expression.Call(Expression.Convert(ois, partType.AsType()), m),
+                    ois
+                )
                     .Compile();
 
                 var prev = result;

@@ -364,8 +364,8 @@ namespace Roslyn.Test.Utilities
                     );
             public static PortableExecutableReference SystemRuntimeInteropServicesWindowsRuntime { get; } =
                 AssemblyMetadata.CreateFromImage(
-                        ResourcesNet451.SystemRuntimeInteropServicesWindowsRuntime
-                    )
+                    ResourcesNet451.SystemRuntimeInteropServicesWindowsRuntime
+                )
                     .GetReference(
                         display: "System.Runtime.InteropServices.WindowsRuntime.dll (net451)",
                         filePath: "System.Runtime.InteropServices.WindowsRuntime.dll"
@@ -823,16 +823,16 @@ namespace Roslyn.Test.Utilities
         {
             public static PortableExecutableReference PortableLib { get; } =
                 AssemblyMetadata.CreateFromImage(
-                        ResourcesSystemThreadingTasksExtensions.PortableLib
-                    )
+                    ResourcesSystemThreadingTasksExtensions.PortableLib
+                )
                     .GetReference(
                         display: "System.Threading.Tasks.Extensions.dll (systemthreadingtasksextensions)",
                         filePath: "PortableLib.dll"
                     );
             public static PortableExecutableReference NetStandard20Lib { get; } =
                 AssemblyMetadata.CreateFromImage(
-                        ResourcesSystemThreadingTasksExtensions.NetStandard20Lib
-                    )
+                    ResourcesSystemThreadingTasksExtensions.NetStandard20Lib
+                )
                     .GetReference(
                         display: "System.Threading.Tasks.Extensions.dll (systemthreadingtasksextensions)",
                         filePath: "NetStandard20Lib.dll"

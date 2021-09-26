@@ -264,9 +264,10 @@ LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]"
             bool async
         )
         {
-            await base.Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(
-                async
-            );
+            await base
+                .Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
@@ -303,9 +304,8 @@ ORDER BY [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].
             bool async
         )
         {
-            await base.Project_multiple_owned_navigations_with_expansion_on_owned_collections(
-                async
-            );
+            await base
+                .Project_multiple_owned_navigations_with_expansion_on_owned_collections(async);
 
             AssertSql(
                 @"SELECT (
@@ -325,9 +325,8 @@ ORDER BY [o].[Id]"
             bool async
         )
         {
-            await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(
-                async
-            );
+            await base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(async);
 
             AssertSql(
                 @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
@@ -347,9 +346,10 @@ ORDER BY [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].
             bool async
         )
         {
-            await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
-                async
-            );
+            await base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [p].[Id]
@@ -362,9 +362,10 @@ LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]"
             bool async
         )
         {
-            await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(
-                async
-            );
+            await base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [o].[Id], [p].[Id], [m].[Id], [m].[Diameter], [m].[PlanetId]
@@ -379,9 +380,8 @@ ORDER BY [o].[Id], [p].[Id], [m].[Id]"
             bool async
         )
         {
-            await base.SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(
-                async
-            );
+            await base
+                .SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(async);
 
             AssertSql(
                 @"SELECT [m].[Id], [m].[Diameter], [m].[PlanetId]
@@ -395,9 +395,10 @@ INNER JOIN [Moon] AS [m] ON [p].[Id] = [m].[PlanetId]"
             bool async
         )
         {
-            await base.SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
-                async
-            );
+            await base
+                .SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name], [e].[StarId]
@@ -412,9 +413,10 @@ INNER JOIN [Element] AS [e] ON [s].[Id] = [e].[StarId]"
             bool async
         )
         {
-            await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
-                async
-            );
+            await base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [s].[Id], [s].[Name], [o].[Id], [p].[Id], [e].[Id], [e].[Name], [e].[StarId]
@@ -430,9 +432,10 @@ ORDER BY [o].[Id], [p].[Id], [s].[Id], [e].[Id]"
             bool async
         )
         {
-            await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
-                async
-            );
+            await base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [s].[Name]
@@ -446,9 +449,10 @@ LEFT JOIN [Star] AS [s] ON [p].[StarId] = [s].[Id]"
             bool async
         )
         {
-            await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
-                async
-            );
+            await base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [s].[Id], [s].[Name], [o].[Id], [p].[Id], [e].[Id], [e].[Name], [e].[StarId]
@@ -1115,9 +1119,10 @@ ORDER BY [o].[Id], [p].[Id], [o0].[ClientId], [o0].[Id]"
             bool async
         )
         {
-            await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_split(
-                async
-            );
+            await base
+                .Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_split(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [o].[Id], [p].[Id]
@@ -1246,9 +1251,10 @@ ORDER BY [o].[PersonAddress_PlaceType], [o].[Id], [t].[ClientId], [t].[Id], [t].
             bool async
         )
         {
-            await base.Using_from_sql_on_owner_generates_join_with_table_for_owned_shared_dependents(
-                async
-            );
+            await base
+                .Using_from_sql_on_owner_generates_join_with_table_for_owned_shared_dependents(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[Id], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[Id1], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t0].[Id], [t0].[BranchAddress_BranchName], [t0].[BranchAddress_PlaceType], [t0].[Id1], [t0].[BranchAddress_Country_Name], [t0].[BranchAddress_Country_PlanetId], [t2].[Id], [t2].[LeafBAddress_LeafBType], [t2].[LeafBAddress_PlaceType], [t2].[Id1], [t2].[LeafBAddress_Country_Name], [t2].[LeafBAddress_Country_PlanetId], [t4].[Id], [t4].[LeafAAddress_LeafType], [t4].[LeafAAddress_PlaceType], [t4].[Id1], [t4].[LeafAAddress_Country_Name], [t4].[LeafAAddress_Country_PlanetId], [t].[Id0], [t0].[Id0], [t2].[Id0], [t4].[Id0], [t6].[ClientId], [t6].[Id], [t6].[OrderDate], [t6].[OrderClientId], [t6].[OrderId], [t6].[Id0], [t6].[Detail]
@@ -1304,9 +1310,10 @@ ORDER BY [o].[Id], [t].[Id], [t].[Id0], [t0].[Id], [t0].[Id0], [t2].[Id], [t2].[
             bool async
         )
         {
-            await base.Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(
-                async
-            );
+            await base
+                .Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [b].[Throned_Value], [f].[Id], [b].[Id], [p].[Id], [p].[StarId]

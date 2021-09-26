@@ -20,10 +20,11 @@ namespace System.Net.Http
             if (handlerMethod == null)
             {
                 Type? androidEnv = Type.GetType("Android.Runtime.AndroidEnvironment, Mono.Android");
-                handlerMethod = androidEnv!.GetMethod(
-                    "GetHttpMessageHandler",
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-                );
+                handlerMethod = androidEnv!
+                    .GetMethod(
+                        "GetHttpMessageHandler",
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                    );
             }
 
             return (HttpMessageHandler)handlerMethod!.Invoke(null, null)!;

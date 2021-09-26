@@ -2463,12 +2463,13 @@ public class Program
 ";
 
             ImmutableArray<Diagnostic> diagnostics = CreateEmptyCompilation(
-                    source + InstrumentationHelperSource
-                )
+                source + InstrumentationHelperSource
+            )
                 .GetEmitDiagnostics(
-                    EmitOptions.Default.WithInstrumentationKinds(
-                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                    )
+                    EmitOptions.Default
+                        .WithInstrumentationKinds(
+                            ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                        )
                 );
             foreach (Diagnostic diagnostic in diagnostics)
             {
@@ -3003,9 +3004,10 @@ class D
 
             var verifier = CompileAndVerify(
                 c,
-                emitOptions: EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                emitOptions: EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
             c.VerifyEmitDiagnostics();
 
@@ -3049,9 +3051,10 @@ class D
 
             var verifier = CompileAndVerify(
                 c,
-                emitOptions: EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                emitOptions: EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
             c.VerifyEmitDiagnostics();
 
@@ -3689,16 +3692,18 @@ static void Test()
             Verification verify = Verification.Passes
         )
         {
-            return base.CompileAndVerify(
-                source,
-                expectedOutput: expectedOutput,
-                options: (options ?? TestOptions.ReleaseExe).WithDeterministic(true),
-                parseOptions: parseOptions,
-                emitOptions: EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                ),
-                verify: verify
-            );
+            return base
+                .CompileAndVerify(
+                    source,
+                    expectedOutput: expectedOutput,
+                    options: (options ?? TestOptions.ReleaseExe).WithDeterministic(true),
+                    parseOptions: parseOptions,
+                    emitOptions: EmitOptions.Default
+                        .WithInstrumentationKinds(
+                            ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                        ),
+                    verify: verify
+                );
         }
 
         private CompilationVerifier CompileAndVerify(
@@ -3719,13 +3724,15 @@ static void Test()
                 options: (options ?? TestOptions.ReleaseExe).WithDeterministic(true)
             );
             trees.Free();
-            return base.CompileAndVerify(
-                compilation,
-                expectedOutput: expectedOutput,
-                emitOptions: EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
-            );
+            return base
+                .CompileAndVerify(
+                    compilation,
+                    expectedOutput: expectedOutput,
+                    emitOptions: EmitOptions.Default
+                        .WithInstrumentationKinds(
+                            ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                        )
+                );
         }
     }
 }

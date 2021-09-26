@@ -173,10 +173,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
         ) =>
             parameters.Count == 0
                 ? ""
-                : string.Join(
-                      ", ",
-                      parameters.Select(e => FormatParameter(e, shouldLogParameterValues))
-                  );
+                : string
+                  .Join(", ", parameters.Select(e => FormatParameter(e, shouldLogParameterValues)));
 
         private static string FormatParameter(SqlParameter parameter, bool shouldLogParameterValue)
         {

@@ -953,13 +953,12 @@ namespace System.Drawing.Tests
             )
             {
                 RemoteExecutor.Invoke(
-                        () =>
-                        {
-                            AppContext.SetSwitch(DontSupportPngFramesInIcons, false);
-                            VerifyPng();
-                        }
-                    )
-                    .Dispose();
+                    () =>
+                    {
+                        AppContext.SetSwitch(DontSupportPngFramesInIcons, false);
+                        VerifyPng();
+                    }
+                ).Dispose();
             }
             else
             {
@@ -991,13 +990,12 @@ namespace System.Drawing.Tests
             )
             {
                 RemoteExecutor.Invoke(
-                        () =>
-                        {
-                            AppContext.SetSwitch(DontSupportPngFramesInIcons, true);
-                            VerifyPngNotSupported();
-                        }
-                    )
-                    .Dispose();
+                    () =>
+                    {
+                        AppContext.SetSwitch(DontSupportPngFramesInIcons, true);
+                        VerifyPngNotSupported();
+                    }
+                ).Dispose();
             }
             else
             {
@@ -1236,10 +1234,8 @@ namespace System.Drawing.Tests
                             string fieldName = PlatformDetection.IsNetFramework
                                 ? "bitDepth"
                                 : "s_bitDepth";
-                            FieldInfo fi = typeof(Icon).GetField(
-                                fieldName,
-                                BindingFlags.Static | BindingFlags.NonPublic
-                            );
+                            FieldInfo fi = typeof(Icon)
+                                .GetField(fieldName, BindingFlags.Static | BindingFlags.NonPublic);
                             expectedBitDepth = (int)fi.GetValue(null);
                         }
 

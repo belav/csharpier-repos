@@ -37,14 +37,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 var text = entries[i].text;
                 if (
                     segment.Length == text.Length
-                    && string.Compare(
-                        path,
-                        segment.Start,
-                        text,
-                        0,
-                        segment.Length,
-                        StringComparison.OrdinalIgnoreCase
-                    ) == 0
+                    && string
+                        .Compare(
+                            path,
+                            segment.Start,
+                            text,
+                            0,
+                            segment.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
                 )
                 {
                     return entries[i].destination;

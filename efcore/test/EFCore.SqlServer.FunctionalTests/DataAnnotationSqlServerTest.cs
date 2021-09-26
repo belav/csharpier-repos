@@ -45,8 +45,8 @@ namespace Microsoft.EntityFrameworkCore
                 CoreStrings.WarningAsErrorTemplate(
                     RelationalEventId.ModelValidationKeyDefaultValueWarning,
                     RelationalResources.LogKeyHasDefaultValue(
-                            new TestLogger<SqlServerLoggingDefinitions>()
-                        )
+                        new TestLogger<SqlServerLoggingDefinitions>()
+                    )
                         .GenerateMessage(nameof(Login1.UserName), nameof(Login1)),
                     "RelationalEventId.ModelValidationKeyDefaultValueWarning"
                 ),
@@ -134,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var modelBuilder = base.DatabaseGeneratedOption_configures_the_property_correctly();
 
-            var identity = modelBuilder.Model.FindEntityType(typeof(GeneratedEntity))
+            var identity = modelBuilder.Model
+                .FindEntityType(typeof(GeneratedEntity))
                 .FindProperty(nameof(GeneratedEntity.Identity));
             Assert.Equal(
                 SqlServerValueGenerationStrategy.IdentityColumn,
@@ -152,7 +153,8 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "Unique_No",
-                modelBuilder.Model.FindEntityType(typeof(One))
+                modelBuilder.Model
+                    .FindEntityType(typeof(One))
                     .FindProperty(nameof(One.UniqueNo))
                     .GetColumnBaseName()
             );
@@ -160,8 +162,8 @@ namespace Microsoft.EntityFrameworkCore
 
         public override ModelBuilder DatabaseGeneratedOption_Identity_does_not_throw_on_noninteger_properties()
         {
-            var modelBuilder =
-                base.DatabaseGeneratedOption_Identity_does_not_throw_on_noninteger_properties();
+            var modelBuilder = base
+                .DatabaseGeneratedOption_Identity_does_not_throw_on_noninteger_properties();
 
             var entity = modelBuilder.Model.FindEntityType(typeof(GeneratedEntityNonInteger));
 

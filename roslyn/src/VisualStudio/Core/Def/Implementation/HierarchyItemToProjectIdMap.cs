@@ -43,26 +43,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // First filter the projects by matching up properties on the input hierarchy against properties on each
             // project's hierarchy.
             var candidateProjects = _workspace.CurrentSolution.Projects.Where(
-                    p =>
+                p =>
+                {
+                    // We're about to access various properties of the IVsHierarchy associated with the project.
+                    // The properties supported and the interpretation of their values varies from one project system
+                    // to another. This code is designed with C# and VB in mind, so we need to filter out everything
+                    // else.
+                    if (
+                        p.Language != LanguageNames.CSharp
+                        && p.Language != LanguageNames.VisualBasic
+                    )
                     {
-                        // We're about to access various properties of the IVsHierarchy associated with the project.
-                        // The properties supported and the interpretation of their values varies from one project system
-                        // to another. This code is designed with C# and VB in mind, so we need to filter out everything
-                        // else.
-                        if (
-                            p.Language != LanguageNames.CSharp
-                            && p.Language != LanguageNames.VisualBasic
-                        )
-                        {
-                            return false;
-                        }
-
-                        var hierarchy = _workspace.GetHierarchy(p.Id);
-
-                        return hierarchy == nestedHierarchy;
+                        return false;
                     }
-                )
-                .ToArray();
+
+                    var hierarchy = _workspace.GetHierarchy(p.Id);
+
+                    return hierarchy == nestedHierarchy;
+                }
+            ).ToArray();
 
             // If we only have one candidate then no further checks are required.
             if (candidateProjects.Length == 1)
@@ -95,9 +94,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             foreach (var candidateProject in candidateProjects)
             {
                 if (
-                    !candidateProject.DocumentIds.Any(
-                        id => ContainedDocument.TryGetContainedDocument(id) != null
-                    )
+                    !candidateProject.DocumentIds
+                        .Any(id => ContainedDocument.TryGetContainedDocument(id) != null)
                 )
                 {
                     projectId = candidateProject.Id;

@@ -506,7 +506,8 @@ namespace System.Net
                 {
                     IsBackground = true,
                     Name = ".NET Network Timer"
-                }.Start();
+                }
+                    .Start();
             }
         }
 

@@ -44,10 +44,8 @@ namespace Newtonsoft.Json.Utilities
                 if (propertyInfo.PropertyType.IsByRef)
                 {
                     throw new InvalidOperationException(
-                        "Could not create getter for {0}. ByRef return values are not supported.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            propertyInfo
-                        )
+                        "Could not create getter for {0}. ByRef return values are not supported."
+                            .FormatWith(CultureInfo.InvariantCulture, propertyInfo)
                     );
                 }
 
@@ -60,10 +58,8 @@ namespace Newtonsoft.Json.Utilities
             }
 
             throw new Exception(
-                "Could not create getter for {0}.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    memberInfo
-                )
+                "Could not create getter for {0}."
+                    .FormatWith(CultureInfo.InvariantCulture, memberInfo)
             );
         }
 
@@ -80,10 +76,8 @@ namespace Newtonsoft.Json.Utilities
             }
 
             throw new Exception(
-                "Could not create setter for {0}.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    memberInfo
-                )
+                "Could not create setter for {0}."
+                    .FormatWith(CultureInfo.InvariantCulture, memberInfo)
             );
         }
 

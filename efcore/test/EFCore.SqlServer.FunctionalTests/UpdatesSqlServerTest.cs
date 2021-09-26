@@ -106,9 +106,10 @@ SELECT @@ROWCOUNT;"
         public override void Identifiers_are_generated_correctly()
         {
             using var context = CreateContext();
-            var entityType = context.Model.FindEntityType(
-                typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly)
-            );
+            var entityType = context.Model
+                .FindEntityType(
+                    typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly)
+                );
             Assert.Equal(
                 "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorking~",
                 entityType.GetTableName()
@@ -126,9 +127,10 @@ SELECT @@ROWCOUNT;"
                 entityType.GetIndexes().Single().GetDatabaseName()
             );
 
-            var entityType2 = context.Model.FindEntityType(
-                typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails)
-            );
+            var entityType2 = context.Model
+                .FindEntityType(
+                    typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails)
+                );
 
             Assert.Equal(
                 "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkin~1",

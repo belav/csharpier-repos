@@ -45,8 +45,8 @@ namespace Microsoft.JSInterop
             var cancellationToken = new CancellationToken();
             var jsRuntime = new Mock<IJSRuntime>(MockBehavior.Strict);
             jsRuntime.Setup(
-                    s => s.InvokeAsync<string>(method, cancellationToken, It.IsAny<object[]>())
-                )
+                s => s.InvokeAsync<string>(method, cancellationToken, It.IsAny<object[]>())
+            )
                 .Callback<string, CancellationToken, object[]>(
                     (method, cts, args) =>
                     {
@@ -57,12 +57,8 @@ namespace Microsoft.JSInterop
                 .Verifiable();
 
             // Act
-            var result = await jsRuntime.Object.InvokeAsync<string>(
-                method,
-                cancellationToken,
-                "a",
-                "b"
-            );
+            var result = await jsRuntime.Object
+                .InvokeAsync<string>(method, cancellationToken, "a", "b");
 
             // Assert
             Assert.Equal("Hello", result);
@@ -121,11 +117,8 @@ namespace Microsoft.JSInterop
                 .Returns(new ValueTask<string>(expected));
 
             // Act
-            var result = await jsRuntime.Object.InvokeAsync<string>(
-                method,
-                TimeSpan.FromMinutes(5),
-                args
-            );
+            var result = await jsRuntime.Object
+                .InvokeAsync<string>(method, TimeSpan.FromMinutes(5), args);
 
             Assert.Equal(expected, result);
             jsRuntime.Verify();
@@ -150,11 +143,8 @@ namespace Microsoft.JSInterop
                 .Returns(new ValueTask<string>(expected));
 
             // Act
-            var result = await jsRuntime.Object.InvokeAsync<string>(
-                method,
-                Timeout.InfiniteTimeSpan,
-                args
-            );
+            var result = await jsRuntime.Object
+                .InvokeAsync<string>(method, Timeout.InfiniteTimeSpan, args);
 
             Assert.Equal(expected, result);
             jsRuntime.Verify();

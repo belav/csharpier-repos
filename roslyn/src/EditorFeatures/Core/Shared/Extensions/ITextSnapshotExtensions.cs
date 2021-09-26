@@ -67,11 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             using (Logger.LogBlock(FunctionId.Formatting_ApplyResultToBuffer, cancellationToken))
             {
-                document.Project.Solution.Workspace.ApplyTextChanges(
-                    document.Id,
-                    changes,
-                    cancellationToken
-                );
+                document.Project.Solution.Workspace
+                    .ApplyTextChanges(document.Id, changes, cancellationToken);
             }
         }
 
@@ -104,8 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 )
             )
             {
-                var service =
-                    document.Project.Solution.Workspace.Services.GetService<IWorkspaceStatusService>();
+                var service = document.Project.Solution.Workspace.Services
+                    .GetService<IWorkspaceStatusService>();
                 if (service != null)
                 {
                     // TODO: decide for prototype, we don't do anything complex and just ask workspace whether it is fully loaded
@@ -132,12 +129,13 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             // make sure this is only called from UI thread
             threadingContext.ThrowIfNotOnUIThread();
 
-            return threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
-                        operationContext
-                    )
-            );
+            return threadingContext.JoinableTaskFactory
+                .Run(
+                    () =>
+                        snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
+                            operationContext
+                        )
+                );
         }
     }
 }

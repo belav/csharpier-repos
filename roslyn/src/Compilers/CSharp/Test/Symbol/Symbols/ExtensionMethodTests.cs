@@ -57,9 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             CompileAndVerify(
                 source,
                 validator: validator,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -1086,10 +1085,10 @@ static class S3
     internal static object F3(this N.C x, object y) { return null; }
 }";
             CreateCompilationWithMscorlib40(
-                    source,
-                    references: new[] { Net40.SystemCore },
-                    parseOptions: TestOptions.WithoutImprovedOverloadCandidates
-                )
+                source,
+                references: new[] { Net40.SystemCore },
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            )
                 .VerifyDiagnostics(
                     // (10,16): error CS0407: 'void S2.F1(object, object)' has the wrong return type
                     //             M1(c.F1); // wrong return type
@@ -1567,7 +1566,9 @@ class B
                     .WithLocation(15, 20),
                 // (15,27): error CS0122: 'A.G()' is inaccessible due to its protection level
                 //         M(a.E(), A.F(), a.G());
-                Diagnostic(ErrorCode.ERR_BadAccess, "G").WithArguments("A.G()").WithLocation(15, 27)
+                Diagnostic(ErrorCode.ERR_BadAccess, "G")
+                    .WithArguments("A.G()")
+                    .WithLocation(15, 27)
             );
         }
 
@@ -2708,9 +2709,8 @@ B"
                 source: source,
                 sourceSymbolValidator: validator(true),
                 symbolValidator: validator(false),
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -2764,9 +2764,8 @@ static class S
 }";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             Action<ModuleSymbol> validator = module =>
             {
@@ -2878,7 +2877,8 @@ internal static class C
                 comp,
                 symbolValidator: module =>
                 {
-                    var method = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                    var method = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMember<PEMethodSymbol>("M1");
                     Assert.True(method.IsExtensionMethod);
                     Assert.Equal(
@@ -2886,7 +2886,8 @@ internal static class C
                         method.Parameters.Single().Type.SpecialType
                     );
 
-                    var attr = ((PEModuleSymbol)module).GetCustomAttributesForToken(method.Handle)
+                    var attr = ((PEModuleSymbol)module)
+                        .GetCustomAttributesForToken(method.Handle)
                         .Single();
                     Assert.Equal(
                         "System.Runtime.CompilerServices.ExtensionAttribute",
@@ -3091,24 +3092,23 @@ class Program
         M(x);
     }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (5,9): error CS1501: No overload for method 'M' takes 2 arguments
-                    //         x.M(x, y);
-                    Diagnostic(ErrorCode.ERR_BadArgCount, "M")
-                        .WithArguments("M", "2")
-                        .WithLocation(5, 11),
-                    // (6,9): error CS7036: There is no argument given that corresponds to the required formal parameter 'y' of 'S.M(object, object)'
-                    //         x.M();
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
-                        .WithArguments("y", "S.M(object, object)")
-                        .WithLocation(6, 11),
-                    // (7,9): error CS7036: There is no argument given that corresponds to the required formal parameter 'y' of 'S.M(object, object)'
-                    //         M(x);
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
-                        .WithArguments("y", "S.M(object, object)")
-                        .WithLocation(7, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (5,9): error CS1501: No overload for method 'M' takes 2 arguments
+                //         x.M(x, y);
+                Diagnostic(ErrorCode.ERR_BadArgCount, "M")
+                    .WithArguments("M", "2")
+                    .WithLocation(5, 11),
+                // (6,9): error CS7036: There is no argument given that corresponds to the required formal parameter 'y' of 'S.M(object, object)'
+                //         x.M();
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                    .WithArguments("y", "S.M(object, object)")
+                    .WithLocation(6, 11),
+                // (7,9): error CS7036: There is no argument given that corresponds to the required formal parameter 'y' of 'S.M(object, object)'
+                //         M(x);
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                    .WithArguments("y", "S.M(object, object)")
+                    .WithLocation(7, 9)
+            );
         }
 
         [WorkItem(543711, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543711")]
@@ -3125,7 +3125,8 @@ class Program
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics();
 
-            var extensionMethod = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var extensionMethod = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
@@ -3178,13 +3179,13 @@ public struct MyStruct<T>
             );
             compilation2.VerifyDiagnostics();
 
-            var extensionMethod = compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var extensionMethod = compilation2.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
-            var myStruct = (NamedTypeSymbol)compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "MyStruct"
-            );
+            var myStruct = (NamedTypeSymbol)compilation2.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("MyStruct");
             var int32Type = compilation2.GetSpecialType(SpecialType.System_Int32);
             var msi = myStruct.Construct(int32Type);
 
@@ -3211,13 +3212,13 @@ public struct MyStruct<T>
                     .WithLocation(5, 9)
             );
 
-            extensionMethod = compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            extensionMethod = compilation2.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
-            myStruct = (NamedTypeSymbol)compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "MyStruct"
-            );
+            myStruct = (NamedTypeSymbol)compilation2.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("MyStruct");
             int32Type = compilation2.GetSpecialType(SpecialType.System_Int32);
             msi = myStruct.Construct(int32Type);
 
@@ -3264,13 +3265,12 @@ static class Extensions
 }";
             // Dev11 also reports:
             // (17,17): error CS0122: 'Extensions.Test<T>(T)' is inaccessible due to its protection level
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (6,16): error CS1503: Argument 1: cannot convert from 'double' to 'float'
-                    Diagnostic(ErrorCode.ERR_BadArgType, "1d")
-                        .WithArguments("1", "double", "float")
-                        .WithLocation(6, 16)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (6,16): error CS1503: Argument 1: cannot convert from 'double' to 'float'
+                Diagnostic(ErrorCode.ERR_BadArgType, "1d")
+                    .WithArguments("1", "double", "float")
+                    .WithLocation(6, 16)
+            );
         }
 
         [WorkItem(545322, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545322")] // Bug relates to defunct LookupOptions.IgnoreAccessibility.
@@ -3401,21 +3401,20 @@ static class C
             // TODO: Dev10 reports CS1113 for all of these.  Roslyn reports various other diagnostics
             // because we detect the condition for CS1113 and then indicate that no conversion exists,
             // resulting in various cascaded errors.
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (9,13): error CS1113: Extension method 'C.Goo(int)' defined on value type 'int' cannot be used to create delegates
-                    Diagnostic(ErrorCode.ERR_ValueTypeExtDelegate, "x.Goo")
-                        .WithArguments("C.Goo(int)", "int")
-                        .WithLocation(9, 13),
-                    // (10,13): error CS1113: Extension method 'C.Goo(int)' defined on value type 'int' cannot be used to create delegates
-                    Diagnostic(ErrorCode.ERR_ValueTypeExtDelegate, "new VoidDelegate(x.Goo)")
-                        .WithArguments("C.Goo(int)", "int")
-                        .WithLocation(10, 13),
-                    // (11,14): error CS1113: Extension method 'C.Goo(int)' defined on value type 'int' cannot be used to create delegates
-                    Diagnostic(ErrorCode.ERR_ValueTypeExtDelegate, "x.Goo")
-                        .WithArguments("'C.Goo(int)", "int")
-                        .WithLocation(11, 14)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (9,13): error CS1113: Extension method 'C.Goo(int)' defined on value type 'int' cannot be used to create delegates
+                Diagnostic(ErrorCode.ERR_ValueTypeExtDelegate, "x.Goo")
+                    .WithArguments("C.Goo(int)", "int")
+                    .WithLocation(9, 13),
+                // (10,13): error CS1113: Extension method 'C.Goo(int)' defined on value type 'int' cannot be used to create delegates
+                Diagnostic(ErrorCode.ERR_ValueTypeExtDelegate, "new VoidDelegate(x.Goo)")
+                    .WithArguments("C.Goo(int)", "int")
+                    .WithLocation(10, 13),
+                // (11,14): error CS1113: Extension method 'C.Goo(int)' defined on value type 'int' cannot be used to create delegates
+                Diagnostic(ErrorCode.ERR_ValueTypeExtDelegate, "x.Goo")
+                    .WithArguments("'C.Goo(int)", "int")
+                    .WithLocation(11, 14)
+            );
         }
 
         [Fact]
@@ -3437,13 +3436,12 @@ static class DevDivBugs142219
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (8,26): error CS1113: Extension method 'DevDivBugs142219.Goo<T>(T)' defined on value type 'T' cannot be used to create delegates
-                    //         VoidDelegate f = x.Goo; // CS1113
-                    Diagnostic(ErrorCode.ERR_ValueTypeExtDelegate, "x.Goo")
-                        .WithArguments("DevDivBugs142219.Goo<T>(T)", "T")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (8,26): error CS1113: Extension method 'DevDivBugs142219.Goo<T>(T)' defined on value type 'T' cannot be used to create delegates
+                //         VoidDelegate f = x.Goo; // CS1113
+                Diagnostic(ErrorCode.ERR_ValueTypeExtDelegate, "x.Goo")
+                    .WithArguments("DevDivBugs142219.Goo<T>(T)", "T")
+            );
         }
 
         [ClrOnlyFact]
@@ -4170,7 +4168,8 @@ namespace N
                     .WithLocation(9, 15),
                 // (4,5): hidden CS8019: Unnecessary using directive.
                 //     using X = N.S;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = N.S;").WithLocation(4, 5)
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = N.S;")
+                    .WithLocation(4, 5)
             );
         }
 
@@ -4225,10 +4224,10 @@ namespace ConsoleApplication22
             Assert.Equal("System.Collections.Generic.IEnumerable<T>", type.ToTestDisplayString());
 
             var symbols = model.LookupSymbols(
-                    member.Expression.EndPosition,
-                    type,
-                    includeReducedExtensionMethods: true
-                )
+                member.Expression.EndPosition,
+                type,
+                includeReducedExtensionMethods: true
+            )
                 .Select(s => s.Name)
                 .ToArray();
             Assert.Contains("GetEnumerableDisposable2", symbols);
@@ -4327,11 +4326,11 @@ public class BaseClass<TMember>
             Assert.Equal("BaseClass<System.Int32>", baseClass.ToTestDisplayString());
 
             var setMember = model.LookupSymbols(
-                    instance.Position,
-                    baseClass,
-                    "SetMember",
-                    includeReducedExtensionMethods: true
-                )
+                instance.Position,
+                baseClass,
+                "SetMember",
+                includeReducedExtensionMethods: true
+            )
                 .Single();
             Assert.Equal(
                 "BaseClass<System.Int32> BaseClass<System.Int32>.SetMember<BaseClass<System.Int32>, TMember>(TMember NewValue)",
@@ -4410,10 +4409,10 @@ public class BaseClass<TMember>
             );
             Assert.Empty(
                 model.LookupSymbols(
-                        instance.Position,
-                        baseClass,
-                        includeReducedExtensionMethods: true
-                    )
+                    instance.Position,
+                    baseClass,
+                    includeReducedExtensionMethods: true
+                )
                     .Where(s => s.Name == "SetMembers")
             );
         }
@@ -4464,11 +4463,11 @@ public class BaseClass<TMember> : I1<TMember>
             Assert.Equal("BaseClass<System.Int32>", baseClass.ToTestDisplayString());
 
             var setMember = model.LookupSymbols(
-                    instance.Position,
-                    baseClass,
-                    "SetMember",
-                    includeReducedExtensionMethods: true
-                )
+                instance.Position,
+                baseClass,
+                "SetMember",
+                includeReducedExtensionMethods: true
+            )
                 .Single();
             Assert.Equal(
                 "BaseClass<System.Int32> BaseClass<System.Int32>.SetMember<BaseClass<System.Int32>, TMember>(TMember NewValue)",
@@ -4550,10 +4549,10 @@ public class BaseClass<TMember> : I1<TMember>
             );
             Assert.Empty(
                 model.LookupSymbols(
-                        instance.Position,
-                        baseClass,
-                        includeReducedExtensionMethods: true
-                    )
+                    instance.Position,
+                    baseClass,
+                    includeReducedExtensionMethods: true
+                )
                     .Where(s => s.Name == "SetMembers")
             );
         }

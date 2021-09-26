@@ -237,14 +237,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     Expression.Assign(
                         Expression.Field(
                             DispParamsVariable,
-                            typeof(ComTypes.DISPPARAMS).GetField(
-                                nameof(ComTypes.DISPPARAMS.rgdispidNamedArgs)
-                            )
+                            typeof(ComTypes.DISPPARAMS)
+                                .GetField(nameof(ComTypes.DISPPARAMS.rgdispidNamedArgs))
                         ),
                         Expression.Call(
-                            typeof(UnsafeMethods).GetMethod(
-                                nameof(UnsafeMethods.GetIdsOfNamedParameters)
-                            ),
+                            typeof(UnsafeMethods)
+                                .GetMethod(nameof(UnsafeMethods.GetIdsOfNamedParameters)),
                             DispatchObjectVariable,
                             Expression.Constant(names),
                             DispIdVariable,
@@ -359,9 +357,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
             for (int i = 0, n = variants.Length; i < n; i++)
             {
-                Expression updateFromReturn = variants[i].UpdateFromReturn(
-                    parametersForUpdates[i + 1]
-                );
+                Expression updateFromReturn = variants[i]
+                    .UpdateFromReturn(parametersForUpdates[i + 1]);
                 if (updateFromReturn != null)
                 {
                     tryStatements.Add(updateFromReturn);
@@ -461,9 +458,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                             typeof(ComTypes.DISPPARAMS).GetField(nameof(ComTypes.DISPPARAMS.rgvarg))
                         ),
                         Expression.Call(
-                            typeof(UnsafeMethods).GetMethod(
-                                nameof(UnsafeMethods.ConvertVariantByrefToPtr)
-                            ),
+                            typeof(UnsafeMethods)
+                                .GetMethod(nameof(UnsafeMethods.ConvertVariantByrefToPtr)),
                             VariantArray.GetStructField(ParamVariantsVariable, 0)
                         )
                     )
@@ -493,9 +489,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     Expression.Assign(
                         Expression.Field(
                             DispParamsVariable,
-                            typeof(ComTypes.DISPPARAMS).GetField(
-                                nameof(ComTypes.DISPPARAMS.cNamedArgs)
-                            )
+                            typeof(ComTypes.DISPPARAMS)
+                                .GetField(nameof(ComTypes.DISPPARAMS.cNamedArgs))
                         ),
                         Expression.Constant(1)
                     )
@@ -512,14 +507,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     Expression.Assign(
                         Expression.Field(
                             DispParamsVariable,
-                            typeof(ComTypes.DISPPARAMS).GetField(
-                                nameof(ComTypes.DISPPARAMS.rgdispidNamedArgs)
-                            )
+                            typeof(ComTypes.DISPPARAMS)
+                                .GetField(nameof(ComTypes.DISPPARAMS.rgdispidNamedArgs))
                         ),
                         Expression.Call(
-                            typeof(UnsafeMethods).GetMethod(
-                                nameof(UnsafeMethods.ConvertInt32ByrefToPtr)
-                            ),
+                            typeof(UnsafeMethods)
+                                .GetMethod(nameof(UnsafeMethods.ConvertInt32ByrefToPtr)),
                             PropertyPutDispIdVariable
                         )
                     )
@@ -534,9 +527,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     Expression.Assign(
                         Expression.Field(
                             DispParamsVariable,
-                            typeof(ComTypes.DISPPARAMS).GetField(
-                                nameof(ComTypes.DISPPARAMS.cNamedArgs)
-                            )
+                            typeof(ComTypes.DISPPARAMS)
+                                .GetField(nameof(ComTypes.DISPPARAMS.cNamedArgs))
                         ),
                         Expression.Constant(_keywordArgNames.Length)
                     )

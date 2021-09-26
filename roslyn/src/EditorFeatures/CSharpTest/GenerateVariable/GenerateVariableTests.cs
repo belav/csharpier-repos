@@ -322,10 +322,11 @@ class Class : Base
                     string.Format(FeaturesResources.Generate_property_1_0, "goo", "Class"),
                     string.Format(FeaturesResources.Generate_local_0, "goo"),
                     string.Format(FeaturesResources.Generate_parameter_0, "goo"),
-                    string.Format(
-                        FeaturesResources.Generate_parameter_0_and_overrides_implementations,
-                        "goo"
-                    )
+                    string
+                        .Format(
+                            FeaturesResources.Generate_parameter_0_and_overrides_implementations,
+                            "goo"
+                        )
                 }
             );
         }

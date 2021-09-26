@@ -114,12 +114,13 @@ namespace Microsoft.CodeAnalysis.Editor.Host
                 // There was only one location to navigate to.  Just directly go to that location. If we're directly
                 // going to a location we need to activate the preview so that focus follows to the new cursor position.
 
-                return nonExternalItems[0].TryNavigateTo(
-                    workspace,
-                    showInPreviewTab: true,
-                    activateTab: true,
-                    cancellationToken
-                );
+                return nonExternalItems[0]
+                    .TryNavigateTo(
+                        workspace,
+                        showInPreviewTab: true,
+                        activateTab: true,
+                        cancellationToken
+                    );
             }
 
             if (presenter != null)

@@ -654,19 +654,21 @@ namespace System.Management
             if (
                 (
                     0
-                    == string.Compare(
-                        eventWatcher.Scope.Path.Server,
-                        ".",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    == string
+                        .Compare(
+                            eventWatcher.Scope.Path.Server,
+                            ".",
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 || (
                     0
-                    == string.Compare(
-                        eventWatcher.Scope.Path.Server,
-                        System.Environment.MachineName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    == string
+                        .Compare(
+                            eventWatcher.Scope.Path.Server,
+                            System.Environment.MachineName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
             )
             {

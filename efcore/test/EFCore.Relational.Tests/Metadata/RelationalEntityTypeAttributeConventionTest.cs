@@ -122,20 +122,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             new RelationalTableAttributeConvention(
                 CreateDependencies(),
                 CreateRelationalDependencies()
-            ).ProcessEntityTypeAdded(entityTypeBuilder, context);
+            )
+                .ProcessEntityTypeAdded(entityTypeBuilder, context);
 
             new RelationalTableCommentAttributeConvention(
                 CreateDependencies(),
                 CreateRelationalDependencies()
-            ).ProcessEntityTypeAdded(entityTypeBuilder, context);
+            )
+                .ProcessEntityTypeAdded(entityTypeBuilder, context);
         }
 
         private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
         {
             var conventionSet = new ConventionSet();
-            conventionSet.EntityTypeAddedConventions.Add(
-                new PropertyDiscoveryConvention(CreateDependencies())
-            );
+            conventionSet.EntityTypeAddedConventions
+                .Add(new PropertyDiscoveryConvention(CreateDependencies()));
 
             var modelBuilder = new InternalModelBuilder(new Model(conventionSet));
 
@@ -143,11 +144,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            RelationalTestHelpers.Instance.CreateContextServices()
+            RelationalTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private RelationalConventionSetBuilderDependencies CreateRelationalDependencies() =>
-            RelationalTestHelpers.Instance.CreateContextServices()
+            RelationalTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<RelationalConventionSetBuilderDependencies>();
 
         protected virtual ModelBuilder CreateConventionalModelBuilder() =>

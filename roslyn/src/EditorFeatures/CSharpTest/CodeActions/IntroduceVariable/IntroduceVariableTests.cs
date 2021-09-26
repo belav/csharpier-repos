@@ -2015,10 +2015,11 @@ class Program
                 new[]
                 {
                     string.Format(FeaturesResources.Introduce_local_constant_for_0, "5"),
-                    string.Format(
-                        FeaturesResources.Introduce_local_constant_for_all_occurrences_of_0,
-                        "5"
-                    )
+                    string
+                        .Format(
+                            FeaturesResources.Introduce_local_constant_for_all_occurrences_of_0,
+                            "5"
+                        )
                 }
             );
         }

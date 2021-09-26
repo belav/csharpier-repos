@@ -20,9 +20,10 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_with_new_when_no_EF_services_use_Database()
         {
             var options =
-                new DbContextOptionsBuilder<ConstructorTestContext1A>().UseInternalServiceProvider(
-                    new ServiceCollection().BuildServiceProvider()
-                ).Options;
+                new DbContextOptionsBuilder<ConstructorTestContext1A>()
+                    .UseInternalServiceProvider(
+                        new ServiceCollection().BuildServiceProvider()
+                    ).Options;
 
             Assert.Equal(
                 CoreStrings.NoEfServices,
@@ -35,9 +36,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_with_add_when_no_EF_services_use_Database()
         {
-            var appServiceProvider = new ServiceCollection().AddDbContext<ConstructorTestContext1A>(
-                    (p, b) => b.UseInternalServiceProvider(p)
-                )
+            var appServiceProvider = new ServiceCollection()
+                .AddDbContext<ConstructorTestContext1A>((p, b) => b.UseInternalServiceProvider(p))
                 .BuildServiceProvider();
 
             using var serviceScope = appServiceProvider.GetRequiredService<IServiceScopeFactory>()
@@ -58,9 +58,8 @@ namespace Microsoft.EntityFrameworkCore
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
             var options =
-                new DbContextOptionsBuilder<ConstructorTestContext1A>().UseInternalServiceProvider(
-                    serviceProvider
-                ).Options;
+                new DbContextOptionsBuilder<ConstructorTestContext1A>()
+                    .UseInternalServiceProvider(serviceProvider).Options;
 
             using var context = new ConstructorTestContext1A(options);
             Assert.Equal(
@@ -78,8 +77,8 @@ namespace Microsoft.EntityFrameworkCore
             new EntityFrameworkServicesBuilder(serviceCollection).TryAddCoreServices();
 
             var appServiceProvider = serviceCollection.AddDbContext<ConstructorTestContext1A>(
-                    (p, b) => b.UseInternalServiceProvider(p)
-                )
+                (p, b) => b.UseInternalServiceProvider(p)
+            )
                 .BuildServiceProvider();
 
             using var serviceScope = appServiceProvider.GetRequiredService<IServiceScopeFactory>()
@@ -109,14 +108,14 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_with_add_when_no_EF_services_because_parameterless_constructor_use_Database()
         {
-            var appServiceProvider =
-                new ServiceCollection().AddDbContext<ConstructorTestContextNoConfiguration>()
-                    .BuildServiceProvider();
+            var appServiceProvider = new ServiceCollection()
+                .AddDbContext<ConstructorTestContextNoConfiguration>()
+                .BuildServiceProvider();
 
             using var serviceScope = appServiceProvider.GetRequiredService<IServiceScopeFactory>()
                 .CreateScope();
-            var context =
-                serviceScope.ServiceProvider.GetService<ConstructorTestContextNoConfiguration>();
+            var context = serviceScope.ServiceProvider
+                .GetService<ConstructorTestContextNoConfiguration>();
 
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,
@@ -135,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder.UseInternalServiceProvider(
-                    new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                    new ServiceCollection()
+                        .AddEntityFrameworkInMemoryDatabase()
                         .BuildServiceProvider()
                 );
         }
@@ -889,7 +889,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var connection = new FakeRelationalConnection(
                 CreateOptions(
-                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                    new FakeRelationalOptionsExtension()
+                        .WithConnectionString("Database=FrodoLives")
                         .WithCommandTimeout(99)
                 )
             );
@@ -968,9 +969,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var connection = new FakeRelationalConnection(
                 CreateOptions(
-                    new FakeRelationalOptionsExtension().WithConnection(
-                            new FakeDbConnection("Database=FrodoLives")
-                        )
+                    new FakeRelationalOptionsExtension()
+                        .WithConnection(new FakeDbConnection("Database=FrodoLives"))
                         .WithConnectionString("Database=SamLives")
                 )
             );
@@ -1022,9 +1022,8 @@ namespace Microsoft.EntityFrameworkCore
 
             foreach (var optionsExtension in optionsExtensions)
             {
-                ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                    optionsExtension
-                );
+                ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                    .AddOrUpdateExtension(optionsExtension);
             }
 
             return optionsBuilder.Options;

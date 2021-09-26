@@ -62,8 +62,8 @@ namespace Company.WebApplication1
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(
-                    options => options.SignIn.RequireConfirmedAccount = true
-                )
+                options => options.SignIn.RequireConfirmedAccount = true
+            )
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
@@ -104,7 +104,8 @@ namespace Company.WebApplication1
             services.AddControllersWithViews(
                 options =>
                 {
-                    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
+                    var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
                         .Build();
                     options.Filters.Add(new AuthorizeFilter(policy));
                 }
@@ -113,7 +114,8 @@ namespace Company.WebApplication1
             services.AddControllersWithViews();
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
-            services.AddRazorPages().AddMicrosoftIdentityUI();
+            services.AddRazorPages()
+                .AddMicrosoftIdentityUI();
 #endif
         }
 

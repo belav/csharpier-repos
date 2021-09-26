@@ -123,18 +123,18 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             {
                 actions.Add(
                     await TryCreateCodeActionAsync(
-                            GetWrapEdits(wrappingColumn: 0, align: false),
-                            FeaturesResources.Wrapping,
-                            FeaturesResources.Wrap_call_chain
-                        )
+                        GetWrapEdits(wrappingColumn: 0, align: false),
+                        FeaturesResources.Wrapping,
+                        FeaturesResources.Wrap_call_chain
+                    )
                         .ConfigureAwait(false)
                 );
                 actions.Add(
                     await TryCreateCodeActionAsync(
-                            GetWrapEdits(wrappingColumn: 0, align: true),
-                            FeaturesResources.Wrapping,
-                            FeaturesResources.Wrap_and_align_call_chain
-                        )
+                        GetWrapEdits(wrappingColumn: 0, align: true),
+                        FeaturesResources.Wrapping,
+                        FeaturesResources.Wrap_and_align_call_chain
+                    )
                         .ConfigureAwait(false)
                 );
             }
@@ -142,10 +142,10 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             private async Task AddUnwrapCodeActionAsync(ArrayBuilder<WrapItemsAction> actions) =>
                 actions.Add(
                     await TryCreateCodeActionAsync(
-                            GetUnwrapEdits(),
-                            FeaturesResources.Wrapping,
-                            FeaturesResources.Unwrap_call_chain
-                        )
+                        GetUnwrapEdits(),
+                        FeaturesResources.Wrapping,
+                        FeaturesResources.Unwrap_call_chain
+                    )
                         .ConfigureAwait(false)
                 );
 
@@ -153,18 +153,18 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             {
                 actions.Add(
                     await TryCreateCodeActionAsync(
-                            GetWrapEdits(WrappingColumn, align: false),
-                            FeaturesResources.Wrapping,
-                            FeaturesResources.Wrap_long_call_chain
-                        )
+                        GetWrapEdits(WrappingColumn, align: false),
+                        FeaturesResources.Wrapping,
+                        FeaturesResources.Wrap_long_call_chain
+                    )
                         .ConfigureAwait(false)
                 );
                 actions.Add(
                     await TryCreateCodeActionAsync(
-                            GetWrapEdits(WrappingColumn, align: true),
-                            FeaturesResources.Wrapping,
-                            FeaturesResources.Wrap_and_align_long_call_chain
-                        )
+                        GetWrapEdits(WrappingColumn, align: true),
+                        FeaturesResources.Wrapping,
+                        FeaturesResources.Wrap_and_align_long_call_chain
+                    )
                         .ConfigureAwait(false)
                 );
             }

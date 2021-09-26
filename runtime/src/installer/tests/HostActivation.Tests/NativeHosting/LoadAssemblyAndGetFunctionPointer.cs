@@ -268,18 +268,21 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 DotNetRoot = dotNet.BinPath;
                 HostFxrPath = dotNet.GreatestVersionHostFxrFilePath;
 
-                ApplicationFixture = new TestProjectFixture(
-                    "PortableApp",
-                    RepoDirectories
-                ).EnsureRestored().PublishProject();
+                ApplicationFixture = new TestProjectFixture("PortableApp", RepoDirectories)
+                    .EnsureRestored()
+                    .PublishProject();
                 ComponentWithNoDependenciesFixture = new TestProjectFixture(
                     "ComponentWithNoDependencies",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
                 SelfContainedApplicationFixture = new TestProjectFixture(
                     "StandaloneApp",
                     RepoDirectories
-                ).EnsureRestored().PublishProject(selfContained: true);
+                )
+                    .EnsureRestored()
+                    .PublishProject(selfContained: true);
                 ComponentTypeName =
                     $"Component.Component, {ComponentWithNoDependenciesFixture.TestProject.AssemblyName}";
             }
@@ -322,14 +325,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             var constraint = assertion.ExecuteComponentEntryPoint(methodName, componentCallCount);
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                return constraint.And.HaveStdOutContaining(
-                    $"{methodName} delegate threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
-                );
+                return constraint.And
+                    .HaveStdOutContaining(
+                        $"{methodName} delegate threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
+                    );
             }
             else
             {
                 // Exception is unhandled by native host on non-Windows systems
-                return constraint.And.ExitWith(Constants.ErrorCode.SIGABRT)
+                return constraint.And
+                    .ExitWith(Constants.ErrorCode.SIGABRT)
                     .And.HaveStdErrContaining(
                         $"Unhandled exception. System.InvalidOperationException: {methodName}"
                     );

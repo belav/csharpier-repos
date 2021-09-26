@@ -90,12 +90,13 @@ namespace System.Threading.Tasks.Tests
 
                 Assert.False(
                     _actionType != ActionType.Empty && (r < minLimit || r > maxLimit),
-                    string.Format(
-                        "Differ in results. Expected result to lie between {0} and {1} but got {2}",
-                        minLimit,
-                        maxLimit,
-                        r
-                    )
+                    string
+                        .Format(
+                            "Differ in results. Expected result to lie between {0} and {1} but got {2}",
+                            minLimit,
+                            maxLimit,
+                            r
+                        )
                 );
             }
         }

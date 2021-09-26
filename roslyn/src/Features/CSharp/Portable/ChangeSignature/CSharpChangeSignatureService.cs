@@ -335,7 +335,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return method.WithParameterList(
-                    method.ParameterList.WithParameters(updatedParameters)
+                    method.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -353,7 +354,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return localFunction.WithParameterList(
-                    localFunction.ParameterList.WithParameters(updatedParameters)
+                    localFunction.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -371,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return constructor.WithParameterList(
-                    constructor.ParameterList.WithParameters(updatedParameters)
+                    constructor.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -389,7 +392,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return indexer.WithParameterList(
-                    indexer.ParameterList.WithParameters(updatedParameters)
+                    indexer.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -407,7 +411,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return delegateDeclaration.WithParameterList(
-                    delegateDeclaration.ParameterList.WithParameters(updatedParameters)
+                    delegateDeclaration.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -431,7 +436,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return anonymousMethod.WithParameterList(
-                    anonymousMethod.ParameterList.WithParameters(updatedParameters)
+                    anonymousMethod.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -536,21 +542,21 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
 
                 return invocation.WithArgumentList(
                     await UpdateArgumentListAsync(
-                            declarationSymbol,
-                            signaturePermutation,
-                            invocation.ArgumentList,
-                            symbolInfo.Symbol
-                                is IMethodSymbol { MethodKind: MethodKind.ReducedExtension },
-                            IsParamsArrayExpanded(
-                                semanticModel,
-                                invocation,
-                                symbolInfo,
-                                cancellationToken
-                            ),
-                            document,
-                            originalNode.SpanStart,
+                        declarationSymbol,
+                        signaturePermutation,
+                        invocation.ArgumentList,
+                        symbolInfo.Symbol
+                            is IMethodSymbol { MethodKind: MethodKind.ReducedExtension },
+                        IsParamsArrayExpanded(
+                            semanticModel,
+                            invocation,
+                            symbolInfo,
                             cancellationToken
-                        )
+                        ),
+                        document,
+                        originalNode.SpanStart,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 );
             }
@@ -570,20 +576,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
 
                 return objCreation.WithArgumentList(
                     await UpdateArgumentListAsync(
-                            declarationSymbol,
-                            signaturePermutation,
-                            objCreation.ArgumentList,
-                            isReducedExtensionMethod: false,
-                            IsParamsArrayExpanded(
-                                semanticModel,
-                                objCreation,
-                                symbolInfo,
-                                cancellationToken
-                            ),
-                            document,
-                            originalNode.SpanStart,
+                        declarationSymbol,
+                        signaturePermutation,
+                        objCreation.ArgumentList,
+                        isReducedExtensionMethod: false,
+                        IsParamsArrayExpanded(
+                            semanticModel,
+                            objCreation,
+                            symbolInfo,
                             cancellationToken
-                        )
+                        ),
+                        document,
+                        originalNode.SpanStart,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 );
             }
@@ -602,20 +608,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
 
                 return constructorInit.WithArgumentList(
                     await UpdateArgumentListAsync(
-                            declarationSymbol,
-                            signaturePermutation,
-                            constructorInit.ArgumentList,
-                            isReducedExtensionMethod: false,
-                            IsParamsArrayExpanded(
-                                semanticModel,
-                                constructorInit,
-                                symbolInfo,
-                                cancellationToken
-                            ),
-                            document,
-                            originalNode.SpanStart,
+                        declarationSymbol,
+                        signaturePermutation,
+                        constructorInit.ArgumentList,
+                        isReducedExtensionMethod: false,
+                        IsParamsArrayExpanded(
+                            semanticModel,
+                            constructorInit,
+                            symbolInfo,
                             cancellationToken
-                        )
+                        ),
+                        document,
+                        originalNode.SpanStart,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 );
             }
@@ -634,20 +640,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
 
                 return elementAccess.WithArgumentList(
                     await UpdateArgumentListAsync(
-                            declarationSymbol,
-                            signaturePermutation,
-                            elementAccess.ArgumentList,
-                            isReducedExtensionMethod: false,
-                            IsParamsArrayExpanded(
-                                semanticModel,
-                                elementAccess,
-                                symbolInfo,
-                                cancellationToken
-                            ),
-                            document,
-                            originalNode.SpanStart,
+                        declarationSymbol,
+                        signaturePermutation,
+                        elementAccess.ArgumentList,
+                        isReducedExtensionMethod: false,
+                        IsParamsArrayExpanded(
+                            semanticModel,
+                            elementAccess,
+                            symbolInfo,
                             cancellationToken
-                        )
+                        ),
+                        document,
+                        originalNode.SpanStart,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 );
             }
@@ -666,20 +672,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
 
                 return attribute.WithArgumentList(
                     await UpdateAttributeArgumentListAsync(
-                            declarationSymbol,
-                            signaturePermutation,
-                            attribute.ArgumentList,
-                            isReducedExtensionMethod: false,
-                            IsParamsArrayExpanded(
-                                semanticModel,
-                                attribute,
-                                symbolInfo,
-                                cancellationToken
-                            ),
-                            document,
-                            originalNode.SpanStart,
+                        declarationSymbol,
+                        signaturePermutation,
+                        attribute.ArgumentList,
+                        isReducedExtensionMethod: false,
+                        IsParamsArrayExpanded(
+                            semanticModel,
+                            attribute,
+                            symbolInfo,
                             cancellationToken
-                        )
+                        ),
+                        document,
+                        originalNode.SpanStart,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 );
             }
@@ -711,17 +717,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             // Adds new arguments into the updated list
             // e.g. P(c, a) ==> P(x, c, a, y)
             newArguments = await AddNewArgumentsToListAsync(
-                    declarationSymbol,
-                    newArguments,
-                    argumentList.Arguments,
-                    signaturePermutation,
-                    isReducedExtensionMethod,
-                    isParamsArrayExpanded,
-                    generateAttributeArguments: false,
-                    document,
-                    position,
-                    cancellationToken
-                )
+                declarationSymbol,
+                newArguments,
+                argumentList.Arguments,
+                signaturePermutation,
+                isReducedExtensionMethod,
+                isParamsArrayExpanded,
+                generateAttributeArguments: false,
+                document,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return (T)argumentList.WithArguments(newArguments)
@@ -746,17 +752,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             );
 
             newArguments = await AddNewArgumentsToListAsync(
-                    declarationSymbol,
-                    newArguments,
-                    argumentList.Arguments,
-                    signaturePermutation,
-                    isReducedExtensionMethod,
-                    isParamsArrayExpanded,
-                    generateAttributeArguments: true,
-                    document,
-                    position,
-                    cancellationToken
-                )
+                declarationSymbol,
+                newArguments,
+                argumentList.Arguments,
+                signaturePermutation,
+                isReducedExtensionMethod,
+                isParamsArrayExpanded,
+                generateAttributeArguments: true,
+                document,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return argumentList.WithArguments(newArguments)
@@ -872,11 +878,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             Func<AddedParameter, T> createNewParameterMethod
         ) where T : SyntaxNode
         {
-            var (parameters, separators) = base.UpdateDeclarationBase<T>(
-                list,
-                updatedSignature,
-                createNewParameterMethod
-            );
+            var (parameters, separators) = base
+                .UpdateDeclarationBase<T>(list, updatedSignature, createNewParameterMethod);
             return SeparatedList(parameters, separators);
         }
 
@@ -917,16 +920,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
         )
         {
             var newArgumentList = await AddNewArgumentsToListAsync(
-                    declarationSymbol,
-                    newArguments,
-                    signaturePermutation,
-                    isReducedExtensionMethod,
-                    isParamsArrayExpanded,
-                    generateAttributeArguments,
-                    document,
-                    position,
-                    cancellationToken
-                )
+                declarationSymbol,
+                newArguments,
+                signaturePermutation,
+                isReducedExtensionMethod,
+                isParamsArrayExpanded,
+                generateAttributeArguments,
+                document,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return SeparatedList(
@@ -1069,9 +1072,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             var i = 0;
             foreach (var paramNode in paramNodes)
             {
-                var nameAttribute = paramNode.StartTag.Attributes.FirstOrDefault(
-                    a => a.Name.ToString().Equals("name", StringComparison.OrdinalIgnoreCase)
-                );
+                var nameAttribute = paramNode.StartTag.Attributes
+                    .FirstOrDefault(
+                        a => a.Name.ToString().Equals("name", StringComparison.OrdinalIgnoreCase)
+                    );
                 if (nameAttribute == null)
                 {
                     return ImmutableArray<SyntaxNode>.Empty;
@@ -1132,42 +1136,39 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
 
             var nodes = root.DescendantNodes().ToImmutableArray();
             var convertedMethodGroups = nodes.WhereAsArray(
-                    n =>
+                n =>
+                {
+                    if (
+                        !n.IsKind(SyntaxKind.IdentifierName)
+                        || !semanticModel.GetMemberGroup(n, cancellationToken).Any()
+                    )
                     {
-                        if (
-                            !n.IsKind(SyntaxKind.IdentifierName)
-                            || !semanticModel.GetMemberGroup(n, cancellationToken).Any()
-                        )
-                        {
-                            return false;
-                        }
-
-                        ISymbol? convertedType =
-                            semanticModel.GetTypeInfo(n, cancellationToken).ConvertedType;
-
-                        if (convertedType != null)
-                        {
-                            convertedType = convertedType.OriginalDefinition;
-                        }
-
-                        if (convertedType != null)
-                        {
-                            convertedType =
-                                SymbolFinder.FindSourceDefinitionAsync(
-                                        convertedType,
-                                        document.Project.Solution,
-                                        cancellationToken
-                                    )
-                                    .WaitAndGetResult_CanCallOnBackground(cancellationToken)
-                                ?? convertedType;
-                        }
-
-                        return Equals(convertedType, symbol.ContainingType);
+                        return false;
                     }
-                )
-                .Select(n => semanticModel.GetSymbolInfo(n, cancellationToken).Symbol)
-                .WhereNotNull()
-                .ToImmutableArray();
+
+                    ISymbol? convertedType =
+                        semanticModel.GetTypeInfo(n, cancellationToken).ConvertedType;
+
+                    if (convertedType != null)
+                    {
+                        convertedType = convertedType.OriginalDefinition;
+                    }
+
+                    if (convertedType != null)
+                    {
+                        convertedType =
+                            SymbolFinder.FindSourceDefinitionAsync(
+                                convertedType,
+                                document.Project.Solution,
+                                cancellationToken
+                            )
+                                .WaitAndGetResult_CanCallOnBackground(cancellationToken)
+                            ?? convertedType;
+                    }
+
+                    return Equals(convertedType, symbol.ContainingType);
+                }
+            ).Select(n => semanticModel.GetSymbolInfo(n, cancellationToken).Symbol).WhereNotNull().ToImmutableArray();
 
             return convertedMethodGroups;
         }

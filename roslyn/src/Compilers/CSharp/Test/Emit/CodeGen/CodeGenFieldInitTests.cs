@@ -462,10 +462,9 @@ class C
 }
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "C..ctor",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "C..ctor",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -477,7 +476,7 @@ class C
   IL_0011:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -494,10 +493,9 @@ class C
 }
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "C..ctor",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "C..ctor",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -506,7 +504,7 @@ class C
   IL_0006:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -520,10 +518,9 @@ class C<T>
 }
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "C<T>..ctor",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "C<T>..ctor",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -532,7 +529,7 @@ class C<T>
   IL_0006:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -553,10 +550,9 @@ class C
 
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "C..cctor",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "C..cctor",
+                @"
 {
   // Code size       47 (0x2f)
   .maxstack  1
@@ -577,7 +573,7 @@ class C
   IL_002e:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -641,10 +637,9 @@ class C
 
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "C..ctor",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "C..ctor",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -653,7 +648,7 @@ class C
   IL_0006:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -740,13 +735,12 @@ class B
     public const int F1 = F2;
     public static int F2 = 0;
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,27): error CS0133: The expression being assigned to 'B.F1' must be constant
-                    Diagnostic(ErrorCode.ERR_NotConstantExpression, "F2")
-                        .WithArguments("B.F1")
-                        .WithLocation(7, 27)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,27): error CS0133: The expression being assigned to 'B.F1' must be constant
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "F2")
+                    .WithArguments("B.F1")
+                    .WithLocation(7, 27)
+            );
         }
 
         [Fact]
@@ -776,10 +770,10 @@ class B
     private static object M(int i) { return null; }
 }";
             CreateCompilation(
-                    source2,
-                    new[] { new CSharpCompilationReference(compilation1) },
-                    assemblyName: "2110a705-cc34-430b-9450-ca37031aa828"
-                )
+                source2,
+                new[] { new CSharpCompilationReference(compilation1) },
+                assemblyName: "2110a705-cc34-430b-9450-ca37031aa828"
+            )
                 .Emit(new System.IO.MemoryStream())
                 .Diagnostics.Verify(
                     // error CS7038: Failed to emit module '2110a705-cc34-430b-9450-ca37031aa828': Unable to determine specific cause of the failure.

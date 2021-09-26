@@ -71,13 +71,13 @@ namespace System.Web.Http.Controllers
         {
             Mock<IActionFilter> filterMock = new Mock<IActionFilter>();
             filterMock.Setup(
-                    f =>
-                        f.ExecuteActionFilterAsync(
-                            It.IsAny<HttpActionContext>(),
-                            CancellationToken.None,
-                            It.IsAny<Func<Task<HttpResponseMessage>>>()
-                        )
-                )
+                f =>
+                    f.ExecuteActionFilterAsync(
+                        It.IsAny<HttpActionContext>(),
+                        CancellationToken.None,
+                        It.IsAny<Func<Task<HttpResponseMessage>>>()
+                    )
+            )
                 .Returns(implementation)
                 .Verifiable();
             return filterMock;

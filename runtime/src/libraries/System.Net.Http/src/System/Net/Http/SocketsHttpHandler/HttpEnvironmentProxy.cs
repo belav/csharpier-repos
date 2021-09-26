@@ -188,10 +188,11 @@ namespace System.Net.Http
                 }
 
                 if (
-                    !ushort.TryParse(
-                        value.AsSpan(separatorIndex + 1, endIndex - separatorIndex - 1),
-                        out port
-                    )
+                    !ushort
+                        .TryParse(
+                            value.AsSpan(separatorIndex + 1, endIndex - separatorIndex - 1),
+                            out port
+                        )
                 )
                 {
                     return null;
@@ -234,14 +235,15 @@ namespace System.Net.Http
                         // .foo.com will match foo.com it self or *.foo.com
                         if (
                             (s.Length - 1) == input.Host.Length
-                            && string.Compare(
-                                s,
-                                1,
-                                input.Host,
-                                0,
-                                input.Host.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            ) == 0
+                            && string
+                                .Compare(
+                                    s,
+                                    1,
+                                    input.Host,
+                                    0,
+                                    input.Host.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
                         )
                         {
                             return true;

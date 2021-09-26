@@ -491,7 +491,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                         () =>
                         {
                             var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
-                            var nextSpan = Encoding.Latin1.GetBytes(headerValueUtf16Latin1CrossOver)
+                            var nextSpan = Encoding.Latin1
+                                .GetBytes(headerValueUtf16Latin1CrossOver)
                                 .AsSpan();
 
                             Assert.False(
@@ -550,7 +551,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     }
 
                     var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
-                    var latinValueSpan = Encoding.Latin1.GetBytes(headerValueUtf16Latin1CrossOver)
+                    var latinValueSpan = Encoding.Latin1
+                        .GetBytes(headerValueUtf16Latin1CrossOver)
                         .AsSpan();
 
                     Assert.False(
@@ -646,12 +648,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             headers.Append(cookieNameBytes, headerValueBytes);
             headers.OnHeadersComplete();
 
-            var parsedAcceptHeaderValue = ((IHeaderDictionary)headers)[
-                HeaderNames.Accept
-            ].ToString();
-            var parsedCookieHeaderValue = ((IHeaderDictionary)headers)[
-                HeaderNames.Cookie
-            ].ToString();
+            var parsedAcceptHeaderValue = ((IHeaderDictionary)headers)[HeaderNames.Accept]
+                .ToString();
+            var parsedCookieHeaderValue = ((IHeaderDictionary)headers)[HeaderNames.Cookie]
+                .ToString();
 
             Assert.Empty(parsedAcceptHeaderValue);
             Assert.Equal(headerValue, parsedCookieHeaderValue);

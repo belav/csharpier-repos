@@ -81,9 +81,8 @@ public interface I0 : I1<string>
 
             AssertEx.SetEqual(
                 new[] { "I1<System.String>", "I2<System.String, System.Object!>" },
-                imc1.AllInterfacesNoUseSiteDiagnostics.Select(
-                    i => i.ToTestDisplayString(includeNonNullable: true)
-                )
+                imc1.AllInterfacesNoUseSiteDiagnostics
+                    .Select(i => i.ToTestDisplayString(includeNonNullable: true))
             );
 
             var client_source =
@@ -113,9 +112,8 @@ public class C
 
             AssertEx.SetEqual(
                 new[] { "I1<System.String>", "I2<System.String, System.Object!>" },
-                imc2.AllInterfacesNoUseSiteDiagnostics.Select(
-                    i => i.ToTestDisplayString(includeNonNullable: true)
-                )
+                imc2.AllInterfacesNoUseSiteDiagnostics
+                    .Select(i => i.ToTestDisplayString(includeNonNullable: true))
             );
         }
 
@@ -167,9 +165,8 @@ public class C0 : I1<string>
 
             AssertEx.SetEqual(
                 new[] { "I1<System.String>", "I2<System.String, System.Object!>" },
-                lib2_c0.AllInterfacesNoUseSiteDiagnostics.Select(
-                    i => i.ToTestDisplayString(includeNonNullable: true)
-                )
+                lib2_c0.AllInterfacesNoUseSiteDiagnostics
+                    .Select(i => i.ToTestDisplayString(includeNonNullable: true))
             );
 
             CompileAndVerify(
@@ -226,9 +223,8 @@ public class C1 : C0
 
             AssertEx.SetEqual(
                 new[] { "I1<System.String>", "I2<System.String, System.Object!>" },
-                lib3_c0.AllInterfacesNoUseSiteDiagnostics.Select(
-                    i => i.ToTestDisplayString(includeNonNullable: true)
-                )
+                lib3_c0.AllInterfacesNoUseSiteDiagnostics
+                    .Select(i => i.ToTestDisplayString(includeNonNullable: true))
             );
 
             CompileAndVerify(
@@ -248,17 +244,21 @@ public class C1 : C0
             {
                 if (exists)
                 {
-                    _ = reader.TypeDefinitions.Single(
-                        h => reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
-                    );
+                    _ = reader.TypeDefinitions
+                        .Single(
+                            h =>
+                                reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
+                        );
                 }
                 else
                 {
                     Assert.False(
-                        reader.TypeDefinitions.Any(
-                            h =>
-                                reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
-                        )
+                        reader.TypeDefinitions
+                            .Any(
+                                h =>
+                                    reader.StringComparer
+                                        .Equals(reader.GetTypeDefinition(h).Name, name)
+                            )
                     );
                 }
             }
@@ -375,9 +375,8 @@ public interface I0 : I1<string>
                     "I1<System.String>",
                     "I2<System.String, (System.Object a, System.Object b)>"
                 },
-                imc1.AllInterfacesNoUseSiteDiagnostics.Select(
-                    i => i.ToTestDisplayString(includeNonNullable: true)
-                )
+                imc1.AllInterfacesNoUseSiteDiagnostics
+                    .Select(i => i.ToTestDisplayString(includeNonNullable: true))
             );
         }
 
@@ -677,9 +676,8 @@ class A
 {
     object? F = null;
 }";
-            var options = TestOptions.ReleaseDll.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var options = TestOptions.ReleaseDll
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var comp = CreateCompilation(sourceA, assemblyName: "A", options: options);
             CompileAndVerify(
                 comp,
@@ -727,9 +725,8 @@ class A
 {
     object? F = null;
 }";
-            var options = TestOptions.ReleaseDll.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var options = TestOptions.ReleaseDll
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var comp = CreateCompilation(
                 new[] { sourceAttribute, sourceA },
                 assemblyName: "A",
@@ -1874,16 +1871,14 @@ class Program
             var type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "A?",
-                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
             type = comp2.GetMember<NamedTypeSymbol>("D");
             Assert.Equal(
                 "A!",
-                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
         }
 
@@ -1943,9 +1938,8 @@ class Program
             var type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "A<System.Object>",
-                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
         }
 
@@ -2049,16 +2043,14 @@ public class C<T> where T : A<object>
             var type = comp2.GetMember<NamedTypeSymbol>("B");
             Assert.Equal(
                 "A<System.Object?>!",
-                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
             type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "A<System.Object!>!",
-                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
         }
 
@@ -2117,17 +2109,17 @@ public class C<T> where T : A<object>
                 // (5,15): warning CS8634: The type 'object?' cannot be used as type parameter 'T' in the generic type or method 'C<T, U>'. Nullability of type argument 'object?' doesn't match 'class' constraint.
                 //         new C<object?, string?>();
                 Diagnostic(
-                        ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
-                        "object?"
-                    )
+                    ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
+                    "object?"
+                )
                     .WithArguments("C<T, U>", "T", "object?")
                     .WithLocation(5, 15),
                 // (6,15): warning CS8634: The type 'object?' cannot be used as type parameter 'T' in the generic type or method 'C<T, U>'. Nullability of type argument 'object?' doesn't match 'class' constraint.
                 //         new C<object?, string>();
                 Diagnostic(
-                        ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
-                        "object?"
-                    )
+                    ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
+                    "object?"
+                )
                     .WithArguments("C<T, U>", "T", "object?")
                     .WithLocation(6, 15)
             };
@@ -2145,9 +2137,8 @@ public class C<T> where T : A<object>
             var type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "T?",
-                type.TypeParameters[1].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[1].ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
         }
 
@@ -2274,9 +2265,8 @@ public class Program
                         bool? expectedConstraintIsNullable
                     )
                     {
-                        var typeParameter = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                                typeName
-                            )
+                        var typeParameter = module.GlobalNamespace
+                            .GetMember<NamedTypeSymbol>(typeName)
                             .TypeParameters.Single();
                         Assert.True(typeParameter.HasReferenceTypeConstraint);
                         Assert.Equal(
@@ -2357,9 +2347,8 @@ public class Program
                         bool? expectedConstraintIsNullable
                     )
                     {
-                        var typeParameter = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                                typeName
-                            )
+                        var typeParameter = module.GlobalNamespace
+                            .GetMember<NamedTypeSymbol>(typeName)
                             .TypeParameters.Single();
                         Assert.True(typeParameter.HasReferenceTypeConstraint);
                         Assert.Equal(
@@ -2422,9 +2411,8 @@ public class C2<T2>
 
                     void verifyTypeParameterConstraint(string typeName)
                     {
-                        var typeParameter = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                                typeName
-                            )
+                        var typeParameter = module.GlobalNamespace
+                            .GetMember<NamedTypeSymbol>(typeName)
                             .TypeParameters.Single();
                         Assert.True(typeParameter.HasNotNullConstraint);
                     }
@@ -2844,7 +2832,8 @@ class B
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.ContainingAssembly.GetTypeByMetadataName("C")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("C")
                         .GetMethod("<M>g__L|0_0");
                     AssertNullableAttribute(method.GetReturnTypeAttributes());
                     AssertAttributes(
@@ -2873,7 +2862,8 @@ class B
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.ContainingAssembly.GetTypeByMetadataName("C")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("C")
                         .GetMethod("<M>g__L|0_0");
                     AssertNullableAttribute(method.Parameters[0].GetAttributes());
                     AssertNoNullableAttribute(method.Parameters[1].GetAttributes());
@@ -2906,7 +2896,8 @@ class B : A, I
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.ContainingAssembly.GetTypeByMetadataName("B")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("B")
                         .GetMethod("I.F");
                     AssertNullableAttribute(method.GetReturnTypeAttributes());
                     AssertNoNullableAttribute(method.GetAttributes());
@@ -2933,7 +2924,8 @@ class C
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var property = module.ContainingAssembly.GetTypeByMetadataName("C")
+                    var property = module.ContainingAssembly
+                        .GetTypeByMetadataName("C")
                         .GetTypeMember("<F>d__0")
                         .GetProperty(
                             "System.Collections.Generic.IEnumerator<System.Object>.Current"
@@ -2967,7 +2959,8 @@ class C
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var property = module.ContainingAssembly.GetTypeByMetadataName("C")
+                    var property = module.ContainingAssembly
+                        .GetTypeByMetadataName("C")
                         .GetTypeMember("<F>d__0")
                         .GetProperty(
                             "System.Collections.Generic.IEnumerator<System.Object[]>.Current"
@@ -5415,13 +5408,13 @@ public class Program
             );
         }
 
-        private static readonly SymbolDisplayFormat _displayFormat =
-            SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                    SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                        | SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                        | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                )
-                .WithCompilerInternalOptions(SymbolDisplayCompilerInternalOptions.None);
+        private static readonly SymbolDisplayFormat _displayFormat = SymbolDisplayFormat.TestFormat
+            .WithMiscellaneousOptions(
+                SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                    | SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            )
+            .WithCompilerInternalOptions(SymbolDisplayCompilerInternalOptions.None);
 
         private static void VerifyBytes(
             TypeWithAnnotations type,
@@ -6403,7 +6396,8 @@ public class B<T> :
                     .WithLocation(8, 9),
                 // (10,9): warning CS8602: Dereference of a possibly null reference.
                 //         b.Property._9.ToString(); // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.Property._9").WithLocation(10, 9)
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.Property._9")
+                    .WithLocation(10, 9)
             );
 
             var type = comp2.GetMember<NamedTypeSymbol>("B");
@@ -6455,9 +6449,10 @@ public class Program
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NullableAttribute"
-                    );
+                    var attributeType = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>(
+                            "System.Runtime.CompilerServices.NullableAttribute"
+                        );
                     AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
                     Assert.False(attributeUsage.Inherited);
                     Assert.False(attributeUsage.AllowMultiple);
@@ -6768,9 +6763,10 @@ public class A
         private static TypeDefinition GetTypeDefinitionByName(MetadataReader reader, string name)
         {
             return reader.GetTypeDefinition(
-                reader.TypeDefinitions.Single(
-                    h => reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
-                )
+                reader.TypeDefinitions
+                    .Single(
+                        h => reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
+                    )
             );
         }
 

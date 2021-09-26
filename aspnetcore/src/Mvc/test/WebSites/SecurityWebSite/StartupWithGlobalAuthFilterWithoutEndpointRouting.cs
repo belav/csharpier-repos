@@ -32,24 +32,19 @@ namespace SecurityWebSite
             );
 
             services.AddMvc(
-                    o =>
-                    {
-                        o.EnableEndpointRouting = false;
-                        o.Filters.Add(new AuthorizeFilter("RequireClaimA"));
-                    }
-                )
-                .AddRazorPagesOptions(
-                    options =>
-                    {
-                        options.Conventions.AllowAnonymousToPage(
-                            "/AllowAnonymousPageViaConvention"
-                        );
-                        options.Conventions.AuthorizePage(
-                            "/AuthorizePageViaConvention",
-                            "RequireClaimB"
-                        );
-                    }
-                );
+                o =>
+                {
+                    o.EnableEndpointRouting = false;
+                    o.Filters.Add(new AuthorizeFilter("RequireClaimA"));
+                }
+            ).AddRazorPagesOptions(
+                options =>
+                {
+                    options.Conventions.AllowAnonymousToPage("/AllowAnonymousPageViaConvention");
+                    options.Conventions
+                        .AuthorizePage("/AuthorizePageViaConvention", "RequireClaimB");
+                }
+            );
         }
 
         public void Configure(IApplicationBuilder app)

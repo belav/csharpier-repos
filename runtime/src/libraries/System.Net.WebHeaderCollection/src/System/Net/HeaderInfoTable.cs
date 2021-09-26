@@ -79,11 +79,8 @@ namespace System.Net
             bool noComma = !lastElement.Contains(',');
 
             string lastAttribute = lastElement.Split('=')[0].Trim();
-            bool isExpires = string.Equals(
-                lastAttribute,
-                "Expires",
-                StringComparison.OrdinalIgnoreCase
-            );
+            bool isExpires = string
+                .Equals(lastAttribute, "Expires", StringComparison.OrdinalIgnoreCase);
 
             return (isExpires && noComma);
         }

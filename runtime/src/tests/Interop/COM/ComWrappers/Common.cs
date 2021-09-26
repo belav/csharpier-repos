@@ -79,9 +79,8 @@ namespace ComWrappersTests.Common
             {
                 try
                 {
-                    ComWrappers.ComInterfaceDispatch.GetInstance<ITest>(
-                            (ComWrappers.ComInterfaceDispatch*)dispatchPtr
-                        )
+                    ComWrappers.ComInterfaceDispatch
+                        .GetInstance<ITest>((ComWrappers.ComInterfaceDispatch*)dispatchPtr)
                         .SetValue(i);
                 }
                 catch (Exception e)

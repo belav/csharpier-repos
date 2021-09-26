@@ -40,15 +40,16 @@ namespace System.Runtime.Caching
                 exceptionMessage = null;
             }
 
-            string output = string.Format(
-                CultureInfo.InvariantCulture,
-                "[{0}] {1} {2}{3}{4}",
-                Environment.CurrentManagedThreadId,
-                tagName,
-                message,
-                Environment.NewLine,
-                exceptionMessage != null ? exceptionMessage + Environment.NewLine : ""
-            );
+            string output = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "[{0}] {1} {2}{3}{4}",
+                    Environment.CurrentManagedThreadId,
+                    tagName,
+                    message,
+                    Environment.NewLine,
+                    exceptionMessage != null ? exceptionMessage + Environment.NewLine : ""
+                );
             Debug.WriteLine(output);
 #endif
         }

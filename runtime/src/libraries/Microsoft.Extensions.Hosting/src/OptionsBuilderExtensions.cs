@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             optionsBuilder.Services.AddHostedService<ValidationHostedService>();
-            optionsBuilder.Services.AddOptions<ValidatorOptions>()
+            optionsBuilder.Services
+                .AddOptions<ValidatorOptions>()
                 .Configure<IOptionsMonitor<TOptions>>(
                     (vo, options) =>
                     {

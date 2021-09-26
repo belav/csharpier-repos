@@ -36,11 +36,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             {
                 if (
                     await service.CanProvideBraceCompletionAsync(
-                            openingBrace,
-                            openingPosition,
-                            document,
-                            cancellationToken
-                        )
+                        openingBrace,
+                        openingPosition,
+                        document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {

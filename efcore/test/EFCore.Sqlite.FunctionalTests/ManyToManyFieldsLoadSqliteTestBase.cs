@@ -27,8 +27,8 @@ namespace Microsoft.EntityFrameworkCore
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                 modelBuilder.SharedTypeEntity<Dictionary<string, object>>(
-                        "JoinOneToThreePayloadFullShared"
-                    )
+                    "JoinOneToThreePayloadFullShared"
+                )
                     .IndexerProperty<string>("Payload")
                     .HasDefaultValue("Generated");
 

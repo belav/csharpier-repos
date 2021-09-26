@@ -258,11 +258,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             var isDestructorTypeContext =
                 targetToken.IsKind(SyntaxKind.TildeToken)
                 && targetToken.Parent.IsKind(SyntaxKind.DestructorDeclaration)
-                && targetToken.Parent.Parent.IsKind(
-                    SyntaxKind.ClassDeclaration,
-                    SyntaxKind.StructDeclaration,
-                    SyntaxKind.RecordDeclaration
-                );
+                && targetToken.Parent.Parent
+                    .IsKind(
+                        SyntaxKind.ClassDeclaration,
+                        SyntaxKind.StructDeclaration,
+                        SyntaxKind.RecordDeclaration
+                    );
 
             // Typing a dot after a numeric expression (numericExpression.)
             // - maybe a start of MemberAccessExpression like numericExpression.Member.
@@ -274,11 +275,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 cancellationToken
             );
 
-            var isArgumentListToken = targetToken.Parent.IsKind(
-                SyntaxKind.ArgumentList,
-                SyntaxKind.AttributeArgumentList,
-                SyntaxKind.ArrayRankSpecifier
-            );
+            var isArgumentListToken = targetToken.Parent
+                .IsKind(
+                    SyntaxKind.ArgumentList,
+                    SyntaxKind.AttributeArgumentList,
+                    SyntaxKind.ArrayRankSpecifier
+                );
 
             return new CSharpSyntaxContext(
                 workspace: workspace,
@@ -455,14 +457,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 token.Kind() == SyntaxKind.OpenBracketToken
                 && token.Parent.IsKind(SyntaxKind.AttributeList)
-                && this.SyntaxTree.IsTypeDeclarationContext(
-                    token.SpanStart,
-                    contextOpt: null,
-                    validModifiers: null,
-                    validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
-                    canBePartial: false,
-                    cancellationToken: cancellationToken
-                )
+                && this.SyntaxTree
+                    .IsTypeDeclarationContext(
+                        token.SpanStart,
+                        contextOpt: null,
+                        validModifiers: null,
+                        validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
+                        canBePartial: false,
+                        cancellationToken: cancellationToken
+                    )
             )
             {
                 return true;
@@ -478,14 +481,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             CancellationToken cancellationToken = default
         )
         {
-            return this.SyntaxTree.IsTypeDeclarationContext(
-                this.Position,
-                this,
-                validModifiers,
-                validTypeDeclarations,
-                canBePartial,
-                cancellationToken
-            );
+            return this.SyntaxTree
+                .IsTypeDeclarationContext(
+                    this.Position,
+                    this,
+                    validModifiers,
+                    validTypeDeclarations,
+                    canBePartial,
+                    cancellationToken
+                );
         }
 
         public bool IsMemberAttributeContext(
@@ -500,14 +504,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 token.Kind() == SyntaxKind.OpenBracketToken
                 && token.Parent.IsKind(SyntaxKind.AttributeList)
-                && this.SyntaxTree.IsMemberDeclarationContext(
-                    token.SpanStart,
-                    contextOpt: null,
-                    validModifiers: null,
-                    validTypeDeclarations: validTypeDeclarations,
-                    canBePartial: false,
-                    cancellationToken: cancellationToken
-                )
+                && this.SyntaxTree
+                    .IsMemberDeclarationContext(
+                        token.SpanStart,
+                        contextOpt: null,
+                        validModifiers: null,
+                        validTypeDeclarations: validTypeDeclarations,
+                        canBePartial: false,
+                        cancellationToken: cancellationToken
+                    )
             )
             {
                 return true;
@@ -539,14 +544,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             CancellationToken cancellationToken = default
         )
         {
-            return this.SyntaxTree.IsMemberDeclarationContext(
-                this.Position,
-                this,
-                validModifiers,
-                validTypeDeclarations,
-                canBePartial,
-                cancellationToken
-            );
+            return this.SyntaxTree
+                .IsMemberDeclarationContext(
+                    this.Position,
+                    this,
+                    validModifiers,
+                    validTypeDeclarations,
+                    canBePartial,
+                    cancellationToken
+                );
         }
 
         private static bool IsLeftSideOfUsingAliasDirective(SyntaxToken leftToken)

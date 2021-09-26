@@ -139,9 +139,8 @@ namespace System.ComponentModel
                                 )
                                 {
                                     if (
-                                        s_skipInterfaceAttributeList[ifaceSkipIdx].IsInstanceOfType(
-                                            attr
-                                        )
+                                        s_skipInterfaceAttributeList[ifaceSkipIdx]
+                                            .IsInstanceOfType(attr)
                                     )
                                     {
                                         addAttr = false;

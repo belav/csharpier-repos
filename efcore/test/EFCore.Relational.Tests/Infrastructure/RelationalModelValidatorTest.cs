@@ -55,8 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyWarning(
                 RelationalResources.LogBoolWithDefaultWarning(
-                        new TestLogger<TestRelationalLoggingDefinitions>()
-                    )
+                    new TestLogger<TestRelationalLoggingDefinitions>()
+                )
                     .GenerateMessage("ImBool", "E"),
                 model
             );
@@ -77,8 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyWarning(
                 RelationalResources.LogBoolWithDefaultWarning(
-                        new TestLogger<TestRelationalLoggingDefinitions>()
-                    )
+                    new TestLogger<TestRelationalLoggingDefinitions>()
+                )
                     .GenerateMessage("ImBool", "E"),
                 model
             );
@@ -98,8 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyWarning(
                 RelationalResources.LogKeyHasDefaultValue(
-                        new TestLogger<TestRelationalLoggingDefinitions>()
-                    )
+                    new TestLogger<TestRelationalLoggingDefinitions>()
+                )
                     .GenerateMessage("Id", "A"),
                 model
             );
@@ -123,8 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyWarning(
                 RelationalResources.LogKeyHasDefaultValue(
-                        new TestLogger<TestRelationalLoggingDefinitions>()
-                    )
+                    new TestLogger<TestRelationalLoggingDefinitions>()
+                )
                     .GenerateMessage("P0", "A"),
                 model
             );
@@ -2187,10 +2187,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionlessModelBuilder();
 
-            var methodInfo = typeof(TestMethods).GetRuntimeMethod(
-                nameof(TestMethods.MethodA),
-                Array.Empty<Type>()
-            );
+            var methodInfo = typeof(TestMethods)
+                .GetRuntimeMethod(nameof(TestMethods.MethodA), Array.Empty<Type>());
 
             modelBuilder.HasDbFunction(methodInfo);
 
@@ -2226,10 +2224,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
 
-            var methodInfo = typeof(TestMethods).GetRuntimeMethod(
-                nameof(TestMethods.MethodA),
-                Array.Empty<Type>()
-            );
+            var methodInfo = typeof(TestMethods)
+                .GetRuntimeMethod(nameof(TestMethods.MethodA), Array.Empty<Type>());
 
             var function = modelBuilder.HasDbFunction(methodInfo).Metadata;
 
@@ -2674,17 +2670,23 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         private class TestMethods : BaseTestMethods
         {
-            public static readonly MethodInfo MethodAMi = typeof(TestMethods).GetTypeInfo()
+            public static readonly MethodInfo MethodAMi = typeof(TestMethods)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(MethodA));
-            public static readonly MethodInfo MethodBMi = typeof(TestMethods).GetTypeInfo()
+            public static readonly MethodInfo MethodBMi = typeof(TestMethods)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(MethodB));
-            public static readonly MethodInfo MethodCMi = typeof(TestMethods).GetTypeInfo()
+            public static readonly MethodInfo MethodCMi = typeof(TestMethods)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(MethodC));
-            public static readonly MethodInfo MethodDMi = typeof(TestMethods).GetTypeInfo()
+            public static readonly MethodInfo MethodDMi = typeof(TestMethods)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(MethodD));
-            public static readonly MethodInfo MethodEMi = typeof(TestMethods).GetTypeInfo()
+            public static readonly MethodInfo MethodEMi = typeof(TestMethods)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(MethodE));
-            public static readonly MethodInfo MethodFMi = typeof(TestMethods).GetTypeInfo()
+            public static readonly MethodInfo MethodFMi = typeof(TestMethods)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(MethodF));
 
             public static IQueryable<TestMethods> MethodA() => throw new NotImplementedException();

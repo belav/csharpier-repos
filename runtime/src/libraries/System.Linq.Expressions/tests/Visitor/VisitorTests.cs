@@ -91,7 +91,8 @@ namespace System.Linq.Expressions.Tests
                         enumerator,
                         Call(
                             Enumerable,
-                            typeof(IEnumerable<>).MakeGenericType(ItemVariable.Type)
+                            typeof(IEnumerable<>)
+                                .MakeGenericType(ItemVariable.Type)
                                 .GetMethod(nameof(IEnumerable.GetEnumerator))
                         )
                     ),
@@ -103,9 +104,8 @@ namespace System.Linq.Expressions.Tests
                                     IsFalse(
                                         Call(
                                             enumerator,
-                                            typeof(IEnumerator).GetMethod(
-                                                nameof(IEnumerator.MoveNext)
-                                            )
+                                            typeof(IEnumerator)
+                                                .GetMethod(nameof(IEnumerator.MoveNext))
                                         )
                                     ),
                                     Break(breakLabel)
@@ -223,10 +223,8 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "nodes",
                 () =>
-                    new DefaultVisitor().VisitAndConvert(
-                        default(ReadOnlyCollection<Expression>),
-                        ""
-                    )
+                    new DefaultVisitor()
+                        .VisitAndConvert(default(ReadOnlyCollection<Expression>), "")
             );
         }
 
@@ -238,7 +236,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Constant(0),
                 Expression.Constant(2),
                 Expression.DebugInfo(Expression.SymbolDocument("fileName"), 1, 1, 1, 1)
-            }.AsReadOnly();
+            }
+                .AsReadOnly();
             Assert.Same(collection, new DefaultVisitor().Visit(collection));
         }
 
@@ -249,10 +248,10 @@ namespace System.Linq.Expressions.Tests
             ReadOnlyCollection<Expression> collection = new List<Expression>
             {
                 Expression.Constant(value)
-            }.AsReadOnly();
-            ReadOnlyCollection<Expression> visited = new ConstantRefreshingVisitor().Visit(
-                collection
-            );
+            }
+                .AsReadOnly();
+            ReadOnlyCollection<Expression> visited = new ConstantRefreshingVisitor()
+                .Visit(collection);
             Assert.NotSame(collection, visited);
             Assert.NotSame(collection[0], visited[0]);
             Assert.Same(value, ((ConstantExpression)visited[0]).Value);
@@ -266,10 +265,10 @@ namespace System.Linq.Expressions.Tests
             {
                 Expression.Empty(),
                 Expression.Constant(value)
-            }.AsReadOnly();
-            ReadOnlyCollection<Expression> visited = new ConstantRefreshingVisitor().Visit(
-                collection
-            );
+            }
+                .AsReadOnly();
+            ReadOnlyCollection<Expression> visited = new ConstantRefreshingVisitor()
+                .Visit(collection);
             Assert.NotSame(collection, visited);
             Assert.Same(collection[0], visited[0]);
             Assert.NotSame(collection[1], visited[1]);
@@ -279,12 +278,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VisitCollectionNullNodes()
         {
-            ReadOnlyCollection<Expression> collection = new List<Expression>
-            {
-                null,
-                null,
-                null
-            }.AsReadOnly();
+            ReadOnlyCollection<Expression> collection = new List<Expression> { null, null, null }
+                .AsReadOnly();
             Assert.Same(collection, new DefaultVisitor().Visit(collection));
         }
 
@@ -310,13 +305,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VisitCollectionWithElementVisitorDifferOnLater()
         {
-            ReadOnlyCollection<string> collection = new List<string>
-            {
-                "ABC",
-                "def",
-                "GHI",
-                "jkl"
-            }.AsReadOnly();
+            ReadOnlyCollection<string> collection = new List<string> { "ABC", "def", "GHI", "jkl" }
+                .AsReadOnly();
             ReadOnlyCollection<string> visited = ExpressionVisitor.Visit(
                 collection,
                 UpperCaseIfNotAlready
@@ -331,12 +321,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VisitCollectionWithElementVisitorNullNodes()
         {
-            ReadOnlyCollection<string> collection = new List<string>
-            {
-                null,
-                null,
-                null
-            }.AsReadOnly();
+            ReadOnlyCollection<string> collection = new List<string> { null, null, null }
+                .AsReadOnly();
             Assert.Same(collection, ExpressionVisitor.Visit(collection, UpperCaseIfNotAlready));
         }
 
@@ -391,10 +377,8 @@ namespace System.Linq.Expressions.Tests
         public void VisitAndConvertSameResultAsVisit()
         {
             ConstantExpression constant = Expression.Constant(0);
-            ConstantExpression visited = new ConstantRefreshingVisitor().VisitAndConvert(
-                constant,
-                ""
-            );
+            ConstantExpression visited = new ConstantRefreshingVisitor()
+                .VisitAndConvert(constant, "");
             Assert.NotSame(constant, visited);
             Assert.Equal(0, visited.Value);
         }

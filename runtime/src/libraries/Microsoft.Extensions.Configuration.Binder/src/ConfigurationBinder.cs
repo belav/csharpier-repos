@@ -283,10 +283,8 @@ namespace Microsoft.Extensions.Configuration
             collectionInterface = FindOpenGenericInterface(typeof(IReadOnlyDictionary<, >), type);
             if (collectionInterface != null)
             {
-                Type dictionaryType = typeof(Dictionary<, >).MakeGenericType(
-                    type.GenericTypeArguments[0],
-                    type.GenericTypeArguments[1]
-                );
+                Type dictionaryType = typeof(Dictionary<, >)
+                    .MakeGenericType(type.GenericTypeArguments[0], type.GenericTypeArguments[1]);
                 object instance = Activator.CreateInstance(dictionaryType);
                 BindDictionary(instance, dictionaryType, config, options);
                 return instance;
@@ -296,10 +294,8 @@ namespace Microsoft.Extensions.Configuration
             if (collectionInterface != null)
             {
                 object instance = Activator.CreateInstance(
-                    typeof(Dictionary<, >).MakeGenericType(
-                        type.GenericTypeArguments[0],
-                        type.GenericTypeArguments[1]
-                    )
+                    typeof(Dictionary<, >)
+                        .MakeGenericType(type.GenericTypeArguments[0], type.GenericTypeArguments[1])
                 );
                 BindDictionary(instance, collectionInterface, config, options);
                 return instance;

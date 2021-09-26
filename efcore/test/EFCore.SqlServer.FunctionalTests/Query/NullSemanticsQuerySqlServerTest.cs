@@ -836,9 +836,8 @@ WHERE ((([e].[NullableStringA] <> N'Foo') OR [e].[NullableStringA] IS NULL) AND 
             bool async
         )
         {
-            await base.Where_multiple_ands_with_nullable_parameter_and_constant_not_optimized(
-                async
-            );
+            await base
+                .Where_multiple_ands_with_nullable_parameter_and_constant_not_optimized(async);
 
             AssertSql(
                 @"@__prm3_2='Blah' (Size = 4000)
@@ -1253,9 +1252,8 @@ WHERE @__p_0 = CAST(1 AS bit)"
             bool async
         )
         {
-            await base.Where_comparison_null_semantics_optimization_works_with_complex_predicates(
-                async
-            );
+            await base
+                .Where_comparison_null_semantics_optimization_works_with_complex_predicates(async);
 
             AssertSql(
                 @"SELECT [e].[Id]
@@ -1335,9 +1333,10 @@ FROM [Entities1] AS [e]"
             bool async
         )
         {
-            await base.Null_semantics_applied_when_comparing_function_with_nullable_argument_to_a_nullable_column(
-                async
-            );
+            await base
+                .Null_semantics_applied_when_comparing_function_with_nullable_argument_to_a_nullable_column(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [e].[Id]
@@ -1413,9 +1412,8 @@ ORDER BY [e].[Id]"
             bool async
         )
         {
-            await base.Null_semantics_applied_when_comparing_two_functions_with_nullable_arguments(
-                async
-            );
+            await base
+                .Null_semantics_applied_when_comparing_two_functions_with_nullable_arguments(async);
 
             AssertSql(
                 @"SELECT [e].[Id]
@@ -1497,9 +1495,10 @@ END IS NOT NULL)"
             bool async
         )
         {
-            await base.Null_semantics_applied_when_comparing_two_functions_with_multiple_nullable_arguments(
-                async
-            );
+            await base
+                .Null_semantics_applied_when_comparing_two_functions_with_multiple_nullable_arguments(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [e].[Id]
@@ -1875,9 +1874,10 @@ WHERE ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL) A
             bool async
         )
         {
-            await base.Nullable_column_info_propagates_inside_binary_OrElse_when_info_is_duplicated(
-                async
-            );
+            await base
+                .Nullable_column_info_propagates_inside_binary_OrElse_when_info_is_duplicated(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [e].[Id]
@@ -1928,9 +1928,8 @@ FROM [Entities1] AS [e]"
             bool async
         )
         {
-            await base.Nullable_column_info_doesnt_propagate_between_different_parts_of_select(
-                async
-            );
+            await base
+                .Nullable_column_info_doesnt_propagate_between_different_parts_of_select(async);
 
             AssertSql(
                 @"SELECT [e].[Id]
@@ -1976,9 +1975,8 @@ FROM [Entities1] AS [e]"
             bool async
         )
         {
-            await base.Nullable_string_FirstOrDefault_compared_to_nullable_string_LastOrDefault(
-                async
-            );
+            await base
+                .Nullable_string_FirstOrDefault_compared_to_nullable_string_LastOrDefault(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
@@ -2061,9 +2059,10 @@ WHERE [e].[NullableIntA] NOT IN (1, 2) AND [e].[NullableIntA] IS NOT NULL"
             bool async
         )
         {
-            await base.Multiple_non_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
-                async
-            );
+            await base
+                .Multiple_non_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
@@ -2076,9 +2075,10 @@ WHERE ([e].[NullableIntA] <> 1) AND [e].[NullableIntA] IS NOT NULL"
             bool async
         )
         {
-            await base.Multiple_non_equality_comparisons_without_null_comparison_work_for_relational_null_semantics(
-                async
-            );
+            await base
+                .Multiple_non_equality_comparisons_without_null_comparison_work_for_relational_null_semantics(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
@@ -2091,9 +2091,10 @@ WHERE [e].[NullableIntA] NOT IN (1, 2)"
             bool async
         )
         {
-            await base.Multiple_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
-                async
-            );
+            await base
+                .Multiple_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
@@ -2106,9 +2107,8 @@ WHERE ([e].[NullableIntA] = 1) OR [e].[NullableIntA] IS NULL"
             bool async
         )
         {
-            await base.Multiple_contains_calls_get_combined_into_one_for_relational_null_semantics(
-                async
-            );
+            await base
+                .Multiple_contains_calls_get_combined_into_one_for_relational_null_semantics(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
@@ -2121,9 +2121,10 @@ WHERE [e].[NullableIntA] IN (1, NULL, 2, 3)"
             bool async
         )
         {
-            await base.Multiple_negated_contains_calls_get_combined_into_one_for_relational_null_semantics(
-                async
-            );
+            await base
+                .Multiple_negated_contains_calls_get_combined_into_one_for_relational_null_semantics(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
@@ -2136,9 +2137,8 @@ WHERE [e].[NullableIntA] NOT IN (1, NULL, 2, 3)"
             bool async
         )
         {
-            await base.Contains_with_comparison_dont_get_combined_for_relational_null_semantics(
-                async
-            );
+            await base
+                .Contains_with_comparison_dont_get_combined_for_relational_null_semantics(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
@@ -2151,9 +2151,10 @@ WHERE [e].[NullableIntA] IN (1, 2) OR [e].[NullableIntA] IS NULL"
             bool async
         )
         {
-            await base.Negated_contains_with_comparison_dont_get_combined_for_relational_null_semantics(
-                async
-            );
+            await base
+                .Negated_contains_with_comparison_dont_get_combined_for_relational_null_semantics(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
@@ -2166,9 +2167,10 @@ WHERE [e].[NullableIntA] IS NOT NULL AND [e].[NullableIntA] NOT IN (1, 2)"
             bool async
         )
         {
-            await base.Negated_contains_with_comparison_without_null_get_combined_for_relational_null_semantics(
-                async
-            );
+            await base
+                .Negated_contains_with_comparison_without_null_get_combined_for_relational_null_semantics(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]

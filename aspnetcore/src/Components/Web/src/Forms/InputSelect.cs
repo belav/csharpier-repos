@@ -38,11 +38,12 @@ namespace Microsoft.AspNetCore.Components.Forms
             builder.AddAttribute(
                 4,
                 "onchange",
-                EventCallback.Factory.CreateBinder<string?>(
-                    this,
-                    __value => CurrentValueAsString = __value,
-                    CurrentValueAsString
-                )
+                EventCallback.Factory
+                    .CreateBinder<string?>(
+                        this,
+                        __value => CurrentValueAsString = __value,
+                        CurrentValueAsString
+                    )
             );
             builder.AddElementReferenceCapture(5, __selectReference => Element = __selectReference);
             builder.AddContent(6, ChildContent);

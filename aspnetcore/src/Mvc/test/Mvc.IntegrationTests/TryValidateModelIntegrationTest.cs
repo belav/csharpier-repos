@@ -244,9 +244,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Action<MvcOptions> optionsConfigurator
         )
         {
-            var options = actionContext.HttpContext.RequestServices.GetRequiredService<
-                IOptions<MvcOptions>
-            >();
+            var options = actionContext.HttpContext.RequestServices
+                .GetRequiredService<IOptions<MvcOptions>>();
             optionsConfigurator.Invoke(options.Value);
 
             var controller = new TestController();

@@ -111,7 +111,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             {
                 // Call into the tag helper scope manager to start a new tag helper scope.
                 // Also capture the value as the current execution context.
-                context.CodeWriter.WriteStartAssignment(ExecutionContextVariableName)
+                context.CodeWriter
+                    .WriteStartAssignment(ExecutionContextVariableName)
                     .WriteStartInstanceMethodInvocation(
                         ScopeManagerVariableName,
                         ScopeManagerBeginMethodName
@@ -125,7 +126,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     uniqueId = GetDeterministicId(context);
                 }
 
-                context.CodeWriter.WriteStringLiteral(node.TagName)
+                context.CodeWriter
+                    .WriteStringLiteral(node.TagName)
                     .WriteParameterSeparator()
                     .Write(TagModeTypeName)
                     .Write(".")
@@ -158,17 +160,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 throw new InvalidOperationException(message);
             }
 
-            context.CodeWriter.WriteStartAssignment(node.FieldName)
+            context.CodeWriter
+                .WriteStartAssignment(node.FieldName)
                 .Write(CreateTagHelperMethodName)
                 .WriteLine("<global::" + node.TypeName + ">();");
 
             if (!context.Options.DesignTime)
             {
-                context.CodeWriter.WriteInstanceMethodInvocation(
-                    ExecutionContextVariableName,
-                    ExecutionContextAddMethodName,
-                    node.FieldName
-                );
+                context.CodeWriter
+                    .WriteInstanceMethodInvocation(
+                        ExecutionContextVariableName,
+                        ExecutionContextAddMethodName,
+                        node.FieldName
+                    );
             }
         }
 
@@ -189,7 +193,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // We always render `await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);` to notify users of the requirement for a method
             // to be asynchronous.
 
-            context.CodeWriter.Write("await ")
+            context.CodeWriter
+                .Write("await ")
                 .WriteStartInstanceMethodInvocation(RunnerVariableName, RunnerRunAsyncMethodName)
                 .Write(ExecutionContextVariableName)
                 .WriteEndMethodInvocation();
@@ -199,7 +204,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 var tagHelperOutputAccessor =
                     $"{ExecutionContextVariableName}.{ExecutionContextOutputPropertyName}";
 
-                context.CodeWriter.Write("if (!")
+                context.CodeWriter
+                    .Write("if (!")
                     .Write(tagHelperOutputAccessor)
                     .Write(".")
                     .Write(TagHelperOutputIsContentModifiedPropertyName)
@@ -207,14 +213,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
                 using (context.CodeWriter.BuildScope())
                 {
-                    context.CodeWriter.Write("await ")
+                    context.CodeWriter
+                        .Write("await ")
                         .WriteInstanceMethodInvocation(
                             ExecutionContextVariableName,
                             ExecutionContextSetOutputContentAsyncMethodName
                         );
                 }
 
-                context.CodeWriter.WriteStartMethodInvocation(WriteTagHelperOutputMethod)
+                context.CodeWriter
+                    .WriteStartMethodInvocation(WriteTagHelperOutputMethod)
                     .Write(tagHelperOutputAccessor)
                     .WriteEndMethodInvocation()
                     .WriteStartAssignment(ExecutionContextVariableName)
@@ -247,11 +255,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             {
                 var attributeValueStyleParameter =
                     $"{HtmlAttributeValueStyleTypeName}.{node.AttributeStructure}";
-                var isConditionalAttributeValue = node.Children.Any(
-                    child =>
-                        child is CSharpExpressionAttributeValueIntermediateNode
-                        || child is CSharpCodeAttributeValueIntermediateNode
-                );
+                var isConditionalAttributeValue = node.Children
+                    .Any(
+                        child =>
+                            child is CSharpExpressionAttributeValueIntermediateNode
+                            || child is CSharpCodeAttributeValueIntermediateNode
+                    );
 
                 // All simple text and minimized attributes will be pre-allocated.
                 if (isConditionalAttributeValue)
@@ -261,17 +270,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
                     // TagHelper attribute rendering is buffered by default. We do not want to write to the current
                     // writer.
-                    var valuePieceCount = node.Children.Count(
-                        child =>
-                            child is HtmlAttributeValueIntermediateNode
-                            || child is CSharpExpressionAttributeValueIntermediateNode
-                            || child is CSharpCodeAttributeValueIntermediateNode
-                            || child is ExtensionIntermediateNode
-                    );
+                    var valuePieceCount = node.Children
+                        .Count(
+                            child =>
+                                child is HtmlAttributeValueIntermediateNode
+                                || child is CSharpExpressionAttributeValueIntermediateNode
+                                || child is CSharpCodeAttributeValueIntermediateNode
+                                || child is ExtensionIntermediateNode
+                        );
 
-                    context.CodeWriter.WriteStartMethodInvocation(
-                            BeginAddHtmlAttributeValuesMethodName
-                        )
+                    context.CodeWriter
+                        .WriteStartMethodInvocation(BeginAddHtmlAttributeValuesMethodName)
                         .Write(ExecutionContextVariableName)
                         .WriteParameterSeparator()
                         .WriteStringLiteral(node.AttributeName)
@@ -283,10 +292,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
                     context.RenderChildren(node, new TagHelperHtmlAttributeRuntimeNodeWriter());
 
-                    context.CodeWriter.WriteMethodInvocation(
-                        EndAddHtmlAttributeValuesMethodName,
-                        ExecutionContextVariableName
-                    );
+                    context.CodeWriter
+                        .WriteMethodInvocation(
+                            EndAddHtmlAttributeValuesMethodName,
+                            ExecutionContextVariableName
+                        );
                 }
                 else
                 {
@@ -295,16 +305,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     // determine its final value.
 
                     // Attribute value is not plain text, must be buffered to determine its final value.
-                    context.CodeWriter.WriteMethodInvocation(
-                        BeginWriteTagHelperAttributeMethodName
-                    );
+                    context.CodeWriter
+                        .WriteMethodInvocation(BeginWriteTagHelperAttributeMethodName);
 
                     // We're building a writing scope around the provided chunks which captures everything written from the
                     // page. Therefore, we do not want to write to any other buffer since we're using the pages buffer to
                     // ensure we capture all content that's written, directly or indirectly.
                     context.RenderChildren(node, new RuntimeNodeWriter());
 
-                    context.CodeWriter.WriteStartAssignment(StringValueBufferVariableName)
+                    context.CodeWriter
+                        .WriteStartAssignment(StringValueBufferVariableName)
                         .WriteMethodInvocation(EndWriteTagHelperAttributeMethodName)
                         .WriteStartInstanceMethodInvocation(
                             ExecutionContextVariableName,
@@ -346,7 +356,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 )
                 {
                     // Throw a reasonable Exception at runtime if the dictionary property is null.
-                    context.CodeWriter.Write("if (")
+                    context.CodeWriter
+                        .Write("if (")
                         .Write(node.FieldName)
                         .Write(".")
                         .Write(node.PropertyName)
@@ -355,7 +366,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     {
                         // System is in Host.NamespaceImports for all MVC scenarios. No need to generate FullName
                         // of InvalidOperationException type.
-                        context.CodeWriter.Write("throw ")
+                        context.CodeWriter
+                            .Write("throw ")
                             .WriteStartNewObject(nameof(InvalidOperationException))
                             .WriteStartMethodInvocation(FormatInvalidIndexerAssignmentMethodName)
                             .WriteStringLiteral(node.AttributeName)
@@ -380,7 +392,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             if (!object.ReferenceEquals(firstUseOfAttribute, node))
             {
                 // If we get here, this value has already been used. We just need to copy the value.
-                context.CodeWriter.WriteStartAssignment(GetPropertyAccessor(node))
+                context.CodeWriter
+                    .WriteStartAssignment(GetPropertyAccessor(node))
                     .Write(GetPropertyAccessor(firstUseOfAttribute))
                     .WriteLine(";");
 
@@ -411,13 +424,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 }
                 else
                 {
-                    context.CodeWriter.WriteMethodInvocation(
-                        BeginWriteTagHelperAttributeMethodName
-                    );
+                    context.CodeWriter
+                        .WriteMethodInvocation(BeginWriteTagHelperAttributeMethodName);
 
                     context.RenderChildren(node, new LiteralRuntimeNodeWriter());
 
-                    context.CodeWriter.WriteStartAssignment(StringValueBufferVariableName)
+                    context.CodeWriter
+                        .WriteStartAssignment(StringValueBufferVariableName)
                         .WriteMethodInvocation(EndWriteTagHelperAttributeMethodName)
                         .WriteStartAssignment(GetPropertyAccessor(node))
                         .Write(StringValueBufferVariableName)
@@ -449,14 +462,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
                             if (valueStart != null)
                             {
-                                context.CodeWriter.WritePadding(
-                                    assignmentPrefixLength,
-                                    node.Source,
-                                    context
-                                );
+                                context.CodeWriter
+                                    .WritePadding(assignmentPrefixLength, node.Source, context);
                             }
 
-                            context.CodeWriter.WriteStartAssignment(accessor)
+                            context.CodeWriter
+                                .WriteStartAssignment(accessor)
                                 .Write("global::")
                                 .Write(node.BoundAttribute.TypeName)
                                 .Write(".");
@@ -465,11 +476,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                         {
                             if (valueStart != null)
                             {
-                                context.CodeWriter.WritePadding(
-                                    assignmentPrefixLength,
-                                    node.Source,
-                                    context
-                                );
+                                context.CodeWriter
+                                    .WritePadding(assignmentPrefixLength, node.Source, context);
                             }
 
                             context.CodeWriter.WriteStartAssignment(GetPropertyAccessor(node));
@@ -505,7 +513,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                             && token.IsCSharp
                         )
                         {
-                            context.CodeWriter.Write("global::")
+                            context.CodeWriter
+                                .Write("global::")
                                 .Write(node.BoundAttribute.TypeName)
                                 .Write(".");
                         }
@@ -532,7 +541,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             if (!context.Options.DesignTime)
             {
                 // We need to inform the context of the attribute value.
-                context.CodeWriter.WriteStartInstanceMethodInvocation(
+                context.CodeWriter
+                    .WriteStartInstanceMethodInvocation(
                         ExecutionContextVariableName,
                         ExecutionContextAddTagHelperAttributeMethodName
                     )
@@ -553,14 +563,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         )
         {
             context.CodeWriter.WriteLine("#line hidden");
-            context.CodeWriter.WriteField(
-                FieldUnintializedModifiers,
-                PrivateModifiers,
-                ExecutionContextTypeName,
-                ExecutionContextVariableName
-            );
+            context.CodeWriter
+                .WriteField(
+                    FieldUnintializedModifiers,
+                    PrivateModifiers,
+                    ExecutionContextTypeName,
+                    ExecutionContextVariableName
+                );
 
-            context.CodeWriter.Write("private ")
+            context.CodeWriter
+                .Write("private ")
                 .Write(TagHelperRunnerTypeName)
                 .Write(" ")
                 .Write(RunnerVariableName)
@@ -570,22 +582,25 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
             if (!context.Options.DesignTime)
             {
-                context.CodeWriter.WriteField(
-                    FieldUnusedModifiers,
-                    PrivateModifiers,
-                    "string",
-                    StringValueBufferVariableName
-                );
+                context.CodeWriter
+                    .WriteField(
+                        FieldUnusedModifiers,
+                        PrivateModifiers,
+                        "string",
+                        StringValueBufferVariableName
+                    );
 
                 var backedScopeManageVariableName = "__backed" + ScopeManagerVariableName;
-                context.CodeWriter.Write("private ")
+                context.CodeWriter
+                    .Write("private ")
                     .WriteVariableDeclaration(
                         ScopeManagerTypeName,
                         backedScopeManageVariableName,
                         value: null
                     );
 
-                context.CodeWriter.Write("private ")
+                context.CodeWriter
+                    .Write("private ")
                     .Write(ScopeManagerTypeName)
                     .Write(" ")
                     .WriteLine(ScopeManagerVariableName);
@@ -595,13 +610,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     context.CodeWriter.WriteLine("get");
                     using (context.CodeWriter.BuildScope())
                     {
-                        context.CodeWriter.Write("if (")
+                        context.CodeWriter
+                            .Write("if (")
                             .Write(backedScopeManageVariableName)
                             .WriteLine(" == null)");
 
                         using (context.CodeWriter.BuildScope())
                         {
-                            context.CodeWriter.WriteStartAssignment(backedScopeManageVariableName)
+                            context.CodeWriter
+                                .WriteStartAssignment(backedScopeManageVariableName)
                                 .WriteStartNewObject(ScopeManagerTypeName)
                                 .Write(StartTagHelperWritingScopeMethodName)
                                 .WriteParameterSeparator()
@@ -609,7 +626,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                                 .WriteEndMethodInvocation();
                         }
 
-                        context.CodeWriter.Write("return ")
+                        context.CodeWriter
+                            .Write("return ")
                             .Write(backedScopeManageVariableName)
                             .WriteLine(";");
                     }
@@ -711,11 +729,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 if (
                     tagHelperNode.Children[i]
                         is DefaultTagHelperPropertyIntermediateNode otherPropertyNode
-                    && string.Equals(
-                        otherPropertyNode.AttributeName,
-                        propertyNode.AttributeName,
-                        StringComparison.Ordinal
-                    )
+                    && string
+                        .Equals(
+                            otherPropertyNode.AttributeName,
+                            propertyNode.AttributeName,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     return otherPropertyNode;
@@ -756,9 +775,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
             if (node.IsIndexerNameMatch)
             {
-                var dictionaryKey = node.AttributeName.Substring(
-                    node.BoundAttribute.IndexerNamePrefix.Length
-                );
+                var dictionaryKey = node.AttributeName
+                    .Substring(node.BoundAttribute.IndexerNamePrefix.Length);
                 propertyAccessor += $"[\"{dictionaryKey}\"]";
             }
 

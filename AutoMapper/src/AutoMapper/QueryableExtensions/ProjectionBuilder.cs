@@ -186,9 +186,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             void ProjectProperties()
             {
                 foreach (
-                    var propertyMap in typeMap.PropertyMaps.Where(
-                            pm => pm.CanResolveValue && pm.DestinationMember.CanBeSet()
-                        )
+                    var propertyMap in typeMap.PropertyMaps
+                        .Where(pm => pm.CanResolveValue && pm.DestinationMember.CanBeSet())
                         .OrderBy(pm => pm.DestinationName)
                 )
                 {
@@ -321,9 +320,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                     { ConstructorMap: { CanResolve: true } constructorMap }
                       => New(
                           constructorMap.Ctor,
-                          constructorMap.CtorParams.Select(
-                              map => TryProjectMember(map) ?? Default(map.DestinationType)
-                          )
+                          constructorMap.CtorParams
+                              .Select(map => TryProjectMember(map) ?? Default(map.DestinationType))
                       ),
                     _ => New(typeMap.DestinationTypeToUse)
                 };
@@ -384,15 +382,15 @@ namespace AutoMapper.QueryableExtensions.Impl
             )
             {
                 var letMapInfos = _savedPaths.Select(
-                        path =>
-                            new
-                            {
-                                path.LetExpression,
-                                MapFromSource = path.GetSourceExpression(instanceParameter),
-                                Property = path.GetPropertyDescription(),
-                                path.Marker
-                            }
-                    )
+                    path =>
+                        new
+                        {
+                            path.LetExpression,
+                            MapFromSource = path.GetSourceExpression(instanceParameter),
+                            Property = path.GetPropertyDescription(),
+                            path.Marker
+                        }
+                )
                     .ToArray();
                 var properties = letMapInfos.Select(m => m.Property)
                     .Concat(GetMemberAccessesVisitor.Retrieve(projection, instanceParameter));
@@ -435,7 +433,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                     projection = new ReplaceMemberAccessesVisitor(
                         instanceParameter,
                         secondParameter
-                    ).Visit(projection);
+                    )
+                        .Visit(projection);
                 }
             }
             readonly struct SubQueryPath
@@ -491,9 +490,10 @@ namespace AutoMapper.QueryableExtensions.Impl
                 {
                     var visitor = new GetMemberAccessesVisitor(target);
                     visitor.Visit(expression);
-                    return visitor.Members.Select(
-                        member => new PropertyDescription(member.Name, member.GetMemberType())
-                    );
+                    return visitor.Members
+                        .Select(
+                            member => new PropertyDescription(member.Name, member.GetMemberType())
+                        );
                 }
             }
             class ReplaceMemberAccessesVisitor : ExpressionVisitor

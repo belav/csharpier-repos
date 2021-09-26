@@ -54,10 +54,10 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
             )
             {
                 var unnecessaryImports = await GetCommonUnnecessaryImportsOfAllContextAsync(
-                        document,
-                        predicate,
-                        cancellationToken
-                    )
+                    document,
+                    predicate,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (
                     unnecessaryImports == null
@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                     document,
                     unnecessaryImports,
                     cancellationToken
-                ).Visit(oldRoot);
+                )
+                    .Visit(oldRoot);
 
                 cancellationToken.ThrowIfCancellationRequested();
                 return document.WithSyntaxRoot(

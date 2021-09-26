@@ -41,12 +41,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
         private string GetDebuggerDisplay()
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "Annotation: Kind='{0}' Data='{1}'",
-                this.Kind ?? "",
-                this.Data ?? ""
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "Annotation: Kind='{0}' Data='{1}'",
+                    this.Kind ?? "",
+                    this.Data ?? ""
+                );
         }
 
         public bool Equals(SyntaxAnnotation other)

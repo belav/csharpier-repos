@@ -42,10 +42,10 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
             }
 
             return await Formatter.FormatAsync(
-                    document,
-                    spans,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                spans,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
                     return root;
                 }
 
-                return await root.SyntaxTree.WithChangedText(oldText.WithChanges(changes))
+                return await root.SyntaxTree
+                    .WithChangedText(oldText.WithChanges(changes))
                     .GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
             }

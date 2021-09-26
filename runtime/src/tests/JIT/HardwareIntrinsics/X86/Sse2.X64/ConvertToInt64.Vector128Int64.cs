@@ -175,9 +175,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Sse2.X64.ConvertToInt64(
-                Unsafe.Read<Vector128<Int64>>(_dataTable.inArrayPtr)
-            );
+            var result = Sse2.X64
+                .ConvertToInt64(Unsafe.Read<Vector128<Int64>>(_dataTable.inArrayPtr));
 
             ValidateResult(_dataTable.inArrayPtr, result);
         }
@@ -186,9 +185,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = Sse2.X64.ConvertToInt64(
-                Sse2.LoadVector128((Int64*)(_dataTable.inArrayPtr))
-            );
+            var result = Sse2.X64
+                .ConvertToInt64(Sse2.LoadVector128((Int64*)(_dataTable.inArrayPtr)));
 
             ValidateResult(_dataTable.inArrayPtr, result);
         }
@@ -197,9 +195,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_LoadAligned));
 
-            var result = Sse2.X64.ConvertToInt64(
-                Sse2.LoadAlignedVector128((Int64*)(_dataTable.inArrayPtr))
-            );
+            var result = Sse2.X64
+                .ConvertToInt64(Sse2.LoadAlignedVector128((Int64*)(_dataTable.inArrayPtr)));
 
             ValidateResult(_dataTable.inArrayPtr, result);
         }
@@ -208,10 +205,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Sse2.X64).GetMethod(
-                    nameof(Sse2.X64.ConvertToInt64),
-                    new Type[] { typeof(Vector128<Int64>) }
-                )
+            var result = typeof(Sse2.X64)
+                .GetMethod(nameof(Sse2.X64.ConvertToInt64), new Type[] { typeof(Vector128<Int64>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector128<Int64>>(_dataTable.inArrayPtr) }
@@ -224,10 +219,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse2.X64).GetMethod(
-                    nameof(Sse2.X64.ConvertToInt64),
-                    new Type[] { typeof(Vector128<Int64>) }
-                )
+            var result = typeof(Sse2.X64)
+                .GetMethod(nameof(Sse2.X64.ConvertToInt64), new Type[] { typeof(Vector128<Int64>) })
                 .Invoke(null, new object[] { Sse2.LoadVector128((Int64*)(_dataTable.inArrayPtr)) });
 
             ValidateResult(_dataTable.inArrayPtr, (Int64)(result));
@@ -237,10 +230,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse2.X64).GetMethod(
-                    nameof(Sse2.X64.ConvertToInt64),
-                    new Type[] { typeof(Vector128<Int64>) }
-                )
+            var result = typeof(Sse2.X64)
+                .GetMethod(nameof(Sse2.X64.ConvertToInt64), new Type[] { typeof(Vector128<Int64>) })
                 .Invoke(
                     null,
                     new object[] { Sse2.LoadAlignedVector128((Int64*)(_dataTable.inArrayPtr)) }
@@ -387,12 +378,12 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse2.X64)}.{nameof(Sse2.X64.ConvertToInt64)}<Int64>(Vector128<Int64>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse2.X64)}.{nameof(Sse2.X64.ConvertToInt64)}<Int64>(Vector128<Int64>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($"   result: result");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

@@ -67,7 +67,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         }
 
         public bool IsHttpsDevelopmentCertificate(X509Certificate2 certificate) =>
-            certificate.Extensions.OfType<X509Extension>()
+            certificate.Extensions
+                .OfType<X509Extension>()
                 .Any(e => string.Equals(AspNetHttpsOid, e.Oid?.Value, StringComparison.Ordinal));
 
         public IList<X509Certificate2> ListCertificates(
@@ -99,8 +100,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                     Log.CheckCertificatesValidity();
                     var now = DateTimeOffset.Now;
                     var validCertificates = matchingCertificates.Where(
-                            c => IsValidCertificate(c, now, requireExportable)
-                        )
+                        c => IsValidCertificate(c, now, requireExportable)
+                    )
                         .OrderByDescending(c => GetCertificateVersion(c))
                         .ToArray();
 
@@ -139,20 +140,19 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             }
 
             bool HasOid(X509Certificate2 certificate, string oid) =>
-                certificate.Extensions.OfType<X509Extension>()
+                certificate.Extensions
+                    .OfType<X509Extension>()
                     .Any(e => string.Equals(oid, e.Oid?.Value, StringComparison.Ordinal));
 
             static byte GetCertificateVersion(X509Certificate2 c)
             {
                 var byteArray =
-                    c.Extensions.OfType<X509Extension>()
+                    c.Extensions
+                        .OfType<X509Extension>()
                         .Where(
                             e =>
-                                string.Equals(
-                                    AspNetHttpsOid,
-                                    e.Oid?.Value,
-                                    StringComparison.Ordinal
-                                )
+                                string
+                                    .Equals(AspNetHttpsOid, e.Oid?.Value, StringComparison.Ordinal)
                         )
                         .Single().RawData;
 
@@ -598,12 +598,13 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                             Array.Clear(keyBytes, 0, keyBytes.Length);
                             Array.Clear(pem, 0, pem.Length);
 
-                            bytes = Encoding.ASCII.GetBytes(
-                                PemEncoding.Write(
-                                    "CERTIFICATE",
-                                    certificate.Export(X509ContentType.Cert)
-                                )
-                            );
+                            bytes = Encoding.ASCII
+                                .GetBytes(
+                                    PemEncoding.Write(
+                                        "CERTIFICATE",
+                                        certificate.Export(X509ContentType.Cert)
+                                    )
+                                );
                             break;
                         default:
                             throw new InvalidOperationException("Unknown format.");
@@ -613,12 +614,13 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                 {
                     if (format == CertificateKeyExportFormat.Pem)
                     {
-                        bytes = Encoding.ASCII.GetBytes(
-                            PemEncoding.Write(
-                                "CERTIFICATE",
-                                certificate.Export(X509ContentType.Cert)
-                            )
-                        );
+                        bytes = Encoding.ASCII
+                            .GetBytes(
+                                PemEncoding.Write(
+                                    "CERTIFICATE",
+                                    certificate.Export(X509ContentType.Cert)
+                                )
+                            );
                     }
                     else
                     {
@@ -875,7 +877,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                 }
                 using var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
                 store.Open(OpenFlags.ReadWrite);
-                var matching = store.Certificates.OfType<X509Certificate2>()
+                var matching = store.Certificates
+                    .OfType<X509Certificate2>()
                     .Single(c => c.SerialNumber == certificate.SerialNumber);
 
                 store.Remove(matching);
@@ -892,12 +895,13 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         internal static string ToCertificateDescription(
             IEnumerable<X509Certificate2> matchingCertificates
         ) =>
-            string.Join(
-                Environment.NewLine,
-                matchingCertificates.OrderBy(c => c.Thumbprint)
-                    .Select(c => GetDescription(c))
-                    .ToArray()
-            );
+            string
+                .Join(
+                    Environment.NewLine,
+                    matchingCertificates.OrderBy(c => c.Thumbprint)
+                        .Select(c => GetDescription(c))
+                        .ToArray()
+                );
 
         internal static string GetDescription(X509Certificate2 c) =>
             $"{c.Thumbprint[0..6]} - {c.Subject} - {c.GetEffectiveDateString()} - {c.GetExpirationDateString()} - {Instance.IsHttpsDevelopmentCertificate(c)} - {Instance.IsExportable(c)}";

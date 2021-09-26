@@ -303,7 +303,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 ? _foreignKeys.Count == 0
                     ? _baseType.FindForeignKeys(properties)
                     : _baseType.FindForeignKeys(properties)
-                          .Concat(FindDeclaredForeignKeys(properties))
+                      .Concat(FindDeclaredForeignKeys(properties))
                 : FindDeclaredForeignKeys(properties);
 
         private SlimForeignKey? FindForeignKey(
@@ -354,10 +354,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             foreach (var fk in FindDeclaredForeignKeys(properties))
             {
                 if (
-                    PropertyListComparer.Instance.Equals(
-                        fk.PrincipalKey.Properties,
-                        principalKey.Properties
-                    )
+                    PropertyListComparer.Instance
+                        .Equals(fk.PrincipalKey.Properties, principalKey.Properties)
                     && fk.PrincipalEntityType == principalEntityType
                 )
                 {
@@ -373,7 +371,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 ? (DeclaredReferencingForeignKeys?.Count ?? 0) == 0
                     ? _baseType.GetReferencingForeignKeys()
                     : _baseType.GetReferencingForeignKeys()
-                          .Concat(GetDeclaredReferencingForeignKeys())
+                      .Concat(GetDeclaredReferencingForeignKeys())
                 : GetDeclaredReferencingForeignKeys();
 
         private IEnumerable<SlimForeignKey> GetDeclaredReferencingForeignKeys() =>
@@ -810,7 +808,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                           this,
                           static entityType =>
                           {
-                              ((IModel)entityType.Model).GetModelDependencies()
+                              ((IModel)entityType.Model)
+                                  .GetModelDependencies()
                                   .ConstructorBindingFactory.GetBindings(
                                       entityType,
                                       out entityType._constructorBinding,
@@ -855,13 +854,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual DebugView DebugView =>
             new(
                 () =>
-                    ((IReadOnlyEntityType)this).ToDebugString(
-                        MetadataDebugStringOptions.ShortDefault
-                    ),
+                    ((IReadOnlyEntityType)this)
+                        .ToDebugString(MetadataDebugStringOptions.ShortDefault),
                 () =>
-                    ((IReadOnlyEntityType)this).ToDebugString(
-                        MetadataDebugStringOptions.LongDefault
-                    )
+                    ((IReadOnlyEntityType)this)
+                        .ToDebugString(MetadataDebugStringOptions.LongDefault)
             );
 
         /// <inheritdoc/>
@@ -1335,11 +1332,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     var contextParam = Expression.Parameter(typeof(MaterializationContext), "mc");
 
                     return Expression.Lambda<Func<MaterializationContext, object>>(
-                            binding.CreateConstructorExpression(
-                                new ParameterBindingInfo(entityType, contextParam)
-                            ),
-                            contextParam
-                        )
+                        binding.CreateConstructorExpression(
+                            new ParameterBindingInfo(entityType, contextParam)
+                        ),
+                        contextParam
+                    )
                         .Compile();
                 }
             );

@@ -128,9 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     }
 
                     // Existing members, try to stay consistent with their style.
-                    var lastMember = destinationOpt.Members.LastOrDefault(
-                        m => m.EqualsValue != null
-                    );
+                    var lastMember = destinationOpt.Members
+                        .LastOrDefault(m => m.EqualsValue != null);
                     if (lastMember != null)
                     {
                         var lastExpression = lastMember.EqualsValue.Value;

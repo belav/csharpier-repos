@@ -39,10 +39,8 @@
 
             protected override void Because_of()
             {
-                IQueryable<Source> sources = new[]
-                {
-                    new Source() { OtherValue = 10 }
-                }.AsQueryable();
+                IQueryable<Source> sources = new[] { new Source() { OtherValue = 10 } }
+                    .AsQueryable();
 
                 _dest = sources.ProjectTo<Dest>(Configuration).ToArray();
             }

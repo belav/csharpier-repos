@@ -96,12 +96,13 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
                 var options = compilation.Options;
                 if (additionalEnabledDiagnostics.Length > 0)
                 {
-                    options = compilation.Options.WithSpecificDiagnosticOptions(
-                        additionalEnabledDiagnostics.ToDictionary(
-                            s => s,
-                            s => ReportDiagnostic.Info
-                        )
-                    );
+                    options = compilation.Options
+                        .WithSpecificDiagnosticOptions(
+                            additionalEnabledDiagnostics.ToDictionary(
+                                s => s,
+                                s => ReportDiagnostic.Info
+                            )
+                        );
                 }
 
                 var compilationWithAnalyzers = compilation.WithOptions(options)
@@ -120,10 +121,10 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
                 // We want to KEEP errors because we might have written bad code. But sometimes we leave warnings in to make the
                 // test code more convenient
                 diags = diags.Where(
-                        d =>
-                            d.Severity == DiagnosticSeverity.Error
-                            || analyzer.SupportedDiagnostics.Any(s => s.Id.Equals(d.Id))
-                    )
+                    d =>
+                        d.Severity == DiagnosticSeverity.Error
+                        || analyzer.SupportedDiagnostics.Any(s => s.Id.Equals(d.Id))
+                )
                     .ToImmutableArray();
 
                 foreach (var diag in diags)
@@ -178,11 +179,11 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
             Solution = Solution ?? new AdhocWorkspace().CurrentSolution;
 
             Solution = Solution.AddProject(
-                    projectId,
-                    TestProjectName,
-                    TestProjectName,
-                    LanguageNames.CSharp
-                )
+                projectId,
+                TestProjectName,
+                TestProjectName,
+                LanguageNames.CSharp
+            )
                 .WithProjectCompilationOptions(
                     projectId,
                     new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)

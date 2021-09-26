@@ -985,14 +985,15 @@ namespace System.Management
                 if (
                     (q.Length >= keyword.Length)
                     && (
-                        string.Compare(
-                            q,
-                            0,
-                            keyword,
-                            0,
-                            keyword.Length,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                        string
+                            .Compare(
+                                q,
+                                0,
+                                keyword,
+                                0,
+                                keyword.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
                     )
                 ) //select clause found
                 {
@@ -1041,14 +1042,15 @@ namespace System.Management
                 if (
                     (q.Length >= keyword.Length)
                     && (
-                        string.Compare(
-                            q,
-                            0,
-                            keyword,
-                            0,
-                            keyword.Length,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                        string
+                            .Compare(
+                                q,
+                                0,
+                                keyword,
+                                0,
+                                keyword.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
                     )
                 ) //from clause found
                     ParseToken(ref q, keyword, null, ref bFound, ref className);
@@ -1060,14 +1062,15 @@ namespace System.Management
                 if (
                     (q.Length >= keyword.Length)
                     && (
-                        string.Compare(
-                            q,
-                            0,
-                            keyword,
-                            0,
-                            keyword.Length,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                        string
+                            .Compare(
+                                q,
+                                0,
+                                keyword,
+                                0,
+                                keyword.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
                     )
                 ) //where clause exists
                 {
@@ -1084,14 +1087,15 @@ namespace System.Management
                     (q.Length < keyword.Length)
                     || (
                         0
-                        != string.Compare(
-                            q,
-                            0,
-                            keyword,
-                            0,
-                            keyword.Length,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        != string
+                            .Compare(
+                                q,
+                                0,
+                                keyword,
+                                0,
+                                keyword.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                 )
                     throw new ArgumentException(
@@ -1117,14 +1121,15 @@ namespace System.Management
                     (q.Length < keyword.Length)
                     || (
                         0
-                        != string.Compare(
-                            q,
-                            0,
-                            keyword,
-                            0,
-                            keyword.Length,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        != string
+                            .Compare(
+                                q,
+                                0,
+                                keyword,
+                                0,
+                                keyword.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                 )
                     throw new ArgumentException(
@@ -1141,14 +1146,15 @@ namespace System.Management
                     (q.Length < keyword.Length)
                     || (
                         0
-                        != string.Compare(
-                            q,
-                            0,
-                            keyword,
-                            0,
-                            keyword.Length,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        != string
+                            .Compare(
+                                q,
+                                0,
+                                keyword,
+                                0,
+                                keyword.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                 )
                     throw new ArgumentException(
@@ -1168,14 +1174,15 @@ namespace System.Management
                         (q.Length < keyword.Length)
                         || (
                             0
-                            != string.Compare(
-                                q,
-                                0,
-                                keyword,
-                                0,
-                                keyword.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            != string
+                                .Compare(
+                                    q,
+                                    0,
+                                    keyword,
+                                    0,
+                                    keyword.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                         throw new ArgumentException(
@@ -1799,14 +1806,15 @@ namespace System.Management
             //Find "associators" clause
             if (
                 0
-                != string.Compare(
-                    q,
-                    0,
-                    TokenAssociators,
-                    0,
-                    TokenAssociators.Length,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                != string
+                    .Compare(
+                        q,
+                        0,
+                        TokenAssociators,
+                        0,
+                        TokenAssociators.Length,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
                 throw new ArgumentException(
                     SR.Format(SR.InvalidQueryTokenExpected, TokenAssociators),
@@ -1825,14 +1833,8 @@ namespace System.Management
             // Next token should be "of"
             if (
                 0
-                != string.Compare(
-                    q,
-                    0,
-                    TokenOf,
-                    0,
-                    TokenOf.Length,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                != string
+                    .Compare(q, 0, TokenOf, 0, TokenOf.Length, StringComparison.OrdinalIgnoreCase)
             )
                 throw new ArgumentException(
                     SR.Format(SR.InvalidQueryTokenExpected, TokenOf),
@@ -1862,14 +1864,15 @@ namespace System.Management
                 // Next should be the "where" clause
                 if (
                     0
-                    != string.Compare(
-                        q,
-                        0,
-                        TokenWhere,
-                        0,
-                        TokenWhere.Length,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    != string
+                        .Compare(
+                            q,
+                            0,
+                            TokenWhere,
+                            0,
+                            TokenWhere.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                     throw new ArgumentException(
                         SR.Format(SR.InvalidQueryTokenExpected, TokenWhere),
@@ -1901,14 +1904,15 @@ namespace System.Management
                         (q.Length >= TokenResultClass.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenResultClass,
-                                0,
-                                TokenResultClass.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenResultClass,
+                                    0,
+                                    TokenResultClass.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                         ParseToken(
@@ -1922,14 +1926,15 @@ namespace System.Management
                         (q.Length >= TokenAssocClass.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenAssocClass,
-                                0,
-                                TokenAssocClass.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenAssocClass,
+                                    0,
+                                    TokenAssocClass.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                         ParseToken(
@@ -1943,14 +1948,15 @@ namespace System.Management
                         (q.Length >= TokenResultRole.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenResultRole,
-                                0,
-                                TokenResultRole.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenResultRole,
+                                    0,
+                                    TokenResultRole.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                         ParseToken(
@@ -1964,14 +1970,15 @@ namespace System.Management
                         (q.Length >= TokenRole.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenRole,
-                                0,
-                                TokenRole.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenRole,
+                                    0,
+                                    TokenRole.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                         ParseToken(ref q, TokenRole, "=", ref bRoleFound, ref tempThisRole);
@@ -1979,14 +1986,15 @@ namespace System.Management
                         (q.Length >= TokenRequiredQualifier.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenRequiredQualifier,
-                                0,
-                                TokenRequiredQualifier.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenRequiredQualifier,
+                                    0,
+                                    TokenRequiredQualifier.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                         ParseToken(
@@ -2000,14 +2008,15 @@ namespace System.Management
                         (q.Length >= TokenRequiredAssocQualifier.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenRequiredAssocQualifier,
-                                0,
-                                TokenRequiredAssocQualifier.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenRequiredAssocQualifier,
+                                    0,
+                                    TokenRequiredAssocQualifier.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                         ParseToken(
@@ -2021,14 +2030,15 @@ namespace System.Management
                         (q.Length >= TokenSchemaOnly.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenSchemaOnly,
-                                0,
-                                TokenSchemaOnly.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenSchemaOnly,
+                                    0,
+                                    TokenSchemaOnly.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                     {
@@ -2039,14 +2049,15 @@ namespace System.Management
                         (q.Length >= TokenClassDefsOnly.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenClassDefsOnly,
-                                0,
-                                TokenClassDefsOnly.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenClassDefsOnly,
+                                    0,
+                                    TokenClassDefsOnly.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                     {
@@ -2527,14 +2538,15 @@ namespace System.Management
             //Find "references" clause
             if (
                 0
-                != string.Compare(
-                    q,
-                    0,
-                    TokenReferences,
-                    0,
-                    TokenReferences.Length,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                != string
+                    .Compare(
+                        q,
+                        0,
+                        TokenReferences,
+                        0,
+                        TokenReferences.Length,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
                 throw new ArgumentException(
                     SR.Format(SR.InvalidQueryTokenExpected, TokenReferences),
@@ -2553,14 +2565,8 @@ namespace System.Management
             // Next token should be "of"
             if (
                 0
-                != string.Compare(
-                    q,
-                    0,
-                    TokenOf,
-                    0,
-                    TokenOf.Length,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                != string
+                    .Compare(q, 0, TokenOf, 0, TokenOf.Length, StringComparison.OrdinalIgnoreCase)
             )
                 throw new ArgumentException(
                     SR.Format(SR.InvalidQueryTokenExpected, TokenOf),
@@ -2590,14 +2596,15 @@ namespace System.Management
                 // Next should be the "where" clause
                 if (
                     0
-                    != string.Compare(
-                        q,
-                        0,
-                        TokenWhere,
-                        0,
-                        TokenWhere.Length,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    != string
+                        .Compare(
+                            q,
+                            0,
+                            TokenWhere,
+                            0,
+                            TokenWhere.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                     throw new ArgumentException(
                         SR.Format(SR.InvalidQueryTokenExpected, TokenWhere),
@@ -2626,14 +2633,15 @@ namespace System.Management
                         (q.Length >= TokenResultClass.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenResultClass,
-                                0,
-                                TokenResultClass.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenResultClass,
+                                    0,
+                                    TokenResultClass.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                         ParseToken(
@@ -2647,14 +2655,15 @@ namespace System.Management
                         (q.Length >= TokenRole.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenRole,
-                                0,
-                                TokenRole.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenRole,
+                                    0,
+                                    TokenRole.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                         ParseToken(ref q, TokenRole, "=", ref bRoleFound, ref tempThisRole);
@@ -2662,14 +2671,15 @@ namespace System.Management
                         (q.Length >= TokenRequiredQualifier.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenRequiredQualifier,
-                                0,
-                                TokenRequiredQualifier.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenRequiredQualifier,
+                                    0,
+                                    TokenRequiredQualifier.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                         ParseToken(
@@ -2683,14 +2693,15 @@ namespace System.Management
                         (q.Length >= TokenClassDefsOnly.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenClassDefsOnly,
-                                0,
-                                TokenClassDefsOnly.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenClassDefsOnly,
+                                    0,
+                                    TokenClassDefsOnly.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                     {
@@ -2701,14 +2712,15 @@ namespace System.Management
                         (q.Length >= TokenSchemaOnly.Length)
                         && (
                             0
-                            == string.Compare(
-                                q,
-                                0,
-                                TokenSchemaOnly,
-                                0,
-                                TokenSchemaOnly.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    q,
+                                    0,
+                                    TokenSchemaOnly,
+                                    0,
+                                    TokenSchemaOnly.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                     {
@@ -3495,9 +3507,10 @@ namespace System.Management
                 s =
                     s
                     + " within "
-                    + withinInterval.TotalSeconds.ToString(
-                        (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(double))
-                    );
+                    + withinInterval.TotalSeconds
+                        .ToString(
+                            (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(double))
+                        );
 
             //Where clause
             if (!(Condition.Length == 0))
@@ -3509,9 +3522,10 @@ namespace System.Management
                 s =
                     s
                     + " group within "
-                    + groupWithinInterval.TotalSeconds.ToString(
-                        (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(double))
-                    );
+                    + groupWithinInterval.TotalSeconds
+                        .ToString(
+                            (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(double))
+                        );
 
                 //Group By clause
                 if ((null != groupByPropertyList) && (0 < groupByPropertyList.Count))
@@ -3564,14 +3578,15 @@ namespace System.Management
                 (q.Length < keyword.Length)
                 || (
                     0
-                    != string.Compare(
-                        q,
-                        0,
-                        keyword,
-                        0,
-                        keyword.Length,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    != string
+                        .Compare(
+                            q,
+                            0,
+                            keyword,
+                            0,
+                            keyword.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
             )
                 throw new ArgumentException(SR.InvalidQuery);
@@ -3590,14 +3605,15 @@ namespace System.Management
                 (q.Length < keyword.Length)
                 || (
                     0
-                    != string.Compare(
-                        q,
-                        0,
-                        keyword,
-                        0,
-                        keyword.Length,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    != string
+                        .Compare(
+                            q,
+                            0,
+                            keyword,
+                            0,
+                            keyword.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
             )
                 throw new ArgumentException(
@@ -3612,14 +3628,15 @@ namespace System.Management
                 (q.Length >= keyword.Length)
                 && (
                     0
-                    == string.Compare(
-                        q,
-                        0,
-                        keyword,
-                        0,
-                        keyword.Length,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    == string
+                        .Compare(
+                            q,
+                            0,
+                            keyword,
+                            0,
+                            keyword.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
             )
             {
@@ -3655,14 +3672,15 @@ namespace System.Management
                     (q.Length >= keyword.Length)
                     && (
                         0
-                        == string.Compare(
-                            q,
-                            0,
-                            keyword,
-                            0,
-                            keyword.Length,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        == string
+                            .Compare(
+                                q,
+                                0,
+                                keyword,
+                                0,
+                                keyword.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                 )
                 {
@@ -3708,14 +3726,15 @@ namespace System.Management
                     (q.Length >= keyword.Length)
                     && (
                         0
-                        == string.Compare(
-                            q,
-                            0,
-                            keyword,
-                            0,
-                            keyword.Length,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        == string
+                            .Compare(
+                                q,
+                                0,
+                                keyword,
+                                0,
+                                keyword.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                 )
                 { //the rest until the end is assumed to be the having condition
@@ -3740,14 +3759,15 @@ namespace System.Management
                 (w.Length >= keyword.Length)
                 && (
                     0
-                    == string.Compare(
-                        w,
-                        0,
-                        keyword,
-                        0,
-                        keyword.Length,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    == string
+                        .Compare(
+                            w,
+                            0,
+                            keyword,
+                            0,
+                            keyword.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
             ) //where clause exists
             {
@@ -3854,9 +3874,8 @@ namespace System.Management
             if (value is EventQuery && destinationType == typeof(InstanceDescriptor))
             {
                 EventQuery obj = ((EventQuery)(value));
-                ConstructorInfo ctor = typeof(EventQuery).GetConstructor(
-                    new Type[] { typeof(string) }
-                );
+                ConstructorInfo ctor = typeof(EventQuery)
+                    .GetConstructor(new Type[] { typeof(string) });
                 if (ctor != null)
                 {
                     return new InstanceDescriptor(ctor, new object[] { obj.QueryString });
@@ -3866,9 +3885,8 @@ namespace System.Management
             if (value is ObjectQuery && destinationType == typeof(InstanceDescriptor))
             {
                 ObjectQuery obj = ((ObjectQuery)(value));
-                ConstructorInfo ctor = typeof(ObjectQuery).GetConstructor(
-                    new Type[] { typeof(string) }
-                );
+                ConstructorInfo ctor = typeof(ObjectQuery)
+                    .GetConstructor(new Type[] { typeof(string) });
                 if (ctor != null)
                 {
                     return new InstanceDescriptor(ctor, new object[] { obj.QueryString });

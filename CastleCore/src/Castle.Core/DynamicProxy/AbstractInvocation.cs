@@ -168,16 +168,17 @@ namespace Castle.DynamicProxy
                 methodKindDescription = "method without target";
             }
 
-            var message = string.Format(
-                "This is a DynamicProxy2 error: {0} for method '{1}' which {2}. "
-                    + "When calling {3} there is no implementation to 'proceed' to and "
-                    + "it is the responsibility of the interceptor to mimic the implementation "
-                    + "(set return value, out arguments etc)",
-                interceptorsMessage,
-                Method,
-                methodKindIs,
-                methodKindDescription
-            );
+            var message = string
+                .Format(
+                    "This is a DynamicProxy2 error: {0} for method '{1}' which {2}. "
+                        + "When calling {3} there is no implementation to 'proceed' to and "
+                        + "it is the responsibility of the interceptor to mimic the implementation "
+                        + "(set return value, out arguments etc)",
+                    interceptorsMessage,
+                    Method,
+                    methodKindIs,
+                    methodKindDescription
+                );
 
             throw new NotImplementedException(message);
         }

@@ -273,10 +273,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Aes).GetMethod(
-                    nameof(Aes.InverseMixColumns),
-                    new Type[] { typeof(Vector128<Byte>) }
-                )
+            var result = typeof(Aes)
+                .GetMethod(nameof(Aes.InverseMixColumns), new Type[] { typeof(Vector128<Byte>) })
                 .Invoke(null, new object[] { Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Byte>)(result));
@@ -287,10 +285,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Aes).GetMethod(
-                    nameof(Aes.InverseMixColumns),
-                    new Type[] { typeof(Vector128<Byte>) }
-                )
+            var result = typeof(Aes)
+                .GetMethod(nameof(Aes.InverseMixColumns), new Type[] { typeof(Vector128<Byte>) })
                 .Invoke(null, new object[] { Aes.LoadVector128((Byte*)(_dataTable.inArrayPtr)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Byte>)(result));
@@ -301,10 +297,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Aes).GetMethod(
-                    nameof(Aes.InverseMixColumns),
-                    new Type[] { typeof(Vector128<Byte>) }
-                )
+            var result = typeof(Aes)
+                .GetMethod(nameof(Aes.InverseMixColumns), new Type[] { typeof(Vector128<Byte>) })
                 .Invoke(
                     null,
                     new object[] { Aes.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr)) }
@@ -506,15 +500,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Aes)}.{nameof(Aes.InverseMixColumns)}<Byte>(Vector128<Byte>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  expectedRet: ({string.Join(", ", _expectedRet)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Aes)}.{nameof(Aes.InverseMixColumns)}<Byte>(Vector128<Byte>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  expectedRet: ({string.Join(", ", _expectedRet)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

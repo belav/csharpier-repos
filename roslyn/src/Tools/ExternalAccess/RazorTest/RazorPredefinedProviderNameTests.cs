@@ -62,8 +62,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.UnitTests
         )
         {
             return namesType.GetFields(
-                    BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public
-                )
+                BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public
+            )
                 .Where(field => field.FieldType == typeof(string))
                 .ToImmutableDictionary(field => field.Name, field => (string)field.GetValue(null));
         }
@@ -73,8 +73,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.UnitTests
         )
         {
             return namesType.GetProperties(
-                    BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public
-                )
+                BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public
+            )
                 .Where(property => property.PropertyType == typeof(string))
                 .ToImmutableDictionary(
                     property => property.Name,

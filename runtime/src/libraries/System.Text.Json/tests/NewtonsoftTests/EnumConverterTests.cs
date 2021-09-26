@@ -48,14 +48,11 @@ namespace System.Text.Json.Tests
                 new JsonSerializerOptions { WriteIndented = true }
             );
 
-            Assert.Equal(
-                @"{
+            Assert.Equal(@"{
   ""StoreColor"": 2,
   ""NullableStoreColor1"": 8,
   ""NullableStoreColor2"": null
-}".NormalizeLineEndings(),
-                json
-            );
+}".NormalizeLineEndings(), json);
         }
 
         [Fact]
@@ -73,14 +70,11 @@ namespace System.Text.Json.Tests
                 new JsonSerializerOptions { WriteIndented = true }
             );
 
-            Assert.Equal(
-                @"{
+            Assert.Equal(@"{
   ""StoreColor"": 1000,
   ""NullableStoreColor1"": 1000,
   ""NullableStoreColor2"": null
-}".NormalizeLineEndings(),
-                json
-            );
+}".NormalizeLineEndings(), json);
         }
 
         [Fact]
@@ -98,14 +92,11 @@ namespace System.Text.Json.Tests
                 new JsonSerializerOptions { WriteIndented = true }
             );
 
-            Assert.Equal(
-                @"{
+            Assert.Equal(@"{
   ""StoreColor"": 10,
   ""NullableStoreColor1"": 0,
   ""NullableStoreColor2"": 11
-}".NormalizeLineEndings(),
-                json
-            );
+}".NormalizeLineEndings(), json);
         }
 
         [Fact]
@@ -121,13 +112,10 @@ namespace System.Text.Json.Tests
                 new JsonSerializerOptions { WriteIndented = true }
             );
 
-            Assert.Equal(
-                @"{
+            Assert.Equal(@"{
   ""Value1"": -2,
   ""Value2"": 6
-}".NormalizeLineEndings(),
-                json
-            );
+}".NormalizeLineEndings(), json);
         }
 
         [Fact]
@@ -144,13 +132,10 @@ namespace System.Text.Json.Tests
                 new JsonSerializerOptions { WriteIndented = true }
             );
 
-            Assert.Equal(
-                @"{
+            Assert.Equal(@"{
   ""Value1"": -1,
   ""Value2"": -2147483648
-}".NormalizeLineEndings(),
-                json
-            );
+}".NormalizeLineEndings(), json);
         }
 
         [Fact]
@@ -175,17 +160,14 @@ namespace System.Text.Json.Tests
                 }
             );
 
-            Assert.Equal(
-                @"[
+            Assert.Equal(@"[
   6,
   1,
   2,
   4,
   5,
   2147483647
-]".NormalizeLineEndings(),
-                json1
-            );
+]".NormalizeLineEndings(), json1);
 
             IList<Foo> foos = JsonSerializer.Deserialize<List<Foo>>(json1);
 
@@ -208,14 +190,11 @@ namespace System.Text.Json.Tests
                 }
             );
 
-            Assert.Equal(
-                @"[
+            Assert.Equal(@"[
   0,
   1,
   2
-]".NormalizeLineEndings(),
-                json2
-            );
+]".NormalizeLineEndings(), json2);
 
             IList<Bar> bars = JsonSerializer.Deserialize<List<Bar>>(json2);
 

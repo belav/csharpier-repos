@@ -47,7 +47,8 @@ namespace System.Net.Sockets.Tests
                 Array = new byte[length],
                 Count = count,
                 Offset = offset
-            }.ToActual();
+            }
+                .ToActual();
 
             await AssertThrowsSynchronously<ArgumentOutOfRangeException>(
                 () => ReceiveFromAsync(socket, buffer, GetGetDummyTestEndpoint())
@@ -277,8 +278,8 @@ namespace System.Net.Sockets.Tests
                 else
                 {
                     SocketException ex = await Assert.ThrowsAsync<SocketException>(
-                            () => receiveTask
-                        )
+                        () => receiveTask
+                    )
                         .WaitAsync(CancellationTestTimeout);
                     SocketError expectedError = UsesSync
                         ? SocketError.Interrupted
@@ -310,8 +311,8 @@ namespace System.Net.Sockets.Tests
                 await Task.Delay(50);
 
             SocketException exception = await Assert.ThrowsAnyAsync<SocketException>(
-                    () => ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint())
-                )
+                () => ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint())
+            )
                 .WaitAsync(CancellationTestTimeout);
 
             Assert.Equal(SocketError.Shutdown, exception.SocketErrorCode);
@@ -488,15 +489,15 @@ namespace System.Net.Sockets.Tests
                 cts.CancelAfter(100);
 
             OperationCanceledException ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () =>
-                        socket.ReceiveFromAsync(
-                                buffer,
-                                SocketFlags.None,
-                                dummy.LocalEndPoint,
-                                cts.Token
-                            )
-                            .AsTask()
-                )
+                () =>
+                    socket.ReceiveFromAsync(
+                        buffer,
+                        SocketFlags.None,
+                        dummy.LocalEndPoint,
+                        cts.Token
+                    )
+                        .AsTask()
+            )
                 .WaitAsync(CancellationTestTimeout);
             Assert.Equal(cts.Token, ex.CancellationToken);
         }

@@ -22,8 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
             var typeActivator = new Mock<ITypeActivatorCache>();
             typeActivator.Setup(
-                    ta => ta.CreateInstance<object>(It.IsAny<IServiceProvider>(), It.IsAny<Type>())
-                )
+                ta => ta.CreateInstance<object>(It.IsAny<IServiceProvider>(), It.IsAny<Type>())
+            )
                 .Returns(expectedInstance);
 
             var activator = new DefaultViewComponentActivator(typeActivator.Object);
@@ -47,8 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
             var typeActivator = new Mock<ITypeActivatorCache>();
             typeActivator.Setup(
-                    ta => ta.CreateInstance<object>(It.IsAny<IServiceProvider>(), It.IsAny<Type>())
-                )
+                ta => ta.CreateInstance<object>(It.IsAny<IServiceProvider>(), It.IsAny<Type>())
+            )
                 .Returns(expectedInstance);
 
             var activator = new DefaultViewComponentActivator(typeActivator.Object);

@@ -59,9 +59,8 @@ namespace X
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyPdb(
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -117,7 +116,7 @@ namespace X
     </method>
   </methods>
 </symbols>"
-                );
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/25737")]
@@ -143,9 +142,8 @@ namespace X
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyPdb(
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -201,7 +199,7 @@ namespace X
     </method>
   </methods>
 </symbols>"
-                );
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/25737")]
@@ -227,9 +225,8 @@ namespace X
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyPdb(
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -285,7 +282,7 @@ namespace X
     </method>
   </methods>
 </symbols>"
-                );
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/25737")]
@@ -311,9 +308,8 @@ namespace X
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyPdb(
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -369,7 +365,7 @@ namespace X
     </method>
   </methods>
 </symbols>"
-                );
+            );
         }
 
         [Fact]
@@ -1574,9 +1570,8 @@ namespace X
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyPdb(
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                @"
 <symbols>
     <files>
       <file id=""1"" name="""" language=""C#"" />
@@ -1608,7 +1603,7 @@ namespace X
         </method>
     </methods>
 </symbols>"
-                );
+            );
         }
 
         [Fact]
@@ -1628,9 +1623,8 @@ class C
 }
 "
             );
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyPdb(
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -1693,7 +1687,7 @@ class C
     </method>
   </methods>
 </symbols>"
-                );
+            );
         }
 
         [Fact]
@@ -1714,9 +1708,8 @@ class C
 "
             );
 
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyPdb(
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -1801,7 +1794,7 @@ class C
     </method>
   </methods>
 </symbols>"
-                );
+            );
         }
 
         [Fact]
@@ -1822,9 +1815,8 @@ class Derived : Base
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyPdb(
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -1856,7 +1848,7 @@ class Derived : Base
     </method>
   </methods>
 </symbols>"
-                );
+            );
         }
 
         [Fact]
@@ -1885,9 +1877,8 @@ class C : I1, I2
 "
             );
 
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyPdb(
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyPdb(
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -1922,7 +1913,7 @@ class C : I1, I2
     </method>
   </methods>
 </symbols>"
-                );
+            );
         }
 
         [WorkItem(692496, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/692496")]
@@ -2004,10 +1995,9 @@ public class Test
     }
 }
 ";
-            CompileAndVerify(source, new[] { libRef }, options: TestOptions.DebugExe)
-                .VerifyPdb(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(source, new[] { libRef }, options: TestOptions.DebugExe).VerifyPdb(
+                "Test.Main",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -2030,7 +2020,7 @@ public class Test
     </method>
   </methods>
 </symbols>"
-                );
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/25737")]
@@ -2342,12 +2332,13 @@ namespace goo
             var pdbbits = new MemoryStream();
             var result = compilation.Emit(exebits, pdbbits);
 
-            result.Diagnostics.Verify(
-                Diagnostic(ErrorCode.WRN_DebugFullNameTooLong, "Main")
-                    .WithArguments(
-                        "AACT TSystem.Action`7[[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-                    )
-            );
+            result.Diagnostics
+                .Verify(
+                    Diagnostic(ErrorCode.WRN_DebugFullNameTooLong, "Main")
+                        .WithArguments(
+                            "AACT TSystem.Action`7[[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                        )
+                );
         }
 
         [WorkItem(1084059, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1084059")]
@@ -2440,9 +2431,8 @@ class C
                             "Enumerable",
                             "DataColumn"
                         },
-                        reader.TypeReferences.Select(
-                            h => reader.GetString(reader.GetTypeReference(h).Name)
-                        )
+                        reader.TypeReferences
+                            .Select(h => reader.GetString(reader.GetTypeReference(h).Name))
                     );
 
                     Assert.Equal(1, reader.GetTableRowCount(TableIndex.TypeSpec));
@@ -2505,7 +2495,8 @@ class C
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using B;").WithLocation(3, 1),
                 // (4,1): hidden CS8019: Unnecessary using directive.
                 // using X = C.D;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = C.D;").WithLocation(4, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = C.D;")
+                    .WithLocation(4, 1),
                 // (6,1): hidden CS8019: Unnecessary using directive.
                 // using Z = F<int>;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Z = F<int>;")
@@ -2626,9 +2617,9 @@ class C
 }
 ";
             var libRef = CreateCompilation(
-                    sourceLib,
-                    assemblyName: "ImportedNoPiaTypesAssemblyName"
-                )
+                sourceLib,
+                assemblyName: "ImportedNoPiaTypesAssemblyName"
+            )
                 .EmitToImageReference(embedInteropTypes: true);
             var compilation = CreateCompilation(source, new[] { libRef });
             var v = CompileAndVerify(compilation);

@@ -94,12 +94,8 @@ namespace System.Net.Http.Formatting
                 }
 
                 MediaTypeHeaderValue bestMediaType = bestFormatterMatch.MediaType;
-                MediaTypeFormatter bestFormatter =
-                    bestFormatterMatch.Formatter.GetPerRequestFormatterInstance(
-                        type,
-                        request,
-                        bestMediaType
-                    );
+                MediaTypeFormatter bestFormatter = bestFormatterMatch.Formatter
+                    .GetPerRequestFormatterInstance(type, request, bestMediaType);
                 return new ContentNegotiationResult(bestFormatter, bestMediaType);
             }
 
@@ -370,14 +366,10 @@ namespace System.Net.Http.Formatting
                             encoding != null
                             && acceptCharset.Quality != FormattingUtilities.NoMatch
                             && (
-                                acceptCharset.Value.Equals(
-                                    encoding.WebName,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                                || acceptCharset.Value.Equals(
-                                    "*",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                acceptCharset.Value
+                                    .Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase)
+                                || acceptCharset.Value
+                                    .Equals("*", StringComparison.OrdinalIgnoreCase)
                             )
                         )
                         {
@@ -629,9 +621,9 @@ namespace System.Net.Http.Formatting
                 // Use OrderBy() instead of Array.Sort() as it performs fewer comparisons. In this case the comparisons
                 // are quite expensive so OrderBy() performs better.
                 return headerValues.OrderByDescending(
-                        m => m,
-                        MediaTypeWithQualityHeaderValueComparer.QualityComparer
-                    )
+                    m => m,
+                    MediaTypeWithQualityHeaderValueComparer.QualityComparer
+                )
                     .ToArray();
             }
             else
@@ -660,9 +652,9 @@ namespace System.Net.Http.Formatting
                 // Use OrderBy() instead of Array.Sort() as it performs fewer comparisons. In this case the comparisons
                 // are quite expensive so OrderBy() performs better.
                 return headerValues.OrderByDescending(
-                        m => m,
-                        StringWithQualityHeaderValueComparer.QualityComparer
-                    )
+                    m => m,
+                    StringWithQualityHeaderValueComparer.QualityComparer
+                )
                     .ToArray();
             }
             else

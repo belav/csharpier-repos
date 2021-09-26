@@ -180,7 +180,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public static void TestKeyAgreeEncryptedKey_FixedValue()
         {
             byte[] expectedEncryptedKey =
-                "c39323a9f5113c1465bf27b558ffeda656d606e08f8dc37e67cb8cbf7fb04d71dbe20071eaaa20db".HexToByteArray();
+                "c39323a9f5113c1465bf27b558ffeda656d606e08f8dc37e67cb8cbf7fb04d71dbe20071eaaa20db"
+                    .HexToByteArray();
 
             KeyAgreeRecipientInfo recipient = FixedValueKeyAgree1();
             byte[] encryptedKey = recipient.EncryptedKey;
@@ -219,7 +220,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 "0281806F96EF8C53A6919CC976E88B8F426696E7B7970ABC6BD4ABBDCF4CF34F89CEB6E8EF675000FAD2ECA3CAF9D0E51B00"
                 + "4FD19A943F1779748F343FE2059E6E8208D64CB2A5BF33B2C41C20F4AE950D8F8BD720F5747D7930AF86C612088747B5315A"
                 + "E68159A5AE8A80E928AA71F4E889CB2D581845EDC8F79DA5894CB7A40F9FBE"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             Assert.Equal(expectedKey, key);
         }
@@ -296,7 +298,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "1006092a864886f70d0107010403424d580428da28837b15e9bdf5528180a2e9beb91bf0d4519a5d76b655ebac9c43012d50"
                 + "d6b55f0618380210e4302b06092a864886f70d010701301406082a864886f70d030704087bb5f0d33e6e0354800814219a66"
                 + "c2ea1449"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             EnvelopedCms envelopedCms = new EnvelopedCms();
             envelopedCms.Decode(encryptedCms);
@@ -341,7 +344,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "160F8D3C223042A016041411DA1370316788112EB8594C864C2420AE7FBA420428DFBDC19AD44063478A0C125641BE27"
                 + "4113441AD5891C78F925097F06A3DF57F3F1E6D1160F8D3C22302B06092A864886F70D010701301406082A864886F70D"
                 + "030704088AADC286F258F6D78008FC304F518A653F83"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -450,7 +454,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             + "006f007200690074007902100ae59b0cb8119f8942eda74163413a020428c39323a9f5113c1465bf27b558ffeda656d606e0"
             + "8f8dc37e67cb8cbf7fb04d71dbe20071eaaa20db302b06092a864886f70d010701301406082a864886f70d0307040879d81f"
             + "ee4a736dde800892bc977ea496752d"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         private static byte[] s_KeyAgreeEncodedMessage_Ski = (
             "3082014d06092a864886f70d010703a082013e3082013a02010231820106a1820102020103a08196a18193300906072a8648"
@@ -460,6 +465,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             + "0109100305300f060b2a864886f70d0109100306050030443042a016041410da1370316788112eb8594c864c2420ae7fba42"
             + "0428dfbdc19ad44063478a0c125641be274113441ad5891c78f925097f06a3df57f3f1e6d1160f8d3c22302b06092a864886"
             + "f70d010701301406082a864886f70d030704088aadc286f258f6d78008fc304f518a653f83"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
     }
 }

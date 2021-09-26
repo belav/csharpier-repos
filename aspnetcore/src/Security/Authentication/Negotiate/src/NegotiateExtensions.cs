@@ -84,17 +84,19 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<NegotiateOptions> configureOptions
         )
         {
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IPostConfigureOptions<NegotiateOptions>,
-                    PostConfigureNegotiateOptions
-                >()
-            );
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<IStartupFilter>(
-                    new NegotiateOptionsValidationStartupFilter(authenticationScheme)
-                )
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IPostConfigureOptions<NegotiateOptions>,
+                        PostConfigureNegotiateOptions
+                    >()
+                );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<IStartupFilter>(
+                        new NegotiateOptionsValidationStartupFilter(authenticationScheme)
+                    )
+                );
             return builder.AddScheme<NegotiateOptions, NegotiateHandler>(
                 authenticationScheme,
                 displayName,

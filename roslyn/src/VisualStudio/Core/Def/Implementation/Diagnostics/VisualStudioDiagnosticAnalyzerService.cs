@@ -102,7 +102,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             }
 
             // Analyzers are only supported for C# and VB currently.
-            var projectsWithHierarchy = currentSolution.Projects.Where(
+            var projectsWithHierarchy = currentSolution.Projects
+                .Where(
                     p =>
                         p.Language == LanguageNames.CSharp
                         || p.Language == LanguageNames.VisualBasic
@@ -187,10 +188,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 )
                 {
                     // Change to show the name of the project as part of the menu item display text.
-                    command.Text = string.Format(
-                        ServicesVSResources.Run_Code_Analysis_on_0,
-                        project.Name
-                    );
+                    command.Text = string
+                        .Format(ServicesVSResources.Run_Code_Analysis_on_0, project.Name);
                 }
 
                 enabled = !VisualStudioCommandHandlerHelpers.IsBuildActive();
@@ -245,35 +244,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 $"{nameof(VisualStudioDiagnosticAnalyzerService)}_{nameof(RunAnalyzers)}"
             );
             Task.Run(
-                    async () =>
+                async () =>
+                {
+                    try
                     {
-                        try
-                        {
-                            var onProjectAnalyzed =
-                                statusBarUpdater != null
-                                    ? statusBarUpdater.OnProjectAnalyzed
-                                    : (Action<Project>)((Project _) => { });
-                            await _diagnosticService.ForceAnalyzeAsync(
-                                    solution,
-                                    onProjectAnalyzed,
-                                    project?.Id,
-                                    CancellationToken.None
-                                )
-                                .ConfigureAwait(false);
+                        var onProjectAnalyzed =
+                            statusBarUpdater != null
+                                ? statusBarUpdater.OnProjectAnalyzed
+                                : (Action<Project>)((Project _) => { });
+                        await _diagnosticService.ForceAnalyzeAsync(
+                            solution,
+                            onProjectAnalyzed,
+                            project?.Id,
+                            CancellationToken.None
+                        )
+                            .ConfigureAwait(false);
 
-                            // If user has disabled live analyzer execution for any project(s), i.e. set RunAnalyzersDuringLiveAnalysis = false,
-                            // then ForceAnalyzeAsync will not cause analyzers to execute.
-                            // We explicitly fetch diagnostics for such projects and report these as "Host" diagnostics.
-                            HandleProjectsWithDisabledAnalysis();
-                        }
-
-                        finally
-                        {
-                            statusBarUpdater?.Dispose();
-                        }
+                        // If user has disabled live analyzer execution for any project(s), i.e. set RunAnalyzersDuringLiveAnalysis = false,
+                        // then ForceAnalyzeAsync will not cause analyzers to execute.
+                        // We explicitly fetch diagnostics for such projects and report these as "Host" diagnostics.
+                        HandleProjectsWithDisabledAnalysis();
                     }
-                )
-                .CompletesAsyncOperation(asyncToken);
+
+                    finally
+                    {
+                        statusBarUpdater?.Dispose();
+                    }
+                }
+            ).CompletesAsyncOperation(asyncToken);
 
             return;
 
@@ -303,7 +301,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     for (var index = 0; index < projectsWithDisabledAnalysis.Length; index++)
                     {
                         var project = projectsWithDisabledAnalysis[index];
-                        project = project.Solution.WithRunAnalyzers(project.Id, runAnalyzers: true)
+                        project = project.Solution
+                            .WithRunAnalyzers(project.Id, runAnalyzers: true)
                             .GetProject(project.Id)!;
                         tasks[index] = Task.Run(
                             () =>
@@ -332,8 +331,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         {
             if (hierarchy != null)
             {
-                var projectMap =
-                    _workspace.Services.GetRequiredService<IHierarchyItemToProjectIdMap>();
+                var projectMap = _workspace.Services
+                    .GetRequiredService<IHierarchyItemToProjectIdMap>();
                 var projectHierarchyItem = _vsHierarchyItemManager.GetHierarchyItem(
                     hierarchy,
                     VSConstants.VSITEMID_ROOT
@@ -381,21 +380,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
                 _statusMessageWhileRunning =
                     projectOrSolutionName != null
-                        ? string.Format(
+                        ? string
+                          .Format(
                               ServicesVSResources.Running_code_analysis_for_0,
                               projectOrSolutionName
                           )
                         : ServicesVSResources.Running_code_analysis_for_Solution;
                 _statusMesageOnCompleted =
                     projectOrSolutionName != null
-                        ? string.Format(
+                        ? string
+                          .Format(
                               ServicesVSResources.Code_analysis_completed_for_0,
                               projectOrSolutionName
                           )
                         : ServicesVSResources.Code_analysis_completed_for_Solution;
                 _statusMesageOnTerminated =
                     projectOrSolutionName != null
-                        ? string.Format(
+                        ? string
+                          .Format(
                               ServicesVSResources.Code_analysis_terminated_before_completion_for_0,
                               projectOrSolutionName
                           )

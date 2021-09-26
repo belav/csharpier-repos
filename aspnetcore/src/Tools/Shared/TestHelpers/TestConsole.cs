@@ -47,7 +47,8 @@ namespace Microsoft.Extensions.Tools.Internal
 
         public ConsoleCancelEventArgs ConsoleCancelKey()
         {
-            var ctor = typeof(ConsoleCancelEventArgs).GetTypeInfo()
+            var ctor = typeof(ConsoleCancelEventArgs)
+                .GetTypeInfo()
                 .DeclaredConstructors.Single(
                     c => c.GetParameters().First().ParameterType == typeof(ConsoleSpecialKey)
                 );

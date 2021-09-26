@@ -51,8 +51,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         public CommandState GetCommandState(TCommandArgs args)
         {
             // Because this is expensive to compute, we just always say yes as long as the language allows it.
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             var findUsagesService = document?.GetLanguageService<TLanguageService>();
             return findUsagesService != null ? CommandState.Available : CommandState.Unspecified;
         }
@@ -69,14 +69,13 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                 if (!subjectBuffer.TryGetWorkspace(out var workspace))
                     return false;
 
-                var service = workspace.Services.GetLanguageServices(
-                    args.SubjectBuffer
-                )?.GetService<TLanguageService>();
+                var service = workspace.Services
+                    .GetLanguageServices(args.SubjectBuffer)?.GetService<TLanguageService>();
                 if (service == null)
                     return false;
 
-                var document =
-                    subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                var document = subjectBuffer.CurrentSnapshot
+                    .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                         context.OperationContext,
                         _threadingContext
                     );
@@ -109,15 +108,16 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                     )
                 )
                 {
-                    messageToShow = _threadingContext.JoinableTaskFactory.Run(
-                        () =>
-                            NavigateToOrPresentResultsAsync(
-                                document,
-                                caretPosition,
-                                service,
-                                userCancellationToken
-                            )
-                    );
+                    messageToShow = _threadingContext.JoinableTaskFactory
+                        .Run(
+                            () =>
+                                NavigateToOrPresentResultsAsync(
+                                    document,
+                                    caretPosition,
+                                    service,
+                                    userCancellationToken
+                                )
+                        );
                 }
 
                 if (messageToShow != null)
@@ -126,8 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                     // wait context. That means the command system won't attempt to show its own wait dialog
                     // and also will take it into consideration when measuring command handling duration.
                     context.OperationContext.TakeOwnership();
-                    var notificationService =
-                        document.Project.Solution.Workspace.Services.GetService<INotificationService>();
+                    var notificationService = document.Project.Solution.Workspace.Services
+                        .GetService<INotificationService>();
                     notificationService.SendNotification(
                         message: messageToShow,
                         title: DisplayName,
@@ -155,12 +155,12 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                 return context.Message;
 
             await _streamingPresenter.TryNavigateToOrPresentItemsAsync(
-                    _threadingContext,
-                    document.Project.Solution.Workspace,
-                    context.SearchTitle,
-                    context.GetDefinitions(),
-                    cancellationToken
-                )
+                _threadingContext,
+                document.Project.Solution.Workspace,
+                context.SearchTitle,
+                context.GetDefinitions(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return null;
         }

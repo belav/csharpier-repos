@@ -52,9 +52,8 @@ namespace System.MemoryTests
             );
 
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
-            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(
-                a.Length
-            );
+            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory)
+                .Slice(a.Length);
 
             Assert.Equal(0, memoryFromManager.Length);
             Assert.True(
@@ -82,10 +81,8 @@ namespace System.MemoryTests
             );
 
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
-            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(
-                3,
-                5
-            );
+            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory)
+                .Slice(3, 5);
 
             Assert.Equal(5, memoryFromManager.Length);
             Assert.True(
@@ -110,10 +107,8 @@ namespace System.MemoryTests
             );
 
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
-            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(
-                4,
-                6
-            );
+            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory)
+                .Slice(4, 6);
 
             Assert.Equal(6, memoryFromManager.Length);
             Assert.True(
@@ -141,10 +136,8 @@ namespace System.MemoryTests
             );
 
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
-            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(
-                a.Length,
-                0
-            );
+            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory)
+                .Slice(a.Length, 0);
 
             Assert.Equal(0, memoryFromManager.Length);
             Assert.True(

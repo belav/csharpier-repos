@@ -158,9 +158,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 .ToSet();
 
             var localName = NameGenerator.EnsureUniqueness(
-                    SyntaxGeneratorExtensions.GetLocalName(typeSymbol),
-                    reservedNames
-                )
+                SyntaxGeneratorExtensions.GetLocalName(typeSymbol),
+                reservedNames
+            )
                 .EscapeIdentifier();
 
             // Now, go and actually try to make the change.  This will allow us to see all the
@@ -220,13 +220,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var newLocalName = SyntaxFactory.Identifier(localName)
                 .WithAdditionalAnnotations(RenameAnnotation.Create());
             var isPattern = SyntaxFactory.IsPatternExpression(
-                    isExpression.Left,
-                    isExpression.OperatorToken,
-                    SyntaxFactory.DeclarationPattern(
-                        (TypeSyntax)isExpression.Right.WithTrailingTrivia(SyntaxFactory.Space),
-                        SyntaxFactory.SingleVariableDesignation(newLocalName)
-                    )
+                isExpression.Left,
+                isExpression.OperatorToken,
+                SyntaxFactory.DeclarationPattern(
+                    (TypeSyntax)isExpression.Right.WithTrailingTrivia(SyntaxFactory.Space),
+                    SyntaxFactory.SingleVariableDesignation(newLocalName)
                 )
+            )
                 .WithTriviaFrom(isExpression);
 
             editor.ReplaceNode(isExpression, isPattern);
@@ -245,15 +245,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             }
 
             var changedRoot = editor.GetChangedRoot();
-            var updatedSyntaxTree = semanticModel.SyntaxTree.WithRootAndOptions(
-                changedRoot,
-                semanticModel.SyntaxTree.Options
-            );
+            var updatedSyntaxTree = semanticModel.SyntaxTree
+                .WithRootAndOptions(changedRoot, semanticModel.SyntaxTree.Options);
 
-            var updatedCompilation = semanticModel.Compilation.ReplaceSyntaxTree(
-                semanticModel.SyntaxTree,
-                updatedSyntaxTree
-            );
+            var updatedCompilation = semanticModel.Compilation
+                .ReplaceSyntaxTree(semanticModel.SyntaxTree, updatedSyntaxTree);
 #pragma warning disable RS1030 // Do not invoke Compilation.GetSemanticModel() method within a diagnostic analyzer
             return updatedCompilation.GetSemanticModel(updatedSyntaxTree);
 #pragma warning restore RS1030 // Do not invoke Compilation.GetSemanticModel() method within a diagnostic analyzer

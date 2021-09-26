@@ -28,11 +28,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         null
                     }
                 );
-            var errors = (SqlErrorCollection)typeof(SqlErrorCollection).GetTypeInfo()
+            var errors = (SqlErrorCollection)typeof(SqlErrorCollection)
+                .GetTypeInfo()
                 .DeclaredConstructors.Single()
                 .Invoke(null);
 
-            typeof(SqlErrorCollection).GetRuntimeMethods()
+            typeof(SqlErrorCollection)
+                .GetRuntimeMethods()
                 .Single(m => m.Name == "Add")
                 .Invoke(errors, new object[] { error });
 

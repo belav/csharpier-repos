@@ -149,8 +149,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
 
             // Do we roam this at all?
-            var roamingSerializations =
-                optionKey.Option.StorageLocations.OfType<RoamingProfileStorageLocation>();
+            var roamingSerializations = optionKey.Option.StorageLocations
+                .OfType<RoamingProfileStorageLocation>();
 
             if (!roamingSerializations.Any())
             {
@@ -281,9 +281,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
 
             // Do we roam this at all?
-            var roamingSerialization =
-                optionKey.Option.StorageLocations.OfType<RoamingProfileStorageLocation>()
-                    .FirstOrDefault();
+            var roamingSerialization = optionKey.Option.StorageLocations
+                .OfType<RoamingProfileStorageLocation>()
+                .FirstOrDefault();
 
             if (roamingSerialization == null)
             {

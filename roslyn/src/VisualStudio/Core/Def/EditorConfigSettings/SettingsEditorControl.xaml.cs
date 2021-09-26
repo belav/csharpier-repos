@@ -65,9 +65,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
 
             var solution = _workspace.CurrentSolution;
-            var analyzerConfigDocument = solution.Projects.Select(
-                    p => p.TryGetExistingAnalyzerConfigDocumentAtPath(_filepath)
-                )
+            var analyzerConfigDocument = solution.Projects
+                .Select(p => p.TryGetExistingAnalyzerConfigDocumentAtPath(_filepath))
                 .FirstOrDefault();
             if (analyzerConfigDocument is null)
             {

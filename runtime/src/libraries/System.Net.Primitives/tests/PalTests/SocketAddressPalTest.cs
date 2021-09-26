@@ -216,8 +216,8 @@ namespace System.Net.Primitives.PalTests
         }
 
         public static IEnumerable<object[]> IPv4AddressAndPortData = IPv4AddressData.SelectMany(
-                o => PortData.Select(p => o.Concat(p))
-            )
+            o => PortData.Select(p => o.Concat(p))
+        )
             .Select(o => o.ToArray());
 
         [Theory, MemberData(nameof(IPv4AddressAndPortData))]
@@ -233,8 +233,8 @@ namespace System.Net.Primitives.PalTests
         }
 
         public static IEnumerable<object[]> IPv6AddressAndPortData = IPv6AddressData.SelectMany(
-                o => PortData.Select(p => o.Concat(p))
-            )
+            o => PortData.Select(p => o.Concat(p))
+        )
             .Select(o => o.ToArray());
 
         [Theory, MemberData(nameof(IPv6AddressAndPortData))]

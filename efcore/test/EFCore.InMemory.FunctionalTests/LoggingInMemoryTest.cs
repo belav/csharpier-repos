@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore
         protected override DbContextOptionsBuilder CreateOptionsBuilder(
             IServiceCollection services
         ) =>
-            new DbContextOptionsBuilder().UseInMemoryDatabase("LoggingInMemoryTest")
+            new DbContextOptionsBuilder()
+                .UseInMemoryDatabase("LoggingInMemoryTest")
                 .UseInternalServiceProvider(
                     services.AddEntityFrameworkInMemoryDatabase().BuildServiceProvider()
                 );

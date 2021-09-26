@@ -342,24 +342,24 @@ namespace System.Linq.Expressions.Tests
                 typeof(MulticastDelegate)
             );
             builder.DefineConstructor(
-                    MethodAttributes.RTSpecialName
-                        | MethodAttributes.HideBySig
-                        | MethodAttributes.Public,
-                    CallingConventions.Standard,
-                    new[] { typeof(object), typeof(IntPtr) }
-                )
+                MethodAttributes.RTSpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.Public,
+                CallingConventions.Standard,
+                new[] { typeof(object), typeof(IntPtr) }
+            )
                 .SetImplementationFlags(
                     MethodImplAttributes.Runtime | MethodImplAttributes.Managed
                 );
             builder.DefineMethod(
-                    "Invoke",
-                    MethodAttributes.Private
-                        | MethodAttributes.HideBySig
-                        | MethodAttributes.NewSlot
-                        | MethodAttributes.Virtual,
-                    typeof(int),
-                    Type.EmptyTypes
-                )
+                "Invoke",
+                MethodAttributes.Private
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Virtual,
+                typeof(int),
+                Type.EmptyTypes
+            )
                 .SetImplementationFlags(
                     MethodImplAttributes.Runtime | MethodImplAttributes.Managed
                 );
@@ -390,24 +390,24 @@ namespace System.Linq.Expressions.Tests
                 typeof(MulticastDelegate)
             );
             builder.DefineConstructor(
-                    MethodAttributes.RTSpecialName
-                        | MethodAttributes.HideBySig
-                        | MethodAttributes.Public,
-                    CallingConventions.Standard,
-                    new[] { typeof(object), typeof(IntPtr) }
-                )
+                MethodAttributes.RTSpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.Public,
+                CallingConventions.Standard,
+                new[] { typeof(object), typeof(IntPtr) }
+            )
                 .SetImplementationFlags(
                     MethodImplAttributes.Runtime | MethodImplAttributes.Managed
                 );
             builder.DefineMethod(
-                    "Invoke",
-                    MethodAttributes.Private
-                        | MethodAttributes.HideBySig
-                        | MethodAttributes.NewSlot
-                        | MethodAttributes.Virtual,
-                    typeof(int),
-                    Type.EmptyTypes
-                )
+                "Invoke",
+                MethodAttributes.Private
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Virtual,
+                typeof(int),
+                Type.EmptyTypes
+            )
                 .SetImplementationFlags(
                     MethodImplAttributes.Runtime | MethodImplAttributes.Managed
                 );
@@ -428,22 +428,22 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression refParam = Expression.Parameter(typeof(int).MakeByRefType());
             ParameterExpression param = Expression.Parameter(typeof(List<int>));
             Func<List<int>, List<int>> func = Expression.Lambda<Func<List<int>, List<int>>>(
-                    Expression.Block(
-                        Expression.Invoke(
-                            Expression.Lambda<RefIntAction>(
-                                Expression.AddAssign(refParam, Expression.Constant(2)),
-                                refParam
-                            ),
-                            Expression.MakeIndex(
-                                param,
-                                typeof(List<int>).GetProperty("Item"),
-                                new[] { Expression.Constant(0) }
-                            )
+                Expression.Block(
+                    Expression.Invoke(
+                        Expression.Lambda<RefIntAction>(
+                            Expression.AddAssign(refParam, Expression.Constant(2)),
+                            refParam
                         ),
-                        param
+                        Expression.MakeIndex(
+                            param,
+                            typeof(List<int>).GetProperty("Item"),
+                            new[] { Expression.Constant(0) }
+                        )
                     ),
                     param
-                )
+                ),
+                param
+            )
                 .Compile(useInterpreter);
             List<int> list = new List<int> { 9 };
             Assert.Equal(11, func(list)[0]);

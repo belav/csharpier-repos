@@ -49,31 +49,34 @@ namespace System.Xml
         )
         {
             if (buffer == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    nameof(buffer)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull(nameof(buffer));
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                    );
             if (offset > buffer.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        nameof(offset),
-                        SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
-                    )
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            nameof(offset),
+                            SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
+                        )
+                    );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
+                    );
             if (count > buffer.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        nameof(count),
-                        SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
-                    )
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            nameof(count),
+                            SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
+                        )
+                    );
             MoveToInitial(quotas, session, null);
             BufferReader.SetBuffer(buffer, offset, count, dictionary, session);
             _buffered = true;
@@ -88,9 +91,8 @@ namespace System.Xml
         )
         {
             if (stream == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    nameof(stream)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull(nameof(stream));
             MoveToInitial(quotas, session, null);
             BufferReader.SetBuffer(stream, dictionary, session);
             _buffered = false;
@@ -610,10 +612,8 @@ namespace System.Xml
                         VerifyWhitespace();
                     return true;
                 case XmlBinaryNodeType.BoolTextWithEndElement:
-                    MoveToAtomicTextWithEndElement()
-                        .Value.SetValue(
-                            ReadUInt8() != 0 ? ValueHandleType.True : ValueHandleType.False
-                        );
+                    MoveToAtomicTextWithEndElement().Value
+                        .SetValue(ReadUInt8() != 0 ? ValueHandleType.True : ValueHandleType.False);
                     if (this.OutsideRootElement)
                         VerifyWhitespace();
                     return true;
@@ -1370,31 +1370,34 @@ namespace System.Xml
         private void CheckArray(Array array, int offset, int count)
         {
             if (array == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException(nameof(array))
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException(nameof(array)));
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                    );
             if (offset > array.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        nameof(offset),
-                        SR.Format(SR.OffsetExceedsBufferSize, array.Length)
-                    )
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            nameof(offset),
+                            SR.Format(SR.OffsetExceedsBufferSize, array.Length)
+                        )
+                    );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
+                    );
             if (count > array.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        nameof(count),
-                        SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
-                    )
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            nameof(count),
+                            SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
+                        )
+                    );
         }
 
         private unsafe int ReadArray(bool[] array, int offset, int count)

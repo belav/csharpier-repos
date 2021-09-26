@@ -45,9 +45,8 @@ namespace System.IO
             Assert.Equal(1, rules.Count);
             var actualAddedRule = (FileSystemAccessRule)rules[0];
             Assert.Equal(
-                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
-                    typeof(NTAccount)
-                ),
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                    .Translate(typeof(NTAccount)),
                 actualAddedRule.IdentityReference
             );
             Assert.Equal(accessRule.FileSystemRights, actualAddedRule.FileSystemRights);
@@ -120,9 +119,8 @@ namespace System.IO
             Assert.Equal(2, rules.Count);
             var existingAccessRule = (FileSystemAccessRule)rules[0];
             Assert.Equal(
-                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
-                    typeof(NTAccount)
-                ),
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                    .Translate(typeof(NTAccount)),
                 existingAccessRule.IdentityReference
             );
             existingAccessRule = (FileSystemAccessRule)rules[1];
@@ -405,9 +403,8 @@ namespace System.IO
             Assert.Equal(2, rules.Count);
             var existingAccessRule = (FileSystemAccessRule)rules[0];
             Assert.Equal(
-                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
-                    typeof(NTAccount)
-                ),
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                    .Translate(typeof(NTAccount)),
                 existingAccessRule.IdentityReference
             );
             Assert.Equal(AccessControlType.Deny, existingAccessRule.AccessControlType);
@@ -485,9 +482,8 @@ namespace System.IO
             Assert.Equal(2, auditRules.Count);
             var firstAuditRule = (FileSystemAuditRule)auditRules[0];
             Assert.Equal(
-                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
-                    typeof(NTAccount)
-                ),
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                    .Translate(typeof(NTAccount)),
                 firstAuditRule.IdentityReference
             );
             Assert.Equal(AuditFlags.Success, firstAuditRule.AuditFlags);
@@ -534,9 +530,8 @@ namespace System.IO
             Assert.Equal(FileSystemRights.Read, existingRule.FileSystemRights);
             Assert.Equal(AuditFlags.Failure, existingRule.AuditFlags);
             Assert.Equal(
-                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
-                    typeof(NTAccount)
-                ),
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                    .Translate(typeof(NTAccount)),
                 existingRule.IdentityReference
             );
         }

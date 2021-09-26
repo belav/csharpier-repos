@@ -45,9 +45,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var triviaList = GetTriviaAtEdges(tokens, textSpan);
 
             var annotations = Enumerable.Range(
-                    (int)TriviaLocation.BeforeBeginningOfSpan,
-                    TriviaLocationsCount
-                )
+                (int)TriviaLocation.BeforeBeginningOfSpan,
+                TriviaLocationsCount
+            )
                 .Cast<TriviaLocation>()
                 .ToDictionary(location => location, _ => new SyntaxAnnotation());
 
@@ -158,15 +158,15 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             );
             tokens[TriviaLocation.BeforeBeginningOfSpan] = tokens[
                 TriviaLocation.AfterBeginningOfSpan
-            ].GetPreviousToken(includeZeroWidth: true);
+            ]
+                .GetPreviousToken(includeZeroWidth: true);
             tokens[TriviaLocation.BeforeEndOfSpan] = _syntaxFacts.FindTokenOnLeftOfPosition(
                 root,
                 textSpan.End,
                 includeSkipped: false
             );
-            tokens[TriviaLocation.AfterEndOfSpan] = tokens[
-                TriviaLocation.BeforeEndOfSpan
-            ].GetNextToken(includeZeroWidth: true);
+            tokens[TriviaLocation.AfterEndOfSpan] = tokens[TriviaLocation.BeforeEndOfSpan]
+                .GetNextToken(includeZeroWidth: true);
             return tokens;
         }
 

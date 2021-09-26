@@ -221,12 +221,13 @@ namespace System.Security.Authentication.ExtendedProtection
                     // Loosely validate the port just to make sure it was a port and not something else.
                     ushort portValue;
                     if (
-                        !ushort.TryParse(
-                            port,
-                            NumberStyles.Integer,
-                            CultureInfo.InvariantCulture,
-                            out portValue
-                        )
+                        !ushort
+                            .TryParse(
+                                port,
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out portValue
+                            )
                     )
                     {
                         return inputServiceName;
@@ -273,11 +274,12 @@ namespace System.Security.Authentication.ExtendedProtection
 
             // Don't return the new one unless we absolutely have to.  It may have only changed casing.
             if (
-                string.Equals(
-                    inputServiceName,
-                    normalizedServiceName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        inputServiceName,
+                        normalizedServiceName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 return inputServiceName;

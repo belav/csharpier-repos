@@ -63,7 +63,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 _multilevelDir,
                 Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"),
                 "exe"
-            ).AddMicrosoftNETCoreAppFrameworkMockHostPolicy("9999.0.0").Build();
+            )
+                .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("9999.0.0")
+                .Build();
 
             RepoDirectories = new RepoDirectoriesProvider(builtDotnet: DotNet.BinPath);
 

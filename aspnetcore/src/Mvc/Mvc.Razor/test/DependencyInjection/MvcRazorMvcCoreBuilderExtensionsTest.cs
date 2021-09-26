@@ -56,13 +56,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Test.DependencyInjection
         {
             // Arrange
             var services = new ServiceCollection();
-            var builder = services.AddMvcCore()
-                .ConfigureApplicationPartManager(
-                    manager =>
-                    {
-                        manager.ApplicationParts.Add(new TestApplicationPart());
-                    }
-                );
+            var builder = services.AddMvcCore().ConfigureApplicationPartManager(
+                manager =>
+                {
+                    manager.ApplicationParts.Add(new TestApplicationPart());
+                }
+            );
 
             // Act
             builder.AddTagHelpersAsServices();
@@ -85,9 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Test.DependencyInjection
             var services = new ServiceCollection();
 
             var manager = new ApplicationPartManager();
-            manager.ApplicationParts.Add(
-                new TestApplicationPart(typeof(TestTagHelperOne), typeof(TestTagHelperTwo))
-            );
+            manager.ApplicationParts
+                .Add(new TestApplicationPart(typeof(TestTagHelperOne), typeof(TestTagHelperTwo)));
 
             manager.FeatureProviders.Add(new TestFeatureProvider());
 

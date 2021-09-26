@@ -87,17 +87,13 @@ namespace System.Collections.Immutable.Tests
         public void ExceptDoesEnumerateSequenceIfThisIsEmpty()
         {
             bool enumerated = false;
-            Empty<int>()
-                .Except(
-                    Enumerable.Range(1, 1)
-                        .Select(
-                            n =>
-                            {
-                                enumerated = true;
-                                return n;
-                            }
-                        )
-                );
+            Empty<int>().Except(Enumerable.Range(1, 1).Select(
+                    n =>
+                    {
+                        enumerated = true;
+                        return n;
+                    }
+                ));
             Assert.True(enumerated);
         }
 

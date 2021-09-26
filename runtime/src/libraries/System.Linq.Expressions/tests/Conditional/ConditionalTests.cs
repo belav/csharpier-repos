@@ -451,24 +451,24 @@ namespace System.Linq.Expressions.Tests
         public void AnyTypesAllowedWithExplicitVoid(bool useInterpreter)
         {
             Action act = Expression.Lambda<Action>(
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(0),
-                        Expression.Constant(0L),
-                        typeof(void)
-                    )
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(0),
+                    Expression.Constant(0L),
+                    typeof(void)
                 )
+            )
                 .Compile(useInterpreter);
             act();
 
             act = Expression.Lambda<Action>(
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(0L),
-                        Expression.Constant(0),
-                        typeof(void)
-                    )
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(0L),
+                    Expression.Constant(0),
+                    typeof(void)
                 )
+            )
                 .Compile(useInterpreter);
             act();
         }
@@ -483,15 +483,15 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Func<object> func = Expression.Lambda<Func<object>>(
-                    Expression.Convert(
-                        Expression.Condition(
-                            Expression.Constant(test),
-                            Expression.Constant(ifTrue),
-                            Expression.Constant(ifFalse)
-                        ),
-                        typeof(object)
-                    )
+                Expression.Convert(
+                    Expression.Condition(
+                        Expression.Constant(test),
+                        Expression.Constant(ifTrue),
+                        Expression.Constant(ifFalse)
+                    ),
+                    typeof(object)
                 )
+            )
                 .Compile(useInterpreter);
 
             Assert.Equal(expected, func());
@@ -507,15 +507,15 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Func<object> func = Expression.Lambda<Func<object>>(
-                    Expression.Convert(
-                        Expression.Condition(
-                            Expression.Not(Expression.Constant(test)),
-                            Expression.Constant(ifFalse),
-                            Expression.Constant(ifTrue)
-                        ),
-                        typeof(object)
-                    )
+                Expression.Convert(
+                    Expression.Condition(
+                        Expression.Not(Expression.Constant(test)),
+                        Expression.Constant(ifFalse),
+                        Expression.Constant(ifTrue)
+                    ),
+                    typeof(object)
                 )
+            )
                 .Compile(useInterpreter);
 
             Assert.Equal(expected, func());
@@ -531,18 +531,18 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Func<object> func = Expression.Lambda<Func<object>>(
-                    Expression.Convert(
-                        Expression.Condition(
-                            Expression.Not(
-                                Expression.Constant(test),
-                                GetType().GetMethod(nameof(NotNot))
-                            ),
-                            Expression.Constant(ifTrue),
-                            Expression.Constant(ifFalse)
+                Expression.Convert(
+                    Expression.Condition(
+                        Expression.Not(
+                            Expression.Constant(test),
+                            GetType().GetMethod(nameof(NotNot))
                         ),
-                        typeof(object)
-                    )
+                        Expression.Constant(ifTrue),
+                        Expression.Constant(ifFalse)
+                    ),
+                    typeof(object)
                 )
+            )
                 .Compile(useInterpreter);
 
             Assert.Equal(expected, func());
@@ -559,13 +559,13 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Func<object> func = Expression.Lambda<Func<object>>(
-                    Expression.Condition(
-                        Expression.Constant(test),
-                        Expression.Constant(ifTrue),
-                        Expression.Constant(ifFalse),
-                        type
-                    )
+                Expression.Condition(
+                    Expression.Constant(test),
+                    Expression.Constant(ifTrue),
+                    Expression.Constant(ifFalse),
+                    type
                 )
+            )
                 .Compile(useInterpreter);
 
             Assert.Same(expected, func());
@@ -662,15 +662,15 @@ namespace System.Linq.Expressions.Tests
         public void TurnOnNullableComparedWithConstantNull(bool useInterpreter)
         {
             Func<int> func = Expression.Lambda<Func<int>>(
-                    Expression.Condition(
-                        Expression.Equal(
-                            Expression.Constant(2, typeof(int?)),
-                            Expression.Default(typeof(int?))
-                        ),
-                        Expression.Constant(1),
-                        Expression.Constant(2)
-                    )
+                Expression.Condition(
+                    Expression.Equal(
+                        Expression.Constant(2, typeof(int?)),
+                        Expression.Default(typeof(int?))
+                    ),
+                    Expression.Constant(1),
+                    Expression.Constant(2)
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(2, func());
         }
@@ -679,15 +679,15 @@ namespace System.Linq.Expressions.Tests
         public void TurnOnReferenceComparedWithConstantNull(bool useInterpreter)
         {
             Func<int> func = Expression.Lambda<Func<int>>(
-                    Expression.Condition(
-                        Expression.Equal(
-                            Expression.Constant(new object()),
-                            Expression.Default(typeof(object))
-                        ),
-                        Expression.Constant(1),
-                        Expression.Constant(2)
-                    )
+                Expression.Condition(
+                    Expression.Equal(
+                        Expression.Constant(new object()),
+                        Expression.Default(typeof(object))
+                    ),
+                    Expression.Constant(1),
+                    Expression.Constant(2)
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(2, func());
         }
@@ -696,15 +696,15 @@ namespace System.Linq.Expressions.Tests
         public void TurnOnConstantNullComparedWithNullable(bool useInterpreter)
         {
             Func<int> func = Expression.Lambda<Func<int>>(
-                    Expression.Condition(
-                        Expression.Equal(
-                            Expression.Default(typeof(int?)),
-                            Expression.Constant(2, typeof(int?))
-                        ),
-                        Expression.Constant(1),
-                        Expression.Constant(2)
-                    )
+                Expression.Condition(
+                    Expression.Equal(
+                        Expression.Default(typeof(int?)),
+                        Expression.Constant(2, typeof(int?))
+                    ),
+                    Expression.Constant(1),
+                    Expression.Constant(2)
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(2, func());
         }
@@ -713,15 +713,15 @@ namespace System.Linq.Expressions.Tests
         public void TurnOnConstantNullComparedWithReference(bool useInterpreter)
         {
             Func<int> func = Expression.Lambda<Func<int>>(
-                    Expression.Condition(
-                        Expression.Equal(
-                            Expression.Default(typeof(object)),
-                            Expression.Constant(new object())
-                        ),
-                        Expression.Constant(1),
-                        Expression.Constant(2)
-                    )
+                Expression.Condition(
+                    Expression.Equal(
+                        Expression.Default(typeof(object)),
+                        Expression.Constant(new object())
+                    ),
+                    Expression.Constant(1),
+                    Expression.Constant(2)
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(2, func());
         }

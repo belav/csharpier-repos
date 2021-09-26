@@ -13,9 +13,8 @@ namespace System.Runtime.InteropServices.Tests
             "", //Empty String
             "Test String",
             "A", //Single character string
-            string.Concat(
-                Enumerable.Repeat("This is a very long string as it repeats itself. ", 13)
-            ),
+            string
+                .Concat(Enumerable.Repeat("This is a very long string as it repeats itself. ", 13)),
             "This \n is \n a \n multiline \n string",
             "This \0 is \0 a \0 string \0 with \0 nulls",
             "\0string",

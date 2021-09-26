@@ -108,11 +108,12 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             {
                 FilterDescriptors = filterDescriptors,
                 MethodInfo =
-                    typeof(GetApiResponseTypes_ReturnsResponseTypesFromActionIfPresentController).GetMethod(
-                        nameof(
-                            GetApiResponseTypes_ReturnsResponseTypesFromActionIfPresentController.Get
-                        )
-                    ),
+                    typeof(GetApiResponseTypes_ReturnsResponseTypesFromActionIfPresentController)
+                        .GetMethod(
+                            nameof(
+                                GetApiResponseTypes_ReturnsResponseTypesFromActionIfPresentController.Get
+                            )
+                        ),
             };
 
             var provider = GetProvider();
@@ -670,12 +671,13 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 typeof(TestController),
                 nameof(TestController.PutModel)
             );
-            actionDescriptor.FilterDescriptors.Add(
-                new FilterDescriptor(
-                    new ProducesAttribute("application/json"),
-                    FilterScope.Controller
-                )
-            );
+            actionDescriptor.FilterDescriptors
+                .Add(
+                    new FilterDescriptor(
+                        new ProducesAttribute("application/json"),
+                        FilterScope.Controller
+                    )
+                );
             actionDescriptor.Properties[typeof(ApiConventionResult)] = new ApiConventionResult(
                 new IApiResponseMetadataProvider[]
                 {
@@ -735,12 +737,13 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 typeof(TestController),
                 nameof(TestController.PutModel)
             );
-            actionDescriptor.FilterDescriptors.Add(
-                new FilterDescriptor(
-                    new ProducesAttribute("application/json") { Type = typeof(string) },
-                    FilterScope.Controller
-                )
-            );
+            actionDescriptor.FilterDescriptors
+                .Add(
+                    new FilterDescriptor(
+                        new ProducesAttribute("application/json") { Type = typeof(string) },
+                        FilterScope.Controller
+                    )
+                );
             actionDescriptor.Properties[typeof(ApiConventionResult)] = new ApiConventionResult(
                 new IApiResponseMetadataProvider[]
                 {
@@ -816,9 +819,13 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 typeof(TestController),
                 nameof(TestController.GetUser)
             );
-            actionDescriptor.FilterDescriptors.Add(
-                new FilterDescriptor(new ProducesAttribute("application/pdf"), FilterScope.Action)
-            );
+            actionDescriptor.FilterDescriptors
+                .Add(
+                    new FilterDescriptor(
+                        new ProducesAttribute("application/pdf"),
+                        FilterScope.Action
+                    )
+                );
 
             var provider = GetProvider();
 
@@ -870,9 +877,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
             foreach (var filterAttribute in method.GetCustomAttributes().OfType<IFilterMetadata>())
             {
-                actionDescriptor.FilterDescriptors.Add(
-                    new FilterDescriptor(filterAttribute, FilterScope.Action)
-                );
+                actionDescriptor.FilterDescriptors
+                    .Add(new FilterDescriptor(filterAttribute, FilterScope.Action));
             }
 
             return actionDescriptor;

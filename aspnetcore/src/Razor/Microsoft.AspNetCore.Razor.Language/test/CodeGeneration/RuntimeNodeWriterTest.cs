@@ -419,9 +419,8 @@ WriteLiteral(""👧‍👧"");
             var context = TestCodeRenderingContext.CreateRuntime();
 
             var node = new HtmlContentIntermediateNode();
-            node.Children.Add(
-                new IntermediateToken() { Content = "SomeContent", Kind = TokenKind.Html, }
-            );
+            node.Children
+                .Add(new IntermediateToken() { Content = "SomeContent", Kind = TokenKind.Html, });
 
             // Act
             writer.WriteHtmlContent(context, node);
@@ -445,27 +444,28 @@ WriteLiteral(""👧‍👧"");
             var context = TestCodeRenderingContext.CreateRuntime();
 
             var node = new HtmlContentIntermediateNode();
-            node.Children.Add(
-                new IntermediateToken() { Content = new string('*', 2000), Kind = TokenKind.Html, }
-            );
+            node.Children
+                .Add(
+                    new IntermediateToken()
+                    {
+                        Content = new string('*', 2000),
+                        Kind = TokenKind.Html,
+                    }
+                );
 
             // Act
             writer.WriteHtmlContent(context, node);
 
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
-            Assert.Equal(
-                string.Format(
+            Assert.Equal(string.Format(
                     CultureInfo.InvariantCulture,
                     @"WriteLiteral(@""{0}"");
 WriteLiteral(@""{1}"");
 ",
                     new string('*', 1024),
                     new string('*', 976)
-                ),
-                csharp,
-                ignoreLineEndingDifferences: true
-            );
+                ), csharp, ignoreLineEndingDifferences: true);
         }
 
         [Fact]

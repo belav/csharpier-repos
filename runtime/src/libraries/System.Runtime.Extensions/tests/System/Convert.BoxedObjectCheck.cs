@@ -60,10 +60,8 @@ namespace System.Tests
                 {
                     try
                     {
-                        object converted = ((IConvertible)testValue).ToType(
-                            input[0].GetType(),
-                            null
-                        );
+                        object converted = ((IConvertible)testValue)
+                            .ToType(input[0].GetType(), null);
                         Assert.NotSame(testValue, converted);
                     }
                     catch (InvalidCastException) { }

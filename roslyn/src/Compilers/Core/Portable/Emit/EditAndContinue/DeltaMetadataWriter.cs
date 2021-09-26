@@ -651,9 +651,8 @@ namespace Microsoft.CodeAnalysis.Emit
             // First, visit all MethodImplementations and add to this.methodImplList.
             foreach (var methodImpl in typeDef.GetExplicitImplementationOverrides(Context))
             {
-                var methodDef = (IMethodDefinition?)methodImpl.ImplementingMethod.AsDefinition(
-                    this.Context
-                );
+                var methodDef = (IMethodDefinition?)methodImpl.ImplementingMethod
+                    .AsDefinition(this.Context);
                 RoslynDebug.AssertNotNull(methodDef);
 
                 int methodDefIndex;
@@ -735,14 +734,15 @@ namespace Microsoft.CodeAnalysis.Emit
         {
             if (symbol != null && _changes.IsAdded(symbol.GetISymbol()))
             {
-                Context.Diagnostics.Add(
-                    messageProvider.CreateDiagnostic(
-                        messageProvider.ERR_EncReferenceToAddedMember,
-                        GetSymbolLocation(symbol),
-                        symbol.Name,
-                        symbol.ContainingAssembly.Name
-                    )
-                );
+                Context.Diagnostics
+                    .Add(
+                        messageProvider.CreateDiagnostic(
+                            messageProvider.ERR_EncReferenceToAddedMember,
+                            GetSymbolLocation(symbol),
+                            symbol.Name,
+                            symbol.ContainingAssembly.Name
+                        )
+                    );
             }
         }
 
@@ -1657,10 +1657,8 @@ namespace Microsoft.CodeAnalysis.Emit
             {
                 // Unless the implementing method was added,
                 // the method implementation already exists.
-                var methodDef =
-                    (IMethodDefinition?)methodImplementation.ImplementingMethod.AsDefinition(
-                        this.Context
-                    );
+                var methodDef = (IMethodDefinition?)methodImplementation.ImplementingMethod
+                    .AsDefinition(this.Context);
                 RoslynDebug.AssertNotNull(methodDef);
 
                 if (_changes.GetChange(methodDef) == SymbolChange.Added)

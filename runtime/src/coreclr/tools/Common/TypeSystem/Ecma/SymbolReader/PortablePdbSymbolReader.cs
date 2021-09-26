@@ -152,7 +152,8 @@ namespace Internal.TypeSystem.Ecma
         {
             var debugInformationHandle = (
                 (MethodDefinitionHandle)MetadataTokens.EntityHandle(methodToken)
-            ).ToDebugInformationHandle();
+            )
+                .ToDebugInformationHandle();
 
             var debugInformation = _reader.GetMethodDebugInformation(debugInformationHandle);
 
@@ -164,7 +165,8 @@ namespace Internal.TypeSystem.Ecma
         {
             var debugInformationHandle = (
                 (MethodDefinitionHandle)MetadataTokens.EntityHandle(methodToken)
-            ).ToDebugInformationHandle();
+            )
+                .ToDebugInformationHandle();
 
             var debugInformation = _reader.GetMethodDebugInformation(debugInformationHandle);
 

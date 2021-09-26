@@ -91,11 +91,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             // First find all the projects that could potentially reference this type.
             var projectsThatCouldReferenceType = await GetProjectsThatCouldReferenceTypeAsync(
-                    type,
-                    solution,
-                    searchInMetadata,
-                    cancellationToken
-                )
+                type,
+                solution,
+                searchInMetadata,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Now, based on the list of projects that could actually reference the type,
@@ -138,16 +138,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 Debug.Assert(project.SupportsCompilation);
                 await DescendInheritanceTreeInProjectAsync(
-                        searchInMetadata,
-                        result,
-                        currentMetadataTypes,
-                        currentSourceAndMetadataTypes,
-                        project,
-                        typeMatches,
-                        shouldContinueSearching,
-                        transitive,
-                        cancellationToken
-                    )
+                    searchInMetadata,
+                    result,
+                    currentMetadataTypes,
+                    currentSourceAndMetadataTypes,
+                    project,
+                    typeMatches,
+                    shouldContinueSearching,
+                    transitive,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -178,14 +178,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 using var _ = GetSymbolSet(out var tempBuffer);
 
                 await AddDescendantMetadataTypesInProjectAsync(
-                        currentMetadataTypes,
-                        result: tempBuffer,
-                        project,
-                        typeMatches,
-                        shouldContinueSearching,
-                        transitive,
-                        cancellationToken
-                    )
+                    currentMetadataTypes,
+                    result: tempBuffer,
+                    project,
+                    typeMatches,
+                    shouldContinueSearching,
+                    transitive,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // Add all the matches we found to the result set.
@@ -211,14 +211,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 // Now search the project and see what source types we can find.
                 await AddDescendantSourceTypesInProjectAsync(
-                        currentSourceAndMetadataTypes,
-                        result: tempBuffer,
-                        project,
-                        typeMatches,
-                        shouldContinueSearching,
-                        transitive,
-                        cancellationToken
-                    )
+                    currentSourceAndMetadataTypes,
+                    result: tempBuffer,
+                    project,
+                    typeMatches,
+                    shouldContinueSearching,
+                    transitive,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // Add all the matches we found to the result set.
@@ -282,18 +282,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // Need to find all the possible projects that contain this metadata.
                 var projectsThatReferenceMetadataAssembly =
                     await DependentProjectsFinder.GetDependentProjectsAsync(
-                            solution,
-                            type,
-                            projects: null,
-                            cancellationToken: cancellationToken
-                        )
+                        solution,
+                        type,
+                        projects: null,
+                        cancellationToken: cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 // Now collect all the dependent projects as well.
                 var projectsThatCouldReferenceType =
                     projectsThatReferenceMetadataAssembly.SelectMany(
-                            p => GetProjectsThatCouldReferenceType(dependencyGraph, p)
-                        )
+                        p => GetProjectsThatCouldReferenceType(dependencyGraph, p)
+                    )
                         .ToSet();
 
                 return projectsThatCouldReferenceType;
@@ -309,9 +309,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 // Now find all the dependent of those projects.
                 var projectsThatCouldReferenceType = GetProjectsThatCouldReferenceType(
-                        dependencyGraph,
-                        sourceProject
-                    )
+                    dependencyGraph,
+                    sourceProject
+                )
                     .ToSet();
 
                 return projectsThatCouldReferenceType;
@@ -383,8 +383,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // and we're passed in 'B, C, E' as the project to search, then this set
             // will be A, B, C, E.
             var allProjectsThatTheseProjectsDependOn = projects.SelectMany(
-                    p => dependencyGraph.GetProjectsThatThisProjectTransitivelyDependsOn(p.Id)
-                )
+                p => dependencyGraph.GetProjectsThatThisProjectTransitivelyDependsOn(p.Id)
+            )
                 .Concat(projects.Select(p => p.Id))
                 .ToSet();
 
@@ -439,14 +439,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     cancellationToken.ThrowIfCancellationRequested();
 
                     await AddMatchingMetadataTypesInMetadataReferenceAsync(
-                            typesToSearchFor,
-                            project,
-                            typeMatches,
-                            compilation,
-                            peReference,
-                            tempBuffer,
-                            cancellationToken
-                        )
+                        typesToSearchFor,
+                        project,
+                        typeMatches,
+                        compilation,
+                        peReference,
+                        tempBuffer,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -478,11 +478,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // we might get false positives.  But that's fine as we still use
             // 'tpeMatches' to make sure the match is correct.
             var symbolTreeInfo = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                    project.Solution,
-                    reference,
-                    loadOnly: false,
-                    cancellationToken: cancellationToken
-                )
+                project.Solution,
+                reference,
+                loadOnly: false,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // For each type we care about, see if we can find any derived types
@@ -570,56 +570,56 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     {
                         case SpecialType.System_Object:
                             await AddMatchingTypesAsync(
-                                    cachedModels,
-                                    projectIndex.ClassesAndRecordsThatMayDeriveFromSystemObject,
-                                    result: tempBuffer,
-                                    predicateOpt: n =>
-                                        n.BaseType?.SpecialType == SpecialType.System_Object,
-                                    cancellationToken
-                                )
+                                cachedModels,
+                                projectIndex.ClassesAndRecordsThatMayDeriveFromSystemObject,
+                                result: tempBuffer,
+                                predicateOpt: n =>
+                                    n.BaseType?.SpecialType == SpecialType.System_Object,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             break;
                         case SpecialType.System_ValueType:
                             await AddMatchingTypesAsync(
-                                    cachedModels,
-                                    projectIndex.ValueTypes,
-                                    result: tempBuffer,
-                                    predicateOpt: null,
-                                    cancellationToken
-                                )
+                                cachedModels,
+                                projectIndex.ValueTypes,
+                                result: tempBuffer,
+                                predicateOpt: null,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             break;
                         case SpecialType.System_Enum:
                             await AddMatchingTypesAsync(
-                                    cachedModels,
-                                    projectIndex.Enums,
-                                    result: tempBuffer,
-                                    predicateOpt: null,
-                                    cancellationToken
-                                )
+                                cachedModels,
+                                projectIndex.Enums,
+                                result: tempBuffer,
+                                predicateOpt: null,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             break;
                         case SpecialType.System_MulticastDelegate:
                             await AddMatchingTypesAsync(
-                                    cachedModels,
-                                    projectIndex.Delegates,
-                                    result: tempBuffer,
-                                    predicateOpt: null,
-                                    cancellationToken
-                                )
+                                cachedModels,
+                                projectIndex.Delegates,
+                                result: tempBuffer,
+                                predicateOpt: null,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             break;
                     }
 
                     await AddSourceTypesThatDeriveFromNameAsync(
-                            typeMatches,
-                            cachedModels,
-                            typesToSearchFor,
-                            projectIndex,
-                            result: tempBuffer,
-                            type.Name,
-                            cancellationToken
-                        )
+                        typeMatches,
+                        cachedModels,
+                        typesToSearchFor,
+                        projectIndex,
+                        result: tempBuffer,
+                        type.Name,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 

@@ -45,33 +45,26 @@ public static void Main(string[] args)
             VisualStudio.InteractiveWindow.Verify.CurrentTokenType(tokenType: "string");
             VisualStudio.InteractiveWindow.PlaceCaret("<summary", charsOffset: -1);
             VisualStudio.SendKeys.Send(new KeyPress(VirtualKey.Right, ShiftState.Alt));
-            VisualStudio.InteractiveWindow.Verify.CurrentTokenType(
-                tokenType: "xml doc comment - delimiter"
-            );
+            VisualStudio.InteractiveWindow.Verify
+                .CurrentTokenType(tokenType: "xml doc comment - delimiter");
             VisualStudio.InteractiveWindow.PlaceCaret("summary");
-            VisualStudio.InteractiveWindow.Verify.CurrentTokenType(
-                tokenType: "xml doc comment - name"
-            );
+            VisualStudio.InteractiveWindow.Verify
+                .CurrentTokenType(tokenType: "xml doc comment - name");
             VisualStudio.InteractiveWindow.PlaceCaret("innertext");
-            VisualStudio.InteractiveWindow.Verify.CurrentTokenType(
-                tokenType: "xml doc comment - text"
-            );
+            VisualStudio.InteractiveWindow.Verify
+                .CurrentTokenType(tokenType: "xml doc comment - text");
             VisualStudio.InteractiveWindow.PlaceCaret("!--");
-            VisualStudio.InteractiveWindow.Verify.CurrentTokenType(
-                tokenType: "xml doc comment - delimiter"
-            );
+            VisualStudio.InteractiveWindow.Verify
+                .CurrentTokenType(tokenType: "xml doc comment - delimiter");
             VisualStudio.InteractiveWindow.PlaceCaret("comment");
-            VisualStudio.InteractiveWindow.Verify.CurrentTokenType(
-                tokenType: "xml doc comment - comment"
-            );
+            VisualStudio.InteractiveWindow.Verify
+                .CurrentTokenType(tokenType: "xml doc comment - comment");
             VisualStudio.InteractiveWindow.PlaceCaret("CDATA");
-            VisualStudio.InteractiveWindow.Verify.CurrentTokenType(
-                tokenType: "xml doc comment - delimiter"
-            );
+            VisualStudio.InteractiveWindow.Verify
+                .CurrentTokenType(tokenType: "xml doc comment - delimiter");
             VisualStudio.InteractiveWindow.PlaceCaret("cdata");
-            VisualStudio.InteractiveWindow.Verify.CurrentTokenType(
-                tokenType: "xml doc comment - cdata section"
-            );
+            VisualStudio.InteractiveWindow.Verify
+                .CurrentTokenType(tokenType: "xml doc comment - cdata section");
             VisualStudio.InteractiveWindow.PlaceCaret("attribute");
             VisualStudio.InteractiveWindow.Verify.CurrentTokenType(tokenType: "identifier");
             VisualStudio.InteractiveWindow.PlaceCaret("Environment");

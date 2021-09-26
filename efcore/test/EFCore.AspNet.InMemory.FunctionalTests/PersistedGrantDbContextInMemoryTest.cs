@@ -29,19 +29,21 @@ namespace Microsoft.EntityFrameworkCore
             Func<PersistedGrantDbContext, Task> nestedTestOperation3 = null
         )
         {
-            await base.ExecuteWithStrategyInTransactionAsync(
-                testOperation,
-                nestedTestOperation1,
-                nestedTestOperation2,
-                nestedTestOperation3
-            );
+            await base
+                .ExecuteWithStrategyInTransactionAsync(
+                    testOperation,
+                    nestedTestOperation1,
+                    nestedTestOperation2,
+                    nestedTestOperation3
+                );
             await Fixture.ReseedAsync();
         }
 
         public class PersistedGrantDbContextInMemoryFixture : PersistedGrantDbContextFixtureBase
         {
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .ConfigureWarnings(e => e.Ignore(InMemoryEventId.TransactionIgnoredWarning));
 
             protected override ITestStoreFactory TestStoreFactory =>

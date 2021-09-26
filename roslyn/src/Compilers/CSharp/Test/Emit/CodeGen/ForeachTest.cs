@@ -53,7 +53,7 @@ four";
         public void TestIteration()
         {
             CompileAndVerify(
-                    @"
+                @"
 using System;
 public class Test
 {
@@ -66,12 +66,11 @@ public class Test
         }
     }
 }",
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            ).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  4
@@ -106,7 +105,7 @@ public class Test
   IL_001e:  blt.s      IL_0012
   IL_0020:  ret
 }"
-                );
+            );
         }
 
         // Using the Linq as iteration variable
@@ -345,10 +344,9 @@ class Test
                 TestOptions.ReleaseExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "123")
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "123").VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       56 (0x38)
   .maxstack  3
@@ -379,7 +377,7 @@ class Test
   IL_0035:  blt.s      IL_001b
   IL_0037:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -408,10 +406,9 @@ class Test
                 TestOptions.ReleaseExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "1230")
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "1230").VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       79 (0x4f)
   .maxstack  4
@@ -450,7 +447,7 @@ class Test
   IL_0049:  call       ""void System.Console.Write(int)""
   IL_004e:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -535,10 +532,9 @@ class Test
                 TestOptions.ReleaseExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "hello", verify: Verification.Passes)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "hello", verify: Verification.Passes).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       44 (0x2c)
   .maxstack  2
@@ -565,7 +561,7 @@ class Test
   IL_0029:  blt.s      IL_000f
   IL_002b:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -590,10 +586,9 @@ class Test
                 TestOptions.ReleaseExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "123", verify: Verification.Fails)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "123", verify: Verification.Fails).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       45 (0x2d)
   .maxstack  2
@@ -621,7 +616,7 @@ class Test
   IL_002a:  blt.s      IL_0010
   IL_002c:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -648,10 +643,9 @@ class Test
 
             comp.MakeMemberMissing(WellKnownMember.System_Span_T__get_Item);
 
-            CompileAndVerify(comp, expectedOutput: "123")
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "123").VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       57 (0x39)
   .maxstack  4
@@ -677,7 +671,7 @@ class Test
   IL_0036:  brtrue.s   IL_0022
   IL_0038:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -753,10 +747,9 @@ namespace System
                 TestOptions.ReleaseExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "123", verify: Verification.Fails)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "123", verify: Verification.Fails).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       56 (0x38)
   .maxstack  4
@@ -781,7 +774,7 @@ namespace System
   IL_0035:  brtrue.s   IL_0022
   IL_0037:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -807,10 +800,9 @@ class Test
                 TestOptions.ReleaseExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "123")
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "123").VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       57 (0x39)
   .maxstack  3
@@ -842,7 +834,7 @@ class Test
   IL_0036:  blt.s      IL_001b
   IL_0038:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -873,10 +865,9 @@ class Test
                 comp.References.Concat(new[] { SystemRuntimeFacadeRef, ValueTupleRef })
             );
 
-            CompileAndVerify(comp, expectedOutput: "1234")
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "1234").VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       95 (0x5f)
   .maxstack  5
@@ -923,7 +914,7 @@ class Test
   IL_005c:  blt.s      IL_002c
   IL_005e:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -949,10 +940,9 @@ class Test
                 TestOptions.DebugExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "123")
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "123").VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       67 (0x43)
   .maxstack  4
@@ -995,7 +985,7 @@ class Test
   IL_0040:  blt.s      IL_0020
   IL_0042:  ret
 }"
-                );
+            );
         }
 
         // Traveled Multi-dimensional jagged arrays

@@ -40,9 +40,8 @@ namespace Wasm.Performance.Driver
                 retries++;
                 try
                 {
-                    var response = (
-                        await httpClient.GetAsync("status", cancellationToken)
-                    ).EnsureSuccessStatusCode();
+                    var response = (await httpClient.GetAsync("status", cancellationToken))
+                        .EnsureSuccessStatusCode();
                     Console.WriteLine("Connected to Selenium");
                     return uri;
                 }

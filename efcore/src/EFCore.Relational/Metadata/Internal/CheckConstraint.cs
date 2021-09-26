@@ -51,10 +51,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (dataDictionary == null)
             {
                 dataDictionary = new Dictionary<string, ICheckConstraint>();
-                ((IMutableEntityType)EntityType).SetOrRemoveAnnotation(
-                    RelationalAnnotationNames.CheckConstraints,
-                    dataDictionary
-                );
+                ((IMutableEntityType)EntityType)
+                    .SetOrRemoveAnnotation(
+                        RelationalAnnotationNames.CheckConstraints,
+                        dataDictionary
+                    );
             }
 
             if (dataDictionary.ContainsKey(Name))

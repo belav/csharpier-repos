@@ -37,26 +37,23 @@ namespace Microsoft.AspNetCore.Razor.Language
             return string.Equals(descriptorX.Kind, descriptorY.Kind, StringComparison.Ordinal)
                 && descriptorX.IsEnum == descriptorY.IsEnum
                 && string.Equals(descriptorX.Name, descriptorY.Name, StringComparison.Ordinal)
-                && string.Equals(
-                    descriptorX.TypeName,
-                    descriptorY.TypeName,
-                    StringComparison.Ordinal
-                )
-                && string.Equals(
-                    descriptorX.Documentation,
-                    descriptorY.Documentation,
-                    StringComparison.Ordinal
-                )
-                && string.Equals(
-                    descriptorX.DisplayName,
-                    descriptorY.DisplayName,
-                    StringComparison.Ordinal
-                )
+                && string
+                    .Equals(descriptorX.TypeName, descriptorY.TypeName, StringComparison.Ordinal)
+                && string
+                    .Equals(
+                        descriptorX.Documentation,
+                        descriptorY.Documentation,
+                        StringComparison.Ordinal
+                    )
+                && string
+                    .Equals(
+                        descriptorX.DisplayName,
+                        descriptorY.DisplayName,
+                        StringComparison.Ordinal
+                    )
                 && Enumerable.SequenceEqual(
-                    descriptorX.Metadata.OrderBy(
-                        propertyX => propertyX.Key,
-                        StringComparer.Ordinal
-                    ),
+                    descriptorX.Metadata
+                        .OrderBy(propertyX => propertyX.Key, StringComparer.Ordinal),
                     descriptorY.Metadata.OrderBy(propertyY => propertyY.Key, StringComparer.Ordinal)
                 );
         }

@@ -90,10 +90,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse2).GetMethod(
-                    nameof(Sse2.LoadScalarVector128),
-                    new Type[] { typeof(Double*) }
-                )
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.LoadScalarVector128), new Type[] { typeof(Double*) })
                 .Invoke(null, new object[] { Pointer.Box(_dataTable.inArrayPtr, typeof(Double*)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Double>)(result));
@@ -187,15 +185,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse2)}.{nameof(Sse2.LoadScalarVector128)}<Double>(Vector128<Double>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse2)}.{nameof(Sse2.LoadScalarVector128)}<Double>(Vector128<Double>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"   result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

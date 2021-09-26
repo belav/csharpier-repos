@@ -22,13 +22,13 @@ namespace System.Web.Http.Tracing.Tracers
                 CallBase = true
             };
             mockActivator.Setup(
-                    b =>
-                        b.Create(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<HttpControllerDescriptor>(),
-                            It.IsAny<Type>()
-                        )
-                )
+                b =>
+                    b.Create(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<HttpControllerDescriptor>(),
+                        It.IsAny<Type>()
+                    )
+            )
                 .Returns(mockController.Object);
             HttpRequestMessage request = new HttpRequestMessage();
             TestTraceWriter traceWriter = new TestTraceWriter();
@@ -52,11 +52,12 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            IHttpController createdController = ((IHttpControllerActivator)tracer).Create(
-                request,
-                controllerDescriptor: null,
-                controllerType: mockController.Object.GetType()
-            );
+            IHttpController createdController = ((IHttpControllerActivator)tracer)
+                .Create(
+                    request,
+                    controllerDescriptor: null,
+                    controllerType: mockController.Object.GetType()
+                );
 
             // Assert
             Assert.Equal<TraceRecord>(
@@ -78,13 +79,13 @@ namespace System.Web.Http.Tracing.Tracers
             };
             InvalidOperationException exception = new InvalidOperationException("test");
             mockActivator.Setup(
-                    b =>
-                        b.Create(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<HttpControllerDescriptor>(),
-                            It.IsAny<Type>()
-                        )
-                )
+                b =>
+                    b.Create(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<HttpControllerDescriptor>(),
+                        It.IsAny<Type>()
+                    )
+            )
                 .Throws(exception);
             HttpRequestMessage request = new HttpRequestMessage();
             TestTraceWriter traceWriter = new TestTraceWriter();
@@ -110,11 +111,12 @@ namespace System.Web.Http.Tracing.Tracers
             // Act & Assert
             Exception thrown = Assert.Throws<InvalidOperationException>(
                 () =>
-                    ((IHttpControllerActivator)tracer).Create(
-                        request,
-                        controllerDescriptor: null,
-                        controllerType: mockController.Object.GetType()
-                    )
+                    ((IHttpControllerActivator)tracer)
+                        .Create(
+                            request,
+                            controllerDescriptor: null,
+                            controllerType: mockController.Object.GetType()
+                        )
             );
 
             // Assert

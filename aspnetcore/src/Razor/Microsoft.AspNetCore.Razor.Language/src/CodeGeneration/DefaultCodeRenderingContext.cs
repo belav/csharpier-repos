@@ -121,11 +121,12 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
             if (
                 SourceDocument.FilePath != null
-                && !string.Equals(
-                    SourceDocument.FilePath,
-                    node.Source.Value.FilePath,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && !string
+                    .Equals(
+                        SourceDocument.FilePath,
+                        node.Source.Value.FilePath,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 // We don't want to generate line mappings for imports.

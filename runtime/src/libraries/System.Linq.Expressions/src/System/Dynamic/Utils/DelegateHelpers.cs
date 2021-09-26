@@ -22,10 +22,8 @@ namespace System.Dynamic.Utils
 #if !FEATURE_DYNAMIC_DELEGATE
             return CreateObjectArrayDelegateRefEmit(delegateType, handler);
 #else
-            return Internal.Runtime.Augments.DynamicDelegateAugments.CreateObjectArrayDelegate(
-                delegateType,
-                handler
-            );
+            return Internal.Runtime.Augments.DynamicDelegateAugments
+                .CreateObjectArrayDelegate(delegateType, handler);
 #endif
         }
 
@@ -35,10 +33,8 @@ namespace System.Dynamic.Utils
             Type,
             MethodInfo
         >(256);
-        private static readonly MethodInfo s_FuncInvoke = typeof(Func<
-            object?[],
-            object?
-        >).GetMethod("Invoke")!;
+        private static readonly MethodInfo s_FuncInvoke = typeof(Func<object?[], object?>)
+            .GetMethod("Invoke")!;
         private static readonly MethodInfo s_ArrayEmpty = GetEmptyObjectArrayMethod();
         private static readonly MethodInfo[] s_ActionThunks = GetActionThunks();
         private static readonly MethodInfo[] s_FuncThunks = GetFuncThunks();

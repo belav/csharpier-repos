@@ -334,8 +334,8 @@ internal class Xcode
                 default:
                     sdk = "maccatalyst";
                     args.Append(
-                            " -scheme \"" + Path.GetFileNameWithoutExtension(xcodePrjPath) + "\""
-                        )
+                        " -scheme \"" + Path.GetFileNameWithoutExtension(xcodePrjPath) + "\""
+                    )
                         .Append(" -destination \"platform=macOS,arch=arm64,variant=Mac Catalyst\"")
                         .Append(" -UseModernBuildSystem=YES")
                         .Append(" IPHONEOS_DEPLOYMENT_TARGET=14.2");
@@ -357,8 +357,8 @@ internal class Xcode
                 default:
                     sdk = "maccatalyst";
                     args.Append(
-                            " -scheme \"" + Path.GetFileNameWithoutExtension(xcodePrjPath) + "\""
-                        )
+                        " -scheme \"" + Path.GetFileNameWithoutExtension(xcodePrjPath) + "\""
+                    )
                         .Append(" -destination \"platform=macOS,arch=x86_64,variant=Mac Catalyst\"")
                         .Append(" -UseModernBuildSystem=YES")
                         .Append(" IPHONEOS_DEPLOYMENT_TARGET=13.5");
@@ -381,7 +381,8 @@ internal class Xcode
             Path.GetFileNameWithoutExtension(xcodePrjPath) + ".app"
         );
 
-        long appSize = new DirectoryInfo(appPath).EnumerateFiles("*", SearchOption.AllDirectories)
+        long appSize = new DirectoryInfo(appPath)
+            .EnumerateFiles("*", SearchOption.AllDirectories)
             .Sum(file => file.Length);
 
         Utils.LogInfo($"\nAPP size: {(appSize / 1000_000.0):0.#} Mb.\n");

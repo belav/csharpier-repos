@@ -30,13 +30,14 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
             CancellationToken cancellationToken
         )
         {
-            var projects = solution.Projects.Where(
-                project =>
-                    projectFilePath.Equals(
-                        project.FilePath,
-                        System.StringComparison.OrdinalIgnoreCase
-                    )
-            );
+            var projects = solution.Projects
+                .Where(
+                    project =>
+                        projectFilePath.Equals(
+                            project.FilePath,
+                            System.StringComparison.OrdinalIgnoreCase
+                        )
+                );
 
             HashSet<string> usedAssemblyFilePaths = new();
 
@@ -211,10 +212,10 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
 
         internal static ImmutableArray<string> GetAllCompilationAssemblies(ReferenceInfo reference)
         {
-            var transitiveCompilationAssemblies = reference.Dependencies.SelectMany(
-                dependency => GetAllCompilationAssemblies(dependency)
-            );
-            return reference.CompilationAssemblies.Concat(transitiveCompilationAssemblies)
+            var transitiveCompilationAssemblies = reference.Dependencies
+                .SelectMany(dependency => GetAllCompilationAssemblies(dependency));
+            return reference.CompilationAssemblies
+                .Concat(transitiveCompilationAssemblies)
                 .ToImmutableArray();
         }
 
@@ -225,15 +226,15 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
             CancellationToken cancellationToken
         )
         {
-            var referenceCleanupService =
-                solution.Workspace.Services.GetRequiredService<IReferenceCleanupService>();
+            var referenceCleanupService = solution.Workspace.Services
+                .GetRequiredService<IReferenceCleanupService>();
 
             await ApplyReferenceUpdatesAsync(
-                    referenceCleanupService,
-                    projectFilePath,
-                    referenceUpdates,
-                    cancellationToken
-                )
+                referenceCleanupService,
+                projectFilePath,
+                referenceUpdates,
+                cancellationToken
+            )
                 .ConfigureAwait(true);
 
             return solution.Workspace.CurrentSolution;
@@ -270,10 +271,10 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
                 }
 
                 await referenceCleanupService.TryUpdateReferenceAsync(
-                        projectFilePath,
-                        referenceUpdate,
-                        cancellationToken
-                    )
+                    projectFilePath,
+                    referenceUpdate,
+                    cancellationToken
+                )
                     .ConfigureAwait(true);
             }
         }

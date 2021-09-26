@@ -58,10 +58,8 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             Int32 value = TestLibrary.Generator.GetInt32();
-            object result = typeof(Vector256).GetMethod(
-                    nameof(Vector256.Create),
-                    new Type[] { typeof(Int32) }
-                )
+            object result = typeof(Vector256)
+                .GetMethod(nameof(Vector256.Create), new Type[] { typeof(Int32) })
                 .Invoke(null, new object[] { value });
 
             ValidateResult((Vector256<Int32>)(result), value);
@@ -104,13 +102,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256.Create(Int32): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector256.Create(Int32): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

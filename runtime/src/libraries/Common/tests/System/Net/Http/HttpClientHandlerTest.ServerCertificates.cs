@@ -205,10 +205,11 @@ namespace System.Net.Http.Functional.Tests
                     callbackCalled = true;
                     Assert.NotNull(request);
 
-                    X509ChainStatusFlags flags = chain.ChainStatus.Aggregate(
-                        X509ChainStatusFlags.NoError,
-                        (cur, status) => cur | status.Status
-                    );
+                    X509ChainStatusFlags flags = chain.ChainStatus
+                        .Aggregate(
+                            X509ChainStatusFlags.NoError,
+                            (cur, status) => cur | status.Status
+                        );
                     bool ignoreErrors = // https://github.com/dotnet/runtime/issues/22644#issuecomment-315555237
                         RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
                         && checkRevocation
@@ -524,27 +525,24 @@ namespace System.Net.Http.Functional.Tests
             psi.Environment.Add("SSL_CERT_FILE", sslCertFile);
 
             RemoteExecutor.Invoke(
-                    async (useVersionString, allowAllHttp2CertificatesString) =>
+                async (useVersionString, allowAllHttp2CertificatesString) =>
+                {
+                    const string Url = "https://www.microsoft.com";
+
+                    HttpClientHandler handler = CreateHttpClientHandler(
+                        Version.Parse(useVersionString),
+                        allowAllHttp2Certificates: bool.Parse(allowAllHttp2CertificatesString)
+                    );
+
+                    using (HttpClient client = CreateHttpClient(handler, useVersionString))
                     {
-                        const string Url = "https://www.microsoft.com";
-
-                        HttpClientHandler handler = CreateHttpClientHandler(
-                            Version.Parse(useVersionString),
-                            allowAllHttp2Certificates: bool.Parse(allowAllHttp2CertificatesString)
-                        );
-
-                        using (HttpClient client = CreateHttpClient(handler, useVersionString))
-                        {
-                            await Assert.ThrowsAsync<HttpRequestException>(
-                                () => client.GetAsync(Url)
-                            );
-                        }
-                    },
-                    UseVersion.ToString(),
-                    AllowAllHttp2Certificates.ToString(),
-                    new RemoteInvokeOptions { StartInfo = psi }
-                )
-                .Dispose();
+                        await Assert.ThrowsAsync<HttpRequestException>(() => client.GetAsync(Url));
+                    }
+                },
+                UseVersion.ToString(),
+                AllowAllHttp2Certificates.ToString(),
+                new RemoteInvokeOptions { StartInfo = psi }
+            ).Dispose();
         }
     }
 }

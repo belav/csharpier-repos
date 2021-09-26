@@ -430,19 +430,19 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 cancellationToken
             );
             return typesToImplement.SelectAsArray(
-                    s =>
-                        (
+                s =>
+                    (
+                        s,
+                        members: GetUnimplementedMembers(
+                            classOrStructType,
                             s,
-                            members: GetUnimplementedMembers(
-                                classOrStructType,
-                                s,
-                                isImplemented,
-                                isValidImplementation,
-                                interfaceMemberGetter,
-                                cancellationToken
-                            )
+                            isImplemented,
+                            isValidImplementation,
+                            interfaceMemberGetter,
+                            cancellationToken
                         )
-                )
+                    )
+            )
                 .WhereAsArray(t => t.members.Length > 0);
         }
 

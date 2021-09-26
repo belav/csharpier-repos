@@ -124,9 +124,11 @@ namespace Microsoft.EntityFrameworkCore
 
         private DbContext CreateContext(string connectionString) =>
             new(
-                new DbContextOptionsBuilder().UseSqlite(connectionString)
+                new DbContextOptionsBuilder()
+                    .UseSqlite(connectionString)
                     .UseInternalServiceProvider(
-                        SqliteTestStoreFactory.Instance.AddProviderServices(new ServiceCollection())
+                        SqliteTestStoreFactory.Instance
+                            .AddProviderServices(new ServiceCollection())
                             .BuildServiceProvider(validateScopes: true)
                     ).Options
             );

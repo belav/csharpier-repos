@@ -69,26 +69,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
         )
         {
             var invocationNodes = diagnostics.Select(
-                    d => GetInvocationExpression(d, cancellationToken)
-                )
+                d => GetInvocationExpression(d, cancellationToken)
+            )
                 .OrderByDescending(i => i.SpanStart)
                 .ToImmutableArray();
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
 
             await editor.ApplyExpressionLevelSemanticEditsAsync(
-                    document,
-                    invocationNodes,
-                    canReplace: (_1, _2) => true,
-                    (semanticModel, currentRoot, currentInvocation) =>
-                        UpdateInvocation(
-                            semanticModel,
-                            currentRoot,
-                            currentInvocation,
-                            syntaxGenerator,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                document,
+                invocationNodes,
+                canReplace: (_1, _2) => true,
+                (semanticModel, currentRoot, currentInvocation) =>
+                    UpdateInvocation(
+                        semanticModel,
+                        currentRoot,
+                        currentInvocation,
+                        syntaxGenerator,
+                        cancellationToken
+                    ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -131,10 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             Diagnostic d,
             CancellationToken cancellationToken
         ) =>
-            (InvocationExpressionSyntax)d.AdditionalLocations[0].FindNode(
-                getInnermostNodeForTie: true,
-                cancellationToken
-            );
+            (InvocationExpressionSyntax)d.AdditionalLocations[0]
+                .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
         private static ExpressionSyntax FixOne(Result result, SyntaxGenerator generator)
         {

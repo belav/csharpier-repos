@@ -40,11 +40,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo
         )
         {
             var results = await _service.SearchDocumentAsync(
-                    document,
-                    searchPattern,
-                    kinds,
-                    cancellationToken
-                )
+                document,
+                searchPattern,
+                kinds,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             foreach (var result in results)
                 await onResultFound(new InternalFSharpNavigateToSearchResult(result))
@@ -64,12 +64,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo
         )
         {
             var results = await _service.SearchProjectAsync(
-                    project,
-                    priorityDocuments,
-                    searchPattern,
-                    kinds,
-                    cancellationToken
-                )
+                project,
+                priorityDocuments,
+                searchPattern,
+                kinds,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             foreach (var result in results)
                 await onResultFound(new InternalFSharpNavigateToSearchResult(result))

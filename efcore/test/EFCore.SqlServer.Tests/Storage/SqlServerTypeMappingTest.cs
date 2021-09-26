@@ -192,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             (RelationalTypeMapping)new SqlServerTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
                 TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
-            ).FindMapping(type);
+            )
+                .FindMapping(type);
 
         public override void ByteArray_literal_generated_correctly()
         {
@@ -322,7 +323,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             new SqlServerTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
                 TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
-            ).FindMapping(type);
+            )
+                .FindMapping(type);
 
         private class FakeType : Type
         {
@@ -453,9 +455,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         protected override DbContextOptions ContextOptions { get; } =
-            new DbContextOptionsBuilder().UseInternalServiceProvider(
-                    SqlServerFixture.DefaultServiceProvider
-                )
+            new DbContextOptionsBuilder()
+                .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
                 .UseSqlServer("Server=Dummy").Options;
     }
 }

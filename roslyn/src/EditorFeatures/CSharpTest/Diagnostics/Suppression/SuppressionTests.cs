@@ -275,13 +275,13 @@ class Class
                         )
                     );
                     workspace.TryApplyChanges(
-                        workspace.CurrentSolution.WithAnalyzerReferences(
-                            new[] { analyzerReference }
-                        )
+                        workspace.CurrentSolution
+                            .WithAnalyzerReferences(new[] { analyzerReference })
                     );
 
                     Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
-                        workspace.ExportProvider.GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+                        workspace.ExportProvider
+                            .GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
                     );
                     var diagnosticService = Assert.IsType<DiagnosticAnalyzerService>(
                         workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
@@ -322,7 +322,8 @@ class Class
                             includeConfigurationFixes: true,
                             cancellationToken: CancellationToken.None
                         )
-                    ).SelectMany(fixCollection => fixCollection.Fixes);
+                    )
+                        .SelectMany(fixCollection => fixCollection.Fixes);
 
                     var cs0219Fixes = allFixes.Where(fix => fix.PrimaryDiagnostic.Id == "CS0219")
                         .ToArray();
@@ -1134,7 +1135,8 @@ class Class
                             case SyntaxKind.EnumDeclaration:
                                 // Report diagnostic on each descendant comment trivia
                                 foreach (
-                                    var trivia in context.Node.DescendantTrivia()
+                                    var trivia in context.Node
+                                        .DescendantTrivia()
                                         .Where(
                                             t =>
                                                 t.Kind() == SyntaxKind.SingleLineCommentTrivia

@@ -17,11 +17,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_with_multiple_providers_new_when_no_provider()
         {
             var options =
-                new DbContextOptionsBuilder().UseCosmos(
-                        "serviceEndPoint",
-                        "authKeyOrResourceToken",
-                        "databaseName"
-                    )
+                new DbContextOptionsBuilder()
+                    .UseCosmos("serviceEndPoint", "authKeyOrResourceToken", "databaseName")
                     .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
 
             var context = new DbContext(options);
@@ -97,8 +94,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             var connectionMode = (ConnectionMode)958410610;
             var options = Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    new DbContextOptionsBuilder().UseCosmos(
+                () => new DbContextOptionsBuilder().UseCosmos(
                         "serviceEndPoint",
                         "authKeyOrResourceToken",
                         "databaseName",

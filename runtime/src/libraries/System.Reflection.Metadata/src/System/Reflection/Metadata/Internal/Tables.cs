@@ -117,10 +117,11 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return ResolutionScopeTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _ResolutionScopeOffset,
-                    _IsResolutionScopeRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(
+                        rowOffset + _ResolutionScopeOffset,
+                        _IsResolutionScopeRefSizeSmall
+                    )
             );
         }
 
@@ -136,10 +137,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return StringHandle.FromOffset(
-                this.Block.PeekHeapReference(
-                    rowOffset + _NamespaceOffset,
-                    _IsStringHeapRefSizeSmall
-                )
+                this.Block
+                    .PeekHeapReference(rowOffset + _NamespaceOffset, _IsStringHeapRefSizeSmall)
             );
         }
     }
@@ -198,10 +197,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return NamespaceDefinitionHandle.FromFullNameOffset(
-                this.Block.PeekHeapReference(
-                    rowOffset + _NamespaceOffset,
-                    _IsStringHeapRefSizeSmall
-                )
+                this.Block
+                    .PeekHeapReference(rowOffset + _NamespaceOffset, _IsStringHeapRefSizeSmall)
             );
         }
 
@@ -209,10 +206,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return StringHandle.FromOffset(
-                this.Block.PeekHeapReference(
-                    rowOffset + _NamespaceOffset,
-                    _IsStringHeapRefSizeSmall
-                )
+                this.Block
+                    .PeekHeapReference(rowOffset + _NamespaceOffset, _IsStringHeapRefSizeSmall)
             );
         }
 
@@ -228,10 +223,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return TypeDefOrRefTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _ExtendsOffset,
-                    _IsTypeDefOrRefRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(rowOffset + _ExtendsOffset, _IsTypeDefOrRefRefSizeSmall)
             );
         }
 
@@ -253,13 +246,14 @@ namespace System.Reflection.Metadata.Ecma335
         )
         {
             int numOfRows = this.NumberOfRows;
-            int slot = this.Block.BinarySearchForSlot(
-                numOfRows,
-                this.RowSize,
-                _MethodListOffset,
-                (uint)methodDefOrPtrRowId,
-                _IsMethodRefSizeSmall
-            );
+            int slot = this.Block
+                .BinarySearchForSlot(
+                    numOfRows,
+                    this.RowSize,
+                    _MethodListOffset,
+                    (uint)methodDefOrPtrRowId,
+                    _IsMethodRefSizeSmall
+                );
             int row = slot + 1;
             if (row == 0)
             {
@@ -303,13 +297,14 @@ namespace System.Reflection.Metadata.Ecma335
         )
         {
             int numOfRows = this.NumberOfRows;
-            int slot = this.Block.BinarySearchForSlot(
-                numOfRows,
-                this.RowSize,
-                _FieldListOffset,
-                (uint)fieldDefOrPtrRowId,
-                _IsFieldRefSizeSmall
-            );
+            int slot = this.Block
+                .BinarySearchForSlot(
+                    numOfRows,
+                    this.RowSize,
+                    _FieldListOffset,
+                    (uint)fieldDefOrPtrRowId,
+                    _IsFieldRefSizeSmall
+                );
             int row = slot + 1;
             if (row == 0)
             {
@@ -383,12 +378,13 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal int GetRowIdForFieldDefRow(int fieldDefRowId)
         {
-            return this.Block.LinearSearchReference(
-                    this.RowSize,
-                    _FieldOffset,
-                    (uint)fieldDefRowId,
-                    _IsFieldTableRowRefSizeSmall
-                ) + 1;
+            return this.Block
+                    .LinearSearchReference(
+                        this.RowSize,
+                        _FieldOffset,
+                        (uint)fieldDefRowId,
+                        _IsFieldTableRowRefSizeSmall
+                    ) + 1;
         }
     }
 
@@ -483,12 +479,13 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal int GetRowIdForMethodDefRow(int methodDefRowId)
         {
-            return this.Block.LinearSearchReference(
-                    this.RowSize,
-                    _MethodOffset,
-                    (uint)methodDefRowId,
-                    _IsMethodTableRowRefSizeSmall
-                ) + 1;
+            return this.Block
+                    .LinearSearchReference(
+                        this.RowSize,
+                        _MethodOffset,
+                        (uint)methodDefRowId,
+                        _IsMethodTableRowRefSizeSmall
+                    ) + 1;
         }
     }
 
@@ -696,11 +693,12 @@ namespace System.Reflection.Metadata.Ecma335
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _ClassOffset,
-                _IsTypeDefTableRowRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _ClassOffset,
+                    _IsTypeDefTableRowRefSizeSmall
+                );
         }
 
         internal void GetInterfaceImplRange(
@@ -713,15 +711,16 @@ namespace System.Reflection.Metadata.Ecma335
 
             int startRowNumber,
                 endRowNumber;
-            this.Block.BinarySearchReferenceRange(
-                this.NumberOfRows,
-                this.RowSize,
-                _ClassOffset,
-                (uint)typeDefRid,
-                _IsTypeDefTableRowRefSizeSmall,
-                out startRowNumber,
-                out endRowNumber
-            );
+            this.Block
+                .BinarySearchReferenceRange(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    _ClassOffset,
+                    (uint)typeDefRid,
+                    _IsTypeDefTableRowRefSizeSmall,
+                    out startRowNumber,
+                    out endRowNumber
+                );
 
             if (startRowNumber == -1)
             {
@@ -739,10 +738,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return TypeDefOrRefTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _InterfaceOffset,
-                    _IsTypeDefOrRefRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(rowOffset + _InterfaceOffset, _IsTypeDefOrRefRefSizeSmall)
             );
         }
     }
@@ -802,10 +799,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return MemberRefParentTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _ClassOffset,
-                    _IsMemberRefParentRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(rowOffset + _ClassOffset, _IsMemberRefParentRefSizeSmall)
             );
         }
     }
@@ -866,33 +861,33 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return HasConstantTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _ParentOffset,
-                    _IsHasConstantRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(rowOffset + _ParentOffset, _IsHasConstantRefSizeSmall)
             );
         }
 
         internal ConstantHandle FindConstant(EntityHandle parentHandle)
         {
-            int foundRowNumber = this.Block.BinarySearchReference(
-                this.NumberOfRows,
-                this.RowSize,
-                _ParentOffset,
-                HasConstantTag.ConvertToTag(parentHandle),
-                _IsHasConstantRefSizeSmall
-            );
+            int foundRowNumber = this.Block
+                .BinarySearchReference(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    _ParentOffset,
+                    HasConstantTag.ConvertToTag(parentHandle),
+                    _IsHasConstantRefSizeSmall
+                );
 
             return ConstantHandle.FromRowId(foundRowNumber + 1);
         }
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _ParentOffset,
-                _IsHasConstantRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _ParentOffset,
+                    _IsHasConstantRefSizeSmall
+                );
         }
     }
 
@@ -937,12 +932,13 @@ namespace System.Reflection.Metadata.Ecma335
 
             if (!declaredSorted && !CheckSorted())
             {
-                this.PtrTable = this.Block.BuildPtrTable(
-                    numberOfRows,
-                    this.RowSize,
-                    _ParentOffset,
-                    _IsHasCustomAttributeRefSizeSmall
-                );
+                this.PtrTable = this.Block
+                    .BuildPtrTable(
+                        numberOfRows,
+                        this.RowSize,
+                        _ParentOffset,
+                        _IsHasCustomAttributeRefSizeSmall
+                    );
             }
         }
 
@@ -950,10 +946,11 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return HasCustomAttributeTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _ParentOffset,
-                    _IsHasCustomAttributeRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(
+                        rowOffset + _ParentOffset,
+                        _IsHasCustomAttributeRefSizeSmall
+                    )
             );
         }
 
@@ -961,10 +958,11 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return CustomAttributeTypeTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _TypeOffset,
-                    _IsCustomAttributeTypeRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(
+                        rowOffset + _TypeOffset,
+                        _IsCustomAttributeTypeRefSizeSmall
+                    )
             );
         }
 
@@ -987,27 +985,29 @@ namespace System.Reflection.Metadata.Ecma335
 
             if (this.PtrTable != null)
             {
-                this.Block.BinarySearchReferenceRange(
-                    this.PtrTable,
-                    this.RowSize,
-                    _ParentOffset,
-                    HasCustomAttributeTag.ConvertToTag(parentHandle),
-                    _IsHasCustomAttributeRefSizeSmall,
-                    out startRowNumber,
-                    out endRowNumber
-                );
+                this.Block
+                    .BinarySearchReferenceRange(
+                        this.PtrTable,
+                        this.RowSize,
+                        _ParentOffset,
+                        HasCustomAttributeTag.ConvertToTag(parentHandle),
+                        _IsHasCustomAttributeRefSizeSmall,
+                        out startRowNumber,
+                        out endRowNumber
+                    );
             }
             else
             {
-                this.Block.BinarySearchReferenceRange(
-                    this.NumberOfRows,
-                    this.RowSize,
-                    _ParentOffset,
-                    HasCustomAttributeTag.ConvertToTag(parentHandle),
-                    _IsHasCustomAttributeRefSizeSmall,
-                    out startRowNumber,
-                    out endRowNumber
-                );
+                this.Block
+                    .BinarySearchReferenceRange(
+                        this.NumberOfRows,
+                        this.RowSize,
+                        _ParentOffset,
+                        HasCustomAttributeTag.ConvertToTag(parentHandle),
+                        _IsHasCustomAttributeRefSizeSmall,
+                        out startRowNumber,
+                        out endRowNumber
+                    );
             }
 
             if (startRowNumber == -1)
@@ -1024,11 +1024,12 @@ namespace System.Reflection.Metadata.Ecma335
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _ParentOffset,
-                _IsHasCustomAttributeRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _ParentOffset,
+                    _IsHasCustomAttributeRefSizeSmall
+                );
         }
     }
 
@@ -1072,10 +1073,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return HasFieldMarshalTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _ParentOffset,
-                    _IsHasFieldMarshalRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(rowOffset + _ParentOffset, _IsHasFieldMarshalRefSizeSmall)
             );
         }
 
@@ -1089,24 +1088,26 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal int FindFieldMarshalRowId(EntityHandle handle)
         {
-            int foundRowNumber = this.Block.BinarySearchReference(
-                this.NumberOfRows,
-                this.RowSize,
-                _ParentOffset,
-                HasFieldMarshalTag.ConvertToTag(handle),
-                _IsHasFieldMarshalRefSizeSmall
-            );
+            int foundRowNumber = this.Block
+                .BinarySearchReference(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    _ParentOffset,
+                    HasFieldMarshalTag.ConvertToTag(handle),
+                    _IsHasFieldMarshalRefSizeSmall
+                );
 
             return foundRowNumber + 1;
         }
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _ParentOffset,
-                _IsHasFieldMarshalRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _ParentOffset,
+                    _IsHasFieldMarshalRefSizeSmall
+                );
         }
     }
 
@@ -1158,10 +1159,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return HasDeclSecurityTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _ParentOffset,
-                    _IsHasDeclSecurityRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(rowOffset + _ParentOffset, _IsHasDeclSecurityRefSizeSmall)
             );
         }
 
@@ -1169,10 +1168,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return BlobHandle.FromOffset(
-                this.Block.PeekHeapReference(
-                    rowOffset + _PermissionSetOffset,
-                    _IsBlobHeapRefSizeSmall
-                )
+                this.Block
+                    .PeekHeapReference(rowOffset + _PermissionSetOffset, _IsBlobHeapRefSizeSmall)
             );
         }
 
@@ -1185,15 +1182,16 @@ namespace System.Reflection.Metadata.Ecma335
             int startRowNumber,
                 endRowNumber;
 
-            this.Block.BinarySearchReferenceRange(
-                this.NumberOfRows,
-                this.RowSize,
-                _ParentOffset,
-                HasDeclSecurityTag.ConvertToTag(parentToken),
-                _IsHasDeclSecurityRefSizeSmall,
-                out startRowNumber,
-                out endRowNumber
-            );
+            this.Block
+                .BinarySearchReferenceRange(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    _ParentOffset,
+                    HasDeclSecurityTag.ConvertToTag(parentToken),
+                    _IsHasDeclSecurityRefSizeSmall,
+                    out startRowNumber,
+                    out endRowNumber
+                );
 
             if (startRowNumber == -1)
             {
@@ -1209,11 +1207,12 @@ namespace System.Reflection.Metadata.Ecma335
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _ParentOffset,
-                _IsHasDeclSecurityRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _ParentOffset,
+                    _IsHasDeclSecurityRefSizeSmall
+                );
         }
     }
 
@@ -1276,22 +1275,24 @@ namespace System.Reflection.Metadata.Ecma335
         internal int FindRow(TypeDefinitionHandle typeDef)
         {
             return 1
-                + this.Block.BinarySearchReference(
-                    this.NumberOfRows,
-                    this.RowSize,
-                    _ParentOffset,
-                    (uint)typeDef.RowId,
-                    _IsTypeDefTableRowRefSizeSmall
-                );
+                + this.Block
+                    .BinarySearchReference(
+                        this.NumberOfRows,
+                        this.RowSize,
+                        _ParentOffset,
+                        (uint)typeDef.RowId,
+                        _IsTypeDefTableRowRefSizeSmall
+                    );
         }
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _ParentOffset,
-                _IsTypeDefTableRowRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _ParentOffset,
+                    _IsTypeDefTableRowRefSizeSmall
+                );
         }
     }
 
@@ -1333,13 +1334,14 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         internal int FindFieldLayoutRowId(FieldDefinitionHandle handle)
         {
-            int rowNumber = this.Block.BinarySearchReference(
-                this.NumberOfRows,
-                this.RowSize,
-                _FieldOffset,
-                (uint)handle.RowId,
-                _IsFieldTableRowRefSizeSmall
-            );
+            int rowNumber = this.Block
+                .BinarySearchReference(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    _FieldOffset,
+                    (uint)handle.RowId,
+                    _IsFieldTableRowRefSizeSmall
+                );
 
             return rowNumber + 1;
         }
@@ -1360,11 +1362,12 @@ namespace System.Reflection.Metadata.Ecma335
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _FieldOffset,
-                _IsFieldTableRowRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _FieldOffset,
+                    _IsFieldTableRowRefSizeSmall
+                );
         }
     }
 
@@ -1437,12 +1440,13 @@ namespace System.Reflection.Metadata.Ecma335
             // We do a linear scan here because we don't have these tables sorted
             // TODO: We can scan the table to see if it is sorted and use binary search if so.
             // Also, the compilers should make sure it's sorted.
-            int rowNumber = this.Block.LinearSearchReference(
-                this.RowSize,
-                _ParentOffset,
-                (uint)typeDef.RowId,
-                _IsTypeDefTableRowRefSizeSmall
-            );
+            int rowNumber = this.Block
+                .LinearSearchReference(
+                    this.RowSize,
+                    _ParentOffset,
+                    (uint)typeDef.RowId,
+                    _IsTypeDefTableRowRefSizeSmall
+                );
 
             return rowNumber + 1;
         }
@@ -1546,10 +1550,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return TypeDefOrRefTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _EventTypeOffset,
-                    _IsTypeDefOrRefRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(rowOffset + _EventTypeOffset, _IsTypeDefOrRefRefSizeSmall)
             );
         }
     }
@@ -1589,12 +1591,13 @@ namespace System.Reflection.Metadata.Ecma335
             // We do a linear scan here because we don't have these tables sorted.
             // TODO: We can scan the table to see if it is sorted and use binary search if so.
             // Also, the compilers should make sure it's sorted.
-            int rowNumber = this.Block.LinearSearchReference(
-                this.RowSize,
-                _ParentOffset,
-                (uint)typeDef.RowId,
-                _IsTypeDefTableRowRefSizeSmall
-            );
+            int rowNumber = this.Block
+                .LinearSearchReference(
+                    this.RowSize,
+                    _ParentOffset,
+                    (uint)typeDef.RowId,
+                    _IsTypeDefTableRowRefSizeSmall
+                );
 
             return rowNumber + 1;
         }
@@ -1610,10 +1613,8 @@ namespace System.Reflection.Metadata.Ecma335
         internal int GetPropertyListStartFor(int rowId)
         {
             int rowOffset = (rowId - 1) * this.RowSize;
-            return this.Block.PeekReference(
-                rowOffset + _PropertyListOffset,
-                _IsPropertyRefSizeSmall
-            );
+            return this.Block
+                .PeekReference(rowOffset + _PropertyListOffset, _IsPropertyRefSizeSmall);
         }
     }
 
@@ -1647,10 +1648,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return PropertyDefinitionHandle.FromRowId(
-                this.Block.PeekReference(
-                    rowOffset + _PropertyOffset,
-                    _IsPropertyTableRowRefSizeSmall
-                )
+                this.Block
+                    .PeekReference(rowOffset + _PropertyOffset, _IsPropertyTableRowRefSizeSmall)
             );
         }
     }
@@ -1759,19 +1758,16 @@ namespace System.Reflection.Metadata.Ecma335
         internal MethodSemanticsAttributes GetSemantics(int rowId)
         {
             int rowOffset = (rowId - 1) * this.RowSize;
-            return (MethodSemanticsAttributes)this.Block.PeekUInt16(
-                rowOffset + _SemanticsFlagOffset
-            );
+            return (MethodSemanticsAttributes)this.Block
+                .PeekUInt16(rowOffset + _SemanticsFlagOffset);
         }
 
         internal EntityHandle GetAssociation(int rowId)
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return HasSemanticsTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _AssociationOffset,
-                    _IsHasSemanticRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(rowOffset + _AssociationOffset, _IsHasSemanticRefSizeSmall)
             );
         }
 
@@ -1800,15 +1796,16 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int startRowNumber,
                 endRowNumber;
-            this.Block.BinarySearchReferenceRange(
-                this.NumberOfRows,
-                this.RowSize,
-                _AssociationOffset,
-                searchCodedTag,
-                _IsHasSemanticRefSizeSmall,
-                out startRowNumber,
-                out endRowNumber
-            );
+            this.Block
+                .BinarySearchReferenceRange(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    _AssociationOffset,
+                    searchCodedTag,
+                    _IsHasSemanticRefSizeSmall,
+                    out startRowNumber,
+                    out endRowNumber
+                );
 
             if (startRowNumber == -1)
             {
@@ -1822,11 +1819,12 @@ namespace System.Reflection.Metadata.Ecma335
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _AssociationOffset,
-                _IsHasSemanticRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _AssociationOffset,
+                    _IsHasSemanticRefSizeSmall
+                );
         }
     }
 
@@ -1880,10 +1878,11 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return MethodDefOrRefTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _MethodBodyOffset,
-                    _IsMethodDefOrRefRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(
+                        rowOffset + _MethodBodyOffset,
+                        _IsMethodDefOrRefRefSizeSmall
+                    )
             );
         }
 
@@ -1891,10 +1890,11 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return MethodDefOrRefTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _MethodDeclarationOffset,
-                    _IsMethodDefOrRefRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(
+                        rowOffset + _MethodDeclarationOffset,
+                        _IsMethodDefOrRefRefSizeSmall
+                    )
             );
         }
 
@@ -1906,15 +1906,16 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int startRowNumber,
                 endRowNumber;
-            this.Block.BinarySearchReferenceRange(
-                this.NumberOfRows,
-                this.RowSize,
-                _ClassOffset,
-                (uint)typeDef.RowId,
-                _IsTypeDefTableRowRefSizeSmall,
-                out startRowNumber,
-                out endRowNumber
-            );
+            this.Block
+                .BinarySearchReferenceRange(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    _ClassOffset,
+                    (uint)typeDef.RowId,
+                    _IsTypeDefTableRowRefSizeSmall,
+                    out startRowNumber,
+                    out endRowNumber
+                );
 
             if (startRowNumber == -1)
             {
@@ -1930,11 +1931,12 @@ namespace System.Reflection.Metadata.Ecma335
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _ClassOffset,
-                _IsTypeDefTableRowRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _ClassOffset,
+                    _IsTypeDefTableRowRefSizeSmall
+                );
         }
     }
 
@@ -2086,24 +2088,26 @@ namespace System.Reflection.Metadata.Ecma335
 
         private int BinarySearchTag(uint searchCodedTag)
         {
-            int foundRowNumber = this.Block.BinarySearchReference(
-                this.NumberOfRows,
-                this.RowSize,
-                _MemberForwardedOffset,
-                searchCodedTag,
-                _IsMemberForwardRowRefSizeSmall
-            );
+            int foundRowNumber = this.Block
+                .BinarySearchReference(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    _MemberForwardedOffset,
+                    searchCodedTag,
+                    _IsMemberForwardRowRefSizeSmall
+                );
 
             return foundRowNumber + 1;
         }
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _MemberForwardedOffset,
-                _IsMemberForwardRowRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _MemberForwardedOffset,
+                    _IsMemberForwardRowRefSizeSmall
+                );
         }
     }
 
@@ -2161,11 +2165,12 @@ namespace System.Reflection.Metadata.Ecma335
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _FieldOffset,
-                _IsFieldTableRowRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _FieldOffset,
+                    _IsFieldTableRowRefSizeSmall
+                );
         }
     }
 
@@ -2463,10 +2468,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return BlobHandle.FromOffset(
-                this.Block.PeekHeapReference(
-                    rowOffset + _PublicKeyOrTokenOffset,
-                    _IsBlobHeapRefSizeSmall
-                )
+                this.Block
+                    .PeekHeapReference(rowOffset + _PublicKeyOrTokenOffset, _IsBlobHeapRefSizeSmall)
             );
         }
 
@@ -2658,10 +2661,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return StringHandle.FromOffset(
-                this.Block.PeekHeapReference(
-                    rowOffset + _TypeNamespaceOffset,
-                    _IsStringHeapRefSizeSmall
-                )
+                this.Block
+                    .PeekHeapReference(rowOffset + _TypeNamespaceOffset, _IsStringHeapRefSizeSmall)
             );
         }
 
@@ -2669,10 +2670,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return NamespaceDefinitionHandle.FromFullNameOffset(
-                this.Block.PeekHeapReference(
-                    rowOffset + _TypeNamespaceOffset,
-                    _IsStringHeapRefSizeSmall
-                )
+                this.Block
+                    .PeekHeapReference(rowOffset + _TypeNamespaceOffset, _IsStringHeapRefSizeSmall)
             );
         }
 
@@ -2680,10 +2679,11 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return ImplementationTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _ImplementationOffset,
-                    _IsImplementationRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(
+                        rowOffset + _ImplementationOffset,
+                        _IsImplementationRefSizeSmall
+                    )
             );
         }
 
@@ -2702,10 +2702,8 @@ namespace System.Reflection.Metadata.Ecma335
         internal int GetNamespace(int rowId)
         {
             int rowOffset = (rowId - 1) * this.RowSize;
-            return this.Block.PeekReference(
-                rowOffset + _TypeNamespaceOffset,
-                _IsStringHeapRefSizeSmall
-            );
+            return this.Block
+                .PeekReference(rowOffset + _TypeNamespaceOffset, _IsStringHeapRefSizeSmall);
         }
     }
 
@@ -2755,10 +2753,11 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return ImplementationTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _ImplementationOffset,
-                    _IsImplementationRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(
+                        rowOffset + _ImplementationOffset,
+                        _IsImplementationRefSizeSmall
+                    )
             );
         }
 
@@ -2812,10 +2811,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return TypeDefinitionHandle.FromRowId(
-                this.Block.PeekReference(
-                    rowOffset + _NestedClassOffset,
-                    _IsTypeDefTableRowRefSizeSmall
-                )
+                this.Block
+                    .PeekReference(rowOffset + _NestedClassOffset, _IsTypeDefTableRowRefSizeSmall)
             );
         }
 
@@ -2823,22 +2820,24 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (rowId - 1) * this.RowSize;
             return TypeDefinitionHandle.FromRowId(
-                this.Block.PeekReference(
-                    rowOffset + _EnclosingClassOffset,
-                    _IsTypeDefTableRowRefSizeSmall
-                )
+                this.Block
+                    .PeekReference(
+                        rowOffset + _EnclosingClassOffset,
+                        _IsTypeDefTableRowRefSizeSmall
+                    )
             );
         }
 
         internal TypeDefinitionHandle FindEnclosingType(TypeDefinitionHandle nestedTypeDef)
         {
-            int rowNumber = this.Block.BinarySearchReference(
-                this.NumberOfRows,
-                this.RowSize,
-                _NestedClassOffset,
-                (uint)nestedTypeDef.RowId,
-                _IsTypeDefTableRowRefSizeSmall
-            );
+            int rowNumber = this.Block
+                .BinarySearchReference(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    _NestedClassOffset,
+                    (uint)nestedTypeDef.RowId,
+                    _IsTypeDefTableRowRefSizeSmall
+                );
 
             if (rowNumber == -1)
             {
@@ -2846,20 +2845,22 @@ namespace System.Reflection.Metadata.Ecma335
             }
 
             return TypeDefinitionHandle.FromRowId(
-                this.Block.PeekReference(
-                    rowNumber * this.RowSize + _EnclosingClassOffset,
-                    _IsTypeDefTableRowRefSizeSmall
-                )
+                this.Block
+                    .PeekReference(
+                        rowNumber * this.RowSize + _EnclosingClassOffset,
+                        _IsTypeDefTableRowRefSizeSmall
+                    )
             );
         }
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _NestedClassOffset,
-                _IsTypeDefTableRowRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _NestedClassOffset,
+                    _IsTypeDefTableRowRefSizeSmall
+                );
         }
     }
 
@@ -2927,10 +2928,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return TypeOrMethodDefTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _OwnerOffset,
-                    _IsTypeOrMethodDefRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(rowOffset + _OwnerOffset, _IsTypeOrMethodDefRefSizeSmall)
             );
         }
 
@@ -2960,15 +2959,16 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int startRowNumber,
                 endRowNumber;
-            this.Block.BinarySearchReferenceRange(
-                this.NumberOfRows,
-                this.RowSize,
-                _OwnerOffset,
-                searchCodedTag,
-                _IsTypeOrMethodDefRefSizeSmall,
-                out startRowNumber,
-                out endRowNumber
-            );
+            this.Block
+                .BinarySearchReferenceRange(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    _OwnerOffset,
+                    searchCodedTag,
+                    _IsTypeOrMethodDefRefSizeSmall,
+                    out startRowNumber,
+                    out endRowNumber
+                );
 
             if (startRowNumber == -1)
             {
@@ -2982,11 +2982,12 @@ namespace System.Reflection.Metadata.Ecma335
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _OwnerOffset,
-                _IsTypeOrMethodDefRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _OwnerOffset,
+                    _IsTypeOrMethodDefRefSizeSmall
+                );
         }
     }
 
@@ -3024,10 +3025,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return MethodDefOrRefTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _MethodOffset,
-                    _IsMethodDefOrRefRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(rowOffset + _MethodOffset, _IsMethodDefOrRefRefSizeSmall)
             );
         }
 
@@ -3035,10 +3034,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return BlobHandle.FromOffset(
-                this.Block.PeekHeapReference(
-                    rowOffset + _InstantiationOffset,
-                    _IsBlobHeapRefSizeSmall
-                )
+                this.Block
+                    .PeekHeapReference(rowOffset + _InstantiationOffset, _IsBlobHeapRefSizeSmall)
             );
         }
     }
@@ -3085,15 +3082,16 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int startRowNumber,
                 endRowNumber;
-            this.Block.BinarySearchReferenceRange(
-                this.NumberOfRows,
-                this.RowSize,
-                _OwnerOffset,
-                (uint)genericParameter.RowId,
-                _IsGenericParamTableRowRefSizeSmall,
-                out startRowNumber,
-                out endRowNumber
-            );
+            this.Block
+                .BinarySearchReferenceRange(
+                    this.NumberOfRows,
+                    this.RowSize,
+                    _OwnerOffset,
+                    (uint)genericParameter.RowId,
+                    _IsGenericParamTableRowRefSizeSmall,
+                    out startRowNumber,
+                    out endRowNumber
+                );
 
             if (startRowNumber == -1)
             {
@@ -3108,21 +3106,20 @@ namespace System.Reflection.Metadata.Ecma335
 
         private bool CheckSorted()
         {
-            return this.Block.IsOrderedByReferenceAscending(
-                this.RowSize,
-                _OwnerOffset,
-                _IsGenericParamTableRowRefSizeSmall
-            );
+            return this.Block
+                .IsOrderedByReferenceAscending(
+                    this.RowSize,
+                    _OwnerOffset,
+                    _IsGenericParamTableRowRefSizeSmall
+                );
         }
 
         internal EntityHandle GetConstraint(GenericParameterConstraintHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return TypeDefOrRefTag.ConvertToHandle(
-                this.Block.PeekTaggedReference(
-                    rowOffset + _ConstraintOffset,
-                    _IsTypeDefOrRefRefSizeSmall
-                )
+                this.Block
+                    .PeekTaggedReference(rowOffset + _ConstraintOffset, _IsTypeDefOrRefRefSizeSmall)
             );
         }
 
@@ -3130,10 +3127,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             int rowOffset = (handle.RowId - 1) * this.RowSize;
             return GenericParameterHandle.FromRowId(
-                this.Block.PeekReference(
-                    rowOffset + _OwnerOffset,
-                    _IsGenericParamTableRowRefSizeSmall
-                )
+                this.Block
+                    .PeekReference(rowOffset + _OwnerOffset, _IsGenericParamTableRowRefSizeSmall)
             );
         }
     }

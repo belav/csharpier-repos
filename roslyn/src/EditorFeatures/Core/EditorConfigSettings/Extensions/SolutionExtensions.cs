@@ -32,9 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Extensions
 
             var builder = ArrayBuilder<Project>.GetInstance();
             foreach (
-                var (projectDirectoryPath, project) in solution.Projects.Select(
-                    p => (new DirectoryInfo(p.FilePath).Parent, p)
-                )
+                var (projectDirectoryPath, project) in solution.Projects
+                    .Select(p => (new DirectoryInfo(p.FilePath).Parent, p))
             )
             {
                 if (ContainsPath(givenFolder, projectDirectoryPath))

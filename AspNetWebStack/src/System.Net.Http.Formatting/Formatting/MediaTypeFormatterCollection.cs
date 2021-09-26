@@ -203,7 +203,8 @@ namespace System.Net.Http.Formatting
                 typeof(XmlNode).IsAssignableFrom(type)
                 ||
 #endif
-                typeof(FormDataCollection).IsAssignableFrom(type)
+                typeof(FormDataCollection)
+                    .IsAssignableFrom(type)
                 || FormattingUtilities.IsJTokenType(type)
                 || typeof(XObject).IsAssignableFrom(type)
                 || typeof(Type).IsAssignableFrom(type)

@@ -14,9 +14,8 @@ namespace System.ComponentModel.Tests
             var component = new DescriptorTestComponent();
             var eventHandlerWasCalled = false;
             Action eventHandler = () => eventHandlerWasCalled = true;
-            var eventInfo = typeof(DescriptorTestComponent).GetEvent(
-                nameof(DescriptorTestComponent.ActionEvent)
-            );
+            var eventInfo = typeof(DescriptorTestComponent)
+                .GetEvent(nameof(DescriptorTestComponent.ActionEvent));
             EventDescriptor eventDescriptor = TypeDescriptor.CreateEvent(
                 component.GetType(),
                 nameof(component.ActionEvent),

@@ -64,10 +64,8 @@ namespace System.Reflection.Emit.Tests
             ilGenerator.Emit(OpCodes.Ldfld, genericUField);
             ilGenerator.Emit(OpCodes.Box, methodParams[0].AsType());
 
-            MethodInfo writeLineObj = typeof(Console).GetMethod(
-                "WriteLine",
-                new Type[] { typeof(object) }
-            );
+            MethodInfo writeLineObj = typeof(Console)
+                .GetMethod("WriteLine", new Type[] { typeof(object) });
             ilGenerator.EmitCall(OpCodes.Call, writeLineObj, null);
             ilGenerator.Emit(OpCodes.Ret);
 
@@ -108,10 +106,8 @@ namespace System.Reflection.Emit.Tests
 
             ILGenerator ilGenerator = method.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ldstr, "Test string here.");
-            MethodInfo writeLine = typeof(Console).GetMethod(
-                "WriteLine",
-                new Type[] { typeof(string) }
-            );
+            MethodInfo writeLine = typeof(Console)
+                .GetMethod("WriteLine", new Type[] { typeof(string) });
             ilGenerator.EmitCall(OpCodes.Call, writeLine, null);
             ilGenerator.Emit(OpCodes.Ret);
 

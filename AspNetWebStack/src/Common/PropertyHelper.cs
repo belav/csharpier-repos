@@ -164,15 +164,14 @@ namespace System.Web.WebPages
         private delegate TValue ByRefFunc<TDeclaringType, TValue>(ref TDeclaringType arg);
 
         private static readonly MethodInfo _callPropertyGetterOpenGenericMethod =
-            typeof(PropertyHelper).GetMethod(
-                "CallPropertyGetter",
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            typeof(PropertyHelper)
+                .GetMethod("CallPropertyGetter", BindingFlags.NonPublic | BindingFlags.Static);
         private static readonly MethodInfo _callPropertyGetterByReferenceOpenGenericMethod =
-            typeof(PropertyHelper).GetMethod(
-                "CallPropertyGetterByReference",
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            typeof(PropertyHelper)
+                .GetMethod(
+                    "CallPropertyGetterByReference",
+                    BindingFlags.NonPublic | BindingFlags.Static
+                );
 
         private static object CallPropertyGetter<TDeclaringType, TValue>(
             Func<TDeclaringType, TValue> getter,
@@ -193,10 +192,8 @@ namespace System.Web.WebPages
 
         // Implementation of the fast setter.
         private static readonly MethodInfo _callPropertySetterOpenGenericMethod =
-            typeof(PropertyHelper).GetMethod(
-                "CallPropertySetter",
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            typeof(PropertyHelper)
+                .GetMethod("CallPropertySetter", BindingFlags.NonPublic | BindingFlags.Static);
 
         private static void CallPropertySetter<TDeclaringType, TValue>(
             Action<TDeclaringType, TValue> setter,
@@ -223,8 +220,8 @@ namespace System.Web.WebPages
                 // We avoid loading indexed properties using the where statement.
                 // Indexed properties are not useful (or valid) for grabbing properties off an anonymous object.
                 IEnumerable<PropertyInfo> properties = type.GetProperties(
-                        BindingFlags.Public | BindingFlags.Instance
-                    )
+                    BindingFlags.Public | BindingFlags.Instance
+                )
                     .Where(prop => prop.GetIndexParameters().Length == 0 && prop.GetMethod != null);
 
                 var newHelpers = new List<PropertyHelper>();

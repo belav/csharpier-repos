@@ -42,10 +42,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
             // parameter == UnsafeMethods.GetVariantForObject(parameter);
             return Expression.Call(
-                typeof(UnsafeMethods).GetMethod(
-                    nameof(UnsafeMethods.GetVariantForObject),
-                    BindingFlags.Static | BindingFlags.NonPublic
-                ),
+                typeof(UnsafeMethods)
+                    .GetMethod(
+                        nameof(UnsafeMethods.GetVariantForObject),
+                        BindingFlags.Static | BindingFlags.NonPublic
+                    ),
                 parameter
             );
         }

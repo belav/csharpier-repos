@@ -89,11 +89,12 @@ namespace System.Security.Cryptography
                         throw new CryptographicException(SR.Cryptography_OpenInvalidHandle);
                     }
 
-                    byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
-                        includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
-                        exportPrivate: includePrivateParameters,
-                        password: ExportPassword
-                    );
+                    byte[] keyBlob = Interop.AppleCrypto
+                        .SecKeyExport(
+                            includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
+                            exportPrivate: includePrivateParameters,
+                            password: ExportPassword
+                        );
 
                     try
                     {
@@ -266,10 +267,8 @@ namespace System.Security.Cryptography
 
                     try
                     {
-                        return Interop.AppleCrypto.ImportEphemeralKey(
-                            rented.AsSpan(0, written),
-                            hasPrivateKey
-                        );
+                        return Interop.AppleCrypto
+                            .ImportEphemeralKey(rented.AsSpan(0, written), hasPrivateKey);
                     }
 
                     finally
@@ -300,10 +299,8 @@ namespace System.Security.Cryptography
                                 out int localRead
                             );
 
-                            SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.ImportEphemeralKey(
-                                source.Slice(0, localRead),
-                                false
-                            );
+                            SafeSecKeyRefHandle publicKey = Interop.AppleCrypto
+                                .ImportEphemeralKey(source.Slice(0, localRead), false);
                             SetKey(SecKeyPair.PublicOnly(publicKey));
 
                             bytesRead = localRead;
@@ -323,10 +320,8 @@ namespace System.Security.Cryptography
                         throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                     }
 
-                    byte[] derFormatSignature = Interop.AppleCrypto.GenerateSignature(
-                        keys.PrivateKey,
-                        rgbHash
-                    );
+                    byte[] derFormatSignature = Interop.AppleCrypto
+                        .GenerateSignature(keys.PrivateKey, rgbHash);
 
                     // Since the AppleCrypto implementation is limited to FIPS 186-2, signature field sizes
                     // are always 160 bits / 20 bytes (the size of SHA-1, and the only legal length for Q).
@@ -357,11 +352,8 @@ namespace System.Security.Cryptography
                         signature
                     );
 
-                    return Interop.AppleCrypto.VerifySignature(
-                        GetKeys().PublicKey,
-                        hash,
-                        derFormatSignature
-                    );
+                    return Interop.AppleCrypto
+                        .VerifySignature(GetKeys().PublicKey, hash, derFormatSignature);
                 }
 
                 protected override byte[] HashData(

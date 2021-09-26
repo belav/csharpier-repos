@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             private readonly int _position;
             private readonly AbstractOverrideCompletionProvider _provider;
             private readonly SymbolDisplayFormat _overrideNameFormat =
-                SymbolDisplayFormats.NameFormat.WithParameterOptions(
+                SymbolDisplayFormats.NameFormat
+                    .WithParameterOptions(
                         SymbolDisplayParameterOptions.IncludeDefaultValue
                             | SymbolDisplayParameterOptions.IncludeExtensionThis
                             | SymbolDisplayParameterOptions.IncludeType
@@ -93,9 +94,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     return default;
 
                 var semanticModel = await _document.ReuseExistingSpeculativeModelAsync(
-                        startToken.Parent,
-                        _cancellationToken
-                    )
+                    startToken.Parent,
+                    _cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (
                     !_provider.TryDetermineReturnType(

@@ -17,11 +17,12 @@ namespace System
             uint length;
             while (
                 (
-                    length = Interop.Kernel32.GetEnvironmentVariable(
-                        variable,
-                        ref builder.GetPinnableReference(),
-                        (uint)builder.Capacity
-                    )
+                    length = Interop.Kernel32
+                        .GetEnvironmentVariable(
+                            variable,
+                            ref builder.GetPinnableReference(),
+                            (uint)builder.Capacity
+                        )
                 ) > builder.Capacity
             )
             {

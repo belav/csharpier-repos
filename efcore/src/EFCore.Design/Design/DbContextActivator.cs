@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Design
                 contextType.Assembly,
                 startupAssembly ?? contextType.Assembly,
                 args: args ?? Array.Empty<string>()
-            ).CreateContext(contextType.FullName!);
+            )
+                .CreateContext(contextType.FullName!);
         }
     }
 }

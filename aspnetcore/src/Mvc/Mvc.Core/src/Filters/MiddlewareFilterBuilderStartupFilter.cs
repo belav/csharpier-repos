@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
             void MiddlewareFilterBuilder(IApplicationBuilder builder)
             {
-                var middlewarePipelineBuilder =
-                    builder.ApplicationServices.GetRequiredService<MiddlewareFilterBuilder>();
+                var middlewarePipelineBuilder = builder.ApplicationServices
+                    .GetRequiredService<MiddlewareFilterBuilder>();
                 middlewarePipelineBuilder.ApplicationBuilder = builder.New();
 
                 next(builder);

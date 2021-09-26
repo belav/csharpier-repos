@@ -165,13 +165,14 @@ namespace System.Data.SqlTypes.Tests
             // Some of Windows versions have a regression, so ignore last entry in the s_specialMatchingString if this is the case.
             if (
                 PlatformDetection.IsWindows10Version1903OrGreater
-                && CultureInfo.InvariantCulture.CompareInfo.Compare(
-                    "\u3060",
-                    "\uFF80\uFF9E",
-                    CompareOptions.IgnoreKanaType
-                        | CompareOptions.IgnoreWidth
-                        | CompareOptions.IgnoreCase
-                ) != 0
+                && CultureInfo.InvariantCulture.CompareInfo
+                    .Compare(
+                        "\u3060",
+                        "\uFF80\uFF9E",
+                        CompareOptions.IgnoreKanaType
+                            | CompareOptions.IgnoreWidth
+                            | CompareOptions.IgnoreCase
+                    ) != 0
             )
             {
                 count--;
@@ -186,19 +187,21 @@ namespace System.Data.SqlTypes.Tests
                 // Per default option, each set contains two string which should be matched as equal per default option
                 Assert.True(
                     (bool)(str1 == str2),
-                    string.Format(
-                        "Error (Default Comparison Option with Operator): {0} and {1} should be equal",
-                        s_specialMatchingString[i, 0],
-                        s_specialMatchingString[i, 1]
-                    )
+                    string
+                        .Format(
+                            "Error (Default Comparison Option with Operator): {0} and {1} should be equal",
+                            s_specialMatchingString[i, 0],
+                            s_specialMatchingString[i, 1]
+                        )
                 );
                 Assert.True(
                     str1.CompareTo(str2) == 0,
-                    string.Format(
-                        "FAILED: (Default Comparison Option with CompareTo): {0} and {1} should be equal",
-                        s_specialMatchingString[i, 0],
-                        s_specialMatchingString[i, 1]
-                    )
+                    string
+                        .Format(
+                            "FAILED: (Default Comparison Option with CompareTo): {0} and {1} should be equal",
+                            s_specialMatchingString[i, 0],
+                            s_specialMatchingString[i, 1]
+                        )
                 );
             }
         }
@@ -305,10 +308,11 @@ namespace System.Data.SqlTypes.Tests
                         break;
                     case SqlCompareOptions.BinarySort2:
                         Assert.True(
-                            string.CompareOrdinal(
-                                currentString.Value.TrimEnd(),
-                                nextString.Value.TrimEnd()
-                            ) < 0,
+                            string
+                                .CompareOrdinal(
+                                    currentString.Value.TrimEnd(),
+                                    nextString.Value.TrimEnd()
+                                ) < 0,
                             "FAILED: (SqlString BinarySort2 Comparison): SqlStrings are out of order"
                         );
                         break;

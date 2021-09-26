@@ -329,9 +329,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             }
             else if (property.IsBindingRequired)
             {
-                var message = property.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
-                    fieldName
-                );
+                var message = property.ModelBindingMessageProvider
+                    .MissingBindRequiredValueAccessor(fieldName);
                 bindingContext.ModelState.TryAddModelError(modelName, message);
             }
 
@@ -552,8 +551,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 }
 
                 _modelCreator = Expression.Lambda<Func<object>>(
-                        Expression.New(bindingContext.ModelType)
-                    )
+                    Expression.New(bindingContext.ModelType)
+                )
                     .Compile();
             }
 

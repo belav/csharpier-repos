@@ -48,7 +48,8 @@ namespace System.Security.Cryptography.Xml.Tests
 
             // Schema check. Should not throw.
             const string schema = "http://www.w3.org/2000/09/xmldsig#";
-            new[] { "Exponent", "Modulus" }.Select(
+            new[] { "Exponent", "Modulus" }
+                .Select(
                     elementName =>
                         Convert.FromBase64String(
                             xmlkey.SelectSingleNode(

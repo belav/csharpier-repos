@@ -16,10 +16,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(KeyValuePair<int, string>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
                 ModelName = "foo",
                 ValueProvider = new SimpleHttpValueProvider
                 {
@@ -43,10 +41,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(List<int>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(List<int>)),
                 ModelName = "foo",
                 ValueProvider = new SimpleHttpValueProvider
                 {

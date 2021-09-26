@@ -530,9 +530,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                 return;
             }
 
-            _batchBuilder.ComponentRenderQueue.Enqueue(
-                new RenderQueueEntry(componentState, renderFragment)
-            );
+            _batchBuilder.ComponentRenderQueue
+                .Enqueue(new RenderQueueEntry(componentState, renderFragment));
 
             if (!_isBatchInProgress)
             {

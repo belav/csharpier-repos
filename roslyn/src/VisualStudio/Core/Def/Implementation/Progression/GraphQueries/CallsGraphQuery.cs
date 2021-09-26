@@ -24,10 +24,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
-                    solution,
-                    context.InputNodes,
-                    cancellationToken
-                )
+                solution,
+                context.InputNodes,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             foreach (var node in context.InputNodes)
@@ -37,10 +37,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 {
                     foreach (
                         var newSymbol in await GetCalledMethodSymbolsAsync(
-                                symbol,
-                                solution,
-                                cancellationToken
-                            )
+                            symbol,
+                            solution,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {
@@ -72,7 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 foreach (
                     var syntaxNode in (
                         await reference.GetSyntaxAsync(cancellationToken).ConfigureAwait(false)
-                    ).DescendantNodes()
+                    )
+                        .DescendantNodes()
                 )
                 {
                     cancellationToken.ThrowIfCancellationRequested();

@@ -241,9 +241,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             {
                 var linkFolderPath = Path.GetDirectoryName(linkMetadata);
                 folders = linkFolderPath.Split(
-                        PathSeparatorCharacters,
-                        StringSplitOptions.RemoveEmptyEntries
-                    )
+                    PathSeparatorCharacters,
+                    StringSplitOptions.RemoveEmptyEntries
+                )
                     .ToImmutableArray();
             }
             else if (!string.IsNullOrEmpty(VisualStudioProject.FilePath))

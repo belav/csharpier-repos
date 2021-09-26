@@ -246,10 +246,10 @@ namespace System.Net.Security.Tests
                 )
                 {
                     await serverAuth.AuthenticateAsServerAsync(
-                            CredentialCache.DefaultNetworkCredentials,
-                            ProtectionLevel.EncryptAndSign,
-                            TokenImpersonationLevel.Identification
-                        )
+                        CredentialCache.DefaultNetworkCredentials,
+                        ProtectionLevel.EncryptAndSign,
+                        TokenImpersonationLevel.Identification
+                    )
                         .WaitAsync(TimeSpan.FromSeconds(15));
 
                     Assert.True(serverAuth.IsAuthenticated, "IsAuthenticated");

@@ -430,10 +430,8 @@ namespace System.Web.Razor.Parser
         {
             // First, determine if this is a 'data-' attribute (since those can't use conditional attributes)
             LocationTagged<string> name = nameSymbols.GetContent(Span.Start);
-            bool attributeCanBeConditional = !name.Value.StartsWith(
-                "data-",
-                StringComparison.OrdinalIgnoreCase
-            );
+            bool attributeCanBeConditional = !name.Value
+                .StartsWith("data-", StringComparison.OrdinalIgnoreCase);
 
             // Accept the whitespace and name
             Accept(whitespace);

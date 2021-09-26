@@ -93,9 +93,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             if (containingType == null)
                 return;
 
-            using var _1 = ArrayBuilder<INamedTypeSymbol>.GetInstance(
-                out var missingComparableTypes
-            );
+            using var _1 = ArrayBuilder<INamedTypeSymbol>
+                .GetInstance(out var missingComparableTypes);
 
             foreach (var iface in containingType.Interfaces)
             {
@@ -213,16 +212,16 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             );
 
             return await codeGenService.AddMembersAsync(
-                    document.Project.Solution,
-                    containingType,
-                    operators,
-                    new CodeGenerationOptions(
-                        contextLocation: typeDeclaration.GetLocation(),
-                        options: options,
-                        parseOptions: typeDeclaration.SyntaxTree.Options
-                    ),
-                    cancellationToken
-                )
+                document.Project.Solution,
+                containingType,
+                operators,
+                new CodeGenerationOptions(
+                    contextLocation: typeDeclaration.GetLocation(),
+                    options: options,
+                    parseOptions: typeDeclaration.SyntaxTree.Options
+                ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

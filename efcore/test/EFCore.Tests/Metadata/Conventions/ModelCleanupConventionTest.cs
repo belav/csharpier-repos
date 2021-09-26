@@ -131,14 +131,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 modelBuilder.Metadata.ConventionDispatcher
             );
 
-            new ModelCleanupConvention(CreateDependencies()).ProcessModelFinalizing(
-                modelBuilder,
-                context
-            );
+            new ModelCleanupConvention(CreateDependencies())
+                .ProcessModelFinalizing(modelBuilder, context);
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private static InternalEntityTypeBuilder CreateInternalEntityBuilder<T>()

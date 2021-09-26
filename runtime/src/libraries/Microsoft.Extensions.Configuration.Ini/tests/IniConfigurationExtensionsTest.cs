@@ -48,7 +48,9 @@ namespace Microsoft.Extensions.Configuration.Ini.Test
             var path = "file-does-not-exist.ini";
 
             // Act and Assert
-            new ConfigurationBuilder().AddIniFile(path, optional: true).Build();
+            new ConfigurationBuilder()
+                .AddIniFile(path, optional: true)
+                .Build();
         }
     }
 }

@@ -29,26 +29,26 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             // If this is a symbol from a metadata-as-source project, then map that symbol back to a symbol in the primary workspace.
             var symbolAndProjectOpt =
                 await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(
-                        document,
-                        position,
-                        cancellationToken
-                    )
+                    document,
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             if (symbolAndProjectOpt == null)
             {
                 await context.ReportMessageAsync(
-                        EditorFeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret
-                    )
+                    EditorFeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret
+                )
                     .ConfigureAwait(false);
                 return;
             }
 
             var symbolAndProject = symbolAndProjectOpt.Value;
             await FindImplementationsAsync(
-                    symbolAndProject.symbol,
-                    symbolAndProject.project,
-                    context
-                )
+                symbolAndProject.symbol,
+                symbolAndProject.project,
+                context
+            )
                 .ConfigureAwait(false);
         }
 
@@ -61,9 +61,9 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             var cancellationToken = context.CancellationToken;
             var solution = project.Solution;
             var client = await RemoteHostClient.TryGetClientAsync(
-                    solution.Workspace,
-                    cancellationToken
-                )
+                solution.Workspace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (client != null)
             {
@@ -78,17 +78,17 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                 );
 
                 await client.TryInvokeAsync<IRemoteFindUsagesService>(
-                        solution,
-                        (service, solutionInfo, callbackId, cancellationToken) =>
-                            service.FindImplementationsAsync(
-                                solutionInfo,
-                                callbackId,
-                                symbolAndProjectId,
-                                cancellationToken
-                            ),
-                        serverCallback,
-                        cancellationToken
-                    )
+                    solution,
+                    (service, solutionInfo, callbackId, cancellationToken) =>
+                        service.FindImplementationsAsync(
+                            solutionInfo,
+                            callbackId,
+                            symbolAndProjectId,
+                            cancellationToken
+                        ),
+                    serverCallback,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else
@@ -109,10 +109,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
 
             var solution = project.Solution;
             var (implementations, message) = await FindSourceImplementationsAsync(
-                    solution,
-                    symbol,
-                    cancellationToken
-                )
+                solution,
+                symbol,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (message != null)
@@ -122,22 +122,23 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             }
 
             await context.SetSearchTitleAsync(
-                    string.Format(
+                string
+                    .Format(
                         EditorFeaturesResources._0_implementations,
                         FindUsagesHelpers.GetDisplayName(symbol)
                     )
-                )
+            )
                 .ConfigureAwait(false);
 
             foreach (var implementation in implementations)
             {
                 var definitionItem = await implementation.ToClassifiedDefinitionItemAsync(
-                        solution,
-                        isPrimary: true,
-                        includeHiddenLocations: false,
-                        FindReferencesSearchOptions.Default,
-                        cancellationToken
-                    )
+                    solution,
+                    isPrimary: true,
+                    includeHiddenLocations: false,
+                    FindReferencesSearchOptions.Default,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 await context.OnDefinitionFoundAsync(definitionItem).ConfigureAwait(false);
@@ -155,20 +156,20 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             // If we're in a linked file, try to find all the symbols this links to, and find all the implementations of
             // each of those linked symbols. De-dupe the results so the user only gets unique results.
             var linkedSymbols = await SymbolFinder.FindLinkedSymbolsAsync(
-                    symbol,
-                    solution,
-                    cancellationToken
-                )
+                symbol,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             foreach (var linkedSymbol in linkedSymbols)
             {
                 builder.AddRange(
                     await FindSourceImplementationsWorkerAsync(
-                            solution,
-                            linkedSymbol,
-                            cancellationToken
-                        )
+                        solution,
+                        linkedSymbol,
+                        cancellationToken
+                    )
                         .ConfigureAwait((bool)false)
                 );
             }
@@ -188,10 +189,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
         )
         {
             var implementations = await FindSourceAndMetadataImplementationsAsync(
-                    solution,
-                    symbol,
-                    cancellationToken
-                )
+                solution,
+                symbol,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return implementations.WhereAsArray(s => s.Locations.Any(l => l.IsInSource));
         }
@@ -207,10 +208,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             if (symbol.IsInterfaceType() || symbol.IsImplementableMember())
             {
                 var implementations = await SymbolFinder.FindImplementationsAsync(
-                        symbol,
-                        solution,
-                        cancellationToken: cancellationToken
-                    )
+                    symbol,
+                    solution,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // It's important we use a HashSet here -- we may have cases in an inheritance hierarchy where more than one method
@@ -227,10 +228,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                     if (implementation.IsOverridable())
                     {
                         var overrides = await SymbolFinder.FindOverridesAsync(
-                                implementation,
-                                solution,
-                                cancellationToken: cancellationToken
-                            )
+                            implementation,
+                            solution,
+                            cancellationToken: cancellationToken
+                        )
                             .ConfigureAwait(false);
                         implementationsAndOverrides.AddRange(overrides);
                     }
@@ -246,10 +247,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             else if (symbol is INamedTypeSymbol { TypeKind: TypeKind.Class } namedType)
             {
                 var derivedClasses = await SymbolFinder.FindDerivedClassesAsync(
-                        namedType,
-                        solution,
-                        cancellationToken: cancellationToken
-                    )
+                    namedType,
+                    solution,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return derivedClasses.Concat(symbol).ToImmutableArray();
@@ -257,10 +258,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             else if (symbol.IsOverridable())
             {
                 var overrides = await SymbolFinder.FindOverridesAsync(
-                        symbol,
-                        solution,
-                        cancellationToken: cancellationToken
-                    )
+                    symbol,
+                    solution,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 return overrides.Concat(symbol).ToImmutableArray();
             }

@@ -888,17 +888,17 @@ class ClassA
             var info0 = GetAnonymousTypeInfoSummary(
                 data,
                 0,
-                data.Tree.FindNodeOrTokenByKind(
-                    SyntaxKind.NewKeyword,
-                    NumberOfNewKeywords(LINQ) + 2
-                ).Span,
+                data.Tree
+                    .FindNodeOrTokenByKind(
+                        SyntaxKind.NewKeyword,
+                        NumberOfNewKeywords(LINQ) + 2
+                    ).Span,
                 1,
                 2
             );
 
-            var info1 = data.Model.GetSymbolInfo(
-                ((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression
-            );
+            var info1 = data.Model
+                .GetSymbolInfo(((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression);
             Assert.NotNull(info1.Symbol);
             Assert.Equal(SymbolKind.RangeVariable, info1.Symbol.Kind);
             Assert.Equal("x", info1.Symbol.ToDisplayString());
@@ -975,10 +975,11 @@ class ClassA
             var info0 = GetAnonymousTypeInfoSummary(
                 data,
                 0,
-                data.Tree.FindNodeOrTokenByKind(
-                    SyntaxKind.NewKeyword,
-                    NumberOfNewKeywords(LINQ) + 2
-                ).Span,
+                data.Tree
+                    .FindNodeOrTokenByKind(
+                        SyntaxKind.NewKeyword,
+                        NumberOfNewKeywords(LINQ) + 2
+                    ).Span,
                 1,
                 2
             );
@@ -988,16 +989,14 @@ class ClassA
                 info0.Type.ToTestDisplayString()
             );
 
-            var info1 = data.Model.GetSymbolInfo(
-                ((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression
-            );
+            var info1 = data.Model
+                .GetSymbolInfo(((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression);
             Assert.NotNull(info1.Symbol);
             Assert.Equal(SymbolKind.RangeVariable, info1.Symbol.Kind);
             Assert.Equal("x", info1.Symbol.ToDisplayString());
 
-            var info2 = data.Model.GetSymbolInfo(
-                ((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[2]).Expression
-            );
+            var info2 = data.Model
+                .GetSymbolInfo(((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[2]).Expression);
             Assert.NotNull(info2.Symbol);
             Assert.Equal(SymbolKind.RangeVariable, info2.Symbol.Kind);
             Assert.Equal("y", info2.Symbol.ToDisplayString());
@@ -1682,7 +1681,8 @@ public class ClassA
                 from m in info0.Type.GetMembers()
                 where m.Kind == SymbolKind.Property
                 select m
-            ).ToArray();
+            )
+                .ToArray();
             Assert.Equal(3, properties.Length);
 
             Assert.Equal(
@@ -1796,7 +1796,8 @@ public class ClassA
             );
 
             var pos = data.Nodes[0].Span.End;
-            var syms = data.Model.LookupSymbols(pos, container: info0.Type)
+            var syms = data.Model
+                .LookupSymbols(pos, container: info0.Type)
                 .Select(x => x.ToTestDisplayString())
                 .OrderBy(x => x)
                 .ToArray();
@@ -1833,7 +1834,8 @@ public class ClassA
             Assert.Equal("<empty anonymous type>", info0.Type.ToTestDisplayString());
 
             pos = data.Nodes[3].Span.End;
-            syms = data.Model.LookupSymbols(pos, container: info0.Type)
+            syms = data.Model
+                .LookupSymbols(pos, container: info0.Type)
                 .Select(x => x.ToTestDisplayString())
                 .OrderBy(x => x)
                 .ToArray();
@@ -1914,7 +1916,7 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
         public void TestAnonymousTypeInsideGroupBy_Queryable()
         {
             CompileAndVerify(
-                    @"using System.Linq;
+                @"using System.Linq;
 
 public class Product
 {
@@ -1935,8 +1937,7 @@ public class Program
         var q0 = db.Products.GroupBy(p => new { Conditional = false ? new { p.ProductID, p.ProductName, p.SupplierID } : new { p.ProductID, p.ProductName, p.SupplierID } }).ToList();
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -2078,7 +2079,7 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
         public void TestAnonymousTypeInsideGroupBy_Enumerable()
         {
             CompileAndVerify(
-                    @"using System.Linq;
+                @"using System.Linq;
 using System.Collections.Generic;
 
 public class Product
@@ -2100,8 +2101,7 @@ public class Program
         var q0 = db.Products.GroupBy(p => new { Conditional = false ? new { p.ProductID, p.ProductName, p.SupplierID } : new { p.ProductID, p.ProductName, p.SupplierID } }).ToList();
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [WorkItem(546416, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546416")]
@@ -2109,7 +2109,7 @@ public class Program
         public void TestAnonymousTypeInsideGroupBy_Enumerable2()
         {
             CompileAndVerify(
-                    @"using System.Linq;
+                @"using System.Linq;
 using System.Collections.Generic;
 
 public class Product
@@ -2131,8 +2131,7 @@ public class Program
         var q1 = db.Products.GroupBy(p => new { Conditional = false ? new { p.ProductID, p.SupplierID } : new { p.ProductID, p.SupplierID } }).ToList();
     }
 }"
-                )
-                .VerifyDiagnostics();
+            ).VerifyDiagnostics();
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -2195,7 +2194,8 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
                     .WithLocation(6, 46),
                 // file.cs(6,59): error CS8716: There is no target type for the default literal.
                 //         var obj = /*<bind>*/new { f1 = null, f2 = M, f3 = default }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 59)
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
+                    .WithLocation(6, 59)
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AnonymousObjectCreationExpressionSyntax>(
@@ -2396,10 +2396,8 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
 
             List<TextSpan> intervals = new List<TextSpan>();
 
-            var all = (
-                from s in FindAll(source, startTag)
-                select new { start = true, offset = s }
-            ).Union(from s in FindAll(source, endTag) select new { start = false, offset = s })
+            var all = (from s in FindAll(source, startTag) select new { start = true, offset = s })
+                .Union(from s in FindAll(source, endTag) select new { start = false, offset = s })
                 .OrderBy(value => value.offset)
                 .ToList();
 

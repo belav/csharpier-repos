@@ -294,10 +294,8 @@ class C
             expectedDiagnostic = Diagnostic(analyzer.Descriptor.Id, source, isSuppressed: true);
             VerifySuppressedDiagnostics(compilation, analyzersAndSuppressors, expectedDiagnostic);
 
-            var specificDiagnosticOptions = compilation.Options.SpecificDiagnosticOptions.Add(
-                suppressionId,
-                ReportDiagnostic.Suppress
-            );
+            var specificDiagnosticOptions = compilation.Options.SpecificDiagnosticOptions
+                .Add(suppressionId, ReportDiagnostic.Suppress);
             compilation = compilation.WithOptions(
                 compilation.Options.WithSpecificDiagnosticOptions(specificDiagnosticOptions)
             );
@@ -331,10 +329,10 @@ class C { }";
                             );
 
                         var diagnosticNoSuppressor = Diagnostic(
-                                "ID1000",
-                                "class C { }",
-                                isSuppressed: false
-                            )
+                            "ID1000",
+                            "class C { }",
+                            isSuppressed: false
+                        )
                             .WithLocation(2, 1)
                             .WithDefaultSeverity(defaultSeverity)
                             .WithEffectiveSeverity(
@@ -370,9 +368,8 @@ class C { }";
                             value: DiagnosticDescriptor.MapSeverityToReport(effectiveSeverity)
                         );
                         compilation = compilation.WithOptions(
-                            compilation.Options.WithSpecificDiagnosticOptions(
-                                specificDiagnosticOptions
-                            )
+                            compilation.Options
+                                .WithSpecificDiagnosticOptions(specificDiagnosticOptions)
                         );
 
                         // Verify analyzer diagnostic without suppressor, also verify no suppressions.
@@ -544,10 +541,11 @@ class C { }";
             var analyzersAndSuppresors = new DiagnosticAnalyzer[] { analyzer, suppressor };
 
             // "Reported suppression with ID '{0}' is not supported by the suppressor."
-            var exceptionMessage = string.Format(
-                CodeAnalysisResources.UnsupportedSuppressionReported,
-                unsupportedSuppressionId
-            );
+            var exceptionMessage = string
+                .Format(
+                    CodeAnalysisResources.UnsupportedSuppressionReported,
+                    unsupportedSuppressionId
+                );
 
             var exceptions = new List<Exception>();
             EventHandler<FirstChanceExceptionEventArgs> firstChanceException = (sender, e) =>
@@ -613,11 +611,12 @@ class C { }";
             var analyzersAndSuppresors = new DiagnosticAnalyzer[] { analyzer, suppressor };
 
             // "Suppressed diagnostic ID '{0}' does not match suppressable ID '{1}' for the given suppression descriptor."
-            var exceptionMessage = string.Format(
-                CodeAnalysisResources.InvalidDiagnosticSuppressionReported,
-                analyzer.Descriptor.Id,
-                unsupportedSuppressedId
-            );
+            var exceptionMessage = string
+                .Format(
+                    CodeAnalysisResources.InvalidDiagnosticSuppressionReported,
+                    analyzer.Descriptor.Id,
+                    unsupportedSuppressedId
+                );
 
             var exceptions = new List<Exception>();
             EventHandler<FirstChanceExceptionEventArgs> firstChanceException = (sender, e) =>
@@ -683,10 +682,11 @@ class C { }";
             var analyzersAndSuppressors = new DiagnosticAnalyzer[] { analyzer, suppressor };
 
             // "Non-reported diagnostic with ID '{0}' cannot be suppressed."
-            var exceptionMessage = string.Format(
-                CodeAnalysisResources.NonReportedDiagnosticCannotBeSuppressed,
-                nonReportedDiagnosticId
-            );
+            var exceptionMessage = string
+                .Format(
+                    CodeAnalysisResources.NonReportedDiagnosticCannotBeSuppressed,
+                    nonReportedDiagnosticId
+                );
 
             var exceptions = new List<Exception>();
             EventHandler<FirstChanceExceptionEventArgs> firstChanceException = (sender, e) =>
@@ -780,7 +780,8 @@ class C { }";
             var programmaticSuppression = diagnostics.Select(d => d.ProgrammaticSuppressionInfo)
                 .Single();
             Assert.Equal(2, programmaticSuppression.Suppressions.Count);
-            var orderedSuppressions = programmaticSuppression.Suppressions.Order()
+            var orderedSuppressions = programmaticSuppression.Suppressions
+                .Order()
                 .ToImmutableArrayOrEmpty();
             Assert.Equal(suppressionId, orderedSuppressions[0].Id);
             Assert.Equal(

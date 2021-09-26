@@ -8173,9 +8173,8 @@ class Class
         throw new System.NotImplementedException();
     }
 }",
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 
@@ -8204,9 +8203,8 @@ class Class
         throw new NotImplementedException();
     }
 }",
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 
@@ -8233,9 +8231,8 @@ class Class
         throw new System.NotImplementedException();
     }
 }",
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 
@@ -8264,9 +8261,8 @@ class Class
         throw new NotImplementedException();
     }
 }",
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 

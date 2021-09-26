@@ -20,8 +20,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Extensions
             // Arrange
             var absoluteUrlFactory = new Mock<IAbsoluteUrlFactory>();
             absoluteUrlFactory.Setup(
-                    auf => auf.GetAbsoluteUrl(It.IsAny<HttpContext>(), It.IsAny<string>())
-                )
+                auf => auf.GetAbsoluteUrl(It.IsAny<HttpContext>(), It.IsAny<string>())
+            )
                 .Returns<HttpContext, string>(
                     (_, s) =>
                         Uri.IsWellFormedUriString(s, UriKind.Absolute)
@@ -30,20 +30,20 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Extensions
                 );
 
             var options = Options.Create(new ApiAuthorizationOptions());
-            options.Value.Clients.AddIdentityServerSPA(
-                "SPA",
-                cb =>
-                    cb.WithScopes("a/b", "c/d")
-                        .WithRedirectUri("authentication/login-callback")
-                        .WithLogoutRedirectUri("authentication/logout-callback")
-            );
+            options.Value.Clients
+                .AddIdentityServerSPA(
+                    "SPA",
+                    cb =>
+                        cb.WithScopes("a/b", "c/d")
+                            .WithRedirectUri("authentication/login-callback")
+                            .WithLogoutRedirectUri("authentication/logout-callback")
+                );
 
             var context = new DefaultHttpContext();
             context.Request.Scheme = "http";
             context.Request.Host = new HostString("localhost");
-            context.RequestServices = new ServiceCollection().AddSingleton(
-                    new IdentityServerOptions()
-                )
+            context.RequestServices = new ServiceCollection()
+                .AddSingleton(new IdentityServerOptions())
                 .BuildServiceProvider();
 
             var clientRequestParametersProvider = new DefaultClientRequestParametersProvider(

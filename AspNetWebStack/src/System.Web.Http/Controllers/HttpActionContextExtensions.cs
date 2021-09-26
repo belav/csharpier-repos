@@ -32,7 +32,8 @@ namespace System.Web.Http.Controllers
                 throw Error.ArgumentNull("actionContext");
             }
 
-            return actionContext.ControllerContext.Configuration.Services.GetModelMetadataProvider();
+            return actionContext.ControllerContext.Configuration.Services
+                .GetModelMetadataProvider();
         }
 
         /// <summary>
@@ -49,7 +50,8 @@ namespace System.Web.Http.Controllers
                 throw Error.ArgumentNull("actionContext");
             }
 
-            return actionContext.ControllerContext.Configuration.Services.GetModelValidatorProviders();
+            return actionContext.ControllerContext.Configuration.Services
+                .GetModelValidatorProviders();
         }
 
         /// <summary>
@@ -124,9 +126,8 @@ namespace System.Web.Http.Controllers
             {
                 object untypedModel = propertyBindingContext.Model;
                 model = ModelBindingHelper.CastOrDefault<TModel>(untypedModel);
-                parentBindingContext.ValidationNode.ChildNodes.Add(
-                    propertyBindingContext.ValidationNode
-                );
+                parentBindingContext.ValidationNode.ChildNodes
+                    .Add(propertyBindingContext.ValidationNode);
                 return true;
             }
 

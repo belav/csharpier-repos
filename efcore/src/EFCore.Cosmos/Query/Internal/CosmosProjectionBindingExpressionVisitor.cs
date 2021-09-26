@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
     public class CosmosProjectionBindingExpressionVisitor : ExpressionVisitor
     {
         private static readonly MethodInfo _getParameterValueMethodInfo =
-            typeof(CosmosProjectionBindingExpressionVisitor).GetTypeInfo()
+            typeof(CosmosProjectionBindingExpressionVisitor)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(GetParameterValue));
 
         private readonly CosmosSqlTranslatingExpressionVisitor _sqlTranslator;
@@ -734,9 +735,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                             lambda = Expression.Lambda(Visit(lambda.Body), lambda.Parameters);
                             return Expression.Call(
-                                EnumerableMethods.Select.MakeGenericMethod(
-                                    method.GetGenericArguments()
-                                ),
+                                EnumerableMethods.Select
+                                    .MakeGenericMethod(method.GetGenericArguments()),
                                 shaper,
                                 lambda
                             );

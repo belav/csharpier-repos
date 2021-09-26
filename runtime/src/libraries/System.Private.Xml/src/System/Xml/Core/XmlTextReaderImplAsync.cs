@@ -74,11 +74,8 @@ namespace System.Xml
         private async Task FinishInitUriStringAsync()
         {
             Stream stream = (Stream)(
-                await _laterInitParam!.inputUriResolver!.GetEntityAsync(
-                        _laterInitParam.inputbaseUri!,
-                        string.Empty,
-                        typeof(Stream)
-                    )
+                await _laterInitParam!.inputUriResolver!
+                    .GetEntityAsync(_laterInitParam.inputbaseUri!, string.Empty, typeof(Stream))
                     .ConfigureAwait(false)
             );
 
@@ -99,13 +96,13 @@ namespace System.Xml
                 // init ParsingState
                 Debug.Assert(_reportedBaseUri != null);
                 await InitStreamInputAsync(
-                        _laterInitParam.inputbaseUri,
-                        _reportedBaseUri,
-                        stream,
-                        null,
-                        0,
-                        enc
-                    )
+                    _laterInitParam.inputbaseUri,
+                    _reportedBaseUri,
+                    stream,
+                    null,
+                    0,
+                    enc
+                )
                     .ConfigureAwait(false);
 
                 _reportedEncoding = _ps.encoding;
@@ -138,13 +135,13 @@ namespace System.Xml
             // init ParsingState
             Debug.Assert(_reportedBaseUri != null);
             await InitStreamInputAsync(
-                    _laterInitParam.inputbaseUri,
-                    _reportedBaseUri,
-                    _laterInitParam!.inputStream!,
-                    _laterInitParam.inputBytes,
-                    _laterInitParam.inputByteCount,
-                    enc
-                )
+                _laterInitParam.inputbaseUri,
+                _reportedBaseUri,
+                _laterInitParam!.inputStream!,
+                _laterInitParam.inputBytes,
+                _laterInitParam.inputByteCount,
+                enc
+            )
                 .ConfigureAwait(false);
 
             _reportedEncoding = _ps.encoding;
@@ -1296,7 +1293,8 @@ namespace System.Xml
                     // read new bytes
                     if (_ps.bytePos == _ps.bytesUsed && _ps.bytes!.Length - _ps.bytesUsed > 0)
                     {
-                        int read = await _ps.stream.ReadAsync(_ps.bytes.AsMemory(_ps.bytesUsed))
+                        int read = await _ps.stream
+                            .ReadAsync(_ps.bytes.AsMemory(_ps.bytesUsed))
                             .ConfigureAwait(false);
                         if (read == 0)
                         {
@@ -1319,7 +1317,8 @@ namespace System.Xml
             else if (_ps.textReader != null)
             {
                 // read chars
-                charsRead = await _ps.textReader.ReadAsync(
+                charsRead = await _ps.textReader
+                    .ReadAsync(
                         _ps.chars.AsMemory(_ps.charsUsed, _ps.chars.Length - _ps.charsUsed - 1)
                     )
                     .ConfigureAwait(false);
@@ -3038,9 +3037,9 @@ namespace System.Xml
                             LineInfo entityLineInfo = new LineInfo(_ps.lineNo, _ps.LinePos + 1);
 
                             var tuple_8 = await HandleEntityReferenceAsync(
-                                    true,
-                                    EntityExpandType.All
-                                )
+                                true,
+                                EntityExpandType.All
+                            )
                                 .ConfigureAwait(false);
                             pos = tuple_8.Item1;
 
@@ -4404,9 +4403,9 @@ namespace System.Xml
                 EntityType entityType;
 
                 var tuple_17 = await ParseNumericCharRefAsync(
-                        expandType != EntityExpandType.OnlyGeneral,
-                        null
-                    )
+                    expandType != EntityExpandType.OnlyGeneral,
+                    null
+                )
                     .ConfigureAwait(false);
                 entityType = tuple_17.Item1;
 
@@ -4423,9 +4422,9 @@ namespace System.Xml
             {
                 // named character reference
                 charRefEndPos = await ParseNamedCharRefAsync(
-                        expandType != EntityExpandType.OnlyGeneral,
-                        null
-                    )
+                    expandType != EntityExpandType.OnlyGeneral,
+                    null
+                )
                     .ConfigureAwait(false);
                 if (charRefEndPos >= 0)
                 {
@@ -4473,11 +4472,11 @@ namespace System.Xml
                 charRefEndPos = -1;
 
                 EntityType entType = await HandleGeneralEntityReferenceAsync(
-                        entityName,
-                        isInAttributeValue,
-                        false,
-                        entityLinePos
-                    )
+                    entityName,
+                    isInAttributeValue,
+                    false,
+                    entityLinePos
+                )
                     .ConfigureAwait(false);
                 _reportedBaseUri = _ps.baseUriStr;
                 _reportedEncoding = _ps.encoding;
@@ -5946,10 +5945,10 @@ namespace System.Xml
             if (_xmlResolver.SupportsType(uri, typeof(TextReader)))
             {
                 TextReader textReader = (TextReader)await _xmlResolver.GetEntityAsync(
-                        uri,
-                        null,
-                        typeof(TextReader)
-                    )
+                    uri,
+                    null,
+                    typeof(TextReader)
+                )
                     .ConfigureAwait(false);
                 if (textReader == null)
                 {
@@ -5997,11 +5996,11 @@ namespace System.Xml
                     entityBaseUri = _xmlResolver!.ResolveUri(null, entity.BaseUriString);
                 }
                 await PushExternalEntityOrSubsetAsync(
-                        entity.PublicId,
-                        entity.SystemId,
-                        entityBaseUri,
-                        entity.Name
-                    )
+                    entity.PublicId,
+                    entity.SystemId,
+                    entityBaseUri,
+                    entity.Name
+                )
                     .ConfigureAwait(false);
 
                 RegisterEntity(entity);
@@ -6066,13 +6065,13 @@ namespace System.Xml
 
             // Parse DTD
             _dtdInfo = await dtdParser.ParseFreeFloatingDtdAsync(
-                    _fragmentParserContext.BaseURI,
-                    _fragmentParserContext.DocTypeName,
-                    _fragmentParserContext.PublicId,
-                    _fragmentParserContext.SystemId,
-                    _fragmentParserContext.InternalSubset,
-                    new DtdParserProxy(this)
-                )
+                _fragmentParserContext.BaseURI,
+                _fragmentParserContext.DocTypeName,
+                _fragmentParserContext.PublicId,
+                _fragmentParserContext.SystemId,
+                _fragmentParserContext.InternalSubset,
+                new DtdParserProxy(this)
+            )
                 .ConfigureAwait(false);
 
             if (

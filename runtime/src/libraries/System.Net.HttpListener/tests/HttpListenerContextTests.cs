@@ -122,10 +122,11 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(IsNotWindows7))]
         public async Task AcceptWebSocketAsync_AuthorizationInHeaders_ThrowsNotImplementedException()
         {
-            Socket.Options.SetRequestHeader(
-                "Authorization",
-                "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes("user:password"))
-            );
+            Socket.Options
+                .SetRequestHeader(
+                    "Authorization",
+                    "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes("user:password"))
+                );
             Factory.GetListener().AuthenticationSchemes = AuthenticationSchemes.Basic;
 
             HttpListenerContext context = await GetWebSocketContext();
@@ -291,7 +292,8 @@ namespace System.Net.Tests
             {
                 Array = new byte[10],
                 Offset = offset
-            }.ToActual();
+            }
+                .ToActual();
             await AssertExtensions.ThrowsAsync<ArgumentOutOfRangeException>(
                 "internalBuffer.Offset",
                 () => context.AcceptWebSocketAsync(null, 1024, TimeSpan.MaxValue, internalBuffer)
@@ -315,7 +317,8 @@ namespace System.Net.Tests
                 Array = new byte[10],
                 Offset = offset,
                 Count = count
-            }.ToActual();
+            }
+                .ToActual();
             await AssertExtensions.ThrowsAsync<ArgumentOutOfRangeException>(
                 "internalBuffer.Count",
                 () => context.AcceptWebSocketAsync(null, 1024, TimeSpan.MaxValue, internalBuffer)

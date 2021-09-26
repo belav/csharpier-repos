@@ -100,7 +100,8 @@ public class Top : A<E> { // base is A<E>
             return new TypeMap(
                 allTypeParameters.ToImmutableAndFree(),
                 typeArguments.SelectAsArray(t => TypeWithAnnotations.Create(t))
-            ).SubstituteNamedType(type);
+            )
+                .SubstituteNamedType(type);
         }
 
         [Fact]

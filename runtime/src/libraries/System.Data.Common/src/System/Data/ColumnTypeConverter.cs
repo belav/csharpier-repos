@@ -99,10 +99,8 @@ namespace System.Data
 
                 if (value is Type || value is string)
                 {
-                    MethodInfo method = typeof(Type).GetMethod(
-                        "GetType",
-                        new Type[] { typeof(string) }
-                    )!;
+                    MethodInfo method = typeof(Type)
+                        .GetMethod("GetType", new Type[] { typeof(string) })!;
                     if (method != null)
                     {
                         return new InstanceDescriptor(

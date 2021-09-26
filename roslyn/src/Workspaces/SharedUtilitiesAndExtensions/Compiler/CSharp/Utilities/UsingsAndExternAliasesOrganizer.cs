@@ -121,9 +121,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 {
                     // If there is a banner comment that precedes the nodes,
                     // then remove it and store it for later.
-                    initialList[0] = initialList[
-                        0
-                    ].GetNodeWithoutLeadingBannerAndPreprocessorDirectives(out var leadingTrivia);
+                    initialList[0] = initialList[0]
+                        .GetNodeWithoutLeadingBannerAndPreprocessorDirectives(
+                            out var leadingTrivia
+                        );
 
                     var comparer = placeSystemNamespaceFirst
                         ? UsingsAndExternAliasesDirectiveComparer.SystemFirstInstance
@@ -143,8 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
                         // Now split out the externs and usings back into two separate lists.
                         organizedExternAliasList = finalList.Where(
-                                t => t is ExternAliasDirectiveSyntax
-                            )
+                            t => t is ExternAliasDirectiveSyntax
+                        )
                             .Cast<ExternAliasDirectiveSyntax>()
                             .ToSyntaxList();
                         organizedUsingList = finalList.Where(t => t is UsingDirectiveSyntax)

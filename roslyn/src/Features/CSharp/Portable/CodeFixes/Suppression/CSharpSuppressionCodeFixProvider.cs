@@ -222,9 +222,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
                 isAssemblyAttribute
             );
 
-            var attributes = new SeparatedSyntaxList<AttributeSyntax>().Add(
-                SyntaxFactory.Attribute(attributeName, attributeArguments)
-            );
+            var attributes = new SeparatedSyntaxList<AttributeSyntax>()
+                .Add(SyntaxFactory.Attribute(attributeName, attributeArguments));
 
             AttributeListSyntax attributeList;
             if (isAssemblyAttribute)

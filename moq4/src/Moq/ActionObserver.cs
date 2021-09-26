@@ -95,12 +95,13 @@ namespace Moq
                         // A recorder was set up, but it recorded no invocation. This means
                         // that the invocation could not be intercepted:
                         throw new ArgumentException(
-                            string.Format(
-                                CultureInfo.CurrentCulture,
-                                Resources.UnsupportedExpressionWithHint,
-                                $"{actionParameterName} => {body.ToStringFixed()}...",
-                                Resources.NextMemberNonInterceptable
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.CurrentCulture,
+                                    Resources.UnsupportedExpressionWithHint,
+                                    $"{actionParameterName} => {body.ToStringFixed()}...",
+                                    Resources.NextMemberNonInterceptable
+                                )
                         );
                     }
                 }
@@ -118,12 +119,13 @@ namespace Moq
                 else
                 {
                     throw new ArgumentException(
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            Resources.UnsupportedExpressionWithHint,
-                            $"{actionParameterName} => {body.ToStringFixed()}...",
-                            error.Message
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                Resources.UnsupportedExpressionWithHint,
+                                $"{actionParameterName} => {body.ToStringFixed()}...",
+                                error.Message
+                            )
                     );
                 }
             }
@@ -177,9 +179,8 @@ namespace Moq
                         }
 
                         if (
-                            parameterTypes[argumentIndex].IsAssignableFrom(
-                                defaultValue?.GetType() ?? defaultValueType
-                            )
+                            parameterTypes[argumentIndex]
+                                .IsAssignableFrom(defaultValue?.GetType() ?? defaultValueType)
                         )
                         {
                             // We found a potential match. (Matcher type is assignment-compatible to parameter type.)
@@ -214,12 +215,13 @@ namespace Moq
                         // at that; however, it's probably better to let client code know, so it can be either
                         // adjusted or reported to Moq.
                         throw new ArgumentException(
-                            string.Format(
-                                CultureInfo.CurrentCulture,
-                                Resources.MatcherAssignmentFailedDuringExpressionReconstruction,
-                                matches.Length,
-                                $"{invocation.Method.DeclaringType.GetFormattedName()}.{invocation.Method.Name}"
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.CurrentCulture,
+                                    Resources.MatcherAssignmentFailedDuringExpressionReconstruction,
+                                    matches.Length,
+                                    $"{invocation.Method.DeclaringType.GetFormattedName()}.{invocation.Method.Name}"
+                                )
                         );
                     }
 
@@ -286,12 +288,8 @@ namespace Moq
         )
         {
             recorder = new Recorder(matcherObserver);
-            return (IProxy)ProxyFactory.Instance.CreateProxy(
-                type,
-                recorder,
-                Type.EmptyTypes,
-                ctorArgs ?? new object[0]
-            );
+            return (IProxy)ProxyFactory.Instance
+                .CreateProxy(type, recorder, Type.EmptyTypes, ctorArgs ?? new object[0]);
         }
 
         // Records an invocation, mocks return values, and builds a chain to the return value's recorder.
@@ -319,10 +317,8 @@ namespace Moq
                 get
                 {
                     Debug.Assert(this.invocationTimestamp != default);
-                    return this.matcherObserver.GetMatchesBetween(
-                        this.creationTimestamp,
-                        this.invocationTimestamp
-                    );
+                    return this.matcherObserver
+                        .GetMatchesBetween(this.creationTimestamp, this.invocationTimestamp);
                 }
             }
 

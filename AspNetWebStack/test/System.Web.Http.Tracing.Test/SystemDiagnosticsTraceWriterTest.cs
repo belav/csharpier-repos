@@ -517,9 +517,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string formattedTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
-                traceRecord
-            );
+            string formattedTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }
+                .Format(traceRecord);
 
             // Assert
             AssertContainsExactly(
@@ -553,9 +552,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string formattedTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
-                traceRecord
-            );
+            string formattedTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }
+                .Format(traceRecord);
 
             // Assert
             AssertContainsExactly(
@@ -588,9 +586,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
-                traceRecord
-            );
+            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }
+                .Format(traceRecord);
 
             // Assert
             string timePrefix = "] ";
@@ -623,9 +620,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
-                traceRecord
-            );
+            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }
+                .Format(traceRecord);
 
             // Assert
             string timePrefix = "] ";
@@ -672,10 +668,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter()
-            {
-                IsVerbose = true
-            }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }
+                .FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
@@ -720,10 +714,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter()
-            {
-                IsVerbose = true
-            }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }
+                .FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
@@ -751,10 +743,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter()
-            {
-                IsVerbose = true
-            }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }
+                .FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
@@ -788,10 +778,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter()
-            {
-                IsVerbose = true
-            }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }
+                .FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
@@ -837,10 +825,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter()
-            {
-                IsVerbose = true
-            }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }
+                .FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
@@ -869,10 +855,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter()
-            {
-                IsVerbose = true
-            }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }
+                .FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
@@ -918,7 +902,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
+            new SystemDiagnosticsTraceWriter()
+                .TranslateHttpResponseException(traceRecord);
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, traceRecord.Status);
@@ -942,7 +927,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
+            new SystemDiagnosticsTraceWriter()
+                .TranslateHttpResponseException(traceRecord);
 
             // Assert
             Assert.Equal(TraceLevel.Warn, traceRecord.Level);
@@ -964,7 +950,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
+            new SystemDiagnosticsTraceWriter()
+                .TranslateHttpResponseException(traceRecord);
 
             // Assert
             Assert.Equal(TraceLevel.Info, traceRecord.Level);
@@ -988,7 +975,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
+            new SystemDiagnosticsTraceWriter()
+                .TranslateHttpResponseException(traceRecord);
 
             // Assert
             Assert.Equal(TraceLevel.Error, traceRecord.Level);
@@ -1017,7 +1005,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
+            new SystemDiagnosticsTraceWriter()
+                .TranslateHttpResponseException(traceRecord);
 
             // Assert
             Assert.Equal(0, ParseTrace(traceRecord.Message).Count);
@@ -1059,7 +1048,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
+            new SystemDiagnosticsTraceWriter()
+                .TranslateHttpResponseException(traceRecord);
 
             // Assert
             Assert.Equal(TraceLevel.Warn, traceRecord.Level);
@@ -1137,7 +1127,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
+            new SystemDiagnosticsTraceWriter()
+                .TranslateHttpResponseException(traceRecord);
 
             // Assert
             Assert.Equal(TraceLevel.Warn, traceRecord.Level);
@@ -1196,7 +1187,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
+            new SystemDiagnosticsTraceWriter()
+                .TranslateHttpResponseException(traceRecord);
 
             // Assert
             Assert.Equal(TraceLevel.Error, traceRecord.Level);
@@ -1240,7 +1232,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
+            new SystemDiagnosticsTraceWriter()
+                .TranslateHttpResponseException(traceRecord);
 
             // Assert
             Assert.Equal(TraceLevel.Warn, traceRecord.Level);
@@ -1293,7 +1286,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
+            new SystemDiagnosticsTraceWriter()
+                .TranslateHttpResponseException(traceRecord);
 
             // Assert
             Assert.Equal(TraceLevel.Warn, traceRecord.Level);

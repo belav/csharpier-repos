@@ -384,9 +384,8 @@ namespace System.Text.Unicode.Tests
             return new Lazy<GetPointerToFirstInvalidCharDel>(
                 () =>
                 {
-                    Type utf16UtilityType = typeof(Utf8).Assembly.GetType(
-                        "System.Text.Unicode.Utf16Utility"
-                    );
+                    Type utf16UtilityType = typeof(Utf8).Assembly
+                        .GetType("System.Text.Unicode.Utf16Utility");
 
                     if (utf16UtilityType is null)
                     {
@@ -429,11 +428,12 @@ namespace System.Text.Unicode.Tests
             {
                 input =
                     input[..idx]
-                    + (char)ushort.Parse(
-                        input.Substring(idx + 1, 4),
-                        NumberStyles.AllowHexSpecifier,
-                        CultureInfo.InvariantCulture
-                    )
+                    + (char)ushort
+                        .Parse(
+                            input.Substring(idx + 1, 4),
+                            NumberStyles.AllowHexSpecifier,
+                            CultureInfo.InvariantCulture
+                        )
                     + input[(idx + 6)..];
             }
 

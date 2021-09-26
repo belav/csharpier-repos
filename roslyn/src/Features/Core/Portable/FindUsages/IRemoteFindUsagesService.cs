@@ -129,9 +129,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
             {
                 var id = definition.Id;
                 var rehydrated = await definition.RehydrateAsync(
-                        _solution,
-                        _context.CancellationToken
-                    )
+                    _solution,
+                    _context.CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 lock (_idToDefinition)
@@ -153,10 +153,10 @@ namespace Microsoft.CodeAnalysis.FindUsages
             try
             {
                 var rehydrated = await reference.RehydrateAsync(
-                        _solution,
-                        GetDefinition(reference.DefinitionId),
-                        _context.CancellationToken
-                    )
+                    _solution,
+                    GetDefinition(reference.DefinitionId),
+                    _context.CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 await _context.OnReferenceFoundAsync(rehydrated).ConfigureAwait(false);
@@ -282,9 +282,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
         )
         {
             var sourceSpans = await SourceSpans.SelectAsArrayAsync(
-                    (ss, cancellationToken) => ss.RehydrateAsync(solution, cancellationToken),
-                    cancellationToken
-                )
+                (ss, cancellationToken) => ss.RehydrateAsync(solution, cancellationToken),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return new DefinitionItem.DefaultDefinitionItem(

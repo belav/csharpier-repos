@@ -55,10 +55,8 @@ namespace Castle.Components.DictionaryAdapter
             bool ifExists
         )
         {
-            return string.Format(
-                    Format,
-                    GetFormatArguments(dictionaryAdapter, property.Property.Name)
-                )
+            return string
+                .Format(Format, GetFormatArguments(dictionaryAdapter, property.Property.Name))
                 .Trim();
         }
 

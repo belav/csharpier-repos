@@ -135,14 +135,14 @@ public static partial class XmlSerializerTests
     {
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2013, 1, 2)
-        ).TotalMinutes;
-        var timeZoneString = string.Format(
-            "{0:+;-}{1}",
-            offsetMinutes,
-            new TimeSpan(0, offsetMinutes, 0).ToString(@"hh\:mm")
-        );
+        var offsetMinutes = (int)TimeZoneInfo.Local
+            .GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
+        var timeZoneString = string
+            .Format(
+                "{0:+;-}{1}",
+                offsetMinutes,
+                new TimeSpan(0, offsetMinutes, 0).ToString(@"hh\:mm")
+            );
         Assert.StrictEqual(
             SerializeAndDeserialize<DateTime>(
                 new DateTime(2013, 1, 2),
@@ -210,17 +210,11 @@ public static partial class XmlSerializerTests
             }
         )
         {
-            Assert.StrictEqual(
-                SerializeAndDeserialize<decimal>(
-                    value,
-                    string.Format(
+            Assert.StrictEqual(SerializeAndDeserialize<decimal>(value, string.Format(
                         @"<?xml version=""1.0""?>
 <decimal>{0}</decimal>",
                         value.ToString(CultureInfo.InvariantCulture)
-                    )
-                ),
-                value
-            );
+                    )), value);
         }
     }
 
@@ -331,17 +325,11 @@ public static partial class XmlSerializerTests
 
         foreach (Guid value in new Guid[] { Guid.NewGuid(), Guid.Empty })
         {
-            Assert.StrictEqual(
-                SerializeAndDeserialize<Guid>(
-                    value,
-                    string.Format(
+            Assert.StrictEqual(SerializeAndDeserialize<Guid>(value, string.Format(
                         @"<?xml version=""1.0""?>
 <guid>{0}</guid>",
                         value.ToString()
-                    )
-                ),
-                value
-            );
+                    )), value);
         }
     }
 
@@ -350,17 +338,11 @@ public static partial class XmlSerializerTests
     {
         foreach (int value in new int[] { -1, 0, 2, int.MinValue, int.MaxValue })
         {
-            Assert.StrictEqual(
-                SerializeAndDeserialize<int>(
-                    value,
-                    string.Format(
+            Assert.StrictEqual(SerializeAndDeserialize<int>(value, string.Format(
                         @"<?xml version=""1.0""?>
 <int>{0}</int>",
                         value
-                    )
-                ),
-                value
-            );
+                    )), value);
         }
     }
 
@@ -371,17 +353,11 @@ public static partial class XmlSerializerTests
             long value in new long[] { (long)-1, (long)0, (long)2, long.MinValue, long.MaxValue }
         )
         {
-            Assert.StrictEqual(
-                SerializeAndDeserialize<long>(
-                    value,
-                    string.Format(
+            Assert.StrictEqual(SerializeAndDeserialize<long>(value, string.Format(
                         @"<?xml version=""1.0""?>
 <long>{0}</long>",
                         value
-                    )
-                ),
-                value
-            );
+                    )), value);
         }
     }
 
@@ -454,17 +430,11 @@ public static partial class XmlSerializerTests
             }
         )
         {
-            Assert.StrictEqual(
-                SerializeAndDeserialize<short>(
-                    value,
-                    string.Format(
+            Assert.StrictEqual(SerializeAndDeserialize<short>(value, string.Format(
                         @"<?xml version=""1.0""?>
 <short>{0}</short>",
                         value
-                    )
-                ),
-                value
-            );
+                    )), value);
         }
     }
 
@@ -473,17 +443,11 @@ public static partial class XmlSerializerTests
     {
         foreach (sbyte value in new sbyte[] { (sbyte)3, (sbyte)0, sbyte.MinValue, sbyte.MaxValue })
         {
-            Assert.StrictEqual(
-                SerializeAndDeserialize<sbyte>(
-                    value,
-                    string.Format(
+            Assert.StrictEqual(SerializeAndDeserialize<sbyte>(value, string.Format(
                         @"<?xml version=""1.0""?>
 <byte>{0}</byte>",
                         value
-                    )
-                ),
-                value
-            );
+                    )), value);
         }
     }
 
@@ -543,17 +507,11 @@ public static partial class XmlSerializerTests
     {
         foreach (uint value in new uint[] { (uint)3, (uint)0, uint.MinValue, uint.MaxValue })
         {
-            Assert.StrictEqual(
-                SerializeAndDeserialize<uint>(
-                    value,
-                    string.Format(
+            Assert.StrictEqual(SerializeAndDeserialize<uint>(value, string.Format(
                         @"<?xml version=""1.0""?>
 <unsignedInt>{0}</unsignedInt>",
                         value
-                    )
-                ),
-                value
-            );
+                    )), value);
         }
     }
 
@@ -562,17 +520,11 @@ public static partial class XmlSerializerTests
     {
         foreach (ulong value in new ulong[] { (ulong)3, (ulong)0, ulong.MinValue, ulong.MaxValue })
         {
-            Assert.StrictEqual(
-                SerializeAndDeserialize<ulong>(
-                    value,
-                    string.Format(
+            Assert.StrictEqual(SerializeAndDeserialize<ulong>(value, string.Format(
                         @"<?xml version=""1.0""?>
 <unsignedLong>{0}</unsignedLong>",
                         value
-                    )
-                ),
-                value
-            );
+                    )), value);
         }
     }
 
@@ -583,17 +535,11 @@ public static partial class XmlSerializerTests
             ushort value in new ushort[] { (ushort)3, (ushort)0, ushort.MinValue, ushort.MaxValue }
         )
         {
-            Assert.StrictEqual(
-                SerializeAndDeserialize<ushort>(
-                    value,
-                    string.Format(
+            Assert.StrictEqual(SerializeAndDeserialize<ushort>(value, string.Format(
                         @"<?xml version=""1.0""?>
 <unsignedShort>{0}</unsignedShort>",
                         value
-                    )
-                ),
-                value
-            );
+                    )), value);
         }
     }
 
@@ -1907,24 +1853,26 @@ public static partial class XmlSerializerTests
         Utils.CompareResult result = Utils.Compare(baseline, actualOutput);
         Assert.True(
             result.Equal,
-            string.Format(
-                "{1}{0}Test failed for wrong output from schema: {0}Expected: {2}{0}Actual: {3}",
-                Environment.NewLine,
-                result.ErrorMessage,
-                baseline,
-                actualOutput
-            )
+            string
+                .Format(
+                    "{1}{0}Test failed for wrong output from schema: {0}Expected: {2}{0}Actual: {3}",
+                    Environment.NewLine,
+                    result.ErrorMessage,
+                    baseline,
+                    actualOutput
+                )
         );
         Assert.False(schemaEnumerator.MoveNext());
         schemas.Compile(
             (o, args) =>
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        "{1}{0} Test failed because schema compile failed",
-                        Environment.NewLine,
-                        args.Message
-                    )
+                    string
+                        .Format(
+                            "{1}{0} Test failed because schema compile failed",
+                            Environment.NewLine,
+                            args.Message
+                        )
                 );
             },
             true
@@ -1954,9 +1902,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_ComplexField()
     {
-        XmlTypeMapping typeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(SoapEncodedTestType2)
-        );
+        XmlTypeMapping typeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(SoapEncodedTestType2));
         var serializer = new XmlSerializer(typeMapping);
         var value = new SoapEncodedTestType2();
         value.TestType3 = new SoapEncodedTestType3() { StringValue = "foo" };
@@ -1972,9 +1919,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_Basic()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(SoapEncodedTestType1)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(SoapEncodedTestType1));
         var ser = new XmlSerializer(myTypeMapping);
         var value = new SoapEncodedTestType1()
         {
@@ -2000,9 +1946,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_TypeWithNullableFields()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(SoapEncodedTestType4)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(SoapEncodedTestType4));
         var ser = new XmlSerializer(myTypeMapping);
         var value = new SoapEncodedTestType4() { IntValue = 11, DoubleValue = 12.0 };
 
@@ -2042,9 +1987,8 @@ public static partial class XmlSerializerTests
         );
         Assert.Equal(value, actual);
 
-        XmlTypeMapping structMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(SomeStruct?)
-        );
+        XmlTypeMapping structMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(SomeStruct?));
         SomeStruct? structValue = new SomeStruct() { A = 1, B = 2 };
 
         var structActual = SerializeAndDeserialize(
@@ -2069,9 +2013,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_Basic_FromMappings()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(SoapEncodedTestType1)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(SoapEncodedTestType1));
         var ser = XmlSerializer.FromMappings(new XmlMapping[] { myTypeMapping });
         var value = new SoapEncodedTestType1()
         {
@@ -2103,9 +2046,8 @@ public static partial class XmlSerializerTests
         var soapOverrides = new SoapAttributeOverrides();
         soapOverrides.Add(typeof(SoapEncodedTestType1), "IntValue", soapAttributes);
 
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(soapOverrides).ImportTypeMapping(
-            typeof(SoapEncodedTestType1)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(soapOverrides)
+            .ImportTypeMapping(typeof(SoapEncodedTestType1));
         var ser = new XmlSerializer(myTypeMapping);
         var value = new SoapEncodedTestType1()
         {
@@ -2138,9 +2080,8 @@ public static partial class XmlSerializerTests
         var soapOverrides = new SoapAttributeOverrides();
         soapOverrides.Add(typeof(SoapEncodedTestType1), "StringValue", soapAttributes);
 
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(soapOverrides).ImportTypeMapping(
-            typeof(SoapEncodedTestType1)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(soapOverrides)
+            .ImportTypeMapping(typeof(SoapEncodedTestType1));
         var ser = new XmlSerializer(myTypeMapping);
         var value = new SoapEncodedTestType1()
         {
@@ -2174,9 +2115,8 @@ public static partial class XmlSerializerTests
         var soapOverrides = new SoapAttributeOverrides();
         soapOverrides.Add(typeof(SoapEncodedTestType1), soapAttributes);
 
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(soapOverrides).ImportTypeMapping(
-            typeof(SoapEncodedTestType1)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(soapOverrides)
+            .ImportTypeMapping(typeof(SoapEncodedTestType1));
         var ser = new XmlSerializer(myTypeMapping);
         var value = new SoapEncodedTestType1()
         {
@@ -2202,9 +2142,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_Enum()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(SoapEncodedTestEnum)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(SoapEncodedTestEnum));
         var ser = new XmlSerializer(myTypeMapping);
         var value = SoapEncodedTestEnum.A;
 
@@ -2228,9 +2167,8 @@ public static partial class XmlSerializerTests
         var soapAttributeOverrides = new SoapAttributeOverrides();
         soapAttributeOverrides.Add(typeof(SoapEncodedTestEnum), "A", soapAtts);
 
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(
-            soapAttributeOverrides
-        ).ImportTypeMapping(typeof(SoapEncodedTestEnum));
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(soapAttributeOverrides)
+            .ImportTypeMapping(typeof(SoapEncodedTestEnum));
         var ser = new XmlSerializer(myTypeMapping);
         var value = SoapEncodedTestEnum.A;
 
@@ -2258,9 +2196,8 @@ public static partial class XmlSerializerTests
         var soapAttributeOverrides = new SoapAttributeOverrides();
         soapAttributeOverrides.Add(typeof(SoapEncodedTestType5), "Name", soapAtts1);
         soapAttributeOverrides.Add(typeof(SoapEncodedTestType5), "Today", soapAtts2);
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(
-            soapAttributeOverrides
-        ).ImportTypeMapping(typeof(SoapEncodedTestType5));
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(soapAttributeOverrides)
+            .ImportTypeMapping(typeof(SoapEncodedTestType5));
         var ser = new XmlSerializer(myTypeMapping);
         var value = new SoapEncodedTestType5()
         {
@@ -2305,9 +2242,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void SoapEncodedSerialization_CircularLink()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(MyCircularLink)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(MyCircularLink));
         var ser = new XmlSerializer(myTypeMapping);
         var value = new MyCircularLink(true);
 
@@ -2323,9 +2259,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_Array()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(MyGroup)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(MyGroup));
         XmlSerializer ser = new XmlSerializer(myTypeMapping);
         MyItem[] things = new MyItem[]
         {
@@ -2348,9 +2283,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_List()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(MyGroup2)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(MyGroup2));
         var ser = new XmlSerializer(myTypeMapping);
         List<MyItem> things = new List<MyItem>()
         {
@@ -2374,9 +2308,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_MyCollection()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(MyCollection<string>)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(MyCollection<string>));
         var serializer = new XmlSerializer(myTypeMapping);
         var value = new MyCollection<string>("a1", "a2");
 
@@ -2395,14 +2328,15 @@ public static partial class XmlSerializerTests
             Utils.CompareResult result = Utils.Compare(baseline, actualOutput);
             Assert.True(
                 result.Equal,
-                string.Format(
-                    "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                    Environment.NewLine,
-                    result.ErrorMessage,
-                    value,
-                    baseline,
-                    actualOutput
-                )
+                string
+                    .Format(
+                        "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                        Environment.NewLine,
+                        result.ErrorMessage,
+                        value,
+                        baseline,
+                        actualOutput
+                    )
             );
 
             ms.Position = 0;
@@ -2475,9 +2409,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_NestedPublicType()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(TypeWithNestedPublicType.LevelData)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(TypeWithNestedPublicType.LevelData));
         var ser = new XmlSerializer(myTypeMapping);
         var value = new TypeWithNestedPublicType.LevelData() { Name = "AA" };
 
@@ -2492,9 +2425,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_ObjectAsRoot()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(object)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(object));
         var ser = new XmlSerializer(myTypeMapping);
         Assert.Equal(
             1,
@@ -2535,9 +2467,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_ObjectAsRoot_Nullable()
     {
-        XmlTypeMapping nullableTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(TypeWithNullableObject)
-        );
+        XmlTypeMapping nullableTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(TypeWithNullableObject));
         var ser = new XmlSerializer(nullableTypeMapping);
 
         var value = new TypeWithNullableObject { MyObject = null };
@@ -2602,10 +2533,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void XmlSerializerAssemblyAttributeTest()
     {
-        object[] attrs = typeof(AssemblyAttrTestClass).GetCustomAttributes(
-            typeof(XmlSerializerAssemblyAttribute),
-            false
-        );
+        object[] attrs = typeof(AssemblyAttrTestClass)
+            .GetCustomAttributes(typeof(XmlSerializerAssemblyAttribute), false);
         XmlSerializerAssemblyAttribute attr = (XmlSerializerAssemblyAttribute)attrs[0];
         Assert.NotNull(attr);
         Assert.Equal("AssemblyAttrTestClass", attr.AssemblyName);
@@ -3001,14 +2930,15 @@ public static partial class XmlSerializerTests
         Utils.CompareResult result = Utils.Compare(output, actualOutput);
         Assert.True(
             result.Equal,
-            string.Format(
-                "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                Environment.NewLine,
-                result.ErrorMessage,
-                deserialized,
-                output,
-                actualOutput
-            )
+            string
+                .Format(
+                    "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                    Environment.NewLine,
+                    result.ErrorMessage,
+                    deserialized,
+                    output,
+                    actualOutput
+                )
         );
     }
 
@@ -3061,14 +2991,15 @@ public static partial class XmlSerializerTests
         Utils.CompareResult result = Utils.Compare(output, actualOutput);
         Assert.True(
             result.Equal,
-            string.Format(
-                "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                Environment.NewLine,
-                result.ErrorMessage,
-                deserialized,
-                output,
-                actualOutput
-            )
+            string
+                .Format(
+                    "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                    Environment.NewLine,
+                    result.ErrorMessage,
+                    deserialized,
+                    output,
+                    actualOutput
+                )
         );
     }
 
@@ -3123,14 +3054,15 @@ public static partial class XmlSerializerTests
         Utils.CompareResult result = Utils.Compare(expectedOutput, actualOutput);
         Assert.True(
             result.Equal,
-            string.Format(
-                "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                Environment.NewLine,
-                result.ErrorMessage,
-                deserialized,
-                expectedOutput,
-                actualOutput
-            )
+            string
+                .Format(
+                    "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                    Environment.NewLine,
+                    result.ErrorMessage,
+                    deserialized,
+                    expectedOutput,
+                    actualOutput
+                )
         );
     }
 
@@ -3447,9 +3379,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_TypeWithReadOnlyMyCollectionProperty()
     {
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter().ImportTypeMapping(
-            typeof(TypeWithReadOnlyMyCollectionProperty)
-        );
+        XmlTypeMapping myTypeMapping = new SoapReflectionImporter()
+            .ImportTypeMapping(typeof(TypeWithReadOnlyMyCollectionProperty));
         var serializer = new XmlSerializer(myTypeMapping);
         var value = new TypeWithReadOnlyMyCollectionProperty();
         value.Collection.Add("s1");
@@ -3647,16 +3578,17 @@ public static partial class XmlSerializerTests
             TextColor = System.Drawing.Color.FromArgb(3, 4, 5, 6)
         };
         value.LocalReadingPositionState = new List<LocalReadingPosition>();
-        value.LocalReadingPositionState.Add(
-            new LocalReadingPosition()
-            {
-                Ean = "Ean",
-                LastReadTime = new DateTime(2013, 1, 2),
-                PageCount = 1,
-                PageNumber = "1",
-                PlatformOffset = "offset"
-            }
-        );
+        value.LocalReadingPositionState
+            .Add(
+                new LocalReadingPosition()
+                {
+                    Ean = "Ean",
+                    LastReadTime = new DateTime(2013, 1, 2),
+                    PageCount = 1,
+                    PageNumber = "1",
+                    PlatformOffset = "offset"
+                }
+            );
 
         var deserializedValue = SerializeAndDeserialize<NookAppLocalState>(
             value,
@@ -3864,8 +3796,8 @@ public static partial class XmlSerializerTests
         XmlTypeMapping mapping = new XmlReflectionImporter().ImportTypeMapping(typeof(TimeSpan));
         exporter.ExportTypeMapping(mapping);
         XmlSchema schema = schemas.Where(
-                s => s.TargetNamespace == "http://microsoft.com/wsdl/types/"
-            )
+            s => s.TargetNamespace == "http://microsoft.com/wsdl/types/"
+        )
             .FirstOrDefault();
         Assert.NotNull(schema);
         var ms = new MemoryStream();
@@ -3883,12 +3815,13 @@ public static partial class XmlSerializerTests
             "<?xml version=\"1.0\"?>\r\n<xs:schema xmlns:tns=\"http://microsoft.com/wsdl/types/\" elementFormDefault=\"qualified\" targetNamespace=\"http://microsoft.com/wsdl/types/\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\r\n  <xs:simpleType name=\"TimeSpan\">\r\n    <xs:restriction base=\"xs:duration\" />\r\n  </xs:simpleType>\r\n</xs:schema>";
         Assert.True(
             element.LastAttribute.Value == expectedAttribute,
-            string.Format(
-                "{0}Test failed for wrong output from schema: {0}Expected Output: {1}{0}Actual Output: {2}",
-                Environment.NewLine,
-                baseline,
-                actualOutput
-            )
+            string
+                .Format(
+                    "{0}Test failed for wrong output from schema: {0}Expected Output: {1}{0}Actual Output: {2}",
+                    Environment.NewLine,
+                    baseline,
+                    actualOutput
+                )
         );
     }
 

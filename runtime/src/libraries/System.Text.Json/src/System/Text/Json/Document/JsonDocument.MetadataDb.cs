@@ -157,7 +157,8 @@ namespace System.Text.Json
                 // The data in this rented buffer only conveys the positions and
                 // lengths of tokens in a document, but no content; so it does not
                 // need to be cleared.
-                ArrayPool<byte>.Shared.Return(data);
+                ArrayPool<byte>.Shared
+                    .Return(data);
                 Length = 0;
             }
 
@@ -180,7 +181,8 @@ namespace System.Text.Json
                         // The data in this rented buffer only conveys the positions and
                         // lengths of tokens in a document, but no content; so it does not
                         // need to be cleared.
-                        ArrayPool<byte>.Shared.Return(returnBuf);
+                        ArrayPool<byte>.Shared
+                            .Return(returnBuf);
                     }
                     else
                     {
@@ -203,7 +205,8 @@ namespace System.Text.Json
                             // The data in this rented buffer only conveys the positions and
                             // lengths of tokens in a document, but no content; so it does not
                             // need to be cleared.
-                            ArrayPool<byte>.Shared.Return(returnBuf);
+                            ArrayPool<byte>.Shared
+                                .Return(returnBuf);
                         }
                     }
                 }
@@ -240,7 +243,8 @@ namespace System.Text.Json
                 // The data in this rented buffer only conveys the positions and
                 // lengths of tokens in a document, but no content; so it does not
                 // need to be cleared.
-                ArrayPool<byte>.Shared.Return(toReturn);
+                ArrayPool<byte>.Shared
+                    .Return(toReturn);
             }
 
             [Conditional("DEBUG")]

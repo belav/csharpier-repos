@@ -100,12 +100,13 @@ namespace Microsoft.CodeAnalysis
             for (int i = 0; i < lastExplicitValue; i++)
             {
                 if (
-                    !ushort.TryParse(
-                        elements[i],
-                        NumberStyles.None,
-                        CultureInfo.InvariantCulture,
-                        out values[i]
-                    )
+                    !ushort
+                        .TryParse(
+                            elements[i],
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out values[i]
+                        )
                     || values[i] > maxValue
                 )
                 {
@@ -179,12 +180,8 @@ namespace Microsoft.CodeAnalysis
         {
             System.Numerics.BigInteger number;
             if (
-                System.Numerics.BigInteger.TryParse(
-                    s,
-                    NumberStyles.None,
-                    CultureInfo.InvariantCulture,
-                    out number
-                )
+                System.Numerics.BigInteger
+                    .TryParse(s, NumberStyles.None, CultureInfo.InvariantCulture, out number)
             )
             {
                 //The old compiler would take the 16 least significant bits and use their value as the output

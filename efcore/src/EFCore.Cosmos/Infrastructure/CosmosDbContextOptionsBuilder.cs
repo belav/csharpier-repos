@@ -177,12 +177,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Func<CosmosOptionsExtension, CosmosOptionsExtension> setAction
         )
         {
-            ((IDbContextOptionsBuilderInfrastructure)_optionsBuilder).AddOrUpdateExtension(
-                setAction(
-                    _optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
-                        ?? new CosmosOptionsExtension()
-                )
-            );
+            ((IDbContextOptionsBuilderInfrastructure)_optionsBuilder)
+                .AddOrUpdateExtension(
+                    setAction(
+                        _optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
+                            ?? new CosmosOptionsExtension()
+                    )
+                );
 
             return this;
         }

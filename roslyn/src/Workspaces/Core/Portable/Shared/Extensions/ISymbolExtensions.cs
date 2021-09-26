@@ -631,7 +631,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     {
                         var baseType = memberSymbol.ContainingType.BaseType;
 #nullable disable // Can 'baseType' be null here? https://github.com/dotnet/roslyn/issues/39166
-                        return baseType.Constructors.Where(c => IsSameSignature(methodSymbol, c))
+                        return baseType.Constructors
+                            .Where(c => IsSameSignature(methodSymbol, c))
                             .FirstOrDefault();
 #nullable enable
                     }
@@ -772,10 +773,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             try
             {
-                var xpathResult = (IEnumerable)System.Xml.XPath.Extensions.XPathEvaluate(
-                    node,
-                    xpath
-                );
+                var xpathResult = (IEnumerable)System.Xml.XPath.Extensions
+                    .XPathEvaluate(node, xpath);
 
                 // Throws InvalidOperationException if the result of the XPath is an XDocument:
                 return xpathResult?.Cast<XNode>().ToArray();

@@ -19,9 +19,8 @@ namespace System.ServiceProcess.Tests
 
         private static readonly Lazy<bool> s_runningWithElevatedPrivileges = new Lazy<bool>(
             () =>
-                new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(
-                    WindowsBuiltInRole.Administrator
-                )
+                new WindowsPrincipal(WindowsIdentity.GetCurrent())
+                    .IsInRole(WindowsBuiltInRole.Administrator)
         );
 
         private NamedPipeClientStream _client;

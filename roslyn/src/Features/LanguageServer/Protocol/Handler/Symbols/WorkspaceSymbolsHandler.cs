@@ -122,10 +122,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             )
             {
                 var location = await ProtocolConversions.TextSpanToLocationAsync(
-                        result.NavigableItem.Document,
-                        result.NavigableItem.SourceSpan,
-                        cancellationToken
-                    )
+                    result.NavigableItem.Document,
+                    result.NavigableItem.SourceSpan,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 Contract.ThrowIfNull(location);
                 _progress.Report(

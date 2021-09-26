@@ -55,7 +55,8 @@ namespace System.CodeDom.Tests
             var typeReference = new CodeTypeReference(type);
             string expectedArrayElementType = type.IsArray ? type.GetElementType().FullName : null;
             int expectedArrayRank = type.IsArray ? type.GetArrayRank() : 0;
-            string[] expectedTypeArguments = type.GenericTypeArguments.Select(
+            string[] expectedTypeArguments = type.GenericTypeArguments
+                .Select(
                     arg =>
                         arg.IsGenericType ? arg.GetGenericTypeDefinition().FullName : arg.FullName
                 )
@@ -423,8 +424,9 @@ namespace System.CodeDom.Tests
 
             Assert.Equal((CodeTypeReferenceOptions)0, typeReference.Options);
 
-            CodeTypeReference[] actualTypeArguments =
-                typeReference.TypeArguments.Cast<CodeTypeReference>().ToArray();
+            CodeTypeReference[] actualTypeArguments = typeReference.TypeArguments
+                .Cast<CodeTypeReference>()
+                .ToArray();
             Assert.Equal(expectedTypeArguments.Length, actualTypeArguments.Length);
             for (int i = 0; i < expectedTypeArguments.Length; i++)
             {

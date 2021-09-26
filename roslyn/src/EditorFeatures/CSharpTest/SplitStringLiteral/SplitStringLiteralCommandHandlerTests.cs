@@ -46,14 +46,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
         {
             using var workspace = TestWorkspace.CreateCSharp(inputMarkup);
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                            SmartIndent,
-                            LanguageNames.CSharp,
-                            indentStyle
-                        )
-                        .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
-                )
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(SmartIndent, LanguageNames.CSharp, indentStyle)
+                            .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
+                    )
             );
 
             if (useTabs && expectedOutputMarkup != null)
@@ -75,8 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
             view.SetMultiSelection(snapshotSpans);
 
             var undoHistoryRegistry = workspace.GetService<ITextUndoHistoryRegistry>();
-            var commandHandler =
-                workspace.ExportProvider.GetCommandHandler<SplitStringLiteralCommandHandler>(
+            var commandHandler = workspace.ExportProvider
+                .GetCommandHandler<SplitStringLiteralCommandHandler>(
                     nameof(SplitStringLiteralCommandHandler)
                 );
 

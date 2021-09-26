@@ -131,10 +131,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi1).GetMethod(
-                    nameof(Bmi1.AndNot),
-                    new Type[] { typeof(UInt32), typeof(UInt32) }
-                )
+            var result = typeof(Bmi1)
+                .GetMethod(nameof(Bmi1.AndNot), new Type[] { typeof(UInt32), typeof(UInt32) })
                 .Invoke(
                     null,
                     new object[]
@@ -237,9 +235,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi1)}.{nameof(Bmi1.AndNot)}<UInt32>(UInt32, UInt32): AndNot failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi1)}.{nameof(Bmi1.AndNot)}<UInt32>(UInt32, UInt32): AndNot failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

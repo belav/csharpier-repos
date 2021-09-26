@@ -52,10 +52,8 @@ namespace System.IO.Tests
     {
         protected override FileStream CreateFileStream(string path, FileMode mode)
         {
-            return new FileInfo(path).Open(
-                mode,
-                mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite
-            );
+            return new FileInfo(path)
+                .Open(mode, mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite);
         }
 
         protected override FileStream CreateFileStream(
@@ -72,11 +70,12 @@ namespace System.IO.Tests
     {
         protected override FileStream CreateFileStream(string path, FileMode mode)
         {
-            return new FileInfo(path).Open(
-                mode,
-                mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite,
-                FileShare.ReadWrite | FileShare.Delete
-            );
+            return new FileInfo(path)
+                .Open(
+                    mode,
+                    mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite,
+                    FileShare.ReadWrite | FileShare.Delete
+                );
         }
 
         protected override FileStream CreateFileStream(

@@ -152,10 +152,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
                     try
                     {
                         await findUsagesService.FindReferencesAsync(
-                                document,
-                                caretPosition,
-                                context
-                            )
+                            document,
+                            caretPosition,
+                            context
+                        )
                             .ConfigureAwait(false);
                     }
 

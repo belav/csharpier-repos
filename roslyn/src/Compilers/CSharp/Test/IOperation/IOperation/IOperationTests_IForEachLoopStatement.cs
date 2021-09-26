@@ -4404,9 +4404,9 @@ public sealed class MyClass
                 // file.cs(6,18): error CS8186: A foreach loop must declare its iteration variables.
                 //         foreach ((var x, (var y, var z), a ?? b) in this)
                 Diagnostic(
-                        ErrorCode.ERR_MustDeclareForeachIteration,
-                        "(var x, (var y, var z), a ?? b)"
-                    )
+                    ErrorCode.ERR_MustDeclareForeachIteration,
+                    "(var x, (var y, var z), a ?? b)"
+                )
                     .WithLocation(6, 18)
             };
 

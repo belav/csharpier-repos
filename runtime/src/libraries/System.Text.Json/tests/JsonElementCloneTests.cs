@@ -165,10 +165,8 @@ null
 
         private static JsonDocument SniffDocument(this JsonElement element)
         {
-            return (JsonDocument)typeof(JsonElement).GetField(
-                    "_parent",
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                )
+            return (JsonDocument)typeof(JsonElement)
+                .GetField("_parent", BindingFlags.Instance | BindingFlags.NonPublic)
                 .GetValue(element);
         }
     }

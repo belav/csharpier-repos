@@ -43,7 +43,8 @@ namespace System.Linq.Parallel
             CountdownEvent barrier = new CountdownEvent(inputStream.PartitionCount);
             ListChunk<Pair<TInputOutput, THashKey>>[][] valueExchangeMatrix = JaggedArray<
                 ListChunk<Pair<TInputOutput, THashKey>>
-            >.Allocate(inputStream.PartitionCount, inputStream.PartitionCount);
+            >
+                .Allocate(inputStream.PartitionCount, inputStream.PartitionCount);
 
             // Now construct each partition object.
             for (int i = 0; i < inputStream.PartitionCount; i++)

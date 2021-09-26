@@ -190,19 +190,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                 if (httpsDefault.IsTls || httpsDefault.TryUseHttps())
                 {
                     await httpsDefault.BindAsync(context, cancellationToken).ConfigureAwait(false);
-                    context.Logger.LogDebug(
-                        CoreStrings.BindingToDefaultAddresses,
-                        Constants.DefaultServerAddress,
-                        Constants.DefaultServerHttpsAddress
-                    );
+                    context.Logger
+                        .LogDebug(
+                            CoreStrings.BindingToDefaultAddresses,
+                            Constants.DefaultServerAddress,
+                            Constants.DefaultServerHttpsAddress
+                        );
                 }
                 else
                 {
                     // No default cert is available, do not bind to the https endpoint.
-                    context.Logger.LogDebug(
-                        CoreStrings.BindingToDefaultAddress,
-                        Constants.DefaultServerAddress
-                    );
+                    context.Logger
+                        .LogDebug(
+                            CoreStrings.BindingToDefaultAddress,
+                            Constants.DefaultServerAddress
+                        );
                 }
             }
         }
@@ -218,11 +220,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             )
             {
                 var joined = string.Join(", ", _addresses);
-                context.Logger.LogInformation(
-                    CoreStrings.OverridingWithPreferHostingUrls,
-                    nameof(IServerAddressesFeature.PreferHostingUrls),
-                    joined
-                );
+                context.Logger
+                    .LogInformation(
+                        CoreStrings.OverridingWithPreferHostingUrls,
+                        nameof(IServerAddressesFeature.PreferHostingUrls),
+                        joined
+                    );
 
                 return base.BindAsync(context, cancellationToken);
             }

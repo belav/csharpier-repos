@@ -28,41 +28,39 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     /// </summary>
     public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<object>
     {
-        private static readonly MethodInfo _doubleEqualsMethodInfo =
-            typeof(double).GetRequiredRuntimeMethod(
-                nameof(double.Equals),
-                new[] { typeof(double) }
-            );
+        private static readonly MethodInfo _doubleEqualsMethodInfo = typeof(double)
+            .GetRequiredRuntimeMethod(nameof(double.Equals), new[] { typeof(double) });
 
-        private static readonly MethodInfo _floatEqualsMethodInfo =
-            typeof(float).GetRequiredRuntimeMethod(nameof(float.Equals), new[] { typeof(float) });
+        private static readonly MethodInfo _floatEqualsMethodInfo = typeof(float)
+            .GetRequiredRuntimeMethod(nameof(float.Equals), new[] { typeof(float) });
 
-        internal static readonly MethodInfo ArrayCopyMethod =
-            typeof(Array).GetRequiredRuntimeMethod(
+        internal static readonly MethodInfo ArrayCopyMethod = typeof(Array)
+            .GetRequiredRuntimeMethod(
                 nameof(Array.Copy),
                 new[] { typeof(Array), typeof(Array), typeof(int) }
             );
 
         internal static readonly MethodInfo EqualityComparerHashCodeMethod =
-            typeof(IEqualityComparer).GetRequiredRuntimeMethod(
-                nameof(IEqualityComparer.GetHashCode),
-                new[] { typeof(object) }
-            );
+            typeof(IEqualityComparer)
+                .GetRequiredRuntimeMethod(
+                    nameof(IEqualityComparer.GetHashCode),
+                    new[] { typeof(object) }
+                );
 
-        internal static readonly MethodInfo EqualityComparerEqualsMethod =
-            typeof(IEqualityComparer).GetRequiredRuntimeMethod(
+        internal static readonly MethodInfo EqualityComparerEqualsMethod = typeof(IEqualityComparer)
+            .GetRequiredRuntimeMethod(
                 nameof(IEqualityComparer.Equals),
                 new[] { typeof(object), typeof(object) }
             );
 
-        internal static readonly MethodInfo ObjectEqualsMethod =
-            typeof(object).GetRequiredRuntimeMethod(
+        internal static readonly MethodInfo ObjectEqualsMethod = typeof(object)
+            .GetRequiredRuntimeMethod(
                 nameof(object.Equals),
                 new[] { typeof(object), typeof(object) }
             );
 
-        internal static readonly MethodInfo ObjectGetHashCodeMethod =
-            typeof(object).GetRequiredRuntimeMethod(nameof(object.GetHashCode), Type.EmptyTypes);
+        internal static readonly MethodInfo ObjectGetHashCodeMethod = typeof(object)
+            .GetRequiredRuntimeMethod(nameof(object.GetHashCode), Type.EmptyTypes);
 
         /// <summary>
         ///     Creates a new <see cref="ValueComparer" /> with the given comparison and
@@ -165,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             return new ReplacingExpressionVisitor(
                 new Expression[] { original1, original2 },
                 new[] { leftExpression, rightExpression }
-            ).Visit(EqualsExpression.Body);
+            )
+                .Visit(EqualsExpression.Body);
         }
 
         /// <summary>
@@ -300,8 +299,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         internal sealed class DefaultDateTimeOffsetValueComparer
             : DefaultValueComparer<DateTimeOffset>
         {
-            private static readonly PropertyInfo _offsetPropertyInfo =
-                typeof(DateTimeOffset).GetProperty(nameof(DateTimeOffset.Offset))!;
+            private static readonly PropertyInfo _offsetPropertyInfo = typeof(DateTimeOffset)
+                .GetProperty(nameof(DateTimeOffset.Offset))!;
 
             // In .NET, two DateTimeOffset instances are considered equal if they represent the same point in time but with different
             // time zone offsets. This comparer considers such DateTimeOffset as non-equal.

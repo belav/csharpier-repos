@@ -136,10 +136,9 @@ As Statement
             );
 
             // With the optimizer off, the local is not elided
-            CompileAndVerify(source, options: TestOptions.DebugDll)
-                .VerifyIL(
-                    "C.TestObject()",
-                    expectedIL: @"
+            CompileAndVerify(source, options: TestOptions.DebugDll).VerifyIL(
+                "C.TestObject()",
+                expectedIL: @"
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -159,7 +158,7 @@ As Statement
   IL_0015:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -670,7 +669,7 @@ In Get P2
         public void EventLvalue()
         {
             CompileAndVerify(
-                    @"
+                @"
 using System;
 class C
 {
@@ -680,10 +679,9 @@ class C
         E ??= (sender, args) => {};
     }
 }"
-                )
-                .VerifyIL(
-                    "C.Main()",
-                    @"
+            ).VerifyIL(
+                "C.Main()",
+                @"
 {
   // Code size       44 (0x2c)
   .maxstack  2
@@ -702,14 +700,14 @@ class C
   IL_002b:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void InvalidLHS()
         {
             CreateCompilation(
-                    @"
+                @"
 public class C
 {
     int? WriteOnlyProperty { set {} }
@@ -728,37 +726,36 @@ public class C
     static int? GetInt() => null;
 }
 "
-                )
-                .VerifyDiagnostics(
-                    // (10,9): error CS0154: The property or indexer 'C.WriteOnlyProperty' cannot be used in this context because it lacks the get accessor
-                    //         c.WriteOnlyProperty ??= 1; // Non rvalue write only
-                    Diagnostic(ErrorCode.ERR_PropertyLacksGet, "c.WriteOnlyProperty")
-                        .WithArguments("C.WriteOnlyProperty")
-                        .WithLocation(10, 9),
-                    // (11,9): error CS0200: Property or indexer 'C.ReadOnlyProperty' cannot be assigned to -- it is read only
-                    //         c.ReadOnlyProperty ??= 1; // Non lvalue readonly
-                    Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "c.ReadOnlyProperty")
-                        .WithArguments("C.ReadOnlyProperty")
-                        .WithLocation(11, 9),
-                    // (12,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                    //         GetInt() ??= 1; // Non lvalue method invocation
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "GetInt()").WithLocation(12, 9),
-                    // (13,9): error CS1656: Cannot assign to 'GetInt' because it is a 'method group'
-                    //         GetInt ??= null; // Non lvalue method group
-                    Diagnostic(ErrorCode.ERR_AssgReadonlyLocalCause, "GetInt")
-                        .WithArguments("GetInt", "method group")
-                        .WithLocation(13, 9),
-                    // (14,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                    //         () => {} ??= null; // Non lvalue lambda
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "() => {}").WithLocation(14, 9)
-                );
+            ).VerifyDiagnostics(
+                // (10,9): error CS0154: The property or indexer 'C.WriteOnlyProperty' cannot be used in this context because it lacks the get accessor
+                //         c.WriteOnlyProperty ??= 1; // Non rvalue write only
+                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "c.WriteOnlyProperty")
+                    .WithArguments("C.WriteOnlyProperty")
+                    .WithLocation(10, 9),
+                // (11,9): error CS0200: Property or indexer 'C.ReadOnlyProperty' cannot be assigned to -- it is read only
+                //         c.ReadOnlyProperty ??= 1; // Non lvalue readonly
+                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "c.ReadOnlyProperty")
+                    .WithArguments("C.ReadOnlyProperty")
+                    .WithLocation(11, 9),
+                // (12,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                //         GetInt() ??= 1; // Non lvalue method invocation
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "GetInt()").WithLocation(12, 9),
+                // (13,9): error CS1656: Cannot assign to 'GetInt' because it is a 'method group'
+                //         GetInt ??= null; // Non lvalue method group
+                Diagnostic(ErrorCode.ERR_AssgReadonlyLocalCause, "GetInt")
+                    .WithArguments("GetInt", "method group")
+                    .WithLocation(13, 9),
+                // (14,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                //         () => {} ??= null; // Non lvalue lambda
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "() => {}").WithLocation(14, 9)
+            );
         }
 
         [Fact]
         public void ValidRHS()
         {
             CompileAndVerify(
-                    @"
+                @"
 using System;
 public class C
 {
@@ -771,14 +768,13 @@ public class C
     static void TestMethod() => Console.WriteLine(""In TestMethod"");
 }
 ",
-                    expectedOutput: @"
+                expectedOutput: @"
 In TestMethod
 In TestMethod
 "
-                )
-                .VerifyIL(
-                    "C.Main()",
-                    @"
+            ).VerifyIL(
+                "C.Main()",
+                @"
 {
   // Code size       70 (0x46)
   .maxstack  2
@@ -814,14 +810,14 @@ In TestMethod
   IL_0045:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void InvalidRHS()
         {
             CreateCompilation(
-                    @"
+                @"
 public class C
 {
     static int P1 { set {} }
@@ -833,14 +829,13 @@ public class C
     }
 }
 "
-                )
-                .VerifyDiagnostics(
-                    // (9,15): error CS0154: The property or indexer 'C.P1' cannot be used in this context because it lacks the get accessor
-                    //         c ??= P1;
-                    Diagnostic(ErrorCode.ERR_PropertyLacksGet, "P1")
-                        .WithArguments("C.P1")
-                        .WithLocation(9, 15)
-                );
+            ).VerifyDiagnostics(
+                // (9,15): error CS0154: The property or indexer 'C.P1' cannot be used in this context because it lacks the get accessor
+                //         c ??= P1;
+                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "P1")
+                    .WithArguments("C.P1")
+                    .WithLocation(9, 15)
+            );
         }
 
         [Fact]
@@ -1023,7 +1018,7 @@ In GetF2
         public void RefReadonlyReturnLvalue()
         {
             CreateCompilation(
-                    @"
+                @"
 using System;
 public class C
 {
@@ -1051,26 +1046,25 @@ public class C
         Console.WriteLine(c.GetF1() ??= 2);
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (24,27): error CS8331: Cannot assign to property 'C.P1' because it is a readonly variable
-                    //         Console.WriteLine(c.P1 ??= 1);
-                    Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "c.P1")
-                        .WithArguments("property", "C.P1")
-                        .WithLocation(24, 27),
-                    // (26,27): error CS8331: Cannot assign to method 'C.GetF1()' because it is a readonly variable
-                    //         Console.WriteLine(c.GetF1() ??= 2);
-                    Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "c.GetF1()")
-                        .WithArguments("method", "C.GetF1()")
-                        .WithLocation(26, 27)
-                );
+            ).VerifyDiagnostics(
+                // (24,27): error CS8331: Cannot assign to property 'C.P1' because it is a readonly variable
+                //         Console.WriteLine(c.P1 ??= 1);
+                Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "c.P1")
+                    .WithArguments("property", "C.P1")
+                    .WithLocation(24, 27),
+                // (26,27): error CS8331: Cannot assign to method 'C.GetF1()' because it is a readonly variable
+                //         Console.WriteLine(c.GetF1() ??= 2);
+                Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "c.GetF1()")
+                    .WithArguments("method", "C.GetF1()")
+                    .WithLocation(26, 27)
+            );
         }
 
         [Fact]
         public void NonNullableLHS()
         {
             CreateCompilation(
-                    @"
+                @"
 public class C
 {
     public static void Main()
@@ -1079,21 +1073,20 @@ public class C
         i1 ??= 0;
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (8,9): error CS0019: Operator '??=' cannot be applied to operands of type 'int' and 'int'
-                    //         i1 ??= 0;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 ??= 0")
-                        .WithArguments("??=", "int", "int")
-                        .WithLocation(7, 9)
-                );
+            ).VerifyDiagnostics(
+                // (8,9): error CS0019: Operator '??=' cannot be applied to operands of type 'int' and 'int'
+                //         i1 ??= 0;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 ??= 0")
+                    .WithArguments("??=", "int", "int")
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
         public void ReferenceTypeLHS()
         {
             CompileAndVerify(
-                    @"
+                @"
 public class C
 {
     static C P1 { get; set; }
@@ -1103,10 +1096,9 @@ public class C
     }
     static void Test(C test) {}
 }"
-                )
-                .VerifyIL(
-                    "C.Main()",
-                    expectedIL: @"
+            ).VerifyIL(
+                "C.Main()",
+                expectedIL: @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -1121,7 +1113,7 @@ public class C
   IL_0019:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -1352,10 +1344,9 @@ class C
     }
 }";
 
-            CompileAndVerify(source1, expectedOutput: "F2")
-                .VerifyIL(
-                    "C.Main()",
-                    expectedIL: @"
+            CompileAndVerify(source1, expectedOutput: "F2").VerifyIL(
+                "C.Main()",
+                expectedIL: @"
 {
   // Code size       31 (0x1f)
   .maxstack  3
@@ -1382,7 +1373,7 @@ class C
   IL_001e:  ret
 }
 "
-                );
+            );
 
             var source2 =
                 @"
@@ -1398,49 +1389,48 @@ class C
     }
 }";
 
-            CreateCompilation(source2)
-                .VerifyDiagnostics(
-                    // (9,16): error CS1525: Invalid expression term 'ref'
-                    //         o1 ??= ref o2;
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref o2")
-                        .WithArguments("ref")
-                        .WithLocation(9, 16),
-                    // (9,16): error CS1073: Unexpected token 'ref'
-                    //         o1 ??= ref o2;
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
-                        .WithArguments("ref")
-                        .WithLocation(9, 16),
-                    // (10,13): error CS0118: 'o1' is a variable but is used like a type
-                    //         ref o1 ??= ref o2;
-                    Diagnostic(ErrorCode.ERR_BadSKknown, "o1")
-                        .WithArguments("o1", "variable", "type")
-                        .WithLocation(10, 13),
-                    // (10,16): error CS1001: Identifier expected
-                    //         ref o1 ??= ref o2;
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "??=").WithLocation(10, 16),
-                    // (10,16): error CS1002: ; expected
-                    //         ref o1 ??= ref o2;
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "??=").WithLocation(10, 16),
-                    // (10,16): error CS1525: Invalid expression term '??='
-                    //         ref o1 ??= ref o2;
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "??=")
-                        .WithArguments("??=")
-                        .WithLocation(10, 16),
-                    // (10,16): error CS8174: A declaration of a by-reference variable must have an initializer
-                    //         ref o1 ??= ref o2;
-                    Diagnostic(ErrorCode.ERR_ByReferenceVariableMustBeInitialized, "")
-                        .WithLocation(10, 16),
-                    // (10,20): error CS1525: Invalid expression term 'ref'
-                    //         ref o1 ??= ref o2;
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref o2")
-                        .WithArguments("ref")
-                        .WithLocation(10, 20),
-                    // (10,20): error CS1073: Unexpected token 'ref'
-                    //         ref o1 ??= ref o2;
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
-                        .WithArguments("ref")
-                        .WithLocation(10, 20)
-                );
+            CreateCompilation(source2).VerifyDiagnostics(
+                // (9,16): error CS1525: Invalid expression term 'ref'
+                //         o1 ??= ref o2;
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref o2")
+                    .WithArguments("ref")
+                    .WithLocation(9, 16),
+                // (9,16): error CS1073: Unexpected token 'ref'
+                //         o1 ??= ref o2;
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
+                    .WithArguments("ref")
+                    .WithLocation(9, 16),
+                // (10,13): error CS0118: 'o1' is a variable but is used like a type
+                //         ref o1 ??= ref o2;
+                Diagnostic(ErrorCode.ERR_BadSKknown, "o1")
+                    .WithArguments("o1", "variable", "type")
+                    .WithLocation(10, 13),
+                // (10,16): error CS1001: Identifier expected
+                //         ref o1 ??= ref o2;
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "??=").WithLocation(10, 16),
+                // (10,16): error CS1002: ; expected
+                //         ref o1 ??= ref o2;
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "??=").WithLocation(10, 16),
+                // (10,16): error CS1525: Invalid expression term '??='
+                //         ref o1 ??= ref o2;
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "??=")
+                    .WithArguments("??=")
+                    .WithLocation(10, 16),
+                // (10,16): error CS8174: A declaration of a by-reference variable must have an initializer
+                //         ref o1 ??= ref o2;
+                Diagnostic(ErrorCode.ERR_ByReferenceVariableMustBeInitialized, "")
+                    .WithLocation(10, 16),
+                // (10,20): error CS1525: Invalid expression term 'ref'
+                //         ref o1 ??= ref o2;
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref o2")
+                    .WithArguments("ref")
+                    .WithLocation(10, 20),
+                // (10,20): error CS1073: Unexpected token 'ref'
+                //         ref o1 ??= ref o2;
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
+                    .WithArguments("ref")
+                    .WithLocation(10, 20)
+            );
         }
 
         [Fact]
@@ -1500,13 +1490,12 @@ class C
     static void M(in object o) {}
 }";
 
-            CreateCompilation(source2)
-                .VerifyDiagnostics(
-                    // (7,15): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
-                    //         M(in (o ??= "Test String"));
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, @"o ??= ""Test String""")
-                        .WithLocation(7, 15)
-                );
+            CreateCompilation(source2).VerifyDiagnostics(
+                // (7,15): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
+                //         M(in (o ??= "Test String"));
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, @"o ??= ""Test String""")
+                    .WithLocation(7, 15)
+            );
         }
 
         [Fact]
@@ -1704,10 +1693,9 @@ class F
 
             compilation.VerifyDiagnostics();
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "C.Main()",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "C.Main()",
+                @"
 {
   // Code size      180 (0xb4)
   .maxstack  2
@@ -1784,14 +1772,14 @@ class F
   IL_00ae:  call       ""void C.UseParamAsInt(int)""
   IL_00b3:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void InvalidRHSConversions()
         {
             CreateCompilation(
-                    @"
+                @"
 class C
 {
     public void M()
@@ -1819,36 +1807,35 @@ class D : C {}
 class E {}
 class F {}
 "
-                )
-                .VerifyDiagnostics(
-                    // (8,9): error CS0019: Operator '??=' cannot be applied to operands of type 'int?' and 'double'
-                    //         i1 ??= 1.0;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 ??= 1.0")
-                        .WithArguments("??=", "int?", "double")
-                        .WithLocation(8, 9),
-                    // (12,9): error CS0019: Operator '??=' cannot be applied to operands of type 'D' and 'C'
-                    //         d1 ??= new C();
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d1 ??= new C()")
-                        .WithArguments("??=", "D", "C")
-                        .WithLocation(12, 9),
-                    // (16,9): error CS0019: Operator '??=' cannot be applied to operands of type 'C' and 'E'
-                    //         c1 ??= new E();
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c1 ??= new E()")
-                        .WithArguments("??=", "C", "E")
-                        .WithLocation(16, 9),
-                    // (20,9): error CS0019: Operator '??=' cannot be applied to operands of type 'C' and 'F'
-                    //         c2 ??= new F();
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c2 ??= new F()")
-                        .WithArguments("??=", "C", "F")
-                        .WithLocation(20, 9)
-                );
+            ).VerifyDiagnostics(
+                // (8,9): error CS0019: Operator '??=' cannot be applied to operands of type 'int?' and 'double'
+                //         i1 ??= 1.0;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 ??= 1.0")
+                    .WithArguments("??=", "int?", "double")
+                    .WithLocation(8, 9),
+                // (12,9): error CS0019: Operator '??=' cannot be applied to operands of type 'D' and 'C'
+                //         d1 ??= new C();
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d1 ??= new C()")
+                    .WithArguments("??=", "D", "C")
+                    .WithLocation(12, 9),
+                // (16,9): error CS0019: Operator '??=' cannot be applied to operands of type 'C' and 'E'
+                //         c1 ??= new E();
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "c1 ??= new E()")
+                    .WithArguments("??=", "C", "E")
+                    .WithLocation(16, 9),
+                // (20,9): error CS0019: Operator '??=' cannot be applied to operands of type 'C' and 'F'
+                //         c2 ??= new F();
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "c2 ??= new F()")
+                    .WithArguments("??=", "C", "F")
+                    .WithLocation(20, 9)
+            );
         }
 
         [Fact]
         public void AsInvalidSubexpression()
         {
             CreateCompilation(
-                    @"
+                @"
 class C
 {
     public void M()
@@ -1863,22 +1850,21 @@ class C
     public void M3(C c) {}
 }
 "
-                )
-                .VerifyDiagnostics(
-                    // (7,12): error CS1503: Argument 1: cannot convert from 'double' to 'C'
-                    //         M3(d ??= 3.0);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "d ??= 3.0")
-                        .WithArguments("1", "double", "C")
-                        .WithLocation(7, 12),
-                    // (9,12): error CS1503: Argument 1: cannot convert from 'object' to 'C'
-                    //         M3(o ??= null);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "o ??= null")
-                        .WithArguments("1", "object", "C")
-                        .WithLocation(9, 12),
-                    // (10,10): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                    //         (o ??= null) = null;
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "o ??= null").WithLocation(10, 10)
-                );
+            ).VerifyDiagnostics(
+                // (7,12): error CS1503: Argument 1: cannot convert from 'double' to 'C'
+                //         M3(d ??= 3.0);
+                Diagnostic(ErrorCode.ERR_BadArgType, "d ??= 3.0")
+                    .WithArguments("1", "double", "C")
+                    .WithLocation(7, 12),
+                // (9,12): error CS1503: Argument 1: cannot convert from 'object' to 'C'
+                //         M3(o ??= null);
+                Diagnostic(ErrorCode.ERR_BadArgType, "o ??= null")
+                    .WithArguments("1", "object", "C")
+                    .WithLocation(9, 12),
+                // (10,10): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                //         (o ??= null) = null;
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "o ??= null").WithLocation(10, 10)
+            );
         }
 
         [Fact]
@@ -2275,7 +2261,7 @@ In get_Property1
         public void UseBeforeAssignment()
         {
             CreateCompilation(
-                    @"
+                @"
 public class C
 {
     public static void Main()
@@ -2302,36 +2288,35 @@ public class C
     object Prop { get; set; }
     object Field;
 }"
-                )
-                .VerifyDiagnostics(
-                    // (7,9): error CS0165: Use of unassigned local variable 'c1'
-                    //         c1 ??= new C(); // LHS unassigned
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "c1")
-                        .WithArguments("c1")
-                        .WithLocation(7, 9),
-                    // (10,16): error CS0165: Use of unassigned local variable 'c2'
-                    //         c1 ??= c2; // RHS unassigned
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "c2")
-                        .WithArguments("c2")
-                        .WithLocation(10, 16),
-                    // (16,9): error CS0165: Use of unassigned local variable 'y1'
-                    //         y1.ToString();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "y1")
-                        .WithArguments("y1")
-                        .WithLocation(16, 9),
-                    // (22,9): error CS0165: Use of unassigned local variable 'y2'
-                    //         y2.ToString();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "y2")
-                        .WithArguments("y2")
-                        .WithLocation(22, 9)
-                );
+            ).VerifyDiagnostics(
+                // (7,9): error CS0165: Use of unassigned local variable 'c1'
+                //         c1 ??= new C(); // LHS unassigned
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "c1")
+                    .WithArguments("c1")
+                    .WithLocation(7, 9),
+                // (10,16): error CS0165: Use of unassigned local variable 'c2'
+                //         c1 ??= c2; // RHS unassigned
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "c2")
+                    .WithArguments("c2")
+                    .WithLocation(10, 16),
+                // (16,9): error CS0165: Use of unassigned local variable 'y1'
+                //         y1.ToString();
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(16, 9),
+                // (22,9): error CS0165: Use of unassigned local variable 'y2'
+                //         y2.ToString();
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(22, 9)
+            );
         }
 
         [Fact]
         public void NonStaticInStaticContext()
         {
             CreateCompilation(
-                    @"
+                @"
 public class C
 {
     C P { get; set; }
@@ -2340,21 +2325,20 @@ public class C
         P ??= new C();
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (7,9): error CS0120: An object reference is required for the non-static field, method, or property 'C.P'
-                    //         P ??= new C();
-                    Diagnostic(ErrorCode.ERR_ObjectRequired, "P")
-                        .WithArguments("C.P")
-                        .WithLocation(7, 9)
-                );
+            ).VerifyDiagnostics(
+                // (7,9): error CS0120: An object reference is required for the non-static field, method, or property 'C.P'
+                //         P ??= new C();
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "P")
+                    .WithArguments("C.P")
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
         public void ThrowExpressionRHS()
         {
             CreateCompilation(
-                    @"
+                @"
 using System;
 public class C
 {
@@ -2365,12 +2349,11 @@ public class C
     }
 }
 "
-                )
-                .VerifyDiagnostics(
-                    // (8,15): error CS8115: A throw expression is not allowed in this context.
-                    //         o ??= throw new Exception();
-                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(8, 15)
-                );
+            ).VerifyDiagnostics(
+                // (8,15): error CS8115: A throw expression is not allowed in this context.
+                //         o ??= throw new Exception();
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(8, 15)
+            );
         }
 
         [Fact]
@@ -2521,7 +2504,7 @@ Test String
             );
 
             CreateCompilation(
-                    @"
+                @"
 class C
 {
     void M<T>(T t1, T t2) where T : struct
@@ -2529,14 +2512,13 @@ class C
         t1 ??= t2;
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (6,9): error CS0019: Operator '??=' cannot be applied to operands of type 'T' and 'T'
-                    //         t1 ??= t2;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "t1 ??= t2")
-                        .WithArguments("??=", "T", "T")
-                        .WithLocation(6, 9)
-                );
+            ).VerifyDiagnostics(
+                // (6,9): error CS0019: Operator '??=' cannot be applied to operands of type 'T' and 'T'
+                //         t1 ??= t2;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "t1 ??= t2")
+                    .WithArguments("??=", "T", "T")
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -2583,12 +2565,11 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                    //         await t1 ??= t2;
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "await t1").WithLocation(7, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                //         await t1 ??= t2;
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "await t1").WithLocation(7, 9)
+            );
         }
 
         [Fact]
@@ -2747,19 +2728,18 @@ class C
     }
 }";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (14,9): error CS0165: Use of unassigned local variable 'o2'
-                    //         o2.ToString();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "o2")
-                        .WithArguments("o2")
-                        .WithLocation(14, 9),
-                    // (17,9): error CS0165: Use of unassigned local variable 'o3'
-                    //         o3.ToString();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "o3")
-                        .WithArguments("o3")
-                        .WithLocation(17, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (14,9): error CS0165: Use of unassigned local variable 'o2'
+                //         o2.ToString();
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "o2")
+                    .WithArguments("o2")
+                    .WithLocation(14, 9),
+                // (17,9): error CS0165: Use of unassigned local variable 'o3'
+                //         o3.ToString();
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "o3")
+                    .WithArguments("o3")
+                    .WithLocation(17, 9)
+            );
         }
 
         [Fact]
@@ -2870,19 +2850,18 @@ class C
     }
 }";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,9): error CS8331: Cannot assign to variable 'in object' because it is a readonly variable
-                    //         o1 ??= null;
-                    Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "o1")
-                        .WithArguments("variable", "in object")
-                        .WithLocation(6, 9),
-                    // (7,9): error CS0269: Use of unassigned out parameter 'o2'
-                    //         o2 ??= null;
-                    Diagnostic(ErrorCode.ERR_UseDefViolationOut, "o2")
-                        .WithArguments("o2")
-                        .WithLocation(7, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,9): error CS8331: Cannot assign to variable 'in object' because it is a readonly variable
+                //         o1 ??= null;
+                Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "o1")
+                    .WithArguments("variable", "in object")
+                    .WithLocation(6, 9),
+                // (7,9): error CS0269: Use of unassigned out parameter 'o2'
+                //         o2 ??= null;
+                Diagnostic(ErrorCode.ERR_UseDefViolationOut, "o2")
+                    .WithArguments("o2")
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
@@ -2940,12 +2919,11 @@ class C
     }
 }";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                    //         (x, y) ??= (1, 2);
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "(x, y)").WithLocation(7, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                //         (x, y) ??= (1, 2);
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "(x, y)").WithLocation(7, 9)
+            );
         }
 
         [Fact]
@@ -2990,7 +2968,7 @@ class C
         public void SpanNotAllowedLHS()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class C
 {
@@ -3002,19 +2980,18 @@ class C
         s2 ??= new Span<byte>();
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (8,9): error CS0019: Operator '??=' cannot be applied to operands of type 'Span<byte>' and 'Span<byte>'
-                    //         s1 ??= new Span<byte>();
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "s1 ??= new Span<byte>()")
-                        .WithArguments("??=", "System.Span<byte>", "System.Span<byte>")
-                        .WithLocation(8, 9),
-                    // (9,9): error CS0306: The type 'Span<byte>' may not be used as a type argument
-                    //         Span<byte>? s2 = null;
-                    Diagnostic(ErrorCode.ERR_BadTypeArgument, "Span<byte>?")
-                        .WithArguments("System.Span<byte>")
-                        .WithLocation(9, 9)
-                );
+            ).VerifyDiagnostics(
+                // (8,9): error CS0019: Operator '??=' cannot be applied to operands of type 'Span<byte>' and 'Span<byte>'
+                //         s1 ??= new Span<byte>();
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "s1 ??= new Span<byte>()")
+                    .WithArguments("??=", "System.Span<byte>", "System.Span<byte>")
+                    .WithLocation(8, 9),
+                // (9,9): error CS0306: The type 'Span<byte>' may not be used as a type argument
+                //         Span<byte>? s2 = null;
+                Diagnostic(ErrorCode.ERR_BadTypeArgument, "Span<byte>?")
+                    .WithArguments("System.Span<byte>")
+                    .WithLocation(9, 9)
+            );
         }
 
         [Fact]
@@ -3022,7 +2999,7 @@ class C
         public void ExpressionTreeNotAllowed()
         {
             CreateCompilation(
-                    @"
+                @"
 using System;
 using System.Linq.Expressions;
 public class C {
@@ -3033,30 +3010,29 @@ public class C {
         Expression<Func<object>> e1 = () => o ??= null;
     }
 }"
+            ).VerifyDiagnostics(
+                // (8,45): error CS8642: An expression tree may not contain a null coalescing assignment
+                //         Expression<Func<string>> e0 = () => x ??= null;
+                Diagnostic(
+                    ErrorCode.ERR_ExpressionTreeCantContainNullCoalescingAssignment,
+                    "x ??= null"
                 )
-                .VerifyDiagnostics(
-                    // (8,45): error CS8642: An expression tree may not contain a null coalescing assignment
-                    //         Expression<Func<string>> e0 = () => x ??= null;
-                    Diagnostic(
-                            ErrorCode.ERR_ExpressionTreeCantContainNullCoalescingAssignment,
-                            "x ??= null"
-                        )
-                        .WithLocation(8, 45),
-                    // (9,45): error CS8642: An expression tree may not contain a null coalescing assignment
-                    //         Expression<Func<object>> e1 = () => o ??= null;
-                    Diagnostic(
-                            ErrorCode.ERR_ExpressionTreeCantContainNullCoalescingAssignment,
-                            "o ??= null"
-                        )
-                        .WithLocation(9, 45)
-                );
+                    .WithLocation(8, 45),
+                // (9,45): error CS8642: An expression tree may not contain a null coalescing assignment
+                //         Expression<Func<object>> e1 = () => o ??= null;
+                Diagnostic(
+                    ErrorCode.ERR_ExpressionTreeCantContainNullCoalescingAssignment,
+                    "o ??= null"
+                )
+                    .WithLocation(9, 45)
+            );
         }
 
         [Fact]
         public void PointersDisallowed()
         {
             CreateCompilation(
-                    @"
+                @"
 class C
 {
     unsafe void M(int* i1, int* i2)
@@ -3064,15 +3040,14 @@ class C
         i1 ??= i2;
     }
 }",
-                    options: TestOptions.UnsafeReleaseDll
-                )
-                .VerifyDiagnostics(
-                    // (6,9): error CS0019: Operator '??=' cannot be applied to operands of type 'int*' and 'int*'
-                    //         i1 ??= i2;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 ??= i2")
-                        .WithArguments("??=", "int*", "int*")
-                        .WithLocation(6, 9)
-                );
+                options: TestOptions.UnsafeReleaseDll
+            ).VerifyDiagnostics(
+                // (6,9): error CS0019: Operator '??=' cannot be applied to operands of type 'int*' and 'int*'
+                //         i1 ??= i2;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 ??= i2")
+                    .WithArguments("??=", "int*", "int*")
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]

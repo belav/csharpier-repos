@@ -56,9 +56,9 @@ namespace Microsoft.CodeAnalysis.Remote
                         .ConfigureAwait(false);
 
                     var symbol = await symbolAndProjectIdArg.TryRehydrateAsync(
-                            solution,
-                            cancellationToken
-                        )
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     var progressCallback = new FindReferencesProgressCallback(
@@ -82,17 +82,17 @@ namespace Microsoft.CodeAnalysis.Remote
                     var documents = documentArgs.IsDefault
                         ? null
                         : documentArgs.Select(solution.GetDocument)
-                              .WhereNotNull()
-                              .ToImmutableHashSet();
+                          .WhereNotNull()
+                          .ToImmutableHashSet();
 
                     await SymbolFinder.FindReferencesInCurrentProcessAsync(
-                            symbol,
-                            solution,
-                            progressCallback,
-                            documents,
-                            options,
-                            cancellationToken
-                        )
+                        symbol,
+                        solution,
+                        progressCallback,
+                        documents,
+                        options,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 },
                 cancellationToken
@@ -120,11 +120,11 @@ namespace Microsoft.CodeAnalysis.Remote
                         cancellationToken
                     );
                     await SymbolFinder.FindLiteralReferencesInCurrentProcessAsync(
-                            convertedType,
-                            solution,
-                            progressCallback,
-                            cancellationToken
-                        )
+                        convertedType,
+                        solution,
+                        progressCallback,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 },
                 cancellationToken
@@ -169,11 +169,11 @@ namespace Microsoft.CodeAnalysis.Remote
 
                     var result =
                         await DeclarationFinder.FindAllDeclarationsWithNormalQueryInCurrentProcessAsync(
-                                project,
-                                query,
-                                criteria,
-                                cancellationToken
-                            )
+                            project,
+                            query,
+                            criteria,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                     return Convert(result, solution, cancellationToken);
@@ -199,12 +199,12 @@ namespace Microsoft.CodeAnalysis.Remote
                         .ConfigureAwait(false);
                     var result =
                         await DeclarationFinder.FindSourceDeclarationsWithNormalQueryInCurrentProcessAsync(
-                                solution,
-                                name,
-                                ignoreCase,
-                                criteria,
-                                cancellationToken
-                            )
+                            solution,
+                            name,
+                            ignoreCase,
+                            criteria,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                     return Convert(result, solution, cancellationToken);
@@ -233,12 +233,12 @@ namespace Microsoft.CodeAnalysis.Remote
 
                     var result =
                         await DeclarationFinder.FindSourceDeclarationsWithNormalQueryInCurrentProcessAsync(
-                                project,
-                                name,
-                                ignoreCase,
-                                criteria,
-                                cancellationToken
-                            )
+                            project,
+                            name,
+                            ignoreCase,
+                            criteria,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                     return Convert(result, solution, cancellationToken);
@@ -264,11 +264,11 @@ namespace Microsoft.CodeAnalysis.Remote
 
                     var result =
                         await DeclarationFinder.FindSourceDeclarationsWithPatternInCurrentProcessAsync(
-                                solution,
-                                pattern,
-                                criteria,
-                                cancellationToken
-                            )
+                            solution,
+                            pattern,
+                            criteria,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                     return Convert(result, solution, cancellationToken);
@@ -296,11 +296,11 @@ namespace Microsoft.CodeAnalysis.Remote
 
                     var result =
                         await DeclarationFinder.FindSourceDeclarationsWithPatternInCurrentProcessAsync(
-                                project,
-                                pattern,
-                                criteria,
-                                cancellationToken
-                            )
+                            project,
+                            pattern,
+                            criteria,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                     return Convert(result, solution, cancellationToken);

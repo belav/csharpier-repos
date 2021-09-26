@@ -111,11 +111,11 @@ namespace System.Net.Test.Common
                             );
 
                             await Stream.AuthenticateAsServerAsync(
-                                    _options.ServerCertificate,
-                                    _options.RequireClientAuthentication,
-                                    _options.AllowedProtocols,
-                                    false
-                                )
+                                _options.ServerCertificate,
+                                _options.RequireClientAuthentication,
+                                _options.AllowedProtocols,
+                                false
+                            )
                                 .ConfigureAwait(false);
 
                             _log.WriteLine(

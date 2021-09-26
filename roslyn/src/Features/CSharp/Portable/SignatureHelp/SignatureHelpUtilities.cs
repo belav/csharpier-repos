@@ -85,12 +85,13 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             AttributeArgumentListSyntax,
             IEnumerable<string?>
         > s_getAttributeArgumentListNames = list =>
-            list.Arguments.Select(
-                argument =>
-                    argument.NameColon != null
-                        ? argument.NameColon.Name.Identifier.ValueText
-                        : argument.NameEquals?.Name.Identifier.ValueText
-            );
+            list.Arguments
+                .Select(
+                    argument =>
+                        argument.NameColon != null
+                            ? argument.NameColon.Name.Identifier.ValueText
+                            : argument.NameEquals?.Name.Identifier.ValueText
+                );
 
         internal static SignatureHelpState? GetSignatureHelpState(
             BaseArgumentListSyntax argumentList,
@@ -186,10 +187,11 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             // Note that the tuple initially parses as a parenthesized expression
             if (
                 token.IsKind(SyntaxKind.OpenParenToken)
-                && token.Parent.IsKind(
-                    SyntaxKind.ParenthesizedExpression,
-                    out ParenthesizedExpressionSyntax? parenExpr
-                )
+                && token.Parent
+                    .IsKind(
+                        SyntaxKind.ParenthesizedExpression,
+                        out ParenthesizedExpressionSyntax? parenExpr
+                    )
             )
             {
                 var parenthesizedExpr = parenExpr.WalkUpParentheses();

@@ -52,7 +52,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
                     sampleSitePath,
                     "--environment",
                     Environment.ToString(),
-                }.Concat(AdditionalArguments).ToArray()
+                }
+                    .Concat(AdditionalArguments)
+                    .ToArray()
             );
         }
     }

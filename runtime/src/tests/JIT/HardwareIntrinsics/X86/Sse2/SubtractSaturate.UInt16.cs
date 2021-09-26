@@ -374,7 +374,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Sse2).GetMethod(
+            var result = typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.SubtractSaturate),
                     new Type[] { typeof(Vector128<UInt16>), typeof(Vector128<UInt16>) }
                 )
@@ -395,7 +396,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse2).GetMethod(
+            var result = typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.SubtractSaturate),
                     new Type[] { typeof(Vector128<UInt16>), typeof(Vector128<UInt16>) }
                 )
@@ -416,7 +418,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse2).GetMethod(
+            var result = typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.SubtractSaturate),
                     new Type[] { typeof(Vector128<UInt16>), typeof(Vector128<UInt16>) }
                 )
@@ -694,14 +697,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse2)}.{nameof(Sse2.SubtractSaturate)}<UInt16>(Vector128<UInt16>, Vector128<UInt16>): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse2)}.{nameof(Sse2.SubtractSaturate)}<UInt16>(Vector128<UInt16>, Vector128<UInt16>): {method} failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -24,10 +24,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         protected override bool IsKeyboardFocusableCore() => true;
 
         protected override string GetNameCore() =>
-            string.Format(
-                EditorFeaturesResources.An_inline_rename_session_is_active_for_identifier_0,
-                _identifier
-            );
+            string
+                .Format(
+                    EditorFeaturesResources.An_inline_rename_session_is_active_for_identifier_0,
+                    _identifier
+                );
 
         protected override AutomationControlType GetAutomationControlTypeCore() =>
             AutomationControlType.Custom;

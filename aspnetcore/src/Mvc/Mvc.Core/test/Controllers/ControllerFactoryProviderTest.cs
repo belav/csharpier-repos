@@ -110,8 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
             var propertyActivator1 = new Mock<IControllerPropertyActivator>();
             propertyActivator1.Setup(
-                    p => p.GetActivatorDelegate(It.IsAny<ControllerActionDescriptor>())
-                )
+                p => p.GetActivatorDelegate(It.IsAny<ControllerActionDescriptor>())
+            )
                 .Returns(
                     (context, controllerObject) =>
                     {
@@ -122,8 +122,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
             var propertyActivator2 = new Mock<IControllerPropertyActivator>();
             propertyActivator2.Setup(
-                    p => p.GetActivatorDelegate(It.IsAny<ControllerActionDescriptor>())
-                )
+                p => p.GetActivatorDelegate(It.IsAny<ControllerActionDescriptor>())
+            )
                 .Returns(
                     (context, controllerObject) =>
                     {

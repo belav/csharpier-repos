@@ -32,17 +32,15 @@ namespace System.Threading.Tests
                 Assert.True(sl.IsHeld);
                 Assert.True(sl.IsHeldByCurrentThread);
                 Task.Factory.StartNew(
-                        () =>
-                        {
-                            Assert.True(sl.IsHeld);
-                            Assert.False(sl.IsHeldByCurrentThread);
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
-                    .GetAwaiter()
-                    .GetResult();
+                    () =>
+                    {
+                        Assert.True(sl.IsHeld);
+                        Assert.False(sl.IsHeldByCurrentThread);
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                ).GetAwaiter().GetResult();
                 sl.Exit();
             }
         }

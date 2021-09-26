@@ -120,12 +120,8 @@ namespace System.Linq.Expressions.Compiler
                 }
 
                 // Clone the lambda, replacing the body & variables.
-                return Expression<T>.Create(
-                    newBody,
-                    lambda.Name,
-                    lambda.TailCall,
-                    new ParameterList(lambda)
-                );
+                return Expression<T>
+                    .Create(newBody, lambda.Name, lambda.TailCall, new ParameterList(lambda));
             }
 
             return lambda;

@@ -150,7 +150,8 @@ namespace Microsoft.Data.Sqlite
             }
 
             _connection.ExecuteNonQuery(
-                new StringBuilder().Append("SAVEPOINT \"")
+                new StringBuilder()
+                    .Append("SAVEPOINT \"")
                     .Append(savepointName.Replace("\"", "\"\""))
                     .Append("\";")
                     .ToString()
@@ -178,7 +179,8 @@ namespace Microsoft.Data.Sqlite
             }
 
             _connection.ExecuteNonQuery(
-                new StringBuilder().Append("ROLLBACK TO SAVEPOINT \"")
+                new StringBuilder()
+                    .Append("ROLLBACK TO SAVEPOINT \"")
                     .Append(savepointName.Replace("\"", "\"\""))
                     .Append("\";")
                     .ToString()
@@ -207,7 +209,8 @@ namespace Microsoft.Data.Sqlite
             }
 
             _connection.ExecuteNonQuery(
-                new StringBuilder().Append("RELEASE SAVEPOINT \"")
+                new StringBuilder()
+                    .Append("RELEASE SAVEPOINT \"")
                     .Append(savepointName.Replace("\"", "\"\""))
                     .Append("\";")
                     .ToString()

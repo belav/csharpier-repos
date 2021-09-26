@@ -197,18 +197,12 @@ namespace System.Security.Cryptography
                 if (padding.Mode == RSAEncryptionPaddingMode.Oaep)
                 {
                     Debug.Assert(padding.OaepHashAlgorithm.Name != null);
-                    hashAlgorithm = Interop.Crypto.HashAlgorithmToEvp(
-                        padding.OaepHashAlgorithm.Name
-                    );
+                    hashAlgorithm = Interop.Crypto
+                        .HashAlgorithmToEvp(padding.OaepHashAlgorithm.Name);
                 }
 
-                return Interop.Crypto.RsaDecrypt(
-                    key,
-                    data,
-                    padding.Mode,
-                    hashAlgorithm,
-                    destination
-                );
+                return Interop.Crypto
+                    .RsaDecrypt(key, data, padding.Mode, hashAlgorithm, destination);
             }
 
             public override byte[] Encrypt(byte[] data, RSAEncryptionPadding padding)
@@ -302,13 +296,8 @@ namespace System.Security.Cryptography
                     try
                     {
                         rsaPaddingProcessor.PadOaep(data, tmp);
-                        returnValue = Interop.Crypto.RsaPublicEncrypt(
-                            tmp.Length,
-                            tmp,
-                            destination,
-                            key,
-                            rsaPadding
-                        );
+                        returnValue = Interop.Crypto
+                            .RsaPublicEncrypt(tmp.Length, tmp, destination, key, rsaPadding);
                     }
 
                     finally
@@ -321,13 +310,8 @@ namespace System.Security.Cryptography
                 {
                     Debug.Assert(rsaPadding != Interop.Crypto.RsaPadding.NoPadding);
 
-                    returnValue = Interop.Crypto.RsaPublicEncrypt(
-                        data.Length,
-                        data,
-                        destination,
-                        key,
-                        rsaPadding
-                    );
+                    returnValue = Interop.Crypto
+                        .RsaPublicEncrypt(data.Length, data, destination, key, rsaPadding);
                 }
 
                 CheckReturn(returnValue);
@@ -370,10 +354,8 @@ namespace System.Security.Cryptography
                 // It's entirely possible that this line will cause the key to be generated in the first place.
                 SafeRsaHandle key = GetKey();
 
-                RSAParameters rsaParameters = Interop.Crypto.ExportRsaParameters(
-                    key,
-                    includePrivateParameters
-                );
+                RSAParameters rsaParameters = Interop.Crypto
+                    .ExportRsaParameters(key, includePrivateParameters);
                 bool hasPrivateKey = rsaParameters.D != null;
 
                 if (
@@ -400,25 +382,26 @@ namespace System.Security.Cryptography
                 try
                 {
                     if (
-                        !Interop.Crypto.SetRsaParameters(
-                            key,
-                            parameters.Modulus,
-                            parameters.Modulus != null ? parameters.Modulus.Length : 0,
-                            parameters.Exponent,
-                            parameters.Exponent != null ? parameters.Exponent.Length : 0,
-                            parameters.D,
-                            parameters.D != null ? parameters.D.Length : 0,
-                            parameters.P,
-                            parameters.P != null ? parameters.P.Length : 0,
-                            parameters.DP,
-                            parameters.DP != null ? parameters.DP.Length : 0,
-                            parameters.Q,
-                            parameters.Q != null ? parameters.Q.Length : 0,
-                            parameters.DQ,
-                            parameters.DQ != null ? parameters.DQ.Length : 0,
-                            parameters.InverseQ,
-                            parameters.InverseQ != null ? parameters.InverseQ.Length : 0
-                        )
+                        !Interop.Crypto
+                            .SetRsaParameters(
+                                key,
+                                parameters.Modulus,
+                                parameters.Modulus != null ? parameters.Modulus.Length : 0,
+                                parameters.Exponent,
+                                parameters.Exponent != null ? parameters.Exponent.Length : 0,
+                                parameters.D,
+                                parameters.D != null ? parameters.D.Length : 0,
+                                parameters.P,
+                                parameters.P != null ? parameters.P.Length : 0,
+                                parameters.DP,
+                                parameters.DP != null ? parameters.DP.Length : 0,
+                                parameters.Q,
+                                parameters.Q != null ? parameters.Q.Length : 0,
+                                parameters.DQ,
+                                parameters.DQ != null ? parameters.DQ.Length : 0,
+                                parameters.InverseQ,
+                                parameters.InverseQ != null ? parameters.InverseQ.Length : 0
+                            )
                     )
                     {
                         throw Interop.Crypto.CreateOpenSslCryptographicException();
@@ -762,13 +745,8 @@ namespace System.Security.Cryptography
                     return false;
                 }
 
-                int written = Interop.Crypto.RsaSignHash(
-                    key,
-                    padding.Mode,
-                    digestAlgorithm,
-                    hash,
-                    destination
-                );
+                int written = Interop.Crypto
+                    .RsaSignHash(key, padding.Mode, digestAlgorithm, hash, destination);
                 Debug.Assert(written == bytesRequired);
                 bytesWritten = written;
 
@@ -847,11 +825,8 @@ namespace System.Security.Cryptography
 
                     try
                     {
-                        int ret = Interop.Crypto.RsaVerificationPrimitive(
-                            signature,
-                            unwrapped,
-                            rsa
-                        );
+                        int ret = Interop.Crypto
+                            .RsaVerificationPrimitive(signature, unwrapped, rsa);
 
                         CheckReturn(ret);
 

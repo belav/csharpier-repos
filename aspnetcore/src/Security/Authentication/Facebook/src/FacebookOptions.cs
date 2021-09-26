@@ -55,11 +55,12 @@ namespace Microsoft.AspNetCore.Authentication.Facebook
             if (string.IsNullOrEmpty(AppId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.Exception_OptionMustBeProvided,
-                        nameof(AppId)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Exception_OptionMustBeProvided,
+                            nameof(AppId)
+                        ),
                     nameof(AppId)
                 );
             }
@@ -67,11 +68,12 @@ namespace Microsoft.AspNetCore.Authentication.Facebook
             if (string.IsNullOrEmpty(AppSecret))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.Exception_OptionMustBeProvided,
-                        nameof(AppSecret)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Exception_OptionMustBeProvided,
+                            nameof(AppSecret)
+                        ),
                     nameof(AppSecret)
                 );
             }

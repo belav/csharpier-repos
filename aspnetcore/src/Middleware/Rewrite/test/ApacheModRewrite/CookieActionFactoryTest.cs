@@ -12,9 +12,8 @@ namespace Microsoft.AspNetCore.Rewrite.Test
         [Fact]
         public void Creates_OneCookie()
         {
-            var cookie = new CookieActionFactory().Create(
-                "NAME:VALUE:DOMAIN:1440:path:secure:httponly"
-            );
+            var cookie = new CookieActionFactory()
+                .Create("NAME:VALUE:DOMAIN:1440:path:secure:httponly");
 
             Assert.Equal("NAME", cookie.Name);
             Assert.Equal("VALUE", cookie.Value);
@@ -28,9 +27,8 @@ namespace Microsoft.AspNetCore.Rewrite.Test
         [Fact]
         public void Creates_OneCookie_AltSeparator()
         {
-            var action = new CookieActionFactory().Create(
-                ";NAME;VALUE:WithColon;DOMAIN;1440;path;secure;httponly"
-            );
+            var action = new CookieActionFactory()
+                .Create(";NAME;VALUE:WithColon;DOMAIN;1440;path;secure;httponly");
 
             Assert.Equal("NAME", action.Name);
             Assert.Equal("VALUE:WithColon", action.Value);

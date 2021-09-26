@@ -58,10 +58,11 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 if (!Directory.Exists(DeploymentParameters.ApplicationPath))
                 {
                     throw new DirectoryNotFoundException(
-                        string.Format(
-                            "Application path {0} does not exist.",
-                            DeploymentParameters.ApplicationPath
-                        )
+                        string
+                            .Format(
+                                "Application path {0} does not exist.",
+                                DeploymentParameters.ApplicationPath
+                            )
                     );
                 }
 

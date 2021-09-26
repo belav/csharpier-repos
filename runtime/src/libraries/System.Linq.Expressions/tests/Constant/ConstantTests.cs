@@ -397,9 +397,9 @@ namespace System.Linq.Expressions.Tests
         private static MethodInfo GlobalMethod(params Type[] parameterTypes)
         {
             ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(
-                    new AssemblyName("Name"),
-                    AssemblyBuilderAccess.RunAndCollect
-                )
+                new AssemblyName("Name"),
+                AssemblyBuilderAccess.RunAndCollect
+            )
                 .DefineDynamicModule("Module");
             MethodBuilder globalMethod = module.DefineGlobalMethod(
                 "GlobalMethod",
@@ -419,15 +419,18 @@ namespace System.Linq.Expressions.Tests
                 MethodInfo value in new MethodInfo[]
                 {
                     null,
-                    typeof(SomePublicMethodsForLdToken).GetMethod(
-                        nameof(SomePublicMethodsForLdToken.Bar),
-                        BindingFlags.Public | BindingFlags.Static
-                    ),
-                    typeof(SomePublicMethodsForLdToken).GetMethod(
-                        nameof(SomePublicMethodsForLdToken.Qux),
-                        BindingFlags.Public | BindingFlags.Static
-                    ),
-                    typeof(SomePublicMethodsForLdToken).GetMethod(
+                    typeof(SomePublicMethodsForLdToken)
+                        .GetMethod(
+                            nameof(SomePublicMethodsForLdToken.Bar),
+                            BindingFlags.Public | BindingFlags.Static
+                        ),
+                    typeof(SomePublicMethodsForLdToken)
+                        .GetMethod(
+                            nameof(SomePublicMethodsForLdToken.Qux),
+                            BindingFlags.Public | BindingFlags.Static
+                        ),
+                    typeof(SomePublicMethodsForLdToken)
+                        .GetMethod(
                             nameof(SomePublicMethodsForLdToken.Qux),
                             BindingFlags.Public | BindingFlags.Static
                         )
@@ -449,7 +452,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckConstructorInfoConstantTest(bool useInterpreter)
         {
             foreach (
-                ConstructorInfo value in typeof(SomePublicMethodsForLdToken).GetConstructors()
+                ConstructorInfo value in typeof(SomePublicMethodsForLdToken)
+                    .GetConstructors()
                     .Concat(typeof(string).GetConstructors())
                     .Concat(typeof(List<>).GetConstructors())
                     .Append(null)

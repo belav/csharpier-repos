@@ -19,9 +19,8 @@ namespace Microsoft.AspNetCore.Components
                 () =>
                 {
                     var parameters = new Dictionary<string, object> { { "unknownparameter", 123 } };
-                    _ = new DynamicComponent().SetParametersAsync(
-                        ParameterView.FromDictionary(parameters)
-                    );
+                    _ = new DynamicComponent()
+                        .SetParametersAsync(ParameterView.FromDictionary(parameters));
                 }
             );
 

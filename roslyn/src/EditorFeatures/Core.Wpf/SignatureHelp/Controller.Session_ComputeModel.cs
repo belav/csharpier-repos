@@ -78,10 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         AssertIsBackground();
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        var document = Controller.DocumentProvider.GetDocument(
-                            caretPosition.Snapshot,
-                            cancellationToken
-                        );
+                        var document = Controller.DocumentProvider
+                            .GetDocument(caretPosition.Snapshot, cancellationToken);
                         if (document == null)
                         {
                             return currentModel;
@@ -104,9 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
                             if (
                                 triggerInfo.TriggerCharacter.HasValue
-                                && !currentModel.Provider.IsRetriggerCharacter(
-                                    triggerInfo.TriggerCharacter.Value
-                                )
+                                && !currentModel.Provider
+                                    .IsRetriggerCharacter(triggerInfo.TriggerCharacter.Value)
                             )
                             {
                                 return currentModel;
@@ -115,12 +112,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
                         // first try to query the providers that can trigger on the specified character
                         var (provider, items) = await ComputeItemsAsync(
-                                providers,
-                                caretPosition,
-                                triggerInfo,
-                                document,
-                                cancellationToken
-                            )
+                            providers,
+                            caretPosition,
+                            triggerInfo,
+                            document,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         if (provider == null)
@@ -181,9 +178,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         );
 
                         return model.WithSelectedItem(
-                                selection.SelectedItem,
-                                selection.UserSelected
-                            )
+                            selection.SelectedItem,
+                            selection.UserSelected
+                        )
                             .WithSelectedParameter(selection.SelectedParameter);
                     }
                 }
@@ -211,9 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     && currentModel.UserSelected
                 )
                 {
-                    var userSelectedItem = items.Items.FirstOrDefault(
-                        i => DisplayPartsMatch(i, currentModel.SelectedItem)
-                    );
+                    var userSelectedItem = items.Items
+                        .FirstOrDefault(i => DisplayPartsMatch(i, currentModel.SelectedItem));
                     if (userSelectedItem != null)
                     {
                         userSelected = true;
@@ -233,9 +229,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 {
                     // If the provider did not pick a default, and it's the same provider as the previous
                     // model we have, then try to return the same item that we had before.
-                    lastSelectionOrDefault = items.Items.FirstOrDefault(
-                        i => DisplayPartsMatch(i, currentModel.SelectedItem)
-                    );
+                    lastSelectionOrDefault = items.Items
+                        .FirstOrDefault(i => DisplayPartsMatch(i, currentModel.SelectedItem));
                 }
 
                 if (lastSelectionOrDefault == null)
@@ -273,11 +268,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         cancellationToken.ThrowIfCancellationRequested();
 
                         var currentItems = await provider.GetItemsAsync(
-                                document,
-                                caretPosition,
-                                triggerInfo,
-                                cancellationToken
-                            )
+                            document,
+                            caretPosition,
+                            triggerInfo,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (
                             currentItems != null

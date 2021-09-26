@@ -115,9 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 // the model should be only updated here
                 if (lastCompletedModel != null)
                 {
-                    var semanticVersion = await document.Project.GetDependentSemanticVersionAsync(
-                            CancellationToken.None
-                        )
+                    var semanticVersion = await document.Project
+                        .GetDependentSemanticVersionAsync(CancellationToken.None)
                         .ConfigureAwait(false);
                     if (
                         lastCompletedModel.SemanticVersionStamp == semanticVersion
@@ -138,9 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                     if (items != null)
                     {
                         items.Do(i => i.InitializeTrackingSpans(snapshot));
-                        var version = await document.Project.GetDependentSemanticVersionAsync(
-                                cancellationToken
-                            )
+                        var version = await document.Project
+                            .GetDependentSemanticVersionAsync(cancellationToken)
                             .ConfigureAwait(false);
 
                         return new NavigationBarModel(

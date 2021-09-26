@@ -97,7 +97,8 @@ namespace System.Linq.Expressions.Tests
             );
             Func<NonGenericClass.E1, NonGenericClass.E2> lambda = Expression.Lambda<
                 Func<NonGenericClass.E1, NonGenericClass.E2>
-            >(call, p).Compile(useInterpreter);
+            >(call, p)
+                .Compile(useInterpreter);
 
             Assert.Equal(NonGenericClass.E2.One, lambda(NonGenericClass.E1.One));
             Assert.Equal(NonGenericClass.E2.Two, lambda(NonGenericClass.E1.Two));
@@ -189,9 +190,9 @@ namespace System.Linq.Expressions.Tests
             );
             MethodCallExpression call = Expression.Call(member, typeof(Mutable).GetMethod("Foo"));
             Func<Wrapper<Mutable>, int> lambda = Expression.Lambda<Func<Wrapper<Mutable>, int>>(
-                    call,
-                    p
-                )
+                call,
+                p
+            )
                 .Compile(useInterpreter);
 
             var wrapper = new Wrapper<Mutable>();
@@ -211,9 +212,9 @@ namespace System.Linq.Expressions.Tests
             );
             MethodCallExpression call = Expression.Call(member, typeof(Mutable).GetMethod("Foo"));
             Func<Wrapper<Mutable>, int> lambda = Expression.Lambda<Func<Wrapper<Mutable>, int>>(
-                    call,
-                    p
-                )
+                call,
+                p
+            )
                 .Compile(useInterpreter);
 
             var wrapper = new Wrapper<Mutable>();
@@ -232,9 +233,9 @@ namespace System.Linq.Expressions.Tests
             );
             MethodCallExpression call = Expression.Call(member, typeof(Mutable).GetMethod("Foo"));
             Func<Wrapper<Mutable>, int> lambda = Expression.Lambda<Func<Wrapper<Mutable>, int>>(
-                    call,
-                    p
-                )
+                call,
+                p
+            )
                 .Compile(useInterpreter);
 
             var wrapper = new Wrapper<Mutable>();
@@ -437,30 +438,22 @@ namespace System.Linq.Expressions.Tests
 
         private static Expression s_valid => Expression.Constant(5);
 
-        private static MethodInfo s_method0 = typeof(NonGenericClass).GetMethod(
-            nameof(NonGenericClass.Method0)
-        );
-        private static MethodInfo s_method1 = typeof(NonGenericClass).GetMethod(
-            nameof(NonGenericClass.Method1)
-        );
-        private static MethodInfo s_method2 = typeof(NonGenericClass).GetMethod(
-            nameof(NonGenericClass.Method2)
-        );
-        private static MethodInfo s_method3 = typeof(NonGenericClass).GetMethod(
-            nameof(NonGenericClass.Method3)
-        );
-        private static MethodInfo s_method4 = typeof(NonGenericClass).GetMethod(
-            nameof(NonGenericClass.Method4)
-        );
-        private static MethodInfo s_method5 = typeof(NonGenericClass).GetMethod(
-            nameof(NonGenericClass.Method5)
-        );
-        private static MethodInfo s_method6 = typeof(NonGenericClass).GetMethod(
-            nameof(NonGenericClass.Method6)
-        );
-        private static MethodInfo s_method7 = typeof(NonGenericClass).GetMethod(
-            nameof(NonGenericClass.Method7)
-        );
+        private static MethodInfo s_method0 = typeof(NonGenericClass)
+            .GetMethod(nameof(NonGenericClass.Method0));
+        private static MethodInfo s_method1 = typeof(NonGenericClass)
+            .GetMethod(nameof(NonGenericClass.Method1));
+        private static MethodInfo s_method2 = typeof(NonGenericClass)
+            .GetMethod(nameof(NonGenericClass.Method2));
+        private static MethodInfo s_method3 = typeof(NonGenericClass)
+            .GetMethod(nameof(NonGenericClass.Method3));
+        private static MethodInfo s_method4 = typeof(NonGenericClass)
+            .GetMethod(nameof(NonGenericClass.Method4));
+        private static MethodInfo s_method5 = typeof(NonGenericClass)
+            .GetMethod(nameof(NonGenericClass.Method5));
+        private static MethodInfo s_method6 = typeof(NonGenericClass)
+            .GetMethod(nameof(NonGenericClass.Method6));
+        private static MethodInfo s_method7 = typeof(NonGenericClass)
+            .GetMethod(nameof(NonGenericClass.Method7));
 
         public static IEnumerable<object[]> Method_Invalid_TestData()
         {
@@ -621,9 +614,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void InstanceMethod_NullInstance_ThrowsArgumentException()
         {
-            MethodInfo method = typeof(NonGenericClass).GetMethod(
-                nameof(NonGenericClass.InstanceMethod)
-            );
+            MethodInfo method = typeof(NonGenericClass)
+                .GetMethod(nameof(NonGenericClass.InstanceMethod));
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Expression.Call(method, s_valid)
@@ -679,9 +671,8 @@ namespace System.Linq.Expressions.Tests
         public static void StaticMethod_NonNullInstance_ThrowsArgumentException()
         {
             Expression instance = Expression.Constant(new NonGenericClass());
-            MethodInfo method = typeof(NonGenericClass).GetMethod(
-                nameof(NonGenericClass.StaticMethod)
-            );
+            MethodInfo method = typeof(NonGenericClass)
+                .GetMethod(nameof(NonGenericClass.StaticMethod));
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Expression.Call(instance, method, s_valid)
@@ -1159,29 +1150,23 @@ namespace System.Linq.Expressions.Tests
 
             MethodCallExpression e1 = Expression.Call(
                 null,
-                typeof(SomeMethods).GetMethod(
-                    nameof(SomeMethods.S0),
-                    BindingFlags.Static | BindingFlags.Public
-                )
+                typeof(SomeMethods)
+                    .GetMethod(nameof(SomeMethods.S0), BindingFlags.Static | BindingFlags.Public)
             );
             Assert.Equal("S0()", e1.ToString());
 
             MethodCallExpression e2 = Expression.Call(
                 null,
-                typeof(SomeMethods).GetMethod(
-                    nameof(SomeMethods.S1),
-                    BindingFlags.Static | BindingFlags.Public
-                ),
+                typeof(SomeMethods)
+                    .GetMethod(nameof(SomeMethods.S1), BindingFlags.Static | BindingFlags.Public),
                 Expression.Parameter(typeof(int), "x")
             );
             Assert.Equal("S1(x)", e2.ToString());
 
             MethodCallExpression e3 = Expression.Call(
                 null,
-                typeof(SomeMethods).GetMethod(
-                    nameof(SomeMethods.S2),
-                    BindingFlags.Static | BindingFlags.Public
-                ),
+                typeof(SomeMethods)
+                    .GetMethod(nameof(SomeMethods.S2), BindingFlags.Static | BindingFlags.Public),
                 Expression.Parameter(typeof(int), "x"),
                 Expression.Parameter(typeof(int), "y")
             );
@@ -1189,29 +1174,23 @@ namespace System.Linq.Expressions.Tests
 
             MethodCallExpression e4 = Expression.Call(
                 Expression.Parameter(typeof(SomeMethods), "o"),
-                typeof(SomeMethods).GetMethod(
-                    nameof(SomeMethods.I0),
-                    BindingFlags.Instance | BindingFlags.Public
-                )
+                typeof(SomeMethods)
+                    .GetMethod(nameof(SomeMethods.I0), BindingFlags.Instance | BindingFlags.Public)
             );
             Assert.Equal("o.I0()", e4.ToString());
 
             MethodCallExpression e5 = Expression.Call(
                 Expression.Parameter(typeof(SomeMethods), "o"),
-                typeof(SomeMethods).GetMethod(
-                    nameof(SomeMethods.I1),
-                    BindingFlags.Instance | BindingFlags.Public
-                ),
+                typeof(SomeMethods)
+                    .GetMethod(nameof(SomeMethods.I1), BindingFlags.Instance | BindingFlags.Public),
                 Expression.Parameter(typeof(int), "x")
             );
             Assert.Equal("o.I1(x)", e5.ToString());
 
             MethodCallExpression e6 = Expression.Call(
                 Expression.Parameter(typeof(SomeMethods), "o"),
-                typeof(SomeMethods).GetMethod(
-                    nameof(SomeMethods.I2),
-                    BindingFlags.Instance | BindingFlags.Public
-                ),
+                typeof(SomeMethods)
+                    .GetMethod(nameof(SomeMethods.I2), BindingFlags.Instance | BindingFlags.Public),
                 Expression.Parameter(typeof(int), "x"),
                 Expression.Parameter(typeof(int), "y")
             );
@@ -1219,20 +1198,22 @@ namespace System.Linq.Expressions.Tests
 
             MethodCallExpression e7 = Expression.Call(
                 null,
-                typeof(ExtensionMethods).GetMethod(
-                    nameof(ExtensionMethods.E0),
-                    BindingFlags.Static | BindingFlags.Public
-                ),
+                typeof(ExtensionMethods)
+                    .GetMethod(
+                        nameof(ExtensionMethods.E0),
+                        BindingFlags.Static | BindingFlags.Public
+                    ),
                 Expression.Parameter(typeof(int), "x")
             );
             Assert.Equal("x.E0()", e7.ToString());
 
             MethodCallExpression e8 = Expression.Call(
                 null,
-                typeof(ExtensionMethods).GetMethod(
-                    nameof(ExtensionMethods.E1),
-                    BindingFlags.Static | BindingFlags.Public
-                ),
+                typeof(ExtensionMethods)
+                    .GetMethod(
+                        nameof(ExtensionMethods.E1),
+                        BindingFlags.Static | BindingFlags.Public
+                    ),
                 Expression.Parameter(typeof(int), "x"),
                 Expression.Parameter(typeof(int), "y")
             );
@@ -1240,10 +1221,11 @@ namespace System.Linq.Expressions.Tests
 
             MethodCallExpression e9 = Expression.Call(
                 null,
-                typeof(ExtensionMethods).GetMethod(
-                    nameof(ExtensionMethods.E2),
-                    BindingFlags.Static | BindingFlags.Public
-                ),
+                typeof(ExtensionMethods)
+                    .GetMethod(
+                        nameof(ExtensionMethods.E2),
+                        BindingFlags.Static | BindingFlags.Public
+                    ),
                 Expression.Parameter(typeof(int), "x"),
                 Expression.Parameter(typeof(int), "y"),
                 Expression.Parameter(typeof(int), "z")

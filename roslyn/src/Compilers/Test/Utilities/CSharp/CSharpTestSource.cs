@@ -52,8 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
                     return trees;
                 case CSharpTestSource[] testSources:
                     return testSources.SelectMany(
-                            s => s.GetSyntaxTrees(parseOptions, sourceFileName)
-                        )
+                        s => s.GetSyntaxTrees(parseOptions, sourceFileName)
+                    )
                         .ToArray();
                 case null:
                     return Array.Empty<SyntaxTree>();

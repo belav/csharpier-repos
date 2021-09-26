@@ -60,7 +60,8 @@ namespace Microsoft.Extensions.Http.Logging
             // not really anything to surround.
             Log.RequestStart(_logger, request, shouldRedactHeaderValue);
             var stopwatch = ValueStopwatch.StartNew();
-            HttpResponseMessage response = await base.SendAsync(request, cancellationToken)
+            HttpResponseMessage response = await base
+                .SendAsync(request, cancellationToken)
                 .ConfigureAwait(false);
             Log.RequestEnd(_logger, response, stopwatch.GetElapsedTime(), shouldRedactHeaderValue);
 

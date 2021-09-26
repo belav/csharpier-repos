@@ -25,9 +25,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
       End Sub
 End Class"
             );
-            VisualStudio.Editor.Verify.ErrorTags(
-                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[50-51]"
-            );
+            VisualStudio.Editor.Verify
+                .ErrorTags("Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[50-51]");
         }
 
         public virtual void VerifySemanticErrorSquiggles()
@@ -39,9 +38,8 @@ End Class"
       End Sub
 End Class"
             );
-            VisualStudio.Editor.Verify.ErrorTags(
-                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'Bar'[33-36]"
-            );
+            VisualStudio.Editor.Verify
+                .ErrorTags("Microsoft.VisualStudio.Text.Tagging.ErrorTag:'Bar'[33-36]");
         }
     }
 }

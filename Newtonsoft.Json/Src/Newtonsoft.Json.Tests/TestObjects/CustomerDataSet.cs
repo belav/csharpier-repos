@@ -270,10 +270,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             global::System.IO.MemoryStream stream = new global::System.IO.MemoryStream();
             WriteXmlSchema(new global::System.Xml.XmlTextWriter(stream, null));
             stream.Position = 0;
-            return global::System.Xml.Schema.XmlSchema.Read(
-                new global::System.Xml.XmlTextReader(stream),
-                null
-            );
+            return global::System.Xml.Schema.XmlSchema
+                .Read(new global::System.Xml.XmlTextReader(stream), null);
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -374,8 +372,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     dsSchema.Write(s1);
                     for (
                         global::System.Collections.IEnumerator schemas = xs.Schemas(
-                                dsSchema.TargetNamespace
-                            )
+                            dsSchema.TargetNamespace
+                        )
                             .GetEnumerator();
                         schemas.MoveNext();
 
@@ -786,8 +784,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                         dsSchema.Write(s1);
                         for (
                             global::System.Collections.IEnumerator schemas = xs.Schemas(
-                                    dsSchema.TargetNamespace
-                                )
+                                dsSchema.TargetNamespace
+                            )
                                 .GetEnumerator();
                             schemas.MoveNext();
 

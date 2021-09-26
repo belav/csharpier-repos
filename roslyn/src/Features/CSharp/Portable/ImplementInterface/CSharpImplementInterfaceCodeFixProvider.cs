@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             var model = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            var actions = token.Parent.GetAncestorsOrThis<TypeSyntax>()
+            var actions = token.Parent
+                .GetAncestorsOrThis<TypeSyntax>()
                 .Where(_interfaceName)
                 .Select(n => service.GetCodeActions(document, model, n, cancellationToken))
                 .FirstOrDefault(a => !a.IsEmpty);

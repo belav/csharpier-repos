@@ -21,10 +21,10 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void MonitorUsesFactory()
         {
-            var services = new ServiceCollection().AddSingleton<
-                IOptionsFactory<FakeOptions>,
-                FakeOptionsFactory
-            >().Configure<FakeOptions>(o => o.Message = "Ignored").BuildServiceProvider();
+            var services = new ServiceCollection()
+                .AddSingleton<IOptionsFactory<FakeOptions>, FakeOptionsFactory>()
+                .Configure<FakeOptions>(o => o.Message = "Ignored")
+                .BuildServiceProvider();
 
             var monitor = services.GetRequiredService<IOptionsMonitor<FakeOptions>>();
             Assert.Equal(FakeOptionsFactory.Options, monitor.CurrentValue);
@@ -78,7 +78,8 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanClearNamedOptions()
         {
-            var services = new ServiceCollection().AddOptions()
+            var services = new ServiceCollection()
+                .AddOptions()
                 .AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
 
             var sp = services.BuildServiceProvider();
@@ -105,7 +106,8 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanWatchNamedOptions()
         {
-            var services = new ServiceCollection().AddOptions()
+            var services = new ServiceCollection()
+                .AddOptions()
                 .AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
             var changeToken = new FakeChangeToken();
             services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(

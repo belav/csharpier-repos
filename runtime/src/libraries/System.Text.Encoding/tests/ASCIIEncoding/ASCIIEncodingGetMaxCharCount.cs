@@ -20,19 +20,19 @@ namespace System.Text.Tests
             Assert.Equal(
                 byteCount,
                 Encoding.GetEncoding(
-                        "ascii",
-                        EncoderFallback.ExceptionFallback,
-                        DecoderFallback.ExceptionFallback
-                    )
+                    "ascii",
+                    EncoderFallback.ExceptionFallback,
+                    DecoderFallback.ExceptionFallback
+                )
                     .GetMaxCharCount(byteCount)
             );
             Assert.Equal(
                 byteCount,
                 Encoding.GetEncoding(
-                        "ascii",
-                        EncoderFallback.ExceptionFallback,
-                        new CustomLengthDecoderFallback(-5)
-                    )
+                    "ascii",
+                    EncoderFallback.ExceptionFallback,
+                    new CustomLengthDecoderFallback(-5)
+                )
                     .GetMaxCharCount(byteCount)
             );
         }

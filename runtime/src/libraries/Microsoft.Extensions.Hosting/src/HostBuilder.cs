@@ -170,8 +170,8 @@ namespace Microsoft.Extensions.Hosting
 
         private void BuildHostConfiguration()
         {
-            IConfigurationBuilder configBuilder =
-                new ConfigurationBuilder().AddInMemoryCollection(); // Make sure there's some default storage since there are no default providers
+            IConfigurationBuilder configBuilder = new ConfigurationBuilder()
+                .AddInMemoryCollection(); // Make sure there's some default storage since there are no default providers
 
             foreach (Action<IConfigurationBuilder> buildAction in _configureHostConfigActions)
             {
@@ -227,9 +227,8 @@ namespace Microsoft.Extensions.Hosting
 
         private void BuildAppConfiguration()
         {
-            IConfigurationBuilder configBuilder = new ConfigurationBuilder().SetBasePath(
-                    _hostingEnvironment.ContentRootPath
-                )
+            IConfigurationBuilder configBuilder = new ConfigurationBuilder()
+                .SetBasePath(_hostingEnvironment.ContentRootPath)
                 .AddConfiguration(_hostConfiguration, shouldDisposeConfiguration: true);
 
             foreach (
@@ -276,13 +275,12 @@ namespace Microsoft.Extensions.Hosting
                     );
                 }
             );
-            services.AddOptions()
-                .Configure<HostOptions>(
-                    options =>
-                    {
-                        options.Initialize(_hostConfiguration);
-                    }
-                );
+            services.AddOptions().Configure<HostOptions>(
+                options =>
+                {
+                    options.Initialize(_hostConfiguration);
+                }
+            );
             services.AddLogging();
 
             foreach (

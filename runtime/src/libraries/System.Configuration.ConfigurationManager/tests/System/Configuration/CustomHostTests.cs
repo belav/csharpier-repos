@@ -21,23 +21,22 @@ namespace System.Configuration.Tests
         public void FilePathIsPopulatedCorrectly()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        MakeAssemblyGetEntryAssemblyReturnNull();
+                () =>
+                {
+                    MakeAssemblyGetEntryAssemblyReturnNull();
 
-                        string expectedFilePathEnding = RuntimeInformation.IsOSPlatform(
-                            OSPlatform.Windows
-                        )
-                            ? "dotnet.exe.config"
-                            : "dotnet.config";
+                    string expectedFilePathEnding = RuntimeInformation.IsOSPlatform(
+                        OSPlatform.Windows
+                    )
+                        ? "dotnet.exe.config"
+                        : "dotnet.config";
 
-                        Configuration config = ConfigurationManager.OpenExeConfiguration(
-                            ConfigurationUserLevel.None
-                        );
-                        Assert.EndsWith(expectedFilePathEnding, config.FilePath);
-                    }
-                )
-                .Dispose();
+                    Configuration config = ConfigurationManager.OpenExeConfiguration(
+                        ConfigurationUserLevel.None
+                    );
+                    Assert.EndsWith(expectedFilePathEnding, config.FilePath);
+                }
+            ).Dispose();
         }
 
         /// <summary>
@@ -45,10 +44,8 @@ namespace System.Configuration.Tests
         /// </summary>
         private static void MakeAssemblyGetEntryAssemblyReturnNull()
         {
-            typeof(Assembly).GetField(
-                    "s_forceNullEntryPoint",
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )
+            typeof(Assembly)
+                .GetField("s_forceNullEntryPoint", BindingFlags.NonPublic | BindingFlags.Static)
                 .SetValue(null, true);
 
             Assert.Null(Assembly.GetEntryAssembly());

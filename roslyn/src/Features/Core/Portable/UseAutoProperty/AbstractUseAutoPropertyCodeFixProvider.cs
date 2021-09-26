@@ -96,8 +96,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             var declarator = (TVariableDeclarator)declaratorLocation.FindNode(cancellationToken);
             var fieldDocument = solution.GetRequiredDocument(declarator.SyntaxTree);
             var fieldSemanticModel = await fieldDocument.GetRequiredSemanticModelAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var fieldSymbol = (IFieldSymbol)fieldSemanticModel.GetRequiredDeclaredSymbol(
                 declarator,
@@ -107,8 +107,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             var property = GetPropertyDeclaration(propertyLocation.FindNode(cancellationToken));
             var propertyDocument = solution.GetRequiredDocument(property.SyntaxTree);
             var propertySemanticModel = await propertyDocument.GetRequiredSemanticModelAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var propertySymbol = (IPropertySymbol)propertySemanticModel.GetRequiredDeclaredSymbol(
                 property,
@@ -121,11 +121,11 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 .ConfigureAwait(false);
 
             var fieldLocations = await Renamer.FindRenameLocationsAsync(
-                    solution,
-                    fieldSymbol,
-                    RenameOptionSet.From(solution),
-                    cancellationToken
-                )
+                solution,
+                fieldSymbol,
+                RenameOptionSet.From(solution),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // First, create the updated property we want to replace the old property with
@@ -136,14 +136,14 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 cancellationToken
             );
             var updatedProperty = await UpdatePropertyAsync(
-                    propertyDocument,
-                    compilation,
-                    fieldSymbol,
-                    propertySymbol,
-                    property,
-                    isWrittenToOutsideOfConstructor,
-                    cancellationToken
-                )
+                propertyDocument,
+                compilation,
+                fieldSymbol,
+                propertySymbol,
+                property,
+                isWrittenToOutsideOfConstructor,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Note: rename will try to update all the references in linked files as well.  However,
@@ -187,10 +187,10 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             );
 
             var resolution = await filteredLocations.ResolveConflictsAsync(
-                    propertySymbol.Name,
-                    nonConflictSymbols: ImmutableHashSet.Create<ISymbol>(propertySymbol),
-                    cancellationToken
-                )
+                propertySymbol.Name,
+                nonConflictSymbols: ImmutableHashSet.Create<ISymbol>(propertySymbol),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             Contract.ThrowIfTrue(resolution.ErrorMessage != null);
@@ -202,7 +202,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             propertyDocument = solution.GetRequiredDocument(propertyDocument.Id);
             Debug.Assert(fieldDocument.Project == propertyDocument.Project);
 
-            compilation = await fieldDocument.Project.GetRequiredCompilationAsync(cancellationToken)
+            compilation = await fieldDocument.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             fieldSymbol = (IFieldSymbol?)fieldSymbol.GetSymbolKey(cancellationToken)
@@ -211,11 +212,12 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 .Resolve(compilation, cancellationToken: cancellationToken).Symbol;
             Contract.ThrowIfTrue(fieldSymbol == null || propertySymbol == null);
 
-            declarator = (TVariableDeclarator)await fieldSymbol.DeclaringSyntaxReferences[
-                0
-            ].GetSyntaxAsync(cancellationToken).ConfigureAwait(false);
+            declarator = (TVariableDeclarator)await fieldSymbol.DeclaringSyntaxReferences[0]
+                .GetSyntaxAsync(cancellationToken)
+                .ConfigureAwait(false);
             property = GetPropertyDeclaration(
-                await propertySymbol.DeclaringSyntaxReferences[0].GetSyntaxAsync(cancellationToken)
+                await propertySymbol.DeclaringSyntaxReferences[0]
+                    .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false)
             );
 
@@ -271,8 +273,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             {
                 // Same file.  Have to do this in a slightly complicated fashion.
                 var declaratorTreeRoot = await fieldDocument.GetRequiredSyntaxRootAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var editor = new SyntaxEditor(
@@ -292,12 +294,12 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             {
                 // In different files.  Just update both files.
                 var fieldTreeRoot = await fieldDocument.GetRequiredSyntaxRootAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var propertyTreeRoot = await propertyDocument.GetRequiredSyntaxRootAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var newFieldTreeRoot = fieldTreeRoot.RemoveNode(nodeToRemove, syntaxRemoveOptions);
@@ -305,16 +307,16 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 var newPropertyTreeRoot = propertyTreeRoot.ReplaceNode(property, updatedProperty);
 
                 newFieldTreeRoot = await FormatAsync(
-                        newFieldTreeRoot,
-                        fieldDocument,
-                        cancellationToken
-                    )
+                    newFieldTreeRoot,
+                    fieldDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 newPropertyTreeRoot = await FormatAsync(
-                        newPropertyTreeRoot,
-                        propertyDocument,
-                        cancellationToken
-                    )
+                    newPropertyTreeRoot,
+                    propertyDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var updatedSolution = solution.WithDocumentSyntaxRoot(
@@ -407,23 +409,25 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             CancellationToken cancellationToken
         )
         {
-            var constructorNodes = field.ContainingType.GetMembers()
+            var constructorNodes = field.ContainingType
+                .GetMembers()
                 .Where(m => m.IsConstructor())
                 .SelectMany(c => c.DeclaringSyntaxReferences)
                 .Select(s => s.GetSyntax(cancellationToken))
                 .Select(n => n.FirstAncestorOrSelf<TConstructorDeclaration>())
                 .WhereNotNull()
                 .ToSet();
-            return renameLocations.Locations.Any(
-                loc =>
-                    IsWrittenToOutsideOfConstructorOrProperty(
-                        renameLocations.Solution,
-                        loc,
-                        propertyDeclaration,
-                        constructorNodes,
-                        cancellationToken
-                    )
-            );
+            return renameLocations.Locations
+                .Any(
+                    loc =>
+                        IsWrittenToOutsideOfConstructorOrProperty(
+                            renameLocations.Solution,
+                            loc,
+                            propertyDeclaration,
+                            constructorNodes,
+                            cancellationToken
+                        )
+                );
         }
 
         private static bool IsWrittenToOutsideOfConstructorOrProperty(

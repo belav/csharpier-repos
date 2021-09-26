@@ -84,12 +84,8 @@ namespace System.Diagnostics
                     true
                 );
 
-                bool succeeded = Interop.Kernel32.EnumProcessModules(
-                    processHandle,
-                    null,
-                    0,
-                    out int needed
-                );
+                bool succeeded = Interop.Kernel32
+                    .EnumProcessModules(processHandle, null, 0, out int needed);
 
                 // The API we need to use to enumerate process modules differs on two factors:
                 //   1) If our process is running in WOW64.
@@ -104,20 +100,19 @@ namespace System.Diagnostics
                 if (!succeeded)
                 {
                     if (
-                        !Interop.Kernel32.IsWow64Process(
-                            Interop.Kernel32.GetCurrentProcess(),
-                            out bool sourceProcessIsWow64
-                        )
+                        !Interop.Kernel32
+                            .IsWow64Process(
+                                Interop.Kernel32.GetCurrentProcess(),
+                                out bool sourceProcessIsWow64
+                            )
                     )
                     {
                         throw new Win32Exception();
                     }
 
                     if (
-                        !Interop.Kernel32.IsWow64Process(
-                            processHandle,
-                            out bool targetProcessIsWow64
-                        )
+                        !Interop.Kernel32
+                            .IsWow64Process(processHandle, out bool targetProcessIsWow64)
                     )
                     {
                         throw new Win32Exception();
@@ -174,11 +169,8 @@ namespace System.Diagnostics
                         IntPtr moduleHandle = moduleHandles[i];
                         Interop.Kernel32.NtModuleInfo ntModuleInfo;
                         if (
-                            !Interop.Kernel32.GetModuleInformation(
-                                processHandle,
-                                moduleHandle,
-                                out ntModuleInfo
-                            )
+                            !Interop.Kernel32
+                                .GetModuleInformation(processHandle, moduleHandle, out ntModuleInfo)
                         )
                         {
                             HandleLastWin32Error();
@@ -192,12 +184,8 @@ namespace System.Diagnostics
                             BaseAddress = ntModuleInfo.BaseOfDll
                         };
 
-                        int length = Interop.Kernel32.GetModuleBaseName(
-                            processHandle,
-                            moduleHandle,
-                            chars,
-                            chars.Length
-                        );
+                        int length = Interop.Kernel32
+                            .GetModuleBaseName(processHandle, moduleHandle, chars, chars.Length);
                         if (length == 0)
                         {
                             HandleLastWin32Error();
@@ -206,12 +194,8 @@ namespace System.Diagnostics
 
                         module.ModuleName = new string(chars, 0, length);
 
-                        length = Interop.Kernel32.GetModuleFileNameEx(
-                            processHandle,
-                            moduleHandle,
-                            chars,
-                            chars.Length
-                        );
+                        length = Interop.Kernel32
+                            .GetModuleFileNameEx(processHandle, moduleHandle, chars, chars.Length);
                         if (length == 0)
                         {
                             HandleLastWin32Error();
@@ -333,12 +317,13 @@ namespace System.Diagnostics
                         // by GetProcessInfos below
                         fixed (long* bufferPtr = buffer)
                         {
-                            uint status = Interop.NtDll.NtQuerySystemInformation(
-                                Interop.NtDll.SystemProcessInformation,
-                                bufferPtr,
-                                (uint)(buffer.Length * sizeof(long)),
-                                &requiredSize
-                            );
+                            uint status = Interop.NtDll
+                                .NtQuerySystemInformation(
+                                    Interop.NtDll.SystemProcessInformation,
+                                    bufferPtr,
+                                    (uint)(buffer.Length * sizeof(long)),
+                                    &requiredSize
+                                );
 
                             if (status != Interop.NtDll.STATUS_INFO_LENGTH_MISMATCH)
                             {
@@ -459,9 +444,8 @@ namespace System.Diagnostics
                         else
                         {
                             // for normal process without name, using the process ID.
-                            processInfo.ProcessName = processInfo.ProcessId.ToString(
-                                CultureInfo.InvariantCulture
-                            );
+                            processInfo.ProcessName = processInfo.ProcessId
+                                .ToString(CultureInfo.InvariantCulture);
                         }
                     }
                     else

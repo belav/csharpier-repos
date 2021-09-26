@@ -42,8 +42,8 @@ namespace Identity.DefaultUI.WebSite
             services.AddDbContext<TContext>(
                 options =>
                     options.ConfigureWarnings(
-                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
-                        )
+                        b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                    )
                         //.UseSqlServer(
                         //    Configuration.GetConnectionString("DefaultConnection"),
                         //    sqlOptions => sqlOptions.MigrationsAssembly("Identity.DefaultUI.WebSite")

@@ -34,13 +34,14 @@ namespace System.Net.Security
 
             try
             {
-                _sslContext = Interop.OpenSsl.AllocateSslContext(
-                    credential.Protocols,
-                    credential.CertHandle,
-                    credential.CertKeyHandle,
-                    credential.Policy,
-                    sslAuthenticationOptions
-                );
+                _sslContext = Interop.OpenSsl
+                    .AllocateSslContext(
+                        credential.Protocols,
+                        credential.CertHandle,
+                        credential.CertKeyHandle,
+                        credential.Policy,
+                        sslAuthenticationOptions
+                    );
             }
             catch (Exception ex)
             {

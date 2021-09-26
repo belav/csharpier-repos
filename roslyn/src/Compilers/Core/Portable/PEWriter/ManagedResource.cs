@@ -66,12 +66,13 @@ namespace Microsoft.Cci
                         if (bytesWritten != count)
                         {
                             throw new EndOfStreamException(
-                                string.Format(
-                                    CultureInfo.CurrentUICulture,
-                                    CodeAnalysisResources.ResourceStreamEndedUnexpectedly,
-                                    bytesWritten,
-                                    count
-                                )
+                                string
+                                    .Format(
+                                        CultureInfo.CurrentUICulture,
+                                        CodeAnalysisResources.ResourceStreamEndedUnexpectedly,
+                                        bytesWritten,
+                                        count
+                                    )
                             );
                         }
                         resourceWriter.Align(8);

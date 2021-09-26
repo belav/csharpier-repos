@@ -155,9 +155,8 @@ namespace System.Drawing
                 {
                     Point pt = (Point)value;
 
-                    ConstructorInfo ctor = typeof(Point).GetConstructor(
-                        new Type[] { typeof(int), typeof(int) }
-                    );
+                    ConstructorInfo ctor = typeof(Point)
+                        .GetConstructor(new Type[] { typeof(int), typeof(int) });
                     if (ctor != null)
                     {
                         return new InstanceDescriptor(ctor, new object[] { pt.X, pt.Y });

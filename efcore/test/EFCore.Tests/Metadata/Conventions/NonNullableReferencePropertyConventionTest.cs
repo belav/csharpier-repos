@@ -115,18 +115,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 propertyBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
             );
 
-            new NonNullableReferencePropertyConvention(CreateDependencies()).ProcessPropertyAdded(
-                propertyBuilder,
-                context
-            );
+            new NonNullableReferencePropertyConvention(CreateDependencies())
+                .ProcessPropertyAdded(propertyBuilder, context);
         }
 
         private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
         {
             var conventionSet = new ConventionSet();
-            conventionSet.EntityTypeAddedConventions.Add(
-                new PropertyDiscoveryConvention(CreateDependencies())
-            );
+            conventionSet.EntityTypeAddedConventions
+                .Add(new PropertyDiscoveryConvention(CreateDependencies()));
 
             var modelBuilder = new InternalModelBuilder(new Model(conventionSet));
 
@@ -134,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private class A

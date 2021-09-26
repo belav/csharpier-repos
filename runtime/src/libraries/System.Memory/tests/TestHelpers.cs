@@ -425,11 +425,14 @@ namespace System
             Memory<T> mem = default;
             object boxedMemory = mem;
 
-            typeof(Memory<T>).GetField("_object", BindingFlags.Instance | BindingFlags.NonPublic)
+            typeof(Memory<T>)
+                .GetField("_object", BindingFlags.Instance | BindingFlags.NonPublic)
                 .SetValue(boxedMemory, obj);
-            typeof(Memory<T>).GetField("_index", BindingFlags.Instance | BindingFlags.NonPublic)
+            typeof(Memory<T>)
+                .GetField("_index", BindingFlags.Instance | BindingFlags.NonPublic)
                 .SetValue(boxedMemory, offset);
-            typeof(Memory<T>).GetField("_length", BindingFlags.Instance | BindingFlags.NonPublic)
+            typeof(Memory<T>)
+                .GetField("_length", BindingFlags.Instance | BindingFlags.NonPublic)
                 .SetValue(boxedMemory, length);
 
             return (Memory<T>)boxedMemory;

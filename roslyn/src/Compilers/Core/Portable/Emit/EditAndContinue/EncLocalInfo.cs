@@ -80,14 +80,15 @@ namespace Microsoft.CodeAnalysis.Emit
                 return "[invalid]";
             }
 
-            return string.Format(
-                "[Id={0}, SynthesizedKind={1}, Type={2}, Constraints={3}, Sig={4}]",
-                SlotInfo.Id,
-                SlotInfo.SynthesizedKind,
-                Type,
-                Constraints,
-                (Signature != null) ? BitConverter.ToString(Signature) : "null"
-            );
+            return string
+                .Format(
+                    "[Id={0}, SynthesizedKind={1}, Type={2}, Constraints={3}, Sig={4}]",
+                    SlotInfo.Id,
+                    SlotInfo.SynthesizedKind,
+                    Type,
+                    Constraints,
+                    (Signature != null) ? BitConverter.ToString(Signature) : "null"
+                );
         }
     }
 }

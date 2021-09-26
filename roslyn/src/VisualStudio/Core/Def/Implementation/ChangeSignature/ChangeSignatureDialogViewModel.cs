@@ -62,8 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             _classificationFormatMap = classificationFormatMap;
             _classificationTypeMap = classificationTypeMap;
 
-            _notificationService =
-                document.Project.Solution.Workspace.Services.GetRequiredService<INotificationService>();
+            _notificationService = document.Project.Solution.Workspace.Services
+                .GetRequiredService<INotificationService>();
 
             // This index is displayed to users. That is why we start it from 1.
             var initialDisplayIndex = 1;
@@ -134,9 +134,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 if (!parameter.IsRemoved)
                 {
                     parameterNameOverlapMap.GetOrAdd(
-                            parameter.ParameterName,
-                            _ => new List<ParameterViewModel>()
-                        )
+                        parameter.ParameterName,
+                        _ => new List<ParameterViewModel>()
+                    )
                         .Add(parameter);
                 }
                 else
@@ -408,9 +408,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 {
                     case ExistingParameterViewModel existingParameter:
                         displayParts.AddRange(
-                            existingParameter.ParameterSymbol.ToDisplayParts(
-                                s_parameterDisplayFormat
-                            )
+                            existingParameter.ParameterSymbol
+                                .ToDisplayParts(s_parameterDisplayFormat)
                         );
                         break;
 
@@ -561,13 +560,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 || !_parametersWithoutDefaultValues.OfType<ExistingParameterViewModel>()
                     .Select(p => p.ParameterSymbol)
                     .SequenceEqual(
-                        _originalParameterConfiguration.ParametersWithoutDefaultValues.Cast<ExistingParameter>()
+                        _originalParameterConfiguration.ParametersWithoutDefaultValues
+                            .Cast<ExistingParameter>()
                             .Select(p => p.Symbol)
                     )
                 || !_parametersWithDefaultValues.OfType<ExistingParameterViewModel>()
                     .Select(p => p.ParameterSymbol)
                     .SequenceEqual(
-                        _originalParameterConfiguration.RemainingEditableParameters.Cast<ExistingParameter>()
+                        _originalParameterConfiguration.RemainingEditableParameters
+                            .Cast<ExistingParameter>()
                             .Select(p => p.Symbol)
                     );
 
@@ -634,11 +635,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     return string.Empty;
                 }
 
-                return string.Format(
-                    ServicesVSResources.Move_0_above_1,
-                    AllParameters[SelectedIndex!.Value].ShortAutomationText,
-                    AllParameters[SelectedIndex!.Value - 1].ShortAutomationText
-                );
+                return string
+                    .Format(
+                        ServicesVSResources.Move_0_above_1,
+                        AllParameters[SelectedIndex!.Value].ShortAutomationText,
+                        AllParameters[SelectedIndex!.Value - 1].ShortAutomationText
+                    );
             }
         }
 
@@ -651,11 +653,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     return string.Empty;
                 }
 
-                return string.Format(
-                    ServicesVSResources.Move_0_below_1,
-                    AllParameters[SelectedIndex!.Value].ShortAutomationText,
-                    AllParameters[SelectedIndex!.Value + 1].ShortAutomationText
-                );
+                return string
+                    .Format(
+                        ServicesVSResources.Move_0_below_1,
+                        AllParameters[SelectedIndex!.Value].ShortAutomationText,
+                        AllParameters[SelectedIndex!.Value + 1].ShortAutomationText
+                    );
             }
         }
 
@@ -668,10 +671,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     return string.Empty;
                 }
 
-                return string.Format(
-                    ServicesVSResources.Remove_0,
-                    AllParameters[SelectedIndex!.Value].ShortAutomationText
-                );
+                return string
+                    .Format(
+                        ServicesVSResources.Remove_0,
+                        AllParameters[SelectedIndex!.Value].ShortAutomationText
+                    );
             }
         }
 
@@ -684,10 +688,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     return string.Empty;
                 }
 
-                return string.Format(
-                    ServicesVSResources.Restore_0,
-                    AllParameters[SelectedIndex!.Value].ShortAutomationText
-                );
+                return string
+                    .Format(
+                        ServicesVSResources.Restore_0,
+                        AllParameters[SelectedIndex!.Value].ShortAutomationText
+                    );
             }
         }
     }

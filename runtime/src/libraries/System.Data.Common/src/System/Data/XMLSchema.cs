@@ -350,9 +350,8 @@ namespace System.Data
                 {
                     if (props == null)
                     {
-                        object val = TypeDescriptor.GetProperties(instance)[
-                            "ExtendedProperties"
-                        ].GetValue(instance);
+                        object val = TypeDescriptor.GetProperties(instance)["ExtendedProperties"]
+                            .GetValue(instance);
                         Debug.Assert(
                             val is PropertyCollection,
                             "We can set values only for classes that have ExtendedProperties"
@@ -438,9 +437,8 @@ namespace System.Data
                 {
                     if (props == null)
                     {
-                        object val = TypeDescriptor.GetProperties(instance)[
-                            "ExtendedProperties"
-                        ].GetValue(instance);
+                        object val = TypeDescriptor.GetProperties(instance)["ExtendedProperties"]
+                            .GetValue(instance);
                         Debug.Assert(
                             val is PropertyCollection,
                             "We can set values only for classes that have ExtendedProperties"
@@ -456,10 +454,8 @@ namespace System.Data
         internal void HandleRefTableProperties(ArrayList RefTables, XmlSchemaElement element)
         {
             string typeName = GetInstanceName(element);
-            DataTable table = _ds.Tables.GetTable(
-                XmlConvert.DecodeName(typeName),
-                element.QualifiedName.Namespace
-            );
+            DataTable table = _ds.Tables
+                .GetTable(XmlConvert.DecodeName(typeName), element.QualifiedName.Namespace);
             Debug.Assert(table != null, "ref table should have been already created");
 
             SetProperties(table, element.UnhandledAttributes);
@@ -1608,9 +1604,8 @@ namespace System.Data
 
             if (0 < key.Length)
             {
-                UniqueConstraint found = (UniqueConstraint)key[0].Table.Constraints.FindConstraint(
-                    new UniqueConstraint(name, key)
-                );
+                UniqueConstraint found = (UniqueConstraint)key[0].Table.Constraints
+                    .FindConstraint(new UniqueConstraint(name, key));
 
                 if (found == null)
                 {
@@ -2546,11 +2541,12 @@ namespace System.Data
                         )
                         || // backward compatability :SQL BU DT 310912
                         (
-                            string.Equals(
-                                attrib.QualifiedName.Namespace,
-                                column.Namespace,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    attrib.QualifiedName.Namespace,
+                                    column.Namespace,
+                                    StringComparison.Ordinal
+                                )
                         )
                     )
                     {
@@ -2757,11 +2753,12 @@ namespace System.Data
                         )
                         || // backward compatability :SQL BU DT 310912
                         (
-                            string.Equals(
-                                elem.QualifiedName.Namespace,
-                                column.Namespace,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    elem.QualifiedName.Namespace,
+                                    column.Namespace,
+                                    StringComparison.Ordinal
+                                )
                         )
                     )
                     {
@@ -2948,10 +2945,13 @@ namespace System.Data
                             }
                             else
                             {
-                                DataTable tempTable = _ds.Tables.GetTable(
-                                    XmlConvert.DecodeName(GetInstanceName((XmlSchemaElement)el)),
-                                    node.QualifiedName.Namespace
-                                );
+                                DataTable tempTable = _ds.Tables
+                                    .GetTable(
+                                        XmlConvert.DecodeName(
+                                            GetInstanceName((XmlSchemaElement)el)
+                                        ),
+                                        node.QualifiedName.Namespace
+                                    );
                                 if (tempTable != null)
                                 {
                                     tableSequenceList.Add(tempTable); // if ref table is created, add it

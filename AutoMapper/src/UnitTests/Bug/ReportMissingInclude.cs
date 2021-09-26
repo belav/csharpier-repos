@@ -17,12 +17,7 @@ namespace AutoMapper.UnitTests.Bug
                             cfg.CreateMap<object, BaseType>().Include<object, ChildType>();
                         }
                     )
-            ).ShouldThrowException<InvalidOperationException>(
-                ex =>
-                    ex.Message.ShouldStartWith(
-                        $"Missing map from {typeof(object)} to {typeof(ChildType)}."
-                    )
-            );
+            ).ShouldThrowException<InvalidOperationException>(ex => ex.Message.ShouldStartWith($"Missing map from {typeof(object)} to {typeof(ChildType)}."));
         }
 
         public class BaseType { }
@@ -47,12 +42,7 @@ namespace AutoMapper.UnitTests.Bug
                                 .Include<ReportMissingIncludeCreateMissingMap, ChildType>();
                         }
                     )
-            ).ShouldThrowException<InvalidOperationException>(
-                ex =>
-                    ex.Message.ShouldStartWith(
-                        $"Missing map from {typeof(ReportMissingIncludeCreateMissingMap)} to {typeof(ChildType)}."
-                    )
-            );
+            ).ShouldThrowException<InvalidOperationException>(ex => ex.Message.ShouldStartWith($"Missing map from {typeof(ReportMissingIncludeCreateMissingMap)} to {typeof(ChildType)}."));
         }
 
         public class BaseType { }
@@ -76,12 +66,7 @@ namespace AutoMapper.UnitTests.Bug
                             cfg.CreateMap<object, ChildType>().IncludeBase<object, BaseType>();
                         }
                     )
-            ).ShouldThrowException<InvalidOperationException>(
-                ex =>
-                    ex.Message.ShouldStartWith(
-                        $"Missing map from {typeof(object)} to {typeof(BaseType)}."
-                    )
-            );
+            ).ShouldThrowException<InvalidOperationException>(ex => ex.Message.ShouldStartWith($"Missing map from {typeof(object)} to {typeof(BaseType)}."));
         }
 
         public class BaseType { }
@@ -106,12 +91,7 @@ namespace AutoMapper.UnitTests.Bug
                                 .IncludeBase<ReportMissingIncludeBaseCreateMissingMap, BaseType>();
                         }
                     )
-            ).ShouldThrowException<InvalidOperationException>(
-                ex =>
-                    ex.Message.ShouldStartWith(
-                        $"Missing map from {typeof(ReportMissingIncludeBaseCreateMissingMap)} to {typeof(BaseType)}."
-                    )
-            );
+            ).ShouldThrowException<InvalidOperationException>(ex => ex.Message.ShouldStartWith($"Missing map from {typeof(ReportMissingIncludeBaseCreateMissingMap)} to {typeof(BaseType)}."));
         }
 
         public class BaseType { }

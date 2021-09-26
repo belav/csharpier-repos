@@ -78,11 +78,11 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                 }
 
                 var combinations = names.Join(
-                        attributes,
-                        _ => true,
-                        _ => true,
-                        (name, attr) => new { name, attr }
-                    )
+                    attributes,
+                    _ => true,
+                    _ => true,
+                    (name, attr) => new { name, attr }
+                )
                     .ToList();
                 var data = new TheoryData<string, FileAttributes, ExclusionFilters, bool>();
 

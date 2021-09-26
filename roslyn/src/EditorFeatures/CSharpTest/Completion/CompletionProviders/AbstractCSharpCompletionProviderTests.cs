@@ -54,24 +54,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             CompletionItemFlags? flags = null
         )
         {
-            return base.VerifyWorkerAsync(
-                code,
-                position,
-                expectedItemOrNull,
-                expectedDescriptionOrNull,
-                sourceCodeKind,
-                usePreviousCharAsTrigger,
-                checkForAbsence,
-                glyph,
-                matchPriority,
-                hasSuggestionItem,
-                displayTextSuffix,
-                displayTextPrefix,
-                inlineDescription,
-                isComplexTextEdit,
-                matchingFilters,
-                flags
-            );
+            return base
+                .VerifyWorkerAsync(
+                    code,
+                    position,
+                    expectedItemOrNull,
+                    expectedDescriptionOrNull,
+                    sourceCodeKind,
+                    usePreviousCharAsTrigger,
+                    checkForAbsence,
+                    glyph,
+                    matchPriority,
+                    hasSuggestionItem,
+                    displayTextSuffix,
+                    displayTextPrefix,
+                    inlineDescription,
+                    isComplexTextEdit,
+                    matchingFilters,
+                    flags
+                );
         }
 
         private protected override async Task VerifyWorkerAsync(
@@ -230,24 +231,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             code = code.Substring(0, position) + insertText + "/**/" + code.Substring(position);
             position += insertText.Length;
 
-            return base.VerifyWorkerAsync(
-                code,
-                position,
-                expectedItemOrNull,
-                expectedDescriptionOrNull,
-                sourceCodeKind,
-                usePreviousCharAsTrigger,
-                checkForAbsence,
-                glyph,
-                matchPriority,
-                hasSuggestionItem,
-                displayTextSuffix,
-                displayTextPrefix,
-                inlineDescription,
-                isComplexTextEdit,
-                matchingFilters,
-                flags: null
-            );
+            return base
+                .VerifyWorkerAsync(
+                    code,
+                    position,
+                    expectedItemOrNull,
+                    expectedDescriptionOrNull,
+                    sourceCodeKind,
+                    usePreviousCharAsTrigger,
+                    checkForAbsence,
+                    glyph,
+                    matchPriority,
+                    hasSuggestionItem,
+                    displayTextSuffix,
+                    displayTextPrefix,
+                    inlineDescription,
+                    isComplexTextEdit,
+                    matchingFilters,
+                    flags: null
+                );
         }
 
         private Task VerifyInFrontOfCommentAsync(
@@ -363,13 +365,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var position = hostDocument.CursorPosition.Value;
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        CompletionOptions.EnterKeyBehavior,
-                        LanguageNames.CSharp,
-                        sendThroughEnterOption
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(
+                                CompletionOptions.EnterKeyBehavior,
+                                LanguageNames.CSharp,
+                                sendThroughEnterOption
+                            )
                     )
-                )
             );
 
             var service = GetCompletionService(document.Project);
@@ -379,9 +383,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 position,
                 RoslynTrigger.Invoke
             );
-            var item = completionList.Items.First(
-                i => (i.DisplayText + i.DisplayTextSuffix).StartsWith(textTypedSoFar)
-            );
+            var item = completionList.Items
+                .First(i => (i.DisplayText + i.DisplayTextSuffix).StartsWith(textTypedSoFar));
 
             Assert.Equal(
                 expected,

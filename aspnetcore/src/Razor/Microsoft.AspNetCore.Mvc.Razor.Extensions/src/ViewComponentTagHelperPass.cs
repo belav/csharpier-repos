@@ -88,15 +88,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             }
 
             // Now i has the right insertion point.
-            node.Children.Insert(
-                i,
-                new DefaultTagHelperCreateIntermediateNode()
-                {
-                    FieldName = context.GetFieldName(tagHelper),
-                    TagHelper = tagHelper,
-                    TypeName = context.GetFullyQualifiedName(tagHelper),
-                }
-            );
+            node.Children
+                .Insert(
+                    i,
+                    new DefaultTagHelperCreateIntermediateNode()
+                    {
+                        FieldName = context.GetFieldName(tagHelper),
+                        TagHelper = tagHelper,
+                        TypeName = context.GetFullyQualifiedName(tagHelper),
+                    }
+                );
 
             // Now we need to rewrite any set property nodes to use the default runtime.
             for (i = 0; i < node.Children.Count; i++)
@@ -141,22 +142,23 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
                 i++;
             }
 
-            context.Class.Children.Insert(
-                i,
-                new FieldDeclarationIntermediateNode()
-                {
-                    Annotations =
+            context.Class.Children
+                .Insert(
+                    i,
+                    new FieldDeclarationIntermediateNode()
                     {
+                        Annotations =
                         {
-                            CommonAnnotations.DefaultTagHelperExtension.TagHelperField,
-                            bool.TrueString
+                            {
+                                CommonAnnotations.DefaultTagHelperExtension.TagHelperField,
+                                bool.TrueString
+                            },
                         },
-                    },
-                    Modifiers = { "private", },
-                    FieldName = context.GetFieldName(tagHelper),
-                    FieldType = "global::" + context.GetFullyQualifiedName(tagHelper),
-                }
-            );
+                        Modifiers = { "private", },
+                        FieldName = context.GetFieldName(tagHelper),
+                        FieldType = "global::" + context.GetFullyQualifiedName(tagHelper),
+                    }
+                );
         }
 
         private void AddTagHelperClass(Context context, TagHelperDescriptor tagHelper)

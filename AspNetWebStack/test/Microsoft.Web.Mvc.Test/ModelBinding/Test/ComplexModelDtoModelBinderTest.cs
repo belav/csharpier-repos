@@ -17,16 +17,14 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ControllerContext controllerContext = new ControllerContext();
             MyModel model = new MyModel();
-            ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                () => model,
-                typeof(MyModel)
-            );
+            ModelMetadata modelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(() => model, typeof(MyModel));
             ComplexModelDto dto = new ComplexModelDto(modelMetadata, modelMetadata.Properties);
 
             Mock<IExtensibleModelBinder> mockStringBinder = new Mock<IExtensibleModelBinder>();
             mockStringBinder.Setup(
-                    b => b.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                b => b.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -43,8 +41,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    b => b.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                b => b.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -61,8 +59,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockDateTimeBinder = new Mock<IExtensibleModelBinder>();
             mockDateTimeBinder.Setup(
-                    b => b.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                b => b.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -91,10 +89,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ExtensibleModelBindingContext parentBindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => dto,
-                    typeof(ComplexModelDto)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => dto, typeof(ComplexModelDto)),
                 ModelName = "theModel",
                 ModelBinderProviders = binders
             };

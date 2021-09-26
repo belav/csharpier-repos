@@ -57,11 +57,12 @@ namespace System.Globalization.Tests
             DateTime time = new DateTime(new Random(-55).Next(1, 9999), 12, 31);
             Assert.Equal(
                 53,
-                new ThaiBuddhistCalendar().GetWeekOfYear(
-                    time,
-                    thaiDateFormat.CalendarWeekRule,
-                    thaiDateFormat.FirstDayOfWeek
-                )
+                new ThaiBuddhistCalendar()
+                    .GetWeekOfYear(
+                        time,
+                        thaiDateFormat.CalendarWeekRule,
+                        thaiDateFormat.FirstDayOfWeek
+                    )
             );
         }
     }

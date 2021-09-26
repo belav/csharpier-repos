@@ -34,12 +34,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
 
             var documentKind = context.DocumentKind ?? string.Empty;
-            context.Diagnostics.Add(
-                RazorDiagnosticFactory.CreateCodeTarget_UnsupportedExtension(
-                    documentKind,
-                    typeof(TDependency)
-                )
-            );
+            context.Diagnostics
+                .Add(
+                    RazorDiagnosticFactory.CreateCodeTarget_UnsupportedExtension(
+                        documentKind,
+                        typeof(TDependency)
+                    )
+                );
         }
     }
 }

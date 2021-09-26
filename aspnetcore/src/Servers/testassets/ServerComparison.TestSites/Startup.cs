@@ -15,9 +15,8 @@ namespace ServerComparison.TestSites
             app.Run(
                 ctx =>
                 {
-                    return ctx.Response.WriteAsync(
-                        "Hello World " + RuntimeInformation.ProcessArchitecture
-                    );
+                    return ctx.Response
+                        .WriteAsync("Hello World " + RuntimeInformation.ProcessArchitecture);
                 }
             );
         }

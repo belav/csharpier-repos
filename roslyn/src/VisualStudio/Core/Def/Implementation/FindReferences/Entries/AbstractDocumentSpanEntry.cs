@@ -73,10 +73,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 }
 
                 var results = await service.MapSpansAsync(
-                        documentSpan.Document,
-                        SpecializedCollections.SingletonEnumerable(documentSpan.SourceSpan),
-                        cancellationToken
-                    )
+                    documentSpan.Document,
+                    SpecializedCollections.SingletonEnumerable(documentSpan.SourceSpan),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (results.IsDefaultOrEmpty)

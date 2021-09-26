@@ -69,10 +69,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var unsortedList = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
             var bindingList = new SortableBindingList<ListElement>(list);
 
-            ((IBindingList)bindingList).ApplySort(
-                ListElement.Property("Random"),
-                ListSortDirection.Ascending
-            );
+            ((IBindingList)bindingList)
+                .ApplySort(ListElement.Property("Random"), ListSortDirection.Ascending);
 
             Assert.True(list.SequenceEqual(unsortedList, new ListElementComparer()));
         }
@@ -84,10 +82,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var unsortedList = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
             var bindingList = new SortableBindingList<ListElement>(list);
 
-            ((IBindingList)bindingList).ApplySort(
-                ListElement.Property("ByteArray"),
-                ListSortDirection.Descending
-            );
+            ((IBindingList)bindingList)
+                .ApplySort(ListElement.Property("ByteArray"), ListSortDirection.Descending);
 
             Assert.True(list.SequenceEqual(unsortedList, new ListElementComparer()));
         }
@@ -110,10 +106,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var bindingList = new SortableBindingList<ListElement>(list);
 
-            ((IBindingList)bindingList).ApplySort(
-                ListElement.Property("Int"),
-                ListSortDirection.Ascending
-            );
+            ((IBindingList)bindingList)
+                .ApplySort(ListElement.Property("Int"), ListSortDirection.Ascending);
 
             Assert.True(list.SequenceEqual(sortedList, new ListElementComparer()));
         }
@@ -126,10 +120,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var bindingList = new SortableBindingList<DerivedListElement>(list);
 
-            ((IBindingList)bindingList).ApplySort(
-                ListElement.Property("Int"),
-                ListSortDirection.Ascending
-            );
+            ((IBindingList)bindingList)
+                .ApplySort(ListElement.Property("Int"), ListSortDirection.Ascending);
 
             Assert.True(list.SequenceEqual(sortedList, new ListElementComparer()));
         }

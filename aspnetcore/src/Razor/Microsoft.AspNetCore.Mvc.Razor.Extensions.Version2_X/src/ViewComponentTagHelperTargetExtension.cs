@@ -73,21 +73,23 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             // Initialize declaration.
             using (
-                context.CodeWriter.BuildClassDeclaration(
-                    PublicModifiers,
-                    node.ClassName,
-                    TagHelperTypeName,
-                    interfaces: null,
-                    typeParameters: null
-                )
+                context.CodeWriter
+                    .BuildClassDeclaration(
+                        PublicModifiers,
+                        node.ClassName,
+                        TagHelperTypeName,
+                        interfaces: null,
+                        typeParameters: null
+                    )
             )
             {
                 // Add view component helper.
-                context.CodeWriter.WriteVariableDeclaration(
-                    $"private readonly {ViewComponentHelperTypeName}",
-                    ViewComponentHelperVariableName,
-                    value: null
-                );
+                context.CodeWriter
+                    .WriteVariableDeclaration(
+                        $"private readonly {ViewComponentHelperTypeName}",
+                        ViewComponentHelperVariableName,
+                        value: null
+                    );
 
                 // Add constructor.
                 WriteConstructorString(context.CodeWriter, node.ClassName);
@@ -176,8 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
                         methodParameters
                     );
                 writer.WriteStartAssignment(
-                        $"{TagHelperOutputVariableName}.{TagHelperOutputTagNamePropertyName}"
-                    )
+                    $"{TagHelperOutputVariableName}.{TagHelperOutputTagNamePropertyName}"
+                )
                     .WriteLine("null;");
                 writer.WriteInstanceMethodInvocation(
                     $"{TagHelperOutputVariableName}.{TagHelperOutputContentPropertyName}",
@@ -189,9 +191,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
         private string[] GetMethodParameters(TagHelperDescriptor tagHelper)
         {
-            var propertyNames = tagHelper.BoundAttributes.Select(
-                attribute => attribute.GetPropertyName()
-            );
+            var propertyNames = tagHelper.BoundAttributes
+                .Select(attribute => attribute.GetPropertyName());
             var joinedPropertyNames = string.Join(", ", propertyNames);
             var parametersString = $"new {{ {joinedPropertyNames} }}";
             var viewComponentName = tagHelper.GetViewComponentName();

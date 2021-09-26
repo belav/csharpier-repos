@@ -233,9 +233,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         var dialog = await GetDialogAsync(cancellationTokenSource.Token);
 
                         var memberSelectionList = dialog.GetTestAccessor().Members;
-                        var items =
-                            memberSelectionList.Items.Cast<ExtractInterfaceDialogViewModel.MemberSymbolViewModel>()
-                                .ToArray();
+                        var items = memberSelectionList.Items
+                            .Cast<ExtractInterfaceDialogViewModel.MemberSymbolViewModel>()
+                            .ToArray();
                         var itemViewModel = items.Single(x => x.SymbolName == item);
                         itemViewModel.IsChecked = !itemViewModel.IsChecked;
 

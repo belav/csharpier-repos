@@ -33,14 +33,14 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             var solutionChecksums = await GetAssetAsync<SolutionStateChecksums>(
-                    solutionChecksum,
-                    cancellationToken
-                )
+                solutionChecksum,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var solutionAttributes = await GetAssetAsync<SolutionInfo.SolutionAttributes>(
-                    solutionChecksums.Attributes,
-                    cancellationToken
-                )
+                solutionChecksums.Attributes,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var projects = new List<ProjectInfo>();
@@ -55,23 +55,23 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             var analyzerReferences = await CreateCollectionAsync<AnalyzerReference>(
-                    solutionChecksums.AnalyzerReferences,
-                    cancellationToken
-                )
+                solutionChecksums.AnalyzerReferences,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var info = SolutionInfo.Create(
-                    solutionAttributes.Id,
-                    solutionAttributes.Version,
-                    solutionAttributes.FilePath,
-                    projects,
-                    analyzerReferences
-                )
+                solutionAttributes.Id,
+                solutionAttributes.Version,
+                solutionAttributes.FilePath,
+                projects,
+                analyzerReferences
+            )
                 .WithTelemetryId(solutionAttributes.TelemetryId);
             var options = await GetAssetAsync<SerializableOptionSet>(
-                    solutionChecksums.Options,
-                    cancellationToken
-                )
+                solutionChecksums.Options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return (info, options);
         }
@@ -82,15 +82,15 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             var projectChecksums = await GetAssetAsync<ProjectStateChecksums>(
-                    projectChecksum,
-                    cancellationToken
-                )
+                projectChecksum,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var projectInfo = await GetAssetAsync<ProjectInfo.ProjectAttributes>(
-                    projectChecksums.Info,
-                    cancellationToken
-                )
+                projectChecksums.Info,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!RemoteSupportedLanguages.IsSupported(projectInfo.Language))
             {
@@ -101,67 +101,67 @@ namespace Microsoft.CodeAnalysis.Remote
 
             var compilationOptions = projectInfo.FixUpCompilationOptions(
                 await GetAssetAsync<CompilationOptions>(
-                        projectChecksums.CompilationOptions,
-                        cancellationToken
-                    )
+                    projectChecksums.CompilationOptions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             );
 
             var parseOptions = await GetAssetAsync<ParseOptions>(
-                    projectChecksums.ParseOptions,
-                    cancellationToken
-                )
+                projectChecksums.ParseOptions,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var projectReferences = await CreateCollectionAsync<ProjectReference>(
-                    projectChecksums.ProjectReferences,
-                    cancellationToken
-                )
+                projectChecksums.ProjectReferences,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var metadataReferences = await CreateCollectionAsync<MetadataReference>(
-                    projectChecksums.MetadataReferences,
-                    cancellationToken
-                )
+                projectChecksums.MetadataReferences,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var analyzerReferences = await CreateCollectionAsync<AnalyzerReference>(
-                    projectChecksums.AnalyzerReferences,
-                    cancellationToken
-                )
+                projectChecksums.AnalyzerReferences,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var documentInfos = await CreateDocumentInfosAsync(
-                    projectChecksums.Documents,
-                    cancellationToken
-                )
+                projectChecksums.Documents,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var additionalDocumentInfos = await CreateDocumentInfosAsync(
-                    projectChecksums.AdditionalDocuments,
-                    cancellationToken
-                )
+                projectChecksums.AdditionalDocuments,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var analyzerConfigDocumentInfos = await CreateDocumentInfosAsync(
-                    projectChecksums.AnalyzerConfigDocuments,
-                    cancellationToken
-                )
+                projectChecksums.AnalyzerConfigDocuments,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return ProjectInfo.Create(
-                    projectInfo.Id,
-                    projectInfo.Version,
-                    projectInfo.Name,
-                    projectInfo.AssemblyName,
-                    projectInfo.Language,
-                    projectInfo.FilePath,
-                    projectInfo.OutputFilePath,
-                    compilationOptions,
-                    parseOptions,
-                    documentInfos,
-                    projectReferences,
-                    metadataReferences,
-                    analyzerReferences,
-                    additionalDocumentInfos,
-                    projectInfo.IsSubmission
-                )
+                projectInfo.Id,
+                projectInfo.Version,
+                projectInfo.Name,
+                projectInfo.AssemblyName,
+                projectInfo.Language,
+                projectInfo.FilePath,
+                projectInfo.OutputFilePath,
+                compilationOptions,
+                parseOptions,
+                documentInfos,
+                projectReferences,
+                metadataReferences,
+                analyzerReferences,
+                additionalDocumentInfos,
+                projectInfo.IsSubmission
+            )
                 .WithOutputRefFilePath(projectInfo.OutputRefFilePath)
                 .WithCompilationOutputInfo(projectInfo.CompilationOutputInfo)
                 .WithHasAllInformation(projectInfo.HasAllInformation)
@@ -177,19 +177,19 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             var documentSnapshot = await GetAssetAsync<DocumentStateChecksums>(
-                    documentChecksum,
-                    cancellationToken
-                )
+                documentChecksum,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var documentInfo = await GetAssetAsync<DocumentInfo.DocumentAttributes>(
-                    documentSnapshot.Info,
-                    cancellationToken
-                )
+                documentSnapshot.Info,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var serializableSourceText = await GetAssetAsync<SerializableSourceText>(
-                    documentSnapshot.Text,
-                    cancellationToken
-                )
+                documentSnapshot.Text,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var textLoader = TextLoader.From(

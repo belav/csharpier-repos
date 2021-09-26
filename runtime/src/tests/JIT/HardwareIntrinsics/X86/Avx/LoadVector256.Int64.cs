@@ -90,10 +90,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Avx).GetMethod(
-                    nameof(Avx.LoadVector256),
-                    new Type[] { typeof(Int64*) }
-                )
+            var result = typeof(Avx)
+                .GetMethod(nameof(Avx.LoadVector256), new Type[] { typeof(Int64*) })
                 .Invoke(null, new object[] { Pointer.Box(_dataTable.inArrayPtr, typeof(Int64*)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector256<Int64>)(result));
@@ -184,15 +182,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Avx)}.{nameof(Avx.LoadVector256)}<Int64>(Vector256<Int64>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Avx)}.{nameof(Avx.LoadVector256)}<Int64>(Vector256<Int64>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"   result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -145,21 +145,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             using var _1 = ArrayBuilder<ISymbol>.GetInstance(out var symbols);
 
             await CascadeBetweenAnonymousFunctionParametersAsync(
-                    solution,
-                    parameter,
-                    symbols,
-                    cancellationToken
-                )
+                solution,
+                parameter,
+                symbols,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             CascadeBetweenPropertyAndAccessorParameters(parameter, symbols);
             CascadeBetweenDelegateMethodParameters(parameter, symbols);
             CascadeBetweenPartialMethodParameters(parameter, symbols);
 
             using var _2 =
-                ArrayBuilder<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>.GetInstance(
-                    symbols.Count,
-                    out var result
-                );
+                ArrayBuilder<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>
+                    .GetInstance(symbols.Count, out var result);
             foreach (var symbol in symbols)
                 result.Add((symbol, cascadeDirection));
 
@@ -175,9 +173,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         {
             if (parameter.ContainingSymbol.IsAnonymousFunction())
             {
-                var parameterNode = parameter.DeclaringSyntaxReferences.Select(
-                        r => r.GetSyntax(cancellationToken)
-                    )
+                var parameterNode = parameter.DeclaringSyntaxReferences
+                    .Select(r => r.GetSyntax(cancellationToken))
                     .FirstOrDefault();
                 if (parameterNode != null)
                 {
@@ -189,15 +186,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                         if (semanticFacts.ExposesAnonymousFunctionParameterNames)
                         {
                             var semanticModel = await document.GetRequiredSemanticModelAsync(
-                                    cancellationToken
-                                )
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
 
-                            var lambdaNode =
-                                parameter.ContainingSymbol.DeclaringSyntaxReferences.Select(
-                                        r => r.GetSyntax(cancellationToken)
-                                    )
-                                    .First();
+                            var lambdaNode = parameter.ContainingSymbol.DeclaringSyntaxReferences
+                                .Select(r => r.GetSyntax(cancellationToken))
+                                .First();
                             var convertedType =
                                 semanticModel.GetTypeInfo(
                                     lambdaNode,
@@ -254,11 +249,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     if (
                         symbol is IParameterSymbol
                         && symbol.ContainingSymbol.IsAnonymousFunction()
-                        && SignatureComparer.Instance.HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
-                            parameter.ContainingSymbol,
-                            symbol.ContainingSymbol,
-                            syntaxFacts.IsCaseSensitive
-                        )
+                        && SignatureComparer.Instance
+                            .HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
+                                parameter.ContainingSymbol,
+                                symbol.ContainingSymbol,
+                                syntaxFacts.IsCaseSensitive
+                            )
                         && ParameterNamesMatch(
                             syntaxFacts,
                             (IMethodSymbol)parameter.ContainingSymbol,
@@ -266,9 +262,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                         )
                     )
                     {
-                        var lambdaNode = symbol.ContainingSymbol.DeclaringSyntaxReferences.Select(
-                                r => r.GetSyntax(cancellationToken)
-                            )
+                        var lambdaNode = symbol.ContainingSymbol.DeclaringSyntaxReferences
+                            .Select(r => r.GetSyntax(cancellationToken))
                             .First();
                         var convertedType2 =
                             semanticModel.GetTypeInfo(lambdaNode, cancellationToken).ConvertedType;
@@ -377,8 +372,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     {
                         // cascade to the corresponding parameter in the BeginInvoke method.
                         var beginInvokeMethod = containingType.GetMembers(
-                                WellKnownMemberNames.DelegateBeginInvokeName
-                            )
+                            WellKnownMemberNames.DelegateBeginInvokeName
+                        )
                             .OfType<IMethodSymbol>()
                             .FirstOrDefault();
                         AddParameterAtIndex(results, ordinal, beginInvokeMethod?.Parameters);

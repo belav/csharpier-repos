@@ -52,12 +52,7 @@ namespace System.Diagnostics
             message ??= string.Empty;
             int length =
                 detailMessage != null ? message.Length + 1 + detailMessage.Length : message.Length;
-            TraceEvent(
-                null,
-                SR.TraceAsTraceSource,
-                TraceEventType.Error,
-                0,
-                string.Create(
+            TraceEvent(null, SR.TraceAsTraceSource, TraceEventType.Error, 0, string.Create(
                     length,
                     (message, detailMessage),
                     (dst, v) =>
@@ -73,8 +68,7 @@ namespace System.Diagnostics
                             detail.CopyTo(dst.Slice(prefix.Length + 1, detail.Length));
                         }
                     }
-                )
-            );
+                ));
         }
 
         public override void TraceEvent(

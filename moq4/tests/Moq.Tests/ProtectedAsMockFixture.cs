@@ -74,7 +74,8 @@ namespace Moq.Tests
         public void Setup_can_setup_simple_method()
         {
             bool doSomethingImplInvoked = false;
-            this.protectedMock.Setup(m => m.DoSomethingImpl())
+            this.protectedMock
+                .Setup(m => m.DoSomethingImpl())
                 .Callback(() => doSomethingImplInvoked = true);
 
             this.mock.Object.DoSomething();
@@ -96,7 +97,8 @@ namespace Moq.Tests
         public void Setup_can_match_exact_arguments()
         {
             bool doSomethingImplInvoked = false;
-            this.protectedMock.Setup(m => m.DoSomethingImpl(1))
+            this.protectedMock
+                .Setup(m => m.DoSomethingImpl(1))
                 .Callback(() => doSomethingImplInvoked = true);
 
             this.mock.Object.DoSomething(0);
@@ -110,7 +112,8 @@ namespace Moq.Tests
         public void Setup_can_involve_matchers()
         {
             bool doSomethingImplInvoked = false;
-            this.protectedMock.Setup(m => m.DoSomethingImpl(It.Is<int>(i => i == 1)))
+            this.protectedMock
+                .Setup(m => m.DoSomethingImpl(It.Is<int>(i => i == 1)))
                 .Callback(() => doSomethingImplInvoked = true);
 
             this.mock.Object.DoSomething(0);
@@ -191,7 +194,8 @@ namespace Moq.Tests
         [Fact]
         public void SetupSequence_TResult_can_setup_property()
         {
-            this.protectedMock.SetupSequence(m => m.ReadOnlyPropertyImpl)
+            this.protectedMock
+                .SetupSequence(m => m.ReadOnlyPropertyImpl)
                 .Returns(1)
                 .Throws(new InvalidOperationException())
                 .Returns(3);
@@ -213,7 +217,8 @@ namespace Moq.Tests
         [Fact]
         public void SetupSequence_can_setup_actions()
         {
-            this.protectedMock.SetupSequence(m => m.DoSomethingImpl())
+            this.protectedMock
+                .SetupSequence(m => m.DoSomethingImpl())
                 .Pass()
                 .Pass()
                 .Throws(new InvalidOperationException());
@@ -271,11 +276,12 @@ namespace Moq.Tests
             var exception = Record.Exception(
                 () =>
                 {
-                    this.protectedMock.Verify(
-                        m => m.DoSomethingImpl(),
-                        Times.Exactly(3),
-                        "Wasn't called three times."
-                    );
+                    this.protectedMock
+                        .Verify(
+                            m => m.DoSomethingImpl(),
+                            Times.Exactly(3),
+                            "Wasn't called three times."
+                        );
                 }
             );
 
@@ -322,11 +328,8 @@ namespace Moq.Tests
             var exception = Record.Exception(
                 () =>
                 {
-                    this.protectedMock.VerifyGet(
-                        m => m.ReadOnlyPropertyImpl,
-                        Times.Once(),
-                        "Was not queried."
-                    );
+                    this.protectedMock
+                        .VerifyGet(m => m.ReadOnlyPropertyImpl, Times.Once(), "Was not queried.");
                 }
             );
 

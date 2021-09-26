@@ -134,8 +134,8 @@ namespace Microsoft.Extensions.DependencyInjection
             out IFileProvider? fileProviderOrDefault
         )
         {
-            var spaStaticFilesService =
-                app.ApplicationServices.GetService<ISpaStaticFileProvider>();
+            var spaStaticFilesService = app.ApplicationServices
+                .GetService<ISpaStaticFileProvider>();
             if (spaStaticFilesService != null)
             {
                 // If an ISpaStaticFileProvider was configured but it says no IFileProvider is available

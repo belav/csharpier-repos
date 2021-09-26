@@ -557,11 +557,12 @@ namespace Roslyn.Test.Utilities
             {
                 Assert.True(
                     none,
-                    string.Format(
-                        "Unexpected item found among existing items: {0}\nExisting items: {1}",
-                        ToString(actual.First(predicate)),
-                        ToString(actual)
-                    )
+                    string
+                        .Format(
+                            "Unexpected item found among existing items: {0}\nExisting items: {1}",
+                            ToString(actual.First(predicate)),
+                            ToString(actual)
+                        )
                 );
             }
         }
@@ -582,10 +583,11 @@ namespace Roslyn.Test.Utilities
             {
                 Assert.True(
                     all,
-                    string.Format(
-                        "Not all items satisfy condition:\n{0}",
-                        ToString(actual.Where(i => !predicate(i)))
-                    )
+                    string
+                        .Format(
+                            "Not all items satisfy condition:\n{0}",
+                            ToString(actual.Where(i => !predicate(i)))
+                        )
                 );
             }
         }
@@ -796,10 +798,8 @@ namespace Roslyn.Test.Utilities
                 }
             }
 
-            var expectedString = string.Join(
-                itemSeparator,
-                expected.Take(10).Select(itemInspector)
-            );
+            var expectedString = string
+                .Join(itemSeparator, expected.Take(10).Select(itemInspector));
             var actualString = string.Join(itemSeparator, actual.Select(itemInspector));
 
             var message = new StringBuilder();
@@ -872,12 +872,13 @@ namespace Roslyn.Test.Utilities
             var compareCmd = Path.GetTempFileName() + ".cmd";
             File.WriteAllText(
                 compareCmd,
-                string.Format(
-                    "\"{0}\" \"{1}\" \"{2}\"",
-                    s_diffToolPath,
-                    actualFilePath,
-                    expectedFilePath
-                )
+                string
+                    .Format(
+                        "\"{0}\" \"{1}\" \"{2}\"",
+                        s_diffToolPath,
+                        actualFilePath,
+                        expectedFilePath
+                    )
             );
 
             return "file://" + compareCmd;

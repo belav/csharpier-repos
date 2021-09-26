@@ -187,25 +187,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
                 if (SkipNavigation.Inverse != null)
                 {
-                    (
-                        (EntityType)SkipNavigation.Inverse.DeclaringEntityType
-                    ).Builder.HasNoSkipNavigation(
-                        (SkipNavigation)SkipNavigation.Inverse,
-                        ConfigurationSource.Explicit
-                    );
+                    ((EntityType)SkipNavigation.Inverse.DeclaringEntityType).Builder
+                        .HasNoSkipNavigation(
+                            (SkipNavigation)SkipNavigation.Inverse,
+                            ConfigurationSource.Explicit
+                        );
                 }
 
-                declaringEntityType.Builder.HasNoSkipNavigation(
-                    (SkipNavigation)SkipNavigation,
-                    ConfigurationSource.Explicit
-                );
+                declaringEntityType.Builder
+                    .HasNoSkipNavigation(
+                        (SkipNavigation)SkipNavigation,
+                        ConfigurationSource.Explicit
+                    );
 
-                Builder = declaringEntityType.Builder.HasRelationship(
-                    (EntityType)RelatedEntityType,
-                    navigationName,
-                    ConfigurationSource.Explicit,
-                    targetIsPrincipal: false
-                );
+                Builder = declaringEntityType.Builder
+                    .HasRelationship(
+                        (EntityType)RelatedEntityType,
+                        navigationName,
+                        ConfigurationSource.Explicit,
+                        targetIsPrincipal: false
+                    );
                 SkipNavigation = null;
             }
 
@@ -291,10 +292,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             var leftSkipNavigation = (SkipNavigation)collectionCollectionBuilder.LeftNavigation;
             var rightSkipNavigation = (SkipNavigation)collectionCollectionBuilder.RightNavigation;
 
-            leftSkipNavigation.Builder.HasInverse(
-                rightSkipNavigation,
-                ConfigurationSource.Explicit
-            );
+            leftSkipNavigation.Builder
+                .HasInverse(rightSkipNavigation, ConfigurationSource.Explicit);
 
             // Note: we delayed setting the ConfigurationSource of SkipNavigation
             // in HasMany(). But now we know that both skip navigations should
@@ -348,16 +347,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
             using (foreignKey.DeclaringEntityType.Model.DelayConventions())
             {
-                foreignKey.DeclaringEntityType.Builder.HasNoRelationship(
-                    foreignKey,
-                    ConfigurationSource.Explicit
-                );
+                foreignKey.DeclaringEntityType.Builder
+                    .HasNoRelationship(foreignKey, ConfigurationSource.Explicit);
                 Builder = null;
-                return ((EntityType)DeclaringEntityType).Builder.HasSkipNavigation(
-                    navigationMember,
-                    (EntityType)RelatedEntityType,
-                    ConfigurationSource.Explicit
-                )!.Metadata;
+                return ((EntityType)DeclaringEntityType).Builder
+                    .HasSkipNavigation(
+                        navigationMember,
+                        (EntityType)RelatedEntityType,
+                        ConfigurationSource.Explicit
+                    )!.Metadata;
             }
         }
 
@@ -415,10 +413,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             {
                 if (conflictingNavigation != null)
                 {
-                    foreignKey!.DeclaringEntityType.Builder.HasNoRelationship(
-                        foreignKey,
-                        ConfigurationSource.Explicit
-                    );
+                    foreignKey!.DeclaringEntityType.Builder
+                        .HasNoRelationship(foreignKey, ConfigurationSource.Explicit);
                 }
                 else
                 {
@@ -431,11 +427,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     }
                 }
 
-                return ((EntityType)RelatedEntityType).Builder.HasSkipNavigation(
-                    navigationMember,
-                    (EntityType)DeclaringEntityType,
-                    ConfigurationSource.Explicit
-                )!.Metadata;
+                return ((EntityType)RelatedEntityType).Builder
+                    .HasSkipNavigation(
+                        navigationMember,
+                        (EntityType)DeclaringEntityType,
+                        ConfigurationSource.Explicit
+                    )!.Metadata;
             }
         }
 

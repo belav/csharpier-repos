@@ -136,9 +136,8 @@ namespace Microsoft.EntityFrameworkCore
 
             ConfigureWarnings(optionsBuilder);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension);
 
             inMemoryOptionsAction?.Invoke(new InMemoryDbContextOptionsBuilder(optionsBuilder));
 
@@ -153,15 +152,15 @@ namespace Microsoft.EntityFrameworkCore
                 ?? new CoreOptionsExtension();
 
             coreOptionsExtension = coreOptionsExtension.WithWarningsConfiguration(
-                coreOptionsExtension.WarningsConfiguration.TryWithExplicit(
-                    InMemoryEventId.TransactionIgnoredWarning,
-                    WarningBehavior.Throw
-                )
+                coreOptionsExtension.WarningsConfiguration
+                    .TryWithExplicit(
+                        InMemoryEventId.TransactionIgnoredWarning,
+                        WarningBehavior.Throw
+                    )
             );
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                coreOptionsExtension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(coreOptionsExtension);
         }
     }
 }

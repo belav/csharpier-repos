@@ -369,11 +369,12 @@ public class ByteMark
                     OutputStringPart(string.Format("{0}:", s_tests[i].Name()));
                     bench_with_confidence(i, out bmean, out bstdev, out bnumrun);
                     OutputString(
-                        string.Format(
-                            "  Iterations/sec: {0:F5}  Index: {1:F5}",
-                            bmean,
-                            bmean / s_bindex[i]
-                        )
+                        string
+                            .Format(
+                                "  Iterations/sec: {0:F5}  Index: {1:F5}",
+                                bmean,
+                                bmean / s_bindex[i]
+                            )
                     );
 
                     /*
@@ -409,16 +410,18 @@ public class ByteMark
             {
                 OutputString("===========OVERALL============");
                 OutputString(
-                    string.Format(
-                        "INTEGER INDEX: {0:F5}",
-                        Math.Pow(intindex, (double)1.0 / (double)intcount)
-                    )
+                    string
+                        .Format(
+                            "INTEGER INDEX: {0:F5}",
+                            Math.Pow(intindex, (double)1.0 / (double)intcount)
+                        )
                 );
                 OutputString(
-                    string.Format(
-                        "FLOATING-POINT INDEX: {0:F5}",
-                        Math.Pow(fpindex, (double)1.0 / (double)fpcount)
-                    )
+                    string
+                        .Format(
+                            "FLOATING-POINT INDEX: {0:F5}",
+                            Math.Pow(fpindex, (double)1.0 / (double)fpcount)
+                        )
                 );
                 OutputString(" (90 MHz Dell Pentium = 1.00)");
                 OutputString("==============================");

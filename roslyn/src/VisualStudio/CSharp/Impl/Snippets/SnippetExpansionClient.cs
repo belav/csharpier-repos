@@ -80,10 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             SubjectBuffer.Insert(endPosition, commentString);
 
             var commentSpan = new Span(endPosition, commentString.Length);
-            return SubjectBuffer.CurrentSnapshot.CreateTrackingSpan(
-                commentSpan,
-                SpanTrackingMode.EdgeExclusive
-            );
+            return SubjectBuffer.CurrentSnapshot
+                .CreateTrackingSpan(commentSpan, SpanTrackingMode.EdgeExclusive);
         }
 
         protected override string FallbackDefaultLiteral => "default";
@@ -177,7 +175,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
 
             var addImportService = document.GetRequiredLanguageService<IAddImportsService>();
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
-            var compilation = document.Project.GetRequiredCompilationAsync(cancellationToken)
+            var compilation = document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .WaitAndGetResult(cancellationToken);
             var newRoot = addImportService.AddImports(
                 compilation,
@@ -193,15 +192,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             var newDocument = document.WithSyntaxRoot(newRoot);
 
             var formattedDocument = Formatter.FormatAsync(
-                    newDocument,
-                    Formatter.Annotation,
-                    cancellationToken: cancellationToken
-                )
+                newDocument,
+                Formatter.Annotation,
+                cancellationToken: cancellationToken
+            )
                 .WaitAndGetResult(cancellationToken);
-            document.Project.Solution.Workspace.ApplyDocumentChanges(
-                formattedDocument,
-                cancellationToken
-            );
+            document.Project.Solution.Workspace
+                .ApplyDocumentChanges(formattedDocument, cancellationToken);
 
             return formattedDocument;
         }
@@ -235,8 +232,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                 }
 
                 var candidateUsing = SyntaxFactory.ParseCompilationUnit(
-                        "using " + namespaceToImport + ";"
-                    )
+                    "using " + namespaceToImport + ";"
+                )
                     .DescendantNodes()
                     .OfType<UsingDirectiveSyntax>()
                     .FirstOrDefault();
@@ -248,8 +245,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                 {
                     // Retry by parsing the namespace as a name and constructing a using directive from it
                     candidateUsing = SyntaxFactory.UsingDirective(
-                            SyntaxFactory.ParseName(namespaceToImport)
-                        )
+                        SyntaxFactory.ParseName(namespaceToImport)
+                    )
                         .WithUsingKeyword(
                             SyntaxFactory.Token(SyntaxKind.UsingKeyword)
                                 .WithTrailingTrivia(SyntaxFactory.Space)

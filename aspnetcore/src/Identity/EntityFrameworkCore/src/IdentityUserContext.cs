@@ -152,7 +152,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
                         converter = new PersonalDataConverter(
                             this.GetService<IPersonalDataProtector>()
                         );
-                        var personalDataProps = typeof(TUser).GetProperties()
+                        var personalDataProps = typeof(TUser)
+                            .GetProperties()
                             .Where(
                                 prop =>
                                     Attribute.IsDefined(
@@ -214,7 +215,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
                     if (encryptPersonalData)
                     {
-                        var tokenProps = typeof(TUserToken).GetProperties()
+                        var tokenProps = typeof(TUserToken)
+                            .GetProperties()
                             .Where(
                                 prop =>
                                     Attribute.IsDefined(

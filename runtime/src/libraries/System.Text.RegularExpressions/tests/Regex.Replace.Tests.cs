@@ -88,9 +88,8 @@ namespace System.Text.RegularExpressions.Tests
             };
 
             // Stress
-            string pattern = string.Concat(
-                Enumerable.Repeat("([a-z]", 1000).Concat(Enumerable.Repeat(")", 1000))
-            );
+            string pattern = string
+                .Concat(Enumerable.Repeat("([a-z]", 1000).Concat(Enumerable.Repeat(")", 1000)));
             string input = string.Concat(Enumerable.Repeat("abcde", 200));
             yield return new object[]
             {
@@ -1211,12 +1210,8 @@ namespace System.Text.RegularExpressions.Tests
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "count",
                 () =>
-                    new Regex("pattern").Replace(
-                        "input",
-                        new MatchEvaluator(MatchEvaluator1),
-                        -2,
-                        0
-                    )
+                    new Regex("pattern")
+                        .Replace("input", new MatchEvaluator(MatchEvaluator1), -2, 0)
             );
 
             // Start is invalid
@@ -1227,12 +1222,8 @@ namespace System.Text.RegularExpressions.Tests
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "startat",
                 () =>
-                    new Regex("pattern").Replace(
-                        "input",
-                        new MatchEvaluator(MatchEvaluator1),
-                        0,
-                        -1
-                    )
+                    new Regex("pattern")
+                        .Replace("input", new MatchEvaluator(MatchEvaluator1), 0, -1)
             );
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(

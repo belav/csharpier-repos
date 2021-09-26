@@ -27,11 +27,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         {
             return Resources.CompilationFailed
                 + Environment.NewLine
-                + string.Join(
-                    Environment.NewLine,
-                    compilationFailures.SelectMany(f => f.Messages)
-                        .Select(message => message.FormattedMessage)
-                );
+                + string
+                    .Join(
+                        Environment.NewLine,
+                        compilationFailures.SelectMany(f => f.Messages)
+                            .Select(message => message.FormattedMessage)
+                    );
         }
     }
 }

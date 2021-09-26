@@ -190,8 +190,8 @@ namespace AutoMapper
         private void AddMapsCore(IEnumerable<Assembly> assembliesToScan)
         {
             var allTypes = assembliesToScan.Where(
-                    a => !a.IsDynamic && a != typeof(NamedProfile).Assembly
-                )
+                a => !a.IsDynamic && a != typeof(NamedProfile).Assembly
+            )
                 .SelectMany(a => a.DefinedTypes)
                 .ToArray();
             var autoMapAttributeProfile = new NamedProfile(nameof(AutoMapAttribute));

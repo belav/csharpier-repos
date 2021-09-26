@@ -359,19 +359,18 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider.ForType<Employee>()
-                .BindingDetails(
-                    binding =>
+            metadataProvider.ForType<Employee>().BindingDetails(
+                binding =>
+                {
+                    binding.BinderModelName = bindingMetadata.BinderModelName;
+                    binding.BinderType = bindingMetadata.BinderType;
+                    binding.BindingSource = bindingMetadata.BindingSource;
+                    if (bindingMetadata.PropertyFilterProvider != null)
                     {
-                        binding.BinderModelName = bindingMetadata.BinderModelName;
-                        binding.BinderType = bindingMetadata.BinderType;
-                        binding.BindingSource = bindingMetadata.BindingSource;
-                        if (bindingMetadata.PropertyFilterProvider != null)
-                        {
-                            binding.PropertyFilterProvider = bindingMetadata.PropertyFilterProvider;
-                        }
+                        binding.PropertyFilterProvider = bindingMetadata.PropertyFilterProvider;
                     }
-                );
+                }
+            );
 
             var modelBinder = Mock.Of<IModelBinder>();
             var modelBinderProvider = new TestModelBinderProvider(

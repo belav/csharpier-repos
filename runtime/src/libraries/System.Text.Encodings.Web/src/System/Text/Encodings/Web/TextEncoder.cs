@@ -216,10 +216,8 @@ namespace System.Text.Encodings.Web
             } while (!remainingInput.IsEmpty);
 
 #if NETCOREAPP
-            string retVal = string.Concat(
-                value.Slice(0, indexOfFirstCharToEncode),
-                stringBuilder.AsSpan()
-            );
+            string retVal = string
+                .Concat(value.Slice(0, indexOfFirstCharToEncode), stringBuilder.AsSpan());
             stringBuilder.Dispose();
             return retVal;
 #else
@@ -632,9 +630,8 @@ namespace System.Text.Encodings.Web
                 MaxOutputCharactersPerInputCharacter,
                 EncodeStartingOutputBufferSize
             );
-            char[] rentedArray = ArrayPool<char>.Shared.Rent(
-                Math.Max(value.Length, minBufferBumpEachIteration)
-            );
+            char[] rentedArray = ArrayPool<char>.Shared
+                .Rent(Math.Max(value.Length, minBufferBumpEachIteration));
             Span<char> scratchBuffer = rentedArray;
 
             do

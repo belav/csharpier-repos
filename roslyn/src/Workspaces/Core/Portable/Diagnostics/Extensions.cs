@@ -98,9 +98,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (textDocument is Document document && document.SupportsSyntaxTree)
             {
                 var syntacticDocument = await SyntacticDocument.CreateAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return dataLocation.ConvertLocation(syntacticDocument);
             }
@@ -208,11 +208,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 var result = new DiagnosticAnalysisResultBuilder(project, version);
-                var diagnosticIdsToFilter =
-                    skippedAnalyzersInfo.FilteredDiagnosticIdsForAnalyzers.GetValueOrDefault(
-                        analyzer,
-                        ImmutableArray<string>.Empty
-                    );
+                var diagnosticIdsToFilter = skippedAnalyzersInfo.FilteredDiagnosticIdsForAnalyzers
+                    .GetValueOrDefault(analyzer, ImmutableArray<string>.Empty);
 
                 if (documentAnalysisScope != null)
                 {
@@ -230,10 +227,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             if (treeToAnalyze != null)
                             {
                                 if (
-                                    analysisResult.SyntaxDiagnostics.TryGetValue(
-                                        treeToAnalyze,
-                                        out diagnosticsByAnalyzerMap
-                                    )
+                                    analysisResult.SyntaxDiagnostics
+                                        .TryGetValue(treeToAnalyze, out diagnosticsByAnalyzerMap)
                                 )
                                 {
                                     AddAnalyzerDiagnosticsToResult(
@@ -251,10 +246,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 }
                             }
                             else if (
-                                analysisResult.AdditionalFileDiagnostics.TryGetValue(
-                                    additionalFileToAnalyze!,
-                                    out diagnosticsByAnalyzerMap
-                                )
+                                analysisResult.AdditionalFileDiagnostics
+                                    .TryGetValue(
+                                        additionalFileToAnalyze!,
+                                        out diagnosticsByAnalyzerMap
+                                    )
                             )
                             {
                                 AddAnalyzerDiagnosticsToResult(
@@ -274,10 +270,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                         case AnalysisKind.Semantic:
                             if (
-                                analysisResult.SemanticDiagnostics.TryGetValue(
-                                    treeToAnalyze!,
-                                    out diagnosticsByAnalyzerMap
-                                )
+                                analysisResult.SemanticDiagnostics
+                                    .TryGetValue(treeToAnalyze!, out diagnosticsByAnalyzerMap)
                             )
                             {
                                 AddAnalyzerDiagnosticsToResult(
@@ -490,9 +484,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Debug.Assert(
                     diagnostics.Length
                         == CompilationWithAnalyzers.GetEffectiveDiagnostics(
-                                diagnostics,
-                                compilation
-                            )
+                            diagnostics,
+                            compilation
+                        )
                             .Count()
                 );
 
@@ -562,18 +556,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         )
         {
             var result = await GetAnalysisResultAsync(
-                    compilationWithAnalyzers,
-                    documentAnalysisScope,
-                    cancellationToken
-                )
+                compilationWithAnalyzers,
+                documentAnalysisScope,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var additionalDiagnostics =
                 await compilationWithAnalyzers.GetPragmaSuppressionAnalyzerDiagnosticsAsync(
-                        documentAnalysisScope,
-                        project,
-                        analyzerInfoCache,
-                        cancellationToken
-                    )
+                    documentAnalysisScope,
+                    project,
+                    analyzerInfoCache,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             return (result, additionalDiagnostics);
         }
@@ -591,7 +585,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             Debug.Assert(
-                documentAnalysisScope.Analyzers.ToSet()
+                documentAnalysisScope.Analyzers
+                    .ToSet()
                     .IsSubsetOf(compilationWithAnalyzers.Analyzers)
             );
 
@@ -603,32 +598,32 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                             .ConfigureAwait(false);
                         return await compilationWithAnalyzers.GetAnalysisResultAsync(
-                                tree,
-                                documentAnalysisScope.Analyzers,
-                                cancellationToken
-                            )
+                            tree,
+                            documentAnalysisScope.Analyzers,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                     else
                     {
                         return await compilationWithAnalyzers.GetAnalysisResultAsync(
-                                documentAnalysisScope.AdditionalFile,
-                                documentAnalysisScope.Analyzers,
-                                cancellationToken
-                            )
+                            documentAnalysisScope.AdditionalFile,
+                            documentAnalysisScope.Analyzers,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
 
                 case AnalysisKind.Semantic:
-                    var model = await (
-                        (Document)documentAnalysisScope.TextDocument
-                    ).GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                    var model = await ((Document)documentAnalysisScope.TextDocument)
+                        .GetRequiredSemanticModelAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     return await compilationWithAnalyzers.GetAnalysisResultAsync(
-                            model,
-                            documentAnalysisScope.Span,
-                            documentAnalysisScope.Analyzers,
-                            cancellationToken
-                        )
+                        model,
+                        documentAnalysisScope.Span,
+                        documentAnalysisScope.Analyzers,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 default:
@@ -663,11 +658,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 using var _ = ArrayBuilder<Diagnostic>.GetInstance(out var diagnosticsBuilder);
                 await AnalyzeDocumentAsync(
-                        suppressionAnalyzer,
-                        document,
-                        documentAnalysisScope.Span,
-                        diagnosticsBuilder.Add
-                    )
+                    suppressionAnalyzer,
+                    document,
+                    documentAnalysisScope.Span,
+                    diagnosticsBuilder.Add
+                )
                     .ConfigureAwait(false);
                 return diagnosticsBuilder.ToImmutable();
             }
@@ -676,10 +671,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 if (compilationWithAnalyzers.AnalysisOptions.ConcurrentAnalysis)
                 {
                     var bag = new ConcurrentBag<Diagnostic>();
-                    using var _ = ArrayBuilder<Task>.GetInstance(
-                        project.DocumentIds.Count,
-                        out var tasks
-                    );
+                    using var _ = ArrayBuilder<Task>
+                        .GetInstance(project.DocumentIds.Count, out var tasks);
                     foreach (var document in project.Documents)
                     {
                         tasks.Add(
@@ -696,11 +689,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     foreach (var document in project.Documents)
                     {
                         await AnalyzeDocumentAsync(
-                                suppressionAnalyzer,
-                                document,
-                                span: null,
-                                diagnosticsBuilder.Add
-                            )
+                            suppressionAnalyzer,
+                            document,
+                            span: null,
+                            diagnosticsBuilder.Add
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -718,13 +711,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
                 await suppressionAnalyzer.AnalyzeAsync(
-                        semanticModel,
-                        span,
-                        compilationWithAnalyzers,
-                        analyzerInfoCache.GetDiagnosticDescriptors,
-                        reportDiagnostic,
-                        cancellationToken
-                    )
+                    semanticModel,
+                    span,
+                    compilationWithAnalyzers,
+                    analyzerInfoCache.GetDiagnosticDescriptors,
+                    reportDiagnostic,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

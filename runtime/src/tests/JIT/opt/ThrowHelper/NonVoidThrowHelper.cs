@@ -157,7 +157,8 @@ public unsafe class Program
     public static int Main()
     {
         foreach (
-            var method in typeof(Program).GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
+            var method in typeof(Program)
+                .GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
                 .Where(m => m.Name.StartsWith("Test"))
         )
         {

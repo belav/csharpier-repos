@@ -118,15 +118,16 @@ namespace Internal.Cryptography
                 fixed (byte* pSrc = &MemoryMarshal.GetReference(source))
                 fixed (byte* pDest = &MemoryMarshal.GetReference(destination))
                 {
-                    NTSTATUS ntStatus = Interop.BCrypt.BCryptHash(
-                        (uint)algHandle,
-                        pbSecret: null,
-                        cbSecret: 0,
-                        pSrc,
-                        source.Length,
-                        pDest,
-                        digestSizeInBytes
-                    );
+                    NTSTATUS ntStatus = Interop.BCrypt
+                        .BCryptHash(
+                            (uint)algHandle,
+                            pbSecret: null,
+                            cbSecret: 0,
+                            pSrc,
+                            source.Length,
+                            pDest,
+                            digestSizeInBytes
+                        );
 
                     if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                     {
@@ -144,15 +145,16 @@ namespace Internal.Cryptography
                 Span<byte> destination
             )
             {
-                NTSTATUS ntStatus = Interop.BCrypt.BCryptCreateHash(
-                    algHandle,
-                    out SafeBCryptHashHandle hHash,
-                    IntPtr.Zero,
-                    0,
-                    default,
-                    0,
-                    BCryptCreateHashFlags.None
-                );
+                NTSTATUS ntStatus = Interop.BCrypt
+                    .BCryptCreateHash(
+                        algHandle,
+                        out SafeBCryptHashHandle hHash,
+                        IntPtr.Zero,
+                        0,
+                        default,
+                        0,
+                        BCryptCreateHashFlags.None
+                    );
 
                 if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 {

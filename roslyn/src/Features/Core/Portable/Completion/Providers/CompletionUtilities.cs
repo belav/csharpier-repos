@@ -38,10 +38,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             );
 
             return options.WithChangedOption(
-                    RecommendationOptions.FilterOutOfScopeLocals,
-                    language,
-                    filterOutOfScopeLocals
-                )
+                RecommendationOptions.FilterOutOfScopeLocals,
+                language,
+                filterOutOfScopeLocals
+            )
                 .WithChangedOption(
                     RecommendationOptions.HideAdvancedMembers,
                     language,

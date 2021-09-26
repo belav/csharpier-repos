@@ -59,13 +59,14 @@ namespace AutoMapper
                 ?? (p => !p.IsSpecialName);
             ShouldUseConstructor =
                 profile.ShouldUseConstructor ?? configuration?.ShouldUseConstructor ?? (c => true);
-            ValueTransformers = profile.ValueTransformers.Concat(configuration?.ValueTransformers)
+            ValueTransformers = profile.ValueTransformers
+                .Concat(configuration?.ValueTransformers)
                 .ToArray();
-            _memberConfigurations = profile.MemberConfigurations.Concat(
-                    globalProfile?.MemberConfigurations
-                )
+            _memberConfigurations = profile.MemberConfigurations
+                .Concat(globalProfile?.MemberConfigurations)
                 .ToArray();
-            var nameSplitMember = _memberConfigurations[0].MemberMappers.OfType<NameSplitMember>()
+            var nameSplitMember = _memberConfigurations[0].MemberMappers
+                .OfType<NameSplitMember>()
                 .FirstOrDefault();
             if (nameSplitMember != null)
             {
@@ -76,19 +77,17 @@ namespace AutoMapper
                     ?? PascalCaseNamingConvention.Instance;
             }
             GlobalIgnores = profile.GlobalIgnores.Concat(globalProfile?.GlobalIgnores).ToArray();
-            SourceExtensionMethods = profile.SourceExtensionMethods.Concat(
-                    globalProfile?.SourceExtensionMethods
-                )
+            SourceExtensionMethods = profile.SourceExtensionMethods
+                .Concat(globalProfile?.SourceExtensionMethods)
                 .ToArray();
-            AllPropertyMapActions = profile.AllPropertyMapActions.Concat(
-                    globalProfile?.AllPropertyMapActions
-                )
+            AllPropertyMapActions = profile.AllPropertyMapActions
+                .Concat(globalProfile?.AllPropertyMapActions)
                 .ToArray();
-            AllTypeMapActions = profile.AllTypeMapActions.Concat(globalProfile?.AllTypeMapActions)
+            AllTypeMapActions = profile.AllTypeMapActions
+                .Concat(globalProfile?.AllTypeMapActions)
                 .ToArray();
-            var prePostFixes = profile.MemberConfigurations.Concat(
-                    globalProfile?.MemberConfigurations
-                )
+            var prePostFixes = profile.MemberConfigurations
+                .Concat(globalProfile?.MemberConfigurations)
                 .Select(m => m.NameMapper)
                 .SelectMany(m => m.NamedMappers)
                 .OfType<PrePostfixName>()
@@ -281,22 +280,23 @@ namespace AutoMapper
                     openMapConfig.SourceType.IsGenericTypeDefinition
                         ? closedTypes.SourceType.GenericTypeArguments
                         : Type.EmptyTypes
-                ).Concat(
-                    openMapConfig.DestinationType.IsGenericTypeDefinition
-                      ? closedTypes.DestinationType.GenericTypeArguments
-                      : Type.EmptyTypes
-                );
+                )
+                    .Concat(
+                        openMapConfig.DestinationType.IsGenericTypeDefinition
+                          ? closedTypes.DestinationType.GenericTypeArguments
+                          : Type.EmptyTypes
+                    );
                 var neededParameters = closedMap.TypeConverterType.GenericParametersCount();
-                closedMap.TypeConverterType = closedMap.TypeConverterType.MakeGenericType(
-                    typeParams.Take(neededParameters).ToArray()
-                );
+                closedMap.TypeConverterType = closedMap.TypeConverterType
+                    .MakeGenericType(typeParams.Take(neededParameters).ToArray());
             }
             if (closedMap.DestinationTypeOverride is { IsGenericTypeDefinition: true })
             {
                 var neededParameters = closedMap.DestinationTypeOverride.GenericParametersCount();
-                closedMap.DestinationTypeOverride =
-                    closedMap.DestinationTypeOverride.MakeGenericType(
-                        closedTypes.DestinationType.GenericTypeArguments.Take(neededParameters)
+                closedMap.DestinationTypeOverride = closedMap.DestinationTypeOverride
+                    .MakeGenericType(
+                        closedTypes.DestinationType.GenericTypeArguments
+                            .Take(neededParameters)
                             .ToArray()
                     );
             }

@@ -106,14 +106,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 var arguments = Expression.Parameter(typeof(object[]), "arguments");
 
                 _thunk = Expression.Lambda<Func<object, object[], Task>>(
-                        Expression.Call(
-                            Expression.Convert(receiver, method.DeclaringType),
-                            method,
-                            Unpack(arguments, parameters)
-                        ),
-                        receiver,
-                        arguments
-                    )
+                    Expression.Call(
+                        Expression.Convert(receiver, method.DeclaringType),
+                        method,
+                        Unpack(arguments, parameters)
+                    ),
+                    receiver,
+                    arguments
+                )
                     .Compile();
             }
 
@@ -126,11 +126,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private class GenericTaskHandlerMethod : HandlerMethod
         {
-            private static readonly MethodInfo ConvertMethod =
-                typeof(GenericTaskHandlerMethod).GetMethod(
-                    nameof(Convert),
-                    BindingFlags.NonPublic | BindingFlags.Static
-                );
+            private static readonly MethodInfo ConvertMethod = typeof(GenericTaskHandlerMethod)
+                .GetMethod(nameof(Convert), BindingFlags.NonPublic | BindingFlags.Static);
 
             private readonly Func<object, object[], Task<object>> _thunk;
 
@@ -143,20 +140,20 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 var arguments = Expression.Parameter(typeof(object[]), "arguments");
 
                 _thunk = Expression.Lambda<Func<object, object[], Task<object>>>(
-                        Expression.Call(
-                            ConvertMethod.MakeGenericMethod(method.ReturnType.GenericTypeArguments),
-                            Expression.Convert(
-                                Expression.Call(
-                                    Expression.Convert(receiver, method.DeclaringType),
-                                    method,
-                                    Unpack(arguments, parameters)
-                                ),
-                                typeof(object)
-                            )
-                        ),
-                        receiver,
-                        arguments
-                    )
+                    Expression.Call(
+                        ConvertMethod.MakeGenericMethod(method.ReturnType.GenericTypeArguments),
+                        Expression.Convert(
+                            Expression.Call(
+                                Expression.Convert(receiver, method.DeclaringType),
+                                method,
+                                Unpack(arguments, parameters)
+                            ),
+                            typeof(object)
+                        )
+                    ),
+                    receiver,
+                    arguments
+                )
                     .Compile();
             }
 
@@ -184,14 +181,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 var arguments = Expression.Parameter(typeof(object[]), "arguments");
 
                 _thunk = Expression.Lambda<Action<object, object[]>>(
-                        Expression.Call(
-                            Expression.Convert(receiver, method.DeclaringType),
-                            method,
-                            Unpack(arguments, parameters)
-                        ),
-                        receiver,
-                        arguments
-                    )
+                    Expression.Call(
+                        Expression.Convert(receiver, method.DeclaringType),
+                        method,
+                        Unpack(arguments, parameters)
+                    ),
+                    receiver,
+                    arguments
+                )
                     .Compile();
             }
 
@@ -215,17 +212,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 var arguments = Expression.Parameter(typeof(object[]), "arguments");
 
                 _thunk = Expression.Lambda<Func<object, object[], IActionResult>>(
-                        Expression.Convert(
-                            Expression.Call(
-                                Expression.Convert(receiver, method.DeclaringType),
-                                method,
-                                Unpack(arguments, parameters)
-                            ),
-                            typeof(IActionResult)
+                    Expression.Convert(
+                        Expression.Call(
+                            Expression.Convert(receiver, method.DeclaringType),
+                            method,
+                            Unpack(arguments, parameters)
                         ),
-                        receiver,
-                        arguments
-                    )
+                        typeof(IActionResult)
+                    ),
+                    receiver,
+                    arguments
+                )
                     .Compile();
             }
 

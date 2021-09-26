@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
                 SyntaxKind.CloseParenToken,
                 SyntaxTriviaList.Empty
             );
-            var newTrailingTrivia = asExpression.Left.GetTrailingTrivia()
+            var newTrailingTrivia = asExpression.Left
+                .GetTrailingTrivia()
                 .SkipInitialWhitespace()
                 .ToSyntaxTriviaList()
                 .AddRange(asExpression.GetTrailingTrivia());
@@ -80,11 +81,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
             typeNode = typeNode.WithoutTrailingTrivia();
 
             var castExpression = CastExpression(
-                    openParen,
-                    typeNode,
-                    closeParen,
-                    expression.WithoutTrailingTrivia()
-                )
+                openParen,
+                typeNode,
+                closeParen,
+                expression.WithoutTrailingTrivia()
+            )
                 .WithLeadingTrivia(newLeadingTrivia)
                 .WithTrailingTrivia(newTrailingTrivia);
 

@@ -321,9 +321,10 @@ ORDER BY [l].[Id], [t].[Id], [t0].[Id], [t0].[Id0]"
             bool async
         )
         {
-            await base.SelectMany_with_navigation_and_Distinct_projecting_columns_including_join_key(
-                async
-            );
+            await base
+                .SelectMany_with_navigation_and_Distinct_projecting_columns_including_join_key(
+                    async
+                );
 
             AssertSql(
                 @"SELECT [l].[Id], [l].[Date], [l].[Name], [t].[Id], [t].[Name], [t].[FK], [t0].[Id], [t0].[OneToOne_Required_PK_Date], [t0].[Level1_Optional_Id], [t0].[Level1_Required_Id], [t0].[Level2_Name], [t0].[OneToMany_Optional_Inverse2Id], [t0].[OneToMany_Required_Inverse2Id], [t0].[OneToOne_Optional_PK_Inverse2Id], [t0].[Id0]

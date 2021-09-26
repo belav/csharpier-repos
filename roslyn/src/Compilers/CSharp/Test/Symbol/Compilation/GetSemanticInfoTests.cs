@@ -330,12 +330,8 @@ class C
 ";
 
             var isExplicitConversion = ck == ConversionKind.ExplicitNumeric;
-            var source = string.Format(
-                template,
-                from,
-                to,
-                isExplicitConversion ? "(" + to + ")" : ""
-            );
+            var source = string
+                .Format(template, from, to, isExplicitConversion ? "(" + to + ")" : "");
             var tree = Parse(source);
             var comp = CreateCompilation(tree);
             comp.VerifyDiagnostics();
@@ -1053,10 +1049,8 @@ class C {
             else
             {
                 Assert.NotNull(info.Type);
-                var act2 = semanticModel.Compilation.ClassifyConversion(
-                    info.Type,
-                    info.ConvertedType
-                );
+                var act2 = semanticModel.Compilation
+                    .ClassifyConversion(info.Type, info.ConvertedType);
                 Assert.Equal(ept2, act2.Kind);
                 ValidateConversion(act2, ept2);
             }
@@ -1750,7 +1744,8 @@ class C
             var systemActionType = GetSystemActionType(comp);
             Assert.Equal(systemActionType, bindInfo.Type);
 
-            var eventSymbol = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var eventSymbol = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IEventSymbol>("E");
             Assert.Equal(eventSymbol, bindInfo.Symbol);
         }
@@ -1780,7 +1775,8 @@ class C
             var systemActionType = GetSystemActionType(comp);
             Assert.Equal(systemActionType, bindInfo.Type);
 
-            var eventSymbol = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var eventSymbol = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IEventSymbol>("E");
             Assert.Equal(eventSymbol, bindInfo.Symbol);
         }
@@ -1809,7 +1805,8 @@ class C
 
             Assert.Equal(SpecialType.System_Void, bindInfo.Type.SpecialType);
 
-            var eventSymbol = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var eventSymbol = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IEventSymbol>("E");
             Assert.Equal(eventSymbol.AddMethod, bindInfo.Symbol);
         }
@@ -1838,7 +1835,8 @@ class C
 
             Assert.Equal(SpecialType.System_Void, bindInfo.Type.SpecialType);
 
-            var eventSymbol = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var eventSymbol = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IEventSymbol>("E");
             Assert.Equal(eventSymbol.AddMethod, bindInfo.Symbol);
         }
@@ -1876,7 +1874,8 @@ class C
 
         private static INamedTypeSymbol GetSystemActionType(Compilation comp)
         {
-            return (INamedTypeSymbol)comp.GlobalNamespace.GetMember<INamespaceSymbol>("System")
+            return (INamedTypeSymbol)comp.GlobalNamespace
+                .GetMember<INamespaceSymbol>("System")
                 .GetMembers("Action")
                 .Where(s => !((INamedTypeSymbol)s).IsGenericType)
                 .Single();
@@ -1907,7 +1906,8 @@ class C
 
             var bindInfo = model.GetSemanticInfoSummary(exprSyntaxToBind);
 
-            var indexerSymbol = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var indexerSymbol = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .Indexers.Where(i => i.ParameterCount == 1)
                 .Single()
                 .GetPublicSymbol();
@@ -1949,11 +1949,13 @@ class C
 
             var bindInfo = model.GetSemanticInfoSummary(exprSyntaxToBind);
 
-            var indexerSymbol1 = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var indexerSymbol1 = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .Indexers.Where(i => i.ParameterCount == 1)
                 .Single()
                 .GetPublicSymbol();
-            var indexerSymbol2 = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var indexerSymbol2 = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .Indexers.Where(i => i.ParameterCount == 2)
                 .Single()
                 .GetPublicSymbol();
@@ -1961,10 +1963,8 @@ class C
 
             Assert.Null(bindInfo.Symbol);
             Assert.True(
-                bindInfo.CandidateSymbols.SetEquals(
-                    candidateIndexers,
-                    EqualityComparer<ISymbol>.Default
-                )
+                bindInfo.CandidateSymbols
+                    .SetEquals(candidateIndexers, EqualityComparer<ISymbol>.Default)
             );
             Assert.Equal(CandidateReason.OverloadResolutionFailure, bindInfo.CandidateReason);
 
@@ -2927,9 +2927,9 @@ class C
                 // (8,19): error CS0819: Implicitly-typed variables cannot have multiple declarators
                 //         /*<bind>*/var a = new StreamWriter(""), b = new StreamReader("")/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
-                        @"var a = new StreamWriter(""""), b = new StreamReader("""")"
-                    )
+                    ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
+                    @"var a = new StreamWriter(""""), b = new StreamReader("""")"
+                )
                     .WithLocation(8, 19)
             );
 
@@ -3430,7 +3430,8 @@ class C
             var comp = (Compilation)CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var operatorSymbol = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var operatorSymbol = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>(operatorName);
 
             var expr = GetExprSyntaxForBinding(GetExprSyntaxList(tree));
@@ -3482,7 +3483,8 @@ struct S
             var comp = (Compilation)CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var conversions = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("S")
+            var conversions = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("S")
                 .GetMembers(WellKnownMemberNames.ExplicitConversionName);
 
             var expr = GetExprSyntaxForBinding(GetExprSyntaxList(tree));
@@ -3518,7 +3520,8 @@ struct S
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var conversions = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S")
+            var conversions = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("S")
                 .GetMembers(WellKnownMemberNames.ExplicitConversionName);
             Assert.Equal(0, conversions.Length);
 
@@ -3582,7 +3585,8 @@ class Program
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var operators = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("UnaryOperator")
+            var operators = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("UnaryOperator")
                 .GetMembers(WellKnownMemberNames.UnaryPlusOperatorName);
 
             var expr = GetExprSyntaxForBinding(GetExprSyntaxList(tree));
@@ -3616,7 +3620,8 @@ class C
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var operators = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var operators = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.UnaryPlusOperatorName);
             Assert.Equal(0, operators.Length);
 
@@ -3679,7 +3684,8 @@ class Program
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var operators = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("IncrementOperator")
+            var operators = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("IncrementOperator")
                 .GetMembers(WellKnownMemberNames.IncrementOperatorName);
 
             var expr = GetExprSyntaxForBinding(GetExprSyntaxList(tree));
@@ -3713,7 +3719,8 @@ class C
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var operators = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var operators = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.IncrementOperatorName);
             Assert.Equal(0, operators.Length);
 
@@ -3757,7 +3764,8 @@ class C
             var comp = (Compilation)CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var operators = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var operators = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.AdditionOperatorName);
 
             var expr = GetExprSyntaxForBinding(GetExprSyntaxList(tree));
@@ -3791,7 +3799,8 @@ class C
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var operators = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var operators = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.AdditionOperatorName);
             Assert.Equal(0, operators.Length);
 
@@ -3838,7 +3847,8 @@ class C
             var comp = (Compilation)CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var operators = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var operators = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.AdditionOperatorName);
 
             var expr = GetExprSyntaxForBinding(GetExprSyntaxList(tree));
@@ -3872,7 +3882,8 @@ class C
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var operators = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var operators = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.AdditionOperatorName);
             Assert.Equal(0, operators.Length);
 
@@ -3923,16 +3934,18 @@ class C
             var comp = (Compilation)CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var operators = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var operators = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.AdditionOperatorName)
                 .Cast<IMethodSymbol>();
             var operatorSymbol = operators.Where(
-                    method =>
-                        method.Parameters[0].Type.Equals(
+                method =>
+                    method.Parameters[0].Type
+                        .Equals(
                             method.Parameters[1].Type,
                             SymbolEqualityComparer.ConsiderEverything
                         )
-                )
+            )
                 .Single();
 
             var expr = GetExprSyntaxForBinding(GetExprSyntaxList(tree));
@@ -4020,7 +4033,8 @@ class Z
             var model = comp.GetSemanticModel(tree);
 
             var gType = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("G");
-            var mngMethod = (IMethodSymbol)comp.GlobalNamespace.GetMember<INamedTypeSymbol>("Z")
+            var mngMethod = (IMethodSymbol)comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("Z")
                 .GetMembers("MNG")
                 .First();
             var gNullableType = mngMethod.GetParameterType(0);
@@ -4089,7 +4103,8 @@ class Z
             var model = comp.GetSemanticModel(tree);
 
             var gType = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("G");
-            var mngMethod = (IMethodSymbol)comp.GlobalNamespace.GetMember<INamedTypeSymbol>("Z")
+            var mngMethod = (IMethodSymbol)comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("Z")
                 .GetMembers("MNG")
                 .First();
             var gNullableType = mngMethod.GetParameterType(0);
@@ -4528,7 +4543,8 @@ class C
                 SpeculativeBindingOption.BindAsExpression
             );
             Assert.Equal(
-                compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+                compilation.GlobalNamespace
+                    .GetMember<INamedTypeSymbol>("C")
                     .GetMember<IMethodSymbol>("M"),
                 info.CandidateSymbols.Single()
             );
@@ -4598,7 +4614,8 @@ class C
 
             var info = model.GetSymbolInfo(syntax);
             Assert.Equal(
-                compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+                compilation.GlobalNamespace
+                    .GetMember<INamedTypeSymbol>("C")
                     .GetMember<IMethodSymbol>("M"),
                 info.CandidateSymbols.Single()
             );
@@ -4679,7 +4696,8 @@ class C
                 SpeculativeBindingOption.BindAsExpression
             );
             Assert.Equal(
-                compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("IA")
+                compilation.GlobalNamespace
+                    .GetMember<INamedTypeSymbol>("IA")
                     .GetMember<IPropertySymbol>("P"),
                 info.Symbol
             );
@@ -4858,7 +4876,8 @@ static class Program
             Assert.Throws<ArgumentException>(
                 () =>
                     method1.GetTypeInferredDuringReduction(
-                        comp.Assembly.GlobalNamespace.GetMember<INamedTypeSymbol>("Program")
+                        comp.Assembly.GlobalNamespace
+                            .GetMember<INamedTypeSymbol>("Program")
                             .GetMembers("Any")
                             .Where((m) => (object)m != (object)method1.ReducedFrom)
                             .Cast<IMethodSymbol>()
@@ -6966,21 +6985,19 @@ partial class C
 
             model1.GetDeclarationDiagnostics().Verify();
 
-            model2.GetDeclarationDiagnostics()
-                .Verify(
-                    // (4,12): error CS0111: Type 'C' already defines a member called 'C' with the same parameter types
-                    Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C")
-                        .WithArguments("C", "C")
-                        .WithLocation(4, 12)
-                );
+            model2.GetDeclarationDiagnostics().Verify(
+                // (4,12): error CS0111: Type 'C' already defines a member called 'C' with the same parameter types
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C")
+                    .WithArguments("C", "C")
+                    .WithLocation(4, 12)
+            );
 
-            model3.GetDeclarationDiagnostics()
-                .Verify(
-                    // (4,12): error CS0111: Type 'C' already defines a member called 'C' with the same parameter types
-                    Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C")
-                        .WithArguments("C", "C")
-                        .WithLocation(4, 12)
-                );
+            model3.GetDeclarationDiagnostics().Verify(
+                // (4,12): error CS0111: Type 'C' already defines a member called 'C' with the same parameter types
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C")
+                    .WithArguments("C", "C")
+                    .WithLocation(4, 12)
+            );
 
             Assert.Equal(
                 3,
@@ -7024,21 +7041,19 @@ partial class C
 
             model1.GetDeclarationDiagnostics().Verify();
 
-            model2.GetDeclarationDiagnostics()
-                .Verify(
-                    // (4,5): error CS0111: Type 'C' already defines a member called 'C' with the same parameter types
-                    Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C")
-                        .WithArguments("C", "C")
-                        .WithLocation(4, 5)
-                );
+            model2.GetDeclarationDiagnostics().Verify(
+                // (4,5): error CS0111: Type 'C' already defines a member called 'C' with the same parameter types
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C")
+                    .WithArguments("C", "C")
+                    .WithLocation(4, 5)
+            );
 
-            model3.GetDeclarationDiagnostics()
-                .Verify(
-                    // (4,5): error CS0111: Type 'C' already defines a member called 'C' with the same parameter types
-                    Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C")
-                        .WithArguments("C", "C")
-                        .WithLocation(4, 5)
-                );
+            model3.GetDeclarationDiagnostics().Verify(
+                // (4,5): error CS0111: Type 'C' already defines a member called 'C' with the same parameter types
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C")
+                    .WithArguments("C", "C")
+                    .WithLocation(4, 5)
+            );
 
             Assert.Equal(
                 3,

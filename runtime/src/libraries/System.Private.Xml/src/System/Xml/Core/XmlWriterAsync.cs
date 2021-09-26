@@ -288,10 +288,10 @@ namespace System.Xml
                     if (defattr || !reader.IsDefaultInternal)
                     {
                         await WriteStartAttributeAsync(
-                                reader.Prefix,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                            reader.Prefix,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        )
                             .ConfigureAwait(false);
                         while (reader.ReadAttributeValue())
                         {
@@ -342,10 +342,10 @@ namespace System.Xml
                 {
                     case XmlNodeType.Element:
                         await WriteStartElementAsync(
-                                reader.Prefix,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                            reader.Prefix,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        )
                             .ConfigureAwait(false);
                         await WriteAttributesAsync(reader, defattr).ConfigureAwait(false);
                         if (reader.IsEmptyElement)
@@ -398,11 +398,11 @@ namespace System.Xml
                         break;
                     case XmlNodeType.DocumentType:
                         await WriteDocTypeAsync(
-                                reader.Name,
-                                reader.GetAttribute("PUBLIC"),
-                                reader.GetAttribute("SYSTEM"),
-                                reader.Value
-                            )
+                            reader.Name,
+                            reader.GetAttribute("PUBLIC"),
+                            reader.GetAttribute("SYSTEM"),
+                            reader.Value
+                        )
                             .ConfigureAwait(false);
                         break;
 
@@ -435,10 +435,10 @@ namespace System.Xml
                 {
                     case XmlNodeType.Element:
                         await WriteStartElementAsync(
-                                reader.Prefix,
-                                reader.LocalName,
-                                reader.NamespaceURI
-                            )
+                            reader.Prefix,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        )
                             .ConfigureAwait(false);
                         await WriteAttributesAsync(reader, defattr).ConfigureAwait(false);
                         if (reader.IsEmptyElement)
@@ -458,10 +458,10 @@ namespace System.Xml
                             while (
                                 (
                                     read = await reader.ReadValueChunkAsync(
-                                            _writeNodeBuffer,
-                                            0,
-                                            WriteNodeBufferSize
-                                        )
+                                        _writeNodeBuffer,
+                                        0,
+                                        WriteNodeBufferSize
+                                    )
                                         .ConfigureAwait(false)
                                 ) > 0
                             )
@@ -474,16 +474,16 @@ namespace System.Xml
                         {
                             //reader.Value may block on Text or WhiteSpace node, use GetValueAsync
                             await WriteStringAsync(
-                                    await reader.GetValueAsync().ConfigureAwait(false)
-                                )
+                                await reader.GetValueAsync().ConfigureAwait(false)
+                            )
                                 .ConfigureAwait(false);
                         }
                         break;
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
                         await WriteWhitespaceAsync(
-                                await reader.GetValueAsync().ConfigureAwait(false)
-                            )
+                            await reader.GetValueAsync().ConfigureAwait(false)
+                        )
                             .ConfigureAwait(false);
                         break;
                     case XmlNodeType.CDATA:
@@ -499,11 +499,11 @@ namespace System.Xml
                         break;
                     case XmlNodeType.DocumentType:
                         await WriteDocTypeAsync(
-                                reader.Name,
-                                reader.GetAttribute("PUBLIC"),
-                                reader.GetAttribute("SYSTEM"),
-                                reader.Value
-                            )
+                            reader.Name,
+                            reader.GetAttribute("PUBLIC"),
+                            reader.GetAttribute("SYSTEM"),
+                            reader.Value
+                        )
                             .ConfigureAwait(false);
                         break;
 
@@ -543,10 +543,10 @@ namespace System.Xml
                 {
                     case XPathNodeType.Element:
                         await WriteStartElementAsync(
-                                navigator.Prefix,
-                                navigator.LocalName,
-                                navigator.NamespaceURI
-                            )
+                            navigator.Prefix,
+                            navigator.LocalName,
+                            navigator.NamespaceURI
+                        )
                             .ConfigureAwait(false);
 
                         // Copy attributes
@@ -558,10 +558,10 @@ namespace System.Xml
                                 if (defattr || (schemaInfo == null || !schemaInfo.IsDefault))
                                 {
                                     await WriteStartAttributeAsync(
-                                            navigator.Prefix,
-                                            navigator.LocalName,
-                                            navigator.NamespaceURI
-                                        )
+                                        navigator.Prefix,
+                                        navigator.LocalName,
+                                        navigator.NamespaceURI
+                                    )
                                         .ConfigureAwait(false);
                                     // copy string value to writer
                                     await WriteStringAsync(navigator.Value).ConfigureAwait(false);

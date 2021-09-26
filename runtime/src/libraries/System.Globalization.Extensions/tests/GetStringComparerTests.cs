@@ -24,16 +24,16 @@ namespace System.Globalization.Tests
             AssertExtensions.Throws<ArgumentException>(
                 "options",
                 () =>
-                    new CultureInfo("tr-TR").CompareInfo.GetStringComparer(
-                        CompareOptions.Ordinal | CompareOptions.IgnoreCase
-                    )
+                    new CultureInfo("tr-TR").CompareInfo
+                        .GetStringComparer(CompareOptions.Ordinal | CompareOptions.IgnoreCase)
             );
             AssertExtensions.Throws<ArgumentException>(
                 "options",
                 () =>
-                    new CultureInfo("tr-TR").CompareInfo.GetStringComparer(
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreCase
-                    )
+                    new CultureInfo("tr-TR").CompareInfo
+                        .GetStringComparer(
+                            CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreCase
+                        )
             );
         }
 
@@ -60,9 +60,8 @@ namespace System.Globalization.Tests
         )
         {
             int expected = PlatformDetection.IsNlsGlobalization ? expectedNls : expectedICU;
-            StringComparer comparer = new CultureInfo(cultureName).CompareInfo.GetStringComparer(
-                options
-            );
+            StringComparer comparer = new CultureInfo(cultureName).CompareInfo
+                .GetStringComparer(options);
 
             Assert.Equal(expected, Math.Sign(comparer.Compare(x, y)));
             Assert.Equal((expected == 0), comparer.Equals(x, y));
@@ -82,7 +81,8 @@ namespace System.Globalization.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "obj",
                 () =>
-                    new CultureInfo("tr-TR").CompareInfo.GetStringComparer(CompareOptions.None)
+                    new CultureInfo("tr-TR").CompareInfo
+                        .GetStringComparer(CompareOptions.None)
                         .GetHashCode(null)
             );
         }
@@ -106,12 +106,10 @@ namespace System.Globalization.Tests
             bool expected
         )
         {
-            StringComparer comparer1 = new CultureInfo(cultureName1).CompareInfo.GetStringComparer(
-                options1
-            );
-            StringComparer comparer2 = new CultureInfo(cultureName2).CompareInfo.GetStringComparer(
-                options2
-            );
+            StringComparer comparer1 = new CultureInfo(cultureName1).CompareInfo
+                .GetStringComparer(options1);
+            StringComparer comparer2 = new CultureInfo(cultureName2).CompareInfo
+                .GetStringComparer(options2);
 
             Assert.Equal(expected, comparer1.Equals(comparer2));
             Assert.Equal(expected, comparer1.GetHashCode().Equals(comparer2.GetHashCode()));

@@ -588,16 +588,12 @@ public class Ref<T> where T : Entity
 
             Assert.Throws<COMException>(
                 () =>
-                    (GetCodeModel()).CodeElementFromPoint(
-                        textPoint,
-                        vsCMElement.vsCMElementFunction
-                    )
+                    (GetCodeModel())
+                        .CodeElementFromPoint(textPoint, vsCMElement.vsCMElementFunction)
             );
 
-            var element = (GetCodeModel()).CodeElementFromPoint(
-                textPoint,
-                vsCMElement.vsCMElementClass
-            );
+            var element = (GetCodeModel())
+                .CodeElementFromPoint(textPoint, vsCMElement.vsCMElementClass);
             Assert.Equal("A", element.Name);
         }
 

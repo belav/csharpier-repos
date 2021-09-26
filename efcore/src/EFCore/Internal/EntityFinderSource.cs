@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
     /// </summary>
     public class EntityFinderSource : IEntityFinderSource
     {
-        private static readonly MethodInfo _genericCreate = typeof(EntityFinderSource).GetTypeInfo()
+        private static readonly MethodInfo _genericCreate = typeof(EntityFinderSource)
+            .GetTypeInfo()
             .GetRequiredDeclaredMethod(nameof(CreateConstructor));
 
         private readonly ConcurrentDictionary<

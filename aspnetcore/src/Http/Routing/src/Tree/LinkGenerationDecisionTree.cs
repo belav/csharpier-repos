@@ -62,10 +62,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 }
             }
 
-            _root = DecisionTreeBuilder<OutboundMatch>.GenerateTree(
-                attributedEntries,
-                new OutboundMatchClassifier()
-            );
+            _root = DecisionTreeBuilder<OutboundMatch>
+                .GenerateTree(attributedEntries, new OutboundMatchClassifier());
         }
 
         public IList<OutboundMatchResult> GetMatches(
@@ -236,11 +234,12 @@ namespace Microsoft.AspNetCore.Routing.Tree
                     return x.IsFallbackMatch.CompareTo(y.IsFallbackMatch);
                 }
 
-                return string.Compare(
-                    x.Match.Entry.RouteTemplate.TemplateText,
-                    y.Match.Entry.RouteTemplate.TemplateText,
-                    StringComparison.Ordinal
-                );
+                return string
+                    .Compare(
+                        x.Match.Entry.RouteTemplate.TemplateText,
+                        y.Match.Entry.RouteTemplate.TemplateText,
+                        StringComparison.Ordinal
+                    );
             }
         }
 

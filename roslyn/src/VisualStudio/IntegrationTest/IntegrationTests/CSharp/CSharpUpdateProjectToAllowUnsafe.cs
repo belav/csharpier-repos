@@ -32,10 +32,8 @@ unsafe class C
 
             VisualStudio.Editor.PlaceCaret("C");
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Allow unsafe code in this project",
-                applyFix: true
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Allow unsafe code in this project", applyFix: true);
         }
 
         [
@@ -47,11 +45,12 @@ unsafe class C
             var project = new ProjectUtils.Project(ProjectName);
 
             VisualStudio.SolutionExplorer.CreateSolution(SolutionName);
-            VisualStudio.SolutionExplorer.AddProject(
-                project,
-                WellKnownProjectTemplates.CSharpNetStandardClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    project,
+                    WellKnownProjectTemplates.CSharpNetStandardClassLibrary,
+                    LanguageNames.CSharp
+                );
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(project);
 
             InvokeFix();
@@ -68,11 +67,8 @@ unsafe class C
             var project = new ProjectUtils.Project(ProjectName);
 
             VisualStudio.SolutionExplorer.CreateSolution(SolutionName);
-            VisualStudio.SolutionExplorer.AddProject(
-                project,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(project, WellKnownProjectTemplates.ClassLibrary, LanguageNames.CSharp);
 
             InvokeFix();
             VerifyPropertyInEachConfiguration(

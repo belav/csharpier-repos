@@ -25,24 +25,20 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             }
 
             private static readonly MethodInfo _includeReferenceMethodInfo =
-                typeof(CustomShaperCompilingExpressionVisitor).GetRequiredDeclaredMethod(
-                    nameof(IncludeReference)
-                );
+                typeof(CustomShaperCompilingExpressionVisitor)
+                    .GetRequiredDeclaredMethod(nameof(IncludeReference));
 
             private static readonly MethodInfo _includeCollectionMethodInfo =
-                typeof(CustomShaperCompilingExpressionVisitor).GetRequiredDeclaredMethod(
-                    nameof(IncludeCollection)
-                );
+                typeof(CustomShaperCompilingExpressionVisitor)
+                    .GetRequiredDeclaredMethod(nameof(IncludeCollection));
 
             private static readonly MethodInfo _materializeCollectionMethodInfo =
-                typeof(CustomShaperCompilingExpressionVisitor).GetRequiredDeclaredMethod(
-                    nameof(MaterializeCollection)
-                );
+                typeof(CustomShaperCompilingExpressionVisitor)
+                    .GetRequiredDeclaredMethod(nameof(MaterializeCollection));
 
             private static readonly MethodInfo _materializeSingleResultMethodInfo =
-                typeof(CustomShaperCompilingExpressionVisitor).GetRequiredDeclaredMethod(
-                    nameof(MaterializeSingleResult)
-                );
+                typeof(CustomShaperCompilingExpressionVisitor)
+                    .GetRequiredDeclaredMethod(nameof(MaterializeSingleResult));
 
             private static void IncludeReference<TEntity, TIncludingEntity, TIncludedEntity>(
                 QueryContext queryContext,
@@ -195,11 +191,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                             Expression.Constant(inverseNavigation, typeof(INavigationBase)),
                             Expression.Constant(
                                 GenerateFixup(
-                                        includingClrType,
-                                        relatedEntityClrType,
-                                        includeExpression.Navigation,
-                                        inverseNavigation
-                                    )
+                                    includingClrType,
+                                    relatedEntityClrType,
+                                    includeExpression.Navigation,
+                                    inverseNavigation
+                                )
                                     .Compile()
                             ),
                             Expression.Constant(_tracking),
@@ -222,11 +218,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         Expression.Constant(inverseNavigation, typeof(INavigationBase)),
                         Expression.Constant(
                             GenerateFixup(
-                                    includingClrType,
-                                    relatedEntityClrType,
-                                    includeExpression.Navigation,
-                                    inverseNavigation
-                                )
+                                includingClrType,
+                                relatedEntityClrType,
+                                includeExpression.Navigation,
+                                inverseNavigation
+                            )
                                 .Compile()
                         ),
                         Expression.Constant(_tracking)
@@ -249,9 +245,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         QueryCompilationContext.QueryContextParameter,
                         collectionShaperExpression.Projection,
                         Expression.Constant(
-                            (
-                                (LambdaExpression)Visit(collectionShaperExpression.InnerShaper)
-                            ).Compile()
+                            ((LambdaExpression)Visit(collectionShaperExpression.InnerShaper))
+                                .Compile()
                         ),
                         Expression.Constant(collectionAccessor, typeof(IClrCollectionAccessor))
                     );
@@ -333,8 +328,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             )
             {
                 return entity.MakeMemberAccess(
-                        navigation.GetMemberInfo(forMaterialization: true, forSet: true)
-                    )
+                    navigation.GetMemberInfo(forMaterialization: true, forSet: true)
+                )
                     .Assign(relatedEntity);
             }
 
@@ -352,9 +347,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 );
 
             private static readonly MethodInfo _collectionAccessorAddMethodInfo =
-                typeof(IClrCollectionAccessor).GetRequiredDeclaredMethod(
-                    nameof(IClrCollectionAccessor.Add)
-                );
+                typeof(IClrCollectionAccessor)
+                    .GetRequiredDeclaredMethod(nameof(IClrCollectionAccessor.Add));
         }
     }
 }

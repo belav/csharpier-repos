@@ -177,7 +177,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_UnsafeRead()
         {
-            var result = typeof(Avx).GetMethod(
+            var result = typeof(Avx)
+                .GetMethod(
                     nameof(Avx.ConvertToVector256Double),
                     new Type[] { typeof(Vector128<Single>) }
                 )
@@ -192,7 +193,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_Load()
         {
-            var result = typeof(Avx).GetMethod(
+            var result = typeof(Avx)
+                .GetMethod(
                     nameof(Avx.ConvertToVector256Double),
                     new Type[] { typeof(Vector128<Single>) }
                 )
@@ -204,7 +206,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_LoadAligned()
         {
-            var result = typeof(Avx).GetMethod(
+            var result = typeof(Avx)
+                .GetMethod(
                     nameof(Avx.ConvertToVector256Double),
                     new Type[] { typeof(Vector128<Single>) }
                 )

@@ -124,9 +124,9 @@ namespace Microsoft.CodeAnalysis.Host
                 root.SerializeTo(stream, cancellationToken);
                 stream.Position = 0;
 
-                _storage =
-                    _service.LanguageServices.WorkspaceServices.GetRequiredService<ITemporaryStorageService>()
-                        .CreateTemporaryStreamStorage(cancellationToken);
+                _storage = _service.LanguageServices.WorkspaceServices
+                    .GetRequiredService<ITemporaryStorageService>()
+                    .CreateTemporaryStreamStorage(cancellationToken);
                 await _storage.WriteStreamAsync(stream, cancellationToken).ConfigureAwait(false);
             }
 

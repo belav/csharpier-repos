@@ -67,7 +67,8 @@ public class TestClass
         {
             s_dotnetExeName = "dotnet" + (Path.DirectorySeparatorChar == '/' ? "" : ".exe");
             s_dotnetSdkVersion =
-                typeof(DotNetSdkTests).Assembly.GetCustomAttribute<DotNetSdkVersionAttribute>()?.Version
+                typeof(DotNetSdkTests).Assembly
+                    .GetCustomAttribute<DotNetSdkVersionAttribute>()?.Version
                 ?? throw new InvalidOperationException(
                     $"Couldn't find {nameof(DotNetSdkVersionAttribute)}"
                 );
@@ -81,8 +82,8 @@ public class TestClass
             if (!isMatchingDotNetInstance(dotnetInstallDir))
             {
                 dotnetInstallDir = Environment.GetEnvironmentVariable("PATH")?.Split(
-                        Path.PathSeparator
-                    )
+                    Path.PathSeparator
+                )
                     .FirstOrDefault(isMatchingDotNetInstance);
             }
 
@@ -126,10 +127,10 @@ public class TestClass
                 $@"<Project>      
   <Target Name=""Test_EvaluateExpressions"">
     <PropertyGroup>
-      {string.Join(Environment.NewLine + "      ", expressions.SelectWithIndex((e, i) => $@"<_Value{i}>{e}</_Value{i}><_Value{i} Condition=""'$(_Value{i})' == ''"">{EmptyValueMarker}</_Value{i}>"))}
+      {string .Join(Environment.NewLine + "      ", expressions.SelectWithIndex((e, i) => $@"<_Value{i}>{e}</_Value{i}><_Value{i} Condition=""'$(_Value{i})' == ''"">{EmptyValueMarker}</_Value{i}>"))}
     </PropertyGroup>
     <ItemGroup>
-      <LinesToWrite Include=""{string.Join(";", expressions.SelectWithIndex((e, i) => $"$(_Value{i})"))}""/>
+      <LinesToWrite Include=""{string .Join(";", expressions.SelectWithIndex((e, i) => $"$(_Value{i})"))}""/>
     </ItemGroup>
     <MakeDir Directories=""{Path.GetDirectoryName(outputFile)}"" />
     <WriteLinesToFile File=""{outputFile}""

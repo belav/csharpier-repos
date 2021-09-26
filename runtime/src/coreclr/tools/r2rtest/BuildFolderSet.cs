@@ -248,11 +248,12 @@ namespace R2RTest
                         causeOfFailure = "Unknown cause of failure";
                     }
 
-                    Console.Error.WriteLine(
-                        "Error running R2R dump on {0}: {1}",
-                        string.Join(", ", r2rDumpExecution.Parameters.InputFileNames),
-                        causeOfFailure
-                    );
+                    Console.Error
+                        .WriteLine(
+                            "Error running R2R dump on {0}: {1}",
+                            string.Join(", ", r2rDumpExecution.Parameters.InputFileNames),
+                            causeOfFailure
+                        );
                     success = false;
                 }
             }
@@ -444,9 +445,8 @@ namespace R2RTest
                     }
                     else if (compilationProcess.Succeeded)
                     {
-                        skipCopying[(int)runner.Index].UnionWith(
-                            compilationProcess.Parameters.InputFileNames
-                        );
+                        skipCopying[(int)runner.Index]
+                            .UnionWith(compilationProcess.Parameters.InputFileNames);
                         AnalyzeCompilationLog(compilationProcess, runner.Index);
                     }
                     else
@@ -503,11 +503,12 @@ namespace R2RTest
                         causeOfFailure = "Unknown cause of failure";
                     }
 
-                    Console.Error.WriteLine(
-                        "Error running R2R dump on {0}: {1}",
-                        string.Join(", ", r2rDumpExecution.Parameters.InputFileNames),
-                        causeOfFailure
-                    );
+                    Console.Error
+                        .WriteLine(
+                            "Error running R2R dump on {0}: {1}",
+                            string.Join(", ", r2rDumpExecution.Parameters.InputFileNames),
+                            causeOfFailure
+                        );
                     success = false;
                 }
             }
@@ -552,11 +553,12 @@ namespace R2RTest
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(
-                    "Error reading log file {0}: {1}",
-                    compilationProcess.Parameters.LogPath,
-                    ex.Message
-                );
+                Console.Error
+                    .WriteLine(
+                        "Error reading log file {0}: {1}",
+                        compilationProcess.Parameters.LogPath,
+                        ex.Message
+                    );
             }
         }
 
@@ -1267,10 +1269,11 @@ namespace R2RTest
                         }
                         catch (Exception)
                         {
-                            Console.Error.WriteLine(
-                                "Cannot find CPAOT output file '{0}', ignoring in size stats",
-                                cpaotCompilation.Parameters.OutputFileName
-                            );
+                            Console.Error
+                                .WriteLine(
+                                    "Cannot find CPAOT output file '{0}', ignoring in size stats",
+                                    cpaotCompilation.Parameters.OutputFileName
+                                );
                             continue;
                         }
 
@@ -1282,10 +1285,11 @@ namespace R2RTest
                         }
                         catch (Exception)
                         {
-                            Console.Error.WriteLine(
-                                "Cannot find Crossgen output file '{0}', ignoring in size stats",
-                                crossgenCompilation.Parameters.OutputFileName
-                            );
+                            Console.Error
+                                .WriteLine(
+                                    "Cannot find Crossgen output file '{0}', ignoring in size stats",
+                                    crossgenCompilation.Parameters.OutputFileName
+                                );
                             continue;
                         }
 
@@ -1837,11 +1841,11 @@ namespace R2RTest
                     logWriter,
                     "CPAOT = TRUE / CROSSGEN = FALSE",
                     cpaot.Where(
-                            kvp =>
-                                kvp.Value == 1
-                                && crossgen.ContainsKey(kvp.Key)
-                                && crossgen[kvp.Key] == 0
-                        )
+                        kvp =>
+                            kvp.Value == 1
+                            && crossgen.ContainsKey(kvp.Key)
+                            && crossgen[kvp.Key] == 0
+                    )
                         .Select(kvp => kvp.Key)
                 );
 
@@ -1849,11 +1853,11 @@ namespace R2RTest
                     logWriter,
                     "CPAOT = FALSE / CROSSGEN = TRUE",
                     cpaot.Where(
-                            kvp =>
-                                kvp.Value == 0
-                                && crossgen.ContainsKey(kvp.Key)
-                                && crossgen[kvp.Key] == 1
-                        )
+                        kvp =>
+                            kvp.Value == 0
+                            && crossgen.ContainsKey(kvp.Key)
+                            && crossgen[kvp.Key] == 1
+                    )
                         .Select(kvp => kvp.Key)
                 );
 

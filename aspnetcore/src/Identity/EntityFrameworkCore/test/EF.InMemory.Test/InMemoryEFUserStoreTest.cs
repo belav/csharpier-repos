@@ -50,12 +50,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
             {
                 UserName = useNamePrefixAsUserName
                     ? namePrefix
-                    : string.Format(
-                          CultureInfo.InvariantCulture,
-                          "{0}{1}",
-                          namePrefix,
-                          Guid.NewGuid()
-                      ),
+                    : string
+                      .Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
                 Email = email,
                 PhoneNumber = phoneNumber,
                 LockoutEnabled = lockoutEnabled,
@@ -70,12 +66,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
         {
             var roleName = useRoleNamePrefixAsRoleName
                 ? roleNamePrefix
-                : string.Format(
-                      CultureInfo.InvariantCulture,
-                      "{0}{1}",
-                      roleNamePrefix,
-                      Guid.NewGuid()
-                  );
+                : string
+                  .Format(CultureInfo.InvariantCulture, "{0}{1}", roleNamePrefix, Guid.NewGuid());
             return new IdentityRole(roleName);
         }
 

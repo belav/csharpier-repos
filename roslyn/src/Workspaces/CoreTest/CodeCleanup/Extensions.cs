@@ -18,11 +18,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         public static TextSpan GetCodeCleanupSpan(this SyntaxNode node)
         {
             var previousToken = node.GetFirstToken(
-                    includeZeroWidth: true,
-                    includeSkipped: true,
-                    includeDirectives: true,
-                    includeDocumentationComments: true
-                )
+                includeZeroWidth: true,
+                includeSkipped: true,
+                includeDirectives: true,
+                includeDocumentationComments: true
+            )
                 .GetPreviousToken(
                     includeZeroWidth: true,
                     includeSkipped: true,
@@ -30,11 +30,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
                     includeDocumentationComments: true
                 );
             var endToken = node.GetLastToken(
-                    includeZeroWidth: true,
-                    includeSkipped: true,
-                    includeDirectives: true,
-                    includeDocumentationComments: true
-                )
+                includeZeroWidth: true,
+                includeSkipped: true,
+                includeDirectives: true,
+                includeDocumentationComments: true
+            )
                 .GetNextToken(
                     includeZeroWidth: true,
                     includeSkipped: true,
@@ -56,9 +56,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
 
         public static T RemoveCSharpMember<T>(this T node, int index) where T : SyntaxNode
         {
-            var newMembers = CSharp.SyntaxFactory.List(
-                node.RemoveMember<CSharp.Syntax.MemberDeclarationSyntax>(index)
-            );
+            var newMembers = CSharp.SyntaxFactory
+                .List(node.RemoveMember<CSharp.Syntax.MemberDeclarationSyntax>(index));
 
             dynamic d = node;
             return (T)d.WithMembers(newMembers);
@@ -70,9 +69,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
             int index
         ) where T : SyntaxNode
         {
-            var newMembers = CSharp.SyntaxFactory.List(
-                node.AddMember<CSharp.Syntax.MemberDeclarationSyntax>(member, index)
-            );
+            var newMembers = CSharp.SyntaxFactory
+                .List(node.AddMember<CSharp.Syntax.MemberDeclarationSyntax>(member, index));
 
             dynamic d = node;
             return (T)d.WithMembers(newMembers);

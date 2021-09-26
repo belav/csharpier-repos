@@ -210,9 +210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     Path.GetDirectoryName(filePath),
                     fileExtensionToWatch
                 );
-                _documentFileChangeContext = _workspace.FileChangeWatcher.CreateContext(
-                    projectDirectoryToWatch
-                );
+                _documentFileChangeContext = _workspace.FileChangeWatcher
+                    .CreateContext(projectDirectoryToWatch);
             }
             else
             {
@@ -303,8 +302,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         {
                             // Note: Not using our project Id. This is the same ProjectGuid that the project system uses
                             // so data can be correlated
-                            m["ProjectGuid"] =
-                                projectState.ProjectInfo.Attributes.TelemetryId.ToString("B");
+                            m["ProjectGuid"] = projectState.ProjectInfo.Attributes.TelemetryId
+                                .ToString("B");
                             m["SyntaxTreesParsed"] = parsedTrees;
                             m["HadCompilation"] = hadCompilation;
                         }
@@ -630,32 +629,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             {
                                 solutionChanges.UpdateSolutionForProjectAction(
                                     Id,
-                                    solutionChanges.Solution.RemoveProjectReference(
-                                        Id,
-                                        projectReference
-                                    )
+                                    solutionChanges.Solution
+                                        .RemoveProjectReference(Id, projectReference)
                                 );
                             }
                             else
                             {
                                 // TODO: find a cleaner way to fetch this
-                                var metadataReference =
-                                    _workspace.CurrentSolution.GetRequiredProject(Id)
-                                        .MetadataReferences.Cast<PortableExecutableReference>()
-                                        .Single(
-                                            m => m.FilePath == path && m.Properties == properties
-                                        );
+                                var metadataReference = _workspace.CurrentSolution
+                                    .GetRequiredProject(Id)
+                                    .MetadataReferences.Cast<PortableExecutableReference>()
+                                    .Single(m => m.FilePath == path && m.Properties == properties);
 
-                                _workspace.FileWatchedReferenceFactory.StopWatchingReference(
-                                    metadataReference
-                                );
+                                _workspace.FileWatchedReferenceFactory
+                                    .StopWatchingReference(metadataReference);
 
                                 solutionChanges.UpdateSolutionForProjectAction(
                                     Id,
-                                    newSolution: solutionChanges.Solution.RemoveMetadataReference(
-                                        Id,
-                                        metadataReference
-                                    )
+                                    newSolution: solutionChanges.Solution
+                                        .RemoveMetadataReference(Id, metadataReference)
                                 );
                             }
                         }
@@ -683,21 +675,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                                 }
                                 else
                                 {
-                                    var metadataReference =
-                                        _workspace.FileWatchedReferenceFactory.CreateReferenceAndStartWatchingFile(
-                                            path,
-                                            properties
-                                        );
+                                    var metadataReference = _workspace.FileWatchedReferenceFactory
+                                        .CreateReferenceAndStartWatchingFile(path, properties);
                                     metadataReferencesCreated.Add(metadataReference);
                                 }
                             }
 
                             solutionChanges.UpdateSolutionForProjectAction(
                                 Id,
-                                solutionChanges.Solution.AddProjectReferences(
-                                        Id,
-                                        projectReferencesCreated
-                                    )
+                                solutionChanges.Solution
+                                    .AddProjectReferences(Id, projectReferencesCreated)
                                     .AddMetadataReferences(Id, metadataReferencesCreated)
                             );
 
@@ -707,10 +694,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         // Project reference adding...
                         solutionChanges.UpdateSolutionForProjectAction(
                             Id,
-                            newSolution: solutionChanges.Solution.AddProjectReferences(
-                                Id,
-                                _projectReferencesAddedInBatch
-                            )
+                            newSolution: solutionChanges.Solution
+                                .AddProjectReferences(Id, _projectReferencesAddedInBatch)
                         );
                         ClearAndZeroCapacity(_projectReferencesAddedInBatch);
 
@@ -719,10 +704,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         {
                             solutionChanges.UpdateSolutionForProjectAction(
                                 Id,
-                                newSolution: solutionChanges.Solution.RemoveProjectReference(
-                                    Id,
-                                    projectReference
-                                )
+                                newSolution: solutionChanges.Solution
+                                    .RemoveProjectReference(Id, projectReference)
                             );
                         }
 
@@ -731,10 +714,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         // Analyzer reference adding...
                         solutionChanges.UpdateSolutionForProjectAction(
                             Id,
-                            newSolution: solutionChanges.Solution.AddAnalyzerReferences(
-                                Id,
-                                _analyzersAddedInBatch.Select(a => a.GetReference())
-                            )
+                            newSolution: solutionChanges.Solution
+                                .AddAnalyzerReferences(
+                                    Id,
+                                    _analyzersAddedInBatch.Select(a => a.GetReference())
+                                )
                         );
                         ClearAndZeroCapacity(_analyzersAddedInBatch);
 
@@ -743,10 +727,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         {
                             solutionChanges.UpdateSolutionForProjectAction(
                                 Id,
-                                newSolution: solutionChanges.Solution.RemoveAnalyzerReference(
-                                    Id,
-                                    analyzerReference.GetReference()
-                                )
+                                newSolution: solutionChanges.Solution
+                                    .RemoveAnalyzerReference(Id, analyzerReference.GetReference())
                             );
                         }
 
@@ -889,9 +871,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 {
                     // skip unrelated providers
                     if (
-                        !provider.Metadata.Extensions.Any(
-                            e => string.Equals(e, extension, StringComparison.OrdinalIgnoreCase)
-                        )
+                        !provider.Metadata.Extensions
+                            .Any(
+                                e => string.Equals(e, extension, StringComparison.OrdinalIgnoreCase)
+                            )
                     )
                     {
                         continue;
@@ -902,7 +885,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     // and the parameter filePath points to dynamic file such as ASP.NET .g.cs files.
                     //
                     // Also, provider is free-threaded. so fine to call Wait rather than JTF.
-                    fileInfo = provider.Value.GetDynamicFileInfoAsync(
+                    fileInfo = provider.Value
+                        .GetDynamicFileInfoAsync(
                             projectId: Id,
                             projectFilePath: _filePath,
                             filePath: dynamicFilePath,
@@ -998,11 +982,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             // provider is free-threaded. so fine to call Wait rather than JTF
             provider.RemoveDynamicFileInfoAsync(
-                    projectId: Id,
-                    projectFilePath: _filePath,
-                    filePath: dynamicFilePath,
-                    CancellationToken.None
-                )
+                projectId: Id,
+                projectFilePath: _filePath,
+                filePath: dynamicFilePath,
+                CancellationToken.None
+            )
                 .Wait(CancellationToken.None);
         }
 
@@ -1159,11 +1143,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             }
                             else
                             {
-                                var metadataReference =
-                                    _workspace.FileWatchedReferenceFactory.CreateReferenceAndStartWatchingFile(
-                                        fullPath,
-                                        properties
-                                    );
+                                var metadataReference = _workspace.FileWatchedReferenceFactory
+                                    .CreateReferenceAndStartWatchingFile(fullPath, properties);
                                 w.OnMetadataReferenceAdded(Id, metadataReference);
                             }
                         }
@@ -1247,15 +1228,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             else
                             {
                                 // TODO: find a cleaner way to fetch this
-                                var metadataReference = w.CurrentSolution.GetRequiredProject(Id)
+                                var metadataReference = w.CurrentSolution
+                                    .GetRequiredProject(Id)
                                     .MetadataReferences.Cast<PortableExecutableReference>()
                                     .Single(
                                         m => m.FilePath == fullPath && m.Properties == properties
                                     );
 
-                                _workspace.FileWatchedReferenceFactory.StopWatchingReference(
-                                    metadataReference
-                                );
+                                _workspace.FileWatchedReferenceFactory
+                                    .StopWatchingReference(metadataReference);
                                 w.OnMetadataReferenceRemoved(Id, metadataReference);
                             }
                         }
@@ -1319,7 +1300,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     return true;
                 }
 
-                return _workspace.CurrentSolution.GetRequiredProject(Id)
+                return _workspace.CurrentSolution
+                    .GetRequiredProject(Id)
                     .AllProjectReferences.Contains(projectReference);
             }
         }
@@ -1582,10 +1564,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     _orderedDocumentsInBatch = _orderedDocumentsInBatch?.Add(documentId);
 
                     _documentPathsToDocumentIds.Add(fullPath, documentId);
-                    _project._documentFileWatchingTokens.Add(
-                        documentId,
-                        _project._documentFileChangeContext.EnqueueWatchingFile(fullPath)
-                    );
+                    _project._documentFileWatchingTokens
+                        .Add(
+                            documentId,
+                            _project._documentFileChangeContext.EnqueueWatchingFile(fullPath)
+                        );
 
                     if (_project._activeBatchScopes > 0)
                     {
@@ -1593,12 +1576,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     }
                     else
                     {
-                        _project._workspace.ApplyChangeToWorkspace(
-                            w => _documentAddAction(w, documentInfo)
-                        );
-                        _project._workspace.QueueCheckForFilesBeingOpen(
-                            ImmutableArray.Create(fullPath)
-                        );
+                        _project._workspace
+                            .ApplyChangeToWorkspace(w => _documentAddAction(w, documentInfo));
+                        _project._workspace
+                            .QueueCheckForFilesBeingOpen(ImmutableArray.Create(fullPath));
                     }
                 }
 
@@ -1669,9 +1650,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         _project._workspace.ApplyChangeToWorkspace(
                             w =>
                             {
-                                _project._workspace.AddDocumentToDocumentsNotFromFiles(
-                                    documentInfo.Id
-                                );
+                                _project._workspace
+                                    .AddDocumentToDocumentsNotFromFiles(documentInfo.Id);
                                 _documentAddAction(w, documentInfo);
                                 w.OnDocumentOpened(documentInfo.Id, textContainer);
                             }
@@ -1725,9 +1705,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     else
                     {
                         // right now, assumption is dynamically generated file can never be opened in editor
-                        _project._workspace.ApplyChangeToWorkspace(
-                            w => _documentAddAction(w, documentInfo)
-                        );
+                        _project._workspace
+                            .ApplyChangeToWorkspace(w => _documentAddAction(w, documentInfo));
                     }
                 }
             }
@@ -1784,9 +1763,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         );
                     }
 
-                    _project._documentFileChangeContext.StopWatchingFile(
-                        _project._documentFileWatchingTokens[documentId]
-                    );
+                    _project._documentFileChangeContext
+                        .StopWatchingFile(_project._documentFileWatchingTokens[documentId]);
                     _project._documentFileWatchingTokens.Remove(documentId);
 
                     RemoveFileInternal(documentId, fullPath);
@@ -1811,9 +1789,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     }
                     else
                     {
-                        _project._workspace.ApplyChangeToWorkspace(
-                            w => _documentRemoveAction(w, documentId)
-                        );
+                        _project._workspace
+                            .ApplyChangeToWorkspace(w => _documentRemoveAction(w, documentId));
                     }
                 }
                 else
@@ -1886,9 +1863,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                                         new SourceTextLoader(textContainer, filePath: null)
                                     );
                                     _documentRemoveAction(w, documentId);
-                                    _project._workspace.RemoveDocumentToDocumentsNotFromFiles(
-                                        documentId
-                                    );
+                                    _project._workspace
+                                        .RemoveDocumentToDocumentsNotFromFiles(documentId);
                                 }
                             );
                         }
@@ -1978,19 +1954,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                                     // meaning it can't use JTF to go back to UI thread.
                                     // so, it is okay for us to call regular ".Result" on a task here.
                                     var fileInfo = fileInfoProvider.GetDynamicFileInfoAsync(
-                                            _project.Id,
-                                            _project._filePath,
-                                            projectSystemFilePath,
-                                            CancellationToken.None
-                                        )
+                                        _project.Id,
+                                        _project._filePath,
+                                        projectSystemFilePath,
+                                        CancellationToken.None
+                                    )
                                         .WaitAndGetResult_CanCallOnBackground(
                                             CancellationToken.None
                                         );
 
                                     // Right now we're only supporting dynamic files as actual source files, so it's OK to call GetDocument here
-                                    var document = w.CurrentSolution.GetRequiredDocument(
-                                        documentId
-                                    );
+                                    var document = w.CurrentSolution
+                                        .GetRequiredDocument(documentId);
 
                                     var documentInfo = DocumentInfo.Create(
                                         document.Id,
@@ -2060,10 +2035,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                                 var solutionChanges = new SolutionChangeAccumulator(solution);
                                 solutionChanges.UpdateSolutionForProjectAction(
                                     _project.Id,
-                                    solutionChanges.Solution.WithProjectDocumentsOrder(
-                                        _project.Id,
-                                        documentIds.ToImmutable()
-                                    )
+                                    solutionChanges.Solution
+                                        .WithProjectDocumentsOrder(
+                                            _project.Id,
+                                            documentIds.ToImmutable()
+                                        )
                                 );
                                 return solutionChanges;
                             }
@@ -2130,10 +2106,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 {
                     solutionChanges.UpdateSolutionForProjectAction(
                         _project.Id,
-                        solutionChanges.Solution.WithProjectDocumentsOrder(
-                            _project.Id,
-                            _orderedDocumentsInBatch
-                        )
+                        solutionChanges.Solution
+                            .WithProjectDocumentsOrder(_project.Id, _orderedDocumentsInBatch)
                     );
                     _orderedDocumentsInBatch = null;
                 }

@@ -66,9 +66,8 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
         {
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var expressionTypeOpt = semanticModel.Compilation.GetTypeByMetadataName(
-                "System.Linq.Expressions.Expression`1"
-            );
+            var expressionTypeOpt = semanticModel.Compilation
+                .GetTypeByMetadataName("System.Linq.Expressions.Expression`1");
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var semanticFacts = document.GetLanguageService<ISemanticFactsService>();
 
@@ -124,14 +123,14 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
                     );
 
                     var coalesceExpression = GetCoalesceExpression(
-                            syntaxFacts,
-                            g,
-                            whenPart,
-                            whenTrue,
-                            conditionalPartLow,
-                            currentWhenTrue,
-                            currentWhenFalse
-                        )
+                        syntaxFacts,
+                        g,
+                        whenPart,
+                        whenTrue,
+                        conditionalPartLow,
+                        currentWhenTrue,
+                        currentWhenFalse
+                    )
                         .WithTrailingTrivia(conditionalExpression.GetTrailingTrivia());
 
                     if (

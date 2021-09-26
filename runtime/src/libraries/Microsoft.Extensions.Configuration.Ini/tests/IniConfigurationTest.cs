@@ -20,9 +20,8 @@ Provider=SqlClient
 [Data:Inventory]
 ConnectionString=AnotherTestConnectionString
 SubHeader:Provider=MySql";
-            var config = new ConfigurationBuilder().AddIniStream(
-                    TestStreamHelpers.StringToStream(ini)
-                )
+            var config = new ConfigurationBuilder()
+                .AddIniStream(TestStreamHelpers.StringToStream(ini))
                 .Build();
 
             Assert.Equal("TestConnectionString", config["defaultconnection:ConnectionString"]);
@@ -41,9 +40,8 @@ Provider=SqlClient
 [Data:Inventory]
 ConnectionString=AnotherTestConnectionString
 SubHeader:Provider=MySql";
-            var config = new ConfigurationBuilder().AddIniStream(
-                    TestStreamHelpers.StringToStream(ini)
-                )
+            var config = new ConfigurationBuilder()
+                .AddIniStream(TestStreamHelpers.StringToStream(ini))
                 .Build();
             Assert.Throws<InvalidOperationException>(() => config.Reload());
         }
@@ -305,10 +303,8 @@ DefaultConnection=TestConnectionString
         [Fact]
         public void IniConfiguration_Does_Not_Throw_On_Optional_Configuration()
         {
-            var config = new ConfigurationBuilder().AddIniFile(
-                    "NotExistingConfig.ini",
-                    optional: true
-                )
+            var config = new ConfigurationBuilder()
+                .AddIniFile("NotExistingConfig.ini", optional: true)
                 .Build();
         }
     }

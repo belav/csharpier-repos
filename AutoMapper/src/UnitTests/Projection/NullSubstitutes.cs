@@ -61,15 +61,14 @@
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateProjection<Source, Dest>()
-                        .ForMember(
-                            m => m.ValuePropertyNotMatching,
-                            opt =>
-                            {
-                                opt.MapFrom(src => src.Value);
-                                opt.NullSubstitute(5);
-                            }
-                        );
+                    cfg.CreateProjection<Source, Dest>().ForMember(
+                        m => m.ValuePropertyNotMatching,
+                        opt =>
+                        {
+                            opt.MapFrom(src => src.Value);
+                            opt.NullSubstitute(5);
+                        }
+                    );
                 }
             );
 

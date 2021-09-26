@@ -65,9 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
         public override string ToString() =>
-            ((IDbFunctionParameter)this).ToDebugString(
-                MetadataDebugStringOptions.SingleLineDefault
-            );
+            ((IDbFunctionParameter)this)
+                .ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -79,13 +78,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual DebugView DebugView =>
             new(
                 () =>
-                    ((IDbFunctionParameter)this).ToDebugString(
-                        MetadataDebugStringOptions.ShortDefault
-                    ),
+                    ((IDbFunctionParameter)this)
+                        .ToDebugString(MetadataDebugStringOptions.ShortDefault),
                 () =>
-                    ((IDbFunctionParameter)this).ToDebugString(
-                        MetadataDebugStringOptions.LongDefault
-                    )
+                    ((IDbFunctionParameter)this)
+                        .ToDebugString(MetadataDebugStringOptions.LongDefault)
             );
 
         /// <inheritdoc />
@@ -152,7 +149,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     var relationalTypeMappingSource = (IRelationalTypeMappingSource)(
                         (IModel)parameter.Function.Model
-                    ).GetModelDependencies().TypeMappingSource;
+                    )
+                        .GetModelDependencies().TypeMappingSource;
                     return relationalTypeMappingSource.FindMapping(parameter._storeType)!;
                 }
             );

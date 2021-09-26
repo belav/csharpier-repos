@@ -37,11 +37,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void XAxisOverrides()
         {
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).SetXAxis(
-                "AxisX",
-                1,
-                100
-            );
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
+                .SetXAxis("AxisX", 1, 100);
             AssertBuiltChartAction(
                 chart,
                 c =>
@@ -57,11 +54,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void YAxisOverrides()
         {
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).SetYAxis(
-                "AxisY",
-                1,
-                100
-            );
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
+                .SetYAxis("AxisY", 1, 100);
             AssertBuiltChartAction(
                 chart,
                 c =>
@@ -311,12 +305,8 @@ namespace System.Web.Helpers.Test
                 new { GroupBy = "1", YValue = 2 },
                 new { GroupBy = "2", YValue = 1 }
             };
-            var chart = new Chart(
-                GetContext(),
-                GetVirtualPathProvider(),
-                100,
-                100
-            ).DataBindCrossTable(data, "GroupBy", xField: null, yFields: "YValue");
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
+                .DataBindCrossTable(data, "GroupBy", xField: null, yFields: "YValue");
             // todo - anything else to verify here?
             AssertBuiltChartAction(
                 chart,
@@ -422,10 +412,8 @@ namespace System.Web.Helpers.Test
                 new { XValue = "2", YValue = 2 },
                 new { XValue = "3", YValue = 3 }
             };
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).DataBindTable(
-                data,
-                xField: "XValue"
-            );
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
+                .DataBindTable(data, xField: "XValue");
             // todo - anything else to verify here?
             AssertBuiltChartAction(
                 chart,
@@ -441,10 +429,8 @@ namespace System.Web.Helpers.Test
         public void DataBindTableWhenXFieldIsNull()
         {
             var data = new[] { new { YValue = 1 }, new { YValue = 2 }, new { YValue = 3 } };
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).DataBindTable(
-                data,
-                xField: null
-            );
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
+                .DataBindTable(data, xField: null);
             // todo - anything else to verify here?
             AssertBuiltChartAction(
                 chart,
@@ -549,9 +535,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void LegendOverrides()
         {
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).AddLegend(
-                    "Legend1"
-                )
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
+                .AddLegend("Legend1")
                 .AddLegend("Legend2", "Legend2Name");
             AssertBuiltChartAction(
                 chart,
@@ -786,9 +771,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SeriesOverrides()
         {
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).AddSeries(
-                chartType: "Bar"
-            );
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
+                .AddSeries(chartType: "Bar");
             AssertBuiltChartAction(
                 chart,
                 c =>
@@ -845,9 +829,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TitleOverrides()
         {
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).AddTitle(
-                    name: "Title1"
-                )
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
+                .AddTitle(name: "Title1")
                 .AddTitle("Title2Text", name: "Title2");
             AssertBuiltChartAction(
                 chart,

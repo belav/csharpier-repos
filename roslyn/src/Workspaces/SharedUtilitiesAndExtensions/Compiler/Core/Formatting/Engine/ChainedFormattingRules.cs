@@ -149,27 +149,26 @@ namespace Microsoft.CodeAnalysis.Formatting
         )
         {
             return rules.Where(
-                    rule =>
+                rule =>
+                {
+                    var type = GetTypeImplementingMethod(rule, name);
+                    if (type == typeof(AbstractFormattingRule))
                     {
-                        var type = GetTypeImplementingMethod(rule, name);
-                        if (type == typeof(AbstractFormattingRule))
+                        return false;
+                    }
+
+                    if (type == typeof(CompatAbstractFormattingRule))
+                    {
+                        type = GetTypeImplementingMethod(rule, name + "Slow");
+                        if (type == typeof(CompatAbstractFormattingRule))
                         {
                             return false;
                         }
-
-                        if (type == typeof(CompatAbstractFormattingRule))
-                        {
-                            type = GetTypeImplementingMethod(rule, name + "Slow");
-                            if (type == typeof(CompatAbstractFormattingRule))
-                            {
-                                return false;
-                            }
-                        }
-
-                        return true;
                     }
-                )
-                .ToImmutableArray();
+
+                    return true;
+                }
+            ).ToImmutableArray();
         }
 
         private static Type? GetTypeImplementingMethod(object obj, string name)
@@ -177,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             return s_typeImplementingMethod.GetOrAdd(
                 (obj.GetType(), name),
                 key =>
-                    key.type.GetRuntimeMethods()
+                    key.type
+                        .GetRuntimeMethods()
                         .FirstOrDefault(method => method.Name == key.name)?.DeclaringType
             );
         }

@@ -142,19 +142,22 @@ namespace Microsoft.EntityFrameworkCore.Query
             && selectExpression.Tables.Count == 1
             && selectExpression.Tables[0] is SetOperationBase setOperation
             && selectExpression.Projection.Count == setOperation.Source1.Projection.Count
-            && selectExpression.Projection.Select(
+            && selectExpression.Projection
+                .Select(
                     (pe, index) =>
                         pe.Expression is ColumnExpression column
-                        && string.Equals(
-                            column.TableAlias,
-                            setOperation.Alias,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && string.Equals(
-                            column.Name,
-                            setOperation.Source1.Projection[index].Alias,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        && string
+                            .Equals(
+                                column.TableAlias,
+                                setOperation.Alias,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        && string
+                            .Equals(
+                                column.Name,
+                                setOperation.Source1.Projection[index].Alias,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                 )
                 .All(e => e);
 
@@ -292,8 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (!string.IsNullOrEmpty(sqlFunctionExpression.Schema))
                 {
                     _relationalCommandBuilder.Append(
-                            _sqlGenerationHelper.DelimitIdentifier(sqlFunctionExpression.Schema)
-                        )
+                        _sqlGenerationHelper.DelimitIdentifier(sqlFunctionExpression.Schema)
+                    )
                         .Append(".");
                 }
 
@@ -322,18 +325,18 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (!string.IsNullOrEmpty(tableValuedFunctionExpression.StoreFunction.Schema))
             {
                 _relationalCommandBuilder.Append(
-                        _sqlGenerationHelper.DelimitIdentifier(
-                            tableValuedFunctionExpression.StoreFunction.Schema
-                        )
+                    _sqlGenerationHelper.DelimitIdentifier(
+                        tableValuedFunctionExpression.StoreFunction.Schema
                     )
+                )
                     .Append(".");
             }
 
             _relationalCommandBuilder.Append(
-                    _sqlGenerationHelper.DelimitIdentifier(
-                        tableValuedFunctionExpression.StoreFunction.Name
-                    )
+                _sqlGenerationHelper.DelimitIdentifier(
+                    tableValuedFunctionExpression.StoreFunction.Name
                 )
+            )
                 .Append("(");
 
             GenerateList(tableValuedFunctionExpression.Arguments, e => Visit(e));
@@ -353,8 +356,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(columnExpression, nameof(columnExpression));
 
             _relationalCommandBuilder.Append(
-                    _sqlGenerationHelper.DelimitIdentifier(columnExpression.TableAlias)
-                )
+                _sqlGenerationHelper.DelimitIdentifier(columnExpression.TableAlias)
+            )
                 .Append(".")
                 .Append(_sqlGenerationHelper.DelimitIdentifier(columnExpression.Name));
 
@@ -367,11 +370,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(tableExpression, nameof(tableExpression));
 
             _relationalCommandBuilder.Append(
-                    _sqlGenerationHelper.DelimitIdentifier(
-                        tableExpression.Name,
-                        tableExpression.Schema
-                    )
-                )
+                _sqlGenerationHelper.DelimitIdentifier(tableExpression.Name, tableExpression.Schema)
+            )
                 .Append(AliasSeparator)
                 .Append(_sqlGenerationHelper.DelimitIdentifier(tableExpression.Alias));
 
@@ -419,10 +419,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         }
                         else if (value is SqlConstantExpression sqlConstantExpression)
                         {
-                            substitutions[i] =
-                                sqlConstantExpression.TypeMapping!.GenerateSqlLiteral(
-                                    sqlConstantExpression.Value
-                                );
+                            substitutions[i] = sqlConstantExpression.TypeMapping!
+                                .GenerateSqlLiteral(sqlConstantExpression.Value);
                         }
                     }
                     break;
@@ -604,9 +602,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             );
 
             if (
-                _relationalCommandBuilder.Parameters.All(
-                    p => p.InvariantName != sqlParameterExpression.Name
-                )
+                _relationalCommandBuilder.Parameters
+                    .All(p => p.InvariantName != sqlParameterExpression.Name)
             )
             {
                 _relationalCommandBuilder.AddParameter(
@@ -837,7 +834,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _relationalCommandBuilder.Append(inExpression.IsNegated ? " NOT IN " : " IN ");
                 _relationalCommandBuilder.Append("(");
                 var valuesConstant = (SqlConstantExpression)inExpression.Values;
-                var valuesList = ((IEnumerable<object?>)valuesConstant.Value!).Select(
+                var valuesList = ((IEnumerable<object?>)valuesConstant.Value!)
+                    .Select(
                         v =>
                             new SqlConstantExpression(
                                 Expression.Constant(v),

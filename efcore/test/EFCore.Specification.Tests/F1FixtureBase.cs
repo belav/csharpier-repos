@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore
         protected override bool UsePooling => true;
 
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-            base.AddOptions(builder)
+            base
+                .AddOptions(builder)
                 .UseModel(CreateModelExternal())
                 .ConfigureWarnings(
                     w => w.Ignore(CoreEventId.SaveChangesStarting, CoreEventId.SaveChangesCompleted)
@@ -112,16 +113,15 @@ namespace Microsoft.EntityFrameworkCore
                 }
             );
 
-            modelBuilder.Entity<TitleSponsor>()
-                .OwnsOne(
-                    s => s.Details,
-                    eb =>
-                    {
-                        eb.Property(d => d.Space);
-                        eb.Property<TRowVersion>("Version").IsRowVersion();
-                        eb.Property<int?>(Sponsor.ClientTokenPropertyName).IsConcurrencyToken();
-                    }
-                );
+            modelBuilder.Entity<TitleSponsor>().OwnsOne(
+                s => s.Details,
+                eb =>
+                {
+                    eb.Property(d => d.Space);
+                    eb.Property<TRowVersion>("Version").IsRowVersion();
+                    eb.Property<int?>(Sponsor.ClientTokenPropertyName).IsConcurrencyToken();
+                }
+            );
 
             if (typeof(TRowVersion) != typeof(byte[]))
             {
@@ -137,16 +137,13 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder.Entity<Sponsor>()
                     .Property<TRowVersion>("Version")
                     .HasConversion<byte[]>();
-                modelBuilder.Entity<TitleSponsor>()
-                    .OwnsOne(
-                        s => s.Details,
-                        eb =>
-                        {
-                            eb.Property<TRowVersion>("Version")
-                                .IsRowVersion()
-                                .HasConversion<byte[]>();
-                        }
-                    );
+                modelBuilder.Entity<TitleSponsor>().OwnsOne(
+                    s => s.Details,
+                    eb =>
+                    {
+                        eb.Property<TRowVersion>("Version").IsRowVersion().HasConversion<byte[]>();
+                    }
+                );
             }
         }
 

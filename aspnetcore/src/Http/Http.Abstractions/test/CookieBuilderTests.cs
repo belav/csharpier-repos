@@ -35,10 +35,8 @@ namespace Microsoft.AspNetCore.Http.Abstractions.Tests
             Assert.Null(new CookieBuilder().Build(new DefaultHttpContext()).Expires);
 
             var now = DateTimeOffset.Now;
-            var options = new CookieBuilder { Expiration = TimeSpan.FromHours(1) }.Build(
-                new DefaultHttpContext(),
-                now
-            );
+            var options = new CookieBuilder { Expiration = TimeSpan.FromHours(1) }
+                .Build(new DefaultHttpContext(), now);
             Assert.Equal(now.AddHours(1), options.Expires);
         }
 

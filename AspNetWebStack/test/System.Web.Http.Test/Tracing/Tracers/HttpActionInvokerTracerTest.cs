@@ -104,10 +104,8 @@ namespace System.Web.Http.Tracing.Tracers
             );
 
             // Act
-            var response = ((IHttpActionInvoker)tracer).InvokeActionAsync(
-                _actionContext,
-                cancellationSource.Token
-            );
+            var response = ((IHttpActionInvoker)tracer)
+                .InvokeActionAsync(_actionContext, cancellationSource.Token);
 
             // Assert
             await Assert.ThrowsAsync<TaskCanceledException>(() => response);
@@ -144,10 +142,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            var response = ((IHttpActionInvoker)tracer).InvokeActionAsync(
-                _actionContext,
-                cancellationSource.Token
-            );
+            var response = ((IHttpActionInvoker)tracer)
+                .InvokeActionAsync(_actionContext, cancellationSource.Token);
 
             // Assert
             await Assert.ThrowsAsync<TaskCanceledException>(() => response);
@@ -171,12 +167,12 @@ namespace System.Web.Http.Tracing.Tracers
                 new TaskCompletionSource<HttpResponseMessage>(null);
             tcs.TrySetException(expectedException);
             mockActionInvoker.Setup(
-                    a =>
-                        a.InvokeActionAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                a =>
+                    a.InvokeActionAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(tcs.Task);
             HttpActionInvokerTracer tracer = new HttpActionInvokerTracer(
                 mockActionInvoker.Object,
@@ -186,10 +182,8 @@ namespace System.Web.Http.Tracing.Tracers
             // Act & Assert
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    ((IHttpActionInvoker)tracer).InvokeActionAsync(
-                        _actionContext,
-                        CancellationToken.None
-                    )
+                    ((IHttpActionInvoker)tracer)
+                        .InvokeActionAsync(_actionContext, CancellationToken.None)
             );
 
             Assert.Equal(expectedException.Message, exception.Message);
@@ -208,12 +202,12 @@ namespace System.Web.Http.Tracing.Tracers
                 new TaskCompletionSource<HttpResponseMessage>(null);
             tcs.TrySetException(expectedException);
             mockActionInvoker.Setup(
-                    a =>
-                        a.InvokeActionAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                a =>
+                    a.InvokeActionAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(tcs.Task);
             TestTraceWriter traceWriter = new TestTraceWriter();
             HttpActionInvokerTracer tracer = new HttpActionInvokerTracer(
@@ -239,10 +233,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            var response = ((IHttpActionInvoker)tracer).InvokeActionAsync(
-                _actionContext,
-                CancellationToken.None
-            );
+            var response = ((IHttpActionInvoker)tracer)
+                .InvokeActionAsync(_actionContext, CancellationToken.None);
 
             // Assert
             await Assert.ThrowsAsync<InvalidOperationException>(() => response);
@@ -280,12 +272,12 @@ namespace System.Web.Http.Tracing.Tracers
             Mock<ApiControllerActionInvoker> mockActionInvoker =
                 new Mock<ApiControllerActionInvoker>() { CallBase = true };
             mockActionInvoker.Setup(
-                    a =>
-                        a.InvokeActionAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                a =>
+                    a.InvokeActionAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Throws(expectedException);
             HttpActionInvokerTracer tracer = new HttpActionInvokerTracer(
                 mockActionInvoker.Object,
@@ -295,10 +287,8 @@ namespace System.Web.Http.Tracing.Tracers
             // Act & Assert
             InvalidOperationException thrownException = Assert.Throws<InvalidOperationException>(
                 () =>
-                    ((IHttpActionInvoker)tracer).InvokeActionAsync(
-                        _actionContext,
-                        CancellationToken.None
-                    )
+                    ((IHttpActionInvoker)tracer)
+                        .InvokeActionAsync(_actionContext, CancellationToken.None)
             );
 
             // Assert
@@ -315,12 +305,12 @@ namespace System.Web.Http.Tracing.Tracers
             Mock<ApiControllerActionInvoker> mockActionInvoker =
                 new Mock<ApiControllerActionInvoker>() { CallBase = true };
             mockActionInvoker.Setup(
-                    a =>
-                        a.InvokeActionAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                a =>
+                    a.InvokeActionAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Throws(expectedException);
 
             TestTraceWriter traceWriter = new TestTraceWriter();
@@ -349,10 +339,8 @@ namespace System.Web.Http.Tracing.Tracers
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    ((IHttpActionInvoker)tracer).InvokeActionAsync(
-                        _actionContext,
-                        CancellationToken.None
-                    )
+                    ((IHttpActionInvoker)tracer)
+                        .InvokeActionAsync(_actionContext, CancellationToken.None)
             );
 
             // Assert

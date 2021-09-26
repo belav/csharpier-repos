@@ -89,11 +89,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                         }
                     }
                     else if (
-                        string.Equals(
-                            RazorFileExtension,
-                            Path.GetExtension(fileInfo.Name),
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                RazorFileExtension,
+                                Path.GetExtension(fileInfo.Name),
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         var filePath = prefix + "/" + fileInfo.Name;

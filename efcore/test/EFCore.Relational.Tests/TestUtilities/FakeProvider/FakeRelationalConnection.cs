@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
                         new RelationalCommandBuilderDependencies(
                             new TestRelationalTypeMappingSource(
                                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                                TestServiceFactory.Instance
+                                    .Create<RelationalTypeMappingSourceDependencies>()
                             )
                         )
                     )
@@ -66,9 +67,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                new FakeRelationalOptionsExtension().WithConnectionString("Database=Dummy")
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=Dummy")
+                );
 
             return optionsBuilder.Options;
         }

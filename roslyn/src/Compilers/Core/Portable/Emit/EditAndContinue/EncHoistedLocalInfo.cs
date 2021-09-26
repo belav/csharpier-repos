@@ -48,12 +48,13 @@ namespace Microsoft.CodeAnalysis.Emit
                 return "[invalid]";
             }
 
-            return string.Format(
-                "[Id={0}, SynthesizedKind={1}, Type={2}]",
-                SlotInfo.Id,
-                SlotInfo.SynthesizedKind,
-                Type
-            );
+            return string
+                .Format(
+                    "[Id={0}, SynthesizedKind={1}, Type={2}]",
+                    SlotInfo.Id,
+                    SlotInfo.SynthesizedKind,
+                    Type
+                );
         }
     }
 }

@@ -34,12 +34,8 @@ namespace System.Speech.Internal.ObjectTokens
                 && tokenName.IndexOf("HKEY_", StringComparison.Ordinal) != 0
             )
             {
-                tokenName = string.Format(
-                    CultureInfo.InvariantCulture,
-                    @"{0}\Tokens\{1}",
-                    Id,
-                    tokenName
-                );
+                tokenName = string
+                    .Format(CultureInfo.InvariantCulture, @"{0}\Tokens\{1}", Id, tokenName);
             }
 
             return ObjectToken.Open(null, tokenName, false);

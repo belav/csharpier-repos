@@ -135,9 +135,9 @@ namespace System.Linq.Expressions.Tests
 #if FEATURE_COMPILE
         private static TypeBuilder GetTestTypeBuilder() =>
             AssemblyBuilder.DefineDynamicAssembly(
-                    new AssemblyName("TestAssembly"),
-                    AssemblyBuilderAccess.RunAndCollect
-                )
+                new AssemblyName("TestAssembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            )
                 .DefineDynamicModule("TestModule")
                 .DefineType("TestType");
 
@@ -853,8 +853,8 @@ namespace System.Linq.Expressions.Tests
             Expression<Action> index = Expression.Lambda<Action>(Expression.Empty());
             ConstantExpression intIdx = Expression.Constant(0);
             Func<bool> f = Expression.Lambda<Func<bool>>(
-                    Expression.Property(instance, prop, intIdx, index)
-                )
+                Expression.Property(instance, prop, intIdx, index)
+            )
                 .Compile(useInterpreter);
             Assert.True(f());
         }

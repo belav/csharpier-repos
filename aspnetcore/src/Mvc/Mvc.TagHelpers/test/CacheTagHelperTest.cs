@@ -39,11 +39,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var value = new Mock<ICacheEntry>();
             value.Setup(c => c.Value).Returns(new DefaultTagHelperContent().SetContent("ok"));
             cache.Setup(
-                    c =>
-                        c.CreateEntry(
-                            /*key*/It.IsAny<string>()
-                        )
-                )
+                c =>
+                    c.CreateEntry(
+                        /*key*/It.IsAny<string>()
+                    )
+            )
                 .Returns((object key) => value.Object)
                 .Verifiable();
             object cacheResult;
@@ -542,9 +542,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             expectedContent.SetContent("some-content");
             var tokenSource = new CancellationTokenSource();
             var cache = new MemoryCache(new MemoryCacheOptions());
-            var cacheEntryOptions = new MemoryCacheEntryOptions().AddExpirationToken(
-                new CancellationChangeToken(tokenSource.Token)
-            );
+            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                .AddExpirationToken(new CancellationChangeToken(tokenSource.Token));
             var tagHelperContext = new TagHelperContext(
                 tagName: "cache",
                 allAttributes: new TagHelperAttributeList(),

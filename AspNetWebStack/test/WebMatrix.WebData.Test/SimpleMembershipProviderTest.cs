@@ -22,12 +22,12 @@ namespace WebMatrix.WebData.Test
             var database = new Mock<MockDatabase>(MockBehavior.Strict);
             database.As<IDisposable>().Setup(d => d.Dispose());
             database.Setup(
-                    d =>
-                        d.Query(
-                            "SELECT [UserId], [ConfirmationToken] FROM webpages_Membership WHERE [ConfirmationToken] = @0",
-                            "foo"
-                        )
-                )
+                d =>
+                    d.Query(
+                        "SELECT [UserId], [ConfirmationToken] FROM webpages_Membership WHERE [ConfirmationToken] = @0",
+                        "foo"
+                    )
+            )
                 .Returns(Enumerable.Empty<DynamicRecord>());
             var simpleMembershipProvider = new TestSimpleMembershipProvider(database.Object);
 
@@ -46,12 +46,12 @@ namespace WebMatrix.WebData.Test
             DynamicRecord record = GetRecord(98, "Foo");
             database.As<IDisposable>().Setup(d => d.Dispose());
             database.Setup(
-                    d =>
-                        d.Query(
-                            "SELECT [UserId], [ConfirmationToken] FROM webpages_Membership WHERE [ConfirmationToken] = @0",
-                            "foo"
-                        )
-                )
+                d =>
+                    d.Query(
+                        "SELECT [UserId], [ConfirmationToken] FROM webpages_Membership WHERE [ConfirmationToken] = @0",
+                        "foo"
+                    )
+            )
                 .Returns(new[] { record });
             var simpleMembershipProvider = new TestSimpleMembershipProvider(database.Object);
 
@@ -71,12 +71,12 @@ namespace WebMatrix.WebData.Test
             DynamicRecord recordB = GetRecord(99, "fOo");
             database.As<IDisposable>().Setup(d => d.Dispose());
             database.Setup(
-                    d =>
-                        d.Query(
-                            "SELECT [UserId], [ConfirmationToken] FROM webpages_Membership WHERE [ConfirmationToken] = @0",
-                            "foo"
-                        )
-                )
+                d =>
+                    d.Query(
+                        "SELECT [UserId], [ConfirmationToken] FROM webpages_Membership WHERE [ConfirmationToken] = @0",
+                        "foo"
+                    )
+            )
                 .Returns(new[] { recordA, recordB });
             var simpleMembershipProvider = new TestSimpleMembershipProvider(database.Object);
 
@@ -95,21 +95,21 @@ namespace WebMatrix.WebData.Test
             DynamicRecord record = GetRecord(100, "foo");
             database.As<IDisposable>().Setup(d => d.Dispose());
             database.Setup(
-                    d =>
-                        d.Query(
-                            "SELECT [UserId], [ConfirmationToken] FROM webpages_Membership WHERE [ConfirmationToken] = @0",
-                            "foo"
-                        )
-                )
+                d =>
+                    d.Query(
+                        "SELECT [UserId], [ConfirmationToken] FROM webpages_Membership WHERE [ConfirmationToken] = @0",
+                        "foo"
+                    )
+            )
                 .Returns(new[] { record })
                 .Verifiable();
             database.Setup(
-                    d =>
-                        d.Execute(
-                            "UPDATE webpages_Membership SET [IsConfirmed] = 1 WHERE [UserId] = @0",
-                            100
-                        )
-                )
+                d =>
+                    d.Execute(
+                        "UPDATE webpages_Membership SET [IsConfirmed] = 1 WHERE [UserId] = @0",
+                        100
+                    )
+            )
                 .Returns(1)
                 .Verifiable();
             var simpleMembershipProvider = new TestSimpleMembershipProvider(database.Object);
@@ -132,21 +132,21 @@ namespace WebMatrix.WebData.Test
             DynamicRecord recordC = GetRecord(102, "fOo");
             database.As<IDisposable>().Setup(d => d.Dispose());
             database.Setup(
-                    d =>
-                        d.Query(
-                            "SELECT [UserId], [ConfirmationToken] FROM webpages_Membership WHERE [ConfirmationToken] = @0",
-                            "foo"
-                        )
-                )
+                d =>
+                    d.Query(
+                        "SELECT [UserId], [ConfirmationToken] FROM webpages_Membership WHERE [ConfirmationToken] = @0",
+                        "foo"
+                    )
+            )
                 .Returns(new[] { recordA, recordB, recordC })
                 .Verifiable();
             database.Setup(
-                    d =>
-                        d.Execute(
-                            "UPDATE webpages_Membership SET [IsConfirmed] = 1 WHERE [UserId] = @0",
-                            101
-                        )
-                )
+                d =>
+                    d.Execute(
+                        "UPDATE webpages_Membership SET [IsConfirmed] = 1 WHERE [UserId] = @0",
+                        101
+                    )
+            )
                 .Returns(1)
                 .Verifiable();
             var simpleMembershipProvider = new TestSimpleMembershipProvider(database.Object);
@@ -166,13 +166,13 @@ namespace WebMatrix.WebData.Test
             var database = new Mock<MockDatabase>(MockBehavior.Strict);
             database.As<IDisposable>().Setup(d => d.Dispose());
             database.Setup(
-                    d =>
-                        d.QuerySingle(
-                            "SELECT m.[UserId], m.[ConfirmationToken] FROM webpages_Membership m JOIN [Users] u ON m.[UserId] = u.[UserId] WHERE m.[ConfirmationToken] = @0 AND u.[UserName] = @1",
-                            "foo",
-                            "user12"
-                        )
-                )
+                d =>
+                    d.QuerySingle(
+                        "SELECT m.[UserId], m.[ConfirmationToken] FROM webpages_Membership m JOIN [Users] u ON m.[UserId] = u.[UserId] WHERE m.[ConfirmationToken] = @0 AND u.[UserName] = @1",
+                        "foo",
+                        "user12"
+                    )
+            )
                 .Returns(null);
             var simpleMembershipProvider = new TestSimpleMembershipProvider(database.Object)
             {
@@ -196,13 +196,13 @@ namespace WebMatrix.WebData.Test
             DynamicRecord record = GetRecord(98, "Foo");
             database.As<IDisposable>().Setup(d => d.Dispose());
             database.Setup(
-                    d =>
-                        d.QuerySingle(
-                            "SELECT m.[UserId], m.[ConfirmationToken] FROM webpages_Membership m JOIN [Users_bkp2_1] u ON m.[UserId] = u.[wishlist_site_real_user_id] WHERE m.[ConfirmationToken] = @0 AND u.[wishlist_site_real_user_name] = @1",
-                            "foo",
-                            "user13"
-                        )
-                )
+                d =>
+                    d.QuerySingle(
+                        "SELECT m.[UserId], m.[ConfirmationToken] FROM webpages_Membership m JOIN [Users_bkp2_1] u ON m.[UserId] = u.[wishlist_site_real_user_id] WHERE m.[ConfirmationToken] = @0 AND u.[wishlist_site_real_user_name] = @1",
+                        "foo",
+                        "user13"
+                    )
+            )
                 .Returns(record);
             var simpleMembershipProvider = new TestSimpleMembershipProvider(database.Object)
             {
@@ -226,22 +226,22 @@ namespace WebMatrix.WebData.Test
             DynamicRecord record = GetRecord(100, "foo");
             database.As<IDisposable>().Setup(d => d.Dispose());
             database.Setup(
-                    d =>
-                        d.QuerySingle(
-                            "SELECT m.[UserId], m.[ConfirmationToken] FROM webpages_Membership m JOIN [Users] u ON m.[UserId] = u.[Id] WHERE m.[ConfirmationToken] = @0 AND u.[UserName] = @1",
-                            "foo",
-                            "user14"
-                        )
-                )
+                d =>
+                    d.QuerySingle(
+                        "SELECT m.[UserId], m.[ConfirmationToken] FROM webpages_Membership m JOIN [Users] u ON m.[UserId] = u.[Id] WHERE m.[ConfirmationToken] = @0 AND u.[UserName] = @1",
+                        "foo",
+                        "user14"
+                    )
+            )
                 .Returns(record)
                 .Verifiable();
             database.Setup(
-                    d =>
-                        d.Execute(
-                            "UPDATE webpages_Membership SET [IsConfirmed] = 1 WHERE [UserId] = @0",
-                            100
-                        )
-                )
+                d =>
+                    d.Execute(
+                        "UPDATE webpages_Membership SET [IsConfirmed] = 1 WHERE [UserId] = @0",
+                        100
+                    )
+            )
                 .Returns(1)
                 .Verifiable();
             var simpleMembershipProvider = new TestSimpleMembershipProvider(database.Object)

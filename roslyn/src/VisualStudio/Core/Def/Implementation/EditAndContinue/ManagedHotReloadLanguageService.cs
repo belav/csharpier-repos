@@ -88,11 +88,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             {
                 var solution = _proxy.Workspace.CurrentSolution;
                 _debuggingSessionConnection = await _proxy.StartDebuggingSessionAsync(
-                        solution,
-                        _debuggerService,
-                        captureMatchingDocuments: false,
-                        cancellationToken
-                    )
+                    solution,
+                    _debuggerService,
+                    captureMatchingDocuments: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
@@ -108,29 +108,30 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
                 var solution = _proxy.Workspace.CurrentSolution;
                 var (moduleUpdates, diagnosticData, rudeEdits) =
                     await _proxy.EmitSolutionUpdateAsync(
-                            solution,
-                            s_solutionActiveStatementSpanProvider,
-                            _diagnosticService,
-                            _diagnosticUpdateSource,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
-
-                var updates = moduleUpdates.Updates.SelectAsArray(
-                    update =>
-                        new ManagedHotReloadUpdate(
-                            update.Module,
-                            update.ILDelta,
-                            update.MetadataDelta
-                        )
-                );
-
-                var diagnostics = await EmitSolutionUpdateResults.GetHotReloadDiagnosticsAsync(
                         solution,
-                        diagnosticData,
-                        rudeEdits,
+                        s_solutionActiveStatementSpanProvider,
+                        _diagnosticService,
+                        _diagnosticUpdateSource,
                         cancellationToken
                     )
+                        .ConfigureAwait(false);
+
+                var updates = moduleUpdates.Updates
+                    .SelectAsArray(
+                        update =>
+                            new ManagedHotReloadUpdate(
+                                update.Module,
+                                update.ILDelta,
+                                update.MetadataDelta
+                            )
+                    );
+
+                var diagnostics = await EmitSolutionUpdateResults.GetHotReloadDiagnosticsAsync(
+                    solution,
+                    diagnosticData,
+                    rudeEdits,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return new ManagedHotReloadUpdates(updates, diagnostics);
@@ -181,10 +182,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             try
             {
                 await _proxy.EndDebuggingSessionAsync(
-                        _diagnosticUpdateSource,
-                        _diagnosticService,
-                        cancellationToken
-                    )
+                    _diagnosticUpdateSource,
+                    _diagnosticService,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 Contract.ThrowIfNull(_debuggingSessionConnection);

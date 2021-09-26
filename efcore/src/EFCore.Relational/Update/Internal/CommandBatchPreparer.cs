@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             _modificationCommandComparer = dependencies.ModificationCommandComparer;
             _keyValueIndexFactorySource = dependencies.KeyValueIndexFactorySource;
             _minBatchSize =
-                dependencies.Options.Extensions.OfType<RelationalOptionsExtension>()
+                dependencies.Options.Extensions
+                    .OfType<RelationalOptionsExtension>()
                     .FirstOrDefault()?.MinBatchSize ?? 4;
             Dependencies = dependencies;
 
@@ -106,21 +107,23 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                         {
                             if (batch.ModificationCommands.Count > 1)
                             {
-                                Dependencies.UpdateLogger.BatchReadyForExecution(
-                                    batch.ModificationCommands.SelectMany(c => c.Entries),
-                                    batch.ModificationCommands.Count
-                                );
+                                Dependencies.UpdateLogger
+                                    .BatchReadyForExecution(
+                                        batch.ModificationCommands.SelectMany(c => c.Entries),
+                                        batch.ModificationCommands.Count
+                                    );
                             }
 
                             yield return batch;
                         }
                         else
                         {
-                            Dependencies.UpdateLogger.BatchSmallerThanMinBatchSize(
-                                batch.ModificationCommands.SelectMany(c => c.Entries),
-                                batch.ModificationCommands.Count,
-                                _minBatchSize
-                            );
+                            Dependencies.UpdateLogger
+                                .BatchSmallerThanMinBatchSize(
+                                    batch.ModificationCommands.SelectMany(c => c.Entries),
+                                    batch.ModificationCommands.Count,
+                                    _minBatchSize
+                                );
 
                             foreach (var command in batch.ModificationCommands)
                             {
@@ -139,21 +142,23 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                 {
                     if (batch.ModificationCommands.Count > 1)
                     {
-                        Dependencies.UpdateLogger.BatchReadyForExecution(
-                            batch.ModificationCommands.SelectMany(c => c.Entries),
-                            batch.ModificationCommands.Count
-                        );
+                        Dependencies.UpdateLogger
+                            .BatchReadyForExecution(
+                                batch.ModificationCommands.SelectMany(c => c.Entries),
+                                batch.ModificationCommands.Count
+                            );
                     }
 
                     yield return batch;
                 }
                 else
                 {
-                    Dependencies.UpdateLogger.BatchSmallerThanMinBatchSize(
-                        batch.ModificationCommands.SelectMany(c => c.Entries),
-                        batch.ModificationCommands.Count,
-                        _minBatchSize
-                    );
+                    Dependencies.UpdateLogger
+                        .BatchSmallerThanMinBatchSize(
+                            batch.ModificationCommands.SelectMany(c => c.Entries),
+                            batch.ModificationCommands.Count,
+                            _minBatchSize
+                        );
 
                     foreach (var command in batch.ModificationCommands)
                     {
@@ -423,9 +428,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             StringBuilder builder
         )
         {
-            var reverseDependency = !source.Entries.Any(
-                e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType)
-            );
+            var reverseDependency = !source.Entries
+                .Any(e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType));
             if (reverseDependency)
             {
                 builder.AppendLine(" <-");
@@ -461,9 +465,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             }
 
             var dependentCommand = reverseDependency ? target : source;
-            var dependentEntry = dependentCommand.Entries.First(
-                e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType)
-            );
+            var dependentEntry = dependentCommand.Entries
+                .First(e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType));
             builder.Append("{ ");
             for (var i = 0; i < foreignKey.Properties.Count; i++)
             {
@@ -511,9 +514,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             builder.Append("Index ");
 
             var dependentCommand = reverseDependency ? target : source;
-            var dependentEntry = dependentCommand.Entries.First(
-                e => index.DeclaringEntityType.IsAssignableFrom(e.EntityType)
-            );
+            var dependentEntry = dependentCommand.Entries
+                .First(e => index.DeclaringEntityType.IsAssignableFrom(e.EntityType));
             builder.Append("{ ");
             for (var i = 0; i < index.Properties.Count; i++)
             {
@@ -572,9 +574,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                                 !constraints.Any()
                                 || (
                                     entry.EntityState == EntityState.Modified
-                                    && !foreignKey.PrincipalKey.Properties.Any(
-                                        p => entry.IsModified(p)
-                                    )
+                                    && !foreignKey.PrincipalKey.Properties
+                                        .Any(p => entry.IsModified(p))
                                 )
                             )
                             {
@@ -583,8 +584,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
 
                             var principalKeyValue =
                                 _keyValueIndexFactorySource.GetKeyValueIndexFactory(
-                                        foreignKey.PrincipalKey
-                                    )
+                                    foreignKey.PrincipalKey
+                                )
                                     .CreatePrincipalKeyValue(entry, foreignKey);
 
                             if (principalKeyValue != null)
@@ -635,8 +636,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
 
                             var dependentKeyValue =
                                 _keyValueIndexFactorySource.GetKeyValueIndexFactory(
-                                        foreignKey.PrincipalKey
-                                    )
+                                    foreignKey.PrincipalKey
+                                )
                                     .CreateDependentKeyValueFromOriginalValues(entry, foreignKey);
 
                             if (dependentKeyValue != null)
@@ -697,8 +698,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
 
                                 var dependentKeyValue =
                                     _keyValueIndexFactorySource.GetKeyValueIndexFactory(
-                                            foreignKey.PrincipalKey
-                                        )
+                                        foreignKey.PrincipalKey
+                                    )
                                         .CreateDependentKeyValue(entry, foreignKey);
                                 if (dependentKeyValue == null)
                                 {
@@ -735,8 +736,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
 
                                 var principalKeyValue =
                                     _keyValueIndexFactorySource.GetKeyValueIndexFactory(
-                                            foreignKey.PrincipalKey
-                                        )
+                                        foreignKey.PrincipalKey
+                                    )
                                         .CreatePrincipalKeyValueFromOriginalValues(
                                             entry,
                                             foreignKey
@@ -800,7 +801,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                 {
                     var entry = command.Entries[entryIndex];
                     foreach (
-                        var index in entry.EntityType.GetIndexes()
+                        var index in entry.EntityType
+                            .GetIndexes()
                             .Where(i => i.IsUnique && i.GetMappedTableIndexes().Any())
                     )
                     {
@@ -845,13 +847,14 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                     }
 
                     foreach (
-                        var key in entry.EntityType.GetKeys()
+                        var key in entry.EntityType
+                            .GetKeys()
                             .Where(k => k.GetMappedConstraints().Any())
                     )
                     {
                         var principalKeyValue = _keyValueIndexFactorySource.GetKeyValueIndexFactory(
-                                key
-                            )
+                            key
+                        )
                             .CreatePrincipalKeyValue(entry, null);
 
                         if (principalKeyValue != null)
@@ -888,7 +891,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                     foreach (var entry in command.Entries)
                     {
                         foreach (
-                            var index in entry.EntityType.GetIndexes()
+                            var index in entry.EntityType
+                                .GetIndexes()
                                 .Where(i => i.IsUnique && i.GetMappedTableIndexes().Any())
                         )
                         {
@@ -930,7 +934,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                     foreach (var entry in command.Entries)
                     {
                         foreach (
-                            var key in entry.EntityType.GetKeys()
+                            var key in entry.EntityType
+                                .GetKeys()
                                 .Where(k => k.GetMappedConstraints().Any())
                         )
                         {

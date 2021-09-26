@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
                 return;
             }
 
-            var semanticModel = await context.Document.GetSemanticModelAsync(cancellationToken)
+            var semanticModel = await context.Document
+                .GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var compilation = semanticModel.Compilation;
 
@@ -132,32 +133,33 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
                 .ConfigureAwait(false);
             var methodSymbolOpt =
                 semanticModel.GetDeclaredSymbol(node, cancellationToken) as IMethodSymbol;
-            var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);
 
             if (NeedsRename(this, methodSymbolOpt, keepVoid, isEntryPoint, in knownTypes))
             {
                 return await RenameThenAddAsyncTokenAsync(
-                        keepVoid,
-                        document,
-                        node,
-                        methodSymbolOpt,
-                        knownTypes,
-                        cancellationToken
-                    )
+                    keepVoid,
+                    document,
+                    node,
+                    methodSymbolOpt,
+                    knownTypes,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else
             {
                 return await AddAsyncTokenAsync(
-                        keepVoid,
-                        document,
-                        methodSymbolOpt,
-                        knownTypes,
-                        node,
-                        cancellationToken
-                    )
+                    keepVoid,
+                    document,
+                    methodSymbolOpt,
+                    knownTypes,
+                    node,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -227,12 +229,12 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
 
             // Rename the method to add the 'Async' suffix, then add the 'async' keyword.
             var newSolution = await Renamer.RenameSymbolAsync(
-                    solution,
-                    methodSymbol,
-                    newName,
-                    solution.Options,
-                    cancellationToken
-                )
+                solution,
+                methodSymbol,
+                newName,
+                solution.Options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var newDocument = newSolution.GetDocument(document.Id);
@@ -247,13 +249,13 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
                     cancellationToken
                 );
                 return await AddAsyncTokenAsync(
-                        keepVoid,
-                        newDocument,
-                        newMethod,
-                        knownTypes,
-                        newNode,
-                        cancellationToken
-                    )
+                    keepVoid,
+                    newDocument,
+                    newMethod,
+                    knownTypes,
+                    newNode,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 

@@ -719,8 +719,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             var authorizationFilter1 = new Mock<IAuthorizationFilter>(MockBehavior.Strict);
             authorizationFilter1.Setup(
-                    f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>())
-                )
+                f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>())
+            )
                 .Callback<AuthorizationFilterContext>(
                     c =>
                     {
@@ -768,8 +768,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             var authorizationFilter = new Mock<IAuthorizationFilter>(MockBehavior.Strict);
             authorizationFilter.Setup(
-                    f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>())
-                )
+                f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>())
+            )
                 .Callback<AuthorizationFilterContext>(c => c.Result = challenge.Object)
                 .Verifiable();
 
@@ -817,12 +817,12 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var filter = new Mock<IAsyncResultFilter>(MockBehavior.Strict);
             filter.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns<ResultExecutingContext, ResultExecutionDelegate>(
                     async (context, next) => await next()
                 )
@@ -914,12 +914,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var filter2 = new Mock<IAsyncResultFilter>(MockBehavior.Strict);
             filter2.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns<ResultExecutingContext, ResultExecutionDelegate>(
                     (c, next) =>
                     {
@@ -978,12 +978,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var filter2 = new Mock<IAsyncResultFilter>(MockBehavior.Strict);
             filter2.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns<ResultExecutingContext, ResultExecutionDelegate>(
                     (c, next) =>
                     {
@@ -1032,12 +1032,12 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var filter = new Mock<IAsyncResultFilter>(MockBehavior.Strict);
             filter.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns<ResultExecutingContext, ResultExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1156,12 +1156,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var filter = new Mock<IAsyncResultFilter>(MockBehavior.Strict);
             filter.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns<ResultExecutingContext, ResultExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1265,12 +1265,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var resultFilter1 = new Mock<IAsyncResultFilter>(MockBehavior.Strict);
             resultFilter1.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns<ResultExecutingContext, ResultExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1326,12 +1326,12 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1389,12 +1389,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1430,12 +1430,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1485,12 +1485,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1535,12 +1535,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1581,12 +1581,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1633,12 +1633,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1680,12 +1680,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter1 = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter1.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1696,12 +1696,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var resourceFilter2 = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter2.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     (c, next) =>
                     {
@@ -1733,12 +1733,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter1 = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter1.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1780,12 +1780,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter1 = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter1.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1830,12 +1830,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter1 = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter1.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1846,12 +1846,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var resourceFilter2 = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter2.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     (c, next) =>
                     {
@@ -1894,12 +1894,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter1 = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter1.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1910,12 +1910,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var resourceFilter2 = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter2.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     (c, next) =>
                     {
@@ -1961,12 +1961,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter1 = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter1.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -2019,12 +2019,12 @@ namespace Microsoft.AspNetCore.Mvc
             ResourceExecutedContext context = null;
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -2051,12 +2051,12 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -2067,8 +2067,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             var authorizationFilter = new Mock<IAuthorizationFilter>(MockBehavior.Strict);
             authorizationFilter.Setup(
-                    f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>())
-                )
+                f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>())
+            )
                 .Callback<AuthorizationFilterContext>(
                     (c) =>
                     {
@@ -2108,8 +2108,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             var authorizationFilter = new Mock<IAsyncAuthorizationFilter>(MockBehavior.Strict);
             authorizationFilter.Setup(
-                    f => f.OnAuthorizationAsync(It.IsAny<AuthorizationFilterContext>())
-                )
+                f => f.OnAuthorizationAsync(It.IsAny<AuthorizationFilterContext>())
+            )
                 .Returns<AuthorizationFilterContext>(
                     (c) =>
                     {
@@ -2135,12 +2135,12 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var resultFilter = new Mock<IAsyncAlwaysRunResultFilter>(MockBehavior.Strict);
             resultFilter.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns<ResultExecutingContext, ResultExecutionDelegate>(
                     (c, next) =>
                     {
@@ -2152,8 +2152,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             var authorizationFilter = new Mock<IAuthorizationFilter>(MockBehavior.Strict);
             authorizationFilter.Setup(
-                    f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>())
-                )
+                f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>())
+            )
                 .Callback<AuthorizationFilterContext>(
                     (c) =>
                     {
@@ -2191,18 +2191,18 @@ namespace Microsoft.AspNetCore.Mvc
 
             var resultFilter3 = new Mock<IAsyncAlwaysRunResultFilter>(MockBehavior.Strict);
             resultFilter3.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns(Task.CompletedTask);
 
             var authorizationFilter = new Mock<IAuthorizationFilter>(MockBehavior.Strict);
             authorizationFilter.Setup(
-                    f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>())
-                )
+                f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>())
+            )
                 .Callback<AuthorizationFilterContext>(
                     (c) =>
                     {
@@ -2264,12 +2264,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     (c, next) =>
                     {
@@ -2295,12 +2295,12 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var resultFilter = new Mock<IAsyncAlwaysRunResultFilter>(MockBehavior.Strict);
             resultFilter.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns<ResultExecutingContext, ResultExecutionDelegate>(
                     (c, next) =>
                     {
@@ -2344,12 +2344,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var resultFilter3 = new Mock<IAsyncAlwaysRunResultFilter>(MockBehavior.Strict);
             resultFilter3.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns(Task.CompletedTask);
 
             var resourceFilter = new Mock<IResourceFilter>(MockBehavior.Strict);
@@ -2436,12 +2436,12 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var resultFilter = new Mock<IAsyncAlwaysRunResultFilter>(MockBehavior.Strict);
             resultFilter.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns<ResultExecutingContext, ResultExecutionDelegate>(
                     (c, next) =>
                     {
@@ -2486,12 +2486,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var resultFilter3 = new Mock<IAsyncAlwaysRunResultFilter>(MockBehavior.Strict);
             resultFilter3.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns(Task.CompletedTask);
 
             var exceptionFilter = new Mock<IExceptionFilter>(MockBehavior.Strict);
@@ -2557,23 +2557,23 @@ namespace Microsoft.AspNetCore.Mvc
 
             var resultFilter3 = new Mock<IAsyncResultFilter>(MockBehavior.Strict);
             resultFilter3.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns<ResultExecutingContext, ResultExecutionDelegate>((c, next) => next())
                 .Verifiable();
 
             var resultFilter4 = new Mock<IAsyncAlwaysRunResultFilter>(MockBehavior.Strict);
             resultFilter4.Setup(
-                    f =>
-                        f.OnResultExecutionAsync(
-                            It.IsAny<ResultExecutingContext>(),
-                            It.IsAny<ResultExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResultExecutionAsync(
+                        It.IsAny<ResultExecutingContext>(),
+                        It.IsAny<ResultExecutionDelegate>()
+                    )
+            )
                 .Returns<ResultExecutingContext, ResultExecutionDelegate>((c, next) => next())
                 .Verifiable();
 

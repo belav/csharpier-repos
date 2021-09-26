@@ -1220,10 +1220,11 @@ namespace System.Linq.Expressions.Tests
             // to optimizations for closure storage access.
             //
 
-            MethodInfo add = typeof(LambdaTests).GetMethod(
-                nameof(LambdaTests.Add),
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-            );
+            MethodInfo add = typeof(LambdaTests)
+                .GetMethod(
+                    nameof(LambdaTests.Add),
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                );
 
             for (var i = 0; i < 10; i++)
             {
@@ -2026,14 +2027,14 @@ namespace System.Linq.Expressions.Tests
                 .Append(parToMutate)
                 .ToArray();
             Expression.Lambda<TricentaryIntAndMutableFunc>(
-                    Expression.Call(
-                        parToMutate,
-                        nameof(Mutable.Mutate),
-                        Type.EmptyTypes,
-                        Array.Empty<ParameterExpression>()
-                    ),
-                    pars
-                )
+                Expression.Call(
+                    parToMutate,
+                    nameof(Mutable.Mutate),
+                    Type.EmptyTypes,
+                    Array.Empty<ParameterExpression>()
+                ),
+                pars
+            )
                 .VerifyIL(
                     @".method valuetype [System.Linq.Expressions.Tests]System.Linq.Expressions.Tests.LambdaTests+Mutable ::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,int32,valuetype [System.Linq.Expressions.Tests]System.Linq.Expressions.Tests.LambdaTests+Mutable)
 {
@@ -2115,24 +2116,24 @@ namespace System.Linq.Expressions.Tests
                 typeof(MulticastDelegate)
             );
             builder.DefineConstructor(
-                    MethodAttributes.RTSpecialName
-                        | MethodAttributes.HideBySig
-                        | MethodAttributes.Public,
-                    CallingConventions.Standard,
-                    new[] { typeof(object), typeof(IntPtr) }
-                )
+                MethodAttributes.RTSpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.Public,
+                CallingConventions.Standard,
+                new[] { typeof(object), typeof(IntPtr) }
+            )
                 .SetImplementationFlags(
                     MethodImplAttributes.Runtime | MethodImplAttributes.Managed
                 );
             builder.DefineMethod(
-                    "Invoke",
-                    MethodAttributes.Private
-                        | MethodAttributes.HideBySig
-                        | MethodAttributes.NewSlot
-                        | MethodAttributes.Virtual,
-                    typeof(int),
-                    Type.EmptyTypes
-                )
+                "Invoke",
+                MethodAttributes.Private
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Virtual,
+                typeof(int),
+                Type.EmptyTypes
+            )
                 .SetImplementationFlags(
                     MethodImplAttributes.Runtime | MethodImplAttributes.Managed
                 );

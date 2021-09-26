@@ -48,10 +48,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
-            var builder = new EntityFrameworkServicesBuilder(serviceCollection).TryAdd<
-                LoggingDefinitions,
-                CosmosLoggingDefinitions
-            >()
+            var builder = new EntityFrameworkServicesBuilder(serviceCollection)
+                .TryAdd<LoggingDefinitions, CosmosLoggingDefinitions>()
                 .TryAdd<IDatabaseProvider, DatabaseProvider<CosmosOptionsExtension>>()
                 .TryAdd<IDatabase, CosmosDatabaseWrapper>()
                 .TryAdd<IExecutionStrategyFactory, CosmosExecutionStrategyFactory>()

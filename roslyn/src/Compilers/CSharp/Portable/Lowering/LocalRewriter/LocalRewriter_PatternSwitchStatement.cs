@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private readonly Dictionary<SyntaxNode, LabelSymbol> _sectionLabels = PooledDictionary<
                 SyntaxNode,
                 LabelSymbol
-            >.GetInstance();
+            >
+                .GetInstance();
 
             public static BoundStatement Rewrite(
                 LocalRewriter localRewriter,
@@ -90,8 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // EnC: We need to insert a hidden sequence point to handle function remapping in case
                     // the containing method is edited while methods invoked in the expression are being executed.
-                    var instrumentedExpression =
-                        _localRewriter._instrumenter.InstrumentSwitchStatementExpression(
+                    var instrumentedExpression = _localRewriter._instrumenter
+                        .InstrumentSwitchStatementExpression(
                             node,
                             loweredSwitchGoverningExpression,
                             _factory
@@ -195,10 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 if (GenerateInstrumentation)
-                    translatedSwitch = _localRewriter._instrumenter.InstrumentSwitchStatement(
-                        node,
-                        translatedSwitch
-                    );
+                    translatedSwitch = _localRewriter._instrumenter
+                        .InstrumentSwitchStatement(node, translatedSwitch);
 
                 return translatedSwitch;
             }

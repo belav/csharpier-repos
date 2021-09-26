@@ -25,10 +25,11 @@ namespace System.Web.WebPages.Test
             // Assert
             Assert.False(result);
             request.WorkerRequest.Verify();
-            request.WorkerRequest.Verify(
-                wr => wr.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar),
-                Times.Never()
-            );
+            request.WorkerRequest
+                .Verify(
+                    wr => wr.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar),
+                    Times.Never()
+                );
         }
 
         [Fact]
@@ -86,14 +87,16 @@ namespace System.Web.WebPages.Test
             bool result2 = helper.WasRequestRewritten(request2.Context.Object);
 
             // Assert
-            request1.WorkerRequest.Verify(
-                c => c.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar),
-                Times.Once()
-            );
-            request2.WorkerRequest.Verify(
-                c => c.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar),
-                Times.Never()
-            );
+            request1.WorkerRequest
+                .Verify(
+                    c => c.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar),
+                    Times.Once()
+                );
+            request2.WorkerRequest
+                .Verify(
+                    c => c.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar),
+                    Times.Never()
+                );
             Assert.False(result1);
             Assert.False(result2);
         }
@@ -113,10 +116,11 @@ namespace System.Web.WebPages.Test
             bool result2 = helper.WasRequestRewritten(request1.Context.Object);
 
             // Assert
-            request1.WorkerRequest.Verify(
-                c => c.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar),
-                Times.Once()
-            );
+            request1.WorkerRequest
+                .Verify(
+                    c => c.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar),
+                    Times.Once()
+                );
             Assert.True(result1);
             Assert.True(result2);
         }
@@ -136,10 +140,11 @@ namespace System.Web.WebPages.Test
             bool result2 = helper.WasRequestRewritten(request1.Context.Object);
 
             // Assert
-            request1.WorkerRequest.Verify(
-                c => c.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar),
-                Times.Once()
-            );
+            request1.WorkerRequest
+                .Verify(
+                    c => c.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar),
+                    Times.Once()
+                );
             Assert.False(result1);
             Assert.False(result2);
         }
@@ -159,16 +164,16 @@ namespace System.Web.WebPages.Test
             if (isUrlRewriteOnForServer)
             {
                 mockWorkerRequest.Setup(
-                        wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar)
-                    )
+                    wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar)
+                )
                     .Returns("On!")
                     .Verifiable();
             }
             else
             {
                 mockWorkerRequest.Setup(
-                        wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar)
-                    )
+                    wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar)
+                )
                     .Returns((string)null)
                     .Verifiable();
             }
@@ -176,8 +181,8 @@ namespace System.Web.WebPages.Test
             if (isUrlRewriteOnForRequest)
             {
                 mockWorkerRequest.Setup(
-                        wr => wr.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar)
-                    )
+                    wr => wr.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar)
+                )
                     .Returns("Yup!")
                     .Verifiable();
             }
@@ -185,8 +190,8 @@ namespace System.Web.WebPages.Test
             {
                 // this won't be called if rewrite is off for the server
                 mockWorkerRequest.Setup(
-                        wr => wr.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar)
-                    )
+                    wr => wr.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar)
+                )
                     .Returns((string)null);
             }
 

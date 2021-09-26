@@ -139,10 +139,8 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     HttpRequestData requestData = await server.HandleRequestAsync();
-                    string expectedHeaderValue = string.Join(
-                        "; ",
-                        cookies.Select(c => $"{c.Name}={c.Value}").ToArray()
-                    );
+                    string expectedHeaderValue = string
+                        .Join("; ", cookies.Select(c => $"{c.Name}={c.Value}").ToArray());
                     Assert.Equal(expectedHeaderValue, requestData.GetSingleHeaderValue("Cookie"));
                 }
             );
@@ -331,17 +329,15 @@ namespace System.Net.Http.Functional.Tests
                             {
                                 Assert.False(sawContainerCookie);
 
-                                var cookies = cookieValues[i].Split(
-                                    new string[] { "; " },
-                                    StringSplitOptions.None
-                                );
+                                var cookies = cookieValues[i]
+                                    .Split(new string[] { "; " }, StringSplitOptions.None);
                                 Assert.Equal(2, cookies.Count());
                                 Assert.Contains(s_expectedCookieHeaderValue, cookies);
 
                                 sawContainerCookie = true;
                                 cookieValues[i] = cookies.Where(
-                                        c => c != s_expectedCookieHeaderValue
-                                    )
+                                    c => c != s_expectedCookieHeaderValue
+                                )
                                     .Single();
                             }
                         }
@@ -371,10 +367,8 @@ namespace System.Net.Http.Functional.Tests
                     handler.CookieContainer = new CookieContainer();
                     handler.CookieContainer.Add(url1, new Cookie("cookie1", "value1", path1));
                     handler.CookieContainer.Add(url2, new Cookie("cookie2", "value2", path2));
-                    handler.CookieContainer.Add(
-                        unusedUrl,
-                        new Cookie("cookie3", "value3", unusedPath)
-                    );
+                    handler.CookieContainer
+                        .Add(unusedUrl, new Cookie("cookie3", "value3", unusedPath));
 
                     using (HttpClient client = CreateHttpClient(handler))
                     {

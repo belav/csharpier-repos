@@ -840,7 +840,8 @@ namespace Microsoft.DiaSymReader
             // Retrieve the timestamp the PDB writer generates when creating a new PDB stream.
             // Note that ImageDebugDirectory.TimeDateStamp is not set by GetDebugInfo,
             // we need to go through IPdbWriter interface to get it.
-            ((IPdbWriter)symWriter).GetSignatureAge(out stamp, out age);
+            ((IPdbWriter)symWriter)
+                .GetSignatureAge(out stamp, out age);
         }
     }
 }

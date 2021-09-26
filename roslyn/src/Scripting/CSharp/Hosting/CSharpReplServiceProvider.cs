@@ -21,10 +21,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             CSharpDiagnosticFormatter.Instance;
 
         public override string Logo =>
-            string.Format(
-                CSharpScriptingResources.LogoLine1,
-                CommonCompiler.GetProductVersion(typeof(CSharpReplServiceProvider))
-            );
+            string
+                .Format(
+                    CSharpScriptingResources.LogoLine1,
+                    CommonCompiler.GetProductVersion(typeof(CSharpReplServiceProvider))
+                );
 
         public override Script<T> CreateScript<T>(
             string code,

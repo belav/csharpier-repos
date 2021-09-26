@@ -100,10 +100,8 @@ namespace System.Web.Http.SelfHost.Channels
                 );
                 if (!String.IsNullOrEmpty(contentType))
                 {
-                    request.Content.Headers.TryAddWithoutValidation(
-                        ContentTypeHeaderName,
-                        contentType
-                    );
+                    request.Content.Headers
+                        .TryAddWithoutValidation(ContentTypeHeaderName, contentType);
                 }
 
                 Message message = request.ToMessage();
@@ -132,10 +130,8 @@ namespace System.Web.Http.SelfHost.Channels
                 request.Content = new StreamContent(stream);
                 if (!String.IsNullOrEmpty(contentType))
                 {
-                    request.Content.Headers.TryAddWithoutValidation(
-                        ContentTypeHeaderName,
-                        contentType
-                    );
+                    request.Content.Headers
+                        .TryAddWithoutValidation(ContentTypeHeaderName, contentType);
                 }
 
                 Message message = request.ToMessage();

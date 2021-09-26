@@ -74,21 +74,21 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             )
             {
                 return await RenameThenRemoveAsyncTokenAsync(
-                        document,
-                        node,
-                        methodSymbolOpt,
-                        cancellationToken
-                    )
+                    document,
+                    node,
+                    methodSymbolOpt,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else
             {
                 return await RemoveAsyncTokenAsync(
-                        document,
-                        methodSymbolOpt,
-                        node,
-                        cancellationToken
-                    )
+                    document,
+                    methodSymbolOpt,
+                    node,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -109,12 +109,12 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
 
             // Rename the method to remove the 'Async' suffix, then remove the 'async' keyword.
             var newSolution = await Renamer.RenameSymbolAsync(
-                    solution,
-                    methodSymbol,
-                    newName,
-                    solution.Options,
-                    cancellationToken
-                )
+                solution,
+                methodSymbol,
+                newName,
+                solution.Options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var newDocument = newSolution.GetDocument(document.Id);
             var newRoot = await newDocument.GetSyntaxRootAsync(cancellationToken)
@@ -128,11 +128,11 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                     cancellationToken
                 );
                 return await RemoveAsyncTokenAsync(
-                        newDocument,
-                        newMethod,
-                        newNode,
-                        cancellationToken
-                    )
+                    newDocument,
+                    newMethod,
+                    newNode,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -146,7 +146,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);
 
@@ -189,10 +190,10 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                 )
                 {
                     var references = await SymbolFinder.FindRenamableReferencesAsync(
-                            methodSymbol,
-                            document.Project.Solution,
-                            cancellationToken
-                        )
+                        methodSymbol,
+                        document.Project.Solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     var referencedSymbol = references.FirstOrDefault(
@@ -201,10 +202,10 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                     if (referencedSymbol != null)
                     {
                         return await RemoveAwaitFromCallersAsync(
-                                document.Project.Solution,
-                                referencedSymbol.Locations.ToImmutableArray(),
-                                cancellationToken
-                            )
+                            document.Project.Solution,
+                            referencedSymbol.Locations.ToImmutableArray(),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -226,10 +227,10 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             foreach (var group in groupedLocations)
             {
                 currentSolution = await RemoveAwaitFromCallersAsync(
-                        currentSolution,
-                        group,
-                        cancellationToken
-                    )
+                    currentSolution,
+                    group,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 

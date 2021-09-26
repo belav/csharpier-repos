@@ -443,10 +443,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 for (int i = 0; i < typeArguments.Length; i++)
                 {
                     if (
-                        !typeParameters[i].Equals(
-                            typeArguments[i].Type,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        !typeParameters[i]
+                            .Equals(typeArguments[i].Type, TypeCompareKind.ConsiderEverything)
                     )
                     {
                         return false;
@@ -491,10 +489,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             for (int i = 0; i < arity; i++)
             {
                 if (
-                    !this.TypeArgumentsWithAnnotations[i].Equals(
-                        other.TypeArgumentsWithAnnotations[i],
-                        compareKind
-                    )
+                    !this.TypeArgumentsWithAnnotations[i]
+                        .Equals(other.TypeArgumentsWithAnnotations[i], compareKind)
                 )
                 {
                     return false;

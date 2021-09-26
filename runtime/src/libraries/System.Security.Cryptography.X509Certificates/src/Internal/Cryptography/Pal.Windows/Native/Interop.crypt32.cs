@@ -476,25 +476,21 @@ internal static partial class Interop
         {
             int cb = 0;
             if (
-                !Interop.crypt32.CryptEncodeObject(
-                    CertEncodingType.All,
-                    lpszStructType,
-                    decoded,
-                    null,
-                    ref cb
-                )
+                !Interop.crypt32
+                    .CryptEncodeObject(CertEncodingType.All, lpszStructType, decoded, null, ref cb)
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
             byte[] encoded = new byte[cb];
             if (
-                !Interop.crypt32.CryptEncodeObject(
-                    CertEncodingType.All,
-                    lpszStructType,
-                    decoded,
-                    encoded,
-                    ref cb
-                )
+                !Interop.crypt32
+                    .CryptEncodeObject(
+                        CertEncodingType.All,
+                        lpszStructType,
+                        decoded,
+                        encoded,
+                        ref cb
+                    )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
@@ -505,25 +501,21 @@ internal static partial class Interop
         {
             int cb = 0;
             if (
-                !Interop.crypt32.CryptEncodeObject(
-                    CertEncodingType.All,
-                    lpszStructType,
-                    decoded,
-                    null,
-                    ref cb
-                )
+                !Interop.crypt32
+                    .CryptEncodeObject(CertEncodingType.All, lpszStructType, decoded, null, ref cb)
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
             byte[] encoded = new byte[cb];
             if (
-                !Interop.crypt32.CryptEncodeObject(
-                    CertEncodingType.All,
-                    lpszStructType,
-                    decoded,
-                    encoded,
-                    ref cb
-                )
+                !Interop.crypt32
+                    .CryptEncodeObject(
+                        CertEncodingType.All,
+                        lpszStructType,
+                        decoded,
+                        encoded,
+                        ref cb
+                    )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 

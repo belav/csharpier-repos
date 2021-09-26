@@ -27,13 +27,15 @@ namespace Microsoft.EntityFrameworkCore
                 IServiceCollection serviceCollection,
                 IEnumerable<IInterceptor> injectedInterceptors
             ) =>
-                base.InjectInterceptors(
-                    serviceCollection.AddEntityFrameworkInMemoryDatabase(),
-                    injectedInterceptors
-                );
+                base
+                    .InjectInterceptors(
+                        serviceCollection.AddEntityFrameworkInMemoryDatabase(),
+                        injectedInterceptors
+                    );
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .ConfigureWarnings(c => c.Ignore(InMemoryEventId.TransactionIgnoredWarning));
         }
 

@@ -103,7 +103,8 @@ namespace System.Data.Common
         {
             DataTableMapping clonedDataTableMapping = (DataTableMapping)(
                 (ICloneable)_dataTableMapping
-            ).Clone();
+            )
+                .Clone();
 
             Assert.Equal(_dataTableMapping.SourceTable, clonedDataTableMapping.SourceTable);
             Assert.Equal(_dataTableMapping.DataSetTable, clonedDataTableMapping.DataSetTable);

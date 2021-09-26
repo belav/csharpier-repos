@@ -40,12 +40,13 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     complete[i],
-                    string.Format(
-                        "TestForBreak:  Failed: incomplete at {0}, loopsize {1}, breakpoint {2}",
-                        i,
-                        loopsize,
-                        breakpoint
-                    )
+                    string
+                        .Format(
+                            "TestForBreak:  Failed: incomplete at {0}, loopsize {1}, breakpoint {2}",
+                            i,
+                            loopsize,
+                            breakpoint
+                        )
                 );
             }
 
@@ -99,12 +100,13 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     complete[i],
-                    string.Format(
-                        "TestFor64Break: Failed: incomplete at {0}, loopsize {1}, breakpoint {2}",
-                        i,
-                        loopsize,
-                        breakpoint
-                    )
+                    string
+                        .Format(
+                            "TestFor64Break: Failed: incomplete at {0}, loopsize {1}, breakpoint {2}",
+                            i,
+                            loopsize,
+                            breakpoint
+                        )
                 );
             }
 
@@ -160,12 +162,13 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     complete[i],
-                    string.Format(
-                        "TestForEachBreak(loopsize={0},breakpoint={1}):  Failed: incomplete at {2}",
-                        loopsize,
-                        breakpoint,
-                        i
-                    )
+                    string
+                        .Format(
+                            "TestForEachBreak(loopsize={0},breakpoint={1}):  Failed: incomplete at {2}",
+                            loopsize,
+                            breakpoint,
+                            i
+                        )
                 );
             }
 
@@ -181,11 +184,12 @@ namespace System.Threading.Tasks.Tests
 
             Assert.True(
                 result,
-                string.Format(
-                    "TestForEachBreak(loopsize={0},breakpoint={1}): Failed: Could not detect any interruption of For-loop.",
-                    loopsize,
-                    breakpoint
-                )
+                string
+                    .Format(
+                        "TestForEachBreak(loopsize={0},breakpoint={1}): Failed: Could not detect any interruption of For-loop.",
+                        loopsize,
+                        breakpoint
+                    )
             );
 
             //
@@ -216,12 +220,13 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     complete[i],
-                    string.Format(
-                        "TestForEachBreak(loopsize={0},breakpoint={1}):  Failed: incomplete at {2}",
-                        loopsize,
-                        breakpoint,
-                        i
-                    )
+                    string
+                        .Format(
+                            "TestForEachBreak(loopsize={0},breakpoint={1}):  Failed: incomplete at {2}",
+                            loopsize,
+                            breakpoint,
+                            i
+                        )
                 );
             }
 
@@ -237,11 +242,12 @@ namespace System.Threading.Tasks.Tests
 
             Assert.True(
                 result,
-                string.Format(
-                    "TestForEachBreak(loopsize={0},breakpoint={1}): Failed: Could not detect any interruption of For-loop.",
-                    loopsize,
-                    breakpoint
-                )
+                string
+                    .Format(
+                        "TestForEachBreak(loopsize={0},breakpoint={1}): Failed: Could not detect any interruption of For-loop.",
+                        loopsize,
+                        breakpoint
+                    )
             );
         }
     }

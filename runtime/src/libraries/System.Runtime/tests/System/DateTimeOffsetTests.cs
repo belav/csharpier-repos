@@ -2023,9 +2023,8 @@ namespace System.Tests
         }
 
         public static bool IsMinValueNegativeLocalOffset() =>
-            TimeZoneInfo.Local.GetUtcOffset(
-                DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc)
-            ).Ticks < 0;
+            TimeZoneInfo.Local
+                .GetUtcOffset(DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc)).Ticks < 0;
 
         [ConditionalFact(nameof(IsMinValueNegativeLocalOffset))]
         public static void ToLocalTime_MinValue()
@@ -2041,9 +2040,8 @@ namespace System.Tests
         }
 
         public static bool IsMaxValuePositiveLocalOffset() =>
-            TimeZoneInfo.Local.GetUtcOffset(
-                DateTime.SpecifyKind(DateTime.MaxValue, DateTimeKind.Utc)
-            ).Ticks > 0;
+            TimeZoneInfo.Local
+                .GetUtcOffset(DateTime.SpecifyKind(DateTime.MaxValue, DateTimeKind.Utc)).Ticks > 0;
 
         [ConditionalFact(nameof(IsMaxValuePositiveLocalOffset))]
         public static void ToLocalTime_MaxValue()
@@ -2337,31 +2335,31 @@ namespace System.Tests
                     Assert.Equal(
                         expected,
                         DateTimeOffset.ParseExact(
-                                expected,
-                                standardFormat,
-                                null,
-                                DateTimeStyles.None
-                            )
+                            expected,
+                            standardFormat,
+                            null,
+                            DateTimeStyles.None
+                        )
                             .ToString(standardFormat)
                     );
                     Assert.Equal(
                         expected,
                         DateTimeOffset.ParseExact(
-                                expected,
-                                new[] { standardFormat },
-                                null,
-                                DateTimeStyles.None
-                            )
+                            expected,
+                            new[] { standardFormat },
+                            null,
+                            DateTimeStyles.None
+                        )
                             .ToString(standardFormat)
                     );
                     Assert.Equal(
                         expected,
                         DateTimeOffset.ParseExact(
-                                expected,
-                                new[] { standardFormat },
-                                null,
-                                DateTimeStyles.AllowWhiteSpaces
-                            )
+                            expected,
+                            new[] { standardFormat },
+                            null,
+                            DateTimeStyles.AllowWhiteSpaces
+                        )
                             .ToString(standardFormat)
                     );
 
@@ -2455,55 +2453,55 @@ namespace System.Tests
             Assert.Equal(
                 expectedString,
                 DateTimeOffset.ParseExact(
-                        Whitespace + input,
-                        "o",
-                        null,
-                        DateTimeStyles.AllowLeadingWhite
-                    )
+                    Whitespace + input,
+                    "o",
+                    null,
+                    DateTimeStyles.AllowLeadingWhite
+                )
                     .ToString("o")
             );
             Assert.Equal(
                 expectedString,
                 DateTimeOffset.ParseExact(
-                        input + Whitespace,
-                        "o",
-                        null,
-                        DateTimeStyles.AllowTrailingWhite
-                    )
+                    input + Whitespace,
+                    "o",
+                    null,
+                    DateTimeStyles.AllowTrailingWhite
+                )
                     .ToString("o")
             );
             Assert.Equal(
                 expectedString,
                 DateTimeOffset.ParseExact(
-                        Whitespace + input + Whitespace,
-                        "o",
-                        null,
-                        DateTimeStyles.AllowLeadingWhite | DateTimeStyles.AllowTrailingWhite
-                    )
+                    Whitespace + input + Whitespace,
+                    "o",
+                    null,
+                    DateTimeStyles.AllowLeadingWhite | DateTimeStyles.AllowTrailingWhite
+                )
                     .ToString("o")
             );
             Assert.Equal(
                 expectedString,
                 DateTimeOffset.ParseExact(
-                        input.Substring(0, 27) + Whitespace + input.Substring(27),
-                        "o",
-                        null,
-                        DateTimeStyles.AllowInnerWhite
-                    )
+                    input.Substring(0, 27) + Whitespace + input.Substring(27),
+                    "o",
+                    null,
+                    DateTimeStyles.AllowInnerWhite
+                )
                     .ToString("o")
             );
             Assert.Equal(
                 expectedString,
                 DateTimeOffset.ParseExact(
-                        Whitespace
-                            + input.Substring(0, 27)
-                            + Whitespace
-                            + input.Substring(27)
-                            + Whitespace,
-                        "o",
-                        null,
-                        DateTimeStyles.AllowWhiteSpaces
-                    )
+                    Whitespace
+                        + input.Substring(0, 27)
+                        + Whitespace
+                        + input.Substring(27)
+                        + Whitespace,
+                    "o",
+                    null,
+                    DateTimeStyles.AllowWhiteSpaces
+                )
                     .ToString("o")
             );
         }
@@ -2582,55 +2580,55 @@ namespace System.Tests
             Assert.Equal(
                 dt.ToString("r"),
                 DateTimeOffset.ParseExact(
-                        Whitespace + input,
-                        "r",
-                        null,
-                        DateTimeStyles.AllowLeadingWhite
-                    )
+                    Whitespace + input,
+                    "r",
+                    null,
+                    DateTimeStyles.AllowLeadingWhite
+                )
                     .ToString("r")
             );
             Assert.Equal(
                 dt.ToString("r"),
                 DateTimeOffset.ParseExact(
-                        input + Whitespace,
-                        "r",
-                        null,
-                        DateTimeStyles.AllowTrailingWhite
-                    )
+                    input + Whitespace,
+                    "r",
+                    null,
+                    DateTimeStyles.AllowTrailingWhite
+                )
                     .ToString("r")
             );
             Assert.Equal(
                 dt.ToString("r"),
                 DateTimeOffset.ParseExact(
-                        Whitespace + input + Whitespace,
-                        "r",
-                        null,
-                        DateTimeStyles.AllowLeadingWhite | DateTimeStyles.AllowTrailingWhite
-                    )
+                    Whitespace + input + Whitespace,
+                    "r",
+                    null,
+                    DateTimeStyles.AllowLeadingWhite | DateTimeStyles.AllowTrailingWhite
+                )
                     .ToString("r")
             );
             Assert.Equal(
                 dt.ToString("r"),
                 DateTimeOffset.ParseExact(
-                        input.Substring(0, 4) + Whitespace + input.Substring(4),
-                        "r",
-                        null,
-                        DateTimeStyles.AllowInnerWhite
-                    )
+                    input.Substring(0, 4) + Whitespace + input.Substring(4),
+                    "r",
+                    null,
+                    DateTimeStyles.AllowInnerWhite
+                )
                     .ToString("r")
             );
             Assert.Equal(
                 dt.ToString("r"),
                 DateTimeOffset.ParseExact(
-                        Whitespace
-                            + input.Substring(0, 4)
-                            + Whitespace
-                            + input.Substring(4)
-                            + Whitespace,
-                        "r",
-                        null,
-                        DateTimeStyles.AllowWhiteSpaces
-                    )
+                    Whitespace
+                        + input.Substring(0, 4)
+                        + Whitespace
+                        + input.Substring(4)
+                        + Whitespace,
+                    "r",
+                    null,
+                    DateTimeStyles.AllowWhiteSpaces
+                )
                     .ToString("r")
             );
         }
@@ -3311,10 +3309,8 @@ namespace System.Tests
         public static void ToString_Slice_ParseSpan_RoundtripsSuccessfully(string roundtripFormat)
         {
             string expectedString = DateTimeOffset.UtcNow.ToString(roundtripFormat);
-            ReadOnlySpan<char> expectedSpan = ("abcd" + expectedString + "1234").AsSpan(
-                "abcd".Length,
-                expectedString.Length
-            );
+            ReadOnlySpan<char> expectedSpan = ("abcd" + expectedString + "1234")
+                .AsSpan("abcd".Length, expectedString.Length);
 
             Assert.Equal(
                 expectedString,

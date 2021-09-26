@@ -52,7 +52,8 @@ namespace Newtonsoft.Json.Linq
 
             for (int i = 0; i < _values.Count; i++)
             {
-                await _values[i].WriteToAsync(writer, cancellationToken, converters)
+                await _values[i]
+                    .WriteToAsync(writer, cancellationToken, converters)
                     .ConfigureAwait(false);
             }
 
@@ -108,10 +109,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Error reading JConstructor from JsonReader. Current JsonReader item is not a constructor: {0}".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Error reading JConstructor from JsonReader. Current JsonReader item is not a constructor: {0}"
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
 

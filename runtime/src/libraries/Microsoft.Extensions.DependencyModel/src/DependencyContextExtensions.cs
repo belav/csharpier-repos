@@ -19,9 +19,8 @@ namespace Microsoft.Extensions.DependencyModel
             {
                 throw new ArgumentNullException(nameof(self));
             }
-            return self.RuntimeLibraries.SelectMany(
-                library => library.GetDefaultNativeAssets(self)
-            );
+            return self.RuntimeLibraries
+                .SelectMany(library => library.GetDefaultNativeAssets(self));
         }
 
         public static IEnumerable<RuntimeFile> GetDefaultNativeRuntimeFileAssets(
@@ -32,9 +31,8 @@ namespace Microsoft.Extensions.DependencyModel
             {
                 throw new ArgumentNullException(nameof(self));
             }
-            return self.RuntimeLibraries.SelectMany(
-                library => library.GetDefaultNativeRuntimeFileAssets(self)
-            );
+            return self.RuntimeLibraries
+                .SelectMany(library => library.GetDefaultNativeRuntimeFileAssets(self));
         }
 
         public static IEnumerable<string> GetRuntimeNativeAssets(
@@ -50,9 +48,8 @@ namespace Microsoft.Extensions.DependencyModel
             {
                 throw new ArgumentNullException(nameof(runtimeIdentifier));
             }
-            return self.RuntimeLibraries.SelectMany(
-                library => library.GetRuntimeNativeAssets(self, runtimeIdentifier)
-            );
+            return self.RuntimeLibraries
+                .SelectMany(library => library.GetRuntimeNativeAssets(self, runtimeIdentifier));
         }
 
         public static IEnumerable<RuntimeFile> GetRuntimeNativeRuntimeFileAssets(
@@ -68,9 +65,10 @@ namespace Microsoft.Extensions.DependencyModel
             {
                 throw new ArgumentNullException(nameof(runtimeIdentifier));
             }
-            return self.RuntimeLibraries.SelectMany(
-                library => library.GetRuntimeNativeRuntimeFileAssets(self, runtimeIdentifier)
-            );
+            return self.RuntimeLibraries
+                .SelectMany(
+                    library => library.GetRuntimeNativeRuntimeFileAssets(self, runtimeIdentifier)
+                );
         }
 
         public static IEnumerable<string> GetDefaultNativeAssets(
@@ -145,9 +143,8 @@ namespace Microsoft.Extensions.DependencyModel
             {
                 throw new ArgumentNullException(nameof(self));
             }
-            return self.RuntimeLibraries.SelectMany(
-                library => library.GetDefaultAssemblyNames(self)
-            );
+            return self.RuntimeLibraries
+                .SelectMany(library => library.GetDefaultAssemblyNames(self));
         }
 
         public static IEnumerable<AssemblyName> GetRuntimeAssemblyNames(
@@ -163,9 +160,8 @@ namespace Microsoft.Extensions.DependencyModel
             {
                 throw new ArgumentNullException(nameof(runtimeIdentifier));
             }
-            return self.RuntimeLibraries.SelectMany(
-                library => library.GetRuntimeAssemblyNames(self, runtimeIdentifier)
-            );
+            return self.RuntimeLibraries
+                .SelectMany(library => library.GetRuntimeAssemblyNames(self, runtimeIdentifier));
         }
 
         public static IEnumerable<AssemblyName> GetDefaultAssemblyNames(
@@ -232,9 +228,8 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<RuntimeAssetGroup> assets
         )
         {
-            RuntimeFallbacks fallbacks = context.RuntimeGraph.FirstOrDefault(
-                f => f.Runtime == runtimeIdentifier
-            );
+            RuntimeFallbacks fallbacks = context.RuntimeGraph
+                .FirstOrDefault(f => f.Runtime == runtimeIdentifier);
             IEnumerable<string> rids = Enumerable.Concat(
                 new[] { runtimeIdentifier },
                 fallbacks?.Fallbacks ?? Enumerable.Empty<string>()
@@ -248,9 +243,8 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<RuntimeAssetGroup> assets
         )
         {
-            RuntimeFallbacks fallbacks = context.RuntimeGraph.FirstOrDefault(
-                f => f.Runtime == runtimeIdentifier
-            );
+            RuntimeFallbacks fallbacks = context.RuntimeGraph
+                .FirstOrDefault(f => f.Runtime == runtimeIdentifier);
             IEnumerable<string> rids = Enumerable.Concat(
                 new[] { runtimeIdentifier },
                 fallbacks?.Fallbacks ?? Enumerable.Empty<string>()

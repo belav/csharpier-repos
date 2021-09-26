@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                         NotificationOption2.Suggestion
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -129,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -203,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -239,7 +245,8 @@ class TestClass
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -275,7 +282,8 @@ class TestClass
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -310,7 +318,8 @@ class TestClass
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -353,7 +362,8 @@ class TestClass
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -390,7 +400,8 @@ class TestClass
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
     }
 }

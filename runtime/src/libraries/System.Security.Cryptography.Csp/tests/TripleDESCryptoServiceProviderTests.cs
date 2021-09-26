@@ -38,16 +38,16 @@ namespace System.Security.Cryptography.Encryption.TripleDES.Tests
                 alg.Padding = PaddingMode.None;
                 alg.Mode = CipherMode.CBC;
 
-                byte[] plainText =
-                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] plainText = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b"
+                    .HexToByteArray();
                 byte[] cipher = alg.Encrypt(plainText);
-                byte[] expectedCipher =
-                    "dea36279600f19c602b6ed9bf3ffdac5ebf25c1c470eb61c".HexToByteArray();
+                byte[] expectedCipher = "dea36279600f19c602b6ed9bf3ffdac5ebf25c1c470eb61c"
+                    .HexToByteArray();
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted =
-                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] expectedDecrypted = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b"
+                    .HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }

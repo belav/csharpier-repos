@@ -397,12 +397,13 @@ namespace System.Threading.Tasks.Tests
                     {
                         case WorkloadType.CreateChildTask:
                         case WorkloadType.CreateDetachedChildTask:
-                            Task.Factory.StartNew(
-                                () => { },
-                                _workloadType == WorkloadType.CreateDetachedChildTask
-                                  ? TaskCreationOptions.None
-                                  : TaskCreationOptions.AttachedToParent
-                            );
+                            Task.Factory
+                                .StartNew(
+                                    () => { },
+                                    _workloadType == WorkloadType.CreateDetachedChildTask
+                                      ? TaskCreationOptions.None
+                                      : TaskCreationOptions.AttachedToParent
+                                );
                             break;
 
                         case WorkloadType.ContinueInside:
@@ -411,7 +412,8 @@ namespace System.Threading.Tasks.Tests
 
                         case WorkloadType.RunWithUserScheduler:
                             TaskScheduler ts = new TaskRunSyncTaskScheduler(true);
-                            Task.Factory.StartNew(
+                            Task.Factory
+                                .StartNew(
                                     () => { },
                                     _cts.Token,
                                     TaskCreationOptions.AttachedToParent,
@@ -456,10 +458,11 @@ namespace System.Threading.Tasks.Tests
             else
                 Assert.True(
                     false,
-                    string.Format(
-                        "Caught un-expected exception - {0]. Fail to re-propagate the test exception via Wait",
-                        ae
-                    )
+                    string
+                        .Format(
+                            "Caught un-expected exception - {0]. Fail to re-propagate the test exception via Wait",
+                            ae
+                        )
                 );
         }
     }

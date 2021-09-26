@@ -32,7 +32,8 @@ namespace Tracing.Tests.BufferValidation
 
             var providers = new List<Provider>() { new Provider("MyEventSource") };
 
-            var tests = new int[] { 0, 2 }.Select(x => (uint)Math.Pow(2, x))
+            var tests = new int[] { 0, 2 }
+                .Select(x => (uint)Math.Pow(2, x))
                 .Select(
                     bufferSize =>
                         new SessionConfiguration(

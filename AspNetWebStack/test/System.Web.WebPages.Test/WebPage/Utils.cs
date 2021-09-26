@@ -173,10 +173,11 @@ namespace System.Web.WebPages.Test
             AppDomainUtils.SetAppData();
             var env = new HostingEnvironment();
 
-            var register = typeof(HostingEnvironment).GetMethod(
-                "RegisterVirtualPathProviderInternal",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            var register = typeof(HostingEnvironment)
+                .GetMethod(
+                    "RegisterVirtualPathProviderInternal",
+                    BindingFlags.Static | BindingFlags.NonPublic
+                );
             register.Invoke(null, new object[] { vpp.Object });
         }
 

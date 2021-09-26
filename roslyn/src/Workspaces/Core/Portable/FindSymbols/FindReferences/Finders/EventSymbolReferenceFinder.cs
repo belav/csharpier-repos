@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         )
         {
-            var baseSymbols = await base.DetermineCascadedSymbolsAsync(
+            var baseSymbols = await base
+                .DetermineCascadedSymbolsAsync(
                     symbol,
                     solution,
                     projects,
@@ -35,17 +36,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 )
                 .ConfigureAwait(false);
 
-            var backingFields = symbol.ContainingType.GetMembers()
+            var backingFields = symbol.ContainingType
+                .GetMembers()
                 .OfType<IFieldSymbol>()
                 .Where(f => symbol.Equals(f.AssociatedSymbol))
                 .ToImmutableArray();
 
-            var associatedNamedTypes = symbol.ContainingType.GetTypeMembers()
+            var associatedNamedTypes = symbol.ContainingType
+                .GetTypeMembers()
                 .WhereAsArray(n => symbol.Equals(n.AssociatedSymbol));
 
             return baseSymbols.Concat(
-                    backingFields.SelectAsArray(f => ((ISymbol)f, cascadeDirection))
-                )
+                backingFields.SelectAsArray(f => ((ISymbol)f, cascadeDirection))
+            )
                 .Concat(associatedNamedTypes.SelectAsArray(n => ((ISymbol)n, cascadeDirection)));
         }
 

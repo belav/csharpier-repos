@@ -262,14 +262,15 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertFromString(int x, int y, int width, int height)
         {
             var rect = (Rectangle)Converter.ConvertFromString(
-                string.Format(
-                    "{0}{4} {1}{4} {2}{4} {3}",
-                    x,
-                    y,
-                    width,
-                    height,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                )
+                string
+                    .Format(
+                        "{0}{4} {1}{4} {2}{4} {3}",
+                        x,
+                        y,
+                        width,
+                        height,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
             );
             Assert.Equal(x, rect.X);
             Assert.Equal(y, rect.Y);
@@ -281,10 +282,11 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertFromString_ArgumentException()
         {
             ConvertFromStringThrowsArgumentException(
-                string.Format(
-                    "1{0} 1{0} 1{0} 1{0} 1",
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                )
+                string
+                    .Format(
+                        "1{0} 1{0} 1{0} 1{0} 1",
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
             );
         }
 
@@ -308,14 +310,15 @@ namespace System.ComponentModel.TypeConverterTests
         {
             var str = Converter.ConvertToString(new Rectangle(x, y, width, height));
             Assert.Equal(
-                string.Format(
-                    "{0}{4} {1}{4} {2}{4} {3}",
-                    x,
-                    y,
-                    width,
-                    height,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                ),
+                string
+                    .Format(
+                        "{0}{4} {1}{4} {2}{4} {3}",
+                        x,
+                        y,
+                        width,
+                        height,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    ),
                 str
             );
         }

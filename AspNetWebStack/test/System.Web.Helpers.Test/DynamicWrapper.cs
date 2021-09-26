@@ -44,10 +44,8 @@ namespace System.Web.Helpers.Test
 
             private Expression GetWrappedObjectExpression()
             {
-                FieldInfo fieldInfo = typeof(DynamicWrapper).GetField(
-                    "_object",
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                );
+                FieldInfo fieldInfo = typeof(DynamicWrapper)
+                    .GetField("_object", BindingFlags.NonPublic | BindingFlags.Instance);
                 Debug.Assert(fieldInfo != null);
                 return Expression.Convert(
                     Expression.Field(GetDynamicExpression(), fieldInfo),
@@ -84,7 +82,8 @@ namespace System.Web.Helpers.Test
                     from p in WrappedObject.GetType().GetProperties()
                     orderby p.Name
                     select p.Name
-                ).ToArray();
+                )
+                    .ToArray();
             }
         }
     }

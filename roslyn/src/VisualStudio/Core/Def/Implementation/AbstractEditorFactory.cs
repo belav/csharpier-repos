@@ -431,9 +431,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             var rootToFormat = addedDocument.GetSyntaxRootSynchronously(cancellationToken);
             Contract.ThrowIfNull(rootToFormat);
-            var documentOptions = ThreadHelper.JoinableTaskFactory.Run(
-                () => addedDocument.GetOptionsAsync(cancellationToken)
-            );
+            var documentOptions = ThreadHelper.JoinableTaskFactory
+                .Run(() => addedDocument.GetOptionsAsync(cancellationToken));
 
             // Apply file header preferences
             var fileHeaderTemplate = documentOptions.GetOption(
@@ -464,12 +463,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             }
 
             // Organize using directives
-            addedDocument = ThreadHelper.JoinableTaskFactory.Run(
-                () => OrganizeUsingsCreatedFromTemplateAsync(addedDocument, cancellationToken)
-            );
-            rootToFormat = ThreadHelper.JoinableTaskFactory.Run(
-                () => addedDocument.GetRequiredSyntaxRootAsync(cancellationToken).AsTask()
-            );
+            addedDocument = ThreadHelper.JoinableTaskFactory
+                .Run(
+                    () => OrganizeUsingsCreatedFromTemplateAsync(addedDocument, cancellationToken)
+                );
+            rootToFormat = ThreadHelper.JoinableTaskFactory
+                .Run(() => addedDocument.GetRequiredSyntaxRootAsync(cancellationToken).AsTask());
 
             // Format document
             var unformattedText = addedDocument.GetTextSynchronously(cancellationToken);
@@ -491,20 +490,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             foreach (var originalLine in originalText.Lines)
             {
                 var originalNewLine = originalText.ToString(
-                    CodeAnalysis.Text.TextSpan.FromBounds(
-                        originalLine.End,
-                        originalLine.EndIncludingLineBreak
-                    )
+                    CodeAnalysis.Text.TextSpan
+                        .FromBounds(originalLine.End, originalLine.EndIncludingLineBreak)
                 );
 
                 // Check if we have a line ending, so we don't go adding one to the end if we don't need to.
                 if (originalNewLine.Length > 0 && originalNewLine != targetLineEnding)
                 {
                     var currentLine = formattedText.Lines[originalLine.LineNumber];
-                    var currentSpan = CodeAnalysis.Text.TextSpan.FromBounds(
-                        currentLine.End,
-                        currentLine.EndIncludingLineBreak
-                    );
+                    var currentSpan = CodeAnalysis.Text.TextSpan
+                        .FromBounds(currentLine.End, currentLine.EndIncludingLineBreak);
                     formattedText = formattedText.WithChanges(
                         new TextChange(currentSpan, targetLineEnding)
                     );

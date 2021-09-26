@@ -356,8 +356,8 @@ namespace System.Net.Http.Formatting.DataSets
                 return new RefTypeTestData<MediaTypeHeaderValue>(
                     () =>
                         LegalMediaTypeStrings.Select(
-                                mediaType => new MediaTypeHeaderValue(mediaType)
-                            )
+                            mediaType => new MediaTypeHeaderValue(mediaType)
+                        )
                             .ToList()
                 );
             }

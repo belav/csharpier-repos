@@ -176,17 +176,16 @@ namespace System.Threading.Tasks.Tests
 
             //if source is partitioner
             if (_parameters.PartitionerType == PartitionerType.RangePartitioner)
-                _rangePartitioner = PartitionerFactory<Tuple<int, int>>.Create(
-                    _parameters.PartitionerType,
-                    _parameters.StartIndex,
-                    _parameters.StartIndex + _parameters.Count,
-                    _parameters.ChunkSize
-                );
+                _rangePartitioner = PartitionerFactory<Tuple<int, int>>
+                    .Create(
+                        _parameters.PartitionerType,
+                        _parameters.StartIndex,
+                        _parameters.StartIndex + _parameters.Count,
+                        _parameters.ChunkSize
+                    );
             else
-                _partitioner = PartitionerFactory<int>.Create(
-                    _parameters.PartitionerType,
-                    _collection
-                );
+                _partitioner = PartitionerFactory<int>
+                    .Create(_parameters.PartitionerType, _collection);
 
             if (_parameters.ParallelOption != WithParallelOption.None)
             {
@@ -991,13 +990,14 @@ namespace System.Threading.Tasks.Tests
 
                 Assert.True(
                     _parameters.StateOption == ActionWithState.Stop && 0 == _results[i],
-                    string.Format(
-                        "Incorrect results[{0}]. Expected result to lie between {1} and {2} but got {3})",
-                        i,
-                        minLimit,
-                        maxLimit,
-                        _results[i]
-                    )
+                    string
+                        .Format(
+                            "Incorrect results[{0}]. Expected result to lie between {1} and {2} but got {3})",
+                            i,
+                            minLimit,
+                            maxLimit,
+                            _results[i]
+                        )
                 );
             }
         }

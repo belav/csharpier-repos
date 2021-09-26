@@ -118,10 +118,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     "",
                     ""
                 );
-                await result.HttpClient.RetryRequestAsync(
-                    "/WaitingRequestCount",
-                    async message => await message.Content.ReadAsStringAsync() == "1"
-                );
+                await result.HttpClient
+                    .RetryRequestAsync(
+                        "/WaitingRequestCount",
+                        async message => await message.Content.ReadAsStringAsync() == "1"
+                    );
             }
 
             StopServer();
@@ -185,8 +186,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 foreach (var eventElement in eventElements)
                 {
                     var eventElementWithOpCode = eventElement.Descendants(
-                            nameSpace + "RenderingInfo"
-                        )
+                        nameSpace + "RenderingInfo"
+                    )
                         .Single()
                         .Descendants(nameSpace + "Opcode")
                         .Single();

@@ -23,12 +23,13 @@ namespace System.Text.Json.Serialization.Converters
             Debug.Assert(jsonParameterInfo.ShouldDeserialize);
             Debug.Assert(jsonParameterInfo.Options != null);
 
-            bool success = jsonParameterInfo.ConverterBase.TryReadAsObject(
-                ref reader,
-                jsonParameterInfo.Options!,
-                ref state,
-                out object? arg
-            );
+            bool success = jsonParameterInfo.ConverterBase
+                .TryReadAsObject(
+                    ref reader,
+                    jsonParameterInfo.Options!,
+                    ref state,
+                    out object? arg
+                );
 
             if (success && !(arg == null && jsonParameterInfo.IgnoreDefaultValuesOnRead))
             {
@@ -70,10 +71,8 @@ namespace System.Text.Json.Serialization.Converters
 
             if (typeInfo.CreateObjectWithArgs == null)
             {
-                typeInfo.CreateObjectWithArgs =
-                    options.MemberAccessorStrategy.CreateParameterizedConstructor<T>(
-                        ConstructorInfo!
-                    );
+                typeInfo.CreateObjectWithArgs = options.MemberAccessorStrategy
+                    .CreateParameterizedConstructor<T>(ConstructorInfo!);
             }
 
             object[] arguments = ArrayPool<object>.Shared.Rent(typeInfo.ParameterCount);

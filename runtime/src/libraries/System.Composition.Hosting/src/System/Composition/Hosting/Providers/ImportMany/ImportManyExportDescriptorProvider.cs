@@ -12,7 +12,8 @@ namespace System.Composition.Hosting.Providers.ImportMany
     internal sealed class ImportManyExportDescriptorProvider : ExportDescriptorProvider
     {
         private static readonly MethodInfo s_getImportManyDefinitionMethod =
-            typeof(ImportManyExportDescriptorProvider).GetTypeInfo()
+            typeof(ImportManyExportDescriptorProvider)
+                .GetTypeInfo()
                 .GetDeclaredMethod("GetImportManyDescriptor");
         private static readonly Type[] s_supportedContractTypes = new[]
         {

@@ -53,9 +53,8 @@ namespace Microsoft.EntityFrameworkCore
 
             extension = extension.WithChangeTracking(useChangeTrackingProxies, checkEquality);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension);
 
             return optionsBuilder;
         }
@@ -124,9 +123,8 @@ namespace Microsoft.EntityFrameworkCore
 
             extension = extension.WithLazyLoading(useLazyLoadingProxies);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension);
 
             return optionsBuilder;
         }

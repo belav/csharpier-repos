@@ -299,7 +299,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             return RunTest(
                 SharedState.DotNetWithNETCoreAppPreRelease,
                 SharedState.FrameworkReferenceApp,
-                new TestSettings().WithRuntimeConfigCustomizer(
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
                         runtimeConfig =>
                             runtimeConfig.WithApplyPatches(applyPatches)
                                 .WithFramework(MicrosoftNETCoreApp, frameworkReferenceVersion)

@@ -147,7 +147,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                     true,
                     "{\"type\":4,\"invocationId\":\"123\",\"target\":\"Target\",\"arguments\":[1,\"Foo\",2.0]}"
                 ),
-            }.ToDictionary(t => t.Name);
+            }
+                .ToDictionary(t => t.Name);
 
         public static IEnumerable<object[]> CustomProtocolTestDataNames =>
             CustomProtocolTestData.Keys.Select(name => new object[] { name });

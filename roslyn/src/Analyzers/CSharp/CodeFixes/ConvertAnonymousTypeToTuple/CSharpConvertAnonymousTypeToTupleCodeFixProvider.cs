@@ -40,12 +40,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAnonymousTypeToTuple
             AnonymousObjectCreationExpressionSyntax anonCreation
         ) =>
             SyntaxFactory.TupleExpression(
-                    SyntaxFactory.Token(SyntaxKind.OpenParenToken)
-                        .WithTriviaFrom(anonCreation.OpenBraceToken),
-                    ConvertInitializers(anonCreation.Initializers),
-                    SyntaxFactory.Token(SyntaxKind.CloseParenToken)
-                        .WithTriviaFrom(anonCreation.CloseBraceToken)
-                )
+                SyntaxFactory.Token(SyntaxKind.OpenParenToken)
+                    .WithTriviaFrom(anonCreation.OpenBraceToken),
+                ConvertInitializers(anonCreation.Initializers),
+                SyntaxFactory.Token(SyntaxKind.CloseParenToken)
+                    .WithTriviaFrom(anonCreation.CloseBraceToken)
+            )
                 .WithPrependedLeadingTrivia(anonCreation.GetLeadingTrivia());
 
         private static SeparatedSyntaxList<ArgumentSyntax> ConvertInitializers(
@@ -60,10 +60,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAnonymousTypeToTuple
             AnonymousObjectMemberDeclaratorSyntax declarator
         ) =>
             SyntaxFactory.Argument(
-                    ConvertName(declarator.NameEquals),
-                    default,
-                    declarator.Expression
-                )
+                ConvertName(declarator.NameEquals),
+                default,
+                declarator.Expression
+            )
                 .WithTriviaFrom(declarator);
 
         private static NameColonSyntax ConvertName(NameEqualsSyntax nameEquals) =>

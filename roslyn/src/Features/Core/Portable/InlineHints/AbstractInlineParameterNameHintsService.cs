@@ -70,10 +70,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 .ConfigureAwait(false);
 
             using var _1 = ArrayBuilder<InlineHint>.GetInstance(out var result);
-            using var _2 =
-                ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)>.GetInstance(
-                    out var buffer
-                );
+            using var _2 = ArrayBuilder<(int position, IParameterSymbol? parameter, HintKind kind)>
+                .GetInstance(out var buffer);
 
             foreach (
                 var node in root.DescendantNodes(textSpan, n => n.Span.IntersectsWith(textSpan))
@@ -308,10 +306,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 // will be 'result'.  So we check if the first letters differ on case and the rest of the method
                 // matches.
                 return char.ToLower(suffix.Span[0]) == parameterName[0]
-                    && suffix.Span[1..].Equals(
-                        parameterName.AsSpan()[1..],
-                        StringComparison.Ordinal
-                    );
+                    && suffix.Span[1..]
+                        .Equals(parameterName.AsSpan()[1..], StringComparison.Ordinal);
             }
         }
     }

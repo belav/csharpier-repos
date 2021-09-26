@@ -85,7 +85,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
 
         private static EditForm FindEditFormComponent(CapturedBatch batch) =>
-            batch.ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Component)
+            batch.ReferenceFrames
+                .Where(f => f.FrameType == RenderTreeFrameType.Component)
                 .Select(f => f.Component)
                 .OfType<EditForm>()
                 .Single();

@@ -223,20 +223,16 @@ namespace Newtonsoft.Json.Linq
         internal override bool RemoveItem(JToken? item)
         {
             throw new JsonException(
-                "Cannot add or remove items from {0}.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    typeof(JProperty)
-                )
+                "Cannot add or remove items from {0}."
+                    .FormatWith(CultureInfo.InvariantCulture, typeof(JProperty))
             );
         }
 
         internal override void RemoveItemAt(int index)
         {
             throw new JsonException(
-                "Cannot add or remove items from {0}.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    typeof(JProperty)
-                )
+                "Cannot add or remove items from {0}."
+                    .FormatWith(CultureInfo.InvariantCulture, typeof(JProperty))
             );
         }
 
@@ -261,10 +257,8 @@ namespace Newtonsoft.Json.Linq
             if (Value != null)
             {
                 throw new JsonException(
-                    "{0} cannot have multiple values.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        typeof(JProperty)
-                    )
+                    "{0} cannot have multiple values."
+                        .FormatWith(CultureInfo.InvariantCulture, typeof(JProperty))
                 );
             }
 
@@ -289,10 +283,8 @@ namespace Newtonsoft.Json.Linq
         internal override void ClearItems()
         {
             throw new JsonException(
-                "Cannot add or remove items from {0}.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    typeof(JProperty)
-                )
+                "Cannot add or remove items from {0}."
+                    .FormatWith(CultureInfo.InvariantCulture, typeof(JProperty))
             );
         }
 
@@ -406,10 +398,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Error reading JProperty from JsonReader. Current JsonReader item is not a property: {0}".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Error reading JProperty from JsonReader. Current JsonReader item is not a property: {0}"
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
 

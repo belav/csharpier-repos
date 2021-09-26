@@ -96,8 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         public void UserDefinedControllerClass_IsNotController()
         {
             // Arrange
-            var controllerType =
-                typeof(ControllerFeatureProviderControllers.Controller).GetTypeInfo();
+            var controllerType = typeof(ControllerFeatureProviderControllers.Controller)
+                .GetTypeInfo();
             var manager = GetApplicationPartManager(controllerType);
             var feature = new ControllerFeature();
 

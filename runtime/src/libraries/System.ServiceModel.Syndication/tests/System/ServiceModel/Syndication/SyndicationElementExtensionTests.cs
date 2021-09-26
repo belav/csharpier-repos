@@ -44,7 +44,8 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlReader reader = new XElement(
                     "parent",
                     new XElement("ExtensionObject", new XElement("Value", 10))
-                ).CreateReader()
+                )
+                    .CreateReader()
             )
             {
                 reader.MoveToElement();

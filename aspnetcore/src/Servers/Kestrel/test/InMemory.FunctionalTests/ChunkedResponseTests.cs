@@ -26,12 +26,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     async httpContext =>
                     {
                         var response = httpContext.Response;
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6)
-                        );
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
+                        await response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
                     },
                     testContext
                 )
@@ -98,12 +96,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     {
                         httpContext.Request.Protocol = "HTTP/2"; // Doesn't support chunking. This change should be ignored.
                         var response = httpContext.Response;
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6)
-                        );
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
+                        await response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
                     },
                     testContext
                 )
@@ -338,13 +334,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     async httpContext =>
                     {
                         var response = httpContext.Response;
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
                         await response.BodyWriter.WriteAsync(new Memory<byte>(new byte[0], 0, 0));
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
                     },
                     testContext
                 )
@@ -453,9 +447,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     async httpContext =>
                     {
                         var response = httpContext.Response;
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World!"), 0, 12)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World!"), 0, 12)
+                            );
                         throw new Exception();
                     },
                     testContext
@@ -528,16 +523,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     async httpContext =>
                     {
                         var response = httpContext.Response;
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
 
                         // Don't complete response until client has received the first chunk.
                         await flushWh.Task.DefaultTimeout();
 
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
                     },
                     testContext
                 )
@@ -575,15 +568,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         var response = httpContext.Response;
                         response.Headers["Transfer-Encoding"] = "chunked";
 
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("6\r\nHello \r\n"), 0, 11)
-                        );
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("6\r\nWorld!\r\n"), 0, 11)
-                        );
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("0\r\n\r\n"), 0, 5)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("6\r\nHello \r\n"), 0, 11)
+                            );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("6\r\nWorld!\r\n"), 0, 11)
+                            );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("0\r\n\r\n"), 0, 5)
+                            );
                     },
                     testContext
                 )
@@ -717,9 +713,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         length.Value = memory.Length;
                         semaphore.Release();
 
-                        var fisrtPartOfResponse = Encoding.ASCII.GetBytes(
-                            new string('a', memory.Length)
-                        );
+                        var fisrtPartOfResponse = Encoding.ASCII
+                            .GetBytes(new string('a', memory.Length));
                         fisrtPartOfResponse.CopyTo(memory);
                         response.BodyWriter.Advance(memory.Length);
 
@@ -777,9 +772,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         length.Value = memory.Length;
                         semaphore.Release();
 
-                        var fisrtPartOfResponse = Encoding.ASCII.GetBytes(
-                            new string('a', memory.Length)
-                        );
+                        var fisrtPartOfResponse = Encoding.ASCII
+                            .GetBytes(new string('a', memory.Length));
                         fisrtPartOfResponse.CopyTo(memory);
                         response.BodyWriter.Advance(memory.Length);
 
@@ -1146,9 +1140,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     {
                         var response = httpContext.Response;
                         var memory = response.BodyWriter.GetMemory(4096);
-                        var fisrtPartOfResponse = Encoding.ASCII.GetBytes(
-                            new string('a', writeSize)
-                        );
+                        var fisrtPartOfResponse = Encoding.ASCII
+                            .GetBytes(new string('a', writeSize));
                         fisrtPartOfResponse.CopyTo(memory);
                         response.BodyWriter.Advance(writeSize);
                         await response.BodyWriter.FlushAsync();
@@ -1189,9 +1182,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         var response = httpContext.Response;
 
                         var memory = response.BodyWriter.GetMemory(4096);
-                        var fisrtPartOfResponse = Encoding.ASCII.GetBytes(
-                            new string('a', writeSize)
-                        );
+                        var fisrtPartOfResponse = Encoding.ASCII
+                            .GetBytes(new string('a', writeSize));
                         fisrtPartOfResponse.CopyTo(memory);
                         response.BodyWriter.Advance(writeSize);
                         await response.BodyWriter.FlushAsync();
@@ -1236,9 +1228,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         response.BodyWriter.Advance(6);
 
                         await response.Body.WriteAsync(Encoding.ASCII.GetBytes("hello, world"));
-                        await response.BodyWriter.WriteAsync(
-                            Encoding.ASCII.GetBytes("hello, world")
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(Encoding.ASCII.GetBytes("hello, world"));
                         await response.WriteAsync("hello, world");
                     },
                     new TestServiceContext(LoggerFactory)

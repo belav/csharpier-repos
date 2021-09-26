@@ -57,9 +57,9 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
                 if (node != null)
                 {
                     var qualifiedAccess = generator.MemberAccessExpression(
-                            generator.ThisExpression(),
-                            node.WithLeadingTrivia()
-                        )
+                        generator.ThisExpression(),
+                        node.WithLeadingTrivia()
+                    )
                         .WithLeadingTrivia(node.GetLeadingTrivia());
 
                     editor.ReplaceNode(node, qualifiedAccess);

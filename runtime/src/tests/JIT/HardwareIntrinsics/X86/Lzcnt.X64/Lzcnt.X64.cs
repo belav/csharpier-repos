@@ -39,7 +39,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     resl = Convert.ToUInt64(
-                        typeof(Lzcnt.X64).GetMethod(
+                        typeof(Lzcnt.X64)
+                            .GetMethod(
                                 nameof(Lzcnt.X64.LeadingZeroCount),
                                 new Type[] { sl.GetType() }
                             )
@@ -74,7 +75,8 @@ namespace IntelHardwareIntrinsicTest
                 try
                 {
                     resl = Convert.ToUInt64(
-                        typeof(Lzcnt.X64).GetMethod(
+                        typeof(Lzcnt.X64)
+                            .GetMethod(
                                 nameof(Lzcnt.X64.LeadingZeroCount),
                                 new Type[] { sl.GetType() }
                             )

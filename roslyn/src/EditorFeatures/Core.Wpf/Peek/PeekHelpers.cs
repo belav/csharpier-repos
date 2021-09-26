@@ -22,12 +22,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
         )
         {
             var fileName = Path.GetFileName(filePath);
-            var label = string.Format(
-                "{0} - ({1}, {2})",
-                fileName,
-                identifierLocation.Start.Line + 1,
-                identifierLocation.Start.Character + 1
-            );
+            var label = string
+                .Format(
+                    "{0} - ({1}, {2})",
+                    fileName,
+                    identifierLocation.Start.Line + 1,
+                    identifierLocation.Start.Character + 1
+                );
 
             var displayInfo = new PeekResultDisplayInfo(
                 label: label,
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             var root = identifierLocation.SourceTree.GetRoot(cancellationToken);
             var node = root.FindToken(identifierLocation.SourceSpan.Start).Parent;
 
-            var syntaxFactsService = workspace.Services.GetLanguageServices(root.Language)
+            var syntaxFactsService = workspace.Services
+                .GetLanguageServices(root.Language)
                 .GetService<ISyntaxFactsService>();
 
             switch (symbol.Kind)

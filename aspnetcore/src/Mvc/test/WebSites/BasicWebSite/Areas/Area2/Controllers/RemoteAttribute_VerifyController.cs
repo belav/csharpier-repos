@@ -16,14 +16,15 @@ namespace BasicWebSite.Ares.Area2.Controllers
         public IActionResult IsIdAvailable(RemoteAttributeUser user)
         {
             return new JsonResult(
-                value: string.Format(
-                    CultureInfo.InvariantCulture,
-                    "/Area2/RemoteAttribute_Verify/IsIdAvailable rejects '{0}' with '{1}', '{2}', and '{3}'.",
-                    user.UserId4,
-                    user.UserId1,
-                    user.UserId2,
-                    user.UserId3
-                )
+                value: string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "/Area2/RemoteAttribute_Verify/IsIdAvailable rejects '{0}' with '{1}', '{2}', and '{3}'.",
+                        user.UserId4,
+                        user.UserId1,
+                        user.UserId2,
+                        user.UserId3
+                    )
             );
         }
     }

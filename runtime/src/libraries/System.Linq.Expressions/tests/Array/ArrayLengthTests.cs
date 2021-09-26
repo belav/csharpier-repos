@@ -1915,8 +1915,8 @@ namespace System.Linq.Expressions.Tests
         {
             Array arr = new[] { 1, 2, 3 };
             Func<int> func = Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(arr))
-                )
+                Expression.ArrayLength(Expression.Constant(arr))
+            )
                 .Compile(useInterpreter);
             Assert.Equal(3, func());
         }

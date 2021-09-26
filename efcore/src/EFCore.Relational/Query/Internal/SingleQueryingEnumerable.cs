@@ -179,7 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     {
                         if (_dataReader == null)
                         {
-                            _relationalQueryContext.ExecutionStrategyFactory.Create()
+                            _relationalQueryContext.ExecutionStrategyFactory
+                                .Create()
                                 .Execute(
                                     this,
                                     (_, enumerator) => InitializeReader(enumerator),
@@ -245,10 +246,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 EntityFrameworkEventSource.Log.QueryExecuting();
 
-                var relationalCommandTemplate =
-                    enumerator._relationalCommandCache.GetRelationalCommand(
-                        enumerator._relationalQueryContext.ParameterValues
-                    );
+                var relationalCommandTemplate = enumerator._relationalCommandCache
+                    .GetRelationalCommand(enumerator._relationalQueryContext.ParameterValues);
 
                 var relationalCommand = enumerator._relationalCommand =
                     enumerator._relationalQueryContext.Connection.RentCommand();
@@ -267,9 +266,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 enumerator._resultCoordinator = new SingleQueryResultCoordinator();
 
-                enumerator._relationalQueryContext.InitializeStateManager(
-                    enumerator._standAloneStateManager
-                );
+                enumerator._relationalQueryContext
+                    .InitializeStateManager(enumerator._standAloneStateManager);
 
                 return false;
             }
@@ -337,7 +335,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     {
                         if (_dataReader == null)
                         {
-                            await _relationalQueryContext.ExecutionStrategyFactory.Create()
+                            await _relationalQueryContext.ExecutionStrategyFactory
+                                .Create()
                                 .ExecuteAsync(
                                     this,
                                     (_, enumerator, cancellationToken) =>
@@ -350,9 +349,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         var hasNext =
                             _resultCoordinator!.HasNext
-                            ?? await _dataReader!.ReadAsync(
-                                    _relationalQueryContext.CancellationToken
-                                )
+                            ?? await _dataReader!
+                                .ReadAsync(_relationalQueryContext.CancellationToken)
                                 .ConfigureAwait(false);
                         Current = default!;
 
@@ -377,8 +375,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                                 if (
                                     !await _dataReader.ReadAsync(
-                                            _relationalQueryContext.CancellationToken
-                                        )
+                                        _relationalQueryContext.CancellationToken
+                                    )
                                         .ConfigureAwait(false)
                                 )
                                 {
@@ -419,33 +417,30 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 EntityFrameworkEventSource.Log.QueryExecuting();
 
-                var relationalCommandTemplate =
-                    enumerator._relationalCommandCache.GetRelationalCommand(
-                        enumerator._relationalQueryContext.ParameterValues
-                    );
+                var relationalCommandTemplate = enumerator._relationalCommandCache
+                    .GetRelationalCommand(enumerator._relationalQueryContext.ParameterValues);
 
                 var relationalCommand = enumerator._relationalCommand =
                     enumerator._relationalQueryContext.Connection.RentCommand();
                 relationalCommand.PopulateFromTemplate(relationalCommandTemplate);
 
                 enumerator._dataReader = await relationalCommand.ExecuteReaderAsync(
-                        new RelationalCommandParameterObject(
-                            enumerator._relationalQueryContext.Connection,
-                            enumerator._relationalQueryContext.ParameterValues,
-                            enumerator._relationalCommandCache.ReaderColumns,
-                            enumerator._relationalQueryContext.Context,
-                            enumerator._relationalQueryContext.CommandLogger,
-                            enumerator._detailedErrorsEnabled
-                        ),
-                        cancellationToken
-                    )
+                    new RelationalCommandParameterObject(
+                        enumerator._relationalQueryContext.Connection,
+                        enumerator._relationalQueryContext.ParameterValues,
+                        enumerator._relationalCommandCache.ReaderColumns,
+                        enumerator._relationalQueryContext.Context,
+                        enumerator._relationalQueryContext.CommandLogger,
+                        enumerator._detailedErrorsEnabled
+                    ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 enumerator._resultCoordinator = new SingleQueryResultCoordinator();
 
-                enumerator._relationalQueryContext.InitializeStateManager(
-                    enumerator._standAloneStateManager
-                );
+                enumerator._relationalQueryContext
+                    .InitializeStateManager(enumerator._standAloneStateManager);
 
                 return false;
             }

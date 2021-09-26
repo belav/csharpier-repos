@@ -91,13 +91,14 @@ namespace System.Threading.Tasks.Dataflow
             targets[1] = _target2 = new JoinBlockTarget<T2>(_sharedResources);
 
             // Let the source know when all targets have completed
-            Task.Factory.ContinueWhenAll(
-                new[] { _target1.CompletionTaskInternal, _target2.CompletionTaskInternal },
-                _ => _source.Complete(),
-                CancellationToken.None,
-                Common.GetContinuationOptions(),
-                TaskScheduler.Default
-            );
+            Task.Factory
+                .ContinueWhenAll(
+                    new[] { _target1.CompletionTaskInternal, _target2.CompletionTaskInternal },
+                    _ => _source.Complete(),
+                    CancellationToken.None,
+                    Common.GetContinuationOptions(),
+                    TaskScheduler.Default
+                );
 
             // It is possible that the source half may fault on its own, e.g. due to a task scheduler exception.
             // In those cases we need to fault the target half to drop its buffered messages and to release its
@@ -443,18 +444,19 @@ namespace System.Threading.Tasks.Dataflow
             targets[2] = _target3 = new JoinBlockTarget<T3>(_sharedResources);
 
             // Let the source know when all targets have completed
-            Task.Factory.ContinueWhenAll(
-                new[]
-                {
-                    _target1.CompletionTaskInternal,
-                    _target2.CompletionTaskInternal,
-                    _target3.CompletionTaskInternal
-                },
-                _ => _source.Complete(),
-                CancellationToken.None,
-                Common.GetContinuationOptions(),
-                TaskScheduler.Default
-            );
+            Task.Factory
+                .ContinueWhenAll(
+                    new[]
+                    {
+                        _target1.CompletionTaskInternal,
+                        _target2.CompletionTaskInternal,
+                        _target3.CompletionTaskInternal
+                    },
+                    _ => _source.Complete(),
+                    CancellationToken.None,
+                    Common.GetContinuationOptions(),
+                    TaskScheduler.Default
+                );
 
             // It is possible that the source half may fault on its own, e.g. due to a task scheduler exception.
             // In those cases we need to fault the target half to drop its buffered messages and to release its
@@ -957,11 +959,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             );
 
             bool consumed;
-            T? consumedValue = _nonGreedy.ReservedMessage.Key.ConsumeMessage(
-                _nonGreedy.ReservedMessage.Value,
-                this,
-                out consumed
-            );
+            T? consumedValue = _nonGreedy.ReservedMessage.Key
+                .ConsumeMessage(_nonGreedy.ReservedMessage.Value, this, out consumed);
 
             // Null out our reservation
             _nonGreedy.ReservedMessage = default(KeyValuePair<
@@ -1104,10 +1103,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // Release the reservation and null out our reservation flag even if an exception occurs
                 try
                 {
-                    _nonGreedy.ReservedMessage.Key.ReleaseReservation(
-                        _nonGreedy.ReservedMessage.Value,
-                        this
-                    );
+                    _nonGreedy.ReservedMessage.Key
+                        .ReleaseReservation(_nonGreedy.ReservedMessage.Value, this);
                 }
 
                 finally
@@ -1770,9 +1767,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             // so that _taskForInputProcessing will be visibly set in the task loop.
             _taskForInputProcessing = new Task(
                 thisSharedResources =>
-                    (
-                        (JoinBlockTargetSharedResources)thisSharedResources!
-                    ).ProcessMessagesLoopCore(),
+                    ((JoinBlockTargetSharedResources)thisSharedResources!)
+                        .ProcessMessagesLoopCore(),
                 this,
                 Common.GetCreationOptionsForTask(isReplacementReplica)
             );
@@ -1911,11 +1907,12 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // We can trigger completion of the JoinBlock by completing one target.
                 // It doesn't matter which one. So we always complete the first one.
                 Debug.Assert(_targets.Length > 0, "A join must have targets.");
-                _targets[0].CompleteCore(
-                    exception,
-                    dropPendingMessages: true,
-                    releaseReservedMessages: true
-                );
+                _targets[0]
+                    .CompleteCore(
+                        exception,
+                        dropPendingMessages: true,
+                        releaseReservedMessages: true
+                    );
                 // The finally section will do the block completion.
             }
             finally

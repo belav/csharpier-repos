@@ -147,7 +147,8 @@ class Tests
         /* Check sharing of wrappers of vtype methods with static methods having an IntPtr argument */
         if ((string)(typeof(Foo).GetMethod("ToString2").Invoke(new Foo(), null)) != "FOO")
             return 3;
-        object o = typeof(Tests).GetMethod("GetNSObject")
+        object o = typeof(Tests)
+            .GetMethod("GetNSObject")
             .Invoke(null, new object[] { new IntPtr(42) });
         if (!(o is IntPtr) || ((IntPtr)o != new IntPtr(42)))
             return 4;
@@ -160,7 +161,8 @@ class Tests
         int[] arr = new int[10];
         fixed (void* p = &arr[5])
         {
-            object o = typeof(Tests).GetMethod("data_types_ptr")
+            object o = typeof(Tests)
+                .GetMethod("data_types_ptr")
                 .Invoke(null, new object[1] { new IntPtr(p) });
             void* p2 = Pointer.Unbox(o);
             if (new IntPtr(p) != new IntPtr(p2))
@@ -177,7 +179,8 @@ class Tests
 
     public static int test_0_string_ctor()
     {
-        string res = (string)typeof(String).GetConstructor(new Type[] { typeof(char[]) })
+        string res = (string)typeof(String)
+            .GetConstructor(new Type[] { typeof(char[]) })
             .Invoke(new object[] { new char[] { 'A', 'B', 'C' } });
         if (res == "ABC")
             return 0;
@@ -194,7 +197,8 @@ class Tests
     {
         Foo<string> f = new Foo<string> { t = "A" };
         Foo<string> f2 =
-            (Foo<string>)typeof(Tests).GetMethod("data_types_ginst_ref")
+            (Foo<string>)typeof(Tests)
+                .GetMethod("data_types_ginst_ref")
                 .MakeGenericMethod(new Type[] { typeof(string) })
                 .Invoke(null, new object[] { f });
         if (f2.t != "A")
@@ -207,7 +211,8 @@ class Tests
     {
         FooStruct<string> f = new FooStruct<string> { t = "A" };
         FooStruct<string> f2 =
-            (FooStruct<string>)typeof(Tests).GetMethod("data_types_ginst_vtype")
+            (FooStruct<string>)typeof(Tests)
+                .GetMethod("data_types_ginst_vtype")
                 .MakeGenericMethod(new Type[] { typeof(string) })
                 .Invoke(null, new object[] { f });
         if (f2.t != "A")
@@ -345,10 +350,11 @@ class Tests
     public static int test_0_method_invoke_no_modify_by_value_arg()
     {
         var args = new object[] { null };
-        var method = typeof(Tests).GetMethod(
-            "method_invoke_no_modify_by_value_arg_helper",
-            BindingFlags.NonPublic | BindingFlags.Static
-        );
+        var method = typeof(Tests)
+            .GetMethod(
+                "method_invoke_no_modify_by_value_arg_helper",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
         method.Invoke(null, args);
         if (args[0] == null)
             return 0;
@@ -363,7 +369,8 @@ class Tests
         arg.a2 = 2;
         arg.a3 = 3;
         arg.a20 = 20;
-        var res = typeof(Tests).GetMethod("return_t")
+        var res = typeof(Tests)
+            .GetMethod("return_t")
             .MakeGenericMethod(new Type[] { typeof(AStruct) })
             .Invoke(null, new object[] { arg });
         var arg2 = (AStruct)res;

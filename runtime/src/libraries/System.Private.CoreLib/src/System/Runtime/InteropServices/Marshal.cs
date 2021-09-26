@@ -281,7 +281,8 @@ namespace System.Runtime.InteropServices
 
             // The rest of the argument validation is done by CopyTo
 
-            new Span<T>(source, startIndex, length).CopyTo(new Span<T>((void*)destination, length));
+            new Span<T>(source, startIndex, length)
+                .CopyTo(new Span<T>((void*)destination, length));
         }
 
         public static void Copy(IntPtr source, int[] destination, int startIndex, int length)
@@ -348,7 +349,8 @@ namespace System.Runtime.InteropServices
 
             // The rest of the argument validation is done by CopyTo
 
-            new Span<T>((void*)source, length).CopyTo(new Span<T>(destination, startIndex, length));
+            new Span<T>((void*)source, length)
+                .CopyTo(new Span<T>(destination, startIndex, length));
         }
 
         public static unsafe byte ReadByte(IntPtr ptr, int ofs)

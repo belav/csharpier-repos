@@ -68,9 +68,8 @@ namespace System.CommandLine.Parsing
                     var token = unmatchedTokens[i];
                     _errors.Add(
                         new ParseError(
-                            parser.Configuration.ValidationMessages.UnrecognizedCommandOrArgument(
-                                token.Value
-                            )
+                            parser.Configuration.ValidationMessages
+                                .UnrecognizedCommandOrArgument(token.Value)
                         )
                     );
                 }

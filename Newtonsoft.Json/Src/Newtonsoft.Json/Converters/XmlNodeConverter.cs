@@ -1899,10 +1899,8 @@ namespace Newtonsoft.Json.Converters
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "JSON root object has property '{0}' that will be converted to an attribute. A root object cannot have any attribute properties. Consider specifying a DeserializeRootElementName.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        propertyName
-                    )
+                    "JSON root object has property '{0}' that will be converted to an attribute. A root object cannot have any attribute properties. Consider specifying a DeserializeRootElementName."
+                        .FormatWith(CultureInfo.InvariantCulture, propertyName)
                 );
             }
 
@@ -1980,10 +1978,8 @@ namespace Newtonsoft.Json.Converters
                 default:
                     throw JsonSerializationException.Create(
                         reader,
-                        "Cannot get an XML string value from token type '{0}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            reader.TokenType
-                        )
+                        "Cannot get an XML string value from token type '{0}'."
+                            .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                     );
             }
         }

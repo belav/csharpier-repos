@@ -117,9 +117,9 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap(typeof(CFieldDefinitionModel<>), typeof(CFieldDefinitionDTO<>))
                         .ReverseMap();
                     cfg.CreateMap(
-                            typeof(CComponentDefinitionModel<>),
-                            typeof(CComponentDefinitionDTO<>)
-                        )
+                        typeof(CComponentDefinitionModel<>),
+                        typeof(CComponentDefinitionDTO<>)
+                    )
                         .ReverseMap();
                 }
             );
@@ -377,15 +377,14 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap<Supplier, SupplierViewModel>()
-                        .ForPath(
-                            d => d.Contact.Supplier1,
-                            o =>
-                            {
-                                o.MapFrom(s => s.Contact.Supplier);
-                                o.Ignore();
-                            }
-                        );
+                    cfg.CreateMap<Supplier, SupplierViewModel>().ForPath(
+                        d => d.Contact.Supplier1,
+                        o =>
+                        {
+                            o.MapFrom(s => s.Contact.Supplier);
+                            o.Ignore();
+                        }
+                    );
                 }
             );
 

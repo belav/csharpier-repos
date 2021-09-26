@@ -37,11 +37,12 @@ namespace Microsoft.AspNetCore.Testing
             ITestMethod testMethod,
             IAttributeInfo theoryAttribute
         ) =>
-            base.Discover(
-                new OptionsWithPreEnumerationEnabled(discoveryOptions),
-                testMethod,
-                theoryAttribute
-            );
+            base
+                .Discover(
+                    new OptionsWithPreEnumerationEnabled(discoveryOptions),
+                    testMethod,
+                    theoryAttribute
+                );
 
         protected override IEnumerable<IXunitTestCase> CreateTestCasesForTheory(
             ITestFrameworkDiscoveryOptions discoveryOptions,
@@ -87,19 +88,16 @@ namespace Microsoft.AspNetCore.Testing
             }
 
             return skipReason != null
-              ? base.CreateTestCasesForSkippedDataRow(
+              ? base
+                .CreateTestCasesForSkippedDataRow(
                     discoveryOptions,
                     testMethod,
                     theoryAttribute,
                     dataRow,
                     skipReason
                 )
-              : base.CreateTestCasesForDataRow(
-                    discoveryOptions,
-                    testMethod,
-                    theoryAttribute,
-                    dataRow
-                );
+              : base
+                .CreateTestCasesForDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow);
         }
 
         protected override IEnumerable<IXunitTestCase> CreateTestCasesForSkippedDataRow(

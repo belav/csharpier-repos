@@ -146,9 +146,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
 
         private void ToggleCheckSelection()
         {
-            var selectedItems =
-                Members.SelectedItems.OfType<PickMembersDialogViewModel.MemberSymbolViewModel>()
-                    .ToArray();
+            var selectedItems = Members.SelectedItems
+                .OfType<PickMembersDialogViewModel.MemberSymbolViewModel>()
+                .ToArray();
             var allChecked = selectedItems.All(m => m.IsChecked);
             foreach (var item in selectedItems)
             {

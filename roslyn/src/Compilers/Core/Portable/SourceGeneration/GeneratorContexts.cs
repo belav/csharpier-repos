@@ -213,10 +213,11 @@ namespace Microsoft.CodeAnalysis
             if (x is object)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        CodeAnalysisResources.Single_type_per_generator_0,
-                        typeName ?? typeof(T).Name
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.Single_type_per_generator_0,
+                            typeName ?? typeof(T).Name
+                        )
                 );
             }
         }

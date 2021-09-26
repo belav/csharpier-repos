@@ -117,9 +117,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return new ModuleToken(ecmaField.Module, ecmaField.Handle);
             }
 
-            TypeDesc owningCanonType = field.OwningType.ConvertToCanonForm(
-                CanonicalFormKind.Specific
-            );
+            TypeDesc owningCanonType = field.OwningType
+                .ConvertToCanonForm(CanonicalFormKind.Specific);
             FieldDesc canonField = field;
             if (owningCanonType != field.OwningType)
             {
@@ -149,9 +148,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (token.TokenType == CorTokenType.mdtMethodSpec)
             {
-                MethodSpecification methodSpec = token.MetadataReader.GetMethodSpecification(
-                    (MethodSpecificationHandle)token.Handle
-                );
+                MethodSpecification methodSpec = token.MetadataReader
+                    .GetMethodSpecification((MethodSpecificationHandle)token.Handle);
                 methodSpec.DecodeSignature<DummyTypeInfo, ModuleTokenResolver>(
                     new TokenResolverProvider(this, token.Module),
                     this
@@ -160,9 +158,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
             if (token.TokenType == CorTokenType.mdtMemberRef)
             {
-                MemberReference memberRef = token.MetadataReader.GetMemberReference(
-                    (MemberReferenceHandle)token.Handle
-                );
+                MemberReference memberRef = token.MetadataReader
+                    .GetMemberReference((MemberReferenceHandle)token.Handle);
                 EntityHandle owningTypeHandle = memberRef.Parent;
                 AddModuleTokenForType(
                     method.OwningType,
@@ -177,9 +174,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private void AddModuleTokenForFieldReference(TypeDesc owningType, ModuleToken token)
         {
-            MemberReference memberRef = token.MetadataReader.GetMemberReference(
-                (MemberReferenceHandle)token.Handle
-            );
+            MemberReference memberRef = token.MetadataReader
+                .GetMemberReference((MemberReferenceHandle)token.Handle);
             EntityHandle owningTypeHandle = memberRef.Parent;
             AddModuleTokenForType(owningType, new ModuleToken(token.Module, owningTypeHandle));
             memberRef.DecodeFieldSignature<DummyTypeInfo, ModuleTokenResolver>(
@@ -200,9 +196,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return;
             }
 
-            TypeDesc owningCanonType = field.OwningType.ConvertToCanonForm(
-                CanonicalFormKind.Specific
-            );
+            TypeDesc owningCanonType = field.OwningType
+                .ConvertToCanonForm(CanonicalFormKind.Specific);
             FieldDesc canonField = field;
             if (owningCanonType != field.OwningType)
             {
@@ -256,9 +251,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // Collect underlying type tokens for type specifications
             if (token.TokenType == CorTokenType.mdtTypeSpec)
             {
-                TypeSpecification typeSpec = token.MetadataReader.GetTypeSpecification(
-                    (TypeSpecificationHandle)token.Handle
-                );
+                TypeSpecification typeSpec = token.MetadataReader
+                    .GetTypeSpecification((TypeSpecificationHandle)token.Handle);
                 typeSpec.DecodeSignature(new TokenResolverProvider(this, token.Module), this);
                 specialTypeFound = true;
             }

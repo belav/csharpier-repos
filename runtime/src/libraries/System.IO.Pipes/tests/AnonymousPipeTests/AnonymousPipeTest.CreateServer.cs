@@ -186,15 +186,10 @@ namespace System.IO.Pipes.Tests
             new AnonymousPipeServerStream().Dispose();
             new AnonymousPipeServerStream(PipeDirection.Out).Dispose();
             new AnonymousPipeServerStream(PipeDirection.Out, HandleInheritability.None).Dispose();
-            new AnonymousPipeServerStream(
-                PipeDirection.Out,
-                HandleInheritability.Inheritable
-            ).Dispose();
-            new AnonymousPipeServerStream(
-                PipeDirection.Out,
-                HandleInheritability.None,
-                0
-            ).Dispose();
+            new AnonymousPipeServerStream(PipeDirection.Out, HandleInheritability.Inheritable)
+                .Dispose();
+            new AnonymousPipeServerStream(PipeDirection.Out, HandleInheritability.None, 0)
+                .Dispose();
         }
     }
 }

@@ -193,73 +193,45 @@ namespace System.Diagnostics.Tests
         public void TestBaggageWithChainedActivities()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Activity a1 = new Activity("a1");
-                        a1.Start();
+                () =>
+                {
+                    Activity a1 = new Activity("a1");
+                    a1.Start();
 
-                        a1.AddBaggage("1", "1");
-                        a1.AddBaggage("2", "2");
+                    a1.AddBaggage("1", "1");
+                    a1.AddBaggage("2", "2");
 
-                        IEnumerable<KeyValuePair<string, string>> baggages = a1.Baggage;
-                        Assert.Equal(2, baggages.Count());
-                        Assert.Equal(
-                            new KeyValuePair<string, string>("2", "2"),
-                            baggages.ElementAt(0)
-                        );
-                        Assert.Equal(
-                            new KeyValuePair<string, string>("1", "1"),
-                            baggages.ElementAt(1)
-                        );
+                    IEnumerable<KeyValuePair<string, string>> baggages = a1.Baggage;
+                    Assert.Equal(2, baggages.Count());
+                    Assert.Equal(new KeyValuePair<string, string>("2", "2"), baggages.ElementAt(0));
+                    Assert.Equal(new KeyValuePair<string, string>("1", "1"), baggages.ElementAt(1));
 
-                        Activity a2 = new Activity("a2");
-                        a2.Start();
+                    Activity a2 = new Activity("a2");
+                    a2.Start();
 
-                        a2.AddBaggage("3", "3");
-                        baggages = a2.Baggage;
-                        Assert.Equal(3, baggages.Count());
-                        Assert.Equal(
-                            new KeyValuePair<string, string>("3", "3"),
-                            baggages.ElementAt(0)
-                        );
-                        Assert.Equal(
-                            new KeyValuePair<string, string>("2", "2"),
-                            baggages.ElementAt(1)
-                        );
-                        Assert.Equal(
-                            new KeyValuePair<string, string>("1", "1"),
-                            baggages.ElementAt(2)
-                        );
+                    a2.AddBaggage("3", "3");
+                    baggages = a2.Baggage;
+                    Assert.Equal(3, baggages.Count());
+                    Assert.Equal(new KeyValuePair<string, string>("3", "3"), baggages.ElementAt(0));
+                    Assert.Equal(new KeyValuePair<string, string>("2", "2"), baggages.ElementAt(1));
+                    Assert.Equal(new KeyValuePair<string, string>("1", "1"), baggages.ElementAt(2));
 
-                        Activity a3 = new Activity("a3");
-                        a3.Start();
+                    Activity a3 = new Activity("a3");
+                    a3.Start();
 
-                        a3.AddBaggage("4", "4");
-                        baggages = a3.Baggage;
-                        Assert.Equal(4, baggages.Count());
-                        Assert.Equal(
-                            new KeyValuePair<string, string>("4", "4"),
-                            baggages.ElementAt(0)
-                        );
-                        Assert.Equal(
-                            new KeyValuePair<string, string>("3", "3"),
-                            baggages.ElementAt(1)
-                        );
-                        Assert.Equal(
-                            new KeyValuePair<string, string>("2", "2"),
-                            baggages.ElementAt(2)
-                        );
-                        Assert.Equal(
-                            new KeyValuePair<string, string>("1", "1"),
-                            baggages.ElementAt(3)
-                        );
+                    a3.AddBaggage("4", "4");
+                    baggages = a3.Baggage;
+                    Assert.Equal(4, baggages.Count());
+                    Assert.Equal(new KeyValuePair<string, string>("4", "4"), baggages.ElementAt(0));
+                    Assert.Equal(new KeyValuePair<string, string>("3", "3"), baggages.ElementAt(1));
+                    Assert.Equal(new KeyValuePair<string, string>("2", "2"), baggages.ElementAt(2));
+                    Assert.Equal(new KeyValuePair<string, string>("1", "1"), baggages.ElementAt(3));
 
-                        a3.Dispose();
-                        a2.Dispose();
-                        a1.Dispose();
-                    }
-                )
-                .Dispose();
+                    a3.Dispose();
+                    a2.Dispose();
+                    a1.Dispose();
+                }
+            ).Dispose();
         }
 
         /// <summary>
@@ -768,55 +740,50 @@ namespace System.Diagnostics.Tests
         public void IdFormat_W3CWhenDefaultIsW3C()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Activity.DefaultIdFormat = ActivityIdFormat.W3C;
-                        Activity activity = new Activity("activity4");
-                        activity.Start();
-                        Assert.Equal(ActivityIdFormat.W3C, activity.IdFormat);
-                        Assert.True(IdIsW3CFormat(activity.Id));
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    Activity.DefaultIdFormat = ActivityIdFormat.W3C;
+                    Activity activity = new Activity("activity4");
+                    activity.Start();
+                    Assert.Equal(ActivityIdFormat.W3C, activity.IdFormat);
+                    Assert.True(IdIsW3CFormat(activity.Id));
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void IdFormat_WithTheEnvironmentSwitch()
         {
             var psi = new ProcessStartInfo();
-            psi.Environment.Add(
-                "DOTNET_SYSTEM_DIAGNOSTICS_DEFAULTACTIVITYIDFORMATISHIERARCHIAL",
-                "true"
-            );
+            psi.Environment
+                .Add("DOTNET_SYSTEM_DIAGNOSTICS_DEFAULTACTIVITYIDFORMATISHIERARCHIAL", "true");
 
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Activity activity = new Activity("activity15");
-                        activity.Start();
-                        Assert.Equal(ActivityIdFormat.Hierarchical, activity.IdFormat);
-                    },
-                    new RemoteInvokeOptions() { StartInfo = psi }
-                )
-                .Dispose();
+                () =>
+                {
+                    Activity activity = new Activity("activity15");
+                    activity.Start();
+                    Assert.Equal(ActivityIdFormat.Hierarchical, activity.IdFormat);
+                },
+                new RemoteInvokeOptions() { StartInfo = psi }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void IdFormat_HierarchicalWhenDefaultIsW3CButHierarchicalParentId()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Activity.DefaultIdFormat = ActivityIdFormat.W3C;
-                        Activity activity = new Activity("activity5");
-                        string parentId = "|a000b421-5d183ab6.1.";
-                        activity.SetParentId(parentId);
-                        activity.Start();
-                        Assert.Equal(ActivityIdFormat.Hierarchical, activity.IdFormat);
-                        Assert.StartsWith(parentId, activity.Id);
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    Activity.DefaultIdFormat = ActivityIdFormat.W3C;
+                    Activity activity = new Activity("activity5");
+                    string parentId = "|a000b421-5d183ab6.1.";
+                    activity.SetParentId(parentId);
+                    activity.Start();
+                    Assert.Equal(ActivityIdFormat.Hierarchical, activity.IdFormat);
+                    Assert.StartsWith(parentId, activity.Id);
+                }
+            ).Dispose();
         }
 
         [Fact]
@@ -843,23 +810,22 @@ namespace System.Diagnostics.Tests
         public void IdFormat_W3CWhenForcedAndHierarchicalParentId()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Activity.DefaultIdFormat = ActivityIdFormat.W3C;
-                        Activity.ForceDefaultIdFormat = true;
-                        Activity activity = new Activity("activity6");
-                        activity.SetParentId("|a000b421-5d183ab6.1.");
-                        activity.Start();
-                        Assert.Equal(ActivityIdFormat.W3C, activity.IdFormat);
-                        Assert.True(IdIsW3CFormat(activity.Id));
-                        Assert.NotEqual(
-                            "00000000000000000000000000000000",
-                            activity.TraceId.ToHexString()
-                        );
-                        Assert.NotEqual("0000000000000000", activity.SpanId.ToHexString());
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    Activity.DefaultIdFormat = ActivityIdFormat.W3C;
+                    Activity.ForceDefaultIdFormat = true;
+                    Activity activity = new Activity("activity6");
+                    activity.SetParentId("|a000b421-5d183ab6.1.");
+                    activity.Start();
+                    Assert.Equal(ActivityIdFormat.W3C, activity.IdFormat);
+                    Assert.True(IdIsW3CFormat(activity.Id));
+                    Assert.NotEqual(
+                        "00000000000000000000000000000000",
+                        activity.TraceId.ToHexString()
+                    );
+                    Assert.NotEqual("0000000000000000", activity.SpanId.ToHexString());
+                }
+            ).Dispose();
         }
 
         [Fact]
@@ -970,20 +936,16 @@ namespace System.Diagnostics.Tests
         public void IdFormat_W3CForcedOverridesParentActivityIdFormat()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Activity.DefaultIdFormat = ActivityIdFormat.W3C;
-                        Activity.ForceDefaultIdFormat = true;
+                () =>
+                {
+                    Activity.DefaultIdFormat = ActivityIdFormat.W3C;
+                    Activity.ForceDefaultIdFormat = true;
 
-                        Activity parent = new Activity("parent").Start();
-                        Activity activity = new Activity("child").Start();
-                        Assert.Equal(
-                            parent.SpanId.ToHexString(),
-                            activity.ParentSpanId.ToHexString()
-                        );
-                    }
-                )
-                .Dispose();
+                    Activity parent = new Activity("parent").Start();
+                    Activity activity = new Activity("child").Start();
+                    Assert.Equal(parent.SpanId.ToHexString(), activity.ParentSpanId.ToHexString());
+                }
+            ).Dispose();
         }
 
         [Fact]
@@ -1057,40 +1019,39 @@ namespace System.Diagnostics.Tests
         public void SetIdFormat_OverridesForcedW3C()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Activity.DefaultIdFormat = ActivityIdFormat.W3C;
-                        Activity.ForceDefaultIdFormat = true;
-                        Activity activity = new Activity("activity7");
-                        activity.SetIdFormat(ActivityIdFormat.Hierarchical);
-                        activity.Start();
-                        Assert.Equal(ActivityIdFormat.Hierarchical, activity.IdFormat);
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    Activity.DefaultIdFormat = ActivityIdFormat.W3C;
+                    Activity.ForceDefaultIdFormat = true;
+                    Activity activity = new Activity("activity7");
+                    activity.SetIdFormat(ActivityIdFormat.Hierarchical);
+                    activity.Start();
+                    Assert.Equal(ActivityIdFormat.Hierarchical, activity.IdFormat);
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void SetIdFormat_OverridesForcedHierarchical()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Activity.DefaultIdFormat = ActivityIdFormat.Hierarchical;
-                        Activity.ForceDefaultIdFormat = true;
-                        Activity activity = new Activity("activity8");
-                        activity.SetIdFormat(ActivityIdFormat.W3C);
-                        activity.Start();
-                        Assert.Equal(ActivityIdFormat.W3C, activity.IdFormat);
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    Activity.DefaultIdFormat = ActivityIdFormat.Hierarchical;
+                    Activity.ForceDefaultIdFormat = true;
+                    Activity activity = new Activity("activity8");
+                    activity.SetIdFormat(ActivityIdFormat.W3C);
+                    activity.Start();
+                    Assert.Equal(ActivityIdFormat.W3C, activity.IdFormat);
+                }
+            ).Dispose();
         }
 
         [Fact]
         public void SetIdFormat_OverridesParentHierarchicalFormat()
         {
-            Activity parent = new Activity("parent").SetIdFormat(ActivityIdFormat.Hierarchical)
+            Activity parent = new Activity("parent")
+                .SetIdFormat(ActivityIdFormat.Hierarchical)
                 .Start();
 
             Activity child = new Activity("child").SetIdFormat(ActivityIdFormat.W3C).Start();
@@ -1103,7 +1064,8 @@ namespace System.Diagnostics.Tests
         {
             Activity parent = new Activity("parent").SetIdFormat(ActivityIdFormat.W3C).Start();
 
-            Activity child = new Activity("child").SetIdFormat(ActivityIdFormat.Hierarchical)
+            Activity child = new Activity("child")
+                .SetIdFormat(ActivityIdFormat.Hierarchical)
                 .Start();
 
             Assert.Equal(ActivityIdFormat.Hierarchical, child.IdFormat);
@@ -1153,19 +1115,18 @@ namespace System.Diagnostics.Tests
         public void TraceIdBeforeStart_NoParent()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Activity.DefaultIdFormat = ActivityIdFormat.W3C;
-                        Activity.ForceDefaultIdFormat = true;
+                () =>
+                {
+                    Activity.DefaultIdFormat = ActivityIdFormat.W3C;
+                    Activity.ForceDefaultIdFormat = true;
 
-                        Activity activity = new Activity("activity3");
-                        Assert.Equal(
-                            "00000000000000000000000000000000",
-                            activity.TraceId.ToHexString()
-                        );
-                    }
-                )
-                .Dispose();
+                    Activity activity = new Activity("activity3");
+                    Assert.Equal(
+                        "00000000000000000000000000000000",
+                        activity.TraceId.ToHexString()
+                    );
+                }
+            ).Dispose();
         }
 
         [Fact]
@@ -1343,7 +1304,8 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void ParentChild()
         {
-            var parent = new Activity("parent").AddBaggage("id1", "baggage from parent")
+            var parent = new Activity("parent")
+                .AddBaggage("id1", "baggage from parent")
                 .AddTag("tag1", "tag from parent");
 
             parent.Start();
@@ -1659,16 +1621,12 @@ namespace System.Diagnostics.Tests
             DateTimeOffset ts2 = ts1.AddMinutes(1);
 
             Assert.True(
-                object.ReferenceEquals(
-                    activity,
-                    activity.AddEvent(new ActivityEvent("Event1", ts1))
-                )
+                object
+                    .ReferenceEquals(activity, activity.AddEvent(new ActivityEvent("Event1", ts1)))
             );
             Assert.True(
-                object.ReferenceEquals(
-                    activity,
-                    activity.AddEvent(new ActivityEvent("Event2", ts2))
-                )
+                object
+                    .ReferenceEquals(activity, activity.AddEvent(new ActivityEvent("Event2", ts2)))
             );
 
             Assert.Equal(2, activity.Events.Count());
@@ -1961,70 +1919,65 @@ namespace System.Diagnostics.Tests
         public void RestoreOriginalParentTest()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Assert.Null(Activity.Current);
+                () =>
+                {
+                    Assert.Null(Activity.Current);
 
-                        Activity a = new Activity("Root");
-                        a.Start();
+                    Activity a = new Activity("Root");
+                    a.Start();
 
-                        Assert.NotNull(Activity.Current);
-                        Assert.Equal("Root", Activity.Current.OperationName);
+                    Assert.NotNull(Activity.Current);
+                    Assert.Equal("Root", Activity.Current.OperationName);
 
-                        // Create Activity with the parent context to not use Activity.Current as a parent
-                        Activity b = new Activity("Child");
-                        b.SetParentId(
-                            ActivityTraceId.CreateRandom(),
-                            ActivitySpanId.CreateRandom()
-                        );
-                        b.Start();
+                    // Create Activity with the parent context to not use Activity.Current as a parent
+                    Activity b = new Activity("Child");
+                    b.SetParentId(ActivityTraceId.CreateRandom(), ActivitySpanId.CreateRandom());
+                    b.Start();
 
-                        Assert.NotNull(Activity.Current);
-                        Assert.Equal("Child", Activity.Current.OperationName);
+                    Assert.NotNull(Activity.Current);
+                    Assert.Equal("Child", Activity.Current.OperationName);
 
-                        b.Stop();
+                    b.Stop();
 
-                        // Now the child activity stopped. We used to restore null to the Activity.Current but now we restore
-                        // the original parent stored in Activity.Current before we started the Activity.
-                        Assert.NotNull(Activity.Current);
-                        Assert.Equal("Root", Activity.Current.OperationName);
+                    // Now the child activity stopped. We used to restore null to the Activity.Current but now we restore
+                    // the original parent stored in Activity.Current before we started the Activity.
+                    Assert.NotNull(Activity.Current);
+                    Assert.Equal("Root", Activity.Current.OperationName);
 
-                        a.Stop();
-                        Assert.Null(Activity.Current);
-                    }
-                )
-                .Dispose();
+                    a.Stop();
+                    Assert.Null(Activity.Current);
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void TraceIdCustomGenerationTest()
         {
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    Random random = new Random();
+                    byte[] traceIdBytes = new byte[16];
+
+                    Activity.TraceIdGenerator = () =>
                     {
-                        Random random = new Random();
-                        byte[] traceIdBytes = new byte[16];
+                        random.NextBytes(traceIdBytes);
+                        return ActivityTraceId.CreateFromBytes(traceIdBytes);
+                    };
+                    Activity.DefaultIdFormat = ActivityIdFormat.W3C;
 
-                        Activity.TraceIdGenerator = () =>
-                        {
-                            random.NextBytes(traceIdBytes);
-                            return ActivityTraceId.CreateFromBytes(traceIdBytes);
-                        };
-                        Activity.DefaultIdFormat = ActivityIdFormat.W3C;
+                    for (int i = 0; i < 100; i++)
+                    {
+                        Assert.Null(Activity.Current);
+                        Activity a = new Activity("CustomTraceId");
+                        a.Start();
 
-                        for (int i = 0; i < 100; i++)
-                        {
-                            Assert.Null(Activity.Current);
-                            Activity a = new Activity("CustomTraceId");
-                            a.Start();
+                        Assert.Equal(ActivityTraceId.CreateFromBytes(traceIdBytes), a.TraceId);
 
-                            Assert.Equal(ActivityTraceId.CreateFromBytes(traceIdBytes), a.TraceId);
-
-                            a.Stop();
-                        }
+                        a.Stop();
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         public void Dispose()

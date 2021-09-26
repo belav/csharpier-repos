@@ -187,7 +187,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.And(
                     Expression.Constant(a, typeof(byte?)),
                     Expression.Constant(b, typeof(byte?)),
-                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseAndNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AndNullableByte")
                 )
             );
@@ -202,7 +203,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.And(
                     Expression.Constant(a, typeof(int?)),
                     Expression.Constant(b, typeof(int?)),
-                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseAndNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AndNullableInt")
                 )
             );
@@ -217,7 +219,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.And(
                     Expression.Constant(a, typeof(long?)),
                     Expression.Constant(b, typeof(long?)),
-                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseAndNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AndNullableLong")
                 )
             );
@@ -232,7 +235,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.And(
                     Expression.Constant(a, typeof(sbyte?)),
                     Expression.Constant(b, typeof(sbyte?)),
-                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseAndNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AndNullableSByte")
                 )
             );
@@ -247,7 +251,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.And(
                     Expression.Constant(a, typeof(short?)),
                     Expression.Constant(b, typeof(short?)),
-                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseAndNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AndNullableShort")
                 )
             );
@@ -262,7 +267,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.And(
                     Expression.Constant(a, typeof(uint?)),
                     Expression.Constant(b, typeof(uint?)),
-                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseAndNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AndNullableUInt")
                 )
             );
@@ -277,7 +283,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.And(
                     Expression.Constant(a, typeof(ulong?)),
                     Expression.Constant(b, typeof(ulong?)),
-                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseAndNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AndNullableULong")
                 )
             );
@@ -296,7 +303,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.And(
                     Expression.Constant(a, typeof(ushort?)),
                     Expression.Constant(b, typeof(ushort?)),
-                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseAndNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("AndNullableUShort")
                 )
             );

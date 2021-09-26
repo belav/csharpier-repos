@@ -54,10 +54,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 ConfigurationSource.Convention
             );
             entityTypeBuilder.Property(
-                    typeof(Tuple<long>),
-                    "LongProperty",
-                    ConfigurationSource.Explicit
-                )
+                typeof(Tuple<long>),
+                "LongProperty",
+                ConfigurationSource.Explicit
+            )
                 .HasColumnType("some_int_mapping");
 
             Assert.Equal(

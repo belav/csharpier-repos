@@ -45,55 +45,58 @@ namespace StaticFilesAuth
                         "files",
                         builder =>
                         {
-                            builder.RequireAuthenticatedUser()
-                                .RequireAssertion(
-                                    context =>
+                            builder.RequireAuthenticatedUser().RequireAssertion(
+                                context =>
+                                {
+                                    var userName = context.User.Identity.Name;
+                                    userName = userName?.Split('@').FirstOrDefault();
+                                    if (userName == null)
                                     {
-                                        var userName = context.User.Identity.Name;
-                                        userName = userName?.Split('@').FirstOrDefault();
-                                        if (userName == null)
-                                        {
-                                            return false;
-                                        }
-                                        if (context.Resource is Endpoint endpoint)
-                                        {
-                                            var userPath = Path.Combine(usersPath, userName);
+                                        return false;
+                                    }
+                                    if (context.Resource is Endpoint endpoint)
+                                    {
+                                        var userPath = Path.Combine(usersPath, userName);
 
-                                            var directory =
-                                                endpoint.Metadata.GetMetadata<DirectoryInfo>();
-                                            if (directory != null)
-                                            {
-                                                return string.Equals(
+                                        var directory = endpoint.Metadata
+                                            .GetMetadata<DirectoryInfo>();
+                                        if (directory != null)
+                                        {
+                                            return string
+                                                    .Equals(
                                                         directory.FullName,
                                                         basePath,
                                                         StringComparison.OrdinalIgnoreCase
                                                     )
-                                                    || string.Equals(
+                                                || string
+                                                    .Equals(
                                                         directory.FullName,
                                                         usersPath,
                                                         StringComparison.OrdinalIgnoreCase
                                                     )
-                                                    || string.Equals(
+                                                || string
+                                                    .Equals(
                                                         directory.FullName,
                                                         userPath,
                                                         StringComparison.OrdinalIgnoreCase
                                                     )
-                                                    || directory.FullName.StartsWith(
+                                                || directory.FullName
+                                                    .StartsWith(
                                                         userPath + Path.DirectorySeparatorChar,
                                                         StringComparison.OrdinalIgnoreCase
                                                     );
-                                            }
-
-                                            throw new InvalidOperationException(
-                                                $"Missing file system metadata."
-                                            );
                                         }
 
                                         throw new InvalidOperationException(
-                                            $"Unknown resource type '{context.Resource.GetType()}'"
+                                            $"Missing file system metadata."
                                         );
                                     }
-                                );
+
+                                    throw new InvalidOperationException(
+                                        $"Unknown resource type '{context.Resource.GetType()}'"
+                                    );
+                                }
+                            );
                         }
                     );
                 }

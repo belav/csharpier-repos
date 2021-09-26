@@ -319,9 +319,8 @@ namespace System.Reflection.Tests
         public void DeclaredProperties(Type type, string name)
         {
             TypeInfo typeInfo = type.GetTypeInfo();
-            IEnumerable<string> properties = typeInfo.DeclaredProperties.Select(
-                property => property.Name
-            );
+            IEnumerable<string> properties = typeInfo.DeclaredProperties
+                .Select(property => property.Name);
             Assert.Contains(name, properties);
             Assert.Equal(name, typeInfo.GetDeclaredProperty(name).Name);
         }
@@ -329,26 +328,31 @@ namespace System.Reflection.Tests
         [Fact]
         public void FindInterfaces()
         {
-            Type[] interfaces = typeof(ClassWithNoInterfaces).GetTypeInfo()
+            Type[] interfaces = typeof(ClassWithNoInterfaces)
+                .GetTypeInfo()
                 .FindInterfaces((Type t, object c) => true, "notused");
 
             Assert.Equal(0, interfaces.Length);
-            interfaces = typeof(TI_ClassWithInterface1).GetTypeInfo()
+            interfaces = typeof(TI_ClassWithInterface1)
+                .GetTypeInfo()
                 .FindInterfaces((Type t, object c) => true, "notused");
             Assert.Equal(1, interfaces.Length);
             Assert.Equal(nameof(TI_NonGenericInterface1), interfaces[0].Name);
 
-            interfaces = typeof(TI_ClassWithInterface1).GetTypeInfo()
+            interfaces = typeof(TI_ClassWithInterface1)
+                .GetTypeInfo()
                 .FindInterfaces((Type t, object c) => t.Name.Equals(c), "TI_NonGenericInterface1");
             Assert.Equal(1, interfaces.Length);
             Assert.Equal(nameof(TI_NonGenericInterface1), interfaces[0].Name);
 
-            interfaces = typeof(ClassWithInterface2Interface3).GetTypeInfo()
+            interfaces = typeof(ClassWithInterface2Interface3)
+                .GetTypeInfo()
                 .FindInterfaces((Type t, object c) => true, "notused");
             Assert.Equal(2, interfaces.Length);
             Assert.All(interfaces, m => Assert.Contains("TI_NonGenericInterface", m.Name));
 
-            interfaces = typeof(ClassWithInterface2Interface3).GetTypeInfo()
+            interfaces = typeof(ClassWithInterface2Interface3)
+                .GetTypeInfo()
                 .FindInterfaces(
                     (Type t, object c) => t.Name.Contains(c.ToString()),
                     "TI_NonGenericInterface"
@@ -356,12 +360,14 @@ namespace System.Reflection.Tests
             Assert.Equal(2, interfaces.Length);
             Assert.All(interfaces, m => Assert.Contains("TI_NonGenericInterface", m.Name));
 
-            interfaces = typeof(SubClassWithInterface1).GetTypeInfo()
+            interfaces = typeof(SubClassWithInterface1)
+                .GetTypeInfo()
                 .FindInterfaces((Type t, object c) => true, "notused");
             Assert.Equal(1, interfaces.Length);
             Assert.Equal(nameof(TI_NonGenericInterface1), interfaces[0].Name);
 
-            interfaces = typeof(SubClassWithInterface1).GetTypeInfo()
+            interfaces = typeof(SubClassWithInterface1)
+                .GetTypeInfo()
                 .FindInterfaces(
                     (Type t, object c) => t.Name.Contains(c.ToString()),
                     "TI_NonGenericInterface"
@@ -369,12 +375,14 @@ namespace System.Reflection.Tests
             Assert.Equal(1, interfaces.Length);
             Assert.Equal(nameof(TI_NonGenericInterface1), interfaces[0].Name);
 
-            interfaces = typeof(SubClassWithInterface1Interface2Interface3).GetTypeInfo()
+            interfaces = typeof(SubClassWithInterface1Interface2Interface3)
+                .GetTypeInfo()
                 .FindInterfaces((Type t, object c) => true, "notused");
             Assert.Equal(3, interfaces.Length);
             Assert.All(interfaces, m => Assert.Contains("TI_NonGenericInterface", m.Name));
 
-            interfaces = typeof(SubClassWithInterface1Interface2Interface3).GetTypeInfo()
+            interfaces = typeof(SubClassWithInterface1Interface2Interface3)
+                .GetTypeInfo()
                 .FindInterfaces(
                     (Type t, object c) => t.Name.Contains(c.ToString()),
                     "TI_NonGenericInterface"
@@ -382,7 +390,8 @@ namespace System.Reflection.Tests
             Assert.Equal(3, interfaces.Length);
             Assert.All(interfaces, m => Assert.Contains("TI_NonGenericInterface", m.Name));
 
-            interfaces = typeof(SubClassWithInterface1Interface2Interface3).GetTypeInfo()
+            interfaces = typeof(SubClassWithInterface1Interface2Interface3)
+                .GetTypeInfo()
                 .FindInterfaces(
                     (Type t, object c) => t.Name.Contains(c.ToString()),
                     nameof(TI_NonGenericInterface1)
@@ -967,7 +976,8 @@ namespace System.Reflection.Tests
             );
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    typeof(IntEnum).GetTypeInfo()
+                    typeof(IntEnum)
+                        .GetTypeInfo()
                         .IsEnumDefined(new NonGenericClassWithNoInterfaces())
             );
         }
@@ -1328,9 +1338,8 @@ namespace System.Reflection.Tests
             Assert.True(a2.IsAssignableFrom(a1));
             Assert.True(a1.IsAssignableTo(a2));
 
-            Type ie = typeof(IEnumerable<>).MakeGenericType(
-                typeof(GG<, >).GetGenericArguments()[1]
-            );
+            Type ie = typeof(IEnumerable<>)
+                .MakeGenericType(typeof(GG<, >).GetGenericArguments()[1]);
             Assert.True(ie.IsAssignableFrom(a1));
             Assert.True(a1.IsAssignableTo(ie));
         }
@@ -1406,7 +1415,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void FindMembers()
         {
-            MemberInfo[] members = typeof(MembersClass).GetTypeInfo()
+            MemberInfo[] members = typeof(MembersClass)
+                .GetTypeInfo()
                 .FindMembers(
                     MemberTypes.All,
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
@@ -1415,7 +1425,8 @@ namespace System.Reflection.Tests
                 );
             Assert.Equal(28, members.Length);
 
-            members = typeof(MembersClass).GetTypeInfo()
+            members = typeof(MembersClass)
+                .GetTypeInfo()
                 .FindMembers(
                     MemberTypes.Constructor,
                     BindingFlags.Public | BindingFlags.Instance,
@@ -1425,7 +1436,8 @@ namespace System.Reflection.Tests
             Assert.Equal(2, members.Length);
             Assert.All(members, m => Assert.Equal(".ctor", m.Name));
 
-            members = typeof(MembersClass).GetTypeInfo()
+            members = typeof(MembersClass)
+                .GetTypeInfo()
                 .FindMembers(
                     MemberTypes.Constructor,
                     BindingFlags.NonPublic | BindingFlags.Instance,
@@ -1435,7 +1447,8 @@ namespace System.Reflection.Tests
             Assert.Equal(1, members.Length);
             Assert.Equal(1, ((ConstructorInfo)members[0]).GetParameters().Length);
 
-            members = typeof(MembersClass).GetTypeInfo()
+            members = typeof(MembersClass)
+                .GetTypeInfo()
                 .FindMembers(
                     MemberTypes.Constructor,
                     BindingFlags.NonPublic | BindingFlags.Instance,
@@ -1446,7 +1459,8 @@ namespace System.Reflection.Tests
             Assert.Equal(1, members.Length);
             Assert.Equal(".ctor", members[0].Name);
 
-            members = typeof(MembersClass).GetTypeInfo()
+            members = typeof(MembersClass)
+                .GetTypeInfo()
                 .FindMembers(
                     MemberTypes.Event,
                     BindingFlags.NonPublic | BindingFlags.Instance,
@@ -1455,7 +1469,8 @@ namespace System.Reflection.Tests
                 );
             Assert.Equal(1, members.Length);
 
-            members = typeof(MembersClass).GetTypeInfo()
+            members = typeof(MembersClass)
+                .GetTypeInfo()
                 .FindMembers(
                     MemberTypes.Event,
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
@@ -1465,7 +1480,8 @@ namespace System.Reflection.Tests
             Assert.Equal(2, members.Length);
             Assert.All(members, m => Assert.Contains("Event", m.Name));
 
-            members = typeof(MembersClass).GetTypeInfo()
+            members = typeof(MembersClass)
+                .GetTypeInfo()
                 .FindMembers(
                     MemberTypes.Property,
                     BindingFlags.NonPublic | BindingFlags.Instance,
@@ -1475,7 +1491,8 @@ namespace System.Reflection.Tests
             Assert.Equal(1, members.Length);
             Assert.Equal("PrivateProp", members[0].Name);
 
-            members = typeof(MembersClass).GetTypeInfo()
+            members = typeof(MembersClass)
+                .GetTypeInfo()
                 .FindMembers(
                     MemberTypes.Property,
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
@@ -1485,7 +1502,8 @@ namespace System.Reflection.Tests
             Assert.Equal(2, members.Length);
             Assert.All(members, m => Assert.Contains("Prop", m.Name));
 
-            members = typeof(MembersClass).GetTypeInfo()
+            members = typeof(MembersClass)
+                .GetTypeInfo()
                 .FindMembers(
                     MemberTypes.Method,
                     BindingFlags.NonPublic | BindingFlags.Instance,
@@ -1494,7 +1512,8 @@ namespace System.Reflection.Tests
                 );
             Assert.Equal(7, members.Length);
 
-            members = typeof(MembersClass).GetTypeInfo()
+            members = typeof(MembersClass)
+                .GetTypeInfo()
                 .FindMembers(
                     MemberTypes.Method,
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
@@ -1505,7 +1524,8 @@ namespace System.Reflection.Tests
             Assert.All(members, m => Assert.Contains("Prop", m.Name));
             Assert.All(members, m => Assert.Contains("get_", m.Name));
 
-            members = typeof(MembersClass).GetTypeInfo()
+            members = typeof(MembersClass)
+                .GetTypeInfo()
                 .FindMembers(
                     MemberTypes.NestedType,
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
@@ -1537,23 +1557,28 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetProperty()
         {
-            PropertyInfo prop = typeof(MembersClass).GetTypeInfo()
+            PropertyInfo prop = typeof(MembersClass)
+                .GetTypeInfo()
                 .GetProperty(nameof(MembersClass.PublicProp));
             Assert.NotNull(prop);
 
-            prop = typeof(MembersClass).GetTypeInfo()
+            prop = typeof(MembersClass)
+                .GetTypeInfo()
                 .GetProperty(nameof(MembersClass.PublicProp), typeof(int));
             Assert.NotNull(prop);
 
-            prop = typeof(MembersClass).GetTypeInfo()
+            prop = typeof(MembersClass)
+                .GetTypeInfo()
                 .GetProperty(nameof(MembersClass.PublicProp), Type.EmptyTypes);
             Assert.NotNull(prop);
 
-            prop = typeof(MembersClass).GetTypeInfo()
+            prop = typeof(MembersClass)
+                .GetTypeInfo()
                 .GetProperty(nameof(MembersClass.PublicProp), typeof(int), Type.EmptyTypes);
             Assert.NotNull(prop);
 
-            prop = typeof(MembersClass).GetTypeInfo()
+            prop = typeof(MembersClass)
+                .GetTypeInfo()
                 .GetProperty(nameof(MembersClass.PublicProp), typeof(int), Type.EmptyTypes, null);
             Assert.NotNull(prop);
         }
@@ -1564,7 +1589,8 @@ namespace System.Reflection.Tests
             MethodInfo[] methods = typeof(MembersClass).GetTypeInfo().GetMethods();
             Assert.Equal(9, methods.Length);
 
-            methods = typeof(MembersClass).GetTypeInfo()
+            methods = typeof(MembersClass)
+                .GetTypeInfo()
                 .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.Equal(16, methods.Length);
         }
@@ -1580,7 +1606,8 @@ namespace System.Reflection.Tests
             );
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    typeof(MembersClass).GetTypeInfo()
+                    typeof(MembersClass)
+                        .GetTypeInfo()
                         .GetMethod("p", new Type[] { typeof(int), null })
             );
         }
@@ -1882,7 +1909,8 @@ namespace System.Reflection.Tests
         [InlineData("NoSuchMethod", 0)]
         public void GetDeclaredMethods(string name, int count)
         {
-            IEnumerable<MethodInfo> methods = typeof(TI_BaseClass).GetTypeInfo()
+            IEnumerable<MethodInfo> methods = typeof(TI_BaseClass)
+                .GetTypeInfo()
                 .GetDeclaredMethods(name);
             Assert.Equal(count, methods.Count());
             Assert.All(methods, method => method.Name.Equals(name));
@@ -2434,10 +2462,10 @@ namespace System.Reflection.Tests
                 yield return new object[]
                 {
                     Array.CreateInstance(
-                            typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>),
-                            new[] { 2 },
-                            new[] { -1 }
-                        )
+                        typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>),
+                        new[] { 2 },
+                        new[] { -1 }
+                    )
                         .GetType(),
                     false
                 };

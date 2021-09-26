@@ -18,9 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         private readonly INamedTypeSymbol _iDictionarySymbol;
 
         private static readonly SymbolDisplayFormat FullNameTypeDisplayFormat =
-            SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
-                    SymbolDisplayGlobalNamespaceStyle.Omitted
-                )
+            SymbolDisplayFormat.FullyQualifiedFormat
+                .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
                 .WithMiscellaneousOptions(
                     SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions
                         & (~SymbolDisplayMiscellaneousOptions.UseSpecialTypes)
@@ -125,11 +124,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             var selectedMethod = methods[0];
             var returnType = selectedMethod.ReturnType as INamedTypeSymbol;
             if (
-                string.Equals(
-                    selectedMethod.Name,
-                    ViewComponentTypes.AsyncMethodName,
-                    StringComparison.Ordinal
-                )
+                string
+                    .Equals(
+                        selectedMethod.Name,
+                        ViewComponentTypes.AsyncMethodName,
+                        StringComparison.Ordinal
+                    )
             )
             {
                 // Will invoke asynchronously. Method must not return Task or Task<T>.
@@ -139,10 +139,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
                 }
                 else if (
                     returnType.IsGenericType
-                    && SymbolEqualityComparer.Default.Equals(
-                        returnType.ConstructedFrom,
-                        _genericTaskSymbol
-                    )
+                    && SymbolEqualityComparer.Default
+                        .Equals(returnType.ConstructedFrom, _genericTaskSymbol)
                 )
                 {
                     // This is ok.
@@ -180,10 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
                 }
                 else if (
                     returnType.IsGenericType
-                    && SymbolEqualityComparer.Default.Equals(
-                        returnType.ConstructedFrom,
-                        _genericTaskSymbol
-                    )
+                    && SymbolEqualityComparer.Default
+                        .Equals(returnType.ConstructedFrom, _genericTaskSymbol)
                 )
                 {
                     diagnostic =
@@ -212,16 +208,18 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
                             m.DeclaredAccessibility == Accessibility.Public
                             && !m.IsStatic
                             && (
-                                string.Equals(
-                                    m.Name,
-                                    ViewComponentTypes.AsyncMethodName,
-                                    StringComparison.Ordinal
-                                )
-                                || string.Equals(
-                                    m.Name,
-                                    ViewComponentTypes.SyncMethodName,
-                                    StringComparison.Ordinal
-                                )
+                                string
+                                    .Equals(
+                                        m.Name,
+                                        ViewComponentTypes.AsyncMethodName,
+                                        StringComparison.Ordinal
+                                    )
+                                || string
+                                    .Equals(
+                                        m.Name,
+                                        ViewComponentTypes.SyncMethodName,
+                                        StringComparison.Ordinal
+                                    )
                             )
                     );
 
@@ -304,25 +302,30 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         {
             INamedTypeSymbol dictionaryType;
             if (
-                SymbolEqualityComparer.Default.Equals(
-                    (parameter.Type as INamedTypeSymbol)?.ConstructedFrom,
-                    _iDictionarySymbol
-                )
+                SymbolEqualityComparer.Default
+                    .Equals(
+                        (parameter.Type as INamedTypeSymbol)?.ConstructedFrom,
+                        _iDictionarySymbol
+                    )
             )
             {
                 dictionaryType = (INamedTypeSymbol)parameter.Type;
             }
             else if (
-                parameter.Type.AllInterfaces.Any(
-                    s =>
-                        SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
-                )
+                parameter.Type.AllInterfaces
+                    .Any(
+                        s =>
+                            SymbolEqualityComparer.Default
+                                .Equals(s.ConstructedFrom, _iDictionarySymbol)
+                    )
             )
             {
-                dictionaryType = parameter.Type.AllInterfaces.First(
-                    s =>
-                        SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
-                );
+                dictionaryType = parameter.Type.AllInterfaces
+                    .First(
+                        s =>
+                            SymbolEqualityComparer.Default
+                                .Equals(s.ConstructedFrom, _iDictionarySymbol)
+                    );
             }
             else
             {
@@ -348,20 +351,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             var viewComponentAttribute = componentType.GetAttributes()
                 .Where(
                     a =>
-                        SymbolEqualityComparer.Default.Equals(
-                            a.AttributeClass,
-                            _viewComponentAttributeSymbol
-                        )
+                        SymbolEqualityComparer.Default
+                            .Equals(a.AttributeClass, _viewComponentAttributeSymbol)
                 )
                 .FirstOrDefault();
             var name =
-                viewComponentAttribute?.NamedArguments.Where(
+                viewComponentAttribute?.NamedArguments
+                    .Where(
                         namedArgument =>
-                            string.Equals(
-                                namedArgument.Key,
-                                ViewComponentTypes.ViewComponent.Name,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    namedArgument.Key,
+                                    ViewComponentTypes.ViewComponent.Name,
+                                    StringComparison.Ordinal
+                                )
                     )
                     .FirstOrDefault().Value.Value as string;
 
@@ -380,16 +383,18 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
             // Get name by convention
             if (
-                componentType.Name.EndsWith(
-                    ViewComponentTypes.ViewComponentSuffix,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                componentType.Name
+                    .EndsWith(
+                        ViewComponentTypes.ViewComponentSuffix,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
-                return componentType.Name.Substring(
-                    0,
-                    componentType.Name.Length - ViewComponentTypes.ViewComponentSuffix.Length
-                );
+                return componentType.Name
+                    .Substring(
+                        0,
+                        componentType.Name.Length - ViewComponentTypes.ViewComponentSuffix.Length
+                    );
             }
             else
             {

@@ -31,31 +31,34 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             public override void VisitTagHelperProperty(TagHelperPropertyIntermediateNode node)
             {
                 if (
-                    string.Equals(
-                        node.BoundAttribute.TypeName,
-                        ModelExpressionTypeName,
-                        StringComparison.Ordinal
-                    )
-                    || (
-                        node.IsIndexerNameMatch
-                        && string.Equals(
-                            node.BoundAttribute.IndexerTypeName,
+                    string
+                        .Equals(
+                            node.BoundAttribute.TypeName,
                             ModelExpressionTypeName,
                             StringComparison.Ordinal
                         )
+                    || (
+                        node.IsIndexerNameMatch
+                        && string
+                            .Equals(
+                                node.BoundAttribute.IndexerTypeName,
+                                ModelExpressionTypeName,
+                                StringComparison.Ordinal
+                            )
                     )
                 )
                 {
                     var expression = new CSharpExpressionIntermediateNode();
 
-                    expression.Children.Add(
-                        new IntermediateToken()
-                        {
-                            Kind = TokenKind.CSharp,
-                            Content =
-                                "ModelExpressionProvider.CreateModelExpression(ViewData, __model => ",
-                        }
-                    );
+                    expression.Children
+                        .Add(
+                            new IntermediateToken()
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content =
+                                    "ModelExpressionProvider.CreateModelExpression(ViewData, __model => ",
+                            }
+                        );
 
                     if (
                         node.Children.Count == 1
@@ -65,13 +68,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                     {
                         // A 'simple' expression will look like __model => __model.Foo
 
-                        expression.Children.Add(
-                            new IntermediateToken()
-                            {
-                                Kind = TokenKind.CSharp,
-                                Content = "__model."
-                            }
-                        );
+                        expression.Children
+                            .Add(
+                                new IntermediateToken()
+                                {
+                                    Kind = TokenKind.CSharp,
+                                    Content = "__model."
+                                }
+                            );
 
                         expression.Children.Add(token);
                     }
@@ -100,9 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
                         }
                     }
 
-                    expression.Children.Add(
-                        new IntermediateToken() { Kind = TokenKind.CSharp, Content = ")", }
-                    );
+                    expression.Children
+                        .Add(new IntermediateToken() { Kind = TokenKind.CSharp, Content = ")", });
 
                     node.Children.Clear();
 

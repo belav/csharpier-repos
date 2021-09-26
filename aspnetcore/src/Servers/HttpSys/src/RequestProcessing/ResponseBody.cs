@@ -136,12 +136,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             {
                 if (!started)
                 {
-                    statusCode = _requestContext.Response.SendHeaders(
-                        dataChunks,
-                        null,
-                        flags,
-                        false
-                    );
+                    statusCode = _requestContext.Response
+                        .SendHeaders(dataChunks, null, flags, false);
                 }
                 else
                 {
@@ -368,12 +364,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             {
                 if (!started)
                 {
-                    statusCode = _requestContext.Response.SendHeaders(
-                        null,
-                        asyncResult,
-                        flags,
-                        false
-                    );
+                    statusCode = _requestContext.Response
+                        .SendHeaders(null, asyncResult, flags, false);
                     bytesSent = asyncResult.BytesSent;
                 }
                 else
@@ -729,12 +721,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             {
                 if (!started)
                 {
-                    statusCode = _requestContext.Response.SendHeaders(
-                        null,
-                        asyncResult,
-                        flags,
-                        false
-                    );
+                    statusCode = _requestContext.Response
+                        .SendHeaders(null, asyncResult, flags, false);
                     bytesSent = asyncResult.BytesSent;
                 }
                 else

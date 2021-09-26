@@ -99,34 +99,34 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Contract.ThrowIfFalse(!compilationWithAnalyzers.Analyzers.IsEmpty);
 
                 var remoteHostClient = await RemoteHostClient.TryGetClientAsync(
-                        project,
-                        cancellationToken
-                    )
+                    project,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (remoteHostClient != null)
                 {
                     return await AnalyzeOutOfProcAsync(
-                            documentAnalysisScope,
-                            project,
-                            compilationWithAnalyzers,
-                            remoteHostClient,
-                            forceExecuteAllAnalyzers,
-                            logPerformanceInfo,
-                            getTelemetryInfo,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
-                }
-
-                return await AnalyzeInProcAsync(
                         documentAnalysisScope,
                         project,
                         compilationWithAnalyzers,
-                        client: null,
+                        remoteHostClient,
+                        forceExecuteAllAnalyzers,
                         logPerformanceInfo,
                         getTelemetryInfo,
                         cancellationToken
                     )
+                        .ConfigureAwait(false);
+                }
+
+                return await AnalyzeInProcAsync(
+                    documentAnalysisScope,
+                    project,
+                    compilationWithAnalyzers,
+                    client: null,
+                    logPerformanceInfo,
+                    getTelemetryInfo,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -144,18 +144,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         )
         {
             var version = await DiagnosticIncrementalAnalyzer.GetDiagnosticVersionAsync(
-                    project,
-                    cancellationToken
-                )
+                project,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var (analysisResult, additionalPragmaSuppressionDiagnostics) =
                 await compilationWithAnalyzers.GetAnalysisResultAsync(
-                        documentAnalysisScope,
-                        project,
-                        AnalyzerInfoCache,
-                        cancellationToken
-                    )
+                    documentAnalysisScope,
+                    project,
+                    AnalyzerInfoCache,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             if (logPerformanceInfo)
@@ -165,12 +165,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     nameof(AnalyzeInProcAsync)
                 );
                 var _ = FireAndForgetReportAnalyzerPerformanceAsync(
-                        documentAnalysisScope,
-                        project,
-                        client,
-                        analysisResult,
-                        cancellationToken
-                    )
+                    documentAnalysisScope,
+                    project,
+                    client,
+                    analysisResult,
+                    cancellationToken
+                )
                     .CompletesAsyncOperation(asyncToken);
             }
 
@@ -179,16 +179,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             // get compiler result builder map
             var builderMap = await analysisResult.ToResultBuilderMapAsync(
-                    additionalPragmaSuppressionDiagnostics,
-                    documentAnalysisScope,
-                    project,
-                    version,
-                    compilationWithAnalyzers.Compilation,
-                    analyzers,
-                    skippedAnalyzersInfo,
-                    compilationWithAnalyzers.AnalysisOptions.ReportSuppressedDiagnostics,
-                    cancellationToken
-                )
+                additionalPragmaSuppressionDiagnostics,
+                documentAnalysisScope,
+                project,
+                version,
+                compilationWithAnalyzers.Compilation,
+                analyzers,
+                skippedAnalyzersInfo,
+                compilationWithAnalyzers.AnalysisOptions.ReportSuppressedDiagnostics,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var result = builderMap.ToImmutableDictionary(
@@ -219,21 +219,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // +1 for project itself
                 var count = documentAnalysisScope != null ? 1 : project.DocumentIds.Count + 1;
 
-                var performanceInfo =
-                    analysisResult.AnalyzerTelemetryInfo.ToAnalyzerPerformanceInfo(
-                            AnalyzerInfoCache
-                        )
-                        .ToImmutableArray();
+                var performanceInfo = analysisResult.AnalyzerTelemetryInfo
+                    .ToAnalyzerPerformanceInfo(AnalyzerInfoCache)
+                    .ToImmutableArray();
 
                 _ = await client.TryInvokeAsync<IRemoteDiagnosticAnalyzerService>(
-                        (service, cancellationToken) =>
-                            service.ReportAnalyzerPerformanceAsync(
-                                performanceInfo,
-                                count,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    (service, cancellationToken) =>
+                        service.ReportAnalyzerPerformanceAsync(
+                            performanceInfo,
+                            count,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -264,9 +262,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             var analyzers =
                 documentAnalysisScope?.Analyzers
-                ?? compilationWithAnalyzers.Analyzers.Where(
-                    a => forceExecuteAllAnalyzers || !a.IsOpenFileOnly(solution.Options)
-                );
+                ?? compilationWithAnalyzers.Analyzers
+                    .Where(a => forceExecuteAllAnalyzers || !a.IsOpenFileOnly(solution.Options));
             analyzerMap.AppendAnalyzerMap(analyzers);
 
             if (analyzerMap.Count == 0)
@@ -292,15 +289,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 IRemoteDiagnosticAnalyzerService,
                 SerializableDiagnosticAnalysisResults
             >(
-                    solution,
-                    invocation: (service, solutionInfo, cancellationToken) =>
-                        service.CalculateDiagnosticsAsync(
-                            solutionInfo,
-                            argument,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                solution,
+                invocation: (service, solutionInfo, cancellationToken) =>
+                    service.CalculateDiagnosticsAsync(solutionInfo, argument, cancellationToken),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (!result.HasValue)
@@ -313,9 +306,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             // handling of cancellation and exception
             var version = await DiagnosticIncrementalAnalyzer.GetDiagnosticVersionAsync(
-                    project,
-                    cancellationToken
-                )
+                project,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var documentIds =
@@ -324,23 +317,25 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     : null;
 
             return new DiagnosticAnalysisResultMap<DiagnosticAnalyzer, DiagnosticAnalysisResult>(
-                result.Value.Diagnostics.ToImmutableDictionary(
-                    entry => analyzerMap[entry.analyzerId],
-                    entry =>
-                        DiagnosticAnalysisResult.Create(
-                            project,
-                            version,
-                            syntaxLocalMap: Hydrate(entry.diagnosticMap.Syntax, project),
-                            semanticLocalMap: Hydrate(entry.diagnosticMap.Semantic, project),
-                            nonLocalMap: Hydrate(entry.diagnosticMap.NonLocal, project),
-                            others: entry.diagnosticMap.Other,
-                            documentIds
-                        )
-                ),
-                result.Value.Telemetry.ToImmutableDictionary(
-                    entry => analyzerMap[entry.analyzerId],
-                    entry => entry.telemetry
-                )
+                result.Value.Diagnostics
+                    .ToImmutableDictionary(
+                        entry => analyzerMap[entry.analyzerId],
+                        entry =>
+                            DiagnosticAnalysisResult.Create(
+                                project,
+                                version,
+                                syntaxLocalMap: Hydrate(entry.diagnosticMap.Syntax, project),
+                                semanticLocalMap: Hydrate(entry.diagnosticMap.Semantic, project),
+                                nonLocalMap: Hydrate(entry.diagnosticMap.NonLocal, project),
+                                others: entry.diagnosticMap.Other,
+                                documentIds
+                            )
+                    ),
+                result.Value.Telemetry
+                    .ToImmutableDictionary(
+                        entry => analyzerMap[entry.analyzerId],
+                        entry => entry.telemetry
+                    )
             );
         }
 
@@ -350,9 +345,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Project project
         ) =>
             diagnosticByDocument.Where(
-                    entry =>
-                        project.GetTextDocument(entry.documentId)?.SupportsDiagnostics() == true
-                )
+                entry => project.GetTextDocument(entry.documentId)?.SupportsDiagnostics() == true
+            )
                 .ToImmutableDictionary(entry => entry.documentId, entry => entry.diagnostics);
     }
 }

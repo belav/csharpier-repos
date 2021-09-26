@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         protected override void OnIntialized()
         {
-            Passes = Engine.Features.OfType<IRazorDirectiveClassifierPass>()
+            Passes = Engine.Features
+                .OfType<IRazorDirectiveClassifierPass>()
                 .OrderBy(p => p.Order)
                 .ToArray();
         }

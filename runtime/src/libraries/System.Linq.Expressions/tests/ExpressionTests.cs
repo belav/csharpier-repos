@@ -137,7 +137,8 @@ namespace System.Linq.Expressions.Tests
                 typeof(string),
                 typeof(ExpressionTests),
                 typeof(ExpressionType)
-            }.Select(type => new object[] { type });
+            }
+                .Select(type => new object[] { type });
 
         [Fact]
         public void NodeTypeMustBeOverridden()

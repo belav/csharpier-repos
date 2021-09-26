@@ -49,11 +49,12 @@ End Class"
             Assert.Equal("FirstMethod", VisualStudio.Editor.GetSelectedText());
 
             // Verify C# files are found when navigating from VB
-            VisualStudio.SolutionExplorer.AddProject(
-                csProject,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    csProject,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.CSharp
+                );
             VisualStudio.SolutionExplorer.AddFile(csProject, "csfile.cs", open: true);
 
             VisualStudio.Editor.InvokeNavigateTo("FirstClass", VirtualKey.Enter);

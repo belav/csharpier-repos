@@ -158,10 +158,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 var result = r.VisitLambdaInternal(node);
                 if (
-                    !node.Type.Equals(
-                        result.Type,
-                        TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                    )
+                    !node.Type
+                        .Equals(
+                            result.Type,
+                            TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
                 )
                 {
                     diagnostics.Add(
@@ -712,11 +713,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _bound.Compilation.Assembly
             );
             var kind =
-                _bound.Compilation.Conversions.ClassifyConversionFromType(
-                    oldType,
-                    newType,
-                    ref useSiteInfo
-                ).Kind;
+                _bound.Compilation.Conversions
+                    .ClassifyConversionFromType(oldType, newType, ref useSiteInfo).Kind;
             Debug.Assert(useSiteInfo.Diagnostics.IsNullOrEmpty());
             Diagnostics.AddDependencies(useSiteInfo);
 

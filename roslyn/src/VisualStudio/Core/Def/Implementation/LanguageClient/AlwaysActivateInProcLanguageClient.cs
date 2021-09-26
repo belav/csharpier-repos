@@ -66,11 +66,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             var serverCapabilities = new VSServerCapabilities();
 
             // If the LSP editor feature flag is enabled advertise support for LSP features here so they are available locally and remote.
-            var isLspEditorEnabled =
-                Workspace.Services.GetRequiredService<IExperimentationService>()
-                    .IsExperimentEnabled(
-                        VisualStudioWorkspaceContextService.LspEditorFeatureFlagName
-                    );
+            var isLspEditorEnabled = Workspace.Services
+                .GetRequiredService<IExperimentationService>()
+                .IsExperimentEnabled(VisualStudioWorkspaceContextService.LspEditorFeatureFlagName);
             if (isLspEditorEnabled)
             {
                 serverCapabilities = _defaultCapabilitiesProvider.GetCapabilities();

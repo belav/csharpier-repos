@@ -232,27 +232,26 @@ namespace Microsoft.Extensions.Logging.Test
         {
             var provider = new TestLoggerProvider(new TestSink(), isEnabled: true);
             var factory = TestLoggerBuilder.Create(
-                builder =>
-                    builder.AddProvider(provider)
-                        .AddFilter(
-                            (name, cat, level) =>
-                            {
-                                if (
-                                    string.Equals(
+                builder => builder.AddProvider(provider).AddFilter(
+                        (name, cat, level) =>
+                        {
+                            if (
+                                string
+                                    .Equals(
                                         "Microsoft.Extensions.Logging.Test.TestLoggerProvider",
                                         name
                                     )
-                                )
+                            )
+                            {
+                                if (string.Equals("Test", cat))
                                 {
-                                    if (string.Equals("Test", cat))
-                                    {
-                                        return level >= LogLevel.Information;
-                                    }
+                                    return level >= LogLevel.Information;
                                 }
-
-                                return true;
                             }
-                        )
+
+                            return true;
+                        }
+                    )
             );
 
             var logger = factory.CreateLogger("Test");
@@ -272,19 +271,17 @@ namespace Microsoft.Extensions.Logging.Test
         {
             var provider = new TestLoggerProvider(new TestSink(), isEnabled: true);
             var factory = TestLoggerBuilder.Create(
-                builder =>
-                    builder.AddProvider(provider)
-                        .AddFilter(
-                            (name, cat, level) =>
+                builder => builder.AddProvider(provider).AddFilter(
+                        (name, cat, level) =>
+                        {
+                            if (string.Equals("None", name))
                             {
-                                if (string.Equals("None", name))
-                                {
-                                    return level >= LogLevel.Error;
-                                }
-
-                                return true;
+                                return level >= LogLevel.Error;
                             }
-                        )
+
+                            return true;
+                        }
+                    )
             );
 
             var logger = factory.CreateLogger("Test");
@@ -434,10 +431,12 @@ namespace Microsoft.Extensions.Logging.Test
         [Fact]
         public void LogLevelKeyIsCaseInsensitive()
         {
-            var serviceProvider = new ServiceCollection().AddLogging(
+            var serviceProvider = new ServiceCollection()
+                .AddLogging(
                     builder =>
                         builder.AddConfiguration(
-                            new ConfigurationBuilder().AddInMemoryCollection(
+                            new ConfigurationBuilder()
+                                .AddInMemoryCollection(
                                     new[]
                                     {
                                         new KeyValuePair<string, string>(
@@ -459,10 +458,12 @@ namespace Microsoft.Extensions.Logging.Test
         [Fact]
         public void DefaultCategoryIsCaseInsensitive()
         {
-            var serviceProvider = new ServiceCollection().AddLogging(
+            var serviceProvider = new ServiceCollection()
+                .AddLogging(
                     builder =>
                         builder.AddConfiguration(
-                            new ConfigurationBuilder().AddInMemoryCollection(
+                            new ConfigurationBuilder()
+                                .AddInMemoryCollection(
                                     new[]
                                     {
                                         new KeyValuePair<string, string>(

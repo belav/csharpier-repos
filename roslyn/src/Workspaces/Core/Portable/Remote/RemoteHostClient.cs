@@ -214,10 +214,10 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             using var connection = await CreateConnectionAsync(
-                    serviceName,
-                    callbackTarget,
-                    cancellationToken
-                )
+                serviceName,
+                callbackTarget,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             await connection.RunRemoteAsync(targetName, solution, arguments, cancellationToken)
                 .ConfigureAwait(false);
@@ -252,18 +252,18 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             using var connection = await CreateConnectionAsync(
-                    serviceName,
-                    callbackTarget,
-                    cancellationToken
-                )
+                serviceName,
+                callbackTarget,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return await connection.RunRemoteAsync(
-                    targetName,
-                    solution,
-                    arguments,
-                    dataReader,
-                    cancellationToken
-                )
+                targetName,
+                solution,
+                arguments,
+                dataReader,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

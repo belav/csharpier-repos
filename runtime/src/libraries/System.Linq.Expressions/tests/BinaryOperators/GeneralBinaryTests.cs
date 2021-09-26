@@ -139,7 +139,9 @@ namespace System.Linq.Expressions.Tests
 
         private static ExpressionType[] NonBinaryTypes = (
             (ExpressionType[])Enum.GetValues(typeof(ExpressionType))
-        ).Except(BinaryTypes).ToArray();
+        )
+            .Except(BinaryTypes)
+            .ToArray();
 
         public static IEnumerable<ExpressionType> NonBinaryTypesIncludingInvalid =
             NonBinaryTypes.Concat(Enumerable.Repeat((ExpressionType)(-1), 1));
@@ -434,7 +436,8 @@ namespace System.Linq.Expressions.Tests
             Expression exp = Expression.MakeBinary(type, left, right, false, method);
             Func<GenericClassWithNonGenericMethod<bool>> f = Expression.Lambda<
                 Func<GenericClassWithNonGenericMethod<bool>>
-            >(exp).Compile(useInterpreter);
+            >(exp)
+                .Compile(useInterpreter);
             Assert.Same(value, f());
         }
     }

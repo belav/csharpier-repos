@@ -591,11 +591,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            return binder.Conversions.ClassifyConversionFromExpression(
-                boundExpression,
-                csdestination,
-                ref discardedUseSiteInfo
-            );
+            return binder.Conversions
+                .ClassifyConversionFromExpression(
+                    boundExpression,
+                    csdestination,
+                    ref discardedUseSiteInfo
+                );
         }
 
         internal override Conversion ClassifyConversionForCast(
@@ -622,12 +623,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            return binder.Conversions.ClassifyConversionFromExpression(
-                boundExpression,
-                destination,
-                ref discardedUseSiteInfo,
-                forCast: true
-            );
+            return binder.Conversions
+                .ClassifyConversionFromExpression(
+                    boundExpression,
+                    destination,
+                    ref discardedUseSiteInfo,
+                    forCast: true
+                );
         }
 
         /// <summary>
@@ -1073,9 +1075,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (paramList.Parent.Kind() == SyntaxKind.LocalFunctionStatement)
             {
                 var localFunction = GetDeclaredSymbol(
-                        (LocalFunctionStatementSyntax)paramList.Parent,
-                        cancellationToken
-                    )
+                    (LocalFunctionStatementSyntax)paramList.Parent,
+                    cancellationToken
+                )
                     .GetSymbol<MethodSymbol>();
                 if ((object)localFunction != null)
                 {
@@ -1176,7 +1178,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return new AwaitExpressionInfo(
-                getAwaiter: (IMethodSymbol)awaitableInfo.GetAwaiter?.ExpressionSymbol.GetPublicSymbol(),
+                getAwaiter: (IMethodSymbol)awaitableInfo.GetAwaiter?.ExpressionSymbol
+                    .GetPublicSymbol(),
                 isCompleted: awaitableInfo.IsCompleted.GetPublicSymbol(),
                 getResult: awaitableInfo.GetResult.GetPublicSymbol(),
                 isDynamic: awaitableInfo.IsDynamic
@@ -1246,7 +1249,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 enumeratorInfoOpt.MoveNextInfo.Method.GetPublicSymbol(),
                 currentProperty: (
                     (PropertySymbol)enumeratorInfoOpt.CurrentPropertyGetter?.AssociatedSymbol
-                ).GetPublicSymbol(),
+                )
+                    .GetPublicSymbol(),
                 disposeMethod.GetPublicSymbol(),
                 enumeratorInfoOpt.ElementType.GetPublicSymbol(),
                 boundForEach.ElementConversion,
@@ -1590,13 +1594,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 IsInTree(node),
                 "Since the node is in the tree, we can always recompute the binder later"
             );
-            return base.GetSymbolInfoForNode(
-                options,
-                lowestBoundNode,
-                highestBoundNode,
-                boundParent,
-                binderOpt: null
-            );
+            return base
+                .GetSymbolInfoForNode(
+                    options,
+                    lowestBoundNode,
+                    highestBoundNode,
+                    boundParent,
+                    binderOpt: null
+                );
         }
 
         internal override CSharpTypeInfo GetTypeInfoWorker(
@@ -1641,12 +1646,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 IsInTree(node),
                 "Since the node is in the tree, we can always recompute the binder later"
             );
-            return base.GetMemberGroupForNode(
-                options,
-                lowestBoundNode,
-                boundParent,
-                binderOpt: null
-            );
+            return base
+                .GetMemberGroupForNode(options, lowestBoundNode, boundParent, binderOpt: null);
         }
 
         internal override ImmutableArray<IPropertySymbol> GetIndexerGroupWorker(
@@ -2317,9 +2318,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (boundInnerLambdaOrQuery.Kind)
             {
                 case BoundKind.UnboundLambda:
-                    boundInnerLambdaOrQuery = (
-                        (UnboundLambda)boundInnerLambdaOrQuery
-                    ).BindForErrorRecovery();
+                    boundInnerLambdaOrQuery = ((UnboundLambda)boundInnerLambdaOrQuery)
+                        .BindForErrorRecovery();
                     goto case BoundKind.Lambda;
                 case BoundKind.Lambda:
                     AssertPositionAdjusted(position);

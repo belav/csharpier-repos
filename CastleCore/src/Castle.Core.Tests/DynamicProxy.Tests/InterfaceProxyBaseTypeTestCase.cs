@@ -36,12 +36,13 @@ namespace Castle.DynamicProxy.Tests
                     )
             );
             Assert.AreEqual(
-                string.Format(
-                    "Type {0} is not valid base type for interface proxy, because it is sealed. "
-                        + "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. "
-                        + "Please use some other valid type.",
-                    typeof(Sealed)
-                ),
+                string
+                    .Format(
+                        "Type {0} is not valid base type for interface proxy, because it is sealed. "
+                            + "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. "
+                            + "Please use some other valid type.",
+                        typeof(Sealed)
+                    ),
                 exception.Message
             );
         }
@@ -59,12 +60,13 @@ namespace Castle.DynamicProxy.Tests
                     )
             );
             Assert.AreEqual(
-                string.Format(
-                    "Type {0} is not valid base type for interface proxy, because it is not a class type. "
-                        + "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. "
-                        + "Please use some other valid type.",
-                    typeof(ISomething)
-                ),
+                string
+                    .Format(
+                        "Type {0} is not valid base type for interface proxy, because it is not a class type. "
+                            + "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. "
+                            + "Please use some other valid type.",
+                        typeof(ISomething)
+                    ),
                 exception.Message
             );
         }
@@ -82,12 +84,13 @@ namespace Castle.DynamicProxy.Tests
                     )
             );
             Assert.AreEqual(
-                string.Format(
-                    "Type {0} is not valid base type for interface proxy, because it does not have accessible parameterless constructor. "
-                        + "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. "
-                        + "Please use some other valid type.",
-                    typeof(NoDefaultCtor)
-                ),
+                string
+                    .Format(
+                        "Type {0} is not valid base type for interface proxy, because it does not have accessible parameterless constructor. "
+                            + "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. "
+                            + "Please use some other valid type.",
+                        typeof(NoDefaultCtor)
+                    ),
                 exception.Message
             );
         }
@@ -105,12 +108,13 @@ namespace Castle.DynamicProxy.Tests
                     )
             );
             Assert.AreEqual(
-                string.Format(
-                    "Type {0} is not valid base type for interface proxy, because it does not have accessible parameterless constructor. "
-                        + "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. "
-                        + "Please use some other valid type.",
-                    typeof(DefaultPrivateCtor)
-                ),
+                string
+                    .Format(
+                        "Type {0} is not valid base type for interface proxy, because it does not have accessible parameterless constructor. "
+                            + "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. "
+                            + "Please use some other valid type.",
+                        typeof(DefaultPrivateCtor)
+                    ),
                 exception.Message
             );
         }

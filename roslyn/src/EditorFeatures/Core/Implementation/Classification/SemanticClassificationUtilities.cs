@@ -52,11 +52,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             spanToTag = new DocumentSnapshotSpan(document, spanToTag.SnapshotSpan);
 
             var classified = await TryClassifyContainingMemberSpanAsync(
-                    context,
-                    spanToTag,
-                    classificationService,
-                    typeMap
-                )
+                context,
+                spanToTag,
+                classificationService,
+                typeMap
+            )
                 .ConfigureAwait(false);
             if (classified)
             {
@@ -95,9 +95,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             var lastSemanticVersion = (VersionStamp?)context.State;
             if (lastSemanticVersion != null)
             {
-                var currentSemanticVersion =
-                    await document.Project.GetDependentSemanticVersionAsync(cancellationToken)
-                        .ConfigureAwait(false);
+                var currentSemanticVersion = await document.Project
+                    .GetDependentSemanticVersionAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 if (lastSemanticVersion.Value != currentSemanticVersion)
                 {
                     // A top level change was made.  We can't perform this optimization.
@@ -167,12 +167,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     var classifiedSpans = ClassificationUtilities.GetOrCreateClassifiedSpanList();
 
                     await AddSemanticClassificationsAsync(
-                            document,
-                            snapshotSpan.Span.ToTextSpan(),
-                            classificationService,
-                            classifiedSpans,
-                            cancellationToken: cancellationToken
-                        )
+                        document,
+                        snapshotSpan.Span.ToTextSpan(),
+                        classificationService,
+                        classifiedSpans,
+                        cancellationToken: cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     ClassificationUtilities.Convert(
@@ -183,9 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     );
                     ClassificationUtilities.ReturnClassifiedSpanList(classifiedSpans);
 
-                    var version = await document.Project.GetDependentSemanticVersionAsync(
-                            cancellationToken
-                        )
+                    var version = await document.Project
+                        .GetDependentSemanticVersionAsync(cancellationToken)
                         .ConfigureAwait(false);
 
                     // Let the context know that this was the span we actually tried to tag.
@@ -207,8 +206,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             CancellationToken cancellationToken
         )
         {
-            var workspaceStatusService =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+            var workspaceStatusService = document.Project.Solution.Workspace.Services
+                .GetRequiredService<IWorkspaceStatusService>();
 
             // Importantly, we do not await/wait on the fullyLoadedStateTask.  We do not want to ever be waiting on work
             // that may end up touching the UI thread (As we can deadlock if GetTagsSynchronous waits on us).  Instead,
@@ -223,22 +222,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             // New code will not be semantically classified, but will eventually when the project fully loads.
             if (
                 await TryAddSemanticClassificationsFromCacheAsync(
-                        document,
-                        textSpan,
-                        classifiedSpans,
-                        isFullyLoaded,
-                        cancellationToken
-                    )
+                    document,
+                    textSpan,
+                    classifiedSpans,
+                    isFullyLoaded,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             )
                 return;
 
             await classificationService.AddSemanticClassificationsAsync(
-                    document,
-                    textSpan,
-                    classifiedSpans,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                classifiedSpans,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -254,21 +253,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             if (isFullyLoaded)
                 return false;
 
-            var semanticCacheService =
-                document.Project.Solution.Workspace.Services.GetService<ISemanticClassificationCacheService>();
+            var semanticCacheService = document.Project.Solution.Workspace.Services
+                .GetService<ISemanticClassificationCacheService>();
             if (semanticCacheService == null)
                 return false;
 
-            var checksums = await document.State.GetStateChecksumsAsync(cancellationToken)
+            var checksums = await document.State
+                .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
             var checksum = checksums.Text;
 
             var result = await semanticCacheService.GetCachedSemanticClassificationsAsync(
-                    SemanticClassificationCacheUtilities.GetDocumentKeyForCaching(document),
-                    textSpan,
-                    checksum,
-                    cancellationToken
-                )
+                SemanticClassificationCacheUtilities.GetDocumentKeyForCaching(document),
+                textSpan,
+                checksum,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (result.IsDefault)
                 return false;

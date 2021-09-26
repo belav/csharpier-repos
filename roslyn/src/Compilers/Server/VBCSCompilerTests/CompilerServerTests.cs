@@ -1603,14 +1603,11 @@ End Module
                 redirectEncoding: Encoding.ASCII
             );
 
-            Assert.Equal(
-                @"SRC.VB(1) : error BC30037: Character is not valid.
+            Assert.Equal(@"SRC.VB(1) : error BC30037: Character is not valid.
 
 ?
 ~
-".Trim(),
-                result.Output.Trim().Replace(srcFile, "SRC.VB")
-            );
+".Trim(), result.Output.Trim().Replace(srcFile, "SRC.VB"));
             Assert.Equal(1, result.ExitCode);
 
             var listener = await serverData.Complete();
@@ -1658,14 +1655,11 @@ End Module
                 redirectEncoding: UTF8Encoding
             );
 
-            Assert.Equal(
-                @"SRC.VB(1) : error BC30037: Character is not valid.
+            Assert.Equal(@"SRC.VB(1) : error BC30037: Character is not valid.
 
 ♕
 ~
-".Trim(),
-                result.Output.Trim().Replace(srcFile, "SRC.VB")
-            );
+".Trim(), result.Output.Trim().Replace(srcFile, "SRC.VB"));
             Assert.Equal(1, result.ExitCode);
 
             var listener = await serverData.Complete();

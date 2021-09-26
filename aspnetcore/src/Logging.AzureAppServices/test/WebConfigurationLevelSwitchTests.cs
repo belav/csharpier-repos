@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         [InlineData("ABCD", LogLevel.None)]
         public void AddsRuleWithCorrectLevel(string levelValue, LogLevel expectedLevel)
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[] { new KeyValuePair<string, string>("levelKey", levelValue), }
                 )
                 .Build();

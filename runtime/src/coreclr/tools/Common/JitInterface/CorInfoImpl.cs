@@ -480,9 +480,8 @@ namespace Internal.JitInterface
                     _actualInstructionSetUnsupported,
                     architecture
                 );
-                var node = _compilation.SymbolNodeFactory.PerMethodInstructionSetSupportFixup(
-                    actualSupport
-                );
+                var node = _compilation.SymbolNodeFactory
+                    .PerMethodInstructionSetSupportFixup(actualSupport);
                 _methodCodeNode.Fixups.Add(node);
             }
 #else
@@ -1246,10 +1245,11 @@ namespace Internal.JitInterface
                 {
                     Debug.Assert(type.HasSameTypeDefinition(method.OwningType));
                     Instantiation methodInst = method.Instantiation;
-                    method = _compilation.TypeSystemContext.GetMethodForInstantiatedType(
-                        method.GetTypicalMethodDefinition(),
-                        (InstantiatedType)type
-                    );
+                    method = _compilation.TypeSystemContext
+                        .GetMethodForInstantiatedType(
+                            method.GetTypicalMethodDefinition(),
+                            (InstantiatedType)type
+                        );
                     if (methodInst.Length > 0)
                     {
                         method = method.MakeInstantiatedMethod(methodInst);
@@ -1364,10 +1364,11 @@ namespace Internal.JitInterface
                 if (decl.OwningType != ownerTypeDesc)
                 {
                     Debug.Assert(ownerTypeDesc is InstantiatedType);
-                    decl = _compilation.TypeSystemContext.GetMethodForInstantiatedType(
-                        decl.GetTypicalMethodDefinition(),
-                        (InstantiatedType)ownerTypeDesc
-                    );
+                    decl = _compilation.TypeSystemContext
+                        .GetMethodForInstantiatedType(
+                            decl.GetTypicalMethodDefinition(),
+                            (InstantiatedType)ownerTypeDesc
+                        );
                 }
             }
 
@@ -1504,10 +1505,11 @@ namespace Internal.JitInterface
                 {
                     Debug.Assert(methodDesc.IsUnmanagedCallersOnly);
                     CustomAttributeValue<TypeDesc> unmanagedCallersOnlyAttribute =
-                        ((EcmaMethod)methodDesc).GetDecodedCustomAttribute(
-                            "System.Runtime.InteropServices",
-                            "UnmanagedCallersOnlyAttribute"
-                        ).Value;
+                        ((EcmaMethod)methodDesc)
+                            .GetDecodedCustomAttribute(
+                                "System.Runtime.InteropServices",
+                                "UnmanagedCallersOnlyAttribute"
+                            ).Value;
                     return GetUnmanagedCallingConventionFromAttribute(
                         unmanagedCallersOnlyAttribute
                     );
@@ -1701,8 +1703,8 @@ namespace Internal.JitInterface
             {
                 if (method.IsSharedByGenericInstantiations)
                 {
-                    MethodDesc sharedMethod =
-                        methodIL.OwningMethod.GetSharedRuntimeFormMethodTarget();
+                    MethodDesc sharedMethod = methodIL.OwningMethod
+                        .GetSharedRuntimeFormMethodTarget();
                     result = ResolveTokenWithSubstitution(
                         methodIL,
                         pResolvedToken.token,
@@ -1716,8 +1718,8 @@ namespace Internal.JitInterface
             {
                 if (field.OwningType.IsCanonicalSubtype(CanonicalFormKind.Any))
                 {
-                    MethodDesc sharedMethod =
-                        methodIL.OwningMethod.GetSharedRuntimeFormMethodTarget();
+                    MethodDesc sharedMethod = methodIL.OwningMethod
+                        .GetSharedRuntimeFormMethodTarget();
                     result = ResolveTokenWithSubstitution(
                         methodIL,
                         pResolvedToken.token,
@@ -1732,8 +1734,8 @@ namespace Internal.JitInterface
                 TypeDesc type = (TypeDesc)result;
                 if (type.IsCanonicalSubtype(CanonicalFormKind.Any))
                 {
-                    MethodDesc sharedMethod =
-                        methodIL.OwningMethod.GetSharedRuntimeFormMethodTarget();
+                    MethodDesc sharedMethod = methodIL.OwningMethod
+                        .GetSharedRuntimeFormMethodTarget();
                     result = ResolveTokenWithSubstitution(
                         methodIL,
                         pResolvedToken.token,
@@ -1749,7 +1751,8 @@ namespace Internal.JitInterface
                             (
                                 (TypeDesc)methodIL.GetMethodILDefinition()
                                     .GetObject((int)pResolvedToken.token)
-                            ).IsCanonicalDefinitionType(CanonicalFormKind.Any)
+                            )
+                                .IsCanonicalDefinitionType(CanonicalFormKind.Any)
                     );
                 }
 
@@ -1801,18 +1804,17 @@ namespace Internal.JitInterface
 #if READYTORUN
                 if (recordToken)
                 {
-                    _compilation.NodeFactory.Resolver.AddModuleTokenForMethod(
-                        method,
-                        HandleToModuleToken(ref pResolvedToken)
-                    );
+                    _compilation.NodeFactory.Resolver
+                        .AddModuleTokenForMethod(method, HandleToModuleToken(ref pResolvedToken));
                 }
 #else
-                _compilation.NodeFactory.MetadataManager.GetDependenciesDueToAccess(
-                    ref _additionalDependencies,
-                    _compilation.NodeFactory,
-                    methodIL,
-                    method
-                );
+                _compilation.NodeFactory.MetadataManager
+                    .GetDependenciesDueToAccess(
+                        ref _additionalDependencies,
+                        _compilation.NodeFactory,
+                        methodIL,
+                        method
+                    );
 #endif
             }
             else if (result is FieldDesc)
@@ -1836,18 +1838,17 @@ namespace Internal.JitInterface
 #if READYTORUN
                 if (recordToken)
                 {
-                    _compilation.NodeFactory.Resolver.AddModuleTokenForField(
-                        field,
-                        HandleToModuleToken(ref pResolvedToken)
-                    );
+                    _compilation.NodeFactory.Resolver
+                        .AddModuleTokenForField(field, HandleToModuleToken(ref pResolvedToken));
                 }
 #else
-                _compilation.NodeFactory.MetadataManager.GetDependenciesDueToAccess(
-                    ref _additionalDependencies,
-                    _compilation.NodeFactory,
-                    methodIL,
-                    field
-                );
+                _compilation.NodeFactory.MetadataManager
+                    .GetDependenciesDueToAccess(
+                        ref _additionalDependencies,
+                        _compilation.NodeFactory,
+                        methodIL,
+                        field
+                    );
 #endif
             }
             else
@@ -1857,10 +1858,8 @@ namespace Internal.JitInterface
 #if READYTORUN
                 if (recordToken)
                 {
-                    _compilation.NodeFactory.Resolver.AddModuleTokenForType(
-                        type,
-                        HandleToModuleToken(ref pResolvedToken)
-                    );
+                    _compilation.NodeFactory.Resolver
+                        .AddModuleTokenForType(type, HandleToModuleToken(ref pResolvedToken));
                 }
 #endif
 
@@ -2643,30 +2642,26 @@ namespace Internal.JitInterface
 
                 case CorInfoClassId.CLASSID_TYPED_BYREF:
                     return ObjectToHandle(
-                        _compilation.TypeSystemContext.GetWellKnownType(
-                            WellKnownType.TypedReference
-                        )
+                        _compilation.TypeSystemContext
+                            .GetWellKnownType(WellKnownType.TypedReference)
                     );
 
                 case CorInfoClassId.CLASSID_TYPE_HANDLE:
                     return ObjectToHandle(
-                        _compilation.TypeSystemContext.GetWellKnownType(
-                            WellKnownType.RuntimeTypeHandle
-                        )
+                        _compilation.TypeSystemContext
+                            .GetWellKnownType(WellKnownType.RuntimeTypeHandle)
                     );
 
                 case CorInfoClassId.CLASSID_FIELD_HANDLE:
                     return ObjectToHandle(
-                        _compilation.TypeSystemContext.GetWellKnownType(
-                            WellKnownType.RuntimeFieldHandle
-                        )
+                        _compilation.TypeSystemContext
+                            .GetWellKnownType(WellKnownType.RuntimeFieldHandle)
                     );
 
                 case CorInfoClassId.CLASSID_METHOD_HANDLE:
                     return ObjectToHandle(
-                        _compilation.TypeSystemContext.GetWellKnownType(
-                            WellKnownType.RuntimeMethodHandle
-                        )
+                        _compilation.TypeSystemContext
+                            .GetWellKnownType(WellKnownType.RuntimeMethodHandle)
                     );
 
                 case CorInfoClassId.CLASSID_ARGUMENT_HANDLE:
@@ -2910,9 +2905,8 @@ namespace Internal.JitInterface
             // excessive for sanity.
             if (type1.IsArray && type2.IsArray)
             {
-                TypeDesc arrayClass = _compilation.TypeSystemContext.GetWellKnownType(
-                    WellKnownType.Array
-                );
+                TypeDesc arrayClass = _compilation.TypeSystemContext
+                    .GetWellKnownType(WellKnownType.Array);
                 Debug.Assert(
                     (merged.IsArray && reflexive.IsArray)
                         || ((merged == arrayClass) && (reflexive == arrayClass))
@@ -3334,9 +3328,8 @@ namespace Internal.JitInterface
                 methodDefinition as TypeSystem.Ecma.EcmaMethod;
             if (ecmaMethodDefinition != null)
             {
-                return (mdToken)System.Reflection.Metadata.Ecma335.MetadataTokens.GetToken(
-                    ecmaMethodDefinition.Handle
-                );
+                return (mdToken)System.Reflection.Metadata.Ecma335.MetadataTokens
+                    .GetToken(ecmaMethodDefinition.Handle);
             }
 
             return 0;
@@ -4113,9 +4106,8 @@ namespace Internal.JitInterface
                 case TargetArchitecture.X86:
                     Debug.Assert(InstructionSet.X86_SSE2 == InstructionSet.X64_SSE2);
                     if (
-                        _compilation.InstructionSetSupport.IsInstructionSetSupported(
-                            InstructionSet.X86_SSE2
-                        )
+                        _compilation.InstructionSetSupport
+                            .IsInstructionSetSupported(InstructionSet.X86_SSE2)
                     )
                     {
                         flags.Set(CorJitFlag.CORJIT_FLAG_FEATURE_SIMD);
@@ -4124,9 +4116,8 @@ namespace Internal.JitInterface
 
                 case TargetArchitecture.ARM64:
                     if (
-                        _compilation.InstructionSetSupport.IsInstructionSetSupported(
-                            InstructionSet.ARM64_AdvSimd
-                        )
+                        _compilation.InstructionSetSupport
+                            .IsInstructionSetSupported(InstructionSet.ARM64_AdvSimd)
                     )
                     {
                         flags.Set(CorJitFlag.CORJIT_FLAG_FEATURE_SIMD);

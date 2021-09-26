@@ -28,7 +28,8 @@ class Y
         var s = new X<string>("hello, world!");
         // Jit should devirtualize, remove box,
         // change to call unboxed entry, then inline.
-        ((IPrint)s).Print();
+        ((IPrint)s)
+            .Print();
         return 100;
     }
 }

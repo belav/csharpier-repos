@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken)
+            var root = await context.Document
+                .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

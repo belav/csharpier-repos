@@ -96,10 +96,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       58 (0x3a)
   .maxstack  2
@@ -124,7 +123,7 @@ class C
   IL_0038:  pop
   IL_0039:  ret
 }"
-                );
+            );
         }
 
         // Goto location outside enclosing block
@@ -152,10 +151,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  2
@@ -167,7 +165,7 @@ class C
   IL_0005:  call       ""void System.Console.WriteLine(int)""
   IL_000a:  ret
 }"
-                );
+            );
         }
 
         // Goto location in enclosing block
@@ -195,10 +193,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  2
@@ -210,7 +207,7 @@ class C
   IL_0005:  call       ""void System.Console.WriteLine(int)""
   IL_000a:  ret
 }"
-                );
+            );
         }
 
         // Same label in different scope
@@ -277,17 +274,16 @@ class C
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  0
   IL_0000:  br.s       IL_0000
 }
 "
-                );
+            );
         }
 
         // Infinite loop
@@ -308,18 +304,16 @@ class C
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyDiagnostics()
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(text).VerifyDiagnostics().VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  0
   IL_0000:  br.s       IL_0000
 }
 "
-                );
+            );
         }
 
         // unreachable code
@@ -491,10 +485,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  1
@@ -525,7 +518,7 @@ class C
 }
   IL_000f:  br.s       IL_000f
 }"
-                );
+            );
         }
 
         // Optimization redundant branch for code generate
@@ -585,10 +578,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       37 (0x25)
   .maxstack  2
@@ -605,7 +597,7 @@ class C
   IL_0024:  ret
 }
 "
-                );
+            );
         }
 
         // Definition same label in different lambdas
@@ -639,10 +631,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       73 (0x49)
   .maxstack  2
@@ -669,7 +660,7 @@ class C
   IL_0048:  ret
 }
 "
-                );
+            );
         }
 
         // Control is transferred to the target of the goto statement after finally
@@ -1034,7 +1025,9 @@ F(true);";
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "L").WithLocation(5, 1),
                 // (3,17): error CS0159: No such label 'L' within the scope of the goto statement
                 //     if (b) goto L;
-                Diagnostic(ErrorCode.ERR_LabelNotFound, "L").WithArguments("L").WithLocation(3, 17)
+                Diagnostic(ErrorCode.ERR_LabelNotFound, "L")
+                    .WithArguments("L")
+                    .WithLocation(3, 17)
             );
         }
 
@@ -1056,7 +1049,9 @@ goto L;";
             compilation.VerifyDiagnostics(
                 // (6,6): error CS0159: No such label 'L' within the scope of the goto statement
                 // goto L;
-                Diagnostic(ErrorCode.ERR_LabelNotFound, "L").WithArguments("L").WithLocation(6, 6),
+                Diagnostic(ErrorCode.ERR_LabelNotFound, "L")
+                    .WithArguments("L")
+                    .WithLocation(6, 6),
                 // (3,1): warning CS0164: This label has not been referenced
                 // L:
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "L").WithLocation(3, 1)
@@ -1173,19 +1168,16 @@ B: goto A;";
                 options: options,
                 parseOptions: TestOptions.Script
             );
-            compilation.GetDiagnostics()
-                .Verify(
-                    // a.csx(2,9): error CS0159: No such label 'B' within the scope of the goto statement
-                    // A: goto B;
-                    Diagnostic(ErrorCode.ERR_LabelNotFound, "B")
-                        .WithArguments("B")
-                        .WithLocation(2, 9),
-                    // (3,9): error CS0159: No such label 'A' within the scope of the goto statement
-                    // B: goto A;
-                    Diagnostic(ErrorCode.ERR_LabelNotFound, "A")
-                        .WithArguments("A")
-                        .WithLocation(3, 9)
-                );
+            compilation.GetDiagnostics().Verify(
+                // a.csx(2,9): error CS0159: No such label 'B' within the scope of the goto statement
+                // A: goto B;
+                Diagnostic(ErrorCode.ERR_LabelNotFound, "B")
+                    .WithArguments("B")
+                    .WithLocation(2, 9),
+                // (3,9): error CS0159: No such label 'A' within the scope of the goto statement
+                // B: goto A;
+                Diagnostic(ErrorCode.ERR_LabelNotFound, "A").WithArguments("A").WithLocation(3, 9)
+            );
         }
 
         [Fact, WorkItem(3712, "https://github.com/dotnet/roslyn/pull/3172")]
@@ -1234,32 +1226,29 @@ EOF:";
                 source,
                 parseOptions: TestOptions.Script
             );
-            compilation.GetDiagnostics()
-                .Verify(
-                    // (3,5): error CS1733: Expected expression
-                    // EOF:
-                    Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(3, 5)
-                );
+            compilation.GetDiagnostics().Verify(
+                // (3,5): error CS1733: Expected expression
+                // EOF:
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(3, 5)
+            );
 
             compilation = CreateSubmission(source);
-            compilation.GetDiagnostics()
-                .Verify(
-                    // (3,5): error CS1733: Expected expression
-                    // EOF:
-                    Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(3, 5)
-                );
+            compilation.GetDiagnostics().Verify(
+                // (3,5): error CS1733: Expected expression
+                // EOF:
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(3, 5)
+            );
 
             source =
                 @"
 goto EOF;
 EOF: 42";
             compilation = CreateCompilationWithMscorlib45(source, parseOptions: TestOptions.Script);
-            compilation.GetDiagnostics()
-                .Verify(
-                    // (3,8): error CS1002: ; expected
-                    // EOF: 42
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(3, 8)
-                );
+            compilation.GetDiagnostics().Verify(
+                // (3,8): error CS1002: ; expected
+                // EOF: 42
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(3, 8)
+            );
 
             source =
                 @"
@@ -1270,32 +1259,30 @@ L2:
 EOF: obj.ToString()";
 
             compilation = CreateCompilationWithMscorlib45(source, parseOptions: TestOptions.Script);
-            compilation.GetDiagnostics()
-                .Verify(
-                    // (6,20): error CS1002: ; expected
-                    // EOF: obj.ToString()
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 20),
-                    // (5,1): warning CS0164: This label has not been referenced
-                    // L2:
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "L2").WithLocation(5, 1),
-                    // (6,1): warning CS0164: This label has not been referenced
-                    // EOF: obj.ToString()
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "EOF").WithLocation(6, 1)
-                );
+            compilation.GetDiagnostics().Verify(
+                // (6,20): error CS1002: ; expected
+                // EOF: obj.ToString()
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 20),
+                // (5,1): warning CS0164: This label has not been referenced
+                // L2:
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "L2").WithLocation(5, 1),
+                // (6,1): warning CS0164: This label has not been referenced
+                // EOF: obj.ToString()
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "EOF").WithLocation(6, 1)
+            );
 
             compilation = CreateSubmission(source);
-            compilation.GetDiagnostics()
-                .Verify(
-                    // (6,20): error CS1002: ; expected
-                    // EOF: obj.ToString()
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 20),
-                    // (5,1): warning CS0164: This label has not been referenced
-                    // L2:
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "L2").WithLocation(5, 1),
-                    // (6,1): warning CS0164: This label has not been referenced
-                    // EOF: obj.ToString()
-                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "EOF").WithLocation(6, 1)
-                );
+            compilation.GetDiagnostics().Verify(
+                // (6,20): error CS1002: ; expected
+                // EOF: obj.ToString()
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 20),
+                // (5,1): warning CS0164: This label has not been referenced
+                // L2:
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "L2").WithLocation(5, 1),
+                // (6,1): warning CS0164: This label has not been referenced
+                // EOF: obj.ToString()
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "EOF").WithLocation(6, 1)
+            );
         }
     }
 }

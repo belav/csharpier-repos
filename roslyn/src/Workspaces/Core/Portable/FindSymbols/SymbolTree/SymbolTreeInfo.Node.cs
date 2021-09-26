@@ -200,7 +200,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     Instance,
                     reader,
                     genericContext
-                ).DecodeType(ref sigReader);
+                )
+                    .DecodeType(ref sigReader);
             }
 
             public ParameterTypeInfo GetArrayType(

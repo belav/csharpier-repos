@@ -42,14 +42,12 @@ namespace System.CommandLine.Suggest.Tests
 
             var currentDirectory = Path.Combine(Directory.GetCurrentDirectory(), "TestAssets");
 
-            _endToEndTestApp = new DirectoryInfo(currentDirectory).GetFiles(
-                    "EndToEndTestApp".ExecutableName()
-                )
+            _endToEndTestApp = new DirectoryInfo(currentDirectory)
+                .GetFiles("EndToEndTestApp".ExecutableName())
                 .SingleOrDefault();
 
-            _dotnetSuggest = new DirectoryInfo(currentDirectory).GetFiles(
-                    "dotnet-suggest".ExecutableName()
-                )
+            _dotnetSuggest = new DirectoryInfo(currentDirectory)
+                .GetFiles("dotnet-suggest".ExecutableName())
                 .SingleOrDefault();
 
             PrepareTestHomeDirectoryToAvoidPolluteBuildMachineHome();

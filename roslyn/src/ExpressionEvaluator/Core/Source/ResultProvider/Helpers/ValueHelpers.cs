@@ -44,11 +44,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 null,
                 Formatter.NoFormatSpecifiers
             );
-            return string.Format(
-                Resources.ExceptionThrown,
-                fullNameWithoutFormatSpecifiers,
-                typeName
-            );
+            return string
+                .Format(Resources.ExceptionThrown, fullNameWithoutFormatSpecifiers, typeName);
         }
 
         internal static DkmClrValue GetMemberValue(

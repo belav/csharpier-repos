@@ -96,20 +96,19 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             var url = "http://127.0.0.1:0";
 
             _host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.ConfigureLogging(
-                                builder =>
-                                    builder.SetMinimumLevel(LogLevel.Trace)
-                                        .AddProvider(new ForwardingLoggerProvider(_loggerFactory))
-                            )
-                            .UseStartup(typeof(TStartup))
-                            .UseKestrel()
-                            .UseUrls(url)
-                            .UseContentRoot(Directory.GetCurrentDirectory());
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.ConfigureLogging(
+                        builder =>
+                            builder.SetMinimumLevel(LogLevel.Trace)
+                                .AddProvider(new ForwardingLoggerProvider(_loggerFactory))
+                    )
+                        .UseStartup(typeof(TStartup))
+                        .UseKestrel()
+                        .UseUrls(url)
+                        .UseContentRoot(Directory.GetCurrentDirectory());
+                }
+            ).Build();
 
             _logger.LogInformation("Starting test server...");
             var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
@@ -128,7 +127,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             _logger.LogInformation("Test Server started");
 
             // Get the URL from the server
-            _url = _host.Services.GetService<IServer>()
+            _url = _host.Services
+                .GetService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses.Single();
 

@@ -138,10 +138,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     // If there are any comments or directives on the return keyword, move them to
                     // the expression.
                     expression = firstStatement.GetLeadingTrivia()
-                        .Any(t => t.IsDirective || t.IsSingleOrMultiLineComment())
-                        ? returnStatement.Expression.WithLeadingTrivia(
-                              returnStatement.GetLeadingTrivia()
-                          )
+                    .Any(t => t.IsDirective || t.IsSingleOrMultiLineComment())
+                        ? returnStatement.Expression
+                          .WithLeadingTrivia(returnStatement.GetLeadingTrivia())
                         : returnStatement.Expression;
                     semicolonToken = returnStatement.SemicolonToken;
                     return true;

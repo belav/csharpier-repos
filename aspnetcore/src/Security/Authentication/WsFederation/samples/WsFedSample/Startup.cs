@@ -26,27 +26,24 @@ namespace WsFedSample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(
-                    sharedOptions =>
-                    {
-                        sharedOptions.DefaultScheme =
-                            CookieAuthenticationDefaults.AuthenticationScheme;
-                        sharedOptions.DefaultSignInScheme =
-                            CookieAuthenticationDefaults.AuthenticationScheme;
-                        sharedOptions.DefaultChallengeScheme =
-                            WsFederationDefaults.AuthenticationScheme;
-                    }
-                )
-                .AddWsFederation(
-                    options =>
-                    {
-                        options.Wtrealm = "https://Tratcheroutlook.onmicrosoft.com/WsFedSample";
-                        options.MetadataAddress =
-                            "https://login.windows.net/cdc690f9-b6b8-4023-813a-bae7143d1f87/FederationMetadata/2007-06/FederationMetadata.xml";
-                        // options.CallbackPath = "/";
-                        // options.SkipUnrecognizedRequests = true;
-                    }
-                )
-                .AddCookie();
+                sharedOptions =>
+                {
+                    sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    sharedOptions.DefaultSignInScheme =
+                        CookieAuthenticationDefaults.AuthenticationScheme;
+                    sharedOptions.DefaultChallengeScheme =
+                        WsFederationDefaults.AuthenticationScheme;
+                }
+            ).AddWsFederation(
+                options =>
+                {
+                    options.Wtrealm = "https://Tratcheroutlook.onmicrosoft.com/WsFedSample";
+                    options.MetadataAddress =
+                        "https://login.windows.net/cdc690f9-b6b8-4023-813a-bae7143d1f87/FederationMetadata/2007-06/FederationMetadata.xml";
+                    // options.CallbackPath = "/";
+                    // options.SkipUnrecognizedRequests = true;
+                }
+            ).AddCookie();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -81,12 +78,12 @@ namespace WsFedSample
                             context.Response,
                             async res =>
                             {
-                                await context.Response.WriteAsync(
-                                    $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
-                                );
-                                await context.Response.WriteAsync(
-                                    "<a class=\"btn btn-link\" href=\"/\">Sign In</a>"
-                                );
+                                await context.Response
+                                    .WriteAsync(
+                                        $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
+                                    );
+                                await context.Response
+                                    .WriteAsync("<a class=\"btn btn-link\" href=\"/\">Sign In</a>");
                             }
                         );
                         return;
@@ -111,12 +108,14 @@ namespace WsFedSample
                             context.Response,
                             async res =>
                             {
-                                await context.Response.WriteAsync(
-                                    $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
-                                );
-                                await context.Response.WriteAsync(
-                                    "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
-                                );
+                                await context.Response
+                                    .WriteAsync(
+                                        $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
+                                    );
+                                await context.Response
+                                    .WriteAsync(
+                                        "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
+                                    );
                             }
                         );
                         return;

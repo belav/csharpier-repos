@@ -144,11 +144,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
 
         protected Project LoadProject(FileInfo projectFile)
         {
-            var project = ProjectCollection.GlobalProjectCollection.LoadProject(
-                projectFile.FullName,
-                globalProperties: null,
-                toolsVersion: null
-            );
+            var project = ProjectCollection.GlobalProjectCollection
+                .LoadProject(projectFile.FullName, globalProperties: null, toolsVersion: null);
             project.ReevaluateIfNecessary();
             return project;
         }
@@ -179,11 +176,12 @@ namespace Microsoft.DotNet.OpenApi.Commands
             var items = project.GetItems(tagName);
             var fileItems = items.Where(
                 i =>
-                    string.Equals(
-                        GetFullPath(i.EvaluatedInclude),
-                        GetFullPath(sourceFile),
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            GetFullPath(i.EvaluatedInclude),
+                            GetFullPath(sourceFile),
+                            StringComparison.Ordinal
+                        )
             );
 
             if (fileItems.Any())
@@ -545,17 +543,16 @@ namespace Microsoft.DotNet.OpenApi.Commands
                 using var packageVersionDocument = await JsonDocument.ParseAsync(
                     packageVersionStream
                 );
-                var packageVersionsElement = packageVersionDocument.RootElement.GetProperty(
-                    "Packages"
-                );
+                var packageVersionsElement = packageVersionDocument.RootElement
+                    .GetProperty("Packages");
                 var packageVersionsDictionary = new Dictionary<string, string>(
                     StringComparer.OrdinalIgnoreCase
                 );
 
                 foreach (var packageVersion in packageVersionsElement.EnumerateObject())
                 {
-                    packageVersionsDictionary[packageVersion.Name] =
-                        packageVersion.Value.GetString();
+                    packageVersionsDictionary[packageVersion.Name] = packageVersion.Value
+                        .GetString();
                 }
 
                 return packageVersionsDictionary;
@@ -572,8 +569,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
         {
             CodeGenerator generator = type ?? CodeGenerator.NSwagCSharp;
             var name = Enum.GetName(typeof(CodeGenerator), generator);
-            var attributes =
-                typeof(Program).Assembly.GetCustomAttributes<OpenApiDependencyAttribute>();
+            var attributes = typeof(Program).Assembly
+                .GetCustomAttributes<OpenApiDependencyAttribute>();
 
             var packages = attributes.Where(a => a.CodeGenerators.Contains(generator));
             var result = new Dictionary<string, string>();

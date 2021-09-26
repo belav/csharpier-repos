@@ -87,11 +87,12 @@ namespace Microsoft.CodeAnalysis.Completion
         {
             if (description.Length > 0)
             {
-                return string.Join(
-                    "|",
-                    description.SelectMany(d => new string[] { d.Tag, d.Text })
-                        .Select(t => t.Escape('\\', s_descriptionSeparators))
-                );
+                return string
+                    .Join(
+                        "|",
+                        description.SelectMany(d => new string[] { d.Tag, d.Text })
+                            .Select(t => t.Escape('\\', s_descriptionSeparators))
+                    );
             }
             else
             {

@@ -40,9 +40,9 @@ namespace Microsoft.CodeAnalysis.AddPackage
             {
                 var assemblyNames = new HashSet<string> { assemblyName };
                 var addPackageCodeActions = await GetAddPackagesCodeActionsAsync(
-                        context,
-                        assemblyNames
-                    )
+                    context,
+                    assemblyNames
+                )
                     .ConfigureAwait(false);
                 context.RegisterFixes(addPackageCodeActions, context.Diagnostics);
             }

@@ -112,10 +112,12 @@ namespace JIT.HardwareIntrinsics.General
                 values[15]
             );
 
-            object lowerResult = typeof(Vector128).GetMethod(nameof(Vector128.GetLower))
+            object lowerResult = typeof(Vector128)
+                .GetMethod(nameof(Vector128.GetLower))
                 .MakeGenericMethod(typeof(SByte))
                 .Invoke(null, new object[] { value });
-            object upperResult = typeof(Vector128).GetMethod(nameof(Vector128.GetUpper))
+            object upperResult = typeof(Vector128)
+                .GetMethod(nameof(Vector128.GetUpper))
                 .MakeGenericMethod(typeof(SByte))
                 .Invoke(null, new object[] { value });
             ValidateGetResult(
@@ -124,10 +126,12 @@ namespace JIT.HardwareIntrinsics.General
                 values
             );
 
-            object result = typeof(Vector128).GetMethod(nameof(Vector128.WithLower))
+            object result = typeof(Vector128)
+                .GetMethod(nameof(Vector128.WithLower))
                 .MakeGenericMethod(typeof(SByte))
                 .Invoke(null, new object[] { value, upperResult });
-            result = typeof(Vector128).GetMethod(nameof(Vector128.WithUpper))
+            result = typeof(Vector128)
+                .GetMethod(nameof(Vector128.WithUpper))
                 .MakeGenericMethod(typeof(SByte))
                 .Invoke(null, new object[] { result, lowerResult });
             ValidateWithResult((Vector128<SByte>)(result), values);
@@ -169,15 +173,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<SByte>.GetLower(): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", values)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", lowerResult)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128<SByte>.GetLower(): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", lowerResult)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -196,15 +197,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<SByte>.GetUpper(): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", values)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", upperResult)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128<SByte>.GetUpper(): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", upperResult)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -241,15 +239,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<SByte.WithLower(): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", values)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128<SByte.WithLower(): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -268,15 +263,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<SByte.WithUpper(): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", values)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128<SByte.WithUpper(): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -136,11 +136,12 @@ namespace System.Net
                 foreach (string connection in Headers.GetValues(HttpKnownHeaderNames.Connection)!)
                 {
                     if (
-                        string.Equals(
-                            connection,
-                            HttpKnownHeaderNames.Upgrade,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                connection,
+                                HttpKnownHeaderNames.Upgrade,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         foundConnectionUpgradeHeader = true;
@@ -156,11 +157,12 @@ namespace System.Net
                 foreach (string upgrade in Headers.GetValues(HttpKnownHeaderNames.Upgrade)!)
                 {
                     if (
-                        string.Equals(
-                            upgrade,
-                            HttpWebSocket.WebSocketUpgradeToken,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                upgrade,
+                                HttpWebSocket.WebSocketUpgradeToken,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         return true;
@@ -290,12 +292,13 @@ namespace System.Net
 
         public Task<X509Certificate2?> GetClientCertificateAsync()
         {
-            return Task.Factory.FromAsync(
-                (callback, state) =>
-                    ((HttpListenerRequest)state!).BeginGetClientCertificate(callback, state),
-                iar => ((HttpListenerRequest)iar.AsyncState!).EndGetClientCertificate(iar),
-                this
-            );
+            return Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        ((HttpListenerRequest)state!).BeginGetClientCertificate(callback, state),
+                    iar => ((HttpListenerRequest)iar.AsyncState!).EndGetClientCertificate(iar),
+                    this
+                );
         }
 
         internal ListenerClientCertState ClientCertState { get; set; } =
@@ -345,12 +348,8 @@ namespace System.Net
 
                 while (i < l)
                 {
-                    i = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                        headerValue,
-                        AttrName,
-                        i,
-                        CompareOptions.IgnoreCase
-                    );
+                    i = CultureInfo.InvariantCulture.CompareInfo
+                        .IndexOf(headerValue, AttrName, i, CompareOptions.IgnoreCase);
                     if (i < 0)
                         break;
                     if (i + k >= l)

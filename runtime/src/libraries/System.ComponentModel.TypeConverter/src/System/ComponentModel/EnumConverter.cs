@@ -177,15 +177,11 @@ namespace System.ComponentModel
                     Type underlyingType = Enum.GetUnderlyingType(EnumType);
                     if (value is IConvertible)
                     {
-                        object convertedValue = ((IConvertible)value).ToType(
-                            underlyingType,
-                            culture
-                        );
+                        object convertedValue = ((IConvertible)value)
+                            .ToType(underlyingType, culture);
 
-                        MethodInfo method = typeof(Enum).GetMethod(
-                            "ToObject",
-                            new Type[] { typeof(Type), underlyingType }
-                        );
+                        MethodInfo method = typeof(Enum)
+                            .GetMethod("ToObject", new Type[] { typeof(Type), underlyingType });
                         if (method != null)
                         {
                             return new InstanceDescriptor(

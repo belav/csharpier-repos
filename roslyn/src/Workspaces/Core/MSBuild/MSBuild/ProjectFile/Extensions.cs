@@ -67,11 +67,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
             );
 
             return RoslynString.IsNullOrWhiteSpace(referenceOutputAssemblyText)
-                || !string.Equals(
-                    referenceOutputAssemblyText,
-                    bool.FalseString,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                || !string
+                    .Equals(
+                        referenceOutputAssemblyText,
+                        bool.FalseString,
+                        StringComparison.OrdinalIgnoreCase
+                    );
         }
 
         public static string? ReadPropertyString(

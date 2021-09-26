@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
     {
         private const string HiddenListItem = @"<li style=""display:none""></li>";
         private static readonly MethodInfo ConvertEnumFromStringMethod =
-            typeof(DefaultHtmlGenerator).GetTypeInfo()
+            typeof(DefaultHtmlGenerator)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(ConvertEnumFromString));
 
         // See: (http://www.w3.org/TR/html5/forms.html#the-input-element)
@@ -583,11 +584,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                     // isChecked not provided nor found in the given attributes; fall back to view data.
                     var valueString = Convert.ToString(value, CultureInfo.CurrentCulture);
-                    isChecked = string.Equals(
-                        EvalString(viewContext, expression),
-                        valueString,
-                        StringComparison.OrdinalIgnoreCase
-                    );
+                    isChecked = string
+                        .Equals(
+                            EvalString(viewContext, expression),
+                            valueString,
+                            StringComparison.OrdinalIgnoreCase
+                        );
                 }
             }
             else
@@ -602,11 +604,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 var valueString = Convert.ToString(value, CultureInfo.CurrentCulture);
                 isChecked =
                     model != null
-                    && string.Equals(
-                        model.ToString(),
-                        valueString,
-                        StringComparison.OrdinalIgnoreCase
-                    );
+                    && string
+                        .Equals(model.ToString(), valueString, StringComparison.OrdinalIgnoreCase);
             }
 
             if (isChecked.HasValue && htmlAttributeDictionary != null)
@@ -956,10 +955,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 return null;
             }
 
-            var tryGetModelStateResult = viewContext.ViewData.ModelState.TryGetValue(
-                fullName,
-                out var entry
-            );
+            var tryGetModelStateResult = viewContext.ViewData.ModelState
+                .TryGetValue(fullName, out var entry);
             var modelErrors = tryGetModelStateResult ? entry.Errors : null;
 
             ModelError modelError = null;
@@ -1006,13 +1003,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         viewContext.ViewData,
                         _metadataProvider
                     );
-                tagBuilder.InnerHtml.SetContent(
-                    ValidationHelpers.GetModelErrorMessageOrDefault(
-                        modelError,
-                        entry,
-                        modelExplorer
-                    )
-                );
+                tagBuilder.InnerHtml
+                    .SetContent(
+                        ValidationHelpers.GetModelErrorMessageOrDefault(
+                            modelError,
+                            entry,
+                            modelExplorer
+                        )
+                    );
             }
 
             if (formContext != null)
@@ -1056,10 +1054,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (
                 excludePropertyErrors
                 && (
-                    !viewData.ModelState.TryGetValue(
-                        viewData.TemplateInfo.HtmlFieldPrefix,
-                        out var entryForModel
-                    )
+                    !viewData.ModelState
+                        .TryGetValue(viewData.TemplateInfo.HtmlFieldPrefix, out var entryForModel)
                     || entryForModel.Errors.Count == 0
                 )
             )
@@ -1275,13 +1271,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     {
                         // Add all simple names for this value.
                         var matchingNames = enumNames.Where(
-                                kvp =>
-                                    string.Equals(
-                                        integerString,
-                                        kvp.Value,
-                                        StringComparison.Ordinal
-                                    )
-                            )
+                            kvp => string.Equals(integerString, kvp.Value, StringComparison.Ordinal)
+                        )
                             .Select(kvp => kvp.Key);
                         foreach (var name in matchingNames)
                         {
@@ -1495,11 +1486,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                             is string modelStateValue
                         )
                         {
-                            isChecked = string.Equals(
-                                modelStateValue,
-                                valueParameter,
-                                StringComparison.Ordinal
-                            );
+                            isChecked = string
+                                .Equals(modelStateValue, valueParameter, StringComparison.Ordinal);
                             usedModelState = true;
                         }
                     }
@@ -1547,16 +1535,18 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     {
                         var typeAttributeString = typeAttributeValue.ToString();
                         if (
-                            string.Equals(
-                                typeAttributeString,
-                                "file",
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                            || string.Equals(
-                                typeAttributeString,
-                                "image",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    typeAttributeString,
+                                    "file",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            || string
+                                .Equals(
+                                    typeAttributeString,
+                                    "image",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             // 'value' attribute is not needed for 'file' and 'image' input types.
@@ -1982,9 +1972,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                                 && object.ReferenceEquals(optGroup, groupItem.Group)
                             )
                             {
-                                groupBuilder.InnerHtml.AppendLine(
-                                    GenerateOption(groupItem, currentValues)
-                                );
+                                groupBuilder.InnerHtml
+                                    .AppendLine(GenerateOption(groupItem, currentValues));
                                 optionGenerated[j] = true;
                             }
                         }

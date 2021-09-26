@@ -28,10 +28,8 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new int[][] { new int[] { 10 } } };
             yield return new object[] { new int[,] { { 10 } } };
 
-            MethodInfo method = typeof(IsComObjectTests).GetMethod(
-                nameof(NonGenericMethod),
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            MethodInfo method = typeof(IsComObjectTests)
+                .GetMethod(nameof(NonGenericMethod), BindingFlags.NonPublic | BindingFlags.Static);
             Delegate d = method.CreateDelegate(typeof(NonGenericDelegate));
             yield return new object[] { d };
 
@@ -47,9 +45,8 @@ namespace System.Runtime.InteropServices.Tests
             object collectibleObject = Activator.CreateInstance(collectibleType);
             yield return new object[] { collectibleObject };
 
-            ConstructorInfo comImportConstructor = typeof(ComImportAttribute).GetConstructor(
-                new Type[0]
-            );
+            ConstructorInfo comImportConstructor = typeof(ComImportAttribute)
+                .GetConstructor(new Type[0]);
             var comImportAttributeBuilder = new CustomAttributeBuilder(
                 comImportConstructor,
                 new object[0]

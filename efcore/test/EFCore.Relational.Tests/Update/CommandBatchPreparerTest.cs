@@ -338,13 +338,15 @@ namespace Microsoft.EntityFrameworkCore.Update
         [ConditionalFact]
         public void BatchCommands_creates_batches_lazily()
         {
-            var configuration = RelationalTestHelpers.Instance.CreateContextServices(
-                new ServiceCollection().AddScoped<
-                    IModificationCommandBatchFactory,
-                    TestModificationCommandBatchFactory
-                >(),
-                CreateSimpleFKModel()
-            );
+            var configuration = RelationalTestHelpers.Instance
+                .CreateContextServices(
+                    new ServiceCollection()
+                        .AddScoped<
+                            IModificationCommandBatchFactory,
+                            TestModificationCommandBatchFactory
+                        >(),
+                    CreateSimpleFKModel()
+                );
 
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
@@ -472,9 +474,9 @@ ForeignKey { 'RelatedId' } FakeEntity [Added]" + CoreStrings.SensitiveDataDisabl
                 Assert.Throws<InvalidOperationException>(
                     () =>
                         CreateCommandBatchPreparer(
-                                updateAdapter: modelData,
-                                sensitiveLogging: sensitiveLogging
-                            )
+                            updateAdapter: modelData,
+                            sensitiveLogging: sensitiveLogging
+                        )
                             .BatchCommands(new[] { fakeEntry, relatedFakeEntry }, modelData)
                             .ToArray()
                 ).Message
@@ -530,9 +532,9 @@ Index { 'UniqueValue' } FakeEntity [Added]" + CoreStrings.SensitiveDataDisabled;
                 Assert.Throws<InvalidOperationException>(
                     () =>
                         CreateCommandBatchPreparer(
-                                updateAdapter: modelData,
-                                sensitiveLogging: sensitiveLogging
-                            )
+                            updateAdapter: modelData,
+                            sensitiveLogging: sensitiveLogging
+                        )
                             .BatchCommands(
                                 new[] { fakeEntry, relatedFakeEntry, fakeEntry2 },
                                 modelData
@@ -583,9 +585,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                 Assert.Throws<InvalidOperationException>(
                     () =>
                         CreateCommandBatchPreparer(
-                                updateAdapter: modelData,
-                                sensitiveLogging: sensitiveLogging
-                            )
+                            updateAdapter: modelData,
+                            sensitiveLogging: sensitiveLogging
+                        )
                             .BatchCommands(
                                 // Order is important for this test. Entry which is not part of cycle but tail should come first.
                                 new[] { anotherFakeEntry, fakeEntry, relatedFakeEntry },
@@ -822,9 +824,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                     Assert.Throws<InvalidOperationException>(
                         () =>
                             CreateCommandBatchPreparer(
-                                    updateAdapter: modelData,
-                                    sensitiveLogging: true
-                                )
+                                updateAdapter: modelData,
+                                sensitiveLogging: true
+                            )
                                 .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
                                 .ToArray()
                     ).Message
@@ -842,9 +844,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                     Assert.Throws<InvalidOperationException>(
                         () =>
                             CreateCommandBatchPreparer(
-                                    updateAdapter: modelData,
-                                    sensitiveLogging: false
-                                )
+                                updateAdapter: modelData,
+                                sensitiveLogging: false
+                            )
                                 .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
                                 .ToArray()
                     ).Message
@@ -882,9 +884,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
             {
                 new EntityEntry<FakeEntity>(firstEntry).Property(e => e.RelatedId).OriginalValue =
                     1;
-                new EntityEntry<RelatedFakeEntity>(secondEntry).Property(
-                    e => e.RelatedId
-                ).OriginalValue = 2;
+                new EntityEntry<RelatedFakeEntity>(secondEntry)
+                    .Property(e => e.RelatedId).OriginalValue = 2;
             }
 
             var modelData = new UpdateAdapter(stateManager);
@@ -905,9 +906,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 CreateCommandBatchPreparer(
-                                        updateAdapter: modelData,
-                                        sensitiveLogging: true
-                                    )
+                                    updateAdapter: modelData,
+                                    sensitiveLogging: true
+                                )
                                     .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
                                     .ToArray()
                         ).Message
@@ -926,9 +927,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 CreateCommandBatchPreparer(
-                                        updateAdapter: modelData,
-                                        sensitiveLogging: false
-                                    )
+                                    updateAdapter: modelData,
+                                    sensitiveLogging: false
+                                )
                                     .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
                                     .ToArray()
                         ).Message
@@ -951,9 +952,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 CreateCommandBatchPreparer(
-                                        updateAdapter: modelData,
-                                        sensitiveLogging: true
-                                    )
+                                    updateAdapter: modelData,
+                                    sensitiveLogging: true
+                                )
                                     .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
                                     .ToArray()
                         ).Message
@@ -972,9 +973,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                         Assert.Throws<InvalidOperationException>(
                             () =>
                                 CreateCommandBatchPreparer(
-                                        updateAdapter: modelData,
-                                        sensitiveLogging: false
-                                    )
+                                    updateAdapter: modelData,
+                                    sensitiveLogging: false
+                                )
                                     .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
                                     .ToArray()
                         ).Message
@@ -1005,9 +1006,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
             var modelData = new UpdateAdapter(stateManager);
 
             var commandBatches = CreateCommandBatchPreparer(
-                    updateAdapter: modelData,
-                    sensitiveLogging: true
-                )
+                updateAdapter: modelData,
+                sensitiveLogging: true
+            )
                 .BatchCommands(new[] { firstEntry }, modelData)
                 .ToArray();
 
@@ -1082,9 +1083,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
             var modelData = new UpdateAdapter(stateManager);
 
             var batches = CreateCommandBatchPreparer(
-                    updateAdapter: modelData,
-                    sensitiveLogging: false
-                )
+                updateAdapter: modelData,
+                sensitiveLogging: false
+            )
                 .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
                 .ToArray();
 
@@ -1113,9 +1114,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
             var modelData = new UpdateAdapter(stateManager);
 
             var commandBatches = CreateCommandBatchPreparer(
-                    updateAdapter: modelData,
-                    sensitiveLogging: true
-                )
+                updateAdapter: modelData,
+                sensitiveLogging: true
+            )
                 .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
                 .ToArray();
 
@@ -1166,9 +1167,9 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
             bool sensitiveLogging = false
         )
         {
-            modificationCommandBatchFactory ??=
-                RelationalTestHelpers.Instance.CreateContextServices()
-                    .GetRequiredService<IModificationCommandBatchFactory>();
+            modificationCommandBatchFactory ??= RelationalTestHelpers.Instance
+                .CreateContextServices()
+                .GetRequiredService<IModificationCommandBatchFactory>();
 
             var loggingOptions = new LoggingOptions();
             if (sensitiveLogging)

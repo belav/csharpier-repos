@@ -33,7 +33,8 @@ namespace LargeResponseApp
 
                     for (int i = 0; i < numChunks; i++)
                     {
-                        await context.Response.Body.WriteAsync(_chunk, 0, _chunkSize)
+                        await context.Response.Body
+                            .WriteAsync(_chunk, 0, _chunkSize)
                             .ConfigureAwait(false);
                     }
                 }
@@ -43,19 +44,16 @@ namespace LargeResponseApp
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
-                                {
-                                    options.Listen(IPAddress.Loopback, 5001);
-                                }
-                            )
-                            .UseContentRoot(Directory.GetCurrentDirectory())
-                            .UseStartup<Startup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(IPAddress.Loopback, 5001);
+                        }
+                    ).UseContentRoot(Directory.GetCurrentDirectory()).UseStartup<Startup>();
+                }
+            ).Build();
 
             return host.RunAsync();
         }

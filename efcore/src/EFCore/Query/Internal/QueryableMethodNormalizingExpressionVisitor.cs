@@ -123,9 +123,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     )
                     {
                         genericArguments[^1] = body.Type;
-                        var newIncludeMethod =
-                            methodCallExpression.Method.GetGenericMethodDefinition()
-                                .MakeGenericMethod(genericArguments);
+                        var newIncludeMethod = methodCallExpression.Method
+                            .GetGenericMethodDefinition()
+                            .MakeGenericMethod(genericArguments);
 
                         return Expression.Call(newIncludeMethod, source, lambda);
                     }
@@ -191,9 +191,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     {
                         throw new InvalidOperationException(
                             CoreStrings.QueryInvalidMaterializationType(
-                                new ExpressionPrinter().Print(
-                                    Expression.Lambda(expression, lambdaParameter)
-                                ),
+                                new ExpressionPrinter()
+                                    .Print(Expression.Lambda(expression, lambdaParameter)),
                                 expression.Type.ShortDisplayName()
                             )
                         );
@@ -331,7 +330,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             }
 
             foreach (
-                var method in typeof(Queryable).GetTypeInfo()
+                var method in typeof(Queryable)
+                    .GetTypeInfo()
                     .GetDeclaredMethods(methodCallExpression.Method.Name)
             )
             {
@@ -395,9 +395,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             innerArgument = toListMethodCallExpression.Arguments[0];
                         }
 
-                        var innerQueryableElementType = innerArgument.Type.TryGetElementType(
-                            typeof(IQueryable<>)
-                        );
+                        var innerQueryableElementType = innerArgument.Type
+                            .TryGetElementType(typeof(IQueryable<>));
                         if (
                             innerQueryableElementType == null
                             || innerQueryableElementType != genericType
@@ -516,16 +515,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     var inner = groupJoinMethod.Arguments[1];
                     var outerKeySelector = groupJoinMethod.Arguments[2].UnwrapLambdaFromQuote();
                     var innerKeySelector = groupJoinMethod.Arguments[3].UnwrapLambdaFromQuote();
-                    var groupJoinResultSelector = groupJoinMethod.Arguments[
-                        4
-                    ].UnwrapLambdaFromQuote();
+                    var groupJoinResultSelector = groupJoinMethod.Arguments[4]
+                        .UnwrapLambdaFromQuote();
 
-                    var selectManyCollectionSelector = methodCallExpression.Arguments[
-                        1
-                    ].UnwrapLambdaFromQuote();
-                    var selectManyResultSelector = methodCallExpression.Arguments[
-                        2
-                    ].UnwrapLambdaFromQuote();
+                    var selectManyCollectionSelector = methodCallExpression.Arguments[1]
+                        .UnwrapLambdaFromQuote();
+                    var selectManyResultSelector = methodCallExpression.Arguments[2]
+                        .UnwrapLambdaFromQuote();
 
                     var collectionSelectorBody = selectManyCollectionSelector.Body;
                     var defaultIfEmpty = false;
@@ -593,12 +589,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         {
                             // left join
                             return Expression.Call(
-                                QueryableExtensions.LeftJoinMethodInfo.MakeGenericMethod(
-                                    outer.Type.GetSequenceType(),
-                                    inner.Type.GetSequenceType(),
-                                    outerKeySelector.ReturnType,
-                                    resultSelector.ReturnType
-                                ),
+                                QueryableExtensions.LeftJoinMethodInfo
+                                    .MakeGenericMethod(
+                                        outer.Type.GetSequenceType(),
+                                        inner.Type.GetSequenceType(),
+                                        outerKeySelector.ReturnType,
+                                        resultSelector.ReturnType
+                                    ),
                                 outer,
                                 inner,
                                 outerKeySelector,
@@ -609,12 +606,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         // inner join
                         return Expression.Call(
-                            QueryableMethods.Join.MakeGenericMethod(
-                                outer.Type.GetSequenceType(),
-                                inner.Type.GetSequenceType(),
-                                outerKeySelector.ReturnType,
-                                resultSelector.ReturnType
-                            ),
+                            QueryableMethods.Join
+                                .MakeGenericMethod(
+                                    outer.Type.GetSequenceType(),
+                                    inner.Type.GetSequenceType(),
+                                    outerKeySelector.ReturnType,
+                                    resultSelector.ReturnType
+                                ),
                             outer,
                             inner,
                             outerKeySelector,
@@ -671,13 +669,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     var inner = groupJoinMethod.Arguments[1];
                     var outerKeySelector = groupJoinMethod.Arguments[2].UnwrapLambdaFromQuote();
                     var innerKeySelector = groupJoinMethod.Arguments[3].UnwrapLambdaFromQuote();
-                    var groupJoinResultSelector = groupJoinMethod.Arguments[
-                        4
-                    ].UnwrapLambdaFromQuote();
+                    var groupJoinResultSelector = groupJoinMethod.Arguments[4]
+                        .UnwrapLambdaFromQuote();
 
-                    var selectManyResultSelector = methodCallExpression.Arguments[
-                        1
-                    ].UnwrapLambdaFromQuote();
+                    var selectManyResultSelector = methodCallExpression.Arguments[1]
+                        .UnwrapLambdaFromQuote();
 
                     var groupJoinResultSelectorBody = groupJoinResultSelector.Body;
                     var defaultIfEmpty = false;
@@ -726,12 +722,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         {
                             // left join
                             return Expression.Call(
-                                QueryableExtensions.LeftJoinMethodInfo.MakeGenericMethod(
-                                    outer.Type.GetSequenceType(),
-                                    inner.Type.GetSequenceType(),
-                                    outerKeySelector.ReturnType,
-                                    resultSelector.ReturnType
-                                ),
+                                QueryableExtensions.LeftJoinMethodInfo
+                                    .MakeGenericMethod(
+                                        outer.Type.GetSequenceType(),
+                                        inner.Type.GetSequenceType(),
+                                        outerKeySelector.ReturnType,
+                                        resultSelector.ReturnType
+                                    ),
                                 outer,
                                 inner,
                                 outerKeySelector,
@@ -742,12 +739,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         // inner join
                         return Expression.Call(
-                            QueryableMethods.Join.MakeGenericMethod(
-                                outer.Type.GetSequenceType(),
-                                inner.Type.GetSequenceType(),
-                                outerKeySelector.ReturnType,
-                                resultSelector.ReturnType
-                            ),
+                            QueryableMethods.Join
+                                .MakeGenericMethod(
+                                    outer.Type.GetSequenceType(),
+                                    inner.Type.GetSequenceType(),
+                                    outerKeySelector.ReturnType,
+                                    resultSelector.ReturnType
+                                ),
                             outer,
                             inner,
                             outerKeySelector,

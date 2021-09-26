@@ -860,9 +860,7 @@ int i = 1;
 }
 }";
             var tree = SyntaxFactory.ParseSyntaxTree(code);
-            TestNormalize(
-                tree.GetCompilationUnitRoot(),
-                @"class c1
+            TestNormalize(tree.GetCompilationUnitRoot(), @"class c1
 {
   void goo()
   {
@@ -870,8 +868,7 @@ int i = 1;
       int i = 1;
     }
   }
-}".NormalizeLineEndings()
-            );
+}".NormalizeLineEndings());
         }
 
         [WorkItem(1079042, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1079042")]

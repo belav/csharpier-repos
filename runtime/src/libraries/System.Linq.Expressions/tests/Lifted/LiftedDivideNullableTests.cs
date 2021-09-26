@@ -301,7 +301,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(byte?)),
                     Expression.Constant(b, typeof(byte?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableByte")
                 )
             );
@@ -319,7 +320,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(char?)),
                     Expression.Constant(b, typeof(char?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableChar")
                 )
             );
@@ -337,7 +339,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(decimal?)),
                     Expression.Constant(b, typeof(decimal?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableDecimal")
                 )
             );
@@ -355,7 +358,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(double?)),
                     Expression.Constant(b, typeof(double?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableDouble")
                 )
             );
@@ -370,7 +374,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(float?)),
                     Expression.Constant(b, typeof(float?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableFloat")
                 )
             );
@@ -385,7 +390,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(int?)),
                     Expression.Constant(b, typeof(int?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableInt")
                 )
             );
@@ -405,7 +411,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(long?)),
                     Expression.Constant(b, typeof(long?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableLong")
                 )
             );
@@ -425,7 +432,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(sbyte?)),
                     Expression.Constant(b, typeof(sbyte?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableSByte")
                 )
             );
@@ -443,7 +451,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(short?)),
                     Expression.Constant(b, typeof(short?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableShort")
                 )
             );
@@ -461,7 +470,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(uint?)),
                     Expression.Constant(b, typeof(uint?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableUInt")
                 )
             );
@@ -479,7 +489,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(ulong?)),
                     Expression.Constant(b, typeof(ulong?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableULong")
                 )
             );
@@ -497,7 +508,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Divide(
                     Expression.Constant(a, typeof(ushort?)),
                     Expression.Constant(b, typeof(ushort?)),
-                    typeof(LiftedDivideNullableTests).GetTypeInfo()
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("DivideNullableUShort")
                 )
             );

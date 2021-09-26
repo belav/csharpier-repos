@@ -154,8 +154,8 @@ namespace Microsoft.CodeAnalysis.AddImports
             var globalImports = GetGlobalImports(compilation, generator);
             var containers = GetAllContainers(root, contextLocation);
             var filteredImports = newImports.Where(
-                    i => !HasExistingImport(i, containers, globalImports)
-                )
+                i => !HasExistingImport(i, containers, globalImports)
+            )
                 .ToArray();
 
             var externAliases = filteredImports.OfType<TExternSyntax>().ToArray();

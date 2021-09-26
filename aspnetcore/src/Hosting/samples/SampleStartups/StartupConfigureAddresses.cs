@@ -28,15 +28,14 @@ namespace SampleStartups
             var config = new ConfigurationBuilder().AddCommandLine(args).Build();
 
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseConfiguration(config)
-                            .UseKestrel()
-                            .UseStartup<StartupConfigureAddresses>()
-                            .UseUrls("http://localhost:5000", "http://localhost:5001");
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseConfiguration(config)
+                        .UseKestrel()
+                        .UseStartup<StartupConfigureAddresses>()
+                        .UseUrls("http://localhost:5000", "http://localhost:5001");
+                }
+            ).Build();
 
             return host.RunAsync();
         }

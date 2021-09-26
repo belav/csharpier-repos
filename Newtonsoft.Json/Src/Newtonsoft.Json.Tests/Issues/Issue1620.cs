@@ -74,12 +74,12 @@ namespace Newtonsoft.Json.Tests.Issues
             IFoo foo = mock.Object;
 
             List<MemberInfo> properties = ReflectionUtils.GetFieldsAndProperties(
-                    foo.GetType(),
-                    BindingFlags.Instance
-                        | BindingFlags.Static
-                        | BindingFlags.Public
-                        | BindingFlags.NonPublic
-                )
+                foo.GetType(),
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+            )
                 .ToList();
 
             Assert.AreEqual(1, properties.Count(p => p.Name == "Mock"));

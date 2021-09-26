@@ -75,26 +75,29 @@ namespace Microsoft.AspNetCore.Authentication
 
             builder.Services.Configure(TryAddJwtBearerSchemeMapping(scheme, jwtBearerScheme));
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IConfigureOptions<AzureADOptions>,
-                    AzureADOptionsConfiguration
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IConfigureOptions<AzureADOptions>,
+                        AzureADOptionsConfiguration
+                    >()
+                );
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IValidateOptions<AzureADOptions>,
-                    AzureADOptionsValidation
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IValidateOptions<AzureADOptions>,
+                        AzureADOptionsValidation
+                    >()
+                );
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IConfigureOptions<JwtBearerOptions>,
-                    AzureADJwtBearerOptionsConfiguration
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IConfigureOptions<JwtBearerOptions>,
+                        AzureADJwtBearerOptionsConfiguration
+                    >()
+                );
 
             builder.Services.Configure(scheme, configureOptions);
             builder.AddJwtBearer(jwtBearerScheme, o => { });
@@ -160,37 +163,42 @@ namespace Microsoft.AspNetCore.Authentication
                 }
             );
 
-            builder.Services.Configure(
-                TryAddOpenIDCookieSchemeMappings(scheme, openIdConnectScheme, cookieScheme)
-            );
+            builder.Services
+                .Configure(
+                    TryAddOpenIDCookieSchemeMappings(scheme, openIdConnectScheme, cookieScheme)
+                );
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IConfigureOptions<AzureADOptions>,
-                    AzureADOptionsConfiguration
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IConfigureOptions<AzureADOptions>,
+                        AzureADOptionsConfiguration
+                    >()
+                );
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IValidateOptions<AzureADOptions>,
-                    AzureADOptionsValidation
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IValidateOptions<AzureADOptions>,
+                        AzureADOptionsValidation
+                    >()
+                );
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IConfigureOptions<OpenIdConnectOptions>,
-                    AzureADOpenIdConnectOptionsConfiguration
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IConfigureOptions<OpenIdConnectOptions>,
+                        AzureADOpenIdConnectOptionsConfiguration
+                    >()
+                );
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IConfigureOptions<CookieAuthenticationOptions>,
-                    AzureADCookieOptionsConfiguration
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IConfigureOptions<CookieAuthenticationOptions>,
+                        AzureADCookieOptionsConfiguration
+                    >()
+                );
 
             builder.Services.Configure(scheme, configureOptions);
 
@@ -225,13 +233,14 @@ namespace Microsoft.AspNetCore.Authentication
                         );
                     }
                 }
-                o.JwtBearerMappings.Add(
-                    scheme,
-                    new AzureADSchemeOptions.JwtBearerSchemeMapping
-                    {
-                        JwtBearerScheme = jwtBearerScheme
-                    }
-                );
+                o.JwtBearerMappings
+                    .Add(
+                        scheme,
+                        new AzureADSchemeOptions.JwtBearerSchemeMapping
+                        {
+                            JwtBearerScheme = jwtBearerScheme
+                        }
+                    );
             }
             ;
         }
@@ -270,27 +279,27 @@ namespace Microsoft.AspNetCore.Authentication
                         );
                     }
                 }
-                o.OpenIDMappings.Add(
-                    scheme,
-                    new AzureADSchemeOptions.AzureADOpenIDSchemeMapping
-                    {
-                        OpenIdConnectScheme = openIdConnectScheme,
-                        CookieScheme = cookieScheme
-                    }
-                );
+                o.OpenIDMappings
+                    .Add(
+                        scheme,
+                        new AzureADSchemeOptions.AzureADOpenIDSchemeMapping
+                        {
+                            OpenIdConnectScheme = openIdConnectScheme,
+                            CookieScheme = cookieScheme
+                        }
+                    );
             }
             ;
         }
 
         private static void AddAdditionalMvcApplicationParts(IServiceCollection services)
         {
-            var mvcBuilder = services.AddMvc()
-                .ConfigureApplicationPartManager(
-                    apm =>
-                    {
-                        apm.FeatureProviders.Add(new AzureADAccountControllerFeatureProvider());
-                    }
-                );
+            var mvcBuilder = services.AddMvc().ConfigureApplicationPartManager(
+                apm =>
+                {
+                    apm.FeatureProviders.Add(new AzureADAccountControllerFeatureProvider());
+                }
+            );
         }
     }
 }

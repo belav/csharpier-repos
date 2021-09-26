@@ -108,9 +108,8 @@ namespace AutoMapper.Configuration
             ReverseMapExpression = reverseMap;
             if (_memberConfigurations != null)
             {
-                reverseMap.MemberConfigurations.AddRange(
-                    _memberConfigurations.Select(m => m.Reverse()).Where(m => m != null)
-                );
+                reverseMap.MemberConfigurations
+                    .AddRange(_memberConfigurations.Select(m => m.Reverse()).Where(m => m != null));
             }
             _features?.ReverseTo(reverseMap.Features);
         }
@@ -174,9 +173,8 @@ namespace AutoMapper.Configuration
                 )
             )
             {
-                var ignoredProperty = typeMap.DestinationSetters.SingleOrDefault(
-                    p => p.Name == ignoredPropertyName
-                );
+                var ignoredProperty = typeMap.DestinationSetters
+                    .SingleOrDefault(p => p.Name == ignoredPropertyName);
                 if (ignoredProperty != null)
                 {
                     IgnoreDestinationMember(ignoredProperty);
@@ -195,14 +193,15 @@ namespace AutoMapper.Configuration
                 foreach (var parameter in destCtor.Parameters)
                 {
                     sourceMembers.Clear();
-                    var canResolve = typeMap.Profile.MapDestinationPropertyToSource(
-                        typeMap.SourceTypeDetails,
-                        constructor.DeclaringType,
-                        parameter.ParameterType,
-                        parameter.Name,
-                        sourceMembers,
-                        IsReverseMap
-                    );
+                    var canResolve = typeMap.Profile
+                        .MapDestinationPropertyToSource(
+                            typeMap.SourceTypeDetails,
+                            constructor.DeclaringType,
+                            parameter.ParameterType,
+                            parameter.Name,
+                            sourceMembers,
+                            IsReverseMap
+                        );
                     if (!canResolve)
                     {
                         if (parameter.IsOptional || IsConfigured(parameter))
@@ -252,9 +251,11 @@ namespace AutoMapper.Configuration
         private void ReverseSourceMembers(TypeMap typeMap)
         {
             foreach (
-                var propertyMap in typeMap.PropertyMaps.Where(
-                    p => p.SourceMembers.Length > 1 && !p.SourceMembers.Any(s => s is MethodInfo)
-                )
+                var propertyMap in typeMap.PropertyMaps
+                    .Where(
+                        p =>
+                            p.SourceMembers.Length > 1 && !p.SourceMembers.Any(s => s is MethodInfo)
+                    )
             )
             {
                 var memberPath = new MemberPath(propertyMap.SourceMembers);
@@ -413,11 +414,8 @@ namespace AutoMapper.Configuration
             TDestination destination,
             ResolutionContext context
         ) =>
-            (
-                (IMappingAction<TSource, TDestination>)context.CreateInstance(
-                    typeof(TMappingAction)
-                )
-            ).Process(source, destination, context);
+            ((IMappingAction<TSource, TDestination>)context.CreateInstance(typeof(TMappingAction)))
+                .Process(source, destination, context);
 
         public TMappingExpression AfterMap(Action<TSource, TDestination> afterFunction)
         {

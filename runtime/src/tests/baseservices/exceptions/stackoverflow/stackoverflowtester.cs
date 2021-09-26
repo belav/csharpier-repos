@@ -81,9 +81,8 @@ namespace TestStackOverflow
             if (TestStackOverflow("stackoverflow", "smallframe main", out lines))
             {
                 if (
-                    !lines[lines.Count - 1].EndsWith(
-                        "at TestStackOverflow.Program.Main(System.String[])"
-                    )
+                    !lines[lines.Count - 1]
+                        .EndsWith("at TestStackOverflow.Program.Main(System.String[])")
                 )
                 {
                     Console.WriteLine("Missing \"Main\" method frame at the last line");
@@ -138,9 +137,8 @@ namespace TestStackOverflow
             if (TestStackOverflow("stackoverflow", "largeframe main", out lines))
             {
                 if (
-                    !lines[lines.Count - 1].EndsWith(
-                        "at TestStackOverflow.Program.Main(System.String[])"
-                    )
+                    !lines[lines.Count - 1]
+                        .EndsWith("at TestStackOverflow.Program.Main(System.String[])")
                 )
                 {
                     Console.WriteLine("Missing \"Main\" method frame at the last line");

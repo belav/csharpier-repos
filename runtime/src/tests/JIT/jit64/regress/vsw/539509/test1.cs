@@ -504,10 +504,8 @@ public struct BB
                             {
                                 param1 = param1;
                             }
-                            AA<sbyte, byte, uint, uint, long, bool>.Static3(
-                                TestEnum.blue,
-                                App.m_shFwd4
-                            );
+                            AA<sbyte, byte, uint, uint, long, bool>
+                                .Static3(TestEnum.blue, App.m_shFwd4);
                             param1[(5 ^ param6)][param6] = (new uint[2u, ((uint)(param6))]);
                         }
                     else
@@ -516,12 +514,13 @@ public struct BB
                         );
                     while (((bool)(((object)(param4)))))
                     {
-                        AA<sbyte, byte, uint, uint, long, bool>.Static2(
-                            ((ulong)(114.0)),
-                            ((short)(((long)(49.0f)))),
-                            ref App.m_uFwd12,
-                            ref App.m_gsbFwd13
-                        );
+                        AA<sbyte, byte, uint, uint, long, bool>
+                            .Static2(
+                                ((ulong)(114.0)),
+                                ((short)(((long)(49.0f)))),
+                                ref App.m_uFwd12,
+                                ref App.m_gsbFwd13
+                            );
                         try
                         {
                             if ((null == new AA<sbyte, byte, uint, uint, long, bool>()))
@@ -590,10 +589,8 @@ public class App
         try
         {
             Console.WriteLine("Testing AA::Method1");
-            ((AA<sbyte, byte, uint, uint, long, bool>)(((object)(new BB())))).Method1(
-                (new uint[12u, 115u, 95u, 13u]),
-                ref App.m_xFwd15
-            );
+            ((AA<sbyte, byte, uint, uint, long, bool>)(((object)(new BB()))))
+                .Method1((new uint[12u, 115u, 95u, 13u]), ref App.m_xFwd15);
         }
         catch (Exception x)
         {
@@ -611,12 +608,13 @@ public class App
         try
         {
             Console.WriteLine("Testing AA::Static2");
-            AA<sbyte, byte, uint, uint, long, bool>.Static2(
-                ((ulong)(((ushort)(10.0)))),
-                ((short)(70.0)),
-                ref App.m_uFwd12,
-                ref App.m_gsbFwd13
-            );
+            AA<sbyte, byte, uint, uint, long, bool>
+                .Static2(
+                    ((ulong)(((ushort)(10.0)))),
+                    ((short)(70.0)),
+                    ref App.m_uFwd12,
+                    ref App.m_gsbFwd13
+                );
         }
         catch (Exception x)
         {
@@ -625,10 +623,8 @@ public class App
         try
         {
             Console.WriteLine("Testing AA::Static3");
-            AA<sbyte, byte, uint, uint, long, bool>.Static3(
-                TestEnum.green,
-                ((short)(((sbyte)(69.0))))
-            );
+            AA<sbyte, byte, uint, uint, long, bool>
+                .Static3(TestEnum.green, ((short)(((sbyte)(69.0)))));
         }
         catch (Exception x)
         {
@@ -646,13 +642,14 @@ public class App
         try
         {
             Console.WriteLine("Testing AA::Static5");
-            AA<sbyte, byte, uint, uint, long, bool>.Static5(
-                ref App.m_aglFwd17,
-                ref App.m_achFwd18,
-                ((Array)(null)),
-                ref App.m_aulFwd19,
-                ref App.m_alFwd20
-            );
+            AA<sbyte, byte, uint, uint, long, bool>
+                .Static5(
+                    ref App.m_aglFwd17,
+                    ref App.m_achFwd18,
+                    ((Array)(null)),
+                    ref App.m_aulFwd19,
+                    ref App.m_alFwd20
+                );
         }
         catch (Exception x)
         {
@@ -661,14 +658,15 @@ public class App
         try
         {
             Console.WriteLine("Testing BB::Method1");
-            new BB().Method1(
-                ref App.m_auFwd21,
-                ref App.m_axFwd22,
-                ref App.m_achFwd23,
-                new AA<sbyte, byte, uint, uint, long, bool>(),
-                ref App.m_axFwd24,
-                87
-            );
+            new BB()
+                .Method1(
+                    ref App.m_auFwd21,
+                    ref App.m_axFwd22,
+                    ref App.m_achFwd23,
+                    new AA<sbyte, byte, uint, uint, long, bool>(),
+                    ref App.m_axFwd24,
+                    87
+                );
         }
         catch (Exception x)
         {

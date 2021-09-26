@@ -78,8 +78,8 @@ namespace ApiExplorerWebSite
                     parameterData.RouteInfo = new ApiExplorerParameterRouteInfo()
                     {
                         ConstraintTypes = parameter.RouteInfo.Constraints?.Select(
-                                c => c.GetType().Name
-                            )
+                            c => c.GetType().Name
+                        )
                             .ToArray(),
                         DefaultValue = parameter.RouteInfo.DefaultValue,
                         IsOptional = parameter.RouteInfo.IsOptional,
@@ -91,13 +91,14 @@ namespace ApiExplorerWebSite
 
             foreach (var request in description.SupportedRequestFormats)
             {
-                data.SupportedRequestFormats.Add(
-                    new ApiExplorerRequestFormat
-                    {
-                        FormatterType = request.Formatter?.GetType().FullName,
-                        MediaType = request.MediaType,
-                    }
-                );
+                data.SupportedRequestFormats
+                    .Add(
+                        new ApiExplorerRequestFormat
+                        {
+                            FormatterType = request.Formatter?.GetType().FullName,
+                            MediaType = request.MediaType,
+                        }
+                    );
             }
 
             foreach (var response in description.SupportedResponseTypes)
@@ -111,13 +112,14 @@ namespace ApiExplorerWebSite
 
                 foreach (var responseFormat in response.ApiResponseFormats)
                 {
-                    responseType.ResponseFormats.Add(
-                        new ApiExplorerResponseFormat()
-                        {
-                            FormatterType = responseFormat.Formatter?.GetType().FullName,
-                            MediaType = responseFormat.MediaType
-                        }
-                    );
+                    responseType.ResponseFormats
+                        .Add(
+                            new ApiExplorerResponseFormat()
+                            {
+                                FormatterType = responseFormat.Formatter?.GetType().FullName,
+                                MediaType = responseFormat.MediaType
+                            }
+                        );
                 }
 
                 data.SupportedResponseTypes.Add(responseType);

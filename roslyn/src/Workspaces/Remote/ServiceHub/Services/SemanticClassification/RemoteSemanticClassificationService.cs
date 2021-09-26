@@ -42,19 +42,19 @@ namespace Microsoft.CodeAnalysis.Remote
                     var document =
                         solution.GetDocument(documentId)
                         ?? await solution.GetSourceGeneratedDocumentAsync(
-                                documentId,
-                                cancellationToken
-                            )
+                            documentId,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     Contract.ThrowIfNull(document);
 
                     using var _ = ArrayBuilder<ClassifiedSpan>.GetInstance(out var temp);
                     await AbstractClassificationService.AddSemanticClassificationsInCurrentProcessAsync(
-                            document,
-                            span,
-                            temp,
-                            cancellationToken
-                        )
+                        document,
+                        span,
+                        temp,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return SerializableClassifiedSpans.Dehydrate(temp.ToImmutable());

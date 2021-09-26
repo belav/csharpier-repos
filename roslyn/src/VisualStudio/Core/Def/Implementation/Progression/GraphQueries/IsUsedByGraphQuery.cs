@@ -33,20 +33,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             )
             {
                 var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
-                        solution,
-                        context.InputNodes,
-                        cancellationToken
-                    )
+                    solution,
+                    context.InputNodes,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var node in context.InputNodes)
                 {
                     var symbol = graphBuilder.GetSymbol(node);
                     var references = await SymbolFinder.FindReferencesAsync(
-                            symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     foreach (var reference in references)
@@ -54,9 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         var referencedSymbol = reference.Definition;
                         var projectId = graphBuilder.GetContextProject(node).Id;
 
-                        var allLocations = referencedSymbol.Locations.Concat(
-                                reference.Locations.Select(r => r.Location)
-                            )
+                        var allLocations = referencedSymbol.Locations
+                            .Concat(reference.Locations.Select(r => r.Location))
                             .Where(l => l != null && l.IsInSource);
 
                         foreach (var location in allLocations)
@@ -90,25 +89,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             var span = location.GetLineSpan();
             var lineText = location.SourceTree.GetText(cancellationToken).Lines[
                 span.StartLinePosition.Line
-            ].ToString();
+            ]
+                .ToString();
             var filePath = location.SourceTree.FilePath;
             var sourceLocation = new SourceLocation(
                 filePath,
                 new Position(span.StartLinePosition.Line, span.StartLinePosition.Character),
                 new Position(span.EndLinePosition.Line, span.EndLinePosition.Character)
             );
-            var label = string.Format(
-                "{0} ({1}, {2}): {3}",
-                System.IO.Path.GetFileName(filePath),
-                span.StartLinePosition.Line + 1,
-                span.StartLinePosition.Character + 1,
-                lineText.TrimStart()
-            );
-            var locationNode = context.Graph.Nodes.GetOrCreate(
-                sourceLocation.CreateGraphNodeId(),
-                label,
-                CodeNodeCategories.SourceLocation
-            );
+            var label = string
+                .Format(
+                    "{0} ({1}, {2}): {3}",
+                    System.IO.Path.GetFileName(filePath),
+                    span.StartLinePosition.Line + 1,
+                    span.StartLinePosition.Character + 1,
+                    lineText.TrimStart()
+                );
+            var locationNode = context.Graph.Nodes
+                .GetOrCreate(
+                    sourceLocation.CreateGraphNodeId(),
+                    label,
+                    CodeNodeCategories.SourceLocation
+                );
             locationNode[CodeNodeProperties.SourceLocation] = sourceLocation;
             locationNode[RoslynGraphProperties.ContextProjectId] = projectId;
             locationNode[DgmlNodeProperties.Icon] = IconHelper.GetIconName(

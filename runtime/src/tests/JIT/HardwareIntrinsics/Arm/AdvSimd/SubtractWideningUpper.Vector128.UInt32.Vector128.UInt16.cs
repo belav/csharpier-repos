@@ -355,7 +355,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.SubtractWideningUpper),
                     new Type[] { typeof(Vector128<UInt32>), typeof(Vector128<UInt16>) }
                 )
@@ -376,7 +377,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.SubtractWideningUpper),
                     new Type[] { typeof(Vector128<UInt32>), typeof(Vector128<UInt16>) }
                 )
@@ -637,14 +639,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.SubtractWideningUpper)}<UInt32>(Vector128<UInt32>, Vector128<UInt16>): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.SubtractWideningUpper)}<UInt32>(Vector128<UInt32>, Vector128<UInt16>): {method} failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

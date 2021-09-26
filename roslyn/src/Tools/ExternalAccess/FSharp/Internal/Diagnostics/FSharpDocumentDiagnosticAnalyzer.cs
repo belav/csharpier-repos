@@ -89,8 +89,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
             CancellationToken cancellationToken
         )
         {
-            var analyzer =
-                document.Project.LanguageServices.GetService<FSharpDocumentDiagnosticAnalyzerService>();
+            var analyzer = document.Project.LanguageServices
+                .GetService<FSharpDocumentDiagnosticAnalyzerService>();
             if (analyzer == null)
             {
                 return Task.FromResult(ImmutableArray<Diagnostic>.Empty);
@@ -104,8 +104,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
             CancellationToken cancellationToken
         )
         {
-            var analyzer =
-                document.Project.LanguageServices.GetService<FSharpDocumentDiagnosticAnalyzerService>();
+            var analyzer = document.Project.LanguageServices
+                .GetService<FSharpDocumentDiagnosticAnalyzerService>();
             if (analyzer == null)
             {
                 return Task.FromResult(ImmutableArray<Diagnostic>.Empty);

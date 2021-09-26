@@ -91,9 +91,8 @@ namespace DebuggerTests
             );
 
             var scope_id = pause_location["callFrames"][0]["callFrameId"].Value<string>();
-            var scope = int.Parse(
-                scope_id.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[2]
-            );
+            var scope = int
+                .Parse(scope_id.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[2]);
 
             var var_ids = new[]
             {

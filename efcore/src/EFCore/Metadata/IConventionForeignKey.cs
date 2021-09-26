@@ -311,7 +311,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <returns> The skip navigations using this foreign key. </returns>
         new IEnumerable<IConventionSkipNavigation> GetReferencingSkipNavigations() =>
-            ((IReadOnlyForeignKey)this).GetReferencingSkipNavigations()
+            ((IReadOnlyForeignKey)this)
+                .GetReferencingSkipNavigations()
                 .Cast<IConventionSkipNavigation>();
 
         /// <summary>

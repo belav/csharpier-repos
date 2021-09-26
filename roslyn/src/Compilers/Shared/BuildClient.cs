@@ -105,9 +105,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             {
                 // Register encodings for console
                 // https://github.com/dotnet/roslyn/issues/10785
-                System.Text.Encoding.RegisterProvider(
-                    System.Text.CodePagesEncodingProvider.Instance
-                );
+                System.Text.Encoding
+                    .RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             }
 
             var client = new BuildClient(language, compileFunc, logger);
@@ -213,16 +212,15 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 ProfileOptimization.SetProfileRoot(profileRoot);
                 ProfileOptimization.StartProfile(profileName);
 #else
-                AssemblyLoadContext.Default.SetProfileOptimizationRoot(profileRoot);
+                AssemblyLoadContext.Default
+                    .SetProfileOptimizationRoot(profileRoot);
                 AssemblyLoadContext.Default.StartProfileOptimization(profileName);
 #endif
             }
             catch (Exception e)
             {
-                errorMessage = string.Format(
-                    CodeAnalysisResources.ExceptionEnablingMulticoreJit,
-                    e.Message
-                );
+                errorMessage = string
+                    .Format(CodeAnalysisResources.ExceptionEnablingMulticoreJit, e.Message);
                 return false;
             }
 
@@ -452,9 +450,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
             // The first argument will be the executable name hence we skip it.
             return CommandLineParser.SplitCommandLineIntoArguments(
-                    commandLine,
-                    removeHashComments: false
-                )
+                commandLine,
+                removeHashComments: false
+            )
                 .Skip(1);
         }
     }

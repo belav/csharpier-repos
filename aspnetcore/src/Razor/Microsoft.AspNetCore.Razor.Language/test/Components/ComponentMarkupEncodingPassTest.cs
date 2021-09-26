@@ -21,9 +21,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 {
                     if (b.Features.OfType<ComponentMarkupEncodingPass>().Any())
                     {
-                        b.Features.Remove(
-                            b.Features.OfType<ComponentMarkupEncodingPass>().Single()
-                        );
+                        b.Features
+                            .Remove(b.Features.OfType<ComponentMarkupEncodingPass>().Single());
                     }
                 }
             );
@@ -222,7 +221,8 @@ The time is "
             }
 
             var document = codeDocument.GetDocumentIntermediateNode();
-            Engine.Features.OfType<ComponentDocumentClassifierPass>()
+            Engine.Features
+                .OfType<ComponentDocumentClassifierPass>()
                 .Single()
                 .Execute(codeDocument, document);
             return document;

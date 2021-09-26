@@ -28,9 +28,10 @@ namespace Microsoft.Extensions.Logging
             builder.AddConsoleFormatter<SystemdConsoleFormatter, ConsoleFormatterOptions>();
             builder.AddConsoleFormatter<SimpleConsoleFormatter, SimpleConsoleFormatterOptions>();
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<ILoggerProvider, ConsoleLoggerProvider>()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<ILoggerProvider, ConsoleLoggerProvider>()
+                );
             LoggerProviderOptions.RegisterProviderOptions<
                 ConsoleLoggerOptions,
                 ConsoleLoggerProvider
@@ -164,21 +165,22 @@ namespace Microsoft.Extensions.Logging
         {
             builder.AddConfiguration();
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<ConsoleFormatter, TFormatter>()
-            );
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IConfigureOptions<TOptions>,
-                    ConsoleLoggerFormatterConfigureOptions<TFormatter, TOptions>
-                >()
-            );
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IOptionsChangeTokenSource<TOptions>,
-                    ConsoleLoggerFormatterOptionsChangeTokenSource<TFormatter, TOptions>
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(ServiceDescriptor.Singleton<ConsoleFormatter, TFormatter>());
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IConfigureOptions<TOptions>,
+                        ConsoleLoggerFormatterConfigureOptions<TFormatter, TOptions>
+                    >()
+                );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IOptionsChangeTokenSource<TOptions>,
+                        ConsoleLoggerFormatterOptionsChangeTokenSource<TFormatter, TOptions>
+                    >()
+                );
 
             return builder;
         }

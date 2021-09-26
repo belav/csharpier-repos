@@ -64,43 +64,42 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             // NOTE: This task has CancellationToken.None specified, since it must complete no matter what
             // so the callback is appropriately notified that the search has terminated.
             Task.Run(
-                    async () =>
+                async () =>
+                {
+                    // The error message to show if we had an error. null will mean we succeeded.
+                    string completionErrorMessage = null;
+                    try
                     {
-                        // The error message to show if we had an error. null will mean we succeeded.
-                        string completionErrorMessage = null;
-                        try
+                        await SearchAsync(
+                            workspace,
+                            searchScope,
+                            callback,
+                            _cancellationSource.Token
+                        )
+                            .ConfigureAwait(false);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        completionErrorMessage = EditorFeaturesResources.Canceled;
+                    }
+                    catch (Exception e) when (FatalError.ReportAndCatch(e))
+                    {
+                        completionErrorMessage = e.Message;
+                    }
+                    finally
+                    {
+                        if (completionErrorMessage != null)
                         {
-                            await SearchAsync(
-                                    workspace,
-                                    searchScope,
-                                    callback,
-                                    _cancellationSource.Token
-                                )
-                                .ConfigureAwait(false);
+                            callback.SearchFailed(completionErrorMessage);
                         }
-                        catch (OperationCanceledException)
+                        else
                         {
-                            completionErrorMessage = EditorFeaturesResources.Canceled;
+                            callback.SearchSucceeded();
                         }
-                        catch (Exception e) when (FatalError.ReportAndCatch(e))
-                        {
-                            completionErrorMessage = e.Message;
-                        }
-                        finally
-                        {
-                            if (completionErrorMessage != null)
-                            {
-                                callback.SearchFailed(completionErrorMessage);
-                            }
-                            else
-                            {
-                                callback.SearchSucceeded();
-                            }
-                        }
-                    },
-                    CancellationToken.None
-                )
-                .CompletesAsyncOperation(asyncToken);
+                    }
+                },
+                CancellationToken.None
+            ).CompletesAsyncOperation(asyncToken);
         }
 
         private async Task SearchAsync(
@@ -115,10 +114,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             if (project == null)
             {
                 throw new Exception(
-                    string.Format(
-                        WorkspacesResources.The_symbol_0_cannot_be_located_within_the_current_solution,
-                        SymbolName
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources.The_symbol_0_cannot_be_located_within_the_current_solution,
+                            SymbolName
+                        )
                 );
             }
 
@@ -131,10 +131,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             if (symbol == null)
             {
                 throw new Exception(
-                    string.Format(
-                        WorkspacesResources.The_symbol_0_cannot_be_located_within_the_current_solution,
-                        SymbolName
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources.The_symbol_0_cannot_be_located_within_the_current_solution,
+                            SymbolName
+                        )
                 );
             }
 
@@ -154,8 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
                 || scope == CallHierarchySearchScope.CurrentProject
             )
             {
-                var documentTrackingService =
-                    project.Solution.Workspace.Services.GetService<IDocumentTrackingService>();
+                var documentTrackingService = project.Solution.Workspace.Services
+                    .GetService<IDocumentTrackingService>();
                 if (documentTrackingService == null)
                 {
                     return null;
@@ -208,23 +209,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
                     if (caller.CallingSymbol.Kind == SymbolKind.Field)
                     {
                         initializerLocations.AddRange(
-                            caller.Locations.Select(
-                                l => new CallHierarchyDetail(l, project.Solution.Workspace)
-                            )
+                            caller.Locations
+                                .Select(l => new CallHierarchyDetail(l, project.Solution.Workspace))
                         );
                     }
                     else
                     {
-                        var callingProject = project.Solution.GetProject(
-                            caller.CallingSymbol.ContainingAssembly,
-                            cancellationToken
-                        );
+                        var callingProject = project.Solution
+                            .GetProject(caller.CallingSymbol.ContainingAssembly, cancellationToken);
                         var item = await Provider.CreateItemAsync(
-                                caller.CallingSymbol,
-                                callingProject,
-                                caller.Locations,
-                                cancellationToken
-                            )
+                            caller.CallingSymbol,
+                            callingProject,
+                            caller.Locations,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         callback.AddResult(item);
                         cancellationToken.ThrowIfCancellationRequested();

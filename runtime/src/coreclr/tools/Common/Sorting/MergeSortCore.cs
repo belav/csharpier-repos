@@ -57,13 +57,8 @@ namespace ILCompiler.Sorting.Implementation
 
                 T[] localCopyOfHalfOfArray = new T[halfLen];
                 accessor.Copy(arrayToSort, index, localCopyOfHalfOfArray, 0, halfLen);
-                await MergeSortCore<
-                    T,
-                    T[],
-                    ArrayAccessor<T>,
-                    TComparer,
-                    TCompareAsEqualAction
-                >.ParallelSort(localCopyOfHalfOfArray, 0, halfLen, comparer);
+                await MergeSortCore<T, T[], ArrayAccessor<T>, TComparer, TCompareAsEqualAction>
+                    .ParallelSort(localCopyOfHalfOfArray, 0, halfLen, comparer);
                 await rightSortTask;
                 Merge(localCopyOfHalfOfArray, arrayToSort, index, halfLen, length, comparer);
             }

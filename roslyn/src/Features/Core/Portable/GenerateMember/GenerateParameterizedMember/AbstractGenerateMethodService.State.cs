@@ -40,11 +40,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 var state = new State();
                 if (
                     !await state.TryInitializeMethodAsync(
-                            service,
-                            document,
-                            interfaceNode,
-                            cancellationToken
-                        )
+                        service,
+                        document,
+                        interfaceNode,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -204,8 +204,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 }
                 else
                 {
-                    var typeInference =
-                        semanticDocument.Document.GetLanguageService<ITypeInferenceService>();
+                    var typeInference = semanticDocument.Document
+                        .GetLanguageService<ITypeInferenceService>();
                     var delegateType = typeInference.InferDelegateType(
                         semanticModel,
                         SimpleNameOrMemberAccessExpression,
@@ -293,8 +293,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     return false;
                 }
 
-                var semanticFacts =
-                    semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
+                var semanticFacts = semanticDocument.Document
+                    .GetLanguageService<ISemanticFactsService>();
                 IsWrittenTo = semanticFacts.IsWrittenTo(
                     semanticModel,
                     InvocationExpressionOpt ?? SimpleNameOrMemberAccessExpression,

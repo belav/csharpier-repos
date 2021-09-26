@@ -84,12 +84,13 @@ namespace Microsoft.AspNetCore.Mvc
             );
 
             Assert.Equal(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    "The argument '{0}' is invalid. "
-                        + "Media types which match all types or match all subtypes are not supported.",
-                    invalidContentType
-                ),
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        "The argument '{0}' is invalid. "
+                            + "Media types which match all types or match all subtypes are not supported.",
+                        invalidContentType
+                    ),
                 ex.Message
             );
         }

@@ -144,12 +144,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         }
 
         private static readonly SymbolDisplayFormat _displayFormat =
-            SymbolDisplayFormat.TestFormatWithConstraints.WithMemberOptions(
-                SymbolDisplayMemberOptions.IncludeParameters
-                    | SymbolDisplayMemberOptions.IncludeType
-                    | SymbolDisplayMemberOptions.IncludeRef
-                    | SymbolDisplayMemberOptions.IncludeExplicitInterface
-            );
+            SymbolDisplayFormat.TestFormatWithConstraints
+                .WithMemberOptions(
+                    SymbolDisplayMemberOptions.IncludeParameters
+                        | SymbolDisplayMemberOptions.IncludeType
+                        | SymbolDisplayMemberOptions.IncludeRef
+                        | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                );
 
         private void ReportContainingSymbols(Symbol symbol)
         {

@@ -39,10 +39,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     resi = Convert.ToUInt32(
-                        typeof(Popcnt).GetMethod(
-                                nameof(Popcnt.PopCount),
-                                new Type[] { si.GetType() }
-                            )
+                        typeof(Popcnt)
+                            .GetMethod(nameof(Popcnt.PopCount), new Type[] { si.GetType() })
                             .Invoke(null, new object[] { si })
                     );
                     if (resi != intPopcntTable[i].res)

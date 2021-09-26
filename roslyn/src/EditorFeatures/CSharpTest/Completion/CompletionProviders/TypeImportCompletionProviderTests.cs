@@ -37,10 +37,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         protected override OptionSet WithChangedOptions(OptionSet options)
         {
             return options.WithChangedOption(
-                    CompletionOptions.ShowItemsFromUnimportedNamespaces,
-                    LanguageNames.CSharp,
-                    ShowImportCompletionItemsOptionValue
-                )
+                CompletionOptions.ShowItemsFromUnimportedNamespaces,
+                LanguageNames.CSharp,
+                ShowImportCompletionItemsOptionValue
+            )
                 .WithChangedOption(
                     CompletionServiceOptions.IsExpandedCompletion,
                     IsExpandedCompletion
@@ -2105,9 +2105,9 @@ namespace Foo
                 </Workspace> ";
 
             var completionList = await GetCompletionListAsync(
-                    markup,
-                    workspaceKind: WorkspaceKind.Interactive
-                )
+                markup,
+                workspaceKind: WorkspaceKind.Interactive
+            )
                 .ConfigureAwait(false);
             Assert.NotEmpty(completionList.Items);
         }
@@ -2144,8 +2144,8 @@ namespace Baz
         {
             var hashset = new HashSet<string>(expectedTypesInRelativeOrder);
             var actualTypesInRelativeOrder = allCompletionItems.Where(
-                    item => hashset.Contains(item.DisplayText)
-                )
+                item => hashset.Contains(item.DisplayText)
+            )
                 .Select(item => item.DisplayText)
                 .ToImmutableArray();
 

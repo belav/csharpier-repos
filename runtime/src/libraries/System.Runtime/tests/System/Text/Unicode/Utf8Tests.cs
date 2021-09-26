@@ -38,9 +38,9 @@ namespace System.Text.Unicode.Tests
 
         // All valid scalars [ U+0000 .. U+D7FF ] and [ U+E000 .. U+10FFFF ].
         private static readonly IEnumerable<Rune> s_allValidScalars = Enumerable.Range(
-                0x0000,
-                0xD800
-            )
+            0x0000,
+            0xD800
+        )
             .Concat(Enumerable.Range(0xE000, 0x110000 - 0xE000))
             .Select(value => new Rune(value));
 

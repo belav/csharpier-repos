@@ -47,17 +47,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
         )
         {
             var implementations = await SymbolFinder.FindImplementationsAsync(
-                    symbol,
-                    project.Solution,
-                    cancellationToken: cancellationToken
-                )
+                symbol,
+                project.Solution,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             foreach (var implementation in implementations)
             {
-                var sourceLocations = implementation.DeclaringSyntaxReferences.Select(
-                        d => project.Solution.GetDocument(d.SyntaxTree)
-                    )
+                var sourceLocations = implementation.DeclaringSyntaxReferences
+                    .Select(d => project.Solution.GetDocument(d.SyntaxTree))
                     .WhereNotNull();
                 var bestLocation = sourceLocations.FirstOrDefault(
                     d => documents == null || documents.Contains(d)
@@ -65,11 +64,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
                 if (bestLocation != null)
                 {
                     var item = await Provider.CreateItemAsync(
-                            implementation,
-                            bestLocation.Project,
-                            SpecializedCollections.EmptyEnumerable<Location>(),
-                            cancellationToken
-                        )
+                        implementation,
+                        bestLocation.Project,
+                        SpecializedCollections.EmptyEnumerable<Location>(),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     callback.AddResult(item);
                     cancellationToken.ThrowIfCancellationRequested();

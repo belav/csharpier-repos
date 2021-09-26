@@ -171,10 +171,11 @@ namespace Microsoft.CodeAnalysis
             if (ProjectHasOpenDocuments(projectId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_still_contains_open_documents,
-                        this.GetProjectName(projectId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_still_contains_open_documents,
+                            this.GetProjectName(projectId)
+                        )
                 );
             }
         }
@@ -363,10 +364,11 @@ namespace Microsoft.CodeAnalysis
             if (this.IsDocumentOpen(documentId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_still_open,
-                        this.GetDocumentName(documentId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_still_open,
+                            this.GetDocumentName(documentId)
+                        )
                 );
             }
         }
@@ -376,10 +378,11 @@ namespace Microsoft.CodeAnalysis
             if (!this.IsDocumentOpen(documentId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_not_open,
-                        this.GetDocumentName(documentId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_not_open,
+                            this.GetDocumentName(documentId)
+                        )
                 );
             }
         }

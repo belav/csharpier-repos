@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetRequiredSyntaxRootAsync(context.CancellationToken)
+            var root = await context.Document
+                .GetRequiredSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var syntaxFacts = context.Document.GetRequiredLanguageService<ISyntaxFactsService>();
             foreach (var diagnostic in context.Diagnostics)
@@ -113,7 +114,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 }
                 else
                 {
-                    node = editor.OriginalRoot.FindTrivia(location.SourceSpan.Start)
+                    node = editor.OriginalRoot
+                        .FindTrivia(location.SourceSpan.Start)
                         .GetStructure()!;
                 }
 

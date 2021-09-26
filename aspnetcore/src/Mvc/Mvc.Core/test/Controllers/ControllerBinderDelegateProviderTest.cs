@@ -35,15 +35,16 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.Parameters.Add(
-                new ControllerParameterDescriptor
-                {
-                    Name = "foo",
-                    ParameterType = typeof(object),
-                    BindingInfo = new BindingInfo(),
-                    ParameterInfo = ParameterInfos.BindNeverParameterInfo
-                }
-            );
+            actionDescriptor.Parameters
+                .Add(
+                    new ControllerParameterDescriptor
+                    {
+                        Name = "foo",
+                        ParameterType = typeof(object),
+                        BindingInfo = new BindingInfo(),
+                        ParameterInfo = ParameterInfos.BindNeverParameterInfo
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
             var arguments = new Dictionary<string, object>(StringComparer.Ordinal);
@@ -93,13 +94,14 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.BoundProperties.Add(
-                new ParameterDescriptor
-                {
-                    Name = nameof(TestController.RequiredButBindNeverProperty),
-                    ParameterType = typeof(object)
-                }
-            );
+            actionDescriptor.BoundProperties
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = nameof(TestController.RequiredButBindNeverProperty),
+                        ParameterType = typeof(object)
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
             var arguments = new Dictionary<string, object>(StringComparer.Ordinal);
@@ -150,14 +152,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.Parameters.Add(
-                new ParameterDescriptor
-                {
-                    Name = "foo",
-                    ParameterType = typeof(object),
-                    BindingInfo = new BindingInfo(),
-                }
-            );
+            actionDescriptor.Parameters
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = "foo",
+                        ParameterType = typeof(object),
+                        BindingInfo = new BindingInfo(),
+                    }
+                );
 
             var binder = new Mock<IModelBinder>();
             binder.Setup(b => b.BindModelAsync(It.IsAny<DefaultModelBindingContext>()))
@@ -191,14 +194,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.Parameters.Add(
-                new ParameterDescriptor
-                {
-                    Name = "foo",
-                    ParameterType = typeof(object),
-                    BindingInfo = new BindingInfo(),
-                }
-            );
+            actionDescriptor.Parameters
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = "foo",
+                        ParameterType = typeof(object),
+                        BindingInfo = new BindingInfo(),
+                    }
+                );
 
             var binder = new Mock<IModelBinder>();
             binder.Setup(b => b.BindModelAsync(It.IsAny<DefaultModelBindingContext>()))
@@ -232,28 +236,27 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.Parameters.Add(
-                new ParameterDescriptor
-                {
-                    Name = "foo",
-                    ParameterType = typeof(string),
-                    BindingInfo = new BindingInfo(),
-                }
-            );
+            actionDescriptor.Parameters
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = "foo",
+                        ParameterType = typeof(string),
+                        BindingInfo = new BindingInfo(),
+                    }
+                );
 
             var value = "Hello world";
             var metadataProvider = new EmptyModelMetadataProvider();
 
             var binder = new Mock<IModelBinder>();
-            binder.Setup(b => b.BindModelAsync(It.IsAny<DefaultModelBindingContext>()))
-                .Callback(
-                    (ModelBindingContext context) =>
-                    {
-                        context.ModelMetadata = metadataProvider.GetMetadataForType(typeof(string));
-                        context.Result = ModelBindingResult.Success(value);
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            binder.Setup(b => b.BindModelAsync(It.IsAny<DefaultModelBindingContext>())).Callback(
+                (ModelBindingContext context) =>
+                {
+                    context.ModelMetadata = metadataProvider.GetMetadataForType(typeof(string));
+                    context.Result = ModelBindingResult.Success(value);
+                }
+            ).Returns(Task.CompletedTask);
 
             var factory = GetModelBinderFactory(binder.Object);
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -284,14 +287,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.Parameters.Add(
-                new ControllerParameterDescriptor
-                {
-                    Name = "foo",
-                    ParameterType = typeof(object),
-                    ParameterInfo = ParameterInfos.NoAttributesParameterInfo
-                }
-            );
+            actionDescriptor.Parameters
+                .Add(
+                    new ControllerParameterDescriptor
+                    {
+                        Name = "foo",
+                        ParameterType = typeof(object),
+                        ParameterInfo = ParameterInfos.NoAttributesParameterInfo
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
 
@@ -307,8 +311,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                 Mock.Of<ICompositeMetadataDetailsProvider>()
             );
             mockMetadataProvider.Setup(
-                    p => p.GetMetadataForParameter(ParameterInfos.NoAttributesParameterInfo)
-                )
+                p => p.GetMetadataForParameter(ParameterInfos.NoAttributesParameterInfo)
+            )
                 .Returns(modelMetadata.Object);
 
             var parameterBinder = GetParameterBinder(mockMetadataProvider.Object, factory);
@@ -341,9 +345,14 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.Parameters.Add(
-                new ControllerParameterDescriptor { Name = "foo", ParameterType = typeof(Person) }
-            );
+            actionDescriptor.Parameters
+                .Add(
+                    new ControllerParameterDescriptor
+                    {
+                        Name = "foo",
+                        ParameterType = typeof(Person)
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
 
@@ -389,14 +398,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.Parameters.Add(
-                new ControllerParameterDescriptor
-                {
-                    Name = "foo",
-                    ParameterType = typeof(object),
-                    ParameterInfo = ParameterInfos.CustomValidationParameterInfo
-                }
-            );
+            actionDescriptor.Parameters
+                .Add(
+                    new ControllerParameterDescriptor
+                    {
+                        Name = "foo",
+                        ParameterType = typeof(object),
+                        ParameterInfo = ParameterInfos.CustomValidationParameterInfo
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
 
@@ -442,14 +452,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.Parameters.Add(
-                new ParameterDescriptor
-                {
-                    Name = "foo",
-                    ParameterType = typeof(object),
-                    BindingInfo = new BindingInfo(),
-                }
-            );
+            actionDescriptor.Parameters
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = "foo",
+                        ParameterType = typeof(object),
+                        BindingInfo = new BindingInfo(),
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
             var arguments = new Dictionary<string, object>(StringComparer.Ordinal);
@@ -492,13 +503,14 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.BoundProperties.Add(
-                new ParameterDescriptor
-                {
-                    Name = nameof(TestController.ValidatedProperty),
-                    ParameterType = typeof(string),
-                }
-            );
+            actionDescriptor.BoundProperties
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = nameof(TestController.ValidatedProperty),
+                        ParameterType = typeof(string),
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
             var controller = new TestController();
@@ -546,13 +558,14 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.BoundProperties.Add(
-                new ParameterDescriptor
-                {
-                    Name = nameof(TestController.ValidatedProperty),
-                    ParameterType = typeof(string),
-                }
-            );
+            actionDescriptor.BoundProperties
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = nameof(TestController.ValidatedProperty),
+                        ParameterType = typeof(string),
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
             var controller = new TestController();
@@ -599,13 +612,14 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.BoundProperties.Add(
-                new ParameterDescriptor
-                {
-                    Name = nameof(TestController.StringProperty),
-                    ParameterType = typeof(string),
-                }
-            );
+            actionDescriptor.BoundProperties
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = nameof(TestController.StringProperty),
+                        ParameterType = typeof(string),
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
             var controller = new TestController();
@@ -653,14 +667,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.BoundProperties.Add(
-                new ParameterDescriptor
-                {
-                    Name = nameof(TestController.StringProperty),
-                    BindingInfo = new BindingInfo(),
-                    ParameterType = typeof(string)
-                }
-            );
+            actionDescriptor.BoundProperties
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = nameof(TestController.StringProperty),
+                        BindingInfo = new BindingInfo(),
+                        ParameterType = typeof(string)
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
             var controller = new TestController();
@@ -692,14 +707,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.BoundProperties.Add(
-                new ParameterDescriptor
-                {
-                    Name = nameof(TestController.CollectionProperty),
-                    BindingInfo = new BindingInfo(),
-                    ParameterType = typeof(ICollection<string>),
-                }
-            );
+            actionDescriptor.BoundProperties
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = nameof(TestController.CollectionProperty),
+                        BindingInfo = new BindingInfo(),
+                        ParameterType = typeof(ICollection<string>),
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
             var controller = new TestController();
@@ -732,14 +748,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.BoundProperties.Add(
-                new ParameterDescriptor
-                {
-                    Name = nameof(TestController.NonNullableProperty),
-                    BindingInfo = new BindingInfo() { BindingSource = BindingSource.Custom },
-                    ParameterType = typeof(int)
-                }
-            );
+            actionDescriptor.BoundProperties
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = nameof(TestController.NonNullableProperty),
+                        BindingInfo = new BindingInfo() { BindingSource = BindingSource.Custom },
+                        ParameterType = typeof(int)
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
             var controller = new TestController();
@@ -773,14 +790,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.BoundProperties.Add(
-                new ParameterDescriptor
-                {
-                    Name = "NullableProperty",
-                    BindingInfo = new BindingInfo() { BindingSource = BindingSource.Custom },
-                    ParameterType = typeof(int?)
-                }
-            );
+            actionDescriptor.BoundProperties
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = "NullableProperty",
+                        BindingInfo = new BindingInfo() { BindingSource = BindingSource.Custom },
+                        ParameterType = typeof(int?)
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
             var controller = new TestController();
@@ -1007,14 +1025,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             // Arrange
             var actionDescriptor = GetActionDescriptor();
-            actionDescriptor.BoundProperties.Add(
-                new ParameterDescriptor
-                {
-                    Name = propertyName,
-                    BindingInfo = new BindingInfo(),
-                    ParameterType = propertyType,
-                }
-            );
+            actionDescriptor.BoundProperties
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = propertyName,
+                        BindingInfo = new BindingInfo(),
+                        ParameterType = propertyType,
+                    }
+                );
 
             var controllerContext = GetControllerContext(actionDescriptor);
             var controller = new TestController();
@@ -1071,14 +1090,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var actionDescriptor = GetActionDescriptor();
             foreach (var keyValuePair in boundPropertyTypes)
             {
-                actionDescriptor.BoundProperties.Add(
-                    new ParameterDescriptor
-                    {
-                        Name = keyValuePair.Key,
-                        BindingInfo = new BindingInfo(),
-                        ParameterType = keyValuePair.Value,
-                    }
-                );
+                actionDescriptor.BoundProperties
+                    .Add(
+                        new ParameterDescriptor
+                        {
+                            Name = keyValuePair.Key,
+                            BindingInfo = new BindingInfo(),
+                            ParameterType = keyValuePair.Value,
+                        }
+                    );
             }
 
             var controllerContext = GetControllerContext(actionDescriptor);
@@ -1210,17 +1230,17 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                 NullLoggerFactory.Instance
             );
             parameterBinder.Setup(
-                    p =>
-                        p.BindModelAsync(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<IModelBinder>(),
-                            It.IsAny<IValueProvider>(),
-                            It.IsAny<ParameterDescriptor>(),
-                            It.IsAny<ModelMetadata>(),
-                            null,
-                            null
-                        )
-                )
+                p =>
+                    p.BindModelAsync(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<IModelBinder>(),
+                        It.IsAny<IValueProvider>(),
+                        It.IsAny<ParameterDescriptor>(),
+                        It.IsAny<ModelMetadata>(),
+                        null,
+                        null
+                    )
+            )
                 .Returns(
                     (
                         ActionContext context,
@@ -1306,8 +1326,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
             var valueProviderFactory = new Mock<IValueProviderFactory>();
             valueProviderFactory.Setup(
-                    f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())
-                )
+                f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())
+            )
                 .Throws(new ValueProviderException("Some error"));
 
             var controllerContext = GetControllerContext(actionDescriptor);
@@ -1379,8 +1399,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
             var validatorProvider = new Mock<IModelValidatorProvider>();
             validatorProvider.Setup(
-                    p => p.CreateValidators(It.IsAny<ModelValidatorProviderContext>())
-                )
+                p => p.CreateValidators(It.IsAny<ModelValidatorProviderContext>())
+            )
                 .Callback<ModelValidatorProviderContext>(
                     context =>
                     {
@@ -1548,16 +1568,17 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                 [CustomValidation("some message")] string param3
             ) { }
 
-            public static ParameterInfo NoAttributesParameterInfo =
-                typeof(ParameterInfos).GetMethod(nameof(ParameterInfos.Method)).GetParameters()[0];
+            public static ParameterInfo NoAttributesParameterInfo = typeof(ParameterInfos)
+                .GetMethod(nameof(ParameterInfos.Method))
+                .GetParameters()[0];
 
-            public static ParameterInfo BindNeverParameterInfo = typeof(ParameterInfos).GetMethod(
-                    nameof(ParameterInfos.Method)
-                )
+            public static ParameterInfo BindNeverParameterInfo = typeof(ParameterInfos)
+                .GetMethod(nameof(ParameterInfos.Method))
                 .GetParameters()[1];
 
-            public static ParameterInfo CustomValidationParameterInfo =
-                typeof(ParameterInfos).GetMethod(nameof(ParameterInfos.Method)).GetParameters()[2];
+            public static ParameterInfo CustomValidationParameterInfo = typeof(ParameterInfos)
+                .GetMethod(nameof(ParameterInfos.Method))
+                .GetParameters()[2];
         }
 
         public abstract class FakeModelMetadata : ModelMetadata

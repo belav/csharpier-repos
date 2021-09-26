@@ -179,7 +179,8 @@ namespace AutoMapper
         public Type MakeGenericType(Type type) =>
             type.IsGenericTypeDefinition
                 ? type.MakeGenericType(
-                      SourceType.GenericTypeArguments.Concat(DestinationType.GenericTypeArguments)
+                      SourceType.GenericTypeArguments
+                          .Concat(DestinationType.GenericTypeArguments)
                           .Take(type.GenericParametersCount())
                           .ToArray()
                   )
@@ -195,14 +196,16 @@ namespace AutoMapper
                       name => ExpressionBuilder.MemberAccessLambda(SourceType, name)
                   );
         public bool ConstructorParameterMatches(string destinationPropertyName) =>
-            ConstructorMap.CtorParams.Any(
-                c =>
-                    string.Equals(
-                        c.Parameter.Name,
-                        destinationPropertyName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-            );
+            ConstructorMap.CtorParams
+                .Any(
+                    c =>
+                        string
+                            .Equals(
+                                c.Parameter.Name,
+                                destinationPropertyName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                );
 
         public void AddPropertyMap(
             MemberInfo destProperty,
@@ -239,16 +242,15 @@ namespace AutoMapper
             else
             {
                 var redirectedSourceMembers = MemberMaps.Where(
-                        pm =>
-                            pm.IsMapped
-                            && pm.SourceMember != null
-                            && pm.SourceMember.Name != pm.DestinationName
-                    )
+                    pm =>
+                        pm.IsMapped
+                        && pm.SourceMember != null
+                        && pm.SourceMember.Name != pm.DestinationName
+                )
                     .Select(pm => pm.SourceMember.Name);
 
-                var ignoredSourceMembers = _sourceMemberConfigs?.Values.Where(
-                        smc => smc.IsIgnored()
-                    )
+                var ignoredSourceMembers = _sourceMemberConfigs?.Values
+                    .Where(smc => smc.IsIgnored())
                     .Select(pm => pm.SourceMember.Name);
 
                 properties = Profile.CreateTypeDetails(SourceType)
@@ -403,9 +405,8 @@ namespace AutoMapper
         ) =>
             Types.IsGenericTypeDefinition
                 ? null
-                : new TypeMapPlanBuilder(configurationProvider, this).CreateMapperLambda(
-                      typeMapsPath
-                  );
+                : new TypeMapPlanBuilder(configurationProvider, this)
+                  .CreateMapperLambda(typeMapsPath);
         private PropertyMap GetPropertyMap(string name) => _propertyMaps?.GetOrDefault(name);
         private PropertyMap GetPropertyMap(PropertyMap propertyMap) =>
             GetPropertyMap(propertyMap.DestinationName);
@@ -436,9 +437,8 @@ namespace AutoMapper
         private void ApplyIncludedMemberTypeMap(IncludedMember includedMember)
         {
             var typeMap = includedMember.TypeMap;
-            var includedMemberMaps = typeMap.PropertyMaps.Where(
-                    m => m.CanResolveValue && GetPropertyMap(m) == null
-                )
+            var includedMemberMaps = typeMap.PropertyMaps
+                .Where(m => m.CanResolveValue && GetPropertyMap(m) == null)
                 .Select(p => new PropertyMap(p, this, includedMember))
                 .ToArray();
             var notOverridenPathMaps = NotOverridenPathMaps(typeMap);
@@ -556,9 +556,8 @@ namespace AutoMapper
                 return Array.Empty<PathMap>();
             }
             _pathMaps ??= new();
-            return inheritedTypeMap.PathMaps.Where(
-                    baseConfig => !_pathMaps.ContainsKey(baseConfig.MemberPath)
-                )
+            return inheritedTypeMap.PathMaps
+                .Where(baseConfig => !_pathMaps.ContainsKey(baseConfig.MemberPath))
                 .ToArray();
         }
         internal void CopyInheritedMapsTo(TypeMap typeMap)

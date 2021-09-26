@@ -72,8 +72,8 @@ namespace Microsoft.CodeAnalysis
                             cancellationToken
                         );
 
-                    var serializer =
-                        _solutionServices.Workspace.Services.GetService<ISerializerService>();
+                    var serializer = _solutionServices.Workspace.Services
+                        .GetService<ISerializerService>();
 
                     var infoChecksum = serializer.CreateChecksum(
                         ProjectInfo.Attributes,
@@ -96,8 +96,8 @@ namespace Microsoft.CodeAnalysis
                             _ =>
                                 new ProjectReferenceChecksumCollection(
                                     ProjectReferences.Select(
-                                            r => serializer.CreateChecksum(r, cancellationToken)
-                                        )
+                                        r => serializer.CreateChecksum(r, cancellationToken)
+                                    )
                                         .ToArray()
                                 )
                         );
@@ -107,8 +107,8 @@ namespace Microsoft.CodeAnalysis
                             _ =>
                                 new MetadataReferenceChecksumCollection(
                                     MetadataReferences.Select(
-                                            r => serializer.CreateChecksum(r, cancellationToken)
-                                        )
+                                        r => serializer.CreateChecksum(r, cancellationToken)
+                                    )
                                         .ToArray()
                                 )
                         );
@@ -118,8 +118,8 @@ namespace Microsoft.CodeAnalysis
                             _ =>
                                 new AnalyzerReferenceChecksumCollection(
                                     AnalyzerReferences.Select(
-                                            r => serializer.CreateChecksum(r, cancellationToken)
-                                        )
+                                        r => serializer.CreateChecksum(r, cancellationToken)
+                                    )
                                         .ToArray()
                                 )
                         );
@@ -129,8 +129,8 @@ namespace Microsoft.CodeAnalysis
                     var additionalChecksums = await Task.WhenAll(additionalDocumentChecksumTasks)
                         .ConfigureAwait(false);
                     var analyzerConfigDocumentChecksums = await Task.WhenAll(
-                            analyzerConfigDocumentChecksumTasks
-                        )
+                        analyzerConfigDocumentChecksumTasks
+                    )
                         .ConfigureAwait(false);
 
                     return new ProjectStateChecksums(

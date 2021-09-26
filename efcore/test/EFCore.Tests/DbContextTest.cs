@@ -58,9 +58,10 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Local_calls_DetectChanges()
         {
-            var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-            );
+            var provider = InMemoryTestHelpers.Instance
+                .CreateServiceProvider(
+                    new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+                );
 
             using var context = new ButTheHedgehogContext(provider);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -82,9 +83,10 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Local_does_not_call_DetectChanges_when_disabled()
         {
-            var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-            );
+            var provider = InMemoryTestHelpers.Instance
+                .CreateServiceProvider(
+                    new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+                );
 
             using var context = new ButTheHedgehogContext(provider);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -131,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void SaveChanges_calls_DetectChanges()
         {
-            var services = new ServiceCollection().AddScoped<IStateManager, FakeStateManager>()
+            var services = new ServiceCollection()
+                .AddScoped<IStateManager, FakeStateManager>()
                 .AddScoped<IChangeDetector, FakeChangeDetector>();
 
             var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
@@ -140,7 +143,8 @@ namespace Microsoft.EntityFrameworkCore
             var serviceProvider = InMemoryTestHelpers.Instance.CreateServiceProvider(services);
 
             using var context = new DbContext(
-                new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider)
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(serviceProvider)
                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
                     .UseModel(modelBuilder.FinalizeModel()).Options
             );
@@ -372,7 +376,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Model_cannot_be_used_in_OnModelCreating()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             using var context = new UseModelInOnModelCreatingContext(serviceProvider);
@@ -409,7 +414,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Context_cannot_be_used_in_OnModelCreating()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             using var context = new UseInOnModelCreatingContext(serviceProvider);
@@ -445,7 +451,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Context_cannot_be_used_in_OnConfiguring()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             using var context = new UseInOnConfiguringContext(serviceProvider);
@@ -633,9 +640,10 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Add_Attach_Remove_Update_do_not_call_DetectChanges()
         {
-            var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-            );
+            var provider = InMemoryTestHelpers.Instance
+                .CreateServiceProvider(
+                    new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+                );
             using var context = new ButTheHedgehogContext(provider);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
@@ -799,9 +807,8 @@ namespace Microsoft.EntityFrameworkCore
                 ).Message
             );
 
-            var methodCount = typeof(DbContext).GetMethods(
-                    BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
-                )
+            var methodCount = typeof(DbContext)
+                .GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
                 .Count();
             var expectedMethodCount = 50;
             Assert.True(
@@ -867,7 +874,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var fakeServiceProvider = new FakeServiceProvider();
             var context = new DbContext(
-                new DbContextOptionsBuilder().UseInternalServiceProvider(fakeServiceProvider)
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(fakeServiceProvider)
                     .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options
             );
 
@@ -892,7 +900,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public FakeServiceProvider()
             {
-                _realProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                _realProvider = new ServiceCollection()
+                    .AddEntityFrameworkInMemoryDatabase()
                     .BuildServiceProvider();
             }
 

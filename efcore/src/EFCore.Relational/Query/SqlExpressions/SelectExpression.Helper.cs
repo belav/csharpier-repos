@@ -260,9 +260,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         && _columnsUsedInJoinCondition[tableAlias] != null
                     )
                     {
-                        _columnReferenced[tableAlias]!.UnionWith(
-                            _columnsUsedInJoinCondition[tableAlias]!
-                        );
+                        _columnReferenced[tableAlias]!
+                            .UnionWith(_columnsUsedInJoinCondition[tableAlias]!);
                     }
                 }
 
@@ -398,14 +397,16 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             }
 
             public TableExpressionBase Table =>
-                _selectExpression.Tables.Single(
-                    e =>
-                        string.Equals(
-                            (e as JoinExpressionBase)?.Table.Alias ?? e.Alias,
-                            Alias,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                );
+                _selectExpression.Tables
+                    .Single(
+                        e =>
+                            string
+                                .Equals(
+                                    (e as JoinExpressionBase)?.Table.Alias ?? e.Alias,
+                                    Alias,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                    );
 
             public string Alias { get; internal set; }
 
@@ -433,11 +434,13 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             // That means we also don't need to compute the hashcode for it.
             // This allows us to break the cycle in computation when traversing this graph.
             private bool Equals(TableReferenceExpression tableReferenceExpression) =>
-                string.Equals(
-                    Alias,
-                    tableReferenceExpression.Alias,
-                    StringComparison.OrdinalIgnoreCase
-                ) && ReferenceEquals(_selectExpression, tableReferenceExpression._selectExpression);
+                string
+                    .Equals(
+                        Alias,
+                        tableReferenceExpression.Alias,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                && ReferenceEquals(_selectExpression, tableReferenceExpression._selectExpression);
 
             /// <inheritdoc />
             public override int GetHashCode() => Alias.GetHashCode();

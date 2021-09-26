@@ -66,17 +66,15 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             CancellationToken cancellationToken
         )
         {
-            using var _ = PooledDictionary<ISymbol, SyntaxAnnotation>.GetInstance(
-                out var symbolToDeclarationAnnotationMap
-            );
-            using var _1 = PooledDictionary<SyntaxTree, SyntaxNode>.GetInstance(
-                out var currentRoots
-            );
-            using var _2 = PooledDictionary<DocumentId, List<ISymbol>>.GetInstance(
-                out var documentIdToSymbolsMap
-            );
+            using var _ = PooledDictionary<ISymbol, SyntaxAnnotation>
+                .GetInstance(out var symbolToDeclarationAnnotationMap);
+            using var _1 = PooledDictionary<SyntaxTree, SyntaxNode>
+                .GetInstance(out var currentRoots);
+            using var _2 = PooledDictionary<DocumentId, List<ISymbol>>
+                .GetInstance(out var documentIdToSymbolsMap);
 
-            var typeNodeRoot = await typeNode.SyntaxTree.GetRootAsync(cancellationToken)
+            var typeNodeRoot = await typeNode.SyntaxTree
+                .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var typeNodeAnnotation = new SyntaxAnnotation();
 

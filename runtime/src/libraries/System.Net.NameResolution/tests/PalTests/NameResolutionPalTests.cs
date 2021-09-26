@@ -360,7 +360,8 @@ namespace System.Net.NameResolution.PalTests
                         AddressFamily.Unspecified,
                         CancellationToken.None
                     )
-                ).ConfigureAwait(false);
+                )
+                    .ConfigureAwait(false);
 
                 Assert.NotNull(addresses);
                 Assert.True(addresses.Length > 0);
@@ -374,7 +375,8 @@ namespace System.Net.NameResolution.PalTests
                         AddressFamily.Unspecified,
                         CancellationToken.None
                     )
-                ).ConfigureAwait(false);
+                )
+                    .ConfigureAwait(false);
 
                 Assert.NotNull(hostEntry);
                 Assert.True(hostEntry.AddressList.Length > 0);
@@ -514,7 +516,8 @@ namespace System.Net.NameResolution.PalTests
                         AddressFamily.Unspecified,
                         CancellationToken.None
                     )
-                ).ConfigureAwait(false);
+                )
+                    .ConfigureAwait(false);
 
                 Assert.NotNull(addresses);
                 Assert.True(addresses.Length > 0);
@@ -528,7 +531,8 @@ namespace System.Net.NameResolution.PalTests
                         AddressFamily.Unspecified,
                         CancellationToken.None
                     )
-                ).ConfigureAwait(false);
+                )
+                    .ConfigureAwait(false);
 
                 Assert.NotNull(hostEntry);
                 Assert.True(hostEntry.AddressList.Length > 0);
@@ -549,14 +553,14 @@ namespace System.Net.NameResolution.PalTests
             const string hostName = "test.123";
 
             SocketException socketException = await Assert.ThrowsAnyAsync<SocketException>(
-                    () =>
-                        NameResolutionPal.GetAddrInfoAsync(
-                            hostName,
-                            justAddresses,
-                            AddressFamily.Unspecified,
-                            CancellationToken.None
-                        )
-                )
+                () =>
+                    NameResolutionPal.GetAddrInfoAsync(
+                        hostName,
+                        justAddresses,
+                        AddressFamily.Unspecified,
+                        CancellationToken.None
+                    )
+            )
                 .ConfigureAwait(false);
             SocketError socketError = socketException.SocketErrorCode;
 

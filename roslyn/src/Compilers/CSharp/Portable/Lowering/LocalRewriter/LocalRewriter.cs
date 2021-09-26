@@ -260,11 +260,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || visited.HasErrors
                     || ReferenceEquals(visited.Type, node.Type)
                     || visited.Type is { }
-                        && visited.Type.Equals(
-                            node.Type,
-                            TypeCompareKind.IgnoreDynamicAndTupleNames
-                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        )
+                        && visited.Type
+                            .Equals(
+                                node.Type,
+                                TypeCompareKind.IgnoreDynamicAndTupleNames
+                                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            )
                     || IsUnusedDeconstruction(node)
             );
 
@@ -334,9 +335,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     hasReturnTypeOrParameter(localFunction, t => t.ContainsNativeInteger())
                     || typeParameters.Any(
                         t =>
-                            t.ConstraintTypesNoUseSiteDiagnostics.Any(
-                                t => t.ContainsNativeInteger()
-                            )
+                            t.ConstraintTypesNoUseSiteDiagnostics
+                                .Any(t => t.ContainsNativeInteger())
                     )
                 )
                 {
@@ -344,16 +344,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 if (
-                    _factory.CompilationState.Compilation.ShouldEmitNullableAttributes(
-                        localFunction
-                    )
+                    _factory.CompilationState.Compilation
+                        .ShouldEmitNullableAttributes(localFunction)
                 )
                 {
                     bool constraintsNeedNullableAttribute = typeParameters.Any(
                         typeParameter =>
-                            (
-                                (SourceTypeParameterSymbolBase)typeParameter
-                            ).ConstraintsNeedNullableAttribute()
+                            ((SourceTypeParameterSymbolBase)typeParameter)
+                                .ConstraintsNeedNullableAttribute()
                     );
 
                     if (
@@ -919,8 +917,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 resultExpr = F.Call(
                     receiver: null,
                     F.WellKnownMethod(
-                            WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__GetSubArray_T
-                        )
+                        WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__GetSubArray_T
+                    )
                         .Construct(ImmutableArray.Create(elementType)),
                     ImmutableArray.Create(
                         VisitExpression(node.Expression),

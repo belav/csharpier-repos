@@ -43,12 +43,13 @@ namespace Microsoft.CodeAnalysis.TodoComments
                     continue;
 
                 if (
-                    !int.TryParse(
-                        pair[1],
-                        NumberStyles.None,
-                        CultureInfo.InvariantCulture,
-                        out var priority
-                    )
+                    !int
+                        .TryParse(
+                            pair[1],
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out var priority
+                        )
                 )
                     continue;
 

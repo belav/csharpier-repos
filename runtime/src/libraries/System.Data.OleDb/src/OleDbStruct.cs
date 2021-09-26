@@ -55,13 +55,12 @@ namespace System.Data.OleDb
                     .Append(Environment.NewLine);
             }
             builder.Append(
-                    "\tulParamSize  ="
-                        + ulParamSize.ToInt64().ToString(CultureInfo.InvariantCulture)
-                )
+                "\tulParamSize  =" + ulParamSize.ToInt64().ToString(CultureInfo.InvariantCulture)
+            )
                 .Append(Environment.NewLine);
             builder.Append(
-                    "\tdwFlags     =0x" + dwFlags.ToString("X4", CultureInfo.InvariantCulture)
-                )
+                "\tdwFlags     =0x" + dwFlags.ToString("X4", CultureInfo.InvariantCulture)
+            )
                 .Append(Environment.NewLine);
             builder.Append("\tPrecision   =" + bPrecision.ToString(CultureInfo.InvariantCulture))
                 .Append(Environment.NewLine);
@@ -94,13 +93,12 @@ namespace System.Data.OleDb
                     .Append(Environment.NewLine);
             }
             builder.Append(
-                    "\tulParamSize  ="
-                        + ulParamSize.ToInt64().ToString(CultureInfo.InvariantCulture)
-                )
+                "\tulParamSize  =" + ulParamSize.ToInt64().ToString(CultureInfo.InvariantCulture)
+            )
                 .Append(Environment.NewLine);
             builder.Append(
-                    "\tdwFlags     =0x" + dwFlags.ToString("X4", CultureInfo.InvariantCulture)
-                )
+                "\tdwFlags     =0x" + dwFlags.ToString("X4", CultureInfo.InvariantCulture)
+            )
                 .Append(Environment.NewLine);
             builder.Append("\tPrecision   =" + bPrecision.ToString(CultureInfo.InvariantCulture))
                 .Append(Environment.NewLine);
@@ -166,24 +164,24 @@ namespace System.Data.OleDb
             StringBuilder builder = new StringBuilder();
             builder.Append("tagDBBINDING").Append(Environment.NewLine);
             builder.Append(
-                    "\tOrdinal     =" + iOrdinal.ToInt64().ToString(CultureInfo.InvariantCulture)
-                )
+                "\tOrdinal     =" + iOrdinal.ToInt64().ToString(CultureInfo.InvariantCulture)
+            )
                 .Append(Environment.NewLine);
             builder.Append(
-                    "\tValueOffset =" + obValue.ToInt64().ToString(CultureInfo.InvariantCulture)
-                )
+                "\tValueOffset =" + obValue.ToInt64().ToString(CultureInfo.InvariantCulture)
+            )
                 .Append(Environment.NewLine);
             builder.Append(
-                    "\tLengthOffset=" + obLength.ToInt64().ToString(CultureInfo.InvariantCulture)
-                )
+                "\tLengthOffset=" + obLength.ToInt64().ToString(CultureInfo.InvariantCulture)
+            )
                 .Append(Environment.NewLine);
             builder.Append(
-                    "\tStatusOffset=" + obStatus.ToInt64().ToString(CultureInfo.InvariantCulture)
-                )
+                "\tStatusOffset=" + obStatus.ToInt64().ToString(CultureInfo.InvariantCulture)
+            )
                 .Append(Environment.NewLine);
             builder.Append(
-                    "\tMaxLength   =" + cbMaxLen.ToInt64().ToString(CultureInfo.InvariantCulture)
-                )
+                "\tMaxLength   =" + cbMaxLen.ToInt64().ToString(CultureInfo.InvariantCulture)
+            )
                 .Append(Environment.NewLine);
             builder.Append("\tDB_Type     =" + ODB.WLookup(wType)).Append(Environment.NewLine);
             builder.Append("\tPrecision   =" + bPrecision.ToString(CultureInfo.InvariantCulture))
@@ -470,8 +468,8 @@ namespace System.Data.OleDb
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(
-                    "tagDBCOLUMNINFO: " + Convert.ToString(pwszName, CultureInfo.InvariantCulture)
-                )
+                "tagDBCOLUMNINFO: " + Convert.ToString(pwszName, CultureInfo.InvariantCulture)
+            )
                 .Append(Environment.NewLine);
             builder.Append("\t" + iOrdinal.ToInt64().ToString(CultureInfo.InvariantCulture))
                 .Append(Environment.NewLine);

@@ -126,7 +126,8 @@ namespace System.Net.Http.Functional.Tests
                                         "Client cert: {0}",
                                         new X509Certificate2(
                                             sslStream.RemoteCertificate.Export(X509ContentType.Cert)
-                                        ).GetNameInfo(X509NameType.SimpleName, false)
+                                        )
+                                            .GetNameInfo(X509NameType.SimpleName, false)
                                     );
                                     Assert.Equal(cert, sslStream.RemoteCertificate);
                                 }

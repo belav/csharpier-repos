@@ -62,16 +62,16 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
             IDictionary<HealthStatus, int> mapping
         )
         {
-            var missingHealthStatus = ((HealthStatus[])Enum.GetValues(typeof(HealthStatus))).Except(
-                    mapping.Keys
-                )
+            var missingHealthStatus = ((HealthStatus[])Enum.GetValues(typeof(HealthStatus)))
+                .Except(mapping.Keys)
                 .ToList();
             if (missingHealthStatus.Count > 0)
             {
-                var missing = string.Join(
-                    ", ",
-                    missingHealthStatus.Select(status => $"{nameof(HealthStatus)}.{status}")
-                );
+                var missing = string
+                    .Join(
+                        ", ",
+                        missingHealthStatus.Select(status => $"{nameof(HealthStatus)}.{status}")
+                    );
                 var message =
                     $"The {nameof(ResultStatusCodes)} dictionary must include an entry for all possible "
                     + $"{nameof(HealthStatus)} values. Missing: {missing}";

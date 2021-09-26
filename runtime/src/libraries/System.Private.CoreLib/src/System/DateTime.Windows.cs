@@ -160,11 +160,12 @@ namespace System
             ulong*,
             void> GetGetSystemTimeAsFileTimeFnPtr()
         {
-            IntPtr kernel32Lib = Interop.Kernel32.LoadLibraryEx(
-                Interop.Libraries.Kernel32,
-                IntPtr.Zero,
-                Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32
-            );
+            IntPtr kernel32Lib = Interop.Kernel32
+                .LoadLibraryEx(
+                    Interop.Libraries.Kernel32,
+                    IntPtr.Zero,
+                    Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32
+                );
             Debug.Assert(kernel32Lib != IntPtr.Zero);
 
             IntPtr pfnGetSystemTime = NativeLibrary.GetExport(
@@ -275,10 +276,11 @@ namespace System
                 fileTimeNow + LeapSecondCache.ValidityPeriodInTicks;
             Interop.Kernel32.SYSTEMTIME systemTimeAtEndOfValidityPeriod;
             if (
-                Interop.Kernel32.FileTimeToSystemTime(
-                    &fileTimeAtEndOfValidityPeriod,
-                    &systemTimeAtEndOfValidityPeriod
-                ) == Interop.BOOL.FALSE
+                Interop.Kernel32
+                    .FileTimeToSystemTime(
+                        &fileTimeAtEndOfValidityPeriod,
+                        &systemTimeAtEndOfValidityPeriod
+                    ) == Interop.BOOL.FALSE
             )
             {
                 return LowGranularityNonCachedFallback();
@@ -316,10 +318,11 @@ namespace System
 
                 ulong fileTimeAtBeginningOfDay;
                 if (
-                    Interop.Kernel32.SystemTimeToFileTime(
-                        &systemTimeAtBeginningOfDay,
-                        &fileTimeAtBeginningOfDay
-                    ) == Interop.BOOL.FALSE
+                    Interop.Kernel32
+                        .SystemTimeToFileTime(
+                            &systemTimeAtBeginningOfDay,
+                            &fileTimeAtBeginningOfDay
+                        ) == Interop.BOOL.FALSE
                 )
                 {
                     return LowGranularityNonCachedFallback();

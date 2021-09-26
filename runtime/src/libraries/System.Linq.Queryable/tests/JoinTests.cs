@@ -453,7 +453,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Join1()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .Join(new int[] { 1, 2, 3 }, n1 => n1, n2 => n2, (n1, n2) => n1 + n2)
                 .Count();
             Assert.Equal(2, count);
@@ -462,7 +463,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Join2()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .Join(
                     new int[] { 1, 2, 3 },
                     n1 => n1,

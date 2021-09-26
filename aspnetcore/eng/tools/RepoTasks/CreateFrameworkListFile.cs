@@ -34,8 +34,8 @@ namespace RepoTasks
         public override bool Execute()
         {
             XAttribute[] rootAttributes = RootAttributes?.Select(
-                    item => new XAttribute(item.ItemSpec, item.GetMetadata("Value"))
-                )
+                item => new XAttribute(item.ItemSpec, item.GetMetadata("Value"))
+            )
                 .ToArray();
 
             var frameworkManifest = new XElement("FileList", rootAttributes);
@@ -44,18 +44,18 @@ namespace RepoTasks
 
             foreach (
                 var f in Files.Select(
-                        item =>
-                            new
-                            {
-                                Item = item,
-                                Filename = Path.GetFileName(item.ItemSpec),
-                                AssemblyName = FileUtilities.GetAssemblyName(item.ItemSpec),
-                                FileVersion = FileUtilities.GetFileVersion(item.ItemSpec),
-                                IsNative = item.GetMetadata("IsNativeImage") == "true",
-                                IsSymbolFile = item.GetMetadata("IsSymbolFile") == "true",
-                                PackagePath = item.GetMetadata("PackagePath")
-                            }
-                    )
+                    item =>
+                        new
+                        {
+                            Item = item,
+                            Filename = Path.GetFileName(item.ItemSpec),
+                            AssemblyName = FileUtilities.GetAssemblyName(item.ItemSpec),
+                            FileVersion = FileUtilities.GetFileVersion(item.ItemSpec),
+                            IsNative = item.GetMetadata("IsNativeImage") == "true",
+                            IsSymbolFile = item.GetMetadata("IsSymbolFile") == "true",
+                            PackagePath = item.GetMetadata("PackagePath")
+                        }
+                )
                     .Where(
                         f =>
                             !f.IsSymbolFile

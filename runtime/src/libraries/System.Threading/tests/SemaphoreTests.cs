@@ -180,8 +180,7 @@ namespace System.Threading.Tests
             using (Semaphore s = new Semaphore(0, int.MaxValue))
             {
                 const int NumItems = 5;
-                Task.WaitAll(
-                    Task.Factory.StartNew(
+                Task.WaitAll(Task.Factory.StartNew(
                         () =>
                         {
                             for (int i = 0; i < NumItems; i++)
@@ -191,8 +190,7 @@ namespace System.Threading.Tests
                         CancellationToken.None,
                         TaskCreationOptions.LongRunning,
                         TaskScheduler.Default
-                    ),
-                    Task.Factory.StartNew(
+                    ), Task.Factory.StartNew(
                         () =>
                         {
                             for (int i = 0; i < NumItems; i++)
@@ -201,8 +199,7 @@ namespace System.Threading.Tests
                         CancellationToken.None,
                         TaskCreationOptions.LongRunning,
                         TaskScheduler.Default
-                    )
-                );
+                    ));
             }
         }
 
@@ -213,8 +210,7 @@ namespace System.Threading.Tests
             string name = Guid.NewGuid().ToString("N");
             const int NumItems = 5;
             var b = new Barrier(2);
-            Task.WaitAll(
-                Task.Factory.StartNew(
+            Task.WaitAll(Task.Factory.StartNew(
                     () =>
                     {
                         using (var s = new Semaphore(0, int.MaxValue, name))
@@ -228,8 +224,7 @@ namespace System.Threading.Tests
                     CancellationToken.None,
                     TaskCreationOptions.LongRunning,
                     TaskScheduler.Default
-                ),
-                Task.Factory.StartNew(
+                ), Task.Factory.StartNew(
                     () =>
                     {
                         using (var s = new Semaphore(0, int.MaxValue, name))
@@ -242,8 +237,7 @@ namespace System.Threading.Tests
                     CancellationToken.None,
                     TaskCreationOptions.LongRunning,
                     TaskScheduler.Default
-                )
-            );
+                ));
         }
 
         [PlatformSpecific(TestPlatforms.AnyUnix)] // named semaphores aren't supported on Unix

@@ -690,7 +690,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public void CloneSslOptionsClonesAllProperties()
         {
-            var propertyNames = typeof(SslServerAuthenticationOptions).GetProperties()
+            var propertyNames = typeof(SslServerAuthenticationOptions)
+                .GetProperties()
                 .Select(property => property.Name)
                 .ToList();
 

@@ -34,8 +34,8 @@ namespace System.Web.Helpers.Test
 
         private class DynamicDictionaryMetaObject : DynamicMetaObject
         {
-            private static readonly PropertyInfo ItemPropery =
-                typeof(DynamicDictionary).GetProperty("Item");
+            private static readonly PropertyInfo ItemPropery = typeof(DynamicDictionary)
+                .GetProperty("Item");
 
             public DynamicDictionaryMetaObject(Expression expression, object value)
                 : base(expression, BindingRestrictions.Empty, value) { }

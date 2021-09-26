@@ -182,10 +182,11 @@ namespace Castle.DynamicProxy.Serialization
             else
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        "Got value {0} for the interface generator type, which is not known for the purpose of serialization.",
-                        generatorType
-                    )
+                    string
+                        .Format(
+                            "Got value {0} for the interface generator type, which is not known for the purpose of serialization.",
+                            generatorType
+                        )
                 );
             }
 

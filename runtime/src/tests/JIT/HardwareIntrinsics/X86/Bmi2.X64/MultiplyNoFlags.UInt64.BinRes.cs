@@ -133,11 +133,12 @@ namespace JIT.HardwareIntrinsics.X86
 
             UInt64 buffer = 0;
 
-            var result = Bmi2.X64.MultiplyNoFlags(
-                Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
-                Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2)),
-                &buffer
-            );
+            var result = Bmi2.X64
+                .MultiplyNoFlags(
+                    Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
+                    Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2)),
+                    &buffer
+                );
 
             ValidateResult(_data1, _data2, buffer, result);
         }
@@ -148,7 +149,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             UInt64 buffer = 0;
 
-            var result = typeof(Bmi2.X64).GetMethod(
+            var result = typeof(Bmi2.X64)
+                .GetMethod(
                     nameof(Bmi2.X64.MultiplyNoFlags),
                     new Type[] { typeof(UInt64), typeof(UInt64), typeof(UInt64*) }
                 )
@@ -263,9 +265,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi2.X64)}.{nameof(Bmi2.X64.MultiplyNoFlags)}<UInt64>(UInt64, UInt64, UInt64): MultiplyNoFlags failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi2.X64)}.{nameof(Bmi2.X64.MultiplyNoFlags)}<UInt64>(UInt64, UInt64, UInt64): MultiplyNoFlags failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"   op1: {op1}");
                 TestLibrary.TestFramework.LogInformation($"   op2: {op2}");
                 TestLibrary.TestFramework.LogInformation($" lower: {lower}");

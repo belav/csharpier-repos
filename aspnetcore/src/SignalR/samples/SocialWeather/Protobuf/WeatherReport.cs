@@ -25,38 +25,41 @@ namespace SocialWeather.Protobuf
 
         static WeatherReportReflection()
         {
-            byte[] descriptorData = global::System.Convert.FromBase64String(
-                string.Concat(
-                    "ChNXZWF0aGVyUmVwb3J0LnByb3RvIuIBCg1XZWF0aGVyUmVwb3J0EhMKC1Rl",
-                    "bXBlcmF0dXJlGAEgASgFEhIKClJlcG9ydFRpbWUYAiABKAMSKwoHV2VhdGhl",
-                    "chgDIAEoDjIaLldlYXRoZXJSZXBvcnQuV2VhdGhlcktpbmQSDwoHWmlwQ29k",
-                    "ZRgEIAEoCSJqCgtXZWF0aGVyS2luZBIJCgVTdW5ueRAAEg8KC01vc3RseVN1",
-                    "bm55EAESDwoLUGFydGx5U3VubnkQAhIQCgxQYXJ0bHlDbG91ZHkQAxIQCgxN",
-                    "b3N0bHlDbG91ZHkQBBIKCgZDbG91ZHkQBUIZqgIWU29jaWFsV2VhdGhlci5Q",
-                    "cm90b2J1ZmIGcHJvdG8z"
-                )
-            );
-            descriptor = pbr::FileDescriptor.FromGeneratedCode(
-                descriptorData,
-                new pbr::FileDescriptor[] {  },
-                new pbr::GeneratedClrTypeInfo(
-                    null,
-                    new pbr::GeneratedClrTypeInfo[]
-                    {
-                        new pbr::GeneratedClrTypeInfo(
-                            typeof(global::SocialWeather.Protobuf.WeatherReport),
-                            global::SocialWeather.Protobuf.WeatherReport.Parser,
-                            new[] { "Temperature", "ReportTime", "Weather", "ZipCode" },
-                            null,
-                            new[]
-                            {
-                                typeof(global::SocialWeather.Protobuf.WeatherReport.Types.WeatherKind)
-                            },
-                            null
+            byte[] descriptorData = global::System.Convert
+                .FromBase64String(
+                    string
+                        .Concat(
+                            "ChNXZWF0aGVyUmVwb3J0LnByb3RvIuIBCg1XZWF0aGVyUmVwb3J0EhMKC1Rl",
+                            "bXBlcmF0dXJlGAEgASgFEhIKClJlcG9ydFRpbWUYAiABKAMSKwoHV2VhdGhl",
+                            "chgDIAEoDjIaLldlYXRoZXJSZXBvcnQuV2VhdGhlcktpbmQSDwoHWmlwQ29k",
+                            "ZRgEIAEoCSJqCgtXZWF0aGVyS2luZBIJCgVTdW5ueRAAEg8KC01vc3RseVN1",
+                            "bm55EAESDwoLUGFydGx5U3VubnkQAhIQCgxQYXJ0bHlDbG91ZHkQAxIQCgxN",
+                            "b3N0bHlDbG91ZHkQBBIKCgZDbG91ZHkQBUIZqgIWU29jaWFsV2VhdGhlci5Q",
+                            "cm90b2J1ZmIGcHJvdG8z"
                         )
-                    }
-                )
-            );
+                );
+            descriptor = pbr::FileDescriptor
+                .FromGeneratedCode(
+                    descriptorData,
+                    new pbr::FileDescriptor[] {  },
+                    new pbr::GeneratedClrTypeInfo(
+                        null,
+                        new pbr::GeneratedClrTypeInfo[]
+                        {
+                            new pbr::GeneratedClrTypeInfo(
+                                typeof(global::SocialWeather.Protobuf.WeatherReport),
+                                global::SocialWeather.Protobuf.WeatherReport.Parser,
+                                new[] { "Temperature", "ReportTime", "Weather", "ZipCode" },
+                                null,
+                                new[]
+                                {
+                                    typeof(global::SocialWeather.Protobuf.WeatherReport.Types.WeatherKind)
+                                },
+                                null
+                            )
+                        }
+                    )
+                );
         }
     #endregion
 

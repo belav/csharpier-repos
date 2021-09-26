@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Authentication
             this HttpContext context,
             string? scheme
         ) =>
-            context.RequestServices.GetRequiredService<IAuthenticationService>()
+            context.RequestServices
+                .GetRequiredService<IAuthenticationService>()
                 .AuthenticateAsync(context, scheme);
 
         /// <summary>
@@ -81,7 +82,8 @@ namespace Microsoft.AspNetCore.Authentication
             string? scheme,
             AuthenticationProperties? properties
         ) =>
-            context.RequestServices.GetRequiredService<IAuthenticationService>()
+            context.RequestServices
+                .GetRequiredService<IAuthenticationService>()
                 .ChallengeAsync(context, scheme, properties);
 
         /// <summary>
@@ -130,7 +132,8 @@ namespace Microsoft.AspNetCore.Authentication
             string? scheme,
             AuthenticationProperties? properties
         ) =>
-            context.RequestServices.GetRequiredService<IAuthenticationService>()
+            context.RequestServices
+                .GetRequiredService<IAuthenticationService>()
                 .ForbidAsync(context, scheme, properties);
 
         /// <summary>
@@ -184,7 +187,8 @@ namespace Microsoft.AspNetCore.Authentication
             ClaimsPrincipal principal,
             AuthenticationProperties? properties
         ) =>
-            context.RequestServices.GetRequiredService<IAuthenticationService>()
+            context.RequestServices
+                .GetRequiredService<IAuthenticationService>()
                 .SignInAsync(context, scheme, principal, properties);
 
         /// <summary>
@@ -229,7 +233,8 @@ namespace Microsoft.AspNetCore.Authentication
             string? scheme,
             AuthenticationProperties? properties
         ) =>
-            context.RequestServices.GetRequiredService<IAuthenticationService>()
+            context.RequestServices
+                .GetRequiredService<IAuthenticationService>()
                 .SignOutAsync(context, scheme, properties);
 
         /// <summary>
@@ -244,7 +249,8 @@ namespace Microsoft.AspNetCore.Authentication
             string? scheme,
             string tokenName
         ) =>
-            context.RequestServices.GetRequiredService<IAuthenticationService>()
+            context.RequestServices
+                .GetRequiredService<IAuthenticationService>()
                 .GetTokenAsync(context, scheme, tokenName);
 
         /// <summary>
@@ -255,7 +261,8 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="tokenName">The name of the token.</param>
         /// <returns>The value of the token if present.</returns>
         public static Task<string?> GetTokenAsync(this HttpContext context, string tokenName) =>
-            context.RequestServices.GetRequiredService<IAuthenticationService>()
+            context.RequestServices
+                .GetRequiredService<IAuthenticationService>()
                 .GetTokenAsync(context, tokenName);
     }
 }

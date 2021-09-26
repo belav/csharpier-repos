@@ -71,12 +71,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     .Returns(new ActionDescriptor[] { actionDescriptor });
 
                 mockActionSelector.Setup(
-                        a =>
-                            a.SelectBestCandidate(
-                                It.IsAny<RouteContext>(),
-                                It.IsAny<IReadOnlyList<ActionDescriptor>>()
-                            )
-                    )
+                    a =>
+                        a.SelectBestCandidate(
+                            It.IsAny<RouteContext>(),
+                            It.IsAny<IReadOnlyList<ActionDescriptor>>()
+                        )
+                )
                     .Returns(actionDescriptor);
                 actionSelector = mockActionSelector.Object;
             }

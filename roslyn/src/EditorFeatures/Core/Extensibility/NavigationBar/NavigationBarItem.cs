@@ -67,9 +67,10 @@ namespace Microsoft.CodeAnalysis.Editor
 
         internal void InitializeTrackingSpans(ITextSnapshot textSnapshot)
         {
-            this.TrackingSpans = this.Spans.SelectAsArray(
-                s => textSnapshot.CreateTrackingSpan(s.ToSpan(), SpanTrackingMode.EdgeExclusive)
-            );
+            this.TrackingSpans = this.Spans
+                .SelectAsArray(
+                    s => textSnapshot.CreateTrackingSpan(s.ToSpan(), SpanTrackingMode.EdgeExclusive)
+                );
             this.ChildItems.Do(i => i.InitializeTrackingSpans(textSnapshot));
         }
     }

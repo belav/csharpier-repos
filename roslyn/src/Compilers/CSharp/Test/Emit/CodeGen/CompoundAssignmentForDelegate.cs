@@ -207,10 +207,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text, expectedOutput: "10")
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(text, expectedOutput: "10").VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       77 (0x4d)
   .maxstack  3
@@ -243,7 +242,7 @@ class C
   IL_004c:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -268,10 +267,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text, expectedOutput: "Hello")
-                .VerifyIL(
-                    "C.Main()",
-                    @"
+            CompileAndVerify(text, expectedOutput: "Hello").VerifyIL(
+                "C.Main()",
+                @"
 {
   // Code size       80 (0x50)
   .maxstack  3
@@ -304,7 +302,7 @@ class C
   IL_004f:  ret
 }
 "
-                );
+            );
         }
 
         // Mixed named method and Lambda expression to removal or concatenation

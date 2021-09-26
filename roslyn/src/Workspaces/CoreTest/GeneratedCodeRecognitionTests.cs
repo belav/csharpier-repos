@@ -111,20 +111,22 @@ generated_code = false
                 {
                     Assert.True(
                         document.IsGeneratedCode(CancellationToken.None),
-                        string.Format(
-                            "Expected file '{0}' to be interpreted as generated code",
-                            fileName
-                        )
+                        string
+                            .Format(
+                                "Expected file '{0}' to be interpreted as generated code",
+                                fileName
+                            )
                     );
                 }
                 else
                 {
                     Assert.False(
                         document.IsGeneratedCode(CancellationToken.None),
-                        string.Format(
-                            "Did not expect file '{0}' to be interpreted as generated code",
-                            fileName
-                        )
+                        string
+                            .Format(
+                                "Did not expect file '{0}' to be interpreted as generated code",
+                                fileName
+                            )
                     );
                 }
             }
@@ -134,12 +136,8 @@ generated_code = false
         {
             var projectName = "TestProject";
             var projectId = ProjectId.CreateNewId(projectName);
-            return new AdhocWorkspace().CurrentSolution.AddProject(
-                    projectId,
-                    projectName,
-                    projectName,
-                    LanguageNames.CSharp
-                )
+            return new AdhocWorkspace().CurrentSolution
+                .AddProject(projectId, projectName, projectName, LanguageNames.CSharp)
                 .GetProject(projectId);
         }
     }

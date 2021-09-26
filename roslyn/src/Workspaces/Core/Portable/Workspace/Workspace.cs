@@ -1584,9 +1584,8 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 if (
-                    !CurrentSolution.AnalyzerReferences.SequenceEqual(
-                        newSolution.AnalyzerReferences
-                    )
+                    !CurrentSolution.AnalyzerReferences
+                        .SequenceEqual(newSolution.AnalyzerReferences)
                 )
                 {
                     foreach (
@@ -1658,9 +1657,10 @@ namespace Microsoft.CodeAnalysis
                 // still changes then we need to verify we can apply those. The .editorconfig changes will also be represented as
                 // document edits, which the host is expected to actually apply directly.
                 var newOptionsWithoutSyntaxTreeOptionsChange =
-                    projectChanges.NewProject.CompilationOptions.WithSyntaxTreeOptionsProvider(
-                        projectChanges.OldProject.CompilationOptions.SyntaxTreeOptionsProvider
-                    );
+                    projectChanges.NewProject.CompilationOptions
+                        .WithSyntaxTreeOptionsProvider(
+                            projectChanges.OldProject.CompilationOptions.SyntaxTreeOptionsProvider
+                        );
 
                 if (
                     projectChanges.OldProject.CompilationOptions
@@ -1727,9 +1727,8 @@ namespace Microsoft.CodeAnalysis
                 && projectChanges.GetChangedDocuments()
                     .Any(
                         id =>
-                            projectChanges.NewProject.GetDocument(id)!.HasInfoChanged(
-                                projectChanges.OldProject.GetDocument(id)!
-                            )
+                            projectChanges.NewProject.GetDocument(id)!
+                                .HasInfoChanged(projectChanges.OldProject.GetDocument(id)!)
                     )
             )
             {
@@ -1739,9 +1738,9 @@ namespace Microsoft.CodeAnalysis
             }
 
             var changedDocumentIds = projectChanges.GetChangedDocuments(
-                    onlyGetDocumentsWithTextChanges: true,
-                    IgnoreUnchangeableDocumentsWhenApplyingChanges
-                )
+                onlyGetDocumentsWithTextChanges: true,
+                IgnoreUnchangeableDocumentsWhenApplyingChanges
+            )
                 .ToImmutableArray();
 
             if (
@@ -1764,10 +1763,11 @@ namespace Microsoft.CodeAnalysis
                 if (!document.CanApplyChange())
                 {
                     throw new NotSupportedException(
-                        string.Format(
-                            WorkspacesResources.Changing_document_0_is_not_supported,
-                            document.FilePath ?? document.Name
-                        )
+                        string
+                            .Format(
+                                WorkspacesResources.Changing_document_0_is_not_supported,
+                                document.FilePath ?? document.Name
+                            )
                     );
                 }
             }
@@ -2138,24 +2138,24 @@ namespace Microsoft.CodeAnalysis
         private static ProjectInfo CreateProjectInfo(Project project)
         {
             return ProjectInfo.Create(
-                    project.Id,
-                    VersionStamp.Create(),
-                    project.Name,
-                    project.AssemblyName,
-                    project.Language,
-                    project.FilePath,
-                    project.OutputFilePath,
-                    project.CompilationOptions,
-                    project.ParseOptions,
-                    project.Documents.Select(d => CreateDocumentInfoWithText(d)),
-                    project.ProjectReferences,
-                    project.MetadataReferences,
-                    project.AnalyzerReferences,
-                    project.AdditionalDocuments.Select(d => CreateDocumentInfoWithText(d)),
-                    project.IsSubmission,
-                    project.State.HostObjectType,
-                    project.OutputRefFilePath
-                )
+                project.Id,
+                VersionStamp.Create(),
+                project.Name,
+                project.AssemblyName,
+                project.Language,
+                project.FilePath,
+                project.OutputFilePath,
+                project.CompilationOptions,
+                project.ParseOptions,
+                project.Documents.Select(d => CreateDocumentInfoWithText(d)),
+                project.ProjectReferences,
+                project.MetadataReferences,
+                project.AnalyzerReferences,
+                project.AdditionalDocuments.Select(d => CreateDocumentInfoWithText(d)),
+                project.IsSubmission,
+                project.State.HostObjectType,
+                project.OutputRefFilePath
+            )
                 .WithDefaultNamespace(project.DefaultNamespace)
                 .WithAnalyzerConfigDocuments(
                     project.AnalyzerConfigDocuments.Select(d => CreateDocumentInfoWithText(d))
@@ -2518,10 +2518,11 @@ namespace Microsoft.CodeAnalysis
             if (!this.CurrentSolution.ContainsProject(projectId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_not_part_of_the_workspace,
-                        this.GetProjectName(projectId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_not_part_of_the_workspace,
+                            this.GetProjectName(projectId)
+                        )
                 );
             }
         }
@@ -2534,10 +2535,11 @@ namespace Microsoft.CodeAnalysis
             if (this.CurrentSolution.ContainsProject(projectId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_already_part_of_the_workspace,
-                        this.GetProjectName(projectId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_already_part_of_the_workspace,
+                            this.GetProjectName(projectId)
+                        )
                 );
             }
         }
@@ -2551,16 +2553,16 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                !this.CurrentSolution.GetProject(fromProjectId)!.ProjectReferences.Contains(
-                    projectReference
-                )
+                !this.CurrentSolution.GetProject(fromProjectId)!.ProjectReferences
+                    .Contains(projectReference)
             )
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_not_referenced,
-                        this.GetProjectName(projectReference.ProjectId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_not_referenced,
+                            this.GetProjectName(projectReference.ProjectId)
+                        )
                 );
             }
         }
@@ -2574,16 +2576,16 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                this.CurrentSolution.GetProject(fromProjectId)!.ProjectReferences.Contains(
-                    projectReference
-                )
+                this.CurrentSolution.GetProject(fromProjectId)!.ProjectReferences
+                    .Contains(projectReference)
             )
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_already_referenced,
-                        this.GetProjectName(projectReference.ProjectId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_already_referenced,
+                            this.GetProjectName(projectReference.ProjectId)
+                        )
                 );
             }
         }
@@ -2596,16 +2598,18 @@ namespace Microsoft.CodeAnalysis
             ProjectId toProjectId
         )
         {
-            var transitiveReferences = this.CurrentSolution.GetProjectDependencyGraph()
+            var transitiveReferences = this.CurrentSolution
+                .GetProjectDependencyGraph()
                 .GetProjectsThatThisProjectTransitivelyDependsOn(toProjectId);
             if (transitiveReferences.Contains(fromProjectId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources.Adding_project_reference_from_0_to_1_will_cause_a_circular_reference,
-                        this.GetProjectName(fromProjectId),
-                        this.GetProjectName(toProjectId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources.Adding_project_reference_from_0_to_1_will_cause_a_circular_reference,
+                            this.GetProjectName(fromProjectId),
+                            this.GetProjectName(toProjectId)
+                        )
                 );
             }
         }
@@ -2619,9 +2623,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                !this.CurrentSolution.GetProject(projectId)!.MetadataReferences.Contains(
-                    metadataReference
-                )
+                !this.CurrentSolution.GetProject(projectId)!.MetadataReferences
+                    .Contains(metadataReference)
             )
             {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_not_referenced);
@@ -2637,9 +2640,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                this.CurrentSolution.GetProject(projectId)!.MetadataReferences.Contains(
-                    metadataReference
-                )
+                this.CurrentSolution.GetProject(projectId)!.MetadataReferences
+                    .Contains(metadataReference)
             )
             {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_already_referenced);
@@ -2655,9 +2657,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                !this.CurrentSolution.GetProject(projectId)!.AnalyzerReferences.Contains(
-                    analyzerReference
-                )
+                !this.CurrentSolution.GetProject(projectId)!.AnalyzerReferences
+                    .Contains(analyzerReference)
             )
             {
                 throw new ArgumentException(
@@ -2675,9 +2676,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                this.CurrentSolution.GetProject(projectId)!.AnalyzerReferences.Contains(
-                    analyzerReference
-                )
+                this.CurrentSolution.GetProject(projectId)!.AnalyzerReferences
+                    .Contains(analyzerReference)
             )
             {
                 throw new ArgumentException(
@@ -2726,10 +2726,11 @@ namespace Microsoft.CodeAnalysis
             if (this.CurrentSolution.GetDocument(documentId) == null)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_not_part_of_the_workspace,
-                        this.GetDocumentName(documentId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_not_part_of_the_workspace,
+                            this.GetDocumentName(documentId)
+                        )
                 );
             }
         }
@@ -2742,10 +2743,11 @@ namespace Microsoft.CodeAnalysis
             if (this.CurrentSolution.GetAdditionalDocument(documentId) == null)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_not_part_of_the_workspace,
-                        this.GetDocumentName(documentId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_not_part_of_the_workspace,
+                            this.GetDocumentName(documentId)
+                        )
                 );
             }
         }
@@ -2758,10 +2760,11 @@ namespace Microsoft.CodeAnalysis
             if (!this.CurrentSolution.ContainsAnalyzerConfigDocument(documentId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_not_part_of_the_workspace,
-                        this.GetDocumentName(documentId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_not_part_of_the_workspace,
+                            this.GetDocumentName(documentId)
+                        )
                 );
             }
         }
@@ -2774,10 +2777,11 @@ namespace Microsoft.CodeAnalysis
             if (this.CurrentSolution.ContainsDocument(documentId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_already_part_of_the_workspace,
-                        this.GetDocumentName(documentId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_already_part_of_the_workspace,
+                            this.GetDocumentName(documentId)
+                        )
                 );
             }
         }
@@ -2790,10 +2794,11 @@ namespace Microsoft.CodeAnalysis
             if (this.CurrentSolution.ContainsAdditionalDocument(documentId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_already_part_of_the_workspace,
-                        this.GetAdditionalDocumentName(documentId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_already_part_of_the_workspace,
+                            this.GetAdditionalDocumentName(documentId)
+                        )
                 );
             }
         }
@@ -2806,10 +2811,11 @@ namespace Microsoft.CodeAnalysis
             if (this.CurrentSolution.ContainsAnalyzerConfigDocument(documentId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources._0_is_already_part_of_the_workspace,
-                        this.GetAnalyzerConfigDocumentName(documentId)
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_already_part_of_the_workspace,
+                            this.GetAnalyzerConfigDocumentName(documentId)
+                        )
                 );
             }
         }

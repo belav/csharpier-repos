@@ -173,10 +173,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     try
                     {
                         var result = await handler.HandleRequestAsync(
-                                request,
-                                context,
-                                cancellationToken
-                            )
+                            request,
+                            context,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         completion.SetResult(result);
                     }

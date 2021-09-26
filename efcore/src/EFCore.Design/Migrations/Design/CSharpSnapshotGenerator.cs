@@ -55,9 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Check.NotNull(model, nameof(model));
             Check.NotNull(stringBuilder, nameof(stringBuilder));
 
-            var annotations = Dependencies.AnnotationCodeGenerator.FilterIgnoredAnnotations(
-                    model.GetAnnotations()
-                )
+            var annotations = Dependencies.AnnotationCodeGenerator
+                .FilterIgnoredAnnotations(model.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
             var productVersion = model.GetProductVersion();
@@ -81,10 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     );
 
                     foreach (
-                        var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator.GenerateFluentApiCalls(
-                            model,
-                            annotations
-                        )
+                        var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator
+                            .GenerateFluentApiCalls(model, annotations)
                     )
                     {
                         stringBuilder.AppendLine().Append(Code.Fragment(methodCallCodeFragment));
@@ -205,10 +202,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 ownerNavigation != null
                 && entityType.HasSharedClrType
                 && entityTypeName
-                    == ownership!.PrincipalEntityType.GetOwnedName(
-                        entityType.ClrType.ShortDisplayName(),
-                        ownerNavigation
-                    )
+                    == ownership!.PrincipalEntityType
+                        .GetOwnedName(entityType.ClrType.ShortDisplayName(), ownerNavigation)
             )
             {
                 entityTypeName = entityType.ClrType.DisplayName();
@@ -599,9 +594,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Check.NotNull(property, nameof(property));
             Check.NotNull(stringBuilder, nameof(stringBuilder));
 
-            var annotations = Dependencies.AnnotationCodeGenerator.FilterIgnoredAnnotations(
-                    property.GetAnnotations()
-                )
+            var annotations = Dependencies.AnnotationCodeGenerator
+                .FilterIgnoredAnnotations(property.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
             GenerateFluentApiForMaxLength(property, stringBuilder);
@@ -615,9 +609,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 .Append(
                     Code.Literal(
                         property.GetColumnType()
-                            ?? Dependencies.RelationalTypeMappingSource.GetMapping(
-                                property
-                            ).StoreType
+                            ?? Dependencies.RelationalTypeMappingSource
+                                .GetMapping(property).StoreType
                     )
                 )
                 .Append(")");
@@ -639,10 +632,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             );
 
             foreach (
-                var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator.GenerateFluentApiCalls(
-                    property,
-                    annotations
-                )
+                var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator
+                    .GenerateFluentApiCalls(property, annotations)
             )
             {
                 stringBuilder.AppendLine().Append(Code.Fragment(methodCallCodeFragment));
@@ -743,16 +734,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <param name="stringBuilder"> The builder code is added to. </param>
         protected virtual void GenerateKeyAnnotations(IKey key, IndentedStringBuilder stringBuilder)
         {
-            var annotations = Dependencies.AnnotationCodeGenerator.FilterIgnoredAnnotations(
-                    key.GetAnnotations()
-                )
+            var annotations = Dependencies.AnnotationCodeGenerator
+                .FilterIgnoredAnnotations(key.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
             foreach (
-                var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator.GenerateFluentApiCalls(
-                    key,
-                    annotations
-                )
+                var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator
+                    .GenerateFluentApiCalls(key, annotations)
             )
             {
                 stringBuilder.AppendLine().Append(Code.Fragment(methodCallCodeFragment));
@@ -842,9 +830,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             IndentedStringBuilder stringBuilder
         )
         {
-            var annotations = Dependencies.AnnotationCodeGenerator.FilterIgnoredAnnotations(
-                    index.GetAnnotations()
-                )
+            var annotations = Dependencies.AnnotationCodeGenerator
+                .FilterIgnoredAnnotations(index.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
             // Temporary patch: specifically exclude some annotations which are known to produce identical Fluent API calls across different
@@ -855,10 +842,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             );
 
             foreach (
-                var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator.GenerateFluentApiCalls(
-                    index,
-                    annotations
-                )
+                var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator
+                    .GenerateFluentApiCalls(index, annotations)
             )
             {
                 stringBuilder.AppendLine().Append(Code.Fragment(methodCallCodeFragment));
@@ -895,9 +880,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 a => a.Name == CoreAnnotationNames.DiscriminatorValue
             );
 
-            var annotations = Dependencies.AnnotationCodeGenerator.FilterIgnoredAnnotations(
-                    entityType.GetAnnotations()
-                )
+            var annotations = Dependencies.AnnotationCodeGenerator
+                .FilterIgnoredAnnotations(entityType.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
             var tableNameAnnotation = annotations.Find(RelationalAnnotationNames.TableName);
@@ -1016,9 +1000,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                         (string)discriminatorPropertyAnnotation.Value
                     )!;
                     var propertyClrType =
-                        FindValueConverter(discriminatorProperty)?.ProviderClrType.MakeNullable(
-                            discriminatorProperty.IsNullable
-                        ) ?? discriminatorProperty.ClrType;
+                        FindValueConverter(discriminatorProperty)?.ProviderClrType
+                            .MakeNullable(discriminatorProperty.IsNullable)
+                        ?? discriminatorProperty.ClrType;
                     stringBuilder.Append("<")
                         .Append(Code.Reference(propertyClrType))
                         .Append(">(")
@@ -1064,10 +1048,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 stringBuilder.AppendLine(";");
             }
 
-            var fluentApiCalls = Dependencies.AnnotationCodeGenerator.GenerateFluentApiCalls(
-                entityType,
-                annotations
-            );
+            var fluentApiCalls = Dependencies.AnnotationCodeGenerator
+                .GenerateFluentApiCalls(entityType, annotations);
             if (fluentApiCalls.Count > 0 || annotations.Count > 0)
             {
                 stringBuilder.AppendLine().Append(builderName);
@@ -1216,10 +1198,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                         .Append(Code.Literal(foreignKey.DeclaringEntityType.Name))
                         .Append(", ")
                         .Append(
-                            string.Join(
-                                ", ",
-                                foreignKey.Properties.Select(p => Code.Literal(p.Name))
-                            )
+                            string
+                                .Join(", ", foreignKey.Properties.Select(p => Code.Literal(p.Name)))
                         )
                         .Append(")");
 
@@ -1232,12 +1212,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                             .Append(Code.Literal(foreignKey.PrincipalEntityType.Name))
                             .Append(", ")
                             .Append(
-                                string.Join(
-                                    ", ",
-                                    foreignKey.PrincipalKey.Properties.Select(
-                                        p => Code.Literal(p.Name)
+                                string
+                                    .Join(
+                                        ", ",
+                                        foreignKey.PrincipalKey.Properties
+                                            .Select(p => Code.Literal(p.Name))
                                     )
-                                )
                             )
                             .Append(")");
                     }
@@ -1260,10 +1240,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                     stringBuilder.Append(".HasForeignKey(")
                         .Append(
-                            string.Join(
-                                ", ",
-                                foreignKey.Properties.Select(p => Code.Literal(p.Name))
-                            )
+                            string
+                                .Join(", ", foreignKey.Properties.Select(p => Code.Literal(p.Name)))
                         )
                         .Append(")");
 
@@ -1274,12 +1252,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                         stringBuilder.AppendLine()
                             .Append(".HasPrincipalKey(")
                             .Append(
-                                string.Join(
-                                    ", ",
-                                    foreignKey.PrincipalKey.Properties.Select(
-                                        p => Code.Literal(p.Name)
+                                string
+                                    .Join(
+                                        ", ",
+                                        foreignKey.PrincipalKey.Properties
+                                            .Select(p => Code.Literal(p.Name))
                                     )
-                                )
                             )
                             .Append(")");
                     }
@@ -1318,16 +1296,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Check.NotNull(foreignKey, nameof(foreignKey));
             Check.NotNull(stringBuilder, nameof(stringBuilder));
 
-            var annotations = Dependencies.AnnotationCodeGenerator.FilterIgnoredAnnotations(
-                    foreignKey.GetAnnotations()
-                )
+            var annotations = Dependencies.AnnotationCodeGenerator
+                .FilterIgnoredAnnotations(foreignKey.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
             foreach (
-                var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator.GenerateFluentApiCalls(
-                    foreignKey,
-                    annotations
-                )
+                var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator
+                    .GenerateFluentApiCalls(foreignKey, annotations)
             )
             {
                 stringBuilder.AppendLine().Append(Code.Fragment(methodCallCodeFragment));
@@ -1450,16 +1425,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Check.NotNull(navigation, nameof(navigation));
             Check.NotNull(stringBuilder, nameof(stringBuilder));
 
-            var annotations = Dependencies.AnnotationCodeGenerator.FilterIgnoredAnnotations(
-                    navigation.GetAnnotations()
-                )
+            var annotations = Dependencies.AnnotationCodeGenerator
+                .FilterIgnoredAnnotations(navigation.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
             foreach (
-                var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator.GenerateFluentApiCalls(
-                    navigation,
-                    annotations
-                )
+                var methodCallCodeFragment in Dependencies.AnnotationCodeGenerator
+                    .GenerateFluentApiCalls(navigation, annotations)
             )
             {
                 stringBuilder.AppendLine().Append(Code.Fragment(methodCallCodeFragment));

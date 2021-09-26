@@ -3168,24 +3168,25 @@ class Test
             var comp = CSharpCompilation.Create(
                 "Name",
                 references: new[] { reference },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var pid = (
-                (NamedTypeSymbol)comp.GlobalNamespace.GetMembers()
+                (NamedTypeSymbol)comp.GlobalNamespace
+                    .GetMembers()
                     .Single(
                         s =>
-                            s.Name.StartsWith(
-                                "<PrivateImplementationDetails>",
-                                StringComparison.Ordinal
-                            )
+                            s.Name
+                                .StartsWith(
+                                    "<PrivateImplementationDetails>",
+                                    StringComparison.Ordinal
+                                )
                     )
             );
             var member = pid.GetMembers(
-                    PrivateImplementationDetails.SynthesizedStringHashFunctionName
-                )
+                PrivateImplementationDetails.SynthesizedStringHashFunctionName
+            )
                 .Single();
             Assert.Equal(Accessibility.Internal, member.DeclaredAccessibility);
         }
@@ -7168,10 +7169,9 @@ public class Test
                 text,
                 options: TestOptions.ReleaseExe.WithModuleName("MODULE")
             );
-            CompileAndVerify(comp)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size      326 (0x146)
   .maxstack  2
@@ -7305,7 +7305,7 @@ public class Test
   IL_0140:  call       ""void System.Console.Write(int)""
   IL_0145:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(634404, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/634404")]
@@ -7342,10 +7342,9 @@ public class Test
             );
 
             // With special members available, we use a hashtable approach.
-            CompileAndVerify(comp)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size      307 (0x133)
   .maxstack  2
@@ -7471,16 +7470,15 @@ public class Test
   IL_012d:  call       ""void System.Console.Write(int)""
   IL_0132:  ret
 }"
-                );
+            );
 
             comp = CreateCompilation(text);
             comp.MakeMemberMissing(SpecialMember.System_String__Chars);
 
             // Can't use the hash version when String.Chars is unavailable.
-            CompileAndVerify(comp)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size      186 (0xba)
   .maxstack  2
@@ -7554,7 +7552,7 @@ public class Test
   IL_00b4:  call       ""void System.Console.Write(int)""
   IL_00b9:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(947580, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/947580")]
@@ -8623,19 +8621,18 @@ class Program
     }
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7)
-                .VerifyDiagnostics(
-                    // (13,21): error CS8413: An expression of type 'ValueType' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                    //         return o is T t ? t : default(T);
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
-                        .WithArguments("System.ValueType", "T", "7.0", "7.1")
-                        .WithLocation(13, 21),
-                    // (19,18): error CS8413: An expression of type 'ValueType' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                    //             case T t:
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
-                        .WithArguments("System.ValueType", "T", "7.0", "7.1")
-                        .WithLocation(19, 18)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
+                // (13,21): error CS8413: An expression of type 'ValueType' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                //         return o is T t ? t : default(T);
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                    .WithArguments("System.ValueType", "T", "7.0", "7.1")
+                    .WithLocation(13, 21),
+                // (19,18): error CS8413: An expression of type 'ValueType' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                //             case T t:
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                    .WithArguments("System.ValueType", "T", "7.0", "7.1")
+                    .WithLocation(19, 18)
+            );
             var compVerifier = CompileAndVerify(
                 source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
@@ -8766,19 +8763,18 @@ class Program
         }
     }
 }";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7)
-                .VerifyDiagnostics(
-                    // (13,21): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'int' in C# 7.0. Please use language version 7.1 or greater.
-                    //         return o is int t ? t : default(int);
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "int")
-                        .WithArguments("T", "int", "7.0", "7.1")
-                        .WithLocation(13, 21),
-                    // (19,18): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'int' in C# 7.0. Please use language version 7.1 or greater.
-                    //             case int t:
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "int")
-                        .WithArguments("T", "int", "7.0", "7.1")
-                        .WithLocation(19, 18)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
+                // (13,21): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'int' in C# 7.0. Please use language version 7.1 or greater.
+                //         return o is int t ? t : default(int);
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "int")
+                    .WithArguments("T", "int", "7.0", "7.1")
+                    .WithLocation(13, 21),
+                // (19,18): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'int' in C# 7.0. Please use language version 7.1 or greater.
+                //             case int t:
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "int")
+                    .WithArguments("T", "int", "7.0", "7.1")
+                    .WithLocation(19, 18)
+            );
             var compVerifier = CompileAndVerify(
                 source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication),
@@ -8974,19 +8970,18 @@ class B : A
 }
 class X : B { }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7)
-                .VerifyDiagnostics(
-                    // (14,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                    //         return o is T t ? t : default(T);
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
-                        .WithArguments("A", "T", "7.0", "7.1")
-                        .WithLocation(14, 21),
-                    // (20,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                    //             case T t:
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
-                        .WithArguments("A", "T", "7.0", "7.1")
-                        .WithLocation(20, 18)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
+                // (14,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                //         return o is T t ? t : default(T);
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                    .WithArguments("A", "T", "7.0", "7.1")
+                    .WithLocation(14, 21),
+                // (20,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                //             case T t:
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                    .WithArguments("A", "T", "7.0", "7.1")
+                    .WithLocation(20, 18)
+            );
             var compVerifier = CompileAndVerify(
                 source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
@@ -9036,19 +9031,18 @@ class B : A
 }
 class X : B { }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7)
-                .VerifyDiagnostics(
-                    // (14,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                    //         return o is T t ? t : default(T);
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
-                        .WithArguments("A", "T", "7.0", "7.1")
-                        .WithLocation(14, 21),
-                    // (20,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                    //             case T t:
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
-                        .WithArguments("A", "T", "7.0", "7.1")
-                        .WithLocation(20, 18)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
+                // (14,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                //         return o is T t ? t : default(T);
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                    .WithArguments("A", "T", "7.0", "7.1")
+                    .WithLocation(14, 21),
+                // (20,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                //             case T t:
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                    .WithArguments("A", "T", "7.0", "7.1")
+                    .WithLocation(20, 18)
+            );
             var compVerifier = CompileAndVerify(
                 source,
                 options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
@@ -9096,24 +9090,23 @@ struct B : I1
 {
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7)
-                .VerifyDiagnostics(
-                    // (13,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                    //         return o is T t;
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
-                        .WithArguments("A", "T", "7.0", "7.1")
-                        .WithLocation(13, 21),
-                    // (19,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                    //             case T t:
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
-                        .WithArguments("A", "T", "7.0", "7.1")
-                        .WithLocation(19, 18)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
+                // (13,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                //         return o is T t;
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                    .WithArguments("A", "T", "7.0", "7.1")
+                    .WithLocation(13, 21),
+                // (19,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                //             case T t:
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                    .WithArguments("A", "T", "7.0", "7.1")
+                    .WithLocation(19, 18)
+            );
             var compilation = CreateCompilation(
-                    source,
-                    options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                    parseOptions: TestOptions.Regular7_1
-                )
+                source,
+                options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
+                parseOptions: TestOptions.Regular7_1
+            )
                 .VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: "FalseFalseTrueTrue");
         }
@@ -9154,24 +9147,23 @@ struct B
 {
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7)
-                .VerifyDiagnostics(
-                    // (13,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                    //         return o is T t;
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
-                        .WithArguments("A", "T", "7.0", "7.1")
-                        .WithLocation(13, 21),
-                    // (19,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
-                    //             case T t:
-                    Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
-                        .WithArguments("A", "T", "7.0", "7.1")
-                        .WithLocation(19, 18)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
+                // (13,21): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                //         return o is T t;
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                    .WithArguments("A", "T", "7.0", "7.1")
+                    .WithLocation(13, 21),
+                // (19,18): error CS8413: An expression of type 'A' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                //             case T t:
+                Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
+                    .WithArguments("A", "T", "7.0", "7.1")
+                    .WithLocation(19, 18)
+            );
             var compilation = CreateCompilation(
-                    source,
-                    options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
-                    parseOptions: TestOptions.Regular7_1
-                )
+                source,
+                options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication),
+                parseOptions: TestOptions.Regular7_1
+            )
                 .VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: "FalseFalseTrueTrue");
             compVerifier.VerifyDiagnostics();
@@ -9208,22 +9200,21 @@ class Program
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (18,13): error CS0152: The switch statement contains multiple cases with the label value '1'
-                    //             case Generic<dynamic>.Color.Red: // error: duplicate case
-                    Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case Generic<dynamic>.Color.Red:")
-                        .WithArguments("1")
-                        .WithLocation(18, 13),
-                    // (19,13): error CS0152: The switch statement contains multiple cases with the label value '2'
-                    //             case Generic<(int z, int w)>.Color.Blue: // error: duplicate case
-                    Diagnostic(
-                            ErrorCode.ERR_DuplicateCaseLabel,
-                            "case Generic<(int z, int w)>.Color.Blue:"
-                        )
-                        .WithArguments("2")
-                        .WithLocation(19, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (18,13): error CS0152: The switch statement contains multiple cases with the label value '1'
+                //             case Generic<dynamic>.Color.Red: // error: duplicate case
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case Generic<dynamic>.Color.Red:")
+                    .WithArguments("1")
+                    .WithLocation(18, 13),
+                // (19,13): error CS0152: The switch statement contains multiple cases with the label value '2'
+                //             case Generic<(int z, int w)>.Color.Blue: // error: duplicate case
+                Diagnostic(
+                    ErrorCode.ERR_DuplicateCaseLabel,
+                    "case Generic<(int z, int w)>.Color.Blue:"
+                )
+                    .WithArguments("2")
+                    .WithLocation(19, 13)
+            );
         }
 
         [Fact, WorkItem(16195, "https://github.com/dotnet/roslyn/issues/16195")]
@@ -9270,9 +9261,9 @@ class Program
 }
 ";
             var compilation = CreateCompilation(
-                    source,
-                    options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication)
-                )
+                source,
+                options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication)
+            )
                 .VerifyDiagnostics();
             var compVerifier = CompileAndVerify(
                 compilation,
@@ -9367,9 +9358,9 @@ class C
     }
 }";
             var compilation = CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication)
-                )
+                source,
+                options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.ConsoleApplication)
+            )
                 .VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: @"True");
             compVerifier.VerifyIL(
@@ -9479,7 +9470,8 @@ public class Program
                 source,
                 expectedOutput: "",
                 symbolValidator: validator,
-                options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication)
+                options: TestOptions.DebugDll
+                    .WithOutputKind(OutputKind.ConsoleApplication)
                     .WithMetadataImportOptions(MetadataImportOptions.All)
             );
 
@@ -9727,9 +9719,9 @@ class Program
 }
 ";
             var compilation = CreateCompilation(
-                    source,
-                    options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication)
-                )
+                source,
+                options: TestOptions.DebugDll.WithOutputKind(OutputKind.ConsoleApplication)
+            )
                 .VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: "abc");
             compVerifier.VerifyIL(
@@ -10006,10 +9998,10 @@ class Program
 }
 ";
             var compilation = CreateCompilation(
-                    source,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.Regular9
-                )
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular9
+            )
                 .VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: "123333456");
             compVerifier.VerifyIL(
@@ -10078,10 +10070,10 @@ class Program
 "
             );
             compilation = CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseExe,
-                    parseOptions: TestOptions.Regular9
-                )
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.Regular9
+            )
                 .VerifyDiagnostics();
             compVerifier = CompileAndVerify(compilation, expectedOutput: "123333456");
             compVerifier.VerifyIL(

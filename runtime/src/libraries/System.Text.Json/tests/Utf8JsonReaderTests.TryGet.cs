@@ -116,14 +116,13 @@ namespace System.Text.Json.Tests
                         );
                         float actual = float.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = floats[count].ToString(
-                            JsonTestHelper.SingleFormatString,
-                            CultureInfo.InvariantCulture
-                        );
-                        float expected = float.Parse(
-                            roundTripExpected,
-                            CultureInfo.InvariantCulture
-                        );
+                        string roundTripExpected = floats[count]
+                            .ToString(
+                                JsonTestHelper.SingleFormatString,
+                                CultureInfo.InvariantCulture
+                            );
+                        float expected = float
+                            .Parse(roundTripExpected, CultureInfo.InvariantCulture);
 
                         Assert.Equal(expected, actual);
                         count++;
@@ -140,14 +139,13 @@ namespace System.Text.Json.Tests
                         );
                         double actual = double.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = doubles[count].ToString(
-                            JsonTestHelper.DoubleFormatString,
-                            CultureInfo.InvariantCulture
-                        );
-                        double expected = double.Parse(
-                            roundTripExpected,
-                            CultureInfo.InvariantCulture
-                        );
+                        string roundTripExpected = doubles[count]
+                            .ToString(
+                                JsonTestHelper.DoubleFormatString,
+                                CultureInfo.InvariantCulture
+                            );
+                        double expected = double
+                            .Parse(roundTripExpected, CultureInfo.InvariantCulture);
 
                         Assert.Equal(expected, actual);
                         count++;
@@ -158,11 +156,8 @@ namespace System.Text.Json.Tests
                         if (count >= decimals.Count)
                             count = 0;
 
-                        var str = string.Format(
-                            CultureInfo.InvariantCulture,
-                            "{0}",
-                            decimals[count]
-                        );
+                        var str = string
+                            .Format(CultureInfo.InvariantCulture, "{0}", decimals[count]);
                         decimal expected = decimal.Parse(str, CultureInfo.InvariantCulture);
                         Assert.Equal(expected, numberDecimal);
                         count++;
@@ -268,14 +263,13 @@ namespace System.Text.Json.Tests
                             );
                         float actual = float.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = floats[count].ToString(
-                            JsonTestHelper.SingleFormatString,
-                            CultureInfo.InvariantCulture
-                        );
-                        float expected = float.Parse(
-                            roundTripExpected,
-                            CultureInfo.InvariantCulture
-                        );
+                        string roundTripExpected = floats[count]
+                            .ToString(
+                                JsonTestHelper.SingleFormatString,
+                                CultureInfo.InvariantCulture
+                            );
+                        float expected = float
+                            .Parse(roundTripExpected, CultureInfo.InvariantCulture);
 
                         Assert.Equal(expected, actual);
                         count++;
@@ -292,14 +286,13 @@ namespace System.Text.Json.Tests
                             );
                         double actual = double.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = doubles[count].ToString(
-                            JsonTestHelper.DoubleFormatString,
-                            CultureInfo.InvariantCulture
-                        );
-                        double expected = double.Parse(
-                            roundTripExpected,
-                            CultureInfo.InvariantCulture
-                        );
+                        string roundTripExpected = doubles[count]
+                            .ToString(
+                                JsonTestHelper.DoubleFormatString,
+                                CultureInfo.InvariantCulture
+                            );
+                        double expected = double
+                            .Parse(roundTripExpected, CultureInfo.InvariantCulture);
 
                         Assert.Equal(expected, actual);
                         count++;
@@ -311,11 +304,8 @@ namespace System.Text.Json.Tests
                             if (count >= decimals.Count)
                                 count = 0;
 
-                            var str = string.Format(
-                                CultureInfo.InvariantCulture,
-                                "{0}",
-                                decimals[count]
-                            );
+                            var str = string
+                                .Format(CultureInfo.InvariantCulture, "{0}", decimals[count]);
                             decimal expected = decimal.Parse(str, CultureInfo.InvariantCulture);
                             Assert.Equal(expected, json.GetDecimal());
                             count++;
@@ -324,11 +314,12 @@ namespace System.Text.Json.Tests
                         {
                             Assert.True(
                                 false,
-                                string.Format(
-                                    "Unexpected exception: {0}. Message: {1}",
-                                    except.Source,
-                                    except.Message
-                                )
+                                string
+                                    .Format(
+                                        "Unexpected exception: {0}. Message: {1}",
+                                        except.Source,
+                                        except.Message
+                                    )
                             );
                         }
                     }

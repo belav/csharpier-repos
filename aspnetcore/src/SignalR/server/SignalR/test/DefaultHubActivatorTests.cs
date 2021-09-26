@@ -37,15 +37,14 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public void DisposeNotCalledForHubsResolvedFromServiceProvider()
         {
             var mockServiceProvider = new Mock<IServiceProvider>();
-            mockServiceProvider.Setup(sp => sp.GetService(typeof(Hub)))
-                .Returns(
-                    () =>
-                    {
-                        var m = new Mock<Hub>();
-                        m.Protected().Setup("Dispose", ItExpr.IsAny<bool>());
-                        return m.Object;
-                    }
-                );
+            mockServiceProvider.Setup(sp => sp.GetService(typeof(Hub))).Returns(
+                () =>
+                {
+                    var m = new Mock<Hub>();
+                    m.Protected().Setup("Dispose", ItExpr.IsAny<bool>());
+                    return m.Object;
+                }
+            );
 
             var hubActivator = new DefaultHubActivator<Hub>(mockServiceProvider.Object);
             var hub = hubActivator.Create();

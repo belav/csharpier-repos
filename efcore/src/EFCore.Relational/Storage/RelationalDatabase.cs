@@ -57,13 +57,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             Check.NotNull(entries, nameof(entries));
 
-            return RelationalDependencies.BatchExecutor.Execute(
-                RelationalDependencies.BatchPreparer.BatchCommands(
-                    entries,
-                    Dependencies.UpdateAdapterFactory.Create()
-                ),
-                RelationalDependencies.Connection
-            );
+            return RelationalDependencies.BatchExecutor
+                .Execute(
+                    RelationalDependencies.BatchPreparer
+                        .BatchCommands(entries, Dependencies.UpdateAdapterFactory.Create()),
+                    RelationalDependencies.Connection
+                );
         }
 
         /// <summary>
@@ -83,14 +82,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             Check.NotNull(entries, nameof(entries));
 
-            return RelationalDependencies.BatchExecutor.ExecuteAsync(
-                RelationalDependencies.BatchPreparer.BatchCommands(
-                    entries,
-                    Dependencies.UpdateAdapterFactory.Create()
-                ),
-                RelationalDependencies.Connection,
-                cancellationToken
-            );
+            return RelationalDependencies.BatchExecutor
+                .ExecuteAsync(
+                    RelationalDependencies.BatchPreparer
+                        .BatchCommands(entries, Dependencies.UpdateAdapterFactory.Create()),
+                    RelationalDependencies.Connection,
+                    cancellationToken
+                );
         }
     }
 }

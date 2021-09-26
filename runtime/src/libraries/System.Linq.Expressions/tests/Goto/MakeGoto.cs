@@ -9,9 +9,8 @@ namespace System.Linq.Expressions.Tests
     public class MakeGoto
     {
         public static IEnumerable<object[]> GotoTypes =>
-            ((GotoExpressionKind[])Enum.GetValues(typeof(GotoExpressionKind))).Select(
-                kind => new object[] { kind }
-            );
+            ((GotoExpressionKind[])Enum.GetValues(typeof(GotoExpressionKind)))
+                .Select(kind => new object[] { kind });
 
         [Theory]
         [MemberData(nameof(GotoTypes))]

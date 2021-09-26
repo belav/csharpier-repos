@@ -101,8 +101,8 @@ namespace System.Runtime.Serialization.Json
                 if (canWriteSimpleDictionary && useSimpleDictionaryFormat)
                 {
                     ReflectionWriteObjectAttribute(jsonWriter);
-                    Type[] itemTypeGenericArguments =
-                        collectionContract.ItemType.GetGenericArguments();
+                    Type[] itemTypeGenericArguments = collectionContract.ItemType
+                        .GetGenericArguments();
                     Type? dictionaryValueType =
                         itemTypeGenericArguments.Length == 2 ? itemTypeGenericArguments[1] : null;
 
@@ -180,12 +180,13 @@ namespace System.Runtime.Serialization.Json
                             );
                             if (isDictionary)
                             {
-                                jsonDataContract!.WriteJsonValue(
-                                    jsonWriter,
-                                    current,
-                                    context,
-                                    collectionContract.ItemType.TypeHandle
-                                );
+                                jsonDataContract!
+                                    .WriteJsonValue(
+                                        jsonWriter,
+                                        current,
+                                        context,
+                                        collectionContract.ItemType.TypeHandle
+                                    );
                             }
                             else
                             {

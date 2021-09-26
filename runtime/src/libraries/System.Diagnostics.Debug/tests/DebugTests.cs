@@ -14,10 +14,8 @@ namespace System.Diagnostics.Tests
 
         static DebugTests()
         {
-            FieldInfo fieldInfo = typeof(Debug).GetField(
-                "s_provider",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            FieldInfo fieldInfo = typeof(Debug)
+                .GetField("s_provider", BindingFlags.Static | BindingFlags.NonPublic);
             _debugOnlyProvider = (DebugProvider)fieldInfo.GetValue(null);
             // Triggers code to wire up TraceListeners with Debug
             Assert.Equal(1, Trace.Listeners.Count);
@@ -39,10 +37,8 @@ namespace System.Diagnostics.Tests
 
         protected void VerifyLogged(Action test, string expectedOutput)
         {
-            FieldInfo writeCoreHook = typeof(DebugProvider).GetField(
-                "s_WriteCore",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            FieldInfo writeCoreHook = typeof(DebugProvider)
+                .GetField("s_WriteCore", BindingFlags.Static | BindingFlags.NonPublic);
 
             // First use our test logger to verify the output
             var originalWriteCoreHook = writeCoreHook.GetValue(null);
@@ -67,17 +63,13 @@ namespace System.Diagnostics.Tests
 
         protected void VerifyAssert(Action test, params string[] expectedOutputStrings)
         {
-            FieldInfo writeCoreHook = typeof(DebugProvider).GetField(
-                "s_WriteCore",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            FieldInfo writeCoreHook = typeof(DebugProvider)
+                .GetField("s_WriteCore", BindingFlags.Static | BindingFlags.NonPublic);
             var originalWriteCoreHook = writeCoreHook.GetValue(null);
             writeCoreHook.SetValue(null, new Action<string>(WriteLogger.s_instance.WriteCore));
 
-            FieldInfo failCoreHook = typeof(DebugProvider).GetField(
-                "s_FailCore",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            FieldInfo failCoreHook = typeof(DebugProvider)
+                .GetField("s_FailCore", BindingFlags.Static | BindingFlags.NonPublic);
             var originalFailCoreHook = failCoreHook.GetValue(null);
             failCoreHook.SetValue(
                 null,

@@ -29,10 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             CommandExecutionContext context
         )
         {
-            using var _ = context.OperationContext.AddScope(
-                allowCancellation: true,
-                EditorFeaturesResources.Formatting_pasted_text
-            );
+            using var _ = context.OperationContext
+                .AddScope(allowCancellation: true, EditorFeaturesResources.Formatting_pasted_text);
             var caretPosition = args.TextView.GetCaretPoint(args.SubjectBuffer);
 
             nextHandler();
@@ -74,21 +72,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 return;
             }
 
-            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(
-                caretPosition.Value.Position,
-                0,
-                SpanTrackingMode.EdgeInclusive
-            );
+            var trackingSpan = caretPosition.Value.Snapshot
+                .CreateTrackingSpan(
+                    caretPosition.Value.Position,
+                    0,
+                    SpanTrackingMode.EdgeInclusive
+                );
 
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
             }
 
-            var formattingRuleService =
-                document.Project.Solution.Workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleService = document.Project.Solution.Workspace.Services
+                .GetService<IHostDependentFormattingRuleFactoryService>();
             if (
                 formattingRuleService != null
                 && formattingRuleService.ShouldNotFormatOrCommitOnPaste(document)
@@ -105,22 +104,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
 
             var span = trackingSpan.GetSpan(args.SubjectBuffer.CurrentSnapshot).Span.ToTextSpan();
             var changes = formattingService.GetFormattingChangesOnPasteAsync(
-                    document,
-                    span,
-                    documentOptions: null,
-                    cancellationToken
-                )
+                document,
+                span,
+                documentOptions: null,
+                cancellationToken
+            )
                 .WaitAndGetResult(cancellationToken);
             if (changes.Count == 0)
             {
                 return;
             }
 
-            document.Project.Solution.Workspace.ApplyTextChanges(
-                document.Id,
-                changes,
-                cancellationToken
-            );
+            document.Project.Solution.Workspace
+                .ApplyTextChanges(document.Id, changes, cancellationToken);
         }
     }
 }

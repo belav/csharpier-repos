@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
-            base.AddServices(serviceCollection)
+            base
+                .AddServices(serviceCollection)
                 .AddSingleton<IRelationalTypeMappingSource, ReplacementTypeMappingSource>();
 
         protected class ReplacementTypeMappingSource : SqlServerTypeMappingSource
@@ -53,9 +54,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             ) =>
                 mappingInfo.ClrType == typeof(GeoPoint)
                     ? (
-                          (RelationalTypeMapping)base.FindMapping(typeof(Point))
+                          (RelationalTypeMapping)base
+                              .FindMapping(typeof(Point))
                               .Clone(new GeoPointConverter())
-                      ).Clone("geometry", null)
+                      )
+                      .Clone("geometry", null)
                     : base.FindMapping(mappingInfo);
         }
     }

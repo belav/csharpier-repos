@@ -366,10 +366,8 @@ namespace System.Net.Tests
 
             // We need url group id which is private so we get it using reflection.
             string urlGroupIdName = "_urlGroupId";
-            FieldInfo info = typeof(HttpListener).GetField(
-                urlGroupIdName,
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            FieldInfo info = typeof(HttpListener)
+                .GetField(urlGroupIdName, BindingFlags.Instance | BindingFlags.NonPublic);
             ulong urlGroupId = (ulong)info.GetValue(_listener);
 
             HTTP_TIMEOUT_LIMIT_INFO timeoutinfo = new HTTP_TIMEOUT_LIMIT_INFO();

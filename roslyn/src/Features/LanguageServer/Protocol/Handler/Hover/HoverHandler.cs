@@ -44,18 +44,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             }
 
             var position = await document.GetPositionFromLinePositionAsync(
-                    ProtocolConversions.PositionToLinePosition(request.Position),
-                    cancellationToken
-                )
+                ProtocolConversions.PositionToLinePosition(request.Position),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
-            var quickInfoService =
-                document.Project.LanguageServices.GetRequiredService<QuickInfoService>();
+            var quickInfoService = document.Project.LanguageServices
+                .GetRequiredService<QuickInfoService>();
             var info = await quickInfoService.GetQuickInfoAsync(
-                    document,
-                    position,
-                    cancellationToken
-                )
+                document,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (info == null)
             {
@@ -77,10 +77,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // Build the classified text without navigation actions - they are not serializable.
                 RawContent =
                     await IntellisenseQuickInfoBuilder.BuildContentWithoutNavigationActionsAsync(
-                            info,
-                            document,
-                            cancellationToken
-                        )
+                        info,
+                        document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
             };
         }

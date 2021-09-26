@@ -217,27 +217,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             int testPort = 0
         )
         {
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                serverOptions =>
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        serverOptions =>
+                        {
+                            serverOptions.ConfigureHttpsDefaults(
+                                httpsOptions =>
                                 {
-                                    serverOptions.ConfigureHttpsDefaults(
-                                        httpsOptions =>
-                                        {
-                                            httpsOptions.ServerCertificate =
-                                                TestResources.GetTestCertificate();
-                                        }
-                                    );
+                                    httpsOptions.ServerCertificate =
+                                        TestResources.GetTestCertificate();
                                 }
-                            )
-                            .UseUrls(addressInput)
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+                            );
+                        }
+                    ).UseUrls(addressInput).Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -285,43 +281,35 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         [Fact]
         public async Task RegisterHttpAddress_UpgradedToHttpsByConfigureEndpointDefaults()
         {
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                serverOptions =>
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        serverOptions =>
+                        {
+                            serverOptions.ConfigureEndpointDefaults(
+                                listenOptions =>
                                 {
-                                    serverOptions.ConfigureEndpointDefaults(
-                                        listenOptions =>
-                                        {
-                                            listenOptions.UseHttps(
-                                                TestResources.GetTestCertificate()
-                                            );
-                                        }
-                                    );
-                                }
-                            )
-                            .UseUrls("http://127.0.0.1:0")
-                            .Configure(
-                                app =>
-                                {
-                                    var serverAddresses =
-                                        app.ServerFeatures.Get<IServerAddressesFeature>();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.Single(serverAddresses.Addresses);
-                                            return context.Response.WriteAsync(
-                                                serverAddresses.Addresses.First()
-                                            );
-                                        }
-                                    );
+                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
                                 }
                             );
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+                        }
+                    ).UseUrls("http://127.0.0.1:0").Configure(
+                        app =>
+                        {
+                            var serverAddresses = app.ServerFeatures.Get<IServerAddressesFeature>();
+                            app.Run(
+                                context =>
+                                {
+                                    Assert.Single(serverAddresses.Addresses);
+                                    return context.Response
+                                        .WriteAsync(serverAddresses.Addresses.First());
+                                }
+                            );
+                        }
+                    );
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -379,36 +367,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             int testPort = 0
         )
         {
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(
+                                endPoint,
+                                listenOptions =>
                                 {
-                                    options.Listen(
-                                        endPoint,
-                                        listenOptions =>
-                                        {
-                                            if (
-                                                testUrl.StartsWith(
-                                                    "https",
-                                                    StringComparison.Ordinal
-                                                )
-                                            )
-                                            {
-                                                listenOptions.UseHttps(
-                                                    TestResources.GetTestCertificate()
-                                                );
-                                            }
-                                        }
-                                    );
+                                    if (testUrl.StartsWith("https", StringComparison.Ordinal))
+                                    {
+                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                    }
                                 }
-                            )
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+                            );
+                        }
+                    ).Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -418,9 +396,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
                 var options =
                     (
-                        (IOptions<KestrelServerOptions>)host.Services.GetService(
-                            typeof(IOptions<KestrelServerOptions>)
-                        )
+                        (IOptions<KestrelServerOptions>)host.Services
+                            .GetService(typeof(IOptions<KestrelServerOptions>))
                     ).Value;
                 Assert.Single(options.ListenOptions);
 
@@ -468,20 +445,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
         private async Task ListenAnyIP_Success(string[] testUrls, int testPort = 0)
         {
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
-                                {
-                                    options.ListenAnyIP(testPort);
-                                }
-                            )
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.ListenAnyIP(testPort);
+                        }
+                    ).Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -529,20 +503,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
         private async Task ListenLocalhost_Success(string[] testUrls, int testPort = 0)
         {
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
-                                {
-                                    options.ListenLocalhost(testPort);
-                                }
-                            )
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.ListenLocalhost(testPort);
+                        }
+                    ).Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -648,24 +619,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             bool mockHttps = false
         )
         {
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
-                                {
-                                    if (mockHttps)
-                                    {
-                                        options.DefaultCertificate =
-                                            TestResources.GetTestCertificate();
-                                    }
-                                }
-                            )
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            if (mockHttps)
+                            {
+                                options.DefaultCertificate = TestResources.GetTestCertificate();
+                            }
+                        }
+                    ).Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -683,21 +650,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     log =>
                         log.LogLevel == LogLevel.Debug
                         && (
-                            string.Equals(
-                                CoreStrings.FormatBindingToDefaultAddresses(
-                                    Constants.DefaultServerAddress,
-                                    Constants.DefaultServerHttpsAddress
-                                ),
-                                log.Message,
-                                StringComparison.Ordinal
-                            )
-                            || string.Equals(
-                                CoreStrings.FormatBindingToDefaultAddress(
-                                    Constants.DefaultServerAddress
-                                ),
-                                log.Message,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    CoreStrings.FormatBindingToDefaultAddresses(
+                                        Constants.DefaultServerAddress,
+                                        Constants.DefaultServerHttpsAddress
+                                    ),
+                                    log.Message,
+                                    StringComparison.Ordinal
+                                )
+                            || string
+                                .Equals(
+                                    CoreStrings.FormatBindingToDefaultAddress(
+                                        Constants.DefaultServerAddress
+                                    ),
+                                    log.Message,
+                                    StringComparison.Ordinal
+                                )
                         )
                 );
 
@@ -730,16 +699,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 socket.Listen(0);
                 var port = ((IPEndPoint)socket.LocalEndPoint).Port;
 
-                var hostBuilder = TransportSelector.GetHostBuilder()
-                    .ConfigureWebHost(
-                        webHostBuilder =>
-                        {
-                            webHostBuilder.UseKestrel()
-                                .UseUrls($"http://127.0.0.1:{port}")
-                                .Configure(ConfigureEchoAddress);
-                        }
-                    )
-                    .ConfigureServices(AddTestLogging);
+                var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseKestrel()
+                            .UseUrls($"http://127.0.0.1:{port}")
+                            .Configure(ConfigureEchoAddress);
+                    }
+                ).ConfigureServices(AddTestLogging);
 
                 using (var host = hostBuilder.Build())
                 {
@@ -780,16 +747,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 socket.Listen(0);
                 var port = ((IPEndPoint)socket.LocalEndPoint).Port;
 
-                var hostBuilder = TransportSelector.GetHostBuilder()
-                    .ConfigureWebHost(
-                        webHostBuilder =>
-                        {
-                            webHostBuilder.UseKestrel()
-                                .UseUrls($"http://[::1]:{port}")
-                                .Configure(ConfigureEchoAddress);
-                        }
-                    )
-                    .ConfigureServices(AddTestLogging);
+                var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseKestrel()
+                            .UseUrls($"http://[::1]:{port}")
+                            .Configure(ConfigureEchoAddress);
+                    }
+                ).ConfigureServices(AddTestLogging);
 
                 using (var host = hostBuilder.Build())
                 {
@@ -817,30 +782,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         public async Task OverrideDirectConfigurationWithIServerAddressesFeature_Succeeds()
         {
             var useUrlsAddress = $"http://127.0.0.1:0";
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(
+                                new IPEndPoint(IPAddress.Loopback, 0),
+                                listenOptions =>
                                 {
-                                    options.Listen(
-                                        new IPEndPoint(IPAddress.Loopback, 0),
-                                        listenOptions =>
-                                        {
-                                            listenOptions.UseHttps(
-                                                TestResources.GetTestCertificate()
-                                            );
-                                        }
-                                    );
+                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
                                 }
-                            )
-                            .UseUrls(useUrlsAddress)
-                            .PreferHostingUrls(true)
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+                            );
+                        }
+                    ).UseUrls(useUrlsAddress).PreferHostingUrls(true).Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -851,7 +809,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 // If this isn't working properly, we'll get the HTTPS endpoint defined in UseKestrel
                 // instead of the HTTP endpoint defined in UseUrls.
                 var serverAddresses =
-                    host.Services.GetRequiredService<IServer>()
+                    host.Services
+                        .GetRequiredService<IServer>()
                         .Features.Get<IServerAddressesFeature>().Addresses;
                 Assert.Equal(1, serverAddresses.Count);
                 var useUrlsAddressWithPort = $"http://127.0.0.1:{port}";
@@ -861,14 +820,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     LogMessages,
                     log =>
                         log.LogLevel == LogLevel.Information
-                        && string.Equals(
-                            CoreStrings.FormatOverridingWithPreferHostingUrls(
-                                nameof(IServerAddressesFeature.PreferHostingUrls),
-                                useUrlsAddress
-                            ),
-                            log.Message,
-                            StringComparison.Ordinal
-                        )
+                        && string
+                            .Equals(
+                                CoreStrings.FormatOverridingWithPreferHostingUrls(
+                                    nameof(IServerAddressesFeature.PreferHostingUrls),
+                                    useUrlsAddress
+                                ),
+                                log.Message,
+                                StringComparison.Ordinal
+                            )
                 );
 
                 Assert.Equal(
@@ -885,31 +845,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         {
             var useUrlsAddress = $"http://127.0.0.1:0";
 
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(
+                                new IPEndPoint(IPAddress.Loopback, 0),
+                                listenOptions =>
                                 {
-                                    options.Listen(
-                                        new IPEndPoint(IPAddress.Loopback, 0),
-                                        listenOptions =>
-                                        {
-                                            listenOptions.UseHttps(
-                                                TestResources.TestCertificatePath,
-                                                "testPassword"
-                                            );
-                                        }
+                                    listenOptions.UseHttps(
+                                        TestResources.TestCertificatePath,
+                                        "testPassword"
                                     );
                                 }
-                            )
-                            .UseUrls($"http://127.0.0.1:0")
-                            .PreferHostingUrls(false)
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+                            );
+                        }
+                    ).UseUrls($"http://127.0.0.1:0").PreferHostingUrls(false).Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -920,7 +875,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 // If this isn't working properly, we'll get the HTTP endpoint defined in UseUrls
                 // instead of the HTTPS endpoint defined in UseKestrel.
                 var serverAddresses =
-                    host.Services.GetRequiredService<IServer>()
+                    host.Services
+                        .GetRequiredService<IServer>()
                         .Features.Get<IServerAddressesFeature>().Addresses;
                 Assert.Equal(1, serverAddresses.Count);
                 var endPointAddress = $"https://127.0.0.1:{port}";
@@ -930,11 +886,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     LogMessages,
                     log =>
                         log.LogLevel == LogLevel.Warning
-                        && string.Equals(
-                            CoreStrings.FormatOverridingWithKestrelOptions(useUrlsAddress),
-                            log.Message,
-                            StringComparison.Ordinal
-                        )
+                        && string
+                            .Equals(
+                                CoreStrings.FormatOverridingWithKestrelOptions(useUrlsAddress),
+                                log.Message,
+                                StringComparison.Ordinal
+                            )
                 );
 
                 Assert.Equal(
@@ -948,29 +905,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         [Fact]
         public async Task DoesNotOverrideDirectConfigurationWithIServerAddressesFeature_IfAddressesEmpty()
         {
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(
+                                new IPEndPoint(IPAddress.Loopback, 0),
+                                listenOptions =>
                                 {
-                                    options.Listen(
-                                        new IPEndPoint(IPAddress.Loopback, 0),
-                                        listenOptions =>
-                                        {
-                                            listenOptions.UseHttps(
-                                                TestResources.GetTestCertificate()
-                                            );
-                                        }
-                                    );
+                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
                                 }
-                            )
-                            .PreferHostingUrls(true)
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+                            );
+                        }
+                    ).PreferHostingUrls(true).Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -980,7 +931,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
                 // If this isn't working properly, we'll not get the HTTPS endpoint defined in UseKestrel.
                 var serverAddresses =
-                    host.Services.GetRequiredService<IServer>()
+                    host.Services
+                        .GetRequiredService<IServer>()
                         .Features.Get<IServerAddressesFeature>().Addresses;
                 Assert.Equal(1, serverAddresses.Count);
                 var endPointAddress = $"https://127.0.0.1:{port}";
@@ -1013,16 +965,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         {
             IgnoredCriticalLogExceptions.Add(typeof(InvalidOperationException));
 
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel()
-                            .UseUrls("http://localhost:0")
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel()
+                        .UseUrls("http://localhost:0")
+                        .Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -1039,16 +989,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         {
             IgnoredCriticalLogExceptions.Add(typeof(InvalidOperationException));
 
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel()
-                            .UseUrls(address)
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel().UseUrls(address).Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -1064,20 +1010,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             var port = GetNextPort();
             var endPointAddress = $"http://127.0.0.1:{port}/";
 
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
-                                {
-                                    options.Listen(IPAddress.Loopback, port);
-                                }
-                            )
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(IPAddress.Loopback, port);
+                        }
+                    ).Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -1088,19 +1031,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 await host.StopAsync();
             }
 
-            hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
-                                {
-                                    options.Listen(IPAddress.Loopback, port);
-                                }
-                            )
-                            .Configure(ConfigureEchoAddress);
-                    }
-                );
+            hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(IPAddress.Loopback, port);
+                        }
+                    ).Configure(ConfigureEchoAddress);
+                }
+            );
 
             using (var host = hostBuilder.Build())
             {
@@ -1120,21 +1061,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             var ipv4endPointAddress = $"http://127.0.0.1:{port}/";
             var ipv6endPointAddress = $"http://[::1]:{port}/";
 
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
-                                {
-                                    options.Listen(IPAddress.Loopback, port);
-                                    options.Listen(IPAddress.IPv6Loopback, port);
-                                }
-                            )
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(IPAddress.Loopback, port);
+                            options.Listen(IPAddress.IPv6Loopback, port);
+                        }
+                    ).Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -1152,20 +1090,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 await host.StopAsync();
             }
 
-            hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
-                                {
-                                    options.Listen(IPAddress.Loopback, port);
-                                    options.Listen(IPAddress.IPv6Loopback, port);
-                                }
-                            )
-                            .Configure(ConfigureEchoAddress);
-                    }
-                );
+            hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(IPAddress.Loopback, port);
+                            options.Listen(IPAddress.IPv6Loopback, port);
+                        }
+                    ).Configure(ConfigureEchoAddress);
+                }
+            );
 
             using (var host = hostBuilder.Build())
             {
@@ -1194,33 +1130,30 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         )
         {
             KestrelServerOptions capturedOptions = null;
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
-                                {
-                                    var config = new ConfigurationBuilder().AddInMemoryCollection(
-                                            new[]
-                                            {
-                                                new KeyValuePair<string, string>(
-                                                    "EndpointDefaults:Protocols",
-                                                    input
-                                                ),
-                                            }
-                                        )
-                                        .Build();
-                                    options.Configure(config);
+            var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            var config = new ConfigurationBuilder()
+                                .AddInMemoryCollection(
+                                    new[]
+                                    {
+                                        new KeyValuePair<string, string>(
+                                            "EndpointDefaults:Protocols",
+                                            input
+                                        ),
+                                    }
+                                )
+                                .Build();
+                            options.Configure(config);
 
-                                    capturedOptions = options;
-                                }
-                            )
-                            .UseUrls("http://127.0.0.1:0")
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+                            capturedOptions = options;
+                        }
+                    ).UseUrls("http://127.0.0.1:0").Configure(ConfigureEchoAddress);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
@@ -1278,16 +1211,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         continue;
                     }
 
-                    var hostBuilder = TransportSelector.GetHostBuilder()
-                        .ConfigureWebHost(
-                            webHostBuilder =>
-                            {
-                                webHostBuilder.UseKestrel()
-                                    .UseUrls($"http://localhost:{port}")
-                                    .Configure(ConfigureEchoAddress);
-                            }
-                        )
-                        .ConfigureServices(AddTestLogging);
+                    var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                        webHostBuilder =>
+                        {
+                            webHostBuilder.UseKestrel()
+                                .UseUrls($"http://localhost:{port}")
+                                .Configure(ConfigureEchoAddress);
+                        }
+                    ).ConfigureServices(AddTestLogging);
 
                     using (var host = hostBuilder.Build())
                     {
@@ -1319,10 +1250,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                                 log =>
                                     log.LogLevel == LogLevel.Critical
                                     && log.Exception is null
-                                    && log.Message.EndsWith(
-                                        CoreStrings.FormatEndpointAlreadyInUse(thisAddressString),
-                                        StringComparison.Ordinal
-                                    )
+                                    && log.Message
+                                        .EndsWith(
+                                            CoreStrings.FormatEndpointAlreadyInUse(
+                                                thisAddressString
+                                            ),
+                                            StringComparison.Ordinal
+                                        )
                             )
                         );
                         break;

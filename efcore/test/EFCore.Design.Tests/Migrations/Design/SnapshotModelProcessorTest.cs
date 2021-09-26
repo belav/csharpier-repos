@@ -58,9 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var reporter = new TestOperationReporter();
 
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance)
+                .Process(model);
 
             AssertAnnotations(model);
             AssertAnnotations(entityType);
@@ -83,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 assembly,
                 new TestOperationReporter(),
                 new string[0]
-            ).Build(SqlServerTestHelpers.Instance.CreateContext())
+            )
+                .Build(SqlServerTestHelpers.Instance.CreateContext())
                 .GetRequiredService<ISnapshotModelProcessor>();
 
             Assert.NotNull(snapshotModelProcessor);
@@ -101,9 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var reporter = new TestOperationReporter();
 
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance)
+                .Process(model);
 
             Assert.Equal(
                 "warn: " + DesignStrings.MultipleAnnotationConflict("DefaultSchema"),
@@ -127,9 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var reporter = new TestOperationReporter();
 
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance)
+                .Process(model);
 
             Assert.Equal(
                 "warn: " + DesignStrings.MultipleAnnotationConflict("DefaultSchema"),
@@ -153,9 +151,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var reporter = new TestOperationReporter();
 
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance)
+                .Process(model);
 
             Assert.Empty(reporter.Messages);
 
@@ -174,9 +171,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var reporter = new TestOperationReporter();
 
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance)
+                .Process(model);
 
             Assert.Empty(reporter.Messages);
 
@@ -203,9 +199,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             );
 
             var reporter = new TestOperationReporter();
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance)
+                .Process(model);
 
             Assert.Empty(reporter.Messages);
             Assert.Equal(
@@ -228,7 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             var differ = context.GetService<IMigrationsModelDiffer>();
             var snapshot = (ModelSnapshot)Activator.CreateInstance(snapshotType);
             var reporter = new TestOperationReporter();
-            var modelRuntimeInitializer = SqlServerTestHelpers.Instance.CreateContextServices()
+            var modelRuntimeInitializer = SqlServerTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<IModelRuntimeInitializer>();
             var processor = new SnapshotModelProcessor(reporter, modelRuntimeInitializer);
             var model = processor.Process(snapshot.Model);
@@ -251,7 +247,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             var differ = context.GetService<IMigrationsModelDiffer>();
             var snapshot = (ModelSnapshot)Activator.CreateInstance(snapshotType);
             var reporter = new TestOperationReporter();
-            var setBuilder = SqlServerTestHelpers.Instance.CreateContextServices()
+            var setBuilder = SqlServerTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<IModelRuntimeInitializer>();
             var processor = new SnapshotModelProcessor(reporter, setBuilder);
             var model = processor.Process(snapshot.Model);
@@ -266,19 +263,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
         private void AddAnnotations(IMutableAnnotatable element)
         {
-            foreach (
-                var annotationName in GetAnnotationNames()
-                    .Where(
-                        a =>
-                            a != RelationalAnnotationNames.MaxIdentifierLength
+            foreach (var annotationName in GetAnnotationNames().Where(
+                    a =>
+                        a != RelationalAnnotationNames.MaxIdentifierLength
 #pragma warning disable CS0618 // Type or member is obsolete
-                            && a != RelationalAnnotationNames.SequencePrefix
-                    )
+                        && a != RelationalAnnotationNames.SequencePrefix
+                )
 #pragma warning restore CS0618 // Type or member is obsolete
-                    .Select(
-                        a => "Unicorn" + a.Substring(RelationalAnnotationNames.Prefix.Length - 1)
-                    )
-            )
+                .Select(a => "Unicorn" + a.Substring(RelationalAnnotationNames.Prefix.Length - 1)))
             {
                 element[annotationName] = "Value";
             }
@@ -286,30 +278,27 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
         private void AssertAnnotations(IMutableAnnotatable element)
         {
-            foreach (
-                var annotationName in GetAnnotationNames()
-                    .Where(
-                        a =>
-                            a != RelationalAnnotationNames.MaxIdentifierLength
-                            && a != RelationalAnnotationNames.RelationalModel
-                            && a != RelationalAnnotationNames.DefaultMappings
-                            && a != RelationalAnnotationNames.DefaultColumnMappings
-                            && a != RelationalAnnotationNames.TableMappings
-                            && a != RelationalAnnotationNames.TableColumnMappings
-                            && a != RelationalAnnotationNames.ViewMappings
-                            && a != RelationalAnnotationNames.ViewColumnMappings
-                            && a != RelationalAnnotationNames.SqlQueryMappings
-                            && a != RelationalAnnotationNames.SqlQueryColumnMappings
-                            && a != RelationalAnnotationNames.FunctionMappings
-                            && a != RelationalAnnotationNames.FunctionColumnMappings
-                            && a != RelationalAnnotationNames.ForeignKeyMappings
-                            && a != RelationalAnnotationNames.TableIndexMappings
-                            && a != RelationalAnnotationNames.UniqueConstraintMappings
-                            && a != RelationalAnnotationNames.RelationalOverrides
+            foreach (var annotationName in GetAnnotationNames().Where(
+                    a =>
+                        a != RelationalAnnotationNames.MaxIdentifierLength
+                        && a != RelationalAnnotationNames.RelationalModel
+                        && a != RelationalAnnotationNames.DefaultMappings
+                        && a != RelationalAnnotationNames.DefaultColumnMappings
+                        && a != RelationalAnnotationNames.TableMappings
+                        && a != RelationalAnnotationNames.TableColumnMappings
+                        && a != RelationalAnnotationNames.ViewMappings
+                        && a != RelationalAnnotationNames.ViewColumnMappings
+                        && a != RelationalAnnotationNames.SqlQueryMappings
+                        && a != RelationalAnnotationNames.SqlQueryColumnMappings
+                        && a != RelationalAnnotationNames.FunctionMappings
+                        && a != RelationalAnnotationNames.FunctionColumnMappings
+                        && a != RelationalAnnotationNames.ForeignKeyMappings
+                        && a != RelationalAnnotationNames.TableIndexMappings
+                        && a != RelationalAnnotationNames.UniqueConstraintMappings
+                        && a != RelationalAnnotationNames.RelationalOverrides
 #pragma warning disable CS0618 // Type or member is obsolete
-                            && a != RelationalAnnotationNames.SequencePrefix
-                    )
-            )
+                        && a != RelationalAnnotationNames.SequencePrefix
+                ))
 #pragma warning restore CS0618 // Type or member is obsolete
             {
                 Assert.Equal("Value", (string)element[annotationName]);
@@ -317,7 +306,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         }
 
         private static IEnumerable<string> GetAnnotationNames() =>
-            typeof(RelationalAnnotationNames).GetTypeInfo()
+            typeof(RelationalAnnotationNames)
+                .GetTypeInfo()
                 .GetRuntimeFields()
                 .Where(p => p.Name != nameof(RelationalAnnotationNames.Prefix))
                 .Select(p => (string)p.GetValue(null));

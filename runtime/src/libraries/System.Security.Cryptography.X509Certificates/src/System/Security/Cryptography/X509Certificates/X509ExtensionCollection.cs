@@ -57,11 +57,12 @@ namespace System.Security.Cryptography.X509Certificates
                 foreach (X509Extension extension in _list)
                 {
                     if (
-                        string.Equals(
-                            extension.Oid!.Value,
-                            oidValue,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                extension.Oid!.Value,
+                                oidValue,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                         return extension;
                 }

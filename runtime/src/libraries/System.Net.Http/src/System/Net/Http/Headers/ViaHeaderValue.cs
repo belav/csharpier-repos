@@ -111,17 +111,15 @@ namespace System.Net.Http.Headers
 
             // Note that for token and host case-insensitive comparison is used. Comments are compared using case-
             // sensitive comparison.
-            return string.Equals(
-                    _protocolVersion,
-                    other._protocolVersion,
-                    StringComparison.OrdinalIgnoreCase
-                )
+            return string
+                    .Equals(
+                        _protocolVersion,
+                        other._protocolVersion,
+                        StringComparison.OrdinalIgnoreCase
+                    )
                 && string.Equals(_receivedBy, other._receivedBy, StringComparison.OrdinalIgnoreCase)
-                && string.Equals(
-                    _protocolName,
-                    other._protocolName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && string
+                    .Equals(_protocolName, other._protocolName, StringComparison.OrdinalIgnoreCase)
                 && string.Equals(_comment, other._comment, StringComparison.Ordinal);
         }
 
@@ -147,11 +145,8 @@ namespace System.Net.Http.Headers
         public static ViaHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (ViaHeaderValue)GenericHeaderParser.SingleValueViaParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (ViaHeaderValue)GenericHeaderParser.SingleValueViaParser
+                .ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(
@@ -163,12 +158,8 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.SingleValueViaParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser.SingleValueViaParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (ViaHeaderValue)output!;

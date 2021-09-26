@@ -28,9 +28,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         {
             var configuration = EditorTestCompositions.EditorFeatures.GetCompositionConfiguration();
             var exportedProviders = FindComposedPartsWithExport(
-                    configuration,
-                    providerType.FullName
-                )
+                configuration,
+                providerType.FullName
+            )
                 .ToArray();
 
             var failureMessage = new StringBuilder();
@@ -89,12 +89,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                     continue;
                 }
 
-                var providerNames = string.Join(
-                    ", ",
-                    namedGroup.Select(
-                        exportedProvider => exportedProvider.Part.Definition.Type.FullName
-                    )
-                );
+                var providerNames = string
+                    .Join(
+                        ", ",
+                        namedGroup.Select(
+                            exportedProvider => exportedProvider.Part.Definition.Type.FullName
+                        )
+                    );
                 failureMessage.AppendLine(
                     $"'{namedGroup.Key}' is used by the following providers: {providerNames}"
                 );
@@ -119,9 +120,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
             var configuration = EditorTestCompositions.EditorFeatures.GetCompositionConfiguration();
             var exportedProviders = FindComposedPartsWithExport(
-                    configuration,
-                    providerType.FullName
-                )
+                configuration,
+                providerType.FullName
+            )
                 .ToArray();
 
             var failureMessage = new StringBuilder();
@@ -167,11 +168,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 providerType.FullName
             );
             var providerNames = exportedProviders.Select(
-                    exportedProvider =>
-                        TryGetExportName(exportedProvider.Export, out var name)
-                            ? name
-                            : string.Empty
-                )
+                exportedProvider =>
+                    TryGetExportName(exportedProvider.Export, out var name) ? name : string.Empty
+            )
                 .ToImmutableHashSet();
 
             var failureMessage = new StringBuilder();
@@ -210,8 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         private static ImmutableHashSet<string> GetPredefinedNamesFromType(Type namesType)
         {
             return namesType.GetFields(
-                    BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public
-                )
+                BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public
+            )
                 .Where(field => field.FieldType == typeof(string))
                 .Select(field => (string)field.GetValue(null))
                 .ToImmutableHashSet();
@@ -224,9 +223,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         {
             foreach (var part in configuration.Parts)
             {
-                var export = part.Definition.ExportedTypes.FirstOrDefault(
-                    exportedType => exportedTypeName.Equals(exportedType.ContractName)
-                );
+                var export = part.Definition.ExportedTypes
+                    .FirstOrDefault(
+                        exportedType => exportedTypeName.Equals(exportedType.ContractName)
+                    );
 
                 if (export != null)
                 {

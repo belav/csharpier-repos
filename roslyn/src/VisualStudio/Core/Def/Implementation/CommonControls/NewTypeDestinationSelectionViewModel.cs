@@ -71,14 +71,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
         {
             get
             {
-                return string.Format(
-                    "{0}{1}{2}",
-                    string.IsNullOrEmpty(_defaultNamespace)
-                      ? string.Empty
-                      : _defaultNamespace + ".",
-                    _typeName.Trim(),
-                    _generatedNameTypeParameterSuffix
-                );
+                return string
+                    .Format(
+                        "{0}{1}{2}",
+                        string.IsNullOrEmpty(_defaultNamespace)
+                          ? string.Empty
+                          : _defaultNamespace + ".",
+                        _typeName.Trim(),
+                        _generatedNameTypeParameterSuffix
+                    );
             }
         }
 
@@ -120,10 +121,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
 
             if (!_syntaxFactsService.IsValidIdentifier(trimmedName))
             {
-                message = string.Format(
-                    ServicesVSResources.Name_is_not_a_valid_0_identifier,
-                    _languageName
-                );
+                message = string
+                    .Format(ServicesVSResources.Name_is_not_a_valid_0_identifier, _languageName);
                 return false;
             }
 
@@ -133,10 +132,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
                     .Equals(_fileExtension, StringComparison.OrdinalIgnoreCase)
             )
             {
-                message = string.Format(
-                    ServicesVSResources.File_name_must_have_the_0_extension,
-                    _fileExtension
-                );
+                message = string
+                    .Format(
+                        ServicesVSResources.File_name_must_have_the_0_extension,
+                        _fileExtension
+                    );
                 return false;
             }
 

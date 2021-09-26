@@ -114,7 +114,8 @@ namespace System.Linq.Expressions.Tests
 
         private static MethodInfo GetMethodInfo(string name)
         {
-            Type[] parameterTypes = typeof(ModuleExtensions).GetMethod(name)
+            Type[] parameterTypes = typeof(ModuleExtensions)
+                .GetMethod(name)
                 .GetParameters()
                 .Skip(1)
                 .Select(p => p.ParameterType)

@@ -23,11 +23,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
 
             return descriptorX != null
-                && string.Equals(
-                    descriptorX.Directive,
-                    descriptorY.Directive,
-                    StringComparison.Ordinal
-                )
+                && string
+                    .Equals(descriptorX.Directive, descriptorY.Directive, StringComparison.Ordinal)
                 && descriptorX.Kind == descriptorY.Kind
                 && Enumerable.SequenceEqual(
                     descriptorX.Tokens,

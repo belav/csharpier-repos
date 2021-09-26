@@ -20,16 +20,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Customer>()
-                    .OwnsOne(
-                        c => c.Details,
-                        db =>
-                        {
-                            db.WithOwner(d => d.Customer).HasPrincipalKey(c => c.AlternateKey);
-                            db.Property(d => d.CustomerId);
-                            db.HasIndex(d => d.CustomerId);
-                        }
-                    );
+                modelBuilder.Entity<Customer>().OwnsOne(
+                    c => c.Details,
+                    db =>
+                    {
+                        db.WithOwner(d => d.Customer).HasPrincipalKey(c => c.AlternateKey);
+                        db.Property(d => d.CustomerId);
+                        db.HasIndex(d => d.CustomerId);
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -98,17 +97,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     }
                 );
 
-                modelBuilder.Entity<OneToOneOwnerWithField>()
-                    .OwnsOne(
-                        owner => owner.OwnedDependent,
-                        db =>
-                        {
-                            db.WithOwner(d => d.OneToOneOwner);
-                            db.Property(d => d.OneToOneOwnerId);
-                            db.HasIndex(d => d.OneToOneOwnerId);
-                            db.Navigation(owned => owned.OneToOneOwner);
-                        }
-                    );
+                modelBuilder.Entity<OneToOneOwnerWithField>().OwnsOne(
+                    owner => owner.OwnedDependent,
+                    db =>
+                    {
+                        db.WithOwner(d => d.OneToOneOwner);
+                        db.Property(d => d.OneToOneOwnerId);
+                        db.HasIndex(d => d.OneToOneOwnerId);
+                        db.Navigation(owned => owned.OneToOneOwner);
+                    }
+                );
 
                 modelBuilder.Entity<OneToOneOwnerWithField>()
                     .Navigation(owner => owner.OwnedDependent);
@@ -165,17 +163,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     }
                 );
 
-                modelBuilder.Entity<OneToManyOwnerWithField>()
-                    .OwnsMany(
-                        owner => owner.OwnedDependents,
-                        db =>
-                        {
-                            db.WithOwner(d => d.OneToManyOwner);
-                            db.Property(d => d.OneToManyOwnerId);
-                            db.HasIndex(d => d.OneToManyOwnerId);
-                            db.Navigation(owned => owned.OneToManyOwner);
-                        }
-                    );
+                modelBuilder.Entity<OneToManyOwnerWithField>().OwnsMany(
+                    owner => owner.OwnedDependents,
+                    db =>
+                    {
+                        db.WithOwner(d => d.OneToManyOwner);
+                        db.Property(d => d.OneToManyOwnerId);
+                        db.HasIndex(d => d.OneToManyOwnerId);
+                        db.Navigation(owned => owned.OneToManyOwner);
+                    }
+                );
 
                 modelBuilder.Entity<OneToManyOwnerWithField>()
                     .Navigation(owner => owner.OwnedDependents);
@@ -324,15 +321,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Customer>()
-                    .OwnsOne(
-                        c => c.Details,
-                        r =>
-                        {
-                            r.WithOwner();
-                            r.HasOne(d => d.Customer).WithMany();
-                        }
-                    );
+                modelBuilder.Entity<Customer>().OwnsOne(
+                    c => c.Details,
+                    r =>
+                    {
+                        r.WithOwner();
+                        r.HasOne(d => d.Customer).WithMany();
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -370,15 +366,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Customer)
                     ),
                     Assert.Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder.Entity<Customer>()
-                                .OwnsOne(
-                                    c => c.Details,
-                                    r =>
-                                    {
-                                        r.HasOne(d => d.Customer).WithMany();
-                                    }
-                                )
+                        () => modelBuilder.Entity<Customer>().OwnsOne(
+                                c => c.Details,
+                                r =>
+                                {
+                                    r.HasOne(d => d.Customer).WithMany();
+                                }
+                            )
                     ).Message
                 );
             }
@@ -563,23 +557,22 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Customer>()
-                    .OwnsMany(
-                        c => c.Orders,
-                        r =>
-                        {
-                            r.HasAnnotation("foo", "bar");
-                            r.Property<uint>("Id");
-                            r.HasKey("Id");
-                            r.HasIndex(o => o.AnotherCustomerId);
-                            r.Property(o => o.AnotherCustomerId).IsRequired();
-                            r.Ignore(o => o.OrderCombination);
-                            r.Ignore(o => o.Details);
-                            r.WithOwner(o => o.Customer)
-                                .HasAnnotation("bar", "foo")
-                                .HasForeignKey("DifferentCustomerId");
-                        }
-                    );
+                modelBuilder.Entity<Customer>().OwnsMany(
+                    c => c.Orders,
+                    r =>
+                    {
+                        r.HasAnnotation("foo", "bar");
+                        r.Property<uint>("Id");
+                        r.HasKey("Id");
+                        r.HasIndex(o => o.AnotherCustomerId);
+                        r.Property(o => o.AnotherCustomerId).IsRequired();
+                        r.Ignore(o => o.OrderCombination);
+                        r.Ignore(o => o.Details);
+                        r.WithOwner(o => o.Customer)
+                            .HasAnnotation("bar", "foo")
+                            .HasForeignKey("DifferentCustomerId");
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -612,17 +605,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.Ignore<Customer>();
                 modelBuilder.Ignore<OrderDetails>();
-                modelBuilder.Entity<OtherCustomer>()
-                    .OwnsMany(
-                        c => c.Orders,
-                        ob =>
-                        {
-                            ob.HasKey(o => o.OrderId);
-                            ob.HasOne<SpecialCustomer>()
-                                .WithOne()
-                                .HasPrincipalKey<SpecialCustomer>();
-                        }
-                    );
+                modelBuilder.Entity<OtherCustomer>().OwnsMany(
+                    c => c.Orders,
+                    ob =>
+                    {
+                        ob.HasKey(o => o.OrderId);
+                        ob.HasOne<SpecialCustomer>().WithOne().HasPrincipalKey<SpecialCustomer>();
+                    }
+                );
 
                 Assert.NotNull(modelBuilder.Model.FindEntityType(typeof(Order)));
 
@@ -704,58 +694,55 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
 
                 modelBuilder.Ignore<OrderDetails>();
-                modelBuilder.Entity<Customer>()
-                    .OwnsMany(
-                        c => c.Orders,
-                        ob =>
-                        {
-                            ob.HasKey(o => o.OrderId);
-                            var ownedNavigationBuilder = ob.OwnsOne(o => o.Details);
+                modelBuilder.Entity<Customer>().OwnsMany(
+                    c => c.Orders,
+                    ob =>
+                    {
+                        ob.HasKey(o => o.OrderId);
+                        var ownedNavigationBuilder = ob.OwnsOne(o => o.Details);
 
-                            switch (hasDataOverload)
-                            {
-                                case HasDataOverload.Array:
-                                    ownedNavigationBuilder.HasData(
-                                        new object[] { new OrderDetails { OrderId = -1 } }
-                                    );
-                                    break;
-                                case HasDataOverload.Array | HasDataOverload.Params:
-                                    ownedNavigationBuilder.HasData(
-                                        (object)new OrderDetails { OrderId = -1 }
-                                    );
-                                    break;
-                                case HasDataOverload.Array | HasDataOverload.Generic:
-                                    // ReSharper disable once RedundantExplicitParamsArrayCreation
-                                    ownedNavigationBuilder.HasData(
-                                        new[] { new OrderDetails { OrderId = -1 } }
-                                    );
-                                    break;
-                                case HasDataOverload.Array
-                                    | HasDataOverload.Params
-                                    | HasDataOverload.Generic:
-                                    ownedNavigationBuilder.HasData(
-                                        new OrderDetails { OrderId = -1 }
-                                    );
-                                    break;
-                                case HasDataOverload.Enumerable:
-                                    ownedNavigationBuilder.HasData(
-                                        new List<object> { new OrderDetails { OrderId = -1 } }
-                                    );
-                                    break;
-                                case HasDataOverload.Enumerable | HasDataOverload.Generic:
-                                    ownedNavigationBuilder.HasData(
-                                        new List<OrderDetails> { new() { OrderId = -1 } }
-                                    );
-                                    break;
-                                default:
-                                    Assert.True(
-                                        false,
-                                        $"Unexpected HasData overload specification {hasDataOverload}"
-                                    );
-                                    break;
-                            }
+                        switch (hasDataOverload)
+                        {
+                            case HasDataOverload.Array:
+                                ownedNavigationBuilder.HasData(
+                                    new object[] { new OrderDetails { OrderId = -1 } }
+                                );
+                                break;
+                            case HasDataOverload.Array | HasDataOverload.Params:
+                                ownedNavigationBuilder.HasData(
+                                    (object)new OrderDetails { OrderId = -1 }
+                                );
+                                break;
+                            case HasDataOverload.Array | HasDataOverload.Generic:
+                                // ReSharper disable once RedundantExplicitParamsArrayCreation
+                                ownedNavigationBuilder.HasData(
+                                    new[] { new OrderDetails { OrderId = -1 } }
+                                );
+                                break;
+                            case HasDataOverload.Array
+                                | HasDataOverload.Params
+                                | HasDataOverload.Generic:
+                                ownedNavigationBuilder.HasData(new OrderDetails { OrderId = -1 });
+                                break;
+                            case HasDataOverload.Enumerable:
+                                ownedNavigationBuilder.HasData(
+                                    new List<object> { new OrderDetails { OrderId = -1 } }
+                                );
+                                break;
+                            case HasDataOverload.Enumerable | HasDataOverload.Generic:
+                                ownedNavigationBuilder.HasData(
+                                    new List<OrderDetails> { new() { OrderId = -1 } }
+                                );
+                                break;
+                            default:
+                                Assert.True(
+                                    false,
+                                    $"Unexpected HasData overload specification {hasDataOverload}"
+                                );
+                                break;
                         }
-                    );
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel(designTime: true);
 
@@ -793,24 +780,23 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
 
                 modelBuilder.Ignore<OrderDetails>();
-                modelBuilder.Entity<Customer>()
-                    .OwnsMany(
-                        c => c.Orders,
-                        ob =>
-                        {
-                            ob.HasKey(o => o.OrderId);
-                            ob.HasData(new Order { OrderId = -2, CustomerId = -1 });
-                            ob.OwnsMany(
-                                o => o.Products,
-                                pb =>
-                                {
-                                    pb.WithOwner(p => p.Order);
-                                    pb.Ignore(p => p.Categories);
-                                    pb.HasKey(p => p.Id);
-                                }
-                            );
-                        }
-                    );
+                modelBuilder.Entity<Customer>().OwnsMany(
+                    c => c.Orders,
+                    ob =>
+                    {
+                        ob.HasKey(o => o.OrderId);
+                        ob.HasData(new Order { OrderId = -2, CustomerId = -1 });
+                        ob.OwnsMany(
+                            o => o.Products,
+                            pb =>
+                            {
+                                pb.WithOwner(p => p.Order);
+                                pb.Ignore(p => p.Categories);
+                                pb.HasKey(p => p.Id);
+                            }
+                        );
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel(designTime: true);
 
@@ -845,23 +831,22 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Customer>()
-                    .OwnsMany(
-                        c => c.Orders,
-                        r =>
-                        {
-                            r.Ignore(o => o.OrderCombination);
-                            r.Ignore(o => o.Details);
-                            r.OwnsMany(
-                                o => o.Products,
-                                pb =>
-                                {
-                                    pb.WithOwner(p => p.Order);
-                                    pb.Ignore(p => p.Categories);
-                                }
-                            );
-                        }
-                    );
+                modelBuilder.Entity<Customer>().OwnsMany(
+                    c => c.Orders,
+                    r =>
+                    {
+                        r.Ignore(o => o.OrderCombination);
+                        r.Ignore(o => o.Details);
+                        r.OwnsMany(
+                            o => o.Products,
+                            pb =>
+                            {
+                                pb.WithOwner(p => p.Order);
+                                pb.Ignore(p => p.Categories);
+                            }
+                        );
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -906,25 +891,24 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Customer>()
-                    .OwnsMany(
-                        c => c.Orders,
-                        r =>
-                        {
-                            r.Ignore(o => o.OrderCombination);
-                            r.Ignore(o => o.Details);
-                            r.Ignore(o => o.OrderId);
-                            r.OwnsMany(
-                                o => o.Products,
-                                pb =>
-                                {
-                                    pb.WithOwner(p => p.Order);
-                                    pb.Ignore(p => p.Categories);
-                                    pb.Ignore(p => p.Id);
-                                }
-                            );
-                        }
-                    );
+                modelBuilder.Entity<Customer>().OwnsMany(
+                    c => c.Orders,
+                    r =>
+                    {
+                        r.Ignore(o => o.OrderCombination);
+                        r.Ignore(o => o.Details);
+                        r.Ignore(o => o.OrderId);
+                        r.OwnsMany(
+                            o => o.Products,
+                            pb =>
+                            {
+                                pb.WithOwner(p => p.Order);
+                                pb.Ignore(p => p.Categories);
+                                pb.Ignore(p => p.Id);
+                            }
+                        );
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -994,16 +978,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Owned<Order>();
                 modelBuilder.Entity<Customer>().OwnsMany(c => c.Orders).HasKey(o => o.OrderId);
 
-                modelBuilder.Entity<SpecialCustomer>()
-                    .OwnsMany(
-                        c => c.SpecialOrders,
-                        so =>
-                        {
-                            so.HasKey(o => o.SpecialOrderId);
-                            so.Ignore(o => o.Customer);
-                            so.OwnsOne(o => o.BackOrder);
-                        }
-                    );
+                modelBuilder.Entity<SpecialCustomer>().OwnsMany(
+                    c => c.SpecialOrders,
+                    so =>
+                    {
+                        so.HasKey(o => o.SpecialOrderId);
+                        so.Ignore(o => o.Customer);
+                        so.OwnsOne(o => o.BackOrder);
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -1064,17 +1047,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Owned<SpecialOrder>();
 
                 modelBuilder.Entity<SpecialCustomer>();
-                var specialCustomer =
-                    modelBuilder.Entity<SpecialCustomer>()
-                        .OwnsMany(
-                            c => c.SpecialOrders,
-                            so =>
-                            {
-                                so.HasKey(o => o.SpecialOrderId);
-                                so.Ignore(o => o.Customer);
-                                so.OwnsOne(o => o.BackOrder);
-                            }
-                        ).Metadata;
+                var specialCustomer = modelBuilder.Entity<SpecialCustomer>().OwnsMany(
+                        c => c.SpecialOrders,
+                        so =>
+                        {
+                            so.HasKey(o => o.SpecialOrderId);
+                            so.Ignore(o => o.Customer);
+                            so.OwnsOne(o => o.BackOrder);
+                        }
+                    ).Metadata;
 
                 modelBuilder.Owned<Order>();
 
@@ -1147,14 +1128,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Ignore<SpecialBookLabel>();
                 modelBuilder.Ignore<BookDetails>();
 
-                modelBuilder.Entity<Book>()
-                    .OwnsOne(
-                        b => b.Label,
-                        lb =>
-                        {
-                            lb.WithOwner().HasForeignKey("BookLabelId").HasAnnotation("Foo", "Bar");
-                        }
-                    );
+                modelBuilder.Entity<Book>().OwnsOne(
+                    b => b.Label,
+                    lb =>
+                    {
+                        lb.WithOwner().HasForeignKey("BookLabelId").HasAnnotation("Foo", "Bar");
+                    }
+                );
                 modelBuilder.Entity<Book>()
                     .OwnsOne(b => b.AlternateLabel)
                     .WithOwner()
@@ -1174,13 +1154,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 );
                 Assert.Equal(
                     typeof(int),
-                    bookOwnership1.DeclaringEntityType.GetForeignKeys()
+                    bookOwnership1.DeclaringEntityType
+                        .GetForeignKeys()
                         .Single()
                         .Properties.Single().ClrType
                 );
                 Assert.Equal(
                     typeof(int),
-                    bookOwnership1.DeclaringEntityType.GetForeignKeys()
+                    bookOwnership1.DeclaringEntityType
+                        .GetForeignKeys()
                         .Single()
                         .Properties.Single().ClrType
                 );
@@ -1263,16 +1245,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     ).ForeignKey.DeclaringEntityType;
                 Assert.Empty(owned.GetDirectlyDerivedTypes());
                 Assert.NotEmpty(
-                    model.GetEntityTypes()
-                        .SelectMany(e => e.GetDeclaredNavigations())
-                        .Where(
-                            n =>
-                            {
-                                var targetType = n.TargetEntityType.ClrType;
-                                return targetType != typeof(DetailsBase)
-                                    && typeof(DetailsBase).IsAssignableFrom(targetType);
-                            }
-                        )
+                    model.GetEntityTypes().SelectMany(e => e.GetDeclaredNavigations()).Where(
+                        n =>
+                        {
+                            var targetType = n.TargetEntityType.ClrType;
+                            return targetType != typeof(DetailsBase)
+                                && typeof(DetailsBase).IsAssignableFrom(targetType);
+                        }
+                    )
                 );
                 Assert.Single(owned.GetForeignKeys());
                 Assert.Equal(
@@ -1303,16 +1283,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     ).ForeignKey.DeclaringEntityType;
                 Assert.Empty(owned.GetDirectlyDerivedTypes());
                 Assert.NotEmpty(
-                    model.GetEntityTypes()
-                        .SelectMany(e => e.GetDeclaredNavigations())
-                        .Where(
-                            n =>
-                            {
-                                var targetType = n.TargetEntityType.ClrType;
-                                return targetType != typeof(DetailsBase)
-                                    && typeof(DetailsBase).IsAssignableFrom(targetType);
-                            }
-                        )
+                    model.GetEntityTypes().SelectMany(e => e.GetDeclaredNavigations()).Where(
+                        n =>
+                        {
+                            var targetType = n.TargetEntityType.ClrType;
+                            return targetType != typeof(DetailsBase)
+                                && typeof(DetailsBase).IsAssignableFrom(targetType);
+                        }
+                    )
                 );
                 Assert.Single(owned.GetForeignKeys());
                 Assert.Equal(
@@ -1354,59 +1332,57 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Book>()
-                    .OwnsOne(
-                        b => b.Label,
-                        bb =>
-                        {
-                            bb.Ignore(l => l.Book);
-                            bb.OwnsOne(
-                                l => l.AnotherBookLabel,
-                                ab =>
-                                {
-                                    ab.Ignore(l => l.Book);
-                                    ab.OwnsOne(l => l.SpecialBookLabel)
-                                        .Ignore(l => l.Book)
-                                        .Ignore(s => s.BookLabel);
-                                }
-                            );
-                            bb.OwnsOne(
-                                l => l.SpecialBookLabel,
-                                sb =>
-                                {
-                                    sb.Ignore(l => l.Book);
-                                    sb.OwnsOne(l => l.AnotherBookLabel).Ignore(l => l.Book);
-                                }
-                            );
-                        }
-                    );
+                modelBuilder.Entity<Book>().OwnsOne(
+                    b => b.Label,
+                    bb =>
+                    {
+                        bb.Ignore(l => l.Book);
+                        bb.OwnsOne(
+                            l => l.AnotherBookLabel,
+                            ab =>
+                            {
+                                ab.Ignore(l => l.Book);
+                                ab.OwnsOne(l => l.SpecialBookLabel)
+                                    .Ignore(l => l.Book)
+                                    .Ignore(s => s.BookLabel);
+                            }
+                        );
+                        bb.OwnsOne(
+                            l => l.SpecialBookLabel,
+                            sb =>
+                            {
+                                sb.Ignore(l => l.Book);
+                                sb.OwnsOne(l => l.AnotherBookLabel).Ignore(l => l.Book);
+                            }
+                        );
+                    }
+                );
 
-                modelBuilder.Entity<Book>()
-                    .OwnsOne(
-                        b => b.AlternateLabel,
-                        bb =>
-                        {
-                            bb.Ignore(l => l.Book);
-                            bb.OwnsOne(
-                                l => l.SpecialBookLabel,
-                                sb =>
-                                {
-                                    sb.Ignore(l => l.Book);
-                                    sb.OwnsOne(l => l.AnotherBookLabel).Ignore(l => l.Book);
-                                }
-                            );
-                            bb.OwnsOne(
-                                l => l.AnotherBookLabel,
-                                ab =>
-                                {
-                                    ab.Ignore(l => l.Book);
-                                    ab.OwnsOne(l => l.SpecialBookLabel)
-                                        .Ignore(l => l.Book)
-                                        .Ignore(s => s.BookLabel);
-                                }
-                            );
-                        }
-                    );
+                modelBuilder.Entity<Book>().OwnsOne(
+                    b => b.AlternateLabel,
+                    bb =>
+                    {
+                        bb.Ignore(l => l.Book);
+                        bb.OwnsOne(
+                            l => l.SpecialBookLabel,
+                            sb =>
+                            {
+                                sb.Ignore(l => l.Book);
+                                sb.OwnsOne(l => l.AnotherBookLabel).Ignore(l => l.Book);
+                            }
+                        );
+                        bb.OwnsOne(
+                            l => l.AnotherBookLabel,
+                            ab =>
+                            {
+                                ab.Ignore(l => l.Book);
+                                ab.OwnsOne(l => l.SpecialBookLabel)
+                                    .Ignore(l => l.Book)
+                                    .Ignore(s => s.BookLabel);
+                            }
+                        );
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -1418,75 +1394,71 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Book>()
-                    .OwnsOne(
-                        b => b.Label,
-                        bb =>
-                        {
-                            bb.OwnsOne(
-                                l => l.AnotherBookLabel,
-                                ab =>
-                                {
-                                    ab.OwnsOne(l => l.SpecialBookLabel)
-                                        .Ignore(s => s.BookLabel)
-                                        .Ignore(l => l.Book);
-                                    ab.Ignore(l => l.Book);
-                                }
-                            );
-                            bb.Ignore(l => l.Book);
-                        }
-                    );
+                modelBuilder.Entity<Book>().OwnsOne(
+                    b => b.Label,
+                    bb =>
+                    {
+                        bb.OwnsOne(
+                            l => l.AnotherBookLabel,
+                            ab =>
+                            {
+                                ab.OwnsOne(l => l.SpecialBookLabel)
+                                    .Ignore(s => s.BookLabel)
+                                    .Ignore(l => l.Book);
+                                ab.Ignore(l => l.Book);
+                            }
+                        );
+                        bb.Ignore(l => l.Book);
+                    }
+                );
 
-                modelBuilder.Entity<Book>()
-                    .OwnsOne(
-                        b => b.AlternateLabel,
-                        bb =>
-                        {
-                            bb.OwnsOne(
-                                l => l.AnotherBookLabel,
-                                ab =>
-                                {
-                                    ab.OwnsOne(l => l.SpecialBookLabel)
-                                        .Ignore(s => s.BookLabel)
-                                        .Ignore(l => l.Book);
-                                    ab.Ignore(l => l.Book);
-                                }
-                            );
-                            bb.Ignore(l => l.Book);
-                        }
-                    );
+                modelBuilder.Entity<Book>().OwnsOne(
+                    b => b.AlternateLabel,
+                    bb =>
+                    {
+                        bb.OwnsOne(
+                            l => l.AnotherBookLabel,
+                            ab =>
+                            {
+                                ab.OwnsOne(l => l.SpecialBookLabel)
+                                    .Ignore(s => s.BookLabel)
+                                    .Ignore(l => l.Book);
+                                ab.Ignore(l => l.Book);
+                            }
+                        );
+                        bb.Ignore(l => l.Book);
+                    }
+                );
 
-                modelBuilder.Entity<Book>()
-                    .OwnsOne(
-                        b => b.Label,
-                        bb =>
-                        {
-                            bb.OwnsOne(
-                                l => l.SpecialBookLabel,
-                                sb =>
-                                {
-                                    sb.OwnsOne(l => l.AnotherBookLabel).Ignore(l => l.Book);
-                                    sb.Ignore(l => l.Book);
-                                }
-                            );
-                        }
-                    );
+                modelBuilder.Entity<Book>().OwnsOne(
+                    b => b.Label,
+                    bb =>
+                    {
+                        bb.OwnsOne(
+                            l => l.SpecialBookLabel,
+                            sb =>
+                            {
+                                sb.OwnsOne(l => l.AnotherBookLabel).Ignore(l => l.Book);
+                                sb.Ignore(l => l.Book);
+                            }
+                        );
+                    }
+                );
 
-                modelBuilder.Entity<Book>()
-                    .OwnsOne(
-                        b => b.AlternateLabel,
-                        bb =>
-                        {
-                            bb.OwnsOne(
-                                l => l.SpecialBookLabel,
-                                sb =>
-                                {
-                                    sb.OwnsOne(l => l.AnotherBookLabel).Ignore(l => l.Book);
-                                    sb.Ignore(l => l.Book);
-                                }
-                            );
-                        }
-                    );
+                modelBuilder.Entity<Book>().OwnsOne(
+                    b => b.AlternateLabel,
+                    bb =>
+                    {
+                        bb.OwnsOne(
+                            l => l.SpecialBookLabel,
+                            sb =>
+                            {
+                                sb.OwnsOne(l => l.AnotherBookLabel).Ignore(l => l.Book);
+                                sb.Ignore(l => l.Book);
+                            }
+                        );
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -1502,43 +1474,41 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Entity<Book>();
 
                 // SpecialBookLabel has an inverse to BookLabel making it ambiguous
-                modelBuilder.Entity<Book>()
-                    .OwnsOne(
-                        b => b.Label,
-                        lb =>
-                        {
-                            lb.Ignore(l => l.Book);
+                modelBuilder.Entity<Book>().OwnsOne(
+                    b => b.Label,
+                    lb =>
+                    {
+                        lb.Ignore(l => l.Book);
 
-                            lb.OwnsOne(b => b.AnotherBookLabel)
-                                .Ignore(l => l.Book)
-                                .OwnsOne(b => b.SpecialBookLabel)
-                                .Ignore(l => l.Book)
-                                .Ignore(l => l.BookLabel);
-                            lb.OwnsOne(b => b.SpecialBookLabel)
-                                .Ignore(l => l.Book)
-                                .OwnsOne(b => b.AnotherBookLabel)
-                                .Ignore(l => l.Book);
-                        }
-                    );
+                        lb.OwnsOne(b => b.AnotherBookLabel)
+                            .Ignore(l => l.Book)
+                            .OwnsOne(b => b.SpecialBookLabel)
+                            .Ignore(l => l.Book)
+                            .Ignore(l => l.BookLabel);
+                        lb.OwnsOne(b => b.SpecialBookLabel)
+                            .Ignore(l => l.Book)
+                            .OwnsOne(b => b.AnotherBookLabel)
+                            .Ignore(l => l.Book);
+                    }
+                );
 
-                modelBuilder.Entity<Book>()
-                    .OwnsOne(
-                        b => b.AlternateLabel,
-                        al =>
-                        {
-                            al.Ignore(l => l.Book);
+                modelBuilder.Entity<Book>().OwnsOne(
+                    b => b.AlternateLabel,
+                    al =>
+                    {
+                        al.Ignore(l => l.Book);
 
-                            al.OwnsOne(b => b.AnotherBookLabel)
-                                .Ignore(l => l.Book)
-                                .OwnsOne(b => b.SpecialBookLabel)
-                                .Ignore(l => l.Book)
-                                .Ignore(l => l.BookLabel);
-                            al.OwnsOne(b => b.SpecialBookLabel)
-                                .Ignore(l => l.Book)
-                                .OwnsOne(b => b.AnotherBookLabel)
-                                .Ignore(l => l.Book);
-                        }
-                    );
+                        al.OwnsOne(b => b.AnotherBookLabel)
+                            .Ignore(l => l.Book)
+                            .OwnsOne(b => b.SpecialBookLabel)
+                            .Ignore(l => l.Book)
+                            .Ignore(l => l.BookLabel);
+                        al.OwnsOne(b => b.SpecialBookLabel)
+                            .Ignore(l => l.Book)
+                            .OwnsOne(b => b.AnotherBookLabel)
+                            .Ignore(l => l.Book);
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -1553,43 +1523,41 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Entity<Book>();
                 modelBuilder.Owned<BookLabel>();
 
-                modelBuilder.Entity<Book>()
-                    .OwnsOne(
-                        b => b.Label,
-                        lb =>
-                        {
-                            lb.Ignore(l => l.Book);
+                modelBuilder.Entity<Book>().OwnsOne(
+                    b => b.Label,
+                    lb =>
+                    {
+                        lb.Ignore(l => l.Book);
 
-                            lb.OwnsOne(b => b.AnotherBookLabel)
-                                .Ignore(l => l.Book)
-                                .OwnsOne(b => b.SpecialBookLabel)
-                                .Ignore(l => l.Book)
-                                .Ignore(l => l.BookLabel);
-                            lb.OwnsOne(b => b.SpecialBookLabel)
-                                .Ignore(l => l.Book)
-                                .OwnsOne(b => b.AnotherBookLabel)
-                                .Ignore(l => l.Book);
-                        }
-                    );
+                        lb.OwnsOne(b => b.AnotherBookLabel)
+                            .Ignore(l => l.Book)
+                            .OwnsOne(b => b.SpecialBookLabel)
+                            .Ignore(l => l.Book)
+                            .Ignore(l => l.BookLabel);
+                        lb.OwnsOne(b => b.SpecialBookLabel)
+                            .Ignore(l => l.Book)
+                            .OwnsOne(b => b.AnotherBookLabel)
+                            .Ignore(l => l.Book);
+                    }
+                );
 
-                modelBuilder.Entity<Book>()
-                    .OwnsOne(
-                        b => b.AlternateLabel,
-                        al =>
-                        {
-                            al.Ignore(l => l.Book);
+                modelBuilder.Entity<Book>().OwnsOne(
+                    b => b.AlternateLabel,
+                    al =>
+                    {
+                        al.Ignore(l => l.Book);
 
-                            al.OwnsOne(b => b.AnotherBookLabel)
-                                .Ignore(l => l.Book)
-                                .OwnsOne(b => b.SpecialBookLabel)
-                                .Ignore(l => l.Book)
-                                .Ignore(l => l.BookLabel);
-                            al.OwnsOne(b => b.SpecialBookLabel)
-                                .Ignore(l => l.Book)
-                                .OwnsOne(b => b.AnotherBookLabel)
-                                .Ignore(l => l.Book);
-                        }
-                    );
+                        al.OwnsOne(b => b.AnotherBookLabel)
+                            .Ignore(l => l.Book)
+                            .OwnsOne(b => b.SpecialBookLabel)
+                            .Ignore(l => l.Book)
+                            .Ignore(l => l.BookLabel);
+                        al.OwnsOne(b => b.SpecialBookLabel)
+                            .Ignore(l => l.Book)
+                            .OwnsOne(b => b.AnotherBookLabel)
+                            .Ignore(l => l.Book);
+                    }
+                );
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -1615,21 +1583,17 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Null(bookOwnership2.DependentToPrincipal);
 
                 var bookLabel1Ownership1 =
-                    bookOwnership1.DeclaringEntityType.FindNavigation(
-                        nameof(BookLabel.AnotherBookLabel)
-                    ).ForeignKey;
+                    bookOwnership1.DeclaringEntityType
+                        .FindNavigation(nameof(BookLabel.AnotherBookLabel)).ForeignKey;
                 var bookLabel1Ownership2 =
-                    bookOwnership1.DeclaringEntityType.FindNavigation(
-                        nameof(BookLabel.SpecialBookLabel)
-                    ).ForeignKey;
+                    bookOwnership1.DeclaringEntityType
+                        .FindNavigation(nameof(BookLabel.SpecialBookLabel)).ForeignKey;
                 var bookLabel2Ownership1 =
-                    bookOwnership2.DeclaringEntityType.FindNavigation(
-                        nameof(BookLabel.AnotherBookLabel)
-                    ).ForeignKey;
+                    bookOwnership2.DeclaringEntityType
+                        .FindNavigation(nameof(BookLabel.AnotherBookLabel)).ForeignKey;
                 var bookLabel2Ownership2 =
-                    bookOwnership2.DeclaringEntityType.FindNavigation(
-                        nameof(BookLabel.SpecialBookLabel)
-                    ).ForeignKey;
+                    bookOwnership2.DeclaringEntityType
+                        .FindNavigation(nameof(BookLabel.SpecialBookLabel)).ForeignKey;
 
                 Assert.Null(bookLabel1Ownership1.DependentToPrincipal);
                 Assert.Equal(
@@ -1643,21 +1607,17 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 );
 
                 var bookLabel1Ownership1Subownership =
-                    bookLabel1Ownership1.DeclaringEntityType.FindNavigation(
-                        nameof(BookLabel.SpecialBookLabel)
-                    ).ForeignKey;
+                    bookLabel1Ownership1.DeclaringEntityType
+                        .FindNavigation(nameof(BookLabel.SpecialBookLabel)).ForeignKey;
                 var bookLabel1Ownership2Subownership =
-                    bookLabel1Ownership2.DeclaringEntityType.FindNavigation(
-                        nameof(BookLabel.AnotherBookLabel)
-                    ).ForeignKey;
+                    bookLabel1Ownership2.DeclaringEntityType
+                        .FindNavigation(nameof(BookLabel.AnotherBookLabel)).ForeignKey;
                 var bookLabel2Ownership1Subownership =
-                    bookLabel2Ownership1.DeclaringEntityType.FindNavigation(
-                        nameof(BookLabel.SpecialBookLabel)
-                    ).ForeignKey;
+                    bookLabel2Ownership1.DeclaringEntityType
+                        .FindNavigation(nameof(BookLabel.SpecialBookLabel)).ForeignKey;
                 var bookLabel2Ownership2Subownership =
-                    bookLabel2Ownership2.DeclaringEntityType.FindNavigation(
-                        nameof(BookLabel.AnotherBookLabel)
-                    ).ForeignKey;
+                    bookLabel2Ownership2.DeclaringEntityType
+                        .FindNavigation(nameof(BookLabel.AnotherBookLabel)).ForeignKey;
 
                 Assert.NotSame(
                     bookLabel1Ownership1.DeclaringEntityType,
@@ -1727,9 +1687,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     model.FindEntityType(typeof(BookLabel))
                         .FindNavigation(nameof(BookLabel.AnotherBookLabel)).ForeignKey;
                 var selfOwnership =
-                    bookLabelOwnership.DeclaringEntityType.FindNavigation(
-                        nameof(BookLabel.AnotherBookLabel)
-                    ).ForeignKey;
+                    bookLabelOwnership.DeclaringEntityType
+                        .FindNavigation(nameof(BookLabel.AnotherBookLabel)).ForeignKey;
                 Assert.NotSame(
                     selfOwnership.PrincipalEntityType,
                     selfOwnership.DeclaringEntityType
@@ -1917,16 +1876,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
                 var model = modelBuilder.Model;
 
-                modelBuilder.Entity<OneToOneNavPrincipalOwner>()
-                    .OwnsOne(
-                        e => e.OwnedDependent,
-                        a =>
-                        {
-                            a.WithOwner(owned => owned.OneToOneOwner);
-                            a.Navigation(owned => owned.OneToOneOwner)
-                                .UsePropertyAccessMode(PropertyAccessMode.Property);
-                        }
-                    );
+                modelBuilder.Entity<OneToOneNavPrincipalOwner>().OwnsOne(
+                    e => e.OwnedDependent,
+                    a =>
+                    {
+                        a.WithOwner(owned => owned.OneToOneOwner);
+                        a.Navigation(owned => owned.OneToOneOwner)
+                            .UsePropertyAccessMode(PropertyAccessMode.Property);
+                    }
+                );
 
                 modelBuilder.Entity<OneToOneNavPrincipalOwner>()
                     .Navigation(e => e.OwnedDependent)
@@ -1955,16 +1913,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
                 var model = modelBuilder.Model;
 
-                modelBuilder.Entity<OneToManyNavPrincipalOwner>()
-                    .OwnsMany(
-                        e => e.OwnedDependents,
-                        a =>
-                        {
-                            a.WithOwner(owned => owned.OneToManyOwner);
-                            a.Navigation(owned => owned.OneToManyOwner)
-                                .UsePropertyAccessMode(PropertyAccessMode.Property);
-                        }
-                    );
+                modelBuilder.Entity<OneToManyNavPrincipalOwner>().OwnsMany(
+                    e => e.OwnedDependents,
+                    a =>
+                    {
+                        a.WithOwner(owned => owned.OneToManyOwner);
+                        a.Navigation(owned => owned.OneToManyOwner)
+                            .UsePropertyAccessMode(PropertyAccessMode.Property);
+                    }
+                );
 
                 modelBuilder.Entity<OneToManyNavPrincipalOwner>()
                     .Navigation(e => e.OwnedDependents)

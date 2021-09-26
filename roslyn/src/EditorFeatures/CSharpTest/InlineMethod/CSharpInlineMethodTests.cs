@@ -111,27 +111,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 );
 
                 await TestInRegularScriptsInDifferentFilesAsync(
-                        initialMarkUpForCaller,
-                        initialMarkUpForCallee,
-                        expectedMarkUpForCaller,
-                        string.Concat(
+                    initialMarkUpForCaller,
+                    initialMarkUpForCallee,
+                    expectedMarkUpForCaller,
+                    string
+                        .Concat(
                             firstPartitionBeforeMarkUp,
                             inlinedMethod,
                             lastPartitionAfterMarkup
                         ),
-                        diagnosticResultsWhenKeepInlinedMethod,
-                        keepInlinedMethod: true
-                    )
+                    diagnosticResultsWhenKeepInlinedMethod,
+                    keepInlinedMethod: true
+                )
                     .ConfigureAwait(false);
 
                 await TestInRegularScriptsInDifferentFilesAsync(
-                        initialMarkUpForCaller,
-                        initialMarkUpForCallee,
-                        expectedMarkUpForCaller,
-                        string.Concat(firstPartitionBeforeMarkUp, lastPartitionAfterMarkup),
-                        diagnosticResultsWhenRemoveInlinedMethod,
-                        keepInlinedMethod: false
-                    )
+                    initialMarkUpForCaller,
+                    initialMarkUpForCallee,
+                    expectedMarkUpForCaller,
+                    string.Concat(firstPartitionBeforeMarkUp, lastPartitionAfterMarkup),
+                    diagnosticResultsWhenRemoveInlinedMethod,
+                    keepInlinedMethod: false
+                )
                     .ConfigureAwait(false);
             }
 
@@ -161,23 +162,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 var lastPartitionAfterMarkup = expectedMarkUp.Substring(secondMarkerIndex + 2);
 
                 await TestInRegularAndScriptInTheSameFileAsync(
-                        initialMarkUp,
-                        string.Concat(
+                    initialMarkUp,
+                    string
+                        .Concat(
                             firstPartitionBeforeMarkUp,
                             inlinedMethod,
                             lastPartitionAfterMarkup
                         ),
-                        diagnosticResultsWhenKeepInlinedMethod,
-                        keepInlinedMethod: true
-                    )
+                    diagnosticResultsWhenKeepInlinedMethod,
+                    keepInlinedMethod: true
+                )
                     .ConfigureAwait(false);
 
                 await TestInRegularAndScriptInTheSameFileAsync(
-                        initialMarkUp,
-                        string.Concat(firstPartitionBeforeMarkUp, lastPartitionAfterMarkup),
-                        diagnosticResultsWhenRemoveInlinedMethod,
-                        keepInlinedMethod: false
-                    )
+                    initialMarkUp,
+                    string.Concat(firstPartitionBeforeMarkUp, lastPartitionAfterMarkup),
+                    diagnosticResultsWhenRemoveInlinedMethod,
+                    keepInlinedMethod: false
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -1868,7 +1870,9 @@ public partial class TestClass
             var diagnostic = new List<DiagnosticResult>()
             {
                 // Await can't be used in non-async method.
-                DiagnosticResult.CompilerError("CS4032").WithSpan(7, 33, 7, 56).WithArguments("int")
+                DiagnosticResult.CompilerError("CS4032")
+                    .WithSpan(7, 33, 7, 56)
+                    .WithArguments("int")
             };
             return TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 @"
@@ -2857,8 +2861,7 @@ public class TestClass
         [InlineData("++")]
         [InlineData("--")]
         public Task TestPreExpression(string op) =>
-            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
-                @"
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(@"
 public class TestClass
 {
     public void Caller()
@@ -2871,8 +2874,7 @@ public class TestClass
     {
         return (op)i;
     }
-}".Replace("(op)", op),
-                @"
+}".Replace("(op)", op), @"
 public class TestClass
 {
     public void Caller()
@@ -2885,8 +2887,7 @@ public class TestClass
     {
         return (op)i;
     }
-##}".Replace("(op)", op)
-            );
+##}".Replace("(op)", op));
 
         [Fact]
         public Task TestAwaitExpressionWithFireAndForgot() =>
@@ -2923,8 +2924,7 @@ public class TestClass
         [InlineData("++")]
         [InlineData("--")]
         public Task TestPostExpression(string op) =>
-            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
-                @"
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(@"
 public class TestClass
 {
     public void Caller()
@@ -2937,8 +2937,7 @@ public class TestClass
     {
         return i(op);
     }
-}".Replace("(op)", op),
-                @"
+}".Replace("(op)", op), @"
 public class TestClass
 {
     public void Caller()
@@ -2951,8 +2950,7 @@ public class TestClass
     {
         return i(op);
     }
-##}".Replace("(op)", op)
-            );
+##}".Replace("(op)", op));
 
         [Fact]
         public Task TestConditionalInvocationExpression1() =>

@@ -362,14 +362,15 @@ namespace System.Net.Http.Functional.Tests
                                         ? await stream.ReadAsync(buffer, 0, buffer.Length)
                                         : mode == 3
                                             ? await stream.ReadAsync(new Memory<byte>(buffer))
-                                            : await Task.Factory.FromAsync(
-                                                  stream.BeginRead,
-                                                  stream.EndRead,
-                                                  buffer,
-                                                  0,
-                                                  buffer.Length,
-                                                  null
-                                              );
+                                            : await Task.Factory
+                                                  .FromAsync(
+                                                      stream.BeginRead,
+                                                      stream.EndRead,
+                                                      buffer,
+                                                      0,
+                                                      buffer.Length,
+                                                      null
+                                                  );
 
                         Assert.Equal(Math.Min(buffer.Length, ContentLength - i), bytesRead);
                         for (int j = 0; j < bytesRead; j++)
@@ -390,14 +391,15 @@ namespace System.Net.Http.Functional.Tests
                                   ? await stream.ReadAsync(buffer, 0, buffer.Length)
                                   : mode == 3
                                       ? await stream.ReadAsync(new Memory<byte>(buffer))
-                                      : await Task.Factory.FromAsync(
-                                            stream.BeginRead,
-                                            stream.EndRead,
-                                            buffer,
-                                            0,
-                                            buffer.Length,
-                                            null
-                                        )
+                                      : await Task.Factory
+                                            .FromAsync(
+                                                stream.BeginRead,
+                                                stream.EndRead,
+                                                buffer,
+                                                0,
+                                                buffer.Length,
+                                                null
+                                            )
                     );
                 }
             }

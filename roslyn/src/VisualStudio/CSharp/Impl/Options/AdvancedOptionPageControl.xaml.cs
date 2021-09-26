@@ -363,10 +363,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
             RoutedEventArgs e
         )
         {
-            this.OptionStore.SetOption(
-                InternalDiagnosticsOptions.NormalDiagnosticMode,
-                DiagnosticMode.Pull
-            );
+            this.OptionStore
+                .SetOption(InternalDiagnosticsOptions.NormalDiagnosticMode, DiagnosticMode.Pull);
             UpdatePullDiagnosticsOptions();
         }
 
@@ -375,10 +373,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
             RoutedEventArgs e
         )
         {
-            this.OptionStore.SetOption(
-                InternalDiagnosticsOptions.NormalDiagnosticMode,
-                DiagnosticMode.Push
-            );
+            this.OptionStore
+                .SetOption(InternalDiagnosticsOptions.NormalDiagnosticMode, DiagnosticMode.Push);
             UpdatePullDiagnosticsOptions();
         }
 
@@ -387,10 +383,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
             RoutedEventArgs e
         )
         {
-            this.OptionStore.SetOption(
-                InternalDiagnosticsOptions.RazorDiagnosticMode,
-                DiagnosticMode.Pull
-            );
+            this.OptionStore
+                .SetOption(InternalDiagnosticsOptions.RazorDiagnosticMode, DiagnosticMode.Pull);
             UpdatePullDiagnosticsOptions();
         }
 
@@ -399,29 +393,23 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
             RoutedEventArgs e
         )
         {
-            this.OptionStore.SetOption(
-                InternalDiagnosticsOptions.RazorDiagnosticMode,
-                DiagnosticMode.Push
-            );
+            this.OptionStore
+                .SetOption(InternalDiagnosticsOptions.RazorDiagnosticMode, DiagnosticMode.Push);
             UpdatePullDiagnosticsOptions();
         }
 
         private void UpdateInlineHintsOptions()
         {
-            var enabledForParameters = this.OptionStore.GetOption(
-                InlineHintsOptions.EnabledForParameters,
-                LanguageNames.CSharp
-            );
+            var enabledForParameters = this.OptionStore
+                .GetOption(InlineHintsOptions.EnabledForParameters, LanguageNames.CSharp);
             ShowHintsForLiterals.IsEnabled = enabledForParameters;
             ShowHintsForNewExpressions.IsEnabled = enabledForParameters;
             ShowHintsForEverythingElse.IsEnabled = enabledForParameters;
             SuppressHintsWhenParameterNameMatchesTheMethodsIntent.IsEnabled = enabledForParameters;
             SuppressHintsWhenParameterNamesDifferOnlyBySuffix.IsEnabled = enabledForParameters;
 
-            var enabledForTypes = this.OptionStore.GetOption(
-                InlineHintsOptions.EnabledForTypes,
-                LanguageNames.CSharp
-            );
+            var enabledForTypes = this.OptionStore
+                .GetOption(InlineHintsOptions.EnabledForTypes, LanguageNames.CSharp);
             ShowHintsForVariablesWithInferredTypes.IsEnabled = enabledForTypes;
             ShowHintsForLambdaParameterTypes.IsEnabled = enabledForTypes;
             ShowHintsForImplicitObjectCreation.IsEnabled = enabledForTypes;
@@ -429,41 +417,29 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         private void DisplayInlineParameterNameHints_Checked(object sender, RoutedEventArgs e)
         {
-            this.OptionStore.SetOption(
-                InlineHintsOptions.EnabledForParameters,
-                LanguageNames.CSharp,
-                true
-            );
+            this.OptionStore
+                .SetOption(InlineHintsOptions.EnabledForParameters, LanguageNames.CSharp, true);
             UpdateInlineHintsOptions();
         }
 
         private void DisplayInlineParameterNameHints_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.OptionStore.SetOption(
-                InlineHintsOptions.EnabledForParameters,
-                LanguageNames.CSharp,
-                false
-            );
+            this.OptionStore
+                .SetOption(InlineHintsOptions.EnabledForParameters, LanguageNames.CSharp, false);
             UpdateInlineHintsOptions();
         }
 
         private void DisplayInlineTypeHints_Checked(object sender, RoutedEventArgs e)
         {
-            this.OptionStore.SetOption(
-                InlineHintsOptions.EnabledForTypes,
-                LanguageNames.CSharp,
-                true
-            );
+            this.OptionStore
+                .SetOption(InlineHintsOptions.EnabledForTypes, LanguageNames.CSharp, true);
             UpdateInlineHintsOptions();
         }
 
         private void DisplayInlineTypeHints_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.OptionStore.SetOption(
-                InlineHintsOptions.EnabledForTypes,
-                LanguageNames.CSharp,
-                false
-            );
+            this.OptionStore
+                .SetOption(InlineHintsOptions.EnabledForTypes, LanguageNames.CSharp, false);
             UpdateInlineHintsOptions();
         }
     }

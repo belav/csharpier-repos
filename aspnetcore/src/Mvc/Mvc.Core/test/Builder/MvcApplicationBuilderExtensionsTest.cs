@@ -60,8 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Builder
                 }
             );
 
-            var endpointDataSource =
-                appBuilder.ApplicationServices.GetRequiredService<EndpointDataSource>();
+            var endpointDataSource = appBuilder.ApplicationServices
+                .GetRequiredService<EndpointDataSource>();
 
             Assert.Empty(endpointDataSource.Endpoints);
         }

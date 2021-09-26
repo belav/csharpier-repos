@@ -157,7 +157,8 @@ namespace System.Collections.ObjectModel.Tests
             {
                 throw new ArgumentNullException(nameof(collection));
             }
-            MethodInfo propGet = typeof(KeyedCollection<TKey, TValue>).GetTypeInfo()
+            MethodInfo propGet = typeof(KeyedCollection<TKey, TValue>)
+                .GetTypeInfo()
                 .DeclaredProperties.Where(f => f.Name == "Dictionary")
                 .Select(f => f.GetMethod)
                 .Where(gm => gm != null)

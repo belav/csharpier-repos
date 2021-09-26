@@ -45,11 +45,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         )
         {
             return actions.SelectMany(
-                    a =>
-                        a is AbstractConfigurationActionWithNestedActions
-                            ? a.NestedCodeActions
-                            : ImmutableArray.Create(a)
-                )
+                a =>
+                    a is AbstractConfigurationActionWithNestedActions
+                        ? a.NestedCodeActions
+                        : ImmutableArray.Create(a)
+            )
                 .ToImmutableArray();
         }
 
@@ -109,9 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 document.Project,
                 includeSuppressedDiagnostics: IncludeSuppressedDiagnostics
             );
-            var diagnostics = (await testDriver.GetAllDiagnosticsAsync(document, span)).Where(
-                d => fixer.IsFixableDiagnostic(d)
-            );
+            var diagnostics = (await testDriver.GetAllDiagnosticsAsync(document, span))
+                .Where(d => fixer.IsFixableDiagnostic(d));
 
             var filteredDiagnostics = FilterDiagnostics(diagnostics);
 

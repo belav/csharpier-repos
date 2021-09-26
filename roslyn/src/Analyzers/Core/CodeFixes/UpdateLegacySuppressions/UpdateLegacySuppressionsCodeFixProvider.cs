@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.UpdateLegacySuppressions
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken)
+            var root = await context.Document
+                .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             foreach (var diagnostic in context.Diagnostics)
             {
@@ -70,10 +71,8 @@ namespace Microsoft.CodeAnalysis.UpdateLegacySuppressions
         {
             foreach (var diagnostic in diagnostics)
             {
-                var node = editor.OriginalRoot.FindNode(
-                    diagnostic.Location.SourceSpan,
-                    getInnermostNodeForTie: true
-                );
+                var node = editor.OriginalRoot
+                    .FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
                 var newDocCommentId = diagnostic.Properties[
                     AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.DocCommentIdKey
                 ];

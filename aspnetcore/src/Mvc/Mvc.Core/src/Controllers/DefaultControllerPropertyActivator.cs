@@ -33,10 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             );
 
             var controllerType = controller.GetType();
-            var propertiesToActivate = _activateActions!.GetOrAdd(
-                controllerType,
-                _getPropertiesToActivate
-            );
+            var propertiesToActivate = _activateActions!
+                .GetOrAdd(controllerType, _getPropertiesToActivate);
 
             for (var i = 0; i < propertiesToActivate.Length; i++)
             {
@@ -82,18 +80,20 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         private static PropertyActivator<ControllerContext>[] GetPropertiesToActivate(Type type)
         {
             IEnumerable<PropertyActivator<ControllerContext>> activators;
-            activators = PropertyActivator<ControllerContext>.GetPropertiesToActivate(
-                type,
-                typeof(ActionContextAttribute),
-                p => new PropertyActivator<ControllerContext>(p, c => c)
-            );
+            activators = PropertyActivator<ControllerContext>
+                .GetPropertiesToActivate(
+                    type,
+                    typeof(ActionContextAttribute),
+                    p => new PropertyActivator<ControllerContext>(p, c => c)
+                );
 
             activators = activators.Concat(
-                PropertyActivator<ControllerContext>.GetPropertiesToActivate(
-                    type,
-                    typeof(ControllerContextAttribute),
-                    p => new PropertyActivator<ControllerContext>(p, c => c)
-                )
+                PropertyActivator<ControllerContext>
+                    .GetPropertiesToActivate(
+                        type,
+                        typeof(ControllerContextAttribute),
+                        p => new PropertyActivator<ControllerContext>(p, c => c)
+                    )
             );
 
             return activators.ToArray();

@@ -238,15 +238,11 @@ public partial class B : I
     }
 }";
             _eventLibRef = CreateEmptyCompilation(
-                    eventLibSrc,
-                    references: new[]
-                    {
-                        MscorlibRef_v4_0_30316_17626,
-                        SystemCoreRef_v4_0_30319_17929
-                    },
-                    options: TestOptions.DebugWinMD.WithAllowUnsafe(true),
-                    assemblyName: "EventLibrary"
-                )
+                eventLibSrc,
+                references: new[] { MscorlibRef_v4_0_30316_17626, SystemCoreRef_v4_0_30319_17929 },
+                options: TestOptions.DebugWinMD.WithAllowUnsafe(true),
+                assemblyName: "EventLibrary"
+            )
                 .EmitToImageReference();
         }
 
@@ -2902,10 +2898,10 @@ class C : Interface<int>
             Assert.False(implementingNormalEvent.IsWindowsRuntimeEvent);
             Assert.True(implementingWinRTEvent.IsWindowsRuntimeEvent);
 
-            var substitutedNormalEvent =
-                implementingNormalEvent.ExplicitInterfaceImplementations.Single();
-            var substitutedWinRTEvent =
-                implementingWinRTEvent.ExplicitInterfaceImplementations.Single();
+            var substitutedNormalEvent = implementingNormalEvent.ExplicitInterfaceImplementations
+                .Single();
+            var substitutedWinRTEvent = implementingWinRTEvent.ExplicitInterfaceImplementations
+                .Single();
 
             Assert.IsType<SubstitutedEventSymbol>(substitutedNormalEvent);
             Assert.IsType<SubstitutedEventSymbol>(substitutedWinRTEvent);
@@ -2920,9 +2916,8 @@ class C : Interface<int>
             );
             retargetingAssembly.SetCorLibrary(comp.Assembly.CorLibrary);
 
-            var retargetingType = retargetingAssembly.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "C"
-            );
+            var retargetingType = retargetingAssembly.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C");
             var retargetingNormalEvent = retargetingType.GetMembers()
                 .OfType<EventSymbol>()
                 .Single(e => e.Name.Contains("Normal"));
@@ -3126,9 +3121,8 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                 );
 
                 {
-                    var overrideNoImplClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "OverrideNoImpl"
-                    );
+                    var overrideNoImplClass = comp.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("OverrideNoImpl");
                     var normalEvent = overrideNoImplClass.GetMember<EventSymbol>("Normal");
                     var winRTEvent = overrideNoImplClass.GetMember<EventSymbol>("WinRT");
 
@@ -3137,8 +3131,8 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                 }
 
                 {
-                    var overrideAndImplCorrectlyClass =
-                        comp.GlobalNamespace.GetMember<NamedTypeSymbol>("OverrideAndImplCorrectly");
+                    var overrideAndImplCorrectlyClass = comp.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("OverrideAndImplCorrectly");
                     var normalEvent = overrideAndImplCorrectlyClass.GetMember<EventSymbol>(
                         "Normal"
                     );
@@ -3149,10 +3143,8 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                 }
 
                 {
-                    var overrideAndImplIncorrectlyClass =
-                        comp.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                            "OverrideAndImplIncorrectly"
-                        );
+                    var overrideAndImplIncorrectlyClass = comp.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("OverrideAndImplIncorrectly");
                     var normalEvent = overrideAndImplIncorrectlyClass.GetMember<EventSymbol>(
                         "Normal"
                     );
@@ -3557,25 +3549,24 @@ class C
     }
 }
 ";
-            CreateEmptyCompilation(source, WinRtRefs, TestOptions.ReleaseWinMD)
-                .VerifyDiagnostics(
-                    // (9,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
-                    //         Ref(ref Instance);
-                    Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Instance")
-                        .WithArguments("C.Instance"),
-                    // (10,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
-                    //         Out(out Instance);
-                    Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Instance")
-                        .WithArguments("C.Instance"),
-                    // (11,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
-                    //         Ref(ref Static);
-                    Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Static")
-                        .WithArguments("C.Static"),
-                    // (12,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
-                    //         Out(out Static);
-                    Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Static")
-                        .WithArguments("C.Static")
-                );
+            CreateEmptyCompilation(source, WinRtRefs, TestOptions.ReleaseWinMD).VerifyDiagnostics(
+                // (9,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
+                //         Ref(ref Instance);
+                Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Instance")
+                    .WithArguments("C.Instance"),
+                // (10,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
+                //         Out(out Instance);
+                Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Instance")
+                    .WithArguments("C.Instance"),
+                // (11,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
+                //         Ref(ref Static);
+                Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Static")
+                    .WithArguments("C.Static"),
+                // (12,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
+                //         Out(out Static);
+                Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Static")
+                    .WithArguments("C.Static")
+            );
         }
 
         [Fact]
@@ -3806,8 +3797,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (@event.HasAssociatedField)
             {
                 var expectedFieldType = compilation.GetWellKnownType(
-                        WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T
-                    )
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T
+                )
                     .Construct(eventType.Type);
                 Assert.Equal(expectedFieldType, @event.AssociatedField.Type);
             }

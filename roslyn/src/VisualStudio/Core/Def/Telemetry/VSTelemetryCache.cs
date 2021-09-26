@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                 EventPrefix
                 + Enum.GetName(typeof(FunctionId), key.FunctionId).Replace('_', '/')
                 + (key.ItemKey == null ? string.Empty : ("/" + key.ItemKey))
-            ).ToLowerInvariant();
+            )
+                .ToLowerInvariant();
 
         private static string CreatePropertyName(Key key) =>
             (
@@ -40,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                 + Enum.GetName(typeof(FunctionId), key.FunctionId).Replace('_', '.')
                 + "."
                 + key.ItemKey
-            ).ToLowerInvariant();
+            )
+                .ToLowerInvariant();
 
         private struct Key : IEquatable<Key>
         {

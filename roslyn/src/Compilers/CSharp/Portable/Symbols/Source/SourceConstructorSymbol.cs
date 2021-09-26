@@ -238,9 +238,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return _hasThisInitializer
               ? flags.IsNullableAnalysisEnabled
-              : (
-                    (SourceMemberContainerTypeSymbol)ContainingType
-                ).IsNullableEnabledForConstructorsAndInitializers(IsStatic);
+              : ((SourceMemberContainerTypeSymbol)ContainingType)
+                .IsNullableEnabledForConstructorsAndInitializers(IsStatic);
         }
 
         protected override bool AllowRefOrOut

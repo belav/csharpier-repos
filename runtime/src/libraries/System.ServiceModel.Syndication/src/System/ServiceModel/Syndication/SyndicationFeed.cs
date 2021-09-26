@@ -360,12 +360,13 @@ namespace System.ServiceModel.Syndication
                     if (reader.LocalName == Rss20Constants.HourTag)
                     {
                         string value = reader.ReadElementString();
-                        bool parsed = int.TryParse(
-                            value,
-                            NumberStyles.Integer,
-                            NumberFormatInfo.InvariantInfo,
-                            out int hour
-                        );
+                        bool parsed = int
+                            .TryParse(
+                                value,
+                                NumberStyles.Integer,
+                                NumberFormatInfo.InvariantInfo,
+                                out int hour
+                            );
 
                         if (!parsed || (hour < 0 || hour > 23))
                         {

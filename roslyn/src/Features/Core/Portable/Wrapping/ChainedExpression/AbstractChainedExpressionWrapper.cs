@@ -113,10 +113,10 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             foreach (var chunk in chunks)
             {
                 var unformattable = await ContainsUnformattableContentAsync(
-                        document,
-                        chunk,
-                        cancellationToken
-                    )
+                    document,
+                    chunk,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (unformattable)
                 {
@@ -155,9 +155,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             //
             // Here 'remainder' is everything up to the next <c>. Name (...)</c> chunk.
 
-            using var _2 = ArrayBuilder<ImmutableArray<SyntaxNodeOrToken>>.GetInstance(
-                out var chunks
-            );
+            using var _2 = ArrayBuilder<ImmutableArray<SyntaxNodeOrToken>>
+                .GetInstance(out var chunks);
             BreakPiecesIntoChunks(pieces, chunks);
             return chunks.ToImmutable();
         }
@@ -273,10 +272,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             int end
         )
         {
-            using var resultDisposer = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(
-                end - start,
-                out var result
-            );
+            using var resultDisposer = ArrayBuilder<SyntaxNodeOrToken>
+                .GetInstance(end - start, out var result);
             for (var i = start; i < end; i++)
             {
                 result.Add(pieces[i]);

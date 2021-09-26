@@ -779,7 +779,8 @@ namespace RazorSyntaxGenerator
 
         private void WriteContextualGreenFactories()
         {
-            var nodes = Tree.Types.Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
+            var nodes = Tree.Types
+                .Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
                 .ToList();
             WriteLine();
             WriteLine("  internal partial class ContextAwareSyntax");
@@ -802,7 +803,8 @@ namespace RazorSyntaxGenerator
 
         private void WriteStaticGreenFactories()
         {
-            var nodes = Tree.Types.Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
+            var nodes = Tree.Types
+                .Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
                 .ToList();
             WriteLine();
             WriteLine("  internal static partial class SyntaxFactory");
@@ -836,7 +838,8 @@ namespace RazorSyntaxGenerator
             WriteLine("    {");
             WriteLine("        return new Type[] {");
 
-            var nodes = Tree.Types.Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
+            var nodes = Tree.Types
+                .Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
                 .ToList();
             for (int i = 0, n = nodes.Count; i < n; i++)
             {
@@ -1568,11 +1571,12 @@ namespace RazorSyntaxGenerator
                         WriteLine();
                     nWritten++;
                     WriteComment(
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "<summary>Called when the visitor visits a {0} node.</summary>",
-                            node.Name
-                        ),
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "<summary>Called when the visitor visits a {0} node.</summary>",
+                                node.Name
+                            ),
                         "    "
                     );
                     WriteLine(
@@ -2009,7 +2013,8 @@ namespace RazorSyntaxGenerator
 
         private void WriteRedFactories()
         {
-            var nodes = Tree.Types.Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
+            var nodes = Tree.Types
+                .Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
                 .OfType<Node>()
                 .ToList();
             WriteLine();
@@ -2110,11 +2115,12 @@ namespace RazorSyntaxGenerator
             var nodeFields = nd.Fields.Where(n => !IsValueField(n)).ToList();
 
             WriteComment(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "<summary>Creates a new {0} instance.</summary>",
-                    nd.Name
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "<summary>Creates a new {0} instance.</summary>",
+                        nd.Name
+                    ),
                 "    "
             );
 
@@ -2301,41 +2307,45 @@ namespace RazorSyntaxGenerator
 
             if (IsOptional(field) || IsAnyList(field.Type))
             {
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "default({0})",
-                    GetRedPropertyType(field)
-                );
+                return string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "default({0})",
+                        GetRedPropertyType(field)
+                    );
             }
             else if (field.Type == "SyntaxToken")
             {
                 // auto construct token?
                 if (field.Kinds.Count == 1)
                 {
-                    return string.Format(
-                        CultureInfo.InvariantCulture,
-                        "SyntaxFactory.Token(SyntaxKind.{0})",
-                        field.Kinds[0].Name
-                    );
+                    return string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "SyntaxFactory.Token(SyntaxKind.{0})",
+                            field.Kinds[0].Name
+                        );
                 }
                 else
                 {
-                    return string.Format(
-                        CultureInfo.InvariantCulture,
-                        "SyntaxFactory.Token(Get{0}{1}Kind(kind))",
-                        StripPost(nd.Name, "Syntax"),
-                        StripPost(field.Name, "Opt")
-                    );
+                    return string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "SyntaxFactory.Token(Get{0}{1}Kind(kind))",
+                            StripPost(nd.Name, "Syntax"),
+                            StripPost(field.Name, "Opt")
+                        );
                 }
             }
             else
             {
                 var referencedNode = GetNode(field.Type);
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "SyntaxFactory.{0}()",
-                    StripPost(referencedNode.Name, "Syntax")
-                );
+                return string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "SyntaxFactory.{0}()",
+                        StripPost(referencedNode.Name, "Syntax")
+                    );
             }
         }
 
@@ -2406,11 +2416,12 @@ namespace RazorSyntaxGenerator
             WriteLine();
 
             WriteComment(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "<summary>Creates a new {0} instance.</summary>",
-                    nd.Name
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "<summary>Creates a new {0} instance.</summary>",
+                        nd.Name
+                    ),
                 "    "
             );
             Write("    {0} static {1} {2}(", "public", nd.Name, StripPost(nd.Name, "Syntax"));
@@ -2539,11 +2550,12 @@ namespace RazorSyntaxGenerator
             WriteLine();
 
             WriteComment(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "<summary>Creates a new {0} instance.</summary>",
-                    nd.Name
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "<summary>Creates a new {0} instance.</summary>",
+                        nd.Name
+                    ),
                 "    "
             );
             Write("    {0} static {1} {2}(", "public", nd.Name, StripPost(nd.Name, "Syntax"));
@@ -2714,10 +2726,11 @@ namespace RazorSyntaxGenerator
             {
                 foreach (XmlElement element in comment.Body)
                 {
-                    string[] lines = element.OuterXml.Split(
-                        new string[] { "\r", "\n", "\r\n" },
-                        StringSplitOptions.RemoveEmptyEntries
-                    );
+                    string[] lines = element.OuterXml
+                        .Split(
+                            new string[] { "\r", "\n", "\r\n" },
+                            StringSplitOptions.RemoveEmptyEntries
+                        );
                     foreach (string line in lines.Where(l => !string.IsNullOrWhiteSpace(l)))
                     {
                         WriteLine("{0}/// {1}", indent, line.TrimStart());

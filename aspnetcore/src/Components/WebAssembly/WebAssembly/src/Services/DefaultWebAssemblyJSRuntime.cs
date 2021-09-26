@@ -22,9 +22,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
         private DefaultWebAssemblyJSRuntime()
         {
             ElementReferenceContext = new WebElementReferenceContext(this);
-            JsonSerializerOptions.Converters.Add(
-                new ElementReferenceJsonConverter(ElementReferenceContext)
-            );
+            JsonSerializerOptions.Converters
+                .Add(new ElementReferenceJsonConverter(ElementReferenceContext));
         }
 
         public JsonSerializerOptions ReadJsonSerializerOptions() => JsonSerializerOptions;
@@ -67,10 +66,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
             long dotNetObjectId;
             if (char.IsDigit(assemblyNameOrDotNetObjectId[0]))
             {
-                dotNetObjectId = long.Parse(
-                    assemblyNameOrDotNetObjectId,
-                    CultureInfo.InvariantCulture
-                );
+                dotNetObjectId = long
+                    .Parse(assemblyNameOrDotNetObjectId, CultureInfo.InvariantCulture);
                 assemblyName = null;
             }
             else

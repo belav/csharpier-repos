@@ -223,9 +223,8 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                             p =>
                             {
                                 p.CreateProjection<Source, Dest>();
-                                p.ValueTransformers.Add<string>(
-                                    dest => dest + " is straight up dope"
-                                );
+                                p.ValueTransformers
+                                    .Add<string>(dest => dest + " is straight up dope");
                             }
                         );
                     }
@@ -349,9 +348,8 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                             {
                                 p.CreateProjection<Source, Dest>()
                                     .ValueTransformers.Add<string>(dest => dest + ", for real,");
-                                p.ValueTransformers.Add<string>(
-                                    dest => dest + " is straight up dope"
-                                );
+                                p.ValueTransformers
+                                    .Add<string>(dest => dest + " is straight up dope");
                             }
                         );
                     }
@@ -417,9 +415,8 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                                         d => d.Value,
                                         opt => opt.AddTransform(d => d + ", seriously")
                                     );
-                                p.ValueTransformers.Add<string>(
-                                    dest => dest + " is straight up dope"
-                                );
+                                p.ValueTransformers
+                                    .Add<string>(dest => dest + " is straight up dope");
                             }
                         );
                     }
@@ -432,9 +429,8 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                 {
                     var dest = await ProjectTo<Dest>(context.Sources).SingleAsync();
 
-                    dest.Value.ShouldBe(
-                        "Jimmy, seriously, for real, is straight up dope! No joke!"
-                    );
+                    dest.Value
+                        .ShouldBe("Jimmy, seriously, for real, is straight up dope! No joke!");
                 }
             }
         }

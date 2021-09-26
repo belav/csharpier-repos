@@ -48,8 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
         {
             _proxy = new RemoteEditAndContinueServiceProxy(workspace);
             _debuggingService = workspace.Services.GetRequiredService<IDebuggingWorkspaceService>();
-            _activeStatementTrackingService =
-                workspace.Services.GetRequiredService<IActiveStatementTrackingService>();
+            _activeStatementTrackingService = workspace.Services
+                .GetRequiredService<IActiveStatementTrackingService>();
             _debuggerService = debuggerService;
             _diagnosticService = diagnosticService;
             _diagnosticUpdateSource = diagnosticUpdateSource;
@@ -78,11 +78,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             {
                 var solution = _proxy.Workspace.CurrentSolution;
                 _debuggingSessionConnection = await _proxy.StartDebuggingSessionAsync(
-                        solution,
-                        _debuggerService,
-                        captureMatchingDocuments: false,
-                        cancellationToken
-                    )
+                    solution,
+                    _debuggerService,
+                    captureMatchingDocuments: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
@@ -177,10 +177,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             try
             {
                 await _proxy.EndDebuggingSessionAsync(
-                        _diagnosticUpdateSource,
-                        _diagnosticService,
-                        cancellationToken
-                    )
+                    _diagnosticUpdateSource,
+                    _diagnosticService,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 Contract.ThrowIfNull(_debuggingSessionConnection);
@@ -217,11 +217,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
                 var solution = _proxy.Workspace.CurrentSolution;
                 var activeStatementSpanProvider = GetActiveStatementSpanProvider(solution);
                 return await _proxy.HasChangesAsync(
-                        solution,
-                        activeStatementSpanProvider,
-                        sourceFilePath,
-                        cancellationToken
-                    )
+                    solution,
+                    activeStatementSpanProvider,
+                    sourceFilePath,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
@@ -239,12 +239,12 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
                 var solution = _proxy.Workspace.CurrentSolution;
                 var activeStatementSpanProvider = GetActiveStatementSpanProvider(solution);
                 var (updates, _, _) = await _proxy.EmitSolutionUpdateAsync(
-                        solution,
-                        activeStatementSpanProvider,
-                        _diagnosticService,
-                        _diagnosticUpdateSource,
-                        cancellationToken
-                    )
+                    solution,
+                    activeStatementSpanProvider,
+                    _diagnosticService,
+                    _diagnosticUpdateSource,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return updates;
             }
@@ -271,19 +271,19 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
                     {
                         var document = solution.GetRequiredDocument(documentId);
                         return await _activeStatementTrackingService.GetSpansAsync(
-                                document,
-                                cancellationToken
-                            )
+                            document,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 );
 
                 var span = await _proxy.GetCurrentActiveStatementPositionAsync(
-                        solution,
-                        activeStatementSpanProvider,
-                        instruction,
-                        cancellationToken
-                    )
+                    solution,
+                    activeStatementSpanProvider,
+                    instruction,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return span?.ToSourceSpan();
             }
@@ -302,10 +302,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             {
                 var solution = _proxy.Workspace.CurrentSolution;
                 return await _proxy.IsActiveStatementInExceptionRegionAsync(
-                        solution,
-                        instruction,
-                        cancellationToken
-                    )
+                    solution,
+                    instruction,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))

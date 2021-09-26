@@ -109,11 +109,12 @@ internal partial class VectorTest
         )
             returnVal = Fail;
         if (
-            VectorAddTest<ulong>.VectorAdd(
-                0x4100000000000000ul,
-                0x4200000000000000ul,
-                0x4100000000000000ul + 0x4200000000000000ul
-            ) != Pass
+            VectorAddTest<ulong>
+                .VectorAdd(
+                    0x4100000000000000ul,
+                    0x4200000000000000ul,
+                    0x4100000000000000ul + 0x4200000000000000ul
+                ) != Pass
         )
             returnVal = Fail;
 

@@ -112,11 +112,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 {
                     var logger = invoker._logger;
 
-                    invoker._diagnosticListener.BeforeAction(
-                        actionContext.ActionDescriptor,
-                        actionContext.HttpContext,
-                        actionContext.RouteData
-                    );
+                    invoker._diagnosticListener
+                        .BeforeAction(
+                            actionContext.ActionDescriptor,
+                            actionContext.HttpContext,
+                            actionContext.RouteData
+                        );
 
                     var actionScope = logger.ActionScope(actionContext.ActionDescriptor);
 
@@ -148,11 +149,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
                 finally
                 {
-                    invoker._diagnosticListener.AfterAction(
-                        actionContext.ActionDescriptor,
-                        actionContext.HttpContext,
-                        actionContext.RouteData
-                    );
+                    invoker._diagnosticListener
+                        .AfterAction(
+                            actionContext.ActionDescriptor,
+                            actionContext.HttpContext,
+                            actionContext.RouteData
+                        );
                 }
             }
         }

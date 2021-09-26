@@ -379,8 +379,8 @@ namespace Newtonsoft.Json.Utilities
             const bool enableParamArray = false;
 
             return candidates.Where(
-                    m => FilterParameters(m.GetParameters(), types, enableParamArray)
-                )
+                m => FilterParameters(m.GetParameters(), types, enableParamArray)
+            )
                 .OrderBy(
                     m => m.GetParameters(),
                     new ParametersMatchComparer(types, enableParamArray)

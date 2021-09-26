@@ -69,10 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
 
             foreach (var diagnostic in diagnostics)
             {
-                var coalesce = diagnostic.AdditionalLocations[0].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var coalesce = diagnostic.AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
                 // changing from `x ?? (x = y)` to `x ??= y` can change the type.  Specifically,
                 // with nullable value types (`int?`) it could change from `int?` to `int`.

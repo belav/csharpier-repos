@@ -43,10 +43,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 public bool Contains(TValue item) => _dictionary.ContainsValue(item);
 
                 public void CopyTo(TValue[] array, int arrayIndex) =>
-                    ((ICollection<TValue>)_dictionary.ReadOnlyDictionary.Values).CopyTo(
-                        array,
-                        arrayIndex
-                    );
+                    ((ICollection<TValue>)_dictionary.ReadOnlyDictionary.Values)
+                        .CopyTo(array, arrayIndex);
 
                 public ImmutableSegmentedDictionary<
                     TKey,

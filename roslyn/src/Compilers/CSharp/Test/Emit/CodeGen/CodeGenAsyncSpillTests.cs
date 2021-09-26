@@ -25,12 +25,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             CSharpCompilationOptions options = null
         )
         {
-            return base.CompileAndVerify(
-                source,
-                expectedOutput: expectedOutput,
-                references: references,
-                options: options
-            );
+            return base
+                .CompileAndVerify(
+                    source,
+                    expectedOutput: expectedOutput,
+                    references: references,
+                    options: options
+                );
         }
 
         [Fact]
@@ -985,9 +986,8 @@ public class C
 ";
             CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     AssertEx.Equal(
@@ -3451,10 +3451,8 @@ namespace AsyncBug
     }
 }
 ";
-            var expected = new bool[] { false, true, false, true, false }.Aggregate(
-                "",
-                (str, next) => str += $"{next}{Environment.NewLine}"
-            );
+            var expected = new bool[] { false, true, false, true, false }
+                .Aggregate("", (str, next) => str += $"{next}{Environment.NewLine}");
             var v = CompileAndVerify(source, expected);
         }
 
@@ -3544,7 +3542,7 @@ public class C
         public void AwaitWithInParameter_ArgModifier()
         {
             CreateCompilation(
-                    @"
+                @"
 using System.Threading.Tasks;
 class Foo
 {
@@ -3555,14 +3553,13 @@ class Foo
 
     void C(in object obj, int length) {}
 }"
-                )
-                .VerifyDiagnostics(
-                    // (7,14): error CS1503: Argument 1: cannot convert from 'in string' to 'in object'
-                    //         C(in s, await task);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "s")
-                        .WithArguments("1", "in string", "in object")
-                        .WithLocation(7, 14)
-                );
+            ).VerifyDiagnostics(
+                // (7,14): error CS1503: Argument 1: cannot convert from 'in string' to 'in object'
+                //         C(in s, await task);
+                Diagnostic(ErrorCode.ERR_BadArgType, "s")
+                    .WithArguments("1", "in string", "in object")
+                    .WithLocation(7, 14)
+            );
         }
 
         [Fact]
@@ -4143,8 +4140,8 @@ class B
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"TestPropertyAccessThrows
+                comp,
+                expectedOutput: @"TestPropertyAccessThrows
 Before Assignment
 Caught NullReferenceException
 TestFieldAccessThrows
@@ -4155,10 +4152,9 @@ TestPropertyAccessSucceeds
 Before Assignment a.B.x is: 0
 RHS
 After Assignment a.B.x is: 42"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      184 (0xb8)
   .maxstack  3
@@ -4242,7 +4238,7 @@ After Assignment a.B.x is: 42"
   IL_00b2:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00b7:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -4374,8 +4370,8 @@ class A
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"TestIndexerThrows
+                comp,
+                expectedOutput: @"TestIndexerThrows
 Before Assignment
 Caught IndexOutOfRangeException
 TestAssignmentThrows
@@ -4400,10 +4396,9 @@ RHS
 After Assignment arr[0].x is: 0
 After Assignment arr[0].y is: True
 After Assignment a.x is: 42"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      181 (0xb5)
   .maxstack  3
@@ -4488,7 +4483,7 @@ After Assignment a.x is: 42"
   IL_00af:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00b4:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -4600,8 +4595,8 @@ struct A
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"TestIndexerThrows
+                comp,
+                expectedOutput: @"TestIndexerThrows
 Before Assignment
 Caught IndexOutOfRangeException
 TestIndexerSucceeds
@@ -4620,10 +4615,9 @@ Before Assignment arr[0].y is: False
 RHS
 After Assignment arr[0].x is: 42
 Before Assignment arr[0].y is: True"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      198 (0xc6)
   .maxstack  3
@@ -4713,7 +4707,7 @@ Before Assignment arr[0].y is: True"
   IL_00c0:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c5:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -4797,8 +4791,8 @@ class Program
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"TestIndexerThrows
+                comp,
+                expectedOutput: @"TestIndexerThrows
 Before Assignment
 RHS
 Caught IndexOutOfRangeException
@@ -4812,10 +4806,9 @@ Before Assignment arrCopy[0] is: 0
 RHS
 After Assignment arr.Length is: 0
 After Assignment arrCopy[0] is: 42"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      176 (0xb0)
   .maxstack  3
@@ -4899,7 +4892,7 @@ After Assignment arrCopy[0] is: 42"
   IL_00aa:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00af:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -4996,8 +4989,8 @@ struct C
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"TestAIsNull
+                comp,
+                expectedOutput: @"TestAIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNotNull
@@ -5010,10 +5003,9 @@ Before Assignment aCopy.b.c.x is: 0
 RHS
 After Assignment a is null == True
 After Assignment aCopy.b.c.x is: 42"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      201 (0xc9)
   .maxstack  3
@@ -5102,7 +5094,7 @@ After Assignment aCopy.b.c.x is: 42"
   IL_00c3:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c8:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -5196,8 +5188,8 @@ class B
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"TestAIsNull
+                comp,
+                expectedOutput: @"TestAIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNotNull
@@ -5214,10 +5206,9 @@ RHS
 SetX
 After Assignment a is null == True
 After Assignment aCopy._b._x is: 42"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      184 (0xb8)
   .maxstack  3
@@ -5301,7 +5292,7 @@ After Assignment aCopy._b._x is: 42"
   IL_00b2:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00b7:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(19609, "https://github.com/dotnet/roslyn/issues/19609")]
@@ -5388,8 +5379,8 @@ class A
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"TestAIsNull
+                comp,
+                expectedOutput: @"TestAIsNull
 Before Assignment
 RHS
 Caught NullReferenceException
@@ -5403,10 +5394,9 @@ Before Assignment aCopy.x is: 0
 RHS
 After Assignment a is null == True
 After Assignment aCopy.x is: 42"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      179 (0xb3)
   .maxstack  3
@@ -5489,7 +5479,7 @@ After Assignment aCopy.x is: 42"
   IL_00ad:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00b2:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -5595,8 +5585,8 @@ class A
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"TestAIsNull
+                comp,
+                expectedOutput: @"TestAIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNotNull
@@ -5613,10 +5603,9 @@ ReassignXDuringAssignment
 Before Assignment a.x is: 1
 RHS
 After Assignment a.x is: 43"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      202 (0xca)
   .maxstack  3
@@ -5709,7 +5698,7 @@ After Assignment a.x is: 43"
   IL_00c4:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c9:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -5816,8 +5805,8 @@ class A
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"TestAIsNull
+                comp,
+                expectedOutput: @"TestAIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNotNull
@@ -5840,10 +5829,9 @@ GetX
 RHS
 SetX
 After Assignment a._x is: 43"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      202 (0xca)
   .maxstack  3
@@ -5936,7 +5924,7 @@ After Assignment a._x is: 43"
   IL_00c4:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c9:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(19609, "https://github.com/dotnet/roslyn/issues/19609")]
@@ -6064,8 +6052,8 @@ class B
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"TestAIsNullBIsNull
+                comp,
+                expectedOutput: @"TestAIsNullBIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNullBIsNotNull
@@ -6085,10 +6073,9 @@ Before Assignment b.x is: 0
 RHS
 After Assignment a.b.x is: 42
 After Assignment b.x is: 42"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      219 (0xdb)
   .maxstack  4
@@ -6186,7 +6173,7 @@ After Assignment b.x is: 42"
   IL_00d5:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00da:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(19609, "https://github.com/dotnet/roslyn/issues/19609")]
@@ -6316,8 +6303,8 @@ class B
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"TestAIsNullBIsNull
+                comp,
+                expectedOutput: @"TestAIsNullBIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNullBIsNotNull
@@ -6343,10 +6330,9 @@ SetX
 SetX
 After Assignment a._b._x is: 42
 After Assignment b._x is: 42"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      219 (0xdb)
   .maxstack  3
@@ -6444,7 +6430,7 @@ After Assignment b._x is: 42"
   IL_00d5:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00da:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -6489,14 +6475,13 @@ struct B
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             CompileAndVerify(
-                    comp,
-                    expectedOutput: @"Before Assignment A.b.x is: 0
+                comp,
+                expectedOutput: @"Before Assignment A.b.x is: 0
 RHS
 After Assignment A.b.x is: 42"
-                )
-                .VerifyIL(
-                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-                    @"
+            ).VerifyIL(
+                "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      159 (0x9f)
   .maxstack  3
@@ -6571,7 +6556,7 @@ After Assignment A.b.x is: 42"
   IL_0099:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_009e:  ret
 }"
-                );
+            );
         }
 
         [Fact, WorkItem(47191, "https://github.com/dotnet/roslyn/issues/47191")]

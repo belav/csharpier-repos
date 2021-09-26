@@ -143,13 +143,13 @@ namespace Microsoft.AspNetCore.Components.Web.Rendering
 
             var initialClient = new Mock<IClientProxy>();
             initialClient.Setup(
-                    c =>
-                        c.SendCoreAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback(
                     (string name, object[] value, CancellationToken token) =>
                         renderIds.Add((long)value[0])
@@ -168,13 +168,13 @@ namespace Microsoft.AspNetCore.Components.Web.Rendering
 
             var client = new Mock<IClientProxy>();
             client.Setup(
-                    c =>
-                        c.SendCoreAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback(
                     (string name, object[] value, CancellationToken token) =>
                         renderIds.Add((long)value[0])
@@ -239,13 +239,13 @@ namespace Microsoft.AspNetCore.Components.Web.Rendering
             var renderIds = new List<long>();
             var onlineClient = new Mock<IClientProxy>();
             onlineClient.Setup(
-                    c =>
-                        c.SendCoreAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback(
                     (string name, object[] value, CancellationToken token) =>
                         renderIds.Add((long)value[1])
@@ -320,13 +320,13 @@ namespace Microsoft.AspNetCore.Components.Web.Rendering
             var renderIds = new List<long>();
             var onlineClient = new Mock<IClientProxy>();
             onlineClient.Setup(
-                    c =>
-                        c.SendCoreAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback(
                     (string name, object[] value, CancellationToken token) =>
                         renderIds.Add((long)value[1])
@@ -389,13 +389,13 @@ namespace Microsoft.AspNetCore.Components.Web.Rendering
 
             var onlineClient = new Mock<IClientProxy>();
             onlineClient.Setup(
-                    c =>
-                        c.SendCoreAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback(
                     (string name, object[] value, CancellationToken token) =>
                         renderIds.Add((long)value[1])
@@ -464,13 +464,13 @@ namespace Microsoft.AspNetCore.Components.Web.Rendering
 
             var onlineClient = new Mock<IClientProxy>();
             onlineClient.Setup(
-                    c =>
-                        c.SendCoreAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback(
                     (string name, object[] value, CancellationToken token) =>
                         renderIds.Add((long)value[1])
@@ -601,9 +601,8 @@ namespace Microsoft.AspNetCore.Components.Web.Rendering
 
             public void TriggerRender()
             {
-                var task = _renderHandle.Dispatcher.InvokeAsync(
-                    () => _renderHandle.Render(_renderFragment)
-                );
+                var task = _renderHandle.Dispatcher
+                    .InvokeAsync(() => _renderHandle.Render(_renderFragment));
                 Assert.True(task.IsCompletedSuccessfully);
             }
         }
@@ -634,9 +633,8 @@ namespace Microsoft.AspNetCore.Components.Web.Rendering
 
             public void TriggerRender()
             {
-                var task = _renderHandle.Dispatcher.InvokeAsync(
-                    () => _renderHandle.Render(Content)
-                );
+                var task = _renderHandle.Dispatcher
+                    .InvokeAsync(() => _renderHandle.Render(Content));
                 Assert.True(task.IsCompletedSuccessfully);
             }
         }

@@ -77,7 +77,8 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
 
         protected virtual IDictionary<string, string> Load(string userSecretsId)
         {
-            return new ConfigurationBuilder().AddJsonFile(_secretsFilePath, optional: true)
+            return new ConfigurationBuilder()
+                .AddJsonFile(_secretsFilePath, optional: true)
                 .Build()
                 .AsEnumerable()
                 .Where(i => i.Value != null)

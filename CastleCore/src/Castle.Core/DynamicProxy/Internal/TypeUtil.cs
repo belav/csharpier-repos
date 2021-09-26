@@ -39,10 +39,11 @@ namespace Castle.DynamicProxy.Internal
             if (type.IsClass == false)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        "Type {0} is not a class type. This method supports only classes",
-                        type
-                    )
+                    string
+                        .Format(
+                            "Type {0} is not a class type. This method supports only classes",
+                            type
+                        )
                 );
             }
 
@@ -141,11 +142,8 @@ namespace Castle.DynamicProxy.Internal
         internal static bool IsMemberwiseClone(this MethodInfo methodInfo)
         {
             return methodInfo.DeclaringType == typeof(object)
-                && string.Equals(
-                    "MemberwiseClone",
-                    methodInfo.Name,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                && string
+                    .Equals("MemberwiseClone", methodInfo.Name, StringComparison.OrdinalIgnoreCase);
         }
 
         internal static void SetStaticField(
@@ -161,11 +159,12 @@ namespace Castle.DynamicProxy.Internal
             if (field == null)
             {
                 throw new DynamicProxyException(
-                    string.Format(
-                        "Could not find field named '{0}' on type {1}. This is likely a bug in DynamicProxy. Please report it.",
-                        fieldName,
-                        type
-                    )
+                    string
+                        .Format(
+                            "Could not find field named '{0}' on type {1}. This is likely a bug in DynamicProxy. Please report it.",
+                            fieldName,
+                            type
+                        )
                 );
             }
 
@@ -176,22 +175,24 @@ namespace Castle.DynamicProxy.Internal
             catch (MissingFieldException e)
             {
                 throw new DynamicProxyException(
-                    string.Format(
-                        "Could not find field named '{0}' on type {1}. This is likely a bug in DynamicProxy. Please report it.",
-                        fieldName,
-                        type
-                    ),
+                    string
+                        .Format(
+                            "Could not find field named '{0}' on type {1}. This is likely a bug in DynamicProxy. Please report it.",
+                            fieldName,
+                            type
+                        ),
                     e
                 );
             }
             catch (TargetException e)
             {
                 throw new DynamicProxyException(
-                    string.Format(
-                        "There was an error trying to set field named '{0}' on type {1}. This is likely a bug in DynamicProxy. Please report it.",
-                        fieldName,
-                        type
-                    ),
+                    string
+                        .Format(
+                            "There was an error trying to set field named '{0}' on type {1}. This is likely a bug in DynamicProxy. Please report it.",
+                            fieldName,
+                            type
+                        ),
                     e
                 );
             }
@@ -202,10 +203,11 @@ namespace Castle.DynamicProxy.Internal
                     throw;
                 }
                 throw new DynamicProxyException(
-                    string.Format(
-                        "There was an error in static constructor on type {0}. This is likely a bug in DynamicProxy. Please report it.",
-                        type
-                    ),
+                    string
+                        .Format(
+                            "There was an error in static constructor on type {0}. This is likely a bug in DynamicProxy. Please report it.",
+                            type
+                        ),
                     e
                 );
             }

@@ -79,9 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         ) => new(activeStatements, semanticEdits, diagnostics);
 
         private static SyntaxTree ParseSource(string source) =>
-            new CSharpEditAndContinueTestHelpers().ParseText(
-                ActiveStatementsDescription.ClearTags(source)
-            );
+            new CSharpEditAndContinueTestHelpers()
+                .ParseText(ActiveStatementsDescription.ClearTags(source));
 
         internal static EditScript<SyntaxNode> GetTopEdits(string src1, string src2)
         {

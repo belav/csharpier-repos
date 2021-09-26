@@ -60,8 +60,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
 
             if (_searchCurrentDocument)
             {
-                var documentService =
-                    _solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
+                var documentService = _solution.Workspace.Services
+                    .GetRequiredService<IDocumentTrackingService>();
                 var activeId = documentService.TryGetActiveDocument();
                 _currentDocument = activeId != null ? _solution.GetDocument(activeId) : null;
             }
@@ -142,10 +142,10 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             var isFullyLoaded = projectSystemIsFullyLoaded && remoteHostIsFullyLoaded;
             var orderedProjects = GetOrderedProjectsToProcess();
             var (itemsReported, projectResults) = await ProcessProjectsAsync(
-                    orderedProjects,
-                    isFullyLoaded,
-                    cancellationToken
-                )
+                orderedProjects,
+                isFullyLoaded,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // If we're fully loaded then we're done at this point.  All the searches would have been against the latest
@@ -163,14 +163,14 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             // projects were using cached data then we can try searching them again, but this tell them to use the
             // latest data.  The ensures the user at least gets some result instead of nothing.
             var projectsUsingCache = projectResults.Where(
-                    t => t.location == NavigateToSearchLocation.Cache
-                )
+                t => t.location == NavigateToSearchLocation.Cache
+            )
                 .SelectAsArray(t => t.project);
             await ProcessProjectsAsync(
-                    ImmutableArray.Create(projectsUsingCache),
-                    isFullyLoaded: true,
-                    cancellationToken
-                )
+                ImmutableArray.Create(projectsUsingCache),
+                isFullyLoaded: true,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // We attempted a full oop sync and an uncached search.  However, we still may need to tell the user that
@@ -265,10 +265,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
         {
             await _progress.AddItemsAsync(orderedProjects.Sum(p => p.Length)).ConfigureAwait(false);
 
-            using var _ =
-                ArrayBuilder<(Project project, NavigateToSearchLocation location)>.GetInstance(
-                    out var result
-                );
+            using var _ = ArrayBuilder<(Project project, NavigateToSearchLocation location)>
+                .GetInstance(out var result);
 
             var seenItems = new HashSet<INavigateToSearchResult>(
                 NavigateToSearchResultComparer.Instance
@@ -276,19 +274,14 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             foreach (var projectGroup in orderedProjects)
                 result.AddRange(
                     await Task.WhenAll(
-                            projectGroup.Select(
-                                p =>
-                                    Task.Run(
-                                        () =>
-                                            SearchAsync(
-                                                p,
-                                                isFullyLoaded,
-                                                seenItems,
-                                                cancellationToken
-                                            )
-                                    )
-                            )
+                        projectGroup.Select(
+                            p =>
+                                Task.Run(
+                                    () =>
+                                        SearchAsync(p, isFullyLoaded, seenItems, cancellationToken)
+                                )
                         )
+                    )
                         .ConfigureAwait(false)
                 );
 
@@ -305,11 +298,11 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             try
             {
                 var location = await SearchCoreAsync(
-                        project,
-                        isFullyLoaded,
-                        seenItems,
-                        cancellationToken
-                    )
+                    project,
+                    isFullyLoaded,
+                    seenItems,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return (project, location);
             }
@@ -337,26 +330,26 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             {
                 Contract.ThrowIfNull(_currentDocument);
                 return await service.SearchDocumentAsync(
-                        _currentDocument,
-                        _searchPattern,
-                        _kinds,
-                        OnResultFound,
-                        isFullyLoaded,
-                        cancellationToken
-                    )
+                    _currentDocument,
+                    _searchPattern,
+                    _kinds,
+                    OnResultFound,
+                    isFullyLoaded,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else
             {
                 return await service.SearchProjectAsync(
-                        project,
-                        GetPriorityDocuments(project),
-                        _searchPattern,
-                        _kinds,
-                        OnResultFound,
-                        isFullyLoaded,
-                        cancellationToken
-                    )
+                    project,
+                    GetPriorityDocuments(project),
+                    _searchPattern,
+                    _kinds,
+                    OnResultFound,
+                    isFullyLoaded,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 

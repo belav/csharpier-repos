@@ -36,7 +36,9 @@ namespace Castle.Components.DictionaryAdapter
                 from groupings in property.Annotations.OfType<GroupAttribute>()
                 where this.groups.Intersect(groupings.Group).Any()
                 select property.PropertyName
-            ).Distinct().ToArray();
+            )
+                .Distinct()
+                .ToArray();
 
             if (propertyNames.Length > 0 && adapter.CanNotify)
             {
@@ -66,12 +68,13 @@ namespace Castle.Components.DictionaryAdapter
         {
             get
             {
-                return string.Join(
-                    Environment.NewLine,
-                    propertyNames.Select(propertyName => adapter[propertyName])
-                        .Where(errors => !string.IsNullOrEmpty(errors))
-                        .ToArray()
-                );
+                return string
+                    .Join(
+                        Environment.NewLine,
+                        propertyNames.Select(propertyName => adapter[propertyName])
+                            .Where(errors => !string.IsNullOrEmpty(errors))
+                            .ToArray()
+                    );
             }
         }
 

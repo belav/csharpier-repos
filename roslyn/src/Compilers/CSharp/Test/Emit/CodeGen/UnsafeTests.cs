@@ -1398,11 +1398,11 @@ unsafe class C
 ";
             // NOTE: no pointer arithmetic - just dereference p.
             var compVerifier = CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "1",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "1",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Main",
                     @"
@@ -2570,10 +2570,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -2640,10 +2640,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -2711,10 +2711,10 @@ unsafe class C
 ";
             // Cleanup not in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -2775,10 +2775,10 @@ unsafe class C
 ";
             // Cleanup not in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"{
@@ -2843,10 +2843,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -2912,10 +2912,10 @@ unsafe class C
 ";
             // Neither inner nor outer has finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -2980,10 +2980,10 @@ unsafe class C
 ";
             // Inner and outer both have finally blocks.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -3064,10 +3064,10 @@ unsafe class C
 ";
             // Outer has finally, inner does not.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -3156,10 +3156,10 @@ unsafe class C
             //   2) none of the fixed statements has a try-finally.
             // CONSIDER: Shorter test that performs the same checks.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -3294,10 +3294,10 @@ unsafe class C
             // CONSIDER: This is sort of silly since the using is optimized away.
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -3353,10 +3353,10 @@ unsafe class C
 ";
             // Cleanup not in finally (matches dev11, but not clear why).
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -3426,10 +3426,10 @@ unsafe class C
             // Cleanup in finally.
             // CONSIDER: dev11 is smarter and skips the try-finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -3518,10 +3518,10 @@ class Enumerator : System.IDisposable
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -3606,10 +3606,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.<>c.<Test>b__0_0()",
                     @"
@@ -3670,10 +3670,10 @@ unsafe class C
 ";
             // Cleanup not in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.<>c.<Test>b__0_0()",
                     @"
@@ -3723,10 +3723,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.<>c.<Test>b__0_0()",
                     @"
@@ -3785,10 +3785,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.<>c.<.ctor>b__1_0()",
                     @"
@@ -3843,10 +3843,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.<>c.<.ctor>b__1_0()",
                     @"
@@ -3903,10 +3903,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -3965,10 +3965,10 @@ unsafe class C
             // Cleanup in finally.
             // CONSIDER: dev11 doesn't have a finally here, but that seems incorrect.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -4026,10 +4026,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -4088,10 +4088,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -4146,10 +4146,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -4204,10 +4204,10 @@ unsafe class C
 ";
             // Cleanup in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -4261,10 +4261,10 @@ unsafe class C
 ";
             // Cleanup not in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -4309,10 +4309,10 @@ unsafe class C
 ";
             // Cleanup not in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -4358,10 +4358,10 @@ unsafe class C
 ";
             // Cleanup not in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -4424,10 +4424,10 @@ unsafe class C
             //      it does.
             // Cleanup not in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -4496,10 +4496,10 @@ unsafe class C
 ";
             // Cleanup not in finally.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -4571,10 +4571,10 @@ unsafe class C
     }
 }";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -6390,18 +6390,18 @@ unsafe class C
 True";
 
             CompileAndVerify(
-                    string.Format(template, "unchecked"),
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "unchecked"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.Main", expectedIL);
             CompileAndVerify(
-                    string.Format(template, "checked"),
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "checked"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.Main", expectedIL);
         }
 
@@ -6455,18 +6455,18 @@ unsafe class C
             var expectedOutput = @"a";
 
             CompileAndVerify(
-                    string.Format(template, "unchecked"),
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "unchecked"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.Main", expectedIL);
             CompileAndVerify(
-                    string.Format(template, "checked"),
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "checked"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.Main", expectedIL);
         }
 
@@ -6505,10 +6505,10 @@ unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.M",
                     @"
@@ -6604,10 +6604,10 @@ unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.M",
                     @"
@@ -6703,10 +6703,10 @@ unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.M",
                     @"
@@ -6802,10 +6802,10 @@ unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.M",
                     @"
@@ -6953,16 +6953,16 @@ unsafe class Implicit
 }
 ";
             CompileAndVerify(
-                    string.Format(template, "unchecked"),
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "unchecked"),
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.M", expectedIL);
             CompileAndVerify(
-                    string.Format(template, "checked"),
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "checked"),
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.M", expectedIL);
         }
 
@@ -7028,16 +7028,16 @@ unsafe class C
 }
 ";
             CompileAndVerify(
-                    string.Format(template, "unchecked"),
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "unchecked"),
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.M", expectedIL);
             CompileAndVerify(
-                    string.Format(template, "checked"),
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "checked"),
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.M", expectedIL);
         }
 
@@ -7147,18 +7147,18 @@ unsafe class C
 ";
             var expectedOutput = @"970104";
             CompileAndVerify(
-                    string.Format(template, "unchecked"),
-                    options: TestOptions.UnsafeDebugExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "unchecked"),
+                options: TestOptions.UnsafeDebugExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.Main", expectedIL, sequencePoints: "C.Main");
             CompileAndVerify(
-                    string.Format(template, "checked  "),
-                    options: TestOptions.UnsafeDebugExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "checked  "),
+                options: TestOptions.UnsafeDebugExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.Main", expectedIL, sequencePoints: "C.Main");
         }
 
@@ -7218,18 +7218,18 @@ unsafe class C
 ";
             var expectedOutput = @"a";
             CompileAndVerify(
-                    string.Format(template, "unchecked"),
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "unchecked"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.Main", expectedIL);
             CompileAndVerify(
-                    string.Format(template, "checked"),
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Fails
-                )
+                string.Format(template, "checked"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            )
                 .VerifyIL("C.Main", expectedIL);
         }
 
@@ -7274,16 +7274,16 @@ unsafe class C
 }
 ";
             CompileAndVerify(
-                    string.Format(template, "unchecked"),
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Passes
-                )
+                string.Format(template, "unchecked"),
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Passes
+            )
                 .VerifyIL("C.M", expectedIL);
             CompileAndVerify(
-                    string.Format(template, "checked"),
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Passes
-                )
+                string.Format(template, "checked"),
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Passes
+            )
                 .VerifyIL("C.M", expectedIL);
         }
 
@@ -7361,16 +7361,16 @@ unsafe class C
 }
 ";
             CompileAndVerify(
-                    string.Format(template, "unchecked"),
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Passes
-                )
+                string.Format(template, "unchecked"),
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Passes
+            )
                 .VerifyIL("C.M", expectedIL);
             CompileAndVerify(
-                    string.Format(template, "checked"),
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Passes
-                )
+                string.Format(template, "checked"),
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Passes
+            )
                 .VerifyIL("C.M", expectedIL);
         }
 
@@ -7433,11 +7433,11 @@ unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "12",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "12",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Main",
                     @"
@@ -7506,11 +7506,11 @@ unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "1234",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "1234",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Main",
                     @"
@@ -7683,11 +7683,11 @@ class C
 16
 ".Trim();
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Passes
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Passes
+            )
                 .VerifyIL(
                     "C.Main",
                     @"
@@ -7780,11 +7780,11 @@ class Outer
             }
 
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Passes
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Passes
+            )
                 .VerifyIL(
                     "C.Main",
                     @"
@@ -7832,11 +7832,11 @@ enum E3 : long { A }
 8
 ".Trim();
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Passes
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Passes
+            )
                 .VerifyIL(
                     "C.Main",
                     @"
@@ -7885,10 +7885,10 @@ unsafe struct S
 
             // Dev10 has conv.u after IL_000d and conv.i8 in place of conv.u8 at IL_0017.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -7959,10 +7959,10 @@ unsafe struct S
 
             // Dev10 has conv.u after IL_000d and conv.i8 in place of conv.u8 at IL_0017.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -8033,10 +8033,10 @@ unsafe struct S
 
             // Dev10 has conv.u after IL_000d and conv.i8 in place of conv.u8 at IL_0017.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -8107,10 +8107,10 @@ unsafe struct S
 
             // Dev10 has conv.u after IL_000d and conv.i8 in place of conv.u8 at IL_0017.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -8478,16 +8478,15 @@ unsafe struct S
 ";
 
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: @"2147483651
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"2147483651
 overflow
 2",
-                    verify: Verification.Fails
-                )
-                .VerifyIL(
-                    "S.Main",
-                    @"
+                verify: Verification.Fails
+            ).VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       67 (0x43)
   .maxstack  2
@@ -8537,7 +8536,7 @@ overflow
   IL_0042:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -8574,11 +8573,11 @@ unsafe struct S
 ";
 
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "4",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "4",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -8648,11 +8647,11 @@ unsafe struct S
 ";
 
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "4",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "4",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -8717,11 +8716,11 @@ unsafe struct S
 ";
 
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "I0",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "I0",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -8795,11 +8794,11 @@ unsafe struct S
 ";
 
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "8",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "8",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -8912,11 +8911,11 @@ unsafe struct S
             }
 
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: expectedOutput,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -8989,11 +8988,11 @@ unsafe struct S
 
             // NOTE: don't use checked subtraction or division in either case (matches dev10).
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "44",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "44",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -9057,11 +9056,11 @@ unsafe struct S
 
             // NOTE: don't use checked subtraction or division in either case (matches dev10).
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "11",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "11",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -9123,11 +9122,11 @@ unsafe struct S
 
             // NOTE: don't use checked subtraction or division in either case (matches dev10).
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "11",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "11",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -9192,11 +9191,11 @@ unsafe struct S
 
             // NOTE: don't use checked subtraction or division in either case (matches dev10).
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "01",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "01",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -9568,19 +9567,21 @@ unsafe class C
 
 {3}
 ";
-            return string.Format(
-                mainClassTemplate,
-                checkedness,
-                string.Format(casesTemplate, pointedAtType),
-                string.Format(
-                    CheckedNumericHelperTemplate,
-                    operationName,
-                    pointedAtType,
-                    @operator,
-                    checkedness
-                ),
-                SizedStructs
-            );
+            return string
+                .Format(
+                    mainClassTemplate,
+                    checkedness,
+                    string.Format(casesTemplate, pointedAtType),
+                    string
+                        .Format(
+                            CheckedNumericHelperTemplate,
+                            operationName,
+                            pointedAtType,
+                            @operator,
+                            checkedness
+                        ),
+                    SizedStructs
+                );
         }
 
         // Positive numbers, size = 1
@@ -10922,11 +10923,11 @@ unsafe struct S
 ";
             // NOTE: all comparisons unsigned.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "011010011010",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "011010011010",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "S.Main",
                     @"
@@ -11179,10 +11180,10 @@ unsafe class C
 ";
             // NOTE: conversion is always unchecked, multiplication is always checked.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.M",
                     @"
@@ -11244,10 +11245,10 @@ unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.M",
                     @"
@@ -11290,10 +11291,10 @@ unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.M",
                     @"
@@ -11476,11 +11477,11 @@ unsafe class T
 } 
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "0",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "0",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "T.Main",
                     @"
@@ -11508,11 +11509,11 @@ unsafe class T
 "
                 );
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "0",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "0",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "T.Main",
                     @"
@@ -11784,10 +11785,10 @@ unsafe class C
             // That is, pinned temps are reused in by other pinned temps
             // but not by unpinned temps and vice versa.
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Test",
                     @"
@@ -11946,10 +11947,10 @@ public class Test
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails
+            )
                 .VerifyDiagnostics();
         }
 
@@ -11966,10 +11967,10 @@ class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyDiagnostics(
                     // (4,9): warning CS0414: The field 'C.x' is assigned but its value is never used
                     //     int x = 1;
@@ -11990,10 +11991,10 @@ class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyDiagnostics(
                     // (5,9): warning CS0414: The field 'C.x' is assigned but its value is never used
                     //     int x = 1;
@@ -12079,10 +12080,10 @@ public struct OuterStruct
 }
 ";
             CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Passes
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Passes
+            )
                 .VerifyDiagnostics(
                     // (8,17): warning CS0649: Field 'OuterStruct.FS' is never assigned to, and will always have its default value
                     //     FixedStruct FS;
@@ -12116,10 +12117,10 @@ unsafe public struct FixedStruct
 }
 ";
             var comp = CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyDiagnostics();
 
             comp.VerifyIL(
@@ -12178,11 +12179,11 @@ unsafe public struct FixedStruct
         }
     }";
             var comp = CompileAndVerify(
-                    text,
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "ABC",
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "ABC",
+                verify: Verification.Fails
+            )
                 .VerifyDiagnostics();
 
             comp.VerifyIL(

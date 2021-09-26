@@ -70,8 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedLocalFunction
             // do this, then SyntaxEditor will fail if it tries to remove an inner local function
             // after already removing the outer one.
             var localFunctions = diagnostics.OrderBy(
-                    (d1, d2) => d2.Location.SourceSpan.Start - d1.Location.SourceSpan.Start
-                )
+                (d1, d2) => d2.Location.SourceSpan.Start - d1.Location.SourceSpan.Start
+            )
                 .Select(d => root.FindToken(d.Location.SourceSpan.Start))
                 .Select(t => t.GetAncestor<LocalFunctionStatementSyntax>());
 

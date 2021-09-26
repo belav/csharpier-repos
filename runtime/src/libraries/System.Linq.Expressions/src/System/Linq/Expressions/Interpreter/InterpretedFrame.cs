@@ -149,7 +149,8 @@ namespace System.Linq.Expressions.Interpreter
             {
                 exception.Data[typeof(InterpretedFrameInfo)] = new List<InterpretedFrameInfo>(
                     GetStackTraceDebugInfo()
-                ).ToArray();
+                )
+                    .ToArray();
             }
         }
 

@@ -523,9 +523,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     typeof(HubT),
                     loggerFactory: LoggerFactory
                 );
-                var payload = Encoding.UTF8.GetBytes(
-                    "{\"protocol\": \"json\",\"version\": 1}\u001e{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
-                );
+                var payload = Encoding.UTF8
+                    .GetBytes(
+                        "{\"protocol\": \"json\",\"version\": 1}\u001e{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
+                    );
 
                 using (var client = new TestClient())
                 {
@@ -586,9 +587,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         [Fact]
         public async Task HubMessageOverTheMaxMessageSizeThrows()
         {
-            var payload = Encoding.UTF8.GetBytes(
-                "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
-            );
+            var payload = Encoding.UTF8
+                .GetBytes(
+                    "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
+                );
             var maximumMessageSize = payload.Length - 10;
 
             using (StartVerifiableLog())
@@ -615,11 +617,15 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 }
             }
 
-            var exceptionLog = TestSink.Writes.Where(
-                w =>
-                    string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
-                    && (w.Exception is InvalidDataException ide)
-            );
+            var exceptionLog = TestSink.Writes
+                .Where(
+                    w =>
+                        string
+                            .Equals(
+                                w.LoggerName,
+                                "Microsoft.AspNetCore.SignalR.HubConnectionHandler"
+                            ) && (w.Exception is InvalidDataException ide)
+                );
             Assert.Single(exceptionLog);
             Assert.Equal(
                 exceptionLog.First().Exception.Message,
@@ -630,9 +636,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         [Fact]
         public async Task ChunkedHubMessageOverTheMaxMessageSizeThrows()
         {
-            var payload = Encoding.UTF8.GetBytes(
-                "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
-            );
+            var payload = Encoding.UTF8
+                .GetBytes(
+                    "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
+                );
             var maximumMessageSize = payload.Length - 10;
 
             using (StartVerifiableLog())
@@ -651,12 +658,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 {
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
-                    await client.Connection.Application.Output.WriteAsync(
-                        payload.AsMemory(0, payload.Length / 2)
-                    );
-                    await client.Connection.Application.Output.WriteAsync(
-                        payload.AsMemory(payload.Length / 2)
-                    );
+                    await client.Connection.Application.Output
+                        .WriteAsync(payload.AsMemory(0, payload.Length / 2));
+                    await client.Connection.Application.Output
+                        .WriteAsync(payload.AsMemory(payload.Length / 2));
 
                     client.Dispose();
 
@@ -664,11 +669,15 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 }
             }
 
-            var exceptionLog = TestSink.Writes.Where(
-                w =>
-                    string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
-                    && (w.Exception is InvalidDataException ide)
-            );
+            var exceptionLog = TestSink.Writes
+                .Where(
+                    w =>
+                        string
+                            .Equals(
+                                w.LoggerName,
+                                "Microsoft.AspNetCore.SignalR.HubConnectionHandler"
+                            ) && (w.Exception is InvalidDataException ide)
+                );
             Assert.Single(exceptionLog);
             Assert.Equal(
                 exceptionLog.First().Exception.Message,
@@ -679,15 +688,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         [Fact]
         public async Task ManyHubMessagesOneOverTheMaxMessageSizeThrows()
         {
-            var payload1 = Encoding.UTF8.GetBytes(
-                "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"one\"]}\u001e"
-            );
-            var payload2 = Encoding.UTF8.GetBytes(
-                "{\"type\":1, \"invocationId\":\"2\", \"target\": \"Echo\", \"arguments\":[\"two\"]}\u001e"
-            );
-            var payload3 = Encoding.UTF8.GetBytes(
-                "{\"type\":1, \"invocationId\":\"3\", \"target\": \"Echo\", \"arguments\":[\"three\"]}\u001e"
-            );
+            var payload1 = Encoding.UTF8
+                .GetBytes(
+                    "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"one\"]}\u001e"
+                );
+            var payload2 = Encoding.UTF8
+                .GetBytes(
+                    "{\"type\":1, \"invocationId\":\"2\", \"target\": \"Echo\", \"arguments\":[\"two\"]}\u001e"
+                );
+            var payload3 = Encoding.UTF8
+                .GetBytes(
+                    "{\"type\":1, \"invocationId\":\"3\", \"target\": \"Echo\", \"arguments\":[\"three\"]}\u001e"
+                );
 
             // Between the first and the second payload so we'll end up slicing with some remaining in the slice for
             // the next message
@@ -737,11 +749,15 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 }
             }
 
-            var exceptionLog = TestSink.Writes.Where(
-                w =>
-                    string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
-                    && (w.Exception is InvalidDataException ide)
-            );
+            var exceptionLog = TestSink.Writes
+                .Where(
+                    w =>
+                        string
+                            .Equals(
+                                w.LoggerName,
+                                "Microsoft.AspNetCore.SignalR.HubConnectionHandler"
+                            ) && (w.Exception is InvalidDataException ide)
+                );
             Assert.Single(exceptionLog);
             Assert.Equal(
                 exceptionLog.First().Exception.Message,
@@ -752,15 +768,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         [Fact]
         public async Task ManyHubMessagesUnderTheMessageSizeButConfiguredWithMax()
         {
-            var payload1 = Encoding.UTF8.GetBytes(
-                "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"one\"]}\u001e"
-            );
-            var payload2 = Encoding.UTF8.GetBytes(
-                "{\"type\":1, \"invocationId\":\"2\", \"target\": \"Echo\", \"arguments\":[\"two\"]}\u001e"
-            );
-            var payload3 = Encoding.UTF8.GetBytes(
-                "{\"type\":1, \"invocationId\":\"3\", \"target\": \"Echo\", \"arguments\":[\"three\"]}\u001e"
-            );
+            var payload1 = Encoding.UTF8
+                .GetBytes(
+                    "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"one\"]}\u001e"
+                );
+            var payload2 = Encoding.UTF8
+                .GetBytes(
+                    "{\"type\":1, \"invocationId\":\"2\", \"target\": \"Echo\", \"arguments\":[\"two\"]}\u001e"
+                );
+            var payload3 = Encoding.UTF8
+                .GetBytes(
+                    "{\"type\":1, \"invocationId\":\"3\", \"target\": \"Echo\", \"arguments\":[\"three\"]}\u001e"
+                );
 
             // Bigger than all 3 messages
             var maximumMessageSize = payload3.Length + 10;
@@ -1319,9 +1338,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                     await client.SendInvocationAsync(
-                            nameof(MethodHub.ValueMethod),
-                            nonBlocking: true
-                        )
+                        nameof(MethodHub.ValueMethod),
+                        nonBlocking: true
+                    )
                         .DefaultTimeout();
 
                     // kill the connection
@@ -1501,12 +1520,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var result =
                         (
                             await client.InvokeAsync(
-                                    nameof(MethodHub.ConcatString),
-                                    (byte)32,
-                                    42,
-                                    'm',
-                                    "string"
-                                )
+                                nameof(MethodHub.ConcatString),
+                                (byte)32,
+                                42,
+                                'm',
+                                "string"
+                            )
                                 .DefaultTimeout()
                         ).Result;
 
@@ -1820,9 +1839,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     foreach (
                         var result in await Task.WhenAll(
-                                firstClient.ReadAsync(),
-                                secondClient.ReadAsync()
-                            )
+                            firstClient.ReadAsync(),
+                            secondClient.ReadAsync()
+                        )
                             .DefaultTimeout()
                     )
                     {
@@ -1874,16 +1893,17 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     foreach (
                         var result in await Task.WhenAll(
-                                firstClient.ReadAsync(),
-                                secondClient.ReadAsync()
-                            )
+                            firstClient.ReadAsync(),
+                            secondClient.ReadAsync()
+                        )
                             .DefaultTimeout()
                     )
                     {
                         var invocation = Assert.IsType<InvocationMessage>(result);
                         Assert.Equal("Array", invocation.Target);
                         Assert.Single(invocation.Arguments);
-                        var values = ((JArray)invocation.Arguments[0]).Select(t => t.Value<int>())
+                        var values = ((JArray)invocation.Arguments[0])
+                            .Select(t => t.Value<int>())
                             .ToArray();
                         Assert.Equal(new[] { 1, 2, 3 }, values);
                     }
@@ -2054,10 +2074,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     );
 
                     await Task.WhenAll(
-                            firstClient.Connected,
-                            secondClient.Connected,
-                            thirdClient.Connected
-                        )
+                        firstClient.Connected,
+                        secondClient.Connected,
+                        thirdClient.Connected
+                    )
                         .DefaultTimeout();
 
                     var excludeSecondClientId = new HashSet<string>();
@@ -2066,16 +2086,16 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     excludeThirdClientId.Add(thirdClient.Connection.ConnectionId);
 
                     await firstClient.SendInvocationAsync(
-                            "SendToAllExcept",
-                            "To second",
-                            excludeThirdClientId
-                        )
+                        "SendToAllExcept",
+                        "To second",
+                        excludeThirdClientId
+                    )
                         .DefaultTimeout();
                     await firstClient.SendInvocationAsync(
-                            "SendToAllExcept",
-                            "To third",
-                            excludeSecondClientId
-                        )
+                        "SendToAllExcept",
+                        "To third",
+                        excludeSecondClientId
+                    )
                         .DefaultTimeout();
 
                     var secondClientResult = await secondClient.ReadAsync().DefaultTimeout();
@@ -2094,10 +2114,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     thirdClient.Dispose();
 
                     await Task.WhenAll(
-                            firstConnectionHandlerTask,
-                            secondConnectionHandlerTask,
-                            thirdConnectionHandlerTask
-                        )
+                        firstConnectionHandlerTask,
+                        secondConnectionHandlerTask,
+                        thirdConnectionHandlerTask
+                    )
                         .DefaultTimeout();
                 }
             }
@@ -2129,10 +2149,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     );
 
                     await Task.WhenAll(
-                            firstClient.Connected,
-                            secondClient.Connected,
-                            thirdClient.Connected
-                        )
+                        firstClient.Connected,
+                        secondClient.Connected,
+                        thirdClient.Connected
+                    )
                         .DefaultTimeout();
 
                     var secondAndThirdClients = new HashSet<string>
@@ -2142,10 +2162,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     };
 
                     await firstClient.SendInvocationAsync(
-                            "SendToMultipleClients",
-                            "Second and Third",
-                            secondAndThirdClients
-                        )
+                        "SendToMultipleClients",
+                        "Second and Third",
+                        secondAndThirdClients
+                    )
                         .DefaultTimeout();
 
                     var secondClientResult = await secondClient.ReadAsync().DefaultTimeout();
@@ -2169,10 +2189,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     thirdClient.Dispose();
 
                     await Task.WhenAll(
-                            firstConnectionHandlerTask,
-                            secondConnectionHandlerTask,
-                            thirdConnectionHandlerTask
-                        )
+                        firstConnectionHandlerTask,
+                        secondConnectionHandlerTask,
+                        thirdConnectionHandlerTask
+                    )
                         .DefaultTimeout();
                 }
             }
@@ -2204,17 +2224,17 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     );
 
                     await Task.WhenAll(
-                            firstClient.Connected,
-                            secondClient.Connected,
-                            thirdClient.Connected
-                        )
+                        firstClient.Connected,
+                        secondClient.Connected,
+                        thirdClient.Connected
+                    )
                         .DefaultTimeout();
 
                     await firstClient.SendInvocationAsync(
-                            nameof(MethodHub.SendToMultipleUsers),
-                            new[] { "userB", "userC" },
-                            "Second and Third"
-                        )
+                        nameof(MethodHub.SendToMultipleUsers),
+                        new[] { "userB", "userC" },
+                        "Second and Third"
+                    )
                         .DefaultTimeout();
 
                     var secondClientResult = await secondClient.ReadAsync().DefaultTimeout();
@@ -2238,10 +2258,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     thirdClient.Dispose();
 
                     await Task.WhenAll(
-                            firstConnectionHandlerTask,
-                            secondConnectionHandlerTask,
-                            thirdConnectionHandlerTask
-                        )
+                        firstConnectionHandlerTask,
+                        secondConnectionHandlerTask,
+                        thirdConnectionHandlerTask
+                    )
                         .DefaultTimeout();
                 }
             }
@@ -2286,17 +2306,17 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     result =
                         (
                             await secondClient.InvokeAsync(
-                                    nameof(MethodHub.GroupAddMethod),
-                                    "testGroup"
-                                )
+                                nameof(MethodHub.GroupAddMethod),
+                                "testGroup"
+                            )
                                 .DefaultTimeout()
                         ).Result;
 
                     await firstClient.SendInvocationAsync(
-                            nameof(MethodHub.GroupSendMethod),
-                            "testGroup",
-                            "test"
-                        )
+                        nameof(MethodHub.GroupSendMethod),
+                        "testGroup",
+                        "test"
+                    )
                         .DefaultTimeout();
 
                     // check that 'secondConnection' has received the group send
@@ -2363,11 +2383,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     };
 
                     await firstClient.SendInvocationAsync(
-                            "GroupExceptSendMethod",
-                            "testGroup",
-                            "test",
-                            excludedConnectionIds
-                        )
+                        "GroupExceptSendMethod",
+                        "testGroup",
+                        "test",
+                        excludedConnectionIds
+                    )
                         .DefaultTimeout();
 
                     // check that 'secondConnection' has received the group send
@@ -2435,10 +2455,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         .DefaultTimeout();
 
                     await firstClient.SendInvocationAsync(
-                            "SendToOthersInGroup",
-                            "testGroup",
-                            "test"
-                        )
+                        "SendToOthersInGroup",
+                        "testGroup",
+                        "test"
+                    )
                         .DefaultTimeout();
 
                     // check that 'secondConnection' has received the group send
@@ -2496,10 +2516,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     var groupNames = new List<string> { "GroupA", "GroupB" };
                     await firstClient.SendInvocationAsync(
-                            nameof(MethodHub.SendToMultipleGroups),
-                            "test",
-                            groupNames
-                        )
+                        nameof(MethodHub.SendToMultipleGroups),
+                        "test",
+                        groupNames
+                    )
                         .DefaultTimeout();
 
                     var hubMessage = await secondClient.ReadAsync().DefaultTimeout();
@@ -2543,9 +2563,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                     await client.SendInvocationAsync(
-                            nameof(MethodHub.GroupRemoveMethod),
-                            "testGroup"
-                        )
+                        nameof(MethodHub.GroupRemoveMethod),
+                        "testGroup"
+                    )
                         .DefaultTimeout();
 
                     // kill the connection
@@ -2625,10 +2645,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         .DefaultTimeout();
 
                     await firstClient.SendInvocationAsync(
-                            "ConnectionSendMethod",
-                            secondClient.Connection.ConnectionId,
-                            "test"
-                        )
+                        "ConnectionSendMethod",
+                        secondClient.Connection.ConnectionId,
+                        "test"
+                    )
                         .DefaultTimeout();
 
                     // check that 'secondConnection' has received the group send
@@ -2672,10 +2692,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         .DefaultTimeout();
 
                     await firstClient.SendInvocationAsync(
-                            "DelayedSend",
-                            secondClient.Connection.ConnectionId,
-                            "test"
-                        )
+                        "DelayedSend",
+                        secondClient.Connection.ConnectionId,
+                        "test"
+                    )
                         .DefaultTimeout();
 
                     // check that 'secondConnection' has received the group send
@@ -2726,7 +2746,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                     // Wait for a connection, or for the endpoint to fail.
-                    await client.Connected.OrThrowIfOtherFails(connectionHandlerTask)
+                    await client.Connected
+                        .OrThrowIfOtherFails(connectionHandlerTask)
                         .DefaultTimeout();
 
                     var messages = await client.StreamAsync(method, 4).DefaultTimeout();
@@ -3010,9 +3031,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                 using (var client = new TestClient())
                 {
-                    client.Connection.User.AddIdentity(
-                        new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, "name") })
-                    );
+                    client.Connection.User
+                        .AddIdentity(
+                            new ClaimsIdentity(
+                                new[] { new Claim(ClaimTypes.NameIdentifier, "name") }
+                            )
+                        );
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                     await client.Connected.DefaultTimeout();
@@ -3086,9 +3110,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                 using (var client = new TestClient())
                 {
-                    client.Connection.User.AddIdentity(
-                        new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, "name") })
-                    );
+                    client.Connection.User
+                        .AddIdentity(
+                            new ClaimsIdentity(
+                                new[] { new Claim(ClaimTypes.NameIdentifier, "name") }
+                            )
+                        );
 
                     // Setup a HttpContext to make sure it flows to the AuthHandler correctly
                     var httpConnectionContext = new HttpContextFeatureImpl();
@@ -3100,10 +3127,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     await client.Connected.DefaultTimeout();
 
                     var message = await client.InvokeAsync(
-                            nameof(MethodHub.MultiParamAuthMethod),
-                            "Hello",
-                            "World!"
-                        )
+                        nameof(MethodHub.MultiParamAuthMethod),
+                        "Hello",
+                        "World!"
+                    )
                         .DefaultTimeout();
 
                     Assert.Null(message.Error);
@@ -3123,16 +3150,15 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                     services =>
                     {
-                        services.AddSignalR()
-                            .AddNewtonsoftJsonProtocol(
-                                o =>
+                        services.AddSignalR().AddNewtonsoftJsonProtocol(
+                            o =>
+                            {
+                                o.PayloadSerializerSettings = new JsonSerializerSettings
                                 {
-                                    o.PayloadSerializerSettings = new JsonSerializerSettings
-                                    {
-                                        ContractResolver = new DefaultContractResolver()
-                                    };
-                                }
-                            );
+                                    ContractResolver = new DefaultContractResolver()
+                                };
+                            }
+                        );
                     },
                     LoggerFactory
                 );
@@ -3208,19 +3234,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                     services =>
                     {
-                        services.AddSignalR()
-                            .AddMessagePackProtocol(
-                                options =>
-                                {
-                                    options.SerializerOptions =
-                                        MessagePackSerializerOptions.Standard.WithResolver(
-                                            CompositeResolver.Create(
-                                                new CustomFormatter(),
-                                                options.SerializerOptions.Resolver
-                                            )
-                                        );
-                                }
-                            );
+                        services.AddSignalR().AddMessagePackProtocol(
+                            options =>
+                            {
+                                options.SerializerOptions = MessagePackSerializerOptions.Standard
+                                    .WithResolver(
+                                        CompositeResolver.Create(
+                                            new CustomFormatter(),
+                                            options.SerializerOptions.Resolver
+                                        )
+                                    );
+                            }
+                        );
                     },
                     LoggerFactory
                 );
@@ -3294,12 +3319,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 {
                     client.SupportedFormats = TransferFormat.Binary;
                     await Assert.ThrowsAsync<InvalidOperationException>(
-                            async () =>
-                                await await client.ConnectAsync(
-                                    connectionHandler,
-                                    expectedHandshakeResponseMessage: false
-                                )
-                        )
+                        async () =>
+                            await await client.ConnectAsync(
+                                connectionHandler,
+                                expectedHandshakeResponseMessage: false
+                            )
+                    )
                         .DefaultTimeout();
                 }
             }
@@ -3338,12 +3363,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 {
                     client.SupportedFormats = TransferFormat.Binary;
                     await Assert.ThrowsAsync<InvalidOperationException>(
-                            async () =>
-                                await await client.ConnectAsync(
-                                    connectionHandler,
-                                    expectedHandshakeResponseMessage: false
-                                )
-                        )
+                        async () =>
+                            await await client.ConnectAsync(
+                                connectionHandler,
+                                expectedHandshakeResponseMessage: false
+                            )
+                    )
                         .DefaultTimeout();
                 }
             }
@@ -3390,10 +3415,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     await client2.Connected.DefaultTimeout();
 
                     await client2.SendInvocationAsync(
-                            nameof(MethodHub.SendToMultipleUsers),
-                            new[] { "client1" },
-                            "Hi!"
-                        )
+                        nameof(MethodHub.SendToMultipleUsers),
+                        new[] { "client1" },
+                        "Hi!"
+                    )
                         .DefaultTimeout();
 
                     var message = (InvocationMessage)await client1.ReadAsync().DefaultTimeout();
@@ -4097,12 +4122,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     // Blocking streaming invocation to test that other invocations can still run
                     await client.SendHubMessageAsync(
-                            new StreamInvocationMessage(
-                                "1",
-                                nameof(StreamingHub.BlockingStream),
-                                Array.Empty<object>()
-                            )
+                        new StreamInvocationMessage(
+                            "1",
+                            nameof(StreamingHub.BlockingStream),
+                            Array.Empty<object>()
                         )
+                    )
                         .DefaultTimeout();
 
                     var completion = await client.InvokeAsync(nameof(StreamingHub.NonStream))
@@ -4231,21 +4256,21 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     await client.Connected.DefaultTimeout();
 
                     await client.SendHubMessageAsync(
-                            new StreamInvocationMessage(
-                                "123",
-                                nameof(StreamingHub.BlockingStream),
-                                Array.Empty<object>()
-                            )
+                        new StreamInvocationMessage(
+                            "123",
+                            nameof(StreamingHub.BlockingStream),
+                            Array.Empty<object>()
                         )
+                    )
                         .DefaultTimeout();
 
                     await client.SendHubMessageAsync(
-                            new StreamInvocationMessage(
-                                "123",
-                                nameof(StreamingHub.BlockingStream),
-                                Array.Empty<object>()
-                            )
+                        new StreamInvocationMessage(
+                            "123",
+                            nameof(StreamingHub.BlockingStream),
+                            Array.Empty<object>()
                         )
+                    )
                         .DefaultTimeout();
 
                     var completion = Assert.IsType<CompletionMessage>(
@@ -4299,18 +4324,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     // Long running hub invocation to test that other invocations will not run until it is completed
                     await client.SendInvocationAsync(
-                            nameof(LongRunningHub.LongRunningMethod),
-                            nonBlocking: false
-                        )
+                        nameof(LongRunningHub.LongRunningMethod),
+                        nonBlocking: false
+                    )
                         .DefaultTimeout();
                     // Wait for the long running method to start
                     await tcsService.StartedMethod.Task.DefaultTimeout();
 
                     // Invoke another hub method which will wait for the first method to finish
                     await client.SendInvocationAsync(
-                            nameof(LongRunningHub.SimpleMethod),
-                            nonBlocking: false
-                        )
+                        nameof(LongRunningHub.SimpleMethod),
+                        nonBlocking: false
+                    )
                         .DefaultTimeout();
                     // Both invocations should be waiting now
                     Assert.Null(client.TryRead());
@@ -4370,9 +4395,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     // Long running hub invocation to test that other invocations will not run until it is completed
                     await client.SendInvocationAsync(
-                            nameof(LongRunningHub.LongRunningMethod),
-                            nonBlocking: false
-                        )
+                        nameof(LongRunningHub.LongRunningMethod),
+                        nonBlocking: false
+                    )
                         .DefaultTimeout();
                     // Wait for the long running method to start
                     await tcsService.StartedMethod.Task.DefaultTimeout();
@@ -4381,9 +4406,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     {
                         // Invoke another hub method which will wait for the first method to finish
                         await client.SendInvocationAsync(
-                                nameof(LongRunningHub.SimpleMethod),
-                                nonBlocking: false
-                            )
+                            nameof(LongRunningHub.SimpleMethod),
+                            nonBlocking: false
+                        )
                             .DefaultTimeout();
 
                         // simple hub method result
@@ -4442,9 +4467,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     // Long running hub invocation to test that other invocations will not run until it is completed
                     await client.SendInvocationAsync(
-                            nameof(LongRunningHub.LongRunningMethod),
-                            nonBlocking: false
-                        )
+                        nameof(LongRunningHub.LongRunningMethod),
+                        nonBlocking: false
+                    )
                         .DefaultTimeout();
                     // Wait for the long running method to start
                     await tcsService.StartedMethod.Task.DefaultTimeout();
@@ -4454,18 +4479,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     // Long running hub invocation to test that other invocations will not run until it is completed
                     await client.SendInvocationAsync(
-                            nameof(LongRunningHub.LongRunningMethod),
-                            nonBlocking: false
-                        )
+                        nameof(LongRunningHub.LongRunningMethod),
+                        nonBlocking: false
+                    )
                         .DefaultTimeout();
                     // Wait for the long running method to start
                     await tcsService.StartedMethod.Task.DefaultTimeout();
 
                     // Invoke another hub method which will wait for the first method to finish
                     await client.SendInvocationAsync(
-                            nameof(LongRunningHub.SimpleMethod),
-                            nonBlocking: false
-                        )
+                        nameof(LongRunningHub.SimpleMethod),
+                        nonBlocking: false
+                    )
                         .DefaultTimeout();
                     // Both invocations should be waiting now
                     Assert.Null(client.TryRead());
@@ -4533,9 +4558,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     // Long running stream invocation to test that other invocations can still run before it is completed
                     var streamInvocationId = await client.SendStreamInvocationAsync(
-                            nameof(LongRunningHub.LongRunningStream),
-                            null
-                        )
+                        nameof(LongRunningHub.LongRunningStream),
+                        null
+                    )
                         .DefaultTimeout();
                     // Wait for the long running method to start
                     await tcsService.StartedMethod.Task.DefaultTimeout();
@@ -4554,8 +4579,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         as CustomHubActivator<LongRunningHub>;
 
                     await client.SendHubMessageAsync(
-                            new CancelInvocationMessage(streamInvocationId)
-                        )
+                        new CancelInvocationMessage(streamInvocationId)
+                    )
                         .DefaultTimeout();
 
                     // Completion message for canceled Stream
@@ -4596,9 +4621,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler)
                         .DefaultTimeout();
 
-                    await client.Connection.Application.Output.WriteAsync(
-                            Encoding.UTF8.GetBytes(new[] { '{' })
-                        )
+                    await client.Connection.Application.Output
+                        .WriteAsync(Encoding.UTF8.GetBytes(new[] { '{' }))
                         .DefaultTimeout();
 
                     // Close connection
@@ -4646,11 +4670,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var connectionHandlerTask = await client.ConnectAsync(connectionHandler)
                     .DefaultTimeout();
                 await client.BeginUploadStreamAsync(
-                        "invocationId",
-                        nameof(MethodHub.StreamDontRead),
-                        new[] { "id" },
-                        Array.Empty<object>()
-                    )
+                    "invocationId",
+                    nameof(MethodHub.StreamDontRead),
+                    new[] { "id" },
+                    Array.Empty<object>()
+                )
                     .DefaultTimeout();
 
                 foreach (var letter in new[] { "A", "B", "C", "D", "E" })
@@ -4792,11 +4816,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 foreach (var spot in order)
                 {
                     await client.SendHubMessageAsync(
-                            new StreamItemMessage(
-                                spot.ToString(CultureInfo.InvariantCulture),
-                                words[spot][pos[spot]]
-                            )
+                        new StreamItemMessage(
+                            spot.ToString(CultureInfo.InvariantCulture),
+                            words[spot][pos[spot]]
                         )
+                    )
                         .DefaultTimeout();
                     pos[spot] += 1;
                 }
@@ -4986,8 +5010,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     // Test HubConnectionContext.WriteCore(HubMessage) codepath
                     await client.SendInvocationAsync(
-                            nameof(ConnectionLifetimeHub.ProtocolErrorSelf)
-                        )
+                        nameof(ConnectionLifetimeHub.ProtocolErrorSelf)
+                    )
                         .DefaultTimeout();
 
                     await connectionHandlerTask.DefaultTimeout();
@@ -5045,11 +5069,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler)
                         .DefaultTimeout();
                     await client.BeginUploadStreamAsync(
-                            "invocation",
-                            nameof(MethodHub.StreamingConcat),
-                            streamIds: new[] { "id" },
-                            Array.Empty<object>()
-                        )
+                        "invocation",
+                        nameof(MethodHub.StreamingConcat),
+                        streamIds: new[] { "id" },
+                        Array.Empty<object>()
+                    )
                         .DefaultTimeout();
 
                     // send integers that are then cast to strings
@@ -5114,18 +5138,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler)
                         .DefaultTimeout();
                     await client.BeginUploadStreamAsync(
-                            "invocationId",
-                            nameof(MethodHub.TestTypeCastingErrors),
-                            new[] { "channelId" },
-                            Array.Empty<object>()
-                        )
+                        "invocationId",
+                        nameof(MethodHub.TestTypeCastingErrors),
+                        new[] { "channelId" },
+                        Array.Empty<object>()
+                    )
                         .DefaultTimeout();
 
                     // client is running wild, sending strings not ints.
                     // this error should be propogated to the user's HubMethod code
                     await client.SendHubMessageAsync(
-                            new StreamItemMessage("channelId", "not a number")
-                        )
+                        new StreamItemMessage("channelId", "not a number")
+                    )
                         .DefaultTimeout();
                     var response = await client.ReadAsync().DefaultTimeout();
 
@@ -5159,8 +5183,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler)
                         .DefaultTimeout();
                     await client.SendHubMessageAsync(
-                            new StreamItemMessage("fake_id", "not a number")
-                        )
+                        new StreamItemMessage("fake_id", "not a number")
+                    )
                         .DefaultTimeout();
 
                     var message = client.TryRead();
@@ -5169,11 +5193,13 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             }
 
             Assert.Single(
-                TestSink.Writes.Where(
-                    w =>
-                        w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                        && w.EventId.Name == "ClosingStreamWithBindingError"
-                )
+                TestSink.Writes
+                    .Where(
+                        w =>
+                            w.LoggerName
+                                == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                            && w.EventId.Name == "ClosingStreamWithBindingError"
+                    )
             );
         }
 
@@ -5206,11 +5232,13 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             }
 
             Assert.Single(
-                TestSink.Writes.Where(
-                    w =>
-                        w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                        && w.EventId.Name == "UnexpectedStreamCompletion"
-                )
+                TestSink.Writes
+                    .Where(
+                        w =>
+                            w.LoggerName
+                                == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                            && w.EventId.Name == "UnexpectedStreamCompletion"
+                    )
             );
         }
 
@@ -5232,15 +5260,15 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 {
                     await client.ConnectAsync(connectionHandler).DefaultTimeout();
                     await client.BeginUploadStreamAsync(
-                            "invocation",
-                            nameof(MethodHub.TestCustomErrorPassing),
-                            streamIds: new[] { "id" },
-                            args: Array.Empty<object>()
-                        )
+                        "invocation",
+                        nameof(MethodHub.TestCustomErrorPassing),
+                        streamIds: new[] { "id" },
+                        args: Array.Empty<object>()
+                    )
                         .DefaultTimeout();
                     await client.SendHubMessageAsync(
-                            CompletionMessage.WithError("id", CustomErrorMessage)
-                        )
+                        CompletionMessage.WithError("id", CustomErrorMessage)
+                    )
                         .DefaultTimeout();
 
                     var response = (CompletionMessage)await client.ReadAsync().DefaultTimeout();
@@ -5265,11 +5293,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 {
                     await client.ConnectAsync(connectionHandler).DefaultTimeout();
                     await client.BeginUploadStreamAsync(
-                            "invocation",
-                            nameof(MethodHub.StreamingConcat),
-                            streamIds: new[] { "id", "id2" },
-                            args: Array.Empty<object>()
-                        )
+                        "invocation",
+                        nameof(MethodHub.StreamingConcat),
+                        streamIds: new[] { "id", "id2" },
+                        args: Array.Empty<object>()
+                    )
                         .DefaultTimeout();
 
                     var response = (CompletionMessage)await client.ReadAsync().DefaultTimeout();
@@ -5297,11 +5325,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 {
                     await client.ConnectAsync(connectionHandler).DefaultTimeout();
                     await client.BeginUploadStreamAsync(
-                            "invocation",
-                            nameof(MethodHub.StreamingConcat),
-                            streamIds: Array.Empty<string>(),
-                            args: Array.Empty<object>()
-                        )
+                        "invocation",
+                        nameof(MethodHub.StreamingConcat),
+                        streamIds: Array.Empty<string>(),
+                        args: Array.Empty<object>()
+                    )
                         .DefaultTimeout();
 
                     var response = (CompletionMessage)await client.ReadAsync().DefaultTimeout();
@@ -5335,11 +5363,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         .DefaultTimeout();
 
                     await client.BeginUploadStreamAsync(
-                            "invocation",
-                            nameof(MethodHub.StreamingConcat),
-                            streamIds: new[] { "id" },
-                            args: Array.Empty<object>()
-                        )
+                        "invocation",
+                        nameof(MethodHub.StreamingConcat),
+                        streamIds: new[] { "id" },
+                        args: Array.Empty<object>()
+                    )
                         .DefaultTimeout();
 
                     await client.SendHubMessageAsync(new StreamItemMessage("id", "hello"))
@@ -5396,11 +5424,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     // null ID means we're doing a Send and not an Invoke
                     await client.BeginUploadStreamAsync(
-                            invocationId: null,
-                            nameof(MethodHub.StreamingConcat),
-                            streamIds: new[] { "id" },
-                            args: Array.Empty<object>()
-                        )
+                        invocationId: null,
+                        nameof(MethodHub.StreamingConcat),
+                        streamIds: new[] { "id" },
+                        args: Array.Empty<object>()
+                    )
                         .DefaultTimeout();
                     await client.SendHubMessageAsync(new StreamItemMessage("id", "hello"))
                         .DefaultTimeout();
@@ -5443,11 +5471,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         .DefaultTimeout();
 
                     await client.BeginUploadStreamAsync(
-                            "invocation",
-                            nameof(MethodHub.UploadIgnoreItems),
-                            streamIds: new[] { "id" },
-                            args: Array.Empty<object>()
-                        )
+                        "invocation",
+                        nameof(MethodHub.UploadIgnoreItems),
+                        streamIds: new[] { "id" },
+                        args: Array.Empty<object>()
+                    )
                         .DefaultTimeout();
 
                     await client.SendHubMessageAsync(new StreamItemMessage("id", "ignored"))
@@ -5472,11 +5500,13 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             }
 
             Assert.Single(
-                TestSink.Writes.Where(
-                    w =>
-                        w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                        && w.EventId.Name == "ClosingStreamWithBindingError"
-                )
+                TestSink.Writes
+                    .Where(
+                        w =>
+                            w.LoggerName
+                                == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                            && w.EventId.Name == "ClosingStreamWithBindingError"
+                    )
             );
         }
 
@@ -5498,10 +5528,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         .DefaultTimeout();
 
                     await client.SendStreamInvocationAsync(
-                            nameof(MethodHub.StreamAndUploadIgnoreItems),
-                            streamIds: new[] { "id" },
-                            args: Array.Empty<object>()
-                        )
+                        nameof(MethodHub.StreamAndUploadIgnoreItems),
+                        streamIds: new[] { "id" },
+                        args: Array.Empty<object>()
+                    )
                         .DefaultTimeout();
 
                     await client.SendHubMessageAsync(new StreamItemMessage("id", "ignored"))
@@ -5526,11 +5556,13 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             }
 
             Assert.Single(
-                TestSink.Writes.Where(
-                    w =>
-                        w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                        && w.EventId.Name == "ClosingStreamWithBindingError"
-                )
+                TestSink.Writes
+                    .Where(
+                        w =>
+                            w.LoggerName
+                                == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                            && w.EventId.Name == "ClosingStreamWithBindingError"
+                    )
             );
         }
 
@@ -5565,17 +5597,17 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         .DefaultTimeout();
 
                     var streamInvocationId = await client.SendStreamInvocationAsync(
-                            methodName,
-                            args
-                        )
+                        methodName,
+                        args
+                    )
                         .DefaultTimeout();
                     // Wait for the stream method to start
                     await tcsService.StartedMethod.Task.DefaultTimeout();
 
                     // Cancel the stream which should trigger the CancellationToken in the hub method
                     await client.SendHubMessageAsync(
-                            new CancelInvocationMessage(streamInvocationId)
-                        )
+                        new CancelInvocationMessage(streamInvocationId)
+                    )
                         .DefaultTimeout();
 
                     var result = await client.ReadAsync().DefaultTimeout();
@@ -5617,8 +5649,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         .DefaultTimeout();
 
                     var streamInvocationId = await client.SendStreamInvocationAsync(
-                            nameof(LongRunningHub.CancelableStreamSingleParameter)
-                        )
+                        nameof(LongRunningHub.CancelableStreamSingleParameter)
+                    )
                         .DefaultTimeout();
                     // Wait for the stream method to start
                     await tcsService.StartedMethod.Task.DefaultTimeout();
@@ -5657,10 +5689,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         .DefaultTimeout();
 
                     var streamInvocationId = await client.SendStreamInvocationAsync(
-                            nameof(LongRunningHub.StreamNullableParameter),
-                            5,
-                            null
-                        )
+                        nameof(LongRunningHub.StreamNullableParameter),
+                        5,
+                        null
+                    )
                         .DefaultTimeout();
                     // Wait for the stream method to start
                     var firstArgument = await tcsService.StartedMethod.Task.DefaultTimeout();
@@ -5695,10 +5727,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         .DefaultTimeout();
 
                     var streamInvocationId = await client.SendStreamInvocationAsync(
-                            nameof(LongRunningHub.CancelableStreamNullableParameter),
-                            5,
-                            null
-                        )
+                        nameof(LongRunningHub.CancelableStreamNullableParameter),
+                        5,
+                        null
+                    )
                         .DefaultTimeout();
                     // Wait for the stream method to start
                     var firstArgument = await tcsService.StartedMethod.Task.DefaultTimeout();
@@ -5706,8 +5738,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     // Cancel the stream which should trigger the CancellationToken in the hub method
                     await client.SendHubMessageAsync(
-                            new CancelInvocationMessage(streamInvocationId)
-                        )
+                        new CancelInvocationMessage(streamInvocationId)
+                    )
                         .DefaultTimeout();
 
                     var secondArgument = await tcsService.EndMethod.Task.DefaultTimeout();
@@ -5735,8 +5767,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                         .DefaultTimeout();
 
                     var invocationId = await client.SendInvocationAsync(
-                            nameof(MethodHub.InvalidArgument)
-                        )
+                        nameof(MethodHub.InvalidArgument)
+                    )
                         .DefaultTimeout();
 
                     var completion = Assert.IsType<CompletionMessage>(
@@ -5778,15 +5810,16 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     Task connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                     // Wait for a connection, or for the endpoint to fail.
-                    await client.Connected.OrThrowIfOtherFails(connectionHandlerTask)
+                    await client.Connected
+                        .OrThrowIfOtherFails(connectionHandlerTask)
                         .DefaultTimeout();
 
                     var streamId = "sample_id";
                     var messagePromise = client.StreamAsync(
-                            nameof(StreamingHub.StreamEcho),
-                            new[] { streamId },
-                            Array.Empty<object>()
-                        )
+                        nameof(StreamingHub.StreamEcho),
+                        new[] { streamId },
+                        Array.Empty<object>()
+                    )
                         .DefaultTimeout();
 
                     var phrases = new[] { "asdf", "qwer", "zxcv" };
@@ -5866,7 +5899,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                     // Wait for a connection, or for the endpoint to fail.
-                    await client.Connected.OrThrowIfOtherFails(connectionHandlerTask)
+                    await client.Connected
+                        .OrThrowIfOtherFails(connectionHandlerTask)
                         .DefaultTimeout();
 
                     var messages = await client.StreamAsync(method, argument).DefaultTimeout();
@@ -5909,7 +5943,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                     // Wait for a connection, or for the endpoint to fail.
-                    await client.Connected.OrThrowIfOtherFails(connectionHandlerTask)
+                    await client.Connected
+                        .OrThrowIfOtherFails(connectionHandlerTask)
                         .DefaultTimeout();
 
                     await callerService.Caller.SendAsync("Echo", "message").DefaultTimeout();
@@ -5940,11 +5975,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 await client.Connected.OrThrowIfOtherFails(connectionHandlerTask).DefaultTimeout();
 
                 await client.BeginUploadStreamAsync(
-                        "invocation",
-                        nameof(MethodHub.UploadDoesWorkOnComplete),
-                        streamIds: new[] { "id" },
-                        args: Array.Empty<object>()
-                    )
+                    "invocation",
+                    nameof(MethodHub.UploadDoesWorkOnComplete),
+                    streamIds: new[] { "id" },
+                    args: Array.Empty<object>()
+                )
                     .DefaultTimeout();
 
                 await client.SendHubMessageAsync(new StreamItemMessage("id", "hello"))
@@ -5971,19 +6006,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 serviceBuilder =>
                 {
                     serviceBuilder.AddSignalR(
-                            o =>
-                            {
-                                // ConnectAsync would fail if this value was used
-                                o.MaximumReceiveMessageSize = 1;
-                            }
-                        )
-                        .AddHubOptions<MethodHub>(
-                            o =>
-                            {
-                                // null is treated as both no-limit and not set, this test verifies that we track if the user explicitly sets the value
-                                o.MaximumReceiveMessageSize = null;
-                            }
-                        );
+                        o =>
+                        {
+                            // ConnectAsync would fail if this value was used
+                            o.MaximumReceiveMessageSize = 1;
+                        }
+                    ).AddHubOptions<MethodHub>(
+                        o =>
+                        {
+                            // null is treated as both no-limit and not set, this test verifies that we track if the user explicitly sets the value
+                            o.MaximumReceiveMessageSize = null;
+                        }
+                    );
                 }
             );
             var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();

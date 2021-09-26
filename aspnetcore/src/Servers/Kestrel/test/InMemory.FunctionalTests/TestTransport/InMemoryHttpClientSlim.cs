@@ -161,10 +161,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                 throw new InvalidDataException($"No StatusCode found in '{response}'");
             }
 
-            return (HttpStatusCode)int.Parse(
-                response.Substring(statusStart, statusLength),
-                CultureInfo.InvariantCulture
-            );
+            return (HttpStatusCode)int
+                .Parse(response.Substring(statusStart, statusLength), CultureInfo.InvariantCulture);
         }
 
         private static async Task<Stream> GetStream(
@@ -184,11 +182,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                 );
 
                 await sslStream.AuthenticateAsClientAsync(
-                        requestUri.Host,
-                        clientCertificates: null,
-                        enabledSslProtocols: SslProtocols.None,
-                        checkCertificateRevocation: validateCertificate
-                    )
+                    requestUri.Host,
+                    clientCertificates: null,
+                    enabledSslProtocols: SslProtocols.None,
+                    checkCertificateRevocation: validateCertificate
+                )
                     .ConfigureAwait(false);
                 return sslStream;
             }

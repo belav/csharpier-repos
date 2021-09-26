@@ -54,7 +54,8 @@ public class Test
         Eval(new Gen<double>().Unbox(new Gen<double>().Box(1.111)).Equals(1.111));
         Eval(new Gen<string>().Unbox(new Gen<string>().Box("boxme")).Equals("boxme"));
         Eval(
-            new Gen<Guid>().Unbox(new Gen<Guid>().Box(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)))
+            new Gen<Guid>()
+                .Unbox(new Gen<Guid>().Box(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)))
                 .Equals(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11))
         );
 

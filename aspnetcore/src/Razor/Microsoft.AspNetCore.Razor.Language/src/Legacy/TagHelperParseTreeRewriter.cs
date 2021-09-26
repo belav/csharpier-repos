@@ -547,10 +547,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             {
                 if (
                     HasAllowedChildren()
-                    && !CurrentTagHelperTracker.PrefixedAllowedChildren.Contains(
-                        tagName,
-                        StringComparer.OrdinalIgnoreCase
-                    )
+                    && !CurrentTagHelperTracker.PrefixedAllowedChildren
+                        .Contains(tagName, StringComparer.OrdinalIgnoreCase)
                 )
                 {
                     OnAllowedChildrenStartTagError(
@@ -645,20 +643,22 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             private bool IsPotentialTagHelperStart(string tagName, MarkupStartTagSyntax startTag)
             {
-                return !string.Equals(
-                        tagName,
-                        SyntaxConstants.TextTagName,
-                        StringComparison.OrdinalIgnoreCase
-                    ) || !startTag.IsMarkupTransition;
+                return !string
+                        .Equals(
+                            tagName,
+                            SyntaxConstants.TextTagName,
+                            StringComparison.OrdinalIgnoreCase
+                        ) || !startTag.IsMarkupTransition;
             }
 
             private bool IsPotentialTagHelperEnd(string tagName, MarkupEndTagSyntax endTag)
             {
-                return !string.Equals(
-                        tagName,
-                        SyntaxConstants.TextTagName,
-                        StringComparison.OrdinalIgnoreCase
-                    ) || !endTag.IsMarkupTransition;
+                return !string
+                        .Equals(
+                            tagName,
+                            SyntaxConstants.TextTagName,
+                            StringComparison.OrdinalIgnoreCase
+                        ) || !endTag.IsMarkupTransition;
             }
 
             private static bool IsPartialStartTag(MarkupStartTagSyntax startTag)
@@ -919,14 +919,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     Info = info;
 
                     if (
-                        Info.BindingResult.Descriptors.Any(
-                            descriptor => descriptor.AllowedChildTags != null
-                        )
+                        Info.BindingResult.Descriptors
+                            .Any(descriptor => descriptor.AllowedChildTags != null)
                     )
                     {
-                        AllowedChildren = Info.BindingResult.Descriptors.Where(
-                                descriptor => descriptor.AllowedChildTags != null
-                            )
+                        AllowedChildren = Info.BindingResult.Descriptors
+                            .Where(descriptor => descriptor.AllowedChildTags != null)
                             .SelectMany(
                                 descriptor =>
                                     descriptor.AllowedChildTags.Select(childTag => childTag.Name)
@@ -951,8 +949,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             Debug.Assert(Info.BindingResult.Descriptors.Count() >= 1);
 
                             _prefixedAllowedChildren = AllowedChildren.Select(
-                                    allowedChild => _tagHelperPrefix + allowedChild
-                                )
+                                allowedChild => _tagHelperPrefix + allowedChild
+                            )
                                 .ToList();
                         }
 

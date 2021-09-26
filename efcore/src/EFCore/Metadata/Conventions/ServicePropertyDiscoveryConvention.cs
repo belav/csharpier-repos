@@ -83,10 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     continue;
                 }
 
-                var factory = Dependencies.ParameterBindingFactories.FindFactory(
-                    propertyInfo.PropertyType,
-                    name
-                );
+                var factory = Dependencies.ParameterBindingFactories
+                    .FindFactory(propertyInfo.PropertyType, name);
                 if (factory == null)
                 {
                     continue;

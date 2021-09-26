@@ -11,9 +11,8 @@ namespace AutoMapper.Internal.Mappers
     using static ExpressionBuilder;
     public class ToDynamicMapper : IObjectMapper
     {
-        private static readonly MethodInfo MapMethodInfo = typeof(ToDynamicMapper).GetStaticMethod(
-            nameof(Map)
-        );
+        private static readonly MethodInfo MapMethodInfo = typeof(ToDynamicMapper)
+            .GetStaticMethod(nameof(Map));
         private static object Map(
             object source,
             object destination,

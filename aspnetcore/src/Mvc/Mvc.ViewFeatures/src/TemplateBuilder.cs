@@ -112,20 +112,18 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
             else if (!string.IsNullOrEmpty(formatString))
             {
-                formattedModelValue = string.Format(
-                    CultureInfo.CurrentCulture,
-                    formatString,
-                    _model
-                );
+                formattedModelValue = string
+                    .Format(CultureInfo.CurrentCulture, formatString, _model);
             }
             else if (
                 (
                     string.Equals("week", _templateName, StringComparison.OrdinalIgnoreCase)
-                    || string.Equals(
-                        "week",
-                        viewData.ModelMetadata.DataTypeName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    || string
+                        .Equals(
+                            "week",
+                            viewData.ModelMetadata.DataTypeName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
             )
             {
@@ -150,9 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             viewData.TemplateInfo.FormattedModelValue = formattedModelValue;
-            viewData.TemplateInfo.HtmlFieldPrefix = _viewData.TemplateInfo.GetFullHtmlFieldName(
-                _htmlFieldName
-            );
+            viewData.TemplateInfo.HtmlFieldPrefix = _viewData.TemplateInfo
+                .GetFullHtmlFieldName(_htmlFieldName);
 
             if (_additionalViewData != null)
             {

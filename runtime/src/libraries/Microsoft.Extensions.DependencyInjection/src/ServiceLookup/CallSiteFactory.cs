@@ -358,9 +358,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 Type closedType;
                 try
                 {
-                    closedType = descriptor.ImplementationType.MakeGenericType(
-                        serviceType.GenericTypeArguments
-                    );
+                    closedType = descriptor.ImplementationType
+                        .MakeGenericType(serviceType.GenericTypeArguments);
                 }
                 catch (ArgumentException)
                 {
@@ -468,15 +467,16 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                                 {
                                     // Ambiguous match exception
                                     throw new InvalidOperationException(
-                                        string.Join(
-                                            Environment.NewLine,
-                                            SR.Format(
-                                                SR.AmbiguousConstructorException,
-                                                implementationType
-                                            ),
-                                            bestConstructor,
-                                            constructors[i]
-                                        )
+                                        string
+                                            .Join(
+                                                Environment.NewLine,
+                                                SR.Format(
+                                                    SR.AmbiguousConstructorException,
+                                                    implementationType
+                                                ),
+                                                bestConstructor,
+                                                constructors[i]
+                                            )
                                     );
                                 }
                             }

@@ -74,9 +74,10 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<UInt32.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"Vector128<UInt32.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                    );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -98,9 +99,10 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<UInt32.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"Vector128<UInt32.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                    );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -124,7 +126,8 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                object result = typeof(Vector128).GetMethod(nameof(Vector128.GetElement))
+                object result = typeof(Vector128)
+                    .GetMethod(nameof(Vector128.GetElement))
                     .MakeGenericMethod(typeof(UInt32))
                     .Invoke(null, new object[] { value, imm });
                 ValidateGetResult((UInt32)(result), values);
@@ -137,9 +140,10 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<UInt32.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"Vector128<UInt32.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                    );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -151,7 +155,8 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                object result2 = typeof(Vector128).GetMethod(nameof(Vector128.WithElement))
+                object result2 = typeof(Vector128)
+                    .GetMethod(nameof(Vector128.WithElement))
                     .MakeGenericMethod(typeof(UInt32))
                     .Invoke(null, new object[] { value, imm, insertedValue });
                 ValidateWithResult((Vector128<UInt32>)(result2), values, insertedValue);
@@ -164,9 +169,10 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<UInt32.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"Vector128<UInt32.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                    );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -192,12 +198,10 @@ namespace JIT.HardwareIntrinsics.General
             {
                 Succeeded = false;
 
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<UInt32.GetElement(3): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", values)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128<UInt32.GetElement(3): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", values)})");
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }
@@ -240,16 +244,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<UInt32.WithElement(3): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", values)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128<UInt32.WithElement(3): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", values)})");
                 TestLibrary.TestFramework.LogInformation($"  insert: insertedValue");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

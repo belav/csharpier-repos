@@ -667,7 +667,8 @@ namespace System.Data
                             root_id = RBInsert(Next(z_id), x_id, z_id, -1, false); // z_id is existing mainTreeNodeID
                             SetKey(z_id, Key(Next(z_id)));
 #if VerifyPath
-                            (new NodePath(x_id, z_id)).VerifyPath(this); // verify x_id after its been added
+                            (new NodePath(x_id, z_id))
+                                .VerifyPath(this); // verify x_id after its been added
 #endif
                         }
                         else
@@ -713,7 +714,8 @@ namespace System.Data
 
                             SetSubTreeSize(newMainTreeNodeId, savedSize);
 #if VerifyPath
-                            (new NodePath(x_id, newMainTreeNodeId)).VerifyPath(this); // verify x_id after its been added
+                            (new NodePath(x_id, newMainTreeNodeId))
+                                .VerifyPath(this); // verify x_id after its been added
 #endif
                         }
                         return root_id;
@@ -767,7 +769,8 @@ namespace System.Data
                     // technically we should never come here. Satellite tree always has a root and atleast 1 child.
                     // if it has only root as it's node, then the satellite tree gets collapsed into the main tree.
 #if VerifyPath
-                    (new NodePath(x_id, mainTreeNodeID)).VerifyPath(this); // verify x_id after its been added
+                    (new NodePath(x_id, mainTreeNodeID))
+                        .VerifyPath(this); // verify x_id after its been added
 #endif
                     SetNext(mainTreeNodeID, x_id);
                     SetKey(mainTreeNodeID, Key(x_id));
@@ -859,7 +862,8 @@ namespace System.Data
                 SetColor(root_id, NodeColor.black);
 
 #if VerifyPath
-            (new NodePath(z_id, mainTreeNodeID)).VerifyPath(this); // verify x_id after its been added
+            (new NodePath(z_id, mainTreeNodeID))
+                .VerifyPath(this); // verify x_id after its been added
 #endif
             return root_id;
         } //Insert
@@ -931,7 +935,8 @@ namespace System.Data
             int py_id; // for holding spliced node (y_id's) parent
 #if VerifyPath
             // by knowing the NodePath, when z_id is in a satellite branch we don't have to Search for mainTreeNodeID
-            (new NodePath(z_id, mainTreeNodeID)).VerifyPath(this);
+            (new NodePath(z_id, mainTreeNodeID))
+                .VerifyPath(this);
 #endif
             if (Next(z_id) != NIL)
                 return RBDeleteX(Next(z_id), Next(z_id), z_id); // delete root of satelite tree.
@@ -1166,7 +1171,8 @@ namespace System.Data
 
 #if VerifyPath
             // by knowing the NodePath, when z_id is in a satellite branch we don't have to Search for mainTreeNodeID
-            (new NodePath(root_id, mainTreeNodeID)).VerifyPath(this);
+            (new NodePath(root_id, mainTreeNodeID))
+                .VerifyPath(this);
 #endif
 
             if (x_id == NIL && px_id == NIL)
@@ -1450,7 +1456,8 @@ namespace System.Data
             else if (NIL != Next(node))
             { // node is a main tree node
 #if VerifyIndex && VerifyPath
-                (new NodePath(Next(node), node)).VerifyPath(this);
+                (new NodePath(Next(node), node))
+                    .VerifyPath(this);
 #endif
                 return ComputeIndexWithSatelliteByNode(node);
             }
@@ -1460,14 +1467,16 @@ namespace System.Data
                 if (mainTreeNodeId == node)
                 { // node is a main tree node
 #if VerifyIndex && VerifyPath
-                    (new NodePath(node, NIL)).VerifyPath(this);
+                    (new NodePath(node, NIL))
+                        .VerifyPath(this);
 #endif
                     return ComputeIndexWithSatelliteByNode(node);
                 }
                 else
                 { //compute the main tree rank + satellite branch rank
 #if VerifyIndex && VerifyPath
-                    (new NodePath(node, mainTreeNodeId)).VerifyPath(this);
+                    (new NodePath(node, mainTreeNodeId))
+                        .VerifyPath(this);
 #endif
                     return ComputeIndexWithSatelliteByNode(mainTreeNodeId)
                         + ComputeIndexByNode(node);

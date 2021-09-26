@@ -37,9 +37,11 @@ namespace Microsoft.CodeAnalysis.Razor
 
         protected override void OnInitialized()
         {
-            _referenceFeature = Engine.Features.OfType<IMetadataReferenceFeature>()
+            _referenceFeature = Engine.Features
+                .OfType<IMetadataReferenceFeature>()
                 .FirstOrDefault();
-            _providers = Engine.Features.OfType<ITagHelperDescriptorProvider>()
+            _providers = Engine.Features
+                .OfType<ITagHelperDescriptorProvider>()
                 .OrderBy(f => f.Order)
                 .ToArray();
         }

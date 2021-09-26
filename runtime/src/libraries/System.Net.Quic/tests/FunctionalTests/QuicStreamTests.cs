@@ -66,9 +66,8 @@ namespace System.Net.Quic.Tests
                     }
                 );
 
-                await (new[] { listenTask, clientTask }).WhenAllOrAnyFailed(
-                    millisecondsTimeout: 10000
-                );
+                await (new[] { listenTask, clientTask })
+                    .WhenAllOrAnyFailed(millisecondsTimeout: 10000);
             }
         }
 
@@ -141,9 +140,8 @@ namespace System.Net.Quic.Tests
                     }
                 );
 
-                await (new[] { listenTask, clientTask }).WhenAllOrAnyFailed(
-                    millisecondsTimeout: 1000000
-                );
+                await (new[] { listenTask, clientTask })
+                    .WhenAllOrAnyFailed(millisecondsTimeout: 1000000);
             }
         }
 
@@ -333,9 +331,8 @@ namespace System.Net.Quic.Tests
                     }
                 );
 
-                await (new[] { listenTask, clientTask }).WhenAllOrAnyFailed(
-                    millisecondsTimeout: 1000000
-                );
+                await (new[] { listenTask, clientTask })
+                    .WhenAllOrAnyFailed(millisecondsTimeout: 1000000);
             }
         }
 
@@ -543,38 +540,37 @@ namespace System.Net.Quic.Tests
             const int ExpectedErrorCode = 0xfffffff;
 
             await Task.Run(
-                    async () =>
-                    {
-                        using QuicListener listener = CreateQuicListener();
-                        ValueTask<QuicConnection> serverConnectionTask =
-                            listener.AcceptConnectionAsync();
+                async () =>
+                {
+                    using QuicListener listener = CreateQuicListener();
+                    ValueTask<QuicConnection> serverConnectionTask =
+                        listener.AcceptConnectionAsync();
 
-                        using QuicConnection clientConnection = CreateQuicConnection(
-                            listener.ListenEndPoint
+                    using QuicConnection clientConnection = CreateQuicConnection(
+                        listener.ListenEndPoint
+                    );
+                    await clientConnection.ConnectAsync();
+
+                    using QuicConnection serverConnection = await serverConnectionTask;
+
+                    await using QuicStream clientStream =
+                        clientConnection.OpenBidirectionalStream();
+                    await clientStream.WriteAsync(new byte[1]);
+
+                    await using QuicStream serverStream =
+                        await serverConnection.AcceptStreamAsync();
+                    await serverStream.ReadAsync(new byte[1]);
+
+                    clientStream.AbortWrite(ExpectedErrorCode);
+
+                    byte[] buffer = new byte[100];
+                    QuicStreamAbortedException ex =
+                        await Assert.ThrowsAsync<QuicStreamAbortedException>(
+                            () => serverStream.ReadAsync(buffer).AsTask()
                         );
-                        await clientConnection.ConnectAsync();
-
-                        using QuicConnection serverConnection = await serverConnectionTask;
-
-                        await using QuicStream clientStream =
-                            clientConnection.OpenBidirectionalStream();
-                        await clientStream.WriteAsync(new byte[1]);
-
-                        await using QuicStream serverStream =
-                            await serverConnection.AcceptStreamAsync();
-                        await serverStream.ReadAsync(new byte[1]);
-
-                        clientStream.AbortWrite(ExpectedErrorCode);
-
-                        byte[] buffer = new byte[100];
-                        QuicStreamAbortedException ex =
-                            await Assert.ThrowsAsync<QuicStreamAbortedException>(
-                                () => serverStream.ReadAsync(buffer).AsTask()
-                            );
-                        Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
-                    }
-                )
-                .WaitAsync(TimeSpan.FromSeconds(5));
+                    Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
+                }
+            ).WaitAsync(TimeSpan.FromSeconds(5));
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/32050")]
@@ -584,38 +580,37 @@ namespace System.Net.Quic.Tests
             const int ExpectedErrorCode = 1234;
 
             await Task.Run(
-                    async () =>
-                    {
-                        using QuicListener listener = CreateQuicListener();
-                        ValueTask<QuicConnection> serverConnectionTask =
-                            listener.AcceptConnectionAsync();
+                async () =>
+                {
+                    using QuicListener listener = CreateQuicListener();
+                    ValueTask<QuicConnection> serverConnectionTask =
+                        listener.AcceptConnectionAsync();
 
-                        using QuicConnection clientConnection = CreateQuicConnection(
-                            listener.ListenEndPoint
+                    using QuicConnection clientConnection = CreateQuicConnection(
+                        listener.ListenEndPoint
+                    );
+                    await clientConnection.ConnectAsync();
+
+                    using QuicConnection serverConnection = await serverConnectionTask;
+
+                    await using QuicStream clientStream =
+                        clientConnection.OpenBidirectionalStream();
+                    await clientStream.WriteAsync(new byte[1]);
+
+                    await using QuicStream serverStream =
+                        await serverConnection.AcceptStreamAsync();
+                    await serverStream.ReadAsync(new byte[1]);
+
+                    await clientConnection.CloseAsync(ExpectedErrorCode);
+
+                    byte[] buffer = new byte[100];
+                    QuicConnectionAbortedException ex =
+                        await Assert.ThrowsAsync<QuicConnectionAbortedException>(
+                            () => serverStream.ReadAsync(buffer).AsTask()
                         );
-                        await clientConnection.ConnectAsync();
-
-                        using QuicConnection serverConnection = await serverConnectionTask;
-
-                        await using QuicStream clientStream =
-                            clientConnection.OpenBidirectionalStream();
-                        await clientStream.WriteAsync(new byte[1]);
-
-                        await using QuicStream serverStream =
-                            await serverConnection.AcceptStreamAsync();
-                        await serverStream.ReadAsync(new byte[1]);
-
-                        await clientConnection.CloseAsync(ExpectedErrorCode);
-
-                        byte[] buffer = new byte[100];
-                        QuicConnectionAbortedException ex =
-                            await Assert.ThrowsAsync<QuicConnectionAbortedException>(
-                                () => serverStream.ReadAsync(buffer).AsTask()
-                            );
-                        Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
-                    }
-                )
-                .WaitAsync(TimeSpan.FromSeconds(5));
+                    Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
+                }
+            ).WaitAsync(TimeSpan.FromSeconds(5));
         }
     }
 

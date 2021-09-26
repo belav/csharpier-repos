@@ -282,16 +282,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             )
             {
                 var diagnostic = await selectedDiagnostic.ToDiagnosticAsync(
-                        project,
-                        waitContext.CancellationToken
-                    )
+                    project,
+                    waitContext.CancellationToken
+                )
                     .ConfigureAwait(false);
                 return await ConfigurationUpdater.ConfigureSeverityAsync(
-                        reportDiagnostic.Value,
-                        diagnostic,
-                        project,
-                        waitContext.CancellationToken
-                    )
+                    reportDiagnostic.Value,
+                    diagnostic,
+                    project,
+                    waitContext.CancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

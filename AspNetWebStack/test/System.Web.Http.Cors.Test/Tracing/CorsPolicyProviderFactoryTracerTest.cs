@@ -19,8 +19,8 @@ namespace System.Web.Http.Cors.Tracing
             Mock<ICorsPolicyProviderFactory> policyProviderFactoryMock =
                 new Mock<ICorsPolicyProviderFactory>();
             policyProviderFactoryMock.Setup(
-                    f => f.GetCorsPolicyProvider(It.IsAny<HttpRequestMessage>())
-                )
+                f => f.GetCorsPolicyProvider(It.IsAny<HttpRequestMessage>())
+            )
                 .Returns(
                     () =>
                     {
@@ -46,8 +46,8 @@ namespace System.Web.Http.Cors.Tracing
             Mock<ICorsPolicyProviderFactory> policyProviderFactoryMock =
                 new Mock<ICorsPolicyProviderFactory>();
             policyProviderFactoryMock.Setup(
-                    f => f.GetCorsPolicyProvider(It.IsAny<HttpRequestMessage>())
-                )
+                f => f.GetCorsPolicyProvider(It.IsAny<HttpRequestMessage>())
+            )
                 .Returns(expectedPolicyProvider);
             CorsPolicyProviderFactoryTracer tracer = new CorsPolicyProviderFactoryTracer(
                 policyProviderFactoryMock.Object,
@@ -69,8 +69,8 @@ namespace System.Web.Http.Cors.Tracing
             Mock<ICorsPolicyProviderFactory> policyProviderFactoryMock =
                 new Mock<ICorsPolicyProviderFactory>();
             policyProviderFactoryMock.Setup(
-                    f => f.GetCorsPolicyProvider(It.IsAny<HttpRequestMessage>())
-                )
+                f => f.GetCorsPolicyProvider(It.IsAny<HttpRequestMessage>())
+            )
                 .Returns((ICorsPolicyProvider)null);
             CorsPolicyProviderFactoryTracer tracer = new CorsPolicyProviderFactoryTracer(
                 policyProviderFactoryMock.Object,
@@ -91,14 +91,14 @@ namespace System.Web.Http.Cors.Tracing
             TraceRecord endTrace = null;
             Mock<ITraceWriter> traceWriterMock = new Mock<ITraceWriter>();
             traceWriterMock.Setup(
-                    t =>
-                        t.Trace(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<string>(),
-                            It.IsAny<TraceLevel>(),
-                            It.IsAny<Action<TraceRecord>>()
-                        )
-                )
+                t =>
+                    t.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
+            )
                 .Callback<HttpRequestMessage, string, TraceLevel, Action<TraceRecord>>(
                     (request, category, level, traceAction) =>
                     {
@@ -117,8 +117,8 @@ namespace System.Web.Http.Cors.Tracing
             Mock<ICorsPolicyProviderFactory> policyProviderFactoryMock =
                 new Mock<ICorsPolicyProviderFactory>();
             policyProviderFactoryMock.Setup(
-                    f => f.GetCorsPolicyProvider(It.IsAny<HttpRequestMessage>())
-                )
+                f => f.GetCorsPolicyProvider(It.IsAny<HttpRequestMessage>())
+            )
                 .Returns(new EnableCorsAttribute(origins: "*", headers: "*", methods: "*"));
             CorsPolicyProviderFactoryTracer tracer = new CorsPolicyProviderFactoryTracer(
                 policyProviderFactoryMock.Object,

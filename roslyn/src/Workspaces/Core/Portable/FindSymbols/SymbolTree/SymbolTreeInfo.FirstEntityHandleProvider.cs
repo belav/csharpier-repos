@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     this,
                     reader,
                     genericContext: null
-                ).DecodeType(ref sigReader);
+                )
+                    .DecodeType(ref sigReader);
             }
 
             public EntityHandle GetTypeFromSpecification(

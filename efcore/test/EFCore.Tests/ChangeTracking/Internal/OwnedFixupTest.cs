@@ -173,8 +173,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 CoreStrings.WarningAsErrorTemplate(
                     CoreEventId.DuplicateDependentEntityTypeInstanceWarning.ToString(),
                     CoreResources.LogDuplicateDependentEntityTypeInstance(
-                            new TestLogger<TestLoggingDefinitions>()
-                        )
+                        new TestLogger<TestLoggingDefinitions>()
+                    )
                         .GenerateMessage(
                             typeof(ParentPN).ShortDisplayName()
                                 + "."
@@ -4997,16 +4997,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Distributor>()
-                    .OwnsMany(
-                        rt => rt.ShippingCenters,
-                        image =>
-                        {
-                            image.WithOwner().HasForeignKey("DistributorId");
-                            image.Property<int>("Id");
-                            image.HasKey("DistributorId", "Id");
-                        }
-                    );
+                modelBuilder.Entity<Distributor>().OwnsMany(
+                    rt => rt.ShippingCenters,
+                    image =>
+                    {
+                        image.WithOwner().HasForeignKey("DistributorId");
+                        image.Property<int>("Id");
+                        image.HasKey("DistributorId", "Id");
+                    }
+                );
             }
         }
 
@@ -5225,15 +5224,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(2, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
             );
 
             context.TestOrders.Add(order);
@@ -5243,15 +5240,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(2, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
             );
 
             context.SaveChanges();
@@ -5261,15 +5256,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(2, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
             );
         }
 
@@ -5340,25 +5333,23 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 modelBuilder.Entity<TestOrder>().HasKey(o => o.Id);
 
-                modelBuilder.Entity<TestOrderItem>()
-                    .OwnsOne(
-                        oi => oi.Price,
-                        ip =>
-                        {
-                            ip.Property(p => p.Amount).IsRequired();
-                            ip.OwnsOne(
-                                p => p.Currency,
-                                pc =>
-                                {
-                                    pc.Property(c => c.Code).IsRequired();
-                                    pc.Ignore(c => c.Id);
-                                    pc.Ignore(c => c.Name);
-                                    pc.Ignore(c => c.NumericCode);
-                                }
-                            );
-                        }
-                    )
-                    .HasKey(oi => oi.Id);
+                modelBuilder.Entity<TestOrderItem>().OwnsOne(
+                    oi => oi.Price,
+                    ip =>
+                    {
+                        ip.Property(p => p.Amount).IsRequired();
+                        ip.OwnsOne(
+                            p => p.Currency,
+                            pc =>
+                            {
+                                pc.Property(c => c.Code).IsRequired();
+                                pc.Ignore(c => c.Id);
+                                pc.Ignore(c => c.Name);
+                                pc.Ignore(c => c.NumericCode);
+                            }
+                        );
+                    }
+                ).HasKey(oi => oi.Id);
             }
         }
 
@@ -5400,27 +5391,23 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(4, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
             );
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 2"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 2").Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 4"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 4").Price.Currency.Code
             );
 
             context.Add(order);
@@ -5430,27 +5417,23 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(4, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
             );
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 2"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 2").Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 4"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 4").Price.Currency.Code
             );
 
             context.SaveChanges();
@@ -5460,27 +5443,23 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(4, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
             );
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 2"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 2").Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 4"
-                ).Price.Currency.Code
+                order.TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 4").Price.Currency.Code
             );
         }
 
@@ -5501,23 +5480,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 modelBuilder.Entity<TestOrder>().HasKey(o => o.Id);
 
-                modelBuilder.Entity<TestOrderItem>()
-                    .OwnsOne(
-                        oi => oi.Price,
-                        ip =>
-                        {
-                            ip.Property(p => p.Amount).IsRequired();
-                            ip.Property(p => p.Currency)
-                                .HasConversion(
-                                    v => v.Code,
-                                    v =>
-                                        v == "EUR"
-                                            ? TestCurrency.EUR
-                                            : v == "USD" ? TestCurrency.USD : null
-                                );
-                        }
-                    )
-                    .HasKey(oi => oi.Id);
+                modelBuilder.Entity<TestOrderItem>().OwnsOne(
+                    oi => oi.Price,
+                    ip =>
+                    {
+                        ip.Property(p => p.Amount).IsRequired();
+                        ip.Property(p => p.Currency)
+                            .HasConversion(
+                                v => v.Code,
+                                v =>
+                                    v == "EUR"
+                                        ? TestCurrency.EUR
+                                        : v == "USD" ? TestCurrency.USD : null
+                            );
+                    }
+                ).HasKey(oi => oi.Id);
             }
         }
 
@@ -5526,7 +5503,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             EntityState GetEntryState<TEntity>(EquatableEntitiesContext context, string role = null)
                 where TEntity : class =>
-                context.ChangeTracker.Entries<TEntity>()
+                context.ChangeTracker
+                    .Entries<TEntity>()
                     .Single(
                         e => role == null || e.Property("Value").CurrentValue.Equals(role)
                     ).State;
@@ -5700,17 +5678,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     {
                         m.HasKey(x => x.UserId);
                         m.OwnsMany(
-                                x => x.Roles,
-                                b =>
-                                {
-                                    b.Property<Guid>("RoleAssignmentId");
-                                    b.HasKey("RoleAssignmentId");
-                                    b.Property(x => x.Value);
-                                    b.Property<Guid>("UserId");
-                                    b.WithOwner().HasForeignKey("UserId");
-                                }
-                            )
-                            .UsePropertyAccessMode(PropertyAccessMode.Field);
+                            x => x.Roles,
+                            b =>
+                            {
+                                b.Property<Guid>("RoleAssignmentId");
+                                b.HasKey("RoleAssignmentId");
+                                b.Property(x => x.Value);
+                                b.Property<Guid>("UserId");
+                                b.WithOwner().HasForeignKey("UserId");
+                            }
+                        ).UsePropertyAccessMode(PropertyAccessMode.Field);
                     }
                 );
         }
@@ -6110,15 +6087,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     }
                 );
 
-                modelBuilder.Entity<Thing>()
-                    .OwnsMany(
-                        p => p.OwnedByThings,
-                        a =>
-                        {
-                            a.WithOwner().HasForeignKey(e => e.ThingId);
-                            a.HasKey(e => e.OwnedByThingId);
-                        }
-                    );
+                modelBuilder.Entity<Thing>().OwnsMany(
+                    p => p.OwnedByThings,
+                    a =>
+                    {
+                        a.WithOwner().HasForeignKey(e => e.ThingId);
+                        a.HasKey(e => e.OwnedByThingId);
+                    }
+                );
             }
 
             protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

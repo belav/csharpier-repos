@@ -3545,8 +3545,8 @@ class Test
                 expectedOutput: @""
             );
             comp.VerifyIL(
-                    "Test.Test0<T>(T)",
-                    @"
+                "Test.Test0<T>(T)",
+                @"
 {
   // Code size       27 (0x1b)
   .maxstack  1
@@ -3561,10 +3561,9 @@ class Test
   IL_001a:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Test.Test1<T>(ref T)",
-                    @"
+            ).VerifyIL(
+                "Test.Test1<T>(ref T)",
+                @"
 {
   // Code size       52 (0x34)
   .maxstack  2
@@ -3590,7 +3589,7 @@ class Test
   IL_0033:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -3722,8 +3721,8 @@ class Program
 42"
             );
             comp.VerifyIL(
-                    "Program.Test1(Program.C1)",
-                    @"
+                "Program.Test1(Program.C1)",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  1
@@ -3736,10 +3735,9 @@ class Program
   IL_000c:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2(Program.C1)",
-                    @"
+            ).VerifyIL(
+                "Program.Test2(Program.C1)",
+                @"
 {
   // Code size       41 (0x29)
   .maxstack  1
@@ -3764,7 +3762,7 @@ class Program
   IL_0028:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -3809,8 +3807,8 @@ class Program
 42"
             );
             comp.VerifyIL(
-                    "Program.Test1(Program.C1)",
-                    @"
+                "Program.Test1(Program.C1)",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  1
@@ -3825,10 +3823,9 @@ class Program
   IL_0016:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2(Program.C1)",
-                    @"
+            ).VerifyIL(
+                "Program.Test2(Program.C1)",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  1
@@ -3852,7 +3849,7 @@ class Program
   IL_0026:  ldloc.0
   IL_0027:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -3899,8 +3896,8 @@ class Program
 42"
             );
             comp.VerifyIL(
-                    "Program.Test1(ref Program.C1)",
-                    @"
+                "Program.Test1(ref Program.C1)",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -3915,10 +3912,9 @@ class Program
   IL_000e:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2(ref Program.C1)",
-                    @"
+            ).VerifyIL(
+                "Program.Test2(ref Program.C1)",
+                @"
 {
   // Code size       43 (0x2b)
   .maxstack  2
@@ -3945,7 +3941,7 @@ class Program
   IL_002a:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -3990,8 +3986,8 @@ class Program
 42"
             );
             comp.VerifyIL(
-                    "Program.Test1(Program.C1?)",
-                    @"
+                "Program.Test1(Program.C1?)",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  1
@@ -4009,10 +4005,9 @@ class Program
   IL_001b:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2(Program.C1?)",
-                    @"
+            ).VerifyIL(
+                "Program.Test2(Program.C1?)",
+                @"
 {
   // Code size       56 (0x38)
   .maxstack  1
@@ -4042,7 +4037,7 @@ class Program
   IL_0037:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -4089,8 +4084,8 @@ class Program
 42"
             );
             comp.VerifyIL(
-                    "Program.Test1(ref Program.C1?)",
-                    @"
+                "Program.Test1(ref Program.C1?)",
+                @"
 {
   // Code size       27 (0x1b)
   .maxstack  2
@@ -4110,10 +4105,9 @@ class Program
 }
 
 "
-                )
-                .VerifyIL(
-                    "Program.Test2(ref Program.C1?)",
-                    @"
+            ).VerifyIL(
+                "Program.Test2(ref Program.C1?)",
+                @"
 {
   // Code size       55 (0x37)
   .maxstack  2
@@ -4144,7 +4138,7 @@ class Program
   IL_0036:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -4247,8 +4241,8 @@ False
 False"
             );
             comp.VerifyIL(
-                    "Program.Test1(Program.C1)",
-                    @"
+                "Program.Test1(Program.C1)",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  1
@@ -4263,10 +4257,9 @@ False"
   IL_000d:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2(Program.C1)",
-                    @"
+            ).VerifyIL(
+                "Program.Test2(Program.C1)",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  1
@@ -4281,10 +4274,9 @@ False"
   IL_000d:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test3(Program.C1)",
-                    @"
+            ).VerifyIL(
+                "Program.Test3(Program.C1)",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  1
@@ -4299,7 +4291,7 @@ False"
   IL_000d:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -4360,8 +4352,8 @@ True
 False"
             );
             comp.VerifyIL(
-                    "Program.Test1(Program.C1)",
-                    @"
+                "Program.Test1(Program.C1)",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -4376,10 +4368,9 @@ False"
   IL_000e:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2(Program.C1)",
-                    @"
+            ).VerifyIL(
+                "Program.Test2(Program.C1)",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -4396,10 +4387,9 @@ False"
   IL_0011:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test3(Program.C1)",
-                    @"
+            ).VerifyIL(
+                "Program.Test3(Program.C1)",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -4414,7 +4404,7 @@ False"
   IL_000e:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -4507,8 +4497,8 @@ True
 False"
             );
             comp.VerifyIL(
-                    "Program.Test1(Program.C1)",
-                    @"
+                "Program.Test1(Program.C1)",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -4523,10 +4513,9 @@ False"
   IL_0011:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2(ref Program.C1)",
-                    @"
+            ).VerifyIL(
+                "Program.Test2(ref Program.C1)",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  2
@@ -4543,10 +4532,9 @@ False"
   IL_0013:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test3(Program.C1)",
-                    @"
+            ).VerifyIL(
+                "Program.Test3(Program.C1)",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -4561,10 +4549,9 @@ False"
   IL_0011:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test4(ref Program.C1)",
-                    @"
+            ).VerifyIL(
+                "Program.Test4(ref Program.C1)",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  2
@@ -4581,7 +4568,7 @@ False"
   IL_0013:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -4623,8 +4610,8 @@ class Program
 ";
             var comp = CompileAndVerify(source, expectedOutput: @"");
             comp.VerifyIL(
-                    "Program.Test1()",
-                    @"
+                "Program.Test1()",
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  2
@@ -4637,10 +4624,9 @@ class Program
   IL_000f:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2<T>()",
-                    @"
+            ).VerifyIL(
+                "Program.Test2<T>()",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  1
@@ -4656,7 +4642,7 @@ class Program
   IL_001b:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -4701,8 +4687,8 @@ class Program
 ";
             var comp = CompileAndVerify(source, expectedOutput: @"");
             comp.VerifyIL(
-                    "Program.Test1()",
-                    @"
+                "Program.Test1()",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -4717,10 +4703,9 @@ class Program
   IL_0010:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2<T>()",
-                    @"
+            ).VerifyIL(
+                "Program.Test2<T>()",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -4738,7 +4723,7 @@ class Program
   IL_0021:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -4913,8 +4898,8 @@ class Program
 ";
             var comp = CompileAndVerify(source, expectedOutput: @"");
             comp.VerifyIL(
-                    "Program.Test1<T>(T[])",
-                    @"
+                "Program.Test1<T>(T[])",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -4934,10 +4919,9 @@ class Program
   IL_0021:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2<T>(T[])",
-                    @"
+            ).VerifyIL(
+                "Program.Test2<T>(T[])",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -4957,7 +4941,7 @@ class Program
   IL_0021:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -4998,8 +4982,8 @@ class Program
 ";
             var comp = CompileAndVerify(source, expectedOutput: @"");
             comp.VerifyIL(
-                    "Program.Test1<T>(T[])",
-                    @"
+                "Program.Test1<T>(T[])",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -5019,10 +5003,9 @@ class Program
   IL_0021:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2<T>(T[])",
-                    @"
+            ).VerifyIL(
+                "Program.Test2<T>(T[])",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -5042,7 +5025,7 @@ class Program
   IL_0021:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -5097,8 +5080,8 @@ not empty
 not empty"
             );
             comp.VerifyIL(
-                    "Program.Test1<T>(T[])",
-                    @"
+                "Program.Test1<T>(T[])",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  1
@@ -5116,10 +5099,9 @@ not empty"
   IL_0014:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2<T>(T[])",
-                    @"
+            ).VerifyIL(
+                "Program.Test2<T>(T[])",
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -5139,7 +5121,7 @@ not empty"
   IL_0019:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -5210,10 +5192,9 @@ class Program
 }
 ";
             var comp = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: "")
-                .VerifyIL(
-                    "Program.Test0(ref System.WeakReference<string>)",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "").VerifyIL(
+                "Program.Test0(ref System.WeakReference<string>)",
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -5236,10 +5217,9 @@ class Program
   IL_0019:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test1(ref System.WeakReference<string>)",
-                    @"
+            ).VerifyIL(
+                "Program.Test1(ref System.WeakReference<string>)",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -5262,10 +5242,9 @@ class Program
   IL_001b:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test2(ref System.WeakReference<string>)",
-                    @"
+            ).VerifyIL(
+                "Program.Test2(ref System.WeakReference<string>)",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -5288,10 +5267,9 @@ class Program
   IL_001b:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "Program.Test3(ref System.WeakReference<string>)",
-                    @"
+            ).VerifyIL(
+                "Program.Test3(ref System.WeakReference<string>)",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -5314,7 +5292,7 @@ class Program
   IL_001b:  ret
 }
 "
-                );
+            );
         }
 
         [WorkItem(1042288, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1042288")]
@@ -6582,8 +6560,8 @@ OverflowException"
             );
 
             verifier.VerifyIL(
-                    "C.HasLength",
-                    @"
+                "C.HasLength",
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  2
@@ -6598,10 +6576,9 @@ OverflowException"
   IL_000d:  ceq
   IL_000f:  ret
 }"
-                )
-                .VerifyIL(
-                    "C.HasLengthChecked",
-                    @"
+            ).VerifyIL(
+                "C.HasLengthChecked",
+                @"
 {
   // Code size       48 (0x30)
   .maxstack  2
@@ -6630,7 +6607,7 @@ OverflowException"
   IL_002e:  and
   IL_002f:  ret
 }"
-                );
+            );
         }
 
         [Fact]

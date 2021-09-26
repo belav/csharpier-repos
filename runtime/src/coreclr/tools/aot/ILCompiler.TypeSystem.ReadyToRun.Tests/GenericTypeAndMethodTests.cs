@@ -345,19 +345,19 @@ namespace TypeSystemTests
             );
 
             MethodDesc genericIntStringOnGenericIntString = genericIntString.GetMethod(
-                    "GenericFunction",
-                    null
-                )
+                "GenericFunction",
+                null
+            )
                 .MakeInstantiatedMethod(intType, stringType);
             MethodDesc genericCharStringOnGenericCharString = genericCharString.GetMethod(
-                    "GenericFunction",
-                    null
-                )
+                "GenericFunction",
+                null
+            )
                 .MakeInstantiatedMethod(charType, stringType);
             MethodDesc genericCharObjectOnGenericCharObject = genericCharObject.GetMethod(
-                    "GenericFunction",
-                    null
-                )
+                "GenericFunction",
+                null
+            )
                 .MakeInstantiatedMethod(charType, objectType);
 
             MethodDesc genericIntStringOnNonGeneric = genericOnNonGeneric.MakeInstantiatedMethod(

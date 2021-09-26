@@ -1367,7 +1367,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Where_equal_using_relational_null_semantics()
         {
             using var context = CreateContext(useRelationalNulls: true);
-            context.Entities1.Where(e => e.NullableBoolA == e.NullableBoolB)
+            context.Entities1
+                .Where(e => e.NullableBoolA == e.NullableBoolB)
                 .Select(e => e.Id)
                 .ToList();
         }
@@ -1377,7 +1378,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext(useRelationalNulls: true);
             var names = new[] { "Foo", "Bar" };
-            var result = context.Entities1.Where(e => names.Contains(e.NullableStringA))
+            var result = context.Entities1
+                .Where(e => names.Contains(e.NullableStringA))
                 .Select(e => e.NullableStringA)
                 .ToList();
 
@@ -1390,7 +1392,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext(useRelationalNulls: true);
             var names = new string[0];
             var result =
-                context.Entities1.Where(e => names.Contains(e.NullableStringA))
+                context.Entities1
+                    .Where(e => names.Contains(e.NullableStringA))
                     .Select(e => e.NullableStringA)
                     .ToList().Count;
 
@@ -1403,7 +1406,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext(useRelationalNulls: true);
             var names = new string[] { null };
             var result =
-                context.Entities1.Where(e => names.Contains(e.NullableStringA))
+                context.Entities1
+                    .Where(e => names.Contains(e.NullableStringA))
                     .Select(e => e.NullableStringA)
                     .ToList().Count;
 
@@ -1466,7 +1470,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext(useRelationalNulls: true);
             var prm = false;
-            context.Entities1.Where(e => e.NullableBoolA == e.NullableBoolB || prm)
+            context.Entities1
+                .Where(e => e.NullableBoolA == e.NullableBoolB || prm)
                 .Select(e => e.Id)
                 .ToList();
         }
@@ -1475,7 +1480,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Where_not_equal_using_relational_null_semantics()
         {
             using var context = CreateContext(useRelationalNulls: true);
-            context.Entities1.Where(e => e.NullableBoolA != e.NullableBoolB)
+            context.Entities1
+                .Where(e => e.NullableBoolA != e.NullableBoolB)
                 .Select(e => e.Id)
                 .ToList();
         }
@@ -1493,7 +1499,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext(useRelationalNulls: true);
             var prm = false;
-            context.Entities1.Where(e => e.NullableBoolA != e.NullableBoolB || prm)
+            context.Entities1
+                .Where(e => e.NullableBoolA != e.NullableBoolB || prm)
                 .Select(e => e.Id)
                 .ToList();
         }
@@ -1570,7 +1577,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 results2;
             using (var context = CreateContext())
             {
-                var query = context.Entities1.Where(e => e.NullableBoolA == e.NullableBoolB)
+                var query = context.Entities1
+                    .Where(e => e.NullableBoolA == e.NullableBoolB)
                     .Select(e => e.Id);
 
                 results1 = query.ToList();
@@ -1578,7 +1586,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             using (var context = CreateContext(useRelationalNulls: true))
             {
-                var query = context.Entities1.Where(e => e.NullableBoolA == e.NullableBoolB)
+                var query = context.Entities1
+                    .Where(e => e.NullableBoolA == e.NullableBoolB)
                     .Select(e => e.Id);
 
                 results2 = query.ToList();
@@ -1607,9 +1616,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void From_sql_composed_with_relational_null_comparison()
         {
             using var context = CreateContext(useRelationalNulls: true);
-            var actual = context.Entities1.FromSqlRaw(
-                    NormalizeDelimitersInRawString("SELECT * FROM [Entities1]")
-                )
+            var actual = context.Entities1
+                .FromSqlRaw(NormalizeDelimitersInRawString("SELECT * FROM [Entities1]"))
                 .Where(c => c.StringA == c.StringB)
                 .ToArray();
 
@@ -1849,10 +1857,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     e.NullableStringA != null
                                     && e.NullableStringB != null
                                     && e.NullableStringC != null
-                                    && e.NullableStringA.Replace(
-                                        e.NullableStringB,
-                                        e.NullableStringC
-                                    ) == e.NullableStringA
+                                    && e.NullableStringA
+                                        .Replace(e.NullableStringB, e.NullableStringC)
+                                        == e.NullableStringA
                                 )
                         )
                         .Select(e => e.Id)
@@ -1884,10 +1891,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     e.NullableStringA != null
                                     && e.NullableStringB != null
                                     && e.NullableStringC != null
-                                    && e.NullableStringA.Replace(
-                                        e.NullableStringB,
-                                        e.NullableStringC
-                                    ) != e.NullableStringA
+                                    && e.NullableStringA
+                                        .Replace(e.NullableStringB, e.NullableStringC)
+                                        != e.NullableStringA
                                 )
                         )
                         .Select(e => e.Id)
@@ -2850,7 +2856,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var ctx = CreateContext(useRelationalNulls: true);
 
-            var expected = ctx.Entities1.AsEnumerable()
+            var expected = ctx.Entities1
+                .AsEnumerable()
                 .Where(e => e.NullableIntA != 1 && e.NullableIntA != null)
                 .ToList();
             ClearLog();
@@ -2868,7 +2875,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var ctx = CreateContext(useRelationalNulls: true);
 
-            var expected = ctx.Entities1.AsEnumerable()
+            var expected = ctx.Entities1
+                .AsEnumerable()
                 .Where(e => e.NullableIntA != 1 && e.NullableIntA != 2 && e.NullableIntA != null)
                 .ToList();
             ClearLog();
@@ -2886,7 +2894,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var ctx = CreateContext(useRelationalNulls: true);
 
-            var expected = ctx.Entities1.AsEnumerable()
+            var expected = ctx.Entities1
+                .AsEnumerable()
                 .Where(e => e.NullableIntA == 1 || e.NullableIntA == null)
                 .ToList();
             ClearLog();
@@ -2904,16 +2913,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var ctx = CreateContext(useRelationalNulls: true);
 
-            var expected = ctx.Entities1.AsEnumerable()
+            var expected = ctx.Entities1
+                .AsEnumerable()
                 .Where(e => new int?[] { 1, 2, 3 }.Contains(e.NullableIntA))
                 .ToList();
 
             ClearLog();
-            var query = ctx.Entities1.Where(
-                e =>
-                    new int?[] { 1, null }.Contains(e.NullableIntA)
-                    || new int?[] { 2, null, 3 }.Contains(e.NullableIntA)
-            );
+            var query = ctx.Entities1
+                .Where(
+                    e =>
+                        new int?[] { 1, null }.Contains(e.NullableIntA)
+                        || new int?[] { 2, null, 3 }.Contains(e.NullableIntA)
+                );
 
             var result = async ? await query.ToListAsync() : query.ToList();
             Assert.Equal(expected.Count, result.Count);
@@ -2926,11 +2937,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var ctx = CreateContext(useRelationalNulls: true);
-            var query = ctx.Entities1.Where(
-                e =>
-                    !(new int?[] { 1, null }.Contains(e.NullableIntA))
-                    && !(new int?[] { 2, null, 3 }.Contains(e.NullableIntA))
-            );
+            var query = ctx.Entities1
+                .Where(
+                    e =>
+                        !(new int?[] { 1, null }.Contains(e.NullableIntA))
+                        && !(new int?[] { 2, null, 3 }.Contains(e.NullableIntA))
+                );
 
             var result = async ? await query.ToListAsync() : query.ToList();
             Assert.Empty(result);
@@ -2944,14 +2956,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var ctx = CreateContext(useRelationalNulls: true);
 
-            var expected = ctx.Entities1.AsEnumerable()
+            var expected = ctx.Entities1
+                .AsEnumerable()
                 .Where(e => new int?[] { 1, 2 }.Contains(e.NullableIntA) || e.NullableIntA == null)
                 .ToList();
 
             ClearLog();
-            var query = ctx.Entities1.Where(
-                e => new int?[] { 1, 2 }.Contains(e.NullableIntA) || e.NullableIntA == null
-            );
+            var query = ctx.Entities1
+                .Where(e => new int?[] { 1, 2 }.Contains(e.NullableIntA) || e.NullableIntA == null);
 
             var result = async ? await query.ToListAsync() : query.ToList();
             Assert.Equal(expected.Count, result.Count);
@@ -2965,16 +2977,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var ctx = CreateContext(useRelationalNulls: true);
 
-            var expected = ctx.Entities1.AsEnumerable()
+            var expected = ctx.Entities1
+                .AsEnumerable()
                 .Where(
                     e => !(new int?[] { 1, 2 }.Contains(e.NullableIntA)) && e.NullableIntA != null
                 )
                 .ToList();
 
             ClearLog();
-            var query = ctx.Entities1.Where(
-                e => e.NullableIntA != null && !(new int?[] { 1, 2 }.Contains(e.NullableIntA))
-            );
+            var query = ctx.Entities1
+                .Where(
+                    e => e.NullableIntA != null && !(new int?[] { 1, 2 }.Contains(e.NullableIntA))
+                );
 
             var result = async ? await query.ToListAsync() : query.ToList();
             Assert.Equal(expected.Count, result.Count);
@@ -2988,14 +3002,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var ctx = CreateContext(useRelationalNulls: true);
 
-            var expected = ctx.Entities1.AsEnumerable()
+            var expected = ctx.Entities1
+                .AsEnumerable()
                 .Where(e => !(new int?[] { 1, 2, 3, null }.Contains(e.NullableIntA)))
                 .ToList();
 
             ClearLog();
-            var query = ctx.Entities1.Where(
-                e => e.NullableIntA != 3 && !(new int?[] { 1, 2 }.Contains(e.NullableIntA))
-            );
+            var query = ctx.Entities1
+                .Where(e => e.NullableIntA != 3 && !(new int?[] { 1, 2 }.Contains(e.NullableIntA)));
 
             var result = async ? await query.ToListAsync() : query.ToList();
             Assert.Equal(expected.Count, result.Count);

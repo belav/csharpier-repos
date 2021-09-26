@@ -95,11 +95,12 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             }
 
             if (
-                !string.Equals(
-                    redirectUri.GetLeftPart(UriPartial.Authority),
-                    postLogouturi.GetLeftPart(UriPartial.Authority),
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        redirectUri.GetLeftPart(UriPartial.Authority),
+                        postLogouturi.GetLeftPart(UriPartial.Authority),
+                        StringComparison.Ordinal
+                    )
             )
             {
                 throw new InvalidOperationException(

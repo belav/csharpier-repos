@@ -32,11 +32,8 @@ namespace Microsoft.EntityFrameworkCore
             var pluralizer = new HumanizerPluralizer();
             Assert.Equal(
                 output,
-                new CSharpNamer<string>(
-                    s => s,
-                    new CSharpUtilities(),
-                    pluralizer.Singularize
-                ).GetName(input)
+                new CSharpNamer<string>(s => s, new CSharpUtilities(), pluralizer.Singularize)
+                    .GetName(input)
             );
         }
 
@@ -48,11 +45,8 @@ namespace Microsoft.EntityFrameworkCore
             var pluralizer = new HumanizerPluralizer();
             Assert.Equal(
                 output,
-                new CSharpNamer<string>(
-                    s => s,
-                    new CSharpUtilities(),
-                    pluralizer.Pluralize
-                ).GetName(input)
+                new CSharpNamer<string>(s => s, new CSharpUtilities(), pluralizer.Pluralize)
+                    .GetName(input)
             );
         }
     }

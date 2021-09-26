@@ -135,7 +135,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 parameters == null
                     ? new List<DbFunctionParameter>()
                     : parameters.Select(p => new DbFunctionParameter(this, p.Name, p.Type))
-                          .ToList();
+                      .ToList();
 
             if (IsScalar)
             {
@@ -590,7 +590,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                           {
                               var relationalTypeMappingSource = (IRelationalTypeMappingSource)(
                                   (IModel)dbFunction.Model
-                              ).GetModelDependencies().TypeMappingSource;
+                              )
+                                  .GetModelDependencies().TypeMappingSource;
                               return !string.IsNullOrEmpty(dbFunction._storeType)
                                 ? relationalTypeMappingSource.FindMapping(dbFunction._storeType)!
                                 : relationalTypeMappingSource.FindMapping(dbFunction.ReturnType)!;

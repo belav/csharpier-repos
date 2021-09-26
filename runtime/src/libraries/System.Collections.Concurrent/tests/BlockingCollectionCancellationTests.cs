@@ -127,20 +127,22 @@ namespace System.Collections.Concurrent.Tests
                                 BlockingCollection<int>.AddToAny(new[] { bc1, bc2 }, 42, cs.Token);
                                 break;
                             case 1:
-                                BlockingCollection<int>.TryAddToAny(
-                                    new[] { bc1, bc2 },
-                                    42,
-                                    Timeout.Infinite,
-                                    cs.Token
-                                );
+                                BlockingCollection<int>
+                                    .TryAddToAny(
+                                        new[] { bc1, bc2 },
+                                        42,
+                                        Timeout.Infinite,
+                                        cs.Token
+                                    );
                                 break;
                             case 2:
-                                BlockingCollection<int>.TryAddToAny(
-                                    new[] { bc1, bc2 },
-                                    42,
-                                    (int)TimeSpan.FromDays(1).TotalMilliseconds,
-                                    cs.Token
-                                );
+                                BlockingCollection<int>
+                                    .TryAddToAny(
+                                        new[] { bc1, bc2 },
+                                        42,
+                                        (int)TimeSpan.FromDays(1).TotalMilliseconds,
+                                        cs.Token
+                                    );
                                 break;
                         }
                     }

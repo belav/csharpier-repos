@@ -70,11 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             // The base analyzer may impose further limitations
-            return base.ShouldAnalyzeForEachStatement(
-                forEachStatement,
-                semanticModel,
-                cancellationToken
-            );
+            return base
+                .ShouldAnalyzeForEachStatement(forEachStatement, semanticModel, cancellationToken);
         }
 
         internal override bool TryAnalyzeVariableDeclaration(
@@ -104,15 +101,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             if (
-                typeName.Parent.IsKind(
-                    SyntaxKind.VariableDeclaration,
-                    out VariableDeclarationSyntax? variableDeclaration
-                )
-                && typeName.Parent.Parent.IsKind(
-                    SyntaxKind.LocalDeclarationStatement,
-                    SyntaxKind.ForStatement,
-                    SyntaxKind.UsingStatement
-                )
+                typeName.Parent
+                    .IsKind(
+                        SyntaxKind.VariableDeclaration,
+                        out VariableDeclarationSyntax? variableDeclaration
+                    )
+                && typeName.Parent.Parent
+                    .IsKind(
+                        SyntaxKind.LocalDeclarationStatement,
+                        SyntaxKind.ForStatement,
+                        SyntaxKind.UsingStatement
+                    )
             )
             {
                 // check assignment for variable declarations.
@@ -176,11 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             // The base analyzer may impose further limitations
-            return base.ShouldAnalyzeDeclarationExpression(
-                declaration,
-                semanticModel,
-                cancellationToken
-            );
+            return base
+                .ShouldAnalyzeDeclarationExpression(declaration, semanticModel, cancellationToken);
         }
 
         /// <summary>

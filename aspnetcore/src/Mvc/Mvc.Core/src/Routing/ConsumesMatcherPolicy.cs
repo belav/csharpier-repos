@@ -102,11 +102,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                         for (var j = 0; j < metadata.ContentTypes.Count; j++)
                         {
                             if (
-                                string.Equals(
-                                    "*/*",
-                                    metadata.ContentTypes[j],
-                                    StringComparison.Ordinal
-                                )
+                                string
+                                    .Equals(
+                                        "*/*",
+                                        metadata.ContentTypes[j],
+                                        StringComparison.Ordinal
+                                    )
                             )
                             {
                                 needs415Endpoint = false;
@@ -295,8 +296,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Since our 'edges' can have wildcards, we do a sort based on how wildcard-ey they
             // are then then execute them in linear order.
             var ordered = edges.Select(
-                    e => (mediaType: CreateEdgeMediaType(ref e), destination: e.Destination)
-                )
+                e => (mediaType: CreateEdgeMediaType(ref e), destination: e.Destination)
+            )
                 .OrderBy(e => GetScore(e.mediaType))
                 .ToArray();
 
@@ -363,10 +364,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             protected override int CompareMetadata(IConsumesMetadata? x, IConsumesMetadata? y)
             {
                 // Ignore the metadata if it has an empty list of content types.
-                return base.CompareMetadata(
-                    x?.ContentTypes.Count > 0 ? x : null,
-                    y?.ContentTypes.Count > 0 ? y : null
-                );
+                return base
+                    .CompareMetadata(
+                        x?.ContentTypes.Count > 0 ? x : null,
+                        y?.ContentTypes.Count > 0 ? y : null
+                    );
             }
         }
 

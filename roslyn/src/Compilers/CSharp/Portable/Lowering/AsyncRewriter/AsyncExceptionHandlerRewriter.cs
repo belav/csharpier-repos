@@ -350,8 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // skip 0 - it means we took no explicit branches
             int i = 1;
-            var cases =
-                ArrayBuilder<SyntheticBoundNodeFactory.SyntheticSwitchSection>.GetInstance();
+            var cases = ArrayBuilder<SyntheticBoundNodeFactory.SyntheticSwitchSection>
+                .GetInstance();
 
             if (proxiedLabels != null)
             {
@@ -536,10 +536,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var handledLabel = _F.GenerateLabel("handled");
                 var handlersList = currentAwaitCatchFrame.handlers;
-                var handlers =
-                    ArrayBuilder<SyntheticBoundNodeFactory.SyntheticSwitchSection>.GetInstance(
-                        handlersList.Count
-                    );
+                var handlers = ArrayBuilder<SyntheticBoundNodeFactory.SyntheticSwitchSection>
+                    .GetInstance(handlersList.Count);
                 for (int i = 0, l = handlersList.Count; i < l; i++)
                 {
                     handlers.Add(
@@ -549,9 +547,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 tryWithCatches = _F.Block(
                     ImmutableArray.Create<LocalSymbol>(
-                            currentAwaitCatchFrame.pendingCaughtException,
-                            currentAwaitCatchFrame.pendingCatch
-                        )
+                        currentAwaitCatchFrame.pendingCaughtException,
+                        currentAwaitCatchFrame.pendingCatch
+                    )
                         .AddRange(currentAwaitCatchFrame.GetHoistedLocals()),
                     _F.HiddenSequencePoint(),
                     _F.Assignment(
@@ -1155,15 +1153,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             public void HoistLocal(LocalSymbol local, SyntheticBoundNodeFactory F)
             {
                 if (
-                    !_hoistedLocals.Keys.Any(
-                        l =>
-                            l.Name == local.Name
-                            && TypeSymbol.Equals(
-                                l.Type,
-                                local.Type,
-                                TypeCompareKind.ConsiderEverything2
-                            )
-                    )
+                    !_hoistedLocals.Keys
+                        .Any(
+                            l =>
+                                l.Name == local.Name
+                                && TypeSymbol.Equals(
+                                    l.Type,
+                                    local.Type,
+                                    TypeCompareKind.ConsiderEverything2
+                                )
+                        )
                 )
                 {
                     _hoistedLocals.Add(local, local);

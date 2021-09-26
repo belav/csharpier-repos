@@ -124,13 +124,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             var mockHttpRoute = new Mock<IRouter>();
             mockHttpRoute.Setup(
-                    mock =>
-                        mock.GetVirtualPath(
-                            It.Is<VirtualPathContext>(
-                                c => string.Equals(c.RouteName, mockRouteName)
-                            )
-                        )
-                )
+                mock =>
+                    mock.GetVirtualPath(
+                        It.Is<VirtualPathContext>(c => string.Equals(c.RouteName, mockRouteName))
+                    )
+            )
                 .Returns(new VirtualPathData(mockHttpRoute.Object, mockTemplateValue));
 
             routeBuilder.Routes.Add(mockHttpRoute.Object);

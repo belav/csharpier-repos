@@ -43,9 +43,9 @@ namespace Microsoft.CodeAnalysis.Remote
                         .ConfigureAwait(false);
 
                     var symbol = await typeAndProjectId.TryRehydrateAsync(
-                            solution,
-                            cancellationToken
-                        )
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     if (symbol is not INamedTypeSymbol namedType)
@@ -54,16 +54,16 @@ namespace Microsoft.CodeAnalysis.Remote
                     var projects = projectIdsOpt.IsDefault
                         ? null
                         : projectIdsOpt.Select(id => solution.GetRequiredProject(id))
-                              .ToImmutableHashSet();
+                          .ToImmutableHashSet();
 
                     var types = await DependentTypeFinder.FindTypesInCurrentProcessAsync(
-                            namedType,
-                            solution,
-                            projects,
-                            transitive,
-                            kind,
-                            cancellationToken
-                        )
+                        namedType,
+                        solution,
+                        projects,
+                        transitive,
+                        kind,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return types.SelectAsArray(

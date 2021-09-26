@@ -46,9 +46,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal('c', new FormatterConverter().ToChar("c"));
             Assert.Equal(
                 new DateTime(2000, 1, 1),
-                new FormatterConverter().ToDateTime(
-                    new DateTime(2000, 1, 1).ToString(CultureInfo.InvariantCulture)
-                )
+                new FormatterConverter()
+                    .ToDateTime(new DateTime(2000, 1, 1).ToString(CultureInfo.InvariantCulture))
             );
             Assert.Equal(1.2m, new FormatterConverter().ToDecimal("1.2"));
             Assert.Equal(1.2, new FormatterConverter().ToDouble("1.2"));

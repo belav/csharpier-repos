@@ -477,10 +477,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     }
 
                     var directivesInSpan = node.DescendantTrivia(
-                            span,
-                            n => n.ContainsDirectives,
-                            descendIntoTrivia: true
-                        )
+                        span,
+                        n => n.ContainsDirectives,
+                        descendIntoTrivia: true
+                    )
                         .Where(tr => tr.IsDirective)
                         .Select(tr => (DirectiveTriviaSyntax)tr.GetStructure()!);
 

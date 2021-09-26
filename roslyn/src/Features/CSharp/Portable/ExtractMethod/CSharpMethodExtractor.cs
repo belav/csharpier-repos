@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             var originalSpanStart = OriginalSelectionResult.OriginalSpan.Start;
             Contract.ThrowIfFalse(originalSpanStart >= 0);
 
-            var root = await document.Document.GetSyntaxRootAsync(cancellationToken)
+            var root = await document.Document
+                .GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var basePosition = root.FindToken(originalSpanStart);
 
@@ -55,18 +56,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         )
                         || (
                             node.ExpressionBody != null
-                            && node.ExpressionBody.Span.Contains(
-                                OriginalSelectionResult.OriginalSpan
-                            )
+                            && node.ExpressionBody.Span
+                                .Contains(OriginalSelectionResult.OriginalSpan)
                         )
                 );
                 if (localFunctionNode is object)
                 {
                     return await InsertionPoint.CreateAsync(
-                            document,
-                            localFunctionNode,
-                            cancellationToken
-                        )
+                        document,
+                        localFunctionNode,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -81,10 +81,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (accessorNode is object)
                 {
                     return await InsertionPoint.CreateAsync(
-                            document,
-                            accessorNode,
-                            cancellationToken
-                        )
+                        document,
+                        accessorNode,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -95,10 +95,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (OriginalSelectionResult.FinalSpan.Contains(memberNode.Span))
                 {
                     return await InsertionPoint.CreateAsync(
-                            document,
-                            globalStatement.Parent,
-                            cancellationToken
-                        )
+                        document,
+                        globalStatement.Parent,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -110,18 +110,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     // The extracted function will be a new global statement
                     return await InsertionPoint.CreateAsync(
-                            document,
-                            globalStatement.Parent,
-                            cancellationToken
-                        )
+                        document,
+                        globalStatement.Parent,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
                 return await InsertionPoint.CreateAsync(
-                        document,
-                        globalStatement.Statement,
-                        cancellationToken
-                    )
+                    document,
+                    globalStatement.Statement,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -151,14 +151,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             var newExpression = await Simplifier.ExpandAsync(
-                    lastExpression,
-                    selection.SemanticDocument.Document,
-                    n => n != selection.GetContainingScope(),
-                    expandParameter: false,
-                    cancellationToken: cancellationToken
-                )
+                lastExpression,
+                selection.SemanticDocument.Document,
+                n => n != selection.GetContainingScope(),
+                expandParameter: false,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
-            return await selection.SemanticDocument.WithSyntaxRootAsync(
+            return await selection.SemanticDocument
+                .WithSyntaxRootAsync(
                     selection.SemanticDocument.Root.ReplaceNode(lastExpression, newExpression),
                     cancellationToken
                 )
@@ -235,15 +236,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     return new OperationStatus(
                         OperationStatusFlag.BestEffort,
-                        string.Format(
-                            FeaturesResources.Type_parameter_0_is_hidden_by_another_type_parameter_1,
-                            typeParameter.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                            currentType == null
-                              ? string.Empty
-                              : currentType.ToDisplayString(
+                        string
+                            .Format(
+                                FeaturesResources.Type_parameter_0_is_hidden_by_another_type_parameter_1,
+                                typeParameter.ToDisplayString(
                                     SymbolDisplayFormat.FullyQualifiedFormat
-                                )
-                        )
+                                ),
+                                currentType == null
+                                  ? string.Empty
+                                  : currentType.ToDisplayString(
+                                        SymbolDisplayFormat.FullyQualifiedFormat
+                                    )
+                            )
                     );
                 }
             }

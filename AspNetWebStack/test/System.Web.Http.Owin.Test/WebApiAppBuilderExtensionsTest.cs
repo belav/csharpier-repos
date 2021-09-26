@@ -80,14 +80,14 @@ namespace System.Web.Http.Owin
             var config = new HttpConfiguration();
             var appBuilder = new Mock<IAppBuilder>();
             appBuilder.Setup(
-                    ab =>
-                        ab.Use(
-                            typeof(HttpMessageHandlerAdapter),
-                            It.Is<HttpMessageHandlerOptions>(
-                                (o) => ((HttpServer)o.MessageHandler).Configuration == config
-                            )
+                ab =>
+                    ab.Use(
+                        typeof(HttpMessageHandlerAdapter),
+                        It.Is<HttpMessageHandlerOptions>(
+                            (o) => ((HttpServer)o.MessageHandler).Configuration == config
                         )
-                )
+                    )
+            )
                 .Returns(appBuilder.Object)
                 .Verifiable();
 
@@ -119,17 +119,17 @@ namespace System.Web.Http.Owin
                 };
                 appBuilder.SetupGet(b => b.Properties).Returns(properties);
                 appBuilder.Setup(
-                        ab =>
-                            ab.Use(
-                                typeof(HttpMessageHandlerAdapter),
-                                It.Is<HttpMessageHandlerOptions>(
-                                    (o) =>
-                                        ((HttpServer)o.MessageHandler).Configuration == config
-                                        && o.BufferPolicySelector == bufferPolicySelector
-                                        && o.AppDisposing == expectedAppDisposing
-                                )
+                    ab =>
+                        ab.Use(
+                            typeof(HttpMessageHandlerAdapter),
+                            It.Is<HttpMessageHandlerOptions>(
+                                (o) =>
+                                    ((HttpServer)o.MessageHandler).Configuration == config
+                                    && o.BufferPolicySelector == bufferPolicySelector
+                                    && o.AppDisposing == expectedAppDisposing
                             )
-                    )
+                        )
+                )
                     .Callback<object, object[]>(
                         (i, args) =>
                         {
@@ -157,12 +157,12 @@ namespace System.Web.Http.Owin
             HttpServer httpServer = new Mock<HttpServer>().Object;
             Mock<IAppBuilder> appBuilderMock = new Mock<IAppBuilder>();
             appBuilderMock.Setup(
-                    ab =>
-                        ab.Use(
-                            typeof(HttpMessageHandlerAdapter),
-                            It.Is<HttpMessageHandlerOptions>((o) => o.MessageHandler == httpServer)
-                        )
-                )
+                ab =>
+                    ab.Use(
+                        typeof(HttpMessageHandlerAdapter),
+                        It.Is<HttpMessageHandlerOptions>((o) => o.MessageHandler == httpServer)
+                    )
+            )
                 .Returns(appBuilderMock.Object)
                 .Verifiable();
 
@@ -199,17 +199,17 @@ namespace System.Web.Http.Owin
                 };
                 appBuilderMock.SetupGet(b => b.Properties).Returns(properties);
                 appBuilderMock.Setup(
-                        ab =>
-                            ab.Use(
-                                typeof(HttpMessageHandlerAdapter),
-                                It.Is<HttpMessageHandlerOptions>(
-                                    (o) =>
-                                        o.MessageHandler == httpServer
-                                        && o.BufferPolicySelector == bufferPolicySelector
-                                        && o.AppDisposing == expectedAppDisposing
-                                )
+                    ab =>
+                        ab.Use(
+                            typeof(HttpMessageHandlerAdapter),
+                            It.Is<HttpMessageHandlerOptions>(
+                                (o) =>
+                                    o.MessageHandler == httpServer
+                                    && o.BufferPolicySelector == bufferPolicySelector
+                                    && o.AppDisposing == expectedAppDisposing
                             )
-                    )
+                        )
+                )
                     .Callback<object, object[]>(
                         (i, args) =>
                         {
@@ -319,12 +319,12 @@ namespace System.Web.Http.Owin
             CancellationToken cancellationToken = CancellationToken.None;
 
             expected.Setup(
-                    (l) =>
-                        l.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                (l) =>
+                    l.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(CreateCanceledTask());
 
             await Assert.ThrowsAsync<TaskCanceledException>(
@@ -347,12 +347,8 @@ namespace System.Web.Http.Owin
             CancellationToken cancellationToken = CancellationToken.None;
 
             expected.Setup(
-                    (l) =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                (l) => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(CreateCanceledTask());
 
             await Assert.ThrowsAsync<TaskCanceledException>(

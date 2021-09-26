@@ -93,15 +93,15 @@ namespace System.Linq.Parallel
                     )
                 )
                 {
-                    PartitionedStream<TLeftInput, int> leftStreamInt =
-                        QueryOperator<TLeftInput>.ExecuteAndCollectResults(
-                                leftStream,
-                                leftStream.PartitionCount,
-                                OutputOrdered,
-                                preferStriping,
-                                settings
-                            )
-                            .GetPartitionedStream();
+                    PartitionedStream<TLeftInput, int> leftStreamInt = QueryOperator<TLeftInput>
+                        .ExecuteAndCollectResults(
+                            leftStream,
+                            leftStream.PartitionCount,
+                            OutputOrdered,
+                            preferStriping,
+                            settings
+                        )
+                        .GetPartitionedStream();
                     WrapPartitionedStreamHelper<int, TRightKey>(
                         ExchangeUtilities.HashRepartitionOrdered(
                             leftStreamInt,

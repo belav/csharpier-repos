@@ -22,10 +22,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
             // Arrange
             var evaluator = BuildEvaluator();
             var context = new DefaultHttpContext();
-            var services = new ServiceCollection().AddSingleton<
-                IAuthenticationService,
-                SadAuthentication
-            >();
+            var services = new ServiceCollection()
+                .AddSingleton<IAuthenticationService, SadAuthentication>();
             context.RequestServices = services.BuildServiceProvider();
             var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
 
@@ -42,12 +40,11 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
             // Arrange
             var evaluator = BuildEvaluator();
             var context = new DefaultHttpContext();
-            var services = new ServiceCollection().AddSingleton<
-                IAuthenticationService,
-                EchoAuthentication
-            >();
+            var services = new ServiceCollection()
+                .AddSingleton<IAuthenticationService, EchoAuthentication>();
             context.RequestServices = services.BuildServiceProvider();
-            var policy = new AuthorizationPolicyBuilder().AddAuthenticationSchemes("A", "B", "C")
+            var policy = new AuthorizationPolicyBuilder()
+                .AddAuthenticationSchemes("A", "B", "C")
                 .RequireAssertion(_ => true)
                 .Build();
 
@@ -87,7 +84,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
             // Arrange
             var evaluator = BuildEvaluator();
             var context = new DefaultHttpContext();
-            var policy = new AuthorizationPolicyBuilder().RequireAssertion(c => c.Resource != null)
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireAssertion(c => c.Resource != null)
                 .Build();
             var success = AuthenticateResult.Success(
                 new AuthenticationTicket(new ClaimsPrincipal(), "whatever")
@@ -159,7 +157,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
             // Arrange
             var evaluator = BuildEvaluator();
             var context = new DefaultHttpContext();
-            var policy = new AuthorizationPolicyBuilder().AddRequirements(new DummyRequirement())
+            var policy = new AuthorizationPolicyBuilder()
+                .AddRequirements(new DummyRequirement())
                 .RequireAssertion(_ => false)
                 .Build();
 

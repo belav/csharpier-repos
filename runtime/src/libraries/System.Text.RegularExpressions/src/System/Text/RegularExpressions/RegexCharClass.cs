@@ -300,11 +300,9 @@ namespace System.Text.RegularExpressions
             int len = s_propTable.Length;
             for (int i = 0; i < len - 1; i++)
                 Debug.Assert(
-                    string.Compare(
-                        s_propTable[i][0],
-                        s_propTable[i + 1][0],
-                        StringComparison.Ordinal
-                    ) < 0,
+                    string
+                        .Compare(s_propTable[i][0], s_propTable[i + 1][0], StringComparison.Ordinal)
+                        < 0,
                     $"RegexCharClass s_propTable is out of order at ({s_propTable[i][0]}, {s_propTable[i + 1][0]})"
                 );
         }
@@ -1304,9 +1302,8 @@ namespace System.Text.RegularExpressions
             StringBuilder? categoriesBuilder = null;
             if (categoryLength > 0)
             {
-                categoriesBuilder = new StringBuilder().Append(
-                    charClass.AsSpan(end, categoryLength)
-                );
+                categoriesBuilder = new StringBuilder()
+                    .Append(charClass.AsSpan(end, categoryLength));
             }
 
             return new RegexCharClass(IsNegated(charClass, start), ranges, categoriesBuilder, sub);

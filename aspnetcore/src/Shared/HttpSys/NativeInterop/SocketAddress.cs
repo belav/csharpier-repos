@@ -235,14 +235,15 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
         {
             Contract.Assert(Size >= IPv4AddressSize);
 
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                IPv4StringFormat,
-                _buffer[4],
-                _buffer[5],
-                _buffer[6],
-                _buffer[7]
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    IPv4StringFormat,
+                    _buffer[4],
+                    _buffer[5],
+                    _buffer[6],
+                    _buffer[7]
+                );
         }
 
         // TODO: Does scope ID ever matter?
@@ -280,14 +281,15 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                     // Write the remaining digits as an IPv4 address
                     builder.Append(IPv6StringSeparator);
                     builder.Append(
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            IPv4StringFormat,
-                            numbers[i] >> 8,
-                            numbers[i] & 0xFF,
-                            numbers[i + 1] >> 8,
-                            numbers[i + 1] & 0xFF
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                IPv4StringFormat,
+                                numbers[i] >> 8,
+                                numbers[i] & 0xFF,
+                                numbers[i + 1] >> 8,
+                                numbers[i + 1] & 0xFF
+                            )
                     );
                     break;
                 }

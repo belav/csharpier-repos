@@ -146,11 +146,11 @@ namespace System.Linq.Parallel.Tests
             IntegerRangeSet seen = new IntegerRangeSet(0, leftCount);
             Assert.All(
                 leftQuery.GroupJoin(
-                        rightQuery,
-                        x => x * KeyFactor,
-                        y => y,
-                        (x, y) => KeyValuePair.Create(x, y)
-                    )
+                    rightQuery,
+                    x => x * KeyFactor,
+                    y => y,
+                    (x, y) => KeyValuePair.Create(x, y)
+                )
                     .ToList(),
                 p =>
                 {
@@ -190,11 +190,11 @@ namespace System.Linq.Parallel.Tests
             int seen = 0;
             Assert.All(
                 leftQuery.GroupJoin(
-                        UnorderedSources.Default(rightCount),
-                        x => x * KeyFactor,
-                        y => y,
-                        (x, y) => KeyValuePair.Create(x, y)
-                    )
+                    UnorderedSources.Default(rightCount),
+                    x => x * KeyFactor,
+                    y => y,
+                    (x, y) => KeyValuePair.Create(x, y)
+                )
                     .ToList(),
                 p =>
                 {
@@ -738,12 +738,8 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "outer",
                 () =>
-                    ((ParallelQuery<int>)null).GroupJoin(
-                        ParallelEnumerable.Range(0, 1),
-                        i => i,
-                        i => i,
-                        (i, j) => i
-                    )
+                    ((ParallelQuery<int>)null)
+                        .GroupJoin(ParallelEnumerable.Range(0, 1), i => i, i => i, (i, j) => i)
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "inner",
@@ -787,13 +783,14 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "outer",
                 () =>
-                    ((ParallelQuery<int>)null).GroupJoin(
-                        ParallelEnumerable.Range(0, 1),
-                        i => i,
-                        i => i,
-                        (i, j) => i,
-                        EqualityComparer<int>.Default
-                    )
+                    ((ParallelQuery<int>)null)
+                        .GroupJoin(
+                            ParallelEnumerable.Range(0, 1),
+                            i => i,
+                            i => i,
+                            (i, j) => i,
+                            EqualityComparer<int>.Default
+                        )
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "inner",

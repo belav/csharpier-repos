@@ -15,11 +15,13 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
     public static class RC2CipherTests
     {
         // These are the expected output of many decryptions. Changing these values requires re-generating test input.
-        private static readonly string s_multiBlockString = new ASCIIEncoding().GetBytes(
+        private static readonly string s_multiBlockString = new ASCIIEncoding()
+            .GetBytes(
                 "This is a sentence that is longer than a block, it ensures that multi-block functions work."
             )
             .ByteArrayToHex();
-        private static readonly string s_multiBlockString_8 = new ASCIIEncoding().GetBytes(
+        private static readonly string s_multiBlockString_8 = new ASCIIEncoding()
+            .GetBytes(
                 "This is a sentence that is longer than a block,but exactly an even block multiplier of 8"
             )
             .ByteArrayToHex();
@@ -265,7 +267,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                         byte[] expectedCipher1 = (
                             "85B5D998F35ECD98DB886798170F64BA2DBA4FE902791CDE900EEB0B35728FEE35FB6CADC41DF67FBB691B45D92B876A"
                             + "13FD18229E5ACB797D21D7B257520910360E00FEECDE3433FDC6F15233AE6B5CAC01289AC8B57A9A6B5DA734C2E7E733"
-                        ).HexToByteArray();
+                        )
+                            .HexToByteArray();
                         Assert.Equal<byte>(expectedCipher1, cipher1);
 
                         byte[] decrypted1 = decryptor.Transform(cipher1);
@@ -277,7 +280,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                         byte[] expectedCipher2 = (
                             "85B5D998F35ECD98DB886798170F64BA2DBA4FE902791CDE900EEB0B35728FEE35FB6CADC41DF67F6056044F15B5C7ED"
                             + "4FAB086053D7DC458C206145AE9655F1590C590FBDE76365FA488CADBCDA67B325A35E7CCBC1B9A15E5EBE2879C7AEC2"
-                        ).HexToByteArray();
+                        )
+                            .HexToByteArray();
                         Assert.Equal<byte>(expectedCipher2, cipher2);
 
                         byte[] decrypted2 = decryptor.Transform(cipher2);
@@ -307,7 +311,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     byte[] expectedCipher1 = (
                         "85B5D998F35ECD98DB886798170F64BA2DBA4FE902791CDE900EEB0B35728FEE35FB6CADC41DF67FBB691B45D92B876A"
                         + "13FD18229E5ACB797D21D7B257520910360E00FEECDE3433FDC6F15233AE6B5CAC01289AC8B57A9A6B5DA734C2E7E733"
-                    ).HexToByteArray();
+                    )
+                        .HexToByteArray();
                     Assert.Equal<byte>(expectedCipher1, cipher1);
                 }
             }
@@ -332,7 +337,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     byte[] expectedCipher1 = (
                         "F6DF2E83811D6CB0C8A5830069D16F6A51C985D7003852539051FABC3C6EA7CF46BD3DBD5527003A789B76CBE4D40A73"
                         + "620F04ED9F0AA1AEC7FEC90E7934F69E0568F6DF1F38B2198821D0A771D68A3F8220C8822E387721AEB21E183555CE07"
-                    ).HexToByteArray();
+                    )
+                        .HexToByteArray();
                     Assert.Equal<byte>(expectedCipher1, cipher1);
                 }
             }

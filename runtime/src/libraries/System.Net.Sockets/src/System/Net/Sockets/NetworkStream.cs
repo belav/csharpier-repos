@@ -547,11 +547,11 @@ namespace System.Net.Sockets
             try
             {
                 return _streamSocket.ReceiveAsync(
-                        new Memory<byte>(buffer, offset, count),
-                        SocketFlags.None,
-                        fromNetworkStream: true,
-                        cancellationToken
-                    )
+                    new Memory<byte>(buffer, offset, count),
+                    SocketFlags.None,
+                    fromNetworkStream: true,
+                    cancellationToken
+                )
                     .AsTask();
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))
@@ -619,10 +619,10 @@ namespace System.Net.Sockets
             try
             {
                 return _streamSocket.SendAsyncForNetworkStream(
-                        new ReadOnlyMemory<byte>(buffer, offset, count),
-                        SocketFlags.None,
-                        cancellationToken
-                    )
+                    new ReadOnlyMemory<byte>(buffer, offset, count),
+                    SocketFlags.None,
+                    cancellationToken
+                )
                     .AsTask();
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))

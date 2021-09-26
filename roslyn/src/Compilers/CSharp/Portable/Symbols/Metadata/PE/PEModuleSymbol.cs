@@ -749,9 +749,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         )
         {
             NamedTypeSymbol result;
-            PENamespaceSymbol scope = (PENamespaceSymbol)this.GlobalNamespace.LookupNestedNamespace(
-                emittedName.NamespaceSegments
-            );
+            PENamespaceSymbol scope = (PENamespaceSymbol)this.GlobalNamespace
+                .LookupNestedNamespace(emittedName.NamespaceSegments);
 
             if ((object)scope == null)
             {
@@ -781,11 +780,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         )
         {
             string matchedName;
-            (int firstIndex, int secondIndex) = this.Module.GetAssemblyRefsForForwardedType(
-                fullName.FullName,
-                ignoreCase: false,
-                matchedName: out matchedName
-            );
+            (int firstIndex, int secondIndex) = this.Module
+                .GetAssemblyRefsForForwardedType(
+                    fullName.FullName,
+                    ignoreCase: false,
+                    matchedName: out matchedName
+                );
 
             if (firstIndex < 0)
             {

@@ -194,11 +194,12 @@ namespace Microsoft.AspNetCore.Components.Rendering
             if (
                 context.ClosestSelectValueAsString != null
                 && string.Equals(frame.ElementName, "option", StringComparison.OrdinalIgnoreCase)
-                && string.Equals(
-                    capturedValueAttribute,
-                    context.ClosestSelectValueAsString,
-                    StringComparison.Ordinal
-                )
+                && string
+                    .Equals(
+                        capturedValueAttribute,
+                        context.ClosestSelectValueAsString,
+                        StringComparison.Ordinal
+                    )
             )
             {
                 result.Add(" selected");
@@ -209,11 +210,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
             {
                 result.Add(">");
 
-                var isSelect = string.Equals(
-                    frame.ElementName,
-                    "select",
-                    StringComparison.OrdinalIgnoreCase
-                );
+                var isSelect = string
+                    .Equals(frame.ElementName, "select", StringComparison.OrdinalIgnoreCase);
                 if (isSelect)
                 {
                     context.ClosestSelectValueAsString = capturedValueAttribute;

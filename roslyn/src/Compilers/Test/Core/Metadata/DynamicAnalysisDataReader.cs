@@ -114,9 +114,8 @@ namespace Microsoft.CodeAnalysis
             bool isBlobHeapSmall = blobHeapSize <= ushort.MaxValue;
             bool isGuidHeapSmall = guidHeapSize / GuidSize <= ushort.MaxValue;
 
-            var documentsBuilder = ArrayBuilder<DynamicAnalysisDocument>.GetInstance(
-                documentRowCount
-            );
+            var documentsBuilder = ArrayBuilder<DynamicAnalysisDocument>
+                .GetInstance(documentRowCount);
 
             for (int i = 0; i < documentRowCount; i++)
             {
@@ -131,9 +130,8 @@ namespace Microsoft.CodeAnalysis
 
             Documents = documentsBuilder.ToImmutableAndFree();
 
-            var methodsBuilder = ArrayBuilder<DynamicAnalysisMethod>.GetInstance(
-                methodSpanRowCount
-            );
+            var methodsBuilder = ArrayBuilder<DynamicAnalysisMethod>
+                .GetInstance(methodSpanRowCount);
 
             for (int i = 0; i < methodSpanRowCount; i++)
             {

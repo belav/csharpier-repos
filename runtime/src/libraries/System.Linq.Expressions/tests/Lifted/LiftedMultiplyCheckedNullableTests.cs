@@ -291,7 +291,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(byte?)),
                     Expression.Constant(b, typeof(byte?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableByte")
                 )
             );
@@ -317,7 +318,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(char?)),
                     Expression.Constant(b, typeof(char?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableChar")
                 )
             );
@@ -347,7 +349,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(decimal?)),
                     Expression.Constant(b, typeof(decimal?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableDecimal")
                 )
             );
@@ -377,7 +380,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(double?)),
                     Expression.Constant(b, typeof(double?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableDouble")
                 )
             );
@@ -396,7 +400,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(float?)),
                     Expression.Constant(b, typeof(float?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableFloat")
                 )
             );
@@ -411,7 +416,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(int?)),
                     Expression.Constant(b, typeof(int?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableInt")
                 )
             );
@@ -437,7 +443,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(long?)),
                     Expression.Constant(b, typeof(long?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableLong")
                 )
             );
@@ -467,7 +474,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(sbyte?)),
                     Expression.Constant(b, typeof(sbyte?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableSByte")
                 )
             );
@@ -497,7 +505,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(short?)),
                     Expression.Constant(b, typeof(short?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableShort")
                 )
             );
@@ -523,7 +532,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(uint?)),
                     Expression.Constant(b, typeof(uint?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableUInt")
                 )
             );
@@ -553,7 +563,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(ulong?)),
                     Expression.Constant(b, typeof(ulong?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableULong")
                 )
             );
@@ -583,7 +594,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.MultiplyChecked(
                     Expression.Constant(a, typeof(ushort?)),
                     Expression.Constant(b, typeof(ushort?)),
-                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedMultiplyCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("MultiplyCheckedNullableUShort")
                 )
             );

@@ -26,10 +26,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.InProcess
 
             var deploymentResult = await DeployAsync(deploymentParameters);
 
-            var result = await deploymentResult.HttpClient.PostAsync(
-                "/ReadRequestBody",
-                new StringContent("test")
-            );
+            var result = await deploymentResult.HttpClient
+                .PostAsync("/ReadRequestBody", new StringContent("test"));
             Assert.Equal(HttpStatusCode.RequestEntityTooLarge, result.StatusCode);
         }
 
@@ -49,10 +47,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.InProcess
             );
             var deploymentResult = await DeployAsync(deploymentParameters);
 
-            var result = await deploymentResult.HttpClient.PostAsync(
-                "/ReadRequestBody",
-                new StringContent("test")
-            );
+            var result = await deploymentResult.HttpClient
+                .PostAsync("/ReadRequestBody", new StringContent("test"));
 
             // IIS either returns a 404 or a 413 based on versions of IIS.
             // Check for both as we don't know which specific patch version.
@@ -78,10 +74,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.InProcess
             );
             var deploymentResult = await DeployAsync(deploymentParameters);
 
-            var result = await deploymentResult.HttpClient.PostAsync(
-                "/ReadRequestBodyLarger",
-                new StringContent(new string('a', 100000000))
-            );
+            var result = await deploymentResult.HttpClient
+                .PostAsync("/ReadRequestBodyLarger", new StringContent(new string('a', 100000000)));
 
             Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         }
@@ -102,10 +96,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.InProcess
             );
             var deploymentResult = await DeployAsync(deploymentParameters);
 
-            var result = await deploymentResult.HttpClient.PostAsync(
-                "/ReadRequestBodyLarger",
-                new StringContent(new string('a', 10000))
-            );
+            var result = await deploymentResult.HttpClient
+                .PostAsync("/ReadRequestBodyLarger", new StringContent(new string('a', 10000)));
 
             Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         }
@@ -159,10 +151,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.InProcess
             );
             var deploymentResult = await DeployAsync(deploymentParameters);
 
-            var result = await deploymentResult.HttpClient.PostAsync(
-                "/IncreaseRequestLimit",
-                new StringContent("1")
-            );
+            var result = await deploymentResult.HttpClient
+                .PostAsync("/IncreaseRequestLimit", new StringContent("1"));
             Assert.Equal(HttpStatusCode.OK, result.StatusCode);
 
             StopServer();
@@ -172,11 +162,12 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.InProcess
                 Assert.Single(
                     TestSink.Writes,
                     w =>
-                        w.Message.Contains(
-                            "Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength."
-                                + " HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS."
-                                + " You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit."
-                        )
+                        w.Message
+                            .Contains(
+                                "Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength."
+                                    + " HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS."
+                                    + " You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit."
+                            )
                 );
             }
         }

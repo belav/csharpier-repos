@@ -96,13 +96,14 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             }
 
             // We can't do anything special, so fall back to the expensive path
-            return hostWorkspaceServices.SupportedLanguages.ToDictionary(
-                l => l,
-                l =>
-                    hostWorkspaceServices.GetLanguageServices(l)
-                        .GetRequiredService<IContentTypeLanguageService>()
-                        .GetDefaultContentType().TypeName
-            );
+            return hostWorkspaceServices.SupportedLanguages
+                .ToDictionary(
+                    l => l,
+                    l =>
+                        hostWorkspaceServices.GetLanguageServices(l)
+                            .GetRequiredService<IContentTypeLanguageService>()
+                            .GetDefaultContentType().TypeName
+                );
         }
 
         internal static IList<T> SelectMatchingExtensionValues<T, TMetadata>(
@@ -117,8 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             }
 
             return items.Where(
-                    lazy => LanguageMatches(lazy.Metadata.Language, contentType, workspaceServices)
-                )
+                lazy => LanguageMatches(lazy.Metadata.Language, contentType, workspaceServices)
+            )
                 .Select(lazy => lazy.Value)
                 .ToList();
         }
@@ -136,15 +137,13 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             }
 
             return items.Where(
-                    lazy =>
-                    {
-                        var metadata = lazy.Metadata;
-                        return LanguageMatches(metadata.Language, contentType, workspaceServices)
-                            && RolesMatch(metadata.Roles, roleSet);
-                    }
-                )
-                .Select(lazy => lazy.Value)
-                .ToList();
+                lazy =>
+                {
+                    var metadata = lazy.Metadata;
+                    return LanguageMatches(metadata.Language, contentType, workspaceServices)
+                        && RolesMatch(metadata.Roles, roleSet);
+                }
+            ).Select(lazy => lazy.Value).ToList();
         }
 
         private static bool LanguageMatches(

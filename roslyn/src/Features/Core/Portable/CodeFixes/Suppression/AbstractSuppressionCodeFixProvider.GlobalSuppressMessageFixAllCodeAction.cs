@@ -112,10 +112,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     if (supressMessageAttribute != null)
                     {
                         var diagnosticsBySymbol = await CreateDiagnosticsBySymbolAsync(
-                                fixer,
-                                grouping,
-                                cancellationToken
-                            )
+                            fixer,
+                            grouping,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (diagnosticsBySymbol.Any())
                         {
@@ -127,8 +127,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                             );
                             var newDocument =
                                 await projectCodeAction.GetChangedSuppressionDocumentAsync(
-                                        cancellationToken
-                                    )
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                             currentSolution = newDocument.Project.Solution;
                         }
@@ -156,10 +156,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     if (suppressMessageAttribute != null)
                     {
                         var diagnosticsBySymbol = await CreateDiagnosticsBySymbolAsync(
-                                oldProject,
-                                diagnostics,
-                                cancellationToken
-                            )
+                            oldProject,
+                            diagnostics,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (diagnosticsBySymbol.Any())
                         {
@@ -171,8 +171,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                             );
                             var newDocument =
                                 await projectCodeAction.GetChangedSuppressionDocumentAsync(
-                                        cancellationToken
-                                    )
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                             currentSolution = newDocument.Project.Solution;
                         }
@@ -194,9 +194,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 var workspace = suppressionsDoc.Project.Solution.Workspace;
                 var suppressionsRoot = await suppressionsDoc.GetSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var compilation = await suppressionsDoc.Project.GetCompilationAsync(
-                        cancellationToken
-                    )
+                var compilation = await suppressionsDoc.Project
+                    .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var addImportsService =
                     suppressionsDoc.GetRequiredLanguageService<IAddImportsService>();
@@ -245,10 +244,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     {
                         Contract.ThrowIfFalse(diagnostic.Location.IsInSource);
                         var suppressionTargetInfo = await fixer.GetSuppressionTargetInfoAsync(
-                                document,
-                                diagnostic.Location.SourceSpan,
-                                cancellationToken
-                            )
+                            document,
+                            diagnostic.Location.SourceSpan,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (suppressionTargetInfo != null)
                         {

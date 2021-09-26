@@ -131,12 +131,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             bool diagnosticSourceEnabled,
             bool simpleLogEnabled
         ) =>
-            ((IDiagnosticsLogger)this).DispatchEventData(
-                definition,
-                eventData,
-                diagnosticSourceEnabled,
-                simpleLogEnabled
-            );
+            ((IDiagnosticsLogger)this)
+                .DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
 
         /// <summary>
         ///     Checks whether or not the message should be sent to the <see cref="ILogger" />.
@@ -176,11 +177,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             out bool diagnosticSourceEnabled,
             out bool simpleLogEnabled
         ) where TInterceptor : class, IInterceptor =>
-            ((IDiagnosticsLogger)this).NeedsEventData(
-                definition,
-                out interceptor,
-                out diagnosticSourceEnabled,
-                out simpleLogEnabled
-            );
+            ((IDiagnosticsLogger)this)
+                .NeedsEventData(
+                    definition,
+                    out interceptor,
+                    out diagnosticSourceEnabled,
+                    out simpleLogEnabled
+                );
     }
 }

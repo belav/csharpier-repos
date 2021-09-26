@@ -22,9 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             get
             {
                 foreach (
-                    var field in typeof(ClassificationTypeNames).GetFields(
-                        BindingFlags.Static | BindingFlags.Public
-                    )
+                    var field in typeof(ClassificationTypeNames)
+                        .GetFields(BindingFlags.Static | BindingFlags.Public)
                 )
                 {
                     yield return new object[] { field.Name, field.GetRawConstantValue() };
@@ -38,8 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         public void ClassificationTypeExported(string fieldName, object constantValue)
         {
             var classificationTypeName = Assert.IsType<string>(constantValue);
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory
+                .CreateExportProvider();
             var classificationTypeRegistryService =
                 exportProvider.GetExport<IClassificationTypeRegistryService>().Value;
             var classificationType = classificationTypeRegistryService.GetClassificationType(

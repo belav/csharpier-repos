@@ -19,11 +19,8 @@ namespace Roslyn.Test.Utilities
             CancellationToken cancellationToken = default(CancellationToken)
         )
         {
-            return await (await task.ConfigureAwait(false)).ContinueWithAsync(
-                    code,
-                    options,
-                    cancellationToken
-                )
+            return await (await task.ConfigureAwait(false))
+                .ContinueWithAsync(code, options, cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -34,11 +31,8 @@ namespace Roslyn.Test.Utilities
             CancellationToken cancellationToken = default(CancellationToken)
         )
         {
-            return await (await task.ConfigureAwait(false)).ContinueWithAsync(
-                    code,
-                    options,
-                    cancellationToken
-                )
+            return await (await task.ConfigureAwait(false))
+                .ContinueWithAsync(code, options, cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -49,11 +43,8 @@ namespace Roslyn.Test.Utilities
             CancellationToken cancellationToken = default(CancellationToken)
         )
         {
-            return await (await task.ConfigureAwait(false)).ContinueWithAsync<T>(
-                    code,
-                    options,
-                    cancellationToken
-                )
+            return await (await task.ConfigureAwait(false))
+                .ContinueWithAsync<T>(code, options, cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -64,11 +55,8 @@ namespace Roslyn.Test.Utilities
             CancellationToken cancellationToken = default(CancellationToken)
         )
         {
-            return await (await task.ConfigureAwait(false)).ContinueWithAsync<T>(
-                    code,
-                    options,
-                    cancellationToken
-                )
+            return await (await task.ConfigureAwait(false))
+                .ContinueWithAsync<T>(code, options, cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -79,11 +67,8 @@ namespace Roslyn.Test.Utilities
             CancellationToken cancellationToken = default(CancellationToken)
         )
         {
-            return await (await task.ConfigureAwait(false)).ContinueWithAsync(
-                    code,
-                    options,
-                    cancellationToken
-                )
+            return await (await task.ConfigureAwait(false))
+                .ContinueWithAsync(code, options, cancellationToken)
                 .ConfigureAwait(false);
         }
     }

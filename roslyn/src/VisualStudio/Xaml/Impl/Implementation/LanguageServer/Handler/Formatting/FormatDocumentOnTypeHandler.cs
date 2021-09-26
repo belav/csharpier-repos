@@ -50,14 +50,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             }
 
             var document = context.Document;
-            var formattingService =
-                document?.Project.LanguageServices.GetService<IXamlFormattingService>();
+            var formattingService = document?.Project.LanguageServices
+                .GetService<IXamlFormattingService>();
             if (document != null && formattingService != null)
             {
                 var position = await document.GetPositionFromLinePositionAsync(
-                        ProtocolConversions.PositionToLinePosition(request.Position),
-                        cancellationToken
-                    )
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var options = new XamlFormattingOptions
                 {
@@ -66,12 +66,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                     OtherOptions = request.Options.OtherOptions
                 };
                 var textChanges = await formattingService.GetFormattingChangesAsync(
-                        document,
-                        options,
-                        request.Character[0],
-                        position,
-                        cancellationToken
-                    )
+                    document,
+                    options,
+                    request.Character[0],
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (textChanges != null)
                 {

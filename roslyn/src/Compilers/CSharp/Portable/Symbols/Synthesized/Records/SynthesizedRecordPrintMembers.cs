@@ -350,10 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             ParameterCount: 1,
                             Arity: 0
                         } method
-                    && method.ParameterTypesWithAnnotations[0].Equals(
-                        stringBuilder,
-                        TypeCompareKind.AllIgnoreOptions
-                    )
+                    && method.ParameterTypesWithAnnotations[0]
+                        .Equals(stringBuilder, TypeCompareKind.AllIgnoreOptions)
                 )
                 {
                     if (candidate is object)

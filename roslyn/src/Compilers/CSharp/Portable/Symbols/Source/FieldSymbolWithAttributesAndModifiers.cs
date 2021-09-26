@@ -213,9 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    int offset = attribute.CommonConstructorArguments[0].DecodeValue<int>(
-                        SpecialType.System_Int32
-                    );
+                    int offset = attribute.CommonConstructorArguments[0]
+                        .DecodeValue<int>(SpecialType.System_Int32);
                     if (offset < 0)
                     {
                         // Dev10 reports CS0647: "Error emitting attribute ..."
@@ -231,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     // Set field offset even if the attribute specifies an invalid value, so that
                     // post-validation knows that the attribute is applied and reports better errors.
-                    arguments.GetOrCreateData<FieldWellKnownAttributeData>().SetFieldOffset(offset);
+                    arguments.GetOrCreateData<FieldWellKnownAttributeData>()
+                        .SetFieldOffset(offset);
                 }
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.MarshalAsAttribute))
@@ -241,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     AttributeSyntax,
                     CSharpAttributeData,
                     AttributeLocation
-                >.Decode(ref arguments, AttributeTargets.Field, MessageProvider.Instance);
+                >
+                    .Decode(ref arguments, AttributeTargets.Field, MessageProvider.Instance);
             }
             else if (
                 ReportExplicitUseOfReservedAttributes(
@@ -434,13 +435,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            base.PostDecodeWellKnownAttributes(
-                boundAttributes,
-                allAttributeSyntaxNodes,
-                diagnostics,
-                symbolPart,
-                decodedData
-            );
+            base
+                .PostDecodeWellKnownAttributes(
+                    boundAttributes,
+                    allAttributeSyntaxNodes,
+                    diagnostics,
+                    symbolPart,
+                    decodedData
+                );
         }
 
         internal sealed override bool HasSpecialName

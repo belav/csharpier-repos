@@ -151,11 +151,12 @@ namespace System.Web.Mvc
                         try
                         {
                             _nextId = 0;
-                            viewContext.HttpContext.Server.Execute(
-                                HttpHandlerUtil.WrapForServerExecute(this),
-                                switchWriter,
-                                true /* preserveForm */
-                            );
+                            viewContext.HttpContext.Server
+                                .Execute(
+                                    HttpHandlerUtil.WrapForServerExecute(this),
+                                    switchWriter,
+                                    true /* preserveForm */
+                                );
                         }
 
                         finally

@@ -77,9 +77,8 @@ namespace System.Web.WebPages
                         inherit: false
                     );
                     var directiveAttributes = attributes.Where(
-                            attr =>
-                                StringComparer.OrdinalIgnoreCase.Equals("sessionstate", attr.Name)
-                        )
+                        attr => StringComparer.OrdinalIgnoreCase.Equals("sessionstate", attr.Name)
+                    )
                         .ToList();
 
                     if (!directiveAttributes.Any())

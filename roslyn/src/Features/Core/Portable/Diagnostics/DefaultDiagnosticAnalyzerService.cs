@@ -173,9 +173,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         return true;
                     }
 
-                    return _workspace.Options.GetOption(
-                            InternalRuntimeDiagnosticOptions.ScriptSemantic
-                        )
+                    return _workspace.Options
+                            .GetOption(InternalRuntimeDiagnosticOptions.ScriptSemantic)
                         && document.SourceCodeKind == SourceCodeKind.Script;
                 }
             }
@@ -219,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 CancellationToken cancellationToken
             )
             {
-                var loadDiagnostic = await document.State.GetLoadDiagnosticAsync(cancellationToken)
+                var loadDiagnostic = await document.State
+                    .GetLoadDiagnosticAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (loadDiagnostic != null)
                 {
@@ -235,11 +235,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 var compilationWithAnalyzers =
                     await AnalyzerHelper.CreateCompilationWithAnalyzersAsync(
-                            project,
-                            analyzers,
-                            includeSuppressedDiagnostics: false,
-                            cancellationToken
-                        )
+                        project,
+                        analyzers,
+                        includeSuppressedDiagnostics: false,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 var analysisScope = new DocumentAnalysisScope(
                     document,

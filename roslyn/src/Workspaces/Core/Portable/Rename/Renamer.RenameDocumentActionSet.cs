@@ -88,10 +88,11 @@ namespace Microsoft.CodeAnalysis.Rename
                 if (actions.Any(a => !ApplicableActions.Contains(a)))
                 {
                     throw new ArgumentException(
-                        string.Format(
-                            WorkspacesResources.Cannot_apply_action_that_is_not_in_0,
-                            nameof(ApplicableActions)
-                        )
+                        string
+                            .Format(
+                                WorkspacesResources.Cannot_apply_action_that_is_not_in_0,
+                                nameof(ApplicableActions)
+                            )
                     );
                 }
 
@@ -113,10 +114,10 @@ namespace Microsoft.CodeAnalysis.Rename
                 {
                     document = solution.GetRequiredDocument(documentId);
                     solution = await action.GetModifiedSolutionAsync(
-                            document,
-                            _optionSet,
-                            cancellationToken
-                        )
+                        document,
+                        _optionSet,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -155,9 +156,11 @@ namespace Microsoft.CodeAnalysis.Rename
                 // https://github.com/dotnet/roslyn/issues/43729 tracks designing a more elagent system that can help alleviate
                 // this issue.
                 var project = solution.GetRequiredProject(_documentId.ProjectId);
-                return project.Documents.FirstOrDefault(
-                        d => d.Name == _documentName && d.Folders.SequenceEqual(_documentFolders)
-                    )
+                return project.Documents
+                        .FirstOrDefault(
+                            d =>
+                                d.Name == _documentName && d.Folders.SequenceEqual(_documentFolders)
+                        )
                     ?? throw new InvalidOperationException(
                         WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document
                     );

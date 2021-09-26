@@ -68,10 +68,11 @@ namespace Microsoft.AspNetCore.Identity
                 var owner = await manager.FindByNameAsync(roleName);
                 if (
                     owner != null
-                    && !string.Equals(
-                        await manager.GetRoleIdAsync(owner),
-                        await manager.GetRoleIdAsync(role)
-                    )
+                    && !string
+                        .Equals(
+                            await manager.GetRoleIdAsync(owner),
+                            await manager.GetRoleIdAsync(role)
+                        )
                 )
                 {
                     errors.Add(Describer.DuplicateRoleName(roleName));

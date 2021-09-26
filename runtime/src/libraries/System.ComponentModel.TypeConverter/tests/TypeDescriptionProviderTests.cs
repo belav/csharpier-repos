@@ -74,8 +74,8 @@ namespace System.ComponentModel.Tests
         {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             mockParentProvider.Setup(
-                    p => p.CreateInstance(serviceProvider, objectType, argTypes, args)
-                )
+                p => p.CreateInstance(serviceProvider, objectType, argTypes, args)
+            )
                 .Returns(result)
                 .Verifiable();
             var provider = new SubTypeDescriptionProvider(mockParentProvider.Object);

@@ -85,7 +85,8 @@ class CrstTypeTool
 
             // Create a parser for the CrstTypes.def file and run it over the input file (errors are signalled
             // via exception, in common with all the following steps except validation).
-            new TypeFileParser().ParseFile(inputFile, app.m_crsts);
+            new TypeFileParser()
+                .ParseFile(inputFile, app.m_crsts);
 
             // Validate the collection of Crst type definitions we built up during parsing for common logic
             // errors and the presence of dependency cycles. False is returned from ValidateCrsts if an error

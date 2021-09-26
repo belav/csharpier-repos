@@ -292,14 +292,14 @@ namespace TypeSystemTests
             var doubleArrayType = doubleType.MakeArrayType();
 
             MetadataType myDerivedType = ilModule.GetType(
-                    "MethodImplOverride1",
-                    "DerivedGenericsShape`1"
-                )
+                "MethodImplOverride1",
+                "DerivedGenericsShape`1"
+            )
                 .MakeInstantiatedType(doubleType);
             MetadataType baseType = ilModule.GetType(
-                    "MethodImplOverride1",
-                    "BaseTestGenericsShape`4"
-                )
+                "MethodImplOverride1",
+                "BaseTestGenericsShape`4"
+            )
                 .MakeInstantiatedType(objectType, stringType, genericTypeOfInt, doubleArrayType);
 
             var bang0Type = _context.GetSignatureVariable(0, false);
@@ -396,9 +396,9 @@ namespace TypeSystemTests
             var implementorType = ilModule.GetType("MethodImplOverride1", "Implementor`2")
                 .MakeInstantiatedType(intType, intType);
             var partialIntImplementorType = ilModule.GetType(
-                    "MethodImplOverride1",
-                    "PartialIntImplementor`1"
-                )
+                "MethodImplOverride1",
+                "PartialIntImplementor`1"
+            )
                 .MakeInstantiatedType(intType);
             var intImplementorType = ilModule.GetType("MethodImplOverride1", "IntImplementor");
 

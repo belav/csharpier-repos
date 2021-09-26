@@ -34,15 +34,15 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             await _callback.InvokeAsync(
-                    (callback, cancellationToken) =>
-                        callback.ReportTodoCommentDataAsync(
-                            _callbackId,
-                            documentId,
-                            data,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                (callback, cancellationToken) =>
+                    callback.ReportTodoCommentDataAsync(
+                        _callbackId,
+                        documentId,
+                        data,
+                        cancellationToken
+                    ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

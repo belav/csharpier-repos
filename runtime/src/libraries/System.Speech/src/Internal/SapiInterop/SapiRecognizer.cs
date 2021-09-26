@@ -234,11 +234,8 @@ namespace System.Speech.Internal.SapiInterop
             return (SAPIErrorCodes)_proxy.Invoke(
                 delegate
                 {
-                    return _proxy.SapiSpeechRecognizer.EmulateRecognition(
-                        phrase,
-                        ref displayAttributes,
-                        0
-                    );
+                    return _proxy.SapiSpeechRecognizer
+                        .EmulateRecognition(phrase, ref displayAttributes, 0);
                 }
             );
         }

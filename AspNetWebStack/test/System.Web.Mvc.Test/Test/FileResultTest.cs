@@ -56,16 +56,14 @@ namespace System.Web.Mvc.Test
                 MockBehavior.Strict
             );
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentType = "application/my-type"
-                )
+                c => c.HttpContext.Response.ContentType = "application/my-type"
+            )
                 .Verifiable();
             mockControllerContext.Setup(
-                    c =>
-                        c.HttpContext.Response.AddHeader(
-                            "Content-Disposition",
-                            @"attachment; filename=""some\\file"""
-                        )
-                )
+                c =>
+                    c.HttpContext.Response
+                        .AddHeader("Content-Disposition", @"attachment; filename=""some\\file""")
+            )
                 .Verifiable();
 
             EmptyFileResult result = new EmptyFileResult("application/my-type")
@@ -89,16 +87,17 @@ namespace System.Web.Mvc.Test
                 MockBehavior.Strict
             );
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentType = "application/my-type"
-                )
+                c => c.HttpContext.Response.ContentType = "application/my-type"
+            )
                 .Verifiable();
             mockControllerContext.Setup(
-                    c =>
-                        c.HttpContext.Response.AddHeader(
+                c =>
+                    c.HttpContext.Response
+                        .AddHeader(
                             "Content-Disposition",
                             @"attachment; filename*=UTF-8''ABCXYZabcxyz012789!%40%23$%25%5E&%2A%28%29-%3D_+.:~%CE%94"
                         )
-                )
+            )
                 .Verifiable();
 
             EmptyFileResult result = new EmptyFileResult("application/my-type")
@@ -120,8 +119,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentType = "application/my-type"
-                )
+                c => c.HttpContext.Response.ContentType = "application/my-type"
+            )
                 .Verifiable();
 
             EmptyFileResult result = new EmptyFileResult("application/my-type");
@@ -142,16 +141,14 @@ namespace System.Web.Mvc.Test
                 MockBehavior.Strict
             );
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentType = "application/my-type"
-                )
+                c => c.HttpContext.Response.ContentType = "application/my-type"
+            )
                 .Verifiable();
             mockControllerContext.Setup(
-                    c =>
-                        c.HttpContext.Response.AddHeader(
-                            "Content-Disposition",
-                            "attachment; filename=filename.ext"
-                        )
-                )
+                c =>
+                    c.HttpContext.Response
+                        .AddHeader("Content-Disposition", "attachment; filename=filename.ext")
+            )
                 .Verifiable();
 
             EmptyFileResult result = new EmptyFileResult("application/my-type")

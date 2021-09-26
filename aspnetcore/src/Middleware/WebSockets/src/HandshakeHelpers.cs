@@ -86,19 +86,21 @@ namespace Microsoft.AspNetCore.WebSockets
             foreach (var pair in interestingHeaders)
             {
                 if (
-                    string.Equals(
-                        HeaderNames.Connection,
-                        pair.Key,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            HeaderNames.Connection,
+                            pair.Key,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     if (
-                        string.Equals(
-                            HeaderNames.Upgrade,
-                            pair.Value,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                HeaderNames.Upgrade,
+                                pair.Value,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         validConnection = true;
@@ -109,41 +111,45 @@ namespace Microsoft.AspNetCore.WebSockets
                 )
                 {
                     if (
-                        string.Equals(
-                            Constants.Headers.UpgradeWebSocket,
-                            pair.Value,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                Constants.Headers.UpgradeWebSocket,
+                                pair.Value,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         validUpgrade = true;
                     }
                 }
                 else if (
-                    string.Equals(
-                        HeaderNames.SecWebSocketVersion,
-                        pair.Key,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            HeaderNames.SecWebSocketVersion,
+                            pair.Key,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     if (
-                        string.Equals(
-                            Constants.Headers.SupportedVersion,
-                            pair.Value,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                Constants.Headers.SupportedVersion,
+                                pair.Value,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         validVersion = true;
                     }
                 }
                 else if (
-                    string.Equals(
-                        HeaderNames.SecWebSocketKey,
-                        pair.Key,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            HeaderNames.SecWebSocketKey,
+                            pair.Key,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     validKey = IsRequestKeyValid(pair.Value);

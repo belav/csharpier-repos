@@ -355,12 +355,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool includeDocumentationComments = false
         )
         {
-            return base.GetFirstToken(
-                includeZeroWidth,
-                includeSkipped,
-                includeDirectives,
-                includeDocumentationComments
-            );
+            return base
+                .GetFirstToken(
+                    includeZeroWidth,
+                    includeSkipped,
+                    includeDirectives,
+                    includeDocumentationComments
+                );
         }
 
         /// <summary>
@@ -396,12 +397,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool includeDocumentationComments = false
         )
         {
-            return base.GetLastToken(
-                includeZeroWidth,
-                includeSkipped,
-                includeDirectives,
-                includeDocumentationComments
-            );
+            return base
+                .GetLastToken(
+                    includeZeroWidth,
+                    includeSkipped,
+                    includeDirectives,
+                    includeDocumentationComments
+                );
         }
 
         /// <summary>
@@ -441,9 +443,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             Debug.Assert(trivia.HasStructure);
-            SyntaxToken triviaToken = ((CSharpSyntaxNode)trivia.GetStructure()!).FindTokenInternal(
-                position
-            );
+            SyntaxToken triviaToken = ((CSharpSyntaxNode)trivia.GetStructure()!)
+                .FindTokenInternal(position);
 
             // CONSIDER: We might want to use the trivia token anywhere within a doc comment.
             // Otherwise, we'll fall back on the enclosing scope outside of name and cref
@@ -526,14 +527,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return SyntaxReplacer.Replace(
-                    this,
-                    nodes,
-                    computeReplacementNode,
-                    tokens,
-                    computeReplacementToken,
-                    trivia,
-                    computeReplacementTrivia
-                )
+                this,
+                nodes,
+                computeReplacementNode,
+                tokens,
+                computeReplacementToken,
+                trivia,
+                computeReplacementTrivia
+            )
                 .AsRootOfNewTreeWithOptionsFrom(this.SyntaxTree);
         }
 

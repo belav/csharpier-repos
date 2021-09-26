@@ -214,12 +214,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             NSLayoutConstraint.ActivateConstraints(constraints);
 
-            _differenceViewerPreview.Viewer.InlineView.TryMoveCaretToAndEnsureVisible(
-                new Microsoft.VisualStudio.Text.SnapshotPoint(
-                    _differenceViewerPreview.Viewer.InlineView.TextSnapshot,
-                    0
-                )
-            );
+            _differenceViewerPreview.Viewer.InlineView
+                .TryMoveCaretToAndEnsureVisible(
+                    new Microsoft.VisualStudio.Text.SnapshotPoint(
+                        _differenceViewerPreview.Viewer.InlineView.TextSnapshot,
+                        0
+                    )
+                );
         }
 
         public PreviewPane(IntPtr ptr) : base(ptr) { }

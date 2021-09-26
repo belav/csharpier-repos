@@ -106,7 +106,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             var webConfigLocation = GetWebConfigLocation(directory);
             XDocument webConfig = XDocument.Load(webConfigLocation);
-            webConfig.Root.Descendants("system.webServer")
+            webConfig.Root
+                .Descendants("system.webServer")
                 .Single()
                 .GetOrAdd("aspNetCore")
                 .SetAttributeValue("hostingModel", model.ToString());

@@ -92,14 +92,15 @@ namespace System.Configuration
                 }
                 if (
                     count > 0
-                    && string.Compare(
-                        NullString,
-                        0,
-                        val,
-                        count,
-                        len - 2 * count,
-                        StringComparison.Ordinal
-                    ) != 0
+                    && string
+                        .Compare(
+                            NullString,
+                            0,
+                            val,
+                            count,
+                            len - 2 * count,
+                            StringComparison.Ordinal
+                        ) != 0
                 )
                 {
                     // the stuff between the parens is not "None"

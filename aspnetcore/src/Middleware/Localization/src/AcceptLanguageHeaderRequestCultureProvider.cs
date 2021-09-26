@@ -49,9 +49,9 @@ namespace Microsoft.AspNetCore.Localization
             }
 
             var orderedLanguages = languages.OrderByDescending(
-                    h => h,
-                    StringWithQualityHeaderValueComparer.QualityComparer
-                )
+                h => h,
+                StringWithQualityHeaderValueComparer.QualityComparer
+            )
                 .Select(x => x.Value)
                 .ToList();
 

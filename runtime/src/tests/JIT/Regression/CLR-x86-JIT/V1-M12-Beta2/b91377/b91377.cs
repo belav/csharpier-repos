@@ -15,9 +15,13 @@ public class BB
         try
         {
             Console.WriteLine("Testing BB::Method1");
-            new BB().Method1(
-                (new sbyte[10, 10][,][,][][,])[9, 9][Math.Sign(10), new int[] { 10, 10, 10 }[10]]
-            );
+            new BB()
+                .Method1(
+                    (new sbyte[10, 10][,][,][][,])[9, 9][
+                        Math.Sign(10),
+                        new int[] { 10, 10, 10 }[10]
+                    ]
+                );
         }
         catch (Exception x) { }
         Console.WriteLine("Passed.");

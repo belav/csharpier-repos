@@ -162,13 +162,13 @@ public class App
             // ---------------------------
             // Source symbols
             var originalSymbols = GetSourceSymbols(
-                    comp1,
-                    SymbolCategory.NonTypeMember | SymbolCategory.Parameter
-                )
+                comp1,
+                SymbolCategory.NonTypeMember | SymbolCategory.Parameter
+            )
                 .ToList();
             originalSymbols = originalSymbols.Where(
-                    s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter
-                )
+                s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter
+            )
                 .OrderBy(s => s.Name)
                 .Select(s => s)
                 .ToList();
@@ -311,7 +311,8 @@ class Test
             var mtsym20_3 = mem20_2.Parameters[1].Type;
 
             // ====================
-            var typeTest = comp40.SourceModule.GlobalNamespace.GetTypeMembers("Test")
+            var typeTest = comp40.SourceModule.GlobalNamespace
+                .GetTypeMembers("Test")
                 .FirstOrDefault();
             var mem40 = typeTest.GetMembers("Main").Single() as IMethodSymbol;
             var list = GetBlockSyntaxList(mem40);
@@ -417,8 +418,8 @@ class Test
                 SymbolCategory.NonTypeMember | SymbolCategory.Parameter
             );
             var originalSymbols = originals.Where(
-                    s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter
-                )
+                s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter
+            )
                 .OrderBy(s => s.Name)
                 .ToList();
 
@@ -533,8 +534,8 @@ class Test
                 SymbolCategory.NonTypeMember | SymbolCategory.Parameter
             );
             var originalSymbols = originals.Where(
-                    s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter
-                )
+                s => !s.IsAccessor() && s.Kind != SymbolKind.Parameter
+            )
                 .OrderBy(s => s.Name)
                 .ToList();
 

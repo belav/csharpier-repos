@@ -18,33 +18,32 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             // Arrange
             MyModel model = new MyModel();
-            ModelMetadata modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                () => model,
-                typeof(MyModel)
-            );
+            ModelMetadata modelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(() => model, typeof(MyModel));
             ComplexModelDto dto = new ComplexModelDto(modelMetadata, modelMetadata.Properties);
             Mock<IModelBinder> mockStringBinder = new Mock<IModelBinder>();
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             Mock<IModelBinder> mockDateTimeBinder = new Mock<IModelBinder>();
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.ReplaceRange(
-                typeof(ModelBinderProvider),
-                new ModelBinderProvider[]
-                {
-                    new SimpleModelBinderProvider(typeof(string), mockStringBinder.Object)
+            context.ControllerContext.Configuration.Services
+                .ReplaceRange(
+                    typeof(ModelBinderProvider),
+                    new ModelBinderProvider[]
                     {
-                        SuppressPrefixCheck = true
-                    },
-                    new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
-                    {
-                        SuppressPrefixCheck = true
-                    },
-                    new SimpleModelBinderProvider(typeof(DateTime), mockDateTimeBinder.Object)
-                    {
-                        SuppressPrefixCheck = true
+                        new SimpleModelBinderProvider(typeof(string), mockStringBinder.Object)
+                        {
+                            SuppressPrefixCheck = true
+                        },
+                        new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+                        {
+                            SuppressPrefixCheck = true
+                        },
+                        new SimpleModelBinderProvider(typeof(DateTime), mockDateTimeBinder.Object)
+                        {
+                            SuppressPrefixCheck = true
+                        }
                     }
-                }
-            );
+                );
 
             mockStringBinder.Setup(b => b.BindModel(context, It.IsAny<ModelBindingContext>()))
                 .Returns(
@@ -60,20 +59,19 @@ namespace System.Web.Http.ModelBinding.Binders
                         return true;
                     }
                 );
-            mockIntBinder.Setup(b => b.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns(
-                    (HttpActionContext ec, ModelBindingContext mbc) =>
-                    {
-                        Assert.Equal(typeof(int), mbc.ModelType);
-                        Assert.Equal("theModel.IntProperty", mbc.ModelName);
-                        mbc.ValidationNode = new ModelValidationNode(
-                            mbc.ModelMetadata,
-                            "theModel.IntProperty"
-                        );
-                        mbc.Model = 42;
-                        return true;
-                    }
-                );
+            mockIntBinder.Setup(b => b.BindModel(context, It.IsAny<ModelBindingContext>())).Returns(
+                (HttpActionContext ec, ModelBindingContext mbc) =>
+                {
+                    Assert.Equal(typeof(int), mbc.ModelType);
+                    Assert.Equal("theModel.IntProperty", mbc.ModelName);
+                    mbc.ValidationNode = new ModelValidationNode(
+                        mbc.ModelMetadata,
+                        "theModel.IntProperty"
+                    );
+                    mbc.Model = 42;
+                    return true;
+                }
+            );
             mockDateTimeBinder.Setup(b => b.BindModel(context, It.IsAny<ModelBindingContext>()))
                 .Returns(
                     (HttpActionContext ec, ModelBindingContext mbc) =>
@@ -85,10 +83,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 );
             ModelBindingContext parentBindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => dto,
-                    typeof(ComplexModelDto)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => dto, typeof(ComplexModelDto)),
                 ModelName = "theModel",
             };
             ComplexModelDtoModelBinder binder = new ComplexModelDtoModelBinder();
@@ -113,9 +109,10 @@ namespace System.Web.Http.ModelBinding.Binders
             Assert.Equal("theModel.IntProperty", intDtoResult.ValidationNode.ModelStateKey);
 
             // Bind failed, so DateTime won't even be in the DTO dictionary
-            bool containsMissingKey = dto.Results.ContainsKey(
-                dto.PropertyMetadata.Where(m => m.ModelType == typeof(DateTime)).First()
-            );
+            bool containsMissingKey = dto.Results
+                .ContainsKey(
+                    dto.PropertyMetadata.Where(m => m.ModelType == typeof(DateTime)).First()
+                );
             Assert.False(containsMissingKey);
         }
 

@@ -97,9 +97,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 try
                 {
                     var diagnostics = await executor.ComputeDiagnosticsAsync(
-                            stateSet.Analyzer,
-                            cancellationToken
-                        )
+                        stateSet.Analyzer,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     // this is no-op in product. only run in test environment
@@ -114,9 +114,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     );
 
                     var version = await GetDiagnosticVersionAsync(
-                            document.Project,
-                            cancellationToken
-                        )
+                        document.Project,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     var state = stateSet.GetOrCreateActiveFileState(document.Id);
                     var existingData = state.GetAnalysisData(kind);
@@ -164,12 +164,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     var version = await GetDiagnosticVersionAsync(project, cancellationToken)
                         .ConfigureAwait(false);
                     var existingData = await ProjectAnalysisData.CreateAsync(
-                            PersistentStorageService,
-                            project,
-                            stateSets,
-                            avoidLoadingData,
-                            cancellationToken
-                        )
+                        PersistentStorageService,
+                        project,
+                        stateSets,
+                        avoidLoadingData,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     // We can't return here if we have open file only analyzers since saved data for open file only analyzer
@@ -203,23 +203,23 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     }
 
                     var result = await ComputeDiagnosticsAsync(
-                            compilationWithAnalyzers,
-                            project,
-                            stateSets,
-                            forceAnalyzerRun,
-                            existingData.Result,
-                            cancellationToken
-                        )
+                        compilationWithAnalyzers,
+                        project,
+                        stateSets,
+                        forceAnalyzerRun,
+                        existingData.Result,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     // If project is not loaded successfully, get rid of any semantic errors from compiler analyzer.
                     // Note: In the past when project was not loaded successfully we did not run any analyzers on the project.
                     // Now we run analyzers but filter out some information. So on such projects, there will be some perf degradation.
                     result = await RemoveCompilerSemanticErrorsIfProjectNotLoadedAsync(
-                            result,
-                            project,
-                            cancellationToken
-                        )
+                        result,
+                        project,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return new ProjectAnalysisData(
@@ -268,17 +268,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         {
             // see whether solution is loaded successfully
             var projectLoadedSuccessfully = await project.HasSuccessfullyLoadedAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (projectLoadedSuccessfully)
             {
                 return result;
             }
 
-            var compilerAnalyzer = project.Solution.State.Analyzers.GetCompilerDiagnosticAnalyzer(
-                project.Language
-            );
+            var compilerAnalyzer = project.Solution.State.Analyzers
+                .GetCompilerDiagnosticAnalyzer(project.Language);
             if (compilerAnalyzer == null)
             {
                 // this language doesn't support compiler analyzer
@@ -327,13 +326,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 {
                     // calculate regular diagnostic analyzers diagnostics
                     var resultMap = await _diagnosticAnalyzerRunner.AnalyzeProjectAsync(
-                            project,
-                            compilationWithAnalyzers,
-                            forcedAnalysis,
-                            logPerformanceInfo: true,
-                            getTelemetryInfo: true,
-                            cancellationToken
-                        )
+                        project,
+                        compilationWithAnalyzers,
+                        forcedAnalysis,
+                        logPerformanceInfo: true,
+                        getTelemetryInfo: true,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     result = resultMap.AnalysisResult;
@@ -344,12 +343,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 // check whether there is IDE specific project diagnostic analyzer
                 return await MergeProjectDiagnosticAnalyzerDiagnosticsAsync(
-                        project,
-                        ideAnalyzers,
-                        compilationWithAnalyzers?.Compilation,
-                        result,
-                        cancellationToken
-                    )
+                    project,
+                    ideAnalyzers,
+                    compilationWithAnalyzers?.Compilation,
+                    result,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e)
@@ -401,32 +400,32 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         (analyzersToRun.Length == 0)
                             ? null
                             : await AnalyzerHelper.CreateCompilationWithAnalyzersAsync(
-                                      project,
-                                      analyzersToRun,
-                                      compilationWithAnalyzers.AnalysisOptions.ReportSuppressedDiagnostics,
-                                      cancellationToken
-                                  )
+                                  project,
+                                  analyzersToRun,
+                                  compilationWithAnalyzers.AnalysisOptions.ReportSuppressedDiagnostics,
+                                  cancellationToken
+                              )
                                   .ConfigureAwait(false);
 
                     var result = await ComputeDiagnosticsAsync(
-                            compilationWithReducedAnalyzers,
-                            project,
-                            ideAnalyzers,
-                            forcedAnalysis,
-                            cancellationToken
-                        )
+                        compilationWithReducedAnalyzers,
+                        project,
+                        ideAnalyzers,
+                        forcedAnalysis,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     return MergeExistingDiagnostics(version, existing, result);
                 }
 
                 // we couldn't reduce the set.
                 return await ComputeDiagnosticsAsync(
-                        compilationWithAnalyzers,
-                        project,
-                        ideAnalyzers,
-                        forcedAnalysis,
-                        cancellationToken
-                    )
+                    compilationWithAnalyzers,
+                    project,
+                    ideAnalyzers,
+                    forcedAnalysis,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e)
@@ -521,10 +520,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     .ConfigureAwait(false);
 
                 var (fileLoadAnalysisResult, failedDocuments) = await GetDocumentLoadFailuresAsync(
-                        project,
-                        version,
-                        cancellationToken
-                    )
+                    project,
+                    version,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 result = result.SetItem(FileContentLoadAnalyzer.Instance, fileLoadAnalysisResult);
 
@@ -547,23 +546,23 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                                         builder.AddSyntaxDiagnostics(
                                             tree,
                                             await AnalyzerHelper.ComputeDocumentDiagnosticAnalyzerDiagnosticsAsync(
-                                                    documentAnalyzer,
-                                                    document,
-                                                    AnalysisKind.Syntax,
-                                                    compilation,
-                                                    cancellationToken
-                                                )
+                                                documentAnalyzer,
+                                                document,
+                                                AnalysisKind.Syntax,
+                                                compilation,
+                                                cancellationToken
+                                            )
                                                 .ConfigureAwait(false)
                                         );
                                         builder.AddSemanticDiagnostics(
                                             tree,
                                             await AnalyzerHelper.ComputeDocumentDiagnosticAnalyzerDiagnosticsAsync(
-                                                    documentAnalyzer,
-                                                    document,
-                                                    AnalysisKind.Semantic,
-                                                    compilation,
-                                                    cancellationToken
-                                                )
+                                                documentAnalyzer,
+                                                document,
+                                                AnalysisKind.Semantic,
+                                                compilation,
+                                                cancellationToken
+                                            )
                                                 .ConfigureAwait(false)
                                         );
                                     }
@@ -572,23 +571,23 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                                         builder.AddExternalSyntaxDiagnostics(
                                             document.Id,
                                             await AnalyzerHelper.ComputeDocumentDiagnosticAnalyzerDiagnosticsAsync(
-                                                    documentAnalyzer,
-                                                    document,
-                                                    AnalysisKind.Syntax,
-                                                    compilation,
-                                                    cancellationToken
-                                                )
+                                                documentAnalyzer,
+                                                document,
+                                                AnalysisKind.Syntax,
+                                                compilation,
+                                                cancellationToken
+                                            )
                                                 .ConfigureAwait(false)
                                         );
                                         builder.AddExternalSemanticDiagnostics(
                                             document.Id,
                                             await AnalyzerHelper.ComputeDocumentDiagnosticAnalyzerDiagnosticsAsync(
-                                                    documentAnalyzer,
-                                                    document,
-                                                    AnalysisKind.Semantic,
-                                                    compilation,
-                                                    cancellationToken
-                                                )
+                                                documentAnalyzer,
+                                                document,
+                                                AnalysisKind.Semantic,
+                                                compilation,
+                                                cancellationToken
+                                            )
                                                 .ConfigureAwait(false)
                                         );
                                     }
@@ -599,11 +598,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         case ProjectDiagnosticAnalyzer projectAnalyzer:
                             builder.AddCompilationDiagnostics(
                                 await AnalyzerHelper.ComputeProjectDiagnosticAnalyzerDiagnosticsAsync(
-                                        projectAnalyzer,
-                                        project,
-                                        compilation,
-                                        cancellationToken
-                                    )
+                                    projectAnalyzer,
+                                    project,
+                                    compilation,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false)
                             );
                             break;
@@ -641,7 +640,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             foreach (var document in project.Documents)
             {
-                var loadDiagnostic = await document.State.GetLoadDiagnosticAsync(cancellationToken)
+                var loadDiagnostic = await document.State
+                    .GetLoadDiagnosticAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (loadDiagnostic != null)
                 {

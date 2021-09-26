@@ -98,11 +98,11 @@ User-Agent: Testing application
                     try
                     {
                         await Stream.AuthenticateAsClientAsync(
-                                _options.ServerName,
-                                clientCerts,
-                                _options.AllowedProtocols,
-                                checkCertificateRevocation: false
-                            )
+                            _options.ServerName,
+                            clientCerts,
+                            _options.AllowedProtocols,
+                            checkCertificateRevocation: false
+                        )
                             .ConfigureAwait(false);
                     }
                     catch (Exception ex)
@@ -189,10 +189,8 @@ User-Agent: Testing application
             string requestString = null;
             if (read == null)
             {
-                requestString = string.Format(
-                    Options.DefaultRequestStringTemplate,
-                    _options.ServerName
-                );
+                requestString = string
+                    .Format(Options.DefaultRequestStringTemplate, _options.ServerName);
             }
 
             _requestCount++;

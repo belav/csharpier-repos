@@ -20,8 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var client = Fixture.WithWebHostBuilder(
-                    whb => whb.UseStartup<RazorPagesWebSite.StartupWithClientValidationDisabled>()
-                )
+                whb => whb.UseStartup<RazorPagesWebSite.StartupWithClientValidationDisabled>()
+            )
                 .CreateClient();
 
             // Act

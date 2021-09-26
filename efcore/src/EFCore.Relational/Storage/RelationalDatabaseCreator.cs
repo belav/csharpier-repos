@@ -123,10 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     to incrementally update the schema. It is assumed that none of the tables exist in the database.
         /// </summary>
         public virtual void CreateTables() =>
-            Dependencies.MigrationCommandExecutor.ExecuteNonQuery(
-                GetCreateTablesCommands(),
-                Dependencies.Connection
-            );
+            Dependencies.MigrationCommandExecutor
+                .ExecuteNonQuery(GetCreateTablesCommands(), Dependencies.Connection);
 
         /// <summary>
         ///     Asynchronously creates all tables for the current model in the database. No attempt is made
@@ -138,11 +136,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </returns>
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public virtual Task CreateTablesAsync(CancellationToken cancellationToken = default) =>
-            Dependencies.MigrationCommandExecutor.ExecuteNonQueryAsync(
-                GetCreateTablesCommands(),
-                Dependencies.Connection,
-                cancellationToken
-            );
+            Dependencies.MigrationCommandExecutor
+                .ExecuteNonQueryAsync(
+                    GetCreateTablesCommands(),
+                    Dependencies.Connection,
+                    cancellationToken
+                );
 
         /// <summary>
         ///     Gets the commands that will create all tables from the model.
@@ -154,11 +153,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         )
         {
             var model = Dependencies.CurrentContext.Context.GetService<IDesignTimeModel>().Model;
-            return Dependencies.MigrationsSqlGenerator.Generate(
-                Dependencies.ModelDiffer.GetDifferences(null, model.GetRelationalModel()),
-                model,
-                options
-            );
+            return Dependencies.MigrationsSqlGenerator
+                .Generate(
+                    Dependencies.ModelDiffer.GetDifferences(null, model.GetRelationalModel()),
+                    model,
+                    options
+                );
         }
 
         /// <summary>

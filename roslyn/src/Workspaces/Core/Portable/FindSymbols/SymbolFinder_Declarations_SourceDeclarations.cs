@@ -53,12 +53,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 var declarations =
                     await DeclarationFinder.FindSourceDeclarationsWithNormalQueryAsync(
-                            solution,
-                            name,
-                            ignoreCase,
-                            filter,
-                            cancellationToken
-                        )
+                        solution,
+                        name,
+                        ignoreCase,
+                        filter,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 return declarations;
             }
@@ -101,12 +101,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 var declarations =
                     await DeclarationFinder.FindSourceDeclarationsWithNormalQueryAsync(
-                            project,
-                            name,
-                            ignoreCase,
-                            filter,
-                            cancellationToken
-                        )
+                        project,
+                        name,
+                        ignoreCase,
+                        filter,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 return declarations;
@@ -156,11 +156,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             )
             {
                 var declarations = await DeclarationFinder.FindSourceDeclarationsWithPatternAsync(
-                        solution,
-                        pattern,
-                        filter,
-                        cancellationToken
-                    )
+                    solution,
+                    pattern,
+                    filter,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return declarations;
             }
@@ -207,11 +207,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             )
             {
                 var declarations = await DeclarationFinder.FindSourceDeclarationsWithPatternAsync(
-                        project,
-                        pattern,
-                        filter,
-                        cancellationToken
-                    )
+                    project,
+                    pattern,
+                    filter,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return declarations;

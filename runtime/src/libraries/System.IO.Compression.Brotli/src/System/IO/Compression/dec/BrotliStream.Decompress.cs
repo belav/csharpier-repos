@@ -235,13 +235,13 @@ namespace System.IO.Compression
                             && (
                                 (
                                     numRead = await _stream.ReadAsync(
-                                            new Memory<byte>(
-                                                _buffer,
-                                                _bufferCount,
-                                                _buffer.Length - _bufferCount
-                                            ),
-                                            cancellationToken
-                                        )
+                                        new Memory<byte>(
+                                            _buffer,
+                                            _bufferCount,
+                                            _buffer.Length - _bufferCount
+                                        ),
+                                        cancellationToken
+                                    )
                                         .ConfigureAwait(false)
                                 ) > 0
                             )

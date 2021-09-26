@@ -47,13 +47,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             var progressCollector = new StreamingProgressCollector();
             await FindReferencesAsync(
-                    symbol,
-                    solution,
-                    progressCollector,
-                    documents: null,
-                    options,
-                    cancellationToken
-                )
+                symbol,
+                solution,
+                progressCollector,
+                documents: null,
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return progressCollector.GetReferencedSymbols();
         }
@@ -99,13 +99,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         )
         {
             return await FindReferencesAsync(
-                    symbol,
-                    solution,
-                    progress,
-                    documents,
-                    FindReferencesSearchOptions.Default,
-                    cancellationToken
-                )
+                symbol,
+                solution,
+                progress,
+                documents,
+                FindReferencesSearchOptions.Default,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -123,13 +123,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 new StreamingFindReferencesProgressAdapter(progress)
             );
             await FindReferencesAsync(
-                    symbol,
-                    solution,
-                    streamingProgress,
-                    documents,
-                    options,
-                    cancellationToken
-                )
+                symbol,
+                solution,
+                streamingProgress,
+                documents,
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return streamingProgress.GetReferencedSymbols();
         }

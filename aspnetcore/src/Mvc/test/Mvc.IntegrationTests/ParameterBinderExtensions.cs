@@ -21,12 +21,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             ControllerContext context
         )
         {
-            var optionsAccessor = context.HttpContext.RequestServices.GetService<
-                IOptions<MvcOptions>
-            >();
+            var optionsAccessor = context.HttpContext.RequestServices
+                .GetService<IOptions<MvcOptions>>();
             Assert.NotNull(optionsAccessor?.Value); // Guard
-            var modelMetadataProvider =
-                context.HttpContext.RequestServices.GetService<IModelMetadataProvider>();
+            var modelMetadataProvider = context.HttpContext.RequestServices
+                .GetService<IModelMetadataProvider>();
             Assert.NotNull(modelMetadataProvider); // Guard
 
             // Imitate a bit of ControllerBinderDelegateProvider and PageBinderFactory

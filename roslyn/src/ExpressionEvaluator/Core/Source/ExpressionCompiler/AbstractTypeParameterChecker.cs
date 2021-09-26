@@ -35,11 +35,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             {
                 Debug.Assert(
                     false,
-                    string.Format(
-                        "Unexpected type parameter {0} owned by {1}",
-                        symbol,
-                        symbol.ContainingSymbol
-                    )
+                    string
+                        .Format(
+                            "Unexpected type parameter {0} owned by {1}",
+                            symbol,
+                            symbol.ContainingSymbol
+                        )
                 );
             }
 

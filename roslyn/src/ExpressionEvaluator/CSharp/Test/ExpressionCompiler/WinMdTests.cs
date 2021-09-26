@@ -65,9 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var testData = new CompilationTestData();
                     context.CompileExpression("(p == null) ? f : null", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.1
@@ -77,7 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0005:  ldarg.0
   IL_0006:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -122,15 +121,14 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldc.i4.0
   IL_0001:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -142,12 +140,12 @@ class C
                 ImmutableArray.Create(
                     MscorlibRef,
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_3(TestResources.ExpressionCompiler.Windows)
-                        )
+                        ToVersion1_3(TestResources.ExpressionCompiler.Windows)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_3(TestResources.ExpressionCompiler.LibraryA)
-                        )
+                        ToVersion1_3(TestResources.ExpressionCompiler.LibraryA)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(TestResources.ExpressionCompiler.LibraryB)
                         .GetReference()
@@ -155,16 +153,16 @@ class C
                 ImmutableArray.Create(
                     MscorlibRef,
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_3(TestResources.ExpressionCompiler.WindowsData)
-                        )
+                        ToVersion1_3(TestResources.ExpressionCompiler.WindowsData)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_3(TestResources.ExpressionCompiler.WindowsStorage)
-                        )
+                        ToVersion1_3(TestResources.ExpressionCompiler.WindowsStorage)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_3(TestResources.ExpressionCompiler.LibraryA)
-                        )
+                        ToVersion1_3(TestResources.ExpressionCompiler.LibraryA)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(TestResources.ExpressionCompiler.LibraryB)
                         .GetReference()
@@ -180,12 +178,12 @@ class C
                 ImmutableArray.Create(
                     MscorlibRef,
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_3(TestResources.ExpressionCompiler.Windows)
-                        )
+                        ToVersion1_3(TestResources.ExpressionCompiler.Windows)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_3(TestResources.ExpressionCompiler.LibraryA)
-                        )
+                        ToVersion1_3(TestResources.ExpressionCompiler.LibraryA)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(TestResources.ExpressionCompiler.LibraryB)
                         .GetReference()
@@ -193,16 +191,16 @@ class C
                 ImmutableArray.Create(
                     MscorlibRef,
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_4(TestResources.ExpressionCompiler.WindowsData)
-                        )
+                        ToVersion1_4(TestResources.ExpressionCompiler.WindowsData)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_4(TestResources.ExpressionCompiler.WindowsStorage)
-                        )
+                        ToVersion1_4(TestResources.ExpressionCompiler.WindowsStorage)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_3(TestResources.ExpressionCompiler.LibraryA)
-                        )
+                        ToVersion1_3(TestResources.ExpressionCompiler.LibraryA)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(TestResources.ExpressionCompiler.LibraryB)
                         .GetReference()
@@ -219,16 +217,16 @@ class C
                 ImmutableArray.Create(
                     MscorlibRef,
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_4(TestResources.ExpressionCompiler.WindowsData)
-                        )
+                        ToVersion1_4(TestResources.ExpressionCompiler.WindowsData)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_4(TestResources.ExpressionCompiler.WindowsStorage)
-                        )
+                        ToVersion1_4(TestResources.ExpressionCompiler.WindowsStorage)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_4(TestResources.ExpressionCompiler.LibraryA)
-                        )
+                        ToVersion1_4(TestResources.ExpressionCompiler.LibraryA)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(TestResources.ExpressionCompiler.LibraryB)
                         .GetReference()
@@ -236,12 +234,12 @@ class C
                 ImmutableArray.Create(
                     MscorlibRef,
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_4(TestResources.ExpressionCompiler.Windows)
-                        )
+                        ToVersion1_4(TestResources.ExpressionCompiler.Windows)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(
-                            ToVersion1_4(TestResources.ExpressionCompiler.LibraryA)
-                        )
+                        ToVersion1_4(TestResources.ExpressionCompiler.LibraryA)
+                    )
                         .GetReference(),
                     AssemblyMetadata.CreateFromImage(TestResources.ExpressionCompiler.LibraryB)
                         .GetReference()
@@ -282,9 +280,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       17 (0x11)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -302,7 +299,7 @@ class C
   IL_000f:  ldarg.3
   IL_0010:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     var result = context.CompileExpression(
                         "default(Windows.Storage.StorageFolder)",
@@ -378,12 +375,13 @@ class C
             var compilation = CreateEmptyCompilation(source, WinRtRefs, TestOptions.DebugDll);
             WithRuntimeInstance(
                 compilation,
-                new[] { MscorlibRef }.Concat(
-                    ExpressionCompilerTestHelpers.GetRuntimeWinMds(
-                        "Windows.Storage",
-                        "Windows.Foundation.Collections"
-                    )
-                ),
+                new[] { MscorlibRef }
+                    .Concat(
+                        ExpressionCompilerTestHelpers.GetRuntimeWinMds(
+                            "Windows.Storage",
+                            "Windows.Foundation.Collections"
+                        )
+                    ),
                 runtime =>
                 {
                     var context = CreateMethodContext(runtime, "C.M");
@@ -408,9 +406,8 @@ class C
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       55 (0x37)
   .maxstack  2
   IL_0000:  ldstr      ""s""
@@ -428,7 +425,7 @@ class C
   IL_0031:  box        ""long""
   IL_0036:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -447,13 +444,14 @@ class C
             var compilation = CreateEmptyCompilation(source, WinRtRefs, TestOptions.DebugDll);
             WithRuntimeInstance(
                 compilation,
-                new[] { MscorlibRef }.Concat(
-                    ExpressionCompilerTestHelpers.GetRuntimeWinMds(
-                        "Windows.Foundation",
-                        "Windows.UI",
-                        "Windows.UI.Xaml"
-                    )
-                ),
+                new[] { MscorlibRef }
+                    .Concat(
+                        ExpressionCompilerTestHelpers.GetRuntimeWinMds(
+                            "Windows.Foundation",
+                            "Windows.UI",
+                            "Windows.UI.Xaml"
+                        )
+                    ),
                 runtime =>
                 {
                     var context = CreateMethodContext(runtime, "C.M");
@@ -473,8 +471,8 @@ class C
                         testData
                     );
                     var expectedAssemblyIdentity = WinRtRefs.Single(
-                            r => r.Display == "System.Runtime.WindowsRuntime.dll"
-                        )
+                        r => r.Display == "System.Runtime.WindowsRuntime.dll"
+                    )
                         .GetAssemblyIdentity();
                     Assert.Equal(expectedAssemblyIdentity, missingAssemblyIdentities.Single());
                 }
@@ -495,9 +493,13 @@ class C
             var compilation = CreateEmptyCompilation(source, WinRtRefs, TestOptions.DebugDll);
             WithRuntimeInstance(
                 compilation,
-                new[] { MscorlibRef }.Concat(
-                    ExpressionCompilerTestHelpers.GetRuntimeWinMds("Windows.UI", "Windows.UI.Xaml")
-                ),
+                new[] { MscorlibRef }
+                    .Concat(
+                        ExpressionCompilerTestHelpers.GetRuntimeWinMds(
+                            "Windows.UI",
+                            "Windows.UI.Xaml"
+                        )
+                    ),
                 runtime =>
                 {
                     string errorMessage;
@@ -520,16 +522,15 @@ class C
                         out testData
                     );
                     Assert.Null(errorMessage);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  callvirt   ""Windows.UI.Core.CoreDispatcher Windows.UI.Xaml.DependencyObject.Dispatcher.get""
   IL_0006:  ret
 }"
-                        );
+                    );
                 }
             );
         }

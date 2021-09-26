@@ -41,10 +41,8 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticGenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<int>.StaticGenericMethod<int[]>(
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<int>
+                            .StaticGenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[]))
                     )
                     + "'"
             );
@@ -52,10 +50,11 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<int>.StaticGenericMethod<string[]>(
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<int>
+                    .StaticGenericMethod<string[]>(
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -63,10 +62,11 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<int>.StaticGenericMethod<string[]>(
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<int>
+                            .StaticGenericMethod<string[]>(
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
@@ -92,10 +92,8 @@ internal class M
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<string>.StaticGenericMethod<int[]>(
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<string>
+                    .StaticGenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -103,10 +101,8 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<string>.StaticGenericMethod<int[]>(
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<string>
+                            .StaticGenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[]))
                     )
                     + "'"
             );
@@ -114,10 +110,11 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<string>.StaticGenericMethod<string[]>(
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<string>
+                    .StaticGenericMethod<string[]>(
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -125,10 +122,11 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<string>.StaticGenericMethod<string[]>(
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<string>
+                            .StaticGenericMethod<string[]>(
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
@@ -154,10 +152,8 @@ internal class M
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<int[]>.StaticGenericMethod<int[]>(
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<int[]>
+                    .StaticGenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -165,10 +161,8 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<int[]>.StaticGenericMethod<int[]>(
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<int[]>
+                            .StaticGenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[]))
                     )
                     + "'"
             );
@@ -176,10 +170,11 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<int[]>.StaticGenericMethod<string[]>(
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<int[]>
+                    .StaticGenericMethod<string[]>(
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -187,10 +182,11 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<int[]>.StaticGenericMethod<string[]>(
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<int[]>
+                            .StaticGenericMethod<string[]>(
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
@@ -216,10 +212,8 @@ internal class M
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<string[]>.StaticGenericMethod<int[]>(
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<string[]>
+                    .StaticGenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -227,10 +221,8 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethod<int[]>(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<string[]>.StaticGenericMethod<int[]>(
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<string[]>
+                            .StaticGenericMethod<int[]>(new int[] { 1, 2, 3 }, typeof(int[]))
                     )
                     + "'"
             );
@@ -238,10 +230,11 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<string[]>.StaticGenericMethod<string[]>(
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<string[]>
+                    .StaticGenericMethod<string[]>(
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -249,10 +242,11 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethod<string[]>(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<string[]>.StaticGenericMethod<string[]>(
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<string[]>
+                            .StaticGenericMethod<string[]>(
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
@@ -278,10 +272,8 @@ internal class M
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<int>.StaticNonGenericMethodIntArray(
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<int>
+                    .StaticNonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -289,10 +281,8 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<int>.StaticNonGenericMethodIntArray(
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<int>
+                            .StaticNonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[]))
                     )
                     + "'"
             );
@@ -300,10 +290,11 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<int>.StaticNonGenericMethodStringArray(
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<int>
+                    .StaticNonGenericMethodStringArray(
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -311,10 +302,11 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<int>.StaticNonGenericMethodStringArray(
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<int>
+                            .StaticNonGenericMethodStringArray(
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
@@ -340,10 +332,8 @@ internal class M
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<string>.StaticNonGenericMethodIntArray(
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<string>
+                    .StaticNonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -351,10 +341,8 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<string>.StaticNonGenericMethodIntArray(
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<string>
+                            .StaticNonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[]))
                     )
                     + "'"
             );
@@ -362,10 +350,11 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<string>.StaticNonGenericMethodStringArray(
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<string>
+                    .StaticNonGenericMethodStringArray(
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -373,10 +362,11 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<string>.StaticNonGenericMethodStringArray(
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<string>
+                            .StaticNonGenericMethodStringArray(
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
@@ -402,10 +392,8 @@ internal class M
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<int[]>.StaticNonGenericMethodIntArray(
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<int[]>
+                    .StaticNonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -413,10 +401,8 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<int[]>.StaticNonGenericMethodIntArray(
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<int[]>
+                            .StaticNonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[]))
                     )
                     + "'"
             );
@@ -424,10 +410,11 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<int[]>.StaticNonGenericMethodStringArray(
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<int[]>
+                    .StaticNonGenericMethodStringArray(
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -435,10 +422,11 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<int[]>.StaticNonGenericMethodStringArray(
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<int[]>
+                            .StaticNonGenericMethodStringArray(
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
@@ -464,10 +452,8 @@ internal class M
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<string[]>.StaticNonGenericMethodIntArray(
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<string[]>
+                    .StaticNonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[])),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -475,10 +461,8 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodIntArray(new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<string[]>.StaticNonGenericMethodIntArray(
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<string[]>
+                            .StaticNonGenericMethodIntArray(new int[] { 1, 2, 3 }, typeof(int[]))
                     )
                     + "'"
             );
@@ -486,10 +470,11 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<string[]>.StaticNonGenericMethodStringArray(
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<string[]>
+                    .StaticNonGenericMethodStringArray(
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -497,10 +482,11 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodStringArray(new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<string[]>.StaticNonGenericMethodStringArray(
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<string[]>
+                            .StaticNonGenericMethodStringArray(
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
@@ -510,41 +496,33 @@ internal class M
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticGenericMethodUsesClassTypeParam<int>(27, 1, typeof(int)) to be 1, but found '"
-                    + GenericClass<int>.StaticGenericMethodUsesClassTypeParam<int>(
-                        27,
-                        1,
-                        typeof(int)
-                    )
+                    + GenericClass<int>
+                        .StaticGenericMethodUsesClassTypeParam<int>(27, 1, typeof(int))
                     + "'"
             );
         }
 
         if (
-            GenericClass<int>.StaticGenericMethodUsesClassTypeParam<string>(
-                27,
-                "aaaa",
-                typeof(string)
-            ) != "aaaa"
+            GenericClass<int>
+                .StaticGenericMethodUsesClassTypeParam<string>(27, "aaaa", typeof(string)) != "aaaa"
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticGenericMethodUsesClassTypeParam<string>(27, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
-                    + GenericClass<int>.StaticGenericMethodUsesClassTypeParam<string>(
-                        27,
-                        "aaaa",
-                        typeof(string)
-                    )
+                    + GenericClass<int>
+                        .StaticGenericMethodUsesClassTypeParam<string>(27, "aaaa", typeof(string))
                     + "'"
             );
         }
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<int>.StaticGenericMethodUsesClassTypeParam<int[]>(
-                    27,
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<int>
+                    .StaticGenericMethodUsesClassTypeParam<int[]>(
+                        27,
+                        new int[] { 1, 2, 3 },
+                        typeof(int[])
+                    ),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -552,11 +530,12 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticGenericMethodUsesClassTypeParam<int[]>(27, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<int>.StaticGenericMethodUsesClassTypeParam<int[]>(
-                            27,
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<int>
+                            .StaticGenericMethodUsesClassTypeParam<int[]>(
+                                27,
+                                new int[] { 1, 2, 3 },
+                                typeof(int[])
+                            )
                     )
                     + "'"
             );
@@ -564,11 +543,12 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<int>.StaticGenericMethodUsesClassTypeParam<string[]>(
-                    27,
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<int>
+                    .StaticGenericMethodUsesClassTypeParam<string[]>(
+                        27,
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -576,11 +556,12 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticGenericMethodUsesClassTypeParam<string[]>(27, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<int>.StaticGenericMethodUsesClassTypeParam<string[]>(
-                            27,
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<int>
+                            .StaticGenericMethodUsesClassTypeParam<string[]>(
+                                27,
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
@@ -592,41 +573,33 @@ internal class M
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethodUsesClassTypeParam<int>(\"\", 1, typeof(int)) to be 1, but found '"
-                    + GenericClass<string>.StaticGenericMethodUsesClassTypeParam<int>(
-                        "",
-                        1,
-                        typeof(int)
-                    )
+                    + GenericClass<string>
+                        .StaticGenericMethodUsesClassTypeParam<int>("", 1, typeof(int))
                     + "'"
             );
         }
 
         if (
-            GenericClass<string>.StaticGenericMethodUsesClassTypeParam<string>(
-                "",
-                "aaaa",
-                typeof(string)
-            ) != "aaaa"
+            GenericClass<string>
+                .StaticGenericMethodUsesClassTypeParam<string>("", "aaaa", typeof(string)) != "aaaa"
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethodUsesClassTypeParam<string>(\"\", \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
-                    + GenericClass<string>.StaticGenericMethodUsesClassTypeParam<string>(
-                        "",
-                        "aaaa",
-                        typeof(string)
-                    )
+                    + GenericClass<string>
+                        .StaticGenericMethodUsesClassTypeParam<string>("", "aaaa", typeof(string))
                     + "'"
             );
         }
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<string>.StaticGenericMethodUsesClassTypeParam<int[]>(
-                    "",
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<string>
+                    .StaticGenericMethodUsesClassTypeParam<int[]>(
+                        "",
+                        new int[] { 1, 2, 3 },
+                        typeof(int[])
+                    ),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -634,11 +607,12 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethodUsesClassTypeParam<int[]>(\"\", new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<string>.StaticGenericMethodUsesClassTypeParam<int[]>(
-                            "",
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<string>
+                            .StaticGenericMethodUsesClassTypeParam<int[]>(
+                                "",
+                                new int[] { 1, 2, 3 },
+                                typeof(int[])
+                            )
                     )
                     + "'"
             );
@@ -646,11 +620,12 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<string>.StaticGenericMethodUsesClassTypeParam<string[]>(
-                    "",
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<string>
+                    .StaticGenericMethodUsesClassTypeParam<string[]>(
+                        "",
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -658,61 +633,56 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticGenericMethodUsesClassTypeParam<string[]>(\"\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<string>.StaticGenericMethodUsesClassTypeParam<string[]>(
-                            "",
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<string>
+                            .StaticGenericMethodUsesClassTypeParam<string[]>(
+                                "",
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
         }
 
         if (
-            GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<int>(
-                new int[0],
-                1,
-                typeof(int)
-            ) != 1
+            GenericClass<int[]>
+                .StaticGenericMethodUsesClassTypeParam<int>(new int[0], 1, typeof(int)) != 1
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<int>(new int[0], 1, typeof(int)) to be 1, but found '"
-                    + GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<int>(
-                        new int[0],
-                        1,
-                        typeof(int)
-                    )
+                    + GenericClass<int[]>
+                        .StaticGenericMethodUsesClassTypeParam<int>(new int[0], 1, typeof(int))
                     + "'"
             );
         }
 
         if (
-            GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<string>(
-                new int[0],
-                "aaaa",
-                typeof(string)
-            ) != "aaaa"
+            GenericClass<int[]>
+                .StaticGenericMethodUsesClassTypeParam<string>(new int[0], "aaaa", typeof(string))
+            != "aaaa"
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<string>(new int[0], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
-                    + GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<string>(
-                        new int[0],
-                        "aaaa",
-                        typeof(string)
-                    )
+                    + GenericClass<int[]>
+                        .StaticGenericMethodUsesClassTypeParam<string>(
+                            new int[0],
+                            "aaaa",
+                            typeof(string)
+                        )
                     + "'"
             );
         }
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<int[]>(
-                    new int[0],
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<int[]>
+                    .StaticGenericMethodUsesClassTypeParam<int[]>(
+                        new int[0],
+                        new int[] { 1, 2, 3 },
+                        typeof(int[])
+                    ),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -720,11 +690,12 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<int[]>(new int[0], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<int[]>(
-                            new int[0],
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<int[]>
+                            .StaticGenericMethodUsesClassTypeParam<int[]>(
+                                new int[0],
+                                new int[] { 1, 2, 3 },
+                                typeof(int[])
+                            )
                     )
                     + "'"
             );
@@ -732,11 +703,12 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<string[]>(
-                    new int[0],
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<int[]>
+                    .StaticGenericMethodUsesClassTypeParam<string[]>(
+                        new int[0],
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -744,61 +716,59 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<string[]>(new int[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<int[]>.StaticGenericMethodUsesClassTypeParam<string[]>(
-                            new int[0],
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<int[]>
+                            .StaticGenericMethodUsesClassTypeParam<string[]>(
+                                new int[0],
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
         }
 
         if (
-            GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<int>(
-                new string[0],
-                1,
-                typeof(int)
-            ) != 1
+            GenericClass<string[]>
+                .StaticGenericMethodUsesClassTypeParam<int>(new string[0], 1, typeof(int)) != 1
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<int>(new string[0], 1, typeof(int)) to be 1, but found '"
-                    + GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<int>(
-                        new string[0],
-                        1,
-                        typeof(int)
-                    )
+                    + GenericClass<string[]>
+                        .StaticGenericMethodUsesClassTypeParam<int>(new string[0], 1, typeof(int))
                     + "'"
             );
         }
 
         if (
-            GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<string>(
-                new string[0],
-                "aaaa",
-                typeof(string)
-            ) != "aaaa"
+            GenericClass<string[]>
+                .StaticGenericMethodUsesClassTypeParam<string>(
+                    new string[0],
+                    "aaaa",
+                    typeof(string)
+                ) != "aaaa"
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<string>(new string[0], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
-                    + GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<string>(
-                        new string[0],
-                        "aaaa",
-                        typeof(string)
-                    )
+                    + GenericClass<string[]>
+                        .StaticGenericMethodUsesClassTypeParam<string>(
+                            new string[0],
+                            "aaaa",
+                            typeof(string)
+                        )
                     + "'"
             );
         }
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<int[]>(
-                    new string[0],
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<string[]>
+                    .StaticGenericMethodUsesClassTypeParam<int[]>(
+                        new string[0],
+                        new int[] { 1, 2, 3 },
+                        typeof(int[])
+                    ),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -806,11 +776,12 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<int[]>(new string[0], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<int[]>(
-                            new string[0],
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<string[]>
+                            .StaticGenericMethodUsesClassTypeParam<int[]>(
+                                new string[0],
+                                new int[] { 1, 2, 3 },
+                                typeof(int[])
+                            )
                     )
                     + "'"
             );
@@ -818,11 +789,12 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<string[]>(
-                    new string[0],
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<string[]>
+                    .StaticGenericMethodUsesClassTypeParam<string[]>(
+                        new string[0],
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -830,61 +802,59 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<string[]>(new string[0], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<string[]>.StaticGenericMethodUsesClassTypeParam<string[]>(
-                            new string[0],
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<string[]>
+                            .StaticGenericMethodUsesClassTypeParam<string[]>(
+                                new string[0],
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
         }
 
         if (
-            GenericClass<int>.StaticNonGenericMethodIntUsesClassTypeParam(
-                Int32.MaxValue,
-                1,
-                typeof(int)
-            ) != 1
+            GenericClass<int>
+                .StaticNonGenericMethodIntUsesClassTypeParam(Int32.MaxValue, 1, typeof(int)) != 1
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodIntUsesClassTypeParam(Int32.MaxValue, 1, typeof(int)) to be 1, but found '"
-                    + GenericClass<int>.StaticNonGenericMethodIntUsesClassTypeParam(
-                        Int32.MaxValue,
-                        1,
-                        typeof(int)
-                    )
+                    + GenericClass<int>
+                        .StaticNonGenericMethodIntUsesClassTypeParam(Int32.MaxValue, 1, typeof(int))
                     + "'"
             );
         }
 
         if (
-            GenericClass<int>.StaticNonGenericMethodStringUsesClassTypeParam(
-                Int32.MaxValue,
-                "aaaa",
-                typeof(string)
-            ) != "aaaa"
+            GenericClass<int>
+                .StaticNonGenericMethodStringUsesClassTypeParam(
+                    Int32.MaxValue,
+                    "aaaa",
+                    typeof(string)
+                ) != "aaaa"
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodString(Int32.MaxValue, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
-                    + GenericClass<int>.StaticNonGenericMethodStringUsesClassTypeParam(
-                        Int32.MaxValue,
-                        "aaaa",
-                        typeof(string)
-                    )
+                    + GenericClass<int>
+                        .StaticNonGenericMethodStringUsesClassTypeParam(
+                            Int32.MaxValue,
+                            "aaaa",
+                            typeof(string)
+                        )
                     + "'"
             );
         }
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<int>.StaticNonGenericMethodIntArrayUsesClassTypeParam(
-                    Int32.MaxValue,
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<int>
+                    .StaticNonGenericMethodIntArrayUsesClassTypeParam(
+                        Int32.MaxValue,
+                        new int[] { 1, 2, 3 },
+                        typeof(int[])
+                    ),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -892,11 +862,12 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodIntArrayUsesClassTypeParam(Int32.MaxValue, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<int>.StaticNonGenericMethodIntArrayUsesClassTypeParam(
-                            Int32.MaxValue,
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<int>
+                            .StaticNonGenericMethodIntArrayUsesClassTypeParam(
+                                Int32.MaxValue,
+                                new int[] { 1, 2, 3 },
+                                typeof(int[])
+                            )
                     )
                     + "'"
             );
@@ -904,11 +875,12 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<int>.StaticNonGenericMethodStringArrayUsesClassTypeParam(
-                    Int32.MaxValue,
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<int>
+                    .StaticNonGenericMethodStringArrayUsesClassTypeParam(
+                        Int32.MaxValue,
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -916,61 +888,59 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int>.StaticNonGenericMethodStringArrayUsesClassTypeParam(Int32.MaxValue, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<int>.StaticNonGenericMethodStringArrayUsesClassTypeParam(
-                            Int32.MaxValue,
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<int>
+                            .StaticNonGenericMethodStringArrayUsesClassTypeParam(
+                                Int32.MaxValue,
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
         }
 
         if (
-            GenericClass<string>.StaticNonGenericMethodIntUsesClassTypeParam(
-                "wxyzabcdefgh",
-                1,
-                typeof(int)
-            ) != 1
+            GenericClass<string>
+                .StaticNonGenericMethodIntUsesClassTypeParam("wxyzabcdefgh", 1, typeof(int)) != 1
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodIntUsesClassTypeParam(\"wxyzabcdefgh\", 1, typeof(int)) to be 1, but found '"
-                    + GenericClass<string>.StaticNonGenericMethodIntUsesClassTypeParam(
-                        "wxyzabcdefgh",
-                        1,
-                        typeof(int)
-                    )
+                    + GenericClass<string>
+                        .StaticNonGenericMethodIntUsesClassTypeParam("wxyzabcdefgh", 1, typeof(int))
                     + "'"
             );
         }
 
         if (
-            GenericClass<string>.StaticNonGenericMethodStringUsesClassTypeParam(
-                "wxyzabcdefgh",
-                "aaaa",
-                typeof(string)
-            ) != "aaaa"
+            GenericClass<string>
+                .StaticNonGenericMethodStringUsesClassTypeParam(
+                    "wxyzabcdefgh",
+                    "aaaa",
+                    typeof(string)
+                ) != "aaaa"
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodString(\"wxyzabcdefgh\", \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
-                    + GenericClass<string>.StaticNonGenericMethodStringUsesClassTypeParam(
-                        "wxyzabcdefgh",
-                        "aaaa",
-                        typeof(string)
-                    )
+                    + GenericClass<string>
+                        .StaticNonGenericMethodStringUsesClassTypeParam(
+                            "wxyzabcdefgh",
+                            "aaaa",
+                            typeof(string)
+                        )
                     + "'"
             );
         }
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<string>.StaticNonGenericMethodIntArrayUsesClassTypeParam(
-                    "wxyzabcdefgh",
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<string>
+                    .StaticNonGenericMethodIntArrayUsesClassTypeParam(
+                        "wxyzabcdefgh",
+                        new int[] { 1, 2, 3 },
+                        typeof(int[])
+                    ),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -978,11 +948,12 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodIntArrayUsesClassTypeParam(\"wxyzabcdefgh\", new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<string>.StaticNonGenericMethodIntArrayUsesClassTypeParam(
-                            "wxyzabcdefgh",
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<string>
+                            .StaticNonGenericMethodIntArrayUsesClassTypeParam(
+                                "wxyzabcdefgh",
+                                new int[] { 1, 2, 3 },
+                                typeof(int[])
+                            )
                     )
                     + "'"
             );
@@ -990,11 +961,12 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<string>.StaticNonGenericMethodStringArrayUsesClassTypeParam(
-                    "wxyzabcdefgh",
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<string>
+                    .StaticNonGenericMethodStringArrayUsesClassTypeParam(
+                        "wxyzabcdefgh",
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -1002,61 +974,67 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string>.StaticNonGenericMethodStringArrayUsesClassTypeParam(\"wxyzabcdefgh\", new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<string>.StaticNonGenericMethodStringArrayUsesClassTypeParam(
-                            "wxyzabcdefgh",
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<string>
+                            .StaticNonGenericMethodStringArrayUsesClassTypeParam(
+                                "wxyzabcdefgh",
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
         }
 
         if (
-            GenericClass<int[]>.StaticNonGenericMethodIntUsesClassTypeParam(
-                new int[] { Int32.MaxValue, Int32.MinValue },
-                1,
-                typeof(int)
-            ) != 1
+            GenericClass<int[]>
+                .StaticNonGenericMethodIntUsesClassTypeParam(
+                    new int[] { Int32.MaxValue, Int32.MinValue },
+                    1,
+                    typeof(int)
+                ) != 1
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodIntUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, 1, typeof(int)) to be 1, but found '"
-                    + GenericClass<int[]>.StaticNonGenericMethodIntUsesClassTypeParam(
-                        new int[] { Int32.MaxValue, Int32.MinValue },
-                        1,
-                        typeof(int)
-                    )
+                    + GenericClass<int[]>
+                        .StaticNonGenericMethodIntUsesClassTypeParam(
+                            new int[] { Int32.MaxValue, Int32.MinValue },
+                            1,
+                            typeof(int)
+                        )
                     + "'"
             );
         }
 
         if (
-            GenericClass<int[]>.StaticNonGenericMethodStringUsesClassTypeParam(
-                new int[] { Int32.MaxValue, Int32.MinValue },
-                "aaaa",
-                typeof(string)
-            ) != "aaaa"
+            GenericClass<int[]>
+                .StaticNonGenericMethodStringUsesClassTypeParam(
+                    new int[] { Int32.MaxValue, Int32.MinValue },
+                    "aaaa",
+                    typeof(string)
+                ) != "aaaa"
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodString(new int[] {Int32.MaxValue, Int32.MinValue}, \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
-                    + GenericClass<int[]>.StaticNonGenericMethodStringUsesClassTypeParam(
-                        new int[] { Int32.MaxValue, Int32.MinValue },
-                        "aaaa",
-                        typeof(string)
-                    )
+                    + GenericClass<int[]>
+                        .StaticNonGenericMethodStringUsesClassTypeParam(
+                            new int[] { Int32.MaxValue, Int32.MinValue },
+                            "aaaa",
+                            typeof(string)
+                        )
                     + "'"
             );
         }
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<int[]>.StaticNonGenericMethodIntArrayUsesClassTypeParam(
-                    new int[] { Int32.MaxValue, Int32.MinValue },
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<int[]>
+                    .StaticNonGenericMethodIntArrayUsesClassTypeParam(
+                        new int[] { Int32.MaxValue, Int32.MinValue },
+                        new int[] { 1, 2, 3 },
+                        typeof(int[])
+                    ),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -1064,11 +1042,12 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodIntArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<int[]>.StaticNonGenericMethodIntArrayUsesClassTypeParam(
-                            new int[] { Int32.MaxValue, Int32.MinValue },
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<int[]>
+                            .StaticNonGenericMethodIntArrayUsesClassTypeParam(
+                                new int[] { Int32.MaxValue, Int32.MinValue },
+                                new int[] { 1, 2, 3 },
+                                typeof(int[])
+                            )
                     )
                     + "'"
             );
@@ -1076,11 +1055,12 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<int[]>.StaticNonGenericMethodStringArrayUsesClassTypeParam(
-                    new int[] { Int32.MaxValue, Int32.MinValue },
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<int[]>
+                    .StaticNonGenericMethodStringArrayUsesClassTypeParam(
+                        new int[] { Int32.MaxValue, Int32.MinValue },
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -1088,61 +1068,63 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<int[]>.StaticNonGenericMethodStringArrayUsesClassTypeParam(new int[] {Int32.MaxValue, Int32.MinValue}, new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<int[]>.StaticNonGenericMethodStringArrayUsesClassTypeParam(
-                            new int[] { Int32.MaxValue, Int32.MinValue },
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<int[]>
+                            .StaticNonGenericMethodStringArrayUsesClassTypeParam(
+                                new int[] { Int32.MaxValue, Int32.MinValue },
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );
         }
 
         if (
-            GenericClass<string[]>.StaticNonGenericMethodIntUsesClassTypeParam(
-                new string[1000],
-                1,
-                typeof(int)
-            ) != 1
+            GenericClass<string[]>
+                .StaticNonGenericMethodIntUsesClassTypeParam(new string[1000], 1, typeof(int)) != 1
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodIntUsesClassTypeParam(new string[1000], 1, typeof(int)) to be 1, but found '"
-                    + GenericClass<string[]>.StaticNonGenericMethodIntUsesClassTypeParam(
-                        new string[1000],
-                        1,
-                        typeof(int)
-                    )
+                    + GenericClass<string[]>
+                        .StaticNonGenericMethodIntUsesClassTypeParam(
+                            new string[1000],
+                            1,
+                            typeof(int)
+                        )
                     + "'"
             );
         }
 
         if (
-            GenericClass<string[]>.StaticNonGenericMethodStringUsesClassTypeParam(
-                new string[1000],
-                "aaaa",
-                typeof(string)
-            ) != "aaaa"
+            GenericClass<string[]>
+                .StaticNonGenericMethodStringUsesClassTypeParam(
+                    new string[1000],
+                    "aaaa",
+                    typeof(string)
+                ) != "aaaa"
         )
         {
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodString(new string[1000], \"aaaa\", typeof(string)) to be \"aaaa\", but found '"
-                    + GenericClass<string[]>.StaticNonGenericMethodStringUsesClassTypeParam(
-                        new string[1000],
-                        "aaaa",
-                        typeof(string)
-                    )
+                    + GenericClass<string[]>
+                        .StaticNonGenericMethodStringUsesClassTypeParam(
+                            new string[1000],
+                            "aaaa",
+                            typeof(string)
+                        )
                     + "'"
             );
         }
 
         if (
             Utils.CompareArray<int>(
-                GenericClass<string[]>.StaticNonGenericMethodIntArrayUsesClassTypeParam(
-                    new string[1000],
-                    new int[] { 1, 2, 3 },
-                    typeof(int[])
-                ),
+                GenericClass<string[]>
+                    .StaticNonGenericMethodIntArrayUsesClassTypeParam(
+                        new string[1000],
+                        new int[] { 1, 2, 3 },
+                        typeof(int[])
+                    ),
                 new int[] { 1, 2, 3 }
             )
         )
@@ -1150,11 +1132,12 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodIntArrayUsesClassTypeParam(new string[1000], new int[] {1,2,3} typeof(int[])) to be int[] {1,2,3}, but found '"
                     + Utils.BuildArrayString<int>(
-                        GenericClass<string[]>.StaticNonGenericMethodIntArrayUsesClassTypeParam(
-                            new string[1000],
-                            new int[] { 1, 2, 3 },
-                            typeof(int[])
-                        )
+                        GenericClass<string[]>
+                            .StaticNonGenericMethodIntArrayUsesClassTypeParam(
+                                new string[1000],
+                                new int[] { 1, 2, 3 },
+                                typeof(int[])
+                            )
                     )
                     + "'"
             );
@@ -1162,11 +1145,12 @@ internal class M
 
         if (
             Utils.CompareArray<string>(
-                GenericClass<string[]>.StaticNonGenericMethodStringArrayUsesClassTypeParam(
-                    new string[1000],
-                    new string[] { "abc", "def", "ghi", "jkl" },
-                    typeof(string[])
-                ),
+                GenericClass<string[]>
+                    .StaticNonGenericMethodStringArrayUsesClassTypeParam(
+                        new string[1000],
+                        new string[] { "abc", "def", "ghi", "jkl" },
+                        typeof(string[])
+                    ),
                 new string[] { "abc", "def", "ghi", "jkl" }
             )
         )
@@ -1174,11 +1158,12 @@ internal class M
             Utils.Fail(
                 "Expected returned value of GenericClass<string[]>.StaticNonGenericMethodStringArrayUsesClassTypeParam(new string[1000], new string[] {\"abc\",\"def\",\"ghi\",\"jkl\"} typeof(string[])) to be string[] {\"abc\",\"def\",\"ghi\",\"jkl\"}, but found '"
                     + Utils.BuildArrayString<string>(
-                        GenericClass<string[]>.StaticNonGenericMethodStringArrayUsesClassTypeParam(
-                            new string[1000],
-                            new string[] { "abc", "def", "ghi", "jkl" },
-                            typeof(string[])
-                        )
+                        GenericClass<string[]>
+                            .StaticNonGenericMethodStringArrayUsesClassTypeParam(
+                                new string[1000],
+                                new string[] { "abc", "def", "ghi", "jkl" },
+                                typeof(string[])
+                            )
                     )
                     + "'"
             );

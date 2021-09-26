@@ -432,12 +432,8 @@ namespace System.Text.RegularExpressions
 
             if (_code.BoyerMoorePrefix != null)
             {
-                runtextpos = _code.BoyerMoorePrefix.Scan(
-                    runtext!,
-                    runtextpos,
-                    runtextbeg,
-                    runtextend
-                );
+                runtextpos = _code.BoyerMoorePrefix
+                    .Scan(runtext!, runtextpos, runtextbeg, runtextend);
 
                 if (runtextpos == -1)
                 {

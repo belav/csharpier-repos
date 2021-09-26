@@ -90,9 +90,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
             var matchingTabs = string.IsNullOrEmpty(targetApplicationUrl)
                 ? availableTabs.ToList()
                 : availableTabs.Where(
-                          t => t.Url.Equals(targetApplicationUrl, StringComparison.Ordinal)
-                      )
-                      .ToList();
+                      t => t.Url.Equals(targetApplicationUrl, StringComparison.Ordinal)
+                  )
+                  .ToList();
 
             if (matchingTabs.Count == 1)
             {
@@ -107,12 +107,14 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
                 var suffix = string.IsNullOrEmpty(targetApplicationUrl)
                     ? string.Empty
                     : $" matching the URL {WebUtility.HtmlEncode(targetApplicationUrl)}";
-                await context.Response.WriteAsync(
-                    $"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>"
-                );
-                await context.Response.WriteAsync(
-                    "<p>Make sure your browser is displaying the target application.</p>"
-                );
+                await context.Response
+                    .WriteAsync(
+                        $"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>"
+                    );
+                await context.Response
+                    .WriteAsync(
+                        "<p>Make sure your browser is displaying the target application.</p>"
+                    );
             }
             else
             {
@@ -151,11 +153,12 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
                 foreach (var tab in matchingTabs)
                 {
                     var devToolsUrlWithProxy = GetDevToolsUrlWithProxy(request, tab);
-                    await context.Response.WriteAsync(
-                        $"<a class='inspectable-page' href='{WebUtility.HtmlEncode(devToolsUrlWithProxy)}'>"
-                            + $"<h3>{WebUtility.HtmlEncode(tab.Title)}</h3>{WebUtility.HtmlEncode(tab.Url)}"
-                            + $"</a>"
-                    );
+                    await context.Response
+                        .WriteAsync(
+                            $"<a class='inspectable-page' href='{WebUtility.HtmlEncode(devToolsUrlWithProxy)}'>"
+                                + $"<h3>{WebUtility.HtmlEncode(tab.Title)}</h3>{WebUtility.HtmlEncode(tab.Url)}"
+                                + $"</a>"
+                        );
                 }
             }
         }

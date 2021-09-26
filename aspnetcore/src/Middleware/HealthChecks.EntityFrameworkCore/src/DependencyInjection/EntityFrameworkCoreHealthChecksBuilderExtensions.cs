@@ -73,10 +73,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (customTestQuery != null)
             {
-                builder.Services.Configure<DbContextHealthCheckOptions<TContext>>(
-                    name,
-                    options => options.CustomTestQuery = customTestQuery
-                );
+                builder.Services
+                    .Configure<DbContextHealthCheckOptions<TContext>>(
+                        name,
+                        options => options.CustomTestQuery = customTestQuery
+                    );
             }
 
             return builder.AddCheck<DbContextHealthCheck<TContext>>(

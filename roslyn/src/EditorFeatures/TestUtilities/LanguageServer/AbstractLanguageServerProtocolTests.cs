@@ -38,9 +38,8 @@ namespace Roslyn.Test.Utilities
     {
         // TODO: remove WPF dependency (IEditorInlineRenameService)
         private static readonly TestComposition s_composition =
-            EditorTestCompositions.LanguageServerProtocolWpf.AddParts(
-                    typeof(TestLspWorkspaceRegistrationService)
-                )
+            EditorTestCompositions.LanguageServerProtocolWpf
+                .AddParts(typeof(TestLspWorkspaceRegistrationService))
                 .AddParts(typeof(TestDocumentTrackingService))
                 .RemoveParts(typeof(MockWorkspaceEventListenerProvider));
 
@@ -105,13 +104,13 @@ namespace Roslyn.Test.Utilities
                 if (document.Name == GeneratedFileName)
                 {
                     mappedResult = spans.Select(
-                            span =>
-                                new MappedSpanResult(
-                                    s_mappedFilePath,
-                                    s_mappedLinePosition,
-                                    new TextSpan(0, 5)
-                                )
-                        )
+                        span =>
+                            new MappedSpanResult(
+                                s_mappedFilePath,
+                                s_mappedLinePosition,
+                                new TextSpan(0, 5)
+                            )
+                    )
                         .ToImmutableArray();
                 }
 
@@ -279,16 +278,16 @@ namespace Roslyn.Test.Utilities
         )
         {
             var position = await document.GetPositionFromLinePositionAsync(
-                    ProtocolConversions.PositionToLinePosition(request.Position),
-                    CancellationToken.None
-                )
+                ProtocolConversions.PositionToLinePosition(request.Position),
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
             var completionTrigger = await ProtocolConversions.LSPToRoslynCompletionTriggerAsync(
-                    request.Context,
-                    document,
-                    position,
-                    CancellationToken.None
-                )
+                request.Context,
+                document,
+                position,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             var item = new LSP.VSCompletionItem()
@@ -440,8 +439,8 @@ namespace Roslyn.Test.Utilities
 
         private protected static void RegisterWorkspaceForLsp(TestWorkspace workspace)
         {
-            var provider =
-                workspace.ExportProvider.GetExportedValue<ILspWorkspaceRegistrationService>();
+            var provider = workspace.ExportProvider
+                .GetExportedValue<ILspWorkspaceRegistrationService>();
             provider.Register(workspace);
         }
 
@@ -498,15 +497,15 @@ namespace Roslyn.Test.Utilities
 
         private static RequestDispatcher CreateRequestDispatcher(TestWorkspace workspace)
         {
-            var factory =
-                workspace.ExportProvider.GetExportedValue<CSharpVisualBasicRequestDispatcherFactory>();
+            var factory = workspace.ExportProvider
+                .GetExportedValue<CSharpVisualBasicRequestDispatcherFactory>();
             return factory.CreateRequestDispatcher();
         }
 
         private static RequestExecutionQueue CreateRequestQueue(TestWorkspace workspace)
         {
-            var registrationService =
-                workspace.ExportProvider.GetExportedValue<ILspWorkspaceRegistrationService>();
+            var registrationService = workspace.ExportProvider
+                .GetExportedValue<ILspWorkspaceRegistrationService>();
             return new RequestExecutionQueue(
                 NoOpLspLogger.Instance,
                 registrationService,

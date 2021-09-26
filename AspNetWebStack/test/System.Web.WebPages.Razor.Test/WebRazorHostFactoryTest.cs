@@ -42,10 +42,8 @@ namespace System.Web.WebPages.Razor.Test
         public void CreateHostReturnsWebPageHostWithWebPageAsBaseClassIfVirtualPathIsNormalPage()
         {
             // Act
-            WebPageRazorHost host = new WebRazorHostFactory().CreateHost(
-                "~/Foo/Bar/Baz.cshtml",
-                null
-            );
+            WebPageRazorHost host = new WebRazorHostFactory()
+                .CreateHost("~/Foo/Bar/Baz.cshtml", null);
 
             // Assert
             Assert.IsType<WebPageRazorHost>(host);
@@ -56,10 +54,8 @@ namespace System.Web.WebPages.Razor.Test
         public void CreateHostReturnsWebPageHostWithInitPageAsBaseClassIfVirtualPathIsPageStart()
         {
             // Act
-            WebPageRazorHost host = new WebRazorHostFactory().CreateHost(
-                "~/Foo/Bar/_pagestart.cshtml",
-                null
-            );
+            WebPageRazorHost host = new WebRazorHostFactory()
+                .CreateHost("~/Foo/Bar/_pagestart.cshtml", null);
 
             // Assert
             Assert.IsType<WebPageRazorHost>(host);
@@ -70,10 +66,8 @@ namespace System.Web.WebPages.Razor.Test
         public void CreateHostReturnsWebPageHostWithStartPageAsBaseClassIfVirtualPathIsAppStart()
         {
             // Act
-            WebPageRazorHost host = new WebRazorHostFactory().CreateHost(
-                "~/Foo/Bar/_appstart.cshtml",
-                null
-            );
+            WebPageRazorHost host = new WebRazorHostFactory()
+                .CreateHost("~/Foo/Bar/_appstart.cshtml", null);
 
             // Assert
             Assert.IsType<WebPageRazorHost>(host);
@@ -84,10 +78,8 @@ namespace System.Web.WebPages.Razor.Test
         public void CreateHostPassesPhysicalPathOnToWebCodeRazorHost()
         {
             // Act
-            WebPageRazorHost host = new WebRazorHostFactory().CreateHost(
-                "~/Foo/Bar/Baz/App_Code/Bar",
-                @"C:\Foo.cshtml"
-            );
+            WebPageRazorHost host = new WebRazorHostFactory()
+                .CreateHost("~/Foo/Bar/Baz/App_Code/Bar", @"C:\Foo.cshtml");
 
             // Assert
             Assert.Equal(@"C:\Foo.cshtml", host.PhysicalPath);
@@ -97,10 +89,8 @@ namespace System.Web.WebPages.Razor.Test
         public void CreateHostPassesPhysicalPathOnToWebPageRazorHost()
         {
             // Act
-            WebPageRazorHost host = new WebRazorHostFactory().CreateHost(
-                "~/Foo/Bar/Baz/Bar",
-                @"C:\Foo.cshtml"
-            );
+            WebPageRazorHost host = new WebRazorHostFactory()
+                .CreateHost("~/Foo/Bar/Baz/Bar", @"C:\Foo.cshtml");
 
             // Assert
             Assert.Equal(@"C:\Foo.cshtml", host.PhysicalPath);

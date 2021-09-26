@@ -789,11 +789,11 @@ namespace System.ComponentModel.Composition.Hosting
         private Lazy<T, TMetadataView>? GetExportCore<T, TMetadataView>(string? contractName)
         {
             Export? export = GetExportsCore(
-                    typeof(T),
-                    typeof(TMetadataView),
-                    contractName,
-                    ImportCardinality.ExactlyOne
-                )
+                typeof(T),
+                typeof(TMetadataView),
+                contractName,
+                ImportCardinality.ExactlyOne
+            )
                 .SingleOrDefault();
 
             return (export != null)
@@ -804,11 +804,11 @@ namespace System.ComponentModel.Composition.Hosting
         private Lazy<T>? GetExportCore<T>(string? contractName)
         {
             Export? export = GetExportsCore(
-                    typeof(T),
-                    null,
-                    contractName,
-                    ImportCardinality.ExactlyOne
-                )
+                typeof(T),
+                null,
+                contractName,
+                ImportCardinality.ExactlyOne
+            )
                 .SingleOrDefault();
 
             return (export != null) ? ExportServices.CreateStronglyTypedLazyOfT<T>(export) : null;

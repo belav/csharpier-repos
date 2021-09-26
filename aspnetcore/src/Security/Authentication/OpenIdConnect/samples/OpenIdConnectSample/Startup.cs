@@ -104,56 +104,52 @@ namespace OpenIdConnectSample
             );
 
             services.AddAuthentication(
-                    sharedOptions =>
-                    {
-                        sharedOptions.DefaultScheme =
-                            CookieAuthenticationDefaults.AuthenticationScheme;
-                        sharedOptions.DefaultChallengeScheme =
-                            OpenIdConnectDefaults.AuthenticationScheme;
-                    }
-                )
-                .AddCookie()
-                .AddOpenIdConnect(
-                    o =>
-                    {
-                        /*
+                sharedOptions =>
+                {
+                    sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    sharedOptions.DefaultChallengeScheme =
+                        OpenIdConnectDefaults.AuthenticationScheme;
+                }
+            ).AddCookie().AddOpenIdConnect(
+                o =>
+                {
+                    /*
                 o.ClientId = Configuration["oidc:clientid"];
                 o.ClientSecret = Configuration["oidc:clientsecret"]; // for code flow
                 o.Authority = Configuration["oidc:authority"];
                 */
-                        // https://github.com/IdentityServer/IdentityServer4.Demo/blob/master/src/IdentityServer4Demo/Config.cs
-                        o.ClientId = "hybrid";
-                        o.ClientSecret = "secret"; // for code flow
-                        o.Authority = "https://demo.identityserver.io/";
+                    // https://github.com/IdentityServer/IdentityServer4.Demo/blob/master/src/IdentityServer4Demo/Config.cs
+                    o.ClientId = "hybrid";
+                    o.ClientSecret = "secret"; // for code flow
+                    o.Authority = "https://demo.identityserver.io/";
 
-                        o.ResponseType = OpenIdConnectResponseType.CodeIdToken;
-                        o.SaveTokens = true;
-                        o.GetClaimsFromUserInfoEndpoint = true;
-                        o.AccessDeniedPath = "/access-denied-from-remote";
-                        o.MapInboundClaims = false;
+                    o.ResponseType = OpenIdConnectResponseType.CodeIdToken;
+                    o.SaveTokens = true;
+                    o.GetClaimsFromUserInfoEndpoint = true;
+                    o.AccessDeniedPath = "/access-denied-from-remote";
+                    o.MapInboundClaims = false;
 
-                        // o.ClaimActions.MapAllExcept("aud", "iss", "iat", "nbf", "exp", "aio", "c_hash", "uti", "nonce");
+                    // o.ClaimActions.MapAllExcept("aud", "iss", "iat", "nbf", "exp", "aio", "c_hash", "uti", "nonce");
 
-                        o.Events = new OpenIdConnectEvents()
+                    o.Events = new OpenIdConnectEvents()
+                    {
+                        OnAuthenticationFailed = c =>
                         {
-                            OnAuthenticationFailed = c =>
-                            {
-                                c.HandleResponse();
+                            c.HandleResponse();
 
-                                c.Response.StatusCode = 500;
-                                c.Response.ContentType = "text/plain";
-                                if (Environment.IsDevelopment())
-                                {
-                                    // Debug only, in production do not share exceptions with the remote host.
-                                    return c.Response.WriteAsync(c.Exception.ToString());
-                                }
-                                return c.Response.WriteAsync(
-                                    "An error occurred processing your authentication."
-                                );
+                            c.Response.StatusCode = 500;
+                            c.Response.ContentType = "text/plain";
+                            if (Environment.IsDevelopment())
+                            {
+                                // Debug only, in production do not share exceptions with the remote host.
+                                return c.Response.WriteAsync(c.Exception.ToString());
                             }
-                        };
-                    }
-                );
+                            return c.Response
+                                .WriteAsync("An error occurred processing your authentication.");
+                        }
+                    };
+                }
+            );
         }
 
         public void Configure(
@@ -314,9 +310,8 @@ namespace OpenIdConnectSample
                         var options = optionsMonitor.Get(
                             OpenIdConnectDefaults.AuthenticationScheme
                         );
-                        var metadata = await options.ConfigurationManager.GetConfigurationAsync(
-                            context.RequestAborted
-                        );
+                        var metadata = await options.ConfigurationManager
+                            .GetConfigurationAsync(context.RequestAborted);
 
                         var pairs = new Dictionary<string, string>()
                         {
@@ -326,11 +321,8 @@ namespace OpenIdConnectSample
                             { "refresh_token", refreshToken }
                         };
                         var content = new FormUrlEncodedContent(pairs);
-                        var tokenResponse = await options.Backchannel.PostAsync(
-                            metadata.TokenEndpoint,
-                            content,
-                            context.RequestAborted
-                        );
+                        var tokenResponse = await options.Backchannel
+                            .PostAsync(metadata.TokenEndpoint, content, context.RequestAborted);
                         tokenResponse.EnsureSuccessStatusCode();
 
                         using (
@@ -386,7 +378,8 @@ namespace OpenIdConnectSample
 
                                     await res.WriteAsync("<h2>Payload:</h2>");
                                     await res.WriteAsync(
-                                        HtmlEncoder.Default.Encode(payload.ToString())
+                                        HtmlEncoder.Default
+                                            .Encode(payload.ToString())
                                             .Replace(",", ",<br>") + "<br>"
                                     );
                                 }

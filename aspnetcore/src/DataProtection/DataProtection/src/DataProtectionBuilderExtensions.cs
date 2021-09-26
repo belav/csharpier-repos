@@ -338,9 +338,10 @@ namespace Microsoft.AspNetCore.DataProtection
                 }
             );
 
-            builder.Services.Configure<XmlKeyDecryptionOptions>(
-                o => o.AddKeyDecryptionCertificate(certificate)
-            );
+            builder.Services
+                .Configure<XmlKeyDecryptionOptions>(
+                    o => o.AddKeyDecryptionCertificate(certificate)
+                );
 
             return builder;
         }
@@ -764,12 +765,13 @@ namespace Microsoft.AspNetCore.DataProtection
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Services.Replace(
-                ServiceDescriptor.Singleton<
-                    IDataProtectionProvider,
-                    EphemeralDataProtectionProvider
-                >()
-            );
+            builder.Services
+                .Replace(
+                    ServiceDescriptor.Singleton<
+                        IDataProtectionProvider,
+                        EphemeralDataProtectionProvider
+                    >()
+                );
 
             return builder;
         }

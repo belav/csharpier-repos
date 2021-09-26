@@ -147,9 +147,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
                 if (!Storage._shutdownTokenSource.IsCancellationRequested)
                 {
-                    using var _ = Storage._connectionPool.Target.GetPooledConnection(
-                        out var connection
-                    );
+                    using var _ = Storage._connectionPool.Target
+                        .GetPooledConnection(out var connection);
                     if (TryGetDatabaseId(connection, key, out var dataId))
                     {
                         try
@@ -253,9 +252,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
                 if (!Storage._shutdownTokenSource.IsCancellationRequested)
                 {
-                    using var _ = Storage._connectionPool.Target.GetPooledConnection(
-                        out var connection
-                    );
+                    using var _ = Storage._connectionPool.Target
+                        .GetPooledConnection(out var connection);
 
                     // Determine the appropriate data-id to store this stream at.
                     if (TryGetDatabaseId(connection, key, out var dataId))
@@ -307,22 +305,20 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                         // out the data value at all.
                         if (
                             t.checksum != null
-                            && !t.self.ChecksumsMatch_MustRunInTransaction(
-                                t.connection,
-                                t.database,
-                                t.rowId,
-                                t.checksum
-                            )
+                            && !t.self
+                                .ChecksumsMatch_MustRunInTransaction(
+                                    t.connection,
+                                    t.database,
+                                    t.rowId,
+                                    t.checksum
+                                )
                         )
                         {
                             return default;
                         }
 
-                        return t.connection.ReadDataBlob_MustRunInTransaction(
-                            t.database,
-                            t.self.Table,
-                            t.rowId
-                        );
+                        return t.connection
+                            .ReadDataBlob_MustRunInTransaction(t.database, t.self.Table, t.rowId);
                     },
                     (self: this, connection, database, checksum, rowId)
                 );
@@ -339,11 +335,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 // writing to the blob.
                 return connection.RunInTransaction(
                     static t =>
-                        t.connection.ReadChecksum_MustRunInTransaction(
-                            t.database,
-                            t.self.Table,
-                            t.rowId
-                        ),
+                        t.connection
+                            .ReadChecksum_MustRunInTransaction(t.database, t.self.Table, t.rowId),
                     (self: this, connection, database, rowId)
                 );
             }

@@ -169,28 +169,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
                     );
                     if (!string.IsNullOrWhiteSpace(keybindingString))
                     {
-                        pbstrText = string.Format(
-                            ServicesVSResources.Project_colon_0_1_Use_the_dropdown_to_view_and_switch_to_other_projects_this_file_may_belong_to,
-                            selectedItemPreviewText,
-                            keybindingString
-                        );
+                        pbstrText = string
+                            .Format(
+                                ServicesVSResources.Project_colon_0_1_Use_the_dropdown_to_view_and_switch_to_other_projects_this_file_may_belong_to,
+                                selectedItemPreviewText,
+                                keybindingString
+                            );
                     }
                     else
                     {
-                        pbstrText = string.Format(
-                            ServicesVSResources.Project_colon_0_Use_the_dropdown_to_view_and_switch_to_other_projects_this_file_may_belong_to,
-                            selectedItemPreviewText
-                        );
+                        pbstrText = string
+                            .Format(
+                                ServicesVSResources.Project_colon_0_Use_the_dropdown_to_view_and_switch_to_other_projects_this_file_may_belong_to,
+                                selectedItemPreviewText
+                            );
                     }
 
                     return VSConstants.S_OK;
 
                 case 1:
                 case 2:
-                    pbstrText = string.Format(
-                        ServicesVSResources._0_Use_the_dropdown_to_view_and_navigate_to_other_items_in_this_file,
-                        selectedItemPreviewText
-                    );
+                    pbstrText = string
+                        .Format(
+                            ServicesVSResources._0_Use_the_dropdown_to_view_and_navigate_to_other_items_in_this_file,
+                            selectedItemPreviewText
+                        );
                     return VSConstants.S_OK;
 
                 default:

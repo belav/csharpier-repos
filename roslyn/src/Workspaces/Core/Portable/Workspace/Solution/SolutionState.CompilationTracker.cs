@@ -70,11 +70,12 @@ namespace Microsoft.CodeAnalysis
                     var compilationToCache =
                         state.FinalCompilationWithGeneratedDocuments?.GetValueOrNull()
                         ?? state.CompilationWithoutGeneratedDocuments?.GetValueOrNull();
-                    solutionServices.CacheService.CacheObjectIfCachingEnabledForKey(
-                        ProjectState.Id,
-                        state,
-                        compilationToCache
-                    );
+                    solutionServices.CacheService
+                        .CacheObjectIfCachingEnabledForKey(
+                            ProjectState.Id,
+                            state,
+                            compilationToCache
+                        );
                 }
 
                 Volatile.Write(ref _stateDoNotAccessDirectly, state);
@@ -288,9 +289,8 @@ namespace Microsoft.CodeAnalysis
 
                 if (!inProgressCompilation.SyntaxTrees.Contains(tree))
                 {
-                    var existingTree = inProgressCompilation.SyntaxTrees.FirstOrDefault(
-                        t => t.FilePath == tree.FilePath
-                    );
+                    var existingTree = inProgressCompilation.SyntaxTrees
+                        .FirstOrDefault(t => t.FilePath == tree.FilePath);
                     if (existingTree != null)
                     {
                         inProgressCompilation = inProgressCompilation.ReplaceSyntaxTree(
@@ -364,9 +364,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     inProgressState != null
                     && compilationWithoutGeneratedDocuments != null
-                    && inProgressState.IntermediateProjects.All(
-                        t => IsTouchDocumentActionForDocument(t.action, id)
-                    )
+                    && inProgressState.IntermediateProjects
+                        .All(t => IsTouchDocumentActionForDocument(t.action, id))
                 )
                 {
                     inProgressProject = ProjectState;
@@ -392,10 +391,8 @@ namespace Microsoft.CodeAnalysis
                 // if we already have a final compilation we are done.
                 if (compilationWithoutGeneratedDocuments != null && state is FinalState finalState)
                 {
-                    var finalCompilation =
-                        finalState.FinalCompilationWithGeneratedDocuments.GetValueOrNull(
-                            cancellationToken
-                        );
+                    var finalCompilation = finalState.FinalCompilationWithGeneratedDocuments
+                        .GetValueOrNull(cancellationToken);
 
                     if (finalCompilation != null)
                     {
@@ -446,18 +443,17 @@ namespace Microsoft.CodeAnalysis
                         if (referencedProject.IsSubmission)
                         {
                             var previousScriptCompilation = solution.GetCompilationAsync(
-                                    projectReference.ProjectId,
-                                    cancellationToken
-                                )
+                                projectReference.ProjectId,
+                                cancellationToken
+                            )
                                 .WaitAndGetResult(cancellationToken);
 
                             // previous submission project must support compilation:
                             RoslynDebug.Assert(previousScriptCompilation != null);
 
                             inProgressCompilation = inProgressCompilation.WithScriptCompilationInfo(
-                                inProgressCompilation.ScriptCompilationInfo!.WithPreviousScriptCompilation(
-                                    previousScriptCompilation
-                                )
+                                inProgressCompilation.ScriptCompilationInfo!
+                                    .WithPreviousScriptCompilation(previousScriptCompilation)
                             );
                         }
                         else
@@ -472,8 +468,8 @@ namespace Microsoft.CodeAnalysis
                             {
                                 // if we failed to get the metadata, check to see if we previously had existing metadata and reuse it instead.
                                 var inProgressCompilationNotRef = inProgressCompilation;
-                                metadata =
-                                    inProgressCompilationNotRef.ExternalReferences.FirstOrDefault(
+                                metadata = inProgressCompilationNotRef.ExternalReferences
+                                    .FirstOrDefault(
                                         r =>
                                             solution.GetProjectState(
                                                 inProgressCompilationNotRef.GetAssemblyOrModuleSymbol(
@@ -529,9 +525,8 @@ namespace Microsoft.CodeAnalysis
                 var state = ReadState();
                 if (
                     state.FinalCompilationWithGeneratedDocuments != null
-                    && state.FinalCompilationWithGeneratedDocuments.TryGetValue(
-                        out var compilationOpt
-                    )
+                    && state.FinalCompilationWithGeneratedDocuments
+                        .TryGetValue(out var compilationOpt)
                     && compilationOpt.HasValue
                 )
                 {
@@ -568,10 +563,10 @@ namespace Microsoft.CodeAnalysis
             )
             {
                 var compilationInfo = await GetOrBuildCompilationInfoAsync(
-                        solution,
-                        lockGate: true,
-                        cancellationToken: cancellationToken
-                    )
+                    solution,
+                    lockGate: true,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 return compilationInfo.Compilation;
             }
@@ -612,8 +607,8 @@ namespace Microsoft.CodeAnalysis
                             {
                                 // okay, move to full declaration state. do this so that declaration only compilation never
                                 // realize symbols.
-                                var declarationOnlyCompilation =
-                                    state.DeclarationOnlyCompilation.Clone();
+                                var declarationOnlyCompilation = state.DeclarationOnlyCompilation
+                                    .Clone();
                                 WriteState(
                                     new FullDeclarationState(
                                         declarationOnlyCompilation,
@@ -627,9 +622,9 @@ namespace Microsoft.CodeAnalysis
 
                             // We've got nothing.  Build it from scratch :(
                             return await BuildDeclarationCompilationFromScratchAsync(
-                                    solutionServices,
-                                    cancellationToken
-                                )
+                                solutionServices,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         }
 
@@ -640,11 +635,11 @@ namespace Microsoft.CodeAnalysis
                         }
 
                         compilation = await BuildDeclarationCompilationFromInProgressAsync(
-                                solutionServices,
-                                (InProgressState)state,
-                                compilation,
-                                cancellationToken
-                            )
+                            solutionServices,
+                            (InProgressState)state,
+                            compilation,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         // We must have an in progress compilation. Build off of that.
@@ -815,18 +810,18 @@ namespace Microsoft.CodeAnalysis
                 try
                 {
                     var compilation = await BuildDeclarationCompilationFromScratchAsync(
-                            solution.Services,
-                            cancellationToken
-                        )
+                        solution.Services,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return await FinalizeCompilationAsync(
-                            solution,
-                            compilation,
-                            authoritativeGeneratedDocuments: null,
-                            nonAuthoritativeGeneratedDocuments: TextDocumentStates<SourceGeneratedDocumentState>.Empty,
-                            cancellationToken
-                        )
+                        solution,
+                        compilation,
+                        authoritativeGeneratedDocuments: null,
+                        nonAuthoritativeGeneratedDocuments: TextDocumentStates<SourceGeneratedDocumentState>.Empty,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 catch (Exception e)
@@ -851,11 +846,11 @@ namespace Microsoft.CodeAnalysis
                 {
                     var compilation = CreateEmptyCompilation();
 
-                    var trees = ArrayBuilder<SyntaxTree>.GetInstance(
-                        ProjectState.DocumentStates.Count
-                    );
+                    var trees = ArrayBuilder<SyntaxTree>
+                        .GetInstance(ProjectState.DocumentStates.Count);
                     foreach (
-                        var documentState in ProjectState.DocumentStates.GetStatesInCompilationOrder()
+                        var documentState in ProjectState.DocumentStates
+                            .GetStatesInCompilationOrder()
                     )
                     {
                         cancellationToken.ThrowIfCancellationRequested();
@@ -888,8 +883,8 @@ namespace Microsoft.CodeAnalysis
 
             private Compilation CreateEmptyCompilation()
             {
-                var compilationFactory =
-                    this.ProjectState.LanguageServices.GetRequiredService<ICompilationFactoryService>();
+                var compilationFactory = this.ProjectState.LanguageServices
+                    .GetRequiredService<ICompilationFactoryService>();
 
                 if (this.ProjectState.IsSubmission)
                 {
@@ -918,19 +913,19 @@ namespace Microsoft.CodeAnalysis
                 try
                 {
                     var compilation = await BuildDeclarationCompilationFromInProgressAsync(
-                            solution.Services,
-                            state,
-                            inProgressCompilation,
-                            cancellationToken
-                        )
+                        solution.Services,
+                        state,
+                        inProgressCompilation,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     return await FinalizeCompilationAsync(
-                            solution,
-                            compilation,
-                            authoritativeGeneratedDocuments: null,
-                            nonAuthoritativeGeneratedDocuments: state.GeneratedDocuments,
-                            cancellationToken
-                        )
+                        solution,
+                        compilation,
+                        authoritativeGeneratedDocuments: null,
+                        nonAuthoritativeGeneratedDocuments: state.GeneratedDocuments,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 catch (Exception e)
@@ -958,9 +953,9 @@ namespace Microsoft.CodeAnalysis
                         var compilationTranslationAction = intermediateProjects[0].action;
                         inProgressCompilation =
                             await compilationTranslationAction.TransformCompilationAsync(
-                                    inProgressCompilation,
-                                    cancellationToken
-                                )
+                                inProgressCompilation,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         intermediateProjects = intermediateProjects.RemoveAt(0);
 
@@ -1051,24 +1046,25 @@ namespace Microsoft.CodeAnalysis
 
                                 var previousSubmissionCompilation =
                                     await solution.GetCompilationAsync(
-                                            projectReference.ProjectId,
-                                            cancellationToken
-                                        )
+                                        projectReference.ProjectId,
+                                        cancellationToken
+                                    )
                                         .ConfigureAwait(false);
 
                                 compilation = compilation.WithScriptCompilationInfo(
-                                    compilation.ScriptCompilationInfo!.WithPreviousScriptCompilation(
-                                        previousSubmissionCompilation!
-                                    )
+                                    compilation.ScriptCompilationInfo!
+                                        .WithPreviousScriptCompilation(
+                                            previousSubmissionCompilation!
+                                        )
                                 );
                             }
                             else
                             {
                                 var metadataReference = await solution.GetMetadataReferenceAsync(
-                                        projectReference,
-                                        this.ProjectState,
-                                        cancellationToken
-                                    )
+                                    projectReference,
+                                    this.ProjectState,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
 
                                 // A reference can fail to be created if a skeleton assembly could not be constructed.
@@ -1093,9 +1089,8 @@ namespace Microsoft.CodeAnalysis
                         compilation = compilation.WithReferences(newReferences);
                     }
 
-                    var generators = this.ProjectState.AnalyzerReferences.SelectMany(
-                            a => a.GetGenerators(this.ProjectState.Language)
-                        )
+                    var generators = this.ProjectState.AnalyzerReferences
+                        .SelectMany(a => a.GetGenerators(this.ProjectState.Language))
                         .ToImmutableArray();
 
                     // We will finalize the compilation by adding full contents here.
@@ -1115,12 +1110,12 @@ namespace Microsoft.CodeAnalysis
 
                         if (generators.Any())
                         {
-                            var additionalTexts =
-                                this.ProjectState.AdditionalDocumentStates.SelectAsArray<AdditionalText>(
+                            var additionalTexts = this.ProjectState.AdditionalDocumentStates
+                                .SelectAsArray<AdditionalText>(
                                     state => new AdditionalTextWithState(state)
                                 );
-                            var compilationFactory =
-                                this.ProjectState.LanguageServices.GetRequiredService<ICompilationFactoryService>();
+                            var compilationFactory = this.ProjectState.LanguageServices
+                                .GetRequiredService<ICompilationFactoryService>();
 
                             var generatorDriver = compilationFactory.CreateGeneratorDriver(
                                 this.ProjectState.ParseOptions!,
@@ -1260,11 +1255,12 @@ namespace Microsoft.CodeAnalysis
                 // Combine the strings together; we'll use Encoding.Unicode since that'll match the underlying format; this can be made much
                 // faster once we're on .NET Core since we could directly treat the strings as ReadOnlySpan<char>.
                 var projectIdBytes = projectId.Id.ToByteArray();
-                using var _ = ArrayBuilder<byte>.GetInstance(
-                    capacity: (generatorName.Length + hintName.Length + 1) * 2
-                        + projectIdBytes.Length,
-                    out var hashInput
-                );
+                using var _ = ArrayBuilder<byte>
+                    .GetInstance(
+                        capacity: (generatorName.Length + hintName.Length + 1) * 2
+                            + projectIdBytes.Length,
+                        out var hashInput
+                    );
                 hashInput.AddRange(projectIdBytes);
                 hashInput.AddRange(Encoding.Unicode.GetBytes(generatorName));
 
@@ -1274,7 +1270,8 @@ namespace Microsoft.CodeAnalysis
                 hashInput.AddRange(Encoding.Unicode.GetBytes(hintName));
 
                 // The particular choice of crypto algorithm here is arbitrary and can be always changed as necessary.
-                var hash = System.Security.Cryptography.SHA256.Create()
+                var hash = System.Security.Cryptography.SHA256
+                    .Create()
                     .ComputeHash(hashInput.ToArray());
                 Array.Resize(ref hash, 16);
                 var guid = new Guid(hash);
@@ -1324,10 +1321,10 @@ namespace Microsoft.CodeAnalysis
                     {
                         // otherwise get a metadata only image reference that is built by emitting the metadata from the referenced project's compilation and re-importing it.
                         return await this.GetMetadataOnlyImageReferenceAsync(
-                                solution,
-                                projectReference,
-                                cancellationToken
-                            )
+                            solution,
+                            projectReference,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -1353,18 +1350,18 @@ namespace Microsoft.CodeAnalysis
                 // get compilation in any state it happens to be in right now.
                 if (
                     state.CompilationWithoutGeneratedDocuments != null
-                    && state.CompilationWithoutGeneratedDocuments.TryGetValue(
-                        out var compilationOpt
-                    )
+                    && state.CompilationWithoutGeneratedDocuments
+                        .TryGetValue(out var compilationOpt)
                     && compilationOpt.HasValue
                     && ProjectState.LanguageServices == fromProject.LanguageServices
                 )
                 {
                     // if we have a compilation and its the correct language, use a simple compilation reference
-                    return compilationOpt.Value.ToMetadataReference(
-                        projectReference.Aliases,
-                        projectReference.EmbedInteropTypes
-                    );
+                    return compilationOpt.Value
+                        .ToMetadataReference(
+                            projectReference.Aliases,
+                            projectReference.EmbedInteropTypes
+                        );
                 }
 
                 return null;
@@ -1389,21 +1386,22 @@ namespace Microsoft.CodeAnalysis
                     )
                     {
                         var version = await this.GetDependentSemanticVersionAsync(
-                                solution,
-                                cancellationToken
-                            )
+                            solution,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         // get or build compilation up to declaration state. this compilation will be used to provide live xml doc comment
                         var declarationCompilation =
                             await this.GetOrBuildDeclarationCompilationAsync(
-                                    solution.Services,
-                                    cancellationToken: cancellationToken
-                                )
+                                solution.Services,
+                                cancellationToken: cancellationToken
+                            )
                                 .ConfigureAwait(false);
-                        solution.Workspace.LogTestMessage(
-                            $"Looking for a cached skeleton assembly for {projectReference.ProjectId} before taking the lock..."
-                        );
+                        solution.Workspace
+                            .LogTestMessage(
+                                $"Looking for a cached skeleton assembly for {projectReference.ProjectId} before taking the lock..."
+                            );
 
                         if (
                             !MetadataOnlyReference.TryGetReference(
@@ -1421,16 +1419,15 @@ namespace Microsoft.CodeAnalysis
                                     .ConfigureAwait(false)
                             )
                             {
-                                solution.Workspace.LogTestMessage(
-                                    $"Build lock taken for {ProjectState.Id}..."
-                                );
+                                solution.Workspace
+                                    .LogTestMessage($"Build lock taken for {ProjectState.Id}...");
 
                                 // okay, we still don't have one. bring the compilation to final state since we are going to use it to create skeleton assembly
                                 var compilationInfo = await this.GetOrBuildCompilationInfoAsync(
-                                        solution,
-                                        lockGate: false,
-                                        cancellationToken: cancellationToken
-                                    )
+                                    solution,
+                                    lockGate: false,
+                                    cancellationToken: cancellationToken
+                                )
                                     .ConfigureAwait(false);
                                 reference = MetadataOnlyReference.GetOrBuildReference(
                                     solution,
@@ -1443,9 +1440,10 @@ namespace Microsoft.CodeAnalysis
                         }
                         else
                         {
-                            solution.Workspace.LogTestMessage(
-                                $"Reusing the already cached skeleton assembly for {projectReference.ProjectId}"
-                            );
+                            solution.Workspace
+                                .LogTestMessage(
+                                    $"Reusing the already cached skeleton assembly for {projectReference.ProjectId}"
+                                );
                         }
 
                         return reference;
@@ -1472,11 +1470,8 @@ namespace Microsoft.CodeAnalysis
                 var state = this.ReadState();
                 return state.DeclarationOnlyCompilation == null
                   ? (bool?)null
-                  : state.DeclarationOnlyCompilation.ContainsSymbolsWithName(
-                        name,
-                        filter,
-                        cancellationToken
-                    );
+                  : state.DeclarationOnlyCompilation
+                    .ContainsSymbolsWithName(name, filter, cancellationToken);
             }
 
             /// <summary>
@@ -1492,11 +1487,8 @@ namespace Microsoft.CodeAnalysis
                 var state = this.ReadState();
                 return state.DeclarationOnlyCompilation == null
                   ? (bool?)null
-                  : state.DeclarationOnlyCompilation.ContainsSymbolsWithName(
-                        predicate,
-                        filter,
-                        cancellationToken
-                    );
+                  : state.DeclarationOnlyCompilation
+                    .ContainsSymbolsWithName(predicate, filter, cancellationToken);
             }
 
             /// <summary>
@@ -1547,10 +1539,10 @@ namespace Microsoft.CodeAnalysis
             )
             {
                 var compilationInfo = await GetOrBuildCompilationInfoAsync(
-                        solution,
-                        lockGate: true,
-                        cancellationToken: cancellationToken
-                    )
+                    solution,
+                    lockGate: true,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 return compilationInfo.HasSuccessfullyLoaded;
             }
@@ -1563,10 +1555,10 @@ namespace Microsoft.CodeAnalysis
             )
             {
                 var compilationInfo = await GetOrBuildCompilationInfoAsync(
-                        solution,
-                        lockGate: true,
-                        cancellationToken: cancellationToken
-                    )
+                    solution,
+                    lockGate: true,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 return compilationInfo.GeneratedDocuments;
             }
@@ -1632,9 +1624,9 @@ namespace Microsoft.CodeAnalysis
                     if (solution.ContainsProject(dependentProjectReference.ProjectId))
                     {
                         var dependentProjectVersion = await solution.GetDependentVersionAsync(
-                                dependentProjectReference.ProjectId,
-                                cancellationToken
-                            )
+                            dependentProjectReference.ProjectId,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         version = dependentProjectVersion.GetNewerVersion(version);
                     }
@@ -1682,9 +1674,9 @@ namespace Microsoft.CodeAnalysis
                     {
                         var dependentProjectVersion =
                             await solution.GetDependentSemanticVersionAsync(
-                                    dependentProjectReference.ProjectId,
-                                    cancellationToken
-                                )
+                                dependentProjectReference.ProjectId,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         version = dependentProjectVersion.GetNewerVersion(version);
                     }

@@ -191,7 +191,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
             InliningInfoNode otherInliningInfo = (InliningInfoNode)other;
-            return _module.Assembly.GetName()
+            return _module.Assembly
+                .GetName()
                 .Name.CompareTo(otherInliningInfo._module.Assembly.GetName().Name);
         }
 

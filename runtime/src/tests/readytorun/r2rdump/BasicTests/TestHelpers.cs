@@ -37,14 +37,14 @@ namespace R2RDumpTest
                 node => XmlNodeFullName(node)
             );
             Dictionary<string, XmlNode> diffTest = testXmlNodes.Except(
-                    expectedXmlNodes,
-                    new XElementEqualityComparer()
-                )
+                expectedXmlNodes,
+                new XElementEqualityComparer()
+            )
                 .ToDictionary(node => XmlNodeFullName(node));
             Dictionary<string, XmlNode> diffExpected = expectedXmlNodes.Except(
-                    testXmlNodes,
-                    new XElementEqualityComparer()
-                )
+                testXmlNodes,
+                new XElementEqualityComparer()
+            )
                 .ToDictionary(node => XmlNodeFullName(node));
 
             foreach (KeyValuePair<string, XmlNode> diff in diffExpected)

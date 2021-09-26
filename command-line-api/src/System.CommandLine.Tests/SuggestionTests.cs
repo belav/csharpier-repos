@@ -24,11 +24,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Option_GetSuggestions_returns_argument_suggestions_if_configured()
         {
-            var option = new Option("--hello", arity: ArgumentArity.ExactlyOne).AddSuggestions(
-                "one",
-                "two",
-                "three"
-            );
+            var option = new Option("--hello", arity: ArgumentArity.ExactlyOne)
+                .AddSuggestions("one", "two", "three");
 
             var suggestions = option.GetSuggestions();
 
@@ -362,16 +359,10 @@ namespace System.CommandLine.Tests
         public void Parser_options_can_supply_context_sensitive_matches()
         {
             var parser = new Parser(
-                new Option("--bread", arity: ArgumentArity.ExactlyOne).FromAmong(
-                    "wheat",
-                    "sourdough",
-                    "rye"
-                ),
-                new Option("--cheese", arity: ArgumentArity.ExactlyOne).FromAmong(
-                    "provolone",
-                    "cheddar",
-                    "cream cheese"
-                )
+                new Option("--bread", arity: ArgumentArity.ExactlyOne)
+                    .FromAmong("wheat", "sourdough", "rye"),
+                new Option("--cheese", arity: ArgumentArity.ExactlyOne)
+                    .FromAmong("provolone", "cheddar", "cream cheese")
             );
 
             var commandLine = "--bread";
@@ -468,10 +459,8 @@ namespace System.CommandLine.Tests
             var parser = new Parser(
                 new Command("outer")
                 {
-                    new Option("--one", arity: ArgumentArity.ExactlyOne).FromAmong(
-                        "one-a",
-                        "one-b"
-                    ),
+                    new Option("--one", arity: ArgumentArity.ExactlyOne)
+                        .FromAmong("one-a", "one-b"),
                     new Option("--two", arity: ArgumentArity.ExactlyOne).FromAmong("two-a", "two-b")
                 }
             );
@@ -504,11 +493,8 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("the-command")
             {
-                new Option("-t", arity: ArgumentArity.ExactlyOne).AddSuggestions(
-                    "vegetable",
-                    "mineral",
-                    "animal"
-                )
+                new Option("-t", arity: ArgumentArity.ExactlyOne)
+                    .AddSuggestions("vegetable", "mineral", "animal")
             };
 
             command.Parse("the-command -t m")
@@ -545,9 +531,8 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("the-command")
             {
-                new Option<string>("-x").AddSuggestions(
-                    (_, __) => new[] { "vegetable", "mineral", "animal" }
-                )
+                new Option<string>("-x")
+                    .AddSuggestions((_, __) => new[] { "vegetable", "mineral", "animal" })
             };
 
             var parseResult = command.Parse("the-command -x m");
@@ -560,21 +545,12 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("outer")
             {
-                new Option("one", arity: ArgumentArity.ExactlyOne).FromAmong(
-                    "one-a",
-                    "one-b",
-                    "one-c"
-                ),
-                new Option("two", arity: ArgumentArity.ExactlyOne).FromAmong(
-                    "two-a",
-                    "two-b",
-                    "two-c"
-                ),
-                new Option("three", arity: ArgumentArity.ExactlyOne).FromAmong(
-                    "three-a",
-                    "three-b",
-                    "three-c"
-                )
+                new Option("one", arity: ArgumentArity.ExactlyOne)
+                    .FromAmong("one-a", "one-b", "one-c"),
+                new Option("two", arity: ArgumentArity.ExactlyOne)
+                    .FromAmong("two-a", "two-b", "two-c"),
+                new Option("three", arity: ArgumentArity.ExactlyOne)
+                    .FromAmong("three-a", "three-b", "three-c")
             };
 
             var parser = new CommandLineBuilder().AddCommand(command).Build();
@@ -589,21 +565,12 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("outer")
             {
-                new Option("one", arity: ArgumentArity.ExactlyOne).FromAmong(
-                    "one-a",
-                    "one-b",
-                    "one-c"
-                ),
-                new Option("two", arity: ArgumentArity.ExactlyOne).FromAmong(
-                    "two-a",
-                    "two-b",
-                    "two-c"
-                ),
-                new Option("three", arity: ArgumentArity.ExactlyOne).FromAmong(
-                    "three-a",
-                    "three-b",
-                    "three-c"
-                )
+                new Option("one", arity: ArgumentArity.ExactlyOne)
+                    .FromAmong("one-a", "one-b", "one-c"),
+                new Option("two", arity: ArgumentArity.ExactlyOne)
+                    .FromAmong("two-a", "two-b", "two-c"),
+                new Option("three", arity: ArgumentArity.ExactlyOne)
+                    .FromAmong("three-a", "three-b", "three-c")
             };
 
             var result = command.Parse("outer two b");
@@ -618,27 +585,18 @@ namespace System.CommandLine.Tests
             {
                 new Command("one")
                 {
-                    new Argument { Arity = ArgumentArity.ExactlyOne }.FromAmong(
-                        "one-a",
-                        "one-b",
-                        "one-c"
-                    )
+                    new Argument { Arity = ArgumentArity.ExactlyOne }
+                        .FromAmong("one-a", "one-b", "one-c")
                 },
                 new Command("two")
                 {
-                    new Argument { Arity = ArgumentArity.ExactlyOne }.FromAmong(
-                        "two-a",
-                        "two-b",
-                        "two-c"
-                    )
+                    new Argument { Arity = ArgumentArity.ExactlyOne }
+                        .FromAmong("two-a", "two-b", "two-c")
                 },
                 new Command("three")
                 {
-                    new Argument { Arity = ArgumentArity.ExactlyOne }.FromAmong(
-                        "three-a",
-                        "three-b",
-                        "three-c"
-                    )
+                    new Argument { Arity = ArgumentArity.ExactlyOne }
+                        .FromAmong("three-a", "three-b", "three-c")
                 }
             };
 
@@ -654,27 +612,18 @@ namespace System.CommandLine.Tests
             {
                 new Command("one")
                 {
-                    new Argument { Arity = ArgumentArity.ExactlyOne }.FromAmong(
-                        "one-a",
-                        "one-b",
-                        "one-c"
-                    )
+                    new Argument { Arity = ArgumentArity.ExactlyOne }
+                        .FromAmong("one-a", "one-b", "one-c")
                 },
                 new Command("two")
                 {
-                    new Argument { Arity = ArgumentArity.ExactlyOne }.FromAmong(
-                        "two-a",
-                        "two-b",
-                        "two-c"
-                    )
+                    new Argument { Arity = ArgumentArity.ExactlyOne }
+                        .FromAmong("two-a", "two-b", "two-c")
                 },
                 new Command("three")
                 {
-                    new Argument { Arity = ArgumentArity.ExactlyOne }.FromAmong(
-                        "three-a",
-                        "three-b",
-                        "three-c"
-                    )
+                    new Argument { Arity = ArgumentArity.ExactlyOne }
+                        .FromAmong("three-a", "three-b", "three-c")
                 }
             };
 
@@ -711,7 +660,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_current_symbol_is_an_option_that_requires_arguments_then_parent_symbol_suggestions_are_omitted()
         {
-            var parser = new CommandLineBuilder().AddOption(new Option<string>("--allows-one"))
+            var parser = new CommandLineBuilder()
+                .AddOption(new Option<string>("--allows-one"))
                 .AddOption(new Option<string[]>("--allows-many"))
                 .UseSuggestDirective()
                 .Build();
@@ -788,12 +738,8 @@ namespace System.CommandLine.Tests
                 var command = new Command("the-command")
                 {
                     new Argument<string>(),
-                    new Option<string>("--option1").FromAmong(
-                        "apple",
-                        "banana",
-                        "cherry",
-                        "durian"
-                    ),
+                    new Option<string>("--option1")
+                        .FromAmong("apple", "banana", "cherry", "durian"),
                     new Option<string>("--option2")
                 };
 
@@ -873,12 +819,8 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("the-command")
                 {
-                    new Option<string>("--option1").FromAmong(
-                        "apple",
-                        "banana",
-                        "cherry",
-                        "durian"
-                    ),
+                    new Option<string>("--option1")
+                        .FromAmong("apple", "banana", "cherry", "durian"),
                     new Option<string>("--option2"),
                     new Argument<string>()
                 };
@@ -923,9 +865,8 @@ namespace System.CommandLine.Tests
             {
                 var argument = new Argument<DayOfWeek?>();
                 argument.Suggestions.Clear();
-                argument.Suggestions.Add(
-                    new[] { "mon", "tues", "wed", "thur", "fri", "sat", "sun" }
-                );
+                argument.Suggestions
+                    .Add(new[] { "mon", "tues", "wed", "thur", "fri", "sat", "sun" });
                 var command = new Command("the-command") { argument };
 
                 var suggestions = command.Parse("the-command s").GetSuggestions();

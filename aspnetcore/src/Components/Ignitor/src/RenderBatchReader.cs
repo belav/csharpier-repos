@@ -174,10 +174,10 @@ namespace Ignitor
                         var attributeValue = ReadString(frameData.Slice(8, 4), strings);
                         var attributeEventHandlerId = BitConverter.ToUInt64(frameData.Slice(12, 8));
                         result[i / ReferenceFrameSize] = RenderTreeFrame.Attribute(
-                                0,
-                                attributeName,
-                                attributeValue
-                            )
+                            0,
+                            attributeName,
+                            attributeValue
+                        )
                             .WithAttributeEventHandlerId(attributeEventHandlerId);
                         break;
 
@@ -185,9 +185,9 @@ namespace Ignitor
                         var componentSubtreeLength = BitConverter.ToInt32(frameData.Slice(4, 4));
                         var componentId = BitConverter.ToInt32(frameData.Slice(8, 4)); // Nowhere to put this without creating a ComponentState
                         result[i / ReferenceFrameSize] = RenderTreeFrame.ChildComponent(
-                                0,
-                                componentType: null
-                            )
+                            0,
+                            componentType: null
+                        )
                             .WithComponentSubtreeLength(componentSubtreeLength)
                             .WithComponent(new ComponentState(componentId));
                         break;
@@ -211,9 +211,9 @@ namespace Ignitor
                     case RenderTreeFrameType.ElementReferenceCapture:
                         var referenceCaptureId = ReadString(frameData.Slice(4, 4), strings);
                         result[i / ReferenceFrameSize] = RenderTreeFrame.ElementReferenceCapture(
-                                0,
-                                null
-                            )
+                            0,
+                            null
+                        )
                             .WithElementReferenceCaptureId(referenceCaptureId);
                         break;
 

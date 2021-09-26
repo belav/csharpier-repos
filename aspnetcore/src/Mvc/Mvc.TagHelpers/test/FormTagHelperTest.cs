@@ -51,17 +51,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             );
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GeneratePageForm(
-                            viewContext,
-                            null,
-                            "page-handler",
-                            null,
-                            null,
-                            null,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GeneratePageForm(viewContext, null, "page-handler", null, null, null, null)
+            )
                 .Returns(new TagBuilder("form"))
                 .Verifiable();
             var formTagHelper = new FormTagHelper(generator.Object)
@@ -420,16 +412,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             );
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GenerateForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                mock =>
+                    mock.GenerateForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(new TagBuilder("form"));
 
             generator.Setup(mock => mock.GenerateAntiforgery(viewContext))
@@ -481,16 +473,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GenerateForm(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                mock =>
+                    mock.GenerateForm(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Callback<ViewContext, string, string, object, string, object>(
                     (
                         viewContext,
@@ -564,16 +556,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             );
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GenerateForm(
-                            viewContext,
-                            "Index",
-                            "Home",
-                            It.IsAny<IDictionary<string, object>>(),
-                            null,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GenerateForm(
+                        viewContext,
+                        "Index",
+                        "Home",
+                        It.IsAny<IDictionary<string, object>>(),
+                        null,
+                        null
+                    )
+            )
                 .Returns(new TagBuilder("form"))
                 .Verifiable();
             var formTagHelper = new FormTagHelper(generator.Object)
@@ -686,16 +678,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var expectedRouteValues = new Dictionary<string, object> { { "area", "Admin" } };
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GenerateForm(
-                            viewContext,
-                            "Index",
-                            "Home",
-                            expectedRouteValues,
-                            null,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GenerateForm(viewContext, "Index", "Home", expectedRouteValues, null, null)
+            )
                 .Returns(new TagBuilder("form"))
                 .Verifiable();
             var formTagHelper = new FormTagHelper(generator.Object)
@@ -747,16 +732,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var expectedRouteValues = new Dictionary<string, object> { { "area", string.Empty } };
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GenerateForm(
-                            viewContext,
-                            "Index",
-                            "Home",
-                            expectedRouteValues,
-                            null,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GenerateForm(viewContext, "Index", "Home", expectedRouteValues, null, null)
+            )
                 .Returns(new TagBuilder("form"))
                 .Verifiable();
             var formTagHelper = new FormTagHelper(generator.Object)
@@ -808,16 +786,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var expectedRouteValues = new Dictionary<string, object> { { "area", "Admin" } };
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GenerateForm(
-                            viewContext,
-                            "Index",
-                            "Home",
-                            expectedRouteValues,
-                            null,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GenerateForm(viewContext, "Index", "Home", expectedRouteValues, null, null)
+            )
                 .Returns(new TagBuilder("form"))
                 .Verifiable();
             var formTagHelper = new FormTagHelper(generator.Object)
@@ -868,15 +839,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             );
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GenerateRouteForm(
-                            viewContext,
-                            "Default",
-                            It.Is<RouteValueDictionary>(m => string.Equals(m["name"], "value")),
-                            null,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GenerateRouteForm(
+                        viewContext,
+                        "Default",
+                        It.Is<RouteValueDictionary>(m => string.Equals(m["name"], "value")),
+                        null,
+                        null
+                    )
+            )
                 .Returns(new TagBuilder("form"))
                 .Verifiable();
             var formTagHelper = new FormTagHelper(generator.Object)
@@ -924,17 +895,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             );
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GeneratePageForm(
-                            viewContext,
-                            "/Home/Admin/Post",
-                            "page-handler",
-                            null,
-                            "hello-world",
-                            null,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GeneratePageForm(
+                        viewContext,
+                        "/Home/Admin/Post",
+                        "page-handler",
+                        null,
+                        "hello-world",
+                        null,
+                        null
+                    )
+            )
                 .Returns(new TagBuilder("form"))
                 .Verifiable();
             var formTagHelper = new FormTagHelper(generator.Object)
@@ -974,17 +945,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             );
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GeneratePageForm(
-                            viewContext,
-                            "/Home/Admin/Post",
-                            "page-handler",
-                            It.IsAny<object>(),
-                            "hello-world",
-                            null,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GeneratePageForm(
+                        viewContext,
+                        "/Home/Admin/Post",
+                        "page-handler",
+                        It.IsAny<object>(),
+                        "hello-world",
+                        null,
+                        null
+                    )
+            )
                 .Callback(
                     (
                         ViewContext _,
@@ -1144,13 +1115,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(null)
             );
-            var expectedErrorMessage = string.Join(
-                Environment.NewLine,
-                "Cannot determine the 'action' attribute for <form>. The following attributes are mutually exclusive:",
-                "asp-route",
-                "asp-controller, asp-action",
-                "asp-page"
-            );
+            var expectedErrorMessage = string
+                .Join(
+                    Environment.NewLine,
+                    "Cannot determine the 'action' attribute for <form>. The following attributes are mutually exclusive:",
+                    "asp-route",
+                    "asp-controller, asp-action",
+                    "asp-page"
+                );
 
             var context = new TagHelperContext(
                 tagName: "form",
@@ -1183,13 +1155,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(null)
             );
-            var expectedErrorMessage = string.Join(
-                Environment.NewLine,
-                "Cannot determine the 'action' attribute for <form>. The following attributes are mutually exclusive:",
-                "asp-route",
-                "asp-controller, asp-action",
-                "asp-page"
-            );
+            var expectedErrorMessage = string
+                .Join(
+                    Environment.NewLine,
+                    "Cannot determine the 'action' attribute for <form>. The following attributes are mutually exclusive:",
+                    "asp-route",
+                    "asp-controller, asp-action",
+                    "asp-page"
+                );
 
             var context = new TagHelperContext(
                 tagName: "form",
@@ -1222,13 +1195,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(null)
             );
-            var expectedErrorMessage = string.Join(
-                Environment.NewLine,
-                "Cannot determine the 'action' attribute for <form>. The following attributes are mutually exclusive:",
-                "asp-route",
-                "asp-controller, asp-action",
-                "asp-page"
-            );
+            var expectedErrorMessage = string
+                .Join(
+                    Environment.NewLine,
+                    "Cannot determine the 'action' attribute for <form>. The following attributes are mutually exclusive:",
+                    "asp-route",
+                    "asp-controller, asp-action",
+                    "asp-page"
+                );
 
             var context = new TagHelperContext(
                 tagName: "form",

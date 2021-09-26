@@ -73,12 +73,8 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             try
             {
-                return await BrokeredServiceConnection<T>.InvokeStreamingServiceAsync(
-                        _callback,
-                        invocation,
-                        reader,
-                        cancellationToken
-                    )
+                return await BrokeredServiceConnection<T>
+                    .InvokeStreamingServiceAsync(_callback, invocation, reader, cancellationToken)
                     .ConfigureAwait(false);
             }
             catch (Exception exception)

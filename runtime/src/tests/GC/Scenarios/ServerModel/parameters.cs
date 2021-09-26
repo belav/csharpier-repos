@@ -240,10 +240,11 @@ namespace ServerSimulator
                     {
                         float finalizableRate = 0;
                         if (
-                            !float.TryParse(
-                                str.Substring("/finalizablerate:".Length),
-                                out finalizableRate
-                            )
+                            !float
+                                .TryParse(
+                                    str.Substring("/finalizablerate:".Length),
+                                    out finalizableRate
+                                )
                         )
                         {
                             Console.WriteLine("Invalid finalizablerate");
@@ -259,10 +260,11 @@ namespace ServerSimulator
                     {
                         float cacheReplacementRate = 0;
                         if (
-                            !float.TryParse(
-                                str.Substring("/cachereplacementrate:".Length),
-                                out cacheReplacementRate
-                            )
+                            !float
+                                .TryParse(
+                                    str.Substring("/cachereplacementrate:".Length),
+                                    out cacheReplacementRate
+                                )
                         )
                         {
                             Console.WriteLine("Invalid cachereplacementrate");
@@ -278,10 +280,8 @@ namespace ServerSimulator
                     {
                         float survivalRate = 0;
                         if (
-                            !float.TryParse(
-                                str.Substring("/survivalrate:".Length),
-                                out survivalRate
-                            )
+                            !float
+                                .TryParse(str.Substring("/survivalrate:".Length), out survivalRate)
                         )
                         {
                             Console.WriteLine("Invalid survivalrate");

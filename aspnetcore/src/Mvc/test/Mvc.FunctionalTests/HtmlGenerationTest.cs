@@ -161,11 +161,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 }
                 else
                 {
-                    expectedContent = string.Format(
-                        CultureInfo.InvariantCulture,
-                        expectedContent,
-                        forgeryToken
-                    );
+                    expectedContent = string
+                        .Format(CultureInfo.InvariantCulture, expectedContent, forgeryToken);
                     Assert.Equal(
                         expectedContent.Trim(),
                         responseContent,
@@ -195,9 +192,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var client = Factory.WithWebHostBuilder(
-                    builder =>
-                        builder.UseStartup<HtmlGenerationWebSite.StartupWithoutEndpointRouting>()
-                )
+                builder => builder.UseStartup<HtmlGenerationWebSite.StartupWithoutEndpointRouting>()
+            )
                 .CreateDefaultClient();
             var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
             var outputFile =

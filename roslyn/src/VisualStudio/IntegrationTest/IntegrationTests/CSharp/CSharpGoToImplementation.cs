@@ -46,10 +46,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             );
             VisualStudio.Editor.PlaceCaret("interface IGoo");
             VisualStudio.Editor.GoToImplementation("FileImplementation.cs");
-            VisualStudio.Editor.Verify.TextContains(
-                @"class Implementation$$",
-                assertCaretPosition: true
-            );
+            VisualStudio.Editor.Verify
+                .TextContains(@"class Implementation$$", assertCaretPosition: true);
             Assert.False(VisualStudio.Shell.IsActiveTabProvisional());
         }
 
@@ -69,11 +67,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 }
 "
             );
-            VisualStudio.SolutionExplorer.CloseCodeFile(
-                project,
-                "FileImplementation.cs",
-                saveFile: true
-            );
+            VisualStudio.SolutionExplorer
+                .CloseCodeFile(project, "FileImplementation.cs", saveFile: true);
             VisualStudio.SolutionExplorer.AddFile(project, "FileInterface.cs");
             VisualStudio.SolutionExplorer.OpenFile(project, "FileInterface.cs");
             VisualStudio.Editor.SetText(
@@ -83,10 +78,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             );
             VisualStudio.Editor.PlaceCaret("interface IBar");
             VisualStudio.Editor.GoToImplementation("FileImplementation.cs");
-            VisualStudio.Editor.Verify.TextContains(
-                @"class Implementation$$",
-                assertCaretPosition: true
-            );
+            VisualStudio.Editor.Verify
+                .TextContains(@"class Implementation$$", assertCaretPosition: true);
             Assert.True(VisualStudio.Shell.IsActiveTabProvisional());
         }
 
@@ -111,10 +104,8 @@ class Implementation : IDisposable
             VisualStudio.Editor.PlaceCaret("IDisposable d", charsOffset: -1);
             VisualStudio.Editor.GoToDefinition("IDisposable [from metadata]");
             VisualStudio.Editor.GoToImplementation("FileImplementation.cs");
-            VisualStudio.Editor.Verify.TextContains(
-                @"class Implementation$$ : IDisposable",
-                assertCaretPosition: true
-            );
+            VisualStudio.Editor.Verify
+                .TextContains(@"class Implementation$$ : IDisposable", assertCaretPosition: true);
         }
     }
 }

@@ -139,7 +139,8 @@ class C
                     .WithArguments("C.N1.N4.n4_pub", "0"),
                 // (8,24): warning CS0414: The field 'C.c_priv' is assigned but its value is never used
                 //     static private int c_priv;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv").WithArguments("C.c_priv")
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv")
+                    .WithArguments("C.c_priv")
             );
         }
 
@@ -224,7 +225,8 @@ class C
             c.VerifyDiagnostics(
                 // (8,24): warning CS0414: The field 'C.c_priv' is assigned but its value is never used
                 //     static private int c_priv;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv").WithArguments("C.c_priv"),
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv")
+                    .WithArguments("C.c_priv"),
                 // (17,28): warning CS0414: The field 'C.N1.n1_priv' is assigned but its value is never used
                 //         static private int n1_priv;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "n1_priv")
@@ -350,7 +352,8 @@ class E: D
                     .WithArguments("C.N4.n4_pub", "0"),
                 // (8,24): warning CS0414: The field 'C.c_priv' is assigned but its value is never used
                 //     static private int c_priv;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv").WithArguments("C.c_priv"),
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "c_priv")
+                    .WithArguments("C.c_priv"),
                 // (41,24): warning CS0414: The field 'D.n1_priv' is assigned but its value is never used
                 //     static private int n1_priv;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "n1_priv")
@@ -802,9 +805,8 @@ class ADerived2: A
             Compilation compilation = c;
             INamespaceSymbol globalNS = c.GlobalNamespace;
             IAssemblySymbol sourceAssem = c.SourceModule.ContainingAssembly;
-            IAssemblySymbol mscorlibAssem = ((CSharpCompilation)c).GetReferencedAssemblySymbol(
-                    c.ExternalReferences[0]
-                )
+            IAssemblySymbol mscorlibAssem = ((CSharpCompilation)c)
+                .GetReferencedAssemblySymbol(c.ExternalReferences[0])
                 .GetPublicSymbol();
             INamedTypeSymbol classA = globalNS.GetMembers("A").Single() as INamedTypeSymbol;
             var tree = c.SyntaxTrees.First();
@@ -1063,9 +1065,8 @@ internal class Derived : Outer
             );
             INamespaceSymbol globalNS = c1.GlobalNamespace;
             IAssemblySymbol sourceAssem = c1.SourceModule.ContainingAssembly;
-            IAssemblySymbol mscorlibAssem = ((CSharpCompilation)c1).GetReferencedAssemblySymbol(
-                    c1.ExternalReferences[0]
-                )
+            IAssemblySymbol mscorlibAssem = ((CSharpCompilation)c1)
+                .GetReferencedAssemblySymbol(c1.ExternalReferences[0])
                 .GetPublicSymbol();
             INamedTypeSymbol Outer = globalNS.GetMembers("Outer").Single() as INamedTypeSymbol;
             INamedTypeSymbol Outer_Inner = Outer.GetMembers("Inner").Single() as INamedTypeSymbol;
@@ -1154,10 +1155,12 @@ internal class InFriendCompilation
             Compilation compilation = c;
             c.VerifyDiagnostics();
             Assert.NotNull(c.GetReferencedAssemblySymbol(r1));
-            var classC = compilation.GlobalNamespace.GetMembers("C")
+            var classC = compilation.GlobalNamespace
+                .GetMembers("C")
                 .OfType<INamedTypeSymbol>()
                 .Single();
-            var classQ = compilation.GlobalNamespace.GetMembers("Q")
+            var classQ = compilation.GlobalNamespace
+                .GetMembers("Q")
                 .OfType<INamedTypeSymbol>()
                 .Single();
             Assert.True(compilation.IsSymbolAccessibleWithin(classC, classQ));
@@ -1172,13 +1175,15 @@ internal class InFriendCompilation
             // duplicate assembly results in no assembly symbol
             Assert.Null(c.GetReferencedAssemblySymbol(r1));
             // The variable classC represents a symbol from r1, which did not result in any symbols in c
-            var c2 = ((Compilation)c).GlobalNamespace.GetMembers("C")
+            var c2 = ((Compilation)c).GlobalNamespace
+                .GetMembers("C")
                 .OfType<INamedTypeSymbol>()
                 .Single();
             Assert.NotEqual(classC, c2);
 
             Assert.NotNull(c.GetReferencedAssemblySymbol(r2));
-            classQ = ((Compilation)c).GlobalNamespace.GetMembers("Q")
+            classQ = ((Compilation)c).GlobalNamespace
+                .GetMembers("Q")
                 .OfType<INamedTypeSymbol>()
                 .Single();
             // the below should not throw a null reference exception.
@@ -1247,12 +1252,11 @@ public class A
         public void AccessCheckCrossAssemblyParameterProtectedMethodMD()
         {
             var other = CreateCompilation(
-                    @"
+                @"
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""AccessCheckCrossAssemblyParameterProtectedMethod2"")]
 internal class C {}",
-                    assemblyName: "AccessCheckCrossAssemblyParameterProtectedMethod1"
-                )
-                .EmitToArray();
+                assemblyName: "AccessCheckCrossAssemblyParameterProtectedMethod1"
+            ).EmitToArray();
 
             CSharpCompilation c = CreateCompilation(
                 @"
@@ -1382,7 +1386,9 @@ internal abstract class B3 : A
             );
             compilation3.VerifyDiagnostics(
                 // (6,12): error CS0122: 'A.M()' is inaccessible due to its protection level
-                Diagnostic(ErrorCode.ERR_BadAccess, "M").WithArguments("A.M()").WithLocation(6, 12),
+                Diagnostic(ErrorCode.ERR_BadAccess, "M")
+                    .WithArguments("A.M()")
+                    .WithLocation(6, 12),
                 // (8,16): error CS0122: 'A.P' is inaccessible due to its protection level
                 Diagnostic(ErrorCode.ERR_BadAccess, "P").WithArguments("A.P").WithLocation(8, 16),
                 // (9,12): error CS0122: 'A.P' is inaccessible due to its protection level
@@ -1660,14 +1666,13 @@ abstract class Class1
 {
     private int _UnusedField;
 }";
-            CompileAndVerify(text)
-                .VerifyDiagnostics(
-                    // (4,21): warning CS0169: The field 'Class1._UnusedField' is never used
-                    //         private int _UnusedField;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "_UnusedField")
-                        .WithArguments("Class1._UnusedField")
-                        .WithLocation(4, 17)
-                );
+            CompileAndVerify(text).VerifyDiagnostics(
+                // (4,21): warning CS0169: The field 'Class1._UnusedField' is never used
+                //         private int _UnusedField;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "_UnusedField")
+                    .WithArguments("Class1._UnusedField")
+                    .WithLocation(4, 17)
+            );
         }
 
         [Fact, WorkItem(13652, "https://github.com/dotnet/roslyn/issues/13652")]
@@ -1684,14 +1689,13 @@ abstract class Class1
         _AssignedButNotReadField = 1;
     }
 }";
-            CompileAndVerify(text)
-                .VerifyDiagnostics(
-                    // (4,21): warning CS0414: The field 'Class1._AssignedButNotReadField' is assigned but its value is never used
-                    //         private int _AssignedButNotReadField;
-                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "_AssignedButNotReadField")
-                        .WithArguments("Class1._AssignedButNotReadField")
-                        .WithLocation(4, 17)
-                );
+            CompileAndVerify(text).VerifyDiagnostics(
+                // (4,21): warning CS0414: The field 'Class1._AssignedButNotReadField' is assigned but its value is never used
+                //         private int _AssignedButNotReadField;
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "_AssignedButNotReadField")
+                    .WithArguments("Class1._AssignedButNotReadField")
+                    .WithLocation(4, 17)
+            );
         }
 
         [Fact, WorkItem(13652, "https://github.com/dotnet/roslyn/issues/13652")]
@@ -1708,14 +1712,13 @@ internal abstract class Class1
         System.Console.WriteLine(_UnAssignedField1);
     }
 }";
-            CompileAndVerify(text)
-                .VerifyDiagnostics(
-                    // (4,18): warning CS0649: Field 'Class1._UnAssignedField1' is never assigned to, and will always have its default value 0
-                    //     internal int _UnAssignedField;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "_UnAssignedField1")
-                        .WithArguments("Class1._UnAssignedField1", "0")
-                        .WithLocation(4, 19)
-                );
+            CompileAndVerify(text).VerifyDiagnostics(
+                // (4,18): warning CS0649: Field 'Class1._UnAssignedField1' is never assigned to, and will always have its default value 0
+                //     internal int _UnAssignedField;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "_UnAssignedField1")
+                    .WithArguments("Class1._UnAssignedField1", "0")
+                    .WithLocation(4, 19)
+            );
         }
 
         [Fact, WorkItem(13652, "https://github.com/dotnet/roslyn/issues/13652")]

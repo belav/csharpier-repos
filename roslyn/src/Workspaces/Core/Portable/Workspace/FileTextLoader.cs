@@ -197,9 +197,9 @@ namespace Microsoft.CodeAnalysis
                 // we do this so that we asynchronously read from file. and this should allocate less for IDE case.
                 // but probably not for command line case where it doesn't use more sophisticated services.
                 using var readStream = await SerializableBytes.CreateReadableStreamAsync(
-                        stream,
-                        cancellationToken: cancellationToken
-                    )
+                    stream,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 var text = CreateText(readStream, workspace);
                 textAndVersion = TextAndVersion.Create(text, version, Path);
@@ -212,10 +212,8 @@ namespace Microsoft.CodeAnalysis
             var newLastWriteTime = FileUtilities.GetFileTimeStamp(Path);
             if (!newLastWriteTime.Equals(prevLastWriteTime))
             {
-                var message = string.Format(
-                    WorkspacesResources.File_was_externally_modified_colon_0,
-                    Path
-                );
+                var message = string
+                    .Format(WorkspacesResources.File_was_externally_modified_colon_0, Path);
                 throw new IOException(message);
             }
 
@@ -266,10 +264,8 @@ namespace Microsoft.CodeAnalysis
             var newLastWriteTime = FileUtilities.GetFileTimeStamp(Path);
             if (!newLastWriteTime.Equals(prevLastWriteTime))
             {
-                var message = string.Format(
-                    WorkspacesResources.File_was_externally_modified_colon_0,
-                    Path
-                );
+                var message = string
+                    .Format(WorkspacesResources.File_was_externally_modified_colon_0, Path);
                 throw new IOException(message);
             }
 
@@ -303,12 +299,13 @@ namespace Microsoft.CodeAnalysis
                     )
                 );
 
-                var message = string.Format(
-                    WorkspacesResources.File_0_size_of_1_exceeds_maximum_allowed_size_of_2,
-                    path,
-                    fileLength,
-                    threshold
-                );
+                var message = string
+                    .Format(
+                        WorkspacesResources.File_0_size_of_1_exceeds_maximum_allowed_size_of_2,
+                        path,
+                        fileLength,
+                        threshold
+                    );
                 throw new InvalidDataException(message);
             }
         }

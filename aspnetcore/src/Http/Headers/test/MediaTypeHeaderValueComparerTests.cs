@@ -72,9 +72,9 @@ namespace Microsoft.Net.Http.Headers
             var expectedSortedValues = MediaTypeHeaderValue.ParseList(expectedSorted.ToList());
 
             var actualSorted = unsortedValues.OrderByDescending(
-                    m => m,
-                    MediaTypeHeaderValueComparer.QualityComparer
-                )
+                m => m,
+                MediaTypeHeaderValueComparer.QualityComparer
+            )
                 .ToList();
 
             Assert.Equal(expectedSortedValues, actualSorted);

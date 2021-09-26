@@ -79,14 +79,16 @@ namespace Roslyn.Test.Utilities
         {
             if (language == LanguageNames.CSharp)
             {
-                return CS.SyntaxFactory.ParseTokens(text)
+                return CS.SyntaxFactory
+                    .ParseTokens(text)
                     .Select(t => (SyntaxToken)t)
                     .Where(t => !SkipCSharpToken(t))
                     .ToList();
             }
             else
             {
-                return VB.SyntaxFactory.ParseTokens(text)
+                return VB.SyntaxFactory
+                    .ParseTokens(text)
                     .Select(t => (SyntaxToken)t)
                     .Where(t => !SkipVisualBasicToken(t))
                     .ToList();
@@ -113,17 +115,16 @@ namespace Roslyn.Test.Utilities
         {
             if (language == LanguageNames.CSharp)
             {
-                return CS.SyntaxFactory.ParseCompilationUnit(
-                    expectedText,
-                    options: (CS.CSharpParseOptions)options
-                );
+                return CS.SyntaxFactory
+                    .ParseCompilationUnit(expectedText, options: (CS.CSharpParseOptions)options);
             }
             else
             {
-                return VB.SyntaxFactory.ParseCompilationUnit(
-                    expectedText,
-                    options: (VB.VisualBasicParseOptions)options
-                );
+                return VB.SyntaxFactory
+                    .ParseCompilationUnit(
+                        expectedText,
+                        options: (VB.VisualBasicParseOptions)options
+                    );
             }
         }
     }

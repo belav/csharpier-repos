@@ -610,22 +610,20 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         )
         {
             var matcher = new Mock<Matcher>();
-            matcher.Setup(m => m.AddInclude(It.IsAny<string>()))
-                .Returns<string>(
-                    pattern =>
-                    {
-                        includePatterns.Add(pattern);
-                        return matcher.Object;
-                    }
-                );
-            matcher.Setup(m => m.AddExclude(It.IsAny<string>()))
-                .Returns<string>(
-                    pattern =>
-                    {
-                        excludePatterns.Add(pattern);
-                        return matcher.Object;
-                    }
-                );
+            matcher.Setup(m => m.AddInclude(It.IsAny<string>())).Returns<string>(
+                pattern =>
+                {
+                    includePatterns.Add(pattern);
+                    return matcher.Object;
+                }
+            );
+            matcher.Setup(m => m.AddExclude(It.IsAny<string>())).Returns<string>(
+                pattern =>
+                {
+                    excludePatterns.Add(pattern);
+                    return matcher.Object;
+                }
+            );
             var patternMatchingResult = new PatternMatchingResult(
                 Enumerable.Empty<FilePatternMatch>()
             );

@@ -246,8 +246,8 @@ namespace Internal.TypeSystem.Ecma
             else if (attributeCtor.Kind == HandleKind.MethodDefinition)
             {
                 attributeType = metadataReader.GetMethodDefinition(
-                        (MethodDefinitionHandle)attributeCtor
-                    )
+                    (MethodDefinitionHandle)attributeCtor
+                )
                     .GetDeclaringType();
                 return true;
             }

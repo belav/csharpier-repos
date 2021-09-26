@@ -91,17 +91,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
             string[] genericFormatArgs = new string[genericArity];
             for (int i = 0; i < genericParametersOrder.Length; i++)
             {
-                genericFormatArgs[genericParametersOrder[i]] = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{{{0}}}",
-                    i
-                );
+                genericFormatArgs[genericParametersOrder[i]] = string
+                    .Format(CultureInfo.InvariantCulture, "{{{0}}}", i);
             }
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                originalGenericName,
-                genericFormatArgs
-            );
+            return string
+                .Format(CultureInfo.InvariantCulture, originalGenericName, genericFormatArgs);
         }
 
         public static T[] Reorder<T>(T[] original, int[] genericParametersOrder)

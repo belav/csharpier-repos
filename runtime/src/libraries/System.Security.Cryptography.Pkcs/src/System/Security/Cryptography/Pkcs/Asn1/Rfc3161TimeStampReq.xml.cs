@@ -160,11 +160,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System.Security.Cryptography.Pkcs.Asn1.MessageImprint.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.MessageImprint
-            );
+            System.Security.Cryptography.Pkcs.Asn1.MessageImprint
+                .Decode(ref sequenceReader, rebind, out decoded.MessageImprint);
 
             if (
                 sequenceReader.HasData
@@ -214,11 +211,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Asn1.X509ExtensionAsn.Decode(
-                            ref collectionReader,
-                            rebind,
-                            out tmpItem
-                        );
+                        System.Security.Cryptography.Asn1.X509ExtensionAsn
+                            .Decode(ref collectionReader, rebind, out tmpItem);
                         tmpList.Add(tmpItem);
                     }
 

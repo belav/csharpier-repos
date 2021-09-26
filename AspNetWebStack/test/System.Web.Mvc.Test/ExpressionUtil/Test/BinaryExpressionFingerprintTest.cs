@@ -15,10 +15,8 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
             ExpressionType expectedNodeType = ExpressionType.Add;
             Type expectedType = typeof(DateTime);
-            MethodInfo expectedMethod = typeof(DateTime).GetMethod(
-                "op_Addition",
-                new Type[] { typeof(DateTime), typeof(TimeSpan) }
-            );
+            MethodInfo expectedMethod = typeof(DateTime)
+                .GetMethod("op_Addition", new Type[] { typeof(DateTime), typeof(TimeSpan) });
 
             // Act
             BinaryExpressionFingerprint fingerprint = new BinaryExpressionFingerprint(
@@ -39,10 +37,8 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
             ExpressionType nodeType = ExpressionType.Add;
             Type type = typeof(DateTime);
-            MethodInfo method = typeof(DateTime).GetMethod(
-                "op_Addition",
-                new Type[] { typeof(DateTime), typeof(TimeSpan) }
-            );
+            MethodInfo method = typeof(DateTime)
+                .GetMethod("op_Addition", new Type[] { typeof(DateTime), typeof(TimeSpan) });
 
             // Act
             BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(
@@ -67,10 +63,8 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
             ExpressionType nodeType = ExpressionType.Add;
             Type type = typeof(DateTime);
-            MethodInfo method = typeof(DateTime).GetMethod(
-                "op_Addition",
-                new Type[] { typeof(DateTime), typeof(TimeSpan) }
-            );
+            MethodInfo method = typeof(DateTime)
+                .GetMethod("op_Addition", new Type[] { typeof(DateTime), typeof(TimeSpan) });
 
             // Act
             BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(
@@ -93,10 +87,8 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
             ExpressionType nodeType = ExpressionType.Add;
             Type type = typeof(DateTime);
-            MethodInfo method = typeof(DateTime).GetMethod(
-                "op_Addition",
-                new Type[] { typeof(DateTime), typeof(TimeSpan) }
-            );
+            MethodInfo method = typeof(DateTime)
+                .GetMethod("op_Addition", new Type[] { typeof(DateTime), typeof(TimeSpan) });
 
             // Act
             BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(
@@ -120,10 +112,8 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
             ExpressionType nodeType = ExpressionType.Add;
             Type type = typeof(DateTime);
-            MethodInfo method = typeof(DateTime).GetMethod(
-                "op_Addition",
-                new Type[] { typeof(DateTime), typeof(TimeSpan) }
-            );
+            MethodInfo method = typeof(DateTime)
+                .GetMethod("op_Addition", new Type[] { typeof(DateTime), typeof(TimeSpan) });
 
             // Act
             BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(

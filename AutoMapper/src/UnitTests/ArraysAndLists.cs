@@ -102,7 +102,8 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         [Fact]
         public void Should_map_ok()
         {
-            _destination.Items.Select(i => i.Value)
+            _destination.Items
+                .Select(i => i.Value)
                 .SequenceEqual(_sourceItems.Select(i => i.Value))
                 .ShouldBeTrue();
         }

@@ -43,40 +43,41 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.SignatureHelp
                 triggerInfo.TriggerCharacter
             );
             var mappedSignatureHelpItems = await _provider.GetItemsAsync(
-                    document,
-                    position,
-                    mappedTriggerInfo,
-                    cancellationToken
-                )
+                document,
+                position,
+                mappedTriggerInfo,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (mappedSignatureHelpItems != null)
             {
                 return new SignatureHelpItems(
                     mappedSignatureHelpItems.Items?.Select(
-                            x =>
-                                new SignatureHelpItem(
-                                    x.IsVariadic,
-                                    x.DocumentationFactory,
-                                    x.PrefixDisplayParts,
-                                    x.SeparatorDisplayParts,
-                                    x.SuffixDisplayParts,
-                                    x.Parameters.Select(
-                                            y =>
-                                                new SignatureHelpParameter(
-                                                    y.Name,
-                                                    y.IsOptional,
-                                                    y.DocumentationFactory,
-                                                    y.DisplayParts,
-                                                    y.PrefixDisplayParts,
-                                                    y.SuffixDisplayParts,
-                                                    y.SelectedDisplayParts
-                                                )
-                                        )
-                                        .ToList(),
-                                    x.DescriptionParts
-                                )
-                        )
+                        x =>
+                            new SignatureHelpItem(
+                                x.IsVariadic,
+                                x.DocumentationFactory,
+                                x.PrefixDisplayParts,
+                                x.SeparatorDisplayParts,
+                                x.SuffixDisplayParts,
+                                x.Parameters
+                                    .Select(
+                                        y =>
+                                            new SignatureHelpParameter(
+                                                y.Name,
+                                                y.IsOptional,
+                                                y.DocumentationFactory,
+                                                y.DisplayParts,
+                                                y.PrefixDisplayParts,
+                                                y.SuffixDisplayParts,
+                                                y.SelectedDisplayParts
+                                            )
+                                    )
+                                    .ToList(),
+                                x.DescriptionParts
+                            )
+                    )
                         .ToList(),
                     mappedSignatureHelpItems.ApplicableSpan,
                     mappedSignatureHelpItems.ArgumentIndex,

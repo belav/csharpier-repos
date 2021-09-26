@@ -42,9 +42,9 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             return async i =>
                 await _callback.InvokeAsync(
-                        (callback, c) => callback.OnResultFoundAsync(callbackId, i),
-                        cancellationToken
-                    )
+                    (callback, c) => callback.OnResultFoundAsync(callbackId, i),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
         }
 
@@ -84,12 +84,12 @@ namespace Microsoft.CodeAnalysis.Remote
                     var callback = GetCallback(callbackId, cancellationToken);
 
                     await AbstractNavigateToSearchService.SearchFullyLoadedDocumentInCurrentProcessAsync(
-                            document,
-                            searchPattern,
-                            kinds.ToImmutableHashSet(),
-                            callback,
-                            cancellationToken
-                        )
+                        document,
+                        searchPattern,
+                        kinds.ToImmutableHashSet(),
+                        callback,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 },
                 cancellationToken
@@ -119,13 +119,13 @@ namespace Microsoft.CodeAnalysis.Remote
                     );
 
                     await AbstractNavigateToSearchService.SearchFullyLoadedProjectInCurrentProcessAsync(
-                            project,
-                            priorityDocuments,
-                            searchPattern,
-                            kinds.ToImmutableHashSet(),
-                            callback,
-                            cancellationToken
-                        )
+                        project,
+                        priorityDocuments,
+                        searchPattern,
+                        kinds.ToImmutableHashSet(),
+                        callback,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 },
                 cancellationToken
@@ -150,14 +150,14 @@ namespace Microsoft.CodeAnalysis.Remote
                     var callback = GetCallback(callbackId, cancellationToken);
 
                     await AbstractNavigateToSearchService.SearchCachedDocumentsInCurrentProcessAsync(
-                            GetWorkspace(),
-                            documentKeys,
-                            priorityDocumentKeys,
-                            searchPattern,
-                            kinds.ToImmutableHashSet(),
-                            callback,
-                            cancellationToken
-                        )
+                        GetWorkspace(),
+                        documentKeys,
+                        priorityDocumentKeys,
+                        searchPattern,
+                        kinds.ToImmutableHashSet(),
+                        callback,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 },
                 cancellationToken

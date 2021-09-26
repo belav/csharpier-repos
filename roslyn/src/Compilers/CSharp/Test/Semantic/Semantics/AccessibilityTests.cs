@@ -73,9 +73,9 @@ class C1
         public void IsAccessibleSymbolNotResolvable()
         {
             Symbol symbol = CSharpCompilation.Create(
-                    "NotResolvable",
-                    references: new MetadataReference[] { MscorlibRef }
-                )
+                "NotResolvable",
+                references: new MetadataReference[] { MscorlibRef }
+            )
                 .GetWellKnownType(WellKnownType.System_Exception);
 
             Assert.True(s_testModel.IsAccessible(s_testPosition, symbol.GetPublicSymbol()));
@@ -192,12 +192,11 @@ public class G<T>
 
     protected event G<int>.N E;
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,30): warning CS0067: The event 'G<T>.E' is never used
-                    //     protected event G<int>.N E;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("G<T>.E")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,30): warning CS0067: The event 'G<T>.E' is never used
+                //     protected event G<int>.N E;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("G<T>.E")
+            );
         }
 
         [WorkItem(545450, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545450")]
@@ -215,12 +214,11 @@ class C : G<int>
 {
     protected event G<long>.N E;
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,31): warning CS0067: The event 'C.E' is never used
-                    //     protected event G<long>.N E;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,31): warning CS0067: The event 'C.E' is never used
+                //     protected event G<long>.N E;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E")
+            );
         }
 
         [WorkItem(545450, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545450")]
@@ -278,20 +276,19 @@ class Test
     {
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (16,32): warning CS0649: Field 'RuleE<T>.Z1.Goo' is never assigned to, and will always have its default value null
-                    //         protected RuleE<int>.N Goo;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Goo")
-                        .WithArguments("RuleE<T>.Z1.Goo", "null"),
-                    // (23,26): warning CS0169: The field 'RuleE<T>.Fld3' is never used
-                    //     private RuleE<int>.N Fld3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "Fld3")
-                        .WithArguments("RuleE<T>.Fld3"),
-                    // (38,26): warning CS0169: The field 'D<T>.F3' is never used
-                    //     private RuleE<int>.N F3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "F3").WithArguments("D<T>.F3")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (16,32): warning CS0649: Field 'RuleE<T>.Z1.Goo' is never assigned to, and will always have its default value null
+                //         protected RuleE<int>.N Goo;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Goo")
+                    .WithArguments("RuleE<T>.Z1.Goo", "null"),
+                // (23,26): warning CS0169: The field 'RuleE<T>.Fld3' is never used
+                //     private RuleE<int>.N Fld3;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "Fld3")
+                    .WithArguments("RuleE<T>.Fld3"),
+                // (38,26): warning CS0169: The field 'D<T>.F3' is never used
+                //     private RuleE<int>.N F3;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "F3").WithArguments("D<T>.F3")
+            );
         }
 
         [WorkItem(531368, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531368")]

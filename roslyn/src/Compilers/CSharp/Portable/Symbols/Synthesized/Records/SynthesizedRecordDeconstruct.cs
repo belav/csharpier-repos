@@ -63,23 +63,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         diagnostics
                     )
                 ),
-                Parameters: _ctor.Parameters.SelectAsArray<
-                    ParameterSymbol,
-                    ImmutableArray<Location>,
-                    ParameterSymbol
-                >(
-                    (param, locations) =>
-                        new SourceSimpleParameterSymbol(
-                            owner: this,
-                            param.TypeWithAnnotations,
-                            param.Ordinal,
-                            RefKind.Out,
-                            param.Name,
-                            isDiscard: false,
-                            locations
-                        ),
-                    arg: Locations
-                ),
+                Parameters: _ctor.Parameters
+                    .SelectAsArray<ParameterSymbol, ImmutableArray<Location>, ParameterSymbol>(
+                        (param, locations) =>
+                            new SourceSimpleParameterSymbol(
+                                owner: this,
+                                param.TypeWithAnnotations,
+                                param.Ordinal,
+                                RefKind.Out,
+                                param.Name,
+                                isDiscard: false,
+                                locations
+                            ),
+                        arg: Locations
+                    ),
                 IsVararg: false,
                 DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty
             );
@@ -106,9 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            var statementsBuilder = ArrayBuilder<BoundStatement>.GetInstance(
-                _properties.Length + 1
-            );
+            var statementsBuilder = ArrayBuilder<BoundStatement>
+                .GetInstance(_properties.Length + 1);
             for (int i = 0; i < _properties.Length; i++)
             {
                 var parameter = Parameters[i];

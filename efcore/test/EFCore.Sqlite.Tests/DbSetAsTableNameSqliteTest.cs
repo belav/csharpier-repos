@@ -22,8 +22,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder.UseInternalServiceProvider(
-                        new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider()
-                    )
+                    new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider()
+                )
                     .UseSqlite("Database = Dummy");
         }
 
@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder.UseInternalServiceProvider(
-                        new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider()
-                    )
+                    new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider()
+                )
                     .UseSqlite("Database = Dummy");
         }
     }

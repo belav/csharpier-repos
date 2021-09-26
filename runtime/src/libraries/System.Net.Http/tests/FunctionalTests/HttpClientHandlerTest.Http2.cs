@@ -478,15 +478,15 @@ namespace System.Net.Http.Functional.Tests
                 }
 
                 Http2LoopbackConnection connection = await connectionTask.WaitAsync(
-                        TestHelper.PassingTestTimeout
-                    )
+                    TestHelper.PassingTestTimeout
+                )
                     .ConfigureAwait(false);
 
                 // Client sets the default MaxConcurrentStreams to 100, so accept 100 requests.
                 List<int> acceptedRequests = await AcceptRequests(
-                        connection,
-                        DefaultMaxConcurrentStreams
-                    )
+                    connection,
+                    DefaultMaxConcurrentStreams
+                )
                     .WaitAsync(TestHelper.PassingTestTimeout)
                     .ConfigureAwait(false);
 
@@ -495,23 +495,23 @@ namespace System.Net.Http.Functional.Tests
                 // Extra request is queued on the client.
                 Task<HttpResponseMessage> extraSendTask = client.GetAsync(server.Address);
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        () => connection.ReadRequestHeaderAsync()
-                    )
+                    () => connection.ReadRequestHeaderAsync()
+                )
                     .WaitAsync(TestHelper.PassingTestTimeout)
                     .ConfigureAwait(false);
 
                 // Send SETTINGS frame to increase the default stream limit by 1, unblocking the extra request.
                 await connection.SendSettingsAsync(
-                        timeout,
-                        new[]
+                    timeout,
+                    new[]
+                    {
+                        new SettingsEntry()
                         {
-                            new SettingsEntry()
-                            {
-                                SettingId = SettingId.MaxConcurrentStreams,
-                                Value = DefaultMaxConcurrentStreams + 1
-                            }
+                            SettingId = SettingId.MaxConcurrentStreams,
+                            Value = DefaultMaxConcurrentStreams + 1
                         }
-                    )
+                    }
+                )
                     .ConfigureAwait(false);
 
                 (int extraStreamId, _) = await connection.ReadAndParseRequestHeaderAsync()
@@ -562,31 +562,31 @@ namespace System.Net.Http.Functional.Tests
                 }
 
                 Http2LoopbackConnection connection = await connectionTask.WaitAsync(
-                        TestHelper.PassingTestTimeout
-                    )
+                    TestHelper.PassingTestTimeout
+                )
                     .ConfigureAwait(false);
 
                 // Client sets the default MaxConcurrentStreams to 100, so accept 100 requests.
                 List<int> acceptedRequests = await AcceptRequests(
-                        connection,
-                        DefaultMaxConcurrentStreams + ExtraStreams
-                    )
+                    connection,
+                    DefaultMaxConcurrentStreams + ExtraStreams
+                )
                     .WaitAsync(TestHelper.PassingTestTimeout)
                     .ConfigureAwait(false);
                 Assert.Equal(DefaultMaxConcurrentStreams, acceptedRequests.Count);
 
                 // Send SETTINGS frame with MaxConcurrentStreams = 102
                 await connection.SendSettingsAsync(
-                        timeout,
-                        new[]
+                    timeout,
+                    new[]
+                    {
+                        new SettingsEntry()
                         {
-                            new SettingsEntry()
-                            {
-                                SettingId = SettingId.MaxConcurrentStreams,
-                                Value = DefaultMaxConcurrentStreams + 2
-                            }
+                            SettingId = SettingId.MaxConcurrentStreams,
+                            Value = DefaultMaxConcurrentStreams + 2
                         }
-                    )
+                    }
+                )
                     .ConfigureAwait(false);
 
                 // Increased MaxConcurrentStreams ublocks only 2 requests.
@@ -657,15 +657,15 @@ namespace System.Net.Http.Functional.Tests
                 }
 
                 Http2LoopbackConnection connection = await connectionTask.WaitAsync(
-                        TestHelper.PassingTestTimeout
-                    )
+                    TestHelper.PassingTestTimeout
+                )
                     .ConfigureAwait(false);
 
                 // Client sets the default MaxConcurrentStreams to 100, so accept 100 requests.
                 List<int> acceptedRequests = await AcceptRequests(
-                        connection,
-                        DefaultMaxConcurrentStreams
-                    )
+                    connection,
+                    DefaultMaxConcurrentStreams
+                )
                     .WaitAsync(TestHelper.PassingTestTimeout)
                     .ConfigureAwait(false);
                 Assert.Equal(DefaultMaxConcurrentStreams, acceptedRequests.Count);
@@ -673,8 +673,8 @@ namespace System.Net.Http.Functional.Tests
                 // Extra request is queued on the client.
                 Task<HttpResponseMessage> extraSendTask = client.GetAsync(server.Address);
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        () => connection.ReadRequestHeaderAsync()
-                    )
+                    () => connection.ReadRequestHeaderAsync()
+                )
                     .WaitAsync(TestHelper.PassingTestTimeout)
                     .ConfigureAwait(false);
 
@@ -691,9 +691,9 @@ namespace System.Net.Http.Functional.Tests
 
                 // Client sets the MaxConcurrentStreams to 'infinite', so accept 100 + 1 extra requests.
                 List<int> acceptedExtraRequests = await AcceptRequests(
-                        connection,
-                        DefaultMaxConcurrentStreams + 1
-                    )
+                    connection,
+                    DefaultMaxConcurrentStreams + 1
+                )
                     .WaitAsync(TestHelper.PassingTestTimeout)
                     .ConfigureAwait(false);
                 Assert.Equal(DefaultMaxConcurrentStreams + 1, acceptedExtraRequests.Count);
@@ -1101,9 +1101,8 @@ namespace System.Net.Http.Functional.Tests
                 // Expect client to detect that server has disconnected and throw an exception
                 await Assert.ThrowsAnyAsync<HttpRequestException>(
                     () =>
-                        new Task[] { sendTask }.WhenAllOrAnyFailed(
-                            TestHelper.PassingTestTimeoutMilliseconds
-                        )
+                        new Task[] { sendTask }
+                            .WhenAllOrAnyFailed(TestHelper.PassingTestTimeoutMilliseconds)
                 );
             }
         }
@@ -2430,9 +2429,8 @@ namespace System.Net.Http.Functional.Tests
                     );
                     await connection.SendResponseBodyAsync(
                         streamId,
-                        Encoding.ASCII.GetBytes(
-                            $"Http2_PendingSend_SendsReset(waitForData: {waitForData})"
-                        ),
+                        Encoding.ASCII
+                            .GetBytes($"Http2_PendingSend_SendsReset(waitForData: {waitForData})"),
                         isFinal: false
                     );
                     // Wait for any lingering frames or extra reset frames.
@@ -2622,10 +2620,11 @@ namespace System.Net.Http.Functional.Tests
                         request.Version = new Version(2, 0);
                         request.Content = new StringContent(new string('*', 3000));
                         request.Headers.ExpectContinue = true;
-                        request.Headers.Add(
-                            "x-test",
-                            $"PostAsyncExpect100Continue_SendRequest_Ok({send100Continue}"
-                        );
+                        request.Headers
+                            .Add(
+                                "x-test",
+                                $"PostAsyncExpect100Continue_SendRequest_Ok({send100Continue}"
+                            );
 
                         HttpResponseMessage response = await client.SendAsync(request);
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -2682,10 +2681,11 @@ namespace System.Net.Http.Functional.Tests
                         request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
                         request.Content = new StringContent(new string('*', 3000));
                         request.Headers.ExpectContinue = true;
-                        request.Headers.Add(
-                            "x-test",
-                            "PostAsyncExpect100Continue_NonSuccessResponse_RequestBodyNotSent"
-                        );
+                        request.Headers
+                            .Add(
+                                "x-test",
+                                "PostAsyncExpect100Continue_NonSuccessResponse_RequestBodyNotSent"
+                            );
 
                         HttpResponseMessage response = await client.SendAsync(request);
                         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
@@ -4238,7 +4238,8 @@ namespace System.Net.Http.Functional.Tests
                                 SslServerAuthenticationOptions options =
                                     new SslServerAuthenticationOptions();
                                 options.ServerCertificate =
-                                    Net.Test.Common.Configuration.Certificates.GetServerCertificate();
+                                    Net.Test.Common.Configuration.Certificates
+                                        .GetServerCertificate();
                                 options.ApplicationProtocols = new List<SslApplicationProtocol>()
                                 {
                                     SslApplicationProtocol.Http2
@@ -4246,15 +4247,14 @@ namespace System.Net.Http.Functional.Tests
                                 options.ApplicationProtocols.Add(SslApplicationProtocol.Http2);
                                 // Negotiate TLS.
                                 await sslStream.AuthenticateAsServerAsync(
-                                        options,
-                                        CancellationToken.None
-                                    )
+                                    options,
+                                    CancellationToken.None
+                                )
                                     .ConfigureAwait(false);
                                 // Send back HTTP/1.1 response
                                 await sslStream.WriteAsync(
-                                    Encoding.ASCII.GetBytes(
-                                        "HTTP/1.1 400 Unrecognized request\r\n\r\n"
-                                    ),
+                                    Encoding.ASCII
+                                        .GetBytes("HTTP/1.1 400 Unrecognized request\r\n\r\n"),
                                     CancellationToken.None
                                 );
                             }
@@ -4376,10 +4376,8 @@ namespace System.Net.Http.Functional.Tests
                     };
                     for (int i = 0; i < count; i++)
                     {
-                        message.Headers.TryAddWithoutValidation(
-                            "large-header" + i,
-                            largeHeaderValue
-                        );
+                        message.Headers
+                            .TryAddWithoutValidation("large-header" + i, largeHeaderValue);
                     }
                     var response = await client.SendAsync(TestAsync, message).ConfigureAwait(false);
                 },
@@ -4440,8 +4438,8 @@ namespace System.Net.Http.Functional.Tests
                     // A Http2ConnectionException will be present somewhere in the inner exceptions.
                     // Its location depends on which method threw the exception.
                     while (
-                        requestException?.GetType()
-                            .FullName.Equals("System.Net.Http.Http2ConnectionException") == false
+                        requestException?.GetType().FullName
+                            .Equals("System.Net.Http.Http2ConnectionException") == false
                     )
                     {
                         requestException = requestException.InnerException;
@@ -4457,10 +4455,8 @@ namespace System.Net.Http.Functional.Tests
                         (Http2LoopbackConnection connection, SettingsFrame clientSettings) =
                             await server.EstablishConnectionGetSettingsAsync();
 
-                        SettingsEntry clientWindowSizeSetting =
-                            clientSettings.Entries.SingleOrDefault(
-                                x => x.SettingId == SettingId.InitialWindowSize
-                            );
+                        SettingsEntry clientWindowSizeSetting = clientSettings.Entries
+                            .SingleOrDefault(x => x.SettingId == SettingId.InitialWindowSize);
                         int clientWindowSize =
                             clientWindowSizeSetting.SettingId == SettingId.InitialWindowSize
                                 ? (int)clientWindowSizeSetting.Value
@@ -4855,10 +4851,8 @@ namespace System.Net.Http.Functional.Tests
                     using (HttpResponseMessage response = await client.GetAsync(uri))
                     {
                         Assert.True(
-                            response.Headers.TryGetValues(
-                                "new-header",
-                                out IEnumerable<string> values
-                            )
+                            response.Headers
+                                .TryGetValues("new-header", out IEnumerable<string> values)
                         );
                         Assert.Equal("baz", Assert.Single(values));
                     }
@@ -5071,10 +5065,11 @@ namespace System.Net.Http.Functional.Tests
                 var expected = headers.Select(
                     x => (name: x.Name.ToLowerInvariant(), value: x.Value.ToLowerInvariant())
                 );
-                var actual = response.Headers.SelectMany(
-                    x => x.Value,
-                    (kvp, v) => (name: kvp.Key.ToLowerInvariant(), value: v.ToLowerInvariant())
-                );
+                var actual = response.Headers
+                    .SelectMany(
+                        x => x.Value,
+                        (kvp, v) => (name: kvp.Key.ToLowerInvariant(), value: v.ToLowerInvariant())
+                    );
                 Assert.Empty(actual.Except(expected));
             }
         }

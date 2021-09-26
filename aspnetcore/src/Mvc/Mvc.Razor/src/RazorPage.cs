@@ -250,18 +250,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // b) if no sections are defined, then the body is rendered if it's available.
             if (PreviousSectionWriters != null && PreviousSectionWriters.Count > 0)
             {
-                var sectionsNotRendered = PreviousSectionWriters.Keys.Except(
-                    _renderedSections,
-                    StringComparer.OrdinalIgnoreCase
-                );
+                var sectionsNotRendered = PreviousSectionWriters.Keys
+                    .Except(_renderedSections, StringComparer.OrdinalIgnoreCase);
 
                 string[] sectionsNotIgnored;
                 if (_ignoredSections != null)
                 {
                     sectionsNotIgnored = sectionsNotRendered.Except(
-                            _ignoredSections,
-                            StringComparer.OrdinalIgnoreCase
-                        )
+                        _ignoredSections,
+                        StringComparer.OrdinalIgnoreCase
+                    )
                         .ToArray();
                 }
                 else

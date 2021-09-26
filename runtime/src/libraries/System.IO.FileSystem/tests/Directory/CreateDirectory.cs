@@ -30,15 +30,14 @@ namespace System.IO.Tests
         {
             // We're checking that we're maintaining the original path
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Environment.CurrentDirectory = TestDirectory;
-                        string subdir = Path.GetRandomFileName();
-                        DirectoryInfo info = Create(subdir);
-                        Assert.Equal(subdir, info.ToString());
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    Environment.CurrentDirectory = TestDirectory;
+                    string subdir = Path.GetRandomFileName();
+                    DirectoryInfo info = Create(subdir);
+                    Assert.Equal(subdir, info.ToString());
+                }
+            ).Dispose();
         }
 
         [Fact]

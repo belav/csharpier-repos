@@ -84,9 +84,8 @@ namespace System.Runtime.Loader.Tests
                 Assembly asm = _contexts[contextIndex].LoadFromAssemblyName(asmName);
 
                 Assert.NotNull(asm);
-                _testClassTypes[contextIndex] = asm.DefinedTypes.FirstOrDefault(
-                    t => t.Name == "TestClass"
-                );
+                _testClassTypes[contextIndex] = asm.DefinedTypes
+                    .FirstOrDefault(t => t.Name == "TestClass");
                 Assert.NotNull(_testClassTypes[contextIndex]);
 
                 _checker.SetAssemblyLoadContext(contextIndex, _contexts[contextIndex]);

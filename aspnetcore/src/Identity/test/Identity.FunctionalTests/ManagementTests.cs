@@ -194,7 +194,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
 
             // Assert 1
             Assert.NotNull(
-                principals[1].Identities.Single()
+                principals[1].Identities
+                    .Single()
                     .Claims.Single(c => c.Type == ClaimTypes.AuthenticationMethod).Value
             );
 
@@ -326,8 +327,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
                 services.SetupTestThirdPartyLogin();
 
             var client = ServerFactory.WithWebHostBuilder(
-                    whb => whb.ConfigureTestServices(ConfigureTestServices)
-                )
+                whb => whb.ConfigureTestServices(ConfigureTestServices)
+            )
                 .CreateClient();
 
             var userName = $"{Guid.NewGuid()}@example.com";

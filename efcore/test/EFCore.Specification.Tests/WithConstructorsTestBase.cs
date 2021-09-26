@@ -1653,9 +1653,9 @@ namespace Microsoft.EntityFrameworkCore
 
                 blogServiceProperty.ParameterBinding =
                     (ServiceParameterBinding)bindingFactories.FindFactory(
-                            typeof(ILazyLoader),
-                            "_loader"
-                        )
+                        typeof(ILazyLoader),
+                        "_loader"
+                    )
                         .Bind(
                             blogServiceProperty.DeclaringEntityType,
                             typeof(ILazyLoader),
@@ -1669,9 +1669,9 @@ namespace Microsoft.EntityFrameworkCore
 
                 postServiceProperty.ParameterBinding =
                     (ServiceParameterBinding)bindingFactories.FindFactory(
-                            typeof(ILazyLoader),
-                            "_loader"
-                        )
+                        typeof(ILazyLoader),
+                        "_loader"
+                    )
                         .Bind(
                             postServiceProperty.DeclaringEntityType,
                             typeof(ILazyLoader),

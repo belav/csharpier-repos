@@ -57,13 +57,14 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                "Line index {0}, Count {1} - {2}",
-                StartLineIndex,
-                LineCount,
-                FilePath
-            );
+            return string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "Line index {0}, Count {1} - {2}",
+                    StartLineIndex,
+                    LineCount,
+                    FilePath
+                );
         }
     }
 }

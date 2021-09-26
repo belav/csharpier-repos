@@ -819,9 +819,8 @@ namespace System.IO
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                buffer = ArrayPool<char>.Shared.Rent(
-                    sr.CurrentEncoding.GetMaxCharCount(DefaultBufferSize)
-                );
+                buffer = ArrayPool<char>.Shared
+                    .Rent(sr.CurrentEncoding.GetMaxCharCount(DefaultBufferSize));
                 StringBuilder sb = new StringBuilder();
                 while (true)
                 {
@@ -952,9 +951,9 @@ namespace System.IO
                         .ConfigureAwait(false);
 #else
                     int n = await fs.ReadAsync(
-                            new Memory<byte>(bytes, index, count - index),
-                            cancellationToken
-                        )
+                        new Memory<byte>(bytes, index, count - index),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 #endif
                     if (n == 0)
@@ -997,11 +996,11 @@ namespace System.IO
                     Debug.Assert(bytesRead < rentedArray.Length);
 #if MS_IO_REDIST
                     int n = await fs.ReadAsync(
-                            rentedArray,
-                            bytesRead,
-                            rentedArray.Length - bytesRead,
-                            cancellationToken
-                        )
+                        rentedArray,
+                        bytesRead,
+                        rentedArray.Length - bytesRead,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 #else
                     int n = await fs.ReadAsync(rentedArray.AsMemory(bytesRead), cancellationToken)
@@ -1191,9 +1190,9 @@ namespace System.IO
                     await sw.WriteAsync(buffer, 0, batchSize).ConfigureAwait(false);
 #else
                     await sw.WriteAsync(
-                            new ReadOnlyMemory<char>(buffer, 0, batchSize),
-                            cancellationToken
-                        )
+                        new ReadOnlyMemory<char>(buffer, 0, batchSize),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 #endif
                     index += batchSize;
@@ -1241,7 +1240,8 @@ namespace System.IO
             if (string.IsNullOrEmpty(contents))
             {
                 // Just to throw exception if there is a problem opening the file.
-                new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Read).Dispose();
+                new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Read)
+                    .Dispose();
                 return Task.CompletedTask;
             }
 

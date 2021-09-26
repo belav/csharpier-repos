@@ -238,8 +238,8 @@ namespace BuildBoss
                 // hueristic for finding assemblies that we build. Can be expanded in the future if we find more assemblies that
                 // are worth validating here.
                 var neededDllNames = neededDllNameSet.Where(
-                        x => x.StartsWith("Microsoft.CodeAnalysis")
-                    )
+                    x => x.StartsWith("Microsoft.CodeAnalysis")
+                )
                     .OrderBy(x => x, PathComparer);
                 foreach (var name in neededDllNames)
                 {
@@ -298,8 +298,8 @@ namespace BuildBoss
 
             // Move all of the assets into bincore as that is where the non-MSBuild task assets will go
             coreClrAssets = coreClrAssets.Select(
-                    x => x.WithFileRelativeName(Path.Combine("bincore", x.FileRelativeName))
-                )
+                x => x.WithFileRelativeName(Path.Combine("bincore", x.FileRelativeName))
+            )
                 .ToList();
 
             allGood &= GetPackageAssetsCore(
@@ -536,15 +536,13 @@ namespace BuildBoss
         private string FindNuGetPackage(string directory, string partialName)
         {
             var regex = $@"{partialName}.\d.*\.nupkg";
-            var file = Directory.EnumerateFiles(directory, "*.nupkg")
-                .Where(
-                    filePath =>
-                    {
-                        var fileName = Path.GetFileName(filePath);
-                        return Regex.IsMatch(fileName, regex);
-                    }
-                )
-                .SingleOrDefault();
+            var file = Directory.EnumerateFiles(directory, "*.nupkg").Where(
+                filePath =>
+                {
+                    var fileName = Path.GetFileName(filePath);
+                    return Regex.IsMatch(fileName, regex);
+                }
+            ).SingleOrDefault();
             return file
                 ?? throw new Exception($"Unable to find unique '{partialName}' in '{directory}'");
         }

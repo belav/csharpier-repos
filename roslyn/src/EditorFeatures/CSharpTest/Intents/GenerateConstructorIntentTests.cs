@@ -143,16 +143,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
 }";
 
             await VerifyExpectedTextAsync(
-                    initialText,
-                    expectedText,
-                    options: new OptionsCollection(LanguageNames.CSharp)
+                initialText,
+                expectedText,
+                options: new OptionsCollection(LanguageNames.CSharp)
+                {
                     {
-                        {
-                            CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
-                            CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
-                        }
+                        CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                        CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
                     }
-                )
+                }
+            )
                 .ConfigureAwait(false);
         }
 
@@ -175,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             var documentSet = additionalDocuments.Prepend(activeDocument).ToArray();
             using var workspace = TestWorkspace.CreateCSharp(
                 documentSet,
-                exportProvider: EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider()
+                exportProvider: EditorTestCompositions.EditorFeatures.ExportProviderFactory
+                    .CreateExportProvider()
             );
             if (options != null)
             {
@@ -212,9 +213,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 intentData: null
             );
             var results = await intentSource.ComputeIntentsAsync(
-                    intentContext,
-                    CancellationToken.None
-                )
+                intentContext,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             // For now, we're just taking the first result to match intellicode behavior.

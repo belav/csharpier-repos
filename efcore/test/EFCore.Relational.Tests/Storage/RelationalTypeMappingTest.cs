@@ -113,7 +113,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         fixedLength: true,
                         storeTypePostfix: StoreTypePostfix.Size
                     )
-                }.Concat(additionalArgs).ToArray(),
+                }
+                    .Concat(additionalArgs)
+                    .ToArray(),
                 null,
                 null
             );
@@ -180,7 +182,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         fixedLength: true,
                         storeTypePostfix: StoreTypePostfix.Size
                     )
-                }.Concat(additionalArgs).ToArray(),
+                }
+                    .Concat(additionalArgs)
+                    .ToArray(),
                 null,
                 null
             );
@@ -266,12 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public void Can_create_simple_parameter()
         {
             using var command = CreateTestCommand();
-            var parameter = new IntTypeMapping("int").CreateParameter(
-                command,
-                "Name",
-                17,
-                nullable: false
-            );
+            var parameter = new IntTypeMapping("int")
+                .CreateParameter(command, "Name", 17, nullable: false);
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -284,12 +284,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public void Can_create_simple_nullable_parameter()
         {
             using var command = CreateTestCommand();
-            var parameter = new IntTypeMapping("int").CreateParameter(
-                command,
-                "Name",
-                17,
-                nullable: true
-            );
+            var parameter = new IntTypeMapping("int")
+                .CreateParameter(command, "Name", 17, nullable: true);
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -302,12 +298,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public void Can_create_simple_parameter_with_DbType()
         {
             using var command = CreateTestCommand();
-            var parameter = new IntTypeMapping("int", DbType.Int32).CreateParameter(
-                command,
-                "Name",
-                17,
-                nullable: false
-            );
+            var parameter = new IntTypeMapping("int", DbType.Int32)
+                .CreateParameter(command, "Name", 17, nullable: false);
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -320,12 +312,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public void Can_create_simple_nullable_parameter_with_DbType()
         {
             using var command = CreateTestCommand();
-            var parameter = new IntTypeMapping("int", DbType.Int32).CreateParameter(
-                command,
-                "Name",
-                17,
-                nullable: true
-            );
+            var parameter = new IntTypeMapping("int", DbType.Int32)
+                .CreateParameter(command, "Name", 17, nullable: true);
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -343,7 +331,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 DbType.String,
                 unicode: true,
                 size: 23
-            ).CreateParameter(command, "Name", "Value", nullable: false);
+            )
+                .CreateParameter(command, "Name", "Value", nullable: false);
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -362,7 +351,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 DbType.String,
                 unicode: true,
                 size: 23
-            ).CreateParameter(command, "Name", "Value", nullable: true);
+            )
+                .CreateParameter(command, "Name", "Value", nullable: true);
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -608,10 +598,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
             );
 
             Assert.False(
-                typeMapping.Comparer.Equals(
-                    new DateTimeOffset(2000, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)),
-                    new DateTimeOffset(2000, 1, 1, 13, 0, 0, TimeSpan.FromHours(1))
-                )
+                typeMapping.Comparer
+                    .Equals(
+                        new DateTimeOffset(2000, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)),
+                        new DateTimeOffset(2000, 1, 1, 13, 0, 0, TimeSpan.FromHours(1))
+                    )
             );
         }
 
@@ -639,12 +630,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             using var context = new MismatchedFruityContext(ContextOptions);
             Assert.Equal(
                 typeof(short),
-                context.Model.FindEntityType(typeof(Banana))
+                context.Model
+                    .FindEntityType(typeof(Banana))
                     .FindProperty("Id")
                     .GetTypeMapping().Converter.ProviderClrType
             );
             Assert.Null(
-                context.Model.FindEntityType(typeof(Kiwi))
+                context.Model
+                    .FindEntityType(typeof(Kiwi))
                     .FindProperty("Id")
                     .GetTypeMapping().Converter
             );

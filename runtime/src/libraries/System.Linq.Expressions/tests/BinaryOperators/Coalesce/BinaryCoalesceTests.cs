@@ -953,9 +953,9 @@ namespace System.Linq.Expressions.Tests
             );
 
             Func<string, string> result = Expression.Lambda<Func<string, string>>(
-                    coalescion,
-                    parameterExpression
-                )
+                coalescion,
+                parameterExpression
+            )
                 .Compile(useInterpreter);
             Assert.Equal(expected, result(parameter));
         }
@@ -978,9 +978,9 @@ namespace System.Linq.Expressions.Tests
             );
 
             Func<int?, int?> result = Expression.Lambda<Func<int?, int?>>(
-                    coalescion,
-                    parameterExpression
-                )
+                coalescion,
+                parameterExpression
+            )
                 .Compile(useInterpreter);
             Assert.Equal(expected, result(parameter));
         }
@@ -1115,20 +1115,20 @@ namespace System.Linq.Expressions.Tests
         public static void CoalesceToWiderReference(bool useInterpreter)
         {
             Func<object> func = Expression.Lambda<Func<object>>(
-                    Expression.Coalesce(
-                        Expression.Constant("abc"),
-                        Expression.Constant("def", typeof(object))
-                    )
+                Expression.Coalesce(
+                    Expression.Constant("abc"),
+                    Expression.Constant("def", typeof(object))
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal("abc", func());
 
             func = Expression.Lambda<Func<object>>(
-                    Expression.Coalesce(
-                        Expression.Constant(null, typeof(string)),
-                        Expression.Constant("def", typeof(object))
-                    )
+                Expression.Coalesce(
+                    Expression.Constant(null, typeof(string)),
+                    Expression.Constant("def", typeof(object))
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal("def", func());
         }
@@ -1137,17 +1137,17 @@ namespace System.Linq.Expressions.Tests
         public static void CoalesceToNarrowerReference(bool useInterpreter)
         {
             Func<object> func = Expression.Lambda<Func<object>>(
-                    Expression.Coalesce(
-                        Expression.Constant("abc", typeof(object)),
-                        Expression.Constant("def")
-                    )
+                Expression.Coalesce(
+                    Expression.Constant("abc", typeof(object)),
+                    Expression.Constant("def")
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal("abc", func());
 
             func = Expression.Lambda<Func<object>>(
-                    Expression.Coalesce(Expression.Constant(null), Expression.Constant("def"))
-                )
+                Expression.Coalesce(Expression.Constant(null), Expression.Constant("def"))
+            )
                 .Compile(useInterpreter);
             Assert.Equal("def", func());
         }
@@ -1156,17 +1156,14 @@ namespace System.Linq.Expressions.Tests
         public static void CoalesceReferenceToValueType(bool useInterpreter)
         {
             Func<object> func = Expression.Lambda<Func<object>>(
-                    Expression.Coalesce(
-                        Expression.Constant(2, typeof(object)),
-                        Expression.Constant(1)
-                    )
-                )
+                Expression.Coalesce(Expression.Constant(2, typeof(object)), Expression.Constant(1))
+            )
                 .Compile(useInterpreter);
             Assert.Equal(2, func());
 
             func = Expression.Lambda<Func<object>>(
-                    Expression.Coalesce(Expression.Constant(null), Expression.Constant(1))
-                )
+                Expression.Coalesce(Expression.Constant(null), Expression.Constant(1))
+            )
                 .Compile(useInterpreter);
             Assert.Equal(1, func());
         }
@@ -1212,10 +1209,10 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression x = Expression.Parameter(typeof(int?));
             ParameterExpression y = Expression.Parameter(typeof(long));
             Func<int?, long, long> func = Expression.Lambda<Func<int?, long, long>>(
-                    Expression.Coalesce(x, y),
-                    x,
-                    y
-                )
+                Expression.Coalesce(x, y),
+                x,
+                y
+            )
                 .Compile(useInterpreter);
             Assert.Equal(2, func(null, 2));
             Assert.Equal(2, func(2, 1));
@@ -1227,10 +1224,10 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression x = Expression.Parameter(typeof(int?));
             ParameterExpression y = Expression.Parameter(typeof(long?));
             Func<int?, long?, long?> func = Expression.Lambda<Func<int?, long?, long?>>(
-                    Expression.Coalesce(x, y),
-                    x,
-                    y
-                )
+                Expression.Coalesce(x, y),
+                x,
+                y
+            )
                 .Compile(useInterpreter);
             Assert.Equal(2, func(null, 2));
             Assert.Equal(2, func(2, 1));
@@ -1244,10 +1241,10 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression x = Expression.Parameter(typeof(long?));
             ParameterExpression y = Expression.Parameter(typeof(int));
             Func<long?, int, long> func = Expression.Lambda<Func<long?, int, long>>(
-                    Expression.Coalesce(x, y),
-                    x,
-                    y
-                )
+                Expression.Coalesce(x, y),
+                x,
+                y
+            )
                 .Compile(useInterpreter);
             Assert.Equal(2, func(null, 2));
             Assert.Equal(2, func(2, 1));
@@ -1259,10 +1256,10 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression x = Expression.Parameter(typeof(long?));
             ParameterExpression y = Expression.Parameter(typeof(int?));
             Func<long?, int?, long?> func = Expression.Lambda<Func<long?, int?, long?>>(
-                    Expression.Coalesce(x, y),
-                    x,
-                    y
-                )
+                Expression.Coalesce(x, y),
+                x,
+                y
+            )
                 .Compile(useInterpreter);
             Assert.Equal(2, func(null, 2));
             Assert.Equal(2, func(2, 1));

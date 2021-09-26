@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Hosting
     {
         public static IConfiguration GetBaseConfiguration()
         {
-            return new ConfigurationBuilder().AddEnvironmentVariables(prefix: "ASPNETCORE_")
+            return new ConfigurationBuilder()
+                .AddEnvironmentVariables(prefix: "ASPNETCORE_")
                 .Build();
         }
         public static bool IsEnabled(

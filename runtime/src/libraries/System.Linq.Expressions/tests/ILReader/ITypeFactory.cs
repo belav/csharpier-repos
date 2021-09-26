@@ -25,9 +25,8 @@ namespace System.Linq.Expressions.Tests
         protected DefaultTypeFactory() { }
 
 #if GETTYPEFROMHANDLEUNSAFE
-        private static readonly MethodInfo s_GetTypeFromHandleUnsafe = typeof(Type).GetMethodAssert(
-            "GetTypeFromHandleUnsafe"
-        );
+        private static readonly MethodInfo s_GetTypeFromHandleUnsafe = typeof(Type)
+            .GetMethodAssert("GetTypeFromHandleUnsafe");
 
         public virtual Type FromHandle(IntPtr handle) =>
             (Type)s_GetTypeFromHandleUnsafe.Invoke(null, new object[] { handle });

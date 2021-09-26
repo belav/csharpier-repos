@@ -167,10 +167,11 @@ namespace Microsoft.AspNetCore.ResponseCaching
                     && context.ResponseTime!.Value >= context.ResponseExpires
                 )
                 {
-                    context.Logger.ExpirationExpiresExceeded(
-                        context.ResponseTime.Value,
-                        context.ResponseExpires.Value
-                    );
+                    context.Logger
+                        .ExpirationExpiresExceeded(
+                            context.ResponseTime.Value,
+                            context.ResponseExpires.Value
+                        );
                     return false;
                 }
             }
@@ -181,10 +182,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                 // Validate shared max age
                 if (age >= context.ResponseSharedMaxAge)
                 {
-                    context.Logger.ExpirationSharedMaxAgeExceeded(
-                        age,
-                        context.ResponseSharedMaxAge.Value
-                    );
+                    context.Logger
+                        .ExpirationSharedMaxAgeExceeded(age, context.ResponseSharedMaxAge.Value);
                     return false;
                 }
                 else if (!context.ResponseSharedMaxAge.HasValue)
@@ -200,10 +199,11 @@ namespace Microsoft.AspNetCore.ResponseCaching
                         // Validate expiration
                         if (context.ResponseTime.Value >= context.ResponseExpires)
                         {
-                            context.Logger.ExpirationExpiresExceeded(
-                                context.ResponseTime.Value,
-                                context.ResponseExpires.Value
-                            );
+                            context.Logger
+                                .ExpirationExpiresExceeded(
+                                    context.ResponseTime.Value,
+                                    context.ResponseExpires.Value
+                                );
                             return false;
                         }
                     }
@@ -306,11 +306,12 @@ namespace Microsoft.AspNetCore.ResponseCaching
                     // Request allows stale values with age limit
                     if (requestMaxStale.HasValue && age - lowestMaxAge < requestMaxStale)
                     {
-                        context.Logger.ExpirationMaxStaleSatisfied(
-                            age,
-                            lowestMaxAge.Value,
-                            requestMaxStale.Value
-                        );
+                        context.Logger
+                            .ExpirationMaxStaleSatisfied(
+                                age,
+                                lowestMaxAge.Value,
+                                requestMaxStale.Value
+                            );
                         return true;
                     }
 
@@ -329,10 +330,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                         && context.ResponseTime!.Value >= expires
                     )
                     {
-                        context.Logger.ExpirationExpiresExceeded(
-                            context.ResponseTime.Value,
-                            expires
-                        );
+                        context.Logger
+                            .ExpirationExpiresExceeded(context.ResponseTime.Value, expires);
                         return false;
                     }
                 }

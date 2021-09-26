@@ -147,13 +147,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             {
                 // We return S_FALSE if we have more entrypoints than places in the array.
                 var entryPointNames = entryPoints.Select(
-                        e =>
-                            e.ToDisplayString(
-                                SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
-                                    SymbolDisplayGlobalNamespaceStyle.Omitted
-                                )
-                            )
-                    )
+                    e =>
+                        e.ToDisplayString(
+                            SymbolDisplayFormat.FullyQualifiedFormat
+                                .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
+                        )
+                )
                     .ToArray();
 
                 if (entryPointNames.Length > classNames.Length)

@@ -44,12 +44,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
             _comparisonType = comparison;
 
             _includePatternContexts = includePatterns.Select(
-                    pattern => pattern.CreatePatternContextForInclude()
-                )
+                pattern => pattern.CreatePatternContextForInclude()
+            )
                 .ToList();
             _excludePatternContexts = excludePatterns.Select(
-                    pattern => pattern.CreatePatternContextForExclude()
-                )
+                pattern => pattern.CreatePatternContextForExclude()
+            )
                 .ToList();
 
             _declaredLiteralFolderSegmentInString = new HashSet<string>(

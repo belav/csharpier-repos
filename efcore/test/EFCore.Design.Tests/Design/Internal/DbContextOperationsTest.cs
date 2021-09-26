@@ -129,11 +129,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             private static TestWebHost BuildWebHost(string[] args) =>
                 new(
-                    new ServiceCollection().AddSingleton(
+                    new ServiceCollection()
+                        .AddSingleton(
                             new TestContext(
-                                new DbContextOptionsBuilder<TestContext>().UseInMemoryDatabase(
-                                        "In-memory test database"
-                                    )
+                                new DbContextOptionsBuilder<TestContext>()
+                                    .UseInMemoryDatabase("In-memory test database")
                                     .EnableServiceProviderCaching(false).Options
                             )
                         )
@@ -145,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             private static TestWebHost BuildWebHost(string[] args) =>
                 new(
-                    new ServiceCollection().AddDbContextFactory<TestContextFromFactory>(
+                    new ServiceCollection()
+                        .AddDbContextFactory<TestContextFromFactory>(
                             b => b.UseInMemoryDatabase("In-memory test database")
                         )
                         .BuildServiceProvider()
@@ -185,7 +186,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             Func<DbContextOptionsBuilder, DbContextOptionsBuilder> configureProvider
         ) =>
             new(
-                new ServiceCollection().AddDbContext<TestContext>(
+                new ServiceCollection()
+                    .AddDbContext<TestContext>(
                         b => configureProvider(b.EnableServiceProviderCaching(false))
                     )
                     .BuildServiceProvider()

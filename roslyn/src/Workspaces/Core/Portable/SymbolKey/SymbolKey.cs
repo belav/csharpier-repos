@@ -296,11 +296,12 @@ namespace Microsoft.CodeAnalysis
             Equals(compilation.IsCaseSensitive, name1, name2);
 
         private static bool Equals(bool isCaseSensitive, string? name1, string? name2) =>
-            string.Equals(
-                name1,
-                name2,
-                isCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase
-            );
+            string
+                .Equals(
+                    name1,
+                    name2,
+                    isCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase
+                );
 
         private static string GetName(string metadataName)
         {

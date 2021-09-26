@@ -377,11 +377,12 @@ namespace Microsoft.AspNetCore.SignalR
                 methodName,
                 args,
                 (connection, state) =>
-                    string.Equals(
-                        connection.UserIdentifier,
-                        (string)state!,
-                        StringComparison.Ordinal
-                    ),
+                    string
+                        .Equals(
+                            connection.UserIdentifier,
+                            (string)state!,
+                            StringComparison.Ordinal
+                        ),
                 userId,
                 cancellationToken
             );

@@ -11,9 +11,8 @@ namespace System.Net.Http.Handlers
 {
     public class ProgressWriteAsyncResultTest
     {
-        static readonly byte[] sampleData = Encoding.UTF8.GetBytes(
-            "Hello World! Hello World! Hello World! Hello World! Hello World!"
-        );
+        static readonly byte[] sampleData = Encoding.UTF8
+            .GetBytes("Hello World! Hello World! Hello World! Hello World! Hello World!");
 
         [Fact]
         public void Constructor_BeginWriteOnInnerStream()
@@ -48,15 +47,15 @@ namespace System.Net.Http.Handlers
             object userState = new object();
             IAsyncResult mockIAsyncResult = MockCompletedAsyncResult.Create(true, userState);
             mockInnerStream.Setup(
-                    s =>
-                        s.BeginWrite(
-                            It.IsAny<byte[]>(),
-                            It.IsAny<int>(),
-                            It.IsAny<int>(),
-                            It.IsAny<AsyncCallback>(),
-                            It.IsAny<object>()
-                        )
-                )
+                s =>
+                    s.BeginWrite(
+                        It.IsAny<byte[]>(),
+                        It.IsAny<int>(),
+                        It.IsAny<int>(),
+                        It.IsAny<AsyncCallback>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(mockIAsyncResult);
             ProgressStream progressStream = ProgressStreamTest.CreateProgressStream();
 
@@ -83,15 +82,15 @@ namespace System.Net.Http.Handlers
             // Arrange
             Mock<Stream> mockInnerStream = new Mock<Stream>();
             mockInnerStream.Setup(
-                    s =>
-                        s.BeginWrite(
-                            It.IsAny<byte[]>(),
-                            It.IsAny<int>(),
-                            It.IsAny<int>(),
-                            It.IsAny<AsyncCallback>(),
-                            It.IsAny<object>()
-                        )
-                )
+                s =>
+                    s.BeginWrite(
+                        It.IsAny<byte[]>(),
+                        It.IsAny<int>(),
+                        It.IsAny<int>(),
+                        It.IsAny<AsyncCallback>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Throws<ApplicationException>();
             ProgressStream progressStream = ProgressStreamTest.CreateProgressStream();
 
@@ -121,15 +120,15 @@ namespace System.Net.Http.Handlers
             object userState = new object();
             IAsyncResult mockIAsyncResult = MockCompletedAsyncResult.Create(true, userState);
             mockInnerStream.Setup(
-                    s =>
-                        s.BeginWrite(
-                            It.IsAny<byte[]>(),
-                            It.IsAny<int>(),
-                            It.IsAny<int>(),
-                            It.IsAny<AsyncCallback>(),
-                            It.IsAny<object>()
-                        )
-                )
+                s =>
+                    s.BeginWrite(
+                        It.IsAny<byte[]>(),
+                        It.IsAny<int>(),
+                        It.IsAny<int>(),
+                        It.IsAny<AsyncCallback>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(mockIAsyncResult);
 
             MockProgressEventHandler mockProgressHandler;

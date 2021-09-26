@@ -136,10 +136,11 @@ namespace Microsoft.AspNetCore.Owin
                     {
                         adapter.UpstreamTask = next(environment);
                         adapter.UpstreamWentAsyncTcs.TrySetResult(0);
-                        adapter.UpstreamTask.ContinueWith(
-                            adapter.EnsureCompleted,
-                            TaskContinuationOptions.ExecuteSynchronously
-                        );
+                        adapter.UpstreamTask
+                            .ContinueWith(
+                                adapter.EnsureCompleted,
+                                TaskContinuationOptions.ExecuteSynchronously
+                            );
                     }
                     catch (Exception ex)
                     {

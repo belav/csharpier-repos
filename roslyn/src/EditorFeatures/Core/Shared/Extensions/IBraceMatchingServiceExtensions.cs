@@ -19,10 +19,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         {
             // These are the matching spans when checking the token to the right of the position.
             var braces1 = await service.GetMatchingBracesAsync(
-                    document,
-                    position,
-                    cancellationToken
-                )
+                document,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // These are the matching spans when checking the token to the left of the position.
@@ -32,10 +32,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             if (position > 0)
             {
                 braces2 = await service.GetMatchingBracesAsync(
-                        document,
-                        position - 1,
-                        cancellationToken
-                    )
+                    document,
+                    position - 1,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 

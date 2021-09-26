@@ -19,34 +19,30 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         [Fact]
         public async Task CheckRewritePath()
         {
-            var options = new RewriteOptions().AddRewrite(
-                "(.*)",
-                "http://example.com/$1",
-                skipRemainingRules: false
-            );
+            var options = new RewriteOptions()
+                .AddRewrite("(.*)", "http://example.com/$1", skipRemainingRules: false);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context =>
-                                            context.Response.WriteAsync(
-                                                context.Request.Scheme
-                                                    + "://"
-                                                    + context.Request.Host
-                                                    + context.Request.Path
-                                                    + context.Request.QueryString
-                                            )
-                                    );
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(
+                                context =>
+                                    context.Response
+                                        .WriteAsync(
+                                            context.Request.Scheme
+                                                + "://"
+                                                + context.Request.Host
+                                                + context.Request.Path
+                                                + context.Request.QueryString
+                                        )
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -93,24 +89,23 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
             string expectedUrl
         )
         {
-            var options = new RewriteOptions().AddRedirect(
-                pattern,
-                replacement,
-                statusCode: StatusCodes.Status301MovedPermanently
-            );
+            var options = new RewriteOptions()
+                .AddRedirect(
+                    pattern,
+                    replacement,
+                    statusCode: StatusCodes.Status301MovedPermanently
+                );
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -129,33 +124,30 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         public async Task RewriteRulesCanComeFromConfigureOptions()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.Configure<RewriteOptions>(
+                                options =>
                                 {
-                                    services.Configure<RewriteOptions>(
-                                        options =>
-                                        {
-                                            options.AddRedirect(
-                                                "(.*)",
-                                                "http://example.com/$1",
-                                                statusCode: StatusCodes.Status301MovedPermanently
-                                            );
-                                        }
+                                    options.AddRedirect(
+                                        "(.*)",
+                                        "http://example.com/$1",
+                                        statusCode: StatusCodes.Status301MovedPermanently
                                     );
                                 }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter();
-                                }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseRewriter();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -169,24 +161,23 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         [Fact]
         public async Task CheckRedirectPathWithQueryString()
         {
-            var options = new RewriteOptions().AddRedirect(
-                "(.*)",
-                "http://example.com/$1",
-                statusCode: StatusCodes.Status301MovedPermanently
-            );
+            var options = new RewriteOptions()
+                .AddRedirect(
+                    "(.*)",
+                    "http://example.com/$1",
+                    statusCode: StatusCodes.Status301MovedPermanently
+                );
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -206,18 +197,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToHttps(statusCode: statusCode);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -234,23 +223,19 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         [InlineData(123)]
         public async Task CheckRedirectToHttpsSslPort(int? sslPort)
         {
-            var options = new RewriteOptions().AddRedirectToHttps(
-                statusCode: StatusCodes.Status302Found,
-                sslPort: sslPort
-            );
+            var options = new RewriteOptions()
+                .AddRedirectToHttps(statusCode: StatusCodes.Status302Found, sslPort: sslPort);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -299,18 +284,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToHttps();
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -334,18 +317,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToHttpsPermanent();
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -362,23 +343,22 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         [InlineData(-25, "https://example.com/")]
         public async Task CheckRedirectToHttpsWithSslPort(int sslPort, string expected)
         {
-            var options = new RewriteOptions().AddRedirectToHttps(
-                statusCode: StatusCodes.Status301MovedPermanently,
-                sslPort: sslPort
-            );
+            var options = new RewriteOptions()
+                .AddRedirectToHttps(
+                    statusCode: StatusCodes.Status301MovedPermanently,
+                    sslPort: sslPort
+                );
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -399,18 +379,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToWww(statusCode: statusCode);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -434,18 +412,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToWww();
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -462,18 +438,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToWwwPermanent();
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -500,18 +474,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToWww();
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -531,18 +503,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToNonWww(statusCode: statusCode);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -566,18 +536,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToNonWww();
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -594,18 +562,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToNonWwwPermanent();
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -620,24 +586,19 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         [Fact]
         public async Task CheckIfEmptyStringRedirectCorrectly()
         {
-            var options = new RewriteOptions().AddRedirect(
-                "(.*)",
-                "$1",
-                statusCode: StatusCodes.Status301MovedPermanently
-            );
+            var options = new RewriteOptions()
+                .AddRedirect("(.*)", "$1", statusCode: StatusCodes.Status301MovedPermanently);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -652,24 +613,23 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRewrite("(.*)", "$1", skipRemainingRules: false);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context =>
-                                            context.Response.WriteAsync(
-                                                context.Request.Path + context.Request.QueryString
-                                            )
-                                    );
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(
+                                context =>
+                                    context.Response
+                                        .WriteAsync(
+                                            context.Request.Path + context.Request.QueryString
+                                        )
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -685,24 +645,23 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirect("(.*)", "$1");
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context =>
-                                            context.Response.WriteAsync(
-                                                context.Request.Path + context.Request.QueryString
-                                            )
-                                    );
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(
+                                context =>
+                                    context.Response
+                                        .WriteAsync(
+                                            context.Request.Path + context.Request.QueryString
+                                        )
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -724,18 +683,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToWww("example2.com");
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -761,18 +718,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToWww("example.com");
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -789,18 +744,16 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         {
             var options = new RewriteOptions().AddRedirectToWwwPermanent("example.com");
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -819,23 +772,19 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules
         [InlineData(StatusCodes.Status308PermanentRedirect)]
         public async Task CheckRedirectToWwwWithStatusCodeInWhitelistedDomains(int statusCode)
         {
-            var options = new RewriteOptions().AddRedirectToWww(
-                statusCode: statusCode,
-                "example.com"
-            );
+            var options = new RewriteOptions()
+                .AddRedirectToWww(statusCode: statusCode, "example.com");
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

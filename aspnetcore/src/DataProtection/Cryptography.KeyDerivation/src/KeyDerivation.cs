@@ -56,13 +56,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation
                 throw new ArgumentOutOfRangeException(nameof(numBytesRequested));
             }
 
-            return Pbkdf2Util.Pbkdf2Provider.DeriveKey(
-                password,
-                salt,
-                prf,
-                iterationCount,
-                numBytesRequested
-            );
+            return Pbkdf2Util.Pbkdf2Provider
+                .DeriveKey(password, salt, prf, iterationCount, numBytesRequested);
         }
     }
 }

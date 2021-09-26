@@ -49,9 +49,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             object argument
         )
         {
-            return new ILEmitCallSiteAnalysisResult(ScopedILSize, hasScope: true).Add(
-                VisitCallSiteMain(scopedCallSite, argument)
-            );
+            return new ILEmitCallSiteAnalysisResult(ScopedILSize, hasScope: true)
+                .Add(VisitCallSiteMain(scopedCallSite, argument));
         }
 
         protected override ILEmitCallSiteAnalysisResult VisitConstant(

@@ -354,10 +354,8 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void TryGetValue_returns_false_when_not_exists()
         {
-            var retrieved = new SqliteConnectionStringBuilder().TryGetValue(
-                "Invalid",
-                out var value
-            );
+            var retrieved = new SqliteConnectionStringBuilder()
+                .TryGetValue("Invalid", out var value);
 
             Assert.False(retrieved);
             Assert.Null(value);

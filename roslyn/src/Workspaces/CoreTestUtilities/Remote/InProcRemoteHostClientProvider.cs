@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 LazyWorkspace = new Lazy<RemoteWorkspace>(
                     () =>
                         new RemoteWorkspace(
-                            FeaturesTestCompositions.RemoteHost.AddParts(additionalRemoteParts)
+                            FeaturesTestCompositions.RemoteHost
+                                .AddParts(additionalRemoteParts)
                                 .GetHostServices(),
                             WorkspaceKind.RemoteWorkspace
                         )

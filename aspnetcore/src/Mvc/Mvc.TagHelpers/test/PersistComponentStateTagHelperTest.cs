@@ -201,7 +201,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var httpContext = new DefaultHttpContext
             {
-                RequestServices = new ServiceCollection().AddSingleton(renderer)
+                RequestServices = new ServiceCollection()
+                    .AddSingleton(renderer)
                     .AddSingleton(
                         new ComponentApplicationLifetime(
                             NullLogger<ComponentApplicationLifetime>.Instance

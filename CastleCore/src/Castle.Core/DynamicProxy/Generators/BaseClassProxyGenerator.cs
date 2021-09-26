@@ -243,10 +243,11 @@ namespace Castle.DynamicProxy.Generators
             {
                 return;
             }
-            var message = string.Format(
-                "Target type for the proxy implements {0} which is a DynamicProxy infrastructure interface and you should never implement it yourself. Are you trying to proxy an existing proxy?",
-                typeof(IProxyTargetAccessor)
-            );
+            var message = string
+                .Format(
+                    "Target type for the proxy implements {0} which is a DynamicProxy infrastructure interface and you should never implement it yourself. Are you trying to proxy an existing proxy?",
+                    typeof(IProxyTargetAccessor)
+                );
             throw new ArgumentException(message, name);
         }
     }

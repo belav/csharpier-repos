@@ -382,14 +382,15 @@ namespace Microsoft.AspNetCore.HttpOverrides
                         requestHeaders[_options.OriginalForHeaderName] = new IPEndPoint(
                             connection.RemoteIpAddress,
                             connection.RemotePort
-                        ).ToString();
+                        )
+                            .ToString();
                     }
                     if (forwardedFor!.Length > entriesConsumed)
                     {
                         // Truncate the consumed header values
                         requestHeaders[_options.ForwardedForHeaderName] = forwardedFor.Take(
-                                forwardedFor.Length - entriesConsumed
-                            )
+                            forwardedFor.Length - entriesConsumed
+                        )
                             .ToArray();
                     }
                     else
@@ -409,8 +410,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
                     {
                         // Truncate the consumed header values
                         requestHeaders[_options.ForwardedProtoHeaderName] = forwardedProto.Take(
-                                forwardedProto.Length - entriesConsumed
-                            )
+                            forwardedProto.Length - entriesConsumed
+                        )
                             .ToArray();
                     }
                     else
@@ -429,8 +430,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
                     {
                         // Truncate the consumed header values
                         requestHeaders[_options.ForwardedHostHeaderName] = forwardedHost.Take(
-                                forwardedHost.Length - entriesConsumed
-                            )
+                            forwardedHost.Length - entriesConsumed
+                        )
                             .ToArray();
                     }
                     else

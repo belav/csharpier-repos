@@ -1888,9 +1888,9 @@ IObjectCreationOperation (Constructor: MemberInitializerTest..ctor()) (Operation
                 // CS0747: Invalid initializer member declarator
                 //         var i = /*<bind>*/new MemberInitializerTest() { x = 0, Goo() = new MemberInitializerTest() }/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_InvalidInitializerElementInitializer,
-                        "Goo() = new MemberInitializerTest()"
-                    )
+                    ErrorCode.ERR_InvalidInitializerElementInitializer,
+                    "Goo() = new MemberInitializerTest()"
+                )
                     .WithLocation(8, 64)
             };
 
@@ -2724,17 +2724,17 @@ IObjectCreationOperation (Constructor: MemberInitializerTest..ctor()) (Operation
                 // CS1922: Cannot initialize type 'MemberInitializerTest' with a collection initializer because it does not implement 'System.Collections.IEnumerable'
                 //         var i = /*<bind>*/new MemberInitializerTest() { Goo() = new MemberInitializerTest() }/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_CollectionInitRequiresIEnumerable,
-                        "{ Goo() = new MemberInitializerTest() }"
-                    )
+                    ErrorCode.ERR_CollectionInitRequiresIEnumerable,
+                    "{ Goo() = new MemberInitializerTest() }"
+                )
                     .WithArguments("MemberInitializerTest")
                     .WithLocation(7, 55),
                 // CS0747: Invalid initializer member declarator
                 //         var i = /*<bind>*/new MemberInitializerTest() { Goo() = new MemberInitializerTest() }/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_InvalidInitializerElementInitializer,
-                        "Goo() = new MemberInitializerTest()"
-                    )
+                    ErrorCode.ERR_InvalidInitializerElementInitializer,
+                    "Goo() = new MemberInitializerTest()"
+                )
                     .WithLocation(7, 57),
                 // CS0120: An object reference is required for the non-static field, method, or property 'MemberInitializerTest.Goo()'
                 //         var i = /*<bind>*/new MemberInitializerTest() { Goo() = new MemberInitializerTest() }/*</bind>*/;
@@ -2927,9 +2927,9 @@ IObjectCreationOperation (Constructor: MyList<MyClass>..ctor()) (OperationKind.O
                 // CS1954: The best overloaded method match 'MyList<MyClass>.Add(ref MyClass)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
                 //         MyList<MyClass> myList = /*<bind>*/new MyList<MyClass> { new MyClass { tree = "maple" } }/*</bind>*/; // CS1954
                 Diagnostic(
-                        ErrorCode.ERR_InitializerAddHasParamModifiers,
-                        @"new MyClass { tree = ""maple"" }"
-                    )
+                    ErrorCode.ERR_InitializerAddHasParamModifiers,
+                    @"new MyClass { tree = ""maple"" }"
+                )
                     .WithArguments("MyList<MyClass>.Add(ref MyClass)")
                     .WithLocation(35, 66),
                 // CS0649: Field 'MyList<T>._list' is never assigned to, and will always have its default value null
@@ -2975,9 +2975,9 @@ IInvalidOperation (OperationKind.Invalid, Type: MemberInitializerTest.D<System.I
                 // CS1958: Object and collection initializer expressions may not be applied to a delegate creation expression
                 //         D<int> genD = /*<bind>*/new D<int>(GenericMethod<int>) { }/*</bind>*/; // CS1958
                 Diagnostic(
-                        ErrorCode.ERR_ObjectOrCollectionInitializerWithDelegateCreation,
-                        "new D<int>(GenericMethod<int>) { }"
-                    )
+                    ErrorCode.ERR_ObjectOrCollectionInitializerWithDelegateCreation,
+                    "new D<int>(GenericMethod<int>) { }"
+                )
                     .WithLocation(8, 33)
             };
 
@@ -3719,12 +3719,11 @@ class C
         }
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,21): error CS0826: No best type found for implicitly-typed array
-                    //         var array = new[] { Main() };
-                    Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, "new[] { Main() }")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,21): error CS0826: No best type found for implicitly-typed array
+                //         var array = new[] { Main() };
+                Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, "new[] { Main() }")
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -4005,7 +4004,8 @@ class X : List<int>
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single().Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4057,7 +4057,8 @@ class X : Base
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single().Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4132,7 +4133,8 @@ class Y
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single().Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4175,7 +4177,8 @@ class X : List<int>
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single().Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4219,7 +4222,8 @@ class X : List<int>
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single().Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4425,14 +4429,13 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,11): warning CS0414: The field 'C.a' is assigned but its value is never used
-                    //     int[] a;
-                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a")
-                        .WithArguments("C.a")
-                        .WithLocation(4, 11)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,11): warning CS0414: The field 'C.a' is assigned but its value is never used
+                //     int[] a;
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a")
+                    .WithArguments("C.a")
+                    .WithLocation(4, 11)
+            );
         }
 
         [Fact, WorkItem(1073330, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073330")]
@@ -4451,14 +4454,13 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,12): warning CS0414: The field 'C.a' is assigned but its value is never used
-                    //     int[,] a;
-                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a")
-                        .WithArguments("C.a")
-                        .WithLocation(4, 12)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,12): warning CS0414: The field 'C.a' is assigned but its value is never used
+                //     int[,] a;
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a")
+                    .WithArguments("C.a")
+                    .WithLocation(4, 12)
+            );
         }
 
         [Fact, WorkItem(1073330, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073330")]

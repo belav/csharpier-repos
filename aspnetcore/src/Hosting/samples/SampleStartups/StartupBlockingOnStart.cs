@@ -36,14 +36,13 @@ namespace SampleStartups
             var config = new ConfigurationBuilder().AddCommandLine(args).Build();
 
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseConfiguration(config)
-                            .UseKestrel()
-                            .UseStartup<StartupBlockingOnStart>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseConfiguration(config)
+                        .UseKestrel()
+                        .UseStartup<StartupBlockingOnStart>();
+                }
+            ).Build();
 
             using (host)
             {

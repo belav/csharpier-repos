@@ -315,14 +315,13 @@ using static Path;
         [Fact]
         public void DuplicateUsing_SameSubmission()
         {
-            CreateSubmission("using System; using System;")
-                .VerifyDiagnostics(
-                    // (1,21): warning CS0105: The using directive for 'System' appeared previously in this namespace
-                    // using System; using System;
-                    Diagnostic(ErrorCode.WRN_DuplicateUsing, "System")
-                        .WithArguments("System")
-                        .WithLocation(1, 21)
-                );
+            CreateSubmission("using System; using System;").VerifyDiagnostics(
+                // (1,21): warning CS0105: The using directive for 'System' appeared previously in this namespace
+                // using System; using System;
+                Diagnostic(ErrorCode.WRN_DuplicateUsing, "System")
+                    .WithArguments("System")
+                    .WithLocation(1, 21)
+            );
         }
 
         [Fact]
@@ -336,9 +335,9 @@ using static Path;
         public void DuplicateGlobalUsing_SameSubmission()
         {
             CreateSubmission(
-                    "typeof(String)",
-                    options: TestOptions.DebugDll.WithUsings("System", "System")
-                )
+                "typeof(String)",
+                options: TestOptions.DebugDll.WithUsings("System", "System")
+            )
                 .VerifyDiagnostics();
         }
 
@@ -570,7 +569,8 @@ t = typeof(File); // global using exposed
 
             var compilation = CreateSubmission(
                 submissionSource,
-                options: TestOptions.DebugDll.WithSourceReferenceResolver(resolver)
+                options: TestOptions.DebugDll
+                    .WithSourceReferenceResolver(resolver)
                     .WithUsings("System.IO", "System.IO.Path")
             );
 
@@ -648,10 +648,10 @@ namespace NOuter
             var refs = new[] { lib };
 
             CreateSubmission(
-                    "using NInner;",
-                    refs,
-                    previous: CreateSubmission("using NOuter;", refs)
-                )
+                "using NInner;",
+                refs,
+                previous: CreateSubmission("using NOuter;", refs)
+            )
                 .VerifyDiagnostics(
                     // (1,7): error CS0246: The type or namespace name 'NInner' could not be found (are you missing a using directive or an assembly reference?)
                     // using NInner;
@@ -661,10 +661,10 @@ namespace NOuter
                 );
 
             CreateSubmission(
-                    "using NI = NInner;",
-                    refs,
-                    previous: CreateSubmission("using NOuter;", refs)
-                )
+                "using NI = NInner;",
+                refs,
+                previous: CreateSubmission("using NOuter;", refs)
+            )
                 .VerifyDiagnostics(
                     // (1,12): error CS0246: The type or namespace name 'NInner' could not be found (are you missing a using directive or an assembly reference?)
                     // using NI = NInner;
@@ -674,10 +674,10 @@ namespace NOuter
                 );
 
             CreateSubmission(
-                    "using static COuter;",
-                    refs,
-                    previous: CreateSubmission("using NOuter;", refs)
-                )
+                "using static COuter;",
+                refs,
+                previous: CreateSubmission("using NOuter;", refs)
+            )
                 .VerifyDiagnostics(
                     // (1,14): error CS0246: The type or namespace name 'COuter' could not be found (are you missing a using directive or an assembly reference?)
                     // using static COuter;
@@ -687,10 +687,10 @@ namespace NOuter
                 );
 
             CreateSubmission(
-                    "using static NInner.CInner;",
-                    refs,
-                    previous: CreateSubmission("using NOuter;", refs)
-                )
+                "using static NInner.CInner;",
+                refs,
+                previous: CreateSubmission("using NOuter;", refs)
+            )
                 .VerifyDiagnostics(
                     // (1,14): error CS0246: The type or namespace name 'NInner' could not be found (are you missing a using directive or an assembly reference?)
                     // using static NInner.CInner;

@@ -228,9 +228,8 @@ namespace DebuggerTests
 
             if (call_other)
             {
-                (gvclass, points) = await new ArrayTestsClass().InstanceMethodValueTypeLocalsAsync<
-                    SimpleGenericStruct<Point>
-                >(gvclass_arr[0]);
+                (gvclass, points) = await new ArrayTestsClass()
+                    .InstanceMethodValueTypeLocalsAsync<SimpleGenericStruct<Point>>(gvclass_arr[0]);
                 Console.WriteLine($"* gvclass: {gvclass}, points: {points.Length}");
             }
 
@@ -349,13 +348,8 @@ namespace DebuggerTests
             int local_i = 5;
             var sc = new SimpleClass { X = 10, Y = 45, Id = "sc#Id", Color = RGB.Blue };
             if (call_other)
-                await new Point
-                {
-                    X = 90,
-                    Y = -4,
-                    Id = "point#Id",
-                    Color = RGB.Green
-                }.AsyncInstanceMethod(sc);
+                await new Point { X = 90, Y = -4, Id = "point#Id", Color = RGB.Green }
+                    .AsyncInstanceMethod(sc);
             Console.WriteLine($"AsyncMethod local_i: {local_i}, sc: {sc.Id}");
         }
 
@@ -440,9 +434,8 @@ namespace DebuggerTests
             ArrayTestsClass.EntryPointForStructMethod(true).Wait();
 
             var sc = new SimpleClass { X = 10, Y = 45, Id = "sc#Id", Color = RGB.Blue };
-            new Point { X = 90, Y = -4, Id = "point#Id", Color = RGB.Green }.GenericInstanceMethod(
-                sc
-            );
+            new Point { X = 90, Y = -4, Id = "point#Id", Color = RGB.Green }
+                .GenericInstanceMethod(sc);
         }
     }
 }

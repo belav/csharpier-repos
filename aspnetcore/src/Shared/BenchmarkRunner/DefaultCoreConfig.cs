@@ -30,27 +30,27 @@ namespace BenchmarkDotNet.Attributes
             AddJob(
                 Job.Default
 #if NETCOREAPP2_1
-                .WithToolchain(CsProjCoreToolchain.From(NetCoreAppSettings.NetCoreApp21))
+                    .WithToolchain(CsProjCoreToolchain.From(NetCoreAppSettings.NetCoreApp21))
 #elif NETCOREAPP3_0
-                .WithToolchain(
+                    .WithToolchain(
                         CsProjCoreToolchain.From(
                             new NetCoreAppSettings("netcoreapp3.0", null, ".NET Core 3.0")
                         )
                     )
 #elif NETCOREAPP3_1
-                .WithToolchain(
+                    .WithToolchain(
                         CsProjCoreToolchain.From(
                             new NetCoreAppSettings("netcoreapp3.1", null, ".NET Core 3.1")
                         )
                     )
 #elif NET5_0
-                .WithToolchain(
+                    .WithToolchain(
                         CsProjCoreToolchain.From(
                             new NetCoreAppSettings("net5.0", null, ".NET Core 5.0")
                         )
                     )
 #elif NET6_0
-                .WithToolchain(
+                    .WithToolchain(
                         CsProjCoreToolchain.From(
                             new NetCoreAppSettings("net6.0", null, ".NET Core 6.0")
                         )

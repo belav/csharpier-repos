@@ -79,9 +79,8 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            ConstructorInfo constructor = typeof(Sp).GetConstructor(
-                new[] { typeof(int), typeof(double) }
-            );
+            ConstructorInfo constructor = typeof(Sp)
+                .GetConstructor(new[] { typeof(int), typeof(double) });
             Expression[] exprArgs =
             {
                 Expression.Constant(a, typeof(int)),
@@ -98,9 +97,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNewWithTwoParametersCustom2(int a, string b, bool useInterpreter)
         {
-            ConstructorInfo constructor = typeof(D).GetConstructor(
-                new[] { typeof(int), typeof(string) }
-            );
+            ConstructorInfo constructor = typeof(D)
+                .GetConstructor(new[] { typeof(int), typeof(string) });
             Expression[] exprArgs =
             {
                 Expression.Constant(a, typeof(int)),
@@ -121,9 +119,8 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            ConstructorInfo constructor = typeof(Scs).GetConstructor(
-                new[] { typeof(string), typeof(S) }
-            );
+            ConstructorInfo constructor = typeof(Scs)
+                .GetConstructor(new[] { typeof(string), typeof(S) });
             Expression[] exprArgs =
             {
                 Expression.Constant(a, typeof(string)),
@@ -143,9 +140,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void UpdateSameReturnsSame()
         {
-            ConstructorInfo constructor = typeof(Sp).GetConstructor(
-                new[] { typeof(int), typeof(double) }
-            );
+            ConstructorInfo constructor = typeof(Sp)
+                .GetConstructor(new[] { typeof(int), typeof(double) });
             Expression[] exprArgs = { Expression.Constant(23), Expression.Constant(40.0) };
             NewExpression newExp = Expression.New(constructor, exprArgs);
             Assert.Same(newExp, newExp.Update(exprArgs));
@@ -165,9 +161,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void UpdateDifferentReturnsDifferent()
         {
-            ConstructorInfo constructor = typeof(Sp).GetConstructor(
-                new[] { typeof(int), typeof(double) }
-            );
+            ConstructorInfo constructor = typeof(Sp)
+                .GetConstructor(new[] { typeof(int), typeof(double) });
             NewExpression newExp = Expression.New(
                 constructor,
                 Expression.Constant(23),
@@ -199,9 +194,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void UpdateDoesntRepeatEnumeration()
         {
-            ConstructorInfo constructor = typeof(Sp).GetConstructor(
-                new[] { typeof(int), typeof(double) }
-            );
+            ConstructorInfo constructor = typeof(Sp)
+                .GetConstructor(new[] { typeof(int), typeof(double) });
             NewExpression newExp = Expression.New(
                 constructor,
                 Expression.Constant(23),

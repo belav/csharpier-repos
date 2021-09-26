@@ -46,17 +46,18 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="context">The <see cref="HttpContext"/>.</param>
         public async Task Invoke(HttpContext context)
         {
-            context.Features.Set<IAuthenticationFeature>(
-                new AuthenticationFeature
-                {
-                    OriginalPath = context.Request.Path,
-                    OriginalPathBase = context.Request.PathBase
-                }
-            );
+            context.Features
+                .Set<IAuthenticationFeature>(
+                    new AuthenticationFeature
+                    {
+                        OriginalPath = context.Request.Path,
+                        OriginalPathBase = context.Request.PathBase
+                    }
+                );
 
             // Give any IAuthenticationRequestHandler schemes a chance to handle the request
-            var handlers =
-                context.RequestServices.GetRequiredService<IAuthenticationHandlerProvider>();
+            var handlers = context.RequestServices
+                .GetRequiredService<IAuthenticationHandlerProvider>();
             foreach (var scheme in await Schemes.GetRequestHandlerSchemesAsync())
             {
                 var handler =

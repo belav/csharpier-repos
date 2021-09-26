@@ -605,11 +605,8 @@ namespace System.Web.Mvc.Test
 
             // Arrange
             UrlHelper urlHelper = GetUrlHelper();
-            urlHelper.RouteCollection.MapRoute(
-                "MyRouteName",
-                "any/url",
-                new { controller = "Charlie" }
-            );
+            urlHelper.RouteCollection
+                .MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
 
             // Act
             string result = urlHelper.RouteUrl("MyRouteName");
@@ -907,14 +904,14 @@ namespace System.Web.Mvc.Test
             // Adding a route that recognizes the httproute value for the HttpRouteUrl tests
             Mock<RouteBase> mockHttpRoute = new Mock<RouteBase>();
             mockHttpRoute.Setup(
-                    mock =>
-                        mock.GetVirtualPath(
-                            It.IsAny<RequestContext>(),
-                            It.Is<RouteValueDictionary>(
-                                routeValues => routeValues.ContainsKey("httproute")
-                            )
+                mock =>
+                    mock.GetVirtualPath(
+                        It.IsAny<RequestContext>(),
+                        It.Is<RouteValueDictionary>(
+                            routeValues => routeValues.ContainsKey("httproute")
                         )
-                )
+                    )
+            )
                 .Returns(new VirtualPathData(null, "mock/http/route"));
             rt.Add("httproute", mockHttpRoute.Object);
 

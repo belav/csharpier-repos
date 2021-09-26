@@ -126,11 +126,12 @@ namespace System.CodeDom.Compiler
 
             if (member is CodeTypeDeclaration)
             {
-                ((ICodeGenerator)this).GenerateCodeFromType(
-                    (CodeTypeDeclaration)member,
-                    _output.InnerWriter,
-                    _options
-                );
+                ((ICodeGenerator)this)
+                    .GenerateCodeFromType(
+                        (CodeTypeDeclaration)member,
+                        _output.InnerWriter,
+                        _options
+                    );
 
                 // Nested types clobber the current class, so reset it.
                 _currentClass = declaredType;
@@ -847,11 +848,8 @@ namespace System.CodeDom.Compiler
                         Output.WriteLine();
                     }
                     CodeTypeDeclaration currentClass = (CodeTypeDeclaration)current;
-                    ((ICodeGenerator)this).GenerateCodeFromType(
-                        currentClass,
-                        _output.InnerWriter,
-                        _options
-                    );
+                    ((ICodeGenerator)this)
+                        .GenerateCodeFromType(currentClass, _output.InnerWriter, _options);
                 }
             }
         }
@@ -1046,11 +1044,8 @@ namespace System.CodeDom.Compiler
 
             foreach (CodeStatement stmt in stmts)
             {
-                ((ICodeGenerator)this).GenerateCodeFromStatement(
-                    stmt,
-                    _output.InnerWriter,
-                    _options
-                );
+                ((ICodeGenerator)this)
+                    .GenerateCodeFromStatement(stmt, _output.InnerWriter, _options);
             }
         }
 
@@ -1115,11 +1110,8 @@ namespace System.CodeDom.Compiler
                 OutputIdentifier(arg.Name);
                 Output.Write('=');
             }
-            ((ICodeGenerator)this).GenerateCodeFromExpression(
-                arg.Value,
-                _output.InnerWriter,
-                _options
-            );
+            ((ICodeGenerator)this)
+                .GenerateCodeFromExpression(arg.Value, _output.InnerWriter, _options);
         }
 
         protected virtual void OutputDirection(FieldDirection dir)
@@ -1307,11 +1299,8 @@ namespace System.CodeDom.Compiler
                     else
                         Output.Write(", ");
                 }
-                ((ICodeGenerator)this).GenerateCodeFromExpression(
-                    current,
-                    _output.InnerWriter,
-                    _options
-                );
+                ((ICodeGenerator)this)
+                    .GenerateCodeFromExpression(current, _output.InnerWriter, _options);
             }
             Indent--;
         }

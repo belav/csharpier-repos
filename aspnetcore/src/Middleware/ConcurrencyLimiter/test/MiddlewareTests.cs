@@ -128,8 +128,8 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests
 
             Assert.Equal(0, testQueue.QueuedRequests);
             await Assert.ThrowsAsync<DivideByZeroException>(
-                    () => middleware.Invoke(new DefaultHttpContext())
-                )
+                () => middleware.Invoke(new DefaultHttpContext())
+            )
                 .DefaultTimeout();
 
             Assert.Equal(0, testQueue.QueuedRequests);

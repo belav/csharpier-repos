@@ -71,9 +71,8 @@ namespace System.Net.Http
         // Temporary workaround for request burst handling on connection start.
         private const int InitialMaxConcurrentStreams = 100;
 
-        private static readonly byte[] s_http2ConnectionPreface = Encoding.ASCII.GetBytes(
-            "PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n"
-        );
+        private static readonly byte[] s_http2ConnectionPreface = Encoding.ASCII
+            .GetBytes("PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n");
 
 #if DEBUG
         // In debug builds, start with a very small buffer to induce buffer growing logic.
@@ -292,12 +291,11 @@ namespace System.Net.Http
             {
                 if (initialFrame && NetEventSource.Log.IsEnabled())
                 {
-                    string response = Encoding.ASCII.GetString(
-                        _incomingBuffer.ActiveSpan.Slice(
-                            0,
-                            Math.Min(20, _incomingBuffer.ActiveLength)
-                        )
-                    );
+                    string response = Encoding.ASCII
+                        .GetString(
+                            _incomingBuffer.ActiveSpan
+                                .Slice(0, Math.Min(20, _incomingBuffer.ActiveLength))
+                        );
                     Trace($"HTTP/2 handshake failed. Server returned {response}");
                 }
 
@@ -594,10 +592,8 @@ namespace System.Net.Http
                 Trace($"{frameHeader}");
             Debug.Assert(frameHeader.Type == FrameType.AltSvc);
 
-            ReadOnlySpan<byte> span = _incomingBuffer.ActiveSpan.Slice(
-                0,
-                frameHeader.PayloadLength
-            );
+            ReadOnlySpan<byte> span = _incomingBuffer.ActiveSpan
+                .Slice(0, frameHeader.PayloadLength);
 
             if (BinaryPrimitives.TryReadUInt16BigEndian(span, out ushort originLength))
             {
@@ -691,10 +687,8 @@ namespace System.Net.Http
                 }
 
                 // Parse settings and process the ones we care about.
-                ReadOnlySpan<byte> settings = _incomingBuffer.ActiveSpan.Slice(
-                    0,
-                    frameHeader.PayloadLength
-                );
+                ReadOnlySpan<byte> settings = _incomingBuffer.ActiveSpan
+                    .Slice(0, frameHeader.PayloadLength);
                 bool maxConcurrentStreamsReceived = false;
                 while (settings.Length > 0)
                 {
@@ -819,10 +813,8 @@ namespace System.Net.Http
             // the incoming buffer, so we need to take a copy of the data. Read
             // it as a big-endian integer here to avoid allocating an array.
             Debug.Assert(sizeof(long) == FrameHeader.PingLength);
-            ReadOnlySpan<byte> pingContent = _incomingBuffer.ActiveSpan.Slice(
-                0,
-                FrameHeader.PingLength
-            );
+            ReadOnlySpan<byte> pingContent = _incomingBuffer.ActiveSpan
+                .Slice(0, FrameHeader.PingLength);
             long pingContentLong = BinaryPrimitives.ReadInt64BigEndian(pingContent);
 
             if (frameHeader.AckFlag)
@@ -1173,10 +1165,11 @@ namespace System.Net.Http
                 static (s, writeBuffer) =>
                 {
                     if (NetEventSource.Log.IsEnabled())
-                        s.thisRef.Trace(
-                            s.streamId,
-                            $"Started writing. {nameof(s.errorCode)}={s.errorCode}"
-                        );
+                        s.thisRef
+                            .Trace(
+                                s.streamId,
+                                $"Started writing. {nameof(s.errorCode)}={s.errorCode}"
+                            );
 
                     Span<byte> span = writeBuffer.Span;
                     FrameHeader.WriteTo(
@@ -1410,11 +1403,12 @@ namespace System.Net.Http
                             foreach (string value in headerValues)
                             {
                                 if (
-                                    string.Equals(
-                                        value,
-                                        "trailers",
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                                    string
+                                        .Equals(
+                                            value,
+                                            "trailers",
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
                                 )
                                 {
                                     WriteBytes(knownHeader.Http2EncodedName, ref headerBuffer);
@@ -1526,9 +1520,8 @@ namespace System.Net.Http
             // Determine cookies to send.
             if (_pool.Settings._useCookies)
             {
-                string cookiesFromContainer = _pool.Settings._cookieContainer!.GetCookieHeader(
-                    request.RequestUri
-                );
+                string cookiesFromContainer = _pool.Settings._cookieContainer!
+                    .GetCookieHeader(request.RequestUri);
                 if (cookiesFromContainer != string.Empty)
                 {
                     WriteBytes(KnownHeaders.Cookie.Http2EncodedName, ref headerBuffer);
@@ -1616,9 +1609,8 @@ namespace System.Net.Http
                         ValueStopwatch stopwatch = ValueStopwatch.StartNew();
                         await _concurrentStreams.RequestCreditAsync(1, cancellationToken)
                             .ConfigureAwait(false);
-                        HttpTelemetry.Log.Http20RequestLeftQueue(
-                            stopwatch.GetElapsedTime().TotalMilliseconds
-                        );
+                        HttpTelemetry.Log
+                            .Http20RequestLeftQueue(stopwatch.GetElapsedTime().TotalMilliseconds);
                     }
                     else
                     {
@@ -1675,73 +1667,98 @@ namespace System.Net.Http
                 // and CONTINUATION frames stay together, as they must do. We use the lock as well to ensure new
                 // streams are created and started in order.
                 await PerformWriteAsync(
-                        totalSize,
-                        (
-                            thisRef: this,
-                            http2Stream,
-                            headerBytes,
-                            endStream: (request.Content == null),
-                            mustFlush
-                        ),
-                        static (s, writeBuffer) =>
-                        {
-                            if (NetEventSource.Log.IsEnabled())
-                                s.thisRef.Trace(
+                    totalSize,
+                    (
+                        thisRef: this,
+                        http2Stream,
+                        headerBytes,
+                        endStream: (request.Content == null),
+                        mustFlush
+                    ),
+                    static (s, writeBuffer) =>
+                    {
+                        if (NetEventSource.Log.IsEnabled())
+                            s.thisRef
+                                .Trace(
                                     s.http2Stream.StreamId,
                                     $"Started writing. Total header bytes={s.headerBytes.Length}"
                                 );
 
-                            // Allocate the next available stream ID. Note that if we fail before sending the headers,
-                            // we'll just skip this stream ID, which is fine.
-                            lock (s.thisRef.SyncObject)
+                        // Allocate the next available stream ID. Note that if we fail before sending the headers,
+                        // we'll just skip this stream ID, which is fine.
+                        lock (s.thisRef.SyncObject)
+                        {
+                            if (
+                                s.thisRef._nextStream == MaxStreamId
+                                || s.thisRef._disposed
+                                || s.thisRef._lastStreamId != -1
+                            )
                             {
-                                if (
-                                    s.thisRef._nextStream == MaxStreamId
-                                    || s.thisRef._disposed
-                                    || s.thisRef._lastStreamId != -1
-                                )
-                                {
-                                    // We ran out of stream IDs or we raced between acquiring the connection from the pool and shutting down.
-                                    // Throw a retryable request exception. This will cause retry logic to kick in
-                                    // and perform another connection attempt. The user should never see this exception.
-                                    s.thisRef.ThrowShutdownException();
-                                }
-
-                                // Now that we're holding the lock, configure the stream.  The lock must be held while
-                                // assigning the stream ID to ensure only one stream gets an ID, and it must be held
-                                // across setting the initial window size (available credit) and storing the stream into
-                                // collection such that window size updates are able to atomically affect all known streams.
-                                s.http2Stream.Initialize(
-                                    s.thisRef._nextStream,
-                                    s.thisRef._initialWindowSize
-                                );
-
-                                // Client-initiated streams are always odd-numbered, so increase by 2.
-                                s.thisRef._nextStream += 2;
-
-                                // We're about to flush the HEADERS frame, so add the stream to the dictionary now.
-                                // The lifetime of the stream is now controlled by the stream itself and the connection.
-                                // This can fail if the connection is shutting down, in which case we will cancel sending this frame.
-                                s.thisRef._httpStreams.Add(s.http2Stream.StreamId, s.http2Stream);
+                                // We ran out of stream IDs or we raced between acquiring the connection from the pool and shutting down.
+                                // Throw a retryable request exception. This will cause retry logic to kick in
+                                // and perform another connection attempt. The user should never see this exception.
+                                s.thisRef.ThrowShutdownException();
                             }
 
-                            Span<byte> span = writeBuffer.Span;
+                            // Now that we're holding the lock, configure the stream.  The lock must be held while
+                            // assigning the stream ID to ensure only one stream gets an ID, and it must be held
+                            // across setting the initial window size (available credit) and storing the stream into
+                            // collection such that window size updates are able to atomically affect all known streams.
+                            s.http2Stream
+                                .Initialize(s.thisRef._nextStream, s.thisRef._initialWindowSize);
 
-                            // Copy the HEADERS frame.
-                            ReadOnlyMemory<byte> current,
-                                remaining;
+                            // Client-initiated streams are always odd-numbered, so increase by 2.
+                            s.thisRef._nextStream += 2;
+
+                            // We're about to flush the HEADERS frame, so add the stream to the dictionary now.
+                            // The lifetime of the stream is now controlled by the stream itself and the connection.
+                            // This can fail if the connection is shutting down, in which case we will cancel sending this frame.
+                            s.thisRef._httpStreams.Add(s.http2Stream.StreamId, s.http2Stream);
+                        }
+
+                        Span<byte> span = writeBuffer.Span;
+
+                        // Copy the HEADERS frame.
+                        ReadOnlyMemory<byte> current,
+                            remaining;
+                        (current, remaining) = SplitBuffer(
+                            s.headerBytes,
+                            FrameHeader.MaxPayloadLength
+                        );
+                        FrameFlags flags = (
+                            remaining.Length == 0 ? FrameFlags.EndHeaders : FrameFlags.None
+                        );
+                        flags |= (s.endStream ? FrameFlags.EndStream : FrameFlags.None);
+                        FrameHeader.WriteTo(
+                            span,
+                            current.Length,
+                            FrameType.Headers,
+                            flags,
+                            s.http2Stream.StreamId
+                        );
+                        span = span.Slice(FrameHeader.Size);
+                        current.Span.CopyTo(span);
+                        span = span.Slice(current.Length);
+                        if (NetEventSource.Log.IsEnabled())
+                            s.thisRef
+                                .Trace(
+                                    s.http2Stream.StreamId,
+                                    $"Wrote HEADERS frame. Length={current.Length}, flags={flags}"
+                                );
+
+                        // Copy CONTINUATION frames, if any.
+                        while (remaining.Length > 0)
+                        {
                             (current, remaining) = SplitBuffer(
-                                s.headerBytes,
+                                remaining,
                                 FrameHeader.MaxPayloadLength
                             );
-                            FrameFlags flags = (
-                                remaining.Length == 0 ? FrameFlags.EndHeaders : FrameFlags.None
-                            );
-                            flags |= (s.endStream ? FrameFlags.EndStream : FrameFlags.None);
+                            flags = remaining.Length == 0 ? FrameFlags.EndHeaders : FrameFlags.None;
+
                             FrameHeader.WriteTo(
                                 span,
                                 current.Length,
-                                FrameType.Headers,
+                                FrameType.Continuation,
                                 flags,
                                 s.http2Stream.StreamId
                             );
@@ -1749,45 +1766,19 @@ namespace System.Net.Http
                             current.Span.CopyTo(span);
                             span = span.Slice(current.Length);
                             if (NetEventSource.Log.IsEnabled())
-                                s.thisRef.Trace(
-                                    s.http2Stream.StreamId,
-                                    $"Wrote HEADERS frame. Length={current.Length}, flags={flags}"
-                                );
-
-                            // Copy CONTINUATION frames, if any.
-                            while (remaining.Length > 0)
-                            {
-                                (current, remaining) = SplitBuffer(
-                                    remaining,
-                                    FrameHeader.MaxPayloadLength
-                                );
-                                flags =
-                                    remaining.Length == 0 ? FrameFlags.EndHeaders : FrameFlags.None;
-
-                                FrameHeader.WriteTo(
-                                    span,
-                                    current.Length,
-                                    FrameType.Continuation,
-                                    flags,
-                                    s.http2Stream.StreamId
-                                );
-                                span = span.Slice(FrameHeader.Size);
-                                current.Span.CopyTo(span);
-                                span = span.Slice(current.Length);
-                                if (NetEventSource.Log.IsEnabled())
-                                    s.thisRef.Trace(
+                                s.thisRef
+                                    .Trace(
                                         s.http2Stream.StreamId,
                                         $"Wrote CONTINUATION frame. Length={current.Length}, flags={flags}"
                                     );
-                            }
+                        }
 
-                            Debug.Assert(span.Length == 0);
+                        Debug.Assert(span.Length == 0);
 
-                            return s.mustFlush || s.endStream;
-                        },
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+                        return s.mustFlush || s.endStream;
+                    },
+                    cancellationToken
+                ).ConfigureAwait(false);
 
                 if (HttpTelemetry.Log.IsEnabled())
                     HttpTelemetry.Log.RequestHeadersStop();
@@ -1825,31 +1816,31 @@ namespace System.Net.Http
                 try
                 {
                     await PerformWriteAsync(
-                            FrameHeader.Size + current.Length,
-                            (thisRef: this, streamId, current),
-                            static (s, writeBuffer) =>
-                            {
-                                // Invoked while holding the lock:
-                                if (NetEventSource.Log.IsEnabled())
-                                    s.thisRef.Trace(
+                        FrameHeader.Size + current.Length,
+                        (thisRef: this, streamId, current),
+                        static (s, writeBuffer) =>
+                        {
+                            // Invoked while holding the lock:
+                            if (NetEventSource.Log.IsEnabled())
+                                s.thisRef
+                                    .Trace(
                                         s.streamId,
                                         $"Started writing. {nameof(writeBuffer.Length)}={writeBuffer.Length}"
                                     );
 
-                                FrameHeader.WriteTo(
-                                    writeBuffer.Span,
-                                    s.current.Length,
-                                    FrameType.Data,
-                                    FrameFlags.None,
-                                    s.streamId
-                                );
-                                s.current.CopyTo(writeBuffer.Slice(FrameHeader.Size));
+                            FrameHeader.WriteTo(
+                                writeBuffer.Span,
+                                s.current.Length,
+                                FrameType.Data,
+                                FrameFlags.None,
+                                s.streamId
+                            );
+                            s.current.CopyTo(writeBuffer.Slice(FrameHeader.Size));
 
-                                return false; // no need to flush, as the request content may do so explicitly, or worst case we'll do so as part of the end data frame
-                            },
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
+                            return false; // no need to flush, as the request content may do so explicitly, or worst case we'll do so as part of the end data frame
+                        },
+                        cancellationToken
+                    ).ConfigureAwait(false);
                 }
                 catch
                 {
@@ -1891,10 +1882,8 @@ namespace System.Net.Http
                 static (s, writeBuffer) =>
                 {
                     if (NetEventSource.Log.IsEnabled())
-                        s.thisRef.Trace(
-                            s.streamId,
-                            $"Started writing. {nameof(s.amount)}={s.amount}"
-                        );
+                        s.thisRef
+                            .Trace(s.streamId, $"Started writing. {nameof(s.amount)}={s.amount}");
 
                     Span<byte> span = writeBuffer.Span;
                     FrameHeader.WriteTo(
@@ -2295,10 +2284,10 @@ namespace System.Net.Http
                     && request.HasHeaders
                     && request.Headers.ExpectContinue == true;
                 Http2Stream http2Stream = await SendHeadersAsync(
-                        request,
-                        cancellationToken,
-                        mustFlush: shouldExpectContinue
-                    )
+                    request,
+                    cancellationToken,
+                    mustFlush: shouldExpectContinue
+                )
                     .ConfigureAwait(false);
 
                 bool duplex = request.Content != null && request.Content.AllowDuplex;
@@ -2473,13 +2462,14 @@ namespace System.Net.Http
             string message,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource.Log.HandlerMessage(
-                _pool?.GetHashCode() ?? 0, // pool ID
-                GetHashCode(), // connection ID
-                streamId, // stream ID
-                memberName, // method name
-                message
-            ); // message
+            NetEventSource.Log
+                .HandlerMessage(
+                    _pool?.GetHashCode() ?? 0, // pool ID
+                    GetHashCode(), // connection ID
+                    streamId, // stream ID
+                    memberName, // method name
+                    message
+                ); // message
 
         [DoesNotReturn]
         private static void ThrowRetry(string message, Exception innerException) =>

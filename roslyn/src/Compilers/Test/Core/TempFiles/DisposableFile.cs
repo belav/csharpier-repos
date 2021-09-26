@@ -41,8 +41,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     }
                     catch (IOException ex)
                     {
-                        throw new InvalidOperationException(
-                            string.Format(
+                        throw new InvalidOperationException(string.Format(
                                 @"
 The file '{0}' seems to have been opened in a way that prevents us from deleting it on close.
 Is the file loaded as an assembly (e.g. via Assembly.LoadFile)?
@@ -51,9 +50,7 @@ Is the file loaded as an assembly (e.g. via Assembly.LoadFile)?
                                 Path,
                                 ex.GetType().Name,
                                 ex.Message
-                            ),
-                            ex
-                        );
+                            ), ex);
                     }
                     catch (UnauthorizedAccessException)
                     {

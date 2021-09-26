@@ -119,8 +119,8 @@ public class C2
                 )
             )
             {
-                CompileAndVerify(comp2, verify: Verification.Skipped)
-                    .Diagnostics.Where(d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion)
+                CompileAndVerify(comp2, verify: Verification.Skipped).Diagnostics
+                    .Where(d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion)
                     .Verify(after);
 
                 if (specificReferencesToAssert is object)
@@ -135,10 +135,8 @@ public class C2
                         foreach (var reference in tryRemove)
                         {
                             var comp3 = comp.RemoveReferences(reference);
-                            CompileAndVerify(comp3, verify: Verification.Skipped)
-                                .Diagnostics.Where(
-                                    d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion
-                                )
+                            CompileAndVerify(comp3, verify: Verification.Skipped).Diagnostics
+                                .Where(d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion)
                                 .Verify(after);
                         }
                     }
@@ -275,10 +273,10 @@ public class C2
                     {
                         var comp3 = comp.RemoveReferences(reference);
                         CompileAndVerify(
-                                comp3,
-                                verify: Verification.Skipped,
-                                expectedOutput: expectedOutput
-                            )
+                            comp3,
+                            verify: Verification.Skipped,
+                            expectedOutput: expectedOutput
+                        )
                             .VerifyDiagnostics();
                     }
                 }
@@ -1198,9 +1196,8 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(
-                        DocumentationMode.Diagnose
-                    )
+                    parseOptions: TestOptions.Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, expected);
             }
@@ -2537,7 +2534,8 @@ public class C2
 ",
                 // (2,1): hidden CS8020: Unused extern alias.
                 // extern alias N1C1;
-                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;").WithLocation(2, 1)
+                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
+                    .WithLocation(2, 1)
             );
 
             verify1(
@@ -2610,7 +2608,8 @@ public class C2
 }",
                 // (2,1): hidden CS8020: Unused extern alias.
                 // extern alias N1C1;
-                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;").WithLocation(2, 1)
+                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
+                    .WithLocation(2, 1)
             );
 
             verify2(
@@ -4283,9 +4282,8 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(
-                        DocumentationMode.Diagnose
-                    )
+                    parseOptions: TestOptions.Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, expected);
             }
@@ -4486,7 +4484,7 @@ public class C3 : C0
             Assert.DoesNotContain(comp1Ref, used);
 
             used = CreateCompilation(
-                    @"
+                @"
 using static C2.C1;
 
 public class C3
@@ -4496,15 +4494,14 @@ public class C3
     }
 }
 ",
-                    references: new[] { comp0Ref, comp1Ref }
-                )
-                .GetUsedAssemblyReferences();
+                references: new[] { comp0Ref, comp1Ref }
+            ).GetUsedAssemblyReferences();
 
             Assert.DoesNotContain(comp0Ref, used);
             Assert.DoesNotContain(comp1Ref, used);
 
             used = CreateCompilation(
-                    @"
+                @"
 using alias = C2.C1;
 
 public class C3
@@ -4514,9 +4511,8 @@ public class C3
     }
 }
 ",
-                    references: new[] { comp0Ref, comp1Ref }
-                )
-                .GetUsedAssemblyReferences();
+                references: new[] { comp0Ref, comp1Ref }
+            ).GetUsedAssemblyReferences();
 
             Assert.DoesNotContain(comp0Ref, used);
             Assert.DoesNotContain(comp1Ref, used);
@@ -4992,7 +4988,8 @@ class C2
                 {
                     // (2,1): hidden CS8019: Unnecessary using directive.
                     // using N1;
-                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1;").WithLocation(2, 1),
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1;")
+                        .WithLocation(2, 1),
                     // (2,7): error CS0246: The type or namespace name 'N1' could not be found (are you missing a
                     // using N1;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1")
@@ -5087,9 +5084,8 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(
-                        DocumentationMode.Diagnose
-                    )
+                    parseOptions: TestOptions.Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, expected);
             }
@@ -5347,9 +5343,8 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(
-                        DocumentationMode.Diagnose
-                    )
+                    parseOptions: TestOptions.Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, new[] { reference0 }, references);
             }
@@ -5370,9 +5365,9 @@ class C2
 ";
 
             CreateCompilation(
-                    source1,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
-                )
+                source1,
+                parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+            )
                 .VerifyDiagnostics(
                     // (2,7): error CS0246: The type or namespace name 'global' could not be found (are you missing a using directive or an assembly reference?)
                     // using global;
@@ -5393,9 +5388,9 @@ class C2
 ";
 
             CreateCompilation(
-                    source2,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
-                )
+                source2,
+                parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+            )
                 .VerifyDiagnostics(
                     // (2,15): error CS0246: The type or namespace name 'global' could not be found (are you missing a using directive or an assembly reference?)
                     // using alias = global;
@@ -5420,9 +5415,9 @@ class C2
 ";
 
             CreateCompilation(
-                    source1,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
-                )
+                source1,
+                parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+            )
                 .VerifyDiagnostics(
                     // (2,15): error CS1001: Identifier expected
                     // using global::;
@@ -5441,9 +5436,9 @@ class C2
 ";
 
             CreateCompilation(
-                    source2,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
-                )
+                source2,
+                parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+            )
                 .VerifyDiagnostics(
                     // (2,23): error CS1001: Identifier expected
                     // using alias = global::;

@@ -18,29 +18,23 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class QueryOptimizingExpressionVisitor : ExpressionVisitor
     {
-        private static readonly MethodInfo _stringCompareWithComparisonMethod =
-            typeof(string).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _stringCompareWithComparisonMethod = typeof(string)
+            .GetRequiredRuntimeMethod(
                 nameof(string.Compare),
                 new[] { typeof(string), typeof(string), typeof(StringComparison) }
             );
 
-        private static readonly MethodInfo _stringCompareWithoutComparisonMethod =
-            typeof(string).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _stringCompareWithoutComparisonMethod = typeof(string)
+            .GetRequiredRuntimeMethod(
                 nameof(string.Compare),
                 new[] { typeof(string), typeof(string) }
             );
 
-        private static readonly MethodInfo _startsWithMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.StartsWith),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _startsWithMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.StartsWith), new[] { typeof(string) });
 
-        private static readonly MethodInfo _endsWithMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.EndsWith),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _endsWithMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.EndsWith), new[] { typeof(string) });
 
         private static readonly Expression _constantNullString = Expression.Constant(
             null,
@@ -135,9 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 if (methodInfo.Equals(EnumerableMethods.AnyWithPredicate) && !negated)
                 {
-                    var containsMethod = EnumerableMethods.Contains.MakeGenericMethod(
-                        methodCallExpression.Method.GetGenericArguments()[0]
-                    );
+                    var containsMethod = EnumerableMethods.Contains
+                        .MakeGenericMethod(methodCallExpression.Method.GetGenericArguments()[0]);
                     return Expression.Call(
                         null,
                         containsMethod,
@@ -148,9 +141,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 if (methodInfo.Equals(EnumerableMethods.All) && negated)
                 {
-                    var containsMethod = EnumerableMethods.Contains.MakeGenericMethod(
-                        methodCallExpression.Method.GetGenericArguments()[0]
-                    );
+                    var containsMethod = EnumerableMethods.Contains
+                        .MakeGenericMethod(methodCallExpression.Method.GetGenericArguments()[0]);
                     return Expression.Not(
                         Expression.Call(
                             null,

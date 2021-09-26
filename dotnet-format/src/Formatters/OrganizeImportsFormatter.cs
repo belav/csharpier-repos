@@ -53,10 +53,10 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                 );
 
                 var isSameVersion = await IsSameDocumentAndVersionAsync(
-                        document,
-                        organizedDocument,
-                        cancellationToken
-                    )
+                    document,
+                    organizedDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (isSameVersion)
                 {
@@ -68,14 +68,14 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                 var organizedSourceText = await organizedDocument.GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return await _endOfLineFormatter.FormatFileAsync(
-                        organizedDocument,
-                        organizedSourceText,
-                        optionSet,
-                        analyzerConfigOptions,
-                        formatOptions,
-                        logger,
-                        cancellationToken
-                    )
+                    organizedDocument,
+                    organizedSourceText,
+                    optionSet,
+                    analyzerConfigOptions,
+                    formatOptions,
+                    logger,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (InsufficientExecutionStackException)

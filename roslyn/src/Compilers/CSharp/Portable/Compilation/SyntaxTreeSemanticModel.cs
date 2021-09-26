@@ -727,9 +727,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // we have a winner
                     var decl = (BaseTypeDeclarationSyntax)parent.Parent.Parent;
                     var symbol = this.GetDeclaredSymbol(decl);
-                    return ConsList<TypeSymbol>.Empty.Prepend(
-                        symbol.GetSymbol().OriginalDefinition
-                    );
+                    return ConsList<TypeSymbol>.Empty
+                        .Prepend(symbol.GetSymbol().OriginalDefinition);
                 }
             }
 
@@ -1015,7 +1014,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             position = CheckAndAdjustPosition(position);
 
-            var existingConstructorInitializer = this.Root.FindToken(position)
+            var existingConstructorInitializer = this.Root
+                .FindToken(position)
                 .Parent.AncestorsAndSelf()
                 .OfType<ConstructorInitializerSyntax>()
                 .FirstOrDefault();
@@ -1047,7 +1047,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             position = CheckAndAdjustPosition(position);
 
-            var existingConstructorInitializer = this.Root.FindToken(position)
+            var existingConstructorInitializer = this.Root
+                .FindToken(position)
                 .Parent.AncestorsAndSelf()
                 .OfType<PrimaryConstructorBaseTypeSyntax>()
                 .FirstOrDefault();
@@ -1142,9 +1143,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // https://github.com/dotnet/roslyn/issues/50234: CSharpSyntaxTree.IsNullableAnalysisEnabled() does not differentiate
             // between no '#nullable' directives and '#nullable restore' - it returns null in both cases. Since we fallback to the
             // directives in the original syntax tree, we're not handling '#nullable restore' correctly in the speculative text.
-            return ((CSharpSyntaxTree)speculativeSyntax.SyntaxTree).IsNullableAnalysisEnabled(
-                    speculativeSyntax.Span
-                )
+            return ((CSharpSyntaxTree)speculativeSyntax.SyntaxTree)
+                    .IsNullableAnalysisEnabled(speculativeSyntax.Span)
                 ?? Compilation.IsNullableAnalysisEnabledIn(
                     (CSharpSyntaxTree)SyntaxTree,
                     new TextSpan(position, 0)
@@ -1465,7 +1465,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 this,
                                 tuple.paramDecl,
                                 tuple.parameterSymbol,
-                                tuple.containing.GetEnclosingBinder(tuple.paramDecl.SpanStart)
+                                tuple.containing
+                                    .GetEnclosingBinder(tuple.paramDecl.SpanStart)
                                     .CreateBinderForParameterDefaultValue(
                                         tuple.parameterSymbol,
                                         (EqualsValueClauseSyntax)equalsValue
@@ -2055,7 +2056,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return (
                         GetDeclaredNamespaceOrType(declarationSyntax)
                         ?? GetDeclaredMemberSymbol(declarationSyntax)
-                    ).GetPublicSymbol();
+                    )
+                        .GetPublicSymbol();
             }
         }
 
@@ -2067,10 +2069,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(declarationSyntax);
 
             return SimpleProgramNamedTypeSymbol.GetSimpleProgramEntryPoint(
-                    Compilation,
-                    declarationSyntax,
-                    fallbackToMainEntryPoint: false
-                )
+                Compilation,
+                declarationSyntax,
+                fallbackToMainEntryPoint: false
+            )
                 .GetPublicSymbol();
         }
 
@@ -2220,7 +2222,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(declarationSyntax.Keyword.Kind() != SyntaxKind.IdentifierToken);
                     return (
                         this.GetDeclaredMember(container, declarationSyntax.Span) as MethodSymbol
-                    ).GetPublicSymbol();
+                    )
+                        .GetPublicSymbol();
 
                 default:
                     throw ExceptionUtilities.UnexpectedValue(propertyOrEventDecl.Kind());
@@ -2248,7 +2251,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // to exclude the property symbol from being retrieved.
                     return (
                         this.GetDeclaredMember(container, declarationSyntax.Span) as MethodSymbol
-                    ).GetPublicSymbol();
+                    )
+                        .GetPublicSymbol();
 
                 default:
                     // Don't throw, use only for the assert
@@ -2322,9 +2326,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SyntaxKind.ConstructorDeclaration:
                     if (
-                        ((ConstructorDeclarationSyntax)declaration).Modifiers.Any(
-                            SyntaxKind.StaticKeyword
-                        )
+                        ((ConstructorDeclarationSyntax)declaration).Modifiers
+                            .Any(SyntaxKind.StaticKeyword)
                     )
                     {
                         return WellKnownMemberNames.StaticConstructorName;
@@ -2341,9 +2344,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SyntaxKind.ConversionOperatorDeclaration:
                     if (
-                        (
-                            (ConversionOperatorDeclarationSyntax)declaration
-                        ).ImplicitOrExplicitKeyword.Kind() == SyntaxKind.ExplicitKeyword
+                        ((ConversionOperatorDeclarationSyntax)declaration).ImplicitOrExplicitKeyword
+                            .Kind() == SyntaxKind.ExplicitKeyword
                     )
                     {
                         return WellKnownMemberNames.ExplicitConversionName;
@@ -2644,11 +2646,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 // Case: multiple aliases, not the first (see DevDiv #9368)
-                return new AliasSymbol(
-                    binder,
-                    declarationSyntax.Name,
-                    declarationSyntax.Alias
-                ).GetPublicSymbol();
+                return new AliasSymbol(binder, declarationSyntax.Name, declarationSyntax.Alias)
+                    .GetPublicSymbol();
             }
         }
 
@@ -2737,9 +2736,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                method = (
-                    GetDeclaredSymbol(memberDecl, cancellationToken) as IMethodSymbol
-                ).GetSymbol();
+                method = (GetDeclaredSymbol(memberDecl, cancellationToken) as IMethodSymbol)
+                    .GetSymbol();
             }
 
             if ((object)method == null)
@@ -2778,9 +2776,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            var property = (
-                GetDeclaredSymbol(memberDecl, cancellationToken) as IPropertySymbol
-            ).GetSymbol();
+            var property = (GetDeclaredSymbol(memberDecl, cancellationToken) as IPropertySymbol)
+                .GetSymbol();
             if ((object)property == null)
             {
                 return null;
@@ -2810,7 +2807,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var delegateType = (
                 GetDeclaredSymbol(memberDecl, cancellationToken) as INamedTypeSymbol
-            ).GetSymbol();
+            )
+                .GetSymbol();
             if ((object)delegateType == null)
             {
                 return null;
@@ -2912,7 +2910,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                           typeParameter
                                       )
                             )
-                        ).GetPublicSymbol();
+                        )
+                            .GetPublicSymbol();
                 }
             }
 

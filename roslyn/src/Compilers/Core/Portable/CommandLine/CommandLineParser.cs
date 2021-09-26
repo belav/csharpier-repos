@@ -178,10 +178,10 @@ namespace Microsoft.CodeAnalysis
             diagnosticAlreadyReported = false;
 
             IEnumerator<string> partsEnumerator = ParseSeparatedStrings(
-                    arg,
-                    s_pathSeparators,
-                    StringSplitOptions.RemoveEmptyEntries
-                )
+                arg,
+                s_pathSeparators,
+                StringSplitOptions.RemoveEmptyEntries
+            )
                 .GetEnumerator();
             if (!partsEnumerator.MoveNext() || string.IsNullOrEmpty(partsEnumerator.Current))
             {
@@ -583,16 +583,10 @@ namespace Microsoft.CodeAnalysis
                         {
                             // Ignores /noconfig option specified in a response file
                             if (
-                                !string.Equals(
-                                    newArg,
-                                    "/noconfig",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                                && !string.Equals(
-                                    newArg,
-                                    "-noconfig",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                !string
+                                    .Equals(newArg, "/noconfig", StringComparison.OrdinalIgnoreCase)
+                                && !string
+                                    .Equals(newArg, "-noconfig", StringComparison.OrdinalIgnoreCase)
                             )
                             {
                                 args.Push(newArg);
@@ -1029,10 +1023,10 @@ namespace Microsoft.CodeAnalysis
         internal static IEnumerable<string> ParseSeparatedPaths(string? str)
         {
             return ParseSeparatedStrings(
-                    str,
-                    s_pathSeparators,
-                    StringSplitOptions.RemoveEmptyEntries
-                )
+                str,
+                s_pathSeparators,
+                StringSplitOptions.RemoveEmptyEntries
+            )
                 .Select(RemoveQuotesAndSlashes)!;
         }
 
@@ -1103,11 +1097,8 @@ namespace Microsoft.CodeAnalysis
             bool isScriptFile;
             if (IsScriptCommandLineParser)
             {
-                isScriptFile = !string.Equals(
-                    extension,
-                    RegularFileExtension,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                isScriptFile = !string
+                    .Equals(extension, RegularFileExtension, StringComparison.OrdinalIgnoreCase);
             }
             else
             {
@@ -1214,12 +1205,13 @@ namespace Microsoft.CodeAnalysis
         {
             if (
                 !string.IsNullOrWhiteSpace(arg)
-                && long.TryParse(
-                    arg,
-                    NumberStyles.None,
-                    CultureInfo.InvariantCulture,
-                    out long codepage
-                )
+                && long
+                    .TryParse(
+                        arg,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out long codepage
+                    )
                 && (codepage > 0)
             )
             {
@@ -1288,10 +1280,10 @@ namespace Microsoft.CodeAnalysis
                             if (enumerator == null)
                             {
                                 enumerator = EnumerateFiles(
-                                        resolvedDirectoryPath,
-                                        pattern,
-                                        searchOption
-                                    )
+                                    resolvedDirectoryPath,
+                                    pattern,
+                                    searchOption
+                                )
                                     .GetEnumerator();
                             }
 

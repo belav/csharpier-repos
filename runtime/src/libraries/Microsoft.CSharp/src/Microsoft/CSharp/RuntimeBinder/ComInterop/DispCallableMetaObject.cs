@@ -121,7 +121,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     typeof(DispCallable).GetProperty(nameof(DispCallable.DispatchObject))
                 ),
                 method
-            ).Invoke();
+            )
+                .Invoke();
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]

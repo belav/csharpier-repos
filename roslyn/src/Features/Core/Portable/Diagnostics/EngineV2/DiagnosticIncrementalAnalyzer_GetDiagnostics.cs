@@ -36,11 +36,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 projectId,
                 documentId,
                 includeSuppressedDiagnostics
-            ).GetSpecificDiagnosticsAsync(
-                argsId.Analyzer,
-                (AnalysisKind)argsId.Kind,
-                cancellationToken
-            );
+            )
+                .GetSpecificDiagnosticsAsync(
+                    argsId.Analyzer,
+                    (AnalysisKind)argsId.Kind,
+                    cancellationToken
+                );
         }
 
         public Task<ImmutableArray<DiagnosticData>> GetCachedDiagnosticsAsync(
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 projectId,
                 documentId,
                 includeSuppressedDiagnostics
-            ).GetDiagnosticsAsync(cancellationToken);
+            )
+                .GetDiagnosticsAsync(cancellationToken);
 
         public Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
             Solution solution,
@@ -72,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 documentId,
                 diagnosticIds: null,
                 includeSuppressedDiagnostics
-            ).GetDiagnosticsAsync(cancellationToken);
+            )
+                .GetDiagnosticsAsync(cancellationToken);
 
         public Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForIdsAsync(
             Solution solution,
@@ -89,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 documentId,
                 diagnosticIds,
                 includeSuppressedDiagnostics
-            ).GetDiagnosticsAsync(cancellationToken);
+            )
+                .GetDiagnosticsAsync(cancellationToken);
 
         public Task<ImmutableArray<DiagnosticData>> GetProjectDiagnosticsForIdsAsync(
             Solution solution,
@@ -105,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 documentId: null,
                 diagnosticIds: diagnosticIds,
                 includeSuppressedDiagnostics
-            ).GetProjectDiagnosticsAsync(cancellationToken);
+            )
+                .GetProjectDiagnosticsAsync(cancellationToken);
 
         private abstract class DiagnosticGetter
         {
@@ -171,11 +176,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     // return diagnostics specific to one project or document
                     var includeProjectNonLocalResult = DocumentId == null;
                     await AppendDiagnosticsAsync(
-                            project,
-                            documentIds,
-                            includeProjectNonLocalResult,
-                            cancellationToken
-                        )
+                        project,
+                        documentIds,
+                        includeProjectNonLocalResult,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     return GetDiagnosticData();
                 }
@@ -262,32 +267,32 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     {
                         AppendDiagnostics(
                             await GetDiagnosticsAsync(
-                                    stateSet,
-                                    project,
-                                    documentId,
-                                    AnalysisKind.Syntax,
-                                    cancellationToken
-                                )
+                                stateSet,
+                                project,
+                                documentId,
+                                AnalysisKind.Syntax,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         );
                         AppendDiagnostics(
                             await GetDiagnosticsAsync(
-                                    stateSet,
-                                    project,
-                                    documentId,
-                                    AnalysisKind.Semantic,
-                                    cancellationToken
-                                )
+                                stateSet,
+                                project,
+                                documentId,
+                                AnalysisKind.Semantic,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         );
                         AppendDiagnostics(
                             await GetDiagnosticsAsync(
-                                    stateSet,
-                                    project,
-                                    documentId,
-                                    AnalysisKind.NonLocal,
-                                    cancellationToken
-                                )
+                                stateSet,
+                                project,
+                                documentId,
+                                AnalysisKind.NonLocal,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         );
                     }
@@ -297,12 +302,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         // include project diagnostics if there is no target document
                         AppendDiagnostics(
                             await GetProjectStateDiagnosticsAsync(
-                                    stateSet,
-                                    project,
-                                    documentId: null,
-                                    AnalysisKind.NonLocal,
-                                    cancellationToken
-                                )
+                                stateSet,
+                                project,
+                                documentId: null,
+                                AnalysisKind.NonLocal,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         );
                     }
@@ -329,12 +334,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 }
 
                 var diagnostics = await GetDiagnosticsAsync(
-                        stateSet,
-                        project,
-                        DocumentId,
-                        analysisKind,
-                        cancellationToken
-                    )
+                    stateSet,
+                    project,
+                    DocumentId,
+                    analysisKind,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return IncludeSuppressedDiagnostics
@@ -364,12 +369,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 // project diagnostics:
                 return await GetProjectStateDiagnosticsAsync(
-                        stateSet,
-                        project,
-                        documentId,
-                        kind,
-                        cancellationToken
-                    )
+                    stateSet,
+                    project,
+                    documentId,
+                    kind,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -397,22 +402,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     }
 
                     var result = await state.GetAnalysisDataAsync(
-                            Owner.PersistentStorageService,
-                            document,
-                            avoidLoadingData: false,
-                            cancellationToken: cancellationToken
-                        )
+                        Owner.PersistentStorageService,
+                        document,
+                        avoidLoadingData: false,
+                        cancellationToken: cancellationToken
+                    )
                         .ConfigureAwait(false);
                     return result.GetDocumentDiagnostics(documentId, kind);
                 }
 
                 Contract.ThrowIfFalse(kind == AnalysisKind.NonLocal);
                 var nonLocalResult = await state.GetProjectAnalysisDataAsync(
-                        Owner.PersistentStorageService,
-                        project,
-                        avoidLoadingData: false,
-                        cancellationToken: cancellationToken
-                    )
+                    Owner.PersistentStorageService,
+                    project,
+                    avoidLoadingData: false,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 return nonLocalResult.GetOtherDiagnostics();
             }
@@ -444,11 +449,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     if (project != null)
                     {
                         await AppendDiagnosticsAsync(
-                                project,
-                                SpecializedCollections.EmptyEnumerable<DocumentId>(),
-                                includeProjectNonLocalResult: true,
-                                cancellationToken
-                            )
+                            project,
+                            SpecializedCollections.EmptyEnumerable<DocumentId>(),
+                            includeProjectNonLocalResult: true,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -476,20 +481,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 // unlike the suppressed (disabled) analyzer, we will include hidden diagnostic only analyzers here.
                 var compilation = await CreateCompilationWithAnalyzersAsync(
-                        project,
-                        stateSets,
-                        IncludeSuppressedDiagnostics,
-                        cancellationToken
-                    )
+                    project,
+                    stateSets,
+                    IncludeSuppressedDiagnostics,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var result = await Owner.GetProjectAnalysisDataAsync(
-                        compilation,
-                        project,
-                        stateSets,
-                        forceAnalyzerRun: true,
-                        cancellationToken
-                    )
+                    compilation,
+                    project,
+                    stateSets,
+                    forceAnalyzerRun: true,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var stateSet in stateSets)

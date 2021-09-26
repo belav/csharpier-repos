@@ -23,11 +23,8 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(HttpClient).Assembly.GetType(
-                "System.Net.Http.HttpTelemetry",
-                throwOnError: true,
-                ignoreCase: false
-            );
+            Type esType = typeof(HttpClient).Assembly
+                .GetType("System.Net.Http.HttpTelemetry", throwOnError: true, ignoreCase: false);
             Assert.NotNull(esType);
 
             Assert.Equal("System.Net.Http", EventSource.GetName(esType));
@@ -66,207 +63,188 @@ namespace System.Net.Http.Functional.Tests
             }
 
             RemoteExecutor.Invoke(
-                    async (useVersionString, testMethod) =>
-                    {
-                        const int ResponseContentLength = 42;
+                async (useVersionString, testMethod) =>
+                {
+                    const int ResponseContentLength = 42;
 
-                        Version version = Version.Parse(useVersionString);
-                        using var listener = new TestEventListener(
-                            "System.Net.Http",
-                            EventLevel.Verbose,
-                            eventCounterInterval: 0.1d
-                        );
-                        listener.AddActivityTracking();
+                    Version version = Version.Parse(useVersionString);
+                    using var listener = new TestEventListener(
+                        "System.Net.Http",
+                        EventLevel.Verbose,
+                        eventCounterInterval: 0.1d
+                    );
+                    listener.AddActivityTracking();
 
-                        bool buffersResponse = false;
-                        var events =
-                            new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
-                        await listener.RunWithCallbackAsync(
-                            e => events.Enqueue((e, e.ActivityId)),
-                            async () =>
-                            {
-                                await GetFactoryForVersion(version)
-                                    .CreateClientAndServerAsync(
-                                        async uri =>
-                                        {
-                                            using HttpClientHandler handler =
-                                                CreateHttpClientHandler(useVersionString);
-                                            using HttpClient client = CreateHttpClient(
-                                                handler,
-                                                useVersionString
-                                            );
-                                            using var invoker = new HttpMessageInvoker(handler);
+                    bool buffersResponse = false;
+                    var events =
+                        new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
+                    await listener.RunWithCallbackAsync(
+                        e => events.Enqueue((e, e.ActivityId)),
+                        async () =>
+                        {
+                            await GetFactoryForVersion(version).CreateClientAndServerAsync(
+                                async uri =>
+                                {
+                                    using HttpClientHandler handler = CreateHttpClientHandler(
+                                        useVersionString
+                                    );
+                                    using HttpClient client = CreateHttpClient(
+                                        handler,
+                                        useVersionString
+                                    );
+                                    using var invoker = new HttpMessageInvoker(handler);
 
-                                            var request = new HttpRequestMessage(
-                                                HttpMethod.Get,
-                                                uri
-                                            ) {
-                                                Version = version
-                                            };
+                                    var request = new HttpRequestMessage(HttpMethod.Get, uri)
+                                    {
+                                        Version = version
+                                    };
 
-                                            switch (testMethod)
+                                    switch (testMethod)
+                                    {
+                                        case "GetAsync":
+
                                             {
-                                                case "GetAsync":
-
-                                                    {
-                                                        buffersResponse = true;
-                                                        await client.GetAsync(uri);
-                                                    }
-                                                    break;
-
-                                                case "Send":
-
-                                                    {
-                                                        buffersResponse = true;
-                                                        await Task.Run(() => client.Send(request));
-                                                    }
-                                                    break;
-
-                                                case "UnbufferedSend":
-
-                                                    {
-                                                        buffersResponse = false;
-                                                        HttpResponseMessage response =
-                                                            await Task.Run(
-                                                                () =>
-                                                                    client.Send(
-                                                                        request,
-                                                                        HttpCompletionOption.ResponseHeadersRead
-                                                                    )
-                                                            );
-                                                        response.Content.CopyTo(
-                                                            Stream.Null,
-                                                            null,
-                                                            default
-                                                        );
-                                                    }
-                                                    break;
-
-                                                case "SendAsync":
-
-                                                    {
-                                                        buffersResponse = true;
-                                                        await client.SendAsync(request);
-                                                    }
-                                                    break;
-
-                                                case "UnbufferedSendAsync":
-
-                                                    {
-                                                        buffersResponse = false;
-                                                        HttpResponseMessage response =
-                                                            await client.SendAsync(
-                                                                request,
-                                                                HttpCompletionOption.ResponseHeadersRead
-                                                            );
-                                                        await response.Content.CopyToAsync(
-                                                            Stream.Null
-                                                        );
-                                                    }
-                                                    break;
-
-                                                case "GetStringAsync":
-
-                                                    {
-                                                        buffersResponse = true;
-                                                        await client.GetStringAsync(uri);
-                                                    }
-                                                    break;
-
-                                                case "GetByteArrayAsync":
-
-                                                    {
-                                                        buffersResponse = true;
-                                                        await client.GetByteArrayAsync(uri);
-                                                    }
-                                                    break;
-
-                                                case "GetStreamAsync":
-
-                                                    {
-                                                        buffersResponse = false;
-                                                        Stream responseStream =
-                                                            await client.GetStreamAsync(uri);
-                                                        await responseStream.CopyToAsync(
-                                                            Stream.Null
-                                                        );
-                                                    }
-                                                    break;
-
-                                                case "InvokerSend":
-
-                                                    {
-                                                        buffersResponse = false;
-                                                        HttpResponseMessage response =
-                                                            await Task.Run(
-                                                                () =>
-                                                                    invoker.Send(
-                                                                        request,
-                                                                        cancellationToken: default
-                                                                    )
-                                                            );
-                                                        await response.Content.CopyToAsync(
-                                                            Stream.Null
-                                                        );
-                                                    }
-                                                    break;
-
-                                                case "InvokerSendAsync":
-
-                                                    {
-                                                        buffersResponse = false;
-                                                        HttpResponseMessage response =
-                                                            await invoker.SendAsync(
-                                                                request,
-                                                                cancellationToken: default
-                                                            );
-                                                        await response.Content.CopyToAsync(
-                                                            Stream.Null
-                                                        );
-                                                    }
-                                                    break;
+                                                buffersResponse = true;
+                                                await client.GetAsync(uri);
                                             }
-                                        },
-                                        async server =>
-                                        {
-                                            await server.AcceptConnectionAsync(
-                                                async connection =>
-                                                {
-                                                    await WaitForEventCountersAsync(events);
-                                                    await connection.ReadRequestDataAsync();
-                                                    await connection.SendResponseAsync(
-                                                        content: new string(
-                                                            'a',
-                                                            ResponseContentLength
+                                            break;
+
+                                        case "Send":
+
+                                            {
+                                                buffersResponse = true;
+                                                await Task.Run(() => client.Send(request));
+                                            }
+                                            break;
+
+                                        case "UnbufferedSend":
+
+                                            {
+                                                buffersResponse = false;
+                                                HttpResponseMessage response = await Task.Run(
+                                                    () =>
+                                                        client.Send(
+                                                            request,
+                                                            HttpCompletionOption.ResponseHeadersRead
                                                         )
+                                                );
+                                                response.Content.CopyTo(Stream.Null, null, default);
+                                            }
+                                            break;
+
+                                        case "SendAsync":
+
+                                            {
+                                                buffersResponse = true;
+                                                await client.SendAsync(request);
+                                            }
+                                            break;
+
+                                        case "UnbufferedSendAsync":
+
+                                            {
+                                                buffersResponse = false;
+                                                HttpResponseMessage response =
+                                                    await client.SendAsync(
+                                                        request,
+                                                        HttpCompletionOption.ResponseHeadersRead
                                                     );
-                                                }
+                                                await response.Content.CopyToAsync(Stream.Null);
+                                            }
+                                            break;
+
+                                        case "GetStringAsync":
+
+                                            {
+                                                buffersResponse = true;
+                                                await client.GetStringAsync(uri);
+                                            }
+                                            break;
+
+                                        case "GetByteArrayAsync":
+
+                                            {
+                                                buffersResponse = true;
+                                                await client.GetByteArrayAsync(uri);
+                                            }
+                                            break;
+
+                                        case "GetStreamAsync":
+
+                                            {
+                                                buffersResponse = false;
+                                                Stream responseStream = await client.GetStreamAsync(
+                                                    uri
+                                                );
+                                                await responseStream.CopyToAsync(Stream.Null);
+                                            }
+                                            break;
+
+                                        case "InvokerSend":
+
+                                            {
+                                                buffersResponse = false;
+                                                HttpResponseMessage response = await Task.Run(
+                                                    () =>
+                                                        invoker.Send(
+                                                            request,
+                                                            cancellationToken: default
+                                                        )
+                                                );
+                                                await response.Content.CopyToAsync(Stream.Null);
+                                            }
+                                            break;
+
+                                        case "InvokerSendAsync":
+
+                                            {
+                                                buffersResponse = false;
+                                                HttpResponseMessage response =
+                                                    await invoker.SendAsync(
+                                                        request,
+                                                        cancellationToken: default
+                                                    );
+                                                await response.Content.CopyToAsync(Stream.Null);
+                                            }
+                                            break;
+                                    }
+                                },
+                                async server =>
+                                {
+                                    await server.AcceptConnectionAsync(
+                                        async connection =>
+                                        {
+                                            await WaitForEventCountersAsync(events);
+                                            await connection.ReadRequestDataAsync();
+                                            await connection.SendResponseAsync(
+                                                content: new string('a', ResponseContentLength)
                                             );
                                         }
                                     );
+                                }
+                            );
 
-                                await WaitForEventCountersAsync(events);
-                            }
-                        );
-                        Assert.DoesNotContain(events, e => e.Event.EventId == 0); // errors from the EventSource itself
+                            await WaitForEventCountersAsync(events);
+                        }
+                    );
+                    Assert.DoesNotContain(events, e => e.Event.EventId == 0); // errors from the EventSource itself
 
-                        ValidateStartFailedStopEvents(events);
+                    ValidateStartFailedStopEvents(events);
 
-                        ValidateConnectionEstablishedClosed(events, version);
+                    ValidateConnectionEstablishedClosed(events, version);
 
-                        ValidateRequestResponseStartStopEvents(
-                            events,
-                            requestContentLength: null,
-                            responseContentLength: buffersResponse ? ResponseContentLength : null,
-                            count: 1
-                        );
+                    ValidateRequestResponseStartStopEvents(
+                        events,
+                        requestContentLength: null,
+                        responseContentLength: buffersResponse ? ResponseContentLength : null,
+                        count: 1
+                    );
 
-                        ValidateEventCounters(events, requestCount: 1, shouldHaveFailures: false);
-                    },
-                    UseVersion.ToString(),
-                    testMethod
-                )
-                .Dispose();
+                    ValidateEventCounters(events, requestCount: 1, shouldHaveFailures: false);
+                },
+                UseVersion.ToString(),
+                testMethod
+            ).Dispose();
         }
 
         [OuterLoop]
@@ -281,184 +259,161 @@ namespace System.Net.Http.Functional.Tests
             }
 
             RemoteExecutor.Invoke(
-                    async (useVersionString, testMethod) =>
-                    {
-                        Version version = Version.Parse(useVersionString);
-                        using var listener = new TestEventListener(
-                            "System.Net.Http",
-                            EventLevel.Verbose,
-                            eventCounterInterval: 0.1d
-                        );
-                        listener.AddActivityTracking();
+                async (useVersionString, testMethod) =>
+                {
+                    Version version = Version.Parse(useVersionString);
+                    using var listener = new TestEventListener(
+                        "System.Net.Http",
+                        EventLevel.Verbose,
+                        eventCounterInterval: 0.1d
+                    );
+                    listener.AddActivityTracking();
 
-                        var events =
-                            new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
-                        await listener.RunWithCallbackAsync(
-                            e => events.Enqueue((e, e.ActivityId)),
-                            async () =>
-                            {
-                                var semaphore = new SemaphoreSlim(0, 1);
-                                var cts = new CancellationTokenSource();
+                    var events =
+                        new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
+                    await listener.RunWithCallbackAsync(
+                        e => events.Enqueue((e, e.ActivityId)),
+                        async () =>
+                        {
+                            var semaphore = new SemaphoreSlim(0, 1);
+                            var cts = new CancellationTokenSource();
 
-                                await GetFactoryForVersion(version)
-                                    .CreateClientAndServerAsync(
-                                        async uri =>
-                                        {
-                                            using HttpClientHandler handler =
-                                                CreateHttpClientHandler(useVersionString);
-                                            using HttpClient client = CreateHttpClient(
-                                                handler,
-                                                useVersionString
+                            await GetFactoryForVersion(version).CreateClientAndServerAsync(
+                                async uri =>
+                                {
+                                    using HttpClientHandler handler = CreateHttpClientHandler(
+                                        useVersionString
+                                    );
+                                    using HttpClient client = CreateHttpClient(
+                                        handler,
+                                        useVersionString
+                                    );
+                                    using var invoker = new HttpMessageInvoker(handler);
+
+                                    var request = new HttpRequestMessage(HttpMethod.Get, uri)
+                                    {
+                                        Version = version
+                                    };
+
+                                    switch (testMethod)
+                                    {
+                                        case "GetAsync":
+                                            await Assert.ThrowsAsync<TaskCanceledException>(
+                                                async () => await client.GetAsync(uri, cts.Token)
                                             );
-                                            using var invoker = new HttpMessageInvoker(handler);
+                                            break;
 
-                                            var request = new HttpRequestMessage(
-                                                HttpMethod.Get,
-                                                uri
-                                            ) {
-                                                Version = version
-                                            };
+                                        case "Send":
+                                            await Assert.ThrowsAsync<TaskCanceledException>(
+                                                async () =>
+                                                    await Task.Run(
+                                                        () => client.Send(request, cts.Token)
+                                                    )
+                                            );
+                                            break;
 
-                                            switch (testMethod)
-                                            {
-                                                case "GetAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.GetAsync(uri, cts.Token)
-                                                    );
-                                                    break;
-
-                                                case "Send":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await Task.Run(
-                                                                () =>
-                                                                    client.Send(request, cts.Token)
-                                                            )
-                                                    );
-                                                    break;
-
-                                                case "UnbufferedSend":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await Task.Run(
-                                                                () =>
-                                                                    client.Send(
-                                                                        request,
-                                                                        HttpCompletionOption.ResponseHeadersRead,
-                                                                        cts.Token
-                                                                    )
-                                                            )
-                                                    );
-                                                    break;
-
-                                                case "SendAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.SendAsync(
-                                                                request,
-                                                                cts.Token
-                                                            )
-                                                    );
-                                                    break;
-
-                                                case "UnbufferedSendAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.SendAsync(
+                                        case "UnbufferedSend":
+                                            await Assert.ThrowsAsync<TaskCanceledException>(
+                                                async () =>
+                                                    await Task.Run(
+                                                        () =>
+                                                            client.Send(
                                                                 request,
                                                                 HttpCompletionOption.ResponseHeadersRead,
                                                                 cts.Token
                                                             )
-                                                    );
-                                                    break;
-
-                                                case "GetStringAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.GetStringAsync(
-                                                                uri,
-                                                                cts.Token
-                                                            )
-                                                    );
-                                                    break;
-
-                                                case "GetByteArrayAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.GetByteArrayAsync(
-                                                                uri,
-                                                                cts.Token
-                                                            )
-                                                    );
-                                                    break;
-
-                                                case "GetStreamAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.GetStreamAsync(
-                                                                uri,
-                                                                cts.Token
-                                                            )
-                                                    );
-                                                    break;
-
-                                                case "InvokerSend":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await Task.Run(
-                                                                () =>
-                                                                    invoker.Send(request, cts.Token)
-                                                            )
-                                                    );
-                                                    break;
-
-                                                case "InvokerSendAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await invoker.SendAsync(
-                                                                request,
-                                                                cts.Token
-                                                            )
-                                                    );
-                                                    break;
-                                            }
-
-                                            semaphore.Release();
-                                        },
-                                        async server =>
-                                        {
-                                            await server.AcceptConnectionAsync(
-                                                async connection =>
-                                                {
-                                                    await WaitForEventCountersAsync(events);
-                                                    cts.Cancel();
-                                                    Assert.True(
-                                                        await semaphore.WaitAsync(
-                                                            TimeSpan.FromSeconds(30)
-                                                        )
-                                                    );
-                                                    connection.Dispose();
-                                                }
+                                                    )
                                             );
+                                            break;
+
+                                        case "SendAsync":
+                                            await Assert.ThrowsAsync<TaskCanceledException>(
+                                                async () =>
+                                                    await client.SendAsync(request, cts.Token)
+                                            );
+                                            break;
+
+                                        case "UnbufferedSendAsync":
+                                            await Assert.ThrowsAsync<TaskCanceledException>(
+                                                async () =>
+                                                    await client.SendAsync(
+                                                        request,
+                                                        HttpCompletionOption.ResponseHeadersRead,
+                                                        cts.Token
+                                                    )
+                                            );
+                                            break;
+
+                                        case "GetStringAsync":
+                                            await Assert.ThrowsAsync<TaskCanceledException>(
+                                                async () =>
+                                                    await client.GetStringAsync(uri, cts.Token)
+                                            );
+                                            break;
+
+                                        case "GetByteArrayAsync":
+                                            await Assert.ThrowsAsync<TaskCanceledException>(
+                                                async () =>
+                                                    await client.GetByteArrayAsync(uri, cts.Token)
+                                            );
+                                            break;
+
+                                        case "GetStreamAsync":
+                                            await Assert.ThrowsAsync<TaskCanceledException>(
+                                                async () =>
+                                                    await client.GetStreamAsync(uri, cts.Token)
+                                            );
+                                            break;
+
+                                        case "InvokerSend":
+                                            await Assert.ThrowsAsync<TaskCanceledException>(
+                                                async () =>
+                                                    await Task.Run(
+                                                        () => invoker.Send(request, cts.Token)
+                                                    )
+                                            );
+                                            break;
+
+                                        case "InvokerSendAsync":
+                                            await Assert.ThrowsAsync<TaskCanceledException>(
+                                                async () =>
+                                                    await invoker.SendAsync(request, cts.Token)
+                                            );
+                                            break;
+                                    }
+
+                                    semaphore.Release();
+                                },
+                                async server =>
+                                {
+                                    await server.AcceptConnectionAsync(
+                                        async connection =>
+                                        {
+                                            await WaitForEventCountersAsync(events);
+                                            cts.Cancel();
+                                            Assert.True(
+                                                await semaphore.WaitAsync(TimeSpan.FromSeconds(30))
+                                            );
+                                            connection.Dispose();
                                         }
                                     );
+                                }
+                            );
 
-                                await WaitForEventCountersAsync(events);
-                            }
-                        );
-                        Assert.DoesNotContain(events, e => e.Event.EventId == 0); // errors from the EventSource itself
+                            await WaitForEventCountersAsync(events);
+                        }
+                    );
+                    Assert.DoesNotContain(events, e => e.Event.EventId == 0); // errors from the EventSource itself
 
-                        ValidateStartFailedStopEvents(events, shouldHaveFailures: true);
+                    ValidateStartFailedStopEvents(events, shouldHaveFailures: true);
 
-                        ValidateConnectionEstablishedClosed(events, version);
+                    ValidateConnectionEstablishedClosed(events, version);
 
-                        ValidateEventCounters(events, requestCount: 1, shouldHaveFailures: true);
-                    },
-                    UseVersion.ToString(),
-                    testMethod
-                )
-                .Dispose();
+                    ValidateEventCounters(events, requestCount: 1, shouldHaveFailures: true);
+                },
+                UseVersion.ToString(),
+                testMethod
+            ).Dispose();
         }
 
         [OuterLoop]
@@ -478,138 +433,126 @@ namespace System.Net.Http.Functional.Tests
             }
 
             RemoteExecutor.Invoke(
-                    async (useVersionString, testMethod) =>
-                    {
-                        const int RequestContentLength = 42;
-                        const int ResponseContentLength = 43;
+                async (useVersionString, testMethod) =>
+                {
+                    const int RequestContentLength = 42;
+                    const int ResponseContentLength = 43;
 
-                        Version version = Version.Parse(useVersionString);
-                        using var listener = new TestEventListener(
-                            "System.Net.Http",
-                            EventLevel.Verbose,
-                            eventCounterInterval: 0.1d
-                        );
-                        listener.AddActivityTracking();
+                    Version version = Version.Parse(useVersionString);
+                    using var listener = new TestEventListener(
+                        "System.Net.Http",
+                        EventLevel.Verbose,
+                        eventCounterInterval: 0.1d
+                    );
+                    listener.AddActivityTracking();
 
-                        var events =
-                            new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
-                        await listener.RunWithCallbackAsync(
-                            e => events.Enqueue((e, e.ActivityId)),
-                            async () =>
-                            {
-                                await GetFactoryForVersion(version)
-                                    .CreateClientAndServerAsync(
-                                        async uri =>
-                                        {
-                                            using HttpClientHandler handler =
-                                                CreateHttpClientHandler(useVersionString);
-                                            using HttpClient client = CreateHttpClient(
-                                                handler,
-                                                useVersionString
+                    var events =
+                        new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
+                    await listener.RunWithCallbackAsync(
+                        e => events.Enqueue((e, e.ActivityId)),
+                        async () =>
+                        {
+                            await GetFactoryForVersion(version).CreateClientAndServerAsync(
+                                async uri =>
+                                {
+                                    using HttpClientHandler handler = CreateHttpClientHandler(
+                                        useVersionString
+                                    );
+                                    using HttpClient client = CreateHttpClient(
+                                        handler,
+                                        useVersionString
+                                    );
+                                    using var invoker = new HttpMessageInvoker(handler);
+
+                                    var request = new HttpRequestMessage(HttpMethod.Get, uri)
+                                    {
+                                        Version = version
+                                    };
+
+                                    var content = new ByteArrayContent(
+                                        Encoding.ASCII
+                                            .GetBytes(new string('a', RequestContentLength))
+                                    );
+                                    request.Content = content;
+
+                                    switch (testMethod)
+                                    {
+                                        case "PostAsync":
+                                            await client.PostAsync(uri, content);
+                                            break;
+
+                                        case "Send":
+                                            await Task.Run(() => client.Send(request));
+                                            break;
+
+                                        case "SendAsync":
+                                            await client.SendAsync(request);
+                                            break;
+
+                                        case "SendChunkedAsync":
+                                            request.Headers.TransferEncodingChunked = true;
+                                            await client.SendAsync(request);
+                                            break;
+
+                                        case "InvokerSend":
+                                            HttpResponseMessage syncResponse = await Task.Run(
+                                                () =>
+                                                    invoker.Send(
+                                                        request,
+                                                        cancellationToken: default
+                                                    )
                                             );
-                                            using var invoker = new HttpMessageInvoker(handler);
+                                            await syncResponse.Content.CopyToAsync(Stream.Null);
+                                            break;
 
-                                            var request = new HttpRequestMessage(
-                                                HttpMethod.Get,
-                                                uri
-                                            ) {
-                                                Version = version
-                                            };
-
-                                            var content = new ByteArrayContent(
-                                                Encoding.ASCII.GetBytes(
-                                                    new string('a', RequestContentLength)
-                                                )
-                                            );
-                                            request.Content = content;
-
-                                            switch (testMethod)
-                                            {
-                                                case "PostAsync":
-                                                    await client.PostAsync(uri, content);
-                                                    break;
-
-                                                case "Send":
-                                                    await Task.Run(() => client.Send(request));
-                                                    break;
-
-                                                case "SendAsync":
-                                                    await client.SendAsync(request);
-                                                    break;
-
-                                                case "SendChunkedAsync":
-                                                    request.Headers.TransferEncodingChunked = true;
-                                                    await client.SendAsync(request);
-                                                    break;
-
-                                                case "InvokerSend":
-                                                    HttpResponseMessage syncResponse =
-                                                        await Task.Run(
-                                                            () =>
-                                                                invoker.Send(
-                                                                    request,
-                                                                    cancellationToken: default
-                                                                )
-                                                        );
-                                                    await syncResponse.Content.CopyToAsync(
-                                                        Stream.Null
-                                                    );
-                                                    break;
-
-                                                case "InvokerSendAsync":
-                                                    HttpResponseMessage asyncResponse =
-                                                        await invoker.SendAsync(
-                                                            request,
-                                                            cancellationToken: default
-                                                        );
-                                                    await asyncResponse.Content.CopyToAsync(
-                                                        Stream.Null
-                                                    );
-                                                    break;
-                                            }
-                                        },
-                                        async server =>
+                                        case "InvokerSendAsync":
+                                            HttpResponseMessage asyncResponse =
+                                                await invoker.SendAsync(
+                                                    request,
+                                                    cancellationToken: default
+                                                );
+                                            await asyncResponse.Content.CopyToAsync(Stream.Null);
+                                            break;
+                                    }
+                                },
+                                async server =>
+                                {
+                                    await server.AcceptConnectionAsync(
+                                        async connection =>
                                         {
-                                            await server.AcceptConnectionAsync(
-                                                async connection =>
-                                                {
-                                                    await WaitForEventCountersAsync(events);
-                                                    await connection.ReadRequestDataAsync();
-                                                    await connection.SendResponseAsync(
-                                                        content: new string(
-                                                            'a',
-                                                            ResponseContentLength
-                                                        )
-                                                    );
-                                                }
+                                            await WaitForEventCountersAsync(events);
+                                            await connection.ReadRequestDataAsync();
+                                            await connection.SendResponseAsync(
+                                                content: new string('a', ResponseContentLength)
                                             );
                                         }
                                     );
+                                }
+                            );
 
-                                await WaitForEventCountersAsync(events);
-                            }
-                        );
-                        Assert.DoesNotContain(events, e => e.Event.EventId == 0); // errors from the EventSource itself
+                            await WaitForEventCountersAsync(events);
+                        }
+                    );
+                    Assert.DoesNotContain(events, e => e.Event.EventId == 0); // errors from the EventSource itself
 
-                        ValidateStartFailedStopEvents(events);
+                    ValidateStartFailedStopEvents(events);
 
-                        ValidateConnectionEstablishedClosed(events, version);
+                    ValidateConnectionEstablishedClosed(events, version);
 
-                        ValidateRequestResponseStartStopEvents(
-                            events,
-                            RequestContentLength,
-                            responseContentLength: testMethod.StartsWith("InvokerSend")
-                              ? null
-                              : ResponseContentLength,
-                            count: 1
-                        );
+                    ValidateRequestResponseStartStopEvents(
+                        events,
+                        RequestContentLength,
+                        responseContentLength: testMethod.StartsWith("InvokerSend")
+                          ? null
+                          : ResponseContentLength,
+                        count: 1
+                    );
 
-                        ValidateEventCounters(events, requestCount: 1, shouldHaveFailures: false);
-                    },
-                    UseVersion.ToString(),
-                    testMethod
-                )
-                .Dispose();
+                    ValidateEventCounters(events, requestCount: 1, shouldHaveFailures: false);
+                },
+                UseVersion.ToString(),
+                testMethod
+            ).Dispose();
         }
 
         private static void ValidateStartFailedStopEvents(
@@ -619,8 +562,8 @@ namespace System.Net.Http.Functional.Tests
         )
         {
             (EventWrittenEventArgs Event, Guid ActivityId)[] starts = events.Where(
-                    e => e.Event.EventName == "RequestStart"
-                )
+                e => e.Event.EventName == "RequestStart"
+            )
                 .ToArray();
             foreach (EventWrittenEventArgs startEvent in starts.Select(e => e.Event))
             {
@@ -646,16 +589,16 @@ namespace System.Net.Http.Functional.Tests
             Assert.Equal(count, starts.Length);
 
             (EventWrittenEventArgs Event, Guid ActivityId)[] stops = events.Where(
-                    e => e.Event.EventName == "RequestStop"
-                )
+                e => e.Event.EventName == "RequestStop"
+            )
                 .ToArray();
             Assert.All(stops, stopEvent => Assert.Empty(stopEvent.Event.Payload));
 
             ValidateSameActivityIds(starts, stops);
 
             (EventWrittenEventArgs Event, Guid ActivityId)[] failures = events.Where(
-                    e => e.Event.EventName == "RequestFailed"
-                )
+                e => e.Event.EventName == "RequestFailed"
+            )
                 .ToArray();
             Assert.All(failures, failedEvent => Assert.Empty(failedEvent.Event.Payload));
             if (shouldHaveFailures)
@@ -705,15 +648,15 @@ namespace System.Net.Http.Functional.Tests
         )
         {
             (EventWrittenEventArgs Event, Guid ActivityId)[] requestHeadersStarts = events.Where(
-                    e => e.Event.EventName == "RequestHeadersStart"
-                )
+                e => e.Event.EventName == "RequestHeadersStart"
+            )
                 .ToArray();
             Assert.Equal(count, requestHeadersStarts.Length);
             Assert.All(requestHeadersStarts, r => Assert.Empty(r.Event.Payload));
 
             (EventWrittenEventArgs Event, Guid ActivityId)[] requestHeadersStops = events.Where(
-                    e => e.Event.EventName == "RequestHeadersStop"
-                )
+                e => e.Event.EventName == "RequestHeadersStop"
+            )
                 .ToArray();
             Assert.Equal(count, requestHeadersStops.Length);
             Assert.All(requestHeadersStops, r => Assert.Empty(r.Event.Payload));
@@ -721,15 +664,15 @@ namespace System.Net.Http.Functional.Tests
             ValidateSameActivityIds(requestHeadersStarts, requestHeadersStops);
 
             (EventWrittenEventArgs Event, Guid ActivityId)[] requestContentStarts = events.Where(
-                    e => e.Event.EventName == "RequestContentStart"
-                )
+                e => e.Event.EventName == "RequestContentStart"
+            )
                 .ToArray();
             Assert.Equal(requestContentLength.HasValue ? count : 0, requestContentStarts.Length);
             Assert.All(requestContentStarts, r => Assert.Empty(r.Event.Payload));
 
             (EventWrittenEventArgs Event, Guid ActivityId)[] requestContentStops = events.Where(
-                    e => e.Event.EventName == "RequestContentStop"
-                )
+                e => e.Event.EventName == "RequestContentStop"
+            )
                 .ToArray();
             Assert.Equal(requestContentLength.HasValue ? count : 0, requestContentStops.Length);
             foreach (
@@ -744,15 +687,15 @@ namespace System.Net.Http.Functional.Tests
             ValidateSameActivityIds(requestContentStarts, requestContentStops);
 
             (EventWrittenEventArgs Event, Guid ActivityId)[] responseHeadersStarts = events.Where(
-                    e => e.Event.EventName == "ResponseHeadersStart"
-                )
+                e => e.Event.EventName == "ResponseHeadersStart"
+            )
                 .ToArray();
             Assert.Equal(count, responseHeadersStarts.Length);
             Assert.All(responseHeadersStarts, r => Assert.Empty(r.Event.Payload));
 
             (EventWrittenEventArgs Event, Guid ActivityId)[] responseHeadersStops = events.Where(
-                    e => e.Event.EventName == "ResponseHeadersStop"
-                )
+                e => e.Event.EventName == "ResponseHeadersStop"
+            )
                 .ToArray();
             Assert.Equal(count, responseHeadersStops.Length);
             Assert.All(responseHeadersStops, r => Assert.Empty(r.Event.Payload));
@@ -760,15 +703,15 @@ namespace System.Net.Http.Functional.Tests
             ValidateSameActivityIds(responseHeadersStarts, responseHeadersStops);
 
             (EventWrittenEventArgs Event, Guid ActivityId)[] responseContentStarts = events.Where(
-                    e => e.Event.EventName == "ResponseContentStart"
-                )
+                e => e.Event.EventName == "ResponseContentStart"
+            )
                 .ToArray();
             Assert.Equal(responseContentLength.HasValue ? count : 0, responseContentStarts.Length);
             Assert.All(responseContentStarts, r => Assert.Empty(r.Event.Payload));
 
             (EventWrittenEventArgs Event, Guid ActivityId)[] responseContentStops = events.Where(
-                    e => e.Event.EventName == "ResponseContentStop"
-                )
+                e => e.Event.EventName == "ResponseContentStop"
+            )
                 .ToArray();
             Assert.Equal(responseContentLength.HasValue ? count : 0, responseContentStops.Length);
             Assert.All(responseContentStops, r => Assert.Empty(r.Event.Payload));
@@ -897,152 +840,139 @@ namespace System.Net.Http.Functional.Tests
         public void EventSource_ConnectionPoolAtMaxConnections_LogsRequestLeftQueue()
         {
             RemoteExecutor.Invoke(
-                    async useVersionString =>
-                    {
-                        Version version = Version.Parse(useVersionString);
-                        using var listener = new TestEventListener(
-                            "System.Net.Http",
-                            EventLevel.Verbose,
-                            eventCounterInterval: 0.1d
-                        );
-                        listener.AddActivityTracking();
+                async useVersionString =>
+                {
+                    Version version = Version.Parse(useVersionString);
+                    using var listener = new TestEventListener(
+                        "System.Net.Http",
+                        EventLevel.Verbose,
+                        eventCounterInterval: 0.1d
+                    );
+                    listener.AddActivityTracking();
 
-                        var events =
-                            new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
-                        await listener.RunWithCallbackAsync(
-                            e => events.Enqueue((e, e.ActivityId)),
-                            async () =>
-                            {
-                                var firstRequestReceived = new SemaphoreSlim(0, 1);
-                                var secondRequestSent = new SemaphoreSlim(0, 1);
+                    var events =
+                        new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
+                    await listener.RunWithCallbackAsync(
+                        e => events.Enqueue((e, e.ActivityId)),
+                        async () =>
+                        {
+                            var firstRequestReceived = new SemaphoreSlim(0, 1);
+                            var secondRequestSent = new SemaphoreSlim(0, 1);
 
-                                await GetFactoryForVersion(version)
-                                    .CreateClientAndServerAsync(
-                                        async uri =>
-                                        {
-                                            using HttpClientHandler handler =
-                                                CreateHttpClientHandler(useVersionString);
-                                            using HttpClient client = CreateHttpClient(
-                                                handler,
-                                                useVersionString
-                                            );
-
-                                            var socketsHttpHandler =
-                                                GetUnderlyingSocketsHttpHandler(handler)
-                                                as SocketsHttpHandler;
-                                            socketsHttpHandler.MaxConnectionsPerServer = 1;
-
-                                            // Dummy request to ensure that the MaxConcurrentStreams setting has been acknowledged
-                                            await client.GetStringAsync(uri);
-
-                                            Task firstRequest = client.GetStringAsync(uri);
-                                            Assert.True(
-                                                await firstRequestReceived.WaitAsync(
-                                                    TimeSpan.FromSeconds(10)
-                                                )
-                                            );
-
-                                            // We are now at the connection limit, the next request will wait for the first one to complete
-                                            Task secondRequest = client.GetStringAsync(uri);
-                                            secondRequestSent.Release();
-
-                                            await new[]
-                                            {
-                                                firstRequest,
-                                                secondRequest
-                                            }.WhenAllOrAnyFailed();
-                                        },
-                                        async server =>
-                                        {
-                                            GenericLoopbackConnection connection;
-                                            if (server is Http2LoopbackServer http2Server)
-                                            {
-                                                http2Server.AllowMultipleConnections = true;
-                                                connection =
-                                                    await http2Server.EstablishConnectionAsync(
-                                                        new SettingsEntry
-                                                        {
-                                                            SettingId =
-                                                                SettingId.MaxConcurrentStreams,
-                                                            Value = 1
-                                                        }
-                                                    );
-                                            }
-                                            else
-                                            {
-                                                connection =
-                                                    await server.EstablishGenericConnectionAsync();
-                                            }
-
-                                            using (connection)
-                                            {
-                                                // Dummy request to ensure that the MaxConcurrentStreams setting has been acknowledged
-                                                await connection.ReadRequestDataAsync(
-                                                    readBody: false
-                                                );
-                                                await connection.SendResponseAsync();
-
-                                                // First request
-                                                await connection.ReadRequestDataAsync(
-                                                    readBody: false
-                                                );
-                                                firstRequestReceived.Release();
-                                                Assert.True(
-                                                    await secondRequestSent.WaitAsync(
-                                                        TimeSpan.FromSeconds(10)
-                                                    )
-                                                );
-                                                await WaitForEventCountersAsync(events);
-                                                await connection.SendResponseAsync();
-
-                                                // Second request
-                                                await connection.ReadRequestDataAsync(
-                                                    readBody: false
-                                                );
-                                                await connection.SendResponseAsync();
-                                            }
-                                            ;
-                                        }
+                            await GetFactoryForVersion(version).CreateClientAndServerAsync(
+                                async uri =>
+                                {
+                                    using HttpClientHandler handler = CreateHttpClientHandler(
+                                        useVersionString
+                                    );
+                                    using HttpClient client = CreateHttpClient(
+                                        handler,
+                                        useVersionString
                                     );
 
-                                await WaitForEventCountersAsync(events);
-                            }
-                        );
-                        Assert.DoesNotContain(events, e => e.Event.EventId == 0); // errors from the EventSource itself
+                                    var socketsHttpHandler =
+                                        GetUnderlyingSocketsHttpHandler(handler)
+                                        as SocketsHttpHandler;
+                                    socketsHttpHandler.MaxConnectionsPerServer = 1;
 
-                        ValidateStartFailedStopEvents(events, count: 3);
+                                    // Dummy request to ensure that the MaxConcurrentStreams setting has been acknowledged
+                                    await client.GetStringAsync(uri);
 
-                        ValidateConnectionEstablishedClosed(events, version);
+                                    Task firstRequest = client.GetStringAsync(uri);
+                                    Assert.True(
+                                        await firstRequestReceived.WaitAsync(
+                                            TimeSpan.FromSeconds(10)
+                                        )
+                                    );
 
-                        (EventWrittenEventArgs requestLeftQueue, Guid requestLeftQueueId) =
-                            Assert.Single(events, e => e.Event.EventName == "RequestLeftQueue");
-                        Assert.Equal(3, requestLeftQueue.Payload.Count);
-                        Assert.True((double)requestLeftQueue.Payload.Count > 0); // timeSpentOnQueue
-                        Assert.Equal(version.Major, (byte)requestLeftQueue.Payload[1]);
-                        Assert.Equal(version.Minor, (byte)requestLeftQueue.Payload[2]);
+                                    // We are now at the connection limit, the next request will wait for the first one to complete
+                                    Task secondRequest = client.GetStringAsync(uri);
+                                    secondRequestSent.Release();
 
-                        Assert.Equal(
-                            requestLeftQueueId,
-                            events.Where(e => e.Event.EventName == "RequestStart").Last().ActivityId
-                        );
+                                    await new[] { firstRequest, secondRequest }
+                                        .WhenAllOrAnyFailed();
+                                },
+                                async server =>
+                                {
+                                    GenericLoopbackConnection connection;
+                                    if (server is Http2LoopbackServer http2Server)
+                                    {
+                                        http2Server.AllowMultipleConnections = true;
+                                        connection = await http2Server.EstablishConnectionAsync(
+                                            new SettingsEntry
+                                            {
+                                                SettingId = SettingId.MaxConcurrentStreams,
+                                                Value = 1
+                                            }
+                                        );
+                                    }
+                                    else
+                                    {
+                                        connection = await server.EstablishGenericConnectionAsync();
+                                    }
 
-                        ValidateRequestResponseStartStopEvents(
-                            events,
-                            requestContentLength: null,
-                            responseContentLength: 0,
-                            count: 3
-                        );
+                                    using (connection)
+                                    {
+                                        // Dummy request to ensure that the MaxConcurrentStreams setting has been acknowledged
+                                        await connection.ReadRequestDataAsync(readBody: false);
+                                        await connection.SendResponseAsync();
 
-                        ValidateEventCounters(
-                            events,
-                            requestCount: 3,
-                            shouldHaveFailures: false,
-                            requestsLeftQueueVersion: version.Major
-                        );
-                    },
-                    UseVersion.ToString()
-                )
-                .Dispose();
+                                        // First request
+                                        await connection.ReadRequestDataAsync(readBody: false);
+                                        firstRequestReceived.Release();
+                                        Assert.True(
+                                            await secondRequestSent.WaitAsync(
+                                                TimeSpan.FromSeconds(10)
+                                            )
+                                        );
+                                        await WaitForEventCountersAsync(events);
+                                        await connection.SendResponseAsync();
+
+                                        // Second request
+                                        await connection.ReadRequestDataAsync(readBody: false);
+                                        await connection.SendResponseAsync();
+                                    }
+                                    ;
+                                }
+                            );
+
+                            await WaitForEventCountersAsync(events);
+                        }
+                    );
+                    Assert.DoesNotContain(events, e => e.Event.EventId == 0); // errors from the EventSource itself
+
+                    ValidateStartFailedStopEvents(events, count: 3);
+
+                    ValidateConnectionEstablishedClosed(events, version);
+
+                    (EventWrittenEventArgs requestLeftQueue, Guid requestLeftQueueId) =
+                        Assert.Single(events, e => e.Event.EventName == "RequestLeftQueue");
+                    Assert.Equal(3, requestLeftQueue.Payload.Count);
+                    Assert.True((double)requestLeftQueue.Payload.Count > 0); // timeSpentOnQueue
+                    Assert.Equal(version.Major, (byte)requestLeftQueue.Payload[1]);
+                    Assert.Equal(version.Minor, (byte)requestLeftQueue.Payload[2]);
+
+                    Assert.Equal(
+                        requestLeftQueueId,
+                        events.Where(e => e.Event.EventName == "RequestStart").Last().ActivityId
+                    );
+
+                    ValidateRequestResponseStartStopEvents(
+                        events,
+                        requestContentLength: null,
+                        responseContentLength: 0,
+                        count: 3
+                    );
+
+                    ValidateEventCounters(
+                        events,
+                        requestCount: 3,
+                        shouldHaveFailures: false,
+                        requestsLeftQueueVersion: version.Major
+                    );
+                },
+                UseVersion.ToString()
+            ).Dispose();
         }
 
         private static async Task WaitForEventCountersAsync(

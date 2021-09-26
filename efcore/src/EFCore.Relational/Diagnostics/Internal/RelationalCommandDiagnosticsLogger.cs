@@ -769,11 +769,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0:N0}",
-                        duration.TotalMilliseconds
-                    ),
+                    string
+                        .Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
@@ -843,11 +840,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0:N0}",
-                        duration.TotalMilliseconds
-                    ),
+                    string
+                        .Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
@@ -917,11 +911,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0:N0}",
-                        duration.TotalMilliseconds
-                    ),
+                    string
+                        .Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
@@ -992,11 +983,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0:N0}",
-                        duration.TotalMilliseconds
-                    ),
+                    string
+                        .Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
@@ -1072,11 +1060,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0:N0}",
-                        duration.TotalMilliseconds
-                    ),
+                    string
+                        .Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
@@ -1152,11 +1137,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0:N0}",
-                        duration.TotalMilliseconds
-                    ),
+                    string
+                        .Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
@@ -1248,11 +1230,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     (EventDefinition<string, string, CommandType, int, string, string>)definition;
                 var p = (CommandExecutedEventData)payload;
                 return d.GenerateMessage(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0:N0}",
-                        p.Duration.TotalMilliseconds
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "{0:N0}",
+                            p.Duration.TotalMilliseconds
+                        ),
                     p.Command.Parameters.FormatParameters(p.LogParameterValues),
                     p.Command.CommandType,
                     p.Command.CommandTimeout,
@@ -1327,11 +1310,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 definition.Log(
                     this,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0:N0}",
-                        duration.TotalMilliseconds
-                    ),
+                    string
+                        .Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
@@ -1440,11 +1420,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     (EventDefinition<string, string, CommandType, int, string, string>)definition;
                 var p = (CommandErrorEventData)payload;
                 return d.GenerateMessage(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0:N0}",
-                        p.Duration.TotalMilliseconds
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "{0:N0}",
+                            p.Duration.TotalMilliseconds
+                        ),
                     p.Command.Parameters.FormatParameters(p.LogParameterValues),
                     p.Command.CommandType,
                     p.Command.CommandTimeout,

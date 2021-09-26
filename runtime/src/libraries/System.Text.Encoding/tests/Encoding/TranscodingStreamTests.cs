@@ -86,9 +86,9 @@ namespace System.Text.Tests
             RunTest(
                 () =>
                     transcodingStream.WriteAsync(
-                            ReadOnlyMemory<byte>.Empty,
-                            expectedCancellationToken
-                        )
+                        ReadOnlyMemory<byte>.Empty,
+                        expectedCancellationToken
+                    )
                         .AsTask()
             );
 
@@ -769,15 +769,15 @@ namespace System.Text.Tests
             if (suppressExpectedCancellationTokenAsserts)
             {
                 delegatingInnerStreamMock.Setup(
-                        o => o.ReadAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())
-                    )
+                    o => o.ReadAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())
+                )
                     .Returns<Memory<byte>, CancellationToken>(innerStream.ReadAsync);
             }
             else
             {
                 delegatingInnerStreamMock.Setup(
-                        o => o.ReadAsync(It.IsAny<Memory<byte>>(), expectedCancellationToken)
-                    )
+                    o => o.ReadAsync(It.IsAny<Memory<byte>>(), expectedCancellationToken)
+                )
                     .Returns<Memory<byte>, CancellationToken>(innerStream.ReadAsync);
             }
 
@@ -1054,12 +1054,12 @@ namespace System.Text.Tests
             var innerStreamMock = new Mock<Stream>(MockBehavior.Strict);
             innerStreamMock.Setup(o => o.CanWrite).Returns(true);
             innerStreamMock.Setup(
-                    o =>
-                        o.WriteAsync(
-                            It.IsAny<ReadOnlyMemory<byte>>(),
-                            expectedWriteAsyncCancellationToken
-                        )
-                )
+                o =>
+                    o.WriteAsync(
+                        It.IsAny<ReadOnlyMemory<byte>>(),
+                        expectedWriteAsyncCancellationToken
+                    )
+            )
                 .Returns<ReadOnlyMemory<byte>, CancellationToken>(sink.WriteAsync);
             innerStreamMock.Setup(o => o.FlushAsync(expectedFlushAsyncCancellationToken))
                 .Returns(Task.CompletedTask);
@@ -1142,8 +1142,8 @@ namespace System.Text.Tests
             var innerStreamMock = new Mock<Stream>(MockBehavior.Strict);
             innerStreamMock.Setup(o => o.CanWrite).Returns(true);
             innerStreamMock.Setup(
-                    o => o.WriteAsync(It.IsAny<ReadOnlyMemory<byte>>(), expectedCancellationToken)
-                )
+                o => o.WriteAsync(It.IsAny<ReadOnlyMemory<byte>>(), expectedCancellationToken)
+            )
                 .Returns<ReadOnlyMemory<byte>, CancellationToken>(sink.WriteAsync);
 
             Stream transcodingStream = Encoding.CreateTranscodingStream(
@@ -1180,8 +1180,8 @@ namespace System.Text.Tests
             // The call to DisposeAsync() will call innerStream.WriteAsync without a CancellationToken.
 
             innerStreamMock.Setup(
-                    o => o.WriteAsync(It.IsAny<ReadOnlyMemory<byte>>(), CancellationToken.None)
-                )
+                o => o.WriteAsync(It.IsAny<ReadOnlyMemory<byte>>(), CancellationToken.None)
+            )
                 .Returns<ReadOnlyMemory<byte>, CancellationToken>(sink.WriteAsync);
 
             await transcodingStream.DisposeAsync();
@@ -1229,8 +1229,8 @@ namespace System.Text.Tests
             var innerStreamMock = new Mock<Stream>(MockBehavior.Strict);
             innerStreamMock.Setup(o => o.CanWrite).Returns(true);
             innerStreamMock.Setup(
-                    o => o.WriteAsync(It.IsAny<ReadOnlyMemory<byte>>(), CancellationToken.None)
-                )
+                o => o.WriteAsync(It.IsAny<ReadOnlyMemory<byte>>(), CancellationToken.None)
+            )
                 .Returns<ReadOnlyMemory<byte>, CancellationToken>(sink.WriteAsync);
 
             Stream transcodingStream = Encoding.CreateTranscodingStream(

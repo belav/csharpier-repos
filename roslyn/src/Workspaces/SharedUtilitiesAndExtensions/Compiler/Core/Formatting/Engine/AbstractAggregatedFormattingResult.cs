@@ -85,7 +85,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return _formattingSpans == null
                   ? changes
                   : changes.Where(s => _formattingSpans.HasIntervalThatIntersectsWith(s.Span))
-                        .ToList();
+                    .ToList();
             }
         }
 

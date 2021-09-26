@@ -139,10 +139,11 @@ namespace ILCompiler.DependencyAnalysisFramework
 
             Random stackPopRandomizer = null;
             if (
-                int.TryParse(
-                    Environment.GetEnvironmentVariable("CoreRT_DeterminismSeed"),
-                    out int seed
-                )
+                int
+                    .TryParse(
+                        Environment.GetEnvironmentVariable("CoreRT_DeterminismSeed"),
+                        out int seed
+                    )
             )
             {
                 // Expose output file determinism bugs in our system by randomizing the order nodes are pushed

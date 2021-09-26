@@ -56,9 +56,10 @@ namespace System.Threading
                             && NativeRuntimeEventSource.Log.IsEnabled()
                         )
                         {
-                            NativeRuntimeEventSource.Log.ThreadPoolWorkingThreadCount(
-                                (uint)threadPoolInstance.GetAndResetHighWatermarkCountOfThreadsProcessingUserCallbacks()
-                            );
+                            NativeRuntimeEventSource.Log
+                                .ThreadPoolWorkingThreadCount(
+                                    (uint)threadPoolInstance.GetAndResetHighWatermarkCountOfThreadsProcessingUserCallbacks()
+                                );
                         }
 
                         int cpuUtilization = cpuUtilizationReader.CurrentUtilization;
@@ -77,8 +78,8 @@ namespace System.Threading
                             try
                             {
                                 hillClimbingThreadAdjustmentLock.Acquire();
-                                ThreadCounts counts =
-                                    threadPoolInstance._separated.counts.VolatileRead();
+                                ThreadCounts counts = threadPoolInstance._separated.counts
+                                    .VolatileRead();
 
                                 // Don't add a thread if we're at max or if we are already in the process of adding threads.
                                 // This logic is slightly different from the native implementation in CoreCLR because there are
@@ -103,17 +104,15 @@ namespace System.Threading
                                     short newNumThreadsGoal = (short)(counts.NumProcessingWork + 1);
                                     newCounts.NumThreadsGoal = newNumThreadsGoal;
 
-                                    ThreadCounts oldCounts =
-                                        threadPoolInstance._separated.counts.InterlockedCompareExchange(
-                                            newCounts,
-                                            counts
-                                        );
+                                    ThreadCounts oldCounts = threadPoolInstance._separated.counts
+                                        .InterlockedCompareExchange(newCounts, counts);
                                     if (oldCounts == counts)
                                     {
-                                        HillClimbing.ThreadPoolHillClimber.ForceChange(
-                                            newNumThreadsGoal,
-                                            HillClimbing.StateOrTransition.Starvation
-                                        );
+                                        HillClimbing.ThreadPoolHillClimber
+                                            .ForceChange(
+                                                newNumThreadsGoal,
+                                                HillClimbing.StateOrTransition.Starvation
+                                            );
                                         WorkerThread.MaybeAddWorkingWorker(threadPoolInstance);
                                         break;
                                     }

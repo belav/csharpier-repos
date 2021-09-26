@@ -44,8 +44,8 @@ namespace Microsoft.Web.Mvc.Test
             Mock<ITempDataProvider> mockTempDataProvider = new Mock<ITempDataProvider>();
             string[] retainedKeys = null;
             mockTempDataProvider.Setup(
-                    o => o.SaveTempData(controllerContext, It.IsAny<IDictionary<string, object>>())
-                )
+                o => o.SaveTempData(controllerContext, It.IsAny<IDictionary<string, object>>())
+            )
                 .Callback(
                     delegate(ControllerContext cc, IDictionary<string, object> d)
                     {

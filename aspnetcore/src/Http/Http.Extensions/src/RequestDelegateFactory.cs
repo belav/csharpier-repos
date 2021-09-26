@@ -22,52 +22,49 @@ namespace Microsoft.AspNetCore.Http
     /// </summary>
     public static class RequestDelegateFactory
     {
-        private static readonly MethodInfo ExecuteTaskOfTMethod =
-            typeof(RequestDelegateFactory).GetMethod(
-                nameof(ExecuteTask),
-                BindingFlags.NonPublic | BindingFlags.Static
-            )!;
+        private static readonly MethodInfo ExecuteTaskOfTMethod = typeof(RequestDelegateFactory)
+            .GetMethod(nameof(ExecuteTask), BindingFlags.NonPublic | BindingFlags.Static)!;
         private static readonly MethodInfo ExecuteTaskOfStringMethod =
-            typeof(RequestDelegateFactory).GetMethod(
-                nameof(ExecuteTaskOfString),
-                BindingFlags.NonPublic | BindingFlags.Static
-            )!;
+            typeof(RequestDelegateFactory)
+                .GetMethod(
+                    nameof(ExecuteTaskOfString),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )!;
         private static readonly MethodInfo ExecuteValueTaskOfTMethod =
-            typeof(RequestDelegateFactory).GetMethod(
-                nameof(ExecuteValueTaskOfT),
-                BindingFlags.NonPublic | BindingFlags.Static
-            )!;
-        private static readonly MethodInfo ExecuteValueTaskMethod =
-            typeof(RequestDelegateFactory).GetMethod(
-                nameof(ExecuteValueTask),
-                BindingFlags.NonPublic | BindingFlags.Static
-            )!;
+            typeof(RequestDelegateFactory)
+                .GetMethod(
+                    nameof(ExecuteValueTaskOfT),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )!;
+        private static readonly MethodInfo ExecuteValueTaskMethod = typeof(RequestDelegateFactory)
+            .GetMethod(nameof(ExecuteValueTask), BindingFlags.NonPublic | BindingFlags.Static)!;
         private static readonly MethodInfo ExecuteValueTaskOfStringMethod =
-            typeof(RequestDelegateFactory).GetMethod(
-                nameof(ExecuteValueTaskOfString),
-                BindingFlags.NonPublic | BindingFlags.Static
-            )!;
+            typeof(RequestDelegateFactory)
+                .GetMethod(
+                    nameof(ExecuteValueTaskOfString),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )!;
         private static readonly MethodInfo ExecuteTaskResultOfTMethod =
-            typeof(RequestDelegateFactory).GetMethod(
-                nameof(ExecuteTaskResult),
-                BindingFlags.NonPublic | BindingFlags.Static
-            )!;
+            typeof(RequestDelegateFactory)
+                .GetMethod(
+                    nameof(ExecuteTaskResult),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )!;
         private static readonly MethodInfo ExecuteValueResultTaskOfTMethod =
-            typeof(RequestDelegateFactory).GetMethod(
-                nameof(ExecuteValueTaskResult),
-                BindingFlags.NonPublic | BindingFlags.Static
-            )!;
+            typeof(RequestDelegateFactory)
+                .GetMethod(
+                    nameof(ExecuteValueTaskResult),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )!;
         private static readonly MethodInfo GetRequiredServiceMethod =
-            typeof(ServiceProviderServiceExtensions).GetMethod(
-                nameof(ServiceProviderServiceExtensions.GetRequiredService),
-                BindingFlags.Public | BindingFlags.Static,
-                new Type[] { typeof(IServiceProvider) }
-            )!;
-        private static readonly MethodInfo ResultWriteResponseAsyncMethod =
-            typeof(IResult).GetMethod(
-                nameof(IResult.ExecuteAsync),
-                BindingFlags.Public | BindingFlags.Instance
-            )!;
+            typeof(ServiceProviderServiceExtensions)
+                .GetMethod(
+                    nameof(ServiceProviderServiceExtensions.GetRequiredService),
+                    BindingFlags.Public | BindingFlags.Static,
+                    new Type[] { typeof(IServiceProvider) }
+                )!;
+        private static readonly MethodInfo ResultWriteResponseAsyncMethod = typeof(IResult)
+            .GetMethod(nameof(IResult.ExecuteAsync), BindingFlags.Public | BindingFlags.Instance)!;
         private static readonly MethodInfo StringResultWriteResponseAsyncMethod = GetMethodInfo<
             Func<HttpResponse, string, Task>
         >((response, text) => HttpResponseWritingExtensions.WriteAsync(response, text, default));
@@ -377,9 +374,8 @@ namespace Microsoft.AspNetCore.Http
                 );
             }
             else if (
-                parameter.CustomAttributes.Any(
-                    a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
-                )
+                parameter.CustomAttributes
+                    .Any(a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType))
             )
             {
                 return Expression.Call(
@@ -642,20 +638,20 @@ namespace Microsoft.AspNetCore.Http
             if (factoryContext.JsonRequestBodyType is null)
             {
                 return Expression.Lambda<Func<object?, HttpContext, Task>>(
-                        responseWritingMethodCall,
-                        TargetExpr,
-                        HttpContextExpr
-                    )
+                    responseWritingMethodCall,
+                    TargetExpr,
+                    HttpContextExpr
+                )
                     .Compile();
             }
 
             // We need to generate the code for reading from the body before calling into the delegate
             var invoker = Expression.Lambda<Func<object?, HttpContext, object?, Task>>(
-                    responseWritingMethodCall,
-                    TargetExpr,
-                    HttpContextExpr,
-                    BodyValueExpr
-                )
+                responseWritingMethodCall,
+                TargetExpr,
+                HttpContextExpr,
+                BodyValueExpr
+            )
                 .Compile();
 
             var bodyType = factoryContext.JsonRequestBodyType;
@@ -699,9 +695,8 @@ namespace Microsoft.AspNetCore.Http
 
         private static MethodInfo GetEnumTryParseMethod()
         {
-            var staticEnumMethods = typeof(Enum).GetMethods(
-                BindingFlags.Public | BindingFlags.Static
-            );
+            var staticEnumMethods = typeof(Enum)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static);
 
             foreach (var method in staticEnumMethods)
             {
@@ -1146,8 +1141,8 @@ namespace Microsoft.AspNetCore.Http
 
             private static ILogger GetLogger(HttpContext httpContext)
             {
-                var loggerFactory =
-                    httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
+                var loggerFactory = httpContext.RequestServices
+                    .GetRequiredService<ILoggerFactory>();
                 return loggerFactory.CreateLogger(typeof(RequestDelegateFactory));
             }
         }

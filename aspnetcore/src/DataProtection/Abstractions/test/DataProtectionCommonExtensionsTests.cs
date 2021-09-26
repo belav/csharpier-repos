@@ -67,9 +67,8 @@ namespace Microsoft.AspNetCore.DataProtection
             firstMock.Setup(o => o.CreateProtector("first")).Returns(secondMock.Object);
 
             // Act
-            var retVal = firstMock.Object.CreateProtector(
-                (IEnumerable<string>)new string[] { "first", "second", "third" }
-            );
+            var retVal = firstMock.Object
+                .CreateProtector((IEnumerable<string>)new string[] { "first", "second", "third" });
 
             // Assert
             Assert.Same(finalExpectedProtector, retVal);

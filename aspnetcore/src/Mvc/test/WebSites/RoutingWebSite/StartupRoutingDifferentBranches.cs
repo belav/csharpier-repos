@@ -22,24 +22,23 @@ namespace RoutingWebSite
                 new SlugifyParameterTransformer()
             );
 
-            services.AddMvc(ConfigureMvcOptions)
-                .AddNewtonsoftJson()
-                .AddRazorPagesOptions(
-                    options =>
-                    {
-                        options.Conventions.AddPageRoute(
+            services.AddMvc(ConfigureMvcOptions).AddNewtonsoftJson().AddRazorPagesOptions(
+                options =>
+                {
+                    options.Conventions
+                        .AddPageRoute(
                             "/PageRouteTransformer/PageWithConfiguredRoute",
                             "/PageRouteTransformer/NewConventionRoute/{id?}"
                         );
-                        options.Conventions.AddFolderRouteModelConvention(
-                            "/PageRouteTransformer",
-                            model =>
-                            {
-                                pageRouteTransformerConvention.Apply(model);
-                            }
-                        );
-                    }
-                );
+                    options.Conventions.AddFolderRouteModelConvention(
+                        "/PageRouteTransformer",
+                        model =>
+                        {
+                            pageRouteTransformerConvention.Apply(model);
+                        }
+                    );
+                }
+            );
 
             ConfigureRoutingServices(services);
 
@@ -117,12 +116,13 @@ namespace RoutingWebSite
         protected virtual void ConfigureMvcOptions(MvcOptions options)
         {
             // Add route token transformer to one controller
-            options.Conventions.Add(
-                new ControllerRouteTokenTransformerConvention(
-                    typeof(ParameterTransformerController),
-                    new SlugifyParameterTransformer()
-                )
-            );
+            options.Conventions
+                .Add(
+                    new ControllerRouteTokenTransformerConvention(
+                        typeof(ParameterTransformerController),
+                        new SlugifyParameterTransformer()
+                    )
+                );
         }
 
         protected virtual void ConfigureRoutingServices(IServiceCollection services)

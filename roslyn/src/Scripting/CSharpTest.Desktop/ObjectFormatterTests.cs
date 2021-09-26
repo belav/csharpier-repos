@@ -95,20 +95,21 @@ Class C
    Public Property A As Integer
 End Class
 ";
-            var compilation = VB.VisualBasicCompilation.Create(
-                "goo",
-                new[] { VB.VisualBasicSyntaxTree.ParseText(source) },
-                new[]
-                {
-                    MetadataReference.CreateFromAssemblyInternal(
-                        typeof(object).GetTypeInfo().Assembly
+            var compilation = VB.VisualBasicCompilation
+                .Create(
+                    "goo",
+                    new[] { VB.VisualBasicSyntaxTree.ParseText(source) },
+                    new[]
+                    {
+                        MetadataReference.CreateFromAssemblyInternal(
+                            typeof(object).GetTypeInfo().Assembly
+                        )
+                    },
+                    new VB.VisualBasicCompilationOptions(
+                        OutputKind.DynamicallyLinkedLibrary,
+                        optimizationLevel: OptimizationLevel.Debug
                     )
-                },
-                new VB.VisualBasicCompilationOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel: OptimizationLevel.Debug
-                )
-            );
+                );
 
             Assembly a;
             using (var stream = new MemoryStream())

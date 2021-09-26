@@ -114,15 +114,17 @@ namespace System.Composition.Hosting.Core
                 result += " " + Formatters.Format(_contractName);
 
             if (_metadataConstraints != null)
-                result += string.Format(
-                    " {{ {0} }}",
-                    string.Join(
-                        SR.Formatter_ListSeparatorWithSpace,
-                        _metadataConstraints.Select(
-                            kv => $"{kv.Key} = {Formatters.Format(kv.Value)}"
-                        )
-                    )
-                );
+                result += string
+                    .Format(
+                        " {{ {0} }}",
+                        string
+                            .Join(
+                                SR.Formatter_ListSeparatorWithSpace,
+                                _metadataConstraints.Select(
+                                    kv => $"{kv.Key} = {Formatters.Format(kv.Value)}"
+                                )
+                            )
+                    );
 
             return result;
         }

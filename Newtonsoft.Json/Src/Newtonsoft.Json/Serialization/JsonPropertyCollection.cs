@@ -99,9 +99,8 @@ namespace Newtonsoft.Json.Serialization
                             property.DeclaringType.IsSubclassOf(existingProperty.DeclaringType)
                             || (
                                 existingProperty.DeclaringType.IsInterface()
-                                && property.DeclaringType.ImplementInterface(
-                                    existingProperty.DeclaringType
-                                )
+                                && property.DeclaringType
+                                    .ImplementInterface(existingProperty.DeclaringType)
                             )
                         )
                         {
@@ -113,9 +112,8 @@ namespace Newtonsoft.Json.Serialization
                             existingProperty.DeclaringType.IsSubclassOf(property.DeclaringType)
                             || (
                                 property.DeclaringType.IsInterface()
-                                && existingProperty.DeclaringType.ImplementInterface(
-                                    property.DeclaringType
-                                )
+                                && existingProperty.DeclaringType
+                                    .ImplementInterface(property.DeclaringType)
                             )
                         )
                         {
@@ -137,11 +135,8 @@ namespace Newtonsoft.Json.Serialization
                 if (duplicateProperty)
                 {
                     throw new JsonSerializationException(
-                        "A member with the name '{0}' already exists on '{1}'. Use the JsonPropertyAttribute to specify another name.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            property.PropertyName,
-                            _type
-                        )
+                        "A member with the name '{0}' already exists on '{1}'. Use the JsonPropertyAttribute to specify another name."
+                            .FormatWith(CultureInfo.InvariantCulture, property.PropertyName, _type)
                     );
                 }
             }

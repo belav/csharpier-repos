@@ -48,31 +48,31 @@ namespace Microsoft.CodeAnalysis.Remote
                     var service =
                         document.GetLanguageService<IConvertTupleToStructCodeRefactoringProvider>();
                     var updatedSolution = await service.ConvertToStructAsync(
-                            document,
-                            span,
-                            scope,
-                            cancellationToken
-                        )
+                        document,
+                        span,
+                        scope,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     var cleanedSolution = await CleanupAsync(
-                            solution,
-                            updatedSolution,
-                            cancellationToken
-                        )
+                        solution,
+                        updatedSolution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     var documentTextChanges = await RemoteUtilities.GetDocumentTextChangesAsync(
-                            solution,
-                            cleanedSolution,
-                            cancellationToken
-                        )
+                        solution,
+                        cleanedSolution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     var renamedToken = await GetRenamedTokenAsync(
-                            solution,
-                            cleanedSolution,
-                            cancellationToken
-                        )
+                        solution,
+                        cleanedSolution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return new SerializableConvertTupleToStructResult(
@@ -119,9 +119,9 @@ namespace Microsoft.CodeAnalysis.Remote
             foreach (var docId in changes)
             {
                 var cleaned = await CodeAction.CleanupDocumentAsync(
-                        newSolution.GetDocument(docId),
-                        cancellationToken
-                    )
+                    newSolution.GetDocument(docId),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var cleanedRoot = await cleaned.GetSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);

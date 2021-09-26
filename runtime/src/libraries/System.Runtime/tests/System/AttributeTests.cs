@@ -158,13 +158,13 @@ namespace System.Tests
         [StringValue("\uDFFF")]
         public static void StringArgument_InvalidCodeUnits_FallbackUsed()
         {
-            MethodInfo thisMethod = typeof(AttributeTests).GetTypeInfo()
+            MethodInfo thisMethod = typeof(AttributeTests)
+                .GetTypeInfo()
                 .GetDeclaredMethod("StringArgument_InvalidCodeUnits_FallbackUsed");
             Assert.NotNull(thisMethod);
 
-            CustomAttributeData cad = thisMethod.CustomAttributes.Where(
-                    ca => ca.AttributeType == typeof(StringValueAttribute)
-                )
+            CustomAttributeData cad = thisMethod.CustomAttributes
+                .Where(ca => ca.AttributeType == typeof(StringValueAttribute))
                 .FirstOrDefault();
             Assert.NotNull(cad);
 

@@ -42,7 +42,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     resl = Convert.ToUInt64(
-                        typeof(Sse42.X64).GetMethod(
+                        typeof(Sse42.X64)
+                            .GetMethod(
                                 nameof(Sse42.X64.Crc32),
                                 new Type[] { s1l.GetType(), s2l.GetType() }
                             )
@@ -79,7 +80,8 @@ namespace IntelHardwareIntrinsicTest
                 try
                 {
                     resl = Convert.ToUInt64(
-                        typeof(Sse42.X64).GetMethod(
+                        typeof(Sse42.X64)
+                            .GetMethod(
                                 nameof(Sse42.X64.Crc32),
                                 new Type[] { s1l.GetType(), s2l.GetType() }
                             )

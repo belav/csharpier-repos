@@ -96,11 +96,12 @@ namespace Internal.Cryptography
         {
             // CFB not supported at all
             throw new CryptographicException(
-                string.Format(
-                    SR.Cryptography_CipherModeFeedbackNotSupported,
-                    feedback,
-                    CipherMode.CFB
-                )
+                string
+                    .Format(
+                        SR.Cryptography_CipherModeFeedbackNotSupported,
+                        feedback,
+                        CipherMode.CFB
+                    )
             );
         }
 

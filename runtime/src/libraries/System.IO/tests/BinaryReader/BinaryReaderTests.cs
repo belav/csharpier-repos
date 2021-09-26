@@ -367,11 +367,12 @@ namespace System.IO.Tests
 
             public override int Read(Span<byte> destination)
             {
-                return base.Read(
-                    destination.Length > 10
-                      ? destination.Slice(0, destination.Length - 3)
-                      : destination
-                );
+                return base
+                    .Read(
+                        destination.Length > 10
+                          ? destination.Slice(0, destination.Length - 3)
+                          : destination
+                    );
             }
         }
 

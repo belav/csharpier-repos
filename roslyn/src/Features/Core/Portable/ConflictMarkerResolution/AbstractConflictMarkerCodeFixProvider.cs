@@ -376,8 +376,8 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
 
             // Process diagnostics in order so we produce edits in the right order.
             var orderedDiagnostics = diagnostics.OrderBy(
-                    (d1, d2) => d1.Location.SourceSpan.Start - d2.Location.SourceSpan.Start
-                )
+                (d1, d2) => d1.Location.SourceSpan.Start - d2.Location.SourceSpan.Start
+            )
                 .ToImmutableArray();
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
@@ -438,11 +438,11 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             FixAllProvider.Create(
                 async (context, document, diagnostics) =>
                     await this.FixAllAsync(
-                            document,
-                            diagnostics,
-                            context.CodeActionEquivalenceKey,
-                            context.CancellationToken
-                        )
+                        document,
+                        diagnostics,
+                        context.CodeActionEquivalenceKey,
+                        context.CancellationToken
+                    )
                         .ConfigureAwait(false)
             );
 

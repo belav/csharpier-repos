@@ -50,12 +50,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
 
                         // fire and forget
                         _ = Task.Run(
-                                () =>
-                                    proxy.OnSourceFileUpdatedAsync(
-                                        currentDocument,
-                                        CancellationToken.None
-                                    )
-                            )
+                            () =>
+                                proxy.OnSourceFileUpdatedAsync(
+                                    currentDocument,
+                                    CancellationToken.None
+                                )
+                        )
                             .ReportNonFatalErrorAsync();
                     }
                 }

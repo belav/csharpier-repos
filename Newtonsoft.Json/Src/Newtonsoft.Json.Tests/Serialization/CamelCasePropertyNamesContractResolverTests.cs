@@ -190,20 +190,19 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(
                 "Private!",
                 ReflectionUtils.GetMemberValue(
-                    typeof(PrivateMembersClass).GetField(
-                        "_privateString",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(PrivateMembersClass)
+                        .GetField("_privateString", BindingFlags.Instance | BindingFlags.NonPublic),
                     deserializedPrivateMembersClass
                 )
             );
             Assert.AreEqual(
                 "Internal!",
                 ReflectionUtils.GetMemberValue(
-                    typeof(PrivateMembersClass).GetField(
-                        "_internalString",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(PrivateMembersClass)
+                        .GetField(
+                            "_internalString",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     deserializedPrivateMembersClass
                 )
             );
@@ -212,10 +211,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(
                 0,
                 ReflectionUtils.GetMemberValue(
-                    typeof(PrivateMembersClass).GetField(
-                        "i",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(PrivateMembersClass)
+                        .GetField("i", BindingFlags.Instance | BindingFlags.NonPublic),
                     deserializedPrivateMembersClass
                 )
             );

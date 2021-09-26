@@ -79,9 +79,8 @@ namespace System.Net.Http.Tests
             transferCoding.Parameters.Add(new NameValueHeaderValue("paramName", "\"param value\""));
             Assert.Equal("custom; paramName=\"param value\"", transferCoding.ToString());
 
-            transferCoding.Parameters.Add(
-                new NameValueHeaderValue("paramName2", "\"param value2\"")
-            );
+            transferCoding.Parameters
+                .Add(new NameValueHeaderValue("paramName2", "\"param value2\""));
             Assert.Equal(
                 "custom; paramName=\"param value\"; paramName2=\"param value2\"",
                 transferCoding.ToString()
@@ -147,9 +146,8 @@ namespace System.Net.Http.Tests
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
             TransferCodingHeaderValue source = new TransferCodingHeaderValue("custom");
-            TransferCodingHeaderValue clone = (TransferCodingHeaderValue)(
-                (ICloneable)source
-            ).Clone();
+            TransferCodingHeaderValue clone = (TransferCodingHeaderValue)((ICloneable)source)
+                .Clone();
             Assert.Equal(source.Value, clone.Value);
             Assert.Equal(0, clone.Parameters.Count);
 

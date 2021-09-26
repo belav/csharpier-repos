@@ -67,9 +67,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertTranslationFailedWithDetails(
                 () =>
-                    base.Using_static_string_Equals_with_StringComparison_throws_informative_error(
-                        async
-                    ),
+                    base
+                        .Using_static_string_Equals_with_StringComparison_throws_informative_error(
+                            async
+                        ),
                 CoreStrings.QueryUnableToTranslateStringEqualsWithStringComparison
             );
         }

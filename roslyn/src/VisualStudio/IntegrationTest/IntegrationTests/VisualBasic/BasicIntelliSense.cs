@@ -302,16 +302,13 @@ End Module",
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
             VisualStudio.SendKeys.Send("Nam Foo");
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "Namespace Foo$$",
-                assertCaretPosition: true
-            );
+            VisualStudio.Editor.Verify
+                .CurrentLineText("Namespace Foo$$", assertCaretPosition: true);
 
             ClearEditor();
 
-            VisualStudio.Editor.SendKeys(
-                new KeyPress(VirtualKey.Space, ShiftState.Ctrl | ShiftState.Alt)
-            );
+            VisualStudio.Editor
+                .SendKeys(new KeyPress(VirtualKey.Space, ShiftState.Ctrl | ShiftState.Alt));
 
             VisualStudio.SendKeys.Send("Nam Foo");
             VisualStudio.Editor.Verify.CurrentLineText("Nam Foo$$", assertCaretPosition: true);
@@ -323,10 +320,8 @@ End Module",
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
             VisualStudio.SendKeys.Send("Nam Foo");
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "Namespace Foo$$",
-                assertCaretPosition: true
-            );
+            VisualStudio.Editor.Verify
+                .CurrentLineText("Namespace Foo$$", assertCaretPosition: true);
 
             ClearEditor();
 

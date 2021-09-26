@@ -68,16 +68,16 @@ namespace Microsoft.DotNet.Tools.Publish.Tests
             var appDll = testProjectFixture.TestProject.AppDll;
 
             dotnet.Exec(
-                    "exec",
-                    "--runtimeconfig",
-                    runtimeConfig,
-                    "--depsfile",
-                    depsJson,
-                    "--additionalProbingPath",
-                    additionalProbingPath,
-                    dotnetTestXunitDll,
-                    appDll
-                )
+                "exec",
+                "--runtimeconfig",
+                runtimeConfig,
+                "--depsfile",
+                depsJson,
+                "--additionalProbingPath",
+                additionalProbingPath,
+                dotnetTestXunitDll,
+                appDll
+            )
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute(fExpectedToFail: true)

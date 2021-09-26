@@ -118,12 +118,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         metadata: itemMetadata,
                         model: item
                     );
-                    var fieldName = string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0}[{1}]",
-                        oldPrefix,
-                        index++
-                    );
+                    var fieldName = string
+                        .Format(CultureInfo.InvariantCulture, "{0}[{1}]", oldPrefix, index++);
 
                     var templateBuilder = new TemplateBuilder(
                         viewEngine,
@@ -152,11 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             if (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == htmlHelper.ViewData.Model)
             {
-                htmlHelper.ViewData.TemplateInfo.FormattedModelValue = string.Format(
-                    CultureInfo.CurrentCulture,
-                    "{0:0.00}",
-                    htmlHelper.ViewData.Model
-                );
+                htmlHelper.ViewData.TemplateInfo.FormattedModelValue = string
+                    .Format(CultureInfo.CurrentCulture, "{0:0.00}", htmlHelper.ViewData.Model);
             }
 
             return StringTemplate(htmlHelper);
@@ -326,14 +319,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                     valueDivTag.InnerHtml.AppendHtml(templateBuilderResult);
                     valueDivTag.InnerHtml.AppendHtml(" ");
-                    valueDivTag.InnerHtml.AppendHtml(
-                        htmlHelper.ValidationMessage(
-                            propertyMetadata.PropertyName,
-                            message: null,
-                            htmlAttributes: null,
-                            tag: null
-                        )
-                    );
+                    valueDivTag.InnerHtml
+                        .AppendHtml(
+                            htmlHelper.ValidationMessage(
+                                propertyMetadata.PropertyName,
+                                message: null,
+                                htmlAttributes: null,
+                                tag: null
+                            )
+                        );
 
                     content.AppendLine(valueDivTag);
                 }
@@ -486,11 +480,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             if (value is DateTime || value is DateTimeOffset)
             {
-                htmlHelper.ViewData.TemplateInfo.FormattedModelValue = string.Format(
-                    CultureInfo.InvariantCulture,
-                    format,
-                    value
-                );
+                htmlHelper.ViewData.TemplateInfo.FormattedModelValue = string
+                    .Format(CultureInfo.InvariantCulture, format, value);
             }
         }
 

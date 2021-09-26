@@ -70,8 +70,8 @@ namespace System.Web.WebPages.Administration.Test
                 .Returns(false)
                 .Verifiable();
             fileSystem.Setup(
-                    f => f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>())
-                )
+                f => f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>())
+            )
                 .Callback<string, Stream>(
                     (_, s) =>
                     {
@@ -92,7 +92,8 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal("configuration", element.Name);
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
-            var assemblies = document.Root.Elements()
+            var assemblies = document.Root
+                .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
                 .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
@@ -128,8 +129,8 @@ namespace System.Web.WebPages.Administration.Test
             fileSystem.Setup(f => f.OpenFile(It.Is<string>(p => p.Equals(webConfigPath))))
                 .Returns(webConfigContent);
             fileSystem.Setup(
-                    f => f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>())
-                )
+                f => f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>())
+            )
                 .Callback<string, Stream>(
                     (_, s) =>
                     {
@@ -150,7 +151,8 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal("configuration", element.Name);
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
-            var assemblies = document.Root.Elements()
+            var assemblies = document.Root
+                .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
                 .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
@@ -162,7 +164,8 @@ namespace System.Web.WebPages.Administration.Test
             // Make sure the original web.config content is unaffected
             Assert.Equal(
                 "test",
-                document.Root.Elements()
+                document.Root
+                    .Elements()
                     .SingleOrDefault(e => e.Name.ToString().Equals("connectionStrings"))
                     .Elements()
                     .SingleOrDefault(e => e.Name.ToString().Equals("add"))
@@ -172,7 +175,8 @@ namespace System.Web.WebPages.Administration.Test
 
             Assert.Equal(
                 "awesomeprofile",
-                document.Root.Element("system.web")
+                document.Root
+                    .Element("system.web")
                     .Element("profiles")
                     .Element("add")
                     .Attribute("name").Value
@@ -207,17 +211,16 @@ namespace System.Web.WebPages.Administration.Test
             fileSystem.SetupGet(f => f.Root).Returns("x:\\my-website");
             fileSystem.Setup(f => f.FileExists(It.Is<string>(p => p.Equals(webConfigPath))))
                 .Returns(true);
-            fileSystem.Setup(f => f.OpenFile(It.Is<string>(p => p.Equals(webConfigPath))))
-                .Returns(
-                    () =>
-                    {
-                        memoryStream.Seek(0, SeekOrigin.Begin);
-                        return memoryStream;
-                    }
-                );
+            fileSystem.Setup(f => f.OpenFile(It.Is<string>(p => p.Equals(webConfigPath)))).Returns(
+                () =>
+                {
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    return memoryStream;
+                }
+            );
             fileSystem.Setup(
-                    f => f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>())
-                )
+                f => f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>())
+            )
                 .Callback<string, Stream>(
                     (_, stream) =>
                     {
@@ -237,7 +240,8 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal("configuration", element.Name);
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
-            var assemblies = document.Root.Elements()
+            var assemblies = document.Root
+                .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
                 .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
@@ -257,7 +261,8 @@ namespace System.Web.WebPages.Administration.Test
             // Make sure the original web.config content is unaffected
             Assert.Equal(
                 "test",
-                document.Root.Elements()
+                document.Root
+                    .Elements()
                     .SingleOrDefault(e => e.Name.ToString().Equals("connectionStrings"))
                     .Elements()
                     .SingleOrDefault(e => e.Name.ToString().Equals("add"))
@@ -267,7 +272,8 @@ namespace System.Web.WebPages.Administration.Test
 
             Assert.Equal(
                 "awesomeprofile",
-                document.Root.Element("system.web")
+                document.Root
+                    .Element("system.web")
                     .Element("profiles")
                     .Element("add")
                     .Attribute("name").Value

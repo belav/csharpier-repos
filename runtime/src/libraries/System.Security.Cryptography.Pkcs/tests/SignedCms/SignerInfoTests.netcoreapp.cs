@@ -67,13 +67,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.Equal(2, cms.SignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(2, cms.SignerInfos[0].CounterSignerInfos.Count);
-            byte[] secondSignerCounterSignature = cms.SignerInfos[0].CounterSignerInfos[
-                1
-            ].GetSignature();
+            byte[] secondSignerCounterSignature = cms.SignerInfos[0].CounterSignerInfos[1]
+                .GetSignature();
 
-            cms.SignerInfos[0].RemoveUnsignedAttribute(
-                cms.SignerInfos[0].UnsignedAttributes[0].Values[0]
-            );
+            cms.SignerInfos[0]
+                .RemoveUnsignedAttribute(cms.SignerInfos[0].UnsignedAttributes[0].Values[0]);
 
             Assert.Equal(1, cms.SignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(1, cms.SignerInfos[0].CounterSignerInfos.Count);
@@ -278,8 +276,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(content);
 
             using (
-                X509Certificate2 signerCert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates.RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(
@@ -290,8 +288,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             }
 
             using (
-                X509Certificate2 counterSigner1cert =
-                    Certificates.Dsa1024.TryGetCertificateWithPrivateKey()
+                X509Certificate2 counterSigner1cert = Certificates.Dsa1024
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner counterSigner = new CmsSigner(
@@ -304,8 +302,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             }
 
             using (
-                X509Certificate2 counterSigner2cert =
-                    Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey()
+                X509Certificate2 counterSigner2cert = Certificates.ECDsaP256Win
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner counterSigner = new CmsSigner(

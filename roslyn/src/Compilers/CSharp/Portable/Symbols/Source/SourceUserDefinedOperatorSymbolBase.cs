@@ -146,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeWithAnnotations returnType;
             ImmutableArray<ParameterSymbol> parameters;
 
-            var binder = this.DeclaringCompilation.GetBinderFactory(declarationSyntax.SyntaxTree)
+            var binder = this.DeclaringCompilation
+                .GetBinderFactory(declarationSyntax.SyntaxTree)
                 .GetBinder(returnTypeSyntax, declarationSyntax, this);
 
             SyntaxToken arglistToken;
@@ -589,11 +590,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 diagnostics.Add(ErrorCode.ERR_BadIncDecSignature, this.Locations[0]);
             }
             else if (
-                !this.ReturnType.EffectiveTypeNoUseSiteDiagnostics.IsEqualToOrDerivedFrom(
-                    parameterType,
-                    ComparisonForUserDefinedOperators,
-                    useSiteInfo: ref useSiteInfo
-                )
+                !this.ReturnType.EffectiveTypeNoUseSiteDiagnostics
+                    .IsEqualToOrDerivedFrom(
+                        parameterType,
+                        ComparisonForUserDefinedOperators,
+                        useSiteInfo: ref useSiteInfo
+                    )
             )
             {
                 // CS0448: The return type for ++ or -- operator must match the parameter type
@@ -753,21 +755,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             var compilation = DeclaringCompilation;
 
-            this.ReturnType.CheckAllConstraints(
-                compilation,
-                conversions,
-                this.Locations[0],
-                diagnostics
-            );
+            this.ReturnType
+                .CheckAllConstraints(compilation, conversions, this.Locations[0], diagnostics);
 
             foreach (var parameter in this.Parameters)
             {
-                parameter.Type.CheckAllConstraints(
-                    compilation,
-                    conversions,
-                    parameter.Locations[0],
-                    diagnostics
-                );
+                parameter.Type
+                    .CheckAllConstraints(
+                        compilation,
+                        conversions,
+                        parameter.Locations[0],
+                        diagnostics
+                    );
             }
 
             ParameterHelpers.EnsureIsReadOnlyAttributeExists(

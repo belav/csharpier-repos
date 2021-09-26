@@ -434,20 +434,22 @@ namespace System.Reflection
             if (error == ResolveTokenError.OutOfRange)
                 return new ArgumentOutOfRangeException(
                     nameof(metadataToken),
-                    string.Format(
-                        "Token 0x{0:x} is not valid in the scope of module {1}",
-                        metadataToken,
-                        name
-                    )
+                    string
+                        .Format(
+                            "Token 0x{0:x} is not valid in the scope of module {1}",
+                            metadataToken,
+                            name
+                        )
                 );
             else
                 return new ArgumentException(
-                    string.Format(
-                        "Token 0x{0:x} is not a valid {1} token in the scope of module {2}",
-                        metadataToken,
-                        tokenType,
-                        name
-                    ),
+                    string
+                        .Format(
+                            "Token 0x{0:x} is not a valid {1} token in the scope of module {2}",
+                            metadataToken,
+                            tokenType,
+                            name
+                        ),
                     nameof(metadataToken)
                 );
         }

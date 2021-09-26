@@ -47,10 +47,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             EventTime = eventLogRecord.TimeCreated.Value.ToUniversalTime();
             EventId = eventLogRecord.Id;
-            Data = string.Join(
-                ";",
-                eventLogRecord.Properties.Select(pr => pr.Value ?? string.Empty)
-            );
+            Data = string
+                .Join(";", eventLogRecord.Properties.Select(pr => pr.Value ?? string.Empty));
         }
 
         /// <summary>

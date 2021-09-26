@@ -75,17 +75,13 @@ namespace Microsoft.Extensions.Configuration.Xml
                                 {
                                     // check if this element has appeared before, elements are considered siblings if their SiblingName properties match
                                     if (
-                                        !parent.ChildrenBySiblingName.TryGetValue(
-                                            element.SiblingName,
-                                            out var siblings
-                                        )
+                                        !parent.ChildrenBySiblingName
+                                            .TryGetValue(element.SiblingName, out var siblings)
                                     )
                                     {
                                         siblings = new List<XmlConfigurationElement>();
-                                        parent.ChildrenBySiblingName.Add(
-                                            element.SiblingName,
-                                            siblings
-                                        );
+                                        parent.ChildrenBySiblingName
+                                            .Add(element.SiblingName, siblings);
                                     }
                                     siblings.Add(element);
                                 }
@@ -106,11 +102,12 @@ namespace Microsoft.Extensions.Configuration.Xml
 
                                         // Special case: the first and second child have the same sibling name
                                         if (
-                                            string.Equals(
-                                                parent.SingleChild.SiblingName,
-                                                element.SiblingName,
-                                                StringComparison.OrdinalIgnoreCase
-                                            )
+                                            string
+                                                .Equals(
+                                                    parent.SingleChild.SiblingName,
+                                                    element.SiblingName,
+                                                    StringComparison.OrdinalIgnoreCase
+                                                )
                                         )
                                         {
                                             children.Add(
@@ -263,14 +260,15 @@ namespace Microsoft.Extensions.Configuration.Xml
                     );
                 }
 
-                element.Attributes.Add(
-                    new XmlConfigurationElementAttributeValue(
-                        reader.LocalName,
-                        reader.Value,
-                        lineNumber,
-                        linePosition
-                    )
-                );
+                element.Attributes
+                    .Add(
+                        new XmlConfigurationElementAttributeValue(
+                            reader.LocalName,
+                            reader.Value,
+                            lineNumber,
+                            linePosition
+                        )
+                    );
             }
 
             // Go back to the element containing the attributes we just processed
@@ -287,11 +285,12 @@ namespace Microsoft.Extensions.Configuration.Xml
             while (reader.MoveToNextAttribute())
             {
                 if (
-                    string.Equals(
-                        reader.LocalName,
-                        NameAttributeKey,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            reader.LocalName,
+                            NameAttributeKey,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     // If there is a namespace attached to current attribute

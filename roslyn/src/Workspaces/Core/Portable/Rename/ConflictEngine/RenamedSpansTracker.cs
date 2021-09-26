@@ -85,9 +85,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         internal int GetAdjustedPosition(int startingPosition, DocumentId documentId)
         {
             var documentReplacementSpans = _documentToModifiedSpansMap.ContainsKey(documentId)
-                ? _documentToModifiedSpansMap[documentId].Where(
-                      pair => pair.oldSpan.Start < startingPosition
-                  )
+                ? _documentToModifiedSpansMap[documentId]
+                  .Where(pair => pair.oldSpan.Start < startingPosition)
                 : SpecializedCollections.EmptyEnumerable<(TextSpan oldSpan, TextSpan newSpan)>();
 
             var adjustedStartingPosition = startingPosition;
@@ -97,9 +96,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             }
 
             var documentComplexifiedSpans = _documentToComplexifiedSpansMap.ContainsKey(documentId)
-                ? _documentToComplexifiedSpansMap[documentId].Where(
-                      c => c.OriginalSpan.Start <= startingPosition
-                  )
+                ? _documentToComplexifiedSpansMap[documentId]
+                  .Where(c => c.OriginalSpan.Start <= startingPosition)
                 : SpecializedCollections.EmptyEnumerable<MutableComplexifiedSpan>();
 
             var appliedTextSpans = new HashSet<TextSpan>();
@@ -116,9 +114,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 else
                 {
                     foreach (
-                        var (oldSpan, newSpan) in c.ModifiedSubSpans.OrderByDescending(
-                            t => t.oldSpan.Start
-                        )
+                        var (oldSpan, newSpan) in c.ModifiedSubSpans
+                            .OrderByDescending(t => t.oldSpan.Start)
                     )
                     {
                         if (!appliedTextSpans.Any(s => s.Contains(oldSpan)))
@@ -179,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         {
             get
             {
-                return _documentToModifiedSpansMap.Keys.Concat(_documentToComplexifiedSpansMap.Keys)
+                return _documentToModifiedSpansMap.Keys
+                    .Concat(_documentToComplexifiedSpansMap.Keys)
                     .Distinct();
             }
         }
@@ -201,16 +199,16 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     if (replacementTextValid)
                     {
                         document = await Simplifier.ReduceAsync(
-                                document,
-                                Simplifier.Annotation,
-                                cancellationToken: cancellationToken
-                            )
+                            document,
+                            Simplifier.Annotation,
+                            cancellationToken: cancellationToken
+                        )
                             .ConfigureAwait(false);
                         document = await Formatter.FormatAsync(
-                                document,
-                                Formatter.Annotation,
-                                cancellationToken: cancellationToken
-                            )
+                            document,
+                            Formatter.Annotation,
+                            cancellationToken: cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -237,14 +235,14 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     // First, get all the complexified statements
                     var nodeAnnotations =
                         renameAnnotations.GetAnnotatedNodesAndTokens<RenameNodeSimplificationAnnotation>(
-                                root
-                            )
+                            root
+                        )
                             .Select(
                                 x =>
                                     Tuple.Create(
                                         renameAnnotations.GetAnnotations<RenameNodeSimplificationAnnotation>(
-                                                x
-                                            )
+                                            x
+                                        )
                                             .First(),
                                         (SyntaxNode)x
                                     )
@@ -258,14 +256,14 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
                         var annotationAndTokens2 =
                             renameAnnotations.GetAnnotatedNodesAndTokens<RenameTokenSimplificationAnnotation>(
-                                    node
-                                )
+                                node
+                            )
                                 .Select(
                                     x =>
                                         Tuple.Create(
                                             renameAnnotations.GetAnnotations<RenameTokenSimplificationAnnotation>(
-                                                    x
-                                                )
+                                                x
+                                            )
                                                 .First(),
                                             (SyntaxToken)x
                                         )
@@ -289,8 +287,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     // Now process the rest of the renamed spans
                     var annotationAndTokens =
                         renameAnnotations.GetAnnotatedNodesAndTokens<RenameTokenSimplificationAnnotation>(
-                                root
-                            )
+                            root
+                        )
                             .Where(
                                 x =>
                                     !modifiedTokensInComplexifiedStatements.Contains((SyntaxToken)x)
@@ -299,8 +297,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                 x =>
                                     Tuple.Create(
                                         renameAnnotations.GetAnnotations<RenameTokenSimplificationAnnotation>(
-                                                x
-                                            )
+                                            x
+                                        )
                                             .First(),
                                         (SyntaxToken)x
                                     )
@@ -317,14 +315,14 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
                     var annotationAndTrivias =
                         renameAnnotations.GetAnnotatedTrivia<RenameTokenSimplificationAnnotation>(
-                                root
-                            )
+                            root
+                        )
                             .Select(
                                 x =>
                                     Tuple.Create(
                                         renameAnnotations.GetAnnotations<RenameTokenSimplificationAnnotation>(
-                                                x
-                                            )
+                                            x
+                                        )
                                             .First(),
                                         x
                                     )

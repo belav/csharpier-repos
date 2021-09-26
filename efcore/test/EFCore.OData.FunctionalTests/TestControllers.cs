@@ -77,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore
         protected string GetRoutePrefix()
         {
             var oDataRoute =
-                Request.HttpContext.GetRouteData()
+                Request.HttpContext
+                    .GetRouteData()
                     .Routers.Where(r => r.GetType() == typeof(ODataRoute))
                     .SingleOrDefault() as ODataRoute;
 

@@ -112,8 +112,8 @@ namespace System.Linq.Expressions.Tests
                         ? type.GetGenericArguments()[0]
                         : type;
                 object value = Expression.Lambda<Func<object>>(
-                        Expression.Convert(expression, typeof(object))
-                    )
+                    Expression.Convert(expression, typeof(object))
+                )
                     .Compile()();
                 expected = value != null && value.GetType() == nonNullable;
             }
@@ -146,8 +146,8 @@ namespace System.Linq.Expressions.Tests
                         ? type.GetGenericArguments()[0]
                         : type;
                 object value = Expression.Lambda<Func<object>>(
-                        Expression.Convert(expression, typeof(object))
-                    )
+                    Expression.Convert(expression, typeof(object))
+                )
                     .Compile()();
                 expected = value != null && value.GetType() == nonNullable;
             }
@@ -155,12 +155,12 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression param = Expression.Parameter(expression.Type);
 
             Func<bool> func = Expression.Lambda<Func<bool>>(
-                    Expression.Block(
-                        new[] { param },
-                        Expression.Assign(param, expression),
-                        Expression.TypeEqual(param, type)
-                    )
+                Expression.Block(
+                    new[] { param },
+                    Expression.Assign(param, expression),
+                    Expression.TypeEqual(param, type)
                 )
+            )
                 .Compile(useInterpreter);
 
             Assert.Equal(expected, func());
@@ -206,9 +206,9 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression param = Expression.Parameter(typeof(Action<string>));
 
             Func<Action<string>, bool> isActStr = Expression.Lambda<Func<Action<string>, bool>>(
-                    Expression.TypeEqual(param, typeof(Action<string>)),
-                    param
-                )
+                Expression.TypeEqual(param, typeof(Action<string>)),
+                param
+            )
                 .Compile(useInterpreter);
 
             Assert.False(isActStr(ao));
@@ -220,14 +220,14 @@ namespace System.Linq.Expressions.Tests
         public void TypeEqualConstant(Type type, bool useInterpreter)
         {
             Func<bool> isNullOfType = Expression.Lambda<Func<bool>>(
-                    Expression.TypeEqual(Expression.Constant(null), type)
-                )
+                Expression.TypeEqual(Expression.Constant(null), type)
+            )
                 .Compile(useInterpreter);
             Assert.False(isNullOfType());
 
             isNullOfType = Expression.Lambda<Func<bool>>(
-                    Expression.TypeEqual(Expression.Constant(null, typeof(string)), type)
-                )
+                Expression.TypeEqual(Expression.Constant(null, typeof(string)), type)
+            )
                 .Compile(useInterpreter);
 
             Assert.False(isNullOfType());

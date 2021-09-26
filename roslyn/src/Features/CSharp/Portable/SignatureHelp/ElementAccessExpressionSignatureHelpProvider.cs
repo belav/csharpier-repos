@@ -173,9 +173,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             }
 
             accessibleIndexers = accessibleIndexers.FilterToVisibleAndBrowsableSymbols(
-                    document.ShouldHideAdvancedMembers(),
-                    semanticModel.Compilation
-                )
+                document.ShouldHideAdvancedMembers(),
+                semanticModel.Compilation
+            )
                 .Sort(semanticModel, expression.SpanStart);
 
             var anonymousTypeDisplayService =
@@ -187,15 +187,15 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             return CreateSignatureHelpItems(
                 accessibleIndexers.Select(
-                        p =>
-                            Convert(
-                                p,
-                                openBrace,
-                                semanticModel,
-                                anonymousTypeDisplayService,
-                                documentationCommentFormattingService
-                            )
-                    )
+                    p =>
+                        Convert(
+                            p,
+                            openBrace,
+                            semanticModel,
+                            anonymousTypeDisplayService,
+                            documentationCommentFormattingService
+                        )
+                )
                     .ToList(),
                 textSpan,
                 GetCurrentArgumentState(root, position, syntaxFacts, textSpan, cancellationToken),
@@ -343,10 +343,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             }
 
             indexers = semanticModel.LookupSymbols(
-                    position,
-                    expressionType,
-                    WellKnownMemberNames.Indexer
-                )
+                position,
+                expressionType,
+                WellKnownMemberNames.Indexer
+            )
                 .OfType<IPropertySymbol>()
                 .ToImmutableArray();
             return true;
@@ -375,7 +375,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetPreambleParts(indexer, position, semanticModel),
                 GetSeparatorParts(),
                 GetPostambleParts(),
-                indexer.Parameters.Select(
+                indexer.Parameters
+                    .Select(
                         p =>
                             Convert(
                                 p,

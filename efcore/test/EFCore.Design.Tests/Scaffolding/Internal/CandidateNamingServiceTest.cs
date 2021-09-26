@@ -26,9 +26,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 output,
-                new CandidateNamingService().GenerateCandidateIdentifier(
-                    new DatabaseTable { Database = new DatabaseModel(), Name = input }
-                )
+                new CandidateNamingService()
+                    .GenerateCandidateIdentifier(
+                        new DatabaseTable { Database = new DatabaseModel(), Name = input }
+                    )
             );
         }
 
@@ -39,9 +40,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 output,
-                new CandidateNamingService().GenerateCandidateIdentifier(
-                    new DatabaseColumn { Name = input }
-                )
+                new CandidateNamingService()
+                    .GenerateCandidateIdentifier(new DatabaseColumn { Name = input })
             );
         }
     }

@@ -135,15 +135,16 @@ namespace System.IO.Strategies
             {
                 Debug.Assert(path != null);
                 return ValidateFileHandle(
-                    Interop.Kernel32.CreateFile(
-                        path,
-                        fAccess,
-                        share,
-                        &secAttrs,
-                        mode,
-                        flagsAndAttributes,
-                        IntPtr.Zero
-                    ),
+                    Interop.Kernel32
+                        .CreateFile(
+                            path,
+                            fAccess,
+                            share,
+                            &secAttrs,
+                            mode,
+                            flagsAndAttributes,
+                            IntPtr.Zero
+                        ),
                     path,
                     (options & FileOptions.Asynchronous) != 0
                 );
@@ -167,13 +168,14 @@ namespace System.IO.Strategies
 
             uint fileMode;
 
-            int status = Interop.NtDll.NtQueryInformationFile(
-                FileHandle: fileHandle,
-                IoStatusBlock: out _,
-                FileInformation: &fileMode,
-                Length: sizeof(uint),
-                FileInformationClass: Interop.NtDll.FileModeInformation
-            );
+            int status = Interop.NtDll
+                .NtQueryInformationFile(
+                    FileHandle: fileHandle,
+                    IoStatusBlock: out _,
+                    FileInformation: &fileMode,
+                    Length: sizeof(uint),
+                    FileInformationClass: Interop.NtDll.FileModeInformation
+                );
 
             switch (status)
             {
@@ -270,12 +272,13 @@ namespace System.IO.Strategies
             Interop.Kernel32.FILE_STANDARD_INFO info;
 
             if (
-                !Interop.Kernel32.GetFileInformationByHandleEx(
-                    handle,
-                    Interop.Kernel32.FileStandardInfo,
-                    &info,
-                    (uint)sizeof(Interop.Kernel32.FILE_STANDARD_INFO)
-                )
+                !Interop.Kernel32
+                    .GetFileInformationByHandleEx(
+                        handle,
+                        Interop.Kernel32.FileStandardInfo,
+                        &info,
+                        (uint)sizeof(Interop.Kernel32.FILE_STANDARD_INFO)
+                    )
             )
             {
                 throw Win32Marshal.GetExceptionForLastWin32Error(path);
@@ -375,13 +378,8 @@ namespace System.IO.Strategies
             int lengthHigh = unchecked((int)(length >> 32));
 
             if (
-                !Interop.Kernel32.UnlockFile(
-                    handle,
-                    positionLow,
-                    positionHigh,
-                    lengthLow,
-                    lengthHigh
-                )
+                !Interop.Kernel32
+                    .UnlockFile(handle, positionLow, positionHigh, lengthLow, lengthHigh)
             )
             {
                 throw Win32Marshal.GetExceptionForLastWin32Error(path);
@@ -441,12 +439,13 @@ namespace System.IO.Strategies
             var eofInfo = new Interop.Kernel32.FILE_END_OF_FILE_INFO { EndOfFile = length };
 
             if (
-                !Interop.Kernel32.SetFileInformationByHandle(
-                    handle,
-                    Interop.Kernel32.FileEndOfFileInfo,
-                    &eofInfo,
-                    (uint)sizeof(Interop.Kernel32.FILE_END_OF_FILE_INFO)
-                )
+                !Interop.Kernel32
+                    .SetFileInformationByHandle(
+                        handle,
+                        Interop.Kernel32.FileEndOfFileInfo,
+                        &eofInfo,
+                        (uint)sizeof(Interop.Kernel32.FILE_END_OF_FILE_INFO)
+                    )
             )
             {
                 int errorCode = Marshal.GetLastWin32Error();
@@ -479,28 +478,13 @@ namespace System.IO.Strategies
                     overlapped != null
                         ? (
                               syncUsingOverlapped
-                                  ? Interop.Kernel32.ReadFile(
-                                        handle,
-                                        p,
-                                        bytes.Length,
-                                        out numBytesRead,
-                                        overlapped
-                                    )
-                                  : Interop.Kernel32.ReadFile(
-                                        handle,
-                                        p,
-                                        bytes.Length,
-                                        IntPtr.Zero,
-                                        overlapped
-                                    )
+                                  ? Interop.Kernel32
+                                    .ReadFile(handle, p, bytes.Length, out numBytesRead, overlapped)
+                                  : Interop.Kernel32
+                                    .ReadFile(handle, p, bytes.Length, IntPtr.Zero, overlapped)
                           )
-                        : Interop.Kernel32.ReadFile(
-                              handle,
-                              p,
-                              bytes.Length,
-                              out numBytesRead,
-                              IntPtr.Zero
-                          );
+                        : Interop.Kernel32
+                          .ReadFile(handle, p, bytes.Length, out numBytesRead, IntPtr.Zero);
             }
 
             if (r == 0)
@@ -543,28 +527,19 @@ namespace System.IO.Strategies
                     overlapped != null
                         ? (
                               syncUsingOverlapped
-                                  ? Interop.Kernel32.WriteFile(
+                                  ? Interop.Kernel32
+                                    .WriteFile(
                                         handle,
                                         p,
                                         buffer.Length,
                                         out numBytesWritten,
                                         overlapped
                                     )
-                                  : Interop.Kernel32.WriteFile(
-                                        handle,
-                                        p,
-                                        buffer.Length,
-                                        IntPtr.Zero,
-                                        overlapped
-                                    )
+                                  : Interop.Kernel32
+                                    .WriteFile(handle, p, buffer.Length, IntPtr.Zero, overlapped)
                           )
-                        : Interop.Kernel32.WriteFile(
-                              handle,
-                              p,
-                              buffer.Length,
-                              out numBytesWritten,
-                              IntPtr.Zero
-                          );
+                        : Interop.Kernel32
+                          .WriteFile(handle, p, buffer.Length, out numBytesWritten, IntPtr.Zero);
             }
 
             if (r == 0)
@@ -637,10 +612,11 @@ namespace System.IO.Strategies
                                     {
                                         // Try to cancel the I/O.  We ignore the return value, as cancellation is opportunistic and we
                                         // don't want to fail the operation because we couldn't cancel it.
-                                        Interop.Kernel32.CancelIoEx(
-                                            innerAwaitable._fileHandle,
-                                            innerAwaitable._nativeOverlapped
-                                        );
+                                        Interop.Kernel32
+                                            .CancelIoEx(
+                                                innerAwaitable._fileHandle,
+                                                innerAwaitable._nativeOverlapped
+                                            );
                                     }
                                 }
                             }
@@ -664,10 +640,8 @@ namespace System.IO.Strategies
                             // Allocate a native overlapped for our reusable overlapped, and set position to read based on the next
                             // desired address stored in the awaitable.  (This position may be 0, if either we're at the beginning or
                             // if the stream isn't seekable.)
-                            readAwaitable._nativeOverlapped =
-                                handle.ThreadPoolBinding!.AllocateNativeOverlapped(
-                                    awaitableOverlapped
-                                );
+                            readAwaitable._nativeOverlapped = handle.ThreadPoolBinding!
+                                .AllocateNativeOverlapped(awaitableOverlapped);
                             if (canSeek)
                             {
                                 readAwaitable._nativeOverlapped->OffsetLow = unchecked(
@@ -770,9 +744,9 @@ namespace System.IO.Strategies
 
                     // Write out the read data.
                     await destination.WriteAsync(
-                            new ReadOnlyMemory<byte>(copyBuffer, 0, (int)readAwaitable._numBytes),
-                            cancellationToken
-                        )
+                        new ReadOnlyMemory<byte>(copyBuffer, 0, (int)readAwaitable._numBytes),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }

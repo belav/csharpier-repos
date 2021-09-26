@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 { 1, "a" },
                 { 2, "b" }
-            }.ToImmutableSegmentedDictionary();
+            }
+                .ToImmutableSegmentedDictionary();
             Assert.False(dictionary.ContainsValue("c"));
             Assert.False(dictionary.ContainsValue(null));
         }
@@ -282,7 +283,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IImmutableDictionary<string, int> populated = ImmutableSegmentedDictionary.Create<
                 string,
                 int
-            >().Add("a", 5);
+            >()
+                .Add("a", 5);
             Assert.Equal(0, empty.GetValueOrDefault("a"));
             Assert.Equal(1, empty.GetValueOrDefault("a", 1));
             Assert.Equal(5, populated.GetValueOrDefault("a"));
@@ -309,7 +311,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             ImmutableSegmentedDictionary<string, int> dict = ImmutableSegmentedDictionary.Create<
                 string,
                 int
-            >().Add("One", 1).Add("Two", 2);
+            >()
+                .Add("One", 1)
+                .Add("Two", 2);
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 dict
             );
@@ -320,11 +324,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     "_root"
                 ) ?? throw new InvalidOperationException();
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
-                    == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(
+                    pr =>
+                        pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
+                        == DebuggerBrowsableState.RootHidden
+                );
             KeyValuePair<string, int>[]? items =
                 itemProperty.GetValue(info.Instance) as KeyValuePair<string, int>[];
             Assert.Equal(dict, items);
@@ -348,7 +353,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             ImmutableSegmentedDictionary<string, int> dictionary = new Dictionary<string, int>
             {
                 { "a", 1 }
-            }.ToImmutableSegmentedDictionary();
+            }
+                .ToImmutableSegmentedDictionary();
             Assert.True(
                 IsSame(ImmutableSegmentedDictionary<string, int>.Empty, dictionary.Clear())
             );
@@ -361,7 +367,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             ImmutableSegmentedDictionary<string, int> dictionary = new Dictionary<string, int>
             {
                 { "a", 1 }
-            }.ToImmutableSegmentedDictionary(StringComparer.OrdinalIgnoreCase);
+            }
+                .ToImmutableSegmentedDictionary(StringComparer.OrdinalIgnoreCase);
 
             ImmutableSegmentedDictionary<string, int> clearedDictionary = dictionary.Clear();
             Assert.False(
@@ -453,10 +460,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             }
             public override bool Equals(object? obj)
             {
-                return StringComparer.OrdinalIgnoreCase.Equals(
-                    this.Value,
-                    ((CaseInsensitiveString?)obj)!.Value
-                );
+                return StringComparer.OrdinalIgnoreCase
+                    .Equals(this.Value, ((CaseInsensitiveString?)obj)!.Value);
             }
         }
     }

@@ -70,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(2, modelBuilder.Model.GetEntityTypes().Count());
             Assert.True(
-                modelBuilder.Model.FindEntityType(typeof(Customer))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Customer))
                     .FindNavigation(nameof(Customer.Address)).ForeignKey.IsOwnership
             );
         }
@@ -149,24 +150,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityTypeBuilder.Metadata.Model.ConventionDispatcher
             );
 
-            new NotMappedEntityTypeAttributeConvention(CreateDependencies()).ProcessEntityTypeAdded(
-                entityTypeBuilder,
-                context
-            );
+            new NotMappedEntityTypeAttributeConvention(CreateDependencies())
+                .ProcessEntityTypeAdded(entityTypeBuilder, context);
 
-            new OwnedEntityTypeAttributeConvention(CreateDependencies()).ProcessEntityTypeAdded(
-                entityTypeBuilder,
-                context
-            );
+            new OwnedEntityTypeAttributeConvention(CreateDependencies())
+                .ProcessEntityTypeAdded(entityTypeBuilder, context);
 
-            new KeylessEntityTypeAttributeConvention(CreateDependencies()).ProcessEntityTypeAdded(
-                entityTypeBuilder,
-                context
-            );
+            new KeylessEntityTypeAttributeConvention(CreateDependencies())
+                .ProcessEntityTypeAdded(entityTypeBuilder, context);
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         [NotMapped]

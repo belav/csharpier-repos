@@ -634,10 +634,8 @@ namespace System.Xml.Tests
         {
             if (IsSubtreeReader() || IsXmlNodeReader() || IsXmlNodeReaderDataDoc())
                 return TEST_SKIPPED;
-            string str = string.Format(
-                "<?xml version='1.0' standalone='{0}'>",
-                this.CurVariation.Param
-            );
+            string str = string
+                .Format("<?xml version='1.0' standalone='{0}'>", this.CurVariation.Param);
             CError.WriteLine(str);
             bool bPassed = TestInvalidXmlStr(str, 1, 32, "Xml_InvalidXmlDecl");
             return BoolToLTMResult(bPassed);

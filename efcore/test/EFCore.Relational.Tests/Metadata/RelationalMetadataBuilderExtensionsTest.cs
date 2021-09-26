@@ -264,9 +264,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         private class Splot
         {
-            public static readonly PropertyInfo SplowedProperty = typeof(Splot).GetProperty(
-                "Splowed"
-            );
+            public static readonly PropertyInfo SplowedProperty = typeof(Splot)
+                .GetProperty("Splowed");
 
             public int? Splowed { get; set; }
         }

@@ -462,11 +462,12 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                         for (var i = 0; i < parameters.Count; i++)
                         {
                             if (
-                                string.Equals(
-                                    kvp.Key,
-                                    parameters[i].Name,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                string
+                                    .Equals(
+                                        kvp.Key,
+                                        parameters[i].Name,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                             {
                                 found = true;

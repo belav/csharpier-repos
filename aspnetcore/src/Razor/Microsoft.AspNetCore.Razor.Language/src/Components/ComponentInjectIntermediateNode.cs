@@ -50,11 +50,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(context));
             }
 
-            context.CodeWriter.WriteAutoPropertyDeclaration(
-                _injectedPropertyModifiers,
-                TypeName,
-                MemberName
-            );
+            context.CodeWriter
+                .WriteAutoPropertyDeclaration(_injectedPropertyModifiers, TypeName, MemberName);
         }
     }
 }

@@ -27,23 +27,19 @@ namespace StaticFilesSample
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.ConfigureLogging(
-                                factory =>
-                                {
-                                    factory.AddFilter("Console", level => level >= LogLevel.Debug);
-                                    factory.AddConsole();
-                                }
-                            )
-                            .UseContentRoot(Directory.GetCurrentDirectory())
-                            .UseKestrel()
-                            // .UseHttpSys()
-                            .UseIISIntegration()
-                            .UseStartup<Startup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.ConfigureLogging(
+                        factory =>
+                        {
+                            factory.AddFilter("Console", level => level >= LogLevel.Debug);
+                            factory.AddConsole();
+                        }
+                    ).UseContentRoot(Directory.GetCurrentDirectory()).UseKestrel()
+                    // .UseHttpSys()
+                    .UseIISIntegration().UseStartup<Startup>();
+                }
+            ).Build();
 
             return host.RunAsync();
         }

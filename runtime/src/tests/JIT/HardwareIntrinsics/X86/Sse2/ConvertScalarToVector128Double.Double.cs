@@ -228,7 +228,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Sse2).GetMethod(
+            var result = typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.ConvertScalarToVector128Double),
                     new Type[] { typeof(Vector128<Double>), typeof(Int32) }
                 )
@@ -249,7 +250,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse2).GetMethod(
+            var result = typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.ConvertScalarToVector128Double),
                     new Type[] { typeof(Vector128<Double>), typeof(Int32) }
                 )
@@ -270,7 +272,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse2).GetMethod(
+            var result = typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.ConvertScalarToVector128Double),
                     new Type[] { typeof(Vector128<Double>), typeof(Int32) }
                 )
@@ -458,14 +461,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!Succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse2)}.{nameof(Sse2.ConvertScalarToVector128Double)}<Double>(Vector128<Double>, Int32): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse2)}.{nameof(Sse2.ConvertScalarToVector128Double)}<Double>(Vector128<Double>, Int32): {method} failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }
         }

@@ -768,7 +768,8 @@ namespace System.Tests
 
             // Then use LINQ to ensure IEnumerator<...> works as expected
 
-            int[] enumeratedValues = new string(chars).EnumerateRunes()
+            int[] enumeratedValues = new string(chars)
+                .EnumerateRunes()
                 .Select(r => r.Value)
                 .ToArray();
             Assert.Equal(expected, enumeratedValues);
@@ -1485,11 +1486,8 @@ namespace System.Tests
             );
             Assert.Equal(
                 "abcdef",
-                ("abc" + ZeroWidthJoiner).Replace(
-                    ZeroWidthJoiner,
-                    "def",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                ("abc" + ZeroWidthJoiner)
+                    .Replace(ZeroWidthJoiner, "def", StringComparison.OrdinalIgnoreCase)
             );
         }
 
@@ -1501,20 +1499,13 @@ namespace System.Tests
         {
             Assert.Equal(
                 "abc" + ZeroWidthJoiner + "def",
-                ("abc" + ZeroWidthJoiner + "def").Replace(
-                    ZeroWidthJoiner,
-                    "xyz",
-                    StringComparison.CurrentCulture
-                )
+                ("abc" + ZeroWidthJoiner + "def")
+                    .Replace(ZeroWidthJoiner, "xyz", StringComparison.CurrentCulture)
             );
             Assert.Equal(
                 "abc" + ZeroWidthJoiner + "def",
-                ("abc" + ZeroWidthJoiner + "def").Replace(
-                    ZeroWidthJoiner,
-                    "xyz",
-                    true,
-                    CultureInfo.CurrentCulture
-                )
+                ("abc" + ZeroWidthJoiner + "def")
+                    .Replace(ZeroWidthJoiner, "xyz", true, CultureInfo.CurrentCulture)
             );
         }
 
@@ -1567,17 +1558,13 @@ namespace System.Tests
             // ordinal ignore case
             Assert.Equal(
                 "abc".GetHashCode(StringComparison.OrdinalIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "abc",
-                    CompareOptions.OrdinalIgnoreCase
-                )
+                CultureInfo.InvariantCulture.CompareInfo
+                    .GetHashCode("abc", CompareOptions.OrdinalIgnoreCase)
             );
             Assert.Equal(
                 "abc".GetHashCode(StringComparison.OrdinalIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "ABC",
-                    CompareOptions.OrdinalIgnoreCase
-                )
+                CultureInfo.InvariantCulture.CompareInfo
+                    .GetHashCode("ABC", CompareOptions.OrdinalIgnoreCase)
             );
 
             // culture-aware
@@ -1587,26 +1574,20 @@ namespace System.Tests
             );
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.CurrentCultureIgnoreCase),
-                CultureInfo.CurrentCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc",
-                    CompareOptions.IgnoreCase
-                )
+                CultureInfo.CurrentCulture.CompareInfo
+                    .GetHashCode("aeiXXabc", CompareOptions.IgnoreCase)
             );
 
             // invariant culture
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.InvariantCulture),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc",
-                    CompareOptions.None
-                )
+                CultureInfo.InvariantCulture.CompareInfo
+                    .GetHashCode("aeiXXabc", CompareOptions.None)
             );
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.InvariantCultureIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc",
-                    CompareOptions.IgnoreCase
-                )
+                CultureInfo.InvariantCulture.CompareInfo
+                    .GetHashCode("aeiXXabc", CompareOptions.IgnoreCase)
             );
         }
 
@@ -1616,65 +1597,49 @@ namespace System.Tests
             // ordinal
             Assert.Equal(
                 "abc".GetHashCode(),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "abc".AsSpan(),
-                    CompareOptions.Ordinal
-                )
+                CultureInfo.InvariantCulture.CompareInfo
+                    .GetHashCode("abc".AsSpan(), CompareOptions.Ordinal)
             );
             Assert.NotEqual(
                 "abc".GetHashCode(),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "ABC".AsSpan(),
-                    CompareOptions.Ordinal
-                )
+                CultureInfo.InvariantCulture.CompareInfo
+                    .GetHashCode("ABC".AsSpan(), CompareOptions.Ordinal)
             );
 
             // ordinal ignore case
             Assert.Equal(
                 "abc".GetHashCode(StringComparison.OrdinalIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "abc".AsSpan(),
-                    CompareOptions.OrdinalIgnoreCase
-                )
+                CultureInfo.InvariantCulture.CompareInfo
+                    .GetHashCode("abc".AsSpan(), CompareOptions.OrdinalIgnoreCase)
             );
             Assert.Equal(
                 "abc".GetHashCode(StringComparison.OrdinalIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "ABC".AsSpan(),
-                    CompareOptions.OrdinalIgnoreCase
-                )
+                CultureInfo.InvariantCulture.CompareInfo
+                    .GetHashCode("ABC".AsSpan(), CompareOptions.OrdinalIgnoreCase)
             );
 
             // culture-aware
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.CurrentCulture),
-                CultureInfo.CurrentCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc".AsSpan(),
-                    CompareOptions.None
-                )
+                CultureInfo.CurrentCulture.CompareInfo
+                    .GetHashCode("aeiXXabc".AsSpan(), CompareOptions.None)
             );
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.CurrentCultureIgnoreCase),
-                CultureInfo.CurrentCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc".AsSpan(),
-                    CompareOptions.IgnoreCase
-                )
+                CultureInfo.CurrentCulture.CompareInfo
+                    .GetHashCode("aeiXXabc".AsSpan(), CompareOptions.IgnoreCase)
             );
 
             // invariant culture
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.InvariantCulture),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc".AsSpan(),
-                    CompareOptions.None
-                )
+                CultureInfo.InvariantCulture.CompareInfo
+                    .GetHashCode("aeiXXabc".AsSpan(), CompareOptions.None)
             );
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.InvariantCultureIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc".AsSpan(),
-                    CompareOptions.IgnoreCase
-                )
+                CultureInfo.InvariantCulture.CompareInfo
+                    .GetHashCode("aeiXXabc".AsSpan(), CompareOptions.IgnoreCase)
             );
         }
 
@@ -1688,10 +1653,8 @@ namespace System.Tests
             int hashCodeFromStringComparer = StringComparer.FromComparison(comparisonType)
                 .GetHashCode("abc");
             int hashCodeFromStringGetHashCode = "abc".GetHashCode(comparisonType);
-            int hashCodeFromStringGetHashCodeOfSpan = string.GetHashCode(
-                "abc".AsSpan(),
-                comparisonType
-            );
+            int hashCodeFromStringGetHashCodeOfSpan = string
+                .GetHashCode("abc".AsSpan(), comparisonType);
 
             Assert.Equal(hashCodeFromStringComparer, hashCodeFromStringGetHashCode);
             Assert.Equal(hashCodeFromStringComparer, hashCodeFromStringGetHashCodeOfSpan);
@@ -2534,7 +2497,8 @@ namespace System.Tests
                     ? string.Concat(values[0].AsSpan(), values[1].AsSpan())
                     : values.Length == 3
                         ? string.Concat(values[0].AsSpan(), values[1].AsSpan(), values[2].AsSpan())
-                        : string.Concat(
+                        : string
+                          .Concat(
                               values[0].AsSpan(),
                               values[1].AsSpan(),
                               values[2].AsSpan(),
@@ -3141,22 +3105,13 @@ namespace System.Tests
                         string s2 = prefix + (char)j + suffix;
 
                         bool actualEqualOrdinal = string.Equals(s1, s2, StringComparison.Ordinal);
-                        bool actualEqualOrdinalIgnoreCase = string.Equals(
-                            s1,
-                            s2,
-                            StringComparison.OrdinalIgnoreCase
-                        );
+                        bool actualEqualOrdinalIgnoreCase = string
+                            .Equals(s1, s2, StringComparison.OrdinalIgnoreCase);
 
-                        int actualCompareToOrdinal = string.Compare(
-                            s1,
-                            s2,
-                            StringComparison.Ordinal
-                        );
-                        int actualCompareToOrdinalIgnoreCase = string.Compare(
-                            s1,
-                            s2,
-                            StringComparison.OrdinalIgnoreCase
-                        );
+                        int actualCompareToOrdinal = string
+                            .Compare(s1, s2, StringComparison.Ordinal);
+                        int actualCompareToOrdinalIgnoreCase = string
+                            .Compare(s1, s2, StringComparison.OrdinalIgnoreCase);
 
                         try
                         {

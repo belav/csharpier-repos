@@ -78,16 +78,14 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
 
             foreach (var diagnostic in diagnostics)
             {
-                var operationLocation = diagnostic.AdditionalLocations[0].FindNode(
-                    cancellationToken
-                );
+                var operationLocation = diagnostic.AdditionalLocations[0]
+                    .FindNode(cancellationToken);
                 var operation = semanticModel.GetOperation(operationLocation, cancellationToken);
 
                 var methodDecl = diagnostic.AdditionalLocations[1].FindNode(cancellationToken);
                 var method = semanticModel.GetDeclaredSymbol(methodDecl, cancellationToken);
-                var methodBlock = declarationService.GetDeclarations(method)[0].GetSyntax(
-                    cancellationToken
-                );
+                var methodBlock = declarationService.GetDeclarations(method)[0]
+                    .GetSyntax(cancellationToken);
 
                 var (accessesBase, members, _) = analyzer.GetHashedMembers(method, operation);
                 if (accessesBase || !members.IsDefaultOrEmpty)

@@ -129,12 +129,8 @@ namespace System.Net.Http.Functional.Tests
                             "Expected second response to have completed"
                         );
 
-                        await new[]
-                        {
-                            serverTask1,
-                            serverTask2,
-                            secondResponse
-                        }.WhenAllOrAnyFailed();
+                        await new[] { serverTask1, serverTask2, secondResponse }
+                            .WhenAllOrAnyFailed();
                     }
                 }
             );

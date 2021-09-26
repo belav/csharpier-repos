@@ -73,13 +73,12 @@ namespace System.Web.Mvc.Async.Test
         {
             // Arrange
             Mock<SynchronizationContext> mockSyncContext = new Mock<SynchronizationContext>();
-            mockSyncContext.Setup(c => c.Send(It.IsAny<SendOrPostCallback>(), null))
-                .Callback(
-                    delegate(SendOrPostCallback d, object state)
-                    {
-                        d(state);
-                    }
-                );
+            mockSyncContext.Setup(c => c.Send(It.IsAny<SendOrPostCallback>(), null)).Callback(
+                delegate(SendOrPostCallback d, object state)
+                {
+                    d(state);
+                }
+            );
 
             AsyncManager helper = new AsyncManager(mockSyncContext.Object);
             bool wasCalled = false;

@@ -221,10 +221,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 throw new OperationException(
                     DesignStrings.ExistingFiles(
                         outputDir,
-                        string.Join(
-                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                            existingFiles
-                        )
+                        string
+                            .Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, existingFiles)
                     )
                 );
             }
@@ -234,10 +232,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 throw new OperationException(
                     DesignStrings.ReadOnlyFiles(
                         outputDir,
-                        string.Join(
-                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                            readOnlyFiles
-                        )
+                        string
+                            .Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, readOnlyFiles)
                     )
                 );
             }

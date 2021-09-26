@@ -31,9 +31,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             + "\r\n"
             + "Hello, World!";
 
-        private static readonly string _plaintextPipelinedExpectedResponse = string.Concat(
-            Enumerable.Repeat(_plaintextExpectedResponse, RequestParsingData.Pipelining)
-        );
+        private static readonly string _plaintextPipelinedExpectedResponse = string
+            .Concat(Enumerable.Repeat(_plaintextExpectedResponse, RequestParsingData.Pipelining));
 
         private IHost _host;
         private InMemoryConnection _connection;
@@ -44,21 +43,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             var transportFactory = new InMemoryTransportFactory(connectionsPerEndPoint: 1);
 
             _host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder
-                        // Prevent VS from attaching to hosting startup which could impact results
-                        .UseSetting("preventHostingStartup", "true")
-                            .UseKestrel()
-                            // Bind to a single non-HTTPS endpoint
-                            .UseUrls("http://127.0.0.1:5000")
-                            .Configure(app => app.UseMiddleware<PlaintextMiddleware>());
-                    }
-                )
-                .ConfigureServices(
-                    services => services.AddSingleton<IConnectionListenerFactory>(transportFactory)
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                    // Prevent VS from attaching to hosting startup which could impact results
+                    .UseSetting("preventHostingStartup", "true")
+                        .UseKestrel()
+                        // Bind to a single non-HTTPS endpoint
+                        .UseUrls("http://127.0.0.1:5000")
+                        .Configure(app => app.UseMiddleware<PlaintextMiddleware>());
+                }
+            ).ConfigureServices(services => services.AddSingleton<IConnectionListenerFactory>(transportFactory)).Build();
 
             _host.Start();
 
@@ -66,23 +61,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             _connection = transportFactory.Connections.Values.Single().Single();
 
             ValidateResponseAsync(
-                    RequestParsingData.PlaintextTechEmpowerRequest,
-                    _plaintextExpectedResponse
-                )
+                RequestParsingData.PlaintextTechEmpowerRequest,
+                _plaintextExpectedResponse
+            )
                 .Wait();
             ValidateResponseAsync(
-                    RequestParsingData.PlaintextTechEmpowerPipelinedRequests,
-                    _plaintextPipelinedExpectedResponse
-                )
+                RequestParsingData.PlaintextTechEmpowerPipelinedRequests,
+                _plaintextPipelinedExpectedResponse
+            )
                 .Wait();
         }
 
         private async Task ValidateResponseAsync(byte[] request, string expectedResponse)
         {
             await _connection.SendRequestAsync(request);
-            var response = Encoding.ASCII.GetString(
-                await _connection.GetResponseAsync(expectedResponse.Length)
-            );
+            var response = Encoding.ASCII
+                .GetString(await _connection.GetResponseAsync(expectedResponse.Length));
 
             // Exclude date header since the value changes on every request
             var expectedResponseLines = expectedResponse.Split("\r\n")
@@ -93,14 +87,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             if (!Enumerable.SequenceEqual(expectedResponseLines, responseLines))
             {
                 throw new InvalidOperationException(
-                    string.Join(
-                        Environment.NewLine,
-                        "Invalid response",
-                        "Expected:",
-                        expectedResponse,
-                        "Actual:",
-                        response
-                    )
+                    string
+                        .Join(
+                            Environment.NewLine,
+                            "Invalid response",
+                            "Expected:",
+                            expectedResponse,
+                            "Actual:",
+                            response
+                        )
                 );
             }
         }
@@ -278,9 +273,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         public class PlaintextMiddleware
         {
             private static readonly PathString _path = new PathString("/plaintext");
-            private static readonly byte[] _helloWorldPayload = Encoding.UTF8.GetBytes(
-                "Hello, World!"
-            );
+            private static readonly byte[] _helloWorldPayload = Encoding.UTF8
+                .GetBytes("Hello, World!");
 
             private readonly RequestDelegate _next;
 

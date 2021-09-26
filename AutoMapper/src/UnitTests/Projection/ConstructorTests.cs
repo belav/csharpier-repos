@@ -76,7 +76,9 @@ namespace AutoMapper.UnitTests.Projection
                         }
                     }
                 }
-            }.AsQueryable().ProjectTo<Destination>(Configuration);
+            }
+                .AsQueryable()
+                .ProjectTo<Destination>(Configuration);
             var first = query.First();
             first.Item.Value1.ShouldBe(1);
             first.Item.Value2.ShouldBe(2);
@@ -100,7 +102,8 @@ namespace AutoMapper.UnitTests.Projection
             new MapperConfiguration(cfg => cfg.CreateProjection<Source, Destination>());
         [Fact]
         public void Should_construct_correctly() =>
-            new[] { new Source { Value = 5 } }.AsQueryable()
+            new[] { new Source { Value = 5 } }
+                .AsQueryable()
                 .ProjectTo<Destination>(Configuration)
                 .First()
                 .Value.ShouldBe("5");
@@ -146,11 +149,9 @@ namespace AutoMapper.UnitTests.Projection
         [Fact]
         public void Should_work() =>
             ProjectTo<UserDto>(
-                    new[]
-                    {
-                        new Users { FkAddress = new Addresses { Address = "address" } }
-                    }.AsQueryable()
-                )
+                new[] { new Users { FkAddress = new Addresses { Address = "address" } } }
+                    .AsQueryable()
+            )
                 .First()
                 .AddressDto.Address.ShouldBe("address");
     }

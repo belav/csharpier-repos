@@ -72,7 +72,8 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetUInt16();
             }
 
-            object result = typeof(Vector64).GetMethod(nameof(Vector64.Create), operandTypes)
+            object result = typeof(Vector64)
+                .GetMethod(nameof(Vector64.Create), operandTypes)
                 .Invoke(null, new object[] { values[0], values[1], values[2], values[3] });
 
             ValidateResult((Vector64<UInt16>)(result), values);
@@ -108,15 +109,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64.Create(UInt16): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", expectedValues)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector64.Create(UInt16): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", expectedValues)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

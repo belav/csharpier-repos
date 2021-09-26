@@ -165,77 +165,76 @@ namespace Microsoft.AspNetCore.Authentication
             Action<IServiceCollection> configureServices = null
         )
         {
-            var host = new HostBuilder().ConfigureWebHost(
-                    builder =>
-                        builder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseAuthentication();
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            var req = context.Request;
-                                            var res = context.Response;
-                                            if (
-                                                req.Path.StartsWithSegments(
+            var host = new HostBuilder()
+                .ConfigureWebHost(builder => builder.UseTestServer().Configure(
+                            app =>
+                            {
+                                app.UseAuthentication();
+                                app.Use(
+                                    async (context, next) =>
+                                    {
+                                        var req = context.Request;
+                                        var res = context.Response;
+                                        if (
+                                            req.Path
+                                                .StartsWithSegments(
                                                     new PathString("/add"),
                                                     out var remainder
                                                 )
-                                            )
-                                            {
-                                                var name = remainder.Value.Substring(1);
-                                                var auth =
-                                                    context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
-                                                var scheme = new AuthenticationScheme(
-                                                    name,
-                                                    name,
-                                                    typeof(TestHandler)
-                                                );
-                                                auth.AddScheme(scheme);
-                                            }
-                                            else if (
-                                                req.Path.StartsWithSegments(
+                                        )
+                                        {
+                                            var name = remainder.Value.Substring(1);
+                                            var auth = context.RequestServices
+                                                .GetRequiredService<IAuthenticationSchemeProvider>();
+                                            var scheme = new AuthenticationScheme(
+                                                name,
+                                                name,
+                                                typeof(TestHandler)
+                                            );
+                                            auth.AddScheme(scheme);
+                                        }
+                                        else if (
+                                            req.Path
+                                                .StartsWithSegments(
                                                     new PathString("/auth"),
                                                     out remainder
                                                 )
-                                            )
-                                            {
-                                                var name =
-                                                    (remainder.Value.Length > 0)
-                                                        ? remainder.Value.Substring(1)
-                                                        : null;
-                                                var result = await context.AuthenticateAsync(name);
-                                                await res.DescribeAsync(result?.Ticket?.Principal);
-                                            }
-                                            else if (
-                                                req.Path.StartsWithSegments(
+                                        )
+                                        {
+                                            var name =
+                                                (remainder.Value.Length > 0)
+                                                    ? remainder.Value.Substring(1)
+                                                    : null;
+                                            var result = await context.AuthenticateAsync(name);
+                                            await res.DescribeAsync(result?.Ticket?.Principal);
+                                        }
+                                        else if (
+                                            req.Path
+                                                .StartsWithSegments(
                                                     new PathString("/remove"),
                                                     out remainder
                                                 )
-                                            )
-                                            {
-                                                var name = remainder.Value.Substring(1);
-                                                var auth =
-                                                    context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
-                                                auth.RemoveScheme(name);
-                                            }
-                                            else
-                                            {
-                                                await next();
-                                            }
+                                        )
+                                        {
+                                            var name = remainder.Value.Substring(1);
+                                            var auth = context.RequestServices
+                                                .GetRequiredService<IAuthenticationSchemeProvider>();
+                                            auth.RemoveScheme(name);
                                         }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    configureServices?.Invoke(services);
-                                    services.AddAuthentication();
-                                }
-                            )
-                )
+                                        else
+                                        {
+                                            await next();
+                                        }
+                                    }
+                                );
+                            }
+                        ).ConfigureServices(
+                            services =>
+                            {
+                                configureServices?.Invoke(services);
+                                services.AddAuthentication();
+                            }
+                        ))
                 .Build();
 
             await host.StartAsync();

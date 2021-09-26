@@ -66,15 +66,16 @@ namespace System.Xml
             {
                 try
                 {
-                    return XmlUntypedConverter.Untyped.ChangeType(
-                        strContentValue,
-                        returnType,
-                        (
-                            namespaceResolver == null
-                                ? this as IXmlNamespaceResolver
-                                : namespaceResolver
-                        )
-                    );
+                    return XmlUntypedConverter.Untyped
+                        .ChangeType(
+                            strContentValue,
+                            returnType,
+                            (
+                                namespaceResolver == null
+                                    ? this as IXmlNamespaceResolver
+                                    : namespaceResolver
+                            )
+                        );
                 }
                 catch (FormatException e)
                 {

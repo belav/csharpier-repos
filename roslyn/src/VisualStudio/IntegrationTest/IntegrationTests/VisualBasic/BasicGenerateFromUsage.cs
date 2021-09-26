@@ -51,14 +51,10 @@ End Module"
     End Sub
 End Module"
             );
-            VisualStudio.Editor.Verify.CodeAction(
-                "Generate class 'ClassInNewFile' in new file",
-                applyFix: true
-            );
-            VisualStudio.SolutionExplorer.OpenFile(
-                new ProjectUtils.Project(ProjectName),
-                "ClassInNewFile.vb"
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Generate class 'ClassInNewFile' in new file", applyFix: true);
+            VisualStudio.SolutionExplorer
+                .OpenFile(new ProjectUtils.Project(ProjectName), "ClassInNewFile.vb");
             VisualStudio.Editor.Verify.TextContains(
                 @"Friend Class ClassInNewFile
     Public Sub New()

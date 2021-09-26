@@ -185,10 +185,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         {
                             Assert.Throws<InvalidOperationException>(
                                 () =>
-                                    httpContext.Response.AppendTrailer(
-                                        "TrailerName",
-                                        "Trailer Value"
-                                    )
+                                    httpContext.Response
+                                        .AppendTrailer("TrailerName", "Trailer Value")
                             );
                             responseFinished.SetResult(0);
                         }
@@ -240,10 +238,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 Assert.Equal(HttpVersion.Version20, response.Version);
                 // Avoid HttpContent's automatic content-length calculation.
                 Assert.True(
-                    response.Content.Headers.TryGetValues(
-                        HeaderNames.ContentLength,
-                        out var contentLength
-                    ),
+                    response.Content.Headers
+                        .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                     HeaderNames.ContentLength
                 );
                 Assert.Equal(
@@ -286,10 +282,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 Assert.Equal(HttpVersion.Version20, response.Version);
                 // Avoid HttpContent's automatic content-length calculation.
                 Assert.True(
-                    response.Content.Headers.TryGetValues(
-                        HeaderNames.ContentLength,
-                        out var contentLength
-                    ),
+                    response.Content.Headers
+                        .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                     HeaderNames.ContentLength
                 );
                 Assert.Equal(
@@ -333,10 +327,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 Assert.Equal(HttpVersion.Version20, response.Version);
                 // Avoid HttpContent's automatic content-length calculation.
                 Assert.True(
-                    response.Content.Headers.TryGetValues(
-                        HeaderNames.ContentLength,
-                        out var contentLength
-                    ),
+                    response.Content.Headers
+                        .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                     HeaderNames.ContentLength
                 );
                 Assert.Equal(
@@ -434,10 +426,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     out var address,
                     httpContext =>
                     {
-                        httpContext.Response.AppendTrailer(
-                            "trailername",
-                            new StringValues(new[] { "TrailerValue0", "TrailerValue1" })
-                        );
+                        httpContext.Response
+                            .AppendTrailer(
+                                "trailername",
+                                new StringValues(new[] { "TrailerValue0", "TrailerValue1" })
+                            );
                         return Task.FromResult(0);
                     }
                 )
@@ -479,10 +472,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     out var address,
                     httpContext =>
                     {
-                        httpContext.Response.AppendTrailer(
-                            "ThisIsALongerHeaderNameThatStillWorksForReals",
-                            new StringValues(values)
-                        );
+                        httpContext.Response
+                            .AppendTrailer(
+                                "ThisIsALongerHeaderNameThatStillWorksForReals",
+                                new StringValues(values)
+                            );
                         return Task.FromResult(0);
                     }
                 )
@@ -496,9 +490,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 // that read the header frames directly. We at least verify that really large values work.
                 Assert.Equal(
                     values,
-                    response.TrailingHeaders.GetValues(
-                        "ThisIsALongerHeaderNameThatStillWorksForReals"
-                    )
+                    response.TrailingHeaders
+                        .GetValues("ThisIsALongerHeaderNameThatStillWorksForReals")
                 );
             }
         }

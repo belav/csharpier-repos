@@ -77,14 +77,13 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             if (
                 odataPath.PathTemplate == "~/entityset"
-                && routeContext.HttpContext.Request.Method.Equals(
-                    "get",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && routeContext.HttpContext.Request.Method
+                    .Equals("get", StringComparison.OrdinalIgnoreCase)
                 && ((EntitySetSegment)odataPath.Segments[0]).EntitySet.Name == "Order Details"
             )
             {
-                return routeContext.HttpContext.RequestServices.GetRequiredService<IActionDescriptorCollectionProvider>()
+                return routeContext.HttpContext.RequestServices
+                    .GetRequiredService<IActionDescriptorCollectionProvider>()
                     .ActionDescriptors.Items.OfType<ControllerActionDescriptor>()
                     .Where(c => c.ControllerName == "OrderDetails" && c.ActionName == "Get");
             }

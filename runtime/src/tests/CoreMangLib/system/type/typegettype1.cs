@@ -67,9 +67,8 @@ public class TypeGetType1
     public bool PosTest1()
     {
         bool retVal = true;
-        TestLibrary.TestFramework.BeginScenario(
-            "Verify GetType method return correct system instance type..."
-        );
+        TestLibrary.TestFramework
+            .BeginScenario("Verify GetType method return correct system instance type...");
 
         try
         {
@@ -94,9 +93,8 @@ public class TypeGetType1
     public bool PosTest2()
     {
         bool retVal = true;
-        TestLibrary.TestFramework.BeginScenario(
-            "Verify GetType method return correct customer instance type..."
-        );
+        TestLibrary.TestFramework
+            .BeginScenario("Verify GetType method return correct customer instance type...");
 
         try
         {
@@ -104,7 +102,8 @@ public class TypeGetType1
                 TestLibrary.Generator.GetInt32(-55),
                 TestLibrary.Generator.GetInt32(-55),
                 TestLibrary.Generator.GetInt32(-55)
-            ).GetType();
+            )
+                .GetType();
 
             if (instanceType.FullName != "MyTypeClass")
             {

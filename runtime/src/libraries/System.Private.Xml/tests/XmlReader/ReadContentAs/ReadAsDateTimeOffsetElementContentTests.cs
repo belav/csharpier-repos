@@ -870,7 +870,8 @@ namespace System.Xml.Tests
                     0,
                     0,
                     TimeZoneInfo.Local.GetUtcOffset(new DateTime(2005, 1, 1))
-                ).ToString(),
+                )
+                    .ToString(),
                 reader.ReadElementContentAs(typeof(DateTimeOffset), null).ToString()
             );
         }
@@ -891,7 +892,8 @@ namespace System.Xml.Tests
                     0,
                     0,
                     TimeZoneInfo.Local.GetUtcOffset(new DateTime(9999, 1, 1))
-                ).ToString(),
+                )
+                    .ToString(),
                 reader.ReadElementContentAs(typeof(DateTimeOffset), null).ToString()
             );
         }
@@ -964,7 +966,8 @@ namespace System.Xml.Tests
                     0,
                     0,
                     TimeZoneInfo.Local.GetUtcOffset(new DateTime(2002, 12, 30))
-                ).ToString(),
+                )
+                    .ToString(),
                 reader.ReadElementContentAs(typeof(DateTimeOffset), null).ToString()
             );
         }
@@ -1129,7 +1132,8 @@ namespace System.Xml.Tests
                     0,
                     0,
                     TimeZoneInfo.Local.GetUtcOffset(new DateTime(9999, 1, 1))
-                ).ToString(),
+                )
+                    .ToString(),
                 reader.ReadElementContentAs(typeof(DateTimeOffset), null, "Root", "").ToString()
             );
         }
@@ -1176,7 +1180,8 @@ namespace System.Xml.Tests
                     0,
                     0,
                     TimeZoneInfo.Local.GetUtcOffset(new DateTime(2005, 1, 1))
-                ).ToString(),
+                )
+                    .ToString(),
                 reader.ReadElementContentAs(typeof(DateTimeOffset), null, "Root", "").ToString()
             );
         }
@@ -1197,7 +1202,8 @@ namespace System.Xml.Tests
                     0,
                     0,
                     TimeZoneInfo.Local.GetUtcOffset(new DateTime(2002, 12, 30))
-                ).ToString(),
+                )
+                    .ToString(),
                 reader.ReadElementContentAs(typeof(DateTimeOffset), null, "Root", "").ToString()
             );
         }

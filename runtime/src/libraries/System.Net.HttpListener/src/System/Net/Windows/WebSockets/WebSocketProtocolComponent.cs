@@ -77,11 +77,8 @@ namespace System.Net.WebSockets
 #pragma warning disable CA1810 // explicit static cctor
         static WebSocketProtocolComponent()
         {
-            s_webSocketDllHandle = Interop.Kernel32.LoadLibraryEx(
-                Interop.Libraries.WebSocket,
-                IntPtr.Zero,
-                0
-            );
+            s_webSocketDllHandle = Interop.Kernel32
+                .LoadLibraryEx(Interop.Libraries.WebSocket, IntPtr.Zero, 0);
 
             if (s_webSocketDllHandle == IntPtr.Zero)
                 return;
@@ -157,11 +154,8 @@ namespace System.Net.WebSockets
             SafeWebSocketHandle? webSocketHandle = null;
             try
             {
-                int errorCode = Interop.WebSocket.WebSocketCreateClientHandle(
-                    null!,
-                    0,
-                    out webSocketHandle
-                );
+                int errorCode = Interop.WebSocket
+                    .WebSocketCreateClientHandle(null!, 0, out webSocketHandle);
                 ThrowOnError(errorCode);
 
                 if (webSocketHandle == null || webSocketHandle.IsInvalid)
@@ -172,17 +166,18 @@ namespace System.Net.WebSockets
                 IntPtr additionalHeadersPtr;
                 uint additionalHeaderCount;
 
-                errorCode = Interop.WebSocket.WebSocketBeginClientHandshake(
-                    webSocketHandle!,
-                    IntPtr.Zero,
-                    0,
-                    IntPtr.Zero,
-                    0,
-                    s_initialClientRequestHeaders,
-                    (uint)s_initialClientRequestHeaders.Length,
-                    out additionalHeadersPtr,
-                    out additionalHeaderCount
-                );
+                errorCode = Interop.WebSocket
+                    .WebSocketBeginClientHandshake(
+                        webSocketHandle!,
+                        IntPtr.Zero,
+                        0,
+                        IntPtr.Zero,
+                        0,
+                        s_initialClientRequestHeaders,
+                        (uint)s_initialClientRequestHeaders.Length,
+                        out additionalHeadersPtr,
+                        out additionalHeaderCount
+                    );
                 ThrowOnError(errorCode);
 
                 Interop.WebSocket.HttpHeader[] additionalHeaders = MarshalHttpHeaders(
@@ -194,11 +189,12 @@ namespace System.Net.WebSockets
                 foreach (Interop.WebSocket.HttpHeader header in additionalHeaders)
                 {
                     if (
-                        string.Equals(
-                            header.Name,
-                            HttpKnownHeaderNames.SecWebSocketVersion,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                header.Name,
+                                HttpKnownHeaderNames.SecWebSocketVersion,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         version = header.Value;
@@ -237,11 +233,8 @@ namespace System.Net.WebSockets
                 HttpWebSocket.ThrowPlatformNotSupportedException_WSPC();
             }
 
-            int errorCode = Interop.WebSocket.WebSocketCreateServerHandle(
-                properties!,
-                (uint)propertyCount,
-                out webSocketHandle
-            );
+            int errorCode = Interop.WebSocket
+                .WebSocketCreateServerHandle(properties!, (uint)propertyCount, out webSocketHandle);
             ThrowOnError(errorCode);
 
             if (webSocketHandle == null || webSocketHandle.IsInvalid)
@@ -261,16 +254,17 @@ namespace System.Net.WebSockets
             // just fake an HTTP handshake for the WSPC calling
             // WebSocketBeginServerHandshake and WebSocketEndServerHandshake
             // with statically defined dummy headers.
-            errorCode = Interop.WebSocket.WebSocketBeginServerHandshake(
-                webSocketHandle!,
-                IntPtr.Zero,
-                IntPtr.Zero,
-                0,
-                s_ServerFakeRequestHeaders!,
-                (uint)s_ServerFakeRequestHeaders!.Length,
-                out responseHeadersPtr,
-                out responseHeaderCount
-            );
+            errorCode = Interop.WebSocket
+                .WebSocketBeginServerHandshake(
+                    webSocketHandle!,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    0,
+                    s_ServerFakeRequestHeaders!,
+                    (uint)s_ServerFakeRequestHeaders!.Length,
+                    out responseHeadersPtr,
+                    out responseHeaderCount
+                );
 
             ThrowOnError(errorCode);
 
@@ -320,12 +314,13 @@ namespace System.Net.WebSockets
             int errorCode;
             try
             {
-                errorCode = Interop.WebSocket.WebSocketSend_Raw(
-                    webSocket.SessionHandle,
-                    bufferType,
-                    ref buffer,
-                    IntPtr.Zero
-                );
+                errorCode = Interop.WebSocket
+                    .WebSocketSend_Raw(
+                        webSocket.SessionHandle,
+                        bufferType,
+                        ref buffer,
+                        IntPtr.Zero
+                    );
             }
             catch (ObjectDisposedException innerException)
             {
@@ -351,12 +346,13 @@ namespace System.Net.WebSockets
             int errorCode;
             try
             {
-                errorCode = Interop.WebSocket.WebSocketSendWithoutBody_Raw(
-                    webSocket.SessionHandle,
-                    bufferType,
-                    IntPtr.Zero,
-                    IntPtr.Zero
-                );
+                errorCode = Interop.WebSocket
+                    .WebSocketSendWithoutBody_Raw(
+                        webSocket.SessionHandle,
+                        bufferType,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    );
             }
             catch (ObjectDisposedException innerException)
             {
@@ -379,11 +375,8 @@ namespace System.Net.WebSockets
             int errorCode;
             try
             {
-                errorCode = Interop.WebSocket.WebSocketReceive(
-                    webSocket.SessionHandle,
-                    IntPtr.Zero,
-                    IntPtr.Zero
-                );
+                errorCode = Interop.WebSocket
+                    .WebSocketReceive(webSocket.SessionHandle, IntPtr.Zero, IntPtr.Zero);
             }
             catch (ObjectDisposedException innerException)
             {
@@ -425,16 +418,17 @@ namespace System.Net.WebSockets
             int errorCode;
             try
             {
-                errorCode = Interop.WebSocket.WebSocketGetAction(
-                    webSocket.SessionHandle,
-                    actionQueue,
-                    dataBuffers!,
-                    ref dataBufferCount,
-                    out action,
-                    out bufferType,
-                    out dummy,
-                    out actionContext
-                );
+                errorCode = Interop.WebSocket
+                    .WebSocketGetAction(
+                        webSocket.SessionHandle,
+                        actionQueue,
+                        dataBuffers!,
+                        ref dataBufferCount,
+                        out action,
+                        out bufferType,
+                        out dummy,
+                        out actionContext
+                    );
             }
             catch (ObjectDisposedException innerException)
             {
@@ -472,11 +466,12 @@ namespace System.Net.WebSockets
 
             try
             {
-                Interop.WebSocket.WebSocketCompleteAction(
-                    webSocket.SessionHandle,
-                    actionContext,
-                    (uint)bytesTransferred
-                );
+                Interop.WebSocket
+                    .WebSocketCompleteAction(
+                        webSocket.SessionHandle,
+                        actionContext,
+                        (uint)bytesTransferred
+                    );
             }
             catch (ObjectDisposedException) { }
         }
@@ -497,16 +492,17 @@ namespace System.Net.WebSockets
             {
                 Interop.WebSocket.Buffer[] dataBuffers = new Interop.WebSocket.Buffer[1];
                 uint dataBufferCount = 1;
-                int errorCode = Interop.WebSocket.WebSocketGetAction(
-                    webSocketHandle,
-                    actionQueue,
-                    dataBuffers,
-                    ref dataBufferCount,
-                    out action,
-                    out bufferType,
-                    out dummy,
-                    out actionContext
-                );
+                int errorCode = Interop.WebSocket
+                    .WebSocketGetAction(
+                        webSocketHandle,
+                        actionQueue,
+                        dataBuffers,
+                        ref dataBufferCount,
+                        out action,
+                        out bufferType,
+                        out dummy,
+                        out actionContext
+                    );
 
                 if (!Succeeded(errorCode))
                 {

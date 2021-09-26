@@ -203,17 +203,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             // For spacing between parenthesis and expression
             if (
                 (
-                    previousToken.Parent.IsKind(
-                        SyntaxKind.ParenthesizedExpression,
-                        SyntaxKind.ParenthesizedPattern
-                    )
+                    previousToken.Parent
+                        .IsKind(SyntaxKind.ParenthesizedExpression, SyntaxKind.ParenthesizedPattern)
                     && previousKind == SyntaxKind.OpenParenToken
                 )
                 || (
-                    currentToken.Parent.IsKind(
-                        SyntaxKind.ParenthesizedExpression,
-                        SyntaxKind.ParenthesizedPattern
-                    )
+                    currentToken.Parent
+                        .IsKind(SyntaxKind.ParenthesizedExpression, SyntaxKind.ParenthesizedPattern)
                     && currentKind == SyntaxKind.CloseParenToken
                 )
             )
@@ -426,16 +422,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 || previousToken.Parent is BinaryExpressionSyntax
                 || currentToken.Parent is AssignmentExpressionSyntax
                 || previousToken.Parent is AssignmentExpressionSyntax
-                || currentToken.Parent.IsKind(
-                    SyntaxKind.AndPattern,
-                    SyntaxKind.OrPattern,
-                    SyntaxKind.RelationalPattern
-                )
-                || previousToken.Parent.IsKind(
-                    SyntaxKind.AndPattern,
-                    SyntaxKind.OrPattern,
-                    SyntaxKind.RelationalPattern
-                )
+                || currentToken.Parent
+                    .IsKind(
+                        SyntaxKind.AndPattern,
+                        SyntaxKind.OrPattern,
+                        SyntaxKind.RelationalPattern
+                    )
+                || previousToken.Parent
+                    .IsKind(
+                        SyntaxKind.AndPattern,
+                        SyntaxKind.OrPattern,
+                        SyntaxKind.RelationalPattern
+                    )
             )
             {
                 switch (_options.SpacingAroundBinaryOperator)
@@ -473,10 +471,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     case BinaryOperatorSpacingOptions.Ignore:
                         return CreateAdjustSpacesOperation(0, AdjustSpacesOption.PreserveSpaces);
                     default:
-                        System.Diagnostics.Debug.Assert(
-                            false,
-                            "Invalid BinaryOperatorSpacingOptions"
-                        );
+                        System.Diagnostics.Debug
+                            .Assert(false, "Invalid BinaryOperatorSpacingOptions");
                         break;
                 }
             }
@@ -810,12 +806,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         }
 
         private static bool HasFormattableBracketParent(SyntaxToken token) =>
-            token.Parent.IsKind(
-                SyntaxKind.ArrayRankSpecifier,
-                SyntaxKind.BracketedArgumentList,
-                SyntaxKind.BracketedParameterList,
-                SyntaxKind.ImplicitArrayCreationExpression
-            );
+            token.Parent
+                .IsKind(
+                    SyntaxKind.ArrayRankSpecifier,
+                    SyntaxKind.BracketedArgumentList,
+                    SyntaxKind.BracketedParameterList,
+                    SyntaxKind.ImplicitArrayCreationExpression
+                );
 
         private static bool IsFunctionLikeKeywordExpressionKind(SyntaxKind syntaxKind) =>
             (

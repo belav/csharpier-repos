@@ -366,11 +366,8 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property.DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
 
@@ -398,11 +395,8 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property.DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
@@ -690,11 +684,8 @@ namespace Microsoft.EntityFrameworkCore
             property.IsNullable = false;
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property.DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
 
@@ -717,11 +708,8 @@ namespace Microsoft.EntityFrameworkCore
             property.IsNullable = false;
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property.DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
@@ -1003,11 +991,8 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(byte[]));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property.DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
             Assert.False(typeMapping.IsFixedLength);
@@ -1030,11 +1015,8 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(byte[]));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property.DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
@@ -1201,7 +1183,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_for_unrecognized_property_types()
         {
-            var property = ((IMutableModel)new Model()).AddEntityType("Entity1")
+            var property = ((IMutableModel)new Model())
+                .AddEntityType("Entity1")
                 .AddProperty("Strange", typeof(object));
             var ex = Assert.Throws<InvalidOperationException>(
                 () => CreateTypeMapper().GetMapping((IProperty)property)

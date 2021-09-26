@@ -51,11 +51,8 @@ namespace TypeSystemTests
                 Assembly.GetExecutingAssembly().Location
             );
             string filePath = Path.Combine(bindingDirectory, simpleName + ".dll");
-            ModuleDesc module = Internal.TypeSystem.Ecma.EcmaModule.Create(
-                this,
-                new PEReader(File.OpenRead(filePath)),
-                containingAssembly: null
-            );
+            ModuleDesc module = Internal.TypeSystem.Ecma.EcmaModule
+                .Create(this, new PEReader(File.OpenRead(filePath)), containingAssembly: null);
             _modules.Add(simpleName, module);
             return module;
         }

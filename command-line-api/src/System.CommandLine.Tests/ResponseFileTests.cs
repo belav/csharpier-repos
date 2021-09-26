@@ -54,9 +54,8 @@ namespace System.CommandLine.Tests
         {
             var responseFile = ResponseFile("--flag", "--flag2", "123");
 
-            var result = new RootCommand { new Option("--flag"), new Option<int>("--flag2") }.Parse(
-                $"@{responseFile}"
-            );
+            var result = new RootCommand { new Option("--flag"), new Option<int>("--flag2") }
+                .Parse($"@{responseFile}");
 
             result.HasOption("--flag").Should().BeTrue();
             result.ValueForOption("--flag2").Should().Be(123);
@@ -70,7 +69,8 @@ namespace System.CommandLine.Tests
 
             var result = new RootCommand { new Argument<string[]>() }.Parse($"@{responseFile}");
 
-            result.CommandResult.Tokens.Select(t => t.Value)
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
                 .Should()
                 .BeEquivalentSequenceTo("one", "two", "three");
         }
@@ -80,12 +80,11 @@ namespace System.CommandLine.Tests
         {
             var responseFile = ResponseFile("one", "two", "three");
 
-            var result = new RootCommand
-            {
-                new Command("subcommand") { new Argument<string[]>() }
-            }.Parse($"subcommand @{responseFile}");
+            var result = new RootCommand { new Command("subcommand") { new Argument<string[]>() } }
+                .Parse($"subcommand @{responseFile}");
 
-            result.CommandResult.Tokens.Select(t => t.Value)
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
                 .Should()
                 .BeEquivalentSequenceTo("one", "two", "three");
         }
@@ -95,12 +94,11 @@ namespace System.CommandLine.Tests
         {
             var responseFile = ResponseFile("subcommand");
 
-            var result = new RootCommand
-            {
-                new Command("subcommand") { new Argument<string[]>() }
-            }.Parse($"@{responseFile} one two three");
+            var result = new RootCommand { new Command("subcommand") { new Argument<string[]>() } }
+                .Parse($"@{responseFile} one two three");
 
-            result.CommandResult.Tokens.Select(t => t.Value)
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
                 .Should()
                 .BeEquivalentSequenceTo("one", "two", "three");
         }
@@ -110,12 +108,11 @@ namespace System.CommandLine.Tests
         {
             var responseFile = ResponseFile("one", "two", "three");
 
-            var result = new RootCommand
-            {
-                new Command("subcommand") { new Argument<string[]>() }
-            }.Parse($"subcommand @{responseFile}");
+            var result = new RootCommand { new Command("subcommand") { new Argument<string[]>() } }
+                .Parse($"subcommand @{responseFile}");
 
-            result.CommandResult.Tokens.Select(t => t.Value)
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
                 .Should()
                 .BeEquivalentSequenceTo("one", "two", "three");
         }
@@ -125,7 +122,8 @@ namespace System.CommandLine.Tests
         {
             var responseFile = ResponseFile("--flag", "", "123");
 
-            var result = new CommandLineBuilder().AddOption(new Option<int>("--flag"))
+            var result = new CommandLineBuilder()
+                .AddOption(new Option<int>("--flag"))
                 .Build()
                 .Parse($"@{responseFile}");
 
@@ -145,9 +143,8 @@ namespace System.CommandLine.Tests
                 "--flag2"
             );
 
-            var result = new RootCommand { new Option("--flag"), new Option("--flag2") }.Parse(
-                $"@{responseFile}"
-            );
+            var result = new RootCommand { new Option("--flag"), new Option("--flag2") }
+                .Parse($"@{responseFile}");
 
             result.HasOption("--flag").Should().BeTrue();
             result.HasOption("--flag2").Should().BeTrue();
@@ -157,9 +154,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_response_file_does_not_exist_then_error_is_returned()
         {
-            var result = new RootCommand { new Option("--flag"), new Option("--flag2") }.Parse(
-                "@nonexistent.rsp"
-            );
+            var result = new RootCommand { new Option("--flag"), new Option("--flag2") }
+                .Parse("@nonexistent.rsp");
 
             result.HasOption("--flag").Should().BeFalse();
             result.HasOption("--flag2").Should().BeFalse();
@@ -185,14 +181,14 @@ namespace System.CommandLine.Tests
 
             using (File.Open(nonexistent, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
             {
-                var result = new RootCommand { new Option("--flag"), new Option("--flag2") }.Parse(
-                    $"@{nonexistent}"
-                );
+                var result = new RootCommand { new Option("--flag"), new Option("--flag2") }
+                    .Parse($"@{nonexistent}");
 
                 result.HasOption("--flag").Should().BeFalse();
                 result.HasOption("--flag2").Should().BeFalse();
                 result.Errors.Should().HaveCount(1);
-                result.Errors.Single()
+                result.Errors
+                    .Single()
                     .Message.Should()
                     .StartWith($"Error reading response file '{nonexistent}'");
             }
@@ -213,9 +209,8 @@ namespace System.CommandLine.Tests
                 new Option<string>("--flag"),
                 new Option<int>("--flag2")
             };
-            var parser = new CommandLineBuilder(rootCommand).ParseResponseFileAs(
-                    ResponseFileHandling.ParseArgsAsSpaceSeparated
-                )
+            var parser = new CommandLineBuilder(rootCommand)
+                .ParseResponseFileAs(ResponseFileHandling.ParseArgsAsSpaceSeparated)
                 .Build();
 
             var result = parser.Parse($"@{responseFile}");
@@ -236,7 +231,8 @@ namespace System.CommandLine.Tests
 
             var result = parser.Parse("@file.rsp");
 
-            result.Tokens.Should()
+            result.Tokens
+                .Should()
                 .Contain(t => t.Value == "@file.rsp" && t.Type == TokenType.Argument);
             result.Errors.Should().HaveCount(0);
         }

@@ -27,7 +27,8 @@ namespace XmlFormattersWebSite.Controllers
             {
                 new Person() { Id = 10, Name = "Mike" },
                 new Person() { Id = 11, Name = "Jimmy" }
-            }.AsQueryable();
+            }
+                .AsQueryable();
         }
 
         public IQueryable<Person> WrappedTypes_Empty()

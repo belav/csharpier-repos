@@ -280,11 +280,8 @@ namespace Newtonsoft.Json.Linq
                 if (!(token is JValue value))
                 {
                     throw new InvalidCastException(
-                        "Cannot cast {0} to {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            token.GetType(),
-                            typeof(T)
-                        )
+                        "Cannot cast {0} to {1}."
+                            .FormatWith(CultureInfo.InvariantCulture, token.GetType(), typeof(T))
                     );
                 }
 
@@ -307,11 +304,8 @@ namespace Newtonsoft.Json.Linq
                     targetType = Nullable.GetUnderlyingType(targetType);
                 }
 
-                return (U)System.Convert.ChangeType(
-                    value.Value,
-                    targetType,
-                    CultureInfo.InvariantCulture
-                );
+                return (U)System.Convert
+                    .ChangeType(value.Value, targetType, CultureInfo.InvariantCulture);
             }
         }
 

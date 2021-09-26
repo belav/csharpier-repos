@@ -232,10 +232,8 @@ namespace System
             // remoting of exceptions cross app-domain boundaries, and is thus concatenated into Exception.StackTrace
             // when it's retrieved.
             var sb = new StringBuilder(256);
-            new StackTrace(fNeedFileInfo: true).ToString(
-                System.Diagnostics.StackTrace.TraceFormat.TrailingNewLine,
-                sb
-            );
+            new StackTrace(fNeedFileInfo: true)
+                .ToString(System.Diagnostics.StackTrace.TraceFormat.TrailingNewLine, sb);
             sb.AppendLine(SR.Exception_EndStackTraceFromPreviousThrow);
             _remoteStackTraceString = sb.ToString();
         }

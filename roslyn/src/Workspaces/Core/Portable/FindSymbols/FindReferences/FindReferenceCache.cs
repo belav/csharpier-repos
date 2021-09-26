@@ -99,17 +99,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 );
             }
 
-            return entry.IdentifierCache.GetOrAdd(
-                normalized,
-                key =>
-                    GetIdentifierOrGlobalNamespaceTokensWithText(
-                        syntaxFacts,
-                        root,
-                        sourceText,
-                        key,
-                        cancellationToken
-                    )
-            );
+            return entry.IdentifierCache
+                .GetOrAdd(
+                    normalized,
+                    key =>
+                        GetIdentifierOrGlobalNamespaceTokensWithText(
+                            syntaxFacts,
+                            root,
+                            sourceText,
+                            key,
+                            cancellationToken
+                        )
+                );
         }
 
         [PerformanceSensitive(

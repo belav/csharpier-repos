@@ -595,9 +595,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
 
             var context = new BindingMetadataProviderContext(
                 ModelMetadataIdentity.ForProperty(
-                    typeof(InheritedBindNeverOnClass).GetProperty(
-                        nameof(InheritedBindNeverOnClass.Property)
-                    ),
+                    typeof(InheritedBindNeverOnClass)
+                        .GetProperty(nameof(InheritedBindNeverOnClass.Property)),
                     typeof(int),
                     typeof(InheritedBindNeverOnClass)
                 ),
@@ -646,9 +645,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             // Arrange
             var context = new BindingMetadataProviderContext(
                 ModelMetadataIdentity.ForProperty(
-                    typeof(BindRequiredOverridesInheritedBindNever).GetProperty(
-                        nameof(BindRequiredOverridesInheritedBindNever.Property)
-                    ),
+                    typeof(BindRequiredOverridesInheritedBindNever)
+                        .GetProperty(nameof(BindRequiredOverridesInheritedBindNever.Property)),
                     typeof(int),
                     typeof(BindRequiredOverridesInheritedBindNever)
                 ),
@@ -956,9 +954,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         {
             public void Method(object param1) { }
 
-            public static ParameterInfo SampleParameterInfo = typeof(ParameterInfos).GetMethod(
-                    nameof(ParameterInfos.Method)
-                )
+            public static ParameterInfo SampleParameterInfo = typeof(ParameterInfos)
+                .GetMethod(nameof(ParameterInfos.Method))
                 .GetParameters()[0];
         }
 

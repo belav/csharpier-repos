@@ -78,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore
                     .GetRelationalService<IHistoryRepository>()
                     .GetAppliedMigrationsAsync(cancellationToken)
                     .ConfigureAwait(false)
-            ).Select(hr => hr.MigrationId);
+            )
+                .Select(hr => hr.MigrationId);
 
         /// <summary>
         ///     Gets all migrations that are defined in the assembly but haven't been applied to the target database.
@@ -249,15 +250,16 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var rawSqlCommand = facadeDependencies.RawSqlCommandBuilder.Build(sql, parameters);
 
-                return rawSqlCommand.RelationalCommand.ExecuteNonQuery(
-                    new RelationalCommandParameterObject(
-                        facadeDependencies.RelationalConnection,
-                        rawSqlCommand.ParameterValues,
-                        null,
-                        ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Context,
-                        logger
-                    )
-                );
+                return rawSqlCommand.RelationalCommand
+                    .ExecuteNonQuery(
+                        new RelationalCommandParameterObject(
+                            facadeDependencies.RelationalConnection,
+                            rawSqlCommand.ParameterValues,
+                            null,
+                            ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Context,
+                            logger
+                        )
+                    );
             }
 
             finally
@@ -430,7 +432,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var rawSqlCommand = facadeDependencies.RawSqlCommandBuilder.Build(sql, parameters);
 
-                return await rawSqlCommand.RelationalCommand.ExecuteNonQueryAsync(
+                return await rawSqlCommand.RelationalCommand
+                    .ExecuteNonQueryAsync(
                         new RelationalCommandParameterObject(
                             facadeDependencies.RelationalConnection,
                             rawSqlCommand.ParameterValues,
@@ -562,21 +565,19 @@ namespace Microsoft.EntityFrameworkCore
         public static IDbContextTransaction BeginTransaction(
             this DatabaseFacade databaseFacade,
             IsolationLevel isolationLevel
-        ) =>
-            databaseFacade.CreateExecutionStrategy()
-                .Execute(
-                    databaseFacade,
-                    database =>
-                    {
-                        var transactionManager = database.GetTransactionManager();
+        ) => databaseFacade.CreateExecutionStrategy().Execute(
+                databaseFacade,
+                database =>
+                {
+                    var transactionManager = database.GetTransactionManager();
 
-                        return
-                            transactionManager
-                                is IRelationalTransactionManager relationalTransactionManager
-                          ? relationalTransactionManager.BeginTransaction(isolationLevel)
-                          : transactionManager.BeginTransaction();
-                    }
-                );
+                    return
+                        transactionManager
+                            is IRelationalTransactionManager relationalTransactionManager
+                      ? relationalTransactionManager.BeginTransaction(isolationLevel)
+                      : transactionManager.BeginTransaction();
+                }
+            );
 
         /// <summary>
         ///     Asynchronously starts a new transaction with a given <see cref="IsolationLevel" />.
@@ -593,22 +594,20 @@ namespace Microsoft.EntityFrameworkCore
             this DatabaseFacade databaseFacade,
             IsolationLevel isolationLevel,
             CancellationToken cancellationToken = default
-        ) =>
-            databaseFacade.CreateExecutionStrategy()
-                .ExecuteAsync(
-                    databaseFacade,
-                    (database, ct) =>
-                    {
-                        var transactionManager = database.GetTransactionManager();
+        ) => databaseFacade.CreateExecutionStrategy().ExecuteAsync(
+                databaseFacade,
+                (database, ct) =>
+                {
+                    var transactionManager = database.GetTransactionManager();
 
-                        return
-                            transactionManager
-                                is IRelationalTransactionManager relationalTransactionManager
-                          ? relationalTransactionManager.BeginTransactionAsync(isolationLevel, ct)
-                          : transactionManager.BeginTransactionAsync(ct);
-                    },
-                    cancellationToken
-                );
+                    return
+                        transactionManager
+                            is IRelationalTransactionManager relationalTransactionManager
+                      ? relationalTransactionManager.BeginTransactionAsync(isolationLevel, ct)
+                      : transactionManager.BeginTransactionAsync(ct);
+                },
+                cancellationToken
+            );
 
         /// <summary>
         ///     Sets the <see cref="DbTransaction" /> to be used by database operations on the <see cref="DbContext" />.
@@ -781,7 +780,8 @@ namespace Microsoft.EntityFrameworkCore
                     databaseFacade,
                     nameof(databaseFacade)
                 )
-            ).Context.GetService<IDbContextOptions>()
+            ).Context
+                .GetService<IDbContextOptions>()
                 .Extensions.OfType<RelationalOptionsExtension>()
                 .Any();
 

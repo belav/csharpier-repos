@@ -33,19 +33,18 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             var services = new ServiceCollection().AddLogging();
 
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                        o.AddScheme<TestHandler>("auth1", "auth1");
-                    }
-                )
-                .AddOpenIdConnect(
-                    o =>
-                    {
-                        ConfigureDefaults(o);
-                        o.ForwardDefault = "auth1";
-                    }
-                );
+                o =>
+                {
+                    o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    o.AddScheme<TestHandler>("auth1", "auth1");
+                }
+            ).AddOpenIdConnect(
+                o =>
+                {
+                    ConfigureDefaults(o);
+                    o.ForwardDefault = "auth1";
+                }
+            );
 
             var forwardDefault = new TestHandler();
             services.AddSingleton(forwardDefault);
@@ -83,21 +82,20 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             var services = new ServiceCollection().AddLogging();
 
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                        o.AddScheme<TestHandler2>("auth1", "auth1");
-                        o.AddScheme<TestHandler>("specific", "specific");
-                    }
-                )
-                .AddOpenIdConnect(
-                    o =>
-                    {
-                        ConfigureDefaults(o);
-                        o.ForwardDefault = "auth1";
-                        o.ForwardSignOut = "specific";
-                    }
-                );
+                o =>
+                {
+                    o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    o.AddScheme<TestHandler2>("auth1", "auth1");
+                    o.AddScheme<TestHandler>("specific", "specific");
+                }
+            ).AddOpenIdConnect(
+                o =>
+                {
+                    ConfigureDefaults(o);
+                    o.ForwardDefault = "auth1";
+                    o.ForwardSignOut = "specific";
+                }
+            );
 
             var specific = new TestHandler();
             services.AddSingleton(specific);
@@ -119,21 +117,20 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             var services = new ServiceCollection().AddLogging();
 
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                        o.AddScheme<TestHandler2>("auth1", "auth1");
-                        o.AddScheme<TestHandler>("specific", "specific");
-                    }
-                )
-                .AddOpenIdConnect(
-                    o =>
-                    {
-                        ConfigureDefaults(o);
-                        o.ForwardDefault = "auth1";
-                        o.ForwardSignOut = "specific";
-                    }
-                );
+                o =>
+                {
+                    o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    o.AddScheme<TestHandler2>("auth1", "auth1");
+                    o.AddScheme<TestHandler>("specific", "specific");
+                }
+            ).AddOpenIdConnect(
+                o =>
+                {
+                    ConfigureDefaults(o);
+                    o.ForwardDefault = "auth1";
+                    o.ForwardSignOut = "specific";
+                }
+            );
 
             var specific = new TestHandler();
             services.AddSingleton(specific);
@@ -164,21 +161,20 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             var services = new ServiceCollection().AddLogging();
 
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                        o.AddScheme<TestHandler2>("auth1", "auth1");
-                        o.AddScheme<TestHandler>("specific", "specific");
-                    }
-                )
-                .AddOpenIdConnect(
-                    o =>
-                    {
-                        ConfigureDefaults(o);
-                        o.ForwardDefault = "auth1";
-                        o.ForwardForbid = "specific";
-                    }
-                );
+                o =>
+                {
+                    o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    o.AddScheme<TestHandler2>("auth1", "auth1");
+                    o.AddScheme<TestHandler>("specific", "specific");
+                }
+            ).AddOpenIdConnect(
+                o =>
+                {
+                    ConfigureDefaults(o);
+                    o.ForwardDefault = "auth1";
+                    o.ForwardForbid = "specific";
+                }
+            );
 
             var specific = new TestHandler();
             services.AddSingleton(specific);
@@ -209,21 +205,20 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             var services = new ServiceCollection().AddLogging();
 
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                        o.AddScheme<TestHandler2>("auth1", "auth1");
-                        o.AddScheme<TestHandler>("specific", "specific");
-                    }
-                )
-                .AddOpenIdConnect(
-                    o =>
-                    {
-                        ConfigureDefaults(o);
-                        o.ForwardDefault = "auth1";
-                        o.ForwardAuthenticate = "specific";
-                    }
-                );
+                o =>
+                {
+                    o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    o.AddScheme<TestHandler2>("auth1", "auth1");
+                    o.AddScheme<TestHandler>("specific", "specific");
+                }
+            ).AddOpenIdConnect(
+                o =>
+                {
+                    ConfigureDefaults(o);
+                    o.ForwardDefault = "auth1";
+                    o.ForwardAuthenticate = "specific";
+                }
+            );
 
             var specific = new TestHandler();
             services.AddSingleton(specific);
@@ -253,21 +248,20 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         {
             var services = new ServiceCollection().AddLogging();
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                        o.AddScheme<TestHandler>("specific", "specific");
-                        o.AddScheme<TestHandler2>("auth1", "auth1");
-                    }
-                )
-                .AddOpenIdConnect(
-                    o =>
-                    {
-                        ConfigureDefaults(o);
-                        o.ForwardDefault = "auth1";
-                        o.ForwardChallenge = "specific";
-                    }
-                );
+                o =>
+                {
+                    o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    o.AddScheme<TestHandler>("specific", "specific");
+                    o.AddScheme<TestHandler2>("auth1", "auth1");
+                }
+            ).AddOpenIdConnect(
+                o =>
+                {
+                    ConfigureDefaults(o);
+                    o.ForwardDefault = "auth1";
+                    o.ForwardChallenge = "specific";
+                }
+            );
 
             var specific = new TestHandler();
             services.AddSingleton(specific);
@@ -297,22 +291,21 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         {
             var services = new ServiceCollection().AddLogging();
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                        o.AddScheme<TestHandler2>("auth1", "auth1");
-                        o.AddScheme<TestHandler3>("selector", "selector");
-                        o.AddScheme<TestHandler>("specific", "specific");
-                    }
-                )
-                .AddOpenIdConnect(
-                    o =>
-                    {
-                        ConfigureDefaults(o);
-                        o.ForwardDefault = "auth1";
-                        o.ForwardDefaultSelector = _ => "selector";
-                    }
-                );
+                o =>
+                {
+                    o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    o.AddScheme<TestHandler2>("auth1", "auth1");
+                    o.AddScheme<TestHandler3>("selector", "selector");
+                    o.AddScheme<TestHandler>("specific", "specific");
+                }
+            ).AddOpenIdConnect(
+                o =>
+                {
+                    ConfigureDefaults(o);
+                    o.ForwardDefault = "auth1";
+                    o.ForwardDefaultSelector = _ => "selector";
+                }
+            );
 
             var specific = new TestHandler();
             services.AddSingleton(specific);
@@ -358,22 +351,21 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         {
             var services = new ServiceCollection().AddLogging();
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                        o.AddScheme<TestHandler2>("auth1", "auth1");
-                        o.AddScheme<TestHandler3>("selector", "selector");
-                        o.AddScheme<TestHandler>("specific", "specific");
-                    }
-                )
-                .AddOpenIdConnect(
-                    o =>
-                    {
-                        ConfigureDefaults(o);
-                        o.ForwardDefault = "auth1";
-                        o.ForwardDefaultSelector = _ => null;
-                    }
-                );
+                o =>
+                {
+                    o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    o.AddScheme<TestHandler2>("auth1", "auth1");
+                    o.AddScheme<TestHandler3>("selector", "selector");
+                    o.AddScheme<TestHandler>("specific", "specific");
+                }
+            ).AddOpenIdConnect(
+                o =>
+                {
+                    ConfigureDefaults(o);
+                    o.ForwardDefault = "auth1";
+                    o.ForwardDefaultSelector = _ => null;
+                }
+            );
 
             var specific = new TestHandler();
             services.AddSingleton(specific);
@@ -419,27 +411,26 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         {
             var services = new ServiceCollection().AddLogging();
             services.AddAuthentication(
-                    o =>
-                    {
-                        o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                        o.AddScheme<TestHandler2>("auth1", "auth1");
-                        o.AddScheme<TestHandler3>("selector", "selector");
-                        o.AddScheme<TestHandler>("specific", "specific");
-                    }
-                )
-                .AddOpenIdConnect(
-                    o =>
-                    {
-                        ConfigureDefaults(o);
-                        o.ForwardDefault = "auth1";
-                        o.ForwardDefaultSelector = _ => "selector";
-                        o.ForwardAuthenticate = "specific";
-                        o.ForwardChallenge = "specific";
-                        o.ForwardSignIn = "specific";
-                        o.ForwardSignOut = "specific";
-                        o.ForwardForbid = "specific";
-                    }
-                );
+                o =>
+                {
+                    o.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    o.AddScheme<TestHandler2>("auth1", "auth1");
+                    o.AddScheme<TestHandler3>("selector", "selector");
+                    o.AddScheme<TestHandler>("specific", "specific");
+                }
+            ).AddOpenIdConnect(
+                o =>
+                {
+                    ConfigureDefaults(o);
+                    o.ForwardDefault = "auth1";
+                    o.ForwardDefaultSelector = _ => "selector";
+                    o.ForwardAuthenticate = "specific";
+                    o.ForwardChallenge = "specific";
+                    o.ForwardSignIn = "specific";
+                    o.ForwardSignOut = "specific";
+                    o.ForwardForbid = "specific";
+                }
+            );
 
             var specific = new TestHandler();
             services.AddSingleton(specific);
@@ -484,49 +475,44 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         public async Task MetadataAddressIsGeneratedFromAuthorityWhenMissing()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.Configure(
+                        app =>
+                        {
+                            app.UseAuthentication();
+                            app.Run(
+                                async context =>
                                 {
-                                    app.UseAuthentication();
-                                    app.Run(
-                                        async context =>
-                                        {
-                                            var resolver =
-                                                context.RequestServices.GetRequiredService<IAuthenticationHandlerProvider>();
-                                            var handler =
-                                                await resolver.GetHandlerAsync(
-                                                    context,
-                                                    OpenIdConnectDefaults.AuthenticationScheme
-                                                ) as OpenIdConnectHandler;
-                                            Assert.Equal(
-                                                $"{TestServerBuilder.DefaultAuthority}/.well-known/openid-configuration",
-                                                handler.Options.MetadataAddress
-                                            );
-                                        }
+                                    var resolver = context.RequestServices
+                                        .GetRequiredService<IAuthenticationHandlerProvider>();
+                                    var handler =
+                                        await resolver.GetHandlerAsync(
+                                            context,
+                                            OpenIdConnectDefaults.AuthenticationScheme
+                                        ) as OpenIdConnectHandler;
+                                    Assert.Equal(
+                                        $"{TestServerBuilder.DefaultAuthority}/.well-known/openid-configuration",
+                                        handler.Options.MetadataAddress
                                     );
                                 }
-                            )
-                            .UseTestServer();
-                    }
-                )
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddAuthentication()
-                            .AddCookie()
-                            .AddOpenIdConnect(
-                                o =>
-                                {
-                                    o.Authority = TestServerBuilder.DefaultAuthority;
-                                    o.ClientId = Guid.NewGuid().ToString();
-                                    o.SignInScheme = Guid.NewGuid().ToString();
-                                }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).UseTestServer();
+                }
+            ).ConfigureServices(
+                services =>
+                {
+                    services.AddAuthentication().AddCookie().AddOpenIdConnect(
+                        o =>
+                        {
+                            o.Authority = TestServerBuilder.DefaultAuthority;
+                            o.ClientId = Guid.NewGuid().ToString();
+                            o.SignInScheme = Guid.NewGuid().ToString();
+                        }
+                    );
+                }
+            ).Build();
 
             var server = host.GetTestServer();
 
@@ -636,19 +622,13 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
 
         private TestServer BuildTestServer(Action<OpenIdConnectOptions> options)
         {
-            var host = new HostBuilder().ConfigureWebHost(
-                    builder =>
-                        builder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddAuthentication()
-                                        .AddCookie()
-                                        .AddOpenIdConnect(options);
-                                }
-                            )
-                            .Configure(app => app.UseAuthentication())
-                )
+            var host = new HostBuilder()
+                .ConfigureWebHost(builder => builder.UseTestServer().ConfigureServices(
+                            services =>
+                            {
+                                services.AddAuthentication().AddCookie().AddOpenIdConnect(options);
+                            }
+                        ).Configure(app => app.UseAuthentication()))
                 .Build();
             host.Start();
             return host.GetTestServer();

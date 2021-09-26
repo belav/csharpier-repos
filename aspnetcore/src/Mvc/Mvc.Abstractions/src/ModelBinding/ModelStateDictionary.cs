@@ -1002,14 +1002,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     var result = midKey.Length - searchKey.Length;
                     if (result == 0)
                     {
-                        result = string.Compare(
-                            midKey.Buffer,
-                            midKey.Offset,
-                            searchKey.Buffer,
-                            searchKey.Offset,
-                            searchKey.Length,
-                            StringComparison.OrdinalIgnoreCase
-                        );
+                        result = string
+                            .Compare(
+                                midKey.Buffer,
+                                midKey.Offset,
+                                searchKey.Buffer,
+                                searchKey.Offset,
+                                searchKey.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            );
                     }
 
                     if (result == 0)

@@ -112,10 +112,11 @@ namespace CoreXml.Test.XLinq
                     foreach (GetNameType type in Enum.GetValues(typeof(GetNameType)))
                     {
                         TestLog.Compare(
-                            object.ReferenceEquals(
-                                name,
-                                GetName("name", "http://www.w3.org/2000/xmlns/")
-                            ),
+                            object
+                                .ReferenceEquals(
+                                    name,
+                                    GetName("name", "http://www.w3.org/2000/xmlns/")
+                                ),
                             "reference equal for " + type
                         );
                     }
@@ -130,10 +131,11 @@ namespace CoreXml.Test.XLinq
                     foreach (GetNameType type in Enum.GetValues(typeof(GetNameType)))
                     {
                         TestLog.Compare(
-                            object.ReferenceEquals(
-                                name,
-                                GetName("name", "http://www.w3.org/XML/1998/namespace")
-                            ),
+                            object
+                                .ReferenceEquals(
+                                    name,
+                                    GetName("name", "http://www.w3.org/XML/1998/namespace")
+                                ),
                             "reference equal for " + type
                         );
                     }

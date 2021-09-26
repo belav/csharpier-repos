@@ -76,10 +76,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             if (Diagnostics.Count > 0)
             {
                 builder.Append(" [");
-                var ids = string.Join(
-                    ", ",
-                    Diagnostics.Select(diagnostic => $"{diagnostic.Id}{diagnostic.Span}")
-                );
+                var ids = string
+                    .Join(
+                        ", ",
+                        Diagnostics.Select(diagnostic => $"{diagnostic.Id}{diagnostic.Span}")
+                    );
                 builder.Append(ids);
                 builder.Append("]");
             }

@@ -11,11 +11,12 @@ namespace TagHelpersWebSite
     {
         public IViewComponentResult Invoke(JacketColor jacketColor)
         {
-            var colorReplacement = string.Format(
-                CultureInfo.InvariantCulture,
-                "<span style='color:{0}'>#</span>",
-                jacketColor
-            );
+            var colorReplacement = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "<span style='color:{0}'>#</span>",
+                    jacketColor
+                );
 
             var resultString = DanString.Replace("#", colorReplacement)
                 .Replace(Environment.NewLine, "<br>")

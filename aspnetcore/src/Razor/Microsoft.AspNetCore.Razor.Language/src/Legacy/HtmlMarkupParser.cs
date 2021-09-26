@@ -166,11 +166,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     }
                     else
                     {
-                        Context.ErrorSink.OnError(
-                            RazorDiagnosticFactory.CreateParsing_MarkupBlockMustStartWithTag(
-                                new SourceSpan(CurrentStart, CurrentToken.Content.Length)
-                            )
-                        );
+                        Context.ErrorSink
+                            .OnError(
+                                RazorDiagnosticFactory.CreateParsing_MarkupBlockMustStartWithTag(
+                                    new SourceSpan(CurrentStart, CurrentToken.Content.Length)
+                                )
+                            );
                     }
 
                     // Add any remaining tokens to the builder.
@@ -348,15 +349,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     {
                         // We're at the outermost start tag. Add an error.
                         // We don't want to add this error if the tag is unfinished. A different error would have already been added.
-                        Context.ErrorSink.OnError(
-                            RazorDiagnosticFactory.CreateParsing_MissingEndTag(
-                                new SourceSpan(
-                                    SourceLocationTracker.Advance(tracker.TagLocation, "<"),
-                                    tracker.TagName.Length
-                                ),
-                                tracker.TagName
-                            )
-                        );
+                        Context.ErrorSink
+                            .OnError(
+                                RazorDiagnosticFactory.CreateParsing_MissingEndTag(
+                                    new SourceSpan(
+                                        SourceLocationTracker.Advance(tracker.TagLocation, "<"),
+                                        tracker.TagName.Length
+                                    ),
+                                    tracker.TagName
+                                )
+                            );
                     }
                 }
             }
@@ -398,8 +400,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             At(SyntaxKind.OpenAngle)
                             || (
                                 At(SyntaxKind.Transition)
-                                && Lookahead(count: 1)
-                                    .Content.StartsWith(":", StringComparison.Ordinal)
+                                && Lookahead(count: 1).Content
+                                    .StartsWith(":", StringComparison.Ordinal)
                             )
                         )
                     )
@@ -575,11 +577,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                 Debug.Assert(endTagName != null);
                 if (
-                    string.Equals(
-                        CurrentStartTagName,
-                        endTagName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(CurrentStartTagName, endTagName, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     // Happy path. Found a matching start tag. Create the element and reset the builder.
@@ -627,15 +626,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             if (_tagTracker.Count == 0)
             {
                 // We can't possibly have a matching start tag.
-                Context.ErrorSink.OnError(
-                    RazorDiagnosticFactory.CreateParsing_UnexpectedEndTag(
-                        new SourceSpan(
-                            SourceLocationTracker.Advance(endTagStartLocation, "</"),
-                            Math.Max(endTagName.Length, 1)
-                        ),
-                        endTagName
-                    )
-                );
+                Context.ErrorSink
+                    .OnError(
+                        RazorDiagnosticFactory.CreateParsing_UnexpectedEndTag(
+                            new SourceSpan(
+                                SourceLocationTracker.Advance(endTagStartLocation, "</"),
+                                Math.Max(endTagName.Length, 1)
+                            ),
+                            endTagName
+                        )
+                    );
                 return;
             }
 
@@ -653,15 +653,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (_tagTracker.Count == 0)
                 {
                     // This means we couldn't find a match and we're at the outermost start tag. Add an error.
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_MissingEndTag(
-                            new SourceSpan(
-                                SourceLocationTracker.Advance(tracker.TagLocation, "<"),
-                                tracker.TagName.Length
-                            ),
-                            tracker.TagName
-                        )
-                    );
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_MissingEndTag(
+                                new SourceSpan(
+                                    SourceLocationTracker.Advance(tracker.TagLocation, "<"),
+                                    tracker.TagName.Length
+                                ),
+                                tracker.TagName
+                            )
+                        );
                 }
             }
         }
@@ -675,11 +676,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // First check if the tag we're tracking is a void tag. If so, we need to close it out before moving on.
             while (
                 _tagTracker.Count > 0
-                && !string.Equals(
-                    CurrentStartTagName,
-                    endTagName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && !string
+                    .Equals(CurrentStartTagName, endTagName, StringComparison.OrdinalIgnoreCase)
                 && IsVoidElement(CurrentStartTagName)
             )
             {
@@ -768,11 +766,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             if (
                 mode == ParseMode.MarkupInCodeBlock
                 && _tagTracker.Count == 0
-                && string.Equals(
-                    tagName,
-                    SyntaxConstants.TextTagName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && string
+                    .Equals(
+                        tagName,
+                        SyntaxConstants.TextTagName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 // "<text>" tag is special only if it is the outermost tag.
@@ -807,17 +806,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (EndOfFile || !At(SyntaxKind.CloseAngle))
                 {
                     // Unfinished tag
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_UnfinishedTag(
-                            new SourceSpan(
-                                tagName.Length == 0
-                                  ? tagStartLocation
-                                  : SourceLocationTracker.Advance(tagStartLocation, "<"),
-                                Math.Max(tagName.Length, 1)
-                            ),
-                            tagName
-                        )
-                    );
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_UnfinishedTag(
+                                new SourceSpan(
+                                    tagName.Length == 0
+                                      ? tagStartLocation
+                                      : SourceLocationTracker.Advance(tagStartLocation, "<"),
+                                    Math.Max(tagName.Length, 1)
+                                ),
+                                tagName
+                            )
+                        );
                 }
                 else
                 {
@@ -850,11 +850,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             NextToken();
                             if (
                                 !At(SyntaxKind.Text)
-                                || !string.Equals(
-                                    CurrentToken.Content,
-                                    tagName,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                || !string
+                                    .Equals(
+                                        CurrentToken.Content,
+                                        tagName,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                             {
                                 // There is no matching end void tag.
@@ -948,14 +949,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 }
                 else
                 {
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_TextTagCannotContainAttributes(
-                            new SourceSpan(
-                                textLocation,
-                                contentLength: 4 /* text */
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_TextTagCannotContainAttributes(
+                                new SourceSpan(
+                                    textLocation,
+                                    contentLength: 4 /* text */
+                                )
                             )
-                        )
-                    );
+                        );
 
                     RecoverTextTag(out var miscContent, out closeAngleToken);
                     miscAttributeContentBuilder.Add(miscContent);
@@ -1022,11 +1024,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                 if (
                     mode == ParseMode.MarkupInCodeBlock
-                    && string.Equals(
-                        tagName,
-                        SyntaxConstants.TextTagName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && string
+                        .Equals(
+                            tagName,
+                            SyntaxConstants.TextTagName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     // "<text>" tag is special only if it is the outermost tag. We need to figure out if the current end text tag
@@ -1035,11 +1038,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     foreach (var tracker in _tagTracker)
                     {
                         if (
-                            string.Equals(
-                                tracker.TagName,
-                                SyntaxConstants.TextTagName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    tracker.TagName,
+                                    SyntaxConstants.TextTagName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             openTextTagCount++;
@@ -1048,11 +1052,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                     if (
                         openTextTagCount == 1
-                        && string.Equals(
-                            _tagTracker.Last().TagName,
-                            SyntaxConstants.TextTagName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        && string
+                            .Equals(
+                                _tagTracker.Last().TagName,
+                                SyntaxConstants.TextTagName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         // This means there is only one open text tag and it is the outermost tag.
@@ -1141,14 +1146,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 isWellFormed = At(SyntaxKind.CloseAngle);
                 if (!isWellFormed)
                 {
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_TextTagCannotContainAttributes(
-                            new SourceSpan(
-                                textLocation,
-                                contentLength: 4 /* text */
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_TextTagCannotContainAttributes(
+                                new SourceSpan(
+                                    textLocation,
+                                    contentLength: 4 /* text */
+                                )
                             )
-                        )
-                    );
+                        );
 
                     SpanContext.EditHandler.AcceptedCharacters = AcceptedCharactersInternal.Any;
                     RecoverTextTag(out var miscContent, out closeAngleToken);
@@ -1642,11 +1648,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                     if (
                         At(SyntaxKind.Text)
-                        && string.Equals(
-                            CurrentToken.Content,
-                            ScriptTagName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        && string
+                            .Equals(
+                                CurrentToken.Content,
+                                ScriptTagName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         seenEndScript = true;
@@ -1697,15 +1704,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                     if (!At(SyntaxKind.CloseAngle))
                     {
-                        Context.ErrorSink.OnError(
-                            RazorDiagnosticFactory.CreateParsing_UnfinishedTag(
-                                new SourceSpan(
-                                    SourceLocationTracker.Advance(tagStart, "</"),
-                                    ScriptTagName.Length
-                                ),
-                                ScriptTagName
-                            )
-                        );
+                        Context.ErrorSink
+                            .OnError(
+                                RazorDiagnosticFactory.CreateParsing_UnfinishedTag(
+                                    new SourceSpan(
+                                        SourceLocationTracker.Advance(tagStart, "</"),
+                                        ScriptTagName.Length
+                                    ),
+                                    ScriptTagName
+                                )
+                            );
                         closeAngleToken = SyntaxFactory.MissingToken(SyntaxKind.CloseAngle);
                     }
                     else
@@ -1758,11 +1766,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             AcceptAndMoveNext(); // '['
             Debug.Assert(
                 CurrentToken.Kind == SyntaxKind.Text
-                    && string.Equals(
-                        CurrentToken.Content,
-                        "cdata",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && string
+                        .Equals(CurrentToken.Content, "cdata", StringComparison.OrdinalIgnoreCase)
             );
             AcceptAndMoveNext();
             Assert(SyntaxKind.LeftBracket);
@@ -1992,7 +1997,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             if (typeAttribute != null)
             {
-                var contentValues = typeAttribute.Value.CreateRed()
+                var contentValues = typeAttribute.Value
+                    .CreateRed()
                     .DescendantNodes()
                     .Where(n => n.IsToken)
                     .Cast<Syntax.SyntaxToken>();
@@ -2161,11 +2167,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             else if (
                                 Lookahead(2)?.Kind == SyntaxKind.LeftBracket
                                 && Lookahead(3) is SyntaxToken tagName
-                                && string.Equals(
-                                    tagName.Content,
-                                    "cdata",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                && string
+                                    .Equals(
+                                        tagName.Content,
+                                        "cdata",
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                                 && Lookahead(4)?.Kind == SyntaxKind.LeftBracket
                             )
                             {
@@ -2228,11 +2235,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                 return afterBang != null
                     && afterBang.Kind == SyntaxKind.Text
-                    && !string.Equals(
-                        afterBang.Content,
-                        "DOCTYPE",
-                        StringComparison.OrdinalIgnoreCase
-                    );
+                    && !string
+                        .Equals(afterBang.Content, "DOCTYPE", StringComparison.OrdinalIgnoreCase);
             }
 
             return false;

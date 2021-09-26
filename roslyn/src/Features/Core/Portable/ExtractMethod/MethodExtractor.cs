@@ -83,18 +83,18 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var operationStatus = OriginalSelectionResult.Status;
 
             var analyzeResult = await AnalyzeAsync(
-                    OriginalSelectionResult,
-                    LocalFunction,
-                    cancellationToken
-                )
+                OriginalSelectionResult,
+                LocalFunction,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
 
             operationStatus = await CheckVariableTypesAsync(
-                    analyzeResult.Status.With(operationStatus),
-                    analyzeResult,
-                    cancellationToken
-                )
+                analyzeResult.Status.With(operationStatus),
+                analyzeResult,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (operationStatus.FailedWithNoBestEffortSuggestion())
             {
@@ -102,36 +102,35 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             }
 
             var insertionPoint = await GetInsertionPointAsync(
-                    analyzeResult.SemanticDocument,
-                    cancellationToken
-                )
+                analyzeResult.SemanticDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
 
             var triviaResult = await PreserveTriviaAsync(
-                    OriginalSelectionResult.With(insertionPoint.SemanticDocument),
-                    cancellationToken
-                )
+                OriginalSelectionResult.With(insertionPoint.SemanticDocument),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
 
             var expandedDocument = await ExpandAsync(
-                    OriginalSelectionResult.With(triviaResult.SemanticDocument),
-                    cancellationToken
-                )
+                OriginalSelectionResult.With(triviaResult.SemanticDocument),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
-            var options = await analyzeResult.SemanticDocument.Document.GetOptionsAsync(
-                    cancellationToken
-                )
+            var options = await analyzeResult.SemanticDocument.Document
+                .GetOptionsAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             var generatedCode = await GenerateCodeAsync(
-                    insertionPoint.With(expandedDocument),
-                    OriginalSelectionResult.With(expandedDocument),
-                    analyzeResult.With(expandedDocument),
-                    options,
-                    cancellationToken
-                )
+                insertionPoint.With(expandedDocument),
+                OriginalSelectionResult.With(expandedDocument),
+                analyzeResult.With(expandedDocument),
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var applied = await triviaResult.ApplyAsync(generatedCode, cancellationToken)
@@ -142,34 +141,34 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             if (afterTriviaRestored.Status.FailedWithNoBestEffortSuggestion())
             {
                 return await CreateExtractMethodResultAsync(
-                        operationStatus,
-                        generatedCode.SemanticDocument,
-                        generatedCode.MethodNameAnnotation,
-                        generatedCode.MethodDefinitionAnnotation,
-                        cancellationToken
-                    )
+                    operationStatus,
+                    generatedCode.SemanticDocument,
+                    generatedCode.MethodNameAnnotation,
+                    generatedCode.MethodDefinitionAnnotation,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
             var finalDocument = afterTriviaRestored.Data.Document;
             finalDocument = await Formatter.FormatAsync(
-                    finalDocument,
-                    Formatter.Annotation,
-                    options: null,
-                    rules: GetFormattingRules(finalDocument),
-                    cancellationToken: cancellationToken
-                )
+                finalDocument,
+                Formatter.Annotation,
+                options: null,
+                rules: GetFormattingRules(finalDocument),
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
             return await CreateExtractMethodResultAsync(
-                    operationStatus.With(generatedCode.Status),
-                    await SemanticDocument.CreateAsync(finalDocument, cancellationToken)
-                        .ConfigureAwait(false),
-                    generatedCode.MethodNameAnnotation,
-                    generatedCode.MethodDefinitionAnnotation,
-                    cancellationToken
-                )
+                operationStatus.With(generatedCode.Status),
+                await SemanticDocument.CreateAsync(finalDocument, cancellationToken)
+                    .ConfigureAwait(false),
+                generatedCode.MethodNameAnnotation,
+                generatedCode.MethodDefinitionAnnotation,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -192,11 +191,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             if (LocalFunction && status.Succeeded())
             {
                 var result = await InsertNewLineBeforeLocalFunctionIfNecessaryAsync(
-                        semanticDocument.Document,
-                        methodName,
-                        methodDefinition,
-                        cancellationToken
-                    )
+                    semanticDocument.Document,
+                    methodName,
+                    methodDefinition,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return new SimpleExtractMethodResult(
                     status,
@@ -227,56 +226,54 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var context = firstToken.Parent;
 
             var result = await TryCheckVariableTypeAsync(
-                    document,
-                    context,
-                    analyzeResult.GetVariablesToMoveIntoMethodDefinition(cancellationToken),
-                    status,
-                    cancellationToken
-                )
+                document,
+                context,
+                analyzeResult.GetVariablesToMoveIntoMethodDefinition(cancellationToken),
+                status,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!result.Item1)
             {
                 result = await TryCheckVariableTypeAsync(
-                        document,
-                        context,
-                        analyzeResult.GetVariablesToSplitOrMoveIntoMethodDefinition(
-                            cancellationToken
-                        ),
-                        result.Item2,
-                        cancellationToken
-                    )
+                    document,
+                    context,
+                    analyzeResult.GetVariablesToSplitOrMoveIntoMethodDefinition(cancellationToken),
+                    result.Item2,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (!result.Item1)
                 {
                     result = await TryCheckVariableTypeAsync(
-                            document,
-                            context,
-                            analyzeResult.MethodParameters,
-                            result.Item2,
-                            cancellationToken
-                        )
+                        document,
+                        context,
+                        analyzeResult.MethodParameters,
+                        result.Item2,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (!result.Item1)
                     {
                         result = await TryCheckVariableTypeAsync(
-                                document,
-                                context,
-                                analyzeResult.GetVariablesToMoveOutToCallSite(cancellationToken),
-                                result.Item2,
-                                cancellationToken
-                            )
+                            document,
+                            context,
+                            analyzeResult.GetVariablesToMoveOutToCallSite(cancellationToken),
+                            result.Item2,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (!result.Item1)
                         {
                             result = await TryCheckVariableTypeAsync(
-                                    document,
-                                    context,
-                                    analyzeResult.GetVariablesToSplitOrMoveOutToCallSite(
-                                        cancellationToken
-                                    ),
-                                    result.Item2,
+                                document,
+                                context,
+                                analyzeResult.GetVariablesToSplitOrMoveOutToCallSite(
                                     cancellationToken
-                                )
+                                ),
+                                result.Item2,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             if (!result.Item1)
                             {
@@ -290,12 +287,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             status = result.Item2;
 
             var checkedStatus = await CheckTypeAsync(
-                    document.Document,
-                    context,
-                    context.GetLocation(),
-                    analyzeResult.ReturnType,
-                    cancellationToken
-                )
+                document.Document,
+                context,
+                context.GetLocation(),
+                analyzeResult.ReturnType,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return checkedStatus.With(status);
         }
@@ -319,12 +316,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             {
                 var originalType = variable.GetVariableType(document);
                 var result = await CheckTypeAsync(
-                        document.Document,
-                        contextNode,
-                        location,
-                        originalType,
-                        cancellationToken
-                    )
+                    document.Document,
+                    contextNode,
+                    location,
+                    originalType,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (result.FailedWithNoBestEffortSuggestion())
                 {

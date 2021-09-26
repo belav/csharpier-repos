@@ -111,7 +111,8 @@ namespace Newtonsoft.Json.Linq
                         settings != null && settings.CommentHandling == CommentHandling.Ignore
                             ? reader.ReadAndMoveToContentAsync(cancellationToken)
                             : reader.ReadAsync(cancellationToken)
-                    ).ConfigureAwait(false)
+                    )
+                        .ConfigureAwait(false)
                 )
                 {
                     throw JsonReaderException.Create(
@@ -161,10 +162,8 @@ namespace Newtonsoft.Json.Linq
                 default:
                     throw JsonReaderException.Create(
                         reader,
-                        "Error reading JToken from JsonReader. Unexpected token: {0}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            reader.TokenType
-                        )
+                        "Error reading JToken from JsonReader. Unexpected token: {0}"
+                            .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                     );
             }
         }

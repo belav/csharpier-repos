@@ -228,21 +228,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             // NOTE: the newly created template may be thrown away if another thread wins
-            return this.SynthesizedDelegates.GetOrAdd(
-                key,
-                new SynthesizedDelegateValue(
-                    this,
-                    new SynthesizedDelegateSymbol(
-                        this.Compilation.Assembly.GlobalNamespace,
-                        key.MakeTypeName(),
-                        this.System_Object,
-                        Compilation.GetSpecialType(SpecialType.System_IntPtr),
-                        returnsVoid ? Compilation.GetSpecialType(SpecialType.System_Void) : null,
-                        parameterCount,
-                        byRefParameters
+            return this.SynthesizedDelegates
+                .GetOrAdd(
+                    key,
+                    new SynthesizedDelegateValue(
+                        this,
+                        new SynthesizedDelegateSymbol(
+                            this.Compilation.Assembly.GlobalNamespace,
+                            key.MakeTypeName(),
+                            this.System_Object,
+                            Compilation.GetSpecialType(SpecialType.System_IntPtr),
+                            returnsVoid
+                              ? Compilation.GetSpecialType(SpecialType.System_Void)
+                              : null,
+                            parameterCount,
+                            byRefParameters
+                        )
                     )
-                )
-            ).Delegate;
+                ).Delegate;
         }
 
         /// <summary>
@@ -267,10 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (!this.AnonymousTypeTemplates.TryGetValue(typeDescr.Key, out template))
             {
                 // NOTE: the newly created template may be thrown away if another thread wins
-                template = this.AnonymousTypeTemplates.GetOrAdd(
-                    typeDescr.Key,
-                    new AnonymousTypeTemplateSymbol(this, typeDescr)
-                );
+                template = this.AnonymousTypeTemplates
+                    .GetOrAdd(typeDescr.Key, new AnonymousTypeTemplateSymbol(this, typeDescr));
             }
 
             // Adjust template location if the template is owned by this manager
@@ -294,9 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Microsoft.CodeAnalysis.Emit.AnonymousTypeKey key
         )
         {
-            var fields = key.Fields.SelectAsArray(
-                f => new AnonymousTypeField(f.Name, Location.None, default)
-            );
+            var fields = key.Fields
+                .SelectAsArray(f => new AnonymousTypeField(f.Name, Location.None, default));
             var typeDescr = new AnonymousTypeDescriptor(fields, Location.None);
             return new AnonymousTypeTemplateSymbol(this, typeDescr);
         }
@@ -316,10 +316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             foreach (var key in moduleBeingBuilt.GetPreviousAnonymousTypes())
             {
                 var templateKey = AnonymousTypeDescriptor.ComputeKey(key.Fields, f => f.Name);
-                this.AnonymousTypeTemplates.GetOrAdd(
-                    templateKey,
-                    k => this.CreatePlaceholderTemplate(key)
-                );
+                this.AnonymousTypeTemplates
+                    .GetOrAdd(templateKey, k => this.CreatePlaceholderTemplate(key));
             }
 
             // Get all anonymous types owned by this manager
@@ -548,9 +546,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol translatedType = TranslateAnonymousTypeSymbol(method.ContainingType);
             // find a method in anonymous type template by name
             foreach (
-                var member in ((NamedTypeSymbol)translatedType.OriginalDefinition).GetMembers(
-                    method.Name
-                )
+                var member in ((NamedTypeSymbol)translatedType.OriginalDefinition)
+                    .GetMembers(method.Name)
             )
             {
                 if (member.Kind == SymbolKind.Method)

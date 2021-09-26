@@ -53,13 +53,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var errorTypeAttribute =
                 method.GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute)
                     .FirstOrDefault()
-                ?? method.ContainingType.GetAttributes(
-                        symbolCache.ProducesErrorResponseTypeAttribute
-                    )
+                ?? method.ContainingType
+                    .GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute)
                     .FirstOrDefault()
-                ?? method.ContainingAssembly.GetAttributes(
-                        symbolCache.ProducesErrorResponseTypeAttribute
-                    )
+                ?? method.ContainingAssembly
+                    .GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute)
                     .FirstOrDefault();
 
             ITypeSymbol errorType = symbolCache.ProblemDetails;
@@ -102,9 +100,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         )
         {
             var attribute = method.GetAttributes(
-                    symbolCache.ApiConventionMethodAttribute,
-                    inherit: true
-                )
+                symbolCache.ApiConventionMethodAttribute,
+                inherit: true
+            )
                 .FirstOrDefault();
 
             if (attribute == null)
@@ -197,9 +195,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             }
 
             var producesDefaultResponse = methodSymbol.GetAttributes(
-                    symbolCache.ProducesDefaultResponseTypeAttribute,
-                    inherit: true
-                )
+                symbolCache.ProducesDefaultResponseTypeAttribute,
+                inherit: true
+            )
                 .FirstOrDefault();
             if (producesDefaultResponse != null)
             {
@@ -219,16 +217,13 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             IMethodSymbol method
         )
         {
-            var attributes = method.ContainingType.GetAttributes(
-                    symbolCache.ApiConventionTypeAttribute,
-                    inherit: true
-                )
+            var attributes = method.ContainingType
+                .GetAttributes(symbolCache.ApiConventionTypeAttribute, inherit: true)
                 .ToArray();
             if (attributes.Length == 0)
             {
-                attributes = method.ContainingAssembly.GetAttributes(
-                        symbolCache.ApiConventionTypeAttribute
-                    )
+                attributes = method.ContainingAssembly
+                    .GetAttributes(symbolCache.ApiConventionTypeAttribute)
                     .ToArray();
             }
 
@@ -280,11 +275,12 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             {
                 var parameter = constructorParameters[i];
                 if (
-                    string.Equals(
-                        parameter.Name,
-                        StatusCodeConstructorParameter,
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            parameter.Name,
+                            StatusCodeConstructorParameter,
+                            StringComparison.Ordinal
+                        )
                     && (parameter.Type.SpecialType & SpecialType.System_Int32)
                         == SpecialType.System_Int32
                 )

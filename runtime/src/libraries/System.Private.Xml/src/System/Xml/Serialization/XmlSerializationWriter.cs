@@ -596,11 +596,12 @@ namespace System.Xml.Serialization
                         }
                         if (numeric)
                         {
-                            long index = long.Parse(
-                                name.AsSpan(prefixLength),
-                                NumberStyles.Integer,
-                                CultureInfo.InvariantCulture
-                            );
+                            long index = long
+                                .Parse(
+                                    name.AsSpan(prefixLength),
+                                    NumberStyles.Integer,
+                                    CultureInfo.InvariantCulture
+                                );
                             if (index <= int.MaxValue)
                             {
                                 int newIndex = (int)index;
@@ -2008,15 +2009,16 @@ namespace System.Xml.Serialization
             {
                 _reflectionVariables = new Hashtable();
                 _writer.Write(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        HelperClassesForUseReflection,
-                        "object",
-                        "string",
-                        typeof(Type).FullName,
-                        typeof(FieldInfo).FullName,
-                        typeof(PropertyInfo).FullName
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            HelperClassesForUseReflection,
+                            "object",
+                            "string",
+                            typeof(Type).FullName,
+                            typeof(FieldInfo).FullName,
+                            typeof(PropertyInfo).FullName
+                        )
                 );
 
                 WriteDefaultIndexerInit(typeof(IList), typeof(Array).FullName!, false, false);
@@ -5550,9 +5552,8 @@ namespace System.Xml.Serialization
                     if (xmlName == "##any:")
                     {
                         if (useReflection)
-                            enumValue = choiceMapping.Constants[i].Value.ToString(
-                                CultureInfo.InvariantCulture
-                            );
+                            enumValue = choiceMapping.Constants[i].Value
+                                .ToString(CultureInfo.InvariantCulture);
                         else
                             enumValue = choiceMapping.Constants[i].Name;
                         break;
@@ -5575,9 +5576,8 @@ namespace System.Xml.Serialization
                     )
                     {
                         if (useReflection)
-                            enumValue = choiceMapping.Constants[i].Value.ToString(
-                                CultureInfo.InvariantCulture
-                            );
+                            enumValue = choiceMapping.Constants[i].Value
+                                .ToString(CultureInfo.InvariantCulture);
                         else
                             enumValue = choiceMapping.Constants[i].Name;
                         break;

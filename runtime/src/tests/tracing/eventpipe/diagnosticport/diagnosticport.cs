@@ -60,9 +60,10 @@ namespace Tracing.Tests.DiagnosticPortValidation
                                     IpcAdvertise advertise = IpcAdvertise.Parse(stream);
                                     lock (sync)
                                         advertisements.Add(advertise);
-                                    Logger.logger.Log(
-                                        $"Server {serverIndex} got advertise {advertise.ToString()}"
-                                    );
+                                    Logger.logger
+                                        .Log(
+                                            $"Server {serverIndex} got advertise {advertise.ToString()}"
+                                        );
                                 }
                             )
                         );
@@ -143,9 +144,10 @@ namespace Tracing.Tests.DiagnosticPortValidation
                         config,
                         out var sessionId
                     );
-                    Logger.logger.Log(
-                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
-                    );
+                    Logger.logger
+                        .Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                        );
 
                     var mre = new ManualResetEvent(false);
 
@@ -173,9 +175,8 @@ namespace Tracing.Tests.DiagnosticPortValidation
                         IpcAdvertise advertise = IpcAdvertise.Parse(stream);
                         lock (sync)
                             advertisements.Add(advertise);
-                        Logger.logger.Log(
-                            $"Server {serverIndex} got advertise {advertise.ToString()}"
-                        );
+                        Logger.logger
+                            .Log($"Server {serverIndex} got advertise {advertise.ToString()}");
 
                         // send resume command on this connection
                         var message = new IpcMessage(0x04, 0x01);
@@ -262,9 +263,10 @@ namespace Tracing.Tests.DiagnosticPortValidation
                         config,
                         out var sessionId
                     );
-                    Logger.logger.Log(
-                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
-                    );
+                    Logger.logger
+                        .Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                        );
 
                     var mre = new ManualResetEvent(false);
 
@@ -340,9 +342,10 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
                     ProcessInfo info = ProcessInfo.TryParse(response.Payload);
-                    Logger.logger.Log(
-                        $"ProcessInfo: {{ id={info.ProcessId}, cookie={info.RuntimeCookie}, cmdline={info.Commandline}, OS={info.OS}, arch={info.Arch} }}"
-                    );
+                    Logger.logger
+                        .Log(
+                            $"ProcessInfo: {{ id={info.ProcessId}, cookie={info.RuntimeCookie}, cmdline={info.Commandline}, OS={info.OS}, arch={info.Arch} }}"
+                        );
 
                     Utils.Assert(
                         info.RuntimeCookie.Equals(advertise.RuntimeInstanceCookie),
@@ -410,9 +413,10 @@ namespace Tracing.Tests.DiagnosticPortValidation
                                     IpcAdvertise advertise = IpcAdvertise.Parse(stream);
                                     lock (sync)
                                         advertisements.Add(advertise);
-                                    Logger.logger.Log(
-                                        $"Server {serverIndex} got advertise {advertise.ToString()}"
-                                    );
+                                    Logger.logger
+                                        .Log(
+                                            $"Server {serverIndex} got advertise {advertise.ToString()}"
+                                        );
                                 }
                             )
                         );
@@ -450,7 +454,8 @@ namespace Tracing.Tests.DiagnosticPortValidation
             bool fSuccess = true;
             if (!IpcTraceTest.EnsureCleanEnvironment())
                 return -1;
-            IEnumerable<MethodInfo> tests = typeof(DiagnosticPortValidation).GetMethods()
+            IEnumerable<MethodInfo> tests = typeof(DiagnosticPortValidation)
+                .GetMethods()
                 .Where(mi => mi.Name.StartsWith("TEST_"));
             foreach (var test in tests)
             {

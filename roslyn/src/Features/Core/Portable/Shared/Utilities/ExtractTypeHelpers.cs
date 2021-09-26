@@ -43,10 +43,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             );
             var codeGenService = document.GetRequiredLanguageService<ICodeGenerationService>();
             var newTypeNode = codeGenService.CreateNamedTypeDeclaration(
-                    newType,
-                    options: options,
-                    cancellationToken: cancellationToken
-                )
+                newType,
+                options: options,
+                cancellationToken: cancellationToken
+            )
                 .WithAdditionalAnnotations(SimplificationHelpers.SimplifyModuleNameAnnotation);
 
             var typeAnnotation = new SyntaxAnnotation();
@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             );
             var newDocument = solutionWithInterfaceDocument.GetRequiredDocument(newDocumentId);
             var newSemanticModel = await newDocument.GetRequiredSemanticModelAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var options = new CodeGenerationOptions(
                 contextLocation: newSemanticModel.SyntaxTree.GetLocation(new TextSpan()),
@@ -90,12 +90,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             var namespaceParts = containingNamespaceDisplay.Split('.')
                 .Where(s => !string.IsNullOrEmpty(s));
             var newTypeDocument = await CodeGenerator.AddNamespaceOrTypeDeclarationAsync(
-                    newDocument.Project.Solution,
-                    newSemanticModel.GetEnclosingNamespace(0, cancellationToken),
-                    newSymbol.GenerateRootNamespaceOrType(namespaceParts.ToArray()),
-                    options: options,
-                    cancellationToken: cancellationToken
-                )
+                newDocument.Project.Solution,
+                newSemanticModel.GetEnclosingNamespace(0, cancellationToken),
+                newSymbol.GenerateRootNamespaceOrType(namespaceParts.ToArray()),
+                options: options,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var syntaxRoot = await newTypeDocument.GetRequiredSyntaxRootAsync(cancellationToken)
@@ -115,14 +115,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             newTypeDocument = newTypeDocument.WithSyntaxRoot(annotatedRoot);
 
             var simplified = await Simplifier.ReduceAsync(
-                    newTypeDocument,
-                    cancellationToken: cancellationToken
-                )
+                newTypeDocument,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             var formattedDocument = await Formatter.FormatAsync(
-                    simplified,
-                    cancellationToken: cancellationToken
-                )
+                simplified,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return (formattedDocument, typeAnnotation);
@@ -145,9 +145,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
 
             return Formatter.Format(
-                    syntaxGenerator.SyntaxGeneratorInternal.TypeParameterList(typeParameterNames),
-                    document.Project.Solution.Workspace
-                )
+                syntaxGenerator.SyntaxGeneratorInternal.TypeParameterList(typeParameterNames),
+                document.Project.Solution.Workspace
+            )
                 .ToString();
         }
 
@@ -228,9 +228,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             IEnumerable<ISymbol> includedMembers
         )
         {
-            using var _ = ArrayBuilder<ITypeParameterSymbol>.GetInstance(
-                out var directlyReferencedTypeParameters
-            );
+            using var _ = ArrayBuilder<ITypeParameterSymbol>
+                .GetInstance(out var directlyReferencedTypeParameters);
             foreach (var typeParameter in potentialTypeParameters)
             {
                 if (
@@ -264,20 +263,28 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     return DoesTypeReferenceTypeParameter(@event.Type, typeParameter, checkedTypes);
                 case SymbolKind.Method:
                     var method = member as IMethodSymbol;
-                    return method.Parameters.Any(
-                            t => DoesTypeReferenceTypeParameter(t.Type, typeParameter, checkedTypes)
-                        )
-                        || method.TypeParameters.Any(
-                            t =>
-                                t.ConstraintTypes.Any(
-                                    c =>
-                                        DoesTypeReferenceTypeParameter(
-                                            c,
-                                            typeParameter,
-                                            checkedTypes
+                    return method.Parameters
+                            .Any(
+                                t =>
+                                    DoesTypeReferenceTypeParameter(
+                                        t.Type,
+                                        typeParameter,
+                                        checkedTypes
+                                    )
+                            )
+                        || method.TypeParameters
+                            .Any(
+                                t =>
+                                    t.ConstraintTypes
+                                        .Any(
+                                            c =>
+                                                DoesTypeReferenceTypeParameter(
+                                                    c,
+                                                    typeParameter,
+                                                    checkedTypes
+                                                )
                                         )
-                                )
-                        )
+                            )
                         || DoesTypeReferenceTypeParameter(
                             method.ReturnType,
                             typeParameter,
@@ -285,9 +292,15 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         );
                 case SymbolKind.Property:
                     var property = member as IPropertySymbol;
-                    return property.Parameters.Any(
-                            t => DoesTypeReferenceTypeParameter(t.Type, typeParameter, checkedTypes)
-                        )
+                    return property.Parameters
+                            .Any(
+                                t =>
+                                    DoesTypeReferenceTypeParameter(
+                                        t.Type,
+                                        typeParameter,
+                                        checkedTypes
+                                    )
+                            )
                         || DoesTypeReferenceTypeParameter(
                             property.Type,
                             typeParameter,
@@ -296,10 +309,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 default:
                     Debug.Assert(
                         false,
-                        string.Format(
-                            FeaturesResources.Unexpected_interface_member_kind_colon_0,
-                            member.Kind.ToString()
-                        )
+                        string
+                            .Format(
+                                FeaturesResources.Unexpected_interface_member_kind_colon_0,
+                                member.Kind.ToString()
+                            )
                     );
                     return false;
             }

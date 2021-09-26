@@ -152,7 +152,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         {
             Assert.Throws<ArgumentException>(
                 () =>
-                    new ApplicationBuilder(serviceProvider: null!).Map(matchPath, map => { })
+                    new ApplicationBuilder(serviceProvider: null!)
+                        .Map(matchPath, map => { })
                         .Build()
             );
         }

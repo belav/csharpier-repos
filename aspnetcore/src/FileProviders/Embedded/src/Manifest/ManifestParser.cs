@@ -79,11 +79,12 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
                 for (int j = i + 1; j < entriesList.Count; j++)
                 {
                     if (
-                        string.Equals(
-                            entriesList[i].Name,
-                            entriesList[j].Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                entriesList[i].Name,
+                                entriesList[j].Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         throw new InvalidOperationException(

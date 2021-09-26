@@ -106,7 +106,8 @@ namespace Microsoft.Extensions.DependencyModel
                         rented = ArrayPool<byte>.Shared.Rent(checked(toReturn.Length * 2));
                         Buffer.BlockCopy(toReturn, 0, rented, 0, toReturn.Length);
                         // Holds document content, clear it.
-                        ArrayPool<byte>.Shared.Return(toReturn, clearArray: true);
+                        ArrayPool<byte>.Shared
+                            .Return(toReturn, clearArray: true);
                     }
 
                     lastRead = stream.Read(rented, written, rented.Length - written);
@@ -757,8 +758,8 @@ namespace Microsoft.Extensions.DependencyModel
                     )
                     {
                         RuntimeFile[] groupRuntimeAssemblies = ridGroup.Where(
-                                e => e.Type == DependencyContextStrings.RuntimeAssetType
-                            )
+                            e => e.Type == DependencyContextStrings.RuntimeAssetType
+                        )
                             .Select(e => new RuntimeFile(e.Path, e.AssemblyVersion, e.FileVersion))
                             .ToArray();
 
@@ -775,8 +776,8 @@ namespace Microsoft.Extensions.DependencyModel
                         }
 
                         RuntimeFile[] groupNativeLibraries = ridGroup.Where(
-                                e => e.Type == DependencyContextStrings.NativeAssetType
-                            )
+                            e => e.Type == DependencyContextStrings.NativeAssetType
+                        )
                             .Select(e => new RuntimeFile(e.Path, e.AssemblyVersion, e.FileVersion))
                             .ToArray();
 

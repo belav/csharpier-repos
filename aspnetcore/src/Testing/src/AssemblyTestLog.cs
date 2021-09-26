@@ -183,14 +183,14 @@ namespace Microsoft.AspNetCore.Testing
             DateTimeOffset? logStart = null
         ) =>
             CreateLoggerServices(
-                    output,
-                    className,
-                    minLogLevel,
-                    out var _,
-                    out var _,
-                    testName,
-                    logStart
-                )
+                output,
+                className,
+                minLogLevel,
+                out var _,
+                out var _,
+                testName,
+                logStart
+            )
                 .GetRequiredService<ILoggerFactory>();
 
         [SuppressMessage(
@@ -442,7 +442,8 @@ namespace Microsoft.AspNetCore.Testing
                 File.Delete(fileName);
             }
 
-            var serilogger = new LoggerConfiguration().Enrich.FromLogContext()
+            var serilogger = new LoggerConfiguration().Enrich
+                .FromLogContext()
                 .Enrich.With(new AssemblyLogTimestampOffsetEnricher(logStart))
                 .MinimumLevel.Verbose()
                 .WriteTo.File(

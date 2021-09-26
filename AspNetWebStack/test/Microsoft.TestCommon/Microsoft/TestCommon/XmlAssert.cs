@@ -23,10 +23,8 @@ namespace Microsoft.TestCommon
             {
                 for (int i = 0; i < regexReplacements.Length; i++)
                 {
-                    actual = regexReplacements[i].Regex.Replace(
-                        actual,
-                        regexReplacements[i].Replacement
-                    );
+                    actual = regexReplacements[i].Regex
+                        .Replace(actual, regexReplacements[i].Replacement);
                 }
             }
 
@@ -77,11 +75,12 @@ namespace Microsoft.TestCommon
 
         private static string Encode(XName name)
         {
-            return string.Format(
-                "{0}_{1}",
-                HttpUtility.UrlEncode(name.NamespaceName).Replace('%', '_'),
-                name.LocalName
-            );
+            return string
+                .Format(
+                    "{0}_{1}",
+                    HttpUtility.UrlEncode(name.NamespaceName).Replace('%', '_'),
+                    name.LocalName
+                );
         }
     }
 }

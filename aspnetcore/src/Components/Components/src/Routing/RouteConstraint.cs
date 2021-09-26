@@ -77,54 +77,59 @@ namespace Microsoft.AspNetCore.Components.Routing
                 case "decimal":
                     return new TypeRouteConstraint<decimal>(
                         (string str, out decimal result) =>
-                            decimal.TryParse(
-                                str,
-                                NumberStyles.Number,
-                                CultureInfo.InvariantCulture,
-                                out result
-                            )
+                            decimal
+                                .TryParse(
+                                    str,
+                                    NumberStyles.Number,
+                                    CultureInfo.InvariantCulture,
+                                    out result
+                                )
                     );
                 case "double":
                     return new TypeRouteConstraint<double>(
                         (string str, out double result) =>
-                            double.TryParse(
-                                str,
-                                NumberStyles.Number,
-                                CultureInfo.InvariantCulture,
-                                out result
-                            )
+                            double
+                                .TryParse(
+                                    str,
+                                    NumberStyles.Number,
+                                    CultureInfo.InvariantCulture,
+                                    out result
+                                )
                     );
                 case "float":
                     return new TypeRouteConstraint<float>(
                         (string str, out float result) =>
-                            float.TryParse(
-                                str,
-                                NumberStyles.Number,
-                                CultureInfo.InvariantCulture,
-                                out result
-                            )
+                            float
+                                .TryParse(
+                                    str,
+                                    NumberStyles.Number,
+                                    CultureInfo.InvariantCulture,
+                                    out result
+                                )
                     );
                 case "guid":
                     return new TypeRouteConstraint<Guid>(Guid.TryParse);
                 case "int":
                     return new TypeRouteConstraint<int>(
                         (string str, out int result) =>
-                            int.TryParse(
-                                str,
-                                NumberStyles.Integer,
-                                CultureInfo.InvariantCulture,
-                                out result
-                            )
+                            int
+                                .TryParse(
+                                    str,
+                                    NumberStyles.Integer,
+                                    CultureInfo.InvariantCulture,
+                                    out result
+                                )
                     );
                 case "long":
                     return new TypeRouteConstraint<long>(
                         (string str, out long result) =>
-                            long.TryParse(
-                                str,
-                                NumberStyles.Integer,
-                                CultureInfo.InvariantCulture,
-                                out result
-                            )
+                            long
+                                .TryParse(
+                                    str,
+                                    NumberStyles.Integer,
+                                    CultureInfo.InvariantCulture,
+                                    out result
+                                )
                     );
                 default:
                     return null;

@@ -13,23 +13,18 @@ namespace HostingPlayground
 {
     class Program
     {
-        static async Task Main(string[] args) =>
-            await BuildCommandLine()
-                .UseHost(
-                    _ => Host.CreateDefaultBuilder(),
-                    host =>
-                    {
-                        host.ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<IGreeter, Greeter>();
-                            }
-                        );
-                    }
-                )
-                .UseDefaults()
-                .Build()
-                .InvokeAsync(args);
+        static async Task Main(string[] args) => await BuildCommandLine().UseHost(
+                _ => Host.CreateDefaultBuilder(),
+                host =>
+                {
+                    host.ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton<IGreeter, Greeter>();
+                        }
+                    );
+                }
+            ).UseDefaults().Build().InvokeAsync(args);
 
         private static CommandLineBuilder BuildCommandLine()
         {

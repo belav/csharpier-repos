@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
 
             var opCharacters = ImmutableArray.CreateRange(filterCharacters);
-            s_operatorRules = CompletionItemRules.Default.WithFilterCharacterRule(
+            s_operatorRules = CompletionItemRules.Default
+                .WithFilterCharacterRule(
                     CharacterSetModificationRule.Create(
                         CharacterSetModificationKind.Add,
                         opCharacters
@@ -157,20 +158,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             if (opPosition.HasFlag(OperatorPosition.Infix))
                 return await ReplaceTextAfterOperatorAsync(
-                        document,
-                        item,
-                        text: $" {item.DisplayText} ",
-                        cancellationToken
-                    )
+                    document,
+                    item,
+                    text: $" {item.DisplayText} ",
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             if (opPosition.HasFlag(OperatorPosition.Postfix))
                 return await ReplaceTextAfterOperatorAsync(
-                        document,
-                        item,
-                        text: $"{item.DisplayText} ",
-                        cancellationToken
-                    )
+                    document,
+                    item,
+                    text: $"{item.DisplayText} ",
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             if (opPosition.HasFlag(OperatorPosition.Prefix))

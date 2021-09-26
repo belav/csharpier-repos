@@ -49,9 +49,8 @@ namespace Microsoft.AspNetCore.Mvc
             );
 
             var attribute = new CustomAttributeBuilder(
-                typeof(ProvideApplicationPartFactoryAttribute).GetConstructor(
-                    new[] { typeof(Type) }
-                ),
+                typeof(ProvideApplicationPartFactoryAttribute)
+                    .GetConstructor(new[] { typeof(Type) }),
                 new[] { typeof(TestApplicationPartFactory) }
             );
 
@@ -97,11 +96,9 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var collection = new ServiceCollection();
-            var controllerTypes = new[]
-            {
-                typeof(ControllerTypeA),
-                typeof(TypeBController),
-            }.Select(t => t.GetTypeInfo()).ToArray();
+            var controllerTypes = new[] { typeof(ControllerTypeA), typeof(TypeBController), }
+                .Select(t => t.GetTypeInfo())
+                .ToArray();
 
             var builder = new MvcBuilder(collection, GetApplicationPartManager(controllerTypes));
 
@@ -130,9 +127,8 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var services = new ServiceCollection();
             var manager = new ApplicationPartManager();
-            manager.ApplicationParts.Add(
-                new TestApplicationPart(typeof(ControllerOne), typeof(ControllerTwo))
-            );
+            manager.ApplicationParts
+                .Add(new TestApplicationPart(typeof(ControllerOne), typeof(ControllerTwo)));
             manager.FeatureProviders.Add(new TestFeatureProvider());
             var builder = new MvcBuilder(services, manager);
 

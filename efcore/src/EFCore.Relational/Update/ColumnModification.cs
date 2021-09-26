@@ -387,10 +387,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             if (
                 UseCurrentValueParameter
-                && !StructuralComparisons.StructuralEqualityComparer.Equals(
-                    Value,
-                    modification.Value
-                )
+                && !StructuralComparisons.StructuralEqualityComparer
+                    .Equals(Value, modification.Value)
             )
             {
                 if (_sensitiveLoggingEnabled)
@@ -403,9 +401,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                                 Entry.EntityType.FindPrimaryKey()!.Properties
                             ),
                             Entry.BuildCurrentValuesString(new[] { Property }),
-                            modification.Entry.BuildCurrentValuesString(
-                                new[] { modification.Property }
-                            ),
+                            modification.Entry
+                                .BuildCurrentValuesString(new[] { modification.Property }),
                             ColumnName
                         )
                     );
@@ -424,10 +421,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             if (
                 UseOriginalValueParameter
-                && !StructuralComparisons.StructuralEqualityComparer.Equals(
-                    OriginalValue,
-                    modification.OriginalValue
-                )
+                && !StructuralComparisons.StructuralEqualityComparer
+                    .Equals(OriginalValue, modification.OriginalValue)
             )
             {
                 if (
@@ -450,9 +445,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                                     Entry.EntityType.FindPrimaryKey()!.Properties
                                 ),
                                 Entry.BuildOriginalValuesString(new[] { Property }),
-                                modification.Entry.BuildOriginalValuesString(
-                                    new[] { modification.Property }
-                                ),
+                                modification.Entry
+                                    .BuildOriginalValuesString(new[] { modification.Property }),
                                 ColumnName
                             )
                         );

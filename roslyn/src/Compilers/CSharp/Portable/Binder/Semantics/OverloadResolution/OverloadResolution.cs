@@ -179,8 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
         )
         {
-            ArrayBuilder<TypeWithAnnotations> typeArguments =
-                ArrayBuilder<TypeWithAnnotations>.GetInstance();
+            ArrayBuilder<TypeWithAnnotations> typeArguments = ArrayBuilder<TypeWithAnnotations>
+                .GetInstance();
             MethodOrPropertyOverloadResolution(
                 indexers,
                 typeArguments,
@@ -701,9 +701,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     if (
-                        expectedConvention.CallKind.IsCallingConvention(
-                            Cci.CallingConvention.Unmanaged
-                        )
+                        expectedConvention.CallKind
+                            .IsCallingConvention(Cci.CallingConvention.Unmanaged)
                     )
                     {
                         if (
@@ -1365,15 +1364,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 !moreDerivedOverride.IsOverride
                 || checkOverrideContainingType
-                    && !moreDerivedOverride.ContainingType.IsDerivedFrom(
-                        member.ContainingType,
-                        TypeCompareKind.ConsiderEverything,
-                        ref useSiteInfo
-                    )
-                || !MemberSignatureComparer.SloppyOverrideComparer.Equals(
-                    member,
-                    moreDerivedOverride
-                )
+                    && !moreDerivedOverride.ContainingType
+                        .IsDerivedFrom(
+                            member.ContainingType,
+                            TypeCompareKind.ConsiderEverything,
+                            ref useSiteInfo
+                        )
+                || !MemberSignatureComparer.SloppyOverrideComparer
+                    .Equals(member, moreDerivedOverride)
             )
             {
                 // Easy out.
@@ -1828,10 +1826,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             foreach (MemberResolutionResult<TMember> result in results)
             {
-                result.Member.AddUseSiteInfo(
-                    ref useSiteInfo,
-                    addDiagnostics: result.HasUseSiteDiagnosticToReport
-                );
+                result.Member
+                    .AddUseSiteInfo(
+                        ref useSiteInfo,
+                        addDiagnostics: result.HasUseSiteDiagnosticToReport
+                    );
             }
         }
 
@@ -4253,10 +4252,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     member = (TMember)(Symbol)method.Construct(typeArguments);
-                    leastOverriddenMember =
-                        (TMember)(Symbol)leastOverriddenMethod.ConstructedFrom.Construct(
-                            typeArguments
-                        );
+                    leastOverriddenMember = (TMember)(Symbol)leastOverriddenMethod.ConstructedFrom
+                        .Construct(typeArguments);
 
                     // Spec (§7.6.5.1)
                     //   Once the (inferred) type arguments are substituted for the corresponding method type parameters,

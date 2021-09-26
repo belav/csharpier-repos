@@ -1476,17 +1476,17 @@ class C
                 // (6,30): error CS8315: Operator '==' is ambiguous on operands 'default' and 'default'
                 //         System.Console.Write((default, default) == (default, default));
                 Diagnostic(
-                        ErrorCode.ERR_AmbigBinaryOpsOnDefault,
-                        "(default, default) == (default, default)"
-                    )
+                    ErrorCode.ERR_AmbigBinaryOpsOnDefault,
+                    "(default, default) == (default, default)"
+                )
                     .WithArguments("==", "default", "default")
                     .WithLocation(6, 30),
                 // (6,30): error CS8315: Operator '==' is ambiguous on operands 'default' and 'default'
                 //         System.Console.Write((default, default) == (default, default));
                 Diagnostic(
-                        ErrorCode.ERR_AmbigBinaryOpsOnDefault,
-                        "(default, default) == (default, default)"
-                    )
+                    ErrorCode.ERR_AmbigBinaryOpsOnDefault,
+                    "(default, default) == (default, default)"
+                )
                     .WithArguments("==", "default", "default")
                     .WithLocation(6, 30),
                 // (7,30): error CS0034: Operator '==' is ambiguous on operands of type 'default' and '(default, default)'
@@ -1541,17 +1541,17 @@ class C
                 // (6,30): error CS8315: Operator '==' is ambiguous on operands 'default' and 'default'
                 //         System.Console.Write((null, (default, default)) == (null, (default, default)));
                 Diagnostic(
-                        ErrorCode.ERR_AmbigBinaryOpsOnDefault,
-                        "(null, (default, default)) == (null, (default, default))"
-                    )
+                    ErrorCode.ERR_AmbigBinaryOpsOnDefault,
+                    "(null, (default, default)) == (null, (default, default))"
+                )
                     .WithArguments("==", "default", "default")
                     .WithLocation(6, 30),
                 // (6,30): error CS8315: Operator '==' is ambiguous on operands 'default' and 'default'
                 //         System.Console.Write((null, (default, default)) == (null, (default, default)));
                 Diagnostic(
-                        ErrorCode.ERR_AmbigBinaryOpsOnDefault,
-                        "(null, (default, default)) == (null, (default, default))"
-                    )
+                    ErrorCode.ERR_AmbigBinaryOpsOnDefault,
+                    "(null, (default, default)) == (null, (default, default))"
+                )
                     .WithArguments("==", "default", "default")
                     .WithLocation(6, 30)
             );
@@ -1995,25 +1995,25 @@ class C
                 // (6,30): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'lambda expression'
                 //         System.Console.Write((null, null, null, null) == (null, () => { }, Main, (int i) => { int j = 0; return i + j; }));
                 Diagnostic(
-                        ErrorCode.ERR_BadBinaryOps,
-                        "(null, null, null, null) == (null, () => { }, Main, (int i) => { int j = 0; return i + j; })"
-                    )
+                    ErrorCode.ERR_BadBinaryOps,
+                    "(null, null, null, null) == (null, () => { }, Main, (int i) => { int j = 0; return i + j; })"
+                )
                     .WithArguments("==", "<null>", "lambda expression")
                     .WithLocation(6, 30),
                 // (6,30): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'method group'
                 //         System.Console.Write((null, null, null, null) == (null, () => { }, Main, (int i) => { int j = 0; return i + j; }));
                 Diagnostic(
-                        ErrorCode.ERR_BadBinaryOps,
-                        "(null, null, null, null) == (null, () => { }, Main, (int i) => { int j = 0; return i + j; })"
-                    )
+                    ErrorCode.ERR_BadBinaryOps,
+                    "(null, null, null, null) == (null, () => { }, Main, (int i) => { int j = 0; return i + j; })"
+                )
                     .WithArguments("==", "<null>", "method group")
                     .WithLocation(6, 30),
                 // (6,30): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'lambda expression'
                 //         System.Console.Write((null, null, null, null) == (null, () => { }, Main, (int i) => { int j = 0; return i + j; }));
                 Diagnostic(
-                        ErrorCode.ERR_BadBinaryOps,
-                        "(null, null, null, null) == (null, () => { }, Main, (int i) => { int j = 0; return i + j; })"
-                    )
+                    ErrorCode.ERR_BadBinaryOps,
+                    "(null, null, null, null) == (null, () => { }, Main, (int i) => { int j = 0; return i + j; })"
+                )
                     .WithArguments("==", "<null>", "lambda expression")
                     .WithLocation(6, 30)
             );
@@ -2421,9 +2421,9 @@ public class C
                 // (6,13): error CS0815: Cannot assign (<null>, <null>) to an implicitly-typed variable
                 //         var t = (null, null);
                 Diagnostic(
-                        ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue,
-                        "t = (null, null)"
-                    )
+                    ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue,
+                    "t = (null, null)"
+                )
                     .WithArguments("(<null>, <null>)")
                     .WithLocation(6, 13),
                 // (7,13): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'lambda expression'
@@ -3382,33 +3382,33 @@ public class Y
                 // (6,37): error CS0619: 'A.operator ==(A, Y)' is obsolete: 'obsolete'
                 //         System.Console.WriteLine($"{(new A(), new A()) == (new X(), new Y())}");
                 Diagnostic(
-                        ErrorCode.ERR_DeprecatedSymbolStr,
-                        "(new A(), new A()) == (new X(), new Y())"
-                    )
+                    ErrorCode.ERR_DeprecatedSymbolStr,
+                    "(new A(), new A()) == (new X(), new Y())"
+                )
                     .WithArguments("A.operator ==(A, Y)", "obsolete")
                     .WithLocation(6, 37),
                 // (6,37): error CS0619: 'A.operator ==(A, Y)' is obsolete: 'obsolete'
                 //         System.Console.WriteLine($"{(new A(), new A()) == (new X(), new Y())}");
                 Diagnostic(
-                        ErrorCode.ERR_DeprecatedSymbolStr,
-                        "(new A(), new A()) == (new X(), new Y())"
-                    )
+                    ErrorCode.ERR_DeprecatedSymbolStr,
+                    "(new A(), new A()) == (new X(), new Y())"
+                )
                     .WithArguments("A.operator ==(A, Y)", "obsolete")
                     .WithLocation(6, 37),
                 // (7,37): error CS0619: 'A.operator !=(A, Y)' is obsolete: 'obsolete too'
                 //         System.Console.WriteLine($"{(new A(), new A()) != (new X(), new Y())}");
                 Diagnostic(
-                        ErrorCode.ERR_DeprecatedSymbolStr,
-                        "(new A(), new A()) != (new X(), new Y())"
-                    )
+                    ErrorCode.ERR_DeprecatedSymbolStr,
+                    "(new A(), new A()) != (new X(), new Y())"
+                )
                     .WithArguments("A.operator !=(A, Y)", "obsolete too")
                     .WithLocation(7, 37),
                 // (7,37): error CS0619: 'A.operator !=(A, Y)' is obsolete: 'obsolete too'
                 //         System.Console.WriteLine($"{(new A(), new A()) != (new X(), new Y())}");
                 Diagnostic(
-                        ErrorCode.ERR_DeprecatedSymbolStr,
-                        "(new A(), new A()) != (new X(), new Y())"
-                    )
+                    ErrorCode.ERR_DeprecatedSymbolStr,
+                    "(new A(), new A()) != (new X(), new Y())"
+                )
                     .WithArguments("A.operator !=(A, Y)", "obsolete too")
                     .WithLocation(7, 37)
             );
@@ -4056,10 +4056,9 @@ class C
 "
             );
 
-            CompileAndVerify(source, options: TestOptions.ReleaseExe)
-                .VerifyIL(
-                    "C.Main",
-                    @"{
+            CompileAndVerify(source, options: TestOptions.ReleaseExe).VerifyIL(
+                "C.Main",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldc.i4.1
@@ -4067,7 +4066,7 @@ class C
   IL_0006:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -5563,17 +5562,17 @@ public class NotBool
                 // (7,18): error CS0029: Cannot implicitly convert type 'NotBool' to 'bool'
                 //         Write($"{(new A(1), new A(2)) == (new X(1), new Y(2))}");
                 Diagnostic(
-                        ErrorCode.ERR_NoImplicitConv,
-                        "(new A(1), new A(2)) == (new X(1), new Y(2))"
-                    )
+                    ErrorCode.ERR_NoImplicitConv,
+                    "(new A(1), new A(2)) == (new X(1), new Y(2))"
+                )
                     .WithArguments("NotBool", "bool")
                     .WithLocation(7, 18),
                 // (7,18): error CS0029: Cannot implicitly convert type 'NotBool' to 'bool'
                 //         Write($"{(new A(1), new A(2)) == (new X(1), new Y(2))}");
                 Diagnostic(
-                        ErrorCode.ERR_NoImplicitConv,
-                        "(new A(1), new A(2)) == (new X(1), new Y(2))"
-                    )
+                    ErrorCode.ERR_NoImplicitConv,
+                    "(new A(1), new A(2)) == (new X(1), new Y(2))"
+                )
                     .WithArguments("NotBool", "bool")
                     .WithLocation(7, 18)
             );
@@ -5651,17 +5650,17 @@ public class NotBool
                 // (7,18): error CS0029: Cannot implicitly convert type 'NotBool' to 'bool'
                 //         Write($"{(new A(1), new A(2)) == (new X(1), new Y(2))}");
                 Diagnostic(
-                        ErrorCode.ERR_NoImplicitConv,
-                        "(new A(1), new A(2)) == (new X(1), new Y(2))"
-                    )
+                    ErrorCode.ERR_NoImplicitConv,
+                    "(new A(1), new A(2)) == (new X(1), new Y(2))"
+                )
                     .WithArguments("NotBool", "bool")
                     .WithLocation(7, 18),
                 // (7,18): error CS0029: Cannot implicitly convert type 'NotBool' to 'bool'
                 //         Write($"{(new A(1), new A(2)) == (new X(1), new Y(2))}");
                 Diagnostic(
-                        ErrorCode.ERR_NoImplicitConv,
-                        "(new A(1), new A(2)) == (new X(1), new Y(2))"
-                    )
+                    ErrorCode.ERR_NoImplicitConv,
+                    "(new A(1), new A(2)) == (new X(1), new Y(2))"
+                )
                     .WithArguments("NotBool", "bool")
                     .WithLocation(7, 18)
             );
@@ -6234,10 +6233,12 @@ public class C
             comp.VerifyDiagnostics(
                 // (8,15): error CS1510: A ref or out value must be an assignable variable
                 //         M(ref (1, 2) == (3, 4), out (1, 2) == (3, 4));
-                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "(1, 2) == (3, 4)").WithLocation(8, 15),
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "(1, 2) == (3, 4)")
+                    .WithLocation(8, 15),
                 // (8,37): error CS1510: A ref or out value must be an assignable variable
                 //         M(ref (1, 2) == (3, 4), out (1, 2) == (3, 4));
-                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "(1, 2) == (3, 4)").WithLocation(8, 37)
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "(1, 2) == (3, 4)")
+                    .WithLocation(8, 37)
             );
         }
 

@@ -59,9 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
 }",
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        x => x.Kind != "Method"
-                    );
+                    var item = (await _aggregator.GetItemsAsync("Goo"))
+                        .Single(x => x.Kind != "Method");
                     VerifyNavigateToResultItem(
                         item,
                         "Goo",
@@ -91,9 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
 }",
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("DogBed")).Single(
-                        x => x.Kind != "Method"
-                    );
+                    var item = (await _aggregator.GetItemsAsync("DogBed"))
+                        .Single(x => x.Kind != "Method");
                     VerifyNavigateToResultItem(
                         item,
                         "DogBed",
@@ -153,9 +151,8 @@ class Goo<T> where T : IEnumerable
 }",
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        x => x.Kind != "Method"
-                    );
+                    var item = (await _aggregator.GetItemsAsync("Goo"))
+                        .Single(x => x.Kind != "Method");
                     VerifyNavigateToResultItem(
                         item,
                         "Goo",
@@ -264,9 +261,8 @@ Class Program { FileStyleUriParser f; }",
 }",
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        x => x.Kind != "Method"
-                    );
+                    var item = (await _aggregator.GetItemsAsync("Goo"))
+                        .Single(x => x.Kind != "Method");
                     VerifyNavigateToResultItem(
                         item,
                         "Goo",
@@ -290,9 +286,8 @@ Class Program { FileStyleUriParser f; }",
 }",
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("B")).Single(
-                        x => x.Kind != "Method"
-                    );
+                    var item = (await _aggregator.GetItemsAsync("B"))
+                        .Single(x => x.Kind != "Method");
                     VerifyNavigateToResultItem(
                         item,
                         "Bar",
@@ -319,9 +314,8 @@ Class Program { FileStyleUriParser f; }",
 }",
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Colors")).Single(
-                        x => x.Kind != "Method"
-                    );
+                    var item = (await _aggregator.GetItemsAsync("Colors"))
+                        .Single(x => x.Kind != "Method");
                     VerifyNavigateToResultItem(
                         item,
                         "Colors",
@@ -406,11 +400,8 @@ Class Program { FileStyleUriParser f; }",
                         PatternMatchKind.Exact,
                         NavigateToItemKind.Field,
                         Glyph.FieldPrivate,
-                        additionalInfo: string.Format(
-                            FeaturesResources.in_0_project_1,
-                            "Goo",
-                            "Test"
-                        )
+                        additionalInfo: string
+                            .Format(FeaturesResources.in_0_project_1, "Goo", "Test")
                     );
                 }
             );
@@ -435,11 +426,8 @@ Class Program { FileStyleUriParser f; }",
                         PatternMatchKind.Exact,
                         NavigateToItemKind.Property,
                         Glyph.PropertyPublic,
-                        additionalInfo: string.Format(
-                            FeaturesResources.in_0_project_1,
-                            "Goo",
-                            "Test"
-                        )
+                        additionalInfo: string
+                            .Format(FeaturesResources.in_0_project_1, "Goo", "Test")
                     );
                 }
             );
@@ -463,11 +451,8 @@ Class Program { FileStyleUriParser f; }",
                         PatternMatchKind.CamelCaseExact,
                         NavigateToItemKind.Event,
                         Glyph.EventPublic,
-                        additionalInfo: string.Format(
-                            FeaturesResources.in_0_project_1,
-                            "Goo",
-                            "Test"
-                        )
+                        additionalInfo: string
+                            .Format(FeaturesResources.in_0_project_1, "Goo", "Test")
                     );
                 }
             );
@@ -493,11 +478,8 @@ Class Program { FileStyleUriParser f; }",
                         PatternMatchKind.Prefix,
                         NavigateToItemKind.Property,
                         Glyph.PropertyPrivate,
-                        additionalInfo: string.Format(
-                            FeaturesResources.in_0_project_1,
-                            "Goo",
-                            "Test"
-                        )
+                        additionalInfo: string
+                            .Format(FeaturesResources.in_0_project_1, "Goo", "Test")
                     );
                 }
             );
@@ -571,9 +553,8 @@ Class Program { FileStyleUriParser f; }",
 }",
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        t => t.Kind == NavigateToItemKind.Method
-                    );
+                    var item = (await _aggregator.GetItemsAsync("Goo"))
+                        .Single(t => t.Kind == NavigateToItemKind.Method);
                     VerifyNavigateToResultItem(
                         item,
                         "Goo",
@@ -601,9 +582,8 @@ Class Program { FileStyleUriParser f; }",
 }",
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        t => t.Kind == NavigateToItemKind.Method
-                    );
+                    var item = (await _aggregator.GetItemsAsync("Goo"))
+                        .Single(t => t.Kind == NavigateToItemKind.Method);
                     VerifyNavigateToResultItem(
                         item,
                         "Goo",
@@ -631,9 +611,8 @@ Class Program { FileStyleUriParser f; }",
 }",
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
-                        t => t.Kind == NavigateToItemKind.Method && t.Name != ".ctor"
-                    );
+                    var item = (await _aggregator.GetItemsAsync("Goo"))
+                        .Single(t => t.Kind == NavigateToItemKind.Method && t.Name != ".ctor");
                     VerifyNavigateToResultItem(
                         item,
                         "Goo",
@@ -785,9 +764,8 @@ Class Program { FileStyleUriParser f; }",
 }",
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("DoStuff")).Single(
-                        x => x.Kind != "Method"
-                    );
+                    var item = (await _aggregator.GetItemsAsync("DoStuff"))
+                        .Single(x => x.Kind != "Method");
                     VerifyNavigateToResultItem(
                         item,
                         "DoStuff",
@@ -948,9 +926,8 @@ class C2
                 code,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("G")).Single(
-                        x => x.Kind != "Method"
-                    );
+                    var item = (await _aggregator.GetItemsAsync("G"))
+                        .Single(x => x.Kind != "Method");
                     var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
 
                     var descriptionItems = itemDisplay.DescriptionItems;

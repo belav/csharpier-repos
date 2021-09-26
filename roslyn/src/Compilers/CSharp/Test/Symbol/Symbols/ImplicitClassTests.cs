@@ -86,8 +86,8 @@ void Goo()
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>();
             var toStringIdentifier = identifiers.Where(
-                    node => node.Identifier.ValueText.Equals("ToString")
-                )
+                node => node.Identifier.ValueText.Equals("ToString")
+            )
                 .Single();
 
             Assert.Null(model.GetSymbolInfo(toStringIdentifier).Symbol);

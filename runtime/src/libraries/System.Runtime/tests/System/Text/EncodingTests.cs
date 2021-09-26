@@ -57,13 +57,13 @@ namespace System.Text.Tests
             Mock<EncodingProvider> mockProvider = new Mock<EncodingProvider>();
             mockProvider.Setup(o => o.GetEncoding(codePage)).Returns(mockEncoding.Object);
             mockProvider.Setup(
-                    o =>
-                        o.GetEncoding(
-                            codePage,
-                            It.IsAny<EncoderFallback>(),
-                            It.IsAny<DecoderFallback>()
-                        )
-                )
+                o =>
+                    o.GetEncoding(
+                        codePage,
+                        It.IsAny<EncoderFallback>(),
+                        It.IsAny<DecoderFallback>()
+                    )
+            )
                 .Returns(mockEncoding.Object);
 
             ThreadStaticEncodingProvider.WithEncodingProvider(
@@ -119,13 +119,13 @@ namespace System.Text.Tests
             Mock<EncodingProvider> mockProvider = new Mock<EncodingProvider>();
             mockProvider.Setup(o => o.GetEncoding(encodingName)).Returns(mockEncoding.Object);
             mockProvider.Setup(
-                    o =>
-                        o.GetEncoding(
-                            encodingName,
-                            It.IsAny<EncoderFallback>(),
-                            It.IsAny<DecoderFallback>()
-                        )
-                )
+                o =>
+                    o.GetEncoding(
+                        encodingName,
+                        It.IsAny<EncoderFallback>(),
+                        It.IsAny<DecoderFallback>()
+                    )
+            )
                 .Returns(mockEncoding.Object);
 
             ThreadStaticEncodingProvider.WithEncodingProvider(

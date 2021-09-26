@@ -73,12 +73,8 @@ namespace System.Data.ProviderBase
             DbConnectionOptions? userOptions
         )
         {
-            return base.TryOpenConnectionInternal(
-                outerConnection,
-                connectionFactory,
-                retry,
-                userOptions
-            );
+            return base
+                .TryOpenConnectionInternal(outerConnection, connectionFactory, retry, userOptions);
         }
     }
 

@@ -121,16 +121,18 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             // However, this is a special analyzer that is directly invoked by the analysis host (IDE), so we do this check here.
             if (
                 compilationWithAnalyzers.Compilation.Options.SyntaxTreeOptionsProvider != null
-                    && compilationWithAnalyzers.Compilation.Options.SyntaxTreeOptionsProvider.TryGetDiagnosticValue(
-                        tree,
+                    && compilationWithAnalyzers.Compilation.Options.SyntaxTreeOptionsProvider
+                        .TryGetDiagnosticValue(
+                            tree,
+                            IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId,
+                            cancellationToken,
+                            out var severity
+                        )
+                || compilationWithAnalyzers.Compilation.Options.SpecificDiagnosticOptions
+                    .TryGetValue(
                         IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId,
-                        cancellationToken,
-                        out var severity
+                        out severity
                     )
-                || compilationWithAnalyzers.Compilation.Options.SpecificDiagnosticOptions.TryGetValue(
-                    IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId,
-                    out severity
-                )
             )
             {
                 if (severity == ReportDiagnostic.Suppress)
@@ -141,10 +143,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 
             // Bail out if analyzer has been turned off through options.
             var option = compilationWithAnalyzers.AnalysisOptions.Options?.GetOption(
-                    CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions,
-                    tree,
-                    cancellationToken
-                )
+                CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions,
+                tree,
+                cancellationToken
+            )
                 .Trim();
             var (userIdExclusions, userCategoryExclusions, analyzerDisabled) = ParseUserExclusions(
                 option
@@ -196,17 +198,13 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             //     b. Otherwise, if the diagnostic was suppressed with SuppressMessageAttribute, mark the attribute as used.
             //  6. Finally, report a diagostic all the pragmas and SuppressMessageAttributes which have not been marked as used.
 
-            using var _1 = PooledDictionary<
-                string,
-                List<(SyntaxTrivia pragma, bool isDisable)>
-            >.GetInstance(out var idToPragmasMap);
+            using var _1 = PooledDictionary<string, List<(SyntaxTrivia pragma, bool isDisable)>>
+                .GetInstance(out var idToPragmasMap);
             using var _2 =
-                ArrayBuilder<(SyntaxTrivia pragma, ImmutableArray<string> ids, bool isDisable)>.GetInstance(
-                    out var sortedPragmasWithIds
-                );
-            using var _3 = PooledDictionary<SyntaxTrivia, bool>.GetInstance(
-                out var pragmasToIsUsedMap
-            );
+                ArrayBuilder<(SyntaxTrivia pragma, ImmutableArray<string> ids, bool isDisable)>
+                    .GetInstance(out var sortedPragmasWithIds);
+            using var _3 = PooledDictionary<SyntaxTrivia, bool>
+                .GetInstance(out var pragmasToIsUsedMap);
             using var _4 = PooledHashSet<string>.GetInstance(out var compilerDiagnosticIds);
             var hasPragmaInAnalysisSpan = ProcessPragmaDirectives(
                 root,
@@ -220,22 +218,20 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            using var _5 = PooledDictionary<string, List<SyntaxNode>>.GetInstance(
-                out var idToSuppressMessageAttributesMap
-            );
-            using var _6 = PooledDictionary<SyntaxNode, bool>.GetInstance(
-                out var suppressMessageAttributesToIsUsedMap
-            );
+            using var _5 = PooledDictionary<string, List<SyntaxNode>>
+                .GetInstance(out var idToSuppressMessageAttributesMap);
+            using var _6 = PooledDictionary<SyntaxNode, bool>
+                .GetInstance(out var suppressMessageAttributesToIsUsedMap);
             var hasAttributeInAnalysisSpan = await ProcessSuppressMessageAttributesAsync(
-                    root,
-                    semanticModel,
-                    span,
-                    idToSuppressMessageAttributesMap,
-                    suppressMessageAttributesToIsUsedMap,
-                    userIdExclusions,
-                    userCategoryExclusions,
-                    cancellationToken
-                )
+                root,
+                semanticModel,
+                span,
+                idToSuppressMessageAttributesMap,
+                suppressMessageAttributesToIsUsedMap,
+                userIdExclusions,
+                userCategoryExclusions,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -253,29 +249,29 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 
             // Compute all the reported compiler and analyzer diagnostics for diagnostic IDs corresponding to pragmas in the tree.
             var (diagnostics, unhandledIds) = await GetReportedDiagnosticsForIdsAsync(
-                    idsToAnalyze,
-                    root,
-                    semanticModel,
-                    compilationWithAnalyzers,
-                    getSupportedDiagnostics,
-                    compilerDiagnosticIds,
-                    cancellationToken
-                )
+                idsToAnalyze,
+                root,
+                semanticModel,
+                compilationWithAnalyzers,
+                getSupportedDiagnostics,
+                compilerDiagnosticIds,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
 
             // Iterate through reported diagnostics which are suppressed in source through pragmas and mark the corresponding pragmas as used.
             await ProcessReportedDiagnosticsAsync(
-                    diagnostics,
-                    tree,
-                    compilationWithAnalyzers,
-                    idToPragmasMap,
-                    pragmasToIsUsedMap,
-                    idToSuppressMessageAttributesMap,
-                    suppressMessageAttributesToIsUsedMap,
-                    cancellationToken
-                )
+                diagnostics,
+                tree,
+                compilationWithAnalyzers,
+                idToPragmasMap,
+                pragmasToIsUsedMap,
+                idToSuppressMessageAttributesMap,
+                suppressMessageAttributesToIsUsedMap,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -599,35 +595,31 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 var analyzers = analyzersBuilder.ToImmutable();
 
                 var analysisResult = await compilationWithAnalyzers.GetAnalysisResultAsync(
-                        semanticModel.SyntaxTree,
-                        analyzers,
-                        cancellationToken
-                    )
+                    semanticModel.SyntaxTree,
+                    analyzers,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 if (
-                    analysisResult.SyntaxDiagnostics.TryGetValue(
-                        semanticModel.SyntaxTree,
-                        out var diagnostics
-                    )
+                    analysisResult.SyntaxDiagnostics
+                        .TryGetValue(semanticModel.SyntaxTree, out var diagnostics)
                 )
                 {
                     AddAllDiagnostics(diagnostics, reportedDiagnostics);
                 }
 
                 analysisResult = await compilationWithAnalyzers.GetAnalysisResultAsync(
-                        semanticModel,
-                        filterSpan: null,
-                        analyzers,
-                        cancellationToken
-                    )
+                    semanticModel,
+                    filterSpan: null,
+                    analyzers,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 if (
-                    analysisResult.SemanticDiagnostics.TryGetValue(
-                        semanticModel.SyntaxTree,
-                        out diagnostics
-                    )
+                    analysisResult.SemanticDiagnostics
+                        .TryGetValue(semanticModel.SyntaxTree, out diagnostics)
                 )
                 {
                     AddAllDiagnostics(diagnostics, reportedDiagnostics);
@@ -701,12 +693,12 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 if (suppressionInfo.Attribute is { } attribute)
                 {
                     await ProcessAttributeSuppressionsAsync(
-                            diagnostic,
-                            attribute,
-                            idToSuppressMessageAttributesMap,
-                            suppressMessageAttributesToIsUsedMap,
-                            cancellationToken
-                        )
+                        diagnostic,
+                        attribute,
+                        idToSuppressMessageAttributesMap,
+                        suppressMessageAttributesToIsUsedMap,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else
@@ -779,9 +771,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     return;
                 }
 
-                var attributeNode = await attribute.ApplicationSyntaxReference.GetSyntaxAsync(
-                        cancellationToken
-                    )
+                var attributeNode = await attribute.ApplicationSyntaxReference
+                    .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false);
                 foreach (var node in suppressMessageAttributesForId)
                 {
@@ -967,8 +958,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             CancellationToken cancellationToken
         )
         {
-            var suppressMessageAttributeType =
-                semanticModel.Compilation.SuppressMessageAttributeType();
+            var suppressMessageAttributeType = semanticModel.Compilation
+                .SuppressMessageAttributeType();
             if (suppressMessageAttributeType == null)
             {
                 return false;
@@ -1053,11 +1044,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                                     idToSuppressMessageAttributesMap.Add(id, nodesForId);
                                 }
 
-                                var attributeNode =
-                                    await attribute.ApplicationSyntaxReference.GetSyntaxAsync(
-                                            cancellationToken
-                                        )
-                                        .ConfigureAwait(false);
+                                var attributeNode = await attribute.ApplicationSyntaxReference
+                                    .GetSyntaxAsync(cancellationToken)
+                                    .ConfigureAwait(false);
                                 nodesForId.Add(attributeNode);
 
                                 // Initialize the attribute node as unnecessary at the start of the algorithm.

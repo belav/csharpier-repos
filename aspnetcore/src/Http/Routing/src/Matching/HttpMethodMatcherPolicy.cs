@@ -498,10 +498,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             protected override int CompareMetadata(IHttpMethodMetadata? x, IHttpMethodMetadata? y)
             {
                 // Ignore the metadata if it has an empty list of HTTP methods.
-                return base.CompareMetadata(
-                    x?.HttpMethods.Count > 0 ? x : null,
-                    y?.HttpMethods.Count > 0 ? y : null
-                );
+                return base
+                    .CompareMetadata(
+                        x?.HttpMethods.Count > 0 ? x : null,
+                        y?.HttpMethods.Count > 0 ? y : null
+                    );
             }
         }
 
@@ -522,11 +523,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // These are comparable so they can be sorted in tests.
             public int CompareTo(EdgeKey other)
             {
-                var compare = string.Compare(
-                    HttpMethod,
-                    other.HttpMethod,
-                    StringComparison.Ordinal
-                );
+                var compare = string
+                    .Compare(HttpMethod, other.HttpMethod, StringComparison.Ordinal);
                 if (compare != 0)
                 {
                     return compare;

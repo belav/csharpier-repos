@@ -454,11 +454,8 @@ partial class Partial {{ }}
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(xml);
             var xmlFilePath = xmlFile.Path;
 
-            string includeElement = string.Format(
-                @"<include file='{0}' path='{1}' />",
-                xmlFilePath,
-                xpath
-            );
+            string includeElement = string
+                .Format(@"<include file='{0}' path='{1}' />", xmlFilePath, xpath);
             var sourceTemplate =
                 @"
 /// {0}
@@ -490,10 +487,8 @@ partial class Partial {{ }}
                 );
 
             var actualText = GetDocumentationCommentText(comp, expectedDiagnostics: null);
-            var expectedText = string.Format(
-                expectedTextTemplate,
-                TestHelpers.AsXmlCommentText(xmlFilePath)
-            );
+            var expectedText = string
+                .Format(expectedTextTemplate, TestHelpers.AsXmlCommentText(xmlFilePath));
             Assert.Equal(expectedText, actualText);
         }
 
@@ -507,9 +502,9 @@ partial class Partial {{ }}
             get
             {
                 var modes = Enumerable.Range(
-                        (int)DocumentationMode.None,
-                        DocumentationMode.Diagnose - DocumentationMode.None + 1
-                    )
+                    (int)DocumentationMode.None,
+                    DocumentationMode.Diagnose - DocumentationMode.None + 1
+                )
                     .Select(i => (DocumentationMode)i);
                 AssertEx.All(modes, mode => mode.IsValid());
                 return modes;

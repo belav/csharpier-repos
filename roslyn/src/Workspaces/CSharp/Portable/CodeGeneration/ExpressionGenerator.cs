@@ -72,10 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 if (type.TypeKind == TypeKind.Enum)
                 {
                     var enumType = (INamedTypeSymbol)type;
-                    return (ExpressionSyntax)CSharpFlagsEnumGenerator.Instance.TryCreateEnumConstantValue(
-                        enumType,
-                        value
-                    );
+                    return (ExpressionSyntax)CSharpFlagsEnumGenerator.Instance
+                        .TryCreateEnumConstantValue(enumType, value);
                 }
                 else if (type.IsNullable())
                 {
@@ -444,10 +442,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             var stringValue =
                 negative && nonNegativeValue.Equals(value)
                     ? integerMinValueString
-                    : ((IFormattable)nonNegativeValue).ToString(
-                          formatString,
-                          CultureInfo.InvariantCulture
-                      ) + suffix;
+                    : ((IFormattable)nonNegativeValue)
+                          .ToString(formatString, CultureInfo.InvariantCulture) + suffix;
 
             var literal = SyntaxFactory.LiteralExpression(
                 SyntaxKind.NumericLiteralExpression,

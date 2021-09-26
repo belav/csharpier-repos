@@ -22,10 +22,11 @@ namespace System.Reflection.Emit.Tests
         {
             Type methodType = typeof(IWithIn<int>);
             MethodInfo method = methodType.GetMethod("Method");
-            MethodInfo getMethodFromHandle = typeof(MethodBase).GetMethod(
-                "GetMethodFromHandle",
-                new[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) }
-            );
+            MethodInfo getMethodFromHandle = typeof(MethodBase)
+                .GetMethod(
+                    "GetMethodFromHandle",
+                    new[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) }
+                );
 
             ModuleBuilder moduleBuilder = Helpers.DynamicModule();
             TypeBuilder typeBuilder = moduleBuilder.DefineType(

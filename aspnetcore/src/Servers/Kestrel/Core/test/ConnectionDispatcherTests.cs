@@ -45,9 +45,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var task = kestrelConnection.ExecuteAsync();
 
             // The scope should be created
-            var scopeObjects = ((TestKestrelTrace)serviceContext.Log).Logger.Scopes.OfType<
-                IReadOnlyList<KeyValuePair<string, object>>
-            >().ToList();
+            var scopeObjects = ((TestKestrelTrace)serviceContext.Log).Logger.Scopes
+                .OfType<IReadOnlyList<KeyValuePair<string, object>>>()
+                .ToList();
 
             Assert.Single(scopeObjects);
             var pairs = scopeObjects[0].ToDictionary(p => p.Key, p => p.Value);
@@ -103,8 +103,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 serviceContext.Log
             );
             transportConnectionManager.AddConnection(0, kestrelConnection);
-            var completeFeature =
-                kestrelConnection.TransportConnection.Features.Get<IConnectionCompleteFeature>();
+            var completeFeature = kestrelConnection.TransportConnection.Features
+                .Get<IConnectionCompleteFeature>();
 
             Assert.NotNull(completeFeature);
             object stateObject = new object();
@@ -142,8 +142,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 serviceContext.Log
             );
             transportConnectionManager.AddConnection(0, kestrelConnection);
-            var completeFeature =
-                kestrelConnection.TransportConnection.Features.Get<IConnectionCompleteFeature>();
+            var completeFeature = kestrelConnection.TransportConnection.Features
+                .Get<IConnectionCompleteFeature>();
 
             Assert.NotNull(completeFeature);
             object stateObject = new object();

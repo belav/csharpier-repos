@@ -286,26 +286,26 @@ namespace System.Linq.Expressions.Tests
         {
             LabelTarget target = Expression.Label(typeof(int));
             Func<int> add = Expression.Lambda<Func<int>>(
+                Expression.Add(
                     Expression.Add(
-                        Expression.Add(
-                            Expression.Block(
-                                Expression.Goto(target, Expression.Constant(6)),
-                                Expression.Throw(Expression.Constant(new Exception())),
-                                Expression.Label(target, Expression.Constant(0))
-                            ),
-                            Expression.Block(
-                                Expression.Goto(target, Expression.Constant(4)),
-                                Expression.Throw(Expression.Constant(new Exception())),
-                                Expression.Label(target, Expression.Constant(0))
-                            )
+                        Expression.Block(
+                            Expression.Goto(target, Expression.Constant(6)),
+                            Expression.Throw(Expression.Constant(new Exception())),
+                            Expression.Label(target, Expression.Constant(0))
                         ),
                         Expression.Block(
-                            Expression.Goto(target, Expression.Constant(5)),
+                            Expression.Goto(target, Expression.Constant(4)),
                             Expression.Throw(Expression.Constant(new Exception())),
                             Expression.Label(target, Expression.Constant(0))
                         )
+                    ),
+                    Expression.Block(
+                        Expression.Goto(target, Expression.Constant(5)),
+                        Expression.Throw(Expression.Constant(new Exception())),
+                        Expression.Label(target, Expression.Constant(0))
                     )
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(15, add());
         }

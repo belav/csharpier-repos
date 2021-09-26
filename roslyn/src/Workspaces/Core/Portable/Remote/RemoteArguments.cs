@@ -131,11 +131,11 @@ namespace Microsoft.CodeAnalysis.Remote
             // The server and client should both be talking about the same compilation.  As such
             // locations in symbols are save to resolve as we rehydrate the SymbolKey.
             var symbol = SymbolKey.ResolveString(
-                    SymbolKeyData,
-                    compilation,
-                    out var failureReason,
-                    cancellationToken
-                )
+                SymbolKeyData,
+                compilation,
+                out var failureReason,
+                cancellationToken
+            )
                 .GetAnySymbol();
 
             if (symbol == null)
@@ -301,10 +301,15 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             return new SerializableSymbolGroup(
                 new HashSet<SerializableSymbolAndProjectId>(
-                    group.Symbols.Select(
-                        s =>
-                            SerializableSymbolAndProjectId.Dehydrate(solution, s, cancellationToken)
-                    )
+                    group.Symbols
+                        .Select(
+                            s =>
+                                SerializableSymbolAndProjectId.Dehydrate(
+                                    solution,
+                                    s,
+                                    cancellationToken
+                                )
+                        )
                 )
             );
         }

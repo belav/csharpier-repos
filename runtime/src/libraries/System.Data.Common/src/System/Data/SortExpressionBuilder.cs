@@ -167,9 +167,8 @@ namespace System.Data
             {
                 if (selector == _currentSelector!.Value)
                 {
-                    builder._currentSelector = builder._selectors.AddLast(
-                        r => selector((T)(object)r!)
-                    );
+                    builder._currentSelector = builder._selectors
+                        .AddLast(r => selector((T)(object)r!));
                 }
                 else
                 {

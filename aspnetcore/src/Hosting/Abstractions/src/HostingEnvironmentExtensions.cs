@@ -72,11 +72,12 @@ namespace Microsoft.AspNetCore.Hosting
                 throw new ArgumentNullException(nameof(hostingEnvironment));
             }
 
-            return string.Equals(
-                hostingEnvironment.EnvironmentName,
-                environmentName,
-                StringComparison.OrdinalIgnoreCase
-            );
+            return string
+                .Equals(
+                    hostingEnvironment.EnvironmentName,
+                    environmentName,
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
     }
 }

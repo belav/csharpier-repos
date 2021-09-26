@@ -182,7 +182,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy
             var document = RazorSyntaxTree.Parse(source);
 
             // Assert
-            var erroredNode = document.Root.DescendantNodes()
+            var erroredNode = document.Root
+                .DescendantNodes()
                 .Last(
                     n =>
                         n.GetSpanContext()?.ChunkGenerator is TagHelperPrefixDirectiveChunkGenerator

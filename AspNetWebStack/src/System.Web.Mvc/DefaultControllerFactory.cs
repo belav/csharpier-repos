@@ -233,9 +233,9 @@ namespace System.Web.Mvc
                 type =>
                 {
                     var attr = type.GetCustomAttributes(
-                            typeof(SessionStateAttribute),
-                            inherit: true
-                        )
+                        typeof(SessionStateAttribute),
+                        inherit: true
+                    )
                         .OfType<SessionStateAttribute>()
                         .FirstOrDefault();
 
@@ -276,10 +276,8 @@ namespace System.Web.Mvc
             Type match;
             if (
                 routeData != null
-                && routeData.DataTokens.TryGetValue(
-                    RouteDataTokenKeys.Namespaces,
-                    out routeNamespacesObj
-                )
+                && routeData.DataTokens
+                    .TryGetValue(RouteDataTokenKeys.Namespaces, out routeNamespacesObj)
             )
             {
                 IEnumerable<string> routeNamespaces = routeNamespacesObj as IEnumerable<string>;
@@ -298,9 +296,8 @@ namespace System.Web.Mvc
                     // the UseNamespaceFallback key might not exist, in which case its value is implicitly "true"
                     if (
                         match != null
-                        || false.Equals(
-                            routeData.DataTokens[RouteDataTokenKeys.UseNamespaceFallback]
-                        )
+                        || false
+                            .Equals(routeData.DataTokens[RouteDataTokenKeys.UseNamespaceFallback])
                     )
                     {
                         // got a match or the route requested we stop looking

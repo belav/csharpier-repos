@@ -38,7 +38,8 @@ namespace BoundTreeGenerator
             _writer = writer;
             _tree = tree;
             _targetLang = targetLang;
-            _typeMap = tree.Types.Where(t => !(t is EnumType || t is ValueType))
+            _typeMap = tree.Types
+                .Where(t => !(t is EnumType || t is ValueType))
                 .ToDictionary(n => n.Name, n => n.Base);
             _typeMap.Add(tree.Root, null);
 
@@ -459,10 +460,11 @@ namespace BoundTreeGenerator
                                   : ToCamelCase(baseField.Name)
                             );
                         Or(
-                            (new[] { "hasErrors" }).Concat(
-                                from field in AllNodeOrNodeListFields(node)
-                                select ToCamelCase(field.Name) + ".HasErrors()"
-                            ),
+                            (new[] { "hasErrors" })
+                                .Concat(
+                                    from field in AllNodeOrNodeListFields(node)
+                                    select ToCamelCase(field.Name) + ".HasErrors()"
+                                ),
                             x => x
                         );
                     }
@@ -548,10 +550,11 @@ namespace BoundTreeGenerator
                                   : ToCamelCase(baseField.Name)
                             );
                         Or(
-                            (new[] { "hasErrors" }).Concat(
-                                from field in AllNodeOrNodeListFields(node)
-                                select ToCamelCase(field.Name) + ".NonNullAndHasErrors()"
-                            ),
+                            (new[] { "hasErrors" })
+                                .Concat(
+                                    from field in AllNodeOrNodeListFields(node)
+                                    select ToCamelCase(field.Name) + ".NonNullAndHasErrors()"
+                                ),
                             x => x
                         );
                     }
@@ -1135,11 +1138,12 @@ namespace BoundTreeGenerator
                     Comma(
                         AllSpecifiableFields(node),
                         field =>
-                            string.Format(
-                                "{0} {1}",
-                                GetField(node, field.Name).Type,
-                                ToCamelCase(field.Name)
-                            )
+                            string
+                                .Format(
+                                    "{0} {1}",
+                                    GetField(node, field.Name).Type,
+                                    ToCamelCase(field.Name)
+                                )
                     );
                     UnParen();
                     Blank();
@@ -1153,9 +1157,8 @@ namespace BoundTreeGenerator
                         Blank();
                         Brace();
                         Write("var result = new {0}", node.Name);
-                        var fields = new[] { "this.Syntax" }.Concat(
-                                AllSpecifiableFields(node).Select(f => ToCamelCase(f.Name))
-                            )
+                        var fields = new[] { "this.Syntax" }
+                            .Concat(AllSpecifiableFields(node).Select(f => ToCamelCase(f.Name)))
                             .Concat(new[] { "this.HasErrors" });
                         ParenList(fields);
                         WriteLine(";");
@@ -1188,12 +1191,10 @@ namespace BoundTreeGenerator
                             AllSpecifiableFields(node),
                             field =>
                                 IsValueType(field.Type)
-                                    ? string.Format(
-                                          "{0} <> Me.{1}",
-                                          ToCamelCase(field.Name),
-                                          field.Name
-                                      )
-                                    : string.Format(
+                                    ? string
+                                      .Format("{0} <> Me.{1}", ToCamelCase(field.Name), field.Name)
+                                    : string
+                                      .Format(
                                           "{0} IsNot Me.{1}",
                                           ToCamelCase(field.Name),
                                           field.Name
@@ -1202,9 +1203,8 @@ namespace BoundTreeGenerator
                         WriteLine(" Then");
                         Indent();
                         Write("Dim result = New {0}", node.Name);
-                        var fields = new[] { "Me.Syntax" }.Concat(
-                                AllSpecifiableFields(node).Select(f => ToCamelCase(f.Name))
-                            )
+                        var fields = new[] { "Me.Syntax" }
+                            .Concat(AllSpecifiableFields(node).Select(f => ToCamelCase(f.Name)))
                             .Concat(new[] { "Me.HasErrors" });
                         ParenList(fields);
                         WriteLine("");

@@ -243,17 +243,14 @@ ORDER BY [e].[Id], [t].[EntityOneId], [t].[EntityTwoId], [t].[Id], [t0].[Id], [t
             }
             catch
             {
-                var methodCallLine = Environment.StackTrace.Split(
-                    new[] { Environment.NewLine },
-                    StringSplitOptions.RemoveEmptyEntries
-                )[2].Substring(6);
+                var methodCallLine = Environment.StackTrace
+                    .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)[2]
+                    .Substring(6);
 
                 var indexMethodEnding = methodCallLine.IndexOf(')') + 1;
                 var testName = methodCallLine.Substring(0, indexMethodEnding);
-                var parts = methodCallLine[indexMethodEnding..].Split(
-                    " ",
-                    StringSplitOptions.RemoveEmptyEntries
-                );
+                var parts = methodCallLine[indexMethodEnding..]
+                    .Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 var fileName = parts[1][..^5];
                 var lineNumber = int.Parse(parts[2]);
 
@@ -300,8 +297,8 @@ ORDER BY [e].[Id], [t].[EntityOneId], [t].[EntityTwoId], [t].[Id], [t0].[Id], [t
                     .HasDefaultValueSql("GETUTCDATE()");
 
                 modelBuilder.SharedTypeEntity<Dictionary<string, object>>(
-                        "JoinOneToThreePayloadFullShared"
-                    )
+                    "JoinOneToThreePayloadFullShared"
+                )
                     .IndexerProperty<string>("Payload")
                     .HasDefaultValue("Generated");
 

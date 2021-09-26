@@ -385,7 +385,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 + "E7029B0D4C0F6FD28E9886227E05B56D6BB0BA2933126C808EE0D972054A26DB"
                 + "2CA97B09967B2B6D7592F2563302111DE2FC42ED442522CD83A1AE9E8C3F0B1A"
                 + "9D50A4A89008D2135E0D8BC859F81CEF76166834432B4AE9BAAD1FC08E4C2C70"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] output;
 
@@ -708,7 +709,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 + "CC43AE238410167BC42FDE9DA07D135C0D2DB48537299DC067A808CCBA2B0B0A"
                 + "7A741705DA98872A7416610939DE4E2D4C387662ABD74D80E33502AFF1D571DB"
                 + "B874CA25CC54CEE69B6252B33BA92119873E0F8B5CCE0496324904A7847D73FB"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] output;
 
@@ -1020,7 +1022,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 + "BFE72218C0DF596DFF02C332F45ECC04280455F5D2666E93A3522BB8B41FC92E"
                 + "0176AFB1D3A5AE474B708B882ACA88447046E13D44E5EA8D66421DFC177A683B"
                 + "7B395F18886AAFD9CED072079739ED1D390354976D188C50A29AAD58784886E6"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             using (RSA rsa = RSAFactory.Create(TestData.RSA2048Params))
             {
@@ -1083,7 +1086,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 + "9E86950FC18BD1D6C33508596BAEF0D916F0E29D647C037022753B1E8E44ABCF"
                 + "0079CEFA8972F02D05C4204078BD9ADF98571CE5374AB94BF01918F0EA31A815"
                 + "59F065A4C3FA0DD0E3086530608CA54387F86F25ED77D46C7576376B64BE3C91"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             using (RSA rsa = RSAFactory.Create(TestData.RSA2048Params))
             {
@@ -1109,7 +1113,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 + "A716FE05773803C43B5040BF29AB33C4567E8986B3C442A7CEFCF46D61E13E54"
                 + "85468C0FF3FDC804BDDE60E4310CC45F5196DC75F713581D934FB914661B6B69"
                 + "EC3CE2CF469D7CD8727B959B5593F8D38124B0947E7948252BF9A53763877F"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] correctlyPadded = new byte[encrypted.Length + 1];
             Buffer.BlockCopy(encrypted, 0, correctlyPadded, 1, encrypted.Length);

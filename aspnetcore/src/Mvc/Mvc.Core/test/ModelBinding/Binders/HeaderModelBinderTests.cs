@@ -422,8 +422,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty<ModelWithReadOnlyArray>(
-                    nameof(ModelWithReadOnlyArray.ArrayProperty)
-                )
+                nameof(ModelWithReadOnlyArray.ArrayProperty)
+            )
                 .BindingDetails(bd => bd.BindingSource = BindingSource.Header);
             return metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithReadOnlyArray),

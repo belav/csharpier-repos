@@ -54,12 +54,13 @@ namespace Microsoft.AspNetCore.Mvc.Testing
             ContentRootPath = contentRootPath;
             ContentRootTest = contentRootTest;
             if (
-                int.TryParse(
-                    priority,
-                    NumberStyles.Integer,
-                    CultureInfo.InvariantCulture,
-                    out var parsedPriority
-                )
+                int
+                    .TryParse(
+                        priority,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out var parsedPriority
+                    )
             )
             {
                 Priority = parsedPriority;

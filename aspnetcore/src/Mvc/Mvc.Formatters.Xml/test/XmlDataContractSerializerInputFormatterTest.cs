@@ -557,9 +557,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var expectedException = typeof(XmlException);
-            var inpStart = Encoding.Unicode.GetBytes(
-                "<?xml version=\"1.0\" encoding=\"UTF-16\"?>" + "<DummyClass><SampleInt>"
-            );
+            var inpStart = Encoding.Unicode
+                .GetBytes(
+                    "<?xml version=\"1.0\" encoding=\"UTF-16\"?>" + "<DummyClass><SampleInt>"
+                );
             byte[] inp = { 192, 193 };
             var inpEnd = Encoding.Unicode.GetBytes("</SampleInt></DummyClass>");
 
@@ -586,10 +587,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             // Arrange
             var expectedException = typeof(XmlException);
 
-            var inputBytes = Encoding.UTF8.GetBytes(
-                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                    + "<DummyClass><SampleInt>1000</SampleInt></DummyClass>"
-            );
+            var inputBytes = Encoding.UTF8
+                .GetBytes(
+                    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                        + "<DummyClass><SampleInt>1000</SampleInt></DummyClass>"
+                );
 
             var formatter = new XmlDataContractSerializerInputFormatter(new MvcOptions());
 
@@ -624,12 +626,13 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             // Arrange
             var sampleString = "Test";
             var sampleStringBytes = Encoding.UTF8.GetBytes(sampleString);
-            var inputStart = Encoding.UTF8.GetBytes(
-                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                    + Environment.NewLine
-                    + "<TestLevelTwo><SampleString>"
-                    + sampleString
-            );
+            var inputStart = Encoding.UTF8
+                .GetBytes(
+                    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                        + Environment.NewLine
+                        + "<TestLevelTwo><SampleString>"
+                        + sampleString
+                );
             byte[] bom = { 0xef, 0xbb, 0xbf };
             var inputEnd = Encoding.UTF8.GetBytes("</SampleString></TestLevelTwo>");
             var expectedBytes = new byte[sampleString.Length + bom.Length];
@@ -714,12 +717,13 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             var SubstituteRootName = "SomeOtherClass";
             var SubstituteRootNamespace = "http://tempuri.org";
 
-            var input = string.Format(
-                CultureInfo.InvariantCulture,
-                "<{0} xmlns=\"{1}\"><SampleInt xmlns=\"\">1</SampleInt></{0}>",
-                SubstituteRootName,
-                SubstituteRootNamespace
-            );
+            var input = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "<{0} xmlns=\"{1}\"><SampleInt xmlns=\"\">1</SampleInt></{0}>",
+                    SubstituteRootName,
+                    SubstituteRootNamespace
+                );
             var formatter = new XmlDataContractSerializerInputFormatter(new MvcOptions());
             var contentBytes = Encoding.UTF8.GetBytes(input);
             var context = GetInputFormatterContext(contentBytes, typeof(DummyClass));
@@ -738,13 +742,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             var SubstituteRootName = "SomeOtherClass";
             var SubstituteRootNamespace = "http://tempuri.org";
 
-            var input = string.Format(
-                CultureInfo.InvariantCulture,
-                "<{0} xmlns=\"{1}\"><SampleInt xmlns=\"\">{2}</SampleInt></{0}>",
-                SubstituteRootName,
-                SubstituteRootNamespace,
-                expectedInt
-            );
+            var input = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "<{0} xmlns=\"{1}\"><SampleInt xmlns=\"\">{2}</SampleInt></{0}>",
+                    SubstituteRootName,
+                    SubstituteRootNamespace,
+                    expectedInt
+                );
 
             var dictionary = new XmlDictionary();
             var settings = new DataContractSerializerSettings
@@ -776,13 +781,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             var KnownTypeName = "SomeDummyClass";
             var InstanceNamespace = "http://www.w3.org/2001/XMLSchema-instance";
 
-            var input = string.Format(
-                CultureInfo.InvariantCulture,
-                "<DummyClass i:type=\"{0}\" xmlns:i=\"{1}\"><SampleInt>1</SampleInt>"
-                    + "<SampleString>Some text</SampleString></DummyClass>",
-                KnownTypeName,
-                InstanceNamespace
-            );
+            var input = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "<DummyClass i:type=\"{0}\" xmlns:i=\"{1}\"><SampleInt>1</SampleInt>"
+                        + "<SampleString>Some text</SampleString></DummyClass>",
+                    KnownTypeName,
+                    InstanceNamespace
+                );
             var formatter = new XmlDataContractSerializerInputFormatter(new MvcOptions());
             var contentBytes = Encoding.UTF8.GetBytes(input);
             var context = GetInputFormatterContext(contentBytes, typeof(DummyClass));
@@ -802,15 +808,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             var KnownTypeName = "SomeDummyClass";
             var InstanceNamespace = "http://www.w3.org/2001/XMLSchema-instance";
 
-            var input = string.Format(
-                CultureInfo.InvariantCulture,
-                "<DummyClass i:type=\"{0}\" xmlns:i=\"{1}\"><SampleInt>{2}</SampleInt>"
-                    + "<SampleString>{3}</SampleString></DummyClass>",
-                KnownTypeName,
-                InstanceNamespace,
-                expectedInt,
-                expectedString
-            );
+            var input = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "<DummyClass i:type=\"{0}\" xmlns:i=\"{1}\"><SampleInt>{2}</SampleInt>"
+                        + "<SampleString>{3}</SampleString></DummyClass>",
+                    KnownTypeName,
+                    InstanceNamespace,
+                    expectedInt,
+                    expectedString
+                );
             var settings = new DataContractSerializerSettings
             {
                 KnownTypes = new[] { typeof(SomeDummyClass) }

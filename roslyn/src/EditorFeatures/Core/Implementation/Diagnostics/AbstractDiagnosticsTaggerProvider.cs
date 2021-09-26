@@ -178,10 +178,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             // is generating code that it doesn't want errors shown for.
             var buffer = editorSnapshot.TextBuffer;
             var suppressedDiagnosticsSpans = (NormalizedSnapshotSpanCollection?)null;
-            buffer?.Properties.TryGetProperty(
-                PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
-                out suppressedDiagnosticsSpans
-            );
+            buffer?.Properties
+                .TryGetProperty(
+                    PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
+                    out suppressedDiagnosticsSpans
+                );
 
             var buckets = _diagnosticService.GetPushDiagnosticBuckets(
                 workspace,
@@ -194,14 +195,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             foreach (var bucket in buckets)
             {
                 await ProduceTagsAsync(
-                        context,
-                        spanToTag,
-                        workspace,
-                        document,
-                        suppressedDiagnosticsSpans,
-                        bucket,
-                        cancellationToken
-                    )
+                    context,
+                    spanToTag,
+                    workspace,
+                    document,
+                    suppressedDiagnosticsSpans,
+                    bucket,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -220,14 +221,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             {
                 var id = bucket.Id;
                 var diagnostics = await _diagnosticService.GetPushDiagnosticsAsync(
-                        workspace,
-                        document.Project.Id,
-                        document.Id,
-                        id,
-                        includeSuppressedDiagnostics: false,
-                        diagnosticMode: InternalDiagnosticsOptions.NormalDiagnosticMode,
-                        cancellationToken
-                    )
+                    workspace,
+                    document.Project.Id,
+                    document.Id,
+                    id,
+                    includeSuppressedDiagnostics: false,
+                    diagnosticMode: InternalDiagnosticsOptions.NormalDiagnosticMode,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var isLiveUpdate = id is ISupportLiveUpdate;
@@ -317,9 +318,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             )
             {
                 return DiagnosticData.GetExistingOrCalculatedTextSpan(
-                        diagnosticDataLocation,
-                        sourceText
-                    )
+                    diagnosticDataLocation,
+                    sourceText
+                )
                     .ToSnapshotSpan(diagnosticSnapshot)
                     .TranslateTo(editorSnapshot, SpanTrackingMode.EdgeExclusive);
             }

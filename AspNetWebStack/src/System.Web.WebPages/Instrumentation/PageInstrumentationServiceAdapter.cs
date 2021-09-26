@@ -11,9 +11,8 @@ namespace System.Web.WebPages.Instrumentation
 {
     internal partial class PageInstrumentationServiceAdapter
     {
-        private static readonly Type _targetType = typeof(HttpContext).Assembly.GetType(
-            "System.Web.Instrumentation.PageInstrumentationService"
-        );
+        private static readonly Type _targetType = typeof(HttpContext).Assembly
+            .GetType("System.Web.Instrumentation.PageInstrumentationService");
         private IReadOnlyList<PageExecutionListenerAdapter> _listenerAdapters;
 
         internal PageInstrumentationServiceAdapter()
@@ -36,8 +35,8 @@ namespace System.Web.WebPages.Instrumentation
                     // Bug 235916: If we pass the type as an object, the callsite is limited to wherever the object is assigned to
                     // dynamic which avoids private reflection issues in partial trust.
                     _listenerAdapters = inner.Select(
-                            listener => new PageExecutionListenerAdapter((object)listener)
-                        )
+                        listener => new PageExecutionListenerAdapter((object)listener)
+                    )
                         .ToList();
                 }
 
@@ -83,9 +82,9 @@ namespace System.Web.WebPages.Instrumentation
                         .Compile();
                     ParameterExpression value = Expression.Parameter(typeof(bool));
                     Setter = Expression.Lambda<Action<bool>>(
-                            Expression.Assign(Expression.Property(null, prop), value),
-                            value
-                        )
+                        Expression.Assign(Expression.Property(null, prop), value),
+                        value
+                    )
                         .Compile();
                 }
                 else
@@ -110,8 +109,8 @@ namespace System.Web.WebPages.Instrumentation
                 if (_targetType != null)
                 {
                     Site = Expression.Lambda<Func<object>>(
-                            Expression.New(_targetType.GetConstructor(new Type[] {  }))
-                        )
+                        Expression.New(_targetType.GetConstructor(new Type[] {  }))
+                    )
                         .Compile();
                 }
                 else

@@ -66,8 +66,9 @@ namespace System.Web.Mvc.Routing
         {
             // Each precedence digit corresponds to one decimal place. For example, 3 segments with precedences 2, 1,
             // and 4 results in a combined precedence of 2.14 (decimal).
-            IList<PathContentSegment> segments =
-                parsedRoute.PathSegments.OfType<PathContentSegment>().ToArray();
+            IList<PathContentSegment> segments = parsedRoute.PathSegments
+                .OfType<PathContentSegment>()
+                .ToArray();
 
             decimal precedence = 0;
             uint divisor = 1; // The first digit occupies the one's place.

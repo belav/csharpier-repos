@@ -19,9 +19,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void AjaxCheckedOnlyOnce()
         {
-            var grid = new WebGrid(GetContext(), ajaxUpdateContainerId: "grid").Bind(
-                new[] { new { First = "First", Second = "Second" } }
-            );
+            var grid = new WebGrid(GetContext(), ajaxUpdateContainerId: "grid")
+                .Bind(new[] { new { First = "First", Second = "Second" } });
             string html = grid.Table().ToString();
             Assert.Contains("<script", html);
             html = grid.Table().ToString();
@@ -33,9 +32,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void AjaxCallbackIgnoredIfAjaxUpdateContainerIdIsNotSet()
         {
-            var grid = new WebGrid(GetContext(), ajaxUpdateCallback: "myCallback").Bind(
-                new[] { new { First = "First", Second = "Second" } }
-            );
+            var grid = new WebGrid(GetContext(), ajaxUpdateCallback: "myCallback")
+                .Bind(new[] { new { First = "First", Second = "Second" } });
             string html = grid.Table().ToString();
             Assert.DoesNotContain("<script", html);
             Assert.DoesNotContain("myCallback", html);
@@ -52,9 +50,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void ColumnNameDefaultsForDynamics()
         {
-            var grid = new WebGrid(GetContext()).Bind(
-                Dynamics(new { First = "First", Second = "Second" })
-            );
+            var grid = new WebGrid(GetContext())
+                .Bind(Dynamics(new { First = "First", Second = "Second" }));
             Assert.Equal(2, grid.ColumnNames.Count());
             Assert.Contains("First", grid.ColumnNames);
             Assert.Contains("Second", grid.ColumnNames);
@@ -63,9 +60,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void ColumnNameDefaultsForNonDynamics()
         {
-            var grid = new WebGrid(GetContext()).Bind(
-                new[] { new { First = "First", Second = "Second" } }
-            );
+            var grid = new WebGrid(GetContext())
+                .Bind(new[] { new { First = "First", Second = "Second" } });
             Assert.Equal(2, grid.ColumnNames.Count());
             Assert.Contains("First", grid.ColumnNames);
             Assert.Contains("Second", grid.ColumnNames);
@@ -74,23 +70,24 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void ColumnNameDefaultsSupportsBindableTypes()
         {
-            var grid = new WebGrid(GetContext()).Bind(
-                new[]
-                {
-                    new
+            var grid = new WebGrid(GetContext())
+                .Bind(
+                    new[]
                     {
-                        DateTime = DateTime.MinValue,
-                        DateTimeOffset = DateTimeOffset.MinValue,
-                        Decimal = Decimal.MinValue,
-                        Guid = Guid.Empty,
-                        Int32 = 1,
-                        NullableInt32 = (int?)1,
-                        Object = new object(),
-                        Projection = new { Foo = "Bar" },
-                        TimeSpan = TimeSpan.MinValue
+                        new
+                        {
+                            DateTime = DateTime.MinValue,
+                            DateTimeOffset = DateTimeOffset.MinValue,
+                            Decimal = Decimal.MinValue,
+                            Guid = Guid.Empty,
+                            Int32 = 1,
+                            NullableInt32 = (int?)1,
+                            Object = new object(),
+                            Projection = new { Foo = "Bar" },
+                            TimeSpan = TimeSpan.MinValue
+                        }
                     }
-                }
-            );
+                );
             Assert.Equal(7, grid.ColumnNames.Count());
             Assert.Contains("DateTime", grid.ColumnNames);
             Assert.Contains("DateTimeOffset", grid.ColumnNames);
@@ -106,9 +103,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void ColumnsIsNoOp()
         {
-            var grid = new WebGrid(GetContext()).Bind(
-                new[] { new { First = "First", Second = "Second" } }
-            );
+            var grid = new WebGrid(GetContext())
+                .Bind(new[] { new { First = "First", Second = "Second" } });
             var columns = new[] { grid.Column("First"), grid.Column("Second") };
             Assert.Equal(columns, grid.Columns(columns));
         }
@@ -170,9 +166,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void GetHtmlDefaults()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             var html = grid.GetHtml();
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table><thead><tr>"
@@ -193,9 +190,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void WebGridProducesValidHtmlWhenSummaryIsSpecified()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             var caption = "WebGrid With Caption";
             var html = grid.GetHtml(caption: caption);
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
@@ -221,9 +219,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void WebGridEncodesCaptionText()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             var caption = "WebGrid <> With Caption";
             var html = grid.GetHtml(caption: caption);
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
@@ -265,14 +264,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void GetHtmlWhenPagingAndSortingAreDisabled()
         {
-            var grid = new WebGrid(
-                GetContext(),
-                rowsPerPage: 1,
-                canPage: false,
-                canSort: false
-            ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1, canPage: false, canSort: false)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             var html = grid.GetHtml();
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table><thead><tr>"
@@ -295,9 +290,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "2";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal(1, grid.PageIndex);
             grid.PageIndex = 0;
             Assert.Equal(0, grid.PageIndex);
@@ -310,9 +306,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "2";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             grid.PageIndex = 0;
             Assert.Equal(0, grid.PageIndex);
         }
@@ -320,9 +317,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void PageIndexDefaultsToZero()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal(0, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
             Assert.Equal(1, grid.Rows.First()["P1"]);
@@ -331,9 +329,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SetPageIndexThrowsExceptionWhenValueIsNegative()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.ThrowsArgumentOutOfRange(
                 () =>
                 {
@@ -347,9 +346,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SetPageIndexThrowsExceptionWhenValueIsEqualToPageCount()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.ThrowsArgumentOutOfRange(
                 () =>
                 {
@@ -363,9 +363,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SetPageIndexThrowsExceptionWhenValueIsGreaterToPageCount()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.ThrowsArgumentOutOfRange(
                 () =>
                 {
@@ -379,9 +380,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SetPageIndexThrowsExceptionWhenPagingIsDisabled()
         {
-            var grid = new WebGrid(GetContext(), canPage: false).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), canPage: false)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Throws<NotSupportedException>(
                 () =>
                 {
@@ -396,9 +398,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "3";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal(1, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
             Assert.Equal(4, grid.Rows.First()["P1"]);
@@ -409,9 +412,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "NotAnInt";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal(0, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
             Assert.Equal(1, grid.Rows.First()["P1"]);
@@ -422,9 +426,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "0";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal(0, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
             Assert.Equal(1, grid.Rows.First()["P1"]);
@@ -440,9 +445,10 @@ namespace System.Web.Helpers.Test
                 rowsPerPage: 1,
                 fieldNamePrefix: "g_",
                 pageFieldName: "pg"
-            ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            )
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal(1, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
             Assert.Equal(4, grid.Rows.First()["P1"]);
@@ -453,9 +459,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "2";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal(1, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
             Assert.Equal(4, grid.Rows.First()["P1"]);
@@ -464,23 +471,25 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void GetPageCountWhenPagingIsTurnedOn()
         {
-            var grid = new WebGrid(GetContext(), canPage: true, rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), canPage: true, rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal(2, grid.PageCount);
         }
 
         [Fact]
         public void GetPageIndexWhenPagingIsTurnedOn()
         {
-            var grid = new WebGrid(GetContext(), canPage: true, rowsPerPage: 1).Bind(
-                new[]
-                {
-                    new { P1 = 1, P2 = '2', P3 = "3" },
-                    new { P1 = 4, P2 = '5', P3 = "6" },
-                    new { P1 = 4, P2 = '5', P3 = "6" },
-                }
-            );
+            var grid = new WebGrid(GetContext(), canPage: true, rowsPerPage: 1)
+                .Bind(
+                    new[]
+                    {
+                        new { P1 = 1, P2 = '2', P3 = "3" },
+                        new { P1 = 4, P2 = '5', P3 = "6" },
+                        new { P1 = 4, P2 = '5', P3 = "6" },
+                    }
+                );
             grid.PageIndex = 1;
             Assert.Equal(1, grid.PageIndex);
             Assert.Equal(3, grid.PageCount);
@@ -491,23 +500,25 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void GetPageCountWhenPagingIsTurnedOff()
         {
-            var grid = new WebGrid(GetContext(), canPage: false, rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), canPage: false, rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal(1, grid.PageCount);
         }
 
         [Fact]
         public void GetPageIndexWhenPagingIsTurnedOff()
         {
-            var grid = new WebGrid(GetContext(), canPage: false, rowsPerPage: 1).Bind(
-                new[]
-                {
-                    new { P1 = 1, P2 = '2', P3 = "3" },
-                    new { P1 = 4, P2 = '5', P3 = "6" },
-                    new { P1 = 4, P2 = '5', P3 = "6" },
-                }
-            );
+            var grid = new WebGrid(GetContext(), canPage: false, rowsPerPage: 1)
+                .Bind(
+                    new[]
+                    {
+                        new { P1 = 1, P2 = '2', P3 = "3" },
+                        new { P1 = 4, P2 = '5', P3 = "6" },
+                        new { P1 = 4, P2 = '5', P3 = "6" },
+                    }
+                );
             Assert.Equal(0, grid.PageIndex);
             Assert.Equal(1, grid.PageCount);
         }
@@ -520,9 +531,10 @@ namespace System.Web.Helpers.Test
             queryString["row"] = "0";
             queryString["sort"] = "P1";
             queryString["sortdir"] = "DESC";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             string url = grid.GetPageUrl(1);
             Assert.Equal("?page=2&sort=P1&sortdir=DESC", url);
         }
@@ -543,9 +555,10 @@ namespace System.Web.Helpers.Test
                 GetContext(queryString),
                 rowsPerPage: 1,
                 ajaxUpdateContainerId: "grid-container"
-            ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            )
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             string html = grid.GetContainerUpdateScript(grid.GetPageUrl(1)).ToString();
 
             // Assert
@@ -569,9 +582,10 @@ namespace System.Web.Helpers.Test
                 rowsPerPage: 1,
                 ajaxUpdateContainerId: "grid",
                 ajaxUpdateCallback: "myCallback"
-            ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            )
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             string html = grid.GetContainerUpdateScript(grid.GetPageUrl(1)).ToString();
 
             // Assert
@@ -609,9 +623,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void PageUrlThrowsIfPagingIsDisabled()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 1, canPage: false).Bind(
-                new[] { new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1, canPage: false)
+                .Bind(new[] { new {  }, new {  } });
             Assert.Throws<NotSupportedException>(
                 () =>
                 {
@@ -624,9 +637,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void PagerRenderingDefaults()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new {  }, new {  }, new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1)
+                .Bind(new[] { new {  }, new {  }, new {  }, new {  } });
             var html = grid.Pager();
             Assert.Equal(
                 "1 "
@@ -642,9 +654,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void PagerRenderingOnFirstShowingAll()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new {  }, new {  }, new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1)
+                .Bind(new[] { new {  }, new {  }, new {  }, new {  } });
             var html = grid.Pager(WebGridPagerModes.All, numericLinksCount: 5);
             Assert.Equal(
                 "1 "
@@ -663,9 +674,8 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "3";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new {  }, new {  }, new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(new[] { new {  }, new {  }, new {  }, new {  } });
             var html = grid.Pager(WebGridPagerModes.All, numericLinksCount: 4);
             Assert.Equal(
                 "<a href=\"?page=1\">&lt;&lt;</a> "
@@ -685,9 +695,8 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "3";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new {  }, new {  }, new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(new[] { new {  }, new {  }, new {  }, new {  } });
             var html = grid.Pager(WebGridPagerModes.All, numericLinksCount: 3);
             Assert.Equal(
                 "<a href=\"?page=1\">&lt;&lt;</a> "
@@ -706,9 +715,8 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "2";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new {  }, new {  }, new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(new[] { new {  }, new {  }, new {  }, new {  } });
             var html = grid.Pager(
                 WebGridPagerModes.NextPrevious | WebGridPagerModes.Numeric,
                 numericLinksCount: 2
@@ -728,9 +736,8 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "4";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new {  }, new {  }, new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(new[] { new {  }, new {  }, new {  }, new {  } });
             var html = grid.Pager(
                 WebGridPagerModes.NextPrevious | WebGridPagerModes.Numeric,
                 numericLinksCount: 1
@@ -744,9 +751,8 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "3";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new {  }, new {  }, new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(new[] { new {  }, new {  }, new {  }, new {  } });
             var html = grid.Pager(
                 WebGridPagerModes.FirstLast | WebGridPagerModes.Numeric,
                 numericLinksCount: 0
@@ -760,9 +766,8 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "3";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new {  }, new {  }, new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(new[] { new {  }, new {  }, new {  }, new {  } });
             var html = grid.Pager(WebGridPagerModes.Numeric, numericLinksCount: 6);
             Assert.Equal(
                 "<a href=\"?page=1\">1</a> "
@@ -777,9 +782,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void PagerRenderingHidingAll()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 2).Bind(
-                new[] { new {  }, new {  }, new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 2)
+                .Bind(new[] { new {  }, new {  }, new {  }, new {  } });
             var html = grid.Pager(WebGridPagerModes.Numeric, numericLinksCount: 0);
             Assert.Equal("", html.ToString());
         }
@@ -789,9 +793,8 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "3";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new {  }, new {  }, new {  }, new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1)
+                .Bind(new[] { new {  }, new {  }, new {  }, new {  }, new {  } });
             var html = grid.Pager(
                 WebGridPagerModes.FirstLast | WebGridPagerModes.NextPrevious,
                 firstText: "first",
@@ -864,9 +867,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void PagerThrowsIfPagingIsDisabled()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 1, canPage: false).Bind(
-                new[] { new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1, canPage: false)
+                .Bind(new[] { new {  }, new {  } });
             Assert.Throws<NotSupportedException>(
                 () =>
                 {
@@ -879,13 +881,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void PagerWithAjax()
         {
-            var grid = new WebGrid(
-                GetContext(),
-                rowsPerPage: 1,
-                ajaxUpdateContainerId: "grid"
-            ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 1, ajaxUpdateContainerId: "grid")
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             string html = grid.Pager().ToString();
             Assert.Contains("<script", html);
         }
@@ -898,9 +897,10 @@ namespace System.Web.Helpers.Test
                 rowsPerPage: 1,
                 ajaxUpdateContainerId: "grid",
                 ajaxUpdateCallback: "myCallback"
-            ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            )
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             string html = grid.Pager().ToString();
             Assert.Contains("<script", html);
             Assert.Contains("data-swhgcallback=\"myCallback\"", html);
@@ -912,9 +912,8 @@ namespace System.Web.Helpers.Test
             // test with selection because SelectedIndex getter used to do range checking that caused paging and sorting
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "1";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 2).Bind(
-                new[] { new { P1 = 1 }, new { P1 = 2 }, new { P1 = 3 } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 2)
+                .Bind(new[] { new { P1 = 1 }, new { P1 = 2 }, new { P1 = 3 } });
 
             // invoke other WebGrid properties to ensure they don't cause sorting and paging
             foreach (var prop in typeof(WebGrid).GetProperties())
@@ -940,9 +939,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void PropertySettersDoNotThrowAfterPagingAndSortingIfValuesHaveNotChanged()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 2).Bind(
-                new[] { new { P1 = 1 }, new { P1 = 2 }, new { P1 = 3 } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 2)
+                .Bind(new[] { new { P1 = 1 }, new { P1 = 2 }, new { P1 = 3 } });
             // calling Rows will sort and page the data
             Assert.Equal(2, grid.Rows.Count());
 
@@ -955,9 +953,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void PropertySettersThrowAfterPagingAndSorting()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 2).Bind(
-                new[] { new { P1 = 1 }, new { P1 = 2 }, new { P1 = 3 } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 2)
+                .Bind(new[] { new { P1 = 1 }, new { P1 = 2 }, new { P1 = 3 } });
             // calling Rows will sort and page the data
             Assert.Equal(2, grid.Rows.Count());
 
@@ -1173,9 +1170,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "2";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1, canPage: false).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1, canPage: false)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             // review: should we reset PageIndex or Sort when operation disabled?
             Assert.Equal(0, grid.PageIndex);
             Assert.Equal(2, grid.Rows.Count);
@@ -1197,9 +1195,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "2";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal(1, grid.SelectedIndex);
             grid.SelectedIndex = 0;
             Assert.Equal(0, grid.SelectedIndex);
@@ -1210,9 +1209,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "2";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             grid.SelectedIndex = -1;
             Assert.Equal(-1, grid.SelectedIndex);
         }
@@ -1220,9 +1220,10 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SelectedIndexDefaultsToNegative()
         {
-            var grid = new WebGrid(GetContext()).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext())
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.False(grid.HasSelection);
             Assert.Equal(-1, grid.SelectedIndex);
             Assert.Null(grid.SelectedRow);
@@ -1233,9 +1234,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "3";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 2).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 2)
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.False(grid.HasSelection);
             Assert.Equal(-1, grid.SelectedIndex);
             Assert.Null(grid.SelectedRow);
@@ -1246,9 +1248,8 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "3";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 2, canPage: false).Bind(
-                new[] { new {  }, new {  }, new {  }, new {  } }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 2, canPage: false)
+                .Bind(new[] { new {  }, new {  }, new {  }, new {  } });
             grid.SelectedIndex = 3;
             Assert.Equal(3, grid.SelectedIndex);
         }
@@ -1258,9 +1259,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "NotAnInt";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.False(grid.HasSelection);
             Assert.Equal(-1, grid.SelectedIndex);
             Assert.Null(grid.SelectedRow);
@@ -1271,9 +1273,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "0";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.False(grid.HasSelection);
             Assert.Equal(-1, grid.SelectedIndex);
             Assert.Null(grid.SelectedRow);
@@ -1288,9 +1291,10 @@ namespace System.Web.Helpers.Test
                 GetContext(queryString),
                 fieldNamePrefix: "g_",
                 selectionFieldName: "sel"
-            ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            )
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.True(grid.HasSelection);
             Assert.Equal(1, grid.SelectedIndex);
             Assert.NotNull(grid.SelectedRow);
@@ -1302,9 +1306,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "2";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.True(grid.HasSelection);
             Assert.Equal(1, grid.SelectedIndex);
             Assert.NotNull(grid.SelectedRow);
@@ -1319,9 +1324,10 @@ namespace System.Web.Helpers.Test
             queryString["row"] = "1";
             queryString["sort"] = "P1";
             queryString["sortdir"] = "DESC";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             string html = grid.Rows[1].GetSelectLink().ToString();
             Assert.Equal(
                 "<a href=\"?page=1&amp;row=2&amp;sort=P1&amp;sortdir=DESC\">Select</a>",
@@ -1334,9 +1340,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "P1";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal("P1", grid.SortColumn);
             grid.SortColumn = "P2";
             Assert.Equal("P2", grid.SortColumn);
@@ -1350,9 +1357,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "P1";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal("P1", grid.SortColumn);
             grid.SortColumn = null;
             Assert.Equal(String.Empty, grid.SortColumn);
@@ -1366,9 +1374,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "P1";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             grid.SortColumn = String.Empty;
             Assert.Equal(String.Empty, grid.SortColumn);
         }
@@ -1385,9 +1394,8 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "P4";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
             Assert.Equal("", grid.SortColumn);
         }
 
@@ -1400,7 +1408,8 @@ namespace System.Web.Helpers.Test
                 GetContext(queryString),
                 fieldNamePrefix: "g_",
                 sortFieldName: "st"
-            ).Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
+            )
+                .Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
             Assert.Equal("P2", grid.SortColumn);
         }
 
@@ -1409,9 +1418,8 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "P2";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
             Assert.Equal("P2", grid.SortColumn);
         }
 
@@ -1420,9 +1428,10 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["sortdir"] = "DESC";
-            var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(queryString))
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
             Assert.Equal(SortDirection.Descending, grid.SortDirection);
             grid.SortDirection = SortDirection.Ascending;
             Assert.Equal(SortDirection.Ascending, grid.SortDirection);
@@ -1483,21 +1492,23 @@ namespace System.Web.Helpers.Test
                 GetContext(queryString),
                 fieldNamePrefix: "g_",
                 sortDirectionFieldName: "sd"
-            ).Bind(new object[0]);
+            )
+                .Bind(new object[0]);
             Assert.Equal(SortDirection.Descending, grid.SortDirection);
         }
 
         [Fact]
         public void SortDisabledIfSortIsEmpty()
         {
-            var grid = new WebGrid(GetContext(), defaultSort: String.Empty).Bind(
-                Dynamics(
-                    new { FirstName = "Joe", LastName = "Smith" },
-                    new { FirstName = "Bob", LastName = "Johnson" },
-                    new { FirstName = "Sam", LastName = "Jones" },
-                    new { FirstName = "Tom", LastName = "Anderson" }
-                )
-            );
+            var grid = new WebGrid(GetContext(), defaultSort: String.Empty)
+                .Bind(
+                    Dynamics(
+                        new { FirstName = "Joe", LastName = "Smith" },
+                        new { FirstName = "Bob", LastName = "Johnson" },
+                        new { FirstName = "Sam", LastName = "Jones" },
+                        new { FirstName = "Tom", LastName = "Anderson" }
+                    )
+                );
             Assert.Equal("Joe", grid.Rows[0]["FirstName"]);
             Assert.Equal("Bob", grid.Rows[1]["FirstName"]);
             Assert.Equal("Sam", grid.Rows[2]["FirstName"]);
@@ -1507,14 +1518,15 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SortDisabledIfSortIsNull()
         {
-            var grid = new WebGrid(GetContext(), defaultSort: null).Bind(
-                Dynamics(
-                    new { FirstName = "Joe", LastName = "Smith" },
-                    new { FirstName = "Bob", LastName = "Johnson" },
-                    new { FirstName = "Sam", LastName = "Jones" },
-                    new { FirstName = "Tom", LastName = "Anderson" }
-                )
-            );
+            var grid = new WebGrid(GetContext(), defaultSort: null)
+                .Bind(
+                    Dynamics(
+                        new { FirstName = "Joe", LastName = "Smith" },
+                        new { FirstName = "Bob", LastName = "Johnson" },
+                        new { FirstName = "Sam", LastName = "Jones" },
+                        new { FirstName = "Tom", LastName = "Anderson" }
+                    )
+                );
             Assert.Equal("Joe", grid.Rows[0]["FirstName"]);
             Assert.Equal("Bob", grid.Rows[1]["FirstName"]);
             Assert.Equal("Sam", grid.Rows[2]["FirstName"]);
@@ -1524,14 +1536,15 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SortForDynamics()
         {
-            var grid = new WebGrid(GetContext(), defaultSort: "FirstName").Bind(
-                Dynamics(
-                    new { FirstName = "Joe", LastName = "Smith" },
-                    new { FirstName = "Bob", LastName = "Johnson" },
-                    new { FirstName = "Sam", LastName = "Jones" },
-                    new { FirstName = "Tom", LastName = "Anderson" }
-                )
-            );
+            var grid = new WebGrid(GetContext(), defaultSort: "FirstName")
+                .Bind(
+                    Dynamics(
+                        new { FirstName = "Joe", LastName = "Smith" },
+                        new { FirstName = "Bob", LastName = "Johnson" },
+                        new { FirstName = "Sam", LastName = "Jones" },
+                        new { FirstName = "Tom", LastName = "Anderson" }
+                    )
+                );
             Assert.Equal("Bob", grid.Rows[0]["FirstName"]);
             Assert.Equal("Joe", grid.Rows[1]["FirstName"]);
             Assert.Equal("Sam", grid.Rows[2]["FirstName"]);
@@ -1544,14 +1557,15 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "LastName";
             queryString["sortdir"] = "DESCENDING";
-            var grid = new WebGrid(GetContext(queryString), defaultSort: "FirstName").Bind(
-                Dynamics(
-                    new { FirstName = "Joe", LastName = "Smith" },
-                    new { FirstName = "Bob", LastName = "Johnson" },
-                    new { FirstName = "Sam", LastName = "Jones" },
-                    new { FirstName = "Tom", LastName = "Anderson" }
-                )
-            );
+            var grid = new WebGrid(GetContext(queryString), defaultSort: "FirstName")
+                .Bind(
+                    Dynamics(
+                        new { FirstName = "Joe", LastName = "Smith" },
+                        new { FirstName = "Bob", LastName = "Johnson" },
+                        new { FirstName = "Sam", LastName = "Jones" },
+                        new { FirstName = "Tom", LastName = "Anderson" }
+                    )
+                );
             Assert.Equal("Smith", grid.Rows[0]["LastName"]);
             Assert.Equal("Jones", grid.Rows[1]["LastName"]);
             Assert.Equal("Johnson", grid.Rows[2]["LastName"]);
@@ -1563,15 +1577,16 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "Not.A.Column";
-            var grid = new WebGrid(GetContext(queryString), defaultSort: "Person.FirstName").Bind(
-                new[]
-                {
-                    new { Person = new { FirstName = "Joe", LastName = "Smith" } },
-                    new { Person = new { FirstName = "Bob", LastName = "Johnson" } },
-                    new { Person = new { FirstName = "Sam", LastName = "Jones" } },
-                    new { Person = new { FirstName = "Tom", LastName = "Anderson" } }
-                }
-            );
+            var grid = new WebGrid(GetContext(queryString), defaultSort: "Person.FirstName")
+                .Bind(
+                    new[]
+                    {
+                        new { Person = new { FirstName = "Joe", LastName = "Smith" } },
+                        new { Person = new { FirstName = "Bob", LastName = "Johnson" } },
+                        new { Person = new { FirstName = "Sam", LastName = "Jones" } },
+                        new { Person = new { FirstName = "Tom", LastName = "Anderson" } }
+                    }
+                );
             Assert.Equal("Not.A.Column", grid.SortColumn); // navigation columns are validated during sort
             Assert.Equal("Bob", grid.Rows[0]["Person.FirstName"]);
             Assert.Equal("Joe", grid.Rows[1]["Person.FirstName"]);
@@ -1582,15 +1597,16 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SortForNonDynamics()
         {
-            var grid = new WebGrid(GetContext(), defaultSort: "FirstName").Bind(
-                new[]
-                {
-                    new { FirstName = "Joe", LastName = "Smith" },
-                    new { FirstName = "Bob", LastName = "Johnson" },
-                    new { FirstName = "Sam", LastName = "Jones" },
-                    new { FirstName = "Tom", LastName = "Anderson" }
-                }
-            );
+            var grid = new WebGrid(GetContext(), defaultSort: "FirstName")
+                .Bind(
+                    new[]
+                    {
+                        new { FirstName = "Joe", LastName = "Smith" },
+                        new { FirstName = "Bob", LastName = "Johnson" },
+                        new { FirstName = "Sam", LastName = "Jones" },
+                        new { FirstName = "Tom", LastName = "Anderson" }
+                    }
+                );
             Assert.Equal("Bob", grid.Rows[0]["FirstName"]);
             Assert.Equal("Joe", grid.Rows[1]["FirstName"]);
             Assert.Equal("Sam", grid.Rows[2]["FirstName"]);
@@ -1603,15 +1619,16 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "LastName";
             queryString["sortdir"] = "DESCENDING";
-            var grid = new WebGrid(GetContext(queryString), defaultSort: "FirstName").Bind(
-                new[]
-                {
-                    new { FirstName = "Joe", LastName = "Smith" },
-                    new { FirstName = "Bob", LastName = "Johnson" },
-                    new { FirstName = "Sam", LastName = "Jones" },
-                    new { FirstName = "Tom", LastName = "Anderson" }
-                }
-            );
+            var grid = new WebGrid(GetContext(queryString), defaultSort: "FirstName")
+                .Bind(
+                    new[]
+                    {
+                        new { FirstName = "Joe", LastName = "Smith" },
+                        new { FirstName = "Bob", LastName = "Johnson" },
+                        new { FirstName = "Sam", LastName = "Jones" },
+                        new { FirstName = "Tom", LastName = "Anderson" }
+                    }
+                );
             Assert.Equal("Smith", grid.Rows[0]["LastName"]);
             Assert.Equal("Jones", grid.Rows[1]["LastName"]);
             Assert.Equal("Johnson", grid.Rows[2]["LastName"]);
@@ -1621,15 +1638,17 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SortForNonDynamicsEnumerable()
         {
-            var grid = new WebGrid(GetContext(), defaultSort: "FirstName").Bind(
-                new[]
-                {
-                    new { FirstName = "Joe", LastName = "Smith" },
-                    new { FirstName = "Bob", LastName = "Johnson" },
-                    new { FirstName = "Sam", LastName = "Jones" },
-                    new { FirstName = "Tom", LastName = "Anderson" }
-                }.ToList()
-            );
+            var grid = new WebGrid(GetContext(), defaultSort: "FirstName")
+                .Bind(
+                    new[]
+                    {
+                        new { FirstName = "Joe", LastName = "Smith" },
+                        new { FirstName = "Bob", LastName = "Johnson" },
+                        new { FirstName = "Sam", LastName = "Jones" },
+                        new { FirstName = "Tom", LastName = "Anderson" }
+                    }
+                        .ToList()
+                );
             Assert.Equal("Bob", grid.Rows[0]["FirstName"]);
             Assert.Equal("Joe", grid.Rows[1]["FirstName"]);
             Assert.Equal("Sam", grid.Rows[2]["FirstName"]);
@@ -1642,15 +1661,17 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "LastName";
             queryString["sortdir"] = "DESCENDING";
-            var grid = new WebGrid(GetContext(queryString), defaultSort: "FirstName").Bind(
-                new[]
-                {
-                    new { FirstName = "Joe", LastName = "Smith" },
-                    new { FirstName = "Bob", LastName = "Johnson" },
-                    new { FirstName = "Sam", LastName = "Jones" },
-                    new { FirstName = "Tom", LastName = "Anderson" }
-                }.ToList()
-            );
+            var grid = new WebGrid(GetContext(queryString), defaultSort: "FirstName")
+                .Bind(
+                    new[]
+                    {
+                        new { FirstName = "Joe", LastName = "Smith" },
+                        new { FirstName = "Bob", LastName = "Johnson" },
+                        new { FirstName = "Sam", LastName = "Jones" },
+                        new { FirstName = "Tom", LastName = "Anderson" }
+                    }
+                        .ToList()
+                );
             Assert.Equal("Smith", grid.Rows[0]["LastName"]);
             Assert.Equal("Jones", grid.Rows[1]["LastName"]);
             Assert.Equal("Johnson", grid.Rows[2]["LastName"]);
@@ -1660,17 +1681,18 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SortForNonGenericEnumerable()
         {
-            var grid = new WebGrid(GetContext(), defaultSort: "FirstName").Bind(
-                new NonGenericEnumerable(
-                    new[]
-                    {
-                        new Person { FirstName = "Joe", LastName = "Smith" },
-                        new Person { FirstName = "Bob", LastName = "Johnson" },
-                        new Person { FirstName = "Sam", LastName = "Jones" },
-                        new Person { FirstName = "Tom", LastName = "Anderson" }
-                    }
-                )
-            );
+            var grid = new WebGrid(GetContext(), defaultSort: "FirstName")
+                .Bind(
+                    new NonGenericEnumerable(
+                        new[]
+                        {
+                            new Person { FirstName = "Joe", LastName = "Smith" },
+                            new Person { FirstName = "Bob", LastName = "Johnson" },
+                            new Person { FirstName = "Sam", LastName = "Jones" },
+                            new Person { FirstName = "Tom", LastName = "Anderson" }
+                        }
+                    )
+                );
             Assert.Equal("Bob", grid.Rows[0]["FirstName"]);
             Assert.Equal("Joe", grid.Rows[1]["FirstName"]);
             Assert.Equal("Sam", grid.Rows[2]["FirstName"]);
@@ -1683,17 +1705,18 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "LastName";
             queryString["sortdir"] = "DESCENDING";
-            var grid = new WebGrid(GetContext(queryString), defaultSort: "FirstName").Bind(
-                new NonGenericEnumerable(
-                    new[]
-                    {
-                        new Person { FirstName = "Joe", LastName = "Smith" },
-                        new Person { FirstName = "Bob", LastName = "Johnson" },
-                        new Person { FirstName = "Sam", LastName = "Jones" },
-                        new Person { FirstName = "Tom", LastName = "Anderson" }
-                    }
-                )
-            );
+            var grid = new WebGrid(GetContext(queryString), defaultSort: "FirstName")
+                .Bind(
+                    new NonGenericEnumerable(
+                        new[]
+                        {
+                            new Person { FirstName = "Joe", LastName = "Smith" },
+                            new Person { FirstName = "Bob", LastName = "Johnson" },
+                            new Person { FirstName = "Sam", LastName = "Jones" },
+                            new Person { FirstName = "Tom", LastName = "Anderson" }
+                        }
+                    )
+                );
             Assert.Equal("Smith", grid.Rows[0]["LastName"]);
             Assert.Equal("Jones", grid.Rows[1]["LastName"]);
             Assert.Equal("Johnson", grid.Rows[2]["LastName"]);
@@ -1737,9 +1760,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SortUrlThrowsIfSortingIsDisabled()
         {
-            var grid = new WebGrid(GetContext(), canSort: false).Bind(
-                new[] { new { P1 = 1 }, new { P1 = 2 } }
-            );
+            var grid = new WebGrid(GetContext(), canSort: false)
+                .Bind(new[] { new { P1 = 1 }, new { P1 = 2 } });
             Assert.Throws<NotSupportedException>(
                 () =>
                 {
@@ -1752,15 +1774,16 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SortWhenSortIsDisabled()
         {
-            var grid = new WebGrid(GetContext(), defaultSort: "FirstName", canSort: false).Bind(
-                new[]
-                {
-                    new { FirstName = "Joe", LastName = "Smith" },
-                    new { FirstName = "Bob", LastName = "Johnson" },
-                    new { FirstName = "Sam", LastName = "Jones" },
-                    new { FirstName = "Tom", LastName = "Anderson" }
-                }
-            );
+            var grid = new WebGrid(GetContext(), defaultSort: "FirstName", canSort: false)
+                .Bind(
+                    new[]
+                    {
+                        new { FirstName = "Joe", LastName = "Smith" },
+                        new { FirstName = "Bob", LastName = "Johnson" },
+                        new { FirstName = "Sam", LastName = "Jones" },
+                        new { FirstName = "Tom", LastName = "Anderson" }
+                    }
+                );
             Assert.Equal("Joe", grid.Rows[0]["FirstName"]);
             Assert.Equal("Bob", grid.Rows[1]["FirstName"]);
             Assert.Equal("Sam", grid.Rows[2]["FirstName"]);
@@ -1849,9 +1872,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableRenderingWithColumnTemplates()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 3).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 3)
+                .Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
             var html = grid.Table(
                 displayHeader: false,
                 columns: new[]
@@ -1898,9 +1920,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableRenderingWithDefaultCellValueOfCustom()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 3).Bind(
-                new[] { new { P1 = String.Empty, P2 = (string)null }, }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 3)
+                .Bind(new[] { new { P1 = String.Empty, P2 = (string)null }, });
             var html = grid.Table(
                 fillEmptyRows: true,
                 emptyRowCellValue: "N/A",
@@ -1920,9 +1941,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableRenderingWithDefaultCellValueOfEmpty()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 3).Bind(
-                new[] { new { P1 = String.Empty, P2 = (string)null } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 3)
+                .Bind(new[] { new { P1 = String.Empty, P2 = (string)null } });
             var html = grid.Table(fillEmptyRows: true, emptyRowCellValue: "", displayHeader: false);
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table><tbody>"
@@ -1938,9 +1958,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableRenderingWithDefaultCellValueOfNbsp()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 3).Bind(
-                new[] { new { P1 = String.Empty, P2 = (string)null } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 3)
+                .Bind(new[] { new { P1 = String.Empty, P2 = (string)null } });
             var html = grid.Table(fillEmptyRows: true, displayHeader: false);
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table><tbody>"
@@ -1974,9 +1993,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableRenderingWithNoStylesAndFillEmptyRows()
         {
-            var grid = new WebGrid(GetContext(), rowsPerPage: 3).Bind(
-                new[] { new { FirstName = "Joe", LastName = "Smith" } }
-            );
+            var grid = new WebGrid(GetContext(), rowsPerPage: 3)
+                .Bind(new[] { new { FirstName = "Joe", LastName = "Smith" } });
             var html = grid.Table(fillEmptyRows: true);
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table><thead><tr>"
@@ -1996,9 +2014,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableRenderingWithSortingDisabled()
         {
-            var grid = new WebGrid(GetContext(), canSort: false).Bind(
-                new[] { new { FirstName = "Joe", LastName = "Smith" } }
-            );
+            var grid = new WebGrid(GetContext(), canSort: false)
+                .Bind(new[] { new { FirstName = "Joe", LastName = "Smith" } });
             var html = grid.Table();
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table><thead><tr>"
@@ -2016,9 +2033,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableRenderingWithAttributes()
         {
-            var grid = new WebGrid(GetContext()).Bind(
-                new[] { new { FirstName = "Joe", LastName = "Smith" } }
-            );
+            var grid = new WebGrid(GetContext())
+                .Bind(new[] { new { FirstName = "Joe", LastName = "Smith" } });
             var html = grid.Table(
                 htmlAttributes: new { id = "my-table-id", summary = "Table summary" }
             );
@@ -2038,9 +2054,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableRenderingEncodesAttributes()
         {
-            var grid = new WebGrid(GetContext()).Bind(
-                new[] { new { FirstName = "Joe", LastName = "Smith" } }
-            );
+            var grid = new WebGrid(GetContext())
+                .Bind(new[] { new { FirstName = "Joe", LastName = "Smith" } });
             var html = grid.Table(htmlAttributes: new { summary = "\"<Table summary" });
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table summary=\"&quot;&lt;Table summary\"><thead><tr>"
@@ -2058,9 +2073,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableRenderingIsNotAffectedWhenAttributesIsNull()
         {
-            var grid = new WebGrid(GetContext()).Bind(
-                new[] { new { FirstName = "Joe", LastName = "Smith" } }
-            );
+            var grid = new WebGrid(GetContext())
+                .Bind(new[] { new { FirstName = "Joe", LastName = "Smith" } });
             var html = grid.Table(htmlAttributes: null);
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table><thead><tr>"
@@ -2078,9 +2092,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableRenderingIsNotAffectedWhenAttributesIsEmpty()
         {
-            var grid = new WebGrid(GetContext()).Bind(
-                new[] { new { FirstName = "Joe", LastName = "Smith" } }
-            );
+            var grid = new WebGrid(GetContext())
+                .Bind(new[] { new { FirstName = "Joe", LastName = "Smith" } });
             var html = grid.Table(htmlAttributes: new {  });
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table><thead><tr>"
@@ -2100,13 +2113,14 @@ namespace System.Web.Helpers.Test
         {
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "1";
-            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 4).Bind(
-                new[]
-                {
-                    new { FirstName = "Joe", LastName = "Smith" },
-                    new { FirstName = "Bob", LastName = "Johnson" }
-                }
-            );
+            var grid = new WebGrid(GetContext(queryString), rowsPerPage: 4)
+                .Bind(
+                    new[]
+                    {
+                        new { FirstName = "Joe", LastName = "Smith" },
+                        new { FirstName = "Bob", LastName = "Johnson" }
+                    }
+                );
             var html = grid.Table(
                 tableStyle: "tbl",
                 headerStyle: "hdr",
@@ -2143,9 +2157,8 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableWithAjax()
         {
-            var grid = new WebGrid(GetContext(), ajaxUpdateContainerId: "grid").Bind(
-                new[] { new { First = "First", Second = "Second" } }
-            );
+            var grid = new WebGrid(GetContext(), ajaxUpdateContainerId: "grid")
+                .Bind(new[] { new { First = "First", Second = "Second" } });
             string html = grid.Table().ToString();
             Assert.Contains("<script", html);
             Assert.Contains("swhgajax=\"true\"", html);
@@ -2158,7 +2171,8 @@ namespace System.Web.Helpers.Test
                 GetContext(),
                 ajaxUpdateContainerId: "grid",
                 ajaxUpdateCallback: "myCallback"
-            ).Bind(new[] { new { First = "First", Second = "Second" } });
+            )
+                .Bind(new[] { new { First = "First", Second = "Second" } });
             string html = grid.Table().ToString();
             Assert.Contains("<script", html);
             Assert.Contains("myCallback", html);
@@ -2171,7 +2185,8 @@ namespace System.Web.Helpers.Test
                 GetContext(),
                 ajaxUpdateContainerId: "'grid'",
                 ajaxUpdateCallback: "'myCallback'"
-            ).Bind(new[] { new { First = "First", Second = "Second" } });
+            )
+                .Bind(new[] { new { First = "First", Second = "Second" } });
             string html = grid.Table().ToString();
             Assert.Contains(@"&#39;grid&#39;", html);
             Assert.Contains(@"&#39;myCallback&#39;", html);
@@ -2358,10 +2373,8 @@ namespace System.Web.Helpers.Test
             employees.Add(new Employee { Name = "B", Salary = 20, Manager = employees[0] });
             employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
             employees.Add(new Employee { Name = "D", Salary = 5, Manager = employees[1] });
-            var grid = new WebGrid(context).Bind(
-                employees,
-                columnNames: new[] { "Name", "Manager.Name" }
-            );
+            var grid = new WebGrid(context)
+                .Bind(employees, columnNames: new[] { "Name", "Manager.Name" });
 
             // Act and Assert
             Assert.Throws<InvalidOperationException>(
@@ -2383,10 +2396,8 @@ namespace System.Web.Helpers.Test
             employees.Add(new Employee { Name = "D", Salary = 10, Manager = employees[1] });
 
             // Act
-            var grid = new WebGrid(context).Bind(
-                employees,
-                columnNames: new[] { "Name", "Manager.Name" }
-            );
+            var grid = new WebGrid(context)
+                .Bind(employees, columnNames: new[] { "Name", "Manager.Name" });
             grid.SortColumn = "Salary";
             var html = grid.Table();
 
@@ -2421,10 +2432,8 @@ namespace System.Web.Helpers.Test
             employees.Add(new Employee { Name = "D", Salary = 10, Manager = employees[1] });
 
             // Act
-            var grid = new WebGrid(context, defaultSort: "Salary").Bind(
-                employees,
-                columnNames: new[] { "Name", "Manager.Name" }
-            );
+            var grid = new WebGrid(context, defaultSort: "Salary")
+                .Bind(employees, columnNames: new[] { "Name", "Manager.Name" });
             var html = grid.Table();
 
             // Assert
@@ -2460,10 +2469,11 @@ namespace System.Web.Helpers.Test
             );
 
             // Act
-            var grid = new WebGrid(context, defaultSort: "Salary").AddSorter(
-                "Manager.Name",
-                (Employee x) => (x == null || x.Manager == null) ? null : x.Manager.Name
-            );
+            var grid = new WebGrid(context, defaultSort: "Salary")
+                .AddSorter(
+                    "Manager.Name",
+                    (Employee x) => (x == null || x.Manager == null) ? null : x.Manager.Name
+                );
 
             grid.Bind(employees);
 
@@ -2580,9 +2590,10 @@ namespace System.Web.Helpers.Test
             const string unexpected = @"data_name=""value""";
             var attributes = new { data_name = "value" };
 
-            var grid = new WebGrid(GetContext(), ajaxUpdateContainerId: "grid").Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
-            );
+            var grid = new WebGrid(GetContext(), ajaxUpdateContainerId: "grid")
+                .Bind(
+                    new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                );
 
             // Act
             var htmlString = grid.GetHtml(htmlAttributes: attributes).ToHtmlString();

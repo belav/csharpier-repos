@@ -25,12 +25,12 @@ namespace Microsoft.AspNetCore.DataProtection
         )
         {
             mockActivator.Setup(
-                    o =>
-                        o.CreateInstance(
-                            typeof(IAuthenticatedEncryptorDescriptorDeserializer),
-                            typeName
-                        )
-                )
+                o =>
+                    o.CreateInstance(
+                        typeof(IAuthenticatedEncryptorDescriptorDeserializer),
+                        typeName
+                    )
+            )
                 .Returns(
                     () =>
                     {
@@ -61,23 +61,21 @@ namespace Microsoft.AspNetCore.DataProtection
             string outputXml
         )
         {
-            mockActivator.Setup(o => o.CreateInstance(typeof(IXmlDecryptor), typeName))
-                .Returns(
-                    () =>
-                    {
-                        var mockDecryptor = new Mock<IXmlDecryptor>();
-                        mockDecryptor.Setup(o => o.Decrypt(It.IsAny<XElement>()))
-                            .Returns<XElement>(
-                                el =>
-                                {
-                                    // Only return the descriptor if the XML matches
-                                    XmlAssert.Equal(expectedInputXml, el);
-                                    return XElement.Parse(outputXml);
-                                }
-                            );
-                        return mockDecryptor.Object;
-                    }
-                );
+            mockActivator.Setup(o => o.CreateInstance(typeof(IXmlDecryptor), typeName)).Returns(
+                () =>
+                {
+                    var mockDecryptor = new Mock<IXmlDecryptor>();
+                    mockDecryptor.Setup(o => o.Decrypt(It.IsAny<XElement>())).Returns<XElement>(
+                        el =>
+                        {
+                            // Only return the descriptor if the XML matches
+                            XmlAssert.Equal(expectedInputXml, el);
+                            return XElement.Parse(outputXml);
+                        }
+                    );
+                    return mockDecryptor.Object;
+                }
+            );
         }
     }
 }

@@ -26,10 +26,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             CallHierarchyProvider provider
         ) : base(symbol, projectId, asyncListener, provider)
         {
-            _text = string.Format(
-                EditorFeaturesResources.Calls_To_Interface_Implementation_0,
-                symbol.ToDisplayString()
-            );
+            _text = string
+                .Format(
+                    EditorFeaturesResources.Calls_To_Interface_Implementation_0,
+                    symbol.ToDisplayString()
+                );
         }
 
         public override string DisplayName => _text;
@@ -45,11 +46,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
         )
         {
             var calls = await SymbolFinder.FindCallersAsync(
-                    symbol,
-                    project.Solution,
-                    documents,
-                    cancellationToken
-                )
+                symbol,
+                project.Solution,
+                documents,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return calls.Where(c => c.IsDirect);
         }

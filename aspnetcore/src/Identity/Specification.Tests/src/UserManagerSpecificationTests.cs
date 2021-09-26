@@ -60,16 +60,15 @@ namespace Microsoft.AspNetCore.Identity.Test
             services.AddDataProtection();
             services.AddSingleton<IDataProtectionProvider, EphemeralDataProtectionProvider>();
             var builder = services.AddIdentityCore<TUser>(
-                    options =>
-                    {
-                        options.Password.RequireDigit = false;
-                        options.Password.RequireLowercase = false;
-                        options.Password.RequireNonAlphanumeric = false;
-                        options.Password.RequireUppercase = false;
-                        options.User.AllowedUserNameCharacters = null;
-                    }
-                )
-                .AddDefaultTokenProviders();
+                options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.User.AllowedUserNameCharacters = null;
+                }
+            ).AddDefaultTokenProviders();
             AddUserStore(services, context);
             services.AddLogging();
             services.AddSingleton<ILogger<UserManager<TUser>>>(

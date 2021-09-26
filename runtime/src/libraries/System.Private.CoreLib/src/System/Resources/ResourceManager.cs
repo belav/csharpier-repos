@@ -450,10 +450,8 @@ namespace System.Resources
                 Stream? stream = MainAssembly.GetManifestResourceStream(_locationInfo!, fileName);
                 if (createIfNotExists && stream != null)
                 {
-                    rs = ((ManifestBasedResourceGroveler)_resourceGroveler).CreateResourceSet(
-                        stream,
-                        MainAssembly
-                    );
+                    rs = ((ManifestBasedResourceGroveler)_resourceGroveler)
+                        .CreateResourceSet(stream, MainAssembly);
                     Debug.Assert(localResourceSets != null);
                     AddResourceSet(localResourceSets, culture.Name, ref rs);
                     return rs;
@@ -627,14 +625,9 @@ namespace System.Resources
 
             // case sensitive
             if (
-                string.Compare(
-                    asmTypeName,
-                    0,
-                    typeName,
-                    0,
-                    typeName.Length,
-                    StringComparison.Ordinal
-                ) != 0
+                string
+                    .Compare(asmTypeName, 0, typeName, 0, typeName.Length, StringComparison.Ordinal)
+                != 0
             )
                 return false;
             if (comma == -1)

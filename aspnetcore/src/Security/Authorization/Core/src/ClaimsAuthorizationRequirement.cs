@@ -61,25 +61,31 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure
                 var found = false;
                 if (requirement.AllowedValues == null || !requirement.AllowedValues.Any())
                 {
-                    found = context.User.Claims.Any(
-                        c =>
-                            string.Equals(
-                                c.Type,
-                                requirement.ClaimType,
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                    );
+                    found = context.User.Claims
+                        .Any(
+                            c =>
+                                string
+                                    .Equals(
+                                        c.Type,
+                                        requirement.ClaimType,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                        );
                 }
                 else
                 {
-                    found = context.User.Claims.Any(
-                        c =>
-                            string.Equals(
-                                c.Type,
-                                requirement.ClaimType,
-                                StringComparison.OrdinalIgnoreCase
-                            ) && requirement.AllowedValues.Contains(c.Value, StringComparer.Ordinal)
-                    );
+                    found = context.User.Claims
+                        .Any(
+                            c =>
+                                string
+                                    .Equals(
+                                        c.Type,
+                                        requirement.ClaimType,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                && requirement.AllowedValues
+                                    .Contains(c.Value, StringComparer.Ordinal)
+                        );
                 }
                 if (found)
                 {

@@ -33,9 +33,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Readonly_relational_metadata_methods_have_expected_name()
         {
-            var errors = Fixture.RelationalMetadataMethods.SelectMany(
-                    m => m.Select(ValidateMethodName)
-                )
+            var errors = Fixture.RelationalMetadataMethods
+                .SelectMany(m => m.Select(ValidateMethodName))
                 .Where(e => e != null)
                 .ToList();
 
@@ -189,7 +188,8 @@ namespace Microsoft.EntityFrameworkCore
             public override HashSet<MethodInfo> NonVirtualMethods { get; } =
                 new()
                 {
-                    typeof(RelationalCompiledQueryCacheKeyGenerator).GetRuntimeMethods()
+                    typeof(RelationalCompiledQueryCacheKeyGenerator)
+                        .GetRuntimeMethods()
                         .Single(
                             m =>
                                 m.Name == "GenerateCacheKeyCore"
@@ -202,49 +202,49 @@ namespace Microsoft.EntityFrameworkCore
                 new()
                 {
                     typeof(IMutableSequence).GetMethod("set_ClrType"),
-                    typeof(RelationalEntityTypeBuilderExtensions).GetMethod(
-                        nameof(RelationalEntityTypeBuilderExtensions.ExcludeTableFromMigrations)
-                    )
+                    typeof(RelationalEntityTypeBuilderExtensions)
+                        .GetMethod(
+                            nameof(RelationalEntityTypeBuilderExtensions.ExcludeTableFromMigrations)
+                        )
                 };
 
             public override HashSet<MethodInfo> AsyncMethodExceptions { get; } =
                 new()
                 {
-                    typeof(RelationalDatabaseFacadeExtensions).GetMethod(
-                        nameof(RelationalDatabaseFacadeExtensions.CloseConnectionAsync)
-                    ),
-                    typeof(IRelationalConnection).GetMethod(
-                        nameof(IRelationalConnection.CloseAsync)
-                    ),
+                    typeof(RelationalDatabaseFacadeExtensions)
+                        .GetMethod(nameof(RelationalDatabaseFacadeExtensions.CloseConnectionAsync)),
+                    typeof(IRelationalConnection)
+                        .GetMethod(nameof(IRelationalConnection.CloseAsync)),
                     typeof(RelationalConnection).GetMethod(nameof(RelationalConnection.CloseAsync)),
-                    typeof(RelationalConnection).GetMethod(
-                        "CloseDbConnectionAsync",
-                        BindingFlags.NonPublic | BindingFlags.Instance
-                    ),
-                    typeof(DbConnectionInterceptor).GetMethod(
-                        nameof(DbConnectionInterceptor.ConnectionClosingAsync)
-                    ),
-                    typeof(DbConnectionInterceptor).GetMethod(
-                        nameof(DbConnectionInterceptor.ConnectionClosedAsync)
-                    ),
-                    typeof(IDbConnectionInterceptor).GetMethod(
-                        nameof(IDbConnectionInterceptor.ConnectionClosingAsync)
-                    ),
-                    typeof(IDbConnectionInterceptor).GetMethod(
-                        nameof(IDbConnectionInterceptor.ConnectionClosedAsync)
-                    ),
-                    typeof(IRelationalConnectionDiagnosticsLogger).GetMethod(
-                        nameof(IRelationalConnectionDiagnosticsLogger.ConnectionClosingAsync)
-                    ),
-                    typeof(IRelationalConnectionDiagnosticsLogger).GetMethod(
-                        nameof(IRelationalConnectionDiagnosticsLogger.ConnectionClosedAsync)
-                    ),
-                    typeof(RelationalConnectionDiagnosticsLogger).GetMethod(
-                        nameof(IRelationalConnectionDiagnosticsLogger.ConnectionClosingAsync)
-                    ),
-                    typeof(RelationalConnectionDiagnosticsLogger).GetMethod(
-                        nameof(IRelationalConnectionDiagnosticsLogger.ConnectionClosedAsync)
-                    )
+                    typeof(RelationalConnection)
+                        .GetMethod(
+                            "CloseDbConnectionAsync",
+                            BindingFlags.NonPublic | BindingFlags.Instance
+                        ),
+                    typeof(DbConnectionInterceptor)
+                        .GetMethod(nameof(DbConnectionInterceptor.ConnectionClosingAsync)),
+                    typeof(DbConnectionInterceptor)
+                        .GetMethod(nameof(DbConnectionInterceptor.ConnectionClosedAsync)),
+                    typeof(IDbConnectionInterceptor)
+                        .GetMethod(nameof(IDbConnectionInterceptor.ConnectionClosingAsync)),
+                    typeof(IDbConnectionInterceptor)
+                        .GetMethod(nameof(IDbConnectionInterceptor.ConnectionClosedAsync)),
+                    typeof(IRelationalConnectionDiagnosticsLogger)
+                        .GetMethod(
+                            nameof(IRelationalConnectionDiagnosticsLogger.ConnectionClosingAsync)
+                        ),
+                    typeof(IRelationalConnectionDiagnosticsLogger)
+                        .GetMethod(
+                            nameof(IRelationalConnectionDiagnosticsLogger.ConnectionClosedAsync)
+                        ),
+                    typeof(RelationalConnectionDiagnosticsLogger)
+                        .GetMethod(
+                            nameof(IRelationalConnectionDiagnosticsLogger.ConnectionClosingAsync)
+                        ),
+                    typeof(RelationalConnectionDiagnosticsLogger)
+                        .GetMethod(
+                            nameof(IRelationalConnectionDiagnosticsLogger.ConnectionClosedAsync)
+                        )
                 };
 
             public List<IReadOnlyList<MethodInfo>> RelationalMetadataMethods { get; } = new();

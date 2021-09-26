@@ -20,31 +20,28 @@ namespace BasicTestApp.FormsTest
             var cssClassName = base.GetFieldCssClass(editContext, fieldIdentifier);
 
             // If we can find a [CustomValidationClassName], use it
-            var propertyInfo = fieldIdentifier.Model.GetType()
+            var propertyInfo = fieldIdentifier.Model
+                .GetType()
                 .GetProperty(fieldIdentifier.FieldName);
             if (propertyInfo != null)
             {
                 var customValidationClassName =
                     (CustomValidationClassNameAttribute)propertyInfo.GetCustomAttributes(
-                            typeof(CustomValidationClassNameAttribute),
-                            true
-                        )
+                        typeof(CustomValidationClassNameAttribute),
+                        true
+                    )
                         .FirstOrDefault();
                 if (customValidationClassName != null)
                 {
-                    cssClassName = string.Join(
-                        ' ',
-                        cssClassName.Split(' ')
-                            .Select(
-                                token =>
-                                    token switch
-                                    {
-                                        "valid" => customValidationClassName.Valid ?? token,
-                                        "invalid" => customValidationClassName.Invalid ?? token,
-                                        _ => token,
-                                    }
-                            )
-                    );
+                    cssClassName = string.Join(' ', cssClassName.Split(' ').Select(
+                            token =>
+                                token switch
+                                {
+                                    "valid" => customValidationClassName.Valid ?? token,
+                                    "invalid" => customValidationClassName.Invalid ?? token,
+                                    _ => token,
+                                }
+                        ));
                 }
             }
 

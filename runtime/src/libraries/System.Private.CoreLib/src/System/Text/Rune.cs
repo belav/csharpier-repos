@@ -1592,7 +1592,8 @@ namespace System.Text
 #if SYSTEM_PRIVATE_CORELIB
                 CharUnicodeInfo.GetIsWhiteSpace((char)value._value);
 #else
-                char.IsWhiteSpace((char)value._value);
+                char
+                    .IsWhiteSpace((char)value._value);
 #endif
         }
 

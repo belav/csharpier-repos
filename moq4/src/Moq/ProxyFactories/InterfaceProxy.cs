@@ -17,18 +17,12 @@ namespace Moq.Internals
     [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class InterfaceProxy
     {
-        private static MethodInfo equalsMethod = typeof(object).GetMethod(
-            "Equals",
-            BindingFlags.Public | BindingFlags.Instance
-        );
-        private static MethodInfo getHashCodeMethod = typeof(object).GetMethod(
-            "GetHashCode",
-            BindingFlags.Public | BindingFlags.Instance
-        );
-        private static MethodInfo toStringMethod = typeof(object).GetMethod(
-            "ToString",
-            BindingFlags.Public | BindingFlags.Instance
-        );
+        private static MethodInfo equalsMethod = typeof(object)
+            .GetMethod("Equals", BindingFlags.Public | BindingFlags.Instance);
+        private static MethodInfo getHashCodeMethod = typeof(object)
+            .GetMethod("GetHashCode", BindingFlags.Public | BindingFlags.Instance);
+        private static MethodInfo toStringMethod = typeof(object)
+            .GetMethod("ToString", BindingFlags.Public | BindingFlags.Instance);
 
         /// <summary/>
         [DebuggerHidden]

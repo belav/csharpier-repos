@@ -41,9 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             serviceCollection.AddMvc(
                 mvcOptions =>
                 {
-                    mvcOptions.ModelMetadataDetailsProviders.Add(
-                        new SuppressChildValidationMetadataProvider(typeof(IQueryable))
-                    );
+                    mvcOptions.ModelMetadataDetailsProviders
+                        .Add(new SuppressChildValidationMetadataProvider(typeof(IQueryable)));
                 }
             );
             var services = serviceCollection.BuildServiceProvider();

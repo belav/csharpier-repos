@@ -211,10 +211,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 if (diagnostics.Length > 0)
                 {
                     builder.Append(" [");
-                    var ids = string.Join(
-                        ", ",
-                        diagnostics.Select(diagnostic => $"{diagnostic.Id}{diagnostic.Span}")
-                    );
+                    var ids = string
+                        .Join(
+                            ", ",
+                            diagnostics.Select(diagnostic => $"{diagnostic.Id}{diagnostic.Span}")
+                        );
                     builder.Append(ids);
                     builder.Append("]");
                 }

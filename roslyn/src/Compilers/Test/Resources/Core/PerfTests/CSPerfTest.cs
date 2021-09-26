@@ -2383,7 +2383,8 @@ namespace ns1
                     finally
                     {
                         // Extension Methods
-                        var q = "string".Where((s) => s.ToString() != "string")
+                        var q = "string"
+                            .Where((s) => s.ToString() != "string")
                             .SelectMany((s) => new char[] { s });
                         foreach (var i in q)
                         {
@@ -2479,7 +2480,8 @@ namespace ns1
                 char j = (char)0;
                 // Extension Methods
                 foreach (
-                    char i in ex.Message.Where((e) => j.ToString() != ex.Message + e.ToString())
+                    char i in ex.Message
+                        .Where((e) => j.ToString() != ex.Message + e.ToString())
                         .OrderBy((e) => e)
                 )
                     Console.WriteLine("    Item: " + i);

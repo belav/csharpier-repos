@@ -119,9 +119,8 @@ namespace BinderTracingTests
                     ResultAssemblyName = asm.GetName(),
                     ResultAssemblyPath = asm.Location,
                     Cached = false,
-                    AssemblyLoadContextResolvingHandlers = handlerNull.Invocations.Concat(
-                            handlerLoad.Invocations
-                        )
+                    AssemblyLoadContextResolvingHandlers = handlerNull.Invocations
+                        .Concat(handlerLoad.Invocations)
                         .ToList(),
                     NestedBinds = handlerNull.Binds.Concat(handlerLoad.Binds).ToList()
                 };
@@ -229,9 +228,8 @@ namespace BinderTracingTests
                     ResultAssemblyName = asm.GetName(),
                     ResultAssemblyPath = asm.Location,
                     Cached = false,
-                    AppDomainAssemblyResolveHandlers = handlerNull.Invocations.Concat(
-                            handlerLoad.Invocations
-                        )
+                    AppDomainAssemblyResolveHandlers = handlerNull.Invocations
+                        .Concat(handlerLoad.Invocations)
                         .ToList(),
                     NestedBinds = handlerNull.Binds.Concat(handlerLoad.Binds).ToList()
                 };

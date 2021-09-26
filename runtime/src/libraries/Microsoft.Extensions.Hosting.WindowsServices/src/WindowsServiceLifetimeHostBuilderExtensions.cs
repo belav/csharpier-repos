@@ -51,28 +51,27 @@ namespace Microsoft.Extensions.Hosting
                 // Host.CreateDefaultBuilder uses CurrentDirectory for VS scenarios, but CurrentDirectory for services is c:\Windows\System32.
                 hostBuilder.UseContentRoot(AppContext.BaseDirectory);
                 hostBuilder.ConfigureLogging(
-                        (hostingContext, logging) =>
-                        {
-                            logging.AddEventLog();
-                        }
-                    )
-                    .ConfigureServices(
-                        (hostContext, services) =>
-                        {
-                            services.AddSingleton<IHostLifetime, WindowsServiceLifetime>();
-                            services.Configure<EventLogSettings>(
-                                settings =>
+                    (hostingContext, logging) =>
+                    {
+                        logging.AddEventLog();
+                    }
+                ).ConfigureServices(
+                    (hostContext, services) =>
+                    {
+                        services.AddSingleton<IHostLifetime, WindowsServiceLifetime>();
+                        services.Configure<EventLogSettings>(
+                            settings =>
+                            {
+                                if (string.IsNullOrEmpty(settings.SourceName))
                                 {
-                                    if (string.IsNullOrEmpty(settings.SourceName))
-                                    {
-                                        settings.SourceName =
-                                            hostContext.HostingEnvironment.ApplicationName;
-                                    }
+                                    settings.SourceName =
+                                        hostContext.HostingEnvironment.ApplicationName;
                                 }
-                            );
-                            services.Configure(configure);
-                        }
-                    );
+                            }
+                        );
+                        services.Configure(configure);
+                    }
+                );
             }
 
             return hostBuilder;

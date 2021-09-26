@@ -103,12 +103,12 @@ namespace Microsoft.CodeAnalysis.Remote
                 WorkspaceManager.GetAssetSource()
             );
             return workspace.GetSolutionAsync(
-                    assetProvider,
-                    solutionInfo.SolutionChecksum,
-                    solutionInfo.FromPrimaryBranch,
-                    solutionInfo.WorkspaceVersion,
-                    cancellationToken
-                )
+                assetProvider,
+                solutionInfo.SolutionChecksum,
+                solutionInfo.FromPrimaryBranch,
+                solutionInfo.WorkspaceVersion,
+                cancellationToken
+            )
                 .AsTask();
         }
 

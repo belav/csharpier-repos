@@ -68,9 +68,9 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
 
             var formattedDocument =
                 await RemoveUnnecessaryImportsHelper.RemoveUnnecessaryImportsAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             if (formattedDocument is null)
             {
@@ -78,10 +78,10 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             }
 
             var isSameVersion = await IsSameDocumentAndVersionAsync(
-                    document,
-                    formattedDocument,
-                    cancellationToken
-                )
+                document,
+                formattedDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (isSameVersion)
             {

@@ -62,11 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
 
         private static PropertyActivator<ViewContext>[] GetPropertiesToActivate(Type type)
         {
-            return PropertyActivator<ViewContext>.GetPropertiesToActivate(
-                type,
-                typeof(ViewContextAttribute),
-                _createActivateInfo
-            );
+            return PropertyActivator<ViewContext>
+                .GetPropertiesToActivate(type, typeof(ViewContextAttribute), _createActivateInfo);
         }
     }
 }

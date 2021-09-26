@@ -191,7 +191,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(byte?)),
                     Expression.Constant(b, typeof(byte?)),
-                    typeof(LiftedBitwiseExclusiveOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseExclusiveOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ExclusiveOrNullableByte")
                 )
             );
@@ -206,7 +207,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(int?)),
                     Expression.Constant(b, typeof(int?)),
-                    typeof(LiftedBitwiseExclusiveOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseExclusiveOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ExclusiveOrNullableInt")
                 )
             );
@@ -225,7 +227,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(long?)),
                     Expression.Constant(b, typeof(long?)),
-                    typeof(LiftedBitwiseExclusiveOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseExclusiveOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ExclusiveOrNullableLong")
                 )
             );
@@ -244,7 +247,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(sbyte?)),
                     Expression.Constant(b, typeof(sbyte?)),
-                    typeof(LiftedBitwiseExclusiveOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseExclusiveOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ExclusiveOrNullableSByte")
                 )
             );
@@ -263,7 +267,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(short?)),
                     Expression.Constant(b, typeof(short?)),
-                    typeof(LiftedBitwiseExclusiveOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseExclusiveOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ExclusiveOrNullableShort")
                 )
             );
@@ -282,7 +287,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(uint?)),
                     Expression.Constant(b, typeof(uint?)),
-                    typeof(LiftedBitwiseExclusiveOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseExclusiveOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ExclusiveOrNullableUInt")
                 )
             );
@@ -301,7 +307,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(ulong?)),
                     Expression.Constant(b, typeof(ulong?)),
-                    typeof(LiftedBitwiseExclusiveOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseExclusiveOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ExclusiveOrNullableULong")
                 )
             );
@@ -320,7 +327,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.ExclusiveOr(
                     Expression.Constant(a, typeof(ushort?)),
                     Expression.Constant(b, typeof(ushort?)),
-                    typeof(LiftedBitwiseExclusiveOrNullableTests).GetTypeInfo()
+                    typeof(LiftedBitwiseExclusiveOrNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("ExclusiveOrNullableUShort")
                 )
             );

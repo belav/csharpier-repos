@@ -44,11 +44,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             TriggerTick(now + TimeSpan.FromSeconds(1.1 * 2));
 
             await ExpectAsync(
-                    Http2FrameType.PING,
-                    withLength: 8,
-                    withFlags: (byte)Http2PingFrameFlags.NONE,
-                    withStreamId: 0
-                )
+                Http2FrameType.PING,
+                withLength: 8,
+                withFlags: (byte)Http2PingFrameFlags.NONE,
+                withStreamId: 0
+            )
                 .DefaultTimeout();
 
             // Heartbeat that exceeds timeout
@@ -78,11 +78,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             TriggerTick(now + TimeSpan.FromSeconds(1.1 * 2));
 
             await ExpectAsync(
-                    Http2FrameType.PING,
-                    withLength: 8,
-                    withFlags: (byte)Http2PingFrameFlags.NONE,
-                    withStreamId: 0
-                )
+                Http2FrameType.PING,
+                withLength: 8,
+                withFlags: (byte)Http2PingFrameFlags.NONE,
+                withStreamId: 0
+            )
                 .DefaultTimeout();
 
             await StopConnectionAsync(expectedLastStreamId: 0, ignoreNonGoAwayFrames: false)
@@ -103,11 +103,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             await SendPingAsync(Http2PingFrameFlags.NONE).DefaultTimeout();
             await ExpectAsync(
-                    Http2FrameType.PING,
-                    withLength: 8,
-                    withFlags: (byte)Http2PingFrameFlags.ACK,
-                    withStreamId: 0
-                )
+                Http2FrameType.PING,
+                withLength: 8,
+                withFlags: (byte)Http2PingFrameFlags.ACK,
+                withStreamId: 0
+            )
                 .DefaultTimeout();
 
             // Heartbeat that exceeds interval
@@ -149,11 +149,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             TriggerTick(now + TimeSpan.FromSeconds(1.1 * 2));
 
             await ExpectAsync(
-                    Http2FrameType.PING,
-                    withLength: 8,
-                    withFlags: (byte)Http2PingFrameFlags.NONE,
-                    withStreamId: 0
-                )
+                Http2FrameType.PING,
+                withLength: 8,
+                withFlags: (byte)Http2PingFrameFlags.NONE,
+                withStreamId: 0
+            )
                 .DefaultTimeout();
 
             TriggerTick(now + TimeSpan.FromSeconds(1.1 * 3));
@@ -178,11 +178,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             TriggerTick(now + TimeSpan.FromSeconds(1.1 * 2));
 
             await ExpectAsync(
-                    Http2FrameType.PING,
-                    withLength: 8,
-                    withFlags: (byte)Http2PingFrameFlags.NONE,
-                    withStreamId: 0
-                )
+                Http2FrameType.PING,
+                withLength: 8,
+                withFlags: (byte)Http2PingFrameFlags.NONE,
+                withStreamId: 0
+            )
                 .DefaultTimeout();
             await SendPingAsync(Http2PingFrameFlags.ACK).DefaultTimeout();
 
@@ -190,11 +190,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             TriggerTick(now + TimeSpan.FromSeconds(1.1 * 4));
 
             await ExpectAsync(
-                    Http2FrameType.PING,
-                    withLength: 8,
-                    withFlags: (byte)Http2PingFrameFlags.NONE,
-                    withStreamId: 0
-                )
+                Http2FrameType.PING,
+                withLength: 8,
+                withFlags: (byte)Http2PingFrameFlags.NONE,
+                withStreamId: 0
+            )
                 .DefaultTimeout();
             await SendPingAsync(Http2PingFrameFlags.ACK).DefaultTimeout();
 
@@ -202,11 +202,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             TriggerTick(now + TimeSpan.FromSeconds(1.1 * 6));
 
             await ExpectAsync(
-                    Http2FrameType.PING,
-                    withLength: 8,
-                    withFlags: (byte)Http2PingFrameFlags.NONE,
-                    withStreamId: 0
-                )
+                Http2FrameType.PING,
+                withLength: 8,
+                withFlags: (byte)Http2PingFrameFlags.NONE,
+                withStreamId: 0
+            )
                 .DefaultTimeout();
 
             await StopConnectionAsync(expectedLastStreamId: 0, ignoreNonGoAwayFrames: false)
@@ -232,11 +232,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             TriggerTick(now + TimeSpan.FromSeconds(1.1 * 2));
 
             await ExpectAsync(
-                    Http2FrameType.PING,
-                    withLength: 8,
-                    withFlags: (byte)Http2PingFrameFlags.NONE,
-                    withStreamId: 0
-                )
+                Http2FrameType.PING,
+                withLength: 8,
+                withFlags: (byte)Http2PingFrameFlags.NONE,
+                withStreamId: 0
+            )
                 .DefaultTimeout();
 
             // Heartbeat that exceeds timeout
@@ -274,24 +274,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             Assert.Equal(KeepAliveState.PingSent, _connection._keepAlive._state);
             await ExpectAsync(
-                    Http2FrameType.PING,
-                    withLength: 8,
-                    withFlags: (byte)Http2PingFrameFlags.NONE,
-                    withStreamId: 0
-                )
+                Http2FrameType.PING,
+                withLength: 8,
+                withFlags: (byte)Http2PingFrameFlags.NONE,
+                withStreamId: 0
+            )
                 .DefaultTimeout();
 
             await StartStreamAsync(1, _browserRequestHeaders, endStream: true).DefaultTimeout();
             Assert.Equal(KeepAliveState.None, _connection._keepAlive._state);
 
             await ExpectAsync(
-                    Http2FrameType.HEADERS,
-                    withLength: 36,
-                    withFlags: (byte)(
-                        Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
-                    ),
-                    withStreamId: 1
-                )
+                Http2FrameType.HEADERS,
+                withLength: 36,
+                withFlags: (byte)(
+                    Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+                ),
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false)
@@ -313,13 +313,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             await StartStreamAsync(1, _browserRequestHeaders, endStream: true).DefaultTimeout();
 
             await ExpectAsync(
-                    Http2FrameType.HEADERS,
-                    withLength: 36,
-                    withFlags: (byte)(
-                        Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
-                    ),
-                    withStreamId: 1
-                )
+                Http2FrameType.HEADERS,
+                withLength: 36,
+                withFlags: (byte)(
+                    Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+                ),
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             // Heartbeat that exceeds interval
@@ -341,16 +341,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
             await InitializeConnectionAsync(
-                    async c =>
-                    {
-                        // Don't consume any request data
-                        await tcs.Task;
-                        // Send headers
-                        await c.Request.Body.FlushAsync();
-                    },
-                    expectedWindowUpdate: false
-                )
-                .DefaultTimeout();
+                async c =>
+                {
+                    // Don't consume any request data
+                    await tcs.Task;
+                    // Send headers
+                    await c.Request.Body.FlushAsync();
+                },
+                expectedWindowUpdate: false
+            ).DefaultTimeout();
 
             DateTimeOffset now = _serviceContext.MockSystemClock.UtcNow;
 
@@ -371,11 +370,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             // Send ping that will update the keep alive on the server
             await SendPingAsync(Http2PingFrameFlags.NONE).DefaultTimeout();
             await ExpectAsync(
-                    Http2FrameType.PING,
-                    withLength: 8,
-                    withFlags: (byte)Http2PingFrameFlags.ACK,
-                    withStreamId: 0
-                )
+                Http2FrameType.PING,
+                withLength: 8,
+                withFlags: (byte)Http2PingFrameFlags.ACK,
+                withStreamId: 0
+            )
                 .DefaultTimeout();
 
             // Heartbeat that exceeds interval
@@ -385,13 +384,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             tcs.SetResult(null);
 
             await ExpectAsync(
-                    Http2FrameType.HEADERS,
-                    withLength: 36,
-                    withFlags: (byte)(
-                        Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
-                    ),
-                    withStreamId: 1
-                )
+                Http2FrameType.HEADERS,
+                withLength: 36,
+                withFlags: (byte)(
+                    Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+                ),
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             // Server could send RST_STREAM
@@ -411,16 +410,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
             await InitializeConnectionAsync(
-                    async c =>
-                    {
-                        // Don't consume any request data
-                        await tcs.Task;
-                        // Send headers
-                        await c.Request.Body.FlushAsync();
-                    },
-                    expectedWindowUpdate: false
-                )
-                .DefaultTimeout();
+                async c =>
+                {
+                    // Don't consume any request data
+                    await tcs.Task;
+                    // Send headers
+                    await c.Request.Body.FlushAsync();
+                },
+                expectedWindowUpdate: false
+            ).DefaultTimeout();
 
             DateTimeOffset now = _serviceContext.MockSystemClock.UtcNow;
 
@@ -442,11 +440,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             TriggerTick(now + TimeSpan.FromSeconds(1.1 * 2));
 
             await ExpectAsync(
-                    Http2FrameType.PING,
-                    withLength: 8,
-                    withFlags: (byte)Http2PingFrameFlags.NONE,
-                    withStreamId: 0
-                )
+                Http2FrameType.PING,
+                withLength: 8,
+                withFlags: (byte)Http2PingFrameFlags.NONE,
+                withStreamId: 0
+            )
                 .DefaultTimeout();
 
             // Send ping ack that will reset the keep alive on the server
@@ -459,13 +457,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             tcs.SetResult(null);
 
             await ExpectAsync(
-                    Http2FrameType.HEADERS,
-                    withLength: 36,
-                    withFlags: (byte)(
-                        Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
-                    ),
-                    withStreamId: 1
-                )
+                Http2FrameType.HEADERS,
+                withLength: 36,
+                withFlags: (byte)(
+                    Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+                ),
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             // Server could send RST_STREAM

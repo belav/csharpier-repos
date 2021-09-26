@@ -165,10 +165,10 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
 
             var parsed = ParseExpression(text);
             var foundSymbol = semanticModel.GetSpeculativeSymbolInfo(
-                    token.SpanStart,
-                    parsed,
-                    SpeculativeBindingOption.BindAsExpression
-                )
+                token.SpanStart,
+                parsed,
+                SpeculativeBindingOption.BindAsExpression
+            )
                 .GetAnySymbol();
             if (foundSymbol == null)
             {

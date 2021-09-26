@@ -58,8 +58,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             ColumnModification columnModification
         ) =>
             commandStringBuilder.Append(
-                    SqlGenerationHelper.DelimitIdentifier(columnModification.ColumnName)
-                )
+                SqlGenerationHelper.DelimitIdentifier(columnModification.ColumnName)
+            )
                 .Append(" = ")
                 .Append("provider_specific_identity()");
 

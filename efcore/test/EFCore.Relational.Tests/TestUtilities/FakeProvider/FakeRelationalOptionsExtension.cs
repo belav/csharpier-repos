@@ -33,10 +33,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             IServiceCollection serviceCollection
         )
         {
-            var builder = new EntityFrameworkRelationalServicesBuilder(serviceCollection).TryAdd<
-                LoggingDefinitions,
-                TestRelationalLoggingDefinitions
-            >()
+            var builder = new EntityFrameworkRelationalServicesBuilder(serviceCollection)
+                .TryAdd<LoggingDefinitions, TestRelationalLoggingDefinitions>()
                 .TryAdd<IDatabaseProvider, DatabaseProvider<FakeRelationalOptionsExtension>>()
                 .TryAdd<ISqlGenerationHelper, RelationalSqlGenerationHelper>()
                 .TryAdd<IRelationalTypeMappingSource, TestRelationalTypeMappingSource>()

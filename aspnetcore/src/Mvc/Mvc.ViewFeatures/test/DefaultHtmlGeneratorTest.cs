@@ -718,11 +718,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var viewContext = GetViewContext<Model>(model, metadataProvider);
             viewContext.ViewData[nameof(Model.Name)] = "ignored ViewData value";
-            viewContext.ModelState.SetModelValue(
-                nameof(Model.Name),
-                rawValue,
-                attemptedValue: null
-            );
+            viewContext.ModelState
+                .SetModelValue(nameof(Model.Name), rawValue, attemptedValue: null);
 
             // Act
             var result = htmlGenerator.GetCurrentValues(
@@ -752,11 +749,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var viewContext = GetViewContext<Model>(model, metadataProvider);
             viewContext.ViewData[nameof(Model.Name)] = "ignored ViewData value";
-            viewContext.ModelState.SetModelValue(
-                nameof(Model.Name),
-                rawValue,
-                attemptedValue: null
-            );
+            viewContext.ModelState
+                .SetModelValue(nameof(Model.Name), rawValue, attemptedValue: null);
 
             var modelExplorer = metadataProvider.GetModelExplorerForType(
                 typeof(string),
@@ -809,11 +803,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var viewContext = GetViewContext<Model>(model, metadataProvider);
             viewContext.ViewData[nameof(Model.Name)] = "ignored ViewData value";
-            viewContext.ModelState.SetModelValue(
-                nameof(Model.Name),
-                rawValue,
-                attemptedValue: null
-            );
+            viewContext.ModelState
+                .SetModelValue(nameof(Model.Name), rawValue, attemptedValue: null);
 
             var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(string), rawValue);
 
@@ -843,11 +834,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var viewContext = GetViewContext<Model>(model, metadataProvider);
             viewContext.ViewData[nameof(Model.Name)] = rawValue;
-            viewContext.ModelState.SetModelValue(
-                nameof(Model.Name),
-                rawValue,
-                attemptedValue: null
-            );
+            viewContext.ModelState
+                .SetModelValue(nameof(Model.Name), rawValue, attemptedValue: null);
 
             // Act
             var result = htmlGenerator.GetCurrentValues(
@@ -874,11 +862,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var model = new Model { Name = rawValue?[0] };
 
             var viewContext = GetViewContext<Model>(model, metadataProvider);
-            viewContext.ModelState.SetModelValue(
-                nameof(Model.Name),
-                rawValue,
-                attemptedValue: null
-            );
+            viewContext.ModelState
+                .SetModelValue(nameof(Model.Name), rawValue, attemptedValue: null);
 
             // Act
             var result = htmlGenerator.GetCurrentValues(
@@ -954,11 +939,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var viewContext = GetViewContext<Model>(model, metadataProvider);
             viewContext.ViewData[nameof(Model.Collection)] = new[] { "ignored ViewData value" };
-            viewContext.ModelState.SetModelValue(
-                nameof(Model.Collection),
-                rawValue,
-                attemptedValue: null
-            );
+            viewContext.ModelState
+                .SetModelValue(nameof(Model.Collection), rawValue, attemptedValue: null);
 
             var modelExplorer = metadataProvider.GetModelExplorerForType(
                 typeof(List<string>),
@@ -991,11 +973,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var viewContext = GetViewContext<Model>(model, metadataProvider);
             viewContext.ViewData[nameof(Model.Collection)] = rawValue;
-            viewContext.ModelState.SetModelValue(
-                nameof(Model.Collection),
-                rawValue,
-                attemptedValue: null
-            );
+            viewContext.ModelState
+                .SetModelValue(nameof(Model.Collection), rawValue, attemptedValue: null);
 
             // Act
             var result = htmlGenerator.GetCurrentValues(
@@ -1023,11 +1002,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             model.Collection.AddRange(rawValue);
 
             var viewContext = GetViewContext<Model>(model, metadataProvider);
-            viewContext.ModelState.SetModelValue(
-                nameof(Model.Collection),
-                rawValue,
-                attemptedValue: null
-            );
+            viewContext.ModelState
+                .SetModelValue(nameof(Model.Collection), rawValue, attemptedValue: null);
 
             // Act
             var result = htmlGenerator.GetCurrentValues(
@@ -1138,11 +1114,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 model: null,
                 metadataProvider: metadataProvider
             );
-            viewContext.ModelState.SetModelValue(
-                propertyName,
-                new string[] { rawValue.ToString() },
-                attemptedValue: null
-            );
+            viewContext.ModelState
+                .SetModelValue(
+                    propertyName,
+                    new string[] { rawValue.ToString() },
+                    attemptedValue: null
+                );
 
             // Act
             var result = htmlGenerator.GetCurrentValues(

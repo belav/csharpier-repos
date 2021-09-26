@@ -176,11 +176,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 }
 
                 var result = await projectState.GetAnalysisDataAsync(
-                        persistentStorageService,
-                        document,
-                        avoidLoadingData: false,
-                        CancellationToken.None
-                    )
+                    persistentStorageService,
+                    document,
+                    avoidLoadingData: false,
+                    CancellationToken.None
+                )
                     .ConfigureAwait(false);
 
                 // store analysis result to active file state:

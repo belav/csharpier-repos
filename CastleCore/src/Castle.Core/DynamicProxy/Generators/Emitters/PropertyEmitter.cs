@@ -35,17 +35,18 @@ namespace Castle.DynamicProxy.Generators.Emitters
         {
             this.parentTypeEmitter = parentTypeEmitter;
 
-            builder = parentTypeEmitter.TypeBuilder.DefineProperty(
-                name,
-                attributes,
-                CallingConventions.HasThis,
-                propertyType,
-                null,
-                null,
-                arguments,
-                null,
-                null
-            );
+            builder = parentTypeEmitter.TypeBuilder
+                .DefineProperty(
+                    name,
+                    attributes,
+                    CallingConventions.HasThis,
+                    propertyType,
+                    null,
+                    null,
+                    arguments,
+                    null,
+                    null
+                );
         }
 
         public MemberInfo Member

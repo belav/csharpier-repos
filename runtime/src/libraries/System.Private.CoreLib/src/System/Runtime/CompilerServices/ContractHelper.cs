@@ -123,11 +123,8 @@ namespace System.Runtime.CompilerServices
                 displayMessage = GetDisplayMessage(kind, userMessage, conditionText);
             }
 
-            System.Diagnostics.Debug.ContractFailure(
-                displayMessage,
-                string.Empty,
-                GetFailureMessage(kind, null)
-            );
+            System.Diagnostics.Debug
+                .ContractFailure(displayMessage, string.Empty, GetFailureMessage(kind, null));
         }
 
         private static string GetFailureMessage(

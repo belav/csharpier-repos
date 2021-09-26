@@ -51,8 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             // Arrange
             var responseFeature = new Mock<IHttpResponseFeature>(MockBehavior.Strict);
             responseFeature.Setup(
-                    rf => rf.OnStarting(It.IsAny<Func<object, Task>>(), It.IsAny<object>())
-                )
+                rf => rf.OnStarting(It.IsAny<Func<object, Task>>(), It.IsAny<object>())
+            )
                 .Verifiable();
             responseFeature.SetupGet(rf => rf.HasStarted).Returns(false);
 
@@ -398,9 +398,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         {
             public Task ExecuteResultAsync(ActionContext context)
             {
-                return context.HttpContext.Response.WriteAsync(
-                    $"Hello from {nameof(TestActionResult)}"
-                );
+                return context.HttpContext.Response
+                    .WriteAsync($"Hello from {nameof(TestActionResult)}");
             }
         }
 
@@ -408,9 +407,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         {
             public Task ExecuteResultAsync(ActionContext context)
             {
-                return context.HttpContext.Response.WriteAsync(
-                    $"Hello from {nameof(TestKeepTempDataActionResult)}"
-                );
+                return context.HttpContext.Response
+                    .WriteAsync($"Hello from {nameof(TestKeepTempDataActionResult)}");
             }
         }
 

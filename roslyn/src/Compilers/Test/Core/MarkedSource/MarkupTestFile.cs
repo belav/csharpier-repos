@@ -158,11 +158,12 @@ namespace Roslyn.Test.Utilities
                         if (spanStartStack.Count == 0)
                         {
                             throw new ArgumentException(
-                                string.Format(
-                                    "Saw {0} without matching {1}",
-                                    SpanEndString,
-                                    SpanStartString
-                                )
+                                string
+                                    .Format(
+                                        "Saw {0} without matching {1}",
+                                        SpanEndString,
+                                        SpanStartString
+                                    )
                             );
                         }
 
@@ -178,11 +179,12 @@ namespace Roslyn.Test.Utilities
                         if (namedSpanStartStack.Count == 0)
                         {
                             throw new ArgumentException(
-                                string.Format(
-                                    "Saw {0} without matching {1}",
-                                    NamedSpanEndString,
-                                    NamedSpanStartString
-                                )
+                                string
+                                    .Format(
+                                        "Saw {0} without matching {1}",
+                                        NamedSpanEndString,
+                                        NamedSpanStartString
+                                    )
                             );
                         }
 
@@ -204,11 +206,12 @@ namespace Roslyn.Test.Utilities
             if (namedSpanStartStack.Count > 0)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        "Saw {0} without matching {1}",
-                        NamedSpanEndString,
-                        NamedSpanEndString
-                    )
+                    string
+                        .Format(
+                            "Saw {0} without matching {1}",
+                            NamedSpanEndString,
+                            NamedSpanEndString
+                        )
                 );
             }
 

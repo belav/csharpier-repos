@@ -478,10 +478,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         )
         {
             var migrations = MigrationsOperations.GetMigrations(
-                    contextType,
-                    connectionString,
-                    noConnect
-                )
+                contextType,
+                connectionString,
+                noConnect
+            )
                 .ToList();
             var nameGroups = migrations.GroupBy(m => m.Name).ToList();
 

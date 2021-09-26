@@ -983,7 +983,8 @@ namespace NS  {
             var ns = comp.GlobalNamespace.GetMembers("NS").Single() as NamespaceSymbol;
 
             var type1 =
-                (ns.GetTypeMembers("Test").Single() as NamedTypeSymbol).GetTypeMembers("C", 0)
+                (ns.GetTypeMembers("Test").Single() as NamedTypeSymbol)
+                    .GetTypeMembers("C", 0)
                     .Single() as NamedTypeSymbol;
             Assert.Equal(Accessibility.Public, type1.DeclaredAccessibility);
 
@@ -1109,7 +1110,8 @@ namespace NS  {
 
             var ns = comp.GlobalNamespace.GetMembers("NS").Single() as NamespaceSymbol;
             var type1 =
-                (ns.GetTypeMembers("Test").Single() as NamedTypeSymbol).GetTypeMembers("C", 0)
+                (ns.GetTypeMembers("Test").Single() as NamedTypeSymbol)
+                    .GetTypeMembers("C", 0)
                     .Single() as NamedTypeSymbol;
             Assert.Equal(Accessibility.Public, type1.DeclaredAccessibility);
 
@@ -1370,9 +1372,8 @@ public class DerivedClass : Interface3Derived
 
             var comp = CreateCompilation(text);
 
-            var derivedClass = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers(
-                "DerivedClass"
-            )[0];
+            var derivedClass = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("DerivedClass")[0];
             var members = derivedClass.GetMembers();
             Assert.Equal(3, members.Length);
         }
@@ -1677,7 +1678,8 @@ class C1 : @int, @void
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("C1")
+            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("C1")
                 .Single();
             // Per explanation from NGafter:
             //
@@ -1693,8 +1695,8 @@ class C1 : @int, @void
             NamedTypeSymbol rvoid = (NamedTypeSymbol)mreturn.ReturnType;
             Assert.Equal("void", rvoid.Name);
             Assert.Equal("@void", rvoid.ToString());
-            MethodSymbol mvoidreturn =
-                (MethodSymbol)mreturn.ExplicitInterfaceImplementations.Single();
+            MethodSymbol mvoidreturn = (MethodSymbol)mreturn.ExplicitInterfaceImplementations
+                .Single();
             Assert.Equal("return", mvoidreturn.Name);
             Assert.Equal("@void.@return(@void)", mvoidreturn.ToString());
             ParameterSymbol pin = mreturn.Parameters.Single();
@@ -2031,7 +2033,8 @@ class C
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            var staticConstructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var staticConstructor = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.StaticConstructorName);
 
             Assert.Equal(MethodKind.StaticConstructor, staticConstructor.MethodKind);
@@ -2057,7 +2060,8 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "f").WithArguments("C.f")
             );
 
-            var staticConstructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var staticConstructor = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.StaticConstructorName);
 
             Assert.Equal(MethodKind.StaticConstructor, staticConstructor.MethodKind);
@@ -2224,7 +2228,8 @@ public class C
             var parenPos = source.IndexOf('(');
 
             var comp = CreateCompilation(source);
-            var symbol = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var symbol = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.UnaryPlusOperatorName)
                 .Single();
             var span = symbol.Locations.Single().SourceSpan;
@@ -2248,7 +2253,8 @@ public class C
             var parenPos = source.IndexOf('(');
 
             var comp = CreateCompilation(source);
-            var symbol = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var symbol = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMembers(WellKnownMemberNames.ExplicitConversionName)
                 .Single();
             var span = symbol.Locations.Single().SourceSpan;
@@ -2277,12 +2283,11 @@ partial class C
     async partial void M() { }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (15,24): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-                    //     async partial void M() { }
-                    Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (15,24): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                //     async partial void M() { }
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M")
+            );
         }
 
         [WorkItem(910100, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/910100")]
@@ -2348,12 +2353,11 @@ static class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (4,16): error CS1547: Keyword 'void' cannot be used in this context
-                    //     static ref void M() { }
-                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(4, 16)
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (4,16): error CS1547: Keyword 'void' cannot be used in this context
+                //     static ref void M() { }
+                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(4, 16)
+            );
         }
 
         [Fact]
@@ -2368,12 +2372,11 @@ static class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (4,25): error CS1547: Keyword 'void' cannot be used in this context
-                    //     static ref readonly void M() { }
-                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(4, 25)
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (4,25): error CS1547: Keyword 'void' cannot be used in this context
+                //     static ref readonly void M() { }
+                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(4, 25)
+            );
         }
 
         [Fact]
@@ -2390,17 +2393,16 @@ static class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (6,13): error CS1547: Keyword 'void' cannot be used in this context
-                    //         ref void M() { }
-                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(6, 13),
-                    // (6,18): warning CS8321: The local function 'M' is declared but never used
-                    //         ref void M() { }
-                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M")
-                        .WithArguments("M")
-                        .WithLocation(6, 18)
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (6,13): error CS1547: Keyword 'void' cannot be used in this context
+                //         ref void M() { }
+                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(6, 13),
+                // (6,18): warning CS8321: The local function 'M' is declared but never used
+                //         ref void M() { }
+                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M")
+                    .WithArguments("M")
+                    .WithLocation(6, 18)
+            );
         }
 
         [Fact]
@@ -2425,12 +2427,11 @@ static class C
 ";
 
             var parseOptions = TestOptions.Regular;
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (10,22): error CS1547: Keyword 'void' cannot be used in this context
-                    //         ref readonly void M2() {M1(); throw null;}
-                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(10, 22)
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (10,22): error CS1547: Keyword 'void' cannot be used in this context
+                //         ref readonly void M2() {M1(); throw null;}
+                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(10, 22)
+            );
         }
 
         [Fact]
@@ -2444,22 +2445,21 @@ static class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (4,18): error CS1073: Unexpected token 'ref'
-                    //     static async ref int M() { }
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
-                        .WithArguments("ref")
-                        .WithLocation(4, 18),
-                    // (4,26): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-                    //     static async ref int M() { }
-                    Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 26),
-                    // (4,26): error CS0161: 'C.M()': not all code paths return a value
-                    //     static async ref int M() { }
-                    Diagnostic(ErrorCode.ERR_ReturnExpected, "M")
-                        .WithArguments("C.M()")
-                        .WithLocation(4, 26)
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (4,18): error CS1073: Unexpected token 'ref'
+                //     static async ref int M() { }
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
+                    .WithArguments("ref")
+                    .WithLocation(4, 18),
+                // (4,26): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                //     static async ref int M() { }
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 26),
+                // (4,26): error CS0161: 'C.M()': not all code paths return a value
+                //     static async ref int M() { }
+                Diagnostic(ErrorCode.ERR_ReturnExpected, "M")
+                    .WithArguments("C.M()")
+                    .WithLocation(4, 26)
+            );
         }
 
         [Fact]
@@ -2474,22 +2474,21 @@ static class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (4,18): error CS1073: Unexpected token 'ref'
-                    //     static async ref readonly int M() { }
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
-                        .WithArguments("ref")
-                        .WithLocation(4, 18),
-                    // (4,35): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-                    //     static async ref readonly int M() { }
-                    Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 35),
-                    // (4,35): error CS0161: 'C.M()': not all code paths return a value
-                    //     static async ref readonly int M() { }
-                    Diagnostic(ErrorCode.ERR_ReturnExpected, "M")
-                        .WithArguments("C.M()")
-                        .WithLocation(4, 35)
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (4,18): error CS1073: Unexpected token 'ref'
+                //     static async ref readonly int M() { }
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
+                    .WithArguments("ref")
+                    .WithLocation(4, 18),
+                // (4,35): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                //     static async ref readonly int M() { }
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 35),
+                // (4,35): error CS0161: 'C.M()': not all code paths return a value
+                //     static async ref readonly int M() { }
+                Diagnostic(ErrorCode.ERR_ReturnExpected, "M")
+                    .WithArguments("C.M()")
+                    .WithLocation(4, 35)
+            );
         }
 
         [Fact]
@@ -2583,14 +2582,13 @@ class C
     [Conditional(""Debug"")]
     public int M() => 42; 
 }";
-            var compilation = CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,6): error CS0578: The Conditional attribute is not valid on 'C.M()' because its return type is not void
-                    //     [Conditional("Debug")]
-                    Diagnostic(ErrorCode.ERR_ConditionalMustReturnVoid, @"Conditional(""Debug"")")
-                        .WithArguments("C.M()")
-                        .WithLocation(5, 6)
-                );
+            var compilation = CreateCompilation(source).VerifyDiagnostics(
+                // (5,6): error CS0578: The Conditional attribute is not valid on 'C.M()' because its return type is not void
+                //     [Conditional("Debug")]
+                Diagnostic(ErrorCode.ERR_ConditionalMustReturnVoid, @"Conditional(""Debug"")")
+                    .WithArguments("C.M()")
+                    .WithLocation(5, 6)
+            );
             var method = compilation.GetMember<MethodSymbol>("C.M");
             Assert.True(method.IsConditional);
         }
@@ -2667,7 +2665,8 @@ class C
             comp.VerifyDiagnostics(
                 // (4,18): error CS0751: A partial method must be declared within a partial type
                 //     partial void M();
-                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M").WithLocation(4, 18),
+                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M")
+                    .WithLocation(4, 18),
                 // (5,18): error CS0751: A partial method must be declared within a partial type
                 //     partial void M() {}
                 Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M").WithLocation(5, 18)
@@ -2719,7 +2718,8 @@ public partial class C
                 source,
                 sourceSymbolValidator: module =>
                 {
-                    var m = module.GlobalNamespace.GetTypeMember("C")
+                    var m = module.GlobalNamespace
+                        .GetTypeMember("C")
                         .GetMethod("M")
                         .GetPublicSymbol();
                     Assert.True(m.IsPartialDefinition);
@@ -2728,7 +2728,8 @@ public partial class C
                 },
                 symbolValidator: module =>
                 {
-                    var m = module.GlobalNamespace.GetTypeMember("C")
+                    var m = module.GlobalNamespace
+                        .GetTypeMember("C")
                         .GetMethod("M")
                         .GetPublicSymbol();
                     Assert.False(m.IsPartialDefinition);

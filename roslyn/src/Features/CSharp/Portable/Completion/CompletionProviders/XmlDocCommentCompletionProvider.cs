@@ -81,9 +81,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 }
 
                 var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                        attachedToken.Parent,
-                        cancellationToken
-                    )
+                    attachedToken.Parent,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 ISymbol declaredSymbol = null;
@@ -270,10 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 (elementName, attributes) = GetElementNameAndAttributes(token.Parent.Parent);
             }
             else if (
-                token.Parent.IsKind(
-                    SyntaxKind.XmlCrefAttribute,
-                    out XmlAttributeSyntax attributeSyntax
-                )
+                token.Parent
+                    .IsKind(SyntaxKind.XmlCrefAttribute, out XmlAttributeSyntax attributeSyntax)
                 || token.Parent.IsKind(SyntaxKind.XmlNameAttribute, out attributeSyntax)
                 || token.Parent.IsKind(SyntaxKind.XmlTextAttribute, out attributeSyntax)
             )
@@ -337,10 +335,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             XmlAttributeSyntax attributeSyntax;
             if (
                 token.Parent.IsKind(SyntaxKind.IdentifierName)
-                && token.Parent.IsParentKind(
-                    SyntaxKind.XmlNameAttribute,
-                    out XmlNameAttributeSyntax xmlName
-                )
+                && token.Parent
+                    .IsParentKind(SyntaxKind.XmlNameAttribute, out XmlNameAttributeSyntax xmlName)
             )
             {
                 // Handle the special 'name' attributes: name="bar$$
@@ -348,10 +344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
             else if (
                 token.IsKind(SyntaxKind.XmlTextLiteralToken)
-                && token.Parent.IsKind(
-                    SyntaxKind.XmlTextAttribute,
-                    out XmlTextAttributeSyntax xmlText
-                )
+                && token.Parent
+                    .IsKind(SyntaxKind.XmlTextAttribute, out XmlTextAttributeSyntax xmlText)
             )
             {
                 // Handle the other general text attributes: foo="bar$$

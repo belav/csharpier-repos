@@ -42,11 +42,8 @@ namespace System.Web.Http.Cors
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, httpMethod);
             HttpConfiguration config = new HttpConfiguration();
             request.SetConfiguration(config);
-            IHttpRoute route = config.Routes.MapHttpRoute(
-                "default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            IHttpRoute route = config.Routes
+                .MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
             request.SetRouteData(route.GetRouteData("/", request));
 
             ICorsPolicyProvider provider = providerFactory.GetCorsPolicyProvider(request);
@@ -74,11 +71,8 @@ namespace System.Web.Http.Cors
                 .Callback<HttpControllerContext>(context => controllerContext = context);
             config.Services.Replace(typeof(IHttpActionSelector), actionSelector.Object);
             request.SetConfiguration(config);
-            IHttpRoute route = config.Routes.MapHttpRoute(
-                "default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            IHttpRoute route = config.Routes
+                .MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
             request.SetRouteData(route.GetRouteData("/", request));
 
             ICorsPolicyProvider provider = providerFactory.GetCorsPolicyProvider(request);
@@ -117,11 +111,8 @@ namespace System.Web.Http.Cors
                 );
             config.Services.Replace(typeof(IHttpActionSelector), actionSelector.Object);
             request.SetConfiguration(config);
-            IHttpRoute route = config.Routes.MapHttpRoute(
-                "default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            IHttpRoute route = config.Routes
+                .MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
             request.SetRouteData(route.GetRouteData("/", request));
 
             ICorsPolicyProvider provider = providerFactory.GetCorsPolicyProvider(request);
@@ -144,11 +135,8 @@ namespace System.Web.Http.Cors
             request.Headers.Add("Origin", "http://localhost");
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "GET");
             HttpConfiguration config = new HttpConfiguration();
-            IHttpRoute route = config.Routes.MapHttpRoute(
-                "default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            IHttpRoute route = config.Routes
+                .MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
             request.SetRouteData(route.GetRouteData("/", request));
 
             Assert.Throws<InvalidOperationException>(
@@ -193,11 +181,8 @@ namespace System.Web.Http.Cors
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "RandomMethod");
             HttpConfiguration config = new HttpConfiguration();
             request.SetConfiguration(config);
-            IHttpRoute route = config.Routes.MapHttpRoute(
-                "default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            IHttpRoute route = config.Routes
+                .MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
             request.SetRouteData(route.GetRouteData("/", request));
 
             ICorsPolicyProvider provider = providerFactory.GetCorsPolicyProvider(request);
@@ -219,11 +204,8 @@ namespace System.Web.Http.Cors
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "RandomMethod");
             HttpConfiguration config = new HttpConfiguration();
             request.SetConfiguration(config);
-            IHttpRoute route = config.Routes.MapHttpRoute(
-                "default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            IHttpRoute route = config.Routes
+                .MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
             request.SetRouteData(route.GetRouteData("/", request));
 
             Assert.True(request.GetCorsRequestContext().IsPreflight);
@@ -309,11 +291,8 @@ namespace System.Web.Http.Cors
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "httpmethod");
             HttpConfiguration config = new HttpConfiguration();
             request.SetConfiguration(config);
-            config.Routes.MapHttpRoute(
-                "default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config.Routes
+                .MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
 
             ICorsPolicyProvider provider = providerFactory.GetCorsPolicyProvider(request);
 
@@ -336,11 +315,8 @@ namespace System.Web.Http.Cors
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "Put");
             HttpConfiguration config = new HttpConfiguration();
             request.SetConfiguration(config);
-            var route = config.Routes.MapHttpRoute(
-                "default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            var route = config.Routes
+                .MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
             request.SetRouteData(
                 new HttpRouteData(
                     route,

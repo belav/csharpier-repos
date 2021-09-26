@@ -55,7 +55,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "3571848bf6f55281c75fb67adc9c63fac5c4427b38f4fab1567f2f08063a786059f9850c79ff202d1b556e8c90e41f977090"
                 + "3c2d84a9046a372a0619a29713179304355750c9f6c180d1cc92d9b22b303006092a864886f70d010701301906082a864886"
                 + "f70d0302300d02013a04086bcd05b70546e632800810f6c8d0e0466ee6"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             VerifyAlgorithmRc2_128(encodedMessage);
         }
 
@@ -81,7 +82,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "7B329FECF49277159F2FEAB31173004776B03746381E0DA660B6D656A861E54E79186F36F450105DEB2714D"
                 + "02DB5500921EBE4F1A7D3DFB07E4EE9303106092A864886F70D010701301A06082A864886F70D0302300E02"
                 + "0200A00408D621253C94AF659B800802930ACE6A997122"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
 
@@ -199,7 +201,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "0f6d39a2abb14819083f0a2c767958ebe19a2b73147306202da9ca483b911a0218ffb4ca3046de322cf3be6c1500af3d6b52"
                 + "f02e3fa5a1a85e3fa035b3df65400fd29d8104d93481a6716c170c302806092a864886f70d010701301106052b0e03020704"
                 + "0880052d38754b7f298008fc778a46c054e572"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             VerifyAlgorithmDes(encodedMessage);
         }
 
@@ -238,7 +241,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "10064f21ce4b17f4737a9370298a8b540b1d597fbc39d21a537b45d9dc65c8d2cbafcc6c7208b5f0453f7ef206f4b1d99cc0"
                 + "7186f7f5b31a0a9ec885296ae27183f51b83a64bb8bf46ece16305302b06092a864886f70d010701301406082a864886f70d"
                 + "03070408d8ac6958c16ea6f58008beb49fa4214d1e3f"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             VerifyAlgorithm3Des(encodedMessage);
         }
 
@@ -277,7 +281,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "c94ea26e2b4e8ab9b53d5ec7fec48a095d1145769878e6b2947adf41ad924004b185914bed859b2be7e84bbdb59b45663c2c"
                 + "56392895c0534766e743b70db12cd08377c35d9cdf21ac7eb4a4301e06092a864886f70d010701300c06082a864886f70d03"
                 + "04050080030039bd"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             VerifyAlgorithmRc4(encodedMessage);
         }
 
@@ -302,7 +307,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "BE8E581EF8B7FF7BA9376923A367B9B7E031F630E4CA6ADCB31209B04B03E64076FB0465E7E437B13D4AEA2"
                 + "70CA89EB58C1A598F0AC88DCB4024302A06092A864886F70D010701301706082A864886F70D0304040B4B5A"
                 + "8F64D714F933642D4A8004C68A936F"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -357,7 +363,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "bf85c33cea8ffa40b31a784b61dde7eab3736261f0d912b829773201bdf6cb93a602127a30cad5fa1b3034ba10cd4fddcfe5"
                 + "f30bb05ffc2171b18d3200ef21bda8631a4b82af603277db7ebb752999303c06092a864886f70d010701301d060960864801"
                 + "65030401020410d38e15cc9b02555ae95a75e5a7af86e98010c000f2c29b88ec5e4e6ba51159abae55"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             VerifyAlgorithmAes128(encodedMessage);
         }
 
@@ -396,7 +403,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "6eb4d920a55d735935716671bc12dc65b84c29c5a72aa78a4480e19a28ac09395e708e99e1e9e9704ee4d077541bfed1d06d"
                 + "32f3a7e9441fde9133858a0e825af04a36b5943e0f39eade1463de7c12303c06092a864886f70d010701301d060960864801"
                 + "65030401160410d217d9a8bb30516d54aab00a5e6089b68010149eec8997deedcbad000ae6c1a7fb9d"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             VerifyAlgorithmAes192(encodedMessage);
         }
 
@@ -435,7 +443,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "2db6cc66426253e639939b9be852df9212fba9bb52f857a39a26c04a20bae7b7620a1e53873a7ef03c4139edc7a50ee297ea"
                 + "fdc1372596ef299e71b6d4db146cad48a8485e17b3604a56958afdbe83303c06092a864886f70d010701301d060960864801"
                 + "650304012a04100b85a6899050456469102f41aaa685158010b3008bd0eb863574ecbe46a5cc91a99c"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyAlgorithmAes256(encodedMessage);
         }

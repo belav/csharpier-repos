@@ -344,46 +344,53 @@ namespace System.PrivateUri.Tests
             switch (component)
             {
                 case UriComponents.Fragment:
-                    uriString = string.Format(
-                        "http://userInfo@server:80/path/resource.ext?query=qvalue#{0}",
-                        uriInput
-                    );
+                    uriString = string
+                        .Format(
+                            "http://userInfo@server:80/path/resource.ext?query=qvalue#{0}",
+                            uriInput
+                        );
                     break;
                 case UriComponents.Host:
-                    uriString = string.Format(
-                        "http://userInfo@{0}:80/path/resource.ext?query=qvalue#fragment",
-                        uriInput
-                    );
+                    uriString = string
+                        .Format(
+                            "http://userInfo@{0}:80/path/resource.ext?query=qvalue#fragment",
+                            uriInput
+                        );
                     break;
                 case UriComponents.Path:
-                    uriString = string.Format(
-                        "http://userInfo@server:80/{0}/{0}/resource.ext?query=qvalue#fragment",
-                        uriInput
-                    );
+                    uriString = string
+                        .Format(
+                            "http://userInfo@server:80/{0}/{0}/resource.ext?query=qvalue#fragment",
+                            uriInput
+                        );
                     break;
                 case UriComponents.Port:
-                    uriString = string.Format(
-                        "http://userInfo@server:{0}/path/resource.ext?query=qvalue#fragment",
-                        uriInput
-                    );
+                    uriString = string
+                        .Format(
+                            "http://userInfo@server:{0}/path/resource.ext?query=qvalue#fragment",
+                            uriInput
+                        );
                     break;
                 case UriComponents.Query:
-                    uriString = string.Format(
-                        "http://userInfo@server:80/path/resource.ext?query{0}=qvalue{0}#fragment",
-                        uriInput
-                    );
+                    uriString = string
+                        .Format(
+                            "http://userInfo@server:80/path/resource.ext?query{0}=qvalue{0}#fragment",
+                            uriInput
+                        );
                     break;
                 case UriComponents.Scheme:
-                    uriString = string.Format(
-                        "{0}://userInfo@server:80/path/resource.ext?query=qvalue#fragment",
-                        uriInput
-                    );
+                    uriString = string
+                        .Format(
+                            "{0}://userInfo@server:80/path/resource.ext?query=qvalue#fragment",
+                            uriInput
+                        );
                     break;
                 case UriComponents.UserInfo:
-                    uriString = string.Format(
-                        "http://{0}@server:80/path/resource.ext?query=qvalue#fragment",
-                        uriInput
-                    );
+                    uriString = string
+                        .Format(
+                            "http://{0}@server:80/path/resource.ext?query=qvalue#fragment",
+                            uriInput
+                        );
                     break;
                 default:
                     Assert.False(true, "Unknown Uri component: " + component.ToString());

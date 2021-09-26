@@ -107,9 +107,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 MSBuildMefHostServices.TestAccessor.ClearCachedServices();
                 // Replace hooks with ones that always throw exceptions. These hooks detect cases where code executing
                 // after the end of a test attempts to create an ExportProvider.
-                MefHostServices.TestAccessor.HookServiceCreation(
-                    DenyMefHostServicesCreationBetweenTests
-                );
+                MefHostServices.TestAccessor
+                    .HookServiceCreation(DenyMefHostServicesCreationBetweenTests);
 
                 // Reset static state variables.
                 _hostServices = null;
@@ -174,9 +173,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     {
                         // This attribute cleans up the in-process and out-of-process export providers separately, so we
                         // don't need to provide a workspace when waiting for operations to complete.
-                        var waiter = (
-                            (AsynchronousOperationListenerProvider)listenerProvider
-                        ).WaitAllDispatcherOperationAndTasksAsync(workspace: null);
+                        var waiter = ((AsynchronousOperationListenerProvider)listenerProvider)
+                            .WaitAllDispatcherOperationAndTasksAsync(workspace: null);
                         waiter.JoinUsingDispatcher(timeoutTokenSource.Token);
                     }
                     catch (OperationCanceledException ex)
@@ -189,9 +187,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             "Failed to clean up listeners in a timely manner."
                         );
                         foreach (
-                            var token in (
-                                (AsynchronousOperationListenerProvider)listenerProvider
-                            ).GetTokens()
+                            var token in ((AsynchronousOperationListenerProvider)listenerProvider)
+                                .GetTokens()
                         )
                         {
                             messageBuilder.AppendLine().Append($"  {token}");

@@ -309,7 +309,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             Int16 op3 = TestLibrary.Generator.GetInt16();
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.Insert),
                     new Type[] { typeof(Vector64<Int16>), typeof(byte), typeof(Int16) }
                 )
@@ -333,7 +334,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             Int16 op3 = TestLibrary.Generator.GetInt16();
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.Insert),
                     new Type[] { typeof(Vector64<Int16>), typeof(byte), typeof(Int16) }
                 )
@@ -591,16 +593,15 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.Insert)}<Int16>(Vector64<Int16>, 1, Int16): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.Insert)}<Int16>(Vector64<Int16>, 1, Int16): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($" thirdOp: {thirdOp}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

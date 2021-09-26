@@ -200,7 +200,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <returns> The command. </returns>
         protected virtual RawSqlCommand CreateStoreCommand()
         {
-            var commandBuilder = Dependencies.CommandBuilderFactory.Create()
+            var commandBuilder = Dependencies.CommandBuilderFactory
+                .Create()
                 .Append(GetCommandText());
 
             var parameterValues = new Dictionary<string, object?>(GetParameterCount());
@@ -221,9 +222,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     {
                         commandBuilder.AddParameter(
                             columnModification.ParameterName,
-                            Dependencies.SqlGenerationHelper.GenerateParameterName(
-                                columnModification.ParameterName
-                            ),
+                            Dependencies.SqlGenerationHelper
+                                .GenerateParameterName(columnModification.ParameterName),
                             columnModification.TypeMapping!,
                             columnModification.IsNullable
                         );
@@ -238,9 +238,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     {
                         commandBuilder.AddParameter(
                             columnModification.OriginalParameterName,
-                            Dependencies.SqlGenerationHelper.GenerateParameterName(
-                                columnModification.OriginalParameterName
-                            ),
+                            Dependencies.SqlGenerationHelper
+                                .GenerateParameterName(columnModification.OriginalParameterName),
                             columnModification.TypeMapping!,
                             columnModification.IsNullable
                         );
@@ -269,15 +268,16 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             try
             {
-                using var dataReader = storeCommand.RelationalCommand.ExecuteReader(
-                    new RelationalCommandParameterObject(
-                        connection,
-                        storeCommand.ParameterValues,
-                        null,
-                        Dependencies.CurrentContext.Context,
-                        Dependencies.Logger
-                    )
-                );
+                using var dataReader = storeCommand.RelationalCommand
+                    .ExecuteReader(
+                        new RelationalCommandParameterObject(
+                            connection,
+                            storeCommand.ParameterValues,
+                            null,
+                            Dependencies.CurrentContext.Context,
+                            Dependencies.Logger
+                        )
+                    );
                 Consume(dataReader);
             }
             catch (DbUpdateException)
@@ -313,18 +313,18 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             try
             {
-                await using var dataReader =
-                    await storeCommand.RelationalCommand.ExecuteReaderAsync(
-                            new RelationalCommandParameterObject(
-                                connection,
-                                storeCommand.ParameterValues,
-                                null,
-                                Dependencies.CurrentContext.Context,
-                                Dependencies.Logger
-                            ),
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
+                await using var dataReader = await storeCommand.RelationalCommand
+                    .ExecuteReaderAsync(
+                        new RelationalCommandParameterObject(
+                            connection,
+                            storeCommand.ParameterValues,
+                            null,
+                            Dependencies.CurrentContext.Context,
+                            Dependencies.Logger
+                        ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 await ConsumeAsync(dataReader, cancellationToken).ConfigureAwait(false);
             }
             catch (DbUpdateException)
@@ -371,18 +371,19 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual IRelationalValueBufferFactory CreateValueBufferFactory(
             IReadOnlyList<ColumnModification> columnModifications
         ) =>
-            Dependencies.ValueBufferFactoryFactory.Create(
-                Check.NotNull(columnModifications, nameof(columnModifications))
-                    .Where(c => c.IsRead)
-                    .Select(
-                        c =>
-                            new TypeMaterializationInfo(
-                                c.Property!.ClrType,
-                                c.Property,
-                                c.TypeMapping!
-                            )
-                    )
-                    .ToArray()
-            );
+            Dependencies.ValueBufferFactoryFactory
+                .Create(
+                    Check.NotNull(columnModifications, nameof(columnModifications))
+                        .Where(c => c.IsRead)
+                        .Select(
+                            c =>
+                                new TypeMaterializationInfo(
+                                    c.Property!.ClrType,
+                                    c.Property,
+                                    c.TypeMapping!
+                                )
+                        )
+                        .ToArray()
+                );
     }
 }

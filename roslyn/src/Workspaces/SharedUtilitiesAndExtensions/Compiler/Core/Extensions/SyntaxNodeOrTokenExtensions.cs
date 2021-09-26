@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static SyntaxTrivia[] GetTrivia(params SyntaxNodeOrToken[] nodesOrTokens) =>
             nodesOrTokens.SelectMany(
-                    nodeOrToken =>
-                        nodeOrToken.GetLeadingTrivia().Concat(nodeOrToken.GetTrailingTrivia())
-                )
+                nodeOrToken =>
+                    nodeOrToken.GetLeadingTrivia().Concat(nodeOrToken.GetTrailingTrivia())
+            )
                 .ToArray();
     }
 }

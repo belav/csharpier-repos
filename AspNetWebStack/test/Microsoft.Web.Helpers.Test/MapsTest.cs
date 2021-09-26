@@ -73,18 +73,18 @@ namespace Microsoft.Web.Helpers.Test
 
                     // Act
                     string bingResults = Maps.GetBingHtml(
-                            "somekey",
-                            latitude: "100",
-                            longitude: "10"
-                        )
+                        "somekey",
+                        latitude: "100",
+                        longitude: "10"
+                    )
                         .ToHtmlString();
                     string googleResults = Maps.GetGoogleHtml(latitude: "100", longitude: "10")
                         .ToHtmlString();
                     string mapQuestResults = Maps.GetMapQuestHtml(
-                            "somekey",
-                            latitude: "100",
-                            longitude: "10"
-                        )
+                        "somekey",
+                        latitude: "100",
+                        longitude: "10"
+                    )
                         .ToHtmlString();
 
                     // Assert

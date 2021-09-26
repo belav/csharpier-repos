@@ -244,7 +244,8 @@ namespace System.Linq
 
             internal override UnionIterator<TSource> Union(IEnumerable<TSource> next)
             {
-                var sources = new SingleLinkedNode<IEnumerable<TSource>>(_first).Add(_second)
+                var sources = new SingleLinkedNode<IEnumerable<TSource>>(_first)
+                    .Add(_second)
                     .Add(next);
                 return new UnionIteratorN<TSource>(sources, 2, _comparer);
             }

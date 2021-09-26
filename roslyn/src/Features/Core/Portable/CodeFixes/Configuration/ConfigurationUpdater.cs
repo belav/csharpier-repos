@@ -368,8 +368,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             // Add the newly added analyzer config document as a solution item.
             // The analyzer config document is not yet created, so we just mark the file
             // path for tracking and add it as a solution item whenever the file gets created by the code fix application.
-            var service =
-                _project.Solution.Workspace.Services.GetService<IAddSolutionItemService>();
+            var service = _project.Solution.Workspace.Services
+                .GetService<IAddSolutionItemService>();
             service?.TrackFilePathAndAddSolutionItemWhenFileCreated(editorConfigDocument.FilePath);
 
             return solution.WithAnalyzerConfigDocumentText(editorConfigDocument.Id, newText);
@@ -433,7 +433,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             {
                 var optionSet = project.Solution.Workspace.Options;
                 var builder =
-                    ArrayBuilder<(string optionName, string currentOptionValue, bool isPerLanguage)>.GetInstance();
+                    ArrayBuilder<(string optionName, string currentOptionValue, bool isPerLanguage)>
+                        .GetInstance();
 
                 try
                 {
@@ -517,15 +518,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             {
                 var optionSet = project.Solution.Workspace.Options;
                 using var _ =
-                    ArrayBuilder<(OptionKey, ICodeStyleOption, IEditorConfigStorageLocation2, bool)>.GetInstance(
-                        out var builder
-                    );
+                    ArrayBuilder<(OptionKey, ICodeStyleOption, IEditorConfigStorageLocation2, bool)>
+                        .GetInstance(out var builder);
 
                 foreach (var option in options.OrderBy(option => option.Name))
                 {
-                    var editorConfigLocation =
-                        option.StorageLocations.OfType<IEditorConfigStorageLocation2>()
-                            .FirstOrDefault();
+                    var editorConfigLocation = option.StorageLocations
+                        .OfType<IEditorConfigStorageLocation2>()
+                        .FirstOrDefault();
                     if (editorConfigLocation != null)
                     {
                         var optionKey = new OptionKey(
@@ -712,11 +712,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                                     DiagnosticOptionPrefix.Length,
                                                     diagIdLength
                                                 );
-                                                foundMatch = string.Equals(
-                                                    diagId,
-                                                    _diagnostic.Id,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                );
+                                                foundMatch = string
+                                                    .Equals(
+                                                        diagId,
+                                                        _diagnostic.Id,
+                                                        StringComparison.OrdinalIgnoreCase
+                                                    );
                                             }
                                         }
                                         break;
@@ -750,11 +751,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                                     BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix.Length,
                                                     categoryLength
                                                 );
-                                                foundMatch = string.Equals(
-                                                    category,
-                                                    _categoryToBulkConfigure,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                );
+                                                foundMatch = string
+                                                    .Equals(
+                                                        category,
+                                                        _categoryToBulkConfigure,
+                                                        StringComparison.OrdinalIgnoreCase
+                                                    );
                                             }
                                         }
                                         break;
@@ -792,7 +794,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                         var fileName = mostRecentHeaderText.Substring(0, nameExtensionSplitIndex);
                         var splicedFileExtensions = mostRecentHeaderText[
                             (nameExtensionSplitIndex + 1)..
-                        ].Split(',', ' ', '{', '}');
+                        ]
+                            .Split(',', ' ', '{', '}');
 
                         // Replacing characters in the header with the regex equivalent.
                         fileName = fileName.Replace(".", @"\.");

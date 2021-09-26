@@ -47,11 +47,12 @@ namespace Castle.DynamicProxy.Tests
             var b = typeof(ISharedNameFromB);
             var c = typeof(ISharedNameFromC);
 
-            var proxy = new ProxyGenerator().CreateInterfaceProxyWithoutTarget(
-                interfaceToProxy: a,
-                additionalInterfacesToProxy: new[] { b, c },
-                interceptors: new StandardInterceptor()
-            );
+            var proxy = new ProxyGenerator()
+                .CreateInterfaceProxyWithoutTarget(
+                    interfaceToProxy: a,
+                    additionalInterfacesToProxy: new[] { b, c },
+                    interceptors: new StandardInterceptor()
+                );
 
             var implementingType = proxy.GetType();
 

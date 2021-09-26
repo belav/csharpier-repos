@@ -18,9 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var convention = new RouteTokenTransformerConvention(transformer);
 
             var model = new ActionModel(GetMethodInfo(), Array.Empty<object>());
-            model.Selectors.Add(
-                new SelectorModel() { AttributeRouteModel = new AttributeRouteModel() }
-            );
+            model.Selectors
+                .Add(new SelectorModel() { AttributeRouteModel = new AttributeRouteModel() });
 
             // Act
             convention.Apply(model);
@@ -37,9 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var convention = new CustomRouteTokenTransformerConvention(transformer);
 
             var model = new ActionModel(GetMethodInfo(), Array.Empty<object>());
-            model.Selectors.Add(
-                new SelectorModel() { AttributeRouteModel = new AttributeRouteModel() }
-            );
+            model.Selectors
+                .Add(new SelectorModel() { AttributeRouteModel = new AttributeRouteModel() });
 
             // Act
             convention.Apply(model);
@@ -50,10 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private MethodInfo GetMethodInfo()
         {
-            return typeof(RouteTokenTransformerConventionTest).GetMethod(
-                nameof(GetMethodInfo),
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            return typeof(RouteTokenTransformerConventionTest)
+                .GetMethod(nameof(GetMethodInfo), BindingFlags.NonPublic | BindingFlags.Instance);
         }
 
         private class TestParameterTransformer : IOutboundParameterTransformer

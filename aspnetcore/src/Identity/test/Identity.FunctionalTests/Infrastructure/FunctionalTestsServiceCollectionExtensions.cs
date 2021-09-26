@@ -40,8 +40,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
                         p,
                         (sp, options) =>
                             options.ConfigureWarnings(
-                                    b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
-                                )
+                                b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                            )
                                 .UseSqlite(connection)
                     )
             );
@@ -102,7 +102,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             services.AddMvc(
                 config =>
                 {
-                    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
+                    var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
                         .Build();
                     config.Filters.Add(new AuthorizeFilter(policy));
                 }

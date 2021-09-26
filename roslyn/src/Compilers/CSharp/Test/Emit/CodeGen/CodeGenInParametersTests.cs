@@ -3381,10 +3381,9 @@ class Program
     }
 }";
 
-            CompileAndVerify(code, expectedOutput: "5")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(code, expectedOutput: "5").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       10 (0xa)
   .maxstack  1
@@ -3395,7 +3394,7 @@ class Program
   IL_0004:  call       ""void Program.Test(in int)""
   IL_0009:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
                 code,
@@ -3432,10 +3431,9 @@ class Program
     }
 }";
 
-            CompileAndVerify(code, expectedOutput: "10")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(code, expectedOutput: "10").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  1
@@ -3446,7 +3444,7 @@ class Program
   IL_0005:  call       ""void Program.Test(in int)""
   IL_000a:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
                 code,
@@ -3483,10 +3481,9 @@ class Program
     }
 }";
 
-            CompileAndVerify(code, expectedOutput: "(1, 5)")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(code, expectedOutput: "(1, 5)").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -3501,7 +3498,7 @@ class Program
   IL_0008:  call       ""void Program.Test(in int, in int)""
   IL_000d:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
                 code,
@@ -3542,10 +3539,9 @@ class Program
     }
 }";
 
-            CompileAndVerify(code, expectedOutput: "(2, 5)")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(code, expectedOutput: "(2, 5)").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -3560,7 +3556,7 @@ class Program
   IL_0008:  call       ""void Program.Test(in int, in int)""
   IL_000d:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
                 code,
@@ -3601,10 +3597,9 @@ class Program
     }
 }";
 
-            CompileAndVerify(code, expectedOutput: "(3, 10)")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(code, expectedOutput: "(3, 10)").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -3619,7 +3614,7 @@ class Program
   IL_0009:  call       ""void Program.Test(in int, in int)""
   IL_000e:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
                 code,
@@ -3660,10 +3655,9 @@ class Program
     }
 }";
 
-            CompileAndVerify(code, expectedOutput: "(1, 5)")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(code, expectedOutput: "(1, 5)").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -3678,7 +3672,7 @@ class Program
   IL_0008:  call       ""void Program.Test(in int, in int)""
   IL_000d:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
                 code,
@@ -3719,10 +3713,9 @@ class Program
     }
 }";
 
-            CompileAndVerify(code, expectedOutput: "(2, 10)")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(code, expectedOutput: "(2, 10)").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -3737,7 +3730,7 @@ class Program
   IL_0009:  call       ""void Program.Test(in int, in int)""
   IL_000e:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
                 code,
@@ -3789,15 +3782,14 @@ class Program
 }";
 
             CompileAndVerify(
-                    code,
-                    expectedOutput: @"
+                code,
+                expectedOutput: @"
 get p1=3 p2=2
 set p1=3 p2=2 to 10
 "
-                )
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            ).VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  6
@@ -3828,7 +3820,7 @@ set p1=3 p2=2 to 10
   IL_0021:  callvirt   ""void Program.this[in int, in int].set""
   IL_0026:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
                 code,
@@ -3880,15 +3872,14 @@ class Program
 }";
 
             CompileAndVerify(
-                    code,
-                    expectedOutput: @"
+                code,
+                expectedOutput: @"
 get p1=4 p2=5
 set p1=4 p2=5 to 11
 "
-                )
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            ).VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  6
@@ -3919,7 +3910,7 @@ set p1=4 p2=5 to 11
   IL_0021:  callvirt   ""void Program.this[in int, in int].set""
   IL_0026:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
                 code,
@@ -3971,15 +3962,14 @@ class Program
 }";
 
             CompileAndVerify(
-                    code,
-                    expectedOutput: @"
+                code,
+                expectedOutput: @"
 get p1=3 p2=2
 set p1=3 p2=2 to 10
 "
-                )
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            ).VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  6
@@ -4010,7 +4000,7 @@ set p1=3 p2=2 to 10
   IL_0021:  callvirt   ""void Program.this[in int, in int].set""
   IL_0026:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
                 code,
@@ -4062,15 +4052,14 @@ class Program
 }";
 
             CompileAndVerify(
-                    code,
-                    expectedOutput: @"
+                code,
+                expectedOutput: @"
 get p1=4 p2=5
 set p1=4 p2=5 to 11
 "
-                )
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            ).VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  6
@@ -4101,7 +4090,7 @@ set p1=4 p2=5 to 11
   IL_0021:  callvirt   ""void Program.this[in int, in int].set""
   IL_0026:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
                 code,
@@ -4141,10 +4130,9 @@ class Program
 
 }";
 
-            CompileAndVerify(code, expectedOutput: "test")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(code, expectedOutput: "test").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -4159,7 +4147,7 @@ class Program
   IL_0014:  call       ""void Program.A(in double, in string)""
   IL_0019:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
                 code,
@@ -4202,10 +4190,9 @@ class Program
 
 }";
 
-            CompileAndVerify(code, expectedOutput: "6")
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(code, expectedOutput: "6").VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       30 (0x1e)
   .maxstack  3
@@ -4224,7 +4211,7 @@ class Program
   IL_0018:  call       ""void Program.B(in float, in float, in float)""
   IL_001d:  ret
 }"
-                );
+            );
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
                 code,

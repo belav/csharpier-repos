@@ -125,13 +125,14 @@ namespace System.Net.Sockets
 
             // Get the address family, socket type, and protocol type from the socket.
             if (
-                Interop.Winsock.getsockopt(
-                    handle,
-                    SocketOptionLevel.Socket,
-                    (SocketOptionName)Interop.Winsock.SO_PROTOCOL_INFOW,
-                    (byte*)&info,
-                    ref optionLength
-                ) == SocketError.SocketError
+                Interop.Winsock
+                    .getsockopt(
+                        handle,
+                        SocketOptionLevel.Socket,
+                        (SocketOptionName)Interop.Winsock.SO_PROTOCOL_INFOW,
+                        (byte*)&info,
+                        ref optionLength
+                    ) == SocketError.SocketError
             )
             {
                 throw new SocketException((int)SocketPal.GetLastSocketError());

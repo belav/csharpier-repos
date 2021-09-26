@@ -722,13 +722,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             catch (JsonSerializationException ex)
             {
                 Assert.IsTrue(
-                    ex.Message.StartsWith(
-                        @"Type specified in JSON '"
-                            + employeeRef
-                            + @"' is not compatible with '"
-                            + personRef
-                            + @"'."
-                    )
+                    ex.Message
+                        .StartsWith(
+                            @"Type specified in JSON '"
+                                + employeeRef
+                                + @"' is not compatible with '"
+                                + personRef
+                                + @"'."
+                        )
                 );
             }
         }
@@ -2422,13 +2423,14 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void GenericItemTypeCollection()
         {
             DataType data = new DataType();
-            data.Rows.Add(
-                "key",
-                new List<MyInterfaceImplementationType>
-                {
-                    new MyInterfaceImplementationType() { SomeProperty = "property" }
-                }
-            );
+            data.Rows
+                .Add(
+                    "key",
+                    new List<MyInterfaceImplementationType>
+                    {
+                        new MyInterfaceImplementationType() { SomeProperty = "property" }
+                    }
+                );
             string serialized = JsonConvert.SerializeObject(data, Formatting.Indented);
 
             string listTypeName = ReflectionUtils.GetTypeName(
@@ -2621,10 +2623,11 @@ namespace Newtonsoft.Json.Tests.Serialization
                 out string typeName
             )
             {
-                assemblyName = string.Format(
-                    "FancyAssemblyName=>{0}",
-                    Assembly.GetAssembly(serializedType)?.GetName().Name
-                );
+                assemblyName = string
+                    .Format(
+                        "FancyAssemblyName=>{0}",
+                        Assembly.GetAssembly(serializedType)?.GetName().Name
+                    );
                 typeName = string.Format("{0}{1}{0}", Annotate, serializedType.Name);
             }
 

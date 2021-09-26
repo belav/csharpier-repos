@@ -86,7 +86,8 @@ namespace System.Linq.Tests
         [Fact]
         public void ThenByDescending1()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .OrderBy(n => n)
                 .ThenByDescending(n => n)
                 .Count();
@@ -96,7 +97,8 @@ namespace System.Linq.Tests
         [Fact]
         public void ThenByDescending2()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .OrderBy(n => n)
                 .ThenByDescending(n => n, Comparer<int>.Default)
                 .Count();

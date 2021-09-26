@@ -12,11 +12,11 @@ namespace ABIStress
 {
     class Callee
     {
-        private static readonly MethodInfo s_hashCodeAddMethod = typeof(HashCode).GetMethods()
+        private static readonly MethodInfo s_hashCodeAddMethod = typeof(HashCode)
+            .GetMethods()
             .Single(mi => mi.Name == "Add" && mi.GetParameters().Length == 1);
-        private static readonly MethodInfo s_hashCodeToHashCodeMethod = typeof(HashCode).GetMethod(
-            "ToHashCode"
-        );
+        private static readonly MethodInfo s_hashCodeToHashCodeMethod = typeof(HashCode)
+            .GetMethod("ToHashCode");
 
         public Callee(string name, List<TypeEx> parameters)
         {
@@ -71,9 +71,8 @@ namespace ABIStress
 
         private static ModuleBuilder s_delegateTypesModule;
         private static ConstructorInfo s_unmanagedFunctionPointerCtor =
-            typeof(UnmanagedFunctionPointerAttribute).GetConstructor(
-                new[] { typeof(CallingConvention) }
-            );
+            typeof(UnmanagedFunctionPointerAttribute)
+                .GetConstructor(new[] { typeof(CallingConvention) });
 
         public void EmitPInvokeDelegateTypes()
         {
@@ -104,25 +103,25 @@ namespace ABIStress
                 );
 
                 tb.DefineConstructor(
-                        MethodAttributes.Public
-                            | MethodAttributes.HideBySig
-                            | MethodAttributes.RTSpecialName,
-                        CallingConventions.Standard,
-                        new[] { typeof(object), typeof(IntPtr) }
-                    )
+                    MethodAttributes.Public
+                        | MethodAttributes.HideBySig
+                        | MethodAttributes.RTSpecialName,
+                    CallingConventions.Standard,
+                    new[] { typeof(object), typeof(IntPtr) }
+                )
                     .SetImplementationFlags(
                         MethodImplAttributes.Runtime | MethodImplAttributes.Managed
                     );
 
                 tb.DefineMethod(
-                        "Invoke",
-                        MethodAttributes.Public
-                            | MethodAttributes.HideBySig
-                            | MethodAttributes.NewSlot
-                            | MethodAttributes.Virtual,
-                        typeof(int),
-                        Parameters.Select(t => t.Type).ToArray()
-                    )
+                    "Invoke",
+                    MethodAttributes.Public
+                        | MethodAttributes.HideBySig
+                        | MethodAttributes.NewSlot
+                        | MethodAttributes.Virtual,
+                    typeof(int),
+                    Parameters.Select(t => t.Type).ToArray()
+                )
                     .SetImplementationFlags(
                         MethodImplAttributes.Runtime | MethodImplAttributes.Managed
                     );

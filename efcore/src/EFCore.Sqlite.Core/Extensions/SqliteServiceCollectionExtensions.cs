@@ -52,10 +52,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
-            var builder = new EntityFrameworkRelationalServicesBuilder(serviceCollection).TryAdd<
-                LoggingDefinitions,
-                SqliteLoggingDefinitions
-            >()
+            var builder = new EntityFrameworkRelationalServicesBuilder(serviceCollection)
+                .TryAdd<LoggingDefinitions, SqliteLoggingDefinitions>()
                 .TryAdd<IDatabaseProvider, DatabaseProvider<SqliteOptionsExtension>>()
                 .TryAdd<IRelationalTypeMappingSource, SqliteTypeMappingSource>()
                 .TryAdd<ISqlGenerationHelper, SqliteSqlGenerationHelper>()

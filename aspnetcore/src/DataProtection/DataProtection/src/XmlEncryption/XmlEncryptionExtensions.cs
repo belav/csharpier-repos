@@ -36,8 +36,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             while (true)
             {
                 var elementWhichRequiresDecryption = doc.Descendants(
-                        XmlConstants.EncryptedSecretElementName
-                    )
+                    XmlConstants.EncryptedSecretElementName
+                )
                     .FirstOrDefault();
                 if (elementWhichRequiresDecryption == null)
                 {
@@ -126,16 +126,17 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
                 // <enc:encryptedSecret decryptorType="{type}" xmlns:enc="{ns}">
                 //   <element />
                 // </enc:encryptedSecret>
-                entry.Key.ReplaceWith(
-                    new XElement(
-                        XmlConstants.EncryptedSecretElementName,
-                        new XAttribute(
-                            XmlConstants.DecryptorTypeAttributeName,
-                            entry.Value.DecryptorType.AssemblyQualifiedName!
-                        ),
-                        entry.Value.EncryptedElement
-                    )
-                );
+                entry.Key
+                    .ReplaceWith(
+                        new XElement(
+                            XmlConstants.EncryptedSecretElementName,
+                            new XAttribute(
+                                XmlConstants.DecryptorTypeAttributeName,
+                                entry.Value.DecryptorType.AssemblyQualifiedName!
+                            ),
+                            entry.Value.EncryptedElement
+                        )
+                    );
             }
             return doc.Root;
         }

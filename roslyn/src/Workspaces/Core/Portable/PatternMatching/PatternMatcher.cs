@@ -713,12 +713,12 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                         // only continue trying to consume pattern parts if the last part and this
                         // part are both upper case.
                         if (
-                            !char.IsUpper(
-                                patternChunk.Text[patternHumps[currentPatternHump - 1].Start]
-                            )
-                            || !char.IsUpper(
-                                patternChunk.Text[patternHumps[currentPatternHump].Start]
-                            )
+                            !char
+                                .IsUpper(
+                                    patternChunk.Text[patternHumps[currentPatternHump - 1].Start]
+                                )
+                            || !char
+                                .IsUpper(patternChunk.Text[patternHumps[currentPatternHump].Start])
                         )
                         {
                             break;

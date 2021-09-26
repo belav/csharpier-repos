@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
 
                     var oldDocument = workspace.Documents[0];
                     var oldDocumentId = oldDocument.Id;
-                    var expectedText = workspace.Documents[0].GetTextBuffer()
+                    var expectedText = workspace.Documents[0]
+                        .GetTextBuffer()
                         .CurrentSnapshot.GetText();
 
                     // a new document with the same text as old document is added.
@@ -192,12 +193,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
 
                 if (expectedSourceOriginal != null)
                 {
-                    var originalDocument = workspace.Documents.Single(
-                        doc => !doc.SelectedSpans.IsEmpty()
-                    );
+                    var originalDocument = workspace.Documents
+                        .Single(doc => !doc.SelectedSpans.IsEmpty());
                     var originalDocumentId = originalDocument.Id;
 
-                    var refDocument = workspace.Documents.Where(doc => doc.Id != originalDocumentId)
+                    var refDocument = workspace.Documents
+                        .Where(doc => doc.Id != originalDocumentId)
                         .SingleOrDefault();
                     var refDocumentId = refDocument?.Id;
 
@@ -219,31 +220,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
                     var modifiedOringinalRoot = await modifiedOriginalDocument.GetSyntaxRootAsync();
 
                     // One node/token will contain the warning we attached for change namespace action.
-                    Assert.Single(
-                        modifiedOringinalRoot.DescendantNodesAndTokensAndSelf()
-                            .Where(
-                                n =>
+                    Assert.Single(modifiedOringinalRoot.DescendantNodesAndTokensAndSelf().Where(
+                            n =>
+                            {
+                                IEnumerable<SyntaxAnnotation> annotations;
+                                if (n.IsNode)
                                 {
-                                    IEnumerable<SyntaxAnnotation> annotations;
-                                    if (n.IsNode)
-                                    {
-                                        annotations = n.AsNode()
-                                            .GetAnnotations(WarningAnnotation.Kind);
-                                    }
-                                    else
-                                    {
-                                        annotations = n.AsToken()
-                                            .GetAnnotations(WarningAnnotation.Kind);
-                                    }
-
-                                    return annotations.Any(
-                                        annotation =>
-                                            WarningAnnotation.GetDescription(annotation)
-                                            == FeaturesResources.Warning_colon_changing_namespace_may_produce_invalid_code_and_change_code_meaning
-                                    );
+                                    annotations = n.AsNode().GetAnnotations(WarningAnnotation.Kind);
                                 }
-                            )
-                    );
+                                else
+                                {
+                                    annotations = n.AsToken()
+                                        .GetAnnotations(WarningAnnotation.Kind);
+                                }
+
+                                return annotations.Any(
+                                    annotation =>
+                                        WarningAnnotation.GetDescription(annotation)
+                                        == FeaturesResources.Warning_colon_changing_namespace_may_produce_invalid_code_and_change_code_meaning
+                                );
+                            }
+                        ));
 
                     var actualText = (await modifiedOriginalDocument.GetTextAsync()).ToString();
                     Assert.Equal(expectedSourceOriginal, actualText);
@@ -255,10 +252,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
                         {
                             var oldRefText = (
                                 await oldSolution.GetDocument(refDocumentId).GetTextAsync()
-                            ).ToString();
+                            )
+                                .ToString();
                             var newRefText = (
                                 await newSolution.GetDocument(refDocumentId).GetTextAsync()
-                            ).ToString();
+                            )
+                                .ToString();
                             Assert.Equal(oldRefText, newRefText);
                         }
                     }
@@ -267,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
                         Assert.True(changedDocumentIds.Contains(refDocumentId));
                         var actualRefText = (
                             await newSolution.GetDocument(refDocumentId).GetTextAsync()
-                        ).ToString();
+                        )
+                            .ToString();
                         Assert.Equal(expectedSourceReference, actualRefText);
                     }
                 }

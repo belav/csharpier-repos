@@ -475,23 +475,25 @@ namespace System.Net.Sockets.Tests
                 Task<int>[] reads = new Task<int>[Iters];
                 for (int i = 0; i < Iters; i++)
                 {
-                    reads[i] = Task.Factory.StartNew(
-                        s => accepted.Receive(receiveData, (int)s, 1, SocketFlags.None),
-                        i,
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    );
+                    reads[i] = Task.Factory
+                        .StartNew(
+                            s => accepted.Receive(receiveData, (int)s, 1, SocketFlags.None),
+                            i,
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        );
                 }
                 for (int i = 0; i < Iters; i++)
                 {
-                    writes[i] = Task.Factory.StartNew(
-                        s => client.Send(sendData, (int)s, 1, SocketFlags.None),
-                        i,
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    );
+                    writes[i] = Task.Factory
+                        .StartNew(
+                            s => client.Send(sendData, (int)s, 1, SocketFlags.None),
+                            i,
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        );
                 }
                 await TestSettings.WhenAllOrAnyFailedWithTimeout(writes.Concat(reads).ToArray());
 
@@ -563,10 +565,8 @@ namespace System.Net.Sockets.Tests
                 () => new UnixDomainSocketEndPoint(string.Empty)
             );
 
-            FieldInfo fi = typeof(UnixDomainSocketEndPoint).GetField(
-                "s_nativePathLength",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            FieldInfo fi = typeof(UnixDomainSocketEndPoint)
+                .GetField("s_nativePathLength", BindingFlags.Static | BindingFlags.NonPublic);
             Assert.NotNull(fi);
 
             int maxNativeSize = (int)fi.GetValue(null);
@@ -632,10 +632,11 @@ namespace System.Net.Sockets.Tests
                             // Verify the client address on the server.
                             EndPoint clientAddressOnServer = acceptedClient.RemoteEndPoint;
                             Assert.True(
-                                string.CompareOrdinal(
-                                    expectedClientAddress,
-                                    clientAddressOnServer.ToString()
-                                ) == 0
+                                string
+                                    .CompareOrdinal(
+                                        expectedClientAddress,
+                                        clientAddressOnServer.ToString()
+                                    ) == 0
                             );
                         }
                     }

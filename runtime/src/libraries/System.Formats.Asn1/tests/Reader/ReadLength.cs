@@ -17,10 +17,8 @@ namespace System.Formats.Asn1.Tests.Reader
         );
 
         private static ReadTagAndLengthDelegate ReadTagAndLength =
-            (ReadTagAndLengthDelegate)typeof(AsnDecoder).GetMethod(
-                    "ReadTagAndLength",
-                    BindingFlags.Static | BindingFlags.NonPublic
-                )
+            (ReadTagAndLengthDelegate)typeof(AsnDecoder)
+                .GetMethod("ReadTagAndLength", BindingFlags.Static | BindingFlags.NonPublic)
                 .CreateDelegate(typeof(ReadTagAndLengthDelegate));
 
         [Theory]

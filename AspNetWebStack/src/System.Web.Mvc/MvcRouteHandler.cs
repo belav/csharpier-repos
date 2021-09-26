@@ -20,9 +20,8 @@ namespace System.Web.Mvc
 
         protected virtual IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-            requestContext.HttpContext.SetSessionStateBehavior(
-                GetSessionStateBehavior(requestContext)
-            );
+            requestContext.HttpContext
+                .SetSessionStateBehavior(GetSessionStateBehavior(requestContext));
             return new MvcHandler(requestContext);
         }
 

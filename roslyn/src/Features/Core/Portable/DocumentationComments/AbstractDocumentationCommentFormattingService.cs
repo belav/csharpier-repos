@@ -550,12 +550,12 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 {
                     state.AppendParts(
                         TypeParameterRefToSymbolDisplayParts(
-                                attribute.Value,
-                                state.TypeResolutionSymbol,
-                                state.Position,
-                                state.SemanticModel,
-                                state.Format
-                            )
+                            attribute.Value,
+                            state.TypeResolutionSymbol,
+                            state.Position,
+                            state.SemanticModel,
+                            state.Format
+                        )
                             .ToTaggedText(state.Style)
                     );
                 }
@@ -563,12 +563,12 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 {
                     state.AppendParts(
                         CrefToSymbolDisplayParts(
-                                attribute.Value,
-                                state.Position,
-                                state.SemanticModel,
-                                state.Format,
-                                kind
-                            )
+                            attribute.Value,
+                            state.Position,
+                            state.SemanticModel,
+                            state.Format,
+                            kind
+                        )
                             .ToTaggedText(state.Style)
                     );
                 }
@@ -640,19 +640,16 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
         {
             if (semanticModel != null)
             {
-                var typeParameterIndex =
-                    typeResolutionSymbol.OriginalDefinition.GetAllTypeParameters()
-                        .IndexOf(tp => tp.Name == crefValue);
+                var typeParameterIndex = typeResolutionSymbol.OriginalDefinition
+                    .GetAllTypeParameters()
+                    .IndexOf(tp => tp.Name == crefValue);
                 if (typeParameterIndex >= 0)
                 {
                     var typeArgs = typeResolutionSymbol.GetAllTypeArguments();
                     if (typeArgs.Length > typeParameterIndex)
                     {
-                        return typeArgs[typeParameterIndex].ToMinimalDisplayParts(
-                            semanticModel,
-                            position,
-                            format
-                        );
+                        return typeArgs[typeParameterIndex]
+                            .ToMinimalDisplayParts(semanticModel, position, format);
                     }
                 }
             }

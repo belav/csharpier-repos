@@ -144,11 +144,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             bool isRefAssembly
         )
         {
-            return SourceModule.ContainingSourceAssembly.GetCustomAttributesToEmit(
-                this,
-                isRefAssembly,
-                emittingAssemblyAttributesInNetModule: OutputKind.IsNetModule()
-            );
+            return SourceModule.ContainingSourceAssembly
+                .GetCustomAttributesToEmit(
+                    this,
+                    isRefAssembly,
+                    emittingAssemblyAttributesInNetModule: OutputKind.IsNetModule()
+                );
         }
 
         public sealed override IEnumerable<Cci.SecurityAttribute> GetSourceAssemblySecurityAttributes()
@@ -223,11 +224,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             if (
                 OutputKind != OutputKind.NetModule
                 && !string.IsNullOrEmpty(refIdentity.CultureName)
-                && !string.Equals(
-                    refIdentity.CultureName,
-                    asmIdentity.CultureName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && !string
+                    .Equals(
+                        refIdentity.CultureName,
+                        asmIdentity.CultureName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 diagnostics.Add(
@@ -525,7 +527,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 return SpecializedCollections.EmptyEnumerable<Cci.INamespaceTypeDefinition>();
             }
 
-            return Compilation.AnonymousTypeManager.GetAllCreatedTemplates()
+            return Compilation.AnonymousTypeManager
+                .GetAllCreatedTemplates()
 #if DEBUG
                 .Select(type => type.GetCciAdapter())
 #endif
@@ -789,9 +792,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 {
                     orderedForwardedTypes = orderedForwardedTypes.OrderBy(
                         t =>
-                            t.OriginalDefinition.ToDisplayString(
-                                SymbolDisplayFormat.QualifiedNameArityFormat
-                            )
+                            t.OriginalDefinition
+                                .ToDisplayString(SymbolDisplayFormat.QualifiedNameArityFormat)
                     );
                 }
 
@@ -1776,7 +1778,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 SourceModule,
                 details,
                 GetUntranslatedSpecialType(SpecialType.System_Void, syntaxOpt, diagnostics)
-            ).GetCciAdapter();
+            )
+                .GetCciAdapter();
         }
 
         internal abstract SynthesizedAttributeData SynthesizeEmbeddedAttribute();
@@ -2103,7 +2106,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             return GetAdditionalTopLevelTypes()
 #if DEBUG
-                .Select(type => type.GetCciAdapter())
+            .Select(type => type.GetCciAdapter())
 #endif
             ;
         }
@@ -2114,7 +2117,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             return GetEmbeddedTypes(context.Diagnostics)
 #if DEBUG
-                .Select(type => type.GetCciAdapter())
+            .Select(type => type.GetCciAdapter())
 #endif
             ;
         }

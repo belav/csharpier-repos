@@ -95,12 +95,12 @@ namespace System.Web.Http.Tracing.Tracers
             bool wasInvoked = false;
             Mock<HttpActionBinding> mockBinder = new Mock<HttpActionBinding>() { CallBase = true };
             mockBinder.Setup(
-                    b =>
-                        b.ExecuteBindingAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                b =>
+                    b.ExecuteBindingAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback(() => wasInvoked = true)
                 .Returns(TaskHelpers.Completed());
 
@@ -149,12 +149,12 @@ namespace System.Web.Http.Tracing.Tracers
             tcs.TrySetException(exception);
             Mock<HttpActionBinding> mockBinder = new Mock<HttpActionBinding>() { CallBase = true };
             mockBinder.Setup(
-                    b =>
-                        b.ExecuteBindingAsync(
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                b =>
+                    b.ExecuteBindingAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(tcs.Task);
 
             TestTraceWriter traceWriter = new TestTraceWriter();

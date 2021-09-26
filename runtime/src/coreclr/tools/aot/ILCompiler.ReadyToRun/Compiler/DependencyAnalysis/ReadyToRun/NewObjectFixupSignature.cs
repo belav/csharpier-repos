@@ -17,7 +17,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _typeDesc = typeDesc;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            ((CompilerTypeSystemContext)typeDesc.Context).EnsureLoadableType(typeDesc);
+            ((CompilerTypeSystemContext)typeDesc.Context)
+                .EnsureLoadableType(typeDesc);
         }
 
         public override int ClassCode => 551247760;

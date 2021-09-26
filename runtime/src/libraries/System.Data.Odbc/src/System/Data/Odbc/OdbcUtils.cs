@@ -576,14 +576,15 @@ namespace System.Data.Odbc
 
             if (
                 0
-                == string.Compare(
-                    _sqlstatement,
-                    tempidx,
-                    tokenString,
-                    0,
-                    tokenString.Length,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                == string
+                    .Compare(
+                        _sqlstatement,
+                        tempidx,
+                        tokenString,
+                        0,
+                        tokenString.Length,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 // Reset current position and token

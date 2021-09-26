@@ -458,7 +458,8 @@ namespace System.Security.AccessControl.Tests
             capacity = 5;
             sid = new SecurityIdentifier(
                 Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-            ).ToString();
+            )
+                .ToString();
             rawAcl = new RawAcl(revision, capacity);
             //an SystemAudit ACE with a zero access mask
             //is meaningless, will be removed

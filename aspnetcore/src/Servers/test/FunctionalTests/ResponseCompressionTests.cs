@@ -32,11 +32,11 @@ namespace ServerComparison.FunctionalTests
 
         public static TestMatrix NoCompressionTestVariants =>
             TestMatrix.ForServers(
-                    ServerType.IISExpress,
-                    ServerType.Kestrel,
-                    ServerType.Nginx,
-                    ServerType.HttpSys
-                )
+                ServerType.IISExpress,
+                ServerType.Kestrel,
+                ServerType.Nginx,
+                ServerType.HttpSys
+            )
                 .WithTfms(Tfm.Default)
                 .WithAllHostingModels();
 
@@ -73,11 +73,11 @@ namespace ServerComparison.FunctionalTests
 
         public static TestMatrix HostAndAppCompressionTestVariants =>
             TestMatrix.ForServers(
-                    ServerType.IISExpress,
-                    ServerType.Kestrel,
-                    ServerType.Nginx,
-                    ServerType.HttpSys
-                )
+                ServerType.IISExpress,
+                ServerType.Kestrel,
+                ServerType.Nginx,
+                ServerType.HttpSys
+            )
                 .WithTfms(Tfm.Default)
                 .WithAllHostingModels();
 

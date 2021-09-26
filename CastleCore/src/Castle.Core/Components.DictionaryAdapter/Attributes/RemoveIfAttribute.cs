@@ -91,11 +91,12 @@ namespace Castle.Components.DictionaryAdapter
             }
 
             throw new ArgumentException(
-                string.Format(
-                    "{0} is not a concrete type implementing {1} with a default constructor",
-                    type.FullName,
-                    typeof(TBase).FullName
-                )
+                string
+                    .Format(
+                        "{0} is not a concrete type implementing {1} with a default constructor",
+                        type.FullName,
+                        typeof(TBase).FullName
+                    )
             );
         }
 

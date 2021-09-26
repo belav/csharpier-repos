@@ -558,11 +558,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics
             );
 
-            var conversion = this.Conversions.ClassifyImplicitConversionFromType(
-                awaiterType,
-                INotifyCompletion,
-                ref useSiteInfo
-            );
+            var conversion = this.Conversions
+                .ClassifyImplicitConversionFromType(
+                    awaiterType,
+                    INotifyCompletion,
+                    ref useSiteInfo
+                );
             if (!conversion.IsImplicit)
             {
                 diagnostics.Add(node, useSiteInfo);

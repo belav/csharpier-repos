@@ -20,10 +20,8 @@ namespace Moq
 	/// </summary>
     public abstract partial class Mock : IFluentInterface
     {
-        internal static readonly MethodInfo GetMethod = typeof(Mock).GetMethod(
-            nameof(Get),
-            BindingFlags.Public | BindingFlags.Static
-        );
+        internal static readonly MethodInfo GetMethod = typeof(Mock)
+            .GetMethod(nameof(Get), BindingFlags.Public | BindingFlags.Static);
 
         /// <summary>
 		///   Initializes a new instance of the <see cref="Mock"/> class.
@@ -89,23 +87,25 @@ namespace Moq
                     .GetInterfaces()
                     .Single(i => i.Name.Equals("IMocked`1", StringComparison.Ordinal));
                 var mockedType = imockedType.GetGenericArguments()[0];
-                var types = string.Join(
-                    ", ",
-                    new[] { mockedType }
-                    // Ignore internally defined IMocked<T>
-                    .Concat(mock.InheritedInterfaces)
-                        .Concat(mock.AdditionalInterfaces)
-                        .Select(t => t.Name)
-                        .ToArray()
-                );
+                var types = string
+                    .Join(
+                        ", ",
+                        new[] { mockedType }
+                            // Ignore internally defined IMocked<T>
+                            .Concat(mock.InheritedInterfaces)
+                            .Concat(mock.AdditionalInterfaces)
+                            .Select(t => t.Name)
+                            .ToArray()
+                    );
 
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.InvalidMockGetType,
-                        typeof(T).Name,
-                        types
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.InvalidMockGetType,
+                            typeof(T).Name,
+                            types
+                        )
                 );
             }
 
@@ -302,9 +302,10 @@ namespace Moq
             var errors = new List<MockException>();
 
             foreach (
-                var setup in this.MutableSetups.ToArray(
-                    setup => !setup.IsOverridden && !setup.IsConditional && predicate(setup)
-                )
+                var setup in this.MutableSetups
+                    .ToArray(
+                        setup => !setup.IsOverridden && !setup.IsConditional && predicate(setup)
+                    )
             )
             {
                 try
@@ -321,11 +322,12 @@ namespace Moq
             {
                 throw MockException.Combined(
                     errors,
-                    preamble: string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.VerificationErrorsOfMock,
-                        this
-                    )
+                    preamble: string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.VerificationErrorsOfMock,
+                            this
+                        )
                 );
             }
         }
@@ -432,9 +434,8 @@ namespace Moq
             if (!verifiedMocks.Add(mock))
                 return;
 
-            var unverifiedInvocations = mock.MutableInvocations.ToArray(
-                invocation => !invocation.IsVerified
-            );
+            var unverifiedInvocations = mock.MutableInvocations
+                .ToArray(invocation => !invocation.IsVerified);
 
             var innerMockSetups = mock.MutableSetups.GetInnerMockSetups();
 
@@ -753,15 +754,16 @@ namespace Moq
                     if (innerMock == null)
                     {
                         throw new ArgumentException(
-                            string.Format(
-                                CultureInfo.CurrentCulture,
-                                Resources.UnsupportedExpression,
-                                expr.ToStringFixed()
-                                    + " in "
-                                    + originalExpression.ToStringFixed()
-                                    + ":\n"
-                                    + Resources.TypeNotMockable
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.CurrentCulture,
+                                    Resources.UnsupportedExpression,
+                                    expr.ToStringFixed()
+                                        + " in "
+                                        + originalExpression.ToStringFixed()
+                                        + ":\n"
+                                        + Resources.TypeNotMockable
+                                )
                         );
                     }
                     setup = new InnerMockSetup(
@@ -808,10 +810,8 @@ namespace Moq
         {
             Guard.NotNull(action, nameof(action));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
-                action,
-                mock.ConstructorArguments
-            );
+            var expression = ExpressionReconstructor.Instance
+                .ReconstructExpression(action, mock.ConstructorArguments);
             var parts = expression.Split();
             Mock.RaiseEvent(mock, expression, parts, arguments);
         }
@@ -838,43 +838,48 @@ namespace Moq
                 if (method.IsEventAddAccessor())
                 {
                     var implementingMethod = method.GetImplementingMethod(mock.Object.GetType());
-                    @event = implementingMethod.DeclaringType.GetEvents(bindingFlags)
+                    @event = implementingMethod.DeclaringType
+                        .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetAddMethod(true) == implementingMethod);
                     if (@event == null)
                     {
                         throw new ArgumentException(
-                            string.Format(
-                                CultureInfo.CurrentCulture,
-                                Resources.SetupNotEventAdd,
-                                part.Expression
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.CurrentCulture,
+                                    Resources.SetupNotEventAdd,
+                                    part.Expression
+                                )
                         );
                     }
                 }
                 else if (method.IsEventRemoveAccessor())
                 {
                     var implementingMethod = method.GetImplementingMethod(mock.Object.GetType());
-                    @event = implementingMethod.DeclaringType.GetEvents(bindingFlags)
+                    @event = implementingMethod.DeclaringType
+                        .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetRemoveMethod(true) == implementingMethod);
                     if (@event == null)
                     {
                         throw new ArgumentException(
-                            string.Format(
-                                CultureInfo.CurrentCulture,
-                                Resources.SetupNotEventRemove,
-                                part.Expression
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.CurrentCulture,
+                                    Resources.SetupNotEventRemove,
+                                    part.Expression
+                                )
                         );
                     }
                 }
                 else
                 {
                     throw new ArgumentException(
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            Resources.UnsupportedExpression,
-                            expression
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                Resources.UnsupportedExpression,
+                                expression
+                            )
                     );
                 }
 
@@ -947,20 +952,16 @@ namespace Moq
             Debug.Assert(method.ReturnType != typeof(void));
 
             if (
-                this.ConfiguredDefaultValues.TryGetValue(
-                    method.ReturnType,
-                    out object configuredDefaultValue
-                )
+                this.ConfiguredDefaultValues
+                    .TryGetValue(method.ReturnType, out object configuredDefaultValue)
             )
             {
                 candidateInnerMock = null;
                 return configuredDefaultValue;
             }
 
-            var result = (useAlternateProvider ?? this.DefaultValueProvider).GetDefaultReturnValue(
-                method,
-                this
-            );
+            var result = (useAlternateProvider ?? this.DefaultValueProvider)
+                .GetDefaultReturnValue(method, this);
             var unwrappedResult = Awaitable.TryGetResultRecursive(result);
 
             candidateInnerMock = (unwrappedResult as IMocked)?.Mock;

@@ -30,7 +30,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "23d58b0f717165a727d7dac87556916c800e2346beac5a825c973e9bba4fe6c549baafd151d85fd7c266769dbb57f28e45f8"
                 + "6bb5478d018e132cb576079d8c2a7f4217973c3ff1f0617364809c302b06092a864886f70d010701301406082a864886f70d"
                 + "030704083979569d26db4c278008d2fa4271358f9a2f"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             VerifyUnprotectedAttributes0(encodedMessage);
         }
 
@@ -62,7 +63,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "e1d90965916e25c63f509e32f86a9213b740796927bbb0573b024b7ba3302b06092a864886f70d010701301406082a864886"
                 + "f70d03070408df8ced363e2a76288008262ce8fe027530a3a130302e060a2b0601040182375802023120041e4d0079002000"
                 + "4400650073006300720069007000740069006f006e000000"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             VerifyUnprotectedAttributes1_DocumentDescription(encodedMessage);
         }
 
@@ -93,7 +95,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "2c891711efcee6085f07fa0060da6f9b22d895b312caed824916b14314302b06092a864886f70d010701301406082a864886"
                 + "f70d03070408817ee1c4bb617f828008de69d9d27afef823a1223020060a2b060104018237580201311204104d0079002000"
                 + "4e0061006d0065000000"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             VerifyUnprotectedAttributes1_DocumentName(encodedMessage);
         }
 
@@ -126,7 +129,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "6551ca1a348ac3c25cca9de1bdef79c0bdd2ba8b79e6e668f947cf1bc7302b06092a864886f70d010701301406082a864886"
                 + "f70d03070408e7575fbec5da862080084306defef088dd0ea11e301c06092a864886f70d010905310f170d31383034303130"
                 + "38333030355a"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyUnprotectedAttributes1_SigningTime(encodedMessage);
         }
@@ -164,7 +168,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "0be40c382b5da5db96b0303819573dc3598aa978704ee96a98113ec110d48aef57c745ee0188feceac27a3739663bb52fccc"
                 + "37e106ed3d8ecf3806bcc4df83ce989080405e3e856e725a85aa205bda302b06092a864886f70d010701301406082a864886"
                 + "f70d030704084a0375f470805f908008522c8448feaf357da118301606092a864886f70d010903310906072a9fa20082f300"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyUnprotectedAttributes1_ContentType(encodedMessage);
         }
@@ -201,7 +206,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "d1c9669f3653e41d48f03c0796513da5b922587415853fc46ef5f452cea25a58c6da296527c51111a2fa6e472651391e2c3a"
                 + "ffb081ce6f7e4aee275d0f3d3e351b5e76c84afb5f80bb1ef594eb9b92302b06092a864886f70d010701301406082a864886"
                 + "f70d030704088b5d38dad37f599280081d626f58eabeeb0aa116301406092a864886f70d01090431070405032d58805d"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyUnprotectedAttributes1_MessageDigest(encodedMessage);
         }
@@ -239,7 +245,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "f70d030704085e2e9ca7859583a08008fb219dbb2a84a2eda17c307a060a2b060104018237580202316c04224d0079002000"
                 + "4400650073006300720069007000740069006f006e0020003100000004224d00790020004400650073006300720069007000"
                 + "740069006f006e0020003200000004224d00790020004400650073006300720069007000740069006f006e00200033000000"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             VerifyUnprotectedAttributes_Merge3(encodedMessage);
         }
 
@@ -309,7 +316,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "0701301406082A864886F70D03070408F55F613664678EE9800800BC3504D1F59470A168300E060A2B06010401823758"
                 + "020131003056060A2B060104018237580202314804224D00790020004400650073006300720069007000740069006F00"
                 + "6E0020003100000004224D00790020004400650073006300720069007000740069006F006E00200032000000"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -348,7 +356,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "91ae859e2cd96df3f94599fff2fdc9074ea9722739c9b0ac870acd073c11375d79ab7679b0d2ebab839f0c2ee975d7ef4a59"
                 + "5933aebfcae745f98109c0e5cfd298960cebd244d6a029d9f21bfe60fb302b06092a864886f70d010701301406082a864886"
                 + "f70d03070408aa76edcbc0a03d7d8008aefe2086db6f8f7ca114301206092a864886f70d01070131050403060708"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             VerifyUnprotectedAttributes_Arbitrary1(encodedMessage);
         }
 
@@ -385,7 +394,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "202e3a03cb9866d19262bda6a489c957e14b1068ecfb2ae8ea1cbf47c6a934a5eed8ce05965356e033f2a1c68001cd308604"
                 + "50f28b7949af886727fb506d64ae7889f613c03729a7b834591881666c302b06092a864886f70d010701301406082a864886"
                 + "f70d0307040814a020bca56417de8008a260d0e4e138743ea11230100603551d13310930070101ff02020100"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyUnprotectedAttributes1_OutOfNamespace(encodedMessage);
         }
@@ -430,7 +440,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             byte[] docDescription = (
                 "041E4D00790020004400650073006300720069007000740069006F006E000000"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             byte[] docName1 = ("0410AA00790020004E0061006D0065000000").HexToByteArray();
             byte[] docName2 = ("04104D00790020004E0061006D0065000000").HexToByteArray();
             ContentInfo expectedContentInfo = new ContentInfo(new byte[] { 1, 2, 3 });
@@ -485,9 +496,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             EnvelopedCms ecms = new EnvelopedCms(expectedContentInfo);
 
             if (addUnprotectedAttrs)
-                ecms.UnprotectedAttributes.Add(
-                    new AsnEncodedData(new Oid(Oids.DocumentName), docName)
-                );
+                ecms.UnprotectedAttributes
+                    .Add(new AsnEncodedData(new Oid(Oids.DocumentName), docName));
 
             using (X509Certificate2 cert = Certificates.RSAKeyTransfer1.GetCertificate())
             {

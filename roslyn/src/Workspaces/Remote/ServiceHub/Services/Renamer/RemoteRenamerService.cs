@@ -38,29 +38,29 @@ namespace Microsoft.CodeAnalysis.Remote
                         .ConfigureAwait(false);
 
                     var symbol = await symbolAndProjectId.TryRehydrateAsync(
-                            solution,
-                            cancellationToken
-                        )
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     if (symbol == null)
                         return null;
 
                     var nonConflictSymbols = await GetNonConflictSymbolsAsync(
-                            solution,
-                            nonConflictSymbolIds,
-                            cancellationToken
-                        )
+                        solution,
+                        nonConflictSymbolIds,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     var result = await Renamer.RenameSymbolAsync(
-                            solution,
-                            symbol,
-                            newName,
-                            options.Rehydrate(),
-                            nonConflictSymbols,
-                            cancellationToken
-                        )
+                        solution,
+                        symbol,
+                        newName,
+                        options.Rehydrate(),
+                        nonConflictSymbols,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     return await result.DehydrateAsync(cancellationToken).ConfigureAwait(false);
                 },
@@ -82,20 +82,20 @@ namespace Microsoft.CodeAnalysis.Remote
                         .ConfigureAwait(false);
 
                     var symbol = await symbolAndProjectId.TryRehydrateAsync(
-                            solution,
-                            cancellationToken
-                        )
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     if (symbol == null)
                         return null;
 
                     var result = await RenameLocations.FindLocationsAsync(
-                            symbol,
-                            solution,
-                            options.Rehydrate(),
-                            cancellationToken
-                        )
+                        symbol,
+                        solution,
+                        options.Rehydrate(),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     return result.Dehydrate(solution, cancellationToken);
                 },
@@ -117,27 +117,27 @@ namespace Microsoft.CodeAnalysis.Remote
                     var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                         .ConfigureAwait(false);
                     var nonConflictSymbols = await GetNonConflictSymbolsAsync(
-                            solution,
-                            nonConflictSymbolIds,
-                            cancellationToken
-                        )
+                        solution,
+                        nonConflictSymbolIds,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     var rehydratedSet = await RenameLocations.TryRehydrateAsync(
-                            solution,
-                            renameLocationSet,
-                            cancellationToken
-                        )
+                        solution,
+                        renameLocationSet,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (rehydratedSet == null)
                         return null;
 
                     var result = await ConflictResolver.ResolveConflictsAsync(
-                            rehydratedSet,
-                            replacementText,
-                            nonConflictSymbols,
-                            cancellationToken
-                        )
+                        rehydratedSet,
+                        replacementText,
+                        nonConflictSymbols,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     return await result.DehydrateAsync(cancellationToken).ConfigureAwait(false);
                 },

@@ -237,10 +237,10 @@ namespace System.Text.Encodings.Tests
             }
 
             decoder = Encoding.GetEncoding(
-                    "us-ascii",
-                    new EncoderExceptionFallback(),
-                    new DecoderExceptionFallback()
-                )
+                "us-ascii",
+                new EncoderExceptionFallback(),
+                new DecoderExceptionFallback()
+            )
                 .GetDecoder();
 
             fixed (byte* bytesPtr = new byte[] { 0xFF, 0xFF })
@@ -375,10 +375,10 @@ namespace System.Text.Encodings.Tests
             }
 
             decoder = Encoding.GetEncoding(
-                    "us-ascii",
-                    new EncoderExceptionFallback(),
-                    new DecoderExceptionFallback()
-                )
+                "us-ascii",
+                new EncoderExceptionFallback(),
+                new DecoderExceptionFallback()
+            )
                 .GetDecoder();
 
             fixed (byte* bytesPtr = new byte[] { 0xFF, 0xFF })
@@ -400,10 +400,10 @@ namespace System.Text.Encodings.Tests
         public static void DecoderExceptionFallbackBufferTest()
         {
             Decoder decoder = Encoding.GetEncoding(
-                    "us-ascii",
-                    new EncoderExceptionFallback(),
-                    new DecoderExceptionFallback()
-                )
+                "us-ascii",
+                new EncoderExceptionFallback(),
+                new DecoderExceptionFallback()
+            )
                 .GetDecoder();
 
             byte[] bytes = new byte[] { 0xFF, 0xFF };
@@ -493,10 +493,10 @@ namespace System.Text.Encodings.Tests
         public static void DecoderReplacementFallbackBufferTest()
         {
             Decoder decoder = Encoding.GetEncoding(
-                    "us-ascii",
-                    new EncoderReplacementFallback(),
-                    new DecoderReplacementFallback()
-                )
+                "us-ascii",
+                new EncoderReplacementFallback(),
+                new DecoderReplacementFallback()
+            )
                 .GetDecoder();
 
             byte[] bytes = new byte[] { 0xFF, 0xFF };

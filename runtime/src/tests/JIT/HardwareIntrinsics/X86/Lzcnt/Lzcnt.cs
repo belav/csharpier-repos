@@ -39,10 +39,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     resi = Convert.ToUInt32(
-                        typeof(Lzcnt).GetMethod(
-                                nameof(Lzcnt.LeadingZeroCount),
-                                new Type[] { si.GetType() }
-                            )
+                        typeof(Lzcnt)
+                            .GetMethod(nameof(Lzcnt.LeadingZeroCount), new Type[] { si.GetType() })
                             .Invoke(null, new object[] { si })
                     );
                     if (resi != intLzcntTable[i].res)

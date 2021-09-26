@@ -56,14 +56,14 @@ namespace Microsoft.DotNet.Cli.Build
             var sharedFxVersionDirectories = Directory.EnumerateDirectories(sharedFxBaseDirectory);
 
             GreatestVersionSharedFxPath = sharedFxVersionDirectories.OrderByDescending(
-                    p => p.ToLower()
-                )
+                p => p.ToLower()
+            )
                 .First();
 
             var hostFxrVersionDirectories = Directory.EnumerateDirectories(hostFxrBaseDirectory);
             GreatestVersionHostFxrPath = hostFxrVersionDirectories.OrderByDescending(
-                    p => p.ToLower()
-                )
+                p => p.ToLower()
+            )
                 .First();
         }
 

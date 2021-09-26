@@ -13,11 +13,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public void ExistsWithCorrectId()
         {
-            var esType = typeof(KestrelServer).Assembly.GetType(
-                "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.KestrelEventSource",
-                throwOnError: true,
-                ignoreCase: false
-            );
+            var esType = typeof(KestrelServer).Assembly
+                .GetType(
+                    "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.KestrelEventSource",
+                    throwOnError: true,
+                    ignoreCase: false
+                );
 
             Assert.NotNull(esType);
 

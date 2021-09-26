@@ -150,7 +150,8 @@ namespace System.Composition.UnitTests
         [Fact]
         public void DependenciesOfSharedPartsAreResolvedInTheGlobalScope()
         {
-            var cc = new ContainerConfiguration().WithParts(
+            var cc = new ContainerConfiguration()
+                .WithParts(
                     typeof(GloballySharedWithDependency),
                     typeof(A),
                     typeof(DataConsistencyBoundaryProvider)
@@ -181,7 +182,8 @@ namespace System.Composition.UnitTests
         [Fact]
         public void TheProductOfAnExportFactoryCanBeDisposedDuringDisposalOfTheParent()
         {
-            var container = new ContainerConfiguration().WithPart<DisposesFactoryProduct>()
+            var container = new ContainerConfiguration()
+                .WithPart<DisposesFactoryProduct>()
                 .WithPart<A>()
                 .CreateContainer();
 

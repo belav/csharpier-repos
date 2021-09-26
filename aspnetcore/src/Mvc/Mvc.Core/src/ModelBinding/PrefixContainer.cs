@@ -204,14 +204,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             {
                 var pivot = start + ((end - start) / 2);
                 var candidate = _sortedValues[pivot];
-                var compare = string.Compare(
-                    prefix,
-                    0,
-                    candidate,
-                    0,
-                    prefix.Length,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                var compare = string
+                    .Compare(
+                        prefix,
+                        0,
+                        candidate,
+                        0,
+                        prefix.Length,
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 if (compare == 0)
                 {
                     Debug.Assert(candidate.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
@@ -262,14 +263,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             for (; start <= end; start++)
             {
                 var candidate = _sortedValues[start];
-                var compare = string.Compare(
-                    prefix,
-                    0,
-                    candidate,
-                    0,
-                    prefix.Length,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                var compare = string
+                    .Compare(
+                        prefix,
+                        0,
+                        candidate,
+                        0,
+                        prefix.Length,
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 if (compare == 0)
                 {
                     Debug.Assert(candidate.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));

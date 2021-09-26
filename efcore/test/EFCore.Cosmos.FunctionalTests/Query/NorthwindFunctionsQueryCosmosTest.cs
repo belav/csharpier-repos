@@ -1045,9 +1045,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            await base.Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(
-                async
-            );
+            await base
+                .Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(async);
 
             AssertSql(
                 @"SELECT c

@@ -36,9 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Accept.Add(
-                MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser")
-            );
+            request.Headers.Accept
+                .Add(MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser"));
 
             // Act
             var response = await Client.SendAsync(request);
@@ -61,9 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Accept.Add(
-                MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser")
-            );
+            request.Headers.Accept
+                .Add(MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser"));
 
             // Act
             var response = await Client.SendAsync(request);
@@ -86,9 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Accept.Add(
-                MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser")
-            );
+            request.Headers.Accept
+                .Add(MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser"));
 
             // Act
             var response = await Client.SendAsync(request);
@@ -110,9 +107,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Accept.Add(
-                MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser")
-            );
+            request.Headers.Accept
+                .Add(MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser"));
 
             // Act
             var response = await Client.SendAsync(request);
@@ -134,9 +130,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Accept.Add(
-                MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser")
-            );
+            request.Headers.Accept
+                .Add(MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser"));
 
             // Act
             var response = await Client.SendAsync(request);
@@ -160,9 +155,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Accept.Add(
-                MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser")
-            );
+            request.Headers.Accept
+                .Add(MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser"));
 
             // Act
             var response = await Client.SendAsync(request);
@@ -184,9 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Accept.Add(
-                MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser")
-            );
+            request.Headers.Accept
+                .Add(MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser"));
 
             // Act
             var response = await Client.SendAsync(request);
@@ -209,9 +202,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 HttpMethod.Get,
                 "http://localhost/IEnumerable/SerializableErrors"
             );
-            request.Headers.Accept.Add(
-                MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser")
-            );
+            request.Headers.Accept
+                .Add(MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser"));
 
             // Act
             var response = await Client.SendAsync(request);

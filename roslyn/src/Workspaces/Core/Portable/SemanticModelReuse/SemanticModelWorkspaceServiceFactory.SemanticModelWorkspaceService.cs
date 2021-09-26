@@ -139,11 +139,11 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 }
 
                 var updatedMap = await ComputeUpdatedMapAsync(
-                        originalMap,
-                        document,
-                        bodyNode,
-                        cancellationToken
-                    )
+                    originalMap,
+                    document,
+                    bodyNode,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // Grab the resultant semantic model and then overwrite the existing map.  We return the semantic model
@@ -170,19 +170,19 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 // Get the current top level version for this document's project.  If it has changed, then we cannot
                 // reuse any existing cached data for it.  This also ensures that we can do things like find the same
                 // method body node prior to an edit just by counting it's top-level index in the file.
-                var topLevelSemanticVersion =
-                    await document.Project.GetDependentSemanticVersionAsync(cancellationToken)
-                        .ConfigureAwait(false);
+                var topLevelSemanticVersion = await document.Project
+                    .GetDependentSemanticVersionAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 // If we are able to reuse a semantic model, then ensure that this is now the semantic model we're now
                 // pointing at for this document.
                 var reuseInfo = await TryReuseCachedSemanticModelAsync(
-                        map,
-                        document,
-                        bodyNode,
-                        topLevelSemanticVersion,
-                        cancellationToken
-                    )
+                    map,
+                    document,
+                    bodyNode,
+                    topLevelSemanticVersion,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (reuseInfo != null)
                     return map.SetItem(document.Id, reuseInfo.Value);
@@ -250,10 +250,10 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 var reuseService =
                     document.GetRequiredLanguageService<ISemanticModelReuseLanguageService>();
                 var semanticModel = await reuseService.TryGetSpeculativeSemanticModelAsync(
-                        reuseInfo.PreviousNonSpeculativeSemanticModel,
-                        bodyNode,
-                        cancellationToken
-                    )
+                    reuseInfo.PreviousNonSpeculativeSemanticModel,
+                    bodyNode,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (semanticModel == null)
                     return null;

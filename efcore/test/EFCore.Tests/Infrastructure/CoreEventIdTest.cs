@@ -21,12 +21,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [ConditionalFact]
         public void Every_eventId_has_a_logger_method_and_logs_when_level_enabled()
         {
-            var propertyInfo = typeof(DateTime).GetTypeInfo()
+            var propertyInfo = typeof(DateTime)
+                .GetTypeInfo()
                 .GetDeclaredProperty(nameof(DateTime.Now));
-            var entityType = new Model().AddEntityType(
-                typeof(object),
-                ConfigurationSource.Convention
-            );
+            var entityType = new Model()
+                .AddEntityType(typeof(object), ConfigurationSource.Convention);
             var property = entityType.AddProperty(
                 "A",
                 typeof(int),
@@ -71,9 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             entityType.Model.FinalizeModel();
             var options =
-                new DbContextOptionsBuilder().UseInternalServiceProvider(
-                        InMemoryFixture.DefaultServiceProvider
-                    )
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("D").Options;
 
             var fakeFactories = new Dictionary<Type, Func<object>>

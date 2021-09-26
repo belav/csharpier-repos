@@ -35,9 +35,8 @@ namespace Microsoft.CodeAnalysis.Remote
             : base(
                 listenerProvider.GetListener(FeatureAttribute.SolutionChecksumUpdater),
                 workspace.Services.GetService<IGlobalOperationNotificationService>(),
-                workspace.Options.GetOption(
-                    RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS
-                ),
+                workspace.Options
+                    .GetOption(RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS),
                 shutdownToken
             )
         {
@@ -159,20 +158,21 @@ namespace Microsoft.CodeAnalysis.Remote
                 )
             )
             {
-                var checksum = await solution.State.GetChecksumAsync(cancellationToken)
+                var checksum = await solution.State
+                    .GetChecksumAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 await client.TryInvokeAsync<IRemoteAssetSynchronizationService>(
-                        solution,
-                        (service, solution, cancellationToken) =>
-                            service.SynchronizePrimaryWorkspaceAsync(
-                                solution,
-                                checksum,
-                                solution.WorkspaceVersion,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    solution,
+                    (service, solution, cancellationToken) =>
+                        service.SynchronizePrimaryWorkspaceAsync(
+                            solution,
+                            checksum,
+                            solution.WorkspaceVersion,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -234,28 +234,29 @@ namespace Microsoft.CodeAnalysis.Remote
                 async () =>
                 {
                     var client = await RemoteHostClient.TryGetClientAsync(
-                            _workspace,
-                            CancellationToken
-                        )
+                        _workspace,
+                        CancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (client == null)
                     {
                         return;
                     }
 
-                    var state = await oldDocument.State.GetStateChecksumsAsync(CancellationToken)
+                    var state = await oldDocument.State
+                        .GetStateChecksumsAsync(CancellationToken)
                         .ConfigureAwait(false);
 
                     await client.TryInvokeAsync<IRemoteAssetSynchronizationService>(
-                            (service, cancellationToken) =>
-                                service.SynchronizeTextAsync(
-                                    oldDocument.Id,
-                                    state.Text,
-                                    textChanges,
-                                    cancellationToken
-                                ),
-                            CancellationToken
-                        )
+                        (service, cancellationToken) =>
+                            service.SynchronizeTextAsync(
+                                oldDocument.Id,
+                                state.Text,
+                                textChanges,
+                                cancellationToken
+                            ),
+                        CancellationToken
+                    )
                         .ConfigureAwait(false);
                 },
                 CancellationToken

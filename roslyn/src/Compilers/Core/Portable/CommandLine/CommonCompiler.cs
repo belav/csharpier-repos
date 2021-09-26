@@ -192,9 +192,9 @@ namespace Microsoft.CodeAnalysis
         {
             // The attribute stores a SemVer2-formatted string: `A.B.C(-...)?(+...)?`
             // We remove the section after the + (if any is present)
-            return type.Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split(
-                '+'
-            )[0];
+            return type.Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+                .Split('+')[0];
         }
 
         private static string? GetShortCommitHash(Type type)
@@ -999,9 +999,8 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 globalConfigOptions = analyzerConfigSet.GlobalConfigOptions;
-                sourceFileAnalyzerConfigOptions = Arguments.SourceFiles.SelectAsArray(
-                    f => analyzerConfigSet.GetOptionsForSourcePath(f.Path)
-                );
+                sourceFileAnalyzerConfigOptions = Arguments.SourceFiles
+                    .SelectAsArray(f => analyzerConfigSet.GetOptionsForSourcePath(f.Path));
 
                 foreach (var sourceFileAnalyzerConfigOption in sourceFileAnalyzerConfigOptions)
                 {
@@ -1242,23 +1241,19 @@ namespace Microsoft.CodeAnalysis
                     );
 
                     bool hasAnalyzerConfigs = !Arguments.AnalyzerConfigPaths.IsEmpty;
-                    bool hasGeneratedOutputPath = !string.IsNullOrWhiteSpace(
-                        Arguments.GeneratedFilesOutputDirectory
-                    );
+                    bool hasGeneratedOutputPath = !string
+                        .IsNullOrWhiteSpace(Arguments.GeneratedFilesOutputDirectory);
 
-                    var generatedSyntaxTrees = compilation.SyntaxTrees.Skip(
-                            Arguments.SourceFiles.Length
-                        )
+                    var generatedSyntaxTrees = compilation.SyntaxTrees
+                        .Skip(Arguments.SourceFiles.Length)
                         .ToList();
 
                     var analyzerOptionsBuilder = hasAnalyzerConfigs
-                        ? ArrayBuilder<AnalyzerConfigOptionsResult>.GetInstance(
-                              generatedSyntaxTrees.Count
-                          )
+                        ? ArrayBuilder<AnalyzerConfigOptionsResult>
+                          .GetInstance(generatedSyntaxTrees.Count)
                         : null;
-                    var embeddedTextBuilder = ArrayBuilder<EmbeddedText>.GetInstance(
-                        generatedSyntaxTrees.Count
-                    );
+                    var embeddedTextBuilder = ArrayBuilder<EmbeddedText>
+                        .GetInstance(generatedSyntaxTrees.Count);
                     try
                     {
                         foreach (var tree in generatedSyntaxTrees)
@@ -1395,7 +1390,8 @@ namespace Microsoft.CodeAnalysis
             try
             {
                 // NOTE: Unlike the PDB path, the XML doc path is not embedded in the assembly, so we don't need to pass it to emit.
-                var emitOptions = Arguments.EmitOptions.WithOutputNameOverride(outputName)
+                var emitOptions = Arguments.EmitOptions
+                    .WithOutputNameOverride(outputName)
                     .WithPdbFilePath(
                         PathUtilities.NormalizePathPrefix(finalPdbFilePath, Arguments.PathMap)
                     );
@@ -1786,16 +1782,16 @@ namespace Microsoft.CodeAnalysis
                 return;
             }
 
-            var totalAnalyzerExecutionTime = analyzerDriver.AnalyzerExecutionTimes.Sum(
-                kvp => kvp.Value.TotalSeconds
-            );
+            var totalAnalyzerExecutionTime = analyzerDriver.AnalyzerExecutionTimes
+                .Sum(kvp => kvp.Value.TotalSeconds);
             Func<double, string> getFormattedTime = d => d.ToString("##0.000", culture);
             consoleOutput.WriteLine();
             consoleOutput.WriteLine(
-                string.Format(
-                    CodeAnalysisResources.AnalyzerTotalExecutionTime,
-                    getFormattedTime(totalAnalyzerExecutionTime)
-                )
+                string
+                    .Format(
+                        CodeAnalysisResources.AnalyzerTotalExecutionTime,
+                        getFormattedTime(totalAnalyzerExecutionTime)
+                    )
             );
 
             if (isConcurrentBuild)
@@ -1803,9 +1799,8 @@ namespace Microsoft.CodeAnalysis
                 consoleOutput.WriteLine(CodeAnalysisResources.MultithreadedAnalyzerExecutionNote);
             }
 
-            var analyzersByAssembly = analyzerDriver.AnalyzerExecutionTimes.GroupBy(
-                    kvp => kvp.Key.GetType().GetTypeInfo().Assembly
-                )
+            var analyzersByAssembly = analyzerDriver.AnalyzerExecutionTimes
+                .GroupBy(kvp => kvp.Key.GetType().GetTypeInfo().Assembly)
                 .OrderByDescending(kvp => kvp.Sum(entry => entry.Value.Ticks));
 
             consoleOutput.WriteLine();
@@ -1819,10 +1814,8 @@ namespace Microsoft.CodeAnalysis
             Func<string?, string> getFormattedAnalyzerName = s => "   " + s;
 
             // Table header
-            var analyzerTimeColumn = string.Format(
-                "{0,8}",
-                CodeAnalysisResources.AnalyzerExecutionTimeColumnHeader
-            );
+            var analyzerTimeColumn = string
+                .Format("{0,8}", CodeAnalysisResources.AnalyzerExecutionTimeColumnHeader);
             var analyzerPercentageColumn = string.Format("{0,5}", "%");
             var analyzerNameColumn = getFormattedAnalyzerName(
                 CodeAnalysisResources.AnalyzerNameColumnHeader
@@ -1853,10 +1846,14 @@ namespace Microsoft.CodeAnalysis
 
                     analyzerTimeColumn = getFormattedTime(executionTime);
                     analyzerPercentageColumn = getFormattedPercentage(percentage);
-                    var analyzerIds = string.Join(
-                        ", ",
-                        kvp.Key.SupportedDiagnostics.Select(d => d.Id).Distinct().OrderBy(id => id)
-                    );
+                    var analyzerIds = string
+                        .Join(
+                            ", ",
+                            kvp.Key.SupportedDiagnostics
+                                .Select(d => d.Id)
+                                .Distinct()
+                                .OrderBy(id => id)
+                        );
                     analyzerNameColumn = getFormattedAnalyzerName($"   {kvp.Key} ({analyzerIds})");
 
                     consoleOutput.WriteLine(

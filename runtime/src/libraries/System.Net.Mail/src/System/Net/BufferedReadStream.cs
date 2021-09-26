@@ -105,10 +105,8 @@ namespace System.Net
             CancellationToken cancellationToken
         )
         {
-            int returnValue = await base.ReadAsync(
-                    buffer.AsMemory(offset, count),
-                    cancellationToken
-                )
+            int returnValue = await base
+                .ReadAsync(buffer.AsMemory(offset, count), cancellationToken)
                 .ConfigureAwait(false);
             return bytesAlreadyRead + returnValue;
         }
@@ -219,13 +217,8 @@ namespace System.Net
                     count -= _read;
                     offset += _read;
                 }
-                IAsyncResult result = _parent.BaseStream.BeginRead(
-                    buffer,
-                    offset,
-                    count,
-                    s_onRead,
-                    this
-                );
+                IAsyncResult result = _parent.BaseStream
+                    .BeginRead(buffer, offset, count, s_onRead, this);
                 if (result.CompletedSynchronously)
                 {
                     _read += _parent.BaseStream.EndRead(result);

@@ -346,9 +346,10 @@ namespace System.Web.Http.Results
             string expectedModelStateKey = "ModelStateKey";
             string expectedModelStateErrorMessage = "ModelStateErrorMessage";
             ModelState originalModelStateItem = new ModelState();
-            originalModelStateItem.Errors.Add(
-                new ModelError(new InvalidOperationException(), expectedModelStateErrorMessage)
-            );
+            originalModelStateItem.Errors
+                .Add(
+                    new ModelError(new InvalidOperationException(), expectedModelStateErrorMessage)
+                );
             modelState.Add(expectedModelStateKey, originalModelStateItem);
             bool includeErrorDetail = false;
             MediaTypeFormatter expectedFormatter = CreateFormatter();
@@ -420,13 +421,13 @@ namespace System.Web.Http.Results
 
                 Mock<IContentNegotiator> spy = new Mock<IContentNegotiator>();
                 spy.Setup(
-                        n =>
-                            n.Negotiate(
-                                typeof(ModelStateDictionary),
-                                expectedRequest,
-                                expectedFormatters
-                            )
-                    )
+                    n =>
+                        n.Negotiate(
+                            typeof(ModelStateDictionary),
+                            expectedRequest,
+                            expectedFormatters
+                        )
+                )
                     .Returns(negotiationResult);
                 IContentNegotiator contentNegotiator = spy.Object;
 
@@ -497,8 +498,8 @@ namespace System.Web.Http.Results
             {
                 Mock<IContentNegotiator> spy = new Mock<IContentNegotiator>();
                 spy.Setup(
-                        n => n.Negotiate(typeof(HttpError), expectedRequest, It.Is(formattersMatch))
-                    )
+                    n => n.Negotiate(typeof(HttpError), expectedRequest, It.Is(formattersMatch))
+                )
                     .Returns(negotiationResult);
                 IContentNegotiator contentNegotiator = spy.Object;
 
@@ -607,10 +608,8 @@ namespace System.Web.Http.Results
                     InvalidModelStateResult result = CreateProductUnderTest(modelState, controller);
 
                     IContentNegotiator expectedContentNegotiator = CreateDummyContentNegotiator();
-                    configuration.Services.Replace(
-                        typeof(IContentNegotiator),
-                        expectedContentNegotiator
-                    );
+                    configuration.Services
+                        .Replace(typeof(IContentNegotiator), expectedContentNegotiator);
 
                     // Act
                     IContentNegotiator contentNegotiator = result.ContentNegotiator;
@@ -756,10 +755,8 @@ namespace System.Web.Http.Results
 
                 IContentNegotiator ignore = result.ContentNegotiator;
 
-                configuration.Services.Replace(
-                    typeof(IContentNegotiator),
-                    CreateDummyContentNegotiator()
-                );
+                configuration.Services
+                    .Replace(typeof(IContentNegotiator), CreateDummyContentNegotiator());
 
                 // Act
                 IContentNegotiator contentNegotiator = result.ContentNegotiator;

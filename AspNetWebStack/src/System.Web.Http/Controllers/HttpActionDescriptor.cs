@@ -278,12 +278,12 @@ namespace System.Web.Http.Controllers
 
         private Collection<FilterInfo> InitializeFilterPipeline()
         {
-            IEnumerable<IFilterProvider> filterProviders =
-                _configuration.Services.GetFilterProviders();
+            IEnumerable<IFilterProvider> filterProviders = _configuration.Services
+                .GetFilterProviders();
 
             IEnumerable<FilterInfo> filters = filterProviders.SelectMany(
-                    fp => fp.GetFilters(_configuration, this)
-                )
+                fp => fp.GetFilters(_configuration, this)
+            )
                 .OrderBy(f => f, FilterInfoComparer.Instance);
 
             // Need to discard duplicate filters from the end, so that most specific ones get kept (Action scope) and

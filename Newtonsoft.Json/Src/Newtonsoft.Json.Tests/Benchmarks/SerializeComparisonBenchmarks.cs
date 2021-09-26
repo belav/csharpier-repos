@@ -190,14 +190,15 @@ namespace Newtonsoft.Json.Tests.Benchmarks
                 new JProperty(
                     "Addresses",
                     new JArray(
-                        c.Addresses.Select(
-                            a =>
-                                new JObject(
-                                    new JProperty("Street", a.Street),
-                                    new JProperty("Phone", a.Phone),
-                                    new JProperty("Entered", a.Entered)
-                                )
-                        )
+                        c.Addresses
+                            .Select(
+                                a =>
+                                    new JObject(
+                                        new JProperty("Street", a.Street),
+                                        new JProperty("Phone", a.Phone),
+                                        new JProperty("Entered", a.Entered)
+                                    )
+                            )
                     )
                 )
             );

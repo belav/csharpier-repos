@@ -428,7 +428,8 @@ class C : IComparable<C>, IComparable<int>
                 FixedCode = GetFixedCode("C"),
                 CodeActionIndex = 0,
                 CodeActionEquivalenceKey = "Generate_for_0_C",
-            }.RunAsync();
+            }
+                .RunAsync();
 
             await new VerifyCS.Test
             {
@@ -436,7 +437,8 @@ class C : IComparable<C>, IComparable<int>
                 FixedCode = GetFixedCode("int"),
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey = "Generate_for_0_int",
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateComparisonOperators)]

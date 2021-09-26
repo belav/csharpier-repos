@@ -72,46 +72,43 @@ namespace Microsoft.AspNetCore.HttpsPolicy.Tests
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.Configure<HttpsRedirectionOptions>(
+                                options =>
                                 {
-                                    services.Configure<HttpsRedirectionOptions>(
-                                        options =>
-                                        {
-                                            options.RedirectStatusCode = statusCode;
-                                            options.HttpsPort = tlsPort;
-                                        }
-                                    );
-                                    services.Configure<HstsOptions>(
-                                        options =>
-                                        {
-                                            options.IncludeSubDomains = includeSubDomains;
-                                            options.MaxAge = TimeSpan.FromSeconds(maxAge);
-                                            options.Preload = preload;
-                                            options.ExcludedHosts.Clear(); // allowing localhost for testing
-                                        }
-                                    );
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHttpsRedirection();
-                                    app.UseHsts();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            return context.Response.WriteAsync("Hello world");
-                                        }
-                                    );
+                                    options.RedirectStatusCode = statusCode;
+                                    options.HttpsPort = tlsPort;
                                 }
                             );
-                    }
-                )
-                .Build();
+                            services.Configure<HstsOptions>(
+                                options =>
+                                {
+                                    options.IncludeSubDomains = includeSubDomains;
+                                    options.MaxAge = TimeSpan.FromSeconds(maxAge);
+                                    options.Preload = preload;
+                                    options.ExcludedHosts.Clear(); // allowing localhost for testing
+                                }
+                            );
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseHttpsRedirection();
+                            app.UseHsts();
+                            app.Run(
+                                context =>
+                                {
+                                    return context.Response.WriteAsync("Hello world");
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

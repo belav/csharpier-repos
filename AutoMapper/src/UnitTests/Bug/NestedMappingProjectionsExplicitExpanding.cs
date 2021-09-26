@@ -59,7 +59,8 @@ namespace AutoMapper.UnitTests.Bug
             {
                 Man = new ManEntity { Chu = new ChuEntity { Prop = _propValue } }
             };
-            _destination = new[] { fuEntity }.AsQueryable()
+            _destination = new[] { fuEntity }
+                .AsQueryable()
                 .ProjectTo<Fu>(Configuration, m => m.Man, m => m.Man.Chu)
                 .First();
         }

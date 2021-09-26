@@ -131,10 +131,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             var options =
                 documentOptions
                 ?? await document.GetDocumentOptionsWithInferredIndentationAsync(
-                        explicitFormat: true,
-                        _indentationManagerService,
-                        cancellationToken
-                    )
+                    explicitFormat: true,
+                    _indentationManagerService,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             return Formatter.GetFormattedTextChanges(
@@ -169,10 +169,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             var options =
                 documentOptions
                 ?? await document.GetDocumentOptionsWithInferredIndentationAsync(
-                        explicitFormat: false,
-                        indentationManagerService: _indentationManagerService,
-                        cancellationToken: cancellationToken
-                    )
+                    explicitFormat: false,
+                    indentationManagerService: _indentationManagerService,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
             return Formatter.GetFormattedTextChanges(
@@ -192,8 +192,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
         )
         {
             var workspace = document.Project.Solution.Workspace;
-            var formattingRuleFactory =
-                workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleFactory = workspace.Services
+                .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
             return formattingRuleFactory.CreateRule(document, position)
                 .Concat(GetTypingRules(tokenBeforeCaret))
                 .Concat(Formatter.GetDefaultFormattingRules(document));
@@ -240,7 +240,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             // mess with it if it's inside a line.
             if (token.IsKind(SyntaxKind.OpenBraceToken))
             {
-                var text = await token.SyntaxTree!.GetTextAsync(cancellationToken)
+                var text = await token.SyntaxTree!
+                    .GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (!token.IsFirstTokenOnLine(text))
                 {
@@ -261,10 +262,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
         {
             // first, find the token user just typed.
             var token = await GetTokenBeforeTheCaretAsync(
-                    document,
-                    caretPosition,
-                    cancellationToken
-                )
+                document,
+                caretPosition,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (
                 token.IsMissing
@@ -288,9 +289,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             }
 
             var shouldNotFormat = await TokenShouldNotFormatOnTypeCharAsync(
-                    token,
-                    cancellationToken
-                )
+                token,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (shouldNotFormat)
             {
@@ -300,10 +301,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             var options =
                 documentOptions
                 ?? await document.GetDocumentOptionsWithInferredIndentationAsync(
-                        explicitFormat: false,
-                        _indentationManagerService,
-                        cancellationToken
-                    )
+                    explicitFormat: false,
+                    _indentationManagerService,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             // Do not attempt to format on open/close brace if autoformat on close brace feature is
@@ -344,24 +345,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
                 // the span of the token. They're irrelevant and may screw up other code the user doesn't
                 // want touched.
                 var tokenEdits = await FormatTokenAsync(
-                        document,
-                        options,
-                        token,
-                        formattingRules,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
-                return tokenEdits.Where(t => t.Span.Start >= token.FullSpan.Start).ToList();
-            }
-
-            // if formatting range fails, do format token one at least
-            var changes = await FormatRangeAsync(
                     document,
                     options,
                     token,
                     formattingRules,
                     cancellationToken
                 )
+                    .ConfigureAwait(false);
+                return tokenEdits.Where(t => t.Span.Start >= token.FullSpan.Start).ToList();
+            }
+
+            // if formatting range fails, do format token one at least
+            var changes = await FormatRangeAsync(
+                document,
+                options,
+                token,
+                formattingRules,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (changes.Count > 0)
             {
@@ -369,12 +370,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             }
 
             return await FormatTokenAsync(
-                    document,
-                    options,
-                    token,
-                    formattingRules,
-                    cancellationToken
-                )
+                document,
+                options,
+                token,
+                formattingRules,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -421,10 +422,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
                 .ConfigureAwait(false);
             var formatter = CreateSmartTokenFormatter(options, formattingRules, root);
             var changes = await formatter.FormatTokenAsync(
-                    document.Project.Solution.Workspace,
-                    token,
-                    cancellationToken
-                )
+                document.Project.Solution.Workspace,
+                token,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return changes;
         }

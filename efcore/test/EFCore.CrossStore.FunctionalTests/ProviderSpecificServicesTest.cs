@@ -14,8 +14,10 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_with_new_when_non_relational_provider_in_use()
         {
             var options =
-                new DbContextOptionsBuilder<ConstructorTestContext1A>().UseInternalServiceProvider(
-                        new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                new DbContextOptionsBuilder<ConstructorTestContext1A>()
+                    .UseInternalServiceProvider(
+                        new ServiceCollection()
+                            .AddEntityFrameworkInMemoryDatabase()
                             .BuildServiceProvider()
                     )
                     .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
@@ -32,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_with_add_when_non_relational_provider_in_use()
         {
-            var appServiceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var appServiceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddDbContext<ConstructorTestContext1A>(
                     (p, b) =>
                         b.UseInMemoryDatabase(Guid.NewGuid().ToString())

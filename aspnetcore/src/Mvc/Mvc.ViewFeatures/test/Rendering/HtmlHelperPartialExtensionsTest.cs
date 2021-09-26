@@ -79,8 +79,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var expected = new InvalidOperationException();
             var helper = new Mock<IHtmlHelper>();
             helper.Setup(
-                    h => h.PartialAsync("test", It.IsAny<object>(), It.IsAny<ViewDataDictionary>())
-                )
+                h => h.PartialAsync("test", It.IsAny<object>(), It.IsAny<ViewDataDictionary>())
+            )
                 .Callback(
                     () =>
                     {
@@ -187,13 +187,9 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var expected = new InvalidOperationException();
             var helper = new Mock<IHtmlHelper>();
             helper.Setup(
-                    h =>
-                        h.RenderPartialAsync(
-                            "test",
-                            It.IsAny<object>(),
-                            It.IsAny<ViewDataDictionary>()
-                        )
-                )
+                h =>
+                    h.RenderPartialAsync("test", It.IsAny<object>(), It.IsAny<ViewDataDictionary>())
+            )
                 .Callback(
                     () =>
                     {
@@ -440,23 +436,23 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var model = new TestModel();
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", new[] { "location1", "location2" }))
                 .Verifiable();
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", Enumerable.Empty<string>()))
                 .Verifiable();
 
@@ -484,23 +480,23 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var model = new TestModel();
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", Enumerable.Empty<string>()))
                 .Verifiable();
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", new[] { "location1", "location2" }))
                 .Verifiable();
 
@@ -532,23 +528,23 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var model = new TestModel();
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", new[] { "location1", "location2" }))
                 .Verifiable();
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", new[] { "location3", "location4" }))
                 .Verifiable();
 
@@ -576,23 +572,23 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var model = new TestModel();
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", new[] { "location1", "location2" }))
                 .Verifiable();
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", Enumerable.Empty<string>()))
                 .Verifiable();
 
@@ -620,23 +616,23 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var model = new TestModel();
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", Enumerable.Empty<string>()))
                 .Verifiable();
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", new[] { "location1", "location2" }))
                 .Verifiable();
 
@@ -668,23 +664,23 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var model = new TestModel();
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", new[] { "location1", "location2" }))
                 .Verifiable();
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("test-view", new[] { "location3", "location4" }))
                 .Verifiable();
 

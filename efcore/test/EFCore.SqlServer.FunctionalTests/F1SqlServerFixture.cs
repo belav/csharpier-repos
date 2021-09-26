@@ -55,14 +55,13 @@ namespace Microsoft.EntityFrameworkCore
         {
             base.BuildModelExternal(modelBuilder);
 
-            modelBuilder.Entity<TitleSponsor>()
-                .OwnsOne(
-                    s => s.Details,
-                    eb =>
-                    {
-                        eb.Property(d => d.Space).HasColumnType("decimal(18,2)");
-                    }
-                );
+            modelBuilder.Entity<TitleSponsor>().OwnsOne(
+                s => s.Details,
+                eb =>
+                {
+                    eb.Property(d => d.Space).HasColumnType("decimal(18,2)");
+                }
+            );
         }
     }
 }

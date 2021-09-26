@@ -178,11 +178,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             DynamicMetaObject errorSuggestion
         )
         {
-            CSharpInvokeBinder c = new CSharpInvokeBinder(
-                Flags,
-                CallingContext,
-                _argumentInfo
-            ).TryGetExisting();
+            CSharpInvokeBinder c = new CSharpInvokeBinder(Flags, CallingContext, _argumentInfo)
+                .TryGetExisting();
             return c.Defer(target, args);
         }
     }

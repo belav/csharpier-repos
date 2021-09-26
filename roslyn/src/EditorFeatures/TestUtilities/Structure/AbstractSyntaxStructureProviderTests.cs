@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
                 var position = hostDocument.CursorPosition.Value;
 
                 var expectedRegions = expectedRegionData.Select(
-                        data => CreateBlockSpan(data, hostDocument.AnnotatedSpans)
-                    )
+                    data => CreateBlockSpan(data, hostDocument.AnnotatedSpans)
+                )
                     .ToArray();
 
                 var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);

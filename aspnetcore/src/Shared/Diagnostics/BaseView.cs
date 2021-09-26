@@ -319,12 +319,13 @@ namespace Microsoft.AspNetCore.DiagnosticsViewPage.Views
             }
 
             // Split on line breaks before passing it through the encoder.
-            return string.Join(
-                "<br />" + Environment.NewLine,
-                input.Split(new[] { "\r\n" }, StringSplitOptions.None)
-                    .SelectMany(s => s.Split(new[] { '\r', '\n' }, StringSplitOptions.None))
-                    .Select(HtmlEncoder.Encode)
-            );
+            return string
+                .Join(
+                    "<br />" + Environment.NewLine,
+                    input.Split(new[] { "\r\n" }, StringSplitOptions.None)
+                        .SelectMany(s => s.Split(new[] { '\r', '\n' }, StringSplitOptions.None))
+                        .Select(HtmlEncoder.Encode)
+                );
         }
     }
 }

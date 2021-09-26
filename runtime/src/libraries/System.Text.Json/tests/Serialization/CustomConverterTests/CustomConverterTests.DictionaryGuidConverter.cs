@@ -36,9 +36,8 @@ namespace System.Text.Json.Serialization.Tests
                 Type valueType = type.GetGenericArguments()[1];
 
                 JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                    typeof(DictionaryGuidConverterInner<>).MakeGenericType(
-                        new Type[] { valueType }
-                    ),
+                    typeof(DictionaryGuidConverterInner<>)
+                        .MakeGenericType(new Type[] { valueType }),
                     BindingFlags.Instance | BindingFlags.Public,
                     binder: null,
                     args: new object[] { options },

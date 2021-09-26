@@ -523,7 +523,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var testStore = SqlServerTestStore.GetNorthwindStore();
             using var db = new NorthwindContext(Fixture.CreateOptions(testStore));
-            var results = db.Customers.Where(c => c.CompanyName.StartsWith("A"))
+            var results = db.Customers
+                .Where(c => c.CompanyName.StartsWith("A"))
                 .OrderByDescending(c => c.CustomerID)
                 .ToList();
 
@@ -544,7 +545,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var testStore = SqlServerTestStore.GetNorthwindStore();
             using var db = new NorthwindContext(Fixture.CreateOptions(testStore));
-            var results = db.Customers.Where(c => c.CompanyName.StartsWith("A"))
+            var results = db.Customers
+                .Where(c => c.CompanyName.StartsWith("A"))
                 .OrderByDescending(c => c.CustomerID)
                 .ToList();
 
@@ -667,21 +669,22 @@ namespace Microsoft.EntityFrameworkCore
                 var blogs = await CreateBlogDatabaseAsync<Blog>(db);
 
                 var toAdd =
-                    db.Blogs.Add(
-                        new Blog
-                        {
-                            Name = "Blog to Insert",
-                            George = true,
-                            TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
-                            NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
-                            ToEat = 64,
-                            OrNothing = 0.123456789,
-                            Fuse = 777,
-                            WayRound = 9876543210,
-                            Away = 0.12345f,
-                            AndChew = new byte[16]
-                        }
-                    ).Entity;
+                    db.Blogs
+                        .Add(
+                            new Blog
+                            {
+                                Name = "Blog to Insert",
+                                George = true,
+                                TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
+                                NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
+                                ToEat = 64,
+                                OrNothing = 0.123456789,
+                                Fuse = 777,
+                                WayRound = 9876543210,
+                                Away = 0.12345f,
+                                AndChew = new byte[16]
+                            }
+                        ).Entity;
                 db.Entry(toAdd).State = EntityState.Detached;
 
                 var toUpdate = blogs[0];
@@ -729,7 +732,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new GameDbContext(options))
             {
-                var character = context.Characters.Include(c => c.Level.Game)
+                var character = context.Characters
+                    .Include(c => c.Level.Game)
                     .OrderBy(c => c.Id)
                     .First();
 
@@ -844,7 +848,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new GameDbContext(options))
             {
-                var player = context.Characters.Include(p => p.CurrentWeapon)
+                var player = context.Characters
+                    .Include(p => p.CurrentWeapon)
                     .AsNoTracking()
                     .Single();
 

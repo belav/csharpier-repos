@@ -199,7 +199,8 @@ class C
             );
             comp.VerifyDiagnostics();
 
-            var m = comp.SyntaxTrees.Single()
+            var m = comp.SyntaxTrees
+                .Single()
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<BlockSyntax>()

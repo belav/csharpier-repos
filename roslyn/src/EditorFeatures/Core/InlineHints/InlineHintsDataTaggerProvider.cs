@@ -173,10 +173,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
             var snapshotSpan = documentSnapshotSpan.SnapshotSpan;
             var hints = await service.GetInlineHintsAsync(
-                    document,
-                    snapshotSpan.Span.ToTextSpan(),
-                    cancellationToken
-                )
+                document,
+                snapshotSpan.Span.ToTextSpan(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             foreach (var hint in hints)
             {

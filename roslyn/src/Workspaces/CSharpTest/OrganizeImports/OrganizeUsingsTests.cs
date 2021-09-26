@@ -28,20 +28,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Workspaces.UnitTests.OrganizeImports
         )
         {
             using var workspace = new AdhocWorkspace();
-            var project = workspace.CurrentSolution.AddProject(
-                "Project",
-                "Project.dll",
-                LanguageNames.CSharp
-            );
+            var project = workspace.CurrentSolution
+                .AddProject("Project", "Project.dll", LanguageNames.CSharp);
             var document = project.AddDocument("Document", initial.NormalizeLineEndings());
 
-            var newOptions = workspace.Options.WithChangedOption(
-                new OptionKey(
-                    GenerationOptions.PlaceSystemNamespaceFirst,
-                    document.Project.Language
-                ),
-                placeSystemNamespaceFirst
-            );
+            var newOptions = workspace.Options
+                .WithChangedOption(
+                    new OptionKey(
+                        GenerationOptions.PlaceSystemNamespaceFirst,
+                        document.Project.Language
+                    ),
+                    placeSystemNamespaceFirst
+                );
             newOptions = newOptions.WithChangedOption(
                 new OptionKey(
                     GenerationOptions.SeparateImportDirectiveGroups,
@@ -53,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Workspaces.UnitTests.OrganizeImports
 
             var newRoot = await (
                 await Formatter.OrganizeImportsAsync(document, CancellationToken.None)
-            ).GetSyntaxRootAsync();
+            )
+                .GetSyntaxRootAsync();
             Assert.Equal(final.NormalizeLineEndings(), newRoot.ToFullString());
         }
 

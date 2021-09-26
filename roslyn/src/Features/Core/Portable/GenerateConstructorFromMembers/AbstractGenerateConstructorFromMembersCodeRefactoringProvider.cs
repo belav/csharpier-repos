@@ -83,12 +83,12 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
         {
             using var _ = ArrayBuilder<CodeAction>.GetInstance(out var actions);
             await ComputeRefactoringsAsync(
-                    priorDocument,
-                    priorSelection,
-                    (singleAction, applicableToSpan) => actions.Add(singleAction),
-                    (multipleActions) => actions.AddRange(multipleActions),
-                    cancellationToken
-                )
+                priorDocument,
+                priorSelection,
+                (singleAction, applicableToSpan) => actions.Add(singleAction),
+                (multipleActions) => actions.AddRange(multipleActions),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (actions.IsEmpty())
@@ -98,9 +98,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 
             // The refactorings returned will be in the following order (if available)
             // FieldDelegatingCodeAction, ConstructorDelegatingCodeAction, GenerateConstructorWithDialogCodeAction
-            using var resultsBuilder = ArrayBuilder<IntentProcessorResult>.GetInstance(
-                out var results
-            );
+            using var resultsBuilder = ArrayBuilder<IntentProcessorResult>
+                .GetInstance(out var results);
             foreach (var action in actions)
             {
                 var intentResult = await GetIntentProcessorResultAsync(action, cancellationToken)
@@ -149,9 +148,9 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                         dialogAction.PickMembersOptions
                     );
                     var operations = await dialogAction.GetOperationsAsync(
-                            options: options,
-                            cancellationToken
-                        )
+                        options: options,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     return operations == null
                       ? ImmutableArray<CodeActionOperation>.Empty
@@ -178,11 +177,11 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             }
 
             var actions = await GenerateConstructorFromMembersAsync(
-                    document,
-                    textSpan,
-                    addNullChecks: false,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                textSpan,
+                addNullChecks: false,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!actions.IsDefault)
             {
@@ -192,10 +191,10 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             if (actions.IsDefaultOrEmpty && textSpan.IsEmpty)
             {
                 var nonSelectionAction = await HandleNonSelectionAsync(
-                        document,
-                        textSpan,
-                        cancellationToken
-                    )
+                    document,
+                    textSpan,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (nonSelectionAction != null)
                 {
@@ -314,22 +313,22 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             )
             {
                 var info = await GetSelectedMemberInfoAsync(
-                        document,
-                        textSpan,
-                        allowPartialSelection: true,
-                        cancellationToken
-                    )
+                    document,
+                    textSpan,
+                    allowPartialSelection: true,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (info != null)
                 {
                     var state = await State.TryGenerateAsync(
-                            this,
-                            document,
-                            textSpan,
-                            info.ContainingType,
-                            info.SelectedMembers,
-                            cancellationToken
-                        )
+                        this,
+                        document,
+                        textSpan,
+                        info.ContainingType,
+                        info.SelectedMembers,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (state != null && state.MatchingConstructor == null)
                     {

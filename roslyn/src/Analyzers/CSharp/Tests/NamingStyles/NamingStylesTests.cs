@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
         ) => (new CSharpNamingStyleDiagnosticAnalyzer(), new NamingStyleCodeFixProvider());
 
         protected override TestComposition GetComposition() =>
-            base.GetComposition()
+            base
+                .GetComposition()
                 .AddParts(typeof(TestSymbolRenamedCodeActionOperationFactoryWorkspaceService));
 
         [Fact, Trait(Traits.Feature, Traits.Features.NamingStyle)]

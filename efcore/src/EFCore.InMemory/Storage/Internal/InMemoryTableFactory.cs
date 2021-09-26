@@ -62,10 +62,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             IEntityType entityType,
             IInMemoryTable? baseTable
         ) =>
-            (Func<IInMemoryTable>)typeof(InMemoryTableFactory).GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateFactory))!.MakeGenericMethod(
-                    entityType.FindPrimaryKey()!.GetKeyType()
-                )
+            (Func<IInMemoryTable>)typeof(InMemoryTableFactory)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(CreateFactory))!
+                .MakeGenericMethod(entityType.FindPrimaryKey()!.GetKeyType())
                 .Invoke(
                     null,
                     new object?[]

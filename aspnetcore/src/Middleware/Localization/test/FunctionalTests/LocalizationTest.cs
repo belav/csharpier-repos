@@ -96,12 +96,11 @@ namespace Microsoft.AspNetCore.Localization.FunctionalTests
         private async Task RunTest(Type startupType, string culture, string expected)
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer().UseStartup(startupType);
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().UseStartup(startupType);
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -110,10 +109,8 @@ namespace Microsoft.AspNetCore.Localization.FunctionalTests
             var client = testHost.CreateClient();
             var request = new HttpRequestMessage();
             var cookieValue = $"c={culture}|uic={culture}";
-            request.Headers.Add(
-                "Cookie",
-                $"{CookieRequestCultureProvider.DefaultCookieName}={cookieValue}"
-            );
+            request.Headers
+                .Add("Cookie", $"{CookieRequestCultureProvider.DefaultCookieName}={cookieValue}");
 
             var response = await client.SendAsync(request);
 

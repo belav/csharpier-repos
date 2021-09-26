@@ -78,8 +78,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             _stopped = true;
 
             var disposeTasks = _listeners.Select(
-                    listener => ((IAsyncDisposable)listener).DisposeAsync()
-                )
+                listener => ((IAsyncDisposable)listener).DisposeAsync()
+            )
                 .ToArray();
 
             if (
@@ -117,9 +117,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             try
             {
                 await Task.WhenAll(
-                        Threads.Select(thread => thread.StopAsync(TimeSpan.FromSeconds(5)))
-                            .ToArray()
-                    )
+                    Threads.Select(thread => thread.StopAsync(TimeSpan.FromSeconds(5))).ToArray()
+                )
                     .ConfigureAwait(false);
             }
             catch (AggregateException aggEx)

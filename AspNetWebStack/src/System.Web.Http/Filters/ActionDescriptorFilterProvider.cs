@@ -37,9 +37,9 @@ namespace System.Web.Http.Filters
                 throw Error.ArgumentNull("actionDescriptor");
             }
 
-            IEnumerable<FilterInfo> controllerFilters =
-                actionDescriptor.ControllerDescriptor.GetFilters()
-                    .Select(instance => new FilterInfo(instance, FilterScope.Controller));
+            IEnumerable<FilterInfo> controllerFilters = actionDescriptor.ControllerDescriptor
+                .GetFilters()
+                .Select(instance => new FilterInfo(instance, FilterScope.Controller));
             IEnumerable<FilterInfo> actionFilters = actionDescriptor.GetFilters()
                 .Select(instance => new FilterInfo(instance, FilterScope.Action));
 

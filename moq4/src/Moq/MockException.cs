@@ -148,13 +148,14 @@ namespace Moq
         {
             return new MockException(
                 MockExceptionReasons.NoSetup,
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.MockExceptionMessage,
-                    invocation.ToString(),
-                    MockBehavior.Strict,
-                    Resources.NoSetup
-                )
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.MockExceptionMessage,
+                        invocation.ToString(),
+                        MockBehavior.Strict,
+                        Resources.NoSetup
+                    )
             );
         }
 
@@ -165,13 +166,14 @@ namespace Moq
         {
             return new MockException(
                 MockExceptionReasons.ReturnValueRequired,
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.MockExceptionMessage,
-                    invocation.ToString(),
-                    MockBehavior.Strict,
-                    Resources.ReturnValueRequired
-                )
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.MockExceptionMessage,
+                        invocation.ToString(),
+                        MockBehavior.Strict,
+                        Resources.ReturnValueRequired
+                    )
             );
         }
 
@@ -191,12 +193,13 @@ namespace Moq
             var message = new StringBuilder();
 
             message.AppendLine(
-                    string.Format(
+                string
+                    .Format(
                         CultureInfo.CurrentCulture,
                         Resources.VerificationErrorsOfInnerMock,
                         setup
                     )
-                )
+            )
                 .TrimEnd()
                 .AppendLine()
                 .AppendLine();
@@ -244,8 +247,8 @@ namespace Moq
             var message = new StringBuilder();
 
             message.AppendLine(
-                    string.Format(CultureInfo.CurrentCulture, Resources.UnverifiedInvocations, mock)
-                )
+                string.Format(CultureInfo.CurrentCulture, Resources.UnverifiedInvocations, mock)
+            )
                 .TrimEnd()
                 .AppendLine()
                 .AppendLine();

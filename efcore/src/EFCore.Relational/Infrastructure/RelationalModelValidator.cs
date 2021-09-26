@@ -239,10 +239,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 {
                     var parameters =
                         "{"
-                        + string.Join(
-                            ", ",
-                            mappedFunction.Parameters.Select(p => "'" + p.Name + "'")
-                        )
+                        + string
+                            .Join(", ", mappedFunction.Parameters.Select(p => "'" + p.Name + "'"))
                         + "}";
                     throw new InvalidOperationException(
                         RelationalStrings.InvalidMappedFunctionWithParameters(
@@ -1039,11 +1037,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 duplicateProperty.GetColumnType(storeObject)
                 ?? duplicateProperty.GetRelationalTypeMapping().StoreType;
             if (
-                !string.Equals(
-                    currentTypeString,
-                    previousTypeString,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                !string
+                    .Equals(
+                        currentTypeString,
+                        previousTypeString,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 throw new InvalidOperationException(
@@ -1246,7 +1245,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 );
                 if (foreignKeyName == null)
                 {
-                    var derivedTables = foreignKey.DeclaringEntityType.GetDerivedTypes()
+                    var derivedTables = foreignKey.DeclaringEntityType
+                        .GetDerivedTypes()
                         .Select(t => StoreObjectIdentifier.Create(t, StoreObjectType.Table))
                         .Where(t => t != null);
                     if (
@@ -1633,17 +1633,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     HashSet<(string Table, string? Schema)>? overlappingTables = null;
                     foreach (var property in index.Properties)
                     {
-                        var tablesMappedToProperty =
-                            property.DeclaringEntityType.GetDerivedTypesInclusive()
-                                .Select(t => (t.GetTableName(), t.GetSchema()))
-                                .Distinct()
-                                .Where(
-                                    n =>
-                                        n.Item1 != null
-                                        && property.GetColumnName(
-                                            StoreObjectIdentifier.Table(n.Item1, n.Item2)
-                                        ) != null
-                                )!.ToList<(string Table, string? Schema)>();
+                        var tablesMappedToProperty = property.DeclaringEntityType
+                            .GetDerivedTypesInclusive()
+                            .Select(t => (t.GetTableName(), t.GetSchema()))
+                            .Distinct()
+                            .Where(
+                                n =>
+                                    n.Item1 != null
+                                    && property.GetColumnName(
+                                        StoreObjectIdentifier.Table(n.Item1, n.Item2)
+                                    ) != null
+                            )!
+                            .ToList<(string Table, string? Schema)>();
                         if (tablesMappedToProperty.Count == 0)
                         {
                             propertyNotMappedToAnyTable = property;

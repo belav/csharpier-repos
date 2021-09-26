@@ -28,14 +28,13 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         [Trait(Traits.Feature, Traits.Features.ProjectSystemShims)]
         public void RuleSet_GeneralOption()
         {
-            var ruleSetFile = Temp.CreateFile()
-                .WriteAllText(
-                    @"<?xml version=""1.0"" encoding=""utf-8""?>
+            var ruleSetFile = Temp.CreateFile().WriteAllText(
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Error"" />
 </RuleSet>
 "
-                );
+            );
             using var environment = new TestEnvironment();
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
 
@@ -77,14 +76,13 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         [Trait(Traits.Feature, Traits.Features.ProjectSystemShims)]
         public void RuleSet_ProjectSettingOverridesGeneralOption()
         {
-            var ruleSetFile = Temp.CreateFile()
-                .WriteAllText(
-                    @"<?xml version=""1.0"" encoding=""utf-8""?>
+            var ruleSetFile = Temp.CreateFile().WriteAllText(
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
 </RuleSet>
 "
-                );
+            );
 
             using var environment = new TestEnvironment();
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
@@ -108,9 +106,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         [Trait(Traits.Feature, Traits.Features.ProjectSystemShims)]
         public void RuleSet_SpecificOptions()
         {
-            var ruleSetFile = Temp.CreateFile()
-                .WriteAllText(
-                    @"<?xml version=""1.0"" encoding=""utf-8""?>
+            var ruleSetFile = Temp.CreateFile().WriteAllText(
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -118,7 +115,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
   </Rules>
 </RuleSet>
 "
-                );
+            );
 
             using var environment = new TestEnvironment();
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
@@ -136,9 +133,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         [Trait(Traits.Feature, Traits.Features.ProjectSystemShims)]
         public void RuleSet_ProjectSettingsOverrideSpecificOptions()
         {
-            var ruleSetFile = Temp.CreateFile()
-                .WriteAllText(
-                    @"<?xml version=""1.0"" encoding=""utf-8""?>
+            var ruleSetFile = Temp.CreateFile().WriteAllText(
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -146,7 +142,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
   </Rules>
 </RuleSet>
 "
-                );
+            );
             using var environment = new TestEnvironment();
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
 
@@ -188,9 +184,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         [WorkItem(468, "https://github.com/dotnet/roslyn/issues/468")]
         public void RuleSet_ProjectSettingsOverrideSpecificOptionsAndRestore()
         {
-            var ruleSetFile = Temp.CreateFile()
-                .WriteAllText(
-                    @"<?xml version=""1.0"" encoding=""utf-8""?>
+            var ruleSetFile = Temp.CreateFile().WriteAllText(
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -198,7 +193,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
   </Rules>
 </RuleSet>
 "
-                );
+            );
 
             using var environment = new TestEnvironment();
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
@@ -239,9 +234,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         [WorkItem(468, "https://github.com/dotnet/roslyn/issues/468")]
         public void RuleSet_ProjectNoWarnOverridesOtherSettings()
         {
-            var ruleSetFile = Temp.CreateFile()
-                .WriteAllText(
-                    @"<?xml version=""1.0"" encoding=""utf-8""?>
+            var ruleSetFile = Temp.CreateFile().WriteAllText(
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -249,7 +243,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
   </Rules>
 </RuleSet>
 "
-                );
+            );
 
             using var environment = new TestEnvironment();
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
@@ -306,8 +300,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             File.WriteAllText(ruleSetFile.Path, ruleSetSource.Replace("Error", "Warning"));
             environment.RaiseFileChange(ruleSetFile.Path);
 
-            var listenerProvider =
-                environment.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var listenerProvider = environment.ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             var waiter = listenerProvider.GetWaiter(FeatureAttribute.RuleSetEditor);
             waiter.ExpeditedWaitAsync().JoinUsingDispatcher(CancellationToken.None);
 

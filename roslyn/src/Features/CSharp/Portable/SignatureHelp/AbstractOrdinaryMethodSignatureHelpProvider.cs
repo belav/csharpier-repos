@@ -51,16 +51,18 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 anonymousTypeDisplayService,
                 method.IsParams(),
                 c =>
-                    method.OriginalDefinition.GetDocumentationParts(
-                        semanticModel,
-                        position,
-                        documentationCommentFormattingService,
-                        c
-                    ),
+                    method.OriginalDefinition
+                        .GetDocumentationParts(
+                            semanticModel,
+                            position,
+                            documentationCommentFormattingService,
+                            c
+                        ),
                 GetMethodGroupPreambleParts(method, semanticModel, position),
                 GetSeparatorParts(),
                 GetMethodGroupPostambleParts(),
-                method.Parameters.Select(
+                method.Parameters
+                    .Select(
                         p =>
                             Convert(
                                 p,

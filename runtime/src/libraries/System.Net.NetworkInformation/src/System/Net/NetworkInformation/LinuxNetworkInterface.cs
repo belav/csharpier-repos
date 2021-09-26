@@ -74,12 +74,9 @@ namespace System.Net.NetworkInformation
             IntPtr globalMemory = (IntPtr)null;
 
             if (
-                Interop.Sys.GetNetworkInterfaces(
-                    ref interfaceCount,
-                    ref nii,
-                    ref addressCount,
-                    ref ai
-                ) != 0
+                Interop.Sys
+                    .GetNetworkInterfaces(ref interfaceCount, ref nii, ref addressCount, ref ai)
+                != 0
             )
             {
                 string message = Interop.Sys.GetLastErrorInfo().GetErrorMessage();
@@ -111,10 +108,8 @@ namespace System.Net.NetworkInformation
                     if (nii->NumAddressBytes > 0)
                     {
                         lni._physicalAddress = new PhysicalAddress(
-                            new ReadOnlySpan<byte>(
-                                nii->AddressBytes,
-                                nii->NumAddressBytes
-                            ).ToArray()
+                            new ReadOnlySpan<byte>(nii->AddressBytes, nii->NumAddressBytes)
+                                .ToArray()
                         );
                     }
 

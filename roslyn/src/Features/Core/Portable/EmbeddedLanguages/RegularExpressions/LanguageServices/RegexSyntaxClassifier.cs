@@ -50,10 +50,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             }
 
             if (
-                !workspace.Options.GetOption(
-                    RegularExpressionsOptions.ColorizeRegexPatterns,
-                    semanticModel.Language
-                )
+                !workspace.Options
+                    .GetOption(
+                        RegularExpressionsOptions.ColorizeRegexPatterns,
+                        semanticModel.Language
+                    )
             )
             {
                 return;

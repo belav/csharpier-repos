@@ -126,7 +126,8 @@ namespace Microsoft.AspNetCore.Components
 
         private static IServiceProvider GetServiceProvider()
         {
-            return new ServiceCollection().AddTransient<TestService1>()
+            return new ServiceCollection()
+                .AddTransient<TestService1>()
                 .AddTransient<TestService2>()
                 .BuildServiceProvider();
         }

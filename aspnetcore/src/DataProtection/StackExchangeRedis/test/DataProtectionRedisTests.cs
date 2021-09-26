@@ -56,8 +56,8 @@ namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis
         {
             var database = new Mock<IDatabase>();
             database.Setup(
-                    d => d.ListRightPush("Key", "<Element2 />", When.Always, CommandFlags.None)
-                )
+                d => d.ListRightPush("Key", "<Element2 />", When.Always, CommandFlags.None)
+            )
                 .Verifiable();
             var repo = new RedisXmlRepository(() => database.Object, "Key");
 

@@ -70,10 +70,8 @@ namespace Microsoft.Extensions.Configuration.Test
             var provider = new DisposableTestConfigurationProvider("foo", "foo-value");
             var chainedConfig = new ConfigurationRoot(new IConfigurationProvider[] { provider });
 
-            var config = new ConfigurationBuilder().AddConfiguration(
-                    chainedConfig,
-                    shouldDisposeConfiguration: shouldDispose
-                )
+            var config = new ConfigurationBuilder()
+                .AddConfiguration(chainedConfig, shouldDisposeConfiguration: shouldDispose)
                 .Build();
 
             Assert.False(provider.IsDisposed);

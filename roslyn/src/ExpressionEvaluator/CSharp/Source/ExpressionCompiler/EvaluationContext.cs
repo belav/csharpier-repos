@@ -176,25 +176,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             var typedSymReader = (ISymUnmanagedReader3?)symReader;
 
-            var debugInfo = MethodDebugInfo<TypeSymbol, LocalSymbol>.ReadMethodDebugInfo(
-                typedSymReader,
-                symbolProvider,
-                methodToken,
-                methodVersion,
-                ilOffset,
-                isVisualBasicMethod: false
-            );
+            var debugInfo = MethodDebugInfo<TypeSymbol, LocalSymbol>
+                .ReadMethodDebugInfo(
+                    typedSymReader,
+                    symbolProvider,
+                    methodToken,
+                    methodVersion,
+                    ilOffset,
+                    isVisualBasicMethod: false
+                );
 
             var reuseSpan = debugInfo.ReuseSpan;
             var localsBuilder = ArrayBuilder<LocalSymbol>.GetInstance();
-            MethodDebugInfo<TypeSymbol, LocalSymbol>.GetLocals(
-                localsBuilder,
-                symbolProvider,
-                debugInfo.LocalVariableNames,
-                localInfo,
-                debugInfo.DynamicLocalMap,
-                debugInfo.TupleLocalMap
-            );
+            MethodDebugInfo<TypeSymbol, LocalSymbol>
+                .GetLocals(
+                    localsBuilder,
+                    symbolProvider,
+                    debugInfo.LocalVariableNames,
+                    localInfo,
+                    debugInfo.DynamicLocalMap,
+                    debugInfo.TupleLocalMap
+                );
 
             var inScopeHoistedLocals = debugInfo.GetInScopeHoistedLocalIndices(
                 ilOffset,
@@ -271,26 +273,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 {
                     using var stream = new MemoryStream();
 
-                    Cci.PeWriter.WritePeToStream(
-                        new EmitContext(
-                            moduleBuilder,
-                            null,
-                            diagnostics,
+                    Cci.PeWriter
+                        .WritePeToStream(
+                            new EmitContext(
+                                moduleBuilder,
+                                null,
+                                diagnostics,
+                                metadataOnly: false,
+                                includePrivateMembers: true
+                            ),
+                            context.MessageProvider,
+                            () => stream,
+                            getPortablePdbStreamOpt: null,
+                            nativePdbWriterOpt: null,
+                            pdbOptionsBlobReader: null,
+                            pdbPathOpt: null,
                             metadataOnly: false,
-                            includePrivateMembers: true
-                        ),
-                        context.MessageProvider,
-                        () => stream,
-                        getPortablePdbStreamOpt: null,
-                        nativePdbWriterOpt: null,
-                        pdbOptionsBlobReader: null,
-                        pdbPathOpt: null,
-                        metadataOnly: false,
-                        isDeterministic: false,
-                        emitTestCoverageData: false,
-                        privateKeyOpt: null,
-                        CancellationToken.None
-                    );
+                            isDeterministic: false,
+                            emitTestCoverageData: false,
+                            privateKeyOpt: null,
+                            CancellationToken.None
+                        );
 
                     if (!diagnostics.HasAnyErrors())
                     {
@@ -366,26 +369,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             using var stream = new MemoryStream();
 
-            Cci.PeWriter.WritePeToStream(
-                new EmitContext(
-                    moduleBuilder,
-                    null,
-                    diagnostics,
+            Cci.PeWriter
+                .WritePeToStream(
+                    new EmitContext(
+                        moduleBuilder,
+                        null,
+                        diagnostics,
+                        metadataOnly: false,
+                        includePrivateMembers: true
+                    ),
+                    context.MessageProvider,
+                    () => stream,
+                    getPortablePdbStreamOpt: null,
+                    nativePdbWriterOpt: null,
+                    pdbOptionsBlobReader: null,
+                    pdbPathOpt: null,
                     metadataOnly: false,
-                    includePrivateMembers: true
-                ),
-                context.MessageProvider,
-                () => stream,
-                getPortablePdbStreamOpt: null,
-                nativePdbWriterOpt: null,
-                pdbOptionsBlobReader: null,
-                pdbPathOpt: null,
-                metadataOnly: false,
-                isDeterministic: false,
-                emitTestCoverageData: false,
-                privateKeyOpt: null,
-                CancellationToken.None
-            );
+                    isDeterministic: false,
+                    emitTestCoverageData: false,
+                    privateKeyOpt: null,
+                    CancellationToken.None
+                );
 
             if (diagnostics.HasAnyErrors())
             {
@@ -476,26 +480,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             using var stream = new MemoryStream();
 
-            Cci.PeWriter.WritePeToStream(
-                new EmitContext(
-                    moduleBuilder,
-                    null,
-                    diagnostics,
+            Cci.PeWriter
+                .WritePeToStream(
+                    new EmitContext(
+                        moduleBuilder,
+                        null,
+                        diagnostics,
+                        metadataOnly: false,
+                        includePrivateMembers: true
+                    ),
+                    context.MessageProvider,
+                    () => stream,
+                    getPortablePdbStreamOpt: null,
+                    nativePdbWriterOpt: null,
+                    pdbOptionsBlobReader: null,
+                    pdbPathOpt: null,
                     metadataOnly: false,
-                    includePrivateMembers: true
-                ),
-                context.MessageProvider,
-                () => stream,
-                getPortablePdbStreamOpt: null,
-                nativePdbWriterOpt: null,
-                pdbOptionsBlobReader: null,
-                pdbPathOpt: null,
-                metadataOnly: false,
-                isDeterministic: false,
-                emitTestCoverageData: false,
-                privateKeyOpt: null,
-                CancellationToken.None
-            );
+                    isDeterministic: false,
+                    emitTestCoverageData: false,
+                    privateKeyOpt: null,
+                    CancellationToken.None
+                );
 
             if (diagnostics.HasAnyErrors())
             {
@@ -541,26 +546,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             {
                 using var stream = new MemoryStream();
 
-                Cci.PeWriter.WritePeToStream(
-                    new EmitContext(
-                        moduleBuilder,
-                        null,
-                        diagnostics,
+                Cci.PeWriter
+                    .WritePeToStream(
+                        new EmitContext(
+                            moduleBuilder,
+                            null,
+                            diagnostics,
+                            metadataOnly: false,
+                            includePrivateMembers: true
+                        ),
+                        context.MessageProvider,
+                        () => stream,
+                        getPortablePdbStreamOpt: null,
+                        nativePdbWriterOpt: null,
+                        pdbOptionsBlobReader: null,
+                        pdbPathOpt: null,
                         metadataOnly: false,
-                        includePrivateMembers: true
-                    ),
-                    context.MessageProvider,
-                    () => stream,
-                    getPortablePdbStreamOpt: null,
-                    nativePdbWriterOpt: null,
-                    pdbOptionsBlobReader: null,
-                    pdbPathOpt: null,
-                    metadataOnly: false,
-                    isDeterministic: false,
-                    emitTestCoverageData: false,
-                    privateKeyOpt: null,
-                    CancellationToken.None
-                );
+                        isDeterministic: false,
+                        emitTestCoverageData: false,
+                        privateKeyOpt: null,
+                        CancellationToken.None
+                    );
 
                 if (!diagnostics.HasAnyErrors())
                 {
@@ -642,9 +648,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         arguments.Count == 2
                         && arguments[0] is string namespaceName
                         && arguments[1] is NamespaceSymbol containingNamespace
-                        && containingNamespace.ConstituentNamespaces.Any(
-                            n => n.ContainingAssembly.Identity.IsWindowsAssemblyIdentity()
-                        )
+                        && containingNamespace.ConstituentNamespaces
+                            .Any(n => n.ContainingAssembly.Identity.IsWindowsAssemblyIdentity())
                     )
                     {
                         // This is just a heuristic, but it has the advantage of being portable, particularly

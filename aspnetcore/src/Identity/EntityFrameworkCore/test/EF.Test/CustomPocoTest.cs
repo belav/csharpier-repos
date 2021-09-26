@@ -30,9 +30,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             using (
                 var db = new CustomDbContext<Guid>(
-                    new DbContextOptionsBuilder().UseSqlite(
-                        $"DataSource=D{Guid.NewGuid()}.db"
-                    ).Options
+                    new DbContextOptionsBuilder()
+                        .UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
                 )
             )
             {
@@ -57,9 +56,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             using (
                 var db = new CustomDbContext<string>(
-                    new DbContextOptionsBuilder().UseSqlite(
-                        $"DataSource=D{Guid.NewGuid()}.db"
-                    ).Options
+                    new DbContextOptionsBuilder()
+                        .UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
                 )
             )
             {
@@ -84,9 +82,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             using (
                 var db = new CustomDbContext<int>(
-                    new DbContextOptionsBuilder().UseSqlite(
-                        $"DataSource=D{Guid.NewGuid()}.db"
-                    ).Options
+                    new DbContextOptionsBuilder()
+                        .UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
                 )
             )
             {
@@ -109,9 +106,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             using (
                 var db = new CustomDbContext<int>(
-                    new DbContextOptionsBuilder().UseSqlite(
-                        $"DataSource=D{Guid.NewGuid()}.db"
-                    ).Options
+                    new DbContextOptionsBuilder()
+                        .UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
                 )
             )
             {
@@ -135,9 +131,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             using (
                 var db = new CustomDbContext<int>(
-                    new DbContextOptionsBuilder().UseSqlite(
-                        $"DataSource=D{Guid.NewGuid()}.db"
-                    ).Options
+                    new DbContextOptionsBuilder()
+                        .UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
                 )
             )
             {
@@ -162,9 +157,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             using (
                 var db = new CustomDbContext<int>(
-                    new DbContextOptionsBuilder().UseSqlite(
-                        $"DataSource=D{Guid.NewGuid()}.db"
-                    ).Options
+                    new DbContextOptionsBuilder()
+                        .UseSqlite($"DataSource=D{Guid.NewGuid()}.db").Options
                 )
             )
             {

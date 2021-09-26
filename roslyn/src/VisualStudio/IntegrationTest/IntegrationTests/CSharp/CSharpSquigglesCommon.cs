@@ -42,11 +42,12 @@ namespace ConsoleApplication1
 }"
             );
 
-            VisualStudio.Editor.Verify.ErrorTags(
-                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System.Collections.Generic;\\r\\nusing System.Text;'[15-68]",
-                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[286-287]",
-                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'}'[354-355]"
-            );
+            VisualStudio.Editor.Verify
+                .ErrorTags(
+                    "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System.Collections.Generic;\\r\\nusing System.Text;'[15-68]",
+                    "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[286-287]",
+                    "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'}'[354-355]"
+                );
         }
 
         public virtual void VerifySemanticErrorSquiggles()
@@ -58,10 +59,11 @@ class C  : Bar
 {
 }"
             );
-            VisualStudio.Editor.Verify.ErrorTags(
-                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System;'[0-13]",
-                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'Bar'[28-31]"
-            );
+            VisualStudio.Editor.Verify
+                .ErrorTags(
+                    "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System;'[0-13]",
+                    "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'Bar'[28-31]"
+                );
         }
     }
 }

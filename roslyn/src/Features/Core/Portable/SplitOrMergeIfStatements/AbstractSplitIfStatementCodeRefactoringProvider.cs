@@ -92,13 +92,13 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             );
 
             var newRoot = await GetChangedRootAsync(
-                    document,
-                    root,
-                    ifOrElseIf,
-                    left,
-                    right,
-                    cancellationToken
-                )
+                document,
+                root,
+                ifOrElseIf,
+                left,
+                right,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return document.WithSyntaxRoot(newRoot);
         }

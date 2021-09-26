@@ -2273,7 +2273,8 @@ namespace System.Xml.Schema
         {
             XmlSchemaDatatype dt = XmlSchemaDatatype.FromXmlTokenizedTypeXsd(
                 XmlTokenizedType.QName
-            )!.DeriveByList(null);
+            )!
+                .DeriveByList(null);
             try
             {
                 builder._simpleTypeUnion!.MemberTypes = (XmlQualifiedName[])dt.ParseValue(

@@ -115,10 +115,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         ) =>
             new ExprMethodInfo(
                 TypeManager.GetPredefAgg(
-                        method.IsConstructor()
-                          ? PredefinedType.PT_CONSTRUCTORINFO
-                          : PredefinedType.PT_METHODINFO
-                    )
+                    method.IsConstructor()
+                      ? PredefinedType.PT_CONSTRUCTORINFO
+                      : PredefinedType.PT_METHODINFO
+                )
                     .getThisType(),
                 method,
                 methodType,

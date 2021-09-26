@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         isNullableUnknown: false,
                         type: type.Type,
                         hasErrors: this.HasErrors || inferenceFailed
-                    ).WithWasConverted();
+                    )
+                        .WithWasConverted();
 
                 case SymbolKind.Field:
                     var fieldSymbol = (GlobalExpressionVariable)this.VariableSymbol;

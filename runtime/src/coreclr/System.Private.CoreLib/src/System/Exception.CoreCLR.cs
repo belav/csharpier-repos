@@ -116,9 +116,8 @@ namespace System
         private static string GetStackTrace(Exception e)
         {
             // Do not include a trailing newline for backwards compatibility
-            return new StackTrace(e, fNeedFileInfo: true).ToString(
-                System.Diagnostics.StackTrace.TraceFormat.Normal
-            );
+            return new StackTrace(e, fNeedFileInfo: true)
+                .ToString(System.Diagnostics.StackTrace.TraceFormat.Normal);
         }
 
         private string? CreateSourceName()

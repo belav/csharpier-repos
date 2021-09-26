@@ -81,9 +81,9 @@ namespace System.Text.Json.Serialization.Tests
 
             using var stream = new MemoryStream(data);
             List<TElement> results = await JsonSerializer.DeserializeAsyncEnumerable<TElement>(
-                    stream,
-                    options
-                )
+                stream,
+                options
+            )
                 .ToListAsync();
             Assert.Equal(source, results);
         }
@@ -130,9 +130,9 @@ namespace System.Text.Json.Serialization.Tests
             var token = new CancellationToken(canceled: true);
             using var stream = new MemoryStream(data);
             var cancellableAsyncEnumerable = JsonSerializer.DeserializeAsyncEnumerable<int>(
-                    stream,
-                    options
-                )
+                stream,
+                options
+            )
                 .WithCancellation(token);
 
             await Assert.ThrowsAsync<TaskCanceledException>(

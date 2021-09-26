@@ -1774,9 +1774,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 },
                 options =>
                 {
-                    options.ModelMetadataDetailsProviders.Add(
-                        new SuppressChildValidationMetadataProvider(typeof(Address))
-                    );
+                    options.ModelMetadataDetailsProviders
+                        .Add(new SuppressChildValidationMetadataProvider(typeof(Address)));
                 }
             );
 

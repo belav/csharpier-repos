@@ -516,7 +516,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             Action<NegotiateOptions> configureOptions = null
         )
         {
-            var builder = new HostBuilder().ConfigureServices(
+            var builder = new HostBuilder()
+                .ConfigureServices(
                     services =>
                         services.AddRouting()
                             .AddAuthentication(NegotiateDefaults.AuthenticationScheme)

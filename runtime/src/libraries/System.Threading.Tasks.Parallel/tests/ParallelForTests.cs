@@ -1199,11 +1199,12 @@ namespace System.Threading.Tasks.Tests
             );
             Assert.False(
                 exceededDOP,
-                string.Format(
-                    "TestParallelForDOP:  FAILED!  For32-loop exceeded desired DOP ({0} > {1}).",
-                    maxDOP,
-                    desiredDOP
-                )
+                string
+                    .Format(
+                        "TestParallelForDOP:  FAILED!  For32-loop exceeded desired DOP ({0} > {1}).",
+                        maxDOP,
+                        desiredDOP
+                    )
             );
 
             //
@@ -1228,11 +1229,12 @@ namespace System.Threading.Tasks.Tests
             );
             Assert.False(
                 exceededDOP,
-                string.Format(
-                    "TestParallelForDOP:  FAILED!  For64-loop exceeded desired DOP ({0} > {1}).",
-                    maxDOP,
-                    desiredDOP
-                )
+                string
+                    .Format(
+                        "TestParallelForDOP:  FAILED!  For64-loop exceeded desired DOP ({0} > {1}).",
+                        maxDOP,
+                        desiredDOP
+                    )
             );
 
             //
@@ -1260,11 +1262,12 @@ namespace System.Threading.Tasks.Tests
             );
             Assert.False(
                 exceededDOP,
-                string.Format(
-                    "TestParallelForDOP:  FAILED!  ForEach-loop exceeded desired DOP ({0} > {1}).",
-                    maxDOP,
-                    desiredDOP
-                )
+                string
+                    .Format(
+                        "TestParallelForDOP:  FAILED!  ForEach-loop exceeded desired DOP ({0} > {1}).",
+                        maxDOP,
+                        desiredDOP
+                    )
             );
 
             //
@@ -1293,11 +1296,12 @@ namespace System.Threading.Tasks.Tests
             );
             Assert.False(
                 exceededDOP,
-                string.Format(
-                    "TestParallelForDOP:  FAILED!  ForEach-loop w/ Partitioner exceeded desired DOP ({0} > {1}).",
-                    maxDOP,
-                    desiredDOP
-                )
+                string
+                    .Format(
+                        "TestParallelForDOP:  FAILED!  ForEach-loop w/ Partitioner exceeded desired DOP ({0} > {1}).",
+                        maxDOP,
+                        desiredDOP
+                    )
             );
 
             //
@@ -1323,11 +1327,12 @@ namespace System.Threading.Tasks.Tests
             );
             Assert.False(
                 exceededDOP,
-                string.Format(
-                    "TestParallelForDOP:  FAILED!  ForEach-loop w/ OrderablePartitioner exceeded desired DOP ({0} > {1}).",
-                    maxDOP,
-                    desiredDOP
-                )
+                string
+                    .Format(
+                        "TestParallelForDOP:  FAILED!  ForEach-loop w/ OrderablePartitioner exceeded desired DOP ({0} > {1}).",
+                        maxDOP,
+                        desiredDOP
+                    )
             );
         }
 
@@ -1789,10 +1794,11 @@ namespace System.Threading.Tasks.Tests
                         Task.WaitAll(tcs.Task, continuation);
                         Assert.True(
                             timeExpired,
-                            string.Format(
-                                "TestParallelScheduler:    > FAILED.  WaitAll() completed for unstarted continuation task or TCS.task! -- continuation status: {0}",
-                                continuation.Status
-                            )
+                            string
+                                .Format(
+                                    "TestParallelScheduler:    > FAILED.  WaitAll() completed for unstarted continuation task or TCS.task! -- continuation status: {0}",
+                                    continuation.Status
+                                )
                         );
                     } while (false);
                 },
@@ -1868,10 +1874,11 @@ namespace System.Threading.Tasks.Tests
 
             Assert.False(
                 (counter == numActions) || (counter > 2),
-                string.Format(
-                    "TestInvokeDOPAndCancel:    > FAILED!  Cancellation was not correctly effected.  Saw {0} calls to the Action delegate",
-                    counter
-                )
+                string
+                    .Format(
+                        "TestInvokeDOPAndCancel:    > FAILED!  Cancellation was not correctly effected.  Saw {0} calls to the Action delegate",
+                        counter
+                    )
             );
 
             //
@@ -1923,11 +1930,12 @@ namespace System.Threading.Tasks.Tests
 
             Assert.True(
                 counter == numActions,
-                string.Format(
-                    "TestInvokeDOPAndCancel:    > FAILED!  exception prevented actions from executing ({0}/{1} executed).",
-                    counter,
-                    numActions
-                )
+                string
+                    .Format(
+                        "TestInvokeDOPAndCancel:    > FAILED!  exception prevented actions from executing ({0}/{1} executed).",
+                        counter,
+                        numActions
+                    )
             );
 
             // Test that simple example doesn't deadlock
@@ -2353,9 +2361,9 @@ namespace System.Threading.Tasks.Tests
                 }
                 IEnumerator<TSource>[] partitions = new IEnumerator<TSource>[partitionCount];
                 IEnumerable<KeyValuePair<long, TSource>> partitionEnumerable = Partitioner.Create(
-                        _data,
-                        true
-                    )
+                    _data,
+                    true
+                )
                     .GetOrderableDynamicPartitions();
                 for (int i = 0; i < partitionCount; i++)
                 {

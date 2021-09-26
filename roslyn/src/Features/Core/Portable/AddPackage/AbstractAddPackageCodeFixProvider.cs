@@ -77,11 +77,11 @@ namespace Microsoft.CodeAnalysis.AddPackage
                     cancellationToken.ThrowIfCancellationRequested();
 
                     var sortedPackages = await FindMatchingPackagesAsync(
-                            packageSource,
-                            symbolSearchService,
-                            assemblyNames,
-                            cancellationToken
-                        )
+                        packageSource,
+                        symbolSearchService,
+                        assemblyNames,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     foreach (var package in sortedPackages)
@@ -117,10 +117,10 @@ namespace Microsoft.CodeAnalysis.AddPackage
             foreach (var assemblyName in assemblyNames)
             {
                 var packagesWithAssembly = await searchService.FindPackagesWithAssemblyAsync(
-                        source.Name,
-                        assemblyName,
-                        cancellationToken
-                    )
+                    source.Name,
+                    assemblyName,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 result.AddRange(packagesWithAssembly);

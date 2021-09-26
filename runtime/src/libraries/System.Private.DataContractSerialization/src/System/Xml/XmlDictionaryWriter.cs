@@ -110,9 +110,8 @@ namespace System.Xml
         public static XmlDictionaryWriter CreateDictionaryWriter(XmlWriter writer)
         {
             if (writer == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    nameof(writer)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull(nameof(writer));
 
             XmlDictionaryWriter? dictionaryWriter = writer as XmlDictionaryWriter;
 
@@ -184,9 +183,8 @@ namespace System.Xml
         public virtual void WriteXmlnsAttribute(string? prefix, string namespaceUri)
         {
             if (namespaceUri == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    nameof(namespaceUri)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull(nameof(namespaceUri));
             if (prefix == null)
             {
                 if (LookupPrefix(namespaceUri) != null)
@@ -195,11 +193,11 @@ namespace System.Xml
                 prefix =
                     namespaceUri.Length == 0
                         ? string.Empty
-                        : string.Concat(
+                        : string
+                          .Concat(
                               "d",
-                              namespaceUri.Length.ToString(
-                                  System.Globalization.NumberFormatInfo.InvariantInfo
-                              )
+                              namespaceUri.Length
+                                  .ToString(System.Globalization.NumberFormatInfo.InvariantInfo)
                           );
             }
             WriteAttributeString("xmlns", prefix, null, namespaceUri);
@@ -270,9 +268,8 @@ namespace System.Xml
         )
         {
             if (localName == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException(nameof(localName))
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException(nameof(localName)));
             if (namespaceUri == null)
                 namespaceUri = XmlDictionaryString.Empty;
 #pragma warning suppress 56506 // Microsoft, XmlDictionaryString.Empty is never null
@@ -287,9 +284,8 @@ namespace System.Xml
         public virtual void WriteValue(UniqueId value)
         {
             if (value == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    nameof(value)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull(nameof(value));
 
             WriteString(value.ToString());
         }
@@ -307,15 +303,13 @@ namespace System.Xml
         public virtual void WriteValue(IStreamProvider value)
         {
             if (value == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException(nameof(value))
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException(nameof(value)));
 
             Stream stream = value.GetStream();
             if (stream == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.XmlInvalidStream)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new XmlException(SR.XmlInvalidStream));
             int blockSize = 256;
             int bytesRead = 0;
             byte[] block = new byte[blockSize];
@@ -427,85 +421,35 @@ namespace System.Xml
         )
         {
             if (type == typeof(bool))
-                BooleanArrayHelperWithString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                BooleanArrayHelperWithString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(short))
-                Int16ArrayHelperWithString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                Int16ArrayHelperWithString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(int))
-                Int32ArrayHelperWithString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                Int32ArrayHelperWithString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(long))
-                Int64ArrayHelperWithString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                Int64ArrayHelperWithString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(float))
-                SingleArrayHelperWithString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                SingleArrayHelperWithString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(double))
-                DoubleArrayHelperWithString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                DoubleArrayHelperWithString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(decimal))
-                DecimalArrayHelperWithString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                DecimalArrayHelperWithString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(DateTime))
-                DateTimeArrayHelperWithString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                DateTimeArrayHelperWithString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Guid))
-                GuidArrayHelperWithString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                GuidArrayHelperWithString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(TimeSpan))
-                TimeSpanArrayHelperWithString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                TimeSpanArrayHelperWithString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else
             {
                 WriteElementNode(reader, false);
@@ -522,85 +466,35 @@ namespace System.Xml
         )
         {
             if (type == typeof(bool))
-                BooleanArrayHelperWithDictionaryString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                BooleanArrayHelperWithDictionaryString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(short))
-                Int16ArrayHelperWithDictionaryString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                Int16ArrayHelperWithDictionaryString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(int))
-                Int32ArrayHelperWithDictionaryString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                Int32ArrayHelperWithDictionaryString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(long))
-                Int64ArrayHelperWithDictionaryString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                Int64ArrayHelperWithDictionaryString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(float))
-                SingleArrayHelperWithDictionaryString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                SingleArrayHelperWithDictionaryString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(double))
-                DoubleArrayHelperWithDictionaryString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                DoubleArrayHelperWithDictionaryString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(decimal))
-                DecimalArrayHelperWithDictionaryString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                DecimalArrayHelperWithDictionaryString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(DateTime))
-                DateTimeArrayHelperWithDictionaryString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                DateTimeArrayHelperWithDictionaryString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Guid))
-                GuidArrayHelperWithDictionaryString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                GuidArrayHelperWithDictionaryString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(TimeSpan))
-                TimeSpanArrayHelperWithDictionaryString.Instance.WriteArray(
-                    this,
-                    prefix,
-                    localName,
-                    namespaceUri,
-                    reader
-                );
+                TimeSpanArrayHelperWithDictionaryString.Instance
+                    .WriteArray(this, prefix, localName, namespaceUri, reader);
             else
             {
                 WriteElementNode(reader, false);
@@ -650,9 +544,8 @@ namespace System.Xml
         public virtual void WriteNode(XmlDictionaryReader reader, bool defattr)
         {
             if (reader == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException(nameof(reader))
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException(nameof(reader)));
             int d = (reader.NodeType == XmlNodeType.None ? -1 : reader.Depth);
             do
             {
@@ -715,31 +608,34 @@ namespace System.Xml
         private void CheckArray(Array array, int offset, int count)
         {
             if (array == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException(nameof(array))
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException(nameof(array)));
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                    );
             if (offset > array.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        nameof(offset),
-                        SR.Format(SR.OffsetExceedsBufferSize, array.Length)
-                    )
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            nameof(offset),
+                            SR.Format(SR.OffsetExceedsBufferSize, array.Length)
+                        )
+                    );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
+                    );
             if (count > array.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        nameof(count),
-                        SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
-                    )
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            nameof(count),
+                            SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
+                        )
+                    );
         }
 
         // bool
@@ -1354,9 +1250,8 @@ namespace System.Xml
             public override void WriteXmlnsAttribute(string? prefix, string namespaceUri)
             {
                 if (namespaceUri == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        nameof(namespaceUri)
-                    );
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull(nameof(namespaceUri));
                 if (prefix == null)
                 {
                     if (LookupPrefix(namespaceUri) != null)

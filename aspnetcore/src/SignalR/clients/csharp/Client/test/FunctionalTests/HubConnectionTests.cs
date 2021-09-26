@@ -74,9 +74,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     protocol.TransferFormat
                 )
             );
-            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(
-                delegateConnectionFactory
-            );
+            hubConnectionBuilder.Services
+                .AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 
             return hubConnectionBuilder.Build();
         }
@@ -117,7 +116,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             var protocol = HubProtocols[protocolName];
             await using (var server = await StartServer<Startup>())
             {
-                var connectionBuilder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var connectionBuilder = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(server.Url + path, transportType);
                 connectionBuilder.Services.AddSingleton(protocol);
 
@@ -157,7 +157,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             var protocol = HubProtocols["json"];
             await using (var server = await StartServer<Startup>(ExpectedError))
             {
-                var connectionBuilder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var connectionBuilder = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(
                         server.Url + "/negotiateProtocolVersion12",
                         HttpTransportType.LongPolling
@@ -194,7 +195,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             var protocol = HubProtocols["json"];
             await using (var server = await StartServer<Startup>())
             {
-                var connectionBuilder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var connectionBuilder = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(
                         server.Url + "/negotiateProtocolVersionNegative",
                         HttpTransportType.LongPolling
@@ -244,9 +246,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await connection.StartAsync().DefaultTimeout();
 
                     var result = await connection.InvokeAsync<string>(
-                            nameof(TestHub.Echo),
-                            originalMessage
-                        )
+                        nameof(TestHub.Echo),
+                        originalMessage
+                    )
                         .DefaultTimeout();
 
                     Assert.Equal(originalMessage, result);
@@ -324,17 +326,17 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 {
                     await connection.StartAsync().DefaultTimeout();
                     var result = await connection.InvokeAsync<string>(
-                            nameof(TestHub.Echo),
-                            originalMessage
-                        )
+                        nameof(TestHub.Echo),
+                        originalMessage
+                    )
                         .DefaultTimeout();
                     Assert.Equal(originalMessage, result);
                     await connection.StopAsync().DefaultTimeout();
                     await connection.StartAsync().DefaultTimeout();
                     result = await connection.InvokeAsync<string>(
-                            nameof(TestHub.Echo),
-                            originalMessage
-                        )
+                        nameof(TestHub.Echo),
+                        originalMessage
+                    )
                         .DefaultTimeout();
                     Assert.Equal(originalMessage, result);
                 }
@@ -376,16 +378,16 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await connection.StartAsync().DefaultTimeout();
                     var originalClientConnectionId = connection.ConnectionId;
                     var connectionIdFromServer = await connection.InvokeAsync<string>(
-                            nameof(TestHub.GetCallerConnectionId)
-                        )
+                        nameof(TestHub.GetCallerConnectionId)
+                    )
                         .DefaultTimeout();
                     Assert.Equal(connection.ConnectionId, connectionIdFromServer);
                     await connection.StopAsync().DefaultTimeout();
                     Assert.Null(connection.ConnectionId);
                     await connection.StartAsync().DefaultTimeout();
                     connectionIdFromServer = await connection.InvokeAsync<string>(
-                            nameof(TestHub.GetCallerConnectionId)
-                        )
+                        nameof(TestHub.GetCallerConnectionId)
+                    )
                         .DefaultTimeout();
                     Assert.NotEqual(originalClientConnectionId, connectionIdFromServer);
                     Assert.Equal(connection.ConnectionId, connectionIdFromServer);
@@ -451,9 +453,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 {
                     await connection.StartAsync().DefaultTimeout();
                     var result = await connection.InvokeAsync<string>(
-                            nameof(TestHub.Echo),
-                            originalMessage
-                        )
+                        nameof(TestHub.Echo),
+                        originalMessage
+                    )
                         .DefaultTimeout();
                     Assert.Equal(originalMessage, result);
 
@@ -465,9 +467,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     logger.LogInformation("Reconnection complete");
 
                     result = await connection.InvokeAsync<string>(
-                            nameof(TestHub.Echo),
-                            originalMessage
-                        )
+                        nameof(TestHub.Echo),
+                        originalMessage
+                    )
                         .DefaultTimeout();
                     Assert.Equal(originalMessage, result);
                 }
@@ -508,9 +510,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await connection.StartAsync().DefaultTimeout();
 
                     var result = await connection.InvokeAsync<string>(
-                            nameof(TestHub.Echo).ToLowerInvariant(),
-                            originalMessage
-                        )
+                        nameof(TestHub.Echo).ToLowerInvariant(),
+                        originalMessage
+                    )
                         .DefaultTimeout();
 
                     Assert.Equal(originalMessage, result);
@@ -1074,9 +1076,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
 
                     var channelWriter = Channel.CreateBounded<string>(5);
                     var channel = await connection.StreamAsChannelAsync<string>(
-                            "StreamEcho",
-                            channelWriter.Reader
-                        )
+                        "StreamEcho",
+                        channelWriter.Reader
+                    )
                         .DefaultTimeout();
 
                     await channelWriter.Writer.WriteAsync("1").AsTask().DefaultTimeout();
@@ -1137,9 +1139,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     var stream = clientStreamData();
 
                     var channel = await connection.StreamAsChannelAsync<string>(
-                            "StreamEcho",
-                            stream
-                        )
+                        "StreamEcho",
+                        stream
+                    )
                         .DefaultTimeout();
 
                     Assert.Equal("A", await channel.ReadAsync().AsTask().DefaultTimeout());
@@ -1201,10 +1203,10 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                         async () =>
                         {
                             var channel = await connection.StreamAsChannelAsync<int>(
-                                    "StreamEchoInt",
-                                    stream,
-                                    cts.Token
-                                )
+                                "StreamEchoInt",
+                                stream,
+                                cts.Token
+                            )
                                 .DefaultTimeout();
 
                             while (await channel.WaitToReadAsync())
@@ -1314,10 +1316,10 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     var cts = new CancellationTokenSource();
 
                     var channel = await connection.StreamAsChannelAsync<int>(
-                            "Stream",
-                            1000,
-                            cts.Token
-                        )
+                        "Stream",
+                        1000,
+                        cts.Token
+                    )
                         .DefaultTimeout();
 
                     // Wait for the server to start streaming items
@@ -1465,8 +1467,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await connection.StartAsync().DefaultTimeout();
 
                     var ex = await Assert.ThrowsAsync<HubException>(
-                            () => connection.InvokeAsync("!@#$%")
-                        )
+                        () => connection.InvokeAsync("!@#$%")
+                    )
                         .DefaultTimeout();
                     Assert.Equal(
                         "Failed to invoke '!@#$%' due to an error on the server. HubException: Method does not exist.",
@@ -1509,8 +1511,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await connection.StartAsync().DefaultTimeout();
 
                     var ex = await Assert.ThrowsAsync<HubException>(
-                            () => connection.InvokeAsync("!@#$%", 10, "test")
-                        )
+                        () => connection.InvokeAsync("!@#$%", 10, "test")
+                    )
                         .DefaultTimeout();
                     Assert.Equal(
                         "Failed to invoke '!@#$%' due to an error on the server. HubException: Method does not exist.",
@@ -1551,8 +1553,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await connection.StartAsync().DefaultTimeout();
 
                     var ex = await Assert.ThrowsAsync<HubException>(
-                            () => connection.InvokeAsync("Echo", "p1", 42)
-                        )
+                        () => connection.InvokeAsync("Echo", "p1", 42)
+                    )
                         .DefaultTimeout();
                     Assert.Equal(
                         "Failed to invoke 'Echo' due to an error on the server. InvalidDataException: Invocation provides 2 argument(s) but target expects 1.",
@@ -1595,8 +1597,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await connection.StartAsync().DefaultTimeout();
 
                     var ex = await Assert.ThrowsAsync<HubException>(
-                            () => connection.InvokeAsync("Echo", new[] { 42 })
-                        )
+                        () => connection.InvokeAsync("Echo", new[] { 42 })
+                    )
                         .DefaultTimeout();
                     Assert.StartsWith(
                         "Failed to invoke 'Echo' due to an error on the server.",
@@ -1772,8 +1774,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     var channel = await connection.StreamAsChannelAsync<int>("HelloWorld")
                         .DefaultTimeout();
                     var ex = await Assert.ThrowsAsync<HubException>(
-                            () => channel.ReadAndCollectAllAsync()
-                        )
+                        () => channel.ReadAndCollectAllAsync()
+                    )
                         .DefaultTimeout();
                     Assert.Equal(
                         "The client attempted to invoke the non-streaming 'HelloWorld' method with a streaming invocation.",
@@ -1816,8 +1818,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await connection.StartAsync().DefaultTimeout();
 
                     var ex = await Assert.ThrowsAsync<HubException>(
-                            () => connection.InvokeAsync("Stream", 3)
-                        )
+                        () => connection.InvokeAsync("Stream", 3)
+                    )
                         .DefaultTimeout();
                     Assert.Equal(
                         "The client attempted to invoke the streaming 'Stream' method with a non-streaming invocation.",
@@ -1861,8 +1863,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     var channel = await connection.StreamAsChannelAsync<int>("StreamBroken")
                         .DefaultTimeout();
                     var ex = await Assert.ThrowsAsync<HubException>(
-                            () => channel.ReadAndCollectAllAsync()
-                        )
+                        () => channel.ReadAndCollectAllAsync()
+                    )
                         .DefaultTimeout();
                     Assert.Equal(
                         "The value returned by the streaming method 'StreamBroken' is not a ChannelReader<> or IAsyncEnumerable<>.",
@@ -2011,8 +2013,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await connection.StartAsync().DefaultTimeout();
 
                     var result = connection.InvokeAsync<string>(
-                            nameof(TestHub.GetUnserializableObject)
-                        )
+                        nameof(TestHub.GetUnserializableObject)
+                    )
                         .DefaultTimeout();
 
                     // The connection should close.
@@ -2085,15 +2087,15 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             {
                 async Task<string> AccessTokenProvider()
                 {
-                    var httpResponse = await new HttpClient().GetAsync(
-                        server.Url + "/generateJwtToken"
-                    );
+                    var httpResponse = await new HttpClient()
+                        .GetAsync(server.Url + "/generateJwtToken");
                     httpResponse.EnsureSuccessStatusCode();
                     return await httpResponse.Content.ReadAsStringAsync();
                 }
                 ;
 
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(
                         server.Url + "/authorizedhub",
                         transportType,
@@ -2107,9 +2109,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 {
                     await hubConnection.StartAsync().DefaultTimeout();
                     var message = await hubConnection.InvokeAsync<string>(
-                            nameof(TestHub.Echo),
-                            "Hello, World!"
-                        )
+                        nameof(TestHub.Echo),
+                        "Hello, World!"
+                    )
                         .DefaultTimeout();
                     Assert.Equal("Hello, World!", message);
                 }
@@ -2140,7 +2142,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
 
             await using (var server = await StartServer<Startup>(ExpectedErrors))
             {
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(server.Url + hubPath, transportType)
                     .Build();
                 try
@@ -2169,16 +2172,17 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         {
             await using (var server = await StartServer<Startup>())
             {
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(server.Url + "/redirect", transportType)
                     .Build();
                 try
                 {
                     await hubConnection.StartAsync().DefaultTimeout();
                     var message = await hubConnection.InvokeAsync<string>(
-                            nameof(TestHub.Echo),
-                            "Hello, World!"
-                        )
+                        nameof(TestHub.Echo),
+                        "Hello, World!"
+                    )
                         .DefaultTimeout();
                     Assert.Equal("Hello, World!", message);
                 }
@@ -2201,7 +2205,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         {
             await using (var server = await StartServer<Startup>())
             {
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(
                         server.Url + "/default",
                         transportType,
@@ -2216,9 +2221,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 {
                     await hubConnection.StartAsync().DefaultTimeout();
                     var headerValues = await hubConnection.InvokeAsync<string[]>(
-                            nameof(TestHub.GetHeaderValues),
-                            new[] { "X-test", "X-42" }
-                        )
+                        nameof(TestHub.GetHeaderValues),
+                        new[] { "X-test", "X-42" }
+                    )
                         .DefaultTimeout();
                     Assert.Equal(new[] { "42", "test" }, headerValues);
                 }
@@ -2240,7 +2245,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         {
             await using (var server = await StartServer<Startup>())
             {
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(
                         server.Url + "/default",
                         HttpTransportType.LongPolling,
@@ -2255,9 +2261,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 {
                     await hubConnection.StartAsync().DefaultTimeout();
                     var headerValues = await hubConnection.InvokeAsync<string[]>(
-                            nameof(TestHub.GetHeaderValues),
-                            new[] { "User-Agent" }
-                        )
+                        nameof(TestHub.GetHeaderValues),
+                        new[] { "User-Agent" }
+                    )
                         .DefaultTimeout();
                     Assert.NotNull(headerValues);
                     Assert.Single(headerValues);
@@ -2289,7 +2295,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         {
             await using (var server = await StartServer<Startup>())
             {
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(
                         server.Url + "/default",
                         HttpTransportType.LongPolling,
@@ -2303,9 +2310,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 {
                     await hubConnection.StartAsync().DefaultTimeout();
                     var headerValues = await hubConnection.InvokeAsync<string[]>(
-                            nameof(TestHub.GetHeaderValues),
-                            new[] { "User-Agent" }
-                        )
+                        nameof(TestHub.GetHeaderValues),
+                        new[] { "User-Agent" }
+                    )
                         .DefaultTimeout();
                     Assert.NotNull(headerValues);
                     Assert.Single(headerValues);
@@ -2332,7 +2339,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         {
             await using (var server = await StartServer<Startup>())
             {
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(
                         server.Url + "/default",
                         HttpTransportType.LongPolling,
@@ -2346,9 +2354,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 {
                     await hubConnection.StartAsync().DefaultTimeout();
                     var headerValues = await hubConnection.InvokeAsync<string[]>(
-                            nameof(TestHub.GetHeaderValues),
-                            new[] { "User-Agent" }
-                        )
+                        nameof(TestHub.GetHeaderValues),
+                        new[] { "User-Agent" }
+                    )
                         .DefaultTimeout();
                     Assert.NotNull(headerValues);
                     Assert.Single(headerValues);
@@ -2380,7 +2388,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 var cookieJar = new System.Net.CookieContainer();
                 cookieJar.Add(new System.Net.Cookie("Foo", "Bar", "/", new Uri(server.Url).Host));
 
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(
                         server.Url + "/default",
                         HttpTransportType.WebSockets,
@@ -2394,9 +2403,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 {
                     await hubConnection.StartAsync().DefaultTimeout();
                     var cookieValue = await hubConnection.InvokeAsync<string>(
-                            nameof(TestHub.GetCookieValue),
-                            "Foo"
-                        )
+                        nameof(TestHub.GetCookieValue),
+                        "Foo"
+                    )
                         .DefaultTimeout();
                     Assert.Equal("Bar", cookieValue);
                 }
@@ -2419,16 +2428,17 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         {
             await using (var server = await StartServer<Startup>())
             {
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(server.Url + "/default", HttpTransportType.WebSockets)
                     .Build();
                 try
                 {
                     await hubConnection.StartAsync().DefaultTimeout();
                     var cookieValue = await hubConnection.InvokeAsync<string>(
-                            nameof(TestHub.GetCookieValue),
-                            "fromNegotiate"
-                        )
+                        nameof(TestHub.GetCookieValue),
+                        "fromNegotiate"
+                    )
                         .DefaultTimeout();
                     Assert.Equal("a value", cookieValue);
                 }
@@ -2450,7 +2460,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         {
             await using (var server = await StartServer<Startup>())
             {
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(server.Url + "/default")
                     .Build();
                 try
@@ -2458,8 +2469,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     var features = await hubConnection.InvokeAsync<JsonElement[]>(
-                            nameof(TestHub.GetIHttpConnectionFeatureProperties)
-                        )
+                        nameof(TestHub.GetIHttpConnectionFeatureProperties)
+                    )
                         .DefaultTimeout();
                     var localPort = features[0].GetInt64();
                     var remotePort = features[1].GetInt64();
@@ -2489,7 +2500,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         {
             await using (var server = await StartServer<Startup>())
             {
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(
                         server.Url + "/default",
                         options =>
@@ -2503,8 +2515,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     var userIdentifier = await hubConnection.InvokeAsync<string>(
-                            nameof(TestHub.GetUserIdentifier)
-                        )
+                        nameof(TestHub.GetUserIdentifier)
+                    )
                         .DefaultTimeout();
                     Assert.Equal("SuperAdmin", userIdentifier);
                 }
@@ -2526,9 +2538,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         {
             await using (var server = await StartServer<Startup>())
             {
-                var hubConnectionBuilder = new HubConnectionBuilder().WithLoggerFactory(
-                        LoggerFactory
-                    )
+                var hubConnectionBuilder = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .AddMessagePackProtocol()
                     .WithUrl(server.Url + "/default-nowebsockets");
 
@@ -2538,8 +2549,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     var transport = await hubConnection.InvokeAsync<HttpTransportType>(
-                            nameof(TestHub.GetActiveTransportName)
-                        )
+                        nameof(TestHub.GetActiveTransportName)
+                    )
                         .DefaultTimeout();
                     Assert.Equal(HttpTransportType.LongPolling, transport);
                 }
@@ -2562,7 +2573,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             await using (var server = await StartServer<Startup>())
             {
                 PollTrackingMessageHandler pollTracker = null;
-                var hubConnection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var hubConnection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(
                         server.Url + "/default",
                         options =>
@@ -2652,9 +2664,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     Assert.Equal(connection.ConnectionId, newConnectionId);
 
                     var result = await connection.InvokeAsync<string>(
-                            nameof(TestHub.Echo),
-                            echoMessage
-                        )
+                        nameof(TestHub.Echo),
+                        echoMessage
+                    )
                         .DefaultTimeout();
                     Assert.Equal(echoMessage, result);
                 }
@@ -2682,7 +2694,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
 
             await using (var server = await StartServer<Startup>(ExpectedErrors))
             {
-                var connection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var connection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(server.Url + "/redirect")
                     .WithAutomaticReconnect()
                     .Build();
@@ -2720,9 +2733,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     Assert.Equal(connection.ConnectionId, newConnectionId);
 
                     var result = await connection.InvokeAsync<string>(
-                            nameof(TestHub.Echo),
-                            echoMessage
-                        )
+                        nameof(TestHub.Echo),
+                        echoMessage
+                    )
                         .DefaultTimeout();
                     Assert.Equal(echoMessage, result);
                 }
@@ -2750,7 +2763,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
 
             await using (var server = await StartServer<Startup>(ExpectedErrors))
             {
-                var connectionBuilder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var connectionBuilder = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(server.Url + HubPaths.First(), HttpTransportType.WebSockets)
                     .WithAutomaticReconnect();
 
@@ -2796,9 +2810,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     Assert.Null(connection.ConnectionId);
 
                     var result = await connection.InvokeAsync<string>(
-                            nameof(TestHub.Echo),
-                            echoMessage
-                        )
+                        nameof(TestHub.Echo),
+                        echoMessage
+                    )
                         .DefaultTimeout();
                     Assert.Equal(echoMessage, result);
                 }

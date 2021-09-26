@@ -141,14 +141,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             {
                 var runningDocumentTable =
                     (IVsRunningDocumentTable?)await asyncServiceProvider.GetServiceAsync(
-                            typeof(SVsRunningDocumentTable)
-                        )
+                        typeof(SVsRunningDocumentTable)
+                    )
                         .ConfigureAwait(true);
                 Assumes.Present(runningDocumentTable);
 
                 var componentModel = (IComponentModel?)await asyncServiceProvider.GetServiceAsync(
-                        typeof(SComponentModel)
-                    )
+                    typeof(SComponentModel)
+                )
                     .ConfigureAwait(true);
                 Assumes.Present(componentModel);
 
@@ -166,9 +166,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _workspace.ApplyChangeToWorkspace(
                     w =>
                     {
-                        var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                            moniker
-                        );
+                        var documentIds = _workspace.CurrentSolution
+                            .GetDocumentIdsWithFilePath(moniker);
                         if (documentIds.IsDefaultOrEmpty)
                         {
                             return;
@@ -348,9 +347,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _workspace.ApplyChangeToWorkspace(
                     w =>
                     {
-                        var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                            moniker
-                        );
+                        var documentIds = _workspace.CurrentSolution
+                            .GetDocumentIdsWithFilePath(moniker);
                         if (documentIds.IsDefaultOrEmpty || documentIds.Length == 1)
                         {
                             return;
@@ -500,14 +498,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     );
 
                     Task.Run(
-                            async () =>
-                            {
-                                await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                        async () =>
+                        {
+                            await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory
+                                .SwitchToMainThreadAsync();
 
-                                ProcessQueuedWorkOnUIThread();
-                            }
-                        )
-                        .CompletesAsyncOperation(asyncToken);
+                            ProcessQueuedWorkOnUIThread();
+                        }
+                    ).CompletesAsyncOperation(asyncToken);
                 }
             }
 

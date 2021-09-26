@@ -146,10 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestHiddenProperty(
                 (old, value) => old.WithSpecificDiagnosticOptions(value),
                 opt => opt.SpecificDiagnosticOptions,
-                new Dictionary<string, ReportDiagnostic>
-                {
-                    { "CS0001", ReportDiagnostic.Error }
-                }.ToImmutableDictionary()
+                new Dictionary<string, ReportDiagnostic> { { "CS0001", ReportDiagnostic.Error } }
+                    .ToImmutableDictionary()
             );
             TestHiddenProperty(
                 (old, value) => old.WithReportSuppressedDiagnostics(value),
@@ -269,10 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestProperty(
                 (old, value) => old.WithSpecificDiagnosticOptions(value),
                 opt => opt.SpecificDiagnosticOptions,
-                new Dictionary<string, ReportDiagnostic>
-                {
-                    { "CS0001", ReportDiagnostic.Error }
-                }.ToImmutableDictionary()
+                new Dictionary<string, ReportDiagnostic> { { "CS0001", ReportDiagnostic.Error } }
+                    .ToImmutableDictionary()
             );
             TestProperty(
                 (old, value) => old.WithReportSuppressedDiagnostics(value),
@@ -342,23 +338,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void WithXxx()
         {
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithScriptClassName(null)
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithScriptClassName(null)
                 .VerifyErrors(
                     // error CS7088: Invalid 'ScriptClassName' value: 'null'.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
                         .WithArguments("ScriptClassName", "null")
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithScriptClassName(
-                    "blah\0goo"
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithScriptClassName("blah\0goo")
                 .VerifyErrors(
                     // error CS7088: Invalid 'ScriptClassName' value: 'blah\0goo'.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
                         .WithArguments("ScriptClassName", "blah\0goo")
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithScriptClassName("")
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithScriptClassName("")
                 .VerifyErrors(
                     // error CS7088: Invalid 'ScriptClassName' value: ''.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
@@ -367,74 +364,67 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             Assert.Equal(
                 0,
-                new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithMainTypeName(
-                    null
-                ).Errors.Length
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                    .WithMainTypeName(null).Errors.Length
             );
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithMainTypeName(
-                    "blah\0goo"
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithMainTypeName("blah\0goo")
                 .VerifyErrors(
                     // error CS7088: Invalid 'MainTypeName' value: 'blah\0goo'.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
                         .WithArguments("MainTypeName", "blah\0goo")
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithMainTypeName("")
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithMainTypeName("")
                 .VerifyErrors(
                     // error CS7088: Invalid 'MainTypeName' value: ''.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
                         .WithArguments("MainTypeName", "")
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithOutputKind(
-                    (OutputKind)Int32.MaxValue
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithOutputKind((OutputKind)Int32.MaxValue)
                 .VerifyErrors(
                     // error CS7088: Invalid 'OutputKind' value: 'Int32.MaxValue'.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
                         .WithArguments("OutputKind", Int32.MaxValue.ToString())
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithOutputKind(
-                    (OutputKind)Int32.MinValue
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithOutputKind((OutputKind)Int32.MinValue)
                 .VerifyErrors(
                     // error CS7088: Invalid 'OutputKind' value: 'Int32.MinValue'.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
                         .WithArguments("OutputKind", Int32.MinValue.ToString())
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithOptimizationLevel(
-                    (OptimizationLevel)Int32.MaxValue
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithOptimizationLevel((OptimizationLevel)Int32.MaxValue)
                 .VerifyErrors(
                     // error CS7088: Invalid 'OptimizationLevel' value: 'Int32.MaxValue'.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
                         .WithArguments("OptimizationLevel", Int32.MaxValue.ToString())
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithOptimizationLevel(
-                    (OptimizationLevel)Int32.MinValue
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithOptimizationLevel((OptimizationLevel)Int32.MinValue)
                 .VerifyErrors(
                     // error CS7088: Invalid 'OptimizationLevel' value: 'Int32.MinValue'.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
                         .WithArguments("OptimizationLevel", Int32.MinValue.ToString())
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithPlatform(
-                    (Platform)Int32.MaxValue
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithPlatform((Platform)Int32.MaxValue)
                 .VerifyErrors(
                     // error CS1672: Invalid option 'Int32.MaxValue' for /platform; must be anycpu, x86, Itanium or x64
                     Diagnostic(ErrorCode.ERR_BadPlatformType)
                         .WithArguments(Int32.MaxValue.ToString())
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithPlatform(
-                    (Platform)Int32.MinValue
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithPlatform((Platform)Int32.MinValue)
                 .VerifyErrors(
                     // error CS1672: Invalid option 'Int32.MinValue' for /platform; must be anycpu, x86, Itanium or x64
                     Diagnostic(ErrorCode.ERR_BadPlatformType)
@@ -447,15 +437,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             Assert.Equal(
                 ReportDiagnostic.Error,
-                new CSharpCompilationOptions(
-                    OutputKind.ConsoleApplication
-                ).WithGeneralDiagnosticOption(ReportDiagnostic.Error).GeneralDiagnosticOption
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                    .WithGeneralDiagnosticOption(ReportDiagnostic.Error).GeneralDiagnosticOption
             );
             Assert.Equal(
                 ReportDiagnostic.Default,
-                new CSharpCompilationOptions(
-                    OutputKind.ConsoleApplication
-                ).WithGeneralDiagnosticOption(ReportDiagnostic.Default).GeneralDiagnosticOption
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                    .WithGeneralDiagnosticOption(ReportDiagnostic.Default).GeneralDiagnosticOption
             );
         }
 
@@ -463,50 +451,47 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void WithUsings()
         {
             var actual1 =
-                new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithUsings(
-                    new[] { "A", "B" }
-                ).Usings;
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                    .WithUsings(new[] { "A", "B" }).Usings;
             Assert.True(actual1.SequenceEqual(new[] { "A", "B" }));
 
             var actual2 =
-                new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithUsings(
-                    Enumerable.Repeat("A", 1)
-                ).Usings;
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                    .WithUsings(Enumerable.Repeat("A", 1)).Usings;
             Assert.True(actual2.SequenceEqual(Enumerable.Repeat("A", 1)));
 
             Assert.Equal(
                 0,
-                new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithUsings("A", "B")
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                    .WithUsings("A", "B")
                     .WithUsings(null)
                     .Usings.Count()
             );
             Assert.Equal(
                 0,
-                new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithUsings("A", "B")
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                    .WithUsings("A", "B")
                     .WithUsings((string[])null)
                     .Usings.Count()
             );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithUsings(
-                    new string[] { null }
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithUsings(new string[] { null })
                 .VerifyErrors(
                     // error CS7088: Invalid 'Usings' value: 'null'.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
                         .WithArguments("Usings", "null")
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithUsings(
-                    new string[] { "" }
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithUsings(new string[] { "" })
                 .VerifyErrors(
                     // error CS7088: Invalid 'Usings' value: ''.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("Usings", "")
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithUsings(
-                    new string[] { "blah\0goo" }
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithUsings(new string[] { "blah\0goo" })
                 .VerifyErrors(
                     // error CS7088: Invalid 'Usings' value: 'blah\0goo'.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
@@ -526,36 +511,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             Assert.Equal(
                 3,
-                new CSharpCompilationOptions(
-                    OutputKind.ConsoleApplication
-                ).WithSpecificDiagnosticOptions(warnings).SpecificDiagnosticOptions.Count
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                    .WithSpecificDiagnosticOptions(warnings).SpecificDiagnosticOptions.Count
             );
 
             Assert.Equal(
                 0,
-                new CSharpCompilationOptions(
-                    OutputKind.ConsoleApplication
-                ).WithSpecificDiagnosticOptions(null).SpecificDiagnosticOptions.Count
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                    .WithSpecificDiagnosticOptions(null).SpecificDiagnosticOptions.Count
             );
 
             Assert.Equal(
                 1,
-                new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithWarningLevel(
-                    1
-                ).WarningLevel
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                    .WithWarningLevel(1).WarningLevel
             );
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithWarningLevel(-1)
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithWarningLevel(-1)
                 .VerifyErrors(
                     // error CS7088: Invalid 'WarningLevel' value: '-1'.
                     Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
                         .WithArguments("WarningLevel", "-1")
                 );
 
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithWarningLevel(5)
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithWarningLevel(5)
                 .VerifyErrors();
-            new CSharpCompilationOptions(OutputKind.ConsoleApplication).WithWarningLevel(
-                    int.MaxValue
-                )
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithWarningLevel(int.MaxValue)
                 .VerifyErrors();
         }
 
@@ -564,53 +547,47 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // ModuleName
             Assert.Null(TestOptions.ReleaseDll.WithModuleName(null).ModuleName);
-            TestOptions.ReleaseDll.WithModuleName("")
-                .VerifyErrors(
-                    // error CS7087: Invalid module name: Name cannot be empty.
-                    Diagnostic(ErrorCode.ERR_BadModuleName)
-                        .WithArguments("Name cannot be empty.")
-                        .WithLocation(1, 1)
-                );
+            TestOptions.ReleaseDll.WithModuleName("").VerifyErrors(
+                // error CS7087: Invalid module name: Name cannot be empty.
+                Diagnostic(ErrorCode.ERR_BadModuleName)
+                    .WithArguments("Name cannot be empty.")
+                    .WithLocation(1, 1)
+            );
 
-            TestOptions.ReleaseDll.WithModuleName("a\0a")
-                .VerifyErrors(
-                    // error CS7087: Invalid module name: Name contains invalid characters.
-                    Diagnostic(ErrorCode.ERR_BadModuleName)
-                        .WithArguments("Name contains invalid characters.")
-                        .WithLocation(1, 1)
-                );
+            TestOptions.ReleaseDll.WithModuleName("a\0a").VerifyErrors(
+                // error CS7087: Invalid module name: Name contains invalid characters.
+                Diagnostic(ErrorCode.ERR_BadModuleName)
+                    .WithArguments("Name contains invalid characters.")
+                    .WithLocation(1, 1)
+            );
 
-            TestOptions.ReleaseDll.WithModuleName("a\uD800b")
-                .VerifyErrors(
-                    // error CS7087: Invalid module name: Name contains invalid characters.
-                    Diagnostic(ErrorCode.ERR_BadModuleName)
-                        .WithArguments("Name contains invalid characters.")
-                        .WithLocation(1, 1)
-                );
+            TestOptions.ReleaseDll.WithModuleName("a\uD800b").VerifyErrors(
+                // error CS7087: Invalid module name: Name contains invalid characters.
+                Diagnostic(ErrorCode.ERR_BadModuleName)
+                    .WithArguments("Name contains invalid characters.")
+                    .WithLocation(1, 1)
+            );
 
-            TestOptions.ReleaseDll.WithModuleName("a\\b")
-                .VerifyErrors(
-                    // error CS7087: Invalid module name: Name contains invalid characters.
-                    Diagnostic(ErrorCode.ERR_BadModuleName)
-                        .WithArguments("Name contains invalid characters.")
-                        .WithLocation(1, 1)
-                );
+            TestOptions.ReleaseDll.WithModuleName("a\\b").VerifyErrors(
+                // error CS7087: Invalid module name: Name contains invalid characters.
+                Diagnostic(ErrorCode.ERR_BadModuleName)
+                    .WithArguments("Name contains invalid characters.")
+                    .WithLocation(1, 1)
+            );
 
-            TestOptions.ReleaseDll.WithModuleName("a/b")
-                .VerifyErrors(
-                    // error CS7087: Invalid module name: Name contains invalid characters.
-                    Diagnostic(ErrorCode.ERR_BadModuleName)
-                        .WithArguments("Name contains invalid characters.")
-                        .WithLocation(1, 1)
-                );
+            TestOptions.ReleaseDll.WithModuleName("a/b").VerifyErrors(
+                // error CS7087: Invalid module name: Name contains invalid characters.
+                Diagnostic(ErrorCode.ERR_BadModuleName)
+                    .WithArguments("Name contains invalid characters.")
+                    .WithLocation(1, 1)
+            );
 
-            TestOptions.ReleaseDll.WithModuleName("a:b")
-                .VerifyErrors(
-                    // error CS7087: Invalid module name: Name contains invalid characters.
-                    Diagnostic(ErrorCode.ERR_BadModuleName)
-                        .WithArguments("Name contains invalid characters.")
-                        .WithLocation(1, 1)
-                );
+            TestOptions.ReleaseDll.WithModuleName("a:b").VerifyErrors(
+                // error CS7087: Invalid module name: Name contains invalid characters.
+                Diagnostic(ErrorCode.ERR_BadModuleName)
+                    .WithArguments("Name contains invalid characters.")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
@@ -619,27 +596,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             new CSharpCompilationOptions(
                 OutputKind.ConsoleApplication,
                 usings: new string[] { null }
-            ).VerifyErrors(
-                // error CS7088: Invalid 'Usings' value: 'null'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("Usings", "null")
-            );
+            )
+                .VerifyErrors(
+                    // error CS7088: Invalid 'Usings' value: 'null'.
+                    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                        .WithArguments("Usings", "null")
+                );
 
-            new CSharpCompilationOptions(
-                OutputKind.ConsoleApplication,
-                usings: new string[] { "" }
-            ).VerifyErrors(
-                // error CS7088: Invalid 'Usings' value: ''.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("Usings", "")
-            );
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication, usings: new string[] { "" })
+                .VerifyErrors(
+                    // error CS7088: Invalid 'Usings' value: ''.
+                    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("Usings", "")
+                );
 
             new CSharpCompilationOptions(
                 OutputKind.ConsoleApplication,
                 usings: new string[] { "blah\0goo" }
-            ).VerifyErrors(
-                // error CS7088: Invalid 'Usings' value: 'blah\0goo'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
-                    .WithArguments("Usings", "blah\0goo")
-            );
+            )
+                .VerifyErrors(
+                    // error CS7088: Invalid 'Usings' value: 'blah\0goo'.
+                    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                        .WithArguments("Usings", "blah\0goo")
+                );
 
             Assert.Equal(
                 "Script",
@@ -652,20 +630,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             new CSharpCompilationOptions(
                 OutputKind.ConsoleApplication,
                 scriptClassName: "blah\0goo"
-            ).VerifyErrors(
-                // error CS7088: Invalid 'ScriptClassName' value: 'blah\0goo'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
-                    .WithArguments("ScriptClassName", "blah\0goo")
-            );
+            )
+                .VerifyErrors(
+                    // error CS7088: Invalid 'ScriptClassName' value: 'blah\0goo'.
+                    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                        .WithArguments("ScriptClassName", "blah\0goo")
+                );
 
-            new CSharpCompilationOptions(
-                OutputKind.ConsoleApplication,
-                scriptClassName: ""
-            ).VerifyErrors(
-                // error CS7088: Invalid 'ScriptClassName' value: ''.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
-                    .WithArguments("ScriptClassName", "")
-            );
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication, scriptClassName: "")
+                .VerifyErrors(
+                    // error CS7088: Invalid 'ScriptClassName' value: ''.
+                    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                        .WithArguments("ScriptClassName", "")
+                );
 
             Assert.Equal(
                 0,
@@ -674,23 +651,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     mainTypeName: null
                 ).Errors.Length
             );
-            new CSharpCompilationOptions(
-                OutputKind.ConsoleApplication,
-                mainTypeName: "blah\0goo"
-            ).VerifyErrors(
-                // error CS7088: Invalid 'MainTypeName' value: 'blah\0goo'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
-                    .WithArguments("MainTypeName", "blah\0goo")
-            );
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication, mainTypeName: "blah\0goo")
+                .VerifyErrors(
+                    // error CS7088: Invalid 'MainTypeName' value: 'blah\0goo'.
+                    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                        .WithArguments("MainTypeName", "blah\0goo")
+                );
 
-            new CSharpCompilationOptions(
-                OutputKind.ConsoleApplication,
-                mainTypeName: ""
-            ).VerifyErrors(
-                // error CS7088: Invalid 'MainTypeName' value: ''.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
-                    .WithArguments("MainTypeName", "")
-            );
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication, mainTypeName: "")
+                .VerifyErrors(
+                    // error CS7088: Invalid 'MainTypeName' value: ''.
+                    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                        .WithArguments("MainTypeName", "")
+                );
 
             new CSharpCompilationOptions(outputKind: (OutputKind)Int32.MaxValue).VerifyErrors(
                 // error CS7088: Invalid 'OutputKind' value: 'Int32.MaxValue'.
@@ -707,66 +680,68 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             new CSharpCompilationOptions(
                 OutputKind.ConsoleApplication,
                 optimizationLevel: (OptimizationLevel)Int32.MaxValue
-            ).VerifyErrors(
-                // error CS7088: Invalid 'OptimizationLevel' value: 'Int32.MaxValue'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
-                    .WithArguments("OptimizationLevel", Int32.MaxValue.ToString())
-            );
+            )
+                .VerifyErrors(
+                    // error CS7088: Invalid 'OptimizationLevel' value: 'Int32.MaxValue'.
+                    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                        .WithArguments("OptimizationLevel", Int32.MaxValue.ToString())
+                );
 
             new CSharpCompilationOptions(
                 OutputKind.ConsoleApplication,
                 optimizationLevel: (OptimizationLevel)Int32.MinValue
-            ).VerifyErrors(
-                // error CS7088: Invalid 'OptimizationLevel' value: 'Int32.MinValue'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
-                    .WithArguments("OptimizationLevel", Int32.MinValue.ToString())
-            );
+            )
+                .VerifyErrors(
+                    // error CS7088: Invalid 'OptimizationLevel' value: 'Int32.MinValue'.
+                    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                        .WithArguments("OptimizationLevel", Int32.MinValue.ToString())
+                );
 
             new CSharpCompilationOptions(
                 OutputKind.ConsoleApplication,
                 platform: (Platform)Int32.MinValue
-            ).VerifyErrors(
-                // error CS1672: Invalid option 'Int32.MinValue' for /platform; must be anycpu, x86, Itanium or x64
-                Diagnostic(ErrorCode.ERR_BadPlatformType).WithArguments(Int32.MinValue.ToString())
-            );
+            )
+                .VerifyErrors(
+                    // error CS1672: Invalid option 'Int32.MinValue' for /platform; must be anycpu, x86, Itanium or x64
+                    Diagnostic(ErrorCode.ERR_BadPlatformType)
+                        .WithArguments(Int32.MinValue.ToString())
+                );
 
-            new CSharpCompilationOptions(
-                OutputKind.ConsoleApplication,
-                warningLevel: -1
-            ).VerifyErrors(
-                // error CS7088: Invalid 'WarningLevel' value: '-1'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
-                    .WithArguments("WarningLevel", "-1")
-            );
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication, warningLevel: -1)
+                .VerifyErrors(
+                    // error CS7088: Invalid 'WarningLevel' value: '-1'.
+                    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                        .WithArguments("WarningLevel", "-1")
+                );
 
-            new CSharpCompilationOptions(
-                OutputKind.ConsoleApplication,
-                warningLevel: 5
-            ).VerifyErrors();
-            new CSharpCompilationOptions(
-                OutputKind.ConsoleApplication,
-                warningLevel: int.MaxValue
-            ).VerifyErrors();
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication, warningLevel: 5)
+                .VerifyErrors();
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication, warningLevel: int.MaxValue)
+                .VerifyErrors();
 
             new CSharpCompilationOptions(
                 OutputKind.ConsoleApplication,
                 platform: Platform.AnyCpu32BitPreferred
-            ).VerifyErrors();
+            )
+                .VerifyErrors();
 
             new CSharpCompilationOptions(
                 OutputKind.WindowsRuntimeApplication,
                 platform: Platform.AnyCpu32BitPreferred
-            ).VerifyErrors();
+            )
+                .VerifyErrors();
 
             new CSharpCompilationOptions(
                 OutputKind.WindowsRuntimeMetadata,
                 platform: Platform.AnyCpu32BitPreferred
-            ).VerifyErrors(Diagnostic(ErrorCode.ERR_BadPrefer32OnLib));
+            )
+                .VerifyErrors(Diagnostic(ErrorCode.ERR_BadPrefer32OnLib));
 
             new CSharpCompilationOptions(
                 OutputKind.DynamicallyLinkedLibrary,
                 platform: Platform.AnyCpu32BitPreferred
-            ).VerifyErrors(Diagnostic(ErrorCode.ERR_BadPrefer32OnLib));
+            )
+                .VerifyErrors(Diagnostic(ErrorCode.ERR_BadPrefer32OnLib));
         }
 
         /// <summary>
@@ -909,9 +884,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication).NullableContextOptions
             );
 
-            var values = (NullableContextOptions[])System.Enum.GetValues(
-                typeof(NullableContextOptions)
-            );
+            var values = (NullableContextOptions[])System.Enum
+                .GetValues(typeof(NullableContextOptions));
             var options = new CSharpCompilationOptions[values.Length];
 
             for (int i = 0; i < values.Length; i++)

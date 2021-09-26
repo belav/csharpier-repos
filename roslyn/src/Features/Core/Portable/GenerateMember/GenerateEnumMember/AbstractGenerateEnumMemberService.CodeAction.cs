@@ -34,10 +34,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                 CancellationToken cancellationToken
             )
             {
-                var languageServices =
-                    _document.Project.Solution.Workspace.Services.GetLanguageServices(
-                        _state.TypeToGenerateIn.Language
-                    );
+                var languageServices = _document.Project.Solution.Workspace.Services
+                    .GetLanguageServices(_state.TypeToGenerateIn.Language);
                 var codeGenerator = languageServices.GetService<ICodeGenerationService>();
                 var semanticFacts = languageServices.GetService<ISemanticFactsService>();
 
@@ -46,22 +44,22 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                     : null;
 
                 var result = await codeGenerator.AddFieldAsync(
-                        _document.Project.Solution,
-                        _state.TypeToGenerateIn,
-                        CodeGenerationSymbolFactory.CreateFieldSymbol(
-                            attributes: default,
-                            accessibility: Accessibility.Public,
-                            modifiers: default,
-                            type: _state.TypeToGenerateIn,
-                            name: _state.IdentifierToken.ValueText,
-                            hasConstantValue: value != null,
-                            constantValue: value
-                        ),
-                        new CodeGenerationOptions(
-                            contextLocation: _state.IdentifierToken.GetLocation()
-                        ),
-                        cancellationToken
-                    )
+                    _document.Project.Solution,
+                    _state.TypeToGenerateIn,
+                    CodeGenerationSymbolFactory.CreateFieldSymbol(
+                        attributes: default,
+                        accessibility: Accessibility.Public,
+                        modifiers: default,
+                        type: _state.TypeToGenerateIn,
+                        name: _state.IdentifierToken.ValueText,
+                        hasConstantValue: value != null,
+                        constantValue: value
+                    ),
+                    new CodeGenerationOptions(
+                        contextLocation: _state.IdentifierToken.GetLocation()
+                    ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return result;
@@ -73,11 +71,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                 {
                     var text = FeaturesResources.Generate_enum_member_1_0;
 
-                    return string.Format(
-                        text,
-                        _state.IdentifierToken.ValueText,
-                        _state.TypeToGenerateIn.Name
-                    );
+                    return string
+                        .Format(
+                            text,
+                            _state.IdentifierToken.ValueText,
+                            _state.TypeToGenerateIn.Name
+                        );
                 }
             }
         }

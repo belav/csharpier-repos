@@ -29,9 +29,8 @@ namespace ResponseCompressionSample
                     options.Providers.Add<GzipCompressionProvider>();
                     options.Providers.Add<CustomCompressionProvider>();
                     // .Append(TItem) is only available on Core.
-                    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                        new[] { "image/svg+xml" }
-                    );
+                    options.MimeTypes = ResponseCompressionDefaults.MimeTypes
+                        .Concat(new[] { "image/svg+xml" });
                     ////Example of using excluded and wildcard MIME types:
                     ////Compress all MIME types except various media types, but do compress SVG images.
                     //options.MimeTypes = new[] { "*/*", "image/svg+xml" };
@@ -92,19 +91,16 @@ namespace ResponseCompressionSample
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel()
-                            .ConfigureLogging(
-                                factory =>
-                                {
-                                    factory.AddConsole().SetMinimumLevel(LogLevel.Debug);
-                                }
-                            )
-                            .UseStartup<Startup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel().ConfigureLogging(
+                        factory =>
+                        {
+                            factory.AddConsole().SetMinimumLevel(LogLevel.Debug);
+                        }
+                    ).UseStartup<Startup>();
+                }
+            ).Build();
 
             return host.RunAsync();
         }

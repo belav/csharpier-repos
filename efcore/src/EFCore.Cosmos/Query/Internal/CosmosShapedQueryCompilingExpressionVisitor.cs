@@ -73,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         jObjectParameter,
                         QueryCompilationContext.QueryTrackingBehavior
                             == QueryTrackingBehavior.TrackAll
-                    ).Visit(shaperBody);
+                    )
+                        .Visit(shaperBody);
 
                     var shaperLambda = Expression.Lambda(
                         shaperBody,
@@ -82,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     );
 
                     return Expression.New(
-                        typeof(QueryingEnumerable<>).MakeGenericType(shaperLambda.ReturnType)
+                        typeof(QueryingEnumerable<>)
+                            .MakeGenericType(shaperLambda.ReturnType)
                             .GetConstructors()[0],
                         Expression.Convert(
                             QueryCompilationContext.QueryContextParameter,
@@ -108,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         jObjectParameter,
                         QueryCompilationContext.QueryTrackingBehavior
                             == QueryTrackingBehavior.TrackAll
-                    ).Visit(shaperBody);
+                    )
+                        .Visit(shaperBody);
 
                     var shaperReadItemLambda = Expression.Lambda(
                         shaperBody,
@@ -117,9 +120,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     );
 
                     return Expression.New(
-                        typeof(ReadItemQueryingEnumerable<>).MakeGenericType(
-                                shaperReadItemLambda.ReturnType
-                            )
+                        typeof(ReadItemQueryingEnumerable<>)
+                            .MakeGenericType(shaperReadItemLambda.ReturnType)
                             .GetConstructors()[0],
                         Expression.Convert(
                             QueryCompilationContext.QueryContextParameter,

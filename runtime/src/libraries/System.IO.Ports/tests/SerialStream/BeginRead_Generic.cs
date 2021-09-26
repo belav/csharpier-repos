@@ -183,13 +183,8 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com2.Open();
 
-                readAsyncResult = com2.BaseStream.BeginWrite(
-                    bytesToWrite,
-                    0,
-                    bytesToWrite.Length,
-                    null,
-                    null
-                );
+                readAsyncResult = com2.BaseStream
+                    .BeginWrite(bytesToWrite, 0, bytesToWrite.Length, null, null);
                 com2.BaseStream.EndWrite(readAsyncResult);
 
                 com1.Read(actualBytes, 0, actualBytes.Length);
@@ -399,9 +394,8 @@ namespace System.IO.Ports.Tests
 
             while (0 != com1.BytesToRead)
             {
-                int bytesRead = com1.BaseStream.EndRead(
-                    com1.BaseStream.BeginRead(rcvBuffer, 0, rcvBufferSize, null, null)
-                );
+                int bytesRead = com1.BaseStream
+                    .EndRead(com1.BaseStream.BeginRead(rcvBuffer, 0, rcvBufferSize, null, null));
 
                 // While their are more characters to be read
                 if (

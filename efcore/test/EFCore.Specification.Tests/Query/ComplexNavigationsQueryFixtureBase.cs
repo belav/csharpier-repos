@@ -297,10 +297,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 { typeof(InheritanceDerived2), e => ((InheritanceDerived2)e)?.Id },
                 { typeof(InheritanceLeaf1), e => ((InheritanceLeaf1)e)?.Id },
                 { typeof(InheritanceLeaf2), e => ((InheritanceLeaf2)e)?.Id }
-            }.ToDictionary(e => e.Key, e => (object)e.Value);
+            }
+                .ToDictionary(e => e.Key, e => (object)e.Value);
 
-        public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
-            new Dictionary<Type, Action<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntityAsserters() => new Dictionary<
+                Type,
+                Action<object, object>
+            >
             {
                 {
                     typeof(Level1),
@@ -696,12 +699,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             ComplexNavigationsData.Seed(context);
 
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-            base.AddOptions(builder)
+            base
+                .AddOptions(builder)
                 .ConfigureWarnings(
                     c =>
                         c.Log(
-                                CoreEventId.PossibleUnintendedCollectionNavigationNullComparisonWarning
-                            )
+                            CoreEventId.PossibleUnintendedCollectionNavigationNullComparisonWarning
+                        )
                             .Log(CoreEventId.RowLimitingOperationWithoutOrderByWarning)
                 );
 

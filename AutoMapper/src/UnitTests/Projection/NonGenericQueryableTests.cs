@@ -42,7 +42,8 @@
                         new Actor() { Name = "Actor 4" }
                     }
                 }
-            }.AsQueryable();
+            }
+                .AsQueryable();
 
             var mapped = movies.ProjectTo<MovieDto>(_config);
 

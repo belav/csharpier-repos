@@ -82,12 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     left = BindToNaturalType(left, diagnostics);
                     right = BindToNaturalType(right, diagnostics);
-                    var finalDynamicConversion =
-                        this.Compilation.Conversions.ClassifyConversionFromExpression(
-                            right,
-                            left.Type,
-                            ref useSiteInfo
-                        );
+                    var finalDynamicConversion = this.Compilation.Conversions
+                        .ClassifyConversionFromExpression(right, left.Type, ref useSiteInfo);
                     diagnostics.Add(node, useSiteInfo);
 
                     return new BoundCompoundAssignmentOperator(
@@ -302,12 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (finalConversion.IsExplicit && isPredefinedOperator && !kind.IsShift())
             {
-                Conversion rightToLeftConversion =
-                    this.Conversions.ClassifyConversionFromExpression(
-                        right,
-                        leftType,
-                        ref useSiteInfo
-                    );
+                Conversion rightToLeftConversion = this.Conversions
+                    .ClassifyConversionFromExpression(right, leftType, ref useSiteInfo);
                 if (!rightToLeftConversion.IsImplicit || !rightToLeftConversion.IsValid)
                 {
                     hasError = true;
@@ -380,11 +372,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            Conversion argumentConversion = this.Conversions.ClassifyConversionFromExpression(
-                right,
-                delegateType,
-                ref useSiteInfo
-            );
+            Conversion argumentConversion = this.Conversions
+                .ClassifyConversionFromExpression(right, delegateType, ref useSiteInfo);
 
             if (!argumentConversion.IsImplicit || !argumentConversion.IsValid) // NOTE: dev10 appears to allow user-defined conversions here.
             {
@@ -575,9 +564,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return new BoundBinaryOperator(
                 syntax: node,
-                operatorKind: (
-                    hasError ? kind : kind.WithType(BinaryOperatorKind.Dynamic)
-                ).WithOverflowChecksIfApplicable(CheckOverflowAtRuntime),
+                operatorKind: (hasError ? kind : kind.WithType(BinaryOperatorKind.Dynamic))
+                    .WithOverflowChecksIfApplicable(CheckOverflowAtRuntime),
                 left: BindToNaturalType(left, diagnostics),
                 right: BindToNaturalType(right, diagnostics),
                 constantValueOpt: ConstantValue.NotAvailable,
@@ -645,9 +633,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     result.Kind == BoundKind.TypeExpression
-                    && !((ParenthesizedExpressionSyntax)current).Expression.IsKind(
-                        SyntaxKind.ParenthesizedExpression
-                    )
+                    && !((ParenthesizedExpressionSyntax)current).Expression
+                        .IsKind(SyntaxKind.ParenthesizedExpression)
                 )
                 {
                     Error(diagnostics, ErrorCode.ERR_PossibleBadNegCast, node);
@@ -1054,11 +1041,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Special diagnostic for delegate += and -= about wrong right-hand-side
                 var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-                var conversion = this.Conversions.ClassifyConversionFromExpression(
-                    right,
-                    left.Type,
-                    ref discardedUseSiteInfo
-                );
+                var conversion = this.Conversions
+                    .ClassifyConversionFromExpression(right, left.Type, ref discardedUseSiteInfo);
                 Debug.Assert(!conversion.IsImplicit);
                 GenerateImplicitConversionError(
                     diagnostics,
@@ -1688,11 +1672,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var op = operators[i];
                     if (op.ParameterCount == 1 && op.DeclaredAccessibility == Accessibility.Public)
                     {
-                        var conversion = this.Conversions.ClassifyConversionFromType(
-                            argumentType,
-                            op.GetParameterType(0),
-                            ref useSiteInfo
-                        );
+                        var conversion = this.Conversions
+                            .ClassifyConversionFromType(
+                                argumentType,
+                                op.GetParameterType(0),
+                                ref useSiteInfo
+                            );
                         if (conversion.IsImplicit)
                         {
                             @operator = op;
@@ -1747,13 +1732,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            this.OverloadResolution.BinaryOperatorOverloadResolution(
-                kind,
-                left,
-                right,
-                result,
-                ref useSiteInfo
-            );
+            this.OverloadResolution
+                .BinaryOperatorOverloadResolution(kind, left, right, result, ref useSiteInfo);
             diagnostics.Add(node, useSiteInfo);
 
             var possiblyBest = result.Best;
@@ -1870,12 +1850,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            this.OverloadResolution.UnaryOperatorOverloadResolution(
-                kind,
-                operand,
-                result,
-                ref useSiteInfo
-            );
+            this.OverloadResolution
+                .UnaryOperatorOverloadResolution(kind, operand, result, ref useSiteInfo);
             diagnostics.Add(node, useSiteInfo);
 
             var possiblyBest = result.Best;
@@ -3229,8 +3205,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BoundKind.ThisReference:
                     case BoundKind.BaseReference:
                     {
-                        accessedLocalOrParameterOpt =
-                            this.ContainingMemberOrLambda.EnclosingThisSymbol();
+                        accessedLocalOrParameterOpt = this.ContainingMemberOrLambda
+                            .EnclosingThisSymbol();
                         return true;
                     }
                     case BoundKind.Local:
@@ -3932,9 +3908,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     out BoundTypeExpression typeExpression
                 )
                 && !wasUnderscore
-                && ((CSharpParseOptions)node.SyntaxTree.Options).IsFeatureEnabled(
-                    MessageID.IDS_FeaturePatternMatching
-                )
+                && ((CSharpParseOptions)node.SyntaxTree.Options)
+                    .IsFeatureEnabled(MessageID.IDS_FeaturePatternMatching)
             )
             {
                 // it did not bind as a type; try binding as a constant expression pattern
@@ -4023,9 +3998,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 wasUnderscore
-                && ((CSharpParseOptions)node.SyntaxTree.Options).IsFeatureEnabled(
-                    MessageID.IDS_FeatureRecursivePatterns
-                )
+                && ((CSharpParseOptions)node.SyntaxTree.Options)
+                    .IsFeatureEnabled(MessageID.IDS_FeatureRecursivePatterns)
             )
             {
                 diagnostics.Add(
@@ -5349,14 +5323,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            var whenTrue = node.WhenTrue.CheckAndUnwrapRefExpression(
-                diagnostics,
-                out var whenTrueRefKind
-            );
-            var whenFalse = node.WhenFalse.CheckAndUnwrapRefExpression(
-                diagnostics,
-                out var whenFalseRefKind
-            );
+            var whenTrue = node.WhenTrue
+                .CheckAndUnwrapRefExpression(diagnostics, out var whenTrueRefKind);
+            var whenFalse = node.WhenFalse
+                .CheckAndUnwrapRefExpression(diagnostics, out var whenFalseRefKind);
 
             var isRef = whenTrueRefKind == RefKind.Ref && whenFalseRefKind == RefKind.Ref;
             if (!isRef)

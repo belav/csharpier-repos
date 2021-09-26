@@ -68,7 +68,8 @@ namespace JIT.HardwareIntrinsics.General
             UInt64 upperValue = TestLibrary.Generator.GetUInt64();
             Vector128<UInt64> upper = Vector128.Create(upperValue);
 
-            object result = typeof(Vector256).GetMethod(
+            object result = typeof(Vector256)
+                .GetMethod(
                     nameof(Vector256.Create),
                     new Type[] { typeof(Vector128<UInt64>), typeof(Vector128<UInt64>) }
                 )
@@ -118,14 +119,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256.Create(UInt64): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector256.Create(UInt64): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   lower: {expectedLowerValue}");
                 TestLibrary.TestFramework.LogInformation($"   upper: {expectedUpperValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             "application/json"
         ) {
             Encoding = Encoding.UTF8
-        }.ToString();
+        }
+            .ToString();
 
         private readonly JsonOptions _options;
         private readonly ILogger<SystemTextJsonResultExecutor> _logger;

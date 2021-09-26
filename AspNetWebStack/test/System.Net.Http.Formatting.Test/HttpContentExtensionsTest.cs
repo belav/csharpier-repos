@@ -142,26 +142,23 @@ namespace System.Net.Http
             string value = "42";
             var contentMock = new Mock<TestableHttpContent> { CallBase = true };
             contentMock.Setup(
-                    c =>
-                        c.SerializeToStreamAsyncPublic(
-                            It.IsAny<Stream>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                c =>
+                    c.SerializeToStreamAsyncPublic(It.IsAny<Stream>(), It.IsAny<TransportContext>())
+            )
                 .Returns(TaskHelpers.Completed)
                 .Callback((Stream s, TransportContext _) => contentStream = s)
                 .Verifiable();
             HttpContent content = contentMock.Object;
             content.Headers.ContentType = _mediaType;
             _formatterMock.Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            typeof(string),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<IFormatterLogger>()
-                        )
-                )
+                f =>
+                    f.ReadFromStreamAsync(
+                        typeof(string),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+            )
                 .Returns(Task.FromResult<object>(value));
             _formatterMock.Setup(f => f.CanReadType(typeof(string))).Returns(true);
 
@@ -182,14 +179,14 @@ namespace System.Net.Http
             _formatterMock.Setup(f => f.CanReadType(typeof(string))).Returns(true);
             _formatterMock.Object.SupportedMediaTypes.Add(content.Headers.ContentType);
             _formatterMock.Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<IFormatterLogger>()
-                        )
-                )
+                f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+            )
                 .Returns(Task.FromResult<object>(result: null));
 
             await content.ReadAsAsync<string>(_formatters);
@@ -316,14 +313,14 @@ namespace System.Net.Http
             _formatterMock.Setup(f => f.CanWriteType(It.IsAny<Type>())).Returns(true);
             _formatterMock.Setup(f => f.CanReadType(It.IsAny<Type>())).Returns(true);
             _formatterMock.Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<IFormatterLogger>()
-                        )
-                )
+                f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+            )
                 .Returns<Type, Stream, HttpContent, IFormatterLogger>(
                     async (type, stream, content, logger) =>
                     {
@@ -366,9 +363,8 @@ namespace System.Net.Http
             formatter.Object.SupportedMediaTypes.Add(content.Headers.ContentType);
             formatter.Setup(f => f.CanReadType(typeof(int))).Returns(true);
             formatter.Setup(
-                    f =>
-                        f.ReadFromStreamAsync(typeof(int), It.IsAny<Stream>(), content, null, token)
-                )
+                f => f.ReadFromStreamAsync(typeof(int), It.IsAny<Stream>(), content, null, token)
+            )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();
 
@@ -393,15 +389,15 @@ namespace System.Net.Http
             formatter.Object.SupportedMediaTypes.Add(content.Headers.ContentType);
             formatter.Setup(f => f.CanReadType(typeof(int))).Returns(true);
             formatter.Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            typeof(int),
-                            It.IsAny<Stream>(),
-                            content,
-                            formatterLogger,
-                            token
-                        )
-                )
+                f =>
+                    f.ReadFromStreamAsync(
+                        typeof(int),
+                        It.IsAny<Stream>(),
+                        content,
+                        formatterLogger,
+                        token
+                    )
+            )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();
 
@@ -441,9 +437,8 @@ namespace System.Net.Http
             formatter.Object.SupportedMediaTypes.Add(content.Headers.ContentType);
             formatter.Setup(f => f.CanReadType(typeof(int))).Returns(true);
             formatter.Setup(
-                    f =>
-                        f.ReadFromStreamAsync(typeof(int), It.IsAny<Stream>(), content, null, token)
-                )
+                f => f.ReadFromStreamAsync(typeof(int), It.IsAny<Stream>(), content, null, token)
+            )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();
 
@@ -468,15 +463,15 @@ namespace System.Net.Http
             formatter.Object.SupportedMediaTypes.Add(content.Headers.ContentType);
             formatter.Setup(f => f.CanReadType(typeof(int))).Returns(true);
             formatter.Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            typeof(int),
-                            It.IsAny<Stream>(),
-                            content,
-                            formatterLogger,
-                            token
-                        )
-                )
+                f =>
+                    f.ReadFromStreamAsync(
+                        typeof(int),
+                        It.IsAny<Stream>(),
+                        content,
+                        formatterLogger,
+                        token
+                    )
+            )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();
 
@@ -491,25 +486,25 @@ namespace System.Net.Http
         {
             factory = factory ?? Activator.CreateInstance;
             _formatterMock.Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Returns(TaskHelpers.Completed());
             _formatterMock.Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<IFormatterLogger>()
-                        )
-                )
+                f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+            )
                 .Returns<Type, Stream, HttpContent, IFormatterLogger>(
                     (type, stream, content, logger) => Task.FromResult<object>(factory(type))
                 );

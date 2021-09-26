@@ -118,9 +118,9 @@ namespace Castle.DynamicProxy.Tests
         public void DYNPROXY_99_InterfaceProxyWithTargetHasNamespace()
         {
             Type type = generator.CreateInterfaceProxyWithTarget(
-                    typeof(IService),
-                    new ServiceImpl()
-                )
+                typeof(IService),
+                new ServiceImpl()
+            )
                 .GetType();
             Assert.IsNotNull(type.Namespace);
             Assert.AreEqual("Castle.Proxies", type.Namespace);
@@ -130,9 +130,9 @@ namespace Castle.DynamicProxy.Tests
         public void DYNPROXY_99_InterfaceProxyWithTargetInterfaceHasNamespace()
         {
             Type type = generator.CreateInterfaceProxyWithTargetInterface(
-                    typeof(IService),
-                    new ServiceImpl()
-                )
+                typeof(IService),
+                new ServiceImpl()
+            )
                 .GetType();
             Assert.IsNotNull(type.Namespace);
             Assert.AreEqual("Castle.Proxies", type.Namespace);

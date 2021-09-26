@@ -160,9 +160,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             DebugDirectoryEntry sourceDebugEntry = entries[_debugEntryIndex];
 
-            PEMemoryBlock block = _module.PEReader.GetSectionData(
-                sourceDebugEntry.DataRelativeVirtualAddress
-            );
+            PEMemoryBlock block = _module.PEReader
+                .GetSectionData(sourceDebugEntry.DataRelativeVirtualAddress);
             byte[] result = new byte[sourceDebugEntry.DataSize];
             block.GetContent(0, sourceDebugEntry.DataSize).CopyTo(result);
 

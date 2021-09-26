@@ -101,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = Fixture.CreateContext();
 
-            var entityTypeMappings = context.Model.GetEntityTypes()
+            var entityTypeMappings = context.Model
+                .GetEntityTypes()
                 .Select(e => new EntityTypeMapping(e))
                 .ToList();
             EntityTypeMapping.AssertEqual(ExpectedMappings, entityTypeMappings);

@@ -376,10 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             //  add the method to module
             if (this.CompilationState.Emitting)
             {
-                this.CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
-                    containingType,
-                    wrapper.GetCciAdapter()
-                );
+                this.CompilationState.ModuleBuilderOpt
+                    .AddSynthesizedDefinition(containingType, wrapper.GetCciAdapter());
             }
 
             Debug.Assert(wrapper.SynthesizesLoweredBoundBody);
@@ -574,9 +572,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override BoundNode VisitFieldInfo(BoundFieldInfo node)
         {
-            var rewrittenField = ((FieldSymbol)node.Field.OriginalDefinition).AsMember(
-                (NamedTypeSymbol)this.VisitType(node.Field.ContainingType)
-            );
+            var rewrittenField = ((FieldSymbol)node.Field.OriginalDefinition)
+                .AsMember((NamedTypeSymbol)this.VisitType(node.Field.ContainingType));
             return node.Update(rewrittenField, node.GetFieldFromHandle, node.Type);
         }
 
@@ -584,9 +581,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             BoundExpression receiverOpt = (BoundExpression)this.Visit(node.ReceiverOpt);
             TypeSymbol type = this.VisitType(node.Type);
-            var fieldSymbol = ((FieldSymbol)node.FieldSymbol.OriginalDefinition).AsMember(
-                (NamedTypeSymbol)this.VisitType(node.FieldSymbol.ContainingType)
-            );
+            var fieldSymbol = ((FieldSymbol)node.FieldSymbol.OriginalDefinition)
+                .AsMember((NamedTypeSymbol)this.VisitType(node.FieldSymbol.ContainingType));
             return node.Update(
                 receiverOpt,
                 fieldSymbol,
@@ -697,7 +693,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else
             {
                 //  Method of a regular type
-                return ((MethodSymbol)method.OriginalDefinition).AsMember(
+                return ((MethodSymbol)method.OriginalDefinition)
+                    .AsMember(
                         (NamedTypeSymbol)TypeMap.SubstituteType(method.ContainingType)
                             .AsTypeSymbolOnly()
                     )
@@ -717,10 +714,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (!property.ContainingType.IsAnonymousType)
             {
                 //  Property of a regular type
-                return ((PropertySymbol)property.OriginalDefinition).AsMember(
-                    (NamedTypeSymbol)TypeMap.SubstituteType(property.ContainingType)
-                        .AsTypeSymbolOnly()
-                );
+                return ((PropertySymbol)property.OriginalDefinition)
+                    .AsMember(
+                        (NamedTypeSymbol)TypeMap.SubstituteType(property.ContainingType)
+                            .AsTypeSymbolOnly()
+                    );
             }
 
             //  Method of an anonymous type
@@ -747,9 +745,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private FieldSymbol VisitFieldSymbol(FieldSymbol field)
         {
             //  Property of a regular type
-            return ((FieldSymbol)field.OriginalDefinition).AsMember(
-                (NamedTypeSymbol)TypeMap.SubstituteType(field.ContainingType).AsTypeSymbolOnly()
-            );
+            return ((FieldSymbol)field.OriginalDefinition)
+                .AsMember(
+                    (NamedTypeSymbol)TypeMap.SubstituteType(field.ContainingType).AsTypeSymbolOnly()
+                );
         }
 
         public override BoundNode VisitObjectInitializerMember(BoundObjectInitializerMember node)
@@ -863,9 +862,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 AddSynthesizedAttribute(
                     ref attributes,
-                    this.DeclaringCompilation.TrySynthesizeAttribute(
-                        WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
-                    )
+                    this.DeclaringCompilation
+                        .TrySynthesizeAttribute(
+                            WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
+                        )
                 );
             }
 

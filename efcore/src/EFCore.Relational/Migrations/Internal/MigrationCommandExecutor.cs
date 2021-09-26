@@ -122,8 +122,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             if (transaction == null && !command.TransactionSuppressed)
                             {
                                 transaction = await connection.BeginTransactionAsync(
-                                        cancellationToken
-                                    )
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                             }
 
@@ -136,9 +136,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             }
 
                             await command.ExecuteNonQueryAsync(
-                                    connection,
-                                    cancellationToken: cancellationToken
-                                )
+                                connection,
+                                cancellationToken: cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         }
 

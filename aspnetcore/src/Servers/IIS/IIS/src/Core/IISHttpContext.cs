@@ -275,11 +275,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             // Transfer-Encoding takes priority over Content-Length.
             string transferEncoding = RequestHeaders[HttpKnownHeaderNames.TransferEncoding];
             if (
-                string.Equals(
-                    "chunked",
-                    transferEncoding?.Trim(),
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals("chunked", transferEncoding?.Trim(), StringComparison.OrdinalIgnoreCase)
             )
             {
                 return true;
@@ -448,9 +445,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                     continue;
                 }
 
-                var knownHeaderIndex = HttpApiTypes.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(
-                    headerPair.Key
-                );
+                var knownHeaderIndex = HttpApiTypes.HTTP_RESPONSE_HEADER_ID
+                    .IndexOfKnownHeader(headerPair.Key);
                 for (var i = 0; i < headerValues.Count; i++)
                 {
                     if (string.IsNullOrEmpty(headerValues[i]))

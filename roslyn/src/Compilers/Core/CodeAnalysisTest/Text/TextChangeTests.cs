@@ -1042,10 +1042,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 // generate sequence of "old edits" which meet invariants
                 for (int i = 0; i < originalText.Length; i += random.Next(maxSkipLength))
                 {
-                    var newText = string.Join(
-                        "",
-                        Enumerable.Repeat('a', random.Next(oldMaxInsertLength))
-                    );
+                    var newText = string
+                        .Join("", Enumerable.Repeat('a', random.Next(oldMaxInsertLength)));
                     var newChange = new TextChange(
                         new TextSpan(i, length: random.Next(originalText.Length - i)),
                         newText
@@ -1069,10 +1067,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 // generate sequence of "new edits" which meet invariants
                 for (int i = 0; i < editedLength; i += random.Next(maxSkipLength))
                 {
-                    var newText = string.Join(
-                        "",
-                        Enumerable.Repeat('b', random.Next(newMaxInsertLength))
-                    );
+                    var newText = string
+                        .Join("", Enumerable.Repeat('b', random.Next(newMaxInsertLength)));
                     var newChange = new TextChange(
                         new TextSpan(i, length: random.Next(editedLength - i)),
                         newText
@@ -1103,8 +1099,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
     public void Fuzz_{iteration}()
     {{
         var originalText = SourceText.From(""{originalText}"");
-        var change1 = originalText.WithChanges({string.Join(", ", oldChangesBuilder.Select(c => c.GetDebuggerDisplay()))});
-        var change2 = change1.WithChanges({string.Join(", ", newChangesBuilder.Select(c => c.GetDebuggerDisplay()))});
+        var change1 = originalText.WithChanges({string .Join(", ", oldChangesBuilder.Select(c => c.GetDebuggerDisplay()))});
+        var change2 = change1.WithChanges({string .Join(", ", newChangesBuilder.Select(c => c.GetDebuggerDisplay()))});
         Assert.Equal(""{change1}"", change1.ToString()); // double-check for correctness
         Assert.Equal(""{change2}"", change2.ToString()); // double-check for correctness
 

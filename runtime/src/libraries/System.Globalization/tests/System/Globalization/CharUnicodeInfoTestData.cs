@@ -16,7 +16,8 @@ namespace System.Globalization.Tests
             {
                 List<CharUnicodeInfoTestCase> testCases = new List<CharUnicodeInfoTestCase>();
                 string fileName = "UnicodeData.txt";
-                Stream stream = typeof(CharUnicodeInfoTestData).GetTypeInfo()
+                Stream stream = typeof(CharUnicodeInfoTestData)
+                    .GetTypeInfo()
                     .Assembly.GetManifestResourceStream(fileName);
                 using (StreamReader reader = new StreamReader(stream))
                 {

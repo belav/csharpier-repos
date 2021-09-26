@@ -18,7 +18,8 @@ namespace System.Web.WebPages.Razor.Test
                 {
                     AppDomainUtils.SetPreAppStartStage();
                     PreApplicationStartCode.Start();
-                    var buildProviders = typeof(BuildProvider).GetField(
+                    var buildProviders = typeof(BuildProvider)
+                        .GetField(
                             "s_dynamicallyRegisteredProviders",
                             BindingFlags.Static | BindingFlags.NonPublic
                         )

@@ -107,12 +107,13 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                     .ConfigureAwait(false);
                 if (!taggedText.IsDefaultOrEmpty)
                 {
-                    return Implementation.IntelliSense.Helpers.BuildInteractiveTextElements(
-                        taggedText,
-                        document,
-                        _threadingContext,
-                        _streamingPresenter
-                    );
+                    return Implementation.IntelliSense.Helpers
+                        .BuildInteractiveTextElements(
+                            taggedText,
+                            document,
+                            _threadingContext,
+                            _streamingPresenter
+                        );
                 }
             }
 
@@ -268,19 +269,15 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         private async Task StartToolTipServiceAsync(IToolTipPresenter toolTipPresenter)
         {
             var uiList = await Task.Run(
-                    () => CreateDescriptionAsync(_threadingContext.DisposalToken)
-                )
+                () => CreateDescriptionAsync(_threadingContext.DisposalToken)
+            )
                 .ConfigureAwait(false);
-            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                _threadingContext.DisposalToken
-            );
+            await _threadingContext.JoinableTaskFactory
+                .SwitchToMainThreadAsync(_threadingContext.DisposalToken);
 
             toolTipPresenter.StartOrUpdate(
-                _textView.TextSnapshot.CreateTrackingSpan(
-                    _span.Start,
-                    _span.Length,
-                    SpanTrackingMode.EdgeInclusive
-                ),
+                _textView.TextSnapshot
+                    .CreateTrackingSpan(_span.Start, _span.Length, SpanTrackingMode.EdgeInclusive),
                 uiList
             );
         }

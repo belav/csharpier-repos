@@ -57,10 +57,11 @@ namespace RunTests
         {
             Debug.Assert(IsAdministrator());
 
-            using var registryKey = Registry.LocalMachine.CreateSubKey(
-                @"SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps",
-                writable: true
-            );
+            using var registryKey = Registry.LocalMachine
+                .CreateSubKey(
+                    @"SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps",
+                    writable: true
+                );
             registryKey.SetValue("DumpType", 2, RegistryValueKind.DWord);
             registryKey.SetValue("DumpCount", 2, RegistryValueKind.DWord);
             registryKey.SetValue("DumpFolder", dumpDirectory, RegistryValueKind.String);
@@ -70,10 +71,11 @@ namespace RunTests
         {
             Debug.Assert(IsAdministrator());
 
-            using var registryKey = Registry.LocalMachine.CreateSubKey(
-                @"SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps",
-                writable: true
-            );
+            using var registryKey = Registry.LocalMachine
+                .CreateSubKey(
+                    @"SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps",
+                    writable: true
+                );
             registryKey.DeleteValue("DumpType", throwOnMissingValue: false);
             registryKey.DeleteValue("DumpCount", throwOnMissingValue: false);
             registryKey.DeleteValue("DumpFolder", throwOnMissingValue: false);

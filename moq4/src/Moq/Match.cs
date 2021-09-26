@@ -232,10 +232,8 @@ namespace Moq
                 )
             )
             {
-                return ExpressionComparer.Default.Equals(
-                    this.RenderExpression,
-                    other.RenderExpression
-                );
+                return ExpressionComparer.Default
+                    .Equals(this.RenderExpression, other.RenderExpression);
             }
             else
             {
@@ -292,10 +290,11 @@ namespace Moq
             }
         }
 
-        private static readonly MethodInfo canCastMethod = typeof(MatchFactory).GetMethod(
-            "CanCast",
-            BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly
-        );
+        private static readonly MethodInfo canCastMethod = typeof(MatchFactory)
+            .GetMethod(
+                "CanCast",
+                BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly
+            );
         // TODO: Check whether we need to implement `IEquatable<>` to make this work with delegate-based
         // setup & verification methods such as `SetupSet`!
     }

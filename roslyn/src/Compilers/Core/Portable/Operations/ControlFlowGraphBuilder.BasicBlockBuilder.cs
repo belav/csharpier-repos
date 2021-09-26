@@ -239,9 +239,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 BasicBlock block = blocks[Ordinal];
 
-                var branches = ArrayBuilder<ControlFlowBranch>.GetInstance(
-                    _predecessors?.Count ?? 2
-                );
+                var branches = ArrayBuilder<ControlFlowBranch>
+                    .GetInstance(_predecessors?.Count ?? 2);
 
                 if (_predecessors != null)
                 {

@@ -13,9 +13,8 @@ namespace System.Linq.Expressions.Tests
 {
     public static class InterpreterTests
     {
-        private static readonly PropertyInfo s_debugView = typeof(LightLambda).GetPropertyAssert(
-            "DebugView"
-        );
+        private static readonly PropertyInfo s_debugView = typeof(LightLambda)
+            .GetPropertyAssert("DebugView");
 
         [Fact]
         public static void VerifyInstructions_Simple()

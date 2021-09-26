@@ -148,7 +148,8 @@ namespace System.CommandLine.Rendering.Tests.Views
             _synchronizationContext.InvokePostCallbacks();
 
             _synchronizationContext.PostInvocationCount.Should().Be(2);
-            view.RenderedRegions.Should()
+            view.RenderedRegions
+                .Should()
                 .BeEquivalentSequenceTo(new Region(0, 0, 100, 40), new Region(0, 0, 100, 40));
         }
 

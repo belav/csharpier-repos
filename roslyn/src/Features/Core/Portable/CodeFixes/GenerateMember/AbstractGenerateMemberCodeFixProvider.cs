@@ -53,10 +53,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.GenerateMember
             foreach (var name in names)
             {
                 var codeActions = await GetCodeActionsAsync(
-                        context.Document,
-                        name,
-                        context.CancellationToken
-                    )
+                    context.Document,
+                    name,
+                    context.CancellationToken
+                )
                     .ConfigureAwait(false);
                 if (codeActions.IsDefaultOrEmpty)
                 {

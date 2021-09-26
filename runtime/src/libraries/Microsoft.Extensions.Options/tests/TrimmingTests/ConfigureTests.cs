@@ -17,13 +17,12 @@ class Program
             }
         );
         services.ConfigureOptions<OptionsAPostConfigure>();
-        services.AddOptions<OptionsB>()
-            .Configure<IOptions<OptionsA>>(
-                (b, a) =>
-                {
-                    b.OptionString = a.Value.OptionValue.ToString();
-                }
-            );
+        services.AddOptions<OptionsB>().Configure<IOptions<OptionsA>>(
+            (b, a) =>
+            {
+                b.OptionString = a.Value.OptionValue.ToString();
+            }
+        );
 
         ServiceProvider provider = services.BuildServiceProvider();
 

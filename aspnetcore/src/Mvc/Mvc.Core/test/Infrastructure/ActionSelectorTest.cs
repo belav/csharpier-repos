@@ -98,10 +98,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var routeContext = CreateRouteContext("GET");
             routeContext.RouteData.Values.Add("controller", "Home");
             routeContext.RouteData.Values.Add("action", "Index");
-            routeContext.RouteData.Values.Add(
-                "date",
-                new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7))
-            );
+            routeContext.RouteData.Values
+                .Add("date", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
 
             // Act
             var candidates = selector.SelectCandidates(routeContext);
@@ -505,10 +503,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var selector = CreateSelector(actions, loggerFactory);
 
             var routeContext = CreateRouteContext("POST");
-            var actionNames = string.Join(
-                Environment.NewLine,
-                actions.Select(action => action.DisplayName)
-            );
+            var actionNames = string
+                .Join(Environment.NewLine, actions.Select(action => action.DisplayName));
             var expectedMessage =
                 "Request matched multiple actions resulting in "
                 + $"ambiguity. Matching actions: {actionNames}";
@@ -1030,7 +1026,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private ControllerActionDescriptorProvider GetActionDescriptorProvider()
         {
-            var controllerTypes = typeof(ActionSelectorTest).GetNestedTypes(BindingFlags.NonPublic)
+            var controllerTypes = typeof(ActionSelectorTest)
+                .GetNestedTypes(BindingFlags.NonPublic)
                 .Select(t => t.GetTypeInfo())
                 .ToList();
 
@@ -1092,22 +1089,21 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var comparer = new RouteValueEqualityComparer();
 
             return actions.Where(
+                a => a.RouteValues.Any(kvp => kvp.Key == "area" && comparer.Equals(kvp.Value, area))
+            )
+                .Where(
                     a =>
-                        a.RouteValues.Any(
-                            kvp => kvp.Key == "area" && comparer.Equals(kvp.Value, area)
-                        )
+                        a.RouteValues
+                            .Any(
+                                kvp =>
+                                    kvp.Key == "controller"
+                                    && comparer.Equals(kvp.Value, controller)
+                            )
                 )
                 .Where(
                     a =>
-                        a.RouteValues.Any(
-                            kvp => kvp.Key == "controller" && comparer.Equals(kvp.Value, controller)
-                        )
-                )
-                .Where(
-                    a =>
-                        a.RouteValues.Any(
-                            kvp => kvp.Key == "action" && comparer.Equals(kvp.Value, action)
-                        )
+                        a.RouteValues
+                            .Any(kvp => kvp.Key == "action" && comparer.Equals(kvp.Value, action))
                 );
         }
 
@@ -1173,13 +1169,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         {
             var actionDescriptor = new ControllerActionDescriptor()
             {
-                ActionName = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Area: {0}, Controller: {1}, Action: {2}",
-                    area,
-                    controller,
-                    action
-                ),
+                ActionName = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "Area: {0}, Controller: {1}, Action: {2}",
+                        area,
+                        controller,
+                        action
+                    ),
                 Parameters = new List<ParameterDescriptor>(),
             };
 

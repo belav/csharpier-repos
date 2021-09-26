@@ -213,11 +213,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
             this.ClearSolution();
 
             var solutionInfo = await _loader.LoadSolutionInfoAsync(
-                    solutionFilePath,
-                    progress,
-                    msbuildLogger,
-                    cancellationToken
-                )
+                solutionFilePath,
+                progress,
+                msbuildLogger,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // construct workspace from loaded project infos
@@ -267,12 +267,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
             var projectMap = ProjectMap.Create(this.CurrentSolution);
             var projects = await _loader.LoadProjectInfoAsync(
-                    projectFilePath,
-                    projectMap,
-                    progress,
-                    msbuildLogger,
-                    cancellationToken
-                )
+                projectFilePath,
+                projectMap,
+                progress,
+                msbuildLogger,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // add projects to solution
@@ -356,10 +356,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         _reporter.Report(
                             new ProjectDiagnostic(
                                 WorkspaceDiagnosticKind.Failure,
-                                string.Format(
-                                    WorkspaceMSBuildResources.Project_path_for_0_was_null,
-                                    project.Name
-                                ),
+                                string
+                                    .Format(
+                                        WorkspaceMSBuildResources.Project_path_for_0_was_null,
+                                        project.Name
+                                    ),
                                 projectChanges.ProjectId
                             )
                         );
@@ -432,10 +433,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 var encoding = DetermineEncoding(text, document);
                 if (document.FilePath is null)
                 {
-                    var message = string.Format(
-                        WorkspaceMSBuildResources.Path_for_document_0_was_null,
-                        document.Name
-                    );
+                    var message = string
+                        .Format(
+                            WorkspaceMSBuildResources.Path_for_document_0_was_null,
+                            document.Name
+                        );
                     _reporter.Report(
                         new DocumentDiagnostic(
                             WorkspaceDiagnosticKind.Failure,
@@ -614,10 +616,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
             var identity = GetAssemblyIdentity(projectId, metadataReference);
             if (identity is null)
             {
-                var message = string.Format(
-                    WorkspaceMSBuildResources.Unable_to_add_metadata_reference_0,
-                    metadataReference.Display
-                );
+                var message = string
+                    .Format(
+                        WorkspaceMSBuildResources.Unable_to_add_metadata_reference_0,
+                        metadataReference.Display
+                    );
                 _reporter.Report(
                     new ProjectDiagnostic(WorkspaceDiagnosticKind.Failure, message, projectId)
                 );
@@ -636,10 +639,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
             var identity = GetAssemblyIdentity(projectId, metadataReference);
             if (identity is null)
             {
-                var message = string.Format(
-                    WorkspaceMSBuildResources.Unable_to_remove_metadata_reference_0,
-                    metadataReference.Display
-                );
+                var message = string
+                    .Format(
+                        WorkspaceMSBuildResources.Unable_to_remove_metadata_reference_0,
+                        metadataReference.Display
+                    );
                 _reporter.Report(
                     new ProjectDiagnostic(WorkspaceDiagnosticKind.Failure, message, projectId)
                 );

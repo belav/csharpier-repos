@@ -522,11 +522,8 @@ namespace System.Reflection.Tests
                 {
                     Assembly a = lc.LoadFromAssemblyPath(assemblyPath);
                     Module bob = a.GetModule("Bob.netmodule");
-                    Type mainType1 = a.ManifestModule.GetType(
-                        "MainType1",
-                        throwOnError: true,
-                        ignoreCase: false
-                    );
+                    Type mainType1 = a.ManifestModule
+                        .GetType("MainType1", throwOnError: true, ignoreCase: false);
                     Type baseType = mainType1.BaseType;
                     Assert.Equal("JoeType1", baseType.FullName);
                     Assert.Equal(bob, baseType.Module);

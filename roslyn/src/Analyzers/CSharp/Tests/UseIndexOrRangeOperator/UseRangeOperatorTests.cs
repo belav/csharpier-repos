@@ -38,7 +38,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -108,7 +109,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -138,7 +140,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -184,7 +187,8 @@ class C
                     AdditionalProjectReferences = { "DependencyProject" },
                 },
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -214,7 +218,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -244,7 +249,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -276,7 +282,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -306,7 +313,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -336,7 +344,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -358,7 +367,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -390,7 +400,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -422,7 +433,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -453,7 +465,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -485,7 +498,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -517,7 +531,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -549,7 +564,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -581,7 +597,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -613,7 +630,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(43202, "https://github.com/dotnet/roslyn/issues/43202")]
@@ -642,7 +660,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = source,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
         public async Task TestReturnByRef()
@@ -672,7 +691,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(43202, "https://github.com/dotnet/roslyn/issues/43202")]
@@ -717,7 +737,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(43202, "https://github.com/dotnet/roslyn/issues/43202")]
@@ -761,7 +782,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -792,7 +814,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(36997, "https://github.com/dotnet/roslyn/issues/36997")]
@@ -823,7 +846,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -853,7 +877,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(47183, "https://github.com/dotnet/roslyn/issues/47183")]
@@ -881,7 +906,8 @@ public class Test
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(47183, "https://github.com/dotnet/roslyn/issues/47183")]
@@ -907,7 +933,8 @@ public class Test
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(47183, "https://github.com/dotnet/roslyn/issues/47183")]
@@ -949,7 +976,8 @@ public class Test
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(38055, "https://github.com/dotnet/roslyn/issues/38055")]
@@ -1016,7 +1044,8 @@ namespace System
                 ReferenceAssemblies = new ReferenceAssemblies("nostdlib"),
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(38055, "https://github.com/dotnet/roslyn/issues/38055")]
@@ -1047,7 +1076,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
     }
 }

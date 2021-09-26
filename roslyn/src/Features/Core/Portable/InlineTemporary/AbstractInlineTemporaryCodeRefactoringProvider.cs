@@ -35,24 +35,26 @@ namespace Microsoft.CodeAnalysis.InlineTemporary
                 var options = FindReferencesSearchOptions.Default.With(cascade: false);
 
                 var findReferencesResult = await SymbolFinder.FindReferencesAsync(
-                        local,
-                        document.Project.Solution,
-                        options,
-                        cancellationToken
-                    )
+                    local,
+                    document.Project.Solution,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var referencedSymbol = findReferencesResult.SingleOrDefault(
                     r => Equals(r.Definition, local)
                 );
                 if (referencedSymbol != null)
                 {
-                    return referencedSymbol.LocationsArray.WhereAsArray(
-                        loc =>
-                            !semanticModel.SyntaxTree.OverlapsHiddenPosition(
-                                loc.Location.SourceSpan,
-                                cancellationToken
-                            )
-                    );
+                    return referencedSymbol.LocationsArray
+                        .WhereAsArray(
+                            loc =>
+                                !semanticModel.SyntaxTree
+                                    .OverlapsHiddenPosition(
+                                        loc.Location.SourceSpan,
+                                        cancellationToken
+                                    )
+                        );
                 }
             }
 

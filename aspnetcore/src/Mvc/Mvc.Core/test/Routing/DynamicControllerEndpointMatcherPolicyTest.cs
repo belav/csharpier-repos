@@ -253,9 +253,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             var httpContext = new DefaultHttpContext()
             {
-                RequestServices = new ServiceCollection().AddScoped(
-                        sp => new CustomTransformer { State = "Invalid" }
-                    )
+                RequestServices = new ServiceCollection()
+                    .AddScoped(sp => new CustomTransformer { State = "Invalid" })
                     .BuildServiceProvider(),
             };
 

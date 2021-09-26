@@ -74,8 +74,8 @@ namespace System.Web.Razor.Test.Parser.VB
                     Factory.CodeTransition(SyntaxConstants.TransitionString)
                         .Accepts(AcceptedCharacters.None),
                     Factory.Code(
-                            "Select Case Foo\r\n    Case 1\r\n        Exit Select\r\n    Case 2\r\n        Exit Select\r\nEnd Select\r\n"
-                        )
+                        "Select Case Foo\r\n    Case 1\r\n        Exit Select\r\n    Case 2\r\n        Exit Select\r\nEnd Select\r\n"
+                    )
                         .AsStatement()
                         .Accepts(AcceptedCharacters.None)
                 )
@@ -107,8 +107,8 @@ namespace System.Web.Razor.Test.Parser.VB
                     Factory.CodeTransition(SyntaxConstants.TransitionString)
                         .Accepts(AcceptedCharacters.None),
                     Factory.Code(
-                            "Try\r\n    Foo()\r\n    Exit Try\r\nCatch Bar\r\n    Throw Bar\r\nFinally\r\n    Baz()\r\nEnd Try\r\n"
-                        )
+                        "Try\r\n    Foo()\r\n    Exit Try\r\nCatch Bar\r\n    Throw Bar\r\nFinally\r\n    Baz()\r\nEnd Try\r\n"
+                    )
                         .AsStatement()
                         .Accepts(AcceptedCharacters.None)
                 )

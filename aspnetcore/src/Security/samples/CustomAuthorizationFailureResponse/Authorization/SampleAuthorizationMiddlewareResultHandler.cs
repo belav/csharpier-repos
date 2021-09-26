@@ -34,9 +34,8 @@ namespace CustomAuthorizationFailureResponse.Authorization
             {
                 // as an example, let's return 404 if specific requirement has failed
                 if (
-                    policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(
-                        requirement => requirement is SampleRequirement
-                    )
+                    policyAuthorizationResult.AuthorizationFailure.FailedRequirements
+                        .Any(requirement => requirement is SampleRequirement)
                 )
                 {
                     httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -46,9 +45,8 @@ namespace CustomAuthorizationFailureResponse.Authorization
                     return;
                 }
                 else if (
-                    policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(
-                        requirement => requirement is SampleWithCustomMessageRequirement
-                    )
+                    policyAuthorizationResult.AuthorizationFailure.FailedRequirements
+                        .Any(requirement => requirement is SampleWithCustomMessageRequirement)
                 )
                 {
                     // if other requirements failed, let's just use a custom message
@@ -56,13 +54,13 @@ namespace CustomAuthorizationFailureResponse.Authorization
                     // and modifications of the response are not allowed once the writing has started
                     var message = Startup.CustomForbiddenMessage;
 
-                    httpContext.Response.OnStarting(
-                        () =>
-                            httpContext.Response.BodyWriter.WriteAsync(
-                                    Encoding.UTF8.GetBytes(message)
-                                )
-                                .AsTask()
-                    );
+                    httpContext.Response
+                        .OnStarting(
+                            () =>
+                                httpContext.Response.BodyWriter
+                                    .WriteAsync(Encoding.UTF8.GetBytes(message))
+                                    .AsTask()
+                        );
                 }
             }
 

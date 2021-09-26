@@ -47,11 +47,12 @@ namespace System.Reflection.Tests
         public static bool IsByRefLike(this Type t)
         {
             if (t.IsImplementedByRuntime())
-                return t.CustomAttributes.Any(
-                    cad =>
-                        cad.AttributeType.FullName
-                        == "System.Runtime.CompilerServices.IsByRefLikeAttribute"
-                );
+                return t.CustomAttributes
+                    .Any(
+                        cad =>
+                            cad.AttributeType.FullName
+                            == "System.Runtime.CompilerServices.IsByRefLikeAttribute"
+                    );
 
             return t.CallUsingReflection<bool>("get_IsByRefLike");
         }

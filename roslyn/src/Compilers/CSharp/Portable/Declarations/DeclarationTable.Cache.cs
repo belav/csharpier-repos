@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 this.MergedRoot = new Lazy<MergedNamespaceDeclaration>(
                     () =>
                         MergedNamespaceDeclaration.Create(
-                            table._allOlderRootDeclarations.InInsertionOrder.AsImmutable<SingleNamespaceDeclaration>()
+                            table._allOlderRootDeclarations.InInsertionOrder
+                                .AsImmutable<SingleNamespaceDeclaration>()
                         )
                 );
 
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 this.ReferenceDirectives = new Lazy<ImmutableArray<ReferenceDirective>>(
                     () =>
-                        MergedRoot.Value.Declarations.OfType<RootSingleNamespaceDeclaration>()
+                        MergedRoot.Value.Declarations
+                            .OfType<RootSingleNamespaceDeclaration>()
                             .SelectMany(r => r.ReferenceDirectives)
                             .AsImmutable()
                 );

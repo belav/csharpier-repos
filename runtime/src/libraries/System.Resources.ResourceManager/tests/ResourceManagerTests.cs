@@ -164,13 +164,12 @@ namespace System.Resources.Tests
         public static void GetString_ExpectEvents()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        // Events only fire first time.  Remote to make sure test runs in a separate process
-                        Remote_ExpectEvents();
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    // Events only fire first time.  Remote to make sure test runs in a separate process
+                    Remote_ExpectEvents();
+                }
+            ).Dispose();
         }
 
         private static void Remote_ExpectEvents()

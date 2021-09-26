@@ -10,8 +10,8 @@ namespace System.Composition.TypedParts.Discovery
 {
     internal sealed class DiscoveredPropertyExport : DiscoveredExport
     {
-        private static readonly MethodInfo s_activatorInvoke =
-            typeof(CompositeActivator).GetRuntimeMethod(
+        private static readonly MethodInfo s_activatorInvoke = typeof(CompositeActivator)
+            .GetRuntimeMethod(
                 "Invoke",
                 new[] { typeof(LifetimeContext), typeof(CompositionOperation) }
             );

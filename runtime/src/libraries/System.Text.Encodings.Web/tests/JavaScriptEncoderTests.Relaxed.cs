@@ -166,12 +166,13 @@ namespace System.Text.Encodings.Web.Tests
             for (int i = 0x10000; i <= 0x10FFFF; i++)
             {
                 string input = char.ConvertFromUtf32(i);
-                string expected = string.Format(
-                    CultureInfo.InvariantCulture,
-                    @"\u{0:X4}\u{1:X4}",
-                    (uint)input[0],
-                    (uint)input[1]
-                );
+                string expected = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        @"\u{0:X4}\u{1:X4}",
+                        (uint)input[0],
+                        (uint)input[1]
+                    );
                 string retVal = encoder.Encode(input);
                 Assert.Equal(expected, retVal);
             }

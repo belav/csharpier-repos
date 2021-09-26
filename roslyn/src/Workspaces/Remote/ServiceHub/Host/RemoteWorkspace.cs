@@ -97,9 +97,8 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             var currentSolution = CurrentSolution;
 
-            var currentSolutionChecksum = await currentSolution.State.GetChecksumAsync(
-                    cancellationToken
-                )
+            var currentSolutionChecksum = await currentSolution.State
+                .GetChecksumAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (currentSolutionChecksum == solutionChecksum)
             {
@@ -112,13 +111,13 @@ namespace Microsoft.CodeAnalysis.Remote
             )
             {
                 var solution = await CreateSolution_NoLockAsync(
-                        assetProvider,
-                        solutionChecksum,
-                        fromPrimaryBranch: true,
-                        workspaceVersion,
-                        currentSolution,
-                        cancellationToken
-                    )
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: true,
+                    workspaceVersion,
+                    currentSolution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 _primaryBranchSolutionWithChecksum = Tuple.Create(solutionChecksum, solution);
             }
@@ -183,16 +182,16 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 // we need new solution. bulk sync all asset for the solution first.
                 await assetProvider.SynchronizeSolutionAssetsAsync(
-                        solutionChecksum,
-                        cancellationToken
-                    )
+                    solutionChecksum,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // get new solution info and options
                 var (solutionInfo, options) = await assetProvider.CreateSolutionInfoAndOptionsAsync(
-                        solutionChecksum,
-                        cancellationToken
-                    )
+                    solutionChecksum,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (fromPrimaryBranch)
@@ -273,13 +272,13 @@ namespace Microsoft.CodeAnalysis.Remote
                 }
 
                 var solution = await CreateSolution_NoLockAsync(
-                        assetProvider,
-                        solutionChecksum,
-                        fromPrimaryBranch,
-                        workspaceVersion,
-                        CurrentSolution,
-                        cancellationToken
-                    )
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch,
+                    workspaceVersion,
+                    CurrentSolution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 _lastRequestedSolutionWithChecksum = Tuple.Create(solutionChecksum, solution);

@@ -131,7 +131,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 + "2e2aae9d181f0e1eb6c2af24b40e50bcde1c935c49a679b5b6dbcef9707b2801"
                 + "84b82a29cfbfa90505e1e00f714dfdad5c238329ebc7c54ac8e82784d37ec643"
                 + "0b950005b14f6571c50203010001"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             using (var c = new X509Certificate2(TestData.MsCertificate))
             {
@@ -198,15 +199,8 @@ Wry5FNNo
         [Fact]
         public static void TestNotBefore()
         {
-            DateTime expected = new DateTime(
-                2013,
-                1,
-                24,
-                22,
-                33,
-                39,
-                DateTimeKind.Utc
-            ).ToLocalTime();
+            DateTime expected = new DateTime(2013, 1, 24, 22, 33, 39, DateTimeKind.Utc)
+                .ToLocalTime();
 
             using (var c = new X509Certificate2(TestData.MsCertificate))
             {
@@ -217,15 +211,8 @@ Wry5FNNo
         [Fact]
         public static void TestNotAfter()
         {
-            DateTime expected = new DateTime(
-                2014,
-                4,
-                24,
-                22,
-                33,
-                39,
-                DateTimeKind.Utc
-            ).ToLocalTime();
+            DateTime expected = new DateTime(2014, 4, 24, 22, 33, 39, DateTimeKind.Utc)
+                .ToLocalTime();
 
             using (var c = new X509Certificate2(TestData.MsCertificate))
             {

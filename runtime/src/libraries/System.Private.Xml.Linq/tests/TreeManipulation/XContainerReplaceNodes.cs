@@ -160,14 +160,14 @@ namespace XLinqTests
                 }
 
                 IEnumerable<ExpectedValue> expValues = replacement.Select(
-                        o =>
-                            new ExpectedValue(
-                                o is XNode
-                                    && (o as XNode).Parent == null
-                                    && (o as XNode).Document == null,
-                                o
-                            )
-                    )
+                    o =>
+                        new ExpectedValue(
+                            o is XNode
+                                && (o as XNode).Parent == null
+                                && (o as XNode).Document == null,
+                            o
+                        )
+                )
                     .ProcessNodes()
                     .ToList();
                 IEnumerable<XNode> originalContent = touchOrigNodes ? elem.Nodes().ToList() : null;

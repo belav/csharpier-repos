@@ -56,12 +56,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             // pagesRootSearchPattern will miss _ViewImports outside the RootDirectory despite these influencing
             // compilation. e.g. when RootDirectory = /Dir1/Dir2, the search pattern will ignore changes to
             // [/_ViewImports.cshtml, /Dir1/_ViewImports.cshtml]. We need to additionally account for these.
-            var importFeatures = projectEngine.ProjectFeatures.OfType<IImportProjectFeature>()
+            var importFeatures = projectEngine.ProjectFeatures
+                .OfType<IImportProjectFeature>()
                 .ToArray();
-            var fileAtPagesRoot = projectEngine.FileSystem.GetItem(
-                rootDirectory + "/Index.cshtml",
-                fileKind: null
-            );
+            var fileAtPagesRoot = projectEngine.FileSystem
+                .GetItem(rootDirectory + "/Index.cshtml", fileKind: null);
 
             _additionalFilesToTrack = GetImports(importFeatures, fileAtPagesRoot);
         }

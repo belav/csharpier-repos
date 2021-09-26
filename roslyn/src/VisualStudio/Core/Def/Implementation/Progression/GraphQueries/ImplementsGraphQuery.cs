@@ -33,10 +33,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             )
             {
                 var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
-                        solution,
-                        context.InputNodes,
-                        cancellationToken
-                    )
+                    solution,
+                    context.InputNodes,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var node in context.InputNodes)
@@ -44,9 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     var symbol = graphBuilder.GetSymbol(node);
                     if (symbol is INamedTypeSymbol namedType)
                     {
-                        var implementedSymbols = ImmutableArray<ISymbol>.CastUp(
-                            namedType.AllInterfaces
-                        );
+                        var implementedSymbols = ImmutableArray<ISymbol>
+                            .CastUp(namedType.AllInterfaces);
 
                         await AddImplementedSymbolsAsync(graphBuilder, node, implementedSymbols)
                             .ConfigureAwait(false);
@@ -59,10 +58,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     {
                         var implements =
                             await SymbolFinder.FindImplementedInterfaceMembersArrayAsync(
-                                    symbol,
-                                    solution,
-                                    cancellationToken: cancellationToken
-                                )
+                                symbol,
+                                solution,
+                                cancellationToken: cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         await AddImplementedSymbolsAsync(graphBuilder, node, implements)
                             .ConfigureAwait(false);
@@ -82,9 +81,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             foreach (var interfaceType in implementedSymbols)
             {
                 var interfaceTypeNode = await graphBuilder.AddNodeAsync(
-                        interfaceType,
-                        relatedNode: node
-                    )
+                    interfaceType,
+                    relatedNode: node
+                )
                     .ConfigureAwait(false);
                 graphBuilder.AddLink(node, CodeLinkCategories.Implements, interfaceTypeNode);
             }

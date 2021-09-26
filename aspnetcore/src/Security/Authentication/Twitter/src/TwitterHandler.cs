@@ -239,11 +239,12 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
 
             var cookieOptions = Options.StateCookie.Build(Context, Clock.UtcNow);
 
-            Response.Cookies.Append(
-                Options.StateCookie.Name!,
-                Options.StateDataFormat.Protect(requestToken),
-                cookieOptions
-            );
+            Response.Cookies
+                .Append(
+                    Options.StateCookie.Name!,
+                    Options.StateDataFormat.Protect(requestToken),
+                    cookieOptions
+                );
 
             var redirectContext = new RedirectContext<TwitterOptions>(
                 Context,
@@ -386,11 +387,12 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
 
             var responseParameters = new FormCollection(new FormReader(responseText).ReadForm());
             if (
-                !string.Equals(
-                    responseParameters["oauth_callback_confirmed"],
-                    "true",
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        responseParameters["oauth_callback_confirmed"],
+                        "true",
+                        StringComparison.Ordinal
+                    )
             )
             {
                 throw new Exception("Twitter oauth_callback_confirmed is not true.");
@@ -480,16 +482,18 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
         {
             using (var algorithm = new HMACSHA1())
             {
-                algorithm.Key = Encoding.ASCII.GetBytes(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0}&{1}",
-                        Uri.EscapeDataString(consumerSecret),
-                        string.IsNullOrEmpty(tokenSecret)
-                          ? string.Empty
-                          : Uri.EscapeDataString(tokenSecret)
-                    )
-                );
+                algorithm.Key = Encoding.ASCII
+                    .GetBytes(
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}&{1}",
+                                Uri.EscapeDataString(consumerSecret),
+                                string.IsNullOrEmpty(tokenSecret)
+                                  ? string.Empty
+                                  : Uri.EscapeDataString(tokenSecret)
+                            )
+                    );
                 var hash = algorithm.ComputeHash(Encoding.ASCII.GetBytes(signatureData));
                 return Convert.ToBase64String(hash);
             }
@@ -498,11 +502,12 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
         // https://developer.twitter.com/en/docs/apps/callback-urls
         private async Task EnsureTwitterRequestSuccess(HttpResponseMessage response)
         {
-            var contentTypeIsJson = string.Equals(
-                response.Content.Headers.ContentType?.MediaType ?? "",
-                "application/json",
-                StringComparison.OrdinalIgnoreCase
-            );
+            var contentTypeIsJson = string
+                .Equals(
+                    response.Content.Headers.ContentType?.MediaType ?? "",
+                    "application/json",
+                    StringComparison.OrdinalIgnoreCase
+                );
             if (response.IsSuccessStatusCode || !contentTypeIsJson)
             {
                 // Not an error or not JSON, ensure success as usual
@@ -514,9 +519,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
             try
             {
                 // Failure, attempt to parse Twitters error message
-                var errorContentStream = await response.Content.ReadAsStreamAsync(
-                    Context.RequestAborted
-                );
+                var errorContentStream = await response.Content
+                    .ReadAsStreamAsync(Context.RequestAborted);
                 errorResponse = await JsonSerializer.DeserializeAsync<TwitterErrorResponse>(
                     errorContentStream,
                     ErrorSerializerOptions

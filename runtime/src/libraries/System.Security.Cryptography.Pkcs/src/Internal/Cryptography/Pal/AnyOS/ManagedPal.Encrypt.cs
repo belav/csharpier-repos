@@ -109,16 +109,16 @@ namespace Internal.Cryptography.Pal.AnyOS
                 CmsRecipient recipient = recipients[i];
                 bool v0Recipient;
 
-                envelopedData.RecipientInfos[i].Ktri =
-                    recipient.Certificate.GetKeyAlgorithm() switch
-                    {
-                        Oids.Rsa => MakeKtri(cek, recipient, out v0Recipient),
-                        _
-                          => throw new CryptographicException(
-                              SR.Cryptography_Cms_UnknownAlgorithm,
-                              recipient.Certificate.GetKeyAlgorithm()
-                          ),
-                    };
+                envelopedData.RecipientInfos[i].Ktri = recipient.Certificate
+                    .GetKeyAlgorithm() switch
+                {
+                    Oids.Rsa => MakeKtri(cek, recipient, out v0Recipient),
+                    _
+                      => throw new CryptographicException(
+                          SR.Cryptography_Cms_UnknownAlgorithm,
+                          recipient.Certificate.GetKeyAlgorithm()
+                      ),
+                };
                 allRecipientsVersion0 = allRecipientsVersion0 && v0Recipient;
             }
 
@@ -201,10 +201,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                             out _
                         );
 
-                        ReadOnlySpan<byte> content = contentInfo.Content.AsSpan(
-                            contentOffset,
-                            contentLength
-                        );
+                        ReadOnlySpan<byte> content = contentInfo.Content
+                            .AsSpan(contentOffset, contentLength);
 
                         return encryptor.OneShot(content.ToArray());
                     }

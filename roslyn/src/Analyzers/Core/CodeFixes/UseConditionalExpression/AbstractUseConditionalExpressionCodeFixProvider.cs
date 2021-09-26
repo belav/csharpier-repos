@@ -79,10 +79,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             // annotation on it.
             var rules = new List<AbstractFormattingRule> { GetMultiLineFormattingRule() };
 
-            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
-                root.SyntaxTree,
-                cancellationToken
-            );
+            var options = document.Project.AnalyzerOptions
+                .GetAnalyzerOptionSet(root.SyntaxTree, cancellationToken);
 
 #if CODE_STYLE
             var formattedRoot = FormatterHelper.Format(
@@ -145,11 +143,11 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 if (IsBooleanLiteral(trueValue, false) && IsBooleanLiteral(falseValue, true))
                 {
                     return (TExpressionSyntax)generator.Negate(
-                            generatorInternal,
-                            condition,
-                            semanticModel,
-                            cancellationToken
-                        )
+                        generatorInternal,
+                        condition,
+                        semanticModel,
+                        cancellationToken
+                    )
                         .WithoutTrivia();
                 }
             }
@@ -173,12 +171,12 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 Simplifier.Annotation
             );
             var makeMultiLine = await MakeMultiLineAsync(
-                    document,
-                    condition,
-                    trueValue.Syntax,
-                    falseValue.Syntax,
-                    cancellationToken
-                )
+                document,
+                condition,
+                trueValue.Syntax,
+                falseValue.Syntax,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (makeMultiLine)
             {
@@ -234,12 +232,13 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
 #if CODE_STYLE
             var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var wrappingLength = document.Project.AnalyzerOptions.GetOption(
-                UseConditionalExpressionOptions.ConditionalExpressionWrappingLength,
-                document.Project.Language,
-                tree,
-                cancellationToken
-            );
+            var wrappingLength = document.Project.AnalyzerOptions
+                .GetOption(
+                    UseConditionalExpressionOptions.ConditionalExpressionWrappingLength,
+                    document.Project.Language,
+                    tree,
+                    cancellationToken
+                );
 #else
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var wrappingLength = options.GetOption(

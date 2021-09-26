@@ -46,14 +46,15 @@ namespace System.Net.Mail
             foreach (string extension in extensions)
             {
                 if (
-                    string.Compare(
-                        extension,
-                        0,
-                        AuthExtension,
-                        0,
-                        SizeOfAuthExtension,
-                        StringComparison.OrdinalIgnoreCase
-                    ) == 0
+                    string
+                        .Compare(
+                            extension,
+                            0,
+                            AuthExtension,
+                            0,
+                            SizeOfAuthExtension,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
                 )
                 {
                     // remove the AUTH text including the following character
@@ -88,27 +89,17 @@ namespace System.Net.Mail
                     _dsnEnabled = true;
                 }
                 else if (
-                    string.Compare(
-                        extension,
-                        0,
-                        "STARTTLS",
-                        0,
-                        8,
-                        StringComparison.OrdinalIgnoreCase
-                    ) == 0
+                    string
+                        .Compare(extension, 0, "STARTTLS", 0, 8, StringComparison.OrdinalIgnoreCase)
+                    == 0
                 )
                 {
                     _serverSupportsStartTls = true;
                 }
                 else if (
-                    string.Compare(
-                        extension,
-                        0,
-                        "SMTPUTF8",
-                        0,
-                        8,
-                        StringComparison.OrdinalIgnoreCase
-                    ) == 0
+                    string
+                        .Compare(extension, 0, "SMTPUTF8", 0, 8, StringComparison.OrdinalIgnoreCase)
+                    == 0
                 )
                 {
                     _serverSupportsEai = true;

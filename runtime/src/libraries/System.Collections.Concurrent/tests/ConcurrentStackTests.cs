@@ -84,30 +84,23 @@ namespace System.Collections.Concurrent.Tests
         {
             var stack = new ConcurrentStack<int>();
 
-            Task.WaitAll(
-                Enumerable.Range(0, numThreads)
-                    .Select(
-                        i =>
-                            Task.Factory.StartNew(
-                                (obj) =>
+            Task.WaitAll(Enumerable.Range(0, numThreads).Select(i => Task.Factory.StartNew(
+                            (obj) =>
+                            {
+                                int index = (int)obj;
+                                int[] array = new int[numItemsPerThread];
+                                for (int j = 0; j < numItemsPerThread; j++)
                                 {
-                                    int index = (int)obj;
-                                    int[] array = new int[numItemsPerThread];
-                                    for (int j = 0; j < numItemsPerThread; j++)
-                                    {
-                                        array[j] = index + j;
-                                    }
+                                    array[j] = index + j;
+                                }
 
-                                    stack.PushRange(array);
-                                },
-                                i * numItemsPerThread,
-                                CancellationToken.None,
-                                TaskCreationOptions.DenyChildAttach,
-                                TaskScheduler.Default
-                            )
-                    )
-                    .ToArray()
-            );
+                                stack.PushRange(array);
+                            },
+                            i * numItemsPerThread,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            TaskScheduler.Default
+                        )).ToArray());
 
             //validation
             for (int i = 0; i < numThreads; i++)
@@ -140,25 +133,18 @@ namespace System.Collections.Concurrent.Tests
             var stack = new ConcurrentStack<int>(allValues);
 
             int[] array = new int[numTotalElements];
-            Task.WaitAll(
-                Enumerable.Range(0, numThreads)
-                    .Select(
-                        i =>
-                            Task.Factory.StartNew(
-                                obj =>
-                                {
-                                    int index = (int)obj;
-                                    int res = stack.TryPopRange(array, index, numElementsPerThread);
-                                    Assert.Equal(numElementsPerThread, res);
-                                },
-                                i * numElementsPerThread,
-                                CancellationToken.None,
-                                TaskCreationOptions.LongRunning,
-                                TaskScheduler.Default
-                            )
-                    )
-                    .ToArray()
-            );
+            Task.WaitAll(Enumerable.Range(0, numThreads).Select(i => Task.Factory.StartNew(
+                            obj =>
+                            {
+                                int index = (int)obj;
+                                int res = stack.TryPopRange(array, index, numElementsPerThread);
+                                Assert.Equal(numElementsPerThread, res);
+                            },
+                            i * numElementsPerThread,
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )).ToArray());
 
             for (int i = 0; i < numThreads; i++)
             {

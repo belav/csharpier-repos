@@ -166,11 +166,12 @@ namespace Microsoft.Extensions.Logging
                 }
             }
 
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                _format,
-                formattedValues ?? Array.Empty<object>()
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    _format,
+                    formattedValues ?? Array.Empty<object>()
+                );
         }
 
         // NOTE: This method mutates the items in the array if needed to avoid extra allocations, and should only be used when caller expects this to happen
@@ -184,11 +185,8 @@ namespace Microsoft.Extensions.Logging
                 }
             }
 
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                _format,
-                values ?? Array.Empty<object>()
-            );
+            return string
+                .Format(CultureInfo.InvariantCulture, _format, values ?? Array.Empty<object>());
         }
 
         internal string Format()
@@ -203,23 +201,25 @@ namespace Microsoft.Extensions.Logging
 
         internal string Format(object? arg0, object? arg1)
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                _format,
-                FormatArgument(arg0),
-                FormatArgument(arg1)
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    _format,
+                    FormatArgument(arg0),
+                    FormatArgument(arg1)
+                );
         }
 
         internal string Format(object? arg0, object? arg1, object? arg2)
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                _format,
-                FormatArgument(arg0),
-                FormatArgument(arg1),
-                FormatArgument(arg2)
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    _format,
+                    FormatArgument(arg0),
+                    FormatArgument(arg1),
+                    FormatArgument(arg2)
+                );
         }
 
         public KeyValuePair<string, object?> GetValue(object?[] values, int index)

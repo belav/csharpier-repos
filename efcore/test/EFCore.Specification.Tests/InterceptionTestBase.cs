@@ -180,19 +180,15 @@ namespace Microsoft.EntityFrameworkCore
                 IEnumerable<IInterceptor> injectedInterceptors
             ) =>
                 AddOptions(
-                        TestStore.AddProviderOptions(
-                            new DbContextOptionsBuilder<DbContext>().AddInterceptors(
-                                    appInterceptors
-                                )
-                                .UseInternalServiceProvider(
-                                    InjectInterceptors(
-                                            new ServiceCollection(),
-                                            injectedInterceptors
-                                        )
-                                        .BuildServiceProvider()
-                                )
-                        )
+                    TestStore.AddProviderOptions(
+                        new DbContextOptionsBuilder<DbContext>()
+                            .AddInterceptors(appInterceptors)
+                            .UseInternalServiceProvider(
+                                InjectInterceptors(new ServiceCollection(), injectedInterceptors)
+                                    .BuildServiceProvider()
+                            )
                     )
+                )
                     .EnableDetailedErrors().Options;
 
             protected virtual IServiceCollection InjectInterceptors(

@@ -77,20 +77,22 @@ namespace Castle.DynamicProxy
                             string message;
                             if (interMixin != null)
                             {
-                                message = string.Format(
-                                    "The list of mixins contains two mixins implementing the same interface '{0}': {1} and {2}. An interface cannot be added by more than one mixin.",
-                                    inter.FullName,
-                                    interMixin.GetType().Name,
-                                    mixin.GetType().Name
-                                );
+                                message = string
+                                    .Format(
+                                        "The list of mixins contains two mixins implementing the same interface '{0}': {1} and {2}. An interface cannot be added by more than one mixin.",
+                                        inter.FullName,
+                                        interMixin.GetType().Name,
+                                        mixin.GetType().Name
+                                    );
                             }
                             else
                             {
                                 Debug.Assert(inter.IsDelegateType());
-                                message = string.Format(
-                                    "The list of mixins already contains a mixin for delegate type '{0}'.",
-                                    inter.FullName
-                                );
+                                message = string
+                                    .Format(
+                                        "The list of mixins already contains a mixin for delegate type '{0}'.",
+                                        inter.FullName
+                                    );
                             }
                             throw new ArgumentException(message, nameof(mixinInstances));
                         }
@@ -191,7 +193,8 @@ namespace Castle.DynamicProxy
             {
                 var delegateMixinTypes = mixinPositions.Select(m => m.Key)
                     .Where(TypeUtil.IsDelegateType);
-                var otherDelegateMixinTypes = other.mixinPositions.Select(m => m.Key)
+                var otherDelegateMixinTypes = other.mixinPositions
+                    .Select(m => m.Key)
                     .Where(TypeUtil.IsDelegateType);
                 return Enumerable.SequenceEqual(delegateMixinTypes, otherDelegateMixinTypes);
             }

@@ -56,12 +56,13 @@ namespace System.Net.Quic.Implementations.MsQuic
             _stateHandle = GCHandle.Alloc(_state);
             try
             {
-                uint status = MsQuicApi.Api.ListenerOpenDelegate(
-                    MsQuicApi.Api.Registration,
-                    s_listenerDelegate,
-                    GCHandle.ToIntPtr(_stateHandle),
-                    out _state.Handle
-                );
+                uint status = MsQuicApi.Api
+                    .ListenerOpenDelegate(
+                        MsQuicApi.Api.Registration,
+                        s_listenerDelegate,
+                        GCHandle.ToIntPtr(_stateHandle),
+                        out _state.Handle
+                    );
 
                 QuicExceptionHelpers.ThrowIfFailed(status, "ListenerOpen failed.");
             }
@@ -86,7 +87,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             try
             {
-                return await _state.AcceptConnectionQueue.Reader.ReadAsync(cancellationToken)
+                return await _state.AcceptConnectionQueue.Reader
+                    .ReadAsync(cancellationToken)
                     .ConfigureAwait(false);
             }
             catch (ChannelClosedException)
@@ -134,12 +136,13 @@ namespace System.Net.Quic.Implementations.MsQuic
             try
             {
                 MsQuicAlpnHelper.Prepare(_applicationProtocols, out handles, out buffers);
-                status = MsQuicApi.Api.ListenerStartDelegate(
-                    _state.Handle,
-                    (QuicBuffer*)Marshal.UnsafeAddrOfPinnedArrayElement(buffers, 0),
-                    (uint)_applicationProtocols.Count,
-                    ref address
-                );
+                status = MsQuicApi.Api
+                    .ListenerStartDelegate(
+                        _state.Handle,
+                        (QuicBuffer*)Marshal.UnsafeAddrOfPinnedArrayElement(buffers, 0),
+                        (uint)_applicationProtocols.Count,
+                        ref address
+                    );
             }
 
             finally
@@ -202,10 +205,11 @@ namespace System.Net.Quic.Implementations.MsQuic
                     evt.Data.NewConnection.Connection
                 );
 
-                uint status = MsQuicApi.Api.ConnectionSetConfigurationDelegate(
-                    connectionHandle,
-                    state.ConnectionConfiguration
-                );
+                uint status = MsQuicApi.Api
+                    .ConnectionSetConfigurationDelegate(
+                        connectionHandle,
+                        state.ConnectionConfiguration
+                    );
                 QuicExceptionHelpers.ThrowIfFailed(status, "ConnectionSetConfiguration failed.");
 
                 var msQuicConnection = new MsQuicConnection(

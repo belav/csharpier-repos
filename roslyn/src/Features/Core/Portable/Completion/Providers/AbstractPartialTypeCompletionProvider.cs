@@ -40,9 +40,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 if (node != null)
                 {
                     var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                            node,
-                            cancellationToken
-                        )
+                        node,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (
                         semanticModel.GetDeclaredSymbol(node, cancellationToken)
@@ -140,13 +140,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         }
 
         private static bool InSameProject(INamedTypeSymbol symbol, Compilation compilation) =>
-            symbol.DeclaringSyntaxReferences.Any(
-                r => compilation.SyntaxTrees.Contains(r.SyntaxTree)
-            );
+            symbol.DeclaringSyntaxReferences
+                .Any(r => compilation.SyntaxTrees.Contains(r.SyntaxTree));
 
         private static bool NotNewDeclaredMember(INamedTypeSymbol symbol, TSyntaxContext context)
         {
-            return symbol.DeclaringSyntaxReferences.Select(reference => reference.GetSyntax())
+            return symbol.DeclaringSyntaxReferences
+                .Select(reference => reference.GetSyntax())
                 .Any(
                     node =>
                         !(

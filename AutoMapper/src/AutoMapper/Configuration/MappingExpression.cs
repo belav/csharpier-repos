@@ -232,8 +232,8 @@ namespace AutoMapper.Configuration
         {
             foreach (
                 var member in memberExpressions.Select(
-                        memberExpression => memberExpression.GetMember()
-                    )
+                    memberExpression => memberExpression.GetMember()
+                )
                     .Where(member => member != null)
             )
             {

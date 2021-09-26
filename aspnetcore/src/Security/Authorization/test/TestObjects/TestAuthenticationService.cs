@@ -24,9 +24,8 @@ namespace Microsoft.AspNetCore.Authorization.Test.TestObjects
         {
             AuthenticateCount++;
 
-            var identity = context.User.Identities.SingleOrDefault(
-                i => i.AuthenticationType == scheme
-            );
+            var identity = context.User.Identities
+                .SingleOrDefault(i => i.AuthenticationType == scheme);
             if (identity != null)
             {
                 return Task.FromResult(

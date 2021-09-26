@@ -142,7 +142,8 @@ namespace IntelHardwareIntrinsicTest
 
                     // SDDD DDDD
                     vf3 =
-                        (Vector256<float>)typeof(Avx).GetMethod(
+                        (Vector256<float>)typeof(Avx)
+                            .GetMethod(
                                 nameof(Avx.Blend),
                                 new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
                             )
@@ -266,7 +267,8 @@ namespace IntelHardwareIntrinsicTest
 
                     // DD DD
                     vf3 =
-                        (Vector256<double>)typeof(Avx).GetMethod(
+                        (Vector256<double>)typeof(Avx)
+                            .GetMethod(
                                 nameof(Avx.Blend),
                                 new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
                             )

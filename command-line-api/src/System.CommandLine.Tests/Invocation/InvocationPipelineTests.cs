@@ -24,7 +24,8 @@ namespace System.CommandLine.Tests.Invocation
         {
             var wasCalled = false;
 
-            var parser = new CommandLineBuilder().AddCommand(new Command("command"))
+            var parser = new CommandLineBuilder()
+                .AddCommand(new Command("command"))
                 .UseMiddleware(_ => wasCalled = true)
                 .Build();
 
@@ -76,7 +77,8 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public void When_middleware_throws_then_InvokeAsync_does_not_handle_the_exception()
         {
-            var parser = new CommandLineBuilder().AddCommand(new Command("the-command"))
+            var parser = new CommandLineBuilder()
+                .AddCommand(new Command("the-command"))
                 .UseMiddleware(_ => throw new Exception("oops!"))
                 .Build();
 
@@ -88,7 +90,8 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public void When_middleware_throws_then_Invoke_does_not_handle_the_exception()
         {
-            var parser = new CommandLineBuilder().AddCommand(new Command("the-command"))
+            var parser = new CommandLineBuilder()
+                .AddCommand(new Command("the-command"))
                 .UseMiddleware(_ => throw new Exception("oops!"))
                 .Build();
 
@@ -163,18 +166,17 @@ namespace System.CommandLine.Tests.Invocation
             );
 
             var parser = new CommandLineBuilder().UseMiddleware(
-                    async (context, next) =>
-                    {
-                        var tokens = context.ParseResult.Tokens.Select(t => t.Value)
-                            .Concat(new[] { "implicit-inner-command" })
-                            .ToArray();
+                async (context, next) =>
+                {
+                    var tokens = context.ParseResult.Tokens
+                        .Select(t => t.Value)
+                        .Concat(new[] { "implicit-inner-command" })
+                        .ToArray();
 
-                        context.ParseResult = context.Parser.Parse(tokens);
-                        await next(context);
-                    }
-                )
-                .AddCommand(command)
-                .Build();
+                    context.ParseResult = context.Parser.Parse(tokens);
+                    await next(context);
+                }
+            ).AddCommand(command).Build();
 
             await parser.InvokeAsync("the-command", new TestConsole());
 
@@ -197,14 +199,12 @@ namespace System.CommandLine.Tests.Invocation
             );
 
             var parser = new CommandLineBuilder().UseMiddleware(
-                    async (context, next) =>
-                    {
-                        middlewareWasCalled = true;
-                        await Task.Yield();
-                    }
-                )
-                .AddCommand(command)
-                .Build();
+                async (context, next) =>
+                {
+                    middlewareWasCalled = true;
+                    await Task.Yield();
+                }
+            ).AddCommand(command).Build();
 
             await parser.InvokeAsync("the-command", new TestConsole());
 
@@ -228,14 +228,12 @@ namespace System.CommandLine.Tests.Invocation
             );
 
             var parser = new CommandLineBuilder().UseMiddleware(
-                    async (context, next) =>
-                    {
-                        middlewareWasCalled = true;
-                        await Task.Yield();
-                    }
-                )
-                .AddCommand(command)
-                .Build();
+                async (context, next) =>
+                {
+                    middlewareWasCalled = true;
+                    await Task.Yield();
+                }
+            ).AddCommand(command).Build();
 
             parser.Invoke("the-command", new TestConsole());
 
@@ -288,7 +286,8 @@ namespace System.CommandLine.Tests.Invocation
                 }
             );
 
-            var parser = new CommandLineBuilder().UseHelpBuilder(helpBuilderFactory)
+            var parser = new CommandLineBuilder()
+                .UseHelpBuilder(helpBuilderFactory)
                 .AddCommand(command)
                 .Build();
 

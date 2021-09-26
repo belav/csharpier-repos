@@ -568,11 +568,9 @@ namespace System.Net.Primitives.Functional.Tests
 
             // .NET Framework and .NET Core have different behaviors for Digest when default NetworkCredential is used.
             if (
-                string.Equals(
-                    authType,
-                    authenticationTypeDigest,
-                    StringComparison.OrdinalIgnoreCase
-                ) && (nc == CredentialCache.DefaultNetworkCredentials)
+                string
+                    .Equals(authType, authenticationTypeDigest, StringComparison.OrdinalIgnoreCase)
+                && (nc == CredentialCache.DefaultNetworkCredentials)
             )
             {
                 if (PlatformDetection.IsNetFramework)
@@ -633,11 +631,9 @@ namespace System.Net.Primitives.Functional.Tests
 
             // .NET Framework and .NET Core have different behaviors for Digest when default NetworkCredential is used.
             if (
-                string.Equals(
-                    authType,
-                    authenticationTypeDigest,
-                    StringComparison.OrdinalIgnoreCase
-                ) && (nc == CredentialCache.DefaultNetworkCredentials)
+                string
+                    .Equals(authType, authenticationTypeDigest, StringComparison.OrdinalIgnoreCase)
+                && (nc == CredentialCache.DefaultNetworkCredentials)
             )
             {
                 if (PlatformDetection.IsNetFramework)

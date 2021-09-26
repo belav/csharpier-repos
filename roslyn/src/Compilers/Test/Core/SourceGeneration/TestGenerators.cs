@@ -97,10 +97,11 @@ namespace Roslyn.Test.Utilities.TestGenerators
         {
             if (edit is AdditionalFileAddedEdit add && CanApplyChanges)
             {
-                context.AdditionalSources.Add(
-                    GetGeneratedFileName(add.AddedText.Path),
-                    SourceText.From("", Encoding.UTF8)
-                );
+                context.AdditionalSources
+                    .Add(
+                        GetGeneratedFileName(add.AddedText.Path),
+                        SourceText.From("", Encoding.UTF8)
+                    );
                 return true;
             }
             return false;

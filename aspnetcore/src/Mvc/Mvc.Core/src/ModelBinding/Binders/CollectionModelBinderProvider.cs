@@ -67,9 +67,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             Type collectionType
         )
         {
-            var binderType = typeof(CollectionModelBinder<>).MakeGenericType(
-                collectionType.GenericTypeArguments
-            );
+            var binderType = typeof(CollectionModelBinder<>)
+                .MakeGenericType(collectionType.GenericTypeArguments);
             var elementType = collectionType.GenericTypeArguments[0];
             var elementBinder = context.CreateBinder(
                 context.MetadataProvider.GetMetadataForType(elementType)

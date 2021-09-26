@@ -40,7 +40,8 @@ namespace RazorBuildWebSite
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder().UseContentRoot(Directory.GetCurrentDirectory())
+            new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .UseKestrel()
                 .UseIISIntegration();

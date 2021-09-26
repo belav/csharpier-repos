@@ -72,12 +72,13 @@ namespace System.Linq.Parallel
                 {
                     if (partitions.PartitionCount > 1)
                     {
-                        _asyncChannels = MergeExecutor<TInputOutput>.MakeAsynchronousChannels(
-                            partitions.PartitionCount,
-                            options,
-                            consumerEvent,
-                            cancellationState.MergedCancellationToken
-                        );
+                        _asyncChannels = MergeExecutor<TInputOutput>
+                            .MakeAsynchronousChannels(
+                                partitions.PartitionCount,
+                                options,
+                                consumerEvent,
+                                cancellationState.MergedCancellationToken
+                            );
                         _channelEnumerator = new AsynchronousChannelMergeEnumerator<TInputOutput>(
                             _taskGroupState,
                             _asyncChannels,
@@ -89,17 +90,16 @@ namespace System.Linq.Parallel
                         // If there is only one partition, we don't need to create channels. The only producer enumerator
                         // will be used as the result enumerator.
                         _channelEnumerator = ExceptionAggregator.WrapQueryEnumerator(
-                                partitions[0],
-                                _taskGroupState.CancellationState
-                            )
+                            partitions[0],
+                            _taskGroupState.CancellationState
+                        )
                             .GetEnumerator();
                     }
                 }
                 else
                 {
-                    _syncChannels = MergeExecutor<TInputOutput>.MakeSynchronousChannels(
-                        partitions.PartitionCount
-                    );
+                    _syncChannels = MergeExecutor<TInputOutput>
+                        .MakeSynchronousChannels(partitions.PartitionCount);
                     _channelEnumerator = new SynchronousChannelMergeEnumerator<TInputOutput>(
                         _taskGroupState,
                         _syncChannels
@@ -205,9 +205,8 @@ namespace System.Linq.Parallel
             {
                 List<TInputOutput> output = new List<TInputOutput>();
                 using (
-                    IEnumerator<TInputOutput> enumerator = (
-                        (IMergeHelper<TInputOutput>)this
-                    ).GetEnumerator()
+                    IEnumerator<TInputOutput> enumerator = ((IMergeHelper<TInputOutput>)this)
+                        .GetEnumerator()
                 )
                 {
                     while (enumerator.MoveNext())

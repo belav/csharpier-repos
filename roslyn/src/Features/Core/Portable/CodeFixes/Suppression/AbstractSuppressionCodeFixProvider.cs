@@ -142,13 +142,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         )
         {
             var codeFixes = await GetSuppressionsAsync(
-                    document,
-                    span,
-                    diagnostics,
-                    skipSuppressMessage: true,
-                    skipUnsuppress: true,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                span,
+                diagnostics,
+                skipSuppressMessage: true,
+                skipUnsuppress: true,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             return codeFixes.SelectMany(fix => fix.Action.NestedCodeActions)
                 .OfType<PragmaWarningCodeAction>()
@@ -165,10 +165,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         )
         {
             var suppressionTargetInfo = await GetSuppressionTargetInfoAsync(
-                    document,
-                    span,
-                    cancellationToken
-                )
+                document,
+                span,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (suppressionTargetInfo == null)
             {
@@ -176,14 +176,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             }
 
             return await GetSuppressionsAsync(
-                    documentOpt: document,
-                    project: document.Project,
-                    diagnostics: diagnostics,
-                    suppressionTargetInfo: suppressionTargetInfo,
-                    skipSuppressMessage: skipSuppressMessage,
-                    skipUnsuppress: skipUnsuppress,
-                    cancellationToken: cancellationToken
-                )
+                documentOpt: document,
+                project: document.Project,
+                diagnostics: diagnostics,
+                suppressionTargetInfo: suppressionTargetInfo,
+                skipSuppressMessage: skipSuppressMessage,
+                skipUnsuppress: skipUnsuppress,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -205,14 +205,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 TargetSymbol = compilation.Assembly
             };
             return await GetSuppressionsAsync(
-                    documentOpt: null,
-                    project: project,
-                    diagnostics: diagnostics,
-                    suppressionTargetInfo: suppressionTargetInfo,
-                    skipSuppressMessage: false,
-                    skipUnsuppress: false,
-                    cancellationToken: cancellationToken
-                )
+                documentOpt: null,
+                project: project,
+                diagnostics: diagnostics,
+                suppressionTargetInfo: suppressionTargetInfo,
+                skipSuppressMessage: false,
+                skipUnsuppress: false,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -312,13 +312,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 else if (!skipUnsuppress)
                 {
                     var codeAction = await RemoveSuppressionCodeAction.CreateAsync(
-                            suppressionTargetInfo,
-                            documentOpt,
-                            project,
-                            diagnostic,
-                            this,
-                            cancellationToken
-                        )
+                        suppressionTargetInfo,
+                        documentOpt,
+                        project,
+                        diagnostic,
+                        this,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (codeAction != null)
                     {

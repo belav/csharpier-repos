@@ -31,11 +31,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             var diagnostics = DiagnosticBag.GetInstance();
 
-            var emitOptions = EmitOptions.Default.WithDebugInformationFormat(
-                baseline.HasPortablePdb
-                  ? DebugInformationFormat.PortablePdb
-                  : DebugInformationFormat.Pdb
-            );
+            var emitOptions = EmitOptions.Default
+                .WithDebugInformationFormat(
+                    baseline.HasPortablePdb
+                      ? DebugInformationFormat.PortablePdb
+                      : DebugInformationFormat.Pdb
+                );
             var runtimeMDVersion = compilation.GetRuntimeMetadataVersion(emitOptions, diagnostics);
             var serializationProperties = compilation.ConstructModuleSerializationProperties(
                 emitOptions,

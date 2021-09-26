@@ -43,11 +43,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(optionsBuilder));
             }
 
-            optionsBuilder.Services.Configure<TOptions>(
-                optionsBuilder.Name,
-                config,
-                configureBinder
-            );
+            optionsBuilder.Services
+                .Configure<TOptions>(optionsBuilder.Name, config, configureBinder);
             return optionsBuilder;
         }
 
@@ -76,11 +73,8 @@ namespace Microsoft.Extensions.DependencyInjection
             optionsBuilder.Configure<IConfiguration>(
                 (opts, config) =>
                 {
-                    IConfiguration section = string.Equals(
-                        "",
-                        configSectionPath,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    IConfiguration section = string
+                    .Equals("", configSectionPath, StringComparison.OrdinalIgnoreCase)
                         ? config
                         : config.GetSection(configSectionPath);
                     section.Bind(opts, configureBinder);

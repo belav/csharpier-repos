@@ -499,7 +499,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var bike = context.Vehicles.Include(v => v.Operator)
+                var bike = context.Vehicles
+                    .Include(v => v.Operator)
                     .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
                 bike.Operator = new Operator { Name = "Chris Horner" };
@@ -518,7 +519,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var bike = context.Vehicles.Include(v => v.Operator)
+                var bike = context.Vehicles
+                    .Include(v => v.Operator)
                     .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
                 Assert.Equal("repairman", bike.Operator.Name);
                 Assert.Equal("Repair", ((LicensedOperator)bike.Operator).LicenseType);
@@ -572,7 +574,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var bike = context.Vehicles.Include(v => v.Operator)
+                var bike = context.Vehicles
+                    .Include(v => v.Operator)
                     .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
                 Assert.Equal(2, bike.SeatingCapacity);
@@ -605,7 +608,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var bike = context.Vehicles.Include(v => v.Operator)
+                var bike = context.Vehicles
+                    .Include(v => v.Operator)
                     .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
                 var newBike = new Vehicle
@@ -628,7 +632,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var bike = context.Vehicles.Include(v => v.Operator)
+                var bike = context.Vehicles
+                    .Include(v => v.Operator)
                     .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
                 Assert.Equal(2, bike.SeatingCapacity);
                 Assert.Equal("repairman", bike.Operator.Name);

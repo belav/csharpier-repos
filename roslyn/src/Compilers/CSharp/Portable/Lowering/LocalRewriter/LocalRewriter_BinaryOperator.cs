@@ -294,12 +294,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         Debug.Assert(method is null);
                         return _dynamicFactory.MakeDynamicBinaryOperator(
-                                operatorKind,
-                                loweredLeft,
-                                loweredRight,
-                                isCompoundAssignment,
-                                type
-                            )
+                            operatorKind,
+                            loweredLeft,
+                            loweredRight,
+                            isCompoundAssignment,
+                            type
+                        )
                             .ToExpression();
                     }
                 }
@@ -862,14 +862,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                 }
 
-                result = conditionalLeft!.Update(
-                    conditionalLeft.Receiver,
-                    conditionalLeft.HasValueMethodOpt,
-                    whenNotNull: result,
-                    whenNullOpt: whenNullOpt,
-                    id: conditionalLeft.Id,
-                    type: result.Type!
-                );
+                result = conditionalLeft!
+                    .Update(
+                        conditionalLeft.Receiver,
+                        conditionalLeft.HasValueMethodOpt,
+                        whenNotNull: result,
+                        whenNullOpt: whenNullOpt,
+                        id: conditionalLeft.Id,
+                        type: result.Type!
+                    );
             }
 
             return result;
@@ -974,12 +975,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var op = _dynamicFactory.MakeDynamicBinaryOperator(
-                    operatorKind,
-                    loweredLeft,
-                    loweredRight,
-                    isCompoundAssignment,
-                    type
-                )
+                operatorKind,
+                loweredLeft,
+                loweredRight,
+                isCompoundAssignment,
+                type
+            )
                 .ToExpression();
 
             // IsFalse(true) or IsTrue(false) are always false:
@@ -1075,10 +1076,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(leftTruthOperator == null);
                 return _dynamicFactory.MakeDynamicUnaryOperator(
-                        negative ? UnaryOperatorKind.DynamicFalse : UnaryOperatorKind.DynamicTrue,
-                        loweredLeft,
-                        boolean
-                    )
+                    negative ? UnaryOperatorKind.DynamicFalse : UnaryOperatorKind.DynamicTrue,
+                    loweredLeft,
+                    boolean
+                )
                     .ToExpression();
             }
 
@@ -1087,11 +1088,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // If not the type has to implement IsTrue/IsFalse operator - we checked it during binding.
 
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo();
-            var conversion = _compilation.Conversions.ClassifyConversionFromExpression(
-                loweredLeft,
-                boolean,
-                ref useSiteInfo
-            );
+            var conversion = _compilation.Conversions
+                .ClassifyConversionFromExpression(loweredLeft, boolean, ref useSiteInfo);
             _diagnostics.Add(loweredLeft.Syntax, useSiteInfo);
             if (conversion.IsImplicit)
             {

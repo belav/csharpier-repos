@@ -57,9 +57,8 @@ namespace System.Reflection.TypeLoading.Ecma
                         {
                             // Get file name
                             result.ResourceLocation = default;
-                            AssemblyFile file = (
-                                (AssemblyFileHandle)resource.Implementation
-                            ).GetAssemblyFile(reader);
+                            AssemblyFile file = ((AssemblyFileHandle)resource.Implementation)
+                                .GetAssemblyFile(reader);
                             result.FileName = file.Name.GetString(reader);
                             if (file.ContainsMetadata)
                             {
@@ -82,7 +81,8 @@ namespace System.Reflection.TypeLoading.Ecma
                             result.ResourceLocation = ResourceLocation.ContainedInAnotherAssembly;
                             RoAssemblyName destinationAssemblyName = (
                                 (AssemblyReferenceHandle)resource.Implementation
-                            ).ToRoAssemblyName(reader);
+                            )
+                                .ToRoAssemblyName(reader);
                             result.ReferencedAssembly = Loader.ResolveAssembly(
                                 destinationAssemblyName
                             );

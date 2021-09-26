@@ -41,9 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             _logger.AttemptingToBindModel(bindingContext);
 
             // Check for missing data case 1: There was no <input ... /> element containing this data.
-            var valueProviderResult = bindingContext.ValueProvider.GetValue(
-                bindingContext.ModelName
-            );
+            var valueProviderResult = bindingContext.ValueProvider
+                .GetValue(bindingContext.ModelName);
             if (valueProviderResult == ValueProviderResult.None)
             {
                 _logger.FoundNoValueInRequest(bindingContext);
@@ -69,11 +68,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             }
             catch (Exception exception)
             {
-                bindingContext.ModelState.TryAddModelError(
-                    bindingContext.ModelName,
-                    exception,
-                    bindingContext.ModelMetadata
-                );
+                bindingContext.ModelState
+                    .TryAddModelError(
+                        bindingContext.ModelName,
+                        exception,
+                        bindingContext.ModelMetadata
+                    );
             }
 
             _logger.DoneAttemptingToBindModel(bindingContext);

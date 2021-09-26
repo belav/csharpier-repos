@@ -246,9 +246,9 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> leftQuery = ParallelEnumerable.Range(0, ElementCount / 4)
                 .Union(ParallelEnumerable.Range(ElementCount / 4, ElementCount / 4));
             ParallelQuery<int> rightQuery = ParallelEnumerable.Range(
-                    2 * ElementCount / 4,
-                    ElementCount / 4
-                )
+                2 * ElementCount / 4,
+                ElementCount / 4
+            )
                 .Union(ParallelEnumerable.Range(3 * ElementCount / 4, ElementCount / 4));
 
             var results = new HashSet<int>(leftQuery.Concat(rightQuery));

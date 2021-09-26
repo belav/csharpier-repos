@@ -94,7 +94,7 @@ namespace ILCompiler
             // the compilation input.
             return _mangleForCplusPlus
               ? sanitizedName.Replace(EnterNameScopeSequence, "_AA_")
-                    .Replace(ExitNameScopeSequence, "_VV_")
+                .Replace(ExitNameScopeSequence, "_VV_")
               : sanitizedName;
         }
 

@@ -221,10 +221,10 @@ namespace System.IO.Pipelines
                     while (buffer.TryGet(ref position, out ReadOnlyMemory<byte> memory))
                     {
                         FlushResult flushResult = await writeAsync(
-                                destination,
-                                memory,
-                                cancellationToken
-                            )
+                            destination,
+                            memory,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         if (flushResult.IsCanceled)

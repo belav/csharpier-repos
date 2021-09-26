@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore
             var schema = foreignKey.DeclaringEntityType.GetSchema();
             var principalTableName = foreignKey.PrincipalEntityType.GetTableName();
 
-            var name = new StringBuilder().Append("FK_")
+            var name = new StringBuilder()
+                .Append("FK_")
                 .Append(tableName)
                 .Append("_")
                 .Append(principalTableName)
@@ -85,9 +86,8 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             var propertyNames = foreignKey.Properties.GetColumnNames(storeObject);
-            var principalPropertyNames = foreignKey.PrincipalKey.Properties.GetColumnNames(
-                principalStoreObject
-            );
+            var principalPropertyNames = foreignKey.PrincipalKey.Properties
+                .GetColumnNames(principalStoreObject);
             if (propertyNames == null || principalPropertyNames == null)
             {
                 return null;
@@ -105,9 +105,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 IReadOnlyForeignKey? linkedForeignKey = null;
                 foreach (
-                    var otherForeignKey in rootForeignKey.DeclaringEntityType.FindRowInternalForeignKeys(
-                            storeObject
-                        )
+                    var otherForeignKey in rootForeignKey.DeclaringEntityType
+                        .FindRowInternalForeignKeys(storeObject)
                         .SelectMany(fk => fk.PrincipalEntityType.GetForeignKeys())
                 )
                 {
@@ -118,13 +117,10 @@ namespace Microsoft.EntityFrameworkCore
                             == otherForeignKey.PrincipalEntityType.GetSchema()
                     )
                     {
-                        var otherColumnNames = otherForeignKey.Properties.GetColumnNames(
-                            storeObject
-                        );
-                        var otherPrincipalColumnNames =
-                            otherForeignKey.PrincipalKey.Properties.GetColumnNames(
-                                principalStoreObject
-                            );
+                        var otherColumnNames = otherForeignKey.Properties
+                            .GetColumnNames(storeObject);
+                        var otherPrincipalColumnNames = otherForeignKey.PrincipalKey.Properties
+                            .GetColumnNames(principalStoreObject);
                         if (
                             otherColumnNames != null
                             && otherPrincipalColumnNames != null
@@ -151,7 +147,8 @@ namespace Microsoft.EntityFrameworkCore
                 return rootForeignKey.GetConstraintName(storeObject, principalStoreObject);
             }
 
-            var baseName = new StringBuilder().Append("FK_")
+            var baseName = new StringBuilder()
+                .Append("FK_")
                 .Append(storeObject.Name)
                 .Append("_")
                 .Append(principalStoreObject.Name)
@@ -257,9 +254,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 IReadOnlyForeignKey? linkedForeignKey = null;
                 foreach (
-                    var otherForeignKey in rootForeignKey.DeclaringEntityType.FindRowInternalForeignKeys(
-                            storeObject
-                        )
+                    var otherForeignKey in rootForeignKey.DeclaringEntityType
+                        .FindRowInternalForeignKeys(storeObject)
                         .SelectMany(fk => fk.PrincipalEntityType.GetForeignKeys())
                 )
                 {
@@ -305,9 +301,8 @@ namespace Microsoft.EntityFrameworkCore
             this IMutableForeignKey foreignKey,
             in StoreObjectIdentifier storeObject
         ) =>
-            (IMutableForeignKey?)((IReadOnlyForeignKey)foreignKey).FindSharedObjectRootForeignKey(
-                storeObject
-            );
+            (IMutableForeignKey?)((IReadOnlyForeignKey)foreignKey)
+                .FindSharedObjectRootForeignKey(storeObject);
 
         /// <summary>
         ///     <para>
@@ -325,9 +320,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionForeignKey foreignKey,
             in StoreObjectIdentifier storeObject
         ) =>
-            (IConventionForeignKey?)(
-                (IReadOnlyForeignKey)foreignKey
-            ).FindSharedObjectRootForeignKey(storeObject);
+            (IConventionForeignKey?)((IReadOnlyForeignKey)foreignKey)
+                .FindSharedObjectRootForeignKey(storeObject);
 
         /// <summary>
         ///     <para>
@@ -345,8 +339,7 @@ namespace Microsoft.EntityFrameworkCore
             this IForeignKey foreignKey,
             in StoreObjectIdentifier storeObject
         ) =>
-            (IForeignKey?)((IReadOnlyForeignKey)foreignKey).FindSharedObjectRootForeignKey(
-                storeObject
-            );
+            (IForeignKey?)((IReadOnlyForeignKey)foreignKey)
+                .FindSharedObjectRootForeignKey(storeObject);
     }
 }

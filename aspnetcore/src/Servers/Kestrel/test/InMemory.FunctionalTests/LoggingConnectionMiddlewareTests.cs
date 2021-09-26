@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             )
             {
                 {
-                    var response = await server.HttpClientSlim.GetStringAsync(
+                    var response = await server.HttpClientSlim
+                        .GetStringAsync(
                             $"https://localhost:{server.Port}/",
                             validateCertificate: false
                         )

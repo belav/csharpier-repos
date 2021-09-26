@@ -45,9 +45,8 @@ namespace System.Data.Odbc
         private long _sequentialBytesRead;
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        internal readonly int ObjectID = System.Threading.Interlocked
+            .Increment(ref s_objectTypeCount);
 
         // the statement handle here is just a copy of the statement handle owned by the command
         // the DataReader must not free the statement handle. this is done by the command
@@ -627,11 +626,11 @@ namespace System.Data.Odbc
                 {
                     bool sign = (
                         GetColAttribute(
-                                i,
-                                ODBC32.SQL_DESC.UNSIGNED,
-                                ODBC32.SQL_COLUMN.UNSIGNED,
-                                ODBC32.HANDLER.THROW
-                            )
+                            i,
+                            ODBC32.SQL_DESC.UNSIGNED,
+                            ODBC32.SQL_COLUMN.UNSIGNED,
+                            ODBC32.HANDLER.THROW
+                        )
                             .ToInt64() != 0
                     );
                     typeMap = TypeMap.UpgradeSignedType(typeMap, sign);
@@ -925,10 +924,8 @@ namespace System.Data.Odbc
                                 ODBC32.SQL_C.WCHAR,
                                 ODBC32.SQL_NTS
                             );
-                            _dataCache[i] = decimal.Parse(
-                                s,
-                                System.Globalization.CultureInfo.InvariantCulture
-                            );
+                            _dataCache[i] = decimal
+                                .Parse(s, System.Globalization.CultureInfo.InvariantCulture);
                         }
                         catch (OverflowException)
                         {
@@ -1309,12 +1306,8 @@ namespace System.Data.Odbc
                     return 0; // MDAC Bug 73298
 
                 if (isCharsBuffer)
-                    ((string)cachedObj).CopyTo(
-                        (int)dataIndex,
-                        (char[])buffer,
-                        bufferIndex,
-                        lengthOfCopy
-                    );
+                    ((string)cachedObj)
+                        .CopyTo((int)dataIndex, (char[])buffer, bufferIndex, lengthOfCopy);
                 else
                     Array.Copy(
                         (byte[])cachedObj,
@@ -2275,11 +2268,11 @@ namespace System.Data.Odbc
                 {
                     bool sign = (
                         GetColAttribute(
-                                i,
-                                ODBC32.SQL_DESC.UNSIGNED,
-                                ODBC32.SQL_COLUMN.UNSIGNED,
-                                ODBC32.HANDLER.THROW
-                            )
+                            i,
+                            ODBC32.SQL_DESC.UNSIGNED,
+                            ODBC32.SQL_COLUMN.UNSIGNED,
+                            ODBC32.HANDLER.THROW
+                        )
                             .ToInt64() != 0
                     );
                     // sign = true if the column is unsigned

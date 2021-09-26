@@ -55,8 +55,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _logPerformanceInfo = logPerformanceInfo;
             _onAnalysisException = onAnalysisException;
 
-            var compilationBasedAnalyzers =
-                compilationWithAnalyzers?.Analyzers.ToImmutableHashSet();
+            var compilationBasedAnalyzers = compilationWithAnalyzers?.Analyzers
+                .ToImmutableHashSet();
             _compilationBasedAnalyzersInAnalysisScope =
                 compilationBasedAnalyzers != null
                     ? analysisScope.Analyzers.WhereAsArray(compilationBasedAnalyzers.Contains)
@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 "We only support syntactic analysis for non-source documents"
             );
 
-            var loadDiagnostic = await textDocument.State.GetLoadDiagnosticAsync(cancellationToken)
+            var loadDiagnostic = await textDocument.State
+                .GetLoadDiagnosticAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             if (analyzer == FileContentLoadAnalyzer.Instance)
@@ -111,12 +112,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 var documentDiagnostics =
                     await AnalyzerHelper.ComputeDocumentDiagnosticAnalyzerDiagnosticsAsync(
-                            documentAnalyzer,
-                            document,
-                            kind,
-                            _compilationWithAnalyzers?.Compilation,
-                            cancellationToken
-                        )
+                        documentAnalyzer,
+                        document,
+                        kind,
+                        _compilationWithAnalyzers?.Compilation,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 return documentDiagnostics.ConvertToLocalDiagnostics(document, span);
@@ -144,9 +145,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var isCompilerAnalyzer = analyzer.IsCompilerAnalyzer();
             if (kind != AnalysisKind.Syntax && isCompilerAnalyzer)
             {
-                var isEnabled = await textDocument.Project.HasSuccessfullyLoadedAsync(
-                        cancellationToken
-                    )
+                var isEnabled = await textDocument.Project
+                    .HasSuccessfullyLoadedAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 Logger.Log(
@@ -173,41 +173,41 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 AnalysisKind.Syntax
                   => await GetSyntaxDiagnosticsAsync(
-                          analyzer,
-                          isCompilerAnalyzer,
-                          cancellationToken
-                      )
+                      analyzer,
+                      isCompilerAnalyzer,
+                      cancellationToken
+                  )
                       .ConfigureAwait(false),
                 AnalysisKind.Semantic
                   => await GetSemanticDiagnosticsAsync(
-                          analyzer,
-                          isCompilerAnalyzer,
-                          cancellationToken
-                      )
+                      analyzer,
+                      isCompilerAnalyzer,
+                      cancellationToken
+                  )
                       .ConfigureAwait(false),
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
 
             // Remap diagnostic locations, if required.
             diagnostics = await RemapDiagnosticLocationsIfRequiredAsync(
-                    textDocument,
-                    diagnostics,
-                    cancellationToken
-                )
+                textDocument,
+                diagnostics,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
 #if DEBUG
             var diags = await diagnostics.ToDiagnosticsAsync(
-                    textDocument.Project,
-                    cancellationToken
-                )
+                textDocument.Project,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             Debug.Assert(
                 diags.Length
                     == CompilationWithAnalyzers.GetEffectiveDiagnostics(
-                            diags,
-                            _compilationWithAnalyzers.Compilation
-                        )
+                        diags,
+                        _compilationWithAnalyzers.Compilation
+                    )
                         .Count()
             );
             Debug.Assert(
@@ -230,12 +230,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             try
             {
                 var resultAndTelemetry = await _diagnosticAnalyzerRunner.AnalyzeDocumentAsync(
-                        analysisScope,
-                        _compilationWithAnalyzers,
-                        _logPerformanceInfo,
-                        getTelemetryInfo: false,
-                        cancellationToken
-                    )
+                    analysisScope,
+                    _compilationWithAnalyzers,
+                    _logPerformanceInfo,
+                    getTelemetryInfo: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return resultAndTelemetry.AnalysisResult;
             }
@@ -292,10 +292,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 return await GetCompilerAnalyzerDiagnosticsAsync(
-                        analyzer,
-                        AnalysisScope.Span,
-                        cancellationToken
-                    )
+                    analyzer,
+                    AnalysisScope.Span,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -305,9 +305,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     _compilationBasedAnalyzersInAnalysisScope
                 );
                 var syntaxDiagnostics = await GetAnalysisResultAsync(
-                        analysisScope,
-                        cancellationToken
-                    )
+                    analysisScope,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 Interlocked.CompareExchange(ref _lazySyntaxDiagnostics, syntaxDiagnostics, null);
             }
@@ -345,10 +345,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var adjustedSpan = await GetAdjustedSpanForCompilerAnalyzerAsync()
                     .ConfigureAwait(false);
                 return await GetCompilerAnalyzerDiagnosticsAsync(
-                        analyzer,
-                        adjustedSpan,
-                        cancellationToken
-                    )
+                    analyzer,
+                    adjustedSpan,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -358,9 +358,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     _compilationBasedAnalyzersInAnalysisScope
                 );
                 var semanticDiagnostics = await GetAnalysisResultAsync(
-                        analysisScope,
-                        cancellationToken
-                    )
+                    analysisScope,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 Interlocked.CompareExchange(
                     ref _lazySemanticDiagnostics,
@@ -428,32 +428,32 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var model = await document.GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var rangeDeclaractionDiagnostics = model.GetDeclarationDiagnostics(
-                        span.Value,
-                        cancellationToken
-                    )
+                    span.Value,
+                    cancellationToken
+                )
                     .ToArray();
                 var rangeMethodBodyDiagnostics = model.GetMethodBodyDiagnostics(
-                        span.Value,
-                        cancellationToken
-                    )
+                    span.Value,
+                    cancellationToken
+                )
                     .ToArray();
                 var rangeDiagnostics = rangeDeclaractionDiagnostics.Concat(
-                        rangeMethodBodyDiagnostics
-                    )
+                    rangeMethodBodyDiagnostics
+                )
                     .Where(shouldInclude)
                     .ToArray();
 
                 var wholeDeclarationDiagnostics = model.GetDeclarationDiagnostics(
-                        cancellationToken: cancellationToken
-                    )
+                    cancellationToken: cancellationToken
+                )
                     .ToArray();
                 var wholeMethodBodyDiagnostics = model.GetMethodBodyDiagnostics(
-                        cancellationToken: cancellationToken
-                    )
+                    cancellationToken: cancellationToken
+                )
                     .ToArray();
                 var wholeDiagnostics = wholeDeclarationDiagnostics.Concat(
-                        wholeMethodBodyDiagnostics
-                    )
+                    wholeMethodBodyDiagnostics
+                )
                     .Where(shouldInclude)
                     .ToArray();
 
@@ -509,24 +509,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             // Check if IWorkspaceVenusSpanMappingService is present for remapping.
-            var diagnosticSpanMappingService =
-                textDocument.Project.Solution.Workspace.Services.GetService<IWorkspaceVenusSpanMappingService>();
+            var diagnosticSpanMappingService = textDocument.Project.Solution.Workspace.Services
+                .GetService<IWorkspaceVenusSpanMappingService>();
             if (diagnosticSpanMappingService == null)
             {
                 return diagnostics;
             }
 
             // Round tripping the diagnostics should ensure they get correctly remapped.
-            using var _ = ArrayBuilder<DiagnosticData>.GetInstance(
-                diagnostics.Length,
-                out var builder
-            );
+            using var _ = ArrayBuilder<DiagnosticData>
+                .GetInstance(diagnostics.Length, out var builder);
             foreach (var diagnosticData in diagnostics)
             {
                 var diagnostic = await diagnosticData.ToDiagnosticAsync(
-                        textDocument.Project,
-                        cancellationToken
-                    )
+                    textDocument.Project,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 builder.Add(DiagnosticData.Create(diagnostic, textDocument));
             }

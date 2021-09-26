@@ -143,8 +143,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             try
             {
                 var projectInfos = await _remoteProjectInfoProvider.GetRemoteProjectInfosAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 foreach (var projectInfo in projectInfos)
                 {

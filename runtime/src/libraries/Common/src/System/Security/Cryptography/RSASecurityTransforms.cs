@@ -96,11 +96,12 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_OpenInvalidHandle);
                 }
 
-                byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
-                    includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
-                    exportPrivate: includePrivateParameters,
-                    password: ExportPassword
-                );
+                byte[] keyBlob = Interop.AppleCrypto
+                    .SecKeyExport(
+                        includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
+                        exportPrivate: includePrivateParameters,
+                        password: ExportPassword
+                    );
 
                 try
                 {
@@ -213,10 +214,8 @@ namespace System.Security.Cryptography
                             out int localRead
                         );
 
-                        SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.ImportEphemeralKey(
-                            source.Slice(0, localRead),
-                            false
-                        );
+                        SafeSecKeyRefHandle publicKey = Interop.AppleCrypto
+                            .ImportEphemeralKey(source.Slice(0, localRead), false);
                         SetKey(SecKeyPair.PublicOnly(publicKey));
 
                         bytesRead = localRead;
@@ -343,13 +342,14 @@ namespace System.Security.Cryptography
                         );
                     }
 
-                    return Interop.AppleCrypto.TryRsaEncrypt(
-                        GetKeys().PublicKey,
-                        data,
-                        destination,
-                        padding,
-                        out bytesWritten
-                    );
+                    return Interop.AppleCrypto
+                        .TryRsaEncrypt(
+                            GetKeys().PublicKey,
+                            data,
+                            destination,
+                            padding,
+                            out bytesWritten
+                        );
                 }
 
                 RsaPaddingProcessor? processor;
@@ -381,12 +381,13 @@ namespace System.Security.Cryptography
                         RsaPaddingProcessor.PadPkcs1Encryption(data, tmp);
                     }
 
-                    return Interop.AppleCrypto.TryRsaEncryptionPrimitive(
-                        GetKeys().PublicKey,
-                        tmp,
-                        destination,
-                        out bytesWritten
-                    );
+                    return Interop.AppleCrypto
+                        .TryRsaEncryptionPrimitive(
+                            GetKeys().PublicKey,
+                            tmp,
+                            destination,
+                            out bytesWritten
+                        );
                 }
 
                 finally
@@ -500,13 +501,8 @@ namespace System.Security.Cryptography
                     || padding == RSAEncryptionPadding.OaepSHA1
                 )
                 {
-                    return Interop.AppleCrypto.TryRsaDecrypt(
-                        privateKey,
-                        data,
-                        destination,
-                        padding,
-                        out bytesWritten
-                    );
+                    return Interop.AppleCrypto
+                        .TryRsaDecrypt(privateKey, data, destination, padding, out bytesWritten);
                 }
 
                 Debug.Assert(padding.Mode == RSAEncryptionPaddingMode.Oaep);
@@ -520,12 +516,8 @@ namespace System.Security.Cryptography
                 try
                 {
                     if (
-                        !Interop.AppleCrypto.TryRsaDecryptionPrimitive(
-                            privateKey,
-                            data,
-                            rented,
-                            out int paddedSize
-                        )
+                        !Interop.AppleCrypto
+                            .TryRsaDecryptionPrimitive(privateKey, data, rented, out int paddedSize)
                     )
                     {
                         Debug.Fail(
@@ -674,13 +666,14 @@ namespace System.Security.Cryptography
                         return false;
                     }
 
-                    return Interop.AppleCrypto.TryGenerateSignature(
-                        keys.PrivateKey,
-                        hash,
-                        destination,
-                        palAlgId,
-                        out bytesWritten
-                    );
+                    return Interop.AppleCrypto
+                        .TryGenerateSignature(
+                            keys.PrivateKey,
+                            hash,
+                            destination,
+                            palAlgId,
+                            out bytesWritten
+                        );
                 }
 
                 Debug.Assert(padding.Mode == RSASignaturePaddingMode.Pss);
@@ -697,12 +690,13 @@ namespace System.Security.Cryptography
 
                 try
                 {
-                    return Interop.AppleCrypto.TryRsaSignaturePrimitive(
-                        keys.PrivateKey,
-                        buf,
-                        destination,
-                        out bytesWritten
-                    );
+                    return Interop.AppleCrypto
+                        .TryRsaSignaturePrimitive(
+                            keys.PrivateKey,
+                            buf,
+                            destination,
+                            out bytesWritten
+                        );
                 }
 
                 finally
@@ -760,12 +754,8 @@ namespace System.Security.Cryptography
                         hashAlgorithm,
                         out int expectedSize
                     );
-                    return Interop.AppleCrypto.VerifySignature(
-                        GetKeys().PublicKey,
-                        hash,
-                        signature,
-                        palAlgId
-                    );
+                    return Interop.AppleCrypto
+                        .VerifySignature(GetKeys().PublicKey, hash, signature, palAlgId);
                 }
                 else if (padding.Mode == RSASignaturePaddingMode.Pss)
                 {
@@ -793,12 +783,13 @@ namespace System.Security.Cryptography
                     try
                     {
                         if (
-                            !Interop.AppleCrypto.TryRsaVerificationPrimitive(
-                                publicKey,
-                                signature,
-                                unwrapped,
-                                out int bytesWritten
-                            )
+                            !Interop.AppleCrypto
+                                .TryRsaVerificationPrimitive(
+                                    publicKey,
+                                    signature,
+                                    unwrapped,
+                                    out int bytesWritten
+                                )
                         )
                         {
                             Debug.Fail($"TryRsaVerificationPrimitive with a pre-allocated buffer");
@@ -966,10 +957,8 @@ namespace System.Security.Cryptography
 
                 try
                 {
-                    return Interop.AppleCrypto.ImportEphemeralKey(
-                        rented.AsSpan(0, written),
-                        hasPrivateKey
-                    );
+                    return Interop.AppleCrypto
+                        .ImportEphemeralKey(rented.AsSpan(0, written), hasPrivateKey);
                 }
 
                 finally

@@ -23,12 +23,11 @@ namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests
             using (new CultureReplacer())
             {
                 _host = new HostBuilder().ConfigureWebHost(
-                        webHostBuilder =>
-                        {
-                            webHostBuilder.UseTestServer().UseStartup(typeof(TStartup));
-                        }
-                    )
-                    .Build();
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseTestServer().UseStartup(typeof(TStartup));
+                    }
+                ).Build();
 
                 _host.Start();
                 _server = _host.GetTestServer();

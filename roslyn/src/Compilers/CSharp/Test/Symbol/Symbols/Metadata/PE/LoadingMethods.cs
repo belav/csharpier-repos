@@ -34,9 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     Net40.mscorlib,
                     TestReferences.SymbolsTests.Methods.ByRefReturn
                 },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var module1 = assemblies[0].Modules[0];
@@ -186,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var basicC2_M1 = (MethodSymbol)basicC2.GetMembers("M1").Single();
             Assert.Equal("void C2<T4>.M1<T5>(T5 x, T4 y)", basicC2_M1.ToTestDisplayString());
 
-            var console = module5.GlobalNamespace.GetMembers("System")
+            var console = module5.GlobalNamespace
+                .GetMembers("System")
                 .OfType<NamespaceSymbol>()
                 .Single()
                 .GetTypeMembers("Console")
@@ -395,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.False(csharpModifiers3_M4.HidesBaseMethodsByName);
             Assert.False(csharpModifiers3_M4.IsOverride);
 
-            var byrefReturnMethod = byrefReturn.GlobalNamespace.GetTypeMembers("ByRefReturn")
+            var byrefReturnMethod = byrefReturn.GlobalNamespace
+                .GetTypeMembers("ByRefReturn")
                 .Single()
                 .GetMembers("M")
                 .OfType<MethodSymbol>()
@@ -674,14 +675,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var globalNamespace = assembly.GlobalNamespace;
 
             var baseClass = (NamedTypeSymbol)globalNamespace.GetTypeMembers(
-                    "ExplicitlyImplementedClass"
-                )
+                "ExplicitlyImplementedClass"
+            )
                 .Single();
             Assert.Equal(TypeKind.Class, baseClass.TypeKind);
 
             var derivedClass = (NamedTypeSymbol)globalNamespace.GetTypeMembers(
-                    "ExplicitlyImplementsAClass"
-                )
+                "ExplicitlyImplementsAClass"
+            )
                 .Single();
             Assert.Equal(TypeKind.Class, derivedClass.TypeKind);
             Assert.Equal(baseClass, derivedClass.BaseType());
@@ -709,8 +710,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(TypeKind.Interface, @interface.TypeKind);
 
             var @class = (NamedTypeSymbol)globalNamespace.GetTypeMembers(
-                    "ExplicitlyImplementsUnrelatedInterfaceMethods"
-                )
+                "ExplicitlyImplementsUnrelatedInterfaceMethods"
+            )
                 .Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.Equal(0, @class.AllInterfaces().Length);
@@ -746,8 +747,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(TypeKind.Interface, @interface.TypeKind);
 
             var @class = (NamedTypeSymbol)globalNamespace.GetTypeMembers(
-                    "ExplicitlyImplementsUnrelatedInterfaceMethods"
-                )
+                "ExplicitlyImplementsUnrelatedInterfaceMethods"
+            )
                 .Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.Equal(0, @class.AllInterfaces().Length);
@@ -822,8 +823,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(@interface, innerClass.Interfaces().Single().ConstructedFrom);
 
             var innerClassMethod = (MethodSymbol)innerClass.GetMembers(methodName).Single();
-            var innerClassImplementingMethod =
-                innerClassMethod.ExplicitInterfaceImplementations.Single();
+            var innerClassImplementingMethod = innerClassMethod.ExplicitInterfaceImplementations
+                .Single();
             Assert.Equal(interfaceMethod, innerClassImplementingMethod.OriginalDefinition);
             Assert.Equal(@interface, innerClassImplementingMethod.ContainingType.ConstructedFrom);
         }
@@ -1209,9 +1210,8 @@ class Override : MetadataModifiers
                 string.Format(ilTemplate, modifiers, explicitOverride, body),
                 compilation =>
                 {
-                    var derivedClass = compilation.GlobalNamespace.GetMember<PENamedTypeSymbol>(
-                        "Derived"
-                    );
+                    var derivedClass = compilation.GlobalNamespace
+                        .GetMember<PENamedTypeSymbol>("Derived");
                     var method = derivedClass.GetMember<MethodSymbol>("M");
 
                     switch (expectedVirtualness)
@@ -1501,8 +1501,8 @@ class Override : MetadataModifiers
 
             foreach (
                 var m in compilation.GetTypeByMetadataName(
-                        "Microsoft.FSharp.Control.IDelegateEvent`1"
-                    )
+                    "Microsoft.FSharp.Control.IDelegateEvent`1"
+                )
                     .GetMembers()
             )
             {
@@ -1663,13 +1663,17 @@ public class D
             comp.VerifyDiagnostics(
                 // (6,15): error CS0122: 'C.M()' is inaccessible due to its protection level
                 //       new C().M();
-                Diagnostic(ErrorCode.ERR_BadAccess, "M").WithArguments("C.M()").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_BadAccess, "M")
+                    .WithArguments("C.M()")
+                    .WithLocation(6, 15),
                 // (7,40): error CS0122: 'C.F' is inaccessible due to its protection level
                 //       System.Console.WriteLine(new C().F);
                 Diagnostic(ErrorCode.ERR_BadAccess, "F").WithArguments("C.F").WithLocation(7, 40),
                 // (8,13): error CS0122: 'C.C2' is inaccessible due to its protection level
                 //       new C.C2().M2();
-                Diagnostic(ErrorCode.ERR_BadAccess, "C2").WithArguments("C.C2").WithLocation(8, 13)
+                Diagnostic(ErrorCode.ERR_BadAccess, "C2")
+                    .WithArguments("C.C2")
+                    .WithLocation(8, 13)
             );
         }
     }

@@ -130,7 +130,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     httpClient: new HttpClient(),
                     httpConnectionOptions: null,
                     accessTokenProvider: null
-                ).CreateTransport(AllTransportTypes)
+                )
+                    .CreateTransport(AllTransportTypes)
             );
         }
 

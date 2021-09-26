@@ -190,7 +190,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_UnsafeRead()
         {
-            var result = typeof(Avx2).GetMethod(
+            var result = typeof(Avx2)
+                .GetMethod(
                     nameof(Avx2.ConvertToVector256Int32),
                     new Type[] { typeof(Vector128<Int16>) }
                 )
@@ -205,10 +206,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_Ptr()
         {
-            var result = typeof(Avx2).GetMethod(
-                    nameof(Avx2.ConvertToVector256Int32),
-                    new Type[] { typeof(Int16*) }
-                )
+            var result = typeof(Avx2)
+                .GetMethod(nameof(Avx2.ConvertToVector256Int32), new Type[] { typeof(Int16*) })
                 .Invoke(null, new object[] { Pointer.Box(_dataTable.inArrayPtr, typeof(Int16*)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector256<Int32>)(result));
@@ -217,7 +216,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_Load()
         {
-            var result = typeof(Avx2).GetMethod(
+            var result = typeof(Avx2)
+                .GetMethod(
                     nameof(Avx2.ConvertToVector256Int32),
                     new Type[] { typeof(Vector128<Int16>) }
                 )
@@ -229,7 +229,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_LoadAligned()
         {
-            var result = typeof(Avx2).GetMethod(
+            var result = typeof(Avx2)
+                .GetMethod(
                     nameof(Avx2.ConvertToVector256Int32),
                     new Type[] { typeof(Vector128<Int16>) }
                 )

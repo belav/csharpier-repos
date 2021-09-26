@@ -55,12 +55,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
             var tempAnnotation = new SyntaxAnnotation();
             var escapedName = originalFieldName.EscapeIdentifier();
             var newIdentifier = SyntaxFactory.Identifier(
-                    leading: SyntaxTriviaList.Create(SyntaxFactory.ElasticMarker),
-                    contextualKind: SyntaxKind.IdentifierName,
-                    text: escapedName,
-                    valueText: originalFieldName,
-                    trailing: SyntaxTriviaList.Create(SyntaxFactory.ElasticMarker)
-                )
+                leading: SyntaxTriviaList.Create(SyntaxFactory.ElasticMarker),
+                contextualKind: SyntaxKind.IdentifierName,
+                text: escapedName,
+                valueText: originalFieldName,
+                trailing: SyntaxTriviaList.Create(SyntaxFactory.ElasticMarker)
+            )
                 .WithTrailingTrivia(declarator.Identifier.TrailingTrivia)
                 .WithLeadingTrivia(declarator.Identifier.LeadingTrivia);
 
@@ -89,8 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
                 if (makePrivate)
                 {
                     var modifiers = SpecializedCollections.SingletonEnumerable(
-                            SyntaxFactory.Token(SyntaxKind.PrivateKeyword)
-                        )
+                        SyntaxFactory.Token(SyntaxKind.PrivateKeyword)
+                    )
                         .Concat(
                             fieldSyntax.Modifiers.Where(m => !modifierKinds.Contains(m.Kind()))
                         );
@@ -138,12 +138,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
                 );
 
                 var withField = await codeGenService.AddFieldAsync(
-                        document.Project.Solution,
-                        field.ContainingType,
-                        fieldToAdd,
-                        new CodeGenerationOptions(),
-                        cancellationToken
-                    )
+                    document.Project.Solution,
+                    field.ContainingType,
+                    fieldToAdd,
+                    new CodeGenerationOptions(),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 root = await withField.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
@@ -188,8 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
             }
 
             return declarators.Select(
-                    d => semanticModel.GetDeclaredSymbol(d, cancellationToken) as IFieldSymbol
-                )
+                d => semanticModel.GetDeclaredSymbol(d, cancellationToken) as IFieldSymbol
+            )
                 .WhereNotNull()
                 .Where(f => f.Name.Length != 0)
                 .ToImmutableArray();
@@ -241,12 +241,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
         }
 
         private static bool IsNew(IFieldSymbol field) =>
-            field.DeclaringSyntaxReferences.Any(
-                d =>
-                    d.GetSyntax()
-                        .GetAncestor<FieldDeclarationSyntax>()
-                        .Modifiers.Any(SyntaxKind.NewKeyword)
-            );
+            field.DeclaringSyntaxReferences
+                .Any(
+                    d =>
+                        d.GetSyntax()
+                            .GetAncestor<FieldDeclarationSyntax>()
+                            .Modifiers.Any(SyntaxKind.NewKeyword)
+                );
 
         private static string GenerateFieldName(string correspondingPropertyName) =>
             char.ToLower(correspondingPropertyName[0]).ToString()
@@ -267,8 +268,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
         internal override IEnumerable<SyntaxNode> GetConstructorNodes(
             INamedTypeSymbol containingType
         ) =>
-            containingType.Constructors.SelectMany(
-                c => c.DeclaringSyntaxReferences.Select(d => d.GetSyntax())
-            );
+            containingType.Constructors
+                .SelectMany(c => c.DeclaringSyntaxReferences.Select(d => d.GetSyntax()));
     }
 }

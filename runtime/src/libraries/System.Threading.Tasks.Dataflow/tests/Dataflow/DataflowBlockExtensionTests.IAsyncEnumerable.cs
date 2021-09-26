@@ -186,9 +186,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             for (int i = 0; i < 10; i++)
             {
                 Assert.True(source.Post(i));
-                IAsyncEnumerator<int> e = (
-                    sameEnumerable ? enumerable : source.ReceiveAllAsync()
-                ).GetAsyncEnumerator();
+                IAsyncEnumerator<int> e = (sameEnumerable ? enumerable : source.ReceiveAllAsync())
+                    .GetAsyncEnumerator();
                 ValueTask<bool> vt = e.MoveNextAsync();
                 Assert.True(vt.IsCompletedSuccessfully);
                 Assert.True(vt.Result);
@@ -214,9 +213,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             IAsyncEnumerable<int> enumerable = source.ReceiveAllAsync();
 
             IAsyncEnumerator<int> e1 = enumerable.GetAsyncEnumerator();
-            IAsyncEnumerator<int> e2 = (
-                sameEnumerable ? enumerable : source.ReceiveAllAsync()
-            ).GetAsyncEnumerator();
+            IAsyncEnumerator<int> e2 = (sameEnumerable ? enumerable : source.ReceiveAllAsync())
+                .GetAsyncEnumerator();
             Assert.NotSame(e1, e2);
 
             ValueTask<bool> vt1,

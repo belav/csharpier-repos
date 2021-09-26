@@ -45,10 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             ITextManagerAdapter textManagerAdapter
         )
         {
-            return new FileCodeModel(state, parent, documentId, textManagerAdapter).GetComHandle<
-                EnvDTE80.FileCodeModel2,
-                FileCodeModel
-            >();
+            return new FileCodeModel(state, parent, documentId, textManagerAdapter)
+                .GetComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>();
         }
 
         private readonly ComHandle<object, object> _parentHandle;
@@ -177,7 +175,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return false;
             }
 
-            documentId = project.Solution.GetDocumentIdsWithFilePath(_incomingFilePath)
+            documentId = project.Solution
+                .GetDocumentIdsWithFilePath(_incomingFilePath)
                 .FirstOrDefault(d => d.ProjectId == project.Id);
             if (documentId == null)
             {
@@ -368,14 +367,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                         async () =>
                         {
                             var formatted = await Formatter.FormatAsync(
-                                    result,
-                                    Formatter.Annotation
-                                )
+                                result,
+                                Formatter.Annotation
+                            )
                                 .ConfigureAwait(true);
                             formatted = await Formatter.FormatAsync(
-                                    formatted,
-                                    SyntaxAnnotation.ElasticAnnotation
-                                )
+                                formatted,
+                                SyntaxAnnotation.ElasticAnnotation
+                            )
                                 .ConfigureAwait(true);
 
                             return formatted;
@@ -469,16 +468,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             return GetDocument().GetSyntaxRootSynchronously(CancellationToken.None);
         }
 
-        internal SemanticModel GetSemanticModel() =>
-            State.ThreadingContext.JoinableTaskFactory.Run(
+        internal SemanticModel GetSemanticModel() => State.ThreadingContext.JoinableTaskFactory.Run(
                 () =>
                 {
                     return GetDocument().GetSemanticModelAsync(CancellationToken.None);
                 }
             );
 
-        internal Compilation GetCompilation() =>
-            State.ThreadingContext.JoinableTaskFactory.Run(
+        internal Compilation GetCompilation() => State.ThreadingContext.JoinableTaskFactory.Run(
                 () =>
                 {
                     return GetDocument().Project.GetCompilationAsync(CancellationToken.None);
@@ -827,18 +824,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     if (_batchDocument != null)
                     {
                         // perform expensive operations at once
-                        var newDocument = State.ThreadingContext.JoinableTaskFactory.Run(
-                            () =>
-                                Simplifier.ReduceAsync(
-                                    _batchDocument,
-                                    Simplifier.Annotation,
-                                    cancellationToken: CancellationToken.None
-                                )
-                        );
+                        var newDocument = State.ThreadingContext.JoinableTaskFactory
+                            .Run(
+                                () =>
+                                    Simplifier.ReduceAsync(
+                                        _batchDocument,
+                                        Simplifier.Annotation,
+                                        cancellationToken: CancellationToken.None
+                                    )
+                            );
 
-                        _batchDocument.Project.Solution.Workspace.TryApplyChanges(
-                            newDocument.Project.Solution
-                        );
+                        _batchDocument.Project.Solution.Workspace
+                            .TryApplyChanges(newDocument.Project.Solution);
 
                         // done using batch document
                         _batchDocument = null;
@@ -859,10 +856,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                                 )
                             )
                             {
-                                elementAndPath.Item1.ReacquireNodeKey(
-                                    elementAndPath.Item2,
-                                    CancellationToken.None
-                                );
+                                elementAndPath.Item1
+                                    .ReacquireNodeKey(elementAndPath.Item2, CancellationToken.None);
                             }
 
                             // make sure existing element doesn't go away (weak reference) in the middle of

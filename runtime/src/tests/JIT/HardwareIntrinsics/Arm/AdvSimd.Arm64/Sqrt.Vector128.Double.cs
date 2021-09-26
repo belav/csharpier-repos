@@ -276,9 +276,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = AdvSimd.Arm64.Sqrt(
-                AdvSimd.LoadVector128((Double*)(_dataTable.inArray1Ptr))
-            );
+            var result = AdvSimd.Arm64
+                .Sqrt(AdvSimd.LoadVector128((Double*)(_dataTable.inArray1Ptr)));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
@@ -288,10 +287,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
-                    nameof(AdvSimd.Arm64.Sqrt),
-                    new Type[] { typeof(Vector128<Double>) }
-                )
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(nameof(AdvSimd.Arm64.Sqrt), new Type[] { typeof(Vector128<Double>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector128<Double>>(_dataTable.inArray1Ptr) }
@@ -305,10 +302,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
-                    nameof(AdvSimd.Arm64.Sqrt),
-                    new Type[] { typeof(Vector128<Double>) }
-                )
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(nameof(AdvSimd.Arm64.Sqrt), new Type[] { typeof(Vector128<Double>) })
                 .Invoke(
                     null,
                     new object[] { AdvSimd.LoadVector128((Double*)(_dataTable.inArray1Ptr)) }
@@ -531,15 +526,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.Sqrt)}<Double>(Vector128<Double>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.Sqrt)}<Double>(Vector128<Double>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -78,8 +78,7 @@ namespace System.Net.NetworkInformation
         )
         {
             HashSet<IPAddress> addressSet = new HashSet<IPAddress>();
-            if (
-                Interop.Sys.EnumerateGatewayAddressesForInterface(
+            if (Interop.Sys.EnumerateGatewayAddressesForInterface(
                     (uint)interfaceIndex,
                     (gatewayAddressInfo) =>
                     {
@@ -101,8 +100,7 @@ namespace System.Net.NetworkInformation
                         }
                         addressSet.Add(ipAddress);
                     }
-                ) == -1
-            )
+                ) == -1)
             {
                 throw new NetworkInformationException(SR.net_PInvokeError);
             }

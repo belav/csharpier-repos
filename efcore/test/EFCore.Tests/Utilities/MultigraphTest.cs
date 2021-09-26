@@ -269,11 +269,11 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             Assert.Equal(
                 new[] { vertexOne },
                 graph.TopologicalSort(
-                        (from, to, edges) =>
-                            (from == vertexOne)
-                            && (to == vertexOne)
-                            && (edges.Intersect(new[] { edgeOne }).Count() == 1)
-                    )
+                    (from, to, edges) =>
+                        (from == vertexOne)
+                        && (to == vertexOne)
+                        && (edges.Intersect(new[] { edgeOne }).Count() == 1)
+                )
                     .ToArray()
             );
         }
@@ -302,11 +302,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             Assert.Equal(
                 new[] { vertexOne, vertexTwo, vertexThree },
                 graph.TopologicalSort(
-                        (from, to, edges) =>
-                            (from == vertexThree)
-                            && (to == vertexOne)
-                            && (edges.Single() == edgeThree)
-                    )
+                    (from, to, edges) =>
+                        (from == vertexThree) && (to == vertexOne) && (edges.Single() == edgeThree)
+                )
                     .ToArray()
             );
         }
@@ -345,13 +343,12 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             Assert.Equal(
                 new[] { vertexTwo, vertexThree, vertexOne, vertexFour, vertexFive },
                 graph.TopologicalSort(
-                        (from, to, edges) =>
-                        {
-                            var edge = edges.Single();
-                            return (edge == edgeOne) || (edge == edgeSix);
-                        }
-                    )
-                    .ToArray()
+                    (from, to, edges) =>
+                    {
+                        var edge = edges.Single();
+                        return (edge == edgeOne) || (edge == edgeSix);
+                    }
+                ).ToArray()
             );
         }
 
@@ -378,12 +375,12 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 CoreStrings.CircularDependency(
-                    string.Join(
-                        " ->" + Environment.NewLine,
-                        new[] { vertexOne, vertexTwo, vertexThree, vertexOne }.Select(
-                            v => v.ToString()
+                    string
+                        .Join(
+                            " ->" + Environment.NewLine,
+                            new[] { vertexOne, vertexTwo, vertexThree, vertexOne }
+                                .Select(v => v.ToString())
                         )
-                    )
                 ),
                 Assert.Throws<InvalidOperationException>(() => graph.TopologicalSort()).Message
             );

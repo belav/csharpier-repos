@@ -357,14 +357,12 @@ namespace Castle.DynamicProxy.Generators.Emitters
             parametersOptionalCustomModifiers = new Type[parameterCount][];
             for (int i = 0; i < parameterCount; ++i)
             {
-                parametersRequiredCustomModifiers[i] = baseMethodParameters[
-                    i
-                ].GetRequiredCustomModifiers();
+                parametersRequiredCustomModifiers[i] = baseMethodParameters[i]
+                    .GetRequiredCustomModifiers();
                 Array.Reverse(parametersRequiredCustomModifiers[i]);
 
-                parametersOptionalCustomModifiers[i] = baseMethodParameters[
-                    i
-                ].GetOptionalCustomModifiers();
+                parametersOptionalCustomModifiers[i] = baseMethodParameters[i]
+                    .GetOptionalCustomModifiers();
                 Array.Reverse(parametersOptionalCustomModifiers[i]);
             }
 

@@ -100,10 +100,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
                     case LSP.VSCompletionInvokeKind.Typing:
                         var insertionChar = await GetInsertionCharacterAsync(
-                                document,
-                                position,
-                                cancellationToken
-                            )
+                            document,
+                            position,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         return Completion.CompletionTrigger.CreateInsertionTrigger(insertionChar);
 
@@ -243,10 +243,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         )
         {
             var location = await TextSpanToLocationAsync(
-                    documentSpan.Document,
-                    documentSpan.SourceSpan,
-                    cancellationToken
-                )
+                documentSpan.Document,
+                documentSpan.SourceSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return location == null
@@ -271,9 +271,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             CancellationToken cancellationToken
         ) where T : TextDocument
         {
-            using var _ = ArrayBuilder<(Uri Uri, LSP.TextEdit TextEdit)>.GetInstance(
-                out var uriToTextEdits
-            );
+            using var _ = ArrayBuilder<(Uri Uri, LSP.TextEdit TextEdit)>
+                .GetInstance(out var uriToTextEdits);
 
             foreach (var docId in changedDocuments)
             {
@@ -291,10 +290,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 {
                     Contract.ThrowIfNull(textDiffService);
                     textChanges = await textDiffService.GetTextChangesAsync(
-                            oldDoc,
-                            newDoc,
-                            cancellationToken
-                        )
+                        oldDoc,
+                        newDoc,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else
@@ -306,10 +305,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
                 // Map all the text changes' spans for this document.
                 var mappedResults = await GetMappedSpanResultAsync(
-                        oldDocument,
-                        textChanges.Select(tc => tc.Span).ToImmutableArray(),
-                        cancellationToken
-                    )
+                    oldDocument,
+                    textChanges.Select(tc => tc.Span).ToImmutableArray(),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (mappedResults == null)
                 {
@@ -346,15 +345,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             }
 
             var documentEdits = uriToTextEdits.GroupBy(
-                    uriAndEdit => uriAndEdit.Uri,
-                    uriAndEdit => uriAndEdit.TextEdit,
-                    (uri, edits) =>
-                        new TextDocumentEdit
-                        {
-                            TextDocument = new VersionedTextDocumentIdentifier { Uri = uri },
-                            Edits = edits.ToArray(),
-                        }
-                )
+                uriAndEdit => uriAndEdit.Uri,
+                uriAndEdit => uriAndEdit.TextEdit,
+                (uri, edits) =>
+                    new TextDocumentEdit
+                    {
+                        TextDocument = new VersionedTextDocumentIdentifier { Uri = uri },
+                        Edits = edits.ToArray(),
+                    }
+            )
                 .ToArray();
 
             return documentEdits;
@@ -367,10 +366,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         )
         {
             var result = await GetMappedSpanResultAsync(
-                    document,
-                    ImmutableArray.Create(textSpan),
-                    cancellationToken
-                )
+                document,
+                ImmutableArray.Create(textSpan),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (result == null)
             {
@@ -713,9 +712,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             // LSP doesn't currently support indent size as an option. However, except in special
             // circumstances, indent size is usually equivalent to tab size, so we'll just set it.
             var updatedOptions = documentOptions.WithChangedOption(
-                    Formatting.FormattingOptions.UseTabs,
-                    !options.InsertSpaces
-                )
+                Formatting.FormattingOptions.UseTabs,
+                !options.InsertSpaces
+            )
                 .WithChangedOption(Formatting.FormattingOptions.TabSize, options.TabSize)
                 .WithChangedOption(Formatting.FormattingOptions.IndentationSize, options.TabSize);
             return updatedOptions;
@@ -739,10 +738,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             }
 
             var mappedSpanResult = await spanMappingService.MapSpansAsync(
-                    document,
-                    textSpans,
-                    cancellationToken
-                )
+                document,
+                textSpans,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             Contract.ThrowIfFalse(
                 textSpans.Length == mappedSpanResult.Length,

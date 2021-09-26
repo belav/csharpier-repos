@@ -46,15 +46,15 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         )
         {
             var newSwitchNode = UpdateSwitchNode(
-                    editor,
-                    semanticModel,
-                    addCases,
-                    addDefaultCase,
-                    hasMissingCases,
-                    hasMissingDefaultCase,
-                    switchNode,
-                    switchExpression
-                )
+                editor,
+                semanticModel,
+                addCases,
+                addDefaultCase,
+                hasMissingCases,
+                hasMissingDefaultCase,
+                switchNode,
+                switchExpression
+            )
                 .WithAdditionalAnnotations(Formatter.Annotation);
 
             editor.ReplaceNode(switchNode, newSwitchNode);

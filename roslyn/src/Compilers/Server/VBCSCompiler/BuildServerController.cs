@@ -67,12 +67,13 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             try
             {
                 if (
-                    int.TryParse(
-                        _appSettings[KeepAliveSettingName],
-                        NumberStyles.Integer,
-                        CultureInfo.InvariantCulture,
-                        out int keepAliveValue
-                    )
+                    int
+                        .TryParse(
+                            _appSettings[KeepAliveSettingName],
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out int keepAliveValue
+                        )
                     && keepAliveValue >= 0
                 )
                 {
@@ -128,11 +129,11 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         private async Task<Stream?> ConnectForShutdownAsync(string pipeName, int timeout)
         {
             return await BuildServerConnection.TryConnectToServerAsync(
-                    pipeName,
-                    timeout,
-                    _logger,
-                    cancellationToken: default
-                )
+                pipeName,
+                timeout,
+                _logger,
+                cancellationToken: default
+            )
                 .ConfigureAwait(false);
         }
 
@@ -175,10 +176,11 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     return CommonCompiler.Failed;
                 }
 
-                compilerServerHost.Logger.Log(
-                    "Keep alive timeout is: {0} milliseconds.",
-                    keepAlive?.TotalMilliseconds ?? 0
-                );
+                compilerServerHost.Logger
+                    .Log(
+                        "Keep alive timeout is: {0} milliseconds.",
+                        keepAlive?.TotalMilliseconds ?? 0
+                    );
                 FatalError.Handler = FailFast.OnFatalException;
 
                 var dispatcher = new ServerDispatcher(

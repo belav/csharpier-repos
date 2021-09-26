@@ -32,26 +32,26 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             QueryCompilationContext.QueryParameterPrefix + "entity_equality_";
 
         private static readonly MethodInfo _parameterValueExtractor =
-            typeof(CosmosSqlTranslatingExpressionVisitor).GetTypeInfo()
+            typeof(CosmosSqlTranslatingExpressionVisitor)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(ParameterValueExtractor));
 
         private static readonly MethodInfo _parameterListValueExtractor =
-            typeof(CosmosSqlTranslatingExpressionVisitor).GetTypeInfo()
+            typeof(CosmosSqlTranslatingExpressionVisitor)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(ParameterListValueExtractor));
 
-        private static readonly MethodInfo _concatMethodInfo = typeof(string).GetRuntimeMethod(
-            nameof(string.Concat),
-            new[] { typeof(object), typeof(object) }
-        );
+        private static readonly MethodInfo _concatMethodInfo = typeof(string)
+            .GetRuntimeMethod(nameof(string.Concat), new[] { typeof(object), typeof(object) });
 
-        private static readonly MethodInfo _stringEqualsWithStringComparison =
-            typeof(string).GetRuntimeMethod(
+        private static readonly MethodInfo _stringEqualsWithStringComparison = typeof(string)
+            .GetRuntimeMethod(
                 nameof(string.Equals),
                 new[] { typeof(string), typeof(StringComparison) }
             );
 
-        private static readonly MethodInfo _stringEqualsWithStringComparisonStatic =
-            typeof(string).GetRuntimeMethod(
+        private static readonly MethodInfo _stringEqualsWithStringComparisonStatic = typeof(string)
+            .GetRuntimeMethod(
                 nameof(string.Equals),
                 new[] { typeof(string), typeof(string), typeof(StringComparison) }
             );
@@ -331,9 +331,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                 case ProjectionBindingExpression projectionBindingExpression:
                     return projectionBindingExpression.ProjectionMember != null
-                      ? (
-                            (SelectExpression)projectionBindingExpression.QueryExpression
-                        ).GetMappedProjection(projectionBindingExpression.ProjectionMember)
+                      ? ((SelectExpression)projectionBindingExpression.QueryExpression)
+                        .GetMappedProjection(projectionBindingExpression.ProjectionMember)
                       : null;
 
                 default:
@@ -772,13 +771,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
             var result =
                 member.MemberInfo != null
-                    ? entityReferenceExpression.ParameterEntity.BindMember(
+                    ? entityReferenceExpression.ParameterEntity
+                      .BindMember(
                           member.MemberInfo,
                           entityReferenceExpression.Type,
                           clientEval: false,
                           out _
                       )
-                    : entityReferenceExpression.ParameterEntity.BindMember(
+                    : entityReferenceExpression.ParameterEntity
+                      .BindMember(
                           member.Name,
                           entityReferenceExpression.Type,
                           clientEval: false,
@@ -899,10 +900,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     break;
 
                 case SqlParameterExpression sqlParameterExpression
-                      when sqlParameterExpression.Name.StartsWith(
-                          QueryCompilationContext.QueryParameterPrefix,
-                          StringComparison.Ordinal
-                      ):
+                      when sqlParameterExpression.Name
+                          .StartsWith(
+                              QueryCompilationContext.QueryParameterPrefix,
+                              StringComparison.Ordinal
+                          ):
                     var lambda = Expression.Lambda(
                         Expression.Call(
                             _parameterListValueExtractor.MakeGenericMethod(
@@ -979,13 +981,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                 result = Visit(
                     primaryKeyProperties1.Select(
-                            p =>
-                                Expression.MakeBinary(
-                                    nodeType,
-                                    CreatePropertyAccessExpression(nonNullEntityReference, p),
-                                    Expression.Constant(null, p.ClrType.MakeNullable())
-                                )
-                        )
+                        p =>
+                            Expression.MakeBinary(
+                                nodeType,
+                                CreatePropertyAccessExpression(nonNullEntityReference, p),
+                                Expression.Constant(null, p.ClrType.MakeNullable())
+                            )
+                    )
                         .Aggregate(
                             (l, r) =>
                                 nodeType == ExpressionType.Equal
@@ -1031,13 +1033,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
             result = Visit(
                 primaryKeyProperties.Select(
-                        p =>
-                            Expression.MakeBinary(
-                                nodeType,
-                                CreatePropertyAccessExpression(left, p),
-                                CreatePropertyAccessExpression(right, p)
-                            )
-                    )
+                    p =>
+                        Expression.MakeBinary(
+                            nodeType,
+                            CreatePropertyAccessExpression(left, p),
+                            CreatePropertyAccessExpression(right, p)
+                        )
+                )
                     .Aggregate(
                         (l, r) =>
                             nodeType == ExpressionType.Equal
@@ -1060,10 +1062,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     );
 
                 case SqlParameterExpression sqlParameterExpression
-                      when sqlParameterExpression.Name.StartsWith(
-                          QueryCompilationContext.QueryParameterPrefix,
-                          StringComparison.Ordinal
-                      ):
+                      when sqlParameterExpression.Name
+                          .StartsWith(
+                              QueryCompilationContext.QueryParameterPrefix,
+                              StringComparison.Ordinal
+                          ):
                     var lambda = Expression.Lambda(
                         Expression.Call(
                             _parameterValueExtractor.MakeGenericMethod(
@@ -1086,9 +1089,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     );
 
                 case MemberInitExpression memberInitExpression
-                      when memberInitExpression.Bindings.SingleOrDefault(
-                          mb => mb.Member.Name == property.Name
-                      )
+                      when memberInitExpression.Bindings
+                          .SingleOrDefault(mb => mb.Member.Name == property.Name)
                           is MemberAssignment memberAssignment:
                     return memberAssignment.Expression;
 
@@ -1127,8 +1129,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
             var getter = property.GetGetter();
             return baseListParameter.Select(
-                    e => e != null ? (TProperty)getter.GetClrValue(e) : (TProperty)(object)null
-                )
+                e => e != null ? (TProperty)getter.GetClrValue(e) : (TProperty)(object)null
+            )
                 .ToList();
         }
 
@@ -1140,8 +1142,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 ? new SqlConstantExpression(
                       Expression.Constant(
                           Expression.Lambda<Func<object>>(
-                                  Expression.Convert(expression, typeof(object))
-                              )
+                              Expression.Convert(expression, typeof(object))
+                          )
                               .Compile()
                               .Invoke(),
                           expression.Type
@@ -1164,11 +1166,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                 case MemberInitExpression memberInitExpression:
                     return CanEvaluate(memberInitExpression.NewExpression)
-                        && memberInitExpression.Bindings.All(
-                            mb =>
-                                mb is MemberAssignment memberAssignment
-                                && CanEvaluate(memberAssignment.Expression)
-                        );
+                        && memberInitExpression.Bindings
+                            .All(
+                                mb =>
+                                    mb is MemberAssignment memberAssignment
+                                    && CanEvaluate(memberAssignment.Expression)
+                            );
 
                 default:
                     return false;

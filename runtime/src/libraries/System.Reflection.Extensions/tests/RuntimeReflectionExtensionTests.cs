@@ -267,10 +267,8 @@ namespace System.Reflection.Tests
                 "name",
                 () =>
                 {
-                    typeof(RuntimeReflectionExtensionsTests).GetRuntimeMethod(
-                        null,
-                        Type.EmptyTypes
-                    );
+                    typeof(RuntimeReflectionExtensionsTests)
+                        .GetRuntimeMethod(null, Type.EmptyTypes);
                 }
             );
 
@@ -278,10 +276,8 @@ namespace System.Reflection.Tests
                 "types",
                 () =>
                 {
-                    typeof(RuntimeReflectionExtensionsTests).GetRuntimeMethod(
-                        "RunTest_GetRuntimeMethod",
-                        null
-                    );
+                    typeof(RuntimeReflectionExtensionsTests)
+                        .GetRuntimeMethod("RunTest_GetRuntimeMethod", null);
                 }
             );
 
@@ -404,7 +400,8 @@ namespace System.Reflection.Tests
                 () => typeof(TestType).GetTypeInfo().GetRuntimeInterfaceMap(typeof(string))
             );
 
-            InterfaceMapping map = typeof(TestType).GetTypeInfo()
+            InterfaceMapping map = typeof(TestType)
+                .GetTypeInfo()
                 .GetRuntimeInterfaceMap(typeof(IDisposable));
             Assert.Same(typeof(TestType), map.TargetType);
             Assert.Same(typeof(IDisposable), map.InterfaceType);

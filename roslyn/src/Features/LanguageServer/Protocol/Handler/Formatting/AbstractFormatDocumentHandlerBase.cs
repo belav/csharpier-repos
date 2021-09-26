@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             if (document != null)
             {
-                var formattingService =
-                    document.Project.LanguageServices.GetRequiredService<IEditorFormattingService>();
+                var formattingService = document.Project.LanguageServices
+                    .GetRequiredService<IEditorFormattingService>();
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
                 TextSpan? textSpan = null;
                 if (range != null)
@@ -44,19 +44,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // We should use the options passed in by LSP instead of the document's options.
                 var documentOptions =
                     await ProtocolConversions.FormattingOptionsToDocumentOptionsAsync(
-                            options,
-                            document,
-                            cancellationToken
-                        )
+                        options,
+                        document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 var textChanges = await GetFormattingChangesAsync(
-                        formattingService,
-                        document,
-                        textSpan,
-                        documentOptions,
-                        cancellationToken
-                    )
+                    formattingService,
+                    document,
+                    textSpan,
+                    documentOptions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 edits.AddRange(
                     textChanges.Select(

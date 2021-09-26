@@ -778,32 +778,32 @@ namespace System.Data.OleDb
             ? Marshal.OffsetOf(typeof(tagDBPROP_x86), "vValue").ToInt32()
             : Marshal.OffsetOf(typeof(tagDBPROP), "vValue").ToInt32();
         internal static readonly int OffsetOf_tagDBPROPSET_Properties = Marshal.OffsetOf(
-                typeof(tagDBPROPSET),
-                "rgProperties"
-            )
+            typeof(tagDBPROPSET),
+            "rgProperties"
+        )
             .ToInt32();
         internal static readonly int OffsetOf_tagDBPROPINFO_Value = IsRunningOnX86
             ? Marshal.OffsetOf(typeof(tagDBPROPINFO_x86), "vValue").ToInt32()
             : Marshal.OffsetOf(typeof(tagDBPROPINFO), "vValue").ToInt32();
         internal static readonly int OffsetOf_tagDBPROPIDSET_PropertySet = Marshal.OffsetOf(
-                typeof(tagDBPROPIDSET),
-                "guidPropertySet"
-            )
+            typeof(tagDBPROPIDSET),
+            "guidPropertySet"
+        )
             .ToInt32();
         internal static readonly int OffsetOf_tagDBLITERALINFO_it = Marshal.OffsetOf(
-                typeof(tagDBLITERALINFO),
-                "it"
-            )
+            typeof(tagDBLITERALINFO),
+            "it"
+        )
             .ToInt32();
         internal static readonly int OffsetOf_tagDBBINDING_obValue = Marshal.OffsetOf(
-                typeof(tagDBBINDING),
-                "obValue"
-            )
+            typeof(tagDBBINDING),
+            "obValue"
+        )
             .ToInt32();
         internal static readonly int OffsetOf_tagDBBINDING_wType = Marshal.OffsetOf(
-                typeof(tagDBBINDING),
-                "wType"
-            )
+            typeof(tagDBBINDING),
+            "wType"
+        )
             .ToInt32();
 
         internal static Guid IID_NULL = Guid.Empty;

@@ -158,9 +158,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             // Assert
             Assert.NotNull(context.PageApplicationModel);
-            var propertiesOnPage = context.PageApplicationModel.HandlerProperties.Where(
-                p => p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo
-            );
+            var propertiesOnPage = context.PageApplicationModel.HandlerProperties
+                .Where(p => p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo);
             Assert.Collection(
                 propertiesOnPage.OrderBy(p => p.PropertyName),
                 property =>
@@ -288,7 +287,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Assert
             Assert.NotNull(context.PageApplicationModel);
             Assert.Collection(
-                context.PageApplicationModel.HandlerProperties.OrderBy(p => p.PropertyName)
+                context.PageApplicationModel.HandlerProperties
+                    .OrderBy(p => p.PropertyName)
                     .Where(p => p.BindingInfo != null),
                 property =>
                 {
@@ -715,9 +715,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             // Assert
             var pageModel = context.PageApplicationModel;
-            var propertiesOnPage = pageModel.HandlerProperties.Where(
-                p => p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo
-            );
+            var propertiesOnPage = pageModel.HandlerProperties
+                .Where(p => p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo);
             Assert.Collection(
                 propertiesOnPage.OrderBy(p => p.PropertyName),
                 p =>
@@ -1120,15 +1119,16 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     );
                     Assert.NotNull(p.BindingInfo.RequestPredicate);
                     Assert.True(
-                        p.BindingInfo.RequestPredicate(
-                            new ActionContext
-                            {
-                                HttpContext = new DefaultHttpContext
+                        p.BindingInfo
+                            .RequestPredicate(
+                                new ActionContext
                                 {
-                                    Request = { Method = "GET", }
+                                    HttpContext = new DefaultHttpContext
+                                    {
+                                        Request = { Method = "GET", }
+                                    }
                                 }
-                            }
-                        )
+                            )
                     );
                 }
             );

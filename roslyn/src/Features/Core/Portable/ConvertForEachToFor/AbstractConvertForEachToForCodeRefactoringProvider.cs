@@ -354,9 +354,10 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
 
             // check ImmutableArray case
             if (
-                collectionType.OriginalDefinition.Equals(
-                    model.Compilation.GetTypeByMetadataName(typeof(ImmutableArray<>).FullName)
-                )
+                collectionType.OriginalDefinition
+                    .Equals(
+                        model.Compilation.GetTypeByMetadataName(typeof(ImmutableArray<>).FullName)
+                    )
             )
             {
                 var indexer = GetInterfaceMember(collectionType, get_Item);
@@ -376,8 +377,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
 
             // go through all known interfaces we support next.
             var knownCollectionInterfaces = s_KnownInterfaceNames.Select(
-                    s => model.Compilation.GetTypeByMetadataName(s)
-                )
+                s => model.Compilation.GetTypeByMetadataName(s)
+            )
                 .Where(t => !IsNullOrErrorType(t));
 
             // for all interfaces, we suggest collection name as "list"

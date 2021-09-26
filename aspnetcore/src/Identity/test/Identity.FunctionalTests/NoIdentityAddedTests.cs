@@ -36,8 +36,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             ;
 
             var client = ServerFactory.WithWebHostBuilder(
-                    whb => whb.ConfigureServices(ConfigureTestServices)
-                )
+                whb => whb.ConfigureServices(ConfigureTestServices)
+            )
                 .CreateClient();
 
             // Act

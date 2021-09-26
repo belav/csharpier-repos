@@ -184,19 +184,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         )
         {
             return _underlying.GetTypeInferredDuringReduction(
-                    reducedFromTypeParameter.EnsureCSharpSymbolOrNull(
-                        nameof(reducedFromTypeParameter)
-                    )
-                )
+                reducedFromTypeParameter.EnsureCSharpSymbolOrNull(nameof(reducedFromTypeParameter))
+            )
                 .GetPublicSymbol();
         }
 
         IMethodSymbol IMethodSymbol.ReduceExtensionMethod(ITypeSymbol receiverType)
         {
             return _underlying.ReduceExtensionMethod(
-                    receiverType.EnsureCSharpSymbolOrNull(nameof(receiverType)),
-                    compilation: null
-                )
+                receiverType.EnsureCSharpSymbolOrNull(nameof(receiverType)),
+                compilation: null
+            )
                 .GetPublicSymbol();
         }
 
@@ -257,8 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         )
         {
             return _underlying.Construct(
-                    ConstructTypeArguments(typeArguments, typeArgumentNullableAnnotations)
-                )
+                ConstructTypeArguments(typeArguments, typeArgumentNullableAnnotations)
+            )
                 .GetPublicSymbol();
         }
 

@@ -92,9 +92,8 @@ namespace System.Reflection.Emit.Tests
             ilGenerator.Emit(OpCodes.Ldstr, "Hello World");
             ilGenerator.Emit(OpCodes.Ret);
 
-            MethodInfo interfaceMethod = typeof(GenericInterface<string>).GetMethod(
-                nameof(GenericInterface<string>.Method)
-            );
+            MethodInfo interfaceMethod = typeof(GenericInterface<string>)
+                .GetMethod(nameof(GenericInterface<string>.Method));
             type.DefineMethodOverride(method, interfaceMethod);
 
             Type createdType = type.CreateTypeInfo().AsType();
@@ -182,9 +181,8 @@ namespace System.Reflection.Emit.Tests
                 () =>
                     type.DefineMethodOverride(
                         globalMethod,
-                        typeof(DefineMethodOverrideInterface).GetMethod(
-                            nameof(DefineMethodOverrideInterface.M)
-                        )
+                        typeof(DefineMethodOverrideInterface)
+                            .GetMethod(nameof(DefineMethodOverrideInterface.M))
                     )
             );
         }
@@ -247,9 +245,8 @@ namespace System.Reflection.Emit.Tests
 
             type.DefineMethodOverride(
                 method,
-                typeof(DefineMethodOverrideInterface).GetMethod(
-                    nameof(DefineMethodOverrideInterface.M)
-                )
+                typeof(DefineMethodOverrideInterface)
+                    .GetMethod(nameof(DefineMethodOverrideInterface.M))
             );
 
             Assert.Throws<TypeLoadException>(() => type.CreateTypeInfo());
@@ -361,9 +358,8 @@ namespace System.Reflection.Emit.Tests
             method.GetILGenerator().Emit(OpCodes.Ret);
             type.AddInterfaceImplementation(typeof(InterfaceWithMethod));
 
-            MethodInfo declaration = typeof(InterfaceWithMethod).GetMethod(
-                nameof(InterfaceWithMethod.Method)
-            );
+            MethodInfo declaration = typeof(InterfaceWithMethod)
+                .GetMethod(nameof(InterfaceWithMethod.Method));
             type.DefineMethodOverride(method, declaration);
 
             Assert.Throws<TypeLoadException>(() => type.CreateTypeInfo());

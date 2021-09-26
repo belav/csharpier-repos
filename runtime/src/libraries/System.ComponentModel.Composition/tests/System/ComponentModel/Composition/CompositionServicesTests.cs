@@ -35,10 +35,11 @@ namespace System.ComponentModel.Composition
             StringBuilder typeName = new StringBuilder();
             ContractNameServices.WriteCustomModifiers(typeName, "test", modifiers, false);
             Assert.Equal(
-                string.Format(
-                    " {0}(System.Int32,System.Collections.Generic.List(System.Int32),System.Double)",
-                    "test"
-                ),
+                string
+                    .Format(
+                        " {0}(System.Int32,System.Collections.Generic.List(System.Int32),System.Double)",
+                        "test"
+                    ),
                 typeName.ToString()
             );
         }
@@ -109,17 +110,14 @@ namespace System.ComponentModel.Composition
                 "System.ComponentModel.Composition.GenericContract4(System.Int32,System.Double)+GenericContract5(System.Double,System.Int32)[][,,,,]"
             );
             expectations.Add(
-                typeof(GenericContract4<int, double>.GenericContract5<
-                    double,
-                    int
-                >).MakePointerType(),
+                typeof(GenericContract4<int, double>.GenericContract5<double, int>)
+                    .MakePointerType(),
                 "System.ComponentModel.Composition.GenericContract4(System.Int32,System.Double)+GenericContract5(System.Double,System.Int32)*"
             );
             expectations.Add(
-                typeof(GenericContract4<int, double>.GenericContract5<
-                    double,
-                    int
-                >[][,]).MakePointerType().MakeArrayType(4),
+                typeof(GenericContract4<int, double>.GenericContract5<double, int>[][,])
+                    .MakePointerType()
+                    .MakeArrayType(4),
                 "System.ComponentModel.Composition.GenericContract4(System.Int32,System.Double)+GenericContract5(System.Double,System.Int32)[][,]*[,,,]"
             );
             expectations.Add(

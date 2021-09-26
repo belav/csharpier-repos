@@ -192,12 +192,13 @@ namespace Microsoft.CodeAnalysis
                 int countOfSlots;
 
                 if (
-                    int.TryParse(
-                        emittedMethodName.Substring(index + 1),
-                        NumberStyles.None,
-                        CultureInfo.InvariantCulture,
-                        out countOfSlots
-                    )
+                    int
+                        .TryParse(
+                            emittedMethodName.Substring(index + 1),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out countOfSlots
+                        )
                     && countOfSlots > 0
                 )
                 {

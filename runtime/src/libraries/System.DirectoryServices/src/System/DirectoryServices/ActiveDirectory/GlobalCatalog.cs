@@ -79,13 +79,14 @@ namespace System.DirectoryServices.ActiveDirectory
                     rootDSE,
                     PropertyManager.DnsHostName
                 )!;
-                isGlobalCatalog = (bool)bool.Parse(
-                    (string)PropertyManager.GetPropertyValue(
-                        context,
-                        rootDSE,
-                        PropertyManager.IsGlobalCatalogReady
-                    )!
-                );
+                isGlobalCatalog = (bool)bool
+                    .Parse(
+                        (string)PropertyManager.GetPropertyValue(
+                            context,
+                            rootDSE,
+                            PropertyManager.IsGlobalCatalogReady
+                        )!
+                    );
                 if (!isGlobalCatalog)
                 {
                     throw new ActiveDirectoryObjectNotFoundException(

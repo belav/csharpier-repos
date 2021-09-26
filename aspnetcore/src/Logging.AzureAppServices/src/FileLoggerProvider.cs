@@ -86,7 +86,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
         {
             if (_maxRetainedFiles > 0)
             {
-                var files = new DirectoryInfo(_path).GetFiles(_fileName + "*")
+                var files = new DirectoryInfo(_path)
+                    .GetFiles(_fileName + "*")
                     .OrderByDescending(f => f.Name)
                     .Skip(_maxRetainedFiles.Value);
 

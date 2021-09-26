@@ -38,9 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                var locals = ArrayBuilder<LocalSymbol>.GetInstance(
-                    declarationSyntax.Variables.Count
-                );
+                var locals = ArrayBuilder<LocalSymbol>
+                    .GetInstance(declarationSyntax.Variables.Count);
 
                 // gather expression-declared variables from invalid array dimensions. eg. using(int[x is var y] z = new int[0])
                 declarationSyntax.Type.VisitRankSpecifiers(
@@ -216,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         syntax,
                         valEscape: originalBinder.LocalScopeDepth,
                         awaitableTypeOpt
-                    ).MakeCompilerGenerated();
+                    )
+                        .MakeCompilerGenerated();
                     awaitOpt = originalBinder.BindAwaitInfo(
                         placeholder,
                         syntax,
@@ -282,9 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (hasAwait)
                     {
-                        awaitableType = originalBinder.Compilation.GetWellKnownType(
-                            WellKnownType.System_Threading_Tasks_ValueTask
-                        );
+                        awaitableType = originalBinder.Compilation
+                            .GetWellKnownType(WellKnownType.System_Threading_Tasks_ValueTask);
                     }
                     return true;
                 }
@@ -303,12 +302,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                               WasCompilerGenerated = true
                           };
 
-                    BindingDiagnosticBag patternDiagnostics =
-                        originalBinder.Compilation.IsFeatureEnabled(
-                            MessageID.IDS_FeatureUsingDeclarations
-                        )
-                            ? diagnostics
-                            : BindingDiagnosticBag.Discarded;
+                    BindingDiagnosticBag patternDiagnostics = originalBinder.Compilation
+                    .IsFeatureEnabled(MessageID.IDS_FeatureUsingDeclarations)
+                        ? diagnostics
+                        : BindingDiagnosticBag.Discarded;
                     MethodSymbol disposeMethod = originalBinder.TryFindDisposePatternMethod(
                         receiver,
                         syntax,
@@ -317,15 +314,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                     if (disposeMethod is object)
                     {
-                        MessageID.IDS_FeatureUsingDeclarations.CheckFeatureAvailability(
-                            diagnostics,
-                            originalBinder.Compilation,
-                            syntax.Location
-                        );
+                        MessageID.IDS_FeatureUsingDeclarations
+                            .CheckFeatureAvailability(
+                                diagnostics,
+                                originalBinder.Compilation,
+                                syntax.Location
+                            );
 
-                        var argumentsBuilder = ArrayBuilder<BoundExpression>.GetInstance(
-                            disposeMethod.ParameterCount
-                        );
+                        var argumentsBuilder = ArrayBuilder<BoundExpression>
+                            .GetInstance(disposeMethod.ParameterCount);
                         ImmutableArray<int> argsToParams = default;
                         bool expanded = disposeMethod.HasParamsParameter();
                         originalBinder.BindDefaultArguments(
@@ -400,12 +397,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 return fromExpression
-                  ? originalBinder.Conversions.ClassifyImplicitConversionFromExpression(
+                  ? originalBinder.Conversions
+                    .ClassifyImplicitConversionFromExpression(
                         expressionOpt,
                         targetInterface,
                         ref useSiteInfo
                     )
-                  : originalBinder.Conversions.ClassifyImplicitConversionFromType(
+                  : originalBinder.Conversions
+                    .ClassifyImplicitConversionFromType(
                         declarationTypeOpt,
                         targetInterface,
                         ref useSiteInfo
@@ -415,9 +414,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol getDisposableInterface(bool isAsync)
             {
                 return isAsync
-                  ? originalBinder.Compilation.GetWellKnownType(
-                        WellKnownType.System_IAsyncDisposable
-                    )
+                  ? originalBinder.Compilation
+                    .GetWellKnownType(WellKnownType.System_IAsyncDisposable)
                   : originalBinder.Compilation.GetSpecialType(SpecialType.System_IDisposable);
             }
         }

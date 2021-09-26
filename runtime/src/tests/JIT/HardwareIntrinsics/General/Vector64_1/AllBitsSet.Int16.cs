@@ -55,10 +55,8 @@ namespace JIT.HardwareIntrinsics.General
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
-            object result = typeof(Vector64<Int16>).GetProperty(
-                    nameof(Vector64<Int16>.AllBitsSet),
-                    new Type[] {  }
-                )
+            object result = typeof(Vector64<Int16>)
+                .GetProperty(nameof(Vector64<Int16>.AllBitsSet), new Type[] {  })
                 .GetGetMethod()
                 .Invoke(null, new object[] {  });
 
@@ -89,12 +87,10 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64.AllBitsSet(Int16): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector64.AllBitsSet(Int16): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

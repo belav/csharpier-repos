@@ -38,19 +38,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         {
             var typeName = symbol.ContainingType.Name;
             var documentsWithName = await FindDocumentsAsync(
-                    project,
-                    documents,
-                    findInGlobalSuppressions: true,
-                    cancellationToken,
-                    typeName
-                )
+                project,
+                documents,
+                findInGlobalSuppressions: true,
+                cancellationToken,
+                typeName
+            )
                 .ConfigureAwait(false);
             var documentsWithType = await FindDocumentsAsync(
-                    project,
-                    documents,
-                    symbol.ContainingType.SpecialType.ToPredefinedType(),
-                    cancellationToken
-                )
+                project,
+                documents,
+                symbol.ContainingType.SpecialType.ToPredefinedType(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var documentsWithAttribute = TryGetNameWithoutAttributeSuffix(
                 typeName,
@@ -58,22 +58,22 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 out var simpleName
             )
                 ? await FindDocumentsAsync(
-                          project,
-                          documents,
-                          findInGlobalSuppressions: false,
-                          cancellationToken,
-                          simpleName
-                      )
+                      project,
+                      documents,
+                      findInGlobalSuppressions: false,
+                      cancellationToken,
+                      simpleName
+                  )
                       .ConfigureAwait(false)
                 : SpecializedCollections.EmptyEnumerable<Document>();
 
             var documentsWithImplicitObjectCreations =
                 symbol.MethodKind == MethodKind.Constructor
                     ? await FindDocumentsWithImplicitObjectCreationExpressionAsync(
-                              project,
-                              documents,
-                              cancellationToken
-                          )
+                          project,
+                          documents,
+                          cancellationToken
+                      )
                           .ConfigureAwait(false)
                     : ImmutableArray<Document>.Empty;
 
@@ -122,29 +122,29 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             );
 
             var normalReferences = await FindReferencesInDocumentWorkerAsync(
-                    methodSymbol,
-                    document,
-                    semanticModel,
-                    findParentNode,
-                    cancellationToken
-                )
+                methodSymbol,
+                document,
+                semanticModel,
+                findParentNode,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var nonAliasTypeReferences =
                 await NamedTypeSymbolReferenceFinder.FindNonAliasReferencesAsync(
-                        methodSymbol.ContainingType,
-                        document,
-                        semanticModel,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
-            var aliasReferences = await FindAliasReferencesAsync(
-                    nonAliasTypeReferences,
-                    methodSymbol,
+                    methodSymbol.ContainingType,
                     document,
                     semanticModel,
-                    findParentNode,
                     cancellationToken
                 )
+                    .ConfigureAwait(false);
+            var aliasReferences = await FindAliasReferencesAsync(
+                nonAliasTypeReferences,
+                methodSymbol,
+                document,
+                semanticModel,
+                findParentNode,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return normalReferences.Concat(aliasReferences);
         }
@@ -158,34 +158,34 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var ordinaryRefs = await FindOrdinaryReferencesAsync(
-                    symbol,
-                    document,
-                    semanticModel,
-                    findParentNode,
-                    cancellationToken
-                )
+                symbol,
+                document,
+                semanticModel,
+                findParentNode,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var attributeRefs = await FindAttributeReferencesAsync(
-                    symbol,
-                    document,
-                    semanticModel,
-                    cancellationToken
-                )
+                symbol,
+                document,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var predefinedTypeRefs = await FindPredefinedTypeReferencesAsync(
-                    symbol,
-                    document,
-                    semanticModel,
-                    cancellationToken
-                )
+                symbol,
+                document,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var implicitObjectCreationMatches =
                 await FindReferencesInImplicitObjectCreationExpressionAsync(
-                        symbol,
-                        document,
-                        semanticModel,
-                        cancellationToken
-                    )
+                    symbol,
+                    document,
+                    semanticModel,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             return ordinaryRefs.Concat(

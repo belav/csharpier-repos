@@ -68,7 +68,8 @@ class HWIntrinsicsTests
         int skipped = 0;
         var tests = new SseTests();
         foreach (
-            var method in typeof(SseTests).GetMethods()
+            var method in typeof(SseTests)
+                .GetMethods()
                 .OrderBy(m => m.Name) // TODO: the default order is different in Mono
                 .Where(m => m.GetParameters().Length == 0 && m.DeclaringType == typeof(SseTests))
         )
@@ -213,28 +214,28 @@ public unsafe class SseTests
         if (typeof(T) == typeof(float))
         {
             return Vector128.Create(
-                    (float)(rand.Next() * randMult) / 2.0f,
-                    (float)(rand.Next() * randMult) / 3.0f,
-                    (float)(rand.Next() * randMult) / 4.0f,
-                    (float)(rand.Next() * randMult) / 5.0f
-                )
+                (float)(rand.Next() * randMult) / 2.0f,
+                (float)(rand.Next() * randMult) / 3.0f,
+                (float)(rand.Next() * randMult) / 4.0f,
+                (float)(rand.Next() * randMult) / 5.0f
+            )
                 .As<float, T>();
         }
         else if (typeof(T) == typeof(double))
         {
             return Vector128.Create(
-                    (double)(rand.Next() * randMult),
-                    (double)(rand.Next() * randMult)
-                )
+                (double)(rand.Next() * randMult),
+                (double)(rand.Next() * randMult)
+            )
                 .As<double, T>();
         }
 
         return Vector128.Create(
-                rand.Next(0, int.MaxValue) * randMult,
-                rand.Next(0, int.MaxValue) * randMult,
-                rand.Next(0, int.MaxValue) * randMult,
-                rand.Next(0, int.MaxValue) * randMult
-            )
+            rand.Next(0, int.MaxValue) * randMult,
+            rand.Next(0, int.MaxValue) * randMult,
+            rand.Next(0, int.MaxValue) * randMult,
+            rand.Next(0, int.MaxValue) * randMult
+        )
             .As<int, T>();
     }
 

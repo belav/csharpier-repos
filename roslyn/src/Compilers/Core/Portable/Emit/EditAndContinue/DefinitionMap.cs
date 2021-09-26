@@ -234,10 +234,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
             // Check if method has changed previously. If so, we already have a map.
             if (
-                baseline.AddedOrChangedMethods.TryGetValue(
-                    methodIndex,
-                    out var addedOrChangedMethod
-                )
+                baseline.AddedOrChangedMethods
+                    .TryGetValue(methodIndex, out var addedOrChangedMethod)
             )
             {
                 methodId = addedOrChangedMethod.MethodId;

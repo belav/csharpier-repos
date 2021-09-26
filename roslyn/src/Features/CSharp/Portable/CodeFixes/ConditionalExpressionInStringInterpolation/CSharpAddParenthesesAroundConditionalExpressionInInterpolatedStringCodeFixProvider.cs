@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetRequiredSyntaxRootAsync(context.CancellationToken)
+            var root = await context.Document
+                .GetRequiredSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -87,8 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
             var textWithOpenParenthesis = text.Replace(openParenthesisPosition, 0, "(");
             var documentWithOpenParenthesis = document.WithText(textWithOpenParenthesis);
             var syntaxRoot = await documentWithOpenParenthesis.GetRequiredSyntaxRootAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var nodeAtInsertPosition = syntaxRoot.FindNode(
                 new TextSpan(openParenthesisPosition, 0)

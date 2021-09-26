@@ -193,10 +193,8 @@ namespace Newtonsoft.Json.Serialization
             if (!JsonTypeReflector.FullyTrusted)
             {
                 throw new JsonException(
-                    "Insufficient permissions. Creating an uninitialized '{0}' type requires full trust.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        NonNullableUnderlyingType
-                    )
+                    "Insufficient permissions. Creating an uninitialized '{0}' type requires full trust."
+                        .FormatWith(CultureInfo.InvariantCulture, NonNullableUnderlyingType)
                 );
             }
 

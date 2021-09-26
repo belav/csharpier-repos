@@ -152,8 +152,8 @@ namespace System.Web.Mvc
         {
             var cache = new StandardRouteActionMethodCache();
             cache.AliasedMethods = StandardRouteMethods.Where(
-                    IsMethodDecoratedWithAliasingAttribute
-                )
+                IsMethodDecoratedWithAliasingAttribute
+            )
                 .ToArray();
             cache.NonAliasedMethods = StandardRouteMethods.Except(cache.AliasedMethods)
                 .ToLookup(GetCanonicalMethodName, StringComparer.OrdinalIgnoreCase);

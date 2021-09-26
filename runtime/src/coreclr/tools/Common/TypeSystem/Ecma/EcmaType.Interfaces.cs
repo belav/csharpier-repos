@@ -39,9 +39,8 @@ namespace Internal.TypeSystem.Ecma
             int i = 0;
             foreach (var interfaceHandle in interfaceHandles)
             {
-                var interfaceImplementation = this.MetadataReader.GetInterfaceImplementation(
-                    interfaceHandle
-                );
+                var interfaceImplementation = this.MetadataReader
+                    .GetInterfaceImplementation(interfaceHandle);
                 DefType interfaceType =
                     _module.GetType(interfaceImplementation.Interface) as DefType;
                 if (interfaceType == null)

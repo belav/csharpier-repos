@@ -263,9 +263,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         {
             var configuration = TestServerBuilder.CreateDefaultOpenIdConnectConfiguration();
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "OIDCTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("OIDCTest")
             );
             var server = TestServerBuilder.CreateServer(
                 o =>
@@ -282,7 +281,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             var transaction = await server.SendAsync(DefaultHost + TestServerBuilder.Signout);
             Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
 
-            var query = transaction.Response.Headers.Location.Query.Substring(1)
+            var query = transaction.Response.Headers.Location.Query
+                .Substring(1)
                 .Split('&')
                 .Select(each => each.Split('='))
                 .ToDictionary(pair => pair[0], pair => pair[1]);
@@ -306,9 +306,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         {
             var configuration = TestServerBuilder.CreateDefaultOpenIdConnectConfiguration();
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "OIDCTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("OIDCTest")
             );
             var server = TestServerBuilder.CreateServer(
                 o =>
@@ -326,7 +325,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             );
             Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
 
-            var query = transaction.Response.Headers.Location.Query.Substring(1)
+            var query = transaction.Response.Headers.Location.Query
+                .Substring(1)
                 .Split('&')
                 .Select(each => each.Split('='))
                 .ToDictionary(pair => pair[0], pair => pair[1]);

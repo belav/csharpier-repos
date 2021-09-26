@@ -57,9 +57,9 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests
             using var timeoutTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(30));
 
             var lengthValues = eventListener.GetCounterValues(
-                    "queue-length",
-                    timeoutTokenSource.Token
-                )
+                "queue-length",
+                timeoutTokenSource.Token
+            )
                 .GetAsyncEnumerator();
 
             eventListener.EnableEvents(
@@ -101,9 +101,9 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests
             using var timeoutTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(5));
 
             var durationValues = eventListener.GetCounterValues(
-                    "queue-duration",
-                    timeoutTokenSource.Token
-                )
+                "queue-duration",
+                timeoutTokenSource.Token
+            )
                 .GetAsyncEnumerator();
 
             eventListener.EnableEvents(

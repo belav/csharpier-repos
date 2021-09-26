@@ -66,9 +66,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
         {
             Console.WriteLine($"Process ID: {Process.GetCurrentProcess().Id}");
 
-            var configBuilder = new ConfigurationBuilder().AddEnvironmentVariables(
-                prefix: "ASPNETCORE_"
-            );
+            var configBuilder = new ConfigurationBuilder()
+                .AddEnvironmentVariables(prefix: "ASPNETCORE_");
 
             if (azureSignalRConnectionString != null)
             {
@@ -86,15 +85,12 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
 
             var config = configBuilder.Build();
 
-            var host = new WebHostBuilder().UseConfiguration(config)
-                .ConfigureLogging(
-                    loggerFactory =>
-                    {
-                        loggerFactory.AddConsole().SetMinimumLevel(logLevel);
-                    }
-                )
-                .UseKestrel()
-                .UseStartup<Startup>();
+            var host = new WebHostBuilder().UseConfiguration(config).ConfigureLogging(
+                loggerFactory =>
+                {
+                    loggerFactory.AddConsole().SetMinimumLevel(logLevel);
+                }
+            ).UseKestrel().UseStartup<Startup>();
 
             host.Build().Run();
 

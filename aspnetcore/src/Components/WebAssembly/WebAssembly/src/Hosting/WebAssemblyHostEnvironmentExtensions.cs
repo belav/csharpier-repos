@@ -70,11 +70,12 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
                 throw new ArgumentNullException(nameof(hostingEnvironment));
             }
 
-            return string.Equals(
-                hostingEnvironment.Environment,
-                environmentName,
-                StringComparison.OrdinalIgnoreCase
-            );
+            return string
+                .Equals(
+                    hostingEnvironment.Environment,
+                    environmentName,
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
     }
 }

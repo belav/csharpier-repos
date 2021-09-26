@@ -17,13 +17,14 @@ namespace System.Globalization.Tests
             foreach (string part in parts)
             {
                 sb.Append(
-                    (char)int.Parse(
-                        part,
-                        NumberStyles.HexNumber
-                            | NumberStyles.AllowTrailingWhite
-                            | NumberStyles.AllowLeadingWhite,
-                        CultureInfo.InvariantCulture
-                    )
+                    (char)int
+                        .Parse(
+                            part,
+                            NumberStyles.HexNumber
+                                | NumberStyles.AllowTrailingWhite
+                                | NumberStyles.AllowLeadingWhite,
+                            CultureInfo.InvariantCulture
+                        )
                 );
             }
             return sb.ToString();
@@ -42,7 +43,8 @@ namespace System.Globalization.Tests
             // Windows 7 test came from http://www.unicode.org/Public/3.0-Update1/NormalizationTest-3.0.1.txt
 
             using (
-                Stream stream = typeof(StringNormalizationAllTests).GetTypeInfo()
+                Stream stream = typeof(StringNormalizationAllTests)
+                    .GetTypeInfo()
                     .Assembly.GetManifestResourceStream(
                         PlatformDetection.IsWindows7
                           ? "NormalizationDataWin7"

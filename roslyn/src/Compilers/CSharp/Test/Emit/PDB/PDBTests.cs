@@ -105,16 +105,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             Assert.True(result.Success);
 
             var hash1 = CryptographicHashProvider.ComputeSha1(
-                    Encoding.Unicode.GetBytesWithPreamble(tree1.ToString())
-                )
+                Encoding.Unicode.GetBytesWithPreamble(tree1.ToString())
+            )
                 .ToArray();
             var hash3 = CryptographicHashProvider.ComputeSha1(
-                    new UTF8Encoding(true, false).GetBytesWithPreamble(tree3.ToString())
-                )
+                new UTF8Encoding(true, false).GetBytesWithPreamble(tree3.ToString())
+            )
                 .ToArray();
             var hash4 = CryptographicHashProvider.ComputeSha1(
-                    new UTF8Encoding(false, false).GetBytesWithPreamble(tree4.ToString())
-                )
+                new UTF8Encoding(false, false).GetBytesWithPreamble(tree4.ToString())
+            )
                 .ToArray();
 
             comp.VerifyPdb(
@@ -158,9 +158,8 @@ public class C
 
             var compilation = CreateCompilation(
                 new[] { Parse(text1, @"C:\Folder1\Folder2\Test1.cs") },
-                options: TestOptions.DebugDll.WithSourceReferenceResolver(
-                    SourceFileResolver.Default
-                )
+                options: TestOptions.DebugDll
+                    .WithSourceReferenceResolver(SourceFileResolver.Default)
             );
 
             compilation.VerifyPdb(
@@ -209,9 +208,8 @@ public class C
 
             var compilation = CreateCompilation(
                 new[] { Parse(text1, @"/Folder1/Folder2/Test1.cs") },
-                options: TestOptions.DebugDll.WithSourceReferenceResolver(
-                    SourceFileResolver.Default
-                )
+                options: TestOptions.DebugDll
+                    .WithSourceReferenceResolver(SourceFileResolver.Default)
             );
 
             compilation.VerifyPdb(
@@ -318,10 +316,11 @@ public class C
                 // error CS0041: Unexpected error writing debug information -- 'The version of Windows PDB writer is older than required: '<lib name>''
                 Diagnostic(ErrorCode.FTL_DebugEmitFailure)
                     .WithArguments(
-                        string.Format(
-                            CodeAnalysisResources.SymWriterOlderVersionThanRequired,
-                            "<lib name>"
-                        )
+                        string
+                            .Format(
+                                CodeAnalysisResources.SymWriterOlderVersionThanRequired,
+                                "<lib name>"
+                            )
                     )
             );
 
@@ -11268,12 +11267,11 @@ public class C
                 source,
                 options: TestOptions.DebugDll
             );
-            CompileAndVerify(c)
-                .VerifyIL(
-                    qualifiedMethodName: "Program.M",
-                    sequencePoints: "Program.M",
-                    source: source,
-                    expectedIL: @"{
+            CompileAndVerify(c).VerifyIL(
+                qualifiedMethodName: "Program.M",
+                sequencePoints: "Program.M",
+                source: source,
+                expectedIL: @"{
   // Code size      123 (0x7b)
   .maxstack  2
   .locals init (object V_0,
@@ -11373,7 +11371,7 @@ public class C
   // sequence point: }
   IL_007a:  ret
 }"
-                );
+            );
             c.VerifyPdb(
                 @"<symbols>
   <files>

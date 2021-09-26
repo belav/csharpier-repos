@@ -186,7 +186,8 @@ public class MonthDays : idx
 
             compilation.VerifyDiagnostics();
 
-            var indexer = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("MonthDays")
+            var indexer = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("MonthDays")
                 .Indexers.Single();
             Assert.Equal(Microsoft.CodeAnalysis.WellKnownMemberNames.Indexer, indexer.Name);
             Assert.Equal("MonthInfoIndexer", indexer.MetadataName);
@@ -562,12 +563,11 @@ struct S
     }
 }";
             // Dev10/11: (11,9): error CS0029: Cannot implicitly convert type 'int' to 'S'
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,15): error CS0029: Cannot implicitly convert type 'int' to 'S'
-                    //         S s = 0;
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "0").WithArguments("int", "S")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,15): error CS0029: Cannot implicitly convert type 'int' to 'S'
+                //         S s = 0;
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "0").WithArguments("int", "S")
+            );
         }
 
         [Fact, WorkItem(529242, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529242")]
@@ -809,15 +809,14 @@ class NullCoalescingTest
 }
 ";
             // Native compiler no error (print -123)
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (10,27): error CS0165: Use of unassigned local variable 'c'
-                    //         Console.WriteLine(c);
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "c").WithArguments("c"),
-                    // (7,14): warning CS0219: The variable 'a' is assigned but its value is never used
-                    //         int? a;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a").WithArguments("a")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (10,27): error CS0165: Use of unassigned local variable 'c'
+                //         Console.WriteLine(c);
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "c").WithArguments("c"),
+                // (7,14): warning CS0219: The variable 'a' is assigned but its value is never used
+                //         int? a;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a").WithArguments("a")
+            );
         }
 
         [Fact, WorkItem(529464, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529464")]
@@ -911,22 +910,21 @@ class C
 ";
             // Roslyn: error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('object')
             // Dev10/11: no error
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // This is new in Roslyn.
+            CreateCompilation(text).VerifyDiagnostics(
+                // This is new in Roslyn.
 
-                    // (7,29): error CS0165: Use of unassigned local variable 'i'
-                    //         int? j = (int?)1 ?? i; //dev10 accepts, since it treats the RHS as unreachable.
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "i").WithArguments("i"),
-                    // These match Dev10.
+                // (7,29): error CS0165: Use of unassigned local variable 'i'
+                //         int? j = (int?)1 ?? i; //dev10 accepts, since it treats the RHS as unreachable.
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "i").WithArguments("i"),
+                // These match Dev10.
 
-                    // (10,36): error CS0165: Use of unassigned local variable 'k'
-                    //         int? l = ((int?)1 ?? j) ?? k; // If the LHS of the LHS is non-null, then the LHS should be non-null, but dev10 only handles casts.
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "k").WithArguments("k"),
-                    // (13,57): error CS0165: Use of unassigned local variable 'm'
-                    //         int? n = ((int?)1).HasValue ? ((int?)1).Value : m; //dev10 does not strip casts in a comparable conditional operator
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "m").WithArguments("m")
-                );
+                // (10,36): error CS0165: Use of unassigned local variable 'k'
+                //         int? l = ((int?)1 ?? j) ?? k; // If the LHS of the LHS is non-null, then the LHS should be non-null, but dev10 only handles casts.
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "k").WithArguments("k"),
+                // (13,57): error CS0165: Use of unassigned local variable 'm'
+                //         int? n = ((int?)1).HasValue ? ((int?)1).Value : m; //dev10 does not strip casts in a comparable conditional operator
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "m").WithArguments("m")
+            );
         }
 
         [WorkItem(529974, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529974")]
@@ -1007,7 +1005,7 @@ public class Program
         public void NoMore_CS0458WRN_AlwaysNull02()
         {
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     const bool ct = true;
@@ -1030,17 +1028,17 @@ public class Test
     }
 }
 "
-                )
-                // We decided to not report WRN_AlwaysNull in some cases.
+            )
+            // We decided to not report WRN_AlwaysNull in some cases.
 
-                .VerifyDiagnostics(
-                    // Diagnostic(ErrorCode.WRN_AlwaysNull, "true & null").WithArguments("bool?"),
-                    // Diagnostic(ErrorCode.WRN_AlwaysNull, "null & true").WithArguments("bool?"),
-                    // Diagnostic(ErrorCode.WRN_AlwaysNull, "null | false").WithArguments("bool?"),
-                    // Diagnostic(ErrorCode.WRN_AlwaysNull, "false | null").WithArguments("bool?"),
-                    Diagnostic(ErrorCode.WRN_AlwaysNull, "ct & null ^ null").WithArguments("bool?") //,
-                // Diagnostic(ErrorCode.WRN_AlwaysNull, "null | cf").WithArguments("bool?")
-                );
+            .VerifyDiagnostics(
+                // Diagnostic(ErrorCode.WRN_AlwaysNull, "true & null").WithArguments("bool?"),
+                // Diagnostic(ErrorCode.WRN_AlwaysNull, "null & true").WithArguments("bool?"),
+                // Diagnostic(ErrorCode.WRN_AlwaysNull, "null | false").WithArguments("bool?"),
+                // Diagnostic(ErrorCode.WRN_AlwaysNull, "false | null").WithArguments("bool?"),
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "ct & null ^ null").WithArguments("bool?") //,
+            // Diagnostic(ErrorCode.WRN_AlwaysNull, "null | cf").WithArguments("bool?")
+            );
         }
 
         [WorkItem(530403, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530403")]
@@ -1163,15 +1161,14 @@ public class Test
 }
 ";
             // Native compiler no error (print -123)
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,13): warning CS0219: The variable 'b1' is assigned but its value is never used
-                    //         var b1 = new Derived(); // Both Warning CS0219
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "b1").WithArguments("b1"),
-                    // (10,13): warning CS0219: The variable 'b3' is assigned but its value is never used
-                    //         var b3 = (Derived)((Base)new Derived()); // Roslyn Warning CS0219
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "b3").WithArguments("b3")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,13): warning CS0219: The variable 'b1' is assigned but its value is never used
+                //         var b1 = new Derived(); // Both Warning CS0219
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "b1").WithArguments("b1"),
+                // (10,13): warning CS0219: The variable 'b3' is assigned but its value is never used
+                //         var b3 = (Derived)((Base)new Derived()); // Roslyn Warning CS0219
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "b3").WithArguments("b3")
+            );
         }
 
         [Fact, WorkItem(530556, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530556")]
@@ -1383,11 +1380,10 @@ if (esbyte.e0 == esbyte.e0)
 }}
 ";
             // Native compiler no warn
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,5): warning CS1718: Comparison made to same variable; did you mean to compare something else?
-                    Diagnostic(ErrorCode.WRN_ComparisonToSelf, "esbyte.e0 == esbyte.e0")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,5): warning CS1718: Comparison made to same variable; did you mean to compare something else?
+                Diagnostic(ErrorCode.WRN_ComparisonToSelf, "esbyte.e0 == esbyte.e0")
+            );
         }
 
         [Fact, WorkItem(530629, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530629")]
@@ -1412,13 +1408,12 @@ namespace VS7_336319
 }
 ";
             // Native compiler no warn
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (10,40): warning CS0414: The field 'VS7_336319.ExpressionBinder.PredefinedTypes' is assigned but its value is never used
-                    //         private static PredefinedTypes PredefinedTypes = null;
-                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "PredefinedTypes")
-                        .WithArguments("VS7_336319.ExpressionBinder.PredefinedTypes")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (10,40): warning CS0414: The field 'VS7_336319.ExpressionBinder.PredefinedTypes' is assigned but its value is never used
+                //         private static PredefinedTypes PredefinedTypes = null;
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "PredefinedTypes")
+                    .WithArguments("VS7_336319.ExpressionBinder.PredefinedTypes")
+            );
         }
 
         [WorkItem(530666, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530666")]
@@ -1480,13 +1475,12 @@ static int Main()
     }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (15,13): error CS0121: The call is ambiguous between the following methods or properties: 'C.M(params double[])' and 'C.M(params G<int>[])'
-                    //             M();
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
-                        .WithArguments("C.M(params double[])", "C.M(params G<int>[])")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (15,13): error CS0121: The call is ambiguous between the following methods or properties: 'C.M(params double[])' and 'C.M(params G<int>[])'
+                //             M();
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                    .WithArguments("C.M(params double[])", "C.M(params G<int>[])")
+            );
         }
 
         [Fact, WorkItem(530653, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530653")]
@@ -1511,7 +1505,7 @@ static int Main()
             // behavior is quirky enough to warrant a break.
             // </quote>
             CompileAndVerify(
-                    @"
+                @"
 using System;
 [Obsolete]
 public class ObsoleteType
@@ -1528,13 +1522,12 @@ public class Program
         var y = ObsoleteType.field; // In Dev11, this line doesn't produce a warning.
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (15,17): warning CS0612: 'ObsoleteType' is obsolete
-                    //         var y = ObsoleteType.field;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "ObsoleteType")
-                        .WithArguments("ObsoleteType")
-                );
+            ).VerifyDiagnostics(
+                // (15,17): warning CS0612: 'ObsoleteType' is obsolete
+                //         var y = ObsoleteType.field;
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "ObsoleteType")
+                    .WithArguments("ObsoleteType")
+            );
         }
 
         [Fact, WorkItem(530303, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530303")]
@@ -1585,7 +1578,7 @@ public class Program
         public void TestVariableAndTypeNameClashes()
         {
             CompileAndVerify(
-                    @"
+                @"
 using System;
 public class Class1
 {
@@ -1610,16 +1603,15 @@ public class Class1
         }
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // Breaking Change: See bug 17395. Dev11 had a bug because of which it didn't report the below warnings.
-                    // (13,16): warning CS0168: The variable 'A5' is declared but never used
-                    //             A5 A5; const A6 A6 = null;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "A5").WithArguments("A5"),
-                    // (13,29): warning CS0219: The variable 'A6' is assigned but its value is never used
-                    //             A5 A5; const A6 A6 = null;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "A6").WithArguments("A6")
-                );
+            ).VerifyDiagnostics(
+                // Breaking Change: See bug 17395. Dev11 had a bug because of which it didn't report the below warnings.
+                // (13,16): warning CS0168: The variable 'A5' is declared but never used
+                //             A5 A5; const A6 A6 = null;
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "A5").WithArguments("A5"),
+                // (13,29): warning CS0219: The variable 'A6' is assigned but its value is never used
+                //             A5 A5; const A6 A6 = null;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "A6").WithArguments("A6")
+            );
         }
 
         [WorkItem(530584, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530584")]

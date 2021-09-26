@@ -627,17 +627,15 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("IsFunky", Expression.PropertyOrField(t, "isFunky").Member.Name);
             Assert.Equal("IsFunky", Expression.PropertyOrField(t, "isfunky").Member.Name);
             Assert.True(
-                typeof(PropertyInfo).IsAssignableFrom(
-                    Expression.PropertyOrField(t, "isfunky").Member.GetType()
-                )
+                typeof(PropertyInfo)
+                    .IsAssignableFrom(Expression.PropertyOrField(t, "isfunky").Member.GetType())
             );
             Assert.Equal("IsFunky", Expression.Property(t, "IsFunky").Member.Name);
             Assert.Equal("IsFunky", Expression.Property(t, "isFunky").Member.Name);
             Assert.Equal("IsFunky", Expression.Property(t, "ISFUNKY").Member.Name);
             Assert.True(
-                typeof(PropertyInfo).IsAssignableFrom(
-                    Expression.Property(t, "isFunky").Member.GetType()
-                )
+                typeof(PropertyInfo)
+                    .IsAssignableFrom(Expression.Property(t, "isFunky").Member.GetType())
             );
             Assert.True(
                 typeof(FieldInfo).IsAssignableFrom(Expression.Field(t, "_isFunky").Member.GetType())
@@ -1540,9 +1538,8 @@ namespace System.Linq.Expressions.Tests
             string s = "Bad Mojo";
             int val = 10;
 
-            ConstructorInfo constructor = typeof(TestClass).GetConstructor(
-                new Type[] { typeof(string), typeof(int) }
-            );
+            ConstructorInfo constructor = typeof(TestClass)
+                .GetConstructor(new Type[] { typeof(string), typeof(int) });
             MemberInfo[] members = new MemberInfo[]
             {
                 typeof(TestClass).GetField("S"),
@@ -1573,9 +1570,8 @@ namespace System.Linq.Expressions.Tests
             Assert.True(object.Equals(f1(), new TestClass(s, val)));
             MemberInfo mem1 = typeof(AnonHelperClass1).GetField("mem1");
             LambdaExpression ce1 = Expression.Lambda(Expression.Constant(45m, typeof(decimal)));
-            ConstructorInfo constructor1 = typeof(AnonHelperClass1).GetConstructor(
-                new Type[] { typeof(Expression<Func<decimal>>) }
-            );
+            ConstructorInfo constructor1 = typeof(AnonHelperClass1)
+                .GetConstructor(new Type[] { typeof(Expression<Func<decimal>>) });
 
             Expression[] arguments = new Expression[] { ce1 };
             MemberInfo[] members2 = new MemberInfo[] { mem1 };
@@ -1724,8 +1720,8 @@ namespace System.Linq.Expressions.Tests
         private static S TestCast<T, S>(T value, bool useInterpreter)
         {
             Func<S> d = Expression.Lambda<Func<S>>(
-                    Expression.Convert(Expression.Constant(value, typeof(T)), typeof(S))
-                )
+                Expression.Convert(Expression.Constant(value, typeof(T)), typeof(S))
+            )
                 .Compile(useInterpreter);
             return d();
         }
@@ -2137,8 +2133,8 @@ namespace System.Linq.Expressions.Tests
         private static S TestConvert<T, S>(T value, bool useInterpreter)
         {
             Func<S> d = Expression.Lambda<Func<S>>(
-                    Expression.Convert(Expression.Constant(value, typeof(T)), typeof(S))
-                )
+                Expression.Convert(Expression.Constant(value, typeof(T)), typeof(S))
+            )
                 .Compile(useInterpreter);
             return d();
         }
@@ -2146,8 +2142,8 @@ namespace System.Linq.Expressions.Tests
         private static S TestConvertChecked<T, S>(T value, bool useInterpreter)
         {
             Func<S> d = Expression.Lambda<Func<S>>(
-                    Expression.ConvertChecked(Expression.Constant(value, typeof(T)), typeof(S))
-                )
+                Expression.ConvertChecked(Expression.Constant(value, typeof(T)), typeof(S))
+            )
                 .Compile(useInterpreter);
             return d();
         }
@@ -2193,25 +2189,25 @@ namespace System.Linq.Expressions.Tests
         public static void ConvertToChar(bool useInterpreter)
         {
             Func<char> f = Expression.Lambda<Func<Char>>(
-                    Expression.Convert(Expression.Constant((byte)65), typeof(char))
-                )
+                Expression.Convert(Expression.Constant((byte)65), typeof(char))
+            )
                 .Compile(useInterpreter);
             Assert.Equal('A', f());
 
             Func<char> f2 = Expression.Lambda<Func<Char>>(
-                    Expression.Convert(Expression.Constant(65), typeof(char))
-                )
+                Expression.Convert(Expression.Constant(65), typeof(char))
+            )
                 .Compile(useInterpreter);
             Assert.Equal('A', f2());
 
             Func<char> f3 = Expression.Lambda<Func<Char>>(
-                    Expression.Convert(Expression.Constant(-1), typeof(char))
-                )
+                Expression.Convert(Expression.Constant(-1), typeof(char))
+            )
                 .Compile(useInterpreter);
             char c3 = f3();
             Func<int> f4 = Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(c3), typeof(int))
-                )
+                Expression.Convert(Expression.Constant(c3), typeof(int))
+            )
                 .Compile(useInterpreter);
             Assert.Equal(ushort.MaxValue, f4());
         }
@@ -2466,10 +2462,8 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression y = Expression.Parameter(typeof(int), "y");
             Expression call = Expression.Call(
                 null,
-                typeof(Compiler_Tests).GetMethod(
-                    "ComputeDelegate",
-                    BindingFlags.Static | BindingFlags.Public
-                ),
+                typeof(Compiler_Tests)
+                    .GetMethod("ComputeDelegate", BindingFlags.Static | BindingFlags.Public),
                 new Expression[] { y }
             );
             InvocationExpression ie = Expression.Invoke(call, x);
@@ -2497,10 +2491,8 @@ namespace System.Linq.Expressions.Tests
         {
             Expression call = Expression.Call(
                 null,
-                typeof(Compiler_Tests).GetMethod(
-                    "ComputeDynamicLambda",
-                    BindingFlags.Static | BindingFlags.Public
-                ),
+                typeof(Compiler_Tests)
+                    .GetMethod("ComputeDynamicLambda", BindingFlags.Static | BindingFlags.Public),
                 new Expression[] {  }
             );
             AssertExtensions.Throws<ArgumentException>(
@@ -2519,10 +2511,8 @@ namespace System.Linq.Expressions.Tests
         {
             Expression call = Expression.Call(
                 null,
-                typeof(Compiler_Tests).GetMethod(
-                    "ComputeDynamicDelegate",
-                    BindingFlags.Static | BindingFlags.Public
-                ),
+                typeof(Compiler_Tests)
+                    .GetMethod("ComputeDynamicDelegate", BindingFlags.Static | BindingFlags.Public),
                 new Expression[] {  }
             );
             AssertExtensions.Throws<ArgumentException>(
@@ -3095,12 +3085,12 @@ namespace System.Linq.Expressions.Tests
                 () =>
                 {
                     Func<long> f = Expression.Lambda<Func<long>>(
-                            Expression.MultiplyChecked(
-                                Expression.Constant((long)-1, typeof(long)),
-                                Expression.Constant(long.MinValue, typeof(long))
-                            ),
-                            Enumerable.Empty<ParameterExpression>()
-                        )
+                        Expression.MultiplyChecked(
+                            Expression.Constant((long)-1, typeof(long)),
+                            Expression.Constant(long.MinValue, typeof(long))
+                        ),
+                        Enumerable.Empty<ParameterExpression>()
+                    )
                         .Compile(useInterpreter);
                     f();
                 }
@@ -3115,12 +3105,12 @@ namespace System.Linq.Expressions.Tests
                 () =>
                 {
                     Func<long> f = Expression.Lambda<Func<long>>(
-                            Expression.MultiplyChecked(
-                                Expression.Constant(long.MinValue, typeof(long)),
-                                Expression.Constant((long)-1, typeof(long))
-                            ),
-                            Enumerable.Empty<ParameterExpression>()
-                        )
+                        Expression.MultiplyChecked(
+                            Expression.Constant(long.MinValue, typeof(long)),
+                            Expression.Constant((long)-1, typeof(long))
+                        ),
+                        Enumerable.Empty<ParameterExpression>()
+                    )
                         .Compile(useInterpreter);
                     f();
                 }
@@ -3132,8 +3122,8 @@ namespace System.Linq.Expressions.Tests
         public static void ConvertSignedToUnsigned(bool useInterpreter)
         {
             Func<ulong> f = Expression.Lambda<Func<ulong>>(
-                    Expression.Convert(Expression.Constant((sbyte)-1), typeof(ulong))
-                )
+                Expression.Convert(Expression.Constant((sbyte)-1), typeof(ulong))
+            )
                 .Compile(useInterpreter);
             Assert.Equal(ulong.MaxValue, f());
         }
@@ -3143,8 +3133,8 @@ namespace System.Linq.Expressions.Tests
         public static void ConvertUnsignedToSigned(bool useInterpreter)
         {
             Func<sbyte> f = Expression.Lambda<Func<sbyte>>(
-                    Expression.Convert(Expression.Constant(UInt64.MaxValue), typeof(sbyte))
-                )
+                Expression.Convert(Expression.Constant(UInt64.MaxValue), typeof(sbyte))
+            )
                 .Compile(useInterpreter);
             Assert.Equal((sbyte)-1, f());
         }
@@ -3154,8 +3144,8 @@ namespace System.Linq.Expressions.Tests
         public static void ConvertCheckedSignedToUnsigned(bool useInterpreter)
         {
             Func<ulong> f = Expression.Lambda<Func<ulong>>(
-                    Expression.ConvertChecked(Expression.Constant((sbyte)-1), typeof(ulong))
-                )
+                Expression.ConvertChecked(Expression.Constant((sbyte)-1), typeof(ulong))
+            )
                 .Compile(useInterpreter);
             Assert.Throws<OverflowException>(() => f());
         }
@@ -3165,8 +3155,8 @@ namespace System.Linq.Expressions.Tests
         public static void ConvertCheckedUnsignedToSigned(bool useInterpreter)
         {
             Func<sbyte> f = Expression.Lambda<Func<sbyte>>(
-                    Expression.ConvertChecked(Expression.Constant(UInt64.MaxValue), typeof(sbyte))
-                )
+                Expression.ConvertChecked(Expression.Constant(UInt64.MaxValue), typeof(sbyte))
+            )
                 .Compile(useInterpreter);
             Assert.Throws<OverflowException>(() => f());
         }
@@ -4143,30 +4133,30 @@ namespace System.Linq.Expressions.Tests
             );
             Assert.True(
                 (bool)Expression.Lambda(
-                        Expression.Equal(
-                            Expression.PropertyOrField(c, "CustomerId"),
-                            Expression.PropertyOrField(c, "CUSTOMERID")
-                        ),
-                        c
-                    )
+                    Expression.Equal(
+                        Expression.PropertyOrField(c, "CustomerId"),
+                        Expression.PropertyOrField(c, "CUSTOMERID")
+                    ),
+                    c
+                )
                     .Compile(useInterpreter)
                     .DynamicInvoke(cust)
             );
             Assert.True(
                 (bool)Expression.Lambda(
-                        Expression.And(
-                            Expression.Equal(
-                                Expression.PropertyOrField(c, "CustomerId"),
-                                Expression.PropertyOrField(c2, "CustomerId")
-                            ),
-                            Expression.Equal(
-                                Expression.PropertyOrField(c, "ContactName"),
-                                Expression.PropertyOrField(c2, "ContactName")
-                            )
+                    Expression.And(
+                        Expression.Equal(
+                            Expression.PropertyOrField(c, "CustomerId"),
+                            Expression.PropertyOrField(c2, "CustomerId")
                         ),
-                        c,
-                        c2
-                    )
+                        Expression.Equal(
+                            Expression.PropertyOrField(c, "ContactName"),
+                            Expression.PropertyOrField(c2, "ContactName")
+                        )
+                    ),
+                    c,
+                    c2
+                )
                     .Compile(useInterpreter)
                     .DynamicInvoke(cust, cust)
             );

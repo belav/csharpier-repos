@@ -87,21 +87,24 @@ namespace Newtonsoft.Json.Serialization
                 Type converterType = typeConverter.GetType();
 
                 if (
-                    !string.Equals(
-                        converterType.FullName,
-                        "System.ComponentModel.ComponentConverter",
-                        StringComparison.Ordinal
-                    )
-                    && !string.Equals(
-                        converterType.FullName,
-                        "System.ComponentModel.ReferenceConverter",
-                        StringComparison.Ordinal
-                    )
-                    && !string.Equals(
-                        converterType.FullName,
-                        "System.Windows.Forms.Design.DataSourceConverter",
-                        StringComparison.Ordinal
-                    )
+                    !string
+                        .Equals(
+                            converterType.FullName,
+                            "System.ComponentModel.ComponentConverter",
+                            StringComparison.Ordinal
+                        )
+                    && !string
+                        .Equals(
+                            converterType.FullName,
+                            "System.ComponentModel.ReferenceConverter",
+                            StringComparison.Ordinal
+                        )
+                    && !string
+                        .Equals(
+                            converterType.FullName,
+                            "System.Windows.Forms.Design.DataSourceConverter",
+                            StringComparison.Ordinal
+                        )
                     && converterType != typeof(TypeConverter)
                 )
                 {
@@ -121,8 +124,8 @@ namespace Newtonsoft.Json.Serialization
 
             while (currentType != null)
             {
-                DataContractAttribute? result =
-                    CachedAttributeGetter<DataContractAttribute>.GetAttribute(currentType);
+                DataContractAttribute? result = CachedAttributeGetter<DataContractAttribute>
+                    .GetAttribute(currentType);
                 if (result != null)
                 {
                     return result;
@@ -146,9 +149,8 @@ namespace Newtonsoft.Json.Serialization
 
             // search property and then search base properties if nothing is returned and the property is virtual
             PropertyInfo propertyInfo = (PropertyInfo)memberInfo;
-            DataMemberAttribute? result = CachedAttributeGetter<DataMemberAttribute>.GetAttribute(
-                propertyInfo
-            );
+            DataMemberAttribute? result = CachedAttributeGetter<DataMemberAttribute>
+                .GetAttribute(propertyInfo);
             if (result == null)
             {
                 if (propertyInfo.IsVirtual())
@@ -164,9 +166,8 @@ namespace Newtonsoft.Json.Serialization
                             );
                         if (baseProperty != null && baseProperty.IsVirtual())
                         {
-                            result = CachedAttributeGetter<DataMemberAttribute>.GetAttribute(
-                                baseProperty
-                            );
+                            result = CachedAttributeGetter<DataMemberAttribute>
+                                .GetAttribute(baseProperty);
                         }
 
                         currentType = currentType.BaseType();
@@ -285,19 +286,18 @@ namespace Newtonsoft.Json.Serialization
                     if (parameters != null)
                     {
                         Type[] paramTypes = parameters.Select(
-                                param =>
+                            param =>
+                            {
+                                if (param == null)
                                 {
-                                    if (param == null)
-                                    {
-                                        throw new InvalidOperationException(
-                                            "Cannot pass a null parameter to the constructor."
-                                        );
-                                    }
-
-                                    return param.GetType();
+                                    throw new InvalidOperationException(
+                                        "Cannot pass a null parameter to the constructor."
+                                    );
                                 }
-                            )
-                            .ToArray();
+
+                                return param.GetType();
+                            }
+                        ).ToArray();
                         ConstructorInfo parameterizedConstructorInfo = type.GetConstructor(
                             paramTypes
                         );
@@ -313,10 +313,8 @@ namespace Newtonsoft.Json.Serialization
                         else
                         {
                             throw new JsonException(
-                                "No matching parameterized constructor found for '{0}'.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    type
-                                )
+                                "No matching parameterized constructor found for '{0}'."
+                                    .FormatWith(CultureInfo.InvariantCulture, type)
                             );
                         }
                     }
@@ -324,10 +322,8 @@ namespace Newtonsoft.Json.Serialization
                     if (defaultConstructor == null)
                     {
                         throw new JsonException(
-                            "No parameterless constructor defined for '{0}'.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                type
-                            )
+                            "No parameterless constructor defined for '{0}'."
+                                .FormatWith(CultureInfo.InvariantCulture, type)
                         );
                     }
 
@@ -360,11 +356,12 @@ namespace Newtonsoft.Json.Serialization
                 // only test on attribute type name
                 // attribute assembly could change because of type forwarding, etc
                 if (
-                    string.Equals(
-                        attributeType.FullName,
-                        "System.ComponentModel.DataAnnotations.MetadataTypeAttribute",
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            attributeType.FullName,
+                            "System.ComponentModel.DataAnnotations.MetadataTypeAttribute",
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     const string metadataClassTypeName = "MetadataClassType";
@@ -557,9 +554,8 @@ namespace Newtonsoft.Json.Serialization
                     try
                     {
                         new ReflectionPermission(ReflectionPermissionFlag.MemberAccess).Demand();
-                        new ReflectionPermission(
-                            ReflectionPermissionFlag.RestrictedMemberAccess
-                        ).Demand();
+                        new ReflectionPermission(ReflectionPermissionFlag.RestrictedMemberAccess)
+                            .Demand();
                         new SecurityPermission(SecurityPermissionFlag.SkipVerification).Demand();
                         new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
                         new SecurityPermission(PermissionState.Unrestricted).Demand();

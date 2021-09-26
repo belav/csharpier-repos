@@ -639,12 +639,13 @@ namespace System.Xml.Tests
                 }
                 w.WriteStartElement("root");
                 w.Dispose();
-                string expectedResult = string.Format(
-                    "<?xml version=\"1.0\" encoding=\"{0}\"?>"
-                        + wSettings.NewLineChars
-                        + "<root />",
-                    encoding.WebName
-                );
+                string expectedResult = string
+                    .Format(
+                        "<?xml version=\"1.0\" encoding=\"{0}\"?>"
+                            + wSettings.NewLineChars
+                            + "<root />",
+                        encoding.WebName
+                    );
                 CError.Compare(utils.CompareString(expectedResult), "");
             }
         }

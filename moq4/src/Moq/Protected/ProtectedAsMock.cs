@@ -286,20 +286,16 @@ namespace Moq.Protected
 
             private MethodInfo FindCorrespondingMethod(MethodInfo duckMethod)
             {
-                var candidateTargetMethods = this.targetType.GetMethods(
-                        BindingFlags.NonPublic | BindingFlags.Instance
-                    )
+                var candidateTargetMethods = this.targetType
+                    .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
                     .Where(ctm => IsCorrespondingMethod(duckMethod, ctm))
                     .ToArray();
 
                 if (candidateTargetMethods.Length == 0)
                 {
                     throw new ArgumentException(
-                        string.Format(
-                            Resources.ProtectedMemberNotFound,
-                            this.targetType,
-                            duckMethod
-                        )
+                        string
+                            .Format(Resources.ProtectedMemberNotFound, this.targetType, duckMethod)
                     );
                 }
 
@@ -318,20 +314,20 @@ namespace Moq.Protected
 
             private PropertyInfo FindCorrespondingProperty(PropertyInfo duckProperty)
             {
-                var candidateTargetProperties = this.targetType.GetProperties(
-                        BindingFlags.NonPublic | BindingFlags.Instance
-                    )
+                var candidateTargetProperties = this.targetType
+                    .GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
                     .Where(ctp => IsCorrespondingProperty(duckProperty, ctp))
                     .ToArray();
 
                 if (candidateTargetProperties.Length == 0)
                 {
                     throw new ArgumentException(
-                        string.Format(
-                            Resources.ProtectedMemberNotFound,
-                            this.targetType,
-                            duckProperty
-                        )
+                        string
+                            .Format(
+                                Resources.ProtectedMemberNotFound,
+                                this.targetType,
+                                duckProperty
+                            )
                     );
                 }
 

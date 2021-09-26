@@ -798,8 +798,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             string a = "a";
             dynamic da = a;
             var result = list.Where(
-                    p => p == (string)mc.Method_ReturnsDynamic<string, int, string>(null, 10, a, da)
-                )
+                p => p == (string)mc.Method_ReturnsDynamic<string, int, string>(null, 10, a, da)
+            )
                 .ToList();
             if (result.Count == 1 && result[0] == "a")
                 return 0;

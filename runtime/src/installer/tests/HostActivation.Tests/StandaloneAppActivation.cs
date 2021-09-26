@@ -92,7 +92,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             else
             {
                 // Some Unix flavors filter exit code to ubyte.
-                (exitCode & 0xFF).Should().Be(0x95);
+                (exitCode & 0xFF)
+                    .Should()
+                    .Be(0x95);
             }
         }
 
@@ -125,7 +127,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             else
             {
                 // Some Unix flavors filter exit code to ubyte.
-                (exitCode & 0xFF).Should().Be(0x84);
+                (exitCode & 0xFF)
+                    .Should()
+                    .Be(0x84);
             }
         }
 

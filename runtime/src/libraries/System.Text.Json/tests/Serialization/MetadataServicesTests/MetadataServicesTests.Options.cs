@@ -50,20 +50,16 @@ namespace System.Text.Json.Tests.Serialization
         {
             // Context binds with options when instantiated with parameterless ctor.
             MyJsonContextThatSetsOptionsInParameterlessCtor context = new();
-            FieldInfo optionsField = typeof(JsonSerializerContext).GetField(
-                "_options",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            FieldInfo optionsField = typeof(JsonSerializerContext)
+                .GetField("_options", BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.NotNull(optionsField);
             Assert.NotNull((JsonSerializerOptions)optionsField.GetValue(context));
 
             // Those options are overwritten when context is binded via options.AddContext<TContext>();
             JsonSerializerOptions options = new();
             options.AddContext<MyJsonContextThatSetsOptionsInParameterlessCtor>(); // No error.
-            FieldInfo contextField = typeof(JsonSerializerOptions).GetField(
-                "_context",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            FieldInfo contextField = typeof(JsonSerializerOptions)
+                .GetField("_context", BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.NotNull(contextField);
             Assert.Same(options, ((JsonSerializerContext)contextField.GetValue(options)).Options);
         }

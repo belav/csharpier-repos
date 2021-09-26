@@ -22,8 +22,8 @@ namespace Microsoft.EntityFrameworkCore
         protected ServiceProviderFixtureBase()
         {
             ServiceProvider = AddServices(
-                    TestStoreFactory.AddProviderServices(new ServiceCollection())
-                )
+                TestStoreFactory.AddProviderServices(new ServiceCollection())
+            )
                 .BuildServiceProvider(validateScopes: true);
         }
 
@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore
                 .EnableServiceProviderCaching(false).Options;
 
         protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
-            base.AddServices(serviceCollection)
+            base
+                .AddServices(serviceCollection)
                 .AddSingleton<ILoggerFactory>(
                     TestStoreFactory.CreateListLoggerFactory(ShouldLogCategory)
                 );

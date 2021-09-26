@@ -972,11 +972,12 @@ namespace Roslyn.Test.PdbUtilities
                 if (position + data > contentSize)
                 {
                     throw new Exception(
-                        string.Format(
-                            "DataStream can't read off end of stream. (pos={0},siz={1})",
-                            position,
-                            data
-                        )
+                        string
+                            .Format(
+                                "DataStream can't read off end of stream. (pos={0},siz={1})",
+                                position,
+                                data
+                            )
                     );
                 }
                 if (position == contentSize)
@@ -1571,11 +1572,8 @@ namespace Roslyn.Test.PdbUtilities
             if (sig != 0xeffeeffe || ver != 1)
             {
                 throw new Exception(
-                    string.Format(
-                        "Unsupported Name Stream version. (sig={0:x8}, ver={1})",
-                        sig,
-                        ver
-                    )
+                    string
+                        .Format("Unsupported Name Stream version. (sig={0:x8}, ver={1})", sig, ver)
                 );
             }
             int beg = bits.Position;

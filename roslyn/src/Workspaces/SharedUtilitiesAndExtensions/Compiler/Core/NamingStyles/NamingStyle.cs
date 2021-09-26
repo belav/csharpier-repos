@@ -188,19 +188,15 @@ namespace Microsoft.CodeAnalysis.NamingStyles
         {
             if (!name.StartsWith(Prefix))
             {
-                failureReason = string.Format(
-                    CompilerExtensionsResources.Missing_prefix_colon_0,
-                    Prefix
-                );
+                failureReason = string
+                    .Format(CompilerExtensionsResources.Missing_prefix_colon_0, Prefix);
                 return false;
             }
 
             if (!name.EndsWith(Suffix))
             {
-                failureReason = string.Format(
-                    CompilerExtensionsResources.Missing_suffix_colon_0,
-                    Suffix
-                );
+                failureReason = string
+                    .Format(CompilerExtensionsResources.Missing_suffix_colon_0, Suffix);
                 return false;
             }
 
@@ -222,11 +218,10 @@ namespace Microsoft.CodeAnalysis.NamingStyles
                 // Example: specified prefix "test_", actual prefix "test_m_"
                 failureReason =
                     Prefix == string.Empty
-                        ? string.Format(
-                              CompilerExtensionsResources.Prefix_0_is_not_expected,
-                              prefix
-                          )
-                        : string.Format(
+                        ? string
+                          .Format(CompilerExtensionsResources.Prefix_0_is_not_expected, prefix)
+                        : string
+                          .Format(
                               CompilerExtensionsResources.Prefix_0_does_not_match_expected_prefix_1,
                               prefix,
                               Prefix

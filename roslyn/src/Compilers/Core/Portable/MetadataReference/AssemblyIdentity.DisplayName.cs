@@ -291,7 +291,8 @@ namespace Microsoft.CodeAnalysis
                         continue;
                     }
 
-                    culture = string.Equals(
+                    culture = string
+                    .Equals(
                         propertyValue,
                         InvariantCultureDisplay,
                         StringComparison.OrdinalIgnoreCase
@@ -330,11 +331,8 @@ namespace Microsoft.CodeAnalysis
                     parsedParts |= AssemblyIdentityParts.PublicKey;
                 }
                 else if (
-                    string.Equals(
-                        propertyName,
-                        "PublicKeyToken",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(propertyName, "PublicKeyToken", StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     if ((seen & AssemblyIdentityParts.PublicKeyToken) != 0)
@@ -406,11 +404,12 @@ namespace Microsoft.CodeAnalysis
                     }
 
                     if (
-                        string.Equals(
-                            propertyValue,
-                            "WindowsRuntime",
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                propertyValue,
+                                "WindowsRuntime",
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         contentType = AssemblyContentType.WindowsRuntime;

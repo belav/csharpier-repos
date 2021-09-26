@@ -23,10 +23,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 { typeof(NullSemanticsEntity1), e => ((NullSemanticsEntity1)e)?.Id },
                 { typeof(NullSemanticsEntity2), e => ((NullSemanticsEntity2)e)?.Id }
-            }.ToDictionary(e => e.Key, e => (object)e.Value);
+            }
+                .ToDictionary(e => e.Key, e => (object)e.Value);
 
-        public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
-            new Dictionary<Type, Action<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntityAsserters() => new Dictionary<
+                Type,
+                Action<object, object>
+            >
             {
                 {
                     typeof(NullSemanticsEntity1),

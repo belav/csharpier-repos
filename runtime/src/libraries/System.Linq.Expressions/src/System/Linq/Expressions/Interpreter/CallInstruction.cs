@@ -151,10 +151,8 @@ namespace System.Linq.Expressions.Interpreter
 
                 case 3:
                     alternativeMethod = isGetter
-                        ? typeof(Array).GetMethod(
-                              "GetValue",
-                              new[] { typeof(int), typeof(int), typeof(int) }
-                          )
+                        ? typeof(Array)
+                          .GetMethod("GetValue", new[] { typeof(int), typeof(int), typeof(int) })
                         : typeof(CallInstruction).GetMethod(nameof(ArrayItemSetter3));
                     break;
             }

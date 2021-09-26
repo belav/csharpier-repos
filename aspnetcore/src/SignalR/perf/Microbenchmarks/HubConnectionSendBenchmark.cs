@@ -67,16 +67,16 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                 {
                     var connection = new DefaultConnectionContext();
                     // prevents keep alive time being activated
-                    connection.Features.Set<IConnectionInherentKeepAliveFeature>(
-                        new TestConnectionInherentKeepAliveFeature()
-                    );
+                    connection.Features
+                        .Set<IConnectionInherentKeepAliveFeature>(
+                            new TestConnectionInherentKeepAliveFeature()
+                        );
                     connection.Transport = _pipe;
                     return new ValueTask<ConnectionContext>(connection);
                 }
             );
-            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(
-                delegateConnectionFactory
-            );
+            hubConnectionBuilder.Services
+                .AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 
             _hubConnection = hubConnectionBuilder.Build();
             _hubConnection.StartAsync().GetAwaiter().GetResult();

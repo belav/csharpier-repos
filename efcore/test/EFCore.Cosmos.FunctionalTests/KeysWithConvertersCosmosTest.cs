@@ -39,37 +39,43 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         [ConditionalFact(Skip = "Issue=#16920 (Include)")]
         public override void Can_insert_and_read_back_with_comparable_struct_binary_key_and_optional_dependents()
         {
-            base.Can_insert_and_read_back_with_comparable_struct_binary_key_and_optional_dependents();
+            base
+                .Can_insert_and_read_back_with_comparable_struct_binary_key_and_optional_dependents();
         }
 
         [ConditionalFact(Skip = "Issue=#16920 (Include)")]
         public override void Can_insert_and_read_back_with_comparable_struct_binary_key_and_required_dependents()
         {
-            base.Can_insert_and_read_back_with_comparable_struct_binary_key_and_required_dependents();
+            base
+                .Can_insert_and_read_back_with_comparable_struct_binary_key_and_required_dependents();
         }
 
         [ConditionalFact(Skip = "Issue=#16920 (Include)")]
         public override void Can_insert_and_read_back_with_generic_comparable_struct_binary_key_and_optional_dependents()
         {
-            base.Can_insert_and_read_back_with_generic_comparable_struct_binary_key_and_optional_dependents();
+            base
+                .Can_insert_and_read_back_with_generic_comparable_struct_binary_key_and_optional_dependents();
         }
 
         [ConditionalFact(Skip = "Issue=#16920 (Include)")]
         public override void Can_insert_and_read_back_with_generic_comparable_struct_binary_key_and_required_dependents()
         {
-            base.Can_insert_and_read_back_with_generic_comparable_struct_binary_key_and_required_dependents();
+            base
+                .Can_insert_and_read_back_with_generic_comparable_struct_binary_key_and_required_dependents();
         }
 
         [ConditionalFact(Skip = "Issue=#16920 (Include)")]
         public override void Can_insert_and_read_back_with_structural_struct_binary_key_and_optional_dependents()
         {
-            base.Can_insert_and_read_back_with_structural_struct_binary_key_and_optional_dependents();
+            base
+                .Can_insert_and_read_back_with_structural_struct_binary_key_and_optional_dependents();
         }
 
         [ConditionalFact(Skip = "Issue=#16920 (Include)")]
         public override void Can_insert_and_read_back_with_structural_struct_binary_key_and_required_dependents()
         {
-            base.Can_insert_and_read_back_with_structural_struct_binary_key_and_required_dependents();
+            base
+                .Can_insert_and_read_back_with_structural_struct_binary_key_and_required_dependents();
         }
 
         [ConditionalFact(Skip = "Issue=#16920 (Include)")]

@@ -150,10 +150,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var client = Factory.WithWebHostBuilder(
-                    builder =>
-                        builder.UseStartup<StartupWithCultureReplace>()
-                            .ConfigureTestServices(services => services.AddSingleton(LoggerFactory))
-                )
+                builder =>
+                    builder.UseStartup<StartupWithCultureReplace>()
+                        .ConfigureTestServices(services => services.AddSingleton(LoggerFactory))
+            )
                 .CreateDefaultClient();
             string culture;
             string correlationId;

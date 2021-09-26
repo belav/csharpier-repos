@@ -35,44 +35,40 @@ namespace Microsoft.Extensions.Hosting.Tests
         public void ConfigureHostConfigurationPropagated()
         {
             var host = new HostBuilder().ConfigureHostConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new[] { new KeyValuePair<string, string>("key1", "value1") }
-                        );
-                    }
-                )
-                .ConfigureHostConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new[] { new KeyValuePair<string, string>("key2", "value2") }
-                        );
-                    }
-                )
-                .ConfigureHostConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new[]
-                            {
-                                // Hides value2
-                                new KeyValuePair<string, string>("key2", "value3")
-                            }
-                        );
-                    }
-                )
-                .ConfigureAppConfiguration(
-                    (context, configBuilder) =>
-                    {
-                        Assert.Equal("value1", context.Configuration["key1"]);
-                        Assert.Equal("value3", context.Configuration["key2"]);
-                        var config = configBuilder.Build();
-                        Assert.Equal("value1", config["key1"]);
-                        Assert.Equal("value3", config["key2"]);
-                    }
-                )
-                .Build();
+                configBuilder =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new[] { new KeyValuePair<string, string>("key1", "value1") }
+                    );
+                }
+            ).ConfigureHostConfiguration(
+                configBuilder =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new[] { new KeyValuePair<string, string>("key2", "value2") }
+                    );
+                }
+            ).ConfigureHostConfiguration(
+                configBuilder =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new[]
+                        {
+                            // Hides value2
+                            new KeyValuePair<string, string>("key2", "value3")
+                        }
+                    );
+                }
+            ).ConfigureAppConfiguration(
+                (context, configBuilder) =>
+                {
+                    Assert.Equal("value1", context.Configuration["key1"]);
+                    Assert.Equal("value3", context.Configuration["key2"]);
+                    var config = configBuilder.Build();
+                    Assert.Equal("value1", config["key1"]);
+                    Assert.Equal("value3", config["key2"]);
+                }
+            ).Build();
 
             using (host)
             {
@@ -86,39 +82,37 @@ namespace Microsoft.Extensions.Hosting.Tests
         public void CanConfigureAppConfigurationAndRetrieveFromDI()
         {
             var hostBuilder = new HostBuilder().ConfigureAppConfiguration(
-                    (configBuilder) =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new KeyValuePair<string, string>[]
-                            {
-                                new KeyValuePair<string, string>("key1", "value1")
-                            }
-                        );
-                    }
-                )
-                .ConfigureAppConfiguration(
-                    (configBuilder) =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new KeyValuePair<string, string>[]
-                            {
-                                new KeyValuePair<string, string>("key2", "value2")
-                            }
-                        );
-                    }
-                )
-                .ConfigureAppConfiguration(
-                    (configBuilder) =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new KeyValuePair<string, string>[]
-                            {
-                                // Hides value2
-                                new KeyValuePair<string, string>("key2", "value3")
-                            }
-                        );
-                    }
-                );
+                (configBuilder) =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new KeyValuePair<string, string>[]
+                        {
+                            new KeyValuePair<string, string>("key1", "value1")
+                        }
+                    );
+                }
+            ).ConfigureAppConfiguration(
+                (configBuilder) =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new KeyValuePair<string, string>[]
+                        {
+                            new KeyValuePair<string, string>("key2", "value2")
+                        }
+                    );
+                }
+            ).ConfigureAppConfiguration(
+                (configBuilder) =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new KeyValuePair<string, string>[]
+                        {
+                            // Hides value2
+                            new KeyValuePair<string, string>("key2", "value3")
+                        }
+                    );
+                }
+            );
 
             using (var host = hostBuilder.Build())
             {
@@ -138,7 +132,8 @@ namespace Microsoft.Extensions.Hosting.Tests
         )]
         public void CanConfigureAppConfigurationFromFile()
         {
-            var hostBuilder = new HostBuilder().UseContentRoot(AppContext.BaseDirectory)
+            var hostBuilder = new HostBuilder()
+                .UseContentRoot(AppContext.BaseDirectory)
                 .ConfigureAppConfiguration(
                     (context, configBuilder) =>
                     {
@@ -207,12 +202,12 @@ namespace Microsoft.Extensions.Hosting.Tests
                 { HostDefaults.EnvironmentKey, "EnvB" }
             };
 
-            var overrideConfig = new ConfigurationBuilder().AddInMemoryCollection(overrideSettings)
+            var overrideConfig = new ConfigurationBuilder()
+                .AddInMemoryCollection(overrideSettings)
                 .Build();
 
-            var hostBuilder = new HostBuilder().ConfigureHostConfiguration(
-                    configBuilder => configBuilder.AddConfiguration(config)
-                )
+            var hostBuilder = new HostBuilder()
+                .ConfigureHostConfiguration(configBuilder => configBuilder.AddConfiguration(config))
                 .ConfigureHostConfiguration(
                     configBuilder => configBuilder.AddConfiguration(overrideConfig)
                 );
@@ -236,7 +231,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             var expected = "MY_TEST_ENVIRONMENT";
 
             using (
-                var host = new HostBuilder().ConfigureHostConfiguration(
+                var host = new HostBuilder()
+                    .ConfigureHostConfiguration(
                         configBuilder => configBuilder.AddConfiguration(config)
                     )
                     .UseEnvironment(expected)
@@ -264,7 +260,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             var config = builder.Build();
 
             using (
-                var host = new HostBuilder().ConfigureHostConfiguration(
+                var host = new HostBuilder()
+                    .ConfigureHostConfiguration(
                         configBuilder => configBuilder.AddConfiguration(config)
                     )
                     .UseContentRoot("/")
@@ -285,15 +282,12 @@ namespace Microsoft.Extensions.Hosting.Tests
                 { "contentRoot", Path.GetFullPath(".") }
             };
 
-            using (
-                var host = new HostBuilder().ConfigureHostConfiguration(
-                        config =>
-                        {
-                            config.AddInMemoryCollection(parameters);
-                        }
-                    )
-                    .Build()
-            )
+            using (var host = new HostBuilder().ConfigureHostConfiguration(
+                    config =>
+                    {
+                        config.AddInMemoryCollection(parameters);
+                    }
+                ).Build())
             {
                 var env = host.Services.GetRequiredService<IHostEnvironment>();
 
@@ -360,17 +354,16 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var callCount = 0; //Verify ordering
             var hostBuilder = new HostBuilder().ConfigureLogging(
-                    (hostContext, loggerFactory) =>
-                    {
-                        Assert.Equal(0, callCount++);
-                    }
-                )
-                .ConfigureLogging(
-                    (hostContext, loggerFactory) =>
-                    {
-                        Assert.Equal(1, callCount++);
-                    }
-                );
+                (hostContext, loggerFactory) =>
+                {
+                    Assert.Equal(0, callCount++);
+                }
+            ).ConfigureLogging(
+                (hostContext, loggerFactory) =>
+                {
+                    Assert.Equal(1, callCount++);
+                }
+            );
 
             using (hostBuilder.Build())
             {
@@ -381,7 +374,8 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void HostingContextContainsAppConfigurationDuringConfigureServices()
         {
-            var hostBuilder = new HostBuilder().ConfigureAppConfiguration(
+            var hostBuilder = new HostBuilder()
+                .ConfigureAppConfiguration(
                     (configBuilder) =>
                         configBuilder.AddInMemoryCollection(
                             new KeyValuePair<string, string>[]
@@ -404,29 +398,27 @@ namespace Microsoft.Extensions.Hosting.Tests
         public void ConfigureDefaultServiceProvider()
         {
             var hostBuilder = new HostBuilder().ConfigureServices(
-                    (s) =>
-                    {
-                        s.AddTransient<ServiceD>();
-                        s.AddScoped<ServiceC>();
-                    }
-                )
-                .ConfigureHostConfiguration(
-                    config =>
-                    {
-                        config.AddInMemoryCollection(
-                            new[] { new KeyValuePair<string, string>("Key", "Value"), }
-                        );
-                    }
-                )
-                .UseDefaultServiceProvider(
-                    (context, options) =>
-                    {
-                        Assert.NotNull(context);
-                        Assert.Equal("Value", context.Configuration["Key"]);
-                        Assert.NotNull(options);
-                        options.ValidateScopes = true;
-                    }
-                );
+                (s) =>
+                {
+                    s.AddTransient<ServiceD>();
+                    s.AddScoped<ServiceC>();
+                }
+            ).ConfigureHostConfiguration(
+                config =>
+                {
+                    config.AddInMemoryCollection(
+                        new[] { new KeyValuePair<string, string>("Key", "Value"), }
+                    );
+                }
+            ).UseDefaultServiceProvider(
+                (context, options) =>
+                {
+                    Assert.NotNull(context);
+                    Assert.Equal("Value", context.Configuration["Key"]);
+                    Assert.NotNull(options);
+                    options.ValidateScopes = true;
+                }
+            );
             using (var host = hostBuilder.Build())
             {
                 Assert.Throws<InvalidOperationException>(
@@ -442,27 +434,24 @@ namespace Microsoft.Extensions.Hosting.Tests
         public void ConfigureCustomServiceProvider()
         {
             var hostBuilder = new HostBuilder().ConfigureServices(
-                    (hostContext, s) =>
-                    {
-                        s.AddTransient<ServiceD>();
-                        s.AddScoped<ServiceC>();
-                    }
-                )
-                .UseServiceProviderFactory(new FakeServiceProviderFactory())
-                .ConfigureContainer<FakeServiceCollection>(
-                    (container) =>
-                    {
-                        Assert.Null(container.State);
-                        container.State = "1";
-                    }
-                )
-                .ConfigureContainer<FakeServiceCollection>(
-                    (container) =>
-                    {
-                        Assert.Equal("1", container.State);
-                        container.State = "2";
-                    }
-                );
+                (hostContext, s) =>
+                {
+                    s.AddTransient<ServiceD>();
+                    s.AddScoped<ServiceC>();
+                }
+            ).UseServiceProviderFactory(new FakeServiceProviderFactory()).ConfigureContainer<FakeServiceCollection>(
+                (container) =>
+                {
+                    Assert.Null(container.State);
+                    container.State = "1";
+                }
+            ).ConfigureContainer<FakeServiceCollection>(
+                (container) =>
+                {
+                    Assert.Equal("1", container.State);
+                    container.State = "2";
+                }
+            );
             using (var host = hostBuilder.Build())
             {
                 var fakeServices = host.Services.GetRequiredService<FakeServiceCollection>();
@@ -474,21 +463,20 @@ namespace Microsoft.Extensions.Hosting.Tests
         public void CustomContainerTypeMismatchThrows()
         {
             var hostBuilder = new HostBuilder().ConfigureServices(
-                    (s) =>
-                    {
-                        s.AddTransient<ServiceD>();
-                        s.AddScoped<ServiceC>();
-                    }
-                )
-                .UseServiceProviderFactory(new FakeServiceProviderFactory())
-                .ConfigureContainer<IServiceCollection>((container) => { });
+                (s) =>
+                {
+                    s.AddTransient<ServiceD>();
+                    s.AddScoped<ServiceC>();
+                }
+            ).UseServiceProviderFactory(new FakeServiceProviderFactory()).ConfigureContainer<IServiceCollection>((container) => { });
             Assert.Throws<InvalidCastException>(() => hostBuilder.Build());
         }
 
         [Fact]
         public void HostingContextContainsAppConfigurationDuringConfigureLogging()
         {
-            var hostBuilder = new HostBuilder().ConfigureAppConfiguration(
+            var hostBuilder = new HostBuilder()
+                .ConfigureAppConfiguration(
                     (configBuilder) =>
                         configBuilder.AddInMemoryCollection(
                             new KeyValuePair<string, string>[]
@@ -512,19 +500,18 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var callCount = 0; // Verify ordering
             var hostBuilder = new HostBuilder().ConfigureServices(
-                    (services) =>
-                    {
-                        Assert.Equal(0, callCount++);
-                        services.AddTransient<ServiceA>();
-                    }
-                )
-                .ConfigureServices(
-                    (services) =>
-                    {
-                        Assert.Equal(1, callCount++);
-                        services.AddTransient<ServiceB>();
-                    }
-                );
+                (services) =>
+                {
+                    Assert.Equal(0, callCount++);
+                    services.AddTransient<ServiceA>();
+                }
+            ).ConfigureServices(
+                (services) =>
+                {
+                    Assert.Equal(1, callCount++);
+                    services.AddTransient<ServiceB>();
+                }
+            );
 
             using (var host = hostBuilder.Build())
             {
@@ -549,23 +536,20 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void SetsFullPathToContentRoot()
         {
-            using (
-                var host = new HostBuilder().ConfigureHostConfiguration(
-                        config =>
-                        {
-                            config.AddInMemoryCollection(
-                                new[]
-                                {
-                                    new KeyValuePair<string, string>(
-                                        HostDefaults.ContentRootKey,
-                                        Path.GetFullPath(".")
-                                    )
-                                }
-                            );
-                        }
-                    )
-                    .Build()
-            )
+            using (var host = new HostBuilder().ConfigureHostConfiguration(
+                    config =>
+                    {
+                        config.AddInMemoryCollection(
+                            new[]
+                            {
+                                new KeyValuePair<string, string>(
+                                    HostDefaults.ContentRootKey,
+                                    Path.GetFullPath(".")
+                                )
+                            }
+                        );
+                    }
+                ).Build())
             {
                 var env = host.Services.GetRequiredService<IHostEnvironment>();
 
@@ -645,7 +629,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             BackgroundServiceExceptionBehavior testBehavior
         )
         {
-            using IHost host = new HostBuilder().ConfigureServices(
+            using IHost host = new HostBuilder()
+                .ConfigureServices(
                     services =>
                         services.Configure<HostOptions>(
                             options => options.BackgroundServiceExceptionBehavior = testBehavior

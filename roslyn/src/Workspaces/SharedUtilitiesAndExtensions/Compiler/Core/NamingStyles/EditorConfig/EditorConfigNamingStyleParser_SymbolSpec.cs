@@ -239,8 +239,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             var builder = ArrayBuilder<Accessibility>.GetInstance();
             foreach (
                 var symbolSpecApplicableAccessibility in symbolSpecApplicableAccessibilities.Split(
-                        ','
-                    )
+                    ','
+                )
                     .Select(x => x.Trim())
             )
             {
@@ -474,12 +474,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 return "*";
             }
 
-            return string.Join(
-                ", ",
-                accessibilities.Select(
-                    accessibility => accessibility.ToEditorConfigString(languageName)
-                )
-            );
+            return string
+                .Join(
+                    ", ",
+                    accessibilities.Select(
+                        accessibility => accessibility.ToEditorConfigString(languageName)
+                    )
+                );
         }
 
         private static string ToEditorConfigString(
@@ -546,10 +547,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 return "*";
             }
 
-            return string.Join(
-                ", ",
-                modifiers.Select(modifier => modifier.ToEditorConfigString(languageName))
-            );
+            return string
+                .Join(
+                    ", ",
+                    modifiers.Select(modifier => modifier.ToEditorConfigString(languageName))
+                );
         }
 
         private static string ToEditorConfigString(this ModifierKind modifier, string languageName)

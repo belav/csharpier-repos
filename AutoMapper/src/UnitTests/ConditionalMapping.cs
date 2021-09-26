@@ -25,20 +25,19 @@ namespace AutoMapper.UnitTests.ConditionalMapping
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForAllMembers(
-                            o =>
-                                o.Condition(
-                                    (source, destination, sourceProperty, destinationProperty) =>
-                                    {
-                                        source.ShouldBeSameAs(_source);
-                                        destination.ShouldBeSameAs(_destination);
-                                        ((int)sourceProperty).ShouldBe(3);
-                                        ((int)destinationProperty).ShouldBe(7);
-                                        return true;
-                                    }
-                                )
-                        );
+                    cfg.CreateMap<Source, Destination>().ForAllMembers(
+                        o =>
+                            o.Condition(
+                                (source, destination, sourceProperty, destinationProperty) =>
+                                {
+                                    source.ShouldBeSameAs(_source);
+                                    destination.ShouldBeSameAs(_destination);
+                                    ((int)sourceProperty).ShouldBe(3);
+                                    ((int)destinationProperty).ShouldBe(7);
+                                    return true;
+                                }
+                            )
+                    );
                 }
             );
 
@@ -136,15 +135,14 @@ namespace AutoMapper.UnitTests.ConditionalMapping
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(
-                            dest => dest.Value,
-                            opt =>
-                            {
-                                opt.Condition(src => src.Value > 0);
-                                opt.MapFrom(src => 10);
-                            }
-                        );
+                    cfg.CreateMap<Source, Destination>().ForMember(
+                        dest => dest.Value,
+                        opt =>
+                        {
+                            opt.Condition(src => src.Value > 0);
+                            opt.MapFrom(src => 10);
+                        }
+                    );
                 }
             );
 
@@ -224,9 +222,8 @@ namespace AutoMapper.UnitTests.ConditionalMapping
         [Fact]
         public void Should_consider_the_configuration_valid_even_if_some_properties_with_an_inaccessible_setter_are_unmapped()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
 
         [Fact]
@@ -313,9 +310,8 @@ namespace AutoMapper.UnitTests.ConditionalMapping
         [Fact]
         public void Should_consider_the_configuration_valid_even_if_some_properties_with_an_inaccessible_setter_are_unmapped()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
 
         [Fact]

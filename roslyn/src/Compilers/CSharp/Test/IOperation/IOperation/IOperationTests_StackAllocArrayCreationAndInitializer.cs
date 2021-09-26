@@ -327,9 +327,9 @@ IOperation:  (OperationKind.None, Type: null, IsInvalid) (Syntax: 'stackalloc in
                 // file.cs(6,27): error CS0847: An array initializer of length '2' is expected
                 //         var a = /*<bind>*/stackalloc int[2] { 42 }/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_ArrayInitializerIncorrectLength,
-                        "stackalloc int[2] { 42 }"
-                    )
+                    ErrorCode.ERR_ArrayInitializerIncorrectLength,
+                    "stackalloc int[2] { 42 }"
+                )
                     .WithArguments("2")
                     .WithLocation(6, 27)
             };
@@ -637,7 +637,8 @@ IOperation:  (OperationKind.None, Type: null, IsInvalid) (Syntax: 'stackalloc in
             {
                 // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc int[] { 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[] { 1 }").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[] { 1 }")
+                    .WithLocation(6, 27)
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(

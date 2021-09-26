@@ -47,13 +47,14 @@ namespace Internal.Cryptography
                 {
                     uint length = (uint)destination.Length;
                     Check(
-                        Interop.Crypto.EvpDigestOneShot(
-                            evpType,
-                            pSource,
-                            source.Length,
-                            pDestination,
-                            ref length
-                        )
+                        Interop.Crypto
+                            .EvpDigestOneShot(
+                                evpType,
+                                pSource,
+                                source.Length,
+                                pDestination,
+                                ref length
+                            )
                     );
                     Debug.Assert(length == hashSize);
                 }
@@ -93,11 +94,12 @@ namespace Internal.Cryptography
 
                 uint length = (uint)destination.Length;
                 Check(
-                    Interop.Crypto.EvpDigestFinalEx(
-                        _ctx,
-                        ref MemoryMarshal.GetReference(destination),
-                        ref length
-                    )
+                    Interop.Crypto
+                        .EvpDigestFinalEx(
+                            _ctx,
+                            ref MemoryMarshal.GetReference(destination),
+                            ref length
+                        )
                 );
                 Debug.Assert(length == _hashSize);
 
@@ -113,11 +115,12 @@ namespace Internal.Cryptography
 
                 uint length = (uint)destination.Length;
                 Check(
-                    Interop.Crypto.EvpDigestCurrent(
-                        _ctx,
-                        ref MemoryMarshal.GetReference(destination),
-                        ref length
-                    )
+                    Interop.Crypto
+                        .EvpDigestCurrent(
+                            _ctx,
+                            ref MemoryMarshal.GetReference(destination),
+                            ref length
+                        )
                 );
                 Debug.Assert(length == _hashSize);
 
@@ -150,11 +153,8 @@ namespace Internal.Cryptography
                     throw new CryptographicException();
                 }
 
-                _hmacCtx = Interop.Crypto.HmacCreate(
-                    ref MemoryMarshal.GetReference(key),
-                    key.Length,
-                    algorithmEvp
-                );
+                _hmacCtx = Interop.Crypto
+                    .HmacCreate(ref MemoryMarshal.GetReference(key), key.Length, algorithmEvp);
                 Interop.Crypto.CheckValidOpenSslHandle(_hmacCtx);
             }
 
@@ -167,11 +167,12 @@ namespace Internal.Cryptography
 
                 int length = destination.Length;
                 Check(
-                    Interop.Crypto.HmacFinal(
-                        _hmacCtx,
-                        ref MemoryMarshal.GetReference(destination),
-                        ref length
-                    )
+                    Interop.Crypto
+                        .HmacFinal(
+                            _hmacCtx,
+                            ref MemoryMarshal.GetReference(destination),
+                            ref length
+                        )
                 );
                 Debug.Assert(length == _hashSize);
 
@@ -185,11 +186,12 @@ namespace Internal.Cryptography
 
                 int length = destination.Length;
                 Check(
-                    Interop.Crypto.HmacCurrent(
-                        _hmacCtx,
-                        ref MemoryMarshal.GetReference(destination),
-                        ref length
-                    )
+                    Interop.Crypto
+                        .HmacCurrent(
+                            _hmacCtx,
+                            ref MemoryMarshal.GetReference(destination),
+                            ref length
+                        )
                 );
                 Debug.Assert(length == _hashSize);
 

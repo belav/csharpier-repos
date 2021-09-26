@@ -130,24 +130,26 @@ namespace System.Speech.Internal.SrgsCompiler
                 if (_cg._language == "C#")
                 {
                     // C#
-                    return string.Format(
-                        CultureInfo.InvariantCulture,
-                        "#line {0} \"{1}\"\n{2}",
-                        line.ToString(CultureInfo.InvariantCulture),
-                        filename,
-                        code
-                    );
+                    return string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "#line {0} \"{1}\"\n{2}",
+                            line.ToString(CultureInfo.InvariantCulture),
+                            filename,
+                            code
+                        );
                 }
                 else
                 {
                     // VB.Net
-                    return string.Format(
-                        CultureInfo.InvariantCulture,
-                        "#ExternalSource (\"{1}\",{0}) \n{2}\n#End ExternalSource\n",
-                        line.ToString(CultureInfo.InvariantCulture),
-                        filename,
-                        code
-                    );
+                    return string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "#ExternalSource (\"{1}\",{0}) \n{2}\n#End ExternalSource\n",
+                            line.ToString(CultureInfo.InvariantCulture),
+                            filename,
+                            code
+                        );
                 }
             }
             return code;
@@ -320,13 +322,14 @@ namespace System.Speech.Internal.SrgsCompiler
                         }
 
                         // Build /D/L/P; form for this pronunciation.
-                        string sDLP = string.Format(
-                            CultureInfo.InvariantCulture,
-                            "/{0}/{1}/{2};",
-                            sDisplayToken,
-                            sEscapedToken,
-                            sSubPron
-                        );
+                        string sDLP = string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                "/{0}/{1}/{2};",
+                                sDisplayToken,
+                                sEscapedToken,
+                                sSubPron
+                            );
 
                         // Add /D/L/P; transition to the new state.
                         if (oneOf != null)
@@ -347,12 +350,13 @@ namespace System.Speech.Internal.SrgsCompiler
                 else
                 {
                     // Build /D/L; form for this pronunciation.
-                    string sDLP = string.Format(
-                        CultureInfo.InvariantCulture,
-                        "/{0}/{1};",
-                        sDisplayToken,
-                        sEscapedToken
-                    );
+                    string sDLP = string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "/{0}/{1};",
+                            sDisplayToken,
+                            sEscapedToken
+                        );
 
                     // Add /D/L; transition to the new state.
                     parent.AddArc(_backend.WordTransition(sDLP, 1.0f, requiredConfidence));

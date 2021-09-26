@@ -57,9 +57,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                 Encoding.UTF8.GetBytes("{\"error\":\"\",\"minorVersion\":34}\u001e")
             );
             _responseMessage6 = new ReadOnlySequence<byte>(
-                Encoding.UTF8.GetBytes(
-                    "{\"error\":\"flump flump flump\",\"minorVersion\":112}\u001e"
-                )
+                Encoding.UTF8
+                    .GetBytes("{\"error\":\"flump flump flump\",\"minorVersion\":112}\u001e")
             );
         }
 

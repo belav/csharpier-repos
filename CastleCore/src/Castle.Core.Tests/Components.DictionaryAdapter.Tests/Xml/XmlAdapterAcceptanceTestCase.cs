@@ -914,19 +914,18 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             };
 
             var books = starWars.Select(
-                    (title, i) =>
-                    {
-                        XmlDocument bookDoc = null;
-                        var book = CreateXmlAdapter<IBook>(null, ref bookDoc);
-                        book.Title = title;
-                        book.DDC.Category = 8;
-                        book.DDC.SubCategory = 1;
-                        book.DDC.SubDivision = i;
-                        book.Printed = i % 2 == 0;
-                        return book;
-                    }
-                )
-                .ToList();
+                (title, i) =>
+                {
+                    XmlDocument bookDoc = null;
+                    var book = CreateXmlAdapter<IBook>(null, ref bookDoc);
+                    book.Title = title;
+                    book.DDC.Category = 8;
+                    book.DDC.SubCategory = 1;
+                    book.DDC.SubDivision = i;
+                    book.Printed = i % 2 == 0;
+                    return book;
+                }
+            ).ToList();
 
             foreach (var book in books)
             {

@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Classification
             CancellationToken cancellationToken = default
         )
         {
-            var service = workspace.Services.GetLanguageServices(semanticModel.Language)
+            var service = workspace.Services
+                .GetLanguageServices(semanticModel.Language)
                 .GetRequiredService<ISyntaxClassificationService>();
 
             var syntaxClassifiers = service.GetDefaultSyntaxClassifiers();
@@ -63,12 +64,10 @@ namespace Microsoft.CodeAnalysis.Classification
                 c => c.SyntaxTokenKinds
             );
 
-            using var _1 = ArrayBuilder<ClassifiedSpan>.GetInstance(
-                out var syntacticClassifications
-            );
-            using var _2 = ArrayBuilder<ClassifiedSpan>.GetInstance(
-                out var semanticClassifications
-            );
+            using var _1 = ArrayBuilder<ClassifiedSpan>
+                .GetInstance(out var syntacticClassifications);
+            using var _2 = ArrayBuilder<ClassifiedSpan>
+                .GetInstance(out var semanticClassifications);
 
             service.AddSyntacticClassifications(
                 semanticModel.SyntaxTree,
@@ -116,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 workspace,
                 cancellationToken
             );
-            var sourceText = await semanticModel.SyntaxTree.GetTextAsync(cancellationToken)
+            var sourceText = await semanticModel.SyntaxTree
+                .GetTextAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             return ConvertClassificationsToParts(sourceText, textSpan.Start, classifiedSpans);

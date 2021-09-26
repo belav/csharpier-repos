@@ -51,17 +51,17 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             // the background so that no one takes an accidentally dependency on running on
             // the UI thread.
             var fixes = await Task.Run(
-                    () =>
-                        codeFixService.GetFixesAsync(
-                            document,
-                            selection,
-                            includeSuppressionFixes,
-                            isBlocking,
-                            addOperationScope,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                () =>
+                    codeFixService.GetFixesAsync(
+                        document,
+                        selection,
+                        includeSuppressionFixes,
+                        isBlocking,
+                        addOperationScope,
+                        cancellationToken
+                    ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var filteredFixes = fixes.WhereAsArray(c => c.Fixes.Length > 0);
@@ -191,9 +191,10 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             {
                 if (action.NestedCodeActions.Length > 0)
                 {
-                    var nestedActions = action.NestedCodeActions.SelectAsArray(
-                        nestedAction => GetUnifiedSuggestedAction(nestedAction, fix)
-                    );
+                    var nestedActions = action.NestedCodeActions
+                        .SelectAsArray(
+                            nestedAction => GetUnifiedSuggestedAction(nestedAction, fix)
+                        );
 
                     var set = new UnifiedSuggestedActionSet(
                         categoryName: null,
@@ -280,10 +281,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
                 return null;
             }
 
-            using var fixAllSuggestedActionsDisposer =
-                ArrayBuilder<UnifiedFixAllSuggestedAction>.GetInstance(
-                    out var fixAllSuggestedActions
-                );
+            using var fixAllSuggestedActionsDisposer = ArrayBuilder<UnifiedFixAllSuggestedAction>
+                .GetInstance(out var fixAllSuggestedActions);
             foreach (var scope in supportedScopes)
             {
                 var fixAllStateForScope = fixAllState.With(
@@ -328,15 +327,12 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             Workspace workspace
         )
         {
-            using var _1 = ArrayBuilder<UnifiedSuggestedActionSet>.GetInstance(
-                out var nonSuppressionSets
-            );
-            using var _2 = ArrayBuilder<UnifiedSuggestedActionSet>.GetInstance(
-                out var suppressionSets
-            );
-            using var _3 = ArrayBuilder<UnifiedSuggestedAction>.GetInstance(
-                out var bulkConfigurationActions
-            );
+            using var _1 = ArrayBuilder<UnifiedSuggestedActionSet>
+                .GetInstance(out var nonSuppressionSets);
+            using var _2 = ArrayBuilder<UnifiedSuggestedActionSet>
+                .GetInstance(out var suppressionSets);
+            using var _3 = ArrayBuilder<UnifiedSuggestedAction>
+                .GetInstance(out var bulkConfigurationActions);
 
             foreach (var groupKey in order)
             {
@@ -521,16 +517,16 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             // the background so that no one takes an accidentally dependency on running on
             // the UI thread.
             var refactorings = await Task.Run(
-                    () =>
-                        codeRefactoringService.GetRefactoringsAsync(
-                            document,
-                            selection,
-                            isBlocking,
-                            addOperationScope,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                () =>
+                    codeRefactoringService.GetRefactoringsAsync(
+                        document,
+                        selection,
+                        isBlocking,
+                        addOperationScope,
+                        cancellationToken
+                    ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var filteredRefactorings = FilterOnAnyThread(
@@ -598,24 +594,23 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             CodeRefactoring refactoring
         )
         {
-            using var refactoringSuggestedActionsDisposer =
-                ArrayBuilder<UnifiedSuggestedAction>.GetInstance(
-                    out var refactoringSuggestedActions
-                );
+            using var refactoringSuggestedActionsDisposer = ArrayBuilder<UnifiedSuggestedAction>
+                .GetInstance(out var refactoringSuggestedActions);
 
             foreach (var codeAction in refactoring.CodeActions)
             {
                 if (codeAction.action.NestedCodeActions.Length > 0)
                 {
-                    var nestedActions = codeAction.action.NestedCodeActions.SelectAsArray(
-                        na =>
-                            new UnifiedCodeRefactoringSuggestedAction(
-                                workspace,
-                                na,
-                                na.Priority,
-                                refactoring.Provider
-                            )
-                    );
+                    var nestedActions = codeAction.action.NestedCodeActions
+                        .SelectAsArray(
+                            na =>
+                                new UnifiedCodeRefactoringSuggestedAction(
+                                    workspace,
+                                    na,
+                                    na.Priority,
+                                    refactoring.Provider
+                                )
+                        );
 
                     var set = new UnifiedSuggestedActionSet(
                         categoryName: null,
@@ -744,8 +739,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
                     s => s.Priority == UnifiedSuggestedActionSetPriority.High
                 );
                 var nonHighPriRefactorings = refactorings.WhereAsArray(
-                        s => s.Priority != UnifiedSuggestedActionSetPriority.High
-                    )
+                    s => s.Priority != UnifiedSuggestedActionSetPriority.High
+                )
                     .SelectAsArray(s => WithPriority(s, UnifiedSuggestedActionSetPriority.Low));
 
                 var highPriFixes = fixes.WhereAsArray(
@@ -793,9 +788,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
 
         private static UnifiedSuggestedActionSet InlineActions(UnifiedSuggestedActionSet actionSet)
         {
-            using var newActionsDisposer = ArrayBuilder<IUnifiedSuggestedAction>.GetInstance(
-                out var newActions
-            );
+            using var newActionsDisposer = ArrayBuilder<IUnifiedSuggestedAction>
+                .GetInstance(out var newActions);
             foreach (var action in actionSet.Actions)
             {
                 var actionWithNestedActions = action as UnifiedSuggestedActionWithNestedActions;
@@ -826,9 +820,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             ImmutableArray<UnifiedSuggestedActionSet> allActionSets
         )
         {
-            using var resultDisposer = ArrayBuilder<UnifiedSuggestedActionSet>.GetInstance(
-                out var result
-            );
+            using var resultDisposer = ArrayBuilder<UnifiedSuggestedActionSet>
+                .GetInstance(out var result);
             var seenTitles = new HashSet<string>();
 
             foreach (var set in allActionSets)
@@ -848,9 +841,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             HashSet<string> seenTitles
         )
         {
-            using var actionsDisposer = ArrayBuilder<IUnifiedSuggestedAction>.GetInstance(
-                out var actions
-            );
+            using var actionsDisposer = ArrayBuilder<IUnifiedSuggestedAction>
+                .GetInstance(out var actions);
 
             foreach (var action in set.Actions)
             {

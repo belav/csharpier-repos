@@ -579,7 +579,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             var types = TestData.Module.GetAllSynthesizedMembers();
             Assert.Contains(types.Keys, t => containingTypeName == t.ToString());
-            var members = TestData.Module.GetAllSynthesizedMembers()
+            var members = TestData.Module
+                .GetAllSynthesizedMembers()
                 .Where(e => e.Key.ToString() == containingTypeName)
                 .Single()
                 .Value.Where(s => s.Kind == SymbolKind.Field)

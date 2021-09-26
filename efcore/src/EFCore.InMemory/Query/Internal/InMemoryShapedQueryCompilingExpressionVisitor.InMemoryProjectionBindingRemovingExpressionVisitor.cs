@@ -166,9 +166,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             {
                 return projectionBindingExpression.ProjectionMember != null
                   ? queryExpression.GetMappedProjection(
-                            projectionBindingExpression.ProjectionMember
-                        )
-                        .GetConstantValue<object>()
+                        projectionBindingExpression.ProjectionMember
+                    )
+                    .GetConstantValue<object>()
                   : (
                         projectionBindingExpression.Index != null
                             ? (object)projectionBindingExpression.Index

@@ -11,9 +11,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests.Helpers
     {
         public static string GetResourceString(string stringName, params object[] parameters)
         {
-            var strings = typeof(DatabaseErrorPageMiddleware).Assembly.GetType(
-                    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Strings"
-                )
+            var strings = typeof(DatabaseErrorPageMiddleware).Assembly
+                .GetType("Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Strings")
                 .GetTypeInfo();
             var method = strings.GetDeclaredMethods(stringName).SingleOrDefault();
             if (method != null)

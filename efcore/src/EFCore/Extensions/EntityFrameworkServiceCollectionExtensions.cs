@@ -381,7 +381,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     var extension = (
                         ob.Options.FindExtension<CoreOptionsExtension>()
                         ?? new CoreOptionsExtension()
-                    ).WithMaxPoolSize(poolSize);
+                    )
+                        .WithMaxPoolSize(poolSize);
 
                     ((IDbContextOptionsBuilderInfrastructure)ob).AddOrUpdateExtension(extension);
                 },

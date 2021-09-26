@@ -33,11 +33,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             return GetPropertyCount(entityType) == 0
               ? (() => Snapshot.Empty)
               : Expression.Lambda<Func<ISnapshot>>(
-                        // TODO-Nullable: This whole code path is null unsafe. We are passing null parameter but later using parameter
-                        // as if always exists.
-                        CreateConstructorExpression(entityType, null!)
-                    )
-                    .Compile();
+                    // TODO-Nullable: This whole code path is null unsafe. We are passing null parameter but later using parameter
+                    // as if always exists.
+                    CreateConstructorExpression(entityType, null!)
+                ).Compile();
         }
 
         /// <summary>
@@ -303,7 +302,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         protected virtual bool UseEntityVariable => true;
 
         private static readonly MethodInfo _snapshotCollectionMethod =
-            typeof(SnapshotFactoryFactory).GetTypeInfo()
+            typeof(SnapshotFactoryFactory)
+                .GetTypeInfo()
                 .GetRequiredDeclaredMethod(nameof(SnapshotCollection));
 
         [UsedImplicitly]

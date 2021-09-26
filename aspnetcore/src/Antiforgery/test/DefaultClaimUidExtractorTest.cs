@@ -14,9 +14,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
     public class DefaultClaimUidExtractorTest
     {
         private static readonly ObjectPool<AntiforgerySerializationContext> _pool =
-            new DefaultObjectPoolProvider().Create(
-                new AntiforgerySerializationContextPooledObjectPolicy()
-            );
+            new DefaultObjectPoolProvider()
+                .Create(new AntiforgerySerializationContextPooledObjectPolicy());
 
         [Fact]
         public void ExtractClaimUid_Unauthenticated()
@@ -68,7 +67,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             // Act
             var identiferParameters = DefaultClaimUidExtractor.GetUniqueIdentifierParameters(
                 new ClaimsIdentity[] { claimsIdentity }
-            )!.ToArray();
+            )!
+                .ToArray();
             var claims = claimsIdentity.Claims.ToList();
             claims.Sort((a, b) => string.Compare(a.Type, b.Type, StringComparison.Ordinal));
 

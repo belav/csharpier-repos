@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             if (!_isTargetTypeCompletionFilterExperimentEnabled.HasValue)
             {
-                var experimentationService =
-                    workspace.Services.GetRequiredService<IExperimentationService>();
+                var experimentationService = workspace.Services
+                    .GetRequiredService<IExperimentationService>();
                 _isTargetTypeCompletionFilterExperimentEnabled =
                     experimentationService.IsExperimentEnabled(
                         WellKnownExperimentNames.TargetTypedCompletionFilter
@@ -98,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (symbol.Kind == SymbolKind.Local)
             {
                 var local = (ILocalSymbol)symbol;
-                var declarationSyntax = symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax())
+                var declarationSyntax = symbol.DeclaringSyntaxReferences
+                    .Select(r => r.GetSyntax())
                     .SingleOrDefault();
                 if (declarationSyntax != null && position < declarationSyntax.FullSpan.End)
                 {
@@ -340,10 +341,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 if (completionContext.Trigger.Kind == CompletionTriggerKind.Insertion)
                 {
                     var isSemanticTriggerCharacter = await IsSemanticTriggerCharacterAsync(
-                            document,
-                            position - 1,
-                            cancellationToken
-                        )
+                        document,
+                        position - 1,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (!isSemanticTriggerCharacter)
                     {
@@ -369,20 +370,20 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 )
                 {
                     var syntaxContext = await GetOrCreateContextAsync(
-                            document,
-                            position,
-                            cancellationToken
-                        )
+                        document,
+                        position,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     var regularItems = await GetItemsAsync(
-                            completionContext,
-                            syntaxContext,
-                            document,
-                            position,
-                            options,
-                            telemetryCounter,
-                            cancellationToken
-                        )
+                        completionContext,
+                        syntaxContext,
+                        document,
+                        position,
+                        options,
+                        telemetryCounter,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     completionContext.AddItems(regularItems);
@@ -413,12 +414,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (relatedDocumentIds.IsEmpty)
             {
                 var itemsForCurrentDocument = await GetSymbolsAsync(
-                        completionContext,
-                        syntaxContext,
-                        position,
-                        options,
-                        cancellationToken
-                    )
+                    completionContext,
+                    syntaxContext,
+                    position,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return CreateItems(
                     completionContext,
@@ -431,13 +432,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             var contextAndSymbolLists = await GetPerContextSymbolsAsync(
-                    completionContext,
-                    document,
-                    position,
-                    options,
-                    new[] { document.Id }.Concat(relatedDocumentIds),
-                    cancellationToken
-                )
+                completionContext,
+                document,
+                position,
+                options,
+                new[] { document.Id }.Concat(relatedDocumentIds),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var symbolToContextMap = UnionSymbols(contextAndSymbolLists);
             var missingSymbolsMap = FindSymbolsMissingInLinkedContexts(
@@ -506,11 +507,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             using var _1 = ArrayBuilder<
                 Task<(DocumentId documentId, TSyntaxContext syntaxContext, ImmutableArray<(ISymbol symbol, bool preselect)> symbols)>
-            >.GetInstance(out var tasks);
+            >
+                .GetInstance(out var tasks);
             using var _2 =
-                ArrayBuilder<(DocumentId documentId, TSyntaxContext syntaxContext, ImmutableArray<(ISymbol symbol, bool preselect)> symbols)>.GetInstance(
-                    out var perContextSymbols
-                );
+                ArrayBuilder<(DocumentId documentId, TSyntaxContext syntaxContext, ImmutableArray<(ISymbol symbol, bool preselect)> symbols)>
+                    .GetInstance(out var perContextSymbols);
 
             foreach (var relatedDocumentId in relatedDocuments)
             {
@@ -520,17 +521,17 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         {
                             var relatedDocument = solution.GetRequiredDocument(relatedDocumentId);
                             var syntaxContext = await GetOrCreateContextAsync(
-                                    relatedDocument,
-                                    position,
-                                    cancellationToken
-                                )
+                                relatedDocument,
+                                position,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             var symbols = await TryGetSymbolsForContextAsync(
-                                    completionContext,
-                                    syntaxContext,
-                                    options,
-                                    cancellationToken
-                                )
+                                completionContext,
+                                syntaxContext,
+                                options,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
 
                             return (relatedDocument.Id, syntaxContext, symbols);
@@ -572,12 +573,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             )
               ? default
               : await GetSymbolsAsync(
-                        completionContext,
-                        syntaxContext,
-                        syntaxContext.Position,
-                        options,
-                        cancellationToken
-                    )
+                    completionContext,
+                    syntaxContext,
+                    syntaxContext.Position,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
         }
 
@@ -589,9 +590,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             var workspace = document.Project.Solution.Workspace;
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    position,
-                    cancellationToken
-                )
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var service = document.GetRequiredLanguageService<ISyntaxContextService>();
@@ -655,10 +656,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             foreach (var (documentId, syntaxContext, symbols) in linkedContextSymbolLists)
             {
-                var symbolsMissingInLinkedContext = symbolToContext.Keys.Except(
-                    symbols,
-                    CompletionLinkedFilesSymbolEquivalenceComparer.Instance
-                );
+                var symbolsMissingInLinkedContext = symbolToContext.Keys
+                    .Except(symbols, CompletionLinkedFilesSymbolEquivalenceComparer.Instance);
                 foreach (var (symbol, _) in symbolsMissingInLinkedContext)
                     missingSymbols.GetOrAdd(symbol, m => new List<ProjectId>())
                         .Add(documentId.ProjectId);

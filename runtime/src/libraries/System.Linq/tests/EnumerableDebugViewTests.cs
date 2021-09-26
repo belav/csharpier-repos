@@ -84,7 +84,8 @@ namespace System.Linq.Tests
 
         private static object CreateSystemCore_EnumerableDebugView(IEnumerable source)
         {
-            Type edvType = typeof(Enumerable).GetTypeInfo()
+            Type edvType = typeof(Enumerable)
+                .GetTypeInfo()
                 .Assembly.GetType("System.Linq.SystemCore_EnumerableDebugView");
             ConstructorInfo ctor = edvType.GetTypeInfo().DeclaredConstructors.First();
             return ctor.Invoke(new object[] { source });
@@ -92,7 +93,8 @@ namespace System.Linq.Tests
 
         private static object CreateSystemCore_EnumerableDebugView<T>(IEnumerable<T> source)
         {
-            Type edvOpenGenericType = typeof(Enumerable).GetTypeInfo()
+            Type edvOpenGenericType = typeof(Enumerable)
+                .GetTypeInfo()
                 .Assembly.GetType("System.Linq.SystemCore_EnumerableDebugView`1");
             Type edvClosedGenericType = edvOpenGenericType.MakeGenericType(typeof(T));
             ConstructorInfo ctor = edvClosedGenericType.GetTypeInfo().DeclaredConstructors.First();

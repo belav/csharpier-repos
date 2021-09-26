@@ -206,10 +206,8 @@ namespace Microsoft.AspNetCore.Http
 
             // Matches application/json
             if (
-                mt.MediaType.Equals(
-                    JsonConstants.JsonContentType,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                mt.MediaType
+                    .Equals(JsonConstants.JsonContentType, StringComparison.OrdinalIgnoreCase)
             )
             {
                 charset = mt.Charset;

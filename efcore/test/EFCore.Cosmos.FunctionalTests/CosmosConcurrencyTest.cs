@@ -206,13 +206,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
-            new DbContextOptionsBuilder().UseCosmos(
-                testDatabase.ConnectionString,
-                testDatabase.Name,
-                b =>
-                    b.ApplyConfiguration()
-                        .ContentResponseOnWriteEnabled(enabled: enableContentResponseOnWrite)
-            );
+            new DbContextOptionsBuilder()
+                .UseCosmos(
+                    testDatabase.ConnectionString,
+                    testDatabase.Name,
+                    b =>
+                        b.ApplyConfiguration()
+                            .ContentResponseOnWriteEnabled(enabled: enableContentResponseOnWrite)
+                );
 
             return testDatabase.AddProviderOptions(optionsBuilder).EnableDetailedErrors().Options;
         }

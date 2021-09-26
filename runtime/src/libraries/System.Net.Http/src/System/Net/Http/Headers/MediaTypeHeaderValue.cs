@@ -128,11 +128,8 @@ namespace System.Net.Http.Headers
         public static MediaTypeHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (MediaTypeHeaderValue)MediaTypeHeaderParser.SingleValueParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (MediaTypeHeaderValue)MediaTypeHeaderParser.SingleValueParser
+                .ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(
@@ -144,12 +141,8 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                MediaTypeHeaderParser.SingleValueParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                MediaTypeHeaderParser.SingleValueParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (MediaTypeHeaderValue)output!;
@@ -268,11 +261,12 @@ namespace System.Net.Http.Headers
             }
             else
             {
-                mediaType = string.Concat(
-                    input.AsSpan(startIndex, typeLength),
-                    "/",
-                    input.AsSpan(current, subtypeLength)
-                );
+                mediaType = string
+                    .Concat(
+                        input.AsSpan(startIndex, typeLength),
+                        "/",
+                        input.AsSpan(current, subtypeLength)
+                    );
             }
 
             return mediaTypeLength;

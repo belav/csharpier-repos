@@ -30,10 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     /// </remarks>
     internal sealed class AsyncEnumerableReader
     {
-        private readonly MethodInfo Converter = typeof(AsyncEnumerableReader).GetMethod(
-            nameof(ReadInternal),
-            BindingFlags.NonPublic | BindingFlags.Instance
-        )!;
+        private readonly MethodInfo Converter = typeof(AsyncEnumerableReader)
+            .GetMethod(nameof(ReadInternal), BindingFlags.NonPublic | BindingFlags.Instance)!;
 
         private readonly ConcurrentDictionary<
             Type,
@@ -79,8 +77,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
                     var converter =
                         (Func<object, Task<ICollection>>)Converter.MakeGenericMethod(
-                                enumeratedObjectType
-                            )
+                            enumeratedObjectType
+                        )
                             .CreateDelegate(typeof(Func<object, Task<ICollection>>), this);
 
                     reader = converter;

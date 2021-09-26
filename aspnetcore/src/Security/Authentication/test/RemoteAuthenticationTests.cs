@@ -42,26 +42,22 @@ namespace Microsoft.AspNetCore.Authentication
             Func<HttpContext, Task> testpath = null
         )
         {
-            var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        async (context, next) =>
+            var host = new HostBuilder()
+                .ConfigureWebHost(webHostBuilder => webHostBuilder.UseTestServer().Configure(
+                            app =>
+                            {
+                                app.Use(
+                                    async (context, next) =>
+                                    {
+                                        if (testpath != null)
                                         {
-                                            if (testpath != null)
-                                            {
-                                                await testpath(context);
-                                            }
-                                            await next();
+                                            await testpath(context);
                                         }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(configureServices)
-                )
+                                        await next();
+                                    }
+                                );
+                            }
+                        ).ConfigureServices(configureServices))
                 .Build();
             await host.StartAsync();
             return host;

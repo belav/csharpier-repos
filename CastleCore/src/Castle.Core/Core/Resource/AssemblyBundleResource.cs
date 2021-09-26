@@ -66,11 +66,12 @@ namespace Castle.Core.Resource
             }
             catch (Exception ex)
             {
-                var message = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "The assembly {0} could not be loaded",
-                    assemblyName
-                );
+                var message = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "The assembly {0} could not be loaded",
+                        assemblyName
+                    );
                 throw new ResourceException(message, ex);
             }
         }

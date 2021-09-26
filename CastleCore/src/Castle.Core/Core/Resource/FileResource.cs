@@ -60,12 +60,13 @@ namespace Castle.Core.Resource
 
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                "FileResource: [{0}] [{1}]",
-                filePath,
-                basePath
-            );
+            return string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "FileResource: [{0}] [{1}]",
+                    filePath,
+                    basePath
+                );
         }
 
         public override string FileBasePath
@@ -121,11 +122,12 @@ namespace Castle.Core.Resource
         {
             if (!File.Exists(path))
             {
-                string message = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "File {0} could not be found",
-                    new FileInfo(path).FullName
-                );
+                string message = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "File {0} could not be found",
+                        new FileInfo(path).FullName
+                    );
                 throw new ResourceException(message);
             }
         }

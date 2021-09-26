@@ -172,8 +172,8 @@ namespace Microsoft.AspNetCore.Mvc.Core
                 ModelMetadataIdentity.ForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel))
             );
             provider.Setup(
-                    m => m.GetMetadataForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel))
-                )
+                m => m.GetMetadataForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel))
+            )
                 .Returns(metadata.Object);
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(provider.Object);
@@ -204,8 +204,8 @@ namespace Microsoft.AspNetCore.Mvc.Core
                 ModelMetadataIdentity.ForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel))
             );
             provider.Setup(
-                    m => m.GetMetadataForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel))
-                )
+                m => m.GetMetadataForType(typeof(DefaultTemplatesUtilities.ObjectTemplateModel))
+            )
                 .Returns(metadata.Object);
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(provider.Object);

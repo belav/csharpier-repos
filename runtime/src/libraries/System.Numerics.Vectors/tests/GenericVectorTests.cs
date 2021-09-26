@@ -4210,7 +4210,8 @@ namespace System.Numerics.Tests
             T[] values2 = GenerateRandomValuesForVector<T>();
             var v1 = new Vector<T>(values1);
             var v2 = new Vector<T>(values2);
-            var multOperatorMethod = typeof(Vector<T>).GetTypeInfo()
+            var multOperatorMethod = typeof(Vector<T>)
+                .GetTypeInfo()
                 .GetDeclaredMethods("op_Multiply")
                 .Where(
                     mi =>
@@ -4285,7 +4286,8 @@ namespace System.Numerics.Tests
             T[] values2 = GenerateRandomValuesForVector<T>();
             var v1 = new Vector<T>(values1);
             var v2 = new Vector<T>(values2);
-            var addOperatorMethod = typeof(Vector<T>).GetTypeInfo()
+            var addOperatorMethod = typeof(Vector<T>)
+                .GetTypeInfo()
                 .GetDeclaredMethods("op_Addition")
                 .Where(
                     mi =>
@@ -4366,7 +4368,8 @@ namespace System.Numerics.Tests
 
             var v1 = new Vector<T>(values1);
             var v2 = new Vector<T>(values2);
-            var divideOperatorMethod = typeof(Vector<T>).GetTypeInfo()
+            var divideOperatorMethod = typeof(Vector<T>)
+                .GetTypeInfo()
                 .GetDeclaredMethods("op_Division")
                 .Where(
                     mi =>
@@ -4437,7 +4440,8 @@ namespace System.Numerics.Tests
         }
         private void TestConstructorSingleValueReflection<T>() where T : struct
         {
-            ConstructorInfo constructor = typeof(Vector<T>).GetTypeInfo()
+            ConstructorInfo constructor = typeof(Vector<T>)
+                .GetTypeInfo()
                 .DeclaredConstructors.Where(
                     ci =>
                         ci.GetParameters()
@@ -4511,7 +4515,8 @@ namespace System.Numerics.Tests
         }
         private void TestConstructorArrayReflection<T>() where T : struct
         {
-            ConstructorInfo constructor = typeof(Vector<T>).GetTypeInfo()
+            ConstructorInfo constructor = typeof(Vector<T>)
+                .GetTypeInfo()
                 .DeclaredConstructors.Where(
                     ci =>
                         ci.GetParameters()
@@ -4585,7 +4590,8 @@ namespace System.Numerics.Tests
         }
         private void TestCopyToReflection<T>() where T : struct
         {
-            MethodInfo copyToMethod = typeof(Vector<T>).GetTypeInfo()
+            MethodInfo copyToMethod = typeof(Vector<T>)
+                .GetTypeInfo()
                 .GetDeclaredMethods("CopyTo")
                 .Where(
                     mi =>
@@ -4657,7 +4663,8 @@ namespace System.Numerics.Tests
         }
         private void TestCopyToWithOffsetReflection<T>() where T : struct
         {
-            MethodInfo copyToMethod = typeof(Vector<T>).GetTypeInfo()
+            MethodInfo copyToMethod = typeof(Vector<T>)
+                .GetTypeInfo()
                 .GetDeclaredMethods("CopyTo")
                 .Where(
                     mi =>

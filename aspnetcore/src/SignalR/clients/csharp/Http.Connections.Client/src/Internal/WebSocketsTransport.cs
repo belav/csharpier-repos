@@ -40,9 +40,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
         )
         {
             _webSocket = new ClientWebSocket();
-            _logger = (
-                loggerFactory ?? NullLoggerFactory.Instance
-            ).CreateLogger<WebSocketsTransport>();
+            _logger = (loggerFactory ?? NullLoggerFactory.Instance)
+                .CreateLogger<WebSocketsTransport>();
 
             var isBrowser = OperatingSystem.IsBrowser();
             if (!isBrowser)
@@ -50,21 +49,18 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 // Full Framework will throw when trying to set the User-Agent header
                 // So avoid setting it in netstandard2.0 and only set it in netstandard2.1 and higher
 #if !NETSTANDARD2_0 && !NET461
-                _webSocket.Options.SetRequestHeader(
-                    "User-Agent",
-                    Constants.UserAgentHeader.ToString()
-                );
+                _webSocket.Options
+                    .SetRequestHeader("User-Agent", Constants.UserAgentHeader.ToString());
 #else
                 // Set an alternative user agent header on Full framework
-                _webSocket.Options.SetRequestHeader(
-                    "X-SignalR-User-Agent",
-                    Constants.UserAgentHeader.ToString()
-                );
+                _webSocket.Options
+                    .SetRequestHeader("X-SignalR-User-Agent", Constants.UserAgentHeader.ToString());
 #endif
 
                 // Set this header so the server auth middleware will set an Unauthorized instead of Redirect status code
                 // See: https://github.com/aspnet/Security/blob/ff9f145a8e89c9756ea12ff10c6d47f2f7eb345f/src/Microsoft.AspNetCore.Authentication.Cookies/Events/CookieAuthenticationEvents.cs#L42
-                _webSocket.Options.SetRequestHeader("X-Requested-With", "XMLHttpRequest");
+                _webSocket.Options
+                    .SetRequestHeader("X-Requested-With", "XMLHttpRequest");
             }
 
             if (httpConnectionOptions != null)
@@ -93,9 +89,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
                     if (httpConnectionOptions.ClientCertificates != null)
                     {
-                        _webSocket.Options.ClientCertificates.AddRange(
-                            httpConnectionOptions.ClientCertificates
-                        );
+                        _webSocket.Options.ClientCertificates
+                            .AddRange(httpConnectionOptions.ClientCertificates);
                     }
 
                     if (httpConnectionOptions.Credentials != null)
@@ -166,10 +161,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                     else
                     {
 #pragma warning disable CA1416 // Analyzer bug
-                        _webSocket.Options.SetRequestHeader(
-                            "Authorization",
-                            $"Bearer {accessToken}"
-                        );
+                        _webSocket.Options
+                            .SetRequestHeader("Authorization", $"Bearer {accessToken}");
 #pragma warning restore CA1416 // Analyzer bug
                     }
                 }

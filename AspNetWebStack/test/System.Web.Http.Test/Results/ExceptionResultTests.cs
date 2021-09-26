@@ -399,13 +399,13 @@ namespace System.Web.Http.Results
 
                 Mock<IContentNegotiator> spy = new Mock<IContentNegotiator>();
                 spy.Setup(
-                        n =>
-                            n.Negotiate(
-                                typeof(ModelStateDictionary),
-                                expectedRequest,
-                                expectedFormatters
-                            )
-                    )
+                    n =>
+                        n.Negotiate(
+                            typeof(ModelStateDictionary),
+                            expectedRequest,
+                            expectedFormatters
+                        )
+                )
                     .Returns(negotiationResult);
                 IContentNegotiator contentNegotiator = spy.Object;
 
@@ -470,8 +470,8 @@ namespace System.Web.Http.Results
             {
                 Mock<IContentNegotiator> spy = new Mock<IContentNegotiator>();
                 spy.Setup(
-                        n => n.Negotiate(typeof(HttpError), expectedRequest, It.Is(formattersMatch))
-                    )
+                    n => n.Negotiate(typeof(HttpError), expectedRequest, It.Is(formattersMatch))
+                )
                     .Returns(negotiationResult);
                 IContentNegotiator contentNegotiator = spy.Object;
 
@@ -579,10 +579,8 @@ namespace System.Web.Http.Results
                     ExceptionResult result = CreateProductUnderTest(exception, controller);
 
                     IContentNegotiator expectedContentNegotiator = CreateDummyContentNegotiator();
-                    configuration.Services.Replace(
-                        typeof(IContentNegotiator),
-                        expectedContentNegotiator
-                    );
+                    configuration.Services
+                        .Replace(typeof(IContentNegotiator), expectedContentNegotiator);
 
                     // Act
                     IContentNegotiator contentNegotiator = result.ContentNegotiator;
@@ -728,10 +726,8 @@ namespace System.Web.Http.Results
 
                 IContentNegotiator ignore = result.ContentNegotiator;
 
-                configuration.Services.Replace(
-                    typeof(IContentNegotiator),
-                    CreateDummyContentNegotiator()
-                );
+                configuration.Services
+                    .Replace(typeof(IContentNegotiator), CreateDummyContentNegotiator());
 
                 // Act
                 IContentNegotiator contentNegotiator = result.ContentNegotiator;

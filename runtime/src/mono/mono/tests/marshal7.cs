@@ -130,10 +130,8 @@ public class Test
     }
     static bool IsOSX()
     {
-        return (int)typeof(Environment).GetMethod(
-                    "get_Platform",
-                    BindingFlags.Static | BindingFlags.NonPublic
-                )
+        return (int)typeof(Environment)
+                .GetMethod("get_Platform", BindingFlags.Static | BindingFlags.NonPublic)
                 .Invoke(null, null) == 6;
     }
 

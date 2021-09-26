@@ -992,9 +992,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
             var dict = new RouteValueDictionary() { { "age", 30 }, };
 
             // Act
-            ((ICollection<KeyValuePair<string, object?>>)dict).Add(
-                new KeyValuePair<string, object?>("key", "value")
-            );
+            ((ICollection<KeyValuePair<string, object?>>)dict)
+                .Add(new KeyValuePair<string, object?>("key", "value"));
 
             // Assert
             Assert.Collection(
@@ -1343,7 +1342,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
             var array = new KeyValuePair<string, object?>[2];
 
             // Act
-            ((ICollection<KeyValuePair<string, object?>>)dict).CopyTo(array, 1);
+            ((ICollection<KeyValuePair<string, object?>>)dict)
+                .CopyTo(array, 1);
 
             // Assert
             Assert.Equal(

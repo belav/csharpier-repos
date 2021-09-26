@@ -105,12 +105,13 @@ namespace Microsoft.AspNetCore.Http
 
                 if (
                     !StringSegment.IsNullOrEmpty(port)
-                    && int.TryParse(
-                        port.AsSpan(),
-                        NumberStyles.None,
-                        CultureInfo.InvariantCulture,
-                        out var p
-                    )
+                    && int
+                        .TryParse(
+                            port.AsSpan(),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out var p
+                        )
                 )
                 {
                     return p;

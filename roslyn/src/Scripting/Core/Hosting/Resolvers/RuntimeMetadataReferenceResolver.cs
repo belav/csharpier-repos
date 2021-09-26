@@ -283,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 (AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") as string)?.Split(
                     Path.PathSeparator
                 )
-            ).ToImmutableArrayOrEmpty();
+            )
+                .ToImmutableArrayOrEmpty();
 
         internal static ImmutableDictionary<string, string> GetTrustedPlatformAssemblies(
             ImmutableArray<string> paths

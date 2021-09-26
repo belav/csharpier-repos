@@ -48,10 +48,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
 
             // We only call GetDescription when we already know that we succeeded (so it's safe to
             // assume we have a methodNode here).
-            return string.Format(
-                CSharpFeaturesResources.Make_0_return_Task_instead_of_void,
-                methodNode!.WithBody(null)
-            );
+            return string
+                .Format(
+                    CSharpFeaturesResources.Make_0_return_Task_instead_of_void,
+                    methodNode!.WithBody(null)
+                );
         }
 
         protected override async Task<Tuple<SyntaxTree, SyntaxNode>?> GetRootInOtherSyntaxTreeAsync(
@@ -62,17 +63,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConvertToAsync
         )
         {
             var methodDeclaration = await GetMethodDeclarationAsync(
-                    node,
-                    semanticModel,
-                    cancellationToken
-                )
+                node,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (methodDeclaration == null)
             {
                 return null;
             }
 
-            var oldRoot = await methodDeclaration.SyntaxTree.GetRootAsync(cancellationToken)
+            var oldRoot = await methodDeclaration.SyntaxTree
+                .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var newRoot = oldRoot.ReplaceNode(
                 methodDeclaration,

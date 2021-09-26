@@ -61,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_when_context_is_disposed()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddEntityFrameworkProxies()
                 .AddDbContext<JammieDodgerContext>(
                     (p, b) =>
@@ -89,8 +90,8 @@ namespace Microsoft.EntityFrameworkCore
                 CoreStrings.WarningAsErrorTemplate(
                     CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
                     CoreResources.LogLazyLoadOnDisposedContext(
-                            new TestLogger<TestLoggingDefinitions>()
-                        )
+                        new TestLogger<TestLoggingDefinitions>()
+                    )
                         .GenerateMessage("PhoneProxy", "Texts"),
                     "CoreEventId.LazyLoadOnDisposedContextWarning"
                 ),

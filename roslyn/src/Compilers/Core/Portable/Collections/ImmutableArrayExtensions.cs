@@ -718,9 +718,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<T> fourth
         )
         {
-            var builder = ArrayBuilder<T>.GetInstance(
-                first.Length + second.Length + third.Length + fourth.Length
-            );
+            var builder = ArrayBuilder<T>
+                .GetInstance(first.Length + second.Length + third.Length + fourth.Length);
             builder.AddRange(first);
             builder.AddRange(second);
             builder.AddRange(third);

@@ -266,13 +266,9 @@ namespace System.Xml.Linq
                         return Xml;
                     if (
                         count == xmlnsPrefixNamespace.Length
-                        && string.CompareOrdinal(
-                            namespaceName,
-                            index,
-                            xmlnsPrefixNamespace,
-                            0,
-                            count
-                        ) == 0
+                        && string
+                            .CompareOrdinal(namespaceName, index, xmlnsPrefixNamespace, 0, count)
+                            == 0
                     )
                         return Xmlns;
 

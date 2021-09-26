@@ -94,13 +94,15 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<CookieAuthenticationOptions> configureOptions
         )
         {
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IPostConfigureOptions<CookieAuthenticationOptions>,
-                    PostConfigureCookieAuthenticationOptions
-                >()
-            );
-            builder.Services.AddOptions<CookieAuthenticationOptions>(authenticationScheme)
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IPostConfigureOptions<CookieAuthenticationOptions>,
+                        PostConfigureCookieAuthenticationOptions
+                    >()
+                );
+            builder.Services
+                .AddOptions<CookieAuthenticationOptions>(authenticationScheme)
                 .Validate(
                     o => o.Cookie.Expiration == null,
                     "Cookie.Expiration is ignored, use ExpireTimeSpan instead."

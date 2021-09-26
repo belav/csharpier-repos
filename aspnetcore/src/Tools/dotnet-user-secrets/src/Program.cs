@@ -19,10 +19,8 @@ namespace Microsoft.Extensions.SecretManager.Tools
             DebugHelper.HandleDebugSwitch(ref args);
 
             int rc;
-            new Program(PhysicalConsole.Singleton, Directory.GetCurrentDirectory()).TryRun(
-                args,
-                out rc
-            );
+            new Program(PhysicalConsole.Singleton, Directory.GetCurrentDirectory())
+                .TryRun(args, out rc);
             return rc;
         }
 

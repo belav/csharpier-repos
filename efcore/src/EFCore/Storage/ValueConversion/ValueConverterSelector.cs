@@ -159,9 +159,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                                 modelClrType,
                                 typeof(byte[]),
                                 info =>
-                                    new BoolToZeroOneConverter<byte>().ComposeWith(
-                                        NumberToBytesConverter<byte>.DefaultInfo.Create()
-                                    ),
+                                    new BoolToZeroOneConverter<byte>()
+                                        .ComposeWith(
+                                            NumberToBytesConverter<byte>.DefaultInfo.Create()
+                                        ),
                                 new ConverterMappingHints(size: 1)
                             )
                     );
@@ -345,9 +346,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                                               i.ModelClrType == typeof(DateTime)
                                                   ? DateTimeToBinaryConverter.DefaultInfo.Create()
                                                   : TimeSpanToTicksConverter.DefaultInfo.Create()
-                                          ).ComposeWith(
-                                              NumberToBytesConverter<long>.DefaultInfo.Create()
-                                          ),
+                                          )
+                                              .ComposeWith(
+                                                  NumberToBytesConverter<long>.DefaultInfo.Create()
+                                              ),
                                       NumberToBytesConverter<long>.DefaultInfo.MappingHints
                                   )
                           );
@@ -476,16 +478,16 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     k =>
                     {
                         var toNumber = GetDefaultValueConverterInfo(
-                            typeof(EnumToNumberConverter<, >).MakeGenericType(
-                                k.ModelClrType,
-                                k.ModelClrType.GetEnumUnderlyingType()
-                            )
+                            typeof(EnumToNumberConverter<, >)
+                                .MakeGenericType(
+                                    k.ModelClrType,
+                                    k.ModelClrType.GetEnumUnderlyingType()
+                                )
                         );
 
                         var toBytes = GetDefaultValueConverterInfo(
-                            typeof(NumberToBytesConverter<>).MakeGenericType(
-                                k.ModelClrType.GetEnumUnderlyingType()
-                            )
+                            typeof(NumberToBytesConverter<>)
+                                .MakeGenericType(k.ModelClrType.GetEnumUnderlyingType())
                         );
 
                         return new ValueConverterInfo(

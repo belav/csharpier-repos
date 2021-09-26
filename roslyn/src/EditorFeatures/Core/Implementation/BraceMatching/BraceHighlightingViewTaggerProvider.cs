@@ -111,11 +111,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
                 {
                     var (bracesLeftOfPosition, bracesRightOfPosition) =
                         await GetAllMatchingBracesAsync(
-                                _braceMatcherService,
-                                document,
-                                position,
-                                context.CancellationToken
-                            )
+                            _braceMatcherService,
+                            document,
+                            position,
+                            context.CancellationToken
+                        )
                             .ConfigureAwait(false);
 
                     AddBraces(context, snapshot, bracesLeftOfPosition);
@@ -148,10 +148,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
         {
             // These are the matching spans when checking the token to the right of the position.
             var rightOfPosition = await service.GetMatchingBracesAsync(
-                    document,
-                    position,
-                    cancellationToken
-                )
+                document,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // The braces to the right of the position should only be added if the position is
@@ -188,10 +188,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
             //      <@ ^@>
 
             var leftOfPosition = await service.GetMatchingBracesAsync(
-                    document,
-                    position - 1,
-                    cancellationToken
-                )
+                document,
+                position - 1,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (

@@ -39,10 +39,8 @@ namespace Microsoft.Extensions.DependencyInjection
             var mapping = options.FormatterMappings.GetMediaTypeMappingForFormat(key);
             if (string.IsNullOrEmpty(mapping))
             {
-                options.FormatterMappings.SetMediaTypeMappingForFormat(
-                    key,
-                    MediaTypeHeaderValues.ApplicationXml
-                );
+                options.FormatterMappings
+                    .SetMediaTypeMappingForFormat(key, MediaTypeHeaderValues.ApplicationXml);
             }
 
             var inputFormatter = new XmlSerializerInputFormatter(options);
@@ -50,9 +48,8 @@ namespace Microsoft.Extensions.DependencyInjection
             options.InputFormatters.Add(inputFormatter);
 
             var outputFormatter = new XmlSerializerOutputFormatter(_loggerFactory);
-            outputFormatter.WrapperProviderFactories.Add(
-                new ProblemDetailsWrapperProviderFactory()
-            );
+            outputFormatter.WrapperProviderFactories
+                .Add(new ProblemDetailsWrapperProviderFactory());
             options.OutputFormatters.Add(outputFormatter);
         }
     }

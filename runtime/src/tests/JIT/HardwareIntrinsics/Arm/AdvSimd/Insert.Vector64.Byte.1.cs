@@ -309,7 +309,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             Byte op3 = TestLibrary.Generator.GetByte();
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.Insert),
                     new Type[] { typeof(Vector64<Byte>), typeof(byte), typeof(Byte) }
                 )
@@ -333,7 +334,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             Byte op3 = TestLibrary.Generator.GetByte();
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.Insert),
                     new Type[] { typeof(Vector64<Byte>), typeof(byte), typeof(Byte) }
                 )
@@ -591,16 +593,15 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.Insert)}<Byte>(Vector64<Byte>, 1, Byte): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.Insert)}<Byte>(Vector64<Byte>, 1, Byte): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($" thirdOp: {thirdOp}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -635,14 +635,15 @@ namespace System.Net
 
             // Test domain membership.
             if (
-                string.Compare(
-                    m_fqdnMyDomain,
-                    0,
-                    host,
-                    dot,
-                    m_fqdnMyDomain.Length,
-                    StringComparison.OrdinalIgnoreCase
-                ) == 0
+                string
+                    .Compare(
+                        m_fqdnMyDomain,
+                        0,
+                        host,
+                        dot,
+                        m_fqdnMyDomain.Length,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
             )
             {
                 return true;
@@ -765,11 +766,12 @@ namespace System.Net
                 {
                     if (
                         (
-                            string.Equals(
-                                headerName,
-                                s_headerInfo[i].Name,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    headerName,
+                                    s_headerInfo[i].Name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                     {

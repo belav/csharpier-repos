@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
     {
         private static readonly MethodInfo _asNoTrackingMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(EntityFrameworkQueryableExtensions.AsNoTracking));
 
         protected NorthwindIncludeNoTrackingQueryTestBase(TFixture fixture) : base(fixture) { }
@@ -53,9 +54,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Include_multi_level_reference_then_include_collection_predicate(
-                                async
-                            )
+                            base
+                                .Include_multi_level_reference_then_include_collection_predicate(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -84,9 +86,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Include_multiple_references_and_collection_multi_level_reverse(
-                                async
-                            )
+                            base
+                                .Include_multiple_references_and_collection_multi_level_reverse(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -101,9 +104,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Include_multiple_references_then_include_collection_multi_level(
-                                async
-                            )
+                            base
+                                .Include_multiple_references_then_include_collection_multi_level(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -118,9 +122,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Include_multiple_references_then_include_collection_multi_level_reverse(
-                                async
-                            )
+                            base
+                                .Include_multiple_references_then_include_collection_multi_level_reverse(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -199,9 +204,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Include_references_then_include_collection_multi_level_predicate(
-                                async
-                            )
+                            base
+                                .Include_references_then_include_collection_multi_level_predicate(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -242,9 +248,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                       .AsNoTracking()
                       .SingleAsync(c => c.CustomerID == "ALFKI")
                 : context.Set<Customer>()
-                      .Include(c => c.Orders)
-                      .AsNoTracking()
-                      .Single(c => c.CustomerID == "ALFKI");
+                  .Include(c => c.Orders)
+                  .AsNoTracking()
+                  .Single(c => c.CustomerID == "ALFKI");
 
             Assert.NotEqual(orders, customer.Orders, LegacyReferenceEqualityComparer.Instance);
             Assert.Equal(6, customer.Orders.Count);
@@ -266,9 +272,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                       .AsNoTracking()
                       .SingleAsync(c => c.CustomerID == "ALFKI")
                 : context.Set<Customer>()
-                      .Include(c => c.Orders)
-                      .AsNoTracking()
-                      .Single(c => c.CustomerID == "ALFKI");
+                  .Include(c => c.Orders)
+                  .AsNoTracking()
+                  .Single(c => c.CustomerID == "ALFKI");
 
             Assert.NotSame(customer1, customer2);
             Assert.Equal(6, customer2.Orders.Count);
@@ -291,10 +297,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                       .Where(o => o.CustomerID == "ALFKI")
                       .ToListAsync()
                 : context.Set<Order>()
-                      .Include(o => o.Customer)
-                      .AsNoTracking()
-                      .Where(o => o.CustomerID == "ALFKI")
-                      .ToList();
+                  .Include(o => o.Customer)
+                  .AsNoTracking()
+                  .Where(o => o.CustomerID == "ALFKI")
+                  .ToList();
 
             Assert.Equal(6, orders.Count);
             Assert.True(orders.All(o => !ReferenceEquals(o.Customer, customer)));

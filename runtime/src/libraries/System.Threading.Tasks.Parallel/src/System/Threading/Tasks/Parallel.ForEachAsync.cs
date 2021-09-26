@@ -536,13 +536,14 @@ namespace System.Threading.Tasks
                     else
                     {
                         // We're targeting a non-default TaskScheduler, so queue the task body to it.
-                        Task.Factory.StartNew(
-                            _taskBody!,
-                            this,
-                            default(CancellationToken),
-                            TaskCreationOptions.DenyChildAttach,
-                            _scheduler
-                        );
+                        Task.Factory
+                            .StartNew(
+                                _taskBody!,
+                                this,
+                                default(CancellationToken),
+                                TaskCreationOptions.DenyChildAttach,
+                                _scheduler
+                            );
                     }
                 }
             }

@@ -183,19 +183,19 @@ namespace Microsoft.AspNetCore.SignalR.Client
 
             // Add HttpConnectionOptionsDerivedHttpEndPoint so HubConnection can read the Url from HttpConnectionOptions
             // without the Signal.Client.Core project taking a new dependency on Http.Connections.Client.
-            hubConnectionBuilder.Services.AddSingleton<
-                EndPoint,
-                HttpConnectionOptionsDerivedHttpEndPoint
-            >();
+            hubConnectionBuilder.Services
+                .AddSingleton<EndPoint, HttpConnectionOptionsDerivedHttpEndPoint>();
 
             // Configure the HttpConnection so that it uses the correct transfer format for the configured IHubProtocol.
-            hubConnectionBuilder.Services.AddSingleton<
-                IConfigureOptions<HttpConnectionOptions>,
-                HubProtocolDerivedHttpOptionsConfigurer
-            >();
+            hubConnectionBuilder.Services
+                .AddSingleton<
+                    IConfigureOptions<HttpConnectionOptions>,
+                    HubProtocolDerivedHttpOptionsConfigurer
+                >();
 
             // If and when HttpConnectionFactory is made public, it can be moved out of this assembly and into Http.Connections.Client.
-            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory, HttpConnectionFactory>();
+            hubConnectionBuilder.Services
+                .AddSingleton<IConnectionFactory, HttpConnectionFactory>();
             return hubConnectionBuilder;
         }
 

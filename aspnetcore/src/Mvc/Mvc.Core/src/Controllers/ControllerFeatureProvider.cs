@@ -66,10 +66,9 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             }
 
             if (
-                !typeInfo.Name.EndsWith(
-                    ControllerTypeNameSuffix,
-                    StringComparison.OrdinalIgnoreCase
-                ) && !typeInfo.IsDefined(typeof(ControllerAttribute))
+                !typeInfo.Name
+                    .EndsWith(ControllerTypeNameSuffix, StringComparison.OrdinalIgnoreCase)
+                && !typeInfo.IsDefined(typeof(ControllerAttribute))
             )
             {
                 return false;

@@ -95,9 +95,8 @@ namespace AutoMapper.UnitTests.Mappers
         [Fact]
         public void Should_have_valid_configuration()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
 
         public class TestObjectMapper : IObjectMapper

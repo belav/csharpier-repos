@@ -219,7 +219,8 @@ namespace Microsoft.CodeAnalysis
                         SerializationTypeCode.Int32
                     )
                 }
-            ).AsImmutable();
+            )
+                .AsImmutable();
         }
 
         private static readonly byte[] s_signature_HasThis_Void = new byte[]

@@ -117,9 +117,8 @@ namespace System.Net.Quic.Tests
                                 break;
                             case WriteType.GatheredBuffers:
                                 var buffers = bufferLengths.Select(
-                                        bufferLength =>
-                                            new ReadOnlyMemory<byte>(new byte[bufferLength])
-                                    )
+                                    bufferLength => new ReadOnlyMemory<byte>(new byte[bufferLength])
+                                )
                                     .ToArray();
                                 await stream.WriteAsync(buffers);
                                 break;

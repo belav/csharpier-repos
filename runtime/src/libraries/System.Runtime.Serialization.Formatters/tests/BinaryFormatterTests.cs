@@ -649,20 +649,19 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
             // In another process, deserialize from that file and serialize to another
             RemoteExecutor.Invoke(
-                    (remoteInput, remoteOutput) =>
+                (remoteInput, remoteOutput) =>
+                {
+                    Assert.False(File.Exists(remoteOutput));
+                    using (FileStream input = File.OpenRead(remoteInput))
+                    using (FileStream output = File.OpenWrite(remoteOutput))
                     {
-                        Assert.False(File.Exists(remoteOutput));
-                        using (FileStream input = File.OpenRead(remoteInput))
-                        using (FileStream output = File.OpenWrite(remoteOutput))
-                        {
-                            var b = new BinaryFormatter();
-                            b.Serialize(output, b.Deserialize(input));
-                        }
-                    },
-                    outputPath,
-                    inputPath
-                )
-                .Dispose();
+                        var b = new BinaryFormatter();
+                        b.Serialize(output, b.Deserialize(input));
+                    }
+                },
+                outputPath,
+                inputPath
+            ).Dispose();
 
             // Deserialize what the other process serialized and compare it to the original
             using (FileStream fs = File.OpenRead(inputPath))
@@ -815,11 +814,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             base64Blob = Encoding.UTF8.GetString(data);
 
             return Regex.Replace(
-                    base64Blob,
-                    @"Version=\d.\d.\d.\d.",
-                    "Version=0.0.0.0",
-                    RegexOptions.Multiline
-                )
+                base64Blob,
+                @"Version=\d.\d.\d.\d.",
+                "Version=0.0.0.0",
+                RegexOptions.Multiline
+            )
                 // Ignore the old Test key and Open public keys.
                 .Replace("PublicKeyToken=cc7b13ffcd2ddd51", "PublicKeyToken=null")
                 .Replace("PublicKeyToken=9d77cc7ad39b68eb", "PublicKeyToken=null")

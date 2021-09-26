@@ -277,8 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         case TypeKind.Struct:
                             if (constraintType.IsNullableType())
                             {
-                                var underlyingType =
-                                    constraintType.Type.GetNullableUnderlyingType();
+                                var underlyingType = constraintType.Type
+                                    .GetNullableUnderlyingType();
                                 if (underlyingType.TypeKind == TypeKind.TypeParameter)
                                 {
                                     var underlyingTypeParameter =
@@ -597,9 +597,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (builder == null)
                     {
-                        builder = ArrayBuilder<TypeParameterConstraintClause>.GetInstance(
-                            constraintClauses.Length
-                        );
+                        builder = ArrayBuilder<TypeParameterConstraintClause>
+                            .GetInstance(constraintClauses.Length);
                         builder.AddRange(constraintClauses);
                     }
 
@@ -866,8 +865,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             var diagnosticsBuilder = ArrayBuilder<TypeParameterDiagnosticInfo>.GetInstance();
-            var nullabilityDiagnosticsBuilder =
-                ArrayBuilder<TypeParameterDiagnosticInfo>.GetInstance();
+            var nullabilityDiagnosticsBuilder = ArrayBuilder<TypeParameterDiagnosticInfo>
+                .GetInstance();
             var underlyingTupleTypeChain = ArrayBuilder<NamedTypeSymbol>.GetInstance();
             NamedTypeSymbol.GetUnderlyingTypeChain(tuple, underlyingTupleTypeChain);
 
@@ -1342,10 +1341,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // extension method to be applicable, but then when you try to use it the IDE tells you to upgrade your language version.
                     if (!(args.CurrentCompilation is null))
                     {
-                        var csDiagnosticInfo =
-                            MessageID.IDS_FeatureUnmanagedConstructedTypes.GetFeatureAvailabilityDiagnosticInfo(
-                                args.CurrentCompilation
-                            );
+                        var csDiagnosticInfo = MessageID.IDS_FeatureUnmanagedConstructedTypes
+                            .GetFeatureAvailabilityDiagnosticInfo(args.CurrentCompilation);
                         if (csDiagnosticInfo != null)
                         {
                             diagnosticsBuilder.Add(

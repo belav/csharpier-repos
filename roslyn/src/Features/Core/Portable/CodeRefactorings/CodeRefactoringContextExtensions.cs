@@ -65,10 +65,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         ) where TSyntaxNode : SyntaxNode
         {
             var potentialNodes = await GetRelevantNodesAsync<TSyntaxNode>(
-                    document,
-                    span,
-                    cancellationToken
-                )
+                document,
+                span,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return potentialNodes.FirstOrDefault();
         }

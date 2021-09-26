@@ -20,8 +20,8 @@ namespace System.Net.Security.Tests
         [MemberData(nameof(HostNameData))]
         public async Task SslStream_ClientSendsSNIServerReceives_Ok(string hostName)
         {
-            X509Certificate serverCert =
-                Configuration.Certificates.GetSelfSignedServerCertificate();
+            X509Certificate serverCert = Configuration.Certificates
+                .GetSelfSignedServerCertificate();
 
             await WithVirtualConnection(
                 async (server, client) =>
@@ -72,8 +72,8 @@ namespace System.Net.Security.Tests
             string hostName
         )
         {
-            X509Certificate serverCert =
-                Configuration.Certificates.GetSelfSignedServerCertificate();
+            X509Certificate serverCert = Configuration.Certificates
+                .GetSelfSignedServerCertificate();
 
             int timesCallbackCalled = 0;
 
@@ -146,8 +146,8 @@ namespace System.Net.Security.Tests
             string hostName
         )
         {
-            X509Certificate serverCert =
-                Configuration.Certificates.GetSelfSignedServerCertificate();
+            X509Certificate serverCert = Configuration.Certificates
+                .GetSelfSignedServerCertificate();
 
             int timesCallbackCalled = 0;
 

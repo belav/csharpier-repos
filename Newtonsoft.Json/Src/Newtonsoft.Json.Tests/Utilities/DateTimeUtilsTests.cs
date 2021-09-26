@@ -223,12 +223,13 @@ namespace Newtonsoft.Json.Tests.Utilities
                 Assert.AreEqual(
                     oldDate,
                     newDt,
-                    "DateTime parse not equal. Text: '{0}' Old ticks: {1} New ticks: {2}".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        text,
-                        oldDate != null ? ((DateTime)oldDate).Ticks : (long?)null,
-                        newDt != null ? ((DateTime)newDt).Ticks : (long?)null
-                    )
+                    "DateTime parse not equal. Text: '{0}' Old ticks: {1} New ticks: {2}"
+                        .FormatWith(
+                            CultureInfo.InvariantCulture,
+                            text,
+                            oldDate != null ? ((DateTime)oldDate).Ticks : (long?)null,
+                            newDt != null ? ((DateTime)newDt).Ticks : (long?)null
+                        )
                 );
             }
         }
@@ -327,12 +328,8 @@ namespace Newtonsoft.Json.Tests.Utilities
                 Assert.AreEqual(
                     oldDt,
                     newDt,
-                    "DateTimeOffset parse not equal. Text: '{0}' Old ticks: {1} New ticks: {2}".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        text,
-                        oldTicks,
-                        newTicks
-                    )
+                    "DateTimeOffset parse not equal. Text: '{0}' Old ticks: {1} New ticks: {2}"
+                        .FormatWith(CultureInfo.InvariantCulture, text, oldTicks, newTicks)
                 );
             }
         }

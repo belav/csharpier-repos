@@ -66,25 +66,24 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
             // Test OfferMessage(consumeToAccept: true)
             long consumedId = -1;
-            DataflowBlock.NullTarget<int>()
-                .OfferMessage(
-                    new DataflowMessageHeader(42),
-                    84,
-                    new DelegatePropagator<int, int>()
+            DataflowBlock.NullTarget<int>().OfferMessage(
+                new DataflowMessageHeader(42),
+                84,
+                new DelegatePropagator<int, int>()
+                {
+                    ConsumeMessageDelegate = delegate(
+                        DataflowMessageHeader messageHeader,
+                        ITargetBlock<int> target,
+                        out bool messageConsumed
+                    )
                     {
-                        ConsumeMessageDelegate = delegate(
-                            DataflowMessageHeader messageHeader,
-                            ITargetBlock<int> target,
-                            out bool messageConsumed
-                        )
-                        {
-                            consumedId = messageHeader.Id;
-                            messageConsumed = true;
-                            return 0;
-                        }
-                    },
-                    consumeToAccept: true
-                );
+                        consumedId = messageHeader.Id;
+                        messageConsumed = true;
+                        return 0;
+                    }
+                },
+                consumeToAccept: true
+            );
             Assert.Equal(expected: 42, actual: consumedId);
 
             // Test bad source
@@ -92,23 +91,22 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 () =>
                 {
                     var target = DataflowBlock.NullTarget<int>();
-                    DataflowBlock.NullTarget<int>()
-                        .OfferMessage(
-                            new DataflowMessageHeader(42),
-                            84,
-                            new DelegatePropagator<int, int>()
+                    DataflowBlock.NullTarget<int>().OfferMessage(
+                        new DataflowMessageHeader(42),
+                        84,
+                        new DelegatePropagator<int, int>()
+                        {
+                            ConsumeMessageDelegate = delegate(
+                                DataflowMessageHeader _,
+                                ITargetBlock<int> __,
+                                out bool ___
+                            )
                             {
-                                ConsumeMessageDelegate = delegate(
-                                    DataflowMessageHeader _,
-                                    ITargetBlock<int> __,
-                                    out bool ___
-                                )
-                                {
-                                    throw new InvalidOperationException();
-                                }
-                            },
-                            consumeToAccept: true
-                        );
+                                throw new InvalidOperationException();
+                            }
+                        },
+                        consumeToAccept: true
+                    );
                     Assert.True(target.Post(42));
                 }
             );
@@ -231,11 +229,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     {
                         Assert.True(
                             i == nextValueExpected,
-                            string.Format(
-                                "Expected next value to be {0} but got {1}",
-                                nextValueExpected,
-                                i
-                            )
+                            string
+                                .Format(
+                                    "Expected next value to be {0} but got {1}",
+                                    nextValueExpected,
+                                    i
+                                )
                         );
                         nextValueExpected++;
                     }
@@ -253,11 +252,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     {
                         Assert.True(
                             i == nextValueExpected,
-                            string.Format(
-                                "Expected next value to be {0} but got {1}",
-                                nextValueExpected,
-                                i
-                            )
+                            string
+                                .Format(
+                                    "Expected next value to be {0} but got {1}",
+                                    nextValueExpected,
+                                    i
+                                )
                         );
                         nextValueExpected++;
                     }
@@ -384,7 +384,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             }
 
             // Validate sane behavior with a bad LinkTo
-            new DelegatePropagator<int, int> { LinkToDelegate = (_, __) => null }.AsObservable()
+            new DelegatePropagator<int, int> { LinkToDelegate = (_, __) => null }
+                .AsObservable()
                 .Subscribe(DataflowBlock.NullTarget<int>().AsObserver())
                 .Dispose();
         }
@@ -595,14 +596,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1, Greedy = greedy }
                     );
 
-                    var ignored = source1.Completion.ContinueWith(
-                        _ => jb.Target1.Complete(),
-                        TaskScheduler.Default
-                    );
-                    ignored = source2.Completion.ContinueWith(
-                        _ => jb.Target2.Complete(),
-                        TaskScheduler.Default
-                    );
+                    var ignored = source1.Completion
+                        .ContinueWith(_ => jb.Target1.Complete(), TaskScheduler.Default);
+                    ignored = source2.Completion
+                        .ContinueWith(_ => jb.Target2.Complete(), TaskScheduler.Default);
 
                     using (source1.LinkTo(jb.Target1))
                     {
@@ -1370,11 +1367,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
             for (int i = 1; i < Length; i++)
             {
                 t = t.ContinueWith(
-                        _ => bb.ReceiveAsync(),
-                        CancellationToken.None,
-                        TaskContinuationOptions.ExecuteSynchronously,
-                        TaskScheduler.Default
-                    )
+                    _ => bb.ReceiveAsync(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
                     .Unwrap();
             }
 
@@ -2072,23 +2069,21 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 {
                     int[] linkCounts = new int[n],
                         unlinkCounts = new int[n];
-                    ISourceBlock<int>[] sources = Enumerable.Range(0, n)
-                        .Select(
-                            i =>
-                                new DelegatePropagator<int, int>
+                    ISourceBlock<int>[] sources = Enumerable.Range(0, n).Select(
+                        i =>
+                            new DelegatePropagator<int, int>
+                            {
+                                LinkToDelegate = (target, linkOptions) =>
                                 {
-                                    LinkToDelegate = (target, linkOptions) =>
+                                    Interlocked.Increment(ref linkCounts[i]);
+                                    return new DelegateDisposable
                                     {
-                                        Interlocked.Increment(ref linkCounts[i]);
-                                        return new DelegateDisposable
-                                        {
-                                            DisposeDelegate = () =>
-                                                Interlocked.Increment(ref unlinkCounts[i])
-                                        };
-                                    }
+                                        DisposeDelegate = () =>
+                                            Interlocked.Increment(ref unlinkCounts[i])
+                                    };
                                 }
-                        )
-                        .ToArray();
+                            }
+                    ).ToArray();
 
                     var cts = new CancellationTokenSource();
                     if (cancelBeforeChoose)
@@ -2223,9 +2218,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Throws<ArgumentNullException>(
                 () =>
                     DataflowBlock.Encapsulate<int, int>(
-                            new BufferBlock<int>(),
-                            new BufferBlock<int>()
-                        )
+                        new BufferBlock<int>(),
+                        new BufferBlock<int>()
+                    )
                         .Fault(null)
             );
         }
@@ -2279,20 +2274,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
             var buffer = new BufferBlock<int>();
             transform.LinkTo(buffer);
-            var ignored = transform.Completion.ContinueWith(
-                completion => buffer.Complete(),
-                TaskScheduler.Default
-            );
+            var ignored = transform.Completion
+                .ContinueWith(completion => buffer.Complete(), TaskScheduler.Default);
 
             IPropagatorBlock<int, int> encapsulated = DataflowBlock.Encapsulate(transform, buffer);
             encapsulated.LinkTo(new ActionBlock<int>(x => { }));
 
             var source = new BufferBlock<int>();
             source.LinkTo(encapsulated);
-            ignored = source.Completion.ContinueWith(
-                completion => encapsulated.Complete(),
-                TaskScheduler.Default
-            );
+            ignored = source.Completion
+                .ContinueWith(completion => encapsulated.Complete(), TaskScheduler.Default);
 
             // Feed
             const int messagesSent = 10;
@@ -2519,11 +2510,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
             for (int i = 1; i < iterations; i++)
             {
                 t = t.ContinueWith(
-                        _ => source.OutputAvailableAsync(),
-                        CancellationToken.None,
-                        TaskContinuationOptions.ExecuteSynchronously,
-                        TaskScheduler.Default
-                    )
+                    _ => source.OutputAvailableAsync(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
                     .Unwrap();
             }
 

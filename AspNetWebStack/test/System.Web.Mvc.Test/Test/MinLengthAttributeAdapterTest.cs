@@ -14,11 +14,8 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithMinLengthAttribute()
         {
             // Arrange
-            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => null,
-                typeof(string),
-                "Length"
-            );
+            var metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(() => null, typeof(string), "Length");
             var context = new ControllerContext();
             var attribute = new MinLengthAttribute(6);
             var adapter = new MinLengthAttributeAdapter(metadata, context, attribute);
@@ -44,11 +41,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             string propertyName = "Length";
             string message = "Array must have at least {1} items.";
-            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => null,
-                typeof(int[]),
-                propertyName
-            );
+            var metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(() => null, typeof(int[]), propertyName);
             var context = new ControllerContext();
             var attribute = new MinLengthAttribute(2) { ErrorMessage = message };
             var adapter = new MinLengthAttributeAdapter(metadata, context, attribute);

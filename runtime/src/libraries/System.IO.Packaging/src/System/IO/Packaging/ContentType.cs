@@ -212,16 +212,18 @@ namespace System.IO.Packaging
                 // ASCII characters, digits, and a small set of symbols.  This is not a safe comparison
                 // for the broader set of strings that have not been restricted in the same way.
                 result = (
-                    string.Equals(
-                        _type,
-                        contentType.TypeComponent,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    && string.Equals(
-                        _subType,
-                        contentType.SubTypeComponent,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            _type,
+                            contentType.TypeComponent,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    && string
+                        .Equals(
+                            _subType,
+                            contentType.SubTypeComponent,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 );
             }
             return result;
@@ -379,8 +381,8 @@ namespace System.IO.Packaging
                 );
 
                 parameterAndValue = parameterAndValue.Substring(
-                        parameterStartIndex + parameterValueLength
-                    )
+                    parameterStartIndex + parameterValueLength
+                )
                     .TrimStart(s_linearWhiteSpaceChars);
             }
         }

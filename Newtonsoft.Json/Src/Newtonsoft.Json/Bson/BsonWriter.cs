@@ -225,10 +225,8 @@ namespace Newtonsoft.Json.Bson
                 {
                     throw JsonWriterException.Create(
                         this,
-                        "Error writing {0} value. BSON must start with an Object or Array.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            token.Type
-                        ),
+                        "Error writing {0} value. BSON must start with an Object or Array."
+                            .FormatWith(CultureInfo.InvariantCulture, token.Type),
                         null
                     );
                 }

@@ -529,9 +529,9 @@ class Program : TestBase
     }
 }";
             CompileAndVerifyUtil(
-                    source: new string[] { program, ExpressionTestLibrary },
-                    expectedOutput: @"k"
-                )
+                source: new string[] { program, ExpressionTestLibrary },
+                expectedOutput: @"k"
+            )
                 .VerifyDiagnostics();
         }
 
@@ -562,9 +562,9 @@ class Program : TestBase
     }
 }";
             CompileAndVerifyUtil(
-                    source: new string[] { program, ExpressionTestLibrary },
-                    expectedOutput: @"k"
-                )
+                source: new string[] { program, ExpressionTestLibrary },
+                expectedOutput: @"k"
+            )
                 .VerifyDiagnostics();
         }
 
@@ -604,9 +604,9 @@ namespace ConsoleApplication2
 ";
 
             CompileAndVerifyUtil(
-                    source: new string[] { program, ExpressionTestLibrary },
-                    expectedOutput: @"k"
-                )
+                source: new string[] { program, ExpressionTestLibrary },
+                expectedOutput: @"k"
+            )
                 .VerifyDiagnostics();
         }
 
@@ -796,15 +796,14 @@ class Program
         Expression<Func<int, int[,]>> x = i => new[,] {{ i }};
     }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (7,48): error CS0838: An expression tree may not contain a multidimensional array initializer
-                    //         Expression<Func<int, int[,]>> x = i => new[,] {{ i }};
-                    Diagnostic(
-                        ErrorCode.ERR_ExpressionTreeContainsMultiDimensionalArrayInitializer,
-                        "new[,] {{ i }}"
-                    )
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (7,48): error CS0838: An expression tree may not contain a multidimensional array initializer
+                //         Expression<Func<int, int[,]>> x = i => new[,] {{ i }};
+                Diagnostic(
+                    ErrorCode.ERR_ExpressionTreeContainsMultiDimensionalArrayInitializer,
+                    "new[,] {{ i }}"
+                )
+            );
         }
 
         [WorkItem(544031, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544031")]
@@ -882,8 +881,8 @@ class Program : Program0
     }
 }";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    new[] { Parse(source), Parse(ExpressionTestLibrary) }
-                )
+                new[] { Parse(source), Parse(ExpressionTestLibrary) }
+            )
                 .VerifyDiagnostics(
                     // (265,19): error CS0831: An expression tree may not contain a base access
                     //             () => base.M(), "");
@@ -909,9 +908,9 @@ class Program : TestBase
     }
 }";
             CreateCompilationWithMscorlib46(
-                    new[] { Parse(source), Parse(ExpressionTestLibrary) },
-                    new[] { ExpressionAssemblyRef }
-                )
+                new[] { Parse(source), Parse(ExpressionTestLibrary) },
+                new[] { ExpressionAssemblyRef }
+            )
                 .VerifyDiagnostics(
                     // (10,13): error CS1989: Async lambda expressions cannot be converted to expression trees
                     //             async x => (await x), "");
@@ -2425,18 +2424,17 @@ public class D : C
         Expression<A> e = x => x.B2 += (B)null;
     }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (11,32): error CS0832: An expression tree may not contain an assignment operator
-                    //        Expression<A> e = x => x.B2 += (B)null;
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "x.B2 += (B)null"),
-                    // (5,33): warning CS0067: The event 'C.B1' is never used
-                    // public class C { public event B B1;}
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "B1").WithArguments("C.B1"),
-                    // (8,20): warning CS0067: The event 'D.B2' is never used
-                    //     public event B B2;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "B2").WithArguments("D.B2")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (11,32): error CS0832: An expression tree may not contain an assignment operator
+                //        Expression<A> e = x => x.B2 += (B)null;
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAssignment, "x.B2 += (B)null"),
+                // (5,33): warning CS0067: The event 'C.B1' is never used
+                // public class C { public event B B1;}
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "B1").WithArguments("C.B1"),
+                // (8,20): warning CS0067: The event 'D.B2' is never used
+                //     public event B B2;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "B2").WithArguments("D.B2")
+            );
         }
 
         [WorkItem(544233, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544233")]
@@ -2526,10 +2524,9 @@ public class Test
             string expectedOutput = @"() => ModAdd2(new [] {})";
 
             // the IL, however can and should use Array.Empty when calling into ET APIs.
-            CompileAndVerifyUtil(text, expectedOutput: expectedOutput)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerifyUtil(text, expectedOutput: expectedOutput).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       66 (0x42)
   .maxstack  7
@@ -2553,7 +2550,7 @@ public class Test
   IL_0041:  ret
 }
                     "
-                );
+            );
 
             var comp45 = CreateCompilationWithMscorlib45(
                 new[] { text, ExpressionTestLibrary },
@@ -2562,10 +2559,9 @@ public class Test
             );
 
             // no use Array.Empty here since it is not available
-            CompileAndVerify(comp45, expectedOutput: expectedOutput)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp45, expectedOutput: expectedOutput).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       68 (0x44)
   .maxstack  7
@@ -2591,7 +2587,7 @@ public class Test
   IL_0043:  ret
 }
                     "
-                );
+            );
         }
 
         [WorkItem(544270, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544270")]
@@ -2633,12 +2629,11 @@ public class Test
         Console.WriteLine(testExpr);
     }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (10,48): error CS0854: An expression tree may not contain a call or invocation that uses optional arguments
-                    //         Expression<Func<int>> testExpr = () => ModAdd2();
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeContainsOptionalArgument, "ModAdd2()")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (10,48): error CS0854: An expression tree may not contain a call or invocation that uses optional arguments
+                //         Expression<Func<int>> testExpr = () => ModAdd2();
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsOptionalArgument, "ModAdd2()")
+            );
         }
 
         [WorkItem(544419, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544419")]
@@ -3357,15 +3352,11 @@ public class A
         Expression<Func<D>> f = () => delegate() { };
     }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (9,39): error CS1945: An expression tree may not contain an anonymous method expression
-                    //        Expression<Func<D>> f = () => delegate() { };
-                    Diagnostic(
-                        ErrorCode.ERR_ExpressionTreeContainsAnonymousMethod,
-                        "delegate() { }"
-                    )
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (9,39): error CS1945: An expression tree may not contain an anonymous method expression
+                //        Expression<Func<D>> f = () => delegate() { };
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAnonymousMethod, "delegate() { }")
+            );
         }
 
         [WorkItem(544403, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544403")]
@@ -3506,13 +3497,12 @@ class Program
     Expression<Func<object>> testExpr = () => null ?? ""hello"";
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (6,47): error CS0845: An expression tree lambda may not contain a coalescing operator with a null literal left-hand side
-                    //     Expression<Func<object>> testExpr = () => null ?? new object();
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeContainsBadCoalesce, "null")
-                        .WithLocation(6, 47)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (6,47): error CS0845: An expression tree lambda may not contain a coalescing operator with a null literal left-hand side
+                //     Expression<Func<object>> testExpr = () => null ?? new object();
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsBadCoalesce, "null")
+                    .WithLocation(6, 47)
+            );
         }
 
         [WorkItem(4593, "https://github.com/dotnet/roslyn/issues/4593")]
@@ -3587,12 +3577,11 @@ class Program
 {
     Expression<Func<object>> testExpr = () => null ?? new object();
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (6,47): error CS0845: An expression tree lambda may not contain a coalescing operator with a null literal left-hand side
-                    //     Expression<Func<object>> testExpr = () => null ?? new object();
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeContainsBadCoalesce, "null")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (6,47): error CS0845: An expression tree lambda may not contain a coalescing operator with a null literal left-hand side
+                //     Expression<Func<object>> testExpr = () => null ?? new object();
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsBadCoalesce, "null")
+            );
         }
 
         [Fact]
@@ -3605,12 +3594,11 @@ class C
 {
     object P { get; }  = ((Expression<Func<object>>)(() => null ?? new object())).Compile();
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (6,47): error CS0845: An expression tree lambda may not contain a coalescing operator with a null literal left-hand side
-                    //     Expression<Func<object>> testExpr = () => null ?? new object();
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeContainsBadCoalesce, "null")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (6,47): error CS0845: An expression tree lambda may not contain a coalescing operator with a null literal left-hand side
+                //     Expression<Func<object>> testExpr = () => null ?? new object();
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsBadCoalesce, "null")
+            );
         }
 
         [WorkItem(544429, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544429")]
@@ -3857,50 +3845,49 @@ Lambda:
                 @"
 namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular)
-                .VerifyDiagnostics(
-                    // (2,11): error CS7000: Unexpected use of an aliased name
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "global::").WithLocation(2, 11),
-                    // (2,19): error CS1001: Identifier expected
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(2, 19),
-                    // (2,71): error CS8124: Tuple must contain at least two elements.
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(2, 71),
-                    // (2,76): error CS1026: ) expected
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "=>").WithLocation(2, 76),
-                    // (2,79): error CS0116: A namespace cannot directly contain members such as fields or methods
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "B").WithLocation(2, 79),
-                    // (2,19): error CS1514: { expected
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_LbraceExpected, "(").WithLocation(2, 19),
-                    // (2,76): error CS1022: Type or namespace definition, or end-of-file expected
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_EOFExpected, "=>").WithLocation(2, 76),
-                    // (2,81): error CS1022: Type or namespace definition, or end-of-file expected
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_EOFExpected, ")").WithLocation(2, 81),
-                    // (2,93): error CS1002: ; expected
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "(").WithLocation(2, 93),
-                    // (2,94): error CS8124: Tuple must contain at least two elements.
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(2, 94),
-                    // (2,95): error CS1022: Type or namespace definition, or end-of-file expected
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_EOFExpected, "{").WithLocation(2, 95),
-                    // (2,84): error CS1520: Method must have a return type
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_MemberNeedsType, "Compile").WithLocation(2, 84),
-                    // (2,84): error CS0501: '<invalid-global-code>.<invalid-global-code>()' must declare a body because it is not marked abstract, extern, or partial
-                    // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "Compile")
-                        .WithArguments(".<invalid-global-code>.<invalid-global-code>()")
-                        .WithLocation(2, 84)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular).VerifyDiagnostics(
+                // (2,11): error CS7000: Unexpected use of an aliased name
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "global::").WithLocation(2, 11),
+                // (2,19): error CS1001: Identifier expected
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(2, 19),
+                // (2,71): error CS8124: Tuple must contain at least two elements.
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(2, 71),
+                // (2,76): error CS1026: ) expected
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "=>").WithLocation(2, 76),
+                // (2,79): error CS0116: A namespace cannot directly contain members such as fields or methods
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "B").WithLocation(2, 79),
+                // (2,19): error CS1514: { expected
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_LbraceExpected, "(").WithLocation(2, 19),
+                // (2,76): error CS1022: Type or namespace definition, or end-of-file expected
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_EOFExpected, "=>").WithLocation(2, 76),
+                // (2,81): error CS1022: Type or namespace definition, or end-of-file expected
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_EOFExpected, ")").WithLocation(2, 81),
+                // (2,93): error CS1002: ; expected
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "(").WithLocation(2, 93),
+                // (2,94): error CS8124: Tuple must contain at least two elements.
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(2, 94),
+                // (2,95): error CS1022: Type or namespace definition, or end-of-file expected
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_EOFExpected, "{").WithLocation(2, 95),
+                // (2,84): error CS1520: Method must have a return type
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_MemberNeedsType, "Compile").WithLocation(2, 84),
+                // (2,84): error CS0501: '<invalid-global-code>.<invalid-global-code>()' must declare a body because it is not marked abstract, extern, or partial
+                // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "Compile")
+                    .WithArguments(".<invalid-global-code>.<invalid-global-code>()")
+                    .WithLocation(2, 84)
+            );
         }
 
         [WorkItem(544546, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544546")]
@@ -3912,22 +3899,23 @@ namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B 
 namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
 ";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
-                )
+                source,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+            )
                 .VerifyDiagnostics(
                     // (2,11): error CS7000: Unexpected use of an aliased name
                     // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "global::").WithLocation(2, 11),
+                    Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "global::")
+                        .WithLocation(2, 11),
                     // (2,19): error CS1001: Identifier expected
                     // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
                     Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(2, 19),
                     // (2,20): error CS8059: Feature 'tuples' is not available in C# 6. Please use language version 7.0 or greater.
                     // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
                     Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "(System.Linq.Expressions.Expression<System.Func<B>>)"
-                        )
+                        ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                        "(System.Linq.Expressions.Expression<System.Func<B>>)"
+                    )
                         .WithArguments("tuples", "7.0")
                         .WithLocation(2, 20),
                     // (2,76): error CS1026: ) expected
@@ -3985,42 +3973,41 @@ class Test
         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine(""))).Compile()();
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,58): error CS1547: Keyword 'void' cannot be used in this context
-                    //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
-                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(8, 58),
-                    // (8,105): error CS1010: Newline in constant
-                    //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
-                    Diagnostic(ErrorCode.ERR_NewlineInConst, "").WithLocation(8, 105),
-                    // (8,122): error CS1026: ) expected
-                    //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(8, 122),
-                    // (8,122): error CS1026: ) expected
-                    //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(8, 122),
-                    // (8,122): error CS1026: ) expected
-                    //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(8, 122),
-                    // (8,122): error CS1002: ; expected
-                    //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(8, 122),
-                    // (2,16): error CS0246: The type or namespace name 'global' could not be found (are you missing a using directive or an assembly reference?)
-                    // using System = global;
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "global")
-                        .WithArguments("global")
-                        .WithLocation(2, 16),
-                    // (8,11): error CS0576: Namespace '<global namespace>' contains a definition conflicting with alias 'System'
-                    //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
-                    Diagnostic(ErrorCode.ERR_ConflictAliasAndMember, "System")
-                        .WithArguments("System", "<global namespace>")
-                        .WithLocation(8, 11),
-                    // (8,46): error CS0576: Namespace '<global namespace>' contains a definition conflicting with alias 'System'
-                    //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
-                    Diagnostic(ErrorCode.ERR_ConflictAliasAndMember, "System")
-                        .WithArguments("System", "<global namespace>")
-                        .WithLocation(8, 46)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,58): error CS1547: Keyword 'void' cannot be used in this context
+                //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
+                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(8, 58),
+                // (8,105): error CS1010: Newline in constant
+                //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
+                Diagnostic(ErrorCode.ERR_NewlineInConst, "").WithLocation(8, 105),
+                // (8,122): error CS1026: ) expected
+                //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(8, 122),
+                // (8,122): error CS1026: ) expected
+                //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(8, 122),
+                // (8,122): error CS1026: ) expected
+                //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(8, 122),
+                // (8,122): error CS1002: ; expected
+                //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(8, 122),
+                // (2,16): error CS0246: The type or namespace name 'global' could not be found (are you missing a using directive or an assembly reference?)
+                // using System = global;
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "global")
+                    .WithArguments("global")
+                    .WithLocation(2, 16),
+                // (8,11): error CS0576: Namespace '<global namespace>' contains a definition conflicting with alias 'System'
+                //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
+                Diagnostic(ErrorCode.ERR_ConflictAliasAndMember, "System")
+                    .WithArguments("System", "<global namespace>")
+                    .WithLocation(8, 11),
+                // (8,46): error CS0576: Namespace '<global namespace>' contains a definition conflicting with alias 'System'
+                //         ((System.Linq.Expressions.Expression<System.Func<void>>)(() => global::System.Console.WriteLine("))).Compile()();
+                Diagnostic(ErrorCode.ERR_ConflictAliasAndMember, "System")
+                    .WithArguments("System", "<global namespace>")
+                    .WithLocation(8, 46)
+            );
         }
 
         [WorkItem(544586, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544586")]
@@ -4433,12 +4420,11 @@ public class Program
         Expression<Func<EventHandler>> testExpr = () => new EventHandler(delegate { });
     }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (9,74): error CS1945: An expression tree may not contain an anonymous method expression
-                    //        Expression<Func<EventHandler>> testExpr = () => new EventHandler(delegate { });
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAnonymousMethod, "delegate { }")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (9,74): error CS1945: An expression tree may not contain an anonymous method expression
+                //        Expression<Func<EventHandler>> testExpr = () => new EventHandler(delegate { });
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAnonymousMethod, "delegate { }")
+            );
         }
 
         [WorkItem(545122, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545122")]
@@ -4504,34 +4490,33 @@ public class MemberInitializerTest
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (9,105): error CS1525: Invalid expression term 'int'
-                    //             genD = (D<int>) GenericMethod<((System.Linq.Expressions.Expression<System.Func<int>>)(() => int)).Compile()()>
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
-                        .WithArguments("int")
-                        .WithLocation(9, 105),
-                    // (9,123): error CS1525: Invalid expression term '}'
-                    //             genD = (D<int>) GenericMethod<((System.Linq.Expressions.Expression<System.Func<int>>)(() => int)).Compile()()>
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "")
-                        .WithArguments("}")
-                        .WithLocation(9, 123),
-                    // (8,9): error CS0246: The type or namespace name 'Goo' could not be found (are you missing a using directive or an assembly reference?)
-                    //         Goo f = new Goo {
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Goo")
-                        .WithArguments("Goo")
-                        .WithLocation(8, 9),
-                    // (8,21): error CS0246: The type or namespace name 'Goo' could not be found (are you missing a using directive or an assembly reference?)
-                    //         Goo f = new Goo {
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Goo")
-                        .WithArguments("Goo")
-                        .WithLocation(8, 21),
-                    // (9,29): error CS0411: The type arguments for method 'MemberInitializerTest.GenericMethod<T>()' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //             genD = (D<int>) GenericMethod<((System.Linq.Expressions.Expression<System.Func<int>>)(() => int)).Compile()()>
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "GenericMethod")
-                        .WithArguments("MemberInitializerTest.GenericMethod<T>()")
-                        .WithLocation(9, 29)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (9,105): error CS1525: Invalid expression term 'int'
+                //             genD = (D<int>) GenericMethod<((System.Linq.Expressions.Expression<System.Func<int>>)(() => int)).Compile()()>
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(9, 105),
+                // (9,123): error CS1525: Invalid expression term '}'
+                //             genD = (D<int>) GenericMethod<((System.Linq.Expressions.Expression<System.Func<int>>)(() => int)).Compile()()>
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "")
+                    .WithArguments("}")
+                    .WithLocation(9, 123),
+                // (8,9): error CS0246: The type or namespace name 'Goo' could not be found (are you missing a using directive or an assembly reference?)
+                //         Goo f = new Goo {
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Goo")
+                    .WithArguments("Goo")
+                    .WithLocation(8, 9),
+                // (8,21): error CS0246: The type or namespace name 'Goo' could not be found (are you missing a using directive or an assembly reference?)
+                //         Goo f = new Goo {
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Goo")
+                    .WithArguments("Goo")
+                    .WithLocation(8, 21),
+                // (9,29): error CS0411: The type arguments for method 'MemberInitializerTest.GenericMethod<T>()' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //             genD = (D<int>) GenericMethod<((System.Linq.Expressions.Expression<System.Func<int>>)(() => int)).Compile()()>
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "GenericMethod")
+                    .WithArguments("MemberInitializerTest.GenericMethod<T>()")
+                    .WithLocation(9, 29)
+            );
         }
 
         [WorkItem(545191, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545191")]

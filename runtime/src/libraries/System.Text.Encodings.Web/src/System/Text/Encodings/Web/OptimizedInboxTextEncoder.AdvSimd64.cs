@@ -65,14 +65,13 @@ namespace System.Text.Encodings.Web
                     // element value to be in the range [ 128..255 ]. This causes the tbl lookup to return 0x00
                     // for that particular element in the 'vecPowersOfTwoShuffled' vector, meaning that escaping is required.
 
-                    var allowedCodePointsShuffled = AdvSimd.Arm64.VectorTableLookup(
-                        allowedCodePoints,
-                        AdvSimd.And(packed, vec0xF)
-                    );
-                    var vecPowersOfTwoShuffled = AdvSimd.Arm64.VectorTableLookup(
-                        vecPowersOfTwo,
-                        AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
-                    );
+                    var allowedCodePointsShuffled = AdvSimd.Arm64
+                        .VectorTableLookup(allowedCodePoints, AdvSimd.And(packed, vec0xF));
+                    var vecPowersOfTwoShuffled = AdvSimd.Arm64
+                        .VectorTableLookup(
+                            vecPowersOfTwo,
+                            AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
+                        );
                     var result = AdvSimd.CompareTest(
                         allowedCodePointsShuffled,
                         vecPowersOfTwoShuffled
@@ -86,7 +85,8 @@ namespace System.Text.Encodings.Web
                     // corresponds to whether an element in the 'result' vector was originally 0xFF or 0x00.
 
                     var maskedResult = AdvSimd.And(result, vecPairwiseAddNibbleBitmask);
-                    resultScalar = AdvSimd.Arm64.AddPairwise(maskedResult, maskedResult)
+                    resultScalar = AdvSimd.Arm64
+                        .AddPairwise(maskedResult, maskedResult)
                         .AsUInt64()
                         .ToScalar();
 
@@ -104,14 +104,13 @@ namespace System.Text.Encodings.Web
                 // We'll treat the low 64 bits of the 'result' vector as its own scalar element.
 
                 Vector128<byte> packed = AdvSimd.LoadVector64(pData + i).ToVector128Unsafe(); // unaligned read
-                var allowedCodePointsShuffled = AdvSimd.Arm64.VectorTableLookup(
-                    allowedCodePoints,
-                    AdvSimd.And(packed, vec0xF)
-                );
-                var vecPowersOfTwoShuffled = AdvSimd.Arm64.VectorTableLookup(
-                    vecPowersOfTwo,
-                    AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
-                );
+                var allowedCodePointsShuffled = AdvSimd.Arm64
+                    .VectorTableLookup(allowedCodePoints, AdvSimd.And(packed, vec0xF));
+                var vecPowersOfTwoShuffled = AdvSimd.Arm64
+                    .VectorTableLookup(
+                        vecPowersOfTwo,
+                        AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
+                    );
                 var result = AdvSimd.CompareTest(allowedCodePointsShuffled, vecPowersOfTwoShuffled);
                 resultScalar = result.AsUInt64().ToScalar();
 
@@ -130,17 +129,16 @@ namespace System.Text.Encodings.Web
                 // We'll treat the low 32 bits of the 'result' vector as its own scalar element.
 
                 Vector128<byte> packed = Vector128.CreateScalarUnsafe(
-                        Unsafe.ReadUnaligned<uint>(pData + i)
-                    )
+                    Unsafe.ReadUnaligned<uint>(pData + i)
+                )
                     .AsByte();
-                var allowedCodePointsShuffled = AdvSimd.Arm64.VectorTableLookup(
-                    allowedCodePoints,
-                    AdvSimd.And(packed, vec0xF)
-                );
-                var vecPowersOfTwoShuffled = AdvSimd.Arm64.VectorTableLookup(
-                    vecPowersOfTwo,
-                    AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
-                );
+                var allowedCodePointsShuffled = AdvSimd.Arm64
+                    .VectorTableLookup(allowedCodePoints, AdvSimd.And(packed, vec0xF));
+                var vecPowersOfTwoShuffled = AdvSimd.Arm64
+                    .VectorTableLookup(
+                        vecPowersOfTwo,
+                        AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
+                    );
                 var result = AdvSimd.CompareTest(allowedCodePointsShuffled, vecPowersOfTwoShuffled);
                 resultScalar = result.AsUInt32().ToScalar(); // n.b. implicit conversion uint -> ulong; high 32 bits will be zeroed
 
@@ -243,20 +241,20 @@ namespace System.Text.Encodings.Web
                             short*)(pData + 8 + i)
                         )
                     );
-                    var allowedCodePointsShuffled = AdvSimd.Arm64.VectorTableLookup(
-                        allowedCodePoints,
-                        AdvSimd.And(packed, vec0xF)
-                    );
-                    var vecPowersOfTwoShuffled = AdvSimd.Arm64.VectorTableLookup(
-                        vecPowersOfTwo,
-                        AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
-                    );
+                    var allowedCodePointsShuffled = AdvSimd.Arm64
+                        .VectorTableLookup(allowedCodePoints, AdvSimd.And(packed, vec0xF));
+                    var vecPowersOfTwoShuffled = AdvSimd.Arm64
+                        .VectorTableLookup(
+                            vecPowersOfTwo,
+                            AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
+                        );
                     var result = AdvSimd.CompareTest(
                         allowedCodePointsShuffled,
                         vecPowersOfTwoShuffled
                     );
                     var maskedResult = AdvSimd.And(result, vecPairwiseAddNibbleBitmask);
-                    resultScalar = AdvSimd.Arm64.AddPairwise(maskedResult, maskedResult)
+                    resultScalar = AdvSimd.Arm64
+                        .AddPairwise(maskedResult, maskedResult)
                         .AsUInt64()
                         .ToScalar();
 
@@ -275,21 +273,20 @@ namespace System.Text.Encodings.Web
                 // data.
 
                 Vector128<byte> packed = AdvSimd.ExtractNarrowingSaturateUnsignedLower(
-                        AdvSimd.LoadVector128(
-                            ( /* unaligned */
-                            short*)(pData + i)
-                        )
+                    AdvSimd.LoadVector128(
+                        ( /* unaligned */
+                        short*)(pData + i)
                     )
+                )
                     .AsByte()
                     .ToVector128Unsafe();
-                var allowedCodePointsShuffled = AdvSimd.Arm64.VectorTableLookup(
-                    allowedCodePoints,
-                    AdvSimd.And(packed, vec0xF)
-                );
-                var vecPowersOfTwoShuffled = AdvSimd.Arm64.VectorTableLookup(
-                    vecPowersOfTwo,
-                    AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
-                );
+                var allowedCodePointsShuffled = AdvSimd.Arm64
+                    .VectorTableLookup(allowedCodePoints, AdvSimd.And(packed, vec0xF));
+                var vecPowersOfTwoShuffled = AdvSimd.Arm64
+                    .VectorTableLookup(
+                        vecPowersOfTwo,
+                        AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
+                    );
                 var result = AdvSimd.CompareTest(allowedCodePointsShuffled, vecPowersOfTwoShuffled);
                 resultScalar = result.AsUInt64().ToScalar();
 
@@ -308,21 +305,20 @@ namespace System.Text.Encodings.Web
                 // process. Only the low 32 bits of the 'result' vector have meaningful data.
 
                 Vector128<byte> packed = AdvSimd.ExtractNarrowingSaturateUnsignedLower(
-                        AdvSimd.LoadVector64(
-                                ( /* unaligned */
-                                short*)(pData + i)
-                            )
-                            .ToVector128Unsafe()
+                    AdvSimd.LoadVector64(
+                        ( /* unaligned */
+                        short*)(pData + i)
                     )
+                        .ToVector128Unsafe()
+                )
                     .ToVector128Unsafe();
-                var allowedCodePointsShuffled = AdvSimd.Arm64.VectorTableLookup(
-                    allowedCodePoints,
-                    AdvSimd.And(packed, vec0xF)
-                );
-                var vecPowersOfTwoShuffled = AdvSimd.Arm64.VectorTableLookup(
-                    vecPowersOfTwo,
-                    AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
-                );
+                var allowedCodePointsShuffled = AdvSimd.Arm64
+                    .VectorTableLookup(allowedCodePoints, AdvSimd.And(packed, vec0xF));
+                var vecPowersOfTwoShuffled = AdvSimd.Arm64
+                    .VectorTableLookup(
+                        vecPowersOfTwo,
+                        AdvSimd.ShiftRightArithmetic(packed.AsSByte(), 4).AsByte()
+                    );
                 var result = AdvSimd.CompareTest(allowedCodePointsShuffled, vecPowersOfTwoShuffled);
                 resultScalar = result.AsUInt32().ToScalar(); // n.b. implicit conversion uint -> ulong; high 32 bits will be zeroed
 

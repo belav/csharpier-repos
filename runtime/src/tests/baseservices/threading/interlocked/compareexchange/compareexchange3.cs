@@ -61,9 +61,10 @@ public class InterlockedCompareExchange3
         Double comparand;
         Double oldLocation;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest1: Double Interlocked.CompareExchange(Double&,Double,Double) where comparand is equal"
-        );
+        TestLibrary.TestFramework
+            .BeginScenario(
+                "PosTest1: Double Interlocked.CompareExchange(Double&,Double,Double) where comparand is equal"
+            );
 
         try
         {
@@ -81,27 +82,29 @@ public class InterlockedCompareExchange3
 
                 if (!location.Equals(value))
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "001",
-                        "Interlocked.CompareExchange() did not do the exchange correctly: Expected("
-                            + value
-                            + ") Actual("
-                            + location
-                            + ")"
-                    );
+                    TestLibrary.TestFramework
+                        .LogError(
+                            "001",
+                            "Interlocked.CompareExchange() did not do the exchange correctly: Expected("
+                                + value
+                                + ") Actual("
+                                + location
+                                + ")"
+                        );
                     retVal = false;
                 }
 
                 if (!oldLocation.Equals(comparand))
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "002",
-                        "Interlocked.CompareExchange() did not return the expected value: Expected("
-                            + comparand
-                            + ") Actual("
-                            + oldLocation
-                            + ")"
-                    );
+                    TestLibrary.TestFramework
+                        .LogError(
+                            "002",
+                            "Interlocked.CompareExchange() did not return the expected value: Expected("
+                                + comparand
+                                + ") Actual("
+                                + oldLocation
+                                + ")"
+                        );
                     retVal = false;
                 }
             }
@@ -133,9 +136,10 @@ public class InterlockedCompareExchange3
         Double comparand;
         Double oldLocation;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest2: Double Interlocked.CompareExchange(Double&,Double,Double) where comparand are not equal"
-        );
+        TestLibrary.TestFramework
+            .BeginScenario(
+                "PosTest2: Double Interlocked.CompareExchange(Double&,Double,Double) where comparand are not equal"
+            );
 
         try
         {
@@ -159,27 +163,29 @@ public class InterlockedCompareExchange3
 
                 if (location.Equals(value))
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "004",
-                        "Interlocked.CompareExchange() did not do the exchange correctly: Expected("
-                            + value
-                            + ") Actual("
-                            + location
-                            + ")"
-                    );
+                    TestLibrary.TestFramework
+                        .LogError(
+                            "004",
+                            "Interlocked.CompareExchange() did not do the exchange correctly: Expected("
+                                + value
+                                + ") Actual("
+                                + location
+                                + ")"
+                        );
                     retVal = false;
                 }
 
                 if (oldLocation.Equals(comparand))
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "005",
-                        "Interlocked.CompareExchange() did not return the expected value: Expected("
-                            + location
-                            + ") Actual("
-                            + oldLocation
-                            + ")"
-                    );
+                    TestLibrary.TestFramework
+                        .LogError(
+                            "005",
+                            "Interlocked.CompareExchange() did not return the expected value: Expected("
+                                + location
+                                + ") Actual("
+                                + oldLocation
+                                + ")"
+                        );
                     retVal = false;
                 }
             }

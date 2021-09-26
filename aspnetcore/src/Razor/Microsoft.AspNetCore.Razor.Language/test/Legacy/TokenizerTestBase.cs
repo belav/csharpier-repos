@@ -30,11 +30,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     if (counter >= expectedSymbols.Length)
                     {
                         output.AppendLine(
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "F: Expected: << Nothing >>; Actual: {0}",
-                                current
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "F: Expected: << Nothing >>; Actual: {0}",
+                                    current
+                                )
                         );
                         success = false;
                     }
@@ -49,23 +50,25 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         if (!expectedSymbols[counter].IsEquivalentTo(current))
                         {
                             output.AppendLine(
-                                string.Format(
-                                    CultureInfo.InvariantCulture,
-                                    "F: Expected: {0}; Actual: {1}",
-                                    expectedSymbols[counter],
-                                    current
-                                )
+                                string
+                                    .Format(
+                                        CultureInfo.InvariantCulture,
+                                        "F: Expected: {0}; Actual: {1}",
+                                        expectedSymbols[counter],
+                                        current
+                                    )
                             );
                             success = false;
                         }
                         else
                         {
                             output.AppendLine(
-                                string.Format(
-                                    CultureInfo.InvariantCulture,
-                                    "P: Expected: {0}",
-                                    expectedSymbols[counter]
-                                )
+                                string
+                                    .Format(
+                                        CultureInfo.InvariantCulture,
+                                        "P: Expected: {0}",
+                                        expectedSymbols[counter]
+                                    )
                             );
                         }
                         counter++;
@@ -80,11 +83,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     for (; counter < expectedSymbols.Length; counter++)
                     {
                         output.AppendLine(
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "F: Expected: {0}; Actual: << None >>",
-                                expectedSymbols[counter]
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.InvariantCulture,
+                                    "F: Expected: {0}; Actual: << None >>",
+                                    expectedSymbols[counter]
+                                )
                         );
                     }
                 }

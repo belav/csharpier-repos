@@ -134,8 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
             )
             {
                 var newUsingDirective = usingDirective.WithStaticKeyword(
-                        SyntaxFactory.Token(SyntaxKind.StaticKeyword)
-                    )
+                    SyntaxFactory.Token(SyntaxKind.StaticKeyword)
+                )
                     .WithName(qualifiedName);
 
                 return root.ReplaceNode(usingDirective, newUsingDirective);

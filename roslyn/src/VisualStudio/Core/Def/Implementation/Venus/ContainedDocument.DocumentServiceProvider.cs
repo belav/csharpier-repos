@@ -182,11 +182,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     }
 
                     var classifiedSpansOnContent = await GetClassifiedSpansOnContentAsync(
-                            document,
-                            roslynSnapshot,
-                            contentSpanOnPrimarySnapshot.Value,
-                            cancellationToken
-                        )
+                        document,
+                        roslynSnapshot,
+                        contentSpanOnPrimarySnapshot.Value,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     // the default implementation has no idea how to classify the primary snapshot
@@ -244,10 +244,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                             SpanTrackingMode.EdgeExclusive
                         );
                         var classifiedSpans = await ClassifierHelper.GetClassifiedSpansAsync(
-                                document,
-                                fixedUpSpan.Span.ToTextSpan(),
-                                cancellationToken
-                            )
+                            document,
+                            fixedUpSpan.Span.ToTextSpan(),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (classifiedSpans.IsDefault)
                         {
@@ -413,15 +413,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                         // +-3 line of the line where primary span is on
                         const int AdditionalLineCountPerSide = 3;
 
-                        var startLine = line.Snapshot.GetLineFromLineNumber(
-                            Math.Max(0, line.LineNumber - AdditionalLineCountPerSide)
-                        );
-                        var endLine = line.Snapshot.GetLineFromLineNumber(
-                            Math.Min(
-                                line.Snapshot.LineCount - 1,
-                                line.LineNumber + AdditionalLineCountPerSide
-                            )
-                        );
+                        var startLine = line.Snapshot
+                            .GetLineFromLineNumber(
+                                Math.Max(0, line.LineNumber - AdditionalLineCountPerSide)
+                            );
+                        var endLine = line.Snapshot
+                            .GetLineFromLineNumber(
+                                Math.Min(
+                                    line.Snapshot.LineCount - 1,
+                                    line.LineNumber + AdditionalLineCountPerSide
+                                )
+                            );
 
                         return new SnapshotSpan(
                             line.Snapshot,

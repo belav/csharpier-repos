@@ -95,9 +95,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using var context = new SomeDbContext();
 
-                var query = context.Foos.Where(
-                    e => e.Id == new Guid("6898CFFC-3DCC-45A6-A472-A23057462EE6")
-                );
+                var query = context.Foos
+                    .Where(e => e.Id == new Guid("6898CFFC-3DCC-45A6-A472-A23057462EE6"));
 
                 _ = async ? await query.ToListAsync() : query.ToList();
 
@@ -211,8 +210,8 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        private static readonly FieldInfo _activeDbContexts =
-            typeof(EntityFrameworkEventSource).GetField("_activeDbContexts", _bindingFlags);
+        private static readonly FieldInfo _activeDbContexts = typeof(EntityFrameworkEventSource)
+            .GetField("_activeDbContexts", _bindingFlags);
 
         private static long ActiveDbContexts
         {
@@ -220,8 +219,8 @@ namespace Microsoft.EntityFrameworkCore
             set => _activeDbContexts.SetValue(EntityFrameworkEventSource.Log, value);
         }
 
-        private static readonly FieldInfo _totalQueries =
-            typeof(EntityFrameworkEventSource).GetField(nameof(_totalQueries), _bindingFlags);
+        private static readonly FieldInfo _totalQueries = typeof(EntityFrameworkEventSource)
+            .GetField(nameof(_totalQueries), _bindingFlags);
 
         private static long TotalQueries
         {
@@ -229,8 +228,8 @@ namespace Microsoft.EntityFrameworkCore
             set => _totalQueries.SetValue(EntityFrameworkEventSource.Log, value);
         }
 
-        private static readonly FieldInfo _totalSaveChanges =
-            typeof(EntityFrameworkEventSource).GetField(nameof(_totalSaveChanges), _bindingFlags);
+        private static readonly FieldInfo _totalSaveChanges = typeof(EntityFrameworkEventSource)
+            .GetField(nameof(_totalSaveChanges), _bindingFlags);
 
         private static long TotalSaveChanges
         {
@@ -239,10 +238,8 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         private static readonly FieldInfo _totalExecutionStrategyOperationFailures =
-            typeof(EntityFrameworkEventSource).GetField(
-                nameof(_totalExecutionStrategyOperationFailures),
-                _bindingFlags
-            );
+            typeof(EntityFrameworkEventSource)
+                .GetField(nameof(_totalExecutionStrategyOperationFailures), _bindingFlags);
 
         private static long TotalExecutionStrategyOperationFailures
         {
@@ -258,10 +255,8 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         private static readonly FieldInfo _totalOptimisticConcurrencyFailures =
-            typeof(EntityFrameworkEventSource).GetField(
-                nameof(_totalOptimisticConcurrencyFailures),
-                _bindingFlags
-            );
+            typeof(EntityFrameworkEventSource)
+                .GetField(nameof(_totalOptimisticConcurrencyFailures), _bindingFlags);
 
         private static long TotalOptimisticConcurrencyFailures
         {
@@ -272,13 +267,11 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         private static readonly FieldInfo _compiledQueryCacheInfo =
-            typeof(EntityFrameworkEventSource).GetField(
-                nameof(_compiledQueryCacheInfo),
-                _bindingFlags
-            );
+            typeof(EntityFrameworkEventSource)
+                .GetField(nameof(_compiledQueryCacheInfo), _bindingFlags);
 
-        private static readonly MethodInfo _resetCacheInfo =
-            typeof(EntityFrameworkEventSource).GetMethod("ResetCacheInfo", _bindingFlags);
+        private static readonly MethodInfo _resetCacheInfo = typeof(EntityFrameworkEventSource)
+            .GetMethod("ResetCacheInfo", _bindingFlags);
 
         private static readonly FieldInfo _compiledQueryCacheInfoHits =
             _compiledQueryCacheInfo.FieldType.GetField("Hits", _bindingFlags);

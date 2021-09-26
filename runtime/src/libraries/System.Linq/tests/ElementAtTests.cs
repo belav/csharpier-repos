@@ -678,9 +678,8 @@ namespace System.Linq.Tests
             Assert.Throws<ArgumentOutOfRangeException>(
                 "index",
                 () =>
-                    new TestNonGenericCollection<int>(source.ToArray()).ElementAt(
-                        new Index(int.MaxValue)
-                    )
+                    new TestNonGenericCollection<int>(source.ToArray())
+                        .ElementAt(new Index(int.MaxValue))
             );
         }
 
@@ -1026,9 +1025,8 @@ namespace System.Linq.Tests
             Assert.Throws<ArgumentOutOfRangeException>(
                 "index",
                 () =>
-                    new TestNonGenericCollection<int>(source.ToArray()).ElementAt(
-                        new Index(int.MaxValue)
-                    )
+                    new TestNonGenericCollection<int>(source.ToArray())
+                        .ElementAt(new Index(int.MaxValue))
             );
         }
     }

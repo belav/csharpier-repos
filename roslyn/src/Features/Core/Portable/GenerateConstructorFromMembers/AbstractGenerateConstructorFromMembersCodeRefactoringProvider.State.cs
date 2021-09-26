@@ -38,13 +38,13 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 var state = new State();
                 if (
                     !await state.TryInitializeAsync(
-                            service,
-                            document,
-                            textSpan,
-                            containingType,
-                            selectedMembers,
-                            cancellationToken
-                        )
+                        service,
+                        document,
+                        textSpan,
+                        containingType,
+                        selectedMembers,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -121,9 +121,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 INamedTypeSymbol containingType,
                 ImmutableArray<IParameterSymbol> parameters
             ) =>
-                containingType.InstanceConstructors.FirstOrDefault(
-                    c => MatchesConstructorBasedOnParameterTypes(c, parameters)
-                );
+                containingType.InstanceConstructors
+                    .FirstOrDefault(c => MatchesConstructorBasedOnParameterTypes(c, parameters));
 
             private static bool MatchesConstructorBasedOnParameterTypes(
                 IMethodSymbol constructor,

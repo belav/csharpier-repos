@@ -97,12 +97,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return ToMinimalDisplayParts(
-                    symbol,
-                    nullableAnnotation,
-                    semanticModel,
-                    position,
-                    format
-                )
+                symbol,
+                nullableAnnotation,
+                semanticModel,
+                position,
+                format
+            )
                 .ToDisplayString();
         }
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters

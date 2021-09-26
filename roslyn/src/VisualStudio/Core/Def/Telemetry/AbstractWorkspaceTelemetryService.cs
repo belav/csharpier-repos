@@ -76,8 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                                     {
                                         Namespace = new TelemetryPiiProperty(namespaceName),
                                         Symbols = namespaceGroup.Select(
-                                                symbol => symbol.GetDocumentationCommentId()
-                                            )
+                                            symbol => symbol.GetDocumentationCommentId()
+                                        )
                                             .Where(id => id != null)
                                             .Select(id => new TelemetryPiiProperty(id))
                                     };

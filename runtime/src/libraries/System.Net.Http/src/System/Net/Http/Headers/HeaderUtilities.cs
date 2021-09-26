@@ -50,10 +50,8 @@ namespace System.Net.Http.Headers
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
-                string qualityString = ((double)value).ToString(
-                    "0.0##",
-                    NumberFormatInfo.InvariantInfo
-                );
+                string qualityString = ((double)value)
+                    .ToString("0.0##", NumberFormatInfo.InvariantInfo);
                 if (qualityParameter != null)
                 {
                     qualityParameter.Value = qualityString;
@@ -94,9 +92,8 @@ namespace System.Net.Http.Headers
             // Encode a string using RFC 5987 encoding.
             // encoding'lang'PercentEncodedSpecials
             StringBuilder builder = StringBuilderCache.Acquire();
-            byte[] utf8bytes = ArrayPool<byte>.Shared.Rent(
-                Encoding.UTF8.GetMaxByteCount(input.Length)
-            );
+            byte[] utf8bytes = ArrayPool<byte>.Shared
+                .Rent(Encoding.UTF8.GetMaxByteCount(input.Length));
             int utf8length = Encoding.UTF8.GetBytes(input, 0, input.Length, utf8bytes, 0);
 
             builder.Append("utf-8\'\'");
@@ -156,12 +153,13 @@ namespace System.Net.Http.Headers
                 // separator is considered invalid (even if the current culture would allow it).
                 double qualityValue = 0;
                 if (
-                    double.TryParse(
-                        qualityParameter.Value,
-                        NumberStyles.AllowDecimalPoint,
-                        NumberFormatInfo.InvariantInfo,
-                        out qualityValue
-                    )
+                    double
+                        .TryParse(
+                            qualityParameter.Value,
+                            NumberStyles.AllowDecimalPoint,
+                            NumberFormatInfo.InvariantInfo,
+                            out qualityValue
+                        )
                 )
                 {
                     return qualityValue;
@@ -398,12 +396,13 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            return int.TryParse(
-                value.AsSpan(offset, length),
-                NumberStyles.None,
-                provider: null,
-                out result
-            );
+            return int
+                .TryParse(
+                    value.AsSpan(offset, length),
+                    NumberStyles.None,
+                    provider: null,
+                    out result
+                );
         }
 
         internal static bool TryParseInt64(string value, int offset, int length, out long result)
@@ -414,12 +413,13 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            return long.TryParse(
-                value.AsSpan(offset, length),
-                NumberStyles.None,
-                provider: null,
-                out result
-            );
+            return long
+                .TryParse(
+                    value.AsSpan(offset, length),
+                    NumberStyles.None,
+                    provider: null,
+                    out result
+                );
         }
 
         internal static void DumpHeaders(StringBuilder sb, params HttpHeaders?[] headers)

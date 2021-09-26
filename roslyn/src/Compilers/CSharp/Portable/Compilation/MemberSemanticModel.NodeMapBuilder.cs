@@ -60,10 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return;
                 }
 
-                var additionMap = OrderPreservingMultiDictionary<
-                    SyntaxNode,
-                    BoundNode
-                >.GetInstance();
+                var additionMap = OrderPreservingMultiDictionary<SyntaxNode, BoundNode>
+                    .GetInstance();
                 var builder = new NodeMapBuilder(additionMap, tree, node);
                 builder.Visit(root);
 
@@ -119,11 +117,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                             ((BoundTypeOrValueExpression)added[i]).Type,
                                             TypeCompareKind.ConsiderEverything2
                                         ),
-                                        string.Format(
-                                            System.Globalization.CultureInfo.InvariantCulture,
-                                            "((BoundTypeExpression)existing[{0}]).Type == ((BoundTypeOrValueExpression)added[{0}]).Type",
-                                            i
-                                        )
+                                        string
+                                            .Format(
+                                                System.Globalization.CultureInfo.InvariantCulture,
+                                                "((BoundTypeExpression)existing[{0}]).Type == ((BoundTypeOrValueExpression)added[{0}]).Type",
+                                                i
+                                            )
                                     );
                                 }
                                 else if (
@@ -137,11 +136,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                             ((BoundTypeExpression)added[i]).Type,
                                             TypeCompareKind.ConsiderEverything2
                                         ),
-                                        string.Format(
-                                            System.Globalization.CultureInfo.InvariantCulture,
-                                            "((BoundTypeOrValueExpression)existing[{0}]).Type == ((BoundTypeExpression)added[{0}]).Type",
-                                            i
-                                        )
+                                        string
+                                            .Format(
+                                                System.Globalization.CultureInfo.InvariantCulture,
+                                                "((BoundTypeOrValueExpression)existing[{0}]).Type == ((BoundTypeExpression)added[{0}]).Type",
+                                                i
+                                            )
                                     );
                                 }
                                 else
@@ -156,11 +156,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 Debug.Assert(
                                     (object)existing[i] == added[i] || !(key is StatementSyntax),
-                                    string.Format(
-                                        System.Globalization.CultureInfo.InvariantCulture,
-                                        "(object)existing[{0}] == added[{0}] || !(key is StatementSyntax)",
-                                        i
-                                    )
+                                    string
+                                        .Format(
+                                            System.Globalization.CultureInfo.InvariantCulture,
+                                            "(object)existing[{0}] == added[{0}] || !(key is StatementSyntax)",
+                                            i
+                                        )
                                 );
                             }
                         }

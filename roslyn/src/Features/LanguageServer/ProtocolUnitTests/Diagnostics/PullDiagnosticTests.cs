@@ -410,9 +410,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             Assert.Equal("CS1513", results[0].Diagnostics.Single().Code);
             Assert.Empty(results[1].Diagnostics);
 
-            testLspServer.TestWorkspace.OnDocumentRemoved(
-                testLspServer.TestWorkspace.Documents.First().Id
-            );
+            testLspServer.TestWorkspace
+                .OnDocumentRemoved(testLspServer.TestWorkspace.Documents.First().Id);
 
             var results2 = await RunGetWorkspacePullDiagnosticsAsync(
                 testLspServer,
@@ -434,13 +433,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
         )
         {
             return results.Select(
-                    r =>
-                        new DiagnosticParams
-                        {
-                            TextDocument = r.TextDocument,
-                            PreviousResultId = r.ResultId
-                        }
-                )
+                r =>
+                    new DiagnosticParams
+                    {
+                        TextDocument = r.TextDocument,
+                        PreviousResultId = r.ResultId
+                    }
+            )
                 .ToArray();
         }
 
@@ -534,10 +533,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
 
             // Hacky, but we need to close the document manually since editing the text-buffer will open it in the
             // test-workspace.
-            testLspServer.TestWorkspace.OnDocumentClosed(
-                document.Id,
-                TextLoader.From(TextAndVersion.Create(text, VersionStamp.Create()))
-            );
+            testLspServer.TestWorkspace
+                .OnDocumentClosed(
+                    document.Id,
+                    TextLoader.From(TextAndVersion.Create(text, VersionStamp.Create()))
+                );
 
             var results2 = await RunGetWorkspacePullDiagnosticsAsync(testLspServer);
 
@@ -689,22 +689,24 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
         )
         {
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                            SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                            LanguageNames.CSharp,
-                            scope
-                        )
-                        .WithChangedOption(
-                            SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                            LanguageNames.VisualBasic,
-                            scope
-                        )
-                        .WithChangedOption(
-                            InternalDiagnosticsOptions.NormalDiagnosticMode,
-                            pullDiagnostics ? DiagnosticMode.Pull : DiagnosticMode.Push
-                        )
-                )
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(
+                                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                                LanguageNames.CSharp,
+                                scope
+                            )
+                            .WithChangedOption(
+                                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                                LanguageNames.VisualBasic,
+                                scope
+                            )
+                            .WithChangedOption(
+                                InternalDiagnosticsOptions.NormalDiagnosticMode,
+                                pullDiagnostics ? DiagnosticMode.Pull : DiagnosticMode.Push
+                            )
+                    )
             );
 
             var analyzerReference = new TestAnalyzerReferenceByLanguage(
@@ -714,12 +716,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
                 workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
             );
 
-            var registrationService =
-                workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var registrationService = workspace.Services
+                .GetRequiredService<ISolutionCrawlerRegistrationService>();
             registrationService.Register(workspace);
 
-            var diagnosticService =
-                (DiagnosticService)workspace.ExportProvider.GetExportedValue<IDiagnosticService>();
+            var diagnosticService = (DiagnosticService)workspace.ExportProvider
+                .GetExportedValue<IDiagnosticService>();
             diagnosticService.Register(new TestHostDiagnosticUpdateSource(workspace));
         }
     }

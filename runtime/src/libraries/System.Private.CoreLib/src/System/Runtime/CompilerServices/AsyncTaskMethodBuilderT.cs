@@ -255,11 +255,8 @@ namespace System.Runtime.CompilerServices
             // Log the creation of the state machine box object / task for this async method.
             if (TplEventSource.Log.IsEnabled())
             {
-                TplEventSource.Log.TraceOperationBegin(
-                    box.Id,
-                    "Async: " + stateMachine.GetType().Name,
-                    0
-                );
+                TplEventSource.Log
+                    .TraceOperationBegin(box.Id, "Async: " + stateMachine.GetType().Name, 0);
             }
 
             // And if async debugging is enabled, track the task.
@@ -316,7 +313,8 @@ namespace System.Runtime.CompilerServices
             {
                 Debug.Assert(s is AsyncStateMachineBox<TStateMachine>);
                 // Only used privately to pass directly to EC.Run
-                Unsafe.As<AsyncStateMachineBox<TStateMachine>>(s).StateMachine!.MoveNext();
+                Unsafe.As<AsyncStateMachineBox<TStateMachine>>(s).StateMachine!
+                    .MoveNext();
             }
 
             /// <summary>A delegate to the <see cref="MoveNext()"/> method.</summary>
@@ -342,10 +340,8 @@ namespace System.Runtime.CompilerServices
                 bool loggingOn = TplEventSource.Log.IsEnabled();
                 if (loggingOn)
                 {
-                    TplEventSource.Log.TraceSynchronousWorkBegin(
-                        this.Id,
-                        CausalitySynchronousWork.Execution
-                    );
+                    TplEventSource.Log
+                        .TraceSynchronousWorkBegin(this.Id, CausalitySynchronousWork.Execution);
                 }
 
                 ExecutionContext? context = Context;
@@ -545,9 +541,8 @@ namespace System.Runtime.CompilerServices
         )
         {
             // Get the task (forcing initialization if not already initialized), and set debug notification
-            (taskField ??= CreateWeaklyTypedStateMachineBox()).SetNotificationForWaitCompletion(
-                enabled
-            );
+            (taskField ??= CreateWeaklyTypedStateMachineBox())
+                .SetNotificationForWaitCompletion(enabled);
             // NOTE: It's important that the debugger use builder.SetNotificationForWaitCompletion
             // rather than builder.Task.SetNotificationForWaitCompletion.  Even though the latter will
             // lazily-initialize the task as well, it'll initialize it to a Task<T> (which is important

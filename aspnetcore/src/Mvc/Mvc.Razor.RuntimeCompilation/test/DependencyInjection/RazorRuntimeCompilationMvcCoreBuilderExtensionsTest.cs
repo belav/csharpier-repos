@@ -17,10 +17,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public void AddServices_ReplacesRazorViewCompiler()
         {
             // Arrange
-            var services = new ServiceCollection().AddSingleton<
-                IViewCompilerProvider,
-                DefaultViewCompilerProvider
-            >();
+            var services = new ServiceCollection()
+                .AddSingleton<IViewCompilerProvider, DefaultViewCompilerProvider>();
 
             // Act
             RazorRuntimeCompilationMvcCoreBuilderExtensions.AddServices(services);
@@ -37,10 +35,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public void AddServices_ReplacesActionDescriptorProvider()
         {
             // Arrange
-            var services = new ServiceCollection().AddSingleton<
-                IActionDescriptorProvider,
-                CompiledPageActionDescriptorProvider
-            >();
+            var services = new ServiceCollection()
+                .AddSingleton<IActionDescriptorProvider, CompiledPageActionDescriptorProvider>();
 
             // Act
             RazorRuntimeCompilationMvcCoreBuilderExtensions.AddServices(services);

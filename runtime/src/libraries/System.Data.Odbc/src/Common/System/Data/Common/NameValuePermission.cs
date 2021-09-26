@@ -286,11 +286,12 @@ namespace System.Data.Common
                 {
                     NameValuePermission permitValue = valuetree[i];
                     if (
-                        string.Equals(
-                            keyInQuestion,
-                            permitValue._value,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                keyInQuestion,
+                                permitValue._value,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         return permitValue;

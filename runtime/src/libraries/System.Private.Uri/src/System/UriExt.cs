@@ -413,11 +413,12 @@ namespace System
                       ? -1
                       : string.Compare(uri1.OriginalString, uri2.OriginalString, comparisonType);
 
-            return string.Compare(
-                uri1.GetParts(partsToCompare, compareFormat),
-                uri2.GetParts(partsToCompare, compareFormat),
-                comparisonType
-            );
+            return string
+                .Compare(
+                    uri1.GetParts(partsToCompare, compareFormat),
+                    uri2.GetParts(partsToCompare, compareFormat),
+                    comparisonType
+                );
         }
 
         public bool IsWellFormedOriginalString()

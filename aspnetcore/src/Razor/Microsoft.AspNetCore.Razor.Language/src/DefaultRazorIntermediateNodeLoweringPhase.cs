@@ -203,11 +203,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                         if (descriptor.Usage == DirectiveUsage.FileScopedSinglyOccurring)
                         {
                             // A block directive cannot be imported.
-                            document.Diagnostics.Add(
-                                RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported(
-                                    descriptor.Directive
-                                )
-                            );
+                            document.Diagnostics
+                                .Add(
+                                    RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported(
+                                        descriptor.Directive
+                                    )
+                                );
                         }
                         break;
                     }
@@ -382,8 +383,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                         new DirectiveTokenIntermediateNode()
                         {
                             Content = addTagHelperChunkGenerator.LookupText,
-                            DirectiveToken =
-                                CSharpCodeParser.AddTagHelperDirectiveDescriptor.Tokens.First(),
+                            DirectiveToken = CSharpCodeParser.AddTagHelperDirectiveDescriptor.Tokens
+                                .First(),
                             Source = BuildSourceSpanFromNode(node),
                         }
                     );
@@ -552,7 +553,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     )
                     {
                         // We need to do what ConditionalAttributeCollapser used to do.
-                        var literalAttributeValueNodes = node.Value.ChildNodes()
+                        var literalAttributeValueNodes = node.Value
+                            .ChildNodes()
                             .Cast<MarkupLiteralAttributeValueSyntax>()
                             .ToArray();
                         var valueTokens = SyntaxListBuilder<SyntaxToken>.Create();
@@ -704,15 +706,13 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 if (templateNode.Children.Count > 0)
                 {
-                    var sourceRangeStart = templateNode.Children.FirstOrDefault(
-                        child => child.Source != null
-                    )?.Source;
+                    var sourceRangeStart = templateNode.Children
+                        .FirstOrDefault(child => child.Source != null)?.Source;
 
                     if (sourceRangeStart != null)
                     {
-                        var contentLength = templateNode.Children.Sum(
-                            child => child.Source?.Length ?? 0
-                        );
+                        var contentLength = templateNode.Children
+                            .Sum(child => child.Source?.Length ?? 0);
 
                         templateNode.Source = new SourceSpan(
                             sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -749,15 +749,13 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 if (expressionNode.Children.Count > 0)
                 {
-                    var sourceRangeStart = expressionNode.Children.FirstOrDefault(
-                        child => child.Source != null
-                    )?.Source;
+                    var sourceRangeStart = expressionNode.Children
+                        .FirstOrDefault(child => child.Source != null)?.Source;
 
                     if (sourceRangeStart != null)
                     {
-                        var contentLength = expressionNode.Children.Sum(
-                            child => child.Source?.Length ?? 0
-                        );
+                        var contentLength = expressionNode.Children
+                            .Sum(child => child.Source?.Length ?? 0);
 
                         expressionNode.Source = new SourceSpan(
                             sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -788,15 +786,13 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 if (expressionNode.Children.Count > 0)
                 {
-                    var sourceRangeStart = expressionNode.Children.FirstOrDefault(
-                        child => child.Source != null
-                    )?.Source;
+                    var sourceRangeStart = expressionNode.Children
+                        .FirstOrDefault(child => child.Source != null)?.Source;
 
                     if (sourceRangeStart != null)
                     {
-                        var contentLength = expressionNode.Children.Sum(
-                            child => child.Source?.Length ?? 0
-                        );
+                        var contentLength = expressionNode.Children
+                            .Sum(child => child.Source?.Length ?? 0);
 
                         expressionNode.Source = new SourceSpan(
                             sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -1047,21 +1043,22 @@ namespace Microsoft.AspNetCore.Razor.Language
                 var attributeName = node.Name.GetContent();
                 var associatedDescriptors = descriptors.Where(
                     descriptor =>
-                        descriptor.BoundAttributes.Any(
-                            attributeDescriptor =>
-                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                    attributeName,
-                                    attributeDescriptor
-                                )
-                        )
+                        descriptor.BoundAttributes
+                            .Any(
+                                attributeDescriptor =>
+                                    TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                        attributeName,
+                                        attributeDescriptor
+                                    )
+                            )
                 );
 
                 if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
                 {
                     foreach (var associatedDescriptor in associatedDescriptors)
                     {
-                        var associatedAttributeDescriptor =
-                            associatedDescriptor.BoundAttributes.First(
+                        var associatedAttributeDescriptor = associatedDescriptor.BoundAttributes
+                            .First(
                                 a =>
                                 {
                                     return TagHelperMatchingConventions.CanSatisfyBoundAttribute(
@@ -1118,21 +1115,22 @@ namespace Microsoft.AspNetCore.Razor.Language
                 var attributeValueNode = node.Value;
                 var associatedDescriptors = descriptors.Where(
                     descriptor =>
-                        descriptor.BoundAttributes.Any(
-                            attributeDescriptor =>
-                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                    attributeName,
-                                    attributeDescriptor
-                                )
-                        )
+                        descriptor.BoundAttributes
+                            .Any(
+                                attributeDescriptor =>
+                                    TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                        attributeName,
+                                        attributeDescriptor
+                                    )
+                            )
                 );
 
                 if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
                 {
                     foreach (var associatedDescriptor in associatedDescriptors)
                     {
-                        var associatedAttributeDescriptor =
-                            associatedDescriptor.BoundAttributes.First(
+                        var associatedAttributeDescriptor = associatedDescriptor.BoundAttributes
+                            .First(
                                 a =>
                                 {
                                     return TagHelperMatchingConventions.CanSatisfyBoundAttribute(
@@ -1254,10 +1252,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     node.Value?.LiteralTokens
                 );
                 var rewritten = node.Prefix?.Update(valueTokens) ?? node.Value?.Update(valueTokens);
-                rewritten = (MarkupTextLiteralSyntax)rewritten?.Green.CreateRed(
-                    node,
-                    node.Position
-                );
+                rewritten = (MarkupTextLiteralSyntax)rewritten?.Green
+                    .CreateRed(node, node.Position);
                 var originalContext = rewritten.GetSpanContext();
                 if (originalContext != null)
                 {
@@ -1271,14 +1267,15 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             private void Combine(HtmlContentIntermediateNode node, SyntaxNode item)
             {
-                node.Children.Add(
-                    new LazyIntermediateToken()
-                    {
-                        ContentFactory = () => item.GetContent(),
-                        Kind = TokenKind.Html,
-                        Source = BuildSourceSpanFromNode(item),
-                    }
-                );
+                node.Children
+                    .Add(
+                        new LazyIntermediateToken()
+                        {
+                            ContentFactory = () => item.GetContent(),
+                            Kind = TokenKind.Html,
+                            Source = BuildSourceSpanFromNode(item),
+                        }
+                    );
 
                 if (node.Source != null)
                 {
@@ -1353,12 +1350,13 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 if (node.StartTag != null && node.EndTag != null && node.StartTag.IsVoidElement())
                 {
-                    element.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_UnexpectedClosingTagForVoidElement(
-                            BuildSourceSpanFromNode(node.EndTag),
-                            node.EndTag.GetTagNameWithOptionalBang()
-                        )
-                    );
+                    element.Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_UnexpectedClosingTagForVoidElement(
+                                BuildSourceSpanFromNode(node.EndTag),
+                                node.EndTag.GetTagNameWithOptionalBang()
+                            )
+                        );
                 }
                 else if (
                     node.StartTag != null
@@ -1367,21 +1365,23 @@ namespace Microsoft.AspNetCore.Razor.Language
                     && !node.StartTag.IsSelfClosing()
                 )
                 {
-                    element.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_UnclosedTag(
-                            BuildSourceSpanFromNode(node.StartTag),
-                            node.StartTag.GetTagNameWithOptionalBang()
-                        )
-                    );
+                    element.Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_UnclosedTag(
+                                BuildSourceSpanFromNode(node.StartTag),
+                                node.StartTag.GetTagNameWithOptionalBang()
+                            )
+                        );
                 }
                 else if (node.StartTag == null && node.EndTag != null)
                 {
-                    element.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_UnexpectedClosingTag(
-                            BuildSourceSpanFromNode(node.EndTag),
-                            node.EndTag.GetTagNameWithOptionalBang()
-                        )
-                    );
+                    element.Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_UnexpectedClosingTag(
+                                BuildSourceSpanFromNode(node.EndTag),
+                                node.EndTag.GetTagNameWithOptionalBang()
+                            )
+                        );
                 }
 
                 if (node.StartTag != null && !_document.Options.SuppressPrimaryMethodBody)
@@ -1396,12 +1396,13 @@ namespace Microsoft.AspNetCore.Razor.Language
                     {
                         // A markup element that starts with an uppercase character.
                         // It is most likely intended to be a component. Add a warning.
-                        element.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_UnexpectedMarkupElement(
-                                startTagName,
-                                BuildSourceSpanFromNode(node.StartTag)
-                            )
-                        );
+                        element.Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_UnexpectedMarkupElement(
+                                    startTagName,
+                                    BuildSourceSpanFromNode(node.StartTag)
+                                )
+                            );
                     }
                 }
 
@@ -1687,15 +1688,13 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 if (templateNode.Children.Count > 0)
                 {
-                    var sourceRangeStart = templateNode.Children.FirstOrDefault(
-                        child => child.Source != null
-                    )?.Source;
+                    var sourceRangeStart = templateNode.Children
+                        .FirstOrDefault(child => child.Source != null)?.Source;
 
                     if (sourceRangeStart != null)
                     {
-                        var contentLength = templateNode.Children.Sum(
-                            child => child.Source?.Length ?? 0
-                        );
+                        var contentLength = templateNode.Children
+                            .Sum(child => child.Source?.Length ?? 0);
 
                         templateNode.Source = new SourceSpan(
                             sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -1750,15 +1749,13 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 if (expressionNode.Children.Count > 0)
                 {
-                    var sourceRangeStart = expressionNode.Children.FirstOrDefault(
-                        child => child.Source != null
-                    )?.Source;
+                    var sourceRangeStart = expressionNode.Children
+                        .FirstOrDefault(child => child.Source != null)?.Source;
 
                     if (sourceRangeStart != null)
                     {
-                        var contentLength = expressionNode.Children.Sum(
-                            child => child.Source?.Length ?? 0
-                        );
+                        var contentLength = expressionNode.Children
+                            .Sum(child => child.Source?.Length ?? 0);
 
                         expressionNode.Source = new SourceSpan(
                             sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -1807,15 +1804,13 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 if (expressionNode.Children.Count > 0)
                 {
-                    var sourceRangeStart = expressionNode.Children.FirstOrDefault(
-                        child => child.Source != null
-                    )?.Source;
+                    var sourceRangeStart = expressionNode.Children
+                        .FirstOrDefault(child => child.Source != null)?.Source;
 
                     if (sourceRangeStart != null)
                     {
-                        var contentLength = expressionNode.Children.Sum(
-                            child => child.Source?.Length ?? 0
-                        );
+                        var contentLength = expressionNode.Children
+                            .Sum(child => child.Source?.Length ?? 0);
 
                         expressionNode.Source = new SourceSpan(
                             sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -1932,13 +1927,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                     {
                         // This is most likely a case mismatch in start and end tags. Otherwise the parser wouldn't have grouped them together.
                         // But we can't have case mismatch in start and end tags in components. Add a diagnostic.
-                        tagHelperNode.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_InconsistentStartAndEndTagName(
-                                startTagName,
-                                endTagName,
-                                BuildSourceSpanFromNode(node.EndTag)
-                            )
-                        );
+                        tagHelperNode.Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_InconsistentStartAndEndTagName(
+                                    startTagName,
+                                    endTagName,
+                                    BuildSourceSpanFromNode(node.EndTag)
+                                )
+                            );
                     }
                 }
             }
@@ -1975,13 +1971,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                 var attributeName = node.Name.GetContent();
                 var associatedDescriptors = descriptors.Where(
                     descriptor =>
-                        descriptor.BoundAttributes.Any(
-                            attributeDescriptor =>
-                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                    attributeName,
-                                    attributeDescriptor
-                                )
-                        )
+                        descriptor.BoundAttributes
+                            .Any(
+                                attributeDescriptor =>
+                                    TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                        attributeName,
+                                        attributeDescriptor
+                                    )
+                            )
                 );
 
                 if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
@@ -2050,13 +2047,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                 var attributeName = node.FullName;
                 var associatedDescriptors = descriptors.Where(
                     descriptor =>
-                        descriptor.BoundAttributes.Any(
-                            attributeDescriptor =>
-                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                    attributeName,
-                                    attributeDescriptor
-                                )
-                        )
+                        descriptor.BoundAttributes
+                            .Any(
+                                attributeDescriptor =>
+                                    TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                        attributeName,
+                                        attributeDescriptor
+                                    )
+                            )
                 );
 
                 if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
@@ -2167,13 +2165,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                 var attributeValueNode = node.Value;
                 var associatedDescriptors = descriptors.Where(
                     descriptor =>
-                        descriptor.BoundAttributes.Any(
-                            attributeDescriptor =>
-                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                    attributeName,
-                                    attributeDescriptor
-                                )
-                        )
+                        descriptor.BoundAttributes
+                            .Any(
+                                attributeDescriptor =>
+                                    TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                        attributeName,
+                                        attributeDescriptor
+                                    )
+                            )
                 );
 
                 if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
@@ -2232,13 +2231,14 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 var associatedDescriptors = descriptors.Where(
                     descriptor =>
-                        descriptor.BoundAttributes.Any(
-                            attributeDescriptor =>
-                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                    attributeName,
-                                    attributeDescriptor
-                                )
-                        )
+                        descriptor.BoundAttributes
+                            .Any(
+                                attributeDescriptor =>
+                                    TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                        attributeName,
+                                        attributeDescriptor
+                                    )
+                            )
                 );
 
                 if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
@@ -2406,10 +2406,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     node.Value?.LiteralTokens
                 );
                 var rewritten = node.Prefix?.Update(valueTokens) ?? node.Value?.Update(valueTokens);
-                rewritten = (MarkupTextLiteralSyntax)rewritten?.Green.CreateRed(
-                    node,
-                    node.Position
-                );
+                rewritten = (MarkupTextLiteralSyntax)rewritten?.Green
+                    .CreateRed(node, node.Position);
                 var originalContext = rewritten.GetSpanContext();
                 if (originalContext != null)
                 {
@@ -2423,14 +2421,15 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             private void Combine(HtmlContentIntermediateNode node, SyntaxNode item)
             {
-                node.Children.Add(
-                    new LazyIntermediateToken()
-                    {
-                        ContentFactory = () => item.GetContent(),
-                        Kind = TokenKind.Html,
-                        Source = BuildSourceSpanFromNode(item),
-                    }
-                );
+                node.Children
+                    .Add(
+                        new LazyIntermediateToken()
+                        {
+                            ContentFactory = () => item.GetContent(),
+                            Kind = TokenKind.Html,
+                            Source = BuildSourceSpanFromNode(item),
+                        }
+                    );
 
                 if (node.Source != null)
                 {
@@ -2481,44 +2480,48 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public override void VisitMarkupElement(MarkupElementSyntax node)
             {
-                _document.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                        BuildSourceSpanFromNode(node)
-                    )
-                );
+                _document.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                            BuildSourceSpanFromNode(node)
+                        )
+                    );
 
                 base.VisitMarkupElement(node);
             }
 
             public override void VisitMarkupCommentBlock(MarkupCommentBlockSyntax node)
             {
-                _document.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                        BuildSourceSpanFromNode(node)
-                    )
-                );
+                _document.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                            BuildSourceSpanFromNode(node)
+                        )
+                    );
 
                 base.VisitMarkupCommentBlock(node);
             }
 
             public override void VisitMarkupTagHelperElement(MarkupTagHelperElementSyntax node)
             {
-                _document.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                        BuildSourceSpanFromNode(node)
-                    )
-                );
+                _document.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                            BuildSourceSpanFromNode(node)
+                        )
+                    );
 
                 base.VisitMarkupTagHelperElement(node);
             }
 
             public override void VisitCSharpExplicitExpression(CSharpExplicitExpressionSyntax node)
             {
-                _document.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                        BuildSourceSpanFromNode(node)
-                    )
-                );
+                _document.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                            BuildSourceSpanFromNode(node)
+                        )
+                    );
 
                 base.VisitCSharpExplicitExpression(node);
             }
@@ -2548,15 +2551,13 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 if (expressionNode.Children.Count > 0)
                 {
-                    var sourceRangeStart = expressionNode.Children.FirstOrDefault(
-                        child => child.Source != null
-                    )?.Source;
+                    var sourceRangeStart = expressionNode.Children
+                        .FirstOrDefault(child => child.Source != null)?.Source;
 
                     if (sourceRangeStart != null)
                     {
-                        var contentLength = expressionNode.Children.Sum(
-                            child => child.Source?.Length ?? 0
-                        );
+                        var contentLength = expressionNode.Children
+                            .Sum(child => child.Source?.Length ?? 0);
 
                         expressionNode.Source = new SourceSpan(
                             sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -2568,11 +2569,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                     }
                 }
 
-                _document.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                        expressionNode.Source
-                    )
-                );
+                _document.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                            expressionNode.Source
+                        )
+                    );
 
                 base.VisitCSharpImplicitExpression(node);
             }
@@ -2600,11 +2602,12 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public override void VisitCSharpStatement(CSharpStatementSyntax node)
             {
-                _document.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                        BuildSourceSpanFromNode(node)
-                    )
-                );
+                _document.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                            BuildSourceSpanFromNode(node)
+                        )
+                    );
 
                 base.VisitCSharpStatement(node);
             }

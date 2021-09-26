@@ -57,10 +57,8 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             Byte value = TestLibrary.Generator.GetByte();
-            object result = typeof(Vector128).GetMethod(
-                    nameof(Vector128.Create),
-                    new Type[] { typeof(Byte) }
-                )
+            object result = typeof(Vector128)
+                .GetMethod(nameof(Vector128.Create), new Type[] { typeof(Byte) })
                 .Invoke(null, new object[] { value });
 
             ValidateResult((Vector128<Byte>)(result), value);
@@ -103,13 +101,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128.Create(Byte): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128.Create(Byte): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -561,11 +561,8 @@ namespace System.Text.Json.Serialization.Tests
             json = JsonSerializer.Serialize(obj, s_serializerOptionsPreserve);
 
             // Duplicate the unicode character 'charsInProperty' times.
-            string longPropertyNameEscaped = new StringBuilder().Insert(
-                    0,
-                    @"\u0467",
-                    charsInProperty
-                )
+            string longPropertyNameEscaped = new StringBuilder()
+                .Insert(0, @"\u0467", charsInProperty)
                 .ToString();
             string expectedJson = $"{{\"$id\":\"1\",\"{longPropertyNameEscaped}\":1}}";
             Assert.Equal(expectedJson, json);
@@ -581,7 +578,8 @@ namespace System.Text.Json.Serialization.Tests
             json = JsonSerializer.Serialize(obj, optionsWithEncoder);
 
             // Duplicate the unicode character 'charsInProperty' times.
-            longPropertyNameEscaped = new StringBuilder().Insert(0, "\u0467", charsInProperty)
+            longPropertyNameEscaped = new StringBuilder()
+                .Insert(0, "\u0467", charsInProperty)
                 .ToString();
             expectedJson = $"{{\"$id\":\"1\",\"{longPropertyNameEscaped}\":1}}";
             Assert.Equal(expectedJson, json);

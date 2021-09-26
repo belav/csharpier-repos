@@ -65,8 +65,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             _timeoutControl.Debugger = Mock.Of<IDebugger>();
 
             _mockKestrelTrace.Setup(
-                    m => m.Http3ConnectionClosed(It.IsAny<string>(), It.IsAny<long>())
-                )
+                m => m.Http3ConnectionClosed(It.IsAny<string>(), It.IsAny<long>())
+            )
                 .Callback(() => _closedStateReached.SetResult());
 
             _noopApplication = context => Task.CompletedTask;
@@ -345,7 +345,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
                 while (true)
                 {
-                    var result = await _pair.Application.Input.ReadAsync()
+                    var result = await _pair.Application.Input
+                        .ReadAsync()
                         .AsTask()
                         .DefaultTimeout();
                     var buffer = result.Buffer;
@@ -521,9 +522,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             public void OnStaticIndexedHeader(int index, ReadOnlySpan<byte> value)
             {
                 _decodedHeaders[
-                    (
-                        (Span<byte>)H3StaticTable.GetHeaderFieldAt(index).Name
-                    ).GetAsciiStringNonNullCharacters()
+                    ((Span<byte>)H3StaticTable.GetHeaderFieldAt(index).Name)
+                        .GetAsciiStringNonNullCharacters()
                 ] = value.GetAsciiOrUTF8StringNonNullCharacters();
             }
 

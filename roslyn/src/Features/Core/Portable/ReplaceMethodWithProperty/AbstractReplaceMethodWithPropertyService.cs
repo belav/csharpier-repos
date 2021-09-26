@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
         {
             var getMethodDeclaration = getAndSetMethods.GetMethodDeclaration;
             var setMethodDeclaration = getAndSetMethods.SetMethodDeclaration;
-            var finalLeadingTrivia = getAndSetMethods.GetMethodDeclaration.GetLeadingTrivia()
+            var finalLeadingTrivia = getAndSetMethods.GetMethodDeclaration
+                .GetLeadingTrivia()
                 .ToList();
 
             //If there is a comment on the same line as the method it is contained in trailing trivia for the parameter list

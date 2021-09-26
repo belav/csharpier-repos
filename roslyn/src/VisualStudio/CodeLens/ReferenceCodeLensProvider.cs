@@ -107,9 +107,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     keys = _dataPoints.Keys.ToImmutableArray();
                 }
 
-                var projectVersions = await _lazyCodeLensCallbackService.Value.InvokeAsync<
-                    ImmutableDictionary<Guid, string>
-                >(
+                var projectVersions = await _lazyCodeLensCallbackService.Value
+                    .InvokeAsync<ImmutableDictionary<Guid, string>>(
                         this,
                         nameof(ICodeLensContext.GetProjectVersionsAsync),
                         new object[] { keys },
@@ -263,11 +262,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 // we always get data through VS rather than Roslyn OOP directly since we want final data rather than
                 // raw data from Roslyn OOP such as razor find all reference results
                 var referenceCountOpt = await _callbackService.InvokeAsync<ReferenceCount?>(
-                        _owner,
-                        nameof(ICodeLensContext.GetReferenceCountAsync),
-                        new object?[] { Descriptor, descriptorContext, _calculatedReferenceCount },
-                        cancellationToken
-                    )
+                    _owner,
+                    nameof(ICodeLensContext.GetReferenceCountAsync),
+                    new object?[] { Descriptor, descriptorContext, _calculatedReferenceCount },
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!referenceCountOpt.HasValue)
@@ -284,16 +283,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     Description =
                         referenceCount.Count == 1
                             ? string.Format(CodeLensVSResources._0_reference, referenceCountString)
-                            : string.Format(
-                                  CodeLensVSResources._0_references,
-                                  referenceCountString
-                              ),
+                            : string
+                              .Format(CodeLensVSResources._0_references, referenceCountString),
                     IntValue = referenceCount.Count,
-                    TooltipText = string.Format(
-                        CodeLensVSResources.This_0_has_1_references,
-                        codeElementKind,
-                        referenceCountString
-                    ),
+                    TooltipText = string
+                        .Format(
+                            CodeLensVSResources.This_0_has_1_references,
+                            codeElementKind,
+                            referenceCountString
+                        ),
                     ImageId = null
                 };
 
@@ -324,11 +322,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 // raw data from Roslyn OOP such as razor find all reference results
                 var referenceLocationDescriptors =
                     await _callbackService.InvokeAsync<(string projectVersion, ImmutableArray<ReferenceLocationDescriptor> references)?>(
-                            _owner,
-                            nameof(ICodeLensContext.FindReferenceLocationsAsync),
-                            new object[] { Descriptor, descriptorContext },
-                            cancellationToken
-                        )
+                        _owner,
+                        nameof(ICodeLensContext.FindReferenceLocationsAsync),
+                        new object[] { Descriptor, descriptorContext },
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 // Keep track of the exact reference count
@@ -348,77 +346,76 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 }
 
                 var entries = referenceLocationDescriptors?.references.Select(
-                        referenceLocationDescriptor =>
+                    referenceLocationDescriptor =>
+                    {
+                        ImageId imageId = default;
+                        if (referenceLocationDescriptor.Glyph.HasValue)
                         {
-                            ImageId imageId = default;
-                            if (referenceLocationDescriptor.Glyph.HasValue)
-                            {
-                                var moniker =
-                                    referenceLocationDescriptor.Glyph.Value.GetImageMoniker();
-                                imageId = new ImageId(moniker.Guid, moniker.Id);
-                            }
-
-                            return new CodeLensDetailEntryDescriptor()
-                            {
-                                // use default since reference codelens don't require special behaviors
-                                NavigationCommand = null,
-                                NavigationCommandArgs = null,
-                                Tooltip = null,
-                                Fields = new List<CodeLensDetailEntryField>()
-                                {
-                                    new CodeLensDetailEntryField()
-                                    {
-                                        Text = referenceLocationDescriptor.FilePath
-                                    },
-                                    new CodeLensDetailEntryField()
-                                    {
-                                        Text = referenceLocationDescriptor.LineNumber.ToString()
-                                    },
-                                    new CodeLensDetailEntryField()
-                                    {
-                                        Text = referenceLocationDescriptor.ColumnNumber.ToString()
-                                    },
-                                    new CodeLensDetailEntryField()
-                                    {
-                                        Text = referenceLocationDescriptor.ReferenceLineText
-                                    },
-                                    new CodeLensDetailEntryField()
-                                    {
-                                        Text = referenceLocationDescriptor.ReferenceStart.ToString()
-                                    },
-                                    new CodeLensDetailEntryField()
-                                    {
-                                        Text = (
-                                            referenceLocationDescriptor.ReferenceStart
-                                            + referenceLocationDescriptor.ReferenceLength
-                                        ).ToString()
-                                    },
-                                    new CodeLensDetailEntryField()
-                                    {
-                                        Text = referenceLocationDescriptor.LongDescription
-                                    },
-                                    new CodeLensDetailEntryField() { ImageId = imageId },
-                                    new CodeLensDetailEntryField()
-                                    {
-                                        Text = referenceLocationDescriptor.BeforeReferenceText2
-                                    },
-                                    new CodeLensDetailEntryField()
-                                    {
-                                        Text = referenceLocationDescriptor.BeforeReferenceText1
-                                    },
-                                    new CodeLensDetailEntryField()
-                                    {
-                                        Text = referenceLocationDescriptor.AfterReferenceText1
-                                    },
-                                    new CodeLensDetailEntryField()
-                                    {
-                                        Text = referenceLocationDescriptor.AfterReferenceText2
-                                    }
-                                },
-                            };
+                            var moniker = referenceLocationDescriptor.Glyph.Value.GetImageMoniker();
+                            imageId = new ImageId(moniker.Guid, moniker.Id);
                         }
-                    )
-                    .ToList();
+
+                        return new CodeLensDetailEntryDescriptor()
+                        {
+                            // use default since reference codelens don't require special behaviors
+                            NavigationCommand = null,
+                            NavigationCommandArgs = null,
+                            Tooltip = null,
+                            Fields = new List<CodeLensDetailEntryField>()
+                            {
+                                new CodeLensDetailEntryField()
+                                {
+                                    Text = referenceLocationDescriptor.FilePath
+                                },
+                                new CodeLensDetailEntryField()
+                                {
+                                    Text = referenceLocationDescriptor.LineNumber.ToString()
+                                },
+                                new CodeLensDetailEntryField()
+                                {
+                                    Text = referenceLocationDescriptor.ColumnNumber.ToString()
+                                },
+                                new CodeLensDetailEntryField()
+                                {
+                                    Text = referenceLocationDescriptor.ReferenceLineText
+                                },
+                                new CodeLensDetailEntryField()
+                                {
+                                    Text = referenceLocationDescriptor.ReferenceStart.ToString()
+                                },
+                                new CodeLensDetailEntryField()
+                                {
+                                    Text = (
+                                        referenceLocationDescriptor.ReferenceStart
+                                        + referenceLocationDescriptor.ReferenceLength
+                                    )
+                                        .ToString()
+                                },
+                                new CodeLensDetailEntryField()
+                                {
+                                    Text = referenceLocationDescriptor.LongDescription
+                                },
+                                new CodeLensDetailEntryField() { ImageId = imageId },
+                                new CodeLensDetailEntryField()
+                                {
+                                    Text = referenceLocationDescriptor.BeforeReferenceText2
+                                },
+                                new CodeLensDetailEntryField()
+                                {
+                                    Text = referenceLocationDescriptor.BeforeReferenceText1
+                                },
+                                new CodeLensDetailEntryField()
+                                {
+                                    Text = referenceLocationDescriptor.AfterReferenceText1
+                                },
+                                new CodeLensDetailEntryField()
+                                {
+                                    Text = referenceLocationDescriptor.AfterReferenceText2
+                                }
+                            },
+                        };
+                    }
+                ).ToList();
 
                 return new CodeLensDetailsDescriptor
                 {

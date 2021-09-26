@@ -118,7 +118,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             }
 
             if (
-                typeof(IAsyncDisposable).GetTypeInfo()
+                typeof(IAsyncDisposable)
+                    .GetTypeInfo()
                     .IsAssignableFrom(descriptor.ControllerTypeInfo)
             )
             {

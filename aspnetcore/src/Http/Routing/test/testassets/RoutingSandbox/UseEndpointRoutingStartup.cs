@@ -18,9 +18,8 @@ namespace RoutingSandbox
 {
     public class UseEndpointRoutingStartup
     {
-        private static readonly byte[] _homePayload = Encoding.UTF8.GetBytes(
-            "Endpoint Routing sample endpoints:" + Environment.NewLine + "/plaintext"
-        );
+        private static readonly byte[] _homePayload = Encoding.UTF8
+            .GetBytes("Endpoint Routing sample endpoints:" + Environment.NewLine + "/plaintext");
         private static readonly byte[] _plainTextPayload = Encoding.UTF8.GetBytes("Plain text!");
 
         public void ConfigureServices(IServiceCollection services)
@@ -47,13 +46,14 @@ namespace RoutingSandbox
                         "/",
                         (httpContext) =>
                         {
-                            var dataSource =
-                                httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
+                            var dataSource = httpContext.RequestServices
+                                .GetRequiredService<EndpointDataSource>();
 
                             var sb = new StringBuilder();
                             sb.AppendLine("Endpoints:");
                             foreach (
-                                var endpoint in dataSource.Endpoints.OfType<RouteEndpoint>()
+                                var endpoint in dataSource.Endpoints
+                                    .OfType<RouteEndpoint>()
                                     .OrderBy(
                                         e => e.RoutePattern.RawText,
                                         StringComparer.OrdinalIgnoreCase
@@ -86,29 +86,28 @@ namespace RoutingSandbox
                         }
                     );
                     endpoints.MapGet(
-                            "/graph",
-                            (httpContext) =>
-                            {
-                                using (
-                                    var writer = new StreamWriter(
-                                        httpContext.Response.Body,
-                                        Encoding.UTF8,
-                                        1024,
-                                        leaveOpen: true
-                                    )
+                        "/graph",
+                        (httpContext) =>
+                        {
+                            using (
+                                var writer = new StreamWriter(
+                                    httpContext.Response.Body,
+                                    Encoding.UTF8,
+                                    1024,
+                                    leaveOpen: true
                                 )
-                                {
-                                    var graphWriter =
-                                        httpContext.RequestServices.GetRequiredService<DfaGraphWriter>();
-                                    var dataSource =
-                                        httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
-                                    graphWriter.Write(dataSource, writer);
-                                }
-
-                                return Task.CompletedTask;
+                            )
+                            {
+                                var graphWriter = httpContext.RequestServices
+                                    .GetRequiredService<DfaGraphWriter>();
+                                var dataSource = httpContext.RequestServices
+                                    .GetRequiredService<EndpointDataSource>();
+                                graphWriter.Write(dataSource, writer);
                             }
-                        )
-                        .WithDisplayName("DFA Graph");
+
+                            return Task.CompletedTask;
+                        }
+                    ).WithDisplayName("DFA Graph");
 
                     endpoints.MapGet("/attributes", HandlerWithAttributes);
 

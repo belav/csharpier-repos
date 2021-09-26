@@ -353,9 +353,9 @@ class C
                         // (4,36): error CS8889: The target runtime doesn't support extensible or runtime-environment default calling conventions.
                         //     public unsafe void M(delegate* unmanaged<string> p) {}
                         Diagnostic(
-                                ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv,
-                                "unmanaged"
-                            )
+                            ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv,
+                            "unmanaged"
+                        )
                             .WithLocation(4, 36)
                     );
                 }
@@ -1260,10 +1260,11 @@ class C
                 if (parameterEqualities[i] == Equality.Equal)
                 {
                     Assert.True(
-                        ((FunctionPointerParameterSymbol)param1).MethodEqualityChecks(
-                            (FunctionPointerParameterSymbol)param2,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        ((FunctionPointerParameterSymbol)param1)
+                            .MethodEqualityChecks(
+                                (FunctionPointerParameterSymbol)param2,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                 }
 
@@ -1448,10 +1449,11 @@ class C
                     }
 
                     Assert.True(
-                        param1.Type.Equals(
-                            param2.Type,
-                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                        )
+                        param1.Type
+                            .Equals(
+                                param2.Type,
+                                TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                            )
                     );
                 }
             }
@@ -1561,7 +1563,9 @@ class C
 
             var misplacedDeclaration = (
                 (ArrayTypeSyntax)functionPointerTypeSyntax.ParameterList.Parameters.Single().Type!
-            ).RankSpecifiers.Single().Sizes.Single();
+            ).RankSpecifiers
+                .Single()
+                .Sizes.Single();
 
             var a = (ILocalSymbol)model.GetSymbolInfo(misplacedDeclaration).Symbol!;
             Assert.NotNull(a);
@@ -1620,9 +1624,9 @@ unsafe class C
                 // (11,9): error CS8756: Function pointer 'delegate*<string, void>' does not take 3 arguments
                 //         p2("Too", "many", "arguments");
                 Diagnostic(
-                        ErrorCode.ERR_BadFuncPointerArgCount,
-                        @"p2(""Too"", ""many"", ""arguments"")"
-                    )
+                    ErrorCode.ERR_BadFuncPointerArgCount,
+                    @"p2(""Too"", ""many"", ""arguments"")"
+                )
                     .WithArguments("delegate*<string, void>", "3")
                     .WithLocation(11, 9),
                 // (12,9): error CS8756: Function pointer 'delegate*<string, void>' does not take 0 arguments
@@ -1677,7 +1681,9 @@ class E
             comp.VerifyDiagnostics(
                 // (10,21): error CS0122: 'C.D' is inaccessible due to its protection level
                 //         delegate*<C.D> d;
-                Diagnostic(ErrorCode.ERR_BadAccess, "D").WithArguments("C.D").WithLocation(10, 21),
+                Diagnostic(ErrorCode.ERR_BadAccess, "D")
+                    .WithArguments("C.D")
+                    .WithLocation(10, 21),
                 // (10,24): warning CS0168: The variable 'd' is declared but never used
                 //         delegate*<C.D> d;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "d")
@@ -1888,9 +1894,9 @@ unsafe static class C
                 // (7,23): error CS0828: Cannot assign 'delegate*<void>[]' to anonymous type property
                 //         var b = new { Ptrs = new[] { ptr } };
                 Diagnostic(
-                        ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue,
-                        "Ptrs = new[] { ptr }"
-                    )
+                    ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue,
+                    "Ptrs = new[] { ptr }"
+                )
                     .WithArguments("delegate*<void>[]")
                     .WithLocation(7, 23)
             );
@@ -2197,10 +2203,11 @@ unsafe class C
             Assert.Equal(SignatureCallingConvention.VarArgs, ptr.Signature.CallingConvention);
             var expectedMessage =
                 "error CS8806: "
-                + string.Format(
-                    CSharpResources.ERR_UnsupportedCallingConvention,
-                    "delegate* unmanaged[]<string>"
-                );
+                + string
+                    .Format(
+                        CSharpResources.ERR_UnsupportedCallingConvention,
+                        "delegate* unmanaged[]<string>"
+                    );
             AssertEx.Equal(
                 expectedMessage,
                 ptr.EnsureCSharpSymbolOrNull(nameof(ptr)).GetUseSiteDiagnostic().ToString()
@@ -2287,7 +2294,8 @@ unsafe class C
             );
             Assert.Equal(
                 "System.Runtime.InteropServices.OutAttribute[missing]",
-                ptr.Signature.Parameters.Single()
+                ptr.Signature.Parameters
+                    .Single()
                     .RefCustomModifiers.Single()
                     .Modifier.ToTestDisplayString()
             );
@@ -2572,8 +2580,8 @@ class C
                 .ToArray();
 
             var ptrTypes = methodDecls.SelectMany(
-                    m => m.DescendantNodes().OfType<FunctionPointerTypeSyntax>()
-                )
+                m => m.DescendantNodes().OfType<FunctionPointerTypeSyntax>()
+            )
                 .ToArray();
 
             Assert.Equal(3, ptrTypes.Length);
@@ -2990,17 +2998,19 @@ namespace System
             {
                 // No equality between pointers with differing refkinds
                 Assert.False(
-                    ptr1.NoRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
                 Assert.False(
-                    ptr1.ByRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
 
@@ -3008,28 +3018,32 @@ namespace System
                 {
                     Assert.Equal(
                         expectedConventionEquality,
-                        ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                        ptr1.NoRef.Signature
+                            .GetCallingConventionModifiers()
                             .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                     );
                     Assert.Equal(
                         expectedConventionEquality,
-                        ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                        ptr1.ByRef.Signature
+                            .GetCallingConventionModifiers()
                             .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                     );
                 }
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.NoRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.ByRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.Equal(
                     expectedFullEquality,
@@ -3121,43 +3135,49 @@ namespace System
             {
                 // No equality between pointers with differing refkinds
                 Assert.False(
-                    ptr1.NoRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
                 Assert.False(
-                    ptr1.ByRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
 
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                    ptr1.NoRef.Signature
+                        .GetCallingConventionModifiers()
                         .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                 );
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                    ptr1.ByRef.Signature
+                        .GetCallingConventionModifiers()
                         .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                 );
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.NoRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.ByRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.Equal(
                     expectedFullEquality,
@@ -3255,44 +3275,50 @@ namespace System
             {
                 // No equality between pointers with differing refkinds
                 Assert.False(
-                    ptr1.NoRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
                 Assert.False(
-                    ptr1.ByRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
 
                 Assert.Equal(
                     expectedTypeConventionEquality,
-                    ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                    ptr1.NoRef.Signature
+                        .GetCallingConventionModifiers()
                         .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                 );
                 Assert.Equal(
                     expectedRefConventionEquality,
-                    ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                    ptr1.ByRef.Signature
+                        .GetCallingConventionModifiers()
                         .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                 );
 
                 Assert.Equal(
                     expectedTypeConventionEquality,
-                    ptr1.NoRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.Equal(
                     expectedRefConventionEquality,
-                    ptr1.ByRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 // If we weren't expected the ref version to be equal, but we were expecting the type version to be equal, then that means
                 // the type version will be identical because it will have no ref modifiers

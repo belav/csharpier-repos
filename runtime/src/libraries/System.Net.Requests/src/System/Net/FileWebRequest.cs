@@ -186,13 +186,14 @@ namespace System.Net
         public override IAsyncResult BeginGetRequestStream(AsyncCallback? callback, object? state)
         {
             CheckAndMarkAsyncGetRequestStreamPending();
-            Task<Stream> t = Task.Factory.StartNew(
-                s => ((FileWebRequest)s!).CreateWriteStream(),
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task<Stream> t = Task.Factory
+                .StartNew(
+                    s => ((FileWebRequest)s!).CreateWriteStream(),
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
             return TaskToApm.Begin(t, callback, state);
         }
 
@@ -259,13 +260,14 @@ namespace System.Net
         public override IAsyncResult BeginGetResponse(AsyncCallback? callback, object? state)
         {
             CheckAndMarkAsyncGetResponsePending();
-            Task<WebResponse> t = Task.Factory.StartNew(
-                s => ((FileWebRequest)s!).CreateResponse(),
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task<WebResponse> t = Task.Factory
+                .StartNew(
+                    s => ((FileWebRequest)s!).CreateResponse(),
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
             return TaskToApm.Begin(t, callback, state);
         }
 

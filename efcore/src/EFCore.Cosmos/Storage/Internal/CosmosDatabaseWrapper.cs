@@ -97,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                         // #16707
-                        ((InternalEntityEntry)root).SetEntityState(EntityState.Modified);
+                        ((InternalEntityEntry)root)
+                            .SetEntityState(EntityState.Modified);
 #pragma warning restore EF1001 // Internal EF Core API usage.
                     }
                     continue;
@@ -163,7 +164,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                         // #16707
-                        ((InternalEntityEntry)root).SetEntityState(EntityState.Modified);
+                        ((InternalEntityEntry)root)
+                            .SetEntityState(EntityState.Modified);
 #pragma warning restore EF1001 // Internal EF Core API usage.
                     }
                     continue;

@@ -50,9 +50,10 @@ namespace Ignitor
                         return;
                     }
 
-                    operation.Completion.TrySetException(
-                        new TimeoutException($"The operation timed out after {Timeout}.")
-                    );
+                    operation.Completion
+                        .TrySetException(
+                            new TimeoutException($"The operation timed out after {Timeout}.")
+                        );
                     operation.Cancellation?.Dispose();
                     operation.CancellationRegistration.Dispose();
                 },

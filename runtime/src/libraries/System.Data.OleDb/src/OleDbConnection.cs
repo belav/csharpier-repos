@@ -97,10 +97,11 @@ namespace System.Data.OleDb
                 object? value = (null != constr) ? constr.InitialCatalog : string.Empty;
                 if (
                     (null != value)
-                    && !((string)value).StartsWith(
-                        DbConnectionOptions.DataDirectory,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !((string)value)
+                        .StartsWith(
+                            DbConnectionOptions.DataDirectory,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     OleDbConnectionInternal connection = GetOpenConnection();
@@ -140,10 +141,11 @@ namespace System.Data.OleDb
                 object? value = (null != constr) ? constr.DataSource : string.Empty;
                 if (
                     (null != value)
-                    && !((string)value).StartsWith(
-                        DbConnectionOptions.DataDirectory,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !((string)value)
+                        .StartsWith(
+                            DbConnectionOptions.DataDirectory,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     if (IsOpen)

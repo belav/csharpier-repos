@@ -189,13 +189,14 @@ EndGlobal
                         ? "{F184B08F-C81C-45F6-A57F-5ABD9991F28F}"
                         : "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}";
                 sb.AppendLine(
-                    string.Format(
-                        @"Project(""{0}"") = ""{1}"", ""{2}"", ""{3}""",
-                        languageGuid,
-                        project.Name,
-                        fileName,
-                        project.Guid.ToString("B")
-                    )
+                    string
+                        .Format(
+                            @"Project(""{0}"") = ""{1}"", ""{2}"", ""{3}""",
+                            languageGuid,
+                            project.Name,
+                            fileName,
+                            project.Guid.ToString("B")
+                        )
                 );
                 sb.AppendLine("EndProject");
             }
@@ -259,7 +260,8 @@ EndGlobal
                 }
 
                 var document = XDocument.Parse(CSharpProjectTemplate);
-                var propertyGroup = document.Root.Descendants(XName.Get("PropertyGroup", NS))
+                var propertyGroup = document.Root
+                    .Descendants(XName.Get("PropertyGroup", NS))
                     .First();
                 AddXElement(propertyGroup, "ProjectGuid", Guid.ToString("B"));
                 AddXElement(propertyGroup, "OutputType", OutputType);

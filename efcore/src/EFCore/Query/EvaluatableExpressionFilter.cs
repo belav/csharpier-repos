@@ -26,36 +26,32 @@ namespace Microsoft.EntityFrameworkCore.Query
         // This methods are non-deterministic and result varies based on time of running the query.
         // Hence we don't evaluate them. See issue#2069
 
-        private static readonly PropertyInfo _dateTimeNow =
-            typeof(DateTime).GetRequiredDeclaredProperty(nameof(DateTime.Now));
+        private static readonly PropertyInfo _dateTimeNow = typeof(DateTime)
+            .GetRequiredDeclaredProperty(nameof(DateTime.Now));
 
-        private static readonly PropertyInfo _dateTimeUtcNow =
-            typeof(DateTime).GetRequiredDeclaredProperty(nameof(DateTime.UtcNow));
+        private static readonly PropertyInfo _dateTimeUtcNow = typeof(DateTime)
+            .GetRequiredDeclaredProperty(nameof(DateTime.UtcNow));
 
-        private static readonly PropertyInfo _dateTimeToday =
-            typeof(DateTime).GetRequiredDeclaredProperty(nameof(DateTime.Today));
+        private static readonly PropertyInfo _dateTimeToday = typeof(DateTime)
+            .GetRequiredDeclaredProperty(nameof(DateTime.Today));
 
-        private static readonly PropertyInfo _dateTimeOffsetNow =
-            typeof(DateTimeOffset).GetRequiredDeclaredProperty(nameof(DateTimeOffset.Now));
+        private static readonly PropertyInfo _dateTimeOffsetNow = typeof(DateTimeOffset)
+            .GetRequiredDeclaredProperty(nameof(DateTimeOffset.Now));
 
-        private static readonly PropertyInfo _dateTimeOffsetUtcNow =
-            typeof(DateTimeOffset).GetRequiredDeclaredProperty(nameof(DateTimeOffset.UtcNow));
+        private static readonly PropertyInfo _dateTimeOffsetUtcNow = typeof(DateTimeOffset)
+            .GetRequiredDeclaredProperty(nameof(DateTimeOffset.UtcNow));
 
-        private static readonly MethodInfo _guidNewGuid = typeof(Guid).GetRequiredDeclaredMethod(
-            nameof(Guid.NewGuid)
-        );
+        private static readonly MethodInfo _guidNewGuid = typeof(Guid)
+            .GetRequiredDeclaredMethod(nameof(Guid.NewGuid));
 
-        private static readonly MethodInfo _randomNextNoArgs =
-            typeof(Random).GetRequiredRuntimeMethod(nameof(Random.Next), Array.Empty<Type>());
+        private static readonly MethodInfo _randomNextNoArgs = typeof(Random)
+            .GetRequiredRuntimeMethod(nameof(Random.Next), Array.Empty<Type>());
 
-        private static readonly MethodInfo _randomNextOneArg =
-            typeof(Random).GetRequiredRuntimeMethod(nameof(Random.Next), new[] { typeof(int) });
+        private static readonly MethodInfo _randomNextOneArg = typeof(Random)
+            .GetRequiredRuntimeMethod(nameof(Random.Next), new[] { typeof(int) });
 
-        private static readonly MethodInfo _randomNextTwoArgs =
-            typeof(Random).GetRequiredRuntimeMethod(
-                nameof(Random.Next),
-                new[] { typeof(int), typeof(int) }
-            );
+        private static readonly MethodInfo _randomNextTwoArgs = typeof(Random)
+            .GetRequiredRuntimeMethod(nameof(Random.Next), new[] { typeof(int), typeof(int) });
 
         /// <summary>
         ///     <para>

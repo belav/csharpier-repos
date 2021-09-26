@@ -193,14 +193,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewContext = GetViewContext();
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        v.Writer.Write(expected);
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    v.Writer.Write(expected);
+                }
+            ).Returns(Task.CompletedTask);
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -236,14 +234,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewContext = GetViewContext();
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        v.Writer.Write(expected);
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    v.Writer.Write(expected);
+                }
+            ).Returns(Task.CompletedTask);
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -282,14 +278,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             viewContext.ViewData["key"] = expected;
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        v.Writer.Write(v.ViewData["key"]);
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    v.Writer.Write(v.ViewData["key"]);
+                }
+            ).Returns(Task.CompletedTask);
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -334,14 +328,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             viewContext.ViewData["key"] = "ViewContext";
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        v.Writer.Write(v.ViewData["key"]);
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    v.Writer.Write(v.ViewData["key"]);
+                }
+            ).Returns(Task.CompletedTask);
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -389,16 +381,13 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             viewContext.ViewData.Model = new object();
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        var actual = Assert.IsType<PropertyModel>(v.ViewData.Model);
-                        Assert.Same(expected, actual);
-                    }
-                )
-                .Returns(Task.CompletedTask)
-                .Verifiable();
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    var actual = Assert.IsType<PropertyModel>(v.ViewData.Model);
+                    Assert.Same(expected, actual);
+                }
+            ).Returns(Task.CompletedTask).Verifiable();
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -441,15 +430,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             viewContext.ViewData.Model = new object();
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        Assert.Null(v.ViewData.Model);
-                    }
-                )
-                .Returns(Task.CompletedTask)
-                .Verifiable();
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    Assert.Null(v.ViewData.Model);
+                }
+            ).Returns(Task.CompletedTask).Verifiable();
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -493,15 +479,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             viewContext.ViewData.TemplateInfo.HtmlFieldPrefix = "order.items[0]";
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        Assert.Equal(expected, v.ViewData.TemplateInfo.HtmlFieldPrefix);
-                    }
-                )
-                .Returns(Task.CompletedTask)
-                .Verifiable();
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    Assert.Equal(expected, v.ViewData.TemplateInfo.HtmlFieldPrefix);
+                }
+            ).Returns(Task.CompletedTask).Verifiable();
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -535,15 +518,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             viewContext.ViewData.Model = model;
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        Assert.Same(model, v.ViewData.Model);
-                    }
-                )
-                .Returns(Task.CompletedTask)
-                .Verifiable();
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    Assert.Same(model, v.ViewData.Model);
+                }
+            ).Returns(Task.CompletedTask).Verifiable();
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -577,15 +557,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             viewContext.ViewData.TemplateInfo.HtmlFieldPrefix = expected;
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        Assert.Equal(expected, v.ViewData.TemplateInfo.HtmlFieldPrefix);
-                    }
-                )
-                .Returns(Task.CompletedTask)
-                .Verifiable();
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    Assert.Equal(expected, v.ViewData.TemplateInfo.HtmlFieldPrefix);
+                }
+            ).Returns(Task.CompletedTask).Verifiable();
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -648,14 +625,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             // Arrange
             var bufferScope = new TestViewBufferScope();
             var partialName = "_Partial";
-            var expected = string.Join(
-                Environment.NewLine,
-                $"The partial view '{partialName}' was not found. The following locations were searched:",
-                "NotFound1",
-                "NotFound2",
-                "NotFound3",
-                "NotFound4"
-            );
+            var expected = string
+                .Join(
+                    Environment.NewLine,
+                    $"The partial view '{partialName}' was not found. The following locations were searched:",
+                    "NotFound1",
+                    "NotFound2",
+                    "NotFound3",
+                    "NotFound4"
+                );
             var viewData = new ViewDataDictionary(
                 new TestModelMetadataProvider(),
                 new ModelStateDictionary()
@@ -702,14 +680,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewContext = GetViewContext();
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        v.Writer.Write(expected);
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    v.Writer.Write(expected);
+                }
+            ).Returns(Task.CompletedTask);
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -753,24 +729,20 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewContext = GetViewContext();
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        v.Writer.Write(expected);
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    v.Writer.Write(expected);
+                }
+            ).Returns(Task.CompletedTask);
 
             var fallbackView = new Mock<IView>();
-            fallbackView.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        v.Writer.Write("Hello from fallback partial!");
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            fallbackView.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    v.Writer.Write("Hello from fallback partial!");
+                }
+            ).Returns(Task.CompletedTask);
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -805,19 +777,20 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var bufferScope = new TestViewBufferScope();
             var partialName = "_Partial";
             var fallbackName = "_Fallback";
-            var expected = string.Join(
-                Environment.NewLine,
-                $"The partial view '{partialName}' was not found. The following locations were searched:",
-                "PartialNotFound1",
-                "PartialNotFound2",
-                "PartialNotFound3",
-                "PartialNotFound4",
-                $"The fallback partial view '{fallbackName}' was not found. The following locations were searched:",
-                "FallbackNotFound1",
-                "FallbackNotFound2",
-                "FallbackNotFound3",
-                "FallbackNotFound4"
-            );
+            var expected = string
+                .Join(
+                    Environment.NewLine,
+                    $"The partial view '{partialName}' was not found. The following locations were searched:",
+                    "PartialNotFound1",
+                    "PartialNotFound2",
+                    "PartialNotFound3",
+                    "PartialNotFound4",
+                    $"The fallback partial view '{fallbackName}' was not found. The following locations were searched:",
+                    "FallbackNotFound1",
+                    "FallbackNotFound2",
+                    "FallbackNotFound3",
+                    "FallbackNotFound4"
+                );
             var viewData = new ViewDataDictionary(
                 new TestModelMetadataProvider(),
                 new ModelStateDictionary()
@@ -887,14 +860,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewContext = GetViewContext();
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        v.Writer.Write(expected);
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    v.Writer.Write(expected);
+                }
+            ).Returns(Task.CompletedTask);
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))
@@ -936,14 +907,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewContext = GetViewContext();
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        v.Writer.Write(expected);
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    v.Writer.Write(expected);
+                }
+            ).Returns(Task.CompletedTask);
 
             var viewEngine = new Mock<ICompositeViewEngine>();
             viewEngine.Setup(v => v.GetView(It.IsAny<string>(), partialName, false))

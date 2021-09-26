@@ -26,10 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
 {
     public class AssemblyReferencesTests : EditAndContinueTestBase
     {
-        private static readonly CSharpCompilationOptions s_signedDll =
-            TestOptions.ReleaseDll.WithCryptoPublicKey(
-                TestResources.TestKeys.PublicKey_ce65828c82a341f2
-            );
+        private static readonly CSharpCompilationOptions s_signedDll = TestOptions.ReleaseDll
+            .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_ce65828c82a341f2);
 
         /// <summary>
         /// The baseline metadata might have less (or even different) references than
@@ -563,11 +561,12 @@ class C
                 Diagnostic(ErrorCode.ERR_ModuleEmitFailure)
                     .WithArguments(
                         "C",
-                        string.Format(
-                            CodeAnalysisResources.ChangingVersionOfAssemblyReferenceIsNotAllowedDuringDebugging,
-                            "Lib, Version=1.0.2000.1001, Culture=neutral, PublicKeyToken=null",
-                            "1.0.2000.1002"
-                        )
+                        string
+                            .Format(
+                                CodeAnalysisResources.ChangingVersionOfAssemblyReferenceIsNotAllowedDuringDebugging,
+                                "Lib, Version=1.0.2000.1001, Culture=neutral, PublicKeyToken=null",
+                                "1.0.2000.1002"
+                            )
                     )
             );
         }
@@ -669,11 +668,12 @@ class C
                 Diagnostic(ErrorCode.ERR_ModuleEmitFailure)
                     .WithArguments(
                         "C",
-                        string.Format(
-                            CodeAnalysisResources.ChangingVersionOfAssemblyReferenceIsNotAllowedDuringDebugging,
-                            "Lib, Version=1.0.0.1, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
-                            "1.0.0.2"
-                        )
+                        string
+                            .Format(
+                                CodeAnalysisResources.ChangingVersionOfAssemblyReferenceIsNotAllowedDuringDebugging,
+                                "Lib, Version=1.0.0.1, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
+                                "1.0.0.2"
+                            )
                     )
             );
         }

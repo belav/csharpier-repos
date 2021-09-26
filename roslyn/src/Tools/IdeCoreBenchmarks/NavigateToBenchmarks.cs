@@ -49,12 +49,11 @@ namespace IdeCoreBenchmarks
                 throw new ArgumentException("Couldn't create workspace");
 
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(
-                        StorageOptions.Database,
-                        StorageDatabase.SQLite
+                _workspace.CurrentSolution
+                    .WithOptions(
+                        _workspace.Options
+                            .WithChangedOption(StorageOptions.Database, StorageDatabase.SQLite)
                     )
-                )
             );
 
             Console.WriteLine("Opening roslyn");
@@ -74,9 +73,9 @@ namespace IdeCoreBenchmarks
             // Force a storage instance to be created.  This makes it simple to go examine it prior to any operations we
             // perform, including seeing how big the initial string table is.
             using var storage = storageService.GetStorageAsync(
-                    _workspace.CurrentSolution,
-                    CancellationToken.None
-                )
+                _workspace.CurrentSolution,
+                CancellationToken.None
+            )
                 .AsTask()
                 .GetAwaiter()
                 .GetResult();
@@ -96,7 +95,8 @@ namespace IdeCoreBenchmarks
             sw.Start();
             var solution = _workspace.CurrentSolution;
             // Search each project with an independent threadpool task.
-            var searchTasks = solution.Projects.Select(
+            var searchTasks = solution.Projects
+                .Select(
                     p =>
                         Task.Run(
                             () => SearchAsync(p, priorityDocuments: ImmutableArray<Document>.Empty),

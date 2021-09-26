@@ -82,15 +82,12 @@ namespace System.Text.Json.Tests
 
         private static void AssertContents(string expectedValue, ArrayBufferWriter<byte> buffer)
         {
-            Assert.Equal(
-                expectedValue,
-                Encoding.UTF8.GetString(
+            Assert.Equal(expectedValue, Encoding.UTF8.GetString(
                     buffer.WrittenSpan
 #if NETFRAMEWORK
                     .ToArray()
 #endif
-                )
-            );
+                ));
         }
 
         [Theory]

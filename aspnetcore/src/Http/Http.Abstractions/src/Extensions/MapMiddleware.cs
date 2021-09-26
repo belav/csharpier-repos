@@ -54,11 +54,12 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             }
 
             if (
-                context.Request.Path.StartsWithSegments(
-                    _options.PathMatch,
-                    out var matchedPath,
-                    out var remainingPath
-                )
+                context.Request.Path
+                    .StartsWithSegments(
+                        _options.PathMatch,
+                        out var matchedPath,
+                        out var remainingPath
+                    )
             )
             {
                 var path = context.Request.Path;

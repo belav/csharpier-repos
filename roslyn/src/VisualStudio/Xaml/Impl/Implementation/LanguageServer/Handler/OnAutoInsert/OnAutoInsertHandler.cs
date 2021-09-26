@@ -49,23 +49,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return null;
             }
 
-            var insertService =
-                document.Project.LanguageServices.GetService<IXamlAutoInsertService>();
+            var insertService = document.Project.LanguageServices
+                .GetService<IXamlAutoInsertService>();
             if (insertService == null)
             {
                 return null;
             }
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var offset = text.Lines.GetPosition(
-                ProtocolConversions.PositionToLinePosition(request.Position)
-            );
+            var offset = text.Lines
+                .GetPosition(ProtocolConversions.PositionToLinePosition(request.Position));
             var result = await insertService.GetAutoInsertAsync(
-                    document,
-                    request.Character[0],
-                    offset,
-                    cancellationToken
-                )
+                document,
+                request.Character[0],
+                offset,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (result == null)
             {

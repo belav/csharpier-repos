@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
 
             using var workspace = new AdhocWorkspace(hostServices);
             var textBufferFactoryService =
-                ((IMefHostExportProvider)hostServices).GetExports<ITextBufferFactoryService>()
+                ((IMefHostExportProvider)hostServices)
+                    .GetExports<ITextBufferFactoryService>()
                     .Single().Value;
             var buffer = textBufferFactoryService.CreateTextBuffer(
                 "Hello",
@@ -69,8 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
             var originalSnapshot = buffer.CurrentSnapshot;
             buffer.Insert(5, ", World!");
 
-            var newDocumentWithChanges =
-                buffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var newDocumentWithChanges = buffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
 
             // Since we're calling this on the current snapshot and we observed the text edit synchronously,
             // no forking actually should have happened.

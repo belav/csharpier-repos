@@ -116,13 +116,14 @@ namespace Microsoft.Extensions.Tools.Internal
         {
             _directory.CreateFile(
                 _filename,
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    Template,
-                    string.Join("\r\n", _properties),
-                    string.Join("\r\n", _items),
-                    Sdk
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        Template,
+                        string.Join("\r\n", _properties),
+                        string.Join("\r\n", _items),
+                        Sdk
+                    )
             );
         }
 

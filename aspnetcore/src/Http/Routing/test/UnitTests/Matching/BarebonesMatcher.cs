@@ -70,14 +70,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
                             comparand != null
                             && (
                                 comparand.Length != end - start
-                                || string.Compare(
-                                    path,
-                                    start,
-                                    comparand,
-                                    0,
-                                    comparand.Length,
-                                    StringComparison.OrdinalIgnoreCase
-                                ) != 0
+                                || string
+                                    .Compare(
+                                        path,
+                                        start,
+                                        comparand,
+                                        0,
+                                        comparand.Length,
+                                        StringComparison.OrdinalIgnoreCase
+                                    ) != 0
                             )
                         )
                     )
@@ -98,14 +99,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
                         comparand != null
                         && (
                             comparand.Length != length
-                            || string.Compare(
-                                path,
-                                start,
-                                comparand,
-                                0,
-                                comparand.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            ) != 0
+                            || string
+                                .Compare(
+                                    path,
+                                    start,
+                                    comparand,
+                                    0,
+                                    comparand.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) != 0
                         )
                     )
                     {

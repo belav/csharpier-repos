@@ -45,9 +45,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void CanCustomizeIdentityOptions()
         {
-            var services = new ServiceCollection().Configure<IdentityOptions>(
-                options => options.Password.RequiredLength = -1
-            );
+            var services = new ServiceCollection()
+                .Configure<IdentityOptions>(options => options.Password.RequiredLength = -1);
             services.AddIdentity<PocoUser, PocoRole>();
             var serviceProvider = services.BuildServiceProvider();
 
@@ -84,16 +83,15 @@ namespace Microsoft.AspNetCore.Identity.Test
         public void CanConfigureCookieOptions()
         {
             var services = new ServiceCollection();
-            services.AddAuthentication()
-                .AddIdentityCookies(
-                    o =>
-                    {
-                        o.ApplicationCookie.Configure(a => a.Cookie.Name = "a");
-                        o.ExternalCookie.Configure(a => a.Cookie.Name = "b");
-                        o.TwoFactorRememberMeCookie.Configure(a => a.Cookie.Name = "c");
-                        o.TwoFactorUserIdCookie.Configure(a => a.Cookie.Name = "d");
-                    }
-                );
+            services.AddAuthentication().AddIdentityCookies(
+                o =>
+                {
+                    o.ApplicationCookie.Configure(a => a.Cookie.Name = "a");
+                    o.ExternalCookie.Configure(a => a.Cookie.Name = "b");
+                    o.TwoFactorRememberMeCookie.Configure(a => a.Cookie.Name = "c");
+                    o.TwoFactorUserIdCookie.Configure(a => a.Cookie.Name = "d");
+                }
+            );
             var serviceProvider = services.BuildServiceProvider();
 
             var options = serviceProvider.GetRequiredService<

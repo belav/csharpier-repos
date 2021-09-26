@@ -14,15 +14,13 @@ namespace SecurityWebSite
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(
-                    options =>
-                    {
-                        options.LoginPath = "/Home/Login";
-                        options.LogoutPath = "/Home/Logout";
-                    }
-                )
-                .AddCookie("Cookie2");
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+                options =>
+                {
+                    options.LoginPath = "/Home/Login";
+                    options.LogoutPath = "/Home/Logout";
+                }
+            ).AddCookie("Cookie2");
 
             services.AddAuthorization(
                 options =>

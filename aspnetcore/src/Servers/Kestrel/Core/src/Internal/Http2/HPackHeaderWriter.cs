@@ -224,11 +224,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 case -1:
                     // Content-Disposition currently isn't a known header so a
                     // static index probably won't be specified.
-                    return string.Equals(
-                        name,
-                        "Content-Disposition",
-                        StringComparison.OrdinalIgnoreCase
-                    );
+                    return string
+                        .Equals(name, "Content-Disposition", StringComparison.OrdinalIgnoreCase);
             }
 
             return false;

@@ -91,11 +91,8 @@ namespace Microsoft.AspNetCore.Hosting
                     )
                     {
                         if (
-                            !string.Equals(
-                                authType,
-                                "anonymous",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            !string
+                                .Equals(authType, "anonymous", StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             enableAuth = true;

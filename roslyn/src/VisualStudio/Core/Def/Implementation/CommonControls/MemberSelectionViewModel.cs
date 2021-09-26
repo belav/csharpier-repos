@@ -130,8 +130,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
 
         public ImmutableArray<(ISymbol member, bool makeAbstract)> GetSelectedMembers() =>
             Members.Where(
-                    memberSymbolView => memberSymbolView.IsChecked && memberSymbolView.IsCheckable
-                )
+                memberSymbolView => memberSymbolView.IsChecked && memberSymbolView.IsCheckable
+            )
                 .SelectAsArray(
                     memberViewModel =>
                         (

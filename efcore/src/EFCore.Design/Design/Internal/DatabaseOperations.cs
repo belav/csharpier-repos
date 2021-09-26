@@ -153,7 +153,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var subPath = outputDir.Substring(projectDir.Length);
 
             return !string.IsNullOrWhiteSpace(subPath)
-              ? string.Join(
+              ? string
+                .Join(
                     ".",
                     subPath.Split(
                         new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar },
@@ -165,9 +166,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
         private static string MakeDirRelative(string root, string path)
         {
-            var relativeUri = new Uri(NormalizeDir(root)).MakeRelativeUri(
-                new Uri(NormalizeDir(path))
-            );
+            var relativeUri = new Uri(NormalizeDir(root))
+                .MakeRelativeUri(new Uri(NormalizeDir(path)));
 
             return Uri.UnescapeDataString(relativeUri.ToString())
                 .Replace('/', Path.DirectorySeparatorChar);

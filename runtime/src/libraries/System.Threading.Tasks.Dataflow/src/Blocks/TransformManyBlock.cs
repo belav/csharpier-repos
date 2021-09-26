@@ -126,19 +126,16 @@ namespace System.Threading.Tasks.Dataflow
             Action<ISourceBlock<TOutput>, int>? onItemsRemoved = null;
             if (dataflowBlockOptions.BoundedCapacity > 0)
                 onItemsRemoved = (owningSource, count) =>
-                    ((TransformManyBlock<TInput, TOutput>)owningSource)._target.ChangeBoundingCount(
-                        -count
-                    );
+                    ((TransformManyBlock<TInput, TOutput>)owningSource)._target
+                        .ChangeBoundingCount(-count);
 
             // Initialize source component
             _source = new SourceCore<TOutput>(
                 this,
                 dataflowBlockOptions,
                 owningSource =>
-                    ((TransformManyBlock<TInput, TOutput>)owningSource)._target.Complete(
-                        exception: null,
-                        dropPendingMessages: true
-                    ),
+                    ((TransformManyBlock<TInput, TOutput>)owningSource)._target
+                        .Complete(exception: null, dropPendingMessages: true),
                 onItemsRemoved
             );
 
@@ -229,10 +226,8 @@ namespace System.Threading.Tasks.Dataflow
                 dataflowBlockOptions.CancellationToken,
                 Completion,
                 state =>
-                    ((TargetCore<TInput>)state!).Complete(
-                        exception: null,
-                        dropPendingMessages: true
-                    ),
+                    ((TargetCore<TInput>)state!)
+                        .Complete(exception: null, dropPendingMessages: true),
                 _target
             );
 #if FEATURE_TRACING

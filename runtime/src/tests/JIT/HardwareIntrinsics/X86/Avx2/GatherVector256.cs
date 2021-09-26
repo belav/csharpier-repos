@@ -92,7 +92,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<float>)typeof(Avx2).GetMethod(
+                        (Vector256<float>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector256),
                                 new Type[] { typeof(float*), typeof(Vector256<int>), typeof(byte) }
                             )
@@ -205,7 +206,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vd =
-                        (Vector256<double>)typeof(Avx2).GetMethod(
+                        (Vector256<double>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector256),
                                 new Type[] { typeof(double*), typeof(Vector128<int>), typeof(byte) }
                             )
@@ -315,7 +317,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<int>)typeof(Avx2).GetMethod(
+                        (Vector256<int>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector256),
                                 new Type[] { typeof(int*), typeof(Vector256<int>), typeof(byte) }
                             )
@@ -407,7 +410,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<uint>)typeof(Avx2).GetMethod(
+                        (Vector256<uint>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector256),
                                 new Type[] { typeof(uint*), typeof(Vector256<int>), typeof(byte) }
                             )
@@ -499,7 +503,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<long>)typeof(Avx2).GetMethod(
+                        (Vector256<long>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector256),
                                 new Type[] { typeof(long*), typeof(Vector128<int>), typeof(byte) }
                             )
@@ -595,7 +600,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<ulong>)typeof(Avx2).GetMethod(
+                        (Vector256<ulong>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector256),
                                 new Type[] { typeof(ulong*), typeof(Vector128<int>), typeof(byte) }
                             )
@@ -693,7 +699,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<long>)typeof(Avx2).GetMethod(
+                        (Vector256<long>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector256),
                                 new Type[] { typeof(long*), typeof(Vector256<long>), typeof(byte) }
                             )
@@ -789,7 +796,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<ulong>)typeof(Avx2).GetMethod(
+                        (Vector256<ulong>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector256),
                                 new Type[] { typeof(ulong*), typeof(Vector256<long>), typeof(byte) }
                             )
@@ -892,7 +900,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vd =
-                        (Vector256<double>)typeof(Avx2).GetMethod(
+                        (Vector256<double>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherVector256),
                                 new Type[]
                                 {

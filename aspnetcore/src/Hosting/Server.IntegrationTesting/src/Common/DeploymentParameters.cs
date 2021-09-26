@@ -195,15 +195,16 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "[Variation] :: ServerType={0}, Runtime={1}, Arch={2}, BaseUrlHint={3}, Publish={4}",
-                ServerType,
-                RuntimeFlavor,
-                RuntimeArchitecture,
-                ApplicationBaseUriHint,
-                PublishApplicationBeforeDeployment
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "[Variation] :: ServerType={0}, Runtime={1}, Arch={2}, BaseUrlHint={3}, Publish={4}",
+                    ServerType,
+                    RuntimeFlavor,
+                    RuntimeArchitecture,
+                    ApplicationBaseUriHint,
+                    PublishApplicationBeforeDeployment
+                );
         }
     }
 }

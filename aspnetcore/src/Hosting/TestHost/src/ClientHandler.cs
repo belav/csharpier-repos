@@ -155,19 +155,21 @@ namespace Microsoft.AspNetCore.TestHost
                             );
                         }
                     }
-                    context.Features.Set<IHttpRequestBodyDetectionFeature>(
-                        new RequestBodyDetectionFeature(canHaveBody)
-                    );
+                    context.Features
+                        .Set<IHttpRequestBodyDetectionFeature>(
+                            new RequestBodyDetectionFeature(canHaveBody)
+                        );
 
                     foreach (var header in request.Headers)
                     {
                         // User-Agent is a space delineated single line header but HttpRequestHeaders parses it as multiple elements.
                         if (
-                            string.Equals(
-                                header.Key,
-                                HeaderNames.UserAgent,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    header.Key,
+                                    HeaderNames.UserAgent,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             req.Headers.Append(header.Key, string.Join(" ", header.Value));
@@ -205,15 +207,16 @@ namespace Microsoft.AspNetCore.TestHost
             contextBuilder.RegisterResponseReadCompleteCallback(
                 context =>
                 {
-                    var responseTrailersFeature =
-                        context.Features.Get<IHttpResponseTrailersFeature>()!;
+                    var responseTrailersFeature = context.Features
+                        .Get<IHttpResponseTrailersFeature>()!;
 
                     foreach (var trailer in responseTrailersFeature.Trailers)
                     {
-                        bool success = response.TrailingHeaders.TryAddWithoutValidation(
-                            trailer.Key,
-                            (IEnumerable<string>)trailer.Value
-                        );
+                        bool success = response.TrailingHeaders
+                            .TryAddWithoutValidation(
+                                trailer.Key,
+                                (IEnumerable<string>)trailer.Value
+                            );
                         Contract.Assert(success, "Bad trailer");
                     }
                 }
@@ -231,16 +234,12 @@ namespace Microsoft.AspNetCore.TestHost
             foreach (var header in httpContext.Response.Headers)
             {
                 if (
-                    !response.Headers.TryAddWithoutValidation(
-                        header.Key,
-                        (IEnumerable<string>)header.Value
-                    )
+                    !response.Headers
+                        .TryAddWithoutValidation(header.Key, (IEnumerable<string>)header.Value)
                 )
                 {
-                    bool success = response.Content.Headers.TryAddWithoutValidation(
-                        header.Key,
-                        (IEnumerable<string>)header.Value
-                    );
+                    bool success = response.Content.Headers
+                        .TryAddWithoutValidation(header.Key, (IEnumerable<string>)header.Value);
                     Contract.Assert(success, "Bad header");
                 }
             }

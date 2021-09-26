@@ -58,20 +58,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
-            var autoReferences = projectAssets.Project?.Frameworks?.Values.SelectMany(
+            var autoReferences = projectAssets.Project?.Frameworks?.Values
+                .SelectMany(
                     framework =>
-                        framework.Dependencies?.Keys.Where(
-                            key => framework.Dependencies[key].AutoReferenced
-                        )
+                        framework.Dependencies?.Keys
+                            .Where(key => framework.Dependencies[key].AutoReferenced)
                 )
                 .Distinct()
                 .ToImmutableHashSet();
             autoReferences ??= ImmutableHashSet<string>.Empty;
 
             var references = projectReferences.Select(
-                    projectReference =>
-                        BuildReference(projectAssets, projectReference, autoReferences)
-                )
+                projectReference => BuildReference(projectAssets, projectReference, autoReferences)
+            )
                 .WhereNotNull()
                 .ToImmutableArray();
 
@@ -114,9 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             foreach (var target in projectAssets.Targets.Values)
             {
-                var key = target.Keys.FirstOrDefault(
-                    library => library.Split('/')[0] == referenceName
-                );
+                var key = target.Keys
+                    .FirstOrDefault(library => library.Split('/')[0] == referenceName);
                 if (key is null || !projectAssets.Libraries.TryGetValue(key, out var library))
                 {
                     continue;
@@ -139,9 +137,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 if (targetLibrary.Compile != null)
                 {
                     compilationAssemblies.AddRange(
-                        targetLibrary.Compile.Keys.Where(
-                                assemblyPath => !assemblyPath.EndsWith(NuGetEmptyFileName)
-                            )
+                        targetLibrary.Compile.Keys
+                            .Where(assemblyPath => !assemblyPath.EndsWith(NuGetEmptyFileName))
                             .Select(
                                 assemblyPath =>
                                     Path.GetFullPath(
@@ -158,8 +155,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             }
 
             var dependencies = dependencyNames.Select(
-                    dependency => BuildReference(projectAssets, dependency, treatAsUsed: false)
-                )
+                dependency => BuildReference(projectAssets, dependency, treatAsUsed: false)
+            )
                 .WhereNotNull()
                 .ToImmutableArray();
 

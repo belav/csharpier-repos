@@ -2135,7 +2135,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var propertyInfo = typeof(FullProp).GetAnyProperty("Foo");
 
             Properties_can_have_field_cleared_test(
-                ((IMutableModel)new Model()).AddEntityType(typeof(FullProp))
+                ((IMutableModel)new Model())
+                    .AddEntityType(typeof(FullProp))
                     .AddProperty(propertyInfo),
                 propertyInfo,
                 "_foo"
@@ -2145,7 +2146,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [ConditionalFact]
         public virtual void Field_only_properties_throws_when_field_cleared()
         {
-            var propertyBase = ((IMutableModel)new Model()).AddEntityType(typeof(FieldOnly))
+            var propertyBase = ((IMutableModel)new Model())
+                .AddEntityType(typeof(FieldOnly))
                 .AddProperty("_foo", typeof(int));
 
             Assert.Equal(

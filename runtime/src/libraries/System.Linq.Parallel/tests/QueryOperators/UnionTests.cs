@@ -94,7 +94,8 @@ namespace System.Linq.Parallel.Tests
                         1,
                         Math.Max(DuplicateFactor, leftCount / 2),
                         Math.Max(DuplicateFactor, leftCount)
-                    }.Distinct()
+                    }
+                        .Distinct()
                 )
                 {
                     int rightStart = leftCount - Math.Min(leftCount, rightCount) / 2;
@@ -662,10 +663,8 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "first",
                 () =>
-                    ((ParallelQuery<int>)null).Union(
-                        ParallelEnumerable.Range(0, 1),
-                        EqualityComparer<int>.Default
-                    )
+                    ((ParallelQuery<int>)null)
+                        .Union(ParallelEnumerable.Range(0, 1), EqualityComparer<int>.Default)
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "second",

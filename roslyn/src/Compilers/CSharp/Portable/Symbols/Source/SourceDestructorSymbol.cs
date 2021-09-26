@@ -85,9 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected override void MethodChecks(BindingDiagnosticBag diagnostics)
         {
             var syntax = GetSyntax();
-            var bodyBinder = this.DeclaringCompilation.GetBinderFactory(
-                    syntaxReferenceOpt.SyntaxTree
-                )
+            var bodyBinder = this.DeclaringCompilation
+                .GetBinderFactory(syntaxReferenceOpt.SyntaxTree)
                 .GetBinder(syntax, syntax, this);
             _lazyReturnType = TypeWithAnnotations.Create(
                 bodyBinder.GetSpecialType(SpecialType.System_Void, diagnostics, syntax)

@@ -66,8 +66,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             if (!_isImportCompletionExperimentEnabled.HasValue)
             {
-                var experimentationService =
-                    workspace.Services.GetRequiredService<IExperimentationService>();
+                var experimentationService = workspace.Services
+                    .GetRequiredService<IExperimentationService>();
                 _isImportCompletionExperimentEnabled = experimentationService.IsExperimentEnabled(
                     WellKnownExperimentNames.TypeImportCompletion
                 );
@@ -83,15 +83,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             // We need to check for context before option values, so we can tell completion service that we are in a context to provide expanded items
             // even though import completion might be disabled. This would show the expander in completion list which user can then use to explicitly ask for unimported items.
-            var usePartialSemantic = completionContext.Options.GetOption(
-                CompletionServiceOptions.UsePartialSemanticForImportCompletion
-            );
+            var usePartialSemantic = completionContext.Options
+                .GetOption(CompletionServiceOptions.UsePartialSemanticForImportCompletion);
             var syntaxContext = await CreateContextAsync(
-                    document,
-                    completionContext.Position,
-                    usePartialSemantic,
-                    cancellationToken
-                )
+                document,
+                completionContext.Position,
+                usePartialSemantic,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!ShouldProvideCompletion(completionContext, syntaxContext))
             {
@@ -101,15 +100,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             completionContext.ExpandItemsAvailable = true;
 
             // We will trigger import completion regardless of the option/experiment if extended items is being requested explicitly (via expander in completion list)
-            var isExpandedCompletion = completionContext.Options.GetOption(
-                CompletionServiceOptions.IsExpandedCompletion
-            );
+            var isExpandedCompletion = completionContext.Options
+                .GetOption(CompletionServiceOptions.IsExpandedCompletion);
             if (!isExpandedCompletion)
             {
-                var importCompletionOptionValue = completionContext.Options.GetOption(
-                    CompletionOptions.ShowItemsFromUnimportedNamespaces,
-                    document.Project.Language
-                );
+                var importCompletionOptionValue = completionContext.Options
+                    .GetOption(
+                        CompletionOptions.ShowItemsFromUnimportedNamespaces,
+                        document.Project.Language
+                    );
 
                 // Don't trigger import completion if the option value is "default" and the experiment is disabled for the user.
                 if (
@@ -132,12 +131,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 cancellationToken
             );
             await AddCompletionItemsAsync(
-                    completionContext,
-                    syntaxContext,
-                    namespacesInScope,
-                    isExpandedCompletion,
-                    cancellationToken
-                )
+                completionContext,
+                syntaxContext,
+                namespacesInScope,
+                isExpandedCompletion,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -195,11 +194,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             LogCommit();
             var containingNamespace = ImportCompletionItem.GetContainingNamespace(completionItem);
             var provideParenthesisCompletion = await ShouldProvideParenthesisCompletionAsync(
-                    document,
-                    completionItem,
-                    commitKey,
-                    cancellationToken
-                )
+                document,
+                completionItem,
+                commitKey,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var insertText = completionItem.DisplayText;
@@ -233,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var allowInHiddenRegions = document.CanAddImportsInHiddenRegions();
             var importNode = CreateImport(document, containingNamespace);
 
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var rootWithImport = addImportService.AddImport(
                 compilation,
@@ -248,19 +248,19 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var documentWithImport = document.WithSyntaxRoot(rootWithImport);
             // This only formats the annotated import we just added, not the entire document.
             var formattedDocumentWithImport = await Formatter.FormatAsync(
-                    documentWithImport,
-                    Formatter.Annotation,
-                    cancellationToken: cancellationToken
-                )
+                documentWithImport,
+                Formatter.Annotation,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             using var _ = ArrayBuilder<TextChange>.GetInstance(out var builder);
 
             // Get text change for add import
             var importChanges = await formattedDocumentWithImport.GetTextChangesAsync(
-                    document,
-                    cancellationToken
-                )
+                document,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             builder.AddRange(importChanges);
 
@@ -315,10 +315,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 //
                 // Here we will always choose to qualify the unimported type, just to be consistent and keeps things simple.
                 return await IsInImportsDirectiveAsync(
-                        document,
-                        completionListSpan.Start,
-                        cancellationToken
-                    )
+                    document,
+                    completionListSpan.Start,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -360,8 +360,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             // Certain documents, e.g. Razor document, don't support adding imports
-            var documentSupportsFeatureService =
-                workspace.Services.GetRequiredService<IDocumentSupportsFeatureService>();
+            var documentSupportsFeatureService = workspace.Services
+                .GetRequiredService<IDocumentSupportsFeatureService>();
             if (!documentSupportsFeatureService.SupportsRefactorings(document))
             {
                 return false;

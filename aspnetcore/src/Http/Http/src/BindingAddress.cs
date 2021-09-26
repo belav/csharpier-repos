@@ -212,12 +212,13 @@ namespace Microsoft.AspNetCore.Http
                     );
                     int portNumber;
                     if (
-                        int.TryParse(
-                            portString,
-                            NumberStyles.Integer,
-                            CultureInfo.InvariantCulture,
-                            out portNumber
-                        )
+                        int
+                            .TryParse(
+                                portString,
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out portNumber
+                            )
                     )
                     {
                         hasSpecifiedPort = true;

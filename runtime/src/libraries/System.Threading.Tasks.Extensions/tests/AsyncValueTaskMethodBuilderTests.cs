@@ -799,46 +799,40 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public async Task NonGeneric_ConcurrentBuilders_WorkCorrectly()
         {
-            await Task.WhenAll(
-                Enumerable.Range(0, Environment.ProcessorCount)
-                    .Select(
-                        async _ =>
+            await Task.WhenAll(Enumerable.Range(0, Environment.ProcessorCount).Select(
+                    async _ =>
+                    {
+                        for (int i = 0; i < 10; i++)
                         {
-                            for (int i = 0; i < 10; i++)
-                            {
-                                await ValueTaskAsync();
+                            await ValueTaskAsync();
 
-                                static async ValueTask ValueTaskAsync()
-                                {
-                                    await Task.Delay(1);
-                                }
+                            static async ValueTask ValueTaskAsync()
+                            {
+                                await Task.Delay(1);
                             }
                         }
-                    )
-            );
+                    }
+                ));
         }
 
         [Fact]
         public async Task Generic_ConcurrentBuilders_WorkCorrectly()
         {
-            await Task.WhenAll(
-                Enumerable.Range(0, Environment.ProcessorCount)
-                    .Select(
-                        async _ =>
+            await Task.WhenAll(Enumerable.Range(0, Environment.ProcessorCount).Select(
+                    async _ =>
+                    {
+                        for (int i = 0; i < 10; i++)
                         {
-                            for (int i = 0; i < 10; i++)
-                            {
-                                Assert.Equal(42 + i, await ValueTaskAsync(i));
+                            Assert.Equal(42 + i, await ValueTaskAsync(i));
 
-                                static async ValueTask<int> ValueTaskAsync(int i)
-                                {
-                                    await Task.Delay(1);
-                                    return 42 + i;
-                                }
+                            static async ValueTask<int> ValueTaskAsync(int i)
+                            {
+                                await Task.Delay(1);
+                                return 42 + i;
                             }
                         }
-                    )
-            );
+                    }
+                ));
         }
 
         private struct DelegateStateMachine : IAsyncStateMachine

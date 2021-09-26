@@ -210,8 +210,8 @@ namespace System
         {
             get
             {
-                string? versionString =
-                    typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                string? versionString = typeof(object).Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
 
                 ReadOnlySpan<char> versionSpan = versionString.AsSpan();
 

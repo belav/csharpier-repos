@@ -38,15 +38,15 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
 
         [Fact]
         public void Should_fail_validation() =>
-            new Action(
-                Configuration.AssertConfigurationIsValid
-            ).ShouldThrowException<AutoMapperConfigurationException>(
-                ex =>
-                    ex.MemberMap.ToString()
-                        .ShouldBe(
-                            "AutoMapper.UnitTests.ConfigurationValidation.ConstructorMappingValidation+Destination.Void .ctor(ComplexType).parameter myComplexMember"
-                        )
-            );
+            new Action(Configuration.AssertConfigurationIsValid)
+                .ShouldThrowException<AutoMapperConfigurationException>(
+                    ex =>
+                        ex.MemberMap
+                            .ToString()
+                            .ShouldBe(
+                                "AutoMapper.UnitTests.ConfigurationValidation.ConstructorMappingValidation+Destination.Void .ctor(ComplexType).parameter myComplexMember"
+                            )
+                );
     }
 
     public class When_using_a_type_converter : AutoMapperSpecBase
@@ -107,9 +107,10 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_skip_validation()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                () => Mapper.ConfigurationProvider.AssertConfigurationIsValid()
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(
+                    () => Mapper.ConfigurationProvider.AssertConfigurationIsValid()
+                );
         }
     }
 
@@ -135,9 +136,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_throw()
         {
-            typeof(AutoMapperConfigurationException).ShouldBeThrownBy(
-                () => Configuration.AssertConfigurationIsValid()
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldBeThrownBy(() => Configuration.AssertConfigurationIsValid());
         }
     }
 
@@ -187,9 +187,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_throw()
         {
-            typeof(AutoMapperConfigurationException).ShouldBeThrownBy(
-                () => Configuration.AssertConfigurationIsValid()
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldBeThrownBy(() => Configuration.AssertConfigurationIsValid());
         }
     }
 
@@ -223,9 +222,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_throw()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                () => Configuration.AssertConfigurationIsValid()
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(() => Configuration.AssertConfigurationIsValid());
         }
     }
 
@@ -258,9 +256,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_throw()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                () => Configuration.AssertConfigurationIsValid()
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(() => Configuration.AssertConfigurationIsValid());
         }
     }
 
@@ -323,9 +320,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_fail_a_configuration_check()
         {
-            typeof(AutoMapperConfigurationException).ShouldBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
     }
 
@@ -347,11 +343,9 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
             );
         [Fact]
         public void Should_be_ignored() =>
-            new Action(
-                Configuration.AssertConfigurationIsValid
-            ).ShouldThrow<AutoMapperConfigurationException>().Errors[0].UnmappedPropertyNames[
-                0
-            ].ShouldBe(nameof(Source.Value));
+            new Action(Configuration.AssertConfigurationIsValid)
+                .ShouldThrow<AutoMapperConfigurationException>().Errors[0].UnmappedPropertyNames[0]
+                .ShouldBe(nameof(Source.Value));
     }
 
     public class When_testing_a_dto_with_fully_mapped_and_custom_matchers : NonValidatingSpecBase
@@ -408,9 +402,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_fail_a_configuration_check()
         {
-            typeof(AutoMapperConfigurationException).ShouldBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
     }
 
@@ -545,9 +538,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_fail_a_configuration_check()
         {
-            typeof(AutoMapperConfigurationException).ShouldBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
     }
 
@@ -583,9 +575,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_fail_a_configuration_check()
         {
-            typeof(AutoMapperConfigurationException).ShouldBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
     }
 
@@ -625,9 +616,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_be_valid()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
     }
 
@@ -671,14 +661,12 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
 
         [Fact]
         public void Should_ignore_bad_dtos_in_other_profiles() =>
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                () => AssertConfigurationIsValid("Good")
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(() => AssertConfigurationIsValid("Good"));
         [Fact]
         public void Should_throw_when_profile_name_does_not_exist() =>
-            typeof(ArgumentOutOfRangeException).ShouldBeThrownBy(
-                () => AssertConfigurationIsValid("Does not exist")
-            );
+            typeof(ArgumentOutOfRangeException)
+                .ShouldBeThrownBy(() => AssertConfigurationIsValid("Does not exist"));
     }
 
     public class When_testing_a_dto_with_mismatched_custom_member_mapping : NonValidatingSpecBase
@@ -711,9 +699,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_fail_a_configuration_check()
         {
-            typeof(AutoMapperConfigurationException).ShouldBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
     }
 
@@ -738,9 +725,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_validate_successfully()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
     }
 
@@ -770,9 +756,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_fail_a_configuration_check()
         {
-            typeof(AutoMapperConfigurationException).ShouldBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
     }
 
@@ -799,9 +784,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_fail_a_configuration_check()
         {
-            typeof(AutoMapperConfigurationException).ShouldBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
     }
 
@@ -820,9 +804,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         [Fact]
         public void Should_pass_configuration_check()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
 
         class ConcreteSource
@@ -861,9 +844,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
                 ResolutionContext context
             )
             {
-                return source.Details.Select(
-                        d => new KeyValuePair<string, string>(d.ToString(), d.ToString())
-                    )
+                return source.Details
+                    .Select(d => new KeyValuePair<string, string>(d.ToString(), d.ToString()))
                     .ToList();
             }
         }

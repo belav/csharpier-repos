@@ -303,11 +303,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             if (!(destination is TDeclarationNode))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources.Destination_type_must_be_a_0_but_given_one_is_1,
-                        typeof(TDeclarationNode).Name,
-                        destination.GetType().Name
-                    ),
+                    string
+                        .Format(
+                            WorkspacesResources.Destination_type_must_be_a_0_but_given_one_is_1,
+                            typeof(TDeclarationNode).Name,
+                            destination.GetType().Name
+                        ),
                     nameof(destination)
                 );
             }
@@ -327,12 +328,13 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             if (!(destination is TDeclarationNode1) && !(destination is TDeclarationNode2))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources.Destination_type_must_be_a_0_or_a_1_but_given_one_is_2,
-                        typeof(TDeclarationNode1).Name,
-                        typeof(TDeclarationNode2).Name,
-                        destination.GetType().Name
-                    ),
+                    string
+                        .Format(
+                            WorkspacesResources.Destination_type_must_be_a_0_or_a_1_but_given_one_is_2,
+                            typeof(TDeclarationNode1).Name,
+                            typeof(TDeclarationNode2).Name,
+                            destination.GetType().Name
+                        ),
                     nameof(destination)
                 );
             }
@@ -359,13 +361,14 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             )
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources.Destination_type_must_be_a_0_1_or_2_but_given_one_is_3,
-                        typeof(TDeclarationNode1).Name,
-                        typeof(TDeclarationNode2).Name,
-                        typeof(TDeclarationNode3).Name,
-                        destination.GetType().Name
-                    ),
+                    string
+                        .Format(
+                            WorkspacesResources.Destination_type_must_be_a_0_1_or_2_but_given_one_is_3,
+                            typeof(TDeclarationNode1).Name,
+                            typeof(TDeclarationNode2).Name,
+                            typeof(TDeclarationNode3).Name,
+                            destination.GetType().Name
+                        ),
                     nameof(destination)
                 );
             }
@@ -390,14 +393,15 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             )
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources.Destination_type_must_be_a_0_1_2_or_3_but_given_one_is_4,
-                        typeof(TDeclarationNode1).Name,
-                        typeof(TDeclarationNode2).Name,
-                        typeof(TDeclarationNode3).Name,
-                        typeof(TDeclarationNode4).Name,
-                        destination.GetType().Name
-                    ),
+                    string
+                        .Format(
+                            WorkspacesResources.Destination_type_must_be_a_0_1_2_or_3_but_given_one_is_4,
+                            typeof(TDeclarationNode1).Name,
+                            typeof(TDeclarationNode2).Name,
+                            typeof(TDeclarationNode3).Name,
+                            typeof(TDeclarationNode4).Name,
+                            destination.GetType().Name
+                        ),
                     nameof(destination)
                 );
             }
@@ -421,11 +425,11 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
             var (destinationDeclaration, availableIndices) =
                 await this.FindMostRelevantDeclarationAsync(
-                        solution,
-                        destination,
-                        options,
-                        cancellationToken
-                    )
+                    solution,
+                    destination,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             if (destinationDeclaration == null)
@@ -460,10 +464,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             if (options.AddImports)
             {
                 newDocument = await ImportAdder.AddImportsFromSymbolAnnotationAsync(
-                        newDocument,
-                        await newDocument.GetOptionsAsync(cancellationToken).ConfigureAwait(false),
-                        cancellationToken
-                    )
+                    newDocument,
+                    await newDocument.GetOptionsAsync(cancellationToken).ConfigureAwait(false),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -931,7 +935,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                         continue;
                     }
 
-                    newModifier = newModifierTokens[0].WithLeadingTrivia(modifier.LeadingTrivia)
+                    newModifier = newModifierTokens[0]
+                        .WithLeadingTrivia(modifier.LeadingTrivia)
                         .WithTrailingTrivia(modifier.TrailingTrivia);
                     newModifierTokens.RemoveAt(0);
                     anyAccessModifierSeen = true;

@@ -51,10 +51,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         }
 
         private static bool IsLocalSPA(Client client) =>
-            client.Properties.TryGetValue(
-                ApplicationProfilesPropertyNames.Profile,
-                out var clientType
-            )
+            client.Properties
+                .TryGetValue(ApplicationProfilesPropertyNames.Profile, out var clientType)
             && ApplicationProfiles.IdentityServerSPA == clientType;
 
         private Task<bool> ValidateRelativeUris(string requestedUri, IEnumerable<string> clientUris)

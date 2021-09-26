@@ -38,10 +38,8 @@ namespace System.Reflection.Tests
             Type theV = typeof(IDictionary<, >).GetTypeInfo().GenericTypeParameters[1];
             theT.TestGenericTypeParameterInvariants();
 
-            MethodInfo genericMethod = typeof(ClassWithGenericMethods1).GetMethod(
-                "GenericMethod1",
-                BindingFlags.Public | BindingFlags.Instance
-            );
+            MethodInfo genericMethod = typeof(ClassWithGenericMethods1)
+                .GetMethod("GenericMethod1", BindingFlags.Public | BindingFlags.Instance);
             Debug.Assert(genericMethod != null);
             Type theM = genericMethod.GetGenericArguments()[0];
             theM.TestGenericMethodParameterInvariants();

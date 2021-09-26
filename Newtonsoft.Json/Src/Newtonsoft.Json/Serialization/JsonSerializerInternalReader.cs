@@ -94,10 +94,8 @@ namespace Newtonsoft.Json.Serialization
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Cannot populate JSON array onto type '{0}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            objectType
-                        )
+                        "Cannot populate JSON array onto type '{0}'."
+                            .FormatWith(CultureInfo.InvariantCulture, objectType)
                     );
                 }
             }
@@ -109,11 +107,12 @@ namespace Newtonsoft.Json.Serialization
                 if (
                     Serializer.MetadataPropertyHandling != MetadataPropertyHandling.Ignore
                     && reader.TokenType == JsonToken.PropertyName
-                    && string.Equals(
-                        reader.Value!.ToString(),
-                        JsonTypeReflector.IdPropertyName,
-                        StringComparison.Ordinal
-                    )
+                    && string
+                        .Equals(
+                            reader.Value!.ToString(),
+                            JsonTypeReflector.IdPropertyName,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     reader.ReadAndAssert();
@@ -142,10 +141,8 @@ namespace Newtonsoft.Json.Serialization
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Cannot populate JSON object onto type '{0}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            objectType
-                        )
+                        "Cannot populate JSON object onto type '{0}'."
+                            .FormatWith(CultureInfo.InvariantCulture, objectType)
                     );
                 }
             }
@@ -153,10 +150,8 @@ namespace Newtonsoft.Json.Serialization
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "Unexpected initial token '{0}' when populating object. Expected JSON object or array.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Unexpected initial token '{0}' when populating object. Expected JSON object or array."
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
         }
@@ -198,10 +193,8 @@ namespace Newtonsoft.Json.Serialization
                     {
                         throw JsonSerializationException.Create(
                             reader,
-                            "No JSON content found and type '{0}' is not nullable.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                contract.UnderlyingType
-                            )
+                            "No JSON content found and type '{0}' is not nullable."
+                                .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                         );
                     }
 
@@ -311,11 +304,12 @@ namespace Newtonsoft.Json.Serialization
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Deserialized JSON type '{0}' is not compatible with expected type '{1}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            token.GetType().FullName,
-                            contract.UnderlyingType.FullName
-                        )
+                        "Deserialized JSON type '{0}' is not compatible with expected type '{1}'."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                token.GetType().FullName,
+                                contract.UnderlyingType.FullName
+                            )
                     );
                 }
             }
@@ -699,11 +693,12 @@ namespace Newtonsoft.Json.Serialization
                     if (
                         Serializer.MetadataPropertyHandling != MetadataPropertyHandling.Ignore
                         && reader.TokenType == JsonToken.PropertyName
-                        && string.Equals(
-                            reader.Value!.ToString(),
-                            JsonTypeReflector.ValuePropertyName,
-                            StringComparison.Ordinal
-                        )
+                        && string
+                            .Equals(
+                                reader.Value!.ToString(),
+                                JsonTypeReflector.ValuePropertyName,
+                                StringComparison.Ordinal
+                            )
                     )
                     {
                         reader.ReadAndAssert();
@@ -753,10 +748,11 @@ namespace Newtonsoft.Json.Serialization
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "Cannot preserve reference to readonly dictionary, or dictionary created from a non-default constructor: {0}.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        contract.UnderlyingType
-                                    )
+                                    "Cannot preserve reference to readonly dictionary, or dictionary created from a non-default constructor: {0}."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            contract.UnderlyingType
+                                        )
                                 );
                             }
 
@@ -764,10 +760,11 @@ namespace Newtonsoft.Json.Serialization
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "Cannot call OnSerializing on readonly dictionary, or dictionary created from a non-default constructor: {0}.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        contract.UnderlyingType
-                                    )
+                                    "Cannot call OnSerializing on readonly dictionary, or dictionary created from a non-default constructor: {0}."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            contract.UnderlyingType
+                                        )
                                 );
                             }
 
@@ -775,10 +772,11 @@ namespace Newtonsoft.Json.Serialization
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "Cannot call OnError on readonly list, or dictionary created from a non-default constructor: {0}.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        contract.UnderlyingType
-                                    )
+                                    "Cannot call OnError on readonly list, or dictionary created from a non-default constructor: {0}."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            contract.UnderlyingType
+                                        )
                                 );
                             }
 
@@ -786,10 +784,11 @@ namespace Newtonsoft.Json.Serialization
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "Cannot deserialize readonly or fixed size dictionary: {0}.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        contract.UnderlyingType
-                                    )
+                                    "Cannot deserialize readonly or fixed size dictionary: {0}."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            contract.UnderlyingType
+                                        )
                                 );
                             }
                         }
@@ -886,10 +885,11 @@ namespace Newtonsoft.Json.Serialization
                         throw JsonSerializationException.Create(
                             refToken,
                             refToken.Path,
-                            "JSON reference {0} property must have a string or null value.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                JsonTypeReflector.RefPropertyName
-                            ),
+                            "JSON reference {0} property must have a string or null value."
+                                .FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    JsonTypeReflector.RefPropertyName
+                                ),
                             null
                         );
                     }
@@ -904,10 +904,11 @@ namespace Newtonsoft.Json.Serialization
                             throw JsonSerializationException.Create(
                                 additionalContent,
                                 additionalContent.Path,
-                                "Additional content found in JSON reference object. A JSON reference object should only have a {0} property.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    JsonTypeReflector.RefPropertyName
-                                ),
+                                "Additional content found in JSON reference object. A JSON reference object should only have a {0} property."
+                                    .FormatWith(
+                                        CultureInfo.InvariantCulture,
+                                        JsonTypeReflector.RefPropertyName
+                                    ),
                                 null
                             );
                         }
@@ -922,11 +923,12 @@ namespace Newtonsoft.Json.Serialization
                                 JsonPosition.FormatMessage(
                                     reader,
                                     reader.Path,
-                                    "Resolved object reference '{0}' to {1}.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        reference,
-                                        newValue.GetType()
-                                    )
+                                    "Resolved object reference '{0}' to {1}."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            reference,
+                                            newValue.GetType()
+                                        )
                                 ),
                                 null
                             );
@@ -1029,11 +1031,12 @@ namespace Newtonsoft.Json.Serialization
                         propertyName = reader.Value!.ToString();
 
                         if (
-                            string.Equals(
-                                propertyName,
-                                JsonTypeReflector.RefPropertyName,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    propertyName,
+                                    JsonTypeReflector.RefPropertyName,
+                                    StringComparison.Ordinal
+                                )
                         )
                         {
                             reader.ReadAndAssert();
@@ -1044,10 +1047,11 @@ namespace Newtonsoft.Json.Serialization
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "JSON reference {0} property must have a string or null value.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        JsonTypeReflector.RefPropertyName
-                                    )
+                                    "JSON reference {0} property must have a string or null value."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            JsonTypeReflector.RefPropertyName
+                                        )
                                 );
                             }
 
@@ -1061,10 +1065,11 @@ namespace Newtonsoft.Json.Serialization
                                 {
                                     throw JsonSerializationException.Create(
                                         reader,
-                                        "Additional content found in JSON reference object. A JSON reference object should only have a {0} property.".FormatWith(
-                                            CultureInfo.InvariantCulture,
-                                            JsonTypeReflector.RefPropertyName
-                                        )
+                                        "Additional content found in JSON reference object. A JSON reference object should only have a {0} property."
+                                            .FormatWith(
+                                                CultureInfo.InvariantCulture,
+                                                JsonTypeReflector.RefPropertyName
+                                            )
                                     );
                                 }
 
@@ -1081,11 +1086,12 @@ namespace Newtonsoft.Json.Serialization
                                         JsonPosition.FormatMessage(
                                             reader as IJsonLineInfo,
                                             reader.Path,
-                                            "Resolved object reference '{0}' to {1}.".FormatWith(
-                                                CultureInfo.InvariantCulture,
-                                                reference,
-                                                newValue!.GetType()
-                                            )
+                                            "Resolved object reference '{0}' to {1}."
+                                                .FormatWith(
+                                                    CultureInfo.InvariantCulture,
+                                                    reference,
+                                                    newValue!.GetType()
+                                                )
                                         ),
                                         null
                                     );
@@ -1099,11 +1105,12 @@ namespace Newtonsoft.Json.Serialization
                             }
                         }
                         else if (
-                            string.Equals(
-                                propertyName,
-                                JsonTypeReflector.TypePropertyName,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    propertyName,
+                                    JsonTypeReflector.TypePropertyName,
+                                    StringComparison.Ordinal
+                                )
                         )
                         {
                             reader.ReadAndAssert();
@@ -1124,11 +1131,12 @@ namespace Newtonsoft.Json.Serialization
                             metadataProperty = true;
                         }
                         else if (
-                            string.Equals(
-                                propertyName,
-                                JsonTypeReflector.IdPropertyName,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    propertyName,
+                                    JsonTypeReflector.IdPropertyName,
+                                    StringComparison.Ordinal
+                                )
                         )
                         {
                             reader.ReadAndAssert();
@@ -1139,11 +1147,12 @@ namespace Newtonsoft.Json.Serialization
                             metadataProperty = true;
                         }
                         else if (
-                            string.Equals(
-                                propertyName,
-                                JsonTypeReflector.ArrayValuesPropertyName,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    propertyName,
+                                    JsonTypeReflector.ArrayValuesPropertyName,
+                                    StringComparison.Ordinal
+                                )
                         )
                         {
                             reader.ReadAndAssert();
@@ -1193,19 +1202,15 @@ namespace Newtonsoft.Json.Serialization
                 Type specifiedType;
                 try
                 {
-                    specifiedType = Serializer._serializationBinder.BindToType(
-                        typeNameKey.Value1,
-                        typeNameKey.Value2
-                    );
+                    specifiedType = Serializer._serializationBinder
+                        .BindToType(typeNameKey.Value1, typeNameKey.Value2);
                 }
                 catch (Exception ex)
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Error resolving type specified in JSON '{0}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            qualifiedTypeName
-                        ),
+                        "Error resolving type specified in JSON '{0}'."
+                            .FormatWith(CultureInfo.InvariantCulture, qualifiedTypeName),
                         ex
                     );
                 }
@@ -1214,10 +1219,8 @@ namespace Newtonsoft.Json.Serialization
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Type specified in JSON '{0}' was not resolved.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            qualifiedTypeName
-                        )
+                        "Type specified in JSON '{0}' was not resolved."
+                            .FormatWith(CultureInfo.InvariantCulture, qualifiedTypeName)
                     );
                 }
 
@@ -1228,11 +1231,12 @@ namespace Newtonsoft.Json.Serialization
                         JsonPosition.FormatMessage(
                             reader as IJsonLineInfo,
                             reader.Path,
-                            "Resolved type '{0}' to {1}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                qualifiedTypeName,
-                                specifiedType
-                            )
+                            "Resolved type '{0}' to {1}."
+                                .FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    qualifiedTypeName,
+                                    specifiedType
+                                )
                         ),
                         null
                     );
@@ -1248,11 +1252,12 @@ namespace Newtonsoft.Json.Serialization
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Type specified in JSON '{0}' is not compatible with '{1}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            specifiedType.AssemblyQualifiedName,
-                            objectType.AssemblyQualifiedName
-                        )
+                        "Type specified in JSON '{0}' is not compatible with '{1}'."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                specifiedType.AssemblyQualifiedName,
+                                objectType.AssemblyQualifiedName
+                            )
                     );
                 }
 
@@ -1271,10 +1276,8 @@ namespace Newtonsoft.Json.Serialization
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "Could not resolve type '{0}' to a JsonContract.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        objectType
-                    )
+                    "Could not resolve type '{0}' to a JsonContract."
+                        .FormatWith(CultureInfo.InvariantCulture, objectType)
                 );
             }
 
@@ -1332,10 +1335,8 @@ namespace Newtonsoft.Json.Serialization
                     {
                         throw JsonSerializationException.Create(
                             reader,
-                            "Cannot preserve reference to array or readonly list, or list created from a non-default constructor: {0}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                contract.UnderlyingType
-                            )
+                            "Cannot preserve reference to array or readonly list, or list created from a non-default constructor: {0}."
+                                .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                         );
                     }
 
@@ -1343,10 +1344,8 @@ namespace Newtonsoft.Json.Serialization
                     {
                         throw JsonSerializationException.Create(
                             reader,
-                            "Cannot call OnSerializing on an array or readonly list, or list created from a non-default constructor: {0}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                contract.UnderlyingType
-                            )
+                            "Cannot call OnSerializing on an array or readonly list, or list created from a non-default constructor: {0}."
+                                .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                         );
                     }
 
@@ -1354,10 +1353,8 @@ namespace Newtonsoft.Json.Serialization
                     {
                         throw JsonSerializationException.Create(
                             reader,
-                            "Cannot call OnError on an array or readonly list, or list created from a non-default constructor: {0}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                contract.UnderlyingType
-                            )
+                            "Cannot call OnError on an array or readonly list, or list created from a non-default constructor: {0}."
+                                .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                         );
                     }
 
@@ -1365,10 +1362,8 @@ namespace Newtonsoft.Json.Serialization
                     {
                         throw JsonSerializationException.Create(
                             reader,
-                            "Cannot deserialize readonly or fixed size list: {0}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                contract.UnderlyingType
-                            )
+                            "Cannot deserialize readonly or fixed size list: {0}."
+                                .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                         );
                     }
                 }
@@ -1423,10 +1418,8 @@ namespace Newtonsoft.Json.Serialization
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Cannot populate list type {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            contract.CreatedType
-                        )
+                        "Cannot populate list type {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, contract.CreatedType)
                     );
                 }
 
@@ -1552,11 +1545,12 @@ namespace Newtonsoft.Json.Serialization
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Error converting value {0} to type '{1}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            MiscellaneousUtils.ToString(value),
-                            targetType
-                        ),
+                        "Error converting value {0} to type '{1}'."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                MiscellaneousUtils.ToString(value),
+                                targetType
+                            ),
                         ex
                     );
                 }
@@ -1648,11 +1642,12 @@ namespace Newtonsoft.Json.Serialization
                             JsonPosition.FormatMessage(
                                 reader as IJsonLineInfo,
                                 reader.Path,
-                                "IsSpecified for property '{0}' on {1} set to true.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    property.PropertyName,
-                                    property.DeclaringType
-                                )
+                                "IsSpecified for property '{0}' on {1} set to true."
+                                    .FormatWith(
+                                        CultureInfo.InvariantCulture,
+                                        property.PropertyName,
+                                        property.DeclaringType
+                                    )
                             ),
                             null
                         );
@@ -1700,10 +1695,8 @@ namespace Newtonsoft.Json.Serialization
                 property.PropertyContract = GetContractSafe(property.PropertyType);
             }
 
-            ObjectCreationHandling objectCreationHandling =
-                property.ObjectCreationHandling.GetValueOrDefault(
-                    Serializer._objectCreationHandling
-                );
+            ObjectCreationHandling objectCreationHandling = property.ObjectCreationHandling
+                .GetValueOrDefault(Serializer._objectCreationHandling);
 
             if (
                 (objectCreationHandling != ObjectCreationHandling.Replace)
@@ -1738,11 +1731,12 @@ namespace Newtonsoft.Json.Serialization
                         JsonPosition.FormatMessage(
                             reader as IJsonLineInfo,
                             reader.Path,
-                            "Unable to deserialize value to non-writable property '{0}' on {1}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                property.PropertyName,
-                                property.DeclaringType
-                            )
+                            "Unable to deserialize value to non-writable property '{0}' on {1}."
+                                .FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    property.PropertyName,
+                                    property.DeclaringType
+                                )
                         ),
                         null
                     );
@@ -1765,15 +1759,13 @@ namespace Newtonsoft.Json.Serialization
             // test tokenType here because default value might not be convertible to actual type, e.g. default of "" for DateTime
             if (
                 HasFlag(
-                    property.DefaultValueHandling.GetValueOrDefault(
-                        Serializer._defaultValueHandling
-                    ),
+                    property.DefaultValueHandling
+                        .GetValueOrDefault(Serializer._defaultValueHandling),
                     DefaultValueHandling.Ignore
                 )
                 && !HasFlag(
-                    property.DefaultValueHandling.GetValueOrDefault(
-                        Serializer._defaultValueHandling
-                    ),
+                    property.DefaultValueHandling
+                        .GetValueOrDefault(Serializer._defaultValueHandling),
                     DefaultValueHandling.Populate
                 )
                 && JsonTokenUtils.IsPrimitiveToken(tokenType)
@@ -1817,11 +1809,8 @@ namespace Newtonsoft.Json.Serialization
                         JsonPosition.FormatMessage(
                             reader as IJsonLineInfo,
                             reader.Path,
-                            "Read object reference Id '{0}' for {1}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                id,
-                                value.GetType()
-                            )
+                            "Read object reference Id '{0}' for {1}."
+                                .FormatWith(CultureInfo.InvariantCulture, id, value.GetType())
                         ),
                         null
                     );
@@ -1833,10 +1822,8 @@ namespace Newtonsoft.Json.Serialization
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "Error reading object reference '{0}'.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        id
-                    ),
+                    "Error reading object reference '{0}'."
+                        .FormatWith(CultureInfo.InvariantCulture, id),
                     ex
                 );
             }
@@ -1863,15 +1850,13 @@ namespace Newtonsoft.Json.Serialization
 
             if (
                 HasFlag(
-                    property.DefaultValueHandling.GetValueOrDefault(
-                        Serializer._defaultValueHandling
-                    ),
+                    property.DefaultValueHandling
+                        .GetValueOrDefault(Serializer._defaultValueHandling),
                     DefaultValueHandling.Ignore
                 )
                 && !HasFlag(
-                    property.DefaultValueHandling.GetValueOrDefault(
-                        Serializer._defaultValueHandling
-                    ),
+                    property.DefaultValueHandling
+                        .GetValueOrDefault(Serializer._defaultValueHandling),
                     DefaultValueHandling.Populate
                 )
                 && MiscellaneousUtils.ValueEquals(value, property.GetResolvedDefaultValue())
@@ -1899,10 +1884,8 @@ namespace Newtonsoft.Json.Serialization
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "Cannot create and populate list type {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        contract.CreatedType
-                    )
+                    "Cannot create and populate list type {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, contract.CreatedType)
                 );
             }
 
@@ -1968,19 +1951,15 @@ namespace Newtonsoft.Json.Serialization
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Could not create an instance of type {0}. Type is an interface or abstract class and cannot be instantiated.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            contract.UnderlyingType
-                        )
+                        "Could not create an instance of type {0}. Type is an interface or abstract class and cannot be instantiated."
+                            .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                     );
                 }
 
                 throw JsonSerializationException.Create(
                     reader,
-                    "Unable to find a constructor to use for type {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        contract.UnderlyingType
-                    )
+                    "Unable to find a constructor to use for type {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                 );
             }
         }
@@ -2039,19 +2018,15 @@ namespace Newtonsoft.Json.Serialization
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Could not create an instance of type {0}. Type is an interface or abstract class and cannot be instantiated.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            contract.UnderlyingType
-                        )
+                        "Could not create an instance of type {0}. Type is an interface or abstract class and cannot be instantiated."
+                            .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                     );
                 }
 
                 throw JsonSerializationException.Create(
                     reader,
-                    "Unable to find a default constructor to use for type {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        contract.UnderlyingType
-                    )
+                    "Unable to find a default constructor to use for type {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                 );
             }
         }
@@ -2065,10 +2040,8 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         reader as IJsonLineInfo,
                         reader.Path,
-                        "Started deserializing {0}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            contract.UnderlyingType
-                        )
+                        "Started deserializing {0}"
+                            .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                     ),
                     null
                 );
@@ -2086,10 +2059,8 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         reader as IJsonLineInfo,
                         reader.Path,
-                        "Finished deserializing {0}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            contract.UnderlyingType
-                        )
+                        "Finished deserializing {0}"
+                            .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                     ),
                     null
                 );
@@ -2224,11 +2195,12 @@ namespace Newtonsoft.Json.Serialization
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "Could not convert string '{0}' to dictionary key type '{1}'. Create a TypeConverter to convert from the string to the key type object.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        reader.Value,
-                                        contract.DictionaryKeyType
-                                    ),
+                                    "Could not convert string '{0}' to dictionary key type '{1}'. Create a TypeConverter to convert from the string to the key type object."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            reader.Value,
+                                            contract.DictionaryKeyType
+                                        ),
                                     ex
                                 );
                             }
@@ -2722,10 +2694,8 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         reader as IJsonLineInfo,
                         reader.Path,
-                        "Deserializing {0} using ISerializable constructor.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            contract.UnderlyingType
-                        )
+                        "Deserializing {0} using ISerializable constructor."
+                            .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                     ),
                     null
                 );
@@ -2747,10 +2717,8 @@ namespace Newtonsoft.Json.Serialization
                         {
                             throw JsonSerializationException.Create(
                                 reader,
-                                "Unexpected end when setting {0}'s value.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    memberName
-                                )
+                                "Unexpected end when setting {0}'s value."
+                                    .FormatWith(CultureInfo.InvariantCulture, memberName)
                             );
                         }
                         serializationInfo.AddValue(memberName, JToken.ReadFrom(reader));
@@ -2782,10 +2750,8 @@ namespace Newtonsoft.Json.Serialization
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "Could not create an instance of type {0}. Type is an interface or abstract class and cannot be instantiated.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        contract.UnderlyingType
-                    )
+                    "Could not create an instance of type {0}. Type is an interface or abstract class and cannot be instantiated."
+                        .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                 );
             }
 
@@ -2793,10 +2759,8 @@ namespace Newtonsoft.Json.Serialization
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "ISerializable type '{0}' does not have a valid constructor. To correctly implement ISerializable a constructor that takes SerializationInfo and StreamingContext parameters should be present.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        objectType
-                    )
+                    "ISerializable type '{0}' does not have a valid constructor. To correctly implement ISerializable a constructor that takes SerializationInfo and StreamingContext parameters should be present."
+                        .FormatWith(CultureInfo.InvariantCulture, objectType)
                 );
             }
 
@@ -2866,10 +2830,8 @@ namespace Newtonsoft.Json.Serialization
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "Could not create an instance of type {0}. Type is an interface or abstract class and cannot be instantiated.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        contract.UnderlyingType
-                    )
+                    "Could not create an instance of type {0}. Type is an interface or abstract class and cannot be instantiated."
+                        .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                 );
             }
 
@@ -2888,10 +2850,8 @@ namespace Newtonsoft.Json.Serialization
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "Unable to find a default constructor to use for type {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        contract.UnderlyingType
-                    )
+                    "Unable to find a default constructor to use for type {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                 );
             }
 
@@ -2918,17 +2878,14 @@ namespace Newtonsoft.Json.Serialization
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "Unexpected end when setting {0}'s value.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        memberName
-                                    )
+                                    "Unexpected end when setting {0}'s value."
+                                        .FormatWith(CultureInfo.InvariantCulture, memberName)
                                 );
                             }
 
                             // first attempt to find a settable property, otherwise fall back to a dynamic set without type
-                            JsonProperty? property = contract.Properties.GetClosestMatchProperty(
-                                memberName
-                            );
+                            JsonProperty? property = contract.Properties
+                                .GetClosestMatchProperty(memberName);
 
                             if (property != null && property.Writable && !property.Ignored)
                             {
@@ -3090,7 +3047,7 @@ namespace Newtonsoft.Json.Serialization
                     ", ",
                     contract.CreatorParameters.Select(p => p.PropertyName)
 #if !HAVE_STRING_JOIN_WITH_ENUMERABLE
-                        .ToArray()
+                    .ToArray()
 #endif
                 );
                 TraceWriter.Trace(
@@ -3098,11 +3055,12 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         reader as IJsonLineInfo,
                         reader.Path,
-                        "Deserializing {0} using creator with parameters: {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            contract.UnderlyingType,
-                            parameters
-                        )
+                        "Deserializing {0} using creator with parameters: {1}."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                contract.UnderlyingType,
+                                parameters
+                            )
                     ),
                     null
                 );
@@ -3171,10 +3129,11 @@ namespace Newtonsoft.Json.Serialization
                 JsonProperty? constructorProperty = context.ConstructorProperty;
                 if (constructorProperty == null && context.Property != null)
                 {
-                    constructorProperty = contract.CreatorParameters.ForgivingCaseSensitiveFind(
-                        p => p.PropertyName!,
-                        context.Property.UnderlyingName!
-                    );
+                    constructorProperty = contract.CreatorParameters
+                        .ForgivingCaseSensitiveFind(
+                            p => p.PropertyName!,
+                            context.Property.UnderlyingName!
+                        );
                 }
 
                 if (constructorProperty != null && !constructorProperty.Ignored)
@@ -3197,9 +3156,8 @@ namespace Newtonsoft.Json.Serialization
 
                             if (
                                 HasFlag(
-                                    constructorProperty.DefaultValueHandling.GetValueOrDefault(
-                                        Serializer._defaultValueHandling
-                                    ),
+                                    constructorProperty.DefaultValueHandling
+                                        .GetValueOrDefault(Serializer._defaultValueHandling),
                                     DefaultValueHandling.Populate
                                 )
                             )
@@ -3255,9 +3213,8 @@ namespace Newtonsoft.Json.Serialization
                 else if (!property.Writable && value != null)
                 {
                     // handle readonly collection/dictionary properties
-                    JsonContract propertyContract = Serializer._contractResolver.ResolveContract(
-                        property.PropertyType!
-                    );
+                    JsonContract propertyContract = Serializer._contractResolver
+                        .ResolveContract(property.PropertyType!);
 
                     if (propertyContract.ContractType == JsonContractType.Array)
                     {
@@ -3269,9 +3226,8 @@ namespace Newtonsoft.Json.Serialization
                             && !propertyArrayContract.IsReadOnlyOrFixedSize
                         )
                         {
-                            object? createdObjectCollection = property.ValueProvider!.GetValue(
-                                createdObject
-                            );
+                            object? createdObjectCollection = property.ValueProvider!
+                                .GetValue(createdObject);
                             if (createdObjectCollection != null)
                             {
                                 propertyArrayContract = (JsonArrayContract)GetContract(
@@ -3308,9 +3264,8 @@ namespace Newtonsoft.Json.Serialization
 
                         if (!dictionaryContract.IsReadOnlyOrFixedSize)
                         {
-                            object? createdObjectDictionary = property.ValueProvider!.GetValue(
-                                createdObject
-                            );
+                            object? createdObjectDictionary = property.ValueProvider!
+                                .GetValue(createdObject);
                             if (createdObjectDictionary != null)
                             {
                                 IDictionary targetDictionary =
@@ -3399,11 +3354,12 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         reader as IJsonLineInfo,
                         reader.Path,
-                        "Started deserializing {0} with converter {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            objectType,
-                            converter.GetType()
-                        )
+                        "Started deserializing {0} with converter {1}."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                objectType,
+                                converter.GetType()
+                            )
                     ),
                     null
                 );
@@ -3423,11 +3379,12 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         reader as IJsonLineInfo,
                         reader.Path,
-                        "Finished deserializing {0} with converter {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            objectType,
-                            converter.GetType()
-                        )
+                        "Finished deserializing {0} with converter {1}."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                objectType,
+                                converter.GetType()
+                            )
                     ),
                     null
                 );
@@ -3455,8 +3412,8 @@ namespace Newtonsoft.Json.Serialization
                         CreatorPropertyContext creatorPropertyContext = new CreatorPropertyContext(
                             memberName
                         ) {
-                            ConstructorProperty =
-                                contract.CreatorParameters.GetClosestMatchProperty(memberName),
+                            ConstructorProperty = contract.CreatorParameters
+                                .GetClosestMatchProperty(memberName),
                             Property = contract.Properties.GetClosestMatchProperty(memberName)
                         };
                         propertyValues.Add(creatorPropertyContext);
@@ -3491,10 +3448,8 @@ namespace Newtonsoft.Json.Serialization
                                 {
                                     throw JsonSerializationException.Create(
                                         reader,
-                                        "Unexpected end when setting {0}'s value.".FormatWith(
-                                            CultureInfo.InvariantCulture,
-                                            memberName
-                                        )
+                                        "Unexpected end when setting {0}'s value."
+                                            .FormatWith(CultureInfo.InvariantCulture, memberName)
                                     );
                                 }
 
@@ -3528,10 +3483,8 @@ namespace Newtonsoft.Json.Serialization
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "Unexpected end when setting {0}'s value.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        memberName
-                                    )
+                                    "Unexpected end when setting {0}'s value."
+                                        .FormatWith(CultureInfo.InvariantCulture, memberName)
                                 );
                             }
 
@@ -3544,11 +3497,12 @@ namespace Newtonsoft.Json.Serialization
                                     JsonPosition.FormatMessage(
                                         reader as IJsonLineInfo,
                                         reader.Path,
-                                        "Could not find member '{0}' on {1}.".FormatWith(
-                                            CultureInfo.InvariantCulture,
-                                            memberName,
-                                            contract.UnderlyingType
-                                        )
+                                        "Could not find member '{0}' on {1}."
+                                            .FormatWith(
+                                                CultureInfo.InvariantCulture,
+                                                memberName,
+                                                contract.UnderlyingType
+                                            )
                                     ),
                                     null
                                 );
@@ -3563,11 +3517,12 @@ namespace Newtonsoft.Json.Serialization
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "Could not find member '{0}' on object of type '{1}'".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        memberName,
-                                        objectType.Name
-                                    )
+                                    "Could not find member '{0}' on object of type '{1}'"
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            memberName,
+                                            objectType.Name
+                                        )
                                 );
                             }
                         }
@@ -3672,19 +3627,15 @@ namespace Newtonsoft.Json.Serialization
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Could not create an instance of type {0}. Type is an interface or abstract class and cannot be instantiated.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            objectContract.UnderlyingType
-                        )
+                        "Could not create an instance of type {0}. Type is an interface or abstract class and cannot be instantiated."
+                            .FormatWith(CultureInfo.InvariantCulture, objectContract.UnderlyingType)
                     );
                 }
 
                 throw JsonSerializationException.Create(
                     reader,
-                    "Unable to find a constructor to use for type {0}. A class should either have a default constructor, one constructor with arguments or a constructor marked with the JsonConstructor attribute.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        objectContract.UnderlyingType
-                    )
+                    "Unable to find a constructor to use for type {0}. A class should either have a default constructor, one constructor with arguments or a constructor marked with the JsonConstructor attribute."
+                        .FormatWith(CultureInfo.InvariantCulture, objectContract.UnderlyingType)
                 );
             }
 
@@ -3736,9 +3687,8 @@ namespace Newtonsoft.Json.Serialization
                         {
                             // attempt exact case match first
                             // then try match ignoring case
-                            JsonProperty? property = contract.Properties.GetClosestMatchProperty(
-                                propertyName
-                            );
+                            JsonProperty? property = contract.Properties
+                                .GetClosestMatchProperty(propertyName);
 
                             if (property == null)
                             {
@@ -3752,11 +3702,12 @@ namespace Newtonsoft.Json.Serialization
                                         JsonPosition.FormatMessage(
                                             reader as IJsonLineInfo,
                                             reader.Path,
-                                            "Could not find member '{0}' on {1}".FormatWith(
-                                                CultureInfo.InvariantCulture,
-                                                propertyName,
-                                                contract.UnderlyingType
-                                            )
+                                            "Could not find member '{0}' on {1}"
+                                                .FormatWith(
+                                                    CultureInfo.InvariantCulture,
+                                                    propertyName,
+                                                    contract.UnderlyingType
+                                                )
                                         ),
                                         null
                                     );
@@ -3771,11 +3722,12 @@ namespace Newtonsoft.Json.Serialization
                                 {
                                     throw JsonSerializationException.Create(
                                         reader,
-                                        "Could not find member '{0}' on object of type '{1}'".FormatWith(
-                                            CultureInfo.InvariantCulture,
-                                            propertyName,
-                                            contract.UnderlyingType.Name
-                                        )
+                                        "Could not find member '{0}' on object of type '{1}'"
+                                            .FormatWith(
+                                                CultureInfo.InvariantCulture,
+                                                propertyName,
+                                                contract.UnderlyingType.Name
+                                            )
                                     );
                                 }
 
@@ -3823,10 +3775,8 @@ namespace Newtonsoft.Json.Serialization
                                 {
                                     throw JsonSerializationException.Create(
                                         reader,
-                                        "Unexpected end when setting {0}'s value.".FormatWith(
-                                            CultureInfo.InvariantCulture,
-                                            propertyName
-                                        )
+                                        "Unexpected end when setting {0}'s value."
+                                            .FormatWith(CultureInfo.InvariantCulture, propertyName)
                                     );
                                 }
 
@@ -3944,12 +3894,13 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         null,
                         reader.Path,
-                        "ShouldDeserialize result for property '{0}' on {1}: {2}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            property.PropertyName,
-                            property.DeclaringType,
-                            shouldDeserialize
-                        )
+                        "ShouldDeserialize result for property '{0}' on {1}: {2}"
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                property.PropertyName,
+                                property.DeclaringType,
+                                shouldDeserialize
+                            )
                     ),
                     null
                 );
@@ -3995,10 +3946,8 @@ namespace Newtonsoft.Json.Serialization
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Error setting value in extension data for type '{0}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            contract.UnderlyingType
-                        ),
+                        "Error setting value in extension data for type '{0}'."
+                            .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType),
                         ex
                     );
                 }
@@ -4055,10 +4004,11 @@ namespace Newtonsoft.Json.Serialization
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "Required property '{0}' not found in JSON.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        property.PropertyName
-                                    )
+                                    "Required property '{0}' not found in JSON."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            property.PropertyName
+                                        )
                                 );
                             }
 
@@ -4073,23 +4023,23 @@ namespace Newtonsoft.Json.Serialization
 
                                 if (
                                     HasFlag(
-                                        property.DefaultValueHandling.GetValueOrDefault(
-                                            Serializer._defaultValueHandling
-                                        ),
+                                        property.DefaultValueHandling
+                                            .GetValueOrDefault(Serializer._defaultValueHandling),
                                         DefaultValueHandling.Populate
                                     ) && property.Writable
                                 )
                                 {
-                                    property.ValueProvider!.SetValue(
-                                        newObject,
-                                        EnsureType(
-                                            reader,
-                                            property.GetResolvedDefaultValue(),
-                                            CultureInfo.InvariantCulture,
-                                            property.PropertyContract!,
-                                            property.PropertyType
-                                        )
-                                    );
+                                    property.ValueProvider!
+                                        .SetValue(
+                                            newObject,
+                                            EnsureType(
+                                                reader,
+                                                property.GetResolvedDefaultValue(),
+                                                CultureInfo.InvariantCulture,
+                                                property.PropertyContract!,
+                                                property.PropertyType
+                                            )
+                                        );
                                 }
                             }
                             break;
@@ -4098,20 +4048,22 @@ namespace Newtonsoft.Json.Serialization
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "Required property '{0}' expects a value but got null.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        property.PropertyName
-                                    )
+                                    "Required property '{0}' expects a value but got null."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            property.PropertyName
+                                        )
                                 );
                             }
                             if (resolvedRequired == Required.DisallowNull)
                             {
                                 throw JsonSerializationException.Create(
                                     reader,
-                                    "Required property '{0}' expects a non-null value.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        property.PropertyName
-                                    )
+                                    "Required property '{0}' expects a non-null value."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            property.PropertyName
+                                        )
                                 );
                             }
                             break;

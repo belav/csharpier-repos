@@ -41,13 +41,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static SyntaxTrivia? GetLastCommentOrWhitespace(this SyntaxTriviaList triviaList)
         {
             return triviaList.Where(
-                    t =>
-                        t.MatchesKind(
-                            SyntaxKind.SingleLineCommentTrivia,
-                            SyntaxKind.MultiLineCommentTrivia,
-                            SyntaxKind.WhitespaceTrivia
-                        )
-                )
+                t =>
+                    t.MatchesKind(
+                        SyntaxKind.SingleLineCommentTrivia,
+                        SyntaxKind.MultiLineCommentTrivia,
+                        SyntaxKind.WhitespaceTrivia
+                    )
+            )
                 .LastOrNull();
         }
 

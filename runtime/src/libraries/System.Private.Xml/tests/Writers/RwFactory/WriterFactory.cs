@@ -319,17 +319,15 @@ namespace System.Xml.Tests
                 Convert.ToChar(int.Parse(ReadFilterCriteria("NewLineChars", true))),
                 1
             );
-            _settings.NewLineOnAttributes = bool.Parse(
-                ReadFilterCriteria("NewLineOnAttributes", true)
-            );
+            _settings.NewLineOnAttributes = bool
+                .Parse(ReadFilterCriteria("NewLineOnAttributes", true));
             if (bool.Parse(ReadFilterCriteria("NormalizeNewlines", true)))
                 _settings.NewLineHandling = NewLineHandling.Replace;
             else
                 _settings.NewLineHandling = NewLineHandling.None;
 
-            _settings.OmitXmlDeclaration = bool.Parse(
-                ReadFilterCriteria("OmitXmlDeclaration", true)
-            );
+            _settings.OmitXmlDeclaration = bool
+                .Parse(ReadFilterCriteria("OmitXmlDeclaration", true));
 
             //Reading Writer Type to determine encoding and if the writer type is binary writer.
             string wt = ReadFilterCriteria("WriterType", true);

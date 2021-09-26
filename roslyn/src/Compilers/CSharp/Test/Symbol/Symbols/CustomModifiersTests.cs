@@ -365,9 +365,8 @@ class CL3
             );
 
             var withModifiers = cl3.BaseType().BaseType();
-            var withoutModifiers = withModifiers.OriginalDefinition.Construct(
-                withModifiers.TypeArguments()
-            );
+            var withoutModifiers = withModifiers.OriginalDefinition
+                .Construct(withModifiers.TypeArguments());
             Assert.True(HasTypeArgumentsCustomModifiers(withModifiers));
             Assert.False(HasTypeArgumentsCustomModifiers(withoutModifiers));
             Assert.True(
@@ -383,9 +382,8 @@ class CL3
 
         private bool HasTypeArgumentsCustomModifiers(NamedTypeSymbol type)
         {
-            return type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Any(
-                a => a.CustomModifiers.Any()
-            );
+            return type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                .Any(a => a.CustomModifiers.Any());
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
@@ -1455,9 +1453,10 @@ class CL3
                 test.GetMethod.ToTestDisplayString()
             );
             Assert.True(
-                test.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.SequenceEqual(
-                    test.SetMethod.Parameters.First().TypeWithAnnotations.CustomModifiers
-                )
+                test.GetMethod.ReturnTypeWithAnnotations.CustomModifiers
+                    .SequenceEqual(
+                        test.SetMethod.Parameters.First().TypeWithAnnotations.CustomModifiers
+                    )
             );
 
             CompileAndVerify(
@@ -1804,7 +1803,8 @@ class Module1
                 (
                     (CSharpCustomModifier)(
                         (NamedTypeSymbol)test.Parameters.First().Type
-                    ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].CustomModifiers.First()
+                    ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].CustomModifiers
+                        .First()
                 ).ModifierSymbol.ContainingAssembly
             );
 
@@ -1831,7 +1831,8 @@ class Module1
                 (
                     (CSharpCustomModifier)(
                         (NamedTypeSymbol)test.Parameters.First().Type
-                    ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].CustomModifiers.First()
+                    ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].CustomModifiers
+                        .First()
                 ).ModifierSymbol.ContainingAssembly
             );
 
@@ -2998,16 +2999,18 @@ Implemented B",
                 t2.Equals(t1, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds)
             );
             Assert.True(
-                t1.Type.Equals(
-                    t2.Type,
-                    TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                )
+                t1.Type
+                    .Equals(
+                        t2.Type,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
             );
             Assert.True(
-                t2.Type.Equals(
-                    t1.Type,
-                    TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                )
+                t2.Type
+                    .Equals(
+                        t1.Type,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
             );
         }
 

@@ -82,19 +82,19 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
             var syntaxTree = operation.Syntax.SyntaxTree;
             var cancellationToken = context.CancellationToken;
 
-            var option = context.Options.GetOption(
-                CodeStyleOptions2.PreferSystemHashCode,
-                operation.Language,
-                syntaxTree,
-                cancellationToken
-            );
+            var option = context.Options
+                .GetOption(
+                    CodeStyleOptions2.PreferSystemHashCode,
+                    operation.Language,
+                    syntaxTree,
+                    cancellationToken
+                );
             if (option?.Value != true)
                 return;
 
             var operationLocation = operation.Syntax.GetLocation();
-            var declarationLocation = context.OwningSymbol.DeclaringSyntaxReferences[0].GetSyntax(
-                    cancellationToken
-                )
+            var declarationLocation = context.OwningSymbol.DeclaringSyntaxReferences[0]
+                .GetSyntax(cancellationToken)
                 .GetLocation();
             context.ReportDiagnostic(
                 DiagnosticHelper.Create(

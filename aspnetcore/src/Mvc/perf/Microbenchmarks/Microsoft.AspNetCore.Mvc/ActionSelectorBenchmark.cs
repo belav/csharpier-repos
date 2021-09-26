@@ -128,11 +128,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
                 var routeValues = _dataSet[i].Key;
                 var expected = _dataSet[i].Value;
 
-                var state = routeContext.RouteData.PushState(
-                    MockRouter.Instance,
-                    routeValues,
-                    null
-                );
+                var state = routeContext.RouteData
+                    .PushState(MockRouter.Instance, routeValues, null);
 
                 var actual = _actionSelector.SelectCandidates(routeContext);
                 Verify(expected, actual);
@@ -151,11 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
                 var routeValues = _dataSet[i].Key;
                 var expected = _dataSet[i].Value;
 
-                var state = routeContext.RouteData.PushState(
-                    MockRouter.Instance,
-                    routeValues,
-                    null
-                );
+                var state = routeContext.RouteData
+                    .PushState(MockRouter.Instance, routeValues, null);
 
                 var actual = NaiveSelectCandidates(_actions, routeContext.RouteData.Values);
                 Verify(expected, actual);

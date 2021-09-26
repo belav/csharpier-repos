@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [Fact]
         public void AddReferences()
         {
-            var options = ScriptOptions.Default.AddReferences(typeof(int).GetTypeInfo().Assembly)
+            var options = ScriptOptions.Default
+                .AddReferences(typeof(int).GetTypeInfo().Assembly)
                 .AddReferences(typeof(int).GetTypeInfo().Assembly)
                 .AddReferences(
                     MetadataReference.CreateFromAssemblyInternal(typeof(int).GetTypeInfo().Assembly)
@@ -37,13 +38,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         public void AddReferences_Errors()
         {
             var moduleRef = ModuleMetadata.CreateFromImage(
-                    TestResources.MetadataTests.NetModule01.ModuleCS00
-                )
+                TestResources.MetadataTests.NetModule01.ModuleCS00
+            )
                 .GetReference();
 
-            var options = ScriptOptions.Default.WithReferences(
-                ImmutableArray<MetadataReference>.Empty
-            );
+            var options = ScriptOptions.Default
+                .WithReferences(ImmutableArray<MetadataReference>.Empty);
             Assert.Throws<ArgumentNullException>(
                 "references",
                 () => options.AddReferences((MetadataReference[])null)
@@ -105,9 +105,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [Fact]
         public void WithReferences()
         {
-            var empty = ScriptOptions.Default.WithReferences(
-                ImmutableArray<MetadataReference>.Empty
-            );
+            var empty = ScriptOptions.Default
+                .WithReferences(ImmutableArray<MetadataReference>.Empty);
 
             var options = empty.WithReferences("System.Linq", "system.linq");
             Assert.Equal(2, options.MetadataReferences.Length);
@@ -119,8 +118,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             Assert.Equal(2, options.MetadataReferences.Length);
 
             var assemblyRef = ModuleMetadata.CreateFromImage(
-                    TestResources.SymbolsTests.Methods.CSMethods
-                )
+                TestResources.SymbolsTests.Methods.CSMethods
+            )
                 .GetReference();
 
             options = empty.WithReferences(assemblyRef, assemblyRef);
@@ -131,13 +130,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         public void WithReferences_Errors()
         {
             var moduleRef = ModuleMetadata.CreateFromImage(
-                    TestResources.MetadataTests.NetModule01.ModuleCS00
-                )
+                TestResources.MetadataTests.NetModule01.ModuleCS00
+            )
                 .GetReference();
 
-            var options = ScriptOptions.Default.WithReferences(
-                ImmutableArray<MetadataReference>.Empty
-            );
+            var options = ScriptOptions.Default
+                .WithReferences(ImmutableArray<MetadataReference>.Empty);
             Assert.Throws<ArgumentNullException>(
                 "references",
                 () => options.WithReferences((MetadataReference[])null)
@@ -206,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         public void AddNamespaces()
         {
             // we only check if the specified name is a valid CLR namespace name, it might not be a valid C#/VB namespace name:
-            var options = ScriptOptions.Default.AddImports("")
+            var options = ScriptOptions.Default
+                .AddImports("")
                 .AddImports("blah.")
                 .AddImports("b\0lah")
                 .AddImports(".blah")

@@ -84,10 +84,10 @@ namespace Microsoft.CodeAnalysis.AddParameter
 
             var referencedSymbols = fixAllReferences
                 ? await FindMethodDeclarationReferencesAsync(
-                          invocationDocument,
-                          method,
-                          cancellationToken
-                      )
+                      invocationDocument,
+                      method,
+                      cancellationToken
+                  )
                       .ConfigureAwait(false)
                 : method.GetAllMethodSymbolsOfPartialParts();
 
@@ -139,9 +139,9 @@ namespace Microsoft.CodeAnalysis.AddParameter
                         ? generator.DefaultExpression(newParamaterType)
                         : null;
                     var parameterDeclaration = generator.ParameterDeclaration(
-                            parameterSymbol,
-                            argumentInitializer
-                        )
+                        parameterSymbol,
+                        argumentInitializer
+                    )
                         .WithAdditionalAnnotations(Formatter.Annotation);
                     if (anySymbolReferencesNotInSource && methodDeclaration == method)
                     {
@@ -188,13 +188,13 @@ namespace Microsoft.CodeAnalysis.AddParameter
             var progress = new StreamingProgressCollector();
 
             await SymbolFinder.FindReferencesAsync(
-                    method,
-                    invocationDocument.Project.Solution,
-                    progress: progress,
-                    documents: null,
-                    FindReferencesSearchOptions.Default,
-                    cancellationToken
-                )
+                method,
+                invocationDocument.Project.Solution,
+                progress: progress,
+                documents: null,
+                FindReferencesSearchOptions.Default,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var referencedSymbols = progress.GetReferencedSymbols();
             return referencedSymbols.Select(referencedSymbol => referencedSymbol.Definition)
@@ -262,8 +262,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                     includeLeadingNewLine: true
                 );
                 parameterDeclaration = parameterDeclaration.WithPrependedLeadingTrivia(
-                        leadingIndentation
-                    )
+                    leadingIndentation
+                )
                     .WithAdditionalAnnotations(Formatter.Annotation);
 
                 editor.AddParameter(declaration, parameterDeclaration);
@@ -326,8 +326,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                     editor.ReplaceNode(
                         nextParameter,
                         nextParameter.WithPrependedLeadingTrivia(
-                                generator.ElasticCarriageReturnLineFeed
-                            )
+                            generator.ElasticCarriageReturnLineFeed
+                        )
                             .WithAdditionalAnnotations(Formatter.Annotation)
                     );
                 }
@@ -356,8 +356,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                 editor.ReplaceNode(
                     nextParameter,
                     nextParameter.WithPrependedLeadingTrivia(
-                            generator.ElasticCarriageReturnLineFeed
-                        )
+                        generator.ElasticCarriageReturnLineFeed
+                    )
                         .WithAdditionalAnnotations(Formatter.Annotation)
                 );
             }

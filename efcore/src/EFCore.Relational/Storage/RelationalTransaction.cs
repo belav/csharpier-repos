@@ -185,12 +185,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
             try
             {
                 var interceptionResult = await Logger.TransactionCommittingAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        startTime,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!interceptionResult.IsSuppressed)
@@ -199,27 +199,27 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 }
 
                 await Logger.TransactionCommittedAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        startTime,
-                        stopwatch.Elapsed,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    stopwatch.Elapsed,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 await Logger.TransactionErrorAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        "Commit",
-                        e,
-                        startTime,
-                        stopwatch.Elapsed,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    "Commit",
+                    e,
+                    startTime,
+                    stopwatch.Elapsed,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 throw;
@@ -237,12 +237,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
             try
             {
                 var interceptionResult = await Logger.TransactionRollingBackAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        startTime,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!interceptionResult.IsSuppressed)
@@ -251,27 +251,27 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 }
 
                 await Logger.TransactionRolledBackAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        startTime,
-                        stopwatch.Elapsed,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    stopwatch.Elapsed,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 await Logger.TransactionErrorAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        "Rollback",
-                        e,
-                        startTime,
-                        stopwatch.Elapsed,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    "Rollback",
+                    e,
+                    startTime,
+                    stopwatch.Elapsed,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 throw;
@@ -340,12 +340,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
             try
             {
                 var interceptionResult = await Logger.CreatingTransactionSavepointAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        startTime,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!interceptionResult.IsSuppressed)
@@ -359,26 +359,26 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 }
 
                 await Logger.CreatedTransactionSavepointAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        startTime,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 await Logger.TransactionErrorAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        "CreateSavepoint",
-                        e,
-                        startTime,
-                        stopwatch.Elapsed,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    "CreateSavepoint",
+                    e,
+                    startTime,
+                    stopwatch.Elapsed,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 throw;
@@ -445,12 +445,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
             try
             {
                 var interceptionResult = await Logger.RollingBackToTransactionSavepointAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        startTime,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!interceptionResult.IsSuppressed)
@@ -464,26 +464,26 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 }
 
                 await Logger.RolledBackToTransactionSavepointAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        startTime,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 await Logger.TransactionErrorAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        "RollbackToSavepoint",
-                        e,
-                        startTime,
-                        stopwatch.Elapsed,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    "RollbackToSavepoint",
+                    e,
+                    startTime,
+                    stopwatch.Elapsed,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 throw;
@@ -550,12 +550,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
             try
             {
                 var interceptionResult = await Logger.ReleasingTransactionSavepointAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        startTime,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!interceptionResult.IsSuppressed)
@@ -569,26 +569,26 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 }
 
                 await Logger.ReleasedTransactionSavepointAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        startTime,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 await Logger.TransactionErrorAsync(
-                        Connection,
-                        _dbTransaction,
-                        TransactionId,
-                        "ReleaseSavepoint",
-                        e,
-                        startTime,
-                        stopwatch.Elapsed,
-                        cancellationToken
-                    )
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    "ReleaseSavepoint",
+                    e,
+                    startTime,
+                    stopwatch.Elapsed,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 throw;

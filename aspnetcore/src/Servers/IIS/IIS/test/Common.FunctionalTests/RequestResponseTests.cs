@@ -204,10 +204,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             var content = new StringContent(new string('a', 100000));
             for (int i = 0; i < 500; i++)
             {
-                var response = await _fixture.Client.PostAsync(
-                    "ReadAndWriteSynchronously",
-                    content
-                );
+                var response = await _fixture.Client
+                    .PostAsync("ReadAndWriteSynchronously", content);
                 var responseText = await response.Content.ReadAsStringAsync();
 
                 Assert.Equal(expected: 110000, actual: responseText.Length);
@@ -505,10 +503,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [ConditionalFact]
         public async Task TestReadOffsetWorks()
         {
-            var result = await _fixture.Client.PostAsync(
-                $"/TestReadOffsetWorks",
-                new StringContent("Hello World")
-            );
+            var result = await _fixture.Client
+                .PostAsync($"/TestReadOffsetWorks", new StringContent("Hello World"));
             Assert.Equal("Hello World", await result.Content.ReadAsStringAsync());
         }
 
@@ -520,9 +516,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [InlineData("/InvalidCountWithOffset")]
         public async Task TestInvalidReadOperations(string operation)
         {
-            var result = await _fixture.Client.GetStringAsync(
-                $"/TestInvalidReadOperations{operation}"
-            );
+            var result = await _fixture.Client
+                .GetStringAsync($"/TestInvalidReadOperations{operation}");
             Assert.Equal("Success", result);
         }
 
@@ -531,9 +526,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [InlineData("/InvalidCountZeroRead")]
         public async Task TestValidReadOperations(string operation)
         {
-            var result = await _fixture.Client.GetStringAsync(
-                $"/TestValidReadOperations{operation}"
-            );
+            var result = await _fixture.Client
+                .GetStringAsync($"/TestValidReadOperations{operation}");
             Assert.Equal("Success", result);
         }
 
@@ -542,10 +536,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [InlineData("/InvalidCountZeroReadPost")]
         public async Task TestValidReadOperationsPost(string operation)
         {
-            var result = await _fixture.Client.PostAsync(
-                $"/TestValidReadOperations{operation}",
-                new StringContent("hello")
-            );
+            var result = await _fixture.Client
+                .PostAsync($"/TestValidReadOperations{operation}", new StringContent("hello"));
             Assert.Equal("Success", await result.Content.ReadAsStringAsync());
         }
 
@@ -557,28 +549,24 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [InlineData("/InvalidCountWithOffset")]
         public async Task TestInvalidWriteOperations(string operation)
         {
-            var result = await _fixture.Client.GetStringAsync(
-                $"/TestInvalidWriteOperations{operation}"
-            );
+            var result = await _fixture.Client
+                .GetStringAsync($"/TestInvalidWriteOperations{operation}");
             Assert.Equal("Success", result);
         }
 
         [ConditionalFact]
         public async Task TestValidWriteOperations()
         {
-            var result = await _fixture.Client.GetStringAsync(
-                $"/TestValidWriteOperations/NullBuffer"
-            );
+            var result = await _fixture.Client
+                .GetStringAsync($"/TestValidWriteOperations/NullBuffer");
             Assert.Equal("Success", result);
         }
 
         [ConditionalFact]
         public async Task TestValidWriteOperationsPost()
         {
-            var result = await _fixture.Client.PostAsync(
-                $"/TestValidWriteOperations/NullBufferPost",
-                new StringContent("hello")
-            );
+            var result = await _fixture.Client
+                .PostAsync($"/TestValidWriteOperations/NullBufferPost", new StringContent("hello"));
             Assert.Equal("Success", await result.Content.ReadAsStringAsync());
         }
 
@@ -603,10 +591,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             Assert.Equal("test123=foo", headerValues.First());
 
             Assert.True(
-                response.Content.Headers.TryGetValues(
-                    Net.Http.Headers.HeaderNames.ContentType,
-                    out headerValues
-                )
+                response.Content.Headers
+                    .TryGetValues(Net.Http.Headers.HeaderNames.ContentType, out headerValues)
             );
             Assert.Equal("text/plain", headerValues.First());
 
@@ -644,9 +630,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             string body
         )
         {
-            var response = await _fixture.Client.GetAsync(
-                $"SetCustomErorCode?code={code}&reason={reason}&writeBody={body != null}&body={body}"
-            );
+            var response = await _fixture.Client
+                .GetAsync(
+                    $"SetCustomErorCode?code={code}&reason={reason}&writeBody={body != null}&body={body}"
+                );
             Assert.Equal((HttpStatusCode)code, response.StatusCode);
             Assert.Equal(expectedReason, response.ReasonPhrase);
 
@@ -800,16 +787,18 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     ""
                 );
 
-                await _fixture.Client.RetryRequestAsync(
-                    "/WaitingRequestCount",
-                    async message => await message.Content.ReadAsStringAsync() == "1"
-                );
+                await _fixture.Client
+                    .RetryRequestAsync(
+                        "/WaitingRequestCount",
+                        async message => await message.Content.ReadAsStringAsync() == "1"
+                    );
             }
 
-            await _fixture.Client.RetryRequestAsync(
-                "/WaitingRequestCount",
-                async message => await message.Content.ReadAsStringAsync() == "0"
-            );
+            await _fixture.Client
+                .RetryRequestAsync(
+                    "/WaitingRequestCount",
+                    async message => await message.Content.ReadAsStringAsync() == "0"
+                );
         }
 
         [ConditionalFact]
@@ -877,11 +866,14 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     Assert.False(bytes0.IsEmpty);
                     return (status, Encoding.UTF8.GetString(bytes0.Span));
                 }
-                var length = int.Parse(
-                    headers.Single(h => h.StartsWith("Content-Length: ", StringComparison.Ordinal))
-                        .Substring("Content-Length: ".Length),
-                    CultureInfo.InvariantCulture
-                );
+                var length = int
+                    .Parse(
+                        headers.Single(
+                            h => h.StartsWith("Content-Length: ", StringComparison.Ordinal)
+                        )
+                            .Substring("Content-Length: ".Length),
+                        CultureInfo.InvariantCulture
+                    );
                 var bytes1 = await connection.Receive(length);
                 return (status, Encoding.ASCII.GetString(bytes1.Span));
             }

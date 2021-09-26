@@ -21,9 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     public class AttributeTests_NativeInteger : CSharpTestBase
     {
         private static readonly SymbolDisplayFormat FormatWithSpecialTypes =
-            SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+            SymbolDisplayFormat.TestFormat
+                .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
 
         [Fact]
         public void EmptyProject()
@@ -53,9 +52,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
-                    );
+                    var attributeType = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>(
+                            "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                        );
                     Assert.NotNull(attributeType);
                     AssertNativeIntegerAttributes(module, expected);
                 }
@@ -89,9 +89,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
-                    );
+                    var attributeType = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>(
+                            "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                        );
                     Assert.Null(attributeType);
                     AssertNativeIntegerAttributes(module, expected);
                 }
@@ -244,9 +245,9 @@ using System.Runtime.CompilerServices;
                     // (11,14): error CS8335: Do not use 'System.Runtime.CompilerServices.NativeIntegerAttribute'. This is reserved for compiler usage.
                     //     [return: NativeInteger(new[] { false, true })] static UIntPtr[] M2() => throw null;
                     Diagnostic(
-                            ErrorCode.ERR_ExplicitReservedAttr,
-                            "NativeInteger(new[] { false, true })"
-                        )
+                        ErrorCode.ERR_ExplicitReservedAttr,
+                        "NativeInteger(new[] { false, true })"
+                    )
                         .WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute")
                         .WithLocation(11, 14),
                     // (12,21): error CS8335: Do not use 'System.Runtime.CompilerServices.NativeIntegerAttribute'. This is reserved for compiler usage.
@@ -1360,7 +1361,8 @@ class Program
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.ContainingAssembly.GetTypeByMetadataName("Program")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Program")
                         .GetMethod("<M>g__L|0_0");
                     AssertNativeIntegerAttribute(method.GetReturnTypeAttributes());
                     AssertAttributes(
@@ -1389,7 +1391,8 @@ class Program
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.ContainingAssembly.GetTypeByMetadataName("Program")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Program")
                         .GetMethod("<M>g__L|0_0");
                     AssertNativeIntegerAttribute(method.Parameters[0].GetAttributes());
                 }
@@ -1551,9 +1554,8 @@ public class C : IA, IB<(nint, object, nuint[], object, nint, object, (System.In
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9
             );
             // Ideally should not emit any attributes. Compare with dynamic/object.
@@ -1578,9 +1580,8 @@ class B : A<System.UIntPtr, nint>
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9.WithNullablePublicOnly()
             );
             var expected =
@@ -1606,9 +1607,10 @@ class B : A<System.UIntPtr, nint>
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
-                    );
+                    var attributeType = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>(
+                            "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                        );
                     AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
                     Assert.False(attributeUsage.Inherited);
                     Assert.False(attributeUsage.AllowMultiple);
@@ -1778,9 +1780,10 @@ C
         private static TypeDefinition GetTypeDefinitionByName(MetadataReader reader, string name)
         {
             return reader.GetTypeDefinition(
-                reader.TypeDefinitions.Single(
-                    h => reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
-                )
+                reader.TypeDefinitions
+                    .Single(
+                        h => reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
+                    )
             );
         }
 

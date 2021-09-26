@@ -429,10 +429,11 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
 
             using var server = host.GetTestServer();
             var client = server.CreateClient();
-            client.DefaultRequestHeaders.Add(
-                "X-Client-Cert",
-                Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
-            );
+            client.DefaultRequestHeaders
+                .Add(
+                    "X-Client-Cert",
+                    Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
+                );
             var response = await client.GetAsync("https://example.com/");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
@@ -447,10 +448,11 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
 
             using var server = host.GetTestServer();
             var client = server.CreateClient();
-            client.DefaultRequestHeaders.Add(
-                "X-Client-Cert",
-                "OOPS" + Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
-            );
+            client.DefaultRequestHeaders
+                .Add(
+                    "X-Client-Cert",
+                    "OOPS" + Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
+                );
             var response = await client.GetAsync("https://example.com/");
             Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
         }
@@ -470,10 +472,11 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
 
             using var server = host.GetTestServer();
             var client = server.CreateClient();
-            client.DefaultRequestHeaders.Add(
-                "X-ARR-ClientCert",
-                Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
-            );
+            client.DefaultRequestHeaders
+                .Add(
+                    "X-ARR-ClientCert",
+                    Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
+                );
             var response = await client.GetAsync("https://example.com/");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
@@ -489,10 +492,11 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
 
             using var server = host.GetTestServer();
             var client = server.CreateClient();
-            client.DefaultRequestHeaders.Add(
-                "random-Weird-header",
-                Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
-            );
+            client.DefaultRequestHeaders
+                .Add(
+                    "random-Weird-header",
+                    Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
+                );
             var response = await client.GetAsync("https://example.com/");
             Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
         }
@@ -568,9 +572,11 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
             }
 
             if (
-                !string.IsNullOrEmpty(
-                    Certificates.SelfSignedValidWithNoEku.GetNameInfo(X509NameType.DnsName, false)
-                )
+                !string
+                    .IsNullOrEmpty(
+                        Certificates.SelfSignedValidWithNoEku
+                            .GetNameInfo(X509NameType.DnsName, false)
+                    )
             )
             {
                 actual = responseAsXml.Elements("claim")
@@ -579,19 +585,19 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 {
                     Assert.Single(actual);
                     Assert.Equal(
-                        Certificates.SelfSignedValidWithNoEku.GetNameInfo(
-                            X509NameType.DnsName,
-                            false
-                        ),
+                        Certificates.SelfSignedValidWithNoEku
+                            .GetNameInfo(X509NameType.DnsName, false),
                         actual.First().Value
                     );
                 }
             }
 
             if (
-                !string.IsNullOrEmpty(
-                    Certificates.SelfSignedValidWithNoEku.GetNameInfo(X509NameType.EmailName, false)
-                )
+                !string
+                    .IsNullOrEmpty(
+                        Certificates.SelfSignedValidWithNoEku
+                            .GetNameInfo(X509NameType.EmailName, false)
+                    )
             )
             {
                 actual = responseAsXml.Elements("claim")
@@ -600,22 +606,19 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 {
                     Assert.Single(actual);
                     Assert.Equal(
-                        Certificates.SelfSignedValidWithNoEku.GetNameInfo(
-                            X509NameType.EmailName,
-                            false
-                        ),
+                        Certificates.SelfSignedValidWithNoEku
+                            .GetNameInfo(X509NameType.EmailName, false),
                         actual.First().Value
                     );
                 }
             }
 
             if (
-                !string.IsNullOrEmpty(
-                    Certificates.SelfSignedValidWithNoEku.GetNameInfo(
-                        X509NameType.SimpleName,
-                        false
+                !string
+                    .IsNullOrEmpty(
+                        Certificates.SelfSignedValidWithNoEku
+                            .GetNameInfo(X509NameType.SimpleName, false)
                     )
-                )
             )
             {
                 actual = responseAsXml.Elements("claim")
@@ -624,19 +627,19 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 {
                     Assert.Single(actual);
                     Assert.Equal(
-                        Certificates.SelfSignedValidWithNoEku.GetNameInfo(
-                            X509NameType.SimpleName,
-                            false
-                        ),
+                        Certificates.SelfSignedValidWithNoEku
+                            .GetNameInfo(X509NameType.SimpleName, false),
                         actual.First().Value
                     );
                 }
             }
 
             if (
-                !string.IsNullOrEmpty(
-                    Certificates.SelfSignedValidWithNoEku.GetNameInfo(X509NameType.UpnName, false)
-                )
+                !string
+                    .IsNullOrEmpty(
+                        Certificates.SelfSignedValidWithNoEku
+                            .GetNameInfo(X509NameType.UpnName, false)
+                    )
             )
             {
                 actual = responseAsXml.Elements("claim")
@@ -645,19 +648,19 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 {
                     Assert.Single(actual);
                     Assert.Equal(
-                        Certificates.SelfSignedValidWithNoEku.GetNameInfo(
-                            X509NameType.UpnName,
-                            false
-                        ),
+                        Certificates.SelfSignedValidWithNoEku
+                            .GetNameInfo(X509NameType.UpnName, false),
                         actual.First().Value
                     );
                 }
             }
 
             if (
-                !string.IsNullOrEmpty(
-                    Certificates.SelfSignedValidWithNoEku.GetNameInfo(X509NameType.UrlName, false)
-                )
+                !string
+                    .IsNullOrEmpty(
+                        Certificates.SelfSignedValidWithNoEku
+                            .GetNameInfo(X509NameType.UrlName, false)
+                    )
             )
             {
                 actual = responseAsXml.Elements("claim")
@@ -666,10 +669,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
                 {
                     Assert.Single(actual);
                     Assert.Equal(
-                        Certificates.SelfSignedValidWithNoEku.GetNameInfo(
-                            X509NameType.UrlName,
-                            false
-                        ),
+                        Certificates.SelfSignedValidWithNoEku
+                            .GetNameInfo(X509NameType.UrlName, false),
                         actual.First().Value
                     );
                 }
@@ -848,118 +849,114 @@ namespace Microsoft.AspNetCore.Authentication.Certificate.Test
             bool useCache = false
         )
         {
-            var host = new HostBuilder().ConfigureWebHost(
-                    builder =>
-                        builder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        (context, next) =>
-                                        {
-                                            if (clientCertificate != null)
-                                            {
-                                                context.Connection.ClientCertificate =
-                                                    clientCertificate;
-                                            }
-                                            return next();
-                                        }
-                                    );
-
-                                    if (wireUpHeaderMiddleware)
+            var host = new HostBuilder()
+                .ConfigureWebHost(builder => builder.UseTestServer().Configure(
+                            app =>
+                            {
+                                app.Use(
+                                    (context, next) =>
                                     {
-                                        app.UseCertificateForwarding();
-                                    }
-
-                                    app.UseAuthentication();
-
-                                    app.Use(
-                                        async (context, next) =>
+                                        if (clientCertificate != null)
                                         {
-                                            var request = context.Request;
-                                            var response = context.Response;
-
-                                            var authenticationResult =
-                                                await context.AuthenticateAsync();
-
-                                            if (authenticationResult.Succeeded)
-                                            {
-                                                response.StatusCode = (int)HttpStatusCode.OK;
-                                                response.ContentType = "text/xml";
-
-                                                await response.WriteAsync("<claims>");
-                                                foreach (Claim claim in context.User.Claims)
-                                                {
-                                                    await response.WriteAsync(
-                                                        $"<claim Type=\"{claim.Type}\" Issuer=\"{claim.Issuer}\">{claim.Value}</claim>"
-                                                    );
-                                                }
-                                                await response.WriteAsync("</claims>");
-                                            }
-                                            else
-                                            {
-                                                await context.ChallengeAsync();
-                                            }
+                                            context.Connection.ClientCertificate =
+                                                clientCertificate;
                                         }
-                                    );
+                                        return next();
+                                    }
+                                );
+
+                                if (wireUpHeaderMiddleware)
+                                {
+                                    app.UseCertificateForwarding();
                                 }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    AuthenticationBuilder authBuilder;
-                                    if (configureOptions != null)
-                                    {
-                                        authBuilder = services.AddAuthentication(
-                                                CertificateAuthenticationDefaults.AuthenticationScheme
-                                            )
-                                            .AddCertificate(
-                                                options =>
-                                                {
-                                                    options.CustomTrustStore =
-                                                        configureOptions.CustomTrustStore;
-                                                    options.ChainTrustValidationMode =
-                                                        configureOptions.ChainTrustValidationMode;
-                                                    options.AllowedCertificateTypes =
-                                                        configureOptions.AllowedCertificateTypes;
-                                                    options.Events = configureOptions.Events;
-                                                    options.ValidateCertificateUse =
-                                                        configureOptions.ValidateCertificateUse;
-                                                    options.RevocationFlag =
-                                                        configureOptions.RevocationFlag;
-                                                    options.RevocationMode =
-                                                        configureOptions.RevocationMode;
-                                                    options.ValidateValidityPeriod =
-                                                        configureOptions.ValidateValidityPeriod;
-                                                    options.AdditionalChainCertificates =
-                                                        configureOptions.AdditionalChainCertificates;
-                                                }
-                                            );
-                                    }
-                                    else
-                                    {
-                                        authBuilder = services.AddAuthentication(
-                                                CertificateAuthenticationDefaults.AuthenticationScheme
-                                            )
-                                            .AddCertificate();
-                                    }
-                                    if (useCache)
-                                    {
-                                        authBuilder.AddCertificateCache();
-                                    }
 
-                                    if (wireUpHeaderMiddleware && !string.IsNullOrEmpty(headerName))
+                                app.UseAuthentication();
+
+                                app.Use(
+                                    async (context, next) =>
                                     {
-                                        services.AddCertificateForwarding(
+                                        var request = context.Request;
+                                        var response = context.Response;
+
+                                        var authenticationResult =
+                                            await context.AuthenticateAsync();
+
+                                        if (authenticationResult.Succeeded)
+                                        {
+                                            response.StatusCode = (int)HttpStatusCode.OK;
+                                            response.ContentType = "text/xml";
+
+                                            await response.WriteAsync("<claims>");
+                                            foreach (Claim claim in context.User.Claims)
+                                            {
+                                                await response.WriteAsync(
+                                                    $"<claim Type=\"{claim.Type}\" Issuer=\"{claim.Issuer}\">{claim.Value}</claim>"
+                                                );
+                                            }
+                                            await response.WriteAsync("</claims>");
+                                        }
+                                        else
+                                        {
+                                            await context.ChallengeAsync();
+                                        }
+                                    }
+                                );
+                            }
+                        ).ConfigureServices(
+                            services =>
+                            {
+                                AuthenticationBuilder authBuilder;
+                                if (configureOptions != null)
+                                {
+                                    authBuilder = services.AddAuthentication(
+                                        CertificateAuthenticationDefaults.AuthenticationScheme
+                                    )
+                                        .AddCertificate(
                                             options =>
                                             {
-                                                options.CertificateHeader = headerName;
+                                                options.CustomTrustStore =
+                                                    configureOptions.CustomTrustStore;
+                                                options.ChainTrustValidationMode =
+                                                    configureOptions.ChainTrustValidationMode;
+                                                options.AllowedCertificateTypes =
+                                                    configureOptions.AllowedCertificateTypes;
+                                                options.Events = configureOptions.Events;
+                                                options.ValidateCertificateUse =
+                                                    configureOptions.ValidateCertificateUse;
+                                                options.RevocationFlag =
+                                                    configureOptions.RevocationFlag;
+                                                options.RevocationMode =
+                                                    configureOptions.RevocationMode;
+                                                options.ValidateValidityPeriod =
+                                                    configureOptions.ValidateValidityPeriod;
+                                                options.AdditionalChainCertificates =
+                                                    configureOptions.AdditionalChainCertificates;
                                             }
                                         );
-                                    }
                                 }
-                            )
-                )
+                                else
+                                {
+                                    authBuilder = services.AddAuthentication(
+                                        CertificateAuthenticationDefaults.AuthenticationScheme
+                                    )
+                                        .AddCertificate();
+                                }
+                                if (useCache)
+                                {
+                                    authBuilder.AddCertificateCache();
+                                }
+
+                                if (wireUpHeaderMiddleware && !string.IsNullOrEmpty(headerName))
+                                {
+                                    services.AddCertificateForwarding(
+                                        options =>
+                                        {
+                                            options.CertificateHeader = headerName;
+                                        }
+                                    );
+                                }
+                            }
+                        ))
                 .Build();
 
             await host.StartAsync();

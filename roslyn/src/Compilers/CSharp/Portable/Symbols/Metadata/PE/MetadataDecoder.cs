@@ -420,9 +420,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 // represented by a retargeting assembly, which is supposed to hide the local type.
                 Debug.Assert(
                     !(assembly is SourceAssemblySymbol)
-                        || !(
-                            (SourceAssemblySymbol)assembly
-                        ).SourceModule.MightContainNoPiaLocalTypes()
+                        || !((SourceAssemblySymbol)assembly).SourceModule
+                            .MightContainNoPiaLocalTypes()
                 );
 
                 string candidateGuid;
@@ -607,11 +606,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     !TypeSymbol.Equals(scope, targetTypeSymbol, TypeCompareKind.ConsiderEverything2)
                     && !(
                         targetTypeSymbol.IsInterfaceType()
-                            ? scope.AllInterfacesNoUseSiteDiagnostics.IndexOf(
-                                  (NamedTypeSymbol)targetTypeSymbol,
-                                  0,
-                                  SymbolEqualityComparer.CLRSignature
-                              ) != -1
+                            ? scope.AllInterfacesNoUseSiteDiagnostics
+                                  .IndexOf(
+                                      (NamedTypeSymbol)targetTypeSymbol,
+                                      0,
+                                      SymbolEqualityComparer.CLRSignature
+                                  ) != -1
                             : scope.IsDerivedFrom(
                                   targetTypeSymbol,
                                   TypeCompareKind.CLRSignatureCompareOptions,

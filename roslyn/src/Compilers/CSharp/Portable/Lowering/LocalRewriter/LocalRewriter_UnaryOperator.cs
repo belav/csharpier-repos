@@ -193,9 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (kind == UnaryOperatorKind.DecimalUnaryMinus)
             {
-                method = (MethodSymbol)_compilation.Assembly.GetSpecialTypeMember(
-                    SpecialMember.System_Decimal__op_UnaryNegation
-                );
+                method = (MethodSymbol)_compilation.Assembly
+                    .GetSpecialTypeMember(SpecialMember.System_Decimal__op_UnaryNegation);
                 if (!_inExpressionLambda)
                 {
                     return BoundCall.Synthesized(syntax, receiverOpt: null, method, loweredOperand);
@@ -561,8 +560,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isChecked = node.OperatorKind.IsChecked();
 
             ArrayBuilder<LocalSymbol> tempSymbols = ArrayBuilder<LocalSymbol>.GetInstance();
-            ArrayBuilder<BoundExpression> tempInitializers =
-                ArrayBuilder<BoundExpression>.GetInstance();
+            ArrayBuilder<BoundExpression> tempInitializers = ArrayBuilder<BoundExpression>
+                .GetInstance();
 
             SyntaxNode syntax = node.Syntax;
 
@@ -774,10 +773,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (node.OperatorKind.IsDynamic())
             {
                 return _dynamicFactory.MakeDynamicUnaryOperator(
-                        node.OperatorKind,
-                        rewrittenValueToIncrement,
-                        node.Type
-                    )
+                    node.OperatorKind,
+                    rewrittenValueToIncrement,
+                    node.Type
+                )
                     .ToExpression();
             }
 
@@ -1183,10 +1182,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.DynamicMemberAccess:
                     var dynamicMemberAccess = (BoundDynamicMemberAccess)transformedExpression;
                     return _dynamicFactory.MakeDynamicGetMember(
-                            dynamicMemberAccess.Receiver,
-                            dynamicMemberAccess.Name,
-                            resultIndexed: false
-                        )
+                        dynamicMemberAccess.Receiver,
+                        dynamicMemberAccess.Name,
+                        resultIndexed: false
+                    )
                         .ToExpression();
 
                 case BoundKind.IndexerAccess:

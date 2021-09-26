@@ -105,11 +105,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         Task.Run(
                             () =>
                                 SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                                        Solution,
-                                        peReference,
-                                        loadOnly: false,
-                                        cancellationToken
-                                    )
+                                    Solution,
+                                    peReference,
+                                    loadOnly: false,
+                                    cancellationToken
+                                )
                                     .AsTask(),
                             cancellationToken
                         )
@@ -125,9 +125,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             )
             {
                 // Find applicable symbols in parallel
-                using var _1 = ArrayBuilder<Task<ImmutableArray<IMethodSymbol>?>>.GetInstance(
-                    out var tasks
-                );
+                using var _1 = ArrayBuilder<Task<ImmutableArray<IMethodSymbol>?>>
+                    .GetInstance(out var tasks);
 
                 foreach (var peReference in GetAllRelevantPeReferences())
                 {
@@ -135,10 +134,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         Task.Run(
                             () =>
                                 GetExtensionMethodSymbolsFromPeReferenceAsync(
-                                        peReference,
-                                        forceIndexCreation,
-                                        cancellationToken
-                                    )
+                                    peReference,
+                                    forceIndexCreation,
+                                    cancellationToken
+                                )
                                     .AsTask(),
                             cancellationToken
                         )
@@ -192,8 +191,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             {
                 var graph = Solution.GetProjectDependencyGraph();
                 var relevantProjectIds = graph.GetProjectsThatThisProjectTransitivelyDependsOn(
-                        OriginatingProject.Id
-                    )
+                    OriginatingProject.Id
+                )
                     .Concat(OriginatingProject.Id);
                 return relevantProjectIds.Select(id => Solution.GetRequiredProject(id))
                     .Where(p => p.SupportsCompilation)
@@ -202,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             // Returns all PEs referenced by originating project.
             private ImmutableArray<PortableExecutableReference> GetAllRelevantPeReferences() =>
-                OriginatingProject.MetadataReferences.OfType<PortableExecutableReference>()
+                OriginatingProject.MetadataReferences
+                    .OfType<PortableExecutableReference>()
                     .ToImmutableArray();
 
             private async Task<ImmutableArray<IMethodSymbol>?> GetExtensionMethodSymbolsFromProjectAsync(
@@ -216,11 +216,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 forceIndexCreation = forceIndexCreation || isOriginatingProject;
 
                 var cacheEntry = await GetCacheEntryAsync(
-                        project,
-                        loadOnly: !forceIndexCreation,
-                        _cacheService,
-                        cancellationToken
-                    )
+                    project,
+                    loadOnly: !forceIndexCreation,
+                    _cacheService,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!cacheEntry.HasValue)
@@ -268,11 +268,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             )
             {
                 var index = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                        Solution,
-                        peReference,
-                        loadOnly: !forceIndexCreation,
-                        cancellationToken
-                    )
+                    Solution,
+                    peReference,
+                    loadOnly: !forceIndexCreation,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (index == null)
@@ -284,9 +284,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 if (
                     !(
                         index.ContainsExtensionMethod
-                        && _originatingSemanticModel.Compilation.GetAssemblyOrModuleSymbol(
-                            peReference
-                        )
+                        && _originatingSemanticModel.Compilation
+                            .GetAssemblyOrModuleSymbol(peReference)
                             is IAssemblySymbol assembly
                     )
                 )
@@ -295,10 +294,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 }
 
                 var filter = CreateAggregatedFilter(index);
-                var internalsVisible =
-                    _originatingSemanticModel.Compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
-                        assembly
-                    );
+                var internalsVisible = _originatingSemanticModel.Compilation.Assembly
+                    .IsSameAssemblyOrHasFriendAccessTo(assembly);
 
                 var matchingMethodSymbols = GetPotentialMatchingSymbolsFromAssembly(
                     assembly,
@@ -327,10 +324,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                     var declaredReceiverTypeInOriginatingCompilation =
                         SymbolFinder.FindSimilarSymbols(
-                                declaredReceiverType,
-                                _originatingSemanticModel.Compilation,
-                                cancellationToken
-                            )
+                            declaredReceiverType,
+                            _originatingSemanticModel.Compilation,
+                            cancellationToken
+                        )
                             .FirstOrDefault();
                     if (declaredReceiverTypeInOriginatingCompilation == null)
                     {
@@ -362,13 +359,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     var isFirstMethod = true;
                     foreach (
                         var methodInOriginatingCompilation in methodSymbols.Select(
-                                s =>
-                                    SymbolFinder.FindSimilarSymbols(
-                                            s,
-                                            _originatingSemanticModel.Compilation
-                                        )
-                                        .FirstOrDefault()
-                            )
+                            s =>
+                                SymbolFinder.FindSimilarSymbols(
+                                    s,
+                                    _originatingSemanticModel.Compilation
+                                )
+                                    .FirstOrDefault()
+                        )
                             .WhereNotNull()
                     )
                     {
@@ -561,11 +558,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     // For complex type, we would check if it matches with filter on whether it's an array.
                     if (
                         filterReceiverTypeName.Length > 0
-                        && !string.Equals(
-                            filterReceiverTypeName,
-                            GetReceiverTypeName(method.Parameters[0].Type),
-                            StringComparison.Ordinal
-                        )
+                        && !string
+                            .Equals(
+                                filterReceiverTypeName,
+                                GetReceiverTypeName(method.Parameters[0].Type),
+                                StringComparison.Ordinal
+                            )
                     )
                     {
                         return false;
@@ -701,10 +699,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 ImmutableArray<string> receiverTypeNames
             )
             {
-                using var _ = ArrayBuilder<string>.GetInstance(
-                    receiverTypeNames.Length + 2,
-                    out var receiverTypeNamesBuilder
-                );
+                using var _ = ArrayBuilder<string>
+                    .GetInstance(receiverTypeNames.Length + 2, out var receiverTypeNamesBuilder);
                 receiverTypeNamesBuilder.AddRange(receiverTypeNames);
                 receiverTypeNamesBuilder.Add(FindSymbols.Extensions.ComplexReceiverTypeName);
                 receiverTypeNamesBuilder.Add(FindSymbols.Extensions.ComplexArrayReceiverTypeName);

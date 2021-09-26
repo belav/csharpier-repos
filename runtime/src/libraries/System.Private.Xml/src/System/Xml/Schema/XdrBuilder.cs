@@ -768,14 +768,8 @@ namespace System.Xml.Schema
         {
             return uri.Length >= x_schema.Length
                 && 0
-                    == string.Compare(
-                        uri,
-                        0,
-                        x_schema,
-                        0,
-                        x_schema.Length,
-                        StringComparison.Ordinal
-                    )
+                    == string
+                        .Compare(uri, 0, x_schema, 0, x_schema.Length, StringComparison.Ordinal)
                 && !uri.StartsWith("x-schema:#", StringComparison.Ordinal);
         }
 
@@ -874,9 +868,8 @@ namespace System.Xml.Schema
             { // inline xdr schema
                 if (builder._XdrName != null)
                 {
-                    builder._TargetNamespace = builder._NameTable.Add(
-                        "x-schema:#" + builder._XdrName
-                    );
+                    builder._TargetNamespace = builder._NameTable
+                        .Add("x-schema:#" + builder._XdrName);
                 }
                 else
                 {
@@ -1264,8 +1257,8 @@ namespace System.Xml.Schema
 
             if (builder._contentValidator != null)
             {
-                builder._ElementDef._ElementDecl!.ContentValidator =
-                    builder._contentValidator.Finish(true);
+                builder._ElementDef._ElementDecl!.ContentValidator = builder._contentValidator
+                    .Finish(true);
                 builder._contentValidator = null;
             }
 
@@ -1855,7 +1848,8 @@ namespace System.Xml.Schema
                     if (
                         _SchemaNames.TokenToQName[
                             (int)s_schemaEntries[_CurState._NextStates[i]]._Name
-                        ].Equals(qname)
+                        ]
+                            .Equals(qname)
                     )
                     {
                         _NextState = s_schemaEntries[_CurState._NextStates[i]];
@@ -2050,12 +2044,13 @@ namespace System.Xml.Schema
 
         private static bool ParseInteger(string str, ref uint n)
         {
-            return uint.TryParse(
-                str,
-                NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
-                NumberFormatInfo.InvariantInfo,
-                out n
-            );
+            return uint
+                .TryParse(
+                    str,
+                    NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
+                    NumberFormatInfo.InvariantInfo,
+                    out n
+                );
         }
 
         private void XDR_CheckAttributeDefault(DeclBaseInfo decl, SchemaAttDef pAttdef)

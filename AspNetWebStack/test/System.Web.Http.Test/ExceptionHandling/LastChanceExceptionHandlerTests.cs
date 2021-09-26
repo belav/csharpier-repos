@@ -44,12 +44,12 @@ namespace System.Web.Http.ExceptionHandling
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             Task expectedTask = CreateCompletedTask();
             mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(expectedTask);
             IExceptionHandler innerHander = mock.Object;
 
@@ -84,12 +84,12 @@ namespace System.Web.Http.ExceptionHandling
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             IHttpActionResult result = null;
             mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns<ExceptionHandlerContext, CancellationToken>(
                     (c, i) =>
                     {
@@ -107,10 +107,8 @@ namespace System.Web.Http.ExceptionHandling
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                configuration.Services.Replace(
-                    typeof(IContentNegotiator),
-                    expectedContentNegotiator
-                );
+                configuration.Services
+                    .Replace(typeof(IContentNegotiator), expectedContentNegotiator);
                 configuration.Formatters.Clear();
                 MediaTypeFormatter expectedFormatter = CreateDummyFormatter();
                 configuration.Formatters.Add(expectedFormatter);
@@ -275,12 +273,12 @@ namespace System.Web.Http.ExceptionHandling
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             IHttpActionResult result = null;
             mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns<ExceptionHandlerContext, CancellationToken>(
                     (c, i) =>
                     {

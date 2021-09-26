@@ -49,11 +49,12 @@ namespace Moq.Expressions.Visitors
                     return base.Visit(node);
                 default:
                     throw new NotSupportedException(
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            Resources.UnsupportedExpression,
-                            node.ToStringFixed()
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                Resources.UnsupportedExpression,
+                                node.ToStringFixed()
+                            )
                     );
             }
         }

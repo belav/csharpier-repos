@@ -80,9 +80,9 @@ class B {}
                         .WithLocation(5, 17)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
@@ -114,9 +114,9 @@ class B {}
                         .WithLocation(6, 11)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
@@ -152,9 +152,9 @@ class B {}
                         .WithLocation(10, 14)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
@@ -193,9 +193,9 @@ class B {}
                         .WithLocation(15, 14)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
@@ -233,9 +233,9 @@ class MyCollection : System.Collections.IEnumerable
                         .WithLocation(5, 28)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
@@ -287,9 +287,9 @@ class MyEnumerator : System.Collections.IEnumerator
                         .WithLocation(6, 27)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "12");
         }
@@ -341,9 +341,9 @@ class MyEnumerator
                         .WithLocation(6, 27)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics(
                     // (26,24): error CS0111: Type 'MyEnumerator' already defines a member called 'MoveNext' with the same parameter types
                     //     public static bool MoveNext() => throw null;
@@ -386,24 +386,24 @@ class MyDeconstructable
                     // (6,14): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'a'.
                     //         (var a, var b) = o;
                     Diagnostic(
-                            ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                            "a"
-                        )
+                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                        "a"
+                    )
                         .WithArguments("a")
                         .WithLocation(6, 14),
                     // (6,21): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'b'.
                     //         (var a, var b) = o;
                     Diagnostic(
-                            ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
-                            "b"
-                        )
+                        ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                        "b"
+                    )
                         .WithArguments("b")
                         .WithLocation(6, 21)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
@@ -456,9 +456,9 @@ public class MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCom
                         .WithLocation(9, 17)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics(
                     // (9,17): error CS1986: 'await' requires that the type MyTask<int> have a suitable GetAwaiter method
                     //         var z = await x;
@@ -516,9 +516,9 @@ public struct MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCo
                         .WithLocation(9, 17)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics(
                     // (9,17): error CS0176: Member 'MyTaskAwaiter<int>.GetResult()' cannot be accessed with an instance reference; qualify it with a type name instead
                     //         var z = await x;
@@ -566,9 +566,9 @@ class B {}
                         .WithLocation(6, 35)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
@@ -600,9 +600,9 @@ class B {}
                         .WithLocation(5, 9)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
@@ -635,9 +635,9 @@ class B {}
                         .WithLocation(9, 13)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
@@ -671,9 +671,9 @@ class B {}
                         .WithLocation(7, 29)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
@@ -850,9 +850,9 @@ public class B {}
                         .WithLocation(5, 9)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
@@ -892,9 +892,9 @@ public class X {}
                         .WithLocation(6, 9)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "struct class ");
         }
@@ -932,9 +932,9 @@ class B {}
                         .WithLocation(5, 9)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
@@ -969,9 +969,9 @@ delegate ref int D2();
                         .WithLocation(6, 9)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
@@ -1006,9 +1006,9 @@ delegate ref int D2();
                         .WithLocation(6, 9)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
@@ -1053,9 +1053,9 @@ namespace System.Runtime.CompilerServices
                         .WithLocation(5, 9)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
@@ -1089,9 +1089,9 @@ public class C { public static implicit operator C(A a) => null; }
                         .WithLocation(5, 9)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
@@ -1124,9 +1124,9 @@ public class C { public static implicit operator C(A a) => null; }
                         .WithLocation(5, 9)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
@@ -1151,9 +1151,9 @@ public class C { public static implicit operator C(A a) => null; }
 public class C { public static unsafe implicit operator C(int* p) => null; }
 ";
             CreateCompilationWithoutBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
-                )
+                source,
+                options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
+            )
                 .VerifyDiagnostics(
                     // (6,9): error CS0306: The type 'int*' may not be used as a type argument
                     //         M(p, 0);
@@ -1162,9 +1162,9 @@ public class C { public static unsafe implicit operator C(int* p) => null; }
                         .WithLocation(6, 9)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
-                )
+                source,
+                options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2", verify: Verification.Skipped);
         }
@@ -1222,10 +1222,10 @@ End Class
     }
 }";
             CreateCompilationWithoutBetterCandidates(
-                    source2,
-                    references: new[] { reference1 },
-                    options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
-                )
+                source2,
+                references: new[] { reference1 },
+                options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
+            )
                 .VerifyDiagnostics(
                     // (13,13): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
                     //         o = D.P[null];
@@ -1239,10 +1239,10 @@ End Class
                         .WithLocation(14, 9)
                 );
             CreateCompilationWithBetterCandidates(
-                    source2,
-                    references: new[] { reference1 },
-                    options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
-                )
+                source2,
+                references: new[] { reference1 },
+                options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
+            )
                 .VerifyDiagnostics(
                     // (13,13): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
                     //         o = D.P[null];
@@ -1316,9 +1316,9 @@ class D {}
                         .WithLocation(14, 17)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics(
                     // (6,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(C)'
                     //         Program.M(null); // two static candidates
@@ -1347,7 +1347,8 @@ class D {}
                         .WithLocation(14, 17)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0].GetRoot()
+            var invocations = compilation.SyntaxTrees[0]
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .ToArray();
@@ -1485,9 +1486,9 @@ class Constraint {}
                         .WithLocation(5, 9)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics(
                     // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, B)' and 'Program.M<T>(T, D)'
                     //         M(1, null);
@@ -1496,7 +1497,8 @@ class Constraint {}
                         .WithLocation(5, 9)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0].GetRoot()
+            var invocations = compilation.SyntaxTrees[0]
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .ToArray();
@@ -1557,9 +1559,9 @@ public static class Extensions
                         .WithLocation(5, 11)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics(
                     // (5,11): error CS0121: The call is ambiguous between the following methods or properties: 'Extensions.M<T>(T, B)' and 'Extensions.M<T>(T, D)'
                     //         1.M(null);
@@ -1568,7 +1570,8 @@ public static class Extensions
                         .WithLocation(5, 11)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0].GetRoot()
+            var invocations = compilation.SyntaxTrees[0]
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .ToArray();
@@ -1634,9 +1637,9 @@ interface IZ: IQ, IW, IX, IY {}
                         .WithLocation(5, 17)
                 );
             var compilation = CreateCompilationWithBetterCandidates(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics(
                     // (5,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Argument(IQ)' and 'Program.Argument(IX)'
                     //         Invoked(Argument);
@@ -1645,7 +1648,8 @@ interface IZ: IQ, IW, IX, IY {}
                         .WithLocation(5, 17)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0].GetRoot()
+            var invocations = compilation.SyntaxTrees[0]
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .ToArray();

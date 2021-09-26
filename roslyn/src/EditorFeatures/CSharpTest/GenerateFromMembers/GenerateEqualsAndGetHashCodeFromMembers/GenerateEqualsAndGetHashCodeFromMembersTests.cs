@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 // If we're a dialog test, then mixin our mock and initialize its values to the ones the test asked for.
                 var workspace = new AdhocWorkspace(s_composition.GetHostServices());
 
-                var service =
-                    (TestPickMembersService)workspace.Services.GetService<IPickMembersService>();
+                var service = (TestPickMembersService)workspace.Services
+                    .GetService<IPickMembersService>();
                 service.MemberNames = MemberNames;
                 service.OptionsCallback = OptionsCallback;
 
@@ -1078,7 +1078,8 @@ class Program
                 },
                 CodeActionIndex = 1,
                 LanguageVersion = LanguageVersion.CSharp6,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
@@ -1260,7 +1261,8 @@ class Program
                 CodeActionEquivalenceKey = FeaturesResources.Generate_Equals_object,
                 CodeActionVerifier = (codeAction, verifier) =>
                     verifier.Equal(FeaturesResources.Generate_Equals_object, codeAction.Title),
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
@@ -1319,7 +1321,8 @@ class Program
                         FeaturesResources.Generate_Equals_and_GetHashCode,
                         codeAction.Title
                     ),
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
@@ -1378,7 +1381,8 @@ class Program
                         FeaturesResources.Generate_Equals_and_GetHashCode,
                         codeAction.Title
                     ),
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
@@ -2274,7 +2278,8 @@ class Program
                         CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
@@ -2676,7 +2681,8 @@ struct Foo : IEquatable<Foo>
                         GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
                     ),
                 LanguageVersion = LanguageVersion.CSharp8,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
@@ -2729,7 +2735,8 @@ struct Foo : IEquatable<Foo>
                         GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
                     ),
                 LanguageVersion = LanguageVersion.CSharp8,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
@@ -2825,7 +2832,8 @@ class Foo : IEquatable<Foo?>
                         GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
                     ),
                 LanguageVersion = LanguageVersion.CSharp8,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
@@ -2879,7 +2887,8 @@ class Foo : IEquatable<Foo?>
                         GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
                     ),
                 LanguageVersion = LanguageVersion.CSharp8,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
@@ -3095,9 +3104,8 @@ class Program : {|CS0535:System.IEquatable<Program>|}
                             ),
                     },
                 },
-                ReferenceAssemblies = ReferenceAssemblies.Default.WithAssemblies(
-                    ImmutableArray<string>.Empty
-                ),
+                ReferenceAssemblies = ReferenceAssemblies.Default
+                    .WithAssemblies(ImmutableArray<string>.Empty),
             }.RunAsync();
         }
 
@@ -3766,12 +3774,8 @@ class Program : Base
     }
 }";
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = fixedCode,
-                CodeActionIndex = 0,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = fixedCode, CodeActionIndex = 0, }
+                .RunAsync();
         }
 
         [WorkItem(33601, "https://github.com/dotnet/roslyn/issues/33601")]

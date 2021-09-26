@@ -50,13 +50,12 @@ class C
                 comp,
                 runtime =>
                 {
-                    GetMethodDebugInfo(runtime, "C.M")
-                        .ImportRecordGroups.Verify(
-                            @"
+                    GetMethodDebugInfo(runtime, "C.M").ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System'
                 }"
-                        );
+                    );
                 }
             );
         }
@@ -86,9 +85,8 @@ namespace N1
                 comp,
                 runtime =>
                 {
-                    GetMethodDebugInfo(runtime, "N1.N2.N3.C.M")
-                        .ImportRecordGroups.Verify(
-                            @"
+                    GetMethodDebugInfo(runtime, "N1.N2.N3.C.M").ImportRecordGroups.Verify(
+                        @"
                 {
                 }
                 {
@@ -99,7 +97,7 @@ namespace N1
                 {
                     Namespace: string='System'
                 }"
-                        );
+                    );
                 }
             );
         }
@@ -124,10 +122,9 @@ class C
 ";
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
 
-            CompileAndVerify(comp)
-                .VerifyIL(
-                    "C.M",
-                    @"
+            CompileAndVerify(comp).VerifyIL(
+                "C.M",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  1
@@ -143,19 +140,18 @@ class C
   IL_0007:  ret
 }
 "
-                );
+            );
 
             WithRuntimeInstance(
                 comp,
                 runtime =>
                 {
-                    GetMethodDebugInfo(runtime, "C.M", ilOffset: 0x0004)
-                        .ImportRecordGroups.Verify(
-                            @"
+                    GetMethodDebugInfo(runtime, "C.M", ilOffset: 0x0004).ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System'
                 }"
-                        );
+                    );
                 }
             );
         }
@@ -185,9 +181,8 @@ namespace A
                 comp,
                 runtime =>
                 {
-                    GetMethodDebugInfo(runtime, "A.C.M")
-                        .ImportRecordGroups.Verify(
-                            @"
+                    GetMethodDebugInfo(runtime, "A.C.M").ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
@@ -195,7 +190,7 @@ namespace A
                 {
                     Namespace: string='System'
                 }"
-                        );
+                    );
                 }
             );
         }
@@ -225,9 +220,8 @@ namespace A
                 comp,
                 runtime =>
                 {
-                    GetMethodDebugInfo(runtime, "A.C.M1")
-                        .ImportRecordGroups.Verify(
-                            @"
+                    GetMethodDebugInfo(runtime, "A.C.M1").ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
@@ -235,11 +229,10 @@ namespace A
                 {
                     Namespace: string='System'
                 }"
-                        );
+                    );
 
-                    GetMethodDebugInfo(runtime, "A.C.M2")
-                        .ImportRecordGroups.Verify(
-                            @"
+                    GetMethodDebugInfo(runtime, "A.C.M2").ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
@@ -247,7 +240,7 @@ namespace A
                 {
                     Namespace: string='System'
                 }"
-                        );
+                    );
                 }
             );
         }
@@ -295,9 +288,8 @@ namespace B
                 }"
                     );
 
-                    info.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
+                    info.ExternAliasRecords
+                        .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
                 }
             );
         }
@@ -354,9 +346,8 @@ namespace B
                 }"
                     );
 
-                    info.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
+                    info.ExternAliasRecords
+                        .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
                 }
             );
         }
@@ -413,9 +404,8 @@ namespace D
                 }"
                     );
 
-                    debugInfo1.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
+                    debugInfo1.ExternAliasRecords
+                        .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
 
                     var debugInfo2 = GetMethodDebugInfo(runtime, "D.E.M2");
 
@@ -429,9 +419,8 @@ namespace D
                 }"
                     );
 
-                    debugInfo2.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
+                    debugInfo2.ExternAliasRecords
+                        .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
                 }
             );
         }
@@ -454,17 +443,21 @@ namespace D
                     switch (token)
                     {
                         case methodToken1:
-                            return new MethodDebugInfoBytes.Builder().AddForward(methodToken2)
+                            return new MethodDebugInfoBytes.Builder()
+                                .AddForward(methodToken2)
                                 .Build()
                                 .Bytes.ToArray();
                         case methodToken2:
-                            return new MethodDebugInfoBytes.Builder().AddForward(methodToken3)
+                            return new MethodDebugInfoBytes.Builder()
+                                .AddForward(methodToken3)
                                 .Build()
                                 .Bytes.ToArray();
                         case methodToken3:
                             return new MethodDebugInfoBytes.Builder(
                                 new[] { new[] { importString } }
-                            ).Build().Bytes.ToArray();
+                            )
+                                .Build()
+                                .Bytes.ToArray();
                         default:
                             throw null;
                     }
@@ -527,7 +520,8 @@ namespace D
                     switch (token)
                     {
                         case methodToken1:
-                            return new MethodDebugInfoBytes.Builder().AddForward(methodToken1)
+                            return new MethodDebugInfoBytes.Builder()
+                                .AddForward(methodToken1)
                                 .Build()
                                 .Bytes.ToArray();
                         default:
@@ -643,13 +637,12 @@ public class C
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(
-                    h =>
-                        metadataReader.StringComparer.Equals(
-                            metadataReader.GetMethodDefinition(h).Name,
-                            "Main"
-                        )
-                );
+                var methodHandle = metadataReader.MethodDefinitions
+                    .Single(
+                        h =>
+                            metadataReader.StringComparer
+                                .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
+                    );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
                 symReader = new MockSymUnmanagedReader(
@@ -660,9 +653,12 @@ public class C
                             new MethodDebugInfoBytes.Builder(
                                 new[] { new[] { "USystem", "USystem.IO" } },
                                 suppressUsingInfo: true
-                            ).AddUsingInfo(1, 1).Build()
+                            )
+                                .AddUsingInfo(1, 1)
+                                .Build()
                         },
-                    }.ToImmutableDictionary()
+                    }
+                        .ToImmutableDictionary()
                 );
             }
 
@@ -702,13 +698,12 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(
-                    h =>
-                        metadataReader.StringComparer.Equals(
-                            metadataReader.GetMethodDefinition(h).Name,
-                            "Main"
-                        )
-                );
+                var methodHandle = metadataReader.MethodDefinitions
+                    .Single(
+                        h =>
+                            metadataReader.StringComparer
+                                .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
+                    );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
                 symReader = new MockSymUnmanagedReader(
@@ -719,9 +714,12 @@ namespace N
                             new MethodDebugInfoBytes.Builder(
                                 new[] { new[] { "USystem" } },
                                 suppressUsingInfo: true
-                            ).AddUsingInfo(1).Build()
+                            )
+                                .AddUsingInfo(1)
+                                .Build()
                         },
-                    }.ToImmutableDictionary()
+                    }
+                        .ToImmutableDictionary()
                 );
             }
 
@@ -758,13 +756,12 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(
-                    h =>
-                        metadataReader.StringComparer.Equals(
-                            metadataReader.GetMethodDefinition(h).Name,
-                            "Main"
-                        )
-                );
+                var methodHandle = metadataReader.MethodDefinitions
+                    .Single(
+                        h =>
+                            metadataReader.StringComparer
+                                .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
+                    );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
                 symReader = new MockSymUnmanagedReader(
@@ -781,9 +778,12 @@ namespace N
                                     }
                                 },
                                 suppressUsingInfo: true
-                            ).AddUsingInfo(1).Build()
+                            )
+                                .AddUsingInfo(1)
+                                .Build()
                         },
-                    }.ToImmutableDictionary()
+                    }
+                        .ToImmutableDictionary()
                 );
             }
 
@@ -1483,9 +1483,8 @@ public class C2 : C1
             context.CompileExpression("typeof(SI)", out error, testData);
             Assert.Null(error);
 
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"
 {
 // Code size       11 (0xb)
 .maxstack  1
@@ -1494,7 +1493,7 @@ IL_0005:  call       ""System.Type System.Type.GetTypeFromHandle(System.RuntimeT
 IL_000a:  ret
 }
 "
-                );
+            );
         }
     }
 

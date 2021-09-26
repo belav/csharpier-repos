@@ -23,32 +23,30 @@ namespace ApiExplorerWebSite
 
             var wellKnownChangeToken = new WellKnownChangeToken();
             services.AddControllers(
-                    options =>
-                    {
-                        options.Filters.AddService(typeof(ApiExplorerDataFilter));
+                options =>
+                {
+                    options.Filters.AddService(typeof(ApiExplorerDataFilter));
 
-                        options.Conventions.Add(new ApiExplorerVisibilityEnabledConvention());
-                        options.Conventions.Add(
+                    options.Conventions.Add(new ApiExplorerVisibilityEnabledConvention());
+                    options.Conventions
+                        .Add(
                             new ApiExplorerVisibilityDisabledConvention(
                                 typeof(ApiExplorerVisibilityDisabledByConventionController)
                             )
                         );
-                        options.Conventions.Add(
+                    options.Conventions
+                        .Add(
                             new ApiExplorerInboundOutboundConvention(
                                 typeof(ApiExplorerInboundOutBoundController)
                             )
                         );
-                        options.Conventions.Add(
-                            new ApiExplorerRouteChangeConvention(wellKnownChangeToken)
-                        );
+                    options.Conventions
+                        .Add(new ApiExplorerRouteChangeConvention(wellKnownChangeToken));
 
-                        options.OutputFormatters.Clear();
-                        options.OutputFormatters.Add(
-                            new XmlDataContractSerializerOutputFormatter()
-                        );
-                    }
-                )
-                .AddNewtonsoftJson();
+                    options.OutputFormatters.Clear();
+                    options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+                }
+            ).AddNewtonsoftJson();
 
             services.AddSingleton<ApiExplorerDataFilter>();
             services.AddSingleton<
@@ -77,7 +75,8 @@ namespace ApiExplorerWebSite
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder().UseContentRoot(Directory.GetCurrentDirectory())
+            new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseKestrel()
                 .UseIISIntegration()
                 .UseStartup<Startup>();

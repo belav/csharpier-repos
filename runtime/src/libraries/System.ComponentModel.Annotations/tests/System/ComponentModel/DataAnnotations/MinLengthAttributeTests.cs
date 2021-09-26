@@ -157,10 +157,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             Assert.Throws<InvalidCastException>(
                 () =>
-                    new MinLengthAttribute(0).GetValidationResult(
-                        new Random(),
-                        new ValidationContext(new object())
-                    )
+                    new MinLengthAttribute(0)
+                        .GetValidationResult(new Random(), new ValidationContext(new object()))
             );
         }
 
@@ -169,10 +167,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             Assert.Throws<InvalidCastException>(
                 () =>
-                    new MinLengthAttribute(0).GetValidationResult(
-                        new GenericIEnumerableClass(),
-                        new ValidationContext(new object())
-                    )
+                    new MinLengthAttribute(0)
+                        .GetValidationResult(
+                            new GenericIEnumerableClass(),
+                            new ValidationContext(new object())
+                        )
             );
         }
     }

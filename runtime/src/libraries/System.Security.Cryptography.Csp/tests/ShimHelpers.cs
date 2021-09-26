@@ -85,8 +85,8 @@ namespace System.Security.Cryptography.Csp.Tests
             };
 
             IEnumerable<MethodInfo> baseMethods = shimType.GetMethods(
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-                )
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            )
                 .Where(m => m.IsVirtual && !namesToNotVerify.Any(n => n.Equals(m.Name)));
 
             foreach (MethodInfo info in baseMethods)

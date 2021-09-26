@@ -85,10 +85,8 @@ namespace System.Linq.Parallel
             int maxToRunInParallel = partitions.PartitionCount - 1;
 
             // Generate a set of sort helpers.
-            SortHelper<TInputOutput, TKey>[] sortHelpers = SortHelper<
-                TInputOutput,
-                TKey
-            >.GenerateSortHelpers(partitions, groupState);
+            SortHelper<TInputOutput, TKey>[] sortHelpers = SortHelper<TInputOutput, TKey>
+                .GenerateSortHelpers(partitions, groupState);
 
             // Ensure all tasks in this query are parented under a common root.
             Task rootTask = new Task(

@@ -198,11 +198,12 @@ namespace Newtonsoft.Json
 
             if (lineInfo != null && lineInfo.HasLineInfo())
             {
-                message += ", line {0}, position {1}".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    lineInfo.LineNumber,
-                    lineInfo.LinePosition
-                );
+                message += ", line {0}, position {1}"
+                    .FormatWith(
+                        CultureInfo.InvariantCulture,
+                        lineInfo.LineNumber,
+                        lineInfo.LinePosition
+                    );
             }
 
             message += ".";

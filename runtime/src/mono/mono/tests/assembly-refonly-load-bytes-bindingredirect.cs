@@ -46,10 +46,8 @@ public class TestAssemblyLoad
 
         if (f1.FieldType != typeof(int))
         {
-            Console.Error.WriteLine(
-                "Field OnlyInVersion1 has type {0}, expected int",
-                f1.FieldType
-            );
+            Console.Error
+                .WriteLine("Field OnlyInVersion1 has type {0}, expected int", f1.FieldType);
             return 5;
         }
 

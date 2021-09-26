@@ -488,7 +488,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 await context.Database.EnsureCreatedAsync();
 
                 Assert.Null(
-                    context.Model.FindEntityType(typeof(CustomerWithResourceId))
+                    context.Model
+                        .FindEntityType(typeof(CustomerWithResourceId))
                         .FindProperty(StoreKeyConvention.DefaultIdPropertyName)
                 );
 

@@ -64,9 +64,8 @@ namespace Microsoft.CodeAnalysis
             // so normalize the paths here (instead of enforcing end-with-sep).
             if (!pathMap.IsDefaultOrEmpty)
             {
-                var pathMapBuilder = ArrayBuilder<KeyValuePair<string, string>>.GetInstance(
-                    pathMap.Length
-                );
+                var pathMapBuilder = ArrayBuilder<KeyValuePair<string, string>>
+                    .GetInstance(pathMap.Length);
 
                 foreach (var (key, value) in pathMap)
                 {

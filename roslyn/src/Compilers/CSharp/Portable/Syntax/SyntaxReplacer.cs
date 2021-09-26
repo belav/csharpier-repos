@@ -267,7 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 nodeInList,
                 nodesToInsert,
                 insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter
-            ).Visit(root);
+            )
+                .Visit(root);
         }
 
         public static SyntaxNode ReplaceTokenInList(
@@ -290,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 tokenInList,
                 newTokens,
                 insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter
-            ).Visit(root);
+            )
+                .Visit(root);
         }
 
         public static SyntaxNode ReplaceTriviaInList(
@@ -313,7 +315,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 triviaInList,
                 newTrivia,
                 insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter
-            ).Visit(root);
+            )
+                .Visit(root);
         }
 
         public static SyntaxToken ReplaceTriviaInList(
@@ -322,9 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             IEnumerable<SyntaxTrivia> newTrivia
         )
         {
-            return new TriviaListEditor(triviaInList, newTrivia, ListEditKind.Replace).VisitToken(
-                root
-            );
+            return new TriviaListEditor(triviaInList, newTrivia, ListEditKind.Replace)
+                .VisitToken(root);
         }
 
         public static SyntaxToken InsertTriviaInList(
@@ -338,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 triviaInList,
                 newTrivia,
                 insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter
-            ).VisitToken(root);
+            )
+                .VisitToken(root);
         }
 
         private enum ListEditKind

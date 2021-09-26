@@ -87,11 +87,11 @@ namespace System.Net.Test.Common
                         .ConfigureAwait(false);
 #else
                     await sslStream.AuthenticateAsServerAsync(
-                            cert,
-                            httpOptions.ClientCertificateRequired,
-                            httpOptions.SslProtocols,
-                            checkCertificateRevocation: false
-                        )
+                        cert,
+                        httpOptions.ClientCertificateRequired,
+                        httpOptions.SslProtocols,
+                        checkCertificateRevocation: false
+                    )
                         .ConfigureAwait(false);
 #endif
                 }
@@ -433,9 +433,8 @@ namespace System.Net.Test.Common
             }
             else
             {
-                string value = Encoding.ASCII.GetString(
-                    headerBlock.Slice(bytesConsumed, stringLength).ToArray()
-                );
+                string value = Encoding.ASCII
+                    .GetString(headerBlock.Slice(bytesConsumed, stringLength).ToArray());
                 return (bytesConsumed + stringLength, value);
             }
         }
@@ -932,8 +931,8 @@ namespace System.Net.Test.Common
         public override async Task<HttpRequestData> ReadRequestDataAsync(bool readBody = true)
         {
             (int streamId, HttpRequestData requestData) = await ReadAndParseRequestHeaderAsync(
-                    readBody
-                )
+                readBody
+            )
                 .ConfigureAwait(false);
             _lastStreamId = streamId;
 
@@ -1060,23 +1059,23 @@ namespace System.Net.Test.Common
             if (string.IsNullOrEmpty(content))
             {
                 await SendResponseHeadersAsync(
-                        streamId,
-                        endStream: true,
-                        statusCode,
-                        isTrailingHeader: false,
-                        headers: headers
-                    )
+                    streamId,
+                    endStream: true,
+                    statusCode,
+                    isTrailingHeader: false,
+                    headers: headers
+                )
                     .ConfigureAwait(false);
             }
             else
             {
                 await SendResponseHeadersAsync(
-                        streamId,
-                        endStream: false,
-                        statusCode,
-                        isTrailingHeader: false,
-                        headers: headers
-                    )
+                    streamId,
+                    endStream: false,
+                    statusCode,
+                    isTrailingHeader: false,
+                    headers: headers
+                )
                     .ConfigureAwait(false);
                 await SendResponseBodyAsync(streamId, Encoding.ASCII.GetBytes(content))
                     .ConfigureAwait(false);

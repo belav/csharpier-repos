@@ -100,12 +100,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 CancellationToken cancellationToken
             )
             {
-                var (description, hasExistingImport) = base.GetDescription(
-                    document,
-                    node,
-                    semanticModel,
-                    cancellationToken
-                );
+                var (description, hasExistingImport) = base
+                    .GetDescription(document, node, semanticModel, cancellationToken);
                 if (description == null)
                 {
                     return (null, false);

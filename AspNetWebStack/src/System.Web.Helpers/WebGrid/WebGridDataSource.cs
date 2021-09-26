@@ -17,11 +17,8 @@ namespace System.Web.Helpers
     /// </summary>
     internal sealed class WebGridDataSource : IWebGridDataSource
     {
-        private static readonly MethodInfo SortGenericExpressionMethod =
-            typeof(WebGridDataSource).GetMethod(
-                "SortGenericExpression",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+        private static readonly MethodInfo SortGenericExpressionMethod = typeof(WebGridDataSource)
+            .GetMethod("SortGenericExpression", BindingFlags.Static | BindingFlags.NonPublic);
 
         private readonly WebGrid _grid;
         private readonly Type _elementType;
@@ -81,8 +78,8 @@ namespace System.Web.Helpers
                 rowData = Page(_values.AsQueryable(), pageIndex);
             }
             return rowData.Select(
-                    (value, index) => new WebGridRow(_grid, value: value, rowIndex: index)
-                )
+                (value, index) => new WebGridRow(_grid, value: value, rowIndex: index)
+            )
                 .ToList();
         }
 

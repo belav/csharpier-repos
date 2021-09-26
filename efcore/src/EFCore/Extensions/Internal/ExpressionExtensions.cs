@@ -93,9 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             if (RemoveConvert(lambdaExpression.Body) is NewExpression newExpression)
             {
                 var memberInfos =
-                    (List<TMemberInfo>)newExpression.Arguments.Select(
-                            a => memberMatcher(a, parameterExpression)
-                        )
+                    (List<TMemberInfo>)newExpression.Arguments
+                        .Select(a => memberMatcher(a, parameterExpression))
                         .Where(p => p != null)
                         .ToList()!;
 
@@ -224,8 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             return expression;
         }
 
-        private static readonly MethodInfo _objectEqualsMethodInfo =
-            typeof(object).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _objectEqualsMethodInfo = typeof(object)
+            .GetRequiredRuntimeMethod(
                 nameof(object.Equals),
                 new[] { typeof(object), typeof(object) }
             );

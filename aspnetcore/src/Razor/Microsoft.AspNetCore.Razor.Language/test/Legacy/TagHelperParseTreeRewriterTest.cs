@@ -675,9 +675,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             var pTagHelperBuilder = TagHelperDescriptorBuilder.Create("PTagHelper", "SomeAssembly")
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"));
             var strongTagHelperBuilder = TagHelperDescriptorBuilder.Create(
-                    "StrongTagHelper",
-                    "SomeAssembly"
-                )
+                "StrongTagHelper",
+                "SomeAssembly"
+            )
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("strong"));
 
             foreach (var childTag in allowedChildren)

@@ -283,11 +283,8 @@ namespace Newtonsoft.Json.Utilities
                             continue;
                         }
 
-                        bool isEscapedUnicodeText = string.Equals(
-                            escapedValue,
-                            EscapedUnicodeText,
-                            StringComparison.Ordinal
-                        );
+                        bool isEscapedUnicodeText = string
+                            .Equals(escapedValue, EscapedUnicodeText, StringComparison.Ordinal);
 
                         if (i > lastWritePosition)
                         {
@@ -536,14 +533,14 @@ namespace Newtonsoft.Json.Utilities
             if (!StringUtils.IsNullOrEmpty(s))
             {
                 await WriteEscapedJavaScriptStringWithoutDelimitersAsync(
-                        writer,
-                        s,
-                        charEscapeFlags,
-                        stringEscapeHandling,
-                        client,
-                        writeBuffer,
-                        cancellationToken
-                    )
+                    writer,
+                    s,
+                    charEscapeFlags,
+                    stringEscapeHandling,
+                    client,
+                    writeBuffer,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 

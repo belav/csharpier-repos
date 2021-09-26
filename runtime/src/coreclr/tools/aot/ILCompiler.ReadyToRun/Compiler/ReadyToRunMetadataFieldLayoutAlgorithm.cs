@@ -70,10 +70,8 @@ namespace ILCompiler
                 {
                     OffsetsForType offsetsForType;
                     if (
-                        moduleFieldLayout.TypeOffsets.TryGetValue(
-                            nonGenericType.Handle,
-                            out offsetsForType
-                        )
+                        moduleFieldLayout.TypeOffsets
+                            .TryGetValue(nonGenericType.Handle, out offsetsForType)
                     )
                     {
                         layout.Offsets = _moduleFieldLayoutMap.CalculateTypeLayout(
@@ -194,9 +192,8 @@ namespace ILCompiler
 
                     foreach (FieldDefinitionHandle fieldDefHandle in typeDef.GetFields())
                     {
-                        FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(
-                            fieldDefHandle
-                        );
+                        FieldDefinition fieldDef = module.MetadataReader
+                            .GetFieldDefinition(fieldDefHandle);
                         if (
                             (
                                 fieldDef.Attributes
@@ -568,9 +565,8 @@ namespace ILCompiler
 
                 foreach (FieldDesc field in defType.GetFields())
                 {
-                    FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(
-                        ((EcmaField)field.GetTypicalFieldDefinition()).Handle
-                    );
+                    FieldDefinition fieldDef = module.MetadataReader
+                        .GetFieldDefinition(((EcmaField)field.GetTypicalFieldDefinition()).Handle);
                     if (
                         (fieldDef.Attributes & (FieldAttributes.Static | FieldAttributes.Literal))
                         == FieldAttributes.Static
@@ -688,9 +684,8 @@ namespace ILCompiler
                 {
                     FieldDefinitionHandle fieldDefHandle =
                         ((EcmaField)field.GetTypicalFieldDefinition()).Handle;
-                    FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(
-                        fieldDefHandle
-                    );
+                    FieldDefinition fieldDef = module.MetadataReader
+                        .GetFieldDefinition(fieldDefHandle);
                     if (
                         (fieldDef.Attributes & (FieldAttributes.Static | FieldAttributes.Literal))
                         == FieldAttributes.Static

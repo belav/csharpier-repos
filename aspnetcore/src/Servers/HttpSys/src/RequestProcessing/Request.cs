@@ -72,9 +72,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
             else
             {
-                var prefix = requestContext.Server.Options.UrlPrefixes.GetPrefix(
-                    (int)requestContext.UrlContext
-                );
+                var prefix = requestContext.Server.Options.UrlPrefixes
+                    .GetPrefix((int)requestContext.UrlContext);
                 // Prefix may be null if the requested has been transfered to our queue
                 if (!(prefix is null))
                 {
@@ -96,13 +95,14 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     }
                 }
                 else if (
-                    requestContext.Server.Options.UrlPrefixes.TryMatchLongestPrefix(
-                        IsHttps,
-                        cookedUrl.GetHost()!,
-                        originalPath,
-                        out var pathBase,
-                        out var path
-                    )
+                    requestContext.Server.Options.UrlPrefixes
+                        .TryMatchLongestPrefix(
+                            IsHttps,
+                            cookedUrl.GetHost()!,
+                            originalPath,
+                            out var pathBase,
+                            out var path
+                        )
                 )
                 {
                     PathBase = pathBase;
@@ -151,11 +151,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     // Note Http.Sys adds the Transfer-Encoding: chunked header to HTTP/2 requests with bodies for back compat.
                     string transferEncoding = Headers[HttpKnownHeaderNames.TransferEncoding];
                     if (
-                        string.Equals(
-                            "chunked",
-                            transferEncoding?.Trim(),
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                "chunked",
+                                transferEncoding?.Trim(),
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         _contentBoundaryType = BoundaryType.Chunked;
@@ -166,12 +167,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         long value;
                         if (
                             length != null
-                            && long.TryParse(
-                                length.Trim(),
-                                NumberStyles.None,
-                                CultureInfo.InvariantCulture.NumberFormat,
-                                out value
-                            )
+                            && long
+                                .TryParse(
+                                    length.Trim(),
+                                    NumberStyles.None,
+                                    CultureInfo.InvariantCulture.NumberFormat,
+                                    out value
+                                )
                         )
                         {
                             _contentBoundaryType = BoundaryType.ContentLength;

@@ -76,21 +76,13 @@ namespace System.IO.Pipes
 
                 if (direction == PipeDirection.In)
                 {
-                    bSuccess = Interop.Kernel32.CreatePipe(
-                        out serverHandle,
-                        out _clientHandle,
-                        ref secAttrs,
-                        bufferSize
-                    );
+                    bSuccess = Interop.Kernel32
+                        .CreatePipe(out serverHandle, out _clientHandle, ref secAttrs, bufferSize);
                 }
                 else
                 {
-                    bSuccess = Interop.Kernel32.CreatePipe(
-                        out _clientHandle,
-                        out serverHandle,
-                        ref secAttrs,
-                        bufferSize
-                    );
+                    bSuccess = Interop.Kernel32
+                        .CreatePipe(out _clientHandle, out serverHandle, ref secAttrs, bufferSize);
                 }
             }
 
@@ -111,15 +103,16 @@ namespace System.IO.Pipes
             // process doesn't end up getting another copy of the server handle.  If it were to get a copy, the
             // OS wouldn't be able to inform the child that the server has closed its handle because it will see
             // that there is still one server handle that is open.
-            bSuccess = Interop.Kernel32.DuplicateHandle(
-                Interop.Kernel32.GetCurrentProcess(),
-                serverHandle,
-                Interop.Kernel32.GetCurrentProcess(),
-                out newServerHandle,
-                0,
-                false,
-                Interop.Kernel32.HandleOptions.DUPLICATE_SAME_ACCESS
-            );
+            bSuccess = Interop.Kernel32
+                .DuplicateHandle(
+                    Interop.Kernel32.GetCurrentProcess(),
+                    serverHandle,
+                    Interop.Kernel32.GetCurrentProcess(),
+                    out newServerHandle,
+                    0,
+                    false,
+                    Interop.Kernel32.HandleOptions.DUPLICATE_SAME_ACCESS
+                );
 
             if (!bSuccess)
             {

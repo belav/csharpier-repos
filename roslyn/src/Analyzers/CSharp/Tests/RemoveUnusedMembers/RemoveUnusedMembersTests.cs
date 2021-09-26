@@ -447,7 +447,8 @@ return 0;
                 TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication, },
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp9,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
@@ -1329,14 +1330,13 @@ class C
     }
 }";
 
-            var descriptor =
-                new CSharpRemoveUnusedMembersDiagnosticAnalyzer().SupportedDiagnostics.First(
-                    x => x.Id == "IDE0052"
+            var descriptor = new CSharpRemoveUnusedMembersDiagnosticAnalyzer().SupportedDiagnostics
+                .First(x => x.Id == "IDE0052");
+            var expectedMessage = string
+                .Format(
+                    AnalyzersResources.Private_property_0_can_be_converted_to_a_method_as_its_get_accessor_is_never_invoked,
+                    "MyClass.P"
                 );
-            var expectedMessage = string.Format(
-                AnalyzersResources.Private_property_0_can_be_converted_to_a_method_as_its_get_accessor_is_never_invoked,
-                "MyClass.P"
-            );
 
             await new VerifyCS.Test
             {
@@ -1907,7 +1907,8 @@ class MyClass
                 BatchFixedCode = batchFixedSource,
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
                 DiagnosticSelector = fixableDiagnostics => fixableDiagnostics[diagnosticIndex],
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
@@ -2063,7 +2064,8 @@ partial class MyClass
             {
                 TestState = { Sources = { source1, source2 } },
                 FixedState = { Sources = { source1, source2 } },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
@@ -2084,7 +2086,8 @@ partial class MyClass
             {
                 TestState = { Sources = { source1, source2 } },
                 FixedState = { Sources = { source1, source2 } },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
@@ -2697,7 +2700,8 @@ static class MyClass3
             {
                 TestState = { Sources = { source1, source2 } },
                 FixedState = { Sources = { fixedSource1, fixedSource2 } },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
@@ -2727,7 +2731,8 @@ static partial class B
             {
                 TestState = { Sources = { source1, source2 } },
                 FixedState = { Sources = { source1, source2 } },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
@@ -2757,7 +2762,8 @@ static partial class B
                 TestState = { Sources = { source1, source2 } },
                 FixedState = { Sources = { source1, source2 } },
                 LanguageVersion = LanguageVersion.CSharp9,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, WorkItem(32842, "https://github.com/dotnet/roslyn/issues/32842")]

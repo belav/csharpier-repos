@@ -135,8 +135,7 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
         public static IDictionary<
             string,
             MessagePackHubProtocolTestBase.ProtocolTestData
-        > TestData =>
-            new[]
+        > TestData => new[]
             {
                 // Completion messages
                 new ProtocolTestData(

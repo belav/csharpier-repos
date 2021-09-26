@@ -200,11 +200,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             {
                 if (
                     existingJoinEntityType.ClrType == joinEntityType
-                    && string.Equals(
-                        existingJoinEntityType.Name,
-                        joinEntityName,
-                        StringComparison.Ordinal
-                    )
+                    && string
+                        .Equals(
+                            existingJoinEntityType.Name,
+                            joinEntityName,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     newJoinEntityType = existingJoinEntityType;

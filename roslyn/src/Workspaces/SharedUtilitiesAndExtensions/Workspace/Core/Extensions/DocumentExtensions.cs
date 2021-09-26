@@ -45,10 +45,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 .ConfigureAwait(false);
             return semanticModel
                 ?? throw new InvalidOperationException(
-                    string.Format(
-                        WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
-                        document.Name
-                    )
+                    string
+                        .Format(
+                            WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
+                            document.Name
+                        )
                 );
         }
 
@@ -63,10 +64,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             return syntaxTree
                 ?? throw new InvalidOperationException(
-                    string.Format(
-                        WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
-                        document.Name
-                    )
+                    string
+                        .Format(
+                            WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
+                            document.Name
+                        )
                 );
         }
 
@@ -79,10 +81,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var syntaxTree = document.GetSyntaxTreeSynchronously(cancellationToken);
             return syntaxTree
                 ?? throw new InvalidOperationException(
-                    string.Format(
-                        WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
-                        document.Name
-                    )
+                    string
+                        .Format(
+                            WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
+                            document.Name
+                        )
                 );
         }
 #endif
@@ -98,10 +101,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             return root
                 ?? throw new InvalidOperationException(
-                    string.Format(
-                        WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
-                        document.Name
-                    )
+                    string
+                        .Format(
+                            WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
+                            document.Name
+                        )
                 );
         }
 
@@ -114,10 +118,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var root = document.GetSyntaxRootSynchronously(cancellationToken);
             return root
                 ?? throw new InvalidOperationException(
-                    string.Format(
-                        WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
-                        document.Name
-                    )
+                    string
+                        .Format(
+                            WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
+                            document.Name
+                        )
                 );
         }
 #endif
@@ -208,8 +213,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return document.GetRequiredSemanticModelAsync(cancellationToken);
 
             var workspace = document.Project.Solution.Workspace;
-            var semanticModelService =
-                workspace.Services.GetRequiredService<ISemanticModelReuseWorkspaceService>();
+            var semanticModelService = workspace.Services
+                .GetRequiredService<ISemanticModelReuseWorkspaceService>();
 
             return semanticModelService.ReuseExistingSpeculativeModelAsync(
                 document,
@@ -244,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ignoreErrorCode ??= SpecializedCollections.EmptyList<string>();
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            return semanticModel!.GetDiagnostics(cancellationToken: cancellationToken)
+            return semanticModel!
+                .GetDiagnostics(cancellationToken: cancellationToken)
                 .WhereAsArray(
                     diag =>
                         diag.Severity == DiagnosticSeverity.Error
@@ -294,9 +300,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 document.GetLanguageService<IGeneratedCodeRecognitionService>();
             return generatedCodeRecognitionService != null
                 && await generatedCodeRecognitionService.IsGeneratedCodeAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
         }
 

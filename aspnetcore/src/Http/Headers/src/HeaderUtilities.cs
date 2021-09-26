@@ -35,10 +35,8 @@ namespace Microsoft.Net.Http.Headers
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
-                var qualityString = ((double)value).ToString(
-                    "0.0##",
-                    NumberFormatInfo.InvariantInfo
-                );
+                var qualityString = ((double)value)
+                    .ToString("0.0##", NumberFormatInfo.InvariantInfo);
                 if (qualityParameter != null)
                 {
                     qualityParameter.Value = qualityString;
@@ -275,14 +273,15 @@ namespace Microsoft.Net.Http.Headers
                     var tokenLength = HttpRuleParser.GetTokenLength(headerValues[i], current);
                     if (
                         tokenLength == targetValue.Length
-                        && string.Compare(
-                            headerValues[i],
-                            current,
-                            targetValue,
-                            0,
-                            tokenLength,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                        && string
+                            .Compare(
+                                headerValues[i],
+                                current,
+                                targetValue,
+                                0,
+                                tokenLength,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
                         && TryParseNonNegativeInt64FromHeaderValue(
                             current + tokenLength,
                             headerValues[i],
@@ -354,14 +353,15 @@ namespace Microsoft.Net.Http.Headers
                     );
                     if (
                         tokenLength == targetDirectives.Length
-                        && string.Compare(
-                            cacheControlDirectives[i],
-                            current,
-                            targetDirectives,
-                            0,
-                            tokenLength,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                        && string
+                            .Compare(
+                                cacheControlDirectives[i],
+                                current,
+                                targetDirectives,
+                                0,
+                                tokenLength,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
                     )
                     {
                         // Token matches target value
@@ -450,12 +450,13 @@ namespace Microsoft.Net.Http.Headers
                 return false;
             }
 
-            return int.TryParse(
-                value.AsSpan(),
-                NumberStyles.None,
-                NumberFormatInfo.InvariantInfo,
-                out result
-            );
+            return int
+                .TryParse(
+                    value.AsSpan(),
+                    NumberStyles.None,
+                    NumberFormatInfo.InvariantInfo,
+                    out result
+                );
         }
 
         /// <summary>
@@ -480,12 +481,13 @@ namespace Microsoft.Net.Http.Headers
                 result = 0;
                 return false;
             }
-            return long.TryParse(
-                value.AsSpan(),
-                NumberStyles.None,
-                NumberFormatInfo.InvariantInfo,
-                out result
-            );
+            return long
+                .TryParse(
+                    value.AsSpan(),
+                    NumberStyles.None,
+                    NumberFormatInfo.InvariantInfo,
+                    out result
+                );
         }
 
         // Strict and fast RFC7231 5.3.1 Quality value parser (and without memory allocation)

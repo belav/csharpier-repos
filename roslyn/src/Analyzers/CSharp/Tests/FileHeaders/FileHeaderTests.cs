@@ -80,7 +80,8 @@ namespace N
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -113,7 +114,8 @@ namespace N
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -147,7 +149,8 @@ namespace N
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -182,7 +185,8 @@ namespace N
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -217,7 +221,8 @@ namespace N
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = editorConfig,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -241,7 +246,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = testCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -266,7 +272,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = testCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -290,7 +297,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = testCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -350,7 +358,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -382,7 +391,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -419,7 +429,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory]
@@ -444,7 +455,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = testCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory]
@@ -485,7 +497,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -512,7 +525,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -537,7 +551,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -572,7 +587,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         /// <summary>
@@ -608,7 +624,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettings,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -639,7 +656,8 @@ namespace Bar
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 EditorConfig = TestSettingsWithEmptyLines,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
     }
 }

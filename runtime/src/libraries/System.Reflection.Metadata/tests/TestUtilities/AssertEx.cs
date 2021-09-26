@@ -341,11 +341,12 @@ namespace System.Reflection.Metadata.Tests
             {
                 Assert.True(
                     none,
-                    string.Format(
-                        "Unexpected item found among existing items: {0}\nExisting items: {1}",
-                        ToString(actual.First(predicate)),
-                        ToString(actual)
-                    )
+                    string
+                        .Format(
+                            "Unexpected item found among existing items: {0}\nExisting items: {1}",
+                            ToString(actual.First(predicate)),
+                            ToString(actual)
+                        )
                 );
             }
         }
@@ -366,10 +367,11 @@ namespace System.Reflection.Metadata.Tests
             {
                 Assert.True(
                     all,
-                    string.Format(
-                        "Not all items satisfy condition:\n{0}",
-                        ToString(actual.Where(i => !predicate(i)))
-                    )
+                    string
+                        .Format(
+                            "Not all items satisfy condition:\n{0}",
+                            ToString(actual.Where(i => !predicate(i)))
+                        )
                 );
             }
         }

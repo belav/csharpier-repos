@@ -253,12 +253,8 @@ namespace System.Web.Razor
         )
         {
             return Host.DecorateCodeGenerator(
-                Host.CodeLanguage.CreateCodeGenerator(
-                    className,
-                    rootNamespace,
-                    sourceFileName,
-                    Host
-                )
+                Host.CodeLanguage
+                    .CreateCodeGenerator(className, rootNamespace, sourceFileName, Host)
             );
         }
 

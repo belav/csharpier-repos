@@ -45,11 +45,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
                 default:
                     throw new ArgumentException(
-                        string.Format(
-                            WorkspaceMSBuildResources.Invalid_0_specified_1,
-                            nameof(DiagnosticReportingMode),
-                            nameof(mode)
-                        ),
+                        string
+                            .Format(
+                                WorkspaceMSBuildResources.Invalid_0_specified_1,
+                                nameof(DiagnosticReportingMode),
+                                nameof(mode)
+                            ),
                         nameof(mode)
                     );
             }
@@ -78,11 +79,13 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         private static string GetMSBuildFailedMessage(string projectFilePath, string message) =>
             RoslynString.IsNullOrWhiteSpace(message)
-                ? string.Format(
+                ? string
+                  .Format(
                       WorkspaceMSBuildResources.Msbuild_failed_when_processing_the_file_0,
                       projectFilePath
                   )
-                : string.Format(
+                : string
+                  .Format(
                       WorkspaceMSBuildResources.Msbuild_failed_when_processing_the_file_0_with_message_1,
                       projectFilePath,
                       message

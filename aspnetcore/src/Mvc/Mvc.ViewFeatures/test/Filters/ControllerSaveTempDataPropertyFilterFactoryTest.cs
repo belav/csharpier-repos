@@ -13,9 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         public void CreateInstance_CreatesFilter()
         {
             // Arrange
-            var property = typeof(StringController).GetProperty(
-                nameof(StringController.StringProp)
-            );
+            var property = typeof(StringController)
+                .GetProperty(nameof(StringController.StringProp));
             var lifecycleProperties = new[] { new LifecycleProperty(property, "key") };
             var factory = new ControllerSaveTempDataPropertyFilterFactory(lifecycleProperties);
 

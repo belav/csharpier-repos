@@ -48,14 +48,15 @@ namespace System.Net.Http.Functional.Tests
                                         {
                                             using (
                                                 HttpResponseMessage resp = client.GetAsync(
-                                                        uri,
-                                                        HttpCompletionOption.ResponseHeadersRead
-                                                    )
+                                                    uri,
+                                                    HttpCompletionOption.ResponseHeadersRead
+                                                )
                                                     .GetAwaiter()
                                                     .GetResult()
                                             )
                                             using (
-                                                Stream respStream = resp.Content.ReadAsStreamAsync()
+                                                Stream respStream = resp.Content
+                                                    .ReadAsStreamAsync()
                                                     .GetAwaiter()
                                                     .GetResult()
                                             )
@@ -78,10 +79,11 @@ namespace System.Net.Http.Functional.Tests
                                     Assert.True(
                                         sc.CallStacks.Count == 0,
                                         "Sync Ctx used: "
-                                            + string.Join(
-                                                Environment.NewLine + Environment.NewLine,
-                                                sc.CallStacks
-                                            )
+                                            + string
+                                                .Join(
+                                                    Environment.NewLine + Environment.NewLine,
+                                                    sc.CallStacks
+                                                )
                                     );
                                 }
                             );

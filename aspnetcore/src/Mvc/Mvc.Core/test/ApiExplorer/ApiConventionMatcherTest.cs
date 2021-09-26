@@ -443,9 +443,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             // Arrange
             var method = typeof(TestController).GetMethod(nameof(TestController.Get));
-            var conventionMethod = typeof(TestConvention).GetMethod(
-                nameof(TestConvention.GetNoArgs)
-            );
+            var conventionMethod = typeof(TestConvention)
+                .GetMethod(nameof(TestConvention.GetNoArgs));
 
             // Act
             var result = ApiConventionMatcher.IsMatch(method, conventionMethod);
@@ -459,9 +458,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             // Arrange
             var method = typeof(TestController).GetMethod(nameof(TestController.Get));
-            var conventionMethod = typeof(TestConvention).GetMethod(
-                nameof(TestConvention.GetTwoArgs)
-            );
+            var conventionMethod = typeof(TestConvention)
+                .GetMethod(nameof(TestConvention.GetTwoArgs));
 
             // Act
             var result = ApiConventionMatcher.IsMatch(method, conventionMethod);
@@ -475,9 +473,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             // Arrange
             var method = typeof(TestController).GetMethod(nameof(TestController.Get));
-            var conventionMethod = typeof(TestConvention).GetMethod(
-                nameof(TestConvention.GetParameterNotMatching)
-            );
+            var conventionMethod = typeof(TestConvention)
+                .GetMethod(nameof(TestConvention.GetParameterNotMatching));
 
             // Act
             var result = ApiConventionMatcher.IsMatch(method, conventionMethod);
@@ -519,9 +516,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             // Arrange
             var method = typeof(TestController).GetMethod(nameof(TestController.SearchEmpty));
-            var conventionMethod = typeof(TestConvention).GetMethod(
-                nameof(TestConvention.SearchWithParams)
-            );
+            var conventionMethod = typeof(TestConvention)
+                .GetMethod(nameof(TestConvention.SearchWithParams));
 
             // Act
             var result = ApiConventionMatcher.IsMatch(method, conventionMethod);

@@ -251,9 +251,8 @@ using System.Reflection;
 
             var ivtCompilation = CreateCompilation(
                 assemblyName: "IVT",
-                options: TestOptions.ReleaseDll.WithStrongNameProvider(
-                    new DesktopStrongNameProvider()
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithStrongNameProvider(new DesktopStrongNameProvider()),
                 source: new[]
                 {
                     Parse(
@@ -277,9 +276,8 @@ namespace NamespaceContainingInternalsOnly
 
             var libCompilation = CreateCompilation(
                 assemblyName: "Lib",
-                options: TestOptions.ReleaseDll.WithStrongNameProvider(
-                    new DesktopStrongNameProvider()
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithStrongNameProvider(new DesktopStrongNameProvider()),
                 references: new[] { ivtCompilation.ToMetadataReference() },
                 source: new[]
                 {
@@ -374,15 +372,14 @@ using System.Collections;
 using C = System.Console;
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (2,1): info CS8019: Unnecessary using directive.
-                    // using System.Collections;
-                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Collections;"),
-                    // (3,1): info CS8019: Unnecessary using directive.
-                    // using C = System.Console;
-                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using C = System.Console;")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (2,1): info CS8019: Unnecessary using directive.
+                // using System.Collections;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Collections;"),
+                // (3,1): info CS8019: Unnecessary using directive.
+                // using C = System.Console;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using C = System.Console;")
+            );
         }
 
         [WorkItem(747219, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/747219")]
@@ -491,12 +488,11 @@ partial class Program
             var model = comp.GetSemanticModel(tree);
 
             // There should be no diagnostics.
-            model.GetDiagnostics()
-                .Verify(
-                //// (1,1): hidden CS8019: Unnecessary using directive.
-                //// using System.Runtime.InteropServices;
-                //Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Runtime.InteropServices;").WithLocation(1, 1)
-                );
+            model.GetDiagnostics().Verify(
+            //// (1,1): hidden CS8019: Unnecessary using directive.
+            //// using System.Runtime.InteropServices;
+            //Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Runtime.InteropServices;").WithLocation(1, 1)
+            );
         }
 
         [Fact, WorkItem(18348, "https://github.com/dotnet/roslyn/issues/18348")]
@@ -520,12 +516,11 @@ partial class Program
             var model = comp.GetSemanticModel(tree);
 
             // There should be no diagnostics.
-            model.GetDiagnostics()
-                .Verify(
-                //// (1,1): hidden CS8019: Unnecessary using directive.
-                //// using System.Runtime.InteropServices;
-                //Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Runtime.InteropServices;").WithLocation(1, 1)
-                );
+            model.GetDiagnostics().Verify(
+            //// (1,1): hidden CS8019: Unnecessary using directive.
+            //// using System.Runtime.InteropServices;
+            //Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Runtime.InteropServices;").WithLocation(1, 1)
+            );
         }
 
         [Fact, WorkItem(2773, "https://github.com/dotnet/roslyn/issues/2773")]

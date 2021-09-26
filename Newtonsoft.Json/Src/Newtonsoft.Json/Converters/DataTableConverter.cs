@@ -134,10 +134,8 @@ namespace Newtonsoft.Json.Converters
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "Unexpected JSON token when reading DataTable. Expected StartArray, got {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Unexpected JSON token when reading DataTable. Expected StartArray, got {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
 
@@ -259,10 +257,8 @@ namespace Newtonsoft.Json.Converters
                 default:
                     throw JsonSerializationException.Create(
                         reader,
-                        "Unexpected JSON token when reading DataTable: {0}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            tokenType
-                        )
+                        "Unexpected JSON token when reading DataTable: {0}"
+                            .FormatWith(CultureInfo.InvariantCulture, tokenType)
                     );
             }
         }

@@ -74,11 +74,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 ComObject.RcwToComObject(Expression),
                 BindingRestrictions.GetExpressionRestriction(
                     Expression.Call(
-                        typeof(ComBinder).GetMethod(
-                            nameof(ComBinder.IsComObject),
-                            System.Reflection.BindingFlags.Static
-                                | System.Reflection.BindingFlags.Public
-                        ),
+                        typeof(ComBinder)
+                            .GetMethod(
+                                nameof(ComBinder.IsComObject),
+                                System.Reflection.BindingFlags.Static
+                                    | System.Reflection.BindingFlags.Public
+                            ),
                         Helpers.Convert(Expression, typeof(object))
                     )
                 )

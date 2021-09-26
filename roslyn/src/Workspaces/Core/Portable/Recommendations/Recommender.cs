@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
         )
         {
             options ??= workspace.Options;
-            var languageRecommender = workspace.Services.GetLanguageServices(semanticModel.Language)
+            var languageRecommender = workspace.Services
+                .GetLanguageServices(semanticModel.Language)
                 .GetRequiredService<IRecommendationService>();
 
             return languageRecommender.GetRecommendedSymbolsAtPosition(

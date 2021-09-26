@@ -52,12 +52,10 @@ namespace ResetInteractiveTestsDocument
                 composition: EditorTestCompositions.InteractiveWindow
             );
 
-            var project = workspace.CurrentSolution.Projects.FirstOrDefault(
-                p => p.AssemblyName == "ResetInteractiveTestsAssembly"
-            );
-            var document = project.Documents.FirstOrDefault(
-                d => d.FilePath == "ResetInteractiveTestsDocument"
-            );
+            var project = workspace.CurrentSolution.Projects
+                .FirstOrDefault(p => p.AssemblyName == "ResetInteractiveTestsAssembly");
+            var document = project.Documents
+                .FirstOrDefault(d => d.FilePath == "ResetInteractiveTestsDocument");
             var replReferenceCommands = GetProjectReferences(workspace, project)
                 .Select(r => CreateReplReferenceCommand(r));
 
@@ -186,13 +184,14 @@ namespace ResetInteractiveTestsDocument
         private IEnumerable<string> GetProjectReferences(TestWorkspace workspace, Project project)
         {
             var metadataReferences = project.MetadataReferences.Select(r => r.Display);
-            var projectReferences = project.ProjectReferences.SelectMany(
-                p =>
-                    GetProjectReferences(
-                        workspace,
-                        workspace.CurrentSolution.GetProject(p.ProjectId)
-                    )
-            );
+            var projectReferences = project.ProjectReferences
+                .SelectMany(
+                    p =>
+                        GetProjectReferences(
+                            workspace,
+                            workspace.CurrentSolution.GetProject(p.ProjectId)
+                        )
+                );
             var outputReference = new string[] { project.OutputFilePath };
 
             return metadataReferences.Union(projectReferences).Concat(outputReference);

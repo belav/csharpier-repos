@@ -91,21 +91,21 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             serviceProvider.Setup(mock => mock.GetService(typeof(ITagHelperActivator)))
                 .Returns(tagHelperActivator);
             serviceProvider.Setup(
-                    mock =>
-                        mock.GetService(
-                            It.Is<Type>(
-                                serviceType =>
-                                    serviceType.IsGenericType
-                                    && serviceType.GetGenericTypeDefinition()
-                                        == typeof(IEnumerable<>)
-                            )
+                mock =>
+                    mock.GetService(
+                        It.Is<Type>(
+                            serviceType =>
+                                serviceType.IsGenericType
+                                && serviceType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
                         )
-                )
+                    )
+            )
                 .Returns<Type>(
                     serviceType =>
                     {
                         var enumerableType = serviceType.GetGenericArguments().First();
-                        return typeof(Enumerable).GetMethod("Empty")
+                        return typeof(Enumerable)
+                            .GetMethod("Empty")
                             .MakeGenericMethod(enumerableType)
                             .Invoke(null, null);
                     }

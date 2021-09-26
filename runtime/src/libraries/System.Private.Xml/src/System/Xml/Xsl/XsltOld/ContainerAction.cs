@@ -472,10 +472,8 @@ namespace System.Xml.Xsl.XsltOld
                 } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
-            info.NegativeInfinitySymbol = string.Concat(
-                info.NegativeSign,
-                info.PositiveInfinitySymbol
-            );
+            info.NegativeInfinitySymbol = string
+                .Concat(info.NegativeSign, info.PositiveInfinitySymbol);
             if (Name == null)
             {
                 Name = new XmlQualifiedName();
@@ -508,12 +506,8 @@ namespace System.Xml.Xsl.XsltOld
             for (int i = 0; i < elements.Length; i++)
             {
                 double defaultPriority = NameTest(elements[i]);
-                compiler.CompiledStylesheet!.AddSpace(
-                    compiler,
-                    elements[i],
-                    defaultPriority,
-                    preserve
-                );
+                compiler.CompiledStylesheet!
+                    .AddSpace(compiler, elements[i], defaultPriority, preserve);
             }
             CheckEmpty(compiler);
         }
@@ -960,11 +954,8 @@ namespace System.Xml.Xsl.XsltOld
                         string langName = input.Value;
                         if (
                             string.Equals(langName, "jscript", StringComparison.OrdinalIgnoreCase)
-                            || string.Equals(
-                                langName,
-                                "javascript",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            || string
+                                .Equals(langName, "javascript", StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             lang = ScriptingLanguage.JScript;
@@ -978,11 +969,8 @@ namespace System.Xml.Xsl.XsltOld
                         }
                         else if (
                             string.Equals(langName, "vb", StringComparison.OrdinalIgnoreCase)
-                            || string.Equals(
-                                langName,
-                                "visualbasic",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            || string
+                                .Equals(langName, "visualbasic", StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             lang = ScriptingLanguage.VisualBasic;

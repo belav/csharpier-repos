@@ -38,11 +38,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             formatter.WriteProperty(nameof(AttributeName), AttributeName);
             formatter.WriteProperty(
                 nameof(AttributeNameExpression),
-                string.Join(
-                    string.Empty,
-                    AttributeNameExpression?.FindDescendantNodes<IntermediateToken>()
-                        .Select(n => n.Content) ?? Array.Empty<string>()
-                )
+                string
+                    .Join(
+                        string.Empty,
+                        AttributeNameExpression?.FindDescendantNodes<IntermediateToken>()
+                            .Select(n => n.Content) ?? Array.Empty<string>()
+                    )
             );
             formatter.WriteProperty(nameof(Prefix), Prefix);
             formatter.WriteProperty(nameof(Suffix), Suffix);

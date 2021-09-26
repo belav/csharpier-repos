@@ -414,7 +414,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             protected override IServiceCollection AddServices(
                 IServiceCollection serviceCollection
             ) =>
-                base.AddServices(serviceCollection)
+                base
+                    .AddServices(serviceCollection)
                     .AddSingleton<IRelationalCommandBuilderFactory, BadDataCommandBuilderFactory>();
         }
     }

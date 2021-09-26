@@ -53,9 +53,8 @@ namespace AutoMapper.UnitTests
         {
             if (!_allSourceMembers.TryGetValue(sourceTypeDetails, out SourceMember[] sourceMembers))
             {
-                sourceMembers = sourceTypeDetails.ReadAccessors.Select(
-                        sourceMember => new SourceMember(sourceMember)
-                    )
+                sourceMembers = sourceTypeDetails.ReadAccessors
+                    .Select(sourceMember => new SourceMember(sourceMember))
                     .Where(s => s.Attribute != null)
                     .ToArray();
                 _allSourceMembers[sourceTypeDetails] =
@@ -63,13 +62,14 @@ namespace AutoMapper.UnitTests
             }
             return sourceMembers.FirstOrDefault(
                 d =>
-                    d.Attribute.IsMatch(
-                        sourceTypeDetails,
-                        d.Member,
-                        destType,
-                        destMemberType,
-                        nameToSearch
-                    )
+                    d.Attribute
+                        .IsMatch(
+                            sourceTypeDetails,
+                            d.Member,
+                            destType,
+                            destMemberType,
+                            nameToSearch
+                        )
             ).Member;
         }
         readonly struct SourceMember

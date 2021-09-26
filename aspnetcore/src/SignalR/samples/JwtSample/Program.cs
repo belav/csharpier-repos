@@ -13,29 +13,19 @@ namespace JwtSample
     {
         public static Task Main(string[] args)
         {
-            return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.ConfigureLogging(
-                                factory =>
-                                {
-                                    factory.AddConsole();
-                                    factory.AddFilter(
-                                        "Console",
-                                        level => level >= LogLevel.Information
-                                    );
-                                    factory.AddDebug();
-                                }
-                            )
-                            .UseKestrel()
-                            .UseContentRoot(Directory.GetCurrentDirectory())
-                            .UseIISIntegration()
-                            .UseStartup<Startup>();
-                    }
-                )
-                .Build()
-                .RunAsync();
+            return Host.CreateDefaultBuilder(args).ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.ConfigureLogging(
+                        factory =>
+                        {
+                            factory.AddConsole();
+                            factory.AddFilter("Console", level => level >= LogLevel.Information);
+                            factory.AddDebug();
+                        }
+                    ).UseKestrel().UseContentRoot(Directory.GetCurrentDirectory()).UseIISIntegration().UseStartup<Startup>();
+                }
+            ).Build().RunAsync();
         }
     }
 }

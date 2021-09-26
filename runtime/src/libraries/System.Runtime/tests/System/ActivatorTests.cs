@@ -1654,24 +1654,20 @@ namespace System.Tests
         public static void CreateInstanceAssemblyResolve()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.AssemblyResolve += (
-                            object sender,
-                            ResolveEventArgs args
-                        ) =>
-                            Assembly.LoadFile(
-                                Path.Combine(
-                                    Directory.GetCurrentDirectory(),
-                                    "TestLoadAssembly.dll"
-                                )
-                            );
-                        Assert.Throws<FileLoadException>(
-                            () => Activator.CreateInstance(",,,,", "PublicClassSample")
+                () =>
+                {
+                    AppDomain.CurrentDomain.AssemblyResolve += (
+                        object sender,
+                        ResolveEventArgs args
+                    ) =>
+                        Assembly.LoadFile(
+                            Path.Combine(Directory.GetCurrentDirectory(), "TestLoadAssembly.dll")
                         );
-                    }
-                )
-                .Dispose();
+                    Assert.Throws<FileLoadException>(
+                        () => Activator.CreateInstance(",,,,", "PublicClassSample")
+                    );
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(

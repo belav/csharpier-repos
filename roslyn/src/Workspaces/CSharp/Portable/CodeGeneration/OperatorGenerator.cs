@@ -75,17 +75,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (declaration.ExpressionBody == null)
             {
                 var expressionBodyPreference =
-                    options.Options.GetOption(
-                        CSharpCodeStyleOptions.PreferExpressionBodiedOperators
-                    ).Value;
+                    options.Options
+                        .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedOperators).Value;
                 if (
-                    declaration.Body.TryConvertToArrowExpressionBody(
-                        declaration.Kind(),
-                        parseOptions,
-                        expressionBodyPreference,
-                        out var expressionBody,
-                        out var semicolonToken
-                    )
+                    declaration.Body
+                        .TryConvertToArrowExpressionBody(
+                            declaration.Kind(),
+                            parseOptions,
+                            expressionBodyPreference,
+                            out var expressionBody,
+                            out var semicolonToken
+                        )
                 )
                 {
                     return declaration.WithBody(null)
@@ -109,10 +109,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (operatorSyntaxKind == SyntaxKind.None)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources.Cannot_generate_code_for_unsupported_operator_0,
-                        method.Name
-                    ),
+                    string
+                        .Format(
+                            WorkspacesResources.Cannot_generate_code_for_unsupported_operator_0,
+                            method.Name
+                        ),
                     nameof(method)
                 );
             }

@@ -794,9 +794,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                         case configDefaultDebugger:
                                             if (
                                                 currentXML.Value.Length >= 7
-                                                && currentXML.Value.Substring(
-                                                        currentXML.Value.Length - 7
-                                                    )
+                                                && currentXML.Value
+                                                    .Substring(currentXML.Value.Length - 7)
                                                     .ToLower() == "cdb.exe"
                                             )
                                             {
@@ -804,9 +803,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             }
                                             else if (
                                                 currentXML.Value.Length >= 10
-                                                && currentXML.Value.Substring(
-                                                        currentXML.Value.Length - 7
-                                                    )
+                                                && currentXML.Value
+                                                    .Substring(currentXML.Value.Length - 7)
                                                     .ToLower() == "windbg.exe"
                                             )
                                             {
@@ -1073,9 +1071,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
 
                                             if (
                                                 currentXML.Value.Length >= 7
-                                                && currentXML.Value.Substring(
-                                                        currentXML.Value.Length - 7
-                                                    )
+                                                && currentXML.Value
+                                                    .Substring(currentXML.Value.Length - 7)
                                                     .ToLower() == "cdb.exe"
                                             )
                                             {
@@ -1083,9 +1080,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             }
                                             else if (
                                                 currentXML.Value.Length >= 10
-                                                && currentXML.Value.Substring(
-                                                        currentXML.Value.Length - 7
-                                                    )
+                                                && currentXML.Value
+                                                    .Substring(currentXML.Value.Length - 7)
                                                     .ToLower() == "windbg.exe"
                                             )
                                             {
@@ -1285,11 +1281,12 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                 // first pre command on this test
                                                 rt.PostCommands = new List<string>();
                                             }
-                                            rt.PostCommands.Add(
-                                                Environment.ExpandEnvironmentVariables(
-                                                    currentXML.Value
-                                                )
-                                            );
+                                            rt.PostCommands
+                                                .Add(
+                                                    Environment.ExpandEnvironmentVariables(
+                                                        currentXML.Value
+                                                    )
+                                                );
                                             break;
                                         case configAssemblyPreCommand:
                                             if (rt.PreCommands == null)
@@ -1297,11 +1294,12 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                                 // first pre command on this test
                                                 rt.PreCommands = new List<string>();
                                             }
-                                            rt.PreCommands.Add(
-                                                Environment.ExpandEnvironmentVariables(
-                                                    currentXML.Value
-                                                )
-                                            );
+                                            rt.PreCommands
+                                                .Add(
+                                                    Environment.ExpandEnvironmentVariables(
+                                                        currentXML.Value
+                                                    )
+                                                );
                                             break;
                                         case configAssemblyCustomAction:
                                             switch (currentXML.Value)

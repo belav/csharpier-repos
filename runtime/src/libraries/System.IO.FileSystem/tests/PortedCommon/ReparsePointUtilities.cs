@@ -59,21 +59,19 @@ public static class MountHelper
         if (OperatingSystem.IsWindows())
         {
             symLinkProcess.StartInfo.FileName = "cmd";
-            symLinkProcess.StartInfo.Arguments = string.Format(
-                "/c mklink{0} \"{1}\" \"{2}\"",
-                isDirectory ? " /D" : "",
-                linkPath,
-                targetPath
-            );
+            symLinkProcess.StartInfo.Arguments = string
+                .Format(
+                    "/c mklink{0} \"{1}\" \"{2}\"",
+                    isDirectory ? " /D" : "",
+                    linkPath,
+                    targetPath
+                );
         }
         else
         {
             symLinkProcess.StartInfo.FileName = "/bin/ln";
-            symLinkProcess.StartInfo.Arguments = string.Format(
-                "-s \"{0}\" \"{1}\"",
-                targetPath,
-                linkPath
-            );
+            symLinkProcess.StartInfo.Arguments = string
+                .Format("-s \"{0}\" \"{1}\"", targetPath, linkPath);
         }
         symLinkProcess.StartInfo.UseShellExecute = false;
         symLinkProcess.StartInfo.RedirectStandardOutput = true;

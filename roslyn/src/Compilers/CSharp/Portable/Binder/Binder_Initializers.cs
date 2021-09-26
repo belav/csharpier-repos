@@ -175,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                             (
                                                 (SynthesizedRecordPropertySymbol)fieldSymbol.AssociatedSymbol
                                             ).BackingParameter
-                                        ).MakeCompilerGenerated()
+                                        )
+                                            .MakeCompilerGenerated()
                                     )
                                 );
                                 break;
@@ -210,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 !fieldSymbol.IsStatic
-                && fieldSymbol.ContainingType.GetMembersUnordered()
+                && fieldSymbol.ContainingType
+                    .GetMembersUnordered()
                     .OfType<SynthesizedRecordConstructor>()
                     .SingleOrDefault()
                     is SynthesizedRecordConstructor recordCtor
@@ -219,12 +221,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 binder = new InMethodBinder(recordCtor, binder);
             }
 
-            return new LocalScopeBinder(binder).WithAdditionalFlagsAndContainingMemberOrLambda(
-                suppressBinderFlagsFieldInitializer
-                  ? BinderFlags.None
-                  : BinderFlags.FieldInitializer,
-                fieldSymbol
-            );
+            return new LocalScopeBinder(binder)
+                .WithAdditionalFlagsAndContainingMemberOrLambda(
+                    suppressBinderFlagsFieldInitializer
+                      ? BinderFlags.None
+                      : BinderFlags.FieldInitializer,
+                    fieldSymbol
+                );
         }
 
         /// <summary>

@@ -53,12 +53,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             index = 0;
             return n == ReturnValuePrefixLength
                 || (n > ReturnValuePrefixLength)
-                    && int.TryParse(
-                        name.Substring(ReturnValuePrefixLength),
-                        NumberStyles.None,
-                        CultureInfo.InvariantCulture,
-                        out index
-                    );
+                    && int
+                        .TryParse(
+                            name.Substring(ReturnValuePrefixLength),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out index
+                        );
         }
 
         internal static DkmClrCompilationResultFlags GetLocalResultFlags(this Alias alias)

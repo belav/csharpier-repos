@@ -218,13 +218,14 @@ namespace Microsoft.AspNetCore.Mvc.Cors
             var corsProvider = new CorsApplicationModelProvider(OptionsWithoutEndpointRouting);
             var context = GetProviderContext(typeof(RegularController));
 
-            context.Result.Filters.Add(
-                new CorsAuthorizationFilter(
-                    Mock.Of<ICorsService>(),
-                    Mock.Of<ICorsPolicyProvider>(),
-                    Mock.Of<ILoggerFactory>()
-                )
-            );
+            context.Result.Filters
+                .Add(
+                    new CorsAuthorizationFilter(
+                        Mock.Of<ICorsService>(),
+                        Mock.Of<ICorsPolicyProvider>(),
+                        Mock.Of<ILoggerFactory>()
+                    )
+                );
 
             // Act
             corsProvider.OnProvidersExecuting(context);

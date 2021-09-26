@@ -388,11 +388,12 @@ namespace Microsoft.Net.Http.Headers
             )
             {
                 throw new FormatException(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Invalid disposition type '{0}'.",
-                        dispositionType
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "Invalid disposition type '{0}'.",
+                            dispositionType
+                        )
                 );
             }
         }
@@ -617,9 +618,10 @@ namespace Microsoft.Net.Http.Headers
 
             MimeSuffix.CopyTo(bufferContent.Slice(base64ContentLength));
 
-            return Encoding.UTF8.GetString(
-                buffer.Slice(0, MimePrefix.Length + base64ContentLength + MimeSuffix.Length)
-            );
+            return Encoding.UTF8
+                .GetString(
+                    buffer.Slice(0, MimePrefix.Length + base64ContentLength + MimeSuffix.Length)
+                );
         }
 
         // Attempt to decode MIME encoded strings

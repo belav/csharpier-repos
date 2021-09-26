@@ -23,9 +23,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public DbContextOptions CreateOptions(IModel model, IServiceProvider serviceProvider = null)
         {
-            var optionsBuilder = new DbContextOptionsBuilder().UseInternalServiceProvider(
-                serviceProvider
-            );
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseInternalServiceProvider(serviceProvider);
 
             UseProviderOptions(optionsBuilder.UseModel(model));
 
@@ -34,9 +33,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public DbContextOptions CreateOptions(IServiceProvider serviceProvider = null)
         {
-            var optionsBuilder = new DbContextOptionsBuilder().UseInternalServiceProvider(
-                serviceProvider
-            );
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseInternalServiceProvider(serviceProvider);
 
             UseProviderOptions(optionsBuilder);
 
@@ -83,9 +81,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContextOptions options
         ) =>
             new(
-                new DbContextOptionsBuilder(options).UseInternalServiceProvider(
-                    serviceProvider
-                ).Options
+                new DbContextOptionsBuilder(options)
+                    .UseInternalServiceProvider(serviceProvider).Options
             );
 
         public DbContext CreateContext(IServiceProvider serviceProvider) =>
@@ -96,9 +93,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public DbContext CreateContext(DbContextOptions options) =>
             new(
-                new DbContextOptionsBuilder(options).UseInternalServiceProvider(
-                    CreateServiceProvider()
-                ).Options
+                new DbContextOptionsBuilder(options)
+                    .UseInternalServiceProvider(CreateServiceProvider()).Options
             );
 
         public DbContext CreateContext() => new(CreateOptions(CreateServiceProvider()));
@@ -111,9 +107,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContextOptions options
         ) =>
             new(
-                new DbContextOptionsBuilder(options).UseInternalServiceProvider(
-                    CreateServiceProvider(customServices)
-                ).Options
+                new DbContextOptionsBuilder(options)
+                    .UseInternalServiceProvider(CreateServiceProvider(customServices)).Options
             );
 
         public DbContext CreateContext(IServiceCollection customServices) =>
@@ -187,9 +182,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         )
         {
             var contextServices = CreateContextServices(
-                new ServiceCollection().AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(
-                        _ => modelLogger
-                    )
+                new ServiceCollection()
+                    .AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(_ => modelLogger)
                     .AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model.Validation>>(
                         _ => validationLogger
                     )
@@ -210,9 +204,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         )
         {
             var contextServices = CreateContextServices(
-                new ServiceCollection().AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(
-                        _ => modelLogger
-                    )
+                new ServiceCollection()
+                    .AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(_ => modelLogger)
                     .AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model.Validation>>(
                         _ => validationLogger
                     )
@@ -309,50 +302,49 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         ) where TContext : DbContext
         {
             using var c = createContext();
-            c.Database.CreateExecutionStrategy()
-                .Execute(
-                    c,
-                    context =>
+            c.Database.CreateExecutionStrategy().Execute(
+                c,
+                context =>
+                {
+                    using var transaction = context.Database.BeginTransaction();
+                    using (var innerContext = createContext())
                     {
-                        using var transaction = context.Database.BeginTransaction();
-                        using (var innerContext = createContext())
-                        {
-                            useTransaction(innerContext.Database, transaction);
-                            testOperation(innerContext);
-                        }
-
-                        if (nestedTestOperation1 == null)
-                        {
-                            return;
-                        }
-
-                        using (var innerContext1 = createContext())
-                        {
-                            useTransaction(innerContext1.Database, transaction);
-                            nestedTestOperation1(innerContext1);
-                        }
-
-                        if (nestedTestOperation2 == null)
-                        {
-                            return;
-                        }
-
-                        using (var innerContext2 = createContext())
-                        {
-                            useTransaction(innerContext2.Database, transaction);
-                            nestedTestOperation2(innerContext2);
-                        }
-
-                        if (nestedTestOperation3 == null)
-                        {
-                            return;
-                        }
-
-                        using var innerContext3 = createContext();
-                        useTransaction(innerContext3.Database, transaction);
-                        nestedTestOperation3(innerContext3);
+                        useTransaction(innerContext.Database, transaction);
+                        testOperation(innerContext);
                     }
-                );
+
+                    if (nestedTestOperation1 == null)
+                    {
+                        return;
+                    }
+
+                    using (var innerContext1 = createContext())
+                    {
+                        useTransaction(innerContext1.Database, transaction);
+                        nestedTestOperation1(innerContext1);
+                    }
+
+                    if (nestedTestOperation2 == null)
+                    {
+                        return;
+                    }
+
+                    using (var innerContext2 = createContext())
+                    {
+                        useTransaction(innerContext2.Database, transaction);
+                        nestedTestOperation2(innerContext2);
+                    }
+
+                    if (nestedTestOperation3 == null)
+                    {
+                        return;
+                    }
+
+                    using var innerContext3 = createContext();
+                    useTransaction(innerContext3.Database, transaction);
+                    nestedTestOperation3(innerContext3);
+                }
+            );
         }
 
         public static async Task ExecuteWithStrategyInTransactionAsync<TContext>(
@@ -365,50 +357,49 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         ) where TContext : DbContext
         {
             using var c = createContext();
-            await c.Database.CreateExecutionStrategy()
-                .ExecuteAsync(
-                    c,
-                    async context =>
+            await c.Database.CreateExecutionStrategy().ExecuteAsync(
+                c,
+                async context =>
+                {
+                    using var transaction = await context.Database.BeginTransactionAsync();
+                    using (var innerContext = createContext())
                     {
-                        using var transaction = await context.Database.BeginTransactionAsync();
-                        using (var innerContext = createContext())
-                        {
-                            useTransaction(innerContext.Database, transaction);
-                            await testOperation(innerContext);
-                        }
-
-                        if (nestedTestOperation1 == null)
-                        {
-                            return;
-                        }
-
-                        using (var innerContext1 = createContext())
-                        {
-                            useTransaction(innerContext1.Database, transaction);
-                            await nestedTestOperation1(innerContext1);
-                        }
-
-                        if (nestedTestOperation2 == null)
-                        {
-                            return;
-                        }
-
-                        using (var innerContext2 = createContext())
-                        {
-                            useTransaction(innerContext2.Database, transaction);
-                            await nestedTestOperation2(innerContext2);
-                        }
-
-                        if (nestedTestOperation3 == null)
-                        {
-                            return;
-                        }
-
-                        using var innerContext3 = createContext();
-                        useTransaction(innerContext3.Database, transaction);
-                        await nestedTestOperation3(innerContext3);
+                        useTransaction(innerContext.Database, transaction);
+                        await testOperation(innerContext);
                     }
-                );
+
+                    if (nestedTestOperation1 == null)
+                    {
+                        return;
+                    }
+
+                    using (var innerContext1 = createContext())
+                    {
+                        useTransaction(innerContext1.Database, transaction);
+                        await nestedTestOperation1(innerContext1);
+                    }
+
+                    if (nestedTestOperation2 == null)
+                    {
+                        return;
+                    }
+
+                    using (var innerContext2 = createContext())
+                    {
+                        useTransaction(innerContext2.Database, transaction);
+                        await nestedTestOperation2(innerContext2);
+                    }
+
+                    if (nestedTestOperation3 == null)
+                    {
+                        return;
+                    }
+
+                    using var innerContext3 = createContext();
+                    useTransaction(innerContext3.Database, transaction);
+                    await nestedTestOperation3(innerContext3);
+                }
+            );
         }
     }
 }

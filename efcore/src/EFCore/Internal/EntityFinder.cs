@@ -392,16 +392,15 @@ namespace Microsoft.EntityFrameworkCore.Internal
             var queryRoot = BuildQueryRoot(ownerEntityType);
             var collectionNavigation = ownerEntityType.FindNavigation(navigationName)!.IsCollection;
 
-            return (IQueryable)(
-                collectionNavigation ? _selectManyMethod : _selectMethod
-            ).MakeGenericMethod(ownerEntityType.ClrType, entityType.ClrType)
+            return (IQueryable)(collectionNavigation ? _selectManyMethod : _selectMethod)
+                .MakeGenericMethod(ownerEntityType.ClrType, entityType.ClrType)
                 .Invoke(null, new object[] { queryRoot, navigationName })!;
         }
 
-        private static readonly MethodInfo _selectMethod =
-            typeof(EntityFinder<TEntity>).GetTypeInfo()
-                .GetDeclaredMethods(nameof(Select))
-                .Single(mi => mi.IsGenericMethodDefinition);
+        private static readonly MethodInfo _selectMethod = typeof(EntityFinder<TEntity>)
+            .GetTypeInfo()
+            .GetDeclaredMethods(nameof(Select))
+            .Single(mi => mi.IsGenericMethodDefinition);
 
         private static IQueryable<TResult> Select<TSource, TResult>(
             IQueryable<TSource> source,
@@ -422,10 +421,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
             );
         }
 
-        private static readonly MethodInfo _selectManyMethod =
-            typeof(EntityFinder<TEntity>).GetTypeInfo()
-                .GetDeclaredMethods(nameof(SelectMany))
-                .Single(mi => mi.IsGenericMethodDefinition);
+        private static readonly MethodInfo _selectManyMethod = typeof(EntityFinder<TEntity>)
+            .GetTypeInfo()
+            .GetDeclaredMethods(nameof(SelectMany))
+            .Single(mi => mi.IsGenericMethodDefinition);
 
         private static IQueryable<TResult> SelectMany<TSource, TResult>(
             IQueryable<TSource> source,

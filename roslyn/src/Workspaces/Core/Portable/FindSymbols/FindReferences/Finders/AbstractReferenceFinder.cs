@@ -91,8 +91,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             var documents = ArrayBuilder<Document>.GetInstance();
             foreach (
                 var document in await project.GetAllRegularAndSourceGeneratedDocumentsAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             )
             {
@@ -304,23 +304,23 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var tokens = await GetIdentifierOrGlobalNamespaceTokensWithTextAsync(
-                    document,
-                    semanticModel,
-                    identifier,
-                    cancellationToken
-                )
+                document,
+                semanticModel,
+                identifier,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             var references = await FindReferencesInTokensAsync(
-                    document,
-                    semanticModel,
-                    tokens,
-                    t => IdentifiersMatch(syntaxFacts, identifier, t),
-                    symbolsMatchAsync,
-                    cancellationToken
-                )
+                document,
+                semanticModel,
+                tokens,
+                t => IdentifiersMatch(syntaxFacts, identifier, t),
+                symbolsMatchAsync,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (!findInGlobalSuppressions)
@@ -329,12 +329,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             RoslynDebug.Assert(docCommentId != null);
             var referencesInGlobalSuppressions =
                 await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
-                        document,
-                        semanticModel,
-                        syntaxFacts,
-                        docCommentId,
-                        cancellationToken
-                    )
+                    document,
+                    semanticModel,
+                    syntaxFacts,
+                    docCommentId,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             return references.AddRange(referencesInGlobalSuppressions);
         }
@@ -359,7 +359,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             if (syntaxFacts == null)
                 return ImmutableArray<SyntaxToken>.Empty;
 
-            var root = await semanticModel.SyntaxTree.GetRootAsync(cancellationToken)
+            var root = await semanticModel.SyntaxTree
+                .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             SourceText? text = null;
@@ -434,18 +435,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 
                 if (
                     await SymbolFinder.OriginalSymbolsMatchAsync(
-                            solution,
-                            searchSymbol,
-                            symbolInfoToMatch.Symbol,
-                            cancellationToken
-                        )
+                        solution,
+                        searchSymbol,
+                        symbolInfoToMatch.Symbol,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
                     return (matched: true, CandidateReason.None);
                 }
                 else if (
-                    await symbolInfoToMatch.CandidateSymbols.AnyAsync(
+                    await symbolInfoToMatch.CandidateSymbols
+                        .AnyAsync(
                             static (s, arg) =>
                                 SymbolFinder.OriginalSymbolsMatchAsync(
                                     arg.solution,
@@ -606,13 +608,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             return aliasSymbols.IsDefaultOrEmpty
               ? ImmutableArray<FinderLocation>.Empty
               : await FindReferencesThroughAliasSymbolsAsync(
-                        symbol,
-                        document,
-                        semanticModel,
-                        aliasSymbols,
-                        findParentNode,
-                        cancellationToken
-                    )
+                    symbol,
+                    document,
+                    semanticModel,
+                    aliasSymbols,
+                    findParentNode,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
         }
 
@@ -637,12 +639,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             return aliasSymbols.IsDefaultOrEmpty
               ? ImmutableArray<FinderLocation>.Empty
               : await FindReferencesThroughAliasSymbolsAsync(
-                        document,
-                        semanticModel,
-                        aliasSymbols,
-                        symbolsMatchAsync,
-                        cancellationToken
-                    )
+                    document,
+                    semanticModel,
+                    aliasSymbols,
+                    symbolsMatchAsync,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
         }
 
@@ -685,13 +687,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             foreach (var aliasSymbol in aliasSymbols)
             {
                 var aliasReferences = await FindReferencesInDocumentUsingIdentifierAsync(
-                        symbol,
-                        aliasSymbol.Name,
-                        document,
-                        semanticModel,
-                        findParentNode,
-                        cancellationToken
-                    )
+                    symbol,
+                    aliasSymbol.Name,
+                    document,
+                    semanticModel,
+                    findParentNode,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 allAliasReferences.AddRange(aliasReferences);
                 // the alias may reference an attribute and the alias name may end with an "Attribute" suffix. In this case search for the
@@ -705,12 +707,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 )
                 {
                     aliasReferences = await FindReferencesInDocumentUsingIdentifierAsync(
-                            symbol,
-                            simpleName,
-                            document,
-                            semanticModel,
-                            cancellationToken
-                        )
+                        symbol,
+                        simpleName,
+                        document,
+                        semanticModel,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     allAliasReferences.AddRange(aliasReferences);
                 }
@@ -743,14 +745,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 );
 
                 var aliasReferences = await FindReferencesInDocumentUsingIdentifierAsync(
-                        aliasSymbol.Name,
-                        document,
-                        semanticModel,
-                        symbolsMatchAsync,
-                        docCommentId,
-                        findInGlobalSuppressions,
-                        cancellationToken
-                    )
+                    aliasSymbol.Name,
+                    document,
+                    semanticModel,
+                    symbolsMatchAsync,
+                    docCommentId,
+                    findInGlobalSuppressions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 allAliasReferences.AddRange(aliasReferences);
                 // the alias may reference an attribute and the alias name may end with an "Attribute" suffix. In this case search for the
@@ -764,14 +766,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 )
                 {
                     aliasReferences = await FindReferencesInDocumentUsingIdentifierAsync(
-                            simpleName,
-                            document,
-                            semanticModel,
-                            symbolsMatchAsync,
-                            docCommentId,
-                            findInGlobalSuppressions,
-                            cancellationToken
-                        )
+                        simpleName,
+                        document,
+                        semanticModel,
+                        symbolsMatchAsync,
+                        docCommentId,
+                        findInGlobalSuppressions,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     allAliasReferences.AddRange(aliasReferences);
                 }
@@ -870,9 +872,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var syntaxTreeInfo = await SyntaxTreeIndex.GetRequiredIndexAsync(
-                    document,
-                    cancellationToken
-                )
+                document,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (isRelevantDocument(syntaxTreeInfo))
             {
@@ -1158,10 +1160,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         protected static bool Matches(ISymbol? symbol1, ISymbol notNulloriginalUnreducedSymbol2)
         {
             return symbol1 != null
-                && SymbolEquivalenceComparer.Instance.Equals(
-                    symbol1.GetOriginalUnreducedDefinition(),
-                    notNulloriginalUnreducedSymbol2
-                );
+                && SymbolEquivalenceComparer.Instance
+                    .Equals(
+                        symbol1.GetOriginalUnreducedDefinition(),
+                        notNulloriginalUnreducedSymbol2
+                    );
         }
 
         protected static SymbolUsageInfo GetSymbolUsageInfo(
@@ -1728,13 +1731,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             // Now that we have Doc Comments in place, We are searching for References in the Trivia as well by setting descendIntoTrivia: true
             var tokens = root.DescendantTokens(descendIntoTrivia: true);
             var references = await FindReferencesInTokensAsync(
-                    document,
-                    semanticModel,
-                    tokens,
-                    tokensMatch,
-                    symbolsMatchAsync,
-                    cancellationToken
-                )
+                document,
+                semanticModel,
+                tokens,
+                tokensMatch,
+                symbolsMatchAsync,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (!findInGlobalSuppressions)
@@ -1744,12 +1747,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var referencesInGlobalSuppressions =
                 await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
-                        document,
-                        semanticModel,
-                        syntaxFacts,
-                        docCommentId,
-                        cancellationToken
-                    )
+                    document,
+                    semanticModel,
+                    syntaxFacts,
+                    docCommentId,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             return references.AddRange(referencesInGlobalSuppressions);
         }

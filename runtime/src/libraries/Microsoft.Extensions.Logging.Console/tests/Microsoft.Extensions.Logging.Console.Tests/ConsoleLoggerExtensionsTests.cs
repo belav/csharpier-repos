@@ -26,71 +26,56 @@ namespace Microsoft.Extensions.Logging.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddConsole_NullConfigure_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ServiceCollection().AddLogging(
+            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddLogging(
                         builder =>
                         {
                             builder.AddConsole(null);
                         }
-                    )
-            );
+                    ));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddSimpleConsole_NullConfigure_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ServiceCollection().AddLogging(
+            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddLogging(
                         builder =>
                         {
                             builder.AddSimpleConsole(null);
                         }
-                    )
-            );
+                    ));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddSystemdConsole_NullConfigure_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ServiceCollection().AddLogging(
+            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddLogging(
                         builder =>
                         {
                             builder.AddSystemdConsole(null);
                         }
-                    )
-            );
+                    ));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddJsonConsole_NullConfigure_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ServiceCollection().AddLogging(
+            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddLogging(
                         builder =>
                         {
                             builder.AddJsonConsole(null);
                         }
-                    )
-            );
+                    ));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddConsoleFormatter_NullConfigure_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ServiceCollection().AddLogging(
+            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddLogging(
                         builder =>
                         {
                             builder.AddConsoleFormatter<CustomFormatter, CustomOptions>(null);
                         }
-                    )
-            );
+                    ));
         }
 
         [ConditionalTheory(
@@ -102,7 +87,8 @@ namespace Microsoft.Extensions.Logging.Test
             string formatterName
         )
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Console:FormatterName", formatterName)
@@ -110,9 +96,8 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder => builder.AddConfiguration(configuration).AddConsole()
-                )
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole())
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -124,7 +109,8 @@ namespace Microsoft.Extensions.Logging.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddConsoleFormatter_CustomFormatter_IsReadFromLoggingConfiguration()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Console:FormatterName", "custom"),
@@ -136,7 +122,8 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(
                     builder =>
                         builder.AddConfiguration(configuration)
                             .AddConsoleFormatter<CustomFormatter, CustomOptions>(
@@ -203,7 +190,8 @@ namespace Microsoft.Extensions.Logging.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddSimpleConsole_ChangeProperties_IsReadFromLoggingConfiguration()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -230,9 +218,8 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder => builder.AddConfiguration(configuration).AddSimpleConsole()
-                )
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddSimpleConsole())
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -250,7 +237,8 @@ namespace Microsoft.Extensions.Logging.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddSimpleConsole_OutsideConfig_TakesProperty()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -269,18 +257,15 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder =>
-                        builder.AddConfiguration(configuration)
-                            .AddSimpleConsole(
-                                o =>
-                                {
-                                    o.TimestampFormat = "HH:mm:ss ";
-                                    o.IncludeScopes = false;
-                                    o.UseUtcTimestamp = true;
-                                }
-                            )
-                )
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddSimpleConsole(
+                            o =>
+                            {
+                                o.TimestampFormat = "HH:mm:ss ";
+                                o.IncludeScopes = false;
+                                o.UseUtcTimestamp = true;
+                            }
+                        ))
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -296,7 +281,8 @@ namespace Microsoft.Extensions.Logging.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddSystemdConsole_ChangeProperties_IsReadFromLoggingConfiguration()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -315,9 +301,8 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder => builder.AddConfiguration(configuration).AddSystemdConsole()
-                )
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddSystemdConsole())
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -333,7 +318,8 @@ namespace Microsoft.Extensions.Logging.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddSystemdConsole_OutsideConfig_TakesProperty()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -352,18 +338,15 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder =>
-                        builder.AddConfiguration(configuration)
-                            .AddSystemdConsole(
-                                o =>
-                                {
-                                    o.TimestampFormat = "HH:mm:ss ";
-                                    o.IncludeScopes = false;
-                                    o.UseUtcTimestamp = false;
-                                }
-                            )
-                )
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddSystemdConsole(
+                            o =>
+                            {
+                                o.TimestampFormat = "HH:mm:ss ";
+                                o.IncludeScopes = false;
+                                o.UseUtcTimestamp = false;
+                            }
+                        ))
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -379,7 +362,8 @@ namespace Microsoft.Extensions.Logging.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddJsonConsole_ChangeProperties_IsReadFromLoggingConfiguration()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -402,9 +386,8 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder => builder.AddConfiguration(configuration).AddJsonConsole()
-                )
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddJsonConsole())
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -421,7 +404,8 @@ namespace Microsoft.Extensions.Logging.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddJsonConsole_OutsideConfig_TakesProperty()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -440,20 +424,17 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder =>
-                        builder.AddConfiguration(configuration)
-                            .AddJsonConsole(
-                                o =>
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddJsonConsole(
+                            o =>
+                            {
+                                o.JsonWriterOptions = new JsonWriterOptions()
                                 {
-                                    o.JsonWriterOptions = new JsonWriterOptions()
-                                    {
-                                        Indented = false,
-                                        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-                                    };
-                                }
-                            )
-                )
+                                    Indented = false,
+                                    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                                };
+                            }
+                        ))
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -485,9 +466,8 @@ namespace Microsoft.Extensions.Logging.Test
             };
             var configuration = new ConfigurationBuilder().AddInMemoryCollection(configs).Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder => builder.AddConfiguration(configuration).AddConsole(o => { })
-                )
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(o => { }))
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -501,7 +481,8 @@ namespace Microsoft.Extensions.Logging.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddConsole_NullFormatterName_UsingSystemdFormat_IgnoreFormatterOptionsAndUseDeprecatedInstead()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Console:Format", "Systemd"),
@@ -515,18 +496,15 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder =>
-                        builder.AddConfiguration(configuration)
-                            .AddConsole(
-                                o =>
-                                {
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(
+                            o =>
+                            {
 #pragma warning disable CS0618
-                                    o.IncludeScopes = false;
+                                o.IncludeScopes = false;
 #pragma warning restore CS0618
-                                }
-                            )
-                )
+                            }
+                        ))
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -543,7 +521,8 @@ namespace Microsoft.Extensions.Logging.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddConsole_NullFormatterName_UsingDefaultFormat_IgnoreFormatterOptionsAndUseDeprecatedInstead()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Console:Format", "Default"),
@@ -561,19 +540,16 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder =>
-                        builder.AddConfiguration(configuration)
-                            .AddConsole(
-                                o =>
-                                {
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(
+                            o =>
+                            {
 #pragma warning disable CS0618
-                                    o.DisableColors = true;
-                                    o.IncludeScopes = false;
+                                o.DisableColors = true;
+                                o.IncludeScopes = false;
 #pragma warning restore CS0618
-                                }
-                            )
-                )
+                            }
+                        ))
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -603,7 +579,8 @@ namespace Microsoft.Extensions.Logging.Test
             string formatterName
         )
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Console:Format", "Default"),
@@ -625,19 +602,16 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder =>
-                        builder.AddConfiguration(configuration)
-                            .AddConsole(
-                                o =>
-                                {
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(
+                            o =>
+                            {
 #pragma warning disable CS0618
-                                    o.DisableColors = true;
-                                    o.IncludeScopes = false;
+                                o.DisableColors = true;
+                                o.IncludeScopes = false;
 #pragma warning restore CS0618
-                                }
-                            )
-                )
+                            }
+                        ))
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -667,7 +641,8 @@ namespace Microsoft.Extensions.Logging.Test
             string formatterName
         )
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Console:Format", "Systemd"),
@@ -685,19 +660,16 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder =>
-                        builder.AddConfiguration(configuration)
-                            .AddConsole(
-                                o =>
-                                {
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(
+                            o =>
+                            {
 #pragma warning disable CS0618
-                                    o.UseUtcTimestamp = true;
-                                    o.IncludeScopes = false;
+                                o.UseUtcTimestamp = true;
+                                o.IncludeScopes = false;
 #pragma warning restore CS0618
-                                }
-                            )
-                )
+                            }
+                        ))
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 

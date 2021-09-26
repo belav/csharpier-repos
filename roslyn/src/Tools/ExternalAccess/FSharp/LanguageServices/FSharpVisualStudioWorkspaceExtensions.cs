@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
             DateTime snapshotTimestamp
         )
         {
-            var metadataReferenceProvider =
-                workspace.Services.GetService<VisualStudioMetadataReferenceManager>();
+            var metadataReferenceProvider = workspace.Services
+                .GetService<VisualStudioMetadataReferenceManager>();
             return metadataReferenceProvider.GetMetadata(fullPath, snapshotTimestamp);
         }
 
@@ -58,10 +58,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
             if (workspace is VisualStudioWorkspaceImpl)
             {
                 var impl = workspace as VisualStudioWorkspaceImpl;
-                return impl.ProjectTracker.GetOrCreateProjectIdForPath(
-                    filePath,
-                    projectDisplayName
-                );
+                return impl.ProjectTracker
+                    .GetOrCreateProjectIdForPath(filePath, projectDisplayName);
             }
             return null;
         }

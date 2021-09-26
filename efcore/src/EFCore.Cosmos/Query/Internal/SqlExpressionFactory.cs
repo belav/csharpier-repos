@@ -607,7 +607,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         (EntityProjectionExpression)selectExpression.GetMappedProjection(
                             new ProjectionMember()
                         )
-                    ).BindProperty(discriminatorProperty, clientEval: false);
+                    )
+                        .BindProperty(discriminatorProperty, clientEval: false);
 
                     selectExpression.ApplyPredicate(
                         Equal(
@@ -623,10 +624,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     (EntityProjectionExpression)selectExpression.GetMappedProjection(
                         new ProjectionMember()
                     )
-                ).BindProperty(
-                    concreteEntityTypes[0].FindDiscriminatorProperty(),
-                    clientEval: false
-                );
+                )
+                    .BindProperty(
+                        concreteEntityTypes[0].FindDiscriminatorProperty(),
+                        clientEval: false
+                    );
 
                 selectExpression.ApplyPredicate(
                     In(

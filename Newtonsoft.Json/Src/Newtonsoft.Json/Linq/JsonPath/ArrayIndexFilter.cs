@@ -39,10 +39,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                         if (settings?.ErrorWhenNoMatch ?? false)
                         {
                             throw new JsonException(
-                                "Index * not valid on {0}.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    t.GetType().Name
-                                )
+                                "Index * not valid on {0}."
+                                    .FormatWith(CultureInfo.InvariantCulture, t.GetType().Name)
                             );
                         }
                     }

@@ -82,9 +82,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 IServiceBroker serviceBroker
             )
             {
-                var descriptor = ServiceDescriptors.Instance.GetServiceDescriptorForServiceFactory(
-                    typeof(TService)
-                );
+                var descriptor = ServiceDescriptors.Instance
+                    .GetServiceDescriptorForServiceFactory(typeof(TService));
                 var serviceHubTraceSource = (TraceSource)hostProvidedServices.GetService(
                     typeof(TraceSource)
                 );

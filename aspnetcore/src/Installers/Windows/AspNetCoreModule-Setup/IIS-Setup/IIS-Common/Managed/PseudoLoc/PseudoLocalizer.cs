@@ -377,13 +377,8 @@ namespace Microsoft.Web.Utility
                 );
 
                 string extraPadding = new string('=', padLengthPerSide);
-                string finalString = string.Concat(
-                    minprefix,
-                    extraPadding,
-                    mungedString,
-                    extraPadding,
-                    minsuffix
-                );
+                string finalString = string
+                    .Concat(minprefix, extraPadding, mungedString, extraPadding, minsuffix);
 
                 return finalString;
             }

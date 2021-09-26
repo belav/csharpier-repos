@@ -48,12 +48,11 @@ namespace IdeCoreBenchmarks
                 throw new ArgumentException("Couldn't create workspace");
 
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(
-                        StorageOptions.Database,
-                        StorageDatabase.SQLite
+                _workspace.CurrentSolution
+                    .WithOptions(
+                        _workspace.Options
+                            .WithChangedOption(StorageOptions.Database, StorageDatabase.SQLite)
                     )
-                )
             );
 
             Console.WriteLine("Opening roslyn.  Attach to: " + Process.GetCurrentProcess().Id);
@@ -74,9 +73,9 @@ namespace IdeCoreBenchmarks
                 throw new ArgumentException("Couldn't get storage service");
 
             using var storage = storageService.GetStorageAsync(
-                    _workspace.CurrentSolution,
-                    CancellationToken.None
-                )
+                _workspace.CurrentSolution,
+                CancellationToken.None
+            )
                 .AsTask()
                 .GetAwaiter()
                 .GetResult();
@@ -97,9 +96,8 @@ namespace IdeCoreBenchmarks
             // There might be multiple projects with this name.  That's ok.  FAR goes and finds all the linked-projects
             // anyways  to perform the search on all the equivalent symbols from them.  So the end perf cost is the
             // same.
-            var project = solution.Projects.First(
-                p => p.AssemblyName == "Microsoft.CodeAnalysis.CSharp"
-            );
+            var project = solution.Projects
+                .First(p => p.AssemblyName == "Microsoft.CodeAnalysis.CSharp");
 
             var start = DateTime.Now;
             var compilation = await project.GetCompilationAsync();

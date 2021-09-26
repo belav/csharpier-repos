@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore
                 >
             > relationalAction
         ) =>
-            new DbContextOptionsBuilder().UseInternalServiceProvider(
+            new DbContextOptionsBuilder()
+                .UseInternalServiceProvider(
                     services.AddEntityFrameworkSqlite().BuildServiceProvider()
                 )
                 .UseSqlite("Data Source=LoggingSqliteTest.db", relationalAction);

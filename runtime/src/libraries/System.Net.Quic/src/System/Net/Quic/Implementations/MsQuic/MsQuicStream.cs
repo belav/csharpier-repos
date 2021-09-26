@@ -79,11 +79,12 @@ namespace System.Net.Quic.Implementations.MsQuic
             _stateHandle = GCHandle.Alloc(_state);
             try
             {
-                MsQuicApi.Api.SetCallbackHandlerDelegate(
-                    _state.Handle,
-                    s_streamDelegate,
-                    GCHandle.ToIntPtr(_stateHandle)
-                );
+                MsQuicApi.Api
+                    .SetCallbackHandlerDelegate(
+                        _state.Handle,
+                        s_streamDelegate,
+                        GCHandle.ToIntPtr(_stateHandle)
+                    );
             }
             catch
             {
@@ -103,20 +104,19 @@ namespace System.Net.Quic.Implementations.MsQuic
             _stateHandle = GCHandle.Alloc(_state);
             try
             {
-                uint status = MsQuicApi.Api.StreamOpenDelegate(
-                    connection,
-                    flags,
-                    s_streamDelegate,
-                    GCHandle.ToIntPtr(_stateHandle),
-                    out _state.Handle
-                );
+                uint status = MsQuicApi.Api
+                    .StreamOpenDelegate(
+                        connection,
+                        flags,
+                        s_streamDelegate,
+                        GCHandle.ToIntPtr(_stateHandle),
+                        out _state.Handle
+                    );
 
                 QuicExceptionHelpers.ThrowIfFailed(status, "Failed to open stream to peer.");
 
-                status = MsQuicApi.Api.StreamStartDelegate(
-                    _state.Handle,
-                    QUIC_STREAM_START_FLAGS.ASYNC
-                );
+                status = MsQuicApi.Api
+                    .StreamStartDelegate(_state.Handle, QUIC_STREAM_START_FLAGS.ASYNC);
                 QuicExceptionHelpers.ThrowIfFailed(status, "Could not start stream.");
             }
             catch
@@ -171,14 +171,14 @@ namespace System.Net.Quic.Implementations.MsQuic
             ThrowIfDisposed();
 
             using CancellationTokenRegistration registration = await HandleWriteStartState(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             await SendReadOnlySequenceAsync(
-                    buffers,
-                    endStream ? QUIC_SEND_FLAGS.FIN : QUIC_SEND_FLAGS.NONE
-                )
+                buffers,
+                endStream ? QUIC_SEND_FLAGS.FIN : QUIC_SEND_FLAGS.NONE
+            )
                 .ConfigureAwait(false);
 
             HandleWriteCompletedState();
@@ -201,13 +201,13 @@ namespace System.Net.Quic.Implementations.MsQuic
             ThrowIfDisposed();
 
             using CancellationTokenRegistration registration = await HandleWriteStartState(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             await SendReadOnlyMemoryListAsync(
-                    buffers,
-                    endStream ? QUIC_SEND_FLAGS.FIN : QUIC_SEND_FLAGS.NONE
-                )
+                buffers,
+                endStream ? QUIC_SEND_FLAGS.FIN : QUIC_SEND_FLAGS.NONE
+            )
                 .ConfigureAwait(false);
 
             HandleWriteCompletedState();
@@ -222,14 +222,14 @@ namespace System.Net.Quic.Implementations.MsQuic
             ThrowIfDisposed();
 
             using CancellationTokenRegistration registration = await HandleWriteStartState(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             await SendReadOnlyMemoryAsync(
-                    buffer,
-                    endStream ? QUIC_SEND_FLAGS.FIN : QUIC_SEND_FLAGS.NONE
-                )
+                buffer,
+                endStream ? QUIC_SEND_FLAGS.FIN : QUIC_SEND_FLAGS.NONE
+            )
                 .ConfigureAwait(false);
 
             HandleWriteCompletedState();
@@ -267,9 +267,13 @@ namespace System.Net.Quic.Implementations.MsQuic
 
                     if (shouldComplete)
                     {
-                        _state.SendResettableCompletionSource.CompleteException(
-                            new OperationCanceledException("Write was canceled", cancellationToken)
-                        );
+                        _state.SendResettableCompletionSource
+                            .CompleteException(
+                                new OperationCanceledException(
+                                    "Write was canceled",
+                                    cancellationToken
+                                )
+                            );
                     }
                 }
             );
@@ -277,7 +281,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             // Make sure start has completed
             if (!_started)
             {
-                await _state.SendResettableCompletionSource.GetTypelessValueTask()
+                await _state.SendResettableCompletionSource
+                    .GetTypelessValueTask()
                     .ConfigureAwait(false);
                 _started = true;
             }
@@ -348,9 +353,13 @@ namespace System.Net.Quic.Implementations.MsQuic
 
                     if (shouldComplete)
                     {
-                        _state.ReceiveResettableCompletionSource.CompleteException(
-                            new OperationCanceledException("Read was canceled", cancellationToken)
-                        );
+                        _state.ReceiveResettableCompletionSource
+                            .CompleteException(
+                                new OperationCanceledException(
+                                    "Read was canceled",
+                                    cancellationToken
+                                )
+                            );
                     }
                 }
             );
@@ -358,7 +367,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             // TODO there could potentially be a perf gain by storing the buffer from the inital read
             // This reduces the amount of async calls, however it makes it so MsQuic holds onto the buffers
             // longer than it needs to. We will need to benchmark this.
-            int length = (int)await _state.ReceiveResettableCompletionSource.GetValueTask()
+            int length = (int)await _state.ReceiveResettableCompletionSource
+                .GetValueTask()
                 .ConfigureAwait(false);
 
             int actual = Math.Min(length, destination.Length);
@@ -430,9 +440,10 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             if (shouldComplete)
             {
-                _state.ShutdownWriteCompletionSource.SetException(
-                    new QuicStreamAbortedException("Shutdown was aborted.", errorCode)
-                );
+                _state.ShutdownWriteCompletionSource
+                    .SetException(
+                        new QuicStreamAbortedException("Shutdown was aborted.", errorCode)
+                    );
             }
 
             StartShutdown(QUIC_STREAM_SHUTDOWN_FLAGS.ABORT_SEND, errorCode);
@@ -466,12 +477,13 @@ namespace System.Net.Quic.Implementations.MsQuic
 
                     if (shouldComplete)
                     {
-                        _state.ShutdownWriteCompletionSource.SetException(
-                            new OperationCanceledException(
-                                "Shutdown was canceled",
-                                cancellationToken
-                            )
-                        );
+                        _state.ShutdownWriteCompletionSource
+                            .SetException(
+                                new OperationCanceledException(
+                                    "Shutdown was canceled",
+                                    cancellationToken
+                                )
+                            );
                     }
                 }
             );
@@ -628,9 +640,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             if (shouldComplete)
             {
-                state.ReceiveResettableCompletionSource.Complete(
-                    (uint)receiveEvent.TotalBufferLength
-                );
+                state.ReceiveResettableCompletionSource
+                    .Complete((uint)receiveEvent.TotalBufferLength);
             }
 
             return MsQuicStatusCodes.Pending;
@@ -651,9 +662,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             if (shouldComplete)
             {
-                state.SendResettableCompletionSource.CompleteException(
-                    new QuicStreamAbortedException(state.SendErrorCode)
-                );
+                state.SendResettableCompletionSource
+                    .CompleteException(new QuicStreamAbortedException(state.SendErrorCode));
             }
 
             return MsQuicStatusCodes.Success;
@@ -752,9 +762,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             if (shouldComplete)
             {
-                state.ReceiveResettableCompletionSource.CompleteException(
-                    new QuicStreamAbortedException(state.ReadErrorCode)
-                );
+                state.ReceiveResettableCompletionSource
+                    .CompleteException(new QuicStreamAbortedException(state.ReadErrorCode));
             }
 
             return MsQuicStatusCodes.Success;
@@ -853,13 +862,14 @@ namespace System.Net.Quic.Implementations.MsQuic
                 0
             );
 
-            uint status = MsQuicApi.Api.StreamSendDelegate(
-                _state.Handle,
-                quicBufferPointer,
-                bufferCount: 1,
-                flags,
-                IntPtr.Zero
-            );
+            uint status = MsQuicApi.Api
+                .StreamSendDelegate(
+                    _state.Handle,
+                    quicBufferPointer,
+                    bufferCount: 1,
+                    flags,
+                    IntPtr.Zero
+                );
 
             if (!MsQuicStatusHelper.SuccessfulStatusCode(status))
             {
@@ -918,13 +928,8 @@ namespace System.Net.Quic.Implementations.MsQuic
                 0
             );
 
-            uint status = MsQuicApi.Api.StreamSendDelegate(
-                _state.Handle,
-                quicBufferPointer,
-                count,
-                flags,
-                IntPtr.Zero
-            );
+            uint status = MsQuicApi.Api
+                .StreamSendDelegate(_state.Handle, quicBufferPointer, count, flags, IntPtr.Zero);
 
             if (!MsQuicStatusHelper.SuccessfulStatusCode(status))
             {
@@ -978,13 +983,8 @@ namespace System.Net.Quic.Implementations.MsQuic
                 0
             );
 
-            uint status = MsQuicApi.Api.StreamSendDelegate(
-                _state.Handle,
-                quicBufferPointer,
-                length,
-                flags,
-                IntPtr.Zero
-            );
+            uint status = MsQuicApi.Api
+                .StreamSendDelegate(_state.Handle, quicBufferPointer, length, flags, IntPtr.Zero);
 
             if (!MsQuicStatusHelper.SuccessfulStatusCode(status))
             {
@@ -999,10 +999,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         private void ReceiveComplete(int bufferLength)
         {
-            uint status = MsQuicApi.Api.StreamReceiveCompleteDelegate(
-                _state.Handle,
-                (ulong)bufferLength
-            );
+            uint status = MsQuicApi.Api
+                .StreamReceiveCompleteDelegate(_state.Handle, (ulong)bufferLength);
             QuicExceptionHelpers.ThrowIfFailed(status, "Could not complete receive call.");
         }
 

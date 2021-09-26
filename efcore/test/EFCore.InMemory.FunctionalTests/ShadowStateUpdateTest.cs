@@ -21,9 +21,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var customerType = (IEntityType)entityTypeBuilder.Metadata;
 
-            var optionsBuilder = new DbContextOptionsBuilder().UseModel(
-                    modelBuilder.FinalizeModel()
-                )
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseModel(modelBuilder.FinalizeModel())
                 .UseInMemoryDatabase(nameof(ShadowStateUpdateTest))
                 .UseInternalServiceProvider(_fixture.ServiceProvider);
 

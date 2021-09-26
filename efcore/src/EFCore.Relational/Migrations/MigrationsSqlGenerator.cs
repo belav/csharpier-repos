@@ -285,10 +285,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" ADD ");
 
@@ -321,10 +319,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" ADD ");
 
@@ -357,10 +353,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" ADD ");
             PrimaryKeyConstraint(operation, model, builder);
@@ -390,10 +384,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" ADD ");
             UniqueConstraint(operation, model, builder);
@@ -419,10 +411,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" ADD ");
             CheckConstraint(operation, model, builder);
@@ -511,10 +501,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER SEQUENCE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema)
                 );
 
             SequenceOptions(operation, model, builder);
@@ -597,10 +585,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
                 .Append(" ON ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" (")
                 .Append(ColumnList(operation.Columns))
@@ -655,10 +641,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("CREATE SEQUENCE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema)
                 );
 
             var typeMapping = Dependencies.TypeMappingSource.GetMapping(operation.ClrType);
@@ -701,10 +685,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("CREATE TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema)
                 )
                 .AppendLine(" (");
 
@@ -744,10 +726,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" DROP COLUMN ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name));
@@ -779,10 +759,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" DROP CONSTRAINT ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name));
@@ -838,10 +816,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" DROP CONSTRAINT ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name));
@@ -894,10 +870,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("DROP SEQUENCE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema)
                 )
                 .AppendLine(Dependencies.SqlGenerationHelper.StatementTerminator);
 
@@ -924,10 +898,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("DROP TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema)
                 );
 
             if (terminate)
@@ -955,10 +927,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" DROP CONSTRAINT ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
@@ -985,10 +955,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" DROP CONSTRAINT ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
@@ -1061,10 +1029,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder.Append("ALTER SEQUENCE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema)
                 )
                 .Append(" RESTART WITH ")
                 .Append(longTypeMapping.GenerateSqlLiteral(operation.StartValue))
@@ -1194,10 +1160,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         propertyMapping != null
                             ? propertyMapping.TypeMapping
                             : value != null
-                                ? Dependencies.TypeMappingSource.FindMapping(
-                                      value.GetType(),
-                                      columnType
-                                  )
+                                ? Dependencies.TypeMappingSource
+                                  .FindMapping(value.GetType(), columnType)
                                 : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     modifications[j] = new ColumnModification(
@@ -1319,10 +1283,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         propertyMapping != null
                             ? propertyMapping.TypeMapping
                             : value != null
-                                ? Dependencies.TypeMappingSource.FindMapping(
-                                      value.GetType(),
-                                      columnType
-                                  )
+                                ? Dependencies.TypeMappingSource
+                                  .FindMapping(value.GetType(), columnType)
                                 : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     modifications[j] = new ColumnModification(
@@ -1489,10 +1451,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         propertyMapping != null
                             ? propertyMapping.TypeMapping
                             : value != null
-                                ? Dependencies.TypeMappingSource.FindMapping(
-                                      value.GetType(),
-                                      columnType
-                                  )
+                                ? Dependencies.TypeMappingSource
+                                  .FindMapping(value.GetType(), columnType)
                                 : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     keys[j] = new ColumnModification(
@@ -1522,10 +1482,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         propertyMapping != null
                             ? propertyMapping.TypeMapping
                             : value != null
-                                ? Dependencies.TypeMappingSource.FindMapping(
-                                      value.GetType(),
-                                      columnType
-                                  )
+                                ? Dependencies.TypeMappingSource
+                                  .FindMapping(value.GetType(), columnType)
                                 : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     modifications[j] = new ColumnModification(
@@ -1822,17 +1780,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     || table.Indexes.Any(u => u.Columns.Contains(column));
             }
 
-            return Dependencies.TypeMappingSource.FindMapping(
-                operation.ClrType,
-                null,
-                keyOrIndex,
-                operation.IsUnicode,
-                operation.MaxLength,
-                operation.IsRowVersion,
-                operation.IsFixedLength,
-                operation.Precision,
-                operation.Scale
-            )?.StoreType;
+            return Dependencies.TypeMappingSource
+                .FindMapping(
+                    operation.ClrType,
+                    null,
+                    keyOrIndex,
+                    operation.IsUnicode,
+                    operation.MaxLength,
+                    operation.IsRowVersion,
+                    operation.IsFixedLength,
+                    operation.Precision,
+                    operation.Scale
+                )?.StoreType;
         }
 
         /// <summary>
@@ -1859,10 +1818,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             {
                 var typeMapping =
                     columnType != null
-                        ? Dependencies.TypeMappingSource.FindMapping(
-                              defaultValue.GetType(),
-                              columnType
-                          )
+                        ? Dependencies.TypeMappingSource
+                          .FindMapping(defaultValue.GetType(), columnType)
                         : null;
                 if (typeMapping == null)
                 {
@@ -1942,10 +1899,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 .Append(ColumnList(operation.Columns))
                 .Append(") REFERENCES ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.PrincipalTable,
-                        operation.PrincipalSchema
-                    )
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(operation.PrincipalTable, operation.PrincipalSchema)
                 );
 
             if (operation.PrincipalColumns != null)
@@ -2197,10 +2152,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string tableName
         ) =>
             model?.GetRelationalModel()
-                .FindTable(
-                    Check.NotEmpty(tableName, nameof(tableName)),
-                    schema
-                )?.EntityTypeMappings.Select(m => m.EntityType);
+                .FindTable(Check.NotEmpty(tableName, nameof(tableName)), schema)?.EntityTypeMappings
+                .Select(m => m.EntityType);
 
         /// <summary>
         ///     <para>
@@ -2225,12 +2178,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string columnName
         ) =>
             model?.GetRelationalModel()
-                .FindTable(
-                    Check.NotEmpty(tableName, nameof(tableName)),
-                    schema
-                )?.Columns.FirstOrDefault(
-                c => c.Name == columnName
-            )?.PropertyMappings.First().Property;
+                .FindTable(Check.NotEmpty(tableName, nameof(tableName)), schema)?.Columns
+                .FirstOrDefault(c => c.Name == columnName)?.PropertyMappings.First().Property;
 
         /// <summary>
         ///     Generates a SQL fragment to terminate the SQL command.

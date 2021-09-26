@@ -41,15 +41,16 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         internal override Expression UnmarshalFromRef(Expression value)
         {
             // Decimal.FromOACurrency(value)
-            return base.UnmarshalFromRef(
-                Expression.New(
-                    typeof(CurrencyWrapper).GetConstructor(new Type[] { typeof(decimal) }),
-                    Expression.Call(
-                        typeof(decimal).GetMethod(nameof(decimal.FromOACurrency)),
-                        value
+            return base
+                .UnmarshalFromRef(
+                    Expression.New(
+                        typeof(CurrencyWrapper).GetConstructor(new Type[] { typeof(decimal) }),
+                        Expression.Call(
+                            typeof(decimal).GetMethod(nameof(decimal.FromOACurrency)),
+                            value
+                        )
                     )
-                )
-            );
+                );
         }
     }
 }

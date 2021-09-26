@@ -384,33 +384,33 @@ namespace Microsoft.AspNetCore.Http
         {
             // TODO: Cache the reflected type for later? Only if success?
             var type = typeof(T);
-            var method = type.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .FirstOrDefault(
-                    methodInfo =>
+            var method = type.GetMethods(BindingFlags.Public | BindingFlags.Static).FirstOrDefault(
+                methodInfo =>
+                {
+                    if (
+                        string.Equals("TryParse", methodInfo.Name, StringComparison.Ordinal)
+                        && methodInfo.ReturnParameter.ParameterType.Equals(typeof(bool))
+                    )
                     {
-                        if (
-                            string.Equals("TryParse", methodInfo.Name, StringComparison.Ordinal)
-                            && methodInfo.ReturnParameter.ParameterType.Equals(typeof(bool))
-                        )
-                        {
-                            var methodParams = methodInfo.GetParameters();
-                            return methodParams.Length == 2
-                                && methodParams[0].ParameterType.Equals(typeof(string))
-                                && methodParams[1].IsOut
-                                && methodParams[1].ParameterType.Equals(type.MakeByRefType());
-                        }
-                        return false;
+                        var methodParams = methodInfo.GetParameters();
+                        return methodParams.Length == 2
+                            && methodParams[0].ParameterType.Equals(typeof(string))
+                            && methodParams[1].IsOut
+                            && methodParams[1].ParameterType.Equals(type.MakeByRefType());
                     }
-                );
+                    return false;
+                }
+            );
 
             if (method == null)
             {
                 throw new NotSupportedException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        "The given type '{0}' does not have a TryParse method with the required signature 'public static bool TryParse(string, out {0}).",
-                        nameof(T)
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            "The given type '{0}' does not have a TryParse method with the required signature 'public static bool TryParse(string, out {0}).",
+                            nameof(T)
+                        )
                 );
             }
 
@@ -427,35 +427,34 @@ namespace Microsoft.AspNetCore.Http
         {
             // TODO: Cache the reflected type for later? Only if success?
             var type = typeof(T);
-            var method = type.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .FirstOrDefault(
-                    methodInfo =>
+            var method = type.GetMethods(BindingFlags.Public | BindingFlags.Static).FirstOrDefault(
+                methodInfo =>
+                {
+                    if (
+                        string.Equals("TryParseList", methodInfo.Name, StringComparison.Ordinal)
+                        && methodInfo.ReturnParameter.ParameterType.Equals(typeof(Boolean))
+                    )
                     {
-                        if (
-                            string.Equals("TryParseList", methodInfo.Name, StringComparison.Ordinal)
-                            && methodInfo.ReturnParameter.ParameterType.Equals(typeof(Boolean))
-                        )
-                        {
-                            var methodParams = methodInfo.GetParameters();
-                            return methodParams.Length == 2
-                                && methodParams[0].ParameterType.Equals(typeof(IList<string>))
-                                && methodParams[1].IsOut
-                                && methodParams[1].ParameterType.Equals(
-                                    typeof(IList<T>).MakeByRefType()
-                                );
-                        }
-                        return false;
+                        var methodParams = methodInfo.GetParameters();
+                        return methodParams.Length == 2
+                            && methodParams[0].ParameterType.Equals(typeof(IList<string>))
+                            && methodParams[1].IsOut
+                            && methodParams[1].ParameterType
+                                .Equals(typeof(IList<T>).MakeByRefType());
                     }
-                );
+                    return false;
+                }
+            );
 
             if (method == null)
             {
                 throw new NotSupportedException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        "The given type '{0}' does not have a TryParseList method with the required signature 'public static bool TryParseList(IList<string>, out IList<{0}>).",
-                        nameof(T)
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            "The given type '{0}' does not have a TryParseList method with the required signature 'public static bool TryParseList(IList<string>, out IList<{0}>).",
+                            nameof(T)
+                        )
                 );
             }
 

@@ -62,11 +62,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     break;
                 case (true, true):
                     _returnType = Binder.GetWellKnownType(
-                            compilation,
-                            WellKnownType.System_Threading_Tasks_Task_T,
-                            diagnostics,
-                            NoLocation.Singleton
-                        )
+                        compilation,
+                        WellKnownType.System_Threading_Tasks_Task_T,
+                        diagnostics,
+                        NoLocation.Singleton
+                    )
                         .Construct(
                             Binder.GetSpecialType(
                                 compilation,
@@ -292,7 +292,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     foreach (
                         var global in (
                             (CompilationUnitSyntax)tree.GetRoot(cancellationToken)
-                        ).Members.OfType<GlobalStatementSyntax>()
+                        ).Members
+                            .OfType<GlobalStatementSyntax>()
                     )
                     {
                         cancellationToken.ThrowIfCancellationRequested();

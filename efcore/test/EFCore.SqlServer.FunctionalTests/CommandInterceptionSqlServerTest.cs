@@ -64,10 +64,11 @@ namespace Microsoft.EntityFrameworkCore
                 IServiceCollection serviceCollection,
                 IEnumerable<IInterceptor> injectedInterceptors
             ) =>
-                base.InjectInterceptors(
-                    serviceCollection.AddEntityFrameworkSqlServer(),
-                    injectedInterceptors
-                );
+                base
+                    .InjectInterceptors(
+                        serviceCollection.AddEntityFrameworkSqlServer(),
+                        injectedInterceptors
+                    );
         }
 
         public class CommandInterceptionSqlServerTest
@@ -83,9 +84,8 @@ namespace Microsoft.EntityFrameworkCore
 
                 public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
                 {
-                    new SqlServerDbContextOptionsBuilder(
-                        base.AddOptions(builder)
-                    ).ExecutionStrategy(d => new SqlServerExecutionStrategy(d));
+                    new SqlServerDbContextOptionsBuilder(base.AddOptions(builder))
+                        .ExecutionStrategy(d => new SqlServerExecutionStrategy(d));
                     return builder;
                 }
             }
@@ -105,9 +105,8 @@ namespace Microsoft.EntityFrameworkCore
 
                 public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
                 {
-                    new SqlServerDbContextOptionsBuilder(
-                        base.AddOptions(builder)
-                    ).ExecutionStrategy(d => new SqlServerExecutionStrategy(d));
+                    new SqlServerDbContextOptionsBuilder(base.AddOptions(builder))
+                        .ExecutionStrategy(d => new SqlServerExecutionStrategy(d));
                     return builder;
                 }
             }

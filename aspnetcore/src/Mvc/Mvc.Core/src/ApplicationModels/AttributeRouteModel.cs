@@ -424,9 +424,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                         {
                             // This is the end of a replacement token.
                             var token = template.Substring(
-                                    tokenStart!.Value,
-                                    i - tokenStart.Value - 1
-                                )
+                                tokenStart!.Value,
+                                i - tokenStart.Value - 1
+                            )
                                 .Replace("[[", "[")
                                 .Replace("]]", "]");
 
@@ -437,13 +437,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                                     Resources.FormatAttributeRoute_TokenReplacement_ReplacementValueNotFound(
                                         template,
                                         token,
-                                        string.Join(
-                                            ", ",
-                                            values.Keys.OrderBy(
-                                                k => k,
-                                                StringComparer.OrdinalIgnoreCase
+                                        string
+                                            .Join(
+                                                ", ",
+                                                values.Keys
+                                                    .OrderBy(
+                                                        k => k,
+                                                        StringComparer.OrdinalIgnoreCase
+                                                    )
                                             )
-                                        )
                                     );
                                 throw new InvalidOperationException(message);
                             }

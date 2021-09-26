@@ -211,14 +211,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             };
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey");
 
-            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
-                () => model,
-                model.GetType(),
-                "ValidStringProperty"
-            );
-            node.ChildNodes.Add(
-                new ModelValidationNode(childMetadata, "theKey.ValidStringProperty")
-            );
+            ModelMetadata childMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForProperty(() => model, model.GetType(), "ValidStringProperty");
+            node.ChildNodes
+                .Add(new ModelValidationNode(childMetadata, "theKey.ValidStringProperty"));
 
             node.Validating += delegate
             {
@@ -288,14 +284,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             };
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey");
 
-            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
-                () => model,
-                model.GetType(),
-                "InvalidStringProperty"
-            );
-            node.ChildNodes.Add(
-                new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty")
-            );
+            ModelMetadata childMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForProperty(() => model, model.GetType(), "InvalidStringProperty");
+            node.ChildNodes
+                .Add(new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty"));
 
             node.Validating += delegate
             {
@@ -433,10 +425,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ValidateAllProperties = true
             };
 
-            controllerContext.Controller.ViewData.ModelState.AddModelError(
-                "theKey.RequiredString.Dummy",
-                "existing Error Text"
-            );
+            controllerContext.Controller.ViewData.ModelState
+                .AddModelError("theKey.RequiredString.Dummy", "existing Error Text");
 
             // Act
             node.Validate(controllerContext);

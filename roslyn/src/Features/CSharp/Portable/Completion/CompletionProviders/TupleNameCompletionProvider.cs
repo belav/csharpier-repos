@@ -43,9 +43,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var cancellationToken = completionContext.CancellationToken;
 
                 var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                        position,
-                        cancellationToken
-                    )
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var workspace = document.Project.Solution.Workspace;
@@ -64,10 +64,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 var typeInferrer = document.GetLanguageService<ITypeInferenceService>();
                 var inferredTypes = typeInferrer.InferTypes(
-                        semanticModel,
-                        context.TargetToken.Parent.SpanStart,
-                        cancellationToken
-                    )
+                    semanticModel,
+                    context.TargetToken.Parent.SpanStart,
+                    cancellationToken
+                )
                     .Where(t => t.IsTupleType)
                     .Cast<INamedTypeSymbol>()
                     .ToImmutableArray();
@@ -91,11 +91,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (token.IsKind(SyntaxKind.OpenParenToken))
             {
                 if (
-                    token.Parent.IsKind(
-                        SyntaxKind.ParenthesizedExpression,
-                        SyntaxKind.TupleExpression,
-                        SyntaxKind.CastExpression
-                    )
+                    token.Parent
+                        .IsKind(
+                            SyntaxKind.ParenthesizedExpression,
+                            SyntaxKind.TupleExpression,
+                            SyntaxKind.CastExpression
+                        )
                 )
                 {
                     return 0;

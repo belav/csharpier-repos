@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
             {
                 var service =
                     _service._pickMembersService_forTestingPurposes
-                    ?? _document.Project.Solution.Workspace.Services.GetRequiredService<IPickMembersService>();
+                    ?? _document.Project.Solution.Workspace.Services
+                        .GetRequiredService<IPickMembersService>();
                 return service.PickMembers(
                     FeaturesResources.Pick_members_to_override,
                     _viableMembers
@@ -73,24 +74,23 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
                     result.Members.Length == 1 ? syntaxTree.GetLocation(_textSpan) : null;
 
                 var generator = SyntaxGenerator.GetGenerator(_document);
-                var memberTasks = result.Members.SelectAsArray(
-                    m => GenerateOverrideAsync(generator, m, cancellationToken)
-                );
+                var memberTasks = result.Members
+                    .SelectAsArray(m => GenerateOverrideAsync(generator, m, cancellationToken));
 
                 var members = await Task.WhenAll(memberTasks).ConfigureAwait(false);
 
                 var newDocument = await CodeGenerator.AddMemberDeclarationsAsync(
-                        _document.Project.Solution,
-                        _containingType,
-                        members,
-                        new CodeGenerationOptions(
-                            afterThisLocation: afterThisLocation,
-                            contextLocation: syntaxTree.GetLocation(_textSpan),
-                            options: await _document.GetOptionsAsync(cancellationToken)
-                                .ConfigureAwait(false)
-                        ),
-                        cancellationToken
-                    )
+                    _document.Project.Solution,
+                    _containingType,
+                    members,
+                    new CodeGenerationOptions(
+                        afterThisLocation: afterThisLocation,
+                        contextLocation: syntaxTree.GetLocation(_textSpan),
+                        options: await _document.GetOptionsAsync(cancellationToken)
+                            .ConfigureAwait(false)
+                    ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return SpecializedCollections.SingletonEnumerable(

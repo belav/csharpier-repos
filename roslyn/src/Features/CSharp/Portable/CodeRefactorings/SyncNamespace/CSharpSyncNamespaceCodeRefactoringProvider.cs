@@ -54,12 +54,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.SyncNamespace
             var position = span.Start;
 
             var compilationUnit = (CompilationUnitSyntax)await document.GetSyntaxRootAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var namespaceDecls = compilationUnit.DescendantNodes(
-                    n => n is CompilationUnitSyntax || n is NamespaceDeclarationSyntax
-                )
+                n => n is CompilationUnitSyntax || n is NamespaceDeclarationSyntax
+            )
                 .OfType<NamespaceDeclarationSyntax>()
                 .ToImmutableArray();
 
@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.SyncNamespace
 
             if (namespaceDecls.Length == 0)
             {
-                var firstMemberDeclarationName = compilationUnit.Members.FirstOrDefault()
+                var firstMemberDeclarationName = compilationUnit.Members
+                    .FirstOrDefault()
                     .GetNameToken();
 
                 if (

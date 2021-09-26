@@ -352,11 +352,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         case SqlFunctionExpression sqlFunctionExpression
                               when sqlFunctionExpression.IsBuiltIn
                                   && sqlFunctionExpression.Arguments != null
-                                  && string.Equals(
-                                      "COALESCE",
-                                      sqlFunctionExpression.Name,
-                                      StringComparison.OrdinalIgnoreCase
-                                  ):
+                                  && string
+                                      .Equals(
+                                          "COALESCE",
+                                          sqlFunctionExpression.Name,
+                                          StringComparison.OrdinalIgnoreCase
+                                      ):
                             // for coalesce:
                             // (a ?? b) == null -> a == null && b == null
                             // (a ?? b) != null -> a != null || b != null

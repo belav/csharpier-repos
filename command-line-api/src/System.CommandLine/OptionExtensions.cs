@@ -38,39 +38,47 @@ namespace System.CommandLine
 
         public static Option<FileInfo> ExistingOnly(this Option<FileInfo> option)
         {
-            option.Argument.AddValidator(
-                a =>
-                    a.Tokens.Select(t => t.Value)
-                        .Where(filePath => !File.Exists(filePath))
-                        .Select(a.ValidationMessages.FileDoesNotExist)
-                        .FirstOrDefault()
-            );
+            option.Argument
+                .AddValidator(
+                    a =>
+                        a.Tokens
+                            .Select(t => t.Value)
+                            .Where(filePath => !File.Exists(filePath))
+                            .Select(a.ValidationMessages.FileDoesNotExist)
+                            .FirstOrDefault()
+                );
 
             return option;
         }
 
         public static Option<DirectoryInfo> ExistingOnly(this Option<DirectoryInfo> option)
         {
-            option.Argument.AddValidator(
-                a =>
-                    a.Tokens.Select(t => t.Value)
-                        .Where(filePath => !Directory.Exists(filePath))
-                        .Select(a.ValidationMessages.DirectoryDoesNotExist)
-                        .FirstOrDefault()
-            );
+            option.Argument
+                .AddValidator(
+                    a =>
+                        a.Tokens
+                            .Select(t => t.Value)
+                            .Where(filePath => !Directory.Exists(filePath))
+                            .Select(a.ValidationMessages.DirectoryDoesNotExist)
+                            .FirstOrDefault()
+                );
 
             return option;
         }
 
         public static Option<FileSystemInfo> ExistingOnly(this Option<FileSystemInfo> option)
         {
-            option.Argument.AddValidator(
-                a =>
-                    a.Tokens.Select(t => t.Value)
-                        .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
-                        .Select(a.ValidationMessages.FileOrDirectoryDoesNotExist)
-                        .FirstOrDefault()
-            );
+            option.Argument
+                .AddValidator(
+                    a =>
+                        a.Tokens
+                            .Select(t => t.Value)
+                            .Where(
+                                filePath => !Directory.Exists(filePath) && !File.Exists(filePath)
+                            )
+                            .Select(a.ValidationMessages.FileOrDirectoryDoesNotExist)
+                            .FirstOrDefault()
+                );
 
             return option;
         }

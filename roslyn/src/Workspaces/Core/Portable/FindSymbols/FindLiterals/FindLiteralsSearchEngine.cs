@@ -99,8 +99,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 var documentTasks = new List<Task>();
                 foreach (
                     var document in await project.GetAllRegularAndSourceGeneratedDocumentsAsync(
-                            _cancellationToken
-                        )
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {

@@ -21,9 +21,8 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
                 ?? // On Windows it goes to %APPDATA%\Microsoft\UserSecrets\
                 Environment.GetEnvironmentVariable("HOME"); // On Mac/Linux it goes to ~/.microsoft/usersecrets/
 
-            var expectedSecretPath = !string.IsNullOrEmpty(
-                Environment.GetEnvironmentVariable("APPDATA")
-            )
+            var expectedSecretPath = !string
+                .IsNullOrEmpty(Environment.GetEnvironmentVariable("APPDATA"))
                 ? Path.Combine(root, "Microsoft", "UserSecrets", userSecretsId, "secrets.json")
                 : Path.Combine(root, ".microsoft", "usersecrets", userSecretsId, "secrets.json");
 

@@ -20,9 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             return SyntaxFactory.ParseSyntaxTree(
                 text,
-                options: (options ?? TestOptions.Regular).WithLanguageVersion(
-                    LanguageVersion.CSharp5
-                )
+                options: (options ?? TestOptions.Regular)
+                    .WithLanguageVersion(LanguageVersion.CSharp5)
             );
         }
 
@@ -33,9 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             return SyntaxFactory.ParseExpression(
                 text,
-                options: (options ?? TestOptions.Regular).WithLanguageVersion(
-                    LanguageVersion.CSharp5
-                )
+                options: (options ?? TestOptions.Regular)
+                    .WithLanguageVersion(LanguageVersion.CSharp5)
             );
         }
 
@@ -2174,15 +2172,13 @@ namespace"
         [WorkItem(16044, "https://github.com/dotnet/roslyn/issues/16044")]
         public void AsyncAsType_Property_ExpressionBody()
         {
-            UsingTree("class async { async async => null; }")
-                .GetDiagnostics()
-                .Verify(
-                    // (1,27): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
-                    // class async { async async => null; }
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null")
-                        .WithArguments("expression-bodied property", "6")
-                        .WithLocation(1, 27)
-                );
+            UsingTree("class async { async async => null; }").GetDiagnostics().Verify(
+                // (1,27): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
+                // class async { async async => null; }
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null")
+                    .WithArguments("expression-bodied property", "6")
+                    .WithLocation(1, 27)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2256,15 +2252,13 @@ namespace"
         [WorkItem(16044, "https://github.com/dotnet/roslyn/issues/16044")]
         public void AsyncAsType_Indexer_ExpressionBody_ErrorCase()
         {
-            UsingTree("interface async { async this[async i] => null; }")
-                .GetDiagnostics()
-                .Verify(
-                    // (1,39): error CS8026: Feature 'expression-bodied indexer' is not available in C# 5. Please use language version 6 or greater.
-                    // interface async { async this[async i] => null; }
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null")
-                        .WithArguments("expression-bodied indexer", "6")
-                        .WithLocation(1, 39)
-                );
+            UsingTree("interface async { async this[async i] => null; }").GetDiagnostics().Verify(
+                // (1,39): error CS8026: Feature 'expression-bodied indexer' is not available in C# 5. Please use language version 6 or greater.
+                // interface async { async this[async i] => null; }
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null")
+                    .WithArguments("expression-bodied indexer", "6")
+                    .WithLocation(1, 39)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2364,15 +2358,13 @@ namespace"
         [WorkItem(16044, "https://github.com/dotnet/roslyn/issues/16044")]
         public void AsyncAsType_Property_ExplicitInterface()
         {
-            UsingTree("class async : async { async async.async => null; }")
-                .GetDiagnostics()
-                .Verify(
-                    // (1,41): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
-                    // class async : async { async async.async => null; }
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null")
-                        .WithArguments("expression-bodied property", "6")
-                        .WithLocation(1, 41)
-                );
+            UsingTree("class async : async { async async.async => null; }").GetDiagnostics().Verify(
+                // (1,41): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
+                // class async : async { async async.async => null; }
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null")
+                    .WithArguments("expression-bodied property", "6")
+                    .WithLocation(1, 41)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);

@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_two_non_generated_integers_as_composite_key_end_to_end()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             var ticks = DateTime.UtcNow.Ticks;
@@ -29,9 +30,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var pegasus = context.Pegasuses.Single(
-                    e => (e.Id1 == ticks) && (e.Id2 == ticks + 1)
-                );
+                var pegasus = context.Pegasuses
+                    .Single(e => (e.Id1 == ticks) && (e.Id2 == ticks + 1));
 
                 pegasus.Name = "Rainbow Crash";
 
@@ -40,9 +40,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var pegasus = context.Pegasuses.Single(
-                    e => (e.Id1 == ticks) && (e.Id2 == ticks + 1)
-                );
+                var pegasus = context.Pegasuses
+                    .Single(e => (e.Id1 == ticks) && (e.Id2 == ticks + 1));
 
                 Assert.Equal("Rainbow Crash", pegasus.Name);
 
@@ -63,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_generated_values_in_composite_key_end_to_end()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             long id1;
@@ -93,9 +93,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var unicorn = context.Unicorns.Single(
-                    e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)
-                );
+                var unicorn = context.Unicorns
+                    .Single(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3));
 
                 unicorn.Name = "Bad Hair Day";
 
@@ -104,9 +103,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var unicorn = context.Unicorns.Single(
-                    e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)
-                );
+                var unicorn = context.Unicorns
+                    .Single(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3));
 
                 Assert.Equal("Bad Hair Day", unicorn.Name);
 
@@ -127,7 +125,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Only_one_part_of_a_composite_key_needs_to_vary_for_uniqueness()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             var ids = new int[3];

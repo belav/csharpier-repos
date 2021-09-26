@@ -27,7 +27,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             byte[] encoded = (
                 "30223120300C060355040313054A616D65733010060355040A13094D6963726F" + "736F6674"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             const string expected = "CN=James + O=Microsoft";
             X500DistinguishedName dn;
@@ -53,9 +54,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void PrintUnknownOidRdn()
         {
-            byte[] encoded = (
-                "30183116301406052901020203130B496E76616C6964204F6964"
-            ).HexToByteArray();
+            byte[] encoded = ("30183116301406052901020203130B496E76616C6964204F6964")
+                .HexToByteArray();
 
             X500DistinguishedName dn = new X500DistinguishedName(encoded);
             Assert.Equal("OID.1.1.1.2.2.3=Invalid Oid", dn.Decode(X500DistinguishedNameFlags.None));
@@ -236,7 +236,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void NameWithNumericString()
         {
             X500DistinguishedName dn = new X500DistinguishedName(
-                "30283117301506052901020203120C313233203635342037383930310D300B0603550403130454657374".HexToByteArray()
+                "30283117301506052901020203120C313233203635342037383930310D300B0603550403130454657374"
+                    .HexToByteArray()
             );
 
             Assert.Equal(

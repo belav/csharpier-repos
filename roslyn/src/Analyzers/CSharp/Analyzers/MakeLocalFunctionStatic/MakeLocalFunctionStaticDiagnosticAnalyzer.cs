@@ -55,11 +55,12 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             }
 
             var cancellationToken = context.CancellationToken;
-            var option = context.Options.GetOption(
-                CSharpCodeStyleOptions.PreferStaticLocalFunction,
-                syntaxTree,
-                cancellationToken
-            );
+            var option = context.Options
+                .GetOption(
+                    CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                    syntaxTree,
+                    cancellationToken
+                );
             if (!option.Value)
             {
                 return;

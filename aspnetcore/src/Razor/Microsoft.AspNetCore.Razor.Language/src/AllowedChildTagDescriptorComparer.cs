@@ -34,11 +34,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
 
             return string.Equals(descriptorX.Name, descriptorY.Name, StringComparison.Ordinal)
-                && string.Equals(
-                    descriptorX.DisplayName,
-                    descriptorY.DisplayName,
-                    StringComparison.Ordinal
-                );
+                && string
+                    .Equals(
+                        descriptorX.DisplayName,
+                        descriptorY.DisplayName,
+                        StringComparison.Ordinal
+                    );
         }
 
         /// <inheritdoc />

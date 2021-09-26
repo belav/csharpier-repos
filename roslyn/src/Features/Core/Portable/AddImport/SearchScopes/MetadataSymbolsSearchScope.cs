@@ -52,13 +52,13 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SearchQuery searchQuery
             )
             {
-                var service =
-                    _solution.Workspace.Services.GetService<ISymbolTreeInfoCacheService>();
+                var service = _solution.Workspace.Services
+                    .GetService<ISymbolTreeInfoCacheService>();
                 var info = await service.TryGetMetadataSymbolTreeInfoAsync(
-                        _solution,
-                        _metadataReference,
-                        CancellationToken
-                    )
+                    _solution,
+                    _metadataReference,
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
                 if (info == null)
                 {
@@ -66,11 +66,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                 }
 
                 var declarations = await info.FindAsync(
-                        searchQuery,
-                        _assembly,
-                        filter,
-                        CancellationToken
-                    )
+                    searchQuery,
+                    _assembly,
+                    filter,
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return declarations;

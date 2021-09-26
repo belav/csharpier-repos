@@ -112,10 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 var underlying = _underlyingType.EnumUnderlyingType;
                 return (object)underlying == null
                   ? null
-                  : this.RetargetingTranslator.Retarget(
-                        underlying,
-                        RetargetOptions.RetargetPrimitiveTypesByTypeCode
-                    ); // comes from field's signature.
+                  : this.RetargetingTranslator
+                    .Retarget(underlying, RetargetOptions.RetargetPrimitiveTypesByTypeCode); // comes from field's signature.
             }
         }
 
@@ -209,16 +207,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers()
         {
-            return this.RetargetingTranslator.Retarget(
-                _underlyingType.GetEarlyAttributeDecodingMembers()
-            );
+            return this.RetargetingTranslator
+                .Retarget(_underlyingType.GetEarlyAttributeDecodingMembers());
         }
 
         internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(string name)
         {
-            return this.RetargetingTranslator.Retarget(
-                _underlyingType.GetEarlyAttributeDecodingMembers(name)
-            );
+            return this.RetargetingTranslator
+                .Retarget(_underlyingType.GetEarlyAttributeDecodingMembers(name));
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetTypeMembersUnordered()
@@ -248,19 +244,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            return this.RetargetingTranslator.GetRetargetedAttributes(
-                _underlyingType.GetAttributes(),
-                ref _lazyCustomAttributes
-            );
+            return this.RetargetingTranslator
+                .GetRetargetedAttributes(
+                    _underlyingType.GetAttributes(),
+                    ref _lazyCustomAttributes
+                );
         }
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
         )
         {
-            return this.RetargetingTranslator.RetargetAttributes(
-                _underlyingType.GetCustomAttributesToEmit(moduleBuilder)
-            );
+            return this.RetargetingTranslator
+                .RetargetAttributes(_underlyingType.GetCustomAttributesToEmit(moduleBuilder));
         }
 
         public override AssemblySymbol ContainingAssembly
@@ -275,10 +271,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override NamedTypeSymbol LookupMetadataType(ref MetadataTypeName typeName)
         {
-            return this.RetargetingTranslator.Retarget(
-                _underlyingType.LookupMetadataType(ref typeName),
-                RetargetOptions.RetargetPrimitiveTypesByName
-            );
+            return this.RetargetingTranslator
+                .Retarget(
+                    _underlyingType.LookupMetadataType(ref typeName),
+                    RetargetOptions.RetargetPrimitiveTypesByName
+                );
         }
 
         private static ExtendedErrorTypeSymbol CyclicInheritanceError(
@@ -309,10 +306,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                         var underlyingBase = _underlyingType.BaseTypeNoUseSiteDiagnostics;
                         if ((object)underlyingBase != null)
                         {
-                            acyclicBase = this.RetargetingTranslator.Retarget(
-                                underlyingBase,
-                                RetargetOptions.RetargetPrimitiveTypesByName
-                            );
+                            acyclicBase = this.RetargetingTranslator
+                                .Retarget(
+                                    underlyingBase,
+                                    RetargetOptions.RetargetPrimitiveTypesByName
+                                );
                         }
                     }
 
@@ -379,10 +377,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 var underlyingBase = _underlyingType.GetDeclaredBaseType(basesBeingResolved);
                 var declaredBase =
                     (object)underlyingBase != null
-                        ? this.RetargetingTranslator.Retarget(
-                              underlyingBase,
-                              RetargetOptions.RetargetPrimitiveTypesByName
-                          )
+                        ? this.RetargetingTranslator
+                          .Retarget(underlyingBase, RetargetOptions.RetargetPrimitiveTypesByName)
                         : null;
                 Interlocked.CompareExchange(
                     ref _lazyDeclaredBaseType,
@@ -421,9 +417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 AssemblySymbol primaryDependency = PrimaryDependency;
                 _lazyCachedUseSiteInfo.Initialize(
                     primaryDependency,
-                    new UseSiteInfo<AssemblySymbol>(primaryDependency).AdjustDiagnosticInfo(
-                        CalculateUseSiteDiagnostic()
-                    )
+                    new UseSiteInfo<AssemblySymbol>(primaryDependency)
+                        .AdjustDiagnosticInfo(CalculateUseSiteDiagnostic())
                 );
             }
 
@@ -437,10 +432,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 NamedTypeSymbol coClass = _underlyingType.ComImportCoClass;
                 return (object)coClass == null
                   ? null
-                  : this.RetargetingTranslator.Retarget(
-                        coClass,
-                        RetargetOptions.RetargetPrimitiveTypesByName
-                    );
+                  : this.RetargetingTranslator
+                    .Retarget(coClass, RetargetOptions.RetargetPrimitiveTypesByName);
             }
         }
 

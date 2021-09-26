@@ -52,11 +52,12 @@ namespace Roslyn.Test.Utilities
             foreach (var caHandle in metadataReader.CustomAttributes)
             {
                 if (
-                    string.Equals(
-                        GetAttributeName(metadataReader, caHandle),
-                        attributeClassName,
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            GetAttributeName(metadataReader, caHandle),
+                            attributeClassName,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     return caHandle;

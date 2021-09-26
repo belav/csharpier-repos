@@ -58,10 +58,8 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             Single value = TestLibrary.Generator.GetSingle();
-            object result = typeof(Vector256).GetMethod(
-                    nameof(Vector256.CreateScalarUnsafe),
-                    new Type[] { typeof(Single) }
-                )
+            object result = typeof(Vector256)
+                .GetMethod(nameof(Vector256.CreateScalarUnsafe), new Type[] { typeof(Single) })
                 .Invoke(null, new object[] { value });
 
             ValidateResult((Vector256<Single>)(result), value);
@@ -106,13 +104,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256.CreateScalarUnsafe(Single): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector256.CreateScalarUnsafe(Single): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

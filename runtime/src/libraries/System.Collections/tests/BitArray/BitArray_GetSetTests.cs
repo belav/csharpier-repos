@@ -399,9 +399,9 @@ namespace System.Collections.Tests
                             arraySize / BitsPerInt32,
                             startIndex / BitsPerInt32,
                             Enumerable.Repeat(
-                                    unchecked((int)0xffffffff),
-                                    bitArraySize / BitsPerInt32
-                                )
+                                unchecked((int)0xffffffff),
+                                bitArraySize / BitsPerInt32
+                            )
                                 .ToArray(),
                             default(int)
                         };
@@ -419,9 +419,9 @@ namespace System.Collections.Tests
                             arraySize / BitsPerInt32,
                             startIndex / BitsPerInt32,
                             Enumerable.Repeat(
-                                    unchecked((int)0xaaaaaaaa),
-                                    bitArraySize / BitsPerInt32
-                                )
+                                unchecked((int)0xaaaaaaaa),
+                                bitArraySize / BitsPerInt32
+                            )
                                 .ToArray(),
                             default(int)
                         };
@@ -454,9 +454,9 @@ namespace System.Collections.Tests
                             (arraySize - 1) / BitsPerInt32 + 1,
                             startIndex / BitsPerInt32,
                             Enumerable.Repeat(
-                                    unchecked((int)0xffffffff),
-                                    bitArraySize / BitsPerInt32
-                                )
+                                unchecked((int)0xffffffff),
+                                bitArraySize / BitsPerInt32
+                            )
                                 .Concat(new[] { unchecked((int)(0xffffffffu >> 1)) })
                                 .ToArray(),
                             default(int)
@@ -476,9 +476,9 @@ namespace System.Collections.Tests
                             (arraySize - 1) / BitsPerInt32 + 1,
                             startIndex / BitsPerInt32,
                             Enumerable.Repeat(
-                                    unchecked((int)0xaaaaaaaa),
-                                    bitArraySize / BitsPerInt32
-                                )
+                                unchecked((int)0xaaaaaaaa),
+                                bitArraySize / BitsPerInt32
+                            )
                                 .Concat(new[] { unchecked((int)(0xaaaaaaaau >> 2)) })
                                 .ToArray(),
                             default(int)

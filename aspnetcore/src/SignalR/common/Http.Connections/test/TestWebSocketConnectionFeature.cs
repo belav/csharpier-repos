@@ -208,7 +208,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     if (length > 0)
                     {
                         // Remove the sent bytes from the remaining buffer
-                        _internalBuffer.Buffer = _internalBuffer.Buffer.AsMemory()
+                        _internalBuffer.Buffer = _internalBuffer.Buffer
+                            .AsMemory()
                             .Slice(length)
                             .ToArray();
                         endOfMessage = _internalBuffer.Buffer.Length == 0 && endOfMessage;

@@ -43,9 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public override string ToString() =>
-            ((IFunctionColumnMapping)this).ToDebugString(
-                MetadataDebugStringOptions.SingleLineDefault
-            );
+            ((IFunctionColumnMapping)this)
+                .ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         IFunctionColumn IFunctionColumnMapping.Column
         {

@@ -34,11 +34,12 @@ namespace System.Data
                 return (
                     (string.Equals(LocalName, id.LocalName, StringComparison.OrdinalIgnoreCase))
                     && (
-                        string.Equals(
-                            NamespaceURI,
-                            id.NamespaceURI,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                NamespaceURI,
+                                id.NamespaceURI,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                 );
             }

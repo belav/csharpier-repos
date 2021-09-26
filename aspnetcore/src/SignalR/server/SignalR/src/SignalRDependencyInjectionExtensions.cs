@@ -31,10 +31,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(signalrBuilder));
             }
 
-            signalrBuilder.Services.AddSingleton<
-                IConfigureOptions<HubOptions<THub>>,
-                HubOptionsSetup<THub>
-            >();
+            signalrBuilder.Services
+                .AddSingleton<IConfigureOptions<HubOptions<THub>>, HubOptionsSetup<THub>>();
             signalrBuilder.Services.Configure(configure);
             return signalrBuilder;
         }

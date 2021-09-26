@@ -384,11 +384,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             {
                 if (
                     string.Equals(_areaName, model.AreaName, StringComparison.OrdinalIgnoreCase)
-                    && string.Equals(
-                        model.ViewEnginePath,
-                        _path,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && string
+                        .Equals(model.ViewEnginePath, _path, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     _action(model);

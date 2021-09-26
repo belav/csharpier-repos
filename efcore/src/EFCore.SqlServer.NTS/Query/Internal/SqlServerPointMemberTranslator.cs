@@ -60,11 +60,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     "Instance must have typeMapping assigned."
                 );
                 var storeType = instance.TypeMapping.StoreType;
-                var isGeography = string.Equals(
-                    storeType,
-                    "geography",
-                    StringComparison.OrdinalIgnoreCase
-                );
+                var isGeography = string
+                    .Equals(storeType, "geography", StringComparison.OrdinalIgnoreCase);
 
                 if (
                     _memberToPropertyName.TryGetValue(member, out var propertyName)

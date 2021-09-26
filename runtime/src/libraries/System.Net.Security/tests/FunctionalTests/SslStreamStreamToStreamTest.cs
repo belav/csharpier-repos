@@ -637,27 +637,29 @@ namespace System.Net.Security.Tests
                 serverCertificate,
                 async (certificate, name) =>
                 {
-                    Task t1 = Task.Factory.FromAsync(
-                        clientSslStream.BeginAuthenticateAsClient(
-                            name,
-                            clientCerts,
-                            SslProtocols.None,
-                            checkCertificateRevocation: false,
-                            null,
-                            null
-                        ),
-                        clientSslStream.EndAuthenticateAsClient
-                    );
-                    Task t2 = Task.Factory.FromAsync(
-                        serverSslStream.BeginAuthenticateAsServer(
-                            certificate,
-                            clientCertificateRequired: clientCertificate != null,
-                            checkCertificateRevocation: false,
-                            null,
-                            null
-                        ),
-                        serverSslStream.EndAuthenticateAsServer
-                    );
+                    Task t1 = Task.Factory
+                        .FromAsync(
+                            clientSslStream.BeginAuthenticateAsClient(
+                                name,
+                                clientCerts,
+                                SslProtocols.None,
+                                checkCertificateRevocation: false,
+                                null,
+                                null
+                            ),
+                            clientSslStream.EndAuthenticateAsClient
+                        );
+                    Task t2 = Task.Factory
+                        .FromAsync(
+                            serverSslStream.BeginAuthenticateAsServer(
+                                certificate,
+                                clientCertificateRequired: clientCertificate != null,
+                                checkCertificateRevocation: false,
+                                null,
+                                null
+                            ),
+                            serverSslStream.EndAuthenticateAsServer
+                        );
                     await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
                 }
             );
@@ -672,14 +674,8 @@ namespace System.Net.Security.Tests
         ) =>
             cancellationToken.IsCancellationRequested
                 ? Task.FromCanceled<int>(cancellationToken)
-                : Task.Factory.FromAsync(
-                      stream.BeginRead,
-                      stream.EndRead,
-                      buffer,
-                      offset,
-                      count,
-                      null
-                  );
+                : Task.Factory
+                  .FromAsync(stream.BeginRead, stream.EndRead, buffer, offset, count, null);
 
         protected override Task WriteAsync(
             Stream stream,
@@ -690,14 +686,8 @@ namespace System.Net.Security.Tests
         ) =>
             cancellationToken.IsCancellationRequested
                 ? Task.FromCanceled<int>(cancellationToken)
-                : Task.Factory.FromAsync(
-                      stream.BeginWrite,
-                      stream.EndWrite,
-                      buffer,
-                      offset,
-                      count,
-                      null
-                  );
+                : Task.Factory
+                  .FromAsync(stream.BeginWrite, stream.EndWrite, buffer, offset, count, null);
     }
 
     public abstract class SslStreamStreamToStreamTest_SyncBase : SslStreamStreamToStreamTest

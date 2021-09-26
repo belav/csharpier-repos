@@ -42,17 +42,17 @@ namespace System.Net.Test.Common
         )
         {
             return CreateServerAsync(
-                    async (server, uri) =>
-                    {
-                        Task clientTask = clientFunc(uri);
-                        Task serverTask = serverFunc(server);
+                async (server, uri) =>
+                {
+                    Task clientTask = clientFunc(uri);
+                    Task serverTask = serverFunc(server);
 
-                        await new Task[] { clientTask, serverTask }.WhenAllOrAnyFailed()
-                            .ConfigureAwait(false);
-                    },
-                    options: options
-                )
-                .WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
+                    await new Task[] { clientTask, serverTask }
+                        .WhenAllOrAnyFailed()
+                        .ConfigureAwait(false);
+                },
+                options: options
+            ).WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
         }
     }
 

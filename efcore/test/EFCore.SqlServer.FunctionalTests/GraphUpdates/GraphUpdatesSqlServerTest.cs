@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore
                     base.OnModelCreating(modelBuilder, context);
 
                     foreach (
-                        var foreignKey in modelBuilder.Model.GetEntityTypes()
+                        var foreignKey in modelBuilder.Model
+                            .GetEntityTypes()
                             .SelectMany(e => e.GetDeclaredForeignKeys())
                             .Where(e => e.DeleteBehavior == DeleteBehavior.Cascade)
                     )
@@ -69,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore
                     base.OnModelCreating(modelBuilder, context);
 
                     foreach (
-                        var foreignKey in modelBuilder.Model.GetEntityTypes()
+                        var foreignKey in modelBuilder.Model
+                            .GetEntityTypes()
                             .SelectMany(e => e.GetDeclaredForeignKeys())
                     )
                     {

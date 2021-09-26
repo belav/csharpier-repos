@@ -54,10 +54,10 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             return GetQuickinfoForPragmaWarning(document, token)
                 ?? (
                     await GetQuickInfoForSuppressMessageAttributeAsync(
-                            document,
-                            token,
-                            cancellationToken
-                        )
+                        document,
+                        token,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 );
         }
@@ -213,9 +213,11 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                             new TaggedText(TextTags.Punctuation, ":"),
                             new TaggedText(TextTags.Space, " "),
                             new TaggedText(TextTags.Text, description)
-                        }.ToImmutableArray()
+                        }
+                            .ToImmutableArray()
                     )
-                }.ToImmutableArray(),
+                }
+                    .ToImmutableArray(),
                 relatedSpans: relatedSpans.ToImmutableArray()
             );
         }

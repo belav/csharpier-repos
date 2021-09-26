@@ -1300,9 +1300,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // It has already been subjected to a switch expression conversion.
                     return Conversion.NoConversion;
                 case BoundUnconvertedSwitchExpression switchExpression:
-                    var innerConversions = ArrayBuilder<Conversion>.GetInstance(
-                        switchExpression.SwitchArms.Length
-                    );
+                    var innerConversions = ArrayBuilder<Conversion>
+                        .GetInstance(switchExpression.SwitchArms.Length);
                     foreach (var arm in switchExpression.SwitchArms)
                     {
                         var nestedConversion = this.ClassifyImplicitConversionFromExpression(
@@ -1718,10 +1717,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (
                             delegateParameters[p].RefKind != anonymousFunction.RefKind(p)
-                            || !delegateParameters[p].Type.Equals(
-                                anonymousFunction.ParameterType(p),
-                                TypeCompareKind.AllIgnoreOptions
-                            )
+                            || !delegateParameters[p].Type
+                                .Equals(
+                                    anonymousFunction.ParameterType(p),
+                                    TypeCompareKind.AllIgnoreOptions
+                                )
                         )
                         {
                             return LambdaConversionResult.MismatchedParameterType;
@@ -4404,7 +4404,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 foreach (
-                    var iface in this.corLibrary.GetDeclaredSpecialType(SpecialType.System_Array)
+                    var iface in this.corLibrary
+                        .GetDeclaredSpecialType(SpecialType.System_Array)
                         .AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
                 )
                 {
@@ -4430,10 +4431,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     HasExplicitReferenceConversion(
                         sourceArray.ElementType,
-                        ((NamedTypeSymbol)destination).TypeArgumentWithDefinitionUseSiteDiagnostics(
-                            0,
-                            ref useSiteInfo
-                        ).Type,
+                        ((NamedTypeSymbol)destination)
+                            .TypeArgumentWithDefinitionUseSiteDiagnostics(0, ref useSiteInfo).Type,
                         ref useSiteInfo
                     )
                 )
@@ -4460,10 +4459,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 {
                     var sourceElement =
-                        ((NamedTypeSymbol)source).TypeArgumentWithDefinitionUseSiteDiagnostics(
-                            0,
-                            ref useSiteInfo
-                        ).Type;
+                        ((NamedTypeSymbol)source)
+                            .TypeArgumentWithDefinitionUseSiteDiagnostics(0, ref useSiteInfo).Type;
                     var destinationElement = destinationArray.ElementType;
 
                     if (HasIdentityConversionInternal(sourceElement, destinationElement))

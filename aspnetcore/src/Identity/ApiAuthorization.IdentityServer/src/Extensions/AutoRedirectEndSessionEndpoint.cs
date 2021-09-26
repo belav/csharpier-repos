@@ -64,10 +64,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var client = result.ValidatedRequest?.Client;
             if (
                 client != null
-                && client.Properties.TryGetValue(
-                    ApplicationProfilesPropertyNames.Profile,
-                    out var type
-                )
+                && client.Properties
+                    .TryGetValue(ApplicationProfilesPropertyNames.Profile, out var type)
             )
             {
                 var signInScheme =
@@ -121,11 +119,12 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
             if (
                 HttpMethods.IsPost(request.Method)
-                && !string.Equals(
-                    request.ContentType,
-                    "application/x-www-form-urlencoded",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && !string
+                    .Equals(
+                        request.ContentType,
+                        "application/x-www-form-urlencoded",
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 return new StatusCodeResult(HttpStatusCode.BadRequest);

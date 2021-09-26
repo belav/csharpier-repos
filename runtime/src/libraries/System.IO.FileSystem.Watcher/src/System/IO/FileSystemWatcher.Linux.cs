@@ -325,7 +325,8 @@ namespace System.IO
                 {
                     IsBackground = true,
                     Name = ".NET File Watcher"
-                }.Start(this);
+                }
+                    .Start(this);
                 // PERF: As needed, we can look into making this use async I/O rather than burning
                 // a thread that blocks in the read syscall.
             }
@@ -384,15 +385,16 @@ namespace System.IO
                 // the existing descriptor.  This works even in the case of a rename. We also add the DONT_FOLLOW
                 // and EXCL_UNLINK flags to keep parity with Windows where we don't pickup symlinks or unlinked
                 // files (which don't exist in Windows)
-                int wd = Interop.Sys.INotifyAddWatch(
-                    _inotifyHandle,
-                    fullPath,
-                    (uint)(
-                        this._watchFilters
-                        | Interop.Sys.NotifyEvents.IN_DONT_FOLLOW
-                        | Interop.Sys.NotifyEvents.IN_EXCL_UNLINK
-                    )
-                );
+                int wd = Interop.Sys
+                    .INotifyAddWatch(
+                        _inotifyHandle,
+                        fullPath,
+                        (uint)(
+                            this._watchFilters
+                            | Interop.Sys.NotifyEvents.IN_DONT_FOLLOW
+                            | Interop.Sys.NotifyEvents.IN_EXCL_UNLINK
+                        )
+                    );
                 if (wd == -1)
                 {
                     // If we get an error when trying to add the watch, don't let that tear down processing.  Instead,
@@ -538,10 +540,8 @@ namespace System.IO
                     // Remove the inotify watch.  This could fail if our state has become inconsistent
                     // with the state of the world (e.g. due to lost events).  So we don't want failures
                     // to throw exceptions, but we do assert to detect coding problems during debugging.
-                    int result = Interop.Sys.INotifyRemoveWatch(
-                        _inotifyHandle,
-                        directoryEntry.WatchDescriptor
-                    );
+                    int result = Interop.Sys
+                        .INotifyRemoveWatch(_inotifyHandle, directoryEntry.WatchDescriptor);
                     Debug.Assert(result >= 0);
                 }
             }
@@ -799,12 +799,13 @@ namespace System.IO
                                     // for the next event to arrive).
                                     const int MillisecondsTimeout = 2;
                                     Interop.PollEvents events;
-                                    Interop.Sys.Poll(
-                                        _inotifyHandle,
-                                        Interop.PollEvents.POLLIN,
-                                        MillisecondsTimeout,
-                                        out events
-                                    );
+                                    Interop.Sys
+                                        .Poll(
+                                            _inotifyHandle,
+                                            Interop.PollEvents.POLLIN,
+                                            MillisecondsTimeout,
+                                            out events
+                                        );
 
                                     // If we error or don't have any signaled handles, send the deleted event
                                     if (events == Interop.PollEvents.POLLNONE)

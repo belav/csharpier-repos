@@ -318,12 +318,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 filePath: analyzerConfigDocFilePath
             );
             var projInfo = ProjectInfo.Create(
-                    pid,
-                    version: VersionStamp.Default,
-                    name: "TestProject",
-                    assemblyName: "TestProject.dll",
-                    language: LanguageNames.CSharp
-                )
+                pid,
+                version: VersionStamp.Default,
+                name: "TestProject",
+                assemblyName: "TestProject.dll",
+                language: LanguageNames.CSharp
+            )
                 .WithAnalyzerConfigDocuments(new[] { docInfo });
 
             using (var ws = new AdhocWorkspace())
@@ -449,7 +449,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             // get partial semantics doc
-            var frozen = pws.CurrentSolution.GetDocument(docid1)
+            var frozen = pws.CurrentSolution
+                .GetDocument(docid1)
                 .WithFrozenPartialSemantics(CancellationToken.None);
         }
 

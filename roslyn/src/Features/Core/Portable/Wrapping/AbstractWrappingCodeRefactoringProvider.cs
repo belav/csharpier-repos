@@ -57,11 +57,11 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     cancellationToken.ThrowIfCancellationRequested();
 
                     var computer = await wrapper.TryCreateComputerAsync(
-                            document,
-                            position,
-                            node,
-                            cancellationToken
-                        )
+                        document,
+                        position,
+                        node,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     if (computer == null)

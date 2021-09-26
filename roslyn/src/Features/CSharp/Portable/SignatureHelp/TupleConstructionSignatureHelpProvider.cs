@@ -272,26 +272,26 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         )
         {
             var prefixParts = SpecializedCollections.SingletonEnumerable(
-                    new SymbolDisplayPart(SymbolDisplayPartKind.Punctuation, null, "(")
-                )
+                new SymbolDisplayPart(SymbolDisplayPartKind.Punctuation, null, "(")
+            )
                 .ToTaggedText();
             var suffixParts = SpecializedCollections.SingletonEnumerable(
-                    new SymbolDisplayPart(SymbolDisplayPartKind.Punctuation, null, ")")
-                )
+                new SymbolDisplayPart(SymbolDisplayPartKind.Punctuation, null, ")")
+            )
                 .ToTaggedText();
             var separatorParts = GetSeparatorParts().ToTaggedText();
 
             var items = tupleTypes.Select(
-                    tupleType =>
-                        Convert(
-                            tupleType,
-                            prefixParts,
-                            suffixParts,
-                            separatorParts,
-                            semanticModel,
-                            position
-                        )
-                )
+                tupleType =>
+                    Convert(
+                        tupleType,
+                        prefixParts,
+                        suffixParts,
+                        separatorParts,
+                        semanticModel,
+                        position
+                    )
+            )
                 .ToList();
 
             var state = GetCurrentArgumentState(
@@ -344,7 +344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 // Empty strings for elements not explicitly declared
                 var elementName = element.IsImplicitlyDeclared ? string.Empty : element.Name;
 
-                var typeParts = element.Type.ToMinimalDisplayParts(semanticModel, position)
+                var typeParts = element.Type
+                    .ToMinimalDisplayParts(semanticModel, position)
                     .ToList();
                 if (!string.IsNullOrEmpty(elementName))
                 {

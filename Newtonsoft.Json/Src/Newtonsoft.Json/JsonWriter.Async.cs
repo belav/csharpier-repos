@@ -52,11 +52,12 @@ namespace Newtonsoft.Json
             {
                 throw JsonWriterException.Create(
                     this,
-                    "Token {0} in state {1} would result in an invalid JSON object.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        tokenBeingWritten.ToString(),
-                        oldState.ToString()
-                    ),
+                    "Token {0} in state {1} would result in an invalid JSON object."
+                        .FormatWith(
+                            CultureInfo.InvariantCulture,
+                            tokenBeingWritten.ToString(),
+                            oldState.ToString()
+                        ),
                     null
                 );
             }

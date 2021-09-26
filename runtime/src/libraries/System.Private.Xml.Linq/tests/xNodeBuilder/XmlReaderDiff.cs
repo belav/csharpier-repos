@@ -147,10 +147,8 @@ namespace CoreXml.Test.XLinq
                         );
                         filteredReader.MoveToAttribute(i);
                         TestLog.Compare(
-                            SAEqComparer.Instance.Equals(
-                                filteredReader.GetSAData(),
-                                filteredAttrs[i]
-                            ),
+                            SAEqComparer.Instance
+                                .Equals(filteredReader.GetSAData(), filteredAttrs[i]),
                             "Move to attribute int - wrong position"
                         );
                         VerifyNextFirstAttribute(
@@ -348,10 +346,11 @@ namespace CoreXml.Test.XLinq
                 "Move to next attribute :: " + message
             );
             TestLog.Compare(
-                SAEqComparer.Instance.Equals(
-                    shouldNAWork ? filteredAttrs[attrPosition + 1] : orig,
-                    filteredReader.GetSAData()
-                ),
+                SAEqComparer.Instance
+                    .Equals(
+                        shouldNAWork ? filteredAttrs[attrPosition + 1] : orig,
+                        filteredReader.GetSAData()
+                    ),
                 "MoveToNextAttribute moved to bad position :: " + message
             );
             // MoveToFirstAttribute works OK
@@ -442,13 +441,14 @@ namespace CoreXml.Test.XLinq
                         TestLog.Compare(
                             r1E.Current[2] == XNamespace.Xmlns.NamespaceName
                                 || r1E.Current[1] == "xmlns",
-                            string.Format(
-                                "Reader removed the non NS declaration attribute: {0},{1},{2},{3}",
-                                r1E.Current[0],
-                                r1E.Current[1],
-                                r1E.Current[2],
-                                r1E.Current[3]
-                            )
+                            string
+                                .Format(
+                                    "Reader removed the non NS declaration attribute: {0},{1},{2},{3}",
+                                    r1E.Current[0],
+                                    r1E.Current[1],
+                                    r1E.Current[2],
+                                    r1E.Current[3]
+                                )
                         );
                         TestLog.Compare(
                             nsTable.IsDuplicate(depth, r1E.Current[1], r1E.Current[3]),

@@ -713,10 +713,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                     var argsList =
                         args == null
                             ? string.Empty
-                            : string.Join(
-                                  ", ",
-                                  args.Select(a => a?.GetType().FullName ?? "(null)")
-                              );
+                            : string
+                              .Join(", ", args.Select(a => a?.GetType().FullName ?? "(null)"));
                     _issuingInvocation(
                         logger,
                         invocationId,
@@ -789,10 +787,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                     var argsList =
                         args == null
                             ? string.Empty
-                            : string.Join(
-                                  ", ",
-                                  args.Select(a => a?.GetType().FullName ?? "(null)")
-                              );
+                            : string
+                              .Join(", ", args.Select(a => a?.GetType().FullName ?? "(null)"));
                     _receivedInvocation(logger, invocationId, methodName, argsList, null);
                 }
             }

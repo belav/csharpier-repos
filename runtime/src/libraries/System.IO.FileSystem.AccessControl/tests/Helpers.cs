@@ -10,11 +10,13 @@ namespace System.Security.AccessControl
         public static IdentityReference s_LocalSystemNTAccount = new SecurityIdentifier(
             WellKnownSidType.LocalSystemSid,
             null
-        ).Translate(typeof(NTAccount));
+        )
+            .Translate(typeof(NTAccount));
         public static IdentityReference s_NetworkServiceNTAccount = new SecurityIdentifier(
             WellKnownSidType.NetworkServiceSid,
             null
-        ).Translate(typeof(NTAccount));
+        )
+            .Translate(typeof(NTAccount));
         public static IdentityReference s_WorldSidNTAccount = new SecurityIdentifier(
             WellKnownSidType.WorldSid,
             null

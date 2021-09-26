@@ -247,16 +247,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityTypeBuilder.Metadata.Model.ConventionDispatcher
             );
 
-            new PropertyDiscoveryConvention(CreateDependencies()).ProcessEntityTypeAdded(
-                entityTypeBuilder,
-                context
-            );
+            new PropertyDiscoveryConvention(CreateDependencies())
+                .ProcessEntityTypeAdded(entityTypeBuilder, context);
 
             Assert.False(context.ShouldStopProcessing());
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private InternalEntityTypeBuilder CreateInternalEntityBuilder<T>()

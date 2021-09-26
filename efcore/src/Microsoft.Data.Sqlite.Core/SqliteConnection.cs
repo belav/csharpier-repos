@@ -774,11 +774,12 @@ namespace Microsoft.Data.Sqlite
             }
 
             if (
-                string.Equals(
-                    collectionName,
-                    DbMetaDataCollectionNames.MetaDataCollections,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        collectionName,
+                        DbMetaDataCollectionNames.MetaDataCollections,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 return new DataTable(DbMetaDataCollectionNames.MetaDataCollections)
@@ -797,11 +798,12 @@ namespace Microsoft.Data.Sqlite
                 };
             }
             else if (
-                string.Equals(
-                    collectionName,
-                    DbMetaDataCollectionNames.ReservedWords,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        collectionName,
+                        DbMetaDataCollectionNames.ReservedWords,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 var dataTable = new DataTable(DbMetaDataCollectionNames.ReservedWords)

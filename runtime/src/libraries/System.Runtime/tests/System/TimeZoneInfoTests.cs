@@ -1137,7 +1137,8 @@ namespace System.Tests
                     TimeZoneInfo.Local.Id,
                     time1.AddHours(delta)
                 );
-                time1 = (new DateTime(2007, 11, 4, 1, 30, 0, DateTimeKind.Local)).ToUniversalTime()
+                time1 = (new DateTime(2007, 11, 4, 1, 30, 0, DateTimeKind.Local))
+                    .ToUniversalTime()
                     .AddHours(-1)
                     .ToLocalTime(); // DST half of repeated hour (U.S. Pacific)
                 VerifyConvert(
@@ -1194,7 +1195,8 @@ namespace System.Tests
                     TimeZoneInfo.Local.Id,
                     TimeZoneInfo.ConvertTime(time1, s_regLocal)
                 );
-                time1 = (new DateTime(2004, 10, 31, 1, 30, 0, DateTimeKind.Local)).ToUniversalTime()
+                time1 = (new DateTime(2004, 10, 31, 1, 30, 0, DateTimeKind.Local))
+                    .ToUniversalTime()
                     .AddHours(-1)
                     .ToLocalTime();
                 VerifyConvert(
@@ -1440,7 +1442,8 @@ namespace System.Tests
                 new DateTime(2006, 2, 13, 5, 37, 48, DateTimeKind.Unspecified),
                 TimeZoneInfo.Local.Id,
                 s_strSydney,
-                new DateTime(2006, 2, 13, 5, 37, 48).AddHours(11)
+                new DateTime(2006, 2, 13, 5, 37, 48)
+                    .AddHours(11)
                     .Subtract(s_regLocal.GetUtcOffset(new DateTime(2006, 2, 13, 5, 37, 48)))
             ); // DCR 24267
             if (TimeZoneInfo.Local.Id != s_strSydney)
@@ -3809,19 +3812,13 @@ namespace System.Tests
                     Assert.Equal(new DateTime(1942, 12, 31), rules[i].DateEnd);
                     Assert.Equal(daylightDelta, rules[i].DaylightDelta);
                     Assert.Equal(
-                        TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                            new DateTime(1, 1, 1, 2, 0, 0),
-                            2,
-                            9
-                        ),
+                        TimeZoneInfo.TransitionTime
+                            .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 2, 9),
                         rules[i].DaylightTransitionStart
                     );
                     Assert.Equal(
-                        TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                            new DateTime(1, 1, 1, 23, 59, 59, 999),
-                            12,
-                            31
-                        ),
+                        TimeZoneInfo.TransitionTime
+                            .CreateFixedDateRule(new DateTime(1, 1, 1, 23, 59, 59, 999), 12, 31),
                         rules[i].DaylightTransitionEnd
                     );
 
@@ -3835,19 +3832,13 @@ namespace System.Tests
                     Assert.Equal(new DateTime(1944, 12, 31), rules[i + 1].DateEnd);
                     Assert.Equal(daylightDelta, rules[i + 1].DaylightDelta);
                     Assert.Equal(
-                        TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                            new DateTime(1, 1, 1, 0, 0, 0),
-                            1,
-                            1
-                        ),
+                        TimeZoneInfo.TransitionTime
+                            .CreateFixedDateRule(new DateTime(1, 1, 1, 0, 0, 0), 1, 1),
                         rules[i + 1].DaylightTransitionStart
                     );
                     Assert.Equal(
-                        TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                            new DateTime(1, 1, 1, 23, 59, 59, 999),
-                            12,
-                            31
-                        ),
+                        TimeZoneInfo.TransitionTime
+                            .CreateFixedDateRule(new DateTime(1, 1, 1, 23, 59, 59, 999), 12, 31),
                         rules[i + 1].DaylightTransitionEnd
                     );
 
@@ -3861,19 +3852,13 @@ namespace System.Tests
                     Assert.Equal(new DateTime(1945, 8, 14), rules[i + 2].DateEnd);
                     Assert.Equal(daylightDelta, rules[i + 2].DaylightDelta);
                     Assert.Equal(
-                        TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                            new DateTime(1, 1, 1, 0, 0, 0),
-                            1,
-                            1
-                        ),
+                        TimeZoneInfo.TransitionTime
+                            .CreateFixedDateRule(new DateTime(1, 1, 1, 0, 0, 0), 1, 1),
                         rules[i + 2].DaylightTransitionStart
                     );
                     Assert.Equal(
-                        TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                            new DateTime(1, 1, 1, 15, 59, 59, 999),
-                            8,
-                            14
-                        ),
+                        TimeZoneInfo.TransitionTime
+                            .CreateFixedDateRule(new DateTime(1, 1, 1, 15, 59, 59, 999), 8, 14),
                         rules[i + 2].DaylightTransitionEnd
                     );
 
@@ -3993,24 +3978,26 @@ namespace System.Tests
                 int baseOffsetsCompared = current.BaseUtcOffset.CompareTo(previous.BaseUtcOffset);
                 Assert.True(
                     baseOffsetsCompared >= 0,
-                    string.Format(
-                        "TimeZoneInfos are out of order. {0}:{1} should be before {2}:{3}",
-                        previous.Id,
-                        previous.BaseUtcOffset,
-                        current.Id,
-                        current.BaseUtcOffset
-                    )
+                    string
+                        .Format(
+                            "TimeZoneInfos are out of order. {0}:{1} should be before {2}:{3}",
+                            previous.Id,
+                            previous.BaseUtcOffset,
+                            current.Id,
+                            current.BaseUtcOffset
+                        )
                 );
 
                 if (baseOffsetsCompared == 0)
                 {
                     Assert.True(
                         current.DisplayName.CompareTo(previous.DisplayName) >= 0,
-                        string.Format(
-                            "TimeZoneInfos are out of order. {0} should be before {1}",
-                            previous.DisplayName,
-                            current.DisplayName
-                        )
+                        string
+                            .Format(
+                                "TimeZoneInfos are out of order. {0} should be before {1}",
+                                previous.DisplayName,
+                                current.DisplayName
+                            )
                     );
                 }
             }
@@ -4263,25 +4250,18 @@ namespace System.Tests
         [Fact]
         public static void CreateCustomTimeZone()
         {
-            TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                new DateTime(1, 1, 1, 4, 0, 0),
-                3,
-                2,
-                DayOfWeek.Sunday
-            );
-            TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                new DateTime(1, 1, 1, 4, 0, 0),
-                10,
-                2,
-                DayOfWeek.Sunday
-            );
-            TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                new DateTime(2000, 1, 1),
-                new DateTime(2005, 1, 1),
-                new TimeSpan(1, 0, 0),
-                s1,
-                e1
-            );
+            TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime
+                .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
+            TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime
+                .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 10, 2, DayOfWeek.Sunday);
+            TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule
+                .CreateAdjustmentRule(
+                    new DateTime(2000, 1, 1),
+                    new DateTime(2005, 1, 1),
+                    new TimeSpan(1, 0, 0),
+                    s1,
+                    e1
+                );
 
             // supports DST
             TimeZoneInfo tz1 = TimeZoneInfo.CreateCustomTimeZone(
@@ -4345,47 +4325,33 @@ namespace System.Tests
         [Fact]
         public static void CreateCustomTimeZone_InvalidTimeZone()
         {
-            TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                new DateTime(1, 1, 1, 4, 0, 0),
-                3,
-                2,
-                DayOfWeek.Sunday
-            );
-            TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                new DateTime(1, 1, 1, 4, 0, 0),
-                10,
-                2,
-                DayOfWeek.Sunday
-            );
-            TimeZoneInfo.TransitionTime s2 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                new DateTime(1, 1, 1, 4, 0, 0),
-                2,
-                2,
-                DayOfWeek.Sunday
-            );
-            TimeZoneInfo.TransitionTime e2 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                new DateTime(1, 1, 1, 4, 0, 0),
-                11,
-                2,
-                DayOfWeek.Sunday
-            );
+            TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime
+                .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
+            TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime
+                .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 10, 2, DayOfWeek.Sunday);
+            TimeZoneInfo.TransitionTime s2 = TimeZoneInfo.TransitionTime
+                .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 2, 2, DayOfWeek.Sunday);
+            TimeZoneInfo.TransitionTime e2 = TimeZoneInfo.TransitionTime
+                .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 11, 2, DayOfWeek.Sunday);
 
-            TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                new DateTime(2000, 1, 1),
-                new DateTime(2005, 1, 1),
-                new TimeSpan(1, 0, 0),
-                s1,
-                e1
-            );
+            TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule
+                .CreateAdjustmentRule(
+                    new DateTime(2000, 1, 1),
+                    new DateTime(2005, 1, 1),
+                    new TimeSpan(1, 0, 0),
+                    s1,
+                    e1
+                );
 
             // AdjustmentRules overlap
-            TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                new DateTime(2004, 1, 1),
-                new DateTime(2007, 1, 1),
-                new TimeSpan(1, 0, 0),
-                s2,
-                e2
-            );
+            TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo.AdjustmentRule
+                .CreateAdjustmentRule(
+                    new DateTime(2004, 1, 1),
+                    new DateTime(2007, 1, 1),
+                    new TimeSpan(1, 0, 0),
+                    s2,
+                    e2
+                );
             VerifyCustomTimeZoneException<InvalidTimeZoneException>(
                 "mytimezone",
                 new TimeSpan(6, 0, 0),
@@ -4396,13 +4362,14 @@ namespace System.Tests
             );
 
             // AdjustmentRules not ordered
-            TimeZoneInfo.AdjustmentRule r3 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                new DateTime(2006, 1, 1),
-                new DateTime(2007, 1, 1),
-                new TimeSpan(1, 0, 0),
-                s2,
-                e2
-            );
+            TimeZoneInfo.AdjustmentRule r3 = TimeZoneInfo.AdjustmentRule
+                .CreateAdjustmentRule(
+                    new DateTime(2006, 1, 1),
+                    new DateTime(2007, 1, 1),
+                    new TimeSpan(1, 0, 0),
+                    s2,
+                    e2
+                );
             VerifyCustomTimeZoneException<InvalidTimeZoneException>(
                 "mytimezone",
                 new TimeSpan(6, 0, 0),
@@ -4413,13 +4380,14 @@ namespace System.Tests
             );
 
             // Offset out of range
-            TimeZoneInfo.AdjustmentRule r4 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                new DateTime(2000, 1, 1),
-                new DateTime(2005, 1, 1),
-                new TimeSpan(3, 0, 0),
-                s1,
-                e1
-            );
+            TimeZoneInfo.AdjustmentRule r4 = TimeZoneInfo.AdjustmentRule
+                .CreateAdjustmentRule(
+                    new DateTime(2000, 1, 1),
+                    new DateTime(2005, 1, 1),
+                    new TimeSpan(3, 0, 0),
+                    s1,
+                    e1
+                );
             VerifyCustomTimeZoneException<InvalidTimeZoneException>(
                 "mytimezone",
                 new TimeSpan(12, 0, 0),
@@ -4430,13 +4398,14 @@ namespace System.Tests
             );
 
             // overlapping AdjustmentRules for a date
-            TimeZoneInfo.AdjustmentRule r5 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                new DateTime(2005, 1, 1),
-                new DateTime(2007, 1, 1),
-                new TimeSpan(1, 0, 0),
-                s2,
-                e2
-            );
+            TimeZoneInfo.AdjustmentRule r5 = TimeZoneInfo.AdjustmentRule
+                .CreateAdjustmentRule(
+                    new DateTime(2005, 1, 1),
+                    new DateTime(2007, 1, 1),
+                    new TimeSpan(1, 0, 0),
+                    s2,
+                    e2
+                );
             VerifyCustomTimeZoneException<InvalidTimeZoneException>(
                 "mytimezone",
                 new TimeSpan(6, 0, 0),
@@ -4914,32 +4883,31 @@ namespace System.Tests
                 psi.Environment.Add("TZ", zoneFilePath);
 
                 RemoteExecutor.Invoke(
-                        (day, month, succeed) =>
+                    (day, month, succeed) =>
+                    {
+                        bool expectedToSucceed = bool.Parse(succeed);
+                        int d = int.Parse(day);
+                        int m = int.Parse(month);
+
+                        TimeZoneInfo.AdjustmentRule[] rules = TimeZoneInfo.Local
+                            .GetAdjustmentRules();
+
+                        if (expectedToSucceed)
                         {
-                            bool expectedToSucceed = bool.Parse(succeed);
-                            int d = int.Parse(day);
-                            int m = int.Parse(month);
-
-                            TimeZoneInfo.AdjustmentRule[] rules =
-                                TimeZoneInfo.Local.GetAdjustmentRules();
-
-                            if (expectedToSucceed)
-                            {
-                                Assert.Equal(1, rules.Length);
-                                Assert.Equal(d, rules[0].DaylightTransitionStart.Day);
-                                Assert.Equal(m, rules[0].DaylightTransitionStart.Month);
-                            }
-                            else
-                            {
-                                Assert.Equal(0, rules.Length);
-                            }
-                        },
-                        dayNumber.ToString(),
-                        monthNumber.ToString(),
-                        shouldSucceed.ToString(),
-                        new RemoteInvokeOptions { StartInfo = psi }
-                    )
-                    .Dispose();
+                            Assert.Equal(1, rules.Length);
+                            Assert.Equal(d, rules[0].DaylightTransitionStart.Day);
+                            Assert.Equal(m, rules[0].DaylightTransitionStart.Month);
+                        }
+                        else
+                        {
+                            Assert.Equal(0, rules.Length);
+                        }
+                    },
+                    dayNumber.ToString(),
+                    monthNumber.ToString(),
+                    shouldSucceed.ToString(),
+                    new RemoteInvokeOptions { StartInfo = psi }
+                ).Dispose();
             }
 
             finally
@@ -5155,39 +5123,32 @@ namespace System.Tests
         public static void TestNameWithInvariantCulture()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        // We call ICU to get the names. When passing invariant culture name to ICU, it fail and we'll use the abbreviated names at that time.
-                        // We fixed this issue by avoid sending the invariant culture name to ICU and this test is confirming we work fine at that time.
-                        CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
-                        TimeZoneInfo.ClearCachedData();
+                () =>
+                {
+                    // We call ICU to get the names. When passing invariant culture name to ICU, it fail and we'll use the abbreviated names at that time.
+                    // We fixed this issue by avoid sending the invariant culture name to ICU and this test is confirming we work fine at that time.
+                    CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
+                    TimeZoneInfo.ClearCachedData();
 
-                        TimeZoneInfo pacific = TimeZoneInfo.FindSystemTimeZoneById(s_strPacific);
+                    TimeZoneInfo pacific = TimeZoneInfo.FindSystemTimeZoneById(s_strPacific);
 
-                        Assert.True(
-                            pacific.StandardName.IndexOf(
-                                "Pacific",
-                                StringComparison.OrdinalIgnoreCase
-                            ) >= 0,
-                            $"'{pacific.StandardName}' is not the expected standard name for Pacific time zone"
-                        );
-                        Assert.True(
-                            pacific.DaylightName.IndexOf(
-                                "Pacific",
-                                StringComparison.OrdinalIgnoreCase
-                            ) >= 0,
-                            $"'{pacific.DaylightName}' is not the expected daylight name for Pacific time zone"
-                        );
-                        Assert.True(
-                            pacific.DisplayName.IndexOf(
-                                "Pacific",
-                                StringComparison.OrdinalIgnoreCase
-                            ) >= 0,
-                            $"'{pacific.DisplayName}' is not the expected display name for Pacific time zone"
-                        );
-                    }
-                )
-                .Dispose();
+                    Assert.True(
+                        pacific.StandardName.IndexOf("Pacific", StringComparison.OrdinalIgnoreCase)
+                            >= 0,
+                        $"'{pacific.StandardName}' is not the expected standard name for Pacific time zone"
+                    );
+                    Assert.True(
+                        pacific.DaylightName.IndexOf("Pacific", StringComparison.OrdinalIgnoreCase)
+                            >= 0,
+                        $"'{pacific.DaylightName}' is not the expected daylight name for Pacific time zone"
+                    );
+                    Assert.True(
+                        pacific.DisplayName.IndexOf("Pacific", StringComparison.OrdinalIgnoreCase)
+                            >= 0,
+                        $"'{pacific.DisplayName}' is not the expected display name for Pacific time zone"
+                    );
+                }
+            ).Dispose();
         }
 
         [Theory]
@@ -5241,24 +5202,19 @@ namespace System.Tests
         [Fact]
         public static void AdjustmentRuleBaseUtcOffsetDeltaTest()
         {
-            TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                timeOfDay: new DateTime(1, 1, 1, 2, 0, 0),
-                month: 3,
-                day: 7
-            );
-            TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                timeOfDay: new DateTime(1, 1, 1, 1, 0, 0),
-                month: 11,
-                day: 7
-            );
-            TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                DateTime.MinValue.Date,
-                DateTime.MaxValue.Date,
-                new TimeSpan(1, 0, 0),
-                start,
-                end,
-                baseUtcOffsetDelta: new TimeSpan(1, 0, 0)
-            );
+            TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime
+                .CreateFixedDateRule(timeOfDay: new DateTime(1, 1, 1, 2, 0, 0), month: 3, day: 7);
+            TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime
+                .CreateFixedDateRule(timeOfDay: new DateTime(1, 1, 1, 1, 0, 0), month: 11, day: 7);
+            TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
+                .CreateAdjustmentRule(
+                    DateTime.MinValue.Date,
+                    DateTime.MaxValue.Date,
+                    new TimeSpan(1, 0, 0),
+                    start,
+                    end,
+                    baseUtcOffsetDelta: new TimeSpan(1, 0, 0)
+                );
             TimeZoneInfo customTimeZone = TimeZoneInfo.CreateCustomTimeZone(
                 id: "Fake Time Zone",
                 baseUtcOffset: new TimeSpan(0),
@@ -5349,13 +5305,14 @@ namespace System.Tests
             );
             Assert.True(
                 returnedTime.Equals(expectedTime),
-                string.Format(
-                    "Error: Expected value '{0}' but got '{1}', input value is '{2}', TimeZone: {3}",
-                    expectedTime,
-                    returnedTime,
-                    inputTime,
-                    destinationTimeZoneId
-                )
+                string
+                    .Format(
+                        "Error: Expected value '{0}' but got '{1}', input value is '{2}', TimeZone: {3}",
+                        expectedTime,
+                        returnedTime,
+                        inputTime,
+                        destinationTimeZoneId
+                    )
             );
         }
 
@@ -5371,23 +5328,25 @@ namespace System.Tests
             );
             Assert.True(
                 returnedTime.Equals(expectedTime),
-                string.Format(
-                    "Error: Expected value '{0}' but got '{1}', input value is '{2}', TimeZone: {3}",
-                    expectedTime,
-                    returnedTime,
-                    inputTime,
-                    destinationTimeZoneId
-                )
+                string
+                    .Format(
+                        "Error: Expected value '{0}' but got '{1}', input value is '{2}', TimeZone: {3}",
+                        expectedTime,
+                        returnedTime,
+                        inputTime,
+                        destinationTimeZoneId
+                    )
             );
             Assert.True(
                 expectedTime.Kind == returnedTime.Kind,
-                string.Format(
-                    "Error: Expected value '{0}' but got '{1}', input value is '{2}', TimeZone: {3}",
-                    expectedTime.Kind,
-                    returnedTime.Kind,
-                    inputTime,
-                    destinationTimeZoneId
-                )
+                string
+                    .Format(
+                        "Error: Expected value '{0}' but got '{1}', input value is '{2}', TimeZone: {3}",
+                        expectedTime.Kind,
+                        returnedTime.Kind,
+                        inputTime,
+                        destinationTimeZoneId
+                    )
             );
         }
 
@@ -5404,23 +5363,25 @@ namespace System.Tests
             );
             Assert.True(
                 returnedTime.Equals(expectedTime),
-                string.Format(
-                    "Error: Expected value '{0}' but got '{1}', input value is '{2}', TimeZone: {3}",
-                    expectedTime,
-                    returnedTime,
-                    inputTime,
-                    destinationTimeZoneId
-                )
+                string
+                    .Format(
+                        "Error: Expected value '{0}' but got '{1}', input value is '{2}', TimeZone: {3}",
+                        expectedTime,
+                        returnedTime,
+                        inputTime,
+                        destinationTimeZoneId
+                    )
             );
             Assert.True(
                 expectedKind == returnedTime.Kind,
-                string.Format(
-                    "Error: Expected value '{0}' but got '{1}', input value is '{2}', TimeZone: {3}",
-                    expectedTime.Kind,
-                    returnedTime.Kind,
-                    inputTime,
-                    destinationTimeZoneId
-                )
+                string
+                    .Format(
+                        "Error: Expected value '{0}' but got '{1}', input value is '{2}', TimeZone: {3}",
+                        expectedTime.Kind,
+                        returnedTime.Kind,
+                        inputTime,
+                        destinationTimeZoneId
+                    )
             );
         }
 
@@ -5438,25 +5399,27 @@ namespace System.Tests
             );
             Assert.True(
                 returnedTime.Equals(expectedTime),
-                string.Format(
-                    "Error: Expected value '{0}' but got '{1}', input value is '{2}', Source TimeZone: {3}, Dest. Time Zone: {4}",
-                    expectedTime,
-                    returnedTime,
-                    inputTime,
-                    sourceTimeZoneId,
-                    destinationTimeZoneId
-                )
+                string
+                    .Format(
+                        "Error: Expected value '{0}' but got '{1}', input value is '{2}', Source TimeZone: {3}, Dest. Time Zone: {4}",
+                        expectedTime,
+                        returnedTime,
+                        inputTime,
+                        sourceTimeZoneId,
+                        destinationTimeZoneId
+                    )
             );
             Assert.True(
                 expectedTime.Kind == returnedTime.Kind,
-                string.Format(
-                    "Error: Expected value '{0}' but got '{1}', input value is '{2}', Source TimeZone: {3}, Dest. Time Zone: {4}",
-                    expectedTime.Kind,
-                    returnedTime.Kind,
-                    inputTime,
-                    sourceTimeZoneId,
-                    destinationTimeZoneId
-                )
+                string
+                    .Format(
+                        "Error: Expected value '{0}' but got '{1}', input value is '{2}', Source TimeZone: {3}, Dest. Time Zone: {4}",
+                        expectedTime.Kind,
+                        returnedTime.Kind,
+                        inputTime,
+                        sourceTimeZoneId,
+                        destinationTimeZoneId
+                    )
             );
         }
 
@@ -5477,13 +5440,14 @@ namespace System.Tests
                 // the ambiguous time can be mapped to 2 UTC times so it is not guaranteed to round trip
                 Assert.True(
                     dt1.Equals(dt3),
-                    string.Format(
-                        "{0} failed to round trip using source '{1}' and '{2}' zones. wrong result {3}",
-                        dt1,
-                        sourceTimeZoneId,
-                        destinationTimeZoneId,
-                        dt3
-                    )
+                    string
+                        .Format(
+                            "{0} failed to round trip using source '{1}' and '{2}' zones. wrong result {3}",
+                            dt1,
+                            sourceTimeZoneId,
+                            destinationTimeZoneId,
+                            dt3
+                        )
                 );
             }
 
@@ -5491,12 +5455,13 @@ namespace System.Tests
             {
                 Assert.True(
                     dt3.Kind == DateTimeKind.Utc,
-                    string.Format(
-                        "failed to get the right DT Kind after round trip {0} using source TZ {1} and dest TZi {2}",
-                        dt1,
-                        sourceTimeZoneId,
-                        destinationTimeZoneId
-                    )
+                    string
+                        .Format(
+                            "failed to get the right DT Kind after round trip {0} using source TZ {1} and dest TZi {2}",
+                            dt1,
+                            sourceTimeZoneId,
+                            destinationTimeZoneId
+                        )
                 );
             }
         }
@@ -5600,10 +5565,11 @@ namespace System.Tests
             else
             {
                 throw new NotSupportedException(
-                    string.Format(
-                        "The timeZoneId '{0}' is not supported by GetEarlyTimesOffset.",
-                        timeZoneId
-                    )
+                    string
+                        .Format(
+                            "The timeZoneId '{0}' is not supported by GetEarlyTimesOffset.",
+                            timeZoneId
+                        )
                 );
             }
         }
@@ -5622,25 +5588,18 @@ namespace System.Tests
 
         private static TimeZoneInfo CreateCustomLondonTimeZone()
         {
-            TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                new DateTime(1, 1, 1, 1, 0, 0),
-                3,
-                5,
-                DayOfWeek.Sunday
-            );
-            TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                new DateTime(1, 1, 1, 2, 0, 0),
-                10,
-                5,
-                DayOfWeek.Sunday
-            );
-            TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                DateTime.MinValue.Date,
-                DateTime.MaxValue.Date,
-                new TimeSpan(1, 0, 0),
-                start,
-                end
-            );
+            TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime
+                .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
+            TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime
+                .CreateFloatingDateRule(new DateTime(1, 1, 1, 2, 0, 0), 10, 5, DayOfWeek.Sunday);
+            TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
+                .CreateAdjustmentRule(
+                    DateTime.MinValue.Date,
+                    DateTime.MaxValue.Date,
+                    new TimeSpan(1, 0, 0),
+                    start,
+                    end
+                );
             return TimeZoneInfo.CreateCustomTimeZone(
                 "Europe/London",
                 new TimeSpan(0),

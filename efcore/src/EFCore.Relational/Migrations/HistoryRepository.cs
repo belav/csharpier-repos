@@ -85,10 +85,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     The name of the column that holds the Migration identifier.
         /// </summary>
         protected virtual string MigrationIdColumnName =>
-            _migrationIdColumnName ??= EnsureModel()
-                .FindEntityType(typeof(HistoryRow))!.FindProperty(
-                nameof(HistoryRow.MigrationId)
-            )!.GetColumnBaseName();
+            _migrationIdColumnName ??= EnsureModel().FindEntityType(typeof(HistoryRow))!
+                .FindProperty(nameof(HistoryRow.MigrationId))!
+                .GetColumnBaseName();
 
         private IModel EnsureModel()
         {
@@ -115,11 +114,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     }
                 );
 
-                _model = Dependencies.ModelRuntimeInitializer.Initialize(
-                    modelBuilder.FinalizeModel(),
-                    designTime: true,
-                    validationLogger: null
-                );
+                _model = Dependencies.ModelRuntimeInitializer
+                    .Initialize(
+                        modelBuilder.FinalizeModel(),
+                        designTime: true,
+                        validationLogger: null
+                    );
             }
 
             return _model;
@@ -129,10 +129,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     The name of the column that contains the Entity Framework product version.
         /// </summary>
         protected virtual string ProductVersionColumnName =>
-            _productVersionColumnName ??= EnsureModel()
-                .FindEntityType(typeof(HistoryRow))!.FindProperty(
-                nameof(HistoryRow.ProductVersion)
-            )!.GetColumnBaseName();
+            _productVersionColumnName ??= EnsureModel().FindEntityType(typeof(HistoryRow))!
+                .FindProperty(nameof(HistoryRow.ProductVersion))!
+                .GetColumnBaseName();
 
         /// <summary>
         ///     Overridden by database providers to generate SQL that tests for existence of the history table.
@@ -146,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual bool Exists() =>
             Dependencies.DatabaseCreator.Exists()
             && InterpretExistsResult(
-                Dependencies.RawSqlCommandBuilder.Build(ExistsSql)
+                Dependencies.RawSqlCommandBuilder
+                    .Build(ExistsSql)
                     .ExecuteScalar(
                         new RelationalCommandParameterObject(
                             Dependencies.Connection,
@@ -172,7 +172,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ) =>
             await Dependencies.DatabaseCreator.ExistsAsync(cancellationToken).ConfigureAwait(false)
             && InterpretExistsResult(
-                await Dependencies.RawSqlCommandBuilder.Build(ExistsSql)
+                await Dependencies.RawSqlCommandBuilder
+                    .Build(ExistsSql)
                     .ExecuteScalarAsync(
                         new RelationalCommandParameterObject(
                             Dependencies.Connection,
@@ -207,10 +208,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             var model = EnsureModel();
 
-            var operations = Dependencies.ModelDiffer.GetDifferences(
-                null,
-                model.GetRelationalModel()
-            );
+            var operations = Dependencies.ModelDiffer
+                .GetDifferences(null, model.GetRelationalModel());
             var commandList = Dependencies.MigrationsSqlGenerator.Generate(operations, model);
 
             return string.Concat(commandList.Select(c => c.CommandText));
@@ -288,15 +287,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 var command = Dependencies.RawSqlCommandBuilder.Build(GetAppliedMigrationsSql);
 
                 await using var reader = await command.ExecuteReaderAsync(
-                        new RelationalCommandParameterObject(
-                            Dependencies.Connection,
-                            null,
-                            null,
-                            Dependencies.CurrentContext.Context,
-                            Dependencies.CommandLogger
-                        ),
-                        cancellationToken
-                    )
+                    new RelationalCommandParameterObject(
+                        Dependencies.Connection,
+                        null,
+                        null,
+                        Dependencies.CurrentContext.Context,
+                        Dependencies.CommandLogger
+                    ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
                 {
@@ -316,7 +315,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     Generates SQL to query for the migrations that have been applied.
         /// </summary>
         protected virtual string GetAppliedMigrationsSql =>
-            new StringBuilder().Append("SELECT ")
+            new StringBuilder()
+                .Append("SELECT ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(MigrationIdColumnName))
                 .Append(", ")
                 .AppendLine(SqlGenerationHelper.DelimitIdentifier(ProductVersionColumnName))
@@ -338,7 +338,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
-            return new StringBuilder().Append("INSERT INTO ")
+            return new StringBuilder()
+                .Append("INSERT INTO ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
                 .Append(" (")
                 .Append(SqlGenerationHelper.DelimitIdentifier(MigrationIdColumnName))
@@ -365,7 +366,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
-            return new StringBuilder().Append("DELETE FROM ")
+            return new StringBuilder()
+                .Append("DELETE FROM ")
                 .AppendLine(SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
                 .Append("WHERE ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(MigrationIdColumnName))

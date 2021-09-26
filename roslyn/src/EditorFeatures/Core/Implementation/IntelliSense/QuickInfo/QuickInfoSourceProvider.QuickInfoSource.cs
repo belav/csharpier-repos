@@ -68,19 +68,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 try
                 {
                     using (
-                        Internal.Log.Logger.LogBlock(
-                            FunctionId.Get_QuickInfo_Async,
-                            cancellationToken
-                        )
+                        Internal.Log.Logger
+                            .LogBlock(FunctionId.Get_QuickInfo_Async, cancellationToken)
                     )
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
                         var item = await service.GetQuickInfoAsync(
-                                document,
-                                triggerPoint.Value,
-                                cancellationToken
-                            )
+                            document,
+                            triggerPoint.Value,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (item != null)
                         {
@@ -90,13 +88,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                                 SpanTrackingMode.EdgeInclusive
                             );
                             return await IntellisenseQuickInfoBuilder.BuildItemAsync(
-                                    trackingSpan,
-                                    item,
-                                    document,
-                                    _threadingContext,
-                                    _streamingPresenter,
-                                    cancellationToken
-                                )
+                                trackingSpan,
+                                item,
+                                document,
+                                _threadingContext,
+                                _streamingPresenter,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         }
 

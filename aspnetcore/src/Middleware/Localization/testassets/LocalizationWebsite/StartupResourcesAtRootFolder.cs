@@ -39,7 +39,8 @@ namespace LocalizationWebsite
             );
 
             var location =
-                typeof(LocalizationWebsite.StartupResourcesAtRootFolder).GetTypeInfo()
+                typeof(LocalizationWebsite.StartupResourcesAtRootFolder)
+                    .GetTypeInfo()
                     .Assembly.GetName().Name;
             var stringLocalizer = stringLocalizerFactory.Create("Test", location: location);
 

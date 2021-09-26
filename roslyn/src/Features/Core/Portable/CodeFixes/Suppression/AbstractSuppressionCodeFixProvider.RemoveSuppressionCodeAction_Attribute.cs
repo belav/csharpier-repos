@@ -60,9 +60,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     CancellationToken cancellationToken
                 )
                 {
-                    var attributeNode = await _attribute.ApplicationSyntaxReference.GetSyntaxAsync(
-                            cancellationToken
-                        )
+                    var attributeNode = await _attribute.ApplicationSyntaxReference
+                        .GetSyntaxAsync(cancellationToken)
                         .ConfigureAwait(false);
                     return Fixer.IsSingleAttributeInAttributeList(attributeNode)
                       ? attributeNode.Parent
@@ -82,9 +81,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     }
 
                     var editor = await DocumentEditor.CreateAsync(
-                            documentWithAttribute,
-                            cancellationToken
-                        )
+                        documentWithAttribute,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     editor.RemoveNode(attributeNode);
                     return editor.GetChangedDocument().Project.Solution;

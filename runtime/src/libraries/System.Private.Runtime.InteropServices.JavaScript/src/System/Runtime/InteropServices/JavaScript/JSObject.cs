@@ -27,11 +27,8 @@ namespace System.Runtime.InteropServices.JavaScript
 
         public JSObject() : this(Interop.Runtime.New<object>(), true)
         {
-            object result = Interop.Runtime.BindCoreObject(
-                JSHandle,
-                Int32Handle,
-                out int exception
-            );
+            object result = Interop.Runtime
+                .BindCoreObject(JSHandle, Int32Handle, out int exception);
             if (exception != 0)
                 throw new JSException(SR.Format(SR.JSObjectErrorBinding, result));
         }
@@ -72,12 +69,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </returns>
         public object Invoke(string method, params object?[] args)
         {
-            object res = Interop.Runtime.InvokeJSWithArgs(
-                JSHandle,
-                method,
-                args,
-                out int exception
-            );
+            object res = Interop.Runtime
+                .InvokeJSWithArgs(JSHandle, method, args, out int exception);
             if (exception != 0)
                 throw new JSException((string)res);
             return res;
@@ -107,11 +100,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </returns>
         public object GetObjectProperty(string name)
         {
-            object propertyValue = Interop.Runtime.GetObjectProperty(
-                JSHandle,
-                name,
-                out int exception
-            );
+            object propertyValue = Interop.Runtime
+                .GetObjectProperty(JSHandle, name, out int exception);
             if (exception != 0)
                 throw new JSException((string)propertyValue);
             return propertyValue;
@@ -135,14 +125,15 @@ namespace System.Runtime.InteropServices.JavaScript
             bool hasOwnProperty = false
         )
         {
-            object setPropResult = Interop.Runtime.SetObjectProperty(
-                JSHandle,
-                name,
-                value,
-                createIfNotExists,
-                hasOwnProperty,
-                out int exception
-            );
+            object setPropResult = Interop.Runtime
+                .SetObjectProperty(
+                    JSHandle,
+                    name,
+                    value,
+                    createIfNotExists,
+                    hasOwnProperty,
+                    out int exception
+                );
             if (exception != 0)
                 throw new JSException(
                     $"Error setting {name} on (js-obj js '{JSHandle}' .NET '{Int32Handle} raw '{RawObject != null})"

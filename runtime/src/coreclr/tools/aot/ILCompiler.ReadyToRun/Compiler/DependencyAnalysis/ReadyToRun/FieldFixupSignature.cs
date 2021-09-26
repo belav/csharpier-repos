@@ -29,7 +29,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _fieldDesc = fieldDesc;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            ((CompilerTypeSystemContext)fieldDesc.Context).EnsureLoadableType(fieldDesc.OwningType);
+            ((CompilerTypeSystemContext)fieldDesc.Context)
+                .EnsureLoadableType(fieldDesc.OwningType);
             Debug.Assert(factory.SignatureContext.GetTargetModule(_fieldDesc) != null);
         }
 
@@ -65,10 +66,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         MetadataType owningType = (MetadataType)_fieldDesc.OwningType;
                         baseOffset = (uint)owningType.FieldBaseOffset().AsInt;
                         if (
-                            factory.CompilationModuleGroup.NeedsAlignmentBetweenBaseTypeAndDerived(
-                                (MetadataType)baseType,
-                                owningType
-                            )
+                            factory.CompilationModuleGroup
+                                .NeedsAlignmentBetweenBaseTypeAndDerived(
+                                    (MetadataType)baseType,
+                                    owningType
+                                )
                         )
                         {
                             fieldOffset -= baseOffset;

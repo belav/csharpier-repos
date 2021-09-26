@@ -81,24 +81,20 @@ namespace Castle.DynamicProxy.Tests
         }
 
         public static IEnumerable<string> AsModoptOnParamTypeNames =>
-            CustomModifiersTestCase.customModifiers.Keys.Select(
-                typeName => typeName + "_AsModoptOnParamType"
-            );
+            CustomModifiersTestCase.customModifiers.Keys
+                .Select(typeName => typeName + "_AsModoptOnParamType");
 
         public static IEnumerable<string> AsModreqOnParamTypeNames =>
-            CustomModifiersTestCase.customModifiers.Keys.Select(
-                typeName => typeName + "_AsModreqOnParamType"
-            );
+            CustomModifiersTestCase.customModifiers.Keys
+                .Select(typeName => typeName + "_AsModreqOnParamType");
 
         public static IEnumerable<string> AsModoptOnReturnTypeNames =>
-            CustomModifiersTestCase.customModifiers.Keys.Select(
-                typeName => typeName + "_AsModoptOnReturnType"
-            );
+            CustomModifiersTestCase.customModifiers.Keys
+                .Select(typeName => typeName + "_AsModoptOnReturnType");
 
         public static IEnumerable<string> AsModreqOnReturnTypeNames =>
-            CustomModifiersTestCase.customModifiers.Keys.Select(
-                typeName => typeName + "_AsModreqOnReturnType"
-            );
+            CustomModifiersTestCase.customModifiers.Keys
+                .Select(typeName => typeName + "_AsModreqOnReturnType");
 
         public static IEnumerable<string> AllTypeNames =>
             AsModoptOnParamTypeNames.Concat(AsModreqOnParamTypeNames)
@@ -180,9 +176,8 @@ namespace Castle.DynamicProxy.Tests
             var typeNameWithoutSuffix = typeName.Substring(0, typeName.Length - suffix.Length);
             Assume.That(CustomModifiersTestCase.customModifiers.ContainsKey(typeNameWithoutSuffix));
 
-            var modopts = this.generatedTypes[typeName].GetMethod("Foo").GetParameters()[
-                0
-            ].GetOptionalCustomModifiers();
+            var modopts = this.generatedTypes[typeName].GetMethod("Foo").GetParameters()[0]
+                .GetOptionalCustomModifiers();
 
             CollectionAssert.AreEqual(
                 expected: CustomModifiersTestCase.customModifiers[typeNameWithoutSuffix].Reverse(),
@@ -220,9 +215,8 @@ namespace Castle.DynamicProxy.Tests
             var typeNameWithoutSuffix = typeName.Substring(0, typeName.Length - suffix.Length);
             Assume.That(CustomModifiersTestCase.customModifiers.ContainsKey(typeNameWithoutSuffix));
 
-            var modreqs = this.generatedTypes[typeName].GetMethod("Foo").GetParameters()[
-                0
-            ].GetRequiredCustomModifiers();
+            var modreqs = this.generatedTypes[typeName].GetMethod("Foo").GetParameters()[0]
+                .GetRequiredCustomModifiers();
             Assume.That(modreqs.Length > 0); // If this fails on mono/linux we have to revisit the commits and issues for IL method custom modifiers. https://github.com/castleproject/Core/issues/277
 
             CollectionAssert.AreEqual(
@@ -247,7 +241,8 @@ namespace Castle.DynamicProxy.Tests
             var typeNameWithoutSuffix = typeName.Substring(0, typeName.Length - suffix.Length);
             Assume.That(CustomModifiersTestCase.customModifiers.ContainsKey(typeNameWithoutSuffix));
 
-            var modopts = this.generatedTypes[typeName].GetMethod("Foo")
+            var modopts = this.generatedTypes[typeName]
+                .GetMethod("Foo")
                 .ReturnParameter.GetOptionalCustomModifiers();
             Assume.That(modopts.Length > 0); // If this fails on mono/linux we have to revisit the commits and issues for IL method custom modifiers. https://github.com/castleproject/Core/issues/277
 
@@ -273,7 +268,8 @@ namespace Castle.DynamicProxy.Tests
             var typeNameWithoutSuffix = typeName.Substring(0, typeName.Length - suffix.Length);
             Assume.That(CustomModifiersTestCase.customModifiers.ContainsKey(typeNameWithoutSuffix));
 
-            var modreqs = this.generatedTypes[typeName].GetMethod("Foo")
+            var modreqs = this.generatedTypes[typeName]
+                .GetMethod("Foo")
                 .ReturnParameter.GetRequiredCustomModifiers();
             Assume.That(modreqs.Length > 0); // If this fails on mono/linux we have to revisit the commits and issues for IL method custom modifiers. https://github.com/castleproject/Core/issues/277
 

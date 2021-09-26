@@ -119,11 +119,8 @@ namespace Microsoft.AspNetCore.Components.WebView
             {
                 return Dispatcher.InvokeAsync(
                     () =>
-                        _currentPageContext.Renderer.AddRootComponentAsync(
-                            componentType,
-                            selector,
-                            parameters
-                        )
+                        _currentPageContext.Renderer
+                            .AddRootComponentAsync(componentType, selector, parameters)
                 );
             }
             else
@@ -238,11 +235,12 @@ namespace Microsoft.AspNetCore.Components.WebView
             // Add any root components that were registered before the page attached
             foreach (var (selector, rootComponent) in _rootComponentsBySelector)
             {
-                await _currentPageContext.Renderer.AddRootComponentAsync(
-                    rootComponent.ComponentType,
-                    selector,
-                    rootComponent.Parameters
-                );
+                await _currentPageContext.Renderer
+                    .AddRootComponentAsync(
+                        rootComponent.ComponentType,
+                        selector,
+                        rootComponent.Parameters
+                    );
             }
         }
 

@@ -106,22 +106,17 @@ namespace System.Web.Razor.Test.Generator
             }
 
             string source = TestFile.Create(
-                    String.Format(
-                        "CodeGenerator.{1}.Source.{0}.{2}",
-                        name,
-                        LanguageName,
-                        FileExtension
-                    )
-                )
+                String.Format("CodeGenerator.{1}.Source.{0}.{2}", name, LanguageName, FileExtension)
+            )
                 .ReadAllText();
             string expectedOutput = TestFile.Create(
-                    String.Format(
-                        "CodeGenerator.{1}.Output.{0}.{2}",
-                        baselineName,
-                        LanguageName,
-                        BaselineExtension
-                    )
+                String.Format(
+                    "CodeGenerator.{1}.Output.{0}.{2}",
+                    baselineName,
+                    LanguageName,
+                    BaselineExtension
                 )
+            )
                 .ReadAllText();
 
             // Set up the host and engine
@@ -238,7 +233,8 @@ namespace System.Web.Razor.Test.Generator
 
                     Assert.Equal(
                         expectedDesignTimePragmas.ToArray(),
-                        results.DesignTimeLineMappings.OrderBy(p => p.Key)
+                        results.DesignTimeLineMappings
+                            .OrderBy(p => p.Key)
                             .Select(p => p.Value)
                             .ToArray()
                     );

@@ -92,10 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
             if (accessControlMethod != null)
             {
                 httpContext.Request.Headers.Add("Origin", StringValues.Empty);
-                httpContext.Request.Headers.Add(
-                    "Access-Control-Request-Method",
-                    accessControlMethod
-                );
+                httpContext.Request.Headers
+                    .Add("Access-Control-Request-Method", accessControlMethod);
             }
 
             var routeContext = new RouteContext(httpContext);

@@ -21,7 +21,8 @@ namespace System.IO.Pipes.Tests
                 PipeStreamConformanceTests.GetUniquePipeName(),
                 PipeDirection.InOut,
                 PipeOptions.CurrentUserOnly
-            ).Dispose();
+            )
+                .Dispose();
         }
 
         [Fact]
@@ -34,7 +35,8 @@ namespace System.IO.Pipes.Tests
                 2,
                 PipeTransmissionMode.Byte,
                 PipeOptions.CurrentUserOnly
-            ).Dispose();
+            )
+                .Dispose();
         }
 
         [Fact]

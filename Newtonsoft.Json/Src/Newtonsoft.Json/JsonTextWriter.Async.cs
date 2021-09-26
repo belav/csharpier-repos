@@ -201,21 +201,21 @@ namespace Newtonsoft.Json
             MiscellaneousUtils.Assert(_indentChars != null);
 
             await _writer.WriteAsync(
-                    _indentChars,
-                    0,
-                    newLineLen + Math.Min(currentIndentCount, IndentCharBufferSize),
-                    cancellationToken
-                )
+                _indentChars,
+                0,
+                newLineLen + Math.Min(currentIndentCount, IndentCharBufferSize),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             while ((currentIndentCount -= IndentCharBufferSize) > 0)
             {
                 await _writer.WriteAsync(
-                        _indentChars,
-                        newLineLen,
-                        Math.Min(currentIndentCount, IndentCharBufferSize),
-                        cancellationToken
-                    )
+                    _indentChars,
+                    newLineLen,
+                    Math.Min(currentIndentCount, IndentCharBufferSize),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -578,10 +578,10 @@ namespace Newtonsoft.Json
         )
         {
             await InternalWriteStartAsync(
-                    JsonToken.StartConstructor,
-                    JsonContainerType.Constructor,
-                    cancellationToken
-                )
+                JsonToken.StartConstructor,
+                JsonContainerType.Constructor,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             await _writer.WriteAsync("new ", cancellationToken).ConfigureAwait(false);
@@ -861,9 +861,9 @@ namespace Newtonsoft.Json
             {
                 await _writer.WriteAsync(_quoteChar).ConfigureAwait(false);
                 await _writer.WriteAsync(
-                        value.ToString(DateFormatString, Culture),
-                        cancellationToken
-                    )
+                    value.ToString(DateFormatString, Culture),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 await _writer.WriteAsync(_quoteChar).ConfigureAwait(false);
             }
@@ -930,9 +930,9 @@ namespace Newtonsoft.Json
             {
                 await _writer.WriteAsync(_quoteChar).ConfigureAwait(false);
                 await _writer.WriteAsync(
-                        value.ToString(DateFormatString, Culture),
-                        cancellationToken
-                    )
+                    value.ToString(DateFormatString, Culture),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 await _writer.WriteAsync(_quoteChar).ConfigureAwait(false);
             }
@@ -1438,7 +1438,8 @@ namespace Newtonsoft.Json
                 value == null
                     ? _writer.WriteAsync(JsonConvert.Null, cancellationToken)
                     : WriteEscapedStringAsync(value, true, cancellationToken)
-            ).ConfigureAwait(false);
+            )
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1465,9 +1466,9 @@ namespace Newtonsoft.Json
                 .ConfigureAwait(false);
             await _writer.WriteAsync(_quoteChar, cancellationToken).ConfigureAwait(false);
             await _writer.WriteAsync(
-                    value.ToString(null, CultureInfo.InvariantCulture),
-                    cancellationToken
-                )
+                value.ToString(null, CultureInfo.InvariantCulture),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             await _writer.WriteAsync(_quoteChar, cancellationToken).ConfigureAwait(false);
         }

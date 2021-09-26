@@ -175,17 +175,13 @@ namespace System.Web.Http.Validation
             List<string> log = new List<string>();
             LoggingValidatableObject model = new LoggingValidatableObject(log);
             ModelMetadata modelMetadata = GetModelMetadata(model);
-            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
-                () => model,
-                model.GetType(),
-                "ValidStringProperty"
-            );
+            ModelMetadata childMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForProperty(() => model, model.GetType(), "ValidStringProperty");
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey");
             node.Validating += (sender, e) => log.Add("In OnValidating()");
             node.Validated += (sender, e) => log.Add("In OnValidated()");
-            node.ChildNodes.Add(
-                new ModelValidationNode(childMetadata, "theKey.ValidStringProperty")
-            );
+            node.ChildNodes
+                .Add(new ModelValidationNode(childMetadata, "theKey.ValidStringProperty"));
 
             // Act
             node.Validate(ContextUtil.CreateActionContext());
@@ -212,15 +208,11 @@ namespace System.Web.Http.Validation
             List<string> log = new List<string>();
             LoggingValidatableObject model = new LoggingValidatableObject(log);
             ModelMetadata modelMetadata = GetModelMetadata(model);
-            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
-                () => model,
-                model.GetType(),
-                "InvalidStringProperty"
-            );
+            ModelMetadata childMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForProperty(() => model, model.GetType(), "InvalidStringProperty");
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey");
-            node.ChildNodes.Add(
-                new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty")
-            );
+            node.ChildNodes
+                .Add(new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty"));
             node.Validating += (sender, e) => log.Add("In OnValidating()");
             node.Validated += (sender, e) => log.Add("In OnValidated()");
             HttpActionContext context = ContextUtil.CreateActionContext();
@@ -346,10 +338,8 @@ namespace System.Web.Http.Validation
 
         private static ModelMetadata GetModelMetadata(object o)
         {
-            return new DataAnnotationsModelMetadataProvider().GetMetadataForType(
-                () => o,
-                o.GetType()
-            );
+            return new DataAnnotationsModelMetadataProvider()
+                .GetMetadataForType(() => o, o.GetType());
         }
 
         private sealed class LoggingValidatableObject : IValidatableObject

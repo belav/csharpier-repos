@@ -216,13 +216,15 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     PrepareConfig(contentRoot, port);
 
                     var parameters = string.IsNullOrEmpty(DeploymentParameters.ServerConfigLocation)
-                        ? string.Format(
+                        ? string
+                          .Format(
                               CultureInfo.InvariantCulture,
                               "/port:{0} /path:\"{1}\" /trace:error /systray:false",
                               uri.Port,
                               contentRoot
                           )
-                        : string.Format(
+                        : string
+                          .Format(
                               CultureInfo.InvariantCulture,
                               "/site:{0} /config:{1} /trace:error /systray:false",
                               DeploymentParameters.SiteName,
@@ -259,11 +261,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     process.OutputDataReceived += (sender, dataArgs) =>
                     {
                         if (
-                            string.Equals(
-                                dataArgs.Data,
-                                UnableToStartIISExpressMessage,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    dataArgs.Data,
+                                    UnableToStartIISExpressMessage,
+                                    StringComparison.Ordinal
+                                )
                         )
                         {
                             // We completely failed to start and we don't really know why
@@ -272,21 +275,23 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                             );
                         }
                         else if (
-                            string.Equals(
-                                dataArgs.Data,
-                                FailedToInitializeBindingsMessage,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    dataArgs.Data,
+                                    FailedToInitializeBindingsMessage,
+                                    StringComparison.Ordinal
+                                )
                         )
                         {
                             started.TrySetResult(false);
                         }
                         else if (
-                            string.Equals(
-                                dataArgs.Data,
-                                IISExpressRunningMessage,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    dataArgs.Data,
+                                    IISExpressRunningMessage,
+                                    StringComparison.Ordinal
+                                )
                         )
                         {
                             started.TrySetResult(true);
@@ -380,8 +385,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             if (string.IsNullOrEmpty(serverConfig))
             {
                 using (
-                    var stream = GetType()
-                        .Assembly.GetManifestResourceStream(
+                    var stream = GetType().Assembly
+                        .GetManifestResourceStream(
                             "Microsoft.AspNetCore.Server.IntegrationTesting.IIS.Http.config"
                         )
                 )
@@ -395,7 +400,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             // Pass on the applicationhost.config to iis express. With this don't need to pass in the /path /port switches as they are in the applicationHost.config
             // We take a copy of the original specified applicationHost.Config to prevent modifying the one in the repo.
 
-            config.Root.RequiredElement("location")
+            config.Root
+                .RequiredElement("location")
                 .RequiredElement("system.webServer")
                 .RequiredElement("modules")
                 .GetOrAdd("add", "name", AspNetCoreModuleV2ModuleName);
@@ -643,11 +649,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                             }
 
                             if (
-                                !string.Equals(
-                                    className.ToString(),
-                                    "IISEXPRESS",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                !string
+                                    .Equals(
+                                        className.ToString(),
+                                        "IISEXPRESS",
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                             {
                                 Logger.LogDebug(

@@ -48,68 +48,65 @@ namespace System.ComponentModel.Design.Tests
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             if (useBinaryFormatter)
             {
-                options.RuntimeConfigurationOptions.Add(
-                    enableBinaryFormatterInTypeConverter,
-                    bool.TrueString
-                );
+                options.RuntimeConfigurationOptions
+                    .Add(enableBinaryFormatterInTypeConverter, bool.TrueString);
             }
             RemoteExecutor.Invoke(
-                    (key) =>
+                (key) =>
+                {
+                    var context = new DesigntimeLicenseContext();
+                    context.SetSavedLicenseKey(typeof(int), key);
+                    var assembly = typeof(DesigntimeLicenseContextSerializer).Assembly;
+                    Type runtimeLicenseContextType = assembly.GetType(
+                        "System.ComponentModel.Design.RuntimeLicenseContext"
+                    );
+                    Assert.NotNull(runtimeLicenseContextType);
+                    object runtimeLicenseContext = Activator.CreateInstance(
+                        runtimeLicenseContextType
+                    );
+                    FieldInfo _savedLicenseKeys = runtimeLicenseContextType.GetField(
+                        "_savedLicenseKeys",
+                        BindingFlags.NonPublic | BindingFlags.Instance
+                    );
+                    Assert.NotNull(_savedLicenseKeys);
+                    _savedLicenseKeys.SetValue(runtimeLicenseContext, new Hashtable());
+                    Assert.NotNull(runtimeLicenseContext);
+
+                    Type designtimeLicenseContextSerializer = assembly.GetType(
+                        "System.ComponentModel.Design.DesigntimeLicenseContextSerializer"
+                    );
+                    Assert.NotNull(designtimeLicenseContextSerializer);
+                    MethodInfo deserializeMethod = designtimeLicenseContextSerializer.GetMethod(
+                        "Deserialize",
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    );
+
+                    using (MemoryStream stream = new MemoryStream())
                     {
-                        var context = new DesigntimeLicenseContext();
-                        context.SetSavedLicenseKey(typeof(int), key);
-                        var assembly = typeof(DesigntimeLicenseContextSerializer).Assembly;
-                        Type runtimeLicenseContextType = assembly.GetType(
-                            "System.ComponentModel.Design.RuntimeLicenseContext"
+                        long position = stream.Position;
+                        DesigntimeLicenseContextSerializer.Serialize(stream, key, context);
+                        stream.Seek(position, SeekOrigin.Begin);
+                        VerifyStreamFormatting(stream);
+                        deserializeMethod.Invoke(
+                            null,
+                            new object[] { stream, key, runtimeLicenseContext }
                         );
-                        Assert.NotNull(runtimeLicenseContextType);
-                        object runtimeLicenseContext = Activator.CreateInstance(
-                            runtimeLicenseContextType
-                        );
-                        FieldInfo _savedLicenseKeys = runtimeLicenseContextType.GetField(
-                            "_savedLicenseKeys",
-                            BindingFlags.NonPublic | BindingFlags.Instance
-                        );
-                        Assert.NotNull(_savedLicenseKeys);
-                        _savedLicenseKeys.SetValue(runtimeLicenseContext, new Hashtable());
-                        Assert.NotNull(runtimeLicenseContext);
-
-                        Type designtimeLicenseContextSerializer = assembly.GetType(
-                            "System.ComponentModel.Design.DesigntimeLicenseContextSerializer"
-                        );
-                        Assert.NotNull(designtimeLicenseContextSerializer);
-                        MethodInfo deserializeMethod = designtimeLicenseContextSerializer.GetMethod(
-                            "Deserialize",
-                            BindingFlags.NonPublic | BindingFlags.Static
-                        );
-
-                        using (MemoryStream stream = new MemoryStream())
-                        {
-                            long position = stream.Position;
-                            DesigntimeLicenseContextSerializer.Serialize(stream, key, context);
-                            stream.Seek(position, SeekOrigin.Begin);
-                            VerifyStreamFormatting(stream);
-                            deserializeMethod.Invoke(
-                                null,
-                                new object[] { stream, key, runtimeLicenseContext }
-                            );
-                            Hashtable savedLicenseKeys =
-                                runtimeLicenseContext.GetType()
-                                    .GetField(
-                                        "_savedLicenseKeys",
-                                        BindingFlags.NonPublic | BindingFlags.Instance
-                                    )
-                                    .GetValue(runtimeLicenseContext) as Hashtable;
-                            Assert.NotNull(savedLicenseKeys);
-                            var value = savedLicenseKeys[typeof(int).AssemblyQualifiedName];
-                            Assert.True(value is string);
-                            Assert.Equal(key, value);
-                        }
-                    },
-                    key,
-                    options
-                )
-                .Dispose();
+                        Hashtable savedLicenseKeys =
+                            runtimeLicenseContext.GetType()
+                                .GetField(
+                                    "_savedLicenseKeys",
+                                    BindingFlags.NonPublic | BindingFlags.Instance
+                                )
+                                .GetValue(runtimeLicenseContext) as Hashtable;
+                        Assert.NotNull(savedLicenseKeys);
+                        var value = savedLicenseKeys[typeof(int).AssemblyQualifiedName];
+                        Assert.True(value is string);
+                        Assert.Equal(key, value);
+                    }
+                },
+                key,
+                options
+            ).Dispose();
         }
 
         [ConditionalTheory(nameof(AreBinaryFormatterAndRemoteExecutorSupportedOnThisPlatform))]

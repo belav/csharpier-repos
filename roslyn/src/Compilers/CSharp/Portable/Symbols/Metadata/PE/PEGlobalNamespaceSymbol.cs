@@ -68,9 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 try
                 {
-                    groups = _moduleSymbol.Module.GroupTypesByNamespaceOrThrow(
-                        System.StringComparer.Ordinal
-                    );
+                    groups = _moduleSymbol.Module
+                        .GroupTypesByNamespaceOrThrow(System.StringComparer.Ordinal);
                 }
                 catch (BadImageFormatException)
                 {

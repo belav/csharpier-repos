@@ -28,9 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             get
             {
-                return ImmutableArray<Cci.ICustomModifier>.CastUp(
-                    _underlyingParameter.TypeWithAnnotations.CustomModifiers
-                );
+                return ImmutableArray<Cci.ICustomModifier>
+                    .CastUp(_underlyingParameter.TypeWithAnnotations.CustomModifiers);
             }
         }
 
@@ -43,19 +42,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             get
             {
-                return ImmutableArray<Cci.ICustomModifier>.CastUp(
-                    _underlyingParameter.RefCustomModifiers
-                );
+                return ImmutableArray<Cci.ICustomModifier>
+                    .CastUp(_underlyingParameter.RefCustomModifiers);
             }
         }
 
         Cci.ITypeReference Cci.IParameterTypeInformation.GetType(EmitContext context)
         {
-            return ((PEModuleBuilder)context.Module).Translate(
-                _underlyingParameter.Type,
-                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                diagnostics: context.Diagnostics
-            );
+            return ((PEModuleBuilder)context.Module)
+                .Translate(
+                    _underlyingParameter.Type,
+                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
+                    diagnostics: context.Diagnostics
+                );
         }
 
         ushort Cci.IParameterListEntry.Index

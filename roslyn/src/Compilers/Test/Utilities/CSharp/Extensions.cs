@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 from m in @this.Modules
                 from @ref in m.GetReferencedAssemblySymbols()
                 select @ref
-            ).ToArray();
+            )
+                .ToArray();
         }
 
         public static SourceAssemblySymbol SourceAssembly(this CSharpCompilation @this)
@@ -245,11 +246,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "Could not find member named '{0}'.  Available members:\r\n{1}",
-                        qualifiedName,
-                        string.Join("\r\n", lastContainer.GetMembers().Select(m => "\t\t" + m.Name))
-                    )
+                    string
+                        .Format(
+                            "Could not find member named '{0}'.  Available members:\r\n{1}",
+                            qualifiedName,
+                            string
+                                .Join(
+                                    "\r\n",
+                                    lastContainer.GetMembers().Select(m => "\t\t" + m.Name)
+                                )
+                        )
                 );
             }
             return members;
@@ -460,20 +466,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public static CSharpAttributeData GetAttribute(this Symbol @this, MethodSymbol m)
         {
-            return (
-                from a in @this.GetAttributes()
-                where a.AttributeConstructor.Equals(m)
-                select a
-            ).ToList().First();
+            return (from a in @this.GetAttributes() where a.AttributeConstructor.Equals(m) select a)
+                .ToList()
+                .First();
         }
 
         public static bool HasAttribute(this Symbol @this, MethodSymbol m)
         {
-            return (
-                    from a in @this.GetAttributes()
-                    where a.AttributeConstructor.Equals(m)
-                    select a
-                ).ToList().FirstOrDefault() != null;
+            return (from a in @this.GetAttributes() where a.AttributeConstructor.Equals(m) select a)
+                    .ToList()
+                    .FirstOrDefault() != null;
         }
 
         public static void VerifyValue<T>(
@@ -803,7 +805,8 @@ internal static class Extensions
     {
         return (
             (Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel.TypeParameterSymbol)symbol
-        ).UnderlyingTypeParameterSymbol.AllEffectiveInterfacesNoUseSiteDiagnostics.GetPublicSymbols();
+        ).UnderlyingTypeParameterSymbol.AllEffectiveInterfacesNoUseSiteDiagnostics
+            .GetPublicSymbols();
     }
 
     public static ITypeSymbol GetParameterType(this IMethodSymbol method, int index) =>
@@ -849,7 +852,8 @@ internal static class Extensions
         SpecialMember specialMember
     )
     {
-        return ((CSharpCompilation)compilation).GetSpecialTypeMember(specialMember)
+        return ((CSharpCompilation)compilation)
+            .GetSpecialTypeMember(specialMember)
             .GetPublicSymbol();
     }
 

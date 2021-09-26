@@ -22,19 +22,18 @@ namespace System.Web.Http.ApiExplorer
         {
             Assert.Equal(expectedResults.Count, apiDescriptions.Count);
             ApiDescription[] sortedDescriptions = apiDescriptions.OrderBy(
-                    description => description.ID
-                )
+                description => description.ID
+            )
                 .ToArray();
             object[] sortedExpectedResults = expectedResults.OrderBy(
-                    r =>
-                    {
-                        dynamic expectedResult = r;
-                        HttpMethod expectedHttpMethod = expectedResult.HttpMethod;
-                        string expectedRelativePath = expectedResult.RelativePath;
-                        return expectedHttpMethod + expectedRelativePath;
-                    }
-                )
-                .ToArray();
+                r =>
+                {
+                    dynamic expectedResult = r;
+                    HttpMethod expectedHttpMethod = expectedResult.HttpMethod;
+                    string expectedRelativePath = expectedResult.RelativePath;
+                    return expectedHttpMethod + expectedRelativePath;
+                }
+            ).ToArray();
 
             for (int i = 0; i < sortedDescriptions.Length; i++)
             {
@@ -72,11 +71,12 @@ namespace System.Web.Http.ApiExplorer
             >();
             foreach (Type controllerType in controllerTypes)
             {
-                string controllerName = controllerType.Name.Substring(
-                    0,
-                    controllerType.Name.Length
-                        - DefaultHttpControllerSelector.ControllerSuffix.Length
-                );
+                string controllerName = controllerType.Name
+                    .Substring(
+                        0,
+                        controllerType.Name.Length
+                            - DefaultHttpControllerSelector.ControllerSuffix.Length
+                    );
                 var controllerDescriptor = new HttpControllerDescriptor(
                     config,
                     controllerName,

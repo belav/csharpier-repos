@@ -73,10 +73,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 CancellationToken cancellationToken
             ) =>
                 await GetChangedDocumentAsync(
-                        includeStartTokenChange: true,
-                        includeEndTokenChange: true,
-                        cancellationToken: cancellationToken
-                    )
+                    includeStartTokenChange: true,
+                    includeEndTokenChange: true,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
             public async Task<Document> GetChangedDocumentAsync(
@@ -86,36 +86,35 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             )
             {
                 return await PragmaHelpers.GetChangeDocumentWithPragmaAdjustedAsync(
-                        _document,
-                        _diagnostic.Location.SourceSpan,
-                        _suppressionTargetInfo,
-                        (startToken, currentDiagnosticSpan) =>
-                        {
-                            return includeStartTokenChange
-                              ? PragmaHelpers.GetNewStartTokenWithAddedPragma(
-                                    startToken,
-                                    currentDiagnosticSpan,
-                                    _diagnostic,
-                                    Fixer,
-                                    FormatNode
-                                )
-                              : startToken;
-                        },
-                        (endToken, currentDiagnosticSpan) =>
-                        {
-                            return includeEndTokenChange
-                              ? PragmaHelpers.GetNewEndTokenWithAddedPragma(
-                                    endToken,
-                                    currentDiagnosticSpan,
-                                    _diagnostic,
-                                    Fixer,
-                                    FormatNode
-                                )
-                              : endToken;
-                        },
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+                    _document,
+                    _diagnostic.Location.SourceSpan,
+                    _suppressionTargetInfo,
+                    (startToken, currentDiagnosticSpan) =>
+                    {
+                        return includeStartTokenChange
+                          ? PragmaHelpers.GetNewStartTokenWithAddedPragma(
+                                startToken,
+                                currentDiagnosticSpan,
+                                _diagnostic,
+                                Fixer,
+                                FormatNode
+                            )
+                          : startToken;
+                    },
+                    (endToken, currentDiagnosticSpan) =>
+                    {
+                        return includeEndTokenChange
+                          ? PragmaHelpers.GetNewEndTokenWithAddedPragma(
+                                endToken,
+                                currentDiagnosticSpan,
+                                _diagnostic,
+                                Fixer,
+                                FormatNode
+                            )
+                          : endToken;
+                    },
+                    cancellationToken
+                ).ConfigureAwait(false);
             }
 
             public SyntaxToken StartToken_TestOnly => _suppressionTargetInfo.StartToken;

@@ -120,10 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     case StandardTableKeyNames2.TextInlines:
                         var inlines = new List<Inline> { new Run(" ") };
                         inlines.AddRange(
-                            DefinitionItem.DisplayParts.ToInlines(
-                                _presenter.ClassificationFormatMap,
-                                _presenter.TypeMap
-                            )
+                            DefinitionItem.DisplayParts
+                                .ToInlines(_presenter.ClassificationFormatMap, _presenter.TypeMap)
                         );
                         foreach (var inline in inlines)
                         {

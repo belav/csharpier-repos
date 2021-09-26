@@ -79,17 +79,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return null;
             }
 
-            var renameService =
-                document.Project.LanguageServices.GetService<IXamlTypeRenameService>();
+            var renameService = document.Project.LanguageServices
+                .GetService<IXamlTypeRenameService>();
             if (renameService == null)
             {
                 return null;
             }
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var offset = text.Lines.GetPosition(
-                ProtocolConversions.PositionToLinePosition(request.Position)
-            );
+            var offset = text.Lines
+                .GetPosition(ProtocolConversions.PositionToLinePosition(request.Position));
 
             var result = await renameService.GetTypeRenameAsync(document, offset, cancellationToken)
                 .ConfigureAwait(false);
@@ -102,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
             return new DocumentOnTypeRenameResponseItem
             {
-                Ranges = result.Ranges.Select(s => ProtocolConversions.TextSpanToRange(s, text))
+                Ranges = result.Ranges
+                    .Select(s => ProtocolConversions.TextSpanToRange(s, text))
                     .ToArray(),
                 WordPattern = result.WordPattern
             };

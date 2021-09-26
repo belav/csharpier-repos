@@ -39,9 +39,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             };
 
             CommandResult result = sharedState.CreateNativeHostCommand(
-                    args,
-                    sharedState.DotNet.BinPath
-                )
+                args,
+                sharedState.DotNet.BinPath
+            )
                 .Execute();
 
             string pathSuffix = Path.DirectorySeparatorChar.ToString();
@@ -169,9 +169,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             };
 
             CommandResult result = sharedState.CreateNativeHostCommand(
-                    args,
-                    sharedState.DotNet.BinPath
-                )
+                args,
+                sharedState.DotNet.BinPath
+            )
                 .Execute();
 
             result.Should()
@@ -198,7 +198,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     BaseDirectory,
                     Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"),
                     "mockRuntime"
-                ).AddMicrosoftNETCoreAppFrameworkMockCoreClr(NetCoreAppVersion).Build();
+                )
+                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr(NetCoreAppVersion)
+                    .Build();
 
                 HostFxrPath = Path.Combine(
                     DotNet.GreatestVersionHostFxrPath,

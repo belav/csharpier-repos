@@ -76,10 +76,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestMethodBody()
         {
-            MethodBase mbase = typeof(MethodBaseTests).GetMethod(
-                "MyOtherMethod",
-                BindingFlags.Static | BindingFlags.Public
-            );
+            MethodBase mbase = typeof(MethodBaseTests)
+                .GetMethod("MyOtherMethod", BindingFlags.Static | BindingFlags.Public);
             MethodBody mb = mbase.GetMethodBody();
             Assert.True(mb.InitLocals); // local variables are initialized
 #if DEBUG
@@ -145,10 +143,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Test_GetCurrentMethod_ConstructedGenericMethod()
         {
-            MethodInfo mi = typeof(MethodBaseTests).GetMethod(
-                nameof(MyFakeGenericMethod),
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            MethodInfo mi = typeof(MethodBaseTests)
+                .GetMethod(
+                    nameof(MyFakeGenericMethod),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                );
             MethodBase m = mi.MakeGenericMethod(typeof(byte));
 
             Assert.Equal(nameof(MyFakeGenericMethod), m.Name);
@@ -163,10 +162,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Test_GetCurrentMethod_GenericMethodDefinition()
         {
-            MethodBase m = typeof(MethodBaseTests).GetMethod(
-                nameof(MyFakeGenericMethod),
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            MethodBase m = typeof(MethodBaseTests)
+                .GetMethod(
+                    nameof(MyFakeGenericMethod),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                );
 
             Assert.Equal(nameof(MyFakeGenericMethod), m.Name);
             Assert.Equal(typeof(MethodBaseTests), m.ReflectedType);

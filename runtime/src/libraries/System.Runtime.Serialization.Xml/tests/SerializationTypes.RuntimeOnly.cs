@@ -2496,19 +2496,13 @@ public class TypeWithEnumerableInterfaceGetOnlyCollection
 }
 
 [CollectionDataContract]
-public class RecursiveCollection : List<RecursiveCollection2>
-{
-}
+public class RecursiveCollection : List<RecursiveCollection2> { }
 
 [CollectionDataContract]
-public class RecursiveCollection2 : List<RecursiveCollection3>
-{
-}
+public class RecursiveCollection2 : List<RecursiveCollection3> { }
 
 [CollectionDataContract]
-public class RecursiveCollection3 : List<RecursiveCollection>
-{
-}
+public class RecursiveCollection3 : List<RecursiveCollection> { }
 
 [DataContract]
 public class TypeWithListOfReferenceChildren
@@ -2570,9 +2564,7 @@ public class TypeWithNonDefaultNamcespace
 }
 
 [CollectionDataContract(Namespace = "CollectionNamespace")]
-public class CollectionOfTypeWithNonDefaultNamcespace : List<TypeWithNonDefaultNamcespace>
-{
-}
+public class CollectionOfTypeWithNonDefaultNamcespace : List<TypeWithNonDefaultNamcespace> { }
 
 #region Type for Xml_ConstructorWithXmlAttributeOverrides
 
@@ -3267,10 +3259,8 @@ public static class FragmentHelper
     )
     {
         EnsureWriterCanFragment(writer);
-        ((IFragmentCapableXmlDictionaryWriter)writer).StartFragment(
-            stream,
-            generateSelfContainedText
-        );
+        ((IFragmentCapableXmlDictionaryWriter)writer)
+            .StartFragment(stream, generateSelfContainedText);
     }
 
     public static void End(XmlDictionaryWriter writer)
@@ -3374,9 +3364,7 @@ public class SampleTextWriter : IXmlTextWriterInitializer
     }
 }
 
-public class MycodeGenerator : XmlSerializationGeneratedCode
-{
-}
+public class MycodeGenerator : XmlSerializationGeneratedCode { }
 
 public class SoapEncodedTestType1
 {
@@ -4300,15 +4288,11 @@ public class NetNativeTestData
 
     public Func<object> Instantiate { get; set; }
 }
-public abstract class Invalid_Class_Base_Without_DataContract
-{
-}
+public abstract class Invalid_Class_Base_Without_DataContract { }
 
 // Invalid because it is a derived [DataContract] class whose base class is not
 [DataContract]
-public class Invalid_Class_Derived_With_DataContract : Invalid_Class_Base_Without_DataContract
-{
-}
+public class Invalid_Class_Derived_With_DataContract : Invalid_Class_Base_Without_DataContract { }
 
 // Invalid because its [KnownType] is an invalid type
 [KnownType(typeof(Invalid_Class_No_Parameterless_Ctor))]
@@ -4406,9 +4390,7 @@ public class TypeWithCollectionAndDateTimeOffset
 [KnownType(typeof(ushort))]
 [KnownType(typeof(Uri))]
 [CollectionDataContract]
-public class TypeWithPrimitiveKnownTypes : List<object>
-{
-}
+public class TypeWithPrimitiveKnownTypes : List<object> { }
 
 public enum TestEnum
 {

@@ -175,17 +175,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 : indexerAccess.Indexer.GetOwnOrInheritedGetMethod();
             if (accessorForDefaultArguments is not null)
             {
-                var argumentsBuilder = ArrayBuilder<BoundExpression>.GetInstance(
-                    accessorForDefaultArguments.ParameterCount
-                );
+                var argumentsBuilder = ArrayBuilder<BoundExpression>
+                    .GetInstance(accessorForDefaultArguments.ParameterCount);
                 argumentsBuilder.AddRange(indexerAccess.Arguments);
 
                 ArrayBuilder<RefKind>? refKindsBuilderOpt;
                 if (!indexerAccess.ArgumentRefKindsOpt.IsDefaultOrEmpty)
                 {
-                    refKindsBuilderOpt = ArrayBuilder<RefKind>.GetInstance(
-                        accessorForDefaultArguments.ParameterCount
-                    );
+                    refKindsBuilderOpt = ArrayBuilder<RefKind>
+                        .GetInstance(accessorForDefaultArguments.ParameterCount);
                     refKindsBuilderOpt.AddRange(indexerAccess.ArgumentRefKindsOpt);
                 }
                 else
@@ -1668,10 +1666,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 UseSiteInfo<AssemblySymbol> useSiteInfo = accessor.GetUseSiteInfo();
                 if (
-                    !object.Equals(
-                        useSiteInfo.DiagnosticInfo,
-                        propertySymbol.GetUseSiteInfo().DiagnosticInfo
-                    )
+                    !object
+                        .Equals(
+                            useSiteInfo.DiagnosticInfo,
+                            propertySymbol.GetUseSiteInfo().DiagnosticInfo
+                        )
                 )
                 {
                     return diagnostics.Add(useSiteInfo, propertySyntax);

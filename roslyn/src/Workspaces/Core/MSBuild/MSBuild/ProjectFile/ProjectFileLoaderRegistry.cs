@@ -87,11 +87,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         loader = null;
                         _diagnosticReporter.Report(
                             mode,
-                            string.Format(
-                                WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported,
-                                projectFilePath,
-                                language
-                            )
+                            string
+                                .Format(
+                                    WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported,
+                                    projectFilePath,
+                                    language
+                                )
                         );
                         return false;
                     }
@@ -107,11 +108,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     {
                         _diagnosticReporter.Report(
                             mode,
-                            string.Format(
-                                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
-                                projectFilePath,
-                                Path.GetExtension(projectFilePath)
-                            )
+                            string
+                                .Format(
+                                    WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                                    projectFilePath,
+                                    Path.GetExtension(projectFilePath)
+                                )
                         );
                         return false;
                     }
@@ -131,11 +133,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         loader = null;
                         _diagnosticReporter.Report(
                             mode,
-                            string.Format(
-                                WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported,
-                                projectFilePath,
-                                language
-                            )
+                            string
+                                .Format(
+                                    WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported,
+                                    projectFilePath,
+                                    language
+                                )
                         );
                         return false;
                     }

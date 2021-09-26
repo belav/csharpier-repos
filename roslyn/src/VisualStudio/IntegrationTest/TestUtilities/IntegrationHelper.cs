@@ -491,10 +491,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 }
 
                 if (
-                    displayNameParts[0].StartsWith(
-                        "!VisualStudio.DTE",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    displayNameParts[0]
+                        .StartsWith("!VisualStudio.DTE", StringComparison.OrdinalIgnoreCase)
                     && displayNameProcessId == process.Id
                 )
                 {

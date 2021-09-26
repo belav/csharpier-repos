@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
                 host = E2ETestOptions.Instance.Sauce.HostName;
             }
 
-            return new HostBuilder().ConfigureWebHost(
+            return new HostBuilder()
+                .ConfigureWebHost(
                     webHostBuilder =>
                         webHostBuilder.UseKestrel()
                             .UseContentRoot(sampleSitePath)

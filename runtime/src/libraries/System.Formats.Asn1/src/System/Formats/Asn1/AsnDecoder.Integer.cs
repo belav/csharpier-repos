@@ -120,7 +120,8 @@ namespace System.Formats.Asn1
             {
                 byte fill = (contents[0] & 0x80) == 0 ? (byte)0 : (byte)0xFF;
                 // Fill the unused portions of tmp with positive or negative padding.
-                new Span<byte>(tmp, contents.Length, tmp.Length - contents.Length).Fill(fill);
+                new Span<byte>(tmp, contents.Length, tmp.Length - contents.Length)
+                    .Fill(fill);
                 contents.CopyTo(tmp);
                 // Convert to Little-Endian.
                 AsnWriter.Reverse(new Span<byte>(tmp, 0, contents.Length));

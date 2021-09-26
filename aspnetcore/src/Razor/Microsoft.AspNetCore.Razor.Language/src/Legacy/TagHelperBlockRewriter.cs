@@ -174,9 +174,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     || (
                         !isMinimized
                         && result.IsBoundNonStringAttribute
-                        && string.IsNullOrWhiteSpace(
-                            GetAttributeValueContent(result.RewrittenAttribute)
-                        )
+                        && string
+                            .IsNullOrWhiteSpace(GetAttributeValueContent(result.RewrittenAttribute))
                     )
                 )
                 {
@@ -713,8 +712,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     );
 
                     var expression = SyntaxFactory.CSharpExpressionLiteral(
-                            new SyntaxList<SyntaxToken>(node.Transition)
-                        )
+                        new SyntaxList<SyntaxToken>(node.Transition)
+                    )
                         .WithSpanContext(newContext);
 
                     return base.VisitCSharpExpressionLiteral(expression);
@@ -744,8 +743,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     );
 
                     var expression = SyntaxFactory.CSharpExpressionLiteral(
-                            new SyntaxList<SyntaxToken>(node.Transition.Transition)
-                        )
+                        new SyntaxList<SyntaxToken>(node.Transition.Transition)
+                    )
                         .WithSpanContext(newContext);
                     expression = (CSharpExpressionLiteralSyntax)VisitCSharpExpressionLiteral(
                         expression
@@ -792,8 +791,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     );
 
                     var expression = SyntaxFactory.CSharpExpressionLiteral(
-                            new SyntaxList<SyntaxToken>(node.Transition.Transition)
-                        )
+                        new SyntaxList<SyntaxToken>(node.Transition.Transition)
+                    )
                         .WithSpanContext(newContext);
                     expression = (CSharpExpressionLiteralSyntax)VisitCSharpExpressionLiteral(
                         expression
@@ -856,8 +855,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     );
 
                     var expression = SyntaxFactory.CSharpExpressionLiteral(
-                            new SyntaxList<SyntaxToken>(node.MetaCode)
-                        )
+                        new SyntaxList<SyntaxToken>(node.MetaCode)
+                    )
                         .WithSpanContext(newContext);
 
                     return VisitCSharpExpressionLiteral(expression);

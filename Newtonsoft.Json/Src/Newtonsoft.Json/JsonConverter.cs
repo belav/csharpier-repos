@@ -102,10 +102,8 @@ namespace Newtonsoft.Json
             if (!(value != null ? value is T : ReflectionUtils.IsNullable(typeof(T))))
             {
                 throw new JsonSerializationException(
-                    "Converter cannot write specified value to JSON. {0} is required.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        typeof(T)
-                    )
+                    "Converter cannot write specified value to JSON. {0} is required."
+                        .FormatWith(CultureInfo.InvariantCulture, typeof(T))
                 );
             }
             WriteJson(writer, (T?)value, serializer);
@@ -138,10 +136,8 @@ namespace Newtonsoft.Json
             if (!(existingIsNull || existingValue is T))
             {
                 throw new JsonSerializationException(
-                    "Converter cannot read JSON with the specified existing value. {0} is required.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        typeof(T)
-                    )
+                    "Converter cannot read JSON with the specified existing value. {0} is required."
+                        .FormatWith(CultureInfo.InvariantCulture, typeof(T))
                 );
             }
             return ReadJson(

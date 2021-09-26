@@ -181,9 +181,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 DiagnosticAnalyzer,
                 DiagnosticAnalysisResult
             >();
-            using var _ = PooledHashSet<DocumentId>.GetInstance(
-                out var existingDocumentsInStateSet
-            );
+            using var _ = PooledHashSet<DocumentId>
+                .GetInstance(out var existingDocumentsInStateSet);
             foreach (var stateSet in stateSets)
             {
                 var descriptors = DiagnosticAnalyzerInfoCache.GetDiagnosticDescriptors(

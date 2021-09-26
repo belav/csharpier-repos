@@ -19,11 +19,11 @@ namespace ServerComparison.FunctionalTests
 
         public static TestMatrix TestVariants =>
             TestMatrix.ForServers(
-                    ServerType.IISExpress,
-                    ServerType.Kestrel,
-                    ServerType.Nginx,
-                    ServerType.HttpSys
-                )
+                ServerType.IISExpress,
+                ServerType.Kestrel,
+                ServerType.Nginx,
+                ServerType.HttpSys
+            )
                 .WithTfms(Tfm.Default)
                 .WithApplicationTypes(ApplicationType.Portable)
                 .WithAllHostingModels()

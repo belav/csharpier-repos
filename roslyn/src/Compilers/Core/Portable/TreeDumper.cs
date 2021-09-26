@@ -197,10 +197,11 @@ namespace Microsoft.CodeAnalysis
             var seq = o as IEnumerable;
             if (seq != null)
             {
-                return string.Format(
-                    "{{{0}}}",
-                    string.Join(", ", seq.Cast<object>().Select(DumperString).ToArray())
-                );
+                return string
+                    .Format(
+                        "{{{0}}}",
+                        string.Join(", ", seq.Cast<object>().Select(DumperString).ToArray())
+                    );
             }
 
             var symbol = o as ISymbol;

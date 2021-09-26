@@ -356,9 +356,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class Customer
         {
-            public static readonly PropertyInfo IdProperty = typeof(Customer).GetProperty(
-                nameof(Id)
-            );
+            public static readonly PropertyInfo IdProperty = typeof(Customer)
+                .GetProperty(nameof(Id));
 
             public int Id { get; set; }
             public string Name { get; set; }
@@ -371,9 +370,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class Order
         {
-            public static readonly PropertyInfo CustomerIdProperty = typeof(Order).GetProperty(
-                "CustomerId"
-            );
+            public static readonly PropertyInfo CustomerIdProperty = typeof(Order)
+                .GetProperty("CustomerId");
 
             public int Id { get; set; }
             public int CustomerId { get; set; }

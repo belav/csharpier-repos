@@ -52,16 +52,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             symbol = foundSymbol ?? symbol;
 
             var references = await FindCallReferencesAsync(
-                    solution,
-                    symbol,
-                    documents,
-                    cancellationToken
-                )
+                solution,
+                symbol,
+                documents,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var directReference = references.Where(
-                    r => SymbolEquivalenceComparer.Instance.Equals(symbol, r.Definition)
-                )
+                r => SymbolEquivalenceComparer.Instance.Equals(symbol, r.Definition)
+            )
                 .FirstOrDefault();
 
             var indirectReferences = references.WhereAsArray(r => r != directReference);
@@ -83,9 +83,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             async Task AddReferencingSymbols(ReferencedSymbol reference, bool isDirect)
             {
-                var result = await reference.Locations.FindReferencingSymbolsAsync(
-                        cancellationToken
-                    )
+                var result = await reference.Locations
+                    .FindReferencingSymbolsAsync(cancellationToken)
                     .ConfigureAwait(false);
                 foreach (var (callingSymbol, locations) in result)
                 {
@@ -118,13 +117,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 {
                     var collector = new StreamingProgressCollector();
                     await FindReferencesAsync(
-                            symbol,
-                            solution,
-                            collector,
-                            documents,
-                            FindReferencesSearchOptions.Default,
-                            cancellationToken
-                        )
+                        symbol,
+                        solution,
+                        collector,
+                        documents,
+                        FindReferencesSearchOptions.Default,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     return collector.GetReferencedSymbols();
                 }

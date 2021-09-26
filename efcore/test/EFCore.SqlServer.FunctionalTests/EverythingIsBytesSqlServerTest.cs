@@ -218,7 +218,8 @@ UnicodeDataTypes.StringUnicode ---> [nullable varbinary] [MaxLength = -1]
             public override DateTime DefaultDateTime => new();
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .ConfigureWarnings(c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
@@ -238,12 +239,13 @@ UnicodeDataTypes.StringUnicode ---> [nullable varbinary] [MaxLength = -1]
             public override IServiceCollection AddProviderServices(
                 IServiceCollection serviceCollection
             ) =>
-                base.AddProviderServices(
-                    serviceCollection.AddSingleton<
-                        IRelationalTypeMappingSource,
-                        SqlServerBytesTypeMappingSource
-                    >()
-                );
+                base
+                    .AddProviderServices(
+                        serviceCollection.AddSingleton<
+                            IRelationalTypeMappingSource,
+                            SqlServerBytesTypeMappingSource
+                        >()
+                    );
         }
 
         public class SqlServerBytesTypeMappingSource : RelationalTypeMappingSource

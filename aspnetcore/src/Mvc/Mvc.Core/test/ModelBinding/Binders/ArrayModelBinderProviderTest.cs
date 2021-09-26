@@ -85,9 +85,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty(
-                    typeof(ModelWithIntArrayProperty),
-                    nameof(ModelWithIntArrayProperty.ArrayProperty)
-                )
+                typeof(ModelWithIntArrayProperty),
+                nameof(ModelWithIntArrayProperty.ArrayProperty)
+            )
                 .BindingDetails(bd => bd.IsReadOnly = true);
 
             var modelMetadata = metadataProvider.GetMetadataForProperty(

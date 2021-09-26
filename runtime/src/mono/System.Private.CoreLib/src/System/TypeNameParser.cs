@@ -319,9 +319,8 @@ namespace System
                 switch (name[pos])
                 {
                     case '+':
-                        res.Names.Add(
-                            UnescapeTypeName(name.Substring(name_start, pos - name_start))
-                        );
+                        res.Names
+                            .Add(UnescapeTypeName(name.Substring(name_start, pos - name_start)));
                         name_start = pos + 1;
                         break;
                     case '\\':

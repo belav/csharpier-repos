@@ -58,16 +58,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             }
 
             // Note that this ignores 'Standalone' property comparison.
-            return string.Equals(
-                    expected.Version,
-                    actual.Version,
-                    StringComparison.OrdinalIgnoreCase
-                )
-                && string.Equals(
-                    expected.Encoding,
-                    actual.Encoding,
-                    StringComparison.OrdinalIgnoreCase
-                );
+            return string
+                    .Equals(expected.Version, actual.Version, StringComparison.OrdinalIgnoreCase)
+                && string
+                    .Equals(expected.Encoding, actual.Encoding, StringComparison.OrdinalIgnoreCase);
         }
 
         private static XDocument SortAttributes(XDocument document)

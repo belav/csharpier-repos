@@ -53,15 +53,14 @@ namespace System.Threading.Tasks.Tests
 
             // Create one task that signals the MRE, and wait for it.
             Task.Factory.StartNew(
-                    delegate
-                    {
-                        mre.Set();
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    tm
-                )
-                .Wait();
+                delegate
+                {
+                    mre.Set();
+                },
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                tm
+            ).Wait();
 
             // Lastly, wait for the others to complete.
             Task.WaitAll(tasks);
@@ -90,10 +89,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "    > FAILED. Wrong exception thrown (expected TaskSchedulerException): {0}",
-                        e
-                    )
+                    string
+                        .Format(
+                            "    > FAILED. Wrong exception thrown (expected TaskSchedulerException): {0}",
+                            e
+                        )
                 );
             }
 
@@ -101,10 +101,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "    > FAILED. Task ended up in wrong status (expected Faulted): {0}",
-                        t1.Status
-                    )
+                    string
+                        .Format(
+                            "    > FAILED. Task ended up in wrong status (expected Faulted): {0}",
+                            t1.Status
+                        )
                 );
             }
 
@@ -123,10 +124,11 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "    > FAILED.  Wrong inner exception thrown from Wait(): {0}",
-                            ae.InnerExceptions[0].GetType().Name
-                        )
+                        string
+                            .Format(
+                                "    > FAILED.  Wrong inner exception thrown from Wait(): {0}",
+                                ae.InnerExceptions[0].GetType().Name
+                            )
                     );
                 }
             }
@@ -145,10 +147,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "    > FAILED. Wrong exception thrown (expected TaskSchedulerException): {0}",
-                        e
-                    )
+                    string
+                        .Format(
+                            "    > FAILED. Wrong exception thrown (expected TaskSchedulerException): {0}",
+                            e
+                        )
                 );
             }
 
@@ -156,10 +159,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "    > FAILED. Task ended up in wrong status (expected Faulted): {0}",
-                        t1.Status
-                    )
+                    string
+                        .Format(
+                            "    > FAILED. Task ended up in wrong status (expected Faulted): {0}",
+                            t1.Status
+                        )
                 );
             }
 
@@ -178,10 +182,11 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "    > FAILED.  Wrong inner exception thrown from Wait(): {0}",
-                            ae.InnerExceptions[0].GetType().Name
-                        )
+                        string
+                            .Format(
+                                "    > FAILED.  Wrong inner exception thrown from Wait(): {0}",
+                                ae.InnerExceptions[0].GetType().Name
+                            )
                     );
                 }
             }
@@ -192,12 +197,8 @@ namespace System.Threading.Tasks.Tests
             Debug.WriteLine("  -- testing Task.Factory.StartNew(buggy scheduler)");
             try
             {
-                Task t3 = Task.Factory.StartNew(
-                    delegate { },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    bts
-                );
+                Task t3 = Task.Factory
+                    .StartNew(delegate { }, CancellationToken.None, TaskCreationOptions.None, bts);
                 Assert.True(false, string.Format("    > FAILED.  No exception thrown."));
             }
             catch (TaskSchedulerException) { }
@@ -205,10 +206,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "    > FAILED. Wrong exception thrown (expected TaskSchedulerException): {0}",
-                        e
-                    )
+                    string
+                        .Format(
+                            "    > FAILED. Wrong exception thrown (expected TaskSchedulerException): {0}",
+                            e
+                        )
                 );
             }
 
@@ -238,10 +240,11 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "    > FAILED.  Wrong inner exception thrown from Wait() (sync): {0}",
-                            ae.InnerExceptions[0].GetType().Name
-                        )
+                        string
+                            .Format(
+                                "    > FAILED.  Wrong inner exception thrown from Wait() (sync): {0}",
+                                ae.InnerExceptions[0].GetType().Name
+                            )
                     );
                 }
             }
@@ -272,10 +275,11 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "    > FAILED.  Wrong inner exception thrown from Wait() (async): {0}",
-                            ae.InnerExceptions[0].GetType().Name
-                        )
+                        string
+                            .Format(
+                                "    > FAILED.  Wrong inner exception thrown from Wait() (async): {0}",
+                                ae.InnerExceptions[0].GetType().Name
+                            )
                     );
                 }
             }
@@ -413,7 +417,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public static void GetTaskSchedulersForDebugger_ReturnsDefaultScheduler()
         {
-            MethodInfo getTaskSchedulersForDebuggerMethod = typeof(TaskScheduler).GetTypeInfo()
+            MethodInfo getTaskSchedulersForDebuggerMethod = typeof(TaskScheduler)
+                .GetTypeInfo()
                 .GetDeclaredMethod("GetTaskSchedulersForDebugger");
             TaskScheduler[] foundSchedulers =
                 getTaskSchedulersForDebuggerMethod.Invoke(null, null) as TaskScheduler[];
@@ -424,7 +429,8 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(nameof(DebuggerIsAttached))]
         public static void GetTaskSchedulersForDebugger_DebuggerAttached_ReturnsAllSchedulers()
         {
-            MethodInfo getTaskSchedulersForDebuggerMethod = typeof(TaskScheduler).GetTypeInfo()
+            MethodInfo getTaskSchedulersForDebuggerMethod = typeof(TaskScheduler)
+                .GetTypeInfo()
                 .GetDeclaredMethod("GetTaskSchedulersForDebugger");
 
             var cesp = new ConcurrentExclusiveSchedulerPair();
@@ -445,15 +451,18 @@ namespace System.Threading.Tasks.Tests
 
             Task[] queuedTasks = (
                 from i in Enumerable.Range(0, 10)
-                select Task.Factory.StartNew(
-                    () => { },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    nonExecutingScheduler
-                )
-            ).ToArray();
+                select Task.Factory
+                    .StartNew(
+                        () => { },
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        nonExecutingScheduler
+                    )
+            )
+                .ToArray();
 
-            MethodInfo getScheduledTasksForDebuggerMethod = typeof(TaskScheduler).GetTypeInfo()
+            MethodInfo getScheduledTasksForDebuggerMethod = typeof(TaskScheduler)
+                .GetTypeInfo()
                 .GetDeclaredMethod("GetScheduledTasksForDebugger");
             Task[] foundTasks =
                 getScheduledTasksForDebuggerMethod.Invoke(nonExecutingScheduler, null) as Task[];

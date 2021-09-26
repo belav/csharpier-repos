@@ -36,9 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
     public abstract class CoreFormatterTestsBase
     {
         private static readonly TestComposition s_composition =
-            EditorTestCompositions.EditorFeatures.AddParts(
-                typeof(TestFormattingRuleFactoryServiceFactory)
-            );
+            EditorTestCompositions.EditorFeatures
+                .AddParts(typeof(TestFormattingRuleFactoryServiceFactory));
 
         private readonly ITestOutputHelper _output;
 
@@ -78,19 +77,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             var snapshot = workspace.Documents.First().GetTextBuffer().CurrentSnapshot;
             var bufferGraph = new Mock<IBufferGraph>(MockBehavior.Strict);
             bufferGraph.Setup(
-                    x =>
-                        x.MapUpToSnapshot(
-                            It.IsAny<SnapshotPoint>(),
-                            It.IsAny<PointTrackingMode>(),
-                            It.IsAny<PositionAffinity>(),
-                            It.IsAny<ITextSnapshot>()
-                        )
-                )
+                x =>
+                    x.MapUpToSnapshot(
+                        It.IsAny<SnapshotPoint>(),
+                        It.IsAny<PointTrackingMode>(),
+                        It.IsAny<PositionAffinity>(),
+                        It.IsAny<ITextSnapshot>()
+                    )
+            )
                 .Returns<SnapshotPoint, PointTrackingMode, PositionAffinity, ITextSnapshot>(
                     (p, m, a, s) =>
                     {
                         if (
-                            workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>()
+                            workspace.Services
+                                .GetService<IHostDependentFormattingRuleFactoryService>()
                                 is TestFormattingRuleFactoryServiceFactory.Factory factory
                             && factory.BaseIndentation != 0
                             && factory.TextSpan.Contains(p.Position)
@@ -148,9 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             // set up caret position
             var testDocument = workspace.Documents.Single();
             var view = testDocument.GetTextView();
-            view.Caret.MoveTo(
-                new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
-            );
+            view.Caret
+                .MoveTo(new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value));
 
             // get original buffer
             var buffer = workspace.Documents.First().GetTextBuffer();
@@ -170,11 +169,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             var caretPosition = view.Caret.Position.BufferPosition.Position;
             Assert.True(
                 expectedPosition == caretPosition,
-                string.Format(
-                    "Caret positioned incorrectly. Should have been {0}, but was {1}.",
-                    expectedPosition,
-                    caretPosition
-                )
+                string
+                    .Format(
+                        "Caret positioned incorrectly. Should have been {0}, but was {1}.",
+                        expectedPosition,
+                        caretPosition
+                    )
             );
         }
 
@@ -271,8 +271,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
                 buffer.CurrentSnapshot.GetText()
             );
 
-            var formattingRuleProvider =
-                workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleProvider = workspace.Services
+                .GetService<IHostDependentFormattingRuleFactoryService>();
             if (baseIndentation.HasValue)
             {
                 var factory =
@@ -292,9 +292,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
 
             var root = await syntaxTree.GetRootAsync();
             var rules = formattingRuleProvider.CreateRule(
-                    workspace.CurrentSolution.GetDocument(syntaxTree),
-                    0
-                )
+                workspace.CurrentSolution.GetDocument(syntaxTree),
+                0
+            )
                 .Concat(Formatter.GetDefaultFormattingRules(workspace, root.Language));
             AssertFormat(workspace, expected, options, rules, clonedBuffer, root, spans);
 
@@ -369,9 +369,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             // set up caret position
             var testDocument = workspace.Documents.Single();
             var view = testDocument.GetTextView();
-            view.Caret.MoveTo(
-                new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
-            );
+            view.Caret
+                .MoveTo(new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value));
 
             // get original buffer
             var buffer = workspace.Documents.First().GetTextBuffer();
@@ -409,11 +408,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             var caretPosition = view.Caret.Position.BufferPosition.Position;
             Assert.True(
                 expectedPosition == caretPosition,
-                string.Format(
-                    "Caret positioned incorrectly. Should have been {0}, but was {1}.",
-                    expectedPosition,
-                    caretPosition
-                )
+                string
+                    .Format(
+                        "Caret positioned incorrectly. Should have been {0}, but was {1}.",
+                        expectedPosition,
+                        caretPosition
+                    )
             );
         }
 

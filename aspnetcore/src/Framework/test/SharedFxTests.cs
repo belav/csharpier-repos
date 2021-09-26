@@ -29,9 +29,8 @@ namespace Microsoft.AspNetCore
             _output = output;
             _expectedTfm = TestData.GetDefaultNetCoreTargetFramework();
             _expectedRid = TestData.GetSharedFxRuntimeIdentifier();
-            _sharedFxRoot = string.IsNullOrEmpty(
-                Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH")
-            )
+            _sharedFxRoot = string
+            .IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH"))
                 ? Path.Combine(
                       TestData.GetTestDataValue("SharedFrameworkLayoutRoot"),
                       "shared",
@@ -39,9 +38,8 @@ namespace Microsoft.AspNetCore
                       TestData.GetTestDataValue("RuntimePackageVersion")
                   )
                 : Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH");
-            _expectedVersionFileName = string.IsNullOrEmpty(
-                Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH")
-            )
+            _expectedVersionFileName = string
+            .IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH"))
                 ? ".version"
                 : "Microsoft.AspNetCore.App.versions.txt";
         }
@@ -312,26 +310,26 @@ namespace Microsoft.AspNetCore
 
             _output.WriteLine("==== file contents ====");
             _output.WriteLine(
-                string.Join(
-                    '\n',
-                    runtimeListEntries.Select(i => i.Attribute("Path").Value).OrderBy(i => i)
-                )
+                string
+                    .Join(
+                        '\n',
+                        runtimeListEntries.Select(i => i.Attribute("Path").Value).OrderBy(i => i)
+                    )
             );
             _output.WriteLine("==== expected assemblies ====");
             _output.WriteLine(string.Join('\n', expectedAssemblies.OrderBy(i => i)));
 
             var actualAssemblies = runtimeListEntries.Select(
-                    i =>
-                    {
-                        var filePath = i.Attribute("Path").Value;
-                        var fileParts = filePath.Split('/');
-                        var fileName = fileParts[fileParts.Length - 1];
-                        return fileName.EndsWith(".dll", StringComparison.Ordinal)
-                          ? fileName.Substring(0, fileName.Length - 4)
-                          : fileName;
-                    }
-                )
-                .ToHashSet();
+                i =>
+                {
+                    var filePath = i.Attribute("Path").Value;
+                    var fileParts = filePath.Split('/');
+                    var fileName = fileParts[fileParts.Length - 1];
+                    return fileName.EndsWith(".dll", StringComparison.Ordinal)
+                      ? fileName.Substring(0, fileName.Length - 4)
+                      : fileName;
+                }
+            ).ToHashSet();
 
             var missing = expectedAssemblies.Except(actualAssemblies);
             var unexpected = actualAssemblies.Except(expectedAssemblies);
@@ -396,9 +394,8 @@ namespace Microsoft.AspNetCore
 
             ZipArchive archive = ZipFile.OpenRead(sharedFxPath);
 
-            var actualPaths = archive.Entries.Where(
-                    i => i.FullName.EndsWith(".dll", StringComparison.Ordinal)
-                )
+            var actualPaths = archive.Entries
+                .Where(i => i.FullName.EndsWith(".dll", StringComparison.Ordinal))
                 .Select(i => i.FullName)
                 .ToHashSet();
 

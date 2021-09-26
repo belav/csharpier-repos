@@ -54,9 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             foreach (var item in TriStateValues(value))
             {
-                selectTag.InnerHtml.AppendHtml(
-                    DefaultHtmlGenerator.GenerateOption(item, item.Text)
-                );
+                selectTag.InnerHtml
+                    .AppendHtml(DefaultHtmlGenerator.GenerateOption(item, item.Text));
             }
 
             return selectTag;
@@ -135,12 +134,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         metadata: itemMetadata,
                         model: item
                     );
-                    var fieldName = string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0}[{1}]",
-                        oldPrefix,
-                        index++
-                    );
+                    var fieldName = string
+                        .Format(CultureInfo.InvariantCulture, "{0}[{1}]", oldPrefix, index++);
 
                     var templateBuilder = new TemplateBuilder(
                         viewEngine,
@@ -169,11 +164,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             if (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == htmlHelper.ViewData.Model)
             {
-                htmlHelper.ViewData.TemplateInfo.FormattedModelValue = string.Format(
-                    CultureInfo.CurrentCulture,
-                    "{0:0.00}",
-                    htmlHelper.ViewData.Model
-                );
+                htmlHelper.ViewData.TemplateInfo.FormattedModelValue = string
+                    .Format(CultureInfo.CurrentCulture, "{0:0.00}", htmlHelper.ViewData.Model);
             }
 
             return StringTemplate(htmlHelper);

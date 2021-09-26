@@ -121,11 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            var boundAttribute = new ExecutableCodeBinder(
-                node,
-                this.ContainingMemberOrLambda,
-                this
-            ).BindAttribute(node, boundAttributeType, diagnostics);
+            var boundAttribute = new ExecutableCodeBinder(node, this.ContainingMemberOrLambda, this)
+                .BindAttribute(node, boundAttributeType, diagnostics);
 
             return GetAttribute(boundAttribute, diagnostics);
         }
@@ -223,8 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                boundConstructorArguments =
-                    analyzedArguments.ConstructorArguments.Arguments.SelectAsArray(
+                boundConstructorArguments = analyzedArguments.ConstructorArguments.Arguments
+                    .SelectAsArray(
                         static (arg, attributeArgumentBinder) =>
                             attributeArgumentBinder.BindToTypeForErrorRecovery(arg),
                         attributeArgumentBinder
@@ -510,8 +507,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         string argumentName = argument.NameEquals.Name.Identifier.ValueText!;
                         if (boundNamedArgumentsBuilder == null)
                         {
-                            boundNamedArgumentsBuilder =
-                                ArrayBuilder<BoundAssignmentOperator>.GetInstance();
+                            boundNamedArgumentsBuilder = ArrayBuilder<BoundAssignmentOperator>
+                                .GetInstance();
                             boundNamedArgumentsSet = new HashSet<string>();
                         }
                         else if (boundNamedArgumentsSet!.Contains(argumentName))
@@ -736,9 +733,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         break;
 
                     case SymbolKind.Property:
-                        var propertySymbol = (
-                            (PropertySymbol)namedArgumentNameSymbol
-                        ).GetLeastOverriddenProperty(this.ContainingType);
+                        var propertySymbol = ((PropertySymbol)namedArgumentNameSymbol)
+                            .GetLeastOverriddenProperty(this.ContainingType);
                         namedArgumentType = propertySymbol.Type;
                         invalidNamedArgument |= propertySymbol.IsReadOnly;
                         var getMethod = propertySymbol.GetMethod;
@@ -981,10 +977,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else if (
                         reorderedArgument.Kind == TypedConstantKind.Array
                         && parameter.Type.TypeKind == TypeKind.Array
-                        && !((TypeSymbol)reorderedArgument.TypeInternal!).Equals(
-                            parameter.Type,
-                            TypeCompareKind.AllIgnoreOptions
-                        )
+                        && !((TypeSymbol)reorderedArgument.TypeInternal!)
+                            .Equals(parameter.Type, TypeCompareKind.AllIgnoreOptions)
                     )
                     {
                         // NOTE: As in dev11, we don't allow array covariance conversions (presumably, we don't have a way to
@@ -1142,10 +1136,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 parameterType = Compilation.GetSpecialType(SpecialType.System_String);
                 kind = TypedConstantKind.Primitive;
-                defaultValue = syntax.SyntaxTree.GetDisplayPath(
-                    syntax.Name.Span,
-                    Compilation.Options.SourceReferenceResolver
-                );
+                defaultValue = syntax.SyntaxTree
+                    .GetDisplayPath(syntax.Name.Span, Compilation.Options.SourceReferenceResolver);
             }
             else if (
                 !IsEarlyAttributeBinder
@@ -1155,9 +1147,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 parameterType = Compilation.GetSpecialType(SpecialType.System_String);
                 kind = TypedConstantKind.Primitive;
-                defaultValue = (
-                    (ContextualAttributeBinder)this
-                ).AttributedMember.GetMemberCallerName();
+                defaultValue = ((ContextualAttributeBinder)this).AttributedMember
+                    .GetMemberCallerName();
             }
             else if (defaultConstantValue == ConstantValue.NotAvailable)
             {
@@ -1411,9 +1402,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (builder == null)
                         {
-                            builder = ArrayBuilder<
-                                KeyValuePair<string, TypedConstant>
-                            >.GetInstance();
+                            builder = ArrayBuilder<KeyValuePair<string, TypedConstant>>
+                                .GetInstance();
                         }
 
                         builder.Add(kv.Value);
@@ -1485,9 +1475,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Validate Statement 1) of the spec comment above.
 
                 RoslynDebug.Assert(node.Type is object);
-                var typedConstantKind = node.Type.GetAttributeParameterTypedConstantKind(
-                    _binder.Compilation
-                );
+                var typedConstantKind = node.Type
+                    .GetAttributeParameterTypedConstantKind(_binder.Compilation);
 
                 return VisitExpression(
                     node,

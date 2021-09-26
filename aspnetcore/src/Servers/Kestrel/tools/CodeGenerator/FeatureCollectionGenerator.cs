@@ -41,7 +41,7 @@ namespace {namespaceName}
                               {new string(' ', className.Length)}{feature}")}
     {{
         // Implemented features{Each(implementedFeatures, feature => $@"
-        internal protected {feature}? _current{feature};")}{(allFeatures.Where(f => !implementedFeatures.Contains(f)).FirstOrDefault() is not null ? @"
+        internal protected {feature}? _current{feature};")}{(allFeatures.Where(f => !implementedFeatures.Contains(f)) .FirstOrDefault() is not null ? @"
 
         // Other reserved feature slots" : "")}{Each(allFeatures.Where(f => !implementedFeatures.Contains(f)), feature => $@"
         internal protected {feature}? _current{feature};")}
@@ -135,7 +135,7 @@ namespace {namespaceName}
                     feature = ExtraFeatureGet(key);
                 }}
 
-                return feature{(string.IsNullOrEmpty(fallbackFeatures) ? "" : $" ?? {fallbackFeatures}[key]")};
+                return feature{(string .IsNullOrEmpty(fallbackFeatures) ? "" : $" ?? {fallbackFeatures}[key]")};
             }}
 
             set

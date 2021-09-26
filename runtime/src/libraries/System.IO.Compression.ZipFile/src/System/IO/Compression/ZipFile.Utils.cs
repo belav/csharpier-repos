@@ -81,8 +81,8 @@ namespace System.IO.Compression
         {
             using (
                 IEnumerator<string> enumerator = Directory.EnumerateFileSystemEntries(
-                        possiblyEmptyDir.FullName
-                    )
+                    possiblyEmptyDir.FullName
+                )
                     .GetEnumerator()
             )
                 return !enumerator.MoveNext();

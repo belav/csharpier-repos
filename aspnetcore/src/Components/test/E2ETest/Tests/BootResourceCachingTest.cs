@@ -189,8 +189,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
         private IReadOnlyCollection<string> GetAndClearRequestedPaths()
         {
-            var requestLog =
-                _serverFixture.Host.Services.GetRequiredService<BootResourceRequestLog>();
+            var requestLog = _serverFixture.Host.Services
+                .GetRequiredService<BootResourceRequestLog>();
             var result = requestLog.RequestPaths.ToList();
             requestLog.Clear();
             return result;

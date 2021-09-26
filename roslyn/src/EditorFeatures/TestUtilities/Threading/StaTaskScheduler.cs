@@ -28,10 +28,8 @@ namespace Roslyn.Test.Utilities
         static StaTaskScheduler()
         {
             // Overwrite xunit's app domain handling to not call AppDomain.Unload
-            var getDefaultDomain = typeof(AppDomain).GetMethod(
-                "GetDefaultDomain",
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            var getDefaultDomain = typeof(AppDomain)
+                .GetMethod("GetDefaultDomain", BindingFlags.NonPublic | BindingFlags.Static);
             var defaultDomain = (AppDomain)getDefaultDomain.Invoke(null, null);
             var hook = (XunitDisposeHook)defaultDomain.CreateInstanceFromAndUnwrap(
                 typeof(XunitDisposeHook).Assembly.CodeBase,

@@ -46,7 +46,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Concat()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .Concat((new int[] { 10, 11, 12 }).AsQueryable())
                 .Count();
             Assert.Equal(6, count);

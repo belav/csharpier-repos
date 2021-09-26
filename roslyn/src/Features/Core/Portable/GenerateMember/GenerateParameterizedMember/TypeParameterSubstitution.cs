@@ -115,17 +115,17 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 var projects = solution.Projects.ToImmutableHashSet();
 
                 var commonTypes = await GetDerivedAndImplementedTypesAsync(
-                        (INamedTypeSymbol)symbol.ConstraintTypes[0],
-                        projects
-                    )
+                    (INamedTypeSymbol)symbol.ConstraintTypes[0],
+                    projects
+                )
                     .ConfigureAwait(false);
 
                 for (var i = 1; i < symbol.ConstraintTypes.Length; i++)
                 {
                     var currentTypes = await GetDerivedAndImplementedTypesAsync(
-                            (INamedTypeSymbol)symbol.ConstraintTypes[i],
-                            projects
-                        )
+                        (INamedTypeSymbol)symbol.ConstraintTypes[i],
+                        projects
+                    )
                         .ConfigureAwait(false);
                     commonTypes.IntersectWith(currentTypes);
 
@@ -142,12 +142,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 // If the resultant intersecting type contains any Type arguments that could be replaced
                 // using the type constraints then recursively update the type until all constraints are appropriately handled
                 var substitutedType = await ReplaceTypeParametersBasedOnTypeConstraintsAsync(
-                        _project,
-                        commonType,
-                        _compilation,
-                        _availableTypeParameterNames,
-                        _cancellationToken
-                    )
+                    _project,
+                    commonType,
+                    _compilation,
+                    _availableTypeParameterNames,
+                    _cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var similarTypes = SymbolFinder.FindSimilarSymbols(
@@ -175,21 +175,21 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
                 var symbol = constraintType;
                 var derivedClasses = await SymbolFinder.FindDerivedClassesAsync(
-                        symbol,
-                        solution,
-                        transitive: true,
-                        projects,
-                        _cancellationToken
-                    )
+                    symbol,
+                    solution,
+                    transitive: true,
+                    projects,
+                    _cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var implementedTypes = await SymbolFinder.FindImplementationsAsync(
-                        symbol,
-                        solution,
-                        transitive: true,
-                        projects,
-                        _cancellationToken
-                    )
+                    symbol,
+                    solution,
+                    transitive: true,
+                    projects,
+                    _cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return derivedClasses.Concat(implementedTypes).ToSet();

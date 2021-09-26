@@ -79,33 +79,32 @@ namespace System.Text.Unicode
             string[] split = line.Split(';');
             Assert.Equal(15, split.Length);
 
-            CodePoint = (int)uint.Parse(
-                split[0],
-                NumberStyles.HexNumber,
-                CultureInfo.InvariantCulture
-            );
+            CodePoint = (int)uint
+                .Parse(split[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
             Name = split[1];
             GeneralCategory = UnicodeCategoryMap[split[2]];
 
             if (
-                !int.TryParse(
-                    split[6],
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture,
-                    out DecimalDigitValue
-                )
+                !int
+                    .TryParse(
+                        split[6],
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out DecimalDigitValue
+                    )
             )
             {
                 DecimalDigitValue = -1;
             }
 
             if (
-                !int.TryParse(
-                    split[7],
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture,
-                    out DigitValue
-                )
+                !int
+                    .TryParse(
+                        split[7],
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out DigitValue
+                    )
             )
             {
                 DigitValue = -1;
@@ -121,59 +120,61 @@ namespace System.Text.Unicode
 
                 if (indexOfSlash < 0)
                 {
-                    NumericValue = double.Parse(
-                        numericValue,
-                        NumberStyles.Integer,
-                        CultureInfo.InvariantCulture
-                    );
+                    NumericValue = double
+                        .Parse(numericValue, NumberStyles.Integer, CultureInfo.InvariantCulture);
                 }
                 else
                 {
-                    double numerator = double.Parse(
-                        numericValue.AsSpan(0, indexOfSlash),
-                        NumberStyles.Integer,
-                        CultureInfo.InvariantCulture
-                    );
-                    double denominator = double.Parse(
-                        numericValue.AsSpan(indexOfSlash + 1),
-                        NumberStyles.Integer,
-                        CultureInfo.InvariantCulture
-                    );
+                    double numerator = double
+                        .Parse(
+                            numericValue.AsSpan(0, indexOfSlash),
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture
+                        );
+                    double denominator = double
+                        .Parse(
+                            numericValue.AsSpan(indexOfSlash + 1),
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture
+                        );
                     NumericValue = numerator / denominator;
                 }
             }
 
             if (
-                !int.TryParse(
-                    split[12],
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture,
-                    out SimpleUppercaseMapping
-                )
+                !int
+                    .TryParse(
+                        split[12],
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out SimpleUppercaseMapping
+                    )
             )
             {
                 SimpleUppercaseMapping = CodePoint;
             }
 
             if (
-                !int.TryParse(
-                    split[13],
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture,
-                    out SimpleLowercaseMapping
-                )
+                !int
+                    .TryParse(
+                        split[13],
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out SimpleLowercaseMapping
+                    )
             )
             {
                 SimpleLowercaseMapping = CodePoint;
             }
 
             if (
-                !int.TryParse(
-                    split[14],
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture,
-                    out SimpleTitlecaseMapping
-                )
+                !int
+                    .TryParse(
+                        split[14],
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out SimpleTitlecaseMapping
+                    )
             )
             {
                 SimpleTitlecaseMapping = CodePoint;

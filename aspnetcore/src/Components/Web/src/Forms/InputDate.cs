@@ -43,11 +43,12 @@ namespace Microsoft.AspNetCore.Components.Forms
             builder.AddAttribute(
                 5,
                 "onchange",
-                EventCallback.Factory.CreateBinder<string?>(
-                    this,
-                    __value => CurrentValueAsString = __value,
-                    CurrentValueAsString
-                )
+                EventCallback.Factory
+                    .CreateBinder<string?>(
+                        this,
+                        __value => CurrentValueAsString = __value,
+                        CurrentValueAsString
+                    )
             );
             builder.AddElementReferenceCapture(6, __inputReference => Element = __inputReference);
             builder.CloseElement();
@@ -110,11 +111,12 @@ namespace Microsoft.AspNetCore.Components.Forms
             }
             else
             {
-                validationErrorMessage = string.Format(
-                    CultureInfo.InvariantCulture,
-                    ParsingErrorMessage,
-                    DisplayName ?? FieldIdentifier.FieldName
-                );
+                validationErrorMessage = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        ParsingErrorMessage,
+                        DisplayName ?? FieldIdentifier.FieldName
+                    );
                 return false;
             }
         }

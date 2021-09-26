@@ -299,7 +299,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         [Fact]
         public async Task ApplicationExceptionReExecute_AfterComplete_DoesntReRun()
         {
-            var builder = new HostBuilder().ConfigureServices(
+            var builder = new HostBuilder()
+                .ConfigureServices(
                     services =>
                         services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
                             .AddNegotiate(
@@ -511,7 +512,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             Action<NegotiateOptions> configureOptions = null
         )
         {
-            var builder = new HostBuilder().ConfigureServices(
+            var builder = new HostBuilder()
+                .ConfigureServices(
                     services =>
                         services.AddRouting()
                             .AddAuthentication(NegotiateDefaults.AuthenticationScheme)

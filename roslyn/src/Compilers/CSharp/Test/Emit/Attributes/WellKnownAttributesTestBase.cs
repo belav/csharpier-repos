@@ -80,9 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SourceAssemblySymbol sourceAssembly = assembly as SourceAssemblySymbol;
             if (sourceAssembly != null)
             {
-                return sourceAssembly.DeclaringCompilation.GlobalNamespace.GetMember<NamespaceSymbol>(
-                    "System"
-                );
+                return sourceAssembly.DeclaringCompilation.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System");
             }
             else
             {
@@ -99,9 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(expected, parameter.IsParams);
 
             var peParameter = (PEParameterSymbol)parameter;
-            var allAttributes = (
-                (PEModuleSymbol)parameter.ContainingModule
-            ).GetCustomAttributesForToken(peParameter.Handle);
+            var allAttributes = ((PEModuleSymbol)parameter.ContainingModule)
+                .GetCustomAttributesForToken(peParameter.Handle);
             var paramArrayAttributes = allAttributes.Where(
                 a => a.AttributeClass.ToTestDisplayString() == "System.ParamArrayAttribute"
             );

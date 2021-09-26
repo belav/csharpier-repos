@@ -45,9 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         var s = $@""hello"";
     }
 }",
-                parameters: new TestParameters().WithParseOptions(
-                    new CSharpParseOptions(LanguageVersion.CSharp7_3)
-                )
+                parameters: new TestParameters()
+                    .WithParseOptions(new CSharpParseOptions(LanguageVersion.CSharp7_3))
             );
         }
 
@@ -62,9 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         var s = @$""hello""[||];
     }
 }",
-                parameters: new TestParameters().WithParseOptions(
-                    new CSharpParseOptions(LanguageVersion.CSharp7_3)
-                )
+                parameters: new TestParameters()
+                    .WithParseOptions(new CSharpParseOptions(LanguageVersion.CSharp7_3))
             );
         }
 
@@ -86,9 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         var s = M($@""hello"");
     }
 }",
-                parameters: new TestParameters().WithParseOptions(
-                    new CSharpParseOptions(LanguageVersion.CSharp7_3)
-                )
+                parameters: new TestParameters()
+                    .WithParseOptions(new CSharpParseOptions(LanguageVersion.CSharp7_3))
             );
         }
 
@@ -112,9 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         var s2 = $@""hello"";
     }
 }",
-                parameters: new TestParameters().WithParseOptions(
-                    new CSharpParseOptions(LanguageVersion.CSharp7_3)
-                )
+                parameters: new TestParameters()
+                    .WithParseOptions(new CSharpParseOptions(LanguageVersion.CSharp7_3))
             );
         }
 
@@ -129,9 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         var s = $[||]@""hello"";
     }
 }",
-                parameters: new TestParameters().WithParseOptions(
-                    new CSharpParseOptions(LanguageVersion.CSharp7_3)
-                )
+                parameters: new TestParameters()
+                    .WithParseOptions(new CSharpParseOptions(LanguageVersion.CSharp7_3))
             );
         }
 
@@ -146,9 +141,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
         var s = @[||]$""hello"";
     }
 }",
-                parameters: new TestParameters().WithParseOptions(
-                    new CSharpParseOptions(LanguageVersion.CSharp8)
-                )
+                parameters: new TestParameters()
+                    .WithParseOptions(new CSharpParseOptions(LanguageVersion.CSharp8))
             );
         }
     }

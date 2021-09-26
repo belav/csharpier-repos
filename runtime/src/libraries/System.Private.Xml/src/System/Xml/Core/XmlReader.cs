@@ -415,15 +415,16 @@ namespace System.Xml
             {
                 try
                 {
-                    return XmlUntypedStringConverter.Instance.FromString(
-                        strContentValue,
-                        returnType,
-                        (
-                            namespaceResolver == null
-                                ? (this as IXmlNamespaceResolver)!
-                                : namespaceResolver
-                        )
-                    );
+                    return XmlUntypedStringConverter.Instance
+                        .FromString(
+                            strContentValue,
+                            returnType,
+                            (
+                                namespaceResolver == null
+                                    ? (this as IXmlNamespaceResolver)!
+                                    : namespaceResolver
+                            )
+                        );
                 }
                 catch (FormatException e)
                 {
@@ -645,11 +646,8 @@ namespace System.Xml
 
             return (returnType == typeof(string))
               ? string.Empty
-              : XmlUntypedStringConverter.Instance.FromString(
-                    string.Empty,
-                    returnType,
-                    namespaceResolver
-                );
+              : XmlUntypedStringConverter.Instance
+                .FromString(string.Empty, returnType, namespaceResolver);
         }
 
         // Checks local name and namespace of the current element and returns its content as the requested type.

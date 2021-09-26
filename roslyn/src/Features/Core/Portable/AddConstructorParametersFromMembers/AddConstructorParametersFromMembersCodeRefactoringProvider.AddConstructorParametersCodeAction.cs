@@ -57,8 +57,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 var workspace = _document.Project.Solution.Workspace;
                 var declarationService = _document.GetLanguageService<ISymbolDeclarationService>();
                 var constructor = declarationService.GetDeclarations(
-                        _constructorCandidate.Constructor
-                    )
+                    _constructorCandidate.Constructor
+                )
                     .Select(r => r.GetSyntax(cancellationToken))
                     .First();
 
@@ -69,10 +69,10 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                     workspace
                 );
                 newConstructor = CodeGenerator.AddStatements(
-                        newConstructor,
-                        CreateAssignStatements(_constructorCandidate),
-                        workspace
-                    )
+                    newConstructor,
+                    CreateAssignStatements(_constructorCandidate),
+                    workspace
+                )
                     .WithAdditionalAnnotations(Formatter.Annotation);
 
                 var syntaxTree = constructor.SyntaxTree;
@@ -107,9 +107,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
             {
                 get
                 {
-                    var parameters = _constructorCandidate.Constructor.Parameters.Select(
-                        p => p.ToDisplayString(SimpleFormat)
-                    );
+                    var parameters = _constructorCandidate.Constructor.Parameters
+                        .Select(p => p.ToDisplayString(SimpleFormat));
                     var parameterString = string.Join(", ", parameters);
                     var signature = $"{_containingType.Name}({parameterString})";
 

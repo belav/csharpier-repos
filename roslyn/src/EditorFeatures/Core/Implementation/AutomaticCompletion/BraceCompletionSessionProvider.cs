@@ -69,11 +69,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                     var cancellationToken = CancellationToken.None;
 
                     var editorSession = editorSessionFactory.TryGetServiceAsync(
-                            document,
-                            openingPoint,
-                            openingBrace,
-                            cancellationToken
-                        )
+                        document,
+                        openingPoint,
+                        openingBrace,
+                        cancellationToken
+                    )
                         .WaitAndGetResult(cancellationToken);
                     if (editorSession != null)
                     {

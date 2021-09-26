@@ -56,9 +56,9 @@ namespace System.Net.WebSockets
             try
             {
                 WebSocketReceiveResult r = await ReceiveAsync(
-                        new ArraySegment<byte>(array, 0, buffer.Length),
-                        cancellationToken
-                    )
+                    new ArraySegment<byte>(array, 0, buffer.Length),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 new Span<byte>(array, 0, r.Count).CopyTo(buffer.Span);
                 return new ValueWebSocketReceiveResult(r.Count, r.MessageType, r.EndOfMessage);
@@ -94,11 +94,11 @@ namespace System.Net.WebSockets
             {
                 buffer.Span.CopyTo(array);
                 await SendAsync(
-                        new ArraySegment<byte>(array, 0, buffer.Length),
-                        messageType,
-                        endOfMessage,
-                        cancellationToken
-                    )
+                    new ArraySegment<byte>(array, 0, buffer.Length),
+                    messageType,
+                    endOfMessage,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 

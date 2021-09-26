@@ -1119,13 +1119,14 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // Get out from under currently held locks.  This is to avoid
                 // invoking synchronous continuations off of _completionTask.Task
                 // while holding a lock.
-                Task.Factory.StartNew(
-                    state => ((SourceCore<TOutput>)state!).CompleteBlockOncePossible(),
-                    this,
-                    CancellationToken.None,
-                    Common.GetCreationOptionsForTask(),
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        state => ((SourceCore<TOutput>)state!).CompleteBlockOncePossible(),
+                        this,
+                        CancellationToken.None,
+                        Common.GetCreationOptionsForTask(),
+                        TaskScheduler.Default
+                    );
             }
         }
 

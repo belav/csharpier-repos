@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                 if (op is ApplyChangesOperation applyChanges)
                 {
                     var oldSolution = workspace.CurrentSolution;
-                    var newSolution = applyChanges.ChangedSolution.WithMergedLinkedFileChangesAsync(
+                    var newSolution = applyChanges.ChangedSolution
+                        .WithMergedLinkedFileChangesAsync(
                             oldSolution,
                             cancellationToken: cancellationToken
                         )
@@ -178,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                 var text = singleChangedDocument.GetTextSynchronously(cancellationToken);
 
                 using (
-                    workspace.Services.GetService<ISourceTextUndoService>()
+                    workspace.Services
+                        .GetService<ISourceTextUndoService>()
                         .RegisterUndoTransaction(text, title)
                 )
                 {
@@ -274,8 +276,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
             var changedAdditionalDocuments = projectChange.GetChangedAdditionalDocuments()
                 .ToImmutableArray();
             var changedDocuments = projectChange.GetChangedDocuments(
-                    onlyGetDocumentsWithTextChanges: true
-                )
+                onlyGetDocumentsWithTextChanges: true
+            )
                 .ToImmutableArray();
             var changedAnalyzerConfigDocuments = projectChange.GetChangedAnalyzerConfigDocuments()
                 .ToImmutableArray();
@@ -375,8 +377,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                     .FirstOrNull();
                 if (navigationTokenOpt.HasValue)
                 {
-                    var navigationService =
-                        workspace.Services.GetService<IDocumentNavigationService>();
+                    var navigationService = workspace.Services
+                        .GetService<IDocumentNavigationService>();
                     navigationService.TryNavigateToPosition(
                         workspace,
                         documentId,
@@ -405,8 +407,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                     )
                     {
                         var editorWorkspace = workspace;
-                        var navigationService =
-                            editorWorkspace.Services.GetService<IDocumentNavigationService>();
+                        var navigationService = editorWorkspace.Services
+                            .GetService<IDocumentNavigationService>();
                         if (
                             navigationService.TryNavigateToSpan(
                                 editorWorkspace,

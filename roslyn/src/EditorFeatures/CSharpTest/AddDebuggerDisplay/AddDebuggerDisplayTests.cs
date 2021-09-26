@@ -62,7 +62,8 @@ class C
                 LanguageVersion = LanguageVersion.Preview,
                 TestCode = code,
                 FixedCode = fixedCode,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -90,7 +91,8 @@ record C
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 TestCode = code,
                 FixedCode = fixedCode,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]

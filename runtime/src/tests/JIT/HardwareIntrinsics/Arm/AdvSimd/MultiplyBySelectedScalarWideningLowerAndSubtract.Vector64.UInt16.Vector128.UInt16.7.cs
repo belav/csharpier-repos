@@ -436,7 +436,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.MultiplyBySelectedScalarWideningLowerAndSubtract),
                     new Type[]
                     {
@@ -470,7 +471,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd).GetMethod(
+            var result = typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.MultiplyBySelectedScalarWideningLowerAndSubtract),
                     new Type[]
                     {
@@ -791,21 +793,18 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.MultiplyBySelectedScalarWideningLowerAndSubtract)}<UInt32>(Vector128<UInt32>, Vector64<UInt16>, Vector128<UInt16>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"secondOp: ({string.Join(", ", secondOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" thirdOp: ({string.Join(", ", thirdOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.MultiplyBySelectedScalarWideningLowerAndSubtract)}<UInt32>(Vector128<UInt32>, Vector64<UInt16>, Vector128<UInt16>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"secondOp: ({string.Join(", ", secondOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($" thirdOp: ({string.Join(", ", thirdOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

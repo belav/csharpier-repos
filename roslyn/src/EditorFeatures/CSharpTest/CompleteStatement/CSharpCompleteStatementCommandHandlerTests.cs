@@ -4129,7 +4129,8 @@ class C
         }
 
         internal override ICommandHandler GetCommandHandler(TestWorkspace workspace) =>
-            workspace.ExportProvider.GetExportedValues<ICommandHandler>()
+            workspace.ExportProvider
+                .GetExportedValues<ICommandHandler>()
                 .OfType<CompleteStatementCommandHandler>()
                 .Single();
 
@@ -4345,10 +4346,11 @@ public class ClassC
                 setOptionsOpt: workspace =>
                 {
                     workspace.SetOptions(
-                        workspace.Options.WithChangedOption(
-                            FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon,
-                            false
-                        )
+                        workspace.Options
+                            .WithChangedOption(
+                                FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon,
+                                false
+                            )
                     );
                 }
             );

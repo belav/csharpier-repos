@@ -537,11 +537,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // [Nullable] is compiler synthesized, comparing by name.
             var nullableAttribute = attributes.FirstOrDefault(
                 a =>
-                    string.Equals(
-                        a.GetType().FullName,
-                        NullableAttributeFullTypeName,
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            a.GetType().FullName,
+                            NullableAttributeFullTypeName,
+                            StringComparison.Ordinal
+                        )
             );
             if (nullableAttribute == null)
             {
@@ -620,11 +621,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             {
                 var nullableContextAttribute = attributes.FirstOrDefault(
                     a =>
-                        string.Equals(
-                            a.GetType().FullName,
-                            NullableContextAttributeFullName,
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(
+                                a.GetType().FullName,
+                                NullableContextAttributeFullName,
+                                StringComparison.Ordinal
+                            )
                 );
                 if (nullableContextAttribute != null)
                 {

@@ -40,9 +40,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 ? Path.Combine(sharedState.ValidInstallRoot, "dotnet")
                 : sharedState.InvalidInstallRoot;
             CommandResult result = Command.Create(
-                    sharedState.NativeHostPath,
-                    $"{GetHostFxrPath} {explicitLoad} {(useAssemblyPath ? sharedState.TestAssemblyPath : string.Empty)}"
-                )
+                sharedState.NativeHostPath,
+                $"{GetHostFxrPath} {explicitLoad} {(useAssemblyPath ? sharedState.TestAssemblyPath : string.Empty)}"
+            )
                 .EnableTracingAndCaptureOutputs()
                 .DotNetRoot(dotNetRoot)
                 .Execute();
@@ -88,9 +88,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 ? Path.Combine(sharedState.ValidInstallRoot, "dotnet")
                 : sharedState.InvalidInstallRoot;
             CommandResult result = Command.Create(
-                    sharedState.NativeHostPath,
-                    $"{GetHostFxrPath} {explicitLoad} {(useAssemblyPath ? sharedState.TestAssemblyPath : "nullptr")} {dotNetRoot}"
-                )
+                sharedState.NativeHostPath,
+                $"{GetHostFxrPath} {explicitLoad} {(useAssemblyPath ? sharedState.TestAssemblyPath : "nullptr")} {dotNetRoot}"
+            )
                 .EnableTracingAndCaptureOutputs()
                 .DotNetRoot(null)
                 .Execute();
@@ -165,9 +165,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 }
 
                 result = Command.Create(
-                        sharedState.NativeHostPath,
-                        $"{GetHostFxrPath} {explicitLoad} {(useAssemblyPath ? sharedState.TestAssemblyPath : string.Empty)}"
-                    )
+                    sharedState.NativeHostPath,
+                    $"{GetHostFxrPath} {explicitLoad} {(useAssemblyPath ? sharedState.TestAssemblyPath : string.Empty)}"
+                )
                     .EnableTracingAndCaptureOutputs()
                     .ApplyRegisteredInstallLocationOverride(registeredInstallLocationOverride)
                     .EnvironmentVariable( // Redirect the default install location to a test directory
@@ -221,15 +221,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 ? Path.Combine(sharedState.ValidInstallRoot, "dotnet")
                 : string.Empty;
             Command.Create(
-                    sharedState.NativeHostPath,
-                    $"{GetHostFxrPath} {explicitLoad} {assemblyPath} {dotNetRoot}"
-                )
+                sharedState.NativeHostPath,
+                $"{GetHostFxrPath} {explicitLoad} {assemblyPath} {dotNetRoot}"
+            )
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
                 .Should()
                 .Pass()
                 .And.HaveStdOutContaining(
-                    $"hostfxr_path: {(useDotNetRoot ? sharedState.HostFxrPath : hostFxrPath)}".ToLower()
+                    $"hostfxr_path: {(useDotNetRoot ? sharedState.HostFxrPath : hostFxrPath)}"
+                        .ToLower()
                 );
         }
 
@@ -237,9 +238,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         public void GetHostFxrPath_HostFxrAlreadyLoaded()
         {
             Command.Create(
-                    sharedState.NativeHostPath,
-                    $"{GetHostFxrPath} false {sharedState.TestAssemblyPath} nullptr {sharedState.ProductHostFxrPath}"
-                )
+                sharedState.NativeHostPath,
+                $"{GetHostFxrPath} false {sharedState.TestAssemblyPath} nullptr {sharedState.ProductHostFxrPath}"
+            )
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
                 .Should()
@@ -338,9 +339,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         public void TracingNotBufferedByDefault()
         {
             CommandResult result = Command.Create(
-                    sharedState.NativeHostPath,
-                    $"{GetHostFxrPath} false nullptr x"
-                )
+                sharedState.NativeHostPath,
+                $"{GetHostFxrPath} false nullptr x"
+            )
                 .EnvironmentVariable("COREHOST_TRACE", "1")
                 .EnvironmentVariable("COREHOST_TRACEFILE", "Tracing.out")
                 .MultilevelLookup(true)

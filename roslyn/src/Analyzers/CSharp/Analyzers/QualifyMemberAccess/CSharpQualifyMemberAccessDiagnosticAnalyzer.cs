@@ -61,9 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QualifyMemberAccess
                     containingSymbol.Kind == SymbolKind.Field
                     || containingSymbol.Kind == SymbolKind.Property
                 )
-                && containingSymbol.DeclaringSyntaxReferences.Select(
-                        declaringSyntaxReferences => declaringSyntaxReferences.GetSyntax()
-                    )
+                && containingSymbol.DeclaringSyntaxReferences
+                    .Select(declaringSyntaxReferences => declaringSyntaxReferences.GetSyntax())
                     .Any(
                         declaringSyntax =>
                             IsInPropertyInitialization(declaringSyntax, node)
@@ -83,8 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QualifyMemberAccess
             SyntaxNode node
         ) =>
             declarationSyntax.GetAncestorsOrThis(
-                    n => n.IsKind(SyntaxKind.FieldDeclaration) && n.Contains(node)
-                )
+                n => n.IsKind(SyntaxKind.FieldDeclaration) && n.Contains(node)
+            )
                 .Any();
 
         protected override Location GetLocation(IOperation operation) =>

@@ -562,7 +562,8 @@ namespace System.Linq
 
             // We just instantiate the forall operator and invoke it synchronously on this thread.
             // By the time it returns, the entire query has been executed and the actions run..
-            new ForAllOperator<TSource>(source, action).RunSynchronously();
+            new ForAllOperator<TSource>(source, action)
+                .RunSynchronously();
         }
 
         /*===================================================================================
@@ -1395,11 +1396,8 @@ namespace System.Linq
                 throw new ArgumentNullException(nameof(keySelector));
 
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
-                    keySelector,
-                    null,
-                    false
-                )
+                (QueryOperator<TSource>)source.OrderedEnumerable
+                    .CreateOrderedEnumerable<TKey>(keySelector, null, false)
             );
         }
         /// <summary>
@@ -1436,11 +1434,8 @@ namespace System.Linq
                 throw new ArgumentNullException(nameof(keySelector));
 
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
-                    keySelector,
-                    comparer,
-                    false
-                )
+                (QueryOperator<TSource>)source.OrderedEnumerable
+                    .CreateOrderedEnumerable<TKey>(keySelector, comparer, false)
             );
         }
         /// <summary>
@@ -1475,11 +1470,8 @@ namespace System.Linq
                 throw new ArgumentNullException(nameof(keySelector));
 
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
-                    keySelector,
-                    null,
-                    true
-                )
+                (QueryOperator<TSource>)source.OrderedEnumerable
+                    .CreateOrderedEnumerable<TKey>(keySelector, null, true)
             );
         }
         /// <summary>
@@ -1515,11 +1507,8 @@ namespace System.Linq
             if (keySelector == null)
                 throw new ArgumentNullException(nameof(keySelector));
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
-                    keySelector,
-                    comparer,
-                    true
-                )
+                (QueryOperator<TSource>)source.OrderedEnumerable
+                    .CreateOrderedEnumerable<TKey>(keySelector, comparer, true)
             );
         }
 
@@ -2159,7 +2148,8 @@ namespace System.Linq
                 resultSelector,
                 false,
                 QueryAggregationOptions.AssociativeCommutative
-            ).Aggregate();
+            )
+                .Aggregate();
         }
 
         /// <summary>
@@ -2230,7 +2220,8 @@ namespace System.Linq
                 resultSelector,
                 false,
                 QueryAggregationOptions.AssociativeCommutative
-            ).Aggregate();
+            )
+                .Aggregate();
         }
 
         //-----------------------------------------------------------------------------------
@@ -2308,9 +2299,8 @@ namespace System.Linq
             // Construct a where operator to filter out non-matching elements, and then aggregate.
             checked
             {
-                return new CountAggregationOperator<TSource>(
-                    Where<TSource>(source, predicate)
-                ).Aggregate();
+                return new CountAggregationOperator<TSource>(Where<TSource>(source, predicate))
+                    .Aggregate();
             }
         }
 
@@ -2381,9 +2371,8 @@ namespace System.Linq
                 throw new ArgumentNullException(nameof(predicate));
 
             // Construct a where operator to filter out non-matching elements, and then aggregate.
-            return new LongCountAggregationOperator<TSource>(
-                Where<TSource>(source, predicate)
-            ).Aggregate();
+            return new LongCountAggregationOperator<TSource>(Where<TSource>(source, predicate))
+                .Aggregate();
         }
 
         //-----------------------------------------------------------------------------------
@@ -4994,9 +4983,8 @@ namespace System.Linq
 
             // We use a fully-qualified type name for Shared here to prevent the conflict between System.Linq.Parallel.Shared<>
             // and System.Threading.Shared<> in the 3.5 legacy build.
-            QuerySettings settings = leftOp.SpecifiedQuerySettings.Merge(
-                    rightOp.SpecifiedQuerySettings
-                )
+            QuerySettings settings = leftOp.SpecifiedQuerySettings
+                .Merge(rightOp.SpecifiedQuerySettings)
                 .WithDefaults()
                 .WithPerExecutionSettings(
                     new CancellationTokenSource(),
@@ -6150,17 +6138,16 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
-                    settings.CancellationState.ExternalCancellationToken
-                );
+                IEnumerable<TSource> childAsSequential = queryOp.Child
+                    .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
                     settings.CancellationState.ExternalCancellationToken
                 );
                 return ExceptionAggregator.WrapEnumerable(
-                        childWithCancelChecks,
-                        settings.CancellationState
-                    )
+                    childWithCancelChecks,
+                    settings.CancellationState
+                )
                     .First();
             }
 
@@ -6211,17 +6198,16 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
-                    settings.CancellationState.ExternalCancellationToken
-                );
+                IEnumerable<TSource> childAsSequential = queryOp.Child
+                    .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
                     settings.CancellationState.ExternalCancellationToken
                 );
                 return ExceptionAggregator.WrapEnumerable(
-                        childWithCancelChecks,
-                        settings.CancellationState
-                    )
+                    childWithCancelChecks,
+                    settings.CancellationState
+                )
                     .First(
                         ExceptionAggregator.WrapFunc<TSource, bool>(
                             predicate,
@@ -6268,17 +6254,16 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
-                    settings.CancellationState.ExternalCancellationToken
-                );
+                IEnumerable<TSource> childAsSequential = queryOp.Child
+                    .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
                     settings.CancellationState.ExternalCancellationToken
                 );
                 return ExceptionAggregator.WrapEnumerable(
-                        childWithCancelChecks,
-                        settings.CancellationState
-                    )
+                    childWithCancelChecks,
+                    settings.CancellationState
+                )
                     .FirstOrDefault();
             }
 
@@ -6331,17 +6316,16 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
-                    settings.CancellationState.ExternalCancellationToken
-                );
+                IEnumerable<TSource> childAsSequential = queryOp.Child
+                    .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
                     settings.CancellationState.ExternalCancellationToken
                 );
                 return ExceptionAggregator.WrapEnumerable(
-                        childWithCancelChecks,
-                        settings.CancellationState
-                    )
+                    childWithCancelChecks,
+                    settings.CancellationState
+                )
                     .FirstOrDefault(
                         ExceptionAggregator.WrapFunc<TSource, bool>(
                             predicate,
@@ -6395,17 +6379,16 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
-                    settings.CancellationState.ExternalCancellationToken
-                );
+                IEnumerable<TSource> childAsSequential = queryOp.Child
+                    .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
                     settings.CancellationState.ExternalCancellationToken
                 );
                 return ExceptionAggregator.WrapEnumerable(
-                        childWithCancelChecks,
-                        settings.CancellationState
-                    )
+                    childWithCancelChecks,
+                    settings.CancellationState
+                )
                     .Last();
             }
 
@@ -6453,17 +6436,16 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
-                    settings.CancellationState.ExternalCancellationToken
-                );
+                IEnumerable<TSource> childAsSequential = queryOp.Child
+                    .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
                     settings.CancellationState.ExternalCancellationToken
                 );
                 return ExceptionAggregator.WrapEnumerable(
-                        childWithCancelChecks,
-                        settings.CancellationState
-                    )
+                    childWithCancelChecks,
+                    settings.CancellationState
+                )
                     .Last(
                         ExceptionAggregator.WrapFunc<TSource, bool>(
                             predicate,
@@ -6510,17 +6492,16 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
-                    settings.CancellationState.ExternalCancellationToken
-                );
+                IEnumerable<TSource> childAsSequential = queryOp.Child
+                    .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
                     settings.CancellationState.ExternalCancellationToken
                 );
                 return ExceptionAggregator.WrapEnumerable(
-                        childWithCancelChecks,
-                        settings.CancellationState
-                    )
+                    childWithCancelChecks,
+                    settings.CancellationState
+                )
                     .LastOrDefault();
             }
 
@@ -6567,17 +6548,16 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
-                    settings.CancellationState.ExternalCancellationToken
-                );
+                IEnumerable<TSource> childAsSequential = queryOp.Child
+                    .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
                     settings.CancellationState.ExternalCancellationToken
                 );
                 return ExceptionAggregator.WrapEnumerable(
-                        childWithCancelChecks,
-                        settings.CancellationState
-                    )
+                    childWithCancelChecks,
+                    settings.CancellationState
+                )
                     .LastOrDefault(
                         ExceptionAggregator.WrapFunc<TSource, bool>(
                             predicate,

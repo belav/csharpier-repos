@@ -102,16 +102,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             return await CSharpSelectionResult.CreateAsync(
-                    selectionInfo.Status,
-                    selectionInfo.OriginalSpan,
-                    selectionInfo.FinalSpan,
-                    Options,
-                    selectionInfo.SelectionInExpression,
-                    doc,
-                    selectionInfo.FirstTokenInFinalSpan,
-                    selectionInfo.LastTokenInFinalSpan,
-                    cancellationToken
-                )
+                selectionInfo.Status,
+                selectionInfo.OriginalSpan,
+                selectionInfo.FinalSpan,
+                Options,
+                selectionInfo.SelectionInExpression,
+                doc,
+                selectionInfo.FirstTokenInFinalSpan,
+                selectionInfo.LastTokenInFinalSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -125,9 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return selectionInfo;
             }
 
-            var expressionNode = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(
-                selectionInfo.LastTokenInFinalSpan
-            );
+            var expressionNode = selectionInfo.FirstTokenInFinalSpan
+                .GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
             if (!expressionNode.IsAnyAssignExpression())
             {
                 return selectionInfo;
@@ -143,16 +142,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             return AssignFinalSpan(
                 selectionInfo.With(
-                        s =>
-                            s.FirstTokenInFinalSpan = assign.Right.GetFirstToken(
-                                includeZeroWidth: true
-                            )
-                    )
+                    s =>
+                        s.FirstTokenInFinalSpan = assign.Right.GetFirstToken(includeZeroWidth: true)
+                )
                     .With(
                         s =>
-                            s.LastTokenInFinalSpan = assign.Right.GetLastToken(
-                                includeZeroWidth: true
-                            )
+                            s.LastTokenInFinalSpan = assign.Right
+                                .GetLastToken(includeZeroWidth: true)
                     ),
                 text
             );
@@ -182,9 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             // get the node that covers the selection
-            var node = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(
-                selectionInfo.LastTokenInFinalSpan
-            );
+            var node = selectionInfo.FirstTokenInFinalSpan
+                .GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
 
             var validNode = Check(semanticModel, node, cancellationToken);
             if (validNode)
@@ -198,12 +193,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             {
                 // couldn't find any valid node
                 return selectionInfo.WithStatus(
-                        s =>
-                            new OperationStatus(
-                                OperationStatusFlag.None,
-                                CSharpFeaturesResources.Selection_does_not_contain_a_valid_node
-                            )
-                    )
+                    s =>
+                        new OperationStatus(
+                            OperationStatusFlag.None,
+                            CSharpFeaturesResources.Selection_does_not_contain_a_valid_node
+                        )
+                )
                     .With(s => s.FirstTokenInFinalSpan = default)
                     .With(s => s.LastTokenInFinalSpan = default);
             }
@@ -214,8 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     : firstValidNode;
 
             return selectionInfo.With(
-                    s => s.SelectionInExpression = firstValidNode is ExpressionSyntax
-                )
+                s => s.SelectionInExpression = firstValidNode is ExpressionSyntax
+            )
                 .With(s => s.SelectionInSingleStatement = firstValidNode is StatementSyntax)
                 .With(
                     s =>
@@ -357,9 +352,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             // get the node that covers the selection
-            var commonNode = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(
-                selectionInfo.LastTokenInFinalSpan
-            );
+            var commonNode = selectionInfo.FirstTokenInFinalSpan
+                .GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
 
             if (
                 (selectionInfo.SelectionInExpression || selectionInfo.SelectionInSingleStatement)
@@ -476,16 +470,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             {
                 // simple expression case
                 return selectionInfo.With(
-                        s =>
-                            s.FirstTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetFirstToken(
-                                includeZeroWidth: true
-                            )
-                    )
+                    s =>
+                        s.FirstTokenInFinalSpan = s.CommonRootFromOriginalSpan
+                            .GetFirstToken(includeZeroWidth: true)
+                )
                     .With(
                         s =>
-                            s.LastTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetLastToken(
-                                includeZeroWidth: true
-                            )
+                            s.LastTokenInFinalSpan = s.CommonRootFromOriginalSpan
+                                .GetLastToken(includeZeroWidth: true)
                     );
             }
 
@@ -515,8 +507,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             if (statement1 == statement2)
             {
                 // check one more time to see whether it is an expression case
-                var expression =
-                    selectionInfo.CommonRootFromOriginalSpan.GetAncestor<ExpressionSyntax>();
+                var expression = selectionInfo.CommonRootFromOriginalSpan
+                    .GetAncestor<ExpressionSyntax>();
                 if (expression != null && statement1.Span.Contains(expression.Span))
                 {
                     return selectionInfo.With(s => s.SelectionInExpression = true)
@@ -550,8 +542,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             // move only statements inside of the block
             return selectionInfo.With(
-                    s => s.FirstTokenInFinalSpan = statement1.GetFirstToken(includeZeroWidth: true)
-                )
+                s => s.FirstTokenInFinalSpan = statement1.GetFirstToken(includeZeroWidth: true)
+            )
                 .With(
                     s => s.LastTokenInFinalSpan = statement2.GetLastToken(includeZeroWidth: true)
                 );
@@ -606,14 +598,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             var returnableConstructPairs = returnStatements.Select(
-                    r =>
-                        Tuple.Create(
-                            r,
-                            r.GetAncestors<SyntaxNode>()
-                                .Where(a => a.IsReturnableConstruct())
-                                .FirstOrDefault()
-                        )
-                )
+                r =>
+                    Tuple.Create(
+                        r,
+                        r.GetAncestors<SyntaxNode>()
+                            .Where(a => a.IsReturnableConstruct())
+                            .FirstOrDefault()
+                    )
+            )
                 .Where(p => p.Item2 != null);
 
             // now filter return statements to only include the one under outmost container

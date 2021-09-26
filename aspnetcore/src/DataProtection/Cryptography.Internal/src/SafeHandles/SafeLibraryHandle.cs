@@ -81,11 +81,8 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles
                 // Successfully retrieved the message.
                 using (messageHandle)
                 {
-                    return new string(
-                        (char*)messageHandle.DangerousGetHandle(),
-                        0,
-                        numCharsOutput
-                    ).Trim();
+                    return new string((char*)messageHandle.DangerousGetHandle(), 0, numCharsOutput)
+                        .Trim();
                 }
             }
             else

@@ -312,7 +312,8 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.InvalidSetSameTypeWithDifferentNamespace(
-                    typeof(Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey).DisplayName(),
+                    typeof(Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey)
+                        .DisplayName(),
                     typeof(ShadowKey).DisplayName()
                 ),
                 Assert.Throws<InvalidOperationException>(
@@ -624,16 +625,17 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.InvalidSetSameTypeWithDifferentNamespace(
-                    typeof(Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey).DisplayName(),
+                    typeof(Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey)
+                        .DisplayName(),
                     typeof(ShadowKey).DisplayName()
                 ),
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
                             FindAsync<Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey>(
-                                    context,
-                                    77
-                                )
+                                context,
+                                77
+                            )
                                 .AsTask()
                     )
                 ).Message

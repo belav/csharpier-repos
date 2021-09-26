@@ -197,10 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 BoundSubpattern item = rp.Properties[i];
                                 Symbol symbol = item.Symbol;
                                 if (
-                                    symbol?.ContainingType.Equals(
-                                        inputType,
-                                        TypeCompareKind.AllIgnoreOptions
-                                    ) == true
+                                    symbol?.ContainingType
+                                        .Equals(inputType, TypeCompareKind.AllIgnoreOptions) == true
                                 )
                                 {
                                     LearnFromAnyNullPatterns(
@@ -381,7 +379,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var nodeStateMap = PooledDictionary<
                 BoundDecisionDagNode,
                 (PossiblyConditionalState state, bool believedReachable)
-            >.GetInstance();
+            >
+                .GetInstance();
             nodeStateMap.Add(
                 decisionDag.RootNode,
                 (state: initialState.Clone(), believedReachable: true)
@@ -390,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var labelStateMap = PooledDictionary<
                 LabelSymbol,
                 (LocalState state, bool believedReachable)
-            >.GetInstance();
+            >
+                .GetInstance();
 
             foreach (var dagNode in decisionDag.TopologicallySortedNodes)
             {
@@ -732,9 +732,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         // merge inferred nullable annotation from different branches of the decision tree
                                         inferredType = TypeWithAnnotations.Create(
                                             inferredType.Type,
-                                            existingType.NullableAnnotation.Join(
-                                                inferredType.NullableAnnotation
-                                            )
+                                            existingType.NullableAnnotation
+                                                .Join(inferredType.NullableAnnotation)
                                         );
                                     }
                                     _variables.SetType(local, inferredType);
@@ -962,8 +961,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SetState(defaultLabelState.state);
                 var nodes = node.DecisionDag.TopologicallySortedNodes;
                 var leaf = nodes.Where(
-                        n => n is BoundLeafDecisionDagNode leaf && leaf.Label == node.DefaultLabel
-                    )
+                    n => n is BoundLeafDecisionDagNode leaf && leaf.Label == node.DefaultLabel
+                )
                     .First();
                 var samplePattern = PatternExplainer.SamplePatternForPathToDagNode(
                     BoundDagTemp.ForOriginalInput(node.Expression),
@@ -1068,9 +1067,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                var states = ArrayBuilder<(LocalState, TypeWithState, bool)>.GetInstance(
-                    numSwitchArms
-                );
+                var states = ArrayBuilder<(LocalState, TypeWithState, bool)>
+                    .GetInstance(numSwitchArms);
                 for (int i = 0; i < numSwitchArms; i++)
                 {
                     var nodeForSyntax = expressions[i];

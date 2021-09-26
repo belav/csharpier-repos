@@ -103,11 +103,12 @@ namespace Internal.Cryptography
             if (feedback != 8 && feedback != 64)
             {
                 throw new CryptographicException(
-                    string.Format(
-                        SR.Cryptography_CipherModeFeedbackNotSupported,
-                        feedback,
-                        CipherMode.CFB
-                    )
+                    string
+                        .Format(
+                            SR.Cryptography_CipherModeFeedbackNotSupported,
+                            feedback,
+                            CipherMode.CFB
+                        )
                 );
             }
         }

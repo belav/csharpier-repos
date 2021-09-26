@@ -71,12 +71,13 @@ namespace Microsoft.AspNetCore.Internal
             if (value != null && value.StartsWith(ChunkCountPrefix, StringComparison.Ordinal))
             {
                 if (
-                    int.TryParse(
-                        value.AsSpan(ChunkCountPrefix.Length),
-                        NumberStyles.None,
-                        CultureInfo.InvariantCulture,
-                        out var chunksCount
-                    )
+                    int
+                        .TryParse(
+                            value.AsSpan(ChunkCountPrefix.Length),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out var chunksCount
+                        )
                 )
                 {
                     return chunksCount;
@@ -125,13 +126,14 @@ namespace Microsoft.AspNetCore.Internal
                                 totalSize += chunks[i].Length;
                             }
                             throw new FormatException(
-                                string.Format(
-                                    CultureInfo.CurrentCulture,
-                                    "The chunked cookie is incomplete. Only {0} of the expected {1} chunks were found, totaling {2} characters. A client size limit may have been exceeded.",
-                                    chunkId - 1,
-                                    chunksCount,
-                                    totalSize
-                                )
+                                string
+                                    .Format(
+                                        CultureInfo.CurrentCulture,
+                                        "The chunked cookie is incomplete. Only {0} of the expected {1} chunks were found, totaling {2} characters. A client size limit may have been exceeded.",
+                                        chunkId - 1,
+                                        chunksCount,
+                                        totalSize
+                                    )
                             );
                         }
                         // Missing chunk, abort by returning the original cookie value. It may have been a false positive?
@@ -311,8 +313,8 @@ namespace Microsoft.AspNetCore.Internal
             if (!StringValues.IsNullOrEmpty(existingValues))
             {
                 responseHeaders[HeaderNames.SetCookie] = existingValues.Where(
-                        value => !rejectPredicate(value)
-                    )
+                    value => !rejectPredicate(value)
+                )
                     .ToArray();
             }
 

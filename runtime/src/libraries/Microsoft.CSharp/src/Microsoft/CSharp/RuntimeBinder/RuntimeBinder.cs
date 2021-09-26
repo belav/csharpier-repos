@@ -184,7 +184,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                         false,
                         callPayload.CallingContext,
                         new CSharpArgumentInfo[] { callPayload.GetArgumentInfo(0) }
-                    ).TryGetExisting();
+                    )
+                        .TryGetExisting();
 
                     // The Invoke has the remaining argument infos. However, we need to redo the first one
                     // to correspond to the GetMember result.
@@ -195,7 +196,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                         callPayload.Flags,
                         callPayload.CallingContext,
                         argInfos
-                    ).TryGetExisting();
+                    )
+                        .TryGetExisting();
 
                     DynamicMetaObject[] newArgs = new DynamicMetaObject[args.Length - 1];
                     Array.Copy(args, 1, newArgs, 0, args.Length - 1);
@@ -967,10 +969,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static void CheckForConditionalMethodError(ExprCall call)
         {
             MethodSymbol method = call.MethWithInst.Meth();
-            object[] conditions = method.AssociatedMemberInfo.GetCustomAttributes(
-                typeof(ConditionalAttribute),
-                true
-            );
+            object[] conditions = method.AssociatedMemberInfo
+                .GetCustomAttributes(typeof(ConditionalAttribute), true);
             if (conditions.Length > 0)
             {
                 throw Error.BindCallToConditionalMethod(method.name);
@@ -1010,17 +1010,10 @@ namespace Microsoft.CSharp.RuntimeBinder
             // we're binding against the base method, and the derived method may change the
             // generic arguments.
             TypeArray parameters = TypeManager.SubstTypeArray(methprop.Params, type, typeArgs);
-            methprop = ExpressionBinder.GroupToArgsBinder.FindMostDerivedMethod(
-                methprop,
-                callingObject.Type
-            );
-            ExpressionBinder.GroupToArgsBinder.ReOrderArgsForNamedArguments(
-                methprop,
-                parameters,
-                type,
-                memgroup,
-                argInfo
-            );
+            methprop = ExpressionBinder.GroupToArgsBinder
+                .FindMostDerivedMethod(methprop, callingObject.Type);
+            ExpressionBinder.GroupToArgsBinder
+                .ReOrderArgsForNamedArguments(methprop, parameters, type, memgroup, argInfo);
             Expr pList = null;
 
             // We reordered, so make a new list of them and set them on the constructor.

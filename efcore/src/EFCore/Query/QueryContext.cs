@@ -70,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(navigation, nameof(navigation));
 
             // InitializeStateManager will populate the field before calling here
-            _stateManager!.TryGetEntry(entity)!.SetIsLoaded(navigation);
+            _stateManager!.TryGetEntry(entity)!
+                .SetIsLoaded(navigation);
         }
 
         /// <summary>

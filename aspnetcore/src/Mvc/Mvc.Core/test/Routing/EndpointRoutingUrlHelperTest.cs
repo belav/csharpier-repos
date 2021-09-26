@@ -155,8 +155,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 new Endpoint(context => Task.CompletedTask, EndpointMetadataCollection.Empty, null)
             );
 
-            var urlHelperFactory =
-                httpContext.RequestServices.GetRequiredService<IUrlHelperFactory>();
+            var urlHelperFactory = httpContext.RequestServices
+                .GetRequiredService<IUrlHelperFactory>();
             var urlHelper = urlHelperFactory.GetUrlHelper(actionContext);
             Assert.IsType<EndpointRoutingUrlHelper>(urlHelper);
             return urlHelper;

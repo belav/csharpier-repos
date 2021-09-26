@@ -86,11 +86,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             Assert.Equal(
                 DesignStrings.ExistingFiles(
                     directory.Path,
-                    string.Join(
-                        CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                        "TestContext.cs",
-                        "TestEntity.cs"
-                    )
+                    string
+                        .Join(
+                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                            "TestContext.cs",
+                            "TestEntity.cs"
+                        )
                 ),
                 ex.Message
             );
@@ -151,11 +152,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 Assert.Equal(
                     DesignStrings.ReadOnlyFiles(
                         directory.Path,
-                        string.Join(
-                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                            "TestContext.cs",
-                            "TestEntity.cs"
-                        )
+                        string
+                            .Join(
+                                CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                                "TestContext.cs",
+                                "TestEntity.cs"
+                            )
                     ),
                     ex.Message
                 );
@@ -174,7 +176,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 typeof(ReverseEngineerScaffolderTest).Assembly,
                 new TestOperationReporter(),
                 new string[0]
-            ).CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
+            )
+                .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
                 .BuildServiceProvider()
                 .GetRequiredService<IReverseEngineerScaffolder>();
 
@@ -188,7 +191,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 typeof(ReverseEngineerScaffolderTest).Assembly,
                 new TestOperationReporter(),
                 new string[0]
-            ).CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
+            )
+                .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
                 .AddSingleton<INamedConnectionStringResolver>(resolver)
                 .AddSingleton<IDatabaseModelFactory>(databaseModelFactory)
                 .BuildServiceProvider()
@@ -220,7 +224,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 typeof(ReverseEngineerScaffolderTest).Assembly,
                 new TestOperationReporter(),
                 new string[0]
-            ).CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
+            )
+                .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
                 .AddSingleton<INamedConnectionStringResolver>(resolver)
                 .AddSingleton<IDatabaseModelFactory>(databaseModelFactory)
                 .BuildServiceProvider()

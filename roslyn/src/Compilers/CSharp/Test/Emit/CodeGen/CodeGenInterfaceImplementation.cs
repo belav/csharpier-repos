@@ -3213,15 +3213,14 @@ class Test
     }
 }";
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"
+                source,
+                expectedOutput: @"
 C.Method
 Base.Method
 C.IY.set_Property
 U.I.Method
 U.set_Property"
-                )
-                .VerifyDiagnostics(); // No errors
+            ).VerifyDiagnostics(); // No errors
         }
 
         [Fact]

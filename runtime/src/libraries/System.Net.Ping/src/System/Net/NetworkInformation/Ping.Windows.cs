@@ -224,20 +224,21 @@ namespace System.Net.NetworkInformation
             Internals.SocketAddress remoteAddr = IPEndPointExtensions.Serialize(ep);
             byte[] sourceAddr = new byte[28];
 
-            return (int)Interop.IpHlpApi.Icmp6SendEcho2(
-                _handlePingV6!,
-                GetWaitHandle(isAsync),
-                IntPtr.Zero,
-                IntPtr.Zero,
-                sourceAddr,
-                remoteAddr.Buffer,
-                _requestBuffer!,
-                (ushort)buffer.Length,
-                ref ipOptions,
-                _replyBuffer!,
-                MaxUdpPacket,
-                (uint)timeout
-            );
+            return (int)Interop.IpHlpApi
+                .Icmp6SendEcho2(
+                    _handlePingV6!,
+                    GetWaitHandle(isAsync),
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    sourceAddr,
+                    remoteAddr.Buffer,
+                    _requestBuffer!,
+                    (ushort)buffer.Length,
+                    ref ipOptions,
+                    _replyBuffer!,
+                    MaxUdpPacket,
+                    (uint)timeout
+                );
         }
 
         private PingReply CreatePingReply()

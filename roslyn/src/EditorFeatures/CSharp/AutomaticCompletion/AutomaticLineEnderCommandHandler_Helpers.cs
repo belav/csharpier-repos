@@ -651,9 +651,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     && parentOfParent is PropertyDeclarationSyntax
                 )
                 {
-                    var otherAccessors = accessorListNode.Accessors.Except(
-                            new[] { accessorDeclarationNode }
-                        )
+                    var otherAccessors = accessorListNode.Accessors
+                        .Except(new[] { accessorDeclarationNode })
                         .ToImmutableArray();
                     if (!otherAccessors.IsEmpty)
                     {
@@ -1009,10 +1008,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
 
         private static SyntaxToken GetOpenBrace(IEditorOptions editorOptions) =>
             SyntaxFactory.Token(
-                    leading: SyntaxTriviaList.Empty,
-                    kind: SyntaxKind.OpenBraceToken,
-                    trailing: SyntaxTriviaList.Create(GetNewLineTrivia(editorOptions))
-                )
+                leading: SyntaxTriviaList.Empty,
+                kind: SyntaxKind.OpenBraceToken,
+                trailing: SyntaxTriviaList.Create(GetNewLineTrivia(editorOptions))
+            )
                 .WithAdditionalAnnotations(s_openBracePositionAnnotation);
 
         private static SyntaxToken GetCloseBrace(IEditorOptions editorOptions) =>
@@ -1093,16 +1092,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             IEditorOptions editorOptions
         ) =>
             SyntaxFactory.PropertyDeclaration(
-                    fieldDeclarationNode.AttributeLists,
-                    fieldDeclarationNode.Modifiers,
-                    fieldDeclarationNode.Declaration.Type,
-                    explicitInterfaceSpecifier: null,
-                    identifier: fieldDeclarationNode.Declaration.Variables[0].Identifier,
-                    accessorList: GetAccessorListNode(editorOptions),
-                    expressionBody: null,
-                    initializer: null,
-                    semicolonToken: SyntaxFactory.Token(SyntaxKind.None)
-                )
+                fieldDeclarationNode.AttributeLists,
+                fieldDeclarationNode.Modifiers,
+                fieldDeclarationNode.Declaration.Type,
+                explicitInterfaceSpecifier: null,
+                identifier: fieldDeclarationNode.Declaration.Variables[0].Identifier,
+                accessorList: GetAccessorListNode(editorOptions),
+                expressionBody: null,
+                initializer: null,
+                semicolonToken: SyntaxFactory.Token(SyntaxKind.None)
+            )
                 .WithTriviaFrom(fieldDeclarationNode);
 
         /// <summary>
@@ -1113,15 +1112,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             IEditorOptions editorOptions
         ) =>
             SyntaxFactory.EventDeclaration(
-                    eventFieldDeclarationNode.AttributeLists,
-                    eventFieldDeclarationNode.Modifiers,
-                    eventFieldDeclarationNode.EventKeyword,
-                    eventFieldDeclarationNode.Declaration.Type,
-                    explicitInterfaceSpecifier: null,
-                    identifier: eventFieldDeclarationNode.Declaration.Variables[0].Identifier,
-                    accessorList: GetAccessorListNode(editorOptions),
-                    semicolonToken: SyntaxFactory.Token(SyntaxKind.None)
-                )
+                eventFieldDeclarationNode.AttributeLists,
+                eventFieldDeclarationNode.Modifiers,
+                eventFieldDeclarationNode.EventKeyword,
+                eventFieldDeclarationNode.Declaration.Type,
+                explicitInterfaceSpecifier: null,
+                identifier: eventFieldDeclarationNode.Declaration.Variables[0].Identifier,
+                accessorList: GetAccessorListNode(editorOptions),
+                semicolonToken: SyntaxFactory.Token(SyntaxKind.None)
+            )
                 .WithTriviaFrom(eventFieldDeclarationNode);
 
         /// <summary>
@@ -1169,9 +1168,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             var block =
                 extraNodeInsertedBetweenBraces != null
                     ? GetBlockNode(editorOptions)
-                          .WithStatements(
-                              new SyntaxList<StatementSyntax>(extraNodeInsertedBetweenBraces)
-                          )
+                      .WithStatements(
+                          new SyntaxList<StatementSyntax>(extraNodeInsertedBetweenBraces)
+                      )
                     : GetBlockNode(editorOptions);
 
             return embeddedStatementOwner switch

@@ -37,9 +37,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             _routeModelProviders = pageRouteModelProviders.OrderBy(p => p.Order).ToArray();
             _mvcOptions = mvcOptionsAccessor.Value;
 
-            _conventions =
-                pagesOptionsAccessor.Value.Conventions.OfType<IPageRouteModelConvention>()
-                    .ToArray();
+            _conventions = pagesOptionsAccessor.Value.Conventions
+                .OfType<IPageRouteModelConvention>()
+                .ToArray();
         }
 
         /// <inheritdoc/>
@@ -135,7 +135,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 return selectorModel.AttributeRouteModel.Template;
             }
 
-            var pageRouteMetadata = selectorModel.EndpointMetadata.OfType<PageRouteMetadata>()
+            var pageRouteMetadata = selectorModel.EndpointMetadata
+                .OfType<PageRouteMetadata>()
                 .SingleOrDefault();
             if (pageRouteMetadata == null)
             {

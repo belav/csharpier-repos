@@ -82,9 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             if (
                 variableDeclarator.Initializer == null
                 || variableDeclarator.Initializer.Value.IsMissing
-                || variableDeclarator.Initializer.Value.IsKind(
-                    SyntaxKind.StackAllocArrayCreationExpression
-                )
+                || variableDeclarator.Initializer.Value
+                    .IsKind(SyntaxKind.StackAllocArrayCreationExpression)
             )
             {
                 return;
@@ -108,10 +107,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             }
 
             var references = await GetReferenceLocationsAsync(
-                    document,
-                    variableDeclarator,
-                    cancellationToken
-                )
+                document,
+                variableDeclarator,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!references.Any())
                 return;
@@ -157,13 +156,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 }
             }
             else if (
-                identifierNode.Parent.IsKind(
-                    SyntaxKind.PreDecrementExpression,
-                    SyntaxKind.PreIncrementExpression,
-                    SyntaxKind.PostDecrementExpression,
-                    SyntaxKind.PostIncrementExpression,
-                    SyntaxKind.AddressOfExpression
-                )
+                identifierNode.Parent
+                    .IsKind(
+                        SyntaxKind.PreDecrementExpression,
+                        SyntaxKind.PreIncrementExpression,
+                        SyntaxKind.PostDecrementExpression,
+                        SyntaxKind.PostIncrementExpression,
+                        SyntaxKind.AddressOfExpression
+                    )
             )
             {
                 return true;
@@ -192,10 +192,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             // Annotate the variable declarator so that we can get back to it later.
             var updatedDocument = await document.ReplaceNodeAsync(
-                    declarator,
-                    declarator.WithAdditionalAnnotations(DefinitionAnnotation),
-                    cancellationToken
-                )
+                declarator,
+                declarator.WithAdditionalAnnotations(DefinitionAnnotation),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var semanticModel = await updatedDocument.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -205,18 +205,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             // Create the expression that we're actually going to inline.
             var expressionToInline = await CreateExpressionToInlineAsync(
-                    variableDeclarator,
-                    updatedDocument,
-                    cancellationToken
-                )
+                variableDeclarator,
+                updatedDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Collect the identifier names for each reference.
             var references = await GetReferenceLocationsAsync(
-                    updatedDocument,
-                    variableDeclarator,
-                    cancellationToken
-                )
+                updatedDocument,
+                variableDeclarator,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var syntaxRoot = await updatedDocument.GetSyntaxRootAsync(cancellationToken)
@@ -224,19 +224,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             // Collect the topmost parenting expression for each reference.
             var nonConflictingIdentifierNodes = references.Select(
-                    loc =>
-                        (IdentifierNameSyntax)syntaxRoot.FindToken(
-                            loc.Location.SourceSpan.Start
-                        ).Parent
-                )
+                loc =>
+                    (IdentifierNameSyntax)syntaxRoot.FindToken(loc.Location.SourceSpan.Start).Parent
+            )
                 .Where(ident => !HasConflict(ident, variableDeclarator));
 
             // Add referenceAnnotations to identifier nodes being replaced.
             updatedDocument = await updatedDocument.ReplaceNodesAsync(
-                    nonConflictingIdentifierNodes,
-                    (o, n) => n.WithAdditionalAnnotations(ReferenceAnnotation),
-                    cancellationToken
-                )
+                nonConflictingIdentifierNodes,
+                (o, n) => n.WithAdditionalAnnotations(ReferenceAnnotation),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             semanticModel = await updatedDocument.GetSemanticModelAsync(cancellationToken)
@@ -246,14 +244,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             // Get the annotated reference nodes.
             nonConflictingIdentifierNodes = await FindReferenceAnnotatedNodesAsync(
-                    updatedDocument,
-                    cancellationToken
-                )
+                updatedDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var topmostParentingExpressions = nonConflictingIdentifierNodes.Select(
-                    ident => GetTopMostParentingExpression(ident)
-                )
+                ident => GetTopMostParentingExpression(ident)
+            )
                 .Distinct()
                 .ToList();
 
@@ -270,44 +268,45 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             // Make each topmost parenting statement or Equals Clause Expressions semantically explicit.
             updatedDocument = await updatedDocument.ReplaceNodesAsync(
-                    topmostParentingExpressions,
-                    (o, n) =>
+                topmostParentingExpressions,
+                (o, n) =>
+                {
+                    var node = Simplifier.Expand(
+                        n,
+                        semanticModel,
+                        workspace,
+                        cancellationToken: cancellationToken
+                    );
+
+                    // warn when inlining into a conditional expression, as the inlined expression will not be executed.
+                    if (
+                        semanticModel.GetSymbolInfo(o, cancellationToken).Symbol is IMethodSymbol
+                        {
+                            IsConditional: true
+                        }
+                    )
                     {
-                        var node = Simplifier.Expand(
-                            n,
-                            semanticModel,
-                            workspace,
-                            cancellationToken: cancellationToken
+                        node = node.WithAdditionalAnnotations(
+                            WarningAnnotation.Create(
+                                CSharpFeaturesResources.Warning_Inlining_temporary_into_conditional_method_call
+                            )
                         );
+                    }
 
-                        // warn when inlining into a conditional expression, as the inlined expression will not be executed.
-                        if (
-                            semanticModel.GetSymbolInfo(o, cancellationToken).Symbol
-                            is IMethodSymbol { IsConditional: true }
-                        )
-                        {
-                            node = node.WithAdditionalAnnotations(
-                                WarningAnnotation.Create(
-                                    CSharpFeaturesResources.Warning_Inlining_temporary_into_conditional_method_call
-                                )
-                            );
-                        }
+                    // If the refactoring may potentially change the code's semantics, display a warning message to the user.
+                    if (mayContainSideEffects)
+                    {
+                        node = node.WithAdditionalAnnotations(
+                            WarningAnnotation.Create(
+                                CSharpFeaturesResources.Warning_Inlining_temporary_variable_may_change_code_meaning
+                            )
+                        );
+                    }
 
-                        // If the refactoring may potentially change the code's semantics, display a warning message to the user.
-                        if (mayContainSideEffects)
-                        {
-                            node = node.WithAdditionalAnnotations(
-                                WarningAnnotation.Create(
-                                    CSharpFeaturesResources.Warning_Inlining_temporary_variable_may_change_code_meaning
-                                )
-                            );
-                        }
-
-                        return node;
-                    },
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+                    return node;
+                },
+                cancellationToken
+            ).ConfigureAwait(false);
 
             semanticModel = await updatedDocument.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -326,10 +325,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             );
 
             updatedDocument = await updatedDocument.ReplaceNodeAsync(
-                    scope,
-                    newScope,
-                    cancellationToken
-                )
+                scope,
+                newScope,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             semanticModel = await updatedDocument.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -348,22 +347,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             {
                 // Certain semantic conflicts can be detected only after the reference rewriter has inlined the expression
                 var newDocument = await DetectSemanticConflictsAsync(
-                        updatedDocument,
-                        semanticModel,
-                        semanticModelBeforeInline,
-                        originalInitializerSymbolInfo,
-                        cancellationToken
-                    )
+                    updatedDocument,
+                    semanticModel,
+                    semanticModelBeforeInline,
+                    originalInitializerSymbolInfo,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (updatedDocument == newDocument)
                 {
                     // No semantic conflicts, we can remove the definition.
                     updatedDocument = await updatedDocument.ReplaceNodeAsync(
-                            newScope,
-                            RemoveDeclaratorFromScope(variableDeclarator, newScope),
-                            cancellationToken
-                        )
+                        newScope,
+                        RemoveDeclaratorFromScope(variableDeclarator, newScope),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else
@@ -422,10 +421,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             CancellationToken cancellationToken
         ) =>
             await FindNodeWithAnnotationAsync<VariableDeclaratorSyntax>(
-                    document,
-                    DefinitionAnnotation,
-                    cancellationToken
-                )
+                document,
+                DefinitionAnnotation,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
         private static async Task<ExpressionSyntax> FindInitializerAsync(
@@ -433,10 +432,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             CancellationToken cancellationToken
         ) =>
             await FindNodeWithAnnotationAsync<ExpressionSyntax>(
-                    document,
-                    InitializerAnnotation,
-                    cancellationToken
-                )
+                document,
+                InitializerAnnotation,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
         private static async Task<T> FindNodeWithAnnotationAsync<T>(
@@ -696,19 +695,19 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             newExpression = newExpression.WithAdditionalAnnotations(InitializerAnnotation);
 
             updatedDocument = await updatedDocument.ReplaceNodeAsync(
-                    variableDeclarator.Initializer.Value,
-                    newExpression,
-                    cancellationToken
-                )
+                variableDeclarator.Initializer.Value,
+                newExpression,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             semanticModel = await updatedDocument.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             newExpression = await FindInitializerAsync(updatedDocument, cancellationToken)
                 .ConfigureAwait(false);
             var newVariableDeclarator = await FindDeclaratorAsync(
-                    updatedDocument,
-                    cancellationToken
-                )
+                updatedDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             localSymbol = (ILocalSymbol)semanticModel.GetDeclaredSymbol(
                 newVariableDeclarator,
@@ -724,27 +723,27 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             if (explicitCastExpression != newExpression)
             {
                 updatedDocument = await updatedDocument.ReplaceNodeAsync(
-                        newExpression,
-                        explicitCastExpression,
-                        cancellationToken
-                    )
+                    newExpression,
+                    explicitCastExpression,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 semanticModel = await updatedDocument.GetSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
                 newVariableDeclarator = await FindDeclaratorAsync(
-                        updatedDocument,
-                        cancellationToken
-                    )
+                    updatedDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
             // Now that the variable declarator is normalized, make its initializer
             // value semantically explicit.
             newExpression = await Simplifier.ExpandAsync(
-                    newVariableDeclarator.Initializer.Value,
-                    updatedDocument,
-                    cancellationToken: cancellationToken
-                )
+                newVariableDeclarator.Initializer.Value,
+                updatedDocument,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             return newExpression.WithAdditionalAnnotations(ExpressionToInlineAnnotation);
         }
@@ -766,9 +765,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             // If any semantic changes were introduced by inlining, we update the document with conflict annotations.
             // Otherwise we return the given inlined document without any changes.
 
-            var syntaxRootBeforeInline = await semanticModelBeforeInline.SyntaxTree.GetRootAsync(
-                    cancellationToken
-                )
+            var syntaxRootBeforeInline = await semanticModelBeforeInline.SyntaxTree
+                .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             // Get all the identifier nodes which were replaced with inlined expression.
@@ -872,10 +870,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 );
 
             return await inlinedDocument.ReplaceNodesAsync(
-                    replacementNodesWithChangedSemantics.Keys,
-                    conflictAnnotationAdder,
-                    cancellationToken
-                )
+                replacementNodesWithChangedSemantics.Keys,
+                conflictAnnotationAdder,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

@@ -36,9 +36,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
         public LongPollingTransport(HttpClient httpClient, ILoggerFactory? loggerFactory)
         {
             _httpClient = httpClient;
-            _logger = (
-                loggerFactory ?? NullLoggerFactory.Instance
-            ).CreateLogger<LongPollingTransport>();
+            _logger = (loggerFactory ?? NullLoggerFactory.Instance)
+                .CreateLogger<LongPollingTransport>();
         }
 
         public async Task StartAsync(

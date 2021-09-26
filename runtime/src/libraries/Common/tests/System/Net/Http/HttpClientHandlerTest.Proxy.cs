@@ -136,37 +136,31 @@ namespace System.Net.Http.Functional.Tests
         public void Proxy_UseEnvironmentVariableToSetSystemProxy_RequestGoesThruProxy()
         {
             RemoteExecutor.Invoke(
-                    async (useVersionString) =>
+                async (useVersionString) =>
+                {
+                    var options = new LoopbackProxyServer.Options { AddViaRequestHeader = true };
+                    using (LoopbackProxyServer proxyServer = LoopbackProxyServer.Create(options))
                     {
-                        var options = new LoopbackProxyServer.Options
-                        {
-                            AddViaRequestHeader = true
-                        };
+                        Environment.SetEnvironmentVariable(
+                            "http_proxy",
+                            proxyServer.Uri.AbsoluteUri.ToString()
+                        );
+
+                        using (HttpClient client = CreateHttpClient(useVersionString))
                         using (
-                            LoopbackProxyServer proxyServer = LoopbackProxyServer.Create(options)
+                            HttpResponseMessage response = await client.GetAsync(
+                                Configuration.Http.RemoteEchoServer
+                            )
                         )
                         {
-                            Environment.SetEnvironmentVariable(
-                                "http_proxy",
-                                proxyServer.Uri.AbsoluteUri.ToString()
-                            );
-
-                            using (HttpClient client = CreateHttpClient(useVersionString))
-                            using (
-                                HttpResponseMessage response = await client.GetAsync(
-                                    Configuration.Http.RemoteEchoServer
-                                )
-                            )
-                            {
-                                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                                string body = await response.Content.ReadAsStringAsync();
-                                Assert.Contains(proxyServer.ViaHeader, body);
-                            }
+                            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                            string body = await response.Content.ReadAsStringAsync();
+                            Assert.Contains(proxyServer.ViaHeader, body);
                         }
-                    },
-                    UseVersion.ToString()
-                )
-                .Dispose();
+                    }
+                },
+                UseVersion.ToString()
+            ).Dispose();
         }
 
         const string BasicAuth = "Basic";
@@ -922,9 +916,8 @@ namespace System.Net.Http.Functional.Tests
                             TestHelper.AllowAllCertificates;
                         if (addUserAgentHeader)
                         {
-                            client.DefaultRequestHeaders.UserAgent.Add(
-                                new ProductInfoHeaderValue("Mozilla", "5.0")
-                            );
+                            client.DefaultRequestHeaders.UserAgent
+                                .Add(new ProductInfoHeaderValue("Mozilla", "5.0"));
                         }
                         try
                         {

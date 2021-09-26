@@ -59,7 +59,8 @@ namespace System.Composition.UnitTests
     {
         private CompositionContext CreateContainer(params Type[] types)
         {
-            var configuration = new ContainerConfiguration().WithParts(types)
+            var configuration = new ContainerConfiguration()
+                .WithParts(types)
                 .WithProvider(new DictionaryExportDescriptorProvider());
 
             return configuration.CreateContainer();
@@ -140,7 +141,8 @@ namespace System.Composition.UnitTests
         {
             var rb = new ConventionBuilder();
             rb.ForType<ConventionConsumer>().Export();
-            var container = new ContainerConfiguration().WithPart<ConventionConsumer>(rb)
+            var container = new ContainerConfiguration()
+                .WithPart<ConventionConsumer>(rb)
                 .WithParts(typeof(ValueA), typeof(ValueB))
                 .WithProvider(new DictionaryExportDescriptorProvider())
                 .CreateContainer();

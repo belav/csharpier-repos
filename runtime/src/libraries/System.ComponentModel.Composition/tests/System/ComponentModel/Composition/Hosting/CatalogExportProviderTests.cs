@@ -169,58 +169,58 @@ namespace System.ComponentModel.Composition
             Assert.Equal(
                 0,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithNoFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(object) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithNoFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(object) }
                     )
+                )
                     .Count()
             );
 
             Assert.Equal(
                 1,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(object) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(object) }
                     )
+                )
                     .Count()
             );
             Assert.Equal(
                 0,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithFoo",
-                            new string[] { "Foo", "Bar" },
-                            new Type[] { typeof(object), typeof(object) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithFoo",
+                        new string[] { "Foo", "Bar" },
+                        new Type[] { typeof(object), typeof(object) }
                     )
+                )
                     .Count()
             );
 
             Assert.Equal(
                 0,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithNoFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(object) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithNoFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(object) }
                     )
+                )
                     .Count()
             );
             Assert.Equal(
                 1,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(object) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(object) }
                     )
+                )
                     .Count()
             );
         }
@@ -237,58 +237,58 @@ namespace System.ComponentModel.Composition
             Assert.Equal(
                 0,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithNoFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(string) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithNoFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(string) }
                     )
+                )
                     .Count()
             );
 
             Assert.Equal(
                 1,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(string) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(string) }
                     )
+                )
                     .Count()
             );
             Assert.Equal(
                 0,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithFoo",
-                            new string[] { "Foo", "Bar" },
-                            new Type[] { typeof(string), typeof(string) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithFoo",
+                        new string[] { "Foo", "Bar" },
+                        new Type[] { typeof(string), typeof(string) }
                     )
+                )
                     .Count()
             );
 
             Assert.Equal(
                 0,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithNoFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(string) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithNoFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(string) }
                     )
+                )
                     .Count()
             );
             Assert.Equal(
                 1,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(string) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(string) }
                     )
+                )
                     .Count()
             );
         }
@@ -305,58 +305,58 @@ namespace System.ComponentModel.Composition
             Assert.Equal(
                 0,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithNoFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(int) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithNoFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(int) }
                     )
+                )
                     .Count()
             );
 
             Assert.Equal(
                 0,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(int) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(int) }
                     )
+                )
                     .Count()
             );
             Assert.Equal(
                 0,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithFoo",
-                            new string[] { "Foo", "Bar" },
-                            new Type[] { typeof(int), typeof(int) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithFoo",
+                        new string[] { "Foo", "Bar" },
+                        new Type[] { typeof(int), typeof(int) }
                     )
+                )
                     .Count()
             );
 
             Assert.Equal(
                 0,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithNoFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(int) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithNoFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(int) }
                     )
+                )
                     .Count()
             );
             Assert.Equal(
                 0,
                 catalogExportProvider.GetExports(
-                        ImportFromContractAndMetadata(
-                            "MyExporterWithFoo",
-                            new string[] { "Foo" },
-                            new Type[] { typeof(int) }
-                        )
+                    ImportFromContractAndMetadata(
+                        "MyExporterWithFoo",
+                        new string[] { "Foo" },
+                        new Type[] { typeof(int) }
                     )
+                )
                     .Count()
             );
         }

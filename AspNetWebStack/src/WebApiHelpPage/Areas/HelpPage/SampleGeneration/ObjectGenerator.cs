@@ -164,9 +164,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                     return GenerateQueryable(type, collectionSize, createdObjectReferences);
                 }
 
-                Type closedCollectionType = typeof(ICollection<>).MakeGenericType(
-                    genericArguments[0]
-                );
+                Type closedCollectionType = typeof(ICollection<>)
+                    .MakeGenericType(genericArguments[0]);
                 if (closedCollectionType.IsAssignableFrom(type))
                 {
                     return GenerateCollection(type, collectionSize, createdObjectReferences);
@@ -185,10 +184,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                     );
                 }
 
-                Type closedDictionaryType = typeof(IDictionary<, >).MakeGenericType(
-                    genericArguments[0],
-                    genericArguments[1]
-                );
+                Type closedDictionaryType = typeof(IDictionary<, >)
+                    .MakeGenericType(genericArguments[0], genericArguments[1]);
                 if (closedDictionaryType.IsAssignableFrom(type))
                 {
                     return GenerateDictionary(type, collectionSize, createdObjectReferences);
@@ -362,13 +359,10 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             }
             if (isGeneric)
             {
-                Type argumentType = typeof(IEnumerable<>).MakeGenericType(
-                    queryableType.GetGenericArguments()
-                );
-                MethodInfo asQueryableMethod = typeof(Queryable).GetMethod(
-                    "AsQueryable",
-                    new[] { argumentType }
-                );
+                Type argumentType = typeof(IEnumerable<>)
+                    .MakeGenericType(queryableType.GetGenericArguments());
+                MethodInfo asQueryableMethod = typeof(Queryable)
+                    .GetMethod("AsQueryable", new[] { argumentType });
                 return asQueryableMethod.Invoke(null, new[] { list });
             }
 

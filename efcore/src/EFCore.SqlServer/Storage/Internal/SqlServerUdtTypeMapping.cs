@@ -139,14 +139,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             var valueParam = Expression.Parameter(typeof(string), "value");
 
             return Expression.Lambda<Action<DbParameter, string>>(
-                    Expression.Call(
-                        Expression.Convert(paramParam, paramType),
-                        paramType.GetProperty("UdtTypeName")!.SetMethod!,
-                        valueParam
-                    ),
-                    paramParam,
+                Expression.Call(
+                    Expression.Convert(paramParam, paramType),
+                    paramType.GetProperty("UdtTypeName")!.SetMethod!,
                     valueParam
-                )
+                ),
+                paramParam,
+                valueParam
+            )
                 .Compile();
         }
     }

@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                 ApplicationName = "TestApplication",
                 ContentRootPath = Directory.GetCurrentDirectory()
             };
-            serverOptions.ApplicationServices = new ServiceCollection().AddLogging()
+            serverOptions.ApplicationServices = new ServiceCollection()
+                .AddLogging()
                 .AddSingleton<IHostEnvironment>(env)
                 .BuildServiceProvider();
             return serverOptions;
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         {
             var found = false;
             var serverOptions = CreateServerOptions();
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:Found:Url", "http://*:5001"),
@@ -103,7 +105,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         {
             var run1 = false;
             var serverOptions = CreateServerOptions();
-            var config1 = new ConfigurationBuilder().AddInMemoryCollection(
+            var config1 = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -117,7 +120,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             Assert.False(run1);
 
             var run2 = false;
-            var config2 = new ConfigurationBuilder().AddInMemoryCollection(
+            var config2 = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End2:Url", "http://*:5002"),
@@ -159,37 +163,35 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
 
             var ran1 = false;
             var ran2 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001"),
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        ran1 = true;
-                        Assert.True(opt.IsHttps);
-                        Assert.NotNull(opt.HttpsOptions.ServerCertificate);
-                        Assert.Equal(
-                            ClientCertificateMode.RequireCertificate,
-                            opt.HttpsOptions.ClientCertificateMode
-                        );
-                        Assert.Equal(HttpProtocols.Http1, opt.ListenOptions.Protocols);
-                    }
-                )
-                .LocalhostEndpoint(
-                    5002,
-                    opt =>
-                    {
-                        ran2 = true;
-                        Assert.Equal(HttpProtocols.Http1, opt.Protocols);
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    ran1 = true;
+                    Assert.True(opt.IsHttps);
+                    Assert.NotNull(opt.HttpsOptions.ServerCertificate);
+                    Assert.Equal(
+                        ClientCertificateMode.RequireCertificate,
+                        opt.HttpsOptions.ClientCertificateMode
+                    );
+                    Assert.Equal(HttpProtocols.Http1, opt.ListenOptions.Protocols);
+                }
+            ).LocalhostEndpoint(
+                5002,
+                opt =>
+                {
+                    ran2 = true;
+                    Assert.Equal(HttpProtocols.Http1, opt.Protocols);
+                }
+            ).Load();
 
             Assert.True(ran1);
             Assert.True(ran2);
@@ -219,34 +221,32 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
 
             var ran1 = false;
             var ran2 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001"),
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        ran1 = true;
-                        Assert.True(opt.IsHttps);
-                        Assert.Equal(
-                            ClientCertificateMode.RequireCertificate,
-                            opt.HttpsOptions.ClientCertificateMode
-                        );
-                    }
-                )
-                .LocalhostEndpoint(
-                    5002,
-                    opt =>
-                    {
-                        ran2 = true;
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    ran1 = true;
+                    Assert.True(opt.IsHttps);
+                    Assert.Equal(
+                        ClientCertificateMode.RequireCertificate,
+                        opt.HttpsOptions.ClientCertificateMode
+                    );
+                }
+            ).LocalhostEndpoint(
+                5002,
+                opt =>
+                {
+                    ran2 = true;
+                }
+            ).Load();
 
             Assert.True(ran1);
             Assert.True(ran2);
@@ -273,7 +273,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                 File.WriteAllBytes(path, bytes);
 
                 var ran1 = false;
-                var config = new ConfigurationBuilder().AddInMemoryCollection(
+                var config = new ConfigurationBuilder()
+                    .AddInMemoryCollection(
                         new[]
                         {
                             new KeyValuePair<string, string>(
@@ -288,20 +289,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     )
                     .Build();
 
-                serverOptions.Configure(config)
-                    .Endpoint(
-                        "End1",
-                        opt =>
-                        {
-                            ran1 = true;
-                            Assert.True(opt.IsHttps);
-                            Assert.Equal(
-                                opt.HttpsOptions.ServerCertificate.SerialNumber,
-                                certificate.SerialNumber
-                            );
-                        }
-                    )
-                    .Load();
+                serverOptions.Configure(config).Endpoint(
+                    "End1",
+                    opt =>
+                    {
+                        ran1 = true;
+                        Assert.True(opt.IsHttps);
+                        Assert.Equal(
+                            opt.HttpsOptions.ServerCertificate.SerialNumber,
+                            certificate.SerialNumber
+                        );
+                    }
+                ).Load();
 
                 Assert.True(ran1);
                 Assert.NotNull(serverOptions.DefaultCertificate);
@@ -322,7 +321,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var serverOptions = CreateServerOptions();
             var certificate = new X509Certificate2(TestResources.GetCertPath("https-aspnet.crt"));
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001"),
@@ -341,15 +341,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var ex = Assert.Throws<ArgumentException>(
                 () =>
                 {
-                    serverOptions.Configure(config)
-                        .Endpoint(
-                            "End1",
-                            opt =>
-                            {
-                                Assert.True(opt.IsHttps);
-                            }
-                        )
-                        .Load();
+                    serverOptions.Configure(config).Endpoint(
+                        "End1",
+                        opt =>
+                        {
+                            Assert.True(opt.IsHttps);
+                        }
+                    ).Load();
                 }
             );
         }
@@ -360,7 +358,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var serverOptions = CreateServerOptions();
             var certificate = new X509Certificate2(TestResources.GetCertPath("https-aspnet.crt"));
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001"),
@@ -383,15 +382,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var ex = Assert.Throws<ArgumentException>(
                 () =>
                 {
-                    serverOptions.Configure(config)
-                        .Endpoint(
-                            "End1",
-                            opt =>
-                            {
-                                Assert.True(opt.IsHttps);
-                            }
-                        )
-                        .Load();
+                    serverOptions.Configure(config).Endpoint(
+                        "End1",
+                        opt =>
+                        {
+                            Assert.True(opt.IsHttps);
+                        }
+                    ).Load();
                 }
             );
         }
@@ -402,7 +399,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var serverOptions = CreateServerOptions();
             var certificate = new X509Certificate2(TestResources.GetCertPath("https-aspnet.crt"));
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001"),
@@ -422,15 +420,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var ex = Assert.Throws<CryptographicException>(
                 () =>
                 {
-                    serverOptions.Configure(config)
-                        .Endpoint(
-                            "End1",
-                            opt =>
-                            {
-                                Assert.True(opt.IsHttps);
-                            }
-                        )
-                        .Load();
+                    serverOptions.Configure(config).Endpoint(
+                        "End1",
+                        opt =>
+                        {
+                            Assert.True(opt.IsHttps);
+                        }
+                    ).Load();
                 }
             );
         }
@@ -441,7 +437,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var serverOptions = CreateServerOptions();
             var certificate = new X509Certificate2(TestResources.GetCertPath("https-aspnet.crt"));
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001"),
@@ -460,15 +457,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var ex = Assert.Throws<InvalidOperationException>(
                 () =>
                 {
-                    serverOptions.Configure(config)
-                        .Endpoint(
-                            "End1",
-                            opt =>
-                            {
-                                Assert.True(opt.IsHttps);
-                            }
-                        )
-                        .Load();
+                    serverOptions.Configure(config).Endpoint(
+                        "End1",
+                        opt =>
+                        {
+                            Assert.True(opt.IsHttps);
+                        }
+                    ).Load();
                 }
             );
             Assert.StartsWith("Error getting private key from", ex.Message);
@@ -500,7 +495,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             );
 
             var ran1 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001"),
@@ -512,34 +508,33 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                             "Certificates:Default:KeyPath",
                             Path.Combine("shared", "TestCertificates", certificateKey)
                         ),
-                    }.Concat(
-                        password != null
-                          ? new[]
-                            {
-                                new KeyValuePair<string, string>(
-                                    "Certificates:Default:Password",
-                                    password
-                                )
-                            }
-                          : Array.Empty<KeyValuePair<string, string>>()
-                    )
+                    }
+                        .Concat(
+                            password != null
+                              ? new[]
+                                {
+                                    new KeyValuePair<string, string>(
+                                        "Certificates:Default:Password",
+                                        password
+                                    )
+                                }
+                              : Array.Empty<KeyValuePair<string, string>>()
+                        )
                 )
                 .Build();
 
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        ran1 = true;
-                        Assert.True(opt.IsHttps);
-                        Assert.Equal(
-                            opt.HttpsOptions.ServerCertificate.SerialNumber,
-                            certificate.SerialNumber
-                        );
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    ran1 = true;
+                    Assert.True(opt.IsHttps);
+                    Assert.Equal(
+                        opt.HttpsOptions.ServerCertificate.SerialNumber,
+                        certificate.SerialNumber
+                    );
+                }
+            ).Load();
 
             Assert.True(ran1);
             Assert.NotNull(serverOptions.DefaultCertificate);
@@ -561,7 +556,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                 Directory.CreateDirectory(Path.GetDirectoryName(path));
                 File.WriteAllBytes(path, bytes);
 
-                var config = new ConfigurationBuilder().AddInMemoryCollection(
+                var config = new ConfigurationBuilder()
+                    .AddInMemoryCollection(
                         new[]
                         {
                             new KeyValuePair<string, string>(
@@ -597,7 +593,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     File.Delete(GetCertificatePath());
                 }
 
-                var config = new ConfigurationBuilder().AddInMemoryCollection(
+                var config = new ConfigurationBuilder()
+                    .AddInMemoryCollection(
                         new[]
                         {
                             new KeyValuePair<string, string>(
@@ -628,17 +625,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var serverOptions = CreateServerOptions();
 
             var config = new ConfigurationBuilder().AddInMemoryCollection(
-                    new[]
-                    {
-                        new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
-                        // We shouldn't need to specify a real cert, because KestrelConfigurationLoader should check whether the endpoint requires a cert before trying to load it.
-                        new KeyValuePair<string, string>(
-                            "Endpoints:End1:Certificate:Path",
-                            "fakecert.pfx"
-                        ),
-                    }
-                )
-                .Build();
+                new[]
+                {
+                    new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
+                    // We shouldn't need to specify a real cert, because KestrelConfigurationLoader should check whether the endpoint requires a cert before trying to load it.
+                    new KeyValuePair<string, string>(
+                        "Endpoints:End1:Certificate:Path",
+                        "fakecert.pfx"
+                    ),
+                }
+            ).Build();
 
             var ex = Assert.Throws<InvalidOperationException>(
                 () => serverOptions.Configure(config).Load()
@@ -648,7 +644,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                 ex.Message
             );
 
-            config = new ConfigurationBuilder().AddInMemoryCollection(
+            config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -668,7 +665,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                 ex.Message
             );
 
-            config = new ConfigurationBuilder().AddInMemoryCollection(
+            config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -688,7 +686,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                 ex.Message
             );
 
-            config = new ConfigurationBuilder().AddInMemoryCollection(
+            config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -708,7 +707,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                 ex.Message
             );
 
-            config = new ConfigurationBuilder().AddInMemoryCollection(
+            config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -731,7 +731,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         {
             var serverOptions = CreateServerOptions();
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -750,7 +751,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
 
             serverOptions = CreateServerOptions();
 
-            config = new ConfigurationBuilder().AddInMemoryCollection(
+            config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -813,7 +815,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var ran1 = false;
             var ran2 = false;
             var ran3 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("EndpointDefaults:Protocols", input),
@@ -821,30 +824,27 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.True(opt.IsHttps);
-                        Assert.NotNull(opt.HttpsOptions.ServerCertificate);
-                        Assert.Equal(
-                            ClientCertificateMode.RequireCertificate,
-                            opt.HttpsOptions.ClientCertificateMode
-                        );
-                        Assert.Equal(expected, opt.ListenOptions.Protocols);
-                        ran1 = true;
-                    }
-                )
-                .LocalhostEndpoint(
-                    5002,
-                    opt =>
-                    {
-                        Assert.Equal(expected, opt.Protocols);
-                        ran2 = true;
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    Assert.True(opt.IsHttps);
+                    Assert.NotNull(opt.HttpsOptions.ServerCertificate);
+                    Assert.Equal(
+                        ClientCertificateMode.RequireCertificate,
+                        opt.HttpsOptions.ClientCertificateMode
+                    );
+                    Assert.Equal(expected, opt.ListenOptions.Protocols);
+                    ran1 = true;
+                }
+            ).LocalhostEndpoint(
+                5002,
+                opt =>
+                {
+                    Assert.Equal(expected, opt.Protocols);
+                    ran2 = true;
+                }
+            ).Load();
             serverOptions.ListenAnyIP(
                 0,
                 opt =>
@@ -906,7 +906,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var ran1 = false;
             var ran2 = false;
             var ran3 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Protocols", input),
@@ -914,31 +915,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.True(opt.IsHttps);
-                        Assert.NotNull(opt.HttpsOptions.ServerCertificate);
-                        Assert.Equal(
-                            ClientCertificateMode.RequireCertificate,
-                            opt.HttpsOptions.ClientCertificateMode
-                        );
-                        Assert.Equal(expected, opt.ListenOptions.Protocols);
-                        ran1 = true;
-                    }
-                )
-                .LocalhostEndpoint(
-                    5002,
-                    opt =>
-                    {
-                        // Kestrel default.
-                        Assert.Equal(HttpProtocols.Http1AndHttp2, opt.Protocols);
-                        ran2 = true;
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    Assert.True(opt.IsHttps);
+                    Assert.NotNull(opt.HttpsOptions.ServerCertificate);
+                    Assert.Equal(
+                        ClientCertificateMode.RequireCertificate,
+                        opt.HttpsOptions.ClientCertificateMode
+                    );
+                    Assert.Equal(expected, opt.ListenOptions.Protocols);
+                    ran1 = true;
+                }
+            ).LocalhostEndpoint(
+                5002,
+                opt =>
+                {
+                    // Kestrel default.
+                    Assert.Equal(HttpProtocols.Http1AndHttp2, opt.Protocols);
+                    ran2 = true;
+                }
+            ).Load();
             serverOptions.ListenAnyIP(
                 0,
                 opt =>
@@ -974,7 +972,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
 
             var ran1 = false;
             var ran2 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:SslProtocols:0", "Tls11"),
@@ -982,16 +981,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
-                        ran1 = true;
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
+                    ran1 = true;
+                }
+            ).Load();
             serverOptions.ListenAnyIP(
                 0,
                 opt =>
@@ -1026,7 +1023,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             );
 
             var ran1 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:SslProtocols:0", "Tls11"),
@@ -1034,16 +1032,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
-                        ran1 = true;
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
+                    ran1 = true;
+                }
+            ).Load();
 
             Assert.True(ran1);
         }
@@ -1061,7 +1057,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             );
 
             var ran1 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -1072,16 +1069,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
-                        ran1 = true;
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
+                    ran1 = true;
+                }
+            ).Load();
 
             Assert.True(ran1);
         }
@@ -1102,7 +1097,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             );
 
             var ran1 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -1113,16 +1109,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.Equal(SslProtocols.Tls12, opt.HttpsOptions.SslProtocols);
-                        ran1 = true;
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    Assert.Equal(SslProtocols.Tls12, opt.HttpsOptions.SslProtocols);
+                    ran1 = true;
+                }
+            ).Load();
 
             Assert.True(ran1);
         }
@@ -1146,7 +1140,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
 
             var ran1 = false;
             var ran2 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -1157,19 +1152,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.Equal(
-                            ClientCertificateMode.AllowCertificate,
-                            opt.HttpsOptions.ClientCertificateMode
-                        );
-                        ran1 = true;
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    Assert.Equal(
+                        ClientCertificateMode.AllowCertificate,
+                        opt.HttpsOptions.ClientCertificateMode
+                    );
+                    ran1 = true;
+                }
+            ).Load();
             serverOptions.ListenAnyIP(
                 0,
                 opt =>
@@ -1200,7 +1193,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var certPath = Path.Combine("shared", "TestCertificates", "https-ecdsa.pem");
             var keyPath = Path.Combine("shared", "TestCertificates", "https-ecdsa.key");
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001"),
@@ -1254,7 +1248,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             );
 
             var ran1 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -1265,19 +1260,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.Equal(
-                            ClientCertificateMode.AllowCertificate,
-                            opt.HttpsOptions.ClientCertificateMode
-                        );
-                        ran1 = true;
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    Assert.Equal(
+                        ClientCertificateMode.AllowCertificate,
+                        opt.HttpsOptions.ClientCertificateMode
+                    );
+                    ran1 = true;
+                }
+            ).Load();
 
             Assert.True(ran1);
         }
@@ -1295,7 +1288,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             );
 
             var ran1 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -1306,19 +1300,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.Equal(
-                            ClientCertificateMode.AllowCertificate,
-                            opt.HttpsOptions.ClientCertificateMode
-                        );
-                        ran1 = true;
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    Assert.Equal(
+                        ClientCertificateMode.AllowCertificate,
+                        opt.HttpsOptions.ClientCertificateMode
+                    );
+                    ran1 = true;
+                }
+            ).Load();
 
             Assert.True(ran1);
         }
@@ -1339,7 +1331,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             );
 
             var ran1 = false;
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -1350,19 +1343,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                     }
                 )
                 .Build();
-            serverOptions.Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.Equal(
-                            ClientCertificateMode.RequireCertificate,
-                            opt.HttpsOptions.ClientCertificateMode
-                        );
-                        ran1 = true;
-                    }
-                )
-                .Load();
+            serverOptions.Configure(config).Endpoint(
+                "End1",
+                opt =>
+                {
+                    Assert.Equal(
+                        ClientCertificateMode.RequireCertificate,
+                        opt.HttpsOptions.ClientCertificateMode
+                    );
+                    ran1 = true;
+                }
+            ).Load();
 
             Assert.True(ran1);
         }
@@ -1372,7 +1363,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         {
             var serverOptions = CreateServerOptions();
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:A:Url", "http://*:5000"),
@@ -1387,16 +1379,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             Assert.Equal(5000, serverOptions.ConfigurationBackedListenOptions[0].IPEndPoint.Port);
             Assert.Equal(5001, serverOptions.ConfigurationBackedListenOptions[1].IPEndPoint.Port);
 
-            serverOptions.ConfigurationLoader.Configuration =
-                new ConfigurationBuilder().AddInMemoryCollection(
-                        new[]
-                        {
-                            new KeyValuePair<string, string>("Endpoints:A:Url", "http://*:5000"),
-                            new KeyValuePair<string, string>("Endpoints:B:Url", "http://*:5002"),
-                            new KeyValuePair<string, string>("Endpoints:C:Url", "http://*:5003"),
-                        }
-                    )
-                    .Build();
+            serverOptions.ConfigurationLoader.Configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new[]
+                    {
+                        new KeyValuePair<string, string>("Endpoints:A:Url", "http://*:5000"),
+                        new KeyValuePair<string, string>("Endpoints:B:Url", "http://*:5002"),
+                        new KeyValuePair<string, string>("Endpoints:C:Url", "http://*:5003"),
+                    }
+                )
+                .Build();
 
             var (endpointsToStop, endpointsToStart) = serverOptions.ConfigurationLoader.Reload();
 
@@ -1418,7 +1410,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         {
             var serverOptions = CreateServerOptions();
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -1439,26 +1432,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
 
             serverOptions.Configure(config).Load();
 
-            serverOptions.ConfigurationLoader.Configuration =
-                new ConfigurationBuilder().AddInMemoryCollection(
-                        new[]
-                        {
-                            new KeyValuePair<string, string>(
-                                "Endpoints:DefaultProtocol:Url",
-                                "http://*:5000"
-                            ),
-                            new KeyValuePair<string, string>(
-                                "Endpoints:NonDefaultProtocol:Url",
-                                "http://*:5001"
-                            ),
-                            new KeyValuePair<string, string>(
-                                "Endpoints:NonDefaultProtocol:Protocols",
-                                "Http1AndHttp2"
-                            ),
-                            new KeyValuePair<string, string>("EndpointDefaults:Protocols", "Http1"),
-                        }
-                    )
-                    .Build();
+            serverOptions.ConfigurationLoader.Configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new[]
+                    {
+                        new KeyValuePair<string, string>(
+                            "Endpoints:DefaultProtocol:Url",
+                            "http://*:5000"
+                        ),
+                        new KeyValuePair<string, string>(
+                            "Endpoints:NonDefaultProtocol:Url",
+                            "http://*:5001"
+                        ),
+                        new KeyValuePair<string, string>(
+                            "Endpoints:NonDefaultProtocol:Protocols",
+                            "Http1AndHttp2"
+                        ),
+                        new KeyValuePair<string, string>("EndpointDefaults:Protocols", "Http1"),
+                    }
+                )
+                .Build();
 
             var (endpointsToStop, endpointsToStart) = serverOptions.ConfigurationLoader.Reload();
 
@@ -1478,7 +1471,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             var foundUnchangedCount = 0;
             var serverOptions = CreateServerOptions();
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:Changed:Url", "http://*:5001"),
@@ -1499,21 +1493,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             Assert.Equal(1, foundChangedCount);
             Assert.Equal(1, foundUnchangedCount);
 
-            serverOptions.ConfigurationLoader.Configuration =
-                new ConfigurationBuilder().AddInMemoryCollection(
-                        new[]
-                        {
-                            new KeyValuePair<string, string>(
-                                "Endpoints:Changed:Url",
-                                "http://*:5002"
-                            ),
-                            new KeyValuePair<string, string>(
-                                "Endpoints:Unchanged:Url",
-                                "http://*:5000"
-                            ),
-                        }
-                    )
-                    .Build();
+            serverOptions.ConfigurationLoader.Configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new[]
+                    {
+                        new KeyValuePair<string, string>("Endpoints:Changed:Url", "http://*:5002"),
+                        new KeyValuePair<string, string>(
+                            "Endpoints:Unchanged:Url",
+                            "http://*:5000"
+                        ),
+                    }
+                )
+                .Build();
 
             serverOptions.ConfigurationLoader.Reload();
 

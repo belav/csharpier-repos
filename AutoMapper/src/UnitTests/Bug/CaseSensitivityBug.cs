@@ -15,9 +15,8 @@
         [Fact]
         public void TestMethod1()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
 
         public class Foo

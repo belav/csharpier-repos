@@ -185,9 +185,8 @@ namespace System.Reflection.Emit.Tests
                 null
             );
 
-            ConstructorInfo con = typeof(IntPropertyAttribute).GetConstructor(
-                new Type[] { typeof(int) }
-            );
+            ConstructorInfo con = typeof(IntPropertyAttribute)
+                .GetConstructor(new Type[] { typeof(int) });
 
             type.CreateTypeInfo().AsType();
             Assert.Throws<InvalidOperationException>(

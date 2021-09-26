@@ -65,10 +65,10 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
         {
             var (document, textSpan, cancellationToken) = context;
             var (tupleExprOrTypeNode, tupleType) = await TryGetTupleInfoAsync(
-                    document,
-                    textSpan,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (tupleExprOrTypeNode == null || tupleType == null)
@@ -163,9 +163,9 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 await document.TryGetRelevantNodeAsync<TTupleTypeSyntax>(span, cancellationToken)
                     .ConfigureAwait(false) as SyntaxNode
                 ?? await document.TryGetRelevantNodeAsync<TTupleExpressionSyntax>(
-                        span,
-                        cancellationToken
-                    )
+                    span,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             if (expressionOrType == null)
             {
@@ -203,9 +203,9 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             {
                 var solution = document.Project.Solution;
                 var client = await RemoteHostClient.TryGetClientAsync(
-                        solution.Workspace,
-                        cancellationToken
-                    )
+                    solution.Workspace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (client != null)
                 {
@@ -213,17 +213,17 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                         IRemoteConvertTupleToStructCodeRefactoringService,
                         SerializableConvertTupleToStructResult
                     >(
-                            solution,
-                            (service, solutionInfo, cancellationToken) =>
-                                service.ConvertToStructAsync(
-                                    solutionInfo,
-                                    document.Id,
-                                    span,
-                                    scope,
-                                    cancellationToken
-                                ),
-                            cancellationToken
-                        )
+                        solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.ConvertToStructAsync(
+                                solutionInfo,
+                                document.Id,
+                                span,
+                                scope,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     if (!result.HasValue)
@@ -232,27 +232,27 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                     }
 
                     var resultSolution = await RemoteUtilities.UpdateSolutionAsync(
-                            solution,
-                            result.Value.DocumentTextChanges,
-                            cancellationToken
-                        )
+                        solution,
+                        result.Value.DocumentTextChanges,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return await AddRenameTokenAsync(
-                            resultSolution,
-                            result.Value.RenamedToken,
-                            cancellationToken
-                        )
+                        resultSolution,
+                        result.Value.RenamedToken,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
 
             return await ConvertToStructInCurrentProcessAsync(
-                    document,
-                    span,
-                    scope,
-                    cancellationToken
-                )
+                document,
+                span,
+                scope,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -281,10 +281,10 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
         )
         {
             var (tupleExprOrTypeNode, tupleType) = await TryGetTupleInfoAsync(
-                    document,
-                    span,
-                    cancellationToken
-                )
+                document,
+                span,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             Debug.Assert(tupleExprOrTypeNode != null);
@@ -310,7 +310,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 n => semanticModel.LookupSymbols(position, name: n).IsEmpty
             );
 
-            var capturedTypeParameters = tupleType.TupleElements.Select(p => p.Type)
+            var capturedTypeParameters = tupleType.TupleElements
+                .Select(p => p.Type)
                 .SelectMany<ITypeSymbol, ITypeParameterSymbol>(t => t.GetReferencedTypeParameters())
                 .Distinct()
                 .ToImmutableArray();
@@ -318,64 +319,64 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             // Get the rule that will name the parameter according to the users preferences for this document
             // (and importantly not any of the documents where we change the call sites, below)
             var parameterNamingRule = await document.GetApplicableNamingRuleAsync(
-                    SymbolKind.Parameter,
-                    Accessibility.NotApplicable,
-                    cancellationToken
-                )
+                SymbolKind.Parameter,
+                Accessibility.NotApplicable,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Next, generate the full struct that will be used to replace all instances of this
             // tuple type.
             var namedTypeSymbol = await GenerateFinalNamedTypeAsync(
-                    document,
-                    scope,
-                    structName,
-                    capturedTypeParameters,
-                    tupleType,
-                    parameterNamingRule,
-                    cancellationToken
-                )
+                document,
+                scope,
+                structName,
+                capturedTypeParameters,
+                tupleType,
+                parameterNamingRule,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var documentToEditorMap = new Dictionary<Document, SyntaxEditor>();
             var documentsToUpdate = await GetDocumentsToUpdateAsync(
-                    document,
-                    tupleExprOrTypeNode,
-                    tupleType,
-                    scope,
-                    cancellationToken
-                )
+                document,
+                tupleExprOrTypeNode,
+                tupleType,
+                scope,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Next, go through and replace all matching tuple expressions and types in the appropriate
             // scope with the new named type we've generated.
             await ReplaceExpressionAndTypesInScopeAsync(
-                    documentToEditorMap,
-                    documentsToUpdate,
-                    tupleExprOrTypeNode,
-                    tupleType,
-                    structName,
-                    capturedTypeParameters,
-                    containingNamespace,
-                    parameterNamingRule,
-                    cancellationToken
-                )
+                documentToEditorMap,
+                documentsToUpdate,
+                tupleExprOrTypeNode,
+                tupleType,
+                structName,
+                capturedTypeParameters,
+                containingNamespace,
+                parameterNamingRule,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             await GenerateStructIntoContainingNamespaceAsync(
-                    document,
-                    tupleExprOrTypeNode,
-                    namedTypeSymbol,
-                    documentToEditorMap,
-                    cancellationToken
-                )
+                document,
+                tupleExprOrTypeNode,
+                namedTypeSymbol,
+                documentToEditorMap,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var updatedSolution = await ApplyChangesAsync(
-                    document,
-                    documentToEditorMap,
-                    cancellationToken
-                )
+                document,
+                documentToEditorMap,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return updatedSolution;
@@ -459,17 +460,17 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                     foreach (var container in nodesToUpdate)
                     {
                         replaced |= await ReplaceTupleExpressionsAndTypesInDocumentAsync(
-                                document,
-                                parameterNamingRule,
-                                editor,
-                                tupleExprOrTypeNode,
-                                tupleType,
-                                fullTypeName,
-                                structName,
-                                typeParameters,
-                                container,
-                                cancellationToken
-                            )
+                            document,
+                            parameterNamingRule,
+                            editor,
+                            tupleExprOrTypeNode,
+                            tupleType,
+                            fullTypeName,
+                            structName,
+                            typeParameters,
+                            container,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -522,24 +523,24 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                   => GetDocumentsToUpdateForContainingMember(document, tupleExprOrTypeNode),
                 Scope.ContainingType
                   => await GetDocumentsToUpdateForContainingTypeAsync(
-                          document,
-                          tupleExprOrTypeNode,
-                          cancellationToken
-                      )
+                      document,
+                      tupleExprOrTypeNode,
+                      cancellationToken
+                  )
                       .ConfigureAwait(false),
                 Scope.ContainingProject
                   => await GetDocumentsToUpdateForContainingProjectAsync(
-                          document.Project,
-                          tupleType,
-                          cancellationToken
-                      )
+                      document.Project,
+                      tupleType,
+                      cancellationToken
+                  )
                       .ConfigureAwait(false),
                 Scope.DependentProjects
                   => await GetDocumentsToUpdateForDependentProjectAsync(
-                          document.Project,
-                          tupleType,
-                          cancellationToken
-                      )
+                      document.Project,
+                      tupleType,
+                      cancellationToken
+                  )
                       .ConfigureAwait(false),
                 _ => throw ExceptionUtilities.UnexpectedValue(scope),
             };
@@ -584,18 +585,17 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 .ToSet();
 
             using var _ = ArrayBuilder<DocumentToUpdate>.GetInstance(out var result);
-            var tupleFieldNames = tupleType.TupleElements.SelectAsArray<IFieldSymbol, string>(
-                f => f.Name
-            );
+            var tupleFieldNames = tupleType.TupleElements
+                .SelectAsArray<IFieldSymbol, string>(f => f.Name);
 
             foreach (var project in allProjects)
             {
                 await AddDocumentsToUpdateForProjectAsync(
-                        project,
-                        result,
-                        tupleFieldNames,
-                        cancellationToken
-                    )
+                    project,
+                    result,
+                    tupleFieldNames,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -611,16 +611,15 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
         )
         {
             using var _ = ArrayBuilder<DocumentToUpdate>.GetInstance(out var result);
-            var tupleFieldNames = tupleType.TupleElements.SelectAsArray<IFieldSymbol, string>(
-                f => f.Name
-            );
+            var tupleFieldNames = tupleType.TupleElements
+                .SelectAsArray<IFieldSymbol, string>(f => f.Name);
 
             await AddDocumentsToUpdateForProjectAsync(
-                    project,
-                    result,
-                    tupleFieldNames,
-                    cancellationToken
-                )
+                project,
+                result,
+                tupleFieldNames,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return result.ToImmutable();
@@ -781,10 +780,10 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 var docId = currentDoc.Id;
                 var newRoot = editor.GetChangedRoot();
                 var updatedDocument = currentSolution.WithDocumentSyntaxRoot(
-                        docId,
-                        newRoot,
-                        PreservationMode.PreserveIdentity
-                    )
+                    docId,
+                    newRoot,
+                    PreservationMode.PreserveIdentity
+                )
                     .GetDocument(docId);
 
                 if (currentDoc == startingDocument)
@@ -795,9 +794,9 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                     var equalsAndGetHashCodeService =
                         startingDocument.GetLanguageService<IGenerateEqualsAndGetHashCodeService>();
                     updatedDocument = await equalsAndGetHashCodeService.FormatDocumentAsync(
-                            updatedDocument,
-                            cancellationToken
-                        )
+                        updatedDocument,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -822,30 +821,30 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
         {
             var changed = false;
             changed |= await ReplaceMatchingTupleExpressionsAsync(
-                    document,
-                    parameterNamingRule,
-                    editor,
-                    startingNode,
-                    tupleType,
-                    fullyQualifiedStructName,
-                    structName,
-                    typeParameters,
-                    containerToUpdate,
-                    cancellationToken
-                )
+                document,
+                parameterNamingRule,
+                editor,
+                startingNode,
+                tupleType,
+                fullyQualifiedStructName,
+                structName,
+                typeParameters,
+                containerToUpdate,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             changed |= await ReplaceMatchingTupleTypesAsync(
-                    document,
-                    editor,
-                    startingNode,
-                    tupleType,
-                    fullyQualifiedStructName,
-                    structName,
-                    typeParameters,
-                    containerToUpdate,
-                    cancellationToken
-                )
+                document,
+                editor,
+                startingNode,
+                tupleType,
+                fullyQualifiedStructName,
+                structName,
+                typeParameters,
+                containerToUpdate,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return changed;
@@ -975,11 +974,11 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                     arguments = ConvertArguments(g, parameterNamingRule, arguments);
 
                     return g.ObjectCreationExpression(
-                            typeNameNode,
-                            openParen,
-                            arguments,
-                            closeParen
-                        )
+                        typeNameNode,
+                        openParen,
+                        arguments,
+                        closeParen
+                    )
                         .WithAdditionalAnnotations(Formatter.Annotation);
                 }
             );
@@ -1162,20 +1161,20 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 document.GetLanguageService<IGenerateEqualsAndGetHashCodeService>();
 
             var equalsMethod = await equalsAndGetHashCodeService.GenerateEqualsMethodAsync(
-                    document,
-                    namedTypeWithoutMembers,
-                    ImmutableArray<ISymbol>.CastUp(fields),
-                    localNameOpt: SyntaxGeneratorExtensions.OtherName,
-                    cancellationToken
-                )
+                document,
+                namedTypeWithoutMembers,
+                ImmutableArray<ISymbol>.CastUp(fields),
+                localNameOpt: SyntaxGeneratorExtensions.OtherName,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var getHashCodeMethod =
                 await equalsAndGetHashCodeService.GenerateGetHashCodeMethodAsync(
-                        document,
-                        namedTypeWithoutMembers,
-                        ImmutableArray<ISymbol>.CastUp(fields),
-                        cancellationToken
-                    )
+                    document,
+                    namedTypeWithoutMembers,
+                    ImmutableArray<ISymbol>.CastUp(fields),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             var members = ArrayBuilder<ISymbol>.GetInstance();
@@ -1205,7 +1204,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             IMethodSymbol constructor
         )
         {
-            var assignments = tupleType.TupleElements.Select(
+            var assignments = tupleType.TupleElements
+                .Select(
                     (field, index) =>
                         generator.ExpressionStatement(
                             generator.AssignmentStatement(
@@ -1228,14 +1228,15 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 explicitInterfaceImplementations: default,
                 WellKnownMemberNames.DeconstructMethodName,
                 typeParameters: default,
-                constructor.Parameters.SelectAsArray(
-                    p =>
-                        CodeGenerationSymbolFactory.CreateParameterSymbol(
-                            RefKind.Out,
-                            p.Type,
-                            p.Name
-                        )
-                ),
+                constructor.Parameters
+                    .SelectAsArray(
+                        p =>
+                            CodeGenerationSymbolFactory.CreateParameterSymbol(
+                                RefKind.Out,
+                                p.Type,
+                                p.Name
+                            )
+                    ),
                 assignments
             );
         }
@@ -1250,9 +1251,11 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             const string ValueName = "value";
 
             var valueNode = generator.IdentifierName(ValueName);
-            var arguments = tupleType.TupleElements.SelectAsArray<IFieldSymbol, SyntaxNode>(
-                field => generator.Argument(generator.MemberAccessExpression(valueNode, field.Name))
-            );
+            var arguments = tupleType.TupleElements
+                .SelectAsArray<IFieldSymbol, SyntaxNode>(
+                    field =>
+                        generator.Argument(generator.MemberAccessExpression(valueNode, field.Name))
+                );
 
             var convertToTupleStatement = generator.ReturnStatement(
                 generator.TupleExpression(arguments)

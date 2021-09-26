@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 this.PreviewChangesCheckbox,
                 this.ApplyButton,
                 this.CloseButton
-            }.ToList();
+            }
+                .ToList();
 
             _textView = textView;
             this.DataContext = model;
@@ -257,61 +258,63 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             if (e != null)
             {
                 if (
-                    string.Equals(
-                        e.Key,
-                        RenameShortcutKey.RenameOverloads,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            e.Key,
+                            RenameShortcutKey.RenameOverloads,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     this.OverloadsCheckbox.IsChecked = !this.OverloadsCheckbox.IsChecked;
                 }
                 else if (
-                    string.Equals(
-                        e.Key,
-                        RenameShortcutKey.SearchInComments,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            e.Key,
+                            RenameShortcutKey.SearchInComments,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     this.CommentsCheckbox.IsChecked = !this.CommentsCheckbox.IsChecked;
                 }
                 else if (
-                    string.Equals(
-                        e.Key,
-                        RenameShortcutKey.SearchInStrings,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            e.Key,
+                            RenameShortcutKey.SearchInStrings,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     this.StringsCheckbox.IsChecked = !this.StringsCheckbox.IsChecked;
                 }
                 else if (
-                    string.Equals(
-                        e.Key,
-                        RenameShortcutKey.PreviewChanges,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            e.Key,
+                            RenameShortcutKey.PreviewChanges,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     this.PreviewChangesCheckbox.IsChecked = !this.PreviewChangesCheckbox.IsChecked;
                 }
                 else if (
-                    string.Equals(
-                        e.Key,
-                        RenameShortcutKey.RenameFile,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            e.Key,
+                            RenameShortcutKey.RenameFile,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     this.FileRenameCheckbox.IsChecked = !this.FileRenameCheckbox.IsChecked;
                 }
                 else if (
-                    string.Equals(
-                        e.Key,
-                        RenameShortcutKey.Apply,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(e.Key, RenameShortcutKey.Apply, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     this.Commit();
@@ -420,8 +423,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 // Session.Commit can throw if it can't commit
                 // rename operation.
                 // handle that case gracefully
-                var notificationService =
-                    _model.Session.Workspace.Services.GetService<INotificationService>();
+                var notificationService = _model.Session.Workspace.Services
+                    .GetService<INotificationService>();
                 notificationService.SendNotification(
                     ex.Message,
                     title: EditorFeaturesResources.Rename,
@@ -431,8 +434,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             catch (Exception ex) when (FatalError.ReportAndCatch(ex))
             {
                 // Show a nice error to the user via an info bar
-                var errorReportingService =
-                    _model.Session.Workspace.Services.GetService<IErrorReportingService>();
+                var errorReportingService = _model.Session.Workspace.Services
+                    .GetService<IErrorReportingService>();
                 if (errorReportingService is null)
                 {
                     return;

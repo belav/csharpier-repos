@@ -63,9 +63,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                 typeof(Geometry).IsAssignableFrom(clrType)
                 || (storeTypeName != null && _spatialStoreTypes.Contains(storeTypeName))
               ? (RelationalTypeMapping)Activator.CreateInstance(
-                    typeof(SqlServerGeometryTypeMapping<>).MakeGenericType(
-                        clrType ?? typeof(Geometry)
-                    ),
+                    typeof(SqlServerGeometryTypeMapping<>)
+                        .MakeGenericType(clrType ?? typeof(Geometry)),
                     _geometryServices,
                     storeTypeName ?? "geography"
                 )!

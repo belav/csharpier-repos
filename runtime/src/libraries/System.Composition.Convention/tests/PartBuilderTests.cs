@@ -547,13 +547,13 @@ namespace System.Composition.Convention.Tests
         {
             var builder = new ConventionBuilder();
             builder.ForTypesMatching(
-                    (t) => !t.GetTypeInfo().IsDefined(typeof(MyDoNotIncludeAttribute), false)
-                )
+                (t) => !t.GetTypeInfo().IsDefined(typeof(MyDoNotIncludeAttribute), false)
+            )
                 .Export();
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<MyNotToBeIncludedClass>(builder)
-                    .WithPart<MyToBeIncludedClass>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<MyNotToBeIncludedClass>(builder)
+                .WithPart<MyToBeIncludedClass>(builder)
+                .CreateContainer();
 
             var importer = new ImporterOfMyNotTobeIncludedClass();
             container.SatisfyImports(importer);
@@ -568,10 +568,10 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForTypesMatching(t => true)
                 .NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied");
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<OnImportsSatisfiedConfiguredClass>(builder)
-                    .WithPart<ExportValues>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<OnImportsSatisfiedConfiguredClass>(builder)
+                .WithPart<ExportValues>(builder)
+                .CreateContainer();
             OnImportsSatisfiedConfiguredClass test =
                 container.GetExport<OnImportsSatisfiedConfiguredClass>();
 
@@ -586,10 +586,10 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForTypesMatching(t => true)
                 .NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied");
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<OnImportsSatisfiedDerivedClass>(builder)
-                    .WithPart<ExportValues>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<OnImportsSatisfiedDerivedClass>(builder)
+                .WithPart<ExportValues>(builder)
+                .CreateContainer();
             OnImportsSatisfiedDerivedClass test =
                 container.GetExport<OnImportsSatisfiedDerivedClass>();
 
@@ -604,10 +604,10 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForTypesMatching(t => true)
                 .NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied1");
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<OnImportsSatisfiedMultipleClass>(builder)
-                    .WithPart<ExportValues>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<OnImportsSatisfiedMultipleClass>(builder)
+                .WithPart<ExportValues>(builder)
+                .CreateContainer();
             OnImportsSatisfiedMultipleClass test =
                 container.GetExport<OnImportsSatisfiedMultipleClass>();
 
@@ -624,10 +624,10 @@ namespace System.Composition.Convention.Tests
                 .NotifyImportsSatisfied(
                     mi => mi.Name == "OnImportsSatisfied1" || mi.Name == "OnImportsSatisfied2"
                 );
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<OnImportsSatisfiedMultipleClass>(builder)
-                    .WithPart<ExportValues>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<OnImportsSatisfiedMultipleClass>(builder)
+                .WithPart<ExportValues>(builder)
+                .CreateContainer();
             OnImportsSatisfiedMultipleClass test =
                 container.GetExport<OnImportsSatisfiedMultipleClass>();
 
@@ -644,12 +644,10 @@ namespace System.Composition.Convention.Tests
                 .NotifyImportsSatisfied(
                     mi => mi.Name == "OnImportsSatisfied3" || mi.Name == "OnImportsSatisfied4"
                 );
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<OnImportsSatisfiedTestClassPropertiesAndFields>(
-                        builder
-                    )
-                    .WithPart<ExportValues>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<OnImportsSatisfiedTestClassPropertiesAndFields>(builder)
+                .WithPart<ExportValues>(builder)
+                .CreateContainer();
             OnImportsSatisfiedTestClassPropertiesAndFields test =
                 container.GetExport<OnImportsSatisfiedTestClassPropertiesAndFields>();
 
@@ -666,12 +664,10 @@ namespace System.Composition.Convention.Tests
                 .NotifyImportsSatisfied(
                     mi => mi.Name == "OnImportsSatisfied5" || mi.Name == "OnImportsSatisfied6"
                 );
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<OnImportsSatisfiedTestClassPropertiesAndFields>(
-                        builder
-                    )
-                    .WithPart<ExportValues>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<OnImportsSatisfiedTestClassPropertiesAndFields>(builder)
+                .WithPart<ExportValues>(builder)
+                .CreateContainer();
             OnImportsSatisfiedTestClassPropertiesAndFields test =
                 container.GetExport<OnImportsSatisfiedTestClassPropertiesAndFields>();
 

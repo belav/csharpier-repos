@@ -35,20 +35,21 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             CancellationToken cancellationToken
         )
         {
-            var option = document.Project.Solution.Workspace.Options.GetOption(
-                RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor,
-                document.Project.Language
-            );
+            var option = document.Project.Solution.Workspace.Options
+                .GetOption(
+                    RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor,
+                    document.Project.Language
+                );
             if (!option)
             {
                 return null;
             }
 
             var tree = await _language.TryGetTreeAtPositionAsync(
-                    document,
-                    position,
-                    cancellationToken
-                )
+                document,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return tree == null ? null : GetMatchingBraces(tree, position);
         }

@@ -13,9 +13,8 @@ namespace System.Web.Mvc.Async.Test
     public class ReflectedAsyncActionDescriptorTest
     {
         private readonly MethodInfo _asyncMethod = typeof(ExecuteController).GetMethod("FooAsync");
-        private readonly MethodInfo _completedMethod = typeof(ExecuteController).GetMethod(
-            "FooCompleted"
-        );
+        private readonly MethodInfo _completedMethod = typeof(ExecuteController)
+            .GetMethod("FooCompleted");
 
         [Fact]
         public void Constructor_SetsProperties()
@@ -330,8 +329,8 @@ namespace System.Web.Mvc.Async.Test
                 .Returns(true)
                 .Verifiable();
             mockMethod.Setup(
-                    m => m.GetCustomAttributes(typeof(ActionMethodSelectorAttribute), true)
-                )
+                m => m.GetCustomAttributes(typeof(ActionMethodSelectorAttribute), true)
+            )
                 .Returns(new ActionMethodSelectorAttribute[] { mockAttr.Object });
 
             ReflectedAsyncActionDescriptor ad = GetActionDescriptor(

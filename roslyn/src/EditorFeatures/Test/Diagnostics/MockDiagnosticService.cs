@@ -41,14 +41,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             CancellationToken cancellationToken
         ) =>
             GetPushDiagnosticsAsync(
-                    workspace,
-                    projectId,
-                    documentId,
-                    id,
-                    includeSuppressedDiagnostics,
-                    InternalDiagnosticsOptions.NormalDiagnosticMode,
-                    cancellationToken
-                )
+                workspace,
+                projectId,
+                documentId,
+                id,
+                includeSuppressedDiagnostics,
+                InternalDiagnosticsOptions.NormalDiagnosticMode,
+                cancellationToken
+            )
                 .AsTask()
                 .WaitAndGetResult_CanCallOnBackground(cancellationToken);
 

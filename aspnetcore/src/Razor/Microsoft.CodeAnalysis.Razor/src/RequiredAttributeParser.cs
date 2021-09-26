@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.Razor
             };
             private static readonly char[] InvalidCssAttributeNameCharacters = (
                 new[] { ' ', '\t', ',', ']' }
-            ).Concat(CssValueComparisons.Keys).ToArray();
+            )
+                .Concat(CssValueComparisons.Keys)
+                .ToArray();
             private static readonly char[] InvalidCssQuotelessValueCharacters = { ' ', '\t', ']' };
 
             private int _index;

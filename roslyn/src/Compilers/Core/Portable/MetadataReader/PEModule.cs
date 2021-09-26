@@ -416,11 +416,12 @@ namespace Microsoft.CodeAnalysis
                     if (!MetadataHelpers.IsValidMetadataFileName(moduleName))
                     {
                         throw new BadImageFormatException(
-                            string.Format(
-                                CodeAnalysisResources.InvalidModuleName,
-                                this.Name,
-                                moduleName
-                            )
+                            string
+                                .Format(
+                                    CodeAnalysisResources.InvalidModuleName,
+                                    this.Name,
+                                    moduleName
+                                )
                         );
                     }
 
@@ -2852,10 +2853,11 @@ namespace Microsoft.CodeAnalysis
                 {
                     // Check whether matching name
                     if (
-                        MetadataReader.StringComparer.Equals(
-                            MetadataReader.GetAssemblyReference(assemblyRef).Name,
-                            assemblyName
-                        )
+                        MetadataReader.StringComparer
+                            .Equals(
+                                MetadataReader.GetAssemblyReference(assemblyRef).Name,
+                                assemblyName
+                            )
                     )
                     {
                         // Return assembly ref token
@@ -3167,10 +3169,8 @@ namespace Microsoft.CodeAnalysis
                     StringHandle ctorName = memberRef.Name;
 
                     if (
-                        !metadataReader.StringComparer.Equals(
-                            ctorName,
-                            WellKnownMemberNames.InstanceConstructorName
-                        )
+                        !metadataReader.StringComparer
+                            .Equals(ctorName, WellKnownMemberNames.InstanceConstructorName)
                     )
                     {
                         // Not a constructor.
@@ -3186,10 +3186,8 @@ namespace Microsoft.CodeAnalysis
                     );
 
                     if (
-                        !metadataReader.StringComparer.Equals(
-                            methodDef.Name,
-                            WellKnownMemberNames.InstanceConstructorName
-                        )
+                        !metadataReader.StringComparer
+                            .Equals(methodDef.Name, WellKnownMemberNames.InstanceConstructorName)
                     )
                     {
                         // Not a constructor.
@@ -3809,9 +3807,9 @@ namespace Microsoft.CodeAnalysis
         {
             return fieldOrParameterToken.Kind == HandleKind.FieldDefinition
               ? MetadataReader.GetFieldDefinition((FieldDefinitionHandle)fieldOrParameterToken)
-                    .GetMarshallingDescriptor()
+                .GetMarshallingDescriptor()
               : MetadataReader.GetParameter((ParameterHandle)fieldOrParameterToken)
-                    .GetMarshallingDescriptor();
+                .GetMarshallingDescriptor();
         }
 
         internal UnmanagedType GetMarshallingType(EntityHandle fieldOrParameterToken)
@@ -4151,11 +4149,12 @@ namespace Microsoft.CodeAnalysis
         {
             if (ignoreCase)
             {
-                return string.Equals(
-                    metadataReader.GetString(nameHandle),
-                    name,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                return string
+                    .Equals(
+                        metadataReader.GetString(nameHandle),
+                        name,
+                        StringComparison.OrdinalIgnoreCase
+                    );
             }
 
             return metadataReader.StringComparer.Equals(nameHandle, name);

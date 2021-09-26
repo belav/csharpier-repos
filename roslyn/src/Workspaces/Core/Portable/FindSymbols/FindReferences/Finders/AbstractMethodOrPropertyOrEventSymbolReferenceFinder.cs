@@ -37,11 +37,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 // that method and cascade to them.
                 var result = cascadeDirection.HasFlag(FindReferencesCascadeDirection.Down)
                     ? await SymbolFinder.FindMemberImplementationsArrayAsync(
-                              symbol,
-                              solution,
-                              projects,
-                              cancellationToken
-                          )
+                          symbol,
+                          solution,
+                          projects,
+                          cancellationToken
+                      )
                           .ConfigureAwait(false)
                     : ImmutableArray<ISymbol>.Empty;
                 return result.SelectAsArray(s => (s, FindReferencesCascadeDirection.Down));
@@ -54,11 +54,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     FindReferencesCascadeDirection.Up
                 )
                     ? await SymbolFinder.FindImplementedInterfaceMembersArrayAsync(
-                              symbol,
-                              solution,
-                              projects,
-                              cancellationToken
-                          )
+                          symbol,
+                          solution,
+                          projects,
+                          cancellationToken
+                      )
                           .ConfigureAwait(false)
                     : ImmutableArray<ISymbol>.Empty;
 
@@ -67,11 +67,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 // those members, we'll end up traversing the entire hierarchy.
                 var overrides = cascadeDirection.HasFlag(FindReferencesCascadeDirection.Down)
                     ? await SymbolFinder.FindOverridesArrayAsync(
-                              symbol,
-                              solution,
-                              projects,
-                              cancellationToken
-                          )
+                          symbol,
+                          solution,
+                          projects,
+                          cancellationToken
+                      )
                           .ConfigureAwait(false)
                     : ImmutableArray<ISymbol>.Empty;
 
@@ -94,7 +94,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 return overriddenMember == null
                   ? interfaceMembersImplementedWithDirection.Concat(overridesWithDirection)
                   : interfaceMembersImplementedWithDirection.Concat(overridesWithDirection)
-                        .Concat(overriddenMemberWithDirection);
+                    .Concat(overriddenMemberWithDirection);
             }
         }
 

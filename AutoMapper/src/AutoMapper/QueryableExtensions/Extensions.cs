@@ -74,10 +74,8 @@ namespace AutoMapper.QueryableExtensions
             IDictionary<string, object> parameters,
             params string[] membersToExpand
         ) =>
-            new ProjectionExpression(source, configuration).To<TDestination>(
-                parameters,
-                membersToExpand
-            );
+            new ProjectionExpression(source, configuration)
+                .To<TDestination>(parameters, membersToExpand);
         /// <summary>
         /// Extension method to project from a queryable using the provided mapping engine
         /// </summary>
@@ -107,17 +105,12 @@ namespace AutoMapper.QueryableExtensions
             IDictionary<string, object> parameters,
             params string[] membersToExpand
         ) =>
-            new ProjectionExpression(source, configuration).To(
-                destinationType,
-                parameters,
-                membersToExpand
-            );
+            new ProjectionExpression(source, configuration)
+                .To(destinationType, parameters, membersToExpand);
         readonly struct ProjectionExpression
         {
-            private static readonly MethodInfo SelectMethod = typeof(Queryable).StaticGenericMethod(
-                "Select",
-                parametersCount: 2
-            );
+            private static readonly MethodInfo SelectMethod = typeof(Queryable)
+                .StaticGenericMethod("Select", parametersCount: 2);
             private readonly IQueryable _source;
             private readonly IProjectionBuilder _builder;
             public ProjectionExpression(IQueryable source, IConfigurationProvider configuration)
@@ -161,20 +154,21 @@ namespace AutoMapper.QueryableExtensions
                 MemberPaths memberPathsToExpand
             ) =>
                 _builder.GetProjection(
-                        _source.ElementType,
-                        destinationType,
-                        parameters,
-                        memberPathsToExpand.Select(m => new MemberPath(m)).ToArray()
-                    )
+                    _source.ElementType,
+                    destinationType,
+                    parameters,
+                    memberPathsToExpand.Select(m => new MemberPath(m)).ToArray()
+                )
                     .Chain(_source, Select);
             private static IQueryable Select(IQueryable source, LambdaExpression lambda) =>
-                source.Provider.CreateQuery(
-                    Expression.Call(
-                        SelectMethod.MakeGenericMethod(source.ElementType, lambda.ReturnType),
-                        source.Expression,
-                        Expression.Quote(lambda)
-                    )
-                );
+                source.Provider
+                    .CreateQuery(
+                        Expression.Call(
+                            SelectMethod.MakeGenericMethod(source.ElementType, lambda.ReturnType),
+                            source.Expression,
+                            Expression.Quote(lambda)
+                        )
+                    );
         }
     }
     public class MemberVisitor : ExpressionVisitor

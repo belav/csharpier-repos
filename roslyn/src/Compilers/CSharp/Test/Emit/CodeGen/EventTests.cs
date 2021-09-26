@@ -333,10 +333,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "C.M",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       85 (0x55)
   .maxstack  2
@@ -378,7 +377,7 @@ class C
   IL_004f:  call       ""void C.F.remove""
   IL_0054:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -406,10 +405,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "C.M",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       74 (0x4a)
   .maxstack  2
@@ -440,7 +438,7 @@ class C
   IL_0044:  call       ""void C.F.remove""
   IL_0049:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -471,10 +469,9 @@ class D
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "D.M",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "D.M",
+                @"
 {
   // Code size       53 (0x35)
   .maxstack  2
@@ -500,7 +497,7 @@ class D
   IL_002f:  call       ""void C.H.remove""
   IL_0034:  ret
 }"
-                );
+            );
         }
 
         // Regresses IsMetadataVirtual issue (no associated bug).
@@ -777,24 +774,23 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e").WithArguments("C.e")
             );
 
-            compilation2.Emit(new System.IO.MemoryStream())
-                .Diagnostics.Verify(
-                    // (7,21): error CS0656: Missing compiler required member 'System.Delegate.Combine'
-                    //     public event E1 e;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "e")
-                        .WithArguments("System.Delegate", "Combine")
-                        .WithLocation(7, 21),
-                    // (7,21): error CS0656: Missing compiler required member 'System.Delegate.Remove'
-                    //     public event E1 e;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "e")
-                        .WithArguments("System.Delegate", "Remove")
-                        .WithLocation(7, 21),
-                    // (7,21): warning CS0067: The event 'C.e' is never used
-                    //     public event E1 e;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e")
-                        .WithArguments("C.e")
-                        .WithLocation(7, 21)
-                );
+            compilation2.Emit(new System.IO.MemoryStream()).Diagnostics.Verify(
+                // (7,21): error CS0656: Missing compiler required member 'System.Delegate.Combine'
+                //     public event E1 e;
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "e")
+                    .WithArguments("System.Delegate", "Combine")
+                    .WithLocation(7, 21),
+                // (7,21): error CS0656: Missing compiler required member 'System.Delegate.Remove'
+                //     public event E1 e;
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "e")
+                    .WithArguments("System.Delegate", "Remove")
+                    .WithLocation(7, 21),
+                // (7,21): warning CS0067: The event 'C.e' is never used
+                //     public event E1 e;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e")
+                    .WithArguments("C.e")
+                    .WithLocation(7, 21)
+            );
         }
 
         [
@@ -831,31 +827,30 @@ class C
             );
 
             var verifier = CompileAndVerify(
-                    compilation,
-                    expectedOutput: "TrueFalseTrue",
-                    symbolValidator: module =>
-                    {
-                        var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                        var @event = @class.GetMember<EventSymbol>("e");
+                compilation,
+                expectedOutput: "TrueFalseTrue",
+                symbolValidator: module =>
+                {
+                    var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
+                    var @event = @class.GetMember<EventSymbol>("e");
 
-                        var addMethod = @event.AddMethod;
-                        Assert.False(
-                            (
-                                addMethod.ImplementationAttributes
-                                & System.Reflection.MethodImplAttributes.Synchronized
-                            ) == 0
-                        );
+                    var addMethod = @event.AddMethod;
+                    Assert.False(
+                        (
+                            addMethod.ImplementationAttributes
+                            & System.Reflection.MethodImplAttributes.Synchronized
+                        ) == 0
+                    );
 
-                        var removeMethod = @event.RemoveMethod;
-                        Assert.False(
-                            (
-                                removeMethod.ImplementationAttributes
-                                & System.Reflection.MethodImplAttributes.Synchronized
-                            ) == 0
-                        );
-                    }
-                )
-                .VerifyDiagnostics();
+                    var removeMethod = @event.RemoveMethod;
+                    Assert.False(
+                        (
+                            removeMethod.ImplementationAttributes
+                            & System.Reflection.MethodImplAttributes.Synchronized
+                        ) == 0
+                    );
+                }
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.e.add",
@@ -928,31 +923,30 @@ struct C
             );
 
             var verifier = CompileAndVerify(
-                    compilation,
-                    expectedOutput: "TrueFalseTrue",
-                    symbolValidator: module =>
-                    {
-                        var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                        var @event = @class.GetMember<EventSymbol>("e");
+                compilation,
+                expectedOutput: "TrueFalseTrue",
+                symbolValidator: module =>
+                {
+                    var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
+                    var @event = @class.GetMember<EventSymbol>("e");
 
-                        var addMethod = @event.AddMethod;
-                        Assert.True(
-                            (
-                                addMethod.ImplementationAttributes
-                                & System.Reflection.MethodImplAttributes.Synchronized
-                            ) == 0
-                        );
+                    var addMethod = @event.AddMethod;
+                    Assert.True(
+                        (
+                            addMethod.ImplementationAttributes
+                            & System.Reflection.MethodImplAttributes.Synchronized
+                        ) == 0
+                    );
 
-                        var removeMethod = @event.RemoveMethod;
-                        Assert.True(
-                            (
-                                removeMethod.ImplementationAttributes
-                                & System.Reflection.MethodImplAttributes.Synchronized
-                            ) == 0
-                        );
-                    }
-                )
-                .VerifyDiagnostics();
+                    var removeMethod = @event.RemoveMethod;
+                    Assert.True(
+                        (
+                            removeMethod.ImplementationAttributes
+                            & System.Reflection.MethodImplAttributes.Synchronized
+                        ) == 0
+                    );
+                }
+            ).VerifyDiagnostics();
 
             verifier.VerifyIL(
                 "C.e.add",

@@ -314,134 +314,126 @@ namespace System.IO.Tests
             File.WriteAllText(Path.Combine(testDir, GetTestFileName()), "cat");
             Directory.CreateDirectory(Path.Combine(testDir, GetTestFileName()));
             RemoteExecutor.Invoke(
-                    (testDirectory) =>
-                    {
-                        Directory.SetCurrentDirectory(testDirectory);
+                (testDirectory) =>
+                {
+                    Directory.SetCurrentDirectory(testDirectory);
 
-                        Assert.NotEmpty(
-                            Directory.GetFileSystemEntries(Directory.GetCurrentDirectory())
-                        );
-                        Assert.NotEmpty(
-                            Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*")
-                        );
-                        Assert.NotEmpty(
-                            Directory.GetFileSystemEntries(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.AllDirectories
-                            )
-                        );
-                        Assert.NotEmpty(
-                            Directory.GetFileSystemEntries(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.TopDirectoryOnly
-                            )
-                        );
+                    Assert.NotEmpty(
+                        Directory.GetFileSystemEntries(Directory.GetCurrentDirectory())
+                    );
+                    Assert.NotEmpty(
+                        Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*")
+                    );
+                    Assert.NotEmpty(
+                        Directory.GetFileSystemEntries(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.AllDirectories
+                        )
+                    );
+                    Assert.NotEmpty(
+                        Directory.GetFileSystemEntries(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.TopDirectoryOnly
+                        )
+                    );
 
-                        Assert.NotEmpty(Directory.GetDirectories(Directory.GetCurrentDirectory()));
-                        Assert.NotEmpty(
-                            Directory.GetDirectories(Directory.GetCurrentDirectory(), "*")
-                        );
-                        Assert.NotEmpty(
-                            Directory.GetDirectories(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.AllDirectories
-                            )
-                        );
-                        Assert.NotEmpty(
-                            Directory.GetDirectories(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.TopDirectoryOnly
-                            )
-                        );
+                    Assert.NotEmpty(Directory.GetDirectories(Directory.GetCurrentDirectory()));
+                    Assert.NotEmpty(Directory.GetDirectories(Directory.GetCurrentDirectory(), "*"));
+                    Assert.NotEmpty(
+                        Directory.GetDirectories(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.AllDirectories
+                        )
+                    );
+                    Assert.NotEmpty(
+                        Directory.GetDirectories(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.TopDirectoryOnly
+                        )
+                    );
 
-                        Assert.NotEmpty(Directory.GetFiles(Directory.GetCurrentDirectory()));
-                        Assert.NotEmpty(Directory.GetFiles(Directory.GetCurrentDirectory(), "*"));
-                        Assert.NotEmpty(
-                            Directory.GetFiles(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.AllDirectories
-                            )
-                        );
-                        Assert.NotEmpty(
-                            Directory.GetFiles(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.TopDirectoryOnly
-                            )
-                        );
+                    Assert.NotEmpty(Directory.GetFiles(Directory.GetCurrentDirectory()));
+                    Assert.NotEmpty(Directory.GetFiles(Directory.GetCurrentDirectory(), "*"));
+                    Assert.NotEmpty(
+                        Directory.GetFiles(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.AllDirectories
+                        )
+                    );
+                    Assert.NotEmpty(
+                        Directory.GetFiles(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.TopDirectoryOnly
+                        )
+                    );
 
-                        Assert.NotEmpty(
-                            Directory.EnumerateFileSystemEntries(Directory.GetCurrentDirectory())
-                        );
-                        Assert.NotEmpty(
-                            Directory.EnumerateFileSystemEntries(
-                                Directory.GetCurrentDirectory(),
-                                "*"
-                            )
-                        );
-                        Assert.NotEmpty(
-                            Directory.EnumerateFileSystemEntries(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.AllDirectories
-                            )
-                        );
-                        Assert.NotEmpty(
-                            Directory.EnumerateFileSystemEntries(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.TopDirectoryOnly
-                            )
-                        );
+                    Assert.NotEmpty(
+                        Directory.EnumerateFileSystemEntries(Directory.GetCurrentDirectory())
+                    );
+                    Assert.NotEmpty(
+                        Directory.EnumerateFileSystemEntries(Directory.GetCurrentDirectory(), "*")
+                    );
+                    Assert.NotEmpty(
+                        Directory.EnumerateFileSystemEntries(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.AllDirectories
+                        )
+                    );
+                    Assert.NotEmpty(
+                        Directory.EnumerateFileSystemEntries(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.TopDirectoryOnly
+                        )
+                    );
 
-                        Assert.NotEmpty(
-                            Directory.EnumerateDirectories(Directory.GetCurrentDirectory())
-                        );
-                        Assert.NotEmpty(
-                            Directory.EnumerateDirectories(Directory.GetCurrentDirectory(), "*")
-                        );
-                        Assert.NotEmpty(
-                            Directory.EnumerateDirectories(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.AllDirectories
-                            )
-                        );
-                        Assert.NotEmpty(
-                            Directory.EnumerateDirectories(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.TopDirectoryOnly
-                            )
-                        );
+                    Assert.NotEmpty(
+                        Directory.EnumerateDirectories(Directory.GetCurrentDirectory())
+                    );
+                    Assert.NotEmpty(
+                        Directory.EnumerateDirectories(Directory.GetCurrentDirectory(), "*")
+                    );
+                    Assert.NotEmpty(
+                        Directory.EnumerateDirectories(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.AllDirectories
+                        )
+                    );
+                    Assert.NotEmpty(
+                        Directory.EnumerateDirectories(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.TopDirectoryOnly
+                        )
+                    );
 
-                        Assert.NotEmpty(Directory.EnumerateFiles(Directory.GetCurrentDirectory()));
-                        Assert.NotEmpty(
-                            Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*")
-                        );
-                        Assert.NotEmpty(
-                            Directory.EnumerateFiles(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.AllDirectories
-                            )
-                        );
-                        Assert.NotEmpty(
-                            Directory.EnumerateFiles(
-                                Directory.GetCurrentDirectory(),
-                                "*",
-                                SearchOption.TopDirectoryOnly
-                            )
-                        );
-                    },
-                    testDir
-                )
-                .Dispose();
+                    Assert.NotEmpty(Directory.EnumerateFiles(Directory.GetCurrentDirectory()));
+                    Assert.NotEmpty(Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*"));
+                    Assert.NotEmpty(
+                        Directory.EnumerateFiles(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.AllDirectories
+                        )
+                    );
+                    Assert.NotEmpty(
+                        Directory.EnumerateFiles(
+                            Directory.GetCurrentDirectory(),
+                            "*",
+                            SearchOption.TopDirectoryOnly
+                        )
+                    );
+                },
+                testDir
+            ).Dispose();
         }
     }
 }

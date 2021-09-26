@@ -31,7 +31,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         private static readonly IEnumerable<string> _dictionaryProperties = typeof(IDictionary<
             string,
             object
-        >).GetRuntimeProperties().Select(e => e.Name);
+        >)
+            .GetRuntimeProperties()
+            .Select(e => e.Name);
 
         /// <summary>
         ///     Creates a new instance of <see cref="ModelValidator" />.
@@ -172,18 +174,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             foreach (var entityType in conventionModel.GetEntityTypes())
             {
-                var unmappedProperty = entityType.GetDeclaredProperties()
-                    .FirstOrDefault(
-                        p =>
-                            (
-                                !ConfigurationSource.Convention.Overrides(
-                                    p.GetConfigurationSource()
-                                )
-                                // Use a better condition of non-persisted properties when issue#14121 is implemented
-                                || !p.IsImplicitlyCreated()
-                            )
-                            && p.FindTypeMapping() == null
-                    );
+                var unmappedProperty = entityType.GetDeclaredProperties().FirstOrDefault(
+                    p =>
+                        (
+                            !ConfigurationSource.Convention.Overrides(p.GetConfigurationSource())
+                            // Use a better condition of non-persisted properties when issue#14121 is implemented
+                            || !p.IsImplicitlyCreated()
+                        )
+                        && p.FindTypeMapping() == null
+                );
 
                 if (unmappedProperty != null)
                 {
@@ -206,7 +205,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 var runtimeProperties = entityType.GetRuntimeProperties();
 
                 clrProperties.UnionWith(
-                    runtimeProperties.Values.Where(pi => pi.IsCandidateProperty(needsWrite: false))
+                    runtimeProperties.Values
+                        .Where(pi => pi.IsCandidateProperty(needsWrite: false))
                         .Select(pi => pi.GetSimpleMemberName())
                 );
 
@@ -294,9 +294,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                     && (
                                         !entityType.IsInOwnershipPath(targetType)
                                         || (
-                                            entityType.FindOwnership()!.PrincipalEntityType.ClrType.Equals(
-                                                targetType
-                                            )
+                                            entityType.FindOwnership()!.PrincipalEntityType.ClrType
+                                                .Equals(targetType)
                                             && targetSequenceType == null
                                         )
                                     )
@@ -520,9 +519,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                                 : "." + referencingFk.PrincipalToDependent.Name
                                         ),
                                     referencingFk.Properties.Format(includeTypes: true),
-                                    entityType.FindPrimaryKey()!.Properties.Format(
-                                        includeTypes: true
-                                    )
+                                    entityType.FindPrimaryKey()!.Properties
+                                        .Format(includeTypes: true)
                                 )
                             );
                         }
@@ -547,9 +545,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             {
                 foreach (var key in entityType.GetDeclaredKeys())
                 {
-                    var mutableProperty = key.Properties.FirstOrDefault(
-                        p => p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate)
-                    );
+                    var mutableProperty = key.Properties
+                        .FirstOrDefault(p => p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate));
                     if (mutableProperty != null)
                     {
                         throw new InvalidOperationException(
@@ -586,10 +583,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     var principalType = foreignKey.PrincipalEntityType;
                     if (
                         !foreignKey.PrincipalKey.IsPrimaryKey()
-                        || !PropertyListComparer.Instance.Equals(
-                            foreignKey.Properties,
-                            primaryKey.Properties
-                        )
+                        || !PropertyListComparer.Instance
+                            .Equals(foreignKey.Properties, primaryKey.Properties)
                         || foreignKey.PrincipalEntityType.IsAssignableFrom(entityType)
                     )
                     {
@@ -852,13 +847,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     throw new InvalidOperationException(
                         CoreStrings.MultipleOwnerships(
                             entityType.DisplayName(),
-                            string.Join(
-                                ", ",
-                                ownerships.Select(
-                                    o =>
-                                        $"'{o.PrincipalEntityType.DisplayName()}.{o.PrincipalToDependent?.Name}'"
+                            string
+                                .Join(
+                                    ", ",
+                                    ownerships.Select(
+                                        o =>
+                                            $"'{o.PrincipalEntityType.DisplayName()}.{o.PrincipalToDependent?.Name}'"
+                                    )
                                 )
-                            )
                         )
                     );
                 }
@@ -954,9 +950,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     if (
                         declaredForeignKey.PrincipalEntityType
                             == declaredForeignKey.DeclaringEntityType
-                        && declaredForeignKey.PrincipalKey.Properties.SequenceEqual(
-                            declaredForeignKey.Properties
-                        )
+                        && declaredForeignKey.PrincipalKey.Properties
+                            .SequenceEqual(declaredForeignKey.Properties)
                     )
                     {
                         logger.RedundantForeignKeyWarning(declaredForeignKey);
@@ -978,9 +973,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         {
                             if (
                                 inheritedKey.DeclaringEntityType != entityType
-                                && inheritedKey.Properties.All(
-                                    p => declaredForeignKey.Properties.Contains(p)
-                                )
+                                && inheritedKey.Properties
+                                    .All(p => declaredForeignKey.Properties.Contains(p))
                                 && !ContainedInForeignKeyForAllConcreteTypes(
                                     inheritedKey.DeclaringEntityType,
                                     generatedProperty
@@ -1047,9 +1041,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 if (constructorBinding != null)
                 {
                     foreach (
-                        var consumedProperty in constructorBinding.ParameterBindings.SelectMany(
-                            p => p.ConsumedProperties
-                        )
+                        var consumedProperty in constructorBinding.ParameterBindings
+                            .SelectMany(p => p.ConsumedProperties)
                     )
                     {
                         properties.Remove(consumedProperty);
@@ -1326,12 +1319,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                 throw new InvalidOperationException(
                                     CoreStrings.SeedDatumNavigationSensitive(
                                         entityType.DisplayName(),
-                                        string.Join(
-                                            ", ",
-                                            key.Properties.Select(
-                                                (p, i) => p.Name + ":" + keyValues[i]
-                                            )
-                                        ),
+                                        string
+                                            .Join(
+                                                ", ",
+                                                key.Properties
+                                                    .Select((p, i) => p.Name + ":" + keyValues[i])
+                                            ),
                                         navigation.Name,
                                         foreignKey.DeclaringEntityType.DisplayName(),
                                         foreignKey.Properties.Format()
@@ -1354,9 +1347,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     {
                         if (!identityMaps.TryGetValue(key, out identityMap))
                         {
-                            identityMap = ((IRuntimeKey)key).GetIdentityMapFactory()(
-                                sensitiveDataLogged
-                            );
+                            identityMap = ((IRuntimeKey)key)
+                                .GetIdentityMapFactory()(sensitiveDataLogged);
                             identityMaps[key] = identityMap;
                         }
                     }
@@ -1369,10 +1361,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             throw new InvalidOperationException(
                                 CoreStrings.SeedDatumDuplicateSensitive(
                                     entityType.DisplayName(),
-                                    string.Join(
-                                        ", ",
-                                        key.Properties.Select((p, i) => p.Name + ":" + keyValues[i])
-                                    )
+                                    string
+                                        .Join(
+                                            ", ",
+                                            key.Properties
+                                                .Select((p, i) => p.Name + ":" + keyValues[i])
+                                        )
                                 )
                             );
                         }

@@ -44,20 +44,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return Array.Empty<DocumentHighlight>();
             }
 
-            var documentHighlightService =
-                document.Project.LanguageServices.GetRequiredService<IDocumentHighlightsService>();
+            var documentHighlightService = document.Project.LanguageServices
+                .GetRequiredService<IDocumentHighlightsService>();
             var position = await document.GetPositionFromLinePositionAsync(
-                    ProtocolConversions.PositionToLinePosition(request.Position),
-                    cancellationToken
-                )
+                ProtocolConversions.PositionToLinePosition(request.Position),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var highlights = await documentHighlightService.GetDocumentHighlightsAsync(
-                    document,
-                    position,
-                    ImmutableHashSet.Create(document),
-                    cancellationToken
-                )
+                document,
+                position,
+                ImmutableHashSet.Create(document),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (!highlights.IsDefaultOrEmpty)
@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 );
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
-                return highlightsForDocument.HighlightSpans.Select(
+                return highlightsForDocument.HighlightSpans
+                    .Select(
                         h =>
                             new DocumentHighlight
                             {

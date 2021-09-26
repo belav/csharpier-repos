@@ -196,9 +196,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         public async Task ChallengeCanSetUserStateThroughProperties(string userState)
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "OIDCTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("OIDCTest")
             );
             var settings = new TestSettings(
                 o =>
@@ -237,9 +236,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
         public async Task OnRedirectToIdentityProviderEventCanSetState(string userState)
         {
             var stateFormat = new PropertiesDataFormat(
-                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
-                    "OIDCTest"
-                )
+                new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                    .CreateProtector("OIDCTest")
             );
             var settings = new TestSettings(
                 opt =>
@@ -359,7 +357,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
                 OpenIdConnectParameterNames.RedirectUri
             );
 
-            var actual = res.Headers.Location.Query.Trim('?')
+            var actual = res.Headers.Location.Query
+                .Trim('?')
                 .Split('&')
                 .Single(
                     seg =>
@@ -488,12 +487,13 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             Assert.Contains("samesite=none", transaction.SetCookie.First());
             var challengeCookies = SetCookieHeaderValue.ParseList(transaction.SetCookie);
             var nonceCookie = challengeCookies.Where(
-                    cookie =>
-                        cookie.Name.StartsWith(
+                cookie =>
+                    cookie.Name
+                        .StartsWith(
                             OpenIdConnectDefaults.CookieNoncePrefix,
                             StringComparison.Ordinal
                         )
-                )
+            )
                 .Single();
             Assert.True(nonceCookie.Expires.HasValue);
             Assert.True(nonceCookie.Expires > DateTime.UtcNow);
@@ -503,9 +503,9 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             Assert.Equal(Net.Http.Headers.SameSiteMode.None, nonceCookie.SameSite);
 
             var correlationCookie = challengeCookies.Where(
-                    cookie =>
-                        cookie.Name.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
-                )
+                cookie =>
+                    cookie.Name.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
+            )
                 .Single();
             Assert.True(correlationCookie.Expires.HasValue);
             Assert.True(nonceCookie.Expires > DateTime.UtcNow);

@@ -121,9 +121,10 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             Assert.Equal(initialPath, project.GetOutputFileName());
 
             string getCurrentCompilationOutputAssemblyPath() =>
-                environment.Workspace.CurrentSolution.GetRequiredProject(
-                    project.Test_VisualStudioProject.Id
-                ).CompilationOutputInfo.AssemblyPath;
+                environment.Workspace.CurrentSolution
+                    .GetRequiredProject(
+                        project.Test_VisualStudioProject.Id
+                    ).CompilationOutputInfo.AssemblyPath;
 
             Assert.Equal(initialPath, getCurrentCompilationOutputAssemblyPath());
 
@@ -156,18 +157,17 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
 
             string getCurrentCompilationOutputAssemblyPath() =>
-                environment.Workspace.CurrentSolution.GetRequiredProject(
-                    project.Test_VisualStudioProject.Id
-                ).CompilationOutputInfo.AssemblyPath;
+                environment.Workspace.CurrentSolution
+                    .GetRequiredProject(
+                        project.Test_VisualStudioProject.Id
+                    ).CompilationOutputInfo.AssemblyPath;
 
             Assert.Null(getCurrentCompilationOutputAssemblyPath());
 
             Assert.Equal(
                 0,
-                ((ICompilerOptionsHostObject)project).SetCompilerOptions(
-                    @"/pdb:C:\a\1.pdb /debug+",
-                    out _
-                )
+                ((ICompilerOptionsHostObject)project)
+                    .SetCompilerOptions(@"/pdb:C:\a\1.pdb /debug+", out _)
             );
 
             // Compilation doesn't have output file, so we don't expect any build outputs either.
@@ -175,10 +175,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             Assert.Equal(
                 0,
-                ((ICompilerOptionsHostObject)project).SetCompilerOptions(
-                    @"/out:C:\a\2.dll /debug+",
-                    out _
-                )
+                ((ICompilerOptionsHostObject)project)
+                    .SetCompilerOptions(@"/out:C:\a\2.dll /debug+", out _)
             );
 
             Assert.Equal(@"C:\a\2.dll", getCurrentCompilationOutputAssemblyPath());
@@ -189,10 +187,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             Assert.Equal(
                 0,
-                ((ICompilerOptionsHostObject)project).SetCompilerOptions(
-                    @"/pdb:C:\a\4.pdb /debug+",
-                    out _
-                )
+                ((ICompilerOptionsHostObject)project)
+                    .SetCompilerOptions(@"/pdb:C:\a\4.pdb /debug+", out _)
             );
 
             Assert.Equal(@"C:\a\3.dll", getCurrentCompilationOutputAssemblyPath());
@@ -237,11 +233,12 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             const LanguageVersion attemptedVersion = LanguageVersion.CSharp8;
 
-            var canApply = environment.Workspace.CanApplyParseOptionChange(
-                oldParseOptions,
-                oldParseOptions.WithLanguageVersion(attemptedVersion),
-                project
-            );
+            var canApply = environment.Workspace
+                .CanApplyParseOptionChange(
+                    oldParseOptions,
+                    oldParseOptions.WithLanguageVersion(attemptedVersion),
+                    project
+                );
 
             if (maxSupportedLangVersion.HasValue)
             {
@@ -274,11 +271,12 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             const LanguageVersion attemptedVersion = LanguageVersion.CSharp8;
 
-            var canApply = environment.Workspace.CanApplyParseOptionChange(
-                oldParseOptions,
-                oldParseOptions.WithLanguageVersion(attemptedVersion),
-                project
-            );
+            var canApply = environment.Workspace
+                .CanApplyParseOptionChange(
+                    oldParseOptions,
+                    oldParseOptions.WithLanguageVersion(attemptedVersion),
+                    project
+                );
 
             Assert.True(canApply);
         }

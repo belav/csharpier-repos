@@ -61,9 +61,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
             LocalDeclarationStatementSyntax statement
         ) =>
             statement.WithDeclaration(
-                statement.Declaration.WithType(
-                    statement.Declaration.Type.WithAdditionalAnnotations(Simplifier.Annotation)
-                )
+                statement.Declaration
+                    .WithType(
+                        statement.Declaration.Type.WithAdditionalAnnotations(Simplifier.Annotation)
+                    )
             );
 
         protected override StatementSyntax WrapWithBlockIfAppropriate(

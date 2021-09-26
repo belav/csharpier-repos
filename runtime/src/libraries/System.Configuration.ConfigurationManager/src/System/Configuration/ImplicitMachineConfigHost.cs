@@ -28,13 +28,14 @@ namespace System.Configuration
         {
             // Stash the filemap so we can see if the machine config was explicitly specified
             GetFileMap(hostInitConfigurationParams);
-            base.InitForConfiguration(
-                ref locationSubPath,
-                out configPath,
-                out locationConfigPath,
-                configRoot,
-                hostInitConfigurationParams
-            );
+            base
+                .InitForConfiguration(
+                    ref locationSubPath,
+                    out configPath,
+                    out locationConfigPath,
+                    configRoot,
+                    hostInitConfigurationParams
+                );
         }
 
         public override void Init(IInternalConfigRoot configRoot, params object[] hostInitParams)

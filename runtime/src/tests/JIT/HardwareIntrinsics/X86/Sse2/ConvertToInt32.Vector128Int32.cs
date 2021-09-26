@@ -204,10 +204,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Sse2).GetMethod(
-                    nameof(Sse2.ConvertToInt32),
-                    new Type[] { typeof(Vector128<Int32>) }
-                )
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.ConvertToInt32), new Type[] { typeof(Vector128<Int32>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector128<Int32>>(_dataTable.inArrayPtr) }
@@ -220,10 +218,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse2).GetMethod(
-                    nameof(Sse2.ConvertToInt32),
-                    new Type[] { typeof(Vector128<Int32>) }
-                )
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.ConvertToInt32), new Type[] { typeof(Vector128<Int32>) })
                 .Invoke(null, new object[] { Sse2.LoadVector128((Int32*)(_dataTable.inArrayPtr)) });
 
             ValidateResult(_dataTable.inArrayPtr, (Int32)(result));
@@ -233,10 +229,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse2).GetMethod(
-                    nameof(Sse2.ConvertToInt32),
-                    new Type[] { typeof(Vector128<Int32>) }
-                )
+            var result = typeof(Sse2)
+                .GetMethod(nameof(Sse2.ConvertToInt32), new Type[] { typeof(Vector128<Int32>) })
                 .Invoke(
                     null,
                     new object[] { Sse2.LoadAlignedVector128((Int32*)(_dataTable.inArrayPtr)) }
@@ -383,12 +377,12 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse2)}.{nameof(Sse2.ConvertToInt32)}<Int32>(Vector128<Int32>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse2)}.{nameof(Sse2.ConvertToInt32)}<Int32>(Vector128<Int32>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($"   result: result");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

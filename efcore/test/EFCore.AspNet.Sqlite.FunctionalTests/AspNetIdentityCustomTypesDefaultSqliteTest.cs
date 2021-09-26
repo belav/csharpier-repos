@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore
             ) => base.AddServices(serviceCollection).AddEntityFrameworkProxies();
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .UseLazyLoadingProxies()
                     .ConfigureWarnings(e => e.Ignore(SqliteEventId.SchemaConfiguredWarning));
 

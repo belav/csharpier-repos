@@ -69,13 +69,14 @@ namespace System.Text
                 index = ((right - left) / 2) + left;
 
                 Debug.Assert(index < s_encodingNameIndices.Length - 1);
-                result = string.CompareOrdinal(
-                    invariantName,
-                    s_encodingNames.AsSpan(
-                        s_encodingNameIndices[index],
-                        s_encodingNameIndices[index + 1] - s_encodingNameIndices[index]
-                    )
-                );
+                result = string
+                    .CompareOrdinal(
+                        invariantName,
+                        s_encodingNames.AsSpan(
+                            s_encodingNameIndices[index],
+                            s_encodingNameIndices[index + 1] - s_encodingNameIndices[index]
+                        )
+                    );
 
                 if (result == 0)
                 {
@@ -99,13 +100,14 @@ namespace System.Text
             {
                 Debug.Assert(left < s_encodingNameIndices.Length - 1);
                 if (
-                    string.CompareOrdinal(
-                        invariantName,
-                        s_encodingNames.AsSpan(
-                            s_encodingNameIndices[left],
-                            s_encodingNameIndices[left + 1] - s_encodingNameIndices[left]
-                        )
-                    ) == 0
+                    string
+                        .CompareOrdinal(
+                            invariantName,
+                            s_encodingNames.AsSpan(
+                                s_encodingNameIndices[left],
+                                s_encodingNameIndices[left + 1] - s_encodingNameIndices[left]
+                            )
+                        ) == 0
                 )
                 {
                     return s_codePagesByName[left];

@@ -257,7 +257,8 @@ namespace System.CommandLine.Tests
             var option = new Option<int>("-x", () => 123);
             option.AddValidator(
                 symbol =>
-                    symbol.Tokens.Select(t => t.Value)
+                    symbol.Tokens
+                        .Select(t => t.Value)
                         .Where(v => v == "123")
                         .Select(x => "ERR")
                         .FirstOrDefault()

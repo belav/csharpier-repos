@@ -92,9 +92,9 @@ namespace Microsoft.CodeAnalysis.Rename
                 )
                 {
                     var client = await RemoteHostClient.TryGetClientAsync(
-                            solution.Workspace,
-                            cancellationToken
-                        )
+                        solution.Workspace,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (client != null)
                     {
@@ -104,25 +104,25 @@ namespace Microsoft.CodeAnalysis.Rename
                             IRemoteRenamerService,
                             SerializableRenameLocations?
                         >(
-                                solution,
-                                (service, solutionInfo, cancellationToken) =>
-                                    service.FindRenameLocationsAsync(
-                                        solutionInfo,
-                                        serializedSymbol,
-                                        options,
-                                        cancellationToken
-                                    ),
-                                cancellationToken
-                            )
+                            solution,
+                            (service, solutionInfo, cancellationToken) =>
+                                service.FindRenameLocationsAsync(
+                                    solutionInfo,
+                                    serializedSymbol,
+                                    options,
+                                    cancellationToken
+                                ),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         if (result.HasValue && result.Value != null)
                         {
                             var rehydrated = await TryRehydrateAsync(
-                                    solution,
-                                    result.Value,
-                                    cancellationToken
-                                )
+                                solution,
+                                result.Value,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
 
                             if (rehydrated != null)
@@ -135,11 +135,11 @@ namespace Microsoft.CodeAnalysis.Rename
 
             // Couldn't effectively search in OOP. Perform the search in-proc.
             return await FindLocationsInCurrentProcessAsync(
-                    symbol,
-                    solution,
-                    optionSet,
-                    cancellationToken
-                )
+                symbol,
+                solution,
+                optionSet,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -154,47 +154,46 @@ namespace Microsoft.CodeAnalysis.Rename
             using (Logger.LogBlock(FunctionId.Rename_AllRenameLocations, cancellationToken))
             {
                 symbol = await ReferenceProcessing.FindDefinitionSymbolAsync(
-                        symbol,
-                        solution,
-                        cancellationToken
-                    )
+                    symbol,
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // First, find the direct references just to the symbol being renamed.
                 var originalSymbolResult = await AddLocationsReferenceSymbolsAsync(
-                        symbol,
-                        solution,
-                        cancellationToken
-                    )
+                    symbol,
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // Next, find references to overloads, if the user has asked to rename those as well.
                 var overloadsResult = await GetOverloadsAsync(
-                        symbol,
-                        solution,
-                        optionSet,
-                        cancellationToken
-                    )
+                    symbol,
+                    solution,
+                    optionSet,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // Finally, include strings/comments if that's what the user wants.
                 var (strings, comments) =
                     await ReferenceProcessing.GetRenamableLocationsInStringsAndCommentsAsync(
-                            symbol,
-                            solution,
-                            originalSymbolResult.Locations,
-                            optionSet.RenameInStrings,
-                            optionSet.RenameInComments,
-                            cancellationToken
-                        )
+                        symbol,
+                        solution,
+                        originalSymbolResult.Locations,
+                        optionSet.RenameInStrings,
+                        optionSet.RenameInComments,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 var mergedLocations = ImmutableHashSet.CreateBuilder<RenameLocation>();
 
                 using var _1 = ArrayBuilder<ISymbol>.GetInstance(out var mergedReferencedSymbols);
-                using var _2 = ArrayBuilder<ReferenceLocation>.GetInstance(
-                    out var mergedImplicitLocations
-                );
+                using var _2 = ArrayBuilder<ReferenceLocation>
+                    .GetInstance(out var mergedImplicitLocations);
 
                 mergedLocations.AddRange(strings.NullToEmpty());
                 mergedLocations.AddRange(comments.NullToEmpty());
@@ -206,9 +205,8 @@ namespace Microsoft.CodeAnalysis.Rename
                     mergedLocations.AddRange(
                         renameMethodGroupReferences
                           ? result.Locations
-                          : result.Locations.Where(
-                                x => x.CandidateReason != CandidateReason.MemberGroup
-                            )
+                          : result.Locations
+                            .Where(x => x.CandidateReason != CandidateReason.MemberGroup)
                     );
 
                     mergedImplicitLocations.AddRange(result.ImplicitLocations);
@@ -242,10 +240,10 @@ namespace Microsoft.CodeAnalysis.Rename
                 foreach (var overloadedSymbol in GetOverloadedSymbols(symbol))
                     overloadsResult.Add(
                         await AddLocationsReferenceSymbolsAsync(
-                                overloadedSymbol,
-                                solution,
-                                cancellationToken
-                            )
+                            overloadedSymbol,
+                            solution,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     );
             }
@@ -263,11 +261,12 @@ namespace Microsoft.CodeAnalysis.Rename
                     foreach (var member in containingType.GetMembers())
                     {
                         if (
-                            string.Equals(
-                                member.MetadataName,
-                                symbol.MetadataName,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    member.MetadataName,
+                                    symbol.MetadataName,
+                                    StringComparison.Ordinal
+                                )
                             && member is IMethodSymbol
                             && !member.Equals(symbol)
                         )
@@ -287,29 +286,27 @@ namespace Microsoft.CodeAnalysis.Rename
         {
             var locations = ImmutableHashSet.CreateBuilder<RenameLocation>();
             var referenceSymbols = await SymbolFinder.FindRenamableReferencesAsync(
-                    symbol,
-                    solution,
-                    cancellationToken
-                )
+                symbol,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             foreach (var referencedSymbol in referenceSymbols)
             {
                 locations.AddAll(
                     await ReferenceProcessing.GetRenamableDefinitionLocationsAsync(
-                            referencedSymbol.Definition,
-                            symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        referencedSymbol.Definition,
+                        symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 );
 
                 locations.AddAll(
-                    await referencedSymbol.Locations.SelectManyAsync<
-                        ReferenceLocation,
-                        RenameLocation
-                    >(
+                    await referencedSymbol.Locations
+                        .SelectManyAsync<ReferenceLocation, RenameLocation>(
                             (l, c) =>
                                 ReferenceProcessing.GetRenamableReferenceLocationsAsync(
                                     referencedSymbol.Definition,

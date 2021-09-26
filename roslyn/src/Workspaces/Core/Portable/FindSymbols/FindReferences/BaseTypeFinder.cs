@@ -40,11 +40,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.FindReferences
                     // Add to results overridden members only. Do not add hidden members.
                     if (
                         await SymbolFinder.IsOverrideAsync(
-                                solution,
-                                symbol,
-                                member,
-                                cancellationToken
-                            )
+                            solution,
+                            symbol,
+                            member,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {

@@ -48,9 +48,10 @@ namespace System.DirectoryServices.AccountManagement
 
                 Debug.Assert(
                     typeof(T) == typeof(System.DirectoryServices.AccountManagement.Principal)
-                        || typeof(T).IsSubclassOf(
-                            typeof(System.DirectoryServices.AccountManagement.Principal)
-                        )
+                        || typeof(T)
+                            .IsSubclassOf(
+                                typeof(System.DirectoryServices.AccountManagement.Principal)
+                            )
                 );
                 return (T)_resultSet.CurrentAsPrincipal;
             }

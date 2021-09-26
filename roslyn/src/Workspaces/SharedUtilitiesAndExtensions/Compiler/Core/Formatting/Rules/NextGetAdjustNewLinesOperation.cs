@@ -37,11 +37,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             else
             {
                 // Call the handler at the index, passing a continuation that will come back to here with index + 1
-                return _formattingRules[_index].GetAdjustNewLinesOperation(
-                    in previousToken,
-                    in currentToken,
-                    NextOperation
-                );
+                return _formattingRules[_index]
+                    .GetAdjustNewLinesOperation(in previousToken, in currentToken, NextOperation);
             }
         }
     }

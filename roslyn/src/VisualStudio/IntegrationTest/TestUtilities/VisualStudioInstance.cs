@@ -112,9 +112,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 // integration tests as well.
                 var debuggerHostDte = GetDebuggerHostDte();
                 var targetProcessId = Process.GetCurrentProcess().Id;
-                var localProcess =
-                    debuggerHostDte?.Debugger.LocalProcesses.OfType<EnvDTE80.Process2>()
-                        .FirstOrDefault(p => p.ProcessID == hostProcess.Id);
+                var localProcess = debuggerHostDte?.Debugger.LocalProcesses
+                    .OfType<EnvDTE80.Process2>()
+                    .FirstOrDefault(p => p.ProcessID == hostProcess.Id);
                 if (localProcess != null)
                 {
                     localProcess.Attach2("Managed");
@@ -214,12 +214,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
         public void WaitForApplicationIdle(CancellationToken cancellationToken)
         {
-            var task = Task.Factory.StartNew(
-                () => _inProc.WaitForApplicationIdle(Helper.HangMitigatingTimeout),
-                cancellationToken,
-                TaskCreationOptions.LongRunning,
-                TaskScheduler.Default
-            );
+            var task = Task.Factory
+                .StartNew(
+                    () => _inProc.WaitForApplicationIdle(Helper.HangMitigatingTimeout),
+                    cancellationToken,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
             task.Wait(cancellationToken);
         }
 
@@ -339,9 +340,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             // We use DTE over RPC to start the integration service. All other DTE calls should happen in the host process.
             if (
-                dte.Commands.Item(
-                    WellKnownCommandNames.Test_IntegrationTestService_Start
-                ).IsAvailable
+                dte.Commands
+                    .Item(WellKnownCommandNames.Test_IntegrationTestService_Start).IsAvailable
             )
             {
                 dte.ExecuteCommand(WellKnownCommandNames.Test_IntegrationTestService_Start);

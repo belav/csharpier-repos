@@ -435,8 +435,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private static bool SupportsLinkGeneration(RouteEndpoint endpoint)
         {
             return !(
-                endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration
-                == true
+                endpoint.Metadata
+                    .GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration == true
             );
         }
 

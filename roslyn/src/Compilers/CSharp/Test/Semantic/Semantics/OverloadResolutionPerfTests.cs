@@ -424,7 +424,8 @@ class Program
             comp.NullableAnalysisData = new();
             comp.VerifyDiagnostics();
 
-            int analyzed = comp.NullableAnalysisData.Data.Where(pair => pair.Value.RequiredAnalysis)
+            int analyzed = comp.NullableAnalysisData.Data
+                .Where(pair => pair.Value.RequiredAnalysis)
                 .Count();
             Assert.Equal(nMethods / 2, analyzed);
         }

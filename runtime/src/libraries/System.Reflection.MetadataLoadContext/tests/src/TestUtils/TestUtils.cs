@@ -17,9 +17,8 @@ namespace System.Reflection.Tests
         public static int GetMark(this MemberInfo m)
         {
             Type markAttributeType = typeof(MarkAttribute).Project();
-            CustomAttributeData cad = m.CustomAttributes.Single(
-                ca => ca.AttributeType == markAttributeType
-            );
+            CustomAttributeData cad = m.CustomAttributes
+                .Single(ca => ca.AttributeType == markAttributeType);
             return (int)(cad.ConstructorArguments[0].Value);
         }
 
@@ -73,13 +72,11 @@ namespace System.Reflection.Tests
             );
             Assert.NotNull(runtimeConstructor);
 
-            IList<CustomAttributeTypedArgument> runtimeCats = cad.ConstructorArguments.Select(
-                    ct => ct.ProjectBackToRuntime()
-                )
+            IList<CustomAttributeTypedArgument> runtimeCats = cad.ConstructorArguments
+                .Select(ct => ct.ProjectBackToRuntime())
                 .ToArray();
-            IList<CustomAttributeNamedArgument> runtimeCans = cad.NamedArguments.Select(
-                    cn => cn.ProjectBackToRuntime()
-                )
+            IList<CustomAttributeNamedArgument> runtimeCans = cad.NamedArguments
+                .Select(cn => cn.ProjectBackToRuntime())
                 .ToArray();
 
             return new TestCustomAttributeData(runtimeConstructor, runtimeCats, runtimeCans);
@@ -132,10 +129,8 @@ namespace System.Reflection.Tests
             else
             {
                 // Assume it's from SampleMetadata.
-                return typeof(SampleMetadata.Base1).Assembly.GetType(
-                    type.FullName,
-                    throwOnError: true
-                );
+                return typeof(SampleMetadata.Base1).Assembly
+                    .GetType(type.FullName, throwOnError: true);
             }
         }
 
@@ -253,9 +248,8 @@ namespace System.Reflection.Tests
             }
             Console.WriteLine(si + "Named Arguments.........:");
             foreach (
-                CustomAttributeNamedArgument cna in cad.NamedArguments.OrderBy(
-                    can => can.MemberName
-                )
+                CustomAttributeNamedArgument cna in cad.NamedArguments
+                    .OrderBy(can => can.MemberName)
             )
             {
                 Console.WriteLine(si + "   MemberName....: " + cna.MemberName);

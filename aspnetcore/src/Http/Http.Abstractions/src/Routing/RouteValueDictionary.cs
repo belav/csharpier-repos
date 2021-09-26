@@ -531,11 +531,12 @@ namespace Microsoft.AspNetCore.Routing
                 for (var i = 0; i < storage.Properties.Length; i++)
                 {
                     if (
-                        string.Equals(
-                            storage.Properties[i].Name,
-                            key,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                storage.Properties[i].Name,
+                                key,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         value = storage.Properties[i].GetValue(storage.Value);

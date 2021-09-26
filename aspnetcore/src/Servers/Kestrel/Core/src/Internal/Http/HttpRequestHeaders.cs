@@ -125,12 +125,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             if (
                 numChars > 19
-                || !long.TryParse(
-                    decodedChars.Slice(0, numChars),
-                    NumberStyles.Integer,
-                    CultureInfo.InvariantCulture,
-                    out parsed
-                )
+                || !long
+                    .TryParse(
+                        decodedChars.Slice(0, numChars),
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out parsed
+                    )
                 || parsed < 0
             )
             {

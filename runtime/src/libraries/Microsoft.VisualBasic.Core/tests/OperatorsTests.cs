@@ -2682,11 +2682,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 ulong.MaxValue,
                 ulong.MaxValue,
-                double.Parse(
-                    "3.4028236692093846E+38",
-                    NumberStyles.Any,
-                    CultureInfo.InvariantCulture
-                )
+                double
+                    .Parse("3.4028236692093846E+38", NumberStyles.Any, CultureInfo.InvariantCulture)
             };
 
             // long + primitives.
@@ -2714,11 +2711,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 long.MaxValue,
                 long.MaxValue,
-                double.Parse(
-                    "8.5070591730234616E+37",
-                    NumberStyles.Any,
-                    CultureInfo.InvariantCulture
-                )
+                double
+                    .Parse("8.5070591730234616E+37", NumberStyles.Any, CultureInfo.InvariantCulture)
             };
 
             // float + primitives
@@ -2740,21 +2734,15 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 (float)15,
                 float.MaxValue,
-                double.Parse(
-                    "5.1042351995779329E+39",
-                    NumberStyles.Any,
-                    CultureInfo.InvariantCulture
-                )
+                double
+                    .Parse("5.1042351995779329E+39", NumberStyles.Any, CultureInfo.InvariantCulture)
             };
             yield return new object[]
             {
                 float.MaxValue,
                 float.MaxValue,
-                double.Parse(
-                    "1.1579207543382391E+77",
-                    NumberStyles.Any,
-                    CultureInfo.InvariantCulture
-                )
+                double
+                    .Parse("1.1579207543382391E+77", NumberStyles.Any, CultureInfo.InvariantCulture)
             };
             yield return new object[] { (float)15, float.PositiveInfinity, float.PositiveInfinity };
             yield return new object[] { (float)15, float.NegativeInfinity, float.NegativeInfinity };
@@ -2826,11 +2814,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 (decimal)15,
                 decimal.MaxValue,
-                double.Parse(
-                    "1.1884224377139651E+30",
-                    NumberStyles.Any,
-                    CultureInfo.InvariantCulture
-                )
+                double
+                    .Parse("1.1884224377139651E+30", NumberStyles.Any, CultureInfo.InvariantCulture)
             };
 
             // string + primitives
@@ -5104,11 +5089,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 decimal.MinValue,
                 decimal.MaxValue,
-                double.Parse(
-                    "-1.5845632502852868E+29",
-                    NumberStyles.Any,
-                    CultureInfo.InvariantCulture
-                )
+                double
+                    .Parse(
+                        "-1.5845632502852868E+29",
+                        NumberStyles.Any,
+                        CultureInfo.InvariantCulture
+                    )
             };
 
             // string.

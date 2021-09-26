@@ -329,10 +329,11 @@ namespace System.Text.Encodings.Web.Tests
         private static string GetKnownGoodPercentEncodedValue(int codePoint)
         {
             // Convert the code point to UTF16, then call Encoding.UTF8.GetBytes, then hex-encode everything
-            return string.Concat(
-                _utf8EncodingThrowOnInvalidBytes.GetBytes(char.ConvertFromUtf32(codePoint))
-                    .Select(b => string.Format(CultureInfo.InvariantCulture, "%{0:X2}", b))
-            );
+            return string
+                .Concat(
+                    _utf8EncodingThrowOnInvalidBytes.GetBytes(char.ConvertFromUtf32(codePoint))
+                        .Select(b => string.Format(CultureInfo.InvariantCulture, "%{0:X2}", b))
+                );
         }
 
         private static bool IsSurrogateCodePoint(int codePoint)

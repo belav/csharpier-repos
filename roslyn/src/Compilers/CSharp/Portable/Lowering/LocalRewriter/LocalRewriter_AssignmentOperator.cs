@@ -69,10 +69,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var memberAccess = (BoundDynamicMemberAccess)left;
                     var loweredReceiver = VisitExpression(memberAccess.Receiver);
                     return _dynamicFactory.MakeDynamicSetMember(
-                            loweredReceiver,
-                            memberAccess.Name,
-                            loweredRight
-                        )
+                        loweredReceiver,
+                        memberAccess.Name,
+                        loweredRight
+                    )
                         .ToExpression();
                 }
 
@@ -139,12 +139,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.DynamicMemberAccess:
                     var memberAccess = (BoundDynamicMemberAccess)rewrittenLeft;
                     return _dynamicFactory.MakeDynamicSetMember(
-                            memberAccess.Receiver,
-                            memberAccess.Name,
-                            rewrittenRight,
-                            isCompoundAssignment,
-                            isChecked
-                        )
+                        memberAccess.Receiver,
+                        memberAccess.Name,
+                        rewrittenRight,
+                        isCompoundAssignment,
+                        isChecked
+                    )
                         .ToExpression();
 
                 case BoundKind.EventAccess:
@@ -197,14 +197,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             EmbedIfNeedTo(loweredReceiver, indexerAccess.ApplicableIndexers, indexerAccess.Syntax);
 
             return _dynamicFactory.MakeDynamicSetIndex(
-                    MakeDynamicIndexerAccessReceiver(indexerAccess, loweredReceiver),
-                    loweredArguments,
-                    argumentNames,
-                    refKinds,
-                    loweredRight,
-                    isCompoundAssignment,
-                    isChecked
-                )
+                MakeDynamicIndexerAccessReceiver(indexerAccess, loweredReceiver),
+                loweredArguments,
+                argumentNames,
+                refKinds,
+                loweredRight,
+                isCompoundAssignment,
+                isChecked
+            )
                 .ToExpression();
         }
 

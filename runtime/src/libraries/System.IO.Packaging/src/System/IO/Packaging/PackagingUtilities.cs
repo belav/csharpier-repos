@@ -46,11 +46,8 @@ namespace System.IO.Packaging
                     //only two valid values.
                     if (
                         string.Equals(encoding, WebNameUTF8, StringComparison.OrdinalIgnoreCase)
-                        || string.Equals(
-                            encoding,
-                            WebNameUnicode,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        || string
+                            .Equals(encoding, WebNameUnicode, StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         return;

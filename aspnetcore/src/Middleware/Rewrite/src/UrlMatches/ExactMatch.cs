@@ -19,11 +19,12 @@ namespace Microsoft.AspNetCore.Rewrite.UrlMatches
 
         public override MatchResults Evaluate(string pattern, RewriteContext context)
         {
-            var pathMatch = string.Equals(
-                pattern,
-                _stringMatch,
-                _ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
-            );
+            var pathMatch = string
+                .Equals(
+                    pattern,
+                    _stringMatch,
+                    _ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
+                );
             var success = pathMatch != Negate;
             if (success)
             {

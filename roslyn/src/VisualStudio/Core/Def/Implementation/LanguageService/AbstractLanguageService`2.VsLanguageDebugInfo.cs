@@ -104,21 +104,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             action: waitContext =>
                             {
                                 var cancellationToken = waitContext.CancellationToken;
-                                var textBuffer =
-                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                                        pBuffer
-                                    );
+                                var textBuffer = _languageService.EditorAdaptersFactoryService
+                                    .GetDataBuffer(pBuffer);
                                 if (textBuffer != null)
                                 {
-                                    var nullablePoint = textBuffer.CurrentSnapshot.TryGetPoint(
-                                        iLine,
-                                        iCol
-                                    );
+                                    var nullablePoint = textBuffer.CurrentSnapshot
+                                        .TryGetPoint(iLine, iCol);
                                     if (nullablePoint.HasValue)
                                     {
                                         var point = nullablePoint.Value;
-                                        var document =
-                                            point.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                                        var document = point.Snapshot
+                                            .GetOpenDocumentInCurrentContextWithChanges();
 
                                         if (document != null)
                                         {
@@ -127,10 +123,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                                             // would be nice if they could make it async.
                                             var debugLocationInfo =
                                                 _languageDebugInfo.GetLocationInfoAsync(
-                                                        document,
-                                                        point,
-                                                        cancellationToken
-                                                    )
+                                                    document,
+                                                    point,
+                                                    cancellationToken
+                                                )
                                                     .WaitAndGetResult(cancellationToken);
 
                                             if (!debugLocationInfo.IsDefault)
@@ -186,10 +182,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             allowCancel: true,
                             action: waitContext =>
                             {
-                                var textBuffer =
-                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                                        pBuffer
-                                    );
+                                var textBuffer = _languageService.EditorAdaptersFactoryService
+                                    .GetDataBuffer(pBuffer);
 
                                 if (textBuffer != null)
                                 {
@@ -204,10 +198,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                                             var point = nullablePoint.Value;
                                             var proximityExpressions =
                                                 _proximityExpressionsService.GetProximityExpressionsAsync(
-                                                        document,
-                                                        point.Position,
-                                                        waitContext.CancellationToken
-                                                    )
+                                                    document,
+                                                    point.Position,
+                                                    waitContext.CancellationToken
+                                                )
                                                     .WaitAndGetResult(
                                                         waitContext.CancellationToken
                                                     );
@@ -267,14 +261,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                                 if (_breakpointService != null)
                                 {
                                     var breakpoints = _breakpointService.ResolveBreakpointsAsync(
-                                            solution,
-                                            pszName,
-                                            cancellationToken
-                                        )
+                                        solution,
+                                        pszName,
+                                        cancellationToken
+                                    )
                                         .WaitAndGetResult(cancellationToken);
                                     var debugNames = breakpoints.Select(
-                                            bp => CreateDebugName(bp, solution, cancellationToken)
-                                        )
+                                        bp => CreateDebugName(bp, solution, cancellationToken)
+                                    )
                                         .WhereNotNull()
                                         .ToList();
 
@@ -363,9 +357,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     return VSConstants.E_FAIL;
                 }
 
-                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    pBuffer
-                );
+                var textBuffer = _languageService.EditorAdaptersFactoryService
+                    .GetDataBuffer(pBuffer);
                 if (textBuffer != null)
                 {
                     var snapshot = textBuffer.CurrentSnapshot;
@@ -433,10 +426,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         // synchronous.  In the future, it would be nice for the debugger to provide
                         // an async entry point for this.
                         var breakpoint = _breakpointService.ResolveBreakpointAsync(
-                                document,
-                                new TextSpan(point.Position, length),
-                                cancellationToken
-                            )
+                            document,
+                            new TextSpan(point.Position, length),
+                            cancellationToken
+                        )
                             .WaitAndGetResult(cancellationToken);
                         if (breakpoint == null)
                         {
@@ -459,7 +452,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         // There should be a breakpoint at the location passed back.
                         if (pCodeSpan != null && pCodeSpan.Length > 0)
                         {
-                            pCodeSpan[0] = breakpoint.TextSpan.ToSnapshotSpan(snapshot)
+                            pCodeSpan[0] = breakpoint.TextSpan
+                                .ToSnapshotSpan(snapshot)
                                 .ToVsTextSpan();
                         }
 

@@ -83,10 +83,11 @@ namespace Microsoft.AspNetCore.Identity
                 var owner = await manager.FindByNameAsync(userName);
                 if (
                     owner != null
-                    && !string.Equals(
-                        await manager.GetUserIdAsync(owner),
-                        await manager.GetUserIdAsync(user)
-                    )
+                    && !string
+                        .Equals(
+                            await manager.GetUserIdAsync(owner),
+                            await manager.GetUserIdAsync(user)
+                        )
                 )
                 {
                     errors.Add(Describer.DuplicateUserName(userName));
@@ -115,10 +116,8 @@ namespace Microsoft.AspNetCore.Identity
             var owner = await manager.FindByEmailAsync(email);
             if (
                 owner != null
-                && !string.Equals(
-                    await manager.GetUserIdAsync(owner),
-                    await manager.GetUserIdAsync(user)
-                )
+                && !string
+                    .Equals(await manager.GetUserIdAsync(owner), await manager.GetUserIdAsync(user))
             )
             {
                 errors.Add(Describer.DuplicateEmail(email));

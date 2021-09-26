@@ -351,11 +351,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     {
                         new HiddenInputAttribute(),
                         metadata =>
-                            string.Equals(
-                                "HiddenInput",
-                                metadata.TemplateHint,
-                                StringComparison.Ordinal
-                            ),
+                            string
+                                .Equals(
+                                    "HiddenInput",
+                                    metadata.TemplateHint,
+                                    StringComparison.Ordinal
+                                ),
                         true
                     },
                     { new RequiredAttribute(), metadata => metadata.IsRequired, true },
@@ -1092,19 +1093,18 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             {
                 var entries = base.CreatePropertyDetails(key);
                 return entries.Select(
-                        e =>
-                        {
-                            return new DefaultMetadataDetails(
-                                e.Key,
-                                new ModelAttributes(
-                                    e.ModelAttributes.TypeAttributes,
-                                    _attributes.Concat(e.ModelAttributes.PropertyAttributes),
-                                    Array.Empty<object>()
-                                )
-                            );
-                        }
-                    )
-                    .ToArray();
+                    e =>
+                    {
+                        return new DefaultMetadataDetails(
+                            e.Key,
+                            new ModelAttributes(
+                                e.ModelAttributes.TypeAttributes,
+                                _attributes.Concat(e.ModelAttributes.PropertyAttributes),
+                                Array.Empty<object>()
+                            )
+                        );
+                    }
+                ).ToArray();
             }
         }
     }

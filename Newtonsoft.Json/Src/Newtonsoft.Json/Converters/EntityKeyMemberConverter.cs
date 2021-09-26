@@ -121,18 +121,17 @@ namespace Newtonsoft.Json.Converters
 
             if (
                 reader.TokenType != JsonToken.PropertyName
-                || !string.Equals(
-                    reader.Value?.ToString(),
-                    propertyName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                || !string
+                    .Equals(
+                        reader.Value?.ToString(),
+                        propertyName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 throw new JsonSerializationException(
-                    "Expected JSON property '{0}'.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        propertyName
-                    )
+                    "Expected JSON property '{0}'."
+                        .FormatWith(CultureInfo.InvariantCulture, propertyName)
                 );
             }
         }

@@ -13,14 +13,12 @@ namespace Microsoft.AspNetCore.TestHost
         {
             var builder = new WebHostBuilder().Configure(app => { });
             var server = new TestServer(builder);
-            server.CreateRequest("/")
-                .AddHeader("Host", "MyHost:90")
-                .And(
-                    request =>
-                    {
-                        Assert.Equal("MyHost:90", request.Headers.Host.ToString());
-                    }
-                );
+            server.CreateRequest("/").AddHeader("Host", "MyHost:90").And(
+                request =>
+                {
+                    Assert.Equal("MyHost:90", request.Headers.Host.ToString());
+                }
+            );
         }
 
         [Fact]
@@ -28,15 +26,13 @@ namespace Microsoft.AspNetCore.TestHost
         {
             var builder = new WebHostBuilder().Configure(app => { });
             var server = new TestServer(builder);
-            server.CreateRequest("/")
-                .AddHeader("Content-Type", "Test/Value")
-                .And(
-                    request =>
-                    {
-                        Assert.NotNull(request.Content);
-                        Assert.Equal("Test/Value", request.Content.Headers.ContentType.ToString());
-                    }
-                );
+            server.CreateRequest("/").AddHeader("Content-Type", "Test/Value").And(
+                request =>
+                {
+                    Assert.NotNull(request.Content);
+                    Assert.Equal("Test/Value", request.Content.Headers.ContentType.ToString());
+                }
+            );
         }
 
         [Fact]

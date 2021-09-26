@@ -86,11 +86,12 @@ namespace Microsoft.AspNetCore.Components.Reflection
                 {
                     var parameterName = parameter.Name;
                     if (
-                        string.Equals(
-                            parameterName,
-                            writers.CaptureUnmatchedValuesPropertyName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                parameterName,
+                                writers.CaptureUnmatchedValuesPropertyName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         isCaptureUnmatchedValuesParameterSetExplicitly = true;
@@ -378,9 +379,8 @@ namespace Microsoft.AspNetCore.Components.Reflection
 
                         // It must be able to hold a Dictionary<string, object> since that's what we create.
                         if (
-                            !propertyInfo.PropertyType.IsAssignableFrom(
-                                typeof(Dictionary<string, object>)
-                            )
+                            !propertyInfo.PropertyType
+                                .IsAssignableFrom(typeof(Dictionary<string, object>))
                         )
                         {
                             ThrowForInvalidCaptureUnmatchedValuesParameterType(

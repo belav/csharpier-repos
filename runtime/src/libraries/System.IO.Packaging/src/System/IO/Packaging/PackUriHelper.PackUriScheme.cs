@@ -107,11 +107,8 @@ namespace System.IO.Packaging
             absolutePackageUri = absolutePackageUri.Replace('/', ',');
 
             // Step 5 - Append pack:// at the beginning and a '/' at the end of the pack uri obtained so far
-            absolutePackageUri = string.Concat(
-                PackUriHelper.UriSchemePack,
-                Uri.SchemeDelimiter,
-                absolutePackageUri
-            );
+            absolutePackageUri = string
+                .Concat(PackUriHelper.UriSchemePack, Uri.SchemeDelimiter, absolutePackageUri);
 
             Uri packUri = new Uri(absolutePackageUri);
 
@@ -122,10 +119,11 @@ namespace System.IO.Packaging
             // Step 7 - Append fragment if present
             if (fragment != null)
                 packUri = new Uri(
-                    string.Concat(
-                        packUri.GetComponents(UriComponents.AbsoluteUri, UriFormat.UriEscaped),
-                        fragment
-                    )
+                    string
+                        .Concat(
+                            packUri.GetComponents(UriComponents.AbsoluteUri, UriFormat.UriEscaped),
+                            fragment
+                        )
                 );
 
             // We want to ensure that internal content of resulting Uri has canonical form
@@ -225,10 +223,8 @@ namespace System.IO.Packaging
                 //Iff the PackageUri match do we compare the part uris.
                 if (compareResult == 0)
                 {
-                    compareResult = System.IO.Packaging.PackUriHelper.ComparePartUri(
-                        firstPartUri,
-                        secondPartUri
-                    );
+                    compareResult = System.IO.Packaging.PackUriHelper
+                        .ComparePartUri(firstPartUri, secondPartUri);
                 }
 
                 return compareResult;

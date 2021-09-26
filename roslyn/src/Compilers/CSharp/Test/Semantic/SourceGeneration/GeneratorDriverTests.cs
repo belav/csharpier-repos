@@ -202,7 +202,8 @@ class GeneratedClass { }
             Assert.Equal(2, outputCompilation.SyntaxTrees.Count());
             Assert.NotEqual(compilation, outputCompilation);
 
-            var generatedClass = outputCompilation.GlobalNamespace.GetTypeMembers("GeneratedClass")
+            var generatedClass = outputCompilation.GlobalNamespace
+                .GetTypeMembers("GeneratedClass")
                 .Single();
             Assert.True(generatedClass.Locations.Single().IsInSource);
         }
@@ -1106,10 +1107,8 @@ class C { }
                 isEnabledByDefault: true,
                 description: description
             );
-            var diagnostic = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic,
-                Location.None
-            );
+            var diagnostic = Microsoft.CodeAnalysis.Diagnostic
+                .Create(generatorDiagnostic, Location.None);
 
             var generator = new CallbackGenerator(
                 (ic) => { },
@@ -1405,18 +1404,12 @@ class C { }
                 description: description
             );
 
-            var diagnostic1 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic1,
-                Location.None
-            );
-            var diagnostic2 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic2,
-                Location.None
-            );
-            var diagnostic3 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic3,
-                Location.None
-            );
+            var diagnostic1 = Microsoft.CodeAnalysis.Diagnostic
+                .Create(generatorDiagnostic1, Location.None);
+            var diagnostic2 = Microsoft.CodeAnalysis.Diagnostic
+                .Create(generatorDiagnostic2, Location.None);
+            var diagnostic3 = Microsoft.CodeAnalysis.Diagnostic
+                .Create(generatorDiagnostic3, Location.None);
 
             var generator = new CallbackGenerator(
                 (ic) => { },
@@ -1506,18 +1499,12 @@ class C { }
                 description: description
             );
 
-            var diagnostic1 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic1,
-                Location.None
-            );
-            var diagnostic2 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic2,
-                Location.None
-            );
-            var diagnostic3 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic3,
-                Location.None
-            );
+            var diagnostic1 = Microsoft.CodeAnalysis.Diagnostic
+                .Create(generatorDiagnostic1, Location.None);
+            var diagnostic2 = Microsoft.CodeAnalysis.Diagnostic
+                .Create(generatorDiagnostic2, Location.None);
+            var diagnostic3 = Microsoft.CodeAnalysis.Diagnostic
+                .Create(generatorDiagnostic3, Location.None);
 
             var generator = new CallbackGenerator(
                 (ic) => { },

@@ -31,19 +31,15 @@ namespace BasicWebSite
             services.AddTransient<IAuthorizationHandler, ManagerHandler>();
 
             services.AddMvc(
-                    options =>
-                    {
-                        options.Conventions.Add(
-                            new ApplicationDescription("This is a basic website.")
-                        );
-                        // Filter that records a value in HttpContext.Items
-                        options.Filters.Add(new TraceResourceFilter());
+                options =>
+                {
+                    options.Conventions.Add(new ApplicationDescription("This is a basic website."));
+                    // Filter that records a value in HttpContext.Items
+                    options.Filters.Add(new TraceResourceFilter());
 
-                        options.EnableEndpointRouting = false;
-                    }
-                )
-                .AddNewtonsoftJson()
-                .AddXmlDataContractSerializerFormatters();
+                    options.EnableEndpointRouting = false;
+                }
+            ).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 
             services.ConfigureBaseWebSiteAuthPolicies();
 

@@ -575,10 +575,8 @@ namespace Microsoft.AspNetCore.Components
             var component = new EventComponent();
 
             // Act
-            var callback = EventCallback.Factory.Create<string>(
-                component,
-                (Func<string, Task>)null
-            );
+            var callback = EventCallback.Factory
+                .Create<string>(component, (Func<string, Task>)null);
 
             // Assert
             Assert.Null(callback.Delegate);

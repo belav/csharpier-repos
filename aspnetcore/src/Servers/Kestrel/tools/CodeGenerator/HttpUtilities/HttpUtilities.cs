@@ -52,11 +52,12 @@ namespace CodeGenerator.HttpUtilities
             if (mask.HasValue == false)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Generated {0} not found.",
-                        nameof(mask)
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "Generated {0} not found.",
+                            nameof(mask)
+                        )
                 );
             }
 
@@ -267,37 +268,41 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                         tmpReturn += " | ";
                     }
 
-                    tmpReturn += string.Format(
-                        CultureInfo.InvariantCulture,
-                        "(tmp >> {1})",
-                        HttpUtilitiesGeneratorHelpers.MaskToHexString(item.Mask),
-                        item.Shift
-                    );
+                    tmpReturn += string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "(tmp >> {1})",
+                            HttpUtilitiesGeneratorHelpers.MaskToHexString(item.Mask),
+                            item.Shift
+                        );
                 }
 
                 var mask2 = (ulong)(Math.Pow(2, bitsCount) - 1);
 
-                string returnString = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "return ({0}) & {1};",
-                    tmpReturn,
-                    HttpUtilitiesGeneratorHelpers.MaskToHexString(mask2)
-                );
+                string returnString = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "return ({0}) & {1};",
+                        tmpReturn,
+                        HttpUtilitiesGeneratorHelpers.MaskToHexString(mask2)
+                    );
 
-                bodyString = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "            const int magicNumer = {0};\r\n            var tmp = (int)value & magicNumer;\r\n            {1}",
-                    HttpUtilitiesGeneratorHelpers.MaskToHexString(mask),
-                    returnString
-                );
+                bodyString = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "            const int magicNumer = {0};\r\n            var tmp = (int)value & magicNumer;\r\n            {1}",
+                        HttpUtilitiesGeneratorHelpers.MaskToHexString(mask),
+                        returnString
+                    );
             }
             else
             {
-                bodyString = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "return (int)(value & {0});",
-                    maskHexString
-                );
+                bodyString = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "return (int)(value & {0});",
+                        maskHexString
+                    );
             }
 
             return bodyString;
@@ -305,11 +310,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
         private static string GetHttpMethodFieldName(MethodInfo methodsInfo)
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "_http{0}MethodLong",
-                methodsInfo.HttpMethod.ToString()
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "_http{0}MethodLong",
+                    methodsInfo.HttpMethod.ToString()
+                );
         }
 
         private static string GetMaskFieldName(int nBytes)
@@ -329,12 +335,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             if (method.Length > length)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        "MethodAsciiString {0} length is greather than {1}",
-                        method,
-                        length
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            "MethodAsciiString {0} length is greather than {1}",
+                            method,
+                            length
+                        )
                 );
             }
             string result = method;
@@ -394,11 +401,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         {
             Debug.Assert(
                 str.Length == sizeof(ulong),
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "String must be exactly {0} (ASCII) characters long.",
-                    sizeof(ulong)
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "String must be exactly {0} (ASCII) characters long.",
+                        sizeof(ulong)
+                    )
             );
 
             var bytes = Encoding.ASCII.GetBytes(str);

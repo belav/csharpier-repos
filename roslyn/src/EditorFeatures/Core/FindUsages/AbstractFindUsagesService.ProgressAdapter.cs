@@ -43,14 +43,14 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             {
                 var documentSpan =
                     await ClassifiedSpansAndHighlightSpanFactory.GetClassifiedDocumentSpanAsync(
-                            document,
-                            span,
-                            _context.CancellationToken
-                        )
+                        document,
+                        span,
+                        _context.CancellationToken
+                    )
                         .ConfigureAwait(false);
                 await _context.OnReferenceFoundAsync(
-                        new SourceReferenceItem(_definition, documentSpan, SymbolUsageInfo.None)
-                    )
+                    new SourceReferenceItem(_definition, documentSpan, SymbolUsageInfo.None)
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -110,12 +110,12 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                     if (!_definitionToItem.TryGetValue(group, out var definitionItem))
                     {
                         definitionItem = await group.ToClassifiedDefinitionItemAsync(
-                                _solution,
-                                isPrimary: _definitionToItem.Count == 0,
-                                includeHiddenLocations: false,
-                                _options,
-                                _context.CancellationToken
-                            )
+                            _solution,
+                            isPrimary: _definitionToItem.Count == 0,
+                            includeHiddenLocations: false,
+                            _options,
+                            _context.CancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         _definitionToItem[group] = definitionItem;
@@ -139,10 +139,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             {
                 var definitionItem = await GetDefinitionItemAsync(group).ConfigureAwait(false);
                 var referenceItem = await location.TryCreateSourceReferenceItemAsync(
-                        definitionItem,
-                        includeHiddenLocations: false,
-                        cancellationToken: _context.CancellationToken
-                    )
+                    definitionItem,
+                    includeHiddenLocations: false,
+                    cancellationToken: _context.CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (referenceItem != null)

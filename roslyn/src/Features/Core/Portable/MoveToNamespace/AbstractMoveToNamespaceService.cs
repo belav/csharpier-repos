@@ -79,10 +79,10 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             if (OptionsService != null)
             {
                 var typeAnalysisResult = await AnalyzeTypeAtPositionAsync(
-                        document,
-                        span.Start,
-                        cancellationToken
-                    )
+                    document,
+                    span.Start,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (typeAnalysisResult.CanPerform)
@@ -108,11 +108,11 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             var node = token.Parent;
 
             var moveToNamespaceAnalysisResult = await TryAnalyzeNamespaceAsync(
-                    document,
-                    node,
-                    position,
-                    cancellationToken
-                )
+                document,
+                node,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (moveToNamespaceAnalysisResult != null)
@@ -121,10 +121,10 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             }
 
             moveToNamespaceAnalysisResult = await TryAnalyzeNamedTypeAsync(
-                    document,
-                    node,
-                    cancellationToken
-                )
+                document,
+                node,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return moveToNamespaceAnalysisResult ?? MoveToNamespaceAnalysisResult.Invalid;
         }
@@ -151,10 +151,10 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
                 var changeNamespaceService = document.GetLanguageService<IChangeNamespaceService>();
                 if (
                     await changeNamespaceService.CanChangeNamespaceAsync(
-                            document,
-                            declarationSyntax,
-                            cancellationToken
-                        )
+                        document,
+                        declarationSyntax,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -213,10 +213,10 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
 
                 if (
                     await changeNamespaceService.CanChangeNamespaceAsync(
-                            document,
-                            container,
-                            cancellationToken
-                        )
+                        document,
+                        container,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -333,11 +333,11 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             var originalSolution = document.Project.Solution;
 
             var changedSolution = await changeNamespaceService.ChangeNamespaceAsync(
-                    document,
-                    container,
-                    targetNamespace,
-                    cancellationToken
-                )
+                document,
+                container,
+                targetNamespace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return new MoveToNamespaceResult(
@@ -366,28 +366,28 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             var moveSpan = new TextSpan(container.FullSpan.Start, 0);
 
             var modifiedSolution = await moveTypeService.GetModifiedSolutionAsync(
-                    document,
-                    moveSpan,
-                    MoveTypeOperationKind.MoveTypeNamespaceScope,
-                    cancellationToken
-                )
+                document,
+                moveSpan,
+                MoveTypeOperationKind.MoveTypeNamespaceScope,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var modifiedDocument = modifiedSolution.GetDocument(document.Id);
 
             // Since MoveTypeService doesn't handle linked files, we need to merge the diff ourselves,
             // otherwise, we will end up with multiple linked documents with different content.
             var mergedSolution = await PropagateChangeToLinkedDocumentsAsync(
-                    modifiedDocument,
-                    cancellationToken
-                )
+                modifiedDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var mergedDocument = mergedSolution.GetDocument(document.Id);
 
             var syntaxRoot = await mergedDocument.GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var syntaxNode = syntaxRoot.GetAnnotatedNodes(
-                    AbstractMoveTypeService.NamespaceScopeMovedAnnotation
-                )
+                AbstractMoveTypeService.NamespaceScopeMovedAnnotation
+            )
                 .SingleOrDefault();
 
             if (syntaxNode == null)
@@ -398,11 +398,11 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             }
 
             return await MoveItemsInNamespaceAsync(
-                    mergedDocument,
-                    syntaxNode,
-                    targetNamespace,
-                    cancellationToken
-                )
+                mergedDocument,
+                syntaxNode,
+                targetNamespace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -413,10 +413,10 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         {
             // Need to make sure elastic trivia is formatted properly before pushing the text to other documents.
             var formattedDocument = await Formatter.FormatAsync(
-                    document,
-                    SyntaxAnnotation.ElasticAnnotation,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                SyntaxAnnotation.ElasticAnnotation,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             var formattedText = await formattedDocument.GetTextAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -455,10 +455,12 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            return compilation.GlobalNamespace.GetAllNamespaces(cancellationToken)
+            return compilation.GlobalNamespace
+                .GetAllNamespaces(cancellationToken)
                 .Where(
                     n =>
                         n.NamespaceKind == NamespaceKind.Module

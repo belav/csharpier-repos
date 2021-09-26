@@ -90,10 +90,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             var addMethods =
                 await CommonSignatureHelpUtilities.GetCollectionInitializerAddMethodsAsync(
-                        document,
-                        initializerExpression,
-                        cancellationToken
-                    )
+                    document,
+                    initializerExpression,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             if (addMethods.IsDefaultOrEmpty)
             {
@@ -107,14 +107,14 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 .ConfigureAwait(false);
             return CreateCollectionInitializerSignatureHelpItems(
                 addMethods.Select(
-                        s =>
-                            ConvertMethodGroupMethod(
-                                document,
-                                s,
-                                initializerExpression.OpenBraceToken.SpanStart,
-                                semanticModel
-                            )
-                    )
+                    s =>
+                        ConvertMethodGroupMethod(
+                            document,
+                            s,
+                            initializerExpression.OpenBraceToken.SpanStart,
+                            semanticModel
+                        )
+                )
                     .ToList(),
                 textSpan,
                 GetCurrentArgumentState(root, position, syntaxFacts, textSpan, cancellationToken)

@@ -50,7 +50,8 @@ namespace System.Threading.Tasks
                 {
                     IsBackground = true,
                     Name = ".NET Long Running Task"
-                }.UnsafeStart(task);
+                }
+                    .UnsafeStart(task);
 #pragma warning restore CA1416
             }
             else

@@ -16,14 +16,16 @@ namespace Wasm.Authentication.Client
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-            builder.Services.AddApiAuthorization<RemoteAppState, OidcAccount>()
+            builder.Services
+                .AddApiAuthorization<RemoteAppState, OidcAccount>()
                 .AddAccountClaimsPrincipalFactory<
                     RemoteAppState,
                     OidcAccount,
                     PreferencesUserFactory
                 >();
 
-            builder.Services.AddHttpClient<WeatherForecastClient>(
+            builder.Services
+                .AddHttpClient<WeatherForecastClient>(
                     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
                 )
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();

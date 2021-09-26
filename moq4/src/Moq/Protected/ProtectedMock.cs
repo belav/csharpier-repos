@@ -454,17 +454,16 @@ namespace Moq.Protected
         )
         {
             var argTypes = ToArgTypes(args);
-            var methods = typeof(T).GetMethods(
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
-                )
+            var methods = typeof(T)
+                .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .Where(m => m.Name == methodName);
             if (genericTypeArguments != null && genericTypeArguments.Length > 0)
             {
                 methods = methods.Where(
-                        m =>
-                            m.IsGenericMethod
-                            && m.GetGenericArguments().Length == genericTypeArguments.Length
-                    )
+                    m =>
+                        m.IsGenericMethod
+                        && m.GetGenericArguments().Length == genericTypeArguments.Length
+                )
                     .Select(m => m.MakeGenericMethod(genericTypeArguments));
             }
 
@@ -497,10 +496,11 @@ namespace Moq.Protected
         // TODO should support arguments for property indexers
         private static PropertyInfo GetProperty(string propertyName)
         {
-            return typeof(T).GetProperty(
-                propertyName,
-                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
-            );
+            return typeof(T)
+                .GetProperty(
+                    propertyName,
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+                );
         }
 
         private static Expression<Action<T>> GetSetterExpression(
@@ -521,12 +521,13 @@ namespace Moq.Protected
             if (member == null)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.MemberMissing,
-                        typeof(T).Name,
-                        memberName
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.MemberMissing,
+                            typeof(T).Name,
+                            memberName
+                        )
                 );
             }
         }
@@ -553,13 +554,14 @@ namespace Moq.Protected
                 }
 
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.MethodMissing,
-                        typeof(T).Name,
-                        methodName,
-                        string.Join(", ", extractedTypeNames.ToArray())
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.MethodMissing,
+                            typeof(T).Name,
+                            methodName,
+                            string.Join(", ", extractedTypeNames.ToArray())
+                        )
                 );
             }
         }
@@ -569,12 +571,13 @@ namespace Moq.Protected
             if (method.IsPublic)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.MethodIsPublic,
-                        reflectedTypeName,
-                        method.Name
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.MethodIsPublic,
+                            reflectedTypeName,
+                            method.Name
+                        )
                 );
             }
         }
@@ -584,12 +587,13 @@ namespace Moq.Protected
             if (property.CanRead(out var getter) && getter.IsPublic)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.UnexpectedPublicProperty,
-                        reflectedTypeName,
-                        property.Name
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.UnexpectedPublicProperty,
+                            reflectedTypeName,
+                            property.Name
+                        )
                 );
             }
         }
@@ -599,12 +603,13 @@ namespace Moq.Protected
             if (property.CanWrite(out var setter) && setter.IsPublic)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.UnexpectedPublicProperty,
-                        reflectedTypeName,
-                        property.Name
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.UnexpectedPublicProperty,
+                            reflectedTypeName,
+                            property.Name
+                        )
                 );
             }
         }
@@ -673,11 +678,12 @@ namespace Moq.Protected
                     else
                     {
                         throw new NotSupportedException(
-                            string.Format(
-                                Resources.Culture,
-                                Resources.UnsupportedMember,
-                                member.Member.Name
-                            )
+                            string
+                                .Format(
+                                    Resources.Culture,
+                                    Resources.UnsupportedMember,
+                                    member.Member.Name
+                                )
                         );
                     }
                 }

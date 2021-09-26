@@ -48,10 +48,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
-            var builder = new EntityFrameworkServicesBuilder(serviceCollection).TryAdd<
-                LoggingDefinitions,
-                InMemoryLoggingDefinitions
-            >()
+            var builder = new EntityFrameworkServicesBuilder(serviceCollection)
+                .TryAdd<LoggingDefinitions, InMemoryLoggingDefinitions>()
                 .TryAdd<IDatabaseProvider, DatabaseProvider<InMemoryOptionsExtension>>()
                 .TryAdd<IValueGeneratorSelector, InMemoryValueGeneratorSelector>()
                 .TryAdd<IDatabase>(p => p.GetRequiredService<IInMemoryDatabase>())

@@ -53,17 +53,16 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void EndApp()
         {
             RemoteExecutor.Invoke(
-                    new Action(
-                        () =>
-                        {
-                            // See FileSystemTests.CloseAllFiles() for a test that EndApp() closes open files.
-                            ProjectData.EndApp();
-                            throw new Exception(); // Shouldn't reach here.
-                        }
-                    ),
-                    new RemoteInvokeOptions() { ExpectedExitCode = 0 }
-                )
-                .Dispose();
+                new Action(
+                    () =>
+                    {
+                        // See FileSystemTests.CloseAllFiles() for a test that EndApp() closes open files.
+                        ProjectData.EndApp();
+                        throw new Exception(); // Shouldn't reach here.
+                    }
+                ),
+                new RemoteInvokeOptions() { ExpectedExitCode = 0 }
+            ).Dispose();
         }
     }
 }

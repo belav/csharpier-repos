@@ -28,8 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         public DynamicControllerEndpointSelector GetEndpointSelector(Endpoint endpoint)
         {
-            var dataSourceId =
-                endpoint.Metadata.GetMetadata<ControllerEndpointDataSourceIdMetadata>()!;
+            var dataSourceId = endpoint.Metadata
+                .GetMetadata<ControllerEndpointDataSourceIdMetadata>()!;
             return _endpointSelectorCache.GetOrAdd(dataSourceId.Id, key => EnsureDataSource(key));
         }
 

@@ -485,27 +485,26 @@ namespace System.Threading.Tasks.Tests
         {
             var scheduler = new CountingScheduler();
             Task.Factory.StartNew(
-                    () =>
-                    {
-                        int initialCallCount = scheduler.QueueTaskCalls;
+                () =>
+                {
+                    int initialCallCount = scheduler.QueueTaskCalls;
 
-                        Task<Task> outer = Task.Factory.StartNew(
+                    Task<Task> outer = Task.Factory
+                        .StartNew(
                             () => Task.Run(() => { }),
                             CancellationToken.None,
                             TaskCreationOptions.None,
                             TaskScheduler.Default
                         );
-                        Task unwrappedInner = outer.Unwrap();
-                        unwrappedInner.Wait();
+                    Task unwrappedInner = outer.Unwrap();
+                    unwrappedInner.Wait();
 
-                        Assert.Equal(initialCallCount, scheduler.QueueTaskCalls);
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    scheduler
-                )
-                .GetAwaiter()
-                .GetResult();
+                    Assert.Equal(initialCallCount, scheduler.QueueTaskCalls);
+                },
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                scheduler
+            ).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -516,27 +515,26 @@ namespace System.Threading.Tasks.Tests
         {
             var scheduler = new CountingScheduler();
             Task.Factory.StartNew(
-                    () =>
-                    {
-                        int initialCallCount = scheduler.QueueTaskCalls;
+                () =>
+                {
+                    int initialCallCount = scheduler.QueueTaskCalls;
 
-                        Task<Task<int>> outer = Task.Factory.StartNew(
+                    Task<Task<int>> outer = Task.Factory
+                        .StartNew(
                             () => Task.Run(() => 42),
                             CancellationToken.None,
                             TaskCreationOptions.None,
                             TaskScheduler.Default
                         );
-                        Task<int> unwrappedInner = outer.Unwrap();
-                        unwrappedInner.Wait();
+                    Task<int> unwrappedInner = outer.Unwrap();
+                    unwrappedInner.Wait();
 
-                        Assert.Equal(initialCallCount, scheduler.QueueTaskCalls);
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    scheduler
-                )
-                .GetAwaiter()
-                .GetResult();
+                    Assert.Equal(initialCallCount, scheduler.QueueTaskCalls);
+                },
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                scheduler
+            ).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -550,13 +548,14 @@ namespace System.Threading.Tasks.Tests
             Func<int, Task<int>> func = null;
             func = count =>
                 ++count < DiveDepth
-                    ? Task.Factory.StartNew(
-                              () => func(count),
-                              CancellationToken.None,
-                              TaskCreationOptions.None,
-                              TaskScheduler.Default
-                          )
-                          .Unwrap()
+                    ? Task.Factory
+                      .StartNew(
+                          () => func(count),
+                          CancellationToken.None,
+                          TaskCreationOptions.None,
+                          TaskScheduler.Default
+                      )
+                      .Unwrap()
                     : Task.FromResult(count);
 
             // This test will overflow if it fails.

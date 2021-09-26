@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
             var property = model.FindEntityType(typeof(Entity)).FindProperty("Id");
 
             var migrationAnnotations = _annotations.For(
-                    property.GetTableColumnMappings().Single().Column
-                )
+                property.GetTableColumnMappings().Single().Column
+            )
                 .ToList();
 
             var identity = Assert.Single(

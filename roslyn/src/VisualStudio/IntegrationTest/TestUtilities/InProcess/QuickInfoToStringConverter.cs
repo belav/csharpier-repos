@@ -52,10 +52,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                             break;
                     }
 
-                    return string.Join(
-                        separator,
-                        containerElement.Elements.Select(GetStringFromItem)
-                    );
+                    return string
+                        .Join(separator, containerElement.Elements.Select(GetStringFromItem));
                 case ClassifiedTextElement classifiedTextElement:
                     return string.Join("", classifiedTextElement.Runs.Select(GetStringFromItem));
                 case ClassifiedTextRun classifiedTextRun:

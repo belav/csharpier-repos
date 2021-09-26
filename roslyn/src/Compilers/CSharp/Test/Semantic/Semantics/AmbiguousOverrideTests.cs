@@ -99,16 +99,15 @@ class EntryPoint
     } 
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (22,9): error CS0121: The call is ambiguous between the following methods or properties: 'Base<TLong, TInt>.Method(long, TInt)' and 'Base<TLong, TInt>.Method(TLong, int)'
-                    //         new Derived2().Method(1L, 2); //CS0121
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
-                        .WithArguments(
-                            "Base<TLong, TInt>.Method(long, TInt)",
-                            "Base<TLong, TInt>.Method(TLong, int)"
-                        )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (22,9): error CS0121: The call is ambiguous between the following methods or properties: 'Base<TLong, TInt>.Method(long, TInt)' and 'Base<TLong, TInt>.Method(TLong, int)'
+                //         new Derived2().Method(1L, 2); //CS0121
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Method")
+                    .WithArguments(
+                        "Base<TLong, TInt>.Method(long, TInt)",
+                        "Base<TLong, TInt>.Method(TLong, int)"
+                    )
+            );
         }
 
         [Fact]
@@ -490,24 +489,23 @@ class CBar : IFoo // CS0535 * 2
 ";
             var asm = TestReferences.SymbolsTests.CustomModifiers.ModoptTests;
 
-            CreateCompilation(text, new[] { asm })
-                .VerifyDiagnostics(
-                    // (7,14): error CS0535: 'CBar' does not implement interface member 'IFoo.M<T>(T)'
-                    // class CBar : IFoo // CS0535 * 2
-                    Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "IFoo")
-                        .WithArguments("CBar", "Metadata.IFoo.M<T>(T)")
-                        .WithLocation(7, 14),
-                    // (7,14): error CS0535: 'CBar' does not implement interface member 'IFoo.M<T>(T)'
-                    // class CBar : IFoo // CS0535 * 2
-                    Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "IFoo")
-                        .WithArguments("CBar", "Metadata.IFoo.M<T>(T)")
-                        .WithLocation(7, 14),
-                    // (4,17): error CS0570: 'IFooAmbiguous<T, R>.M(T)' is not supported by the language
-                    //     public long M(string t) { return 127; }
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("Metadata.IFooAmbiguous<T, R>.M(T)")
-                        .WithLocation(4, 17)
-                );
+            CreateCompilation(text, new[] { asm }).VerifyDiagnostics(
+                // (7,14): error CS0535: 'CBar' does not implement interface member 'IFoo.M<T>(T)'
+                // class CBar : IFoo // CS0535 * 2
+                Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "IFoo")
+                    .WithArguments("CBar", "Metadata.IFoo.M<T>(T)")
+                    .WithLocation(7, 14),
+                // (7,14): error CS0535: 'CBar' does not implement interface member 'IFoo.M<T>(T)'
+                // class CBar : IFoo // CS0535 * 2
+                Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "IFoo")
+                    .WithArguments("CBar", "Metadata.IFoo.M<T>(T)")
+                    .WithLocation(7, 14),
+                // (4,17): error CS0570: 'IFooAmbiguous<T, R>.M(T)' is not supported by the language
+                //     public long M(string t) { return 127; }
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("Metadata.IFooAmbiguous<T, R>.M(T)")
+                    .WithLocation(4, 17)
+            );
         }
 
         [WorkItem(540518, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540518")]
@@ -523,40 +521,39 @@ public class CFoo : IFooAmbiguous<string, long> // CS0535 *2
 ";
             var asm = TestReferences.SymbolsTests.CustomModifiers.ModoptTests;
 
-            CreateCompilation(text, new[] { asm })
-                .VerifyDiagnostics(
-                    // (4,38): warning CS0473: Explicit interface implementation 'CFoo.IFooAmbiguous<string, long>.M(string)' matches more than one interface member. Which interface member is actually chosen is implementation-dependent. Consider using a non-explicit implementation instead.
-                    //     long IFooAmbiguous<string, long>.M(string t) { return -128; } // W CS0437
-                    Diagnostic(ErrorCode.WRN_ExplicitImplCollision, "M")
-                        .WithArguments("CFoo.Metadata.IFooAmbiguous<string, long>.M(string)")
-                        .WithLocation(4, 38),
-                    // (4,38): warning CS0473: Explicit interface implementation 'CFoo.IFooAmbiguous<string, long>.M(string)' matches more than one interface member. Which interface member is actually chosen is implementation-dependent. Consider using a non-explicit implementation instead.
-                    //     long IFooAmbiguous<string, long>.M(string t) { return -128; } // W CS0437
-                    Diagnostic(ErrorCode.WRN_ExplicitImplCollision, "M")
-                        .WithArguments("CFoo.Metadata.IFooAmbiguous<string, long>.M(string)")
-                        .WithLocation(4, 38),
-                    // (2,21): error CS0535: 'CFoo' does not implement interface member 'IFooAmbiguous<string, long>.M(string)'
-                    // public class CFoo : IFooAmbiguous<string, long> // CS0535 *2
-                    Diagnostic(
-                            ErrorCode.ERR_UnimplementedInterfaceMember,
-                            "IFooAmbiguous<string, long>"
-                        )
-                        .WithArguments("CFoo", "Metadata.IFooAmbiguous<string, long>.M(string)")
-                        .WithLocation(2, 21),
-                    // (2,21): error CS0535: 'CFoo' does not implement interface member 'IFooAmbiguous<string, long>.M(string)'
-                    // public class CFoo : IFooAmbiguous<string, long> // CS0535 *2
-                    Diagnostic(
-                            ErrorCode.ERR_UnimplementedInterfaceMember,
-                            "IFooAmbiguous<string, long>"
-                        )
-                        .WithArguments("CFoo", "Metadata.IFooAmbiguous<string, long>.M(string)")
-                        .WithLocation(2, 21),
-                    // (4,38): error CS0570: 'IFooAmbiguous<T, R>.M(T)' is not supported by the language
-                    //     long IFooAmbiguous<string, long>.M(string t) { return -128; } // W CS0437
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("Metadata.IFooAmbiguous<T, R>.M(T)")
-                        .WithLocation(4, 38)
-                );
+            CreateCompilation(text, new[] { asm }).VerifyDiagnostics(
+                // (4,38): warning CS0473: Explicit interface implementation 'CFoo.IFooAmbiguous<string, long>.M(string)' matches more than one interface member. Which interface member is actually chosen is implementation-dependent. Consider using a non-explicit implementation instead.
+                //     long IFooAmbiguous<string, long>.M(string t) { return -128; } // W CS0437
+                Diagnostic(ErrorCode.WRN_ExplicitImplCollision, "M")
+                    .WithArguments("CFoo.Metadata.IFooAmbiguous<string, long>.M(string)")
+                    .WithLocation(4, 38),
+                // (4,38): warning CS0473: Explicit interface implementation 'CFoo.IFooAmbiguous<string, long>.M(string)' matches more than one interface member. Which interface member is actually chosen is implementation-dependent. Consider using a non-explicit implementation instead.
+                //     long IFooAmbiguous<string, long>.M(string t) { return -128; } // W CS0437
+                Diagnostic(ErrorCode.WRN_ExplicitImplCollision, "M")
+                    .WithArguments("CFoo.Metadata.IFooAmbiguous<string, long>.M(string)")
+                    .WithLocation(4, 38),
+                // (2,21): error CS0535: 'CFoo' does not implement interface member 'IFooAmbiguous<string, long>.M(string)'
+                // public class CFoo : IFooAmbiguous<string, long> // CS0535 *2
+                Diagnostic(
+                    ErrorCode.ERR_UnimplementedInterfaceMember,
+                    "IFooAmbiguous<string, long>"
+                )
+                    .WithArguments("CFoo", "Metadata.IFooAmbiguous<string, long>.M(string)")
+                    .WithLocation(2, 21),
+                // (2,21): error CS0535: 'CFoo' does not implement interface member 'IFooAmbiguous<string, long>.M(string)'
+                // public class CFoo : IFooAmbiguous<string, long> // CS0535 *2
+                Diagnostic(
+                    ErrorCode.ERR_UnimplementedInterfaceMember,
+                    "IFooAmbiguous<string, long>"
+                )
+                    .WithArguments("CFoo", "Metadata.IFooAmbiguous<string, long>.M(string)")
+                    .WithLocation(2, 21),
+                // (4,38): error CS0570: 'IFooAmbiguous<T, R>.M(T)' is not supported by the language
+                //     long IFooAmbiguous<string, long>.M(string t) { return -128; } // W CS0437
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("Metadata.IFooAmbiguous<T, R>.M(T)")
+                    .WithLocation(4, 38)
+            );
         }
 
         [Fact]
@@ -580,14 +577,13 @@ class Test
             var asm = MetadataReference.CreateFromImage(
                 TestResources.SymbolsTests.CustomModifiers.ModoptTests.AsImmutableOrNull()
             );
-            CreateCompilation(text, new[] { asm })
-                .VerifyDiagnostics(
-                    // (11,17): error CS0570: 'Modreq.M(uint)' is not supported by the language
-                    //         new D().M(11); // Dev10: error CS0570: 'M' is not supported by the language
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("Metadata.Modreq.M(uint)")
-                        .WithLocation(11, 17)
-                );
+            CreateCompilation(text, new[] { asm }).VerifyDiagnostics(
+                // (11,17): error CS0570: 'Modreq.M(uint)' is not supported by the language
+                //         new D().M(11); // Dev10: error CS0570: 'M' is not supported by the language
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("Metadata.Modreq.M(uint)")
+                    .WithLocation(11, 17)
+            );
         }
 
         [Fact]
@@ -612,14 +608,13 @@ class Test
 ";
             var asm = TestReferences.SymbolsTests.CustomModifiers.ModoptTests;
 
-            CreateCompilation(text, new[] { asm })
-                .VerifyDiagnostics(
-                    // (8,30): error CS0570: 'Modreq.M(uint)' is not supported by the language
-                    //         public override void M(uint x) { Console.Write(x + 1); } // CS0115
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("Metadata.Modreq.M(uint)")
-                        .WithLocation(8, 30)
-                );
+            CreateCompilation(text, new[] { asm }).VerifyDiagnostics(
+                // (8,30): error CS0570: 'Modreq.M(uint)' is not supported by the language
+                //         public override void M(uint x) { Console.Write(x + 1); } // CS0115
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("Metadata.Modreq.M(uint)")
+                    .WithLocation(8, 30)
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
@@ -1391,38 +1386,36 @@ class M
     }
 }
 ";
-            CreateCompilationWithILAndMscorlib40(csharp, il)
-                .VerifyDiagnostics(
-                    // CONSIDER: Dev10 reports CS1957, even though the runtime has no trouble distinguishing the potentially
-                    // overridden methods.
+            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
+                // CONSIDER: Dev10 reports CS1957, even though the runtime has no trouble distinguishing the potentially
+                // overridden methods.
 
-                    // (6,26): error CS0462: The inherited members 'CG<T>.F(T)' and 'CG<T>.F(T)' have the same signature in type 'EG<T>', so they cannot be overridden
-                    //     public override void F(T c)
-                    Diagnostic(ErrorCode.ERR_AmbigOverride, "F")
-                        .WithArguments("CG<T>.F(T)", "CG<T>.F(T)", "EG<T>"),
-                    // (15,26): error CS0462: The inherited members 'CG<T>.F(T)' and 'CG<T>.F(T)' have the same signature in type 'EGI', so they cannot be overridden
-                    //     public override void F(int c)
-                    Diagnostic(ErrorCode.ERR_AmbigOverride, "F")
-                        .WithArguments("CG<T>.F(T)", "CG<T>.F(T)", "EGI"),
-                    // NOTE: Dev10 doesn't report these cascading errors.
+                // (6,26): error CS0462: The inherited members 'CG<T>.F(T)' and 'CG<T>.F(T)' have the same signature in type 'EG<T>', so they cannot be overridden
+                //     public override void F(T c)
+                Diagnostic(ErrorCode.ERR_AmbigOverride, "F")
+                    .WithArguments("CG<T>.F(T)", "CG<T>.F(T)", "EG<T>"),
+                // (15,26): error CS0462: The inherited members 'CG<T>.F(T)' and 'CG<T>.F(T)' have the same signature in type 'EGI', so they cannot be overridden
+                //     public override void F(int c)
+                Diagnostic(ErrorCode.ERR_AmbigOverride, "F")
+                    .WithArguments("CG<T>.F(T)", "CG<T>.F(T)", "EGI"),
+                // NOTE: Dev10 doesn't report these cascading errors.
 
-                    // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'CG<T>.F(T)' and 'CG<T>.F(T)'
-                    //         base.F(c);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "F")
-                        .WithArguments("CG<T>.F(T)", "CG<T>.F(T)"),
-                    // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'CG<T>.F(T)' and 'CG<T>.F(T)'
-                    //         base.F(c);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "F")
-                        .WithArguments("CG<T>.F(T)", "CG<T>.F(T)"),
-                    // (34,13): error CS0121: The call is ambiguous between the following methods or properties: 'CG<T>.F(T)' and 'CG<T>.F(T)'
-                    //             e.F(c);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "F")
-                        .WithArguments("CG<T>.F(T)", "CG<T>.F(T)"),
-                    // (43,13): error CS0121: The call is ambiguous between the following methods or properties: 'CG<T>.F(T)' and 'CG<T>.F(T)'
-                    //             e.F(c);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "F")
-                        .WithArguments("CG<T>.F(T)", "CG<T>.F(T)")
-                );
+                // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'CG<T>.F(T)' and 'CG<T>.F(T)'
+                //         base.F(c);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F")
+                    .WithArguments("CG<T>.F(T)", "CG<T>.F(T)"),
+                // (18,9): error CS0121: The call is ambiguous between the following methods or properties: 'CG<T>.F(T)' and 'CG<T>.F(T)'
+                //         base.F(c);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F")
+                    .WithArguments("CG<T>.F(T)", "CG<T>.F(T)"),
+                // (34,13): error CS0121: The call is ambiguous between the following methods or properties: 'CG<T>.F(T)' and 'CG<T>.F(T)'
+                //             e.F(c);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F")
+                    .WithArguments("CG<T>.F(T)", "CG<T>.F(T)"),
+                // (43,13): error CS0121: The call is ambiguous between the following methods or properties: 'CG<T>.F(T)' and 'CG<T>.F(T)'
+                //             e.F(c);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F").WithArguments("CG<T>.F(T)", "CG<T>.F(T)")
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
@@ -1610,14 +1603,13 @@ abstract class TestClass
     public void Method(in int x) { }
 }";
 
-            var comp = CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (5,17): error CS0663: 'TestClass' cannot define an overloaded method that differs only on parameter modifiers 'in' and 'ref'
-                    //     public void Method(in int x) { }
-                    Diagnostic(ErrorCode.ERR_OverloadRefKind, "Method")
-                        .WithArguments("TestClass", "method", "in", "ref")
-                        .WithLocation(5, 17)
-                );
+            var comp = CreateCompilation(text).VerifyDiagnostics(
+                // (5,17): error CS0663: 'TestClass' cannot define an overloaded method that differs only on parameter modifiers 'in' and 'ref'
+                //     public void Method(in int x) { }
+                Diagnostic(ErrorCode.ERR_OverloadRefKind, "Method")
+                    .WithArguments("TestClass", "method", "in", "ref")
+                    .WithLocation(5, 17)
+            );
         }
 
         [Fact]
@@ -1632,14 +1624,13 @@ abstract class TestClass
     public void Method(in int x) { }
 }";
 
-            var comp = CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (5,17): error CS0663: 'TestClass' cannot define an overloaded method that differs only on parameter modifiers 'in' and 'out'
-                    //     public void Method(in int x) { }
-                    Diagnostic(ErrorCode.ERR_OverloadRefKind, "Method")
-                        .WithArguments("TestClass", "method", "in", "out")
-                        .WithLocation(5, 17)
-                );
+            var comp = CreateCompilation(text).VerifyDiagnostics(
+                // (5,17): error CS0663: 'TestClass' cannot define an overloaded method that differs only on parameter modifiers 'in' and 'out'
+                //     public void Method(in int x) { }
+                Diagnostic(ErrorCode.ERR_OverloadRefKind, "Method")
+                    .WithArguments("TestClass", "method", "in", "out")
+                    .WithLocation(5, 17)
+            );
         }
     }
 }

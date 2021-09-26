@@ -48,12 +48,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             }
             else
             {
-                bindingContext.ModelState.TryAddModelError(
-                    bindingContext.ModelName,
-                    bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueIsInvalidAccessor(
-                        valueProviderResult.ToString()
-                    )
-                );
+                bindingContext.ModelState
+                    .TryAddModelError(
+                        bindingContext.ModelName,
+                        bindingContext.ModelMetadata.ModelBindingMessageProvider
+                            .ValueIsInvalidAccessor(valueProviderResult.ToString())
+                    );
             }
         }
 
@@ -80,10 +80,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 // 1. valueProviderResult="2,10", model=12, underlying=12, converted=12
                 //
                 var underlying = Convert.ChangeType(
-                        model,
-                        Enum.GetUnderlyingType(modelType),
-                        CultureInfo.InvariantCulture
-                    )
+                    model,
+                    Enum.GetUnderlyingType(modelType),
+                    CultureInfo.InvariantCulture
+                )
                     .ToString();
                 var converted = model.ToString();
                 return !string.Equals(underlying, converted, StringComparison.OrdinalIgnoreCase);

@@ -573,9 +573,9 @@ namespace System.Text.Unicode
             Debug.Assert(AdvSimd.Arm64.IsSupported);
 
             Vector128<byte> mostSignificantBitIsSet = AdvSimd.ShiftRightArithmetic(
-                    value.AsSByte(),
-                    7
-                )
+                value.AsSByte(),
+                7
+            )
                 .AsByte();
             Vector128<byte> extractedBits = AdvSimd.And(mostSignificantBitIsSet, bitMask128);
 

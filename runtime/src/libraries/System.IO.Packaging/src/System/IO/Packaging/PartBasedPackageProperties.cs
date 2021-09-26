@@ -371,9 +371,8 @@ namespace System.IO.Packaging
 
             propertiesPart = _package.GetPart(propertiesPartUri);
             if (
-                !propertiesPart.ValidatedContentType.AreTypeAndSubTypeEqual(
-                    s_coreDocumentPropertiesContentType
-                )
+                !propertiesPart.ValidatedContentType
+                    .AreTypeAndSubTypeEqual(s_coreDocumentPropertiesContentType)
             )
             {
                 throw new FileFormatException(SR.WrongContentTypeForPropertyPart);
@@ -626,10 +625,11 @@ namespace System.IO.Packaging
             //  The name (string after ":") matches "name"
             if (
                 !object.ReferenceEquals(ns, reader.LookupNamespace(typeValue.Substring(0, index)))
-                || string.CompareOrdinal(
-                    name,
-                    typeValue.Substring(index + 1, typeValue.Length - index - 1)
-                ) != 0
+                || string
+                    .CompareOrdinal(
+                        name,
+                        typeValue.Substring(index + 1, typeValue.Length - index - 1)
+                    ) != 0
             )
             {
                 throw new XmlException(

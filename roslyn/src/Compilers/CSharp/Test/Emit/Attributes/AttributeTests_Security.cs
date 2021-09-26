@@ -38,9 +38,8 @@ public struct EventDescriptor
                 (ModuleSymbol module) =>
                 {
                     var assembly = module.ContainingAssembly;
-                    var type = (Cci.ITypeDefinition)module.GlobalNamespace.GetMember(
-                            "EventDescriptor"
-                        )
+                    var type = (Cci.ITypeDefinition)module.GlobalNamespace
+                        .GetMember("EventDescriptor")
                         .GetCciAdapter();
 
                     if (isFromSource)
@@ -57,11 +56,8 @@ public struct EventDescriptor
                             "System.Security.Permissions",
                             "HostProtectionAttribute"
                         );
-                        NamedTypeSymbol hostProtectionAttr =
-                            sourceAssembly.CorLibrary.LookupTopLevelMetadataType(
-                                ref emittedName,
-                                true
-                            );
+                        NamedTypeSymbol hostProtectionAttr = sourceAssembly.CorLibrary
+                            .LookupTopLevelMetadataType(ref emittedName, true);
                         Assert.NotNull(hostProtectionAttr);
 
                         // Verify type security attributes
@@ -127,30 +123,29 @@ class Program
     {
     }
 }";
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (9,26): warning CS0618: 'System.Security.Permissions.SecurityAction.Deny' is obsolete: 'Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    //     [PrincipalPermission(SecurityAction.Deny)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.Deny")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.Deny",
-                            "Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (10,26): error CS7052: SecurityAction value 'SecurityAction.InheritanceDemand' is invalid for PrincipalPermission attribute
-                    //     [PrincipalPermission(SecurityAction.InheritanceDemand)]     // CS7052
-                    Diagnostic(
-                            ErrorCode.ERR_PrincipalPermissionInvalidAction,
-                            "SecurityAction.InheritanceDemand"
-                        )
-                        .WithArguments("SecurityAction.InheritanceDemand"),
-                    // (11,26): error CS7052: SecurityAction value 'SecurityAction.LinkDemand' is invalid for PrincipalPermission attribute
-                    //     [PrincipalPermission(SecurityAction.LinkDemand)]            // CS7052
-                    Diagnostic(
-                            ErrorCode.ERR_PrincipalPermissionInvalidAction,
-                            "SecurityAction.LinkDemand"
-                        )
-                        .WithArguments("SecurityAction.LinkDemand")
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (9,26): warning CS0618: 'System.Security.Permissions.SecurityAction.Deny' is obsolete: 'Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                //     [PrincipalPermission(SecurityAction.Deny)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.Deny")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.Deny",
+                        "Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (10,26): error CS7052: SecurityAction value 'SecurityAction.InheritanceDemand' is invalid for PrincipalPermission attribute
+                //     [PrincipalPermission(SecurityAction.InheritanceDemand)]     // CS7052
+                Diagnostic(
+                    ErrorCode.ERR_PrincipalPermissionInvalidAction,
+                    "SecurityAction.InheritanceDemand"
+                )
+                    .WithArguments("SecurityAction.InheritanceDemand"),
+                // (11,26): error CS7052: SecurityAction value 'SecurityAction.LinkDemand' is invalid for PrincipalPermission attribute
+                //     [PrincipalPermission(SecurityAction.LinkDemand)]            // CS7052
+                Diagnostic(
+                    ErrorCode.ERR_PrincipalPermissionInvalidAction,
+                    "SecurityAction.LinkDemand"
+                )
+                    .WithArguments("SecurityAction.LinkDemand")
+            );
         }
 
         [WorkItem(544918, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544918")]
@@ -181,30 +176,29 @@ class MySecurityAttribute : CodeAccessSecurityAttribute
 [MySecurityAttribute(a1: SecurityAction.Assert, x: 0)]
 public class C {}
 ";
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (15,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
-                    // [MySecurityAttribute()]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
-                    // (16,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
-                    // [MySecurityAttribute(Field = true)]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
-                    // (17,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
-                    // [MySecurityAttribute(Field = true, Prop = true)]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
-                    // (18,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
-                    // [MySecurityAttribute(Prop = true)]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
-                    // (19,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
-                    // [MySecurityAttribute(Prop = true, Field = true)]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
-                    // (20,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
-                    // [MySecurityAttribute(x: 0, a1: SecurityAction.Assert)]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
-                    // (21,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
-                    // [MySecurityAttribute(a1: SecurityAction.Assert, x: 0)]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute")
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (15,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
+                // [MySecurityAttribute()]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
+                // (16,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
+                // [MySecurityAttribute(Field = true)]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
+                // (17,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
+                // [MySecurityAttribute(Field = true, Prop = true)]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
+                // (18,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
+                // [MySecurityAttribute(Prop = true)]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
+                // (19,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
+                // [MySecurityAttribute(Prop = true, Field = true)]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
+                // (20,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
+                // [MySecurityAttribute(x: 0, a1: SecurityAction.Assert)]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute"),
+                // (21,2): error CS7048: First argument to a security attribute must be a valid SecurityAction
+                // [MySecurityAttribute(a1: SecurityAction.Assert, x: 0)]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeMissingAction, "MySecurityAttribute")
+            );
         }
 
         [WorkItem(544918, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544918")]
@@ -395,121 +389,120 @@ class MyCodeAccessSecurityAttribute : CodeAccessSecurityAttribute
     public override IPermission CreatePermission() { return null; }
     public static void Main() {}
 }";
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (8,32): warning CS0618: 'System.Security.Permissions.SecurityAction.Deny' is obsolete: 'Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    // [assembly: MySecurityAttribute(SecurityAction.Deny)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.Deny")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.Deny",
-                            "Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (16,42): warning CS0618: 'System.Security.Permissions.SecurityAction.Deny' is obsolete: 'Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.Deny)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.Deny")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.Deny",
-                            "Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (5,32): error CS7050: SecurityAction value '(SecurityAction)1' is invalid for security attributes applied to an assembly
-                    // [assembly: MySecurityAttribute((SecurityAction)1)]        // Native compiler allows this security action value for type/method security attributes, but not for assembly.
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "(SecurityAction)1"
-                        )
-                        .WithArguments("(SecurityAction)1"),
-                    // (6,32): error CS7050: SecurityAction value 'SecurityAction.Assert' is invalid for security attributes applied to an assembly
-                    // [assembly: MySecurityAttribute(SecurityAction.Assert)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.Assert"
-                        )
-                        .WithArguments("SecurityAction.Assert"),
-                    // (7,32): error CS7050: SecurityAction value 'SecurityAction.Demand' is invalid for security attributes applied to an assembly
-                    // [assembly: MySecurityAttribute(SecurityAction.Demand)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.Demand"
-                        )
-                        .WithArguments("SecurityAction.Demand"),
-                    // (8,32): error CS7050: SecurityAction value 'SecurityAction.Deny' is invalid for security attributes applied to an assembly
-                    // [assembly: MySecurityAttribute(SecurityAction.Deny)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.Deny"
-                        )
-                        .WithArguments("SecurityAction.Deny"),
-                    // (9,32): error CS7050: SecurityAction value 'SecurityAction.InheritanceDemand' is invalid for security attributes applied to an assembly
-                    // [assembly: MySecurityAttribute(SecurityAction.InheritanceDemand)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.InheritanceDemand"
-                        )
-                        .WithArguments("SecurityAction.InheritanceDemand"),
-                    // (10,32): error CS7050: SecurityAction value 'SecurityAction.LinkDemand' is invalid for security attributes applied to an assembly
-                    // [assembly: MySecurityAttribute(SecurityAction.LinkDemand)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.LinkDemand"
-                        )
-                        .WithArguments("SecurityAction.LinkDemand"),
-                    // (11,32): error CS7050: SecurityAction value 'SecurityAction.PermitOnly' is invalid for security attributes applied to an assembly
-                    // [assembly: MySecurityAttribute(SecurityAction.PermitOnly)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.PermitOnly"
-                        )
-                        .WithArguments("SecurityAction.PermitOnly"),
-                    // (13,42): error CS7050: SecurityAction value '(SecurityAction)1' is invalid for security attributes applied to an assembly
-                    // [assembly: MyCodeAccessSecurityAttribute((SecurityAction)1)]        // Native compiler allows this security action value for type/method security attributes, but not for assembly.
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "(SecurityAction)1"
-                        )
-                        .WithArguments("(SecurityAction)1"),
-                    // (14,42): error CS7050: SecurityAction value 'SecurityAction.Assert' is invalid for security attributes applied to an assembly
-                    // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.Assert)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.Assert"
-                        )
-                        .WithArguments("SecurityAction.Assert"),
-                    // (15,42): error CS7050: SecurityAction value 'SecurityAction.Demand' is invalid for security attributes applied to an assembly
-                    // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.Demand)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.Demand"
-                        )
-                        .WithArguments("SecurityAction.Demand"),
-                    // (16,42): error CS7050: SecurityAction value 'SecurityAction.Deny' is invalid for security attributes applied to an assembly
-                    // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.Deny)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.Deny"
-                        )
-                        .WithArguments("SecurityAction.Deny"),
-                    // (17,42): error CS7050: SecurityAction value 'SecurityAction.InheritanceDemand' is invalid for security attributes applied to an assembly
-                    // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.InheritanceDemand)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.InheritanceDemand"
-                        )
-                        .WithArguments("SecurityAction.InheritanceDemand"),
-                    // (18,42): error CS7050: SecurityAction value 'SecurityAction.LinkDemand' is invalid for security attributes applied to an assembly
-                    // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.LinkDemand)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.LinkDemand"
-                        )
-                        .WithArguments("SecurityAction.LinkDemand"),
-                    // (19,42): error CS7050: SecurityAction value 'SecurityAction.PermitOnly' is invalid for security attributes applied to an assembly
-                    // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.PermitOnly)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
-                            "SecurityAction.PermitOnly"
-                        )
-                        .WithArguments("SecurityAction.PermitOnly")
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (8,32): warning CS0618: 'System.Security.Permissions.SecurityAction.Deny' is obsolete: 'Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // [assembly: MySecurityAttribute(SecurityAction.Deny)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.Deny")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.Deny",
+                        "Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (16,42): warning CS0618: 'System.Security.Permissions.SecurityAction.Deny' is obsolete: 'Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.Deny)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.Deny")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.Deny",
+                        "Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (5,32): error CS7050: SecurityAction value '(SecurityAction)1' is invalid for security attributes applied to an assembly
+                // [assembly: MySecurityAttribute((SecurityAction)1)]        // Native compiler allows this security action value for type/method security attributes, but not for assembly.
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "(SecurityAction)1"
+                )
+                    .WithArguments("(SecurityAction)1"),
+                // (6,32): error CS7050: SecurityAction value 'SecurityAction.Assert' is invalid for security attributes applied to an assembly
+                // [assembly: MySecurityAttribute(SecurityAction.Assert)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.Assert"
+                )
+                    .WithArguments("SecurityAction.Assert"),
+                // (7,32): error CS7050: SecurityAction value 'SecurityAction.Demand' is invalid for security attributes applied to an assembly
+                // [assembly: MySecurityAttribute(SecurityAction.Demand)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.Demand"
+                )
+                    .WithArguments("SecurityAction.Demand"),
+                // (8,32): error CS7050: SecurityAction value 'SecurityAction.Deny' is invalid for security attributes applied to an assembly
+                // [assembly: MySecurityAttribute(SecurityAction.Deny)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.Deny"
+                )
+                    .WithArguments("SecurityAction.Deny"),
+                // (9,32): error CS7050: SecurityAction value 'SecurityAction.InheritanceDemand' is invalid for security attributes applied to an assembly
+                // [assembly: MySecurityAttribute(SecurityAction.InheritanceDemand)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.InheritanceDemand"
+                )
+                    .WithArguments("SecurityAction.InheritanceDemand"),
+                // (10,32): error CS7050: SecurityAction value 'SecurityAction.LinkDemand' is invalid for security attributes applied to an assembly
+                // [assembly: MySecurityAttribute(SecurityAction.LinkDemand)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.LinkDemand"
+                )
+                    .WithArguments("SecurityAction.LinkDemand"),
+                // (11,32): error CS7050: SecurityAction value 'SecurityAction.PermitOnly' is invalid for security attributes applied to an assembly
+                // [assembly: MySecurityAttribute(SecurityAction.PermitOnly)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.PermitOnly"
+                )
+                    .WithArguments("SecurityAction.PermitOnly"),
+                // (13,42): error CS7050: SecurityAction value '(SecurityAction)1' is invalid for security attributes applied to an assembly
+                // [assembly: MyCodeAccessSecurityAttribute((SecurityAction)1)]        // Native compiler allows this security action value for type/method security attributes, but not for assembly.
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "(SecurityAction)1"
+                )
+                    .WithArguments("(SecurityAction)1"),
+                // (14,42): error CS7050: SecurityAction value 'SecurityAction.Assert' is invalid for security attributes applied to an assembly
+                // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.Assert)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.Assert"
+                )
+                    .WithArguments("SecurityAction.Assert"),
+                // (15,42): error CS7050: SecurityAction value 'SecurityAction.Demand' is invalid for security attributes applied to an assembly
+                // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.Demand)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.Demand"
+                )
+                    .WithArguments("SecurityAction.Demand"),
+                // (16,42): error CS7050: SecurityAction value 'SecurityAction.Deny' is invalid for security attributes applied to an assembly
+                // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.Deny)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.Deny"
+                )
+                    .WithArguments("SecurityAction.Deny"),
+                // (17,42): error CS7050: SecurityAction value 'SecurityAction.InheritanceDemand' is invalid for security attributes applied to an assembly
+                // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.InheritanceDemand)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.InheritanceDemand"
+                )
+                    .WithArguments("SecurityAction.InheritanceDemand"),
+                // (18,42): error CS7050: SecurityAction value 'SecurityAction.LinkDemand' is invalid for security attributes applied to an assembly
+                // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.LinkDemand)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.LinkDemand"
+                )
+                    .WithArguments("SecurityAction.LinkDemand"),
+                // (19,42): error CS7050: SecurityAction value 'SecurityAction.PermitOnly' is invalid for security attributes applied to an assembly
+                // [assembly: MyCodeAccessSecurityAttribute(SecurityAction.PermitOnly)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionAssembly,
+                    "SecurityAction.PermitOnly"
+                )
+                    .WithArguments("SecurityAction.PermitOnly")
+            );
         }
 
         [WorkItem(544918, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544918")]
@@ -607,177 +600,176 @@ class Test
     [MyCodeAccessSecurityAttribute(SecurityAction.RequestRefuse)]
     public static void Main() {}
 }";
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (17,22): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    // [MySecurityAttribute(SecurityAction.RequestMinimum)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestMinimum",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (18,22): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    // [MySecurityAttribute(SecurityAction.RequestOptional)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestOptional")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestOptional",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (19,22): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestRefuse' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    // [MySecurityAttribute(SecurityAction.RequestRefuse)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestRefuse")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestRefuse",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (20,32): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    // [MyCodeAccessSecurityAttribute(SecurityAction.RequestMinimum)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestMinimum",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (21,32): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    // [MyCodeAccessSecurityAttribute(SecurityAction.RequestOptional)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestOptional")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestOptional",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (22,32): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestRefuse' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    // [MyCodeAccessSecurityAttribute(SecurityAction.RequestRefuse)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestRefuse")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestRefuse",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (17,22): error CS7051: SecurityAction value 'SecurityAction.RequestMinimum' is invalid for security attributes applied to a type or a method
-                    // [MySecurityAttribute(SecurityAction.RequestMinimum)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestMinimum"
-                        )
-                        .WithArguments("SecurityAction.RequestMinimum"),
-                    // (18,22): error CS7051: SecurityAction value 'SecurityAction.RequestOptional' is invalid for security attributes applied to a type or a method
-                    // [MySecurityAttribute(SecurityAction.RequestOptional)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestOptional"
-                        )
-                        .WithArguments("SecurityAction.RequestOptional"),
-                    // (19,22): error CS7051: SecurityAction value 'SecurityAction.RequestRefuse' is invalid for security attributes applied to a type or a method
-                    // [MySecurityAttribute(SecurityAction.RequestRefuse)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestRefuse"
-                        )
-                        .WithArguments("SecurityAction.RequestRefuse"),
-                    // (20,32): error CS7051: SecurityAction value 'SecurityAction.RequestMinimum' is invalid for security attributes applied to a type or a method
-                    // [MyCodeAccessSecurityAttribute(SecurityAction.RequestMinimum)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestMinimum"
-                        )
-                        .WithArguments("SecurityAction.RequestMinimum"),
-                    // (21,32): error CS7051: SecurityAction value 'SecurityAction.RequestOptional' is invalid for security attributes applied to a type or a method
-                    // [MyCodeAccessSecurityAttribute(SecurityAction.RequestOptional)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestOptional"
-                        )
-                        .WithArguments("SecurityAction.RequestOptional"),
-                    // (22,32): error CS7051: SecurityAction value 'SecurityAction.RequestRefuse' is invalid for security attributes applied to a type or a method
-                    // [MyCodeAccessSecurityAttribute(SecurityAction.RequestRefuse)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestRefuse"
-                        )
-                        .WithArguments("SecurityAction.RequestRefuse"),
-                    // (25,26): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    //     [MySecurityAttribute(SecurityAction.RequestMinimum)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestMinimum",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (26,26): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    //     [MySecurityAttribute(SecurityAction.RequestOptional)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestOptional")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestOptional",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (27,26): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestRefuse' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    //     [MySecurityAttribute(SecurityAction.RequestRefuse)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestRefuse")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestRefuse",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (28,36): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestMinimum)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestMinimum",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (29,36): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestOptional)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestOptional")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestOptional",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (30,36): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestRefuse' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestRefuse)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestRefuse")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.RequestRefuse",
-                            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (25,26): error CS7051: SecurityAction value 'SecurityAction.RequestMinimum' is invalid for security attributes applied to a type or a method
-                    //     [MySecurityAttribute(SecurityAction.RequestMinimum)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestMinimum"
-                        )
-                        .WithArguments("SecurityAction.RequestMinimum"),
-                    // (26,26): error CS7051: SecurityAction value 'SecurityAction.RequestOptional' is invalid for security attributes applied to a type or a method
-                    //     [MySecurityAttribute(SecurityAction.RequestOptional)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestOptional"
-                        )
-                        .WithArguments("SecurityAction.RequestOptional"),
-                    // (27,26): error CS7051: SecurityAction value 'SecurityAction.RequestRefuse' is invalid for security attributes applied to a type or a method
-                    //     [MySecurityAttribute(SecurityAction.RequestRefuse)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestRefuse"
-                        )
-                        .WithArguments("SecurityAction.RequestRefuse"),
-                    // (28,36): error CS7051: SecurityAction value 'SecurityAction.RequestMinimum' is invalid for security attributes applied to a type or a method
-                    //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestMinimum)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestMinimum"
-                        )
-                        .WithArguments("SecurityAction.RequestMinimum"),
-                    // (29,36): error CS7051: SecurityAction value 'SecurityAction.RequestOptional' is invalid for security attributes applied to a type or a method
-                    //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestOptional)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestOptional"
-                        )
-                        .WithArguments("SecurityAction.RequestOptional"),
-                    // (30,36): error CS7051: SecurityAction value 'SecurityAction.RequestRefuse' is invalid for security attributes applied to a type or a method
-                    //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestRefuse)]
-                    Diagnostic(
-                            ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
-                            "SecurityAction.RequestRefuse"
-                        )
-                        .WithArguments("SecurityAction.RequestRefuse")
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (17,22): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // [MySecurityAttribute(SecurityAction.RequestMinimum)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestMinimum",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (18,22): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // [MySecurityAttribute(SecurityAction.RequestOptional)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestOptional")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestOptional",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (19,22): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestRefuse' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // [MySecurityAttribute(SecurityAction.RequestRefuse)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestRefuse")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestRefuse",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (20,32): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // [MyCodeAccessSecurityAttribute(SecurityAction.RequestMinimum)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestMinimum",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (21,32): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // [MyCodeAccessSecurityAttribute(SecurityAction.RequestOptional)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestOptional")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestOptional",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (22,32): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestRefuse' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // [MyCodeAccessSecurityAttribute(SecurityAction.RequestRefuse)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestRefuse")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestRefuse",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (17,22): error CS7051: SecurityAction value 'SecurityAction.RequestMinimum' is invalid for security attributes applied to a type or a method
+                // [MySecurityAttribute(SecurityAction.RequestMinimum)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestMinimum"
+                )
+                    .WithArguments("SecurityAction.RequestMinimum"),
+                // (18,22): error CS7051: SecurityAction value 'SecurityAction.RequestOptional' is invalid for security attributes applied to a type or a method
+                // [MySecurityAttribute(SecurityAction.RequestOptional)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestOptional"
+                )
+                    .WithArguments("SecurityAction.RequestOptional"),
+                // (19,22): error CS7051: SecurityAction value 'SecurityAction.RequestRefuse' is invalid for security attributes applied to a type or a method
+                // [MySecurityAttribute(SecurityAction.RequestRefuse)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestRefuse"
+                )
+                    .WithArguments("SecurityAction.RequestRefuse"),
+                // (20,32): error CS7051: SecurityAction value 'SecurityAction.RequestMinimum' is invalid for security attributes applied to a type or a method
+                // [MyCodeAccessSecurityAttribute(SecurityAction.RequestMinimum)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestMinimum"
+                )
+                    .WithArguments("SecurityAction.RequestMinimum"),
+                // (21,32): error CS7051: SecurityAction value 'SecurityAction.RequestOptional' is invalid for security attributes applied to a type or a method
+                // [MyCodeAccessSecurityAttribute(SecurityAction.RequestOptional)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestOptional"
+                )
+                    .WithArguments("SecurityAction.RequestOptional"),
+                // (22,32): error CS7051: SecurityAction value 'SecurityAction.RequestRefuse' is invalid for security attributes applied to a type or a method
+                // [MyCodeAccessSecurityAttribute(SecurityAction.RequestRefuse)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestRefuse"
+                )
+                    .WithArguments("SecurityAction.RequestRefuse"),
+                // (25,26): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                //     [MySecurityAttribute(SecurityAction.RequestMinimum)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestMinimum",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (26,26): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                //     [MySecurityAttribute(SecurityAction.RequestOptional)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestOptional")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestOptional",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (27,26): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestRefuse' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                //     [MySecurityAttribute(SecurityAction.RequestRefuse)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestRefuse")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestRefuse",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (28,36): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestMinimum)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestMinimum",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (29,36): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestOptional)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestOptional")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestOptional",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (30,36): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestRefuse' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestRefuse)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestRefuse")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.RequestRefuse",
+                        "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (25,26): error CS7051: SecurityAction value 'SecurityAction.RequestMinimum' is invalid for security attributes applied to a type or a method
+                //     [MySecurityAttribute(SecurityAction.RequestMinimum)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestMinimum"
+                )
+                    .WithArguments("SecurityAction.RequestMinimum"),
+                // (26,26): error CS7051: SecurityAction value 'SecurityAction.RequestOptional' is invalid for security attributes applied to a type or a method
+                //     [MySecurityAttribute(SecurityAction.RequestOptional)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestOptional"
+                )
+                    .WithArguments("SecurityAction.RequestOptional"),
+                // (27,26): error CS7051: SecurityAction value 'SecurityAction.RequestRefuse' is invalid for security attributes applied to a type or a method
+                //     [MySecurityAttribute(SecurityAction.RequestRefuse)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestRefuse"
+                )
+                    .WithArguments("SecurityAction.RequestRefuse"),
+                // (28,36): error CS7051: SecurityAction value 'SecurityAction.RequestMinimum' is invalid for security attributes applied to a type or a method
+                //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestMinimum)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestMinimum"
+                )
+                    .WithArguments("SecurityAction.RequestMinimum"),
+                // (29,36): error CS7051: SecurityAction value 'SecurityAction.RequestOptional' is invalid for security attributes applied to a type or a method
+                //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestOptional)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestOptional"
+                )
+                    .WithArguments("SecurityAction.RequestOptional"),
+                // (30,36): error CS7051: SecurityAction value 'SecurityAction.RequestRefuse' is invalid for security attributes applied to a type or a method
+                //     [MyCodeAccessSecurityAttribute(SecurityAction.RequestRefuse)]
+                Diagnostic(
+                    ErrorCode.ERR_SecurityAttributeInvalidActionTypeOrMethod,
+                    "SecurityAction.RequestRefuse"
+                )
+                    .WithArguments("SecurityAction.RequestRefuse")
+            );
         }
 
         [WorkItem(546623, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546623")]
@@ -808,13 +800,12 @@ class MyPermissionAttribute : CodeAccessSecurityAttribute
         return null;
     }
 }";
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (8,6): error CS7070: Security attribute 'MyPermission' is not valid on this declaration type. Security attributes are only valid on assembly, type and method declarations.
-                    //     [MyPermission(SecurityAction.Demand)]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeInvalidTarget, "MyPermission")
-                        .WithArguments("MyPermission")
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (8,6): error CS7070: Security attribute 'MyPermission' is not valid on this declaration type. Security attributes are only valid on assembly, type and method declarations.
+                //     [MyPermission(SecurityAction.Demand)]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeInvalidTarget, "MyPermission")
+                    .WithArguments("MyPermission")
+            );
         }
 
         [WorkItem(546056, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546056")]
@@ -2223,36 +2214,35 @@ using System.Security.Permissions;
 public class MyClass 
 {
 }";
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (4,25): warning CS0618: 'System.Security.Permissions.SecurityAction.Deny' is obsolete: 'Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    // [PermissionSetAttribute(SecurityAction.Deny, File = @"NonExistentFile.xml")]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.Deny")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.Deny",
-                            "Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (5,25): warning CS0618: 'System.Security.Permissions.SecurityAction.Deny' is obsolete: 'Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
-                    // [PermissionSetAttribute(SecurityAction.Deny, File = null)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.Deny")
-                        .WithArguments(
-                            "System.Security.Permissions.SecurityAction.Deny",
-                            "Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
-                        ),
-                    // (4,46): error CS7056: Unable to resolve file path 'NonExistentFile.xml' specified for the named argument 'File' for PermissionSet attribute
-                    // [PermissionSetAttribute(SecurityAction.Deny, File = @"NonExistentFile.xml")]
-                    Diagnostic(
-                            ErrorCode.ERR_PermissionSetAttributeInvalidFile,
-                            @"File = @""NonExistentFile.xml"""
-                        )
-                        .WithArguments("NonExistentFile.xml", "File")
-                        .WithLocation(4, 46),
-                    // (5,46): error CS7056: Unable to resolve file path '<null>' specified for the named argument 'File' for PermissionSet attribute
-                    // [PermissionSetAttribute(SecurityAction.Deny, File = null)]
-                    Diagnostic(ErrorCode.ERR_PermissionSetAttributeInvalidFile, "File = null")
-                        .WithArguments("<null>", "File")
-                        .WithLocation(5, 46)
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (4,25): warning CS0618: 'System.Security.Permissions.SecurityAction.Deny' is obsolete: 'Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // [PermissionSetAttribute(SecurityAction.Deny, File = @"NonExistentFile.xml")]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.Deny")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.Deny",
+                        "Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (5,25): warning CS0618: 'System.Security.Permissions.SecurityAction.Deny' is obsolete: 'Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // [PermissionSetAttribute(SecurityAction.Deny, File = null)]
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.Deny")
+                    .WithArguments(
+                        "System.Security.Permissions.SecurityAction.Deny",
+                        "Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+                    ),
+                // (4,46): error CS7056: Unable to resolve file path 'NonExistentFile.xml' specified for the named argument 'File' for PermissionSet attribute
+                // [PermissionSetAttribute(SecurityAction.Deny, File = @"NonExistentFile.xml")]
+                Diagnostic(
+                    ErrorCode.ERR_PermissionSetAttributeInvalidFile,
+                    @"File = @""NonExistentFile.xml"""
+                )
+                    .WithArguments("NonExistentFile.xml", "File")
+                    .WithLocation(4, 46),
+                // (5,46): error CS7056: Unable to resolve file path '<null>' specified for the named argument 'File' for PermissionSet attribute
+                // [PermissionSetAttribute(SecurityAction.Deny, File = null)]
+                Diagnostic(ErrorCode.ERR_PermissionSetAttributeInvalidFile, "File = null")
+                    .WithArguments("<null>", "File")
+                    .WithLocation(5, 46)
+            );
         }
 
         [Fact]
@@ -2279,9 +2269,9 @@ public class MyClass
 }";
             var resolver = new XmlFileResolver(tempDir.Path);
             CreateCompilationWithMscorlib40(
-                    source,
-                    options: TestOptions.DebugDll.WithXmlReferenceResolver(resolver)
-                )
+                source,
+                options: TestOptions.DebugDll.WithXmlReferenceResolver(resolver)
+            )
                 .VerifyDiagnostics(
                     // (4,25): warning CS0618: 'System.Security.Permissions.SecurityAction.Deny' is obsolete: 'Deny is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
                     // [PermissionSetAttribute(SecurityAction.Deny, File = @"NonExistentFile.xml")]
@@ -2300,9 +2290,9 @@ public class MyClass
                     // (4,46): error CS7056: Unable to resolve file path 'NonExistentFile.xml' specified for the named argument 'File' for PermissionSet attribute
                     // [PermissionSetAttribute(SecurityAction.Deny, File = @"NonExistentFile.xml")]
                     Diagnostic(
-                            ErrorCode.ERR_PermissionSetAttributeInvalidFile,
-                            @"File = @""NonExistentFile.xml"""
-                        )
+                        ErrorCode.ERR_PermissionSetAttributeInvalidFile,
+                        @"File = @""NonExistentFile.xml"""
+                    )
                         .WithArguments("NonExistentFile.xml", "File")
                         .WithLocation(4, 46),
                     // (5,46): error CS7056: Unable to resolve file path '<null>' specified for the named argument 'File' for PermissionSet attribute
@@ -2352,9 +2342,8 @@ public class MyClass
                     GetUniqueName(),
                     new[] { syntaxTree },
                     new[] { MscorlibRef },
-                    TestOptions.ReleaseDll.WithXmlReferenceResolver(
-                        new XmlFileResolver(tempDir.Path)
-                    )
+                    TestOptions.ReleaseDll
+                        .WithXmlReferenceResolver(new XmlFileResolver(tempDir.Path))
                 );
 
                 comp.VerifyDiagnostics(
@@ -2372,10 +2361,11 @@ public class MyClass
                     var emitResult = comp.Emit(output);
 
                     Assert.False(emitResult.Success);
-                    emitResult.Diagnostics.VerifyErrorCodes(
-                        Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr),
-                        Diagnostic(ErrorCode.ERR_PermissionSetAttributeFileReadError)
-                    );
+                    emitResult.Diagnostics
+                        .VerifyErrorCodes(
+                            Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr),
+                            Diagnostic(ErrorCode.ERR_PermissionSetAttributeFileReadError)
+                        );
                 }
             }
 
@@ -2431,27 +2421,26 @@ class A : CodeAccessSecurityAttribute
     {
     }
 }";
-            CreateCompilationWithMscorlib46(source)
-                .VerifyDiagnostics(
-                    // (4,2): error CS7049: Security attribute 'A' has an invalid SecurityAction value '0'
-                    // [A]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeInvalidAction, "A")
-                        .WithArguments("A", "0")
-                        .WithLocation(4, 2),
-                    // (5,2): error CS7049: Security attribute 'A' has an invalid SecurityAction value '0'
-                    // [A()]
-                    Diagnostic(ErrorCode.ERR_SecurityAttributeInvalidAction, "A()")
-                        .WithArguments("A", "0")
-                        .WithLocation(5, 2),
-                    // (6,7): error CS0534: 'A' does not implement inherited abstract member 'SecurityAttribute.CreatePermission()'
-                    // class A : CodeAccessSecurityAttribute
-                    Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "A")
-                        .WithArguments(
-                            "A",
-                            "System.Security.Permissions.SecurityAttribute.CreatePermission()"
-                        )
-                        .WithLocation(6, 7)
-                );
+            CreateCompilationWithMscorlib46(source).VerifyDiagnostics(
+                // (4,2): error CS7049: Security attribute 'A' has an invalid SecurityAction value '0'
+                // [A]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeInvalidAction, "A")
+                    .WithArguments("A", "0")
+                    .WithLocation(4, 2),
+                // (5,2): error CS7049: Security attribute 'A' has an invalid SecurityAction value '0'
+                // [A()]
+                Diagnostic(ErrorCode.ERR_SecurityAttributeInvalidAction, "A()")
+                    .WithArguments("A", "0")
+                    .WithLocation(5, 2),
+                // (6,7): error CS0534: 'A' does not implement inherited abstract member 'SecurityAttribute.CreatePermission()'
+                // class A : CodeAccessSecurityAttribute
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "A")
+                    .WithArguments(
+                        "A",
+                        "System.Security.Permissions.SecurityAttribute.CreatePermission()"
+                    )
+                    .WithLocation(6, 7)
+            );
         }
     }
 }

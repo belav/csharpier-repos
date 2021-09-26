@@ -667,9 +667,9 @@ namespace System
                             // Bitwise Or to combine the flagged matches for the second value to our match flags
                             matches = Avx2.MoveMask(
                                 Avx2.Or(
-                                        Avx2.CompareEqual(values0, search),
-                                        Avx2.CompareEqual(values1, search)
-                                    )
+                                    Avx2.CompareEqual(values0, search),
+                                    Avx2.CompareEqual(values1, search)
+                                )
                                     .AsByte()
                             );
                             // Note that MoveMask has converted the equal vector elements into a set of bit flags,
@@ -690,9 +690,9 @@ namespace System
                         // Same as method as above
                         matches = Avx2.MoveMask(
                             Avx2.Or(
-                                    Avx2.CompareEqual(values0, search),
-                                    Avx2.CompareEqual(values1, search)
-                                )
+                                Avx2.CompareEqual(values0, search),
+                                Avx2.CompareEqual(values1, search)
+                            )
                                 .AsByte()
                         );
                         if (matches == 0)
@@ -718,9 +718,9 @@ namespace System
 
                         matches = Sse2.MoveMask(
                             Sse2.Or(
-                                    Sse2.CompareEqual(values0, search),
-                                    Sse2.CompareEqual(values1, search)
-                                )
+                                Sse2.CompareEqual(values0, search),
+                                Sse2.CompareEqual(values1, search)
+                            )
                                 .AsByte()
                         );
                         // Note that MoveMask has converted the equal vector elements into a set of bit flags,
@@ -740,9 +740,9 @@ namespace System
                     // Same as method as above
                     matches = Sse2.MoveMask(
                         Sse2.Or(
-                                Sse2.CompareEqual(values0, search),
-                                Sse2.CompareEqual(values1, search)
-                            )
+                            Sse2.CompareEqual(values0, search),
+                            Sse2.CompareEqual(values1, search)
+                        )
                             .AsByte()
                     );
                     if (matches == 0)
@@ -921,12 +921,12 @@ namespace System
                             // Bitwise Or to combine the flagged matches for the second value to our match flags
                             matches = Avx2.MoveMask(
                                 Avx2.Or(
-                                        Avx2.Or(
-                                            Avx2.CompareEqual(values0, search),
-                                            Avx2.CompareEqual(values1, search)
-                                        ),
-                                        Avx2.CompareEqual(values2, search)
-                                    )
+                                    Avx2.Or(
+                                        Avx2.CompareEqual(values0, search),
+                                        Avx2.CompareEqual(values1, search)
+                                    ),
+                                    Avx2.CompareEqual(values2, search)
+                                )
                                     .AsByte()
                             );
                             // Note that MoveMask has converted the equal vector elements into a set of bit flags,
@@ -947,12 +947,12 @@ namespace System
                         // Same as method as above
                         matches = Avx2.MoveMask(
                             Avx2.Or(
-                                    Avx2.Or(
-                                        Avx2.CompareEqual(values0, search),
-                                        Avx2.CompareEqual(values1, search)
-                                    ),
-                                    Avx2.CompareEqual(values2, search)
-                                )
+                                Avx2.Or(
+                                    Avx2.CompareEqual(values0, search),
+                                    Avx2.CompareEqual(values1, search)
+                                ),
+                                Avx2.CompareEqual(values2, search)
+                            )
                                 .AsByte()
                         );
                         if (matches == 0)
@@ -979,12 +979,12 @@ namespace System
 
                         matches = Sse2.MoveMask(
                             Sse2.Or(
-                                    Sse2.Or(
-                                        Sse2.CompareEqual(values0, search),
-                                        Sse2.CompareEqual(values1, search)
-                                    ),
-                                    Sse2.CompareEqual(values2, search)
-                                )
+                                Sse2.Or(
+                                    Sse2.CompareEqual(values0, search),
+                                    Sse2.CompareEqual(values1, search)
+                                ),
+                                Sse2.CompareEqual(values2, search)
+                            )
                                 .AsByte()
                         );
                         // Note that MoveMask has converted the equal vector elements into a set of bit flags,
@@ -1004,12 +1004,12 @@ namespace System
                     // Same as method as above
                     matches = Sse2.MoveMask(
                         Sse2.Or(
-                                Sse2.Or(
-                                    Sse2.CompareEqual(values0, search),
-                                    Sse2.CompareEqual(values1, search)
-                                ),
-                                Sse2.CompareEqual(values2, search)
-                            )
+                            Sse2.Or(
+                                Sse2.CompareEqual(values0, search),
+                                Sse2.CompareEqual(values1, search)
+                            ),
+                            Sse2.CompareEqual(values2, search)
+                        )
                             .AsByte()
                     );
                     if (matches == 0)
@@ -1885,10 +1885,8 @@ namespace System
         {
             Debug.Assert(AdvSimd.Arm64.IsSupported);
 
-            Vector128<byte> pairwiseSelectedLane = AdvSimd.Arm64.AddPairwise(
-                compareResult.AsByte(),
-                compareResult.AsByte()
-            );
+            Vector128<byte> pairwiseSelectedLane = AdvSimd.Arm64
+                .AddPairwise(compareResult.AsByte(), compareResult.AsByte());
             ulong selectedLanes = pairwiseSelectedLane.AsUInt64().ToScalar();
             if (selectedLanes == 0)
             {

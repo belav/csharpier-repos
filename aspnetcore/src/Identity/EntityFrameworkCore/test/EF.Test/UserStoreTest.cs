@@ -396,9 +396,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         public async Task ConcurrentUpdatesWillFail()
         {
             var options =
-                new DbContextOptionsBuilder().UseSqlite(
-                    $"Data Source=D{Guid.NewGuid()}.db"
-                ).Options;
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
             var user = CreateTestUser();
             using (var db = new IdentityDbContext(options))
             {
@@ -433,9 +432,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         public async Task ConcurrentUpdatesWillFailWithDetachedUser()
         {
             var options =
-                new DbContextOptionsBuilder().UseSqlite(
-                    $"Data Source=D{Guid.NewGuid()}.db"
-                ).Options;
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
             var user = CreateTestUser();
             using (var db = new IdentityDbContext(options))
             {
@@ -468,9 +466,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         public async Task DeleteAModifiedUserWillFail()
         {
             var options =
-                new DbContextOptionsBuilder().UseSqlite(
-                    $"Data Source=D{Guid.NewGuid()}.db"
-                ).Options;
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
             var user = CreateTestUser();
             using (var db = new IdentityDbContext(options))
             {
@@ -504,9 +501,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         public async Task ConcurrentRoleUpdatesWillFail()
         {
             var options =
-                new DbContextOptionsBuilder().UseSqlite(
-                    $"Data Source=D{Guid.NewGuid()}.db"
-                ).Options;
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
             var role = new IdentityRole(Guid.NewGuid().ToString());
             using (var db = new IdentityDbContext(options))
             {
@@ -541,9 +537,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         public async Task ConcurrentRoleUpdatesWillFailWithDetachedRole()
         {
             var options =
-                new DbContextOptionsBuilder().UseSqlite(
-                    $"Data Source=D{Guid.NewGuid()}.db"
-                ).Options;
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
             var role = new IdentityRole(Guid.NewGuid().ToString());
             using (var db = new IdentityDbContext(options))
             {
@@ -577,9 +572,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         public async Task DeleteAModifiedRoleWillFail()
         {
             var options =
-                new DbContextOptionsBuilder().UseSqlite(
-                    $"Data Source=D{Guid.NewGuid()}.db"
-                ).Options;
+                new DbContextOptionsBuilder()
+                    .UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
             var role = new IdentityRole(Guid.NewGuid().ToString());
             using (var db = new IdentityDbContext(options))
             {
@@ -622,12 +616,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             {
                 UserName = useNamePrefixAsUserName
                     ? namePrefix
-                    : string.Format(
-                          CultureInfo.InvariantCulture,
-                          "{0}{1}",
-                          namePrefix,
-                          Guid.NewGuid()
-                      ),
+                    : string
+                      .Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
                 Email = email,
                 PhoneNumber = phoneNumber,
                 LockoutEnabled = lockoutEnabled,
@@ -642,12 +632,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             var roleName = useRoleNamePrefixAsRoleName
                 ? roleNamePrefix
-                : string.Format(
-                      CultureInfo.InvariantCulture,
-                      "{0}{1}",
-                      roleNamePrefix,
-                      Guid.NewGuid()
-                  );
+                : string
+                  .Format(CultureInfo.InvariantCulture, "{0}{1}", roleNamePrefix, Guid.NewGuid());
             return new IdentityRole(roleName);
         }
 

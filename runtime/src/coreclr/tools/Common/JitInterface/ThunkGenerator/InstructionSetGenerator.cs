@@ -204,9 +204,8 @@ namespace Thunkerator
                                 throw new Exception("Incorrect number of args for instructionset");
                             ValidateArchitectureEncountered(command[1]);
                             _64bitVariants[command[1]].Add(command[2]);
-                            _architectureJitNames[command[1]].Add(
-                                command[2] + "_" + ArchToInstructionSetSuffixArch(command[1])
-                            );
+                            _architectureJitNames[command[1]]
+                                .Add(command[2] + "_" + ArchToInstructionSetSuffixArch(command[1]));
                             break;
                         case "implication":
                             if (command.Length != 4)
@@ -239,9 +238,8 @@ namespace Thunkerator
                             foreach (var val in _64bitVariants[arch])
                             {
                                 _64bitVariants[targetarch].Add(val);
-                                _architectureJitNames[targetarch].Add(
-                                    val + "_" + ArchToInstructionSetSuffixArch(targetarch)
-                                );
+                                _architectureJitNames[targetarch]
+                                    .Add(val + "_" + ArchToInstructionSetSuffixArch(targetarch));
                             }
                             break;
                         default:
@@ -250,11 +248,8 @@ namespace Thunkerator
                 }
                 catch (Exception e)
                 {
-                    Console.Error.WriteLine(
-                        "Error parsing line {0} : {1}",
-                        currentLineIndex,
-                        e.Message
-                    );
+                    Console.Error
+                        .WriteLine("Error parsing line {0} : {1}", currentLineIndex, e.Message);
                     return false;
                 }
             }

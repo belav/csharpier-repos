@@ -41,11 +41,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             expression = new RelationalQueryMetadataExtractingExpressionVisitor(
                 _relationalQueryCompilationContext
-            ).Visit(expression);
+            )
+                .Visit(expression);
             expression = base.NormalizeQueryableMethod(expression);
             expression = new TableValuedFunctionToQueryRootConvertingExpressionVisitor(
                 QueryCompilationContext.Model
-            ).Visit(expression);
+            )
+                .Visit(expression);
 
             return expression;
         }

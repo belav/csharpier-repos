@@ -12,16 +12,12 @@ namespace AutoMapper.QueryableExtensions.Impl
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class EnumerableProjectionMapper : IProjectionMapper
     {
-        private static readonly MethodInfo SelectMethod = typeof(Enumerable).StaticGenericMethod(
-            "Select",
-            parametersCount: 2
-        );
-        private static readonly MethodInfo ToArrayMethod = typeof(Enumerable).GetStaticMethod(
-            "ToArray"
-        );
-        private static readonly MethodInfo ToListMethod = typeof(Enumerable).GetStaticMethod(
-            "ToList"
-        );
+        private static readonly MethodInfo SelectMethod = typeof(Enumerable)
+            .StaticGenericMethod("Select", parametersCount: 2);
+        private static readonly MethodInfo ToArrayMethod = typeof(Enumerable)
+            .GetStaticMethod("ToArray");
+        private static readonly MethodInfo ToListMethod = typeof(Enumerable)
+            .GetStaticMethod("ToList");
         public bool IsMatch(
             MemberMap memberMap,
             TypeMap memberTypeMap,
@@ -47,10 +43,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                     request.MembersToExpand,
                     request.GetPreviousRequestsAndSelf()
                 );
-                var transformedExpressions = configuration.ProjectionBuilder.CreateProjection(
-                    listTypePair,
-                    letPropertyMaps.New()
-                );
+                var transformedExpressions = configuration.ProjectionBuilder
+                    .CreateProjection(listTypePair, letPropertyMaps.New());
                 if (transformedExpressions.Empty)
                 {
                     return null;

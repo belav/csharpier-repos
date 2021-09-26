@@ -24,18 +24,16 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public void ThrowFriendlyErrorWhenServicesNotRegistered()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    );
+                }
+            ).Build();
 
             var ex = Assert.Throws<InvalidOperationException>(() => host.Start());
 
@@ -51,24 +49,21 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task IgnoresRequestThatDoesNotMatchPath()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -83,24 +78,21 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task MatchIsCaseInsensitive()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -115,24 +107,21 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task ReturnsPlainTextStatus()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -150,24 +139,21 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task StatusCodeIs200IfNoChecks()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -185,27 +171,24 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task StatusCodeIs200IfAllChecksHealthy()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks()
-                                        .AddCheck("Foo", () => HealthCheckResult.Healthy("A-ok!"))
-                                        .AddCheck("Bar", () => HealthCheckResult.Healthy("A-ok!"))
-                                        .AddCheck("Baz", () => HealthCheckResult.Healthy("A-ok!"));
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks()
+                                .AddCheck("Foo", () => HealthCheckResult.Healthy("A-ok!"))
+                                .AddCheck("Bar", () => HealthCheckResult.Healthy("A-ok!"))
+                                .AddCheck("Baz", () => HealthCheckResult.Healthy("A-ok!"));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -223,30 +206,24 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task StatusCodeIs200IfCheckIsDegraded()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks()
-                                        .AddCheck("Foo", () => HealthCheckResult.Healthy("A-ok!"))
-                                        .AddCheck(
-                                            "Bar",
-                                            () => HealthCheckResult.Degraded("Not so great.")
-                                        )
-                                        .AddCheck("Baz", () => HealthCheckResult.Healthy("A-ok!"));
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks()
+                                .AddCheck("Foo", () => HealthCheckResult.Healthy("A-ok!"))
+                                .AddCheck("Bar", () => HealthCheckResult.Degraded("Not so great."))
+                                .AddCheck("Baz", () => HealthCheckResult.Healthy("A-ok!"));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -264,41 +241,34 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task StatusCodeIs503IfCheckIsUnhealthy()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks()
-                                        .AddAsyncCheck(
-                                            "Foo",
-                                            () =>
-                                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
-                                        )
-                                        .AddAsyncCheck(
-                                            "Bar",
-                                            () =>
-                                                Task.FromResult(
-                                                    HealthCheckResult.Unhealthy("Pretty bad.")
-                                                )
-                                        )
-                                        .AddAsyncCheck(
-                                            "Baz",
-                                            () =>
-                                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
-                                        );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks()
+                                .AddAsyncCheck(
+                                    "Foo",
+                                    () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                                )
+                                .AddAsyncCheck(
+                                    "Bar",
+                                    () =>
+                                        Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
+                                )
+                                .AddAsyncCheck(
+                                    "Baz",
+                                    () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                                );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -316,35 +286,30 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task StatusCodeIs503IfCheckHasUnhandledException()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks()
-                                        .AddAsyncCheck(
-                                            "Foo",
-                                            () =>
-                                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
-                                        )
-                                        .AddAsyncCheck("Bar", () => throw null)
-                                        .AddAsyncCheck(
-                                            "Baz",
-                                            () =>
-                                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
-                                        );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks()
+                                .AddAsyncCheck(
+                                    "Foo",
+                                    () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                                )
+                                .AddAsyncCheck("Bar", () => throw null)
+                                .AddAsyncCheck(
+                                    "Baz",
+                                    () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                                );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -364,54 +329,47 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
             var expectedJson = JsonConvert.SerializeObject(new { status = "Unhealthy", });
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks(
+                                "/health",
+                                new HealthCheckOptions()
                                 {
-                                    app.UseHealthChecks(
-                                        "/health",
-                                        new HealthCheckOptions()
-                                        {
-                                            ResponseWriter = (c, r) =>
-                                            {
-                                                var json = JsonConvert.SerializeObject(
-                                                    new { status = r.Status.ToString(), }
-                                                );
-                                                c.Response.ContentType = "application/json";
-                                                return c.Response.WriteAsync(json);
-                                            },
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks()
-                                        .AddAsyncCheck(
-                                            "Foo",
-                                            () =>
-                                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
-                                        )
-                                        .AddAsyncCheck(
-                                            "Bar",
-                                            () =>
-                                                Task.FromResult(
-                                                    HealthCheckResult.Unhealthy("Pretty bad.")
-                                                )
-                                        )
-                                        .AddAsyncCheck(
-                                            "Baz",
-                                            () =>
-                                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                                    ResponseWriter = (c, r) =>
+                                    {
+                                        var json = JsonConvert.SerializeObject(
+                                            new { status = r.Status.ToString(), }
                                         );
+                                        c.Response.ContentType = "application/json";
+                                        return c.Response.WriteAsync(json);
+                                    },
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks()
+                                .AddAsyncCheck(
+                                    "Foo",
+                                    () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                                )
+                                .AddAsyncCheck(
+                                    "Bar",
+                                    () =>
+                                        Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
+                                )
+                                .AddAsyncCheck(
+                                    "Baz",
+                                    () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                                );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -430,44 +388,37 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task NoResponseWriterReturnsEmptyBody()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks(
-                                        "/health",
-                                        new HealthCheckOptions() { ResponseWriter = null, }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks()
-                                        .AddAsyncCheck(
-                                            "Foo",
-                                            () =>
-                                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
-                                        )
-                                        .AddAsyncCheck(
-                                            "Bar",
-                                            () =>
-                                                Task.FromResult(
-                                                    HealthCheckResult.Unhealthy("Pretty bad.")
-                                                )
-                                        )
-                                        .AddAsyncCheck(
-                                            "Baz",
-                                            () =>
-                                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
-                                        );
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks(
+                                "/health",
+                                new HealthCheckOptions() { ResponseWriter = null, }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks()
+                                .AddAsyncCheck(
+                                    "Foo",
+                                    () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                                )
+                                .AddAsyncCheck(
+                                    "Bar",
+                                    () =>
+                                        Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
+                                )
+                                .AddAsyncCheck(
+                                    "Baz",
+                                    () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                                );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -484,30 +435,27 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanSetCustomStatusCodes()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks(
+                                "/health",
+                                new HealthCheckOptions()
                                 {
-                                    app.UseHealthChecks(
-                                        "/health",
-                                        new HealthCheckOptions()
-                                        {
-                                            ResultStatusCodes = { [HealthStatus.Healthy] = 201, }
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
+                                    ResultStatusCodes = { [HealthStatus.Healthy] = 201, }
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -524,24 +472,21 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task SetsCacheHeaders()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -564,27 +509,24 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanSuppressCacheHeaders()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks(
-                                        "/health",
-                                        new HealthCheckOptions() { AllowCachingResponses = true, }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks(
+                                "/health",
+                                new HealthCheckOptions() { AllowCachingResponses = true, }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -604,49 +546,41 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanFilterChecks()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks(
+                                "/health",
+                                new HealthCheckOptions()
                                 {
-                                    app.UseHealthChecks(
-                                        "/health",
-                                        new HealthCheckOptions()
-                                        {
-                                            Predicate = (check) =>
-                                                check.Name == "Foo" || check.Name == "Baz",
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks()
-                                        .AddAsyncCheck(
-                                            "Foo",
-                                            () =>
-                                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
-                                        )
-                                        // Will get filtered out
-                                        .AddAsyncCheck(
-                                            "Bar",
-                                            () =>
-                                                Task.FromResult(
-                                                    HealthCheckResult.Unhealthy("A-ok!")
-                                                )
-                                        )
-                                        .AddAsyncCheck(
-                                            "Baz",
-                                            () =>
-                                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
-                                        );
+                                    Predicate = (check) =>
+                                        check.Name == "Foo" || check.Name == "Baz",
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks()
+                                .AddAsyncCheck(
+                                    "Foo",
+                                    () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                                )
+                                // Will get filtered out
+                                .AddAsyncCheck(
+                                    "Bar",
+                                    () => Task.FromResult(HealthCheckResult.Unhealthy("A-ok!"))
+                                )
+                                .AddAsyncCheck(
+                                    "Baz",
+                                    () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                                );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -664,24 +598,21 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanListenWithoutPath_AcceptsRequest()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks(default);
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks(default);
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -699,24 +630,21 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanListenWithPath_AcceptsRequestWithExtraSlash()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -732,24 +660,21 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanListenWithPath_AcceptsRequestWithCaseInsensitiveMatch()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -767,24 +692,21 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanListenWithPath_RejectsRequestWithExtraSegments()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -801,33 +723,27 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanListenWithPath_MultipleMiddleware_LeastSpecificFirst()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    // Throws if used
-                                    app.UseHealthChecks(
-                                        "/health",
-                                        new HealthCheckOptions()
-                                        {
-                                            ResponseWriter = (c, r) => throw null,
-                                        }
-                                    );
-
-                                    app.UseHealthChecks("/health/detailed");
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            // Throws if used
+                            app.UseHealthChecks(
+                                "/health",
+                                new HealthCheckOptions() { ResponseWriter = (c, r) => throw null, }
                             );
-                    }
-                )
-                .Build();
+
+                            app.UseHealthChecks("/health/detailed");
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -846,33 +762,27 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanListenWithPath_MultipleMiddleware_MostSpecificFirst()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHealthChecks("/health/detailed");
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHealthChecks("/health/detailed");
 
-                                    // Throws if used
-                                    app.UseHealthChecks(
-                                        "/health",
-                                        new HealthCheckOptions()
-                                        {
-                                            ResponseWriter = (c, r) => throw null,
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
+                            // Throws if used
+                            app.UseHealthChecks(
+                                "/health",
+                                new HealthCheckOptions() { ResponseWriter = (c, r) => throw null, }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -890,36 +800,33 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanListenOnPort_AcceptsRequest_OnSpecifiedPort()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        next =>
-                                            async (context) =>
-                                            {
-                                                // Need to fake setting the connection info. TestServer doesn't
-                                                // do that, because it doesn't have a connection.
-                                                context.Connection.LocalPort =
-                                                    context.Request.Host.Port.Value;
-                                                await next(context);
-                                            }
-                                    );
-
-                                    app.UseHealthChecks("/health", port: 5001);
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.Use(
+                                next =>
+                                    async (context) =>
+                                    {
+                                        // Need to fake setting the connection info. TestServer doesn't
+                                        // do that, because it doesn't have a connection.
+                                        context.Connection.LocalPort =
+                                            context.Request.Host.Port.Value;
+                                        await next(context);
+                                    }
                             );
-                    }
-                )
-                .Build();
+
+                            app.UseHealthChecks("/health", port: 5001);
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -937,36 +844,33 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanListenOnPortWithoutPath_AcceptsRequest_OnSpecifiedPort()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        next =>
-                                            async (context) =>
-                                            {
-                                                // Need to fake setting the connection info. TestServer doesn't
-                                                // do that, because it doesn't have a connection.
-                                                context.Connection.LocalPort =
-                                                    context.Request.Host.Port.Value;
-                                                await next(context);
-                                            }
-                                    );
-
-                                    app.UseHealthChecks(default, port: 5001);
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.Use(
+                                next =>
+                                    async (context) =>
+                                    {
+                                        // Need to fake setting the connection info. TestServer doesn't
+                                        // do that, because it doesn't have a connection.
+                                        context.Connection.LocalPort =
+                                            context.Request.Host.Port.Value;
+                                        await next(context);
+                                    }
                             );
-                    }
-                )
-                .Build();
+
+                            app.UseHealthChecks(default, port: 5001);
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -984,36 +888,33 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanListenOnPort_RejectsRequest_OnOtherPort()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        next =>
-                                            async (context) =>
-                                            {
-                                                // Need to fake setting the connection info. TestServer doesn't
-                                                // do that, because it doesn't have a connection.
-                                                context.Connection.LocalPort =
-                                                    context.Request.Host.Port.Value;
-                                                await next(context);
-                                            }
-                                    );
-
-                                    app.UseHealthChecks("/health", port: 5001);
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.Use(
+                                next =>
+                                    async (context) =>
+                                    {
+                                        // Need to fake setting the connection info. TestServer doesn't
+                                        // do that, because it doesn't have a connection.
+                                        context.Connection.LocalPort =
+                                            context.Request.Host.Port.Value;
+                                        await next(context);
+                                    }
                             );
-                    }
-                )
-                .Build();
+
+                            app.UseHealthChecks("/health", port: 5001);
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1029,46 +930,40 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanListenOnPort_MultipleMiddleware()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        next =>
-                                            async (context) =>
-                                            {
-                                                // Need to fake setting the connection info. TestServer doesn't
-                                                // do that, because it doesn't have a connection.
-                                                context.Connection.LocalPort =
-                                                    context.Request.Host.Port.Value;
-                                                await next(context);
-                                            }
-                                    );
-
-                                    // Throws if used
-                                    app.UseHealthChecks(
-                                        "/health",
-                                        port: 5001,
-                                        new HealthCheckOptions()
-                                        {
-                                            ResponseWriter = (c, r) => throw null,
-                                        }
-                                    );
-
-                                    app.UseHealthChecks("/health/detailed", port: 5001);
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.Use(
+                                next =>
+                                    async (context) =>
+                                    {
+                                        // Need to fake setting the connection info. TestServer doesn't
+                                        // do that, because it doesn't have a connection.
+                                        context.Connection.LocalPort =
+                                            context.Request.Host.Port.Value;
+                                        await next(context);
+                                    }
                             );
-                    }
-                )
-                .Build();
+
+                            // Throws if used
+                            app.UseHealthChecks(
+                                "/health",
+                                port: 5001,
+                                new HealthCheckOptions() { ResponseWriter = (c, r) => throw null, }
+                            );
+
+                            app.UseHealthChecks("/health/detailed", port: 5001);
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1086,46 +981,40 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CanListenOnPort_MultipleMiddleware_DifferentPorts()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        next =>
-                                            async (context) =>
-                                            {
-                                                // Need to fake setting the connection info. TestServer doesn't
-                                                // do that, because it doesn't have a connection.
-                                                context.Connection.LocalPort =
-                                                    context.Request.Host.Port.Value;
-                                                await next(context);
-                                            }
-                                    );
-
-                                    // Throws if used
-                                    app.UseHealthChecks(
-                                        "/health",
-                                        port: 5002,
-                                        new HealthCheckOptions()
-                                        {
-                                            ResponseWriter = (c, r) => throw null,
-                                        }
-                                    );
-
-                                    app.UseHealthChecks("/health", port: 5001);
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHealthChecks();
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.Use(
+                                next =>
+                                    async (context) =>
+                                    {
+                                        // Need to fake setting the connection info. TestServer doesn't
+                                        // do that, because it doesn't have a connection.
+                                        context.Connection.LocalPort =
+                                            context.Request.Host.Port.Value;
+                                        await next(context);
+                                    }
                             );
-                    }
-                )
-                .Build();
+
+                            // Throws if used
+                            app.UseHealthChecks(
+                                "/health",
+                                port: 5002,
+                                new HealthCheckOptions() { ResponseWriter = (c, r) => throw null, }
+                            );
+
+                            app.UseHealthChecks("/health", port: 5001);
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHealthChecks();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

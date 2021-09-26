@@ -552,11 +552,12 @@ namespace System.DirectoryServices.AccountManagement
             }
 
             if (
-                string.Equals(
-                    _storeCtx.MachineFlatName,
-                    domainName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        _storeCtx.MachineFlatName,
+                        domainName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
                 isLocal = true;
 

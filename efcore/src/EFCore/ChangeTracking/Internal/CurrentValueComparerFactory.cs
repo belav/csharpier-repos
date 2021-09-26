@@ -57,22 +57,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     if (IsGenericComparable(providerType, nonNullableProviderType))
                     {
                         var comparerType = modelType.IsClass
-                            ? typeof(NullableClassCurrentProviderValueComparer<, >).MakeGenericType(
-                                  modelType,
-                                  converter.ProviderClrType
-                              )
+                            ? typeof(NullableClassCurrentProviderValueComparer<, >)
+                              .MakeGenericType(modelType, converter.ProviderClrType)
                             : modelType == converter.ModelClrType
-                                ? typeof(CurrentProviderValueComparer<, >).MakeGenericType(
-                                      modelType,
-                                      converter.ProviderClrType
-                                  )
-                                : typeof(NullableStructCurrentProviderValueComparer<
-                                      ,
-
-                                  >).MakeGenericType(
-                                      nonNullableModelType,
-                                      converter.ProviderClrType
-                                  );
+                                ? typeof(CurrentProviderValueComparer<, >)
+                                  .MakeGenericType(modelType, converter.ProviderClrType)
+                                : typeof(NullableStructCurrentProviderValueComparer<, >)
+                                  .MakeGenericType(nonNullableModelType, converter.ProviderClrType);
 
                         return (IComparer<IUpdateEntry>)Activator.CreateInstance(
                             comparerType,
@@ -115,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             static bool IsGenericComparable(Type type, Type nonNullableType) =>
                 typeof(IComparable<>).MakeGenericType(type).IsAssignableFrom(type)
-                || typeof(IComparable<>).MakeGenericType(nonNullableType)
+                || typeof(IComparable<>)
+                    .MakeGenericType(nonNullableType)
                     .IsAssignableFrom(nonNullableType)
                 || type.IsEnum
                 || nonNullableType.IsEnum;

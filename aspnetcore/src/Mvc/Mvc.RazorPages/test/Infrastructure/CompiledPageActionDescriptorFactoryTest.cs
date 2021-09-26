@@ -24,14 +24,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             );
 
             var convention = new Mock<IPageApplicationModelConvention>();
-            convention.Setup(c => c.Apply(It.IsAny<PageApplicationModel>()))
-                .Callback(
-                    (PageApplicationModel m) =>
-                    {
-                        Assert.Same(model, m);
-                    }
-                )
-                .Verifiable();
+            convention.Setup(c => c.Apply(It.IsAny<PageApplicationModel>())).Callback(
+                (PageApplicationModel m) =>
+                {
+                    Assert.Same(model, m);
+                }
+            ).Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
             {
                 convention.Object,
@@ -57,23 +55,19 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             );
 
             var globalConvention = new Mock<IPageApplicationModelConvention>();
-            globalConvention.Setup(c => c.Apply(It.IsAny<PageApplicationModel>()))
-                .Callback(
-                    (PageApplicationModel m) =>
-                    {
-                        Assert.Same(model, m);
-                    }
-                )
-                .Verifiable();
+            globalConvention.Setup(c => c.Apply(It.IsAny<PageApplicationModel>())).Callback(
+                (PageApplicationModel m) =>
+                {
+                    Assert.Same(model, m);
+                }
+            ).Verifiable();
 
-            handlerConvention.Setup(c => c.Apply(It.IsAny<PageApplicationModel>()))
-                .Callback(
-                    (PageApplicationModel m) =>
-                    {
-                        Assert.Same(model, m);
-                    }
-                )
-                .Verifiable();
+            handlerConvention.Setup(c => c.Apply(It.IsAny<PageApplicationModel>())).Callback(
+                (PageApplicationModel m) =>
+                {
+                    Assert.Same(model, m);
+                }
+            ).Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
             {
                 globalConvention.Object,
@@ -108,14 +102,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             applicationModel.HandlerMethods.Add(handlerModel);
 
-            handlerModelConvention.Setup(p => p.Apply(It.IsAny<PageHandlerModel>()))
-                .Callback(
-                    (PageHandlerModel m) =>
-                    {
-                        Assert.Same(handlerModel, m);
-                    }
-                )
-                .Verifiable();
+            handlerModelConvention.Setup(p => p.Apply(It.IsAny<PageHandlerModel>())).Callback(
+                (PageHandlerModel m) =>
+                {
+                    Assert.Same(handlerModel, m);
+                }
+            ).Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act
@@ -145,14 +137,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             applicationModel.HandlerMethods.Add(handlerModel);
 
             var handlerModelConvention = new Mock<IPageHandlerModelConvention>();
-            handlerModelConvention.Setup(p => p.Apply(It.IsAny<PageHandlerModel>()))
-                .Callback(
-                    (PageHandlerModel m) =>
-                    {
-                        Assert.Same(handlerModel, m);
-                    }
-                )
-                .Verifiable();
+            handlerModelConvention.Setup(p => p.Apply(It.IsAny<PageHandlerModel>())).Callback(
+                (PageHandlerModel m) =>
+                {
+                    Assert.Same(handlerModel, m);
+                }
+            ).Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
             {
                 handlerModelConvention.Object
@@ -191,14 +181,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             applicationModel.HandlerMethods.Add(handlerModel);
 
-            handlerModelConvention.Setup(p => p.Apply(It.IsAny<PageHandlerModel>()))
-                .Callback(
-                    (PageHandlerModel m) =>
-                    {
-                        m.Page.HandlerMethods.Remove(m);
-                    }
-                )
-                .Verifiable();
+            handlerModelConvention.Setup(p => p.Apply(It.IsAny<PageHandlerModel>())).Callback(
+                (PageHandlerModel m) =>
+                {
+                    m.Page.HandlerMethods.Remove(m);
+                }
+            ).Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act
@@ -235,14 +223,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             applicationModel.HandlerMethods.Add(handlerModel);
             handlerModel.Parameters.Add(parameterModel);
 
-            parameterModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback(
-                    (ParameterModelBase m) =>
-                    {
-                        Assert.Same(parameterModel, m);
-                    }
-                )
-                .Verifiable();
+            parameterModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>())).Callback(
+                (ParameterModelBase m) =>
+                {
+                    Assert.Same(parameterModel, m);
+                }
+            ).Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act
@@ -276,14 +262,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             handlerModel.Parameters.Add(parameterModel);
 
             var parameterModelConvention = new Mock<IParameterModelBaseConvention>();
-            parameterModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback(
-                    (ParameterModelBase m) =>
-                    {
-                        Assert.Same(parameterModel, m);
-                    }
-                )
-                .Verifiable();
+            parameterModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>())).Callback(
+                (ParameterModelBase m) =>
+                {
+                    Assert.Same(parameterModel, m);
+                }
+            ).Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
             {
                 parameterModelConvention.Object
@@ -325,15 +309,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             applicationModel.HandlerMethods.Add(handlerModel);
             handlerModel.Parameters.Add(parameterModel);
 
-            parameterModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback(
-                    (ParameterModelBase m) =>
-                    {
-                        var model = Assert.IsType<PageParameterModel>(m);
-                        model.Handler.Parameters.Remove(model);
-                    }
-                )
-                .Verifiable();
+            parameterModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>())).Callback(
+                (ParameterModelBase m) =>
+                {
+                    var model = Assert.IsType<PageParameterModel>(m);
+                    model.Handler.Parameters.Remove(model);
+                }
+            ).Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act
@@ -374,14 +356,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             applicationModel.HandlerProperties.Add(propertyModel);
             handlerModel.Parameters.Add(parameterModel);
 
-            propertyModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback(
-                    (ParameterModelBase m) =>
-                    {
-                        Assert.Same(propertyModel, m);
-                    }
-                )
-                .Verifiable();
+            propertyModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>())).Callback(
+                (ParameterModelBase m) =>
+                {
+                    Assert.Same(propertyModel, m);
+                }
+            ).Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act
@@ -416,14 +396,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             applicationModel.HandlerProperties.Add(propertyModel);
 
             var propertyModelConvention = new Mock<IParameterModelBaseConvention>();
-            propertyModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback(
-                    (ParameterModelBase m) =>
-                    {
-                        Assert.Same(propertyModel, m);
-                    }
-                )
-                .Verifiable();
+            propertyModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>())).Callback(
+                (ParameterModelBase m) =>
+                {
+                    Assert.Same(propertyModel, m);
+                }
+            ).Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
             {
                 propertyModelConvention.Object
@@ -462,15 +440,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             applicationModel.HandlerProperties.Add(propertyModel);
 
-            propertyModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>()))
-                .Callback(
-                    (ParameterModelBase m) =>
-                    {
-                        var model = Assert.IsType<PagePropertyModel>(m);
-                        model.Page.HandlerProperties.Remove(model);
-                    }
-                )
-                .Verifiable();
+            propertyModelConvention.Setup(p => p.Apply(It.IsAny<ParameterModelBase>())).Callback(
+                (ParameterModelBase m) =>
+                {
+                    var model = Assert.IsType<PagePropertyModel>(m);
+                    model.Page.HandlerProperties.Remove(model);
+                }
+            ).Verifiable();
             var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>());
 
             // Act

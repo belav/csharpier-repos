@@ -27,16 +27,16 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 >? equivalentTypesWithDifferingAssemblies
             ) =>
                 _symbolEquivalenceComparer.GetEquivalenceVisitor(
-                        compareMethodTypeParametersByIndex: true,
-                        objectAndDynamicCompareEqually: true
-                    )
+                    compareMethodTypeParametersByIndex: true,
+                    objectAndDynamicCompareEqually: true
+                )
                     .AreEquivalent(x, y, equivalentTypesWithDifferingAssemblies);
 
             public int GetHashCode(ITypeSymbol? x) =>
                 _symbolEquivalenceComparer.GetGetHashCodeVisitor(
-                        compareMethodTypeParametersByIndex: true,
-                        objectAndDynamicCompareEqually: true
-                    )
+                    compareMethodTypeParametersByIndex: true,
+                    objectAndDynamicCompareEqually: true
+                )
                     .GetHashCode(x, currentHash: 0);
         }
     }

@@ -95,12 +95,13 @@ namespace System.Reflection.TypeLoading
                 object result = Volatile.Read(ref _nameAgnosticQueryCaches[index]);
                 if (result == null)
                 {
-                    QueriedMemberList<M> newResult = QueriedMemberList<M>.Create(
-                        _type,
-                        filter: null,
-                        ignoreCase: false,
-                        immediateTypeOnly: immediateTypeOnly
-                    );
+                    QueriedMemberList<M> newResult = QueriedMemberList<M>
+                        .Create(
+                            _type,
+                            filter: null,
+                            ignoreCase: false,
+                            immediateTypeOnly: immediateTypeOnly
+                        );
                     newResult.Compact();
                     Volatile.Write(ref _nameAgnosticQueryCaches[index], newResult);
                     return newResult;
@@ -108,12 +109,8 @@ namespace System.Reflection.TypeLoading
                 QueriedMemberList<M> list = (QueriedMemberList<M>)result;
                 if (list.ImmediateTypeOnly && !immediateTypeOnly)
                 {
-                    QueriedMemberList<M> newResult = QueriedMemberList<M>.Create(
-                        _type,
-                        filter: null,
-                        ignoreCase: false,
-                        immediateTypeOnly: false
-                    );
+                    QueriedMemberList<M> newResult = QueriedMemberList<M>
+                        .Create(_type, filter: null, ignoreCase: false, immediateTypeOnly: false);
                     newResult.Compact();
                     Volatile.Write(ref _nameAgnosticQueryCaches[index], newResult);
                     return newResult;
@@ -207,12 +204,13 @@ namespace System.Reflection.TypeLoading
 
                 protected sealed override QueriedMemberList<M> Factory(string key)
                 {
-                    QueriedMemberList<M> result = QueriedMemberList<M>.Create(
-                        _type,
-                        key,
-                        ignoreCase: _ignoreCase,
-                        immediateTypeOnly: _immediateTypeOnly
-                    );
+                    QueriedMemberList<M> result = QueriedMemberList<M>
+                        .Create(
+                            _type,
+                            key,
+                            ignoreCase: _ignoreCase,
+                            immediateTypeOnly: _immediateTypeOnly
+                        );
                     result.Compact();
                     return result;
                 }

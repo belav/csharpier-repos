@@ -1194,11 +1194,13 @@ namespace System.Xml.Tests
             DateTime dt = new DateTime(2002, 12, 30, 23, 15, 55, 100);
             string expDateTime =
                 (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
-                    ? string.Format(
+                    ? string
+                      .Format(
                           "2002-12-30T23:15:55.1-0{0}:00",
                           Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                       )
-                    : string.Format(
+                    : string
+                      .Format(
                           "2002-12-30T23:15:55.1+0{0}:00",
                           Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                       );
@@ -1211,11 +1213,13 @@ namespace System.Xml.Tests
             dt = dt.AddTicks(9999999);
             expDateTime =
                 (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
-                    ? string.Format(
+                    ? string
+                      .Format(
                           "0001-01-01T23:59:59.9999999-0{0}:00",
                           Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                       )
-                    : string.Format(
+                    : string
+                      .Format(
                           "0001-01-01T23:59:59.9999999+0{0}:00",
                           Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                       );
@@ -1229,11 +1233,13 @@ namespace System.Xml.Tests
             dt = new DateTime(2002, 12, 30, 23, 15, 55);
             expDateTime =
                 (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
-                    ? string.Format(
+                    ? string
+                      .Format(
                           "2002-12-30T23:15:55-0{0}:00",
                           Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                       )
-                    : string.Format(
+                    : string
+                      .Format(
                           "2002-12-30T23:15:55+0{0}:00",
                           Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                       );
@@ -1260,11 +1266,13 @@ namespace System.Xml.Tests
             { // only -08:00 and 09:00 works
                 expDateTime =
                     (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
-                        ? string.Format(
+                        ? string
+                          .Format(
                               "2002-12-30T23:15:55-0{0}:00",
                               Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dtLocal).Hours)
                           )
-                        : string.Format(
+                        : string
+                          .Format(
                               "2002-12-31T16:15:55+0{0}:00",
                               Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dtLocal).Hours)
                           );
@@ -1288,11 +1296,13 @@ namespace System.Xml.Tests
             { // only -08:00 and 09:00 works
                 expDateTime =
                     (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
-                        ? string.Format(
+                        ? string
+                          .Format(
                               "2002-12-30T23:15:55-0{0}:00",
                               Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                           )
-                        : string.Format(
+                        : string
+                          .Format(
                               "2002-12-31T16:15:55+0{0}:00",
                               Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                           );
@@ -1310,11 +1320,13 @@ namespace System.Xml.Tests
             );
             expDateTime =
                 (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
-                    ? string.Format(
+                    ? string
+                      .Format(
                           "2002-12-31T07:15:55-0{0}:00",
                           Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                       )
-                    : string.Format(
+                    : string
+                      .Format(
                           "2002-12-31T07:15:55+0{0}:00",
                           Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                       );
@@ -1357,11 +1369,13 @@ namespace System.Xml.Tests
                 CError.Equals(dt.Kind, DateTimeKind.Local, "Local expected");
                 expDateTime =
                     (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
-                        ? string.Format(
+                        ? string
+                          .Format(
                               "2002-12-30T23:15:55-0{0}:00",
                               Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                           )
-                        : string.Format(
+                        : string
+                          .Format(
                               "2002-12-31T16:15:55+0{0}:00",
                               Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
                           );
@@ -1531,7 +1545,8 @@ namespace System.Xml.Tests
                         55,
                         0
                     )
-                ).AddTicks(1004555),
+                )
+                    .AddTicks(1004555),
                 new DateTime(2002, 1, 9, 4, 2, 8, 0),
                 new DateTime(
                     DateTime.Now.Year,
@@ -1546,23 +1561,12 @@ namespace System.Xml.Tests
                 (new DateTime(2002, 1, 9, 4, 2, 8, 0)),
                 (new DateTime(2002, 1, 9, 0, 0, 0, 0)),
                 (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 4, 2, 8, 0)),
-                (new DateTime(2002, 1, 9, 4, 2, 8, 0)).Add(
-                    offset2002_01_09 + new TimeSpan(5, 0, 0)
-                ),
-                (new DateTime(2002, 1, 9, 0, 0, 0, 0)).Add(
-                    offset2002_01_09 + new TimeSpan(5, 0, 0)
-                ),
-                (
-                    new DateTime(
-                        DateTime.Now.Year,
-                        DateTime.Now.Month,
-                        DateTime.Now.Day,
-                        4,
-                        2,
-                        8,
-                        0
-                    )
-                ).Add(offsetNow + new TimeSpan(5, 0, 0)),
+                (new DateTime(2002, 1, 9, 4, 2, 8, 0))
+                    .Add(offset2002_01_09 + new TimeSpan(5, 0, 0)),
+                (new DateTime(2002, 1, 9, 0, 0, 0, 0))
+                    .Add(offset2002_01_09 + new TimeSpan(5, 0, 0)),
+                (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 4, 2, 8, 0))
+                    .Add(offsetNow + new TimeSpan(5, 0, 0)),
                 new DateTime(2, 1, 9, 4, 2, 8, 210),
                 new DateTime(2, 1, 9, 0, 0, 0, 0),
                 new DateTime(2002, 2, 1, 0, 0, 0, 0)
@@ -1608,7 +1612,8 @@ namespace System.Xml.Tests
                         55,
                         0
                     )
-                ).AddTicks(1004555),
+                )
+                    .AddTicks(1004555),
                 new DateTime(2002, 1, 9, 4, 2, 8, 0),
                 new DateTime(
                     DateTime.Now.Year,
@@ -1622,23 +1627,12 @@ namespace System.Xml.Tests
                 (new DateTime(2002, 1, 9, 4, 2, 8, 0)).AddMilliseconds(0.1458925435),
                 (new DateTime(2002, 1, 9, 4, 2, 8, 0).Add(offset2002_01_09)),
                 (new DateTime(2002, 1, 9).Add(offset2002_01_09)),
-                (new DateTime(2002, 1, 9, 4, 2, 8, 0)).Add(
-                    offset2002_01_09 + new TimeSpan(5, 0, 0)
-                ),
-                (new DateTime(2002, 1, 9, 0, 0, 0, 0)).Add(
-                    offset2002_01_09 + new TimeSpan(5, 0, 0)
-                ),
-                (
-                    new DateTime(
-                        DateTime.Now.Year,
-                        DateTime.Now.Month,
-                        DateTime.Now.Day,
-                        4,
-                        2,
-                        8,
-                        0
-                    )
-                ).Add(offsetNow + new TimeSpan(5, 0, 0)),
+                (new DateTime(2002, 1, 9, 4, 2, 8, 0))
+                    .Add(offset2002_01_09 + new TimeSpan(5, 0, 0)),
+                (new DateTime(2002, 1, 9, 0, 0, 0, 0))
+                    .Add(offset2002_01_09 + new TimeSpan(5, 0, 0)),
+                (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 4, 2, 8, 0))
+                    .Add(offsetNow + new TimeSpan(5, 0, 0)),
                 new DateTime(2, 1, 9, 4, 2, 8, 210),
                 new DateTime(2, 1, 9, 0, 0, 0, 0),
                 new DateTime(2002, 2, 1, 0, 0, 0, 0)
@@ -1686,7 +1680,8 @@ namespace System.Xml.Tests
                         55,
                         0
                     )
-                ).AddTicks(1004555),
+                )
+                    .AddTicks(1004555),
                 new DateTime(2002, 1, 9, 4, 2, 8, 0),
                 new DateTime(
                     DateTime.Now.Year,
@@ -1703,17 +1698,8 @@ namespace System.Xml.Tests
                 (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 4, 2, 8, 0)),
                 (new DateTime(2002, 1, 9, 9, 2, 8, 0)),
                 (new DateTime(2002, 1, 9, 5, 0, 0, 0)),
-                (
-                    new DateTime(
-                        DateTime.Now.Year,
-                        DateTime.Now.Month,
-                        DateTime.Now.Day,
-                        4,
-                        2,
-                        8,
-                        0
-                    )
-                ).Add(new TimeSpan(5, 0, 0)),
+                (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 4, 2, 8, 0))
+                    .Add(new TimeSpan(5, 0, 0)),
                 new DateTime(2, 1, 9, 4, 2, 8, 210),
                 new DateTime(2, 1, 9, 0, 0, 0, 0),
                 new DateTime(2002, 2, 1, 0, 0, 0, 0)
@@ -1764,7 +1750,8 @@ namespace System.Xml.Tests
                         55,
                         0
                     )
-                ).AddTicks(1004555),
+                )
+                    .AddTicks(1004555),
                 new DateTime(2002, 1, 9, 4, 2, 8, 0),
                 new DateTime(
                     DateTime.Now.Year,
@@ -1780,17 +1767,8 @@ namespace System.Xml.Tests
                 (new DateTime(2002, 1, 9, 0, 0, 0, 0)),
                 (new DateTime(2008, 2, 29, 4, 2, 8, 0)).Add(offsetNow + ts),
                 (new DateTime(2012, 2, 29, 0, 0, 0, 0)).Add(offsetNow + ts),
-                (
-                    new DateTime(
-                        DateTime.Now.Year,
-                        DateTime.Now.Month,
-                        DateTime.Now.Day,
-                        4,
-                        2,
-                        8,
-                        0
-                    )
-                ).Add(offsetNow + new TimeSpan(5, 0, 0)),
+                (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 4, 2, 8, 0))
+                    .Add(offsetNow + new TimeSpan(5, 0, 0)),
                 new DateTime(2, 1, 9, 4, 2, 8, 210),
                 new DateTime(2, 1, 9, 0, 0, 0, 0),
                 new DateTime(2016, 2, 29, 0, 0, 0, 0)
@@ -1873,16 +1851,17 @@ namespace System.Xml.Tests
                     23,
                     15,
                     55,
-                    TimeZoneInfo.Local.GetUtcOffset(
-                        new DateTime(
-                            DateTime.Now.Year,
-                            DateTime.Now.Month,
-                            DateTime.Now.Day,
-                            23,
-                            15,
-                            55
+                    TimeZoneInfo.Local
+                        .GetUtcOffset(
+                            new DateTime(
+                                DateTime.Now.Year,
+                                DateTime.Now.Month,
+                                DateTime.Now.Day,
+                                23,
+                                15,
+                                55
+                            )
                         )
-                    )
                 ),
                 (
                     new DateTimeOffset(
@@ -1894,7 +1873,8 @@ namespace System.Xml.Tests
                         8,
                         TimeZoneInfo.Local.GetUtcOffset(new DateTime(2002, 1, 9))
                     )
-                ).AddMilliseconds(0.1458925435),
+                )
+                    .AddMilliseconds(0.1458925435),
                 (new DateTimeOffset(2002, 1, 9, 4, 2, 8, TimeSpan.FromHours(0))).ToLocalTime(),
                 (new DateTimeOffset(2002, 1, 9, 0, 0, 0, TimeSpan.FromHours(0))).ToLocalTime(),
                 (new DateTimeOffset(2002, 1, 9, 4, 2, 8, new TimeSpan(-5, 0, 0))),

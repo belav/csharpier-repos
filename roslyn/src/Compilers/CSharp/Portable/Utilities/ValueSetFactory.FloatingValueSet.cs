@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     numbers: (IValueSet<TFloating>)NumericValueSetFactory<
                         TFloating,
                         TFloatingTC
-                    >.Instance.Random(expectedSize, random),
+                    >.Instance
+                        .Random(expectedSize, random),
                     hasNaN: hasNan
                 );
             }
@@ -100,10 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
                 return new FloatingValueSet<TFloating, TFloatingTC>(
-                    numbers: NumericValueSetFactory<TFloating, TFloatingTC>.Instance.Related(
-                        relation,
-                        value
-                    ),
+                    numbers: NumericValueSetFactory<TFloating, TFloatingTC>.Instance
+                        .Related(relation, value),
                     hasNaN: false
                 );
             }

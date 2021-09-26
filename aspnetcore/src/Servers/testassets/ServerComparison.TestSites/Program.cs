@@ -13,9 +13,8 @@ namespace ServerComparison.TestSites
     {
         public static void Main(string[] args)
         {
-            var builder = new WebHostBuilder().UseConfiguration(
-                    new ConfigurationBuilder().AddCommandLine(args).Build()
-                )
+            var builder = new WebHostBuilder()
+                .UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build())
                 .ConfigureLogging(
                     (_, factory) =>
                     {
@@ -31,23 +30,27 @@ namespace ServerComparison.TestSites
 
             // Switch between Kestrel, IIS, and HttpSys for different tests. Default to Kestrel for normal app execution.
             if (
-                string.Equals(
-                    builder.GetSetting("server"),
-                    "Microsoft.AspNetCore.Server.HttpSys",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        builder.GetSetting("server"),
+                        "Microsoft.AspNetCore.Server.HttpSys",
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 builder.UseHttpSys(
                     options =>
                     {
                         if (
-                            string.Equals(
-                                builder.GetSetting("environment")
-                                    ?? Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"),
-                                "NtlmAuthentication",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    builder.GetSetting("environment")
+                                        ?? Environment.GetEnvironmentVariable(
+                                            "ASPNETCORE_ENVIRONMENT"
+                                        ),
+                                    "NtlmAuthentication",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             // Set up NTLM authentication for HttpSys as follows.

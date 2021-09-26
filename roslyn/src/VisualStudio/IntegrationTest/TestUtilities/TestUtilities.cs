@@ -150,11 +150,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             if (!expectedList.SequenceEqual(actualList, comparer))
             {
                 throw new Exception(
-                    string.Format(
-                        "Expected list:\n{0}\nActual list:\n{1}",
-                        BuildString(expectedList),
-                        BuildString(actualList)
-                    )
+                    string
+                        .Format(
+                            "Expected list:\n{0}\nActual list:\n{1}",
+                            BuildString(expectedList),
+                            BuildString(actualList)
+                        )
                 );
             }
         }

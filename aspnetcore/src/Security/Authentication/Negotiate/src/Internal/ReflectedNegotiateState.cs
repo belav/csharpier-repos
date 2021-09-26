@@ -38,8 +38,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                 throwOnError: true
             )!;
             _constructor = ntAuthType.GetConstructors(
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )
+                BindingFlags.NonPublic | BindingFlags.Instance
+            )
                 .First();
             _getOutgoingBlob = ntAuthType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
                 .Where(
@@ -85,13 +85,13 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                 throwOnError: true
             )!;
             _getIdentity = negoStreamPalType.GetMethods(
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )
+                BindingFlags.NonPublic | BindingFlags.Static
+            )
                 .Where(info => info.Name.Equals("GetIdentity"))
                 .Single();
             _getException = negoStreamPalType.GetMethods(
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )
+                BindingFlags.NonPublic | BindingFlags.Static
+            )
                 .Where(info => info.Name.Equals("CreateExceptionFromError"))
                 .Single();
         }

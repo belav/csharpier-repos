@@ -21,10 +21,8 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         {
             // Arrange
             var useCalled = false;
-            var builder = new ApplicationBuilderWrapper(
-                CreateBuilder(),
-                () => useCalled = true
-            ).UsePathBase(pathBase);
+            var builder = new ApplicationBuilderWrapper(CreateBuilder(), () => useCalled = true)
+                .UsePathBase(pathBase);
 
             // Act
             builder.Build();

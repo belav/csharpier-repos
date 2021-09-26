@@ -17,9 +17,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             builder =>
             {
                 builder.AddTypeToken(
-                        Resources.InjectDirective_TypeToken_Name,
-                        Resources.InjectDirective_TypeToken_Description
-                    )
+                    Resources.InjectDirective_TypeToken_Name,
+                    Resources.InjectDirective_TypeToken_Description
+                )
                     .AddMemberToken(
                         Resources.InjectDirective_MemberToken_Name,
                         Resources.InjectDirective_MemberToken_Description

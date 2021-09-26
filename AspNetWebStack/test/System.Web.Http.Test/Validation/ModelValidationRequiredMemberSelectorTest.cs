@@ -59,10 +59,11 @@ namespace System.Web.Http.Validation
                 config.Services.GetModelMetadataProvider(),
                 config.Services.GetModelValidatorProviders()
             );
-            PropertyInfo propertyInfo = typeof(BadProperties).GetProperty(
-                propertyName,
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-            );
+            PropertyInfo propertyInfo = typeof(BadProperties)
+                .GetProperty(
+                    propertyName,
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                );
 
             Assert.False(selector.IsRequiredMember(propertyInfo));
         }

@@ -542,7 +542,8 @@ public class Tests
 
     public static int test_0_gsharedvt_in_delegates_reflection()
     {
-        var m = typeof(DelClass).GetMethod("return_t")
+        var m = typeof(DelClass)
+            .GetMethod("return_t")
             .MakeGenericMethod(new Type[] { typeof(int) });
         Func<int, int> f =
             (Func<int, int>)Delegate.CreateDelegate(typeof(Func<int, int>), null, m, false);
@@ -975,7 +976,8 @@ public class Tests
     public static int test_0_regress_6040()
     {
         //new B().Test<System.Collections.Generic.KeyValuePair<string, string>>();
-        new A<int>().Test();
+        new A<int>()
+            .Test();
         new A<object>().Test();
         new A<string>().Test();
         return 0;

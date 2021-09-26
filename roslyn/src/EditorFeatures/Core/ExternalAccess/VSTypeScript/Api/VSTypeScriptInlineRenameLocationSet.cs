@@ -35,10 +35,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         )
         {
             var info = await _set.GetReplacementsAsync(
-                    replacementText,
-                    optionSet,
-                    cancellationToken
-                )
+                replacementText,
+                optionSet,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (info != null)
             {

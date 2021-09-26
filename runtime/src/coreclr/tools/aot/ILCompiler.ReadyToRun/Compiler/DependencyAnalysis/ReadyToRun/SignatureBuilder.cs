@@ -455,10 +455,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     if (method.Token.TokenType == CorTokenType.mdtMethodSpec)
                     {
-                        MethodSpecification methodSpecification =
-                            methodToken.MetadataReader.GetMethodSpecification(
-                                (MethodSpecificationHandle)methodToken.Handle
-                            );
+                        MethodSpecification methodSpecification = methodToken.MetadataReader
+                            .GetMethodSpecification((MethodSpecificationHandle)methodToken.Handle);
                         methodToken = new ModuleToken(
                             methodToken.Module,
                             methodSpecification.Method
@@ -511,9 +509,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public void EmitFieldSignature(FieldDesc field, SignatureContext context)
         {
             uint fieldSigFlags = 0;
-            TypeDesc canonOwnerType = field.OwningType.ConvertToCanonForm(
-                CanonicalFormKind.Specific
-            );
+            TypeDesc canonOwnerType = field.OwningType
+                .ConvertToCanonForm(CanonicalFormKind.Specific);
             TypeDesc ownerType = null;
             if (canonOwnerType.HasInstantiation)
             {
@@ -523,10 +520,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (canonOwnerType != field.OwningType)
             {
                 // Convert field to canonical form as this is what the field - module token lookup stores
-                field = field.Context.GetFieldForInstantiatedType(
-                    field.GetTypicalFieldDefinition(),
-                    (InstantiatedType)canonOwnerType
-                );
+                field = field.Context
+                    .GetFieldForInstantiatedType(
+                        field.GetTypicalFieldDefinition(),
+                        (InstantiatedType)canonOwnerType
+                    );
             }
 
             ModuleToken fieldToken = context.GetModuleTokenForField(field);

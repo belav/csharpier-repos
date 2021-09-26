@@ -637,13 +637,12 @@ namespace System.IO.Pipelines.Tests
 
             ValueTask<ReadResult> awaiter = pipe.Reader.ReadAsync();
             Assert.False(awaiter.IsCompleted);
-            awaiter.GetAwaiter()
-                .OnCompleted(
-                    () =>
-                    {
-                        continuationRan = true;
-                    }
-                );
+            awaiter.GetAwaiter().OnCompleted(
+                () =>
+                {
+                    continuationRan = true;
+                }
+            );
             pipe.Writer.Complete();
 
             Assert.True(callbackRan);

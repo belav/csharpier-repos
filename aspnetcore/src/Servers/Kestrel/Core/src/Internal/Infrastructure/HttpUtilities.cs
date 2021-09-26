@@ -141,11 +141,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
             fixed (byte* source = &MemoryMarshal.GetReference(span))
             {
-                return string.Create(
-                    span.Length,
-                    new IntPtr(source),
-                    _getAsciiStringNonNullCharacters
-                );
+                return string
+                    .Create(span.Length, new IntPtr(source), _getAsciiStringNonNullCharacters);
             }
         }
 

@@ -141,18 +141,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
             var (clientStream, serverStream) = FullDuplexStream.CreatePair();
             _languageServer = await InProcLanguageServer.CreateAsync(
-                    this,
-                    serverStream,
-                    serverStream,
-                    _requestDispatcherFactory.CreateRequestDispatcher(),
-                    Workspace,
-                    _diagnosticService,
-                    _listenerProvider,
-                    _lspWorkspaceRegistrationService,
-                    _asyncServiceProvider,
-                    _diagnosticsClientName,
-                    cancellationToken
-                )
+                this,
+                serverStream,
+                serverStream,
+                _requestDispatcherFactory.CreateRequestDispatcher(),
+                Workspace,
+                _diagnosticService,
+                _listenerProvider,
+                _lspWorkspaceRegistrationService,
+                _asyncServiceProvider,
+                _diagnosticsClientName,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return new Connection(clientStream, clientStream);

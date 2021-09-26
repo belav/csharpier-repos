@@ -35,12 +35,13 @@ End Structure";
 
         public override async Task DisposeAsync()
         {
-            VisualStudio.Workspace.SetFeatureOption(
-                "NavigationBarOptions",
-                "ShowNavigationBar",
-                "Visual Basic",
-                "True"
-            );
+            VisualStudio.Workspace
+                .SetFeatureOption(
+                    "NavigationBarOptions",
+                    "ShowNavigationBar",
+                    "Visual Basic",
+                    "True"
+                );
             await base.DisposeAsync();
         }
 
@@ -74,11 +75,12 @@ End Structure";
             Assert.Equal(expectedItems, VisualStudio.Editor.GetMemberNavBarItems());
             VisualStudio.Editor.SelectMemberNavBarItem("B");
             VisualStudio.Editor.Verify.CaretPosition(169);
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "Public Property $$B As Integer",
-                assertCaretPosition: true,
-                trimWhitespace: true
-            );
+            VisualStudio.Editor.Verify
+                .CurrentLineText(
+                    "Public Property $$B As Integer",
+                    assertCaretPosition: true,
+                    trimWhitespace: true
+                );
         }
 
         [WpfFact]
@@ -108,20 +110,22 @@ End Structure";
         [WpfFact, Trait(Traits.Feature, Traits.Features.NavigationBar)]
         public void VerifyOption()
         {
-            VisualStudio.Workspace.SetFeatureOption(
-                "NavigationBarOptions",
-                "ShowNavigationBar",
-                "Visual Basic",
-                "False"
-            );
+            VisualStudio.Workspace
+                .SetFeatureOption(
+                    "NavigationBarOptions",
+                    "ShowNavigationBar",
+                    "Visual Basic",
+                    "False"
+                );
             Assert.False(VisualStudio.Editor.IsNavBarEnabled());
 
-            VisualStudio.Workspace.SetFeatureOption(
-                "NavigationBarOptions",
-                "ShowNavigationBar",
-                "Visual Basic",
-                "True"
-            );
+            VisualStudio.Workspace
+                .SetFeatureOption(
+                    "NavigationBarOptions",
+                    "ShowNavigationBar",
+                    "Visual Basic",
+                    "True"
+                );
             Assert.True(VisualStudio.Editor.IsNavBarEnabled());
         }
 

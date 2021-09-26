@@ -39,9 +39,8 @@ namespace System.CommandLine.Hosting
             // Use default cancellation token instead, and become a noop lifetime.
             invokeCancelToken = context?.GetCancellationToken() ?? default;
 
-            Logger = (loggerFactory ?? NullLoggerFactory.Instance).CreateLogger(
-                "Microsoft.Hosting.Lifetime"
-            );
+            Logger = (loggerFactory ?? NullLoggerFactory.Instance)
+                .CreateLogger("Microsoft.Hosting.Lifetime");
         }
 
         public InvocationLifetimeOptions Options { get; }

@@ -29,17 +29,18 @@ namespace RoutingSandbox
                         (httpContext) =>
                         {
                             var request = httpContext.Request;
-                            return httpContext.Response.WriteAsync(
-                                $"Verb =  {request.Method.ToUpperInvariant()} - Path = {request.Path} - Route values - {string.Join(", ", httpContext.GetRouteData().Values)}"
-                            );
+                            return httpContext.Response
+                                .WriteAsync(
+                                    $"Verb =  {request.Method.ToUpperInvariant()} - Path = {request.Path} - Route values - {string.Join(", ", httpContext.GetRouteData().Values)}"
+                                );
                         }
                     );
 
                     routes.MapGet(
-                            "api/get/{id}",
-                            (request, response, routeData) =>
-                                response.WriteAsync($"API Get {routeData.Values["id"]}")
-                        )
+                        "api/get/{id}",
+                        (request, response, routeData) =>
+                            response.WriteAsync($"API Get {routeData.Values["id"]}")
+                    )
                         .MapMiddlewareRoute(
                             "api/middleware",
                             (appBuilder) =>

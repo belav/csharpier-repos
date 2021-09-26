@@ -19,12 +19,12 @@ namespace System.Threading.Tests
         public void Semaphore_Create_NullSecurity()
         {
             CreateAndVerifySemaphore(
-                    DefaultInitialCount,
-                    DefaultMaximumCount,
-                    name: GetRandomName(),
-                    expectedSecurity: null,
-                    expectedCreatedNew: true
-                )
+                DefaultInitialCount,
+                DefaultMaximumCount,
+                name: GetRandomName(),
+                expectedSecurity: null,
+                expectedCreatedNew: true
+            )
                 .Dispose();
         }
 
@@ -38,12 +38,12 @@ namespace System.Threading.Tests
                 () =>
                 {
                     CreateAndVerifySemaphore(
-                            initialCount,
-                            maximumCount,
-                            name: GetRandomName(),
-                            expectedSecurity: GetBasicSemaphoreSecurity(),
-                            expectedCreatedNew: true
-                        )
+                        initialCount,
+                        maximumCount,
+                        name: GetRandomName(),
+                        expectedSecurity: GetBasicSemaphoreSecurity(),
+                        expectedCreatedNew: true
+                    )
                         .Dispose();
                 }
             );
@@ -109,12 +109,12 @@ namespace System.Threading.Tests
                     () =>
                     {
                         CreateAndVerifySemaphore(
-                                DefaultInitialCount,
-                                DefaultMaximumCount,
-                                name,
-                                GetBasicSemaphoreSecurity(),
-                                expectedCreatedNew: true
-                            )
+                            DefaultInitialCount,
+                            DefaultMaximumCount,
+                            name,
+                            GetBasicSemaphoreSecurity(),
+                            expectedCreatedNew: true
+                        )
                             .Dispose();
                     }
                 );
@@ -155,12 +155,12 @@ namespace System.Threading.Tests
             );
 
             CreateAndVerifySemaphore(
-                    DefaultInitialCount,
-                    DefaultMaximumCount,
-                    GetRandomName(),
-                    security,
-                    expectedCreatedNew: true
-                )
+                DefaultInitialCount,
+                DefaultMaximumCount,
+                GetRandomName(),
+                security,
+                expectedCreatedNew: true
+            )
                 .Dispose();
         }
 
@@ -395,18 +395,18 @@ namespace System.Threading.Tests
             Assert.Equal(typeof(SemaphoreRights), actualSecurity.AccessRightType);
 
             List<SemaphoreAccessRule> expectedAccessRules = expectedSecurity.GetAccessRules(
-                    includeExplicit: true,
-                    includeInherited: false,
-                    typeof(SecurityIdentifier)
-                )
+                includeExplicit: true,
+                includeInherited: false,
+                typeof(SecurityIdentifier)
+            )
                 .Cast<SemaphoreAccessRule>()
                 .ToList();
 
             List<SemaphoreAccessRule> actualAccessRules = actualSecurity.GetAccessRules(
-                    includeExplicit: true,
-                    includeInherited: false,
-                    typeof(SecurityIdentifier)
-                )
+                includeExplicit: true,
+                includeInherited: false,
+                typeof(SecurityIdentifier)
+            )
                 .Cast<SemaphoreAccessRule>()
                 .ToList();
 

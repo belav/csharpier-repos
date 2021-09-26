@@ -106,9 +106,8 @@ namespace System.Reflection.TypeLoading
         }
 
         public sealed override ParameterInfo[] GetIndexParameters() =>
-            (
-                _lazyIndexedParameters ?? (_lazyIndexedParameters = ComputeIndexParameters())
-            ).CloneArray<ParameterInfo>();
+            (_lazyIndexedParameters ?? (_lazyIndexedParameters = ComputeIndexParameters()))
+                .CloneArray<ParameterInfo>();
         private RoPropertyIndexParameter[] ComputeIndexParameters()
         {
             bool useGetter = CanRead;

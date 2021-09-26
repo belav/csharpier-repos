@@ -23,10 +23,8 @@ class Program
         Program prog = new Program(1);
         2.Equals(3);
 
-        MethodInfo info = typeof(Program).GetMethod(
-            "getfunc",
-            BindingFlags.Static | BindingFlags.Public
-        );
+        MethodInfo info = typeof(Program)
+            .GetMethod("getfunc", BindingFlags.Static | BindingFlags.Public);
 
         //Tests closed delegates over static methods with return buffer
         Func<int, decimal> deepThought =

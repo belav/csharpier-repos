@@ -43,14 +43,13 @@ namespace System.Linq.Tests
 
         public static IEnumerable<object[]> QueryableData()
         {
-            return EnumerableData()
-                .Select(
-                    array =>
-                    {
-                        var enumerable = (IEnumerable<int>)array[0];
-                        return new object[] { enumerable.AsQueryable(), array[1] };
-                    }
-                );
+            return EnumerableData().Select(
+                array =>
+                {
+                    var enumerable = (IEnumerable<int>)array[0];
+                    return new object[] { enumerable.AsQueryable(), array[1] };
+                }
+            );
         }
     }
 }

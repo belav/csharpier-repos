@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             if (member is TypeInfo type)
             {
                 foreach (
-                    DebuggerDisplayAttribute attr in type.Assembly.GetCustomAttributes<DebuggerDisplayAttribute>()
+                    DebuggerDisplayAttribute attr in type.Assembly
+                        .GetCustomAttributes<DebuggerDisplayAttribute>()
                 )
                 {
                     if (IsApplicableAttribute(type, attr.Target.GetTypeInfo(), attr.TargetTypeName))
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
             // TODO (tomat): which assembly should we look at for proxy attributes?
             foreach (
-                DebuggerTypeProxyAttribute attr in type.Assembly.GetCustomAttributes<DebuggerTypeProxyAttribute>()
+                DebuggerTypeProxyAttribute attr in type.Assembly
+                    .GetCustomAttributes<DebuggerTypeProxyAttribute>()
             )
             {
                 if (IsApplicableAttribute(type, attr.Target.GetTypeInfo(), attr.TargetTypeName))
@@ -199,9 +201,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 }
                 else
                 {
-                    members = ((IEnumerable<MemberInfo>)type.DeclaredFields).Concat(
-                        type.DeclaredProperties
-                    );
+                    members = ((IEnumerable<MemberInfo>)type.DeclaredFields)
+                        .Concat(type.DeclaredProperties);
                 }
 
                 MemberInfo candidate = null;

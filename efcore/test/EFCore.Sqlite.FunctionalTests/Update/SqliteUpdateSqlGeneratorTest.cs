@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         {
             var ex = Assert.Throws<NotSupportedException>(
                 () =>
-                    base.GenerateNextSequenceValueOperation_returns_statement_with_sanitized_sequence()
+                    base
+                        .GenerateNextSequenceValueOperation_returns_statement_with_sanitized_sequence()
             );
             Assert.Equal(SqliteStrings.SequencesNotSupported, ex.Message);
         }

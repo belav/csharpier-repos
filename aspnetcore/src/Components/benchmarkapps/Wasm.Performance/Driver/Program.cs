@@ -139,131 +139,143 @@ namespace Wasm.Performance.Driver
 
             if (benchmarkResult.DownloadSize != null)
             {
-                output.Metadata.Add(
-                    new BenchmarkMetadata
-                    {
-                        Source = "BlazorWasm",
-                        Name = "blazorwasm/download-size",
-                        ShortDescription = "Download size (KB)",
-                        LongDescription = "Download size (KB)",
-                        Format = "n2",
-                    }
-                );
+                output.Metadata
+                    .Add(
+                        new BenchmarkMetadata
+                        {
+                            Source = "BlazorWasm",
+                            Name = "blazorwasm/download-size",
+                            ShortDescription = "Download size (KB)",
+                            LongDescription = "Download size (KB)",
+                            Format = "n2",
+                        }
+                    );
 
-                output.Measurements.Add(
-                    new BenchmarkMeasurement
-                    {
-                        Timestamp = DateTime.UtcNow,
-                        Name = "blazorwasm/download-size",
-                        Value = ((float)benchmarkResult.DownloadSize) / 1024,
-                    }
-                );
+                output.Measurements
+                    .Add(
+                        new BenchmarkMeasurement
+                        {
+                            Timestamp = DateTime.UtcNow,
+                            Name = "blazorwasm/download-size",
+                            Value = ((float)benchmarkResult.DownloadSize) / 1024,
+                        }
+                    );
             }
 
             if (benchmarkResult.WasmMemory != null)
             {
-                output.Metadata.Add(
-                    new BenchmarkMetadata
-                    {
-                        Source = "BlazorWasm",
-                        Name = "blazorwasm/wasm-memory",
-                        ShortDescription = "Memory (KB)",
-                        LongDescription = "WASM reported memory (KB)",
-                        Format = "n2",
-                    }
-                );
+                output.Metadata
+                    .Add(
+                        new BenchmarkMetadata
+                        {
+                            Source = "BlazorWasm",
+                            Name = "blazorwasm/wasm-memory",
+                            ShortDescription = "Memory (KB)",
+                            LongDescription = "WASM reported memory (KB)",
+                            Format = "n2",
+                        }
+                    );
 
-                output.Measurements.Add(
-                    new BenchmarkMeasurement
-                    {
-                        Timestamp = DateTime.UtcNow,
-                        Name = "blazorwasm/wasm-memory",
-                        Value = ((float)benchmarkResult.WasmMemory) / 1024,
-                    }
-                );
+                output.Measurements
+                    .Add(
+                        new BenchmarkMeasurement
+                        {
+                            Timestamp = DateTime.UtcNow,
+                            Name = "blazorwasm/wasm-memory",
+                            Value = ((float)benchmarkResult.WasmMemory) / 1024,
+                        }
+                    );
 
-                output.Metadata.Add(
-                    new BenchmarkMetadata
-                    {
-                        Source = "BlazorWasm",
-                        Name = "blazorwasm/js-usedjsheapsize",
-                        ShortDescription = "UsedJSHeapSize",
-                        LongDescription = "JS used heap size"
-                    }
-                );
+                output.Metadata
+                    .Add(
+                        new BenchmarkMetadata
+                        {
+                            Source = "BlazorWasm",
+                            Name = "blazorwasm/js-usedjsheapsize",
+                            ShortDescription = "UsedJSHeapSize",
+                            LongDescription = "JS used heap size"
+                        }
+                    );
 
-                output.Measurements.Add(
-                    new BenchmarkMeasurement
-                    {
-                        Timestamp = DateTime.UtcNow,
-                        Name = "blazorwasm/js-usedjsheapsize",
-                        Value = benchmarkResult.UsedJSHeapSize,
-                    }
-                );
+                output.Measurements
+                    .Add(
+                        new BenchmarkMeasurement
+                        {
+                            Timestamp = DateTime.UtcNow,
+                            Name = "blazorwasm/js-usedjsheapsize",
+                            Value = benchmarkResult.UsedJSHeapSize,
+                        }
+                    );
 
-                output.Metadata.Add(
-                    new BenchmarkMetadata
-                    {
-                        Source = "BlazorWasm",
-                        Name = "blazorwasm/js-totaljsheapsize",
-                        ShortDescription = "TotalJSHeapSize",
-                        LongDescription = "JS total heap size"
-                    }
-                );
+                output.Metadata
+                    .Add(
+                        new BenchmarkMetadata
+                        {
+                            Source = "BlazorWasm",
+                            Name = "blazorwasm/js-totaljsheapsize",
+                            ShortDescription = "TotalJSHeapSize",
+                            LongDescription = "JS total heap size"
+                        }
+                    );
 
-                output.Measurements.Add(
-                    new BenchmarkMeasurement
-                    {
-                        Timestamp = DateTime.UtcNow,
-                        Name = "blazorwasm/js-totaljsheapsize",
-                        Value = benchmarkResult.TotalJSHeapSize,
-                    }
-                );
+                output.Measurements
+                    .Add(
+                        new BenchmarkMeasurement
+                        {
+                            Timestamp = DateTime.UtcNow,
+                            Name = "blazorwasm/js-totaljsheapsize",
+                            Value = benchmarkResult.TotalJSHeapSize,
+                        }
+                    );
             }
 
             // Information about the build that this was produced from
-            output.Metadata.Add(
-                new BenchmarkMetadata
-                {
-                    Source = "BlazorWasm",
-                    Name = "blazorwasm/commit",
-                    ShortDescription = "Commit Hash",
-                }
-            );
+            output.Metadata
+                .Add(
+                    new BenchmarkMetadata
+                    {
+                        Source = "BlazorWasm",
+                        Name = "blazorwasm/commit",
+                        ShortDescription = "Commit Hash",
+                    }
+                );
 
-            output.Measurements.Add(
-                new BenchmarkMeasurement
-                {
-                    Timestamp = DateTime.UtcNow,
-                    Name = "blazorwasm/commit",
-                    Value =
-                        typeof(Program).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+            output.Measurements
+                .Add(
+                    new BenchmarkMeasurement
+                    {
+                        Timestamp = DateTime.UtcNow,
+                        Name = "blazorwasm/commit",
+                        Value = typeof(Program).Assembly
+                            .GetCustomAttributes<AssemblyMetadataAttribute>()
                             .FirstOrDefault(f => f.Key == "CommitHash")?.Value,
-                }
-            );
+                    }
+                );
 
             foreach (var result in benchmarkResult.ScenarioResults)
             {
                 var scenarioName = result.Descriptor.Name;
-                output.Metadata.Add(
-                    new BenchmarkMetadata
-                    {
-                        Source = "BlazorWasm",
-                        Name = scenarioName,
-                        ShortDescription = result.Name,
-                        LongDescription = result.Descriptor.Description,
-                        Format = "n2"
-                    }
-                );
+                output.Metadata
+                    .Add(
+                        new BenchmarkMetadata
+                        {
+                            Source = "BlazorWasm",
+                            Name = scenarioName,
+                            ShortDescription = result.Name,
+                            LongDescription = result.Descriptor.Description,
+                            Format = "n2"
+                        }
+                    );
 
-                output.Measurements.Add(
-                    new BenchmarkMeasurement
-                    {
-                        Timestamp = DateTime.UtcNow,
-                        Name = scenarioName,
-                        Value = result.Duration,
-                    }
-                );
+                output.Measurements
+                    .Add(
+                        new BenchmarkMeasurement
+                        {
+                            Timestamp = DateTime.UtcNow,
+                            Name = scenarioName,
+                            Value = result.Duration,
+                        }
+                    );
             }
 
             if (!includeMetadata)
@@ -273,13 +285,14 @@ namespace Wasm.Performance.Driver
 
             if (isStressRun)
             {
-                output.Measurements.Add(
-                    new BenchmarkMeasurement
-                    {
-                        Timestamp = DateTime.UtcNow,
-                        Name = "$$Delimiter$$",
-                    }
-                );
+                output.Measurements
+                    .Add(
+                        new BenchmarkMeasurement
+                        {
+                            Timestamp = DateTime.UtcNow,
+                            Name = "$$Delimiter$$",
+                        }
+                    );
             }
 
             var builder = new StringBuilder();
@@ -315,7 +328,8 @@ namespace Wasm.Performance.Driver
 #if DEBUG
                 "--contentroot",
                 Path.GetFullPath(
-                    typeof(Program).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                    typeof(Program).Assembly
+                        .GetCustomAttributes<AssemblyMetadataAttribute>()
                         .First(f => f.Key == "TestAppLocatiion").Value
                 )
 #endif
@@ -372,7 +386,8 @@ namespace Wasm.Performance.Driver
 
         static string GetListeningUrl(IHost testApp)
         {
-            return testApp.Services.GetRequiredService<IServer>()
+            return testApp.Services
+                .GetRequiredService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses.First();
         }

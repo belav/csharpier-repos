@@ -179,25 +179,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             ) => throw new Exception();
         }
 
-        private static readonly MethodInfo MethodAmi = typeof(TestMethods).GetRuntimeMethod(
-            nameof(TestMethods.MethodA),
-            new[] { typeof(string), typeof(int) }
-        );
+        private static readonly MethodInfo MethodAmi = typeof(TestMethods)
+            .GetRuntimeMethod(nameof(TestMethods.MethodA), new[] { typeof(string), typeof(int) });
 
-        private static readonly MethodInfo MethodBmi = typeof(TestMethods).GetRuntimeMethod(
-            nameof(TestMethods.MethodB),
-            new[] { typeof(string), typeof(int) }
-        );
+        private static readonly MethodInfo MethodBmi = typeof(TestMethods)
+            .GetRuntimeMethod(nameof(TestMethods.MethodB), new[] { typeof(string), typeof(int) });
 
-        private static readonly MethodInfo MethodImi = typeof(TestMethods).GetRuntimeMethod(
-            nameof(TestMethods.MethodI),
-            new Type[] {  }
-        );
+        private static readonly MethodInfo MethodImi = typeof(TestMethods)
+            .GetRuntimeMethod(nameof(TestMethods.MethodI), new Type[] {  });
 
-        private static readonly MethodInfo MethodHmi = typeof(TestMethods).GetTypeInfo()
+        private static readonly MethodInfo MethodHmi = typeof(TestMethods)
+            .GetTypeInfo()
             .GetDeclaredMethod(nameof(TestMethods.MethodH));
 
-        private static readonly MethodInfo MethodJmi = typeof(TestMethods).GetTypeInfo()
+        private static readonly MethodInfo MethodJmi = typeof(TestMethods)
+            .GetTypeInfo()
             .GetDeclaredMethod(nameof(TestMethods.MethodJ));
 
         private class TestMethods
@@ -275,15 +271,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var dup1methodInfo = typeof(MyDerivedContext).GetRuntimeMethod(
-                nameof(MyDerivedContext.DuplicateNameTest),
-                Array.Empty<Type>()
-            );
+            var dup1methodInfo = typeof(MyDerivedContext)
+                .GetRuntimeMethod(nameof(MyDerivedContext.DuplicateNameTest), Array.Empty<Type>());
 
-            var dup2methodInfo = typeof(MyNonDbContext).GetRuntimeMethod(
-                nameof(MyNonDbContext.DuplicateNameTest),
-                Array.Empty<Type>()
-            );
+            var dup2methodInfo = typeof(MyNonDbContext)
+                .GetRuntimeMethod(nameof(MyNonDbContext.DuplicateNameTest), Array.Empty<Type>());
 
             var dbFunc1 = modelBuilder.HasDbFunction(dup1methodInfo).HasName("Dup1").Metadata;
             var dbFunc2 = modelBuilder.HasDbFunction(dup2methodInfo).HasName("Dup2").Metadata;
@@ -297,7 +289,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         [ConditionalFact]
         public virtual void Finds_DbFunctions_on_DbContext()
         {
-            var model = RelationalTestHelpers.Instance.CreateContextServices()
+            var model = RelationalTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<IModelRuntimeInitializer>()
                 .Initialize(
                     GetModelBuilder(new MyDerivedContext()).FinalizeModel(),
@@ -309,13 +302,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             {
                 Assert.NotNull(
                     model.FindDbFunction(
-                        typeof(MyBaseContext).GetMethod(
-                            function,
-                            BindingFlags.Public
-                                | BindingFlags.NonPublic
-                                | BindingFlags.Static
-                                | BindingFlags.Instance
-                        )
+                        typeof(MyBaseContext)
+                            .GetMethod(
+                                function,
+                                BindingFlags.Public
+                                    | BindingFlags.NonPublic
+                                    | BindingFlags.Static
+                                    | BindingFlags.Instance
+                            )
                     )
                 );
             }
@@ -324,13 +318,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             {
                 Assert.NotNull(
                     model.FindDbFunction(
-                        typeof(MyDerivedContext).GetMethod(
-                            function,
-                            BindingFlags.Public
-                                | BindingFlags.NonPublic
-                                | BindingFlags.Static
-                                | BindingFlags.Instance
-                        )
+                        typeof(MyDerivedContext)
+                            .GetMethod(
+                                function,
+                                BindingFlags.Public
+                                    | BindingFlags.NonPublic
+                                    | BindingFlags.Static
+                                    | BindingFlags.Instance
+                            )
                     )
                 );
             }
@@ -341,10 +336,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var methodInfo = typeof(MyDerivedContext).GetRuntimeMethod(
-                nameof(MyDerivedContext.InstancePublicBase),
-                Array.Empty<Type>()
-            );
+            var methodInfo = typeof(MyDerivedContext)
+                .GetRuntimeMethod(nameof(MyDerivedContext.InstancePublicBase), Array.Empty<Type>());
 
             var dbFunc = modelBuilder.HasDbFunction(methodInfo).Metadata;
 
@@ -360,10 +353,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var methodInfo = typeof(MyNonDbContext).GetRuntimeMethod(
-                nameof(MyNonDbContext.NonStatic),
-                Array.Empty<Type>()
-            );
+            var methodInfo = typeof(MyNonDbContext)
+                .GetRuntimeMethod(nameof(MyNonDbContext.NonStatic), Array.Empty<Type>());
 
             Assert.Equal(
                 RelationalStrings.DbFunctionInvalidInstanceType(
@@ -381,10 +372,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var methodInfo = typeof(TestMethods).GetRuntimeMethod(
-                nameof(TestMethods.MethodC),
-                Array.Empty<Type>()
-            );
+            var methodInfo = typeof(TestMethods)
+                .GetRuntimeMethod(nameof(TestMethods.MethodC), Array.Empty<Type>());
 
             Assert.Equal(
                 RelationalStrings.DbFunctionInvalidReturnType(
@@ -702,14 +691,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var queryableNoParams = typeof(MyDerivedContext).GetRuntimeMethod(
-                nameof(MyDerivedContext.QueryableNoParams),
-                Array.Empty<Type>()
-            );
+            var queryableNoParams = typeof(MyDerivedContext)
+                .GetRuntimeMethod(nameof(MyDerivedContext.QueryableNoParams), Array.Empty<Type>());
 
             var functionName = modelBuilder.HasDbFunction(queryableNoParams).Metadata.ModelName;
 
-            var model = RelationalTestHelpers.Instance.CreateContextServices()
+            var model = RelationalTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<IModelRuntimeInitializer>()
                 .Initialize(
                     modelBuilder.FinalizeModel(),
@@ -732,10 +720,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var queryableNoParams = typeof(MyDerivedContext).GetRuntimeMethod(
-                nameof(MyDerivedContext.QueryableNoParams),
-                Array.Empty<Type>()
-            );
+            var queryableNoParams = typeof(MyDerivedContext)
+                .GetRuntimeMethod(nameof(MyDerivedContext.QueryableNoParams), Array.Empty<Type>());
 
             Assert.Equal(
                 RelationalStrings.NonScalarFunctionCannotBeNullable(
@@ -752,10 +738,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var queryableSingleParam = typeof(MyDerivedContext).GetRuntimeMethod(
-                nameof(MyDerivedContext.QueryableSingleParam),
-                new[] { typeof(int) }
-            );
+            var queryableSingleParam = typeof(MyDerivedContext)
+                .GetRuntimeMethod(
+                    nameof(MyDerivedContext.QueryableSingleParam),
+                    new[] { typeof(int) }
+                );
 
             var function = modelBuilder.HasDbFunction(queryableSingleParam);
             var parameter = function.HasParameter("i");
@@ -911,9 +898,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
                 Assert.Throws<InvalidOperationException>(
                     () =>
-                        ((IConventionDbFunction)dbFunction).SetTranslation(
-                            args => new SqlFragmentExpression("Empty")
-                        )
+                        ((IConventionDbFunction)dbFunction)
+                            .SetTranslation(args => new SqlFragmentExpression("Empty"))
                 ).Message
             );
 
@@ -921,10 +907,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
                 Assert.Throws<InvalidOperationException>(
                     () =>
-                        ((IConventionDbFunction)dbFunction).SetTranslation(
-                            args => new SqlFragmentExpression("Empty"),
-                            fromDataAnnotation: true
-                        )
+                        ((IConventionDbFunction)dbFunction)
+                            .SetTranslation(
+                                args => new SqlFragmentExpression("Empty"),
+                                fromDataAnnotation: true
+                            )
                 ).Message
             );
 
@@ -953,19 +940,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             );
             conventionSet.ModelInitializedConventions.Add(dbFunctionAttributeConvention);
             conventionSet.ModelFinalizingConventions.Add(dbFunctionAttributeConvention);
-            conventionSet.ModelFinalizingConventions.Add(
-                new TableValuedDbFunctionConvention(dependencies, relationalDependencies)
-            );
+            conventionSet.ModelFinalizingConventions
+                .Add(new TableValuedDbFunctionConvention(dependencies, relationalDependencies));
 
             return new ModelBuilder(conventionSet);
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            RelationalTestHelpers.Instance.CreateContextServices()
+            RelationalTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private RelationalConventionSetBuilderDependencies CreateRelationalDependencies() =>
-            RelationalTestHelpers.Instance.CreateContextServices()
+            RelationalTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<RelationalConventionSetBuilderDependencies>();
     }
 }

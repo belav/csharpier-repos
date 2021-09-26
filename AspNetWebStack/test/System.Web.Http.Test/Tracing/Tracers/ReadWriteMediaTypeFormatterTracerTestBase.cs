@@ -25,14 +25,14 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             Mock<TFormatter> mockFormatter = new Mock<TFormatter>() { CallBase = true };
             mockFormatter.Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<IFormatterLogger>()
-                        )
-                )
+                f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+            )
                 .Returns(Task.FromResult<object>("sampleValue"));
             TestTraceWriter traceWriter = new TestTraceWriter();
             HttpRequestMessage request = new HttpRequestMessage();
@@ -78,14 +78,14 @@ namespace System.Web.Http.Tracing.Tracers
             InvalidOperationException exception = new InvalidOperationException("test");
             Mock<TFormatter> mockFormatter = new Mock<TFormatter>() { CallBase = true };
             mockFormatter.Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<IFormatterLogger>()
-                        )
-                )
+                f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+            )
                 .Throws(exception);
 
             TestTraceWriter traceWriter = new TestTraceWriter();
@@ -137,14 +137,14 @@ namespace System.Web.Http.Tracing.Tracers
             tcs.TrySetException(exception);
 
             mockFormatter.Setup(
-                    f =>
-                        f.ReadFromStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<IFormatterLogger>()
-                        )
-                )
+                f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+            )
                 .Returns(tcs.Task);
             TestTraceWriter traceWriter = new TestTraceWriter();
             HttpRequestMessage request = new HttpRequestMessage();
@@ -189,15 +189,15 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             Mock<TFormatter> mockFormatter = new Mock<TFormatter>() { CallBase = true };
             mockFormatter.Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<Object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Returns(TaskHelpers.Completed());
             TestTraceWriter traceWriter = new TestTraceWriter();
             HttpRequestMessage request = new HttpRequestMessage();
@@ -241,15 +241,15 @@ namespace System.Web.Http.Tracing.Tracers
             InvalidOperationException exception = new InvalidOperationException("test");
             Mock<TFormatter> mockFormatter = new Mock<TFormatter>() { CallBase = true };
             mockFormatter.Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<Object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Throws(exception);
 
             TestTraceWriter traceWriter = new TestTraceWriter();
@@ -302,15 +302,15 @@ namespace System.Web.Http.Tracing.Tracers
             tcs.TrySetException(exception);
 
             mockFormatter.Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<Object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Returns(tcs.Task);
 
             TestTraceWriter traceWriter = new TestTraceWriter();

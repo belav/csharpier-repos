@@ -62,12 +62,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             )
             {
                 var appSettings = new NameValueCollection();
-                return new BuildServerController(appSettings, Logger).RunShutdownAsync(
-                    pipeName,
-                    waitForProcess,
-                    timeout,
-                    cancellationToken
-                );
+                return new BuildServerController(appSettings, Logger)
+                    .RunShutdownAsync(pipeName, waitForProcess, timeout, cancellationToken);
             }
 
             [Fact]

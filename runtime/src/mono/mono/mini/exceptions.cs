@@ -3448,7 +3448,9 @@ class Tests
 #if __MOBILE__
             typeof(ExceptionTests).GetMethod("lmf_filter").Invoke(null, new object[] {  });
 #else
-            typeof(Tests).GetMethod("lmf_filter").Invoke(null, new object[] {  });
+            typeof(Tests)
+                .GetMethod("lmf_filter")
+                .Invoke(null, new object[] {  });
 #endif
         }
         catch (TargetInvocationException) { }

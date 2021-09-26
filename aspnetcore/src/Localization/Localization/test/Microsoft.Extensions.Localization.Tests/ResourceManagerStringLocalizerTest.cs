@@ -288,10 +288,8 @@ namespace Microsoft.Extensions.Localization
         private TestSink Sink { get; } = new TestSink();
 
         private ILogger Logger =>
-            new TestLoggerFactory(
-                Sink,
-                enabled: true
-            ).CreateLogger<ResourceManagerStringLocalizer>();
+            new TestLoggerFactory(Sink, enabled: true)
+                .CreateLogger<ResourceManagerStringLocalizer>();
 
         internal class TestResourceManager : ResourceManager
         {

@@ -93,7 +93,8 @@ namespace System.Reflection.Emit
                 return MethodBase.GetMethodFromHandle(
                     mbuilder.MethodHandleInternal,
                     mbuilder.TypeBuilder.InternalResolve().TypeHandle
-                )!.GetGenericArguments()[index];
+                )!
+                    .GetGenericArguments()[index];
             return tbuilder.InternalResolve().GetGenericArguments()[index];
         }
 
@@ -103,7 +104,8 @@ namespace System.Reflection.Emit
                 return MethodBase.GetMethodFromHandle(
                     mbuilder.MethodHandleInternal,
                     mbuilder.TypeBuilder.RuntimeResolve().TypeHandle
-                )!.GetGenericArguments()[index];
+                )!
+                    .GetGenericArguments()[index];
             return tbuilder.RuntimeResolve().GetGenericArguments()[index];
         }
 

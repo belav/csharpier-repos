@@ -201,12 +201,11 @@ class Program {
         int?[ , ] ar1 = { null  };
     }
 }";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (5,27): error CS0846: A nested array initializer is expected
-                    //         int?[ , ] ar1 = { null  };
-                    Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "null")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (5,27): error CS0846: A nested array initializer is expected
+                //         int?[ , ] ar1 = { null  };
+                Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "null")
+            );
         }
 
         private static readonly string s_arraysOfRank1IlSource =
@@ -578,9 +577,9 @@ Test2
                 // (11,18): error CS0030: Cannot convert type 'double[*]' to 'System.Collections.Generic.IList<double>'
                 //         var a5 = (System.Collections.Generic.IList<double>)t.Test1();
                 Diagnostic(
-                        ErrorCode.ERR_NoExplicitConv,
-                        "(System.Collections.Generic.IList<double>)t.Test1()"
-                    )
+                    ErrorCode.ERR_NoExplicitConv,
+                    "(System.Collections.Generic.IList<double>)t.Test1()"
+                )
                     .WithArguments("double[*]", "System.Collections.Generic.IList<double>")
                     .WithLocation(11, 18),
                 // (14,19): error CS0029: Cannot implicitly convert type 'System.Collections.Generic.IList<double>' to 'double[*]'
@@ -1915,7 +1914,8 @@ class C
                         .GetAttributes()
                         .Single()
                         .ConstructorArguments.Single().Value
-                ).IsErrorType()
+                )
+                    .IsErrorType()
             );
             Assert.True(
                 (
@@ -1923,7 +1923,8 @@ class C
                         .GetAttributes()
                         .Single()
                         .ConstructorArguments.Single().Value
-                ).IsErrorType()
+                )
+                    .IsErrorType()
             );
 
             CompileAndVerify(

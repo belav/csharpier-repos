@@ -40,11 +40,12 @@ namespace Castle.Core.Resource
 
             if (node == null)
             {
-                string message = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Could not find section '{0}' in the configuration file associated with this domain.",
-                    sectionName
-                );
+                string message = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "Could not find section '{0}' in the configuration file associated with this domain.",
+                        sectionName
+                    );
                 throw new ConfigurationErrorsException(message);
             }
 

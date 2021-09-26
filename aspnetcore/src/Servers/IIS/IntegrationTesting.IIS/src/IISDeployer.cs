@@ -86,9 +86,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                 DeploymentParameters.PublishApplicationBeforeDeployment = true;
                 // Move ASPNETCORE_DETAILEDERRORS to web config env variables
                 if (
-                    IISDeploymentParameters.EnvironmentVariables.ContainsKey(
-                        DetailedErrorsEnvironmentVariable
-                    )
+                    IISDeploymentParameters.EnvironmentVariables
+                        .ContainsKey(DetailedErrorsEnvironmentVariable)
                 )
                 {
                     IISDeploymentParameters.WebConfigBasedEnvironmentVariables[
@@ -97,9 +96,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                         DetailedErrorsEnvironmentVariable
                     ];
 
-                    IISDeploymentParameters.EnvironmentVariables.Remove(
-                        DetailedErrorsEnvironmentVariable
-                    );
+                    IISDeploymentParameters.EnvironmentVariables
+                        .Remove(DetailedErrorsEnvironmentVariable);
                 }
                 // Do not override settings set on parameters
                 if (
@@ -153,10 +151,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 
                 // Expand path to dotnet because IIS process would not inherit PATH variable
                 if (
-                    aspNetCore.Attribute("processPath")?.Value.StartsWith(
-                        "dotnet",
-                        StringComparison.Ordinal
-                    ) == true
+                    aspNetCore.Attribute("processPath")?.Value
+                        .StartsWith("dotnet", StringComparison.Ordinal) == true
                 )
                 {
                     aspNetCore.SetAttributeValue(
@@ -189,9 +185,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                 }
 
                 if (
-                    DeploymentParameters.EnvironmentVariables.ContainsKey(
-                        "ASPNETCORE_MODULE_DEBUG_FILE"
-                    )
+                    DeploymentParameters.EnvironmentVariables
+                        .ContainsKey("ASPNETCORE_MODULE_DEBUG_FILE")
                 )
                 {
                     debugLogLocations.Add(
@@ -453,11 +448,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                         {
                             if (
                                 appPool.WorkerProcesses != null
-                                && appPool.WorkerProcesses.Any(
-                                    wp =>
-                                        wp.State == WorkerProcessState.Running
-                                        || wp.State == WorkerProcessState.Stopping
-                                )
+                                && appPool.WorkerProcesses
+                                    .Any(
+                                        wp =>
+                                            wp.State == WorkerProcessState.Running
+                                            || wp.State == WorkerProcessState.Stopping
+                                    )
                             )
                             {
                                 throw new InvalidOperationException(

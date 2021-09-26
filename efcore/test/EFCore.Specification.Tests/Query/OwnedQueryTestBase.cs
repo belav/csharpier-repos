@@ -181,7 +181,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<OwnedPerson>()
                         .Select(
                             p =>
-                                p.Orders.OrderBy(o => o.Id)
+                                p.Orders
+                                    .OrderBy(o => o.Id)
                                     .Select(o => o.Client.PersonAddress.Country.Name)
                                     .FirstOrDefault()
                         )
@@ -276,7 +277,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             p =>
                                 new
                                 {
-                                    Count = p.Orders.Where(
+                                    Count = p.Orders
+                                        .Where(
                                             o => o.Client.PersonAddress.Country.Planet.Star.Id != 42
                                         )
                                         .Count(),
@@ -485,8 +487,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             var expectedQuery = Fixture.GetExpectedData().Set<OwnedPerson>().OrderBy(p => p.Id);
             var expectedResult = expectedQuery.Select(
-                    q => new { Query = q, Count = expectedQuery.Count() }
-                )
+                q => new { Query = q, Count = expectedQuery.Count() }
+            )
                 .Skip(0)
                 .Take(100)
                 .ToList();
@@ -920,7 +922,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<OwnedPerson>()
                         .Where(
                             ow =>
-                                ow.Orders.Where(o => ((DateTime)o["OrderDate"]).Year == 2018)
+                                ow.Orders
+                                    .Where(o => ((DateTime)o["OrderDate"]).Year == 2018)
                                     .Count() == 1
                         )
                         .Select(c => (string)c["Name"])
@@ -1148,8 +1151,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             public virtual ISetSource GetExpectedData() => new OwnedQueryData();
 
-            public IReadOnlyDictionary<Type, object> GetEntitySorters() =>
-                new Dictionary<Type, Func<object, object>>
+            public IReadOnlyDictionary<Type, object> GetEntitySorters() => new Dictionary<
+                    Type,
+                    Func<object, object>
+                >
                 {
                     { typeof(OwnedPerson), e => ((OwnedPerson)e)?.Id },
                     { typeof(Branch), e => ((Branch)e)?.Id },
@@ -1169,8 +1174,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     { typeof(Throned), e => ((Throned)e)?.Property }
                 }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-            public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
-                new Dictionary<Type, Action<object, object>>
+            public IReadOnlyDictionary<Type, object> GetEntityAsserters() => new Dictionary<
+                    Type,
+                    Action<object, object>
+                >
                 {
                     {
                         typeof(OwnedPerson),

@@ -871,10 +871,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         osVersion = osVersion.Substring(0, index);
                     }
-                    _cachedNumericOSVersion = (double)double.Parse(
-                        osVersion,
-                        NumberFormatInfo.InvariantInfo
-                    );
+                    _cachedNumericOSVersion = (double)double
+                        .Parse(osVersion, NumberFormatInfo.InvariantInfo);
                 }
 
                 return _cachedNumericOSVersion;

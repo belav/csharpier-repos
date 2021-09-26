@@ -371,9 +371,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 options =>
                 {
                     options.SecurityTokenValidators.Clear();
-                    options.SecurityTokenValidators.Add(
-                        new DetailedInvalidTokenValidator(errorType)
-                    );
+                    options.SecurityTokenValidators
+                        .Add(new DetailedInvalidTokenValidator(errorType));
                 }
             );
 
@@ -416,14 +415,16 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 options =>
                 {
                     options.SecurityTokenValidators.Clear();
-                    options.SecurityTokenValidators.Add(
-                        new InvalidTokenValidator(typeof(SecurityTokenInvalidAudienceException))
-                    );
-                    options.SecurityTokenValidators.Add(
-                        new InvalidTokenValidator(
-                            typeof(SecurityTokenSignatureKeyNotFoundException)
-                        )
-                    );
+                    options.SecurityTokenValidators
+                        .Add(
+                            new InvalidTokenValidator(typeof(SecurityTokenInvalidAudienceException))
+                        );
+                    options.SecurityTokenValidators
+                        .Add(
+                            new InvalidTokenValidator(
+                                typeof(SecurityTokenSignatureKeyNotFoundException)
+                            )
+                        );
                 }
             );
 
@@ -568,9 +569,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                         }
                     };
                     options.SecurityTokenValidators.Clear();
-                    options.SecurityTokenValidators.Add(
-                        new BlobTokenValidator(JwtBearerDefaults.AuthenticationScheme)
-                    );
+                    options.SecurityTokenValidators
+                        .Add(new BlobTokenValidator(JwtBearerDefaults.AuthenticationScheme));
                 }
             );
 
@@ -1128,137 +1128,115 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
             Func<HttpContext, Func<Task>, Task> handlerBeforeAuth = null
         )
         {
-            var host = new HostBuilder().ConfigureWebHost(
-                    builder =>
-                        builder.UseTestServer()
-                            .Configure(
-                                app =>
+            var host = new HostBuilder()
+                .ConfigureWebHost(builder => builder.UseTestServer().Configure(
+                            app =>
+                            {
+                                if (handlerBeforeAuth != null)
                                 {
-                                    if (handlerBeforeAuth != null)
-                                    {
-                                        app.Use(handlerBeforeAuth);
-                                    }
+                                    app.Use(handlerBeforeAuth);
+                                }
 
-                                    app.UseAuthentication();
-                                    app.Use(
-                                        async (context, next) =>
+                                app.UseAuthentication();
+                                app.Use(
+                                    async (context, next) =>
+                                    {
+                                        if (
+                                            context.Request.Path
+                                            == new PathString("/checkforerrors")
+                                        )
+                                        {
+                                            var result = await context.AuthenticateAsync(
+                                                JwtBearerDefaults.AuthenticationScheme
+                                            ); // this used to be "Automatic"
+                                            if (result.Failure != null)
+                                            {
+                                                throw new Exception(
+                                                    "Failed to authenticate",
+                                                    result.Failure
+                                                );
+                                            }
+                                            return;
+                                        }
+                                        else if (context.Request.Path == new PathString("/oauth"))
                                         {
                                             if (
-                                                context.Request.Path
-                                                == new PathString("/checkforerrors")
+                                                context.User == null
+                                                || context.User.Identity == null
+                                                || !context.User.Identity.IsAuthenticated
                                             )
                                             {
-                                                var result = await context.AuthenticateAsync(
-                                                    JwtBearerDefaults.AuthenticationScheme
-                                                ); // this used to be "Automatic"
-                                                if (result.Failure != null)
-                                                {
-                                                    throw new Exception(
-                                                        "Failed to authenticate",
-                                                        result.Failure
-                                                    );
-                                                }
-                                                return;
-                                            }
-                                            else if (
-                                                context.Request.Path == new PathString("/oauth")
-                                            )
-                                            {
-                                                if (
-                                                    context.User == null
-                                                    || context.User.Identity == null
-                                                    || !context.User.Identity.IsAuthenticated
-                                                )
-                                                {
-                                                    context.Response.StatusCode = 401;
-                                                    // REVIEW: no more automatic challenge
-                                                    await context.ChallengeAsync(
-                                                        JwtBearerDefaults.AuthenticationScheme
-                                                    );
-                                                    return;
-                                                }
-
-                                                var identifier = context.User.FindFirst(
-                                                    ClaimTypes.NameIdentifier
-                                                );
-                                                if (identifier == null)
-                                                {
-                                                    context.Response.StatusCode = 500;
-                                                    return;
-                                                }
-
-                                                await context.Response.WriteAsync(identifier.Value);
-                                            }
-                                            else if (
-                                                context.Request.Path == new PathString("/token")
-                                            )
-                                            {
-                                                var token = await context.GetTokenAsync(
-                                                    "access_token"
-                                                );
-                                                await context.Response.WriteAsync(token);
-                                            }
-                                            else if (
-                                                context.Request.Path
-                                                == new PathString("/unauthorized")
-                                            )
-                                            {
-                                                // Simulate Authorization failure
-                                                var result = await context.AuthenticateAsync(
-                                                    JwtBearerDefaults.AuthenticationScheme
-                                                );
+                                                context.Response.StatusCode = 401;
+                                                // REVIEW: no more automatic challenge
                                                 await context.ChallengeAsync(
                                                     JwtBearerDefaults.AuthenticationScheme
                                                 );
+                                                return;
                                             }
-                                            else if (
-                                                context.Request.Path == new PathString("/forbidden")
-                                            )
+
+                                            var identifier = context.User
+                                                .FindFirst(ClaimTypes.NameIdentifier);
+                                            if (identifier == null)
                                             {
-                                                // Simulate Forbidden
-                                                await context.ForbidAsync(
-                                                    JwtBearerDefaults.AuthenticationScheme
-                                                );
+                                                context.Response.StatusCode = 500;
+                                                return;
                                             }
-                                            else if (
-                                                context.Request.Path == new PathString("/signIn")
-                                            )
-                                            {
-                                                await Assert.ThrowsAsync<InvalidOperationException>(
-                                                    () =>
-                                                        context.SignInAsync(
-                                                            JwtBearerDefaults.AuthenticationScheme,
-                                                            new ClaimsPrincipal()
-                                                        )
-                                                );
-                                            }
-                                            else if (
-                                                context.Request.Path == new PathString("/signOut")
-                                            )
-                                            {
-                                                await Assert.ThrowsAsync<InvalidOperationException>(
-                                                    () =>
-                                                        context.SignOutAsync(
-                                                            JwtBearerDefaults.AuthenticationScheme
-                                                        )
-                                                );
-                                            }
-                                            else
-                                            {
-                                                await next();
-                                            }
+
+                                            await context.Response.WriteAsync(identifier.Value);
                                         }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                    services.AddAuthentication(
-                                            JwtBearerDefaults.AuthenticationScheme
+                                        else if (context.Request.Path == new PathString("/token"))
+                                        {
+                                            var token = await context.GetTokenAsync("access_token");
+                                            await context.Response.WriteAsync(token);
+                                        }
+                                        else if (
+                                            context.Request.Path == new PathString("/unauthorized")
                                         )
-                                        .AddJwtBearer(options)
-                            )
-                )
+                                        {
+                                            // Simulate Authorization failure
+                                            var result = await context.AuthenticateAsync(
+                                                JwtBearerDefaults.AuthenticationScheme
+                                            );
+                                            await context.ChallengeAsync(
+                                                JwtBearerDefaults.AuthenticationScheme
+                                            );
+                                        }
+                                        else if (
+                                            context.Request.Path == new PathString("/forbidden")
+                                        )
+                                        {
+                                            // Simulate Forbidden
+                                            await context.ForbidAsync(
+                                                JwtBearerDefaults.AuthenticationScheme
+                                            );
+                                        }
+                                        else if (context.Request.Path == new PathString("/signIn"))
+                                        {
+                                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                                () =>
+                                                    context.SignInAsync(
+                                                        JwtBearerDefaults.AuthenticationScheme,
+                                                        new ClaimsPrincipal()
+                                                    )
+                                            );
+                                        }
+                                        else if (context.Request.Path == new PathString("/signOut"))
+                                        {
+                                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                                () =>
+                                                    context.SignOutAsync(
+                                                        JwtBearerDefaults.AuthenticationScheme
+                                                    )
+                                            );
+                                        }
+                                        else
+                                        {
+                                            await next();
+                                        }
+                                    }
+                                );
+                            }
+                        ).ConfigureServices(services => services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options)))
                 .Build();
 
             await host.StartAsync();

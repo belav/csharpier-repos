@@ -67,10 +67,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
 #if CODE_STYLE
             var newLineText = Environment.NewLine;
 #else
-            var newLineText = document.Project.Solution.Options.GetOption(
-                FormattingOptions.NewLine,
-                document.Project.Language
-            );
+            var newLineText = document.Project.Solution.Options
+                .GetOption(FormattingOptions.NewLine, document.Project.Language);
 #endif
             var newLineTrivia = EndOfLine(newLineText);
 
@@ -96,11 +94,12 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
 
             if (
-                !document.Project.AnalyzerOptions.TryGetEditorConfigOption<string>(
-                    CodeStyleOptions2.FileHeaderTemplate,
-                    tree,
-                    out var fileHeaderTemplate
-                ) || string.IsNullOrEmpty(fileHeaderTemplate)
+                !document.Project.AnalyzerOptions
+                    .TryGetEditorConfigOption<string>(
+                        CodeStyleOptions2.FileHeaderTemplate,
+                        tree,
+                        out var fileHeaderTemplate
+                    ) || string.IsNullOrEmpty(fileHeaderTemplate)
             )
             {
                 // This exception would show up as a gold bar, but as indicated we do not believe this is reachable.
@@ -242,11 +241,11 @@ namespace Microsoft.CodeAnalysis.FileHeaders
         )
         {
             var newTrivia = CreateNewHeader(
-                    syntaxFacts,
-                    fileHeaderHelper.CommentPrefix,
-                    expectedFileHeader,
-                    newLineTrivia.ToFullString()
-                )
+                syntaxFacts,
+                fileHeaderHelper.CommentPrefix,
+                expectedFileHeader,
+                newLineTrivia.ToFullString()
+            )
                 .Add(newLineTrivia)
                 .Add(newLineTrivia);
 
@@ -335,9 +334,9 @@ namespace Microsoft.CodeAnalysis.FileHeaders
                         return null;
 
                     return await this.GetTransformedDocumentAsync(
-                            document,
-                            context.CancellationToken
-                        )
+                        document,
+                        context.CancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             );

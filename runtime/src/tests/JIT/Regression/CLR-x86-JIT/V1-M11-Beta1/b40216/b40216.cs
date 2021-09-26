@@ -51,22 +51,24 @@ namespace Test
                     new AA().m_af1,
                     m_af,
                     (object)(
-                        new AA().Method1(
-                            new AA(),
-                            AA.Static1(0.0f, ref m_af, null, m_af, null, null),
-                            ref m_af[2],
-                            ref m_af,
-                            new AA().Method4(m_l)
-                        )
+                        new AA()
+                            .Method1(
+                                new AA(),
+                                AA.Static1(0.0f, ref m_af, null, m_af, null, null),
+                                ref m_af[2],
+                                ref m_af,
+                                new AA().Method4(m_l)
+                            )
                     ),
                     (object)(
-                        new AA().Method1(
-                            new AA(),
-                            AA.Static1(0.0f, ref m_af, m_af, m_af, null, null),
-                            ref m_af[2],
-                            ref m_af,
-                            0
-                        )
+                        new AA()
+                            .Method1(
+                                new AA(),
+                                AA.Static1(0.0f, ref m_af, m_af, m_af, null, null),
+                                ref m_af[2],
+                                ref m_af,
+                                0
+                            )
                     )
                 );
             }

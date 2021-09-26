@@ -140,11 +140,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 {
                     var state = stateSet.GetOrCreateProjectState(project.Id);
                     var result = await state.GetAnalysisDataAsync(
-                            persistentService,
-                            project,
-                            avoidLoadingData,
-                            cancellationToken
-                        )
+                        persistentService,
+                        project,
+                        avoidLoadingData,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     Contract.ThrowIfFalse(project.Id == result.ProjectId);
 

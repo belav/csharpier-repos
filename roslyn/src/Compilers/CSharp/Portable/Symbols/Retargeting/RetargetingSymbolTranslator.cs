@@ -85,10 +85,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     tupleErrorField.Name,
                     tupleErrorField.TupleElementIndex,
                     tupleErrorField.Locations.IsEmpty ? null : tupleErrorField.Locations[0],
-                    this.RetargetingTranslator.Retarget(
-                        tupleErrorField.TypeWithAnnotations,
-                        RetargetOptions.RetargetPrimitiveTypesByTypeCode
-                    ),
+                    this.RetargetingTranslator
+                        .Retarget(
+                            tupleErrorField.TypeWithAnnotations,
+                            RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                        ),
                     tupleErrorField.GetUseSiteInfo().DiagnosticInfo,
                     tupleErrorField.IsImplicitlyDeclared,
                     retargetedCorrespondingDefaultFieldOpt
@@ -227,10 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
             public NamespaceSymbol Retarget(NamespaceSymbol ns)
             {
-                return (NamespaceSymbol)this.SymbolMap.GetOrAdd(
-                    ns,
-                    _retargetingModule._createRetargetingNamespace
-                );
+                return (NamespaceSymbol)this.SymbolMap
+                    .GetOrAdd(ns, _retargetingModule._createRetargetingNamespace);
             }
 
             private NamedTypeSymbol RetargetNamedTypeDefinition(
@@ -330,19 +329,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                         if (container.IsExplicitDefinitionOfNoPiaLocalType)
                         {
                             // Types nested into local types are not supported.
-                            return (NamedTypeSymbol)this.SymbolMap.GetOrAdd(
-                                type,
-                                new UnsupportedMetadataTypeSymbol()
-                            );
+                            return (NamedTypeSymbol)this.SymbolMap
+                                .GetOrAdd(type, new UnsupportedMetadataTypeSymbol());
                         }
 
                         container = container.ContainingType;
                     }
 
-                    return (NamedTypeSymbol)this.SymbolMap.GetOrAdd(
-                        type,
-                        _retargetingModule._createRetargetingNamedType
-                    );
+                    return (NamedTypeSymbol)this.SymbolMap
+                        .GetOrAdd(type, _retargetingModule._createRetargetingNamedType);
                 }
                 else
                 {
@@ -508,9 +503,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 }
                 else
                 {
-                    string namespaceName = type.ContainingNamespace.ToDisplayString(
-                        SymbolDisplayFormat.QualifiedNameOnlyFormat
-                    );
+                    string namespaceName = type.ContainingNamespace
+                        .ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat);
                     mdName = MetadataTypeName.FromNamespaceAndTypeName(
                         namespaceName,
                         type.MetadataName,
@@ -556,18 +550,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     }
                     else
                     {
-                        string namespaceName = type.ContainingNamespace.ToDisplayString(
-                            SymbolDisplayFormat.QualifiedNameOnlyFormat
-                        );
+                        string namespaceName = type.ContainingNamespace
+                            .ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat);
                         mdName = MetadataTypeName.FromNamespaceAndTypeName(
                             namespaceName,
                             type.MetadataName,
                             forcedArity: type.Arity
                         );
-                        result1 = destination.To.LookupTopLevelMetadataType(
-                            ref mdName,
-                            digThroughForwardedTypes: true
-                        );
+                        result1 = destination.To
+                            .LookupTopLevelMetadataType(ref mdName, digThroughForwardedTypes: true);
 
                         Debug.Assert(result1.Arity == type.Arity);
                     }
@@ -641,9 +632,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 bool anythingRetargeted = !originalDefinition.Equals(newDefinition);
 
                 // retarget the arguments
-                var newArguments = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                    oldArguments.Count
-                );
+                var newArguments = ArrayBuilder<TypeWithAnnotations>
+                    .GetInstance(oldArguments.Count);
 
                 foreach (var arg in oldArguments)
                 {
@@ -735,8 +725,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     }
                 }
 
-                ImmutableArray<AssemblySymbol> assembliesToEmbedTypesFrom =
-                    this.UnderlyingModule.GetAssembliesToEmbedTypesFrom();
+                ImmutableArray<AssemblySymbol> assembliesToEmbedTypesFrom = this.UnderlyingModule
+                    .GetAssembliesToEmbedTypesFrom();
 
                 if (assembliesToEmbedTypesFrom.Length > 0)
                 {
@@ -837,10 +827,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
             public virtual TypeParameterSymbol Retarget(TypeParameterSymbol typeParameter)
             {
-                return (TypeParameterSymbol)this.SymbolMap.GetOrAdd(
-                    typeParameter,
-                    _retargetingModule._createRetargetingTypeParameter
-                );
+                return (TypeParameterSymbol)this.SymbolMap
+                    .GetOrAdd(typeParameter, _retargetingModule._createRetargetingTypeParameter);
             }
 
             public ArrayTypeSymbol Retarget(ArrayTypeSymbol type)
@@ -891,9 +879,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     {
                         if (newModifiers == null)
                         {
-                            newModifiers = ArrayBuilder<CustomModifier>.GetInstance(
-                                oldModifiers.Length
-                            );
+                            newModifiers = ArrayBuilder<CustomModifier>
+                                .GetInstance(oldModifiers.Length);
                             newModifiers.AddRange(oldModifiers, i);
                         }
 
@@ -950,12 +937,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 var paramCount = signature.ParameterCount;
                 if (paramCount > 0)
                 {
-                    var newParameterTypesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                        paramCount
-                    );
+                    var newParameterTypesBuilder = ArrayBuilder<TypeWithAnnotations>
+                        .GetInstance(paramCount);
                     var newParameterCustomModifiersBuilder = ArrayBuilder<
                         ImmutableArray<CustomModifier>
-                    >.GetInstance(paramCount);
+                    >
+                        .GetInstance(paramCount);
                     bool parametersModified = false;
 
                     foreach (var parameter in signature.Parameters)
@@ -1114,10 +1101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 Debug.Assert(ReferenceEquals(method.ContainingModule, this.UnderlyingModule));
                 Debug.Assert(ReferenceEquals(method, method.OriginalDefinition));
 
-                return (MethodSymbol)this.SymbolMap.GetOrAdd(
-                    method,
-                    _retargetingModule._createRetargetingMethod
-                );
+                return (MethodSymbol)this.SymbolMap
+                    .GetOrAdd(method, _retargetingModule._createRetargetingMethod);
             }
 
             public MethodSymbol Retarget(
@@ -1147,10 +1132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
             public FieldSymbol Retarget(FieldSymbol field)
             {
-                return (FieldSymbol)this.SymbolMap.GetOrAdd(
-                    field,
-                    _retargetingModule._createRetargetingField
-                );
+                return (FieldSymbol)this.SymbolMap
+                    .GetOrAdd(field, _retargetingModule._createRetargetingField);
             }
 
             public PropertySymbol Retarget(PropertySymbol property)
@@ -1158,10 +1141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 Debug.Assert(ReferenceEquals(property.ContainingModule, this.UnderlyingModule));
                 Debug.Assert(ReferenceEquals(property, property.OriginalDefinition));
 
-                return (PropertySymbol)this.SymbolMap.GetOrAdd(
-                    property,
-                    _retargetingModule._createRetargetingProperty
-                );
+                return (PropertySymbol)this.SymbolMap
+                    .GetOrAdd(property, _retargetingModule._createRetargetingProperty);
             }
 
             public PropertySymbol Retarget(
@@ -1200,10 +1181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     && ReferenceEquals(@event, @event.OriginalDefinition)
                 )
                 {
-                    return (EventSymbol)this.SymbolMap.GetOrAdd(
-                        @event,
-                        _retargetingModule._createRetargetingEvent
-                    );
+                    return (EventSymbol)this.SymbolMap
+                        .GetOrAdd(@event, _retargetingModule._createRetargetingEvent);
                 }
 
                 var containingType = @event.ContainingType;
@@ -1269,9 +1248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 {
                     bool modifiersHaveChanged_Ignored; //ignored
 
-                    var targetParamsBuilder = ArrayBuilder<ParameterSymbol>.GetInstance(
-                        method.Parameters.Length
-                    );
+                    var targetParamsBuilder = ArrayBuilder<ParameterSymbol>
+                        .GetInstance(method.Parameters.Length);
                     foreach (var param in method.Parameters)
                     {
                         targetParamsBuilder.Add(
@@ -1352,9 +1330,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             {
                 bool modifiersHaveChanged_Ignored; //ignored
 
-                var targetParamsBuilder = ArrayBuilder<ParameterSymbol>.GetInstance(
-                    property.Parameters.Length
-                );
+                var targetParamsBuilder = ArrayBuilder<ParameterSymbol>
+                    .GetInstance(property.Parameters.Length);
                 foreach (var param in property.Parameters)
                 {
                     targetParamsBuilder.Add(
@@ -1545,9 +1522,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
                 if (!constructorArguments.IsDefault && constructorArguments.Any())
                 {
-                    var newArguments = ArrayBuilder<TypedConstant>.GetInstance(
-                        constructorArguments.Length
-                    );
+                    var newArguments = ArrayBuilder<TypedConstant>
+                        .GetInstance(constructorArguments.Length);
 
                     foreach (TypedConstant oldArgument in constructorArguments)
                     {
@@ -1647,9 +1623,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
                 if (namedArguments.Any())
                 {
-                    var newArguments = ArrayBuilder<
-                        KeyValuePair<string, TypedConstant>
-                    >.GetInstance(namedArguments.Length);
+                    var newArguments = ArrayBuilder<KeyValuePair<string, TypedConstant>>
+                        .GetInstance(namedArguments.Length);
 
                     foreach (KeyValuePair<string, TypedConstant> oldArgument in namedArguments)
                     {

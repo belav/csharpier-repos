@@ -128,7 +128,8 @@ namespace Microsoft.AspNetCore.Components.Server
             using var memory = new MemoryStream();
             await new FormUrlEncodedContent(
                 new Dictionary<string, string> { ["circuitId"] = "1234" }
-            ).CopyToAsync(memory);
+            )
+                .CopyToAsync(memory);
             memory.Seek(0, SeekOrigin.Begin);
 
             var context = new DefaultHttpContext();
@@ -165,7 +166,8 @@ namespace Microsoft.AspNetCore.Components.Server
             using var memory = new MemoryStream();
             await new FormUrlEncodedContent(
                 new Dictionary<string, string> { ["circuitId"] = circuitId.Secret, }
-            ).CopyToAsync(memory);
+            )
+                .CopyToAsync(memory);
             memory.Seek(0, SeekOrigin.Begin);
 
             var context = new DefaultHttpContext();
@@ -206,7 +208,8 @@ namespace Microsoft.AspNetCore.Components.Server
             using var memory = new MemoryStream();
             await new FormUrlEncodedContent(
                 new Dictionary<string, string> { ["circuitId"] = circuitId.Secret, }
-            ).CopyToAsync(memory);
+            )
+                .CopyToAsync(memory);
             memory.Seek(0, SeekOrigin.Begin);
 
             var context = new DefaultHttpContext();
@@ -248,7 +251,8 @@ namespace Microsoft.AspNetCore.Components.Server
             using var memory = new MemoryStream();
             await new FormUrlEncodedContent(
                 new Dictionary<string, string> { ["circuitId"] = circuitId.Secret }
-            ).CopyToAsync(memory);
+            )
+                .CopyToAsync(memory);
             memory.Seek(0, SeekOrigin.Begin);
 
             var context = new DefaultHttpContext();

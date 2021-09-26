@@ -210,12 +210,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation
         ) =>
-            Builder.ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyAnnotationChanged(
-                Builder,
-                name,
-                annotation,
-                oldAnnotation
-            );
+            Builder.ModelBuilder.Metadata.ConventionDispatcher
+                .OnForeignKeyAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -249,11 +245,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 UpdatePrincipalKeyConfigurationSource(configurationSource.Value);
             }
 
-            return (IReadOnlyList<Property>)DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyPropertiesChanged(
-                Builder,
-                oldProperties,
-                oldPrincipalKey
-            )!;
+            return (IReadOnlyList<Property>)DeclaringEntityType.Model.ConventionDispatcher
+                .OnForeignKeyPropertiesChanged(Builder, oldProperties, oldPrincipalKey)!;
         }
 
         /// <summary>
@@ -561,8 +554,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 string? removedNavigationName = null;
                 if (pointsToPrincipal)
                 {
-                    removedNavigationName =
-                        DeclaringEntityType.Model.ConventionDispatcher.OnNavigationRemoved(
+                    removedNavigationName = DeclaringEntityType.Model.ConventionDispatcher
+                        .OnNavigationRemoved(
                             DeclaringEntityType.Builder,
                             PrincipalEntityType.Builder,
                             oldNavigation.Name,
@@ -571,8 +564,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
                 else
                 {
-                    removedNavigationName =
-                        DeclaringEntityType.Model.ConventionDispatcher.OnNavigationRemoved(
+                    removedNavigationName = DeclaringEntityType.Model.ConventionDispatcher
+                        .OnNavigationRemoved(
                             PrincipalEntityType.Builder,
                             DeclaringEntityType.Builder,
                             oldNavigation.Name,
@@ -588,10 +581,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             if (navigation != null)
             {
-                navigation =
-                    (Navigation?)DeclaringEntityType.Model.ConventionDispatcher.OnNavigationAdded(
-                        navigation.Builder
-                    )?.Metadata;
+                navigation = (Navigation?)DeclaringEntityType.Model.ConventionDispatcher
+                    .OnNavigationAdded(navigation.Builder)?.Metadata;
             }
 
             return navigation;
@@ -640,14 +631,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             )
             {
                 if (
-                    !Internal.Navigation.IsCompatible(
-                        PrincipalToDependent.Name,
-                        PrincipalToDependent.GetIdentifyingMemberInfo()!,
-                        PrincipalEntityType,
-                        DeclaringEntityType,
-                        !unique,
-                        shouldThrow: false
-                    )
+                    !Internal.Navigation
+                        .IsCompatible(
+                            PrincipalToDependent.Name,
+                            PrincipalToDependent.GetIdentifyingMemberInfo()!,
+                            PrincipalEntityType,
+                            DeclaringEntityType,
+                            !unique,
+                            shouldThrow: false
+                        )
                 )
                 {
                     throw new InvalidOperationException(
@@ -666,9 +658,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     : (ConfigurationSource?)configurationSource.Max(_isUniqueConfigurationSource);
 
             return IsUnique != oldUnique
-              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyUniquenessChanged(
-                    Builder
-                )
+              ? DeclaringEntityType.Model.ConventionDispatcher
+                .OnForeignKeyUniquenessChanged(Builder)
               : oldUnique;
         }
 
@@ -715,9 +706,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     : (ConfigurationSource?)configurationSource.Max(_isRequiredConfigurationSource);
 
             return IsRequired != oldRequired
-              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(
-                    Builder
-                )
+              ? DeclaringEntityType.Model.ConventionDispatcher
+                .OnForeignKeyRequirednessChanged(Builder)
               : oldRequired;
         }
 
@@ -787,9 +777,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     : (ConfigurationSource?)configurationSource.Max(_isRequiredConfigurationSource);
 
             return IsRequiredDependent != oldRequired
-              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(
-                    Builder
-                )
+              ? DeclaringEntityType.Model.ConventionDispatcher
+                .OnForeignKeyDependentRequirednessChanged(Builder)
               : oldRequired;
         }
 
@@ -961,7 +950,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual IEnumerable<Navigation> FindNavigationsFromInHierarchy(
             EntityType entityType
         ) =>
-            ((IReadOnlyForeignKey)this).FindNavigationsFromInHierarchy(entityType)
+            ((IReadOnlyForeignKey)this)
+                .FindNavigationsFromInHierarchy(entityType)
                 .Cast<Navigation>();
 
         /// <summary>
@@ -1043,13 +1033,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual DebugView DebugView =>
             new(
                 () =>
-                    ((IReadOnlyForeignKey)this).ToDebugString(
-                        MetadataDebugStringOptions.ShortDefault
-                    ),
+                    ((IReadOnlyForeignKey)this)
+                        .ToDebugString(MetadataDebugStringOptions.ShortDefault),
                 () =>
-                    ((IReadOnlyForeignKey)this).ToDebugString(
-                        MetadataDebugStringOptions.LongDefault
-                    )
+                    ((IReadOnlyForeignKey)this)
+                        .ToDebugString(MetadataDebugStringOptions.LongDefault)
             );
 
         /// <summary>
@@ -1086,9 +1074,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 var actualProperty = declaringEntityType.FindProperty(property.Name);
                 if (
-                    actualProperty?.DeclaringEntityType.IsAssignableFrom(
-                        property.DeclaringEntityType
-                    ) != true
+                    actualProperty?.DeclaringEntityType
+                        .IsAssignableFrom(property.DeclaringEntityType) != true
                     || !property.IsInModel
                 )
                 {
@@ -1113,10 +1100,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
 
             var duplicateForeignKey = declaringEntityType.FindForeignKeysInHierarchy(
-                    properties,
-                    principalKey,
-                    principalEntityType
-                )
+                properties,
+                principalKey,
+                principalEntityType
+            )
                 .FirstOrDefault();
             if (duplicateForeignKey != null)
             {
@@ -1164,14 +1151,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             if (
                 navigationToPrincipal != null
-                && !Internal.Navigation.IsCompatible(
-                    navigationToPrincipal.Name,
-                    navigationToPrincipal,
-                    dependentEntityType,
-                    principalEntityType,
-                    shouldBeCollection: false,
-                    shouldThrow: shouldThrow
-                )
+                && !Internal.Navigation
+                    .IsCompatible(
+                        navigationToPrincipal.Name,
+                        navigationToPrincipal,
+                        dependentEntityType,
+                        principalEntityType,
+                        shouldBeCollection: false,
+                        shouldThrow: shouldThrow
+                    )
             )
             {
                 return false;
@@ -1179,14 +1167,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             if (
                 navigationToDependent != null
-                && !Internal.Navigation.IsCompatible(
-                    navigationToDependent.Name,
-                    navigationToDependent,
-                    principalEntityType,
-                    dependentEntityType,
-                    shouldBeCollection: !unique,
-                    shouldThrow: shouldThrow
-                )
+                && !Internal.Navigation
+                    .IsCompatible(
+                        navigationToDependent.Name,
+                        navigationToDependent,
+                        principalEntityType,
+                        dependentEntityType,
+                        shouldBeCollection: !unique,
+                        shouldThrow: shouldThrow
+                    )
             )
             {
                 return false;

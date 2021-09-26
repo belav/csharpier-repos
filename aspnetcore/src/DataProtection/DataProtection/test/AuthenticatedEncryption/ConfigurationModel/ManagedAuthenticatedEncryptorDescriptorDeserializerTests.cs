@@ -46,10 +46,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                     <value>{masterKey}</value>
                   </masterKey>
                 </descriptor>";
-            var deserializedDescriptor =
-                new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
-                    XElement.Parse(xml)
-                );
+            var deserializedDescriptor = new ManagedAuthenticatedEncryptorDescriptorDeserializer()
+                .ImportFromXml(XElement.Parse(xml));
             var test = CreateEncryptorInstanceFromDescriptor(
                 deserializedDescriptor as ManagedAuthenticatedEncryptorDescriptor
             );
@@ -93,10 +91,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                     <value>{masterKey}</value>
                   </masterKey>
                 </descriptor>";
-            var deserializedDescriptor =
-                new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
-                    XElement.Parse(xml)
-                );
+            var deserializedDescriptor = new ManagedAuthenticatedEncryptorDescriptorDeserializer()
+                .ImportFromXml(XElement.Parse(xml));
             var test = CreateEncryptorInstanceFromDescriptor(
                 deserializedDescriptor as ManagedAuthenticatedEncryptorDescriptor
             );

@@ -37,9 +37,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                GetOrCreateExtension(optionsBuilder)
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(GetOrCreateExtension(optionsBuilder));
 
             ConfigureWarnings(optionsBuilder);
 
@@ -66,9 +65,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var extension = (SqlServerOptionsExtension)GetOrCreateExtension(optionsBuilder)
                 .WithConnectionString(connectionString);
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension);
 
             ConfigureWarnings(optionsBuilder);
 
@@ -100,9 +98,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var extension = (SqlServerOptionsExtension)GetOrCreateExtension(optionsBuilder)
                 .WithConnection(connection);
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension);
 
             ConfigureWarnings(optionsBuilder);
 
@@ -190,18 +187,18 @@ namespace Microsoft.EntityFrameworkCore
                 ?? new CoreOptionsExtension();
 
             coreOptionsExtension = RelationalOptionsExtension.WithDefaultWarningConfiguration(
-                    coreOptionsExtension
-                )
+                coreOptionsExtension
+            )
                 .WithWarningsConfiguration(
-                    coreOptionsExtension.WarningsConfiguration.TryWithExplicit(
-                        SqlServerEventId.ConflictingValueGenerationStrategiesWarning,
-                        WarningBehavior.Throw
-                    )
+                    coreOptionsExtension.WarningsConfiguration
+                        .TryWithExplicit(
+                            SqlServerEventId.ConflictingValueGenerationStrategiesWarning,
+                            WarningBehavior.Throw
+                        )
                 );
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                coreOptionsExtension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(coreOptionsExtension);
         }
     }
 }

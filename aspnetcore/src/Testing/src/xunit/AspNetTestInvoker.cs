@@ -112,7 +112,8 @@ namespace Microsoft.AspNetCore.Testing
             }
 
             foreach (
-                var attribute in testClass.Assembly.GetCustomAttributes(inherit: true)
+                var attribute in testClass.Assembly
+                    .GetCustomAttributes(inherit: true)
                     .OfType<ITestMethodLifecycle>()
             )
             {

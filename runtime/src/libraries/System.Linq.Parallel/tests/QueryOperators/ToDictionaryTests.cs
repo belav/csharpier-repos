@@ -310,20 +310,15 @@ namespace System.Linq.Parallel.Tests
         {
             _ = count;
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToDictionary(
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToDictionary(
                         (Func<int, int>)(
                             x =>
                             {
                                 throw new DeliberateTestException();
                             }
                         )
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToDictionary(
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToDictionary(
                         (Func<int, int>)(
                             x =>
                             {
@@ -331,11 +326,8 @@ namespace System.Linq.Parallel.Tests
                             }
                         ),
                         y => y
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToDictionary(
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToDictionary(
                         x => x,
                         (Func<int, int>)(
                             y =>
@@ -343,12 +335,9 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToDictionary(
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToDictionary(
                         (Func<int, int>)(
                             x =>
                             {
@@ -356,11 +345,8 @@ namespace System.Linq.Parallel.Tests
                             }
                         ),
                         EqualityComparer<int>.Default
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToDictionary(
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToDictionary(
                         (Func<int, int>)(
                             x =>
                             {
@@ -369,11 +355,8 @@ namespace System.Linq.Parallel.Tests
                         ),
                         y => y,
                         EqualityComparer<int>.Default
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToDictionary(
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToDictionary(
                         x => x,
                         (Func<int, int>)(
                             y =>
@@ -382,8 +365,7 @@ namespace System.Linq.Parallel.Tests
                             }
                         ),
                         EqualityComparer<int>.Default
-                    )
-            );
+                    ));
 
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => labeled.Item.ToDictionary(x => x, new FailingEqualityComparer<int>())
@@ -411,11 +393,8 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
                 () =>
-                    ((ParallelQuery<int>)null).ToDictionary(
-                        x => x,
-                        y => y,
-                        EqualityComparer<int>.Default
-                    )
+                    ((ParallelQuery<int>)null)
+                        .ToDictionary(x => x, y => y, EqualityComparer<int>.Default)
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "keySelector",

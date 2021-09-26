@@ -196,7 +196,8 @@ class C
             comp.VerifyDiagnostics(
                 // (16,21): error CS1996: Cannot await in the body of a lock statement
                 //                     await Task.Yield();
-                Diagnostic(ErrorCode.ERR_BadAwaitInLock, "await Task.Yield()").WithLocation(16, 21)
+                Diagnostic(ErrorCode.ERR_BadAwaitInLock, "await Task.Yield()")
+                    .WithLocation(16, 21)
             );
         }
 
@@ -475,9 +476,9 @@ class C
 
             var newTree = SyntaxFactory.ParseSyntaxTree(text + " ", options: TestOptions.Regular9);
             var mMethod = (MethodDeclarationSyntax)newTree.FindNodeOrTokenByKind(
-                    SyntaxKind.MethodDeclaration,
-                    occurrence: 1
-                )
+                SyntaxKind.MethodDeclaration,
+                occurrence: 1
+            )
                 .AsNode();
 
             Assert.True(
@@ -678,9 +679,9 @@ class C
             var model = comp.GetSemanticModel(tree);
 
             var arg1 = (AttributeArgumentSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AttributeArgument,
-                    occurrence: 1
-                )
+                SyntaxKind.AttributeArgument,
+                occurrence: 1
+            )
                 .AsNode();
             Assert.Equal(
                 "System.String s1",
@@ -692,9 +693,9 @@ class C
             );
 
             var arg2 = (AttributeArgumentSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AttributeArgument,
-                    occurrence: 2
-                )
+                SyntaxKind.AttributeArgument,
+                occurrence: 2
+            )
                 .AsNode();
             Assert.Null(model.GetSymbolInfo(arg2.Expression).Symbol);
             Assert.Equal(
@@ -703,9 +704,9 @@ class C
             );
 
             var arg3 = (AttributeArgumentSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AttributeArgument,
-                    occurrence: 3
-                )
+                SyntaxKind.AttributeArgument,
+                occurrence: 3
+            )
                 .AsNode();
             Assert.Equal(
                 "System.String s2",
@@ -747,7 +748,8 @@ class C
             comp.VerifyDiagnostics(
                 // (13,12): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //         [A(42 is int i)] // 1
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "42 is int i").WithLocation(13, 12),
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "42 is int i")
+                    .WithLocation(13, 12),
                 // (16,17): error CS0103: The name 'i' does not exist in the current context
                 //             _ = i.ToString(); // 2
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "i")
@@ -764,9 +766,9 @@ class C
             var model = comp.GetSemanticModel(tree);
 
             var arg = (AttributeArgumentSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AttributeArgument,
-                    occurrence: 1
-                )
+                SyntaxKind.AttributeArgument,
+                occurrence: 1
+            )
                 .AsNode();
             Assert.Null(model.GetSymbolInfo(arg.Expression).Symbol);
             Assert.Equal(
@@ -775,9 +777,9 @@ class C
             );
 
             var decl = (DeclarationPatternSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.DeclarationPattern,
-                    occurrence: 1
-                )
+                SyntaxKind.DeclarationPattern,
+                occurrence: 1
+            )
                 .AsNode();
             Assert.Equal(
                 "System.Int32 i",
@@ -839,9 +841,9 @@ class C
             var model = comp.GetSemanticModel(tree);
 
             var arg = (AttributeArgumentSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AttributeArgument,
-                    occurrence: 1
-                )
+                SyntaxKind.AttributeArgument,
+                occurrence: 1
+            )
                 .AsNode();
             Assert.Equal(
                 "System.Boolean C.M2(out System.Int32 x)",
@@ -853,9 +855,9 @@ class C
             );
 
             var decl = (DeclarationExpressionSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.DeclarationExpression,
-                    occurrence: 1
-                )
+                SyntaxKind.DeclarationExpression,
+                occurrence: 1
+            )
                 .AsNode();
             Assert.Equal(
                 "System.Int32 i",
@@ -1471,7 +1473,8 @@ class C
                     .WithLocation(39, 18),
                 // (40,18): error CS7042: The DllImport attribute cannot be applied to a method that is generic or contained in a generic method or type.
                 //                 [DllImport("a")] extern static void local2<T2>(); // 8
-                Diagnostic(ErrorCode.ERR_DllImportOnGenericMethod, "DllImport").WithLocation(40, 18)
+                Diagnostic(ErrorCode.ERR_DllImportOnGenericMethod, "DllImport")
+                    .WithLocation(40, 18)
             );
         }
 
@@ -1581,7 +1584,8 @@ class C{classTypeParams}
                     .WithLocation(41, 22),
                 // (42,22): error CS7042: The DllImport attribute cannot be applied to a method that is generic or contained in a generic method or type.
                 //                     [DllImport("a")] extern static void local2<T2>(); // 12
-                Diagnostic(ErrorCode.ERR_DllImportOnGenericMethod, "DllImport").WithLocation(42, 22)
+                Diagnostic(ErrorCode.ERR_DllImportOnGenericMethod, "DllImport")
+                    .WithLocation(42, 22)
             );
         }
 
@@ -1857,9 +1861,9 @@ class C
                 // (11,9): error CS0311: The type 'object' cannot be used as type parameter 'U' in the generic type or method 'Local<T, U>(T)'. There is no implicit reference conversion from 'object' to 't'.
                 //         Local<object, object>(null);
                 Diagnostic(
-                        ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
-                        "Local<object, object>"
-                    )
+                    ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                    "Local<object, object>"
+                )
                     .WithArguments("Local<T, U>(T)", "t", "U", "object")
                     .WithLocation(11, 9)
             );
@@ -2088,7 +2092,8 @@ class C
             Assert.True(attrs[1].AttributeClass.IsErrorType());
             Assert.False(attrs[2].AttributeClass.IsErrorType());
             Assert.Equal(
-                comp.GlobalNamespace.GetMember<NamespaceSymbol>("System")
+                comp.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMember<NamedTypeSymbol>("CLSCompliantAttribute"),
                 attrs[2].AttributeClass
             );
@@ -2164,7 +2169,8 @@ class C
                 .OfType<IdentifierNameSyntax>()
                 .Where(id => id.Identifier.ValueText == "CLSCompliant")
                 .Single();
-            var clsCompliantSymbol = comp.GlobalNamespace.GetMember<INamespaceSymbol>("System")
+            var clsCompliantSymbol = comp.GlobalNamespace
+                .GetMember<INamespaceSymbol>("System")
                 .GetTypeMember("CLSCompliantAttribute");
 
             Assert.Null(model.GetDeclaredSymbol(clsCompliant));
@@ -2188,9 +2194,9 @@ class C
             Assert.Equal(
                 clsCompliantSymbol,
                 model.LookupNamespacesAndTypes(
-                        clsCompliant.SpanStart,
-                        name: "CLSCompliantAttribute"
-                    )
+                    clsCompliant.SpanStart,
+                    name: "CLSCompliantAttribute"
+                )
                     .Single()
             );
             ((CSharpCompilation)comp).DeclarationDiagnostics.Verify();
@@ -2264,7 +2270,8 @@ class C
                 .OfType<IdentifierNameSyntax>()
                 .Where(id => id.Identifier.ValueText == "CLSCompliant")
                 .Single();
-            var clsCompliantSymbol = comp.GlobalNamespace.GetMember<INamespaceSymbol>("System")
+            var clsCompliantSymbol = comp.GlobalNamespace
+                .GetMember<INamespaceSymbol>("System")
                 .GetTypeMember("CLSCompliantAttribute");
 
             Assert.Null(model.GetDeclaredSymbol(clsCompliant));
@@ -2288,9 +2295,9 @@ class C
             Assert.Equal(
                 clsCompliantSymbol,
                 model.LookupNamespacesAndTypes(
-                        clsCompliant.SpanStart,
-                        name: "CLSCompliantAttribute"
-                    )
+                    clsCompliant.SpanStart,
+                    name: "CLSCompliantAttribute"
+                )
                     .Single()
             );
             ((CSharpCompilation)comp).DeclarationDiagnostics.Verify();
@@ -2367,7 +2374,8 @@ class C
             Assert.True(attrs[1].AttributeClass.IsErrorType());
             Assert.False(attrs[2].AttributeClass.IsErrorType());
             Assert.Equal(
-                comp.GlobalNamespace.GetMember<NamespaceSymbol>("System")
+                comp.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMember<NamedTypeSymbol>("CLSCompliantAttribute"),
                 attrs[2].AttributeClass
             );
@@ -2439,7 +2447,8 @@ class C
             param = localSymbol.Parameters[1];
             attrs = param.GetAttributes();
             Assert.Equal(
-                comp.GlobalNamespace.GetMember<NamespaceSymbol>("System")
+                comp.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMember<NamedTypeSymbol>("CLSCompliantAttribute"),
                 attrs[0].AttributeClass
             );
@@ -2533,17 +2542,17 @@ class C
                 // (10,10): error CS4030: Security attribute 'SecurityCritical' cannot be applied to an Async method.
                 //         [SecurityCritical] // 1
                 Diagnostic(
-                        ErrorCode.ERR_SecurityCriticalOrSecuritySafeCriticalOnAsync,
-                        "SecurityCritical"
-                    )
+                    ErrorCode.ERR_SecurityCriticalOrSecuritySafeCriticalOnAsync,
+                    "SecurityCritical"
+                )
                     .WithArguments("SecurityCritical")
                     .WithLocation(10, 10),
                 // (11,10): error CS4030: Security attribute 'SecuritySafeCriticalAttribute' cannot be applied to an Async method.
                 //         [SecuritySafeCriticalAttribute] // 2
                 Diagnostic(
-                        ErrorCode.ERR_SecurityCriticalOrSecuritySafeCriticalOnAsync,
-                        "SecuritySafeCriticalAttribute"
-                    )
+                    ErrorCode.ERR_SecurityCriticalOrSecuritySafeCriticalOnAsync,
+                    "SecuritySafeCriticalAttribute"
+                )
                     .WithArguments("SecuritySafeCriticalAttribute")
                     .WithLocation(11, 10),
                 // (12,20): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
@@ -2891,36 +2900,35 @@ class C
             })();
     }
 }";
-            CreateCompilation(src, options: TestOptions.UnsafeDebugDll)
-                .VerifyDiagnostics(
-                    // (8,37): error CS1637: Iterators cannot have unsafe parameters or yield types
-                    //         IEnumerable<int> Local(int* a) { yield break; }
-                    Diagnostic(ErrorCode.ERR_UnsafeIteratorArgType, "a").WithLocation(8, 37),
-                    // (17,41): error CS1637: Iterators cannot have unsafe parameters or yield types
-                    //             IEnumerable<int> Local(int* x) { yield break; }
-                    Diagnostic(ErrorCode.ERR_UnsafeIteratorArgType, "x").WithLocation(17, 41),
-                    // (27,37): error CS1637: Iterators cannot have unsafe parameters or yield types
-                    //         IEnumerable<int> Local(int* a) { yield break; }
-                    Diagnostic(ErrorCode.ERR_UnsafeIteratorArgType, "a").WithLocation(27, 37),
-                    // (33,44): error CS1637: Iterators cannot have unsafe parameters or yield types
-                    //     public unsafe IEnumerable<int> M4(int* a)
-                    Diagnostic(ErrorCode.ERR_UnsafeIteratorArgType, "a").WithLocation(33, 44),
-                    // (33,36): error CS1629: Unsafe code may not appear in iterators
-                    //     public unsafe IEnumerable<int> M4(int* a)
-                    Diagnostic(ErrorCode.ERR_IllegalInnerUnsafe, "M4").WithLocation(33, 36),
-                    // (37,40): error CS1629: Unsafe code may not appear in iterators
-                    //                 IEnumerable<int> Local(int* b) { yield break; }
-                    Diagnostic(ErrorCode.ERR_IllegalInnerUnsafe, "int*").WithLocation(37, 40),
-                    // (39,23): error CS1629: Unsafe code may not appear in iterators
-                    //                 Local(&x);
-                    Diagnostic(ErrorCode.ERR_IllegalInnerUnsafe, "&x").WithLocation(39, 23),
-                    // (39,17): error CS1629: Unsafe code may not appear in iterators
-                    //                 Local(&x);
-                    Diagnostic(ErrorCode.ERR_IllegalInnerUnsafe, "Local(&x)").WithLocation(39, 17),
-                    // (37,45): error CS1637: Iterators cannot have unsafe parameters or yield types
-                    //                 IEnumerable<int> Local(int* b) { yield break; }
-                    Diagnostic(ErrorCode.ERR_UnsafeIteratorArgType, "b").WithLocation(37, 45)
-                );
+            CreateCompilation(src, options: TestOptions.UnsafeDebugDll).VerifyDiagnostics(
+                // (8,37): error CS1637: Iterators cannot have unsafe parameters or yield types
+                //         IEnumerable<int> Local(int* a) { yield break; }
+                Diagnostic(ErrorCode.ERR_UnsafeIteratorArgType, "a").WithLocation(8, 37),
+                // (17,41): error CS1637: Iterators cannot have unsafe parameters or yield types
+                //             IEnumerable<int> Local(int* x) { yield break; }
+                Diagnostic(ErrorCode.ERR_UnsafeIteratorArgType, "x").WithLocation(17, 41),
+                // (27,37): error CS1637: Iterators cannot have unsafe parameters or yield types
+                //         IEnumerable<int> Local(int* a) { yield break; }
+                Diagnostic(ErrorCode.ERR_UnsafeIteratorArgType, "a").WithLocation(27, 37),
+                // (33,44): error CS1637: Iterators cannot have unsafe parameters or yield types
+                //     public unsafe IEnumerable<int> M4(int* a)
+                Diagnostic(ErrorCode.ERR_UnsafeIteratorArgType, "a").WithLocation(33, 44),
+                // (33,36): error CS1629: Unsafe code may not appear in iterators
+                //     public unsafe IEnumerable<int> M4(int* a)
+                Diagnostic(ErrorCode.ERR_IllegalInnerUnsafe, "M4").WithLocation(33, 36),
+                // (37,40): error CS1629: Unsafe code may not appear in iterators
+                //                 IEnumerable<int> Local(int* b) { yield break; }
+                Diagnostic(ErrorCode.ERR_IllegalInnerUnsafe, "int*").WithLocation(37, 40),
+                // (39,23): error CS1629: Unsafe code may not appear in iterators
+                //                 Local(&x);
+                Diagnostic(ErrorCode.ERR_IllegalInnerUnsafe, "&x").WithLocation(39, 23),
+                // (39,17): error CS1629: Unsafe code may not appear in iterators
+                //                 Local(&x);
+                Diagnostic(ErrorCode.ERR_IllegalInnerUnsafe, "Local(&x)").WithLocation(39, 17),
+                // (37,45): error CS1637: Iterators cannot have unsafe parameters or yield types
+                //                 IEnumerable<int> Local(int* b) { yield break; }
+                Diagnostic(ErrorCode.ERR_UnsafeIteratorArgType, "b").WithLocation(37, 45)
+            );
         }
 
         [Fact]
@@ -3209,9 +3217,9 @@ class Program
                     // (9,32): error CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type 'string' to type 'int'
                     //         void CallerMemberName([CallerMemberName] int s = 2) // 1
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithArguments("string", "int")
                         .WithLocation(9, 32),
                     // (13,9): error CS0029: Cannot implicitly convert type 'string' to 'int'
@@ -3434,14 +3442,13 @@ class Program
                 // (8,40): error CS0834: A lambda expression with a statement body cannot be converted to an expression tree
                 //         Expression<Func<int, int>> f = x =>
                 Diagnostic(
-                        ErrorCode.ERR_StatementLambdaToExpressionTree,
-                        @"x =>
+                    ErrorCode.ERR_StatementLambdaToExpressionTree,
+                    @"x =>
         {
             int Local(int y) => y;
             return Local(x);
         }"
-                    )
-                    .WithLocation(8, 40),
+                ).WithLocation(8, 40),
                 // (11,20): error CS8096: An expression tree may not contain a local function or a reference to a local function
                 //             return Local(x);
                 Diagnostic(ErrorCode.ERR_ExpressionTreeContainsLocalFunction, "Local(x)")
@@ -3794,7 +3801,9 @@ class Program
                 source,
                 // (8,14): error CS0159: No such label 'A' within the scope of the goto statement
                 //         goto A;
-                Diagnostic(ErrorCode.ERR_LabelNotFound, "A").WithArguments("A").WithLocation(8, 14),
+                Diagnostic(ErrorCode.ERR_LabelNotFound, "A")
+                    .WithArguments("A")
+                    .WithLocation(8, 14),
                 // (11,9): warning CS0164: This label has not been referenced
                 //         A:  Console.Write(2);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "A").WithLocation(11, 9)
@@ -4548,9 +4557,9 @@ class Program
                 // (6,27): error CS8179: Predefined type 'System.ValueTuple`2' is not defined or imported
                 //         Program operator +(Program left, Program right)
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
-                        "(Program left, Program right)"
-                    )
+                    ErrorCode.ERR_PredefinedValueTupleTypeNotFound,
+                    "(Program left, Program right)"
+                )
                     .WithArguments("System.ValueTuple`2")
                     .WithLocation(6, 27),
                 // (8,13): error CS0127: Since 'Program.Main(string[])' returns void, a return keyword must not be followed by an object expression
@@ -4652,10 +4661,10 @@ class Program
 ";
             var option = TestOptions.ReleaseExe;
             CreateCompilation(
-                    source,
-                    options: option,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
-                )
+                source,
+                options: option,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+            )
                 .VerifyDiagnostics(
                     // (6,14): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
                     //         void Local() { }
@@ -5343,9 +5352,9 @@ namespace System
                 // (8,30): error CS1736: Default parameter value for 'b' must be a compile-time constant
                 //         void Local3(bool b = M(M((int z3, int a2) = (1, 2)), z3), int a3 = z3) {}
                 Diagnostic(
-                        ErrorCode.ERR_DefaultValueMustBeConstant,
-                        "M(M((int z3, int a2) = (1, 2)), z3)"
-                    )
+                    ErrorCode.ERR_DefaultValueMustBeConstant,
+                    "M(M((int z3, int a2) = (1, 2)), z3)"
+                )
                     .WithArguments("b")
                     .WithLocation(8, 30),
                 // (8,76): error CS0103: The name 'z3' does not exist in the current context
@@ -5380,9 +5389,9 @@ namespace System
                 // (12,30): error CS1736: Default parameter value for 'b' must be a compile-time constant
                 //         void Local6(bool b = M(M((var z6, int a2) = (1, 2)), z6), int a3 = z6) {}
                 Diagnostic(
-                        ErrorCode.ERR_DefaultValueMustBeConstant,
-                        "M(M((var z6, int a2) = (1, 2)), z6)"
-                    )
+                    ErrorCode.ERR_DefaultValueMustBeConstant,
+                    "M(M((var z6, int a2) = (1, 2)), z6)"
+                )
                     .WithArguments("b")
                     .WithLocation(12, 30),
                 // (12,76): error CS0103: The name 'z6' does not exist in the current context
@@ -5870,9 +5879,9 @@ class C
                 // (8,35): error CS8322: Cannot pass argument with dynamic type to generic local function 'L' with inferred type arguments.
                 //             => await L(async m => L(async d => await d, m), p);
                 Diagnostic(
-                        ErrorCode.ERR_DynamicLocalFunctionTypeParameter,
-                        "L(async d => await d, m)"
-                    )
+                    ErrorCode.ERR_DynamicLocalFunctionTypeParameter,
+                    "L(async d => await d, m)"
+                )
                     .WithArguments("L")
                     .WithLocation(8, 35),
                 // (8,32): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
@@ -5982,8 +5991,8 @@ class C<T>
             var model = comp.GetSemanticModel(tree);
 
             var localDecl = (LocalFunctionStatementSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.LocalFunctionStatement
-                )
+                SyntaxKind.LocalFunctionStatement
+            )
                 .AsNode();
 
             var typeParameters = localDecl.TypeParameterList.Parameters;
@@ -6029,10 +6038,10 @@ void Method()
     }
 }";
             CreateSubmission(
-                    source,
-                    new[] { ScriptTestFixtures.HostRef },
-                    hostObjectType: typeof(ScriptGlobals)
-                )
+                source,
+                new[] { ScriptTestFixtures.HostRef },
+                hostObjectType: typeof(ScriptGlobals)
+            )
                 .VerifyEmitDiagnostics();
         }
 
@@ -6053,10 +6062,10 @@ var lambda = new System.Action(() =>
     }
 });";
             CreateSubmission(
-                    source,
-                    new[] { ScriptTestFixtures.HostRef },
-                    hostObjectType: typeof(ScriptGlobals)
-                )
+                source,
+                new[] { ScriptTestFixtures.HostRef },
+                hostObjectType: typeof(ScriptGlobals)
+            )
                 .VerifyEmitDiagnostics();
         }
 
@@ -7157,7 +7166,8 @@ class C
             comp.VerifyDiagnostics(
                 // (10,13): warning CS8602: Dereference of a possibly null reference.
                 //         _ = local1(null).ToString(); // 1
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "local1(null)").WithLocation(10, 13)
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "local1(null)")
+                    .WithLocation(10, 13)
             );
         }
 
@@ -8049,9 +8059,8 @@ class C
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: m =>
                 {
-                    var method = (MethodSymbol)m.GlobalNamespace.GetMember(
-                        "Program.<M>g__local|0_0"
-                    );
+                    var method = (MethodSymbol)m.GlobalNamespace
+                        .GetMember("Program.<M>g__local|0_0");
                     Assert.True(method.IsStatic);
                 }
             );
@@ -8081,9 +8090,8 @@ class C
                 expectedOutput: "System.Int32",
                 symbolValidator: m =>
                 {
-                    var method = (MethodSymbol)m.GlobalNamespace.GetMember(
-                        "Program.<M>g__local|0_0"
-                    );
+                    var method = (MethodSymbol)m.GlobalNamespace
+                        .GetMember("Program.<M>g__local|0_0");
                     Assert.True(method.IsStatic);
                     Assert.True(method.IsGenericMethod);
                     Assert.Equal(
@@ -8121,9 +8129,8 @@ class C
                 expectedOutput: "System.Int32",
                 symbolValidator: m =>
                 {
-                    var method = (MethodSymbol)m.GlobalNamespace.GetMember(
-                        "Program.<M>g__local|0_0"
-                    );
+                    var method = (MethodSymbol)m.GlobalNamespace
+                        .GetMember("Program.<M>g__local|0_0");
                     Assert.True(method.IsStatic);
                     Assert.True(method.IsGenericMethod);
                     Assert.Equal(

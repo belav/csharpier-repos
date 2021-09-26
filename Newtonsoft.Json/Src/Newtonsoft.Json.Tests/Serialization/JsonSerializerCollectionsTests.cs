@@ -479,10 +479,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             [OnDeserialized]
             internal void OnDeserializedMethod(StreamingContext context)
             {
-                ((IDictionary)this).Add(
-                    "key2",
-                    new List<SomeObject> { new SomeObject { Text1 = "value2" } }
-                );
+                ((IDictionary)this)
+                    .Add("key2", new List<SomeObject> { new SomeObject { Text1 = "value2" } });
             }
         }
 

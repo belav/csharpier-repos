@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 m =>
                 {
                     {
-                        var actualMembers = m.GlobalNamespace.GetMember<NamespaceSymbol>("Test")
+                        var actualMembers = m.GlobalNamespace
+                            .GetMember<NamespaceSymbol>("Test")
                             .GetMember<NamedTypeSymbol>("voidDelegate")
                             .GetMembers()
                             .ToArray();
@@ -147,11 +148,11 @@ namespace WinRTDelegateLibrary
             var coreRefs45 = new[] { MscorlibRef_v4_0_30316_17626, SystemCoreRef_v4_0_30319_17929 };
 
             var winRtDelegateLibrary = CreateEmptyCompilation(
-                    winRtDelegateLibrarySrc,
-                    references: coreRefs45,
-                    options: TestOptions.ReleaseWinMD.WithAllowUnsafe(true),
-                    assemblyName: "WinRTDelegateLibrary"
-                )
+                winRtDelegateLibrarySrc,
+                references: coreRefs45,
+                options: TestOptions.ReleaseWinMD.WithAllowUnsafe(true),
+                assemblyName: "WinRTDelegateLibrary"
+            )
                 .EmitToImageReference();
 
             var nonWinRtLibrarySrc = winRtDelegateLibrarySrc.Replace(
@@ -160,11 +161,11 @@ namespace WinRTDelegateLibrary
             );
 
             var nonWinRtDelegateLibrary = CreateEmptyCompilation(
-                    nonWinRtLibrarySrc,
-                    references: coreRefs45,
-                    options: TestOptions.UnsafeReleaseDll,
-                    assemblyName: "NonWinRTDelegateLibrary"
-                )
+                nonWinRtLibrarySrc,
+                references: coreRefs45,
+                options: TestOptions.UnsafeReleaseDll,
+                assemblyName: "NonWinRTDelegateLibrary"
+            )
                 .EmitToImageReference();
 
             var allDelegates =

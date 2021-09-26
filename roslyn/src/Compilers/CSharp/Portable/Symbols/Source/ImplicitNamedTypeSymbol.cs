@@ -61,9 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
             IsScriptClass
                 ? null
-                : this.DeclaringCompilation.GetSpecialType(
-                      Microsoft.CodeAnalysis.SpecialType.System_Object
-                  );
+                : this.DeclaringCompilation
+                  .GetSpecialType(Microsoft.CodeAnalysis.SpecialType.System_Object);
 
         protected override void CheckBase(BindingDiagnosticBag diagnostics)
         {

@@ -107,9 +107,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
 
             AssertTrimmedEqual(
                 serializedPreferences.Replace(
-                        "SerializationVersion=\"4\"",
-                        "SerializationVersion=\"5\""
-                    )
+                    "SerializationVersion=\"4\"",
+                    "SerializationVersion=\"5\""
+                )
                     .Replace(
                         "<SymbolKind>Method</SymbolKind>",
                         "<MethodKind>Ordinary</MethodKind>"

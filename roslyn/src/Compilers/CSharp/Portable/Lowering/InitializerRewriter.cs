@@ -46,9 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(!boundInitializers.IsDefault);
 
-            var boundStatements = ArrayBuilder<BoundStatement>.GetInstance(
-                boundInitializers.Length
-            );
+            var boundStatements = ArrayBuilder<BoundStatement>
+                .GetInstance(boundInitializers.Length);
             var submissionResultType = method.ResultType;
             var hasSubmissionResultType = (object)submissionResultType != null;
             BoundStatement lastStatement = null;

@@ -49,9 +49,9 @@ namespace Castle.DynamicProxy.Tests
 
             proxy.RegisterType<object, string>();
 
-            var expectedMethod =
-                typeof(IInterfaceWithGenericMethodWithDependentConstraint).GetMethod("RegisterType")
-                    .MakeGenericMethod(typeof(object), typeof(string));
+            var expectedMethod = typeof(IInterfaceWithGenericMethodWithDependentConstraint)
+                .GetMethod("RegisterType")
+                .MakeGenericMethod(typeof(object), typeof(string));
 
             Assert.AreEqual(expectedMethod, interceptor.Invocation.Method);
         }
@@ -72,9 +72,8 @@ namespace Castle.DynamicProxy.Tests
             proxy.RegisterType<string>();
 
             var expectedMethod =
-                typeof(IGenericInterfaceWithGenericMethodWithDependentConstraint<object>).GetMethod(
-                        "RegisterType"
-                    )
+                typeof(IGenericInterfaceWithGenericMethodWithDependentConstraint<object>)
+                    .GetMethod("RegisterType")
                     .MakeGenericMethod(typeof(string));
 
             Assert.AreEqual(expectedMethod, interceptor.Invocation.Method);

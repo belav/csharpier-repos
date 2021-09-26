@@ -1343,10 +1343,8 @@ namespace System.ComponentModel.Composition
             {
                 var catalog = (ICompositionElement)new DerivedAssemblyCatalog(e);
 
-                string expected = string.Format(
-                    "DerivedAssemblyCatalog (Assembly=\"{0}\")",
-                    e.FullName
-                );
+                string expected = string
+                    .Format("DerivedAssemblyCatalog (Assembly=\"{0}\")", e.FullName);
 
                 Assert.Equal(expected, catalog.DisplayName);
             }

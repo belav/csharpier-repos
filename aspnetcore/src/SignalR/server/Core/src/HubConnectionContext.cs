@@ -77,10 +77,8 @@ namespace Microsoft.AspNetCore.SignalR
             _connectionContext = connectionContext;
             _logger = loggerFactory.CreateLogger<HubConnectionContext>();
             ConnectionAborted = _connectionAbortedTokenSource.Token;
-            _closedRegistration = connectionContext.ConnectionClosed.Register(
-                (state) => ((HubConnectionContext)state!).Abort(),
-                this
-            );
+            _closedRegistration = connectionContext.ConnectionClosed
+                .Register((state) => ((HubConnectionContext)state!).Abort(), this);
 
             HubCallerContext = new DefaultHubCallerContext(this);
 
@@ -458,9 +456,8 @@ namespace Microsoft.AspNetCore.SignalR
             {
                 if (message.Error == null)
                 {
-                    _connectionContext.Transport.Output.Write(
-                        HandshakeProtocol.GetSuccessfulHandshake(Protocol)
-                    );
+                    _connectionContext.Transport.Output
+                        .Write(HandshakeProtocol.GetSuccessfulHandshake(Protocol));
                 }
                 else
                 {

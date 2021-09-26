@@ -34,18 +34,14 @@ namespace System.Net.Http
         /// </summary>
         private const int Expect100ErrorSendThreshold = 1024;
 
-        private static readonly byte[] s_contentLength0NewlineAsciiBytes = Encoding.ASCII.GetBytes(
-            "Content-Length: 0\r\n"
-        );
-        private static readonly byte[] s_spaceHttp10NewlineAsciiBytes = Encoding.ASCII.GetBytes(
-            " HTTP/1.0\r\n"
-        );
-        private static readonly byte[] s_spaceHttp11NewlineAsciiBytes = Encoding.ASCII.GetBytes(
-            " HTTP/1.1\r\n"
-        );
-        private static readonly byte[] s_httpSchemeAndDelimiter = Encoding.ASCII.GetBytes(
-            Uri.UriSchemeHttp + Uri.SchemeDelimiter
-        );
+        private static readonly byte[] s_contentLength0NewlineAsciiBytes = Encoding.ASCII
+            .GetBytes("Content-Length: 0\r\n");
+        private static readonly byte[] s_spaceHttp10NewlineAsciiBytes = Encoding.ASCII
+            .GetBytes(" HTTP/1.0\r\n");
+        private static readonly byte[] s_spaceHttp11NewlineAsciiBytes = Encoding.ASCII
+            .GetBytes(" HTTP/1.1\r\n");
+        private static readonly byte[] s_httpSchemeAndDelimiter = Encoding.ASCII
+            .GetBytes(Uri.UriSchemeHttp + Uri.SchemeDelimiter);
         private static readonly byte[] s_http1DotBytes = Encoding.ASCII.GetBytes("HTTP/1.");
         private static readonly ulong s_http10Bytes = BitConverter.ToUInt64(
             Encoding.ASCII.GetBytes("HTTP/1.0")
@@ -282,9 +278,9 @@ namespace System.Net.Http
                     if (header.Key.KnownHeader != null)
                     {
                         await WriteBytesAsync(
-                                header.Key.KnownHeader.AsciiBytesWithColonSpace,
-                                async
-                            )
+                            header.Key.KnownHeader.AsciiBytesWithColonSpace,
+                            async
+                        )
                             .ConfigureAwait(false);
                     }
                     else
@@ -523,18 +519,17 @@ namespace System.Net.Http
                 Debug.Assert(request.Version.Major >= 0 && request.Version.Minor >= 0); // guaranteed by Version class
                 bool isHttp10 = request.Version.Minor == 0 && request.Version.Major == 1;
                 await WriteBytesAsync(
-                        isHttp10 ? s_spaceHttp10NewlineAsciiBytes : s_spaceHttp11NewlineAsciiBytes,
-                        async
-                    )
+                    isHttp10 ? s_spaceHttp10NewlineAsciiBytes : s_spaceHttp11NewlineAsciiBytes,
+                    async
+                )
                     .ConfigureAwait(false);
 
                 // Determine cookies to send
                 string? cookiesFromContainer = null;
                 if (_pool.Settings._useCookies)
                 {
-                    cookiesFromContainer = _pool.Settings._cookieContainer!.GetCookieHeader(
-                        request.RequestUri
-                    );
+                    cookiesFromContainer = _pool.Settings._cookieContainer!
+                        .GetCookieHeader(request.RequestUri);
                     if (cookiesFromContainer == "")
                     {
                         cookiesFromContainer = null;
@@ -569,10 +564,10 @@ namespace System.Net.Http
                 {
                     // Write content headers
                     await WriteHeadersAsync(
-                            request.Content.Headers,
-                            cookiesFromContainer: null,
-                            async
-                        )
+                        request.Content.Headers,
+                        cookiesFromContainer: null,
+                        async
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -602,11 +597,11 @@ namespace System.Net.Http
                     if (!hasExpectContinueHeader)
                     {
                         await SendRequestContentAsync(
-                                request,
-                                CreateRequestContentStream(request),
-                                async,
-                                cancellationToken
-                            )
+                            request,
+                            CreateRequestContentStream(request),
+                            async,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                     else
@@ -760,9 +755,9 @@ namespace System.Net.Http
                 while (true)
                 {
                     ReadOnlyMemory<byte> line = await ReadNextResponseHeaderLineAsync(
-                            async,
-                            foldedHeadersAllowed: true
-                        )
+                        async,
+                        foldedHeadersAllowed: true
+                    )
                         .ConfigureAwait(false);
                     if (IsLineEmpty(line))
                     {
@@ -1072,7 +1067,8 @@ namespace System.Net.Http
             // Copy all of the data to the server.
             if (async)
             {
-                await request.Content!.CopyToAsync(stream, _transportContext, cancellationToken)
+                await request.Content!
+                    .CopyToAsync(stream, _transportContext, cancellationToken)
                     .ConfigureAwait(false);
             }
             else
@@ -1212,9 +1208,8 @@ namespace System.Net.Http
                 {
                     try
                     {
-                        response.ReasonPhrase = HttpRuleParser.DefaultHttpEncoding.GetString(
-                            reasonBytes
-                        );
+                        response.ReasonPhrase = HttpRuleParser.DefaultHttpEncoding
+                            .GetString(reasonBytes);
                     }
                     catch (FormatException error)
                     {
@@ -1344,12 +1339,13 @@ namespace System.Net.Http
             if (isFromTrailer)
             {
                 string headerValue = descriptor.GetHeaderValue(value, valueEncoding);
-                response.TrailingHeaders.TryAddWithoutValidation(
-                    (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
-                      ? descriptor.AsCustomHeader()
-                      : descriptor,
-                    headerValue
-                );
+                response.TrailingHeaders
+                    .TryAddWithoutValidation(
+                        (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
+                          ? descriptor.AsCustomHeader()
+                          : descriptor,
+                        headerValue
+                    );
             }
             else if ((descriptor.HeaderType & HttpHeaderType.Content) == HttpHeaderType.Content)
             {
@@ -1364,12 +1360,13 @@ namespace System.Net.Http
                     value,
                     valueEncoding
                 );
-                response.Headers.TryAddWithoutValidation(
-                    (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
-                      ? descriptor.AsCustomHeader()
-                      : descriptor,
-                    headerValue
-                );
+                response.Headers
+                    .TryAddWithoutValidation(
+                        (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
+                          ? descriptor.AsCustomHeader()
+                          : descriptor,
+                        headerValue
+                    );
             }
         }
 
@@ -1926,12 +1923,8 @@ namespace System.Net.Http
 
             int bytesRead = async
                 ? await _stream.ReadAsync(
-                          new Memory<byte>(
-                              _readBuffer,
-                              _readLength,
-                              _readBuffer.Length - _readLength
-                          )
-                      )
+                      new Memory<byte>(_readBuffer, _readLength, _readBuffer.Length - _readLength)
+                  )
                       .ConfigureAwait(false)
                 : _stream.Read(_readBuffer, _readLength, _readBuffer.Length - _readLength);
 
@@ -2122,9 +2115,9 @@ namespace System.Net.Http
             if (async)
             {
                 await destination.WriteAsync(
-                        new ReadOnlyMemory<byte>(_readBuffer, _readOffset, count),
-                        cancellationToken
-                    )
+                    new ReadOnlyMemory<byte>(_readBuffer, _readOffset, count),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else
@@ -2438,12 +2431,13 @@ namespace System.Net.Http
             string message,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource.Log.HandlerMessage(
-                _pool?.GetHashCode() ?? 0, // pool ID
-                GetHashCode(), // connection ID
-                _currentRequest?.GetHashCode() ?? 0, // request ID
-                memberName, // method name
-                message
-            ); // message
+            NetEventSource.Log
+                .HandlerMessage(
+                    _pool?.GetHashCode() ?? 0, // pool ID
+                    GetHashCode(), // connection ID
+                    _currentRequest?.GetHashCode() ?? 0, // request ID
+                    memberName, // method name
+                    message
+                ); // message
     }
 }

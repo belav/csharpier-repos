@@ -19,9 +19,8 @@ namespace AutoMapper.UnitTests
             ).ShouldThrowException<ArgumentOutOfRangeException>(
                 ex =>
                 {
-                    ex.Message.ShouldStartWith(
-                        $"{typeof(string)} is not derived from {typeof(int)}."
-                    );
+                    ex.Message
+                        .ShouldStartWith($"{typeof(string)} is not derived from {typeof(int)}.");
                 }
             );
         }

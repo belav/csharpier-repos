@@ -213,13 +213,14 @@ namespace System.IO
 
         #region Task based Async APIs
         public virtual Task<string?> ReadLineAsync() =>
-            Task<string?>.Factory.StartNew(
-                static state => ((TextReader)state!).ReadLine(),
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task<string?>.Factory
+                .StartNew(
+                    static state => ((TextReader)state!).ReadLine(),
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
 
         public virtual async Task<string> ReadToEndAsync()
         {
@@ -285,9 +286,7 @@ namespace System.IO
         internal virtual ValueTask<int> ReadAsyncInternal(
             Memory<char> buffer,
             CancellationToken cancellationToken
-        ) =>
-            new ValueTask<int>(
-                Task<int>.Factory.StartNew(
+        ) => new ValueTask<int>(Task<int>.Factory.StartNew(
                     static state =>
                     {
                         var t = (TupleSlim<TextReader, Memory<char>>)state!;
@@ -297,8 +296,7 @@ namespace System.IO
                     cancellationToken,
                     TaskCreationOptions.DenyChildAttach,
                     TaskScheduler.Default
-                )
-            );
+                ));
 
         public virtual Task<int> ReadBlockAsync(char[] buffer, int index, int count)
         {

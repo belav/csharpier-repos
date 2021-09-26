@@ -134,7 +134,8 @@ namespace System.Composition.UnitTests
         [Fact]
         public void MultipleImportAttributesAreDetected()
         {
-            var c = new ContainerConfiguration().WithPart<MultipleImportsOnProperty>()
+            var c = new ContainerConfiguration()
+                .WithPart<MultipleImportsOnProperty>()
                 .CreateContainer();
 
             var x = Assert.Throws<CompositionFailedException>(

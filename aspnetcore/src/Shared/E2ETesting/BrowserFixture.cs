@@ -50,11 +50,9 @@ namespace Microsoft.AspNetCore.E2ETesting
         {
             // We emit an assemblymetadata attribute that reflects the value of SeleniumE2ETestsSupported at build
             // time and we use that to conditionally skip Selenium tests parts.
-            var attribute =
-                typeof(BrowserFixture).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .SingleOrDefault(
-                        a => a.Key == "Microsoft.AspNetCore.Testing.Selenium.Supported"
-                    );
+            var attribute = typeof(BrowserFixture).Assembly
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
+                .SingleOrDefault(a => a.Key == "Microsoft.AspNetCore.Testing.Selenium.Supported");
             var attributeValue = attribute != null ? bool.Parse(attribute.Value) : false;
 
             // The environment variable below can be set up before running the tests so as to override the default
@@ -166,11 +164,12 @@ namespace Microsoft.AspNetCore.E2ETesting
 
             if (
                 !Debugger.IsAttached
-                && !string.Equals(
-                    Environment.GetEnvironmentVariable("E2E_TEST_VISIBLE"),
-                    "true",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && !string
+                    .Equals(
+                        Environment.GetEnvironmentVariable("E2E_TEST_VISIBLE"),
+                        "true",
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 opts.AddArgument("--headless");

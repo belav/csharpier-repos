@@ -34,11 +34,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
                 VisualStudio.Shell.IsUIContextActive(Guids.CSharpProjectExistsInWorkspaceUIContext)
             );
 
-            VisualStudio.SolutionExplorer.AddProject(
-                new ProjectUtils.Project("TestCSharpProject"),
-                WellKnownProjectTemplates.ConsoleApplication,
-                LanguageNames.CSharp
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    new ProjectUtils.Project("TestCSharpProject"),
+                    WellKnownProjectTemplates.ConsoleApplication,
+                    LanguageNames.CSharp
+                );
 
             Assert.True(
                 VisualStudio.Shell.IsUIContextActive(Guids.CSharpProjectExistsInWorkspaceUIContext)

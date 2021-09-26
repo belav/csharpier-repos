@@ -47,25 +47,24 @@ namespace System.Runtime.Serialization.Formatters.Tests
             options.RuntimeConfigurationOptions[EnableBinaryFormatterSwitchName] = bool.FalseString;
 
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        // First, test serialization
+                () =>
+                {
+                    // First, test serialization
 
-                        MemoryStream ms = new MemoryStream();
-                        BinaryFormatter bf = new BinaryFormatter();
-                        var ex = Assert.Throws<NotSupportedException>(
-                            () => bf.Serialize(ms, "A string to serialize.")
-                        );
-                        Assert.Contains(MoreInfoUrl, ex.Message, StringComparison.Ordinal); // error message should link to the more info URL
+                    MemoryStream ms = new MemoryStream();
+                    BinaryFormatter bf = new BinaryFormatter();
+                    var ex = Assert.Throws<NotSupportedException>(
+                        () => bf.Serialize(ms, "A string to serialize.")
+                    );
+                    Assert.Contains(MoreInfoUrl, ex.Message, StringComparison.Ordinal); // error message should link to the more info URL
 
-                        // Then test deserialization
+                    // Then test deserialization
 
-                        ex = Assert.Throws<NotSupportedException>(() => bf.Deserialize(ms));
-                        Assert.Contains(MoreInfoUrl, ex.Message, StringComparison.Ordinal); // error message should link to the more info URL
-                    },
-                    options
-                )
-                .Dispose();
+                    ex = Assert.Throws<NotSupportedException>(() => bf.Deserialize(ms));
+                    Assert.Contains(MoreInfoUrl, ex.Message, StringComparison.Ordinal); // error message should link to the more info URL
+                },
+                options
+            ).Dispose();
         }
     }
 }

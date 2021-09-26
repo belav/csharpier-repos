@@ -29,14 +29,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             params DiagnosticDescription[] expected
         ) =>
             CompileAndVerify(
-                    source,
-                    options: TestOptions.DebugExe.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    ),
-                    parseOptions: TestOptions.RegularPreview,
-                    symbolValidator: symbolValidator,
-                    expectedOutput: expectedOutput
-                )
+                source,
+                options: TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All),
+                parseOptions: TestOptions.RegularPreview,
+                symbolValidator: symbolValidator,
+                expectedOutput: expectedOutput
+            )
                 .VerifyDiagnostics(expected);
 
         internal void VerifyInPreview(
@@ -52,14 +50,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             void verify(string source)
             {
                 var verifier = CompileAndVerify(
-                        source,
-                        options: TestOptions.DebugExe.WithMetadataImportOptions(
-                            MetadataImportOptions.All
-                        ),
-                        parseOptions: TestOptions.RegularPreview,
-                        symbolValidator: symbolValidator,
-                        expectedOutput: expectedOutput
-                    )
+                    source,
+                    options: TestOptions.DebugExe
+                        .WithMetadataImportOptions(MetadataImportOptions.All),
+                    parseOptions: TestOptions.RegularPreview,
+                    symbolValidator: symbolValidator,
+                    expectedOutput: expectedOutput
+                )
                     .VerifyDiagnostics();
 
                 verifier.VerifyIL(metadataName, expectedIL);
@@ -89,14 +86,13 @@ public class C
         Func<int> f = static () => a;
     }
 }";
-            CreateCompilation(source, parseOptions: TestOptions.Regular8)
-                .VerifyDiagnostics(
-                    // (10,23): error CS8400: Feature 'static anonymous function' is not available in C# 8.0. Please use language version 9.0 or greater.
-                    //         Func<int> f = static () => a;
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "static")
-                        .WithArguments("static anonymous function", "9.0")
-                        .WithLocation(10, 23)
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular8).VerifyDiagnostics(
+                // (10,23): error CS8400: Feature 'static anonymous function' is not available in C# 8.0. Please use language version 9.0 or greater.
+                //         Func<int> f = static () => a;
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "static")
+                    .WithArguments("static anonymous function", "9.0")
+                    .WithLocation(10, 23)
+            );
         }
 
         [Fact]
@@ -1401,14 +1397,13 @@ public class Program
             void verify(string source)
             {
                 var verifier = CompileAndVerify(
-                        source,
-                        options: TestOptions.DebugExe.WithMetadataImportOptions(
-                            MetadataImportOptions.All
-                        ),
-                        parseOptions: TestOptions.Regular9,
-                        symbolValidator: symbolValidator,
-                        expectedOutput: "0False"
-                    )
+                    source,
+                    options: TestOptions.DebugExe
+                        .WithMetadataImportOptions(MetadataImportOptions.All),
+                    parseOptions: TestOptions.Regular9,
+                    symbolValidator: symbolValidator,
+                    expectedOutput: "0False"
+                )
                     .VerifyDiagnostics();
 
                 verifier.VerifyIL(
@@ -1637,7 +1632,8 @@ class C
             comp.VerifyDiagnostics(
                 // (6,32): error CS0211: Cannot take the address of the given expression
                 //         delegate*<void> ptr = &static delegate() { };
-                Diagnostic(ErrorCode.ERR_InvalidAddrOp, "static delegate() { }").WithLocation(6, 32)
+                Diagnostic(ErrorCode.ERR_InvalidAddrOp, "static delegate() { }")
+                    .WithLocation(6, 32)
             );
         }
 
@@ -1771,7 +1767,8 @@ class C
                     .WithLocation(17, 25),
                 // (20,33): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         a = ref b ? ref a : ref () => { };
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "() => { }").WithLocation(20, 33),
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "() => { }")
+                    .WithLocation(20, 33),
                 // (21,33): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         a = ref b ? ref a : ref static () => { };
                 Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "static () => { }")

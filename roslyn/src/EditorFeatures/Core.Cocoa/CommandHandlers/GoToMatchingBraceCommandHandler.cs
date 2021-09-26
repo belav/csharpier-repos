@@ -59,13 +59,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommandHandlers
                 return false;
 
             if (span.Value.Start < caretPosition)
-                args.TextView.TryMoveCaretToAndEnsureVisible(
-                    args.SubjectBuffer.CurrentSnapshot.GetPoint(span.Value.Start)
-                );
+                args.TextView
+                    .TryMoveCaretToAndEnsureVisible(
+                        args.SubjectBuffer.CurrentSnapshot.GetPoint(span.Value.Start)
+                    );
             else if (span.Value.End > caretPosition)
-                args.TextView.TryMoveCaretToAndEnsureVisible(
-                    args.SubjectBuffer.CurrentSnapshot.GetPoint(span.Value.End)
-                );
+                args.TextView
+                    .TryMoveCaretToAndEnsureVisible(
+                        args.SubjectBuffer.CurrentSnapshot.GetPoint(span.Value.End)
+                    );
 
             return true;
         }

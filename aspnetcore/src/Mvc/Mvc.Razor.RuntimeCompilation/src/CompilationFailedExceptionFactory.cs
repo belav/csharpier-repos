@@ -59,10 +59,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         )
         {
             var diagnosticGroups = diagnostics.Where(
-                    diagnostic =>
-                        diagnostic.IsWarningAsError
-                        || diagnostic.Severity == DiagnosticSeverity.Error
-                )
+                diagnostic =>
+                    diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error
+            )
                 .GroupBy(
                     diagnostic => GetFilePath(codeDocument, diagnostic),
                     StringComparer.Ordinal
@@ -124,9 +123,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             }
             else
             {
-                sourceDocument = codeDocument.Imports.FirstOrDefault(
-                    f => string.Equals(f.FilePath, filePath, StringComparison.Ordinal)
-                );
+                sourceDocument = codeDocument.Imports
+                    .FirstOrDefault(
+                        f => string.Equals(f.FilePath, filePath, StringComparison.Ordinal)
+                    );
             }
 
             if (sourceDocument != null)

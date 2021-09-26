@@ -23,11 +23,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             )
             {
                 // for extract method case, for a hybrid case, don't force rule, but preserve user style
-                var operation = base.GetAdjustNewLinesOperation(
-                    in previousToken,
-                    in currentToken,
-                    in nextOperation
-                );
+                var operation = base
+                    .GetAdjustNewLinesOperation(
+                        in previousToken,
+                        in currentToken,
+                        in nextOperation
+                    );
                 if (operation == null)
                 {
                     return null;

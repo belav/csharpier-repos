@@ -228,10 +228,11 @@ namespace Microsoft.CodeAnalysis.Rebuild
         }
 
         private int GetSourceFileCount() =>
-            int.Parse(
-                GetMetadataCompilationOptions()
-                    .GetUniqueOption(CompilationOptionNames.SourceFileCount)
-            );
+            int
+                .Parse(
+                    GetMetadataCompilationOptions()
+                        .GetUniqueOption(CompilationOptionNames.SourceFileCount)
+                );
 
         public IEnumerable<EmbeddedSourceTextInfo> GetEmbeddedSourceTextInfo() =>
             GetSourceTextInfoCore()
@@ -276,7 +277,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 let cdi = PdbReader.GetCustomDebugInformation(handle)
                 where PdbReader.GetGuid(cdi.Kind) == EmbeddedSourceGuid
                 select PdbReader.GetBlobBytes(cdi.Value)
-            ).SingleOrDefault();
+            )
+                .SingleOrDefault();
 
             if (bytes is null)
             {
@@ -349,39 +351,35 @@ namespace Microsoft.CodeAnalysis.Rebuild
             var metadataReader = PeReader.GetMetadataReader();
             if (
                 PeReader.PEHeaders.CorHeader is not { } corHeader
-                || !PeReader.PEHeaders.TryGetDirectoryOffset(
-                    corHeader.ResourcesDirectory,
-                    out var resourcesOffset
-                )
+                || !PeReader.PEHeaders
+                    .TryGetDirectoryOffset(corHeader.ResourcesDirectory, out var resourcesOffset)
             )
             {
                 return null;
             }
 
             var result = metadataReader.ManifestResources.Select(
-                    handle =>
-                    {
-                        var resource = metadataReader.GetManifestResource(handle);
-                        var name = metadataReader.GetString(resource.Name);
+                handle =>
+                {
+                    var resource = metadataReader.GetManifestResource(handle);
+                    var name = metadataReader.GetString(resource.Name);
 
-                        var resourceStart =
-                            PeReader.GetEntireImage().Pointer + resourcesOffset + resource.Offset;
-                        var length = *(int*)resourceStart;
-                        var contentPtr = resourceStart + sizeof(int);
-                        var content = new byte[length];
-                        Marshal.Copy(new IntPtr(contentPtr), content, 0, length);
+                    var resourceStart =
+                        PeReader.GetEntireImage().Pointer + resourcesOffset + resource.Offset;
+                    var length = *(int*)resourceStart;
+                    var contentPtr = resourceStart + sizeof(int);
+                    var content = new byte[length];
+                    Marshal.Copy(new IntPtr(contentPtr), content, 0, length);
 
-                        var isPublic =
-                            (resource.Attributes & ManifestResourceAttributes.Public) != 0;
-                        var description = new ResourceDescription(
-                            name,
-                            dataProvider: () => new MemoryStream(content),
-                            isPublic
-                        );
-                        return description;
-                    }
-                )
-                .ToArray();
+                    var isPublic = (resource.Attributes & ManifestResourceAttributes.Public) != 0;
+                    var description = new ResourceDescription(
+                        name,
+                        dataProvider: () => new MemoryStream(content),
+                        isPublic
+                    );
+                    return description;
+                }
+            ).ToArray();
 
             return result;
         }

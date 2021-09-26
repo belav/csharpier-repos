@@ -154,13 +154,14 @@ namespace System.Tests
                 }
                 catch (Exception e)
                 {
-                    string message = string.Format(
-                        "Expected {0} converting '{1}' (base {2}) to '{3}'",
-                        typeof(TException).FullName,
-                        testValues[i],
-                        testBases[i],
-                        typeof(TOutput).FullName
-                    );
+                    string message = string
+                        .Format(
+                            "Expected {0} converting '{1}' (base {2}) to '{3}'",
+                            typeof(TException).FullName,
+                            testValues[i],
+                            testBases[i],
+                            typeof(TOutput).FullName
+                        );
                     throw new AggregateException(message, e);
                 }
             }
@@ -236,13 +237,14 @@ namespace System.Tests
                 }
                 catch (Exception e)
                 {
-                    string message = string.Format(
-                        "Expected {0} converting '{1}' ({2}) to {3}",
-                        typeof(TException).FullName,
-                        testValues[i],
-                        typeof(TInput).FullName,
-                        typeof(TOutput).FullName
-                    );
+                    string message = string
+                        .Format(
+                            "Expected {0} converting '{1}' ({2}) to {3}",
+                            typeof(TException).FullName,
+                            testValues[i],
+                            typeof(TInput).FullName,
+                            typeof(TOutput).FullName
+                        );
                     throw new AggregateException(message, e);
                 }
             }

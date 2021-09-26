@@ -135,9 +135,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
                             // Roslyn + TagHelpers infrastructure
                             var referenceManager = s.GetRequiredService<RazorReferenceManager>();
-                            builder.Features.Add(
-                                new LazyMetadataReferenceFeature(referenceManager)
-                            );
+                            builder.Features
+                                .Add(new LazyMetadataReferenceFeature(referenceManager));
                             builder.Features.Add(new CompilationTagHelperFeature());
 
                             // TagHelperDescriptorProviders (actually do tag helper discovery)

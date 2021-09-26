@@ -8,11 +8,8 @@ namespace System.IO.IsolatedStorage
 {
     public class ContainsUnknownFilesTests : IsoStorageTest
     {
-        private static MethodInfo s_containsUnknownFilesMethod =
-            typeof(IsolatedStorageFile).GetMethod(
-                "ContainsUnknownFiles",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+        private static MethodInfo s_containsUnknownFilesMethod = typeof(IsolatedStorageFile)
+            .GetMethod("ContainsUnknownFiles", BindingFlags.NonPublic | BindingFlags.Instance);
 
         [Theory, MemberData(nameof(ValidStores))]
         public void ContainsUnknownFiles_CleanStore(PresetScopes scope)

@@ -54,9 +54,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 {
                     var offset = DesignTimeDirectivePass.DesignTimeVariable.Length + " = ".Length;
                     context.CodeWriter.WritePadding(offset, node.Source, context);
-                    context.CodeWriter.WriteStartAssignment(
-                        DesignTimeDirectivePass.DesignTimeVariable
-                    );
+                    context.CodeWriter
+                        .WriteStartAssignment(DesignTimeDirectivePass.DesignTimeVariable);
 
                     for (var i = 0; i < node.Children.Count; i++)
                     {
@@ -174,9 +173,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 {
                     var offset = DesignTimeDirectivePass.DesignTimeVariable.Length + " = ".Length;
                     context.CodeWriter.WritePadding(offset, firstChild.Source, context);
-                    context.CodeWriter.WriteStartAssignment(
-                        DesignTimeDirectivePass.DesignTimeVariable
-                    );
+                    context.CodeWriter
+                        .WriteStartAssignment(DesignTimeDirectivePass.DesignTimeVariable);
 
                     for (var i = 0; i < node.Children.Count; i++)
                     {
@@ -235,10 +233,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                     {
                         if (!isWhitespaceStatement)
                         {
-                            linePragmaScope = context.CodeWriter.BuildLinePragma(
-                                token.Source.Value,
-                                context
-                            );
+                            linePragmaScope = context.CodeWriter
+                                .BuildLinePragma(token.Source.Value, context);
                         }
 
                         context.CodeWriter.WritePadding(0, token.Source.Value, context);

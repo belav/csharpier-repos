@@ -72,10 +72,11 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
 
                             if (
                                 numberOfConnectionsOption.HasValue()
-                                && !int.TryParse(
-                                    numberOfConnectionsOption.Value(),
-                                    out numberOfConnections
-                                )
+                                && !int
+                                    .TryParse(
+                                        numberOfConnectionsOption.Value(),
+                                        out numberOfConnections
+                                    )
                             )
                             {
                                 return InvalidArg(numberOfConnectionsOption);
@@ -83,10 +84,11 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
 
                             if (
                                 sendDurationInSecondsOption.HasValue()
-                                && !int.TryParse(
-                                    sendDurationInSecondsOption.Value(),
-                                    out sendDurationInSeconds
-                                )
+                                && !int
+                                    .TryParse(
+                                        sendDurationInSecondsOption.Value(),
+                                        out sendDurationInSeconds
+                                    )
                             )
                             {
                                 return InvalidArg(sendDurationInSecondsOption);

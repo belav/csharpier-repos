@@ -71,10 +71,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 var currentSolution = originalFixAllContext.Solution;
                 foreach (var group in docIdToTextMerger.GroupBy(kvp => kvp.Key.ProjectId))
                     currentSolution = await ApplyChangesAsync(
-                            currentSolution,
-                            group.SelectAsArray(kvp => (kvp.Key, kvp.Value)),
-                            cancellationToken
-                        )
+                        currentSolution,
+                        group.SelectAsArray(kvp => (kvp.Key, kvp.Value)),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 return currentSolution;
@@ -89,18 +89,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         {
             // First, determine the diagnostics to fix for that context.
             var documentToDiagnostics = await DetermineDiagnosticsAsync(
-                    fixAllContext,
-                    progressTracker
-                )
+                fixAllContext,
+                progressTracker
+            )
                 .ConfigureAwait(false);
 
             // Second, process all those diagnostics, merging the cumulative set of text changes per document into docIdToTextMerger.
             await AddDocumentChangesAsync(
-                    fixAllContext,
-                    progressTracker,
-                    docIdToTextMerger,
-                    documentToDiagnostics
-                )
+                fixAllContext,
+                progressTracker,
+                docIdToTextMerger,
+                documentToDiagnostics
+            )
                 .ConfigureAwait(false);
         }
 
@@ -149,18 +149,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             // Now determine all the document changes caused from these diagnostics.
             var allChangedDocumentsInDiagnosticsOrder =
                 await GetAllChangedDocumentsInDiagnosticsOrderAsync(
-                        fixAllContext,
-                        orderedDiagnostics
-                    )
+                    fixAllContext,
+                    orderedDiagnostics
+                )
                     .ConfigureAwait(false);
 
             // Finally, take all the changes made to each document and merge them together into docIdToTextMerger to
             // keep track of the total set of changes to any particular document.
             await MergeTextChangesAsync(
-                    fixAllContext,
-                    allChangedDocumentsInDiagnosticsOrder,
-                    docIdToTextMerger
-                )
+                fixAllContext,
+                allChangedDocumentsInDiagnosticsOrder,
+                docIdToTextMerger
+            )
                 .ConfigureAwait(false);
         }
 
@@ -192,9 +192,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                         async () =>
                         {
                             // Create a context that will add the reported code actions into this
-                            using var _2 = ArrayBuilder<CodeAction>.GetInstance(
-                                out var codeActions
-                            );
+                            using var _2 = ArrayBuilder<CodeAction>
+                                .GetInstance(out var codeActions);
                             var context = new CodeFixContext(
                                 document,
                                 diagnostic,
@@ -212,23 +211,24 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                             await registerTask.ConfigureAwait(false);
 
                             // Now, process each code action and find out all the document changes caused by it.
-                            using var _3 = ArrayBuilder<Document>.GetInstance(
-                                out var changedDocuments
-                            );
+                            using var _3 = ArrayBuilder<Document>
+                                .GetInstance(out var changedDocuments);
 
                             foreach (var codeAction in codeActions)
                             {
                                 var changedSolution =
                                     await codeAction.GetChangedSolutionInternalAsync(
-                                            cancellationToken: cancellationToken
-                                        )
+                                        cancellationToken: cancellationToken
+                                    )
                                         .ConfigureAwait(false);
                                 if (changedSolution != null)
                                 {
                                     var changedDocumentIds = new SolutionChanges(
                                         changedSolution,
                                         solution
-                                    ).GetProjectChanges().SelectMany(p => p.GetChangedDocuments());
+                                    )
+                                        .GetProjectChanges()
+                                        .SelectMany(p => p.GetChangedDocuments());
                                     changedDocuments.AddRange(
                                         changedDocumentIds.Select(
                                             id => changedSolution.GetRequiredDocument(id)

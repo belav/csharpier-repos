@@ -14,15 +14,14 @@ public partial class ConsoleEncoding
     public void InputEncoding_SetDefaultEncoding_Success()
     {
         RemoteExecutor.Invoke(
-                () =>
-                {
-                    Encoding encoding = Encoding.GetEncoding(0);
-                    Console.InputEncoding = encoding;
-                    Assert.Equal(encoding, Console.InputEncoding);
-                    Assert.Equal((uint)encoding.CodePage, GetConsoleCP());
-                }
-            )
-            .Dispose();
+            () =>
+            {
+                Encoding encoding = Encoding.GetEncoding(0);
+                Console.InputEncoding = encoding;
+                Assert.Equal(encoding, Console.InputEncoding);
+                Assert.Equal((uint)encoding.CodePage, GetConsoleCP());
+            }
+        ).Dispose();
     }
 
     [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -30,18 +29,17 @@ public partial class ConsoleEncoding
     public void InputEncoding_SetUnicodeEncoding_SilentlyIgnoredInternally()
     {
         RemoteExecutor.Invoke(
-                () =>
-                {
-                    Encoding unicodeEncoding = Encoding.Unicode;
-                    Encoding oldEncoding = Console.InputEncoding;
-                    Assert.NotEqual(unicodeEncoding.CodePage, oldEncoding.CodePage);
+            () =>
+            {
+                Encoding unicodeEncoding = Encoding.Unicode;
+                Encoding oldEncoding = Console.InputEncoding;
+                Assert.NotEqual(unicodeEncoding.CodePage, oldEncoding.CodePage);
 
-                    Console.InputEncoding = unicodeEncoding;
-                    Assert.Equal(unicodeEncoding, Console.InputEncoding);
-                    Assert.Equal((uint)oldEncoding.CodePage, GetConsoleCP());
-                }
-            )
-            .Dispose();
+                Console.InputEncoding = unicodeEncoding;
+                Assert.Equal(unicodeEncoding, Console.InputEncoding);
+                Assert.Equal((uint)oldEncoding.CodePage, GetConsoleCP());
+            }
+        ).Dispose();
     }
 
     [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -49,15 +47,14 @@ public partial class ConsoleEncoding
     public void OutputEncoding_SetDefaultEncoding_Success()
     {
         RemoteExecutor.Invoke(
-                () =>
-                {
-                    Encoding encoding = Encoding.GetEncoding(0);
-                    Console.OutputEncoding = encoding;
-                    Assert.Equal(encoding, Console.OutputEncoding);
-                    Assert.Equal((uint)encoding.CodePage, GetConsoleOutputCP());
-                }
-            )
-            .Dispose();
+            () =>
+            {
+                Encoding encoding = Encoding.GetEncoding(0);
+                Console.OutputEncoding = encoding;
+                Assert.Equal(encoding, Console.OutputEncoding);
+                Assert.Equal((uint)encoding.CodePage, GetConsoleOutputCP());
+            }
+        ).Dispose();
     }
 
     [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -65,18 +62,17 @@ public partial class ConsoleEncoding
     public void OutputEncoding_SetUnicodeEncoding_SilentlyIgnoredInternally()
     {
         RemoteExecutor.Invoke(
-                () =>
-                {
-                    Encoding unicodeEncoding = Encoding.Unicode;
-                    Encoding oldEncoding = Console.OutputEncoding;
-                    Assert.NotEqual(unicodeEncoding.CodePage, oldEncoding.CodePage);
-                    Console.OutputEncoding = unicodeEncoding;
-                    Assert.Equal(unicodeEncoding, Console.OutputEncoding);
+            () =>
+            {
+                Encoding unicodeEncoding = Encoding.Unicode;
+                Encoding oldEncoding = Console.OutputEncoding;
+                Assert.NotEqual(unicodeEncoding.CodePage, oldEncoding.CodePage);
+                Console.OutputEncoding = unicodeEncoding;
+                Assert.Equal(unicodeEncoding, Console.OutputEncoding);
 
-                    Assert.Equal((uint)oldEncoding.CodePage, GetConsoleOutputCP());
-                }
-            )
-            .Dispose();
+                Assert.Equal((uint)oldEncoding.CodePage, GetConsoleOutputCP());
+            }
+        ).Dispose();
     }
 
     [DllImport("kernel32.dll")]

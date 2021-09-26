@@ -41,10 +41,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             );
 
             var model = new Person();
-            var serviceProvider = new ServiceCollection().AddSingleton<
-                IModelBinder,
-                NullModelBinder
-            >().BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<IModelBinder, NullModelBinder>()
+                .BuildServiceProvider();
 
             bindingContext.HttpContext.RequestServices = serviceProvider;
 

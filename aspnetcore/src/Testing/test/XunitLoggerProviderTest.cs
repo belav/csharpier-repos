@@ -96,7 +96,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
 
         private static ILoggerFactory CreateTestLogger(Action<ILoggingBuilder> configure)
         {
-            return new ServiceCollection().AddLogging(configure)
+            return new ServiceCollection()
+                .AddLogging(configure)
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerFactory>();
         }

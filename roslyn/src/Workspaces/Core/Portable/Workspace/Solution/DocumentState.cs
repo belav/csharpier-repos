@@ -737,9 +737,8 @@ namespace Microsoft.CodeAnalysis
                         new AsyncLazy<SourceText>(
                             // Build text from root, so recoverable tree won't cycle.
                             async cancellationToken =>
-                                (
-                                    await tree.GetRootAsync(cancellationToken).ConfigureAwait(false)
-                                ).GetText(encoding),
+                                (await tree.GetRootAsync(cancellationToken).ConfigureAwait(false))
+                                    .GetText(encoding),
                             cancellationToken => tree.GetRoot(cancellationToken).GetText(encoding),
                             cacheResult: false
                         )

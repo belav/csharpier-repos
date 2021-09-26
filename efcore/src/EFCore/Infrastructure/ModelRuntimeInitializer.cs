@@ -68,10 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                         if (validationLogger != null && model is IConventionModel)
                         {
-                            initializer.Dependencies.ModelValidator.Validate(
-                                model,
-                                validationLogger
-                            );
+                            initializer.Dependencies.ModelValidator
+                                .Validate(model, validationLogger);
                         }
 
                         initializer.InitializeModel(model, preValidation: false);

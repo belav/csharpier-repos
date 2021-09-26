@@ -17,9 +17,8 @@ namespace System.Reflection.Emit.Tests
                 typeof(object),
                 FieldAttributes.Public
             );
-            ConstructorInfo attributeConstructor = typeof(EmptyAttribute).GetConstructor(
-                new Type[0]
-            );
+            ConstructorInfo attributeConstructor = typeof(EmptyAttribute)
+                .GetConstructor(new Type[0]);
             byte[] bytes = Enumerable.Range(0, 256).Select(i => (byte)i).ToArray();
 
             field.SetCustomAttribute(attributeConstructor, bytes);
@@ -49,9 +48,8 @@ namespace System.Reflection.Emit.Tests
                 typeof(object),
                 FieldAttributes.Public
             );
-            ConstructorInfo attributeConstructor = typeof(EmptyAttribute).GetConstructor(
-                new Type[0]
-            );
+            ConstructorInfo attributeConstructor = typeof(EmptyAttribute)
+                .GetConstructor(new Type[0]);
             AssertExtensions.Throws<ArgumentNullException>(
                 "binaryAttribute",
                 () => field.SetCustomAttribute(attributeConstructor, null)
@@ -67,9 +65,8 @@ namespace System.Reflection.Emit.Tests
                 typeof(object),
                 FieldAttributes.Public
             );
-            ConstructorInfo attributeConstructor = typeof(EmptyAttribute).GetConstructor(
-                new Type[0]
-            );
+            ConstructorInfo attributeConstructor = typeof(EmptyAttribute)
+                .GetConstructor(new Type[0]);
             byte[] bytes = Enumerable.Range(0, 256).Select(i => (byte)i).ToArray();
             type.CreateTypeInfo().AsType();
 
@@ -87,9 +84,8 @@ namespace System.Reflection.Emit.Tests
                 typeof(object),
                 FieldAttributes.Public
             );
-            ConstructorInfo attributeConstructor = typeof(EmptyAttribute).GetConstructor(
-                new Type[0]
-            );
+            ConstructorInfo attributeConstructor = typeof(EmptyAttribute)
+                .GetConstructor(new Type[0]);
             CustomAttributeBuilder attribute = new CustomAttributeBuilder(
                 attributeConstructor,
                 new object[0]

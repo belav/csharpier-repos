@@ -86,9 +86,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             Assert.False(actionContext.ModelState.IsValid);
             Assert.Equal("myParam", actionContext.ModelState.Single().Key);
             Assert.Equal(
-                new DefaultModelBindingMessageProvider().MissingBindRequiredValueAccessor(
-                    "myParam"
-                ),
+                new DefaultModelBindingMessageProvider()
+                    .MissingBindRequiredValueAccessor("myParam"),
                 actionContext.ModelState.Single().Value.Errors.Single().ErrorMessage
             );
         }
@@ -149,10 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     ParameterType = typeof(Person),
                 };
 
-                var method = typeof(Person).GetMethod(
-                    nameof(Person.Equals),
-                    new[] { typeof(Person) }
-                );
+                var method = typeof(Person)
+                    .GetMethod(nameof(Person.Equals), new[] { typeof(Person) });
                 var parameter = method.GetParameters()[0]; // Equals(Person other)
                 var controllerParameterDescriptor = new ControllerParameterDescriptor
                 {
@@ -163,32 +160,29 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 };
 
                 var provider1 = new TestModelMetadataProvider();
-                provider1.ForParameter(parameter)
-                    .ValidationDetails(
-                        d =>
-                        {
-                            d.IsRequired = true;
-                            d.ValidatorMetadata.Add(attribute);
-                        }
-                    );
-                provider1.ForProperty(typeof(Family), nameof(Family.Mom))
-                    .ValidationDetails(
-                        d =>
-                        {
-                            d.IsRequired = true;
-                            d.ValidatorMetadata.Add(attribute);
-                        }
-                    );
+                provider1.ForParameter(parameter).ValidationDetails(
+                    d =>
+                    {
+                        d.IsRequired = true;
+                        d.ValidatorMetadata.Add(attribute);
+                    }
+                );
+                provider1.ForProperty(typeof(Family), nameof(Family.Mom)).ValidationDetails(
+                    d =>
+                    {
+                        d.IsRequired = true;
+                        d.ValidatorMetadata.Add(attribute);
+                    }
+                );
 
                 var provider2 = new TestModelMetadataProvider();
-                provider2.ForType(typeof(Person))
-                    .ValidationDetails(
-                        d =>
-                        {
-                            d.IsRequired = true;
-                            d.ValidatorMetadata.Add(attribute);
-                        }
-                    );
+                provider2.ForType(typeof(Person)).ValidationDetails(
+                    d =>
+                    {
+                        d.IsRequired = true;
+                        d.ValidatorMetadata.Add(attribute);
+                    }
+                );
 
                 return new TheoryData<RequiredAttribute, ParameterDescriptor, ModelMetadata>
                 {
@@ -310,14 +304,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             var mockValidator = new Mock<IObjectModelValidator>(MockBehavior.Strict);
             mockValidator.Setup(
-                    o =>
-                        o.Validate(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<ValidationStateDictionary>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                o =>
+                    o.Validate(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<ValidationStateDictionary>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Callback(
                     (
                         ActionContext context,
@@ -555,9 +549,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public async Task BindModelAsync_ForProperty_UsesValidationOnProperty_WhenDerivedModelIsSet()
         {
             // Arrange
-            var property = typeof(TestControllerWithValidatedProperties).GetProperty(
-                nameof(TestControllerWithValidatedProperties.Model)
-            );
+            var property = typeof(TestControllerWithValidatedProperties)
+                .GetProperty(nameof(TestControllerWithValidatedProperties.Model));
             var parameterDescriptor = new ControllerBoundPropertyDescriptor
             {
                 PropertyInfo = property,
@@ -883,8 +876,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             var validatorProvider = new Mock<IModelValidatorProvider>();
             validatorProvider.Setup(
-                    p => p.CreateValidators(It.IsAny<ModelValidatorProviderContext>())
-                )
+                p => p.CreateValidators(It.IsAny<ModelValidatorProviderContext>())
+            )
                 .Callback<ModelValidatorProviderContext>(
                     context =>
                     {

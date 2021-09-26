@@ -38,9 +38,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 if (constraint.Sql == sql)
                 {
-                    ((CheckConstraint)constraint).UpdateConfigurationSource(
-                        ConfigurationSource.Explicit
-                    );
+                    ((CheckConstraint)constraint)
+                        .UpdateConfigurationSource(ConfigurationSource.Explicit);
                     return ownedNavigationBuilder;
                 }
 

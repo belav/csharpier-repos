@@ -19,9 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             // Arrange
             var handler = new HandlerMethodDescriptor()
             {
-                MethodInfo = typeof(TestPage).GetMethod(
-                    nameof(TestPage.ActionResultReturningHandler)
-                ),
+                MethodInfo = typeof(TestPage)
+                    .GetMethod(nameof(TestPage.ActionResultReturningHandler)),
                 Parameters = new HandlerParameterDescriptor[0],
             };
 
@@ -59,9 +58,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public async Task CreateExecutor_ForActionResultReturningMethod_WithParameters()
         {
             // Arrange
-            var methodInfo = typeof(TestPage).GetMethod(
-                nameof(TestPage.ActionResultReturnHandlerWithParameters)
-            );
+            var methodInfo = typeof(TestPage)
+                .GetMethod(nameof(TestPage.ActionResultReturnHandlerWithParameters));
             var handler = new HandlerMethodDescriptor()
             {
                 MethodInfo = methodInfo,
@@ -150,9 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public async Task CreateExecutor_ForTaskOfConcreteActionResultReturningMethod()
         {
             // Arrange
-            var methodInfo = typeof(TestPage).GetMethod(
-                nameof(TestPage.TaskReturningConcreteSubtype)
-            );
+            var methodInfo = typeof(TestPage)
+                .GetMethod(nameof(TestPage.TaskReturningConcreteSubtype));
             var handler = new HandlerMethodDescriptor()
             {
                 MethodInfo = methodInfo,
@@ -221,15 +218,15 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var parameters = methodInfo.GetParameters();
 
             return parameters.Select(
-                    p =>
-                        new HandlerParameterDescriptor()
-                        {
-                            BindingInfo = BindingInfo.GetBindingInfo(p.GetCustomAttributes()),
-                            Name = p.Name,
-                            ParameterInfo = p,
-                            ParameterType = p.ParameterType,
-                        }
-                )
+                p =>
+                    new HandlerParameterDescriptor()
+                    {
+                        BindingInfo = BindingInfo.GetBindingInfo(p.GetCustomAttributes()),
+                        Name = p.Name,
+                        ParameterInfo = p,
+                        ParameterType = p.ParameterType,
+                    }
+            )
                 .ToArray();
         }
 

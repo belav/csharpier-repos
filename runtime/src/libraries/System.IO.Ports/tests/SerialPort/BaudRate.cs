@@ -353,13 +353,8 @@ namespace System.IO.Ports.Tests
 
                     com2.DiscardInBuffer();
 
-                    IAsyncResult beginWriteResult = com1.BaseStream.BeginWrite(
-                        xmitBytes,
-                        0,
-                        xmitBytes.Length,
-                        null,
-                        null
-                    );
+                    IAsyncResult beginWriteResult = com1.BaseStream
+                        .BeginWrite(xmitBytes, 0, xmitBytes.Length, null, null);
                     while (0 == (bytesToRead = com2.BytesToRead)) { }
 
                     sw.Start();
@@ -387,12 +382,13 @@ namespace System.IO.Ports.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "ERROR!!! BuadRate not used Expected time:{0}, actual time:{1} percentageDifference:{2}",
-                            expectedTime,
-                            actualTime,
-                            percentageDifference
-                        )
+                        string
+                            .Format(
+                                "ERROR!!! BuadRate not used Expected time:{0}, actual time:{1} percentageDifference:{2}",
+                                expectedTime,
+                                actualTime,
+                                percentageDifference
+                            )
                     );
                 }
 

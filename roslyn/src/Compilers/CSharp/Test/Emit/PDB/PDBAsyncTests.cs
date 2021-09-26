@@ -70,9 +70,9 @@ class Driver
             void verify(string text)
             {
                 var compilation = CreateCompilationWithMscorlib45(
-                        text,
-                        options: TestOptions.DebugDll
-                    )
+                    text,
+                    options: TestOptions.DebugDll
+                )
                     .VerifyDiagnostics();
                 var v = CompileAndVerify(compilation);
 
@@ -547,15 +547,15 @@ class TestCase
 }"
             );
             var compilation = CreateCompilationWithMscorlib45(
-                    text,
-                    options: TestOptions.DebugDll,
-                    references: new[]
-                    {
-                        SystemRef_v4_0_30319_17929,
-                        SystemCoreRef_v4_0_30319_17929,
-                        CSharpRef
-                    }
-                )
+                text,
+                options: TestOptions.DebugDll,
+                references: new[]
+                {
+                    SystemRef_v4_0_30319_17929,
+                    SystemCoreRef_v4_0_30319_17929,
+                    CSharpRef
+                }
+            )
                 .VerifyDiagnostics();
 
             compilation.VerifyPdb(
@@ -781,9 +781,8 @@ class C
             var v = CompileAndVerify(
                 CreateCompilationWithMscorlib45(
                     source,
-                    options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.ReleaseDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -888,9 +887,8 @@ class C
             var v = CompileAndVerify(
                 CreateCompilationWithMscorlib45(
                     source,
-                    options: TestOptions.DebugDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.DebugDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -1008,9 +1006,8 @@ class C
             var v = CompileAndVerify(
                 CreateCompilationWithMscorlib45(
                     source,
-                    options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.ReleaseDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -1114,9 +1111,8 @@ class C
             var v = CompileAndVerify(
                 CreateCompilationWithMscorlib45(
                     source,
-                    options: TestOptions.DebugDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.DebugDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -1245,9 +1241,8 @@ class C
             var v = CompileAndVerify(
                 CreateCompilationWithMscorlib45(
                     source,
-                    options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.ReleaseDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -1365,9 +1360,8 @@ class C
             var v = CompileAndVerify(
                 CreateCompilationWithMscorlib45(
                     source,
-                    options: TestOptions.DebugDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.DebugDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -1489,9 +1483,8 @@ class C
                 CreateCompilationWithMscorlib45(
                     source,
                     new[] { SystemCoreRef, CSharpRef },
-                    options: TestOptions.DebugDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.DebugDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -1603,9 +1596,8 @@ class C
                 CreateCompilationWithMscorlib45(
                     source,
                     new[] { SystemCoreRef, CSharpRef },
-                    options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.ReleaseDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -1709,9 +1701,8 @@ class C
                 CreateCompilationWithMscorlib45(
                     source,
                     new[] { SystemCoreRef, CSharpRef },
-                    options: TestOptions.DebugDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.DebugDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -1832,9 +1823,8 @@ class C
             var v = CompileAndVerify(
                 CreateCompilationWithMscorlib45(
                     source,
-                    options: TestOptions.DebugDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.DebugDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -1882,9 +1872,8 @@ class C
                 CreateCompilationWithMscorlib45(
                     source,
                     new[] { SystemCoreRef, CSharpRef },
-                    options: TestOptions.DebugDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.DebugDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -2157,9 +2146,8 @@ class C
                 CreateCompilationWithMscorlib45(
                     source,
                     new[] { SystemCoreRef, CSharpRef },
-                    options: TestOptions.DebugDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions.DebugDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 ),
                 symbolValidator: module =>
                 {
@@ -2259,9 +2247,8 @@ public partial class C
             var result = compilation.Emit(
                 peStream,
                 pdbStream,
-                options: EmitOptions.Default.WithDebugInformationFormat(
-                    DebugInformationFormat.PortablePdb
-                )
+                options: EmitOptions.Default
+                    .WithDebugInformationFormat(DebugInformationFormat.PortablePdb)
             );
 
             Assert.True(result.Success);

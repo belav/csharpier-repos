@@ -147,9 +147,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                       .Where(o => o.CustomerID == "ALFKI")
                       .ToListAsync()
                 : context.Set<Order>()
-                      .Include("Customer")
-                      .Where(o => o.CustomerID == "ALFKI")
-                      .ToList();
+                  .Include("Customer")
+                  .Where(o => o.CustomerID == "ALFKI")
+                  .ToList();
 
             Assert.Equal(6, orders.Count);
             Assert.True(orders.All(o => ReferenceEquals(o.Customer, customer)));
@@ -189,7 +189,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         private class IncludeRewritingExpressionVisitor : ExpressionVisitor
         {
             private static readonly MethodInfo _includeMethodInfo =
-                typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+                typeof(EntityFrameworkQueryableExtensions)
+                    .GetTypeInfo()
                     .GetDeclaredMethods(nameof(EntityFrameworkQueryableExtensions.Include))
                     .Single(
                         mi =>
@@ -203,7 +204,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     );
 
             private static readonly MethodInfo _stringIncludeMethodInfo =
-                typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+                typeof(EntityFrameworkQueryableExtensions)
+                    .GetTypeInfo()
                     .GetDeclaredMethods(nameof(EntityFrameworkQueryableExtensions.Include))
                     .Single(
                         mi =>
@@ -216,7 +218,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     );
 
             private static readonly MethodInfo _thenIncludeAfterReferenceMethodInfo =
-                typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+                typeof(EntityFrameworkQueryableExtensions)
+                    .GetTypeInfo()
                     .GetDeclaredMethods(nameof(EntityFrameworkQueryableExtensions.ThenInclude))
                     .Single(
                         mi =>
@@ -227,7 +230,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     );
 
             private static readonly MethodInfo _thenIncludeAfterEnumerableMethodInfo =
-                typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+                typeof(EntityFrameworkQueryableExtensions)
+                    .GetTypeInfo()
                     .GetDeclaredMethods(nameof(EntityFrameworkQueryableExtensions.ThenInclude))
                     .Where(mi => mi.GetGenericArguments().Count() == 3)
                     .Single(
@@ -249,8 +253,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     && methodCallExpression.Method.IsGenericMethod
                 )
                 {
-                    var genericMethodDefinition =
-                        methodCallExpression.Method.GetGenericMethodDefinition();
+                    var genericMethodDefinition = methodCallExpression.Method
+                        .GetGenericMethodDefinition();
                     if (genericMethodDefinition == _includeMethodInfo)
                     {
                         var source = Visit(methodCallExpression.Arguments[0]);

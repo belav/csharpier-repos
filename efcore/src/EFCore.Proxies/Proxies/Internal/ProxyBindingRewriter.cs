@@ -23,14 +23,15 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
     /// </summary>
     public class ProxyBindingRewriter : IModelFinalizingConvention
     {
-        private static readonly MethodInfo _createLazyLoadingProxyMethod =
-            typeof(IProxyFactory).GetTypeInfo()
-                .GetDeclaredMethod(nameof(IProxyFactory.CreateLazyLoadingProxy))!;
+        private static readonly MethodInfo _createLazyLoadingProxyMethod = typeof(IProxyFactory)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(IProxyFactory.CreateLazyLoadingProxy))!;
 
-        private static readonly PropertyInfo _lazyLoaderProperty =
-            typeof(IProxyLazyLoader).GetProperty(nameof(IProxyLazyLoader.LazyLoader))!;
+        private static readonly PropertyInfo _lazyLoaderProperty = typeof(IProxyLazyLoader)
+            .GetProperty(nameof(IProxyLazyLoader.LazyLoader))!;
 
-        private static readonly MethodInfo _createProxyMethod = typeof(IProxyFactory).GetTypeInfo()
+        private static readonly MethodInfo _createProxyMethod = typeof(IProxyFactory)
+            .GetTypeInfo()
             .GetDeclaredMethod(nameof(IProxyFactory.CreateProxy))!;
 
         private readonly ConstructorBindingConvention _directBindingConvention;
@@ -94,18 +95,20 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                         binding = ((EntityType)entityType).ConstructorBinding!;
                     }
 
-                    ((EntityType)entityType).SetConstructorBinding(
-                        UpdateConstructorBindings(entityType, proxyType, binding),
-                        ConfigurationSource.Convention
-                    );
+                    ((EntityType)entityType)
+                        .SetConstructorBinding(
+                            UpdateConstructorBindings(entityType, proxyType, binding),
+                            ConfigurationSource.Convention
+                        );
 
                     binding = ((EntityType)entityType).ServiceOnlyConstructorBinding;
                     if (binding != null)
                     {
-                        ((EntityType)entityType).SetServiceOnlyConstructorBinding(
-                            UpdateConstructorBindings(entityType, proxyType, binding),
-                            ConfigurationSource.Convention
-                        );
+                        ((EntityType)entityType)
+                            .SetServiceOnlyConstructorBinding(
+                                UpdateConstructorBindings(entityType, proxyType, binding),
+                                ConfigurationSource.Convention
+                            );
                     }
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
@@ -195,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                                                     ProxiesStrings.DictionaryCannotBeProxied(
                                                         clrType.ShortDisplayName(),
                                                         entityType.DisplayName(),
-                                                        typeof(IDictionary<, >).MakeGenericType(
+                                                        typeof(IDictionary<, >)
+                                                            .MakeGenericType(
                                                                 clrType.GenericTypeArguments
                                                             )
                                                             .ShortDisplayName()
@@ -260,9 +264,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                         .ToList()
                 )
                 {
-                    conflictingProperty.DeclaringEntityType.RemoveServiceProperty(
-                        conflictingProperty.Name
-                    );
+                    conflictingProperty.DeclaringEntityType
+                        .RemoveServiceProperty(conflictingProperty.Name);
                 }
 
                 var serviceProperty = entityType.GetServiceProperties()
@@ -273,7 +276,12 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                     serviceProperty.SetParameterBinding(
                         (ServiceParameterBinding)new LazyLoaderParameterBindingFactory(
                             _lazyLoaderParameterBindingFactoryDependencies
-                        ).Bind(entityType, typeof(ILazyLoader), nameof(IProxyLazyLoader.LazyLoader))
+                        )
+                            .Bind(
+                                entityType,
+                                typeof(ILazyLoader),
+                                nameof(IProxyLazyLoader.LazyLoader)
+                            )
                     );
                 }
 

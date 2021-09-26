@@ -31,10 +31,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.Editor.PlaceCaret($"version:{version}");
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                $"Upgrade this project to C# language version '{version}'",
-                applyFix: true
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction(
+                    $"Upgrade this project to C# language version '{version}'",
+                    applyFix: true
+                );
         }
 
         [
@@ -46,11 +47,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             var project = new ProjectUtils.Project(ProjectName);
 
             VisualStudio.SolutionExplorer.CreateSolution(SolutionName);
-            VisualStudio.SolutionExplorer.AddProject(
-                project,
-                WellKnownProjectTemplates.CSharpNetStandardClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    project,
+                    WellKnownProjectTemplates.CSharpNetStandardClassLibrary,
+                    LanguageNames.CSharp
+                );
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(project);
 
             InvokeFix();

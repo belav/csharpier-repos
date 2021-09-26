@@ -235,7 +235,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         [Obsolete("This is a compatibility shim for TypeScript; please do not use it.")]
         internal IVisualStudioHostDocument GetCurrentDocumentFromPath(string filePath)
         {
-            var id = _visualStudioWorkspace.CurrentSolution.GetDocumentIdsWithFilePath(filePath)
+            var id = _visualStudioWorkspace.CurrentSolution
+                .GetDocumentIdsWithFilePath(filePath)
                 .FirstOrDefault(d => d.ProjectId == Id);
 
             if (id != null)
@@ -251,7 +252,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         [Obsolete("This is a compatibility shim for TypeScript; please do not use it.")]
         internal ImmutableArray<IVisualStudioHostDocument> GetCurrentDocuments()
         {
-            return _visualStudioWorkspace.CurrentSolution.GetProject(Id)
+            return _visualStudioWorkspace.CurrentSolution
+                .GetProject(Id)
                 .Documents.SelectAsArray(
                     d =>
                         (IVisualStudioHostDocument)new DocumentProvider.ShimDocument(

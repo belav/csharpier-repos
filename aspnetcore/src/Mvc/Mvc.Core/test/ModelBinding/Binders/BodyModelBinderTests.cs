@@ -138,16 +138,16 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var inputFormatter = mockInputFormatter.Object;
 
             var provider = new TestModelMetadataProvider();
-            provider.ForType<Person>()
-                .BindingDetails(
-                    d =>
-                    {
-                        d.BindingSource = BindingSource.Body;
-                        d.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(
+            provider.ForType<Person>().BindingDetails(
+                d =>
+                {
+                    d.BindingSource = BindingSource.Body;
+                    d.ModelBindingMessageProvider
+                        .SetMissingRequestBodyRequiredValueAccessor(
                             () => "Customized error message"
                         );
-                    }
-                );
+                }
+            );
 
             var bindingContext = GetBindingContext(typeof(Person), metadataProvider: provider);
             bindingContext.BinderModelName = "custom";

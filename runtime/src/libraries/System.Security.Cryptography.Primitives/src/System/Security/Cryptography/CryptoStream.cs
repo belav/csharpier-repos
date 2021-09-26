@@ -151,9 +151,9 @@ namespace System.Security.Cryptography
                 if (useAsync)
                 {
                     await _stream.WriteAsync(
-                            new ReadOnlyMemory<byte>(finalBytes),
-                            cancellationToken
-                        )
+                        new ReadOnlyMemory<byte>(finalBytes),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else
@@ -418,13 +418,13 @@ namespace System.Security.Cryptography
                 {
                     amountRead = useAsync
                         ? await _stream.ReadAsync(
-                                  new Memory<byte>(
-                                      tempInputBuffer,
-                                      _inputBufferIndex,
-                                      numWholeBlocksInBytes - _inputBufferIndex
-                                  ),
-                                  cancellationToken
-                              )
+                              new Memory<byte>(
+                                  tempInputBuffer,
+                                  _inputBufferIndex,
+                                  numWholeBlocksInBytes - _inputBufferIndex
+                              ),
+                              cancellationToken
+                          )
                               .ConfigureAwait(false)
                         : _stream.Read(
                               tempInputBuffer,
@@ -474,9 +474,8 @@ namespace System.Security.Cryptography
                         }
 
                         // Use ArrayPool.Shared instead of CryptoPool because the array is passed out.
-                        tempOutputBuffer = ArrayPool<byte>.Shared.Rent(
-                            numWholeReadBlocks * _outputBlockSize
-                        );
+                        tempOutputBuffer = ArrayPool<byte>.Shared
+                            .Rent(numWholeReadBlocks * _outputBlockSize);
                         numOutputBytes = _transform.TransformBlock(
                             tempInputBuffer,
                             0,
@@ -535,13 +534,13 @@ namespace System.Security.Cryptography
                 {
                     amountRead = useAsync
                         ? await _stream.ReadAsync(
-                                  new Memory<byte>(
-                                      _inputBuffer,
-                                      _inputBufferIndex,
-                                      _inputBlockSize - _inputBufferIndex
-                                  ),
-                                  cancellationToken
-                              )
+                              new Memory<byte>(
+                                  _inputBuffer,
+                                  _inputBufferIndex,
+                                  _inputBlockSize - _inputBufferIndex
+                              ),
+                              cancellationToken
+                          )
                               .ConfigureAwait(false)
                         : _stream.Read(
                               _inputBuffer,
@@ -770,9 +769,9 @@ namespace System.Security.Cryptography
                 // write out the bytes we just got
                 if (useAsync)
                     await _stream.WriteAsync(
-                            new ReadOnlyMemory<byte>(_outputBuffer, 0, numOutputBytes),
-                            cancellationToken
-                        )
+                        new ReadOnlyMemory<byte>(_outputBuffer, 0, numOutputBytes),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 else
                     _stream.Write(_outputBuffer, 0, numOutputBytes);
@@ -793,9 +792,8 @@ namespace System.Security.Cryptography
                         int numWholeBlocksInBytes = numWholeBlocks * _inputBlockSize;
 
                         // Use ArrayPool.Shared instead of CryptoPool because the array is passed out.
-                        byte[]? tempOutputBuffer = ArrayPool<byte>.Shared.Rent(
-                            numWholeBlocks * _outputBlockSize
-                        );
+                        byte[]? tempOutputBuffer = ArrayPool<byte>.Shared
+                            .Rent(numWholeBlocks * _outputBlockSize);
                         numOutputBytes = 0;
 
                         try
@@ -810,13 +808,9 @@ namespace System.Security.Cryptography
                             if (useAsync)
                             {
                                 await _stream.WriteAsync(
-                                        new ReadOnlyMemory<byte>(
-                                            tempOutputBuffer,
-                                            0,
-                                            numOutputBytes
-                                        ),
-                                        cancellationToken
-                                    )
+                                    new ReadOnlyMemory<byte>(tempOutputBuffer, 0, numOutputBytes),
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                             }
                             else
@@ -854,9 +848,9 @@ namespace System.Security.Cryptography
 
                         if (useAsync)
                             await _stream.WriteAsync(
-                                    new ReadOnlyMemory<byte>(_outputBuffer, 0, numOutputBytes),
-                                    cancellationToken
-                                )
+                                new ReadOnlyMemory<byte>(_outputBuffer, 0, numOutputBytes),
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         else
                             _stream.Write(_outputBuffer, 0, numOutputBytes);
@@ -988,14 +982,14 @@ namespace System.Security.Cryptography
                 do
                 {
                     bytesRead = await ReadAsync(
-                            rentedBuffer.AsMemory(0, bufferSize),
-                            cancellationToken
-                        )
+                        rentedBuffer.AsMemory(0, bufferSize),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     await destination.WriteAsync(
-                            rentedBuffer.AsMemory(0, bytesRead),
-                            cancellationToken
-                        )
+                        rentedBuffer.AsMemory(0, bytesRead),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 } while (bytesRead > 0);
             }

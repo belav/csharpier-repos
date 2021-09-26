@@ -133,9 +133,9 @@ namespace Microsoft.CodeAnalysis.AddImport
         )
         {
             var client = await RemoteHostClient.TryGetClientAsync(
-                    document.Project,
-                    cancellationToken
-                )
+                document.Project,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (client != null)
             {
@@ -143,41 +143,41 @@ namespace Microsoft.CodeAnalysis.AddImport
                     IRemoteMissingImportDiscoveryService,
                     ImmutableArray<AddImportFixData>
                 >(
-                        document.Project.Solution,
-                        (service, solutionInfo, callbackId, cancellationToken) =>
-                            service.GetFixesAsync(
-                                solutionInfo,
-                                callbackId,
-                                document.Id,
-                                span,
-                                diagnosticId,
-                                maxResults,
-                                placeSystemNamespaceFirst,
-                                allowInHiddenRegions,
-                                searchReferenceAssemblies,
-                                packageSources,
-                                cancellationToken
-                            ),
-                        callbackTarget: symbolSearchService,
-                        cancellationToken
-                    )
+                    document.Project.Solution,
+                    (service, solutionInfo, callbackId, cancellationToken) =>
+                        service.GetFixesAsync(
+                            solutionInfo,
+                            callbackId,
+                            document.Id,
+                            span,
+                            diagnosticId,
+                            maxResults,
+                            placeSystemNamespaceFirst,
+                            allowInHiddenRegions,
+                            searchReferenceAssemblies,
+                            packageSources,
+                            cancellationToken
+                        ),
+                    callbackTarget: symbolSearchService,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return result.HasValue ? result.Value : ImmutableArray<AddImportFixData>.Empty;
             }
 
             return await GetFixesInCurrentProcessAsync(
-                    document,
-                    span,
-                    diagnosticId,
-                    maxResults,
-                    placeSystemNamespaceFirst,
-                    allowInHiddenRegions,
-                    symbolSearchService,
-                    searchReferenceAssemblies,
-                    packageSources,
-                    cancellationToken
-                )
+                document,
+                span,
+                diagnosticId,
+                maxResults,
+                placeSystemNamespaceFirst,
+                allowInHiddenRegions,
+                symbolSearchService,
+                searchReferenceAssemblies,
+                packageSources,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -209,20 +209,20 @@ namespace Microsoft.CodeAnalysis.AddImport
                         if (CanAddImport(node, allowInHiddenRegions, cancellationToken))
                         {
                             var semanticModel = await document.GetRequiredSemanticModelAsync(
-                                    cancellationToken
-                                )
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             var allSymbolReferences = await FindResultsAsync(
-                                    document,
-                                    semanticModel,
-                                    diagnosticId,
-                                    node,
-                                    maxResults,
-                                    symbolSearchService,
-                                    searchReferenceAssemblies,
-                                    packageSources,
-                                    cancellationToken
-                                )
+                                document,
+                                semanticModel,
+                                diagnosticId,
+                                node,
+                                maxResults,
+                                symbolSearchService,
+                                searchReferenceAssemblies,
+                                packageSources,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
 
                             // Nothing found at all. No need to proceed.
@@ -231,12 +231,12 @@ namespace Microsoft.CodeAnalysis.AddImport
                                 cancellationToken.ThrowIfCancellationRequested();
 
                                 var fixData = await reference.TryGetFixDataAsync(
-                                        document,
-                                        node,
-                                        placeSystemNamespaceFirst,
-                                        allowInHiddenRegions,
-                                        cancellationToken
-                                    )
+                                    document,
+                                    node,
+                                    placeSystemNamespaceFirst,
+                                    allowInHiddenRegions,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                                 result.AddIfNotNull(fixData);
                             }
@@ -289,14 +289,14 @@ namespace Microsoft.CodeAnalysis.AddImport
 
             // Look for exact matches first:
             var exactReferences = await FindResultsAsync(
-                    projectToAssembly,
-                    referenceToCompilation,
-                    project,
-                    maxResults,
-                    finder,
-                    exact: true,
-                    cancellationToken: cancellationToken
-                )
+                projectToAssembly,
+                referenceToCompilation,
+                project,
+                maxResults,
+                finder,
+                exact: true,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             if (exactReferences.Length > 0)
             {
@@ -314,14 +314,14 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
 
             var fuzzyReferences = await FindResultsAsync(
-                    projectToAssembly,
-                    referenceToCompilation,
-                    project,
-                    maxResults,
-                    finder,
-                    exact: false,
-                    cancellationToken: cancellationToken
-                )
+                projectToAssembly,
+                referenceToCompilation,
+                project,
+                maxResults,
+                finder,
+                exact: false,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             return fuzzyReferences;
         }
@@ -348,12 +348,12 @@ namespace Microsoft.CodeAnalysis.AddImport
             // First search the current project to see if any symbols (source or metadata) match the
             // search string.
             await FindResultsInAllSymbolsInStartingProjectAsync(
-                    allReferences,
-                    maxResults,
-                    finder,
-                    exact,
-                    cancellationToken
-                )
+                allReferences,
+                maxResults,
+                finder,
+                exact,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Only bother doing this for host workspaces.  We don't want this for
@@ -365,35 +365,35 @@ namespace Microsoft.CodeAnalysis.AddImport
                 // Now search unreferenced projects, and see if they have any source symbols that match
                 // the search string.
                 await FindResultsInUnreferencedProjectSourceSymbolsAsync(
-                        projectToAssembly,
-                        project,
-                        allReferences,
-                        maxResults,
-                        finder,
-                        exact,
-                        cancellationToken
-                    )
+                    projectToAssembly,
+                    project,
+                    allReferences,
+                    maxResults,
+                    finder,
+                    exact,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // Finally, check and see if we have any metadata symbols that match the search string.
                 await FindResultsInUnreferencedMetadataSymbolsAsync(
-                        referenceToCompilation,
-                        project,
-                        allReferences,
-                        maxResults,
-                        finder,
-                        exact,
-                        cancellationToken
-                    )
+                    referenceToCompilation,
+                    project,
+                    allReferences,
+                    maxResults,
+                    finder,
+                    exact,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // We only support searching NuGet in an exact manner currently.
                 if (exact)
                 {
                     await finder.FindNugetOrReferenceAssemblyReferencesAsync(
-                            allReferences,
-                            cancellationToken
-                        )
+                        allReferences,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -410,9 +410,9 @@ namespace Microsoft.CodeAnalysis.AddImport
         )
         {
             var references = await finder.FindInAllSymbolsInStartingProjectAsync(
-                    exact,
-                    cancellationToken
-                )
+                exact,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             AddRange(allSymbolReferences, references, maxResults);
         }
@@ -464,12 +464,12 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
 
             await WaitForTasksAsync(
-                    allSymbolReferences,
-                    maxResults,
-                    findTasks,
-                    nestedTokenSource,
-                    cancellationToken
-                )
+                allSymbolReferences,
+                maxResults,
+                findTasks,
+                nestedTokenSource,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -533,12 +533,12 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
 
             await WaitForTasksAsync(
-                    allSymbolReferences,
-                    maxResults,
-                    findTasks,
-                    nestedTokenSource,
-                    cancellationToken
-                )
+                allSymbolReferences,
+                maxResults,
+                findTasks,
+                nestedTokenSource,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -674,8 +674,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             PortableExecutableReference reference
         )
         {
-            var compilationService =
-                project.LanguageServices.GetRequiredService<ICompilationFactoryService>();
+            var compilationService = project.LanguageServices
+                .GetRequiredService<ICompilationFactoryService>();
             var compilation = compilationService.CreateCompilation(
                 "TempAssembly",
                 compilationService.GetDefaultCompilationOptions()
@@ -687,10 +687,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             PortableExecutableReference? x,
             PortableExecutableReference? y
         ) =>
-            StringComparer.OrdinalIgnoreCase.Equals(
-                x?.FilePath ?? x?.Display,
-                y?.FilePath ?? y?.Display
-            );
+            StringComparer.OrdinalIgnoreCase
+                .Equals(x?.FilePath ?? x?.Display, y?.FilePath ?? y?.Display);
 
         int IEqualityComparer<PortableExecutableReference>.GetHashCode(
             PortableExecutableReference obj
@@ -807,17 +805,17 @@ namespace Microsoft.CodeAnalysis.AddImport
             foreach (var diagnostic in diagnostics)
             {
                 var fixes = await GetFixesAsync(
-                        document,
-                        span,
-                        diagnostic.Id,
-                        maxResultsPerDiagnostic,
-                        placeSystemNamespaceFirst,
-                        allowInHiddenRegions,
-                        symbolSearchService,
-                        searchReferenceAssemblies,
-                        packageSources,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    diagnostic.Id,
+                    maxResultsPerDiagnostic,
+                    placeSystemNamespaceFirst,
+                    allowInHiddenRegions,
+                    symbolSearchService,
+                    searchReferenceAssemblies,
+                    packageSources,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 fixesForDiagnosticBuilder.Add((diagnostic, fixes));

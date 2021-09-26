@@ -369,10 +369,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                 switch (sampleDirection)
                 {
                     case SampleDirection.Request:
-                        ApiParameterDescription requestBodyParameter =
-                            api.ParameterDescriptions.FirstOrDefault(
-                                p => p.Source == ApiParameterSource.FromBody
-                            );
+                        ApiParameterDescription requestBodyParameter = api.ParameterDescriptions
+                            .FirstOrDefault(p => p.Source == ApiParameterSource.FromBody);
                         type =
                             requestBodyParameter == null
                                 ? null

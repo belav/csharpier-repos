@@ -32,10 +32,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
                     if (braceMatcher != null)
                     {
                         var result = await braceMatcher.FindBracesAsync(
-                                document,
-                                position,
-                                cancellationToken
-                            )
+                            document,
+                            position,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (result != null)
                         {

@@ -229,17 +229,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (leftTarget.Kind != BoundKind.DiscardExpression)
                     {
-                        effects.assignments.Add(
-                            MakeAssignmentOperator(
-                                resultPart.Syntax,
-                                leftTarget,
-                                resultPart,
-                                leftTarget.Type,
-                                used: true,
-                                isChecked: false,
-                                isCompoundAssignment: false
-                            )
-                        );
+                        effects.assignments
+                            .Add(
+                                MakeAssignmentOperator(
+                                    resultPart.Syntax,
+                                    leftTarget,
+                                    resultPart,
+                                    leftTarget.Type,
+                                    used: true,
+                                    isChecked: false,
+                                    isCompoundAssignment: false
+                                )
+                            );
                     }
                 }
                 Debug.Assert(builder is null || resultPart is { });
@@ -250,9 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var tupleType = NamedTypeSymbol.CreateTuple(
                     locationOpt: null,
-                    elementTypesWithAnnotations: builder!.SelectAsArray(
-                        e => TypeWithAnnotations.Create(e.Type)
-                    ),
+                    elementTypesWithAnnotations: builder!
+                        .SelectAsArray(e => TypeWithAnnotations.Create(e.Type)),
                     elementLocations: default,
                     elementNames: default,
                     compilation: _compilation,
@@ -507,9 +507,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> effects
         )
         {
-            var assignmentTargets = ArrayBuilder<Binder.DeconstructionVariable>.GetInstance(
-                variables.Arguments.Length
-            );
+            var assignmentTargets = ArrayBuilder<Binder.DeconstructionVariable>
+                .GetInstance(variables.Arguments.Length);
 
             foreach (var variable in variables.Arguments)
             {

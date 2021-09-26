@@ -357,12 +357,13 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                 // If the type is an integer, verify operand is actually an int
                 int res;
                 if (
-                    !int.TryParse(
-                        results.Operand,
-                        NumberStyles.None,
-                        CultureInfo.InvariantCulture,
-                        out res
-                    )
+                    !int
+                        .TryParse(
+                            results.Operand,
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out res
+                        )
                 )
                 {
                     return false;

@@ -703,12 +703,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 )
                 .Verifiable();
             expander1.Setup(
-                    e =>
-                        e.ExpandViewLocations(
-                            It.IsAny<ViewLocationExpanderContext>(),
-                            It.IsAny<IEnumerable<string>>()
-                        )
-                )
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
                 .Callback(
                     (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
                     {
@@ -721,12 +721,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             var expander2 = new Mock<IViewLocationExpander>();
             expander2.Setup(
-                    e =>
-                        e.ExpandViewLocations(
-                            It.IsAny<ViewLocationExpanderContext>(),
-                            It.IsAny<IEnumerable<string>>()
-                        )
-                )
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
                 .Callback(
                     (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
                     {
@@ -782,12 +782,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 )
                 .Verifiable();
             expander1.Setup(
-                    e =>
-                        e.ExpandViewLocations(
-                            It.IsAny<ViewLocationExpanderContext>(),
-                            It.IsAny<IEnumerable<string>>()
-                        )
-                )
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
                 .Callback(
                     (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
                     {
@@ -800,12 +800,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             var expander2 = new Mock<IViewLocationExpander>();
             expander2.Setup(
-                    e =>
-                        e.ExpandViewLocations(
-                            It.IsAny<ViewLocationExpanderContext>(),
-                            It.IsAny<IEnumerable<string>>()
-                        )
-                )
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
                 .Callback(
                     (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
                     {
@@ -843,12 +843,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             var expander = new Mock<IViewLocationExpander>();
             expander.Setup(
-                    e =>
-                        e.ExpandViewLocations(
-                            It.IsAny<ViewLocationExpanderContext>(),
-                            It.IsAny<IEnumerable<string>>()
-                        )
-                )
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
                 .Returns(new[] { @"Views\Home\Index.cshtml" });
 
             var viewEngine = CreateViewEngine(pageFactory.Object, new[] { expander.Object });
@@ -989,21 +989,19 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var pageFactory = Mock.Of<IRazorPageFactoryProvider>();
             var expander = new Mock<IViewLocationExpander>();
             var expandedLocations = new[] { "viewlocation1", "viewlocation2", "viewlocation3", };
-            expander.Setup(v => v.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-                .Callback(
-                    (ViewLocationExpanderContext expanderContext) =>
-                    {
-                        expanderContext.Values["somekey"] = "somevalue";
-                    }
-                )
-                .Verifiable();
+            expander.Setup(v => v.PopulateValues(It.IsAny<ViewLocationExpanderContext>())).Callback(
+                (ViewLocationExpanderContext expanderContext) =>
+                {
+                    expanderContext.Values["somekey"] = "somevalue";
+                }
+            ).Verifiable();
             expander.Setup(
-                    v =>
-                        v.ExpandViewLocations(
-                            It.IsAny<ViewLocationExpanderContext>(),
-                            It.IsAny<IEnumerable<string>>()
-                        )
-                )
+                v =>
+                    v.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
                 .Returns(expandedLocations)
                 .Verifiable();
 
@@ -1050,21 +1048,19 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 .Returns(GetPageFactoryResult(factory: null, changeTokens: new[] { changeToken }));
             var expander = new Mock<IViewLocationExpander>();
             var expandedLocations = new[] { "viewlocation1", "viewlocation2", "viewlocation3", };
-            expander.Setup(v => v.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-                .Callback(
-                    (ViewLocationExpanderContext expanderContext) =>
-                    {
-                        expanderContext.Values["somekey"] = "somevalue";
-                    }
-                )
-                .Verifiable();
+            expander.Setup(v => v.PopulateValues(It.IsAny<ViewLocationExpanderContext>())).Callback(
+                (ViewLocationExpanderContext expanderContext) =>
+                {
+                    expanderContext.Values["somekey"] = "somevalue";
+                }
+            ).Verifiable();
             expander.Setup(
-                    v =>
-                        v.ExpandViewLocations(
-                            It.IsAny<ViewLocationExpanderContext>(),
-                            It.IsAny<IEnumerable<string>>()
-                        )
-                )
+                v =>
+                    v.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
                 .Returns(expandedLocations)
                 .Verifiable();
 
@@ -1194,22 +1190,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 .Verifiable();
 
             var expander = new Mock<IViewLocationExpander>();
-            expander.Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-                .Callback(
-                    (ViewLocationExpanderContext c) =>
-                    {
-                        Assert.NotNull(c.ActionContext);
-                        c.Values["expander-key"] = expander.ToString();
-                    }
-                )
-                .Verifiable();
+            expander.Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>())).Callback(
+                (ViewLocationExpanderContext c) =>
+                {
+                    Assert.NotNull(c.ActionContext);
+                    c.Values["expander-key"] = expander.ToString();
+                }
+            ).Verifiable();
             expander.Setup(
-                    e =>
-                        e.ExpandViewLocations(
-                            It.IsAny<ViewLocationExpanderContext>(),
-                            It.IsAny<IEnumerable<string>>()
-                        )
-                )
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
                 .Returns(
                     (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
                     {
@@ -1256,22 +1250,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 .Verifiable();
 
             var expander = new Mock<IViewLocationExpander>();
-            expander.Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-                .Callback(
-                    (ViewLocationExpanderContext c) =>
-                    {
-                        Assert.NotNull(c.ActionContext);
-                        c.Values["expander-key"] = expander.ToString();
-                    }
-                )
-                .Verifiable();
+            expander.Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>())).Callback(
+                (ViewLocationExpanderContext c) =>
+                {
+                    Assert.NotNull(c.ActionContext);
+                    c.Values["expander-key"] = expander.ToString();
+                }
+            ).Verifiable();
             expander.Setup(
-                    e =>
-                        e.ExpandViewLocations(
-                            It.IsAny<ViewLocationExpanderContext>(),
-                            It.IsAny<IEnumerable<string>>()
-                        )
-                )
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
                 .Returns(
                     (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
                     {
@@ -1888,23 +1880,21 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             var expected = new[] { "some-seed" };
             var expander = new Mock<IViewLocationExpander>();
-            expander.Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-                .Callback(
-                    (ViewLocationExpanderContext c) =>
-                    {
-                        Assert.Equal("MyController", c.ControllerName);
-                        Assert.Null(c.PageName);
-                    }
-                )
-                .Verifiable();
+            expander.Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>())).Callback(
+                (ViewLocationExpanderContext c) =>
+                {
+                    Assert.Equal("MyController", c.ControllerName);
+                    Assert.Null(c.PageName);
+                }
+            ).Verifiable();
 
             expander.Setup(
-                    e =>
-                        e.ExpandViewLocations(
-                            It.IsAny<ViewLocationExpanderContext>(),
-                            It.IsAny<IEnumerable<string>>()
-                        )
-                )
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
                 .Returns(expected);
 
             var viewEngine = CreateViewEngine(expanders: new[] { expander.Object });
@@ -1925,22 +1915,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             var expected = new[] { "some-seed" };
             var expander = new Mock<IViewLocationExpander>();
-            expander.Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-                .Callback(
-                    (ViewLocationExpanderContext c) =>
-                    {
-                        Assert.Equal("MyPage", c.PageName);
-                    }
-                )
-                .Verifiable();
+            expander.Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>())).Callback(
+                (ViewLocationExpanderContext c) =>
+                {
+                    Assert.Equal("MyPage", c.PageName);
+                }
+            ).Verifiable();
 
             expander.Setup(
-                    e =>
-                        e.ExpandViewLocations(
-                            It.IsAny<ViewLocationExpanderContext>(),
-                            It.IsAny<IEnumerable<string>>()
-                        )
-                )
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
                 .Returns(expected);
 
             var viewEngine = CreateViewEngine(expanders: new[] { expander.Object });

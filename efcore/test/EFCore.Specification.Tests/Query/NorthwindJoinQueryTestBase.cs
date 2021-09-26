@@ -175,11 +175,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from c in ss.Set<Customer>()
-                    join o1 in (
-                        from o2 in ss.Set<Order>()
-                        orderby o2.OrderID
-                        select new { o2 }
-                    ).Take(5)
+                    join o1 in (from o2 in ss.Set<Order>() orderby o2.OrderID  select new { o2 })
+                        .Take(5)
                         on c.CustomerID equals o1.o2.CustomerID
                     where EF.Property<string>(o1.o2, "CustomerID") == "ALFKI"
                     select new { o1, o1.o2, Shadow = EF.Property<DateTime?>(o1.o2, "OrderDate") },
@@ -221,7 +218,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         where o2.OrderID > 0
                         orderby o2.OrderID
                         select o2
-                    ).Take(5)
+                    )
+                        .Take(5)
                         on c.CustomerID equals o1.CustomerID
                     where o1.CustomerID == "ALFKI"
                     select new { c.ContactName, o1.OrderID },
@@ -388,7 +386,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         from c in ss.Set<Customer>()
                         join e in ss.Set<Employee>() on c.City equals e.City into employees
                         select employees
-                    ).SelectMany(emps => emps)
+                    )
+                        .SelectMany(emps => emps)
                         .Select(
                             e => new { Title = EF.Property<string>(e, "Title"), Id = e.EmployeeID }
                         ),
@@ -409,7 +408,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             on c.City equals e.City
                             into employees
                         select employees
-                    ).SelectMany(emps => emps)
+                    )
+                        .SelectMany(emps => emps)
                         .Select(
                             e => new { Title = EF.Property<string>(e, "Title"), Id = e.EmployeeID }
                         ),
@@ -430,7 +430,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             on c.City equals e.City
                             into employees
                         select employees
-                    ).SelectMany(emps => emps)
+                    )
+                        .SelectMany(emps => emps)
                         .Select(
                             e => new { Title = EF.Property<string>(e, "Title"), Id = e.EmployeeID }
                         ),
@@ -824,14 +825,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(c => c.CustomerID.StartsWith("F"))
                         .SelectMany(
                             c =>
-                                c.Orders.Select(
-                                    o =>
-                                        new
-                                        {
-                                            OrderProperty = ClientMethod(o),
-                                            CustomerProperty = c.ContactName
-                                        }
-                                )
+                                c.Orders
+                                    .Select(
+                                        o =>
+                                            new
+                                            {
+                                                OrderProperty = ClientMethod(o),
+                                                CustomerProperty = c.ContactName
+                                            }
+                                    )
                         ),
                 elementSorter: e => e.OrderProperty,
                 entryCount: 63
@@ -849,15 +851,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(c => c.CustomerID.StartsWith("F"))
                         .SelectMany(
                             c =>
-                                c.Orders.Select(
-                                    o =>
-                                        new
-                                        {
-                                            OrderProperty = ClientMethod(o),
-                                            o.OrderDetails,
-                                            CustomerProperty = c.ContactName
-                                        }
-                                )
+                                c.Orders
+                                    .Select(
+                                        o =>
+                                            new
+                                            {
+                                                OrderProperty = ClientMethod(o),
+                                                o.OrderDetails,
+                                                CustomerProperty = c.ContactName
+                                            }
+                                    )
                         ),
                 elementSorter: e => e.OrderProperty,
                 elementAsserter: (e, a) =>
@@ -881,15 +884,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(c => c.CustomerID.StartsWith("F"))
                         .SelectMany(
                             c =>
-                                c.Orders.Select(
-                                    o =>
-                                        new
-                                        {
-                                            OrderProperty = ClientMethod(o),
-                                            o.OrderDetails,
-                                            CustomerProperty = c.ContactName
-                                        }
-                                )
+                                c.Orders
+                                    .Select(
+                                        o =>
+                                            new
+                                            {
+                                                OrderProperty = ClientMethod(o),
+                                                o.OrderDetails,
+                                                CustomerProperty = c.ContactName
+                                            }
+                                    )
                         )
                         .Select(e => new { e.OrderProperty, e.CustomerProperty }),
                 elementSorter: e => e.OrderProperty,
@@ -914,9 +918,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new CustomerViewModel(
                                     c.CustomerID,
                                     c.City,
-                                    c.Orders.SelectMany(
+                                    c.Orders
+                                        .SelectMany(
                                             o =>
-                                                o.OrderDetails.Where(od => od.OrderID < 11000)
+                                                o.OrderDetails
+                                                    .Where(od => od.OrderID < 11000)
                                                     .Select(
                                                         od =>
                                                             new OrderDetailViewModel(
@@ -1030,7 +1036,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(c => c.CustomerID)
                         .SelectMany(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .Skip(0)
                                     .Select(o => new { c.City, o.OrderDate })
                         ),

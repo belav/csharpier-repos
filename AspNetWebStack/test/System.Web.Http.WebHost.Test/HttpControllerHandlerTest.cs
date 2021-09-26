@@ -197,10 +197,8 @@ namespace System.Web.Http.WebHost
                 {
                     // Assert
                     object ignore;
-                    bool found = actualRequest.Properties.TryGetValue(
-                        HttpControllerHandler.OwinEnvironmentKey,
-                        out ignore
-                    );
+                    bool found = actualRequest.Properties
+                        .TryGetValue(HttpControllerHandler.OwinEnvironmentKey, out ignore);
                     Assert.False(found);
                 }
             }
@@ -223,10 +221,8 @@ namespace System.Web.Http.WebHost
                 {
                     // Assert
                     object ignore;
-                    bool found = actualRequest.Properties.TryGetValue(
-                        HttpControllerHandler.OwinEnvironmentKey,
-                        out ignore
-                    );
+                    bool found = actualRequest.Properties
+                        .TryGetValue(HttpControllerHandler.OwinEnvironmentKey, out ignore);
                     Assert.False(found);
                 }
             }
@@ -729,8 +725,8 @@ namespace System.Web.Http.WebHost
             Mock<HttpResponseBase> responseMock = new Mock<HttpResponseBase>();
             responseMock.SetupGet(r => r.StatusCode).Returns(401);
             responseMock.SetupSet<bool>(
-                    r => r.SuppressFormsAuthenticationRedirect = It.IsAny<bool>()
-                )
+                r => r.SuppressFormsAuthenticationRedirect = It.IsAny<bool>()
+            )
                 .Callback(value => suppressFormsAuthenticationRedirect = value)
                 .Verifiable();
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
@@ -950,15 +946,15 @@ namespace System.Web.Http.WebHost
             }
 
             formatterMock.Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Returns(tcs.Task);
 
             MemoryStream memoryStream = new MemoryStream();
@@ -1028,15 +1024,15 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             formatterMock.Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Throws(new NotSupportedException("Expected error"));
 
             MemoryStream memoryStream = new MemoryStream();
@@ -1111,15 +1107,15 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             formatterMock.Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Throws(new HttpResponseException(errorResponse));
 
             MemoryStream memoryStream = new MemoryStream();
@@ -1160,15 +1156,15 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             formatterMock.Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Throws(new HttpResponseException(errorResponse));
 
             MemoryStream memoryStream = new MemoryStream();
@@ -1211,15 +1207,15 @@ namespace System.Web.Http.WebHost
 
             // This formatter throws on any write attempt
             formatterMock.Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Returns(tcs.Task);
 
             // Create a local config to hook to the request to condition
@@ -1268,15 +1264,15 @@ namespace System.Web.Http.WebHost
 
             // This formatter throws on any write attempt
             formatterMock.Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Throws(new NotSupportedException("Expected error"));
 
             // Create a local config to hook to the request to condition
@@ -1323,13 +1319,13 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             negotiatorMock.Setup(
-                    m =>
-                        m.Negotiate(
-                            It.IsAny<Type>(),
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>()
-                        )
-                )
+                m =>
+                    m.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
+            )
                 .Returns(
                     (Type t, HttpRequestMessage r, IEnumerable<MediaTypeFormatter> f) =>
                     {
@@ -1352,15 +1348,15 @@ namespace System.Web.Http.WebHost
 
             // This formatter throws on any write attempt
             formatterMock.Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Throws(new NotSupportedException("Expected error"));
 
             // Create a local config to hook to the request to condition
@@ -1410,15 +1406,15 @@ namespace System.Web.Http.WebHost
 
             // This formatter throws on any write attempt
             formatterMock.Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Throws(new NotSupportedException("Expected error"));
 
             // Create a local config to hook to the request to condition
@@ -1426,10 +1422,11 @@ namespace System.Web.Http.WebHost
             HttpConfiguration config = new HttpConfiguration();
             config.Formatters.Clear();
             config.Formatters.Add(formatterMock.Object);
-            config.Services.Replace(
-                typeof(IContentNegotiator),
-                null /*negotiatorMock.Object*/
-            );
+            config.Services
+                .Replace(
+                    typeof(IContentNegotiator),
+                    null /*negotiatorMock.Object*/
+                );
 
             MemoryStream memoryStream = new MemoryStream();
             Mock<HttpContextBase> contextMock = CreateMockHttpContextBaseForResponse(memoryStream);
@@ -1491,15 +1488,15 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             formatterMock.Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Throws(new NotSupportedException("Expected error"));
 
             MemoryStream memoryStream = new MemoryStream();
@@ -1540,15 +1537,15 @@ namespace System.Web.Http.WebHost
                 CallBase = true
             };
             formatterMock.Setup(
-                    m =>
-                        m.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                m =>
+                    m.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Returns(tcs.Task);
 
             MemoryStream memoryStream = new MemoryStream();
@@ -1580,12 +1577,8 @@ namespace System.Web.Http.WebHost
 
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
             mock.Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(Task.FromResult(0));
             IExceptionLogger logger = mock.Object;
 
@@ -1780,12 +1773,12 @@ namespace System.Web.Http.WebHost
                     MockBehavior.Strict
                 );
                 handlerMock.Setup(
-                        h =>
-                            h.HandleAsync(
-                                It.IsAny<ExceptionHandlerContext>(),
-                                It.IsAny<CancellationToken>()
-                            )
-                    )
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                     .Returns<ExceptionHandlerContext, CancellationToken>(
                         (c, i) =>
                         {
@@ -1882,12 +1875,12 @@ namespace System.Web.Http.WebHost
                     MockBehavior.Strict
                 );
                 handlerMock.Setup(
-                        h =>
-                            h.HandleAsync(
-                                It.IsAny<ExceptionHandlerContext>(),
-                                It.IsAny<CancellationToken>()
-                            )
-                    )
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                     .Returns<ExceptionHandlerContext, CancellationToken>(
                         (c, i) =>
                         {
@@ -1969,12 +1962,12 @@ namespace System.Web.Http.WebHost
                     MockBehavior.Strict
                 );
                 handlerMock.Setup(
-                        h =>
-                            h.HandleAsync(
-                                It.IsAny<ExceptionHandlerContext>(),
-                                It.IsAny<CancellationToken>()
-                            )
-                    )
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                     .Returns<ExceptionHandlerContext, CancellationToken>(
                         (c, i) =>
                         {
@@ -2449,12 +2442,12 @@ namespace System.Web.Http.WebHost
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(Task.FromResult(0));
             return mock;
         }
@@ -2468,12 +2461,8 @@ namespace System.Web.Http.WebHost
         {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
             mock.Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(Task.FromResult(0));
             return mock;
         }
@@ -2523,61 +2512,58 @@ namespace System.Web.Http.WebHost
             requestBaseMock.SetupGet(m => m.Headers).Returns(new NameValueCollection());
             requestBaseMock.Setup(r => r.ReadEntityBodyMode).Returns(() => readEntityBodyMode);
 
-            requestBaseMock.Setup(m => m.GetBufferedInputStream())
-                .Returns(
-                    () =>
+            requestBaseMock.Setup(m => m.GetBufferedInputStream()).Returns(
+                () =>
+                {
+                    if (
+                        readEntityBodyMode == ReadEntityBodyMode.None
+                        || readEntityBodyMode == ReadEntityBodyMode.Buffered
+                    )
                     {
-                        if (
-                            readEntityBodyMode == ReadEntityBodyMode.None
-                            || readEntityBodyMode == ReadEntityBodyMode.Buffered
-                        )
-                        {
-                            readEntityBodyMode = ReadEntityBodyMode.Buffered;
-                            return getStream();
-                        }
-                        throw new InvalidOperationException();
+                        readEntityBodyMode = ReadEntityBodyMode.Buffered;
+                        return getStream();
                     }
-                );
+                    throw new InvalidOperationException();
+                }
+            );
 
-            requestBaseMock.SetupGet(m => m.InputStream)
-                .Returns(
-                    () =>
+            requestBaseMock.SetupGet(m => m.InputStream).Returns(
+                () =>
+                {
+                    if (
+                        readEntityBodyMode == ReadEntityBodyMode.None
+                        || readEntityBodyMode == ReadEntityBodyMode.Classic
+                    )
                     {
-                        if (
-                            readEntityBodyMode == ReadEntityBodyMode.None
-                            || readEntityBodyMode == ReadEntityBodyMode.Classic
-                        )
-                        {
-                            readEntityBodyMode = ReadEntityBodyMode.Classic;
-                            return getStream();
-                        }
-                        else if (readEntityBodyMode == ReadEntityBodyMode.Buffered)
-                        {
-                            Stream stream = getStream();
-                            if (stream.Position == stream.Length)
-                            {
-                                return stream;
-                            }
-                        }
-                        throw new InvalidOperationException();
+                        readEntityBodyMode = ReadEntityBodyMode.Classic;
+                        return getStream();
                     }
-                );
+                    else if (readEntityBodyMode == ReadEntityBodyMode.Buffered)
+                    {
+                        Stream stream = getStream();
+                        if (stream.Position == stream.Length)
+                        {
+                            return stream;
+                        }
+                    }
+                    throw new InvalidOperationException();
+                }
+            );
 
-            requestBaseMock.Setup(m => m.GetBufferlessInputStream())
-                .Returns(
-                    () =>
+            requestBaseMock.Setup(m => m.GetBufferlessInputStream()).Returns(
+                () =>
+                {
+                    if (
+                        readEntityBodyMode == ReadEntityBodyMode.None
+                        || readEntityBodyMode == ReadEntityBodyMode.Bufferless
+                    )
                     {
-                        if (
-                            readEntityBodyMode == ReadEntityBodyMode.None
-                            || readEntityBodyMode == ReadEntityBodyMode.Bufferless
-                        )
-                        {
-                            readEntityBodyMode = ReadEntityBodyMode.Bufferless;
-                            return getStream();
-                        }
-                        throw new InvalidOperationException();
+                        readEntityBodyMode = ReadEntityBodyMode.Bufferless;
+                        return getStream();
                     }
-                );
+                    throw new InvalidOperationException();
+                }
+            );
             return requestBaseMock.Object;
         }
 

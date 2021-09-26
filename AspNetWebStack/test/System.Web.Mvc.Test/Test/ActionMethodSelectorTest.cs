@@ -27,9 +27,8 @@ namespace System.Web.Mvc.Test
             // Assert
             Assert.Equal(2, selector.AliasedMethods.Length);
 
-            List<MethodInfo> sortedAliasedMethods = selector.AliasedMethods.OrderBy(
-                    methodInfo => methodInfo.Name
-                )
+            List<MethodInfo> sortedAliasedMethods = selector.AliasedMethods
+                .OrderBy(methodInfo => methodInfo.Name)
                 .ToList();
             Assert.Equal("Bar", sortedAliasedMethods[0].Name);
             Assert.Equal("FooRenamed", sortedAliasedMethods[1].Name);
@@ -222,9 +221,8 @@ namespace System.Web.Mvc.Test
             // Assert
             Assert.Single(selector.NonAliasedMethods);
 
-            List<MethodInfo> sortedMethods = selector.NonAliasedMethods["foo"].OrderBy(
-                    methodInfo => methodInfo.GetParameters().Length
-                )
+            List<MethodInfo> sortedMethods = selector.NonAliasedMethods["foo"]
+                .OrderBy(methodInfo => methodInfo.GetParameters().Length)
                 .ToList();
             Assert.Equal("Foo", sortedMethods[0].Name);
             Assert.Empty(sortedMethods[0].GetParameters());

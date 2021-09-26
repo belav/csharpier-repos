@@ -35,11 +35,11 @@ namespace Microsoft.AspNetCore.Analyzers
 
             // Assert
             var actual = results.Select(
-                    m =>
-                        m.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
-                        + "."
-                        + m.Name
-                )
+                m =>
+                    m.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                    + "."
+                    + m.Name
+            )
                 .OrderBy(s => s)
                 .ToArray();
             Assert.Equal(expected, actual);

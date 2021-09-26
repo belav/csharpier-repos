@@ -75,7 +75,10 @@ namespace Microsoft.DotNet.Build.Tasks
                     "",
                     $"| Platform |{string.Concat(Branches.Select(p => $" {p.ItemSpec} |"))}",
                     $"| --- | {string.Concat(Enumerable.Repeat(" :---: |", Branches.Length))}"
-                }.Concat(rows).Concat(new[] { "" }).ToArray();
+                }
+                    .Concat(rows)
+                    .Concat(new[] { "" })
+                    .ToArray();
 
                 if (
                     readmeLines.Contains(Begin(TableComment))
@@ -83,8 +86,8 @@ namespace Microsoft.DotNet.Build.Tasks
                 )
                 {
                     string[] beforeTable = readmeLines.TakeWhile(
-                            line => line != Begin(TableComment)
-                        )
+                        line => line != Begin(TableComment)
+                    )
                         .Concat(new[] { Begin(TableComment) })
                         .ToArray();
 
@@ -111,9 +114,8 @@ namespace Microsoft.DotNet.Build.Tasks
         {
             string parenthetical = platform.GetMetadata("Parenthetical");
 
-            string cells = string.Concat(
-                Branches.Select(branch => $" {CreateCell(platform, branch, links)} |")
-            );
+            string cells = string
+                .Concat(Branches.Select(branch => $" {CreateCell(platform, branch, links)} |"));
 
             return $"| **{platform.ItemSpec}**{parenthetical} |{cells}";
         }

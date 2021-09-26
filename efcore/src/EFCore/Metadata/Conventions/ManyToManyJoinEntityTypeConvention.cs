@@ -75,9 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 && navigation.ForeignKey?.DeclaringEntityType != joinEntityType
             )
             {
-                ((InternalModelBuilder)joinEntityType.Model.Builder).RemoveImplicitJoinEntity(
-                    (EntityType)joinEntityType
-                );
+                ((InternalModelBuilder)joinEntityType.Model.Builder)
+                    .RemoveImplicitJoinEntity((EntityType)joinEntityType);
             }
         }
 
@@ -91,9 +90,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var joinEntityType = navigation.ForeignKey?.DeclaringEntityType;
             if (joinEntityType is not null && joinEntityType.IsInModel && navigation.IsCollection)
             {
-                ((InternalModelBuilder)joinEntityType.Model.Builder).RemoveImplicitJoinEntity(
-                    (EntityType)joinEntityType
-                );
+                ((InternalModelBuilder)joinEntityType.Model.Builder)
+                    .RemoveImplicitJoinEntity((EntityType)joinEntityType);
             }
         }
 
@@ -141,11 +139,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 );
             }
 
-            var joinEntityTypeBuilder = model.Builder.SharedTypeEntity(
-                joinEntityTypeName,
-                Model.DefaultPropertyBagType,
-                ConfigurationSource.Convention
-            )!;
+            var joinEntityTypeBuilder = model.Builder
+                .SharedTypeEntity(
+                    joinEntityTypeName,
+                    Model.DefaultPropertyBagType,
+                    ConfigurationSource.Convention
+                )!;
 
             var leftForeignKey = CreateSkipNavigationForeignKey(
                 skipNavigation,
@@ -153,10 +152,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
             if (leftForeignKey == null)
             {
-                model.Builder.HasNoEntityType(
-                    joinEntityTypeBuilder.Metadata,
-                    ConfigurationSource.Convention
-                );
+                model.Builder
+                    .HasNoEntityType(
+                        joinEntityTypeBuilder.Metadata,
+                        ConfigurationSource.Convention
+                    );
                 return;
             }
 
@@ -166,18 +166,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
             if (rightForeignKey == null)
             {
-                model.Builder.HasNoEntityType(
-                    joinEntityTypeBuilder.Metadata,
-                    ConfigurationSource.Convention
-                );
+                model.Builder
+                    .HasNoEntityType(
+                        joinEntityTypeBuilder.Metadata,
+                        ConfigurationSource.Convention
+                    );
                 return;
             }
 
             skipNavigation.Builder.HasForeignKey(leftForeignKey, ConfigurationSource.Convention);
-            inverseSkipNavigation.Builder.HasForeignKey(
-                rightForeignKey,
-                ConfigurationSource.Convention
-            );
+            inverseSkipNavigation.Builder
+                .HasForeignKey(rightForeignKey, ConfigurationSource.Convention);
         }
 
         private static ForeignKey? CreateSkipNavigationForeignKey(
@@ -189,6 +188,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Convention,
                 required: true,
                 skipNavigation.Inverse!.Name
-            )!.IsUnique(false, ConfigurationSource.Convention)!.Metadata;
+            )!
+                .IsUnique(false, ConfigurationSource.Convention)!.Metadata;
     }
 }

@@ -18,20 +18,18 @@ namespace RoutingWebSite
                 new SlugifyParameterTransformer()
             );
 
-            services.AddMvc()
-                .AddNewtonsoftJson()
-                .AddRazorPagesOptions(
-                    options =>
-                    {
-                        options.Conventions.AddFolderRouteModelConvention(
-                            "/PageRouteTransformer",
-                            model =>
-                            {
-                                pageRouteTransformerConvention.Apply(model);
-                            }
-                        );
-                    }
-                );
+            services.AddMvc().AddNewtonsoftJson().AddRazorPagesOptions(
+                options =>
+                {
+                    options.Conventions.AddFolderRouteModelConvention(
+                        "/PageRouteTransformer",
+                        model =>
+                        {
+                            pageRouteTransformerConvention.Apply(model);
+                        }
+                    );
+                }
+            );
             services.AddRouting(
                 options =>
                 {

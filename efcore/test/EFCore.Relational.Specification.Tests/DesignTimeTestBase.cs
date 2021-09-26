@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore
                         throwOnError: true
                     )
                 )!
-            ).ConfigureDesignTimeServices(serviceCollection);
+            )
+                .ConfigureDesignTimeServices(serviceCollection);
             using var services = serviceCollection.BuildServiceProvider();
 
             var reverseEngineerScaffolder = services.GetService<IReverseEngineerScaffolder>();
@@ -45,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Can_get_migrations_services()
         {
             using var context = Fixture.CreateContext();
-            var serviceCollection = new ServiceCollection().AddEntityFrameworkDesignTimeServices()
+            var serviceCollection = new ServiceCollection()
+                .AddEntityFrameworkDesignTimeServices()
                 .AddDbContextDesignTimeServices(context);
             (
                 (IDesignTimeServices)Activator.CreateInstance(
@@ -54,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore
                         throwOnError: true
                     )
                 )!
-            ).ConfigureDesignTimeServices(serviceCollection);
+            )
+                .ConfigureDesignTimeServices(serviceCollection);
             using var services = serviceCollection.BuildServiceProvider();
 
             var migrationsScaffolder = services.GetService<IMigrationsScaffolder>();

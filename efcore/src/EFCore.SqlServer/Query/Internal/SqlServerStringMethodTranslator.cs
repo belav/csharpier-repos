@@ -21,100 +21,72 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerStringMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _indexOfMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.IndexOf),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _indexOfMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.IndexOf), new[] { typeof(string) });
 
-        private static readonly MethodInfo _replaceMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _replaceMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(
                 nameof(string.Replace),
                 new[] { typeof(string), typeof(string) }
             );
 
-        private static readonly MethodInfo _toLowerMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.ToLower), Array.Empty<Type>());
+        private static readonly MethodInfo _toLowerMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.ToLower), Array.Empty<Type>());
 
-        private static readonly MethodInfo _toUpperMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.ToUpper), Array.Empty<Type>());
+        private static readonly MethodInfo _toUpperMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.ToUpper), Array.Empty<Type>());
 
-        private static readonly MethodInfo _substringMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.Substring),
-                new[] { typeof(int), typeof(int) }
-            );
+        private static readonly MethodInfo _substringMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.Substring), new[] { typeof(int), typeof(int) });
 
-        private static readonly MethodInfo _isNullOrEmptyMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.IsNullOrEmpty),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _isNullOrEmptyMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.IsNullOrEmpty), new[] { typeof(string) });
 
-        private static readonly MethodInfo _isNullOrWhiteSpaceMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.IsNullOrWhiteSpace),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _isNullOrWhiteSpaceMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.IsNullOrWhiteSpace), new[] { typeof(string) });
 
         // Method defined in netcoreapp2.0 only
-        private static readonly MethodInfo _trimStartMethodInfoWithoutArgs =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimStart), Array.Empty<Type>());
+        private static readonly MethodInfo _trimStartMethodInfoWithoutArgs = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.TrimStart), Array.Empty<Type>());
 
-        private static readonly MethodInfo _trimEndMethodInfoWithoutArgs =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimEnd), Array.Empty<Type>());
+        private static readonly MethodInfo _trimEndMethodInfoWithoutArgs = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.TrimEnd), Array.Empty<Type>());
 
-        private static readonly MethodInfo _trimMethodInfoWithoutArgs =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), Array.Empty<Type>());
+        private static readonly MethodInfo _trimMethodInfoWithoutArgs = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.Trim), Array.Empty<Type>());
 
         // Method defined in netstandard2.0
-        private static readonly MethodInfo _trimStartMethodInfoWithCharArrayArg =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.TrimStart),
-                new[] { typeof(char[]) }
-            );
+        private static readonly MethodInfo _trimStartMethodInfoWithCharArrayArg = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.TrimStart), new[] { typeof(char[]) });
 
-        private static readonly MethodInfo _trimEndMethodInfoWithCharArrayArg =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.TrimEnd),
-                new[] { typeof(char[]) }
-            );
+        private static readonly MethodInfo _trimEndMethodInfoWithCharArrayArg = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.TrimEnd), new[] { typeof(char[]) });
 
-        private static readonly MethodInfo _trimMethodInfoWithCharArrayArg =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), new[] { typeof(char[]) });
+        private static readonly MethodInfo _trimMethodInfoWithCharArrayArg = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.Trim), new[] { typeof(char[]) });
 
-        private static readonly MethodInfo _startsWithMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.StartsWith),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _startsWithMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.StartsWith), new[] { typeof(string) });
 
-        private static readonly MethodInfo _containsMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.Contains),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _containsMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.Contains), new[] { typeof(string) });
 
-        private static readonly MethodInfo _endsWithMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.EndsWith),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _endsWithMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.EndsWith), new[] { typeof(string) });
 
-        private static readonly MethodInfo _firstOrDefaultMethodInfoWithoutArgs =
-            typeof(Enumerable).GetRuntimeMethods()
-                .Single(
-                    m =>
-                        m.Name == nameof(Enumerable.FirstOrDefault) && m.GetParameters().Length == 1
-                )
-                .MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo _firstOrDefaultMethodInfoWithoutArgs = typeof(Enumerable)
+            .GetRuntimeMethods()
+            .Single(
+                m => m.Name == nameof(Enumerable.FirstOrDefault) && m.GetParameters().Length == 1
+            )
+            .MakeGenericMethod(typeof(char));
 
-        private static readonly MethodInfo _lastOrDefaultMethodInfoWithoutArgs =
-            typeof(Enumerable).GetRuntimeMethods()
-                .Single(
-                    m => m.Name == nameof(Enumerable.LastOrDefault) && m.GetParameters().Length == 1
-                )
-                .MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo _lastOrDefaultMethodInfoWithoutArgs = typeof(Enumerable)
+            .GetRuntimeMethods()
+            .Single(
+                m => m.Name == nameof(Enumerable.LastOrDefault) && m.GetParameters().Length == 1
+            )
+            .MakeGenericMethod(typeof(char));
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -163,16 +135,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     SqlExpression charIndexExpression;
                     var storeType = stringTypeMapping.StoreType;
                     if (
-                        string.Equals(
-                            storeType,
-                            "nvarchar(max)",
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        || string.Equals(
-                            storeType,
-                            "varchar(max)",
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(storeType, "nvarchar(max)", StringComparison.OrdinalIgnoreCase)
+                        || string
+                            .Equals(storeType, "varchar(max)", StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         charIndexExpression = _sqlExpressionFactory.Function(

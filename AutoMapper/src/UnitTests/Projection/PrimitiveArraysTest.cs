@@ -24,10 +24,12 @@ namespace AutoMapper.UnitTests.Projection
                     }
                 );
 
-                typeof(NullReferenceException).ShouldNotBeThrownBy(
-                    () =>
-                        config.Internal().ProjectionBuilder.GetMapExpression<Source, Destination>()
-                );
+                typeof(NullReferenceException)
+                    .ShouldNotBeThrownBy(
+                        () =>
+                            config.Internal()
+                                .ProjectionBuilder.GetMapExpression<Source, Destination>()
+                    );
             }
 
             [Fact]

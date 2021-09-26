@@ -135,10 +135,11 @@ namespace Microsoft.CodeAnalysis.Recommendations
                 if (_context.IsAttributeNameContext)
                 {
                     return symbol.IsOrContainsAccessibleAttribute(
-                        _context.SemanticModel.GetEnclosingNamedType(
-                            _context.LeftToken.SpanStart,
-                            _cancellationToken
-                        ),
+                        _context.SemanticModel
+                            .GetEnclosingNamedType(
+                                _context.LeftToken.SpanStart,
+                                _cancellationToken
+                            ),
                         _context.SemanticModel.Compilation.Assembly,
                         _cancellationToken
                     );
@@ -190,10 +191,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             {
                 if (_lazyEnclosingTypeBases == null)
                 {
-                    var enclosingType = _context.SemanticModel.GetEnclosingNamedType(
-                        _context.LeftToken.SpanStart,
-                        _cancellationToken
-                    );
+                    var enclosingType = _context.SemanticModel
+                        .GetEnclosingNamedType(_context.LeftToken.SpanStart, _cancellationToken);
                     _lazyEnclosingTypeBases =
                         (enclosingType == null)
                             ? SpecializedCollections.EmptyEnumerable<INamedTypeSymbol>()

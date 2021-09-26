@@ -112,7 +112,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     TestProjectRoot,
                     baselineDiagnosticsFilePath
                 );
-                var lines = document.Diagnostics.Select(RazorDiagnosticSerializer.Serialize)
+                var lines = document.Diagnostics
+                    .Select(RazorDiagnosticSerializer.Serialize)
                     .ToArray();
                 if (lines.Any())
                 {
@@ -156,9 +157,11 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 baselineDiagnostics = diagnosticsFile.ReadAllText();
             }
 
-            var actualDiagnostics = string.Concat(
-                document.Diagnostics.Select(d => RazorDiagnosticSerializer.Serialize(d) + "\r\n")
-            );
+            var actualDiagnostics = string
+                .Concat(
+                    document.Diagnostics
+                        .Select(d => RazorDiagnosticSerializer.Serialize(d) + "\r\n")
+                );
             Assert.Equal(baselineDiagnostics, actualDiagnostics);
 
             var baselineMappings = string.Empty;

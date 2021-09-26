@@ -2553,12 +2553,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             {
                 definition.Log(
                     diagnostics,
-                    string.Join(
-                        ", ",
-                        conflictingNavigations.Select(
-                            n => n.Item2.ShortDisplayName() + "." + n.Item1?.Name
-                        )
-                    ),
+                    string
+                        .Join(
+                            ", ",
+                            conflictingNavigations.Select(
+                                n => n.Item2.ShortDisplayName() + "." + n.Item1?.Name
+                            )
+                        ),
                     inverseNavigation.Name
                 );
             }
@@ -2595,12 +2596,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             var d = (EventDefinition<string, string?>)definition;
             var p = (TwoUnmappedPropertyCollectionsEventData)payload;
             return d.GenerateMessage(
-                string.Join(
-                    ", ",
-                    p.FirstPropertyCollection.Select(
-                        n => n.Item2.ShortDisplayName() + "." + n.Item1!.Name
-                    )
-                ),
+                string
+                    .Join(
+                        ", ",
+                        p.FirstPropertyCollection
+                            .Select(n => n.Item2.ShortDisplayName() + "." + n.Item1!.Name)
+                    ),
                 p.SecondPropertyCollection.First().Item1?.Name
             );
         }
@@ -3226,7 +3227,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 p.Property.Name,
                 p.OldValue,
                 p.NewValue,
-                p.EntityEntry.GetInfrastructure()
+                p.EntityEntry
+                    .GetInfrastructure()
                     .BuildCurrentValuesString(
                         p.Property.DeclaringEntityType.FindPrimaryKey()!.Properties
                     )
@@ -3366,7 +3368,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 p.Property.Name,
                 p.OldValue,
                 p.NewValue,
-                p.EntityEntry.GetInfrastructure()
+                p.EntityEntry
+                    .GetInfrastructure()
                     .BuildCurrentValuesString(
                         p.Property.DeclaringEntityType.FindPrimaryKey()!.Properties
                     )
@@ -3513,7 +3516,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 p.Removed.Count(),
                 p.Navigation.DeclaringEntityType.ShortName(),
                 p.Navigation.Name,
-                p.EntityEntry.GetInfrastructure()
+                p.EntityEntry
+                    .GetInfrastructure()
                     .BuildCurrentValuesString(
                         p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
                     )
@@ -3660,7 +3664,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 p.Removed.Count(),
                 p.Navigation.DeclaringEntityType.ShortName(),
                 p.Navigation.Name,
-                p.EntityEntry.GetInfrastructure()
+                p.EntityEntry
+                    .GetInfrastructure()
                     .BuildCurrentValuesString(
                         p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
                     )
@@ -3799,7 +3804,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             return d.GenerateMessage(
                 p.Navigation.DeclaringEntityType.ShortName(),
                 p.Navigation.Name,
-                p.EntityEntry.GetInfrastructure()
+                p.EntityEntry
+                    .GetInfrastructure()
                     .BuildCurrentValuesString(
                         p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
                     )
@@ -3917,7 +3923,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             return d.GenerateMessage(
                 p.EntityEntry.Context.GetType().ShortDisplayName(),
                 p.EntityEntry.Metadata.ShortName(),
-                p.EntityEntry.GetInfrastructure()
+                p.EntityEntry
+                    .GetInfrastructure()
                     .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties)
             );
         }
@@ -4050,7 +4057,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             var p = (StateChangedEventData)payload;
             return d.GenerateMessage(
                 p.EntityEntry.Metadata.ShortName(),
-                p.EntityEntry.GetInfrastructure()
+                p.EntityEntry
+                    .GetInfrastructure()
                     .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
                 p.EntityEntry.Context.GetType().ShortDisplayName(),
                 p.OldState,
@@ -4323,11 +4331,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             var p = (CascadeDeleteEventData)payload;
             return d.GenerateMessage(
                 p.EntityEntry.Metadata.ShortName(),
-                p.EntityEntry.GetInfrastructure()
+                p.EntityEntry
+                    .GetInfrastructure()
                     .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
                 p.State,
                 p.ParentEntityEntry.Metadata.ShortName(),
-                p.ParentEntityEntry.GetInfrastructure()
+                p.ParentEntityEntry
+                    .GetInfrastructure()
                     .BuildCurrentValuesString(
                         p.ParentEntityEntry.Metadata.FindPrimaryKey()!.Properties
                     )
@@ -4459,7 +4469,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             var p = (CascadeDeleteOrphanEventData)payload;
             return d.GenerateMessage(
                 p.EntityEntry.Metadata.ShortName(),
-                p.EntityEntry.GetInfrastructure()
+                p.EntityEntry
+                    .GetInfrastructure()
                     .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
                 p.State,
                 p.ParentEntityType.ShortName()

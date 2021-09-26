@@ -968,9 +968,9 @@ class UseLinq
 
                     var systemCore = SystemCoreRef.ToModuleInstance();
                     var fakeSystemLinq = CreateCompilationWithMscorlib45(
-                            "",
-                            assemblyName: "System.Linq"
-                        )
+                        "",
+                        assemblyName: "System.Linq"
+                    )
                         .EmitToImageReference()
                         .ToModuleInstance();
 

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(0, localTypes1.GlobalNamespace.GetMembers("S1").Length);
             Assert.Equal(
                 0,
-                localTypes1.GlobalNamespace.GetMembers("NS1")
+                localTypes1.GlobalNamespace
+                    .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
                     .GetTypeMembers().Length
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(0, localTypes2.GlobalNamespace.GetMembers("S1").Length);
             Assert.Equal(
                 0,
-                localTypes2.GlobalNamespace.GetMembers("NS1")
+                localTypes2.GlobalNamespace
+                    .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
                     .GetTypeMembers().Length
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var varI1 = pia1_1.GlobalNamespace.GetTypeMembers("I1").Single();
             var varS1 = pia1_1.GlobalNamespace.GetTypeMembers("S1").Single();
-            var varNS1 = pia1_1.GlobalNamespace.GetMembers("NS1")
+            var varNS1 = pia1_1.GlobalNamespace
+                .GetMembers("NS1")
                 .OfType<NamespaceSymbol>()
                 .Single();
             var varI2 = varNS1.GetTypeMembers("I2").Single();
@@ -165,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             Assert.Same(pia1_3.GlobalNamespace.GetTypeMembers("I1").Single(), param[0].Type);
             Assert.Same(
-                pia1_3.GlobalNamespace.GetMembers("NS1")
+                pia1_3.GlobalNamespace
+                    .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
                     .GetTypeMembers("I2")
@@ -412,12 +416,10 @@ public class LocalTypes2
 }
 ";
             var mscorlibRef = Net40.mscorlib;
-            var pia1CopyLink = TestReferences.SymbolsTests.NoPia.Pia1Copy.WithEmbedInteropTypes(
-                true
-            );
-            var pia1CopyRef = TestReferences.SymbolsTests.NoPia.Pia1Copy.WithEmbedInteropTypes(
-                false
-            );
+            var pia1CopyLink = TestReferences.SymbolsTests.NoPia.Pia1Copy
+                .WithEmbedInteropTypes(true);
+            var pia1CopyRef = TestReferences.SymbolsTests.NoPia.Pia1Copy
+                .WithEmbedInteropTypes(false);
 
             // vbc /t:library /vbruntime- LocalTypes1.vb /l:Pia1.dll
             var localTypes1 = CSharpCompilation.Create(
@@ -469,7 +471,8 @@ public class LocalTypes2
 
             var varI1 = pia1_1.GlobalNamespace.GetTypeMembers("I1").Single();
             var varS1 = pia1_1.GlobalNamespace.GetTypeMembers("S1").Single();
-            var varNS1 = pia1_1.GlobalNamespace.GetMembers("NS1")
+            var varNS1 = pia1_1.GlobalNamespace
+                .GetMembers("NS1")
                 .OfType<NamespaceSymbol>()
                 .Single();
             var varI2 = varNS1.GetTypeMembers("I2").Single();
@@ -881,12 +884,10 @@ public class LocalTypes2
             var mscorlibRef = Net40.mscorlib;
             var pia5Link = TestReferences.SymbolsTests.NoPia.Pia5.WithEmbedInteropTypes(true);
             var pia5Ref = TestReferences.SymbolsTests.NoPia.Pia5.WithEmbedInteropTypes(false);
-            var library2Ref = TestReferences.SymbolsTests.NoPia.Library2.WithEmbedInteropTypes(
-                false
-            );
-            var library2Link = TestReferences.SymbolsTests.NoPia.Library2.WithEmbedInteropTypes(
-                true
-            );
+            var library2Ref = TestReferences.SymbolsTests.NoPia.Library2
+                .WithEmbedInteropTypes(false);
+            var library2Link = TestReferences.SymbolsTests.NoPia.Library2
+                .WithEmbedInteropTypes(true);
             var pia1Link = TestReferences.SymbolsTests.NoPia.Pia1.WithEmbedInteropTypes(true);
             var pia1Ref = TestReferences.SymbolsTests.NoPia.Pia1.WithEmbedInteropTypes(false);
 
@@ -1221,12 +1222,10 @@ public class C33
 ";
 
             var mscorlibRef = Net40.mscorlib;
-            var pia1CopyLink = TestReferences.SymbolsTests.NoPia.Pia1Copy.WithEmbedInteropTypes(
-                true
-            );
-            var pia1CopyRef = TestReferences.SymbolsTests.NoPia.Pia1Copy.WithEmbedInteropTypes(
-                false
-            );
+            var pia1CopyLink = TestReferences.SymbolsTests.NoPia.Pia1Copy
+                .WithEmbedInteropTypes(true);
+            var pia1CopyRef = TestReferences.SymbolsTests.NoPia.Pia1Copy
+                .WithEmbedInteropTypes(false);
 
             // vbc /t:library /vbruntime- LocalTypes3.vb /l:Pia1.dll
             var varC_LocalTypes3 = CSharpCompilation.Create(

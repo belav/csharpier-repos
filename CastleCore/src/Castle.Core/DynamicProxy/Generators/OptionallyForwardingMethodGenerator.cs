@@ -43,13 +43,14 @@ namespace Castle.DynamicProxy.Generators
         {
             var targetReference = getTargetReference(@class, MethodToOverride);
 
-            emitter.CodeBuilder.AddStatement(
-                new IfNullExpression(
-                    targetReference,
-                    IfNull(emitter.ReturnType),
-                    IfNotNull(targetReference)
-                )
-            );
+            emitter.CodeBuilder
+                .AddStatement(
+                    new IfNullExpression(
+                        targetReference,
+                        IfNull(emitter.ReturnType),
+                        IfNotNull(targetReference)
+                    )
+                );
 
             return emitter;
         }

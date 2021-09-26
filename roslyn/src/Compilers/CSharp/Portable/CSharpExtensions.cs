@@ -317,11 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia> computeReplacementTrivia
         )
         {
-            return Syntax.SyntaxReplacer.Replace(
-                token,
-                trivia: trivia,
-                computeReplacementTrivia: computeReplacementTrivia
-            );
+            return Syntax.SyntaxReplacer
+                .Replace(token, trivia: trivia, computeReplacementTrivia: computeReplacementTrivia);
         }
 
         /// <summary>
@@ -338,11 +335,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTrivia newTrivia
         )
         {
-            return Syntax.SyntaxReplacer.Replace(
-                token,
-                trivia: new[] { oldTrivia },
-                computeReplacementTrivia: (o, r) => newTrivia
-            );
+            return Syntax.SyntaxReplacer
+                .Replace(
+                    token,
+                    trivia: new[] { oldTrivia },
+                    computeReplacementTrivia: (o, r) => newTrivia
+                );
         }
 
         internal static Syntax.InternalSyntax.DirectiveStack ApplyDirectives(
@@ -942,10 +940,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CSharpResources.IConversionExpressionIsNotCSharpConversion,
-                        nameof(IConversionOperation)
-                    ),
+                    string
+                        .Format(
+                            CSharpResources.IConversionExpressionIsNotCSharpConversion,
+                            nameof(IConversionOperation)
+                        ),
                     nameof(conversionExpression)
                 );
             }
@@ -976,10 +975,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CSharpResources.ICompoundAssignmentOperationIsNotCSharpCompoundAssignment,
-                        nameof(compoundAssignment)
-                    ),
+                    string
+                        .Format(
+                            CSharpResources.ICompoundAssignmentOperationIsNotCSharpCompoundAssignment,
+                            nameof(compoundAssignment)
+                        ),
                     nameof(compoundAssignment)
                 );
             }
@@ -1010,10 +1010,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CSharpResources.ICompoundAssignmentOperationIsNotCSharpCompoundAssignment,
-                        nameof(compoundAssignment)
-                    ),
+                    string
+                        .Format(
+                            CSharpResources.ICompoundAssignmentOperationIsNotCSharpCompoundAssignment,
+                            nameof(compoundAssignment)
+                        ),
                     nameof(compoundAssignment)
                 );
             }

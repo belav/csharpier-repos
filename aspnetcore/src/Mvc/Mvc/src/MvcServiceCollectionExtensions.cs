@@ -337,7 +337,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var mvcTagHelpersAssembly = typeof(InputTagHelper).Assembly;
             if (
-                !partManager.ApplicationParts.OfType<AssemblyPart>()
+                !partManager.ApplicationParts
+                    .OfType<AssemblyPart>()
                     .Any(p => p.Assembly == mvcTagHelpersAssembly)
             )
             {
@@ -346,7 +347,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var mvcRazorAssembly = typeof(UrlResolutionTagHelper).Assembly;
             if (
-                !partManager.ApplicationParts.OfType<AssemblyPart>()
+                !partManager.ApplicationParts
+                    .OfType<AssemblyPart>()
                     .Any(p => p.Assembly == mvcRazorAssembly)
             )
             {

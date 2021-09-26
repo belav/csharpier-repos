@@ -121,8 +121,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             mockBodyControl.Setup(m => m.AllowSynchronousIO).Returns(() => allowSynchronousIO);
             var mockHttpResponseControl = new Mock<IHttpResponseControl>();
             mockHttpResponseControl.Setup(
-                    m => m.WritePipeAsync(It.IsAny<ReadOnlyMemory<byte>>(), CancellationToken.None)
-                )
+                m => m.WritePipeAsync(It.IsAny<ReadOnlyMemory<byte>>(), CancellationToken.None)
+            )
                 .Returns(new ValueTask<FlushResult>(new FlushResult()));
 
             var pipeWriter = new HttpResponsePipeWriter(mockHttpResponseControl.Object);

@@ -128,7 +128,8 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             // internal list of elements that we will then copy to the array. This requires
             // some extra allocation, but is necessary since we don't know up front whether
             // the array is sufficiently large to hold the stack's contents.
-            ((ICollection)ToList()).CopyTo(array, index);
+            ((ICollection)ToList())
+                .CopyTo(array, index);
         }
 
         /// <summary>

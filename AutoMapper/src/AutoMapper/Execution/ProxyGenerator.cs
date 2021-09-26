@@ -11,19 +11,14 @@ namespace AutoMapper.Execution
 {
     public static class ProxyGenerator
     {
-        private static readonly MethodInfo DelegateCombine = typeof(Delegate).GetMethod(
-            nameof(Delegate.Combine),
-            new[] { typeof(Delegate), typeof(Delegate) }
-        );
-        private static readonly MethodInfo DelegateRemove = typeof(Delegate).GetMethod(
-            nameof(Delegate.Remove)
-        );
-        private static readonly EventInfo PropertyChanged = typeof(INotifyPropertyChanged).GetEvent(
-            nameof(INotifyPropertyChanged.PropertyChanged)
-        );
-        private static readonly ConstructorInfo ProxyBaseCtor = typeof(ProxyBase).GetConstructor(
-            Type.EmptyTypes
-        );
+        private static readonly MethodInfo DelegateCombine = typeof(Delegate)
+            .GetMethod(nameof(Delegate.Combine), new[] { typeof(Delegate), typeof(Delegate) });
+        private static readonly MethodInfo DelegateRemove = typeof(Delegate)
+            .GetMethod(nameof(Delegate.Remove));
+        private static readonly EventInfo PropertyChanged = typeof(INotifyPropertyChanged)
+            .GetEvent(nameof(INotifyPropertyChanged.PropertyChanged));
+        private static readonly ConstructorInfo ProxyBaseCtor = typeof(ProxyBase)
+            .GetConstructor(Type.EmptyTypes);
         private static readonly ModuleBuilder ProxyModule = CreateProxyModule();
         private static readonly LockingConcurrentDictionary<TypeDescription, Type> ProxyTypes =
             new LockingConcurrentDictionary<TypeDescription, Type>(EmitProxy);
@@ -49,10 +44,8 @@ namespace AutoMapper.Execution
             return typeBuilder.CreateTypeInfo().AsType();
             TypeBuilder GenerateType()
             {
-                var propertyNames = string.Join(
-                    "_",
-                    typeDescription.AdditionalProperties.Select(p => p.Name)
-                );
+                var propertyNames = string
+                    .Join("_", typeDescription.AdditionalProperties.Select(p => p.Name));
                 var typeName =
                     $"Proxy_{interfaceType.FullName}_{typeDescription.GetHashCode()}_{propertyNames}";
                 const int MaxTypeNameLength = 1023;
@@ -135,8 +128,8 @@ namespace AutoMapper.Execution
                 // first we collect all properties, those with setters before getters in order to enable less specific redundant getters
                 foreach (
                     var property in allInterfaces.Where(
-                            intf => intf != typeof(INotifyPropertyChanged)
-                        )
+                        intf => intf != typeof(INotifyPropertyChanged)
+                    )
                         .SelectMany(intf => intf.GetProperties())
                         .Select(p => new PropertyDescription(p))
                         .Concat(typeDescription.AdditionalProperties)
@@ -174,8 +167,8 @@ namespace AutoMapper.Execution
         ) => ProxyTypes.GetOrAdd(new TypeDescription(sourceType, additionalProperties));
         class PropertyEmitter
         {
-            private static readonly MethodInfo ProxyBaseNotifyPropertyChanged =
-                typeof(ProxyBase).GetMethod("NotifyPropertyChanged", TypeExtensions.InstanceFlags);
+            private static readonly MethodInfo ProxyBaseNotifyPropertyChanged = typeof(ProxyBase)
+                .GetMethod("NotifyPropertyChanged", TypeExtensions.InstanceFlags);
             private readonly FieldBuilder _fieldBuilder;
             private readonly MethodBuilder _getterBuilder;
             private readonly PropertyBuilder _propertyBuilder;

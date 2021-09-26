@@ -127,11 +127,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_save_and_query_with_explicit_services_and_explicit_config()
         {
-            var optionsBuilder = new DbContextOptionsBuilder().UseInMemoryDatabase(
-                    nameof(ExplicitServicesAndConfigBlogContext)
-                )
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseInMemoryDatabase(nameof(ExplicitServicesAndConfigBlogContext))
                 .UseInternalServiceProvider(
-                    new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                    new ServiceCollection()
+                        .AddEntityFrameworkInMemoryDatabase()
                         .BuildServiceProvider()
                 );
 
@@ -281,16 +281,15 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_register_context_and_configuration_with_DI_container_and_have_both_injected()
         {
-            var optionsBuilder = new DbContextOptionsBuilder().UseInMemoryDatabase(
-                nameof(InjectContextAndConfigurationBlogContext)
-            );
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseInMemoryDatabase(nameof(InjectContextAndConfigurationBlogContext));
 
-            var serviceProvider =
-                new ServiceCollection().AddTransient<InjectContextAndConfigurationBlogContext>()
-                    .AddTransient<InjectContextAndConfigurationController>()
-                    .AddSingleton(p => optionsBuilder.UseInternalServiceProvider(p).Options)
-                    .AddEntityFrameworkInMemoryDatabase()
-                    .BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddTransient<InjectContextAndConfigurationBlogContext>()
+                .AddTransient<InjectContextAndConfigurationController>()
+                .AddSingleton(p => optionsBuilder.UseInternalServiceProvider(p).Options)
+                .AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
 
             serviceProvider.GetRequiredService<InjectContextAndConfigurationController>().Test();
         }
@@ -389,24 +388,22 @@ namespace Microsoft.EntityFrameworkCore
         public void Can_inject_different_configurations_into_different_contexts()
         {
             var blogOptions =
-                new DbContextOptionsBuilder<InjectDifferentConfigurationsBlogContext>().UseInMemoryDatabase(
-                    nameof(InjectDifferentConfigurationsBlogContext)
-                );
+                new DbContextOptionsBuilder<InjectDifferentConfigurationsBlogContext>()
+                    .UseInMemoryDatabase(nameof(InjectDifferentConfigurationsBlogContext));
 
             var accountOptions =
-                new DbContextOptionsBuilder<InjectDifferentConfigurationsAccountContext>().UseInMemoryDatabase(
-                    nameof(InjectDifferentConfigurationsAccountContext)
-                );
+                new DbContextOptionsBuilder<InjectDifferentConfigurationsAccountContext>()
+                    .UseInMemoryDatabase(nameof(InjectDifferentConfigurationsAccountContext));
 
-            var serviceProvider =
-                new ServiceCollection().AddTransient<InjectDifferentConfigurationsBlogContext>()
-                    .AddTransient<InjectDifferentConfigurationsAccountContext>()
-                    .AddTransient<InjectDifferentConfigurationsBlogController>()
-                    .AddTransient<InjectDifferentConfigurationsAccountController>()
-                    .AddSingleton(p => blogOptions.UseInternalServiceProvider(p).Options)
-                    .AddSingleton(p => accountOptions.UseInternalServiceProvider(p).Options)
-                    .AddEntityFrameworkInMemoryDatabase()
-                    .BuildServiceProvider();
+            var serviceProvider = new ServiceCollection()
+                .AddTransient<InjectDifferentConfigurationsBlogContext>()
+                .AddTransient<InjectDifferentConfigurationsAccountContext>()
+                .AddTransient<InjectDifferentConfigurationsBlogController>()
+                .AddTransient<InjectDifferentConfigurationsAccountController>()
+                .AddSingleton(p => blogOptions.UseInternalServiceProvider(p).Options)
+                .AddSingleton(p => accountOptions.UseInternalServiceProvider(p).Options)
+                .AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
 
             serviceProvider.GetRequiredService<InjectDifferentConfigurationsBlogController>()
                 .Test();

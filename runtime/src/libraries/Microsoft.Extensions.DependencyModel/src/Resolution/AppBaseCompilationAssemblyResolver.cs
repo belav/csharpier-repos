@@ -41,22 +41,13 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         {
             bool isProject =
                 string.Equals(library.Type, "project", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(
-                    library.Type,
-                    "msbuildproject",
-                    StringComparison.OrdinalIgnoreCase
-                );
+                || string
+                    .Equals(library.Type, "msbuildproject", StringComparison.OrdinalIgnoreCase);
 
-            bool isPackage = string.Equals(
-                library.Type,
-                "package",
-                StringComparison.OrdinalIgnoreCase
-            );
-            bool isReferenceAssembly = string.Equals(
-                library.Type,
-                "referenceassembly",
-                StringComparison.OrdinalIgnoreCase
-            );
+            bool isPackage = string
+                .Equals(library.Type, "package", StringComparison.OrdinalIgnoreCase);
+            bool isReferenceAssembly = string
+                .Equals(library.Type, "referenceassembly", StringComparison.OrdinalIgnoreCase);
             if (
                 !isProject
                 && !isPackage

@@ -407,7 +407,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 join o in context.Set<Order>().AsTracking() on c.CustomerID equals o.CustomerID
                 where c.CustomerID == "ALFKI"
                 select o
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(6, customers.Count);
             Assert.Equal(6, context.ChangeTracker.Entries().Count());
@@ -422,7 +423,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 join o in context.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
                 where c.CustomerID == "ALFKI"
                 select o
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(6, customers.Count);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -437,7 +439,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 join o in context.Set<Order>() on c.CustomerID equals o.CustomerID
                 where c.CustomerID == "ALFKI"
                 select o
-            ).AsNoTracking().ToList();
+            )
+                .AsNoTracking()
+                .ToList();
 
             Assert.Equal(6, customers.Count);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -447,9 +451,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         protected virtual NorthwindContext CreateNoTrackingContext() =>
             new(
-                new DbContextOptionsBuilder(Fixture.CreateOptions()).UseQueryTrackingBehavior(
-                    QueryTrackingBehavior.NoTracking
-                ).Options
+                new DbContextOptionsBuilder(Fixture.CreateOptions())
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking).Options
             );
     }
 }

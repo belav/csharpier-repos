@@ -43,10 +43,11 @@ namespace FunctionalTests
 
         public int GetNumRedirects()
         {
-            return int.Parse(
-                Context.GetHttpContext().Request.Query["numRedirects"],
-                CultureInfo.InvariantCulture
-            );
+            return int
+                .Parse(
+                    Context.GetHttpContext().Request.Query["numRedirects"],
+                    CultureInfo.InvariantCulture
+                );
         }
 
         public void ThrowException(string message)
@@ -82,7 +83,8 @@ namespace FunctionalTests
             token.Register(
                 async (state) =>
                 {
-                    await ((IHubContext<TestHub>)state).Clients.Client(connectionId)
+                    await ((IHubContext<TestHub>)state).Clients
+                        .Client(connectionId)
                         .SendAsync("StreamCanceled");
                 },
                 _context

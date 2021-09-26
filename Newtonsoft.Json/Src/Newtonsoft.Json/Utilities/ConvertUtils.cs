@@ -226,9 +226,8 @@ namespace Newtonsoft.Json.Utilities
                 Type nonNullable = Nullable.GetUnderlyingType(t);
                 if (nonNullable.IsEnum())
                 {
-                    Type nullableUnderlyingType = typeof(Nullable<>).MakeGenericType(
-                        Enum.GetUnderlyingType(nonNullable)
-                    );
+                    Type nullableUnderlyingType = typeof(Nullable<>)
+                        .MakeGenericType(Enum.GetUnderlyingType(nonNullable));
                     isEnum = true;
                     return GetTypeCode(nullableUnderlyingType);
                 }
@@ -301,10 +300,8 @@ namespace Newtonsoft.Json.Utilities
                 return null;
             }
 
-            MethodCall<object?, object?> call =
-                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                    castMethodInfo
-                );
+            MethodCall<object?, object?> call = JsonTypeReflector.ReflectionDelegateFactory
+                .CreateMethodCall<object?>(castMethodInfo);
 
             return o => call(null, o);
         }
@@ -357,10 +354,8 @@ namespace Newtonsoft.Json.Utilities
             }
 
             throw new InvalidCastException(
-                "Cannot convert {0} to BigInteger.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    value.GetType()
-                )
+                "Cannot convert {0} to BigInteger."
+                    .FormatWith(CultureInfo.InvariantCulture, value.GetType())
             );
         }
 
@@ -394,10 +389,8 @@ namespace Newtonsoft.Json.Utilities
             catch (Exception ex)
             {
                 throw new InvalidOperationException(
-                    "Can not convert from BigInteger to {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        targetType
-                    ),
+                    "Can not convert from BigInteger to {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, targetType),
                     ex
                 );
             }
@@ -421,27 +414,27 @@ namespace Newtonsoft.Json.Utilities
                     return value!;
                 case ConvertResult.CannotConvertNull:
                     throw new Exception(
-                        "Can not convert null {0} into non-nullable {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            initialValue.GetType(),
-                            targetType
-                        )
+                        "Can not convert null {0} into non-nullable {1}."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                initialValue.GetType(),
+                                targetType
+                            )
                     );
                 case ConvertResult.NotInstantiableType:
                     throw new ArgumentException(
-                        "Target type {0} is not a value type or a non-abstract class.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            targetType
-                        ),
+                        "Target type {0} is not a value type or a non-abstract class."
+                            .FormatWith(CultureInfo.InvariantCulture, targetType),
                         nameof(targetType)
                     );
                 case ConvertResult.NoValidConversion:
                     throw new InvalidOperationException(
-                        "Can not convert from {0} to {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            initialValue.GetType(),
-                            targetType
-                        )
+                        "Can not convert from {0} to {1}."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                initialValue.GetType(),
+                                targetType
+                            )
                     );
                 default:
                     throw new InvalidOperationException("Unexpected conversion result.");
@@ -715,11 +708,12 @@ namespace Newtonsoft.Json.Utilities
             }
 
             throw new ArgumentException(
-                "Could not cast or convert from {0} to {1}.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    initialType?.ToString() ?? "{null}",
-                    targetType
-                )
+                "Could not cast or convert from {0} to {1}."
+                    .FormatWith(
+                        CultureInfo.InvariantCulture,
+                        initialType?.ToString() ?? "{null}",
+                        targetType
+                    )
             );
         }
 
@@ -1628,7 +1622,8 @@ namespace Newtonsoft.Json.Utilities
                                                 )
                                             )
                                         )
-                                    ).GetValueOrDefault()
+                                    )
+                                        .GetValueOrDefault()
                                 )
                             )
                         )

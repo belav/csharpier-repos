@@ -511,9 +511,8 @@ namespace System.Text.Unicode.Tests
             return new Lazy<GetPointerToFirstInvalidByteDel>(
                 () =>
                 {
-                    Type utf8UtilityType = typeof(Utf8).Assembly.GetType(
-                        "System.Text.Unicode.Utf8Utility"
-                    );
+                    Type utf8UtilityType = typeof(Utf8).Assembly
+                        .GetType("System.Text.Unicode.Utf8Utility");
 
                     if (utf8UtilityType is null)
                     {

@@ -225,10 +225,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 KeyValuePair<TKey, TValue>[] array,
                 int arrayIndex
             ) =>
-                ((ICollection<KeyValuePair<TKey, TValue>>)ReadOnlyDictionary).CopyTo(
-                    array,
-                    arrayIndex
-                );
+                ((ICollection<KeyValuePair<TKey, TValue>>)ReadOnlyDictionary)
+                    .CopyTo(array, arrayIndex);
 
             IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
                 KeyValuePair<TKey, TValue>

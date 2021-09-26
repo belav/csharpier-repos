@@ -11,8 +11,9 @@ namespace Microsoft.EntityFrameworkCore
 {
     public class DefaultValuesTest : IDisposable
     {
-        private readonly IServiceProvider _serviceProvider =
-            new ServiceCollection().AddEntityFrameworkSqlServer().BuildServiceProvider();
+        private readonly IServiceProvider _serviceProvider = new ServiceCollection()
+            .AddEntityFrameworkSqlServer()
+            .BuildServiceProvider();
 
         [ConditionalFact]
         public void Can_use_SQL_Server_default_values()
@@ -70,9 +71,9 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder.UseSqlServer(
-                        SqlServerTestStore.CreateConnectionString(_databaseName),
-                        b => b.ApplyConfiguration()
-                    )
+                    SqlServerTestStore.CreateConnectionString(_databaseName),
+                    b => b.ApplyConfiguration()
+                )
                     .UseInternalServiceProvider(_serviceProvider);
 
             protected override void OnModelCreating(ModelBuilder modelBuilder) =>

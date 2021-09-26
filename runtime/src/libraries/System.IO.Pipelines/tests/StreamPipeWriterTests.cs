@@ -244,7 +244,8 @@ namespace System.IO.Pipelines.Tests
                 Encoding.ASCII.GetBytes("World"),
                 Encoding.ASCII.GetBytes("This"),
                 Encoding.ASCII.GetBytes("Works"),
-            }.ToArray();
+            }
+                .ToArray();
 
             Task readsTask = DoReadsAsync(pipe.Reader, data);
             Task writesTask = DoWritesAsync(writer, data);

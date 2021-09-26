@@ -112,8 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private sealed class IsPatternExpressionGeneralLocalRewriter : DecisionDagRewriter
         {
-            private readonly ArrayBuilder<BoundStatement> _statements =
-                ArrayBuilder<BoundStatement>.GetInstance();
+            private readonly ArrayBuilder<BoundStatement> _statements = ArrayBuilder<BoundStatement>
+                .GetInstance();
 
             public IsPatternExpressionGeneralLocalRewriter(
                 SyntaxNode node,

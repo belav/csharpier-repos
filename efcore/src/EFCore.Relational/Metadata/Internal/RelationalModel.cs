@@ -180,9 +180,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                     foreach (var checkConstraint in ((ITable)table).CheckConstraints)
                     {
-                        ((AnnotatableBase)checkConstraint).AddAnnotations(
-                            relationalAnnotationProvider.For(checkConstraint)
-                        );
+                        ((AnnotatableBase)checkConstraint)
+                            .AddAnnotations(relationalAnnotationProvider.For(checkConstraint));
                     }
 
                     table.AddAnnotations(relationalAnnotationProvider.For(table));
@@ -236,9 +235,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 foreach (var sequence in ((IRelationalModel)databaseModel).Sequences)
                 {
-                    ((AnnotatableBase)sequence).AddAnnotations(
-                        relationalAnnotationProvider.For(sequence)
-                    );
+                    ((AnnotatableBase)sequence)
+                        .AddAnnotations(relationalAnnotationProvider.For(sequence));
                 }
 
                 databaseModel.AddAnnotations(relationalAnnotationProvider.For(databaseModel));
@@ -361,10 +359,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                     var mappedTable = StoreObjectIdentifier.Table(mappedTableName, mappedSchema);
                     if (
-                        !databaseModel.Tables.TryGetValue(
-                            (mappedTableName, mappedSchema),
-                            out var table
-                        )
+                        !databaseModel.Tables
+                            .TryGetValue((mappedTableName, mappedSchema), out var table)
                     )
                     {
                         table = new Table(mappedTableName, mappedSchema, databaseModel);
@@ -747,9 +743,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (functionMapping.ColumnMappings.Count != 0 || functionMappings.Count == 0)
                 {
                     functionMappings.Add(functionMapping);
-                    ((StoreFunction)functionMapping.StoreFunction).EntityTypeMappings.Add(
-                        functionMapping
-                    );
+                    ((StoreFunction)functionMapping.StoreFunction).EntityTypeMappings
+                        .Add(functionMapping);
                 }
             }
 
@@ -798,9 +793,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
 
                 functionMappings.Add(functionMapping);
-                ((StoreFunction)functionMapping.StoreFunction).EntityTypeMappings.Add(
-                    functionMapping
-                );
+                ((StoreFunction)functionMapping.StoreFunction).EntityTypeMappings
+                    .Add(functionMapping);
             }
         }
 
@@ -890,19 +884,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (storeFunction == null)
                 {
                     storeFunction = new StoreFunction(dbFunction, model);
-                    model.Functions.Add(
-                        (storeFunction.Name, storeFunction.Schema, parameterTypes),
-                        storeFunction
-                    );
+                    model.Functions
+                        .Add(
+                            (storeFunction.Name, storeFunction.Schema, parameterTypes),
+                            storeFunction
+                        );
                 }
                 else
                 {
                     dbFunction.StoreFunction = storeFunction;
                     for (var i = 0; i < dbFunction.Parameters.Count; i++)
                     {
-                        storeFunction.Parameters[i].DbFunctionParameters.Add(
-                            dbFunction.Parameters[i]
-                        );
+                        storeFunction.Parameters[i].DbFunctionParameters
+                            .Add(dbFunction.Parameters[i]);
                     }
 
                     storeFunction.DbFunctions.Add(dbFunction.ModelName, dbFunction);
@@ -919,7 +913,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 if (
                     !entityTypeMapping.IncludesDerivedTypes
-                    && entityTypeMapping.EntityType.GetTableMappings()
+                    && entityTypeMapping.EntityType
+                        .GetTableMappings()
                         .Any(m => m.IncludesDerivedTypes)
                 )
                 {
@@ -931,7 +926,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     var firstPrincipalMapping = true;
                     foreach (
-                        var principalMapping in foreignKey.PrincipalEntityType.GetTableMappings()
+                        var principalMapping in foreignKey.PrincipalEntityType
+                            .GetTableMappings()
                             .Reverse()
                     )
                     {
@@ -1222,15 +1218,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     if (
                         foreignKey.IsUnique
                         && foreignKey.PrincipalKey.IsPrimaryKey()
-                        && !foreignKey.DeclaringEntityType.IsAssignableFrom(
-                            foreignKey.PrincipalEntityType
-                        )
-                        && !foreignKey.PrincipalEntityType.IsAssignableFrom(
-                            foreignKey.DeclaringEntityType
-                        )
-                        && ((ITableBase)table).EntityTypeMappings.Any(
-                            m => m.EntityType == foreignKey.PrincipalEntityType
-                        )
+                        && !foreignKey.DeclaringEntityType
+                            .IsAssignableFrom(foreignKey.PrincipalEntityType)
+                        && !foreignKey.PrincipalEntityType
+                            .IsAssignableFrom(foreignKey.DeclaringEntityType)
+                        && ((ITableBase)table).EntityTypeMappings
+                            .Any(m => m.EntityType == foreignKey.PrincipalEntityType)
                     )
                     {
                         if (rowInternalForeignKeys == null)
@@ -1355,9 +1348,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     }
 
                     if (
-                        table.EntityTypeMappings.Single(
-                            etm => etm.EntityType == entityType
-                        ).IncludesDerivedTypes
+                        table.EntityTypeMappings
+                            .Single(etm => etm.EntityType == entityType).IncludesDerivedTypes
                     )
                     {
                         foreach (var directlyDerivedEntityType in entityType.GetDerivedTypes())

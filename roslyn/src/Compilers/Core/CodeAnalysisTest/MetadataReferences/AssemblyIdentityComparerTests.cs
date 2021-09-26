@@ -762,9 +762,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 partial: false
             );
 
-            var appConfig = Temp.CreateFile()
-                .WriteAllText(
-                    @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+            var appConfig = Temp.CreateFile().WriteAllText(
+                @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
   <runtime>
     <assemblyBinding xmlns=""urn:schemas-microsoft-com:asm.v1"">
@@ -773,7 +772,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </runtime>
 </configuration>
 "
-                );
+            );
             // Checks all types of equivalence
             TestMatch(
                 "System, Version=5.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",

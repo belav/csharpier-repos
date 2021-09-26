@@ -228,7 +228,8 @@ namespace System.Linq.Expressions
 #if FEATURE_COMPILE
             return (TDelegate)(object)Compiler.LambdaCompiler.Compile(this);
 #else
-            return (TDelegate)(object)new Interpreter.LightCompiler().CompileTop(this)
+            return (TDelegate)(object)new Interpreter.LightCompiler()
+                .CompileTop(this)
                 .CreateDelegate();
 #endif
         }
@@ -243,7 +244,8 @@ namespace System.Linq.Expressions
 #if FEATURE_COMPILE && FEATURE_INTERPRET
             if (preferInterpretation)
             {
-                return (TDelegate)(object)new Interpreter.LightCompiler().CompileTop(this)
+                return (TDelegate)(object)new Interpreter.LightCompiler()
+                    .CompileTop(this)
                     .CreateDelegate();
             }
 #endif
@@ -731,10 +733,12 @@ namespace System.Linq.Expressions
             if (!factories.TryGetValue(delegateType, out fastPath))
             {
 #if FEATURE_COMPILE
-                MethodInfo create = typeof(Expression<>).MakeGenericType(delegateType)
+                MethodInfo create = typeof(Expression<>)
+                    .MakeGenericType(delegateType)
                     .GetMethod("Create", BindingFlags.Static | BindingFlags.NonPublic)!;
 #else
-                MethodInfo create = typeof(ExpressionCreator<>).MakeGenericType(delegateType)
+                MethodInfo create = typeof(ExpressionCreator<>)
+                    .MakeGenericType(delegateType)
                     .GetMethod("CreateExpressionFunc", BindingFlags.Static | BindingFlags.Public)!;
 #endif
                 if (delegateType.IsCollectible)
@@ -868,12 +872,8 @@ namespace System.Linq.Expressions
 #if FEATURE_COMPILE
             return Expression<TDelegate>.Create(body, name, tailCall, parameterList);
 #else
-            return ExpressionCreator<TDelegate>.CreateExpressionFunc(
-                body,
-                name,
-                tailCall,
-                parameterList
-            );
+            return ExpressionCreator<TDelegate>
+                .CreateExpressionFunc(body, name, tailCall, parameterList);
 #endif
         }
 

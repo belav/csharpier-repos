@@ -47,10 +47,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (project == null)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        WorkspaceExtensionsResources.Project_of_ID_0_is_required_to_accomplish_the_task_but_is_not_available_from_the_solution,
-                        projectId
-                    )
+                    string
+                        .Format(
+                            WorkspaceExtensionsResources.Project_of_ID_0_is_required_to_accomplish_the_task_but_is_not_available_from_the_solution,
+                            projectId
+                        )
                 );
             }
 
@@ -73,10 +74,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         ) =>
             (
                 await solution.GetDocumentAsync(
-                        documentId,
-                        includeSourceGenerated,
-                        cancellationToken
-                    )
+                    documentId,
+                    includeSourceGenerated,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             )
             ?? throw new InvalidOperationException(

@@ -47,11 +47,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
             testState.TestMoveToNamespaceOptionsService.SetOptions(moveToNamespaceOptions);
             if (expectedSuccess)
             {
-                var actions = await testState.MoveToNamespaceService.GetCodeActionsAsync(
-                    testState.InvocationDocument,
-                    testState.TestInvocationDocument.SelectedSpans.Single(),
-                    CancellationToken.None
-                );
+                var actions = await testState.MoveToNamespaceService
+                    .GetCodeActionsAsync(
+                        testState.InvocationDocument,
+                        testState.TestInvocationDocument.SelectedSpans.Single(),
+                        CancellationToken.None
+                    );
 
                 var operationTasks = actions.Cast<AbstractMoveToNamespaceCodeAction>()
                     .Select(
@@ -74,10 +75,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
                     {
                         Assert.NotEmpty(operations);
                         var renamedCodeActionsOperations = operations.Where(
-                                operation =>
-                                    operation
-                                    is TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation
-                            )
+                            operation =>
+                                operation
+                                is TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation
+                        )
                             .Cast<TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation>()
                             .ToImmutableArray();
 
@@ -121,11 +122,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
             var workspace = CreateWorkspaceFromOptions(markup, new TestParameters());
             using var testState = new TestState(workspace);
 
-            var analysis = await testState.MoveToNamespaceService.AnalyzeTypeAtPositionAsync(
-                testState.InvocationDocument,
-                testState.TestInvocationDocument.SelectedSpans.Single().Start,
-                CancellationToken.None
-            );
+            var analysis = await testState.MoveToNamespaceService
+                .AnalyzeTypeAtPositionAsync(
+                    testState.InvocationDocument,
+                    testState.TestInvocationDocument.SelectedSpans.Single().Start,
+                    CancellationToken.None
+                );
 
             Assert.True(analysis.CanPerform);
             Assert.Equal(expectedNamespaceName, analysis.OriginalNamespace);

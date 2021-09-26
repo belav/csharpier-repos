@@ -530,9 +530,9 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
                 // CS0815: Cannot assign void to an implicitly-typed variable
                 //         var x = /*<bind>*/c.M2(d)/*</bind>*/;
                 Diagnostic(
-                        ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue,
-                        "x = /*<bind>*/c.M2(d)"
-                    )
+                    ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue,
+                    "x = /*<bind>*/c.M2(d)"
+                )
                     .WithArguments("void")
                     .WithLocation(6, 13)
             };

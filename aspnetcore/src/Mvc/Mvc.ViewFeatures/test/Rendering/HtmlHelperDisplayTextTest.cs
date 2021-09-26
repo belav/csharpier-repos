@@ -48,13 +48,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var provider = new TestModelMetadataProvider();
-            provider.ForType<OverriddenToStringModel>()
-                .DisplayDetails(
-                    dd =>
-                    {
-                        dd.NullDisplayText = "Null display Text";
-                    }
-                );
+            provider.ForType<OverriddenToStringModel>().DisplayDetails(
+                dd =>
+                {
+                    dd.NullDisplayText = "Null display Text";
+                }
+            );
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
                 model: null,
@@ -73,13 +72,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var provider = new TestModelMetadataProvider();
-            provider.ForType<OverriddenToStringModel>()
-                .DisplayDetails(
-                    dd =>
-                    {
-                        dd.NullDisplayText = "Null display Text";
-                    }
-                );
+            provider.ForType<OverriddenToStringModel>().DisplayDetails(
+                dd =>
+                {
+                    dd.NullDisplayText = "Null display Text";
+                }
+            );
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
                 model: null,
@@ -147,13 +145,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             };
 
             var provider = new TestModelMetadataProvider();
-            provider.ForType<OverriddenToStringModel>()
-                .DisplayDetails(
-                    dd =>
-                    {
-                        dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
-                    }
-                );
+            provider.ForType<OverriddenToStringModel>().DisplayDetails(
+                dd =>
+                {
+                    dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
+                }
+            );
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
                 model: model,
@@ -177,13 +174,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             };
 
             var provider = new TestModelMetadataProvider();
-            provider.ForType<OverriddenToStringModel>()
-                .DisplayDetails(
-                    dd =>
-                    {
-                        dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
-                    }
-                );
+            provider.ForType<OverriddenToStringModel>().DisplayDetails(
+                dd =>
+                {
+                    dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
+                }
+            );
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
                 model: model,
@@ -208,13 +204,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             };
 
             var provider = new TestModelMetadataProvider();
-            provider.ForType<OverriddenToStringModel>()
-                .DisplayDetails(
-                    dd =>
-                    {
-                        dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
-                    }
-                );
+            provider.ForType<OverriddenToStringModel>().DisplayDetails(
+                dd =>
+                {
+                    dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
+                }
+            );
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
                 model: model,
@@ -282,11 +277,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             viewData["FieldPrefix.Name"] = "View data dictionary value";
             viewData.TemplateInfo.HtmlFieldPrefix = "FieldPrefix";
 
-            viewData.ModelState.SetModelValue(
-                "FieldPrefix.Name",
-                "Attempted name value",
-                "Attempted name value"
-            );
+            viewData.ModelState
+                .SetModelValue("FieldPrefix.Name", "Attempted name value", "Attempted name value");
 
             // Act
             var result = helper.DisplayText("Name");
@@ -305,11 +297,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             viewData["Name"] = "View data dictionary value";
             viewData.TemplateInfo.HtmlFieldPrefix = "FieldPrefix";
 
-            viewData.ModelState.SetModelValue(
-                "FieldPrefix.Name",
-                "Attempted name value",
-                "Attempted name value"
-            );
+            viewData.ModelState
+                .SetModelValue("FieldPrefix.Name", "Attempted name value", "Attempted name value");
 
             // Act
             var result = helper.DisplayTextFor(m => m.Name);

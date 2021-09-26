@@ -57,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             RunConvention(firstSkipNav);
 
-            var joinEntityType = manyToManySelf.Metadata.Model.GetEntityTypes()
+            var joinEntityType = manyToManySelf.Metadata.Model
+                .GetEntityTypes()
                 .Single(et => et.IsImplicitlyCreatedJoinEntityType);
             Assert.Equal("ManyToManySelfManyToManySelf", joinEntityType.Name);
         }
@@ -107,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             RunConvention(skipNavOnFirst);
 
             Assert.Empty(
-                manyToManyFirst.Metadata.Model.GetEntityTypes()
+                manyToManyFirst.Metadata.Model
+                    .GetEntityTypes()
                     .Where(et => et.IsImplicitlyCreatedJoinEntityType)
             );
         }
@@ -158,7 +160,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             RunConvention(skipNavOnFirst);
 
             Assert.Empty(
-                manyToManyFirst.Metadata.Model.GetEntityTypes()
+                manyToManyFirst.Metadata.Model
+                    .GetEntityTypes()
                     .Where(et => et.IsImplicitlyCreatedJoinEntityType)
             );
         }
@@ -209,7 +212,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             RunConvention(skipNavOnFirst);
 
             Assert.Empty(
-                manyToManyFirst.Metadata.Model.GetEntityTypes()
+                manyToManyFirst.Metadata.Model
+                    .GetEntityTypes()
                     .Where(et => et.IsImplicitlyCreatedJoinEntityType)
             );
         }
@@ -268,7 +272,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             RunConvention(skipNavOnFirst);
 
             Assert.Empty(
-                manyToManyFirst.Metadata.Model.GetEntityTypes()
+                manyToManyFirst.Metadata.Model
+                    .GetEntityTypes()
                     .Where(et => et.IsImplicitlyCreatedJoinEntityType)
             );
         }
@@ -322,15 +327,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 manyToManySecondPK.Metadata,
                 ConfigurationSource.Convention
             );
-            skipNavOnSecond.Metadata.SetForeignKey(
-                rightFK.Metadata,
-                ConfigurationSource.Convention
-            );
+            skipNavOnSecond.Metadata
+                .SetForeignKey(rightFK.Metadata, ConfigurationSource.Convention);
 
             RunConvention(skipNavOnFirst);
 
             Assert.Empty(
-                manyToManyFirst.Metadata.Model.GetEntityTypes()
+                manyToManyFirst.Metadata.Model
+                    .GetEntityTypes()
                     .Where(et => et.IsImplicitlyCreatedJoinEntityType)
             );
         }
@@ -375,7 +379,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             RunConvention(skipNavOnSecond);
 
-            var joinEntityType = manyToManyFirst.Metadata.Model.GetEntityTypes()
+            var joinEntityType = manyToManyFirst.Metadata.Model
+                .GetEntityTypes()
                 .Single(et => et.IsImplicitlyCreatedJoinEntityType);
 
             Assert.Equal("ManyToManyFirstManyToManySecond", joinEntityType.Name);
@@ -432,7 +437,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             new(CreateDependencies());
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>() with
             {
                 Logger = CreateLogger()

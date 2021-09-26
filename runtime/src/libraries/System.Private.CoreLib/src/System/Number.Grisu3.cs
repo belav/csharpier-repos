@@ -339,10 +339,10 @@ namespace System
                 if (requestedDigits == -1)
                 {
                     DiyFp w = DiyFp.CreateAndGetBoundaries(
-                            v,
-                            out DiyFp boundaryMinus,
-                            out DiyFp boundaryPlus
-                        )
+                        v,
+                        out DiyFp boundaryMinus,
+                        out DiyFp boundaryPlus
+                    )
                         .Normalize();
                     result = TryRunShortest(
                         in boundaryMinus,
@@ -391,10 +391,10 @@ namespace System
                 if (requestedDigits == -1)
                 {
                     DiyFp w = DiyFp.CreateAndGetBoundaries(
-                            v,
-                            out DiyFp boundaryMinus,
-                            out DiyFp boundaryPlus
-                        )
+                        v,
+                        out DiyFp boundaryMinus,
+                        out DiyFp boundaryPlus
+                    )
                         .Normalize();
                     result = TryRunShortest(
                         in boundaryMinus,
@@ -447,10 +447,10 @@ namespace System
                 if (requestedDigits == -1)
                 {
                     DiyFp w = DiyFp.CreateAndGetBoundaries(
-                            v,
-                            out DiyFp boundaryMinus,
-                            out DiyFp boundaryPlus
-                        )
+                        v,
+                        out DiyFp boundaryMinus,
+                        out DiyFp boundaryPlus
+                    )
                         .Normalize();
                     result = TryRunShortest(
                         in boundaryMinus,

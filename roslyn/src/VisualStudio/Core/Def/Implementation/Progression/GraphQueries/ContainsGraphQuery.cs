@@ -26,10 +26,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
-                    solution,
-                    context.InputNodes,
-                    cancellationToken
-                )
+                solution,
+                context.InputNodes,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var nodesToProcess = context.InputNodes;
 
@@ -51,9 +51,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                             cancellationToken.ThrowIfCancellationRequested();
 
                             var newNode = await graphBuilder.AddNodeAsync(
-                                    newSymbol,
-                                    relatedNode: node
-                                )
+                                newSymbol,
+                                relatedNode: node
+                            )
                                 .ConfigureAwait(false);
                             graphBuilder.AddLink(node, GraphCommonSchema.Contains, newNode);
                         }
@@ -66,18 +66,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         {
                             foreach (
                                 var newSymbol in await SymbolContainment.GetContainedSymbolsAsync(
-                                        document,
-                                        cancellationToken
-                                    )
+                                    document,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false)
                             )
                             {
                                 cancellationToken.ThrowIfCancellationRequested();
 
                                 var newNode = await graphBuilder.AddNodeAsync(
-                                        newSymbol,
-                                        relatedNode: node
-                                    )
+                                    newSymbol,
+                                    relatedNode: node
+                                )
                                     .ConfigureAwait(false);
                                 graphBuilder.AddLink(node, GraphCommonSchema.Contains, newNode);
                             }

@@ -184,10 +184,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 object productValue = null;
                 if (
-                    exportDefinition.Metadata.TryGetValue(
-                        CompositionConstants.ProductDefinitionMetadataName,
-                        out productValue
-                    )
+                    exportDefinition.Metadata
+                        .TryGetValue(
+                            CompositionConstants.ProductDefinitionMetadataName,
+                            out productValue
+                        )
                 )
                 {
                     ExportDefinition productDefinition = productValue as ExportDefinition;
@@ -206,11 +207,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             private static readonly MethodInfo _metadataContainsKeyMethod = typeof(IDictionary<
                 string,
                 object
-            >).GetMethod("ContainsKey");
+            >)
+                .GetMethod("ContainsKey");
             private static readonly MethodInfo _metadataItemMethod = typeof(IDictionary<
                 string,
                 object
-            >).GetMethod("get_Item");
+            >)
+                .GetMethod("get_Item");
 
             private static Expression<Func<ExportDefinition, bool>> CreateExportFactoryConstraint(
                 Expression<Func<ExportDefinition, bool>> baseConstraint,

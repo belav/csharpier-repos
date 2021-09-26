@@ -2681,10 +2681,8 @@ class C
                 var runtime = new DkmClrRuntimeInstance(assemblies);
                 var anonymousType = assembly.GetType("<>f__AnonymousType0`2")
                     .MakeGenericType(typeof(int), typeof(int));
-                var type = typeof(Enumerable).GetNestedType(
-                        "WhereSelectEnumerableIterator`2",
-                        BindingFlags.NonPublic
-                    )
+                var type = typeof(Enumerable)
+                    .GetNestedType("WhereSelectEnumerableIterator`2", BindingFlags.NonPublic)
                     .MakeGenericType(anonymousType, anonymousType);
                 var displayClass = assembly.GetType("C+<>c");
                 var instance = displayClass.Instantiate();

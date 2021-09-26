@@ -741,16 +741,12 @@ public class Program
                 string.Format(template, $"public static int operator {operatorSign}(S a, S b)")
             );
             await VerifyNoItemsExistAsync(
-                string.Format(
-                    template,
-                    $"public static bool operator {operatorSign}(S a, S b, S c)"
-                )
+                string
+                    .Format(template, $"public static bool operator {operatorSign}(S a, S b, S c)")
             );
             await VerifyNoItemsExistAsync(
-                string.Format(
-                    template,
-                    $"public static bool operator {operatorSign}(S a, object b)"
-                )
+                string
+                    .Format(template, $"public static bool operator {operatorSign}(S a, object b)")
             );
         }
 

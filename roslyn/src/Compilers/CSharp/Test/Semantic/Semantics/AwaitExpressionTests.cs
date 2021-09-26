@@ -105,8 +105,8 @@ public class C {
             comp.VerifyDiagnostics(diagnostics);
             compilation = comp;
             var syntaxNode = (AwaitExpressionSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AwaitExpression
-                )
+                SyntaxKind.AwaitExpression
+            )
                 .AsNode();
             var treeModel = comp.GetSemanticModel(tree);
             return treeModel.GetAwaitExpressionInfo(syntaxNode);
@@ -242,7 +242,8 @@ class C
                 info.IsCompletedProperty.ToTestDisplayString()
             );
             var semanticModel = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var decl = compilation.SyntaxTrees[0].GetRoot()
+            var decl = compilation.SyntaxTrees[0]
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .AsSingleton();

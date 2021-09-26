@@ -28,10 +28,11 @@ namespace Microsoft.EntityFrameworkCore
                 IServiceCollection serviceCollection,
                 IEnumerable<IInterceptor> injectedInterceptors
             ) =>
-                base.InjectInterceptors(
-                    serviceCollection.AddEntityFrameworkSqlServer(),
-                    injectedInterceptors
-                );
+                base
+                    .InjectInterceptors(
+                        serviceCollection.AddEntityFrameworkSqlServer(),
+                        injectedInterceptors
+                    );
         }
 
         protected override BadUniverseContext CreateBadUniverse(

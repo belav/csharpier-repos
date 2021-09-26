@@ -19,7 +19,8 @@ namespace System.Xml.Linq.Tests
                 new XAttribute(
                     "CreatedTime",
                     new DateTime(2018, 1, 1, 12, 13, 14, DateTimeKind.Utc)
-                ).ToString()
+                )
+                    .ToString()
             );
         }
 

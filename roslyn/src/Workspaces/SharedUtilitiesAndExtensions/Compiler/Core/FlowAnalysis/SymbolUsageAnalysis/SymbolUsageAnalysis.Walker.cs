@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 _pendingWritesMap = PooledDictionary<
                     IAssignmentOperation,
                     PooledHashSet<(ISymbol, IOperation)>
-                >.GetInstance();
+                >
+                    .GetInstance();
                 try
                 {
                     _currentContainingSymbol = containingSymbol;

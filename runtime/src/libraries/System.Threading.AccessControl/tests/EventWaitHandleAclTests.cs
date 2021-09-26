@@ -16,12 +16,12 @@ namespace System.Threading.Tests
         public void EventWaitHandle_Create_NullSecurity()
         {
             CreateAndVerifyEventWaitHandle(
-                    initialState: true,
-                    mode: EventResetMode.AutoReset,
-                    name: GetRandomName(),
-                    expectedSecurity: null,
-                    expectedCreatedNew: true
-                )
+                initialState: true,
+                mode: EventResetMode.AutoReset,
+                name: GetRandomName(),
+                expectedSecurity: null,
+                expectedCreatedNew: true
+            )
                 .Dispose();
         }
 
@@ -81,12 +81,12 @@ namespace System.Threading.Tests
                 () =>
                 {
                     CreateEventWaitHandle(
-                            initialState: true,
-                            mode: EventResetMode.AutoReset,
-                            prefixedName,
-                            expectedSecurity: GetBasicEventWaitHandleSecurity(),
-                            expectedCreatedNew: true
-                        )
+                        initialState: true,
+                        mode: EventResetMode.AutoReset,
+                        prefixedName,
+                        expectedSecurity: GetBasicEventWaitHandleSecurity(),
+                        expectedCreatedNew: true
+                    )
                         .Dispose();
                 }
             );
@@ -113,12 +113,12 @@ namespace System.Threading.Tests
                     () =>
                     {
                         CreateEventWaitHandle(
-                                initialState: true,
-                                mode,
-                                name,
-                                security,
-                                expectedCreatedNew: true
-                            )
+                            initialState: true,
+                            mode,
+                            name,
+                            security,
+                            expectedCreatedNew: true
+                        )
                             .Dispose();
                     }
                 );
@@ -151,12 +151,12 @@ namespace System.Threading.Tests
                     () =>
                     {
                         CreateEventWaitHandle(
-                                initialState: true,
-                                mode,
-                                GetRandomName(),
-                                GetBasicEventWaitHandleSecurity(),
-                                expectedCreatedNew: true
-                            )
+                            initialState: true,
+                            mode,
+                            GetRandomName(),
+                            GetBasicEventWaitHandleSecurity(),
+                            expectedCreatedNew: true
+                        )
                             .Dispose();
                     }
                 );
@@ -168,12 +168,12 @@ namespace System.Threading.Tests
                     () =>
                     {
                         CreateEventWaitHandle(
-                                initialState: true,
-                                mode,
-                                GetRandomName(),
-                                GetBasicEventWaitHandleSecurity(),
-                                expectedCreatedNew: true
-                            )
+                            initialState: true,
+                            mode,
+                            GetRandomName(),
+                            GetBasicEventWaitHandleSecurity(),
+                            expectedCreatedNew: true
+                        )
                             .Dispose();
                     }
                 );
@@ -208,12 +208,12 @@ namespace System.Threading.Tests
                 accessControl
             );
             CreateAndVerifyEventWaitHandle(
-                    initialState,
-                    mode,
-                    GetRandomName(),
-                    security,
-                    expectedCreatedNew: true
-                )
+                initialState,
+                mode,
+                GetRandomName(),
+                security,
+                expectedCreatedNew: true
+            )
                 .Dispose();
         }
 
@@ -490,18 +490,18 @@ namespace System.Threading.Tests
             Assert.Equal(typeof(EventWaitHandleRights), actualSecurity.AccessRightType);
 
             List<EventWaitHandleAccessRule> expectedAccessRules = expectedSecurity.GetAccessRules(
-                    includeExplicit: true,
-                    includeInherited: false,
-                    typeof(SecurityIdentifier)
-                )
+                includeExplicit: true,
+                includeInherited: false,
+                typeof(SecurityIdentifier)
+            )
                 .Cast<EventWaitHandleAccessRule>()
                 .ToList();
 
             List<EventWaitHandleAccessRule> actualAccessRules = actualSecurity.GetAccessRules(
-                    includeExplicit: true,
-                    includeInherited: false,
-                    typeof(SecurityIdentifier)
-                )
+                includeExplicit: true,
+                includeInherited: false,
+                typeof(SecurityIdentifier)
+            )
                 .Cast<EventWaitHandleAccessRule>()
                 .ToList();
 

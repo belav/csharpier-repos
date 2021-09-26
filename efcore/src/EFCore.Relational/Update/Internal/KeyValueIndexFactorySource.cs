@@ -42,8 +42,10 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual IKeyValueIndexFactory Create(IKey key) =>
-            (IKeyValueIndexFactory)typeof(KeyValueIndexFactorySource).GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateFactory))!.MakeGenericMethod(key.GetKeyType())
+            (IKeyValueIndexFactory)typeof(KeyValueIndexFactorySource)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(CreateFactory))!
+                .MakeGenericMethod(key.GetKeyType())
                 .Invoke(null, new object[] { key })!;
 
         [UsedImplicitly]

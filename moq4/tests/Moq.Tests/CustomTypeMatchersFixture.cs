@@ -205,8 +205,8 @@ namespace Moq.Tests
             var invocationCount = 0;
             var mock = new Mock<IX>();
             mock.Setup(
-                    m => m.Method(It.Is<string>(acceptableArg, StringComparer.OrdinalIgnoreCase))
-                )
+                m => m.Method(It.Is<string>(acceptableArg, StringComparer.OrdinalIgnoreCase))
+            )
                 .Callback((object arg) => invocationCount++);
 
             mock.Object.Method("foo");
@@ -227,14 +227,11 @@ namespace Moq.Tests
             var invocationCount = 0;
             var mock = new Mock<IX>();
             mock.Setup(
-                    m =>
-                        m.Method(
-                            It.Is<object>(
-                                acceptableArg,
-                                new ObjectStringOrdinalIgnoreCaseComparer()
-                            )
-                        )
-                )
+                m =>
+                    m.Method(
+                        It.Is<object>(acceptableArg, new ObjectStringOrdinalIgnoreCaseComparer())
+                    )
+            )
                 .Callback((object arg) => invocationCount++);
 
             mock.Object.Method("foo");

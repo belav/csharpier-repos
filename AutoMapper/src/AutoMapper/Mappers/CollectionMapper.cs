@@ -141,9 +141,8 @@ namespace AutoMapper.Internal.Mappers
                         }
                         else
                         {
-                            destinationCollectionType = typeof(ICollection<>).MakeGenericType(
-                                destinationElementType
-                            );
+                            destinationCollectionType = typeof(ICollection<>)
+                                .MakeGenericType(destinationElementType);
                             destExpression = Convert(
                                 mustUseDestination ? destExpression : Null,
                                 destinationCollectionType
@@ -201,19 +200,14 @@ namespace AutoMapper.Internal.Mappers
             );
         static class ArrayMapper
         {
-            private static readonly MethodInfo ToArrayMethod = typeof(Enumerable).GetStaticMethod(
-                "ToArray"
-            );
-            private static readonly MethodInfo CopyToMethod = typeof(Array).GetMethod(
-                "CopyTo",
-                new[] { typeof(Array), typeof(int) }
-            );
-            private static readonly MethodInfo CountMethod = typeof(Enumerable).StaticGenericMethod(
-                "Count",
-                parametersCount: 1
-            );
-            private static readonly MethodInfo MapMultidimensionalMethod =
-                typeof(ArrayMapper).GetStaticMethod(nameof(MapMultidimensional));
+            private static readonly MethodInfo ToArrayMethod = typeof(Enumerable)
+                .GetStaticMethod("ToArray");
+            private static readonly MethodInfo CopyToMethod = typeof(Array)
+                .GetMethod("CopyTo", new[] { typeof(Array), typeof(int) });
+            private static readonly MethodInfo CountMethod = typeof(Enumerable)
+                .StaticGenericMethod("Count", parametersCount: 1);
+            private static readonly MethodInfo MapMultidimensionalMethod = typeof(ArrayMapper)
+                .GetStaticMethod(nameof(MapMultidimensional));
             private static Array MapMultidimensional(
                 Array source,
                 Type destinationElementType,

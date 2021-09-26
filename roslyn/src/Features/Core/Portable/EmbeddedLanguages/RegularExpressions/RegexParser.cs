@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                     options,
                     ImmutableDictionary<string, TextSpan>.Empty,
                     ImmutableDictionary<int, TextSpan>.Empty
-                ).ParseTree();
+                )
+                    .ParseTree();
 
                 var (captureNames, captureNumbers) = CaptureInfoAnalyzer.Analyze(
                     text,
@@ -157,12 +158,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                     options
                 );
 
-                var tree2 = new RegexParser(
-                    text,
-                    options,
-                    captureNames,
-                    captureNumbers
-                ).ParseTree();
+                var tree2 = new RegexParser(text, options, captureNames, captureNumbers)
+                    .ParseTree();
                 return tree2;
             }
             catch (InsufficientExecutionStackException)
@@ -1071,12 +1068,13 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             {
                 return new RegexAlternationNode(
                     topAlternation.Left,
-                    topAlternation.BarToken.AddDiagnosticIfNone(
-                        new EmbeddedDiagnostic(
-                            FeaturesResources.Too_many_bars_in_conditional_grouping,
-                            topAlternation.BarToken.GetSpan()
-                        )
-                    ),
+                    topAlternation.BarToken
+                        .AddDiagnosticIfNone(
+                            new EmbeddedDiagnostic(
+                                FeaturesResources.Too_many_bars_in_conditional_grouping,
+                                topAlternation.BarToken.GetSpan()
+                            )
+                        ),
                     topAlternation.Right
                 );
             }
@@ -1319,10 +1317,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 {
                     captureToken = captureToken.AddDiagnosticIfNone(
                         new EmbeddedDiagnostic(
-                            string.Format(
-                                FeaturesResources.Reference_to_undefined_group_number_0,
-                                val
-                            ),
+                            string
+                                .Format(
+                                    FeaturesResources.Reference_to_undefined_group_number_0,
+                                    val
+                                ),
                             captureToken.GetSpan()
                         )
                     );
@@ -1335,10 +1334,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 {
                     captureToken = captureToken.AddDiagnosticIfNone(
                         new EmbeddedDiagnostic(
-                            string.Format(
-                                FeaturesResources.Reference_to_undefined_group_name_0,
-                                val
-                            ),
+                            string
+                                .Format(FeaturesResources.Reference_to_undefined_group_name_0, val),
                             captureToken.GetSpan()
                         )
                     );
@@ -1829,10 +1826,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                         {
                             backslashToken = backslashToken.AddDiagnosticIfNone(
                                 new EmbeddedDiagnostic(
-                                    string.Format(
-                                        FeaturesResources.Cannot_include_class_0_in_character_range,
-                                        nextChar
-                                    ),
+                                    string
+                                        .Format(
+                                            FeaturesResources.Cannot_include_class_0_in_character_range,
+                                            nextChar
+                                        ),
                                     GetSpan(backslashToken, _currentToken)
                                 )
                             );
@@ -2103,10 +2101,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             if (bestPosition != -1)
             {
                 var numberToken = CreateToken(
-                        RegexKind.NumberToken,
-                        ImmutableArray<RegexTrivia>.Empty,
-                        _lexer.GetSubPattern(start, bestPosition)
-                    )
+                    RegexKind.NumberToken,
+                    ImmutableArray<RegexTrivia>.Empty,
+                    _lexer.GetSubPattern(start, bestPosition)
+                )
                     .With(value: capVal);
                 ResetToPositionAndConsumeCurrentToken(
                     bestPosition,
@@ -2536,10 +2534,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             {
                 token = token.AddDiagnosticIfNone(
                     new EmbeddedDiagnostic(
-                        string.Format(
-                            FeaturesResources.Nested_quantifier_0,
-                            token.VirtualChars.First()
-                        ),
+                        string
+                            .Format(
+                                FeaturesResources.Nested_quantifier_0,
+                                token.VirtualChars.First()
+                            ),
                         token.GetSpan()
                     )
                 );

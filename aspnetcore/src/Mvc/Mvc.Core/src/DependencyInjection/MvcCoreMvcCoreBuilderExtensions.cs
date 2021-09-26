@@ -96,9 +96,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (setupAction != null)
             {
-                builder.Services.Configure<MvcOptions>(
-                    (options) => setupAction(options.FormatterMappings)
-                );
+                builder.Services
+                    .Configure<MvcOptions>((options) => setupAction(options.FormatterMappings));
             }
 
             return builder;
@@ -171,9 +170,13 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Services.TryAddTransient(controller, controller);
             }
 
-            builder.Services.Replace(
-                ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>()
-            );
+            builder.Services
+                .Replace(
+                    ServiceDescriptor.Transient<
+                        IControllerActivator,
+                        ServiceBasedControllerActivator
+                    >()
+                );
 
             return builder;
         }
@@ -288,9 +291,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Services.Configure<MvcCompatibilityOptions>(
-                o => o.CompatibilityVersion = version
-            );
+            builder.Services
+                .Configure<MvcCompatibilityOptions>(o => o.CompatibilityVersion = version);
             return builder;
         }
     }

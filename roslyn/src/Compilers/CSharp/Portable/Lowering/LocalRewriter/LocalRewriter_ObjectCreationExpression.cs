@@ -19,12 +19,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var loweredArguments = VisitList(node.Arguments);
             var constructorInvocation = _dynamicFactory.MakeDynamicConstructorInvocation(
-                    node.Syntax,
-                    node.Type,
-                    loweredArguments,
-                    node.ArgumentNamesOpt,
-                    node.ArgumentRefKindsOpt
-                )
+                node.Syntax,
+                node.Type,
+                loweredArguments,
+                node.ArgumentNamesOpt,
+                node.ArgumentRefKindsOpt
+            )
                 .ToExpression();
 
             if (node.InitializerExpressionOpt == null || node.InitializerExpressionOpt.HasErrors)
@@ -225,8 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Rewrite object/collection initializer expressions
             ArrayBuilder<BoundExpression>? dynamicSiteInitializers = null;
             ArrayBuilder<LocalSymbol>? temps = null;
-            ArrayBuilder<BoundExpression>? loweredInitializers =
-                ArrayBuilder<BoundExpression>.GetInstance();
+            ArrayBuilder<BoundExpression>? loweredInitializers = ArrayBuilder<BoundExpression>
+                .GetInstance();
 
             AddObjectOrCollectionInitializers(
                 ref dynamicSiteInitializers,
@@ -237,9 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             int dynamicSiteCount = dynamicSiteInitializers?.Count ?? 0;
-            var sideEffects = ArrayBuilder<BoundExpression>.GetInstance(
-                1 + dynamicSiteCount + loweredInitializers.Count
-            );
+            var sideEffects = ArrayBuilder<BoundExpression>
+                .GetInstance(1 + dynamicSiteCount + loweredInitializers.Count);
             sideEffects.Add(boundAssignmentToTemp);
 
             if (dynamicSiteCount > 0)

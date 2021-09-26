@@ -38,11 +38,12 @@ namespace Microsoft.AspNetCore.Components.Forms
         {
             var groupName = !string.IsNullOrEmpty(Name) ? Name : _defaultGroupName;
             var fieldClass = EditContext.FieldCssClass(FieldIdentifier);
-            var changeEventCallback = EventCallback.Factory.CreateBinder<string?>(
-                this,
-                __value => CurrentValueAsString = __value,
-                CurrentValueAsString
-            );
+            var changeEventCallback = EventCallback.Factory
+                .CreateBinder<string?>(
+                    this,
+                    __value => CurrentValueAsString = __value,
+                    CurrentValueAsString
+                );
 
             _context = new InputRadioContext(
                 CascadedContext,

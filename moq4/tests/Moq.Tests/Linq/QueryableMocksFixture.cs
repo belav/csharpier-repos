@@ -22,7 +22,8 @@ namespace Moq.Tests.Linq
                     && foo.Find("1").Baz(It.IsAny<string>()).Value == 1
                     && bar.Id == "A"
                 select new { Foo = foo, Bar = bar }
-            ).First();
+            )
+                .First();
 
             Assert.Equal("Foo", target.Foo.Name);
             Assert.Equal(1, target.Foo.Find("1").Baz("hello").Value);
@@ -42,7 +43,8 @@ namespace Moq.Tests.Linq
                     && f.Bar.Ping("error") == "error"
                     && f.Bar.Baz(It.IsAny<string>()).Value == 5
                 select f
-            ).First();
+            )
+                .First();
 
             Assert.Equal("Foo", target.Name);
             Assert.Equal(99, target.Find("1").Baz("asdf").Value);
@@ -222,7 +224,8 @@ namespace Moq.Tests.Linq
                 from __ in Mocks.Of<IFoo>()
                 where x1.Name == "1" && __.Name == "2"
                 select x1
-            ).First();
+            )
+                .First();
             Assert.Equal("1", x.Name);
         }
 
@@ -233,7 +236,8 @@ namespace Moq.Tests.Linq
                 from x1 in Mocks.Of<IFoo>(_ => _.Name == "1")
                 from __ in Mocks.Of<IFoo>(_ => _.Name == "2")
                 select x1
-            ).First();
+            )
+                .First();
             Assert.Equal("1", x.Name);
         }
 

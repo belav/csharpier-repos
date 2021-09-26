@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                 foreach (var parameterDescription in result.ParameterDescriptions)
                 {
                     if (
-                        typeof(IJsonPatchDocument).GetTypeInfo()
+                        typeof(IJsonPatchDocument)
+                            .GetTypeInfo()
                             .IsAssignableFrom(parameterDescription.Type)
                     )
                     {

@@ -122,8 +122,8 @@ namespace System.Net.Test.Common
             );
 
             public static readonly object[][] EchoServers = EchoServerList.Select(
-                    x => new object[] { x }
-                )
+                x => new object[] { x }
+            )
                 .ToArray();
             public static readonly object[][] VerifyUploadServers =
             {

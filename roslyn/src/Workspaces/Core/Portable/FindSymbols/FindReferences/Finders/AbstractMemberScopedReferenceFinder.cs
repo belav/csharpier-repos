@@ -61,12 +61,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             if (container != null)
             {
                 return await FindReferencesInContainerAsync(
-                        symbol,
-                        container,
-                        document,
-                        semanticModel,
-                        cancellationToken
-                    )
+                    symbol,
+                    container,
+                    document,
+                    semanticModel,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -79,12 +79,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 var tokens = root.DescendantTokens();
 
                 return await FindReferencesInTokensWithSymbolNameAsync(
-                        symbol,
-                        document,
-                        semanticModel,
-                        tokens,
-                        cancellationToken
-                    )
+                    symbol,
+                    document,
+                    semanticModel,
+                    tokens,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 

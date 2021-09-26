@@ -19,8 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteHexMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _methodInfo =
-            typeof(SqliteDbFunctionsExtensions).GetRequiredMethod(
+        private static readonly MethodInfo _methodInfo = typeof(SqliteDbFunctionsExtensions)
+            .GetRequiredMethod(
                 nameof(SqliteDbFunctionsExtensions.Hex),
                 typeof(DbFunctions),
                 typeof(byte[])

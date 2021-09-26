@@ -213,10 +213,11 @@ WHERE [s].[ParentId] = @__p_0",
             CascadeTiming cascadeDeleteTiming
         )
         {
-            base.Lazy_load_many_to_one_reference_to_principal_already_loaded(
-                state,
-                cascadeDeleteTiming
-            );
+            base
+                .Lazy_load_many_to_one_reference_to_principal_already_loaded(
+                    state,
+                    cascadeDeleteTiming
+                );
 
             Assert.Equal("", Sql);
         }
@@ -235,10 +236,11 @@ WHERE [s].[ParentId] = @__p_0",
             CascadeTiming cascadeDeleteTiming
         )
         {
-            base.Lazy_load_one_to_one_reference_to_dependent_already_loaded(
-                state,
-                cascadeDeleteTiming
-            );
+            base
+                .Lazy_load_one_to_one_reference_to_dependent_already_loaded(
+                    state,
+                    cascadeDeleteTiming
+                );
 
             Assert.Equal("", Sql);
         }

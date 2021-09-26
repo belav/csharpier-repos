@@ -145,9 +145,8 @@ namespace System.Runtime.Serialization
 
                     _ = InvokeFactoryMethod(classContract, objectId);
                     if (
-                        Globals.TypeOfIDeserializationCallback.IsAssignableFrom(
-                            classContract.UnderlyingType
-                        )
+                        Globals.TypeOfIDeserializationCallback
+                            .IsAssignableFrom(classContract.UnderlyingType)
                     )
                     {
                         _ilg.Call(
@@ -183,9 +182,8 @@ namespace System.Runtime.Serialization
                         {
                             _ilg.Call(classContract.GetKeyValuePairMethodInfo);
                             _ilg.ConvertValue(
-                                Globals.TypeOfKeyValuePair.MakeGenericType(
-                                    classContract.KeyValuePairGenericArguments
-                                ),
+                                Globals.TypeOfKeyValuePair
+                                    .MakeGenericType(classContract.KeyValuePairGenericArguments),
                                 _ilg.CurrentMethod.ReturnType
                             );
                         }
@@ -377,9 +375,8 @@ namespace System.Runtime.Serialization
 
             private bool HasFactoryMethod(ClassDataContract classContract)
             {
-                return Globals.TypeOfIObjectReference.IsAssignableFrom(
-                    classContract.UnderlyingType
-                );
+                return Globals.TypeOfIObjectReference
+                    .IsAssignableFrom(classContract.UnderlyingType);
             }
 
             private bool InvokeFactoryMethod(
@@ -820,9 +817,8 @@ namespace System.Runtime.Serialization
                     switch (collectionContract.Kind)
                     {
                         case CollectionKind.GenericDictionary:
-                            type = Globals.TypeOfDictionaryGeneric.MakeGenericType(
-                                itemType.GetGenericArguments()
-                            );
+                            type = Globals.TypeOfDictionaryGeneric
+                                .MakeGenericType(itemType.GetGenericArguments());
                             constructor = type.GetConstructor(
                                 BindingFlags.Instance | BindingFlags.Public,
                                 Type.EmptyTypes
@@ -924,8 +920,8 @@ namespace System.Runtime.Serialization
                 _ilg.EndFor();
                 if (isArray)
                 {
-                    MethodInfo trimArraySizeMethod =
-                        XmlFormatGeneratorStatics.TrimArraySizeMethod.MakeGenericMethod(itemType);
+                    MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics.TrimArraySizeMethod
+                        .MakeGenericMethod(itemType);
                     _ilg.Call(null, trimArraySizeMethod, growingCollection, i);
                     _ilg.Stloc(_objectLocal);
                     _ilg.Call(
@@ -1117,10 +1113,8 @@ namespace System.Runtime.Serialization
                     _ilg.Load(size);
                     _ilg.Ldloca(_objectLocal);
                     _ilg.Call(
-                        typeof(XmlReaderDelegator).GetMethod(
-                            readArrayMethod,
-                            Globals.ScanAllMembers
-                        )!
+                        typeof(XmlReaderDelegator)
+                            .GetMethod(readArrayMethod, Globals.ScanAllMembers)!
                     );
                     return true;
                 }

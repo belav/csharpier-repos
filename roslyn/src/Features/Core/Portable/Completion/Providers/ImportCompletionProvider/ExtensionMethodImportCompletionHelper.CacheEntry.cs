@@ -107,9 +107,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private static IImportCompletionCacheService<CacheEntry, object> GetCacheService(
             Workspace workspace
         ) =>
-            workspace.Services.GetRequiredService<
-                IImportCompletionCacheService<CacheEntry, object>
-            >();
+            workspace.Services
+                .GetRequiredService<IImportCompletionCacheService<CacheEntry, object>>();
 
         private static async Task<CacheEntry?> GetCacheEntryAsync(
             Project project,
@@ -121,9 +120,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             // While we are caching data from SyntaxTreeInfo, all the things we cared about here are actually based on sources symbols.
             // So using source symbol checksum would suffice.
             var checksum = await SymbolTreeInfo.GetSourceSymbolsChecksumAsync(
-                    project,
-                    cancellationToken
-                )
+                project,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Cache miss, create all requested items.
@@ -133,8 +132,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 || cacheEntry.Language != project.Language
             )
             {
-                var syntaxFacts =
-                    project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
+                var syntaxFacts = project.LanguageServices
+                    .GetRequiredService<ISyntaxFactsService>();
                 var builder = new CacheEntry.Builder(
                     checksum,
                     project.Language,

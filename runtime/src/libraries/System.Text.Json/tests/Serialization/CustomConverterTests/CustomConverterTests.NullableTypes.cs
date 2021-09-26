@@ -599,9 +599,8 @@ namespace System.Text.Json.Serialization.Tests
                 Type item2Type = genericArgs[1];
 
                 JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                    typeof(ValueTupleConverter<, >).MakeGenericType(
-                        new Type[] { item1Type, item2Type }
-                    ),
+                    typeof(ValueTupleConverter<, >)
+                        .MakeGenericType(new Type[] { item1Type, item2Type }),
                     BindingFlags.Instance | BindingFlags.Public,
                     binder: null,
                     args: new object[] {  },

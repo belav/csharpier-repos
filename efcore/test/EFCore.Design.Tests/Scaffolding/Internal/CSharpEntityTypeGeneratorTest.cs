@@ -1084,12 +1084,11 @@ namespace TestNamespace
 On multiple lines
 With XML content <br/>"
                             );
-                            x.Property<int>("Id")
-                                .HasComment(
-                                    @"Property Comment
+                            x.Property<int>("Id").HasComment(
+                                @"Property Comment
 On multiple lines
 With XML content <br/>"
-                                );
+                            );
                         }
                     ),
                 new ModelCodeGenerationOptions { UseDataAnnotations = true },
@@ -1280,27 +1279,25 @@ namespace TestNamespace
         public void ForeignKeyAttribute_is_generated_for_composite_fk()
         {
             Test(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                            "Blog",
-                            x =>
-                            {
-                                x.Property<int>("Id1");
-                                x.Property<int>("Id2");
-                                x.HasKey("Id1", "Id2");
-                            }
-                        )
-                        .Entity(
-                            "Post",
-                            x =>
-                            {
-                                x.Property<int>("Id");
+                modelBuilder => modelBuilder.Entity(
+                        "Blog",
+                        x =>
+                        {
+                            x.Property<int>("Id1");
+                            x.Property<int>("Id2");
+                            x.HasKey("Id1", "Id2");
+                        }
+                    ).Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.Property<int>("Id");
 
-                                x.HasOne("Blog", "BlogNavigation")
-                                    .WithMany("Posts")
-                                    .HasForeignKey("BlogId1", "BlogId2");
-                            }
-                        ),
+                            x.HasOne("Blog", "BlogNavigation")
+                                .WithMany("Posts")
+                                .HasForeignKey("BlogId1", "BlogId2");
+                        }
+                    ),
                 new ModelCodeGenerationOptions { UseDataAnnotations = true },
                 code =>
                 {
@@ -1407,28 +1404,26 @@ namespace TestNamespace
         public void ForeignKeyAttribute_InversePropertyAttribute_is_not_generated_for_alternate_key()
         {
             Test(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                            "Blog",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.Property<int>("Id1");
-                                x.Property<int>("Id2");
-                            }
-                        )
-                        .Entity(
-                            "Post",
-                            x =>
-                            {
-                                x.Property<int>("Id");
+                modelBuilder => modelBuilder.Entity(
+                        "Blog",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("Id1");
+                            x.Property<int>("Id2");
+                        }
+                    ).Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.Property<int>("Id");
 
-                                x.HasOne("Blog", "BlogNavigation")
-                                    .WithMany("Posts")
-                                    .HasPrincipalKey("Id1", "Id2")
-                                    .HasForeignKey("BlogId1", "BlogId2");
-                            }
-                        ),
+                            x.HasOne("Blog", "BlogNavigation")
+                                .WithMany("Posts")
+                                .HasPrincipalKey("Id1", "Id2")
+                                .HasForeignKey("BlogId1", "BlogId2");
+                        }
+                    ),
                 new ModelCodeGenerationOptions { UseDataAnnotations = true },
                 code =>
                 {
@@ -1542,16 +1537,14 @@ namespace TestNamespace
         public void InverseProperty_when_navigation_property_with_same_type_and_navigation_name()
         {
             Test(
-                modelBuilder =>
-                    modelBuilder.Entity("Blog", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Post",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.HasOne("Blog", "Blog").WithMany("Posts");
-                            }
-                        ),
+                modelBuilder => modelBuilder.Entity("Blog", x => x.Property<int>("Id")).Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.HasOne("Blog", "Blog").WithMany("Posts");
+                        }
+                    ),
                 new ModelCodeGenerationOptions { UseDataAnnotations = true },
                 code =>
                 {
@@ -1600,18 +1593,16 @@ namespace TestNamespace
         public void InverseProperty_when_navigation_property_with_same_type_and_property_name()
         {
             Test(
-                modelBuilder =>
-                    modelBuilder.Entity("Blog", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Post",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.HasOne("Blog", "BlogNavigation")
-                                    .WithMany("Posts")
-                                    .HasForeignKey("Blog");
-                            }
-                        ),
+                modelBuilder => modelBuilder.Entity("Blog", x => x.Property<int>("Id")).Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.HasOne("Blog", "BlogNavigation")
+                                .WithMany("Posts")
+                                .HasForeignKey("Blog");
+                        }
+                    ),
                 new ModelCodeGenerationOptions { UseDataAnnotations = true },
                 code =>
                 {
@@ -1660,19 +1651,17 @@ namespace TestNamespace
         public void InverseProperty_when_navigation_property_with_same_type_and_other_navigation_name()
         {
             Test(
-                modelBuilder =>
-                    modelBuilder.Entity("Blog", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Post",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.HasOne("Blog", "Blog").WithMany("Posts");
-                                x.HasOne("Blog", "OriginalBlog")
-                                    .WithMany("OriginalPosts")
-                                    .HasForeignKey("OriginalBlogId");
-                            }
-                        ),
+                modelBuilder => modelBuilder.Entity("Blog", x => x.Property<int>("Id")).Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.HasOne("Blog", "Blog").WithMany("Posts");
+                            x.HasOne("Blog", "OriginalBlog")
+                                .WithMany("OriginalPosts")
+                                .HasForeignKey("OriginalBlogId");
+                        }
+                    ),
                 new ModelCodeGenerationOptions { UseDataAnnotations = true },
                 code =>
                 {

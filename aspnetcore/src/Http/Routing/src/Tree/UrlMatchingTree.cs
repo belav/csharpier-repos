@@ -107,9 +107,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
                     && RemainingSegmentsAreOptional(entry.RouteTemplate.Segments, i)
                 )
                 {
-                    current.Matches.Add(
-                        new InboundMatch() { Entry = entry, TemplateMatcher = matcher }
-                    );
+                    current.Matches
+                        .Add(new InboundMatch() { Entry = entry, TemplateMatcher = matcher });
                 }
 
                 if (part.IsParameter && part.InlineConstraints.Any() && !part.IsCatchAll)
@@ -171,7 +170,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 {
                     var result = x.Entry.Precedence.CompareTo(y.Entry.Precedence);
                     return result == 0
-                      ? string.Compare(
+                      ? string
+                        .Compare(
                             x.Entry.RouteTemplate.TemplateText,
                             y.Entry.RouteTemplate.TemplateText,
                             StringComparison.Ordinal

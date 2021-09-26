@@ -86,7 +86,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
             IDictionary<TKey, TValue> other
         )
         {
-            return (other ?? new Dictionary<TKey, TValue>()).OrderBy(kvp => kvp.Key)
+            return (other ?? new Dictionary<TKey, TValue>())
+                .OrderBy(kvp => kvp.Key)
                 .SequenceEqual(
                     (dictionary ?? new Dictionary<TKey, TValue>()).OrderBy(kvp => kvp.Key)
                 );

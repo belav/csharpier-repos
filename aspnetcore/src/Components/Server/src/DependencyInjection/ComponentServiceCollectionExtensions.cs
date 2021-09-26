@@ -50,14 +50,13 @@ namespace Microsoft.Extensions.DependencyInjection
             //
             // Other than the options, the things exposed by the SignalR builder aren't very meaningful in
             // the Server-Side Blazor context and thus aren't exposed.
-            services.AddSignalR()
-                .AddHubOptions<ComponentHub>(
-                    options =>
-                    {
-                        options.SupportedProtocols.Clear();
-                        options.SupportedProtocols.Add(BlazorPackHubProtocol.ProtocolName);
-                    }
-                );
+            services.AddSignalR().AddHubOptions<ComponentHub>(
+                options =>
+                {
+                    options.SupportedProtocols.Clear();
+                    options.SupportedProtocols.Add(BlazorPackHubProtocol.ProtocolName);
+                }
+            );
 
             // Register the Blazor specific hub protocol
             services.TryAddEnumerable(

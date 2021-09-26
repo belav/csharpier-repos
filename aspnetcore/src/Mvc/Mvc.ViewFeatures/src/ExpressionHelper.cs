@@ -102,11 +102,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         }
                         else
                         {
-                            lastIsModel = string.Equals(
-                                "model",
-                                name,
-                                StringComparison.OrdinalIgnoreCase
-                            );
+                            lastIsModel = string
+                                .Equals("model", name, StringComparison.OrdinalIgnoreCase);
                             length += name.Length + 1;
                             part = memberExpressionPart.Expression;
                             segmentCount++;
@@ -298,11 +295,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             {
                 if (
                     (
-                        string.Equals(
-                            defaultMember.MemberName,
-                            property.Name,
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(
+                                defaultMember.MemberName,
+                                property.Name,
+                                StringComparison.Ordinal
+                            )
                         && property.GetMethod == methodExpression.Method
                     )
                 )

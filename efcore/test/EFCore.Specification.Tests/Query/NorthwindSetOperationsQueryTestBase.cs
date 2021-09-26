@@ -495,7 +495,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var ctx = CreateContext();
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    ctx.Customers.Where(c => c.City == "Berlin")
+                    ctx.Customers
+                        .Where(c => c.City == "Berlin")
                         .Include(c => c.Orders)
                         .Union(ctx.Customers.Where(c => c.City == "London"))
                         .ToList()
@@ -503,7 +504,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    ctx.Customers.Where(c => c.City == "Berlin")
+                    ctx.Customers
+                        .Where(c => c.City == "Berlin")
                         .Union(ctx.Customers.Where(c => c.City == "London").Include(c => c.Orders))
                         .ToList()
             );
@@ -515,10 +517,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var ctx = CreateContext();
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    ctx.Customers.Where(c => c.City == "Berlin")
+                    ctx.Customers
+                        .Where(c => c.City == "Berlin")
                         .Include(c => c.Orders)
                         .Union(
-                            ctx.Customers.Where(c => c.City == "London")
+                            ctx.Customers
+                                .Where(c => c.City == "London")
                                 .Include(c => c.Orders)
                                 .ThenInclude(o => o.OrderDetails)
                         )

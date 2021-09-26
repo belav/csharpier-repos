@@ -2020,13 +2020,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                         ); // set breakpoint here if this test is failing...
                         Assert.True(
                             false,
-                            string.Format(
-                                "Expected {0} but got {1} when converting {2} -> {3}",
-                                kind,
-                                result,
-                                types[j],
-                                types[i]
-                            )
+                            string
+                                .Format(
+                                    "Expected {0} but got {1} when converting {2} -> {3}",
+                                    kind,
+                                    result,
+                                    types[j],
+                                    types[i]
+                                )
                         );
                     }
                 }
@@ -2227,10 +2228,11 @@ public class Program
             var tuple = GetBindingNodeAndModel<ExpressionSyntax>(comp);
             Assert.Equal(
                 ConversionKind.Identity,
-                tuple.Item2.ClassifyConversion(
-                    tuple.Item1,
-                    comp.GetSpecialType(SpecialType.System_Boolean)
-                ).Kind
+                tuple.Item2
+                    .ClassifyConversion(
+                        tuple.Item1,
+                        comp.GetSpecialType(SpecialType.System_Boolean)
+                    ).Kind
             );
         }
 
@@ -2466,13 +2468,12 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,27): error CS0123: No overload for 'goo' matches delegate 'System.Action'
-                    //         System.Action a = goo;
-                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "goo")
-                        .WithArguments("goo", "System.Action")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,27): error CS0123: No overload for 'goo' matches delegate 'System.Action'
+                //         System.Action a = goo;
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "goo")
+                    .WithArguments("goo", "System.Action")
+            );
         }
 
         [WorkItem(543119, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543119")]
@@ -2541,17 +2542,11 @@ class Test
         A a = b;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
-                        .WithArguments(
-                            "B.implicit operator A(B)",
-                            "A.implicit operator A(B)",
-                            "B",
-                            "A"
-                        )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
+                    .WithArguments("B.implicit operator A(B)", "A.implicit operator A(B)", "B", "A")
+            );
         }
 
         [Fact]
@@ -2583,17 +2578,11 @@ class Test
         A a = (A)b;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
-                        .WithArguments(
-                            "B.implicit operator A(B)",
-                            "A.implicit operator A(B)",
-                            "B",
-                            "A"
-                        )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
+                    .WithArguments("B.implicit operator A(B)", "A.implicit operator A(B)", "B", "A")
+            );
         }
 
         [Fact]
@@ -2625,17 +2614,16 @@ class C
         A a = b;
      }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'B<A>.implicit operator A(B<A>)' and 'A.implicit operator A(B<A>)' when converting from 'B<A>' to 'A'
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
-                        .WithArguments(
-                            "B<A>.implicit operator A(B<A>)",
-                            "A.implicit operator A(B<A>)",
-                            "B<A>",
-                            "A"
-                        )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (23,15): error CS0457: Ambiguous user defined conversions 'B<A>.implicit operator A(B<A>)' and 'A.implicit operator A(B<A>)' when converting from 'B<A>' to 'A'
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
+                    .WithArguments(
+                        "B<A>.implicit operator A(B<A>)",
+                        "A.implicit operator A(B<A>)",
+                        "B<A>",
+                        "A"
+                    )
+            );
         }
 
         [Fact]
@@ -2667,17 +2655,11 @@ class Test
         A a = (A)b;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and 'A.explicit operator A(B)' when converting from 'B' to 'A'
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
-                        .WithArguments(
-                            "B.explicit operator A(B)",
-                            "A.explicit operator A(B)",
-                            "B",
-                            "A"
-                        )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and 'A.explicit operator A(B)' when converting from 'B' to 'A'
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
+                    .WithArguments("B.explicit operator A(B)", "A.explicit operator A(B)", "B", "A")
+            );
         }
 
         [Fact]
@@ -2709,11 +2691,10 @@ class Test
         A a = b;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (23,15): error CS0266: Cannot implicitly convert type 'B' to 'A'. An explicit conversion exists (are you missing a cast?)
-                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b").WithArguments("B", "A")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (23,15): error CS0266: Cannot implicitly convert type 'B' to 'A'. An explicit conversion exists (are you missing a cast?)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b").WithArguments("B", "A")
+            );
         }
 
         [Fact]
@@ -2778,18 +2759,12 @@ class Test
         A a = (A)b;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                    //         A a = (A)b;
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
-                        .WithArguments(
-                            "B.explicit operator A(B)",
-                            "A.implicit operator A(B)",
-                            "B",
-                            "A"
-                        )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                //         A a = (A)b;
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
+                    .WithArguments("B.explicit operator A(B)", "A.implicit operator A(B)", "B", "A")
+            );
         }
 
         [Fact]
@@ -2804,14 +2779,13 @@ class C
 
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,20): error CS1750: A value of type 'double' cannot be used as a default parameter because there are no standard conversions to type 'float'
-                    //     void Goo(float x = 0.0)
-                    Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
-                        .WithArguments("double", "float")
-                        .WithLocation(4, 20)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,20): error CS1750: A value of type 'double' cannot be used as a default parameter because there are no standard conversions to type 'float'
+                //     void Goo(float x = 0.0)
+                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
+                    .WithArguments("double", "float")
+                    .WithLocation(4, 20)
+            );
         }
 
         [Fact]
@@ -2834,12 +2808,11 @@ class C
 
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,18): error CS1750: A value of type 'A' cannot be used as a default parameter because there are no standard conversions to type 'int'
-                    Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
-                        .WithArguments("A", "int")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,18): error CS1750: A value of type 'A' cannot be used as a default parameter because there are no standard conversions to type 'int'
+                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
+                    .WithArguments("A", "int")
+            );
         }
 
         [Fact]
@@ -2862,12 +2835,11 @@ class C
 
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,16): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type 'A'
-                    Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
-                        .WithArguments("int", "A")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,16): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type 'A'
+                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
+                    .WithArguments("int", "A")
+            );
         }
 
         [Fact]
@@ -2893,12 +2865,11 @@ class C
 
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (15,19): error CS1750: A value of type 'A' cannot be used as a default parameter because there are no standard conversions to type 'Base'
-                    Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "b")
-                        .WithArguments("A", "Base")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (15,19): error CS1750: A value of type 'A' cannot be used as a default parameter because there are no standard conversions to type 'Base'
+                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "b")
+                    .WithArguments("A", "Base")
+            );
         }
 
         [Fact]
@@ -2935,13 +2906,12 @@ class C
         Console.WriteLine(b is A);
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (27,27): warning CS0184: The given expression is never of the provided ('B') type
-                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "a is B").WithArguments("B"),
-                    // (28,27): warning CS0184: The given expression is never of the provided ('A') type
-                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "b is A").WithArguments("A")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (27,27): warning CS0184: The given expression is never of the provided ('B') type
+                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "a is B").WithArguments("B"),
+                // (28,27): warning CS0184: The given expression is never of the provided ('A') type
+                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "b is A").WithArguments("A")
+            );
         }
 
         [Fact]
@@ -2978,15 +2948,12 @@ class C
         Console.WriteLine(b as A);
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (27,27): error CS0039: Cannot convert type 'A' to 'B' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
-                    Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "a as B")
-                        .WithArguments("A", "B"),
-                    // (28,27): error CS0039: Cannot convert type 'B' to 'A' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
-                    Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "b as A")
-                        .WithArguments("B", "A")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (27,27): error CS0039: Cannot convert type 'A' to 'B' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
+                Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "a as B").WithArguments("A", "B"),
+                // (28,27): error CS0039: Cannot convert type 'B' to 'A' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
+                Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "b as A").WithArguments("B", "A")
+            );
         }
 
         [Fact]
@@ -3009,11 +2976,10 @@ class Convertible
         throw null;
     }
 }";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7_3)
-                .VerifyDiagnostics(
-                    // (6,15): error CS0155: The type caught or thrown must be derived from System.Exception
-                    Diagnostic(ErrorCode.ERR_BadExceptionType, "new Convertible()")
-                );
+            CreateCompilation(source, parseOptions: TestOptions.Regular7_3).VerifyDiagnostics(
+                // (6,15): error CS0155: The type caught or thrown must be derived from System.Exception
+                Diagnostic(ErrorCode.ERR_BadExceptionType, "new Convertible()")
+            );
             CreateCompilation(source).VerifyDiagnostics();
         }
 
@@ -3042,11 +3008,10 @@ class Convertible
         throw null;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,15): error CS0155: The type caught or thrown must be derived from System.Exception
-                    Diagnostic(ErrorCode.ERR_BadExceptionType, "Convertible")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,15): error CS0155: The type caught or thrown must be derived from System.Exception
+                Diagnostic(ErrorCode.ERR_BadExceptionType, "Convertible")
+            );
         }
 
         [Fact]
@@ -3108,13 +3073,12 @@ class Convertible
         return 0;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,18): error CS0150: A constant value is expected
-                    //             case default(Convertible): return;
-                    Diagnostic(ErrorCode.ERR_ConstantExpected, "default(Convertible)")
-                        .WithLocation(8, 18)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (8,18): error CS0150: A constant value is expected
+                //             case default(Convertible): return;
+                Diagnostic(ErrorCode.ERR_ConstantExpected, "default(Convertible)")
+                    .WithLocation(8, 18)
+            );
         }
 
         [Fact]
@@ -3141,12 +3105,11 @@ class Convertible
         return 0;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,18): error CS0150: A constant value is expected
-                    //             case c: return;
-                    Diagnostic(ErrorCode.ERR_ConstantExpected, "c").WithLocation(9, 18)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,18): error CS0150: A constant value is expected
+                //             case c: return;
+                Diagnostic(ErrorCode.ERR_ConstantExpected, "c").WithLocation(9, 18)
+            );
         }
 
         [Fact]
@@ -3178,15 +3141,11 @@ class C
         }
     }
 }";
-            CreateCompilationWithILAndMscorlib40(csharp, il)
-                .VerifyDiagnostics(
-                    // (6,16): error CS1674: 'ConvertibleToIDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
-                    Diagnostic(
-                            ErrorCode.ERR_NoConvToIDisp,
-                            "var d = new ConvertibleToIDisposable()"
-                        )
-                        .WithArguments("ConvertibleToIDisposable")
-                );
+            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
+                // (6,16): error CS1674: 'ConvertibleToIDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var d = new ConvertibleToIDisposable()")
+                    .WithArguments("ConvertibleToIDisposable")
+            );
         }
 
         [WorkItem(11221, "DevDiv_Projects/Roslyn")]
@@ -3206,13 +3165,11 @@ class C
         var b = (C)1000M;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (10,17): error CS0031: Constant value '1000M' cannot be converted to a 'byte'
-                    //         var b = (C)1000M;
-                    Diagnostic(ErrorCode.ERR_ConstOutOfRange, "1000M")
-                        .WithArguments("1000M", "byte")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (10,17): error CS0031: Constant value '1000M' cannot be converted to a 'byte'
+                //         var b = (C)1000M;
+                Diagnostic(ErrorCode.ERR_ConstOutOfRange, "1000M").WithArguments("1000M", "byte")
+            );
         }
 
         [WorkItem(529568, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529568")]
@@ -3425,200 +3382,199 @@ public class Test {
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (126,12): error CS0457: Ambiguous user defined conversions 'H1<A>.implicit operator G1<A>(H1<A>)' and 'H0.implicit operator G0(H0)' when converting from 'H1<A>' to 'G0'
-                    //         F0(h1a);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "h1a")
-                        .WithArguments(
-                            "H1<A>.implicit operator G1<A>(H1<A>)",
-                            "H0.implicit operator G0(H0)",
-                            "H1<A>",
-                            "G0"
-                        ),
-                    // (129,12): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to 'G0'
-                    //         F0(hs2ab);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs2ab")
-                        .WithArguments(
-                            "HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)",
-                            "H1<B>.implicit operator G1<B>(H1<B>)",
-                            "HS2<A, B>",
-                            "G0"
-                        ),
-                    // (132,12): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'G0'
-                    //         F0(hs3abc);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
-                        .WithArguments(
-                            "HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)",
-                            "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)",
-                            "HS3<A, B, C>",
-                            "G0"
-                        ),
-                    // (135,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         F1(h1a);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
-                        .WithArguments("Test.F1<R>(G1<R>)"),
-                    // (138,15): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to 'G1<B>'
-                    //         F1<B>(hs2ab);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs2ab")
-                        .WithArguments(
-                            "HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)",
-                            "H1<B>.implicit operator G1<B>(H1<B>)",
-                            "HS2<A, B>",
-                            "G1<B>"
-                        ),
-                    // (141,15): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'G1<C>'
-                    //         F1<C>(hs3abc);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
-                        .WithArguments(
-                            "HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)",
-                            "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)",
-                            "HS3<A, B, C>",
-                            "G1<C>"
-                        ),
-                    // (144,9): error CS0411: The type arguments for method 'Test.FS2<R, S>(GS2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         FS2(hs2ab);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FS2")
-                        .WithArguments("Test.FS2<R, S>(GS2<R, S>)"),
-                    // (147,18): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'GS2<B, C>'
-                    //         FS2<B,C>(hs3abc);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
-                        .WithArguments(
-                            "HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)",
-                            "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)",
-                            "HS3<A, B, C>",
-                            "GS2<B, C>"
-                        ),
-                    // (150,9): error CS0411: The type arguments for method 'Test.FS3<R, S, T>(GS3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         FS3(hs3abc);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FS3")
-                        .WithArguments("Test.FS3<R, S, T>(GS3<R, S, T>)"),
-                    // (155,12): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A, B>' to 'G0'
-                    //         F0(hc2ab);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc2ab")
-                        .WithArguments(
-                            "HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)",
-                            "H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)",
-                            "HC2<A, B>",
-                            "G0"
-                        ),
-                    // (158,12): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G0'
-                    //         F0(hc3abc);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
-                        .WithArguments(
-                            "HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)",
-                            "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)",
-                            "HC3<A, B, C>",
-                            "G0"
-                        ),
-                    // (161,19): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A, B>' to 'G1<G1<B>>'
-                    //         F1<G1<B>>(hc2ab);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc2ab")
-                        .WithArguments(
-                            "HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)",
-                            "H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)",
-                            "HC2<A, B>",
-                            "G1<G1<B>>"
-                        ),
-                    // (164,30): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G1<G1<GC2<A, G1<B>>>>'
-                    //         F1<G1<GC2<A,G1<B>>>>(hc3abc);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
-                        .WithArguments(
-                            "HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)",
-                            "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)",
-                            "HC3<A, B, C>",
-                            "G1<G1<GC2<A, G1<B>>>>"
-                        ),
-                    // (167,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         FC2(hc2ab);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
-                        .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-                    // (170,33): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'GC2<G1<C>, GC2<A, G1<B>>>'
-                    //         FC2<G1<C>,GC2<A,G1<B>>>(hc3abc);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
-                        .WithArguments(
-                            "HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)",
-                            "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)",
-                            "HC3<A, B, C>",
-                            "GC2<G1<C>, GC2<A, G1<B>>>"
-                        ),
-                    // (173,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         FC3(hc3abc);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC3")
-                        .WithArguments("Test.FC3<R, S, T>(GC3<R, S, T>)"),
-                    // (178,12): error CS0457: Ambiguous user defined conversions 'HH2<A, B>.implicit operator GC2<A, B>(HH2<A, B>)' and 'H1<H1<B>>.implicit operator G1<H1<B>>(H1<H1<B>>)' when converting from 'HH2<A, B>' to 'G0'
-                    //         F0(hh2ab);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hh2ab")
-                        .WithArguments(
-                            "HH2<A, B>.implicit operator GC2<A, B>(HH2<A, B>)",
-                            "H1<H1<B>>.implicit operator G1<H1<B>>(H1<H1<B>>)",
-                            "HH2<A, B>",
-                            "G0"
-                        ),
-                    // (181,12): error CS0457: Ambiguous user defined conversions 'HH3<A, B, C>.implicit operator GC3<A, B, C>(HH3<A, B, C>)' and 'HH2<H1<C>, HH2<A, H1<B>>>.implicit operator GC2<H1<C>, HH2<A, H1<B>>>(HH2<H1<C>, HH2<A, H1<B>>>)' when converting from 'HH3<A, B, C>' to 'G0'
-                    //         F0(hh3abc);
-                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hh3abc")
-                        .WithArguments(
-                            "HH3<A, B, C>.implicit operator GC3<A, B, C>(HH3<A, B, C>)",
-                            "HH2<H1<C>, HH2<A, H1<B>>>.implicit operator GC2<H1<C>, HH2<A, H1<B>>>(HH2<H1<C>, HH2<A, H1<B>>>)",
-                            "HH3<A, B, C>",
-                            "G0"
-                        ),
-                    // (184,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         F1(hh2ab);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
-                        .WithArguments("Test.F1<R>(G1<R>)"),
-                    // (187,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         F1(hh3abc);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
-                        .WithArguments("Test.F1<R>(G1<R>)"),
-                    // (190,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         F1(hh3abc);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
-                        .WithArguments("Test.F1<R>(G1<R>)"),
-                    // (193,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         FC2(hh2ab);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
-                        .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-                    // (196,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         FC2(hh3abc);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
-                        .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-                    // (199,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         FC2(hh3abc);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
-                        .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-                    // (202,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                    //         FC3(hh3abc);
-                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC3")
-                        .WithArguments("Test.FC3<R, S, T>(GC3<R, S, T>)")
-                //Dev10
-                //error CS0457: Ambiguous user defined conversions 'H1<A>.implicit operator G1<A>(H1<A>)' and 'H0.implicit operator G0(H0)' when converting from 'H1<A>' to 'G0'
-                //error CS0457: Ambiguous user defined conversions 'HS2<A,B>.implicit operator GS2<A,B>(HS2<A,B>)' and 'H0.implicit operator G0(H0)' when converting from 'HS2<A,B>' to 'G0'
-                //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator GS3<A,B,C>(HS3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HS3<A,B,C>' to 'G0'
-                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0457: Ambiguous user defined conversions 'HS2<A,B>.implicit operator GS2<A,B>(HS2<A,B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A,B>' to 'G1<B>'
-                //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator GS3<A,B,C>(HS3<A,B,C>)' and 'H1<C>.implicit operator G1<C>(H1<C>)' when converting from 'HS3<A,B,C>' to 'G1<C>'
-                //error CS0411: The type arguments for method 'Test.FS2<R,S>(GS2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator GS3<A,B,C>(HS3<A,B,C>)' and 'HS2<B,C>.implicit operator GS2<B,C>(HS2<B,C>)' when converting from 'HS3<A,B,C>' to 'GS2<B,C>'
-                //error CS0411: The type arguments for method 'Test.FS3<R,S,T>(GS3<R,S,T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0457: Ambiguous user defined conversions 'HC2<A,B>.implicit operator GC2<A,B>(HC2<A,B>)' and 'H0.implicit operator G0(H0)' when converting from 'HC2<A,B>' to 'G0'
-                //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator GC3<A,B,C>(HC3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HC3<A,B,C>' to 'G0'
-                //error CS0457: Ambiguous user defined conversions 'HC2<A,B>.implicit operator GC2<A,B>(HC2<A,B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A,B>' to 'G1<G1<B>>'
-                //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator GC3<A,B,C>(HC3<A,B,C>)' and 'H1<G1<GC2<A,G1<B>>>>.implicit operator G1<G1<GC2<A,G1<B>>>>(H1<G1<GC2<A,G1<B>>>>)' when converting from 'HC3<A,B,C>' to 'G1<G1<GC2<A,G1<B>>>>'
-                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator GC3<A,B,C>(HC3<A,B,C>)' and 'HC2<G1<C>,GC2<A,G1<B>>>.implicit operator GC2<G1<C>,GC2<A,G1<B>>>(HC2<G1<C>,GC2<A,G1<B>>>)' when converting from 'HC3<A,B,C>' to 'GC2<G1<C>,GC2<A,G1<B>>>'
-                //error CS0411: The type arguments for method 'Test.FC3<R,S,T>(GC3<R,S,T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0457: Ambiguous user defined conversions 'HH2<A,B>.implicit operator GC2<A,B>(HH2<A,B>)' and 'H0.implicit operator G0(H0)' when converting from 'HH2<A,B>' to 'G0'
-                //error CS0457: Ambiguous user defined conversions 'HH3<A,B,C>.implicit operator GC3<A,B,C>(HH3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HH3<A,B,C>' to 'G0'
-                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.FC3<R,S,T>(GC3<R,S,T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (126,12): error CS0457: Ambiguous user defined conversions 'H1<A>.implicit operator G1<A>(H1<A>)' and 'H0.implicit operator G0(H0)' when converting from 'H1<A>' to 'G0'
+                //         F0(h1a);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "h1a")
+                    .WithArguments(
+                        "H1<A>.implicit operator G1<A>(H1<A>)",
+                        "H0.implicit operator G0(H0)",
+                        "H1<A>",
+                        "G0"
+                    ),
+                // (129,12): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to 'G0'
+                //         F0(hs2ab);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs2ab")
+                    .WithArguments(
+                        "HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)",
+                        "H1<B>.implicit operator G1<B>(H1<B>)",
+                        "HS2<A, B>",
+                        "G0"
+                    ),
+                // (132,12): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'G0'
+                //         F0(hs3abc);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
+                    .WithArguments(
+                        "HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)",
+                        "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)",
+                        "HS3<A, B, C>",
+                        "G0"
+                    ),
+                // (135,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         F1(h1a);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                    .WithArguments("Test.F1<R>(G1<R>)"),
+                // (138,15): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to 'G1<B>'
+                //         F1<B>(hs2ab);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs2ab")
+                    .WithArguments(
+                        "HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)",
+                        "H1<B>.implicit operator G1<B>(H1<B>)",
+                        "HS2<A, B>",
+                        "G1<B>"
+                    ),
+                // (141,15): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'G1<C>'
+                //         F1<C>(hs3abc);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
+                    .WithArguments(
+                        "HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)",
+                        "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)",
+                        "HS3<A, B, C>",
+                        "G1<C>"
+                    ),
+                // (144,9): error CS0411: The type arguments for method 'Test.FS2<R, S>(GS2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         FS2(hs2ab);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FS2")
+                    .WithArguments("Test.FS2<R, S>(GS2<R, S>)"),
+                // (147,18): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'GS2<B, C>'
+                //         FS2<B,C>(hs3abc);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
+                    .WithArguments(
+                        "HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)",
+                        "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)",
+                        "HS3<A, B, C>",
+                        "GS2<B, C>"
+                    ),
+                // (150,9): error CS0411: The type arguments for method 'Test.FS3<R, S, T>(GS3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         FS3(hs3abc);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FS3")
+                    .WithArguments("Test.FS3<R, S, T>(GS3<R, S, T>)"),
+                // (155,12): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A, B>' to 'G0'
+                //         F0(hc2ab);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc2ab")
+                    .WithArguments(
+                        "HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)",
+                        "H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)",
+                        "HC2<A, B>",
+                        "G0"
+                    ),
+                // (158,12): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G0'
+                //         F0(hc3abc);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
+                    .WithArguments(
+                        "HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)",
+                        "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)",
+                        "HC3<A, B, C>",
+                        "G0"
+                    ),
+                // (161,19): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A, B>' to 'G1<G1<B>>'
+                //         F1<G1<B>>(hc2ab);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc2ab")
+                    .WithArguments(
+                        "HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)",
+                        "H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)",
+                        "HC2<A, B>",
+                        "G1<G1<B>>"
+                    ),
+                // (164,30): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G1<G1<GC2<A, G1<B>>>>'
+                //         F1<G1<GC2<A,G1<B>>>>(hc3abc);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
+                    .WithArguments(
+                        "HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)",
+                        "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)",
+                        "HC3<A, B, C>",
+                        "G1<G1<GC2<A, G1<B>>>>"
+                    ),
+                // (167,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         FC2(hc2ab);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
+                    .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
+                // (170,33): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'GC2<G1<C>, GC2<A, G1<B>>>'
+                //         FC2<G1<C>,GC2<A,G1<B>>>(hc3abc);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
+                    .WithArguments(
+                        "HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)",
+                        "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)",
+                        "HC3<A, B, C>",
+                        "GC2<G1<C>, GC2<A, G1<B>>>"
+                    ),
+                // (173,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         FC3(hc3abc);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC3")
+                    .WithArguments("Test.FC3<R, S, T>(GC3<R, S, T>)"),
+                // (178,12): error CS0457: Ambiguous user defined conversions 'HH2<A, B>.implicit operator GC2<A, B>(HH2<A, B>)' and 'H1<H1<B>>.implicit operator G1<H1<B>>(H1<H1<B>>)' when converting from 'HH2<A, B>' to 'G0'
+                //         F0(hh2ab);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hh2ab")
+                    .WithArguments(
+                        "HH2<A, B>.implicit operator GC2<A, B>(HH2<A, B>)",
+                        "H1<H1<B>>.implicit operator G1<H1<B>>(H1<H1<B>>)",
+                        "HH2<A, B>",
+                        "G0"
+                    ),
+                // (181,12): error CS0457: Ambiguous user defined conversions 'HH3<A, B, C>.implicit operator GC3<A, B, C>(HH3<A, B, C>)' and 'HH2<H1<C>, HH2<A, H1<B>>>.implicit operator GC2<H1<C>, HH2<A, H1<B>>>(HH2<H1<C>, HH2<A, H1<B>>>)' when converting from 'HH3<A, B, C>' to 'G0'
+                //         F0(hh3abc);
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "hh3abc")
+                    .WithArguments(
+                        "HH3<A, B, C>.implicit operator GC3<A, B, C>(HH3<A, B, C>)",
+                        "HH2<H1<C>, HH2<A, H1<B>>>.implicit operator GC2<H1<C>, HH2<A, H1<B>>>(HH2<H1<C>, HH2<A, H1<B>>>)",
+                        "HH3<A, B, C>",
+                        "G0"
+                    ),
+                // (184,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         F1(hh2ab);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                    .WithArguments("Test.F1<R>(G1<R>)"),
+                // (187,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         F1(hh3abc);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                    .WithArguments("Test.F1<R>(G1<R>)"),
+                // (190,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         F1(hh3abc);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                    .WithArguments("Test.F1<R>(G1<R>)"),
+                // (193,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         FC2(hh2ab);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
+                    .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
+                // (196,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         FC2(hh3abc);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
+                    .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
+                // (199,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         FC2(hh3abc);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
+                    .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
+                // (202,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //         FC3(hh3abc);
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC3")
+                    .WithArguments("Test.FC3<R, S, T>(GC3<R, S, T>)")
+            //Dev10
+            //error CS0457: Ambiguous user defined conversions 'H1<A>.implicit operator G1<A>(H1<A>)' and 'H0.implicit operator G0(H0)' when converting from 'H1<A>' to 'G0'
+            //error CS0457: Ambiguous user defined conversions 'HS2<A,B>.implicit operator GS2<A,B>(HS2<A,B>)' and 'H0.implicit operator G0(H0)' when converting from 'HS2<A,B>' to 'G0'
+            //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator GS3<A,B,C>(HS3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HS3<A,B,C>' to 'G0'
+            //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            //error CS0457: Ambiguous user defined conversions 'HS2<A,B>.implicit operator GS2<A,B>(HS2<A,B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A,B>' to 'G1<B>'
+            //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator GS3<A,B,C>(HS3<A,B,C>)' and 'H1<C>.implicit operator G1<C>(H1<C>)' when converting from 'HS3<A,B,C>' to 'G1<C>'
+            //error CS0411: The type arguments for method 'Test.FS2<R,S>(GS2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator GS3<A,B,C>(HS3<A,B,C>)' and 'HS2<B,C>.implicit operator GS2<B,C>(HS2<B,C>)' when converting from 'HS3<A,B,C>' to 'GS2<B,C>'
+            //error CS0411: The type arguments for method 'Test.FS3<R,S,T>(GS3<R,S,T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            //error CS0457: Ambiguous user defined conversions 'HC2<A,B>.implicit operator GC2<A,B>(HC2<A,B>)' and 'H0.implicit operator G0(H0)' when converting from 'HC2<A,B>' to 'G0'
+            //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator GC3<A,B,C>(HC3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HC3<A,B,C>' to 'G0'
+            //error CS0457: Ambiguous user defined conversions 'HC2<A,B>.implicit operator GC2<A,B>(HC2<A,B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A,B>' to 'G1<G1<B>>'
+            //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator GC3<A,B,C>(HC3<A,B,C>)' and 'H1<G1<GC2<A,G1<B>>>>.implicit operator G1<G1<GC2<A,G1<B>>>>(H1<G1<GC2<A,G1<B>>>>)' when converting from 'HC3<A,B,C>' to 'G1<G1<GC2<A,G1<B>>>>'
+            //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator GC3<A,B,C>(HC3<A,B,C>)' and 'HC2<G1<C>,GC2<A,G1<B>>>.implicit operator GC2<G1<C>,GC2<A,G1<B>>>(HC2<G1<C>,GC2<A,G1<B>>>)' when converting from 'HC3<A,B,C>' to 'GC2<G1<C>,GC2<A,G1<B>>>'
+            //error CS0411: The type arguments for method 'Test.FC3<R,S,T>(GC3<R,S,T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            //error CS0457: Ambiguous user defined conversions 'HH2<A,B>.implicit operator GC2<A,B>(HH2<A,B>)' and 'H0.implicit operator G0(H0)' when converting from 'HH2<A,B>' to 'G0'
+            //error CS0457: Ambiguous user defined conversions 'HH3<A,B,C>.implicit operator GC3<A,B,C>(HH3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HH3<A,B,C>' to 'G0'
+            //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            //error CS0411: The type arguments for method 'Test.FC3<R,S,T>(GC3<R,S,T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+            );
         }
 
         [WorkItem(545361, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545361")]
@@ -3823,7 +3779,8 @@ class C<T>
                     )
             );
 
-            var destinationType = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var destinationType = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .Construct(comp.GetSpecialType(SpecialType.System_Int32));
             var conversionSymbols = destinationType.GetMembers()
                 .OfType<IMethodSymbol>()
@@ -3878,10 +3835,9 @@ struct BigInteger
     public static explicit operator ushort(BigInteger b) { return 0; }
 }";
 
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C.Test",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C.Test",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  1
@@ -3892,7 +3848,7 @@ struct BigInteger
   IL_0010:  ret
 }
 "
-                );
+            );
         }
 
         [WorkItem(737732, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/737732")]
@@ -4021,9 +3977,9 @@ public class C
             // which happens AFTER determining that the method group conversion exists.  As
             // a result, both methods are considered applicable and the "wrong" one is chosen.
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    parseOptions: TestOptions.WithoutImprovedOverloadCandidates
-                )
+                source,
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            )
                 .VerifyDiagnostics(
                     // (8,11): error CS0407: 'dynamic C.F()' has the wrong return type
                     //         M(F);
@@ -4133,9 +4089,9 @@ public class Test
             // but that's the native behavior.  We need to replicate it for back-compat, but most of the strangeness will
             // not be spec'd.
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    options: TestOptions.UnsafeReleaseDll
-                )
+                source,
+                options: TestOptions.UnsafeReleaseDll
+            )
                 .VerifyDiagnostics(
                     // (46,17): error CS1660: Cannot convert lambda expression to type 'Q' because it is not a delegate type
                     //             q = () => 1; //CS1660

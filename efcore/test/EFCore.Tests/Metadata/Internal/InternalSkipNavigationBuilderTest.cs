@@ -18,9 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var builder = CreateInternalSkipNavigationBuilder();
             IConventionSkipNavigation skipNavigation = builder.Metadata;
 
-            ((SkipNavigation)skipNavigation).SetConfigurationSource(
-                ConfigurationSource.DataAnnotation
-            );
+            ((SkipNavigation)skipNavigation)
+                .SetConfigurationSource(ConfigurationSource.DataAnnotation);
 
             var productEntity = skipNavigation.TargetEntityType.Builder;
             Assert.Null(
@@ -251,13 +250,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 metadata.GetForeignKeyConfigurationSource()
             );
 
-            var orderProductEntity = metadata.DeclaringEntityType.Model.Builder.Entity(
-                typeof(OrderProduct)
-            );
+            var orderProductEntity = metadata.DeclaringEntityType.Model.Builder
+                .Entity(typeof(OrderProduct));
             var fk = (ForeignKey)orderProductEntity.HasRelationship(
-                    metadata.DeclaringEntityType,
-                    nameof(OrderProduct.Order)
-                )
+                metadata.DeclaringEntityType,
+                nameof(OrderProduct.Order)
+            )
                 .IsUnique(false).Metadata;
 
             Assert.NotSame(fk, metadata.ForeignKey);
@@ -304,10 +302,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             // the skip navigation is pointing to the automatically-generated
             // join entity type and so is its inverse
-            var inverse = (SkipNavigation)metadata.TargetEntityType.Builder.HasSkipNavigation(
-                Product.OrdersProperty,
-                metadata.DeclaringEntityType
-            ).Metadata;
+            var inverse = (SkipNavigation)metadata.TargetEntityType.Builder
+                .HasSkipNavigation(Product.OrdersProperty, metadata.DeclaringEntityType).Metadata;
 
             Assert.NotNull(metadata.Inverse);
             Assert.Equal(ConfigurationSource.Convention, metadata.GetInverseConfigurationSource());
@@ -413,9 +409,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private InternalSkipNavigationBuilder CreateInternalSkipNavigationBuilder()
         {
-            var modelBuilder =
-                (InternalModelBuilder)InMemoryTestHelpers.Instance.CreateConventionBuilder()
-                    .GetInfrastructure();
+            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers.Instance
+                .CreateConventionBuilder()
+                .GetInfrastructure();
 
             return modelBuilder.Entity(typeof(Order), ConfigurationSource.Convention)
                 .HasSkipNavigation(
@@ -427,19 +423,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         protected class Order
         {
-            public static readonly PropertyInfo ProductsProperty = typeof(Order).GetProperty(
-                nameof(Products)
-            );
+            public static readonly PropertyInfo ProductsProperty = typeof(Order)
+                .GetProperty(nameof(Products));
 
-            public static readonly FieldInfo ProductsField = typeof(Order).GetField(
-                nameof(_products),
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            public static readonly FieldInfo ProductsField = typeof(Order)
+                .GetField(nameof(_products), BindingFlags.Instance | BindingFlags.NonPublic);
 
-            public static readonly FieldInfo OtherProductsField = typeof(Order).GetField(
-                nameof(_otherProducts),
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            public static readonly FieldInfo OtherProductsField = typeof(Order)
+                .GetField(nameof(_otherProducts), BindingFlags.Instance | BindingFlags.NonPublic);
 
             public int OrderId { get; set; }
 
@@ -454,11 +445,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class OrderProduct
         {
-            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(
-                nameof(OrderId)
-            );
-            public static readonly PropertyInfo ProductIdProperty =
-                typeof(OrderProduct).GetProperty(nameof(ProductId));
+            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct)
+                .GetProperty(nameof(OrderId));
+            public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct)
+                .GetProperty(nameof(ProductId));
 
             public int OrderId { get; set; }
             public int ProductId { get; set; }
@@ -468,9 +458,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         protected class Product
         {
-            public static readonly PropertyInfo OrdersProperty = typeof(Product).GetProperty(
-                nameof(Orders)
-            );
+            public static readonly PropertyInfo OrdersProperty = typeof(Product)
+                .GetProperty(nameof(Orders));
 
             public int Id { get; set; }
 

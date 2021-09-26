@@ -484,9 +484,8 @@ namespace System.Management
 
         static WmiNetUtilsHelper()
         {
-            RegistryKey netFrameworkSubKey = Registry.LocalMachine.OpenSubKey(
-                @"SOFTWARE\Microsoft\.NETFramework\"
-            );
+            RegistryKey netFrameworkSubKey = Registry.LocalMachine
+                .OpenSubKey(@"SOFTWARE\Microsoft\.NETFramework\");
             string netFrameworkInstallRoot = (string)netFrameworkSubKey?.GetValue("InstallRoot");
 
             if (netFrameworkInstallRoot == null)
@@ -1394,9 +1393,10 @@ namespace System.Management
                 threadParam.Options = new ConnectionOptions();
             }
 
-            string nsPath = threadParam.prvpath.GetNamespacePath(
-                (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
-            );
+            string nsPath = threadParam.prvpath
+                .GetNamespacePath(
+                    (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+                );
 
             // If no namespace specified, fill in the default one
             if ((null == nsPath) || (0 == nsPath.Length))
@@ -1405,10 +1405,8 @@ namespace System.Management
                 // path here as we do NOT want to trigger an
                 // IdentifierChanged event as a result of this set
 
-                nsPath = threadParam.prvpath.SetNamespacePath(
-                    ManagementPath.DefaultPath.Path,
-                    out _
-                );
+                nsPath = threadParam.prvpath
+                    .SetNamespacePath(ManagementPath.DefaultPath.Path, out _);
             }
 
             int status = (int)ManagementStatus.NoError;
@@ -2172,9 +2170,8 @@ namespace System.Management
             if (value is ManagementScope && destinationType == typeof(InstanceDescriptor))
             {
                 ManagementScope obj = ((ManagementScope)(value));
-                ConstructorInfo ctor = typeof(ManagementScope).GetConstructor(
-                    new Type[] { typeof(string) }
-                );
+                ConstructorInfo ctor = typeof(ManagementScope)
+                    .GetConstructor(new Type[] { typeof(string) });
                 if (ctor != null)
                 {
                     return new InstanceDescriptor(ctor, new object[] { obj.Path.Path });

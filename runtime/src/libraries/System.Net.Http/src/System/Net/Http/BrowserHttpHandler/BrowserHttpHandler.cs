@@ -164,10 +164,8 @@ namespace System.Net.Http
                 var requestObject = new JSObject();
 
                 if (
-                    request.Options.TryGetValue(
-                        FetchOptions,
-                        out IDictionary<string, object>? fetchOptions
-                    )
+                    request.Options
+                        .TryGetValue(FetchOptions, out IDictionary<string, object>? fetchOptions)
                 )
                 {
                     foreach (KeyValuePair<string, object> item in fetchOptions)
@@ -204,7 +202,8 @@ namespace System.Net.Http
                     {
                         requestObject.SetObjectProperty(
                             "body",
-                            await request.Content.ReadAsStringAsync(cancellationToken)
+                            await request.Content
+                                .ReadAsStringAsync(cancellationToken)
                                 .ConfigureAwait(continueOnCapturedContext: true)
                         );
                     }
@@ -212,7 +211,8 @@ namespace System.Net.Http
                     {
                         using (
                             Uint8Array uint8Buffer = Uint8Array.From(
-                                await request.Content.ReadAsByteArrayAsync(cancellationToken)
+                                await request.Content
+                                    .ReadAsByteArrayAsync(cancellationToken)
                                     .ConfigureAwait(continueOnCapturedContext: true)
                             )
                         )
@@ -353,15 +353,11 @@ namespace System.Net.Http
                                         var name = (string)resultValue[0];
                                         var value = (string)resultValue[1];
                                         if (
-                                            !httpResponse.Headers.TryAddWithoutValidation(
-                                                name,
-                                                value
-                                            )
+                                            !httpResponse.Headers
+                                                .TryAddWithoutValidation(name, value)
                                         )
-                                            httpResponse.Content.Headers.TryAddWithoutValidation(
-                                                name,
-                                                value
-                                            );
+                                            httpResponse.Content.Headers
+                                                .TryAddWithoutValidation(name, value);
                                     }
                                     nextResult?.Dispose();
                                     nextResult = (JSObject)entriesIterator.Invoke("next");

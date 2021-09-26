@@ -236,7 +236,10 @@ namespace Microsoft.AspNetCore.Testing
                     "CUSTOM /a%20b?c=dHTTP/1.1\r\n",
                     "CUSTOM %2F HTTP/1.1\r\n",
                     "CUSTOM %00 HTTP/1.1\r\n",
-                }.Concat(MethodWithNonTokenCharData.Select(method => $"{method} / HTTP/1.0\r\n"));
+                }
+                    .Concat(
+                        MethodWithNonTokenCharData.Select(method => $"{method} / HTTP/1.0\r\n")
+                    );
             }
         }
 
@@ -267,7 +270,8 @@ namespace Microsoft.AspNetCore.Testing
                     "get@",
                     "post=",
                     "[0x00]"
-                }.Concat(MethodWithNullCharData);
+                }
+                    .Concat(MethodWithNullCharData);
             }
         }
 
@@ -364,9 +368,8 @@ namespace Microsoft.AspNetCore.Testing
         {
             get
             {
-                return new[] { "\0", "/\0", "/\0\0", "/%C8\0", }.Concat(
-                    QueryStringWithNullCharData
-                );
+                return new[] { "\0", "/\0", "/\0\0", "/%C8\0", }
+                    .Concat(QueryStringWithNullCharData);
             }
         }
 

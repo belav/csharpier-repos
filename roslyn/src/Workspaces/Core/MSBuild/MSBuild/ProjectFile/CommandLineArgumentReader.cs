@@ -165,7 +165,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 { "full", "full" },
                 { "portable", "portable" },
                 { "embedded", "embedded" }
-            }.ToImmutableDictionary();
+            }
+                .ToImmutableDictionary();
 
         protected void ReadDebugInfo()
         {
@@ -264,11 +265,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                             foreach (var alias in aliases)
                             {
                                 if (
-                                    string.Equals(
-                                        alias,
-                                        "global",
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                                    string
+                                        .Equals(alias, "global", StringComparison.OrdinalIgnoreCase)
                                 )
                                 {
                                     Add("reference", filePath);

@@ -184,11 +184,12 @@ public class ReliabilityFramework
 #endif
         foreach (string arg in args)
         {
-            rf._logger.WriteToInstrumentationLog(
-                null,
-                LoggingLevels.StartupShutdown,
-                String.Format("Argument: {0}", arg)
-            );
+            rf._logger
+                .WriteToInstrumentationLog(
+                    null,
+                    LoggingLevels.StartupShutdown,
+                    String.Format("Argument: {0}", arg)
+                );
             if (arg[0] == '-')
             {
                 if (String.Compare(arg.Substring(1), "replay", true) == 0)
@@ -243,11 +244,12 @@ public class ReliabilityFramework
         {
             okToContinue = false;
             Console.WriteLine("You must specify a config file!");
-            rf._logger.WriteToInstrumentationLog(
-                null,
-                LoggingLevels.StartupShutdown,
-                "No configuration file specified."
-            );
+            rf._logger
+                .WriteToInstrumentationLog(
+                    null,
+                    LoggingLevels.StartupShutdown,
+                    "No configuration file specified."
+                );
         }
 
         System.Console.WriteLine("Using config file: " + configFile);
@@ -266,11 +268,12 @@ public class ReliabilityFramework
             );
             Console.WriteLine(" -{0}:<seed>	-	Random Number seed for replays", sSeed);
             Console.WriteLine(" -unittest   -   Set when run via unit test harness");
-            rf._logger.WriteToInstrumentationLog(
-                null,
-                LoggingLevels.StartupShutdown,
-                "Not ok to continue."
-            );
+            rf._logger
+                .WriteToInstrumentationLog(
+                    null,
+                    LoggingLevels.StartupShutdown,
+                    "Not ok to continue."
+                );
 
 #if PROJECTK_BUILD
             return 0;
@@ -286,11 +289,12 @@ public class ReliabilityFramework
             {
                 rf._logger.WriteToInstrumentationLog(null, LoggingLevels.Tests, "Running tests...");
                 retVal = rf.RunReliabilityTests(configFile, doReplay);
-                rf._logger.WriteToInstrumentationLog(
-                    null,
-                    LoggingLevels.Tests,
-                    String.Format("Successfully executed tests, return val: {0}", retVal)
-                );
+                rf._logger
+                    .WriteToInstrumentationLog(
+                        null,
+                        LoggingLevels.Tests,
+                        String.Format("Successfully executed tests, return val: {0}", retVal)
+                    );
             }
             catch (OutOfMemoryException e)
             {
@@ -329,20 +333,22 @@ public class ReliabilityFramework
 
         finally
         {
-            rf._logger.WriteToInstrumentationLog(
-                null,
-                LoggingLevels.StartupShutdown,
-                "Reliability framework is shutting down..."
-            );
+            rf._logger
+                .WriteToInstrumentationLog(
+                    null,
+                    LoggingLevels.StartupShutdown,
+                    "Reliability framework is shutting down..."
+                );
         }
 
         NoExitPoll();
 
-        rf._logger.WriteToInstrumentationLog(
-            null,
-            LoggingLevels.StartupShutdown,
-            String.Format("Shutdown w/ ret val of  {0}", retVal)
-        );
+        rf._logger
+            .WriteToInstrumentationLog(
+                null,
+                LoggingLevels.StartupShutdown,
+                String.Format("Shutdown w/ ret val of  {0}", retVal)
+            );
 
         GC.Collect(2);
         GC.WaitForPendingFinalizers();
@@ -818,10 +824,11 @@ public class ReliabilityFramework
         if (Debugger.IsAttached)
         {
             Console.WriteLine(
-                string.Format(
-                    "DebugBreak: breaking in because test threw an exception: {0}",
-                    extraData
-                )
+                string
+                    .Format(
+                        "DebugBreak: breaking in because test threw an exception: {0}",
+                        extraData
+                    )
             );
             Debugger.Break();
         }
@@ -1555,15 +1562,16 @@ public class ReliabilityFramework
                             );
                             try
                             {
-                                daTest.EntryPointMethod.Invoke(
-                                    null,
-                                    new object[]
-                                    {
-                                        (daTest.Arguments == null)
-                                            ? new string[0]
-                                            : daTest.GetSplitArguments()
-                                    }
-                                );
+                                daTest.EntryPointMethod
+                                    .Invoke(
+                                        null,
+                                        new object[]
+                                        {
+                                            (daTest.Arguments == null)
+                                                ? new string[0]
+                                                : daTest.GetSplitArguments()
+                                        }
+                                    );
                             }
                             catch (Exception e)
                             {
@@ -1795,20 +1803,22 @@ public class ReliabilityFramework
                                 ) // must be a simple name or fullname...
                                 {
                                     //exitCode = daTest.AppDomain.ExecuteAssemblyByName(daTest.Assembly, daTest.GetSplitArguments());
-                                    exitCode = daTest.AppDomain.ExecuteAssemblyByName(
-                                        daTest.Assembly,
-                                        null,
-                                        daTest.GetSplitArguments()
-                                    );
+                                    exitCode = daTest.AppDomain
+                                        .ExecuteAssemblyByName(
+                                            daTest.Assembly,
+                                            null,
+                                            daTest.GetSplitArguments()
+                                        );
                                 }
                                 else
                                 {
                                     //exitCode = daTest.AppDomain.ExecuteAssembly(daTest.Assembly, daTest.GetSplitArguments());
-                                    exitCode = daTest.AppDomain.ExecuteAssembly(
-                                        daTest.Assembly,
-                                        null,
-                                        daTest.GetSplitArguments()
-                                    );
+                                    exitCode = daTest.AppDomain
+                                        .ExecuteAssembly(
+                                            daTest.Assembly,
+                                            null,
+                                            daTest.GetSplitArguments()
+                                        );
                                 }
 #endif
                                 // HACKHACK: VSWhidbey bug #113535: Breaking change.  Tests that return a value via Environment.ExitCode

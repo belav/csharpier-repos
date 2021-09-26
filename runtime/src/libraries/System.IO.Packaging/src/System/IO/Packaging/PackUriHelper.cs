@@ -166,9 +166,8 @@ namespace System.IO.Packaging
             if (firstPartUri == null || secondPartUri == null)
                 return CompareUsingSystemUri(firstPartUri, secondPartUri);
 
-            return ((IComparable<ValidatedPartUri>)firstPartUri).CompareTo(
-                (ValidatedPartUri)secondPartUri
-            );
+            return ((IComparable<ValidatedPartUri>)firstPartUri)
+                .CompareTo((ValidatedPartUri)secondPartUri);
         }
 
         /// <summary>
@@ -463,10 +462,11 @@ namespace System.IO.Packaging
             //We test if the URI is well-formed and refined.
             //The relative URI that was passed to us may not be correctly escaped and so we test that.
             //Also there might be navigation "/../" present in the URI which we need to detect.
-            string wellFormedPartName = new Uri(s_defaultUri, partName).GetComponents(
-                UriComponents.Path | UriComponents.KeepDelimiter,
-                UriFormat.UriEscaped
-            );
+            string wellFormedPartName = new Uri(s_defaultUri, partName)
+                .GetComponents(
+                    UriComponents.Path | UriComponents.KeepDelimiter,
+                    UriFormat.UriEscaped
+                );
 
             //Note - For Relative Uris the output of ToString() and OriginalString property
             //are the same as per the current implementation of System.Uri
@@ -479,11 +479,12 @@ namespace System.IO.Packaging
             //We perform the comparison in a case-insensitive manner, as at this point,
             //only escaped hex digits (A-F) might vary in casing.
             if (
-                !string.Equals(
-                    partUri.OriginalString,
-                    wellFormedPartName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                !string
+                    .Equals(
+                        partUri.OriginalString,
+                        wellFormedPartName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
                 return new ArgumentException(SR.InvalidPartUri);
 
@@ -898,10 +899,11 @@ namespace System.IO.Packaging
 
                 //If the extension was not equal to .rels, we would have exited early.
                 Debug.Assert(
-                    string.CompareOrdinal(
-                        (Path.GetExtension(segments[segments.Length - 1])),
-                        RelationshipPartUpperCaseExtension
-                    ) == 0
+                    string
+                        .CompareOrdinal(
+                            (Path.GetExtension(segments[segments.Length - 1])),
+                            RelationshipPartUpperCaseExtension
+                        ) == 0
                 );
 
                 // must be at least two segments and the last one must end with .RELs
@@ -913,10 +915,11 @@ namespace System.IO.Packaging
                 {
                     // look for "_RELS" segment which must be second last segment
                     result = (
-                        string.CompareOrdinal(
-                            segments[segments.Length - 2],
-                            RelationshipPartUpperCaseSegmentName
-                        ) == 0
+                        string
+                            .CompareOrdinal(
+                                segments[segments.Length - 2],
+                                RelationshipPartUpperCaseSegmentName
+                            ) == 0
                     );
                 }
 
@@ -925,18 +928,17 @@ namespace System.IO.Packaging
                 if (segments.Length > 3 && result == true)
                 {
                     if (
-                        (segments[segments.Length - 1]).EndsWith(
-                            RelsrelsUpperCaseExtension,
-                            StringComparison.Ordinal
-                        )
+                        (segments[segments.Length - 1])
+                            .EndsWith(RelsrelsUpperCaseExtension, StringComparison.Ordinal)
                     )
                     {
                         // look for "_rels" segment in the third last segment
                         if (
-                            string.CompareOrdinal(
-                                segments[segments.Length - 3],
-                                RelationshipPartUpperCaseSegmentName
-                            ) == 0
+                            string
+                                .CompareOrdinal(
+                                    segments[segments.Length - 3],
+                                    RelationshipPartUpperCaseSegmentName
+                                ) == 0
                         )
                             throw new ArgumentException(SR.NotAValidRelationshipPartUri);
                     }
@@ -981,10 +983,11 @@ namespace System.IO.Packaging
                     return 1;
 
                 //Compare the normalized uri strings for the two part uris.
-                return string.CompareOrdinal(
-                    this.NormalizedPartUriString,
-                    otherPartUri.NormalizedPartUriString
-                );
+                return string
+                    .CompareOrdinal(
+                        this.NormalizedPartUriString,
+                        otherPartUri.NormalizedPartUriString
+                    );
             }
 
             //------------------------------------------------------

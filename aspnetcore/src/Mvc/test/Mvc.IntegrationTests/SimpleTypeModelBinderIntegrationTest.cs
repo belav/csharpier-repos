@@ -424,16 +424,16 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Arrange
             var parameterType = typeof(int);
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider.ForType(parameterType)
-                .BindingDetails(
-                    binding =>
-                    {
-                        // A real details provider could customize message based on BindingMetadataProviderContext.
-                        binding.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
+            metadataProvider.ForType(parameterType).BindingDetails(
+                binding =>
+                {
+                    // A real details provider could customize message based on BindingMetadataProviderContext.
+                    binding.ModelBindingMessageProvider
+                        .SetNonPropertyAttemptedValueIsInvalidAccessor(
                             (value) => $"Hmm, '{value}' is not a valid value."
                         );
-                    }
-                );
+                }
+            );
 
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
@@ -535,16 +535,16 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider.ForType(parameterType)
-                .BindingDetails(
-                    binding =>
-                    {
-                        // A real details provider could customize message based on BindingMetadataProviderContext.
-                        binding.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+            metadataProvider.ForType(parameterType).BindingDetails(
+                binding =>
+                {
+                    // A real details provider could customize message based on BindingMetadataProviderContext.
+                    binding.ModelBindingMessageProvider
+                        .SetValueMustNotBeNullAccessor(
                             value => $"Hurts when '{value}' is provided."
                         );
-                    }
-                );
+                }
+            );
 
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>

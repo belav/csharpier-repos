@@ -105,10 +105,11 @@ namespace System.Web.Mvc.Test
             Assert.Throws<ArgumentException>(
                 delegate
                 {
-                    ((IControllerFactory)factory).CreateController(
-                        new RequestContext(new Mock<HttpContextBase>().Object, new RouteData()),
-                        String.Empty
-                    );
+                    ((IControllerFactory)factory)
+                        .CreateController(
+                            new RequestContext(new Mock<HttpContextBase>().Object, new RouteData()),
+                            String.Empty
+                        );
                 },
                 "Value cannot be null or empty.\r\nParameter name: controllerName"
             );
@@ -128,10 +129,8 @@ namespace System.Web.Mvc.Test
                 .Returns(typeof(DummyController));
 
             // Act
-            IController controller = ((IControllerFactory)factoryMock.Object).CreateController(
-                requestContext,
-                "moo"
-            );
+            IController controller = ((IControllerFactory)factoryMock.Object)
+                .CreateController(requestContext, "moo");
 
             // Assert
             Assert.IsType<DummyController>(controller);
@@ -152,10 +151,8 @@ namespace System.Web.Mvc.Test
                 .Returns((ControllerBase)null);
 
             // Act
-            IController controller = ((IControllerFactory)factoryMock.Object).CreateController(
-                requestContext,
-                "moo"
-            );
+            IController controller = ((IControllerFactory)factoryMock.Object)
+                .CreateController(requestContext, "moo");
 
             // Assert
             Assert.Null(controller);
@@ -196,10 +193,8 @@ namespace System.Web.Mvc.Test
             Assert.ThrowsHttpException(
                 delegate
                 {
-                    ((IControllerFactory)factoryMock.Object).CreateController(
-                        requestContext,
-                        "moo"
-                    );
+                    ((IControllerFactory)factoryMock.Object)
+                        .CreateController(requestContext, "moo");
                 },
                 "The controller for path 'somepath' was not found or does not implement IController.",
                 404
@@ -241,10 +236,8 @@ namespace System.Web.Mvc.Test
             Exception ex = Assert.Throws<InvalidOperationException>(
                 delegate
                 {
-                    ((IControllerFactory)factoryMock.Object).CreateController(
-                        requestContext,
-                        "moo"
-                    );
+                    ((IControllerFactory)factoryMock.Object)
+                        .CreateController(requestContext, "moo");
                 },
                 "An error occurred when trying to create a controller of type 'System.Web.Mvc.Test.DefaultControllerFactoryTest+DummyControllerThrows'. Make sure that the controller has a parameterless public constructor."
             );

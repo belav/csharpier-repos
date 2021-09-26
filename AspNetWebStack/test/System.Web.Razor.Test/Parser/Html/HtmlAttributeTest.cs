@@ -365,9 +365,8 @@ namespace System.Web.Razor.Test.Parser.Html
         {
             // Act
             ParserResults results = ParseDocument("<a href='~/Foo/Bar' />");
-            Block rewritten = new ConditionalAttributeCollapser(
-                new HtmlMarkupParser().BuildSpan
-            ).Rewrite(results.Document);
+            Block rewritten = new ConditionalAttributeCollapser(new HtmlMarkupParser().BuildSpan)
+                .Rewrite(results.Document);
             rewritten = new MarkupCollapser(new HtmlMarkupParser().BuildSpan).Rewrite(rewritten);
 
             // Assert
@@ -468,9 +467,8 @@ namespace System.Web.Razor.Test.Parser.Html
 
             // Act
             ParserResults results = ParseDocument(code);
-            Block rewritten = new ConditionalAttributeCollapser(
-                new HtmlMarkupParser().BuildSpan
-            ).Rewrite(results.Document);
+            Block rewritten = new ConditionalAttributeCollapser(new HtmlMarkupParser().BuildSpan)
+                .Rewrite(results.Document);
             rewritten = new MarkupCollapser(new HtmlMarkupParser().BuildSpan).Rewrite(rewritten);
 
             // Assert

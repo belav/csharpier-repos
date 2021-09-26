@@ -51,9 +51,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             }
 
             var position = await document.GetPositionFromLinePositionAsync(
-                    ProtocolConversions.PositionToLinePosition(request.Position),
-                    cancellationToken
-                )
+                ProtocolConversions.PositionToLinePosition(request.Position),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var definitions = await GetDefinitions(document, position, cancellationToken)
@@ -68,10 +68,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     }
 
                     var location = await ProtocolConversions.TextSpanToLocationAsync(
-                            definition.Document,
-                            definition.SourceSpan,
-                            cancellationToken
-                        )
+                        definition.Document,
+                        definition.SourceSpan,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     locations.AddIfNotNull(location);
                 }
@@ -80,10 +80,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             {
                 // No definition found - see if we can get metadata as source but that's only applicable for C#\VB.
                 var symbol = await SymbolFinder.FindSymbolAtPositionAsync(
-                        document,
-                        position,
-                        cancellationToken
-                    )
+                    document,
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (
                     symbol != null
@@ -95,11 +95,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     {
                         var declarationFile =
                             await _metadataAsSourceFileService.GetGeneratedFileAsync(
-                                    document.Project,
-                                    symbol,
-                                    false,
-                                    cancellationToken
-                                )
+                                document.Project,
+                                symbol,
+                                false,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
 
                         var linePosSpan = declarationFile.IdentifierLocation.GetLineSpan().Span;
@@ -177,10 +177,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 if (findDefinitionService != null)
                 {
                     return await findDefinitionService.FindDefinitionsAsync(
-                            document,
-                            position,
-                            cancellationToken
-                        )
+                        document,
+                        position,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -188,10 +188,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 var goToDefinitionsService =
                     document.GetRequiredLanguageService<IGoToDefinitionService>();
                 return await goToDefinitionsService.FindDefinitionsAsync(
-                        document,
-                        position,
-                        cancellationToken
-                    )
+                    document,
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

@@ -27,14 +27,14 @@ namespace WebMatrix.WebData.Test
                     // Arrange
                     var providerMock = new Mock<ExtendedMembershipProvider>();
                     providerMock.Setup(
-                            p =>
-                                p.CreateUserAndAccount(
-                                    It.IsAny<string>(),
-                                    It.IsAny<string>(),
-                                    It.IsAny<bool>(),
-                                    It.IsAny<IDictionary<string, object>>()
-                                )
-                        )
+                        p =>
+                            p.CreateUserAndAccount(
+                                It.IsAny<string>(),
+                                It.IsAny<string>(),
+                                It.IsAny<bool>(),
+                                It.IsAny<IDictionary<string, object>>()
+                            )
+                    )
                         .Returns(
                             (
                                 string username,
@@ -43,10 +43,8 @@ namespace WebMatrix.WebData.Test
                                 IDictionary<string, object> values
                             ) => "foo = " + values["foo"]
                         );
-                    typeof(Membership).GetField(
-                            "s_Provider",
-                            BindingFlags.Static | BindingFlags.NonPublic
-                        )
+                    typeof(Membership)
+                        .GetField("s_Provider", BindingFlags.Static | BindingFlags.NonPublic)
                         .SetValue(null, providerMock.Object);
 
                     // Act

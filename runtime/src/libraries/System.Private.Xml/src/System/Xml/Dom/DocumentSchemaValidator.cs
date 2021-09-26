@@ -332,12 +332,13 @@ namespace System.Xml
 
                 case XmlNodeType.Attribute: //Top-level attribute
                     XmlAttribute attr = (_currentNode as XmlAttribute)!;
-                    _validator!.ValidateAttribute(
-                        attr.LocalName,
-                        attr.NamespaceURI,
-                        _nodeValueGetter,
-                        _attributeSchemaInfo
-                    );
+                    _validator!
+                        .ValidateAttribute(
+                            attr.LocalName,
+                            attr.NamespaceURI,
+                            _nodeValueGetter,
+                            _attributeSchemaInfo
+                        );
                     if (_psviAugmentation)
                     {
                         attr.XmlName = _document.AddAttrXmlName(
@@ -414,15 +415,16 @@ namespace System.Xml
                 }
             }
 
-            _validator!.ValidateElement(
-                elementNode.LocalName,
-                elementNode.NamespaceURI,
-                _schemaInfo,
-                xsiType,
-                xsiNil,
-                null,
-                null
-            );
+            _validator!
+                .ValidateElement(
+                    elementNode.LocalName,
+                    elementNode.NamespaceURI,
+                    _schemaInfo,
+                    xsiType,
+                    xsiNil,
+                    null,
+                    null
+                );
             ValidateAttributes(elementNode);
             _validator!.ValidateEndOfAttributes(_schemaInfo);
 
@@ -469,12 +471,13 @@ namespace System.Xml
                 { //Do not validate namespace decls
                     continue;
                 }
-                _validator!.ValidateAttribute(
-                    attr.LocalName,
-                    attr.NamespaceURI,
-                    _nodeValueGetter,
-                    _attributeSchemaInfo
-                );
+                _validator!
+                    .ValidateAttribute(
+                        attr.LocalName,
+                        attr.NamespaceURI,
+                        _nodeValueGetter,
+                        _attributeSchemaInfo
+                    );
                 if (_psviAugmentation)
                 {
                     attr.XmlName = _document.AddAttrXmlName(
@@ -835,15 +838,16 @@ namespace System.Xml
                 }
             }
 
-            _validator!.ValidateElement(
-                elementNode.LocalName,
-                elementNode.NamespaceURI,
-                newSchemaInfo,
-                xsiType,
-                xsiNil,
-                null,
-                null
-            );
+            _validator!
+                .ValidateElement(
+                    elementNode.LocalName,
+                    elementNode.NamespaceURI,
+                    newSchemaInfo,
+                    xsiType,
+                    xsiNil,
+                    null,
+                    null
+                );
             //Validate end of element
             if (skipToEnd)
             {

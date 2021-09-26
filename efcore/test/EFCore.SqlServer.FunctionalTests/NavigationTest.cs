@@ -108,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore
 
         public NavigationTestFixture()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider(validateScopes: true);
 
             var connStrBuilder = new SqlConnectionStringBuilder(TestEnvironment.DefaultConnection)
@@ -119,10 +120,8 @@ namespace Microsoft.EntityFrameworkCore
             };
 
             _options =
-                new DbContextOptionsBuilder().UseSqlServer(
-                        connStrBuilder.ConnectionString,
-                        b => b.ApplyConfiguration()
-                    )
+                new DbContextOptionsBuilder()
+                    .UseSqlServer(connStrBuilder.ConnectionString, b => b.ApplyConfiguration())
                     .UseInternalServiceProvider(serviceProvider).Options;
         }
 

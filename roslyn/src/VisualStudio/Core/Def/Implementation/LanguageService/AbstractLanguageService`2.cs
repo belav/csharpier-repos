@@ -142,12 +142,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             // or service providers.  Anything else which is more complicated should go in Initialize
             // instead.
             this.Workspace = this.Package.ComponentModel.GetService<VisualStudioWorkspaceImpl>();
-            this.EditorAdaptersFactoryService =
-                this.Package.ComponentModel.GetService<IVsEditorAdaptersFactoryService>();
-            this.HostDiagnosticUpdateSource =
-                this.Package.ComponentModel.GetService<HostDiagnosticUpdateSource>();
-            this.AnalyzerFileWatcherService =
-                this.Package.ComponentModel.GetService<AnalyzerFileWatcherService>();
+            this.EditorAdaptersFactoryService = this.Package.ComponentModel
+                .GetService<IVsEditorAdaptersFactoryService>();
+            this.HostDiagnosticUpdateSource = this.Package.ComponentModel
+                .GetService<HostDiagnosticUpdateSource>();
+            this.AnalyzerFileWatcherService = this.Package.ComponentModel
+                .GetService<AnalyzerFileWatcherService>();
         }
 
         protected virtual void RemoveServices()
@@ -175,7 +175,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
         private void PrimeLanguageServiceComponentsOnBackground()
         {
-            var formatter = this.Workspace.Services.GetLanguageServices(RoslynLanguageName)
+            var formatter = this.Workspace.Services
+                .GetLanguageServices(RoslynLanguageName)
                 .GetService<ISyntaxFormattingService>();
             if (formatter != null)
             {
@@ -205,7 +206,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 v => new StandaloneCommandFilter(v, Package.ComponentModel).AttachToVsTextView()
             );
 
-            var openDocument = wpfTextView.TextBuffer.AsTextContainer()
+            var openDocument = wpfTextView.TextBuffer
+                .AsTextContainer()
                 .GetRelatedDocuments()
                 .FirstOrDefault();
             var isOpenMetadataAsSource =
@@ -225,9 +227,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 && ErrorHandler.Succeeded(textView.GetBuffer(out var vsTextLines))
             )
             {
-                ((IVsTextBuffer)vsTextLines).SetStateFlags(
-                    (uint)BUFFERSTATEFLAGS.BSF_USER_READONLY
-                );
+                ((IVsTextBuffer)vsTextLines)
+                    .SetStateFlags((uint)BUFFERSTATEFLAGS.BSF_USER_READONLY);
 
                 var runningDocumentTable =
                     (IVsRunningDocumentTable)SystemServiceProvider.GetService(
@@ -254,8 +255,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             bool isOpenMetadataAsSource
         )
         {
-            var outliningManagerService =
-                this.Package.ComponentModel.GetService<IOutliningManagerService>();
+            var outliningManagerService = this.Package.ComponentModel
+                .GetService<IOutliningManagerService>();
             var outliningManager = outliningManagerService.GetOutliningManager(wpfTextView);
             if (outliningManager == null)
             {
@@ -334,8 +335,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         private void EnsureOutliningTagsComputed(IWpfTextView wpfTextView)
         {
             // We need to get our outlining tag source to notify it to start blocking
-            var outliningTaggerProvider =
-                this.Package.ComponentModel.GetService<AbstractStructureTaggerProvider>();
+            var outliningTaggerProvider = this.Package.ComponentModel
+                .GetService<AbstractStructureTaggerProvider>();
 
             var subjectBuffer = wpfTextView.TextBuffer;
             var snapshot = subjectBuffer.CurrentSnapshot;

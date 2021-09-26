@@ -146,13 +146,13 @@ namespace Microsoft.CodeAnalysis.Completion
         )
         {
             var completionList = await GetCompletionsAsync(
-                    document,
-                    caretPosition,
-                    trigger,
-                    roles,
-                    options,
-                    cancellationToken
-                )
+                document,
+                caretPosition,
+                trigger,
+                roles,
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return (completionList, false);
         }

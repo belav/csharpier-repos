@@ -213,8 +213,8 @@ public class Test
                 // (b) OmittedMultipleAttribute is conditionally NOT applied to symbols
 
                 var actualAttributeNames = attributes.Where(
-                        a => a.AttributeClass.Name != "CompilerGeneratedAttribute"
-                    )
+                    a => a.AttributeClass.Name != "CompilerGeneratedAttribute"
+                )
                     .Select(a => a.AttributeClass.Name);
 
                 if (isFromSource)
@@ -760,25 +760,24 @@ class Bar
     public static string M() { return ""str""; }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,33): error CS0428: Cannot convert method group 'M' to non-delegate type 'string'. Did you intend to invoke the method?
-                    //     public const string M = Bar.M;
-                    Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "M").WithArguments("M", "string"),
-                    // (7,18): error CS1955: Non-invocable member 'Goo.M' cannot be used like a method.
-                    // [Conditional(Goo.M())]
-                    Diagnostic(ErrorCode.ERR_NonInvocableMemberCalled, "M").WithArguments("Goo.M"),
-                    // (8,14): error CS1503: Argument 1: cannot convert from 'method group' to 'string'
-                    // [Conditional(Bar.M)]
-                    Diagnostic(ErrorCode.ERR_BadArgType, "Bar.M")
-                        .WithArguments("1", "method group", "string"),
-                    // (9,14): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [Conditional(Bar.M())]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "Bar.M()"),
-                    // (6,14): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [Conditional(Goo.M)]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "Goo.M")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,33): error CS0428: Cannot convert method group 'M' to non-delegate type 'string'. Did you intend to invoke the method?
+                //     public const string M = Bar.M;
+                Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "M").WithArguments("M", "string"),
+                // (7,18): error CS1955: Non-invocable member 'Goo.M' cannot be used like a method.
+                // [Conditional(Goo.M())]
+                Diagnostic(ErrorCode.ERR_NonInvocableMemberCalled, "M").WithArguments("Goo.M"),
+                // (8,14): error CS1503: Argument 1: cannot convert from 'method group' to 'string'
+                // [Conditional(Bar.M)]
+                Diagnostic(ErrorCode.ERR_BadArgType, "Bar.M")
+                    .WithArguments("1", "method group", "string"),
+                // (9,14): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [Conditional(Bar.M())]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "Bar.M()"),
+                // (6,14): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [Conditional(Goo.M)]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "Goo.M")
+            );
         }
         #endregion
     }

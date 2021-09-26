@@ -142,8 +142,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                                 GetComponentModelService<ITextStructureNavigatorSelectorService>();
                             selectionSpan =
                                 textStructureNavigatorSelectorService.GetTextStructureNavigator(
-                                        textView.TextBuffer
-                                    )
+                                    textView.TextBuffer
+                                )
                                     .GetExtentOfWord(selectionSpan.Start).Span;
                         }
 
@@ -195,9 +195,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     dte.Find.Action = EnvDTE.vsFindAction.vsFindActionFind;
 
                     var originalPosition = GetCaretPosition();
-                    view.Caret.MoveTo(
-                        new SnapshotPoint(GetBufferContainingCaret(view).CurrentSnapshot, 0)
-                    );
+                    view.Caret
+                        .MoveTo(
+                            new SnapshotPoint(GetBufferContainingCaret(view).CurrentSnapshot, 0)
+                        );
 
                     if (occurrence > 0)
                     {
@@ -246,12 +247,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     if (charsOffset < 0)
                     {
                         // On the first negative charsOffset, move to anchor-point position, as if the user hit the LEFT key
-                        view.Caret.MoveTo(
-                            new SnapshotPoint(
-                                view.TextSnapshot,
-                                view.Selection.AnchorPoint.Position.Position
-                            )
-                        );
+                        view.Caret
+                            .MoveTo(
+                                new SnapshotPoint(
+                                    view.TextSnapshot,
+                                    view.Selection.AnchorPoint.Position.Position
+                                )
+                            );
 
                         for (var i = 0; i < -charsOffset - 1; i++)
                         {
@@ -264,10 +266,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     if (extendSelection)
                     {
                         var newPosition = view.Selection.ActivePoint.Position.Position;
-                        view.Selection.Select(
-                            new VirtualSnapshotPoint(view.TextSnapshot, originalPosition),
-                            new VirtualSnapshotPoint(view.TextSnapshot, newPosition)
-                        );
+                        view.Selection
+                            .Select(
+                                new VirtualSnapshotPoint(view.TextSnapshot, originalPosition),
+                                new VirtualSnapshotPoint(view.TextSnapshot, newPosition)
+                            );
                         view.Selection.Mode = selectBlock
                             ? TextSelectionMode.Box
                             : TextSelectionMode.Stream;
@@ -375,10 +378,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                     if (expectedCount != actualCount)
                     {
-                        var tagsTypesString = string.Join(
-                            ",",
-                            allTags.Select(tag => tag.Tag.ToString())
-                        );
+                        var tagsTypesString = string
+                            .Join(",", allTags.Select(tag => tag.Tag.ToString()));
                         throw new Exception(
                             $"Failed to verify {tagTypeName} tags. Expected count: {expectedCount}, Actual count: {actualCount}. All tags: {tagsTypesString}"
                         );
@@ -416,7 +417,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                     var view = GetActiveTextView();
                     var broker = GetComponentModel().GetService<ILightBulbBroker>();
-                    return (await GetLightBulbActionsAsync(broker, view)).Select(a => a.DisplayText)
+                    return (await GetLightBulbActionsAsync(broker, view))
+                        .Select(a => a.DisplayText)
                         .ToArray();
                 }
             );
@@ -433,10 +435,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 var bufferType = view.TextBuffer.ContentType.DisplayName;
                 throw new Exception(
-                    string.Format(
-                        "No light bulb session in View!  Buffer content type={0}",
-                        bufferType
-                    )
+                    string
+                        .Format(
+                            "No light bulb session in View!  Buffer content type={0}",
+                            bufferType
+                        )
                 );
             }
 
@@ -445,10 +448,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 var bufferType = view.TextBuffer.ContentType.DisplayName;
                 throw new InvalidOperationException(
-                    string.Format(
-                        "No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={0}",
-                        bufferType
-                    )
+                    string
+                        .Format(
+                            "No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={0}",
+                            bufferType
+                        )
                 );
             }
 
@@ -519,12 +523,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                     var bufferType = view.TextBuffer.ContentType.DisplayName;
                     throw new InvalidOperationException(
-                        string.Format(
-                            "ISuggestedAction {0} not found.  Buffer content type={1}\r\nActions: {2}",
-                            actionName,
-                            bufferType,
-                            sb.ToString()
-                        )
+                        string
+                            .Format(
+                                "ISuggestedAction {0} not found.  Buffer content type={1}\r\nActions: {2}",
+                                actionName,
+                                bufferType,
+                                sb.ToString()
+                            )
                     );
                 }
 

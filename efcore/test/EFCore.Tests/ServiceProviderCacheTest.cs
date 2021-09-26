@@ -63,11 +63,12 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreResources.LogServiceProviderDebugInfo(new TestLogger<TestLoggingDefinitions>())
                     .GenerateMessage(
-                        string.Join(
-                            ", ",
-                            CoreStrings.ServiceProviderConfigRemoved("Fake1"),
-                            CoreStrings.ServiceProviderConfigAdded("Fake2")
-                        )
+                        string
+                            .Join(
+                                ", ",
+                                CoreStrings.ServiceProviderConfigRemoved("Fake1"),
+                                CoreStrings.ServiceProviderConfigAdded("Fake2")
+                            )
                     ),
                 loggerFactory.Log[1].Message
             );
@@ -172,29 +173,25 @@ namespace Microsoft.EntityFrameworkCore
                 var loggerFactory = new ListLoggerFactory();
 
                 var config1 =
-                    new DbContextOptionsBuilder(
-                        CreateOptions<CoreOptionsExtension>(loggerFactory)
-                    ).EnableDetailedErrors()
+                    new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
+                        .EnableDetailedErrors()
                         .EnableSensitiveDataLogging()
                         .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDelete)).Options;
 
                 var config2 =
-                    new DbContextOptionsBuilder(
-                        CreateOptions<CoreOptionsExtension>(loggerFactory)
-                    ).EnableDetailedErrors()
+                    new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
+                        .EnableDetailedErrors()
                         .EnableSensitiveDataLogging()
                         .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDeleteOrphan)).Options;
 
                 var config3 =
-                    new DbContextOptionsBuilder(
-                        CreateOptions<CoreOptionsExtension>(loggerFactory)
-                    ).EnableDetailedErrors()
+                    new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
+                        .EnableDetailedErrors()
                         .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDelete)).Options;
 
                 var config4 =
-                    new DbContextOptionsBuilder(
-                        CreateOptions<CoreOptionsExtension>(loggerFactory)
-                    ).EnableSensitiveDataLogging()
+                    new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
+                        .EnableSensitiveDataLogging()
                         .ConfigureWarnings(w => w.Throw(CoreEventId.ContextDisposed)).Options;
 
                 var cache = new ServiceProviderCache();
@@ -215,16 +212,16 @@ namespace Microsoft.EntityFrameworkCore
 
                 Assert.Equal(
                     CoreResources.LogServiceProviderCreated(
-                            new TestLogger<TestLoggingDefinitions>()
-                        )
+                        new TestLogger<TestLoggingDefinitions>()
+                    )
                         .GenerateMessage(),
                     loggerFactory.Log[0].Message
                 );
 
                 Assert.Equal(
                     CoreResources.LogServiceProviderDebugInfo(
-                            new TestLogger<TestLoggingDefinitions>()
-                        )
+                        new TestLogger<TestLoggingDefinitions>()
+                    )
                         .GenerateMessage(
                             CoreStrings.ServiceProviderConfigChanged("Core:ConfigureWarnings")
                         ),
@@ -233,8 +230,8 @@ namespace Microsoft.EntityFrameworkCore
 
                 Assert.Equal(
                     CoreResources.LogServiceProviderDebugInfo(
-                            new TestLogger<TestLoggingDefinitions>()
-                        )
+                        new TestLogger<TestLoggingDefinitions>()
+                    )
                         .GenerateMessage(
                             CoreStrings.ServiceProviderConfigChanged(
                                 "Core:EnableSensitiveDataLogging"
@@ -245,16 +242,19 @@ namespace Microsoft.EntityFrameworkCore
 
                 Assert.Equal(
                     CoreResources.LogServiceProviderDebugInfo(
-                            new TestLogger<TestLoggingDefinitions>()
-                        )
+                        new TestLogger<TestLoggingDefinitions>()
+                    )
                         .GenerateMessage(
-                            string.Join(
-                                ", ",
-                                CoreStrings.ServiceProviderConfigChanged(
-                                    "Core:EnableDetailedErrors"
-                                ),
-                                CoreStrings.ServiceProviderConfigChanged("Core:ConfigureWarnings")
-                            )
+                            string
+                                .Join(
+                                    ", ",
+                                    CoreStrings.ServiceProviderConfigChanged(
+                                        "Core:EnableDetailedErrors"
+                                    ),
+                                    CoreStrings.ServiceProviderConfigChanged(
+                                        "Core:ConfigureWarnings"
+                                    )
+                                )
                         ),
                     loggerFactory.Log[3].Message
                 );
@@ -265,9 +265,8 @@ namespace Microsoft.EntityFrameworkCore
             where TExtension : class, IDbContextOptionsExtension, new()
         {
             var optionsBuilder = new DbContextOptionsBuilder();
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                new TExtension()
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(new TExtension());
             optionsBuilder.UseLoggerFactory(loggerFactory);
             optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 

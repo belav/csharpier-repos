@@ -82,10 +82,8 @@ namespace Microsoft.EntityFrameworkCore
                 && ownership != null
 #pragma warning disable EF1001 // Internal EF Core API usage.
                 && entityType.Name
-                    == ownership.PrincipalEntityType.GetOwnedName(
-                        name,
-                        ownership.PrincipalToDependent!.Name
-                    )
+                    == ownership.PrincipalEntityType
+                        .GetOwnedName(name, ownership.PrincipalToDependent!.Name)
             )
 #pragma warning restore EF1001 // Internal EF Core API usage.
             {
@@ -866,10 +864,8 @@ namespace Microsoft.EntityFrameworkCore
                     || principalEntityType == foreignKey.DeclaringEntityType
                     || !foreignKey.IsUnique
 #pragma warning disable EF1001 // Internal EF Core API usage.
-                    || !PropertyListComparer.Instance.Equals(
-                        foreignKey.Properties,
-                        primaryKey.Properties
-                    )
+                    || !PropertyListComparer.Instance
+                        .Equals(foreignKey.Properties, primaryKey.Properties)
                 )
 #pragma warning restore EF1001 // Internal EF Core API usage.
                 {
@@ -920,7 +916,8 @@ namespace Microsoft.EntityFrameworkCore
         )
             // ReSharper disable once RedundantCast
             =>
-            ((IReadOnlyEntityType)entityType).FindRowInternalForeignKeys(storeObject)
+            ((IReadOnlyEntityType)entityType)
+                .FindRowInternalForeignKeys(storeObject)
                 .Cast<IMutableForeignKey>();
 
         /// <summary>
@@ -935,7 +932,8 @@ namespace Microsoft.EntityFrameworkCore
         )
             // ReSharper disable once RedundantCast
             =>
-            ((IReadOnlyEntityType)entityType).FindRowInternalForeignKeys(storeObject)
+            ((IReadOnlyEntityType)entityType)
+                .FindRowInternalForeignKeys(storeObject)
                 .Cast<IConventionForeignKey>();
 
         /// <summary>
@@ -950,7 +948,8 @@ namespace Microsoft.EntityFrameworkCore
         )
             // ReSharper disable once RedundantCast
             =>
-            ((IReadOnlyEntityType)entityType).FindRowInternalForeignKeys(storeObject)
+            ((IReadOnlyEntityType)entityType)
+                .FindRowInternalForeignKeys(storeObject)
                 .Cast<IForeignKey>();
 
         /// <summary>

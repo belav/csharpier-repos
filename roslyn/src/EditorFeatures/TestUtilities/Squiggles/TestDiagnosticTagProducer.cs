@@ -50,9 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Squiggles
                 )
             )
             {
-                var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
-                    workspace.Documents.First().GetTextBuffer()
-                );
+                var tagger = wrapper.TaggerProvider
+                    .CreateTagger<IErrorTag>(workspace.Documents.First().GetTextBuffer());
                 using (var disposable = tagger as IDisposable)
                 {
                     source.RaiseDiagnosticsUpdated(updateArgs);

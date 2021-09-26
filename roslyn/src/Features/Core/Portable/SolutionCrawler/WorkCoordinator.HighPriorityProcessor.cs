@@ -96,9 +96,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         // this is to prevent things like opening a file, changing in other files keep enqueuing
                         // expensive high priority work.
                         if (
-                            !item.InvocationReasons.Contains(
-                                PredefinedInvocationReasons.SyntaxChanged
-                            )
+                            !item.InvocationReasons
+                                .Contains(PredefinedInvocationReasons.SyntaxChanged)
                         )
                         {
                             return;
@@ -163,11 +162,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                             // okay now we have work to do
                             await ProcessDocumentAsync(
-                                    solution,
-                                    Analyzers,
-                                    workItem,
-                                    documentCancellation
-                                )
+                                solution,
+                                Analyzers,
+                                workItem,
+                                documentCancellation
+                            )
                                 .ConfigureAwait(false);
                         }
                         catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
@@ -243,11 +242,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 if (document != null)
                                 {
                                     await _processor.ProcessDocumentAnalyzersAsync(
-                                            document,
-                                            analyzers,
-                                            workItem,
-                                            cancellationToken
-                                        )
+                                        document,
+                                        analyzers,
+                                        workItem,
+                                        cancellationToken
+                                    )
                                         .ConfigureAwait(false);
                                 }
 

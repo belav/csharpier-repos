@@ -30,10 +30,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void CreateFromAssembly_NoMetadata()
         {
-            var dynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName { Name = "A" },
-                System.Reflection.Emit.AssemblyBuilderAccess.Run
-            );
+            var dynamicAssembly = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(
+                    new AssemblyName { Name = "A" },
+                    System.Reflection.Emit.AssemblyBuilderAccess.Run
+                );
             Assert.Throws<NotSupportedException>(
                 () => MetadataReference.CreateFromAssemblyInternal(dynamicAssembly)
             );
@@ -69,10 +70,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     )
             );
 
-            var dynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName { Name = "Goo" },
-                System.Reflection.Emit.AssemblyBuilderAccess.Run
-            );
+            var dynamicAssembly = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(
+                    new AssemblyName { Name = "Goo" },
+                    System.Reflection.Emit.AssemblyBuilderAccess.Run
+                );
             Assert.Throws<NotSupportedException>(
                 () => MetadataReference.CreateFromAssemblyInternal(dynamicAssembly)
             );
@@ -232,10 +234,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 CancellationToken cancellationToken = default(CancellationToken)
             )
             {
-                return string.Format(
-                    "<member name='{0}'><summary>{0}</summary></member>",
-                    documentationMemberID
-                );
+                return string
+                    .Format(
+                        "<member name='{0}'><summary>{0}</summary></member>",
+                        documentationMemberID
+                    );
             }
 
             public override bool Equals(object obj)
@@ -499,7 +502,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 0x00,
                 0x00,
                 0x00
-            }.AsImmutableOrNull(),
+            }
+                .AsImmutableOrNull(),
             hasPublicKey: true
         );
 
@@ -647,14 +651,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var corlib = AssemblyMetadata.CreateFromImage(ResourcesNet451.mscorlib)
                 .GetReference(display: "corlib", documentation: docProvider);
 
-            var comp = (Compilation)CS.CSharpCompilation.Create(
-                "goo",
-                syntaxTrees: new[]
-                {
-                    CS.SyntaxFactory.ParseSyntaxTree("class C : System.Collections.ArrayList { }")
-                },
-                references: new[] { corlib }
-            );
+            var comp = (Compilation)CS.CSharpCompilation
+                .Create(
+                    "goo",
+                    syntaxTrees: new[]
+                    {
+                        CS.SyntaxFactory
+                            .ParseSyntaxTree("class C : System.Collections.ArrayList { }")
+                    },
+                    references: new[] { corlib }
+                );
 
             var c = (ITypeSymbol)comp.GlobalNamespace.GetMembers("C").Single();
             var list = c.BaseType;

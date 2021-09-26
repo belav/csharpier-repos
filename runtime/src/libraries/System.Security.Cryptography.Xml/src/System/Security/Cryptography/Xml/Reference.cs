@@ -528,10 +528,10 @@ namespace System.Security.Cryptography.Xml
                                             )
                                             && (
                                                 Utils.GetAttribute(
-                                                        tempElem,
-                                                        "Id",
-                                                        SignedXml.XmlDsigNamespaceUrl
-                                                    )
+                                                    tempElem,
+                                                    "Id",
+                                                    SignedXml.XmlDsigNamespaceUrl
+                                                )
                                                     .Equals(idref)
                                             )
                                         )

@@ -87,10 +87,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 {
                     if (previousResult.TextDocument != null)
                     {
-                        var document = context.Solution.GetDocument(
-                            previousResult.TextDocument,
-                            context.ClientName
-                        );
+                        var document = context.Solution
+                            .GetDocument(previousResult.TextDocument, context.ClientName);
                         if (document == null)
                         {
                             // We can no longer get this document, return null for both diagnostics and resultId
@@ -127,10 +125,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 // We will compute what to report inside XamlPullDiagnosticService, for example, whether we should keep using the previousId or use a new resultId,
                 // and the handler here just return the result get from XamlPullDiagnosticService.
                 var diagnosticReport = await _xamlDiagnosticService.GetDiagnosticReportAsync(
-                        document,
-                        previousResultId,
-                        cancellationToken
-                    )
+                    document,
+                    previousResultId,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 progress.Report(
                     CreateReport(
@@ -159,7 +157,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             }
 
             var project = document.Project;
-            return xamlDiagnostics.Value.Select(
+            return xamlDiagnostics.Value
+                .Select(
                     d =>
                         new VSDiagnostic()
                         {

@@ -95,10 +95,10 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
 #endif
 
             var containsUnformattableContent = await ContainsUnformattableContentAsync(
-                    document,
-                    exprsAndOperators,
-                    cancellationToken
-                )
+                document,
+                exprsAndOperators,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (containsUnformattableContent)

@@ -22,10 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EventHookup
     internal sealed class EventHookupTestState : AbstractCommandHandlerTestState
     {
         private static readonly TestComposition s_composition =
-            EditorTestCompositions.EditorFeaturesWpf.AddParts(
-                typeof(EventHookupCommandHandler),
-                typeof(EventHookupSessionManager)
-            );
+            EditorTestCompositions.EditorFeaturesWpf
+                .AddParts(typeof(EventHookupCommandHandler), typeof(EventHookupSessionManager));
 
         private readonly EventHookupCommandHandler _commandHandler;
         private readonly Mutex _testSessionHookupMutex;
@@ -50,9 +48,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EventHookup
             OptionsCollection options = null
         ) => new EventHookupTestState(GetWorkspaceXml(markup), options);
 
-        public static XElement GetWorkspaceXml(string markup) =>
-            XElement.Parse(
-                string.Format(
+        public static XElement GetWorkspaceXml(string markup) => XElement.Parse(string.Format(
                     @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
@@ -60,8 +56,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EventHookup
     </Project>
 </Workspace>",
                     markup
-                )
-            );
+                ));
 
         internal void AssertShowing(string expectedText)
         {

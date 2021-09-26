@@ -121,7 +121,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         {
             using var host = await CreateHostAsync();
 
-            var address = host.Services.GetRequiredService<IServer>()
+            var address = host.Services
+                .GetRequiredService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses.First()
                 .Replace("https://", "wss://");
@@ -299,7 +300,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
 
         private Task<IHost> CreateHostAsync(Action<NegotiateOptions> configureOptions = null)
         {
-            var builder = new HostBuilder().ConfigureServices(AddTestLogging)
+            var builder = new HostBuilder()
+                .ConfigureServices(AddTestLogging)
                 .ConfigureServices(
                     services =>
                         services.AddRouting()
@@ -431,7 +433,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler does.
         private static HttpClient CreateWinHttpClient(IHost host)
         {
-            var address = host.Services.GetRequiredService<IServer>()
+            var address = host.Services
+                .GetRequiredService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses.First();
 
@@ -453,7 +456,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             bool useDefaultCredentials = false
         )
         {
-            var address = host.Services.GetRequiredService<IServer>()
+            var address = host.Services
+                .GetRequiredService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses.First();
 

@@ -24,7 +24,8 @@ namespace Microsoft.WebAssembly.Diagnostics
     {
         public static void Main(string[] args)
         {
-            IWebHost host = new WebHostBuilder().UseSetting("UseIISIntegration", false.ToString())
+            IWebHost host = new WebHostBuilder()
+                .UseSetting("UseIISIntegration", false.ToString())
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()

@@ -824,7 +824,8 @@ public class Derived : C<string>
                     .WithLocation(10, 9)
             );
 
-            var property = (PropertySymbol)comp.GlobalNamespace.GetTypeMember("Derived")
+            var property = (PropertySymbol)comp.GlobalNamespace
+                .GetTypeMember("Derived")
                 .BaseTypeNoUseSiteDiagnostics.GetMember("Property");
             Assert.False(property.GetMethod.IsInitOnly);
             Assert.False(property.GetPublicSymbol().GetMethod.IsInitOnly);
@@ -858,9 +859,9 @@ public class CWithoutInit : I<string> // 1
                 // (10,29): error CS8804: 'CWithoutInit' does not implement interface member 'I<string>.Property.init'. 'CWithoutInit.Property.set' cannot implement 'I<string>.Property.init'.
                 // public class CWithoutInit : I<string> // 1
                 Diagnostic(
-                        ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongInitOnly,
-                        "I<string>"
-                    )
+                    ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongInitOnly,
+                    "I<string>"
+                )
                     .WithArguments(
                         "CWithoutInit",
                         "I<string>.Property.init",
@@ -1909,8 +1910,8 @@ public class C
                 Assert.True(setter.IsInitOnly);
                 Assert.True(setter.GetPublicSymbol().IsInitOnly);
                 var setterAttributes = property.SetMethod.GetAttributes().Select(a => a.ToString());
-                var modifier =
-                    property.SetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single();
+                var modifier = property.SetMethod.ReturnTypeWithAnnotations.CustomModifiers
+                    .Single();
                 Assert.Equal(
                     "System.Runtime.CompilerServices.IsExternalInit",
                     modifier.Modifier.ToTestDisplayString()
@@ -3212,15 +3213,13 @@ public class C
             );
             comp.VerifyDiagnostics();
 
-            var conversion = comp.GlobalNamespace.GetMember<SourceUserDefinedConversionSymbol>(
-                "C.op_Implicit"
-            );
+            var conversion = comp.GlobalNamespace
+                .GetMember<SourceUserDefinedConversionSymbol>("C.op_Implicit");
             Assert.False(conversion.IsInitOnly);
             Assert.False(conversion.GetPublicSymbol().IsInitOnly);
 
-            var addition = comp.GlobalNamespace.GetMember<SourceUserDefinedOperatorSymbol>(
-                "C.op_Addition"
-            );
+            var addition = comp.GlobalNamespace
+                .GetMember<SourceUserDefinedOperatorSymbol>("C.op_Addition");
             Assert.False(addition.IsInitOnly);
             Assert.False(addition.GetPublicSymbol().IsInitOnly);
         }
@@ -3975,7 +3974,8 @@ class C : R
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var p = speculativeModel.SyntaxTree.GetRoot()
+            var p = speculativeModel.SyntaxTree
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Single(s => s.Identifier.ValueText == "_p");
@@ -4950,7 +4950,8 @@ public class D
             Assert.Empty(property0.RefCustomModifiers);
             Assert.Equal(
                 "System.Runtime.CompilerServices.IsExternalInit",
-                property0.TypeWithAnnotations.CustomModifiers.Single()
+                property0.TypeWithAnnotations.CustomModifiers
+                    .Single()
                     .Modifier.ToTestDisplayString()
             );
             Assert.Equal("System.Int32", property0.TypeWithAnnotations.Type.ToTestDisplayString());
@@ -5443,9 +5444,8 @@ public struct S
             var i = s.GetMember<IPropertySymbol>("I");
             Assert.False(i.SetMethod.IsReadOnly);
             Assert.True(
-                (
-                    (Symbols.PublicModel.PropertySymbol)i
-                ).GetSymbol<PropertySymbol>().SetMethod.IsDeclaredReadOnly
+                ((Symbols.PublicModel.PropertySymbol)i)
+                    .GetSymbol<PropertySymbol>().SetMethod.IsDeclaredReadOnly
             );
         }
 
@@ -5478,9 +5478,8 @@ public struct S
             var i = s.GetMember<IPropertySymbol>("I");
             Assert.False(i.SetMethod.IsReadOnly);
             Assert.True(
-                (
-                    (Symbols.PublicModel.PropertySymbol)i
-                ).GetSymbol<PropertySymbol>().SetMethod.IsDeclaredReadOnly
+                ((Symbols.PublicModel.PropertySymbol)i)
+                    .GetSymbol<PropertySymbol>().SetMethod.IsDeclaredReadOnly
             );
         }
 
@@ -5767,29 +5766,29 @@ public class C
 }
 ";
             var corlibWithoutIsExternalInitRef = CreateEmptyCompilation(
-                    corlib_cs,
-                    assemblyName: "corlibWithoutIsExternalInit"
-                )
+                corlib_cs,
+                assemblyName: "corlibWithoutIsExternalInit"
+            )
                 .EmitToImageReference();
 
             var corlibWithIsExternalInitRef = CreateEmptyCompilation(
-                    corlib_cs + IsExternalInitTypeDefinition,
-                    assemblyName: "corlibWithIsExternalInit"
-                )
+                corlib_cs + IsExternalInitTypeDefinition,
+                assemblyName: "corlibWithIsExternalInit"
+            )
                 .EmitToImageReference();
 
             var libWithIsExternalInitRef = CreateEmptyCompilation(
-                    IsExternalInitTypeDefinition,
-                    references: new[] { corlibWithoutIsExternalInitRef },
-                    assemblyName: "libWithIsExternalInit"
-                )
+                IsExternalInitTypeDefinition,
+                references: new[] { corlibWithoutIsExternalInitRef },
+                assemblyName: "libWithIsExternalInit"
+            )
                 .EmitToImageReference();
 
             var libWithIsExternalInitRef2 = CreateEmptyCompilation(
-                    IsExternalInitTypeDefinition,
-                    references: new[] { corlibWithoutIsExternalInitRef },
-                    assemblyName: "libWithIsExternalInit2"
-                )
+                IsExternalInitTypeDefinition,
+                references: new[] { corlibWithoutIsExternalInitRef },
+                assemblyName: "libWithIsExternalInit2"
+            )
                 .EmitToImageReference();
 
             {
@@ -5891,9 +5890,8 @@ public class C
                         libWithIsExternalInitRef,
                         libWithIsExternalInitRef2
                     },
-                    options: TestOptions.DebugDll.WithTopLevelBinderFlags(
-                        BinderFlags.IgnoreCorLibraryDuplicatedTypes
-                    )
+                    options: TestOptions.DebugDll
+                        .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
                 );
                 comp.VerifyEmitDiagnostics(
                     // (4,32): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not defined or imported
@@ -5934,9 +5932,8 @@ public class C
                         libWithIsExternalInitRef,
                         libWithIsExternalInitRef2
                     },
-                    options: TestOptions.DebugDll.WithTopLevelBinderFlags(
-                        BinderFlags.IgnoreCorLibraryDuplicatedTypes
-                    )
+                    options: TestOptions.DebugDll
+                        .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
                 );
                 comp.VerifyEmitDiagnostics(
                     // (4,32): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not defined or imported
@@ -5972,9 +5969,8 @@ public class C
                 var comp = CreateEmptyCompilation(
                     source,
                     references: new[] { corlibWithIsExternalInitRef, libWithIsExternalInitRef },
-                    options: TestOptions.DebugDll.WithTopLevelBinderFlags(
-                        BinderFlags.IgnoreCorLibraryDuplicatedTypes
-                    )
+                    options: TestOptions.DebugDll
+                        .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
                 );
                 comp.VerifyEmitDiagnostics();
                 Assert.Equal(
@@ -5995,7 +5991,8 @@ public class C
             {
                 var modifier = (
                     (SourcePropertySymbol)comp.GlobalNamespace.GetMember("C.Property")
-                ).SetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single();
+                ).SetMethod.ReturnTypeWithAnnotations.CustomModifiers
+                    .Single();
                 Assert.Equal(expectedAssemblyName, modifier.Modifier.ContainingAssembly.Name);
 
                 Assert.Equal(

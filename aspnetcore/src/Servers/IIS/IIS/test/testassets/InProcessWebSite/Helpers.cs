@@ -13,7 +13,8 @@ namespace TestSite
 #if FORWARDCOMPAT
             return null;
 #else
-            return request.HttpContext.Features.Get<IHttpRequestBodyDetectionFeature>()?.CanHaveBody;
+            return request.HttpContext.Features
+                .Get<IHttpRequestBodyDetectionFeature>()?.CanHaveBody;
 #endif
         }
     }

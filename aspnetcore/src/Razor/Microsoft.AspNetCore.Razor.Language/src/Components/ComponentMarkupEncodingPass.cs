@@ -216,10 +216,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         }
 
                         if (
-                            ParserHelpers.HtmlEntityCodePoints.TryGetValue(
-                                codePoint,
-                                out replacement
-                            )
+                            ParserHelpers.HtmlEntityCodePoints
+                                .TryGetValue(codePoint, out replacement)
                         )
                         {
                             // This is a known html entity unicode codepoint.

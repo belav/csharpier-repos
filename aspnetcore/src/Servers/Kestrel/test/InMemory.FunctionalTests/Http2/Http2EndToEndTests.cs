@@ -34,9 +34,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2
                     connectionIdFromFeature =
                         context.Features.Get<IConnectionIdFeature>().ConnectionId;
 
-                    var logger = context.RequestServices.GetRequiredService<
-                        ILogger<Http2EndToEndTests>
-                    >();
+                    var logger = context.RequestServices
+                        .GetRequiredService<ILogger<Http2EndToEndTests>>();
                     logger.LogInformation(expectedLogMessage);
 
                     await context.Response.WriteAsync("hello, world");

@@ -886,11 +886,12 @@ namespace System.Security.Claims
             }
 
             if (
-                !string.Equals(
-                    _nameClaimType,
-                    ClaimsIdentity.DefaultNameClaimType,
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        _nameClaimType,
+                        ClaimsIdentity.DefaultNameClaimType,
+                        StringComparison.Ordinal
+                    )
             )
             {
                 mask |= SerializationMask.NameClaimType;
@@ -898,11 +899,12 @@ namespace System.Security.Claims
             }
 
             if (
-                !string.Equals(
-                    _roleClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType,
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        _roleClaimType,
+                        ClaimsIdentity.DefaultRoleClaimType,
+                        StringComparison.Ordinal
+                    )
             )
             {
                 mask |= SerializationMask.RoleClaimType;

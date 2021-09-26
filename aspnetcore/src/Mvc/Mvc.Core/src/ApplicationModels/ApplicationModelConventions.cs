@@ -45,8 +45,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             {
                 // ToArray is needed here to prevent issues with modifying the attributes collection
                 // while iterating it.
-                var controllerConventions =
-                    controller.Attributes.OfType<IControllerModelConvention>().ToArray();
+                var controllerConventions = controller.Attributes
+                    .OfType<IControllerModelConvention>()
+                    .ToArray();
 
                 foreach (var controllerConvention in controllerConventions)
                 {
@@ -58,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 {
                     // ToArray is needed here to prevent issues with modifying the attributes collection
                     // while iterating it.
-                    var actionConventions = action.Attributes.OfType<IActionModelConvention>()
+                    var actionConventions = action.Attributes
+                        .OfType<IActionModelConvention>()
                         .ToArray();
 
                     foreach (var actionConvention in actionConventions)
@@ -71,8 +73,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     {
                         // ToArray is needed here to prevent issues with modifying the attributes collection
                         // while iterating it.
-                        var parameterConventions =
-                            parameter.Attributes.OfType<IParameterModelConvention>().ToArray();
+                        var parameterConventions = parameter.Attributes
+                            .OfType<IParameterModelConvention>()
+                            .ToArray();
 
                         foreach (var parameterConvention in parameterConventions)
                         {

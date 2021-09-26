@@ -48,8 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var textManager = (IVsTextManager4?)await _serviceProvider.GetServiceAsync(
-                    typeof(SVsTextManager)
-                )
+                typeof(SVsTextManager)
+            )
                 .ConfigureAwait(true);
             Assumes.Present(textManager);
 

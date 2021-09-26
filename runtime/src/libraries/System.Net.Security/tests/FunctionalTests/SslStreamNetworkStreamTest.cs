@@ -85,8 +85,8 @@ namespace System.Net.Security.Tests
             TcpListener listener = new TcpListener(IPAddress.Loopback, 0);
 
             using (
-                X509Certificate2 serverCertificate =
-                    Configuration.Certificates.GetServerCertificate()
+                X509Certificate2 serverCertificate = Configuration.Certificates
+                    .GetServerCertificate()
             )
             using (TcpClient client = new TcpClient())
             {
@@ -190,9 +190,10 @@ namespace System.Net.Security.Tests
                 Assert.True(ssl.IsEncrypted);
 
                 // Issue request that triggers regotiation from server.
-                byte[] message = Encoding.UTF8.GetBytes(
-                    "GET /EchoClientCertificate.ashx HTTP/1.1\r\nHost: corefx-net-tls.azurewebsites.net\r\n\r\n"
-                );
+                byte[] message = Encoding.UTF8
+                    .GetBytes(
+                        "GET /EchoClientCertificate.ashx HTTP/1.1\r\nHost: corefx-net-tls.azurewebsites.net\r\n\r\n"
+                    );
                 if (useSync)
                 {
                     ssl.Write(message, 0, message.Length);
@@ -307,9 +308,8 @@ namespace System.Net.Security.Tests
             ) =>
             {
                 // add our custom root CA
-                chain.ChainPolicy.CustomTrustStore.Add(
-                    certificates.serverChain[certificates.serverChain.Count - 1]
-                );
+                chain.ChainPolicy.CustomTrustStore
+                    .Add(certificates.serverChain[certificates.serverChain.Count - 1]);
                 chain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
                 // Add only one CA to verify that peer did send intermediate CA cert.
                 // In case of partial chain, we need to make missing certs available.
@@ -380,9 +380,8 @@ namespace System.Net.Security.Tests
                 ) =>
                 {
                     // Add only root CA to verify that peer did send intermediate CA cert.
-                    chain.ChainPolicy.CustomTrustStore.Add(
-                        certificates.serverChain[certificates.serverChain.Count - 1]
-                    );
+                    chain.ChainPolicy.CustomTrustStore
+                        .Add(certificates.serverChain[certificates.serverChain.Count - 1]);
                     chain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
                     // This should work and we should be able to trust the chain.
                     Assert.True(chain.Build((X509Certificate2)certificate));

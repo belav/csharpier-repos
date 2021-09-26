@@ -40,15 +40,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             CancellationToken cancellationToken
         )
         {
-            var organizedDocument = await base.OrganizeUsingsCreatedFromTemplateAsync(
-                    document,
-                    cancellationToken
-                )
+            var organizedDocument = await base
+                .OrganizeUsingsCreatedFromTemplateAsync(document, cancellationToken)
                 .ConfigureAwait(false);
             return await MisplacedUsingDirectivesCodeFixProvider.TransformDocumentIfRequiredAsync(
-                    organizedDocument,
-                    cancellationToken
-                )
+                organizedDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

@@ -142,11 +142,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             var content_ContentTypeName =
                 contentType_ContentTypeNameProperty.GetValue(content) as string;
 
-            return string.Equals(
-                content_ContentTypeName,
-                AnalyzerContentTypeName,
-                StringComparison.InvariantCultureIgnoreCase
-            );
+            return string
+                .Equals(
+                    content_ContentTypeName,
+                    AnalyzerContentTypeName,
+                    StringComparison.InvariantCultureIgnoreCase
+                );
         }
     }
 }

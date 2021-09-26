@@ -66,9 +66,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
         {
             _workspace = workspace;
             _installerService = workspace.Services.GetService<IPackageInstallerService>();
-            _localSettingsDirectory = new ShellSettingsManager(
-                serviceProvider
-            ).GetApplicationDataFolder(ApplicationDataFolder.LocalSettings);
+            _localSettingsDirectory = new ShellSettingsManager(serviceProvider)
+                .GetApplicationDataFolder(ApplicationDataFolder.LocalSettings);
 
             _logService = new LogService(
                 threadingContext,
@@ -108,10 +107,10 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
             {
                 return _lazyUpdateEngine ??=
                     await SymbolSearchUpdateEngineFactory.CreateEngineAsync(
-                            _workspace,
-                            _logService,
-                            cancellationToken
-                        )
+                        _workspace,
+                        _logService,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
             }
         }
@@ -123,11 +122,11 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
         {
             var engine = await GetEngineAsync(cancellationToken).ConfigureAwait(false);
             await engine.UpdateContinuouslyAsync(
-                    sourceName,
-                    _localSettingsDirectory,
-                    _logService,
-                    cancellationToken
-                )
+                sourceName,
+                _localSettingsDirectory,
+                _logService,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -140,11 +139,11 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
         {
             var engine = await GetEngineAsync(cancellationToken).ConfigureAwait(false);
             var allPackagesWithType = await engine.FindPackagesWithTypeAsync(
-                    source,
-                    name,
-                    arity,
-                    cancellationToken
-                )
+                source,
+                name,
+                arity,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return FilterAndOrderPackages(allPackagesWithType);
@@ -160,10 +159,10 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
         {
             var engine = await GetEngineAsync(cancellationToken).ConfigureAwait(false);
             var allPackagesWithAssembly = await engine.FindPackagesWithAssemblyAsync(
-                    source,
-                    assemblyName,
-                    cancellationToken
-                )
+                source,
+                assemblyName,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return FilterAndOrderPackages(allPackagesWithAssembly);

@@ -423,10 +423,11 @@ namespace System.CommandLine.Tests
                         argumentResult =>
                         {
                             if (
-                                int.TryParse(
-                                    argumentResult.Tokens.Select(t => t.Value).Single(),
-                                    out var value
-                                )
+                                int
+                                    .TryParse(
+                                        argumentResult.Tokens.Select(t => t.Value).Single(),
+                                        out var value
+                                    )
                             )
                             {
                                 return value;
@@ -527,7 +528,8 @@ namespace System.CommandLine.Tests
 
                 var parseResult = command.Parse("1 2 3 4 5 6 7 8");
 
-                parseResult.UnparsedTokens.Should()
+                parseResult.UnparsedTokens
+                    .Should()
                     .BeEquivalentTo(
                         new[] { "4", "5", "6", "7", "8" },
                         options => options.WithStrictOrdering()

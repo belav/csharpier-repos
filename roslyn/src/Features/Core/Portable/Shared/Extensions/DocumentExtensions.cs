@@ -27,10 +27,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool ShouldHideAdvancedMembers(this Document document)
         {
             // Since we don't actually have a way to configure this per-document, we can fetch from the solution
-            return document.Project.Solution.Options.GetOption(
-                CompletionOptions.HideAdvancedMembers,
-                document.Project.Language
-            );
+            return document.Project.Solution.Options
+                .GetOption(CompletionOptions.HideAdvancedMembers, document.Project.Language);
         }
 
         public static async Task<Document> ReplaceNodeAsync<TNode>(
@@ -99,8 +97,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             foreach (var linkedDocumentId in document.GetLinkedDocumentIds())
             {
                 values = await getItemsWorker(
-                        document.Project.Solution.GetRequiredDocument(linkedDocumentId)
-                    )
+                    document.Project.Solution.GetRequiredDocument(linkedDocumentId)
+                )
                     .ConfigureAwait(false);
                 totalItems.AddRange(values.NullToEmpty());
             }
@@ -216,8 +214,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         )
         {
             var workspace = document.Project.Solution.Workspace;
-            var formattingRuleFactory =
-                workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleFactory = workspace.Services
+                .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
             // Not sure why this is being done... there aren't any docs on CreateRule either.
             var position = (span.Start + span.End) / 2;
 

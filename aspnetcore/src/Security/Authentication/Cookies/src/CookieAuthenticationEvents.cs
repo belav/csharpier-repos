@@ -121,16 +121,18 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
 
         private static bool IsAjaxRequest(HttpRequest request)
         {
-            return string.Equals(
-                    request.Query[HeaderNames.XRequestedWith],
-                    "XMLHttpRequest",
-                    StringComparison.Ordinal
-                )
-                || string.Equals(
-                    request.Headers[HeaderNames.XRequestedWith],
-                    "XMLHttpRequest",
-                    StringComparison.Ordinal
-                );
+            return string
+                    .Equals(
+                        request.Query[HeaderNames.XRequestedWith],
+                        "XMLHttpRequest",
+                        StringComparison.Ordinal
+                    )
+                || string
+                    .Equals(
+                        request.Headers[HeaderNames.XRequestedWith],
+                        "XMLHttpRequest",
+                        StringComparison.Ordinal
+                    );
         }
 
         /// <summary>

@@ -249,10 +249,8 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression instance = Expression.Parameter(typeof(int[]));
             ConstantExpression[] args = new[] { Expression.Constant(0) };
             MethodCallExpression expr = Expression.ArrayIndex(instance, args);
-            MethodInfo method = typeof(int[]).GetMethod(
-                "Get",
-                BindingFlags.Public | BindingFlags.Instance
-            );
+            MethodInfo method = typeof(int[])
+                .GetMethod("Get", BindingFlags.Public | BindingFlags.Instance);
 
             AssertCallIsOptimized(expr, instance, method, args);
         }
@@ -263,10 +261,8 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression instance = Expression.Parameter(typeof(int[,]));
             ConstantExpression[] args = new[] { Expression.Constant(0), Expression.Constant(0) };
             MethodCallExpression expr = Expression.ArrayIndex(instance, args);
-            MethodInfo method = typeof(int[,]).GetMethod(
-                "Get",
-                BindingFlags.Public | BindingFlags.Instance
-            );
+            MethodInfo method = typeof(int[,])
+                .GetMethod("Get", BindingFlags.Public | BindingFlags.Instance);
 
             AssertCallIsOptimized(expr, instance, method, args);
         }

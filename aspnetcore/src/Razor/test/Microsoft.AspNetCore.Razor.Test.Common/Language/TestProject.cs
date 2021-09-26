@@ -19,11 +19,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             var projectDirectory = Path.Combine(repoRoot, "src", "Razor", directoryHint, "test");
 
             if (
-                string.Equals(
-                    directoryHint,
-                    "Microsoft.AspNetCore.Razor.Language.Test",
-                    StringComparison.Ordinal
-                )
+                string
+                    .Equals(
+                        directoryHint,
+                        "Microsoft.AspNetCore.Razor.Language.Test",
+                        StringComparison.Ordinal
+                    )
             )
             {
                 projectDirectory = Path.Combine(
@@ -49,11 +50,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             var assemblyName = type.Assembly.GetName().Name;
             var projectDirectory = Path.Combine(repoRoot, "src", "Razor", assemblyName, "test");
             if (
-                string.Equals(
-                    assemblyName,
-                    "Microsoft.AspNetCore.Razor.Language.Test",
-                    StringComparison.Ordinal
-                )
+                string
+                    .Equals(
+                        assemblyName,
+                        "Microsoft.AspNetCore.Razor.Language.Test",
+                        StringComparison.Ordinal
+                    )
             )
             {
                 projectDirectory = Path.Combine(

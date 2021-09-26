@@ -37,11 +37,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickCancel();
@@ -67,11 +64,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -95,11 +89,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -133,11 +124,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickDeselectAll();
@@ -176,11 +164,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -217,11 +202,8 @@ class C : IC
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickDeselectAll();
@@ -259,11 +241,8 @@ class C : IC
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -301,11 +280,8 @@ class C : IC
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 

@@ -128,12 +128,13 @@ namespace Moq
                     )
                     {
                         throw new ArgumentException(
-                            string.Format(
-                                Resources.ArgumentMatcherWillNeverMatch,
-                                convertExpression.Operand.ToStringFixed(),
-                                convertExpression.Operand.Type.GetFormattedName(),
-                                parameter.ParameterType.GetFormattedName()
-                            )
+                            string
+                                .Format(
+                                    Resources.ArgumentMatcherWillNeverMatch,
+                                    convertExpression.Operand.ToStringFixed(),
+                                    convertExpression.Operand.Type.GetFormattedName(),
+                                    parameter.ParameterType.GetFormattedName()
+                                )
                         );
                     }
                 }
@@ -219,11 +220,12 @@ namespace Moq
             }
 
             throw new NotSupportedException(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.UnsupportedExpression,
-                    originalExpression
-                )
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.UnsupportedExpression,
+                        originalExpression
+                    )
             );
         }
     }

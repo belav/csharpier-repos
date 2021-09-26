@@ -137,8 +137,8 @@ public class C
             {
                 var c = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
                 var aggressiveOptNoInliningMethod = c.GetMember<MethodSymbol>(
-                        "M_AggressiveOpt_NoInlining"
-                    )
+                    "M_AggressiveOpt_NoInlining"
+                )
                     .GetPublicSymbol();
 #if !NET472 // MethodImplAttributes.AggressiveOptimization was introduced in .NET Core 3
                 Assert.Equal(
@@ -160,8 +160,8 @@ public class C
                 );
 
                 var aggressiveOptAggressiveInliningMethod = c.GetMember<MethodSymbol>(
-                        "M_AggressiveOpt_AggressiveInlining"
-                    )
+                    "M_AggressiveOpt_AggressiveInlining"
+                )
                     .GetPublicSymbol();
 #if !NET472
                 Assert.Equal(
@@ -177,8 +177,8 @@ public class C
 #endif
 
                 var noOptAggressiveInliningMethod = c.GetMember<MethodSymbol>(
-                        "M_NoOpt_AggressiveInlining"
-                    )
+                    "M_NoOpt_AggressiveInlining"
+                )
                     .GetPublicSymbol();
                 Assert.Equal(
                     MethodImplAttributes.NoOptimization | MethodImplAttributes.AggressiveInlining,

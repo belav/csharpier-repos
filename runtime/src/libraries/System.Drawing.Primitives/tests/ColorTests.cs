@@ -162,7 +162,8 @@ namespace System.Drawing.Primitives.Tests
             new object[] { "YellowGreen", 255, 154, 205, 50 },
         };
 
-        public static readonly IEnumerable<object[]> ColorNames = typeof(Color).GetProperties()
+        public static readonly IEnumerable<object[]> ColorNames = typeof(Color)
+            .GetProperties()
             .Where(p => p.PropertyType == typeof(Color))
             .Select(p => new object[] { p.Name })
             .ToArray();
@@ -728,8 +729,8 @@ namespace System.Drawing.Primitives.Tests
         }
 
         public static readonly IEnumerable<object[]> AllKnownColors = Enum.GetValues(
-                typeof(KnownColor)
-            )
+            typeof(KnownColor)
+        )
             .Cast<KnownColor>()
             .Where(kc => kc != 0)
             .Select(kc => new object[] { kc })
@@ -770,7 +771,9 @@ namespace System.Drawing.Primitives.Tests
             KnownColor.GradientInactiveCaption,
             KnownColor.MenuBar,
             KnownColor.MenuHighlight
-        }.Select(kc => new object[] { kc }).ToArray();
+        }
+            .Select(kc => new object[] { kc })
+            .ToArray();
 
         public static readonly IEnumerable<object[]> NonSystemColors = new[]
         {
@@ -916,7 +919,9 @@ namespace System.Drawing.Primitives.Tests
             KnownColor.Yellow,
             KnownColor.YellowGreen,
             KnownColor.RebeccaPurple
-        }.Select(kc => new object[] { kc }).ToArray();
+        }
+            .Select(kc => new object[] { kc })
+            .ToArray();
 
         public static readonly IEnumerable<bool> SystemKindOrder = new[]
         {

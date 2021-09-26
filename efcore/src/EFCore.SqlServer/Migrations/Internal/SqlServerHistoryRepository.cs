@@ -75,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
         {
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
-            var builder = new StringBuilder().Append("IF OBJECT_ID(")
+            var builder = new StringBuilder()
+                .Append("IF OBJECT_ID(")
                 .Append(
                     stringTypeMapping.GenerateSqlLiteral(
                         SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema)
@@ -123,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
 
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
-            return new StringBuilder().Append("IF NOT EXISTS(SELECT * FROM ")
+            return new StringBuilder()
+                .Append("IF NOT EXISTS(SELECT * FROM ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
                 .Append(" WHERE ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(MigrationIdColumnName))
@@ -146,7 +148,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
 
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
-            return new StringBuilder().Append("IF EXISTS(SELECT * FROM ")
+            return new StringBuilder()
+                .Append("IF EXISTS(SELECT * FROM ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
                 .Append(" WHERE ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(MigrationIdColumnName))
@@ -164,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public override string GetEndIfScript() =>
-            new StringBuilder().Append("END")
+            new StringBuilder()
+                .Append("END")
                 .AppendLine(SqlGenerationHelper.StatementTerminator)
                 .ToString();
     }

@@ -106,14 +106,14 @@ namespace Microsoft.CodeAnalysis
             var includeEffectiveSeverity =
                 expected.Any() && expected.All(e => e.EffectiveSeverity != null);
             var unmatched = actual.Select(
-                    d =>
-                        new DiagnosticDescription(
-                            d,
-                            errorCodeOnly,
-                            includeDefaultSeverity,
-                            includeEffectiveSeverity
-                        )
-                )
+                d =>
+                    new DiagnosticDescription(
+                        d,
+                        errorCodeOnly,
+                        includeDefaultSeverity,
+                        includeEffectiveSeverity
+                    )
+            )
                 .ToList();
 
             // Try to match each of the 'expected' errors to one of the 'actual' ones.
@@ -329,9 +329,8 @@ namespace Microsoft.CodeAnalysis
                     c.Options.WithGeneralDiagnosticOption(toggledOption)
                 );
 
-                var builder = ArrayBuilder<DiagnosticDescription>.GetInstance(
-                    expectedDiagnostics.Length
-                );
+                var builder = ArrayBuilder<DiagnosticDescription>
+                    .GetInstance(expectedDiagnostics.Length);
                 foreach (var expected in expectedDiagnostics)
                 {
                     // Toggle warnaserror and effective severity if following are true:

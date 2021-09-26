@@ -250,12 +250,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             await Client.ExpectRenderBatch(
                 async () =>
                 {
-                    await Client.HubConnection.InvokeAsync(
-                        "EndInvokeJSFromDotNet",
-                        id,
-                        true,
-                        $"[{id}, true, \"{{\"]"
-                    );
+                    await Client.HubConnection
+                        .InvokeAsync("EndInvokeJSFromDotNet", id, true, $"[{id}, true, \"{{\"]");
                 }
             );
 
@@ -284,12 +280,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             await Client.ExpectRenderBatch(
                 async () =>
                 {
-                    await Client.HubConnection.InvokeAsync(
-                        "EndInvokeJSFromDotNet",
-                        id,
-                        true,
-                        $"[{id}, true, null]"
-                    );
+                    await Client.HubConnection
+                        .InvokeAsync("EndInvokeJSFromDotNet", id, true, $"[{id}, true, null]");
                 }
             );
 
@@ -319,12 +311,13 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             await Client.ExpectRenderBatch(
                 async () =>
                 {
-                    await Client.HubConnection.InvokeAsync(
-                        "EndInvokeJSFromDotNet",
-                        id,
-                        false,
-                        $"[{id}, false, \"There was an error invoking sendFailureCallbackReturn\"]"
-                    );
+                    await Client.HubConnection
+                        .InvokeAsync(
+                            "EndInvokeJSFromDotNet",
+                            id,
+                            false,
+                            $"[{id}, false, \"There was an error invoking sendFailureCallbackReturn\"]"
+                        );
                 }
             );
 
@@ -358,12 +351,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             await Client.ExpectCircuitError(
                 async () =>
                 {
-                    await Client.HubConnection.InvokeAsync(
-                        "EndInvokeJSFromDotNet",
-                        id,
-                        true,
-                        $"[{id}, true, }}"
-                    );
+                    await Client.HubConnection
+                        .InvokeAsync("EndInvokeJSFromDotNet", id, true, $"[{id}, true, }}");
                 }
             );
 
@@ -471,11 +460,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             await Client.ExpectCircuitError(
                 async () =>
                 {
-                    await Client.HubConnection.InvokeAsync(
-                        "DispatchBrowserEvent",
-                        "{Invalid:{\"payload}",
-                        "{}"
-                    );
+                    await Client.HubConnection
+                        .InvokeAsync("DispatchBrowserEvent", "{Invalid:{\"payload}", "{}");
                 }
             );
 
@@ -512,14 +498,15 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             await Client.ExpectCircuitError(
                 async () =>
                 {
-                    await Client.HubConnection.InvokeAsync(
-                        "DispatchBrowserEvent",
-                        JsonSerializer.Serialize(
-                            browserDescriptor,
-                            TestJsonSerializerOptionsProvider.Options
-                        ),
-                        "{Invalid:{\"payload}"
-                    );
+                    await Client.HubConnection
+                        .InvokeAsync(
+                            "DispatchBrowserEvent",
+                            JsonSerializer.Serialize(
+                                browserDescriptor,
+                                TestJsonSerializerOptionsProvider.Options
+                            ),
+                            "{Invalid:{\"payload}"
+                        );
                 }
             );
 
@@ -560,17 +547,18 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             await Client.ExpectCircuitError(
                 async () =>
                 {
-                    await Client.HubConnection.InvokeAsync(
-                        "DispatchBrowserEvent",
-                        JsonSerializer.Serialize(
-                            browserDescriptor,
-                            TestJsonSerializerOptionsProvider.Options
-                        ),
-                        JsonSerializer.Serialize(
-                            mouseEventArgs,
-                            TestJsonSerializerOptionsProvider.Options
-                        )
-                    );
+                    await Client.HubConnection
+                        .InvokeAsync(
+                            "DispatchBrowserEvent",
+                            JsonSerializer.Serialize(
+                                browserDescriptor,
+                                TestJsonSerializerOptionsProvider.Options
+                            ),
+                            JsonSerializer.Serialize(
+                                mouseEventArgs,
+                                TestJsonSerializerOptionsProvider.Options
+                            )
+                        );
                 }
             );
 
@@ -580,9 +568,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
                     e.EventId.Name == "DispatchEventFailedToDispatchEvent"
                     && e.LogLevel == LogLevel.Debug
                     && e.Exception is ArgumentException ae
-                    && ae.Message.Contains(
-                        "There is no event handler associated with this event. EventId: '1'."
-                    )
+                    && ae.Message
+                        .Contains(
+                            "There is no event handler associated with this event. EventId: '1'."
+                        )
             );
 
             // Taking any other action will fail because the circuit is disposed.

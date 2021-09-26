@@ -17,7 +17,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         : ManyToManyQueryTestBase<TFixture> where TFixture : ManyToManyQueryFixtureBase, new()
     {
         private static readonly MethodInfo _asNoTrackingMethodInfo =
-            typeof(EntityFrameworkQueryableExtensions).GetTypeInfo()
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(EntityFrameworkQueryableExtensions.AsNoTracking));
 
         protected ManyToManyNoTrackingQueryTestBase(TFixture fixture) : base(fixture) { }
@@ -38,9 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 return methodCallExpression.Update(
                     null,
-                    new[] { ApplyNoTracking(methodCallExpression.Arguments[0]) }.Concat(
-                        methodCallExpression.Arguments.Skip(1)
-                    )
+                    new[] { ApplyNoTracking(methodCallExpression.Arguments[0]) }
+                        .Concat(methodCallExpression.Arguments.Skip(1))
                 );
             }
 

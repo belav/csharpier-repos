@@ -681,12 +681,13 @@ namespace Legacy.Support
 
                 Assert.True(
                     result,
-                    string.Format(
-                        "Err_55808aoped Items differ at {0} expected {1} actual {2}",
-                        i,
-                        expectedArray[i],
-                        actualArray[i]
-                    )
+                    string
+                        .Format(
+                            "Err_55808aoped Items differ at {0} expected {1} actual {2}",
+                            i,
+                            expectedArray[i],
+                            actualArray[i]
+                        )
                 );
             }
         }

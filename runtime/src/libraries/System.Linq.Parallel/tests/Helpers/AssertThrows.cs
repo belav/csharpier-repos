@@ -12,10 +12,8 @@ namespace System.Linq.Parallel.Tests
 
         public static void AlreadyCanceled(Action<ParallelQuery<int>> query)
         {
-            ParallelQuery<int> s = Enumerables<int>.ThrowOnEnumeration(
-                    new ShouldNotBeInvokedException(),
-                    2
-                )
+            ParallelQuery<int> s = Enumerables<int>
+                .ThrowOnEnumeration(new ShouldNotBeInvokedException(), 2)
                 .AsParallel()
                 .WithCancellation(new CancellationToken(canceled: true));
             OperationCanceledException oce = Assert.Throws<OperationCanceledException>(

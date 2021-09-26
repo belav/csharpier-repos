@@ -69,8 +69,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
             foreach (var property in dictionaryAdapter.This.Properties.Values)
             {
                 var propertyRules = AttributesUtil.GetAttributes<ValidationRuleAttribute>(
-                        property.Property
-                    )
+                    property.Property
+                )
                     .Select(x => (IValidationRule)x);
                 var propertyValue = dictionaryAdapter.GetProperty(property.PropertyName, true);
                 ApplyValidationRules(
@@ -100,8 +100,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
             );
 
             var propertyRules = AttributesUtil.GetAttributes<ValidationRuleAttribute>(
-                    property.Property
-                )
+                property.Property
+            )
                 .Select(x => (IValidationRule)x);
             var propertyValue = dictionaryAdapter.GetProperty(property.PropertyName, true);
             ApplyValidationRules(dictionaryAdapter, propertyRules, property, propertyValue, errors);
@@ -152,11 +152,12 @@ namespace Castle.Components.DictionaryAdapter.Tests
             )
             {
                 errors.Add(
-                    string.Format(
-                        "Property {0} must be at least {1} characters long",
-                        property.PropertyName,
-                        MinLength
-                    )
+                    string
+                        .Format(
+                            "Property {0} must be at least {1} characters long",
+                            property.PropertyName,
+                            MinLength
+                        )
                 );
             }
         }

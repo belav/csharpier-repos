@@ -131,11 +131,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     }
 
                     var fixes = fixer.GetFixesAsync(
-                            document,
-                            diagnostic.Location.SourceSpan,
-                            SpecializedCollections.SingletonEnumerable(diagnostic),
-                            CancellationToken.None
-                        )
+                        document,
+                        diagnostic.Location.SourceSpan,
+                        SpecializedCollections.SingletonEnumerable(diagnostic),
+                        CancellationToken.None
+                    )
                         .GetAwaiter()
                         .GetResult();
                     if (fixes == null || fixes.Count() <= 0)
@@ -160,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         .GetResult();
 
                     var applyChangesOperation = operations.OfType<ApplyChangesOperation>().Single();
-                    var newDocument = applyChangesOperation.ChangedSolution.Projects.Single()
+                    var newDocument = applyChangesOperation.ChangedSolution.Projects
+                        .Single()
                         .Documents.Single();
                     var newTree = newDocument.GetSyntaxTreeAsync().GetAwaiter().GetResult();
 

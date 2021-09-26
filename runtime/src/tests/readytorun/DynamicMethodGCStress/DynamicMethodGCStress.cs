@@ -32,13 +32,14 @@ internal static class Program
 
         for (int i = 0; i < 100; ++i)
         {
-            typeof(Program).InvokeMember(
-                $"Func{i}",
-                BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Static,
-                null,
-                null,
-                Array.Empty<object>()
-            );
+            typeof(Program)
+                .InvokeMember(
+                    $"Func{i}",
+                    BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Static,
+                    null,
+                    null,
+                    Array.Empty<object>()
+                );
         }
 
         return 100;

@@ -57,7 +57,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            ((IDisposable)tracer).Dispose();
+            ((IDisposable)tracer)
+                .Dispose();
 
             // Assert
             Assert.Equal(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
@@ -74,7 +75,8 @@ namespace System.Web.Http.Tracing.Tracers
             var tracer = new HttpControllerTracer(request, mockController.Object, traceWriter);
 
             // Act
-            ((IDisposable)tracer).Dispose();
+            ((IDisposable)tracer)
+                .Dispose();
 
             // Assert
             Assert.Empty(traceWriter.Traces);
@@ -119,12 +121,9 @@ namespace System.Web.Http.Tracing.Tracers
             HttpResponseMessage response = new HttpResponseMessage();
             Mock<ApiController> mockController = new Mock<ApiController>() { CallBase = true };
             mockController.Setup(
-                    b =>
-                        b.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                b =>
+                    b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(Task.FromResult<HttpResponseMessage>(response));
 
             HttpRequestMessage request = new HttpRequestMessage();
@@ -165,10 +164,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            var task = ((IHttpController)tracer).ExecuteAsync(
-                controllerContext,
-                CancellationToken.None
-            );
+            var task = ((IHttpController)tracer)
+                .ExecuteAsync(controllerContext, CancellationToken.None);
             HttpResponseMessage actualResponse = await task;
 
             // Assert
@@ -190,12 +187,9 @@ namespace System.Web.Http.Tracing.Tracers
             tcs.TrySetException(exception);
             Mock<ApiController> mockController = new Mock<ApiController>() { CallBase = true };
             mockController.Setup(
-                    b =>
-                        b.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                b =>
+                    b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(tcs.Task);
 
             HttpRequestMessage request = new HttpRequestMessage();
@@ -238,10 +232,8 @@ namespace System.Web.Http.Tracing.Tracers
             // Act
             Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    ((IHttpController)tracer).ExecuteAsync(
-                        controllerContext,
-                        CancellationToken.None
-                    )
+                    ((IHttpController)tracer)
+                        .ExecuteAsync(controllerContext, CancellationToken.None)
             );
 
             // Assert
@@ -260,12 +252,9 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             Mock<ApiController> mockController = new Mock<ApiController>() { CallBase = true };
             mockController.Setup(
-                    b =>
-                        b.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                b =>
+                    b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(TaskHelpers.Canceled<HttpResponseMessage>());
 
             HttpRequestMessage request = new HttpRequestMessage();
@@ -306,10 +295,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            Task task = ((IHttpController)tracer).ExecuteAsync(
-                controllerContext,
-                CancellationToken.None
-            );
+            Task task = ((IHttpController)tracer)
+                .ExecuteAsync(controllerContext, CancellationToken.None);
             Exception thrown = await Assert.ThrowsAsync<TaskCanceledException>(() => task);
 
             // Assert

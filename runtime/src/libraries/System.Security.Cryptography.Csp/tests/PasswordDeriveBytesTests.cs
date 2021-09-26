@@ -513,16 +513,16 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 alg.Padding = PaddingMode.None;
                 alg.Mode = CipherMode.CBC;
 
-                byte[] plainText =
-                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] plainText = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b"
+                    .HexToByteArray();
                 byte[] cipher = alg.Encrypt(plainText);
-                byte[] expectedCipher =
-                    "9DC863445642B88AC46B3B107CB5A0ACC1596A176962EE8F".HexToByteArray();
+                byte[] expectedCipher = "9DC863445642B88AC46B3B107CB5A0ACC1596A176962EE8F"
+                    .HexToByteArray();
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted =
-                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] expectedDecrypted = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b"
+                    .HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }

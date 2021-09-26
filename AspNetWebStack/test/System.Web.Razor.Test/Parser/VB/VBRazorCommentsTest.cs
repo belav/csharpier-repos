@@ -25,13 +25,13 @@ namespace System.Web.Razor.Test.Parser.VB
                         Factory.MetaMarkup("*", HtmlSymbolType.RazorCommentStar)
                             .Accepts(AcceptedCharacters.None),
                         Factory.Span(
-                                SpanKind.Comment,
-                                new HtmlSymbol(
-                                    Factory.LocationTracker.CurrentLocation,
-                                    String.Empty,
-                                    HtmlSymbolType.Unknown
-                                )
+                            SpanKind.Comment,
+                            new HtmlSymbol(
+                                Factory.LocationTracker.CurrentLocation,
+                                String.Empty,
+                                HtmlSymbolType.Unknown
                             )
+                        )
                             .Accepts(AcceptedCharacters.Any)
                     )
                 ),
@@ -52,13 +52,13 @@ namespace System.Web.Razor.Test.Parser.VB
                         Factory.MetaMarkup("*", HtmlSymbolType.RazorCommentStar)
                             .Accepts(AcceptedCharacters.None),
                         Factory.Span(
-                                SpanKind.Comment,
-                                new HtmlSymbol(
-                                    Factory.LocationTracker.CurrentLocation,
-                                    String.Empty,
-                                    HtmlSymbolType.Unknown
-                                )
+                            SpanKind.Comment,
+                            new HtmlSymbol(
+                                Factory.LocationTracker.CurrentLocation,
+                                String.Empty,
+                                HtmlSymbolType.Unknown
                             )
+                        )
                             .Accepts(AcceptedCharacters.Any),
                         Factory.MetaMarkup("*", HtmlSymbolType.RazorCommentStar)
                             .Accepts(AcceptedCharacters.None),
@@ -86,13 +86,13 @@ namespace System.Web.Razor.Test.Parser.VB
                             Factory.MetaCode("*", VBSymbolType.RazorCommentStar)
                                 .Accepts(AcceptedCharacters.None),
                             Factory.Span(
-                                    SpanKind.Comment,
-                                    new VBSymbol(
-                                        Factory.LocationTracker.CurrentLocation,
-                                        String.Empty,
-                                        VBSymbolType.Unknown
-                                    )
+                                SpanKind.Comment,
+                                new VBSymbol(
+                                    Factory.LocationTracker.CurrentLocation,
+                                    String.Empty,
+                                    VBSymbolType.Unknown
                                 )
+                            )
                                 .Accepts(AcceptedCharacters.Any),
                             Factory.MetaCode("*", VBSymbolType.RazorCommentStar)
                                 .Accepts(AcceptedCharacters.None),
@@ -131,13 +131,13 @@ namespace System.Web.Razor.Test.Parser.VB
                             Factory.MetaCode("*", VBSymbolType.RazorCommentStar)
                                 .Accepts(AcceptedCharacters.None),
                             Factory.Span(
-                                    SpanKind.Comment,
-                                    new VBSymbol(
-                                        Factory.LocationTracker.CurrentLocation,
-                                        String.Empty,
-                                        VBSymbolType.Unknown
-                                    )
+                                SpanKind.Comment,
+                                new VBSymbol(
+                                    Factory.LocationTracker.CurrentLocation,
+                                    String.Empty,
+                                    VBSymbolType.Unknown
                                 )
+                            )
                                 .Accepts(AcceptedCharacters.Any)
                         )
                     )
@@ -184,13 +184,13 @@ namespace System.Web.Razor.Test.Parser.VB
                                 Factory.MetaMarkup("*", HtmlSymbolType.RazorCommentStar)
                                     .Accepts(AcceptedCharacters.None),
                                 Factory.Span(
-                                        SpanKind.Comment,
-                                        new HtmlSymbol(
-                                            Factory.LocationTracker.CurrentLocation,
-                                            String.Empty,
-                                            HtmlSymbolType.Unknown
-                                        )
+                                    SpanKind.Comment,
+                                    new HtmlSymbol(
+                                        Factory.LocationTracker.CurrentLocation,
+                                        String.Empty,
+                                        HtmlSymbolType.Unknown
                                     )
+                                )
                                     .Accepts(AcceptedCharacters.Any),
                                 Factory.MetaMarkup("*", HtmlSymbolType.RazorCommentStar)
                                     .Accepts(AcceptedCharacters.None),
@@ -238,13 +238,13 @@ namespace System.Web.Razor.Test.Parser.VB
                             Factory.MetaCode("*", VBSymbolType.RazorCommentStar)
                                 .Accepts(AcceptedCharacters.None),
                             Factory.Span(
-                                    SpanKind.Comment,
-                                    new VBSymbol(
-                                        Factory.LocationTracker.CurrentLocation,
-                                        String.Empty,
-                                        VBSymbolType.Unknown
-                                    )
+                                SpanKind.Comment,
+                                new VBSymbol(
+                                    Factory.LocationTracker.CurrentLocation,
+                                    String.Empty,
+                                    VBSymbolType.Unknown
                                 )
+                            )
                                 .Accepts(AcceptedCharacters.Any)
                         )
                     )

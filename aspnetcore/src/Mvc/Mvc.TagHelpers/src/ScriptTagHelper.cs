@@ -350,19 +350,18 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     {
                         var attribute = attributes[i];
                         if (
-                            !attribute.Name.Equals(
-                                SrcAttributeName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            !attribute.Name
+                                .Equals(SrcAttributeName, StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             if (
                                 SuppressFallbackIntegrity
-                                && string.Equals(
-                                    IntegrityAttributeName,
-                                    attribute.Name,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                && string
+                                    .Equals(
+                                        IntegrityAttributeName,
+                                        attribute.Name,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                             {
                                 continue;
@@ -463,8 +462,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         {
             if (FileVersionProvider == null)
             {
-                FileVersionProvider =
-                    ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
+                FileVersionProvider = ViewContext.HttpContext.RequestServices
+                    .GetRequiredService<IFileVersionProvider>();
             }
         }
 

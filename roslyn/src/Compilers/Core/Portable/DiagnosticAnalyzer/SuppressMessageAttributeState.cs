@@ -194,7 +194,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 bool inImmediatelyContainingSymbol = true;
 
                 for (
-                    var node = location.SourceTree.GetRoot()
+                    var node = location.SourceTree
+                        .GetRoot()
                         .FindNode(location.SourceSpan, getInnermostNodeForTie: true);
                     node != null;
                     node = node.Parent

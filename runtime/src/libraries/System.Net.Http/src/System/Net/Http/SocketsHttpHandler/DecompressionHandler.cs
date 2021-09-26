@@ -51,11 +51,12 @@ namespace System.Net.Http
             foreach (StringWithQualityHeaderValue existingEncoding in acceptEncodingHeader)
             {
                 if (
-                    string.Equals(
-                        existingEncoding.Value,
-                        encoding,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            existingEncoding.Value,
+                            encoding,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     return true;
@@ -87,10 +88,10 @@ namespace System.Net.Http
             }
 
             HttpResponseMessage response = await _innerHandler.SendAsync(
-                    request,
-                    async,
-                    cancellationToken
-                )
+                request,
+                async,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             Debug.Assert(response.Content != null);

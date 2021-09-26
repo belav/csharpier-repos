@@ -85,12 +85,12 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     foreach (var sourceSpan in definition.SourceSpans)
                     {
                         var entry = await TryCreateDocumentSpanEntryAsync(
-                                definitionBucket,
-                                sourceSpan,
-                                HighlightSpanKind.Definition,
-                                symbolUsageInfo: SymbolUsageInfo.None,
-                                additionalProperties: definition.DisplayableProperties
-                            )
+                            definitionBucket,
+                            sourceSpan,
+                            HighlightSpanKind.Definition,
+                            symbolUsageInfo: SymbolUsageInfo.None,
+                            additionalProperties: definition.DisplayableProperties
+                        )
                             .ConfigureAwait(false);
                         entries.AddIfNotNull(entry);
                     }
@@ -118,7 +118,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             {
                 var documentSpan = definition.SourceSpans[0];
                 var (guid, projectName, _) = GetGuidAndProjectInfo(documentSpan.Document);
-                var sourceText = await documentSpan.Document.GetTextAsync(CancellationToken)
+                var sourceText = await documentSpan.Document
+                    .GetTextAsync(CancellationToken)
                     .ConfigureAwait(false);
 
                 var lineText = AbstractDocumentSpanEntry.GetLineContainingPosition(
@@ -126,10 +127,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     documentSpan.SourceSpan.Start
                 );
                 var mappedDocumentSpan = await AbstractDocumentSpanEntry.TryMapAndGetFirstAsync(
-                        documentSpan,
-                        sourceText,
-                        CancellationToken
-                    )
+                    documentSpan,
+                    sourceText,
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
                 if (mappedDocumentSpan == null)
                 {

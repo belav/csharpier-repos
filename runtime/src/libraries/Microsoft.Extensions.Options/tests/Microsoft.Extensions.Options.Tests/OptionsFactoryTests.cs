@@ -226,7 +226,8 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanValidateOptionsWithConfigureOptions()
         {
-            var factory = new ServiceCollection().ConfigureOptions<FakeOptionsValidation>()
+            var factory = new ServiceCollection()
+                .ConfigureOptions<FakeOptionsValidation>()
                 .BuildServiceProvider()
                 .GetRequiredService<IOptionsFactory<FakeOptions>>();
 
@@ -240,7 +241,8 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void ValidateOptionsChecksNullWithConfigureOptions()
         {
-            var factory = new ServiceCollection().ConfigureOptions<FakeOptionsValidationNull>()
+            var factory = new ServiceCollection()
+                .ConfigureOptions<FakeOptionsValidationNull>()
                 .BuildServiceProvider()
                 .GetRequiredService<IOptionsFactory<FakeOptions>>();
 

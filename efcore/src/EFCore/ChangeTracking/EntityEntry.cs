@@ -250,7 +250,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     properties of this entity.
         /// </summary>
         public virtual IEnumerable<PropertyEntry> Properties =>
-            InternalEntry.EntityType.GetProperties()
+            InternalEntry.EntityType
+                .GetProperties()
                 .Select(property => new PropertyEntry(InternalEntry, property));
 
         /// <summary>
@@ -274,7 +275,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     reference (i.e. non-collection) navigation properties of this entity.
         /// </summary>
         public virtual IEnumerable<ReferenceEntry> References =>
-            InternalEntry.EntityType.GetNavigations()
+            InternalEntry.EntityType
+                .GetNavigations()
                 .Where(n => !n.IsCollection)
                 .Select(navigation => new ReferenceEntry(InternalEntry, navigation));
 

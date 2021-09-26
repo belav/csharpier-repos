@@ -141,17 +141,17 @@ namespace Microsoft.CodeAnalysis.GenerateType
             using (Logger.LogBlock(FunctionId.Refactoring_GenerateType, cancellationToken))
             {
                 var semanticDocument = await SemanticDocument.CreateAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var state = await State.GenerateAsync(
-                        (TService)this,
-                        semanticDocument,
-                        node,
-                        cancellationToken
-                    )
+                    (TService)this,
+                    semanticDocument,
+                    node,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (state != null)
                 {
@@ -258,22 +258,21 @@ namespace Microsoft.CodeAnalysis.GenerateType
             CancellationToken cancellationToken
         )
         {
-            var containingNamespace = semanticDocument.SemanticModel.GetEnclosingNamespace(
-                node.SpanStart,
-                cancellationToken
-            );
+            var containingNamespace = semanticDocument.SemanticModel
+                .GetEnclosingNamespace(node.SpanStart, cancellationToken);
 
             // Only allow if the containing namespace is one that can be generated
             // into.
-            var declarationService =
-                semanticDocument.Document.GetLanguageService<ISymbolDeclarationService>();
+            var declarationService = semanticDocument.Document
+                .GetLanguageService<ISymbolDeclarationService>();
             var decl = declarationService.GetDeclarations(containingNamespace)
                 .Where(r => r.SyntaxTree == node.SyntaxTree)
                 .Select(r => r.GetSyntax(cancellationToken))
                 .FirstOrDefault(node.GetAncestorsOrThis<SyntaxNode>().Contains);
 
             return decl != null
-                && semanticDocument.Document.GetLanguageService<ICodeGenerationService>()
+                && semanticDocument.Document
+                    .GetLanguageService<ICodeGenerationService>()
                     .CanAddTo(decl, semanticDocument.Project.Solution, cancellationToken);
         }
 
@@ -284,10 +283,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
             CancellationToken cancellationToken
         )
         {
-            var containingNamespace = document.SemanticModel.GetEnclosingNamespace(
-                node.SpanStart,
-                cancellationToken
-            );
+            var containingNamespace = document.SemanticModel
+                .GetEnclosingNamespace(node.SpanStart, cancellationToken);
             if (containingNamespace != null)
             {
                 var containingNamespaceName = containingNamespace.ToDisplayString();
@@ -451,8 +448,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
 
         protected static bool GeneratedTypesMustBePublic(Project project)
         {
-            var projectInfoService =
-                project.Solution.Workspace.Services.GetService<IProjectInfoService>();
+            var projectInfoService = project.Solution.Workspace.Services
+                .GetService<IProjectInfoService>();
             if (projectInfoService != null)
             {
                 return projectInfoService.GeneratedTypesMustBePublic(project);

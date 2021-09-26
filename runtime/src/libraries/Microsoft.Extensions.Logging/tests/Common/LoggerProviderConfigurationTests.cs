@@ -81,16 +81,17 @@ namespace Microsoft.Extensions.Logging.Test
         [Fact]
         public void MergesConfigurationsInOrder()
         {
-            var serviceProvider = new ServiceCollection().AddLogging(
+            var serviceProvider = new ServiceCollection()
+                .AddLogging(
                     builder =>
                         builder.AddConfiguration(
-                                new ConfigurationBuilder().AddInMemoryCollection(
-                                        new[] { Pair("TestLogger:Key", "Value1") }
-                                    )
-                                    .Build()
-                            )
+                            new ConfigurationBuilder()
+                                .AddInMemoryCollection(new[] { Pair("TestLogger:Key", "Value1") })
+                                .Build()
+                        )
                             .AddConfiguration(
-                                new ConfigurationBuilder().AddInMemoryCollection(
+                                new ConfigurationBuilder()
+                                    .AddInMemoryCollection(
                                         new[]
                                         {
                                             Pair(
@@ -118,7 +119,8 @@ namespace Microsoft.Extensions.Logging.Test
             params KeyValuePair<string, string>[] values
         )
         {
-            return new ServiceCollection().AddLogging(
+            return new ServiceCollection()
+                .AddLogging(
                     builder =>
                         builder.AddConfiguration(
                             new ConfigurationBuilder().AddInMemoryCollection(values).Build()

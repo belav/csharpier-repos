@@ -40,13 +40,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             TArg2 arg2,
             TArg3 arg3
         ) =>
-            LazyLogMessage<TArg0, TArg1, TArg2, TArg3>.Construct(
-                messageGetter,
-                arg0,
-                arg1,
-                arg2,
-                arg3
-            );
+            LazyLogMessage<TArg0, TArg1, TArg2, TArg3>
+                .Construct(messageGetter, arg0, arg1, arg2, arg3);
 
         // message will be either initially set or lazily set by caller
         private string? _message;

@@ -1183,15 +1183,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     return EvaluateBool(((BinaryExpressionSyntax)expr).Left)
                         || EvaluateBool(((BinaryExpressionSyntax)expr).Right);
                 case SyntaxKind.EqualsExpression:
-                    return object.Equals(
-                        Evaluate(((BinaryExpressionSyntax)expr).Left),
-                        Evaluate(((BinaryExpressionSyntax)expr).Right)
-                    );
+                    return object
+                        .Equals(
+                            Evaluate(((BinaryExpressionSyntax)expr).Left),
+                            Evaluate(((BinaryExpressionSyntax)expr).Right)
+                        );
                 case SyntaxKind.NotEqualsExpression:
-                    return !object.Equals(
-                        Evaluate(((BinaryExpressionSyntax)expr).Left),
-                        Evaluate(((BinaryExpressionSyntax)expr).Right)
-                    );
+                    return !object
+                        .Equals(
+                            Evaluate(((BinaryExpressionSyntax)expr).Left),
+                            Evaluate(((BinaryExpressionSyntax)expr).Right)
+                        );
                 case SyntaxKind.LogicalNotExpression:
                     return !EvaluateBool(((PrefixUnaryExpressionSyntax)expr).Operand);
                 case SyntaxKind.IdentifierName:

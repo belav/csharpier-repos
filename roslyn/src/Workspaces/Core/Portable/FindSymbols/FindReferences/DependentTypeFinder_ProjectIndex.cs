@@ -82,15 +82,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 var delegates = new MultiDictionary<Document, DeclaredSymbolInfo>();
 
                 var namedTypes = new MultiDictionary<string, (Document, DeclaredSymbolInfo)>(
-                    project.LanguageServices.GetRequiredService<ISyntaxFactsService>().StringComparer
+                    project.LanguageServices
+                        .GetRequiredService<ISyntaxFactsService>().StringComparer
                 );
 
                 foreach (var document in project.Documents)
                 {
                     var syntaxTreeIndex = await SyntaxTreeIndex.GetRequiredIndexAsync(
-                            document,
-                            cancellationToken
-                        )
+                        document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     foreach (var info in syntaxTreeIndex.DeclaredSymbolInfos)
                     {

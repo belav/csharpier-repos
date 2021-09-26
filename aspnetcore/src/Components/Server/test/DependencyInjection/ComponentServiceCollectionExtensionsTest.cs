@@ -58,14 +58,13 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var services = new ServiceCollection();
-            services.AddServerSideBlazor()
-                .AddHubOptions(
-                    options =>
-                    {
-                        Assert.Equal(TimeSpan.FromMinutes(10), options.HandshakeTimeout);
-                        options.HandshakeTimeout = TimeSpan.FromMinutes(5);
-                    }
-                );
+            services.AddServerSideBlazor().AddHubOptions(
+                options =>
+                {
+                    Assert.Equal(TimeSpan.FromMinutes(10), options.HandshakeTimeout);
+                    options.HandshakeTimeout = TimeSpan.FromMinutes(5);
+                }
+            );
 
             services.Configure<HubOptions>(
                 options =>

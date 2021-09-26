@@ -660,7 +660,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
             Assert.Equal(
                 new[] { "Orders", "DerivedOrders" },
-                ((IReadOnlyEntityType)specialCustomerType).GetNavigations()
+                ((IReadOnlyEntityType)specialCustomerType)
+                    .GetNavigations()
                     .Select(p => p.Name)
                     .ToArray()
             );

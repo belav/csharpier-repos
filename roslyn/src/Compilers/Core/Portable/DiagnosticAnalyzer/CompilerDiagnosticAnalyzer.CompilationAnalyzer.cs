@@ -47,12 +47,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             public static void AnalyzeSemanticModel(SemanticModelAnalysisContext context)
             {
-                var declDiagnostics = context.SemanticModel.GetDeclarationDiagnostics(
-                    cancellationToken: context.CancellationToken
-                );
-                var bodyDiagnostics = context.SemanticModel.GetMethodBodyDiagnostics(
-                    cancellationToken: context.CancellationToken
-                );
+                var declDiagnostics = context.SemanticModel
+                    .GetDeclarationDiagnostics(cancellationToken: context.CancellationToken);
+                var bodyDiagnostics = context.SemanticModel
+                    .GetMethodBodyDiagnostics(cancellationToken: context.CancellationToken);
 
                 ReportDiagnostics(
                     declDiagnostics,
@@ -65,9 +63,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             public static void AnalyzeCompilation(CompilationAnalysisContext context)
             {
-                var diagnostics = context.Compilation.GetDeclarationDiagnostics(
-                    cancellationToken: context.CancellationToken
-                );
+                var diagnostics = context.Compilation
+                    .GetDeclarationDiagnostics(cancellationToken: context.CancellationToken);
                 ReportDiagnostics(
                     diagnostics,
                     context.ReportDiagnostic,

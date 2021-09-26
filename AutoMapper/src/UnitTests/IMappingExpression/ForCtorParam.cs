@@ -55,8 +55,8 @@ namespace AutoMapper.UnitTests
         public void Should_map_ok()
         {
             var destination = ProjectTo<Destination>(
-                    new[] { new Source { Value1 = "Core" } }.AsQueryable()
-                )
+                new[] { new Source { Value1 = "Core" } }.AsQueryable()
+            )
                 .Single();
             destination.Value.ShouldBe("Core");
         }
@@ -103,21 +103,17 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_resolve_using_custom_func()
         {
-            var mapper = new MapperConfiguration(
-                cfg =>
-                    cfg.CreateMap<Source, Dest>()
-                        .ForCtorParam(
-                            "thing",
-                            opt =>
-                                opt.MapFrom(
-                                    (src, ctxt) =>
-                                    {
-                                        var rev = src.Value + 3;
-                                        return rev;
-                                    }
-                                )
-                        )
-            ).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Source, Dest>().ForCtorParam(
+                        "thing",
+                        opt =>
+                            opt.MapFrom(
+                                (src, ctxt) =>
+                                {
+                                    var rev = src.Value + 3;
+                                    return rev;
+                                }
+                            )
+                    )).CreateMapper();
 
             var dest = mapper.Map<Source, Dest>(new Source { Value = 5 });
 
@@ -132,7 +128,8 @@ namespace AutoMapper.UnitTests
                 cfg =>
                     cfg.CreateMap<Source, Dest>()
                         .ForCtorParam("thing", opt => opt.MapFrom((src, ctx) => ctx.Items[itemKey]))
-            ).CreateMapper();
+            )
+                .CreateMapper();
 
             var dest = mapper.Map<Source, Dest>(
                 new Source { Value = 8 },
@@ -157,10 +154,11 @@ namespace AutoMapper.UnitTests
             configuration.ShouldThrowException<AutoMapperConfigurationException>(
                 exception =>
                 {
-                    exception.Message.ShouldContain(
-                        "does not have a constructor with a parameter named 'think'.",
-                        Case.Sensitive
-                    );
+                    exception.Message
+                        .ShouldContain(
+                            "does not have a constructor with a parameter named 'think'.",
+                            Case.Sensitive
+                        );
                     exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
                 }
             );
@@ -203,10 +201,11 @@ namespace AutoMapper.UnitTests
             configuration.ShouldThrowException<AutoMapperConfigurationException>(
                 exception =>
                 {
-                    exception.Message.ShouldContain(
-                        "does not have a constructor with a parameter named 'think'.",
-                        Case.Sensitive
-                    );
+                    exception.Message
+                        .ShouldContain(
+                            "does not have a constructor with a parameter named 'think'.",
+                            Case.Sensitive
+                        );
                     exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
                 }
             );

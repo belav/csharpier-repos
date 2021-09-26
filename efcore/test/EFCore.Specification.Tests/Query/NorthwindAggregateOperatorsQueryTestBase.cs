@@ -406,9 +406,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 "Nullable object must have a value.",
                 Assert.Throws<InvalidOperationException>(
                     () =>
-                        context.Customers.Select(
-                                c => c.Orders.Where(o => o.OrderID == -1).Min(o => o.OrderID)
-                            )
+                        context.Customers
+                            .Select(c => c.Orders.Where(o => o.OrderID == -1).Min(o => o.OrderID))
                             .ToList()
                 ).Message
             );
@@ -446,9 +445,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 "Nullable object must have a value.",
                 Assert.Throws<InvalidOperationException>(
                     () =>
-                        context.Customers.Select(
-                                c => c.Orders.Where(o => o.OrderID == -1).Max(o => o.OrderID)
-                            )
+                        context.Customers
+                            .Select(c => c.Orders.Where(o => o.OrderID == -1).Max(o => o.OrderID))
                             .ToList()
                 ).Message
             );
@@ -486,7 +484,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 "Nullable object must have a value.",
                 Assert.Throws<InvalidOperationException>(
                     () =>
-                        context.Customers.Select(
+                        context.Customers
+                            .Select(
                                 c => c.Orders.Where(o => o.OrderID == -1).Average(o => o.OrderID)
                             )
                             .ToList()
@@ -1021,7 +1020,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(
                             c =>
                                 c.CustomerID == "ALFKI"
-                                && c.Orders.Where(o => o.CustomerID == "ALFKI")
+                                && c.Orders
+                                    .Where(o => o.CustomerID == "ALFKI")
                                     .FirstOrDefault().CustomerID == "ALFKI"
                         ),
                 entryCount: 1
@@ -1040,7 +1040,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(c => c.CustomerID)
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .FirstOrDefault()
                                     .OrderDetails.OrderBy(od => od.ProductID)
                                     .FirstOrDefault()
@@ -1051,7 +1052,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(c => c.CustomerID)
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .FirstOrDefault()
                                     .Maybe(x => x.OrderDetails)
                                     .Maybe(xx => xx.OrderBy(od => od.ProductID).FirstOrDefault())
@@ -1074,7 +1076,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(c => c.CustomerID)
                         .Select(
                             c =>
-                                (int?)c.Orders.OrderBy(o => o.OrderID)
+                                (int?)c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .FirstOrDefault()
                                     .OrderDetails.OrderBy(od => od.ProductID)
                                     .FirstOrDefault().ProductID
@@ -1085,7 +1088,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(c => c.CustomerID)
                         .Select(
                             c =>
-                                c.Orders.OrderBy(o => o.OrderID)
+                                c.Orders
+                                    .OrderBy(o => o.OrderID)
                                     .FirstOrDefault()
                                     .Maybe(x => x.OrderDetails)
                                     .MaybeScalar(
@@ -1422,7 +1426,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 {
                                     new() { CustomerID = "ABCDE" },
                                     new() { CustomerID = id }
-                                }.Select(i => i.CustomerID).Contains(c.CustomerID)
+                                }
+                                    .Select(i => i.CustomerID)
+                                    .Contains(c.CustomerID)
                         ),
                 entryCount: 1
             );
@@ -1439,7 +1445,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 {
                                     new() { CustomerID = "ABCDE" },
                                     new() { CustomerID = id }
-                                }.Select(i => i.CustomerID).Contains(c.CustomerID)
+                                }
+                                    .Select(i => i.CustomerID)
+                                    .Contains(c.CustomerID)
                         ),
                 entryCount: 1
             );
@@ -1751,7 +1759,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Contains_over_entityType_should_rewrite_to_identity_equality()
         {
             using var context = CreateContext();
-            var query = context.Orders.Where(o => o.CustomerID == "VINET")
+            var query = context.Orders
+                .Where(o => o.CustomerID == "VINET")
                 .Contains(context.Orders.Single(o => o.OrderID == 10248));
 
             Assert.True(query);
@@ -1786,7 +1795,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 {
                                     new() { CustomerID = "ALFKI" },
                                     new() { CustomerID = "ANATR" }
-                                }.Contains(c)
+                                }
+                                    .Contains(c)
                         ),
                 entryCount: 2
             );
@@ -1836,7 +1846,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 {
                                     new() { OrderID = 10248 },
                                     new() { OrderID = 10249 }
-                                }.Contains(o)
+                                }
+                                    .Contains(o)
                         ),
                 entryCount: 2
             );
@@ -2094,9 +2105,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Where(
                             c =>
-                                new[] { "ABCDE", "ALFKI", "ANATR" }.Any(
-                                    li => li.Equals(c.CustomerID)
-                                )
+                                new[] { "ABCDE", "ALFKI", "ANATR" }
+                                    .Any(li => li.Equals(c.CustomerID))
                         ),
                 entryCount: 2
             );
@@ -2163,9 +2173,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Where(
                             c =>
-                                new List<string> { "ABCDE", "ALFKI", "ANATR" }.All(
-                                    li => !li.Equals(c.CustomerID)
-                                )
+                                new List<string> { "ABCDE", "ALFKI", "ANATR" }
+                                    .All(li => !li.Equals(c.CustomerID))
                         ),
                 entryCount: 89
             );
@@ -2281,7 +2290,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(c => c.CustomerID.StartsWith("F"))
                         .Where(
                             c =>
-                                c.Orders.OrderByDescending(o => o.OrderID)
+                                c.Orders
+                                    .OrderByDescending(o => o.OrderID)
                                     .LastOrDefault()
                                     .Maybe(x => x.CustomerID) == c.CustomerID
                         ),
@@ -2302,7 +2312,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(c => c.CustomerID.StartsWith("F"))
                         .Where(
                             c =>
-                                c.Orders.OrderByDescending(o => o.OrderID)
+                                c.Orders
+                                    .OrderByDescending(o => o.OrderID)
                                     .LastOrDefault().CustomerID == c.CustomerID
                         ),
                 ss =>
@@ -2310,7 +2321,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(c => c.CustomerID.StartsWith("F"))
                         .Where(
                             c =>
-                                c.Orders.OrderByDescending(o => o.OrderID)
+                                c.Orders
+                                    .OrderByDescending(o => o.OrderID)
                                     .LastOrDefault()
                                     .Maybe(x => x.CustomerID) == c.CustomerID
                         ),

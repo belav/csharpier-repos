@@ -189,27 +189,25 @@ namespace System.Linq.Expressions.Tests
             // Have an error condition so the otherwise-infinite loop can complete.
             ParameterExpression num = Expression.Variable(typeof(int));
             Action spinThenThrow = Expression.Lambda<Action>(
-                    Expression.Block(
-                        new[] { num },
-                        Expression.Assign(num, Expression.Constant(0)),
-                        Expression.Loop(
-                            Expression.IfThen(
-                                Expression.GreaterThan(
-                                    Expression.PreIncrementAssign(num),
-                                    Expression.Constant(19)
-                                ),
-                                Expression.Throw(
-                                    Expression.New(
-                                        typeof(IntegralException).GetConstructor(
-                                            new[] { typeof(int) }
-                                        ),
-                                        num
-                                    )
+                Expression.Block(
+                    new[] { num },
+                    Expression.Assign(num, Expression.Constant(0)),
+                    Expression.Loop(
+                        Expression.IfThen(
+                            Expression.GreaterThan(
+                                Expression.PreIncrementAssign(num),
+                                Expression.Constant(19)
+                            ),
+                            Expression.Throw(
+                                Expression.New(
+                                    typeof(IntegralException).GetConstructor(new[] { typeof(int) }),
+                                    num
                                 )
                             )
                         )
                     )
                 )
+            )
                 .Compile(useInterpreter);
 
             Assert.Equal(20, Assert.Throws<IntegralException>(spinThenThrow).Number);
@@ -221,28 +219,26 @@ namespace System.Linq.Expressions.Tests
             // Have an error condition so the otherwise-infinite loop can complete.
             ParameterExpression num = Expression.Variable(typeof(int));
             Func<int> spinThenThrow = Expression.Lambda<Func<int>>(
-                    Expression.Block(
-                        new[] { num },
-                        Expression.Assign(num, Expression.Constant(0)),
-                        Expression.Loop(
-                            Expression.IfThen(
-                                Expression.GreaterThan(
-                                    Expression.PreIncrementAssign(num),
-                                    Expression.Constant(19)
-                                ),
-                                Expression.Throw(
-                                    Expression.New(
-                                        typeof(IntegralException).GetConstructor(
-                                            new[] { typeof(int) }
-                                        ),
-                                        num
-                                    )
-                                )
+                Expression.Block(
+                    new[] { num },
+                    Expression.Assign(num, Expression.Constant(0)),
+                    Expression.Loop(
+                        Expression.IfThen(
+                            Expression.GreaterThan(
+                                Expression.PreIncrementAssign(num),
+                                Expression.Constant(19)
                             ),
-                            Expression.Label(typeof(int))
-                        )
+                            Expression.Throw(
+                                Expression.New(
+                                    typeof(IntegralException).GetConstructor(new[] { typeof(int) }),
+                                    num
+                                )
+                            )
+                        ),
+                        Expression.Label(typeof(int))
                     )
                 )
+            )
                 .Compile(useInterpreter);
 
             Assert.Equal(20, Assert.Throws<IntegralException>(() => spinThenThrow()).Number);
@@ -255,35 +251,33 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression value = Expression.Variable(typeof(int));
             LabelTarget @break = Expression.Label();
             LabelTarget @continue = Expression.Label();
-            Reflection.MethodInfo append = typeof(StringBuilder).GetMethod(
-                nameof(StringBuilder.Append),
-                new[] { typeof(int) }
-            );
+            Reflection.MethodInfo append = typeof(StringBuilder)
+                .GetMethod(nameof(StringBuilder.Append), new[] { typeof(int) });
             Action act = Expression.Lambda<Action>(
-                    Expression.Block(
-                        new[] { value },
-                        Expression.Assign(value, Expression.Constant(0)),
-                        Expression.Loop(
-                            Expression.Block(
-                                Expression.PostIncrementAssign(value),
-                                Expression.IfThen(
-                                    Expression.GreaterThanOrEqual(value, Expression.Constant(10)),
-                                    Expression.Break(@break)
-                                ),
-                                Expression.IfThen(
-                                    Expression.Equal(
-                                        Expression.Modulo(value, Expression.Constant(2)),
-                                        Expression.Constant(0)
-                                    ),
-                                    Expression.Continue(@continue)
-                                ),
-                                Expression.Call(Expression.Constant(builder), append, value)
+                Expression.Block(
+                    new[] { value },
+                    Expression.Assign(value, Expression.Constant(0)),
+                    Expression.Loop(
+                        Expression.Block(
+                            Expression.PostIncrementAssign(value),
+                            Expression.IfThen(
+                                Expression.GreaterThanOrEqual(value, Expression.Constant(10)),
+                                Expression.Break(@break)
                             ),
-                            @break,
-                            @continue
-                        )
+                            Expression.IfThen(
+                                Expression.Equal(
+                                    Expression.Modulo(value, Expression.Constant(2)),
+                                    Expression.Constant(0)
+                                ),
+                                Expression.Continue(@continue)
+                            ),
+                            Expression.Call(Expression.Constant(builder), append, value)
+                        ),
+                        @break,
+                        @continue
                     )
                 )
+            )
                 .Compile(useInterpreter);
 
             act();

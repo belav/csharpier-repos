@@ -33,50 +33,45 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         private const string _runtimeParameterPrefix =
             QueryCompilationContext.QueryParameterPrefix + "entity_equality_";
 
-        private static readonly MemberInfo _valueBufferIsEmpty = typeof(ValueBuffer).GetMember(
-            nameof(ValueBuffer.IsEmpty)
-        )[0];
+        private static readonly MemberInfo _valueBufferIsEmpty = typeof(ValueBuffer)
+            .GetMember(nameof(ValueBuffer.IsEmpty))[0];
 
         private static readonly MethodInfo _parameterValueExtractor =
-            typeof(InMemoryExpressionTranslatingExpressionVisitor).GetRequiredDeclaredMethod(
-                nameof(ParameterValueExtractor)
-            );
+            typeof(InMemoryExpressionTranslatingExpressionVisitor)
+                .GetRequiredDeclaredMethod(nameof(ParameterValueExtractor));
 
         private static readonly MethodInfo _parameterListValueExtractor =
-            typeof(InMemoryExpressionTranslatingExpressionVisitor).GetRequiredDeclaredMethod(
-                nameof(ParameterListValueExtractor)
-            );
+            typeof(InMemoryExpressionTranslatingExpressionVisitor)
+                .GetRequiredDeclaredMethod(nameof(ParameterListValueExtractor));
 
         private static readonly MethodInfo _getParameterValueMethodInfo =
-            typeof(InMemoryExpressionTranslatingExpressionVisitor).GetRequiredDeclaredMethod(
-                nameof(GetParameterValue)
-            );
+            typeof(InMemoryExpressionTranslatingExpressionVisitor)
+                .GetRequiredDeclaredMethod(nameof(GetParameterValue));
 
-        private static readonly MethodInfo _likeMethodInfo =
-            typeof(DbFunctionsExtensions).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _likeMethodInfo = typeof(DbFunctionsExtensions)
+            .GetRequiredRuntimeMethod(
                 nameof(DbFunctionsExtensions.Like),
                 new[] { typeof(DbFunctions), typeof(string), typeof(string) }
             );
 
-        private static readonly MethodInfo _likeMethodInfoWithEscape =
-            typeof(DbFunctionsExtensions).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _likeMethodInfoWithEscape = typeof(DbFunctionsExtensions)
+            .GetRequiredRuntimeMethod(
                 nameof(DbFunctionsExtensions.Like),
                 new[] { typeof(DbFunctions), typeof(string), typeof(string), typeof(string) }
             );
 
-        private static readonly MethodInfo _randomMethodInfo =
-            typeof(DbFunctionsExtensions).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _randomMethodInfo = typeof(DbFunctionsExtensions)
+            .GetRequiredRuntimeMethod(
                 nameof(DbFunctionsExtensions.Random),
                 new[] { typeof(DbFunctions) }
             );
 
-        private static readonly MethodInfo _randomNextDoubleMethodInfo =
-            typeof(Random).GetRequiredRuntimeMethod(nameof(Random.NextDouble), Array.Empty<Type>());
+        private static readonly MethodInfo _randomNextDoubleMethodInfo = typeof(Random)
+            .GetRequiredRuntimeMethod(nameof(Random.NextDouble), Array.Empty<Type>());
 
         private static readonly MethodInfo _inMemoryLikeMethodInfo =
-            typeof(InMemoryExpressionTranslatingExpressionVisitor).GetRequiredDeclaredMethod(
-                nameof(InMemoryLike)
-            );
+            typeof(InMemoryExpressionTranslatingExpressionVisitor)
+                .GetRequiredDeclaredMethod(nameof(InMemoryLike));
 
         // Regex special chars defined here:
         // https://msdn.microsoft.com/en-us/library/4edbef7e(v=vs.110).aspx
@@ -341,9 +336,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 case ProjectionBindingExpression projectionBindingExpression
                       when projectionBindingExpression.ProjectionMember != null:
-                    return (
-                        (InMemoryQueryExpression)projectionBindingExpression.QueryExpression
-                    ).GetMappedProjection(projectionBindingExpression.ProjectionMember);
+                    return ((InMemoryQueryExpression)projectionBindingExpression.QueryExpression)
+                        .GetMappedProjection(projectionBindingExpression.ProjectionMember);
 
                 //case ProjectionBindingExpression projectionBindingExpression
                 //    when projectionBindingExpression.Index is int index:
@@ -644,9 +638,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                                 expression == null
                                     ? null
                                     : Expression.Call(
-                                          EnumerableMethods.CountWithoutPredicate.MakeGenericMethod(
-                                              expression.Type.GetSequenceType()
-                                          ),
+                                          EnumerableMethods.CountWithoutPredicate
+                                              .MakeGenericMethod(expression.Type.GetSequenceType()),
                                           expression
                                       );
                             break;
@@ -685,9 +678,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                                 expression == null
                                     ? null
                                     : Expression.Call(
-                                          EnumerableMethods.LongCountWithoutPredicate.MakeGenericMethod(
-                                              expression.Type.GetSequenceType()
-                                          ),
+                                          EnumerableMethods.LongCountWithoutPredicate
+                                              .MakeGenericMethod(expression.Type.GetSequenceType()),
                                           expression
                                       );
                             break;
@@ -842,10 +834,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         }
 
                         var result = Expression.Call(
-                            EnumerableMethods.Select.MakeGenericMethod(
-                                typeof(ValueBuffer),
-                                selector.Type
-                            ),
+                            EnumerableMethods.Select
+                                .MakeGenericMethod(typeof(ValueBuffer), selector.Type),
                             groupingElement.Source,
                             Expression.Lambda(selector, groupingElement.ValueBufferParameter)
                         );
@@ -1149,7 +1139,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             // if the nullability of arguments change, we have no easy/reliable way to adjust the actual methodInfo to match the new type,
             // so we are forced to cast back to the original type
-            var parameterTypes = methodCallExpression.Method.GetParameters()
+            var parameterTypes = methodCallExpression.Method
+                .GetParameters()
                 .Select(p => p.ParameterType)
                 .ToArray();
             for (var i = 0; i < arguments.Length; i++)
@@ -1505,9 +1496,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     return null;
                 }
 
-                var result = ((EntityProjectionExpression)valueBufferExpression).BindProperty(
-                    property
-                );
+                var result = ((EntityProjectionExpression)valueBufferExpression)
+                    .BindProperty(property);
 
                 // if the result type change was just nullability change e.g from int to int?
                 // we want to preserve the new type for null propagation
@@ -1699,9 +1689,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                       when methodCallExpression.Method.IsGenericMethod
                           && methodCallExpression.Method.GetGenericMethodDefinition()
                               == _getParameterValueMethodInfo:
-                    var parameterName = methodCallExpression.Arguments[
-                        1
-                    ].GetConstantValue<string>();
+                    var parameterName = methodCallExpression.Arguments[1]
+                        .GetConstantValue<string>();
                     var lambda = Expression.Lambda(
                         Expression.Call(
                             _parameterListValueExtractor.MakeGenericMethod(
@@ -1778,13 +1767,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 result = Visit(
                     primaryKeyProperties1.Select(
-                            p =>
-                                Expression.MakeBinary(
-                                    nodeType,
-                                    CreatePropertyAccessExpression(nonNullEntityReference, p),
-                                    Expression.Constant(null, p.ClrType.MakeNullable())
-                                )
-                        )
+                        p =>
+                            Expression.MakeBinary(
+                                nodeType,
+                                CreatePropertyAccessExpression(nonNullEntityReference, p),
+                                Expression.Constant(null, p.ClrType.MakeNullable())
+                            )
+                    )
                         .Aggregate(
                             (l, r) =>
                                 nodeType == ExpressionType.Equal
@@ -1848,13 +1837,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             result = Visit(
                 primaryKeyProperties.Select(
-                        p =>
-                            Expression.MakeBinary(
-                                nodeType,
-                                CreatePropertyAccessExpression(left, p),
-                                CreatePropertyAccessExpression(right, p)
-                            )
-                    )
+                    p =>
+                        Expression.MakeBinary(
+                            nodeType,
+                            CreatePropertyAccessExpression(left, p),
+                            CreatePropertyAccessExpression(right, p)
+                        )
+                )
                     .Aggregate(
                         (l, r) =>
                             nodeType == ExpressionType.Equal
@@ -1882,9 +1871,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                       when methodCallExpression.Method.IsGenericMethod
                           && methodCallExpression.Method.GetGenericMethodDefinition()
                               == _getParameterValueMethodInfo:
-                    var parameterName = methodCallExpression.Arguments[
-                        1
-                    ].GetConstantValue<string>();
+                    var parameterName = methodCallExpression.Arguments[1]
+                        .GetConstantValue<string>();
                     var lambda = Expression.Lambda(
                         Expression.Call(
                             _parameterValueExtractor.MakeGenericMethod(
@@ -1907,9 +1895,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     );
 
                 case MemberInitExpression memberInitExpression
-                      when memberInitExpression.Bindings.SingleOrDefault(
-                          mb => mb.Member.Name == property.Name
-                      )
+                      when memberInitExpression.Bindings
+                          .SingleOrDefault(mb => mb.Member.Name == property.Name)
                           is MemberAssignment memberAssignment:
                     return memberAssignment.Expression.Type.IsNullableType()
                       ? memberAssignment.Expression
@@ -1960,8 +1947,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             var getter = property.GetGetter();
             return baseListParameter.Select(
-                    e => e != null ? (TProperty?)getter.GetClrValue(e) : (TProperty?)(object?)null
-                )
+                e => e != null ? (TProperty?)getter.GetClrValue(e) : (TProperty?)(object?)null
+            )
                 .ToList();
         }
 
@@ -1987,11 +1974,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 case MemberInitExpression memberInitExpression:
                     return CanEvaluate(memberInitExpression.NewExpression)
-                        && memberInitExpression.Bindings.All(
-                            mb =>
-                                mb is MemberAssignment memberAssignment
-                                && CanEvaluate(memberAssignment.Expression)
-                        );
+                        && memberInitExpression.Bindings
+                            .All(
+                                mb =>
+                                    mb is MemberAssignment memberAssignment
+                                    && CanEvaluate(memberAssignment.Expression)
+                            );
 
                 default:
                     return false;
@@ -2007,24 +1995,23 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             var rightExpressions = ((NewArrayExpression)right).Expressions;
 
             return leftExpressions.Zip(
-                    rightExpressions,
-                    (l, r) =>
+                rightExpressions,
+                (l, r) =>
+                {
+                    l = RemoveObjectConvert(l);
+                    r = RemoveObjectConvert(r);
+                    if (l.Type.IsNullableType())
                     {
-                        l = RemoveObjectConvert(l);
-                        r = RemoveObjectConvert(r);
-                        if (l.Type.IsNullableType())
-                        {
-                            r = r.Type.IsNullableType() ? r : Expression.Convert(r, l.Type);
-                        }
-                        else if (r.Type.IsNullableType())
-                        {
-                            l = l.Type.IsNullableType() ? l : Expression.Convert(l, r.Type);
-                        }
-
-                        return Expression.Equal(l, r);
+                        r = r.Type.IsNullableType() ? r : Expression.Convert(r, l.Type);
                     }
-                )
-                .Aggregate((a, b) => Expression.AndAlso(a, b));
+                    else if (r.Type.IsNullableType())
+                    {
+                        l = l.Type.IsNullableType() ? l : Expression.Convert(l, r.Type);
+                    }
+
+                    return Expression.Equal(l, r);
+                }
+            ).Aggregate((a, b) => Expression.AndAlso(a, b));
 
             static Expression RemoveObjectConvert(Expression expression) =>
                 expression is UnaryExpression unaryExpression

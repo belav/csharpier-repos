@@ -964,8 +964,8 @@ namespace System.Xml.Linq
                                 e.AppendAttributeSkipNotify(
                                     new XAttribute(
                                         _aCache.Get(
-                                                r.Prefix.Length == 0 ? string.Empty : r.NamespaceURI
-                                            )
+                                            r.Prefix.Length == 0 ? string.Empty : r.NamespaceURI
+                                        )
                                             .GetName(r.LocalName),
                                         r.Value
                                     )
@@ -1044,8 +1044,8 @@ namespace System.Xml.Linq
                                 e.AppendAttributeSkipNotify(
                                     new XAttribute(
                                         _aCache.Get(
-                                                r.Prefix.Length == 0 ? string.Empty : r.NamespaceURI
-                                            )
+                                            r.Prefix.Length == 0 ? string.Empty : r.NamespaceURI
+                                        )
                                             .GetName(r.LocalName),
                                         await r.GetValueAsync().ConfigureAwait(false)
                                     )
@@ -1144,8 +1144,8 @@ namespace System.Xml.Linq
                             {
                                 XAttribute a = new XAttribute(
                                     _aCache.Get(
-                                            r.Prefix.Length == 0 ? string.Empty : r.NamespaceURI
-                                        )
+                                        r.Prefix.Length == 0 ? string.Empty : r.NamespaceURI
+                                    )
                                         .GetName(r.LocalName),
                                     r.Value
                                 );
@@ -1288,8 +1288,8 @@ namespace System.Xml.Linq
                             {
                                 XAttribute a = new XAttribute(
                                     _aCache.Get(
-                                            r.Prefix.Length == 0 ? string.Empty : r.NamespaceURI
-                                        )
+                                        r.Prefix.Length == 0 ? string.Empty : r.NamespaceURI
+                                    )
                                         .GetName(r.LocalName),
                                     await r.GetValueAsync().ConfigureAwait(false)
                                 );

@@ -14,9 +14,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
 
         public Task EnableNavigationInterceptionAsync()
         {
-            DefaultWebAssemblyJSRuntime.Instance.Invoke<object>(
-                Interop.EnableNavigationInterception
-            );
+            DefaultWebAssemblyJSRuntime.Instance
+                .Invoke<object>(Interop.EnableNavigationInterception);
             return Task.CompletedTask;
         }
     }

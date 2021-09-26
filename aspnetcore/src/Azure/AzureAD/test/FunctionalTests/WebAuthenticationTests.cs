@@ -69,50 +69,51 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.FunctionalTests
         {
             // Act & Assert
             var client = Factory.WithWebHostBuilder(
-                    builder =>
-                        builder.ConfigureTestServices(
-                            services =>
-                            {
-                                services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
-                                    .AddAzureAD(
-                                        o =>
-                                        {
-                                            o.Instance = "https://login.microsoftonline.com/";
-                                            o.Domain = "test.onmicrosoft.com";
-                                            o.ClientId = "ClientId";
-                                            o.TenantId = "TenantId";
-                                        }
-                                    );
-
-                                services.Configure<OpenIdConnectOptions>(
-                                    AzureADDefaults.OpenIdScheme,
+                builder =>
+                    builder.ConfigureTestServices(
+                        services =>
+                        {
+                            services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
+                                .AddAzureAD(
                                     o =>
                                     {
-                                        o.Configuration = new OpenIdConnectConfiguration()
-                                        {
-                                            Issuer = "https://www.example.com",
-                                            TokenEndpoint = "https://www.example.com/token",
-                                            AuthorizationEndpoint =
-                                                "https://www.example.com/authorize",
-                                            EndSessionEndpoint = "https://www.example.com/logout"
-                                        };
+                                        o.Instance = "https://login.microsoftonline.com/";
+                                        o.Domain = "test.onmicrosoft.com";
+                                        o.ClientId = "ClientId";
+                                        o.TenantId = "TenantId";
                                     }
                                 );
 
-                                services.AddMvc(
-                                    o =>
-                                        o.Filters.Add(
+                            services.Configure<OpenIdConnectOptions>(
+                                AzureADDefaults.OpenIdScheme,
+                                o =>
+                                {
+                                    o.Configuration = new OpenIdConnectConfiguration()
+                                    {
+                                        Issuer = "https://www.example.com",
+                                        TokenEndpoint = "https://www.example.com/token",
+                                        AuthorizationEndpoint = "https://www.example.com/authorize",
+                                        EndSessionEndpoint = "https://www.example.com/logout"
+                                    };
+                                }
+                            );
+
+                            services.AddMvc(
+                                o =>
+                                    o.Filters
+                                        .Add(
                                             new AuthorizeFilter(
                                                 new AuthorizationPolicyBuilder(
                                                     new[] { AzureADDefaults.AuthenticationScheme }
-                                                ).RequireAuthenticatedUser().Build()
+                                                )
+                                                    .RequireAuthenticatedUser()
+                                                    .Build()
                                             )
                                         )
-                                );
-                            }
-                        )
-                )
-                .CreateDefaultClient();
+                            );
+                        }
+                    )
+            ).CreateDefaultClient();
 
             var response = await client.GetAsync(endpoint);
 
@@ -141,56 +142,57 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.FunctionalTests
         {
             // Act & Assert
             var client = Factory.WithWebHostBuilder(
-                    builder =>
-                        builder.ConfigureTestServices(
-                            services =>
-                            {
-                                services.AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
-                                    .AddAzureADB2C(
-                                        o =>
-                                        {
-                                            o.Instance = "https://login.microsoftonline.com/tfp/";
-                                            o.ClientId = "ClientId";
-                                            o.CallbackPath = "/signin-oidc";
-                                            o.Domain = "test.onmicrosoft.com";
-                                            o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
-                                            o.ResetPasswordPolicyId = "B2C_1_SSPR";
-                                            o.EditProfilePolicyId = "B2C_1_SiPe";
-                                        }
-                                    );
-
-                                services.Configure<OpenIdConnectOptions>(
-                                    AzureADB2CDefaults.OpenIdScheme,
+                builder =>
+                    builder.ConfigureTestServices(
+                        services =>
+                        {
+                            services.AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
+                                .AddAzureADB2C(
                                     o =>
                                     {
-                                        o.Configuration = new OpenIdConnectConfiguration()
-                                        {
-                                            Issuer = "https://www.example.com",
-                                            TokenEndpoint = "https://www.example.com/token",
-                                            AuthorizationEndpoint =
-                                                "https://www.example.com/authorize",
-                                            EndSessionEndpoint = "https://www.example.com/logout"
-                                        };
+                                        o.Instance = "https://login.microsoftonline.com/tfp/";
+                                        o.ClientId = "ClientId";
+                                        o.CallbackPath = "/signin-oidc";
+                                        o.Domain = "test.onmicrosoft.com";
+                                        o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
+                                        o.ResetPasswordPolicyId = "B2C_1_SSPR";
+                                        o.EditProfilePolicyId = "B2C_1_SiPe";
                                     }
                                 );
 
-                                services.AddMvc(
-                                    o =>
-                                        o.Filters.Add(
+                            services.Configure<OpenIdConnectOptions>(
+                                AzureADB2CDefaults.OpenIdScheme,
+                                o =>
+                                {
+                                    o.Configuration = new OpenIdConnectConfiguration()
+                                    {
+                                        Issuer = "https://www.example.com",
+                                        TokenEndpoint = "https://www.example.com/token",
+                                        AuthorizationEndpoint = "https://www.example.com/authorize",
+                                        EndSessionEndpoint = "https://www.example.com/logout"
+                                    };
+                                }
+                            );
+
+                            services.AddMvc(
+                                o =>
+                                    o.Filters
+                                        .Add(
                                             new AuthorizeFilter(
                                                 new AuthorizationPolicyBuilder(
                                                     new[]
                                                     {
                                                         AzureADB2CDefaults.AuthenticationScheme
                                                     }
-                                                ).RequireAuthenticatedUser().Build()
+                                                )
+                                                    .RequireAuthenticatedUser()
+                                                    .Build()
                                             )
                                         )
-                                );
-                            }
-                        )
-                )
-                .CreateDefaultClient();
+                            );
+                        }
+                    )
+            ).CreateDefaultClient();
 
             var response = await client.GetAsync(endpoint);
 
@@ -202,61 +204,60 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.FunctionalTests
         public async Task ADB2C_EndToEnd_PasswordReset()
         {
             var client = Factory.WithWebHostBuilder(
-                    builder =>
-                        builder.ConfigureTestServices(
-                            services =>
-                            {
-                                services.AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
-                                    .AddAzureADB2C(
-                                        o =>
-                                        {
-                                            o.Instance = "https://login.microsoftonline.com/tfp/";
-                                            o.ClientId = "ClientId";
-                                            o.CallbackPath = "/signin-oidc";
-                                            o.Domain = "test.onmicrosoft.com";
-                                            o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
-                                            o.ResetPasswordPolicyId = "B2C_1_SSPR";
-                                            o.EditProfilePolicyId = "B2C_1_SiPe";
-                                        }
-                                    );
-
-                                services.Configure<OpenIdConnectOptions>(
-                                    AzureADB2CDefaults.OpenIdScheme,
+                builder =>
+                    builder.ConfigureTestServices(
+                        services =>
+                        {
+                            services.AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
+                                .AddAzureADB2C(
                                     o =>
                                     {
-                                        o.Configuration = new OpenIdConnectConfiguration()
-                                        {
-                                            Issuer = "https://www.example.com",
-                                            TokenEndpoint = "https://www.example.com/token",
-                                            AuthorizationEndpoint =
-                                                "https://www.example.com/authorize",
-                                            EndSessionEndpoint = "https://www.example.com/logout"
-                                        };
-                                        // CookieContainer doesn't allow cookies from other paths
-                                        o.CorrelationCookie.Path = "/";
-                                        o.NonceCookie.Path = "/";
+                                        o.Instance = "https://login.microsoftonline.com/tfp/";
+                                        o.ClientId = "ClientId";
+                                        o.CallbackPath = "/signin-oidc";
+                                        o.Domain = "test.onmicrosoft.com";
+                                        o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
+                                        o.ResetPasswordPolicyId = "B2C_1_SSPR";
+                                        o.EditProfilePolicyId = "B2C_1_SiPe";
                                     }
                                 );
 
-                                services.AddMvc(
-                                    o =>
-                                        o.Filters.Add(
+                            services.Configure<OpenIdConnectOptions>(
+                                AzureADB2CDefaults.OpenIdScheme,
+                                o =>
+                                {
+                                    o.Configuration = new OpenIdConnectConfiguration()
+                                    {
+                                        Issuer = "https://www.example.com",
+                                        TokenEndpoint = "https://www.example.com/token",
+                                        AuthorizationEndpoint = "https://www.example.com/authorize",
+                                        EndSessionEndpoint = "https://www.example.com/logout"
+                                    };
+                                    // CookieContainer doesn't allow cookies from other paths
+                                    o.CorrelationCookie.Path = "/";
+                                    o.NonceCookie.Path = "/";
+                                }
+                            );
+
+                            services.AddMvc(
+                                o =>
+                                    o.Filters
+                                        .Add(
                                             new AuthorizeFilter(
                                                 new AuthorizationPolicyBuilder(
                                                     new[]
                                                     {
                                                         AzureADB2CDefaults.AuthenticationScheme
                                                     }
-                                                ).RequireAuthenticatedUser().Build()
+                                                )
+                                                    .RequireAuthenticatedUser()
+                                                    .Build()
                                             )
                                         )
-                                );
-                            }
-                        )
-                )
-                .CreateClient(
-                    new WebApplicationFactoryClientOptions() { AllowAutoRedirect = false }
-                );
+                            );
+                        }
+                    )
+            ).CreateClient(new WebApplicationFactoryClientOptions() { AllowAutoRedirect = false });
 
             var response = await client.GetAsync("/api/get");
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);

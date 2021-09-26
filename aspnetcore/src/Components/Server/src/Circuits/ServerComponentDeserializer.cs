@@ -77,8 +77,8 @@ namespace Microsoft.AspNetCore.Components.Server
             // See the comment in ServerComponentSerializationSettings.DataExpiration to understand
             // why we limit the validity of the protected payloads.
             _dataProtector = dataProtectionProvider.CreateProtector(
-                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
-                )
+                ServerComponentSerializationSettings.DataProtectionProviderPurpose
+            )
                 .ToTimeLimitedDataProtector();
 
             _logger = logger;

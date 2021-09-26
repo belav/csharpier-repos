@@ -40,18 +40,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 RemoteServiceCallbackId callbackId,
                 CancellationToken cancellationToken
             ) =>
-                (
-                    (DocumentActiveStatementSpanProviderCallback)GetCallback(callbackId)
-                ).GetSpansAsync(cancellationToken);
+                ((DocumentActiveStatementSpanProviderCallback)GetCallback(callbackId))
+                    .GetSpansAsync(cancellationToken);
 
             public ValueTask<ImmutableArray<TextSpan>> GetSpansAsync(
                 RemoteServiceCallbackId callbackId,
                 DocumentId documentId,
                 CancellationToken cancellationToken
             ) =>
-                (
-                    (SolutionActiveStatementSpanProviderCallback)GetCallback(callbackId)
-                ).GetSpansAsync(documentId, cancellationToken);
+                ((SolutionActiveStatementSpanProviderCallback)GetCallback(callbackId))
+                    .GetSpansAsync(documentId, cancellationToken);
 
             public ValueTask<
                 ImmutableArray<ManagedActiveStatementDebugInfo>
@@ -59,29 +57,24 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 RemoteServiceCallbackId callbackId,
                 CancellationToken cancellationToken
             ) =>
-                ((EditSessionCallback)GetCallback(callbackId)).GetActiveStatementsAsync(
-                    cancellationToken
-                );
+                ((EditSessionCallback)GetCallback(callbackId))
+                    .GetActiveStatementsAsync(cancellationToken);
 
             public ValueTask<ManagedEditAndContinueAvailability> GetAvailabilityAsync(
                 RemoteServiceCallbackId callbackId,
                 Guid mvid,
                 CancellationToken cancellationToken
             ) =>
-                ((EditSessionCallback)GetCallback(callbackId)).GetAvailabilityAsync(
-                    mvid,
-                    cancellationToken
-                );
+                ((EditSessionCallback)GetCallback(callbackId))
+                    .GetAvailabilityAsync(mvid, cancellationToken);
 
             public ValueTask PrepareModuleForUpdateAsync(
                 RemoteServiceCallbackId callbackId,
                 Guid mvid,
                 CancellationToken cancellationToken
             ) =>
-                ((EditSessionCallback)GetCallback(callbackId)).PrepareModuleForUpdateAsync(
-                    mvid,
-                    cancellationToken
-                );
+                ((EditSessionCallback)GetCallback(callbackId))
+                    .PrepareModuleForUpdateAsync(mvid, cancellationToken);
         }
 
         private sealed class DocumentActiveStatementSpanProviderCallback
@@ -238,17 +231,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             );
 
             await connection.TryInvokeAsync(
-                    solution,
-                    async (service, solutionInfo, callbackId, cancellationToken) =>
-                        await service.StartDebuggingSessionAsync(
-                                solutionInfo,
-                                callbackId,
-                                captureMatchingDocuments,
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false),
-                    cancellationToken
-                )
+                solution,
+                async (service, solutionInfo, callbackId, cancellationToken) =>
+                    await service.StartDebuggingSessionAsync(
+                        solutionInfo,
+                        callbackId,
+                        captureMatchingDocuments,
+                        cancellationToken
+                    )
+                        .ConfigureAwait(false),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return connection;
@@ -280,10 +273,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     IRemoteEditAndContinueService,
                     ImmutableArray<DocumentId>
                 >(
-                        (service, cancallationToken) =>
-                            service.BreakStateEnteredAsync(cancellationToken),
-                        cancellationToken
-                    )
+                    (service, cancallationToken) =>
+                        service.BreakStateEnteredAsync(cancellationToken),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 documentsToReanalyze = documentsToReanalyzeOpt.HasValue
@@ -315,10 +308,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     IRemoteEditAndContinueService,
                     ImmutableArray<DocumentId>
                 >(
-                        (service, cancallationToken) =>
-                            service.EndDebuggingSessionAsync(cancellationToken),
-                        cancellationToken
-                    )
+                    (service, cancallationToken) =>
+                        service.EndDebuggingSessionAsync(cancellationToken),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 documentsToReanalyze = documentsToReanalyzeOpt.HasValue
@@ -356,19 +349,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 IRemoteEditAndContinueService,
                 ImmutableArray<DiagnosticData>
             >(
-                    document.Project.Solution,
-                    (service, solutionInfo, callbackId, cancellationToken) =>
-                        service.GetDocumentDiagnosticsAsync(
-                            solutionInfo,
-                            callbackId,
-                            document.Id,
-                            cancellationToken
-                        ),
-                    callbackTarget: new DocumentActiveStatementSpanProviderCallback(
-                        activeStatementSpanProvider
+                document.Project.Solution,
+                (service, solutionInfo, callbackId, cancellationToken) =>
+                    service.GetDocumentDiagnosticsAsync(
+                        solutionInfo,
+                        callbackId,
+                        document.Id,
+                        cancellationToken
                     ),
-                    cancellationToken
-                )
+                callbackTarget: new DocumentActiveStatementSpanProviderCallback(
+                    activeStatementSpanProvider
+                ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (!diagnosticData.HasValue)
@@ -410,19 +403,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             var result = await client.TryInvokeAsync<IRemoteEditAndContinueService, bool>(
-                    solution,
-                    (service, solutionInfo, callbackId, cancellationToken) =>
-                        service.HasChangesAsync(
-                            solutionInfo,
-                            callbackId,
-                            sourceFilePath,
-                            cancellationToken
-                        ),
-                    callbackTarget: new SolutionActiveStatementSpanProviderCallback(
-                        activeStatementSpanProvider
+                solution,
+                (service, solutionInfo, callbackId, cancellationToken) =>
+                    service.HasChangesAsync(
+                        solutionInfo,
+                        callbackId,
+                        sourceFilePath,
+                        cancellationToken
                     ),
-                    cancellationToken
-                )
+                callbackTarget: new SolutionActiveStatementSpanProviderCallback(
+                    activeStatementSpanProvider
+                ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return result.HasValue ? result.Value : true;
@@ -461,18 +454,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     IRemoteEditAndContinueService,
                     EmitSolutionUpdateResults.Data
                 >(
-                        solution,
-                        (service, solutionInfo, callbackId, cancellationToken) =>
-                            service.EmitSolutionUpdateAsync(
-                                solutionInfo,
-                                callbackId,
-                                cancellationToken
-                            ),
-                        callbackTarget: new SolutionActiveStatementSpanProviderCallback(
-                            activeStatementSpanProvider
+                    solution,
+                    (service, solutionInfo, callbackId, cancellationToken) =>
+                        service.EmitSolutionUpdateAsync(
+                            solutionInfo,
+                            callbackId,
+                            cancellationToken
                         ),
-                        cancellationToken
-                    )
+                    callbackTarget: new SolutionActiveStatementSpanProviderCallback(
+                        activeStatementSpanProvider
+                    ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (result.HasValue)
@@ -527,10 +520,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     IRemoteEditAndContinueService,
                     ImmutableArray<DocumentId>
                 >(
-                        (service, cancallationToken) =>
-                            service.CommitSolutionUpdateAsync(cancellationToken),
-                        cancellationToken
-                    )
+                    (service, cancallationToken) =>
+                        service.CommitSolutionUpdateAsync(cancellationToken),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 documentsToReanalyze = documentsToReanalyzeOpt.HasValue
@@ -553,10 +546,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             await client.TryInvokeAsync<IRemoteEditAndContinueService>(
-                    (service, cancellationToken) =>
-                        service.DiscardSolutionUpdateAsync(cancellationToken),
-                    cancellationToken
-                )
+                (service, cancellationToken) =>
+                    service.DiscardSolutionUpdateAsync(cancellationToken),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -568,9 +561,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         )
         {
             var client = await RemoteHostClient.TryGetClientAsync(
-                    Workspace.Services,
-                    cancellationToken
-                )
+                Workspace.Services,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (client == null)
             {
@@ -588,19 +581,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 IRemoteEditAndContinueService,
                 LinePositionSpan?
             >(
-                    solution,
-                    (service, solutionInfo, callbackId, cancellationToken) =>
-                        service.GetCurrentActiveStatementPositionAsync(
-                            solutionInfo,
-                            callbackId,
-                            instructionId,
-                            cancellationToken
-                        ),
-                    callbackTarget: new SolutionActiveStatementSpanProviderCallback(
-                        activeStatementSpanProvider
+                solution,
+                (service, solutionInfo, callbackId, cancellationToken) =>
+                    service.GetCurrentActiveStatementPositionAsync(
+                        solutionInfo,
+                        callbackId,
+                        instructionId,
+                        cancellationToken
                     ),
-                    cancellationToken
-                )
+                callbackTarget: new SolutionActiveStatementSpanProviderCallback(
+                    activeStatementSpanProvider
+                ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return result.HasValue ? result.Value : null;
@@ -613,9 +606,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         )
         {
             var client = await RemoteHostClient.TryGetClientAsync(
-                    Workspace.Services,
-                    cancellationToken
-                )
+                Workspace.Services,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (client == null)
             {
@@ -629,15 +622,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             var result = await client.TryInvokeAsync<IRemoteEditAndContinueService, bool?>(
-                    solution,
-                    (service, solutionInfo, cancellationToken) =>
-                        service.IsActiveStatementInExceptionRegionAsync(
-                            solutionInfo,
-                            instructionId,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                solution,
+                (service, solutionInfo, cancellationToken) =>
+                    service.IsActiveStatementInExceptionRegionAsync(
+                        solutionInfo,
+                        instructionId,
+                        cancellationToken
+                    ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return result.HasValue ? result.Value : null;
@@ -664,15 +657,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 IRemoteEditAndContinueService,
                 ImmutableArray<ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>>
             >(
-                    solution,
-                    (service, solutionInfo, cancellationToken) =>
-                        service.GetBaseActiveStatementSpansAsync(
-                            solutionInfo,
-                            documentIds,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                solution,
+                (service, solutionInfo, cancellationToken) =>
+                    service.GetBaseActiveStatementSpansAsync(
+                        solutionInfo,
+                        documentIds,
+                        cancellationToken
+                    ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return result.HasValue
@@ -705,19 +698,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 IRemoteEditAndContinueService,
                 ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>
             >(
-                    document.Project.Solution,
-                    (service, solutionInfo, callbackId, cancellationToken) =>
-                        service.GetAdjustedActiveStatementSpansAsync(
-                            solutionInfo,
-                            callbackId,
-                            document.Id,
-                            cancellationToken
-                        ),
-                    callbackTarget: new DocumentActiveStatementSpanProviderCallback(
-                        activeStatementSpanProvider
+                document.Project.Solution,
+                (service, solutionInfo, callbackId, cancellationToken) =>
+                    service.GetAdjustedActiveStatementSpansAsync(
+                        solutionInfo,
+                        callbackId,
+                        document.Id,
+                        cancellationToken
                     ),
-                    cancellationToken
-                )
+                callbackTarget: new DocumentActiveStatementSpanProviderCallback(
+                    activeStatementSpanProvider
+                ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return result.HasValue ? result.Value : default;
@@ -737,15 +730,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             await client.TryInvokeAsync<IRemoteEditAndContinueService>(
-                    document.Project.Solution,
-                    (service, solutionInfo, cancellationToken) =>
-                        service.OnSourceFileUpdatedAsync(
-                            solutionInfo,
-                            document.Id,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                document.Project.Solution,
+                (service, solutionInfo, cancellationToken) =>
+                    service.OnSourceFileUpdatedAsync(solutionInfo, document.Id, cancellationToken),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

@@ -158,10 +158,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ) =>
             (NonNullabilityConventionState)(
                 modelBuilder.Metadata.FindAnnotation(StateAnnotationName)
-                ?? modelBuilder.Metadata.AddAnnotation(
-                    StateAnnotationName,
-                    new NonNullabilityConventionState()
-                )
+                ?? modelBuilder.Metadata
+                    .AddAnnotation(StateAnnotationName, new NonNullabilityConventionState())
             ).Value!;
 
         /// <inheritdoc />

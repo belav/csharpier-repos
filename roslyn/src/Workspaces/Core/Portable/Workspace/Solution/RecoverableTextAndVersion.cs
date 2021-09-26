@@ -108,7 +108,8 @@ namespace Microsoft.CodeAnalysis
                     if (_text == null)
                     {
                         return InitRecoverable(
-                            await _initialSource!.GetValueAsync(cancellationToken)
+                            await _initialSource!
+                                .GetValueAsync(cancellationToken)
                                 .ConfigureAwait(false)
                         );
                     }

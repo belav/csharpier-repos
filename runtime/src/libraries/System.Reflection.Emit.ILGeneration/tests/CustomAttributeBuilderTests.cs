@@ -172,9 +172,10 @@ namespace System.Reflection.Emit.Tests
             // 4 ctor, 0 fields, 2 properties
             yield return new object[]
             {
-                typeof(TestAttribute).GetConstructor(
-                    new Type[] { typeof(string), typeof(int), typeof(string), typeof(int) }
-                ),
+                typeof(TestAttribute)
+                    .GetConstructor(
+                        new Type[] { typeof(string), typeof(int), typeof(string), typeof(int) }
+                    ),
                 new object[] { stringValue1, intValue1, stringValue1, intValue1 },
                 new string[] { nameof(TestAttribute.TestInt32), nameof(TestAttribute.TestString) },
                 new object[] { intValue2, stringValue2 },
@@ -836,9 +837,8 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public static void StaticConstructor_ThrowsArgumentException()
         {
-            ConstructorInfo con = typeof(TestAttribute).GetConstructors(
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-                )
+            ConstructorInfo con = typeof(TestAttribute)
+                .GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
                 .First();
 
             AssertExtensions.Throws<ArgumentException>(
@@ -877,9 +877,8 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public static void PrivateConstructor_ThrowsArgumentException()
         {
-            ConstructorInfo con = typeof(TestAttribute).GetConstructors(
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )
+            ConstructorInfo con = typeof(TestAttribute)
+                .GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
                 .First();
 
             AssertExtensions.Throws<ArgumentException>(
@@ -1043,9 +1042,8 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(NotSupportedObject_Others_TestData))]
         public static void NotSupportedObjectInConstructorArgs_ThrowsArgumentException(object value)
         {
-            ConstructorInfo con = typeof(TestAttribute).GetConstructor(
-                new Type[] { typeof(object) }
-            );
+            ConstructorInfo con = typeof(TestAttribute)
+                .GetConstructor(new Type[] { typeof(object) });
             object[] constructorArgs = new object[] { value };
 
             AssertExtensions.Throws<ArgumentException>(
@@ -1286,9 +1284,8 @@ namespace System.Reflection.Emit.Tests
             object value
         )
         {
-            ConstructorInfo con = typeof(TestAttribute).GetConstructor(
-                new Type[] { typeof(object) }
-            );
+            ConstructorInfo con = typeof(TestAttribute)
+                .GetConstructor(new Type[] { typeof(object) });
             object[] constructorArgs = new object[] { value };
 
             AssertExtensions.Throws<ArgumentException>(
@@ -1336,9 +1333,8 @@ namespace System.Reflection.Emit.Tests
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
             TypeBuilder type = assembly.DefineDynamicModule("DynamicModule")
                 .DefineType("DynamicType");
-            ConstructorInfo con = typeof(TestAttribute).GetConstructor(
-                new Type[] { typeof(object) }
-            );
+            ConstructorInfo con = typeof(TestAttribute)
+                .GetConstructor(new Type[] { typeof(object) });
             object[] constructorArgs = new object[] { type };
 
             CustomAttributeBuilder attribute = new CustomAttributeBuilder(con, constructorArgs);

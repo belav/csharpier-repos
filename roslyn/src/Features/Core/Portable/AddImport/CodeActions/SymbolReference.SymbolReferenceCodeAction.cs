@@ -29,9 +29,9 @@ namespace Microsoft.CodeAnalysis.AddImport
             > ComputePreviewOperationsAsync(CancellationToken cancellationToken)
             {
                 var operation = await GetChangeSolutionOperationAsync(
-                        isPreview: true,
-                        cancellationToken
-                    )
+                    isPreview: true,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (operation is null)
                 {
@@ -46,9 +46,9 @@ namespace Microsoft.CodeAnalysis.AddImport
             )
             {
                 var operation = await GetChangeSolutionOperationAsync(
-                        isPreview: false,
-                        cancellationToken
-                    )
+                    isPreview: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (operation is null)
                 {
@@ -70,10 +70,10 @@ namespace Microsoft.CodeAnalysis.AddImport
                 // are necessary, the call to 'UpdateProjectAsync' will return null, in which case we fall back to just
                 // returning the updated document with its text changes.
                 var updatedProject = await UpdateProjectAsync(
-                        updatedDocument.Project,
-                        isPreview,
-                        cancellationToken
-                    )
+                    updatedDocument.Project,
+                    isPreview,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return updatedProject
                     ?? new ApplyChangesOperation(updatedDocument.Project.Solution);

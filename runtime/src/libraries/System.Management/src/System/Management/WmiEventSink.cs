@@ -87,19 +87,17 @@ namespace System.Management
                     if (
                         (
                             0
-                            == string.Compare(
-                                this.path.Server,
-                                ".",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(this.path.Server, ".", StringComparison.OrdinalIgnoreCase)
                         )
                         || (
                             0
-                            == string.Compare(
-                                this.path.Server,
-                                System.Environment.MachineName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            == string
+                                .Compare(
+                                    this.path.Server,
+                                    System.Environment.MachineName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                     {
@@ -115,19 +113,21 @@ namespace System.Management
                         if (
                             (
                                 0
-                                == string.Compare(
-                                    this.scope.Path.Server,
-                                    ".",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                == string
+                                    .Compare(
+                                        this.scope.Path.Server,
+                                        ".",
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                             || (
                                 0
-                                == string.Compare(
-                                    this.scope.Path.Server,
-                                    System.Environment.MachineName,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                == string
+                                    .Compare(
+                                        this.scope.Path.Server,
+                                        System.Environment.MachineName,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                         )
                         {

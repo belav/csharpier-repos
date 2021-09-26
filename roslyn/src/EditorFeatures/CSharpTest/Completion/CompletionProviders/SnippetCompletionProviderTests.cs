@@ -42,10 +42,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     + Environment.NewLine
                     + MockSnippetInfoService.SnippetDescription
                     + Environment.NewLine
-                    + string.Format(
-                        FeaturesResources.Note_colon_Tab_twice_to_insert_the_0_snippet,
-                        MockSnippetInfoService.SnippetShortcut
-                    ),
+                    + string
+                        .Format(
+                            FeaturesResources.Note_colon_Tab_twice_to_insert_the_0_snippet,
+                            MockSnippetInfoService.SnippetShortcut
+                        ),
                 SourceCodeKind.Regular
             );
 
@@ -270,11 +271,12 @@ class C
             public bool SnippetShortcutExists_NonBlocking(string shortcut)
             {
                 return string.Equals(shortcut, SnippetShortcut, StringComparison.OrdinalIgnoreCase)
-                    || string.Equals(
-                        shortcut,
-                        PreProcessorSnippetShortcut,
-                        StringComparison.OrdinalIgnoreCase
-                    );
+                    || string
+                        .Equals(
+                            shortcut,
+                            PreProcessorSnippetShortcut,
+                            StringComparison.OrdinalIgnoreCase
+                        );
             }
 
             public bool ShouldFormatSnippet(SnippetInfo snippetInfo) => false;

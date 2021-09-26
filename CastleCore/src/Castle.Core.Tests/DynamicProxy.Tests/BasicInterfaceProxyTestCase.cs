@@ -251,9 +251,9 @@ namespace Castle.DynamicProxy.Tests
         public void Should_implement_explicitly_duplicate_interface_members()
         {
             Type type = generator.CreateInterfaceProxyWithoutTarget(
-                    typeof(IIdenticalOne),
-                    new[] { typeof(IIdenticalTwo) }
-                )
+                typeof(IIdenticalOne),
+                new[] { typeof(IIdenticalTwo) }
+            )
                 .GetType();
             MethodInfo method = type.GetMethod("Foo", BindingFlags.Instance | BindingFlags.Public);
             Assert.IsNotNull(method);
@@ -516,11 +516,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Cannot_proxy_generic_interface_with_type_argument_that_has_inaccessible_type_argument()
         {
-            var expected = string.Format(
-                "Can not create proxy for type {0} because type {1} is not accessible. Make it public, or internal",
-                typeof(IList<IList<PrivateInterface>>).FullName,
-                typeof(PrivateInterface).FullName
-            );
+            var expected = string
+                .Format(
+                    "Can not create proxy for type {0} because type {1} is not accessible. Make it public, or internal",
+                    typeof(IList<IList<PrivateInterface>>).FullName,
+                    typeof(PrivateInterface).FullName
+                );
 
             var exception = Assert.Throws<ArgumentException>(
                 () =>

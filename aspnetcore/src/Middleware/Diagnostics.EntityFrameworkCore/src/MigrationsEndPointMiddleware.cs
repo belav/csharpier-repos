@@ -84,10 +84,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 
                         context.Response.StatusCode = (int)HttpStatusCode.NoContent;
                         context.Response.Headers.Add("Pragma", new[] { "no-cache" });
-                        context.Response.Headers.Add(
-                            "Cache-Control",
-                            new[] { "no-cache,no-store" }
-                        );
+                        context.Response.Headers
+                            .Add("Cache-Control", new[] { "no-cache,no-store" });
 
                         _logger.MigrationsApplied(dbName);
                     }
@@ -126,7 +124,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
             }
 
             // Look for DbContext classes registered in the service provider
-            var registeredContexts = context.RequestServices.GetServices<DbContextOptions>()
+            var registeredContexts = context.RequestServices
+                .GetServices<DbContextOptions>()
                 .Select(o => o.ContextType);
 
             if (

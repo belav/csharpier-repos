@@ -432,11 +432,12 @@ namespace Newtonsoft.Json.Tests
             catch (Exception ex)
             {
                 throw new Exception(
-                    string.Format(
-                        "Exception of type {0} expected; got exception of type {1}.",
-                        typeof(TException).Name,
-                        ex.GetType().Name
-                    ),
+                    string
+                        .Format(
+                            "Exception of type {0} expected; got exception of type {1}.",
+                            typeof(TException).Name,
+                            ex.GetType().Name
+                        ),
                     ex
                 );
             }
@@ -489,11 +490,12 @@ namespace Newtonsoft.Json.Tests
             catch (Exception ex)
             {
                 throw new Exception(
-                    string.Format(
-                        "Exception of type {0} expected; got exception of type {1}.",
-                        typeof(TException).Name,
-                        ex.GetType().Name
-                    ),
+                    string
+                        .Format(
+                            "Exception of type {0} expected; got exception of type {1}.",
+                            typeof(TException).Name,
+                            ex.GetType().Name
+                        ),
                     ex
                 );
             }

@@ -182,11 +182,12 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(
-                string.Format(
-                    xml,
-                    EncryptedXml.XmlEncNamespaceUrl,
-                    Convert.ToBase64String(cipherData)
-                )
+                string
+                    .Format(
+                        xml,
+                        EncryptedXml.XmlEncNamespaceUrl,
+                        Convert.ToBase64String(cipherData)
+                    )
             );
             return new object[] { xmlDocument.DocumentElement, cipherData };
         }

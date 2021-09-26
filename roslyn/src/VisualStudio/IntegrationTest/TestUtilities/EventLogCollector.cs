@@ -157,9 +157,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
                             // If the entry doesn't have a valid BucketId, we don't want it to count towards the maxCount we send
                             if (
-                                !string.IsNullOrWhiteSpace(
-                                    GetEventRecordPropertyToString(eventLogRecord, FaultBucketIndex)
-                                )
+                                !string
+                                    .IsNullOrWhiteSpace(
+                                        GetEventRecordPropertyToString(
+                                            eventLogRecord,
+                                            FaultBucketIndex
+                                        )
+                                    )
                             )
                             {
                                 watsonEntriesCount++;
@@ -307,10 +311,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         private static bool IsValidWatsonEntry(EventRecord eventLogRecord)
         {
             if (
-                StringComparer.InvariantCultureIgnoreCase.Equals(
-                    eventLogRecord.ProviderName,
-                    WatsonProviderName
-                )
+                StringComparer.InvariantCultureIgnoreCase
+                    .Equals(eventLogRecord.ProviderName, WatsonProviderName)
                 && (eventLogRecord.Id == WatsonEventId)
                 && (eventLogRecord.Properties.Count >= WatsonEventLogEntryPropertyCount)
                 && (
@@ -346,10 +348,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         )
         {
             if (
-                StringComparer.InvariantCultureIgnoreCase.Equals(
-                    eventLogRecord.ProviderName,
-                    DotNetProviderName
-                ) && s_dotNetEventId.Contains(eventLogRecord.Id)
+                StringComparer.InvariantCultureIgnoreCase
+                    .Equals(eventLogRecord.ProviderName, DotNetProviderName)
+                && s_dotNetEventId.Contains(eventLogRecord.Id)
             )
             {
                 dotNetEntry = new FeedbackItemDotNetEntry(eventLogRecord);

@@ -95,8 +95,7 @@ namespace System.Threading.Tests
             )
             {
                 const int Iters = 10;
-                Task.WaitAll(
-                    Task.Factory.StartNew(
+                Task.WaitAll(Task.Factory.StartNew(
                         () =>
                         {
                             for (int i = 0; i < Iters; i++)
@@ -108,8 +107,7 @@ namespace System.Threading.Tests
                         CancellationToken.None,
                         TaskCreationOptions.LongRunning,
                         TaskScheduler.Default
-                    ),
-                    Task.Factory.StartNew(
+                    ), Task.Factory.StartNew(
                         () =>
                         {
                             for (int i = 0; i < Iters; i++)
@@ -121,8 +119,7 @@ namespace System.Threading.Tests
                         CancellationToken.None,
                         TaskCreationOptions.LongRunning,
                         TaskScheduler.Default
-                    )
-                );
+                    ));
             }
         }
     }

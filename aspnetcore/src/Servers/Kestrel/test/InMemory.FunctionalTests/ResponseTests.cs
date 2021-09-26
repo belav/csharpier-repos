@@ -180,10 +180,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                             var data = new byte[1024 * 1024 * 10];
 
                             var timerTask = Task.Delay(TimeSpan.FromSeconds(1));
-                            var writeTask = context.Response.BodyWriter.WriteAsync(
-                                    new Memory<byte>(data, 0, data.Length),
-                                    cts.Token
-                                )
+                            var writeTask = context.Response.BodyWriter
+                                .WriteAsync(new Memory<byte>(data, 0, data.Length), cts.Token)
                                 .AsTask()
                                 .DefaultTimeout();
                             var completedTask = await Task.WhenAny(writeTask, timerTask);
@@ -192,10 +190,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                             {
                                 await writeTask;
                                 timerTask = Task.Delay(TimeSpan.FromSeconds(1));
-                                writeTask = context.Response.BodyWriter.WriteAsync(
-                                        new Memory<byte>(data, 0, data.Length),
-                                        cts.Token
-                                    )
+                                writeTask = context.Response.BodyWriter
+                                    .WriteAsync(new Memory<byte>(data, 0, data.Length), cts.Token)
                                     .AsTask()
                                     .DefaultTimeout();
                                 completedTask = await Task.WhenAny(writeTask, timerTask);
@@ -650,8 +646,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                     var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => responseWriteTcs.Task
-                        )
+                        () => responseWriteTcs.Task
+                    )
                         .DefaultTimeout();
                     Assert.Equal(
                         CoreStrings.FormatWritingToResponseBodyNotSupported(statusCode),
@@ -702,8 +698,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                     var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => responseWriteTcs.Task
-                        )
+                        () => responseWriteTcs.Task
+                    )
                         .DefaultTimeout();
                     Assert.Equal(
                         CoreStrings.FormatWritingToResponseBodyNotSupported(205),
@@ -757,9 +753,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             );
             var mockKestrelTrace = new Mock<IKestrelTrace>();
             mockKestrelTrace.Setup(
-                    trace =>
-                        trace.ConnectionHeadResponseBodyWrite(It.IsAny<string>(), response.Length)
-                )
+                trace => trace.ConnectionHeadResponseBodyWrite(It.IsAny<string>(), response.Length)
+            )
                 .Callback<string, long>((connectionId, count) => logTcs.SetResult());
 
             await using (
@@ -813,12 +808,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     async httpContext =>
                     {
                         httpContext.Response.ContentLength = 11;
-                        await httpContext.Response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("hello,"), 0, 6)
-                        );
-                        await httpContext.Response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes(" world"), 0, 6)
-                        );
+                        await httpContext.Response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("hello,"), 0, 6));
+                        await httpContext.Response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes(" world"), 0, 6));
                     },
                     serviceContext
                 )
@@ -904,9 +897,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     {
                         var response = Encoding.ASCII.GetBytes("hello, world");
                         httpContext.Response.ContentLength = 5;
-                        await httpContext.Response.BodyWriter.WriteAsync(
-                            new Memory<byte>(response, 0, response.Length)
-                        );
+                        await httpContext.Response.BodyWriter
+                            .WriteAsync(new Memory<byte>(response, 0, response.Length));
                     },
                     serviceContext
                 )
@@ -947,9 +939,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     {
                         var response = Encoding.ASCII.GetBytes("hello, world");
                         httpContext.Response.ContentLength = 5;
-                        await httpContext.Response.BodyWriter.WriteAsync(
-                            new Memory<byte>(response, 0, response.Length)
-                        );
+                        await httpContext.Response.BodyWriter
+                            .WriteAsync(new Memory<byte>(response, 0, response.Length));
                     },
                     serviceContext
                 )
@@ -987,13 +978,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             );
             var mockTrace = new Mock<IKestrelTrace>();
             mockTrace.Setup(
-                    trace =>
-                        trace.ApplicationError(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<InvalidOperationException>()
-                        )
-                )
+                trace =>
+                    trace.ApplicationError(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<InvalidOperationException>()
+                    )
+            )
                 .Callback<string, string, Exception>(
                     (connectionId, requestId, ex) =>
                     {
@@ -1043,10 +1034,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         It.IsAny<string>(),
                         It.Is<InvalidOperationException>(
                             ex =>
-                                ex.Message.Equals(
-                                    CoreStrings.FormatTooFewBytesWritten(12, 13),
-                                    StringComparison.Ordinal
-                                )
+                                ex.Message
+                                    .Equals(
+                                        CoreStrings.FormatTooFewBytesWritten(12, 13),
+                                        StringComparison.Ordinal
+                                    )
                         )
                     )
             );
@@ -1062,13 +1054,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             );
             var mockTrace = new Mock<IKestrelTrace>();
             mockTrace.Setup(
-                    trace =>
-                        trace.ApplicationError(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<InvalidOperationException>()
-                        )
-                )
+                trace =>
+                    trace.ApplicationError(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<InvalidOperationException>()
+                    )
+            )
                 .Callback<string, string, Exception>(
                     (connectionId, requestId, ex) =>
                     {
@@ -1122,10 +1114,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         It.IsAny<string>(),
                         It.Is<InvalidOperationException>(
                             ex =>
-                                ex.Message.Equals(
-                                    CoreStrings.FormatTooFewBytesWritten(12, 13),
-                                    StringComparison.Ordinal
-                                )
+                                ex.Message
+                                    .Equals(
+                                        CoreStrings.FormatTooFewBytesWritten(12, 13),
+                                        StringComparison.Ordinal
+                                    )
                         )
                     )
             );
@@ -1440,9 +1433,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     async httpContext =>
                     {
                         httpContext.Response.ContentLength = 12;
-                        await httpContext.Response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("hello, world"), 0, 12)
-                        );
+                        await httpContext.Response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("hello, world"), 0, 12)
+                            );
                         await flushed.Task;
                     },
                     serviceContext
@@ -1718,9 +1712,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         httpContext.Response.ContentLength = response.Length - 1;
 
                         // If OnStarting is not run before verifying writes, an error response will be sent.
-                        await httpContext.Response.BodyWriter.WriteAsync(
-                            new Memory<byte>(response, 0, response.Length)
-                        );
+                        await httpContext.Response.BodyWriter
+                            .WriteAsync(new Memory<byte>(response, 0, response.Length));
                     },
                     serviceContext
                 )
@@ -1769,9 +1762,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         httpContext.Response.ContentLength = response.Length - 1;
 
                         // If OnStarting is not run before verifying writes, an error response will be sent.
-                        await httpContext.Response.Body.WriteAsync(
-                            new Memory<byte>(response, 0, response.Length)
-                        );
+                        await httpContext.Response.Body
+                            .WriteAsync(new Memory<byte>(response, 0, response.Length));
                     },
                     serviceContext
                 )
@@ -1820,16 +1812,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         httpContext.Response.ContentLength = response.Length - 1;
 
                         // If OnStarting is not run before verifying writes, an error response will be sent.
-                        await httpContext.Response.BodyWriter.WriteAsync(
-                            new Memory<byte>(response, 0, response.Length / 2)
-                        );
-                        await httpContext.Response.BodyWriter.WriteAsync(
-                            new Memory<byte>(
-                                response,
-                                response.Length / 2,
-                                response.Length - response.Length / 2
-                            )
-                        );
+                        await httpContext.Response.BodyWriter
+                            .WriteAsync(new Memory<byte>(response, 0, response.Length / 2));
+                        await httpContext.Response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(
+                                    response,
+                                    response.Length / 2,
+                                    response.Length - response.Length / 2
+                                )
+                            );
                     },
                     serviceContext
                 )
@@ -1880,16 +1872,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         httpContext.Response.ContentLength = response.Length - 1;
 
                         // If OnStarting is not run before verifying writes, an error response will be sent.
-                        await httpContext.Response.Body.WriteAsync(
-                            new Memory<byte>(response, 0, response.Length / 2)
-                        );
-                        await httpContext.Response.Body.WriteAsync(
-                            new Memory<byte>(
-                                response,
-                                response.Length / 2,
-                                response.Length - response.Length / 2
-                            )
-                        );
+                        await httpContext.Response.Body
+                            .WriteAsync(new Memory<byte>(response, 0, response.Length / 2));
+                        await httpContext.Response.Body
+                            .WriteAsync(
+                                new Memory<byte>(
+                                    response,
+                                    response.Length / 2,
+                                    response.Length - response.Length / 2
+                                )
+                            );
                     },
                     serviceContext
                 )
@@ -1935,9 +1927,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         httpContext.Response.ContentLength = response.Length - 1;
 
                         // If OnStarting is not run before verifying writes, an error response will be sent.
-                        return httpContext.Response.BodyWriter.WriteAsync(
-                                new Memory<byte>(response, 0, response.Length)
-                            )
+                        return httpContext.Response.BodyWriter
+                            .WriteAsync(new Memory<byte>(response, 0, response.Length))
                             .AsTask();
                     },
                     new TestServiceContext(LoggerFactory)
@@ -1982,16 +1973,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         httpContext.Response.ContentLength = response.Length - 1;
 
                         // If OnStarting is not run before verifying writes, an error response will be sent.
-                        await httpContext.Response.BodyWriter.WriteAsync(
-                            new Memory<byte>(response, 0, response.Length / 2)
-                        );
-                        await httpContext.Response.BodyWriter.WriteAsync(
-                            new Memory<byte>(
-                                response,
-                                response.Length / 2,
-                                response.Length - response.Length / 2
-                            )
-                        );
+                        await httpContext.Response.BodyWriter
+                            .WriteAsync(new Memory<byte>(response, 0, response.Length / 2));
+                        await httpContext.Response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(
+                                    response,
+                                    response.Length / 2,
+                                    response.Length - response.Length / 2
+                                )
+                            );
                     },
                     new TestServiceContext(LoggerFactory)
                 )
@@ -2348,7 +2339,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     {
                         Assert.Equal(
                             0,
-                            await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1)
+                            await httpContext.Request.Body
+                                .ReadAsync(new byte[1], 0, 1)
                                 .DefaultTimeout()
                         );
                     },
@@ -2419,10 +2411,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         using (var reader = new StreamReader(request.Body, Encoding.ASCII))
                         {
                             var statusString = await reader.ReadLineAsync();
-                            response.StatusCode = int.Parse(
-                                statusString,
-                                CultureInfo.InvariantCulture
-                            );
+                            response.StatusCode = int
+                                .Parse(statusString, CultureInfo.InvariantCulture);
                         }
                     },
                     testContext
@@ -2473,7 +2463,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     async httpContext =>
                     {
                         var request = httpContext.Request;
-                        var stream = await httpContext.Features.Get<IHttpUpgradeFeature>()
+                        var stream = await httpContext.Features
+                            .Get<IHttpUpgradeFeature>()
                             .UpgradeAsync();
                         var response = Encoding.ASCII.GetBytes("hello, world");
                         await stream.WriteAsync(response, 0, response.Length);
@@ -2682,9 +2673,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                            );
                     },
                     testContext
                 )
@@ -2735,9 +2727,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                            );
                     },
                     testContext
                 )
@@ -2789,9 +2782,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                            );
                     },
                     testContext
                 )
@@ -2841,9 +2835,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         );
 
                         response.Headers["Content-Length"] = new[] { "11" };
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                            );
                         throw new Exception();
                     },
                     testContext
@@ -2889,9 +2884,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         );
 
                         response.Headers["Content-Length"] = new[] { "11" };
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello"), 0, 5)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello"), 0, 5));
                         throw new Exception();
                     },
                     testContext
@@ -2926,9 +2920,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     {
                         var response = httpContext.Response;
                         response.Headers["Content-Length"] = new[] { "11" };
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                            );
                     },
                     testContext
                 )
@@ -3041,9 +3036,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             Assert.Single(
                 LogMessages.Where(
                     m =>
-                        m.Message.Contains(
-                            "The connection was aborted by the application via IConnectionLifetimeFeature.Abort()."
-                        )
+                        m.Message
+                            .Contains(
+                                "The connection was aborted by the application via IConnectionLifetimeFeature.Abort()."
+                            )
                 )
             );
         }
@@ -3660,11 +3656,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                                 context.Response.Body.Write(Encoding.ASCII.GetBytes("What!?"), 0, 6)
                         );
                         Assert.Equal(CoreStrings.SynchronousWritesDisallowed, ioEx.Message);
-                        await context.Response.Body.WriteAsync(
-                            Encoding.ASCII.GetBytes("Hello1"),
-                            0,
-                            6
-                        );
+                        await context.Response.Body
+                            .WriteAsync(Encoding.ASCII.GetBytes("Hello1"), 0, 6);
                     },
                     new TestServiceContext(LoggerFactory)
                 )
@@ -3777,9 +3770,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         );
                         Assert.Equal(CoreStrings.SynchronousWritesDisallowed, ioEx.Message);
 
-                        return context.Response.BodyWriter.WriteAsync(
-                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello!"), 0, 6)
-                            )
+                        return context.Response.BodyWriter
+                            .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello!"), 0, 6))
                             .AsTask();
                     },
                     testContext
@@ -4027,9 +4019,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     async httpContext =>
                     {
                         httpContext.Response.ContentLength = 12;
-                        await httpContext.Response.Body.WriteAsync(
-                            Encoding.ASCII.GetBytes("hello, world")
-                        );
+                        await httpContext.Response.Body
+                            .WriteAsync(Encoding.ASCII.GetBytes("hello, world"));
                     },
                     new TestServiceContext(LoggerFactory)
                 )
@@ -4068,9 +4059,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         response.BodyWriter.Advance(8);
 
                         await response.Body.WriteAsync(Encoding.ASCII.GetBytes("hello, world\r\n"));
-                        await response.BodyWriter.WriteAsync(
-                            Encoding.ASCII.GetBytes("hello, world\r\n")
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(Encoding.ASCII.GetBytes("hello, world\r\n"));
                         await response.WriteAsync("hello, world");
                     },
                     new TestServiceContext(LoggerFactory)
@@ -4688,15 +4678,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     options =>
                     {
                         options.EnableAltSvc = true;
-                        options.CodeBackedListenOptions.Add(
-                            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
-                        );
-                        options.CodeBackedListenOptions.Add(
-                            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 1))
-                            {
-                                Protocols = protocols
-                            }
-                        );
+                        options.CodeBackedListenOptions
+                            .Add(new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)));
+                        options.CodeBackedListenOptions
+                            .Add(
+                                new ListenOptions(new IPEndPoint(IPAddress.Loopback, 1))
+                                {
+                                    Protocols = protocols
+                                }
+                            );
                     },
                     services => { }
                 )
@@ -4747,9 +4737,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     handler,
                     new TestServiceContext(loggerFactory),
                     options =>
-                        options.CodeBackedListenOptions.Add(
-                            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
-                        ),
+                        options.CodeBackedListenOptions
+                            .Add(new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))),
                     services => services.AddSingleton(mockHttpContextFactory.Object)
                 )
             )
@@ -4859,10 +4848,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 throw new InvalidDataException($"No StatusCode found in '{response}'");
             }
 
-            return (HttpStatusCode)int.Parse(
-                response.Substring(statusStart, statusLength),
-                CultureInfo.InvariantCulture
-            );
+            return (HttpStatusCode)int
+                .Parse(response.Substring(statusStart, statusLength), CultureInfo.InvariantCulture);
         }
     }
 }

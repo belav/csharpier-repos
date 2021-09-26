@@ -51,7 +51,9 @@ namespace System.Net.Security.Tests
                     false
                 ),
                 ssl2.AuthenticateAsServerAsync(cert, false, GetSslProtocols(), false)
-            }.WhenAllOrAnyFailed().ConfigureAwait(false);
+            }
+                .WhenAllOrAnyFailed()
+                .ConfigureAwait(false);
 
             if (GetSslProtocols() == SslProtocols.Tls13)
             {

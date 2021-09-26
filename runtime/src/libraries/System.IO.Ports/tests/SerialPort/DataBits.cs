@@ -357,13 +357,8 @@ namespace System.IO.Ports.Tests
                     int bytesToRead = 0;
 
                     com2.DiscardInBuffer();
-                    beginWriteResult = com1.BaseStream.BeginWrite(
-                        xmitBytes,
-                        0,
-                        xmitBytes.Length,
-                        null,
-                        null
-                    );
+                    beginWriteResult = com1.BaseStream
+                        .BeginWrite(xmitBytes, 0, xmitBytes.Length, null, null);
                     while (0 == (bytesToRead = com2.BytesToRead)) { }
 
                     sw.Start();

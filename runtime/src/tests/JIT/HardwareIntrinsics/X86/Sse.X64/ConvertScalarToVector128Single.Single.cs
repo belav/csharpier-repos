@@ -189,10 +189,11 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Sse.X64.ConvertScalarToVector128Single(
-                Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr),
-                _dataTable.inData2
-            );
+            var result = Sse.X64
+                .ConvertScalarToVector128Single(
+                    Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr),
+                    _dataTable.inData2
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inData2, _dataTable.outArrayPtr);
@@ -202,10 +203,11 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = Sse.X64.ConvertScalarToVector128Single(
-                Sse.LoadVector128((Single*)(_dataTable.inArray1Ptr)),
-                _dataTable.inData2
-            );
+            var result = Sse.X64
+                .ConvertScalarToVector128Single(
+                    Sse.LoadVector128((Single*)(_dataTable.inArray1Ptr)),
+                    _dataTable.inData2
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inData2, _dataTable.outArrayPtr);
@@ -215,10 +217,11 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_LoadAligned));
 
-            var result = Sse.X64.ConvertScalarToVector128Single(
-                Sse.LoadAlignedVector128((Single*)(_dataTable.inArray1Ptr)),
-                _dataTable.inData2
-            );
+            var result = Sse.X64
+                .ConvertScalarToVector128Single(
+                    Sse.LoadAlignedVector128((Single*)(_dataTable.inArray1Ptr)),
+                    _dataTable.inData2
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inData2, _dataTable.outArrayPtr);
@@ -228,7 +231,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Sse.X64).GetMethod(
+            var result = typeof(Sse.X64)
+                .GetMethod(
                     nameof(Sse.X64.ConvertScalarToVector128Single),
                     new Type[] { typeof(Vector128<Single>), typeof(Int64) }
                 )
@@ -249,7 +253,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse.X64).GetMethod(
+            var result = typeof(Sse.X64)
+                .GetMethod(
                     nameof(Sse.X64.ConvertScalarToVector128Single),
                     new Type[] { typeof(Vector128<Single>), typeof(Int64) }
                 )
@@ -270,7 +275,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse.X64).GetMethod(
+            var result = typeof(Sse.X64)
+                .GetMethod(
                     nameof(Sse.X64.ConvertScalarToVector128Single),
                     new Type[] { typeof(Vector128<Single>), typeof(Int64) }
                 )
@@ -458,14 +464,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!Succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse.X64)}.{nameof(Sse.X64.ConvertScalarToVector128Single)}<Single>(Vector128<Single>, Int64): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse.X64)}.{nameof(Sse.X64.ConvertScalarToVector128Single)}<Single>(Vector128<Single>, Int64): {method} failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }
         }

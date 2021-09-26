@@ -22,8 +22,8 @@ namespace Microsoft.AspNetCore.Mvc
             foreach (var property in formOptionsProperties)
             {
                 var formLimitAttributeProperty = formLimitsAttributeProperties.Where(
-                        pi => property.Name == pi.Name && pi.PropertyType == property.PropertyType
-                    )
+                    pi => property.Name == pi.Name && pi.PropertyType == property.PropertyType
+                )
                     .SingleOrDefault();
                 Assert.NotNull(formLimitAttributeProperty);
             }
@@ -44,10 +44,10 @@ namespace Microsoft.AspNetCore.Mvc
             foreach (var formOptionsProperty in formOptionsProperties)
             {
                 var formLimitsAttributeProperty = formLimitsAttributeProperties.Where(
-                        pi =>
-                            pi.Name == formOptionsProperty.Name
-                            && pi.PropertyType == formOptionsProperty.PropertyType
-                    )
+                    pi =>
+                        pi.Name == formOptionsProperty.Name
+                        && pi.PropertyType == formOptionsProperty.PropertyType
+                )
                     .SingleOrDefault();
 
                 Assert.Equal(

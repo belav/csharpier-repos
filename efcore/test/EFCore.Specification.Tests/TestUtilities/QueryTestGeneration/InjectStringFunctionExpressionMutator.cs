@@ -34,8 +34,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
             };
 
             var methodInfos = methodNames.Select(
-                    n => typeof(string).GetRuntimeMethod(n, new Type[] {  })
-                )
+                n => typeof(string).GetRuntimeMethod(n, new Type[] {  })
+            )
                 .ToList();
             var methodInfo = methodInfos[random.Next(methodInfos.Count)];
 

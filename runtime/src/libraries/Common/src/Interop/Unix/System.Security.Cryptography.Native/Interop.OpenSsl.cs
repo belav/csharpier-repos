@@ -215,20 +215,22 @@ internal static partial class Interop
                             );
                             unsafe
                             {
-                                Interop.Ssl.SslCtxSetAlpnSelectCb(
-                                    innerContext,
-                                    &AlpnServerSelectCallback,
-                                    GCHandle.ToIntPtr(alpnHandle)
-                                );
+                                Interop.Ssl
+                                    .SslCtxSetAlpnSelectCb(
+                                        innerContext,
+                                        &AlpnServerSelectCallback,
+                                        GCHandle.ToIntPtr(alpnHandle)
+                                    );
                             }
                         }
                         else
                         {
                             if (
-                                Interop.Ssl.SslCtxSetAlpnProtos(
-                                    innerContext,
-                                    sslAuthenticationOptions.ApplicationProtocols
-                                ) != 0
+                                Interop.Ssl
+                                    .SslCtxSetAlpnProtos(
+                                        innerContext,
+                                        sslAuthenticationOptions.ApplicationProtocols
+                                    ) != 0
                             )
                             {
                                 throw CreateSslException(SR.net_alpn_config_failed);

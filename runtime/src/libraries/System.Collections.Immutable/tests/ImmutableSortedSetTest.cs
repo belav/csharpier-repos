@@ -98,7 +98,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ChangeSortComparer()
         {
-            var ordinalSet = ImmutableSortedSet<string>.Empty.WithComparer(StringComparer.Ordinal)
+            var ordinalSet = ImmutableSortedSet<string>.Empty
+                .WithComparer(StringComparer.Ordinal)
                 .Add("apple")
                 .Add("APPLE");
             Assert.Equal(2, ordinalSet.Count); // claimed count
@@ -191,9 +192,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void IndexGetTest()
         {
-            var set = ImmutableSortedSet<int>.Empty.Union(
-                Enumerable.Range(1, 10).Select(n => n * 10)
-            ); // 10, 20, 30, ... 100
+            var set = ImmutableSortedSet<int>.Empty
+                .Union(Enumerable.Range(1, 10).Select(n => n * 10)); // 10, 20, 30, ... 100
 
             int i = 0;
             foreach (var item in set)
@@ -373,11 +373,12 @@ namespace System.Collections.Immutable.Tests
                 "_root"
             );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                    == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(
+                    pr =>
+                        pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                        == DebuggerBrowsableState.RootHidden
+                );
             string[] items = itemProperty.GetValue(info.Instance) as string[];
             Assert.Equal(set, items);
         }

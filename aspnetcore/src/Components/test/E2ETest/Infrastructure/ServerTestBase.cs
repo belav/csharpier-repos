@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure
         {
             // Clear logs - we check these during tests in some cases.
             // Make sure each test starts clean.
-            ((IJavaScriptExecutor)Browser).ExecuteScript("console.clear()");
+            ((IJavaScriptExecutor)Browser)
+                .ExecuteScript("console.clear()");
         }
     }
 }

@@ -18,9 +18,8 @@ namespace ProjectTemplates.Tests.Infrastructure
 {
     public class PlaywrightFixture<TTestAssemblyType> : IAsyncLifetime
     {
-        private static readonly bool _isCIEnvironment = !string.IsNullOrWhiteSpace(
-            Environment.GetEnvironmentVariable("ContinuousIntegrationBuild")
-        );
+        private static readonly bool _isCIEnvironment = !string
+            .IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ContinuousIntegrationBuild"));
 
         private readonly IMessageSink _diagnosticsMessageSink;
         private readonly IConfiguration _configuration;
@@ -43,9 +42,8 @@ namespace ProjectTemplates.Tests.Infrastructure
                 _ => null
             };
 
-            var builder = new ConfigurationBuilder().AddJsonFile(
-                    Path.Combine(basePath, "playwrightSettings.json")
-                )
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile(Path.Combine(basePath, "playwrightSettings.json"))
                 .AddJsonFile(
                     Path.Combine(basePath, $"playwrightSettings.{os}.json"),
                     optional: true
@@ -54,9 +52,9 @@ namespace ProjectTemplates.Tests.Infrastructure
             if (_isCIEnvironment)
             {
                 builder.AddJsonFile(
-                        Path.Combine(basePath, "playwrightSettings.ci.json"),
-                        optional: true
-                    )
+                    Path.Combine(basePath, "playwrightSettings.ci.json"),
+                    optional: true
+                )
                     .AddJsonFile(
                         Path.Combine(basePath, $"playwrightSettings.ci.{os}.json"),
                         optional: true

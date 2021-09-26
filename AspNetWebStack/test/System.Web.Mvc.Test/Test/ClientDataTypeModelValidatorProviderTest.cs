@@ -237,10 +237,8 @@ namespace System.Web.Mvc.Test
             ControllerContext controllerContext = new ControllerContext();
 
             // Act
-            ModelValidator[] validators = new ClientDataTypeModelValidatorProvider().GetValidators(
-                    metadata,
-                    controllerContext
-                )
+            ModelValidator[] validators = new ClientDataTypeModelValidatorProvider()
+                .GetValidators(metadata, controllerContext)
                 .ToArray();
             ModelValidationResult[] results = validators.SelectMany(o => o.Validate(model))
                 .ToArray();

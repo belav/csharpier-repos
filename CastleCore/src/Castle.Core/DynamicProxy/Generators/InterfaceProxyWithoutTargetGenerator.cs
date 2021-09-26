@@ -69,11 +69,12 @@ namespace Castle.DynamicProxy.Generators
             INamingScope namingScope
         )
         {
-            return base.GetTypeImplementerMapping(
-                proxyTargetType: targetType,
-                out contributors,
-                namingScope
-            );
+            return base
+                .GetTypeImplementerMapping(
+                    proxyTargetType: targetType,
+                    out contributors,
+                    namingScope
+                );
         }
     }
 }

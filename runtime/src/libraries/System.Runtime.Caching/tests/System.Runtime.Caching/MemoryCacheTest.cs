@@ -61,10 +61,8 @@ namespace MonoTests.System.Runtime.Caching
                 // On non-windows, we only support .Net 5.0 and higher
                 if (
                     Environment.Version.Major >= 5
-                    || RuntimeInformation.FrameworkDescription.StartsWith(
-                        ".NET Core",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    || RuntimeInformation.FrameworkDescription
+                        .StartsWith(".NET Core", StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     return true;

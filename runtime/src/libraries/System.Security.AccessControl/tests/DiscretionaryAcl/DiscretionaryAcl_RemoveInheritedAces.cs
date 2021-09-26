@@ -89,7 +89,8 @@ namespace System.Security.AccessControl.Tests
             capacity = 5;
             sid = new SecurityIdentifier(
                 Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-            ).ToString();
+            )
+                .ToString();
             rawAcl = new RawAcl(revision, capacity);
             aceFlag = AceFlags.InheritanceFlags;
             accessMask = 1;
@@ -172,7 +173,8 @@ namespace System.Security.AccessControl.Tests
             capacity = 5;
             sid = new SecurityIdentifier(
                 Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-            ).ToString();
+            )
+                .ToString();
             rawAcl = new RawAcl(revision, capacity);
             aceFlag = AceFlags.InheritanceFlags | AceFlags.Inherited;
             accessMask = 1;

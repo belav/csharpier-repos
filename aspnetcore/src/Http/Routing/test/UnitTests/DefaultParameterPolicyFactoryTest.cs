@@ -258,10 +258,8 @@ namespace Microsoft.AspNetCore.Routing
         {
             // Arrange
             var options = new RouteOptions();
-            options.ConstraintMap.Add(
-                "customConstraintPolicy",
-                typeof(CustomParameterPolicyWithArguments)
-            );
+            options.ConstraintMap
+                .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithArguments));
 
             var services = new ServiceCollection();
             services.AddTransient<ITestService, TestService>();
@@ -285,10 +283,8 @@ namespace Microsoft.AspNetCore.Routing
         {
             // Arrange
             var options = new RouteOptions();
-            options.ConstraintMap.Add(
-                "customConstraintPolicy",
-                typeof(CustomParameterPolicyWithMultipleArguments)
-            );
+            options.ConstraintMap
+                .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithMultipleArguments));
 
             var services = new ServiceCollection();
             services.AddTransient<ITestService, TestService>();
@@ -316,10 +312,11 @@ namespace Microsoft.AspNetCore.Routing
         {
             // Arrange
             var options = new RouteOptions();
-            options.ConstraintMap.Add(
-                "customConstraintPolicy",
-                typeof(CustomParameterPolicyWithOnlyServiceArguments)
-            );
+            options.ConstraintMap
+                .Add(
+                    "customConstraintPolicy",
+                    typeof(CustomParameterPolicyWithOnlyServiceArguments)
+                );
 
             var services = new ServiceCollection();
             services.AddTransient<ITestService, TestService>();
@@ -345,10 +342,8 @@ namespace Microsoft.AspNetCore.Routing
         {
             // Arrange
             var options = new RouteOptions();
-            options.ConstraintMap.Add(
-                "customConstraintPolicy",
-                typeof(CustomParameterPolicyWithMultpleCtors)
-            );
+            options.ConstraintMap
+                .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithMultpleCtors));
 
             var services = new ServiceCollection();
             services.AddTransient<ITestService, TestService>();
@@ -372,10 +367,11 @@ namespace Microsoft.AspNetCore.Routing
         {
             // Arrange
             var options = new RouteOptions();
-            options.ConstraintMap.Add(
-                "customConstraintPolicy",
-                typeof(CustomParameterPolicyWithAmbigiousMultpleCtors)
-            );
+            options.ConstraintMap
+                .Add(
+                    "customConstraintPolicy",
+                    typeof(CustomParameterPolicyWithAmbigiousMultpleCtors)
+                );
 
             var services = new ServiceCollection();
             services.AddTransient<ITestService, TestService>();
@@ -404,10 +400,8 @@ namespace Microsoft.AspNetCore.Routing
         {
             // Arrange
             var options = new RouteOptions();
-            options.ConstraintMap.Add(
-                "regex-service",
-                typeof(RegexInlineRouteConstraintWithService)
-            );
+            options.ConstraintMap
+                .Add("regex-service", typeof(RegexInlineRouteConstraintWithService));
 
             var services = new ServiceCollection();
             services.AddTransient<ITestService, TestService>();
@@ -431,10 +425,8 @@ namespace Microsoft.AspNetCore.Routing
         {
             // Arrange
             var options = new RouteOptions();
-            options.ConstraintMap.Add(
-                "customConstraintPolicy",
-                typeof(CustomParameterPolicyWithArguments)
-            );
+            options.ConstraintMap
+                .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithArguments));
 
             var services = new ServiceCollection();
 

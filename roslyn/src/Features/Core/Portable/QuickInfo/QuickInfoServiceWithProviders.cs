@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 var mefExporter = (IMefHostExportProvider)_workspace.Services.HostServices;
 
                 var providers = ExtensionOrderer.Order(
-                        mefExporter.GetExports<QuickInfoProvider, QuickInfoProviderMetadata>()
-                            .Where(lz => lz.Metadata.Language == _language)
-                    )
+                    mefExporter.GetExports<QuickInfoProvider, QuickInfoProviderMetadata>()
+                        .Where(lz => lz.Metadata.Language == _language)
+                )
                     .Select(lz => lz.Value)
                     .ToImmutableArray();
 

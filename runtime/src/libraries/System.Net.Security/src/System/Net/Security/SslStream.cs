@@ -1198,9 +1198,9 @@ namespace System.Net.Security
             ThrowIfExceptionalOrNotAuthenticated();
             ValidateBufferArguments(buffer, offset, count);
             return ReadAsyncInternal(
-                    new AsyncReadWriteAdapter(InnerStream, cancellationToken),
-                    new Memory<byte>(buffer, offset, count)
-                )
+                new AsyncReadWriteAdapter(InnerStream, cancellationToken),
+                new Memory<byte>(buffer, offset, count)
+            )
                 .AsTask();
         }
 

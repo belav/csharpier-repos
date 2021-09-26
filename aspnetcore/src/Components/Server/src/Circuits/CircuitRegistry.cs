@@ -96,9 +96,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             {
                 if (DisconnectCore(circuitHost, connectionId))
                 {
-                    circuitHandlerTask = circuitHost.Renderer.Dispatcher.InvokeAsync(
-                        () => circuitHost.OnConnectionDownAsync(default)
-                    );
+                    circuitHandlerTask = circuitHost.Renderer.Dispatcher
+                        .InvokeAsync(() => circuitHost.OnConnectionDownAsync(default));
                 }
                 else
                 {
@@ -125,11 +124,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             }
 
             if (
-                !string.Equals(
-                    circuitHost.Client.ConnectionId,
-                    connectionId,
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(circuitHost.Client.ConnectionId, connectionId, StringComparison.Ordinal)
             )
             {
                 Log.CircuitConnectedToDifferentConnection(

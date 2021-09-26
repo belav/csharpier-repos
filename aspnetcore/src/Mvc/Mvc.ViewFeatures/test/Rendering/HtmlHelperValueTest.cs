@@ -163,17 +163,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             viewData["StringProperty"] = "ViewDataValue";
             viewData.TemplateInfo.HtmlFieldPrefix = "FieldPrefix";
 
-            viewData.ModelState.SetModelValue(
-                "FieldPrefix.StringProperty",
-                "StringPropertyRawValue",
-                "StringPropertyAttemptedValue"
-            );
+            viewData.ModelState
+                .SetModelValue(
+                    "FieldPrefix.StringProperty",
+                    "StringPropertyRawValue",
+                    "StringPropertyAttemptedValue"
+                );
 
-            viewData.ModelState.SetModelValue(
-                "FieldPrefix",
-                "ModelRawValue",
-                "ModelAttemptedValue"
-            );
+            viewData.ModelState
+                .SetModelValue("FieldPrefix", "ModelRawValue", "ModelAttemptedValue");
 
             // Act & Assert
             Assert.Equal("StringPropertyRawValue", helper.Value("StringProperty", format: null));
@@ -228,11 +226,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewData = helper.ViewData;
             viewData["StringProperty"] = "ViewDataValue <\"\">";
 
-            viewData.ModelState.SetModelValue(
-                "ObjectProperty",
-                "ObjectPropertyRawValue <\"\">",
-                "ObjectPropertyAttemptedValue <\"\">"
-            );
+            viewData.ModelState
+                .SetModelValue(
+                    "ObjectProperty",
+                    "ObjectPropertyRawValue <\"\">",
+                    "ObjectPropertyAttemptedValue <\"\">"
+                );
 
             // Act & Assert
             Assert.Equal(
@@ -257,12 +256,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             public override string ToString()
             {
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{{ StringProperty = {0}, ObjectProperty = {1} }}",
-                    StringProperty ?? "(null)",
-                    ObjectProperty ?? "(null)"
-                );
+                return string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "{{ StringProperty = {0}, ObjectProperty = {1} }}",
+                        StringProperty ?? "(null)",
+                        ObjectProperty ?? "(null)"
+                    );
             }
         }
 

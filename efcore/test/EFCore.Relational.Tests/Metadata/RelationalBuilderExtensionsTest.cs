@@ -155,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             modelBuilder.Entity<Customer>().Property(e => e.SomeShort).HasDefaultValue(7);
 
-            var property = modelBuilder.Model.FindEntityType(typeof(Customer))
+            var property = modelBuilder.Model
+                .FindEntityType(typeof(Customer))
                 .FindProperty("SomeShort");
 
             Assert.Equal((short)7, property.GetDefaultValue());
@@ -186,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             modelBuilder.Entity<Customer>().Property(e => e.EnumValue).HasDefaultValue(MyEnum.Tue);
 
-            var property = modelBuilder.Model.FindEntityType(typeof(Customer))
+            var property = modelBuilder.Model
+                .FindEntityType(typeof(Customer))
                 .FindProperty("EnumValue");
 
             Assert.Equal(typeof(MyEnum), property.GetDefaultValue().GetType());
@@ -237,7 +239,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .WithOne(e => e.Customer)
                 .HasForeignKey(e => e.CustomerId);
 
-            var foreignKey = modelBuilder.Model.FindEntityType(typeof(Order))
+            var foreignKey = modelBuilder.Model
+                .FindEntityType(typeof(Order))
                 .GetForeignKeys()
                 .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
@@ -258,7 +261,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .WithOne(e => e.Customer)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model.FindEntityType(typeof(Order))
+            var foreignKey = modelBuilder.Model
+                .FindEntityType(typeof(Order))
                 .GetForeignKeys()
                 .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
@@ -283,7 +287,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .HasForeignKey(e => e.CustomerId)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model.FindEntityType(typeof(Order))
+            var foreignKey = modelBuilder.Model
+                .FindEntityType(typeof(Order))
                 .GetForeignKeys()
                 .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
@@ -300,7 +305,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .WithMany(e => e.Orders)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model.FindEntityType(typeof(Order))
+            var foreignKey = modelBuilder.Model
+                .FindEntityType(typeof(Order))
                 .GetForeignKeys()
                 .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
@@ -325,7 +331,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .HasForeignKey(e => e.CustomerId)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model.FindEntityType(typeof(Order))
+            var foreignKey = modelBuilder.Model
+                .FindEntityType(typeof(Order))
                 .GetForeignKeys()
                 .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
@@ -343,7 +350,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .HasPrincipalKey<Order>(e => e.OrderId)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model.FindEntityType(typeof(OrderDetails))
+            var foreignKey = modelBuilder.Model
+                .FindEntityType(typeof(OrderDetails))
                 .GetForeignKeys()
                 .Single();
 
@@ -368,7 +376,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .HasForeignKey<OrderDetails>(e => e.Id)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model.FindEntityType(typeof(OrderDetails))
+            var foreignKey = modelBuilder.Model
+                .FindEntityType(typeof(OrderDetails))
                 .GetForeignKeys()
                 .Single();
 
@@ -996,7 +1005,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public void Can_create_dbFunction()
         {
             var modelBuilder = CreateConventionModelBuilder();
-            var testMethod = typeof(TestDbFunctions).GetTypeInfo()
+            var testMethod = typeof(TestDbFunctions)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(TestDbFunctions.MethodA));
             modelBuilder.HasDbFunction(testMethod);
 

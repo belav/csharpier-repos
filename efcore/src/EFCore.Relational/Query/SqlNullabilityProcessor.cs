@@ -947,8 +947,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (sqlBinaryExpression.OperatorType == ExpressionType.OrElse)
             {
                 var intersect = leftNonNullableColumns.Intersect(
-                        _nonNullableColumns.Skip(currentNonNullableColumnsCount)
-                    )
+                    _nonNullableColumns.Skip(currentNonNullableColumnsCount)
+                )
                     .ToList();
                 RestoreNonNullableColumnsList(currentNonNullableColumnsCount);
                 _nonNullableColumns.AddRange(intersect);
@@ -1118,11 +1118,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (
                 sqlFunctionExpression.IsBuiltIn
                 && sqlFunctionExpression.Arguments != null
-                && string.Equals(
-                    sqlFunctionExpression.Name,
-                    "COALESCE",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && string
+                    .Equals(
+                        sqlFunctionExpression.Name,
+                        "COALESCE",
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 var left = Visit(sqlFunctionExpression.Arguments[0], out var leftNullable);
@@ -1152,11 +1153,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             return
                 sqlFunctionExpression.IsBuiltIn
-                && string.Equals(
-                    sqlFunctionExpression.Name,
-                    "SUM",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && string
+                    .Equals(sqlFunctionExpression.Name, "SUM", StringComparison.OrdinalIgnoreCase)
               ? _sqlExpressionFactory.Coalesce(
                     sqlFunctionExpression.Update(instance, arguments),
                     _sqlExpressionFactory.Constant(0, sqlFunctionExpression.TypeMapping),
@@ -1939,11 +1937,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         if (
                             sqlFunctionExpression.IsBuiltIn
-                            && string.Equals(
-                                "COALESCE",
-                                sqlFunctionExpression.Name,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            && string
+                                .Equals(
+                                    "COALESCE",
+                                    sqlFunctionExpression.Name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             // for coalesce:
@@ -2021,17 +2020,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                         if (nullabilityPropagationElements.Count > 0)
                         {
                             var result = nullabilityPropagationElements.Select(
-                                    e =>
-                                        ProcessNullNotNull(
-                                            _sqlExpressionFactory.MakeUnary(
-                                                sqlUnaryExpression.OperatorType,
-                                                e,
-                                                sqlUnaryExpression.Type,
-                                                sqlUnaryExpression.TypeMapping
-                                            )!,
-                                            operandNullable
-                                        )
-                                )
+                                e =>
+                                    ProcessNullNotNull(
+                                        _sqlExpressionFactory.MakeUnary(
+                                            sqlUnaryExpression.OperatorType,
+                                            e,
+                                            sqlUnaryExpression.Type,
+                                            sqlUnaryExpression.TypeMapping
+                                        )!,
+                                        operandNullable
+                                    )
+                            )
                                 .Aggregate(
                                     (r, e) =>
                                         SimplifyLogicalSqlBinaryExpression(

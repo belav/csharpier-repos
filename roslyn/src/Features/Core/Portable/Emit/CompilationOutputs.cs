@@ -124,10 +124,11 @@ namespace Microsoft.CodeAnalysis.Emit
             if (stream != null && (!stream.CanRead || !stream.CanSeek))
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        FeaturesResources.MethodMustReturnStreamThatSupportsReadAndSeek,
-                        methodName
-                    )
+                    string
+                        .Format(
+                            FeaturesResources.MethodMustReturnStreamThatSupportsReadAndSeek,
+                            methodName
+                        )
                 );
             }
 

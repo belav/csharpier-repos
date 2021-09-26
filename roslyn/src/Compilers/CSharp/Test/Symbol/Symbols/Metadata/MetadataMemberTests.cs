@@ -249,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(SymbolKind.Assembly, mscorNS.Kind);
             var ns1 = mscorNS.GlobalNamespace.GetMembers("Microsoft").Single() as NamespaceSymbol;
             var ns2 =
-                (ns1.GetMembers("Runtime").Single() as NamespaceSymbol).GetMembers("Hosting")
+                (ns1.GetMembers("Runtime").Single() as NamespaceSymbol)
+                    .GetMembers("Hosting")
                     .Single() as NamespaceSymbol;
 
             var class1 = ns2.GetTypeMembers("StrongNameHelpers").First() as NamedTypeSymbol;
@@ -306,9 +307,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var mscorlib = compilation.ExternalReferences[0];
             var mscorNS = compilation.GetReferencedAssemblySymbol(mscorlib);
             var ns1 =
-                (
-                    mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol
-                ).GetMembers("Collections").Single() as NamespaceSymbol;
+                (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol)
+                    .GetMembers("Collections")
+                    .Single() as NamespaceSymbol;
             var ns2 = ns1.GetMembers("Generic").Single() as NamespaceSymbol;
 
             var type1 = ns2.GetTypeMembers("IDictionary").First() as NamedTypeSymbol;
@@ -357,9 +358,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var mscorlib = compilation.ExternalReferences[0];
             var mscorNS = compilation.GetReferencedAssemblySymbol(mscorlib);
             var ns1 =
-                (
-                    mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol
-                ).GetMembers("Collections").Single() as NamespaceSymbol;
+                (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol)
+                    .GetMembers("Collections")
+                    .Single() as NamespaceSymbol;
             var ns2 = ns1.GetMembers("Generic").Single() as NamespaceSymbol;
 
             var type1 = ns2.GetTypeMembers("IDictionary").First() as NamedTypeSymbol;
@@ -835,9 +836,8 @@ public class C
                     .WithLocation(1, 1)
             };
 
-            var options = TestOptions.DebugDll.WithMetadataImportOptions(
-                MetadataImportOptions.Internal
-            );
+            var options = TestOptions.DebugDll
+                .WithMetadataImportOptions(MetadataImportOptions.Internal);
             Assert.Equal(MetadataImportOptions.Internal, options.MetadataImportOptions);
             options.VerifyErrors();
             options = TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All);
@@ -846,9 +846,8 @@ public class C
             options = TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.Public);
             Assert.Equal(MetadataImportOptions.Public, options.MetadataImportOptions);
             options.VerifyErrors();
-            options = TestOptions.DebugDll.WithMetadataImportOptions(
-                (MetadataImportOptions)byte.MaxValue
-            );
+            options = TestOptions.DebugDll
+                .WithMetadataImportOptions((MetadataImportOptions)byte.MaxValue);
             Assert.Equal((MetadataImportOptions)byte.MaxValue, options.MetadataImportOptions);
             options.VerifyErrors(expectedDiagnostics);
 
@@ -865,9 +864,8 @@ public class C
 
             var compilation = CreateCompilation(
                 "",
-                options: TestOptions.DebugDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                ),
+                options: TestOptions.DebugDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal),
                 references: new[] { compilation0.EmitToImageReference() }
             );
             var c = compilation.GetTypeByMetadataName("C");

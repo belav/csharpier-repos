@@ -160,12 +160,10 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                 return;
             }
 
-            var ienumerableType = semanticModel.Compilation.GetSpecialType(
-                SpecialType.System_Collections_Generic_IEnumerable_T
-            );
-            var ienumeratorType = semanticModel.Compilation.GetSpecialType(
-                SpecialType.System_Collections_Generic_IEnumerator_T
-            );
+            var ienumerableType = semanticModel.Compilation
+                .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T);
+            var ienumeratorType = semanticModel.Compilation
+                .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerator_T);
 
             // make sure the collection can be iterated.
             if (
@@ -440,8 +438,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
 
             // Create the expression we'll use to replace all matches in the for-body.
             var foreachIdentifierReference = foreachIdentifier.WithoutAnnotations(
-                    RenameAnnotation.Kind
-                )
+                RenameAnnotation.Kind
+            )
                 .WithoutTrivia();
 
             // Walk the for statement, replacing any matches we find.
@@ -624,8 +622,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             }
 
             var indexer = collectionType.GetAccessibleMembersInThisAndBaseTypes<IPropertySymbol>(
-                    containingType
-                )
+                containingType
+            )
                 .Where(IsViableIndexer)
                 .FirstOrDefault();
 
@@ -638,8 +636,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             {
                 var interfaces = collectionType.GetAllInterfacesIncludingThis();
                 indexer = interfaces.SelectMany(
-                        i => i.GetMembers().OfType<IPropertySymbol>().Where(IsViableIndexer)
-                    )
+                    i => i.GetMembers().OfType<IPropertySymbol>().Where(IsViableIndexer)
+                )
                     .FirstOrDefault();
 
                 return indexer?.Type;

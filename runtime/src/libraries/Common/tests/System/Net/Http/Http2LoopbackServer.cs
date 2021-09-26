@@ -101,11 +101,11 @@ namespace System.Net.Test.Common
             Http2LoopbackConnection connection =
                 timeout != null
                     ? await Http2LoopbackConnection.CreateAsync(
-                              connectionSocket,
-                              stream,
-                              _options,
-                              timeout.Value
-                          )
+                          connectionSocket,
+                          stream,
+                          _options,
+                          timeout.Value
+                      )
                           .ConfigureAwait(false)
                     : await Http2LoopbackConnection.CreateAsync(connectionSocket, stream, _options)
                           .ConfigureAwait(false);
@@ -133,10 +133,10 @@ namespace System.Net.Test.Common
         )
         {
             (Http2LoopbackConnection connection, _) = await EstablishConnectionGetSettingsAsync(
-                    timeout,
-                    ackTimeout,
-                    settingsEntries
-                )
+                timeout,
+                ackTimeout,
+                settingsEntries
+            )
                 .ConfigureAwait(false);
             return connection;
         }
@@ -161,9 +161,9 @@ namespace System.Net.Test.Common
             Http2LoopbackConnection connection = await AcceptConnectionAsync(timeout)
                 .ConfigureAwait(false);
             SettingsFrame clientSettingsFrame = await connection.ReadAndSendSettingsAsync(
-                    ackTimeout,
-                    settingsEntries
-                )
+                ackTimeout,
+                settingsEntries
+            )
                 .ConfigureAwait(false);
 
             return (connection, clientSettingsFrame);
@@ -234,7 +234,8 @@ namespace System.Net.Test.Common
                 Task clientTask = clientFunc(server.Address);
                 Task serverTask = serverFunc(server);
 
-                await new Task[] { clientTask, serverTask }.WhenAllOrAnyFailed(timeout)
+                await new Task[] { clientTask, serverTask }
+                    .WhenAllOrAnyFailed(timeout)
                     .ConfigureAwait(false);
             }
         }

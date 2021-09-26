@@ -329,26 +329,30 @@ namespace System.Configuration
 
             private bool IsKnownConfigFile(string filename)
             {
-                return string.Equals(
-                        filename,
-                        ConfigurationManagerInternalFactory.Instance.MachineConfigPath,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    || string.Equals(
-                        filename,
-                        ConfigurationManagerInternalFactory.Instance.ApplicationConfigUri,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    || string.Equals(
-                        filename,
-                        ConfigurationManagerInternalFactory.Instance.ExeLocalConfigPath,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    || string.Equals(
-                        filename,
-                        ConfigurationManagerInternalFactory.Instance.ExeRoamingConfigPath,
-                        StringComparison.OrdinalIgnoreCase
-                    );
+                return string
+                        .Equals(
+                            filename,
+                            ConfigurationManagerInternalFactory.Instance.MachineConfigPath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    || string
+                        .Equals(
+                            filename,
+                            ConfigurationManagerInternalFactory.Instance.ApplicationConfigUri,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    || string
+                        .Equals(
+                            filename,
+                            ConfigurationManagerInternalFactory.Instance.ExeLocalConfigPath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    || string
+                        .Equals(
+                            filename,
+                            ConfigurationManagerInternalFactory.Instance.ExeRoamingConfigPath,
+                            StringComparison.OrdinalIgnoreCase
+                        );
             }
 
             internal static Configuration OpenExeConfiguration(ConfigurationUserLevel userLevel)
@@ -393,16 +397,18 @@ namespace System.Configuration
             )
             {
                 if (
-                    string.Equals(
-                        streamName,
-                        ConfigurationManagerInternalFactory.Instance.ExeLocalConfigPath,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    || string.Equals(
-                        streamName,
-                        ConfigurationManagerInternalFactory.Instance.ExeRoamingConfigPath,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            streamName,
+                            ConfigurationManagerInternalFactory.Instance.ExeLocalConfigPath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    || string
+                        .Equals(
+                            streamName,
+                            ConfigurationManagerInternalFactory.Instance.ExeRoamingConfigPath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     Host.WriteCompleted(streamName, success, writeContext, true);

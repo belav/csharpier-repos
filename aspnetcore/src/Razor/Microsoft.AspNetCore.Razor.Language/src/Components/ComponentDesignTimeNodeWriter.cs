@@ -198,10 +198,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             {
                 if (!isWhitespaceStatement)
                 {
-                    linePragmaScope = context.CodeWriter.BuildLinePragma(
-                        node.Source.Value,
-                        context
-                    );
+                    linePragmaScope = context.CodeWriter
+                        .BuildLinePragma(node.Source.Value, context);
                 }
 
                 context.CodeWriter.WritePadding(0, node.Source.Value, context);
@@ -343,7 +341,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(key));
             }
 
-            context.CodeWriter.WriteStartMethodInvocation(
+            context.CodeWriter
+                .WriteStartMethodInvocation(
                     $"{_scopeStack.BuilderVarName}.{nameof(ComponentsApi.RenderTreeBuilder.AddAttribute)}"
                 )
                 .Write("-1")
@@ -366,9 +365,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(expression));
             }
 
-            context.CodeWriter.WriteStartMethodInvocation(
-                $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}"
-            );
+            context.CodeWriter
+                .WriteStartMethodInvocation(
+                    $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}"
+                );
             context.CodeWriter.Write("-1");
             context.CodeWriter.WriteParameterSeparator();
 
@@ -953,9 +953,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             // Looks like:
             //
             // __builder.AddMultipleAttributes(2, ...);
-            context.CodeWriter.WriteStartMethodInvocation(
-                $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMultipleAttributes}"
-            );
+            context.CodeWriter
+                .WriteStartMethodInvocation(
+                    $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMultipleAttributes}"
+                );
             context.CodeWriter.Write("-1");
             context.CodeWriter.WriteParameterSeparator();
 

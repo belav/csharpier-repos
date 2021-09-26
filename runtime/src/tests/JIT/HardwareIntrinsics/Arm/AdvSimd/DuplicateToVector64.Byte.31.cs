@@ -114,10 +114,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
-            var result = typeof(AdvSimd).GetMethod(
-                    nameof(AdvSimd.DuplicateToVector64),
-                    new Type[] { typeof(Byte) }
-                )
+            var result = typeof(AdvSimd)
+                .GetMethod(nameof(AdvSimd.DuplicateToVector64), new Type[] { typeof(Byte) })
                 .Invoke(null, new object[] { (Byte)31 });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector64<Byte>)(result));
@@ -178,12 +176,12 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.DuplicateToVector64)}<Byte>(31): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.DuplicateToVector64)}<Byte>(31): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"   result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

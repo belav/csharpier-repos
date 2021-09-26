@@ -124,13 +124,14 @@ namespace System.ComponentModel
             _cancellationPending = false;
 
             _asyncOperation = AsyncOperationManager.CreateOperation(null);
-            Task.Factory.StartNew(
-                arg => WorkerThreadStart(arg),
-                argument,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task.Factory
+                .StartNew(
+                    arg => WorkerThreadStart(arg),
+                    argument,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         public event RunWorkerCompletedEventHandler? RunWorkerCompleted;

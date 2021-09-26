@@ -102,8 +102,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             {
                 Assert.Contains(
                     CoreResources.LogSensitiveDataLoggingEnabled(
-                            new TestLogger<CosmosLoggingDefinitions>()
-                        )
+                        new TestLogger<CosmosLoggingDefinitions>()
+                    )
                         .GenerateMessage(),
                     Fixture.TestSqlLoggerFactory.Log.Select(l => l.Message)
                 );
@@ -153,8 +153,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = @__city_0))"
 
             Assert.Equal(
                 CoreResources.LogRowLimitingOperationWithoutOrderBy(
-                        new TestLogger<CosmosLoggingDefinitions>()
-                    )
+                    new TestLogger<CosmosLoggingDefinitions>()
+                )
                     .GenerateMessage(),
                 Fixture.TestSqlLoggerFactory.Log[1].Message
             );
@@ -170,8 +170,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = @__city_0))"
 
             Assert.Equal(
                 CoreResources.LogRowLimitingOperationWithoutOrderBy(
-                        new TestLogger<CosmosLoggingDefinitions>()
-                    )
+                    new TestLogger<CosmosLoggingDefinitions>()
+                )
                     .GenerateMessage(),
                 Fixture.TestSqlLoggerFactory.Log[1].Message
             );

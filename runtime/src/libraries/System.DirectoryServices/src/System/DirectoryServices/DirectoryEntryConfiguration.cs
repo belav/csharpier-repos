@@ -22,7 +22,8 @@ namespace System.DirectoryServices
             {
                 return (ReferralChasingOption)(
                     (UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject
-                ).GetOption((int)AdsOptions.ADS_OPTION_REFERRALS);
+                )
+                    .GetOption((int)AdsOptions.ADS_OPTION_REFERRALS);
             }
             set
             {
@@ -38,10 +39,8 @@ namespace System.DirectoryServices
                         typeof(ReferralChasingOption)
                     );
 
-                ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).SetOption(
-                    (int)AdsOptions.ADS_OPTION_REFERRALS,
-                    value
-                );
+                ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject)
+                    .SetOption((int)AdsOptions.ADS_OPTION_REFERRALS, value);
             }
         }
 
@@ -49,9 +48,8 @@ namespace System.DirectoryServices
         {
             get
             {
-                return (SecurityMasks)(
-                    (UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject
-                ).GetOption((int)AdsOptions.ADS_OPTION_SECURITY_MASK);
+                return (SecurityMasks)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject)
+                    .GetOption((int)AdsOptions.ADS_OPTION_SECURITY_MASK);
             }
             set
             {
@@ -71,10 +69,8 @@ namespace System.DirectoryServices
                         typeof(SecurityMasks)
                     );
 
-                ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).SetOption(
-                    (int)AdsOptions.ADS_OPTION_SECURITY_MASK,
-                    value
-                );
+                ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject)
+                    .SetOption((int)AdsOptions.ADS_OPTION_SECURITY_MASK, value);
             }
         }
 
@@ -82,19 +78,16 @@ namespace System.DirectoryServices
         {
             get
             {
-                return (int)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
-                    (int)AdsOptions.ADS_OPTION_PAGE_SIZE
-                );
+                return (int)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject)
+                    .GetOption((int)AdsOptions.ADS_OPTION_PAGE_SIZE);
             }
             set
             {
                 if (value < 0)
                     throw new ArgumentException(SR.DSBadPageSize);
 
-                ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).SetOption(
-                    (int)AdsOptions.ADS_OPTION_PAGE_SIZE,
-                    value
-                );
+                ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject)
+                    .SetOption((int)AdsOptions.ADS_OPTION_PAGE_SIZE, value);
             }
         }
 
@@ -102,16 +95,13 @@ namespace System.DirectoryServices
         {
             get
             {
-                return (int)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
-                    (int)AdsOptions.ADS_OPTION_PASSWORD_PORTNUMBER
-                );
+                return (int)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject)
+                    .GetOption((int)AdsOptions.ADS_OPTION_PASSWORD_PORTNUMBER);
             }
             set
             {
-                ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).SetOption(
-                    (int)AdsOptions.ADS_OPTION_PASSWORD_PORTNUMBER,
-                    value
-                );
+                ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject)
+                    .SetOption((int)AdsOptions.ADS_OPTION_PASSWORD_PORTNUMBER, value);
             }
         }
 
@@ -121,7 +111,8 @@ namespace System.DirectoryServices
             {
                 return (PasswordEncodingMethod)(
                     (UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject
-                ).GetOption((int)AdsOptions.ADS_OPTION_PASSWORD_METHOD);
+                )
+                    .GetOption((int)AdsOptions.ADS_OPTION_PASSWORD_METHOD);
             }
             set
             {
@@ -135,28 +126,24 @@ namespace System.DirectoryServices
                         typeof(PasswordEncodingMethod)
                     );
 
-                ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).SetOption(
-                    (int)AdsOptions.ADS_OPTION_PASSWORD_METHOD,
-                    value
-                );
+                ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject)
+                    .SetOption((int)AdsOptions.ADS_OPTION_PASSWORD_METHOD, value);
             }
         }
 
         public string GetCurrentServerName()
         {
             // underneath it uses the same handle and binds to the same object, so no permission is required as it has been done in Bind call
-            return (string)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
-                (int)AdsOptions.ADS_OPTION_SERVERNAME
-            );
+            return (string)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject)
+                .GetOption((int)AdsOptions.ADS_OPTION_SERVERNAME);
         }
 
         public bool IsMutuallyAuthenticated()
         {
             try
             {
-                int val = (int)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
-                    (int)AdsOptions.ADS_OPTION_MUTUAL_AUTH_STATUS
-                );
+                int val = (int)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject)
+                    .GetOption((int)AdsOptions.ADS_OPTION_MUTUAL_AUTH_STATUS);
                 if ((val & ISC_RET_MUTUAL_AUTH) != 0)
                     return true;
                 else
@@ -173,10 +160,8 @@ namespace System.DirectoryServices
 
         public void SetUserNameQueryQuota(string accountName)
         {
-            ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).SetOption(
-                (int)AdsOptions.ADS_OPTION_QUOTA,
-                accountName
-            );
+            ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject)
+                .SetOption((int)AdsOptions.ADS_OPTION_QUOTA, accountName);
         }
     }
 }

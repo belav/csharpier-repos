@@ -194,13 +194,12 @@ class Program
                 // (17,5): error CS8803: Top-level statements must precede namespace and type declarations.
                 //     static async ref readonly Task M<T>()
                 Diagnostic(
-                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
-                        @"static async ref readonly Task M<T>()
+                    ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                    @"static async ref readonly Task M<T>()
     {
         throw null;
     }"
-                    )
-                    .WithLocation(17, 5),
+                ).WithLocation(17, 5),
                 // (22,25): error CS1031: Type expected
                 //     public ref readonly virtual int* P1 => throw null;
                 Diagnostic(ErrorCode.ERR_TypeExpected, "virtual").WithLocation(22, 25),
@@ -263,7 +262,7 @@ class Program
         public void RefReadOnlyLocalsAreDisallowed()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M()
@@ -273,33 +272,31 @@ class Test
         ref readonly int invalid = ref readonly value;
     }
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify(
-                    // (8,40): error CS1525: Invalid expression term 'readonly'
-                    //         ref readonly int invalid = ref readonly value;
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
-                        .WithArguments("readonly")
-                        .WithLocation(8, 40),
-                    // (8,40): error CS1002: ; expected
-                    //         ref readonly int invalid = ref readonly value;
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(8, 40),
-                    // (8,40): error CS0106: The modifier 'readonly' is not valid for this item
-                    //         ref readonly int invalid = ref readonly value;
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly")
-                        .WithArguments("readonly")
-                        .WithLocation(8, 40),
-                    // (8,54): error CS1001: Identifier expected
-                    //         ref readonly int invalid = ref readonly value;
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(8, 54)
-                );
+            ).GetParseDiagnostics().Verify(
+                // (8,40): error CS1525: Invalid expression term 'readonly'
+                //         ref readonly int invalid = ref readonly value;
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(8, 40),
+                // (8,40): error CS1002: ; expected
+                //         ref readonly int invalid = ref readonly value;
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(8, 40),
+                // (8,40): error CS0106: The modifier 'readonly' is not valid for this item
+                //         ref readonly int invalid = ref readonly value;
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(8, 40),
+                // (8,54): error CS1001: Identifier expected
+                //         ref readonly int invalid = ref readonly value;
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(8, 54)
+            );
         }
 
         [Fact]
         public void LocalsWithRefReadOnlyExpressionsAreDisallowed()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M()
@@ -309,33 +306,31 @@ class Test
         ref int invalid = ref readonly value;
     }
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify(
-                    // (8,31): error CS1525: Invalid expression term 'readonly'
-                    //         ref int invalid = ref readonly value;
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
-                        .WithArguments("readonly")
-                        .WithLocation(8, 31),
-                    // (8,31): error CS1002: ; expected
-                    //         ref int invalid = ref readonly value;
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(8, 31),
-                    // (8,31): error CS0106: The modifier 'readonly' is not valid for this item
-                    //         ref int invalid = ref readonly value;
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly")
-                        .WithArguments("readonly")
-                        .WithLocation(8, 31),
-                    // (8,45): error CS1001: Identifier expected
-                    //         ref int invalid = ref readonly value;
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(8, 45)
-                );
+            ).GetParseDiagnostics().Verify(
+                // (8,31): error CS1525: Invalid expression term 'readonly'
+                //         ref int invalid = ref readonly value;
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(8, 31),
+                // (8,31): error CS1002: ; expected
+                //         ref int invalid = ref readonly value;
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(8, 31),
+                // (8,31): error CS0106: The modifier 'readonly' is not valid for this item
+                //         ref int invalid = ref readonly value;
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(8, 31),
+                // (8,45): error CS1001: Identifier expected
+                //         ref int invalid = ref readonly value;
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(8, 45)
+            );
         }
 
         [Fact]
         public void ReturnRefReadOnlyAreDisallowed()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     int value = 0;
@@ -344,35 +339,33 @@ class Test
     ref readonly int Invalid() => ref readonly value;
 
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify(
-                    // (7,39): error CS1525: Invalid expression term 'readonly'
-                    //     ref readonly int Invalid() => ref readonly value;
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
-                        .WithArguments("readonly")
-                        .WithLocation(7, 39),
-                    // (7,39): error CS1002: ; expected
-                    //     ref readonly int Invalid() => ref readonly value;
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(7, 39),
-                    // (7,53): error CS1519: Invalid token ';' ref readonly class, struct, or interface member declaration
-                    //     ref readonly int Invalid() => ref readonly value;
-                    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
-                        .WithArguments(";")
-                        .WithLocation(7, 53),
-                    // (7,53): error CS1519: Invalid token ';' ref readonly class, struct, or interface member declaration
-                    //     ref readonly int Invalid() => ref readonly value;
-                    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
-                        .WithArguments(";")
-                        .WithLocation(7, 53)
-                );
+            ).GetParseDiagnostics().Verify(
+                // (7,39): error CS1525: Invalid expression term 'readonly'
+                //     ref readonly int Invalid() => ref readonly value;
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(7, 39),
+                // (7,39): error CS1002: ; expected
+                //     ref readonly int Invalid() => ref readonly value;
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(7, 39),
+                // (7,53): error CS1519: Invalid token ';' ref readonly class, struct, or interface member declaration
+                //     ref readonly int Invalid() => ref readonly value;
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(7, 53),
+                // (7,53): error CS1519: Invalid token ';' ref readonly class, struct, or interface member declaration
+                //     ref readonly int Invalid() => ref readonly value;
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(7, 53)
+            );
         }
 
         [Fact]
         public void RefReadOnlyForEachAreDisallowed()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M()
@@ -384,63 +377,61 @@ class Test
         }
     }
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify(
-                    // (8,17): error CS1525: Invalid expression term 'ref'
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ")
-                        .WithArguments("ref")
-                        .WithLocation(8, 17),
-                    // (8,21): error CS1525: Invalid expression term 'readonly'
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
-                        .WithArguments("readonly")
-                        .WithLocation(8, 21),
-                    // (8,21): error CS1515: 'in' expected
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_InExpected, "readonly").WithLocation(8, 21),
-                    // (8,21): error CS0230: Type and identifier are both required in a foreach statement
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_BadForeachDecl, "readonly").WithLocation(8, 21),
-                    // (8,21): error CS1525: Invalid expression term 'readonly'
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
-                        .WithArguments("readonly")
-                        .WithLocation(8, 21),
-                    // (8,21): error CS1026: ) expected
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "readonly").WithLocation(8, 21),
-                    // (8,21): error CS0106: The modifier 'readonly' is not valid for this item
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly")
-                        .WithArguments("readonly")
-                        .WithLocation(8, 21),
-                    // (8,32): error CS1001: Identifier expected
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "in").WithLocation(8, 32),
-                    // (8,32): error CS1003: Syntax error, ',' expected
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "in")
-                        .WithArguments(",", "in")
-                        .WithLocation(8, 32),
-                    // (8,35): error CS1002: ; expected
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "ar").WithLocation(8, 35),
-                    // (8,37): error CS1002: ; expected
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(8, 37),
-                    // (8,37): error CS1513: } expected
-                    //         foreach(ref readonly v in ar)
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(8, 37)
-                );
+            ).GetParseDiagnostics().Verify(
+                // (8,17): error CS1525: Invalid expression term 'ref'
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ")
+                    .WithArguments("ref")
+                    .WithLocation(8, 17),
+                // (8,21): error CS1525: Invalid expression term 'readonly'
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(8, 21),
+                // (8,21): error CS1515: 'in' expected
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_InExpected, "readonly").WithLocation(8, 21),
+                // (8,21): error CS0230: Type and identifier are both required in a foreach statement
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_BadForeachDecl, "readonly").WithLocation(8, 21),
+                // (8,21): error CS1525: Invalid expression term 'readonly'
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(8, 21),
+                // (8,21): error CS1026: ) expected
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "readonly").WithLocation(8, 21),
+                // (8,21): error CS0106: The modifier 'readonly' is not valid for this item
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(8, 21),
+                // (8,32): error CS1001: Identifier expected
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "in").WithLocation(8, 32),
+                // (8,32): error CS1003: Syntax error, ',' expected
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "in")
+                    .WithArguments(",", "in")
+                    .WithLocation(8, 32),
+                // (8,35): error CS1002: ; expected
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "ar").WithLocation(8, 35),
+                // (8,37): error CS1002: ; expected
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(8, 37),
+                // (8,37): error CS1513: } expected
+                //         foreach(ref readonly v in ar)
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(8, 37)
+            );
         }
 
         [Fact]
         public void RefReadOnlyAtCallSite()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M(in int p)
@@ -452,42 +443,40 @@ class Test
         M(ref readonly x);
     }
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify(
-                    // (10,15): error CS1525: Invalid expression term 'readonly'
-                    //         M(in x);
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
-                        .WithArguments("readonly")
-                        .WithLocation(10, 15),
-                    // (10,15): error CS1026: ) expected
-                    //         M(in x);
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "readonly").WithLocation(10, 15),
-                    // (10,15): error CS1002: ; expected
-                    //         M(in x);
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(10, 15),
-                    // (10,15): error CS0106: The modifier 'readonly' is not valid for this item
-                    //         M(in x);
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly")
-                        .WithArguments("readonly")
-                        .WithLocation(10, 15),
-                    // (10,25): error CS1001: Identifier expected
-                    //         M(in x);
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(10, 25),
-                    // (10,25): error CS1002: ; expected
-                    //         M(in x);
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(10, 25),
-                    // (10,25): error CS1513: } expected
-                    //         M(in x);
-                    Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(10, 25)
-                );
+            ).GetParseDiagnostics().Verify(
+                // (10,15): error CS1525: Invalid expression term 'readonly'
+                //         M(in x);
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(10, 15),
+                // (10,15): error CS1026: ) expected
+                //         M(in x);
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "readonly").WithLocation(10, 15),
+                // (10,15): error CS1002: ; expected
+                //         M(in x);
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(10, 15),
+                // (10,15): error CS0106: The modifier 'readonly' is not valid for this item
+                //         M(in x);
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(10, 15),
+                // (10,25): error CS1001: Identifier expected
+                //         M(in x);
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(10, 25),
+                // (10,25): error CS1002: ; expected
+                //         M(in x);
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(10, 25),
+                // (10,25): error CS1513: } expected
+                //         M(in x);
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(10, 25)
+            );
         }
 
         [Fact]
         public void InAtCallSite()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M(in int p)
@@ -499,16 +488,14 @@ class Test
         M(in x);
     }
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify();
+            ).GetParseDiagnostics().Verify();
         }
 
         [Fact]
         public void NothingAtCallSite()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M(in int p)
@@ -520,130 +507,122 @@ class Test
         M(x);
     }
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify();
+            ).GetParseDiagnostics().Verify();
         }
 
         [Fact]
         public void InverseReadOnlyRefShouldBeIllegal()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M(readonly ref int p)
     {
     }
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify(
-                    // (4,12): error CS1026: ) expected
-                    //     void M(readonly ref int p)
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "readonly").WithLocation(4, 12),
-                    // (4,12): error CS1002: ; expected
-                    //     void M(readonly ref int p)
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(4, 12),
-                    // (4,30): error CS1003: Syntax error, '(' expected
-                    //     void M(readonly ref int p)
-                    Diagnostic(ErrorCode.ERR_SyntaxError, ")")
-                        .WithArguments("(", ")")
-                        .WithLocation(4, 30)
-                );
+            ).GetParseDiagnostics().Verify(
+                // (4,12): error CS1026: ) expected
+                //     void M(readonly ref int p)
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "readonly").WithLocation(4, 12),
+                // (4,12): error CS1002: ; expected
+                //     void M(readonly ref int p)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(4, 12),
+                // (4,30): error CS1003: Syntax error, '(' expected
+                //     void M(readonly ref int p)
+                Diagnostic(ErrorCode.ERR_SyntaxError, ")")
+                    .WithArguments("(", ")")
+                    .WithLocation(4, 30)
+            );
         }
 
         [Fact]
         public void RefReadOnlyReturnIllegalInOperators()
         {
             CreateCompilation(
-                    @"
+                @"
 public class Test
 {
     public static ref readonly bool operator!(Test obj) => throw null;
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify(
-                    // (4,37): error CS1519: Invalid token 'operator' in class, record, struct, or interface member declaration
-                    //     public static ref readonly bool operator!(Test obj) => throw null;
-                    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "operator")
-                        .WithArguments("operator")
-                        .WithLocation(4, 37),
-                    // (4,37): error CS1519: Invalid token 'operator' in class, record, struct, or interface member declaration
-                    //     public static ref readonly bool operator!(Test obj) => throw null;
-                    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "operator")
-                        .WithArguments("operator")
-                        .WithLocation(4, 37),
-                    // (4,55): error CS8124: Tuple must contain at least two elements.
-                    //     public static ref readonly bool operator!(Test obj) => throw null;
-                    Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 55),
-                    // (4,57): error CS1519: Invalid token '=>' in class, record, struct, or interface member declaration
-                    //     public static ref readonly bool operator!(Test obj) => throw null;
-                    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=>")
-                        .WithArguments("=>")
-                        .WithLocation(4, 57)
-                );
+            ).GetParseDiagnostics().Verify(
+                // (4,37): error CS1519: Invalid token 'operator' in class, record, struct, or interface member declaration
+                //     public static ref readonly bool operator!(Test obj) => throw null;
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "operator")
+                    .WithArguments("operator")
+                    .WithLocation(4, 37),
+                // (4,37): error CS1519: Invalid token 'operator' in class, record, struct, or interface member declaration
+                //     public static ref readonly bool operator!(Test obj) => throw null;
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "operator")
+                    .WithArguments("operator")
+                    .WithLocation(4, 37),
+                // (4,55): error CS8124: Tuple must contain at least two elements.
+                //     public static ref readonly bool operator!(Test obj) => throw null;
+                Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 55),
+                // (4,57): error CS1519: Invalid token '=>' in class, record, struct, or interface member declaration
+                //     public static ref readonly bool operator!(Test obj) => throw null;
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=>")
+                    .WithArguments("=>")
+                    .WithLocation(4, 57)
+            );
         }
 
         [Fact]
         public void InNotAllowedInReturnType()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     in int M() => throw null;
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,5): error CS1519: Invalid token 'in' in class, record, struct, or interface member declaration
-                    //     in int M() => throw null;
-                    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "in")
-                        .WithArguments("in")
-                        .WithLocation(4, 5)
-                );
+            ).VerifyDiagnostics(
+                // (4,5): error CS1519: Invalid token 'in' in class, record, struct, or interface member declaration
+                //     in int M() => throw null;
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "in")
+                    .WithArguments("in")
+                    .WithLocation(4, 5)
+            );
         }
 
         [Fact]
         public void RefReadOnlyNotAllowedInParameters()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M(ref readonly int p) => throw null;
 }"
-                )
-                .VerifyDiagnostics(
-                    // (4,16): error CS1031: Type expected
-                    //     void M(ref readonly int p) => throw null;
-                    Diagnostic(ErrorCode.ERR_TypeExpected, "readonly").WithLocation(4, 16),
-                    // (4,16): error CS1001: Identifier expected
-                    //     void M(ref readonly int p) => throw null;
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "readonly").WithLocation(4, 16),
-                    // (4,16): error CS1026: ) expected
-                    //     void M(ref readonly int p) => throw null;
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "readonly").WithLocation(4, 16),
-                    // (4,16): error CS1002: ; expected
-                    //     void M(ref readonly int p) => throw null;
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(4, 16),
-                    // (4,30): error CS1003: Syntax error, ',' expected
-                    //     void M(ref readonly int p) => throw null;
-                    Diagnostic(ErrorCode.ERR_SyntaxError, ")")
-                        .WithArguments(",", ")")
-                        .WithLocation(4, 30),
-                    // (4,10): error CS0501: 'Test.M(ref ?)' must declare a body because it is not marked abstract, extern, or partial
-                    //     void M(ref readonly int p) => throw null;
-                    Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "M")
-                        .WithArguments("Test.M(ref ?)")
-                        .WithLocation(4, 10),
-                    // (4,29): warning CS0169: The field 'Test.p' is never used
-                    //     void M(ref readonly int p) => throw null;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "p")
-                        .WithArguments("Test.p")
-                        .WithLocation(4, 29)
-                );
+            ).VerifyDiagnostics(
+                // (4,16): error CS1031: Type expected
+                //     void M(ref readonly int p) => throw null;
+                Diagnostic(ErrorCode.ERR_TypeExpected, "readonly").WithLocation(4, 16),
+                // (4,16): error CS1001: Identifier expected
+                //     void M(ref readonly int p) => throw null;
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "readonly").WithLocation(4, 16),
+                // (4,16): error CS1026: ) expected
+                //     void M(ref readonly int p) => throw null;
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "readonly").WithLocation(4, 16),
+                // (4,16): error CS1002: ; expected
+                //     void M(ref readonly int p) => throw null;
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(4, 16),
+                // (4,30): error CS1003: Syntax error, ',' expected
+                //     void M(ref readonly int p) => throw null;
+                Diagnostic(ErrorCode.ERR_SyntaxError, ")")
+                    .WithArguments(",", ")")
+                    .WithLocation(4, 30),
+                // (4,10): error CS0501: 'Test.M(ref ?)' must declare a body because it is not marked abstract, extern, or partial
+                //     void M(ref readonly int p) => throw null;
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "M")
+                    .WithArguments("Test.M(ref ?)")
+                    .WithLocation(4, 10),
+                // (4,29): warning CS0169: The field 'Test.p' is never used
+                //     void M(ref readonly int p) => throw null;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "p")
+                    .WithArguments("Test.p")
+                    .WithLocation(4, 29)
+            );
         }
 
         [Fact, WorkItem(25264, "https://github.com/dotnet/roslyn/issues/25264")]

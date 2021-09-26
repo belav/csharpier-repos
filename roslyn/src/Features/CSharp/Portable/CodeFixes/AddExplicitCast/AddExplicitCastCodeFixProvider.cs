@@ -85,9 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
         )
         {
             potentialConversionTypes = ImmutableArray<(ExpressionSyntax, ITypeSymbol)>.Empty;
-            using var _ = ArrayBuilder<(ExpressionSyntax, ITypeSymbol)>.GetInstance(
-                out var mutablePotentialConversionTypes
-            );
+            using var _ = ArrayBuilder<(ExpressionSyntax, ITypeSymbol)>
+                .GetInstance(out var mutablePotentialConversionTypes);
 
             if (diagnosticId == CS0266)
             {

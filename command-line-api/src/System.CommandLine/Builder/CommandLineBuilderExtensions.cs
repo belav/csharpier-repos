@@ -240,15 +240,18 @@ namespace System.CommandLine.Builder
                         );
                         if (string.IsNullOrWhiteSpace(debuggableProcessNames))
                         {
-                            context.Console.Error.WriteLine(
-                                "Debug directive specified, but no process names are listed as allowed for debug."
-                            );
-                            context.Console.Error.WriteLine(
-                                $"Add your process name to the '{environmentVariableName}' environment variable."
-                            );
-                            context.Console.Error.WriteLine(
-                                $"The value of the variable should be the name of the processes, separated by a semi-colon ';', for example '{environmentVariableName}={process.ProcessName}'"
-                            );
+                            context.Console.Error
+                                .WriteLine(
+                                    "Debug directive specified, but no process names are listed as allowed for debug."
+                                );
+                            context.Console.Error
+                                .WriteLine(
+                                    $"Add your process name to the '{environmentVariableName}' environment variable."
+                                );
+                            context.Console.Error
+                                .WriteLine(
+                                    $"The value of the variable should be the name of the processes, separated by a semi-colon ';', for example '{environmentVariableName}={process.ProcessName}'"
+                                );
                             context.ExitCode = errorExitCode ?? 1;
                             return;
                         }
@@ -259,9 +262,10 @@ namespace System.CommandLine.Builder
                             {
                                 var processId = process.Id;
 
-                                context.Console.Out.WriteLine(
-                                    $"Attach your debugger to process {processId} ({process.ProcessName})."
-                                );
+                                context.Console.Out
+                                    .WriteLine(
+                                        $"Attach your debugger to process {processId} ({process.ProcessName})."
+                                    );
                                 var startTime = DateTime.Now;
                                 while (!Debugger.IsAttached)
                                 {
@@ -270,9 +274,10 @@ namespace System.CommandLine.Builder
                             }
                             else
                             {
-                                context.Console.Error.WriteLine(
-                                    $"Process name '{process.ProcessName}' is not included in the list of debuggable process names in the {environmentVariableName} environment variable ('{debuggableProcessNames}')"
-                                );
+                                context.Console.Error
+                                    .WriteLine(
+                                        $"Process name '{process.ProcessName}' is not included in the list of debuggable process names in the {environmentVariableName} environment variable ('{debuggableProcessNames}')"
+                                    );
                                 context.ExitCode = errorExitCode ?? 1;
                                 return;
                             }

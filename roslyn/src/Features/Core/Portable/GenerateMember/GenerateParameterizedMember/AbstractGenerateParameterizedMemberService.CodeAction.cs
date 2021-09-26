@@ -76,15 +76,14 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             {
                 var syntaxTree = await _document.GetSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var syntaxFactory =
-                    _document.Project.Solution.Workspace.Services.GetLanguageServices(
-                            _state.TypeToGenerateIn.Language
-                        )
-                        .GetService<SyntaxGenerator>();
+                var syntaxFactory = _document.Project.Solution.Workspace.Services
+                    .GetLanguageServices(_state.TypeToGenerateIn.Language)
+                    .GetService<SyntaxGenerator>();
 
                 if (_generateProperty)
                 {
-                    var property = await _state.SignatureInfo.GeneratePropertyAsync(
+                    var property = await _state.SignatureInfo
+                        .GeneratePropertyAsync(
                             syntaxFactory,
                             _isAbstract,
                             _state.IsWrittenTo,
@@ -93,41 +92,38 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         .ConfigureAwait(false);
 
                     var result = await CodeGenerator.AddPropertyDeclarationAsync(
-                            _document.Project.Solution,
-                            _state.TypeToGenerateIn,
-                            property,
-                            new CodeGenerationOptions(
-                                afterThisLocation: _state.IdentifierToken.GetLocation(),
-                                generateMethodBodies: _state.TypeToGenerateIn.TypeKind
-                                    != TypeKind.Interface
-                            ),
-                            cancellationToken
-                        )
+                        _document.Project.Solution,
+                        _state.TypeToGenerateIn,
+                        property,
+                        new CodeGenerationOptions(
+                            afterThisLocation: _state.IdentifierToken.GetLocation(),
+                            generateMethodBodies: _state.TypeToGenerateIn.TypeKind
+                                != TypeKind.Interface
+                        ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return result;
                 }
                 else
                 {
-                    var method = await _state.SignatureInfo.GenerateMethodAsync(
-                            syntaxFactory,
-                            _isAbstract,
-                            cancellationToken
-                        )
+                    var method = await _state.SignatureInfo
+                        .GenerateMethodAsync(syntaxFactory, _isAbstract, cancellationToken)
                         .ConfigureAwait(false);
 
                     var result = await CodeGenerator.AddMethodDeclarationAsync(
-                            _document.Project.Solution,
-                            _state.TypeToGenerateIn,
-                            method,
-                            new CodeGenerationOptions(
-                                afterThisLocation: _state.Location,
-                                generateMethodBodies: _state.TypeToGenerateIn.TypeKind
-                                    != TypeKind.Interface,
-                                parseOptions: syntaxTree.Options
-                            ),
-                            cancellationToken
-                        )
+                        _document.Project.Solution,
+                        _state.TypeToGenerateIn,
+                        method,
+                        new CodeGenerationOptions(
+                            afterThisLocation: _state.Location,
+                            generateMethodBodies: _state.TypeToGenerateIn.TypeKind
+                                != TypeKind.Interface,
+                            parseOptions: syntaxTree.Options
+                        ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return result;

@@ -100,12 +100,13 @@ namespace Microsoft.DotNet.CoreSetup.Test
         private void EnsureTestProjectsFileContent(string dir, string type) =>
             EnsureFileWithContent(
                 Path.Combine(dir, $"Directory.Build.{type}"),
-                string.Join(
-                    Environment.NewLine,
-                    "<Project>",
-                    $"  <Import Project=\"{RepoDirProvider.TestAssetsFolder}/TestUtils/TestProjects.{type}\" />",
-                    "</Project>"
-                )
+                string
+                    .Join(
+                        Environment.NewLine,
+                        "<Project>",
+                        $"  <Import Project=\"{RepoDirProvider.TestAssetsFolder}/TestUtils/TestProjects.{type}\" />",
+                        "</Project>"
+                    )
             );
 
         private void EnsureFileWithContent(string path, string content)

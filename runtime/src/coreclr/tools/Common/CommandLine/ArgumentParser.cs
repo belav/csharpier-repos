@@ -272,12 +272,8 @@ namespace Internal.CommandLine
             }
             catch (FormatException ex)
             {
-                var message = string.Format(
-                    Strings.CannotParseValueFmt,
-                    valueText,
-                    diagnosticName,
-                    ex.Message
-                );
+                var message = string
+                    .Format(Strings.CannotParseValueFmt, valueText, diagnosticName, ex.Message);
                 throw new ArgumentSyntaxException(message);
             }
         }

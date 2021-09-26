@@ -12,9 +12,8 @@ namespace AutoMapper.UnitTests.InterfaceMapping
             new MapperConfiguration(c => c.CreateMap<object, IEnumerable<object>>());
         [Fact]
         public void Should_throw() =>
-            new Action(
-                () => Mapper.Map<IEnumerable<object>>(new object())
-            ).ShouldThrow<AutoMapperMappingException>()
+            new Action(() => Mapper.Map<IEnumerable<object>>(new object()))
+                .ShouldThrow<AutoMapperMappingException>()
                 .Message.ShouldStartWith(
                     "Cannot create interface System.Collections.Generic.IEnumerable`1[System.Object]"
                 );

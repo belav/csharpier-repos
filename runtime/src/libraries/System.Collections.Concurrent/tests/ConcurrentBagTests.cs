@@ -40,28 +40,22 @@ namespace System.Collections.Concurrent.Tests
             using (var b = new Barrier(threadsCount))
             {
                 WaitAllOrAnyFailed(
-                    (
-                        Enumerable.Range(0, threadsCount)
-                            .Select(
-                                _ =>
-                                    Task.Factory.StartNew(
-                                        () =>
+                    (Enumerable.Range(0, threadsCount).Select(_ => Task.Factory.StartNew(
+                                    () =>
+                                    {
+                                        b.SignalAndWait();
+                                        for (int i = 1; i < itemsPerThread + 1; i++)
                                         {
-                                            b.SignalAndWait();
-                                            for (int i = 1; i < itemsPerThread + 1; i++)
-                                            {
-                                                bag.Add(i);
-                                                int item;
-                                                Assert.True(bag.TryPeek(out item)); // ordering implementation detail that's not guaranteed
-                                                Assert.Equal(i, item);
-                                            }
-                                        },
-                                        CancellationToken.None,
-                                        TaskCreationOptions.LongRunning,
-                                        TaskScheduler.Default
-                                    )
-                            )
-                    ).ToArray()
+                                            bag.Add(i);
+                                            int item;
+                                            Assert.True(bag.TryPeek(out item)); // ordering implementation detail that's not guaranteed
+                                            Assert.Equal(i, item);
+                                        }
+                                    },
+                                    CancellationToken.None,
+                                    TaskCreationOptions.LongRunning,
+                                    TaskScheduler.Default
+                                ))).ToArray()
                 );
             }
 
@@ -74,21 +68,19 @@ namespace System.Collections.Concurrent.Tests
             var bag = new ConcurrentBag<int>(Enumerable.Range(1, 5));
 
             Task.Factory.StartNew(
-                    () =>
+                () =>
+                {
+                    int item;
+                    for (int i = 1; i <= 5; i++)
                     {
-                        int item;
-                        for (int i = 1; i <= 5; i++)
-                        {
-                            Assert.True(bag.TryPeek(out item));
-                            Assert.Equal(1, item);
-                        }
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                )
-                .GetAwaiter()
-                .GetResult();
+                        Assert.True(bag.TryPeek(out item));
+                        Assert.Equal(1, item);
+                    }
+                },
+                CancellationToken.None,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default
+            ).GetAwaiter().GetResult();
 
             Assert.Equal(5, bag.Count);
 
@@ -111,21 +103,19 @@ namespace System.Collections.Concurrent.Tests
         {
             var bag = new ConcurrentBag<int>(Enumerable.Range(0, 100000));
             Task.Factory.StartNew(
-                    () =>
+                () =>
+                {
+                    for (int i = 0; i < 100000; i++)
                     {
-                        for (int i = 0; i < 100000; i++)
-                        {
-                            int item;
-                            Assert.True(bag.TryTake(out item));
-                            Assert.Equal(i, item); // Testing an implementation detail rather than guaranteed ordering
-                        }
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                )
-                .GetAwaiter()
-                .GetResult();
+                        int item;
+                        Assert.True(bag.TryTake(out item));
+                        Assert.Equal(i, item); // Testing an implementation detail rather than guaranteed ordering
+                    }
+                },
+                CancellationToken.None,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default
+            ).GetAwaiter().GetResult();
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -292,15 +282,13 @@ namespace System.Collections.Concurrent.Tests
             {
                 bag.Add(i + initialCount);
                 ThreadFactory.StartNew(
-                        () =>
-                        {
-                            int item;
-                            Assert.True(bag.TryTake(out item));
-                            Assert.Equal(item, i);
-                        }
-                    )
-                    .GetAwaiter()
-                    .GetResult();
+                    () =>
+                    {
+                        int item;
+                        Assert.True(bag.TryTake(out item));
+                        Assert.Equal(item, i);
+                    }
+                ).GetAwaiter().GetResult();
                 Assert.Equal(Enumerable.Range(i + 1, initialCount).Reverse(), bag.ToArray());
             }
         }
@@ -371,9 +359,7 @@ namespace System.Collections.Concurrent.Tests
                 // If desired, add items on other threads
                 int origThreadId = Environment.CurrentManagedThreadId;
                 Task.WaitAll(
-                    (
-                        from _ in Enumerable.Range(0, otherThreads)
-                        select Task.Factory.StartNew(
+                    (from _ in Enumerable.Range(0, otherThreads) select Task.Factory.StartNew(
                             () =>
                             {
                                 Assert.NotEqual(origThreadId, Environment.CurrentManagedThreadId);
@@ -383,8 +369,7 @@ namespace System.Collections.Concurrent.Tests
                             CancellationToken.None,
                             TaskCreationOptions.LongRunning,
                             TaskScheduler.Default
-                        )
-                    ).ToArray()
+                        )).ToArray()
                 );
 
                 // Make sure we got the expected number of items, then clear, and make sure it's empty
@@ -422,10 +407,7 @@ namespace System.Collections.Concurrent.Tests
         public static void Clear_ConcurrentUsage_NoExceptions(int threadsCount, int itemsPerThread)
         {
             var bag = new ConcurrentBag<int>();
-            Task.WaitAll(
-                (
-                    from i in Enumerable.Range(0, threadsCount)
-                    select Task.Factory.StartNew(
+            Task.WaitAll((from i in Enumerable.Range(0, threadsCount) select Task.Factory.StartNew(
                         () =>
                         {
                             var random = new Random();
@@ -455,9 +437,7 @@ namespace System.Collections.Concurrent.Tests
                         CancellationToken.None,
                         TaskCreationOptions.LongRunning,
                         TaskScheduler.Default
-                    )
-                ).ToArray()
-            );
+                    )).ToArray());
         }
     }
 }

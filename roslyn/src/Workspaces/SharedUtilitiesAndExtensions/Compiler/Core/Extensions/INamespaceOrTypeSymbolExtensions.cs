@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return symbol == null
               ? SpecializedCollections.EmptyEnumerable<IPropertySymbol>()
               : symbol.GetMembers(WellKnownMemberNames.Indexer)
-                    .OfType<IPropertySymbol>()
-                    .Where(p => p.IsIndexer);
+                .OfType<IPropertySymbol>()
+                .Where(p => p.IsIndexer);
         }
 
         public static IReadOnlyList<string> GetNameParts(this INamespaceOrTypeSymbol symbol) =>

@@ -99,10 +99,10 @@ namespace Microsoft.Win32.RegistryTests
             Assert.Equal(
                 expected,
                 TestRegistryKey.GetValue(
-                        valueName,
-                        null,
-                        RegistryValueOptions.DoNotExpandEnvironmentNames
-                    )
+                    valueName,
+                    null,
+                    RegistryValueOptions.DoNotExpandEnvironmentNames
+                )
                     .ToString()
             );
             TestRegistryKey.DeleteValue(valueName);
@@ -166,10 +166,10 @@ namespace Microsoft.Win32.RegistryTests
             Assert.Equal(
                 testValue.ToString(),
                 TestRegistryKey.GetValue(
-                        valueName,
-                        null,
-                        RegistryValueOptions.DoNotExpandEnvironmentNames
-                    )
+                    valueName,
+                    null,
+                    RegistryValueOptions.DoNotExpandEnvironmentNames
+                )
                     .ToString()
             );
             TestRegistryKey.DeleteValue(valueName);
@@ -197,10 +197,10 @@ namespace Microsoft.Win32.RegistryTests
             Assert.Equal(
                 expectedVariableValue,
                 TestRegistryKey.GetValue(
-                        valueName,
-                        null,
-                        RegistryValueOptions.DoNotExpandEnvironmentNames
-                    )
+                    valueName,
+                    null,
+                    RegistryValueOptions.DoNotExpandEnvironmentNames
+                )
                     .ToString()
             );
             TestRegistryKey.DeleteValue(valueName);

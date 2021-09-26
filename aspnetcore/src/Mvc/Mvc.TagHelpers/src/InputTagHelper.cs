@@ -447,11 +447,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             htmlAttributes["type"] = inputType;
             if (
                 string.Equals(inputType, "file")
-                && string.Equals(
-                    inputTypeHint,
-                    TemplateRenderer.IEnumerableOfIFormFileName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && string
+                    .Equals(
+                        inputTypeHint,
+                        TemplateRenderer.IEnumerableOfIFormFileName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 htmlAttributes["multiple"] = "multiple";
@@ -536,11 +537,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 // EditFormatString has a default format i.e. came from a [DataType] attribute.
                 if (
                     string.Equals("text", inputType)
-                    && string.Equals(
-                        nameof(DateTimeOffset),
-                        inputTypeHint,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && string
+                        .Equals(
+                            nameof(DateTimeOffset),
+                            inputTypeHint,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     // Auto-select a format that round-trips Offset and sub-Second values in a DateTimeOffset. Not

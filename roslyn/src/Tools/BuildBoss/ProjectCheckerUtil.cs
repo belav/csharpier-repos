@@ -184,11 +184,12 @@ namespace BuildBoss
             foreach (var internalsVisibleTo in _projectUtil.GetInternalsVisibleTo())
             {
                 if (
-                    string.Equals(
-                        internalsVisibleTo.LoadsWithinVisualStudio,
-                        "false",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            internalsVisibleTo.LoadsWithinVisualStudio,
+                            "false",
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     // IVTs explicitly declared with LoadsWithinVisualStudio="false" are allowed
@@ -214,9 +215,11 @@ namespace BuildBoss
                     continue;
                 }
 
-                var builtByThisRepository = _solutionMap.Values.Any(
-                    projectData => GetAssemblyName(projectData) == internalsVisibleTo.TargetAssembly
-                );
+                var builtByThisRepository = _solutionMap.Values
+                    .Any(
+                        projectData =>
+                            GetAssemblyName(projectData) == internalsVisibleTo.TargetAssembly
+                    );
                 if (!builtByThisRepository)
                 {
                     textWriter.WriteLine(

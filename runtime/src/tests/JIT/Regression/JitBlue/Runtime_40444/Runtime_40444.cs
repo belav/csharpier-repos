@@ -33,7 +33,8 @@ class Runtime_40444
         t2_finished = 0;
 
         // Run Thread2() in a new thread
-        new Thread(new ThreadStart(Thread2)).Start();
+        new Thread(new ThreadStart(Thread2))
+            .Start();
 
         //
         //Wait for Thread2 to signal that it has a result by setting

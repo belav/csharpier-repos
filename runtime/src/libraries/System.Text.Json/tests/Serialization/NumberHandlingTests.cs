@@ -1678,10 +1678,8 @@ namespace System.Text.Json.Serialization.Tests
             static void RunTest<T>()
             {
                 string json = @"{""MyList"":[""1"",""2""]}";
-                ClassWithSimpleCollectionProperty<T> obj =
-                    global::System.Text.Json.JsonSerializer.Deserialize<
-                        ClassWithSimpleCollectionProperty<T>
-                    >(json);
+                ClassWithSimpleCollectionProperty<T> obj = global::System.Text.Json.JsonSerializer
+                    .Deserialize<ClassWithSimpleCollectionProperty<T>>(json);
                 Assert.Equal(json, global::System.Text.Json.JsonSerializer.Serialize(obj));
             }
         }

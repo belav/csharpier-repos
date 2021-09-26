@@ -44,10 +44,8 @@ namespace Microsoft.CodeAnalysis.Emit
         {
             return IsKey == other.IsKey
                 && IgnoreCase == other.IgnoreCase
-                && (IgnoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal).Equals(
-                    Name,
-                    other.Name
-                );
+                && (IgnoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal)
+                    .Equals(Name, other.Name);
         }
 
         public override bool Equals(object obj)
@@ -61,9 +59,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 IsKey,
                 Hash.Combine(
                     IgnoreCase,
-                    (
-                        IgnoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal
-                    ).GetHashCode(Name)
+                    (IgnoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal)
+                        .GetHashCode(Name)
                 )
             );
         }

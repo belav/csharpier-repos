@@ -150,9 +150,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 baselineDiagnostics = diagnosticsFile.ReadAllText();
             }
 
-            var actualDiagnostics = string.Concat(
-                diagnostics.Select(d => SerializeDiagnostic(d) + "\r\n")
-            );
+            var actualDiagnostics = string
+                .Concat(diagnostics.Select(d => SerializeDiagnostic(d) + "\r\n"));
             Assert.Equal(baselineDiagnostics, actualDiagnostics);
 
             // Verify classified spans

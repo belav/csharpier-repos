@@ -112,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
                     return
                         mainEntry.SharedIdentityEntry.EntityType == mainEntry.EntityType
-                        || mainEntry.SharedIdentityEntry.EntityType.GetTableMappings()
+                        || mainEntry.SharedIdentityEntry.EntityType
+                            .GetTableMappings()
                             .Any(m => m.Table.Name == TableName && m.Table.Schema == Schema)
                       ? EntityState.Modified
                       : mainEntry.EntityState;
@@ -389,9 +390,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                         {
                             if (columnPropagator.ColumnModification != null)
                             {
-                                columnPropagator.ColumnModification.AddSharedColumnModification(
-                                    columnModification
-                                );
+                                columnPropagator.ColumnModification
+                                    .AddSharedColumnModification(columnModification);
                                 continue;
                             }
 
@@ -475,11 +475,12 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             result +=
                 "("
-                + string.Join(
-                    ", ",
-                    _columnModifications.Where(m => m.IsKey)
-                        .Select(m => m.OriginalValue?.ToString())
-                )
+                + string
+                    .Join(
+                        ", ",
+                        _columnModifications.Where(m => m.IsKey)
+                            .Select(m => m.OriginalValue?.ToString())
+                    )
                 + ")";
             return result;
         }

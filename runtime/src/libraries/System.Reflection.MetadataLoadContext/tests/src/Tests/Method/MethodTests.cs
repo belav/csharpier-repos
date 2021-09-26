@@ -202,7 +202,8 @@ namespace System.Reflection.Tests
             Type actual = p.ParameterType;
 
             //GenericClass5<N, M[], IEnumerable<U>, T[,], int>
-            Type expected = typeof(GenericClass5<, , , , >).Project()
+            Type expected = typeof(GenericClass5<, , , , >)
+                .Project()
                 .MakeGenericType(
                     theN,
                     theM.MakeArrayType(),
@@ -263,7 +264,8 @@ namespace System.Reflection.Tests
             Type actual = p.ParameterType;
 
             //GenericClass5<N, M[], IEnumerable<U>, T[,], int>
-            Type expected = typeof(GenericClass5<, , , , >).Project()
+            Type expected = typeof(GenericClass5<, , , , >)
+                .Project()
                 .MakeGenericType(
                     theN,
                     theM.MakeArrayType(),
@@ -533,7 +535,8 @@ namespace System.Reflection.Tests
                 | BindingFlags.Static
                 | BindingFlags.DeclaredOnly;
             MethodBase[] mbs = (MethodBase[])(
-                typeof(ExerciseCallingConventions).Project()
+                typeof(ExerciseCallingConventions)
+                    .Project()
                     .GetMember("*", MemberTypes.Method | MemberTypes.Constructor, bf)
             );
             mbs = mbs.OrderBy(m => m.Name).ToArray();

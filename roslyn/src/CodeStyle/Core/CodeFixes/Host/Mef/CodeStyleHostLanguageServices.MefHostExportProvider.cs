@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Host
             _codeStyleLanguageServices = new MefWorkspaceServices(
                 exportProvider,
                 hostLanguageServices.WorkspaceServices.Workspace
-            ).GetLanguageServices(hostLanguageServices.Language);
+            )
+                .GetLanguageServices(hostLanguageServices.Language);
         }
 
         public static CodeStyleHostLanguageServices? GetMappedCodeStyleLanguageServices(

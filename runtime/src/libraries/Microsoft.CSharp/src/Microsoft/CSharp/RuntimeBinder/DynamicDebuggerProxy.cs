@@ -37,13 +37,12 @@ namespace Microsoft.CSharp.RuntimeBinder
             {
                 var v = new List<DynamicMetaObject> { self };
                 var error = new DynamicMetaObject(
-                    System.Linq.Expressions.Expression.Throw(
-                        System.Linq.Expressions.Expression.Constant(
-                            new DynamicBindingFailedException(),
-                            typeof(Exception)
+                    System.Linq.Expressions.Expression
+                        .Throw(
+                            System.Linq.Expressions.Expression
+                                .Constant(new DynamicBindingFailedException(), typeof(Exception)),
+                            typeof(object)
                         ),
-                        typeof(object)
-                    ),
                     System.Dynamic.BindingRestrictions.Combine(v)
                 );
                 return error;
@@ -148,7 +147,23 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             if (oper == ExpressionType.IsTrue || oper == ExpressionType.IsFalse)
             {
-                var trueFalseSite = CallSite<Func<CallSite, T, bool>>.Create(
+                var trueFalseSite = CallSite<Func<CallSite, T, bool>>
+                    .Create(
+                        new Microsoft.CSharp.RuntimeBinder.CSharpUnaryOperationBinder(
+                            oper,
+                            false,
+                            accessibilityContext,
+                            new CSharpArgumentInfo[]
+                            {
+                                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            }
+                        )
+                    );
+                return trueFalseSite.Target(trueFalseSite, obj);
+            }
+
+            var site = CallSite<Func<CallSite, T, object>>
+                .Create(
                     new Microsoft.CSharp.RuntimeBinder.CSharpUnaryOperationBinder(
                         oper,
                         false,
@@ -159,20 +174,6 @@ namespace Microsoft.CSharp.RuntimeBinder
                         }
                     )
                 );
-                return trueFalseSite.Target(trueFalseSite, obj);
-            }
-
-            var site = CallSite<Func<CallSite, T, object>>.Create(
-                new Microsoft.CSharp.RuntimeBinder.CSharpUnaryOperationBinder(
-                    oper,
-                    false,
-                    accessibilityContext,
-                    new CSharpArgumentInfo[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
             return site.Target(site, obj);
         }
 
@@ -184,9 +185,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             Type accessibilityContext
         )
         {
-            var site = CallSite<Func<CallSite, T, K>>.Create(
-                Binder.Convert(kind, type, accessibilityContext)
-            );
+            var site = CallSite<Func<CallSite, T, K>>
+                .Create(Binder.Convert(kind, type, accessibilityContext));
             return site.Target(site, obj);
         }
 
@@ -469,9 +469,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             bool ignoreCase = false;
             object value = null;
 
-            var site = CallSite<Func<CallSite, object, object>>.Create(
-                new GetMemberValueBinder(name, ignoreCase)
-            );
+            var site = CallSite<Func<CallSite, object, object>>
+                .Create(new GetMemberValueBinder(name, ignoreCase));
 
             try
             {

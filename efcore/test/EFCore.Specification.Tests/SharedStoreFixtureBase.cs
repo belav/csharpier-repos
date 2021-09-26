@@ -100,7 +100,8 @@ namespace Microsoft.EntityFrameworkCore
                 .UseInternalServiceProvider(serviceProvider);
 
         protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
-            base.AddServices(serviceCollection)
+            base
+                .AddServices(serviceCollection)
                 .AddSingleton<ILoggerFactory>(
                     TestStoreFactory.CreateListLoggerFactory(ShouldLogCategory)
                 );

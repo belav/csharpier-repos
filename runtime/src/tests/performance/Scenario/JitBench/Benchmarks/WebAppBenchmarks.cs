@@ -118,7 +118,8 @@ namespace JitBench
             string workingDirectory = null
         )
         {
-            int exitCode = await new ProcessRunner("git", arguments).WithLog(output)
+            int exitCode = await new ProcessRunner("git", arguments)
+                .WithLog(output)
                 .WithWorkingDirectory(workingDirectory)
                 .Run();
 
@@ -146,7 +147,8 @@ namespace JitBench
                           "bash",
                           $"./aspnet-generatestore.sh --install-dir {storeDirName} --architecture {dotNetInstall.Architecture} --runtime-id linux-{dotNetInstall.Architecture} -f {tfm} --fx-version {dotNetInstall.FrameworkVersion}"
                       )
-            ).WithWorkingDirectory(GetJitBenchRepoRootDir(outputDir))
+            )
+                .WithWorkingDirectory(GetJitBenchRepoRootDir(outputDir))
                 .WithEnvironmentVariable(
                     "PATH",
                     $"{dotNetInstall.DotNetDir}{Path.PathSeparator}{Environment.GetEnvironmentVariable("PATH")}"
@@ -185,7 +187,8 @@ namespace JitBench
             await new ProcessRunner(
                 dotNetExePath,
                 $"publish -c Release -f {tfm} --manifest {manifestPath}"
-            ).WithWorkingDirectory(GetWebAppSrcDirectory(outputDir))
+            )
+                .WithWorkingDirectory(GetWebAppSrcDirectory(outputDir))
                 .WithEnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "0")
                 .WithEnvironmentVariable("JITBENCH_ASPNET_VERSION", "2.0")
                 .WithEnvironmentVariable("JITBENCH_TARGET_FRAMEWORK_MONIKER", tfm)
@@ -219,12 +222,8 @@ namespace JitBench
             ITestOutputHelper output
         )
         {
-            IterationResult result = base.RecordIterationMetrics(
-                scenarioIteration,
-                stdout,
-                stderr,
-                output
-            );
+            IterationResult result = base
+                .RecordIterationMetrics(scenarioIteration, stdout, stderr, output);
             AddConsoleMetrics(result, stdout, output);
             return result;
         }
@@ -319,11 +318,12 @@ namespace JitBench
             }
             else
             {
-                return base.TryGetBenchviewCustomMetricReporting(
-                    originalMetric,
-                    out newMetric,
-                    out newScenarioModelName
-                );
+                return base
+                    .TryGetBenchviewCustomMetricReporting(
+                        originalMetric,
+                        out newMetric,
+                        out newScenarioModelName
+                    );
             }
             newMetric = Metric.ElapsedTimeMilliseconds;
             return true;

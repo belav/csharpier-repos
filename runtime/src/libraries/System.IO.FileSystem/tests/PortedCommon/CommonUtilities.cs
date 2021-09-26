@@ -222,11 +222,12 @@ public class ManageFileSystem : IDisposable
         {
             tempPath = Path.Combine(
                 parentDir,
-                string.Format(
-                    "{0}{1}",
-                    prefix,
-                    Path.GetFileNameWithoutExtension(Path.GetRandomFileName())
-                )
+                string
+                    .Format(
+                        "{0}{1}",
+                        prefix,
+                        Path.GetFileNameWithoutExtension(Path.GetRandomFileName())
+                    )
             );
             if (!Directory.Exists(tempPath) && !File.Exists(tempPath))
                 break;

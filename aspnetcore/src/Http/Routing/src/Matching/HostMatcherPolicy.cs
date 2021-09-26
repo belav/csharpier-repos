@@ -246,9 +246,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             for (var i = 0; i < endpoints.Count; i++)
             {
                 var endpoint = endpoints[i];
-                var hosts = endpoint.Metadata.GetMetadata<IHostMetadata>()?.Hosts.Select(
-                        h => CreateEdgeKey(h)
-                    )
+                var hosts = endpoint.Metadata.GetMetadata<IHostMetadata>()?.Hosts
+                    .Select(h => CreateEdgeKey(h))
                     .ToArray();
                 if (hosts == null || hosts.Length == 0)
                 {
@@ -272,9 +271,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 var endpoint = endpoints[i];
 
                 var endpointKeys =
-                    endpoint.Metadata.GetMetadata<IHostMetadata>()?.Hosts.Select(
-                            h => CreateEdgeKey(h)
-                        )
+                    endpoint.Metadata.GetMetadata<IHostMetadata>()?.Hosts
+                        .Select(h => CreateEdgeKey(h))
                         .ToArray() ?? Array.Empty<EdgeKey>();
                 if (endpointKeys.Length == 0)
                 {
@@ -377,21 +375,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 return (hostString.Host, hostString.Port);
             }
             else if (
-                string.Equals(
-                    "https",
-                    httpContext.Request.Scheme,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals("https", httpContext.Request.Scheme, StringComparison.OrdinalIgnoreCase)
             )
             {
                 return (hostString.Host, 443);
             }
             else if (
-                string.Equals(
-                    "http",
-                    httpContext.Request.Scheme,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals("http", httpContext.Request.Scheme, StringComparison.OrdinalIgnoreCase)
             )
             {
                 return (hostString.Host, 80);
@@ -407,10 +399,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             protected override int CompareMetadata(IHostMetadata? x, IHostMetadata? y)
             {
                 // Ignore the metadata if it has an empty list of hosts.
-                return base.CompareMetadata(
-                    x?.Hosts.Count > 0 ? x : null,
-                    y?.Hosts.Count > 0 ? y : null
-                );
+                return base
+                    .CompareMetadata(x?.Hosts.Count > 0 ? x : null, y?.Hosts.Count > 0 ? y : null);
             }
         }
 

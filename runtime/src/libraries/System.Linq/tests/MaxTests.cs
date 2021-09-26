@@ -261,9 +261,8 @@ namespace System.Linq.Tests
             yield return new object[] { new double[] { -16, 0, 50, 100, 1000 }, 1000.0 };
             yield return new object[]
             {
-                new double[] { -16, 0, 50, 100, 1000 }.Concat(
-                    Enumerable.Repeat(double.MaxValue, 1)
-                ),
+                new double[] { -16, 0, 50, 100, 1000 }
+                    .Concat(Enumerable.Repeat(double.MaxValue, 1)),
                 double.MaxValue
             };
 
@@ -383,9 +382,8 @@ namespace System.Linq.Tests
             yield return new object[] { new decimal[] { -16, 0, 50, 100, 1000 }, 1000m };
             yield return new object[]
             {
-                new decimal[] { -16, 0, 50, 100, 1000 }.Concat(
-                    Enumerable.Repeat(decimal.MaxValue, 1)
-                ),
+                new decimal[] { -16, 0, 50, 100, 1000 }
+                    .Concat(Enumerable.Repeat(decimal.MaxValue, 1)),
                 decimal.MaxValue
             };
 
@@ -440,9 +438,8 @@ namespace System.Linq.Tests
             yield return new object[] { new int?[] { null, -16, 0, 50, 100, 1000 }, 1000 };
             yield return new object[]
             {
-                new int?[] { null, -16, 0, 50, 100, 1000 }.Concat(
-                    Enumerable.Repeat((int?)int.MaxValue, 1)
-                ),
+                new int?[] { null, -16, 0, 50, 100, 1000 }
+                    .Concat(Enumerable.Repeat((int?)int.MaxValue, 1)),
                 int.MaxValue
             };
             yield return new object[] { Enumerable.Repeat(default(int?), 100), null };
@@ -495,9 +492,8 @@ namespace System.Linq.Tests
             yield return new object[] { new long?[] { null, -16, 0, 50, 100, 1000 }, 1000L };
             yield return new object[]
             {
-                new long?[] { null, -16, 0, 50, 100, 1000 }.Concat(
-                    Enumerable.Repeat((long?)long.MaxValue, 1)
-                ),
+                new long?[] { null, -16, 0, 50, 100, 1000 }
+                    .Concat(Enumerable.Repeat((long?)long.MaxValue, 1)),
                 long.MaxValue
             };
             yield return new object[] { Enumerable.Repeat(default(long?), 100), null };
@@ -551,9 +547,8 @@ namespace System.Linq.Tests
             yield return new object[] { new float?[] { null, -16, 0, 50, 100, 1000 }, 1000f };
             yield return new object[]
             {
-                new float?[] { null, -16, 0, 50, 100, 1000 }.Concat(
-                    Enumerable.Repeat((float?)float.MaxValue, 1)
-                ),
+                new float?[] { null, -16, 0, 50, 100, 1000 }
+                    .Concat(Enumerable.Repeat((float?)float.MaxValue, 1)),
                 float.MaxValue
             };
             yield return new object[] { Enumerable.Repeat(default(float?), 100), null };
@@ -636,9 +631,8 @@ namespace System.Linq.Tests
             yield return new object[] { new double?[] { null, -16, 0, 50, 100, 1000 }, 1000.0 };
             yield return new object[]
             {
-                new double?[] { null, -16, 0, 50, 100, 1000 }.Concat(
-                    Enumerable.Repeat((double?)double.MaxValue, 1)
-                ),
+                new double?[] { null, -16, 0, 50, 100, 1000 }
+                    .Concat(Enumerable.Repeat((double?)double.MaxValue, 1)),
                 double.MaxValue
             };
             yield return new object[] { Enumerable.Repeat(default(double?), 100), null };
@@ -729,9 +723,8 @@ namespace System.Linq.Tests
             yield return new object[] { new decimal?[] { null, -16M, 0, 50, 100, 1000 }, 1000m };
             yield return new object[]
             {
-                new decimal?[] { null, -16M, 0, 50, 100, 1000 }.Concat(
-                    Enumerable.Repeat((decimal?)decimal.MaxValue, 1)
-                ),
+                new decimal?[] { null, -16M, 0, 50, 100, 1000 }
+                    .Concat(Enumerable.Repeat((decimal?)decimal.MaxValue, 1)),
                 decimal.MaxValue
             };
             yield return new object[] { Enumerable.Repeat(default(decimal?), 100), null };

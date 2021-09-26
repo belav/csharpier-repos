@@ -50,9 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             _logger.AttemptingToBindModel(bindingContext);
 
-            var valueProviderResult = bindingContext.ValueProvider.GetValue(
-                bindingContext.ModelName
-            );
+            var valueProviderResult = bindingContext.ValueProvider
+                .GetValue(bindingContext.ModelName);
             if (valueProviderResult == ValueProviderResult.None)
             {
                 _logger.FoundNoValueInRequest(bindingContext);
@@ -114,11 +113,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         ExceptionDispatchInfo.Capture(exception.InnerException).SourceException;
                 }
 
-                bindingContext.ModelState.TryAddModelError(
-                    bindingContext.ModelName,
-                    exception,
-                    bindingContext.ModelMetadata
-                );
+                bindingContext.ModelState
+                    .TryAddModelError(
+                        bindingContext.ModelName,
+                        exception,
+                        bindingContext.ModelMetadata
+                    );
 
                 // Were able to find a converter for the type but conversion failed.
                 return Task.CompletedTask;
@@ -137,12 +137,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             // current bindingContext. If not, an error is logged.
             if (model == null && !bindingContext.ModelMetadata.IsReferenceOrNullableType)
             {
-                bindingContext.ModelState.TryAddModelError(
-                    bindingContext.ModelName,
-                    bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                        valueProviderResult.ToString()
-                    )
-                );
+                bindingContext.ModelState
+                    .TryAddModelError(
+                        bindingContext.ModelName,
+                        bindingContext.ModelMetadata.ModelBindingMessageProvider
+                            .ValueMustNotBeNullAccessor(valueProviderResult.ToString())
+                    );
             }
             else
             {

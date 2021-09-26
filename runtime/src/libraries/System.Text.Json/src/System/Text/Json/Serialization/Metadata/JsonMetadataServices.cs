@@ -134,12 +134,8 @@ namespace System.Text.Json.Serialization.Metadata
                 throw new ArgumentNullException(nameof(propInitFunc));
             }
 
-            ((JsonTypeInfoInternal<T>)info).InitializeAsObject(
-                options,
-                createObjectFunc,
-                propInitFunc,
-                numberHandling
-            );
+            ((JsonTypeInfoInternal<T>)info)
+                .InitializeAsObject(options, createObjectFunc, propInitFunc, numberHandling);
             Debug.Assert(
                 info.PropertyInfoForTypeInfo!.ConverterStrategy == ConverterStrategy.Object
             );
@@ -157,13 +153,8 @@ namespace System.Text.Json.Serialization.Metadata
         ) where TConverterReturn : T
         {
             JsonTypeInfo<T> info = new JsonTypeInfoInternal<T>(options);
-            info.PropertyInfoForTypeInfo =
-                JsonPropertyInfo<TConverterReturn>.CreateForSourceGenTypeInfo(
-                    typeof(T),
-                    runtimeTypeInfo: info,
-                    converter,
-                    options
-                );
+            info.PropertyInfoForTypeInfo = JsonPropertyInfo<TConverterReturn>
+                .CreateForSourceGenTypeInfo(typeof(T), runtimeTypeInfo: info, converter, options);
             return info;
         }
     }

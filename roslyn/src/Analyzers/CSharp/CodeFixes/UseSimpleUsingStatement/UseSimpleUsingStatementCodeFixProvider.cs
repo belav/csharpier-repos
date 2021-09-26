@@ -67,8 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         )
         {
             var topmostUsingStatements = diagnostics.Select(
-                    d => (UsingStatementSyntax)d.AdditionalLocations[0].FindNode(cancellationToken)
-                )
+                d => (UsingStatementSyntax)d.AdditionalLocations[0].FindNode(cancellationToken)
+            )
                 .ToSet();
             var blocks = topmostUsingStatements.Select(u => (BlockSyntax)u.Parent);
 
@@ -93,9 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         {
             if (originalBlock.Statements.Count == currentBlock.Statements.Count)
             {
-                var statementToUpdateIndex = originalBlock.Statements.IndexOf(
-                    s => topmostUsingStatements.Contains(s)
-                );
+                var statementToUpdateIndex = originalBlock.Statements
+                    .IndexOf(s => topmostUsingStatements.Contains(s));
                 var statementToUpdate = currentBlock.Statements[statementToUpdateIndex];
 
                 if (
@@ -103,10 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
                     && usingStatement.Declaration != null
                 )
                 {
-                    var updatedStatements = currentBlock.Statements.ReplaceRange(
-                        statementToUpdate,
-                        Expand(usingStatement)
-                    );
+                    var updatedStatements = currentBlock.Statements
+                        .ReplaceRange(statementToUpdate, Expand(usingStatement));
                     return currentBlock.WithStatements(updatedStatements);
                 }
             }
@@ -186,12 +183,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         private static LocalDeclarationStatementSyntax Convert(UsingStatementSyntax usingStatement)
         {
             return LocalDeclarationStatement(
-                    usingStatement.AwaitKeyword,
-                    usingStatement.UsingKeyword,
-                    modifiers: default,
-                    usingStatement.Declaration,
-                    Token(SyntaxKind.SemicolonToken)
-                )
+                usingStatement.AwaitKeyword,
+                usingStatement.UsingKeyword,
+                modifiers: default,
+                usingStatement.Declaration,
+                Token(SyntaxKind.SemicolonToken)
+            )
                 .WithTrailingTrivia(usingStatement.CloseParenToken.TrailingTrivia);
         }
 

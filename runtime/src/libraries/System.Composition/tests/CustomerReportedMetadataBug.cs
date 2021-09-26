@@ -37,7 +37,8 @@ namespace System.Composition.Lightweight.UnitTests
         [Fact]
         public void SampleServicesCorrectlyImported()
         {
-            var container = new ContainerConfiguration().WithPart<SampleService1>()
+            var container = new ContainerConfiguration()
+                .WithPart<SampleService1>()
                 .CreateContainer();
 
             var importer = new LooseImporter();

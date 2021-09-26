@@ -582,7 +582,8 @@ ORDER BY [g].[Year]"
 
         public override void QF_Select_Correlated_Direct_With_Function_Query_Parameter_Correlated_In_Anonymous()
         {
-            base.QF_Select_Correlated_Direct_With_Function_Query_Parameter_Correlated_In_Anonymous();
+            base
+                .QF_Select_Correlated_Direct_With_Function_Query_Parameter_Correlated_In_Anonymous();
 
             AssertSql(
                 @"SELECT [c].[Id], [g].[OrderId], [g].[CustomerId], [g].[OrderDate]

@@ -87,15 +87,15 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                     : null;
 
                 var result = await CodeGenerator.AddMemberDeclarationsAsync(
-                        _document.Project.Solution,
-                        _state.ContainingType,
-                        members,
-                        new CodeGenerationOptions(
-                            contextLocation: syntaxTree.GetLocation(_state.TextSpan),
-                            afterThisLocation: afterThisLocation
-                        ),
-                        cancellationToken
-                    )
+                    _document.Project.Solution,
+                    _state.ContainingType,
+                    members,
+                    new CodeGenerationOptions(
+                        contextLocation: syntaxTree.GetLocation(_state.TextSpan),
+                        afterThisLocation: afterThisLocation
+                    ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return await AddNavigationAnnotationAsync(result, cancellationToken)
@@ -106,26 +106,27 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             {
                 get
                 {
-                    var parameters = _state.Parameters.Select(
-                        p => _service.ToDisplayString(p, SimpleFormat)
-                    );
+                    var parameters = _state.Parameters
+                        .Select(p => _service.ToDisplayString(p, SimpleFormat));
                     var parameterString = string.Join(", ", parameters);
 
                     if (_state.DelegatedConstructor == null)
                     {
-                        return string.Format(
-                            FeaturesResources.Generate_constructor_0_1,
-                            _state.ContainingType.Name,
-                            parameterString
-                        );
+                        return string
+                            .Format(
+                                FeaturesResources.Generate_constructor_0_1,
+                                _state.ContainingType.Name,
+                                parameterString
+                            );
                     }
                     else
                     {
-                        return string.Format(
-                            FeaturesResources.Generate_field_assigning_constructor_0_1,
-                            _state.ContainingType.Name,
-                            parameterString
-                        );
+                        return string
+                            .Format(
+                                FeaturesResources.Generate_field_assigning_constructor_0_1,
+                                _state.ContainingType.Name,
+                                parameterString
+                            );
                     }
                 }
             }

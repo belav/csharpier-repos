@@ -9,16 +9,12 @@ namespace AutoMapper.Internal.Mappers
     using static Expression;
     public class StringToEnumMapper : IObjectMapper
     {
-        private static readonly MethodInfo EqualsMethod = typeof(StringToEnumMapper).GetMethod(
-            "StringCompareOrdinalIgnoreCase"
-        );
-        private static readonly MethodInfo ParseMethod = typeof(Enum).GetMethod(
-            "Parse",
-            new[] { typeof(Type), typeof(string), typeof(bool) }
-        );
-        private static readonly MethodInfo IsNullOrEmptyMethod = typeof(string).GetMethod(
-            "IsNullOrEmpty"
-        );
+        private static readonly MethodInfo EqualsMethod = typeof(StringToEnumMapper)
+            .GetMethod("StringCompareOrdinalIgnoreCase");
+        private static readonly MethodInfo ParseMethod = typeof(Enum)
+            .GetMethod("Parse", new[] { typeof(Type), typeof(string), typeof(bool) });
+        private static readonly MethodInfo IsNullOrEmptyMethod = typeof(string)
+            .GetMethod("IsNullOrEmpty");
         public bool IsMatch(in TypePair context) =>
             context.SourceType == typeof(string) && context.DestinationType.IsEnum;
         public Expression MapExpression(

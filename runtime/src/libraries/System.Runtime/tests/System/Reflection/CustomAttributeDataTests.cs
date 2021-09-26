@@ -98,7 +98,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Test_CustomAttribute_Constructor_PseudoCa()
         {
-            FieldInfo f = typeof(MyExplicitClass).GetTypeInfo()
+            FieldInfo f = typeof(MyExplicitClass)
+                .GetTypeInfo()
                 .GetDeclaredField(nameof(MyExplicitClass.X));
             foreach (CustomAttributeData cad in f.CustomAttributes)
             {

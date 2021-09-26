@@ -162,9 +162,8 @@ namespace System.Text.RegularExpressions.Tests
                         new[]
                         {
                             new CustomAttributeBuilder(
-                                typeof(AssemblyCompanyAttribute).GetConstructor(
-                                    new[] { typeof(string) }
-                                ),
+                                typeof(AssemblyCompanyAttribute)
+                                    .GetConstructor(new[] { typeof(string) }),
                                 new[] { "TestCompany" }
                             )
                         }

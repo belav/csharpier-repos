@@ -113,12 +113,8 @@ namespace Internal.Cryptography.Pal.Native
         private bool CertHasProperty(CertContextPropId propertyId)
         {
             int cb = 0;
-            bool hasProperty = Interop.crypt32.CertGetCertificateContextProperty(
-                this,
-                propertyId,
-                null,
-                ref cb
-            );
+            bool hasProperty = Interop.crypt32
+                .CertGetCertificateContextProperty(this, propertyId, null, ref cb);
 
             return hasProperty;
         }
@@ -132,9 +128,8 @@ namespace Internal.Cryptography.Pal.Native
         protected sealed override bool ReleaseHandle()
         {
             using (
-                SafeCertContextHandle certContext = Interop.crypt32.CertDuplicateCertificateContext(
-                    handle
-                )
+                SafeCertContextHandle certContext = Interop.crypt32
+                    .CertDuplicateCertificateContext(handle)
             )
             {
                 DeleteKeyContainer(certContext);
@@ -149,23 +144,25 @@ namespace Internal.Cryptography.Pal.Native
                 return;
 
             int cb = 0;
-            bool containsPrivateKey = Interop.crypt32.CertGetCertificateContextProperty(
-                pCertContext,
-                CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                null,
-                ref cb
-            );
+            bool containsPrivateKey = Interop.crypt32
+                .CertGetCertificateContextProperty(
+                    pCertContext,
+                    CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                    null,
+                    ref cb
+                );
             if (!containsPrivateKey)
                 return;
 
             byte[] provInfoAsBytes = new byte[cb];
             if (
-                !Interop.crypt32.CertGetCertificateContextProperty(
-                    pCertContext,
-                    CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                    provInfoAsBytes,
-                    ref cb
-                )
+                !Interop.crypt32
+                    .CertGetCertificateContextProperty(
+                        pCertContext,
+                        CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                        provInfoAsBytes,
+                        ref cb
+                    )
             )
                 return;
             unsafe
@@ -210,13 +207,14 @@ namespace Internal.Cryptography.Pal.Native
                             (pProvInfo->dwFlags & CryptAcquireContextFlags.CRYPT_MACHINE_KEYSET)
                             | CryptAcquireContextFlags.CRYPT_DELETEKEYSET;
                         IntPtr hProv;
-                        _ = Interop.cryptoapi.CryptAcquireContext(
-                            out hProv,
-                            pProvInfo->pwszContainerName,
-                            pProvInfo->pwszProvName,
-                            pProvInfo->dwProvType,
-                            flags
-                        );
+                        _ = Interop.cryptoapi
+                            .CryptAcquireContext(
+                                out hProv,
+                                pProvInfo->pwszContainerName,
+                                pProvInfo->pwszProvName,
+                                pProvInfo->dwProvType,
+                                flags
+                            );
 
                         // Called CryptAcquireContext solely for the side effect of deleting the key containers. When called with these flags, no actual
                         // hProv is returned (so there's nothing to clean up.)

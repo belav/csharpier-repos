@@ -86,8 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 GrowPool(count);
             }
 
-            ArrayBuilder<TypeParameterSymbol> builder =
-                ArrayBuilder<TypeParameterSymbol>.GetInstance();
+            ArrayBuilder<TypeParameterSymbol> builder = ArrayBuilder<TypeParameterSymbol>
+                .GetInstance();
 
             for (int i = 0; i < count; i++)
             {

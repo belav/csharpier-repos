@@ -333,7 +333,8 @@ namespace Microsoft.Net.Http.Headers
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -366,7 +367,8 @@ namespace Microsoft.Net.Http.Headers
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -398,7 +400,8 @@ namespace Microsoft.Net.Http.Headers
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -430,7 +433,8 @@ namespace Microsoft.Net.Http.Headers
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -460,7 +464,8 @@ namespace Microsoft.Net.Http.Headers
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }
@@ -508,7 +513,8 @@ namespace Microsoft.Net.Http.Headers
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\""),
                 new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            }
+                .ToList();
 
             Assert.Equal(expectedResults, results);
         }

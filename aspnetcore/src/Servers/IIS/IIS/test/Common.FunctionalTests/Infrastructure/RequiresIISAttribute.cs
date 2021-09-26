@@ -102,7 +102,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 return;
             }
 
-            _isMetStatic = ancmConfig.Root.Descendants("attribute")
+            _isMetStatic = ancmConfig.Root
+                .Descendants("attribute")
                 .Any(
                     n => "hostingModel".Equals(n.Attribute("name")?.Value, StringComparison.Ordinal)
                 );
@@ -123,10 +124,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 }
             }
 
-            var iisRegistryKey = Registry.LocalMachine.OpenSubKey(
-                @"Software\Microsoft\InetStp",
-                writable: false
-            );
+            var iisRegistryKey = Registry.LocalMachine
+                .OpenSubKey(@"Software\Microsoft\InetStp", writable: false);
             if (iisRegistryKey == null)
             {
                 _poolEnvironmentVariablesAvailable = false;

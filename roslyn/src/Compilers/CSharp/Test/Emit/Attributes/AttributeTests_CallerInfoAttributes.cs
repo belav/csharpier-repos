@@ -50,30 +50,29 @@ class Test {
     static void LogCallerMemberName([CallerMemberName] string memberName) { }
 }";
 
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (5,38): error CS4020: The CallerLineNumberAttribute may only be applied to parameters with default values
-                    //     static void LogCallerLineNumber([CallerLineNumber] int lineNumber) { }
-                    Diagnostic(
-                            ErrorCode.ERR_BadCallerLineNumberParamWithoutDefaultValue,
-                            @"CallerLineNumber"
-                        )
-                        .WithLocation(5, 38),
-                    // (7,36): error CS4021: The CallerFilePathAttribute may only be applied to parameters with default values
-                    //     static void LogCallerFilePath([CallerFilePath] string filePath) { }
-                    Diagnostic(
-                            ErrorCode.ERR_BadCallerFilePathParamWithoutDefaultValue,
-                            @"CallerFilePath"
-                        )
-                        .WithLocation(7, 36),
-                    // (9,38): error CS4022: The CallerMemberNameAttribute may only be applied to parameters with default values
-                    //     static void LogCallerMemberName([CallerMemberName] string memberName) { }
-                    Diagnostic(
-                            ErrorCode.ERR_BadCallerMemberNameParamWithoutDefaultValue,
-                            @"CallerMemberName"
-                        )
-                        .WithLocation(9, 38)
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (5,38): error CS4020: The CallerLineNumberAttribute may only be applied to parameters with default values
+                //     static void LogCallerLineNumber([CallerLineNumber] int lineNumber) { }
+                Diagnostic(
+                    ErrorCode.ERR_BadCallerLineNumberParamWithoutDefaultValue,
+                    @"CallerLineNumber"
+                )
+                    .WithLocation(5, 38),
+                // (7,36): error CS4021: The CallerFilePathAttribute may only be applied to parameters with default values
+                //     static void LogCallerFilePath([CallerFilePath] string filePath) { }
+                Diagnostic(
+                    ErrorCode.ERR_BadCallerFilePathParamWithoutDefaultValue,
+                    @"CallerFilePath"
+                )
+                    .WithLocation(7, 36),
+                // (9,38): error CS4022: The CallerMemberNameAttribute may only be applied to parameters with default values
+                //     static void LogCallerMemberName([CallerMemberName] string memberName) { }
+                Diagnostic(
+                    ErrorCode.ERR_BadCallerMemberNameParamWithoutDefaultValue,
+                    @"CallerMemberName"
+                )
+                    .WithLocation(9, 38)
+            );
         }
 
         [Fact]
@@ -321,38 +320,38 @@ class Test {
 }";
 
             CreateCompilationWithMscorlib45(
-                    source,
-                    references: new MetadataReference[] { SystemRef }
-                )
+                source,
+                references: new MetadataReference[] { SystemRef }
+            )
                 .VerifyDiagnostics(
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(5, 39)
                         .WithArguments("int", "string"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(6, 39)
                         .WithArguments("int", "char"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(7, 39)
                         .WithArguments("int", "bool"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(8, 39)
                         .WithArguments("int", "short"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(9, 39)
                         .WithArguments("int", "ushort"),
                     Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
@@ -371,33 +370,33 @@ class Test {
                         .WithLocation(15, 37)
                         .WithArguments("string", "int?"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(17, 39)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(18, 39)
                         .WithArguments("string", "long"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(19, 39)
                         .WithArguments("string", "double"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(20, 39)
                         .WithArguments("string", "float"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(21, 39)
                         .WithArguments("string", "int?")
                 );
@@ -838,9 +837,9 @@ partial class D
                     Diagnostic(ErrorCode.ERR_DuplicateAttribute, "CallerLineNumber")
                         .WithArguments("CallerLineNumber"),
                     Diagnostic(
-                            ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation,
+                        "CallerLineNumber"
+                    )
                         .WithArguments("x")
                         .WithLocation(11, 23)
                 );
@@ -870,30 +869,26 @@ partial class D
     }
 }";
 
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (12,10): warning CS4024: The CallerLineNumberAttribute applied to parameter 'line' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
-                    //         [CallerLineNumber] int line,
-                    Diagnostic(
-                            ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation,
-                            "CallerLineNumber"
-                        )
-                        .WithArguments("line"),
-                    // (13,10): warning CS4026: The CallerMemberNameAttribute applied to parameter 'member' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
-                    //         [CallerMemberName] string member,
-                    Diagnostic(
-                            ErrorCode.WRN_CallerMemberNameParamForUnconsumedLocation,
-                            "CallerMemberName"
-                        )
-                        .WithArguments("member"),
-                    // (14,10): warning CS4025: The CallerFilePathAttribute applied to parameter 'path' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
-                    //         [CallerFilePath] string path) { }
-                    Diagnostic(
-                            ErrorCode.WRN_CallerFilePathParamForUnconsumedLocation,
-                            "CallerFilePath"
-                        )
-                        .WithArguments("path")
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (12,10): warning CS4024: The CallerLineNumberAttribute applied to parameter 'line' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                //         [CallerLineNumber] int line,
+                Diagnostic(
+                    ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation,
+                    "CallerLineNumber"
+                )
+                    .WithArguments("line"),
+                // (13,10): warning CS4026: The CallerMemberNameAttribute applied to parameter 'member' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                //         [CallerMemberName] string member,
+                Diagnostic(
+                    ErrorCode.WRN_CallerMemberNameParamForUnconsumedLocation,
+                    "CallerMemberName"
+                )
+                    .WithArguments("member"),
+                // (14,10): warning CS4025: The CallerFilePathAttribute applied to parameter 'path' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                //         [CallerFilePath] string path) { }
+                Diagnostic(ErrorCode.WRN_CallerFilePathParamForUnconsumedLocation, "CallerFilePath")
+                    .WithArguments("path")
+            );
         }
 
         [Fact]
@@ -977,41 +972,41 @@ class Test
     public static void Log24([CallerLineNumber, CallerMemberName] int x = 1) { Console.WriteLine(""line: "" + x); }
 }";
             CreateCompilationWithMscorlib45(
-                    source,
-                    options: TestOptions.ReleaseDll.WithWarningLevel(0)
-                )
+                source,
+                options: TestOptions.ReleaseDll.WithWarningLevel(0)
+            )
                 .VerifyDiagnostics(
                     Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
                         .WithLocation(7, 48)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(7, 64)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(8, 48)
                         .WithArguments("string", "int"),
                     Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
                         .WithLocation(8, 66)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(9, 30)
                         .WithArguments("string", "int"),
                     Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
                         .WithLocation(9, 66)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(10, 30)
                         .WithArguments("string", "int"),
                     Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
@@ -1021,93 +1016,93 @@ class Test
                         .WithLocation(11, 30)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(11, 46)
                         .WithArguments("string", "int"),
                     Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
                         .WithLocation(12, 30)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(12, 64)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(14, 30)
                         .WithArguments("int", "string"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(15, 30)
                         .WithArguments("int", "string"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(16, 48)
                         .WithArguments("int", "string"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(17, 65)
                         .WithArguments("int", "string"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(18, 65)
                         .WithArguments("int", "string"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(19, 47)
                         .WithArguments("int", "string"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(24, 31)
                         .WithArguments("int", "string"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(25, 47)
                         .WithArguments("int", "string"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(27, 49)
                         .WithArguments("int", "string"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithLocation(28, 31)
                         .WithArguments("int", "string"),
                     Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
                         .WithLocation(30, 31)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(30, 47)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(31, 31)
                         .WithArguments("string", "int"),
                     Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
@@ -1120,15 +1115,15 @@ class Test
                         .WithLocation(34, 31)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(36, 31)
                         .WithArguments("string", "int"),
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithLocation(37, 49)
                         .WithArguments("string", "int")
                 );
@@ -1242,9 +1237,9 @@ partial class D
             );
             compilation.VerifyDiagnostics(
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation,
-                        "CallerLineNumber"
-                    )
+                    ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation,
+                    "CallerLineNumber"
+                )
                     .WithArguments("x")
                     .WithLocation(11, 23)
             );
@@ -1287,9 +1282,9 @@ partial class D
                 // (12,23): warning CS4026: The CallerMemberNameAttribute applied to parameter 'x' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 //     partial void Goo([CallerMemberName] string x)
                 Diagnostic(
-                        ErrorCode.WRN_CallerMemberNameParamForUnconsumedLocation,
-                        "CallerMemberName"
-                    )
+                    ErrorCode.WRN_CallerMemberNameParamForUnconsumedLocation,
+                    "CallerMemberName"
+                )
                     .WithArguments("x")
                     .WithLocation(12, 23)
             );
@@ -2109,9 +2104,8 @@ partial class A
                         encoding: Encoding.UTF8
                     )
                 },
-                options: TestOptions.ReleaseExe.WithSourceReferenceResolver(
-                    SourceFileResolver.Default
-                )
+                options: TestOptions.ReleaseExe
+                    .WithSourceReferenceResolver(SourceFileResolver.Default)
             );
 
             CompileAndVerify(
@@ -2196,9 +2190,13 @@ partial class A { static void Main5() { Log(); } }
                     ),
                 },
                 new[] { SystemRef },
-                TestOptions.ReleaseExe.WithSourceReferenceResolver(
-                    new SourceFileResolver(ImmutableArray<string>.Empty, baseDirectory: @"C:\A\B")
-                )
+                TestOptions.ReleaseExe
+                    .WithSourceReferenceResolver(
+                        new SourceFileResolver(
+                            ImmutableArray<string>.Empty,
+                            baseDirectory: @"C:\A\B"
+                        )
+                    )
             );
 
             // On CoreClr the '*' is a legal path character
@@ -2846,17 +2844,16 @@ class Program
 }
 ";
 
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (21,2): error CS0181: Attribute constructor parameter 'lineNumber' has type 'int?', which is not a valid attribute parameter type
-                    // [LineNumber2NullableInt, LineNumber2ValueType]
-                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2NullableInt")
-                        .WithArguments("lineNumber", "int?"),
-                    // (21,26): error CS0181: Attribute constructor parameter 'lineNumber' has type 'System.ValueType', which is not a valid attribute parameter type
-                    // [LineNumber2NullableInt, LineNumber2ValueType]
-                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2ValueType")
-                        .WithArguments("lineNumber", "System.ValueType")
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (21,2): error CS0181: Attribute constructor parameter 'lineNumber' has type 'int?', which is not a valid attribute parameter type
+                // [LineNumber2NullableInt, LineNumber2ValueType]
+                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2NullableInt")
+                    .WithArguments("lineNumber", "int?"),
+                // (21,26): error CS0181: Attribute constructor parameter 'lineNumber' has type 'System.ValueType', which is not a valid attribute parameter type
+                // [LineNumber2NullableInt, LineNumber2ValueType]
+                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2ValueType")
+                    .WithArguments("lineNumber", "System.ValueType")
+            );
         }
 
         [Fact, WorkItem(531043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531043")]
@@ -2930,13 +2927,12 @@ class Test
 }
 ";
 
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (13,2): error CS0181: Attribute constructor parameter 'lineNumber' has type 'decimal', which is not a valid attribute parameter type
-                    // [LineNumber2DecimalAttribute]
-                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2DecimalAttribute")
-                        .WithArguments("lineNumber", "decimal")
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (13,2): error CS0181: Attribute constructor parameter 'lineNumber' has type 'decimal', which is not a valid attribute parameter type
+                // [LineNumber2DecimalAttribute]
+                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2DecimalAttribute")
+                    .WithArguments("lineNumber", "decimal")
+            );
         }
 
         [Fact, WorkItem(531043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531043")]
@@ -3067,23 +3063,16 @@ class Test
 }
 ";
 
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (19,38): error CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type 'int' to type 'Test'
-                    //     public bool M1(string expected, [CallerLineNumber] Test line = null)
-                    Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
-                        .WithArguments("int", "Test"),
-                    // (25,38): error CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type 'string' to type 'Test'
-                    //     public bool M2(string expected, [CallerMemberName] Test line = null)
-                    Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
-                        .WithArguments("string", "Test")
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (19,38): error CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type 'int' to type 'Test'
+                //     public bool M1(string expected, [CallerLineNumber] Test line = null)
+                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber")
+                    .WithArguments("int", "Test"),
+                // (25,38): error CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type 'string' to type 'Test'
+                //     public bool M2(string expected, [CallerMemberName] Test line = null)
+                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName")
+                    .WithArguments("string", "Test")
+            );
         }
 
         [Fact, WorkItem(546980, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546980")]
@@ -3264,100 +3253,100 @@ C:\filename
                 // C:\filename(7,21): warning CS7072: The CallerMemberNameAttribute applied to parameter 's' will have no effect. It is overridden by the CallerFilePathAttribute.
                 //     static void M1([CallerMemberName,CallerFilePath] string s = null) { Console.WriteLine(s); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerFilePathPreferredOverCallerMemberName,
-                        "CallerMemberName"
-                    )
+                    ErrorCode.WRN_CallerFilePathPreferredOverCallerMemberName,
+                    "CallerMemberName"
+                )
                     .WithArguments("s"),
                 // C:\filename(8,36): warning CS7072: The CallerMemberNameAttribute applied to parameter 's' will have no effect. It is overridden by the CallerFilePathAttribute.
                 //     static void M2([CallerFilePath,CallerMemberName] string s = null) { Console.WriteLine(s); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerFilePathPreferredOverCallerMemberName,
-                        "CallerMemberName"
-                    )
+                    ErrorCode.WRN_CallerFilePathPreferredOverCallerMemberName,
+                    "CallerMemberName"
+                )
                     .WithArguments("s"),
                 // C:\filename(9,38): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M3([CallerLineNumber,CallerFilePath,CallerMemberName] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
-                        "CallerFilePath"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                    "CallerFilePath"
+                )
                     .WithArguments("o"),
                 // C:\filename(9,53): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M3([CallerLineNumber,CallerFilePath,CallerMemberName] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
-                        "CallerMemberName"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                    "CallerMemberName"
+                )
                     .WithArguments("o"),
                 // C:\filename(10,38): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M4([CallerLineNumber,CallerMemberName,CallerFilePath] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
-                        "CallerMemberName"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                    "CallerMemberName"
+                )
                     .WithArguments("o"),
                 // C:\filename(10,55): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M4([CallerLineNumber,CallerMemberName,CallerFilePath] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
-                        "CallerFilePath"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                    "CallerFilePath"
+                )
                     .WithArguments("o"),
                 // C:\filename(11,21): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M5([CallerFilePath,CallerLineNumber,CallerMemberName] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
-                        "CallerFilePath"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                    "CallerFilePath"
+                )
                     .WithArguments("o"),
                 // C:\filename(11,53): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M5([CallerFilePath,CallerLineNumber,CallerMemberName] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
-                        "CallerMemberName"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                    "CallerMemberName"
+                )
                     .WithArguments("o"),
                 // C:\filename(12,21): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M6([CallerMemberName,CallerLineNumber,CallerFilePath] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
-                        "CallerMemberName"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                    "CallerMemberName"
+                )
                     .WithArguments("o"),
                 // C:\filename(12,55): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M6([CallerMemberName,CallerLineNumber,CallerFilePath] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
-                        "CallerFilePath"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                    "CallerFilePath"
+                )
                     .WithArguments("o"),
                 // C:\filename(13,21): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M7([CallerFilePath,CallerMemberName,CallerLineNumber] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
-                        "CallerFilePath"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                    "CallerFilePath"
+                )
                     .WithArguments("o"),
                 // C:\filename(13,36): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M7([CallerFilePath,CallerMemberName,CallerLineNumber] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
-                        "CallerMemberName"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                    "CallerMemberName"
+                )
                     .WithArguments("o"),
                 // C:\filename(14,21): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M8([CallerMemberName,CallerFilePath,CallerLineNumber] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
-                        "CallerMemberName"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                    "CallerMemberName"
+                )
                     .WithArguments("o"),
                 // C:\filename(14,38): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M8([CallerMemberName,CallerFilePath,CallerLineNumber] object o = null) { Console.WriteLine(o); }
                 Diagnostic(
-                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
-                        "CallerFilePath"
-                    )
+                    ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                    "CallerFilePath"
+                )
                     .WithArguments("o")
             );
 
@@ -3386,15 +3375,15 @@ class Test
 ";
 
             var compilation = CreateCompilationWithMscorlib45(
-                    new SyntaxTree[]
-                    {
-                        SyntaxFactory.ParseSyntaxTree(
-                            source,
-                            options: TestOptions.Regular7,
-                            path: @"C:\filename"
-                        )
-                    }
-                )
+                new SyntaxTree[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(
+                        source,
+                        options: TestOptions.Regular7,
+                        path: @"C:\filename"
+                    )
+                }
+            )
                 .VerifyDiagnostics(
                     // C:\filename(7,38): error CS4018: CallerFilePathAttribute cannot be applied because there are no standard conversions from type 'string' to type 'int'
                     //     static void M1([CallerLineNumber,CallerFilePath,CallerMemberName] int i = 0) { Console.WriteLine(); }
@@ -3404,33 +3393,33 @@ class Test
                     // C:\filename(7,53): error CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type 'string' to type 'int'
                     //     static void M1([CallerLineNumber,CallerFilePath,CallerMemberName] int i = 0) { Console.WriteLine(); }
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                        "CallerMemberName"
+                    )
                         .WithArguments("string", "int")
                         .WithLocation(7, 53),
                     // C:\filename(8,21): error CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type 'int' to type 'string'
                     //     static void M2([CallerLineNumber,CallerFilePath,CallerMemberName] string s = null) { Console.WriteLine(s); }
                     Diagnostic(
-                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
-                            "CallerLineNumber"
-                        )
+                        ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                        "CallerLineNumber"
+                    )
                         .WithArguments("int", "string")
                         .WithLocation(8, 21),
                     // C:\filename(8,38): warning CS7082: The CallerFilePathAttribute applied to parameter 's' will have no effect. It is overridden by the CallerLineNumberAttribute.
                     //     static void M2([CallerLineNumber,CallerFilePath,CallerMemberName] string s = null) { Console.WriteLine(s); }
                     Diagnostic(
-                            ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
-                            "CallerFilePath"
-                        )
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                        "CallerFilePath"
+                    )
                         .WithArguments("s")
                         .WithLocation(8, 38),
                     // C:\filename(8,53): warning CS7081: The CallerMemberNameAttribute applied to parameter 's' will have no effect. It is overridden by the CallerLineNumberAttribute.
                     //     static void M2([CallerLineNumber,CallerFilePath,CallerMemberName] string s = null) { Console.WriteLine(s); }
                     Diagnostic(
-                            ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
-                            "CallerMemberName"
-                        )
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                        "CallerMemberName"
+                    )
                         .WithArguments("s")
                         .WithLocation(8, 53),
                     // C:\filename(13,9): error CS0029: Cannot implicitly convert type 'int' to 'string'

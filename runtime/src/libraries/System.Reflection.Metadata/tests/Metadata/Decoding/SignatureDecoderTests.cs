@@ -591,7 +591,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
                             new OpaqueTokenTypeProvider(),
                             metadataReader: null,
                             genericContext: null
-                        ).DecodeType(ref reader)
+                        )
+                            .DecodeType(ref reader)
                 );
             }
         }
@@ -687,7 +688,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
                         new OpaqueTokenTypeProvider(),
                         metadataReader: null,
                         genericContext: null
-                    ).DecodeType(ref reader)
+                    )
+                        .DecodeType(ref reader)
                 );
             }
         }

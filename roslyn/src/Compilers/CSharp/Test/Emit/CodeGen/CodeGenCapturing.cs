@@ -57,10 +57,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 var fields = VariablesByScope[0];
                 var newCtx = new CaptureContext();
                 newCtx.VariablesByScope.Add(fields);
-                newCtx.VariablesByScope.AddRange(
-                    this.VariablesByScope.Skip(1)
-                        .Select(list => list == null ? null : new List<string>(list))
-                );
+                newCtx.VariablesByScope
+                    .AddRange(
+                        this.VariablesByScope
+                            .Skip(1)
+                            .Select(list => list == null ? null : new List<string>(list))
+                    );
                 newCtx.CaptureNameIndex = this.CaptureNameIndex;
                 return newCtx;
             }
@@ -307,9 +309,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             {
                 return new MethodInfo
                 {
-                    LocalFuncs = this.LocalFuncs.Select(
-                            x => x == null ? null : (IList<string>)new List<string>(x)
-                        )
+                    LocalFuncs = this.LocalFuncs
+                        .Select(x => x == null ? null : (IList<string>)new List<string>(x))
                         .ToList(),
                     CaptureContext = this.CaptureContext.Clone()
                 };
@@ -344,9 +345,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                     var expr = MakeCaptureExpression(captureCombo, copy.CaptureContext);
                     if (depth >= copy.LocalFuncs.Count)
                     {
-                        copy.LocalFuncs.AddRange(
-                            Enumerable.Repeat<List<string>>(null, depth - copy.LocalFuncs.Count)
-                        );
+                        copy.LocalFuncs
+                            .AddRange(
+                                Enumerable.Repeat<List<string>>(null, depth - copy.LocalFuncs.Count)
+                            );
                         copy.LocalFuncs.Insert(depth, new List<string>());
                     }
                     string localFuncName = $"Local_{localFuncNameIndex}";
@@ -422,10 +424,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 }
             }
 
-            var localFuncCalls = string.Join(
-                " + ",
-                Enumerable.Range(0, totalLocalFuncs).Select(f => $"Local_{f}()")
-            );
+            var localFuncCalls = string
+                .Join(" + ", Enumerable.Range(0, totalLocalFuncs).Select(f => $"Local_{f}()"));
             methodText.AppendLine($"Console.WriteLine({localFuncCalls});");
 
             for (int depth = localFuncs.Count - 1; depth > 0; depth--)
@@ -470,10 +470,11 @@ public class C
     {0}";
             StringBuilder GetClassStart() =>
                 new StringBuilder(
-                    string.Format(
-                        ClassFmt,
-                        string.Join("\r\n", fields.Select(f => $"public int {f} = 0;"))
-                    )
+                    string
+                        .Format(
+                            ClassFmt,
+                            string.Join("\r\n", fields.Select(f => $"public int {f} = 0;"))
+                        )
                 );
 
             Parallel.ForEach(

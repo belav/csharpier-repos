@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             if (key.IsPrimaryKey())
             {
-                _foreignKeys = key.DeclaringEntityType.GetDerivedTypesInclusive()
+                _foreignKeys = key.DeclaringEntityType
+                    .GetDerivedTypesInclusive()
                     .SelectMany(t => t.GetDeclaredForeignKeys())
                     .ToArray();
             }
@@ -88,10 +89,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual bool Contains(IForeignKey foreignKey, in ValueBuffer valueBuffer) =>
-            foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromBuffer(
-                valueBuffer,
-                out var key
-            ) && _identityMap.ContainsKey(key);
+            foreignKey.GetDependentKeyValueFactory<TKey>()!
+                .TryCreateFromBuffer(valueBuffer, out var key) && _identityMap.ContainsKey(key);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -179,10 +178,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IForeignKey foreignKey,
             InternalEntityEntry dependentEntry
         ) =>
-            foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromCurrentValues(
-                dependentEntry,
-                out var key
-            ) && _identityMap.TryGetValue(key, out var entry)
+            foreignKey.GetDependentKeyValueFactory<TKey>()!
+                .TryCreateFromCurrentValues(dependentEntry, out var key)
+            && _identityMap.TryGetValue(key, out var entry)
                 ? entry
                 : null;
 
@@ -196,10 +194,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IForeignKey foreignKey,
             InternalEntityEntry dependentEntry
         ) =>
-            foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromPreStoreGeneratedCurrentValues(
-                dependentEntry,
-                out var key
-            ) && _identityMap.TryGetValue(key, out var entry)
+            foreignKey.GetDependentKeyValueFactory<TKey>()!
+                .TryCreateFromPreStoreGeneratedCurrentValues(dependentEntry, out var key)
+            && _identityMap.TryGetValue(key, out var entry)
                 ? entry
                 : null;
 
@@ -213,10 +210,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IForeignKey foreignKey,
             InternalEntityEntry dependentEntry
         ) =>
-            foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromRelationshipSnapshot(
-                dependentEntry,
-                out var key
-            ) && _identityMap.TryGetValue(key, out var entry)
+            foreignKey.GetDependentKeyValueFactory<TKey>()!
+                .TryCreateFromRelationshipSnapshot(dependentEntry, out var key)
+            && _identityMap.TryGetValue(key, out var entry)
                 ? entry
                 : null;
 

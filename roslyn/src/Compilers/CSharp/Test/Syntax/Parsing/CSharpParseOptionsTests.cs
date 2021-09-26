@@ -68,25 +68,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
 
             Assert.Equal(
                 0,
-                CSharpParseOptions.Default.WithPreprocessorSymbols(
-                        ImmutableArray.Create<string>("A", "B")
-                    )
+                CSharpParseOptions.Default
+                    .WithPreprocessorSymbols(ImmutableArray.Create<string>("A", "B"))
                     .WithPreprocessorSymbols(
                         default(ImmutableArray<string>)
                     ).PreprocessorSymbols.Length
             );
             Assert.Equal(
                 0,
-                CSharpParseOptions.Default.WithPreprocessorSymbols(
-                        ImmutableArray.Create<string>("A", "B")
-                    )
+                CSharpParseOptions.Default
+                    .WithPreprocessorSymbols(ImmutableArray.Create<string>("A", "B"))
                     .WithPreprocessorSymbols((IEnumerable<string>)null).PreprocessorSymbols.Length
             );
             Assert.Equal(
                 0,
-                CSharpParseOptions.Default.WithPreprocessorSymbols(
-                        ImmutableArray.Create<string>("A", "B")
-                    )
+                CSharpParseOptions.Default
+                    .WithPreprocessorSymbols(ImmutableArray.Create<string>("A", "B"))
                     .WithPreprocessorSymbols((string[])null).PreprocessorSymbols.Length
             );
         }
@@ -267,9 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void BadDocumentationModeShouldProduceDiagnostics_WithVariation()
         {
-            var options = new CSharpParseOptions().WithDocumentationMode(
-                unchecked((DocumentationMode)100)
-            );
+            var options = new CSharpParseOptions()
+                .WithDocumentationMode(unchecked((DocumentationMode)100));
 
             options.Errors.Verify(
                 // error CS8191: Provided documentation mode is unsupported or invalid: '100'.
@@ -282,9 +278,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void BadLanguageVersionShouldProduceDiagnostics_WithVariation()
         {
-            var options = new CSharpParseOptions().WithLanguageVersion(
-                unchecked((LanguageVersion)10000)
-            );
+            var options = new CSharpParseOptions()
+                .WithLanguageVersion(unchecked((LanguageVersion)10000));
 
             options.Errors.Verify(
                 // error CS8191: Provided language version is unsupported or invalid: '10000'.
@@ -323,9 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void BadPreProcessorSymbolsShouldProduceDiagnostics_SymbolWithDots()
         {
-            var options = new CSharpParseOptions().WithPreprocessorSymbols(
-                new[] { "Good", "Bad.Symbol" }
-            );
+            var options = new CSharpParseOptions()
+                .WithPreprocessorSymbols(new[] { "Good", "Bad.Symbol" });
 
             options.Errors.Verify(
                 // error CS8301: Invalid name for a preprocessing symbol; 'Bad.Symbol' is not a valid identifier
@@ -338,9 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void BadPreProcessorSymbolsShouldProduceDiagnostics_SymbolWithSlashes()
         {
-            var options = new CSharpParseOptions().WithPreprocessorSymbols(
-                new[] { "Good", "Bad\\Symbol" }
-            );
+            var options = new CSharpParseOptions()
+                .WithPreprocessorSymbols(new[] { "Good", "Bad\\Symbol" });
 
             options.Errors.Verify(
                 // error CS8301: Invalid name for a preprocessing symbol; 'Bad\Symbol' is not a valid identifier

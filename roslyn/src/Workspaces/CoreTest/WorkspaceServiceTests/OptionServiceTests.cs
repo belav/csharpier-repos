@@ -207,9 +207,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             TestChangedOptionsCore(
                 workspace,
                 GenerationOptions.PlaceSystemNamespaceFirst,
-                optionProvider: (
-                    (IMefHostExportProvider)workspace.Services.HostServices
-                ).GetExportedValues<IOptionProvider>().OfType<GenerationOptionsProvider>().Single(),
+                optionProvider: ((IMefHostExportProvider)workspace.Services.HostServices)
+                    .GetExportedValues<IOptionProvider>()
+                    .OfType<GenerationOptionsProvider>()
+                    .Single(),
                 isSerializable: true
             );
 
@@ -315,17 +316,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         [Fact, WorkItem(43788, "https://github.com/dotnet/roslyn/issues/43788")]
         public void TestChangedTodoCommentOptions()
         {
-            var hostServices = FeaturesTestCompositions.Features.AddParts(
-                    typeof(TestOptionsServiceFactory)
-                )
+            var hostServices = FeaturesTestCompositions.Features
+                .AddParts(typeof(TestOptionsServiceFactory))
                 .GetHostServices();
 
             using var workspace = new AdhocWorkspace(hostServices);
             var option = TodoCommentOptions.TokenList;
 
-            var provider = (
-                (IMefHostExportProvider)hostServices
-            ).GetExportedValues<IOptionProvider>()
+            var provider = ((IMefHostExportProvider)hostServices)
+                .GetExportedValues<IOptionProvider>()
                 .OfType<TodoCommentOptionsProvider>()
                 .FirstOrDefault();
             var optionService = TestOptionService.GetService(workspace, provider);
@@ -350,9 +349,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         [Fact, WorkItem(1128126, "https://dev.azure.com/devdiv/DevDiv/_workitems/edit/1128126")]
         public void TestPersistedTodoCommentOptions()
         {
-            var hostServices = FeaturesTestCompositions.Features.AddParts(
-                    typeof(TestOptionsServiceFactory)
-                )
+            var hostServices = FeaturesTestCompositions.Features
+                .AddParts(typeof(TestOptionsServiceFactory))
                 .GetHostServices();
 
             using var workspace = new AdhocWorkspace(hostServices);
@@ -365,9 +363,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             Assert.True(persister.TryFetch(option, out var persistedValue));
             Assert.Equal(newOptionValue, persistedValue);
 
-            var provider = (
-                (IMefHostExportProvider)hostServices
-            ).GetExportedValues<IOptionProvider>()
+            var provider = ((IMefHostExportProvider)hostServices)
+                .GetExportedValues<IOptionProvider>()
                 .OfType<TodoCommentOptionsProvider>()
                 .FirstOrDefault();
             var persisterProvider = new TestOptionService.TestOptionsPersisterProvider(persister);

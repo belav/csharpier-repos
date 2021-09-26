@@ -53,11 +53,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             else
             {
                 Assert.Equal(
-                    string.Format(
-                        "[{0};{1}]",
-                        expectedPath,
-                        hasMappedPath ? syntaxTree.FilePath : null
-                    ),
+                    string
+                        .Format(
+                            "[{0};{1}]",
+                            expectedPath,
+                            hasMappedPath ? syntaxTree.FilePath : null
+                        ),
                     actualDisplayPath
                 );
             }
@@ -635,23 +636,22 @@ class MainClass
                 new TextSpan(),
                 new LinePositionSpan(new LinePosition(2, 1), new LinePosition(3, 1))
             );
-            var diagnostic = CodeAnalysis.Diagnostic.Create(
-                "CS0000",
-                "",
-                "msg",
-                DiagnosticSeverity.Warning,
-                DiagnosticSeverity.Warning,
-                true,
-                1,
-                location: location
-            );
+            var diagnostic = CodeAnalysis.Diagnostic
+                .Create(
+                    "CS0000",
+                    "",
+                    "msg",
+                    DiagnosticSeverity.Warning,
+                    DiagnosticSeverity.Warning,
+                    true,
+                    1,
+                    location: location
+                );
 
             Assert.Equal(
                 "test.txt(3,2): warning CS0000: msg",
-                CSharpDiagnosticFormatter.Instance.Format(
-                    diagnostic,
-                    EnsureEnglishUICulture.PreferredOrNull
-                )
+                CSharpDiagnosticFormatter.Instance
+                    .Format(diagnostic, EnsureEnglishUICulture.PreferredOrNull)
             );
         }
 
@@ -668,7 +668,8 @@ class MainClass
             );
 
             // create node with error that would place itself outside the tree.
-            var nodeWithBadError = node.Green.WithDiagnosticsGreen(
+            var nodeWithBadError = node.Green
+                .WithDiagnosticsGreen(
                     new DiagnosticInfo[]
                     {
                         new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_AbstractAndExtern)
@@ -705,12 +706,13 @@ class MainClass
             // create node with error that would place itself outside the tree.
             var nodeWithBadError = SyntaxFactory.IdentifierName(
                 new SyntaxToken(
-                    node.Node.WithDiagnosticsGreen(
-                        new DiagnosticInfo[]
-                        {
-                            new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_AbstractAndExtern)
-                        }
-                    )
+                    node.Node
+                        .WithDiagnosticsGreen(
+                            new DiagnosticInfo[]
+                            {
+                                new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_AbstractAndExtern)
+                            }
+                        )
                 )
             );
             var tree = SyntaxFactory.SyntaxTree(nodeWithBadError);

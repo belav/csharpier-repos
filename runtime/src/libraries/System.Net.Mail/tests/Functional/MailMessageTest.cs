@@ -27,13 +27,14 @@ namespace System.Net.Mail.Tests
             messageWithSubjectAndBody = new MailMessage("from@example.com", "to@example.com");
             messageWithSubjectAndBody.Subject = "the subject";
             messageWithSubjectAndBody.Body = "hello";
-            messageWithSubjectAndBody.AlternateViews.Add(
-                AlternateView.CreateAlternateViewFromString(
-                    "<html><body>hello</body></html>",
-                    null,
-                    "text/html"
-                )
-            );
+            messageWithSubjectAndBody.AlternateViews
+                .Add(
+                    AlternateView.CreateAlternateViewFromString(
+                        "<html><body>hello</body></html>",
+                        null,
+                        "text/html"
+                    )
+                );
             Attachment a = Attachment.CreateAttachmentFromString("blah blah", "AttachmentName");
             messageWithSubjectAndBody.Attachments.Add(a);
 
@@ -241,9 +242,8 @@ blah blah
                 message.Attachments.Add(new Attachment(tempFile.Path));
 
                 string attachment = DecodeSentMailMessage(message).Attachment;
-                string decodedAttachment = Encoding.UTF8.GetString(
-                    Convert.FromBase64String(attachment)
-                );
+                string decodedAttachment = Encoding.UTF8
+                    .GetString(Convert.FromBase64String(attachment));
 
                 // Make sure last byte is not encoded twice.
                 Assert.Equal(specialLength, decodedAttachment.Length);
@@ -279,9 +279,10 @@ blah blah
 
             // Decode contents.
             string result = Encoding.UTF8.GetString(stream.ToArray());
-            string attachment = result.Split(new[] { "attachment" }, StringSplitOptions.None)[
-                1
-            ].Trim().Split('-')[0].Trim();
+            string attachment = result.Split(new[] { "attachment" }, StringSplitOptions.None)[1]
+                .Trim()
+                .Split('-')[0]
+                .Trim();
 
             return (result, attachment);
         }

@@ -129,12 +129,13 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // We'll sort the matches again later using the *real* comparer once building the
             // precedence part of the DFA is over.
             var precedenceDigitComparer =
-                Comparer<(RouteEndpoint endpoint, int precedenceDigit, List<DfaNode> parents)>.Create(
-                    (x, y) =>
-                    {
-                        return x.precedenceDigit.CompareTo(y.precedenceDigit);
-                    }
-                );
+                Comparer<(RouteEndpoint endpoint, int precedenceDigit, List<DfaNode> parents)>
+                    .Create(
+                        (x, y) =>
+                        {
+                            return x.precedenceDigit.CompareTo(y.precedenceDigit);
+                        }
+                    );
 
             // Now we process the entries a level at a time.
             for (var depth = 0; depth <= maxDepth; depth++)
@@ -261,10 +262,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
                             // e.g. Template: Home/{action}, Required values: { action = "Index" }, Result: Home/Index
 
                             if (
-                                endpoint.RoutePattern.ParameterPolicies.TryGetValue(
-                                    parameterPart.Name,
-                                    out var parameterPolicyReferences
-                                )
+                                endpoint.RoutePattern.ParameterPolicies
+                                    .TryGetValue(
+                                        parameterPart.Name,
+                                        out var parameterPolicyReferences
+                                    )
                             )
                             {
                                 for (var k = 0; k < parameterPolicyReferences.Count; k++)

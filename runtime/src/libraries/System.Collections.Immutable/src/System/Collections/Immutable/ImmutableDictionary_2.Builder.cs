@@ -255,11 +255,8 @@ namespace System.Collections.Immutable
                 {
                     if (_syncRoot == null)
                     {
-                        Threading.Interlocked.CompareExchange<object?>(
-                            ref _syncRoot,
-                            new object(),
-                            null
-                        );
+                        Threading.Interlocked
+                            .CompareExchange<object?>(ref _syncRoot, new object(), null);
                     }
 
                     return _syncRoot;
@@ -418,12 +415,8 @@ namespace System.Collections.Immutable
                 }
                 set
                 {
-                    var result = ImmutableDictionary<TKey, TValue>.Add(
-                        key,
-                        value,
-                        KeyCollisionBehavior.SetValue,
-                        this.Origin
-                    );
+                    var result = ImmutableDictionary<TKey, TValue>
+                        .Add(key, value, KeyCollisionBehavior.SetValue, this.Origin);
                     this.Apply(result);
                 }
             }
@@ -531,12 +524,8 @@ namespace System.Collections.Immutable
             /// <exception cref="NotSupportedException">The <see cref="IDictionary{TKey, TValue}"/> is read-only.</exception>
             public void Add(TKey key, TValue value)
             {
-                var result = ImmutableDictionary<TKey, TValue>.Add(
-                    key,
-                    value,
-                    KeyCollisionBehavior.ThrowIfValueDifferent,
-                    this.Origin
-                );
+                var result = ImmutableDictionary<TKey, TValue>
+                    .Add(key, value, KeyCollisionBehavior.ThrowIfValueDifferent, this.Origin);
                 this.Apply(result);
             }
 
@@ -612,11 +601,8 @@ namespace System.Collections.Immutable
             /// </summary>
             public bool TryGetKey(TKey equalKey, out TKey actualKey)
             {
-                return ImmutableDictionary<TKey, TValue>.TryGetKey(
-                    equalKey,
-                    this.Origin,
-                    out actualKey
-                );
+                return ImmutableDictionary<TKey, TValue>
+                    .TryGetKey(equalKey, this.Origin, out actualKey);
             }
 
             /// <summary>

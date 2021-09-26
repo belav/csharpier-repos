@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
     [Trait(Traits.Feature, Traits.Features.RemoteHost)]
     public class RemoteHostClientServiceFactoryTests
     {
-        private static readonly TestComposition s_composition =
-            FeaturesTestCompositions.Features.WithTestHostParts(TestHost.OutOfProcess);
+        private static readonly TestComposition s_composition = FeaturesTestCompositions.Features
+            .WithTestHostParts(TestHost.OutOfProcess);
 
         private static AdhocWorkspace CreateWorkspace() =>
             new AdhocWorkspace(s_composition.GetHostServices());
@@ -37,16 +37,13 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var hostServices = s_composition.GetHostServices();
             using var workspace = new AdhocWorkspace(hostServices);
 
-            var options = workspace.CurrentSolution.Options.WithChangedOption(
-                RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS,
-                1
-            );
+            var options = workspace.CurrentSolution.Options
+                .WithChangedOption(RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS, 1);
 
             workspace.TryApplyChanges(workspace.CurrentSolution.WithOptions(options));
 
-            var listenerProvider = (
-                (IMefHostExportProvider)hostServices
-            ).GetExportedValue<AsynchronousOperationListenerProvider>();
+            var listenerProvider = ((IMefHostExportProvider)hostServices)
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
 
             var checksumUpdater = new SolutionChecksumUpdater(
                 workspace,

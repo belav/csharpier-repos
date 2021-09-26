@@ -157,9 +157,10 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = AdvSimd.Arm64.DuplicateToVector128(
-                Unsafe.ReadUnaligned<Int64>(ref Unsafe.As<Int64, byte>(ref _data))
-            );
+            var result = AdvSimd.Arm64
+                .DuplicateToVector128(
+                    Unsafe.ReadUnaligned<Int64>(ref Unsafe.As<Int64, byte>(ref _data))
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_data, _dataTable.outArrayPtr);
@@ -169,10 +170,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
-                    nameof(AdvSimd.Arm64.DuplicateToVector128),
-                    new Type[] { typeof(Int64) }
-                )
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(nameof(AdvSimd.Arm64.DuplicateToVector128), new Type[] { typeof(Int64) })
                 .Invoke(
                     null,
                     new object[]
@@ -304,13 +303,13 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.DuplicateToVector128)}<Int64>(Int64): DuplicateToVector128 failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.DuplicateToVector128)}<Int64>(Int64): DuplicateToVector128 failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -15,10 +15,11 @@ namespace IntelHardwareIntrinsicTest
 
             if (
                 Sse.IsSupported
-                && int.TryParse(
-                    Environment.GetEnvironmentVariable("COMPlus_EnableIncompleteISAClass"),
-                    out var enableIncompleteIsa
-                )
+                && int
+                    .TryParse(
+                        Environment.GetEnvironmentVariable("COMPlus_EnableIncompleteISAClass"),
+                        out var enableIncompleteIsa
+                    )
                 && (enableIncompleteIsa != 0)
             )
             {

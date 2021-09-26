@@ -179,8 +179,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         {
                             hoistedLocalScopeRecords =
                                 CustomDebugInfoReader.DecodeStateMachineHoistedLocalScopesRecord(
-                                        customDebugInfoRecord
-                                    )
+                                    customDebugInfoRecord
+                                )
                                     .SelectAsArray(
                                         s => new HoistedLocalScopeRecord(s.StartOffset, s.Length)
                                     );
@@ -353,14 +353,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ArrayBuilder<ExternAliasRecord>? externAliasRecordBuilder = null;
             if (!importStringGroups.IsDefault)
             {
-                importRecordGroupBuilder = ArrayBuilder<ImmutableArray<ImportRecord>>.GetInstance(
-                    importStringGroups.Length
-                );
+                importRecordGroupBuilder = ArrayBuilder<ImmutableArray<ImportRecord>>
+                    .GetInstance(importStringGroups.Length);
                 foreach (var importStringGroup in importStringGroups)
                 {
-                    var groupBuilder = ArrayBuilder<ImportRecord>.GetInstance(
-                        importStringGroup.Length
-                    );
+                    var groupBuilder = ArrayBuilder<ImportRecord>
+                        .GetInstance(importStringGroup.Length);
                     foreach (var importString in importStringGroup)
                     {
                         if (
@@ -383,9 +381,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
                 if (!externAliasStrings.IsDefault)
                 {
-                    externAliasRecordBuilder = ArrayBuilder<ExternAliasRecord>.GetInstance(
-                        externAliasStrings.Length
-                    );
+                    externAliasRecordBuilder = ArrayBuilder<ExternAliasRecord>
+                        .GetInstance(externAliasStrings.Length);
                     foreach (var externAliasString in externAliasStrings)
                     {
                         if (

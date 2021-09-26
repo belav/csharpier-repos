@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 public readonly Scope Parent;
 
-                public readonly ArrayBuilder<Scope> NestedScopes =
-                    ArrayBuilder<Scope>.GetInstance();
+                public readonly ArrayBuilder<Scope> NestedScopes = ArrayBuilder<Scope>
+                    .GetInstance();
 
                 /// <summary>
                 /// A list of all nested functions (all lambdas and local functions) declared in this scope.
@@ -134,8 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 /// </summary>
                 public readonly SyntaxReference BlockSyntax;
 
-                public readonly PooledHashSet<Symbol> CapturedVariables =
-                    PooledHashSet<Symbol>.GetInstance();
+                public readonly PooledHashSet<Symbol> CapturedVariables = PooledHashSet<Symbol>
+                    .GetInstance();
 
                 public readonly ArrayBuilder<ClosureEnvironment> CapturedEnvironments =
                     ArrayBuilder<ClosureEnvironment>.GetInstance();
@@ -335,10 +335,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 private readonly PooledDictionary<
                     LabelSymbol,
                     ArrayBuilder<Scope>
-                > _scopesAfterLabel = PooledDictionary<
-                    LabelSymbol,
-                    ArrayBuilder<Scope>
-                >.GetInstance();
+                > _scopesAfterLabel = PooledDictionary<LabelSymbol, ArrayBuilder<Scope>>
+                    .GetInstance();
 
                 /// <summary>
                 /// Contains a list of the labels visited so far for each scope. 
@@ -592,9 +590,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (body is null)
                     {
                         // extern closure
-                        _currentScope.NestedFunctions.Add(
-                            new NestedFunction(functionSymbol, blockSyntax: null)
-                        );
+                        _currentScope.NestedFunctions
+                            .Add(new NestedFunction(functionSymbol, blockSyntax: null));
                         return null;
                     }
 

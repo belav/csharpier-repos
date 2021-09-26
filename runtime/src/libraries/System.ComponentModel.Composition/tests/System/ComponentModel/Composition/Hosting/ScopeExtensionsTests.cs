@@ -95,10 +95,10 @@ namespace System.ComponentModel.Composition.Hosting
         public void Imports_CardinalityIgnored_WhenNotSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple =
-                typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional =
-                typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple)
+                .AsPart();
+            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally)
+                .AsPart();
 
             Assert.True(part1.Imports("Contract1"));
             Assert.True(part1Optional.Imports("Contract1"));
@@ -109,10 +109,10 @@ namespace System.ComponentModel.Composition.Hosting
         public void Imports_CardinalityNotIgnored_WhenSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple =
-                typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional =
-                typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple)
+                .AsPart();
+            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally)
+                .AsPart();
 
             Assert.True(part1.Imports("Contract1", ImportCardinality.ExactlyOne));
             Assert.False(part1.Imports("Contract1", ImportCardinality.ZeroOrMore));

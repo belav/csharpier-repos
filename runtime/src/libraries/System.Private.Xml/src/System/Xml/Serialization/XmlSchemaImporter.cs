@@ -821,11 +821,12 @@ namespace System.Xml.Serialization
             for (int i = 0; i < structMapping.Members.Length; i++)
             {
                 StructMapping? declaringMapping;
-                MemberMapping? baseMember = ((StructMapping)baseMapping).FindDeclaringMapping(
-                    structMapping.Members[i],
-                    out declaringMapping,
-                    structMapping.TypeName
-                );
+                MemberMapping? baseMember = ((StructMapping)baseMapping)
+                    .FindDeclaringMapping(
+                        structMapping.Members[i],
+                        out declaringMapping,
+                        structMapping.TypeName
+                    );
                 if (baseMember != null && baseMember.TypeDesc != structMapping.Members[i].TypeDesc)
                     throw new InvalidOperationException(
                         SR.Format(
@@ -1218,8 +1219,8 @@ namespace System.Xml.Serialization
                 choiceIdentifier.Name = member.ChoiceIdentifier.MemberName;
                 if (groupRepeats)
                 {
-                    choiceIdentifier.TypeDesc =
-                        member.ChoiceIdentifier.Mapping.TypeDesc!.CreateArrayTypeDesc();
+                    choiceIdentifier.TypeDesc = member.ChoiceIdentifier.Mapping.TypeDesc!
+                        .CreateArrayTypeDesc();
                 }
                 else
                 {
@@ -1954,9 +1955,8 @@ namespace System.Xml.Serialization
                 if (itemAccessor.Any)
                     return null;
                 arrayMapping.Elements = new ElementAccessor[] { itemAccessor };
-                arrayMapping.TypeDesc = (
-                    (TypeMapping)itemAccessor.Mapping!
-                ).TypeDesc!.CreateArrayTypeDesc();
+                arrayMapping.TypeDesc = ((TypeMapping)itemAccessor.Mapping!).TypeDesc!
+                    .CreateArrayTypeDesc();
                 arrayMapping.TypeName =
                     (type.Name == null || type.Name.Length == 0)
                         ? "ArrayOf" + CodeIdentifier.MakePascal(itemAccessor.Mapping.TypeDesc.Name)
@@ -2638,11 +2638,12 @@ namespace System.Xml.Serialization
             {
                 ElementAccessor e1 = (ElementAccessor)o1!;
                 ElementAccessor e2 = (ElementAccessor)o2!;
-                return string.Compare(
-                    e1.ToString(string.Empty),
-                    e2.ToString(string.Empty),
-                    StringComparison.Ordinal
-                );
+                return string
+                    .Compare(
+                        e1.ToString(string.Empty),
+                        e2.ToString(string.Empty),
+                        StringComparison.Ordinal
+                    );
             }
         }
 

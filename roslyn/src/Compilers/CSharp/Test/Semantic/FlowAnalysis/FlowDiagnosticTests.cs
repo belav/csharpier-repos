@@ -39,30 +39,29 @@ class Program
         int i9 = new int();         // 0219
     }
 }";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (7,13): warning CS0219: The variable 'i1' is assigned but its value is never used
-                    //         int i1 = 123;               // 0219
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1"),
-                    // (9,14): warning CS0219: The variable 'i3' is assigned but its value is never used
-                    //         int? i3 = 123;              // 0219
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i3").WithArguments("i3"),
-                    // (10,14): warning CS0219: The variable 'i4' is assigned but its value is never used
-                    //         int? i4 = null;             // 0219
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i4").WithArguments("i4"),
-                    // (12,13): warning CS0219: The variable 'i6' is assigned but its value is never used
-                    //         int i6 = default(int);      // 0219
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i6").WithArguments("i6"),
-                    // (13,14): warning CS0219: The variable 'i7' is assigned but its value is never used
-                    //         int? i7 = default(int?);    // 0219
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i7").WithArguments("i7"),
-                    // (14,14): warning CS0219: The variable 'i8' is assigned but its value is never used
-                    //         int? i8 = new int?();       // 0219
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i8").WithArguments("i8"),
-                    // (15,13): warning CS0219: The variable 'i9' is assigned but its value is never used
-                    //         int i9 = new int();         // 0219
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i9").WithArguments("i9")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (7,13): warning CS0219: The variable 'i1' is assigned but its value is never used
+                //         int i1 = 123;               // 0219
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1").WithArguments("i1"),
+                // (9,14): warning CS0219: The variable 'i3' is assigned but its value is never used
+                //         int? i3 = 123;              // 0219
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i3").WithArguments("i3"),
+                // (10,14): warning CS0219: The variable 'i4' is assigned but its value is never used
+                //         int? i4 = null;             // 0219
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i4").WithArguments("i4"),
+                // (12,13): warning CS0219: The variable 'i6' is assigned but its value is never used
+                //         int i6 = default(int);      // 0219
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i6").WithArguments("i6"),
+                // (13,14): warning CS0219: The variable 'i7' is assigned but its value is never used
+                //         int? i7 = default(int?);    // 0219
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i7").WithArguments("i7"),
+                // (14,14): warning CS0219: The variable 'i8' is assigned but its value is never used
+                //         int? i8 = new int?();       // 0219
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i8").WithArguments("i8"),
+                // (15,13): warning CS0219: The variable 'i9' is assigned but its value is never used
+                //         int i9 = new int();         // 0219
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i9").WithArguments("i9")
+            );
         }
 
         [Fact]
@@ -88,12 +87,11 @@ namespace ConsoleApplication1
         }
     }
 }";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (11,25): error CS0165: Use of unassigned local variable 'x'
-                    //                 int y = x; x = y; // use of unassigned local variable 'x'
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x").WithArguments("x")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (11,25): error CS0165: Use of unassigned local variable 'x'
+                //                 int y = x; x = y; // use of unassigned local variable 'x'
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x").WithArguments("x")
+            );
         }
 
         [Fact]
@@ -218,12 +216,11 @@ public class Test
 ";
             var comp = CreateCompilation(program);
 
-            comp.GetMethodBodyDiagnostics()
-                .Verify(
-                    // (7,9): error CS0139: No enclosing loop out of which to break or continue
-                    //         break; // Assert here
-                    Diagnostic(ErrorCode.ERR_NoBreakOrCont, "break;")
-                );
+            comp.GetMethodBodyDiagnostics().Verify(
+                // (7,9): error CS0139: No enclosing loop out of which to break or continue
+                //         break; // Assert here
+                Diagnostic(ErrorCode.ERR_NoBreakOrCont, "break;")
+            );
         }
 
         [WorkItem(538064, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538064")]
@@ -649,15 +646,14 @@ class Program
     }
 }";
 
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (9,9): warning CS0162: Unreachable code detected
-                    //         Action f = () => { int y = y; };
-                    Diagnostic(ErrorCode.WRN_UnreachableCode, "Action"),
-                    // (9,36): error CS0165: Use of unassigned local variable 'y'
-                    //         Action f = () => { int y = y; };
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "y").WithArguments("y")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (9,9): warning CS0162: Unreachable code detected
+                //         Action f = () => { int y = y; };
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "Action"),
+                // (9,36): error CS0165: Use of unassigned local variable 'y'
+                //         Action f = () => { int y = y; };
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y").WithArguments("y")
+            );
         }
 
         [WorkItem(540139, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540139")]
@@ -701,12 +697,11 @@ class Program
 }
 
 ";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (6,54): error CS0165: Use of unassigned local variable 's'
-                    //     static Func<string> x = () => { string s; return s; };
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "s").WithArguments("s")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (6,54): error CS0165: Use of unassigned local variable 's'
+                //     static Func<string> x = () => { string s; return s; };
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "s").WithArguments("s")
+            );
         }
 
         [WorkItem(541389, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541389")]
@@ -765,12 +760,11 @@ public struct S
         Ev += d;
     }
 }";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (4,20): warning CS0414: The field 'S.Ev' is assigned but its value is never used
-                    //     public event D Ev;
-                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "Ev").WithArguments("S.Ev")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (4,20): warning CS0414: The field 'S.Ev' is assigned but its value is never used
+                //     public event D Ev;
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "Ev").WithArguments("S.Ev")
+            );
         }
 
         [WorkItem(542187, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542187")]
@@ -980,29 +974,28 @@ public struct A
     }
 }
 ";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (4,7): error CS0573: 'A': cannot have instance property or field initializers in structs
-                    //     A a = new A(); // CS8036
-                    Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "a")
-                        .WithArguments("A")
-                        .WithLocation(4, 7),
-                    // (4,7): error CS0523: Struct member 'A.a' of type 'A' causes a cycle in the struct layout
-                    //     A a = new A(); // CS8036
-                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "a")
-                        .WithArguments("A.a", "A")
-                        .WithLocation(4, 7),
-                    // (7,11): warning CS0219: The variable 'a' is assigned but its value is never used
-                    //         A a = new A();
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a")
-                        .WithArguments("a")
-                        .WithLocation(7, 11),
-                    // (4,7): warning CS0169: The field 'A.a' is never used
-                    //     A a = new A(); // CS8036
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "a")
-                        .WithArguments("A.a")
-                        .WithLocation(4, 7)
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (4,7): error CS0573: 'A': cannot have instance property or field initializers in structs
+                //     A a = new A(); // CS8036
+                Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "a")
+                    .WithArguments("A")
+                    .WithLocation(4, 7),
+                // (4,7): error CS0523: Struct member 'A.a' of type 'A' causes a cycle in the struct layout
+                //     A a = new A(); // CS8036
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "a")
+                    .WithArguments("A.a", "A")
+                    .WithLocation(4, 7),
+                // (7,11): warning CS0219: The variable 'a' is assigned but its value is never used
+                //         A a = new A();
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a")
+                    .WithArguments("a")
+                    .WithLocation(7, 11),
+                // (4,7): warning CS0169: The field 'A.a' is never used
+                //     A a = new A(); // CS8036
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "a")
+                    .WithArguments("A.a")
+                    .WithLocation(4, 7)
+            );
         }
 
         [WorkItem(542356, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542356")]
@@ -1030,44 +1023,43 @@ struct D<T>
     static C<D<T>> x;
 }
 ";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (14,17): error CS0523: Struct member 'C<T>.x' of type 'D<T>' causes a cycle in the struct layout
-                    //     static D<T> x;
-                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "x")
-                        .WithArguments("C<T>.x", "D<T>")
-                        .WithLocation(14, 17),
-                    // (18,20): error CS0523: Struct member 'D<T>.x' of type 'C<D<T>>' causes a cycle in the struct layout
-                    //     static C<D<T>> x;
-                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "x")
-                        .WithArguments("D<T>.x", "C<D<T>>")
-                        .WithLocation(18, 20),
-                    // (4,20): error CS0523: Struct member 'A<T>.x' of type 'A<A<T>>' causes a cycle in the struct layout
-                    //     static A<A<T>> x;
-                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "x")
-                        .WithArguments("A<T>.x", "A<A<T>>")
-                        .WithLocation(4, 20),
-                    // (9,20): warning CS0169: The field 'B<T>.x' is never used
-                    //     static A<B<T>> x;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "x")
-                        .WithArguments("B<T>.x")
-                        .WithLocation(9, 20),
-                    // (4,20): warning CS0169: The field 'A<T>.x' is never used
-                    //     static A<A<T>> x;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "x")
-                        .WithArguments("A<T>.x")
-                        .WithLocation(4, 20),
-                    // (18,20): warning CS0169: The field 'D<T>.x' is never used
-                    //     static C<D<T>> x;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "x")
-                        .WithArguments("D<T>.x")
-                        .WithLocation(18, 20),
-                    // (14,17): warning CS0169: The field 'C<T>.x' is never used
-                    //     static D<T> x;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "x")
-                        .WithArguments("C<T>.x")
-                        .WithLocation(14, 17)
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (14,17): error CS0523: Struct member 'C<T>.x' of type 'D<T>' causes a cycle in the struct layout
+                //     static D<T> x;
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "x")
+                    .WithArguments("C<T>.x", "D<T>")
+                    .WithLocation(14, 17),
+                // (18,20): error CS0523: Struct member 'D<T>.x' of type 'C<D<T>>' causes a cycle in the struct layout
+                //     static C<D<T>> x;
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "x")
+                    .WithArguments("D<T>.x", "C<D<T>>")
+                    .WithLocation(18, 20),
+                // (4,20): error CS0523: Struct member 'A<T>.x' of type 'A<A<T>>' causes a cycle in the struct layout
+                //     static A<A<T>> x;
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "x")
+                    .WithArguments("A<T>.x", "A<A<T>>")
+                    .WithLocation(4, 20),
+                // (9,20): warning CS0169: The field 'B<T>.x' is never used
+                //     static A<B<T>> x;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "x")
+                    .WithArguments("B<T>.x")
+                    .WithLocation(9, 20),
+                // (4,20): warning CS0169: The field 'A<T>.x' is never used
+                //     static A<A<T>> x;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "x")
+                    .WithArguments("A<T>.x")
+                    .WithLocation(4, 20),
+                // (18,20): warning CS0169: The field 'D<T>.x' is never used
+                //     static C<D<T>> x;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "x")
+                    .WithArguments("D<T>.x")
+                    .WithLocation(18, 20),
+                // (14,17): warning CS0169: The field 'C<T>.x' is never used
+                //     static D<T> x;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "x")
+                    .WithArguments("C<T>.x")
+                    .WithLocation(14, 17)
+            );
         }
 
         [Fact]
@@ -1084,16 +1076,14 @@ partial struct S
 {
     public static int y;
 }";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (4,23): warning CS0649: Field 'S.x' is never assigned to, and will always have its default value 0
-                    //     public static int x;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x")
-                        .WithArguments("S.x", "0"),
-                    // (9,23): warning CS0649: Field 'S.y' is never assigned to, and will always have its default value 0
-                    //     public static int y;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y").WithArguments("S.y", "0")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (4,23): warning CS0649: Field 'S.x' is never assigned to, and will always have its default value 0
+                //     public static int x;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x").WithArguments("S.x", "0"),
+                // (9,23): warning CS0649: Field 'S.y' is never assigned to, and will always have its default value 0
+                //     public static int y;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y").WithArguments("S.y", "0")
+            );
         }
 
         [WorkItem(542567, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542567")]
@@ -1121,26 +1111,23 @@ partial struct S2
 {
     public event D y;
 }";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (1,16): warning CS0282: There is no defined ordering between fields in multiple declarations of partial struct 'S1'. To specify an ordering, all instance fields must be in the same declaration.
-                    // partial struct S1
-                    Diagnostic(ErrorCode.WRN_SequentialOnPartialClass, "S1").WithArguments("S1"),
-                    // (11,16): warning CS0282: There is no defined ordering between fields in multiple declarations of partial struct 'S2'. To specify an ordering, all instance fields must be in the same declaration.
-                    // partial struct S2
-                    Diagnostic(ErrorCode.WRN_SequentialOnPartialClass, "S2").WithArguments("S2"),
-                    // (3,16): warning CS0649: Field 'S1.x' is never assigned to, and will always have its default value 0
-                    //     public int x;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x")
-                        .WithArguments("S1.x", "0"),
-                    // (13,16): warning CS0649: Field 'S2.x' is never assigned to, and will always have its default value 0
-                    //     public int x;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x")
-                        .WithArguments("S2.x", "0"),
-                    // (19,20): warning CS0067: The event 'S2.y' is never used
-                    //     public event D y;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "y").WithArguments("S2.y")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (1,16): warning CS0282: There is no defined ordering between fields in multiple declarations of partial struct 'S1'. To specify an ordering, all instance fields must be in the same declaration.
+                // partial struct S1
+                Diagnostic(ErrorCode.WRN_SequentialOnPartialClass, "S1").WithArguments("S1"),
+                // (11,16): warning CS0282: There is no defined ordering between fields in multiple declarations of partial struct 'S2'. To specify an ordering, all instance fields must be in the same declaration.
+                // partial struct S2
+                Diagnostic(ErrorCode.WRN_SequentialOnPartialClass, "S2").WithArguments("S2"),
+                // (3,16): warning CS0649: Field 'S1.x' is never assigned to, and will always have its default value 0
+                //     public int x;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x").WithArguments("S1.x", "0"),
+                // (13,16): warning CS0649: Field 'S2.x' is never assigned to, and will always have its default value 0
+                //     public int x;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x").WithArguments("S2.x", "0"),
+                // (19,20): warning CS0067: The event 'S2.y' is never used
+                //     public event D y;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "y").WithArguments("S2.y")
+            );
         }
 
         [Fact]
@@ -1205,15 +1192,14 @@ class Program
     }
 }
 ";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (12,15): error CS0165: Use of unassigned local variable 's'
-                    //         S t = s;
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "s").WithArguments("s"),
-                    // (4,19): warning CS0649: Field 'S.y' is never assigned to, and will always have its default value 0
-                    //     public int x, y;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y").WithArguments("S.y", "0")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (12,15): error CS0165: Use of unassigned local variable 's'
+                //         S t = s;
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "s").WithArguments("s"),
+                // (4,19): warning CS0649: Field 'S.y' is never assigned to, and will always have its default value 0
+                //     public int x, y;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y").WithArguments("S.y", "0")
+            );
         }
 
         [Fact]
@@ -1238,12 +1224,11 @@ class Program
     }
 }
 ";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (4,19): warning CS0649: Field 'S.y' is never assigned to, and will always have its default value 0
-                    //     public int x, y;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y").WithArguments("S.y", "0")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (4,19): warning CS0649: Field 'S.y' is never assigned to, and will always have its default value 0
+                //     public int x, y;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y").WithArguments("S.y", "0")
+            );
         }
 
         [Fact]
@@ -1290,15 +1275,14 @@ struct S
     int x, y;
     S(int x) { this.x = x; }
 }";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (5,5): error CS0171: Field 'S.y' must be fully assigned before control is returned to the caller
-                    //     S(int x) { this.x = x; }
-                    Diagnostic(ErrorCode.ERR_UnassignedThis, "S").WithArguments("S.y"),
-                    // (4,12): warning CS0169: The field 'S.y' is never used
-                    //     int x, y;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "y").WithArguments("S.y")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (5,5): error CS0171: Field 'S.y' must be fully assigned before control is returned to the caller
+                //     S(int x) { this.x = x; }
+                Diagnostic(ErrorCode.ERR_UnassignedThis, "S").WithArguments("S.y"),
+                // (4,12): warning CS0169: The field 'S.y' is never used
+                //     int x, y;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "y").WithArguments("S.y")
+            );
         }
 
         [WorkItem(543429, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543429")]
@@ -1315,12 +1299,11 @@ public struct S
         throw new NotImplementedException();
     }
 }";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (4,9): warning CS0169: The field 'S.value' is never used
-                    //     int value;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "value").WithArguments("S.value")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (4,9): warning CS0169: The field 'S.value' is never used
+                //     int value;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "value").WithArguments("S.value")
+            );
         }
 
         [Fact]
@@ -1338,12 +1321,11 @@ struct Program
     {
     }
 }";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (5,12): error CS0843: Backing field for automatically implemented property 'Program.X' must be fully assigned before control is returned to the caller. Consider calling the default constructor from a constructor initializer.
-                    Diagnostic(ErrorCode.ERR_UnassignedThisAutoProperty, "Program")
-                        .WithArguments("Program.X")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (5,12): error CS0843: Backing field for automatically implemented property 'Program.X' must be fully assigned before control is returned to the caller. Consider calling the default constructor from a constructor initializer.
+                Diagnostic(ErrorCode.ERR_UnassignedThisAutoProperty, "Program")
+                    .WithArguments("Program.X")
+            );
         }
 
         [Fact]
@@ -1899,24 +1881,23 @@ struct T
         return t;
     }
 }";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (13,15): warning CS0169: The field 'T.s3' is never used
-                    //     S s1, s2, s3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "s3")
-                        .WithArguments("T.s3")
-                        .WithLocation(13, 15),
-                    // (13,11): warning CS0169: The field 'T.s2' is never used
-                    //     S s1, s2, s3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "s2")
-                        .WithArguments("T.s2")
-                        .WithLocation(13, 11),
-                    // (13,7): warning CS0169: The field 'T.s1' is never used
-                    //     S s1, s2, s3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "s1")
-                        .WithArguments("T.s1")
-                        .WithLocation(13, 7)
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (13,15): warning CS0169: The field 'T.s3' is never used
+                //     S s1, s2, s3;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "s3")
+                    .WithArguments("T.s3")
+                    .WithLocation(13, 15),
+                // (13,11): warning CS0169: The field 'T.s2' is never used
+                //     S s1, s2, s3;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "s2")
+                    .WithArguments("T.s2")
+                    .WithLocation(13, 11),
+                // (13,7): warning CS0169: The field 'T.s1' is never used
+                //     S s1, s2, s3;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "s1")
+                    .WithArguments("T.s1")
+                    .WithLocation(13, 7)
+            );
         }
 
         [WorkItem(543466, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543466")]
@@ -2126,19 +2107,17 @@ struct S<T>
     }
 }
 ";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (12,17): error CS0170: Use of possibly unassigned field 'X'
-                    //             if (s.X < 3)
-                    Diagnostic(ErrorCode.ERR_UseDefViolationField, "s.X").WithArguments("X"),
-                    // (3,18): warning CS0649: Field 'S.X' is never assigned to, and will always have its default value 0
-                    //     public float X;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "X")
-                        .WithArguments("S.X", "0"),
-                    // (4,18): warning CS0649: Field 'S.Y' is never assigned to, and will always have its default value 0
-                    //     public float Y;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Y").WithArguments("S.Y", "0")
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (12,17): error CS0170: Use of possibly unassigned field 'X'
+                //             if (s.X < 3)
+                Diagnostic(ErrorCode.ERR_UseDefViolationField, "s.X").WithArguments("X"),
+                // (3,18): warning CS0649: Field 'S.X' is never assigned to, and will always have its default value 0
+                //     public float X;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "X").WithArguments("S.X", "0"),
+                // (4,18): warning CS0649: Field 'S.Y' is never assigned to, and will always have its default value 0
+                //     public float Y;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Y").WithArguments("S.Y", "0")
+            );
         }
 
         [Fact]
@@ -2212,14 +2191,13 @@ abstract class AbstractType
     public int Kind;
 }";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (4,16): warning CS0649: Field 'AbstractType.Kind' is never assigned to, and will always have its default value 0
-                    //     public int Kind;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Kind")
-                        .WithArguments("AbstractType.Kind", "0")
-                        .WithLocation(4, 16)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (4,16): warning CS0649: Field 'AbstractType.Kind' is never assigned to, and will always have its default value 0
+                //     public int Kind;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Kind")
+                    .WithArguments("AbstractType.Kind", "0")
+                    .WithLocation(4, 16)
+            );
         }
 
         [Fact, WorkItem(545347, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545347")]
@@ -2736,7 +2714,7 @@ class Derived2 : Base
         public void RangeDefiniteAssignmentOrder()
         {
             CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 class C
 {
     void M()
@@ -2747,14 +2725,13 @@ class C
         r = (y+1)..(y=0);
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (9,14): error CS0165: Use of unassigned local variable 'y'
-                    //         r = (y+1)..(y=0);
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "y")
-                        .WithArguments("y")
-                        .WithLocation(9, 14)
-                );
+            ).VerifyDiagnostics(
+                // (9,14): error CS0165: Use of unassigned local variable 'y'
+                //         r = (y+1)..(y=0);
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "y")
+                    .WithArguments("y")
+                    .WithLocation(9, 14)
+            );
         }
 
         [Fact]
@@ -2838,17 +2815,13 @@ struct Empty
 {
 }
 ";
-            CreateCompilation(program)
-                .VerifyDiagnostics(
-                    // (6,25): error CS8196: Reference to an implicitly-typed out variable 'x' is not permitted in the same argument list.
-                    //         Test(out var x, x);
-                    Diagnostic(
-                            ErrorCode.ERR_ImplicitlyTypedOutVariableUsedInTheSameArgumentList,
-                            "x"
-                        )
-                        .WithArguments("x")
-                        .WithLocation(6, 25)
-                );
+            CreateCompilation(program).VerifyDiagnostics(
+                // (6,25): error CS8196: Reference to an implicitly-typed out variable 'x' is not permitted in the same argument list.
+                //         Test(out var x, x);
+                Diagnostic(ErrorCode.ERR_ImplicitlyTypedOutVariableUsedInTheSameArgumentList, "x")
+                    .WithArguments("x")
+                    .WithLocation(6, 25)
+            );
         }
     }
 }

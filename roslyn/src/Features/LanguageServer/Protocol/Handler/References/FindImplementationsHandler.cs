@@ -44,12 +44,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return locations.ToArrayAndFree();
             }
 
-            var findUsagesService =
-                document.Project.LanguageServices.GetRequiredService<IFindUsagesService>();
+            var findUsagesService = document.Project.LanguageServices
+                .GetRequiredService<IFindUsagesService>();
             var position = await document.GetPositionFromLinePositionAsync(
-                    ProtocolConversions.PositionToLinePosition(request.Position),
-                    cancellationToken
-                )
+                ProtocolConversions.PositionToLinePosition(request.Position),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var findUsagesContext = new SimpleFindUsagesContext(cancellationToken);
@@ -66,10 +66,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     {
                         locations.AddIfNotNull(
                             await ProtocolConversions.DocumentSpanToLocationWithTextAsync(
-                                    sourceSpan,
-                                    text,
-                                    cancellationToken
-                                )
+                                sourceSpan,
+                                text,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         );
                     }
@@ -77,9 +77,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     {
                         locations.AddIfNotNull(
                             await ProtocolConversions.DocumentSpanToLocationAsync(
-                                    sourceSpan,
-                                    cancellationToken
-                                )
+                                sourceSpan,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         );
                     }

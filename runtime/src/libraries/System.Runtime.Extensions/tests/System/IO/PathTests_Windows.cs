@@ -86,15 +86,14 @@ namespace System.IO.Tests
         public void GetTempPath_SetEnvVar()
         {
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    foreach (string[] tempPath in GetTempPath_SetEnvVar_Data())
                     {
-                        foreach (string[] tempPath in GetTempPath_SetEnvVar_Data())
-                        {
-                            GetTempPath_SetEnvVar_Helper("TMP", tempPath[0], tempPath[1]);
-                        }
+                        GetTempPath_SetEnvVar_Helper("TMP", tempPath[0], tempPath[1]);
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         [Theory, MemberData(nameof(TestData_Spaces))]

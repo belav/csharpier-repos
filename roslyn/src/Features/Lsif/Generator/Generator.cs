@@ -198,11 +198,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 var lazyRangeVertex = new Lazy<Graph.Range>(
                     () =>
                     {
-                        var rangeVertex = Graph.Range.FromTextSpan(
-                            syntaxToken.Span,
-                            sourceText,
-                            idFactory
-                        );
+                        var rangeVertex = Graph.Range
+                            .FromTextSpan(syntaxToken.Span, sourceText, idFactory);
 
                         lsifJsonWriter.Write(rangeVertex);
                         rangeVertices.Add(rangeVertex.GetId());

@@ -57,7 +57,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 let binder = provider.GetBinder(controllerContext, bindingContext)
                 where binder != null
                 select binder
-            ).FirstOrDefault();
+            )
+                .FirstOrDefault();
         }
 
         internal IExtensibleModelBinder GetRequiredBinder(

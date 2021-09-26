@@ -13,27 +13,20 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class ExpectedQueryRewritingVisitor : ExpressionVisitor
     {
-        private static readonly MethodInfo _maybeDefaultIfEmpty =
-            typeof(QueryTestExtensions).GetMethod(nameof(QueryTestExtensions.MaybeDefaultIfEmpty));
+        private static readonly MethodInfo _maybeDefaultIfEmpty = typeof(QueryTestExtensions)
+            .GetMethod(nameof(QueryTestExtensions.MaybeDefaultIfEmpty));
 
-        private static readonly MethodInfo _maybeMethod = typeof(QueryTestExtensions).GetMethod(
-            nameof(QueryTestExtensions.Maybe)
-        );
+        private static readonly MethodInfo _maybeMethod = typeof(QueryTestExtensions)
+            .GetMethod(nameof(QueryTestExtensions.Maybe));
 
-        private static readonly MethodInfo _containsMethodInfo = typeof(string).GetRuntimeMethod(
-            nameof(string.Contains),
-            new[] { typeof(string) }
-        );
+        private static readonly MethodInfo _containsMethodInfo = typeof(string)
+            .GetRuntimeMethod(nameof(string.Contains), new[] { typeof(string) });
 
-        private static readonly MethodInfo _startsWithMethodInfo = typeof(string).GetRuntimeMethod(
-            nameof(string.StartsWith),
-            new[] { typeof(string) }
-        );
+        private static readonly MethodInfo _startsWithMethodInfo = typeof(string)
+            .GetRuntimeMethod(nameof(string.StartsWith), new[] { typeof(string) });
 
-        private static readonly MethodInfo _endsWithMethodInfo = typeof(string).GetRuntimeMethod(
-            nameof(string.EndsWith),
-            new[] { typeof(string) }
-        );
+        private static readonly MethodInfo _endsWithMethodInfo = typeof(string)
+            .GetRuntimeMethod(nameof(string.EndsWith), new[] { typeof(string) });
 
         private static readonly MethodInfo _getShadowPropertyValueMethodInfo =
             typeof(ExpectedQueryRewritingVisitor).GetMethod(nameof(GetShadowPropertyValue));
@@ -47,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         static ExpectedQueryRewritingVisitor()
         {
-            var maybeScalarMethods = typeof(QueryTestExtensions).GetMethods()
+            var maybeScalarMethods = typeof(QueryTestExtensions)
+                .GetMethods()
                 .Where(m => m.Name == nameof(QueryTestExtensions.MaybeScalar))
                 .Select(
                     m =>
@@ -185,12 +179,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             var inner = Visit(methodCallExpression.Arguments[1]);
             var resultSelector = Visit(methodCallExpression.Arguments[4]);
 
-            var originalLeftKeySelectorLambda = methodCallExpression.Arguments[
-                2
-            ].UnwrapLambdaFromQuote();
-            var originalRightKeySelectorLambda = methodCallExpression.Arguments[
-                3
-            ].UnwrapLambdaFromQuote();
+            var originalLeftKeySelectorLambda = methodCallExpression.Arguments[2]
+                .UnwrapLambdaFromQuote();
+            var originalRightKeySelectorLambda = methodCallExpression.Arguments[3]
+                .UnwrapLambdaFromQuote();
             var leftKeySelectorBody = AddNullProtectionForNonNullableMemberAccess(
                 originalLeftKeySelectorLambda.Body
             );
@@ -345,10 +337,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 if (propertyName != null)
                 {
                     var shadowPropertyMapping = _shadowPropertyMappings.Where(
-                            m =>
-                                caller.Type.GetTypesInHierarchy().Contains(m.Key.Item1)
-                                && m.Key.Item2 == propertyName
-                        )
+                        m =>
+                            caller.Type.GetTypesInHierarchy().Contains(m.Key.Item1)
+                            && m.Key.Item2 == propertyName
+                    )
                         .Select(m => m.Value)
                         .SingleOrDefault();
 
@@ -366,7 +358,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         );
                     }
                     else if (
-                        caller.Type.GetMembers()
+                        caller.Type
+                            .GetMembers()
                             .Where(m => m.Name == propertyName)
                             .SingleOrDefault()
                         is MemberInfo matchingMember
@@ -426,7 +419,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     memberExpression.Type.IsNullableValueType()
                         ? _maybeScalarNullableMethod
                         : _maybeScalarNonNullableMethod
-                ).MakeGenericMethod(instance.Type, memberExpression.Type.UnwrapNullableType());
+                )
+                    .MakeGenericMethod(instance.Type, memberExpression.Type.UnwrapNullableType());
 
                 return Expression.Call(methodInfo, instance, maybeLambda);
             }

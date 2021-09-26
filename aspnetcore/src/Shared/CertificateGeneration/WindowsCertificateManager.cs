@@ -85,11 +85,12 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser);
 
             store.Open(OpenFlags.ReadWrite);
-            var existing = store.Certificates.Find(
-                X509FindType.FindByThumbprint,
-                publicCertificate.Thumbprint,
-                validOnly: false
-            );
+            var existing = store.Certificates
+                .Find(
+                    X509FindType.FindByThumbprint,
+                    publicCertificate.Thumbprint,
+                    validOnly: false
+                );
             if (existing.Count > 0)
             {
                 Log.WindowsCertificateAlreadyTrusted();
@@ -117,7 +118,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser);
 
             store.Open(OpenFlags.ReadWrite);
-            var matching = store.Certificates.OfType<X509Certificate2>()
+            var matching = store.Certificates
+                .OfType<X509Certificate2>()
                 .SingleOrDefault(c => c.SerialNumber == certificate.SerialNumber);
 
             if (matching != null)
@@ -136,11 +138,11 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         public override bool IsTrusted(X509Certificate2 certificate)
         {
             return ListCertificates(
-                    StoreName.Root,
-                    StoreLocation.CurrentUser,
-                    isValid: true,
-                    requireExportable: false
-                )
+                StoreName.Root,
+                StoreLocation.CurrentUser,
+                isValid: true,
+                requireExportable: false
+            )
                 .Any(c => c.Thumbprint == certificate.Thumbprint);
         }
 

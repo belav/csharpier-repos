@@ -4029,14 +4029,14 @@ namespace System.Xml.Xsl.IlGen
                                                             )
                                                             {
                                                                 OptimizerPatterns.Write(
-                                                                        (QilNode)(local0)
-                                                                    )
+                                                                    (QilNode)(local0)
+                                                                )
                                                                     .AddPattern(
                                                                         OptimizerPatternName.FilterElements
                                                                     );
                                                                 OptimizerPatterns.Write(
-                                                                        (QilNode)(local0)
-                                                                    )
+                                                                    (QilNode)(local0)
+                                                                )
                                                                     .AddArgument(
                                                                         OptimizerPatternArgument.ElementQName,
                                                                         local11
@@ -6810,9 +6810,8 @@ namespace System.Xml.Xsl.IlGen
                     else if (typTarget == XmlQueryTypeFactory.IntegerX)
                         return this.f.LiteralInt64(value.ValueAsLong);
                     else if (typTarget == XmlQueryTypeFactory.DecimalX)
-                        return this.f.LiteralDecimal(
-                            (decimal)value.ValueAs(XsltConvert.DecimalType)
-                        );
+                        return this.f
+                            .LiteralDecimal((decimal)value.ValueAs(XsltConvert.DecimalType));
                     else if (typTarget == XmlQueryTypeFactory.DoubleX)
                         return this.f.LiteralDouble(value.ValueAsDouble);
                     else if (typTarget == XmlQueryTypeFactory.BooleanX)

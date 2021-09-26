@@ -1326,12 +1326,13 @@ namespace System.Threading.Tasks.Tests
             public bool IsCompleted => false;
             public void GetResult() { }
             public void OnCompleted(Action continuation) =>
-                Task.Factory.StartNew(
-                    continuation,
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    _scheduler
-                );
+                Task.Factory
+                    .StartNew(
+                        continuation,
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        _scheduler
+                    );
         }
 
         private sealed class MaxConcurrencyLevelPassthroughTaskScheduler : TaskScheduler

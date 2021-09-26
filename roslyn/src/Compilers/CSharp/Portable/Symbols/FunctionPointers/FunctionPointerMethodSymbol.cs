@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool suppressUseSiteDiagnostics
         )
         {
-            ArrayBuilder<CustomModifier> customModifiers =
-                ArrayBuilder<CustomModifier>.GetInstance();
+            ArrayBuilder<CustomModifier> customModifiers = ArrayBuilder<CustomModifier>
+                .GetInstance();
             CallingConvention callingConvention = getCallingConvention(
                 typeBinder.Compilation,
                 syntax.CallingConvention,
@@ -304,10 +304,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         forcedArity: 0
                     );
                     NamedTypeSymbol specifierType;
-                    specifierType = compilation.Assembly.CorLibrary.LookupTopLevelMetadataType(
-                        ref metadataName,
-                        digThroughForwardedTypes: false
-                    );
+                    specifierType = compilation.Assembly.CorLibrary
+                        .LookupTopLevelMetadataType(
+                            ref metadataName,
+                            digThroughForwardedTypes: false
+                        );
 
                     if (specifierType is MissingMetadataTypeSymbol)
                     {
@@ -493,9 +494,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool hasParamChanges = false;
             if (_parameters.Length > 0)
             {
-                var paramMergedTypesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                    _parameters.Length
-                );
+                var paramMergedTypesBuilder = ArrayBuilder<TypeWithAnnotations>
+                    .GetInstance(_parameters.Length);
                 for (int i = 0; i < _parameters.Length; i++)
                 {
                     var thisParam = _parameters[i];
@@ -508,10 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         _ => VarianceKind.None,
                     };
 
-                    var mergedParameterType = thisParam.TypeWithAnnotations.MergeEquivalentTypes(
-                        otherParam.TypeWithAnnotations,
-                        paramVariance
-                    );
+                    var mergedParameterType = thisParam.TypeWithAnnotations
+                        .MergeEquivalentTypes(otherParam.TypeWithAnnotations, paramVariance);
                     paramMergedTypesBuilder.Add(mergedParameterType);
                     if (!mergedParameterType.IsSameAs(thisParam.TypeWithAnnotations))
                     {
@@ -550,9 +548,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool hasParamChanges = false;
             if (_parameters.Length > 0)
             {
-                var paramTypesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                    _parameters.Length
-                );
+                var paramTypesBuilder = ArrayBuilder<TypeWithAnnotations>
+                    .GetInstance(_parameters.Length);
                 foreach (var param in _parameters)
                 {
                     var transformedType = transform(param.TypeWithAnnotations);
@@ -606,9 +603,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (originalParameters.Length > 0)
             {
-                var paramsBuilder = ArrayBuilder<FunctionPointerParameterSymbol>.GetInstance(
-                    originalParameters.Length
-                );
+                var paramsBuilder = ArrayBuilder<FunctionPointerParameterSymbol>
+                    .GetInstance(originalParameters.Length);
                 for (int i = 0; i < originalParameters.Length; i++)
                 {
                     var originalParam = originalParameters[i];
@@ -748,9 +744,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (parameterTypes.Length > 0)
                 {
-                    var paramsBuilder = ArrayBuilder<FunctionPointerParameterSymbol>.GetInstance(
-                        parameterTypes.Length
-                    );
+                    var paramsBuilder = ArrayBuilder<FunctionPointerParameterSymbol>
+                        .GetInstance(parameterTypes.Length);
 
                     for (int i = 0; i < parameterTypes.Length; i++)
                     {
@@ -830,18 +825,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var newParamTypes = ImmutableArray<TypeWithAnnotations>.Empty;
             if (!Parameters.IsEmpty)
             {
-                var paramTypesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                    Parameters.Length
-                );
+                var paramTypesBuilder = ArrayBuilder<TypeWithAnnotations>
+                    .GetInstance(Parameters.Length);
                 bool madeParamChanges = false;
                 foreach (var param in Parameters)
                 {
-                    madeParamChanges |= param.TypeWithAnnotations.ApplyNullableTransforms(
-                        defaultTransformFlag,
-                        transforms,
-                        ref position,
-                        out var newParamType
-                    );
+                    madeParamChanges |= param.TypeWithAnnotations
+                        .ApplyNullableTransforms(
+                            defaultTransformFlag,
+                            transforms,
+                            ref position,
+                            out var newParamType
+                        );
                     paramTypesBuilder.Add(newParamType);
                 }
 

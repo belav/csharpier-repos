@@ -76,10 +76,8 @@ namespace R2RTest
             IEnumerable<string> inputAssemblyFileNames
         )
         {
-            ProcessParameters processParameters = base.CompilationProcess(
-                outputFileName,
-                inputAssemblyFileNames
-            );
+            ProcessParameters processParameters = base
+                .CompilationProcess(outputFileName, inputAssemblyFileNames);
             processParameters.Arguments = $"{Crossgen2Path} {processParameters.Arguments}";
             return processParameters;
         }

@@ -39,8 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
             CancellationToken cancellationToken
         )
         {
-            var symbolNavigationService =
-                solution.Workspace.Services.GetRequiredService<ISymbolNavigationService>();
+            var symbolNavigationService = solution.Workspace.Services
+                .GetRequiredService<ISymbolNavigationService>();
             if (
                 !symbolNavigationService.WouldNavigateToSymbol(
                     definitionItem,

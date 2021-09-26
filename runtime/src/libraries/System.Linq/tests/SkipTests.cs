@@ -178,7 +178,8 @@ namespace System.Linq.Tests
                 from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
                 where x > Int32.MinValue
                 select x
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(q.Skip(0), q.Skip(0));
         }
@@ -202,7 +203,8 @@ namespace System.Linq.Tests
                 from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", String.Empty }
                 where !String.IsNullOrEmpty(x)
                 select x
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(q.Skip(0), q.Skip(0));
         }

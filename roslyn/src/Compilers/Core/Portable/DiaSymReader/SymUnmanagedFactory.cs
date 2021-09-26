@@ -94,7 +94,8 @@ namespace Microsoft.DiaSymReader
                 try
                 {
                     foreach (
-                        var method in typeof(Environment).GetTypeInfo()
+                        var method in typeof(Environment)
+                            .GetTypeInfo()
                             .GetDeclaredMethods("GetEnvironmentVariable")
                     )
                     {

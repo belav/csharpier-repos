@@ -85,12 +85,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 // members
                 var membersBuilder = ArrayBuilder<Symbol>.GetInstance(membersCount);
-                var propertiesBuilder = ArrayBuilder<AnonymousTypePropertySymbol>.GetInstance(
-                    fieldsCount
-                );
-                var typeParametersBuilder = ArrayBuilder<TypeParameterSymbol>.GetInstance(
-                    fieldsCount
-                );
+                var propertiesBuilder = ArrayBuilder<AnonymousTypePropertySymbol>
+                    .GetInstance(fieldsCount);
+                var typeParametersBuilder = ArrayBuilder<TypeParameterSymbol>
+                    .GetInstance(fieldsCount);
 
                 // Process fields
                 for (int fieldIndex = 0; fieldIndex < fieldsCount; fieldIndex++)
@@ -197,10 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Location currentSmallestLocation = _smallestLocation;
                     if (
                         currentSmallestLocation != null
-                        && this.Manager.Compilation.CompareSourceLocations(
-                            currentSmallestLocation,
-                            location
-                        ) < 0
+                        && this.Manager.Compilation
+                            .CompareSourceLocations(currentSmallestLocation, location) < 0
                     )
                     {
                         // The template's smallest location do not need to be changed
@@ -491,9 +487,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 AddSynthesizedAttribute(
                     ref attributes,
-                    Manager.Compilation.TrySynthesizeAttribute(
-                        WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
-                    )
+                    Manager.Compilation
+                        .TrySynthesizeAttribute(
+                            WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                        )
                 );
 
                 if (Manager.Compilation.Options.OptimizationLevel == OptimizationLevel.Debug)
@@ -550,26 +547,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     displayString = builder.ToStringAndFree();
                 }
 
-                return Manager.Compilation.TrySynthesizeAttribute(
-                    WellKnownMember.System_Diagnostics_DebuggerDisplayAttribute__ctor,
-                    arguments: ImmutableArray.Create(
-                        new TypedConstant(
-                            Manager.System_String,
-                            TypedConstantKind.Primitive,
-                            displayString
-                        )
-                    ),
-                    namedArguments: ImmutableArray.Create(
-                        new KeyValuePair<WellKnownMember, TypedConstant>(
-                            WellKnownMember.System_Diagnostics_DebuggerDisplayAttribute__Type,
+                return Manager.Compilation
+                    .TrySynthesizeAttribute(
+                        WellKnownMember.System_Diagnostics_DebuggerDisplayAttribute__ctor,
+                        arguments: ImmutableArray.Create(
                             new TypedConstant(
                                 Manager.System_String,
                                 TypedConstantKind.Primitive,
-                                "<Anonymous Type>"
+                                displayString
+                            )
+                        ),
+                        namedArguments: ImmutableArray.Create(
+                            new KeyValuePair<WellKnownMember, TypedConstant>(
+                                WellKnownMember.System_Diagnostics_DebuggerDisplayAttribute__Type,
+                                new TypedConstant(
+                                    Manager.System_String,
+                                    TypedConstantKind.Primitive,
+                                    "<Anonymous Type>"
+                                )
                             )
                         )
-                    )
-                );
+                    );
             }
 
             internal override bool HasPossibleWellKnownCloneMethod() => false;

@@ -84,8 +84,8 @@ namespace System.CommandLine.Help
             IEnumerable<string> GetUsageParts()
             {
                 IEnumerable<ICommand> parentCommands = command.RecurseWhileNotNull(
-                        c => c.Parents.FirstOrDefaultOfType<ICommand>()
-                    )
+                    c => c.Parents.FirstOrDefaultOfType<ICommand>()
+                )
                     .Reverse();
 
                 var displayOptionTitle = command.Options.Any(x => !x.IsHidden);
@@ -302,8 +302,8 @@ namespace System.CommandLine.Help
                 if (firstColumnWidth > firstColumnMaxWidth)
                 {
                     firstColumnWidth = items.SelectMany(
-                            x => WrapItem(x.Descriptor, firstColumnMaxWidth).Select(x => x.Length)
-                        )
+                        x => WrapItem(x.Descriptor, firstColumnMaxWidth).Select(x => x.Length)
+                    )
                         .Max();
                 }
                 secondColumnWidth = windowWidth - firstColumnWidth - Indent.Length - Indent.Length;
@@ -405,7 +405,8 @@ namespace System.CommandLine.Help
             }
             else
             {
-                var rawAliases = symbol.Aliases.Select(r => r.SplitPrefix())
+                var rawAliases = symbol.Aliases
+                    .Select(r => r.SplitPrefix())
                     .OrderBy(r => r.Prefix, StringComparer.OrdinalIgnoreCase)
                     .ThenBy(r => r.Alias, StringComparer.OrdinalIgnoreCase)
                     .GroupBy(t => t.Alias)

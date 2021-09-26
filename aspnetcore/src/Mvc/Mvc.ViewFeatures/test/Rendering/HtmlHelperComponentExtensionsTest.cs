@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
             var httpContext = new DefaultHttpContext
             {
-                RequestServices = new ServiceCollection().AddSingleton<IComponentRenderer>(renderer)
+                RequestServices = new ServiceCollection()
+                    .AddSingleton<IComponentRenderer>(renderer)
                     .BuildServiceProvider(),
             };
 

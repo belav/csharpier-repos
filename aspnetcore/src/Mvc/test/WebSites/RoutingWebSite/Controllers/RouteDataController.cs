@@ -30,10 +30,11 @@ namespace RoutingWebSite
         {
             if (!context.RouteData.DataTokens.ContainsKey("actionName"))
             {
-                context.RouteData.DataTokens.Add(
-                    "actionName",
-                    ((ControllerActionDescriptor)context.ActionDescriptor).ActionName
-                );
+                context.RouteData.DataTokens
+                    .Add(
+                        "actionName",
+                        ((ControllerActionDescriptor)context.ActionDescriptor).ActionName
+                    );
             }
         }
 

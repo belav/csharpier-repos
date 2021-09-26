@@ -214,23 +214,28 @@ namespace Castle.DynamicProxy.Tests
             );
             Assert.IsTrue(
                 mc.Equals(
-                    typeof(MethodComparerTestCase).GetMethod("GenericMethod")
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod")
                         .MakeGenericMethod(typeof(int)),
-                    typeof(MethodComparerTestCase).GetMethod("GenericMethod")
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod")
                         .MakeGenericMethod(typeof(int))
                 )
             );
             Assert.IsFalse(
                 mc.Equals(
-                    typeof(MethodComparerTestCase).GetMethod("GenericMethod")
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod")
                         .MakeGenericMethod(typeof(int)),
-                    typeof(MethodComparerTestCase).GetMethod("GenericMethod")
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod")
                         .MakeGenericMethod(typeof(string))
                 )
             );
             Assert.IsFalse(
                 mc.Equals(
-                    typeof(MethodComparerTestCase).GetMethod("GenericMethod")
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod")
                         .MakeGenericMethod(typeof(int)),
                     typeof(MethodComparerTestCase).GetMethod("GenericMethod")
                 )
@@ -257,27 +262,33 @@ namespace Castle.DynamicProxy.Tests
 
             Assert.IsTrue(
                 mc.Equals(
-                    typeof(MethodComparerTestCase).GetMethod("GenericMethod3")
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod3")
                         .MakeGenericMethod(typeof(int), typeof(int)),
-                    typeof(NewScope).GetMethod("GenericMethod3")
+                    typeof(NewScope)
+                        .GetMethod("GenericMethod3")
                         .MakeGenericMethod(typeof(int), typeof(int))
                 )
             );
 
             Assert.IsFalse(
                 mc.Equals(
-                    typeof(MethodComparerTestCase).GetMethod("GenericMethod3")
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod3")
                         .MakeGenericMethod(typeof(int), typeof(string)),
-                    typeof(NewScope).GetMethod("GenericMethod3")
+                    typeof(NewScope)
+                        .GetMethod("GenericMethod3")
                         .MakeGenericMethod(typeof(int), typeof(string))
                 )
             );
 
             Assert.IsFalse(
                 mc.Equals(
-                    typeof(MethodComparerTestCase).GetMethod("GenericMethod3")
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod3")
                         .MakeGenericMethod(typeof(int), typeof(string)),
-                    typeof(NewScope).GetMethod("GenericMethod3")
+                    typeof(NewScope)
+                        .GetMethod("GenericMethod3")
                         .MakeGenericMethod(typeof(string), typeof(int))
                 )
             );
@@ -299,22 +310,16 @@ namespace Castle.DynamicProxy.Tests
             Assert.IsFalse(
                 mc.Equals(
                     typeof(Console).GetMethod("WriteLine", new Type[] { typeof(object) }),
-                    typeof(Console).GetMethod(
-                        "WriteLine",
-                        new Type[] { typeof(string), typeof(object[]) }
-                    )
+                    typeof(Console)
+                        .GetMethod("WriteLine", new Type[] { typeof(string), typeof(object[]) })
                 )
             );
             Assert.IsTrue(
                 mc.Equals(
-                    typeof(Console).GetMethod(
-                        "WriteLine",
-                        new Type[] { typeof(string), typeof(object[]) }
-                    ),
-                    typeof(Console).GetMethod(
-                        "WriteLine",
-                        new Type[] { typeof(string), typeof(object[]) }
-                    )
+                    typeof(Console)
+                        .GetMethod("WriteLine", new Type[] { typeof(string), typeof(object[]) }),
+                    typeof(Console)
+                        .GetMethod("WriteLine", new Type[] { typeof(string), typeof(object[]) })
                 )
             );
         }

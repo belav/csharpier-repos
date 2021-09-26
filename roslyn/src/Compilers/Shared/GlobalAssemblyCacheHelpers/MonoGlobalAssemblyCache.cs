@@ -196,11 +196,11 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return GetAssemblyIdentitiesAndPaths(
-                    name: null,
-                    version: null,
-                    publicKeyToken: null,
-                    architectureFilter: architectureFilter
-                )
+                name: null,
+                version: null,
+                publicKeyToken: null,
+                architectureFilter: architectureFilter
+            )
                 .Select(identityAndPath => identityAndPath.Identity.Name)
                 .Distinct();
         }

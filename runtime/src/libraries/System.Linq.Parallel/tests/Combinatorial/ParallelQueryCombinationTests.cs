@@ -304,10 +304,10 @@ namespace System.Linq.Parallel.Tests
         {
             int seen = DefaultStart;
             ParallelQuery<int> query = operation.Item(
-                    DefaultStart * 2,
-                    DefaultSize * 2,
-                    source.Item
-                )
+                DefaultStart * 2,
+                DefaultSize * 2,
+                source.Item
+            )
                 .Select(x => x / 2)
                 .Distinct();
             foreach (int i in query)
@@ -327,10 +327,10 @@ namespace System.Linq.Parallel.Tests
         {
             int seen = DefaultStart;
             ParallelQuery<int> query = operation.Item(
-                    DefaultStart * 2,
-                    DefaultSize * 2,
-                    source.Item
-                )
+                DefaultStart * 2,
+                DefaultSize * 2,
+                source.Item
+            )
                 .Select(x => x / 2)
                 .Distinct();
             Assert.All(query.ToList(), x => Assert.Equal(seen++, x));
@@ -380,10 +380,10 @@ namespace System.Linq.Parallel.Tests
             {
                 int seen = DefaultStart;
                 ParallelQuery<int> query = left(
-                        DefaultStart,
-                        DefaultSize + DefaultSize / 2,
-                        source.Item
-                    )
+                    DefaultStart,
+                    DefaultSize + DefaultSize / 2,
+                    source.Item
+                )
                     .Except(right(DefaultStart + DefaultSize, DefaultSize, source.Item));
                 foreach (int i in query)
                 {
@@ -407,10 +407,10 @@ namespace System.Linq.Parallel.Tests
             {
                 int seen = DefaultStart;
                 ParallelQuery<int> query = left(
-                        DefaultStart,
-                        DefaultSize + DefaultSize / 2,
-                        source.Item
-                    )
+                    DefaultStart,
+                    DefaultSize + DefaultSize / 2,
+                    source.Item
+                )
                     .Except(right(DefaultStart + DefaultSize, DefaultSize, source.Item));
                 Assert.All(query.ToList(), x => Assert.Equal(seen++, x));
                 Assert.Equal(DefaultStart + DefaultSize, seen);
@@ -621,10 +621,10 @@ namespace System.Linq.Parallel.Tests
                 int seenKey = DefaultStart / GroupFactor;
                 foreach (
                     KeyValuePair<int, IEnumerable<int>> group in left(
-                            DefaultStart / GroupFactor,
-                            DefaultSize / GroupFactor,
-                            source.Item
-                        )
+                        DefaultStart / GroupFactor,
+                        DefaultSize / GroupFactor,
+                        source.Item
+                    )
                         .GroupJoin(
                             right(DefaultStart, DefaultSize, source.Item),
                             x => x,
@@ -657,10 +657,10 @@ namespace System.Linq.Parallel.Tests
                 int seenKey = DefaultStart / GroupFactor;
                 foreach (
                     KeyValuePair<int, IEnumerable<int>> group in left(
-                            DefaultStart / GroupFactor,
-                            DefaultSize / GroupFactor,
-                            source.Item
-                        )
+                        DefaultStart / GroupFactor,
+                        DefaultSize / GroupFactor,
+                        source.Item
+                    )
                         .GroupJoin(
                             right(DefaultStart, DefaultSize, source.Item),
                             x => x,
@@ -690,10 +690,10 @@ namespace System.Linq.Parallel.Tests
             {
                 int seen = DefaultStart;
                 ParallelQuery<int> query = left(
-                        DefaultStart - DefaultSize / 2,
-                        DefaultSize + DefaultSize / 2,
-                        source.Item
-                    )
+                    DefaultStart - DefaultSize / 2,
+                    DefaultSize + DefaultSize / 2,
+                    source.Item
+                )
                     .Intersect(right(DefaultStart, DefaultSize + DefaultSize / 2, source.Item));
                 foreach (int i in query)
                 {
@@ -717,10 +717,10 @@ namespace System.Linq.Parallel.Tests
             {
                 int seen = DefaultStart;
                 ParallelQuery<int> query = left(
-                        DefaultStart - DefaultSize / 2,
-                        DefaultSize + DefaultSize / 2,
-                        source.Item
-                    )
+                    DefaultStart - DefaultSize / 2,
+                    DefaultSize + DefaultSize / 2,
+                    source.Item
+                )
                     .Intersect(right(DefaultStart, DefaultSize + DefaultSize / 2, source.Item));
                 Assert.All(query.ToList(), x => Assert.Equal(seen++, x));
                 Assert.Equal(DefaultStart + DefaultSize, seen);
@@ -738,10 +738,10 @@ namespace System.Linq.Parallel.Tests
             {
                 int seen = DefaultStart;
                 ParallelQuery<KeyValuePair<int, int>> query = left(
-                        DefaultStart / GroupFactor,
-                        DefaultSize / GroupFactor,
-                        source.Item
-                    )
+                    DefaultStart / GroupFactor,
+                    DefaultSize / GroupFactor,
+                    source.Item
+                )
                     .Join(
                         right(DefaultStart, DefaultSize, source.Item),
                         x => x,
@@ -771,10 +771,10 @@ namespace System.Linq.Parallel.Tests
             {
                 int seen = DefaultStart;
                 ParallelQuery<KeyValuePair<int, int>> query = left(
-                        DefaultStart / GroupFactor,
-                        DefaultSize / GroupFactor,
-                        source.Item
-                    )
+                    DefaultStart / GroupFactor,
+                    DefaultSize / GroupFactor,
+                    source.Item
+                )
                     .Join(
                         right(DefaultStart, DefaultSize, source.Item),
                         x => x,
@@ -1207,16 +1207,13 @@ namespace System.Linq.Parallel.Tests
         public static void Select_Indexed(Labeled<Operation> source, Labeled<Operation> operation)
         {
             int seen = -DefaultStart;
-            foreach (
-                int i in operation.Item(DefaultStart, DefaultSize, source.Item)
-                    .Select(
-                        (x, index) =>
-                        {
-                            Assert.Equal(DefaultStart + index, x);
-                            return -x;
-                        }
-                    )
-            )
+            foreach (int i in operation.Item(DefaultStart, DefaultSize, source.Item).Select(
+                    (x, index) =>
+                    {
+                        Assert.Equal(DefaultStart + index, x);
+                        return -x;
+                    }
+                ))
             {
                 Assert.Equal(seen--, i);
             }
@@ -1232,18 +1229,13 @@ namespace System.Linq.Parallel.Tests
         )
         {
             int seen = -DefaultStart;
-            Assert.All(
-                operation.Item(DefaultStart, DefaultSize, source.Item)
-                    .Select(
-                        (x, index) =>
-                        {
-                            Assert.Equal(DefaultStart + index, x);
-                            return -x;
-                        }
-                    )
-                    .ToList(),
-                x => Assert.Equal(seen--, x)
-            );
+            Assert.All(operation.Item(DefaultStart, DefaultSize, source.Item).Select(
+                    (x, index) =>
+                    {
+                        Assert.Equal(DefaultStart + index, x);
+                        return -x;
+                    }
+                ).ToList(), x => Assert.Equal(seen--, x));
             Assert.Equal(-DefaultStart - DefaultSize, seen);
         }
 
@@ -1290,16 +1282,13 @@ namespace System.Linq.Parallel.Tests
         )
         {
             int seen = -DefaultStart;
-            foreach (
-                int i in operation.Item(0, DefaultSize, source.Item)
-                    .SelectMany(
-                        (x, index) =>
-                        {
-                            Assert.Equal(index, x);
-                            return new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x);
-                        }
-                    )
-            )
+            foreach (int i in operation.Item(0, DefaultSize, source.Item).SelectMany(
+                    (x, index) =>
+                    {
+                        Assert.Equal(index, x);
+                        return new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x);
+                    }
+                ))
             {
                 Assert.Equal(seen--, i);
             }
@@ -1315,18 +1304,13 @@ namespace System.Linq.Parallel.Tests
         )
         {
             int seen = -DefaultStart;
-            Assert.All(
-                operation.Item(0, DefaultSize, source.Item)
-                    .SelectMany(
-                        (x, index) =>
-                        {
-                            Assert.Equal(index, x);
-                            return new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x);
-                        }
-                    )
-                    .ToList(),
-                x => Assert.Equal(seen--, x)
-            );
+            Assert.All(operation.Item(0, DefaultSize, source.Item).SelectMany(
+                    (x, index) =>
+                    {
+                        Assert.Equal(index, x);
+                        return new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x);
+                    }
+                ).ToList(), x => Assert.Equal(seen--, x));
             Assert.Equal(-DefaultStart - DefaultSize * 2, seen);
         }
 
@@ -1376,17 +1360,14 @@ namespace System.Linq.Parallel.Tests
         )
         {
             int seen = -DefaultStart;
-            foreach (
-                int i in operation.Item(0, DefaultSize, source.Item)
-                    .SelectMany(
-                        (x, index) =>
-                        {
-                            Assert.Equal(index, x);
-                            return new[] { 0, -1 };
-                        },
-                        (x, y) => y + -DefaultStart - 2 * x
-                    )
-            )
+            foreach (int i in operation.Item(0, DefaultSize, source.Item).SelectMany(
+                    (x, index) =>
+                    {
+                        Assert.Equal(index, x);
+                        return new[] { 0, -1 };
+                    },
+                    (x, y) => y + -DefaultStart - 2 * x
+                ))
             {
                 Assert.Equal(seen--, i);
             }
@@ -1402,19 +1383,14 @@ namespace System.Linq.Parallel.Tests
         )
         {
             int seen = -DefaultStart;
-            Assert.All(
-                operation.Item(0, DefaultSize, source.Item)
-                    .SelectMany(
-                        (x, index) =>
-                        {
-                            Assert.Equal(index, x);
-                            return new[] { 0, -1 };
-                        },
-                        (x, y) => y + -DefaultStart - 2 * x
-                    )
-                    .ToList(),
-                x => Assert.Equal(seen--, x)
-            );
+            Assert.All(operation.Item(0, DefaultSize, source.Item).SelectMany(
+                    (x, index) =>
+                    {
+                        Assert.Equal(index, x);
+                        return new[] { 0, -1 };
+                    },
+                    (x, y) => y + -DefaultStart - 2 * x
+                ).ToList(), x => Assert.Equal(seen--, x));
             Assert.Equal(-DefaultStart - DefaultSize * 2, seen);
         }
 

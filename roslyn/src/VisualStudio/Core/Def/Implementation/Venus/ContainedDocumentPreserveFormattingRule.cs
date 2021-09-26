@@ -28,11 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             in NextGetAdjustSpacesOperation nextOperation
         )
         {
-            var operation = base.GetAdjustSpacesOperation(
-                in previousToken,
-                in currentToken,
-                in nextOperation
-            );
+            var operation = base
+                .GetAdjustSpacesOperation(in previousToken, in currentToken, in nextOperation);
             if (operation != null)
             {
                 return s_preserveSpace;
@@ -47,11 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             in NextGetAdjustNewLinesOperation nextOperation
         )
         {
-            var operation = base.GetAdjustNewLinesOperation(
-                in previousToken,
-                in currentToken,
-                in nextOperation
-            );
+            var operation = base
+                .GetAdjustNewLinesOperation(in previousToken, in currentToken, in nextOperation);
             if (operation != null)
             {
                 return s_preserveLine;

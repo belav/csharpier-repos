@@ -83,10 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             for (int i = 0; i < count; i++)
             {
                 if (
-                    !myFields[i].TypeWithAnnotations.Equals(
-                        otherFields[i].TypeWithAnnotations,
-                        comparison
-                    )
+                    !myFields[i].TypeWithAnnotations
+                        .Equals(otherFields[i].TypeWithAnnotations, comparison)
                 )
                 {
                     return false;
@@ -121,10 +119,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(!newFieldTypes.IsDefault);
             Debug.Assert(newFieldTypes.Length == this.Fields.Length);
 
-            var newFields = this.Fields.SelectAsArray(
-                (field, i, types) => new AnonymousTypeField(field.Name, field.Location, types[i]),
-                newFieldTypes
-            );
+            var newFields = this.Fields
+                .SelectAsArray(
+                    (field, i, types) =>
+                        new AnonymousTypeField(field.Name, field.Location, types[i]),
+                    newFieldTypes
+                );
             return new AnonymousTypeDescriptor(newFields, this.Location);
         }
     }

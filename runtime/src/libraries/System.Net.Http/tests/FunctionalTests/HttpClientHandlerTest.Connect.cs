@@ -60,15 +60,14 @@ namespace System.Net.Http.Functional.Tests
 
                                 Task serverTask = connection.SendResponseAsync(HttpStatusCode.OK);
                                 await TestHelper.WhenAllCompletedOrAnyFailed(
-                                        responseTask,
-                                        serverTask
-                                    )
+                                    responseTask,
+                                    serverTask
+                                )
                                     .ConfigureAwait(false);
 
                                 using (
-                                    Stream clientStream = await (
-                                        await responseTask
-                                    ).Content.ReadAsStreamAsync(TestAsync)
+                                    Stream clientStream = await (await responseTask).Content
+                                        .ReadAsStreamAsync(TestAsync)
                                 )
                                 {
                                     Assert.True(clientStream.CanWrite);

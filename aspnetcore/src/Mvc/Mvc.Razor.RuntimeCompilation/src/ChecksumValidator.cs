@@ -72,10 +72,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
             var sourceDocument = RazorSourceDocument.ReadFrom(projectItem);
             if (
-                !string.Equals(
-                    sourceDocument.GetChecksumAlgorithm(),
-                    primaryChecksum.ChecksumAlgorithm
-                ) || !ChecksumsEqual(primaryChecksum.Checksum, sourceDocument.GetChecksum())
+                !string
+                    .Equals(
+                        sourceDocument.GetChecksumAlgorithm(),
+                        primaryChecksum.ChecksumAlgorithm
+                    ) || !ChecksumsEqual(primaryChecksum.Checksum, sourceDocument.GetChecksum())
             )
             {
                 // Main file exists, but checksums not equal.
@@ -86,11 +87,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             {
                 var checksum = checksums[i];
                 if (
-                    string.Equals(
-                        item.Identifier,
-                        checksum.Identifier,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            item.Identifier,
+                            checksum.Identifier,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     // Ignore primary checksum on this pass.
@@ -106,10 +108,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
                 sourceDocument = RazorSourceDocument.ReadFrom(importItem);
                 if (
-                    !string.Equals(
-                        sourceDocument.GetChecksumAlgorithm(),
-                        checksum.ChecksumAlgorithm
-                    ) || !ChecksumsEqual(checksum.Checksum, sourceDocument.GetChecksum())
+                    !string
+                        .Equals(sourceDocument.GetChecksumAlgorithm(), checksum.ChecksumAlgorithm)
+                    || !ChecksumsEqual(checksum.Checksum, sourceDocument.GetChecksum())
                 )
                 {
                     // Import file exists, but checksums not equal.

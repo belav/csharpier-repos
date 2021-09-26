@@ -133,9 +133,8 @@ namespace Microsoft.VisualStudio.LanguageServices
 
             return availableMemory < MemoryThreshold
                 && !SolutionCrawlerOptions.LowMemoryForcedMinimalBackgroundAnalysis
-                && _workspace.Options.GetOption(
-                    InternalFeatureOnOffOptions.BackgroundAnalysisMemoryMonitor
-                );
+                && _workspace.Options
+                    .GetOption(InternalFeatureOnOffOptions.BackgroundAnalysisMemoryMonitor);
         }
 
         private void DisableBackgroundAnalysis()
@@ -161,7 +160,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             }
 
             // Show info bar.
-            _workspace.Services.GetService<IErrorReportingService>()
+            _workspace.Services
+                .GetService<IErrorReportingService>()
                 .ShowGlobalErrorInfo(
                     ServicesVSResources.Visual_Studio_has_suspended_some_advanced_features_to_improve_performance,
                     new InfoBarUI(
@@ -182,12 +182,14 @@ namespace Microsoft.VisualStudio.LanguageServices
 
             // Update info bar shown state.
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(
-                        RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown,
-                        true
+                _workspace.CurrentSolution
+                    .WithOptions(
+                        _workspace.Options
+                            .WithChangedOption(
+                                RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown,
+                                true
+                            )
                     )
-                )
             );
         }
 
@@ -200,12 +202,14 @@ namespace Microsoft.VisualStudio.LanguageServices
 
             // For newly opened solution, reset the info bar state.
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(
-                        RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown,
-                        false
+                _workspace.CurrentSolution
+                    .WithOptions(
+                        _workspace.Options
+                            .WithChangedOption(
+                                RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown,
+                                false
+                            )
                     )
-                )
             );
         }
     }

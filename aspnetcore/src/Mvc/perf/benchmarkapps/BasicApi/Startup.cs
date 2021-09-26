@@ -42,15 +42,14 @@ namespace BasicApi
                 new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature)
             );
 
-            services.AddAuthentication()
-                .AddJwtBearer(
-                    options =>
-                    {
-                        options.TokenValidationParameters.IssuerSigningKey = key;
-                        options.TokenValidationParameters.ValidAudience = "Myself";
-                        options.TokenValidationParameters.ValidIssuer = "BasicApi";
-                    }
-                );
+            services.AddAuthentication().AddJwtBearer(
+                options =>
+                {
+                    options.TokenValidationParameters.IssuerSigningKey = key;
+                    options.TokenValidationParameters.ValidAudience = "Myself";
+                    options.TokenValidationParameters.ValidIssuer = "BasicApi";
+                }
+            );
 
             var connectionString = Configuration["ConnectionString"];
             var databaseType = Configuration["Database"];
@@ -198,8 +197,8 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
+                    var dbContext = serviceScope.ServiceProvider
+                        .GetRequiredService<BasicApiContext>()
                 )
                 {
 #if GENERATE_SQL_SCRIPTS
@@ -212,7 +211,8 @@ namespace BasicApi
                     Console.WriteLine(script);
 #endif
 
-                    dbContext.Database.Migrate();
+                    dbContext.Database
+                        .Migrate();
                 }
             }
         }
@@ -225,8 +225,8 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
+                    var dbContext = serviceScope.ServiceProvider
+                        .GetRequiredService<BasicApiContext>()
                 )
                 {
 #if GENERATE_SQL_SCRIPTS
@@ -239,7 +239,8 @@ namespace BasicApi
                     Console.WriteLine(script);
 #endif
 
-                    dbContext.Database.EnsureDeleted();
+                    dbContext.Database
+                        .EnsureDeleted();
                 }
             }
         }
@@ -251,8 +252,8 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
+                    var dbContext = serviceScope.ServiceProvider
+                        .GetRequiredService<BasicApiContext>()
                 )
                 {
                     var migrator = dbContext.GetService<IMigrator>();
@@ -279,11 +280,13 @@ namespace BasicApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
-            var configuration = new ConfigurationBuilder().AddEnvironmentVariables()
+            var configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
                 .AddCommandLine(args)
                 .Build();
 
-            return new WebHostBuilder().UseKestrel()
+            return new WebHostBuilder()
+                .UseKestrel()
                 .UseUrls("http://+:5000")
                 .UseConfiguration(configuration)
                 .UseContentRoot(Directory.GetCurrentDirectory())

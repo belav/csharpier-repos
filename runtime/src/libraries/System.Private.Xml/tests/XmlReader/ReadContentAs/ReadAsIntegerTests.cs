@@ -109,7 +109,8 @@ namespace System.Xml.Tests
                     0,
                     0,
                     TimeZoneInfo.Local.GetUtcOffset(new DateTime(9999, 1, 1))
-                ).ToString(),
+                )
+                    .ToString(),
                 reader.ReadContentAs(typeof(DateTimeOffset), null).ToString()
             );
         }

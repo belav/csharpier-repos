@@ -1349,16 +1349,10 @@ namespace System.Numerics.Tests
 
                 if (beSignedBytes.Length > 1 && beSignedBytes[0] == 0)
                 {
-                    leUnsignedBytes = new Span<byte>(
-                        leSignedBytes,
-                        0,
-                        leSignedBytes.Length - 1
-                    ).ToArray();
-                    beUnsignedBytes = new Span<byte>(
-                        beSignedBytes,
-                        1,
-                        beSignedBytes.Length - 1
-                    ).ToArray();
+                    leUnsignedBytes = new Span<byte>(leSignedBytes, 0, leSignedBytes.Length - 1)
+                        .ToArray();
+                    beUnsignedBytes = new Span<byte>(beSignedBytes, 1, beSignedBytes.Length - 1)
+                        .ToArray();
                 }
                 else
                 {

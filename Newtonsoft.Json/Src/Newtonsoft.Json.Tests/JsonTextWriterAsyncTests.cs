@@ -1604,13 +1604,8 @@ _____'propertyName': NaN,
                 if (newText != oldText)
                 {
                     throw new Exception(
-                        "Difference for char '{0}' (value {1}). Old text: {2}, New text: {3}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            c,
-                            (int)c,
-                            oldText,
-                            newText
-                        )
+                        "Difference for char '{0}' (value {1}). Old text: {2}, New text: {3}"
+                            .FormatWith(CultureInfo.InvariantCulture, c, (int)c, oldText, newText)
                     );
                 }
 

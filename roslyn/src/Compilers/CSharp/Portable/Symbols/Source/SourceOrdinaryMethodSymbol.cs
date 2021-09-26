@@ -150,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             var syntax = GetSyntax();
-            var withTypeParamsBinder = this.DeclaringCompilation.GetBinderFactory(syntax.SyntaxTree)
+            var withTypeParamsBinder = this.DeclaringCompilation
+                .GetBinderFactory(syntax.SyntaxTree)
                 .GetBinder(syntax.ReturnType, syntax, this);
 
             SyntaxToken arglistToken;
@@ -234,9 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     );
 
                     declaredConstraints = signatureBinder.WithAdditionalFlags(
-                            BinderFlags.GenericConstraintsClause
-                                | BinderFlags.SuppressConstraintChecks
-                        )
+                        BinderFlags.GenericConstraintsClause | BinderFlags.SuppressConstraintChecks
+                    )
                         .BindTypeParameterConstraintClauses(
                             this,
                             TypeParameters,
@@ -362,9 +362,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         WellKnownMember.System_Runtime_CompilerServices_ExtensionAttribute__ctor,
                         out var useSiteInfo
                     );
-                    Location thisLocation = syntax.ParameterList.Parameters[
-                        0
-                    ].Modifiers.FirstOrDefault(SyntaxKind.ThisKeyword).GetLocation();
+                    Location thisLocation = syntax.ParameterList.Parameters[0].Modifiers
+                        .FirstOrDefault(SyntaxKind.ThisKeyword)
+                        .GetLocation();
                     if ((object)attributeConstructor == null)
                     {
                         var memberDescriptor = WellKnownMembers.GetDescriptor(
@@ -428,9 +428,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 var diagnostics = BindingDiagnosticBag.GetInstance();
                 var syntax = GetSyntax();
-                var withTypeParametersBinder = this.DeclaringCompilation.GetBinderFactory(
-                        syntax.SyntaxTree
-                    )
+                var withTypeParametersBinder = this.DeclaringCompilation
+                    .GetBinderFactory(syntax.SyntaxTree)
                     .GetBinder(syntax.ReturnType, syntax, this);
                 var constraints = this.MakeTypeParameterConstraintTypes(
                     withTypeParametersBinder,
@@ -459,9 +458,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (_lazyTypeParameterConstraintKinds.IsDefault)
             {
                 var syntax = GetSyntax();
-                var withTypeParametersBinder = this.DeclaringCompilation.GetBinderFactory(
-                        syntax.SyntaxTree
-                    )
+                var withTypeParametersBinder = this.DeclaringCompilation
+                    .GetBinderFactory(syntax.SyntaxTree)
                     .GetBinder(syntax.ReturnType, syntax, this);
                 var constraints = this.MakeTypeParameterConstraintKinds(
                     withTypeParametersBinder,
@@ -824,10 +822,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     implementation.TypeParameters
                 )
             );
-            bool returnTypesEqual = constructedDefinition.ReturnTypeWithAnnotations.Equals(
-                implementation.ReturnTypeWithAnnotations,
-                TypeCompareKind.AllIgnoreOptions
-            );
+            bool returnTypesEqual = constructedDefinition.ReturnTypeWithAnnotations
+                .Equals(implementation.ReturnTypeWithAnnotations, TypeCompareKind.AllIgnoreOptions);
             if (
                 !returnTypesEqual
                 && !SourceMemberContainerTypeSymbol.IsOrContainsErrorType(implementation.ReturnType)

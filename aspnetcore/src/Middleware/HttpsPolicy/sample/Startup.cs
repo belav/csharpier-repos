@@ -58,36 +58,33 @@ namespace HttpsSample
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(
+                                new IPEndPoint(IPAddress.Loopback, 5001),
+                                listenOptions =>
                                 {
-                                    options.Listen(
-                                        new IPEndPoint(IPAddress.Loopback, 5001),
-                                        listenOptions =>
-                                        {
-                                            listenOptions.UseHttps("testCert.pfx", "testPassword");
-                                        }
-                                    );
-                                    options.Listen(
-                                        new IPEndPoint(IPAddress.Loopback, 5000),
-                                        listenOptions => { }
-                                    );
+                                    listenOptions.UseHttps("testCert.pfx", "testPassword");
                                 }
-                            )
-                            .UseContentRoot(Directory.GetCurrentDirectory()) // for the cert file
-                            .ConfigureLogging(
-                                factory =>
-                                {
-                                    factory.SetMinimumLevel(LogLevel.Debug);
-                                    factory.AddConsole();
-                                }
-                            )
-                            .UseStartup<Startup>();
-                    }
-                )
-                .Build();
+                            );
+                            options.Listen(
+                                new IPEndPoint(IPAddress.Loopback, 5000),
+                                listenOptions => { }
+                            );
+                        }
+                    ).UseContentRoot(Directory.GetCurrentDirectory()) // for the cert file
+                    .ConfigureLogging(
+                        factory =>
+                        {
+                            factory.SetMinimumLevel(LogLevel.Debug);
+                            factory.AddConsole();
+                        }
+                    ).UseStartup<Startup>();
+                }
+            ).Build();
 
             return host.RunAsync();
         }

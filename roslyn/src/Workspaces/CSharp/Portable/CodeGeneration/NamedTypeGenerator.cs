@@ -188,8 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 // Otherwise, give the record a body.
                 recordDeclaration = recordDeclaration.WithOpenBraceToken(
-                        SyntaxFactory.Token(SyntaxKind.OpenBraceToken)
-                    )
+                    SyntaxFactory.Token(SyntaxKind.OpenBraceToken)
+                )
                     .WithCloseBraceToken(SyntaxFactory.Token(SyntaxKind.CloseBraceToken));
             }
 
@@ -286,8 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             }
 
             var result = typeDeclaration.WithAttributeLists(
-                    GenerateAttributeDeclarations(namedType, options)
-                )
+                GenerateAttributeDeclarations(namedType, options)
+            )
                 .WithModifiers(GenerateModifiers(namedType, destination, options))
                 .WithTypeParameterList(GenerateTypeParameterList(namedType, options))
                 .WithBaseList(GenerateBaseList(namedType))

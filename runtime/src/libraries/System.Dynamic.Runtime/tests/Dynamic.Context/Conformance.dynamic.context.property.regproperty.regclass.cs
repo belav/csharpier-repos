@@ -795,7 +795,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
             dynamic dy = mc;
             mc.Property_ulongArr = new ulong[] { 1, 2, 3, 4, 3, 4 };
             mc.Property_ulong = 4;
-            var list = ((ulong[])dy.Property_ulongArr).Where(p => p == (ulong)dy.Property_ulong)
+            var list = ((ulong[])dy.Property_ulongArr)
+                .Where(p => p == (ulong)dy.Property_ulong)
                 .ToList();
             return list.Count - 2;
         }

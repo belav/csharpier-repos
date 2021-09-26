@@ -84,12 +84,13 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                 TMemberAccessExpressionSyntax,
                 TAssignmentStatementSyntax,
                 TVariableDeclaratorSyntax
-            >.Analyze(
-                context.SemanticModel,
-                syntaxFacts,
-                objectCreationExpression,
-                context.CancellationToken
-            );
+            >
+                .Analyze(
+                    context.SemanticModel,
+                    syntaxFacts,
+                    objectCreationExpression,
+                    context.CancellationToken
+                );
 
             if (matches == null || matches.Value.Length == 0)
             {

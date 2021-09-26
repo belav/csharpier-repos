@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis
                 relativePathResolver
             );
 
-            var analyzerLoader = tmpWorkspace.Services.GetRequiredService<IAnalyzerService>()
+            var analyzerLoader = tmpWorkspace.Services
+                .GetRequiredService<IAnalyzerService>()
                 .GetLoader();
             var xmlFileResolver = new XmlFileResolver(commandLineArguments.BaseDirectory);
             var strongNameProvider = new DesktopStrongNameProvider(
@@ -76,10 +77,11 @@ namespace Microsoft.CodeAnalysis
             if (unresolvedMetadataReferences != null)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources.Can_t_resolve_metadata_reference_colon_0,
-                        ((UnresolvedMetadataReference)unresolvedMetadataReferences).Reference
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources.Can_t_resolve_metadata_reference_colon_0,
+                            ((UnresolvedMetadataReference)unresolvedMetadataReferences).Reference
+                        )
                 );
             }
 
@@ -100,10 +102,11 @@ namespace Microsoft.CodeAnalysis
             if (unresolvedAnalyzerReferences != null)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources.Can_t_resolve_analyzer_reference_colon_0,
-                        ((UnresolvedAnalyzerReference)unresolvedAnalyzerReferences).Display
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources.Can_t_resolve_analyzer_reference_colon_0,
+                            ((UnresolvedAnalyzerReference)unresolvedAnalyzerReferences).Display
+                        )
                 );
             }
 
@@ -125,10 +128,11 @@ namespace Microsoft.CodeAnalysis
                 catch (Exception e)
                 {
                     throw new ArgumentException(
-                        string.Format(
-                            WorkspacesResources.An_error_occurred_while_reading_the_specified_configuration_file_colon_0,
-                            e.Message
-                        )
+                        string
+                            .Format(
+                                WorkspacesResources.An_error_occurred_while_reading_the_specified_configuration_file_colon_0,
+                                e.Message
+                            )
                     );
                 }
             }
@@ -216,9 +220,8 @@ namespace Microsoft.CodeAnalysis
                 projectName,
                 assemblyName,
                 language: language,
-                compilationOptions: commandLineArguments.CompilationOptions.WithXmlReferenceResolver(
-                        xmlFileResolver
-                    )
+                compilationOptions: commandLineArguments.CompilationOptions
+                    .WithXmlReferenceResolver(xmlFileResolver)
                     .WithAssemblyIdentityComparer(assemblyIdentityComparer)
                     .WithStrongNameProvider(strongNameProvider)
                     // TODO (https://github.com/dotnet/roslyn/issues/4967):

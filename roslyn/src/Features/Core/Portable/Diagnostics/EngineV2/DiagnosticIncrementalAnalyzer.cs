@@ -55,8 +55,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             AnalyzerService = analyzerService;
             Workspace = workspace;
-            PersistentStorageService =
-                workspace.Services.GetRequiredService<IPersistentStorageService>();
+            PersistentStorageService = workspace.Services
+                .GetRequiredService<IPersistentStorageService>();
             _documentTrackingService = workspace.Services.GetService<IDocumentTrackingService>();
 
             _correlationId = correlationId;

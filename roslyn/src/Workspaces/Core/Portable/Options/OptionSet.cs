@@ -131,10 +131,11 @@ namespace Microsoft.CodeAnalysis.Options
                 ref _lazyAnalyzerConfigOptions,
                 language ?? NoLanguageSentinel,
                 (string language, (OptionSet self, IOptionService optionService) arg) =>
-                    arg.self.CreateAnalyzerConfigOptions(
-                        arg.optionService,
-                        (object)language == NoLanguageSentinel ? null : language
-                    ),
+                    arg.self
+                        .CreateAnalyzerConfigOptions(
+                            arg.optionService,
+                            (object)language == NoLanguageSentinel ? null : language
+                        ),
                 (this, optionService)
             );
         }

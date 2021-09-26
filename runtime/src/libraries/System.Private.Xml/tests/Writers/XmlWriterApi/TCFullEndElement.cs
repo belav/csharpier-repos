@@ -403,10 +403,8 @@ namespace System.Xml.Tests
                     w.WriteElementString("elt", uri, "text");
                     w.WriteEndElement();
                 }
-                string strExpected = string.Format(
-                    "<root xmlns:pre=\"{0}\"><pre:elt>text</pre:elt></root>",
-                    uri
-                );
+                string strExpected = string
+                    .Format("<root xmlns:pre=\"{0}\"><pre:elt>text</pre:elt></root>", uri);
                 Assert.True(utils.CompareReader(strExpected));
             }
 
@@ -6932,14 +6930,16 @@ namespace System.Xml.Tests
                             utils.WriterType == WriterType.UTF8WriterIndent
                             || utils.WriterType == WriterType.UnicodeWriterIndent
                         )
-                            ? string.Format(
+                            ? string
+                              .Format(
                                   "<?xml version=\"1.0\" encoding=\"utf-{0}\" standalone=\"{1}\"?>"
                                       + Environment.NewLine
                                       + "<a />",
                                   enc,
                                   param
                               )
-                            : string.Format(
+                            : string
+                              .Format(
                                   "<?xml version=\"1.0\" encoding=\"utf-{0}\" standalone=\"{1}\"?><a />",
                                   enc,
                                   param
@@ -6975,16 +6975,15 @@ namespace System.Xml.Tests
                             utils.WriterType == WriterType.UTF8WriterIndent
                             || utils.WriterType == WriterType.UnicodeWriterIndent
                         )
-                            ? string.Format(
+                            ? string
+                              .Format(
                                   "<?xml version=\"1.0\" encoding=\"utf-{0}\"?>"
                                       + Environment.NewLine
                                       + "<a />",
                                   enc
                               )
-                            : string.Format(
-                                  "<?xml version=\"1.0\" encoding=\"utf-{0}\"?><a />",
-                                  enc
-                              );
+                            : string
+                              .Format("<?xml version=\"1.0\" encoding=\"utf-{0}\"?><a />", enc);
 
                     exp =
                         (utils.WriterType == WriterType.CustomWriter)

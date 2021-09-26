@@ -86,10 +86,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             var longLiterals = LongLiteralHashSetPool.Allocate();
 
             var declaredSymbolInfos = ArrayBuilder<DeclaredSymbolInfo>.GetInstance();
-            var extensionMethodInfoBuilder = PooledDictionary<
-                string,
-                ArrayBuilder<int>
-            >.GetInstance();
+            var extensionMethodInfoBuilder = PooledDictionary<string, ArrayBuilder<int>>
+                .GetInstance();
             using var _ = PooledDictionary<string, string>.GetInstance(out var usingAliases);
 
             try

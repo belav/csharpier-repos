@@ -321,12 +321,8 @@ namespace System.Xml.Xsl.Xslt
 
                 if (_compiler.Settings.EnableScript)
                 {
-                    XmlExtensionFunction? scrFunc = _compiler.Scripts.ResolveFunction(
-                        name,
-                        ns,
-                        args.Count,
-                        (IErrorHelper)this
-                    );
+                    XmlExtensionFunction? scrFunc = _compiler.Scripts
+                        .ResolveFunction(name, ns, args.Count, (IErrorHelper)this);
                     if (scrFunc != null)
                     {
                         return GenerateScriptCall(_f.QName(name, ns, prefix), scrFunc, args);
@@ -823,9 +819,9 @@ namespace System.Xml.Xsl.Xslt
                         _f.InvokeRegisterDecimalFormatter(formatPicture, format)
                     );
                     fmtIdx.DebugName = _f.QName(
-                            "formatter" + _formatterCnt++,
-                            XmlReservedNs.NsXslDebug
-                        )
+                        "formatter" + _formatterCnt++,
+                        XmlReservedNs.NsXslDebug
+                    )
                         .ToString();
                     _gloVars.Add(fmtIdx);
                     return _f.InvokeFormatNumberStatic(value, fmtIdx);

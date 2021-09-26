@@ -244,9 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return this.TypeMap.SubstituteType(
-                    this.BaseMethod.OriginalDefinition.ReturnTypeWithAnnotations
-                );
+                return this.TypeMap
+                    .SubstituteType(this.BaseMethod.OriginalDefinition.ReturnTypeWithAnnotations);
             }
         }
 

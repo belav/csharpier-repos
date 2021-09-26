@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 "System.Int32",
-                attribute.AttributeConstructor.Parameters.Single()
+                attribute.AttributeConstructor.Parameters
+                    .Single()
                     .TypeWithAnnotations.ToTestDisplayString()
             );
             Assert.Empty(attribute.CommonNamedArguments);
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 "System.Diagnostics.DebuggableAttribute.DebuggingModes",
-                attribute.AttributeConstructor.Parameters.Single()
+                attribute.AttributeConstructor.Parameters
+                    .Single()
                     .TypeWithAnnotations.ToTestDisplayString()
             );
             Assert.Empty(attribute.CommonNamedArguments);
@@ -161,18 +163,16 @@ class C
             var comp = CreateEmptyCompilation(
                 "",
                 new[] { reference },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
-            var pid = (NamedTypeSymbol)comp.GlobalNamespace.GetMembers()
+            var pid = (NamedTypeSymbol)comp.GlobalNamespace
+                .GetMembers()
                 .Where(
                     s =>
-                        s.Name.StartsWith(
-                            "<PrivateImplementationDetails>",
-                            StringComparison.Ordinal
-                        )
+                        s.Name
+                            .StartsWith("<PrivateImplementationDetails>", StringComparison.Ordinal)
                 )
                 .Single();
 
@@ -198,9 +198,8 @@ unsafe struct S
             var comp = CreateEmptyCompilation(
                 "",
                 new[] { reference },
-                options: TestOptions.UnsafeReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.UnsafeReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var s = (NamedTypeSymbol)comp.GlobalNamespace.GetMembers("S").Single();
@@ -230,9 +229,9 @@ class Test
 }
 ";
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
@@ -271,9 +270,8 @@ class Test
                             );
                             Assert.Equal(
                                 DebuggerBrowsableState.Never,
-                                (DebuggerBrowsableState)attributes[
-                                    1
-                                ].ConstructorArguments.Single().Value
+                                (DebuggerBrowsableState)attributes[1].ConstructorArguments
+                                    .Single().Value
                             );
                         }
                         else
@@ -305,9 +303,9 @@ abstract class C
 }
 ";
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
@@ -348,8 +346,8 @@ abstract class C
                     Assert.Equal(
                         "CompilerGeneratedAttribute",
                         peModule.GetCustomAttributesForToken(
-                                ((PEMethodSymbol)e.RemoveMethod).Handle
-                            )
+                            ((PEMethodSymbol)e.RemoveMethod).Handle
+                        )
                             .Single().AttributeClass.Name
                     );
                 }
@@ -374,18 +372,17 @@ class C
 }
 ";
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
                 CreateCompilation(source, options: options),
                 symbolValidator: m =>
                 {
-                    var displayClass = m.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "C.<>c__DisplayClass0_0"
-                    );
+                    var displayClass = m.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C.<>c__DisplayClass0_0");
                     AssertEx.SetEqual(
                         new[] { "CompilerGeneratedAttribute" },
                         GetAttributeNames(displayClass.GetAttributes())
@@ -414,9 +411,9 @@ class C
 }
 ";
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
@@ -603,9 +600,9 @@ public class C
 }
 ";
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
@@ -676,9 +673,9 @@ class C
 }
 ";
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
@@ -755,16 +752,17 @@ class B : A
 }
 ";
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var attributes = module.GlobalNamespace.GetTypeMember("B")
+                    var attributes = module.GlobalNamespace
+                        .GetTypeMember("B")
                         .GetMember<MethodSymbol>("<>n__0")
                         .GetAttributes();
 
@@ -805,16 +803,17 @@ class B : A
 }
 ";
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var baseMethodWrapper = module.GlobalNamespace.GetTypeMember("B")
+                    var baseMethodWrapper = module.GlobalNamespace
+                        .GetTypeMember("B")
                         .GetMember<MethodSymbol>("<>n__0");
                     AssertEx.SetEqual(
                         new[] { "CompilerGeneratedAttribute", "DebuggerHiddenAttribute" },
@@ -861,16 +860,17 @@ class B : A
 }
 ";
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var baseMethodWrapper = module.GlobalNamespace.GetTypeMember("B")
+                    var baseMethodWrapper = module.GlobalNamespace
+                        .GetTypeMember("B")
                         .GetMember<MethodSymbol>("<>n__0");
                     AssertEx.SetEqual(
                         new[] { "CompilerGeneratedAttribute", "DebuggerHiddenAttribute" },
@@ -1791,8 +1791,8 @@ unsafe class C
                     {
                         // Modules security attributes are copied to assemblies they're included in
                         var moduleReference = ModuleMetadata.CreateFromImage(
-                                compilation.EmitToArray()
-                            )
+                            compilation.EmitToArray()
+                        )
                             .GetReference();
                         CompileAndVerifyWithMscorlib40(
                             "",
@@ -1862,9 +1862,9 @@ class Test
 }";
 
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
@@ -1921,16 +1921,17 @@ class Test
 }";
 
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var type = module.GlobalNamespace.GetMember<NamedTypeSymbol>("Test")
+                    var type = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("Test")
                         .GetTypeMember("<>c");
                     var stateMachine = type.GetTypeMember("<<F>b__0_0>d");
                     var asyncMethod = type.GetMember<MethodSymbol>("<F>b__0_0");
@@ -1982,9 +1983,9 @@ public class Test<T>
 }";
 
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
@@ -2040,16 +2041,15 @@ class Test
 }";
 
             var referenceOptions = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
             var reference = CreateCompilationWithMscorlib45(source, options: referenceOptions)
                 .EmitToImageReference(options: new EmitOptions(metadataOnly: true));
 
-            var options = TestOptions.ReleaseDll.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var options = TestOptions.ReleaseDll
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var compilation = CreateCompilationWithMscorlib45(
                 "",
                 new[] { reference },
@@ -2093,9 +2093,9 @@ class Test
 }";
 
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
@@ -2138,9 +2138,9 @@ public class Test<T>
 }";
 
             var options = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
             CompileAndVerify(
@@ -2181,16 +2181,15 @@ public class Test<T>
 }";
 
             var referenceOptions = TestOptions.CreateTestOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel
-                )
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel
+            )
                 .WithMetadataImportOptions(MetadataImportOptions.All);
             var reference = CreateCompilationWithMscorlib45(source, options: referenceOptions)
                 .EmitToImageReference(options: new EmitOptions(metadataOnly: true));
 
-            var options = TestOptions.ReleaseDll.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var options = TestOptions.ReleaseDll
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var compilation = CreateCompilationWithMscorlib45(
                 "",
                 new[] { reference },
@@ -2252,9 +2251,9 @@ namespace System.Runtime.CompilerServices
 }";
             // Build Diagnostics referencing mscorlib with String
             var diagLibComp = CreateEmptyCompilation(
-                    new string[] { diagLibSource },
-                    references: new[] { mslibRef }
-                )
+                new string[] { diagLibSource },
+                references: new[] { mslibRef }
+            )
                 .VerifyDiagnostics();
             var diagLibRef = diagLibComp.EmitToImageReference();
 

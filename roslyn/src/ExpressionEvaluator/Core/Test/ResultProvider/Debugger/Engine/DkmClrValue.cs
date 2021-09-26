@@ -166,11 +166,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 throw new ArgumentNullException(nameof(inspectionContext));
             }
 
-            return inspectionContext.InspectionSession.InvokeFormatter(
-                this,
-                MethodId.GetValueString,
-                f => f.GetValueString(this, inspectionContext, formatSpecifiers)
-            );
+            return inspectionContext.InspectionSession
+                .InvokeFormatter(
+                    this,
+                    MethodId.GetValueString,
+                    f => f.GetValueString(this, inspectionContext, formatSpecifiers)
+                );
         }
 
         public bool HasUnderlyingString(DkmInspectionContext inspectionContext)
@@ -180,11 +181,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 throw new ArgumentNullException(nameof(inspectionContext));
             }
 
-            return inspectionContext.InspectionSession.InvokeFormatter(
-                this,
-                MethodId.HasUnderlyingString,
-                f => f.HasUnderlyingString(this, inspectionContext)
-            );
+            return inspectionContext.InspectionSession
+                .InvokeFormatter(
+                    this,
+                    MethodId.HasUnderlyingString,
+                    f => f.HasUnderlyingString(this, inspectionContext)
+                );
         }
 
         public string GetUnderlyingString(DkmInspectionContext inspectionContext)
@@ -194,11 +196,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 throw new ArgumentNullException(nameof(inspectionContext));
             }
 
-            return inspectionContext.InspectionSession.InvokeFormatter(
-                this,
-                MethodId.GetUnderlyingString,
-                f => f.GetUnderlyingString(this, inspectionContext)
-            );
+            return inspectionContext.InspectionSession
+                .InvokeFormatter(
+                    this,
+                    MethodId.GetUnderlyingString,
+                    f => f.GetUnderlyingString(this, inspectionContext)
+                );
         }
 
         public void GetResult(
@@ -256,8 +259,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 // close enough for testing.
                 if (
                     type.GetMethods(
-                            BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
-                        )
+                        BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
+                    )
                         .Any(m => m.Name == "ToString")
                 )
                 {
@@ -328,9 +331,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                     if (commaIndex >= 0)
                     {
                         var rawFormatSpecifiers = name.Substring(commaIndex + 1).Split(',');
-                        var trimmedFormatSpecifiers = ArrayBuilder<string>.GetInstance(
-                            rawFormatSpecifiers.Length
-                        );
+                        var trimmedFormatSpecifiers = ArrayBuilder<string>
+                            .GetInstance(rawFormatSpecifiers.Length);
                         trimmedFormatSpecifiers.AddRange(
                             rawFormatSpecifiers.Select(fs => fs.Trim())
                         );

@@ -134,11 +134,8 @@ namespace System.IO.Internal
 
                     try
                     {
-                        new FileStream(
-                            tempFileName,
-                            FileMode.CreateNew,
-                            FileAccess.Write
-                        ).Dispose();
+                        new FileStream(tempFileName, FileMode.CreateNew, FileAccess.Write)
+                            .Dispose();
                         uniqueFile = true;
                     }
                     catch (IOException ex)

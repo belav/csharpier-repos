@@ -15,10 +15,11 @@ namespace System.Runtime.ExceptionServices
             Debug.Assert(exception != null, "Expected non-null Exception");
 
             const string ExceptionRemoteStackTraceStringName = "_remoteStackTraceString";
-            FieldInfo? fi = typeof(Exception).GetField(
-                ExceptionRemoteStackTraceStringName,
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            FieldInfo? fi = typeof(Exception)
+                .GetField(
+                    ExceptionRemoteStackTraceStringName,
+                    BindingFlags.NonPublic | BindingFlags.Instance
+                );
 
             if (fi != null)
             {

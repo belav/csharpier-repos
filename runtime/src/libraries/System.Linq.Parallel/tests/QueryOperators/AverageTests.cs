@@ -675,130 +675,90 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Average_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .Average(
-                            (Func<int, int>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average(
+                        (Func<int, int>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .Average(
-                            (Func<int, int?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average(
+                        (Func<int, int?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .Average(
-                            (Func<int, long>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average(
+                        (Func<int, long>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .Average(
-                            (Func<int, long?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average(
+                        (Func<int, long?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .Average(
-                            (Func<int, float>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average(
+                        (Func<int, float>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .Average(
-                            (Func<int, float?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average(
+                        (Func<int, float?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .Average(
-                            (Func<int, double>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average(
+                        (Func<int, double>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .Average(
-                            (Func<int, double?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average(
+                        (Func<int, double?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .Average(
-                            (Func<int, decimal>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average(
+                        (Func<int, decimal>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .Average(
-                            (Func<int, decimal?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average(
+                        (Func<int, decimal?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
         }
 
         [Fact]

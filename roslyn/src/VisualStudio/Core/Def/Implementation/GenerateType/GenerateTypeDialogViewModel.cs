@@ -317,18 +317,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                 var lastIndexOfSeparatorInFullPath = this.FullFilePath.LastIndexOf('\\');
                 if (lastIndexOfSeparatorInFullPath != -1)
                 {
-                    var fileNameInFullPathInContainers = this.FullFilePath.Split(
-                        new[] { '\\' },
-                        StringSplitOptions.RemoveEmptyEntries
-                    );
+                    var fileNameInFullPathInContainers = this.FullFilePath
+                        .Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
 
                     // Trim spaces of each component of the file name.
                     // Note that path normalization changed between 4.6.1 and 4.6.2 and GetFullPath no longer trims trailing spaces.
                     // See https://blogs.msdn.microsoft.com/jeremykuhne/2016/06/21/more-on-new-net-path-handling/
-                    this.FullFilePath = string.Join(
-                        "\\",
-                        fileNameInFullPathInContainers.Select(str => str.Trim())
-                    );
+                    this.FullFilePath = string
+                        .Join("\\", fileNameInFullPathInContainers.Select(str => str.Trim()));
                 }
 
                 string projectRootPath = null;
@@ -405,7 +401,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
 
                 // Check for reserved words in the folder or filename
                 if (
-                    this.FullFilePath.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries)
+                    this.FullFilePath
+                        .Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries)
                         .Any(s => _reservedKeywords.Contains(s, StringComparer.OrdinalIgnoreCase))
                 )
                 {
@@ -418,13 +415,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                 // We check to see if file path of the new file matches the filepath of any other existing file or if the Folders and FileName matches any of the document then
                 // we say that the file already exists.
                 if (
-                    this.SelectedProject.Documents.Where(n => n != null)
+                    this.SelectedProject.Documents
+                        .Where(n => n != null)
                         .Where(n => n.FilePath == FullFilePath)
                         .Any()
                     || (
                         this.Folders != null
                         && this.FileName != null
-                        && this.SelectedProject.Documents.Where(
+                        && this.SelectedProject.Documents
+                            .Where(
                                 n =>
                                     n.Name != null
                                     && n.Folders.Count > 0
@@ -479,9 +478,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                 {
                     NotifyPropertyChanged(nameof(DocumentList));
                     this.DocumentSelectIndex = 0;
-                    this.ProjectSelectIndex = this.ProjectList.FindIndex(
-                        p => p.Project == _selectedProject
-                    );
+                    this.ProjectSelectIndex = this.ProjectList
+                        .FindIndex(p => p.Project == _selectedProject);
                     if (_selectedProject != _document.Project)
                     {
                         // Restrict the Access List Options
@@ -584,7 +582,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
 
                     // Populate the rest of the documents for the project
                     _previouslyPopulatedDocumentList.AddRange(
-                        _document.Project.Documents.Where(
+                        _document.Project.Documents
+                            .Where(
                                 d => d != _document && !d.IsGeneratedCode(CancellationToken.None)
                             )
                             .Select(d => new DocumentSelectItem(d))
@@ -593,9 +592,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                 else
                 {
                     _previouslyPopulatedDocumentList.AddRange(
-                        _selectedProject.Documents.Where(
-                                d => !d.IsGeneratedCode(CancellationToken.None)
-                            )
+                        _selectedProject.Documents
+                            .Where(d => !d.IsGeneratedCode(CancellationToken.None))
                             .Select(d => new DocumentSelectItem(d))
                     );
 
@@ -774,12 +772,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
             // Add the rest of the projects
             // Adding dependency graph to avoid cyclic dependency
             projectListing.AddRange(
-                document.Project.Solution.Projects.Where(
+                document.Project.Solution.Projects
+                    .Where(
                         p =>
                             p != document.Project
                             && !dependencyGraph.GetProjectsThatThisProjectTransitivelyDependsOn(
-                                    p.Id
-                                )
+                                p.Id
+                            )
                                 .Contains(document.Project.Id)
                     )
                     .Select(p => new ProjectSelectItem(p))

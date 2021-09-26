@@ -148,10 +148,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             string attributeName
         )
         {
-            var content = string.Join(
-                "",
-                node.FindDescendantNodes<IntermediateToken>().Select(t => t.Content)
-            );
+            var content = string
+                .Join("", node.FindDescendantNodes<IntermediateToken>().Select(t => t.Content));
             return RazorDiagnostic.Create(
                 UnsupportedComplexContent,
                 node.Source ?? SourceSpan.Undefined,
@@ -215,10 +213,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 source ?? SourceSpan.Undefined,
                 attribute,
                 Environment.NewLine
-                    + string.Join(
-                        Environment.NewLine,
-                        attributes.Select(p => p.TagHelper.DisplayName)
-                    )
+                    + string
+                        .Join(Environment.NewLine, attributes.Select(p => p.TagHelper.DisplayName))
             );
             return diagnostic;
         }
@@ -242,10 +238,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 source ?? SourceSpan.Undefined,
                 attribute,
                 Environment.NewLine
-                    + string.Join(
-                        Environment.NewLine,
-                        attributes.Select(p => p.TagHelper.DisplayName)
-                    )
+                    + string
+                        .Join(Environment.NewLine, attributes.Select(p => p.TagHelper.DisplayName))
             );
             return diagnostic;
         }
@@ -337,10 +331,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             ComponentIntermediateNode component
         )
         {
-            var supportedElements = string.Join(
-                ", ",
-                component.Component.GetChildContentProperties().Select(p => $"'{p.Name}'")
-            );
+            var supportedElements = string
+                .Join(
+                    ", ",
+                    component.Component.GetChildContentProperties().Select(p => $"'{p.Name}'")
+                );
             return RazorDiagnostic.Create(
                 ChildContentMixedWithExplicitChildContent,
                 source ?? SourceSpan.Undefined,
@@ -700,10 +695,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 source ?? SourceSpan.Undefined,
                 attribute,
                 Environment.NewLine
-                    + string.Join(
-                        Environment.NewLine,
-                        attributes.Select(p => p.TagHelper.DisplayName)
-                    )
+                    + string
+                        .Join(Environment.NewLine, attributes.Select(p => p.TagHelper.DisplayName))
             );
             return diagnostic;
         }

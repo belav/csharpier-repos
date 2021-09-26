@@ -48,14 +48,15 @@ namespace Microsoft.CodeAnalysis
                 // text with a different object identity.
                 textSource = CreateRecoverableText(textAndVersion, solutionServices);
 
-                generatedSyntaxTree = languageServices.SyntaxTreeFactory.CreateRecoverableTree(
-                    documentId.ProjectId,
-                    filePath: generatedSyntaxTree.FilePath,
-                    options,
-                    textSource,
-                    generatedSourceText.Encoding,
-                    root
-                );
+                generatedSyntaxTree = languageServices.SyntaxTreeFactory
+                    .CreateRecoverableTree(
+                        documentId.ProjectId,
+                        filePath: generatedSyntaxTree.FilePath,
+                        options,
+                        textSource,
+                        generatedSourceText.Encoding,
+                        root
+                    );
             }
 
             var treeAndVersion = TreeAndVersion.Create(generatedSyntaxTree, textAndVersion.Version);

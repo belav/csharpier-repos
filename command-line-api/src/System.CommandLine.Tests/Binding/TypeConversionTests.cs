@@ -568,7 +568,8 @@ namespace System.CommandLine.Tests.Binding
 
             var value = option.Parse("-x Notaday");
 
-            value.Errors.Select(e => e.Message)
+            value.Errors
+                .Select(e => e.Message)
                 .Should()
                 .Contain(
                     "Cannot parse argument 'Notaday' for option '-x' as expected type System.DayOfWeek."

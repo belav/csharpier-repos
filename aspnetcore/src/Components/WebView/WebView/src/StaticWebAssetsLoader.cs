@@ -106,11 +106,12 @@ namespace Microsoft.AspNetCore.Components.WebView
             {
                 var document = XDocument.Load(manifest);
                 if (
-                    !string.Equals(
-                        document.Root!.Name.LocalName,
-                        ManifestRootElementName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    !string
+                        .Equals(
+                            document.Root!.Name.LocalName,
+                            ManifestRootElementName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     throw new InvalidOperationException(
@@ -136,11 +137,12 @@ namespace Microsoft.AspNetCore.Components.WebView
                 foreach (var element in document.Root.Elements())
                 {
                     if (
-                        !string.Equals(
-                            element.Name.LocalName,
-                            ContentRootElementName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        !string
+                            .Equals(
+                                element.Name.LocalName,
+                                ContentRootElementName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         throw new InvalidOperationException(
@@ -264,11 +266,8 @@ namespace Microsoft.AspNetCore.Components.WebView
 
             private bool StartsWithBasePath(string subpath, out PathString rest)
             {
-                return new PathString(subpath).StartsWithSegments(
-                    BasePath,
-                    FilePathComparison,
-                    out rest
-                );
+                return new PathString(subpath)
+                    .StartsWithSegments(BasePath, FilePathComparison, out rest);
             }
 
             private class StaticWebAssetsDirectoryRoot : IDirectoryContents
@@ -297,7 +296,8 @@ namespace Microsoft.AspNetCore.Components.WebView
 
                 private IEnumerator<IFileInfo> GenerateEnum()
                 {
-                    return new[] { new StaticWebAssetsFileInfo(_nextSegment) }.Cast<IFileInfo>()
+                    return new[] { new StaticWebAssetsFileInfo(_nextSegment) }
+                        .Cast<IFileInfo>()
                         .GetEnumerator();
                 }
 

@@ -117,9 +117,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
 
             Contract.ThrowIfNull(_snippetExpansionClient.ExpansionSession);
 
-            var surfaceBufferFieldSpan = _snippetExpansionClient.ExpansionSession.GetFieldSpan(
-                CaseGenerationLocationField
-            );
+            var surfaceBufferFieldSpan = _snippetExpansionClient.ExpansionSession
+                .GetFieldSpan(CaseGenerationLocationField);
 
             if (
                 !_snippetExpansionClient.TryGetSubjectBufferSpan(

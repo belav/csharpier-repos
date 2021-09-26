@@ -109,9 +109,8 @@ namespace System.Reflection.Emit.Tests
                 "binaryAttribute",
                 () =>
                     parameter.SetCustomAttribute(
-                        typeof(ParameterBuilderCustomAttribute).GetConstructor(
-                            new Type[] { typeof(bool) }
-                        ),
+                        typeof(ParameterBuilderCustomAttribute)
+                            .GetConstructor(new Type[] { typeof(bool) }),
                         null
                     )
             );

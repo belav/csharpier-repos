@@ -53,11 +53,8 @@ namespace System.Runtime.CompilerServices
         )
             where TAwaiter : INotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitOnCompleted(
-                ref awaiter,
-                ref stateMachine,
-                ref m_task
-            );
+            AsyncTaskMethodBuilder<VoidTaskResult>
+                .AwaitOnCompleted(ref awaiter, ref stateMachine, ref m_task);
 
         /// <summary>
         /// Schedules the specified state machine to be pushed forward when the specified awaiter completes.
@@ -73,11 +70,8 @@ namespace System.Runtime.CompilerServices
         )
             where TAwaiter : ICriticalNotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitUnsafeOnCompleted(
-                ref awaiter,
-                ref stateMachine,
-                ref m_task
-            );
+            AsyncTaskMethodBuilder<VoidTaskResult>
+                .AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine, ref m_task);
 
         /// <summary>Gets the <see cref="System.Threading.Tasks.Task"/> for this builder.</summary>
         /// <returns>The <see cref="System.Threading.Tasks.Task"/> representing the builder's asynchronous operation.</returns>
@@ -117,7 +111,8 @@ namespace System.Runtime.CompilerServices
             else
             {
                 // Otherwise, complete the task that's there.
-                AsyncTaskMethodBuilder<VoidTaskResult>.SetExistingTaskResult(m_task, default!);
+                AsyncTaskMethodBuilder<VoidTaskResult>
+                    .SetExistingTaskResult(m_task, default!);
             }
         }
 
@@ -140,10 +135,8 @@ namespace System.Runtime.CompilerServices
         /// true to enable notification; false to disable a previously set notification.
         /// </param>
         internal void SetNotificationForWaitCompletion(bool enabled) =>
-            AsyncTaskMethodBuilder<VoidTaskResult>.SetNotificationForWaitCompletion(
-                enabled,
-                ref m_task
-            );
+            AsyncTaskMethodBuilder<VoidTaskResult>
+                .SetNotificationForWaitCompletion(enabled, ref m_task);
 
         /// <summary>
         /// Gets an object that may be used to uniquely identify this builder to the debugger.

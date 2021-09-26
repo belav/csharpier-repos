@@ -117,17 +117,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
                 var brokeredServiceContainer = await _vsServiceProvider.GetServiceAsync<
                     SVsBrokeredServiceContainer,
                     IBrokeredServiceContainer
-                >().ConfigureAwait(false);
+                >()
+                    .ConfigureAwait(false);
                 var serviceBroker = brokeredServiceContainer.GetFullAccessServiceBroker();
 
                 // VS AsyncLazy does not currently support cancellation:
                 var client = await ServiceHubRemoteHostClient.CreateAsync(
-                        _services,
-                        _listenerProvider,
-                        serviceBroker,
-                        _callbackDispatchers,
-                        CancellationToken.None
-                    )
+                    _services,
+                    _listenerProvider,
+                    serviceBroker,
+                    _callbackDispatchers,
+                    CancellationToken.None
+                )
                     .ConfigureAwait(false);
 
                 // proffer in-proc brokered services:

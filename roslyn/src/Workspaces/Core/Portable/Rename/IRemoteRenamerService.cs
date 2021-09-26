@@ -114,31 +114,29 @@ namespace Microsoft.CodeAnalysis.Rename
                 ? null
                 : new SerializableSearchResult
                   {
-                      Locations = result.Locations.Select(
-                              loc => SerializableRenameLocation.Dehydrate(loc)
-                          )
+                      Locations = result.Locations
+                          .Select(loc => SerializableRenameLocation.Dehydrate(loc))
                           .ToArray(),
                       ImplicitLocations = result.ImplicitLocations.IsDefault
                           ? null
-                          : result.ImplicitLocations.Select(
-                                    loc =>
-                                        SerializableReferenceLocation.Dehydrate(
-                                            loc,
-                                            cancellationToken
-                                        )
-                                )
-                                .ToArray(),
+                          : result.ImplicitLocations
+                            .Select(
+                                loc =>
+                                    SerializableReferenceLocation.Dehydrate(loc, cancellationToken)
+                            )
+                            .ToArray(),
                       ReferencedSymbols = result.ReferencedSymbols.IsDefault
                           ? null
-                          : result.ReferencedSymbols.Select(
-                                    s =>
-                                        SerializableSymbolAndProjectId.Dehydrate(
-                                            solution,
-                                            s,
-                                            cancellationToken
-                                        )
-                                )
-                                .ToArray(),
+                          : result.ReferencedSymbols
+                            .Select(
+                                s =>
+                                    SerializableSymbolAndProjectId.Dehydrate(
+                                        solution,
+                                        s,
+                                        cancellationToken
+                                    )
+                            )
+                            .ToArray(),
                   };
 
         public async Task<RenameLocations.SearchResult> RehydrateAsync(
@@ -151,10 +149,8 @@ namespace Microsoft.CodeAnalysis.Rename
 
             Contract.ThrowIfNull(Locations);
 
-            using var _1 = ArrayBuilder<RenameLocation>.GetInstance(
-                Locations.Length,
-                out var locBuilder
-            );
+            using var _1 = ArrayBuilder<RenameLocation>
+                .GetInstance(Locations.Length, out var locBuilder);
             foreach (var loc in Locations)
                 locBuilder.Add(
                     await loc.RehydrateAsync(solution, cancellationToken).ConfigureAwait(false)
@@ -164,10 +160,8 @@ namespace Microsoft.CodeAnalysis.Rename
 
             if (ImplicitLocations != null)
             {
-                using var _2 = ArrayBuilder<ReferenceLocation>.GetInstance(
-                    ImplicitLocations.Length,
-                    out var builder
-                );
+                using var _2 = ArrayBuilder<ReferenceLocation>
+                    .GetInstance(ImplicitLocations.Length, out var builder);
                 foreach (var loc in ImplicitLocations)
                     builder.Add(
                         await loc.RehydrateAsync(solution, cancellationToken).ConfigureAwait(false)
@@ -178,10 +172,8 @@ namespace Microsoft.CodeAnalysis.Rename
 
             if (ReferencedSymbols != null)
             {
-                using var _3 = ArrayBuilder<ISymbol>.GetInstance(
-                    ReferencedSymbols.Length,
-                    out var builder
-                );
+                using var _3 = ArrayBuilder<ISymbol>
+                    .GetInstance(ReferencedSymbols.Length, out var builder);
                 foreach (var symbol in ReferencedSymbols)
                     builder.AddIfNotNull(
                         await symbol.TryRehydrateAsync(solution, cancellationToken)
@@ -298,7 +290,8 @@ namespace Microsoft.CodeAnalysis.Rename
             if (locations.Symbol == null)
                 return null;
 
-            var symbol = await locations.Symbol.TryRehydrateAsync(solution, cancellationToken)
+            var symbol = await locations.Symbol
+                .TryRehydrateAsync(solution, cancellationToken)
                 .ConfigureAwait(false);
             if (symbol == null)
                 return null;
@@ -309,7 +302,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 symbol,
                 solution,
                 locations.Options.Rehydrate(),
-                await locations.Result.RehydrateAsync(solution, cancellationToken)
+                await locations.Result
+                    .RehydrateAsync(solution, cancellationToken)
                     .ConfigureAwait(false)
             );
         }
@@ -368,10 +362,10 @@ namespace Microsoft.CodeAnalysis.Rename
             Contract.ThrowIfNull(Resolution);
 
             var newSolutionWithoutRenamedDocument = await RemoteUtilities.UpdateSolutionAsync(
-                    oldSolution,
-                    Resolution.DocumentTextChanges,
-                    cancellationToken
-                )
+                oldSolution,
+                Resolution.DocumentTextChanges,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return new ConflictResolution(
@@ -465,10 +459,10 @@ namespace Microsoft.CodeAnalysis.Rename
                 return new SerializableConflictResolution(ErrorMessage, resolution: null);
 
             var documentTextChanges = await RemoteUtilities.GetDocumentTextChangesAsync(
-                    OldSolution,
-                    _newSolutionWithoutRenamedDocument,
-                    cancellationToken
-                )
+                OldSolution,
+                _newSolutionWithoutRenamedDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return new SerializableConflictResolution(
                 errorMessage: null,

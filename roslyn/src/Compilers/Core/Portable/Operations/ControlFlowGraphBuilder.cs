@@ -57,8 +57,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             _captureIdDispenser = captureIdDispenser ?? new CaptureIdDispenser();
             _blocks = blocks;
             _regionMap = PooledDictionary<BasicBlockBuilder, RegionBuilder>.GetInstance();
-            _evalStack =
-                ArrayBuilder<(EvalStackFrame? frameOpt, IOperation? operationOpt)>.GetInstance();
+            _evalStack = ArrayBuilder<(EvalStackFrame? frameOpt, IOperation? operationOpt)>
+                .GetInstance();
         }
 
         private RegionBuilder CurrentRegionRequired
@@ -224,9 +224,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             // Pass 3: Set the predecessors for the created basic blocks.
             foreach (BasicBlockBuilder blockBuilder in blockBuilders)
             {
-                builder[blockBuilder.Ordinal].SetPredecessors(
-                    blockBuilder.ConvertPredecessorsToBranches(builder)
-                );
+                builder[blockBuilder.Ordinal]
+                    .SetPredecessors(blockBuilder.ConvertPredecessorsToBranches(builder));
             }
 
             return builder.ToImmutableAndFree();
@@ -275,10 +274,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             // NOTE: This flow graph walking algorithm has been forked into Workspaces layer's
             //       implementation of "CustomDataFlowAnalysis",
             //       we should keep them in sync as much as possible.
-            var continueDispatchAfterFinally = PooledDictionary<
-                ControlFlowRegion,
-                bool
-            >.GetInstance();
+            var continueDispatchAfterFinally = PooledDictionary<ControlFlowRegion, bool>
+                .GetInstance();
             var dispatchedExceptionsFromRegions = PooledHashSet<ControlFlowRegion>.GetInstance();
             MarkReachableBlocks(
                 blocks,
@@ -1045,8 +1042,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             {
                                 if (predecessorsBuilder == null)
                                 {
-                                    predecessorsBuilder =
-                                        ArrayBuilder<BasicBlockBuilder>.GetInstance();
+                                    predecessorsBuilder = ArrayBuilder<BasicBlockBuilder>
+                                        .GetInstance();
                                 }
                                 else
                                 {
@@ -2172,10 +2169,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             Debug.Assert(candidate.IsStackSpillRegion);
                             if (
                                 candidate.HasCaptureIds
-                                && candidate.CaptureIds.Any(
-                                    (id, set) => set.Contains(id),
-                                    idsStillOnTheStack
-                                )
+                                && candidate.CaptureIds
+                                    .Any((id, set) => set.Contains(id), idsStillOnTheStack)
                             )
                             {
                                 currentSpillRegion = candidate;
@@ -3690,9 +3685,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             if (
                 operation.Target?.Type?.OriginalDefinition.SpecialType
                     == SpecialType.System_Nullable_T
-                && ((INamedTypeSymbol)operation.Target.Type!).TypeArguments[0].Equals(
-                    operation.Type
-                )
+                && ((INamedTypeSymbol)operation.Target.Type!).TypeArguments[0]
+                    .Equals(operation.Type)
             )
             {
                 nullableValueTypeReturn();
@@ -4787,15 +4781,14 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             ITypeSymbol iDisposable = isAsynchronous
                 ? _compilation.CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)
-                      .GetITypeSymbol()
+                  .GetITypeSymbol()
                 : _compilation.GetSpecialType(SpecialType.System_IDisposable);
 
             if (resources is IVariableDeclarationGroupOperation declarationGroup)
             {
                 var resourceQueue =
-                    ArrayBuilder<(IVariableDeclarationOperation, IVariableDeclaratorOperation)>.GetInstance(
-                        declarationGroup.Declarations.Length
-                    );
+                    ArrayBuilder<(IVariableDeclarationOperation, IVariableDeclaratorOperation)>
+                        .GetInstance(declarationGroup.Declarations.Length);
 
                 foreach (IVariableDeclarationOperation declaration in declarationGroup.Declarations)
                 {
@@ -5452,7 +5445,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 bool isAsynchronous = info.IsAsynchronous;
                 var iDisposable = isAsynchronous
                     ? _compilation.CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)
-                          .GetITypeSymbol()
+                      .GetITypeSymbol()
                     : _compilation.GetSpecialType(SpecialType.System_IDisposable);
 
                 AddDisposingFinally(
@@ -5784,10 +5777,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 if (method is null)
                 {
-                    var builder = ArrayBuilder<IOperation>.GetInstance(
-                        --parametersCount,
-                        fillWithValue: null!
-                    );
+                    var builder = ArrayBuilder<IOperation>
+                        .GetInstance(--parametersCount, fillWithValue: null!);
                     builder[--parametersCount] = loopObjectReference;
                     do
                     {
@@ -5803,10 +5794,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 }
                 else
                 {
-                    var builder = ArrayBuilder<IArgumentOperation>.GetInstance(
-                        parametersCount,
-                        fillWithValue: null!
-                    );
+                    var builder = ArrayBuilder<IArgumentOperation>
+                        .GetInstance(parametersCount, fillWithValue: null!);
 
                     builder[--parametersCount] = new ArgumentOperation(
                         ArgumentKind.Explicit,
@@ -7728,9 +7717,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             EvalStackFrame frame = PushStackFrame();
 
-            var initializerBuilder = ArrayBuilder<IOperation>.GetInstance(
-                operation.Initializers.Length
-            );
+            var initializerBuilder = ArrayBuilder<IOperation>
+                .GetInstance(operation.Initializers.Length);
             for (int i = 0; i < operation.Initializers.Length; i++)
             {
                 var simpleAssignment = (ISimpleAssignmentOperation)operation.Initializers[i];
@@ -7927,9 +7915,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 IArrayInitializerOperation initializer
             )
             {
-                var builder = ArrayBuilder<IOperation>.GetInstance(
-                    initializer.ElementValues.Length
-                );
+                var builder = ArrayBuilder<IOperation>
+                    .GetInstance(initializer.ElementValues.Length);
                 for (int i = initializer.ElementValues.Length - 1; i >= 0; i--)
                 {
                     IOperation elementValue = initializer.ElementValues[i];
@@ -8275,9 +8262,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 }
             }
 
-            var partsBuilder = ArrayBuilder<IInterpolatedStringContentOperation>.GetInstance(
-                operation.Parts.Length
-            );
+            var partsBuilder = ArrayBuilder<IInterpolatedStringContentOperation>
+                .GetInstance(operation.Parts.Length);
             for (int i = operation.Parts.Length - 1; i >= 0; i--)
             {
                 IInterpolatedStringContentOperation element = operation.Parts[i];
@@ -8468,10 +8454,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             {
                 Debug.Assert(_currentImplicitInstance.AnonymousTypePropertyValues is not null);
                 if (
-                    _currentImplicitInstance.AnonymousTypePropertyValues.TryGetValue(
-                        operation.Property,
-                        out IOperation? captured
-                    )
+                    _currentImplicitInstance.AnonymousTypePropertyValues
+                        .TryGetValue(operation.Property, out IOperation? captured)
                 )
                 {
                     return captured is IFlowCaptureReferenceOperation reference
@@ -8664,9 +8648,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 if (!propertySymbol.Parameters.IsEmpty)
                 {
                     // Must be an error case of initializing a property with parameters.
-                    var builder = ArrayBuilder<IArgumentOperation>.GetInstance(
-                        propertySymbol.Parameters.Length
-                    );
+                    var builder = ArrayBuilder<IArgumentOperation>
+                        .GetInstance(propertySymbol.Parameters.Length);
                     foreach (var parameter in propertySymbol.Parameters)
                     {
                         var value = new InvalidOperation(
@@ -9283,14 +9266,13 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             return new RecursivePatternOperation(
                 operation.MatchedType,
                 operation.DeconstructSymbol,
-                operation.DeconstructionSubpatterns.SelectAsArray(
-                    (p, @this) => (IPatternOperation)@this.VisitRequired(p),
-                    this
-                ),
-                operation.PropertySubpatterns.SelectAsArray(
-                    (p, @this) => (IPropertySubpatternOperation)@this.VisitRequired(p),
-                    this
-                ),
+                operation.DeconstructionSubpatterns
+                    .SelectAsArray((p, @this) => (IPatternOperation)@this.VisitRequired(p), this),
+                operation.PropertySubpatterns
+                    .SelectAsArray(
+                        (p, @this) => (IPropertySubpatternOperation)@this.VisitRequired(p),
+                        this
+                    ),
                 operation.DeclaredSymbol,
                 operation.InputType,
                 operation.NarrowedType,
@@ -9487,18 +9469,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             // a using statement introduces a 'logical' block after declaration, we synthesize one here in order to analyze it like a regular using. Don't include
             // local functions in this block: they still belong in the containing block. We'll visit any local functions in the list after we visit the statements
             // in this block.
-            ArrayBuilder<IOperation> statementsBuilder = ArrayBuilder<IOperation>.GetInstance(
-                statements.Length
-            );
+            ArrayBuilder<IOperation> statementsBuilder = ArrayBuilder<IOperation>
+                .GetInstance(statements.Length);
             ArrayBuilder<IOperation>? localFunctionsBuilder = null;
 
             foreach (var statement in statements)
             {
                 if (statement.Kind == OperationKind.LocalFunction)
                 {
-                    (localFunctionsBuilder ??= ArrayBuilder<IOperation>.GetInstance()).Add(
-                        statement
-                    );
+                    (localFunctionsBuilder ??= ArrayBuilder<IOperation>.GetInstance())
+                        .Add(statement);
                 }
                 else
                 {

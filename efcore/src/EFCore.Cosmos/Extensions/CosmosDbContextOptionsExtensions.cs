@@ -69,9 +69,8 @@ namespace Microsoft.EntityFrameworkCore
                 .WithAccountKey(accountKey)
                 .WithDatabaseName(databaseName);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension);
 
             cosmosOptionsAction?.Invoke(new CosmosDbContextOptionsBuilder(optionsBuilder));
 
@@ -126,9 +125,8 @@ namespace Microsoft.EntityFrameworkCore
             extension = extension.WithConnectionString(connectionString)
                 .WithDatabaseName(databaseName);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension);
 
             cosmosOptionsAction?.Invoke(new CosmosDbContextOptionsBuilder(optionsBuilder));
 

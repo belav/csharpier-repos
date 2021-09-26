@@ -112,18 +112,17 @@ namespace System.Net.NetworkInformation
             );
             StringParsingHelpers.ParseDhcpServerAddressesFromLeasesFile(
                 internalCollection,
-                string.Format(
-                    NetworkFiles.DHClientInterfaceLeasesFile,
-                    _linuxNetworkInterface.Name
-                ),
+                string
+                    .Format(NetworkFiles.DHClientInterfaceLeasesFile, _linuxNetworkInterface.Name),
                 _linuxNetworkInterface.Name
             );
             StringParsingHelpers.ParseDhcpServerAddressesFromLeasesFile(
                 internalCollection,
-                string.Format(
-                    NetworkFiles.DHClientSecondaryInterfaceLeasesFile,
-                    _linuxNetworkInterface.Name
-                ),
+                string
+                    .Format(
+                        NetworkFiles.DHClientSecondaryInterfaceLeasesFile,
+                        _linuxNetworkInterface.Name
+                    ),
                 _linuxNetworkInterface.Name
             );
 

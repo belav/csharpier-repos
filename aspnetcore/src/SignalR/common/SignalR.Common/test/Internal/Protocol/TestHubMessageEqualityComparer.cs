@@ -37,11 +37,12 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                         (StreamInvocationMessage)y
                     );
                 case CancelInvocationMessage cancelItemMessage:
-                    return string.Equals(
-                        cancelItemMessage.InvocationId,
-                        ((CancelInvocationMessage)y).InvocationId,
-                        StringComparison.Ordinal
-                    );
+                    return string
+                        .Equals(
+                            cancelItemMessage.InvocationId,
+                            ((CancelInvocationMessage)y).InvocationId,
+                            StringComparison.Ordinal
+                        );
                 case PingMessage _:
                     // If the types are equal (above), then we're done.
                     return true;

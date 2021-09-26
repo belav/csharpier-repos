@@ -31,9 +31,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             // From the artifacts dir, it's possible to find where the sharedFrameworkPublish folder is. We need
             // to locate it because we'll copy its contents into other folders
-            string artifactsDir = new RepoDirectoriesProvider().GetTestContextVariable(
-                "TEST_ARTIFACTS"
-            );
+            string artifactsDir = new RepoDirectoriesProvider()
+                .GetTestContextVariable("TEST_ARTIFACTS");
             string builtDotnet = Path.Combine(artifactsDir, "sharedFrameworkPublish");
 
             // The dotnetLightupSharedFxLookup dir will contain some folders and files that will be necessary to perform the tests
@@ -45,10 +44,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             SharedFramework.CopyDirectory(builtDotnet, _currentWorkingDir);
 
             var repoDirectories = new RepoDirectoriesProvider(builtDotnet: _currentWorkingDir);
-            GlobalLightupClientFixture = new TestProjectFixture(
-                "LightupClient",
-                repoDirectories
-            ).EnsureRestored().BuildProject();
+            GlobalLightupClientFixture = new TestProjectFixture("LightupClient", repoDirectories)
+                .EnsureRestored()
+                .BuildProject();
 
             string greatestVersionSharedFxPath =
                 sharedTestState.LightupLibFixture_Built.BuiltDotnet.GreatestVersionSharedFxPath;
@@ -690,20 +688,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             {
                 RepoDirectories = new RepoDirectoriesProvider();
 
-                LightupLibFixture_Built = new TestProjectFixture(
-                    "LightupLib",
-                    RepoDirectories
-                ).EnsureRestored().BuildProject();
+                LightupLibFixture_Built = new TestProjectFixture("LightupLib", RepoDirectories)
+                    .EnsureRestored()
+                    .BuildProject();
 
-                LightupLibFixture_Published = new TestProjectFixture(
-                    "LightupLib",
-                    RepoDirectories
-                ).EnsureRestored().PublishProject();
+                LightupLibFixture_Published = new TestProjectFixture("LightupLib", RepoDirectories)
+                    .EnsureRestored()
+                    .PublishProject();
 
-                LightupClientFixture = new TestProjectFixture(
-                    "LightupClient",
-                    RepoDirectories
-                ).EnsureRestored().BuildProject();
+                LightupClientFixture = new TestProjectFixture("LightupClient", RepoDirectories)
+                    .EnsureRestored()
+                    .BuildProject();
             }
 
             public void Dispose()

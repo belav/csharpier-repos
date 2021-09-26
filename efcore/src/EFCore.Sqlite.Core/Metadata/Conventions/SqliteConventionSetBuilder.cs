@@ -72,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private static IServiceScope CreateServiceScope()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlite()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlite()
                 .AddDbContext<DbContext>(
                     (p, o) => o.UseSqlite("Filename=_.db").UseInternalServiceProvider(p)
                 )

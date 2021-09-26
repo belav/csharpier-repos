@@ -14,36 +14,31 @@ namespace CreateDefaultBuilderApp
     {
         static void Main(string[] args)
         {
-            WebHost.CreateDefaultBuilder()
-                .UseUrls("http://127.0.0.1:0")
-                .ConfigureServices(
-                    (context, services) =>
-                    {
-                        services.AddSingleton(typeof(IService<>), typeof(Service<>));
-                        services.AddScoped<IAnotherService, AnotherService>();
-                    }
-                )
-                .Configure(
-                    app =>
-                    {
-                        app.Run(
-                            context =>
+            WebHost.CreateDefaultBuilder().UseUrls("http://127.0.0.1:0").ConfigureServices(
+                (context, services) =>
+                {
+                    services.AddSingleton(typeof(IService<>), typeof(Service<>));
+                    services.AddScoped<IAnotherService, AnotherService>();
+                }
+            ).Configure(
+                app =>
+                {
+                    app.Run(
+                        context =>
+                        {
+                            try
                             {
-                                try
-                                {
-                                    context.RequestServices.GetService<IService<IAnotherService>>();
-                                    return context.Response.WriteAsync("Success");
-                                }
-                                catch (Exception ex)
-                                {
-                                    return context.Response.WriteAsync(ex.ToString());
-                                }
+                                context.RequestServices.GetService<IService<IAnotherService>>();
+                                return context.Response.WriteAsync("Success");
                             }
-                        );
-                    }
-                )
-                .Build()
-                .Run();
+                            catch (Exception ex)
+                            {
+                                return context.Response.WriteAsync(ex.ToString());
+                            }
+                        }
+                    );
+                }
+            ).Build().Run();
         }
 
         interface IService<T>

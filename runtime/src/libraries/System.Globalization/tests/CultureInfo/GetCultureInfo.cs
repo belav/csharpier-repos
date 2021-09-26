@@ -141,31 +141,31 @@ namespace System.Globalization.Tests
             var psi = new ProcessStartInfo();
             psi.Environment.Clear();
 
-            psi.Environment.Add(
-                "DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY",
-                predefinedCulturesOnlyEnvVar
-            );
+            psi.Environment
+                .Add(
+                    "DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY",
+                    predefinedCulturesOnlyEnvVar
+                );
 
             RemoteExecutor.Invoke(
-                    (culture, predefined) =>
+                (culture, predefined) =>
+                {
+                    if (predefined == "1")
                     {
-                        if (predefined == "1")
-                        {
-                            AssertExtensions.Throws<CultureNotFoundException>(
-                                () => new CultureInfo(culture)
-                            );
-                        }
-                        else
-                        {
-                            CultureInfo ci = new CultureInfo(culture);
-                            Assert.Equal(culture, ci.Name);
-                        }
-                    },
-                    cultureName,
-                    predefinedCulturesOnlyEnvVar,
-                    new RemoteInvokeOptions { StartInfo = psi }
-                )
-                .Dispose();
+                        AssertExtensions.Throws<CultureNotFoundException>(
+                            () => new CultureInfo(culture)
+                        );
+                    }
+                    else
+                    {
+                        CultureInfo ci = new CultureInfo(culture);
+                        Assert.Equal(culture, ci.Name);
+                    }
+                },
+                cultureName,
+                predefinedCulturesOnlyEnvVar,
+                new RemoteInvokeOptions { StartInfo = psi }
+            ).Dispose();
         }
     }
 }

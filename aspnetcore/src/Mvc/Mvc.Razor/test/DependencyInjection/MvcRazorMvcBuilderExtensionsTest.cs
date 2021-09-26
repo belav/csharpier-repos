@@ -44,9 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Test.DependencyInjection
             var services = new ServiceCollection();
 
             var manager = new ApplicationPartManager();
-            manager.ApplicationParts.Add(
-                new TestApplicationPart(typeof(TestTagHelperOne), typeof(TestTagHelperTwo))
-            );
+            manager.ApplicationParts
+                .Add(new TestApplicationPart(typeof(TestTagHelperOne), typeof(TestTagHelperTwo)));
 
             manager.FeatureProviders.Add(new TagHelperFeatureProvider());
 

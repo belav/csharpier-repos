@@ -318,11 +318,12 @@ namespace System.Web.Http.ModelBinding
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "DefaultApi",
-                "api/{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config.Routes
+                .MapHttpRoute(
+                    "DefaultApi",
+                    "api/{controller}/{id}",
+                    new { id = RouteParameter.Optional }
+                );
 
             // The null trace writer case is tested as well to verify the
             // ValuesController works as expected without tracing.
@@ -364,8 +365,8 @@ namespace System.Web.Http.ModelBinding
                     response = await client.SendAsync(request);
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                     string expectedGetQueryStringResponse = valuesController.Get(5);
-                    string actualGetQueryStringResponse =
-                        await response.Content.ReadAsAsync<string>();
+                    string actualGetQueryStringResponse = await response.Content
+                        .ReadAsAsync<string>();
                     Assert.Equal(expectedGetQueryStringResponse, actualGetQueryStringResponse);
                     if (traceWriter != null)
                     {
@@ -479,11 +480,12 @@ namespace System.Web.Http.ModelBinding
         public async Task ValuesController_Get_Id_Writes_Expected_Traces()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "DefaultApi",
-                "api/{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config.Routes
+                .MapHttpRoute(
+                    "DefaultApi",
+                    "api/{controller}/{id}",
+                    new { id = RouteParameter.Optional }
+                );
             Mock<DelegatingHandler> customMessageHandler = new Mock<DelegatingHandler>()
             {
                 CallBase = true
@@ -511,11 +513,12 @@ namespace System.Web.Http.ModelBinding
                     );
                     Assert.True(
                         missingTraces.Count == 0,
-                        string.Format(
-                            "These expected traces were missing:{0}    {1}",
-                            Environment.NewLine,
-                            string.Join(Environment.NewLine + "    ", missingTraces)
-                        )
+                        string
+                            .Format(
+                                "These expected traces were missing:{0}    {1}",
+                                Environment.NewLine,
+                                string.Join(Environment.NewLine + "    ", missingTraces)
+                            )
                     );
 
                     IList<string> unexpectedTraces = UnexpectedTraces(
@@ -524,11 +527,12 @@ namespace System.Web.Http.ModelBinding
                     );
                     Assert.True(
                         unexpectedTraces.Count == 0,
-                        string.Format(
-                            "These traces were not expected:{0}    {1}",
-                            Environment.NewLine,
-                            string.Join(Environment.NewLine + "    ", unexpectedTraces)
-                        )
+                        string
+                            .Format(
+                                "These traces were not expected:{0}    {1}",
+                                Environment.NewLine,
+                                string.Join(Environment.NewLine + "    ", unexpectedTraces)
+                            )
                     );
                 }
             }
@@ -538,11 +542,12 @@ namespace System.Web.Http.ModelBinding
         public async Task ValuesController_Get_Id_Writes_Expected_Traces_InTheCorrectOrder()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "DefaultApi",
-                "api/{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config.Routes
+                .MapHttpRoute(
+                    "DefaultApi",
+                    "api/{controller}/{id}",
+                    new { id = RouteParameter.Optional }
+                );
             Mock<DelegatingHandler> customMessageHandler = new Mock<DelegatingHandler>()
             {
                 CallBase = true
@@ -605,12 +610,13 @@ namespace System.Web.Http.ModelBinding
                 if (beginTrace == null)
                 {
                     missing.Add(
-                        string.Format(
-                            "Begin category={0}, operator={1}, operation={2}",
-                            expectedRecord.Category,
-                            expectedRecord.OperatorName,
-                            expectedRecord.OperationName
-                        )
+                        string
+                            .Format(
+                                "Begin category={0}, operator={1}, operation={2}",
+                                expectedRecord.Category,
+                                expectedRecord.OperatorName,
+                                expectedRecord.OperationName
+                            )
                     );
                 }
 
@@ -637,12 +643,13 @@ namespace System.Web.Http.ModelBinding
                 if (endTrace == null)
                 {
                     missing.Add(
-                        string.Format(
-                            "End category={0}, operator={1}, operation={2}",
-                            expectedRecord.Category,
-                            expectedRecord.OperatorName,
-                            expectedRecord.OperationName
-                        )
+                        string
+                            .Format(
+                                "End category={0}, operator={1}, operation={2}",
+                                expectedRecord.Category,
+                                expectedRecord.OperatorName,
+                                expectedRecord.OperationName
+                            )
                     );
                 }
             }
@@ -671,10 +678,11 @@ namespace System.Web.Http.ModelBinding
                     actualRecord.Operation == null
                     && actualRecord.Exception is ReflectionTypeLoadException
                     && actualRecord.Message != null
-                    && actualRecord.Message.StartsWith(
-                        "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
-                        StringComparison.Ordinal
-                    )
+                    && actualRecord.Message
+                        .StartsWith(
+                            "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     continue;
@@ -702,13 +710,14 @@ namespace System.Web.Http.ModelBinding
                 if (expectedTrace == null)
                 {
                     unexpected.Add(
-                        string.Format(
-                            "kind={0} category={1}, operator={2}, operation={3}",
-                            actualRecord.Kind,
-                            actualRecord.Category,
-                            actualRecord.Operator,
-                            actualRecord.Operation
-                        )
+                        string
+                            .Format(
+                                "kind={0} category={1}, operator={2}, operation={3}",
+                                actualRecord.Kind,
+                                actualRecord.Category,
+                                actualRecord.Operator,
+                                actualRecord.Operation
+                            )
                     );
                 }
             }
@@ -755,10 +764,11 @@ namespace System.Web.Http.ModelBinding
                     && actualRecord.Operation == null
                     && actualRecord.Exception is ReflectionTypeLoadException
                     && actualRecord.Message != null
-                    && actualRecord.Message.StartsWith(
-                        "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
-                        StringComparison.Ordinal
-                    )
+                    && actualRecord.Message
+                        .StartsWith(
+                            "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     traceBeginPos++;

@@ -59,7 +59,8 @@ namespace System.Web.Http.Cors
             request.Headers.Add(CorsConstants.Origin, "http://example.com");
 
             HttpResponseMessage response = await invoker.SendAsync(request, CancellationToken.None);
-            string origin = response.Headers.GetValues("Access-Control-Allow-Origin")
+            string origin = response.Headers
+                .GetValues("Access-Control-Allow-Origin")
                 .FirstOrDefault();
 
             Assert.Equal(expectedOrigin, origin);
@@ -90,13 +91,14 @@ namespace System.Web.Http.Cors
             request.Headers.Add(CorsConstants.AccessControlRequestHeaders, requestedHeaders);
 
             HttpResponseMessage response = await invoker.SendAsync(request, CancellationToken.None);
-            string origin = response.Headers.GetValues(CorsConstants.AccessControlAllowOrigin)
+            string origin = response.Headers
+                .GetValues(CorsConstants.AccessControlAllowOrigin)
                 .FirstOrDefault();
-            string allowMethod = response.Headers.GetValues(CorsConstants.AccessControlAllowMethods)
+            string allowMethod = response.Headers
+                .GetValues(CorsConstants.AccessControlAllowMethods)
                 .FirstOrDefault();
-            string[] allowHeaders = response.Headers.GetValues(
-                    CorsConstants.AccessControlAllowHeaders
-                )
+            string[] allowHeaders = response.Headers
+                .GetValues(CorsConstants.AccessControlAllowHeaders)
                 .FirstOrDefault()
                 .Split(',');
             string[] requestedHeaderArray = requestedHeaders.Split(',');

@@ -13,7 +13,8 @@ namespace System.Web.Razor.Generator
             if (String.IsNullOrEmpty(context.Host.GeneratedClassContext.ResolveUrlMethodName))
             {
                 // Nope, just use the default MarkupCodeGenerator behavior
-                new MarkupCodeGenerator().GenerateCode(target, context);
+                new MarkupCodeGenerator()
+                    .GenerateCode(target, context);
                 return;
             }
 

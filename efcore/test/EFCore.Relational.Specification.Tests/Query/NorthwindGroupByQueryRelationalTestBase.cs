@@ -40,9 +40,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(
-                                async
-                            )
+                            base
+                                .Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(
+                                    async
+                                )
                     )
                 ).Message;
 

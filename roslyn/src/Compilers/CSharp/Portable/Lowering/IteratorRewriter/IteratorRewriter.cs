@@ -89,10 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 isEnumerable,
                 elementType
             );
-            compilationState.ModuleBuilderOpt.CompilationState.SetStateMachineType(
-                method,
-                stateMachineType
-            );
+            compilationState.ModuleBuilderOpt.CompilationState
+                .SetStateMachineType(method, stateMachineType);
             var rewriter = new IteratorRewriter(
                 body,
                 method,
@@ -248,12 +246,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 F.SpecialProperty(SpecialMember.System_Collections_IEnumerator__Current).GetMethod;
 
             var IEnumeratorOfElementType = F.SpecialType(
-                    SpecialType.System_Collections_Generic_IEnumerator_T
-                )
+                SpecialType.System_Collections_Generic_IEnumerator_T
+            )
                 .Construct(ImmutableArray.Create(_elementType));
             var IEnumeratorOfElementType_get_Current = F.SpecialProperty(
-                    SpecialMember.System_Collections_Generic_IEnumerator_T__Current
-                )
+                SpecialMember.System_Collections_Generic_IEnumerator_T__Current
+            )
                 .GetMethod.AsMember(IEnumeratorOfElementType);
 
             // Add bool IEnumerator.MoveNext() and void IDisposable.Dispose()
@@ -299,12 +297,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             var IEnumerableOfElementType = F.SpecialType(
-                    SpecialType.System_Collections_Generic_IEnumerable_T
-                )
+                SpecialType.System_Collections_Generic_IEnumerable_T
+            )
                 .Construct(_elementType.Type);
             var IEnumerableOfElementType_GetEnumerator = F.SpecialMethod(
-                    SpecialMember.System_Collections_Generic_IEnumerable_T__GetEnumerator
-                )
+                SpecialMember.System_Collections_Generic_IEnumerable_T__GetEnumerator
+            )
                 .AsMember(IEnumerableOfElementType);
 
             // generate GetEnumerator()

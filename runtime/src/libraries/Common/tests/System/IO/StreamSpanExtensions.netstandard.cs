@@ -30,15 +30,14 @@ internal static class StreamSpanExtensions
     {
         byte[] array = new byte[destination.Length];
         return new ValueTask<int>(
-            stream.ReadAsync(array, 0, array.Length, cancellationToken)
-                .ContinueWith(
-                    t =>
-                    {
-                        int bytesRead = t.GetAwaiter().GetResult();
-                        new Span<byte>(array, 0, bytesRead).CopyTo(destination.Span);
-                        return bytesRead;
-                    }
-                )
+            stream.ReadAsync(array, 0, array.Length, cancellationToken).ContinueWith(
+                t =>
+                {
+                    int bytesRead = t.GetAwaiter().GetResult();
+                    new Span<byte>(array, 0, bytesRead).CopyTo(destination.Span);
+                    return bytesRead;
+                }
+            )
         );
     }
 

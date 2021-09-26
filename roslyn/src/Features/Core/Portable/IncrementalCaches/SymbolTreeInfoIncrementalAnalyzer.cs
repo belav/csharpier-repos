@@ -56,9 +56,9 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                     if (_projectIdToInfo.TryGetValue(document.Project.Id, out var cachedInfo))
                     {
                         var checksum = await SymbolTreeInfo.GetSourceSymbolsChecksumAsync(
-                                document.Project,
-                                cancellationToken
-                            )
+                            document.Project,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         var newInfo = cachedInfo.WithChecksum(checksum);
@@ -116,9 +116,9 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
             )
             {
                 var checksum = await SymbolTreeInfo.GetSourceSymbolsChecksumAsync(
-                        project,
-                        cancellationToken
-                    )
+                    project,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (
                     !_projectIdToInfo.TryGetValue(project.Id, out var projectInfo)
@@ -126,11 +126,11 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 )
                 {
                     projectInfo = await SymbolTreeInfo.GetInfoForSourceAssemblyAsync(
-                            project,
-                            checksum,
-                            loadOnly: false,
-                            cancellationToken
-                        )
+                        project,
+                        checksum,
+                        loadOnly: false,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     Contract.ThrowIfNull(projectInfo);
@@ -209,12 +209,12 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                     )
                     {
                         var info = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                                project.Solution,
-                                reference,
-                                checksum,
-                                loadOnly: false,
-                                cancellationToken: cancellationToken
-                            )
+                            project.Solution,
+                            reference,
+                            checksum,
+                            loadOnly: false,
+                            cancellationToken: cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         Contract.ThrowIfNull(info);

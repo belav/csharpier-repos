@@ -22375,8 +22375,8 @@ namespace System.Linq.Expressions.Tests
         public static void ConvertVoidToVoid(bool useInterpreter)
         {
             Action act = Expression.Lambda<Action>(
-                    Expression.ConvertChecked(Expression.Empty(), typeof(void))
-                )
+                Expression.ConvertChecked(Expression.Empty(), typeof(void))
+            )
                 .Compile(useInterpreter);
             act();
         }

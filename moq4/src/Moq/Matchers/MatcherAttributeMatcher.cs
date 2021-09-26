@@ -41,9 +41,8 @@ namespace Moq.Matchers
 
         private static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
         {
-            var expectedParametersTypes = new[] { call.Method.ReturnType }.Concat(
-                    call.Method.GetParameters().Select(p => p.ParameterType)
-                )
+            var expectedParametersTypes = new[] { call.Method.ReturnType }
+                .Concat(call.Method.GetParameters().Select(p => p.ParameterType))
                 .ToArray();
 
             MethodInfo method = null;
@@ -54,12 +53,14 @@ namespace Moq.Matchers
                 // passing generic type arguments for the query.
                 var genericArgs = call.Method.GetGenericArguments();
 
-                method = call.Method.DeclaringType.GetMethods(call.Method.Name)
+                method = call.Method.DeclaringType
+                    .GetMethods(call.Method.Name)
                     .Where(
                         m =>
                             m.IsGenericMethodDefinition
                             && m.GetGenericArguments().Length
-                                == call.Method.GetGenericMethodDefinition()
+                                == call.Method
+                                    .GetGenericMethodDefinition()
                                     .GetGenericArguments().Length
                             && expectedParametersTypes.SequenceEqual(
                                 m.MakeGenericMethod(genericArgs)
@@ -72,24 +73,26 @@ namespace Moq.Matchers
             }
             else
             {
-                method = call.Method.DeclaringType.GetMethod(
-                    call.Method.Name,
-                    expectedParametersTypes
-                );
+                method = call.Method.DeclaringType
+                    .GetMethod(call.Method.Name, expectedParametersTypes);
             }
 
             // throw if validatorMethod doesn't exists
             if (method == null)
             {
                 throw new MissingMethodException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        "public {0}bool {1}({2}) in class {3}.",
-                        call.Method.IsStatic ? "static " : String.Empty,
-                        call.Method.Name,
-                        String.Join(", ", expectedParametersTypes.Select(x => x.Name).ToArray()),
-                        call.Method.DeclaringType.ToString()
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            "public {0}bool {1}({2}) in class {3}.",
+                            call.Method.IsStatic ? "static " : String.Empty,
+                            call.Method.Name,
+                            String.Join(
+                                ", ",
+                                expectedParametersTypes.Select(x => x.Name).ToArray()
+                            ),
+                            call.Method.DeclaringType.ToString()
+                        )
                 );
             }
             return method;
@@ -98,9 +101,8 @@ namespace Moq.Matchers
         public bool Matches(object argument, Type parameterType)
         {
             // use matcher Expression to get extra arguments
-            var extraArgs = this.expression.Arguments.Select(
-                ae => ((ConstantExpression)ae.PartialEval()).Value
-            );
+            var extraArgs = this.expression.Arguments
+                .Select(ae => ((ConstantExpression)ae.PartialEval()).Value);
             var args = new[] { argument }.Concat(extraArgs).ToArray();
             // for static and non-static method
             var instance =

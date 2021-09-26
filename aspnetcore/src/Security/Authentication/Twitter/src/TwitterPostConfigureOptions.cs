@@ -34,11 +34,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
 
             if (options.StateDataFormat == null)
             {
-                var dataProtector = options.DataProtectionProvider.CreateProtector(
-                    typeof(TwitterHandler).FullName!,
-                    name,
-                    "v1"
-                );
+                var dataProtector = options.DataProtectionProvider
+                    .CreateProtector(typeof(TwitterHandler).FullName!, name, "v1");
                 options.StateDataFormat = new SecureDataFormat<RequestToken>(
                     new RequestTokenSerializer(),
                     dataProtector
@@ -53,9 +50,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
                 options.Backchannel.Timeout = options.BackchannelTimeout;
                 options.Backchannel.MaxResponseContentBufferSize = 1024 * 1024 * 10; // 10 MB
                 options.Backchannel.DefaultRequestHeaders.Accept.ParseAdd("*/*");
-                options.Backchannel.DefaultRequestHeaders.UserAgent.ParseAdd(
-                    "Microsoft ASP.NET Core Twitter handler"
-                );
+                options.Backchannel.DefaultRequestHeaders.UserAgent
+                    .ParseAdd("Microsoft ASP.NET Core Twitter handler");
                 options.Backchannel.DefaultRequestHeaders.ExpectContinue = false;
             }
         }

@@ -45,6 +45,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             (
                 await _implementation.ResolveBreakpointsAsync(solution, name, cancellationToken)
                     .ConfigureAwait(false)
-            ).Select(r => r.UnderlyingObject);
+            )
+                .Select(r => r.UnderlyingObject);
     }
 }

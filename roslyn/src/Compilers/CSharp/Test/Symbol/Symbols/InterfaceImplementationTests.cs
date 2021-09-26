@@ -132,8 +132,8 @@ class Class : Interface
             var @class = (NamedTypeSymbol)global.GetMembers("Class").Single();
 
             var classExplicitImplementationBase = (MethodSymbol)@class.GetMembers(
-                    "BaseInterface.Method"
-                )
+                "BaseInterface.Method"
+            )
                 .Single();
             Assert.Equal(
                 MethodKind.ExplicitInterfaceImplementation,
@@ -355,9 +355,8 @@ class Class : Interface
 
             var @class = (NamedTypeSymbol)global.GetMembers("Class").Single();
             var classImplicitImplementation = @class.Indexers.Single(p => p.Parameters.Length == 2);
-            var classImplicitImplementationBase = @class.Indexers.Single(
-                p => p.Parameters.Length == 1
-            );
+            var classImplicitImplementationBase = @class.Indexers
+                .Single(p => p.Parameters.Length == 1);
 
             var implementingIndexer = @class.FindImplementationForInterfaceMember(interfaceIndexer);
             Assert.Same(classImplicitImplementation, implementingIndexer);
@@ -477,8 +476,8 @@ class Class2 : BaseClass //does not declare interface
             var baseClass = (NamedTypeSymbol)global.GetMembers("BaseClass").Single();
 
             var baseClassExplicitImplementationBase = (MethodSymbol)baseClass.GetMembers(
-                    "BaseInterface.Method"
-                )
+                "BaseInterface.Method"
+            )
                 .Single();
             Assert.Equal(
                 MethodKind.ExplicitInterfaceImplementation,
@@ -486,8 +485,8 @@ class Class2 : BaseClass //does not declare interface
             );
 
             var baseClassExplicitImplementation = (MethodSymbol)baseClass.GetMembers(
-                    "Interface.Method"
-                )
+                "Interface.Method"
+            )
                 .Single();
             Assert.Equal(
                 MethodKind.ExplicitInterfaceImplementation,
@@ -582,8 +581,8 @@ class Class2 : BaseClass //does not declare interface
             Assert.Equal(MethodKind.Ordinary, baseClassImplicitImplementation.MethodKind);
 
             var baseClassImplicitImplementationBase = (MethodSymbol)baseClass.GetMembers(
-                    "BaseMethod"
-                )
+                "BaseMethod"
+            )
                 .Single();
             Assert.Equal(MethodKind.Ordinary, baseClassImplicitImplementationBase.MethodKind);
 
@@ -936,26 +935,23 @@ class DeclaringClass2 : NonDeclaringClass2, Interface
 
             var nonDeclaring1 = (NamedTypeSymbol)global.GetMembers("NonDeclaringClass1").Single();
             Assert.False(
-                nonDeclaring1.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                nonDeclaring1.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .ContainsKey(@interface)
             );
 
             var nonDeclaring1Method = nonDeclaring1.GetMembers("Method").Single();
 
             var declaring1 = (NamedTypeSymbol)global.GetMembers("DeclaringClass1").Single();
             Assert.True(
-                declaring1.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                declaring1.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .ContainsKey(@interface)
             );
             Assert.Equal(nonDeclaring1, declaring1.BaseType());
 
             var nonDeclaring2 = (NamedTypeSymbol)global.GetMembers("NonDeclaringClass2").Single();
             Assert.False(
-                nonDeclaring2.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                nonDeclaring2.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .ContainsKey(@interface)
             );
             Assert.Equal(declaring1, nonDeclaring2.BaseType());
 
@@ -963,9 +959,8 @@ class DeclaringClass2 : NonDeclaringClass2, Interface
 
             var declaring2 = (NamedTypeSymbol)global.GetMembers("DeclaringClass2").Single();
             Assert.True(
-                declaring2.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                declaring2.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .ContainsKey(@interface)
             );
             Assert.Equal(nonDeclaring2, declaring2.BaseType());
 
@@ -1009,13 +1004,12 @@ class DeclaringClass2 : NonDeclaringClass2, Interface
             Assert.Null(baseClass.FindImplementationForInterfaceMember(interfaceMethod));
 
             var derivedClass = (NamedTypeSymbol)global.GetMembers(
-                    "DerivedExplicitlyImplementsInterface"
-                )
+                "DerivedExplicitlyImplementsInterface"
+            )
                 .Single();
             Assert.False(
-                derivedClass.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                derivedClass.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .ContainsKey(@interface)
             );
             Assert.True(derivedClass.AllInterfaces().Contains(@interface));
 
@@ -1194,7 +1188,8 @@ public class Derived : Base, Interface
                 from m in derivedClass.GetSynthesizedExplicitImplementations(CancellationToken.None)
                 orderby m.MethodKind
                 select m
-            ).ToArray();
+            )
+                .ToArray();
             Assert.Equal(3, synthesizedExplicitImpls.Length);
             Assert.True(
                 synthesizedExplicitImpls.All(s => ReferenceEquals(derivedClass, s.ContainingType))
@@ -1279,7 +1274,8 @@ class Class : CustomModifierOverridingD, Interface
                 from m in @class.GetSynthesizedExplicitImplementations(CancellationToken.None)
                 orderby m.Name
                 select m
-            ).ToArray();
+            )
+                .ToArray();
             Assert.Equal(2, synthesizedExplicitImpls.Length);
 
             var synthesizedExplicitMethod1Impl = synthesizedExplicitImpls[0];
@@ -1922,8 +1918,8 @@ class C : B, I { }
             );
 
             var synthesizedExplicitImpl = classC.GetSynthesizedExplicitImplementations(
-                    CancellationToken.None
-                )
+                CancellationToken.None
+            )
                 .Single();
             Assert.Equal(classC, synthesizedExplicitImpl.ContainingType);
             Assert.Equal(
@@ -2212,8 +2208,8 @@ class D : B, I
 
             var derivedType = comp2.GlobalNamespace.GetMember<SourceNamedTypeSymbol>("D");
             var bridgeMethod = derivedType.GetSynthesizedExplicitImplementations(
-                    CancellationToken.None
-                )
+                CancellationToken.None
+            )
                 .Single();
             Assert.Equal("NonVirtual", bridgeMethod.ImplementingMethod.Name);
         }
@@ -2368,8 +2364,8 @@ public class D : B, I
             );
 
             var synthesized = derivedType.GetSynthesizedExplicitImplementations(
-                    CancellationToken.None
-                )
+                CancellationToken.None
+            )
                 .Single();
             Assert.Equal(baseMethod, synthesized.ImplementingMethod);
             Assert.Equal(interfaceMethod, synthesized.ExplicitInterfaceImplementations.Single());
@@ -2437,13 +2433,12 @@ class Derived2 : Base2, Interface
 
             // Base1 is in metadata, so we just trust it when it claims to implement Interface.
             // Base2 is identical, but in source.  We produce error for Base2.
-            CreateCompilation(source, new[] { ilRef })
-                .VerifyDiagnostics(
-                    // (6,7): error CS0535: 'Base2' does not implement interface member 'Interface.M()'
-                    // class Base2 : Interface
-                    Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface")
-                        .WithArguments("Base2", "Interface.M()")
-                );
+            CreateCompilation(source, new[] { ilRef }).VerifyDiagnostics(
+                // (6,7): error CS0535: 'Base2' does not implement interface member 'Interface.M()'
+                // class Base2 : Interface
+                Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface")
+                    .WithArguments("Base2", "Interface.M()")
+            );
         }
 
         [WorkItem(718115, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/718115")]
@@ -2872,9 +2867,9 @@ class OneToOneUnicodeComparer : StringComparer
                 // (10,16): warning CS8767: Nullability of reference types in type of parameter 'obj' of 'int StringComparer.GetHashCode(string obj)' doesn't match implicitly implemented member 'int IEqualityComparer<string?>.GetHashCode(string? obj)' (possibly because of nullability attributes).
                 //     public int GetHashCode(string obj)
                 Diagnostic(
-                        ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnImplicitImplementation,
-                        "GetHashCode"
-                    )
+                    ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnImplicitImplementation,
+                    "GetHashCode"
+                )
                     .WithArguments(
                         "obj",
                         "int StringComparer.GetHashCode(string obj)",

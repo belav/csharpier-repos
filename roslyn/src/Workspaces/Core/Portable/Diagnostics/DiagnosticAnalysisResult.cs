@@ -142,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             var diagnosticsWithDocumentId = PooledDictionary<
                 DocumentId,
                 ArrayBuilder<DiagnosticData>
-            >.GetInstance();
+            >
+                .GetInstance();
             var diagnosticsWithoutDocumentId = ArrayBuilder<DiagnosticData>.GetInstance();
 
             foreach (var data in diagnostics)

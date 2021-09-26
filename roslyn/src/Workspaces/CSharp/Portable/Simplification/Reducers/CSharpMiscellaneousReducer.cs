@@ -53,20 +53,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         semanticModel,
                         cancellationToken
                     );
-                    newParameterSyntax =
-                        (ParameterSyntax)speculationAnalyzer.ReplacedExpression.GetAnnotatedNodesAndTokens(
-                                annotation
-                            )
-                            .First();
+                    newParameterSyntax = (ParameterSyntax)speculationAnalyzer.ReplacedExpression
+                        .GetAnnotatedNodesAndTokens(annotation)
+                        .First();
 
                     var oldSymbol = semanticModel.GetDeclaredSymbol(
                         parameterSyntax,
                         cancellationToken
                     );
-                    var newSymbol = speculationAnalyzer.SpeculativeSemanticModel.GetDeclaredSymbol(
-                        newParameterSyntax,
-                        cancellationToken
-                    );
+                    var newSymbol = speculationAnalyzer.SpeculativeSemanticModel
+                        .GetDeclaredSymbol(newParameterSyntax, cancellationToken);
                     if (
                         oldSymbol != null
                         && newSymbol != null
@@ -141,9 +137,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     );
 
                     return SimplificationHelpers.CopyAnnotations(
-                            parenthesizedLambda,
-                            newSimpleLambda
-                        )
+                        parenthesizedLambda,
+                        newSimpleLambda
+                    )
                         .WithoutAnnotations(Simplifier.Annotation);
                 }
             }

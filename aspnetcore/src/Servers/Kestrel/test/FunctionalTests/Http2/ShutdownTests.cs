@@ -73,9 +73,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2
                     {
                         requestStarted.SetResult();
                         await requestUnblocked.Task.DefaultTimeout();
-                        await context.Response.WriteAsync(
-                            "hello world " + context.Request.Protocol
-                        );
+                        await context.Response
+                            .WriteAsync("hello world " + context.Request.Protocol);
                     },
                     testContext,
                     kestrelOptions =>
@@ -143,9 +142,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2
                     {
                         requestStarted.SetResult();
                         await requestUnblocked.Task.DefaultTimeout();
-                        await context.Response.WriteAsync(
-                            "hello world " + context.Request.Protocol
-                        );
+                        await context.Response
+                            .WriteAsync("hello world " + context.Request.Protocol);
                     },
                     testContext,
                     kestrelOptions =>
@@ -179,8 +177,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2
                 await closingMessageTask;
 
                 var closedMessageTask = WaitForLogMessage(
-                        m => m.Message.Contains("is closed. The last processed stream ID was 1.")
-                    )
+                    m => m.Message.Contains("is closed. The last processed stream ID was 1.")
+                )
                     .DefaultTimeout();
                 cts.Cancel();
 
@@ -199,9 +197,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2
             Assert.Contains(
                 LogMessages,
                 m =>
-                    m.Message.Contains(
-                        "Some connections failed to close gracefully during server shutdown."
-                    )
+                    m.Message
+                        .Contains(
+                            "Some connections failed to close gracefully during server shutdown."
+                        )
             );
             Assert.DoesNotContain(LogMessages, m => m.Message.Contains("Request finished in"));
 

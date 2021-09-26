@@ -24,10 +24,8 @@ namespace System.Buffers.Text.Tests
                         continue; // -0 is not roundtrippable
 
                     foreach (
-                        ParserTestData<decimal> testData in new FormatterTestData<decimal>[]
-                        {
-                            ftd
-                        }.ToParserTheoryDataCollection()
+                        ParserTestData<decimal> testData in new FormatterTestData<decimal>[] { ftd }
+                            .ToParserTheoryDataCollection()
                     )
                     {
                         yield return testData;

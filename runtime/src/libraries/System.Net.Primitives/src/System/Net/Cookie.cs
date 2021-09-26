@@ -275,14 +275,15 @@ namespace System.Net
             // +1 in the host length is to account for the leading dot in domain
             return (host.Length + 1 == domain.Length)
                 && (
-                    string.Compare(
-                        host,
-                        0,
-                        domain,
-                        1,
-                        host.Length,
-                        StringComparison.OrdinalIgnoreCase
-                    ) == 0
+                    string
+                        .Compare(
+                            host,
+                            0,
+                            domain,
+                            1,
+                            host.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
                 );
         }
 
@@ -479,14 +480,15 @@ namespace System.Net
                             if (
                                 host.Length <= domain.Length
                                 || (
-                                    string.Compare(
-                                        host,
-                                        host.Length - domain.Length,
-                                        domain,
-                                        0,
-                                        domain.Length,
-                                        StringComparison.OrdinalIgnoreCase
-                                    ) != 0
+                                    string
+                                        .Compare(
+                                            host,
+                                            host.Length - domain.Length,
+                                            domain,
+                                            0,
+                                            domain.Length,
+                                            StringComparison.OrdinalIgnoreCase
+                                        ) != 0
                                 )
                             )
                             {
@@ -498,14 +500,15 @@ namespace System.Net
                         host_dot == -1
                         || domain.Length != host.Length - host_dot
                         || (
-                            string.Compare(
-                                host,
-                                host_dot,
-                                domain,
-                                0,
-                                domain.Length,
-                                StringComparison.OrdinalIgnoreCase
-                            ) != 0
+                            string
+                                .Compare(
+                                    host,
+                                    host_dot,
+                                    domain,
+                                    0,
+                                    domain.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) != 0
                         )
                     )
                     {

@@ -725,16 +725,14 @@ namespace System.Xml.Schema
         protected static TimeSpan StringToDayTimeDuration(string value)
         {
             // Parse string as DayTimeDuration and convert it to a DayTimeDuration TimeSpan (it is an error to have year and month parts)
-            return new XsdDuration(value, XsdDuration.DurationType.DayTimeDuration).ToTimeSpan(
-                XsdDuration.DurationType.DayTimeDuration
-            );
+            return new XsdDuration(value, XsdDuration.DurationType.DayTimeDuration)
+                .ToTimeSpan(XsdDuration.DurationType.DayTimeDuration);
         }
 
         protected static TimeSpan StringToDuration(string value)
         {
-            return new XsdDuration(value, XsdDuration.DurationType.Duration).ToTimeSpan(
-                XsdDuration.DurationType.Duration
-            );
+            return new XsdDuration(value, XsdDuration.DurationType.Duration)
+                .ToTimeSpan(XsdDuration.DurationType.Duration);
         }
 
         protected static DateTime StringToGDay(string value)
@@ -860,9 +858,8 @@ namespace System.Xml.Schema
         protected static TimeSpan StringToYearMonthDuration(string value)
         {
             // Parse string as YearMonthDuration and convert it to a YearMonthDuration TimeSpan (it is an error to have day and time parts)
-            return new XsdDuration(value, XsdDuration.DurationType.YearMonthDuration).ToTimeSpan(
-                XsdDuration.DurationType.YearMonthDuration
-            );
+            return new XsdDuration(value, XsdDuration.DurationType.YearMonthDuration)
+                .ToTimeSpan(XsdDuration.DurationType.YearMonthDuration);
         }
 
         //------------------------------------------------------------------------
@@ -891,16 +888,14 @@ namespace System.Xml.Schema
 
         protected static string DayTimeDurationToString(TimeSpan value)
         {
-            return new XsdDuration(value, XsdDuration.DurationType.DayTimeDuration).ToString(
-                XsdDuration.DurationType.DayTimeDuration
-            );
+            return new XsdDuration(value, XsdDuration.DurationType.DayTimeDuration)
+                .ToString(XsdDuration.DurationType.DayTimeDuration);
         }
 
         protected static string DurationToString(TimeSpan value)
         {
-            return new XsdDuration(value, XsdDuration.DurationType.Duration).ToString(
-                XsdDuration.DurationType.Duration
-            );
+            return new XsdDuration(value, XsdDuration.DurationType.Duration)
+                .ToString(XsdDuration.DurationType.Duration);
         }
 
         protected static string GDayToString(DateTime value)
@@ -994,9 +989,8 @@ namespace System.Xml.Schema
 
         protected static string YearMonthDurationToString(TimeSpan value)
         {
-            return new XsdDuration(value, XsdDuration.DurationType.YearMonthDuration).ToString(
-                XsdDuration.DurationType.YearMonthDuration
-            );
+            return new XsdDuration(value, XsdDuration.DurationType.YearMonthDuration)
+                .ToString(XsdDuration.DurationType.YearMonthDuration);
         }
 
         //------------------------------------------------------------------------
@@ -4077,11 +4071,8 @@ namespace System.Xml.Schema
                 T[] arrDst = new T[listSrc.Count];
 
                 for (int i = 0; i < listSrc.Count; i++)
-                    arrDst[i] = (T)this.atomicConverter!.ChangeType(
-                        listSrc[i]!,
-                        typeof(T),
-                        nsResolver
-                    );
+                    arrDst[i] = (T)this.atomicConverter!
+                        .ChangeType(listSrc[i]!, typeof(T), nsResolver);
 
                 return arrDst;
             }
@@ -4109,11 +4100,8 @@ namespace System.Xml.Schema
                 object[] arrDst = new object[listSrc.Count];
 
                 for (int i = 0; i < listSrc.Count; i++)
-                    arrDst[i] = this.atomicConverter!.ChangeType(
-                        listSrc[i]!,
-                        ObjectType,
-                        nsResolver
-                    );
+                    arrDst[i] = this.atomicConverter!
+                        .ChangeType(listSrc[i]!, ObjectType, nsResolver);
 
                 return arrDst;
             }
@@ -4254,19 +4242,12 @@ namespace System.Xml.Schema
                 if (destinationType == StringType)
                     return value;
 
-                XsdSimpleValue simpleValue = (XsdSimpleValue)SchemaType!.Datatype!.ParseValue(
-                    (string)value,
-                    new NameTable(),
-                    nsResolver,
-                    true
-                );
+                XsdSimpleValue simpleValue = (XsdSimpleValue)SchemaType!.Datatype!
+                    .ParseValue((string)value, new NameTable(), nsResolver, true);
 
                 // Allow the member type to perform the conversion
-                return simpleValue.XmlType.ValueConverter.ChangeType(
-                    (string)value,
-                    destinationType,
-                    nsResolver
-                );
+                return simpleValue.XmlType.ValueConverter
+                    .ChangeType((string)value, destinationType, nsResolver);
             }
 
             throw CreateInvalidClrMappingException(sourceType, destinationType);

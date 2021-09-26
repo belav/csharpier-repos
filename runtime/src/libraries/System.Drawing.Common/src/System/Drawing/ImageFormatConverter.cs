@@ -126,9 +126,8 @@ namespace System.Drawing
                     }
                     else
                     {
-                        ConstructorInfo? ctor = typeof(ImageFormat).GetConstructor(
-                            new Type[] { typeof(Guid) }
-                        );
+                        ConstructorInfo? ctor = typeof(ImageFormat)
+                            .GetConstructor(new Type[] { typeof(Guid) });
                         return new InstanceDescriptor(ctor, new object[] { imgFormat.Guid });
                     }
                 }

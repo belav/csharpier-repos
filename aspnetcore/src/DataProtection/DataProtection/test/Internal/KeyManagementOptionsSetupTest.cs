@@ -52,9 +52,8 @@ namespace Microsoft.AspNetCore.DataProtection.Internal
             {
                 ["KeyEscrowSinks"] = String.Join(
                     " ;; ; ",
-                    new Type[] { typeof(MyKeyEscrowSink1), typeof(MyKeyEscrowSink2) }.Select(
-                        t => t.AssemblyQualifiedName
-                    )
+                    new Type[] { typeof(MyKeyEscrowSink1), typeof(MyKeyEscrowSink2) }
+                        .Select(t => t.AssemblyQualifiedName)
                 ),
                 ["EncryptionType"] = "managed",
                 ["DefaultKeyLifetime"] = 1024 // days

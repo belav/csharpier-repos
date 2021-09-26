@@ -68,11 +68,8 @@ namespace Microsoft.CodeAnalysis
 
         private string GetDebuggerDisplay()
         {
-            return string.Format(
-                "Annotation: Kind='{0}' Data='{1}'",
-                this.Kind ?? "",
-                this.Data ?? ""
-            );
+            return string
+                .Format("Annotation: Kind='{0}' Data='{1}'", this.Kind ?? "", this.Data ?? "");
         }
 
         public bool Equals(SyntaxAnnotation? other)

@@ -64,8 +64,8 @@ namespace System.Web.Razor.Test.Parser.VB
                         .Accepts(AcceptedCharacters.None),
                     Factory.MetaCode("Functions").Accepts(AcceptedCharacters.None),
                     Factory.Code(
-                            "\r\n    Public Function Foo() As String\r\n        Return \"Foo\"\r\n    End Function\r\n\r\n    Public Sub Bar()\r\n    End Sub\r\n"
-                        )
+                        "\r\n    Public Function Foo() As String\r\n        Return \"Foo\"\r\n    End Function\r\n\r\n    Public Sub Bar()\r\n    End Sub\r\n"
+                    )
                         .AsFunctionsBody(),
                     Factory.MetaCode("End Functions").Accepts(AcceptedCharacters.None)
                 )

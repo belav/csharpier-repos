@@ -53,14 +53,15 @@ namespace Internal.Cryptography
                 fixed (byte* pSource = source)
                 fixed (byte* pDestination = destination)
                 {
-                    int ret = Interop.AppleCrypto.DigestOneShot(
-                        algorithm,
-                        pSource,
-                        source.Length,
-                        pDestination,
-                        destination.Length,
-                        out int digestSize
-                    );
+                    int ret = Interop.AppleCrypto
+                        .DigestOneShot(
+                            algorithm,
+                            pSource,
+                            source.Length,
+                            pDestination,
+                            destination.Length,
+                            out int digestSize
+                        );
 
                     if (ret != 1)
                     {

@@ -77,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             var shaper = new ShaperExpressionProcessingExpressionVisitor(
                 inMemoryQueryExpression,
                 inMemoryQueryExpression.CurrentParameter
-            ).Inject(shapedQueryExpression.ShaperExpression);
+            )
+                .Inject(shapedQueryExpression.ShaperExpression);
 
             shaper = InjectEntityMaterializers(shaper);
 
@@ -87,12 +88,14 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             shaper = new CustomShaperCompilingExpressionVisitor(
                 QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.TrackAll
-            ).Visit(shaper);
+            )
+                .Visit(shaper);
 
             var shaperLambda = (LambdaExpression)shaper;
 
             return Expression.New(
-                typeof(QueryingEnumerable<>).MakeGenericType(shaperLambda.ReturnType)
+                typeof(QueryingEnumerable<>)
+                    .MakeGenericType(shaperLambda.ReturnType)
                     .GetConstructors()[0],
                 QueryCompilationContext.QueryContextParameter,
                 innerEnumerable,
@@ -107,9 +110,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         }
 
         private static readonly MethodInfo _tableMethodInfo =
-            typeof(InMemoryShapedQueryCompilingExpressionVisitor).GetRequiredDeclaredMethod(
-                nameof(Table)
-            );
+            typeof(InMemoryShapedQueryCompilingExpressionVisitor)
+                .GetRequiredDeclaredMethod(nameof(Table));
 
         private static IEnumerable<ValueBuffer> Table(
             QueryContext queryContext,

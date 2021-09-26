@@ -323,14 +323,15 @@ namespace System.Drawing.PrimitivesTest
         {
             var r = new Rectangle(x, y, width, height);
             Assert.Equal(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    "{{X={0},Y={1},Width={2},Height={3}}}",
-                    r.X,
-                    r.Y,
-                    r.Width,
-                    r.Height
-                ),
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        "{{X={0},Y={1},Width={2},Height={3}}}",
+                        r.X,
+                        r.Y,
+                        r.Width,
+                        r.Height
+                    ),
                 r.ToString()
             );
         }

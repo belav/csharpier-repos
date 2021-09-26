@@ -86,7 +86,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                             var stream = await feature.UpgradeAsync();
 
                             var buffer = new byte[128];
-                            var read = await context.Request.Body.ReadAsync(buffer, 0, 128)
+                            var read = await context.Request.Body
+                                .ReadAsync(buffer, 0, 128)
                                 .DefaultTimeout();
                             Assert.Equal(0, read);
 
@@ -356,8 +357,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             }
 
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () => await upgradeTcs.Task
-                )
+                async () => await upgradeTcs.Task
+            )
                 .DefaultTimeout();
             Assert.Equal(CoreStrings.CannotUpgradeNonUpgradableRequest, ex.Message);
         }
@@ -489,8 +490,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         // can wake up and shutdown gracefully. We manually call CancelPendingRead() to simulate this and
                         // ensure the Stream returned by UpgradeAsync doesn't throw in this case.
                         // https://github.com/dotnet/aspnetcore/issues/26482
-                        var connectionTransportFeature =
-                            context.Features.Get<IConnectionTransportFeature>();
+                        var connectionTransportFeature = context.Features
+                            .Get<IConnectionTransportFeature>();
                         connectionTransportFeature.Transport.Input.CancelPendingRead();
 
                         // Use ReadAsync() instead of CopyToAsync() for this test since IsCanceled is only checked in

@@ -77,37 +77,36 @@ namespace Microsoft.CodeAnalysis.Editing
             {
                 // find existing declaration of the base type
                 var typeRef = await editor.GetBaseOrInterfaceDeclarationReferenceAsync(
-                        symbol,
-                        baseType,
-                        cancellationToken
-                    )
+                    symbol,
+                    baseType,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (typeRef != null)
                 {
                     return await editor.EditOneDeclarationAsync(
-                            symbol,
-                            typeRef.GetLocation(),
-                            (e, d) => e.ReplaceNode(typeRef, getNewBaseType(e.Generator)),
-                            cancellationToken
-                        )
+                        symbol,
+                        typeRef.GetLocation(),
+                        (e, d) => e.ReplaceNode(typeRef, getNewBaseType(e.Generator)),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
 
             // couldn't find the existing reference to change, so add it to one of the declarations
             return await editor.EditOneDeclarationAsync(
-                    symbol,
-                    (e, decl) =>
+                symbol,
+                (e, decl) =>
+                {
+                    var newBaseType = getNewBaseType(e.Generator);
+                    if (newBaseType != null)
                     {
-                        var newBaseType = getNewBaseType(e.Generator);
-                        if (newBaseType != null)
-                        {
-                            e.ReplaceNode(decl, (d, g) => g.AddBaseType(d, newBaseType));
-                        }
-                    },
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+                        e.ReplaceNode(decl, (d, g) => g.AddBaseType(d, newBaseType));
+                    }
+                },
+                cancellationToken
+            ).ConfigureAwait(false);
         }
 
         /// <summary>

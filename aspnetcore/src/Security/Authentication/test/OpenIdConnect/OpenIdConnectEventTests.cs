@@ -1408,50 +1408,44 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
 
         private TestServer CreateServer(OpenIdConnectEvents events, RequestDelegate appCode)
         {
-            var host = new HostBuilder().ConfigureWebHost(
-                    builder =>
-                        builder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddAuthentication(
-                                            auth =>
-                                            {
-                                                auth.DefaultScheme =
-                                                    CookieAuthenticationDefaults.AuthenticationScheme;
-                                                auth.DefaultChallengeScheme =
-                                                    OpenIdConnectDefaults.AuthenticationScheme;
-                                            }
-                                        )
-                                        .AddCookie()
-                                        .AddOpenIdConnect(
-                                            o =>
-                                            {
-                                                o.Events = events;
-                                                o.ClientId = "ClientId";
-                                                o.GetClaimsFromUserInfoEndpoint = true;
-                                                o.Configuration = new OpenIdConnectConfiguration()
-                                                {
-                                                    TokenEndpoint = "http://testhost/tokens",
-                                                    UserInfoEndpoint = "http://testhost/user",
-                                                    EndSessionEndpoint = "http://testhost/end"
-                                                };
-                                                o.StateDataFormat = new TestStateDataFormat();
-                                                o.SecurityTokenValidator = new TestTokenValidator();
-                                                o.ProtocolValidator = new TestProtocolValidator();
-                                                o.BackchannelHttpHandler = new TestBackchannel();
-                                            }
-                                        );
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseAuthentication();
-                                    app.Run(appCode);
-                                }
-                            )
-                )
+            var host = new HostBuilder()
+                .ConfigureWebHost(builder => builder.UseTestServer().ConfigureServices(
+                            services =>
+                            {
+                                services.AddAuthentication(
+                                    auth =>
+                                    {
+                                        auth.DefaultScheme =
+                                            CookieAuthenticationDefaults.AuthenticationScheme;
+                                        auth.DefaultChallengeScheme =
+                                            OpenIdConnectDefaults.AuthenticationScheme;
+                                    }
+                                ).AddCookie().AddOpenIdConnect(
+                                    o =>
+                                    {
+                                        o.Events = events;
+                                        o.ClientId = "ClientId";
+                                        o.GetClaimsFromUserInfoEndpoint = true;
+                                        o.Configuration = new OpenIdConnectConfiguration()
+                                        {
+                                            TokenEndpoint = "http://testhost/tokens",
+                                            UserInfoEndpoint = "http://testhost/user",
+                                            EndSessionEndpoint = "http://testhost/end"
+                                        };
+                                        o.StateDataFormat = new TestStateDataFormat();
+                                        o.SecurityTokenValidator = new TestTokenValidator();
+                                        o.ProtocolValidator = new TestProtocolValidator();
+                                        o.BackchannelHttpHandler = new TestBackchannel();
+                                    }
+                                );
+                            }
+                        ).Configure(
+                            app =>
+                            {
+                                app.UseAuthentication();
+                                app.Run(appCode);
+                            }
+                        ))
                 .Build();
 
             host.Start();
@@ -1555,11 +1549,12 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             )
             {
                 if (
-                    string.Equals(
-                        "/tokens",
-                        request.RequestUri.AbsolutePath,
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            "/tokens",
+                            request.RequestUri.AbsolutePath,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     return Task.FromResult(
@@ -1574,11 +1569,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
                     );
                 }
                 if (
-                    string.Equals(
-                        "/user",
-                        request.RequestUri.AbsolutePath,
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals("/user", request.RequestUri.AbsolutePath, StringComparison.Ordinal)
                 )
                 {
                     return Task.FromResult(

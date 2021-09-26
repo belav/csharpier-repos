@@ -296,9 +296,9 @@ namespace System.Buffers.Text
 
             // shift by 4 bytes, as required by Reshuffle
             str = Avx2.PermuteVar8x32(
-                    str.AsInt32(),
-                    ReadVector<Vector256<sbyte>>(s_avxEncodePermuteVec).AsInt32()
-                )
+                str.AsInt32(),
+                ReadVector<Vector256<sbyte>>(s_avxEncodePermuteVec).AsInt32()
+            )
                 .AsSByte();
 
             // Next loads are done at src-4, as required by Reshuffle, so shift it once

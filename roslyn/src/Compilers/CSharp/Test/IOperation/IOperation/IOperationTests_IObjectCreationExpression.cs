@@ -755,7 +755,8 @@ IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.Co
                 expectedDiagnostics
             );
 
-            var m1 = comp.SyntaxTrees[0].GetRoot()
+            var m1 = comp.SyntaxTrees[0]
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single();
@@ -1069,7 +1070,8 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 expectedDiagnostics
             );
 
-            var main = comp.SyntaxTrees[0].GetRoot()
+            var main = comp.SyntaxTrees[0]
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single();
@@ -1338,7 +1340,8 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 expectedDiagnostics
             );
 
-            var m1 = comp.SyntaxTrees[0].GetRoot()
+            var m1 = comp.SyntaxTrees[0]
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single();
@@ -1675,7 +1678,8 @@ IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Sy
                 expectedDiagnostics
             );
 
-            var main = comp.SyntaxTrees[0].GetRoot()
+            var main = comp.SyntaxTrees[0]
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single();
@@ -2476,7 +2480,8 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
                 expectedDiagnostics
             );
 
-            var m = comp.SyntaxTrees[0].GetRoot()
+            var m = comp.SyntaxTrees[0]
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single();
@@ -2619,7 +2624,8 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
                 expectedDiagnostics
             );
 
-            var m = comp.SyntaxTrees[0].GetRoot()
+            var m = comp.SyntaxTrees[0]
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single(m => m.Identifier.ValueText == "M");
@@ -7467,17 +7473,17 @@ class C1
                 // CS1922: Cannot initialize type 'C1' with a collection initializer because it does not implement 'System.Collections.IEnumerable'
                 //         var x = new C1 { O[b ? 1 : 2] = null };
                 Diagnostic(
-                        ErrorCode.ERR_CollectionInitRequiresIEnumerable,
-                        "{ O[b ? 1 : 2] = null }"
-                    )
+                    ErrorCode.ERR_CollectionInitRequiresIEnumerable,
+                    "{ O[b ? 1 : 2] = null }"
+                )
                     .WithArguments("C1")
                     .WithLocation(6, 24),
                 // CS0747: Invalid initializer member declarator
                 //         var x = new C1 { O[b ? 1 : 2] = null };
                 Diagnostic(
-                        ErrorCode.ERR_InvalidInitializerElementInitializer,
-                        "O[b ? 1 : 2] = null"
-                    )
+                    ErrorCode.ERR_InvalidInitializerElementInitializer,
+                    "O[b ? 1 : 2] = null"
+                )
                     .WithLocation(6, 26)
             };
 
@@ -10136,17 +10142,17 @@ class C2
                 // CS1922: Cannot initialize type 'Class' with a collection initializer because it does not implement 'System.Collections.IEnumerable'
                 //         Class c = new Class { (C21 ?? C22).I1 = 1 };
                 Diagnostic(
-                        ErrorCode.ERR_CollectionInitRequiresIEnumerable,
-                        "{ (C21 ?? C22).I1 = 1 }"
-                    )
+                    ErrorCode.ERR_CollectionInitRequiresIEnumerable,
+                    "{ (C21 ?? C22).I1 = 1 }"
+                )
                     .WithArguments("Class")
                     .WithLocation(8, 29),
                 // CS0747: Invalid initializer member declarator
                 //         Class c = new Class { (C21 ?? C22).I1 = 1 };
                 Diagnostic(
-                        ErrorCode.ERR_InvalidInitializerElementInitializer,
-                        "(C21 ?? C22).I1 = 1"
-                    )
+                    ErrorCode.ERR_InvalidInitializerElementInitializer,
+                    "(C21 ?? C22).I1 = 1"
+                )
                     .WithLocation(8, 31)
             };
 

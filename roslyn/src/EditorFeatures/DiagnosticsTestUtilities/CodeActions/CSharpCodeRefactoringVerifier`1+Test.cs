@@ -55,9 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                             projectId
                         )!.CompilationOptions!;
                         compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
-                            compilationOptions.SpecificDiagnosticOptions.SetItems(
-                                CSharpVerifierHelper.NullableWarnings
-                            )
+                            compilationOptions.SpecificDiagnosticOptions
+                                .SetItems(CSharpVerifierHelper.NullableWarnings)
                         );
                         solution = solution.WithProjectCompilationOptions(
                             projectId,

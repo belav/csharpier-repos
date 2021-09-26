@@ -22,18 +22,21 @@ namespace Microsoft.EntityFrameworkCore.Query
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
 
             var derivedEntity =
-                context.BaseEntities.Include(e => e.BaseCollectionOnBase)
+                context.BaseEntities
+                    .Include(e => e.BaseCollectionOnBase)
                     .Single(e => e.Name == "Derived1(4)") as DerivedInheritanceRelationshipEntity;
 
             Assert.NotNull(derivedEntity);
 
-            var firstRelatedEntity =
-                derivedEntity.BaseCollectionOnBase.Cast<DerivedCollectionOnBase>().First();
+            var firstRelatedEntity = derivedEntity.BaseCollectionOnBase
+                .Cast<DerivedCollectionOnBase>()
+                .First();
 
             var originalValue = firstRelatedEntity.DerivedProperty;
             Assert.NotEqual(0, originalValue);
 
-            var entry = context.ChangeTracker.Entries<DerivedCollectionOnBase>()
+            var entry = context.ChangeTracker
+                .Entries<DerivedCollectionOnBase>()
                 .Single(e => e.Entity == firstRelatedEntity);
 
             Assert.IsType<DerivedCollectionOnBase>(entry.Entity);

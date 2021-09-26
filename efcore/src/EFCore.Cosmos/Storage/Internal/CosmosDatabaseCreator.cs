@@ -90,10 +90,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 if (containerName != null)
                 {
                     created |= await _cosmosClient.CreateContainerIfNotExistsAsync(
-                            containerName,
-                            GetPartitionKeyStoreName(entityType),
-                            cancellationToken
-                        )
+                        containerName,
+                        GetPartitionKeyStoreName(entityType),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }

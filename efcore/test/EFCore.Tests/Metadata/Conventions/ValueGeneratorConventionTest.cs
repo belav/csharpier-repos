@@ -598,37 +598,41 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         #endregion
 
         private static void RunConvention(InternalEntityTypeBuilder entityBuilder) =>
-            new ValueGenerationConvention(CreateDependencies()).ProcessEntityTypePrimaryKeyChanged(
-                entityBuilder,
-                entityBuilder.Metadata.FindPrimaryKey(),
-                null,
-                new ConventionContext<IConventionKey>(
-                    entityBuilder.Metadata.Model.ConventionDispatcher
-                )
-            );
+            new ValueGenerationConvention(CreateDependencies())
+                .ProcessEntityTypePrimaryKeyChanged(
+                    entityBuilder,
+                    entityBuilder.Metadata.FindPrimaryKey(),
+                    null,
+                    new ConventionContext<IConventionKey>(
+                        entityBuilder.Metadata.Model.ConventionDispatcher
+                    )
+                );
 
         private static void RunConvention(InternalForeignKeyBuilder foreignKeyBuilder) =>
-            new ValueGenerationConvention(CreateDependencies()).ProcessForeignKeyAdded(
-                foreignKeyBuilder,
-                new ConventionContext<IConventionForeignKeyBuilder>(
-                    foreignKeyBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
-                )
-            );
+            new ValueGenerationConvention(CreateDependencies())
+                .ProcessForeignKeyAdded(
+                    foreignKeyBuilder,
+                    new ConventionContext<IConventionForeignKeyBuilder>(
+                        foreignKeyBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
+                    )
+                );
 
         private static void RunConvention(
             InternalEntityTypeBuilder entityBuilder,
             ForeignKey foreignKey
         ) =>
-            new ValueGenerationConvention(CreateDependencies()).ProcessForeignKeyRemoved(
-                entityBuilder,
-                foreignKey,
-                new ConventionContext<IConventionForeignKey>(
-                    entityBuilder.Metadata.Model.ConventionDispatcher
-                )
-            );
+            new ValueGenerationConvention(CreateDependencies())
+                .ProcessForeignKeyRemoved(
+                    entityBuilder,
+                    foreignKey,
+                    new ConventionContext<IConventionForeignKey>(
+                        entityBuilder.Metadata.Model.ConventionDispatcher
+                    )
+                );
 
         private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private static InternalModelBuilder CreateInternalModelBuilder()
@@ -639,9 +643,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 serviceProvider.GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
             // Use public API to add conventions, issue #214
-            conventionSet.EntityTypeAddedConventions.Add(
-                new PropertyDiscoveryConvention(dependencies)
-            );
+            conventionSet.EntityTypeAddedConventions
+                .Add(new PropertyDiscoveryConvention(dependencies));
             conventionSet.EntityTypeAddedConventions.Add(new KeyDiscoveryConvention(dependencies));
 
             var keyConvention = new ValueGenerationConvention(dependencies);

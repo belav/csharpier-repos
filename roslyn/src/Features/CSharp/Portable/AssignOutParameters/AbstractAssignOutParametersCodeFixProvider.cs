@@ -123,8 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 .ConfigureAwait(false);
 
             var containersAndLocations = diagnostics.SelectAsArray(
-                    d => GetContainer(root, d.Location.SourceSpan)
-                )
+                d => GetContainer(root, d.Location.SourceSpan)
+            )
                 .WhereAsArray(t => t.container != null);
 
             var result = new MultiDictionary<
@@ -136,9 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 var container = group.Key;
 
                 var parameterList = container.GetParameterList();
-                var outParameters = parameterList.Parameters.Select(
-                        p => semanticModel.GetDeclaredSymbol(p, cancellationToken)
-                    )
+                var outParameters = parameterList.Parameters
+                    .Select(p => semanticModel.GetDeclaredSymbol(p, cancellationToken))
                     .Where(p => p?.RefKind == RefKind.Out)
                     .ToImmutableArray();
 
@@ -168,10 +167,10 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
         )
         {
             var unassignedParameters = await GetUnassignedParametersAsync(
-                    document,
-                    diagnostics,
-                    cancellationToken
-                )
+                document,
+                diagnostics,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             foreach (

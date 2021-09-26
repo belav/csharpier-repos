@@ -341,8 +341,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var url = LinkFrom(
-                    "http://localhost/ConventionalTransformerRoute/conventional-transformer/Index"
-                )
+                "http://localhost/ConventionalTransformerRoute/conventional-transformer/Index"
+            )
                 .To(new { action = "Index", controller = "Home" });
 
             // Act
@@ -363,8 +363,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var url = LinkFrom(
-                    "http://localhost/ConventionalTransformerRoute/conventional-transformer/Index"
-                )
+                "http://localhost/ConventionalTransformerRoute/conventional-transformer/Index"
+            )
                 .To(
                     new
                     {
@@ -395,8 +395,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var url = LinkFrom(
-                    "http://localhost/ConventionalTransformerRoute/conventional-transformer/Index"
-                )
+                "http://localhost/ConventionalTransformerRoute/conventional-transformer/Index"
+            )
                 .To(new {  });
 
             // Act

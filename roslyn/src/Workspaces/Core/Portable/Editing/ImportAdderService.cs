@@ -72,26 +72,26 @@ namespace Microsoft.CodeAnalysis.Editing
 
             if (strategy == Strategy.AddImportsFromSymbolAnnotations)
                 return await AddImportDirectivesFromSymbolAnnotationsAsync(
-                        document,
-                        nodes,
-                        addImportsService,
-                        generator,
-                        placeSystemNamespaceFirst,
-                        allowInHiddenRegions,
-                        cancellationToken
-                    )
+                    document,
+                    nodes,
+                    addImportsService,
+                    generator,
+                    placeSystemNamespaceFirst,
+                    allowInHiddenRegions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             if (strategy == Strategy.AddImportsFromSyntaxes)
                 return await AddImportDirectivesFromSyntaxesAsync(
-                        document,
-                        nodes,
-                        addImportsService,
-                        generator,
-                        placeSystemNamespaceFirst,
-                        allowInHiddenRegions,
-                        cancellationToken
-                    )
+                    document,
+                    nodes,
+                    addImportsService,
+                    generator,
+                    placeSystemNamespaceFirst,
+                    allowInHiddenRegions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             throw ExceptionUtilities.UnexpectedValue(strategy);
@@ -142,8 +142,8 @@ namespace Microsoft.CodeAnalysis.Editing
             // We add Simplifier.Annotation so that the import can be removed if it turns out to be unnecessary.
             // This can happen for a number of reasons (we replace the type with var, inbuilt type, alias, etc.)
             return generator.NamespaceImportDeclaration(
-                    namespaceSymbol.ToDisplayString(SymbolDisplayFormats.NameFormat)
-                )
+                namespaceSymbol.ToDisplayString(SymbolDisplayFormats.NameFormat)
+            )
                 .WithAdditionalAnnotations(Simplifier.Annotation, Formatter.Annotation);
         }
 
@@ -166,8 +166,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 .ConfigureAwait(false);
 
             var nodesWithExplicitNamespaces = syntaxNodes.Select(
-                    n => (syntaxnode: n, namespaceSymbol: GetExplicitNamespaceSymbol(n, model))
-                )
+                n => (syntaxnode: n, namespaceSymbol: GetExplicitNamespaceSymbol(n, model))
+            )
                 .Where(x => x.namespaceSymbol != null);
 
             var addedSymbols = new HashSet<INamespaceSymbol>();
@@ -241,9 +241,8 @@ namespace Microsoft.CodeAnalysis.Editing
             CancellationToken cancellationToken
         )
         {
-            using var _ = PooledDictionary<INamespaceSymbol, SyntaxNode>.GetInstance(
-                out var importToSyntax
-            );
+            using var _ = PooledDictionary<INamespaceSymbol, SyntaxNode>
+                .GetInstance(out var importToSyntax);
 
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);

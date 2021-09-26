@@ -37,8 +37,9 @@ namespace System.Composition.TypedParts.Discovery
             string,
             object
         >();
-        private static readonly MethodInfo s_activatorInvoke =
-            typeof(CompositeActivator).GetTypeInfo().GetDeclaredMethod("Invoke");
+        private static readonly MethodInfo s_activatorInvoke = typeof(CompositeActivator)
+            .GetTypeInfo()
+            .GetDeclaredMethod("Invoke");
 
         private DiscoveredPart(
             TypeInfo partType,
@@ -102,9 +103,8 @@ namespace System.Composition.TypedParts.Discovery
             if (_constructor == null)
             {
                 foreach (
-                    var c in _partType.DeclaredConstructors.Where(
-                        ci => ci.IsPublic && !(ci.IsStatic)
-                    )
+                    var c in _partType.DeclaredConstructors
+                        .Where(ci => ci.IsPublic && !(ci.IsStatic))
                 )
                 {
                     if (
@@ -133,9 +133,10 @@ namespace System.Composition.TypedParts.Discovery
                 }
 
                 if (_constructor == null)
-                    _constructor = _partType.DeclaredConstructors.FirstOrDefault(
-                        ci => ci.IsPublic && !(ci.IsStatic || ci.GetParameters().Any())
-                    );
+                    _constructor = _partType.DeclaredConstructors
+                        .FirstOrDefault(
+                            ci => ci.IsPublic && !(ci.IsStatic || ci.GetParameters().Any())
+                        );
 
                 if (_constructor == null)
                 {
@@ -192,8 +193,8 @@ namespace System.Composition.TypedParts.Discovery
 
             for (var index = 0; index < constructorsCount; index++)
             {
-                ConstructorInfo constructorInfo =
-                    genericPartTypeInfo.DeclaredConstructors.ElementAt(index);
+                ConstructorInfo constructorInfo = genericPartTypeInfo.DeclaredConstructors
+                    .ElementAt(index);
 
                 if (!constructorInfo.IsPublic || constructorInfo.IsStatic)
                     continue;
@@ -236,8 +237,8 @@ namespace System.Composition.TypedParts.Discovery
             Expression[] paramActivatorCalls = new Expression[cps.Length];
 
             var partActivatorDependencies = dependencies.Where(
-                    dep => dep.Site is ParameterImportSite
-                )
+                dep => dep.Site is ParameterImportSite
+            )
                 .ToDictionary(
                     d => ((ParameterImportSite)d.Site).Parameter,
                     ParameterInfoComparer.Instance
@@ -309,9 +310,9 @@ namespace System.Composition.TypedParts.Discovery
             for (int index = 0; index < _partType.GenericTypeParameters.Length; index++)
             {
                 foreach (
-                    var genericParameterConstraints in _partType.GenericTypeParameters[
-                        index
-                    ].GetTypeInfo().GetGenericParameterConstraints()
+                    var genericParameterConstraints in _partType.GenericTypeParameters[index]
+                        .GetTypeInfo()
+                        .GetGenericParameterConstraints()
                 )
                 {
                     if (

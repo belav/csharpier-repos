@@ -103,15 +103,10 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 var result = await _connection.TryInvokeAsync<
                     ImmutableArray<PackageWithTypeResult>
                 >(
-                        (service, cancellationToken) =>
-                            service.FindPackagesWithTypeAsync(
-                                source,
-                                name,
-                                arity,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    (service, cancellationToken) =>
+                        service.FindPackagesWithTypeAsync(source, name, arity, cancellationToken),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return result.HasValue ? result.Value : ImmutableArray<PackageWithTypeResult>.Empty;
@@ -128,14 +123,14 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 var result = await _connection.TryInvokeAsync<
                     ImmutableArray<PackageWithAssemblyResult>
                 >(
-                        (service, cancellationToken) =>
-                            service.FindPackagesWithAssemblyAsync(
-                                source,
-                                assemblyName,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    (service, cancellationToken) =>
+                        service.FindPackagesWithAssemblyAsync(
+                            source,
+                            assemblyName,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return result.HasValue
@@ -154,14 +149,14 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 var result = await _connection.TryInvokeAsync<
                     ImmutableArray<ReferenceAssemblyWithTypeResult>
                 >(
-                        (service, cancellationToken) =>
-                            service.FindReferenceAssembliesWithTypeAsync(
-                                name,
-                                arity,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    (service, cancellationToken) =>
+                        service.FindReferenceAssembliesWithTypeAsync(
+                            name,
+                            arity,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return result.HasValue
@@ -180,15 +175,15 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 _ = logService;
 
                 _ = await _connection.TryInvokeAsync(
-                        (service, callbackId, cancellationToken) =>
-                            service.UpdateContinuouslyAsync(
-                                callbackId,
-                                sourceName,
-                                localSettingsDirectory,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    (service, callbackId, cancellationToken) =>
+                        service.UpdateContinuouslyAsync(
+                            callbackId,
+                            sourceName,
+                            localSettingsDirectory,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

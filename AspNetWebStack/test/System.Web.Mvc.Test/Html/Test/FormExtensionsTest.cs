@@ -625,11 +625,8 @@ window.mvcClientValidationMetadata.push({""Fields"":[],""FormId"":""form_id"",""
             BeginFormHelper(
                 htmlHelper =>
                 {
-                    htmlHelper.RouteCollection.MapRoute(
-                        "MyRouteName",
-                        "any/url",
-                        new { controller = "Charlie" }
-                    );
+                    htmlHelper.RouteCollection
+                        .MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
                     return htmlHelper.BeginRouteForm("MyRouteName");
                 },
                 @"<form action=""" + MvcHelper.AppPathModifier + @"/any/url"" method=""post"">"
@@ -712,8 +709,8 @@ window.mvcClientValidationMetadata.push({""Fields"":[],""FormId"":""form_id"",""
             mockViewContext.Setup(c => c.Writer).Returns(writer);
 
             mockViewContext.Setup(
-                    c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>())
-                )
+                c => c.HttpContext.Response.ApplyAppPathModifier(It.IsAny<string>())
+            )
                 .Returns<string>(r => MvcHelper.AppPathModifier + r);
 
             RouteCollection rt = new RouteCollection();

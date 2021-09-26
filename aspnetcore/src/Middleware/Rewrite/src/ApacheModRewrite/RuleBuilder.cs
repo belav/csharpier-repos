@@ -271,12 +271,13 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                         responseStatusCode = StatusCodes.Status302Found;
                     }
                     else if (
-                        !int.TryParse(
-                            statusCode,
-                            NumberStyles.None,
-                            CultureInfo.InvariantCulture,
-                            out responseStatusCode
-                        )
+                        !int
+                            .TryParse(
+                                statusCode,
+                                NumberStyles.None,
+                                CultureInfo.InvariantCulture,
+                                out responseStatusCode
+                            )
                     )
                     {
                         throw new FormatException(

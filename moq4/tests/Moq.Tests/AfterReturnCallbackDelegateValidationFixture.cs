@@ -15,9 +15,8 @@ namespace Moq.Tests
 
         public AfterReturnCallbackDelegateValidationFixture()
         {
-            this.setup = new Mock<IFoo>().Setup(
-                m => m.Method(It.IsAny<string>(), It.IsAny<object>())
-            );
+            this.setup = new Mock<IFoo>()
+                .Setup(m => m.Method(It.IsAny<string>(), It.IsAny<object>()));
         }
 
         [Fact]

@@ -116,12 +116,11 @@ namespace R2RDump
                 }
             }
 
-            IEnumerable<string> allRefPaths = new string[]
-            {
-                Path.GetDirectoryName(parentFile)
-            }.Concat(
-                (ReferencePath ?? Enumerable.Empty<DirectoryInfo>()).Select(path => path.FullName)
-            );
+            IEnumerable<string> allRefPaths = new string[] { Path.GetDirectoryName(parentFile) }
+                .Concat(
+                    (ReferencePath ?? Enumerable.Empty<DirectoryInfo>())
+                        .Select(path => path.FullName)
+                );
 
             foreach (string refPath in allRefPaths)
             {
@@ -307,12 +306,13 @@ namespace R2RDump
             arg = arg.Trim();
             if (arg.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
             {
-                return int.TryParse(
-                    arg.Substring(2),
-                    System.Globalization.NumberStyles.HexNumber,
-                    null,
-                    out n
-                );
+                return int
+                    .TryParse(
+                        arg.Substring(2),
+                        System.Globalization.NumberStyles.HexNumber,
+                        null,
+                        out n
+                    );
             }
             return int.TryParse(arg, out n);
         }
@@ -496,9 +496,8 @@ namespace R2RDump
                     method.ComponentReader.MetadataReader,
                     method.MethodHandle
                 );
-                mi.AssemblyName = method.ComponentReader.MetadataReader.GetString(
-                    method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name
-                );
+                mi.AssemblyName = method.ComponentReader.MetadataReader
+                    .GetString(method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name);
                 mi.ColdRVA = 0;
                 mi.ColdLength = 0;
 

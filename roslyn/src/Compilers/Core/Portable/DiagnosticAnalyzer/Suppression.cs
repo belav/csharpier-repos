@@ -25,11 +25,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (descriptor.SuppressedDiagnosticId != suppressedDiagnostic.Id)
             {
                 // Suppressed diagnostic ID '{0}' does not match suppressable ID '{1}' for the given suppression descriptor.
-                var message = string.Format(
-                    CodeAnalysisResources.InvalidDiagnosticSuppressionReported,
-                    suppressedDiagnostic.Id,
-                    descriptor.SuppressedDiagnosticId
-                );
+                var message = string
+                    .Format(
+                        CodeAnalysisResources.InvalidDiagnosticSuppressionReported,
+                        suppressedDiagnostic.Id,
+                        descriptor.SuppressedDiagnosticId
+                    );
                 throw new ArgumentException(message);
             }
         }
@@ -76,14 +77,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public bool Equals(Suppression other)
         {
-            return EqualityComparer<SuppressionDescriptor>.Default.Equals(
-                    Descriptor,
-                    other.Descriptor
-                )
-                && EqualityComparer<Diagnostic>.Default.Equals(
-                    SuppressedDiagnostic,
-                    other.SuppressedDiagnostic
-                );
+            return EqualityComparer<SuppressionDescriptor>.Default
+                    .Equals(Descriptor, other.Descriptor)
+                && EqualityComparer<Diagnostic>.Default
+                    .Equals(SuppressedDiagnostic, other.SuppressedDiagnostic);
         }
 
         public override int GetHashCode()

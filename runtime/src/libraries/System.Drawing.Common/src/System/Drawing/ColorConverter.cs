@@ -399,10 +399,11 @@ namespace System.Drawing
                     }
                     else if (c.A != 255)
                     {
-                        member = typeof(Color).GetMethod(
-                            "FromArgb",
-                            new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }
-                        );
+                        member = typeof(Color)
+                            .GetMethod(
+                                "FromArgb",
+                                new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }
+                            );
                         args = new object[] { c.A, c.R, c.G, c.B };
                     }
                     else if (c.IsNamedColor)
@@ -412,10 +413,11 @@ namespace System.Drawing
                     }
                     else
                     {
-                        member = typeof(Color).GetMethod(
-                            "FromArgb",
-                            new Type[] { typeof(int), typeof(int), typeof(int) }
-                        );
+                        member = typeof(Color)
+                            .GetMethod(
+                                "FromArgb",
+                                new Type[] { typeof(int), typeof(int), typeof(int) }
+                            );
                         args = new object[] { c.R, c.G, c.B };
                     }
 

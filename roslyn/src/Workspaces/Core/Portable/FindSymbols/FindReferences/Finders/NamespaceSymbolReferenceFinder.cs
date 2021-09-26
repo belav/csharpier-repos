@@ -55,29 +55,29 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             var tokens = await GetIdentifierOrGlobalNamespaceTokensWithTextAsync(
-                    document,
-                    semanticModel,
-                    identifierName,
-                    cancellationToken
-                )
+                document,
+                semanticModel,
+                identifierName,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var nonAliasReferences = await FindReferencesInTokensAsync(
-                    symbol,
-                    document,
-                    semanticModel,
-                    tokens,
-                    t => syntaxFacts.TextMatch(t.ValueText, identifierName),
-                    cancellationToken
-                )
+                symbol,
+                document,
+                semanticModel,
+                tokens,
+                t => syntaxFacts.TextMatch(t.ValueText, identifierName),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var aliasReferences = await FindAliasReferencesAsync(
-                    nonAliasReferences,
-                    symbol,
-                    document,
-                    semanticModel,
-                    cancellationToken
-                )
+                nonAliasReferences,
+                symbol,
+                document,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var suppressionReferences = ShouldFindReferencesInGlobalSuppressions(
@@ -85,12 +85,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 out var docCommentId
             )
                 ? await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
-                          document,
-                          semanticModel,
-                          syntaxFacts,
-                          docCommentId,
-                          cancellationToken
-                      )
+                      document,
+                      semanticModel,
+                      syntaxFacts,
+                      docCommentId,
+                      cancellationToken
+                  )
                       .ConfigureAwait(false)
                 : ImmutableArray<FinderLocation>.Empty;
 

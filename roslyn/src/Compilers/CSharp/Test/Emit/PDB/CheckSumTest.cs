@@ -27,9 +27,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
                 GetUniqueName(),
                 new[] { Parse(source, filePath) },
                 new[] { MscorlibRef },
-                TestOptions.DebugDll.WithSourceReferenceResolver(
-                    new SourceFileResolver(ImmutableArray.Create<string>(), baseDirectory)
-                )
+                TestOptions.DebugDll
+                    .WithSourceReferenceResolver(
+                        new SourceFileResolver(ImmutableArray.Create<string>(), baseDirectory)
+                    )
             );
         }
 
@@ -115,23 +116,22 @@ class C
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.DebugExe)
-                .VerifyDiagnostics(
-                    // (20,1): warning CS1697: Different checksum values given for 'bogus1.cs'
-                    // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A798}" "ab007f1d23d9"
-                    Diagnostic(
-                            ErrorCode.WRN_ConflictingChecksum,
-                            @"#pragma checksum ""bogus1.cs"" ""{406EA660-64CF-4C82-B6F0-42D48172A798}"" ""ab007f1d23d9"""
-                        )
-                        .WithArguments("bogus1.cs"),
-                    // (22,1): warning CS1697: Different checksum values given for 'bogus1.cs'
-                    // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A799}" "ab007f1d23d8"
-                    Diagnostic(
-                            ErrorCode.WRN_ConflictingChecksum,
-                            @"#pragma checksum ""bogus1.cs"" ""{406EA660-64CF-4C82-B6F0-42D48172A799}"" ""ab007f1d23d8"""
-                        )
-                        .WithArguments("bogus1.cs")
-                );
+            CompileAndVerify(text, options: TestOptions.DebugExe).VerifyDiagnostics(
+                // (20,1): warning CS1697: Different checksum values given for 'bogus1.cs'
+                // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A798}" "ab007f1d23d9"
+                Diagnostic(
+                    ErrorCode.WRN_ConflictingChecksum,
+                    @"#pragma checksum ""bogus1.cs"" ""{406EA660-64CF-4C82-B6F0-42D48172A798}"" ""ab007f1d23d9"""
+                )
+                    .WithArguments("bogus1.cs"),
+                // (22,1): warning CS1697: Different checksum values given for 'bogus1.cs'
+                // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A799}" "ab007f1d23d8"
+                Diagnostic(
+                    ErrorCode.WRN_ConflictingChecksum,
+                    @"#pragma checksum ""bogus1.cs"" ""{406EA660-64CF-4C82-B6F0-42D48172A799}"" ""ab007f1d23d8"""
+                )
+                    .WithArguments("bogus1.cs")
+            );
         }
 
         [Fact]
@@ -159,32 +159,31 @@ class C
 }
 ";
 
-            CompileAndVerify(text)
-                .VerifyDiagnostics(
-                    // (11,71): warning CS1695: Invalid #pragma checksum syntax; should be #pragma checksum "filename" "{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}" "XXXX..."
-                    // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A799}" "ab007f1d23d"
-                    Diagnostic(ErrorCode.WRN_IllegalPPChecksum, @"""ab007f1d23d"""),
-                    // (14,30): warning CS1695: Invalid #pragma checksum syntax; should be #pragma checksum "filename" "{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}" "XXXX..."
-                    // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A79}" "ab007f1d23d9"
-                    Diagnostic(
-                        ErrorCode.WRN_IllegalPPChecksum,
-                        @"""{406EA660-64CF-4C82-B6F0-42D48172A79}"""
-                    ),
-                    // (6,1): warning CS1697: Different checksum values given for 'bogus1.cs'
-                    // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A799}" "ab007f1d23"
-                    Diagnostic(
-                            ErrorCode.WRN_ConflictingChecksum,
-                            @"#pragma checksum ""bogus1.cs"" ""{406EA660-64CF-4C82-B6F0-42D48172A799}"" ""ab007f1d23"""
-                        )
-                        .WithArguments("bogus1.cs"),
-                    // (7,1): warning CS1697: Different checksum values given for 'bogus1.cs'
-                    // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A799}" ""
-                    Diagnostic(
-                            ErrorCode.WRN_ConflictingChecksum,
-                            @"#pragma checksum ""bogus1.cs"" ""{406EA660-64CF-4C82-B6F0-42D48172A799}"" """""
-                        )
-                        .WithArguments("bogus1.cs")
-                );
+            CompileAndVerify(text).VerifyDiagnostics(
+                // (11,71): warning CS1695: Invalid #pragma checksum syntax; should be #pragma checksum "filename" "{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}" "XXXX..."
+                // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A799}" "ab007f1d23d"
+                Diagnostic(ErrorCode.WRN_IllegalPPChecksum, @"""ab007f1d23d"""),
+                // (14,30): warning CS1695: Invalid #pragma checksum syntax; should be #pragma checksum "filename" "{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}" "XXXX..."
+                // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A79}" "ab007f1d23d9"
+                Diagnostic(
+                    ErrorCode.WRN_IllegalPPChecksum,
+                    @"""{406EA660-64CF-4C82-B6F0-42D48172A79}"""
+                ),
+                // (6,1): warning CS1697: Different checksum values given for 'bogus1.cs'
+                // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A799}" "ab007f1d23"
+                Diagnostic(
+                    ErrorCode.WRN_ConflictingChecksum,
+                    @"#pragma checksum ""bogus1.cs"" ""{406EA660-64CF-4C82-B6F0-42D48172A799}"" ""ab007f1d23"""
+                )
+                    .WithArguments("bogus1.cs"),
+                // (7,1): warning CS1697: Different checksum values given for 'bogus1.cs'
+                // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A799}" ""
+                Diagnostic(
+                    ErrorCode.WRN_ConflictingChecksum,
+                    @"#pragma checksum ""bogus1.cs"" ""{406EA660-64CF-4C82-B6F0-42D48172A799}"" """""
+                )
+                    .WithArguments("bogus1.cs")
+            );
         }
 
         [Fact]
@@ -222,16 +221,15 @@ class C1
 }
 ";
 
-            CompileAndVerify(new string[] { text1, text2 })
-                .VerifyDiagnostics(
-                    // (11,1): warning CS1697: Different checksum values given for 'bogus.cs'
-                    // #pragma checksum "bogus.cs" "{406EA660-64CF-4C82-B6F0-42D48172A799}" "ab007f1d23"
-                    Diagnostic(
-                            ErrorCode.WRN_ConflictingChecksum,
-                            @"#pragma checksum ""bogus.cs"" ""{406EA660-64CF-4C82-B6F0-42D48172A799}"" ""ab007f1d23"""
-                        )
-                        .WithArguments("bogus.cs")
-                );
+            CompileAndVerify(new string[] { text1, text2 }).VerifyDiagnostics(
+                // (11,1): warning CS1697: Different checksum values given for 'bogus.cs'
+                // #pragma checksum "bogus.cs" "{406EA660-64CF-4C82-B6F0-42D48172A799}" "ab007f1d23"
+                Diagnostic(
+                    ErrorCode.WRN_ConflictingChecksum,
+                    @"#pragma checksum ""bogus.cs"" ""{406EA660-64CF-4C82-B6F0-42D48172A799}"" ""ab007f1d23"""
+                )
+                    .WithArguments("bogus.cs")
+            );
         }
 
         [Fact]

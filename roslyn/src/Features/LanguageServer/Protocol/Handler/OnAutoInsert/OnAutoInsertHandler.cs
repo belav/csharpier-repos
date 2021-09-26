@@ -73,10 +73,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             // We should use the options passed in by LSP instead of the document's options.
             var documentOptions = await ProtocolConversions.FormattingOptionsToDocumentOptionsAsync(
-                    request.Options,
-                    document,
-                    cancellationToken
-                )
+                request.Options,
+                document,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // The editor calls this handler for C# and VB comment characters, but we only need to process the one for the language that matches the document
@@ -86,12 +86,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             )
             {
                 var documentationCommentResponse = await GetDocumentationCommentResponseAsync(
-                        request,
-                        document,
-                        service,
-                        documentOptions,
-                        cancellationToken
-                    )
+                    request,
+                    document,
+                    service,
+                    documentOptions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (documentationCommentResponse != null)
                 {
@@ -105,16 +105,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (
                 request.Character == "\n"
                 && context.ClientName
-                    == document.Services.GetService<DocumentPropertiesService>()?.DiagnosticsLspClientName
+                    == document.Services
+                        .GetService<DocumentPropertiesService>()?.DiagnosticsLspClientName
             )
             {
                 var braceCompletionAfterReturnResponse =
                     await GetBraceCompletionAfterReturnResponseAsync(
-                            request,
-                            document,
-                            documentOptions,
-                            cancellationToken
-                        )
+                        request,
+                        document,
+                        documentOptions,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 if (braceCompletionAfterReturnResponse != null)
                 {
@@ -183,15 +184,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         )
         {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var position = sourceText.Lines.GetPosition(
-                ProtocolConversions.PositionToLinePosition(autoInsertParams.Position)
-            );
+            var position = sourceText.Lines
+                .GetPosition(ProtocolConversions.PositionToLinePosition(autoInsertParams.Position));
 
             var serviceAndContext = await GetBraceCompletionContextAsync(
-                    position,
-                    document,
-                    cancellationToken
-                )
+                position,
+                document,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (serviceAndContext == null)
             {
@@ -200,10 +200,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             var (service, context) = serviceAndContext.Value;
             var postReturnEdit = await service.GetTextChangeAfterReturnAsync(
-                    context,
-                    documentOptions,
-                    cancellationToken
-                )
+                context,
+                documentOptions,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (postReturnEdit == null)
             {
@@ -234,9 +234,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     // If tabs were inserted the desired caret column can remain beyond the line text.
                     // So just set the caret position to the end of the newly indented line.
                     var caretLineInIndentedText = indentedText.Lines[desiredCaretLinePosition.Line];
-                    desiredCaretLinePosition = indentedText.Lines.GetLinePosition(
-                        caretLineInIndentedText.End
-                    );
+                    desiredCaretLinePosition = indentedText.Lines
+                        .GetLinePosition(caretLineInIndentedText.End);
                 }
                 else
                 {
@@ -333,10 +332,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             foreach (var service in servicesForDocument)
             {
                 var context = await service.GetCompletedBraceContextAsync(
-                        document,
-                        caretLocation,
-                        cancellationToken
-                    )
+                    document,
+                    caretLocation,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (context != null)
                 {

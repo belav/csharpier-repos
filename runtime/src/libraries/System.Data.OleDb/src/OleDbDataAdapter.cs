@@ -245,9 +245,8 @@ namespace System.Data.OleDb
                 {
                     // The NextRecordset method is not available on a disconnected Recordset object, where ActiveConnection has been set to NULL
                     object activeConnection;
-                    activeConnection = (
-                        (UnsafeNativeMethods.Recordset15)adodb
-                    ).get_ActiveConnection();
+                    activeConnection = ((UnsafeNativeMethods.Recordset15)adodb)
+                        .get_ActiveConnection();
 
                     if (null == activeConnection)
                     {
@@ -288,10 +287,8 @@ namespace System.Data.OleDb
 
                         object recordsAffected;
                         object nextresult;
-                        OleDbHResult hr = ((UnsafeNativeMethods.Recordset15)adodb).NextRecordset(
-                            out recordsAffected,
-                            out nextresult
-                        );
+                        OleDbHResult hr = ((UnsafeNativeMethods.Recordset15)adodb)
+                            .NextRecordset(out recordsAffected, out nextresult);
 
                         if (0 > hr)
                         {

@@ -1217,7 +1217,8 @@ namespace System.Tests.Types
     public class GenericMethodParameter1Of2Tests : TypePropertyTestBase
     {
         public override Type CreateType() =>
-            typeof(Outside<>).GetMethod(nameof(Outside<string>.TwoGenericMethod))
+            typeof(Outside<>)
+                .GetMethod(nameof(Outside<string>.TwoGenericMethod))
                 .GetGenericArguments()[0];
 
         public override TypeAttributes Attributes =>
@@ -1246,7 +1247,8 @@ namespace System.Tests.Types
     public class GenericMethodParameter2Of2Tests : TypePropertyTestBase
     {
         public override Type CreateType() =>
-            typeof(Outside<>).GetMethod(nameof(Outside<string>.TwoGenericMethod))
+            typeof(Outside<>)
+                .GetMethod(nameof(Outside<string>.TwoGenericMethod))
                 .GetGenericArguments()[1];
 
         public override TypeAttributes Attributes =>

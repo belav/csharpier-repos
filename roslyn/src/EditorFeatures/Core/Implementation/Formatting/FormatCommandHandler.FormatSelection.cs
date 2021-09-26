@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 return false;
             }
 
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;
@@ -46,10 +46,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             }
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Formatting_currently_selected_text
-                )
+                context.OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesResources.Formatting_currently_selected_text
+                    )
             )
             {
                 var buffer = args.SubjectBuffer;
@@ -73,15 +74,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 // make behavior same as dev12.
                 // make sure we set selection back and set caret position at the end of selection
                 // we can delete this code once razor side fixes a bug where it depends on this behavior (dev12) on formatting.
-                var currentSelection = selection[0].TranslateTo(
-                    args.SubjectBuffer.CurrentSnapshot,
-                    SpanTrackingMode.EdgeExclusive
-                );
+                var currentSelection = selection[0]
+                    .TranslateTo(
+                        args.SubjectBuffer.CurrentSnapshot,
+                        SpanTrackingMode.EdgeExclusive
+                    );
                 args.TextView.SetSelection(currentSelection);
-                args.TextView.TryMoveCaretToAndEnsureVisible(
-                    currentSelection.End,
-                    ensureSpanVisibleOptions: EnsureSpanVisibleOptions.MinimumScroll
-                );
+                args.TextView
+                    .TryMoveCaretToAndEnsureVisible(
+                        currentSelection.End,
+                        ensureSpanVisibleOptions: EnsureSpanVisibleOptions.MinimumScroll
+                    );
 
                 // We have handled this command
                 return true;

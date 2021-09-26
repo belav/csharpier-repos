@@ -536,13 +536,14 @@ namespace System.Text
             }
             else
             {
-                return base.GetBytesWithFallback(
-                    chars,
-                    originalCharsLength,
-                    bytes,
-                    originalBytesLength,
-                    encoder
-                );
+                return base
+                    .GetBytesWithFallback(
+                        chars,
+                        originalCharsLength,
+                        bytes,
+                        originalBytesLength,
+                        encoder
+                    );
             }
         }
 
@@ -928,13 +929,14 @@ namespace System.Text
             }
             else
             {
-                return base.GetCharsWithFallback(
-                    bytes,
-                    originalBytesLength,
-                    chars,
-                    originalCharsLength,
-                    decoder
-                );
+                return base
+                    .GetCharsWithFallback(
+                        bytes,
+                        originalBytesLength,
+                        chars,
+                        originalCharsLength,
+                        decoder
+                    );
             }
         }
 

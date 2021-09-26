@@ -107,10 +107,8 @@ namespace System.Net.Http.Unit.Tests.HPack
         [InlineData(3)]
         public void DynamicTable_WrapsRingBuffer_Success(int targetInsertIndex)
         {
-            FieldInfo insertIndexField = typeof(DynamicTable).GetField(
-                "_insertIndex",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            FieldInfo insertIndexField = typeof(DynamicTable)
+                .GetField("_insertIndex", BindingFlags.NonPublic | BindingFlags.Instance);
             DynamicTable table = new DynamicTable(maxSize: 256);
             Stack<byte[]> insertedHeaders = new Stack<byte[]>();
 
@@ -168,9 +166,8 @@ namespace System.Net.Http.Unit.Tests.HPack
 
             while (insertedSize != insertSize)
             {
-                byte[] data = Encoding.ASCII.GetBytes(
-                    $"header-{dynamicTable.Size}".PadRight(16, ' ')
-                );
+                byte[] data = Encoding.ASCII
+                    .GetBytes($"header-{dynamicTable.Size}".PadRight(16, ' '));
                 Debug.Assert(data.Length == 16);
 
                 dynamicTable.Insert(data, data);

@@ -126,11 +126,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
 
             explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0));
-            System.Security.Cryptography.Pkcs.Asn1.OriginatorIdentifierOrKeyAsn.Decode(
-                ref explicitReader,
-                rebind,
-                out decoded.Originator
-            );
+            System.Security.Cryptography.Pkcs.Asn1.OriginatorIdentifierOrKeyAsn
+                .Decode(ref explicitReader, rebind, out decoded.Originator);
             explicitReader.ThrowIfNotEmpty();
 
             if (
@@ -157,11 +154,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 explicitReader.ThrowIfNotEmpty();
             }
 
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.KeyEncryptionAlgorithm
-            );
+            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn
+                .Decode(ref sequenceReader, rebind, out decoded.KeyEncryptionAlgorithm);
 
             // Decode SEQUENCE OF for RecipientEncryptedKeys
             {
@@ -172,11 +166,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                 while (collectionReader.HasData)
                 {
-                    System.Security.Cryptography.Pkcs.Asn1.RecipientEncryptedKeyAsn.Decode(
-                        ref collectionReader,
-                        rebind,
-                        out tmpItem
-                    );
+                    System.Security.Cryptography.Pkcs.Asn1.RecipientEncryptedKeyAsn
+                        .Decode(ref collectionReader, rebind, out tmpItem);
                     tmpList.Add(tmpItem);
                 }
 

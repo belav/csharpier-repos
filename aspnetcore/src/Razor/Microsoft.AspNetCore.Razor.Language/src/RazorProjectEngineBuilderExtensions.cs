@@ -57,9 +57,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
 
             var configurationFeature = GetDefaultDocumentClassifierPassFeature(builder);
-            configurationFeature.ConfigureClass.Add(
-                (document, @class) => @class.BaseType = baseType
-            );
+            configurationFeature.ConfigureClass
+                .Add((document, @class) => @class.BaseType = baseType);
             return builder;
         }
 
@@ -80,9 +79,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
 
             var configurationFeature = GetDefaultDocumentClassifierPassFeature(builder);
-            configurationFeature.ConfigureNamespace.Add(
-                (document, @namespace) => @namespace.Content = namespaceName
-            );
+            configurationFeature.ConfigureNamespace
+                .Add((document, @namespace) => @namespace.Content = namespaceName);
             return builder;
         }
 
@@ -257,7 +255,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorProjectEngineBuilder builder
         )
         {
-            var directiveFeature = builder.Features.OfType<DefaultRazorDirectiveFeature>()
+            var directiveFeature = builder.Features
+                .OfType<DefaultRazorDirectiveFeature>()
                 .FirstOrDefault();
             if (directiveFeature == null)
             {
@@ -272,7 +271,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorProjectEngineBuilder builder
         )
         {
-            var targetExtensionFeature = builder.Features.OfType<IRazorTargetExtensionFeature>()
+            var targetExtensionFeature = builder.Features
+                .OfType<IRazorTargetExtensionFeature>()
                 .FirstOrDefault();
             if (targetExtensionFeature == null)
             {
@@ -287,8 +287,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorProjectEngineBuilder builder
         )
         {
-            var configurationFeature =
-                builder.Features.OfType<DefaultDocumentClassifierPassFeature>().FirstOrDefault();
+            var configurationFeature = builder.Features
+                .OfType<DefaultDocumentClassifierPassFeature>()
+                .FirstOrDefault();
             if (configurationFeature == null)
             {
                 configurationFeature = new DefaultDocumentClassifierPassFeature();

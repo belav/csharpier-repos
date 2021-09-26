@@ -79,17 +79,17 @@ namespace HeaderPropagationSample
                         {
                             foreach (var header in context.Request.Headers)
                             {
-                                await context.Response.WriteAsync(
-                                    $"'/' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
-                                );
+                                await context.Response
+                                    .WriteAsync(
+                                        $"'/' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                                    );
                             }
 
                             var clientNames = new[] { "test", "another" };
                             foreach (var clientName in clientNames)
                             {
-                                await context.Response.WriteAsync(
-                                    "Sending request to /forwarded\r\n"
-                                );
+                                await context.Response
+                                    .WriteAsync("Sending request to /forwarded\r\n");
 
                                 var uri = UriHelper.BuildAbsolute(
                                     context.Request.Scheme,
@@ -102,15 +102,15 @@ namespace HeaderPropagationSample
 
                                 foreach (var header in response.RequestMessage.Headers)
                                 {
-                                    await context.Response.WriteAsync(
-                                        $"Sent Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
-                                    );
+                                    await context.Response
+                                        .WriteAsync(
+                                            $"Sent Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                                        );
                                 }
 
                                 await context.Response.WriteAsync("Got response\r\n");
-                                await context.Response.WriteAsync(
-                                    await response.Content.ReadAsStringAsync()
-                                );
+                                await context.Response
+                                    .WriteAsync(await response.Content.ReadAsStringAsync());
                             }
                         }
                     );
@@ -121,9 +121,10 @@ namespace HeaderPropagationSample
                         {
                             foreach (var header in context.Request.Headers)
                             {
-                                await context.Response.WriteAsync(
-                                    $"'/forwarded' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
-                                );
+                                await context.Response
+                                    .WriteAsync(
+                                        $"'/forwarded' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                                    );
                             }
                         }
                     );

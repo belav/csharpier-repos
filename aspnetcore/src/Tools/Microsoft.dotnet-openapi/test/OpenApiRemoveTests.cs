@@ -131,9 +131,8 @@ namespace Microsoft.DotNet.OpenApi.Remove.Tests
 
             // csproj contents
             using (
-                var csprojStream = new FileInfo(
-                    Path.Join(_tempDir.Root, "testproj.csproj")
-                ).OpenRead()
+                var csprojStream = new FileInfo(Path.Join(_tempDir.Root, "testproj.csproj"))
+                    .OpenRead()
             )
             using (var reader = new StreamReader(csprojStream))
             {
@@ -152,9 +151,8 @@ namespace Microsoft.DotNet.OpenApi.Remove.Tests
 
             // csproj contents
             using (
-                var csprojStream = new FileInfo(
-                    Path.Join(_tempDir.Root, "testproj.csproj")
-                ).OpenRead()
+                var csprojStream = new FileInfo(Path.Join(_tempDir.Root, "testproj.csproj"))
+                    .OpenRead()
             )
             using (var reader = new StreamReader(csprojStream))
             {

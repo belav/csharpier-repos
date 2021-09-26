@@ -188,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             for (var i = 0; i < root.Usings.Count; i++)
             {
                 if (
-                    root.Usings[i].GetLeadingTrivia()
+                    root.Usings[i]
+                        .GetLeadingTrivia()
                         .Any(trivia => trivia.IsKind(SyntaxKind.IfDirectiveTrivia))
                 )
                 {
@@ -196,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 }
 
                 if (
-                    root.Usings[i].GetLeadingTrivia()
+                    root.Usings[i]
+                        .GetLeadingTrivia()
                         .Any(trivia => trivia.IsKind(SyntaxKind.EndIfDirectiveTrivia))
                 )
                 {

@@ -252,12 +252,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // property (incorrectly) has a different type than the overridden property.  In such cases,
                     // we want to retain the original (incorrect) type to avoid hiding the type given in source.
                     if (
-                        type.Type.Equals(
-                            overriddenPropertyType.Type,
-                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                                | TypeCompareKind.IgnoreDynamic
-                        )
+                        type.Type
+                            .Equals(
+                                overriddenPropertyType.Type,
+                                TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                                    | TypeCompareKind.IgnoreDynamic
+                            )
                     )
                     {
                         type = type.WithTypeAndModifiers(
@@ -1481,16 +1482,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 bool hasAnyDiagnostics;
-                boundAttribute = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    out hasAnyDiagnostics
-                );
+                boundAttribute = arguments.Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        out hasAnyDiagnostics
+                    );
                 if (!boundAttribute.HasErrors)
                 {
-                    string indexerName = boundAttribute.CommonConstructorArguments[
-                        0
-                    ].DecodeValue<string>(SpecialType.System_String);
+                    string indexerName = boundAttribute.CommonConstructorArguments[0]
+                        .DecodeValue<string>(SpecialType.System_String);
                     if (indexerName != null)
                     {
                         arguments.GetOrCreateData<PropertyEarlyWellKnownAttributeData>().IndexerName =
@@ -1625,10 +1626,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.MemberNotNullAttribute))
             {
-                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
-                    diagnostics,
-                    arguments.AttributeSyntaxOpt
-                );
+                MessageID.IDS_FeatureMemberNotNull
+                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                 CSharpAttributeData.DecodeMemberNotNullAttribute<PropertyWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -1638,10 +1637,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attribute.IsTargetAttribute(this, AttributeDescription.MemberNotNullWhenAttribute)
             )
             {
-                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
-                    diagnostics,
-                    arguments.AttributeSyntaxOpt
-                );
+                MessageID.IDS_FeatureMemberNotNull
+                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                 CSharpAttributeData.DecodeMemberNotNullWhenAttribute<PropertyWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -1730,13 +1727,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(_lazyCustomAttributesBag.IsDecodedWellKnownAttributeDataComputed);
             Debug.Assert(symbolPart == AttributeLocation.None);
 
-            base.PostDecodeWellKnownAttributes(
-                boundAttributes,
-                allAttributeSyntaxNodes,
-                diagnostics,
-                symbolPart,
-                decodedData
-            );
+            base
+                .PostDecodeWellKnownAttributes(
+                    boundAttributes,
+                    allAttributeSyntaxNodes,
+                    diagnostics,
+                    symbolPart,
+                    decodedData
+                );
         }
 
         private void ValidateIndexerNameAttribute(
@@ -1755,9 +1753,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                string indexerName = attribute.CommonConstructorArguments[0].DecodeValue<string>(
-                    SpecialType.System_String
-                );
+                string indexerName = attribute.CommonConstructorArguments[0]
+                    .DecodeValue<string>(SpecialType.System_String);
                 if (indexerName == null || !SyntaxFacts.IsValidIdentifier(indexerName))
                 {
                     diagnostics.Add(
@@ -1822,12 +1819,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     foreach (var parameter in this.Parameters)
                                     {
                                         parameter.ForceComplete(locationOpt, cancellationToken);
-                                        parameter.Type.CheckAllConstraints(
-                                            DeclaringCompilation,
-                                            conversions,
-                                            parameter.Locations[0],
-                                            diagnostics
-                                        );
+                                        parameter.Type
+                                            .CheckAllConstraints(
+                                                DeclaringCompilation,
+                                                conversions,
+                                                parameter.Locations[0],
+                                                diagnostics
+                                            );
                                     }
 
                                     this.AddDeclarationDiagnostics(diagnostics);
@@ -1861,12 +1859,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 var conversions = new TypeConversions(
                                     this.ContainingAssembly.CorLibrary
                                 );
-                                this.Type.CheckAllConstraints(
-                                    DeclaringCompilation,
-                                    conversions,
-                                    Location,
-                                    diagnostics
-                                );
+                                this.Type
+                                    .CheckAllConstraints(
+                                        DeclaringCompilation,
+                                        conversions,
+                                        Location,
+                                        diagnostics
+                                    );
 
                                 ValidatePropertyType(diagnostics);
 

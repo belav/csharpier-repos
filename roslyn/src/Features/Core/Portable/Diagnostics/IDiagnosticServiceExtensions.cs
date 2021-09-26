@@ -120,18 +120,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 var diagnostics = forPullDiagnostics
                     ? await service.GetPullDiagnosticsAsync(
-                              bucket,
-                              includeSuppressedDiagnostics,
-                              diagnosticMode,
-                              cancellationToken
-                          )
+                          bucket,
+                          includeSuppressedDiagnostics,
+                          diagnosticMode,
+                          cancellationToken
+                      )
                           .ConfigureAwait(false)
                     : await service.GetPushDiagnosticsAsync(
-                              bucket,
-                              includeSuppressedDiagnostics,
-                              diagnosticMode,
-                              cancellationToken
-                          )
+                          bucket,
+                          includeSuppressedDiagnostics,
+                          diagnosticMode,
+                          cancellationToken
+                      )
                           .ConfigureAwait(false);
                 result.AddRange(diagnostics);
             }

@@ -98,7 +98,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Aggregate2()
         {
-            var val = (new int[] { 0, 2, 1 }).AsQueryable()
+            var val = (new int[] { 0, 2, 1 })
+                .AsQueryable()
                 .Aggregate("", (n1, n2) => n1 + n2.ToString());
             Assert.Equal("021", val);
         }
@@ -106,7 +107,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Aggregate3()
         {
-            var val = (new int[] { 0, 2, 1 }).AsQueryable()
+            var val = (new int[] { 0, 2, 1 })
+                .AsQueryable()
                 .Aggregate(0L, (n1, n2) => n1 + n2, n => n.ToString());
             Assert.Equal("3", val);
         }

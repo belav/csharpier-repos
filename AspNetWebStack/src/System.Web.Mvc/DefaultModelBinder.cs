@@ -101,10 +101,8 @@ namespace System.Web.Mvc
 
                 ModelBindingContext arrayBindingContext = new ModelBindingContext()
                 {
-                    ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                        () => collection,
-                        listType
-                    ),
+                    ModelMetadata = ModelMetadataProviders.Current
+                        .GetMetadataForType(() => collection, listType),
                     ModelName = bindingContext.ModelName,
                     ModelState = bindingContext.ModelState,
                     PropertyFilter = bindingContext.PropertyFilter,
@@ -144,10 +142,8 @@ namespace System.Web.Mvc
 
                 ModelBindingContext dictionaryBindingContext = new ModelBindingContext()
                 {
-                    ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                        () => model,
-                        modelType
-                    ),
+                    ModelMetadata = ModelMetadataProviders.Current
+                        .GetMetadataForType(() => model, modelType),
                     ModelName = bindingContext.ModelName,
                     ModelState = bindingContext.ModelState,
                     PropertyFilter = bindingContext.PropertyFilter,
@@ -175,10 +171,8 @@ namespace System.Web.Mvc
                 {
                     ModelBindingContext collectionBindingContext = new ModelBindingContext()
                     {
-                        ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                            () => model,
-                            modelType
-                        ),
+                        ModelMetadata = ModelMetadataProviders.Current
+                            .GetMetadataForType(() => model, modelType),
                         ModelName = bindingContext.ModelName,
                         ModelState = bindingContext.ModelState,
                         PropertyFilter = bindingContext.PropertyFilter,
@@ -245,11 +239,8 @@ namespace System.Web.Mvc
                     controllerContext,
                     bindingContext
                 );
-                ValueProviderResult valueProviderResult =
-                    bindingContext.UnvalidatedValueProvider.GetValue(
-                        bindingContext.ModelName,
-                        skipValidation: !performRequestValidation
-                    );
+                ValueProviderResult valueProviderResult = bindingContext.UnvalidatedValueProvider
+                    .GetValue(bindingContext.ModelName, skipValidation: !performRequestValidation);
                 if (valueProviderResult != null)
                 {
                     return BindSimpleModel(controllerContext, bindingContext, valueProviderResult);
@@ -361,7 +352,8 @@ namespace System.Web.Mvc
 
                 // Convert FormatExceptions (type conversion failures) into InvalidValue messages
                 foreach (
-                    ModelError error in modelState.Errors.Where(
+                    ModelError error in modelState.Errors
+                        .Where(
                             err => String.IsNullOrEmpty(err.ErrorMessage) && err.Exception != null
                         )
                         .ToList()
@@ -534,9 +526,9 @@ namespace System.Web.Mvc
         )
         {
             BindAttribute bindAttr = (BindAttribute)GetTypeDescriptor(
-                    controllerContext,
-                    bindingContext
-                )
+                controllerContext,
+                bindingContext
+            )
                 .GetAttributes()[typeof(BindAttribute)];
             Predicate<string> newPropertyFilter =
                 (bindAttr != null)
@@ -547,10 +539,8 @@ namespace System.Web.Mvc
 
             ModelBindingContext newBindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                    () => model,
-                    bindingContext.ModelType
-                ),
+                ModelMetadata = ModelMetadataProviders.Current
+                    .GetMetadataForType(() => model, bindingContext.ModelType),
                 ModelName = bindingContext.ModelName,
                 ModelState = bindingContext.ModelState,
                 PropertyFilter = newPropertyFilter,
@@ -575,9 +565,8 @@ namespace System.Web.Mvc
                 Type genericTypeDefinition = modelType.GetGenericTypeDefinition();
                 if (genericTypeDefinition == typeof(IDictionary<, >))
                 {
-                    typeToCreate = typeof(Dictionary<, >).MakeGenericType(
-                        modelType.GetGenericArguments()
-                    );
+                    typeToCreate = typeof(Dictionary<, >)
+                        .MakeGenericType(modelType.GetGenericArguments());
                 }
                 else if (
                     genericTypeDefinition == typeof(IEnumerable<>)
@@ -665,9 +654,8 @@ namespace System.Web.Mvc
         )
         {
             string indexKey = CreateSubPropertyName(bindingContext.ModelName, "index");
-            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
-                indexKey
-            );
+            ValueProviderResult valueProviderResult = bindingContext.ValueProvider
+                .GetValue(indexKey);
 
             if (valueProviderResult != null)
             {
@@ -738,11 +726,12 @@ namespace System.Web.Mvc
             )
             {
                 result =
-                    controllerContext.HttpContext.GetGlobalResourceObject(
-                        ResourceClassKey,
-                        resourceName,
-                        CultureInfo.CurrentUICulture
-                    ) as string;
+                    controllerContext.HttpContext
+                        .GetGlobalResourceObject(
+                            ResourceClassKey,
+                            resourceName,
+                            CultureInfo.CurrentUICulture
+                        ) as string;
             }
 
             return result;
@@ -794,9 +783,9 @@ namespace System.Web.Mvc
 
             foreach (
                 ModelValidationResult validationResult in ModelValidator.GetModelValidator(
-                        bindingContext.ModelMetadata,
-                        controllerContext
-                    )
+                    bindingContext.ModelMetadata,
+                    controllerContext
+                )
                     .Validate(null)
             )
             {
@@ -807,17 +796,14 @@ namespace System.Web.Mvc
 
                 if (!startedValid.ContainsKey(subPropertyName))
                 {
-                    startedValid[subPropertyName] = bindingContext.ModelState.IsValidField(
-                        subPropertyName
-                    );
+                    startedValid[subPropertyName] = bindingContext.ModelState
+                        .IsValidField(subPropertyName);
                 }
 
                 if (startedValid[subPropertyName])
                 {
-                    bindingContext.ModelState.AddModelError(
-                        subPropertyName,
-                        validationResult.Message
-                    );
+                    bindingContext.ModelState
+                        .AddModelError(subPropertyName, validationResult.Message);
                 }
             }
         }
@@ -883,10 +869,8 @@ namespace System.Web.Mvc
             // methods, which are really the old-school validation hooks.
             if (value == null && bindingContext.ModelState.IsValidField(modelStateKey))
             {
-                ModelValidator requiredValidator = ModelValidatorProviders.Providers.GetValidators(
-                        propertyMetadata,
-                        controllerContext
-                    )
+                ModelValidator requiredValidator = ModelValidatorProviders.Providers
+                    .GetValidators(propertyMetadata, controllerContext)
                     .Where(v => v.IsRequired)
                     .FirstOrDefault();
                 if (requiredValidator != null)
@@ -897,10 +881,8 @@ namespace System.Web.Mvc
                         )
                     )
                     {
-                        bindingContext.ModelState.AddModelError(
-                            modelStateKey,
-                            validationResult.Message
-                        );
+                        bindingContext.ModelState
+                            .AddModelError(modelStateKey, validationResult.Message);
                     }
                 }
             }
@@ -933,10 +915,8 @@ namespace System.Web.Mvc
                 && bindingContext.ModelState.IsValidField(modelStateKey)
             )
             {
-                bindingContext.ModelState.AddModelError(
-                    modelStateKey,
-                    GetValueRequiredResource(controllerContext)
-                );
+                bindingContext.ModelState
+                    .AddModelError(modelStateKey, GetValueRequiredResource(controllerContext));
             }
         }
 
@@ -1017,10 +997,8 @@ namespace System.Web.Mvc
 
                 ModelBindingContext innerContext = new ModelBindingContext()
                 {
-                    ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                        null,
-                        elementType
-                    ),
+                    ModelMetadata = ModelMetadataProviders.Current
+                        .GetMetadataForType(null, elementType),
                     ModelName = subIndexKey,
                     ModelState = bindingContext.ModelState,
                     PropertyFilter = bindingContext.PropertyFilter,
@@ -1094,10 +1072,8 @@ namespace System.Web.Mvc
                 // bind the key
                 ModelBindingContext keyBindingContext = new ModelBindingContext()
                 {
-                    ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                        null,
-                        keyType
-                    ),
+                    ModelMetadata = ModelMetadataProviders.Current
+                        .GetMetadataForType(null, keyType),
                     ModelName = keyFieldKey,
                     ModelState = bindingContext.ModelState,
                     ValueProvider = bindingContext.ValueProvider
@@ -1198,16 +1174,10 @@ namespace System.Web.Mvc
 
         private static class CollectionHelpers
         {
-            private static readonly MethodInfo _replaceCollectionMethod =
-                typeof(CollectionHelpers).GetMethod(
-                    "ReplaceCollectionImpl",
-                    BindingFlags.Static | BindingFlags.NonPublic
-                );
-            private static readonly MethodInfo _replaceDictionaryMethod =
-                typeof(CollectionHelpers).GetMethod(
-                    "ReplaceDictionaryImpl",
-                    BindingFlags.Static | BindingFlags.NonPublic
-                );
+            private static readonly MethodInfo _replaceCollectionMethod = typeof(CollectionHelpers)
+                .GetMethod("ReplaceCollectionImpl", BindingFlags.Static | BindingFlags.NonPublic);
+            private static readonly MethodInfo _replaceDictionaryMethod = typeof(CollectionHelpers)
+                .GetMethod("ReplaceDictionaryImpl", BindingFlags.Static | BindingFlags.NonPublic);
 
             [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
             public static void ReplaceCollection(

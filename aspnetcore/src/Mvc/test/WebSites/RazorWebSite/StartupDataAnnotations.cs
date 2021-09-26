@@ -17,17 +17,13 @@ namespace RazorWebSite
         {
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            services.AddMvc()
-                .AddViewLocalization()
-                .AddDataAnnotationsLocalization(
-                    (options) =>
-                    {
-                        options.DataAnnotationLocalizerProvider = (
-                            modelType,
-                            stringLocalizerFactory
-                        ) => stringLocalizerFactory.Create(typeof(SingleType));
-                    }
-                );
+            services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(
+                (options) =>
+                {
+                    options.DataAnnotationLocalizerProvider = (modelType, stringLocalizerFactory) =>
+                        stringLocalizerFactory.Create(typeof(SingleType));
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

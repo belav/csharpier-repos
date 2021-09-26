@@ -30,10 +30,11 @@ namespace System.Net.Http
         private static bool ProxySupportsConnectionAuth(HttpResponseMessage response)
         {
             if (
-                !response.Headers.TryGetValues(
-                    KnownHeaders.ProxySupport.Descriptor,
-                    out IEnumerable<string>? values
-                )
+                !response.Headers
+                    .TryGetValues(
+                        KnownHeaders.ProxySupport.Descriptor,
+                        out IEnumerable<string>? values
+                    )
             )
             {
                 return false;
@@ -62,13 +63,13 @@ namespace System.Net.Http
         )
         {
             HttpResponseMessage response = await InnerSendAsync(
-                    request,
-                    async,
-                    isProxyAuth,
-                    connectionPool,
-                    connection,
-                    cancellationToken
-                )
+                request,
+                async,
+                isProxyAuth,
+                connectionPool,
+                connection,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (
                 !isProxyAuth
@@ -110,10 +111,10 @@ namespace System.Net.Http
                         {
                             // Server is closing the connection and asking us to authenticate on a new connection.
                             connection = await connectionPool.CreateHttp11ConnectionAsync(
-                                    request,
-                                    async,
-                                    cancellationToken
-                                )
+                                request,
+                                async,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             connectionPool.IncrementConnectionCount();
                             connection!.Acquire();
@@ -160,9 +161,9 @@ namespace System.Net.Http
                             else
                             {
                                 IPHostEntry result = await Dns.GetHostEntryAsync(
-                                        authUri.IdnHost,
-                                        cancellationToken
-                                    )
+                                    authUri.IdnHost,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                                 hostName = result.HostName;
                             }
@@ -211,9 +212,9 @@ namespace System.Net.Http
                                 if (needDrain)
                                 {
                                     await connection.DrainResponseAsync(
-                                            response!,
-                                            cancellationToken
-                                        )
+                                        response!,
+                                        cancellationToken
+                                    )
                                         .ConfigureAwait(false);
                                 }
 
@@ -227,13 +228,13 @@ namespace System.Net.Http
                                 );
 
                                 response = await InnerSendAsync(
-                                        request,
-                                        async,
-                                        isProxyAuth,
-                                        connectionPool,
-                                        connection,
-                                        cancellationToken
-                                    )
+                                    request,
+                                    async,
+                                    isProxyAuth,
+                                    connectionPool,
+                                    connection,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                                 if (
                                     authContext.IsCompleted

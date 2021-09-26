@@ -124,8 +124,8 @@ namespace Roslyn.Test.Utilities
                     {
                         rsa.ImportParameters(snKey);
                         var reversedSignature = peReader.GetSectionData(
-                                snDirectory.RelativeVirtualAddress
-                            )
+                            snDirectory.RelativeVirtualAddress
+                        )
                             .GetContent(0, snSize)
                             .ToArray();
 
@@ -173,7 +173,8 @@ namespace Roslyn.Test.Utilities
                 + SectionHeaderSize * peHeaders.SectionHeaders.Length;
 
             // Signature is calculated with the checksum and authenticode signature zeroed
-            new BlobWriter(checksumBlob).WriteUInt32(0);
+            new BlobWriter(checksumBlob)
+                .WriteUInt32(0);
             var buffer = peImage.GetBlobs().Single().GetBytes().Array;
             int authenticodeOffset = GetAuthenticodeOffset(peHeaders, is32bit);
             var authenticodeDir = peHeaders.PEHeader.CertificateTableDirectory;
@@ -241,10 +242,8 @@ namespace Roslyn.Test.Utilities
             {
                 Interlocked.CompareExchange(
                     ref s_peheaderSizeMethod,
-                    typeof(PEHeader).GetMethod(
-                        "Size",
-                        BindingFlags.Static | BindingFlags.NonPublic
-                    ),
+                    typeof(PEHeader)
+                        .GetMethod("Size", BindingFlags.Static | BindingFlags.NonPublic),
                     null
                 );
             }
@@ -259,7 +258,8 @@ namespace Roslyn.Test.Utilities
             {
                 Interlocked.CompareExchange(
                     ref s_blobCtor,
-                    typeof(Blob).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
+                    typeof(Blob)
+                        .GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
                         .Single(),
                     null
                 );
@@ -295,10 +295,11 @@ namespace Roslyn.Test.Utilities
             {
                 Interlocked.CompareExchange(
                     ref s_getContentToSignMethod,
-                    typeof(PEBuilder).GetMethod(
-                        "GetContentToSign",
-                        BindingFlags.Static | BindingFlags.NonPublic
-                    ),
+                    typeof(PEBuilder)
+                        .GetMethod(
+                            "GetContentToSign",
+                            BindingFlags.Static | BindingFlags.NonPublic
+                        ),
                     null
                 );
             }
@@ -342,13 +343,14 @@ namespace Roslyn.Test.Utilities
                     }
                     else
                     {
-                        ILVisualizer.Default.DumpMethod(
-                            result,
-                            methodIL.MaxStack,
-                            methodIL.GetILContent(),
-                            ImmutableArray.Create<ILVisualizer.LocalInfo>(),
-                            ImmutableArray.Create<ILVisualizer.HandlerSpan>()
-                        );
+                        ILVisualizer.Default
+                            .DumpMethod(
+                                result,
+                                methodIL.MaxStack,
+                                methodIL.GetILContent(),
+                                ImmutableArray.Create<ILVisualizer.LocalInfo>(),
+                                ImmutableArray.Create<ILVisualizer.HandlerSpan>()
+                            );
 
                         offset += methodIL.Size;
                     }

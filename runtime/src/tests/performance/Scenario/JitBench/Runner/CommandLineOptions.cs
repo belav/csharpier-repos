@@ -177,7 +177,8 @@ namespace JitBench
                                     case ErrorType.VersionRequestedError:
                                         Console.WriteLine(
                                             new AssemblyName(
-                                                typeof(CommandLineOptions).GetTypeInfo().Assembly.FullName
+                                                typeof(CommandLineOptions)
+                                                    .GetTypeInfo().Assembly.FullName
                                             ).Version
                                         );
                                         Environment.Exit(0);
@@ -224,7 +225,8 @@ namespace JitBench
                 AdditionalNewLineAfterOption = false,
                 Heading = "JitBench",
                 MaximumDisplayWidth = 80,
-            }.AddOptions(parser.ParseArguments<CommandLineOptions>(new string[] { "--help" }))
+            }
+                .AddOptions(parser.ParseArguments<CommandLineOptions>(new string[] { "--help" }))
                 .ToString();
             return helpTextString;
         }

@@ -109,29 +109,25 @@ namespace Microsoft.AspNetCore.Testing
 
             Assert.True(listener.IsListening, "IsListening");
 
-            _ = listener.GetContextAsync()
-                .ContinueWith(
-                    async task =>
+            _ = listener.GetContextAsync().ContinueWith(
+                async task =>
+                {
+                    var context = task.Result;
+                    context.Response.StatusCode = statusCode;
+
+                    if (handler == null)
                     {
-                        var context = task.Result;
-                        context.Response.StatusCode = statusCode;
-
-                        if (handler == null)
-                        {
-                            await context.Response.OutputStream.WriteAsync(
-                                _defaultResponse,
-                                0,
-                                _defaultResponse.Length
-                            );
-                        }
-                        else
-                        {
-                            await handler(context);
-                        }
-
-                        context.Response.Close();
+                        await context.Response.OutputStream
+                            .WriteAsync(_defaultResponse, 0, _defaultResponse.Length);
                     }
-                );
+                    else
+                    {
+                        await handler(context);
+                    }
+
+                    context.Response.Close();
+                }
+            );
 
             return listener;
         }

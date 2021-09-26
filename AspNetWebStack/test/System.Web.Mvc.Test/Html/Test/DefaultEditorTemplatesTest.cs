@@ -903,10 +903,8 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper html = MakeHtmlHelper<ObjectTemplateModel>(null);
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                null,
-                typeof(ObjectTemplateModel)
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForType(null, typeof(ObjectTemplateModel));
             metadata.NullDisplayText = "Null Display Text";
             metadata.SimpleDisplayText = "Simple Display Text";
             html.ViewData.ModelMetadata = metadata;
@@ -931,10 +929,8 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ObjectTemplateModel model = new ObjectTemplateModel();
             HtmlHelper html = MakeHtmlHelper<ObjectTemplateModel>(model);
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                () => model,
-                typeof(ObjectTemplateModel)
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForType(() => model, typeof(ObjectTemplateModel));
             html.ViewData.ModelMetadata = metadata;
             metadata.NullDisplayText = "Null Display Text";
             metadata.SimpleDisplayText = simpleDisplayText;
@@ -1863,11 +1859,12 @@ namespace System.Web.Mvc.Html.Test
 
         private static string GetExpectedInputTag(string type, string value)
         {
-            return string.Format(
-                "<input class=\"text-box single-line\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"{0}\" value=\"{1}\" />",
-                type,
-                value
-            );
+            return string
+                .Format(
+                    "<input class=\"text-box single-line\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"{0}\" value=\"{1}\" />",
+                    type,
+                    value
+                );
         }
 
         private HtmlHelper MakeHtmlHelper<TModel>(object model)
@@ -1880,10 +1877,8 @@ namespace System.Web.Mvc.Html.Test
             ViewDataDictionary viewData = new ViewDataDictionary(model);
             viewData.TemplateInfo.HtmlFieldPrefix = "FieldPrefix";
             viewData.TemplateInfo.FormattedModelValue = formattedModelValue;
-            viewData.ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                () => model,
-                typeof(TModel)
-            );
+            viewData.ModelMetadata = new EmptyModelMetadataProvider()
+                .GetMetadataForType(() => model, typeof(TModel));
 
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
             mockHttpContext.Setup(o => o.Items).Returns(new Hashtable());

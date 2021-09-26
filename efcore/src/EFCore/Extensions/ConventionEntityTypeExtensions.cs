@@ -39,12 +39,13 @@ namespace Microsoft.EntityFrameworkCore
             LambdaExpression? definingQuery,
             bool fromDataAnnotation = false
         ) =>
-            ((EntityType)entityType).SetDefiningQuery(
-                definingQuery,
-                fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
-            );
+            ((EntityType)entityType)
+                .SetDefiningQuery(
+                    definingQuery,
+                    fromDataAnnotation
+                      ? ConfigurationSource.DataAnnotation
+                      : ConfigurationSource.Convention
+                );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="EntityTypeExtensions.GetDefiningQuery" />.

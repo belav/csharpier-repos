@@ -220,27 +220,23 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(
                 false,
-                ((ICollection<KeyValuePair<string, JToken>>)o).Remove(
-                    new KeyValuePair<string, JToken>("PropertyNameValue1", new JValue(1))
-                )
+                ((ICollection<KeyValuePair<string, JToken>>)o)
+                    .Remove(new KeyValuePair<string, JToken>("PropertyNameValue1", new JValue(1)))
             );
             Assert.AreEqual(
                 false,
-                ((ICollection<KeyValuePair<string, JToken>>)o).Remove(
-                    new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(2))
-                )
+                ((ICollection<KeyValuePair<string, JToken>>)o)
+                    .Remove(new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(2)))
             );
             Assert.AreEqual(
                 false,
-                ((ICollection<KeyValuePair<string, JToken>>)o).Remove(
-                    new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(1))
-                )
+                ((ICollection<KeyValuePair<string, JToken>>)o)
+                    .Remove(new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(1)))
             );
             Assert.AreEqual(
                 true,
-                ((ICollection<KeyValuePair<string, JToken>>)o).Remove(
-                    new KeyValuePair<string, JToken>("PropertyNameValue", v)
-                )
+                ((ICollection<KeyValuePair<string, JToken>>)o)
+                    .Remove(new KeyValuePair<string, JToken>("PropertyNameValue", v))
             );
 
             Assert.AreEqual(0, o.Children().Count());
@@ -278,9 +274,8 @@ namespace Newtonsoft.Json.Tests.Linq
         public void GenericCollectionAdd()
         {
             JObject o = new JObject();
-            ((ICollection<KeyValuePair<string, JToken>>)o).Add(
-                new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(1))
-            );
+            ((ICollection<KeyValuePair<string, JToken>>)o)
+                .Add(new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(1)));
 
             Assert.AreEqual(1, (int)o["PropertyNameValue"]);
             Assert.AreEqual(1, o.Children().Count());
@@ -309,29 +304,24 @@ namespace Newtonsoft.Json.Tests.Linq
             o.Add("PropertyNameValue", v);
             Assert.AreEqual(1, o.Children().Count());
 
-            bool contains = ((ICollection<KeyValuePair<string, JToken>>)o).Contains(
-                new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(1))
-            );
+            bool contains = ((ICollection<KeyValuePair<string, JToken>>)o)
+                .Contains(new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(1)));
             Assert.AreEqual(false, contains);
 
-            contains = ((ICollection<KeyValuePair<string, JToken>>)o).Contains(
-                new KeyValuePair<string, JToken>("PropertyNameValue", v)
-            );
+            contains = ((ICollection<KeyValuePair<string, JToken>>)o)
+                .Contains(new KeyValuePair<string, JToken>("PropertyNameValue", v));
             Assert.AreEqual(true, contains);
 
-            contains = ((ICollection<KeyValuePair<string, JToken>>)o).Contains(
-                new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(2))
-            );
+            contains = ((ICollection<KeyValuePair<string, JToken>>)o)
+                .Contains(new KeyValuePair<string, JToken>("PropertyNameValue", new JValue(2)));
             Assert.AreEqual(false, contains);
 
-            contains = ((ICollection<KeyValuePair<string, JToken>>)o).Contains(
-                new KeyValuePair<string, JToken>("PropertyNameValue1", new JValue(1))
-            );
+            contains = ((ICollection<KeyValuePair<string, JToken>>)o)
+                .Contains(new KeyValuePair<string, JToken>("PropertyNameValue1", new JValue(1)));
             Assert.AreEqual(false, contains);
 
-            contains = ((ICollection<KeyValuePair<string, JToken>>)o).Contains(
-                default(KeyValuePair<string, JToken>)
-            );
+            contains = ((ICollection<KeyValuePair<string, JToken>>)o)
+                .Contains(default(KeyValuePair<string, JToken>));
             Assert.AreEqual(false, contains);
         }
 
@@ -420,10 +410,8 @@ Parameter name: array",
                 () =>
                 {
                     JObject o = new JObject();
-                    ((ICollection<KeyValuePair<string, JToken>>)o).CopyTo(
-                        new KeyValuePair<string, JToken>[1],
-                        -1
-                    );
+                    ((ICollection<KeyValuePair<string, JToken>>)o)
+                        .CopyTo(new KeyValuePair<string, JToken>[1], -1);
                 },
                 @"arrayIndex is less than 0.
 Parameter name: arrayIndex",
@@ -438,10 +426,8 @@ Parameter name: arrayIndex",
                 () =>
                 {
                     JObject o = new JObject();
-                    ((ICollection<KeyValuePair<string, JToken>>)o).CopyTo(
-                        new KeyValuePair<string, JToken>[1],
-                        1
-                    );
+                    ((ICollection<KeyValuePair<string, JToken>>)o)
+                        .CopyTo(new KeyValuePair<string, JToken>[1], 1);
                 },
                 @"arrayIndex is equal to or greater than the length of array."
             );
@@ -458,10 +444,8 @@ Parameter name: arrayIndex",
                     o.Add("PropertyNameValue2", new JValue(2));
                     o.Add("PropertyNameValue3", new JValue(3));
 
-                    ((ICollection<KeyValuePair<string, JToken>>)o).CopyTo(
-                        new KeyValuePair<string, JToken>[3],
-                        1
-                    );
+                    ((ICollection<KeyValuePair<string, JToken>>)o)
+                        .CopyTo(new KeyValuePair<string, JToken>[3], 1);
                 },
                 @"The number of elements in the source JObject is greater than the available space from arrayIndex to the end of the destination array."
             );

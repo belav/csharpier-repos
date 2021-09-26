@@ -1315,7 +1315,8 @@ class C { }";
                 tree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].Kind()
             );
             var classdecl = (TypeDeclarationSyntax)tree.GetCompilationUnitRoot()
-                .ChildNodesAndTokens()[0].AsNode();
+                .ChildNodesAndTokens()[0]
+                .AsNode();
             Assert.Equal("class C { }", classdecl.ToString());
             Assert.True(classdecl.HasLeadingTrivia);
             var leading = classdecl.GetLeadingTrivia();
@@ -1862,12 +1863,11 @@ x
             var secondComment = trivias[3].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // we validate that the error is on the firstComment node
-            firstComment.GetDiagnostics()
-                .Verify(
-                    // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'bar'.'
-                    // */
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("bar")
-                );
+            firstComment.GetDiagnostics().Verify(
+                // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'bar'.'
+                // */
+                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("bar")
+            );
 
             // verify that the xml elements contain the right info
             VerifyXmlElement(secondComment.Content[1] as XmlElementSyntax, "goo", " ");
@@ -1895,9 +1895,8 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                    .GetType()
             );
 
             var keyword =
@@ -1946,9 +1945,8 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                    .GetType()
             );
 
             var keyword =
@@ -1997,9 +1995,8 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(PropertyDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                    .GetType()
             );
 
             var keyword =
@@ -2048,9 +2045,8 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(IndexerDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                    .GetType()
             );
 
             var keyword =
@@ -2099,9 +2095,8 @@ x
             // do we parsed a method?
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                    .GetType()
             );
 
             // we grab the open bracket for the Goo method decl
@@ -2155,7 +2150,8 @@ x
             // we grab the open bracket for the Goo method decl
             var typeParameter = (
                 tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).TypeParameterList.Parameters.Single();
+            ).TypeParameterList.Parameters
+                .Single();
 
             var trivias = typeParameter.GetLeadingTrivia();
 
@@ -2199,9 +2195,8 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                    .GetType()
             );
 
             var keyword =
@@ -2703,12 +2698,11 @@ class C{}";
 
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
-            doc.GetDiagnostics()
-                .Verify(
-                    // (2,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'Goo'.'
-                    // class C{}
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("Goo")
-                );
+            doc.GetDiagnostics().Verify(
+                // (2,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'Goo'.'
+                // class C{}
+                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("Goo")
+            );
         }
 
         [WorkItem(906752, "DevDiv/Personal")]
@@ -2733,12 +2727,11 @@ class C{}";
 
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
-            doc.GetDiagnostics()
-                .Verify(
-                    // (1,9): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'Goo'.'
-                    // /**<Goo>*/
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("Goo")
-                );
+            doc.GetDiagnostics().Verify(
+                // (1,9): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'Goo'.'
+                // /**<Goo>*/
+                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("Goo")
+            );
         }
 
         [Fact]
@@ -2821,15 +2814,14 @@ class C{}";
 
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
-            doc.GetDiagnostics()
-                .Verify(
-                    // (2,8): warning CS1570: XML comment has badly formed XML -- 'End tag 'goo' does not match the start tag 'bar'.'
-                    // <bar></goo>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "goo").WithArguments("goo", "bar"),
-                    // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'goo'.'
-                    // */
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("goo")
-                );
+            doc.GetDiagnostics().Verify(
+                // (2,8): warning CS1570: XML comment has badly formed XML -- 'End tag 'goo' does not match the start tag 'bar'.'
+                // <bar></goo>
+                Diagnostic(ErrorCode.WRN_XMLParseError, "goo").WithArguments("goo", "bar"),
+                // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'goo'.'
+                // */
+                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("goo")
+            );
         }
 
         [Fact]
@@ -2851,15 +2843,14 @@ class C{}";
 
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
-            doc.GetDiagnostics()
-                .Verify(
-                    // (2,11): warning CS1570: XML comment has badly formed XML -- 'End tag 'goo' does not match the start tag 'bar'.'
-                    // ///<bar></goo>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "goo").WithArguments("goo", "bar"),
-                    // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'goo'.'
-                    // class C{}
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("goo")
-                );
+            doc.GetDiagnostics().Verify(
+                // (2,11): warning CS1570: XML comment has badly formed XML -- 'End tag 'goo' does not match the start tag 'bar'.'
+                // ///<bar></goo>
+                Diagnostic(ErrorCode.WRN_XMLParseError, "goo").WithArguments("goo", "bar"),
+                // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'goo'.'
+                // class C{}
+                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("goo")
+            );
         }
 
         [Fact]
@@ -3101,33 +3092,32 @@ class A
 }";
 
             var tree = Parse(text);
-            tree.GetDiagnostics()
-                .Verify(
-                    // (4,19): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                    //     /// <see cref=”A()”/>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (4,23): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                    //     /// <see cref=”A()”/>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (5,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                    //     /// <param name=”x”/>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (5,23): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                    //     /// <param name=”x”/>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // What's happening with the text attribute is that "”/>" is correctly (if unintuitively) being consumed as part of the
-                    // attribute value.  It then complains about the missing closing quotation mark and '/>'.
+            tree.GetDiagnostics().Verify(
+                // (4,19): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                //     /// <see cref=”A()”/>
+                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                // (4,23): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                //     /// <see cref=”A()”/>
+                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                // (5,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                //     /// <param name=”x”/>
+                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                // (5,23): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                //     /// <param name=”x”/>
+                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                // What's happening with the text attribute is that "”/>" is correctly (if unintuitively) being consumed as part of the
+                // attribute value.  It then complains about the missing closing quotation mark and '/>'.
 
-                    // (6,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                    //     /// <other attr=”value”/>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (7,1): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for string literal.'
-                    //     void M(int x) { }
-                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag 'other'.'
-                    //     void M(int x) { }
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("other")
-                );
+                // (6,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                //     /// <other attr=”value”/>
+                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                // (7,1): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for string literal.'
+                //     void M(int x) { }
+                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag 'other'.'
+                //     void M(int x) { }
+                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("other")
+            );
         }
 
         [WorkItem(546989, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546989")]
@@ -3154,37 +3144,36 @@ public class Program
 }";
 
             var tree = Parse(text);
-            tree.GetDiagnostics()
-                .Verify(
-                    // (8,44): warning CS1570: XML comment has badly formed XML -- 'Missing equals sign between attribute and attribute value.'
-                    //     /// path is of the format <project name>\<nodename>\<nodename>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (9,11): warning CS1570: XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'nodename'.'
-                    //     /// </summary>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "summary")
-                        .WithArguments("summary", "nodename"),
-                    // (10,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                    //     /// <param name=”metadata”></param>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (10,30): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                    //     /// <param name=”metadata”></param>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (11,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                    //     /// <param name=”provider”></param>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (11,30): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                    //     /// <param name=”provider”></param>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'nodename'.'
-                    //     protected void GetEntityConnectionString(
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("nodename"),
-                    // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'project'.'
-                    //     protected void GetEntityConnectionString(
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("project"),
-                    // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
-                    //     protected void GetEntityConnectionString(
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("summary")
-                );
+            tree.GetDiagnostics().Verify(
+                // (8,44): warning CS1570: XML comment has badly formed XML -- 'Missing equals sign between attribute and attribute value.'
+                //     /// path is of the format <project name>\<nodename>\<nodename>
+                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                // (9,11): warning CS1570: XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'nodename'.'
+                //     /// </summary>
+                Diagnostic(ErrorCode.WRN_XMLParseError, "summary")
+                    .WithArguments("summary", "nodename"),
+                // (10,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                //     /// <param name=”metadata”></param>
+                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                // (10,30): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                //     /// <param name=”metadata”></param>
+                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                // (11,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                //     /// <param name=”provider”></param>
+                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                // (11,30): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                //     /// <param name=”provider”></param>
+                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'nodename'.'
+                //     protected void GetEntityConnectionString(
+                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("nodename"),
+                // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'project'.'
+                //     protected void GetEntityConnectionString(
+                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("project"),
+                // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+                //     protected void GetEntityConnectionString(
+                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("summary")
+            );
         }
 
         [WorkItem(547188, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/547188")]
@@ -3202,21 +3191,20 @@ public class Program
 }";
 
             var tree = Parse(text);
-            tree.GetDiagnostics()
-                .Verify(
-                    // (3,8): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                    // /// <A: B/>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, " "),
-                    // (4,7): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                    // /// <A :B/>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, " "),
-                    // (5,7): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                    // /// <A : B/>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, " "),
-                    // (5,9): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                    // /// <A : B/>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, " ")
-                );
+            tree.GetDiagnostics().Verify(
+                // (3,8): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                // /// <A: B/>
+                Diagnostic(ErrorCode.WRN_XMLParseError, " "),
+                // (4,7): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                // /// <A :B/>
+                Diagnostic(ErrorCode.WRN_XMLParseError, " "),
+                // (5,7): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                // /// <A : B/>
+                Diagnostic(ErrorCode.WRN_XMLParseError, " "),
+                // (5,9): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                // /// <A : B/>
+                Diagnostic(ErrorCode.WRN_XMLParseError, " ")
+            );
         }
 
         [Fact]
@@ -3238,25 +3226,24 @@ public class Program
 }";
 
             var tree = Parse(text);
-            tree.GetDiagnostics()
-                .Verify(
-                    // (7,7): warning CS1570: XML comment has badly formed XML -- 'End tag 'A :B' does not match the start tag 'A:B'.'
-                    // /// </A :B>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "A :B")
-                        .WithArguments("A :B", "A:B")
-                        .WithLocation(7, 7),
-                    // (7,8): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                    // /// </A :B>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, " ").WithLocation(7, 8),
-                    // (10,7): warning CS1570: XML comment has badly formed XML -- 'End tag 'A: B' does not match the start tag 'A:B'.'
-                    // /// </A: B>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, "A: B")
-                        .WithArguments("A: B", "A:B")
-                        .WithLocation(10, 7),
-                    // (10,9): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                    // /// </A: B>
-                    Diagnostic(ErrorCode.WRN_XMLParseError, " ").WithLocation(10, 9)
-                );
+            tree.GetDiagnostics().Verify(
+                // (7,7): warning CS1570: XML comment has badly formed XML -- 'End tag 'A :B' does not match the start tag 'A:B'.'
+                // /// </A :B>
+                Diagnostic(ErrorCode.WRN_XMLParseError, "A :B")
+                    .WithArguments("A :B", "A:B")
+                    .WithLocation(7, 7),
+                // (7,8): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                // /// </A :B>
+                Diagnostic(ErrorCode.WRN_XMLParseError, " ").WithLocation(7, 8),
+                // (10,7): warning CS1570: XML comment has badly formed XML -- 'End tag 'A: B' does not match the start tag 'A:B'.'
+                // /// </A: B>
+                Diagnostic(ErrorCode.WRN_XMLParseError, "A: B")
+                    .WithArguments("A: B", "A:B")
+                    .WithLocation(10, 7),
+                // (10,9): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                // /// </A: B>
+                Diagnostic(ErrorCode.WRN_XMLParseError, " ").WithLocation(10, 9)
+            );
         }
 
         [Fact]
@@ -3570,12 +3557,11 @@ public class Program
                 filterTree: comp.SyntaxTrees[0]
             );
 
-            diags.ToReadOnlyAndFree()
-                .Verify(
-                    // (2,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /// <summary> a
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1)
-                );
+            diags.ToReadOnlyAndFree().Verify(
+                // (2,1): warning CS1587: XML comment is not placed on a valid language element
+                // /// <summary> a
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1)
+            );
 
             diags = DiagnosticBag.GetInstance();
 
@@ -3602,12 +3588,11 @@ public class Program
                 filterTree: comp.SyntaxTrees[1]
             );
 
-            diags.ToReadOnlyAndFree()
-                .Verify(
-                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /// <summary> b
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
-                );
+            diags.ToReadOnlyAndFree().Verify(
+                // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                // /// <summary> b
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
+            );
 
             diags = DiagnosticBag.GetInstance();
 
@@ -3620,15 +3605,14 @@ public class Program
                 filterTree: null
             );
 
-            diags.ToReadOnlyAndFree()
-                .Verify(
-                    // (2,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /// <summary> a
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1),
-                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /// <summary> b
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
-                );
+            diags.ToReadOnlyAndFree().Verify(
+                // (2,1): warning CS1587: XML comment is not placed on a valid language element
+                // /// <summary> a
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1),
+                // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                // /// <summary> b
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
+            );
 
             diags = DiagnosticBag.GetInstance();
 
@@ -3642,15 +3626,14 @@ public class Program
                 filterSpanWithinTree: new TextSpan(0, 0)
             );
 
-            diags.ToReadOnlyAndFree()
-                .Verify(
-                    // (2,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /// <summary> a
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1),
-                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                    // /// <summary> b
-                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
-                );
+            diags.ToReadOnlyAndFree().Verify(
+                // (2,1): warning CS1587: XML comment is not placed on a valid language element
+                // /// <summary> a
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1),
+                // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                // /// <summary> b
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
+            );
         }
 
         #region Xml Test helpers
@@ -3683,12 +3666,14 @@ public class Program
                 from e in actual
                 orderby e.Code
                 select new TestError(e.Code, e.Severity == DiagnosticSeverity.Warning)
-            ).ToList();
+            )
+                .ToList();
             var expectedErrors = (
                 from e in expected
                 orderby e.ErrorCode
                 select new TestError(e.ErrorCode, e.IsWarning)
-            ).ToList();
+            )
+                .ToList();
 
             for (int i = 0; i < expected.Count; i++)
             {

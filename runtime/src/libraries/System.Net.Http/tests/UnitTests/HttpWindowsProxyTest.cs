@@ -39,44 +39,43 @@ namespace System.Net.Http.Tests
         )
         {
             RemoteExecutor.Invoke(
-                    (proxyString, insecureProxy, secureProxy) =>
-                    {
-                        FakeRegistry.Reset();
+                (proxyString, insecureProxy, secureProxy) =>
+                {
+                    FakeRegistry.Reset();
 
-                        Assert.False(HttpWindowsProxy.TryCreate(out IWebProxy p));
+                    Assert.False(HttpWindowsProxy.TryCreate(out IWebProxy p));
 
-                        FakeRegistry.WinInetProxySettings.Proxy = proxyString;
-                        WinInetProxyHelper proxyHelper = new WinInetProxyHelper();
-                        Assert.Null(proxyHelper.AutoConfigUrl);
-                        Assert.Equal(proxyString, proxyHelper.Proxy);
-                        Assert.False(proxyHelper.AutoSettingsUsed);
-                        Assert.True(proxyHelper.ManualSettingsUsed);
+                    FakeRegistry.WinInetProxySettings.Proxy = proxyString;
+                    WinInetProxyHelper proxyHelper = new WinInetProxyHelper();
+                    Assert.Null(proxyHelper.AutoConfigUrl);
+                    Assert.Equal(proxyString, proxyHelper.Proxy);
+                    Assert.False(proxyHelper.AutoSettingsUsed);
+                    Assert.True(proxyHelper.ManualSettingsUsed);
 
-                        Assert.True(HttpWindowsProxy.TryCreate(out p));
-                        Assert.NotNull(p);
+                    Assert.True(HttpWindowsProxy.TryCreate(out p));
+                    Assert.NotNull(p);
 
-                        Assert.Equal(
-                            !string.IsNullOrEmpty(insecureProxy) ? new Uri(insecureProxy) : null,
-                            p.GetProxy(new Uri(fooHttp))
-                        );
-                        Assert.Equal(
-                            !string.IsNullOrEmpty(secureProxy) ? new Uri(secureProxy) : null,
-                            p.GetProxy(new Uri(fooHttps))
-                        );
-                        Assert.Equal(
-                            !string.IsNullOrEmpty(insecureProxy) ? new Uri(insecureProxy) : null,
-                            p.GetProxy(new Uri(fooWs))
-                        );
-                        Assert.Equal(
-                            !string.IsNullOrEmpty(secureProxy) ? new Uri(secureProxy) : null,
-                            p.GetProxy(new Uri(fooWss))
-                        );
-                    },
-                    rawProxyString,
-                    rawInsecureUri ?? string.Empty,
-                    rawSecureUri ?? string.Empty
-                )
-                .Dispose();
+                    Assert.Equal(
+                        !string.IsNullOrEmpty(insecureProxy) ? new Uri(insecureProxy) : null,
+                        p.GetProxy(new Uri(fooHttp))
+                    );
+                    Assert.Equal(
+                        !string.IsNullOrEmpty(secureProxy) ? new Uri(secureProxy) : null,
+                        p.GetProxy(new Uri(fooHttps))
+                    );
+                    Assert.Equal(
+                        !string.IsNullOrEmpty(insecureProxy) ? new Uri(insecureProxy) : null,
+                        p.GetProxy(new Uri(fooWs))
+                    );
+                    Assert.Equal(
+                        !string.IsNullOrEmpty(secureProxy) ? new Uri(secureProxy) : null,
+                        p.GetProxy(new Uri(fooWss))
+                    );
+                },
+                rawProxyString,
+                rawInsecureUri ?? string.Empty,
+                rawSecureUri ?? string.Empty
+            ).Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -88,54 +87,52 @@ namespace System.Net.Http.Tests
         )
         {
             RemoteExecutor.Invoke(
-                    (proxyString, insecureProxy, secureProxy) =>
-                    {
-                        TestControl.ResetAll();
+                (proxyString, insecureProxy, secureProxy) =>
+                {
+                    TestControl.ResetAll();
 
-                        Assert.False(HttpWindowsProxy.TryCreate(out IWebProxy p));
+                    Assert.False(HttpWindowsProxy.TryCreate(out IWebProxy p));
 
-                        FakeRegistry.WinInetProxySettings.AutoConfigUrl =
-                            "http://127.0.0.1/proxy.pac";
-                        WinInetProxyHelper proxyHelper = new WinInetProxyHelper();
-                        Assert.Null(proxyHelper.Proxy);
-                        Assert.Equal(
-                            FakeRegistry.WinInetProxySettings.AutoConfigUrl,
-                            proxyHelper.AutoConfigUrl
-                        );
-                        Assert.False(proxyHelper.ManualSettingsUsed);
-                        Assert.True(proxyHelper.AutoSettingsUsed);
+                    FakeRegistry.WinInetProxySettings.AutoConfigUrl = "http://127.0.0.1/proxy.pac";
+                    WinInetProxyHelper proxyHelper = new WinInetProxyHelper();
+                    Assert.Null(proxyHelper.Proxy);
+                    Assert.Equal(
+                        FakeRegistry.WinInetProxySettings.AutoConfigUrl,
+                        proxyHelper.AutoConfigUrl
+                    );
+                    Assert.False(proxyHelper.ManualSettingsUsed);
+                    Assert.True(proxyHelper.AutoSettingsUsed);
 
-                        Assert.True(HttpWindowsProxy.TryCreate(out p));
-                        Assert.NotNull(p);
+                    Assert.True(HttpWindowsProxy.TryCreate(out p));
+                    Assert.NotNull(p);
 
-                        // With a HttpWindowsProxy created configured to use auto-config, now set Proxy so when it
-                        // attempts to resolve a proxy, it resolves our string.
-                        FakeRegistry.WinInetProxySettings.Proxy = proxyString;
-                        proxyHelper = new WinInetProxyHelper();
-                        Assert.Equal(proxyString, proxyHelper.Proxy);
+                    // With a HttpWindowsProxy created configured to use auto-config, now set Proxy so when it
+                    // attempts to resolve a proxy, it resolves our string.
+                    FakeRegistry.WinInetProxySettings.Proxy = proxyString;
+                    proxyHelper = new WinInetProxyHelper();
+                    Assert.Equal(proxyString, proxyHelper.Proxy);
 
-                        Assert.Equal(
-                            !string.IsNullOrEmpty(insecureProxy) ? new Uri(insecureProxy) : null,
-                            p.GetProxy(new Uri(fooHttp))
-                        );
-                        Assert.Equal(
-                            !string.IsNullOrEmpty(secureProxy) ? new Uri(secureProxy) : null,
-                            p.GetProxy(new Uri(fooHttps))
-                        );
-                        Assert.Equal(
-                            !string.IsNullOrEmpty(insecureProxy) ? new Uri(insecureProxy) : null,
-                            p.GetProxy(new Uri(fooWs))
-                        );
-                        Assert.Equal(
-                            !string.IsNullOrEmpty(secureProxy) ? new Uri(secureProxy) : null,
-                            p.GetProxy(new Uri(fooWss))
-                        );
-                    },
-                    rawProxyString,
-                    rawInsecureUri ?? string.Empty,
-                    rawSecureUri ?? string.Empty
-                )
-                .Dispose();
+                    Assert.Equal(
+                        !string.IsNullOrEmpty(insecureProxy) ? new Uri(insecureProxy) : null,
+                        p.GetProxy(new Uri(fooHttp))
+                    );
+                    Assert.Equal(
+                        !string.IsNullOrEmpty(secureProxy) ? new Uri(secureProxy) : null,
+                        p.GetProxy(new Uri(fooHttps))
+                    );
+                    Assert.Equal(
+                        !string.IsNullOrEmpty(insecureProxy) ? new Uri(insecureProxy) : null,
+                        p.GetProxy(new Uri(fooWs))
+                    );
+                    Assert.Equal(
+                        !string.IsNullOrEmpty(secureProxy) ? new Uri(secureProxy) : null,
+                        p.GetProxy(new Uri(fooWss))
+                    );
+                },
+                rawProxyString,
+                rawInsecureUri ?? string.Empty,
+                rawSecureUri ?? string.Empty
+            ).Dispose();
         }
 
         public static TheoryData<string, string, string> ProxyParsingData =>
@@ -192,24 +189,23 @@ namespace System.Net.Http.Tests
         public void HttpProxy_WindowsProxy_Loaded(string rawProxyString, string expectedUri)
         {
             RemoteExecutor.Invoke(
-                    (proxyString, expectedString) =>
-                    {
-                        IWebProxy p;
+                (proxyString, expectedString) =>
+                {
+                    IWebProxy p;
 
-                        FakeRegistry.Reset();
+                    FakeRegistry.Reset();
 
-                        FakeRegistry.WinInetProxySettings.Proxy = proxyString;
-                        WinInetProxyHelper proxyHelper = new WinInetProxyHelper();
+                    FakeRegistry.WinInetProxySettings.Proxy = proxyString;
+                    WinInetProxyHelper proxyHelper = new WinInetProxyHelper();
 
-                        Assert.True(HttpWindowsProxy.TryCreate(out p));
-                        Assert.NotNull(p);
-                        Assert.Equal(expectedString, p.GetProxy(new Uri(fooHttp)).ToString());
-                        Assert.Equal(expectedString, p.GetProxy(new Uri(fooHttps)).ToString());
-                    },
-                    rawProxyString,
-                    expectedUri
-                )
-                .Dispose();
+                    Assert.True(HttpWindowsProxy.TryCreate(out p));
+                    Assert.NotNull(p);
+                    Assert.Equal(expectedString, p.GetProxy(new Uri(fooHttp)).ToString());
+                    Assert.Equal(expectedString, p.GetProxy(new Uri(fooHttps)).ToString());
+                },
+                rawProxyString,
+                expectedUri
+            ).Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -233,26 +229,25 @@ namespace System.Net.Http.Tests
         public void HttpProxy_Local_Bypassed(string name, bool shouldBypass)
         {
             RemoteExecutor.Invoke(
-                    (url, expected) =>
-                    {
-                        bool expectedResult = Boolean.Parse(expected);
-                        IWebProxy p;
+                (url, expected) =>
+                {
+                    bool expectedResult = Boolean.Parse(expected);
+                    IWebProxy p;
 
-                        FakeRegistry.Reset();
-                        FakeRegistry.WinInetProxySettings.Proxy = insecureProxyUri;
-                        FakeRegistry.WinInetProxySettings.ProxyBypass =
-                            "23.23.86.44;*.foo.com;<local>;BAR.COM; ; 162*;[2002::11];[*:f8b0:4005:80a::200e]; http://www.xn--mnchhausen-9db.at;http://*.xn--bb-bjab.eu;http://xn--bb-bjab.eu;";
+                    FakeRegistry.Reset();
+                    FakeRegistry.WinInetProxySettings.Proxy = insecureProxyUri;
+                    FakeRegistry.WinInetProxySettings.ProxyBypass =
+                        "23.23.86.44;*.foo.com;<local>;BAR.COM; ; 162*;[2002::11];[*:f8b0:4005:80a::200e]; http://www.xn--mnchhausen-9db.at;http://*.xn--bb-bjab.eu;http://xn--bb-bjab.eu;";
 
-                        Assert.True(HttpWindowsProxy.TryCreate(out p));
-                        Assert.NotNull(p);
+                    Assert.True(HttpWindowsProxy.TryCreate(out p));
+                    Assert.NotNull(p);
 
-                        Uri u = new Uri(url);
-                        Assert.Equal(expectedResult, p.GetProxy(u) == null);
-                    },
-                    name,
-                    shouldBypass.ToString()
-                )
-                .Dispose();
+                    Uri u = new Uri(url);
+                    Assert.Equal(expectedResult, p.GetProxy(u) == null);
+                },
+                name,
+                shouldBypass.ToString()
+            ).Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -264,34 +259,33 @@ namespace System.Net.Http.Tests
         public void HttpProxy_Local_Parsing(string bypass, int count)
         {
             RemoteExecutor.Invoke(
-                    (bypassValue, expected) =>
+                (bypassValue, expected) =>
+                {
+                    int expectedCount = Convert.ToInt32(expected);
+                    IWebProxy p;
+
+                    FakeRegistry.Reset();
+                    FakeRegistry.WinInetProxySettings.Proxy = insecureProxyUri;
+                    FakeRegistry.WinInetProxySettings.ProxyBypass = bypassValue;
+
+                    Assert.True(HttpWindowsProxy.TryCreate(out p));
+                    Assert.NotNull(p);
+
+                    HttpWindowsProxy sp = p as HttpWindowsProxy;
+                    Assert.NotNull(sp);
+
+                    if (expectedCount > 0)
                     {
-                        int expectedCount = Convert.ToInt32(expected);
-                        IWebProxy p;
-
-                        FakeRegistry.Reset();
-                        FakeRegistry.WinInetProxySettings.Proxy = insecureProxyUri;
-                        FakeRegistry.WinInetProxySettings.ProxyBypass = bypassValue;
-
-                        Assert.True(HttpWindowsProxy.TryCreate(out p));
-                        Assert.NotNull(p);
-
-                        HttpWindowsProxy sp = p as HttpWindowsProxy;
-                        Assert.NotNull(sp);
-
-                        if (expectedCount > 0)
-                        {
-                            Assert.Equal(expectedCount, sp.BypassList.Count);
-                        }
-                        else
-                        {
-                            Assert.Null(sp.BypassList);
-                        }
-                    },
-                    bypass,
-                    count.ToString()
-                )
-                .Dispose();
+                        Assert.Equal(expectedCount, sp.BypassList.Count);
+                    }
+                    else
+                    {
+                        Assert.Null(sp.BypassList);
+                    }
+                },
+                bypass,
+                count.ToString()
+            ).Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -303,27 +297,26 @@ namespace System.Net.Http.Tests
         public void HttpProxy_InvalidWindowsProxy_Null(string rawProxyString)
         {
             RemoteExecutor.Invoke(
-                    (proxyString) =>
-                    {
-                        IWebProxy p;
+                (proxyString) =>
+                {
+                    IWebProxy p;
 
-                        FakeRegistry.Reset();
-                        Assert.False(HttpWindowsProxy.TryCreate(out p));
+                    FakeRegistry.Reset();
+                    Assert.False(HttpWindowsProxy.TryCreate(out p));
 
-                        FakeRegistry.WinInetProxySettings.Proxy = proxyString;
-                        WinInetProxyHelper proxyHelper = new WinInetProxyHelper();
+                    FakeRegistry.WinInetProxySettings.Proxy = proxyString;
+                    WinInetProxyHelper proxyHelper = new WinInetProxyHelper();
 
-                        Assert.True(HttpWindowsProxy.TryCreate(out p));
-                        Assert.NotNull(p);
+                    Assert.True(HttpWindowsProxy.TryCreate(out p));
+                    Assert.NotNull(p);
 
-                        Assert.Null(p.GetProxy(new Uri(fooHttp)));
-                        Assert.Null(p.GetProxy(new Uri(fooHttps)));
-                        Assert.Null(p.GetProxy(new Uri(fooWs)));
-                        Assert.Null(p.GetProxy(new Uri(fooWss)));
-                    },
-                    rawProxyString
-                )
-                .Dispose();
+                    Assert.Null(p.GetProxy(new Uri(fooHttp)));
+                    Assert.Null(p.GetProxy(new Uri(fooHttps)));
+                    Assert.Null(p.GetProxy(new Uri(fooWs)));
+                    Assert.Null(p.GetProxy(new Uri(fooWss)));
+                },
+                rawProxyString
+            ).Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -336,54 +329,53 @@ namespace System.Net.Http.Tests
         )
         {
             RemoteExecutor.Invoke(
-                    (manualConfigValue, proxyConfigValue, urlValue, expectedValue) =>
+                (manualConfigValue, proxyConfigValue, urlValue, expectedValue) =>
+                {
+                    bool manual = bool.Parse(manualConfigValue);
+                    Uri requestUri = new Uri(urlValue);
+                    string[] expectedUris = expectedValue.Split(
+                        ';',
+                        StringSplitOptions.RemoveEmptyEntries
+                    );
+
+                    TestControl.ResetAll();
+
+                    if (manual)
                     {
-                        bool manual = bool.Parse(manualConfigValue);
-                        Uri requestUri = new Uri(urlValue);
-                        string[] expectedUris = expectedValue.Split(
-                            ';',
-                            StringSplitOptions.RemoveEmptyEntries
-                        );
+                        FakeRegistry.WinInetProxySettings.Proxy = proxyConfigValue;
+                    }
+                    else
+                    {
+                        FakeRegistry.WinInetProxySettings.AutoConfigUrl = "http://dummy.com";
+                    }
 
-                        TestControl.ResetAll();
+                    Assert.True(HttpWindowsProxy.TryCreate(out IWebProxy p));
+                    HttpWindowsProxy wp = Assert.IsType<HttpWindowsProxy>(p);
 
-                        if (manual)
-                        {
-                            FakeRegistry.WinInetProxySettings.Proxy = proxyConfigValue;
-                        }
-                        else
-                        {
-                            FakeRegistry.WinInetProxySettings.AutoConfigUrl = "http://dummy.com";
-                        }
+                    if (!manual)
+                    {
+                        // Now that HttpWindowsProxy has been constructed to use autoconfig,
+                        // set Proxy which will be used by Fakes for all the per-URL calls.
+                        FakeRegistry.WinInetProxySettings.Proxy = proxyConfigValue;
+                    }
 
-                        Assert.True(HttpWindowsProxy.TryCreate(out IWebProxy p));
-                        HttpWindowsProxy wp = Assert.IsType<HttpWindowsProxy>(p);
+                    MultiProxy multi = wp.GetMultiProxy(requestUri);
 
-                        if (!manual)
-                        {
-                            // Now that HttpWindowsProxy has been constructed to use autoconfig,
-                            // set Proxy which will be used by Fakes for all the per-URL calls.
-                            FakeRegistry.WinInetProxySettings.Proxy = proxyConfigValue;
-                        }
+                    for (int i = 0; i < expectedUris.Length; ++i)
+                    {
+                        // Both the current enumerator and the proxy globally should move to the next proxy.
+                        Assert.True(multi.ReadNext(out Uri uri, out _));
+                        Assert.Equal(new Uri(expectedUris[i]), uri);
+                        Assert.Equal(new Uri(expectedUris[i]), p.GetProxy(requestUri));
+                    }
 
-                        MultiProxy multi = wp.GetMultiProxy(requestUri);
-
-                        for (int i = 0; i < expectedUris.Length; ++i)
-                        {
-                            // Both the current enumerator and the proxy globally should move to the next proxy.
-                            Assert.True(multi.ReadNext(out Uri uri, out _));
-                            Assert.Equal(new Uri(expectedUris[i]), uri);
-                            Assert.Equal(new Uri(expectedUris[i]), p.GetProxy(requestUri));
-                        }
-
-                        Assert.False(multi.ReadNext(out _, out _));
-                    },
-                    manualConfig.ToString(),
-                    proxyConfig,
-                    url,
-                    expected
-                )
-                .Dispose();
+                    Assert.False(multi.ReadNext(out _, out _));
+                },
+                manualConfig.ToString(),
+                proxyConfig,
+                url,
+                expected
+            ).Dispose();
         }
 
         public static IEnumerable<object[]> HttpProxy_Multi_Data()
@@ -437,76 +429,75 @@ namespace System.Net.Http.Tests
                 "http://proxy-a.com http://proxy-b.com http://proxy-c.com";
 
             RemoteExecutor.Invoke(
-                    manualValue =>
+                manualValue =>
+                {
+                    bool manual = bool.Parse(manualValue);
+
+                    Uri requestUri = new Uri("http://request.com");
+                    Uri firstProxy = new Uri("http://proxy-a.com");
+                    Uri secondProxy = new Uri("http://proxy-b.com");
+                    Uri thirdProxy = new Uri("http://proxy-c.com");
+
+                    TestControl.ResetAll();
+
+                    if (manual)
                     {
-                        bool manual = bool.Parse(manualValue);
+                        FakeRegistry.WinInetProxySettings.Proxy = MultiProxyConfig;
+                    }
+                    else
+                    {
+                        FakeRegistry.WinInetProxySettings.AutoConfigUrl = "http://dummy.com";
+                    }
 
-                        Uri requestUri = new Uri("http://request.com");
-                        Uri firstProxy = new Uri("http://proxy-a.com");
-                        Uri secondProxy = new Uri("http://proxy-b.com");
-                        Uri thirdProxy = new Uri("http://proxy-c.com");
+                    Assert.True(HttpWindowsProxy.TryCreate(out IWebProxy p));
+                    HttpWindowsProxy wp = Assert.IsType<HttpWindowsProxy>(p);
 
-                        TestControl.ResetAll();
+                    if (!manual)
+                    {
+                        // Now that HttpWindowsProxy has been constructed to use autoconfig,
+                        // set Proxy which will be used by Fakes for all the per-URL calls.
+                        FakeRegistry.WinInetProxySettings.Proxy = MultiProxyConfig;
+                    }
 
-                        if (manual)
-                        {
-                            FakeRegistry.WinInetProxySettings.Proxy = MultiProxyConfig;
-                        }
-                        else
-                        {
-                            FakeRegistry.WinInetProxySettings.AutoConfigUrl = "http://dummy.com";
-                        }
+                    MultiProxy multiA = wp.GetMultiProxy(requestUri);
+                    MultiProxy multiB = wp.GetMultiProxy(requestUri);
 
-                        Assert.True(HttpWindowsProxy.TryCreate(out IWebProxy p));
-                        HttpWindowsProxy wp = Assert.IsType<HttpWindowsProxy>(p);
+                    // Assert first proxy is returned across all three methods.
+                    Assert.True(multiA.ReadNext(out Uri proxyA, out _));
+                    Assert.True(multiB.ReadNext(out Uri proxyB, out _));
+                    Assert.Equal(firstProxy, proxyA);
+                    Assert.Equal(firstProxy, proxyB);
+                    Assert.Equal(firstProxy, p.GetProxy(requestUri));
 
-                        if (!manual)
-                        {
-                            // Now that HttpWindowsProxy has been constructed to use autoconfig,
-                            // set Proxy which will be used by Fakes for all the per-URL calls.
-                            FakeRegistry.WinInetProxySettings.Proxy = MultiProxyConfig;
-                        }
+                    // Assert second proxy is returned across all three methods.
+                    Assert.True(multiA.ReadNext(out proxyA, out _));
+                    Assert.True(multiB.ReadNext(out proxyB, out _));
+                    Assert.Equal(secondProxy, proxyA);
+                    Assert.Equal(secondProxy, proxyB);
+                    Assert.Equal(secondProxy, p.GetProxy(requestUri));
 
-                        MultiProxy multiA = wp.GetMultiProxy(requestUri);
-                        MultiProxy multiB = wp.GetMultiProxy(requestUri);
+                    // Assert third proxy is returned from multiA.
+                    Assert.True(multiA.ReadNext(out proxyA, out _));
+                    Assert.Equal(thirdProxy, proxyA);
+                    Assert.Equal(thirdProxy, p.GetProxy(requestUri));
 
-                        // Assert first proxy is returned across all three methods.
-                        Assert.True(multiA.ReadNext(out Uri proxyA, out _));
-                        Assert.True(multiB.ReadNext(out Uri proxyB, out _));
-                        Assert.Equal(firstProxy, proxyA);
-                        Assert.Equal(firstProxy, proxyB);
-                        Assert.Equal(firstProxy, p.GetProxy(requestUri));
+                    // Enumerating multiA once more should exhaust all of our proxies.
+                    // So, multiB, still on secondProxy, should now also be exhausted because
+                    // when it tries thirdProxy it will see it marked as failed.
+                    Assert.False(multiA.ReadNext(out proxyA, out _));
+                    Assert.False(multiB.ReadNext(out proxyB, out _));
 
-                        // Assert second proxy is returned across all three methods.
-                        Assert.True(multiA.ReadNext(out proxyA, out _));
-                        Assert.True(multiB.ReadNext(out proxyB, out _));
-                        Assert.Equal(secondProxy, proxyA);
-                        Assert.Equal(secondProxy, proxyB);
-                        Assert.Equal(secondProxy, p.GetProxy(requestUri));
+                    // GetProxy should now return the proxy closest to being turned back on, which should be firstProxy.
+                    Assert.Equal(firstProxy, p.GetProxy(requestUri));
 
-                        // Assert third proxy is returned from multiA.
-                        Assert.True(multiA.ReadNext(out proxyA, out _));
-                        Assert.Equal(thirdProxy, proxyA);
-                        Assert.Equal(thirdProxy, p.GetProxy(requestUri));
-
-                        // Enumerating multiA once more should exhaust all of our proxies.
-                        // So, multiB, still on secondProxy, should now also be exhausted because
-                        // when it tries thirdProxy it will see it marked as failed.
-                        Assert.False(multiA.ReadNext(out proxyA, out _));
-                        Assert.False(multiB.ReadNext(out proxyB, out _));
-
-                        // GetProxy should now return the proxy closest to being turned back on, which should be firstProxy.
-                        Assert.Equal(firstProxy, p.GetProxy(requestUri));
-
-                        // Enumerating a new MultiProxy should again return the proxy closed to being turned back on, and no others.
-                        MultiProxy multiC = wp.GetMultiProxy(requestUri);
-                        Assert.True(multiC.ReadNext(out Uri proxyC, out _));
-                        Assert.Equal(firstProxy, proxyC);
-                        Assert.False(multiC.ReadNext(out proxyC, out _));
-                    },
-                    manualConfig.ToString()
-                )
-                .Dispose();
+                    // Enumerating a new MultiProxy should again return the proxy closed to being turned back on, and no others.
+                    MultiProxy multiC = wp.GetMultiProxy(requestUri);
+                    Assert.True(multiC.ReadNext(out Uri proxyC, out _));
+                    Assert.Equal(firstProxy, proxyC);
+                    Assert.False(multiC.ReadNext(out proxyC, out _));
+                },
+                manualConfig.ToString()
+            ).Dispose();
         }
     }
 }

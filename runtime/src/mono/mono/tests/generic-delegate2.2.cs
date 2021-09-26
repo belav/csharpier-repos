@@ -25,14 +25,10 @@ public class main
         Gen<string> gs = new Gen<string>();
         Gen<object> go = new Gen<object>();
 
-        MethodInfo miObj = typeof(Gen<object>).GetMethod(
-            "newArr",
-            BindingFlags.Public | BindingFlags.Instance
-        );
-        MethodInfo miStr = typeof(Gen<string>).GetMethod(
-            "newArr",
-            BindingFlags.Public | BindingFlags.Instance
-        );
+        MethodInfo miObj = typeof(Gen<object>)
+            .GetMethod("newArr", BindingFlags.Public | BindingFlags.Instance);
+        MethodInfo miStr = typeof(Gen<string>)
+            .GetMethod("newArr", BindingFlags.Public | BindingFlags.Instance);
 
         if (miObj == miStr)
         {

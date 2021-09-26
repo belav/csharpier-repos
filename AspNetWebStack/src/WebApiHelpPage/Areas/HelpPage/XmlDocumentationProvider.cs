@@ -136,8 +136,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             if (parameters.Length != 0)
             {
                 string[] parameterTypeNames = parameters.Select(
-                        param => GetTypeName(param.ParameterType)
-                    )
+                    param => GetTypeName(param.ParameterType)
+                )
                     .ToArray();
                 name += String.Format(
                     CultureInfo.InvariantCulture,

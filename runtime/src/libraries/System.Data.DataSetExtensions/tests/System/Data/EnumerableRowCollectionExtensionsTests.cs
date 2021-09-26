@@ -18,7 +18,8 @@ namespace System.Data
         {
             public override int Compare(T x, T y)
             {
-                return int.Parse((string)x.ItemArray[0])
+                return int
+                    .Parse((string)x.ItemArray[0])
                     .CompareTo(int.Parse((string)y.ItemArray[0]));
             }
         }

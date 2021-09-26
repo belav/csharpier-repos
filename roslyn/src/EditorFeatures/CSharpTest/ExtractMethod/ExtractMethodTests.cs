@@ -10892,11 +10892,11 @@ namespace ClassLibrary9
             var solution = new AdhocWorkspace().CurrentSolution;
             var projectId = ProjectId.CreateNewId();
             var project = solution.AddProject(
-                    projectId,
-                    "Project",
-                    "Project.dll",
-                    LanguageNames.CSharp
-                )
+                projectId,
+                "Project",
+                "Project.dll",
+                LanguageNames.CSharp
+            )
                 .GetProject(projectId);
 
             var document = project.AddMetadataReference(TestMetadata.Net451.mscorlib)
@@ -10931,10 +10931,11 @@ namespace ClassLibrary9
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(
-                PredefinedCommandHandlerNames.ExtractMethod,
-                ContentTypeNames.CSharpContentType
-            );
+            var handler = workspace.ExportProvider
+                .GetCommandHandler<ExtractMethodCommandHandler>(
+                    PredefinedCommandHandlerNames.ExtractMethod,
+                    ContentTypeNames.CSharpContentType
+                );
 
             var state = handler.GetCommandState(
                 new ExtractMethodCommandArgs(textView, textView.TextBuffer)

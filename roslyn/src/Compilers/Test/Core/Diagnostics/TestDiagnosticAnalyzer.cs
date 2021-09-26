@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             "AnalyzeAdditionalFile",
             "Initialize",
             "SupportedDiagnostics"
-        }.ToImmutableArray();
+        }
+            .ToImmutableArray();
 
         protected static readonly DiagnosticDescriptor DefaultDiagnostic =
 #pragma warning disable RS1029 // Do not use reserved diagnostic IDs.

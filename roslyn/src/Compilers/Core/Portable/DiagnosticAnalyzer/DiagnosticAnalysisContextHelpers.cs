@@ -73,10 +73,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (!isSupportedDiagnostic(diagnostic))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.UnsupportedDiagnosticReported,
-                        diagnostic.Id
-                    ),
+                    string
+                        .Format(CodeAnalysisResources.UnsupportedDiagnosticReported, diagnostic.Id),
                     nameof(diagnostic)
                 );
             }
@@ -129,11 +127,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 // Disallow diagnostics with source locations outside this compilation.
                 throw new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.InvalidDiagnosticLocationReported,
-                        id,
-                        location.SourceTree.FilePath
-                    ),
+                    string
+                        .Format(
+                            CodeAnalysisResources.InvalidDiagnosticLocationReported,
+                            id,
+                            location.SourceTree.FilePath
+                        ),
                     "diagnostic"
                 );
             }
@@ -142,12 +141,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 // Disallow diagnostics with source locations outside this compilation.
                 throw new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.InvalidDiagnosticSpanReported,
-                        id,
-                        location.SourceSpan,
-                        location.SourceTree.FilePath
-                    ),
+                    string
+                        .Format(
+                            CodeAnalysisResources.InvalidDiagnosticSpanReported,
+                            id,
+                            location.SourceSpan,
+                            location.SourceTree.FilePath
+                        ),
                     "diagnostic"
                 );
             }

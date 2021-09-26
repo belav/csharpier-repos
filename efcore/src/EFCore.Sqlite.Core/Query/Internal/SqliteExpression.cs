@@ -55,9 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 modifiers = strftimeFunction.Arguments.Skip(2).Concat(modifiers);
             }
 
-            var finalArguments = new[] { sqlExpressionFactory.Constant(format), timestring }.Concat(
-                modifiers
-            );
+            var finalArguments = new[] { sqlExpressionFactory.Constant(format), timestring }
+                .Concat(modifiers);
 
             return sqlExpressionFactory.Function(
                 "strftime",

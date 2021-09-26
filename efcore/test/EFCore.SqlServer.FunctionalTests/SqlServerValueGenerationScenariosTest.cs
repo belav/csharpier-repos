@@ -433,8 +433,8 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        private static readonly GeometryFactory GeometryFactory =
-            NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+        private static readonly GeometryFactory GeometryFactory = NtsGeometryServices.Instance
+            .CreateGeometryFactory(srid: 4326);
 
         public class BlogContextNonKeyDefaultValue : ContextBase
         {
@@ -648,9 +648,8 @@ RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
             {
                 context.GetService<IRelationalDatabaseCreator>().CreateTables();
 
-                context.Database.ExecuteSqlRaw(
-                    "ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;"
-                );
+                context.Database
+                    .ExecuteSqlRaw("ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;");
 
                 context.Database.ExecuteSqlRaw(
                     @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
@@ -662,9 +661,10 @@ BEGIN
 END"
                 );
 
-                context.Database.ExecuteSqlRaw(
-                    "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
-                );
+                context.Database
+                    .ExecuteSqlRaw(
+                        "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
+                    );
             }
 
             try
@@ -715,9 +715,8 @@ END"
             finally
             {
                 using var context = new BlogContextComputedColumn(testStore.Name);
-                context.Database.ExecuteSqlRaw(
-                    "ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;"
-                );
+                context.Database
+                    .ExecuteSqlRaw("ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;");
                 context.Database.ExecuteSqlRaw("DROP FUNCTION [dbo].[GetFullName];");
             }
         }
@@ -870,17 +869,14 @@ END"
             // inner exception for details.
             // SqlException : Cannot insert explicit value for identity column in table
             // 'Blog' when IDENTITY_INSERT is set to OFF.
-            context.Database.CreateExecutionStrategy()
-                .Execute(
-                    context,
-                    c =>
-                    {
-                        var updateException = Assert.Throws<DbUpdateException>(
-                            () => c.SaveChanges()
-                        );
-                        Assert.Single(updateException.Entries);
-                    }
-                );
+            context.Database.CreateExecutionStrategy().Execute(
+                context,
+                c =>
+                {
+                    var updateException = Assert.Throws<DbUpdateException>(() => c.SaveChanges());
+                    Assert.Single(updateException.Entries);
+                }
+            );
         }
 
         [ConditionalFact]

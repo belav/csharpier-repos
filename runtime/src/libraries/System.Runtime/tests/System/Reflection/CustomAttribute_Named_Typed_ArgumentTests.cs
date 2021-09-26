@@ -17,10 +17,8 @@ namespace System.Reflection.Tests
                 () => new CustomAttributeNamedArgument(null, null)
             );
 
-            MethodInfo m = typeof(CustomAttribute_Named_Typed_ArgumentTests).GetMethod(
-                "MyMethod",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            MethodInfo m = typeof(CustomAttribute_Named_Typed_ArgumentTests)
+                .GetMethod("MyMethod", BindingFlags.Static | BindingFlags.NonPublic);
             foreach (CustomAttributeData cad in CustomAttributeData.GetCustomAttributes(m))
             {
                 foreach (CustomAttributeTypedArgument cata in cad.ConstructorArguments)

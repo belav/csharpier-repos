@@ -71,9 +71,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                     // Keep delaying until at least delayInMilliseconds has elapsed since lastSetTime
                     if (
                         !await expeditableDelaySource.Delay(
-                                TimeSpan.FromMilliseconds(_delayInMilliseconds),
-                                cancellationToken
-                            )
+                            TimeSpan.FromMilliseconds(_delayInMilliseconds),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {

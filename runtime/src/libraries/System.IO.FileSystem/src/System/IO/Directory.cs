@@ -186,11 +186,11 @@ namespace System.IO
             EnumerationOptions enumerationOptions
         ) =>
             InternalEnumeratePaths(
-                    path,
-                    searchPattern,
-                    SearchTarget.Directories,
-                    enumerationOptions
-                )
+                path,
+                searchPattern,
+                SearchTarget.Directories,
+                enumerationOptions
+            )
                 .ToArray();
 
         public static string[] GetFileSystemEntries(string path) =>

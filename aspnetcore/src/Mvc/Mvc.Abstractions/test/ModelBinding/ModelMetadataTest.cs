@@ -258,9 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void ContainerType_IsNull_ForParameter()
         {
             // Arrange & Act
-            var method = typeof(CollectionImplementation).GetMethod(
-                nameof(CollectionImplementation.Add)
-            );
+            var method = typeof(CollectionImplementation)
+                .GetMethod(nameof(CollectionImplementation.Add));
             var parameter = method.GetParameters()[0]; // Add(string item)
             var metadata = new TestModelMetadata(parameter);
 
@@ -297,9 +296,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void Names_ReturnExpectedMetadata_ForParameter()
         {
             // Arrange & Act
-            var method = typeof(CollectionImplementation).GetMethod(
-                nameof(CollectionImplementation.Add)
-            );
+            var method = typeof(CollectionImplementation)
+                .GetMethod(nameof(CollectionImplementation.Add));
             var parameter = method.GetParameters()[0]; // Add(string item)
             var metadata = new TestModelMetadata(parameter);
 
@@ -343,9 +341,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void GetDisplayName_ReturnsParameterName_WhenSetAndDisplayNameIsNull()
         {
             // Arrange
-            var method = typeof(CollectionImplementation).GetMethod(
-                nameof(CollectionImplementation.Add)
-            );
+            var method = typeof(CollectionImplementation)
+                .GetMethod(nameof(CollectionImplementation.Add));
             var parameter = method.GetParameters()[0]; // Add(string item)
             var metadata = new TestModelMetadata(parameter);
 

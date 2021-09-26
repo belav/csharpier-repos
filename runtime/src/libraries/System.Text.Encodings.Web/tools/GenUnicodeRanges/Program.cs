@@ -83,11 +83,8 @@ namespace GenDefinedCharList
 
                 // Exclude the surrogate range and everything outside the BMP.
 
-                uint startCodeAsInt = uint.Parse(
-                    startCode,
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture
-                );
+                uint startCodeAsInt = uint
+                    .Parse(startCode, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
                 if (
                     startCodeAsInt >= 0x10000
                     || (startCodeAsInt >= 0xD800 && startCodeAsInt <= 0xDFFF)

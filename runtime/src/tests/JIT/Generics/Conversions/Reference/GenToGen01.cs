@@ -111,11 +111,8 @@ public class Test
         Eval(new Converter<string>().ToGenOfT(new Gen<string>(), false, typeof(Gen<string>)));
         Eval(new Converter<string>().ToGenBaseOfT(new Gen<string>(), false, typeof(Gen<string>)));
         Eval(
-            new Converter<string>().ToGenBaseOfT(
-                new GenBase<string>(),
-                false,
-                typeof(GenBase<string>)
-            )
+            new Converter<string>()
+                .ToGenBaseOfT(new GenBase<string>(), false, typeof(GenBase<string>))
         );
         Eval(new Converter<string>().ToGenOfT(new GenBase<string>(), true, null));
 

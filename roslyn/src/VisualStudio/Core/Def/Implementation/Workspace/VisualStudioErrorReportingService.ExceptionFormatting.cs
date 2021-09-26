@@ -181,12 +181,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         private static void FormatParameters(StringBuilder stringBuilder, MethodBase method) =>
             stringBuilder.Append(
-                string.Join(
-                    ",",
-                    method?.GetParameters()
-                        .Select(t => (t.ParameterType?.Name ?? "<UnknownType>") + " " + t.Name)
-                        ?? Array.Empty<string>()
-                )
+                string
+                    .Join(
+                        ",",
+                        method?.GetParameters()
+                            .Select(t => (t.ParameterType?.Name ?? "<UnknownType>") + " " + t.Name)
+                            ?? Array.Empty<string>()
+                    )
             );
     }
 }

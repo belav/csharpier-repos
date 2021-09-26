@@ -193,9 +193,9 @@ namespace System.IO.Compression
                         buffer = buffer.Slice(bytesConsumed);
                     if (bytesWritten > 0)
                         await _stream.WriteAsync(
-                                new ReadOnlyMemory<byte>(_buffer, 0, bytesWritten),
-                                cancellationToken
-                            )
+                            new ReadOnlyMemory<byte>(_buffer, 0, bytesWritten),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                 }
             }

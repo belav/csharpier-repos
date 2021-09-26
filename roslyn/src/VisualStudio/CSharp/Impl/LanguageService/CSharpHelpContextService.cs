@@ -56,18 +56,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var token = await syntaxTree.GetTouchingTokenAsync(
-                    span.Start,
-                    cancellationToken,
-                    findInsideTrivia: true
-                )
+                span.Start,
+                cancellationToken,
+                findInsideTrivia: true
+            )
                 .ConfigureAwait(false);
 
             if (IsValid(token, span))
             {
                 var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                        span,
-                        cancellationToken
-                    )
+                    span,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var result = TryGetText(
@@ -211,10 +211,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             else
             {
                 symbol = semanticModel.GetSemanticInfo(
-                        token,
-                        document.Project.Solution.Workspace,
-                        cancellationToken
-                    )
+                    token,
+                    document.Project.Solution.Workspace,
+                    cancellationToken
+                )
                     .GetAnySymbol(includeType: true);
 
                 if (symbol == null)
@@ -232,9 +232,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             // Local: return the name if it's the declaration, otherwise the type
             if (
                 symbol is ILocalSymbol localSymbol
-                && !symbol.DeclaringSyntaxReferences.Any(
-                    d => d.GetSyntax().DescendantTokens().Contains(token)
-                )
+                && !symbol.DeclaringSyntaxReferences
+                    .Any(d => d.GetSyntax().DescendantTokens().Contains(token))
             )
             {
                 symbol = localSymbol.Type;

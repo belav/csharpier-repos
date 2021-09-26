@@ -18,9 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor
                 underlyingItem.Text,
                 underlyingItem.Glyph,
                 underlyingItem.Spans,
-                underlyingItem.ChildItems.SelectAsArray(
-                    v => (NavigationBarItem)new WrappedNavigationBarItem(v)
-                ),
+                underlyingItem.ChildItems
+                    .SelectAsArray(v => (NavigationBarItem)new WrappedNavigationBarItem(v)),
                 underlyingItem.Indent,
                 underlyingItem.Bolded,
                 underlyingItem.Grayed

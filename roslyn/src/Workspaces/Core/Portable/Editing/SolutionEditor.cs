@@ -40,9 +40,9 @@ namespace Microsoft.CodeAnalysis.Editing
             if (!_documentEditors.TryGetValue(id, out var editor))
             {
                 editor = await DocumentEditor.CreateAsync(
-                        _solution.GetDocument(id),
-                        cancellationToken
-                    )
+                    _solution.GetDocument(id),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 _documentEditors.Add(id, editor);
             }

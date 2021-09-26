@@ -181,14 +181,14 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_unflatten()
         {
-            new Action(
-                () => Mapper.Map<Order>(new OrderDto())
-            ).ShouldThrowException<AutoMapperMappingException>(
-                ex =>
-                    ex.InnerException?.Message.ShouldBe(
-                        "typeMapDestination.CustomerHolder.Customer cannot be null because it's used by ForPath."
-                    )
-            );
+            new Action(() => Mapper.Map<Order>(new OrderDto()))
+                .ShouldThrowException<AutoMapperMappingException>(
+                    ex =>
+                        ex.InnerException?.Message
+                            .ShouldBe(
+                                "typeMapDestination.CustomerHolder.Customer cannot be null because it's used by ForPath."
+                            )
+                );
         }
     }
 
@@ -460,31 +460,28 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap<OrderDto, Order>()
-                        .ForPath(
-                            o => o.CustomerHolder.Customer.Name,
-                            o =>
-                            {
-                                o.Condition(c => !c.SourceMember.StartsWith("George"));
-                                o.MapFrom(s => s.CustomerName);
-                            }
-                        )
-                        .ForPath(
-                            o => o.CustomerHolder.Customer.Total,
-                            o =>
-                            {
-                                o.Condition(c => c.Source.Total < 50);
-                                o.MapFrom(s => s.Total);
-                            }
-                        )
-                        .ForPath(
-                            o => o.CustomerHolder.Customer.Value,
-                            o =>
-                            {
-                                o.Condition(c => c.Destination.CustomerHolder.Customer.Value == 0);
-                                o.MapFrom(s => s.Value);
-                            }
-                        );
+                    cfg.CreateMap<OrderDto, Order>().ForPath(
+                        o => o.CustomerHolder.Customer.Name,
+                        o =>
+                        {
+                            o.Condition(c => !c.SourceMember.StartsWith("George"));
+                            o.MapFrom(s => s.CustomerName);
+                        }
+                    ).ForPath(
+                        o => o.CustomerHolder.Customer.Total,
+                        o =>
+                        {
+                            o.Condition(c => c.Source.Total < 50);
+                            o.MapFrom(s => s.Total);
+                        }
+                    ).ForPath(
+                        o => o.CustomerHolder.Customer.Value,
+                        o =>
+                        {
+                            o.Condition(c => c.Destination.CustomerHolder.Customer.Value == 0);
+                            o.MapFrom(s => s.Value);
+                        }
+                    );
                 }
             );
 

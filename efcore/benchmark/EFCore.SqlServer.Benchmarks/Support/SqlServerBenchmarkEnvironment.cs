@@ -18,9 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks
 
         static SqlServerBenchmarkEnvironment()
         {
-            var configBuilder = new ConfigurationBuilder().SetBasePath(
-                    Directory.GetCurrentDirectory()
-                )
+            var configBuilder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("config.json", optional: true)
                 .AddEnvironmentVariables();
 

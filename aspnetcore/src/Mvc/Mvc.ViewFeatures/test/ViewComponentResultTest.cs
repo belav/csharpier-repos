@@ -248,9 +248,8 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ExecuteResultAsync_ExecutesAsyncViewComponent()
         {
             // Arrange
-            var methodInfo = typeof(AsyncTextViewComponent).GetMethod(
-                nameof(AsyncTextViewComponent.InvokeAsync)
-            );
+            var methodInfo = typeof(AsyncTextViewComponent)
+                .GetMethod(nameof(AsyncTextViewComponent.InvokeAsync));
             var descriptor = new ViewComponentDescriptor()
             {
                 FullName = "Full.Name.AsyncText",
@@ -560,10 +559,8 @@ namespace Microsoft.AspNetCore.Mvc
                     { "text/foo", "text/foo" },
                     { "text/foo;p1=p1-value", "text/foo; p1=p1-value" },
                     {
-                        new MediaTypeHeaderValue("text/foo")
-                        {
-                            Encoding = Encoding.ASCII
-                        }.ToString(),
+                        new MediaTypeHeaderValue("text/foo") { Encoding = Encoding.ASCII }
+                            .ToString(),
                         "text/foo; charset=us-ascii"
                     }
                 };
@@ -640,10 +637,8 @@ namespace Microsoft.AspNetCore.Mvc
             {
                 Arguments = new { name = "World!" },
                 ViewComponentName = "Text",
-                ContentType = new MediaTypeHeaderValue("text/html")
-                {
-                    Encoding = Encoding.UTF8
-                }.ToString(),
+                ContentType = new MediaTypeHeaderValue("text/html") { Encoding = Encoding.UTF8 }
+                    .ToString(),
                 TempData = _tempDataDictionary,
             };
 

@@ -32,12 +32,13 @@ namespace Microsoft.Extensions.Hosting
             var timeoutSeconds = configuration["shutdownTimeoutSeconds"];
             if (
                 !string.IsNullOrEmpty(timeoutSeconds)
-                && int.TryParse(
-                    timeoutSeconds,
-                    NumberStyles.None,
-                    CultureInfo.InvariantCulture,
-                    out var seconds
-                )
+                && int
+                    .TryParse(
+                        timeoutSeconds,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out var seconds
+                    )
             )
             {
                 ShutdownTimeout = TimeSpan.FromSeconds(seconds);

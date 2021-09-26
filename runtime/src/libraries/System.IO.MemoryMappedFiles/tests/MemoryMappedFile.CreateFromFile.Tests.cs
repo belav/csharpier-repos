@@ -1452,13 +1452,13 @@ namespace System.IO.MemoryMappedFiles.Tests
 
                 // Create and close the map
                 MemoryMappedFile.CreateFromFile(
-                        fs,
-                        null,
-                        Capacity,
-                        MemoryMappedFileAccess.ReadWrite,
-                        HandleInheritability.None,
-                        leaveOpen
-                    )
+                    fs,
+                    null,
+                    Capacity,
+                    MemoryMappedFileAccess.ReadWrite,
+                    HandleInheritability.None,
+                    leaveOpen
+                )
                     .Dispose();
 
                 // The handle should now be open iff leaveOpen
@@ -1589,13 +1589,13 @@ namespace System.IO.MemoryMappedFiles.Tests
                 using (FileStream fs = File.Open(file.Path, FileMode.Open))
                 {
                     MemoryMappedFile.CreateFromFile(
-                            fs,
-                            null,
-                            InitialCapacity * 4,
-                            MemoryMappedFileAccess.ReadWrite,
-                            HandleInheritability.None,
-                            true
-                        )
+                        fs,
+                        null,
+                        InitialCapacity * 4,
+                        MemoryMappedFileAccess.ReadWrite,
+                        HandleInheritability.None,
+                        true
+                    )
                         .Dispose();
                     Assert.Equal(InitialCapacity * 4, fs.Length);
                 }
@@ -1618,13 +1618,13 @@ namespace System.IO.MemoryMappedFiles.Tests
                 {
                     long length = long.MaxValue;
                     MemoryMappedFile.CreateFromFile(
-                            fs,
-                            null,
-                            length,
-                            MemoryMappedFileAccess.ReadWrite,
-                            HandleInheritability.None,
-                            true
-                        )
+                        fs,
+                        null,
+                        length,
+                        MemoryMappedFileAccess.ReadWrite,
+                        HandleInheritability.None,
+                        true
+                    )
                         .Dispose();
                     Assert.Equal(length, fs.Length); // if it didn't fail to create the file, the length should be what was requested.
                 }

@@ -297,11 +297,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             // specification to match the previous implementation.
 
             var operators = ArrayBuilder<UnaryOperatorSignature>.GetInstance();
-            this.Compilation.builtInOperators.GetSimpleBuiltInOperators(
-                kind,
-                operators,
-                skipNativeIntegerOperators: !operand.Type.IsNativeIntegerOrNullableNativeIntegerType()
-            );
+            this.Compilation.builtInOperators
+                .GetSimpleBuiltInOperators(
+                    kind,
+                    operators,
+                    skipNativeIntegerOperators: !operand.Type
+                        .IsNativeIntegerOrNullableNativeIntegerType()
+                );
 
             GetEnumOperations(kind, operand, operators);
 
@@ -511,16 +513,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (type0.IsTypeParameter())
                 {
-                    interfaces = (
-                        (TypeParameterSymbol)type0
-                    ).AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
+                    interfaces = ((TypeParameterSymbol)type0)
+                        .AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
                 }
 
                 if (!interfaces.IsDefaultOrEmpty)
                 {
                     var shadowedInterfaces = PooledHashSet<NamedTypeSymbol>.GetInstance();
-                    var resultsFromInterface =
-                        ArrayBuilder<UnaryOperatorAnalysisResult>.GetInstance();
+                    var resultsFromInterface = ArrayBuilder<UnaryOperatorAnalysisResult>
+                        .GetInstance();
                     results.Clear();
 
                     foreach (NamedTypeSymbol @interface in interfaces)

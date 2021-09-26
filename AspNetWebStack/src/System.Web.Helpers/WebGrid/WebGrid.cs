@@ -1187,7 +1187,9 @@ namespace System.Web.Helpers
                     from p in elementType.GetProperties()
                     where IsBindableType(p.PropertyType) && (p.GetIndexParameters().Length == 0)
                     select p.Name
-                ).OrderBy(n => n, StringComparer.OrdinalIgnoreCase).ToArray();
+                )
+                    .OrderBy(n => n, StringComparer.OrdinalIgnoreCase)
+                    .ToArray();
             }
         }
 
@@ -1198,10 +1200,8 @@ namespace System.Web.Helpers
             {
                 names = names.Except(exclusions);
             }
-            return (
-                from n in names
-                select new WebGridColumn { ColumnName = n, CanSort = true }
-            ).ToArray();
+            return (from n in names select new WebGridColumn { ColumnName = n, CanSort = true })
+                .ToArray();
         }
 
         // see: DataBoundControlHelper.IsBindableType

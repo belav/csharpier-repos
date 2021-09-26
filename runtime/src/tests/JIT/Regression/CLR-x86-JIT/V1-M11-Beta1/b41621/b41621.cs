@@ -31,19 +31,21 @@ namespace Test
 
         static void Static1(ref uint[] param1)
         {
-            new BB().Method2(
-                __arglist(
-                    new AA().m_dField1,
-                    (int)m_xStatic1,
-                    (float)m_uForward4 * (float)(new AA().Method1(param1, null, null, 0u))
-                )
-            );
-            new AA().Method1(
-                param1,
-                new long[4],
-                new ulong[4],
-                new AA().Method1(param1, new long[4], new ulong[4], new BB().m_uField2)
-            );
+            new BB()
+                .Method2(
+                    __arglist(
+                        new AA().m_dField1,
+                        (int)m_xStatic1,
+                        (float)m_uForward4 * (float)(new AA().Method1(param1, null, null, 0u))
+                    )
+                );
+            new AA()
+                .Method1(
+                    param1,
+                    new long[4],
+                    new ulong[4],
+                    new AA().Method1(param1, new long[4], new ulong[4], new BB().m_uField2)
+                );
         }
         static int Main()
         {

@@ -152,7 +152,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
             if (response.AvailableTransports != null)
             {
-                var responseTransports = response.AvailableTransports.Select(t => t.Transport)
+                var responseTransports = response.AvailableTransports
+                    .Select(t => t.Transport)
                     .ToList();
 
                 Assert.Equal(availableTransports, responseTransports);

@@ -456,13 +456,13 @@ namespace System.Web.Http.Tracing.Tracers
             };
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
             mockActionDescriptor.Setup(
-                    a =>
-                        a.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<IDictionary<string, object>>(),
-                            CancellationToken.None
-                        )
-                )
+                a =>
+                    a.ExecuteAsync(
+                        It.IsAny<HttpControllerContext>(),
+                        It.IsAny<IDictionary<string, object>>(),
+                        CancellationToken.None
+                    )
+            )
                 .Returns(Task.FromResult<object>(null));
             HttpControllerContext controllerContext = ContextUtil.CreateControllerContext();
             controllerContext.ControllerDescriptor = new HttpControllerDescriptor(
@@ -517,13 +517,13 @@ namespace System.Web.Http.Tracing.Tracers
             };
             InvalidOperationException exception = new InvalidOperationException("test");
             mockActionDescriptor.Setup(
-                    a =>
-                        a.ExecuteAsync(
-                            It.IsAny<HttpControllerContext>(),
-                            It.IsAny<IDictionary<string, object>>(),
-                            CancellationToken.None
-                        )
-                )
+                a =>
+                    a.ExecuteAsync(
+                        It.IsAny<HttpControllerContext>(),
+                        It.IsAny<IDictionary<string, object>>(),
+                        CancellationToken.None
+                    )
+            )
                 .Throws(exception);
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
             HttpControllerContext controllerContext = ContextUtil.CreateControllerContext();

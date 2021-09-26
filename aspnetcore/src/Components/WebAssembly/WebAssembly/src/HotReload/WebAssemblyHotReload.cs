@@ -74,10 +74,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
             }
 
             var jsObjectReference = (IJSUnmarshalledObjectReference)(
-                await DefaultWebAssemblyJSRuntime.Instance.InvokeAsync<IJSObjectReference>(
-                    "import",
-                    "./_framework/blazor-hotreload.js"
-                )
+                await DefaultWebAssemblyJSRuntime.Instance
+                    .InvokeAsync<IJSObjectReference>("import", "./_framework/blazor-hotreload.js")
             );
             await jsObjectReference.InvokeUnmarshalled<Task<int>>("receiveHotReload");
         }
@@ -93,7 +91,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
         )
         {
             var moduleId = Guid.Parse(moduleIdString);
-            var assembly = AppDomain.CurrentDomain.GetAssemblies()
+            var assembly = AppDomain.CurrentDomain
+                .GetAssemblies()
                 .FirstOrDefault(
                     a => a.Modules.FirstOrDefault() is Module m && m.ModuleVersionId == moduleId
                 );
@@ -122,12 +121,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
             var (beforeUpdates, afterUpdates) = _handlerActions.Value;
 
             beforeUpdates.ForEach(a => a(null));
-            System.Reflection.Metadata.AssemblyExtensions.ApplyUpdate(
-                assembly,
-                metadataDelta,
-                ilDeta,
-                ReadOnlySpan<byte>.Empty
-            );
+            System.Reflection.Metadata.AssemblyExtensions
+                .ApplyUpdate(assembly, metadataDelta, ilDeta, ReadOnlySpan<byte>.Empty);
             afterUpdates.ForEach(a => a(null));
         }
 

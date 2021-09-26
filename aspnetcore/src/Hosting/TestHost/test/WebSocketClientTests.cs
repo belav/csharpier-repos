@@ -24,9 +24,7 @@ namespace Microsoft.AspNetCore.TestHost.Tests
             string capturedHost = null;
             string capturedPath = null;
 
-            using (
-                var testServer = new TestServer(
-                    new WebHostBuilder().Configure(
+            using (var testServer = new TestServer(new WebHostBuilder().Configure(
                         app =>
                         {
                             app.Run(
@@ -42,9 +40,7 @@ namespace Microsoft.AspNetCore.TestHost.Tests
                                 }
                             );
                         }
-                    )
-                )
-            )
+                    )))
             {
                 var client = testServer.CreateWebSocketClient();
 

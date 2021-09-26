@@ -252,11 +252,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             foreach (var similarName in similarNames)
             {
                 var symbols = await FindAsync(
-                        lazyAssembly,
-                        similarName,
-                        ignoreCase: true,
-                        cancellationToken: cancellationToken
-                    )
+                    lazyAssembly,
+                    similarName,
+                    ignoreCase: true,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 result.AddRange(symbols);
             }

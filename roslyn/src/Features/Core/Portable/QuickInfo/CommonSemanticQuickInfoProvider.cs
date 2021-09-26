@@ -27,10 +27,10 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         )
         {
             var (model, tokenInformation, supportedPlatforms) = await ComputeQuickInfoDataAsync(
-                    document,
-                    token,
-                    cancellationToken
-                )
+                document,
+                token,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (tokenInformation.Symbols.IsDefaultOrEmpty)
@@ -39,13 +39,13 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             }
 
             return await CreateContentAsync(
-                    document.Project.Solution.Workspace,
-                    token,
-                    model,
-                    tokenInformation,
-                    supportedPlatforms,
-                    cancellationToken
-                )
+                document.Project.Solution.Workspace,
+                token,
+                model,
+                tokenInformation,
+                supportedPlatforms,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -59,11 +59,11 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             if (linkedDocumentIds.Any())
             {
                 return await ComputeFromLinkedDocumentsAsync(
-                        document,
-                        linkedDocumentIds,
-                        token,
-                        cancellationToken
-                    )
+                    document,
+                    linkedDocumentIds,
+                    token,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -104,14 +104,13 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 
             foreach (var linkedDocumentId in linkedDocumentIds)
             {
-                var linkedDocument = document.Project.Solution.GetRequiredDocument(
-                    linkedDocumentId
-                );
+                var linkedDocument = document.Project.Solution
+                    .GetRequiredDocument(linkedDocumentId);
                 var linkedToken = await FindTokenInLinkedDocumentAsync(
-                        token,
-                        linkedDocument,
-                        cancellationToken
-                    )
+                    token,
+                    linkedDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (linkedToken != default)
@@ -119,10 +118,10 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                     // Not in an inactive region, so this file is a candidate.
                     candidateProjects.Add(linkedDocumentId.ProjectId);
                     var (linkedModel, linkedSymbols) = await BindTokenAsync(
-                            linkedDocument,
-                            linkedToken,
-                            cancellationToken
-                        )
+                        linkedDocument,
+                        linkedToken,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     candidateResults.Add((linkedDocumentId, linkedModel, linkedSymbols));
                 }
@@ -145,7 +144,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             {
                 // Does the candidate have anything remotely equivalent?
                 if (
-                    !candidate.tokenInformation.Symbols.Intersect(
+                    !candidate.tokenInformation.Symbols
+                        .Intersect(
                             bestBinding.tokenInformation.Symbols,
                             LinkedFilesSymbolEquivalenceComparer.Instance
                         )
@@ -203,7 +203,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             CancellationToken cancellationToken
         )
         {
-            var syntaxFactsService = workspace.Services.GetLanguageServices(semanticModel.Language)
+            var syntaxFactsService = workspace.Services
+                .GetLanguageServices(semanticModel.Language)
                 .GetRequiredService<ISyntaxFactsService>();
 
             var symbols = tokenInformation.Symbols;
@@ -212,13 +213,13 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             if (syntaxFactsService.IsAttributeName(token.Parent!))
             {
                 symbols = symbols.OrderBy(
-                        (s1, s2) =>
-                            s1.Kind == s2.Kind
-                                ? 0
-                                : s1.Kind == SymbolKind.NamedType
-                                    ? -1
-                                    : s2.Kind == SymbolKind.NamedType ? 1 : 0
-                    )
+                    (s1, s2) =>
+                        s1.Kind == s2.Kind
+                            ? 0
+                            : s1.Kind == SymbolKind.NamedType
+                                ? -1
+                                : s2.Kind == SymbolKind.NamedType ? 1 : 0
+                )
                     .ToImmutableArray();
             }
 

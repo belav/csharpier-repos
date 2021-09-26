@@ -58,9 +58,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         ) =>
             Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    base.Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
-                        async
-                    )
+                    base
+                        .Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
+                            async
+                        )
             );
 
         public override Task Where_query_composition_entity_equality_multiple_elements_Single(

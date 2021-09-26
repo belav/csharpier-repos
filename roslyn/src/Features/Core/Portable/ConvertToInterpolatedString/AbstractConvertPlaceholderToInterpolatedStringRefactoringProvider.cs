@@ -65,13 +65,13 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             }
 
             var (invocation, invocationSymbol) = await TryFindInvocationAsync(
-                    textSpan,
-                    document,
-                    semanticModel,
-                    formatMethods,
-                    syntaxFactsService,
-                    context.CancellationToken
-                )
+                textSpan,
+                document,
+                semanticModel,
+                formatMethods,
+                syntaxFactsService,
+                context.CancellationToken
+            )
                 .ConfigureAwait(false);
             if (
                 invocation != null
@@ -114,9 +114,9 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             // If selection is empty there can be multiple matching invocations (we can be deep in), need to go through all of them
             var possibleInvocations =
                 await document.GetRelevantNodesAsync<TInvocationExpressionSyntax>(
-                        span,
-                        cancellationToken
-                    )
+                    span,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             var invocation = possibleInvocations.FirstOrDefault(
                 invocation =>
@@ -141,9 +141,9 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
 
             // User selected a single argument of the invocation (expression / format string) instead of the whole invocation.
             var argument = await document.TryGetRelevantNodeAsync<TArgumentSyntax>(
-                    span,
-                    cancellationToken
-                )
+                span,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             invocation = argument?.Parent?.Parent as TInvocationExpressionSyntax;
             if (
@@ -167,9 +167,9 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
             // User selected the whole argument list: string format with placeholders plus all expressions
             var argumentList =
                 await document.TryGetRelevantNodeAsync<TArgumentListExpressionSyntax>(
-                        span,
-                        cancellationToken
-                    )
+                    span,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             invocation = argumentList?.Parent as TInvocationExpressionSyntax;
             if (
@@ -315,11 +315,12 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
         ) =>
             arguments.FirstOrDefault(
                 argument =>
-                    string.Equals(
-                        GetArgumentName(argument, syntaxFactsService),
-                        StringFormatArguments.FormatArgumentName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            GetArgumentName(argument, syntaxFactsService),
+                            StringFormatArguments.FormatArgumentName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
             ) ?? arguments[1];
 
         private static TArgumentSyntax GetFormatArgument(
@@ -328,11 +329,12 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
         ) =>
             arguments.FirstOrDefault(
                 argument =>
-                    string.Equals(
-                        GetArgumentName(argument, syntaxFactsService),
-                        StringFormatArguments.FormatArgumentName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            GetArgumentName(argument, syntaxFactsService),
+                            StringFormatArguments.FormatArgumentName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
             ) ?? arguments[0];
 
         private static TArgumentSyntax GetArgument(
@@ -348,11 +350,12 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
 
             return arguments.FirstOrDefault(
                     argument =>
-                        string.Equals(
-                            GetArgumentName(argument, syntaxFacts),
-                            StringFormatArguments.ParamsArgumentNames[index],
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                GetArgumentName(argument, syntaxFacts),
+                                StringFormatArguments.ParamsArgumentNames[index],
+                                StringComparison.OrdinalIgnoreCase
+                            )
                 ) ?? arguments[index];
         }
 
@@ -379,9 +382,9 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                 else
                 {
                     var castExpression = syntaxGenerator.CastExpression(
-                            convertedType,
-                            syntaxGenerator.AddParentheses(argumentExpression)
-                        )
+                        convertedType,
+                        syntaxGenerator.AddParentheses(argumentExpression)
+                    )
                         .WithAdditionalAnnotations(Simplifier.Annotation);
                     builder.Add(castExpression as TExpressionSyntax);
                 }
@@ -410,10 +413,11 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                         )
                         {
                             if (
-                                int.TryParse(
-                                    literalExpression.GetFirstToken().ValueText,
-                                    out var index
-                                )
+                                int
+                                    .TryParse(
+                                        literalExpression.GetFirstToken().ValueText,
+                                        out var index
+                                    )
                             )
                             {
                                 if (index >= 0 && index < expandedArguments.Length)
@@ -423,9 +427,9 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                                             interpolationSyntaxNode
                                         ),
                                         syntaxFactsService.ConvertToSingleLine(
-                                                expandedArguments[index],
-                                                useElasticTrivia: true
-                                            )
+                                            expandedArguments[index],
+                                            useElasticTrivia: true
+                                        )
                                             .WithAdditionalAnnotations(Formatter.Annotation)
                                     );
                                 }

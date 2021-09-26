@@ -859,11 +859,13 @@ namespace System.Text.Json.Serialization.Tests
             );
 
             Assert.Equal(
-                SimpleTestClassWithStringToStringIReadOnlyDictionaryWrapper.s_json.StripWhitespace(),
+                SimpleTestClassWithStringToStringIReadOnlyDictionaryWrapper.s_json
+                    .StripWhitespace(),
                 JsonSerializer.Serialize(obj5)
             );
             Assert.Equal(
-                SimpleTestClassWithStringToStringIReadOnlyDictionaryWrapper.s_json.StripWhitespace(),
+                SimpleTestClassWithStringToStringIReadOnlyDictionaryWrapper.s_json
+                    .StripWhitespace(),
                 JsonSerializer.Serialize<object>(obj5)
             );
         }
@@ -909,7 +911,8 @@ namespace System.Text.Json.Serialization.Tests
                     new SimpleTestStructWithNullableGenericStructCollectionWrappers();
                 obj.Initialize();
                 Assert.Equal(
-                    SimpleTestStructWithNullableGenericStructCollectionWrappers.s_json.StripWhitespace(),
+                    SimpleTestStructWithNullableGenericStructCollectionWrappers.s_json
+                        .StripWhitespace(),
                     JsonSerializer.Serialize(obj)
                 );
             }

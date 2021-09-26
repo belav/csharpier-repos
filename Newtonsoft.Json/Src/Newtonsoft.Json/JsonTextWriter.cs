@@ -365,9 +365,8 @@ namespace Newtonsoft.Json
             {
                 // If we're here, either _indentChars hasn't been set yet, or _writer.NewLine
                 // has been changed, or _indentChar has been changed.
-                _indentChars = (
-                    writerNewLine + new string(_indentChar, IndentCharBufferSize)
-                ).ToCharArray();
+                _indentChars = (writerNewLine + new string(_indentChar, IndentCharBufferSize))
+                    .ToCharArray();
             }
 
             return newLineLen;

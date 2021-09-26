@@ -136,8 +136,8 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Func<Incrementable> func = Expression.Lambda<Func<Incrementable>>(
-                    Expression.Increment(Expression.Constant(operand))
-                )
+                Expression.Increment(Expression.Constant(operand))
+            )
                 .Compile(useInterpreter);
             Assert.Equal(expected.Value, func().Value);
         }
@@ -151,8 +151,8 @@ namespace System.Linq.Expressions.Tests
         {
             MethodInfo method = typeof(IncrementDecrementTests).GetMethod(nameof(DoublyIncrement));
             Func<Incrementable> func = Expression.Lambda<Func<Incrementable>>(
-                    Expression.Increment(Expression.Constant(operand), method)
-                )
+                Expression.Increment(Expression.Constant(operand), method)
+            )
                 .Compile(useInterpreter);
             Assert.Equal(expected.Value, func().Value);
         }
@@ -164,12 +164,11 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            MethodInfo method = typeof(IncrementDecrementTests).GetMethod(
-                nameof(DoublyIncrementInt32)
-            );
+            MethodInfo method = typeof(IncrementDecrementTests)
+                .GetMethod(nameof(DoublyIncrementInt32));
             Func<int> func = Expression.Lambda<Func<int>>(
-                    Expression.Increment(Expression.Constant(operand), method)
-                )
+                Expression.Increment(Expression.Constant(operand), method)
+            )
                 .Compile(useInterpreter);
             Assert.Equal(expected, func());
         }

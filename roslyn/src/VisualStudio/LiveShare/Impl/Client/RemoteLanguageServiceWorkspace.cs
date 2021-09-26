@@ -226,8 +226,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         {
             var roots = await session.ListRootsAsync(CancellationToken.None).ConfigureAwait(false);
             var localPathsOfRemoteRoots = roots.Select(
-                    root => session.ConvertSharedUriToLocalPath(root)
-                )
+                root => session.ConvertSharedUriToLocalPath(root)
+            )
                 .ToImmutableArray();
 
             var remoteRootPaths = ImmutableHashSet.CreateBuilder<string>();
@@ -289,9 +289,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         /// </summary>
         public async Task RefreshAllFilesAsync()
         {
-            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                CancellationToken.None
-            );
+            await _threadingContext.JoinableTaskFactory
+                .SwitchToMainThreadAsync(CancellationToken.None);
             var documents = _runningDocumentTableEventTracker.EnumerateDocumentSet();
             foreach (var (moniker, textBuffer, _) in documents)
             {
@@ -388,9 +387,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
 
         private Document AddDocumentToProject(string filePath, string language, string projectName)
         {
-            var project = CurrentSolution.Projects.FirstOrDefault(
-                p => p.Name == projectName && p.Language == language
-            );
+            var project = CurrentSolution.Projects
+                .FirstOrDefault(p => p.Name == projectName && p.Language == language);
             if (project == null)
             {
                 var projectInfo = ProjectInfo.Create(
@@ -471,9 +469,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                     async () =>
                     {
                         await _session.DownloadFileAsync(
-                                _session.ConvertLocalPathToSharedUri(doc.FilePath),
-                                CancellationToken.None
-                            )
+                            _session.ConvertLocalPathToSharedUri(doc.FilePath),
+                            CancellationToken.None
+                        )
                             .ConfigureAwait(true);
                     }
                 );

@@ -88,10 +88,11 @@ goo(0,1,2,3,4,5,6,7,8,9)
             var errorOutput = (await ReadErrorOutputToEnd()).Trim();
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 "Process is terminated due to StackOverflowException.\n"
-                    + string.Format(
-                        InteractiveHostResources.Hosting_process_exited_with_exit_code_0,
-                        process!.ExitCode
-                    ),
+                    + string
+                        .Format(
+                            InteractiveHostResources.Hosting_process_exited_with_exit_code_0,
+                            process!.ExitCode
+                        ),
                 errorOutput
             );
 
@@ -248,10 +249,8 @@ while(true) {}
         [Fact]
         public async Task AsyncExecuteFile()
         {
-            var file =
-                Temp.CreateFile()
-                    .WriteAllText(
-                        @"
+            var file = Temp.CreateFile().WriteAllText(
+                    @"
 using static System.Console;
 
 public class C 
@@ -264,7 +263,7 @@ public int Goo(int i) { return i; }
 
 WriteLine(5);
 "
-                    ).Path;
+                ).Path;
             var task = await Host.ExecuteFileAsync(file);
 
             var output = await ReadOutputToEnd();

@@ -43,11 +43,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             try
             {
                 store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-                var matchingCerts = store.Certificates.Find(
-                    X509FindType.FindByThumbprint,
-                    thumbprint,
-                    validOnly: true
-                );
+                var matchingCerts = store.Certificates
+                    .Find(X509FindType.FindByThumbprint, thumbprint, validOnly: true);
                 return (matchingCerts != null && matchingCerts.Count > 0) ? matchingCerts[0] : null;
             }
             catch (CryptographicException)

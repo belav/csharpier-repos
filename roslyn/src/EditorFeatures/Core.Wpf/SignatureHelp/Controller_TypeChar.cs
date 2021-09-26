@@ -161,12 +161,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         {
             AssertIsForeground();
 
-            using var matchedProvidersDisposer = ArrayBuilder<ISignatureHelpProvider>.GetInstance(
-                out var matchedProviders
-            );
-            using var unmatchedProvidersDisposer = ArrayBuilder<ISignatureHelpProvider>.GetInstance(
-                out var unmatchedProviders
-            );
+            using var matchedProvidersDisposer = ArrayBuilder<ISignatureHelpProvider>
+                .GetInstance(out var matchedProviders);
+            using var unmatchedProvidersDisposer = ArrayBuilder<ISignatureHelpProvider>
+                .GetInstance(out var unmatchedProviders);
             foreach (var provider in providers)
             {
                 if (provider.IsTriggerCharacter(ch))

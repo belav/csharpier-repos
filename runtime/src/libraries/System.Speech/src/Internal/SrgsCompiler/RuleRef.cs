@@ -120,7 +120,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     {
                         rule = backend.CreateRule(szSpecialVoid, 0);
                         // Rule with no transitions is a void rule.
-                        ((IRule)rule).PostParse(parent);
+                        ((IRule)rule)
+                            .PostParse(parent);
                     }
                     parent.AddArc(backend.RuleTransition(rule, parent._rule, 1.0f));
                     break;

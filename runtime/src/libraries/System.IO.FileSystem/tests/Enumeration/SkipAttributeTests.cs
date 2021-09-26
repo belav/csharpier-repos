@@ -142,7 +142,8 @@ namespace System.IO.Tests.Enumeration
     {
         protected override string[] GetPaths(string directory, EnumerationOptions options)
         {
-            return new DirectoryInfo(directory).GetFiles("*", options)
+            return new DirectoryInfo(directory)
+                .GetFiles("*", options)
                 .Select(i => i.FullName)
                 .ToArray();
         }

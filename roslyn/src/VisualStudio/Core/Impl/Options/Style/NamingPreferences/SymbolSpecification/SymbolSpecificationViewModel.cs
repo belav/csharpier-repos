@@ -352,9 +352,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             {
                 _symbolKind = symbolKind;
                 Name = name;
-                IsChecked = specification.ApplicableSymbolKindList.Any(
-                    k => k.SymbolKind == symbolKind
-                );
+                IsChecked = specification.ApplicableSymbolKindList
+                    .Any(k => k.SymbolKind == symbolKind);
             }
 
             public SymbolKindViewModel(
@@ -376,9 +375,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             {
                 _methodKind = methodKind;
                 Name = name;
-                IsChecked = specification.ApplicableSymbolKindList.Any(
-                    k => k.MethodKind == methodKind
-                );
+                IsChecked = specification.ApplicableSymbolKindList
+                    .Any(k => k.MethodKind == methodKind);
             }
 
             internal SymbolKindOrTypeKind CreateSymbolOrTypeOrMethodKind()

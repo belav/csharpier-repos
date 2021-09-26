@@ -146,8 +146,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
                 services.SetupGlobalAuthorizeFilter();
 
             var client = ServerFactory.WithWebHostBuilder(
-                    whb => whb.ConfigureServices(TestServicesConfiguration)
-                )
+                whb => whb.ConfigureServices(TestServicesConfiguration)
+            )
                 .CreateClient();
 
             // Act

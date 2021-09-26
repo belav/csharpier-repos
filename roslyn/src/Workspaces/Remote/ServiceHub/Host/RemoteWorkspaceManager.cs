@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Remote
         );
 
         internal static readonly ImmutableArray<Assembly> RemoteHostAssemblies =
-            MefHostServices.DefaultAssemblies.Add(typeof(ServiceBase).Assembly)
+            MefHostServices.DefaultAssemblies
+                .Add(typeof(ServiceBase).Assembly)
                 .Add(typeof(RemoteWorkspacesResources).Assembly);
 
         private readonly Lazy<RemoteWorkspace> _lazyPrimaryWorkspace;
@@ -72,8 +73,8 @@ namespace Microsoft.CodeAnalysis.Remote
             var resolver = new Resolver(SimpleAssemblyLoader.Instance);
             var discovery = new AttributedPartDiscovery(resolver, isNonPublicSupported: true);
             var parts = Task.Run(
-                    async () => await discovery.CreatePartsAsync(assemblies).ConfigureAwait(false)
-                )
+                async () => await discovery.CreatePartsAsync(assemblies).ConfigureAwait(false)
+            )
                 .GetAwaiter()
                 .GetResult();
             return ComposableCatalog.Create(resolver).AddParts(parts);

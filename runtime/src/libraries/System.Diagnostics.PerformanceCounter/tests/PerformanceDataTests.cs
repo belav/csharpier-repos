@@ -35,158 +35,134 @@ namespace System.Diagnostics.Tests
             // We run test in isolated process to avoid interferences on internal performance counter shared state with other tests.
             // These interferences could lead to fail also after retries
             RemoteExecutor.Invoke(
-                    (string providerId, string typingCounterSetId) =>
+                (string providerId, string typingCounterSetId) =>
+                {
+                    // Create the 'Typing' counter set.
+                    using (
+                        CounterSet typingCounterSet = new CounterSet(
+                            Guid.Parse(providerId),
+                            Guid.Parse(typingCounterSetId),
+                            CounterSetInstanceType.Single
+                        )
+                    )
                     {
-                        // Create the 'Typing' counter set.
+                        // Add the counters to the counter set definition.
+                        typingCounterSet.AddCounter(1, CounterType.RawData32, "Total Words Typed");
+                        typingCounterSet.AddCounter(
+                            2,
+                            CounterType.Delta32,
+                            "Words Typed In Interval"
+                        );
+                        typingCounterSet.AddCounter(3, CounterType.RawData32, "Letter A Pressed");
+                        typingCounterSet.AddCounter(4, CounterType.RawData32, "Words Containing A");
+                        typingCounterSet.AddCounter(
+                            5,
+                            CounterType.SampleFraction,
+                            "Percent of Words Containing A"
+                        );
+                        typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base");
+                        typingCounterSet.AddCounter(7, CounterType.SampleBase);
+
+                        // Create an instance of the counter set (contains the counter data).
                         using (
-                            CounterSet typingCounterSet = new CounterSet(
-                                Guid.Parse(providerId),
-                                Guid.Parse(typingCounterSetId),
-                                CounterSetInstanceType.Single
-                            )
+                            CounterSetInstance typingCsInstance =
+                                typingCounterSet.CreateCounterSetInstance("Typing Instance")
                         )
                         {
-                            // Add the counters to the counter set definition.
-                            typingCounterSet.AddCounter(
-                                1,
-                                CounterType.RawData32,
-                                "Total Words Typed"
-                            );
-                            typingCounterSet.AddCounter(
-                                2,
-                                CounterType.Delta32,
-                                "Words Typed In Interval"
-                            );
-                            typingCounterSet.AddCounter(
-                                3,
-                                CounterType.RawData32,
-                                "Letter A Pressed"
-                            );
-                            typingCounterSet.AddCounter(
-                                4,
-                                CounterType.RawData32,
-                                "Words Containing A"
-                            );
-                            typingCounterSet.AddCounter(
-                                5,
-                                CounterType.SampleFraction,
-                                "Percent of Words Containing A"
-                            );
-                            typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base");
-                            typingCounterSet.AddCounter(7, CounterType.SampleBase);
+                            typingCsInstance.Counters[1].Value = 0;
+                            typingCsInstance.Counters[2].Value = 0;
+                            typingCsInstance.Counters[3].Value = 0;
+                            typingCsInstance.Counters[4].Value = 0;
+                            typingCsInstance.Counters[5].Value = 0;
+                            typingCsInstance.Counters[6].Value = 0;
 
-                            // Create an instance of the counter set (contains the counter data).
+                            // Instance counters readers
                             using (
-                                CounterSetInstance typingCsInstance =
-                                    typingCounterSet.CreateCounterSetInstance("Typing Instance")
+                                PerformanceCounter totalWordsTyped = Helpers.RetryOnAllPlatforms(
+                                        () => new PerformanceCounter("Typing", "Total Words Typed")
+                                    ),
+                                    wordsTypedInInterval = Helpers.RetryOnAllPlatforms(
+                                        () =>
+                                            new PerformanceCounter(
+                                                "Typing",
+                                                "Words Typed In Interval"
+                                            )
+                                    ),
+                                    aKeyPressed = Helpers.RetryOnAllPlatforms(
+                                        () => new PerformanceCounter("Typing", "Letter A Pressed")
+                                    ),
+                                    wordsContainingA = Helpers.RetryOnAllPlatforms(
+                                        () => new PerformanceCounter("Typing", "Words Containing A")
+                                    ),
+                                    percentofWordsContaingA = Helpers.RetryOnAllPlatforms(
+                                        () =>
+                                            new PerformanceCounter(
+                                                "Typing",
+                                                "Percent of Words Containing A"
+                                            )
+                                    )
                             )
                             {
-                                typingCsInstance.Counters[1].Value = 0;
-                                typingCsInstance.Counters[2].Value = 0;
-                                typingCsInstance.Counters[3].Value = 0;
-                                typingCsInstance.Counters[4].Value = 0;
-                                typingCsInstance.Counters[5].Value = 0;
-                                typingCsInstance.Counters[6].Value = 0;
+                                typingCsInstance.Counters[1].Increment();
+                                Assert.Equal(1, typingCsInstance.Counters[1].Value);
+                                Assert.Equal(1, typingCsInstance.Counters[1].RawValue);
+                                Assert.Equal(
+                                    1,
+                                    typingCsInstance.Counters["Total Words Typed"].RawValue
+                                );
+                                Assert.Equal(1, totalWordsTyped.RawValue);
 
-                                // Instance counters readers
-                                using (
-                                    PerformanceCounter totalWordsTyped = Helpers.RetryOnAllPlatforms(
-                                            () =>
-                                                new PerformanceCounter(
-                                                    "Typing",
-                                                    "Total Words Typed"
-                                                )
-                                        ),
-                                        wordsTypedInInterval = Helpers.RetryOnAllPlatforms(
-                                            () =>
-                                                new PerformanceCounter(
-                                                    "Typing",
-                                                    "Words Typed In Interval"
-                                                )
-                                        ),
-                                        aKeyPressed = Helpers.RetryOnAllPlatforms(
-                                            () =>
-                                                new PerformanceCounter("Typing", "Letter A Pressed")
-                                        ),
-                                        wordsContainingA = Helpers.RetryOnAllPlatforms(
-                                            () =>
-                                                new PerformanceCounter(
-                                                    "Typing",
-                                                    "Words Containing A"
-                                                )
-                                        ),
-                                        percentofWordsContaingA = Helpers.RetryOnAllPlatforms(
-                                            () =>
-                                                new PerformanceCounter(
-                                                    "Typing",
-                                                    "Percent of Words Containing A"
-                                                )
-                                        )
-                                )
-                                {
-                                    typingCsInstance.Counters[1].Increment();
-                                    Assert.Equal(1, typingCsInstance.Counters[1].Value);
-                                    Assert.Equal(1, typingCsInstance.Counters[1].RawValue);
-                                    Assert.Equal(
-                                        1,
-                                        typingCsInstance.Counters["Total Words Typed"].RawValue
-                                    );
-                                    Assert.Equal(1, totalWordsTyped.RawValue);
+                                typingCsInstance.Counters[1].Increment();
+                                Assert.Equal(2, typingCsInstance.Counters[1].Value);
+                                Assert.Equal(2, typingCsInstance.Counters[1].RawValue);
+                                Assert.Equal(
+                                    2,
+                                    typingCsInstance.Counters["Total Words Typed"].RawValue
+                                );
+                                Assert.Equal(2, totalWordsTyped.RawValue);
 
-                                    typingCsInstance.Counters[1].Increment();
-                                    Assert.Equal(2, typingCsInstance.Counters[1].Value);
-                                    Assert.Equal(2, typingCsInstance.Counters[1].RawValue);
-                                    Assert.Equal(
-                                        2,
-                                        typingCsInstance.Counters["Total Words Typed"].RawValue
-                                    );
-                                    Assert.Equal(2, totalWordsTyped.RawValue);
+                                typingCsInstance.Counters[2].IncrementBy(3);
+                                Assert.Equal(3, typingCsInstance.Counters[2].Value);
+                                Assert.Equal(3, typingCsInstance.Counters[2].RawValue);
+                                Assert.Equal(
+                                    3,
+                                    typingCsInstance.Counters["Words Typed In Interval"].RawValue
+                                );
+                                Assert.Equal(3, wordsTypedInInterval.RawValue);
 
-                                    typingCsInstance.Counters[2].IncrementBy(3);
-                                    Assert.Equal(3, typingCsInstance.Counters[2].Value);
-                                    Assert.Equal(3, typingCsInstance.Counters[2].RawValue);
-                                    Assert.Equal(
-                                        3,
-                                        typingCsInstance.Counters[
-                                            "Words Typed In Interval"
-                                        ].RawValue
-                                    );
-                                    Assert.Equal(3, wordsTypedInInterval.RawValue);
+                                typingCsInstance.Counters[3].RawValue = 4;
+                                Assert.Equal(4, typingCsInstance.Counters[3].Value);
+                                Assert.Equal(4, typingCsInstance.Counters[3].RawValue);
+                                Assert.Equal(
+                                    4,
+                                    typingCsInstance.Counters["Letter A Pressed"].RawValue
+                                );
+                                Assert.Equal(4, aKeyPressed.RawValue);
 
-                                    typingCsInstance.Counters[3].RawValue = 4;
-                                    Assert.Equal(4, typingCsInstance.Counters[3].Value);
-                                    Assert.Equal(4, typingCsInstance.Counters[3].RawValue);
-                                    Assert.Equal(
-                                        4,
-                                        typingCsInstance.Counters["Letter A Pressed"].RawValue
-                                    );
-                                    Assert.Equal(4, aKeyPressed.RawValue);
+                                typingCsInstance.Counters[4].Value = 5;
+                                Assert.Equal(5, typingCsInstance.Counters[4].Value);
+                                Assert.Equal(5, typingCsInstance.Counters[4].RawValue);
+                                Assert.Equal(
+                                    5,
+                                    typingCsInstance.Counters["Words Containing A"].RawValue
+                                );
+                                Assert.Equal(5, wordsContainingA.RawValue);
 
-                                    typingCsInstance.Counters[4].Value = 5;
-                                    Assert.Equal(5, typingCsInstance.Counters[4].Value);
-                                    Assert.Equal(5, typingCsInstance.Counters[4].RawValue);
-                                    Assert.Equal(
-                                        5,
-                                        typingCsInstance.Counters["Words Containing A"].RawValue
-                                    );
-                                    Assert.Equal(5, wordsContainingA.RawValue);
-
-                                    typingCsInstance.Counters[4].Decrement();
-                                    Assert.Equal(4, typingCsInstance.Counters[4].Value);
-                                    Assert.Equal(4, typingCsInstance.Counters[4].RawValue);
-                                    Assert.Equal(
-                                        4,
-                                        typingCsInstance.Counters["Words Containing A"].RawValue
-                                    );
-                                    Assert.Equal(4, wordsContainingA.RawValue);
-                                }
+                                typingCsInstance.Counters[4].Decrement();
+                                Assert.Equal(4, typingCsInstance.Counters[4].Value);
+                                Assert.Equal(4, typingCsInstance.Counters[4].RawValue);
+                                Assert.Equal(
+                                    4,
+                                    typingCsInstance.Counters["Words Containing A"].RawValue
+                                );
+                                Assert.Equal(4, wordsContainingA.RawValue);
                             }
                         }
-                    },
-                    _fixture._providerId.ToString(),
-                    _fixture._typingCounterSetId.ToString()
-                )
-                .Dispose();
+                    }
+                },
+                _fixture._providerId.ToString(),
+                _fixture._typingCounterSetId.ToString()
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteToPerfCounters))]

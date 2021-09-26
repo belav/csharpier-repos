@@ -39,36 +39,35 @@ namespace Microsoft.AspNetCore.Razor.Language
                 && descriptorX.HasIndexer == descriptorY.HasIndexer
                 && descriptorX.CaseSensitive == descriptorY.CaseSensitive
                 && string.Equals(descriptorX.Name, descriptorY.Name, StringComparison.Ordinal)
-                && string.Equals(
-                    descriptorX.IndexerNamePrefix,
-                    descriptorY.IndexerNamePrefix,
-                    StringComparison.Ordinal
-                )
-                && string.Equals(
-                    descriptorX.TypeName,
-                    descriptorY.TypeName,
-                    StringComparison.Ordinal
-                )
-                && string.Equals(
-                    descriptorX.IndexerTypeName,
-                    descriptorY.IndexerTypeName,
-                    StringComparison.Ordinal
-                )
-                && string.Equals(
-                    descriptorX.Documentation,
-                    descriptorY.Documentation,
-                    StringComparison.Ordinal
-                )
-                && string.Equals(
-                    descriptorX.DisplayName,
-                    descriptorY.DisplayName,
-                    StringComparison.Ordinal
-                )
+                && string
+                    .Equals(
+                        descriptorX.IndexerNamePrefix,
+                        descriptorY.IndexerNamePrefix,
+                        StringComparison.Ordinal
+                    )
+                && string
+                    .Equals(descriptorX.TypeName, descriptorY.TypeName, StringComparison.Ordinal)
+                && string
+                    .Equals(
+                        descriptorX.IndexerTypeName,
+                        descriptorY.IndexerTypeName,
+                        StringComparison.Ordinal
+                    )
+                && string
+                    .Equals(
+                        descriptorX.Documentation,
+                        descriptorY.Documentation,
+                        StringComparison.Ordinal
+                    )
+                && string
+                    .Equals(
+                        descriptorX.DisplayName,
+                        descriptorY.DisplayName,
+                        StringComparison.Ordinal
+                    )
                 && Enumerable.SequenceEqual(
-                    descriptorX.Metadata.OrderBy(
-                        propertyX => propertyX.Key,
-                        StringComparer.Ordinal
-                    ),
+                    descriptorX.Metadata
+                        .OrderBy(propertyX => propertyX.Key, StringComparer.Ordinal),
                     descriptorY.Metadata.OrderBy(propertyY => propertyY.Key, StringComparer.Ordinal)
                 );
         }

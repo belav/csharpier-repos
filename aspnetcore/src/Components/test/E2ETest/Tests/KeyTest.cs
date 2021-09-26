@@ -255,7 +255,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
                 expectedTextTyped += nextChar;
 
                 // Send keys to whatever has focus
-                new Actions(Browser).SendKeys(nextChar).Perform();
+                new Actions(Browser)
+                    .SendKeys(nextChar)
+                    .Perform();
                 Browser.Equal(expectedTextTyped, () => textboxFinder().GetAttribute("value"));
 
                 // We delay between typings to ensure the events aren't all collapsed into one.
@@ -357,7 +359,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             Assert.Collection(
                 actualRootNode.Children,
-                expectedRootNode.Children.Select<Node, Action<Node>>(
+                expectedRootNode.Children
+                    .Select<Node, Action<Node>>(
                         expectedChild =>
                             (
                                 actualChild =>

@@ -110,18 +110,18 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GenerateRouteLink(
-                            It.IsAny<ViewContext>(),
-                            string.Empty,
-                            "Default",
-                            "http",
-                            "contoso.com",
-                            "hello=world",
-                            It.IsAny<IDictionary<string, object>>(),
-                            null
-                        )
-                )
+                mock =>
+                    mock.GenerateRouteLink(
+                        It.IsAny<ViewContext>(),
+                        string.Empty,
+                        "Default",
+                        "http",
+                        "contoso.com",
+                        "hello=world",
+                        It.IsAny<IDictionary<string, object>>(),
+                        null
+                    )
+            )
                 .Returns(new TagBuilder("a"))
                 .Verifiable();
             var anchorTagHelper = new AnchorTagHelper(generator.Object)
@@ -164,19 +164,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>();
             generator.Setup(
-                    mock =>
-                        mock.GenerateActionLink(
-                            It.IsAny<ViewContext>(),
-                            string.Empty,
-                            "Index",
-                            "Home",
-                            "http",
-                            "contoso.com",
-                            "hello=world",
-                            It.IsAny<IDictionary<string, object>>(),
-                            null
-                        )
-                )
+                mock =>
+                    mock.GenerateActionLink(
+                        It.IsAny<ViewContext>(),
+                        string.Empty,
+                        "Index",
+                        "Home",
+                        "http",
+                        "contoso.com",
+                        "hello=world",
+                        It.IsAny<IDictionary<string, object>>(),
+                        null
+                    )
+            )
                 .Returns(new TagBuilder("a"))
                 .Verifiable();
             var anchorTagHelper = new AnchorTagHelper(generator.Object)
@@ -222,19 +222,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var expectedRouteValues = new Dictionary<string, object> { { "area", "Admin" } };
 
             generator.Setup(
-                    mock =>
-                        mock.GenerateActionLink(
-                            It.IsAny<ViewContext>(),
-                            string.Empty,
-                            "Index",
-                            "Home",
-                            "http",
-                            "contoso.com",
-                            "hello=world",
-                            expectedRouteValues,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GenerateActionLink(
+                        It.IsAny<ViewContext>(),
+                        string.Empty,
+                        "Index",
+                        "Home",
+                        "http",
+                        "contoso.com",
+                        "hello=world",
+                        expectedRouteValues,
+                        null
+                    )
+            )
                 .Returns(new TagBuilder("a"))
                 .Verifiable();
             var anchorTagHelper = new AnchorTagHelper(generator.Object)
@@ -284,19 +284,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var expectedRouteValues = new Dictionary<string, object> { { "area", "Admin" } };
 
             generator.Setup(
-                    mock =>
-                        mock.GenerateActionLink(
-                            It.IsAny<ViewContext>(),
-                            string.Empty,
-                            "Index",
-                            "Home",
-                            "http",
-                            "contoso.com",
-                            "hello=world",
-                            expectedRouteValues,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GenerateActionLink(
+                        It.IsAny<ViewContext>(),
+                        string.Empty,
+                        "Index",
+                        "Home",
+                        "http",
+                        "contoso.com",
+                        "hello=world",
+                        expectedRouteValues,
+                        null
+                    )
+            )
                 .Returns(new TagBuilder("a"))
                 .Verifiable();
             var anchorTagHelper = new AnchorTagHelper(generator.Object)
@@ -347,19 +347,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var expectedRouteValues = new Dictionary<string, object> { { "area", string.Empty } };
 
             generator.Setup(
-                    mock =>
-                        mock.GenerateActionLink(
-                            It.IsAny<ViewContext>(),
-                            string.Empty,
-                            "Index",
-                            "Home",
-                            "http",
-                            "contoso.com",
-                            "hello=world",
-                            expectedRouteValues,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GenerateActionLink(
+                        It.IsAny<ViewContext>(),
+                        string.Empty,
+                        "Index",
+                        "Home",
+                        "http",
+                        "contoso.com",
+                        "hello=world",
+                        expectedRouteValues,
+                        null
+                    )
+            )
                 .Returns(new TagBuilder("a"))
                 .Verifiable();
             var anchorTagHelper = new AnchorTagHelper(generator.Object)
@@ -407,19 +407,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>();
             generator.Setup(
-                    mock =>
-                        mock.GeneratePageLink(
-                            It.IsAny<ViewContext>(),
-                            string.Empty,
-                            "/User/Home/Index",
-                            "page-handler",
-                            "http",
-                            "contoso.com",
-                            "hello=world",
-                            It.IsAny<object>(),
-                            null
-                        )
-                )
+                mock =>
+                    mock.GeneratePageLink(
+                        It.IsAny<ViewContext>(),
+                        string.Empty,
+                        "/User/Home/Index",
+                        "page-handler",
+                        "http",
+                        "contoso.com",
+                        "hello=world",
+                        It.IsAny<object>(),
+                        null
+                    )
+            )
                 .Returns(new TagBuilder("a"))
                 .Verifiable();
             var anchorTagHelper = new AnchorTagHelper(generator.Object)
@@ -462,19 +462,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>();
             generator.Setup(
-                    mock =>
-                        mock.GeneratePageLink(
-                            It.IsAny<ViewContext>(),
-                            string.Empty,
-                            "/User/Home/Index",
-                            "page-handler",
-                            "http",
-                            "contoso.com",
-                            "hello=world",
-                            It.IsAny<object>(),
-                            null
-                        )
-                )
+                mock =>
+                    mock.GeneratePageLink(
+                        It.IsAny<ViewContext>(),
+                        string.Empty,
+                        "/User/Home/Index",
+                        "page-handler",
+                        "http",
+                        "contoso.com",
+                        "hello=world",
+                        It.IsAny<object>(),
+                        null
+                    )
+            )
                 .Callback(
                     (
                         ViewContext v,
@@ -592,13 +592,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(null)
             );
-            var expectedErrorMessage = string.Join(
-                Environment.NewLine,
-                "Cannot determine the 'href' attribute for <a>. The following attributes are mutually exclusive:",
-                "asp-route",
-                "asp-controller, asp-action",
-                "asp-page, asp-page-handler"
-            );
+            var expectedErrorMessage = string
+                .Join(
+                    Environment.NewLine,
+                    "Cannot determine the 'href' attribute for <a>. The following attributes are mutually exclusive:",
+                    "asp-route",
+                    "asp-controller, asp-action",
+                    "asp-page, asp-page-handler"
+                );
 
             var context = new TagHelperContext(
                 tagName: "test",
@@ -634,13 +635,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(null)
             );
-            var expectedErrorMessage = string.Join(
-                Environment.NewLine,
-                "Cannot determine the 'href' attribute for <a>. The following attributes are mutually exclusive:",
-                "asp-route",
-                "asp-controller, asp-action",
-                "asp-page, asp-page-handler"
-            );
+            var expectedErrorMessage = string
+                .Join(
+                    Environment.NewLine,
+                    "Cannot determine the 'href' attribute for <a>. The following attributes are mutually exclusive:",
+                    "asp-route",
+                    "asp-controller, asp-action",
+                    "asp-page, asp-page-handler"
+                );
 
             var context = new TagHelperContext(
                 tagName: "test",
@@ -676,13 +678,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(null)
             );
-            var expectedErrorMessage = string.Join(
-                Environment.NewLine,
-                "Cannot determine the 'href' attribute for <a>. The following attributes are mutually exclusive:",
-                "asp-route",
-                "asp-controller, asp-action",
-                "asp-page, asp-page-handler"
-            );
+            var expectedErrorMessage = string
+                .Join(
+                    Environment.NewLine,
+                    "Cannot determine the 'href' attribute for <a>. The following attributes are mutually exclusive:",
+                    "asp-route",
+                    "asp-controller, asp-action",
+                    "asp-page, asp-page-handler"
+                );
 
             var context = new TagHelperContext(
                 tagName: "test",

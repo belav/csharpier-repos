@@ -25,9 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         protected override OptionSet WithChangedOptions(OptionSet options)
         {
             return options.WithChangedOption(
-                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
-                    CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
-                )
+                CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+            )
                 .WithChangedOption(
                     CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
                     CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement

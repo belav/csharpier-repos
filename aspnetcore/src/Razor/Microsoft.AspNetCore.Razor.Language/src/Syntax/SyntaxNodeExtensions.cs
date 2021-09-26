@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 throw new ArgumentNullException(nameof(node));
             }
 
-            return (TNode)node.Green.SetAnnotations(annotations)
+            return (TNode)node.Green
+                .SetAnnotations(annotations)
                 .CreateRed(node.Parent, node.Position);
         }
 
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 throw new ArgumentNullException(nameof(node));
             }
 
-            return (TNode)node.Green.SetDiagnostics(diagnostics)
+            return (TNode)node.Green
+                .SetDiagnostics(diagnostics)
                 .CreateRed(node.Parent, node.Position);
         }
 

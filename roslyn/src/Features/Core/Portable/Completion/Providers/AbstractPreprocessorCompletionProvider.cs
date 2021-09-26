@@ -22,9 +22,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var position = context.Position;
 
             var semanticModel = await originatingDocument.ReuseExistingSpeculativeModelAsync(
-                    position,
-                    cancellationToken
-                )
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var service = originatingDocument.GetRequiredLanguageService<ISyntaxContextService>();
             var solution = originatingDocument.Project.Solution;

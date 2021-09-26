@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             );
 
             // Exclude local function parameters in case they were captured inside the function body
-            var captures = dataFlow.CapturedInside.Except(dataFlow.VariablesDeclared)
+            var captures = dataFlow.CapturedInside
+                .Except(dataFlow.VariablesDeclared)
                 .Except(declaredSymbol.Parameters)
                 .ToList();
 
@@ -188,7 +189,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             var hasAdditionalTypeArguments = !additionalTypeParameters.IsEmpty();
             var additionalTypeArguments = hasAdditionalTypeArguments
                 ? additionalTypeParameters.Select(p => (TypeSyntax)p.Name.ToIdentifierName())
-                      .ToArray()
+                  .ToArray()
                 : null;
 
             var anyDelegatesToReplace = false;
@@ -222,9 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
 
                 if (hasAdditionalTypeArguments)
                 {
-                    var existingTypeArguments = symbol.TypeArguments.Select(
-                        s => s.GenerateTypeSyntax()
-                    );
+                    var existingTypeArguments = symbol.TypeArguments
+                        .Select(s => s.GenerateTypeSyntax());
                     // Prepend additional type arguments to preserve lexical order in which they are defined
                     var typeArguments = additionalTypeArguments.Concat(existingTypeArguments);
                     currentNode = generator.WithTypeArguments(currentNode, typeArguments);
@@ -232,10 +232,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                 }
 
                 if (
-                    node.Parent.IsKind(
-                        SyntaxKind.InvocationExpression,
-                        out InvocationExpressionSyntax invocation
-                    )
+                    node.Parent
+                        .IsKind(
+                            SyntaxKind.InvocationExpression,
+                            out InvocationExpressionSyntax invocation
+                        )
                 )
                 {
                     if (hasAdditionalArguments)
@@ -245,13 +246,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                             && invocation.ArgumentList.Arguments.Any(arg => arg.NameColon != null);
 
                         var additionalArguments = capturesAsParameters.Select(
-                                p =>
-                                    (ArgumentSyntax)GenerateArgument(
-                                        p,
-                                        p.Name,
-                                        shouldUseNamedArguments
-                                    )
-                            )
+                            p =>
+                                (ArgumentSyntax)GenerateArgument(p, p.Name, shouldUseNamedArguments)
+                        )
                             .ToArray();
 
                         editor.ReplaceNode(
@@ -356,9 +353,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             CancellationToken cancellationToken
         ) =>
             semanticModel.GetAllDeclaredSymbols(
-                    node.GetAncestor<MemberDeclarationSyntax>(),
-                    cancellationToken
-                )
+                node.GetAncestor<MemberDeclarationSyntax>(),
+                cancellationToken
+            )
                 .Select(s => s.Name)
                 .ToList();
 

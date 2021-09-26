@@ -111,7 +111,8 @@ namespace Microsoft.Extensions.Hosting.Tests
                     var activityDictionary = (
                         scopeObjectList.FirstOrDefault()
                         as IEnumerable<KeyValuePair<string, object>>
-                    ).ToDictionary(x => x.Key, x => x.Value);
+                    )
+                        .ToDictionary(x => x.Key, x => x.Value);
                     switch (activity.IdFormat)
                     {
                         case ActivityIdFormat.Hierarchical:
@@ -137,14 +138,12 @@ namespace Microsoft.Extensions.Hosting.Tests
                 }
             );
             var loggerProvider = new ScopeDelegateLoggerProvider(logger);
-            using var host = Host.CreateDefaultBuilder()
-                .ConfigureLogging(
-                    logging =>
-                    {
-                        logging.AddProvider(loggerProvider);
-                    }
-                )
-                .Build();
+            using var host = Host.CreateDefaultBuilder().ConfigureLogging(
+                logging =>
+                {
+                    logging.AddProvider(loggerProvider);
+                }
+            ).Build();
 
             logger.LogInformation("Dummy log");
         }
@@ -285,14 +284,13 @@ namespace Microsoft.Extensions.Hosting.Tests
             var configReloadedCancelTokenSource = new CancellationTokenSource();
             var configReloadedCancelToken = configReloadedCancelTokenSource.Token;
 
-            config.GetReloadToken()
-                .RegisterChangeCallback(
-                    o =>
-                    {
-                        configReloadedCancelTokenSource.Cancel();
-                    },
-                    null
-                );
+            config.GetReloadToken().RegisterChangeCallback(
+                o =>
+                {
+                    configReloadedCancelTokenSource.Cancel();
+                },
+                null
+            );
             // Wait for up to 1 minute, if config reloads at any time, cancel the wait.
             await Task.WhenAny(Task.Delay(TimeSpan.FromMinutes(1), configReloadedCancelToken)); // Task.WhenAny ignores the task throwing on cancellation.
             Assert.NotEqual(dynamicConfigMessage1, dynamicConfigMessage2); // Messages are different.
@@ -328,8 +326,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             string dynamicSecretMessage1 = SaveRandomSecret();
 
             var host = Host.CreateDefaultBuilder(
-                    new[] { "environment=Development", $"applicationName={secretId}" }
-                )
+                new[] { "environment=Development", $"applicationName={secretId}" }
+            )
                 .ConfigureHostConfiguration(
                     builder =>
                     {
@@ -347,14 +345,13 @@ namespace Microsoft.Extensions.Hosting.Tests
             var configReloadedCancelTokenSource = new CancellationTokenSource();
             var configReloadedCancelToken = configReloadedCancelTokenSource.Token;
 
-            config.GetReloadToken()
-                .RegisterChangeCallback(
-                    o =>
-                    {
-                        configReloadedCancelTokenSource.Cancel();
-                    },
-                    null
-                );
+            config.GetReloadToken().RegisterChangeCallback(
+                o =>
+                {
+                    configReloadedCancelTokenSource.Cancel();
+                },
+                null
+            );
             // Wait for up to 1 minute, if config reloads at any time, cancel the wait.
             await Task.WhenAny(Task.Delay(TimeSpan.FromMinutes(1), configReloadedCancelToken)); // Task.WhenAny ignores the task throwing on cancellation.
             Assert.NotEqual(dynamicSecretMessage1, dynamicSecretMessage2); // Messages are different.
@@ -375,22 +372,20 @@ namespace Microsoft.Extensions.Hosting.Tests
                 notDefaultTimeoutSeconds != new HostOptions().ShutdownTimeout.TotalSeconds,
                 "Test value must be not equal to default"
             );
-            var host = Host.CreateDefaultBuilder()
-                .ConfigureHostConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new KeyValuePair<string, string>[]
-                            {
-                                new KeyValuePair<string, string>(
-                                    "SHUTDOWNTIMEOUTSECONDS",
-                                    notDefaultTimeoutSeconds.ToString()
-                                )
-                            }
-                        );
-                    }
-                )
-                .Build();
+            var host = Host.CreateDefaultBuilder().ConfigureHostConfiguration(
+                configBuilder =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new KeyValuePair<string, string>[]
+                        {
+                            new KeyValuePair<string, string>(
+                                "SHUTDOWNTIMEOUTSECONDS",
+                                notDefaultTimeoutSeconds.ToString()
+                            )
+                        }
+                    );
+                }
+            ).Build();
 
             var hostOptions = host.Services.GetRequiredService<IOptions<HostOptions>>();
             Assert.Equal(notDefaultTimeoutSeconds, hostOptions.Value.ShutdownTimeout.TotalSeconds);

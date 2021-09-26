@@ -33,12 +33,12 @@ namespace SdtEventSources
             Debug.WriteLine(string.Format("EventSourceTest: Got Command {0}", command.Command));
             Debug.WriteLine(
                 "  Args: "
-                    + string.Join(
-                        ", ",
-                        command.Arguments.Select(
-                            (pair) => string.Format("{0} -> {1}", pair.Key, pair.Value)
+                    + string
+                        .Join(
+                            ", ",
+                            command.Arguments
+                                .Select((pair) => string.Format("{0} -> {1}", pair.Key, pair.Value))
                         )
-                    )
             );
         }
 

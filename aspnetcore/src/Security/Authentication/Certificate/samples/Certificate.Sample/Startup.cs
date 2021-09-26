@@ -73,9 +73,8 @@ namespace Certificate.Sample
                         "{*url}",
                         context =>
                         {
-                            return context.Response.WriteAsync(
-                                $"Hello {context.User.Identity.Name}"
-                            );
+                            return context.Response
+                                .WriteAsync($"Hello {context.User.Identity.Name}");
                         }
                     );
                 }

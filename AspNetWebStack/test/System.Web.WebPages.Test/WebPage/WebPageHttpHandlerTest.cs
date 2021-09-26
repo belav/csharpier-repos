@@ -76,14 +76,13 @@ namespace System.Web.WebPages.Test
                 headerValue = null;
             var context = new Mock<HttpContextBase>();
             var response = new Mock<HttpResponseBase>();
-            response.Setup(c => c.AddHeader(It.IsAny<string>(), It.IsAny<string>()))
-                .Callback(
-                    (string key, string value) =>
-                    {
-                        headerKey = key;
-                        headerValue = value;
-                    }
-                );
+            response.Setup(c => c.AddHeader(It.IsAny<string>(), It.IsAny<string>())).Callback(
+                (string key, string value) =>
+                {
+                    headerKey = key;
+                    headerValue = value;
+                }
+            );
             context.Setup(c => c.Response).Returns(response.Object);
             context.Setup(c => c.Items).Returns(new Hashtable());
 
@@ -227,12 +226,9 @@ namespace System.Web.WebPages.Test
         {
             Mock<HttpResponseBase> mockResponse = new Mock<HttpResponseBase>();
             mockResponse.Setup(
-                    response =>
-                        response.AppendHeader(
-                            "X-AspNetWebPages-Version",
-                            LatestRazorVersion.MajorMinor
-                        )
-                )
+                response =>
+                    response.AppendHeader("X-AspNetWebPages-Version", LatestRazorVersion.MajorMinor)
+            )
                 .Verifiable();
 
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();

@@ -17,10 +17,8 @@ namespace System.CommandLine.Rendering.Tests
         [MemberData(nameof(TestCases))]
         public void In_ansi_mode_word_wrap_wraps_correctly(RenderingTestCase @case)
         {
-            new ConsoleRenderer(_terminal, OutputMode.Ansi).RenderToRegion(
-                @case.InputSpan,
-                @case.Region
-            );
+            new ConsoleRenderer(_terminal, OutputMode.Ansi)
+                .RenderToRegion(@case.InputSpan, @case.Region);
 
             var output = _terminal.RenderOperations();
 

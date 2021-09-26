@@ -503,10 +503,8 @@ namespace System.Diagnostics
                 )
                 {
                     string? filterAndPayloadSpecs = null;
-                    command.Arguments!.TryGetValue(
-                        "FilterAndPayloadSpecs",
-                        out filterAndPayloadSpecs
-                    );
+                    command.Arguments!
+                        .TryGetValue("FilterAndPayloadSpecs", out filterAndPayloadSpecs);
 
                     if (!IsEnabled(EventLevel.Informational, Keywords.IgnoreShortCutKeywords))
                     {
@@ -1036,11 +1034,9 @@ namespace System.Diagnostics
                 );
 
                 ReadOnlySpan<char> entry = filterAndPayloadSpec.AsSpan(
-                        startIdx + c_ActivitySourcePrefix.Length,
-                        (colonIdx >= 0 ? colonIdx : endIdx)
-                            - startIdx
-                            - c_ActivitySourcePrefix.Length
-                    )
+                    startIdx + c_ActivitySourcePrefix.Length,
+                    (colonIdx >= 0 ? colonIdx : endIdx) - startIdx - c_ActivitySourcePrefix.Length
+                )
                     .Trim();
 
                 int eventNameIndex = entry.IndexOf('/');
@@ -1049,9 +1045,9 @@ namespace System.Diagnostics
                     activitySourceName = entry.Slice(0, eventNameIndex).Trim();
 
                     ReadOnlySpan<char> suffixPart = entry.Slice(
-                            eventNameIndex + 1,
-                            entry.Length - eventNameIndex - 1
-                        )
+                        eventNameIndex + 1,
+                        entry.Length - eventNameIndex - 1
+                    )
                         .Trim();
                     int samplingResultIndex = suffixPart.IndexOf('-');
                     if (samplingResultIndex >= 0)
@@ -1059,9 +1055,9 @@ namespace System.Diagnostics
                         // We have the format "[AS]SourceName/[EventName]-[SamplingResult]
                         eventName = suffixPart.Slice(0, samplingResultIndex).Trim();
                         suffixPart = suffixPart.Slice(
-                                samplingResultIndex + 1,
-                                suffixPart.Length - samplingResultIndex - 1
-                            )
+                            samplingResultIndex + 1,
+                            suffixPart.Length - samplingResultIndex - 1
+                        )
                             .Trim();
 
                         if (suffixPart.Length > 0)
@@ -1769,7 +1765,8 @@ namespace System.Diagnostics
 
                                 Type elemType = iFaceTypeInfo.GetGenericArguments()[0];
                                 Type instantiatedTypedPropertyFetcher =
-                                    typeof(EnumeratePropertyFetch<>).GetTypeInfo()
+                                    typeof(EnumeratePropertyFetch<>)
+                                        .GetTypeInfo()
                                         .MakeGenericType(elemType);
                                 return (PropertyFetch)Activator.CreateInstance(
                                     instantiatedTypedPropertyFetcher,
@@ -1836,9 +1833,8 @@ namespace System.Diagnostics
                                 typeof(TObject).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo())
                             );
                             _propertyFetch =
-                                (Func<TObject, TProperty>)property.GetMethod!.CreateDelegate(
-                                    typeof(Func<TObject, TProperty>)
-                                );
+                                (Func<TObject, TProperty>)property.GetMethod!
+                                    .CreateDelegate(typeof(Func<TObject, TProperty>));
                         }
                         public override object? Fetch(object? obj)
                         {
@@ -1859,9 +1855,8 @@ namespace System.Diagnostics
                         {
                             Debug.Assert(typeof(TStruct) == type);
                             _propertyFetch =
-                                (StructFunc<TStruct, TProperty>)property.GetMethod!.CreateDelegate(
-                                    typeof(StructFunc<TStruct, TProperty>)
-                                );
+                                (StructFunc<TStruct, TProperty>)property.GetMethod!
+                                    .CreateDelegate(typeof(StructFunc<TStruct, TProperty>));
                         }
                         public override object? Fetch(object? obj)
                         {

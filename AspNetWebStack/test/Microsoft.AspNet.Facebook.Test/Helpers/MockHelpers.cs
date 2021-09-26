@@ -48,16 +48,14 @@ namespace Microsoft.AspNet.Facebook.Test.Helpers
         {
             Mock<ActionDescriptor> actionDescriptor = new Mock<ActionDescriptor>();
             actionDescriptor.Setup(
-                    a => a.GetCustomAttributes(typeof(FacebookAuthorizeAttribute), true)
-                )
+                a => a.GetCustomAttributes(typeof(FacebookAuthorizeAttribute), true)
+            )
                 .Returns(actionAuthorizeAttributes ?? new object[0]);
             actionDescriptor.Setup(
-                    a =>
-                        a.ControllerDescriptor.GetCustomAttributes(
-                            typeof(FacebookAuthorizeAttribute),
-                            true
-                        )
-                )
+                a =>
+                    a.ControllerDescriptor
+                        .GetCustomAttributes(typeof(FacebookAuthorizeAttribute), true)
+            )
                 .Returns(controllerAuthorizeAttributes ?? new object[0]);
             return actionDescriptor.Object;
         }

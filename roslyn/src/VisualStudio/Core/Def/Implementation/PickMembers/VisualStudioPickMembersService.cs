@@ -40,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
             if (result.HasValue && result.Value)
             {
                 return new PickMembersResult(
-                    viewModel.MemberContainers.Where(c => c.IsChecked)
+                    viewModel.MemberContainers
+                        .Where(c => c.IsChecked)
                         .Select(c => c.Symbol)
                         .ToImmutableArray(),
                     options

@@ -235,7 +235,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "8443760a9ae94770d6373e0197be23a6a891f0c522ca96b3e8008bf23547474b7e24e7f32e8134df3862d84f4dea2470548e"
                 + "c774dd74f149a56cdd966e141122900d00ad9d10ea1848541294a1302b06092a864886f70d010701301406082a864886f70d"
                 + "030704089c8119f6cf6b174c8008bcea3a10d0737eb9"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             Assert.False(
                 Rfc3161TimestampToken.TryDecode(
@@ -261,8 +262,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(contentInfo);
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 cms.ComputeSignature(
@@ -1013,9 +1014,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             .ToArray();
                     }
 
-                    signer.SignedAttributes.Add(
-                        new AsnEncodedData("1.2.840.113549.1.9.16.2.12", signingCertificateV1Bytes)
-                    );
+                    signer.SignedAttributes
+                        .Add(
+                            new AsnEncodedData(
+                                "1.2.840.113549.1.9.16.2.12",
+                                signingCertificateV1Bytes
+                            )
+                        );
                 }
 
                 if (v2Option != SigningCertificateOption.Omit)
@@ -1110,9 +1115,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
                     Buffer.BlockCopy(issuerNameBytes, 0, attrBytes, index, issuerNameBytes.Length);
 
-                    signer.SignedAttributes.Add(
-                        new AsnEncodedData("1.2.840.113549.1.9.16.2.47", attrBytes)
-                    );
+                    signer.SignedAttributes
+                        .Add(new AsnEncodedData("1.2.840.113549.1.9.16.2.47", attrBytes));
                 }
 
                 cms.ComputeSignature(signer);

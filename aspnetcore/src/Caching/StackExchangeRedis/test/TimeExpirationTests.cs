@@ -96,9 +96,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
                     cache.Set(
                         key,
                         value,
-                        new DistributedCacheEntryOptions().SetAbsoluteExpiration(
-                            TimeSpan.FromMinutes(-1)
-                        )
+                        new DistributedCacheEntryOptions()
+                            .SetAbsoluteExpiration(TimeSpan.FromMinutes(-1))
                     );
                 },
                 nameof(DistributedCacheEntryOptions.AbsoluteExpirationRelativeToNow),
@@ -183,9 +182,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
                     cache.Set(
                         key,
                         value,
-                        new DistributedCacheEntryOptions().SetSlidingExpiration(
-                            TimeSpan.FromMinutes(-1)
-                        )
+                        new DistributedCacheEntryOptions()
+                            .SetSlidingExpiration(TimeSpan.FromMinutes(-1))
                     );
                 },
                 nameof(DistributedCacheEntryOptions.SlidingExpiration),
@@ -294,7 +292,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
             cache.Set(
                 key,
                 value,
-                new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(1))
+                new DistributedCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(1))
                     .SetAbsoluteExpiration(TimeSpan.FromSeconds(3))
             );
 

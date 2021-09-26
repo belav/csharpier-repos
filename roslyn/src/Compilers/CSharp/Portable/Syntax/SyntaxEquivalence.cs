@@ -270,9 +270,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 return true;
             }
 
-            using var beforeDirectivesEnumerator = ((Green.CSharpSyntaxNode)before).GetDirectives()
+            using var beforeDirectivesEnumerator = ((Green.CSharpSyntaxNode)before)
+                .GetDirectives()
                 .GetEnumerator();
-            using var afterDirectivesEnumerator = ((Green.CSharpSyntaxNode)after).GetDirectives()
+            using var afterDirectivesEnumerator = ((Green.CSharpSyntaxNode)after)
+                .GetDirectives()
                 .GetEnumerator();
             while (true)
             {

@@ -285,8 +285,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public void Can_configure_IsRequired_on_to_principal_nonUnique()
         {
             var builder =
-                CreateInternalNavigationBuilder()
-                    .Metadata.ForeignKey.Builder.HasNavigation(
+                CreateInternalNavigationBuilder().Metadata.ForeignKey.Builder
+                    .HasNavigation(
                         nameof(OrderDetails.Order),
                         pointsToPrincipal: true,
                         ConfigurationSource.Explicit
@@ -301,11 +301,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var foreignKey = CreateInternalNavigationBuilder().Metadata.ForeignKey;
             foreignKey =
-                foreignKey.Builder.HasNavigations(
-                    nameof(OrderDetails.Order),
-                    nameof(Order.SingleDetails),
-                    ConfigurationSource.Explicit
-                ).Metadata;
+                foreignKey.Builder
+                    .HasNavigations(
+                        nameof(OrderDetails.Order),
+                        nameof(Order.SingleDetails),
+                        ConfigurationSource.Explicit
+                    ).Metadata;
 
             foreignKey.PrincipalToDependent.Builder.IsRequired(true, ConfigurationSource.Explicit);
 
@@ -317,11 +318,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var foreignKey = CreateInternalNavigationBuilder().Metadata.ForeignKey;
             foreignKey =
-                foreignKey.Builder.HasNavigations(
-                    nameof(OrderDetails.Order),
-                    nameof(Order.SingleDetails),
-                    ConfigurationSource.Explicit
-                ).Metadata;
+                foreignKey.Builder
+                    .HasNavigations(
+                        nameof(OrderDetails.Order),
+                        nameof(Order.SingleDetails),
+                        ConfigurationSource.Explicit
+                    ).Metadata;
 
             foreignKey.PrincipalToDependent.Builder.IsRequired(true, ConfigurationSource.Explicit);
 
@@ -330,9 +332,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private InternalNavigationBuilder CreateInternalNavigationBuilder()
         {
-            var modelBuilder =
-                (InternalModelBuilder)InMemoryTestHelpers.Instance.CreateConventionBuilder()
-                    .GetInfrastructure();
+            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers.Instance
+                .CreateConventionBuilder()
+                .GetInfrastructure();
             var orderEntityBuilder = modelBuilder.Entity(
                 typeof(Order),
                 ConfigurationSource.Convention
@@ -342,11 +344,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ConfigurationSource.Convention
             );
             orderEntityBuilder.HasRelationship(
-                    detailsEntityBuilder.Metadata,
-                    nameof(Order.Details),
-                    ConfigurationSource.DataAnnotation,
-                    targetIsPrincipal: false
-                )
+                detailsEntityBuilder.Metadata,
+                nameof(Order.Details),
+                ConfigurationSource.DataAnnotation,
+                targetIsPrincipal: false
+            )
                 .IsUnique(false, ConfigurationSource.Convention);
             var navigation = (Navigation)orderEntityBuilder.Navigation(nameof(Order.Details));
 
@@ -355,15 +357,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         protected class Order
         {
-            public static readonly FieldInfo DetailsField = typeof(Order).GetField(
-                nameof(_details),
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            public static readonly FieldInfo DetailsField = typeof(Order)
+                .GetField(nameof(_details), BindingFlags.Instance | BindingFlags.NonPublic);
 
-            public static readonly FieldInfo OtherDetailsField = typeof(Order).GetField(
-                nameof(_otherDetails),
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            public static readonly FieldInfo OtherDetailsField = typeof(Order)
+                .GetField(nameof(_otherDetails), BindingFlags.Instance | BindingFlags.NonPublic);
 
             public int OrderId { get; set; }
 

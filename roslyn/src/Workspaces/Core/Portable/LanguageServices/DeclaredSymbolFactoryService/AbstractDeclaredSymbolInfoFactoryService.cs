@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             Debug.Assert(arity > 0);
             return (arity <= s_aritySuffixesOneToNine.Length)
               ? s_aritySuffixesOneToNine[arity - 1]
-              : string.Concat(
+              : string
+                .Concat(
                     GenericTypeNameManglingString,
                     arity.ToString(CultureInfo.InvariantCulture)
                 );

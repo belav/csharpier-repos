@@ -25,7 +25,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting)]
         public void VerifyFormattingIndent()
         {
-            var testCode = new StringBuilder().AppendLine("$$Module A")
+            var testCode = new StringBuilder()
+                .AppendLine("$$Module A")
                 .AppendLine("    Sub Main(args As String())")
                 .AppendLine("    ")
                 .AppendLine("        End Sub")
@@ -74,15 +75,10 @@ Module Program
     End Function
 End Module"
             );
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
-            VisualStudio.Editor.SendKeys(
-                "(o",
-                new KeyPress(VirtualKey.Enter, ShiftState.Shift),
-                "'comment"
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Editor
+                .SendKeys("(o", new KeyPress(VirtualKey.Enter, ShiftState.Shift), "'comment");
             VisualStudio.Editor.Verify.TextContains(
                 @"
 Module Program

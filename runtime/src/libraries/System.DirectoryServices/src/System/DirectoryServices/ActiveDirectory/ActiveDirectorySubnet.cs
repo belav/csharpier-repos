@@ -331,9 +331,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 else
                 {
                     if (Site != null)
-                        cachedEntry.Properties["siteObject"].Add(
-                            _site!.cachedEntry.Properties["distinguishedName"][0]
-                        );
+                        cachedEntry.Properties["siteObject"]
+                            .Add(_site!.cachedEntry.Properties["distinguishedName"][0]);
 
                     cachedEntry.CommitChanges();
 

@@ -727,11 +727,12 @@ namespace System.Xml
             else
             {
                 string? defaultNs = _predefinedNamespaces.LookupNamespace(string.Empty);
-                _nsStack[2].Set(
-                    string.Empty,
-                    (defaultNs == null ? string.Empty : defaultNs),
-                    NamespaceKind.Implied
-                );
+                _nsStack[2]
+                    .Set(
+                        string.Empty,
+                        (defaultNs == null ? string.Empty : defaultNs),
+                        NamespaceKind.Implied
+                    );
             }
             _nsTop = 2;
 

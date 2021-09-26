@@ -162,9 +162,8 @@ namespace JitBench
                 throw new NotSupportedException("Unknown where this OS stores the tar executable");
             }
 
-            await new ProcessRunner(tarToolPath, "-xf " + tarPath).WithWorkingDirectory(
-                    expandedDirPath
-                )
+            await new ProcessRunner(tarToolPath, "-xf " + tarPath)
+                .WithWorkingDirectory(expandedDirPath)
                 .WithLog(output)
                 .WithExpectedExitCode(0)
                 .Run();

@@ -47,21 +47,17 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         [Fact]
         public async Task ThrowsIfClientIdMissing()
         {
-            using var host = await CreateHost(
-                services =>
-                    services.AddAuthentication()
-                        .AddOAuth(
-                            "weeblie",
-                            o =>
-                            {
-                                o.SignInScheme = "whatever";
-                                o.CallbackPath = "/";
-                                o.ClientSecret = "whatever";
-                                o.TokenEndpoint = "/";
-                                o.AuthorizationEndpoint = "/";
-                            }
-                        )
-            );
+            using var host = await CreateHost(services => services.AddAuthentication().AddOAuth(
+                        "weeblie",
+                        o =>
+                        {
+                            o.SignInScheme = "whatever";
+                            o.CallbackPath = "/";
+                            o.ClientSecret = "whatever";
+                            o.TokenEndpoint = "/";
+                            o.AuthorizationEndpoint = "/";
+                        }
+                    ));
             using var server = host.GetTestServer();
             await Assert.ThrowsAsync<ArgumentException>(
                 "ClientId",
@@ -72,21 +68,17 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         [Fact]
         public async Task ThrowsIfClientSecretMissing()
         {
-            using var host = await CreateHost(
-                services =>
-                    services.AddAuthentication()
-                        .AddOAuth(
-                            "weeblie",
-                            o =>
-                            {
-                                o.SignInScheme = "whatever";
-                                o.ClientId = "Whatever;";
-                                o.CallbackPath = "/";
-                                o.TokenEndpoint = "/";
-                                o.AuthorizationEndpoint = "/";
-                            }
-                        )
-            );
+            using var host = await CreateHost(services => services.AddAuthentication().AddOAuth(
+                        "weeblie",
+                        o =>
+                        {
+                            o.SignInScheme = "whatever";
+                            o.ClientId = "Whatever;";
+                            o.CallbackPath = "/";
+                            o.TokenEndpoint = "/";
+                            o.AuthorizationEndpoint = "/";
+                        }
+                    ));
             using var server = host.GetTestServer();
             await Assert.ThrowsAsync<ArgumentException>(
                 "ClientSecret",
@@ -97,21 +89,17 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         [Fact]
         public async Task ThrowsIfCallbackPathMissing()
         {
-            using var host = await CreateHost(
-                services =>
-                    services.AddAuthentication()
-                        .AddOAuth(
-                            "weeblie",
-                            o =>
-                            {
-                                o.ClientId = "Whatever;";
-                                o.ClientSecret = "Whatever;";
-                                o.TokenEndpoint = "/";
-                                o.AuthorizationEndpoint = "/";
-                                o.SignInScheme = "eh";
-                            }
-                        )
-            );
+            using var host = await CreateHost(services => services.AddAuthentication().AddOAuth(
+                        "weeblie",
+                        o =>
+                        {
+                            o.ClientId = "Whatever;";
+                            o.ClientSecret = "Whatever;";
+                            o.TokenEndpoint = "/";
+                            o.AuthorizationEndpoint = "/";
+                            o.SignInScheme = "eh";
+                        }
+                    ));
             using var server = host.GetTestServer();
             await Assert.ThrowsAsync<ArgumentException>(
                 "CallbackPath",
@@ -122,21 +110,17 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         [Fact]
         public async Task ThrowsIfTokenEndpointMissing()
         {
-            using var host = await CreateHost(
-                services =>
-                    services.AddAuthentication()
-                        .AddOAuth(
-                            "weeblie",
-                            o =>
-                            {
-                                o.ClientId = "Whatever;";
-                                o.ClientSecret = "Whatever;";
-                                o.CallbackPath = "/";
-                                o.AuthorizationEndpoint = "/";
-                                o.SignInScheme = "eh";
-                            }
-                        )
-            );
+            using var host = await CreateHost(services => services.AddAuthentication().AddOAuth(
+                        "weeblie",
+                        o =>
+                        {
+                            o.ClientId = "Whatever;";
+                            o.ClientSecret = "Whatever;";
+                            o.CallbackPath = "/";
+                            o.AuthorizationEndpoint = "/";
+                            o.SignInScheme = "eh";
+                        }
+                    ));
             using var server = host.GetTestServer();
             await Assert.ThrowsAsync<ArgumentException>(
                 "TokenEndpoint",
@@ -147,21 +131,17 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         [Fact]
         public async Task ThrowsIfAuthorizationEndpointMissing()
         {
-            using var host = await CreateHost(
-                services =>
-                    services.AddAuthentication()
-                        .AddOAuth(
-                            "weeblie",
-                            o =>
-                            {
-                                o.ClientId = "Whatever;";
-                                o.ClientSecret = "Whatever;";
-                                o.CallbackPath = "/";
-                                o.TokenEndpoint = "/";
-                                o.SignInScheme = "eh";
-                            }
-                        )
-            );
+            using var host = await CreateHost(services => services.AddAuthentication().AddOAuth(
+                        "weeblie",
+                        o =>
+                        {
+                            o.ClientId = "Whatever;";
+                            o.ClientSecret = "Whatever;";
+                            o.CallbackPath = "/";
+                            o.TokenEndpoint = "/";
+                            o.SignInScheme = "eh";
+                        }
+                    ));
             using var server = host.GetTestServer();
             await Assert.ThrowsAsync<ArgumentException>(
                 "AuthorizationEndpoint",
@@ -173,15 +153,13 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         public async Task RedirectToIdentityProvider_SetsCorrelationIdCookiePath_ToCallBackPath()
         {
             using var host = await CreateHost(
-                s =>
-                    s.AddAuthentication()
-                        .AddOAuth(
-                            "Weblie",
-                            opt =>
-                            {
-                                ConfigureDefaults(opt);
-                            }
-                        ),
+                s => s.AddAuthentication().AddOAuth(
+                        "Weblie",
+                        opt =>
+                        {
+                            ConfigureDefaults(opt);
+                        }
+                    ),
                 async ctx =>
                 {
                     await ctx.ChallengeAsync("Weblie");
@@ -207,16 +185,14 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         public async Task RedirectToAuthorizeEndpoint_CorrelationIdCookieOptions_CanBeOverriden()
         {
             using var host = await CreateHost(
-                s =>
-                    s.AddAuthentication()
-                        .AddOAuth(
-                            "Weblie",
-                            opt =>
-                            {
-                                ConfigureDefaults(opt);
-                                opt.CorrelationCookie.Path = "/";
-                            }
-                        ),
+                s => s.AddAuthentication().AddOAuth(
+                        "Weblie",
+                        opt =>
+                        {
+                            ConfigureDefaults(opt);
+                            opt.CorrelationCookie.Path = "/";
+                        }
+                    ),
                 async ctx =>
                 {
                     await ctx.ChallengeAsync("Weblie");
@@ -242,18 +218,16 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         public async Task RedirectToAuthorizeEndpoint_HasScopeAsConfigured()
         {
             using var host = await CreateHost(
-                s =>
-                    s.AddAuthentication()
-                        .AddOAuth(
-                            "Weblie",
-                            opt =>
-                            {
-                                ConfigureDefaults(opt);
-                                opt.Scope.Clear();
-                                opt.Scope.Add("foo");
-                                opt.Scope.Add("bar");
-                            }
-                        ),
+                s => s.AddAuthentication().AddOAuth(
+                        "Weblie",
+                        opt =>
+                        {
+                            ConfigureDefaults(opt);
+                            opt.Scope.Clear();
+                            opt.Scope.Add("foo");
+                            opt.Scope.Add("bar");
+                        }
+                    ),
                 async ctx =>
                 {
                     await ctx.ChallengeAsync("Weblie");
@@ -273,18 +247,16 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         public async Task RedirectToAuthorizeEndpoint_HasScopeAsOverwritten()
         {
             using var host = await CreateHost(
-                s =>
-                    s.AddAuthentication()
-                        .AddOAuth(
-                            "Weblie",
-                            opt =>
-                            {
-                                ConfigureDefaults(opt);
-                                opt.Scope.Clear();
-                                opt.Scope.Add("foo");
-                                opt.Scope.Add("bar");
-                            }
-                        ),
+                s => s.AddAuthentication().AddOAuth(
+                        "Weblie",
+                        opt =>
+                        {
+                            ConfigureDefaults(opt);
+                            opt.Scope.Clear();
+                            opt.Scope.Add("foo");
+                            opt.Scope.Add("bar");
+                        }
+                    ),
                 async ctx =>
                 {
                     var properties = new OAuthChallengeProperties();
@@ -306,18 +278,16 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         public async Task RedirectToAuthorizeEndpoint_HasScopeAsOverwrittenWithBaseAuthenticationProperties()
         {
             using var host = await CreateHost(
-                s =>
-                    s.AddAuthentication()
-                        .AddOAuth(
-                            "Weblie",
-                            opt =>
-                            {
-                                ConfigureDefaults(opt);
-                                opt.Scope.Clear();
-                                opt.Scope.Add("foo");
-                                opt.Scope.Add("bar");
-                            }
-                        ),
+                s => s.AddAuthentication().AddOAuth(
+                        "Weblie",
+                        opt =>
+                        {
+                            ConfigureDefaults(opt);
+                            opt.Scope.Clear();
+                            opt.Scope.Add("foo");
+                            opt.Scope.Add("bar");
+                        }
+                    ),
                 async ctx =>
                 {
                     var properties = new AuthenticationProperties();
@@ -351,29 +321,24 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         [Fact]
         public async Task HandleRequestAsync_RedirectsToAccessDeniedPathWhenExplicitlySet()
         {
-            using var host = await CreateHost(
-                s =>
-                    s.AddAuthentication()
-                        .AddOAuth(
-                            "Weblie",
-                            opt =>
-                            {
-                                opt.ClientId = "Test Id";
-                                opt.ClientSecret = "secret";
-                                opt.SignInScheme =
-                                    CookieAuthenticationDefaults.AuthenticationScheme;
-                                opt.AuthorizationEndpoint = "https://example.com/provider/login";
-                                opt.TokenEndpoint = "https://example.com/provider/token";
-                                opt.CallbackPath = "/oauth-callback";
-                                opt.AccessDeniedPath = "/access-denied";
-                                opt.StateDataFormat = new TestStateDataFormat();
-                                opt.Events.OnRemoteFailure = context =>
-                                    throw new InvalidOperationException(
-                                        "This event should not be called."
-                                    );
-                            }
-                        )
-            );
+            using var host = await CreateHost(s => s.AddAuthentication().AddOAuth(
+                        "Weblie",
+                        opt =>
+                        {
+                            opt.ClientId = "Test Id";
+                            opt.ClientSecret = "secret";
+                            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                            opt.AuthorizationEndpoint = "https://example.com/provider/login";
+                            opt.TokenEndpoint = "https://example.com/provider/token";
+                            opt.CallbackPath = "/oauth-callback";
+                            opt.AccessDeniedPath = "/access-denied";
+                            opt.StateDataFormat = new TestStateDataFormat();
+                            opt.Events.OnRemoteFailure = context =>
+                                throw new InvalidOperationException(
+                                    "This event should not be called."
+                                );
+                        }
+                    ));
 
             using var server = host.GetTestServer();
             var transaction = await server.SendAsync(
@@ -391,38 +356,30 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         [Fact]
         public async Task HandleRequestAsync_InvokesAccessDeniedEvent()
         {
-            using var host = await CreateHost(
-                s =>
-                    s.AddAuthentication()
-                        .AddOAuth(
-                            "Weblie",
-                            opt =>
+            using var host = await CreateHost(s => s.AddAuthentication().AddOAuth(
+                        "Weblie",
+                        opt =>
+                        {
+                            opt.ClientId = "Test Id";
+                            opt.ClientSecret = "secret";
+                            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                            opt.AuthorizationEndpoint = "https://example.com/provider/login";
+                            opt.TokenEndpoint = "https://example.com/provider/token";
+                            opt.CallbackPath = "/oauth-callback";
+                            opt.StateDataFormat = new TestStateDataFormat();
+                            opt.Events = new OAuthEvents()
                             {
-                                opt.ClientId = "Test Id";
-                                opt.ClientSecret = "secret";
-                                opt.SignInScheme =
-                                    CookieAuthenticationDefaults.AuthenticationScheme;
-                                opt.AuthorizationEndpoint = "https://example.com/provider/login";
-                                opt.TokenEndpoint = "https://example.com/provider/token";
-                                opt.CallbackPath = "/oauth-callback";
-                                opt.StateDataFormat = new TestStateDataFormat();
-                                opt.Events = new OAuthEvents()
+                                OnAccessDenied = context =>
                                 {
-                                    OnAccessDenied = context =>
-                                    {
-                                        Assert.Equal(
-                                            "testvalue",
-                                            context.Properties.Items["testkey"]
-                                        );
-                                        context.Response.StatusCode =
-                                            StatusCodes.Status406NotAcceptable;
-                                        context.HandleResponse();
-                                        return Task.CompletedTask;
-                                    }
-                                };
-                            }
-                        )
-            );
+                                    Assert.Equal("testvalue", context.Properties.Items["testkey"]);
+                                    context.Response.StatusCode =
+                                        StatusCodes.Status406NotAcceptable;
+                                    context.HandleResponse();
+                                    return Task.CompletedTask;
+                                }
+                            };
+                        }
+                    ));
 
             using var server = host.GetTestServer();
             var transaction = await server.SendAsync(
@@ -437,42 +394,34 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         [Fact]
         public async Task HandleRequestAsync_InvokesRemoteFailureEventWhenAccessDeniedPathIsNotExplicitlySet()
         {
-            using var host = await CreateHost(
-                s =>
-                    s.AddAuthentication()
-                        .AddOAuth(
-                            "Weblie",
-                            opt =>
+            using var host = await CreateHost(s => s.AddAuthentication().AddOAuth(
+                        "Weblie",
+                        opt =>
+                        {
+                            opt.ClientId = "Test Id";
+                            opt.ClientSecret = "secret";
+                            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                            opt.AuthorizationEndpoint = "https://example.com/provider/login";
+                            opt.TokenEndpoint = "https://example.com/provider/token";
+                            opt.CallbackPath = "/oauth-callback";
+                            opt.StateDataFormat = new TestStateDataFormat();
+                            opt.Events = new OAuthEvents()
                             {
-                                opt.ClientId = "Test Id";
-                                opt.ClientSecret = "secret";
-                                opt.SignInScheme =
-                                    CookieAuthenticationDefaults.AuthenticationScheme;
-                                opt.AuthorizationEndpoint = "https://example.com/provider/login";
-                                opt.TokenEndpoint = "https://example.com/provider/token";
-                                opt.CallbackPath = "/oauth-callback";
-                                opt.StateDataFormat = new TestStateDataFormat();
-                                opt.Events = new OAuthEvents()
+                                OnRemoteFailure = context =>
                                 {
-                                    OnRemoteFailure = context =>
-                                    {
-                                        Assert.Equal(
-                                            "Access was denied by the resource owner or by the remote server.",
-                                            context.Failure.Message
-                                        );
-                                        Assert.Equal(
-                                            "testvalue",
-                                            context.Properties.Items["testkey"]
-                                        );
-                                        context.Response.StatusCode =
-                                            StatusCodes.Status406NotAcceptable;
-                                        context.HandleResponse();
-                                        return Task.CompletedTask;
-                                    }
-                                };
-                            }
-                        )
-            );
+                                    Assert.Equal(
+                                        "Access was denied by the resource owner or by the remote server.",
+                                        context.Failure.Message
+                                    );
+                                    Assert.Equal("testvalue", context.Properties.Items["testkey"]);
+                                    context.Response.StatusCode =
+                                        StatusCodes.Status406NotAcceptable;
+                                    context.HandleResponse();
+                                    return Task.CompletedTask;
+                                }
+                            };
+                        }
+                    ));
 
             using var server = host.GetTestServer();
             var transaction = await server.SendAsync(
@@ -487,39 +436,31 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
         [Fact]
         public async Task RemoteAuthenticationFailed_OAuthError_IncludesProperties()
         {
-            using var host = await CreateHost(
-                s =>
-                    s.AddAuthentication()
-                        .AddOAuth(
-                            "Weblie",
-                            opt =>
+            using var host = await CreateHost(s => s.AddAuthentication().AddOAuth(
+                        "Weblie",
+                        opt =>
+                        {
+                            opt.ClientId = "Test Id";
+                            opt.ClientSecret = "secret";
+                            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                            opt.AuthorizationEndpoint = "https://example.com/provider/login";
+                            opt.TokenEndpoint = "https://example.com/provider/token";
+                            opt.CallbackPath = "/oauth-callback";
+                            opt.StateDataFormat = new TestStateDataFormat();
+                            opt.Events = new OAuthEvents()
                             {
-                                opt.ClientId = "Test Id";
-                                opt.ClientSecret = "secret";
-                                opt.SignInScheme =
-                                    CookieAuthenticationDefaults.AuthenticationScheme;
-                                opt.AuthorizationEndpoint = "https://example.com/provider/login";
-                                opt.TokenEndpoint = "https://example.com/provider/token";
-                                opt.CallbackPath = "/oauth-callback";
-                                opt.StateDataFormat = new TestStateDataFormat();
-                                opt.Events = new OAuthEvents()
+                                OnRemoteFailure = context =>
                                 {
-                                    OnRemoteFailure = context =>
-                                    {
-                                        Assert.Contains("custom_error", context.Failure.Message);
-                                        Assert.Equal(
-                                            "testvalue",
-                                            context.Properties.Items["testkey"]
-                                        );
-                                        context.Response.StatusCode =
-                                            StatusCodes.Status406NotAcceptable;
-                                        context.HandleResponse();
-                                        return Task.CompletedTask;
-                                    }
-                                };
-                            }
-                        )
-            );
+                                    Assert.Contains("custom_error", context.Failure.Message);
+                                    Assert.Equal("testvalue", context.Properties.Items["testkey"]);
+                                    context.Response.StatusCode =
+                                        StatusCodes.Status406NotAcceptable;
+                                    context.HandleResponse();
+                                    return Task.CompletedTask;
+                                }
+                            };
+                        }
+                    ));
 
             using var server = host.GetTestServer();
             var transaction = await server.SendAsync(
@@ -536,26 +477,22 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             Func<HttpContext, Task<bool>> handler = null
         )
         {
-            var host = new HostBuilder().ConfigureWebHost(
-                    builder =>
-                        builder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseAuthentication();
-                                    app.Use(
-                                        async (context, next) =>
+            var host = new HostBuilder()
+                .ConfigureWebHost(builder => builder.UseTestServer().Configure(
+                            app =>
+                            {
+                                app.UseAuthentication();
+                                app.Use(
+                                    async (context, next) =>
+                                    {
+                                        if (handler == null || !await handler(context))
                                         {
-                                            if (handler == null || !await handler(context))
-                                            {
-                                                await next();
-                                            }
+                                            await next();
                                         }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(configureServices)
-                )
+                                    }
+                                );
+                            }
+                        ).ConfigureServices(configureServices))
                 .Build();
             await host.StartAsync();
             return host;

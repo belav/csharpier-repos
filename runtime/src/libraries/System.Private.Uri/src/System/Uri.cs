@@ -507,11 +507,8 @@ namespace System
             else
             {
                 dontEscape = false;
-                relativeUri = baseUri.Syntax.InternalResolve(
-                    baseUri,
-                    this,
-                    out UriFormatException? e
-                );
+                relativeUri = baseUri.Syntax
+                    .InternalResolve(baseUri, this, out UriFormatException? e);
                 if (e != null)
                     throw e;
             }
@@ -563,11 +560,8 @@ namespace System
             else
             {
                 dontEscape = false;
-                newUriString = baseUri.Syntax.InternalResolve(
-                    baseUri,
-                    this,
-                    out UriFormatException? e
-                );
+                newUriString = baseUri.Syntax
+                    .InternalResolve(baseUri, this, out UriFormatException? e);
                 if (e != null)
                     throw e;
             }
@@ -1794,13 +1788,14 @@ namespace System
             {
                 // Try raw compare for _strings as the last chance to keep the working set small
                 if (
-                    string.Equals(
-                        _string,
-                        obj._string,
-                        IsUncOrDosPath
-                          ? StringComparison.OrdinalIgnoreCase
-                          : StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            _string,
+                            obj._string,
+                            IsUncOrDosPath
+                              ? StringComparison.OrdinalIgnoreCase
+                              : StringComparison.Ordinal
+                        )
                 )
                 {
                     return true;
@@ -1894,11 +1889,12 @@ namespace System
             );
 
             // if IsUncOrDosPath is true then we ignore case in the path comparison
-            return string.Equals(
-                selfUrl,
-                otherUrl,
-                IsUncOrDosPath ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
-            );
+            return string
+                .Equals(
+                    selfUrl,
+                    otherUrl,
+                    IsUncOrDosPath ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
+                );
         }
 
         public Uri MakeRelativeUri(Uri uri)
@@ -3132,10 +3128,8 @@ namespace System
                 dest.Append(':');
 
                 const int MaxUshortLength = 5;
-                bool success = _info.Offset.PortValue.TryFormat(
-                    dest.AppendSpan(MaxUshortLength),
-                    out int charsWritten
-                );
+                bool success = _info.Offset.PortValue
+                    .TryFormat(dest.AppendSpan(MaxUshortLength), out int charsWritten);
                 Debug.Assert(success);
                 dest.Length -= MaxUshortLength - charsWritten;
             }
@@ -3302,13 +3296,14 @@ namespace System
                             _info.Offset.Path - _info.Offset.Scheme
                         );
 
-                    return string.Concat(
-                        _string.AsSpan(
-                            _info.Offset.Scheme,
-                            _info.Offset.User - _info.Offset.Scheme
-                        ),
-                        _string.AsSpan(_info.Offset.Host, _info.Offset.Path - _info.Offset.Host)
-                    );
+                    return string
+                        .Concat(
+                            _string.AsSpan(
+                                _info.Offset.Scheme,
+                                _info.Offset.User - _info.Offset.Scheme
+                            ),
+                            _string.AsSpan(_info.Offset.Host, _info.Offset.Path - _info.Offset.Host)
+                        );
 
                 // For HttpWebRequest.ConnectHostAndPort perf
                 case UriComponents.HostAndPort: //Host|StrongPort
@@ -3325,11 +3320,15 @@ namespace System
                             _info.Offset.Path - _info.Offset.Host
                         );
 
-                    return string.Concat(
-                        _string.AsSpan(_info.Offset.Host, _info.Offset.Path - _info.Offset.Host),
-                        ":",
-                        _info.Offset.PortValue.ToString(CultureInfo.InvariantCulture)
-                    );
+                    return string
+                        .Concat(
+                            _string.AsSpan(
+                                _info.Offset.Host,
+                                _info.Offset.Path - _info.Offset.Host
+                            ),
+                            ":",
+                            _info.Offset.PortValue.ToString(CultureInfo.InvariantCulture)
+                        );
 
                 // For an obvious common case perf
                 case UriComponents.AbsoluteUri: //Scheme|UserInfo|Host|Port|Path|Query|Fragment,
@@ -3345,16 +3344,17 @@ namespace System
                 case UriComponents.HttpRequestUrl: //Scheme|Host|Port|Path|Query,
                     if (InFact(Flags.HasUserInfo))
                     {
-                        return string.Concat(
-                            _string.AsSpan(
-                                _info.Offset.Scheme,
-                                _info.Offset.User - _info.Offset.Scheme
-                            ),
-                            _string.AsSpan(
-                                _info.Offset.Host,
-                                _info.Offset.Fragment - _info.Offset.Host
-                            )
-                        );
+                        return string
+                            .Concat(
+                                _string.AsSpan(
+                                    _info.Offset.Scheme,
+                                    _info.Offset.User - _info.Offset.Scheme
+                                ),
+                                _string.AsSpan(
+                                    _info.Offset.Host,
+                                    _info.Offset.Fragment - _info.Offset.Host
+                                )
+                            );
                     }
                     if (_info.Offset.Scheme == 0 && _info.Offset.Fragment == _string.Length)
                         return _string;
@@ -3464,11 +3464,15 @@ namespace System
                     if (InFact(Flags.NotDefaultPort) || _syntax.DefaultPort == UriParser.NoDefaultPort)
                         goto case UriComponents.UserInfo | UriComponents.Host | UriComponents.Port;
 
-                    return string.Concat(
-                        _string.AsSpan(_info.Offset.User, _info.Offset.Path - _info.Offset.User),
-                        ":",
-                        _info.Offset.PortValue.ToString(CultureInfo.InvariantCulture)
-                    );
+                    return string
+                        .Concat(
+                            _string.AsSpan(
+                                _info.Offset.User,
+                                _info.Offset.Path - _info.Offset.User
+                            ),
+                            ":",
+                            _info.Offset.PortValue.ToString(CultureInfo.InvariantCulture)
+                        );
 
                 case UriComponents.PathAndQuery: //Path|Query,
                     return _string.Substring(
@@ -3479,13 +3483,17 @@ namespace System
                 case UriComponents.HttpRequestUrl | UriComponents.Fragment: //Scheme|Host|Port|Path|Query|Fragment,
                     if (InFact(Flags.HasUserInfo))
                     {
-                        return string.Concat(
-                            _string.AsSpan(
-                                _info.Offset.Scheme,
-                                _info.Offset.User - _info.Offset.Scheme
-                            ),
-                            _string.AsSpan(_info.Offset.Host, _info.Offset.End - _info.Offset.Host)
-                        );
+                        return string
+                            .Concat(
+                                _string.AsSpan(
+                                    _info.Offset.Scheme,
+                                    _info.Offset.User - _info.Offset.Scheme
+                                ),
+                                _string.AsSpan(
+                                    _info.Offset.Host,
+                                    _info.Offset.End - _info.Offset.Host
+                                )
+                            );
                     }
                     if (_info.Offset.Scheme == 0 && _info.Offset.End == _string.Length)
                         return _string;
@@ -4491,10 +4499,8 @@ namespace System
                     (ip: (IntPtr)pSpan, length: span.Length),
                     (buffer, state) =>
                     {
-                        int charsWritten = new ReadOnlySpan<char>(
-                            (char*)state.ip,
-                            state.length
-                        ).ToLowerInvariant(buffer);
+                        int charsWritten = new ReadOnlySpan<char>((char*)state.ip, state.length)
+                            .ToLowerInvariant(buffer);
                         Debug.Assert(charsWritten == buffer.Length);
                     }
                 );

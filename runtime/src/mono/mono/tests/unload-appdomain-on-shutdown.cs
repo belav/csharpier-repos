@@ -8,10 +8,8 @@ class Driver
     {
         //DoDomainUnload is invoked as part of the unload sequence, so let's pre jit it here to increase the likehood
         //of hanging
-        var m = typeof(AppDomain).GetMethod(
-            "DoDomainUnload",
-            BindingFlags.Instance | BindingFlags.NonPublic
-        );
+        var m = typeof(AppDomain)
+            .GetMethod("DoDomainUnload", BindingFlags.Instance | BindingFlags.NonPublic);
         if (m != null)
             m.MethodHandle.GetFunctionPointer();
     }

@@ -14,7 +14,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         {
             X509Extension sanExtension = new X509Extension(
                 "2.5.29.17",
-                "302387047F00000187100000000000000000000000000000000182096C6F63616C686F7374".HexToByteArray(),
+                "302387047F00000187100000000000000000000000000000000182096C6F63616C686F7374"
+                    .HexToByteArray(),
                 false
             );
 
@@ -190,12 +191,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             bool exportPfx
         )
         {
-            request.CertificateExtensions.Add(
-                new X509EnhancedKeyUsageExtension(
-                    new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
-                    false
-                )
-            );
+            request.CertificateExtensions
+                .Add(
+                    new X509EnhancedKeyUsageExtension(
+                        new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
+                        false
+                    )
+                );
 
             DateTimeOffset now = DateTimeOffset.UtcNow;
 
@@ -446,13 +448,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 }
 
                 request.CertificateExtensions.Clear();
-                request.CertificateExtensions.Add(
-                    new X509SubjectKeyIdentifierExtension(
-                        request.PublicKey,
-                        X509SubjectKeyIdentifierHashAlgorithm.Sha1,
-                        false
-                    )
-                );
+                request.CertificateExtensions
+                    .Add(
+                        new X509SubjectKeyIdentifierExtension(
+                            request.PublicKey,
+                            X509SubjectKeyIdentifierHashAlgorithm.Sha1,
+                            false
+                        )
+                    );
 
                 using (X509Certificate2 cert = request.CreateSelfSigned(now, now.AddHours(1)))
                 {
@@ -474,13 +477,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     RSASignaturePadding.Pkcs1
                 );
 
-                request.CertificateExtensions.Add(
-                    new X509BasicConstraintsExtension(true, false, 0, true)
-                );
+                request.CertificateExtensions
+                    .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
-                request.CertificateExtensions.Add(
-                    new X509BasicConstraintsExtension(true, false, 0, true)
-                );
+                request.CertificateExtensions
+                    .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
                 DateTimeOffset now = DateTimeOffset.UtcNow;
 
@@ -504,9 +505,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     RSASignaturePadding.Pkcs1
                 );
 
-                request.CertificateExtensions.Add(
-                    new X509BasicConstraintsExtension(true, false, 0, true)
-                );
+                request.CertificateExtensions
+                    .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
                 DateTimeOffset now = DateTimeOffset.UtcNow;
                 DateTimeOffset notBefore = now.AddMinutes(-10);
@@ -574,11 +574,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         () =>
                         {
                             request.Create(
-                                    issuer,
-                                    notBefore.AddDays(-1),
-                                    notAfter.AddDays(1),
-                                    serial
-                                )
+                                issuer,
+                                notBefore.AddDays(-1),
+                                notAfter.AddDays(1),
+                                serial
+                            )
                                 .Dispose();
                         }
                     );
@@ -684,9 +684,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 HashAlgorithmName.SHA256
             );
 
-            issuerRequest.CertificateExtensions.Add(
-                new X509BasicConstraintsExtension(true, false, 0, true)
-            );
+            issuerRequest.CertificateExtensions
+                .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
             CertificateRequest request = new CertificateRequest(
                 new X500DistinguishedName("CN=test"),
@@ -694,12 +693,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 HashAlgorithmName.SHA256
             );
 
-            request.CertificateExtensions.Add(
-                new X509BasicConstraintsExtension(false, false, 0, true)
-            );
-            request.CertificateExtensions.Add(
-                new X509KeyUsageExtension(X509KeyUsageFlags.KeyAgreement, true)
-            );
+            request.CertificateExtensions
+                .Add(new X509BasicConstraintsExtension(false, false, 0, true));
+            request.CertificateExtensions
+                .Add(new X509KeyUsageExtension(X509KeyUsageFlags.KeyAgreement, true));
 
             DateTimeOffset notBefore = DateTimeOffset.UtcNow;
             DateTimeOffset notAfter = notBefore.AddDays(30);
@@ -730,9 +727,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 HashAlgorithmName.SHA256
             );
 
-            issuerRequest.CertificateExtensions.Add(
-                new X509BasicConstraintsExtension(true, false, 0, true)
-            );
+            issuerRequest.CertificateExtensions
+                .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
             CertificateRequest request = new CertificateRequest(
                 new X500DistinguishedName("CN=test"),
@@ -740,9 +736,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 HashAlgorithmName.SHA256
             );
 
-            request.CertificateExtensions.Add(
-                new X509BasicConstraintsExtension(false, false, 0, true)
-            );
+            request.CertificateExtensions
+                .Add(new X509BasicConstraintsExtension(false, false, 0, true));
 
             DateTimeOffset notBefore = DateTimeOffset.UtcNow;
             DateTimeOffset notAfter = notBefore.AddDays(30);
@@ -778,9 +773,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 HashAlgorithmName.SHA256
             );
 
-            issuerRequest.CertificateExtensions.Add(
-                new X509BasicConstraintsExtension(true, false, 0, true)
-            );
+            issuerRequest.CertificateExtensions
+                .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
             CertificateRequest request = new CertificateRequest(
                 new X500DistinguishedName("CN=test"),
@@ -788,9 +782,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 HashAlgorithmName.SHA256
             );
 
-            request.CertificateExtensions.Add(
-                new X509BasicConstraintsExtension(false, false, 0, true)
-            );
+            request.CertificateExtensions
+                .Add(new X509BasicConstraintsExtension(false, false, 0, true));
 
             DateTimeOffset notBefore = DateTimeOffset.UtcNow;
             DateTimeOffset notAfter = notBefore.AddDays(30);
@@ -829,9 +822,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 HashAlgorithmName.SHA256
             );
 
-            issuerRequest.CertificateExtensions.Add(
-                new X509BasicConstraintsExtension(true, false, 0, true)
-            );
+            issuerRequest.CertificateExtensions
+                .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
             CertificateRequest request = new CertificateRequest(
                 new X500DistinguishedName("CN=test"),
@@ -839,9 +831,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 HashAlgorithmName.SHA256
             );
 
-            request.CertificateExtensions.Add(
-                new X509BasicConstraintsExtension(false, false, 0, true)
-            );
+            request.CertificateExtensions
+                .Add(new X509BasicConstraintsExtension(false, false, 0, true));
 
             DateTimeOffset notBefore = DateTimeOffset.UtcNow;
             DateTimeOffset notAfter = notBefore.AddDays(30);
@@ -875,9 +866,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     HashAlgorithmName.SHA256
                 );
 
-                request.CertificateExtensions.Add(
-                    new X509BasicConstraintsExtension(true, false, 0, true)
-                );
+                request.CertificateExtensions
+                    .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
                 DateTimeOffset now = DateTimeOffset.UtcNow;
 
@@ -928,9 +918,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     HashAlgorithmName.SHA256
                 );
 
-                request.CertificateExtensions.Add(
-                    new X509BasicConstraintsExtension(true, false, 0, true)
-                );
+                request.CertificateExtensions
+                    .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
                 DateTimeOffset now = DateTimeOffset.UtcNow;
 
@@ -985,9 +974,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     RSASignaturePadding.Pkcs1
                 );
 
-                request.CertificateExtensions.Add(
-                    new X509BasicConstraintsExtension(true, false, 0, true)
-                );
+                request.CertificateExtensions
+                    .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
                 DateTimeOffset now = DateTimeOffset.UtcNow;
 
@@ -1037,9 +1025,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     RSASignaturePadding.Pkcs1
                 );
 
-                request.CertificateExtensions.Add(
-                    new X509BasicConstraintsExtension(true, false, 0, true)
-                );
+                request.CertificateExtensions
+                    .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
                 DateTimeOffset now = DateTimeOffset.UtcNow;
 

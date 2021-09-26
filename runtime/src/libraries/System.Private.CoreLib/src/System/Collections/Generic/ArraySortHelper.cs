@@ -358,13 +358,8 @@ namespace System.Collections.Generic
                 }
                 else
                 {
-                    return ArraySortHelper<T>.InternalBinarySearch(
-                        array,
-                        index,
-                        length,
-                        value,
-                        comparer
-                    );
+                    return ArraySortHelper<T>
+                        .InternalBinarySearch(array, index, length, value, comparer);
                 }
             }
             catch (Exception e)

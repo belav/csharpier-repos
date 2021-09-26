@@ -298,8 +298,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 PathString.Empty
             );
             globbingUrlBuilder.Setup(
-                    g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())
-                )
+                g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())
+            )
                 .Returns(new[] { "/common.js" });
 
             var helper = GetHelper();
@@ -389,8 +389,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 PathString.Empty
             );
             globbingUrlBuilder.Setup(
-                    g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())
-                )
+                g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())
+            )
                 .Returns(new[] { "/common.js" });
 
             var helper = GetHelper();

@@ -50,10 +50,11 @@ class Program
                 options: OptionOn(),
                 diagnosticId: AbstractRegexDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(
-                    FeaturesResources.Regex_issue_0,
-                    FeaturesResources.Too_many_close_parens
-                )
+                diagnosticMessage: string
+                    .Format(
+                        FeaturesResources.Regex_issue_0,
+                        FeaturesResources.Too_many_close_parens
+                    )
             );
         }
 
@@ -74,10 +75,11 @@ class Program
                 options: OptionOn(),
                 diagnosticId: AbstractRegexDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(
-                    FeaturesResources.Regex_issue_0,
-                    FeaturesResources.Too_many_close_parens
-                )
+                diagnosticMessage: string
+                    .Format(
+                        FeaturesResources.Regex_issue_0,
+                        FeaturesResources.Too_many_close_parens
+                    )
             );
         }
 

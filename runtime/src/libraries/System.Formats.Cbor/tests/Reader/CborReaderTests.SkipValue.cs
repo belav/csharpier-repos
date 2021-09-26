@@ -161,7 +161,8 @@ namespace System.Formats.Cbor.Tests
                 (CborConformanceMode.Ctap2Canonical, "a202020101"), // unsorted keys in map
                 (CborConformanceMode.Ctap2Canonical, "c001"), // tagged value
                 (CborConformanceMode.Strict, "f81f"), // non-canonical simple value
-            }.Select(l => new object[] { l.Mode, l.Encoding });
+            }
+                .Select(l => new object[] { l.Mode, l.Encoding });
 
         [Fact]
         public static void SkipValue_SkippedValueFollowedByNonConformingValue_ShouldThrowCborContentException()

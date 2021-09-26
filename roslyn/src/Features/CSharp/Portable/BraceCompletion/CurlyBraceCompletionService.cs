@@ -55,9 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             CancellationToken cancellationToken
         )
         {
-            var documentOptions = await braceCompletionContext.Document.GetOptionsAsync(
-                    cancellationToken
-                )
+            var documentOptions = await braceCompletionContext.Document
+                .GetOptionsAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             // After the closing brace is completed we need to format the span from the opening point to the closing point.
@@ -66,16 +65,15 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             // We then need to format this to
             // if (true) { $$}
             var (formattingChanges, finalCurlyBraceEnd) = await FormatTrackingSpanAsync(
-                    braceCompletionContext.Document,
-                    braceCompletionContext.OpeningPoint,
-                    braceCompletionContext.ClosingPoint,
-                    shouldHonorAutoFormattingOnCloseBraceOption: true,
-                    // We're not trying to format the indented block here, so no need to pass in additional rules.
-                    braceFormattingIndentationRules: ImmutableArray<AbstractFormattingRule>.Empty,
-                    documentOptions,
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+                braceCompletionContext.Document,
+                braceCompletionContext.OpeningPoint,
+                braceCompletionContext.ClosingPoint,
+                shouldHonorAutoFormattingOnCloseBraceOption: true,
+                // We're not trying to format the indented block here, so no need to pass in additional rules.
+                braceFormattingIndentationRules: ImmutableArray<AbstractFormattingRule>.Empty,
+                documentOptions,
+                cancellationToken
+            ).ConfigureAwait(false);
 
             if (formattingChanges.IsEmpty)
             {
@@ -83,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             }
 
             // The caret location should be at the start of the closing brace character.
-            var originalText = await braceCompletionContext.Document.GetTextAsync(cancellationToken)
+            var originalText = await braceCompletionContext.Document
+                .GetTextAsync(cancellationToken)
                 .ConfigureAwait(false);
             var formattedText = originalText.WithChanges(formattingChanges);
             var caretLocation = formattedText.Lines.GetLinePosition(finalCurlyBraceEnd - 1);
@@ -137,16 +136,16 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
             // Format the text that contains the newly inserted line.
             var (formattingChanges, newClosingPoint) = await FormatTrackingSpanAsync(
-                    document.WithText(textToFormat),
-                    openingPoint,
-                    closingPoint,
-                    shouldHonorAutoFormattingOnCloseBraceOption: false,
-                    braceFormattingIndentationRules: GetBraceIndentationFormattingRules(
-                        documentOptions
-                    ),
-                    documentOptions,
-                    cancellationToken
-                )
+                document.WithText(textToFormat),
+                openingPoint,
+                closingPoint,
+                shouldHonorAutoFormattingOnCloseBraceOption: false,
+                braceFormattingIndentationRules: GetBraceIndentationFormattingRules(
+                    documentOptions
+                ),
+                documentOptions,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             closingPoint = newClosingPoint;
             var formattedText = textToFormat.WithChanges(formattingChanges);
@@ -230,8 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                     //     2. Insert "goodbye" at 3
                     // "goodbye" is after "hello" at location 3 + 5 (length of "hello") in the new text.
                     var newTextChangeText = formattedText.GetSubText(
-                            new TextSpan(newRange.Span.Start + amountToShift, newRange.NewLength)
-                        )
+                        new TextSpan(newRange.Span.Start + amountToShift, newRange.NewLength)
+                    )
                         .ToString();
                     amountToShift += (newRange.NewLength - newRange.Span.Length);
                     mergedChanges.Add(new TextChange(newTextChangeSpan, newTextChangeText));
@@ -252,22 +251,18 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             if (
                 OpeningBrace == brace
                 && await InterpolationBraceCompletionService.IsPositionInInterpolationContextAsync(
-                        document,
-                        openingPosition,
-                        cancellationToken
-                    )
+                    document,
+                    openingPosition,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             )
             {
                 return false;
             }
 
-            return await base.CanProvideBraceCompletionAsync(
-                    brace,
-                    openingPosition,
-                    document,
-                    cancellationToken
-                )
+            return await base
+                .CanProvideBraceCompletionAsync(brace, openingPosition, document, cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -315,10 +310,11 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             CancellationToken cancellationToken
         )
         {
-            var option = document.Project.Solution.Options.GetOption(
-                BraceCompletionOptions.AutoFormattingOnCloseBrace,
-                document.Project.Language
-            );
+            var option = document.Project.Solution.Options
+                .GetOption(
+                    BraceCompletionOptions.AutoFormattingOnCloseBrace,
+                    document.Project.Language
+                );
             if (!option && shouldHonorAutoFormattingOnCloseBraceOption)
             {
                 return (ImmutableArray<TextChange>.Empty, closingPoint);
@@ -326,10 +322,10 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
             // Annotate the original closing brace so we can find it after formatting.
             document = await GetDocumentWithAnnotatedClosingBraceAsync(
-                    document,
-                    closingPoint,
-                    cancellationToken
-                )
+                document,
+                closingPoint,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
@@ -496,12 +492,13 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 //           = new int[] {
                 if (
                     currentToken.IsKind(SyntaxKind.OpenBraceToken)
-                    && currentToken.Parent.IsKind(
-                        SyntaxKind.ObjectInitializerExpression,
-                        SyntaxKind.CollectionInitializerExpression,
-                        SyntaxKind.ArrayInitializerExpression,
-                        SyntaxKind.ImplicitArrayCreationExpression
-                    )
+                    && currentToken.Parent
+                        .IsKind(
+                            SyntaxKind.ObjectInitializerExpression,
+                            SyntaxKind.CollectionInitializerExpression,
+                            SyntaxKind.ArrayInitializerExpression,
+                            SyntaxKind.ImplicitArrayCreationExpression
+                        )
                 )
                 {
                     if (_options.NewLinesForBracesInObjectCollectionArrayInitializers)
@@ -514,11 +511,12 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                     }
                 }
 
-                return base.GetAdjustNewLinesOperation(
-                    in previousToken,
-                    in currentToken,
-                    in nextOperation
-                );
+                return base
+                    .GetAdjustNewLinesOperation(
+                        in previousToken,
+                        in currentToken,
+                        in nextOperation
+                    );
             }
 
             public override void AddAlignTokensOperations(

@@ -122,7 +122,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                     return false;
                 }
 
-                var methodsOfName = symbol.ContainingType.GetMembers(symbol.Name)
+                var methodsOfName = symbol.ContainingType
+                    .GetMembers(symbol.Name)
                     .Where(m => m.Kind == SymbolKind.Method);
 
                 return methodsOfName.Count() > 1;

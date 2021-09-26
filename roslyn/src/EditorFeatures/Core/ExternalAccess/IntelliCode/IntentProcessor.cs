@@ -55,8 +55,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             CancellationToken cancellationToken
         )
         {
-            var currentDocument =
-                intentRequestContext.CurrentSnapshotSpan.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var currentDocument = intentRequestContext.CurrentSnapshotSpan.Snapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (currentDocument == null)
             {
                 throw new ArgumentException("could not retrieve document for request snapshot");
@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             );
 
             var selectionTextSpan = intentRequestContext.PriorSelection;
-            var results = await provider.Value.ComputeIntentAsync(
+            var results = await provider.Value
+                .ComputeIntentAsync(
                     originalDocument,
                     selectionTextSpan,
                     currentDocument,
@@ -109,11 +110,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             foreach (var result in results)
             {
                 var convertedIntent = await ConvertToIntelliCodeResultAsync(
-                        result,
-                        originalDocument,
-                        currentDocument,
-                        cancellationToken
-                    )
+                    result,
+                    originalDocument,
+                    currentDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 convertedResults.AddIfNotNull(convertedIntent);
             }
@@ -132,22 +133,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
 
             // Merge linked file changes so all linked files have the same text changes.
             newSolution = await newSolution.WithMergedLinkedFileChangesAsync(
-                    originalDocument.Project.Solution,
-                    cancellationToken: cancellationToken
-                )
+                originalDocument.Project.Solution,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // For now we only support changes to the current document.  Everything else is dropped.
             var changedDocument = newSolution.GetRequiredDocument(currentDocument.Id);
 
-            var textDiffService =
-                newSolution.Workspace.Services.GetRequiredService<IDocumentTextDifferencingService>();
+            var textDiffService = newSolution.Workspace.Services
+                .GetRequiredService<IDocumentTextDifferencingService>();
             // Compute changes against the current version of the document.
             var textDiffs = await textDiffService.GetTextChangesAsync(
-                    currentDocument,
-                    changedDocument,
-                    cancellationToken
-                )
+                currentDocument,
+                changedDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (textDiffs.IsEmpty)
             {

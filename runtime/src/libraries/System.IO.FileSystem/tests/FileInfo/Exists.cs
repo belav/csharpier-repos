@@ -145,14 +145,13 @@ namespace System.IO.Tests
             )
             {
                 RemoteExecutor.Invoke(
-                        (p) =>
-                        {
-                            FileInfo info = new FileInfo(p);
-                            Assert.True(info.Exists);
-                        },
-                        path
-                    )
-                    .Dispose();
+                    (p) =>
+                    {
+                        FileInfo info = new FileInfo(p);
+                        Assert.True(info.Exists);
+                    },
+                    path
+                ).Dispose();
             }
         }
 
@@ -175,14 +174,13 @@ namespace System.IO.Tests
                 stream.Lock(0, 10);
 
                 RemoteExecutor.Invoke(
-                        (p) =>
-                        {
-                            FileInfo info = new FileInfo(p);
-                            Assert.True(info.Exists);
-                        },
-                        path
-                    )
-                    .Dispose();
+                    (p) =>
+                    {
+                        FileInfo info = new FileInfo(p);
+                        Assert.True(info.Exists);
+                    },
+                    path
+                ).Dispose();
 
                 stream.Unlock(0, 10);
             }

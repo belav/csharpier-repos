@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
     {
         private static readonly MethodInfo _asSplitIncludeMethodInfo =
-            typeof(RelationalQueryableExtensions).GetTypeInfo()
+            typeof(RelationalQueryableExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(RelationalQueryableExtensions.AsSplitQuery));
 
         protected NorthwindSplitIncludeQueryTestBase(TFixture fixture) : base(fixture) { }
@@ -62,9 +63,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                       .AsSplitQuery()
                       .SingleAsync(c => c.CustomerID == "ALFKI")
                 : context.Set<Customer>()
-                      .Include(c => c.Orders)
-                      .AsSplitQuery()
-                      .Single(c => c.CustomerID == "ALFKI");
+                  .Include(c => c.Orders)
+                  .AsSplitQuery()
+                  .Single(c => c.CustomerID == "ALFKI");
 
             Assert.Equal(orders, customer.Orders, LegacyReferenceEqualityComparer.Instance);
             Assert.Equal(6, customer.Orders.Count);
@@ -84,9 +85,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                       .AsSplitQuery()
                       .SingleAsync(c => c.CustomerID == "ALFKI")
                 : context.Set<Customer>()
-                      .Include(c => c.Orders)
-                      .AsSplitQuery()
-                      .Single(c => c.CustomerID == "ALFKI");
+                  .Include(c => c.Orders)
+                  .AsSplitQuery()
+                  .Single(c => c.CustomerID == "ALFKI");
 
             Assert.Same(customer1, customer2);
             Assert.Equal(6, customer2.Orders.Count);
@@ -107,10 +108,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                       .Where(o => o.CustomerID == "ALFKI")
                       .ToListAsync()
                 : context.Set<Order>()
-                      .Include(o => o.Customer)
-                      .AsSplitQuery()
-                      .Where(o => o.CustomerID == "ALFKI")
-                      .ToList();
+                  .Include(o => o.Customer)
+                  .AsSplitQuery()
+                  .Where(o => o.CustomerID == "ALFKI")
+                  .ToList();
 
             Assert.Equal(6, orders.Count);
             Assert.True(orders.All(o => ReferenceEquals(o.Customer, customer)));

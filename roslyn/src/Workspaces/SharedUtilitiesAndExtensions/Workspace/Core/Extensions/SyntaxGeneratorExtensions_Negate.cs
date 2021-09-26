@@ -67,14 +67,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (syntaxFacts.IsParenthesizedExpression(expressionOrPattern))
             {
                 return generatorInternal.AddParentheses(
-                        generator.Negate(
-                            generatorInternal,
-                            syntaxFacts.GetExpressionOfParenthesizedExpression(expressionOrPattern),
-                            semanticModel,
-                            negateBinary,
-                            cancellationToken
-                        )
+                    generator.Negate(
+                        generatorInternal,
+                        syntaxFacts.GetExpressionOfParenthesizedExpression(expressionOrPattern),
+                        semanticModel,
+                        negateBinary,
+                        cancellationToken
                     )
+                )
                     .WithTriviaFrom(expressionOrPattern);
             }
 
@@ -110,14 +110,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 // Push the negation inside the parenthesized pattern.
                 return generatorInternal.AddParentheses(
-                        generator.Negate(
-                            generatorInternal,
-                            syntaxFacts.GetPatternOfParenthesizedPattern(expressionOrPattern),
-                            semanticModel,
-                            negateBinary,
-                            cancellationToken
-                        )
+                    generator.Negate(
+                        generatorInternal,
+                        syntaxFacts.GetPatternOfParenthesizedPattern(expressionOrPattern),
+                        semanticModel,
+                        negateBinary,
+                        cancellationToken
                     )
+                )
                     .WithTriviaFrom(expressionOrPattern);
             }
 
@@ -241,12 +241,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 }
 
                 var newBinaryExpressionSyntax = NewBinaryOperation(
-                        binaryOperation,
-                        newLeftOperand,
-                        negatedKind,
-                        newRightOperand,
-                        generator
-                    )
+                    binaryOperation,
+                    newLeftOperand,
+                    negatedKind,
+                    newRightOperand,
+                    generator
+                )
                     .WithTriviaFrom(expressionNode);
 
                 var newToken = syntaxFacts.GetOperatorTokenOfBinaryExpression(

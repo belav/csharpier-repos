@@ -69,7 +69,8 @@ class Program
         var actualOffsets = (
             from f in t.GetFields()
             select (name: f.Name, offset: Marshal.OffsetOf(t, f.Name).ToInt32())
-        ).ToList();
+        )
+            .ToList();
 
         var expectedOffsets = new[]
         {

@@ -31,14 +31,13 @@ namespace SampleStartups
         public void Start()
         {
             _host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel()
-                            .UseStartup<StartupExternallyControlled>()
-                            .UseUrls(_urls.ToArray());
-                    }
-                )
-                .Start();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel()
+                        .UseStartup<StartupExternallyControlled>()
+                        .UseUrls(_urls.ToArray());
+                }
+            ).Start();
         }
 
         public async Task StopAsync()

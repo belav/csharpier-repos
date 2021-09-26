@@ -107,13 +107,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         {
             this.ViewModel = _createViewModel(OptionStore, _serviceProvider);
 
-            var firstItem = this.ViewModel.CodeStyleItems.OfType<AbstractCodeStyleOptionViewModel>()
+            var firstItem = this.ViewModel.CodeStyleItems
+                .OfType<AbstractCodeStyleOptionViewModel>()
                 .First();
-            this.ViewModel.SetOptionAndUpdatePreview(
-                firstItem.SelectedPreference.IsChecked,
-                firstItem.Option,
-                firstItem.GetPreview()
-            );
+            this.ViewModel
+                .SetOptionAndUpdatePreview(
+                    firstItem.SelectedPreference.IsChecked,
+                    firstItem.Option,
+                    firstItem.GetPreview()
+                );
 
             DataContext = ViewModel;
         }
@@ -163,9 +165,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         private static string GetInitialDirectory()
         {
-            var solution = (IVsSolution)Shell.ServiceProvider.GlobalProvider.GetService(
-                typeof(SVsSolution)
-            );
+            var solution = (IVsSolution)Shell.ServiceProvider.GlobalProvider
+                .GetService(typeof(SVsSolution));
             if (solution is object)
             {
                 if (

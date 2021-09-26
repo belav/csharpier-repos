@@ -6,7 +6,8 @@ namespace System
     public sealed partial class AppDomain
     {
         public TimeSpan MonitoringTotalProcessorTime =>
-            Interop.Kernel32.GetProcessTimes(
+            Interop.Kernel32
+            .GetProcessTimes(
                 Interop.Kernel32.GetCurrentProcess(),
                 out _,
                 out _,

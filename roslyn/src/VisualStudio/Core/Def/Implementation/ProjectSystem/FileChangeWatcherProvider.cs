@@ -37,8 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                     var fileChangeService =
                         (IVsAsyncFileChangeEx?)await serviceProvider.GetServiceAsync(
-                                typeof(SVsFileChangeEx)
-                            )
+                            typeof(SVsFileChangeEx)
+                        )
                             .ConfigureAwait(true);
                     Assumes.Present(fileChangeService);
                     _fileChangeService.SetResult(fileChangeService);

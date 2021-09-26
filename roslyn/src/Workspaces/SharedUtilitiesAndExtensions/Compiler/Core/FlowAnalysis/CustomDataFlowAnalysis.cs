@@ -35,10 +35,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             cancellationToken.ThrowIfCancellationRequested();
 
             var blocks = controlFlowGraph.Blocks;
-            var continueDispatchAfterFinally = PooledDictionary<
-                ControlFlowRegion,
-                bool
-            >.GetInstance();
+            var continueDispatchAfterFinally = PooledDictionary<ControlFlowRegion, bool>
+                .GetInstance();
             var dispatchedExceptionsFromRegions = PooledHashSet<ControlFlowRegion>.GetInstance();
             var firstBlockOrdinal = 0;
             var lastBlockOrdinal = blocks.Length - 1;

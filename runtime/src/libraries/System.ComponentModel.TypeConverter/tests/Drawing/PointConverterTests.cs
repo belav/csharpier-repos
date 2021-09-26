@@ -265,12 +265,8 @@ namespace System.ComponentModel.TypeConverterTests
         {
             var str = Converter.ConvertToString(new Point(x, y));
             Assert.Equal(
-                string.Format(
-                    "{0}{2} {1}",
-                    x,
-                    y,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                ),
+                string
+                    .Format("{0}{2} {1}", x, y, CultureInfo.CurrentCulture.TextInfo.ListSeparator),
                 str
             );
         }

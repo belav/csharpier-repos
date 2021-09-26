@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             var executionContext = BeginDefaultScope(scopeManager, tagName: "p");
 
             // Act
-            ((Dictionary<string, int>)executionContext.Items["test-entry"]).Add("from-child", 1234);
+            ((Dictionary<string, int>)executionContext.Items["test-entry"])
+                .Add("from-child", 1234);
 
             // Assert
             var executionContextItem = Assert.Single(executionContext.Items);
@@ -216,13 +217,14 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         {
             // Arrange
             var scopeManager = CreateDefaultScopeManager();
-            var expectedError = string.Format(
-                CultureInfo.CurrentCulture,
-                "Must call '{2}.{1}' before calling '{2}.{0}'.",
-                nameof(TagHelperScopeManager.End),
-                nameof(TagHelperScopeManager.Begin),
-                nameof(TagHelperScopeManager)
-            );
+            var expectedError = string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "Must call '{2}.{1}' before calling '{2}.{0}'.",
+                    nameof(TagHelperScopeManager.End),
+                    nameof(TagHelperScopeManager.Begin),
+                    nameof(TagHelperScopeManager)
+                );
 
             // Act & Assert
             var ex = Assert.Throws<InvalidOperationException>(

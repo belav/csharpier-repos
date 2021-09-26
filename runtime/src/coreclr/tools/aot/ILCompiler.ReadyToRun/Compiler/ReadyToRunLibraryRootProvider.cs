@@ -151,7 +151,8 @@ namespace ILCompiler
         public static void CheckCanGenerateMethod(MethodDesc method)
         {
             // Ensure the method is loadable
-            ((CompilerTypeSystemContext)method.Context).EnsureLoadableMethod(method);
+            ((CompilerTypeSystemContext)method.Context)
+                .EnsureLoadableMethod(method);
 
             MethodSignature signature = method.Signature;
 

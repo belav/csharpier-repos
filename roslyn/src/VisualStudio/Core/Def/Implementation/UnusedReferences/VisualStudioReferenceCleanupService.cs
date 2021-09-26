@@ -38,9 +38,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         {
             var projectSystemReferences =
                 await _projectSystemReferenceUpdateService.GetProjectReferencesAsync(
-                        projectPath,
-                        cancellationToken
-                    )
+                    projectPath,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             return projectSystemReferences.Select(reference => reference.ToReferenceInfo())
                 .ToImmutableArray();

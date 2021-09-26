@@ -16,8 +16,8 @@ namespace System.Web.Mvc.Test
             mockControllerContext.SetupSet(c => c.HttpContext.Response.StatusCode = 401)
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.StatusDescription = "Some description"
-                )
+                c => c.HttpContext.Response.StatusDescription = "Some description"
+            )
                 .Verifiable();
 
             HttpUnauthorizedResult result = new HttpUnauthorizedResult("Some description");

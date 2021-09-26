@@ -519,7 +519,8 @@ namespace System.Collections.ObjectModel.Tests
             keys = keys.Push(key1, key2);
             items = items.Push(keyedItem1, keyedItem2);
             itemsWithKeys = itemsWithKeys.Push(
-                new[] { keyedItem1, keyedItem2 }.Where(ki => ki.Key != null)
+                new[] { keyedItem1, keyedItem2 }
+                    .Where(ki => ki.Key != null)
                     .ToArray<IKeyedItem<TKey, TValue>>()
             );
 
@@ -559,7 +560,8 @@ namespace System.Collections.ObjectModel.Tests
             keys = keys.Push(key1, key2);
             items = items.Push(keyedItem1, keyedItem2);
             itemsWithKeys = itemsWithKeys.Push(
-                new[] { keyedItem1, keyedItem2 }.Where(ki => ki.Key != null)
+                new[] { keyedItem1, keyedItem2 }
+                    .Where(ki => ki.Key != null)
                     .ToArray<IKeyedItem<TKey, TValue>>()
             );
 
@@ -607,7 +609,8 @@ namespace System.Collections.ObjectModel.Tests
             keys = keys.Push(key1, key2);
             items = items.Push(keyedItem1, keyedItem2);
             itemsWithKeys = itemsWithKeys.Push(
-                new[] { keyedItem1, keyedItem2 }.Where(ki => ki.Key != null)
+                new[] { keyedItem1, keyedItem2 }
+                    .Where(ki => ki.Key != null)
                     .ToArray<IKeyedItem<TKey, TValue>>()
             );
 
@@ -649,7 +652,8 @@ namespace System.Collections.ObjectModel.Tests
             keys = keys.Push(key1, key2);
             items = items.Push(keyedItem1, keyedItem2);
             itemsWithKeys = itemsWithKeys.Push(
-                new[] { keyedItem1, keyedItem2 }.Where(ki => ki.Key != null)
+                new[] { keyedItem1, keyedItem2 }
+                    .Where(ki => ki.Key != null)
                     .ToArray<IKeyedItem<TKey, TValue>>()
             );
             AssertExtensions.Throws<ArgumentException>(
@@ -702,7 +706,8 @@ namespace System.Collections.ObjectModel.Tests
                 keys = keys.Push(key1);
                 items = items.Push(keyedItem1, tempKeyedItem);
                 itemsWithKeys = itemsWithKeys.Push(
-                    new[] { keyedItem1 }.Where(ki => ki.Key != null)
+                    new[] { keyedItem1 }
+                        .Where(ki => ki.Key != null)
                         .ToArray<IKeyedItem<TKey, TValue>>()
                 );
 
@@ -743,7 +748,8 @@ namespace System.Collections.ObjectModel.Tests
                 keys = keys.Push(key1);
                 items = items.Push(keyedItem1, tempKeyedItem);
                 itemsWithKeys = itemsWithKeys.Push(
-                    new[] { keyedItem1, tempKeyedItem }.Where(ki => ki.Key != null)
+                    new[] { keyedItem1, tempKeyedItem }
+                        .Where(ki => ki.Key != null)
                         .ToArray<IKeyedItem<TKey, TValue>>()
                 );
 
@@ -785,7 +791,8 @@ namespace System.Collections.ObjectModel.Tests
                 keys = keys.Push(key1);
                 items = items.Push(keyedItem1, keyedItem2);
                 itemsWithKeys = itemsWithKeys.Push(
-                    new[] { keyedItem1 }.Where(ki => ki.Key != null)
+                    new[] { keyedItem1 }
+                        .Where(ki => ki.Key != null)
                         .ToArray<IKeyedItem<TKey, TValue>>()
                 );
 

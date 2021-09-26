@@ -188,9 +188,9 @@ namespace System.Web.Http.Tracing.Tracers
 
             // Act
             IFilter[] wrappedFilters = FilterTracer.CreateFilterTracers(
-                    filter,
-                    new TestTraceWriter()
-                )
+                filter,
+                new TestTraceWriter()
+            )
                 .ToArray();
 
             // Assert
@@ -387,9 +387,9 @@ namespace System.Web.Http.Tracing.Tracers
 
             // Act
             FilterInfo[] wrappedFilters = FilterTracer.CreateFilterTracers(
-                    filter,
-                    new TestTraceWriter()
-                )
+                filter,
+                new TestTraceWriter()
+            )
                 .ToArray();
 
             // Assert

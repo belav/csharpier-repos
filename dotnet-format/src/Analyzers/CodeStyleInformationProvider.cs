@@ -32,18 +32,12 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             ILogger logger
         )
         {
-            var assemblies = new[]
-            {
-                _featuresPath,
-                _featuresCSharpPath,
-                _featuresVisualBasicPath
-            }.Select(path => Assembly.LoadFrom(path));
+            var assemblies = new[] { _featuresPath, _featuresCSharpPath, _featuresVisualBasicPath }
+                .Select(path => Assembly.LoadFrom(path));
 
             var analyzersAndFixers = AnalyzerFinderHelpers.LoadAnalyzersAndFixers(assemblies);
-            return solution.Projects.ToImmutableDictionary(
-                project => project.Id,
-                project => analyzersAndFixers
-            );
+            return solution.Projects
+                .ToImmutableDictionary(project => project.Id, project => analyzersAndFixers);
         }
 
         public DiagnosticSeverity GetSeverity(FormatOptions formatOptions) =>

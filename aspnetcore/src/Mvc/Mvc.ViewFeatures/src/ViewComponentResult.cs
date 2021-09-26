@@ -70,11 +70,12 @@ namespace Microsoft.AspNetCore.Mvc
             if (executor == null)
             {
                 throw new InvalidOperationException(
-                    Mvc.Core.Resources.FormatUnableToFindServices(
-                        nameof(IServiceCollection),
-                        "AddControllersWithViews()",
-                        "ConfigureServices(...)"
-                    )
+                    Mvc.Core.Resources
+                        .FormatUnableToFindServices(
+                            nameof(IServiceCollection),
+                            "AddControllersWithViews()",
+                            "ConfigureServices(...)"
+                        )
                 );
             }
 

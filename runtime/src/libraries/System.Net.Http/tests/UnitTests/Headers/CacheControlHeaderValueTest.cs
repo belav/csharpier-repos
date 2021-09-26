@@ -178,28 +178,27 @@ namespace System.Net.Http.Tests
         public void ToString_NegativeValues_UsesMinusSignRegardlessOfCurrentCulture()
         {
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    var cacheControl = new CacheControlHeaderValue()
                     {
-                        var cacheControl = new CacheControlHeaderValue()
-                        {
-                            MaxAge = new TimeSpan(0, 0, -1),
-                            MaxStale = true,
-                            MaxStaleLimit = new TimeSpan(0, 0, -2),
-                            MinFresh = new TimeSpan(0, 0, -3),
-                            SharedMaxAge = new TimeSpan(0, 0, -4)
-                        };
+                        MaxAge = new TimeSpan(0, 0, -1),
+                        MaxStale = true,
+                        MaxStaleLimit = new TimeSpan(0, 0, -2),
+                        MinFresh = new TimeSpan(0, 0, -3),
+                        SharedMaxAge = new TimeSpan(0, 0, -4)
+                    };
 
-                        var ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-                        ci.NumberFormat.NegativeSign = "n";
-                        CultureInfo.CurrentCulture = ci;
+                    var ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+                    ci.NumberFormat.NegativeSign = "n";
+                    CultureInfo.CurrentCulture = ci;
 
-                        Assert.Equal(
-                            "max-age=-1, s-maxage=-4, max-stale=-2, min-fresh=-3",
-                            cacheControl.ToString()
-                        );
-                    }
-                )
-                .Dispose();
+                    Assert.Equal(
+                        "max-age=-1, s-maxage=-4, max-stale=-2, min-fresh=-3",
+                        cacheControl.ToString()
+                    );
+                }
+            ).Dispose();
         }
 
         [Fact]

@@ -562,13 +562,13 @@ namespace System.Net.Http
                 try
                 {
                     return await SendAsyncCore(
-                            request,
-                            firstProxy,
-                            async,
-                            doRequestAuth,
-                            isProxyConnect: false,
-                            cancellationToken
-                        )
+                        request,
+                        firstProxy,
+                        async,
+                        doRequestAuth,
+                        isProxyConnect: false,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 catch (HttpRequestException ex) when (ex.AllowRetry != RequestRetryType.NoRetry)

@@ -47,11 +47,12 @@ namespace Microsoft.Extensions.Logging.Test
             Assert.Equal(1, writeContext.EventId);
             Assert.Null(writeContext.Exception);
             Assert.Equal(
-                string.Format(
-                    TestLoggerExtensions.ActionMatchedInfo.FormatString,
-                    controller,
-                    action
-                ),
+                string
+                    .Format(
+                        TestLoggerExtensions.ActionMatchedInfo.FormatString,
+                        controller,
+                        action
+                    ),
                 actualLogValues.ToString()
             );
         }
@@ -159,11 +160,12 @@ namespace Microsoft.Extensions.Logging.Test
                 actualLogValues.ToArray()
             );
             Assert.Equal(
-                string.Format(
-                    TestLoggerExtensions.ScopeInfoWithTwoParameters.FormatString,
-                    param1,
-                    param2
-                ),
+                string
+                    .Format(
+                        TestLoggerExtensions.ScopeInfoWithTwoParameters.FormatString,
+                        param1,
+                        param2
+                    ),
                 actualLogValues.ToString()
             );
         }
@@ -203,12 +205,13 @@ namespace Microsoft.Extensions.Logging.Test
                 actualLogValues.ToArray()
             );
             Assert.Equal(
-                string.Format(
-                    TestLoggerExtensions.ScopeInfoWithThreeParameters.FormatString,
-                    param1,
-                    param2,
-                    param3
-                ),
+                string
+                    .Format(
+                        TestLoggerExtensions.ScopeInfoWithThreeParameters.FormatString,
+                        param1,
+                        param2,
+                        param3
+                    ),
                 actualLogValues.ToString()
             );
         }

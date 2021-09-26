@@ -95,11 +95,12 @@ namespace System.Runtime.Serialization
         internal void IncrementItemCount(int count)
         {
             if (count > _maxItemsInObjectGraph - _itemCount)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(SR.ExceededMaxItemsQuota, _maxItemsInObjectGraph)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(SR.ExceededMaxItemsQuota, _maxItemsInObjectGraph)
+                        )
+                    );
             _itemCount += count;
         }
 
@@ -196,9 +197,12 @@ namespace System.Runtime.Serialization
         )
         {
             if (!isMemberTypeSerializable)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(SR.Format(SR.TypeNotSerializable, memberType))
-                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.Format(SR.TypeNotSerializable, memberType)
+                        )
+                    );
         }
 
         internal virtual Type GetSurrogatedType(Type type)
@@ -243,9 +247,10 @@ namespace System.Runtime.Serialization
             {
                 Type knownType = knownTypeList[i];
                 if (knownType == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.Format(SR.NullKnownType, "knownTypes"))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(SR.Format(SR.NullKnownType, "knownTypes"))
+                        );
 
                 DataContract.CheckAndAdd(knownType, typesChecked, ref dataContracts);
             }

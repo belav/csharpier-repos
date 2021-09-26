@@ -82,10 +82,8 @@ namespace System.Reflection.TypeLoading.Ecma
                         == MethodAttributes.Public
                 )
                 {
-                    MethodInfo methodInfo = others[i].ToMethod(
-                        GetRoDeclaringType(),
-                        GetRoDeclaringType()
-                    );
+                    MethodInfo methodInfo = others[i]
+                        .ToMethod(GetRoDeclaringType(), GetRoDeclaringType());
                     results.Add(methodInfo);
                 }
             }

@@ -46,8 +46,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var selector = new DefaultEndpointSelector();
 
             var groups = _endpoints.GroupBy(
-                    e => (e.Order, e.RoutePattern.InboundPrecedence, e.RoutePattern.RawText)
-                )
+                e => (e.Order, e.RoutePattern.InboundPrecedence, e.RoutePattern.RawText)
+            )
                 .OrderBy(g => g.Key.Order)
                 .ThenBy(g => g.Key.InboundPrecedence);
 

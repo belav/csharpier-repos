@@ -46,10 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
                 if (ambiguousMatches != null)
                 {
-                    var ambiguousMethods = string.Join(
-                        ", ",
-                        ambiguousMatches.Select(m => m.MethodInfo)
-                    );
+                    var ambiguousMethods = string
+                        .Join(", ", ambiguousMatches.Select(m => m.MethodInfo));
                     throw new InvalidOperationException(
                         Resources.FormatAmbiguousHandler(Environment.NewLine, ambiguousMethods)
                     );
@@ -94,11 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 var handler = handlers[i];
                 if (
                     handler.HttpMethod != null
-                    && string.Equals(
-                        handler.HttpMethod,
-                        httpMethod,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && string
+                        .Equals(handler.HttpMethod, httpMethod, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     candidates.Add(handler);
@@ -116,11 +111,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                         var handler = handlers[i];
                         if (
                             handler.HttpMethod != null
-                            && string.Equals(
-                                handler.HttpMethod,
-                                fuzzyHttpMethod,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            && string
+                                .Equals(
+                                    handler.HttpMethod,
+                                    fuzzyHttpMethod,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             candidates.Add(handler);

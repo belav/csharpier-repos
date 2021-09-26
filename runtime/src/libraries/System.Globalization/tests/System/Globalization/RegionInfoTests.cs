@@ -64,9 +64,8 @@ namespace System.Globalization.Tests
                 );
                 Assert.True(
                     RegionInfo.CurrentRegion.Equals(ri)
-                        || RegionInfo.CurrentRegion.Equals(
-                            new RegionInfo(CultureInfo.CurrentCulture.Name)
-                        )
+                        || RegionInfo.CurrentRegion
+                            .Equals(new RegionInfo(CultureInfo.CurrentCulture.Name))
                 );
                 Assert.Same(RegionInfo.CurrentRegion, RegionInfo.CurrentRegion);
             }
@@ -77,21 +76,20 @@ namespace System.Globalization.Tests
         public void CurrentRegion_Windows()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        RegionInfo ri = RegionInfo.CurrentRegion;
-                        CultureInfo.CurrentCulture.ClearCachedData(); // clear the current region cached data
+                () =>
+                {
+                    RegionInfo ri = RegionInfo.CurrentRegion;
+                    CultureInfo.CurrentCulture.ClearCachedData(); // clear the current region cached data
 
-                        CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ja-JP");
+                    CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ja-JP");
 
-                        // Changing the current culture shouldn't affect the default current region as we get it from Windows settings.
-                        Assert.Equal(
-                            ri.TwoLetterISORegionName,
-                            RegionInfo.CurrentRegion.TwoLetterISORegionName
-                        );
-                    }
-                )
-                .Dispose();
+                    // Changing the current culture shouldn't affect the default current region as we get it from Windows settings.
+                    Assert.Equal(
+                        ri.TwoLetterISORegionName,
+                        RegionInfo.CurrentRegion.TwoLetterISORegionName
+                    );
+                }
+            ).Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -102,17 +100,16 @@ namespace System.Globalization.Tests
         public void ValidateUsingCasedRegionName(string regionName)
         {
             RemoteExecutor.Invoke(
-                    name =>
-                    {
-                        // It is important to do this test in the following order because we have internal cache for regions.
-                        // creating the region with the original input name should be the first to do to ensure not cached before.
-                        string resultedName = new RegionInfo(name).Name;
-                        string expectedName = new RegionInfo(name.ToUpperInvariant()).Name;
-                        Assert.Equal(expectedName, resultedName);
-                    },
-                    regionName
-                )
-                .Dispose();
+                name =>
+                {
+                    // It is important to do this test in the following order because we have internal cache for regions.
+                    // creating the region with the original input name should be the first to do to ensure not cached before.
+                    string resultedName = new RegionInfo(name).Name;
+                    string expectedName = new RegionInfo(name.ToUpperInvariant()).Name;
+                    Assert.Equal(expectedName, resultedName);
+                },
+                regionName
+            ).Dispose();
         }
 
         [Theory]

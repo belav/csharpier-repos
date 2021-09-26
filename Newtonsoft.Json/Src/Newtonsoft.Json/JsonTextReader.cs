@@ -492,10 +492,8 @@ namespace Newtonsoft.Json
 
                             throw JsonReaderException.Create(
                                 this,
-                                "Additional text encountered after finished reading JSON content: {0}.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    _chars[_charPos]
-                                )
+                                "Additional text encountered after finished reading JSON content: {0}."
+                                    .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                             );
                         }
                         SetToken(JsonToken.None);
@@ -503,10 +501,8 @@ namespace Newtonsoft.Json
                     default:
                         throw JsonReaderException.Create(
                             this,
-                            "Unexpected state: {0}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                CurrentState
-                            )
+                            "Unexpected state: {0}."
+                                .FormatWith(CultureInfo.InvariantCulture, CurrentState)
                         );
                 }
             }
@@ -588,10 +584,8 @@ namespace Newtonsoft.Json
                                     {
                                         throw JsonReaderException.Create(
                                             this,
-                                            "Error reading bytes. Unexpected token: {0}.".FormatWith(
-                                                CultureInfo.InvariantCulture,
-                                                TokenType
-                                            )
+                                            "Error reading bytes. Unexpected token: {0}."
+                                                .FormatWith(CultureInfo.InvariantCulture, TokenType)
                                         );
                                     }
                                     SetToken(JsonToken.Bytes, data, false);
@@ -656,10 +650,8 @@ namespace Newtonsoft.Json
                 default:
                     throw JsonReaderException.Create(
                         this,
-                        "Unexpected state: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            CurrentState
-                        )
+                        "Unexpected state: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, CurrentState)
                     );
             }
         }
@@ -796,10 +788,8 @@ namespace Newtonsoft.Json
                 default:
                     throw JsonReaderException.Create(
                         this,
-                        "Unexpected state: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            CurrentState
-                        )
+                        "Unexpected state: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, CurrentState)
                     );
             }
         }
@@ -836,10 +826,8 @@ namespace Newtonsoft.Json
         {
             return JsonReaderException.Create(
                 this,
-                "Unexpected character encountered while parsing value: {0}.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    c
-                )
+                "Unexpected character encountered while parsing value: {0}."
+                    .FormatWith(CultureInfo.InvariantCulture, c)
             );
         }
 
@@ -970,10 +958,8 @@ namespace Newtonsoft.Json
                 default:
                     throw JsonReaderException.Create(
                         this,
-                        "Unexpected state: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            CurrentState
-                        )
+                        "Unexpected state: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, CurrentState)
                     );
             }
         }
@@ -1107,10 +1093,8 @@ namespace Newtonsoft.Json
                 default:
                     throw JsonReaderException.Create(
                         this,
-                        "Unexpected state: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            CurrentState
-                        )
+                        "Unexpected state: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, CurrentState)
                     );
             }
         }
@@ -1200,10 +1184,8 @@ namespace Newtonsoft.Json
                 {
                     throw JsonReaderException.Create(
                         this,
-                        "Additional text encountered after finished reading JSON content: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            _chars[_charPos]
-                        )
+                        "Additional text encountered after finished reading JSON content: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                     );
                 }
             }
@@ -1261,10 +1243,8 @@ namespace Newtonsoft.Json
                                 _charPos = charPos;
                                 throw JsonReaderException.Create(
                                     this,
-                                    "Unterminated string. Expected delimiter: {0}.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        quote
-                                    )
+                                    "Unterminated string. Expected delimiter: {0}."
+                                        .FormatWith(CultureInfo.InvariantCulture, quote)
                                 );
                             }
                         }
@@ -1275,10 +1255,8 @@ namespace Newtonsoft.Json
                         {
                             throw JsonReaderException.Create(
                                 this,
-                                "Unterminated string. Expected delimiter: {0}.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    quote
-                                )
+                                "Unterminated string. Expected delimiter: {0}."
+                                    .FormatWith(CultureInfo.InvariantCulture, quote)
                             );
                         }
 
@@ -1385,10 +1363,11 @@ namespace Newtonsoft.Json
                                 _charPos = charPos;
                                 throw JsonReaderException.Create(
                                     this,
-                                    "Bad JSON escape sequence: {0}.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        @"\" + currentChar
-                                    )
+                                    "Bad JSON escape sequence: {0}."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            @"\" + currentChar
+                                        )
                                 );
                         }
 
@@ -1496,10 +1475,11 @@ namespace Newtonsoft.Json
                 {
                     throw JsonReaderException.Create(
                         this,
-                        @"Invalid Unicode escape sequence: \u{0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            new string(_chars, _charPos, 4)
-                        )
+                        @"Invalid Unicode escape sequence: \u{0}."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                new string(_chars, _charPos, 4)
+                            )
                     );
                 }
             }
@@ -1602,10 +1582,8 @@ namespace Newtonsoft.Json
 
                     throw JsonReaderException.Create(
                         this,
-                        "Unexpected character encountered while parsing number: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            currentChar
-                        )
+                        "Unexpected character encountered while parsing number: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, currentChar)
                     );
             }
         }
@@ -1693,10 +1671,8 @@ namespace Newtonsoft.Json
 
                             throw JsonReaderException.Create(
                                 this,
-                                "After parsing a value an unexpected character was encountered: {0}.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    currentChar
-                                )
+                                "After parsing a value an unexpected character was encountered: {0}."
+                                    .FormatWith(CultureInfo.InvariantCulture, currentChar)
                             );
                         }
                         break;
@@ -1784,10 +1760,8 @@ namespace Newtonsoft.Json
             {
                 throw JsonReaderException.Create(
                     this,
-                    "Invalid property identifier character: {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        _chars[_charPos]
-                    )
+                    "Invalid property identifier character: {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                 );
             }
 
@@ -1818,10 +1792,8 @@ namespace Newtonsoft.Json
             {
                 throw JsonReaderException.Create(
                     this,
-                    "Invalid character after parsing property name. Expected ':' but got: {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        _chars[_charPos]
-                    )
+                    "Invalid character after parsing property name. Expected ':' but got: {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                 );
             }
 
@@ -1900,10 +1872,8 @@ namespace Newtonsoft.Json
 
             throw JsonReaderException.Create(
                 this,
-                "Invalid JavaScript property identifier character: {0}.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    currentChar
-                )
+                "Invalid JavaScript property identifier character: {0}."
+                    .FormatWith(CultureInfo.InvariantCulture, currentChar)
             );
         }
 
@@ -2156,10 +2126,8 @@ namespace Newtonsoft.Json
                     {
                         throw JsonReaderException.Create(
                             this,
-                            "Unexpected character while parsing constructor: {0}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                currentChar
-                            )
+                            "Unexpected character while parsing constructor: {0}."
+                                .FormatWith(CultureInfo.InvariantCulture, currentChar)
                         );
                     }
                 }
@@ -2177,10 +2145,8 @@ namespace Newtonsoft.Json
                 {
                     throw JsonReaderException.Create(
                         this,
-                        "Unexpected character while parsing constructor: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            _chars[_charPos]
-                        )
+                        "Unexpected character while parsing constructor: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                     );
                 }
 
@@ -2258,10 +2224,8 @@ namespace Newtonsoft.Json
                             catch (Exception ex)
                             {
                                 throw ThrowReaderError(
-                                    "Input string '{0}' is not a valid number.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        number
-                                    ),
+                                    "Input string '{0}' is not a valid number."
+                                        .FormatWith(CultureInfo.InvariantCulture, number),
                                     ex
                                 );
                             }
@@ -2269,19 +2233,21 @@ namespace Newtonsoft.Json
                         else
                         {
                             if (
-                                !double.TryParse(
-                                    number,
-                                    NumberStyles.Float,
-                                    CultureInfo.InvariantCulture,
-                                    out _
-                                )
+                                !double
+                                    .TryParse(
+                                        number,
+                                        NumberStyles.Float,
+                                        CultureInfo.InvariantCulture,
+                                        out _
+                                    )
                             )
                             {
                                 throw ThrowReaderError(
-                                    "Input string '{0}' is not a valid number.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        _stringReference.ToString()
-                                    )
+                                    "Input string '{0}' is not a valid number."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            _stringReference.ToString()
+                                        )
                                 );
                             }
                         }
@@ -2316,10 +2282,8 @@ namespace Newtonsoft.Json
                             catch (Exception ex)
                             {
                                 throw ThrowReaderError(
-                                    "Input string '{0}' is not a valid integer.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        number
-                                    ),
+                                    "Input string '{0}' is not a valid integer."
+                                        .FormatWith(CultureInfo.InvariantCulture, number),
                                     ex
                                 );
                             }
@@ -2339,19 +2303,21 @@ namespace Newtonsoft.Json
                             else if (parseResult == ParseResult.Overflow)
                             {
                                 throw ThrowReaderError(
-                                    "JSON integer {0} is too large or small for an Int32.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        _stringReference.ToString()
-                                    )
+                                    "JSON integer {0} is too large or small for an Int32."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            _stringReference.ToString()
+                                        )
                                 );
                             }
                             else
                             {
                                 throw ThrowReaderError(
-                                    "Input string '{0}' is not a valid integer.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        _stringReference.ToString()
-                                    )
+                                    "Input string '{0}' is not a valid integer."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            _stringReference.ToString()
+                                        )
                                 );
                             }
                         }
@@ -2386,10 +2352,8 @@ namespace Newtonsoft.Json
                             catch (Exception ex)
                             {
                                 throw ThrowReaderError(
-                                    "Input string '{0}' is not a valid decimal.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        number
-                                    ),
+                                    "Input string '{0}' is not a valid decimal."
+                                        .FormatWith(CultureInfo.InvariantCulture, number),
                                     ex
                                 );
                             }
@@ -2409,10 +2373,11 @@ namespace Newtonsoft.Json
                             else
                             {
                                 throw ThrowReaderError(
-                                    "Input string '{0}' is not a valid decimal.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        _stringReference.ToString()
-                                    )
+                                    "Input string '{0}' is not a valid decimal."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            _stringReference.ToString()
+                                        )
                                 );
                             }
                         }
@@ -2447,10 +2412,8 @@ namespace Newtonsoft.Json
                             catch (Exception ex)
                             {
                                 throw ThrowReaderError(
-                                    "Input string '{0}' is not a valid double.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        number
-                                    ),
+                                    "Input string '{0}' is not a valid double."
+                                        .FormatWith(CultureInfo.InvariantCulture, number),
                                     ex
                                 );
                             }
@@ -2460,12 +2423,13 @@ namespace Newtonsoft.Json
                             string number = _stringReference.ToString();
 
                             if (
-                                double.TryParse(
-                                    number,
-                                    NumberStyles.Float,
-                                    CultureInfo.InvariantCulture,
-                                    out double value
-                                )
+                                double
+                                    .TryParse(
+                                        number,
+                                        NumberStyles.Float,
+                                        CultureInfo.InvariantCulture,
+                                        out double value
+                                    )
                             )
                             {
                                 numberValue = value;
@@ -2473,10 +2437,11 @@ namespace Newtonsoft.Json
                             else
                             {
                                 throw ThrowReaderError(
-                                    "Input string '{0}' is not a valid double.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        _stringReference.ToString()
-                                    )
+                                    "Input string '{0}' is not a valid double."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            _stringReference.ToString()
+                                        )
                                 );
                             }
                         }
@@ -2510,10 +2475,8 @@ namespace Newtonsoft.Json
                             catch (Exception ex)
                             {
                                 throw ThrowReaderError(
-                                    "Input string '{0}' is not a valid number.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        number
-                                    ),
+                                    "Input string '{0}' is not a valid number."
+                                        .FormatWith(CultureInfo.InvariantCulture, number),
                                     ex
                                 );
                             }
@@ -2541,10 +2504,11 @@ namespace Newtonsoft.Json
                                 if (number.Length > MaximumJavascriptIntegerCharacterLength)
                                 {
                                     throw ThrowReaderError(
-                                        "JSON integer {0} is too large to parse.".FormatWith(
-                                            CultureInfo.InvariantCulture,
-                                            _stringReference.ToString()
-                                        )
+                                        "JSON integer {0} is too large to parse."
+                                            .FormatWith(
+                                                CultureInfo.InvariantCulture,
+                                                _stringReference.ToString()
+                                            )
                                     );
                                 }
 
@@ -2552,10 +2516,11 @@ namespace Newtonsoft.Json
                                 numberType = JsonToken.Integer;
 #else
                                 throw ThrowReaderError(
-                                    "JSON integer {0} is too large or small for an Int64.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        _stringReference.ToString()
-                                    )
+                                    "JSON integer {0} is too large or small for an Int64."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            _stringReference.ToString()
+                                        )
                                 );
 #endif
                             }
@@ -2576,10 +2541,11 @@ namespace Newtonsoft.Json
                                     else
                                     {
                                         throw ThrowReaderError(
-                                            "Input string '{0}' is not a valid decimal.".FormatWith(
-                                                CultureInfo.InvariantCulture,
-                                                _stringReference.ToString()
-                                            )
+                                            "Input string '{0}' is not a valid decimal."
+                                                .FormatWith(
+                                                    CultureInfo.InvariantCulture,
+                                                    _stringReference.ToString()
+                                                )
                                         );
                                     }
                                 }
@@ -2588,12 +2554,13 @@ namespace Newtonsoft.Json
                                     string number = _stringReference.ToString();
 
                                     if (
-                                        double.TryParse(
-                                            number,
-                                            NumberStyles.Float,
-                                            CultureInfo.InvariantCulture,
-                                            out double d
-                                        )
+                                        double
+                                            .TryParse(
+                                                number,
+                                                NumberStyles.Float,
+                                                CultureInfo.InvariantCulture,
+                                                out double d
+                                            )
                                     )
                                     {
                                         numberValue = d;
@@ -2601,10 +2568,11 @@ namespace Newtonsoft.Json
                                     else
                                     {
                                         throw ThrowReaderError(
-                                            "Input string '{0}' is not a valid number.".FormatWith(
-                                                CultureInfo.InvariantCulture,
-                                                _stringReference.ToString()
-                                            )
+                                            "Input string '{0}' is not a valid number."
+                                                .FormatWith(
+                                                    CultureInfo.InvariantCulture,
+                                                    _stringReference.ToString()
+                                                )
                                         );
                                     }
                                 }
@@ -2668,10 +2636,8 @@ namespace Newtonsoft.Json
             {
                 throw JsonReaderException.Create(
                     this,
-                    "Error parsing comment. Expected: *, got {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        _chars[_charPos]
-                    )
+                    "Error parsing comment. Expected: *, got {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                 );
             }
 

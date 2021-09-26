@@ -27,9 +27,10 @@ namespace Microsoft.AspNetCore.DataProtection
         public RegistryPolicyResolver(IActivator activator)
         {
             _getPolicyRegKey = () =>
-                Registry.LocalMachine.OpenSubKey(
-                    @"SOFTWARE\Microsoft\DotNetPackages\Microsoft.AspNetCore.DataProtection"
-                );
+                Registry.LocalMachine
+                    .OpenSubKey(
+                        @"SOFTWARE\Microsoft\DotNetPackages\Microsoft.AspNetCore.DataProtection"
+                    );
             _activator = activator;
         }
 
@@ -99,9 +100,8 @@ namespace Microsoft.AspNetCore.DataProtection
                     var candidate = sinkFromRegistry.Trim();
                     if (!String.IsNullOrEmpty(candidate))
                     {
-                        typeof(IKeyEscrowSink).AssertIsAssignableFrom(
-                            Type.GetType(candidate, throwOnError: true)!
-                        );
+                        typeof(IKeyEscrowSink)
+                            .AssertIsAssignableFrom(Type.GetType(candidate, throwOnError: true)!);
                         sinks.Add(candidate);
                     }
                 }

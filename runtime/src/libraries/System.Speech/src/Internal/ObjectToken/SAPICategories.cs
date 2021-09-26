@@ -124,11 +124,12 @@ namespace System.Speech.Internal.ObjectTokens
                             // If there wasn't a default, just pick one with the proper culture
                             string[] sCultureId = new string[]
                             {
-                                string.Format(
-                                    CultureInfo.InvariantCulture,
-                                    "{0:x}",
-                                    CultureInfo.CurrentUICulture.LCID
-                                )
+                                string
+                                    .Format(
+                                        CultureInfo.InvariantCulture,
+                                        "{0:x}",
+                                        CultureInfo.CurrentUICulture.LCID
+                                    )
                             };
 
                             foreach (

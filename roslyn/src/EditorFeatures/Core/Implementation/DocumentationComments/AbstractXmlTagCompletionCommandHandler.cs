@@ -75,10 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             }
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Completing_Tag
-                )
+                context.OperationContext
+                    .AddScope(allowCancellation: true, EditorFeaturesResources.Completing_Tag)
             )
             {
                 var buffer = args.SubjectBuffer;

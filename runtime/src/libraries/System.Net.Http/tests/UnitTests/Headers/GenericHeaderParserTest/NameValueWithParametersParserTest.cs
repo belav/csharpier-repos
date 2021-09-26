@@ -111,11 +111,8 @@ namespace System.Net.Http.Tests
             object result = null;
             Assert.True(
                 parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format(
-                    "TryParse returned false. Input: '{0}', Index: {1}",
-                    input,
-                    startIndex
-                )
+                string
+                    .Format("TryParse returned false. Input: '{0}', Index: {1}", input, startIndex)
             );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(result, expectedResult);

@@ -99,7 +99,8 @@ namespace System.Linq.Tests
         [Fact]
         public void OrderBy2()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .OrderBy(n => n, Comparer<int>.Default)
                 .Count();
             Assert.Equal(3, count);

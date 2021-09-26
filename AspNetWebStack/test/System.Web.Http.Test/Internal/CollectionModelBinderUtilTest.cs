@@ -19,10 +19,11 @@ namespace System.Web.Http.Internal
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => new ReadOnlyCollection<int>(new int[0]),
-                    typeof(ICollection<int>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(
+                        () => new ReadOnlyCollection<int>(new int[0]),
+                        typeof(ICollection<int>)
+                    )
             };
 
             // Act
@@ -44,10 +45,8 @@ namespace System.Web.Http.Internal
             List<int> originalInstance = new List<int> { 10, 20, 30 };
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => originalInstance,
-                    typeof(ICollection<int>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => originalInstance, typeof(ICollection<int>))
             };
 
             // Act
@@ -68,10 +67,8 @@ namespace System.Web.Http.Internal
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(ICollection<int>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(ICollection<int>))
             };
 
             // Act
@@ -92,10 +89,8 @@ namespace System.Web.Http.Internal
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(Dictionary<string, int>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(Dictionary<string, int>))
             };
 
             // Act
@@ -122,10 +117,8 @@ namespace System.Web.Http.Internal
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(Dictionary<string, int>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(Dictionary<string, int>))
             };
 
             // Act
@@ -156,10 +149,8 @@ namespace System.Web.Http.Internal
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => originalModel,
-                    typeof(IDictionary<string, string>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => originalModel, typeof(IDictionary<string, string>))
             };
 
             // Act
@@ -188,10 +179,8 @@ namespace System.Web.Http.Internal
             };
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => originalInstance,
-                    typeof(IDictionary<string, string>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => originalInstance, typeof(IDictionary<string, string>))
             };
 
             // Act
@@ -214,10 +203,8 @@ namespace System.Web.Http.Internal
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(IDictionary<string, string>)
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(IDictionary<string, string>))
             };
 
             // Act

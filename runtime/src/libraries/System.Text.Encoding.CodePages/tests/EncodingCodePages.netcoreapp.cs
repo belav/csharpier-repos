@@ -38,47 +38,42 @@ namespace System.Text.Tests
         public void TestGetEncodings()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        EncodingInfo[] list = Encoding.GetEncodings();
+                () =>
+                {
+                    EncodingInfo[] list = Encoding.GetEncodings();
 
-                        foreach (EncodingInformation eInfo in s_defaultEncoding)
-                        {
-                            Assert.NotNull(
-                                list.FirstOrDefault(
-                                    o => o.CodePage == eInfo.CodePage && o.Name == eInfo.Name
-                                )
-                            );
-                        }
+                    foreach (EncodingInformation eInfo in s_defaultEncoding)
+                    {
+                        Assert.NotNull(
+                            list.FirstOrDefault(
+                                o => o.CodePage == eInfo.CodePage && o.Name == eInfo.Name
+                            )
+                        );
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void TestGetEncodingsWithProvider()
         {
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+                    foreach (EncodingInfo ei in Encoding.GetEncodings())
                     {
-                        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+                        Encoding encoding = ei.GetEncoding();
+                        Assert.Equal(ei.CodePage, encoding.CodePage);
 
-                        foreach (EncodingInfo ei in Encoding.GetEncodings())
-                        {
-                            Encoding encoding = ei.GetEncoding();
-                            Assert.Equal(ei.CodePage, encoding.CodePage);
-
-                            Assert.True(
-                                ei.Name.Equals(
-                                    encoding.WebName,
-                                    StringComparison.OrdinalIgnoreCase
-                                ),
-                                $"Encodinginfo.Name `{ei.Name}` != Encoding.WebName `{encoding.WebName}`"
-                            );
-                        }
+                        Assert.True(
+                            ei.Name.Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase),
+                            $"Encodinginfo.Name `{ei.Name}` != Encoding.WebName `{encoding.WebName}`"
+                        );
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
     }
 }

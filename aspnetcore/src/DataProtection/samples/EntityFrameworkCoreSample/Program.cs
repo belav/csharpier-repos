@@ -15,9 +15,8 @@ namespace EntityFrameworkCoreSample
         static void Main(string[] args)
         {
             // Configure
-            var services = new ServiceCollection().AddLogging(
-                    o => o.AddConsole().SetMinimumLevel(LogLevel.Debug)
-                )
+            var services = new ServiceCollection()
+                .AddLogging(o => o.AddConsole().SetMinimumLevel(LogLevel.Debug))
                 .AddDbContext<DataProtectionKeyContext>(
                     o =>
                     {

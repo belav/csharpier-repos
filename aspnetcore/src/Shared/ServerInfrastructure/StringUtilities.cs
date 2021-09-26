@@ -37,11 +37,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
             fixed (byte* source = &MemoryMarshal.GetReference(span))
             {
-                var resultString = string.Create(
-                    span.Length,
-                    new IntPtr(source),
-                    s_getAsciiOrUtf8StringNonNullCharacters
-                );
+                var resultString = string
+                    .Create(
+                        span.Length,
+                        new IntPtr(source),
+                        s_getAsciiOrUtf8StringNonNullCharacters
+                    );
 
                 // If resultString is marked, perform UTF-8 encoding
                 if (resultString[0] == '\0')
@@ -216,7 +217,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     // BMI2 could be used, but this variant is faster on both Intel and AMD.
                     if (Sse2.X64.IsSupported)
                     {
-                        Vector128<sbyte> vecNarrow = Sse2.X64.ConvertScalarToVector128Int64(value)
+                        Vector128<sbyte> vecNarrow = Sse2.X64
+                            .ConvertScalarToVector128Int64(value)
                             .AsSByte();
                         Vector128<ulong> vecWide = Sse2.UnpackLow(vecNarrow, zero).AsUInt64();
                         Sse2.Store((ulong*)output, vecWide);
@@ -717,10 +719,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             {
                 if (value is null)
                     return false;
-                new UTF8Encoding(
-                    encoderShouldEmitUTF8Identifier: false,
-                    throwOnInvalidBytes: true
-                ).GetByteCount(value);
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true)
+                    .GetByteCount(value);
                 return !value.Contains('\0');
             }
             catch (DecoderFallbackException)
@@ -826,9 +826,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     shuffleMask
                 );
                 var highNibbles = Sse2.ShiftRightLogical(
-                        Sse2.ShiftRightLogical128BitLane(lowNibbles, 2).AsInt32(),
-                        4
-                    )
+                    Sse2.ShiftRightLogical128BitLane(lowNibbles, 2).AsInt32(),
+                    4
+                )
                     .AsByte();
                 var indices = Sse2.And(
                     Sse2.Or(lowNibbles, highNibbles),

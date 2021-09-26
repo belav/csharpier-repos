@@ -66,15 +66,14 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             var inlineExpression = rawInlineExpression;
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
             var callerSemanticModel = await document.GetRequiredSemanticModelAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
-            var calleeDocument = document.Project.Solution.GetRequiredDocument(
-                calleeMethodNode.SyntaxTree
-            );
+            var calleeDocument = document.Project.Solution
+                .GetRequiredDocument(calleeMethodNode.SyntaxTree);
             var calleeSemanticModel = await calleeDocument.GetRequiredSemanticModelAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Generate a map which the key is the symbol need renaming, value is the new name.
@@ -131,9 +130,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 calleeSemanticModel,
                 calleeInvocationNode,
                 rawInlineExpression,
-                methodParametersInfo.ParametersToGenerateFreshVariablesFor.SelectAsArray(
-                    parameterAndArgument => parameterAndArgument.parameterSymbol
-                ),
+                methodParametersInfo.ParametersToGenerateFreshVariablesFor
+                    .SelectAsArray(parameterAndArgument => parameterAndArgument.parameterSymbol),
                 cancellationToken
             );
 
@@ -260,12 +258,12 @@ namespace Microsoft.CodeAnalysis.InlineMethod
 
             // Do the replacement work within the callee's body so that it can be inserted to the caller later.
             inlineExpression = await ReplaceAllSyntaxNodesForSymbolAsync(
-                    calleeDocument,
-                    inlineExpression,
-                    syntaxGenerator,
-                    replacementTable,
-                    cancellationToken
-                )
+                calleeDocument,
+                inlineExpression,
+                syntaxGenerator,
+                replacementTable,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return new InlineMethodContext(
@@ -308,8 +306,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
         {
             // Check if there is await expression. It is used later if the caller should be changed to async
             var awaitExpressions = inlineExpression.DescendantNodesAndSelf(
-                    node => !_syntaxFacts.IsAnonymousFunction(node)
-                )
+                node => !_syntaxFacts.IsAnonymousFunction(node)
+            )
                 .Where(_syntaxFacts.IsAwaitExpression)
                 .ToImmutableArray();
             return !awaitExpressions.IsEmpty;
@@ -345,23 +343,22 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             foreach (var (symbol, syntaxNode) in replacementTable)
             {
                 var allReferences = await SymbolFinder.FindReferencesAsync(
-                        symbol,
-                        document.Project.Solution,
-                        ImmutableHashSet<Document>.Empty.Add(document),
-                        cancellationToken
-                    )
+                    symbol,
+                    document.Project.Solution,
+                    ImmutableHashSet<Document>.Empty.Add(document),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var allSyntaxNodesToReplace = allReferences.SelectMany(
-                        reference =>
-                            reference.Locations.Where(location => !location.IsImplicit)
-                                .Select(
-                                    location =>
-                                        location.Location.FindNode(
-                                            getInnermostNodeForTie: true,
-                                            cancellationToken
-                                        )
-                                )
-                    )
+                    reference =>
+                        reference.Locations
+                            .Where(location => !location.IsImplicit)
+                            .Select(
+                                location =>
+                                    location.Location
+                                        .FindNode(getInnermostNodeForTie: true, cancellationToken)
+                            )
+                )
                     .ToImmutableArray();
 
                 foreach (var nodeToReplace in allSyntaxNodesToReplace)
@@ -389,14 +386,15 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             ImmutableDictionary<ISymbol, string> renameTable
         )
         {
-            var typeParametersReplacementQuery = calleeMethodSymbol.TypeParameters.Zip(
-                calleeMethodSymbol.TypeArguments,
-                (parameter, argument) =>
-                    (
-                        parameter: (ISymbol)parameter,
-                        syntaxNode: GenerateTypeSyntax(argument, allowVar: true)
-                    )
-            );
+            var typeParametersReplacementQuery = calleeMethodSymbol.TypeParameters
+                .Zip(
+                    calleeMethodSymbol.TypeArguments,
+                    (parameter, argument) =>
+                        (
+                            parameter: (ISymbol)parameter,
+                            syntaxNode: GenerateTypeSyntax(argument, allowVar: true)
+                        )
+                );
             var literalArgumentReplacementQuery = parametersToReplace.Select(
                 parameterAndExpressionPair =>
                     (

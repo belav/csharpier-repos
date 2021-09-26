@@ -216,7 +216,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            typeof(Sse2).GetMethod(
+            typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.StoreScalar),
                     new Type[] { typeof(UInt32*), typeof(Vector128<UInt32>) }
                 )
@@ -236,7 +237,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            typeof(Sse2).GetMethod(
+            typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.StoreScalar),
                     new Type[] { typeof(UInt32*), typeof(Vector128<UInt32>) }
                 )
@@ -256,7 +258,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            typeof(Sse2).GetMethod(
+            typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.StoreScalar),
                     new Type[] { typeof(UInt32*), typeof(Vector128<UInt32>) }
                 )
@@ -436,15 +439,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse2)}.{nameof(Sse2.StoreScalar)}<UInt32>(Vector128<UInt32>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"    value: ({string.Join(", ", value)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse2)}.{nameof(Sse2.StoreScalar)}<UInt32>(Vector128<UInt32>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"    value: ({string.Join(", ", value)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

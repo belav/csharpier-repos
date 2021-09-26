@@ -66,12 +66,14 @@ namespace Microsoft.CodeAnalysis.Remote
             // first check checksum
             var oldTextChecksum =
                 (
-                    await oldDocument.State.GetStateChecksumsAsync(cancellationToken)
+                    await oldDocument.State
+                        .GetStateChecksumsAsync(cancellationToken)
                         .ConfigureAwait(false)
                 ).Text;
             var newTextChecksum =
                 (
-                    await newDocument.State.GetStateChecksumsAsync(cancellationToken)
+                    await newDocument.State
+                        .GetStateChecksumsAsync(cancellationToken)
                         .ConfigureAwait(false)
                 ).Text;
             if (oldTextChecksum == newTextChecksum)

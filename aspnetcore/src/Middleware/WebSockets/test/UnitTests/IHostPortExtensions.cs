@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Hosting
 
         public static IEnumerable<Uri> GetUris(this IHost host)
         {
-            return host.Services.GetService<IServer>()
+            return host.Services
+                .GetService<IServer>()
                 .Features.Get<IServerAddressesFeature>()
                 .Addresses.Select(a => new Uri(a));
         }

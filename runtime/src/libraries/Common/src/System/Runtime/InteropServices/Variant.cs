@@ -243,9 +243,8 @@ namespace System.Runtime.InteropServices
                     break;
 
                 case VarEnum.VT_CY:
-                    *(long*)this._typeUnion._unionTypes._byref = decimal.ToOACurrency(
-                        (decimal)value
-                    );
+                    *(long*)this._typeUnion._unionTypes._byref = decimal
+                        .ToOACurrency((decimal)value);
                     break;
 
                 case VarEnum.VT_DECIMAL:

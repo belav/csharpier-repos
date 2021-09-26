@@ -604,9 +604,9 @@ IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (va
                 // CS0819: Implicitly-typed variables cannot have multiple declarators
                 //         /*<bind>*/using (var c1 = new C(), c2 = new C())
                 Diagnostic(
-                        ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
-                        "var c1 = new C(), c2 = new C()"
-                    )
+                    ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
+                    "var c1 = new C(), c2 = new C()"
+                )
                     .WithLocation(12, 26)
             };
 
@@ -7013,20 +7013,18 @@ class P : System.IDisposable
                 // file.cs(12,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             label1:
                 Diagnostic(
-                        ErrorCode.ERR_BadEmbeddedStmt,
-                        @"label1:
+                    ErrorCode.ERR_BadEmbeddedStmt,
+                    @"label1:
                 using var a = new P();"
-                    )
-                    .WithLocation(12, 13),
+                ).WithLocation(12, 13),
                 // file.cs(15,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             label2:
                 Diagnostic(
-                        ErrorCode.ERR_BadEmbeddedStmt,
-                        @"label2:
+                    ErrorCode.ERR_BadEmbeddedStmt,
+                    @"label2:
             label3:
                 using var b = new P();"
-                    )
-                    .WithLocation(15, 13)
+                ).WithLocation(15, 13)
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(

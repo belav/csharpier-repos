@@ -90,8 +90,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         protected virtual SyntaxNode UpdateSpan(SyntaxNode target, SourceChange change)
         {
             var newContent = change.GetEditedContent(target);
-            var builder =
-                Syntax.InternalSyntax.SyntaxListBuilder<Syntax.InternalSyntax.SyntaxToken>.Create();
+            var builder = Syntax.InternalSyntax.SyntaxListBuilder<Syntax.InternalSyntax.SyntaxToken>
+                .Create();
             foreach (var token in Tokenizer(newContent))
             {
                 builder.Add(token);
@@ -100,47 +100,44 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             SyntaxNode newTarget = null;
             if (target is RazorMetaCodeSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.RazorMetaCode(builder.ToList())
+                newTarget = Syntax.InternalSyntax.SyntaxFactory
+                    .RazorMetaCode(builder.ToList())
                     .CreateRed(target.Parent, target.Position);
             }
             else if (target is MarkupTextLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.MarkupTextLiteral(builder.ToList())
+                newTarget = Syntax.InternalSyntax.SyntaxFactory
+                    .MarkupTextLiteral(builder.ToList())
                     .CreateRed(target.Parent, target.Position);
             }
             else if (target is MarkupEphemeralTextLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.MarkupEphemeralTextLiteral(
-                        builder.ToList()
-                    )
+                newTarget = Syntax.InternalSyntax.SyntaxFactory
+                    .MarkupEphemeralTextLiteral(builder.ToList())
                     .CreateRed(target.Parent, target.Position);
             }
             else if (target is CSharpStatementLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.CSharpStatementLiteral(
-                        builder.ToList()
-                    )
+                newTarget = Syntax.InternalSyntax.SyntaxFactory
+                    .CSharpStatementLiteral(builder.ToList())
                     .CreateRed(target.Parent, target.Position);
             }
             else if (target is CSharpExpressionLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.CSharpExpressionLiteral(
-                        builder.ToList()
-                    )
+                newTarget = Syntax.InternalSyntax.SyntaxFactory
+                    .CSharpExpressionLiteral(builder.ToList())
                     .CreateRed(target.Parent, target.Position);
             }
             else if (target is CSharpEphemeralTextLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.CSharpEphemeralTextLiteral(
-                        builder.ToList()
-                    )
+                newTarget = Syntax.InternalSyntax.SyntaxFactory
+                    .CSharpEphemeralTextLiteral(builder.ToList())
                     .CreateRed(target.Parent, target.Position);
             }
             else if (target is UnclassifiedTextLiteralSyntax)
             {
-                newTarget = Syntax.InternalSyntax.SyntaxFactory.UnclassifiedTextLiteral(
-                        builder.ToList()
-                    )
+                newTarget = Syntax.InternalSyntax.SyntaxFactory
+                    .UnclassifiedTextLiteral(builder.ToList())
                     .CreateRed(target.Parent, target.Position);
             }
             else

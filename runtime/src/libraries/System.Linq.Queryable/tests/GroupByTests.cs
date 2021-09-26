@@ -104,7 +104,8 @@ namespace System.Linq.Tests
             AssertGroupingCorrect(
                 key.AsQueryable(),
                 element.AsQueryable(),
-                new string[] { null }.AsQueryable()
+                new string[] { null }
+                    .AsQueryable()
                     .GroupBy(e => e, e => e, EqualityComparer<string>.Default),
                 EqualityComparer<string>.Default
             );
@@ -114,7 +115,8 @@ namespace System.Linq.Tests
         public void EmptySource()
         {
             Assert.Empty(
-                new Record[] {  }.AsQueryable()
+                new Record[] {  }
+                    .AsQueryable()
                     .GroupBy(e => e.Name, e => e.Score, new AnagramEqualityComparer())
             );
         }
@@ -368,7 +370,8 @@ namespace System.Linq.Tests
         public void EmptySourceWithResultSelector()
         {
             Assert.Empty(
-                new Record[] {  }.AsQueryable()
+                new Record[] {  }
+                    .AsQueryable()
                     .GroupBy(
                         e => e.Name,
                         e => e.Score,
@@ -517,7 +520,8 @@ namespace System.Linq.Tests
         [Fact]
         public void GroupBy2()
         {
-            var count = (new int[] { 0, 1, 2, 2, 0 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2, 2, 0 })
+                .AsQueryable()
                 .GroupBy(n => n, EqualityComparer<int>.Default)
                 .Count();
             Assert.Equal(3, count);
@@ -533,7 +537,8 @@ namespace System.Linq.Tests
         [Fact]
         public void GroupBy4()
         {
-            var count = (new int[] { 0, 1, 2, 2, 0 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2, 2, 0 })
+                .AsQueryable()
                 .GroupBy(n => n, n => n, EqualityComparer<int>.Default)
                 .Count();
             Assert.Equal(3, count);
@@ -542,7 +547,8 @@ namespace System.Linq.Tests
         [Fact]
         public void GroupBy5()
         {
-            var count = (new int[] { 0, 1, 2, 2, 0 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2, 2, 0 })
+                .AsQueryable()
                 .GroupBy(n => n, n => n, (k, g) => k)
                 .Count();
             Assert.Equal(3, count);
@@ -551,7 +557,8 @@ namespace System.Linq.Tests
         [Fact]
         public void GroupBy6()
         {
-            var count = (new int[] { 0, 1, 2, 2, 0 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2, 2, 0 })
+                .AsQueryable()
                 .GroupBy(n => n, (k, g) => k)
                 .Count();
             Assert.Equal(3, count);
@@ -560,7 +567,8 @@ namespace System.Linq.Tests
         [Fact]
         public void GroupBy7()
         {
-            var count = (new int[] { 0, 1, 2, 2, 0 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2, 2, 0 })
+                .AsQueryable()
                 .GroupBy(n => n, n => n, (k, g) => k, EqualityComparer<int>.Default)
                 .Count();
             Assert.Equal(3, count);
@@ -569,7 +577,8 @@ namespace System.Linq.Tests
         [Fact]
         public void GroupBy8()
         {
-            var count = (new int[] { 0, 1, 2, 2, 0 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2, 2, 0 })
+                .AsQueryable()
                 .GroupBy(n => n, (k, g) => k, EqualityComparer<int>.Default)
                 .Count();
             Assert.Equal(3, count);

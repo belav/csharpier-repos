@@ -33,7 +33,8 @@ namespace AutoMapper.UnitTests.Projection
         [Fact]
         public void Should_work()
         {
-            new[] { new Foo() }.AsQueryable()
+            new[] { new Foo() }
+                .AsQueryable()
                 .ProjectTo<FooDto>(Configuration)
                 .Single()
                 .A.ShouldBe(0);
@@ -66,13 +67,15 @@ namespace AutoMapper.UnitTests.Projection
                     LastName = "White",
                     Address = new Address("Street1")
                 }
-            }.AsQueryable();
+            }
+                .AsQueryable();
 
             IList<Unmapped> projected = null;
 
-            typeof(InvalidOperationException).ShouldBeThrownBy(
-                () => projected = customers.ProjectTo<Unmapped>(_config).ToList()
-            );
+            typeof(InvalidOperationException)
+                .ShouldBeThrownBy(
+                    () => projected = customers.ProjectTo<Unmapped>(_config).ToList()
+                );
 
             projected.ShouldBeNull();
         }
@@ -88,7 +91,8 @@ namespace AutoMapper.UnitTests.Projection
                     LastName = "White",
                     Address = new Address("Street1")
                 }
-            }.AsQueryable();
+            }
+                .AsQueryable();
 
             IQueryable projected = customers.ProjectTo(typeof(CustomerDto), _config);
 

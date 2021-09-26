@@ -55,10 +55,8 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(RegexOptions.Compiled)]
         public void Docs_Examples_MDYtoDMY(RegexOptions options)
         {
-            string dt = new DateTime(2020, 1, 8, 0, 0, 0, DateTimeKind.Utc).ToString(
-                "d",
-                DateTimeFormatInfo.InvariantInfo
-            );
+            string dt = new DateTime(2020, 1, 8, 0, 0, 0, DateTimeKind.Utc)
+                .ToString("d", DateTimeFormatInfo.InvariantInfo);
             string result = Regex.Replace(
                 dt,
                 @"\b(?<month>\d{1,2})/(?<day>\d{1,2})/(?<year>\d{2,4})\b",

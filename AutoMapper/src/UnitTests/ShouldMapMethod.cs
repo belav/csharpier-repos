@@ -56,20 +56,18 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_report_unmapped_property()
         {
-            new Action(
-                () => Configuration.AssertConfigurationIsValid()
-            ).ShouldThrowException<AutoMapperConfigurationException>(
-                ex =>
-                {
-                    ex.Errors.ShouldNotBeNull();
-                    ex.Errors.ShouldNotBeEmpty();
-                    ex.Errors[0].UnmappedPropertyNames.ShouldNotBeNull();
-                    ex.Errors[0].UnmappedPropertyNames.ShouldNotBeEmpty();
-                    ex.Errors[0].UnmappedPropertyNames[0].ShouldBe(
-                        nameof(Destination.AnotherNumber)
-                    );
-                }
-            );
+            new Action(() => Configuration.AssertConfigurationIsValid())
+                .ShouldThrowException<AutoMapperConfigurationException>(
+                    ex =>
+                    {
+                        ex.Errors.ShouldNotBeNull();
+                        ex.Errors.ShouldNotBeEmpty();
+                        ex.Errors[0].UnmappedPropertyNames.ShouldNotBeNull();
+                        ex.Errors[0].UnmappedPropertyNames.ShouldNotBeEmpty();
+                        ex.Errors[0].UnmappedPropertyNames[0]
+                            .ShouldBe(nameof(Destination.AnotherNumber));
+                    }
+                );
         }
 
         [Fact]
@@ -132,20 +130,18 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_report_unmapped_property()
         {
-            new Action(
-                () => Configuration.AssertConfigurationIsValid()
-            ).ShouldThrowException<AutoMapperConfigurationException>(
-                ex =>
-                {
-                    ex.Errors.ShouldNotBeNull();
-                    ex.Errors.ShouldNotBeEmpty();
-                    ex.Errors[0].UnmappedPropertyNames.ShouldNotBeNull();
-                    ex.Errors[0].UnmappedPropertyNames.ShouldNotBeEmpty();
-                    ex.Errors[0].UnmappedPropertyNames[0].ShouldBe(
-                        nameof(Destination.AnotherNumber)
-                    );
-                }
-            );
+            new Action(() => Configuration.AssertConfigurationIsValid())
+                .ShouldThrowException<AutoMapperConfigurationException>(
+                    ex =>
+                    {
+                        ex.Errors.ShouldNotBeNull();
+                        ex.Errors.ShouldNotBeEmpty();
+                        ex.Errors[0].UnmappedPropertyNames.ShouldNotBeNull();
+                        ex.Errors[0].UnmappedPropertyNames.ShouldNotBeEmpty();
+                        ex.Errors[0].UnmappedPropertyNames[0]
+                            .ShouldBe(nameof(Destination.AnotherNumber));
+                    }
+                );
         }
 
         [Fact]

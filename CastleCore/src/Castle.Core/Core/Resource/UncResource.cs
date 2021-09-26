@@ -64,12 +64,8 @@ namespace Castle.Core.Resource
 
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                "UncResource: [{0}] [{1}]",
-                filePath,
-                basePath
-            );
+            return string
+                .Format(CultureInfo.CurrentCulture, "UncResource: [{0}] [{1}]", filePath, basePath);
         }
 
         private Stream CreateStreamFromUri(CustomUri resource, string rootPath)
@@ -103,11 +99,8 @@ namespace Castle.Core.Resource
         {
             if (!File.Exists(path))
             {
-                string message = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "File {0} could not be found",
-                    path
-                );
+                string message = string
+                    .Format(CultureInfo.InvariantCulture, "File {0} could not be found", path);
                 throw new ResourceException(message);
             }
         }

@@ -126,9 +126,10 @@ internal class Program
         }
         else
         {
-            Console.Error.WriteLine(
-                $@"unbox != box: original {LineCount}, boxed {intAsObject:X8}, unboxed {unboxedInt:X8}"
-            );
+            Console.Error
+                .WriteLine(
+                    $@"unbox != box: original {LineCount}, boxed {intAsObject:X8}, unboxed {unboxedInt:X8}"
+                );
             success = false;
         }
         int? nullableInt = LineCount;
@@ -142,9 +143,10 @@ internal class Program
         }
         else
         {
-            Console.Error.WriteLine(
-                $@"unbox_nullable != box_nullable: original {nullableInt:X8}, boxed {nullableIntAsObject:X8}, unboxed {unboxedNullable:X8}"
-            );
+            Console.Error
+                .WriteLine(
+                    $@"unbox_nullable != box_nullable: original {nullableInt:X8}, boxed {nullableIntAsObject:X8}, unboxed {unboxedNullable:X8}"
+                );
             success = false;
         }
         return success;
@@ -231,13 +233,14 @@ internal class Program
         {
             return true;
         }
-        Console.Error.WriteLine(
-            "val = {0} = 0x{1:x2}, val1 = {2} = 0x{3:x2}",
-            val,
-            (int)val,
-            val1,
-            (int)val1
-        );
+        Console.Error
+            .WriteLine(
+                "val = {0} = 0x{1:x2}, val1 = {2} = 0x{3:x2}",
+                val,
+                (int)val,
+                val1,
+                (int)val1
+            );
         return false;
     }
 
@@ -918,24 +921,18 @@ internal class Program
         result &= (new GenericLookup<object>()).CheckInstanceTypeArg("System.Object");
         result &= (new GenericLookup<string>()).CheckInstanceTypeArg("System.String");
         result &= (new GenericLookup<int>()).CheckInstanceTypeArg("System.Int32");
-        result &= (new GenericLookup<GenericStruct<object>>()).CheckInstanceTypeArg(
-            "Program+GenericStruct`1[System.Object]"
-        );
-        result &= (new GenericLookup<GenericStruct<string>>()).CheckInstanceTypeArg(
-            "Program+GenericStruct`1[System.String]"
-        );
-        result &= (new GenericLookup<GenericStruct<int>>()).CheckInstanceTypeArg(
-            "Program+GenericStruct`1[System.Int32]"
-        );
-        result &= (new GenericLookup<GenericClass<object>>()).CheckInstanceTypeArg(
-            "Program+GenericClass`1[System.Object]"
-        );
-        result &= (new GenericLookup<GenericClass<string>>()).CheckInstanceTypeArg(
-            "Program+GenericClass`1[System.String]"
-        );
-        result &= (new GenericLookup<GenericClass<int>>()).CheckInstanceTypeArg(
-            "Program+GenericClass`1[System.Int32]"
-        );
+        result &= (new GenericLookup<GenericStruct<object>>())
+            .CheckInstanceTypeArg("Program+GenericStruct`1[System.Object]");
+        result &= (new GenericLookup<GenericStruct<string>>())
+            .CheckInstanceTypeArg("Program+GenericStruct`1[System.String]");
+        result &= (new GenericLookup<GenericStruct<int>>())
+            .CheckInstanceTypeArg("Program+GenericStruct`1[System.Int32]");
+        result &= (new GenericLookup<GenericClass<object>>())
+            .CheckInstanceTypeArg("Program+GenericClass`1[System.Object]");
+        result &= (new GenericLookup<GenericClass<string>>())
+            .CheckInstanceTypeArg("Program+GenericClass`1[System.String]");
+        result &= (new GenericLookup<GenericClass<int>>())
+            .CheckInstanceTypeArg("Program+GenericClass`1[System.Int32]");
         return result;
     }
 
@@ -946,24 +943,18 @@ internal class Program
         result &= GenericLookup<object>.CheckStaticTypeArg("System.Object");
         result &= GenericLookup<string>.CheckStaticTypeArg("System.String");
         result &= GenericLookup<int>.CheckStaticTypeArg("System.Int32");
-        result &= GenericLookup<GenericStruct<object>>.CheckStaticTypeArg(
-            "Program+GenericStruct`1[System.Object]"
-        );
-        result &= GenericLookup<GenericStruct<string>>.CheckStaticTypeArg(
-            "Program+GenericStruct`1[System.String]"
-        );
-        result &= GenericLookup<GenericStruct<int>>.CheckStaticTypeArg(
-            "Program+GenericStruct`1[System.Int32]"
-        );
-        result &= GenericLookup<GenericClass<object>>.CheckStaticTypeArg(
-            "Program+GenericClass`1[System.Object]"
-        );
-        result &= GenericLookup<GenericClass<string>>.CheckStaticTypeArg(
-            "Program+GenericClass`1[System.String]"
-        );
-        result &= GenericLookup<GenericClass<int>>.CheckStaticTypeArg(
-            "Program+GenericClass`1[System.Int32]"
-        );
+        result &= GenericLookup<GenericStruct<object>>
+            .CheckStaticTypeArg("Program+GenericStruct`1[System.Object]");
+        result &= GenericLookup<GenericStruct<string>>
+            .CheckStaticTypeArg("Program+GenericStruct`1[System.String]");
+        result &= GenericLookup<GenericStruct<int>>
+            .CheckStaticTypeArg("Program+GenericStruct`1[System.Int32]");
+        result &= GenericLookup<GenericClass<object>>
+            .CheckStaticTypeArg("Program+GenericClass`1[System.Object]");
+        result &= GenericLookup<GenericClass<string>>
+            .CheckStaticTypeArg("Program+GenericClass`1[System.String]");
+        result &= GenericLookup<GenericClass<int>>
+            .CheckStaticTypeArg("Program+GenericClass`1[System.Int32]");
         return result;
     }
 
@@ -973,113 +964,120 @@ internal class Program
         bool result = true;
 
         result &= GenericLookup<object>.CheckStaticTypeArg<int>("System.Object", "System.Int32");
-        result &= GenericLookup<string>.CheckStaticTypeArg<object>(
-            "System.String",
-            "System.Object"
-        );
+        result &= GenericLookup<string>
+            .CheckStaticTypeArg<object>("System.String", "System.Object");
         result &= GenericLookup<int>.CheckStaticTypeArg<string>("System.Int32", "System.String");
 
-        result &= GenericLookup<GenericStruct<object>>.CheckStaticTypeArg<GenericStruct<int>>(
-            "Program+GenericStruct`1[System.Object]",
-            "Program+GenericStruct`1[System.Int32]"
-        );
-        result &= GenericLookup<GenericStruct<string>>.CheckStaticTypeArg<GenericStruct<object>>(
-            "Program+GenericStruct`1[System.String]",
-            "Program+GenericStruct`1[System.Object]"
-        );
-        result &= GenericLookup<GenericStruct<int>>.CheckStaticTypeArg<GenericStruct<string>>(
-            "Program+GenericStruct`1[System.Int32]",
-            "Program+GenericStruct`1[System.String]"
-        );
+        result &= GenericLookup<GenericStruct<object>>
+            .CheckStaticTypeArg<GenericStruct<int>>(
+                "Program+GenericStruct`1[System.Object]",
+                "Program+GenericStruct`1[System.Int32]"
+            );
+        result &= GenericLookup<GenericStruct<string>>
+            .CheckStaticTypeArg<GenericStruct<object>>(
+                "Program+GenericStruct`1[System.String]",
+                "Program+GenericStruct`1[System.Object]"
+            );
+        result &= GenericLookup<GenericStruct<int>>
+            .CheckStaticTypeArg<GenericStruct<string>>(
+                "Program+GenericStruct`1[System.Int32]",
+                "Program+GenericStruct`1[System.String]"
+            );
 
-        result &= GenericLookup<GenericClass<object>>.CheckStaticTypeArg<GenericClass<int>>(
-            "Program+GenericClass`1[System.Object]",
-            "Program+GenericClass`1[System.Int32]"
-        );
-        result &= GenericLookup<GenericClass<string>>.CheckStaticTypeArg<GenericClass<object>>(
-            "Program+GenericClass`1[System.String]",
-            "Program+GenericClass`1[System.Object]"
-        );
-        result &= GenericLookup<GenericClass<int>>.CheckStaticTypeArg<GenericClass<string>>(
-            "Program+GenericClass`1[System.Int32]",
-            "Program+GenericClass`1[System.String]"
-        );
+        result &= GenericLookup<GenericClass<object>>
+            .CheckStaticTypeArg<GenericClass<int>>(
+                "Program+GenericClass`1[System.Object]",
+                "Program+GenericClass`1[System.Int32]"
+            );
+        result &= GenericLookup<GenericClass<string>>
+            .CheckStaticTypeArg<GenericClass<object>>(
+                "Program+GenericClass`1[System.String]",
+                "Program+GenericClass`1[System.Object]"
+            );
+        result &= GenericLookup<GenericClass<int>>
+            .CheckStaticTypeArg<GenericClass<string>>(
+                "Program+GenericClass`1[System.Int32]",
+                "Program+GenericClass`1[System.String]"
+            );
 
-        result &= GenericLookup<GenericClass<object>>.CheckStaticTypeArg<GenericStruct<int>>(
-            "Program+GenericClass`1[System.Object]",
-            "Program+GenericStruct`1[System.Int32]"
-        );
-        result &= GenericLookup<GenericClass<string>>.CheckStaticTypeArg<GenericStruct<object>>(
-            "Program+GenericClass`1[System.String]",
-            "Program+GenericStruct`1[System.Object]"
-        );
-        result &= GenericLookup<GenericClass<int>>.CheckStaticTypeArg<GenericStruct<string>>(
-            "Program+GenericClass`1[System.Int32]",
-            "Program+GenericStruct`1[System.String]"
-        );
+        result &= GenericLookup<GenericClass<object>>
+            .CheckStaticTypeArg<GenericStruct<int>>(
+                "Program+GenericClass`1[System.Object]",
+                "Program+GenericStruct`1[System.Int32]"
+            );
+        result &= GenericLookup<GenericClass<string>>
+            .CheckStaticTypeArg<GenericStruct<object>>(
+                "Program+GenericClass`1[System.String]",
+                "Program+GenericStruct`1[System.Object]"
+            );
+        result &= GenericLookup<GenericClass<int>>
+            .CheckStaticTypeArg<GenericStruct<string>>(
+                "Program+GenericClass`1[System.Int32]",
+                "Program+GenericStruct`1[System.String]"
+            );
 
-        result &= GenericLookup<GenericStruct<object>>.CheckStaticTypeArg<GenericClass<int>>(
-            "Program+GenericStruct`1[System.Object]",
-            "Program+GenericClass`1[System.Int32]"
-        );
-        result &= GenericLookup<GenericStruct<string>>.CheckStaticTypeArg<GenericClass<object>>(
-            "Program+GenericStruct`1[System.String]",
-            "Program+GenericClass`1[System.Object]"
-        );
-        result &= GenericLookup<GenericStruct<int>>.CheckStaticTypeArg<GenericClass<string>>(
-            "Program+GenericStruct`1[System.Int32]",
-            "Program+GenericClass`1[System.String]"
-        );
+        result &= GenericLookup<GenericStruct<object>>
+            .CheckStaticTypeArg<GenericClass<int>>(
+                "Program+GenericStruct`1[System.Object]",
+                "Program+GenericClass`1[System.Int32]"
+            );
+        result &= GenericLookup<GenericStruct<string>>
+            .CheckStaticTypeArg<GenericClass<object>>(
+                "Program+GenericStruct`1[System.String]",
+                "Program+GenericClass`1[System.Object]"
+            );
+        result &= GenericLookup<GenericStruct<int>>
+            .CheckStaticTypeArg<GenericClass<string>>(
+                "Program+GenericStruct`1[System.Int32]",
+                "Program+GenericClass`1[System.String]"
+            );
 
-        result &= (new GenericLookup<object>()).CheckInstanceTypeArg<GenericStruct<int>>(
-            "System.Object",
-            "Program+GenericStruct`1[System.Int32]"
-        );
-        result &= (new GenericLookup<string>()).CheckInstanceTypeArg<GenericStruct<object>>(
-            "System.String",
-            "Program+GenericStruct`1[System.Object]"
-        );
-        result &= (new GenericLookup<int>()).CheckInstanceTypeArg<GenericStruct<string>>(
-            "System.Int32",
-            "Program+GenericStruct`1[System.String]"
-        );
-        result &= (new GenericLookup<GenericStruct<object>>()).CheckInstanceTypeArg<int>(
-            "Program+GenericStruct`1[System.Object]",
-            "System.Int32"
-        );
-        result &= (new GenericLookup<GenericStruct<string>>()).CheckInstanceTypeArg<object>(
-            "Program+GenericStruct`1[System.String]",
-            "System.Object"
-        );
-        result &= (new GenericLookup<GenericStruct<int>>()).CheckInstanceTypeArg<string>(
-            "Program+GenericStruct`1[System.Int32]",
-            "System.String"
-        );
+        result &= (new GenericLookup<object>())
+            .CheckInstanceTypeArg<GenericStruct<int>>(
+                "System.Object",
+                "Program+GenericStruct`1[System.Int32]"
+            );
+        result &= (new GenericLookup<string>())
+            .CheckInstanceTypeArg<GenericStruct<object>>(
+                "System.String",
+                "Program+GenericStruct`1[System.Object]"
+            );
+        result &= (new GenericLookup<int>())
+            .CheckInstanceTypeArg<GenericStruct<string>>(
+                "System.Int32",
+                "Program+GenericStruct`1[System.String]"
+            );
+        result &= (new GenericLookup<GenericStruct<object>>())
+            .CheckInstanceTypeArg<int>("Program+GenericStruct`1[System.Object]", "System.Int32");
+        result &= (new GenericLookup<GenericStruct<string>>())
+            .CheckInstanceTypeArg<object>(
+                "Program+GenericStruct`1[System.String]",
+                "System.Object"
+            );
+        result &= (new GenericLookup<GenericStruct<int>>())
+            .CheckInstanceTypeArg<string>("Program+GenericStruct`1[System.Int32]", "System.String");
 
-        result &= (new GenericLookup<object>()).CheckInstanceTypeArg<GenericClass<int>>(
-            "System.Object",
-            "Program+GenericClass`1[System.Int32]"
-        );
-        result &= (new GenericLookup<string>()).CheckInstanceTypeArg<GenericClass<object>>(
-            "System.String",
-            "Program+GenericClass`1[System.Object]"
-        );
-        result &= (new GenericLookup<int>()).CheckInstanceTypeArg<GenericClass<string>>(
-            "System.Int32",
-            "Program+GenericClass`1[System.String]"
-        );
-        result &= (new GenericLookup<GenericClass<object>>()).CheckInstanceTypeArg<int>(
-            "Program+GenericClass`1[System.Object]",
-            "System.Int32"
-        );
-        result &= (new GenericLookup<GenericClass<string>>()).CheckInstanceTypeArg<object>(
-            "Program+GenericClass`1[System.String]",
-            "System.Object"
-        );
-        result &= (new GenericLookup<GenericClass<int>>()).CheckInstanceTypeArg<string>(
-            "Program+GenericClass`1[System.Int32]",
-            "System.String"
-        );
+        result &= (new GenericLookup<object>())
+            .CheckInstanceTypeArg<GenericClass<int>>(
+                "System.Object",
+                "Program+GenericClass`1[System.Int32]"
+            );
+        result &= (new GenericLookup<string>())
+            .CheckInstanceTypeArg<GenericClass<object>>(
+                "System.String",
+                "Program+GenericClass`1[System.Object]"
+            );
+        result &= (new GenericLookup<int>())
+            .CheckInstanceTypeArg<GenericClass<string>>(
+                "System.Int32",
+                "Program+GenericClass`1[System.String]"
+            );
+        result &= (new GenericLookup<GenericClass<object>>())
+            .CheckInstanceTypeArg<int>("Program+GenericClass`1[System.Object]", "System.Int32");
+        result &= (new GenericLookup<GenericClass<string>>())
+            .CheckInstanceTypeArg<object>("Program+GenericClass`1[System.String]", "System.Object");
+        result &= (new GenericLookup<GenericClass<int>>())
+            .CheckInstanceTypeArg<string>("Program+GenericClass`1[System.Int32]", "System.String");
 
         return result;
     }
@@ -1850,9 +1848,8 @@ internal class Program
         rmh = HelperGenericILCode<string>.GetNonGenericFunctionMethodHandle();
         if (!CheckMethodHandle(rmh, typeGenericStructString, null))
             return false;
-        rmh = HelperGenericILCode<string>.GetGenericFunctionMethodHandle<
-            GenericStructForLdtoken<object>
-        >();
+        rmh = HelperGenericILCode<string>
+            .GetGenericFunctionMethodHandle<GenericStructForLdtoken<object>>();
         if (!CheckMethodHandle(rmh, typeGenericStructString, typeGenericStructObject))
             return false;
 
@@ -1996,20 +1993,22 @@ internal class Program
         RuntimeMethodHandle rmhSet = default(RuntimeMethodHandle);
         RuntimeMethodHandle rmhGet = default(RuntimeMethodHandle);
         RuntimeMethodHandle rmhAddress = default(RuntimeMethodHandle);
-        HelperGenericILCode<string>.LdTokenArrayMethods(
-            ref rmhCtor1,
-            ref rmhCtor2,
-            ref rmhSet,
-            ref rmhGet,
-            ref rmhAddress
-        );
-        HelperGenericILCode<object>.LdTokenArrayMethods(
-            ref rmhCtor1,
-            ref rmhCtor2,
-            ref rmhSet,
-            ref rmhGet,
-            ref rmhAddress
-        );
+        HelperGenericILCode<string>
+            .LdTokenArrayMethods(
+                ref rmhCtor1,
+                ref rmhCtor2,
+                ref rmhSet,
+                ref rmhGet,
+                ref rmhAddress
+            );
+        HelperGenericILCode<object>
+            .LdTokenArrayMethods(
+                ref rmhCtor1,
+                ref rmhCtor2,
+                ref rmhSet,
+                ref rmhGet,
+                ref rmhAddress
+            );
         HelperILCode.LdTokenArrayMethodsInt(
             ref rmhCtor1,
             ref rmhCtor2,

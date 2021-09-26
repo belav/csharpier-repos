@@ -171,9 +171,8 @@ namespace System.Reflection.Tests
         public void Invoke_OneParameter()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
-            ClassWith3Constructors obj = (ClassWith3Constructors)constructors[1].Invoke(
-                new object[] { 100 }
-            );
+            ClassWith3Constructors obj = (ClassWith3Constructors)constructors[1]
+                .Invoke(new object[] { 100 });
             Assert.Equal(100, obj.intValue);
         }
 
@@ -181,9 +180,8 @@ namespace System.Reflection.Tests
         public void Invoke_TwoParameters()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
-            ClassWith3Constructors obj = (ClassWith3Constructors)constructors[2].Invoke(
-                new object[] { 101, "hello" }
-            );
+            ClassWith3Constructors obj = (ClassWith3Constructors)constructors[2]
+                .Invoke(new object[] { 101, "hello" });
             Assert.Equal(101, obj.intValue);
             Assert.Equal("hello", obj.stringValue);
         }
@@ -222,10 +220,8 @@ namespace System.Reflection.Tests
             // Should not produce a second object.
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
             ClassWith3Constructors obj1 = new ClassWith3Constructors(100, "hello");
-            ClassWith3Constructors obj2 = (ClassWith3Constructors)constructors[2].Invoke(
-                obj1,
-                new object[] { 999, "initialized" }
-            );
+            ClassWith3Constructors obj2 = (ClassWith3Constructors)constructors[2]
+                .Invoke(obj1, new object[] { 999, "initialized" });
             Assert.Null(obj2);
             Assert.Equal(999, obj1.intValue);
             Assert.Equal("initialized", obj1.stringValue);

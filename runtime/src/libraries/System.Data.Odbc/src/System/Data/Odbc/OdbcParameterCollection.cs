@@ -98,13 +98,14 @@ namespace System.Data.Odbc
         {
             for (int i = 0; i < Count; ++i)
             {
-                this[i].Bind(
-                    cmdWrapper.StatementHandle!,
-                    command,
-                    checked((short)(i + 1)),
-                    parameterBuffer,
-                    true
-                );
+                this[i]
+                    .Bind(
+                        cmdWrapper.StatementHandle!,
+                        command,
+                        checked((short)(i + 1)),
+                        parameterBuffer,
+                        true
+                    );
             }
             _rebindCollection = false;
         }

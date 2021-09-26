@@ -460,15 +460,14 @@ namespace BuildValidator
                 );
 
                 Process.Start(
-                        new ProcessStartInfo
-                        {
-                            FileName = IldasmUtilities.IldasmPath,
-                            Arguments =
-                                $@"{assemblyFilePath} /all /out={buildDataFiles.ILFilePath}",
-                            UseShellExecute = false,
-                            CreateNoWindow = true
-                        }
-                    )
+                    new ProcessStartInfo
+                    {
+                        FileName = IldasmUtilities.IldasmPath,
+                        Arguments = $@"{assemblyFilePath} /all /out={buildDataFiles.ILFilePath}",
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                )
                     .WaitForExit();
 
                 return buildDataFiles;
@@ -552,9 +551,11 @@ namespace BuildValidator
 
             bool hasPdbCompressionDifferences()
             {
-                var originalEntry = originalInfo.AssemblyReader.ReadDebugDirectory()
+                var originalEntry = originalInfo.AssemblyReader
+                    .ReadDebugDirectory()
                     .SingleOrDefault(x => x.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
-                var rebuildEntry = rebuildInfo.AssemblyReader.ReadDebugDirectory()
+                var rebuildEntry = rebuildInfo.AssemblyReader
+                    .ReadDebugDirectory()
                     .SingleOrDefault(x => x.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
                 if (
                     originalEntry.Type == DebugDirectoryEntryType.Unknown

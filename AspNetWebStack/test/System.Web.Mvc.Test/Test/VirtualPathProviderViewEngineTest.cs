@@ -605,7 +605,8 @@ namespace System.Web.Mvc.Test
             SetupCacheMiss(CreateCacheKey(Cache.Partial));
 
             SetupFileExists("~/vpath/controllerName/partialName.Mobile.partial");
-            _engine.MockCache.Setup(
+            _engine.MockCache
+                .Setup(
                     c =>
                         c.InsertViewLocation(
                             It.IsAny<HttpContextBase>(),
@@ -616,9 +617,8 @@ namespace System.Web.Mvc.Test
                 .Callback<HttpContextBase, string, string>(
                     (httpContext, key, virtualPath) =>
                     {
-                        _engine.MockCache.Setup(
-                                c => c.GetViewLocation(It.IsAny<HttpContextBase>(), key)
-                            )
+                        _engine.MockCache
+                            .Setup(c => c.GetViewLocation(It.IsAny<HttpContextBase>(), key))
                             .Returns("~/vpath/controllerName/partialName.Mobile.partial")
                             .Verifiable();
                     }
@@ -679,7 +679,8 @@ namespace System.Web.Mvc.Test
             SetupFileExists(PARTIAL_VIRTUAL);
             SetupFileDoesNotExist("~/vpath/controllerName/name.Mobile.partial");
             SetupCacheMiss(CreateCacheKey(Cache.Partial, name: "name", displayMode: "Mobile"));
-            _engine.MockCache.Setup(
+            _engine.MockCache
+                .Setup(
                     c =>
                         c.InsertViewLocation(
                             It.IsAny<HttpContextBase>(),
@@ -691,7 +692,8 @@ namespace System.Web.Mvc.Test
                     (httpContext, key, path) => keyView = key
                 )
                 .Verifiable();
-            _engine.MockCache.Setup(
+            _engine.MockCache
+                .Setup(
                     c =>
                         c.InsertViewLocation(
                             It.IsAny<HttpContextBase>(),
@@ -703,7 +705,8 @@ namespace System.Web.Mvc.Test
                     (httpContext, key, path) => keyMaster = key
                 )
                 .Verifiable();
-            _engine.MockCache.Setup(
+            _engine.MockCache
+                .Setup(
                     c =>
                         c.InsertViewLocation(
                             It.IsAny<HttpContextBase>(),
@@ -727,45 +730,42 @@ namespace System.Web.Mvc.Test
             Assert.NotEqual(keyMaster, keyPartial);
             Assert.NotEqual(keyMaster, keyView);
             Assert.NotEqual(keyPartial, keyView);
-            _engine.MockPathProvider.Verify(
-                vpp => vpp.FileExists(VIEW_VIRTUAL),
-                Times.AtMostOnce()
-            );
-            _engine.MockPathProvider.Verify(
-                vpp => vpp.FileExists(MASTER_VIRTUAL),
-                Times.AtMostOnce()
-            );
-            _engine.MockPathProvider.Verify(
-                vpp => vpp.FileExists(PARTIAL_VIRTUAL),
-                Times.AtMostOnce()
-            );
-            _engine.MockCache.Verify(
-                c =>
-                    c.InsertViewLocation(
-                        It.IsAny<HttpContextBase>(),
-                        It.IsAny<string>(),
-                        VIEW_VIRTUAL
-                    ),
-                Times.AtMostOnce()
-            );
-            _engine.MockCache.Verify(
-                c =>
-                    c.InsertViewLocation(
-                        It.IsAny<HttpContextBase>(),
-                        It.IsAny<string>(),
-                        MASTER_VIRTUAL
-                    ),
-                Times.AtMostOnce()
-            );
-            _engine.MockCache.Verify(
-                c =>
-                    c.InsertViewLocation(
-                        It.IsAny<HttpContextBase>(),
-                        It.IsAny<string>(),
-                        PARTIAL_VIRTUAL
-                    ),
-                Times.AtMostOnce()
-            );
+            _engine.MockPathProvider
+                .Verify(vpp => vpp.FileExists(VIEW_VIRTUAL), Times.AtMostOnce());
+            _engine.MockPathProvider
+                .Verify(vpp => vpp.FileExists(MASTER_VIRTUAL), Times.AtMostOnce());
+            _engine.MockPathProvider
+                .Verify(vpp => vpp.FileExists(PARTIAL_VIRTUAL), Times.AtMostOnce());
+            _engine.MockCache
+                .Verify(
+                    c =>
+                        c.InsertViewLocation(
+                            It.IsAny<HttpContextBase>(),
+                            It.IsAny<string>(),
+                            VIEW_VIRTUAL
+                        ),
+                    Times.AtMostOnce()
+                );
+            _engine.MockCache
+                .Verify(
+                    c =>
+                        c.InsertViewLocation(
+                            It.IsAny<HttpContextBase>(),
+                            It.IsAny<string>(),
+                            MASTER_VIRTUAL
+                        ),
+                    Times.AtMostOnce()
+                );
+            _engine.MockCache
+                .Verify(
+                    c =>
+                        c.InsertViewLocation(
+                            It.IsAny<HttpContextBase>(),
+                            It.IsAny<string>(),
+                            PARTIAL_VIRTUAL
+                        ),
+                    Times.AtMostOnce()
+                );
         }
 
         // This tests the protocol involved with two calls to FindView for the same view name
@@ -796,7 +796,7 @@ namespace System.Web.Mvc.Test
             SetupFileDoesNotExist(MOBILE_VIEW_VIRTUAL);
             SetupCacheMiss(CreateCacheKey(Cache.View, name: "name", displayMode: "Mobile"));
             _engine.MockCache // Then they set the value into the cache
-            .Setup(
+                .Setup(
                     c =>
                         c.InsertViewLocation(
                             It.IsAny<HttpContextBase>(),
@@ -809,7 +809,7 @@ namespace System.Web.Mvc.Test
                     {
                         cacheKey = key;
                         _engine.MockCache // Second time through, we give them a cache hit
-                        .Setup(c => c.GetViewLocation(It.IsAny<HttpContextBase>(), key))
+                            .Setup(c => c.GetViewLocation(It.IsAny<HttpContextBase>(), key))
                             .Returns(VIEW_VIRTUAL)
                             .Verifiable();
                     }
@@ -822,49 +822,49 @@ namespace System.Web.Mvc.Test
 
             // Assert
 
-            _engine.MockPathProvider.Verify(
-                vpp => vpp.FileExists(VIEW_VIRTUAL),
-                Times.AtMostOnce()
-            );
-            _engine.MockCache.Verify(
-                c =>
-                    c.InsertViewLocation(
-                        It.IsAny<HttpContextBase>(),
-                        It.IsAny<string>(),
-                        VIEW_VIRTUAL
-                    ),
-                Times.AtMostOnce()
-            );
-            _engine.MockCache.Verify(
-                c => c.GetViewLocation(It.IsAny<HttpContextBase>(), cacheKey),
-                Times.AtMostOnce()
-            );
+            _engine.MockPathProvider
+                .Verify(vpp => vpp.FileExists(VIEW_VIRTUAL), Times.AtMostOnce());
+            _engine.MockCache
+                .Verify(
+                    c =>
+                        c.InsertViewLocation(
+                            It.IsAny<HttpContextBase>(),
+                            It.IsAny<string>(),
+                            VIEW_VIRTUAL
+                        ),
+                    Times.AtMostOnce()
+                );
+            _engine.MockCache
+                .Verify(
+                    c => c.GetViewLocation(It.IsAny<HttpContextBase>(), cacheKey),
+                    Times.AtMostOnce()
+                );
 
             // We seed the cache with all possible display modes but since the mobile view does not exist we don't insert it into the cache.
-            _engine.MockPathProvider.Verify(
-                vpp => vpp.FileExists(MOBILE_VIEW_VIRTUAL),
-                Times.Exactly(1)
-            );
-            _engine.MockCache.Verify(
-                c =>
-                    c.InsertViewLocation(
-                        It.IsAny<HttpContextBase>(),
-                        It.IsAny<string>(),
-                        MOBILE_VIEW_VIRTUAL
-                    ),
-                Times.Never()
-            );
-            _engine.MockCache.Verify(
-                c =>
-                    c.GetViewLocation(
-                        It.IsAny<HttpContextBase>(),
-                        VirtualPathProviderViewEngine.AppendDisplayModeToCacheKey(
-                            cacheKey,
-                            DisplayModeProvider.MobileDisplayModeId
-                        )
-                    ),
-                Times.Never()
-            );
+            _engine.MockPathProvider
+                .Verify(vpp => vpp.FileExists(MOBILE_VIEW_VIRTUAL), Times.Exactly(1));
+            _engine.MockCache
+                .Verify(
+                    c =>
+                        c.InsertViewLocation(
+                            It.IsAny<HttpContextBase>(),
+                            It.IsAny<string>(),
+                            MOBILE_VIEW_VIRTUAL
+                        ),
+                    Times.Never()
+                );
+            _engine.MockCache
+                .Verify(
+                    c =>
+                        c.GetViewLocation(
+                            It.IsAny<HttpContextBase>(),
+                            VirtualPathProviderViewEngine.AppendDisplayModeToCacheKey(
+                                cacheKey,
+                                DisplayModeProvider.MobileDisplayModeId
+                            )
+                        ),
+                    Times.Never()
+                );
         }
 
         [Fact]
@@ -877,7 +877,8 @@ namespace System.Web.Mvc.Test
             SetupFileExists(VIEW_VIRTUAL);
             SetupFileExists(MOBILE_VIEW_VIRTUAL);
 
-            _engine.MockCache.Setup(
+            _engine.MockCache
+                .Setup(
                     c =>
                         c.InsertViewLocation(
                             It.IsAny<HttpContextBase>(),
@@ -889,15 +890,15 @@ namespace System.Web.Mvc.Test
                     (httpContext, key, virtualPath) =>
                     {
                         cacheKey = key;
-                        _engine.MockCache.Setup(
-                                c => c.GetViewLocation(It.IsAny<HttpContextBase>(), key)
-                            )
+                        _engine.MockCache
+                            .Setup(c => c.GetViewLocation(It.IsAny<HttpContextBase>(), key))
                             .Returns(MOBILE_VIEW_VIRTUAL)
                             .Verifiable();
                     }
                 )
                 .Verifiable();
-            _engine.MockCache.Setup(
+            _engine.MockCache
+                .Setup(
                     c =>
                         c.InsertViewLocation(
                             It.IsAny<HttpContextBase>(),
@@ -909,9 +910,8 @@ namespace System.Web.Mvc.Test
                     (httpContext, key, virtualPath) =>
                     {
                         mobileCacheKey = key;
-                        _engine.MockCache.Setup(
-                                c => c.GetViewLocation(It.IsAny<HttpContextBase>(), key)
-                            )
+                        _engine.MockCache
+                            .Setup(c => c.GetViewLocation(It.IsAny<HttpContextBase>(), key))
                             .Returns(MOBILE_VIEW_VIRTUAL)
                             .Verifiable();
                     }
@@ -925,44 +925,43 @@ namespace System.Web.Mvc.Test
             // Assert
 
             // DefaultDisplayMode with Mobile substitution is cached and hit on the second call to FindView
-            _engine.MockPathProvider.Verify(
-                vpp => vpp.FileExists(MOBILE_VIEW_VIRTUAL),
-                Times.AtMostOnce()
-            );
-            _engine.MockCache.Verify(
-                c =>
-                    c.InsertViewLocation(
-                        It.IsAny<HttpContextBase>(),
-                        It.IsAny<string>(),
-                        MOBILE_VIEW_VIRTUAL
-                    ),
-                Times.AtMostOnce()
-            );
-            _engine.MockCache.Verify(
-                c =>
-                    c.GetViewLocation(
-                        It.IsAny<HttpContextBase>(),
-                        VirtualPathProviderViewEngine.AppendDisplayModeToCacheKey(
-                            cacheKey,
-                            DisplayModeProvider.MobileDisplayModeId
-                        )
-                    ),
-                Times.AtMostOnce()
-            );
+            _engine.MockPathProvider
+                .Verify(vpp => vpp.FileExists(MOBILE_VIEW_VIRTUAL), Times.AtMostOnce());
+            _engine.MockCache
+                .Verify(
+                    c =>
+                        c.InsertViewLocation(
+                            It.IsAny<HttpContextBase>(),
+                            It.IsAny<string>(),
+                            MOBILE_VIEW_VIRTUAL
+                        ),
+                    Times.AtMostOnce()
+                );
+            _engine.MockCache
+                .Verify(
+                    c =>
+                        c.GetViewLocation(
+                            It.IsAny<HttpContextBase>(),
+                            VirtualPathProviderViewEngine.AppendDisplayModeToCacheKey(
+                                cacheKey,
+                                DisplayModeProvider.MobileDisplayModeId
+                            )
+                        ),
+                    Times.AtMostOnce()
+                );
 
-            _engine.MockPathProvider.Verify(
-                vpp => vpp.FileExists(VIEW_VIRTUAL),
-                Times.AtMostOnce()
-            );
-            _engine.MockCache.Verify(
-                c =>
-                    c.InsertViewLocation(
-                        It.IsAny<HttpContextBase>(),
-                        It.IsAny<string>(),
-                        VIEW_VIRTUAL
-                    ),
-                Times.Exactly(1)
-            );
+            _engine.MockPathProvider
+                .Verify(vpp => vpp.FileExists(VIEW_VIRTUAL), Times.AtMostOnce());
+            _engine.MockCache
+                .Verify(
+                    c =>
+                        c.InsertViewLocation(
+                            It.IsAny<HttpContextBase>(),
+                            It.IsAny<string>(),
+                            VIEW_VIRTUAL
+                        ),
+                    Times.Exactly(1)
+                );
 
             Assert.NotEqual(cacheKey, mobileCacheKey);
 
@@ -972,23 +971,23 @@ namespace System.Web.Mvc.Test
             // Assert
 
             // The first call to FindView without a mobile browser results in a cache hit
-            _engine.MockPathProvider.Verify(
-                vpp => vpp.FileExists(VIEW_VIRTUAL),
-                Times.AtMostOnce()
-            );
-            _engine.MockCache.Verify(
-                c =>
-                    c.InsertViewLocation(
-                        It.IsAny<HttpContextBase>(),
-                        It.IsAny<string>(),
-                        VIEW_VIRTUAL
-                    ),
-                Times.Exactly(1)
-            );
-            _engine.MockCache.Verify(
-                c => c.GetViewLocation(It.IsAny<HttpContextBase>(), cacheKey),
-                Times.Exactly(1)
-            );
+            _engine.MockPathProvider
+                .Verify(vpp => vpp.FileExists(VIEW_VIRTUAL), Times.AtMostOnce());
+            _engine.MockCache
+                .Verify(
+                    c =>
+                        c.InsertViewLocation(
+                            It.IsAny<HttpContextBase>(),
+                            It.IsAny<string>(),
+                            VIEW_VIRTUAL
+                        ),
+                    Times.Exactly(1)
+                );
+            _engine.MockCache
+                .Verify(
+                    c => c.GetViewLocation(It.IsAny<HttpContextBase>(), cacheKey),
+                    Times.Exactly(1)
+                );
         }
 
         [Fact]
@@ -996,7 +995,8 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             string mobileKey = CreateCacheKey(Cache.View, name: "name", displayMode: "Mobile");
-            _engine.MockCache.Setup(c => c.GetViewLocation(It.IsAny<HttpContextBase>(), mobileKey))
+            _engine.MockCache
+                .Setup(c => c.GetViewLocation(It.IsAny<HttpContextBase>(), mobileKey))
                 .Returns((string)null)
                 .Verifiable();
 
@@ -1009,10 +1009,8 @@ namespace System.Web.Mvc.Test
 
             // On a cache miss we should never check the file system. FindView will be called on a second pass
             // without using the cache.
-            _engine.MockPathProvider.Verify(
-                vpp => vpp.FileExists(MOBILE_VIEW_VIRTUAL),
-                Times.Never()
-            );
+            _engine.MockPathProvider
+                .Verify(vpp => vpp.FileExists(MOBILE_VIEW_VIRTUAL), Times.Never());
             _engine.MockPathProvider.Verify(vpp => vpp.FileExists(VIEW_VIRTUAL), Times.Never());
 
             SetupFileExists(MOBILE_VIEW_VIRTUAL);
@@ -1040,11 +1038,13 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             string mobileKey = CreateCacheKey(Cache.View, name: "name", displayMode: "Mobile");
-            _engine.MockCache.Setup(c => c.GetViewLocation(It.IsAny<HttpContextBase>(), mobileKey))
+            _engine.MockCache
+                .Setup(c => c.GetViewLocation(It.IsAny<HttpContextBase>(), mobileKey))
                 .Returns("")
                 .Verifiable();
             string desktopKey = CreateCacheKey(Cache.View, name: "name");
-            _engine.MockCache.Setup(c => c.GetViewLocation(It.IsAny<HttpContextBase>(), desktopKey))
+            _engine.MockCache
+                .Setup(c => c.GetViewLocation(It.IsAny<HttpContextBase>(), desktopKey))
                 .Returns("")
                 .Verifiable();
 
@@ -1271,9 +1271,8 @@ namespace System.Web.Mvc.Test
 
         private void SetupCacheHit(string key, string path)
         {
-            _engine.MockCache.Setup(
-                    c => c.InsertViewLocation(It.IsAny<HttpContextBase>(), key, path)
-                )
+            _engine.MockCache
+                .Setup(c => c.InsertViewLocation(It.IsAny<HttpContextBase>(), key, path))
                 .Verifiable();
         }
 
@@ -1284,7 +1283,8 @@ namespace System.Web.Mvc.Test
 
         private void SetupFileExistsHelper(string path, bool exists)
         {
-            _engine.MockPathProvider.Setup(vpp => vpp.FileExists(path))
+            _engine.MockPathProvider
+                .Setup(vpp => vpp.FileExists(path))
                 .Returns(exists)
                 .Verifiable();
         }
@@ -1351,8 +1351,8 @@ namespace System.Web.Mvc.Test
 
                 ViewLocationCache = MockCache.Object;
                 MockCache.Setup(
-                        c => c.GetViewLocation(It.IsAny<HttpContextBase>(), It.IsAny<string>())
-                    )
+                    c => c.GetViewLocation(It.IsAny<HttpContextBase>(), It.IsAny<string>())
+                )
                     .Returns((string)null);
 
                 if (!skipVPPInitialization)

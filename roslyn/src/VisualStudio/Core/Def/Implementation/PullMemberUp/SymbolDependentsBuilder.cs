@@ -68,9 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
 
             public async Task<ImmutableArray<ISymbol>> FindMemberDependentsAsync()
             {
-                var tasks = _member.DeclaringSyntaxReferences.Select(
-                    @ref => @ref.GetSyntaxAsync(_cancellationToken)
-                );
+                var tasks = _member.DeclaringSyntaxReferences
+                    .Select(@ref => @ref.GetSyntaxAsync(_cancellationToken));
                 var syntaxes = await Task.WhenAll(tasks).ConfigureAwait(false);
                 var compilation = await _project.GetCompilationAsync(_cancellationToken)
                     .ConfigureAwait(false);

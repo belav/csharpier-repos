@@ -55,15 +55,14 @@ namespace BuildActionTelemetryTable
 
             var currentDirectory = new Uri(Environment.CurrentDirectory + "\\");
             return paths.Select(
-                    path =>
-                    {
-                        Console.WriteLine(
-                            $"Loading assembly from {GetRelativePath(path, currentDirectory)}."
-                        );
-                        return Assembly.LoadFrom(path);
-                    }
-                )
-                .ToImmutableArray();
+                path =>
+                {
+                    Console.WriteLine(
+                        $"Loading assembly from {GetRelativePath(path, currentDirectory)}."
+                    );
+                    return Assembly.LoadFrom(path);
+                }
+            ).ToImmutableArray();
 
             static string GetRelativePath(string path, Uri baseUri)
             {

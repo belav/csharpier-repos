@@ -160,9 +160,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 searchScope.CancellationToken.ThrowIfCancellationRequested();
 
                 // Spin off tasks to do all our searching in parallel
-                using var _1 = ArrayBuilder<Task<ImmutableArray<SymbolReference>>>.GetInstance(
-                    out var tasks
-                );
+                using var _1 = ArrayBuilder<Task<ImmutableArray<SymbolReference>>>
+                    .GetInstance(out var tasks);
                 tasks.Add(GetReferencesForMatchingTypesAsync(searchScope));
                 tasks.Add(GetReferencesForMatchingNamespacesAsync(searchScope));
                 tasks.Add(GetReferencesForMatchingFieldsAndPropertiesAsync(searchScope));
@@ -264,20 +263,20 @@ namespace Microsoft.CodeAnalysis.AddImport
                 }
 
                 var symbols = await searchScope.FindDeclarationsAsync(
-                        name,
-                        nameNode,
-                        SymbolFilter.Type
-                    )
+                    name,
+                    nameNode,
+                    SymbolFilter.Type
+                )
                     .ConfigureAwait(false);
 
                 // also lookup type symbols with the "Attribute" suffix if necessary.
                 if (inAttributeContext)
                 {
                     var attributeSymbols = await searchScope.FindDeclarationsAsync(
-                            name + AttributeSuffix,
-                            nameNode,
-                            SymbolFilter.Type
-                        )
+                        name + AttributeSuffix,
+                        nameNode,
+                        SymbolFilter.Type
+                    )
                         .ConfigureAwait(false);
 
                     symbols = symbols.AddRange(
@@ -378,10 +377,10 @@ namespace Microsoft.CodeAnalysis.AddImport
                     )
                     {
                         var symbols = await searchScope.FindDeclarationsAsync(
-                                name,
-                                nameNode,
-                                SymbolFilter.Namespace
-                            )
+                            name,
+                            nameNode,
+                            SymbolFilter.Namespace
+                        )
                             .ConfigureAwait(false);
                         var namespaceSymbols = OfType<INamespaceSymbol>(symbols);
                         var containingNamespaceSymbols = OfType<INamespaceSymbol>(symbols)
@@ -435,9 +434,9 @@ namespace Microsoft.CodeAnalysis.AddImport
                         {
                             // Check if the expression before the dot binds to a property or field.
                             var symbol = _semanticModel.GetSymbolInfo(
-                                    expression,
-                                    searchScope.CancellationToken
-                                )
+                                expression,
+                                searchScope.CancellationToken
+                            )
                                 .GetAnySymbol();
                             if (
                                 symbol?.Kind == SymbolKind.Property
@@ -453,19 +452,18 @@ namespace Microsoft.CodeAnalysis.AddImport
                                 {
                                     // Try to look up 'Color' as a type.
                                     var symbolResults = await searchScope.FindDeclarationsAsync(
-                                            symbol.Name,
-                                            (TSimpleNameSyntax)expression,
-                                            SymbolFilter.Type
-                                        )
+                                        symbol.Name,
+                                        (TSimpleNameSyntax)expression,
+                                        SymbolFilter.Type
+                                    )
                                         .ConfigureAwait(false);
 
                                     // Return results that have accessible members.
                                     var namedTypeSymbols = OfType<INamedTypeSymbol>(symbolResults);
                                     var name = nameNode.GetFirstToken().ValueText;
                                     var namespaceResults = namedTypeSymbols.WhereAsArray(
-                                            sr =>
-                                                HasAccessibleStaticFieldOrProperty(sr.Symbol, name)
-                                        )
+                                        sr => HasAccessibleStaticFieldOrProperty(sr.Symbol, name)
+                                    )
                                         .SelectAsArray(
                                             sr => sr.WithSymbol(sr.Symbol.ContainingNamespace)
                                         );
@@ -536,10 +534,10 @@ namespace Microsoft.CodeAnalysis.AddImport
                         if (name != null)
                         {
                             var symbols = await searchScope.FindDeclarationsAsync(
-                                    name,
-                                    nameNode,
-                                    SymbolFilter.Member
-                                )
+                                name,
+                                nameNode,
+                                SymbolFilter.Member
+                            )
                                 .ConfigureAwait(false);
 
                             var methodSymbols = OfType<IMethodSymbol>(symbols);
@@ -629,10 +627,10 @@ namespace Microsoft.CodeAnalysis.AddImport
                 }
 
                 var symbols = await searchScope.FindDeclarationsAsync(
-                        nameof(IList.Add),
-                        nameNode: null,
-                        filter: SymbolFilter.Member
-                    )
+                    nameof(IList.Add),
+                    nameNode: null,
+                    filter: SymbolFilter.Member
+                )
                     .ConfigureAwait(false);
 
                 // Note: there is no desiredName for these search results.  We're searching for
@@ -675,10 +673,10 @@ namespace Microsoft.CodeAnalysis.AddImport
                     {
                         // find extension methods named "Select"
                         return await GetReferencesForExtensionMethodAsync(
-                                searchScope,
-                                nameof(Enumerable.Select),
-                                type
-                            )
+                            searchScope,
+                            nameof(Enumerable.Select),
+                            type
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -703,11 +701,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                     if (type != null)
                     {
                         return await GetReferencesForExtensionMethodAsync(
-                                searchScope,
-                                WellKnownMemberNames.GetAwaiter,
-                                type,
-                                m => m.IsValidGetAwaiter()
-                            )
+                            searchScope,
+                            WellKnownMemberNames.GetAwaiter,
+                            type,
+                            m => m.IsValidGetAwaiter()
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -732,11 +730,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                     if (type != null)
                     {
                         return await GetReferencesForExtensionMethodAsync(
-                                searchScope,
-                                WellKnownMemberNames.GetEnumeratorMethodName,
-                                type,
-                                m => m.IsValidGetEnumerator()
-                            )
+                            searchScope,
+                            WellKnownMemberNames.GetEnumeratorMethodName,
+                            type,
+                            m => m.IsValidGetEnumerator()
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -761,11 +759,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                     if (type != null)
                     {
                         return await GetReferencesForExtensionMethodAsync(
-                                searchScope,
-                                WellKnownMemberNames.GetAsyncEnumeratorMethodName,
-                                type,
-                                m => m.IsValidGetAsyncEnumerator()
-                            )
+                            searchScope,
+                            WellKnownMemberNames.GetAsyncEnumeratorMethodName,
+                            type,
+                            m => m.IsValidGetAsyncEnumerator()
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -798,11 +796,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                         // we'll just be permissive, with the assumption that there won't be that many matching
                         // 'Deconstruct' extension methods for the type of node that we're on.
                         return await GetReferencesForExtensionMethodAsync(
-                                searchScope,
-                                "Deconstruct",
-                                type,
-                                m => m.ReturnsVoid
-                            )
+                            searchScope,
+                            "Deconstruct",
+                            type,
+                            m => m.ReturnsVoid
+                        )
                             .ConfigureAwait(false);
                     }
                 }
@@ -820,10 +818,10 @@ namespace Microsoft.CodeAnalysis.AddImport
             )
             {
                 var symbols = await searchScope.FindDeclarationsAsync(
-                        name,
-                        nameNode: null,
-                        filter: SymbolFilter.Member
-                    )
+                    name,
+                    nameNode: null,
+                    filter: SymbolFilter.Member
+                )
                     .ConfigureAwait(false);
 
                 // Note: there is no "desiredName" when doing this.  We're not going to do any

@@ -259,10 +259,11 @@ namespace Newtonsoft.Json.Tests.Benchmarks
                             )
                             {
                                 string key = (string)reader.Value;
-                                c.dictionary.Add(
-                                    key,
-                                    (await reader.ReadAsInt32Async()).GetValueOrDefault()
-                                );
+                                c.dictionary
+                                    .Add(
+                                        key,
+                                        (await reader.ReadAsInt32Async()).GetValueOrDefault()
+                                    );
                             }
                             break;
                         case "Name":

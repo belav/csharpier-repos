@@ -58,10 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _optionService = optionService;
 
             // TODO: make this configurable
-            _languageMap = BidirectionalMap<string, Tuple<Guid>>.Empty.Add(
-                    LanguageNames.CSharp,
-                    Tuple.Create(Guids.CSharpLanguageServiceId)
-                )
+            _languageMap = BidirectionalMap<string, Tuple<Guid>>.Empty
+                .Add(LanguageNames.CSharp, Tuple.Create(Guids.CSharpLanguageServiceId))
                 .Add(LanguageNames.VisualBasic, Tuple.Create(Guids.VisualBasicLanguageServiceId))
                 .Add("TypeScript", Tuple.Create(new Guid("4a0dddb5-7a95-4fbf-97cc-616d07737a77")))
                 .Add("F#", Tuple.Create(new Guid("BC6DD5A5-D4D6-4dab-A00D-A51242DBAF1B")))

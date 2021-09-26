@@ -117,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 source,
                 sourceElementType,
                 selectorParameter
-            ).Visit(selectorBody);
+            )
+                .Visit(selectorBody);
 
             return Expression.Lambda(selectorBody, selectorParameter);
         }
@@ -200,16 +201,15 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 // Collection selector body is IQueryable, we need to adjust the type to IEnumerable, to match the SelectMany signature
                 // therefore the delegate type is specified explicitly
-                var collectionSelectorLambdaType = typeof(Func<, >).MakeGenericType(
-                    _sourceElementType,
-                    typeof(IEnumerable<>).MakeGenericType(collectionElementType)
-                );
+                var collectionSelectorLambdaType = typeof(Func<, >)
+                    .MakeGenericType(
+                        _sourceElementType,
+                        typeof(IEnumerable<>).MakeGenericType(collectionElementType)
+                    );
 
                 return Expression.Call(
-                    QueryableMethods.SelectManyWithoutCollectionSelector.MakeGenericMethod(
-                        _sourceElementType,
-                        collectionElementType
-                    ),
+                    QueryableMethods.SelectManyWithoutCollectionSelector
+                        .MakeGenericMethod(_sourceElementType, collectionElementType),
                     _parentQuery,
                     Expression.Quote(
                         Expression.Lambda(collectionSelectorLambdaType, subquery, newParameter)
@@ -226,7 +226,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     body = new ReplacingExpressionVisitor(
                         lambdaExpression.Parameters,
                         newParameters
-                    ).Visit(body);
+                    )
+                        .Visit(body);
 
                     // TODO-Nullable bug
                     return lambdaExpression.Update(body, newParameters)!;

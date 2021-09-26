@@ -1149,10 +1149,11 @@ namespace System.Xml.Tests
                         {
                             Params = new object[]
                             {
-                                string.Format(
-                                    "<!-- http://www.w3.org is bound to n1 and n2 -->{0}<x xmlns:n1=\"http://www.w3.org\"{0}   xmlns:n2=\"http://www.w3.org\" >{0}   <bad n1:a=\"1\"  n2:a=\"2\" /></x>",
-                                    Environment.NewLine
-                                )
+                                string
+                                    .Format(
+                                        "<!-- http://www.w3.org is bound to n1 and n2 -->{0}<x xmlns:n1=\"http://www.w3.org\"{0}   xmlns:n2=\"http://www.w3.org\" >{0}   <bad n1:a=\"1\"  n2:a=\"2\" /></x>",
+                                        Environment.NewLine
+                                    )
                             },
                             Pri = 2
                         }
@@ -1284,10 +1285,11 @@ namespace System.Xml.Tests
                         {
                             Params = new object[]
                             {
-                                string.Format(
-                                    "<!-- http://www.w3.org is bound to n1 and n2 -->{0}<x xmlns:n1=\"http://www.w3.org\"{0}   xmlns:n2=\"http://www.w3.org\" >{0}   <bad n1:a=\"1\"  n2:a=\"2\" /></x>",
-                                    Environment.NewLine
-                                ),
+                                string
+                                    .Format(
+                                        "<!-- http://www.w3.org is bound to n1 and n2 -->{0}<x xmlns:n1=\"http://www.w3.org\"{0}   xmlns:n2=\"http://www.w3.org\" >{0}   <bad n1:a=\"1\"  n2:a=\"2\" /></x>",
+                                        Environment.NewLine
+                                    ),
                                 35
                             },
                             Pri = 2

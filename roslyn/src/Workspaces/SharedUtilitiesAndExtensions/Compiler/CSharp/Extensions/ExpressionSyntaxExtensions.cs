@@ -120,10 +120,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static bool IsLeftSideOfSimpleMemberAccessExpression(
             this ExpressionSyntax expression
         ) =>
-            (expression?.Parent).IsKind(
-                SyntaxKind.SimpleMemberAccessExpression,
-                out MemberAccessExpressionSyntax memberAccess
-            )
+            (expression?.Parent)
+                .IsKind(
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    out MemberAccessExpressionSyntax memberAccess
+                )
             && memberAccess.Expression == expression;
 
         public static bool IsLeftSideOfDotOrArrow(this ExpressionSyntax expression) =>
@@ -134,10 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             );
 
         public static bool IsLeftSideOfQualifiedName(this ExpressionSyntax expression) =>
-            (expression?.Parent).IsKind(
-                SyntaxKind.QualifiedName,
-                out QualifiedNameSyntax qualifiedName
-            )
+            (expression?.Parent)
+                .IsKind(SyntaxKind.QualifiedName, out QualifiedNameSyntax qualifiedName)
             && qualifiedName.Left == expression;
 
         public static bool IsLeftSideOfExplicitInterfaceSpecifier(this NameSyntax name) =>
@@ -566,9 +565,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     var parentConditionalAccessExpression =
                         (ConditionalAccessExpressionSyntax)expression.Parent;
                     return expression != parentConditionalAccessExpression.WhenNotNull
-                        && !parentConditionalAccessExpression.Parent.IsKind(
-                            SyntaxKind.ConditionalAccessExpression
-                        );
+                        && !parentConditionalAccessExpression.Parent
+                            .IsKind(SyntaxKind.ConditionalAccessExpression);
 
                 case SyntaxKind.IsExpression:
                 case SyntaxKind.AsExpression:
@@ -717,10 +715,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         {
                             var staticType = speculativeSymbolInfo.GetAnySymbol().GetSymbolType();
 
-                            return SymbolEquivalenceComparer.Instance.Equals(
-                                instanceType,
-                                staticType
-                            );
+                            return SymbolEquivalenceComparer.Instance
+                                .Equals(instanceType, staticType);
                         }
                     }
                 }
@@ -988,8 +984,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 if (expression.GetLeadingTrivia().Any(t => t.IsSingleOrMultiLineComment()))
                 {
                     return SyntaxFactory.ReturnStatement(
-                            expression.WithLeadingTrivia(SyntaxFactory.ElasticSpace)
-                        )
+                        expression.WithLeadingTrivia(SyntaxFactory.ElasticSpace)
+                    )
                         .WithSemicolonToken(semicolonToken)
                         .WithLeadingTrivia(expression.GetLeadingTrivia())
                         .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker);

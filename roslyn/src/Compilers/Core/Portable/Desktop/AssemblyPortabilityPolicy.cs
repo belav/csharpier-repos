@@ -99,11 +99,8 @@ namespace Microsoft.CodeAnalysis
                     string pkt = xml.GetAttribute("PKT");
                     string enableAttribute = xml.GetAttribute("enable");
 
-                    bool? enable = string.Equals(
-                        enableAttribute,
-                        "false",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    bool? enable = string
+                    .Equals(enableAttribute, "false", StringComparison.OrdinalIgnoreCase)
                         ? false
                         : string.Equals(enableAttribute, "true", StringComparison.OrdinalIgnoreCase)
                             ? true
@@ -112,21 +109,15 @@ namespace Microsoft.CodeAnalysis
                     if (enable != null)
                     {
                         if (
-                            string.Equals(
-                                pkt,
-                                "31bf3856ad364e35",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(pkt, "31bf3856ad364e35", StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             suppressLibrary = !enable.Value;
                         }
                         else if (
-                            string.Equals(
-                                pkt,
-                                "7cec85d7bea7798e",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(pkt, "7cec85d7bea7798e", StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             suppressPlatform = !enable.Value;

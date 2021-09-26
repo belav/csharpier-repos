@@ -198,11 +198,12 @@ namespace Microsoft.JSInterop.Infrastructure
                 }
 
                 if (
-                    string.Equals(
-                        DisposeDotNetObjectReferenceMethodName,
-                        methodIdentifier,
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            DisposeDotNetObjectReferenceMethodName,
+                            methodIdentifier,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     // The client executed dotNetObjectReference.dispose(). Dispose the reference and exit.

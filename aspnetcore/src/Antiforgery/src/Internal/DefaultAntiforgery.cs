@@ -310,12 +310,13 @@ namespace Microsoft.AspNetCore.Antiforgery
             {
                 throw new InvalidOperationException(
                     Resources.FormatAntiforgery_RequiresSSL(
-                        string.Join(
-                            ".",
-                            nameof(AntiforgeryOptions),
-                            nameof(AntiforgeryOptions.Cookie),
-                            nameof(CookieBuilder.SecurePolicy)
-                        ),
+                        string
+                            .Join(
+                                ".",
+                                nameof(AntiforgeryOptions),
+                                nameof(AntiforgeryOptions.Cookie),
+                                nameof(CookieBuilder.SecurePolicy)
+                            ),
                         nameof(CookieSecurePolicy.Always)
                     )
                 );

@@ -88,10 +88,8 @@ namespace Microsoft.Net.Http.Headers
                     }
                 }
                 else if (
-                    !mediaType1.SubType.Equals(
-                        mediaType2.SubType,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    !mediaType1.SubType
+                        .Equals(mediaType2.SubType, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     if (mediaType1.MatchesAllSubTypes)

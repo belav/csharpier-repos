@@ -120,7 +120,8 @@ namespace Microsoft.Extensions.Configuration.Test
             // Act
             configurationBuilder.Add(memConfigSrc1);
             configurationBuilder.Add(memConfigSrc2);
-            var config = new ConfigurationBuilder().AddConfiguration(configurationBuilder.Build())
+            var config = new ConfigurationBuilder()
+                .AddConfiguration(configurationBuilder.Build())
                 .Add(memConfigSrc3)
                 .Build();
             var dict = config.AsEnumerable(makePathsRelative: removePath)
@@ -286,14 +287,14 @@ namespace Microsoft.Extensions.Configuration.Test
         [Fact]
         public void NewConfigurationRootMayBeBuiltFromExistingWithDuplicateKeys()
         {
-            var configurationRoot = new ConfigurationBuilder().AddInMemoryCollection(
+            var configurationRoot = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new Dictionary<string, string> { { "keya:keyb", "valueA" }, }
                 )
                 .AddInMemoryCollection(new Dictionary<string, string> { { "KEYA:KEYB", "valueB" } })
                 .Build();
-            var newConfigurationRoot = new ConfigurationBuilder().AddInMemoryCollection(
-                    configurationRoot.AsEnumerable()
-                )
+            var newConfigurationRoot = new ConfigurationBuilder()
+                .AddInMemoryCollection(configurationRoot.AsEnumerable())
                 .Build();
             Assert.Equal("valueB", newConfigurationRoot["keya:keyb"]);
         }

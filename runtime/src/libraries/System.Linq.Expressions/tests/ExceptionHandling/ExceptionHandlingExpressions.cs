@@ -33,7 +33,8 @@ namespace System.Linq.Expressions.Tests
 
         private static RuntimeWrappedException CreateRuntimeWrappedException(object inner)
         {
-            return (RuntimeWrappedException)typeof(RuntimeWrappedException).GetConstructor(
+            return (RuntimeWrappedException)typeof(RuntimeWrappedException)
+                .GetConstructor(
                     BindingFlags.Instance
                         | BindingFlags.Public
                         | BindingFlags.NonPublic
@@ -274,9 +275,10 @@ namespace System.Linq.Expressions.Tests
                     Array.Empty<object>(),
                     new[]
                     {
-                        typeof(RuntimeCompatibilityAttribute).GetProperty(
-                            nameof(RuntimeCompatibilityAttribute.WrapNonExceptionThrows)
-                        )
+                        typeof(RuntimeCompatibilityAttribute)
+                            .GetProperty(
+                                nameof(RuntimeCompatibilityAttribute.WrapNonExceptionThrows)
+                            )
                     },
                     new object[] { assemblyWraps }
                 );
@@ -318,8 +320,8 @@ namespace System.Linq.Expressions.Tests
         public void ThrowNullThrowsNRE(bool useInterpreter)
         {
             Action throwNull = Expression.Lambda<Action>(
-                    Expression.Throw(Expression.Constant(null, typeof(Expression)))
-                )
+                Expression.Throw(Expression.Constant(null, typeof(Expression)))
+            )
                 .Compile(useInterpreter);
             Assert.Throws<NullReferenceException>(throwNull);
         }
@@ -329,16 +331,16 @@ namespace System.Linq.Expressions.Tests
         public void ThrowNullThrowsCatchableNRE(bool useInterpreter)
         {
             Func<int> throwCatchNull = Expression.Lambda<Func<int>>(
-                    Expression.TryCatch(
-                        Expression.Throw(
-                            Expression.Constant(null, typeof(ArgumentException)),
-                            typeof(int)
-                        ),
-                        Expression.Catch(typeof(ArgumentException), Expression.Constant(1)),
-                        Expression.Catch(typeof(NullReferenceException), Expression.Constant(2)),
-                        Expression.Catch(typeof(Expression), Expression.Constant(3))
-                    )
+                Expression.TryCatch(
+                    Expression.Throw(
+                        Expression.Constant(null, typeof(ArgumentException)),
+                        typeof(int)
+                    ),
+                    Expression.Catch(typeof(ArgumentException), Expression.Constant(1)),
+                    Expression.Catch(typeof(NullReferenceException), Expression.Constant(2)),
+                    Expression.Catch(typeof(Expression), Expression.Constant(3))
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(2, throwCatchNull());
         }
@@ -348,12 +350,12 @@ namespace System.Linq.Expressions.Tests
         public void CanCatchExceptionAsObject(bool useInterpreter)
         {
             Func<int> throwCatchAsObject = Expression.Lambda<Func<int>>(
-                    Expression.TryCatch(
-                        Expression.Throw(Expression.Constant(new Exception()), typeof(int)),
-                        Expression.Catch(typeof(ArgumentException), Expression.Constant(1)),
-                        Expression.Catch(typeof(object), Expression.Constant(2))
-                    )
+                Expression.TryCatch(
+                    Expression.Throw(Expression.Constant(new Exception()), typeof(int)),
+                    Expression.Catch(typeof(ArgumentException), Expression.Constant(1)),
+                    Expression.Catch(typeof(object), Expression.Constant(2))
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(2, throwCatchAsObject());
         }
@@ -365,15 +367,15 @@ namespace System.Linq.Expressions.Tests
             Exception testException = new Exception();
             ParameterExpression param = Expression.Parameter(typeof(object));
             Func<object> throwCatchAsObject = Expression.Lambda<Func<object>>(
-                    Expression.TryCatch(
-                        Expression.Throw(Expression.Constant(testException), typeof(object)),
-                        Expression.Catch(
-                            typeof(ArgumentException),
-                            Expression.Constant("Will be skipped", typeof(object))
-                        ),
-                        Expression.Catch(param, param)
-                    )
+                Expression.TryCatch(
+                    Expression.Throw(Expression.Constant(testException), typeof(object)),
+                    Expression.Catch(
+                        typeof(ArgumentException),
+                        Expression.Constant("Will be skipped", typeof(object))
+                    ),
+                    Expression.Catch(param, param)
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Same(testException, throwCatchAsObject());
         }
@@ -597,8 +599,8 @@ namespace System.Linq.Expressions.Tests
         public void NonExceptionDerivedExceptionWrapped(bool useInterpreter)
         {
             Action throwWrapped = Expression.Lambda<Action>(
-                    Expression.Throw(Expression.Constant("Hello"))
-                )
+                Expression.Throw(Expression.Constant("Hello"))
+            )
                 .Compile(useInterpreter);
             RuntimeWrappedException rwe = Assert.Throws<RuntimeWrappedException>(throwWrapped);
             Assert.Equal("Hello", rwe.WrappedException);
@@ -694,11 +696,11 @@ namespace System.Linq.Expressions.Tests
         public void FaultNotTriggeredOnNoThrowNonVoid(bool useInterpreter)
         {
             Func<int> func = Expression.Lambda<Func<int>>(
-                    Expression.TryFault(
-                        Expression.Constant(42),
-                        Expression.Throw(Expression.Constant(new TestException()))
-                    )
+                Expression.TryFault(
+                    Expression.Constant(42),
+                    Expression.Throw(Expression.Constant(new TestException()))
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(42, func());
         }
@@ -738,9 +740,9 @@ namespace System.Linq.Expressions.Tests
                 Expression.TryCatch(
                     Expression.Block(
                         Enumerable.Repeat(
-                                Expression.TryFinally(Expression.Empty(), Expression.Empty()),
-                                40
-                            )
+                            Expression.TryFinally(Expression.Empty(), Expression.Empty()),
+                            40
+                        )
                             .Append(
                                 Expression.TryFault(
                                     Expression.Throw(Expression.Constant(new TestException())),
@@ -779,11 +781,11 @@ namespace System.Linq.Expressions.Tests
         public void ExceptionInFinallyReplacesException(bool useInterpreter)
         {
             Action act = Expression.Lambda<Action>(
-                    Expression.TryFinally(
-                        Expression.Throw(Expression.Constant(new InvalidOperationException())),
-                        Expression.Throw(Expression.Constant(new TestException()))
-                    )
+                Expression.TryFinally(
+                    Expression.Throw(Expression.Constant(new InvalidOperationException())),
+                    Expression.Throw(Expression.Constant(new TestException()))
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Throws<TestException>(act);
         }
@@ -792,11 +794,11 @@ namespace System.Linq.Expressions.Tests
         public void ExceptionInFaultReplacesException(bool useInterpreter)
         {
             Action act = Expression.Lambda<Action>(
-                    Expression.TryFault(
-                        Expression.Throw(Expression.Constant(new InvalidOperationException())),
-                        Expression.Throw(Expression.Constant(new TestException()))
-                    )
+                Expression.TryFault(
+                    Expression.Throw(Expression.Constant(new InvalidOperationException())),
+                    Expression.Throw(Expression.Constant(new TestException()))
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Throws<TestException>(act);
         }
@@ -842,29 +844,26 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression variable = Expression.Parameter(typeof(int));
             Func<int> func = Expression.Lambda<Func<int>>(
-                    Expression.Block(
-                        new[] { variable },
+                Expression.Block(
+                    new[] { variable },
+                    Expression.TryCatch(
                         Expression.TryCatch(
-                            Expression.TryCatch(
-                                Expression.Throw(
-                                    Expression.Constant(new TestException()),
-                                    typeof(int)
-                                ),
-                                Expression.Catch(
-                                    typeof(Exception),
-                                    Expression.Block(
-                                        Expression.Assign(variable, Expression.Constant(10)),
-                                        Expression.Rethrow(typeof(int))
-                                    )
-                                )
-                            ),
+                            Expression.Throw(Expression.Constant(new TestException()), typeof(int)),
                             Expression.Catch(
-                                typeof(TestException),
-                                Expression.Add(variable, Expression.Constant(2))
+                                typeof(Exception),
+                                Expression.Block(
+                                    Expression.Assign(variable, Expression.Constant(10)),
+                                    Expression.Rethrow(typeof(int))
+                                )
                             )
+                        ),
+                        Expression.Catch(
+                            typeof(TestException),
+                            Expression.Add(variable, Expression.Constant(2))
                         )
                     )
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(12, func());
         }
@@ -877,38 +876,38 @@ namespace System.Linq.Expressions.Tests
             ConstantExpression builder = Expression.Constant(output);
             var noTypes = new Type[0];
             Action act = Expression.Lambda<Action>(
-                    Expression.Block(
+                Expression.Block(
+                    Expression.TryCatch(
                         Expression.TryCatch(
-                            Expression.TryCatch(
-                                Expression.Throw(Expression.Constant(new TestException())),
-                                Expression.Catch(
-                                    typeof(Exception),
-                                    Expression.Block(
-                                        Expression.Call(
-                                            builder,
-                                            "Append",
-                                            noTypes,
-                                            Expression.Constant('A')
-                                        ),
-                                        Expression.Rethrow()
-                                    )
-                                )
-                            ),
+                            Expression.Throw(Expression.Constant(new TestException())),
                             Expression.Catch(
-                                typeof(TestException),
+                                typeof(Exception),
                                 Expression.Block(
                                     Expression.Call(
                                         builder,
                                         "Append",
                                         noTypes,
-                                        Expression.Constant('B')
+                                        Expression.Constant('A')
                                     ),
-                                    Expression.Empty()
+                                    Expression.Rethrow()
                                 )
+                            )
+                        ),
+                        Expression.Catch(
+                            typeof(TestException),
+                            Expression.Block(
+                                Expression.Call(
+                                    builder,
+                                    "Append",
+                                    noTypes,
+                                    Expression.Constant('B')
+                                ),
+                                Expression.Empty()
                             )
                         )
                     )
                 )
+            )
                 .Compile(useInterpreter);
             act();
             Assert.Equal("AB", output.ToString());

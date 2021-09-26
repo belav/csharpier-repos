@@ -1588,14 +1588,15 @@ namespace System.Drawing.Drawing2D.Tests
                     "family",
                     null,
                     () =>
-                        new GraphicsPath().AddString(
-                            "mono",
-                            null,
-                            0,
-                            10,
-                            new Point(10, 10),
-                            StringFormat.GenericDefault
-                        )
+                        new GraphicsPath()
+                            .AddString(
+                                "mono",
+                                null,
+                                0,
+                                10,
+                                new Point(10, 10),
+                                StringFormat.GenericDefault
+                            )
                 );
             }
         }

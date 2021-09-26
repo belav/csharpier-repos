@@ -108,20 +108,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                 var navigator = _navigatorSelectorService.GetTextStructureNavigator(subjectBuffer);
 
                 var commentInfo = await service.GetInfoAsync(
-                        document,
-                        selectedSpans.First().Span.ToTextSpan(),
-                        cancellationToken
-                    )
+                    document,
+                    selectedSpans.First().Span.ToTextSpan(),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (commentInfo.SupportsBlockComment)
                 {
                     return await ToggleBlockCommentsAsync(
-                            document,
-                            commentInfo,
-                            navigator,
-                            selectedSpans,
-                            cancellationToken
-                        )
+                        document,
+                        commentInfo,
+                        navigator,
+                        selectedSpans,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -144,12 +144,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                 lastLineAroundSelection
             );
             var blockCommentedSpans = await GetBlockCommentsInDocumentAsync(
-                    document,
-                    selectedSpans.First().Snapshot,
-                    linesContainingSelection,
-                    commentInfo,
-                    cancellationToken
-                )
+                document,
+                selectedSpans.First().Snapshot,
+                linesContainingSelection,
+                commentInfo,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var blockCommentSelections = selectedSpans.SelectAsArray(

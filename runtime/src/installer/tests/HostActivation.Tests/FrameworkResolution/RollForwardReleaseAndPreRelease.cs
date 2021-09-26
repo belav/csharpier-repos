@@ -32,8 +32,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             public SharedTestState()
             {
                 DotNetWithNETCoreAppReleaseAndPreRelease = DotNet(
-                        "DotNetWithNETCoreAppReleaseAndPreRelease"
-                    )
+                    "DotNetWithNETCoreAppReleaseAndPreRelease"
+                )
                     .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("4.1.0-preview.1")
                     .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("4.1.0-preview.2")
                     .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("4.1.1")
@@ -300,20 +300,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             // Defaults
             RunTest(
-                    "5.1.0-preview.0",
-                    rollForward: null,
-                    applyPatches: null,
-                    rollForwardToPreRelease: rollForwardToPreRelease
-                )
+                "5.1.0-preview.0",
+                rollForward: null,
+                applyPatches: null,
+                rollForwardToPreRelease: rollForwardToPreRelease
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.0-preview.1");
 
             // Minor, applyPatches=false
             RunTest(
-                    "5.1.0-preview.0",
-                    Constants.RollForwardSetting.Minor,
-                    applyPatches: false,
-                    rollForwardToPreRelease: rollForwardToPreRelease
-                )
+                "5.1.0-preview.0",
+                Constants.RollForwardSetting.Minor,
+                applyPatches: false,
+                rollForwardToPreRelease: rollForwardToPreRelease
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.0-preview.1");
         }
 
@@ -327,7 +327,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             return RunTest(
                 SharedState.DotNetWithNETCoreAppReleaseAndPreRelease,
                 SharedState.FrameworkReferenceApp,
-                new TestSettings().WithRuntimeConfigCustomizer(
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
                         runtimeConfig =>
                             runtimeConfig.WithApplyPatches(applyPatches)
                                 .WithFramework(MicrosoftNETCoreApp, frameworkReferenceVersion)

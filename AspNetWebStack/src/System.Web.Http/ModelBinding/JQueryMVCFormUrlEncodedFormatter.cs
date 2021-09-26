@@ -63,12 +63,13 @@ namespace System.Web.Http.ModelBinding
             IFormatterLogger formatterLogger
         )
         {
-            object obj = await base.ReadFromStreamAsync(
-                typeof(FormDataCollection),
-                readStream,
-                content,
-                formatterLogger
-            );
+            object obj = await base
+                .ReadFromStreamAsync(
+                    typeof(FormDataCollection),
+                    readStream,
+                    content,
+                    formatterLogger
+                );
             FormDataCollection fd = (FormDataCollection)obj;
 
             try

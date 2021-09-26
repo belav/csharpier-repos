@@ -73,24 +73,23 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
-                    //         obj.M2<int>();      // invalid
-                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M2<int>")
-                        .WithArguments("TestRef.M2<T>()", "?", "T", "int")
-                        .WithLocation(9, 13),
-                    // (9,13): error CS0570: 'T' is not supported by the language
-                    //         obj.M2<int>();      // invalid
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M2<int>")
-                        .WithArguments("T")
-                        .WithLocation(9, 13),
-                    // (9,13): error CS0648: '' is a type not supported by the language
-                    //         obj.M2<int>();      // invalid
-                    Diagnostic(ErrorCode.ERR_BogusType, "M2<int>")
-                        .WithArguments("")
-                        .WithLocation(9, 13)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
+                //         obj.M2<int>();      // invalid
+                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M2<int>")
+                    .WithArguments("TestRef.M2<T>()", "?", "T", "int")
+                    .WithLocation(9, 13),
+                // (9,13): error CS0570: 'T' is not supported by the language
+                //         obj.M2<int>();      // invalid
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M2<int>")
+                    .WithArguments("T")
+                    .WithLocation(9, 13),
+                // (9,13): error CS0648: '' is a type not supported by the language
+                //         obj.M2<int>();      // invalid
+                Diagnostic(ErrorCode.ERR_BogusType, "M2<int>")
+                    .WithArguments("")
+                    .WithLocation(9, 13)
+            );
         }
 
         [Fact]
@@ -152,24 +151,23 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
-                    //         obj.M2<int>();      // invalid
-                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M2<int>")
-                        .WithArguments("TestRef.M2<T>()", "?", "T", "int")
-                        .WithLocation(9, 13),
-                    // (9,13): error CS0570: 'T' is not supported by the language
-                    //         obj.M2<int>();      // invalid
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M2<int>")
-                        .WithArguments("T")
-                        .WithLocation(9, 13),
-                    // (9,13): error CS0648: '' is a type not supported by the language
-                    //         obj.M2<int>();      // invalid
-                    Diagnostic(ErrorCode.ERR_BogusType, "M2<int>")
-                        .WithArguments("")
-                        .WithLocation(9, 13)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
+                //         obj.M2<int>();      // invalid
+                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M2<int>")
+                    .WithArguments("TestRef.M2<T>()", "?", "T", "int")
+                    .WithLocation(9, 13),
+                // (9,13): error CS0570: 'T' is not supported by the language
+                //         obj.M2<int>();      // invalid
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M2<int>")
+                    .WithArguments("T")
+                    .WithLocation(9, 13),
+                // (9,13): error CS0648: '' is a type not supported by the language
+                //         obj.M2<int>();      // invalid
+                Diagnostic(ErrorCode.ERR_BogusType, "M2<int>")
+                    .WithArguments("")
+                    .WithLocation(9, 13)
+            );
         }
 
         [Fact]
@@ -231,24 +229,23 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
-                    //         obj.M2<int>();      // invalid
-                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M2<int>")
-                        .WithArguments("TestRef.M2<T>()", "?", "T", "int")
-                        .WithLocation(9, 13),
-                    // (9,13): error CS0570: 'T' is not supported by the language
-                    //         obj.M2<int>();      // invalid
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M2<int>")
-                        .WithArguments("T")
-                        .WithLocation(9, 13),
-                    // (9,13): error CS0648: '' is a type not supported by the language
-                    //         obj.M2<int>();      // invalid
-                    Diagnostic(ErrorCode.ERR_BogusType, "M2<int>")
-                        .WithArguments("")
-                        .WithLocation(9, 13)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
+                //         obj.M2<int>();      // invalid
+                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M2<int>")
+                    .WithArguments("TestRef.M2<T>()", "?", "T", "int")
+                    .WithLocation(9, 13),
+                // (9,13): error CS0570: 'T' is not supported by the language
+                //         obj.M2<int>();      // invalid
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M2<int>")
+                    .WithArguments("T")
+                    .WithLocation(9, 13),
+                // (9,13): error CS0648: '' is a type not supported by the language
+                //         obj.M2<int>();      // invalid
+                Diagnostic(ErrorCode.ERR_BogusType, "M2<int>")
+                    .WithArguments("")
+                    .WithLocation(9, 13)
+            );
         }
 
         [Fact]
@@ -308,14 +305,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (9,13): error CS0570: 'T' is not supported by the language
-                    //         obj.M2<int>();      // invalid
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M2<int>")
-                        .WithArguments("T")
-                        .WithLocation(9, 13)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (9,13): error CS0570: 'T' is not supported by the language
+                //         obj.M2<int>();      // invalid
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M2<int>")
+                    .WithArguments("T")
+                    .WithLocation(9, 13)
+            );
         }
 
         [Fact]
@@ -377,14 +373,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (9,13): error CS0570: 'T' is not supported by the language
-                    //         obj.M2<int>();      // invalid
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M2<int>")
-                        .WithArguments("T")
-                        .WithLocation(9, 13)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (9,13): error CS0570: 'T' is not supported by the language
+                //         obj.M2<int>();      // invalid
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M2<int>")
+                    .WithArguments("T")
+                    .WithLocation(9, 13)
+            );
         }
 
         [Fact]
@@ -402,14 +397,13 @@ class Test<T> where T : unmanaged
 {
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (8,25): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
-                    // class Test<T> where T : unmanaged
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
-                        .WithArguments("System.Runtime.InteropServices.UnmanagedType")
-                        .WithLocation(8, 25)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (8,25): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
+                // class Test<T> where T : unmanaged
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
+                    .WithArguments("System.Runtime.InteropServices.UnmanagedType")
+                    .WithLocation(8, 25)
+            );
         }
 
         [Fact]
@@ -428,14 +422,13 @@ class Test
     public void M<T>() where T : unmanaged {}
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (10,34): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
-                    //     public void M<T>() where T : unmanaged {}
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
-                        .WithArguments("System.Runtime.InteropServices.UnmanagedType")
-                        .WithLocation(10, 34)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (10,34): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
+                //     public void M<T>() where T : unmanaged {}
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
+                    .WithArguments("System.Runtime.InteropServices.UnmanagedType")
+                    .WithLocation(10, 34)
+            );
         }
 
         [Fact]
@@ -453,14 +446,13 @@ namespace System
 }
 public delegate void D<T>() where T : unmanaged;";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (10,39): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
-                    // public delegate void D<T>() where T : unmanaged;
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
-                        .WithArguments("System.Runtime.InteropServices.UnmanagedType")
-                        .WithLocation(10, 39)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (10,39): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
+                // public delegate void D<T>() where T : unmanaged;
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
+                    .WithArguments("System.Runtime.InteropServices.UnmanagedType")
+                    .WithLocation(10, 39)
+            );
         }
 
         [Fact]
@@ -490,14 +482,13 @@ public class Test
     }
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (16,31): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
-                    //         void N<T>() where T : unmanaged
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
-                        .WithArguments("System.Runtime.InteropServices.UnmanagedType")
-                        .WithLocation(16, 31)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (16,31): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
+                //         void N<T>() where T : unmanaged
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
+                    .WithArguments("System.Runtime.InteropServices.UnmanagedType")
+                    .WithLocation(16, 31)
+            );
         }
 
         [Fact]
@@ -522,14 +513,13 @@ class Test<T> where T : unmanaged
 {
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (15,25): error CS0518: Predefined type 'System.ValueType' is not defined or imported
-                    // class Test<T> where T : unmanaged
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
-                        .WithArguments("System.ValueType")
-                        .WithLocation(15, 25)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (15,25): error CS0518: Predefined type 'System.ValueType' is not defined or imported
+                // class Test<T> where T : unmanaged
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
+                    .WithArguments("System.ValueType")
+                    .WithLocation(15, 25)
+            );
         }
 
         [Fact]
@@ -555,14 +545,13 @@ class Test
     public void M<T>() where T : unmanaged {}
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (17,34): error CS0518: Predefined type 'System.ValueType' is not defined or imported
-                    //     public void M<T>() where T : unmanaged {}
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
-                        .WithArguments("System.ValueType")
-                        .WithLocation(17, 34)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (17,34): error CS0518: Predefined type 'System.ValueType' is not defined or imported
+                //     public void M<T>() where T : unmanaged {}
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
+                    .WithArguments("System.ValueType")
+                    .WithLocation(17, 34)
+            );
         }
 
         [Fact]
@@ -587,14 +576,13 @@ namespace System
 }
 public delegate void M<T>() where T : unmanaged;";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (17,39): error CS0518: Predefined type 'System.ValueType' is not defined or imported
-                    // public delegate void M<T>() where T : unmanaged;
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
-                        .WithArguments("System.ValueType")
-                        .WithLocation(17, 39)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (17,39): error CS0518: Predefined type 'System.ValueType' is not defined or imported
+                // public delegate void M<T>() where T : unmanaged;
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
+                    .WithArguments("System.ValueType")
+                    .WithLocation(17, 39)
+            );
         }
 
         [Fact]
@@ -628,19 +616,18 @@ class Test
     }
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (6,19): error CS0518: Predefined type 'System.ValueType' is not defined or imported
-                    //     public struct Int32 {}
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Int32")
-                        .WithArguments("System.ValueType")
-                        .WithLocation(6, 19),
-                    // (20,31): error CS0518: Predefined type 'System.ValueType' is not defined or imported
-                    //         void N<T>() where T : unmanaged
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
-                        .WithArguments("System.ValueType")
-                        .WithLocation(20, 31)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (6,19): error CS0518: Predefined type 'System.ValueType' is not defined or imported
+                //     public struct Int32 {}
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Int32")
+                    .WithArguments("System.ValueType")
+                    .WithLocation(6, 19),
+                // (20,31): error CS0518: Predefined type 'System.ValueType' is not defined or imported
+                //         void N<T>() where T : unmanaged
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
+                    .WithArguments("System.ValueType")
+                    .WithLocation(20, 31)
+            );
         }
 
         [Fact]
@@ -658,9 +645,8 @@ public class Child : Parent
 }",
                 symbolValidator: module =>
                 {
-                    var parentTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "Parent"
-                        )
+                    var parentTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(parentTypeParameter.HasValueTypeConstraint);
@@ -672,9 +658,8 @@ public class Child : Parent
                         module.ContainingAssembly.Name
                     );
 
-                    var childTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "Child"
-                        )
+                    var childTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(childTypeParameter.HasValueTypeConstraint);
@@ -716,7 +701,8 @@ public class Parent
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Parent")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -739,7 +725,8 @@ public class Child : Parent
                 references: new[] { parent.Compilation.EmitToImageReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Child")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -789,9 +776,8 @@ public class Child : Parent
 }",
                 symbolValidator: module =>
                 {
-                    var parentTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "Parent"
-                        )
+                    var parentTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(parentTypeParameter.HasValueTypeConstraint);
@@ -803,9 +789,8 @@ public class Child : Parent
                         module.ContainingAssembly.Name
                     );
 
-                    var childTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "Child"
-                        )
+                    var childTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(childTypeParameter.HasValueTypeConstraint);
@@ -844,7 +829,8 @@ public abstract class Parent
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Parent")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -867,7 +853,8 @@ public class Child : Parent
                 references: new[] { parent.Compilation.EmitToImageReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Child")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -914,9 +901,8 @@ public class Child : Parent
 }",
                 symbolValidator: module =>
                 {
-                    var parentTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "Parent"
-                        )
+                    var parentTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(parentTypeParameter.HasValueTypeConstraint);
@@ -928,9 +914,8 @@ public class Child : Parent
                         module.ContainingAssembly.Name
                     );
 
-                    var childTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "Child"
-                        )
+                    var childTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(childTypeParameter.HasValueTypeConstraint);
@@ -969,7 +954,8 @@ public interface Parent
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Parent")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -992,7 +978,8 @@ public class Child : Parent
                 references: new[] { parent.Compilation.EmitToImageReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Child")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -1039,9 +1026,8 @@ public class Child : Parent
 }",
                 symbolValidator: module =>
                 {
-                    var parentTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "Parent"
-                        )
+                    var parentTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(parentTypeParameter.HasValueTypeConstraint);
@@ -1053,9 +1039,8 @@ public class Child : Parent
                         module.ContainingAssembly.Name
                     );
 
-                    var childTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "Child"
-                        )
+                    var childTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(childTypeParameter.HasValueTypeConstraint);
@@ -1094,7 +1079,8 @@ public interface Parent
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Parent")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -1117,7 +1103,8 @@ public class Child : Parent
                 references: new[] { parent.Compilation.EmitToImageReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Child")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -1164,9 +1151,8 @@ public class Child : Parent
 }",
                 symbolValidator: module =>
                 {
-                    var parentTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "Parent"
-                        )
+                    var parentTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(parentTypeParameter.HasValueTypeConstraint);
@@ -1178,9 +1164,8 @@ public class Child : Parent
                         module.ContainingAssembly.Name
                     );
 
-                    var childTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "Child"
-                        )
+                    var childTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("Parent.M")
                         .TypeParameters.Single();
                     Assert.True(childTypeParameter.HasValueTypeConstraint);
@@ -1220,7 +1205,8 @@ public interface Parent
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Parent")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -1243,7 +1229,8 @@ public class Child : Parent
                 references: new[] { parent.Compilation.EmitToImageReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Child")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("Parent.M")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -1302,14 +1289,12 @@ public class Program
     }
 }",
                 expectedOutput: "5",
-                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseExe
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var delegateTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "D`1"
-                        )
+                    var delegateTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("D`1")
                         .TypeParameters.Single();
                     Assert.True(delegateTypeParameter.HasValueTypeConstraint);
                     Assert.True(delegateTypeParameter.HasUnmanagedTypeConstraint);
@@ -1320,9 +1305,8 @@ public class Program
                         module.ContainingAssembly.Name
                     );
 
-                    var lambdaTypeParameter = module.ContainingAssembly.GetTypeByMetadataName(
-                            "Program"
-                        )
+                    var lambdaTypeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Program")
                         .GetTypeMember("<>c__DisplayClass0_0")
                         .TypeParameters.Single();
                     Assert.True(lambdaTypeParameter.HasValueTypeConstraint);
@@ -1352,7 +1336,8 @@ public class TestRef
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("D`1")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("D`1")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
@@ -1382,12 +1367,12 @@ public class Program
 }",
                 expectedOutput: "5",
                 references: new[] { reference.Compilation.EmitToImageReference() },
-                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseExe
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Program")
+                    var typeParameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Program")
                         .GetTypeMember("<>c__DisplayClass0_0")
                         .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
@@ -1453,14 +1438,14 @@ namespace System.Runtime.InteropServices
 }";
 
             var ref1 = CreateEmptyCompilation(
-                    refCode,
-                    references: new[] { corlibWithoutUnmanagedTypeRef }
-                )
+                refCode,
+                references: new[] { corlibWithoutUnmanagedTypeRef }
+            )
                 .EmitToImageReference();
             var ref2 = CreateEmptyCompilation(
-                    refCode,
-                    references: new[] { corlibWithoutUnmanagedTypeRef }
-                )
+                refCode,
+                references: new[] { corlibWithoutUnmanagedTypeRef }
+            )
                 .EmitToImageReference();
 
             var user =
@@ -1470,9 +1455,9 @@ public class Test<T> where T : unmanaged
 }";
 
             CreateEmptyCompilation(
-                    user,
-                    references: new[] { ref1, ref2, corlibWithoutUnmanagedTypeRef }
-                )
+                user,
+                references: new[] { ref1, ref2, corlibWithoutUnmanagedTypeRef }
+            )
                 .VerifyDiagnostics(
                     // (2,32): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
                     // public class Test<T> where T : unmanaged
@@ -1528,24 +1513,23 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (6,23): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'TestRef.M<T>()'
-                    //         new TestRef().M<int>();
-                    Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "M<int>")
-                        .WithArguments("TestRef.M<T>()", "T", "int")
-                        .WithLocation(6, 23),
-                    // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to 'System.ValueType'.
-                    //         new TestRef().M<string>();
-                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
-                        .WithArguments("TestRef.M<T>()", "System.ValueType", "T", "string")
-                        .WithLocation(7, 23),
-                    // (7,23): error CS0570: 'T' is not supported by the language
-                    //         new TestRef().M<string>();
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M<string>")
-                        .WithArguments("T")
-                        .WithLocation(7, 23)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (6,23): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'TestRef.M<T>()'
+                //         new TestRef().M<int>();
+                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "M<int>")
+                    .WithArguments("TestRef.M<T>()", "T", "int")
+                    .WithLocation(6, 23),
+                // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to 'System.ValueType'.
+                //         new TestRef().M<string>();
+                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
+                    .WithArguments("TestRef.M<T>()", "System.ValueType", "T", "string")
+                    .WithLocation(7, 23),
+                // (7,23): error CS0570: 'T' is not supported by the language
+                //         new TestRef().M<string>();
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M<string>")
+                    .WithArguments("T")
+                    .WithLocation(7, 23)
+            );
         }
 
         [Fact]
@@ -1594,29 +1578,28 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (6,23): error CS0570: 'T' is not supported by the language
-                    //         new TestRef().M<int>();
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M<int>")
-                        .WithArguments("T")
-                        .WithLocation(6, 23),
-                    // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to 'System.ValueType'.
-                    //         new TestRef().M<string>();
-                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
-                        .WithArguments("TestRef.M<T>()", "System.ValueType", "T", "string")
-                        .WithLocation(7, 23),
-                    // (7,23): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'TestRef.M<T>()'
-                    //         new TestRef().M<string>();
-                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "M<string>")
-                        .WithArguments("TestRef.M<T>()", "T", "string")
-                        .WithLocation(7, 23),
-                    // (7,23): error CS0570: 'T' is not supported by the language
-                    //         new TestRef().M<string>();
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M<string>")
-                        .WithArguments("T")
-                        .WithLocation(7, 23)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (6,23): error CS0570: 'T' is not supported by the language
+                //         new TestRef().M<int>();
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M<int>")
+                    .WithArguments("T")
+                    .WithLocation(6, 23),
+                // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to 'System.ValueType'.
+                //         new TestRef().M<string>();
+                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
+                    .WithArguments("TestRef.M<T>()", "System.ValueType", "T", "string")
+                    .WithLocation(7, 23),
+                // (7,23): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'TestRef.M<T>()'
+                //         new TestRef().M<string>();
+                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "M<string>")
+                    .WithArguments("TestRef.M<T>()", "T", "string")
+                    .WithLocation(7, 23),
+                // (7,23): error CS0570: 'T' is not supported by the language
+                //         new TestRef().M<string>();
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M<string>")
+                    .WithArguments("T")
+                    .WithLocation(7, 23)
+            );
         }
 
         [Fact]
@@ -1665,24 +1648,23 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (6,23): error CS0570: 'T' is not supported by the language
-                    //         new TestRef().M<int>();
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M<int>")
-                        .WithArguments("T")
-                        .WithLocation(6, 23),
-                    // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to 'System.ValueType'.
-                    //         new TestRef().M<string>();
-                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
-                        .WithArguments("TestRef.M<T>()", "System.ValueType", "T", "string")
-                        .WithLocation(7, 23),
-                    // (7,23): error CS0570: 'T' is not supported by the language
-                    //         new TestRef().M<string>();
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M<string>")
-                        .WithArguments("T")
-                        .WithLocation(7, 23)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (6,23): error CS0570: 'T' is not supported by the language
+                //         new TestRef().M<int>();
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M<int>")
+                    .WithArguments("T")
+                    .WithLocation(6, 23),
+                // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to 'System.ValueType'.
+                //         new TestRef().M<string>();
+                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
+                    .WithArguments("TestRef.M<T>()", "System.ValueType", "T", "string")
+                    .WithLocation(7, 23),
+                // (7,23): error CS0570: 'T' is not supported by the language
+                //         new TestRef().M<string>();
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M<string>")
+                    .WithArguments("T")
+                    .WithLocation(7, 23)
+            );
         }
 
         [Fact]
@@ -1736,14 +1718,13 @@ public class Test
     struct S1{}
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (10,23): error CS0315: The type 'Test.S1' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no boxing conversion from 'Test.S1' to 'System.IComparable'.
-                    //         new TestRef().M<S1>();
-                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<S1>")
-                        .WithArguments("TestRef.M<T>()", "System.IComparable", "T", "Test.S1")
-                        .WithLocation(10, 23)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (10,23): error CS0315: The type 'Test.S1' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no boxing conversion from 'Test.S1' to 'System.IComparable'.
+                //         new TestRef().M<S1>();
+                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<S1>")
+                    .WithArguments("TestRef.M<T>()", "System.IComparable", "T", "Test.S1")
+                    .WithLocation(10, 23)
+            );
         }
 
         [Fact]
@@ -1807,7 +1788,8 @@ public class Test
                     .WithLocation(10, 23)
             );
 
-            var typeParameter = c.GlobalNamespace.GetTypeMember("TestRef")
+            var typeParameter = c.GlobalNamespace
+                .GetTypeMember("TestRef")
                 .GetMethod("M")
                 .TypeParameters.Single();
             Assert.True(typeParameter.HasUnmanagedTypeConstraint);
@@ -1839,17 +1821,16 @@ unsafe class Program
 }";
 
             CompileAndVerify(
-                    code,
-                    options: TestOptions.UnsafeReleaseExe,
-                    verify: Verification.Fails,
-                    expectedOutput: @"
+                code,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"
 System.Int32
 System.Double
 "
-                )
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            ).VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  1
@@ -1867,7 +1848,7 @@ System.Double
   IL_0017:  call       ""void Program.M<double>(double*)""
   IL_001c:  ret
 }"
-                );
+            );
         }
 
         private const string IsUnmanagedAttributeIL =

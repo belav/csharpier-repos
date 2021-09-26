@@ -41,13 +41,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "{0};ImplicitExpression[{1}];K{2}",
-                base.ToString(),
-                AcceptTrailingDot ? "ATD" : "RTD",
-                Keywords.Count
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "{0};ImplicitExpression[{1}];K{2}",
+                    base.ToString(),
+                    AcceptTrailingDot ? "ATD" : "RTD",
+                    Keywords.Count
+                );
         }
 
         public override bool Equals(object obj)

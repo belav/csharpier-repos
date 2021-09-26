@@ -570,30 +570,39 @@ public abstract `class C`<T`> : NS.I
                 "System.IAsyncResult C<T>.D1.BeginInvoke(System.AsyncCallback callback, System.Object @object)",
                 "void C<T>.D1.EndInvoke(System.IAsyncResult result)",
                 "void C<T>.D1.Invoke()"
-            }.Concat(s_commonDelegateTypeMembers).ToArray();
+            }
+                .Concat(s_commonDelegateTypeMembers)
+                .ToArray();
 
             string[] delegate_d2_members = new string[]
             {
                 "System.IAsyncResult C<T>.D2.BeginInvoke(System.Int32 t, System.AsyncCallback callback, System.Object @object)",
                 "void C<T>.D2.EndInvoke(System.IAsyncResult result)",
                 "void C<T>.D2.Invoke(System.Int32 t)"
-            }.Concat(s_commonDelegateTypeMembers).ToArray();
+            }
+                .Concat(s_commonDelegateTypeMembers)
+                .ToArray();
 
             string[] delegate_d3_members = new string[]
             {
                 "System.IAsyncResult C<T>.D3<U>.BeginInvoke(System.AsyncCallback callback, System.Object @object)",
                 "void C<T>.D3<U>.EndInvoke(System.IAsyncResult result)",
                 "void C<T>.D3<U>.Invoke()"
-            }.Concat(s_commonDelegateTypeMembers).ToArray();
+            }
+                .Concat(s_commonDelegateTypeMembers)
+                .ToArray();
 
             string[] delegate_d4_members = new string[]
             {
                 "System.IAsyncResult C<T>.D4<V>.BeginInvoke(V t, System.AsyncCallback callback, System.Object @object)",
                 "void C<T>.D4<V>.EndInvoke(System.IAsyncResult result)",
                 "void C<T>.D4<V>.Invoke(V t)"
-            }.Concat(s_commonDelegateTypeMembers).ToArray();
+            }
+                .Concat(s_commonDelegateTypeMembers)
+                .ToArray();
 
-            string[] enum_e_members = new string[] { "C<T>.E.A" }.Concat(s_commonEnumTypeMembers)
+            string[] enum_e_members = new string[] { "C<T>.E.A" }
+                .Concat(s_commonEnumTypeMembers)
                 .ToArray();
 
             var expectedNames = MakeExpectedSymbols(
@@ -2478,11 +2487,12 @@ record C(int X)
             int expectedNumExpectedNames = keyPositions.Length - 2 + 1;
             Assert.True(
                 actualNumExpectedNames == expectedNumExpectedNames,
-                string.Format(
-                    "Expected {0} sets of expected names, but found {1}",
-                    expectedNumExpectedNames,
-                    actualNumExpectedNames
-                )
+                string
+                    .Format(
+                        "Expected {0} sets of expected names, but found {1}",
+                        expectedNumExpectedNames,
+                        actualNumExpectedNames
+                    )
             );
 
             for (int key = 0; key < keyPositions.Length - 1; key++)
@@ -2533,9 +2543,8 @@ record C(int X)
             keyPositions = keyPositionBuilder.ToArrayAndFree();
             var text = textBuilder.ToString();
 
-            var parseOptions = TestOptions.Regular9.WithDocumentationMode(
-                DocumentationMode.Diagnose
-            );
+            var parseOptions = TestOptions.Regular9
+                .WithDocumentationMode(DocumentationMode.Diagnose);
             var compilation = CreateCompilationWithMscorlib40(text, parseOptions: parseOptions);
             var tree = compilation.SyntaxTrees[0];
             return compilation.GetSemanticModel(tree);
@@ -2556,19 +2565,21 @@ record C(int X)
                 .ToArray();
             Array.Sort(actualSymbols);
 
-            SyntaxToken token = model.SyntaxTree.GetCompilationUnitRoot()
+            SyntaxToken token = model.SyntaxTree
+                .GetCompilationUnitRoot()
                 .FindToken(position, findInsideTrivia: true);
             AssertEx.Equal(
                 expectedSymbols,
                 actualSymbols,
-                message: string.Format(
-                    "Lookup({0}) - '{1}' in '{2}' after {3}th '{4}' - \"-->\" found but not expected, \"++>\" expected but not found",
-                    position,
-                    token.ToString(),
-                    token.Parent.ToString(),
-                    keyPositionNum,
-                    KeyPositionMarker
-                )
+                message: string
+                    .Format(
+                        "Lookup({0}) - '{1}' in '{2}' after {3}th '{4}' - \"-->\" found but not expected, \"++>\" expected but not found",
+                        position,
+                        token.ToString(),
+                        token.Parent.ToString(),
+                        keyPositionNum,
+                        KeyPositionMarker
+                    )
             );
         }
 

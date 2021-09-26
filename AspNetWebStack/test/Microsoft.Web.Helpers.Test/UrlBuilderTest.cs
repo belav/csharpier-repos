@@ -406,25 +406,22 @@ namespace Microsoft.Web.Helpers.Test
         internal static void CreateHttpRuntime(string appVPath)
         {
             var runtime = new HttpRuntime();
-            var appDomainAppVPathField = typeof(HttpRuntime).GetField(
-                "_appDomainAppVPath",
-                BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance
-            );
+            var appDomainAppVPathField = typeof(HttpRuntime)
+                .GetField(
+                    "_appDomainAppVPath",
+                    BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance
+                );
             appDomainAppVPathField.SetValue(runtime, CreateVirtualPath(appVPath));
             GetTheRuntime().SetValue(null, runtime);
-            var appDomainIdField = typeof(HttpRuntime).GetField(
-                "_appDomainId",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            var appDomainIdField = typeof(HttpRuntime)
+                .GetField("_appDomainId", BindingFlags.NonPublic | BindingFlags.Instance);
             appDomainIdField.SetValue(runtime, "test");
         }
 
         internal static FieldInfo GetTheRuntime()
         {
-            return typeof(HttpRuntime).GetField(
-                "_theRuntime",
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            return typeof(HttpRuntime)
+                .GetField("_theRuntime", BindingFlags.NonPublic | BindingFlags.Static);
         }
 
         internal static void RestoreHttpRuntime()

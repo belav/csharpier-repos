@@ -39,12 +39,12 @@ namespace System.Web.Http.WebHost
             Task expectedTask = CreateTask();
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>();
             mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(expectedTask);
             IExceptionHandler innerHandler = mock.Object;
 

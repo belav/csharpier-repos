@@ -303,10 +303,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Avx).GetMethod(
-                    nameof(Avx.Floor),
-                    new Type[] { typeof(Vector256<Double>) }
-                )
+            var result = typeof(Avx)
+                .GetMethod(nameof(Avx.Floor), new Type[] { typeof(Vector256<Double>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector256<Double>>(_dataTable.inArray1Ptr) }
@@ -320,10 +318,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Avx).GetMethod(
-                    nameof(Avx.Floor),
-                    new Type[] { typeof(Vector256<Double>) }
-                )
+            var result = typeof(Avx)
+                .GetMethod(nameof(Avx.Floor), new Type[] { typeof(Vector256<Double>) })
                 .Invoke(
                     null,
                     new object[] { Avx.LoadVector256((Double*)(_dataTable.inArray1Ptr)) }
@@ -337,10 +333,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Avx).GetMethod(
-                    nameof(Avx.Floor),
-                    new Type[] { typeof(Vector256<Double>) }
-                )
+            var result = typeof(Avx)
+                .GetMethod(nameof(Avx.Floor), new Type[] { typeof(Vector256<Double>) })
                 .Invoke(
                     null,
                     new object[] { Avx.LoadAlignedVector256((Double*)(_dataTable.inArray1Ptr)) }
@@ -584,15 +578,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Avx)}.{nameof(Avx.Floor)}<Double>(Vector256<Double>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Avx)}.{nameof(Avx.Floor)}<Double>(Vector256<Double>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

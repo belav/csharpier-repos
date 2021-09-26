@@ -110,10 +110,8 @@ namespace System.Composition.Lightweight.UnitTests
         [Fact]
         public void UnsupportedMetadataViewMessageIsInformative()
         {
-            var cc = new ContainerConfiguration().WithParts(
-                    typeof(ImportsWithMetadataInterface),
-                    typeof(ExportsWithMetadata)
-                )
+            var cc = new ContainerConfiguration()
+                .WithParts(typeof(ImportsWithMetadataInterface), typeof(ExportsWithMetadata))
                 .CreateContainer();
             var x = Assert.Throws<CompositionFailedException>(
                 () => cc.GetExport<ImportsWithMetadataInterface>()

@@ -1633,19 +1633,18 @@ class Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (8,19): error CS8345: Field or auto-implemented property cannot be of type 'Point' unless it is an instance member of a ref struct.
-                    //     public static Point field2 = new Point();
-                    Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "Point")
-                        .WithArguments("Point")
-                        .WithLocation(8, 19),
-                    // (7,12): error CS8345: Field or auto-implemented property cannot be of type 'Point' unless it is an instance member of a ref struct.
-                    //     public Point field1 = new Point();
-                    Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "Point")
-                        .WithArguments("Point")
-                        .WithLocation(7, 12)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (8,19): error CS8345: Field or auto-implemented property cannot be of type 'Point' unless it is an instance member of a ref struct.
+                //     public static Point field2 = new Point();
+                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "Point")
+                    .WithArguments("Point")
+                    .WithLocation(8, 19),
+                // (7,12): error CS8345: Field or auto-implemented property cannot be of type 'Point' unless it is an instance member of a ref struct.
+                //     public Point field1 = new Point();
+                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "Point")
+                    .WithArguments("Point")
+                    .WithLocation(7, 12)
+            );
         }
 
         [Fact]
@@ -1674,19 +1673,18 @@ ref struct Program
     }
 }";
 
-            CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (8,19): error CS8345: Field or auto-implemented property cannot be of type 'Point' unless it is an instance member of a ref struct.
-                    //     public static Point field2 = new Point();
-                    Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "Point")
-                        .WithArguments("Point")
-                        .WithLocation(8, 19),
-                    // (7,19): error CS8345: Field or auto-implemented property cannot be of type 'Point' unless it is an instance member of a ref struct.
-                    //     public static Point field1;
-                    Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "Point")
-                        .WithArguments("Point")
-                        .WithLocation(7, 19)
-                );
+            CreateCompilation(code).VerifyDiagnostics(
+                // (8,19): error CS8345: Field or auto-implemented property cannot be of type 'Point' unless it is an instance member of a ref struct.
+                //     public static Point field2 = new Point();
+                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "Point")
+                    .WithArguments("Point")
+                    .WithLocation(8, 19),
+                // (7,19): error CS8345: Field or auto-implemented property cannot be of type 'Point' unless it is an instance member of a ref struct.
+                //     public static Point field1;
+                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "Point")
+                    .WithArguments("Point")
+                    .WithLocation(7, 19)
+            );
         }
 
         [Fact]
@@ -1880,7 +1878,7 @@ class C
         public void PassingSpansToParameters_Errors()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class C
 {
@@ -1913,69 +1911,68 @@ class C
         y = default;
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (16,24): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
-                    //         M2(ref s1, out s2);         // one
-                    Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
-                        .WithArguments("s2")
-                        .WithLocation(16, 24),
-                    // (16,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'y' outside of their declaration scope
-                    //         M2(ref s1, out s2);         // one
-                    Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(ref s1, out s2)")
-                        .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "y")
-                        .WithLocation(16, 9),
-                    // (17,16): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
-                    //         M2(ref s2, out s1);         // two
-                    Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
-                        .WithArguments("s2")
-                        .WithLocation(17, 16),
-                    // (17,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'x' outside of their declaration scope
-                    //         M2(ref s2, out s1);         // two
-                    Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(ref s2, out s1)")
-                        .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "x")
-                        .WithLocation(17, 9),
-                    // (19,24): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
-                    //         M2(ref s1, out s2);         // three
-                    Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
-                        .WithArguments("s2")
-                        .WithLocation(19, 24),
-                    // (19,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'y' outside of their declaration scope
-                    //         M2(ref s1, out s2);         // three
-                    Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(ref s1, out s2)")
-                        .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "y")
-                        .WithLocation(19, 9),
-                    // (20,16): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
-                    //         M2(ref s2, out s1);         // four
-                    Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
-                        .WithArguments("s2")
-                        .WithLocation(20, 16),
-                    // (20,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'x' outside of their declaration scope
-                    //         M2(ref s2, out s1);         // four
-                    Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(ref s2, out s1)")
-                        .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "x")
-                        .WithLocation(20, 9),
-                    // (22,19): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
-                    //         M2(y: out s2, x: ref s1);   // five
-                    Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
-                        .WithArguments("s2")
-                        .WithLocation(22, 19),
-                    // (22,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'y' outside of their declaration scope
-                    //         M2(y: out s2, x: ref s1);   // five
-                    Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(y: out s2, x: ref s1)")
-                        .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "y")
-                        .WithLocation(22, 9),
-                    // (23,30): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
-                    //         M2(y: out s1, x: ref s2);   // six
-                    Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
-                        .WithArguments("s2")
-                        .WithLocation(23, 30),
-                    // (23,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'x' outside of their declaration scope
-                    //         M2(y: out s1, x: ref s2);   // six
-                    Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(y: out s1, x: ref s2)")
-                        .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "x")
-                        .WithLocation(23, 9)
-                );
+            ).VerifyDiagnostics(
+                // (16,24): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
+                //         M2(ref s1, out s2);         // one
+                Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
+                    .WithArguments("s2")
+                    .WithLocation(16, 24),
+                // (16,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'y' outside of their declaration scope
+                //         M2(ref s1, out s2);         // one
+                Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(ref s1, out s2)")
+                    .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "y")
+                    .WithLocation(16, 9),
+                // (17,16): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
+                //         M2(ref s2, out s1);         // two
+                Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
+                    .WithArguments("s2")
+                    .WithLocation(17, 16),
+                // (17,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'x' outside of their declaration scope
+                //         M2(ref s2, out s1);         // two
+                Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(ref s2, out s1)")
+                    .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "x")
+                    .WithLocation(17, 9),
+                // (19,24): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
+                //         M2(ref s1, out s2);         // three
+                Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
+                    .WithArguments("s2")
+                    .WithLocation(19, 24),
+                // (19,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'y' outside of their declaration scope
+                //         M2(ref s1, out s2);         // three
+                Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(ref s1, out s2)")
+                    .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "y")
+                    .WithLocation(19, 9),
+                // (20,16): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
+                //         M2(ref s2, out s1);         // four
+                Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
+                    .WithArguments("s2")
+                    .WithLocation(20, 16),
+                // (20,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'x' outside of their declaration scope
+                //         M2(ref s2, out s1);         // four
+                Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(ref s2, out s1)")
+                    .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "x")
+                    .WithLocation(20, 9),
+                // (22,19): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
+                //         M2(y: out s2, x: ref s1);   // five
+                Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
+                    .WithArguments("s2")
+                    .WithLocation(22, 19),
+                // (22,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'y' outside of their declaration scope
+                //         M2(y: out s2, x: ref s1);   // five
+                Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(y: out s2, x: ref s1)")
+                    .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "y")
+                    .WithLocation(22, 9),
+                // (23,30): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
+                //         M2(y: out s1, x: ref s2);   // six
+                Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
+                    .WithArguments("s2")
+                    .WithLocation(23, 30),
+                // (23,9): error CS8350: This combination of arguments to 'C.M2(ref Span<int>, out Span<int>)' is disallowed because it may expose variables referenced by parameter 'x' outside of their declaration scope
+                //         M2(y: out s1, x: ref s2);   // six
+                Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(y: out s1, x: ref s2)")
+                    .WithArguments("C.M2(ref System.Span<int>, out System.Span<int>)", "x")
+                    .WithLocation(23, 9)
+            );
         }
 
         [Fact]
@@ -1983,7 +1980,7 @@ class C
         public void PassingSpansToParameters_Errors_Arglist()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class C
 {
@@ -2006,29 +2003,28 @@ class C
     {
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (16,34): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
-                    //         M2(__arglist(ref s1, ref s2));  // one
-                    Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
-                        .WithArguments("s2")
-                        .WithLocation(16, 34),
-                    // (16,9): error CS8350: This combination of arguments to 'C.M2(__arglist)' is disallowed because it may expose variables referenced by parameter '__arglist' outside of their declaration scope
-                    //         M2(__arglist(ref s1, ref s2));  // one
-                    Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(__arglist(ref s1, ref s2))")
-                        .WithArguments("C.M2(__arglist)", "__arglist")
-                        .WithLocation(16, 9),
-                    // (17,26): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
-                    //         M2(__arglist(ref s2, ref s1));  // two
-                    Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
-                        .WithArguments("s2")
-                        .WithLocation(17, 26),
-                    // (17,9): error CS8350: This combination of arguments to 'C.M2(__arglist)' is disallowed because it may expose variables referenced by parameter '__arglist' outside of their declaration scope
-                    //         M2(__arglist(ref s2, ref s1));  // two
-                    Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(__arglist(ref s2, ref s1))")
-                        .WithArguments("C.M2(__arglist)", "__arglist")
-                        .WithLocation(17, 9)
-                );
+            ).VerifyDiagnostics(
+                // (16,34): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
+                //         M2(__arglist(ref s1, ref s2));  // one
+                Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
+                    .WithArguments("s2")
+                    .WithLocation(16, 34),
+                // (16,9): error CS8350: This combination of arguments to 'C.M2(__arglist)' is disallowed because it may expose variables referenced by parameter '__arglist' outside of their declaration scope
+                //         M2(__arglist(ref s1, ref s2));  // one
+                Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(__arglist(ref s1, ref s2))")
+                    .WithArguments("C.M2(__arglist)", "__arglist")
+                    .WithLocation(16, 9),
+                // (17,26): error CS8352: Cannot use local 's2' in this context because it may expose referenced variables outside of their declaration scope
+                //         M2(__arglist(ref s2, ref s1));  // two
+                Diagnostic(ErrorCode.ERR_EscapeLocal, "s2")
+                    .WithArguments("s2")
+                    .WithLocation(17, 26),
+                // (17,9): error CS8350: This combination of arguments to 'C.M2(__arglist)' is disallowed because it may expose variables referenced by parameter '__arglist' outside of their declaration scope
+                //         M2(__arglist(ref s2, ref s1));  // two
+                Diagnostic(ErrorCode.ERR_CallArgMixing, "M2(__arglist(ref s2, ref s1))")
+                    .WithArguments("C.M2(__arglist)", "__arglist")
+                    .WithLocation(17, 9)
+            );
         }
 
         [Fact]
@@ -2134,29 +2130,28 @@ struct Struct2
         return span; // 4
     }
 }";
-            CreateCompilationWithMscorlibAndSpan(source)
-                .VerifyDiagnostics(
-                    // (10,18): error CS8353: A result of a stackalloc expression of type 'Span<byte>' cannot be used in this context because it may be exposed outside of the containing method
-                    //             0 => stackalloc byte[10], // 1
-                    Diagnostic(ErrorCode.ERR_EscapeStackAlloc, "stackalloc byte[10]")
-                        .WithArguments("System.Span<byte>")
-                        .WithLocation(10, 18),
-                    // (21,18): error CS8353: A result of a stackalloc expression of type 'Span<byte>' cannot be used in this context because it may be exposed outside of the containing method
-                    //             0 => stackalloc byte[10], // 2
-                    Diagnostic(ErrorCode.ERR_EscapeStackAlloc, "stackalloc byte[10]")
-                        .WithArguments("System.Span<byte>")
-                        .WithLocation(21, 18),
-                    // (36,16): error CS8352: Cannot use local 'span' in this context because it may expose referenced variables outside of their declaration scope
-                    //         return span; // 3
-                    Diagnostic(ErrorCode.ERR_EscapeLocal, "span")
-                        .WithArguments("span")
-                        .WithLocation(36, 16),
-                    // (43,16): error CS8352: Cannot use local 'span' in this context because it may expose referenced variables outside of their declaration scope
-                    //         return span; // 4
-                    Diagnostic(ErrorCode.ERR_EscapeLocal, "span")
-                        .WithArguments("span")
-                        .WithLocation(43, 16)
-                );
+            CreateCompilationWithMscorlibAndSpan(source).VerifyDiagnostics(
+                // (10,18): error CS8353: A result of a stackalloc expression of type 'Span<byte>' cannot be used in this context because it may be exposed outside of the containing method
+                //             0 => stackalloc byte[10], // 1
+                Diagnostic(ErrorCode.ERR_EscapeStackAlloc, "stackalloc byte[10]")
+                    .WithArguments("System.Span<byte>")
+                    .WithLocation(10, 18),
+                // (21,18): error CS8353: A result of a stackalloc expression of type 'Span<byte>' cannot be used in this context because it may be exposed outside of the containing method
+                //             0 => stackalloc byte[10], // 2
+                Diagnostic(ErrorCode.ERR_EscapeStackAlloc, "stackalloc byte[10]")
+                    .WithArguments("System.Span<byte>")
+                    .WithLocation(21, 18),
+                // (36,16): error CS8352: Cannot use local 'span' in this context because it may expose referenced variables outside of their declaration scope
+                //         return span; // 3
+                Diagnostic(ErrorCode.ERR_EscapeLocal, "span")
+                    .WithArguments("span")
+                    .WithLocation(36, 16),
+                // (43,16): error CS8352: Cannot use local 'span' in this context because it may expose referenced variables outside of their declaration scope
+                //         return span; // 4
+                Diagnostic(ErrorCode.ERR_EscapeLocal, "span")
+                    .WithArguments("span")
+                    .WithLocation(43, 16)
+            );
         }
     }
 }

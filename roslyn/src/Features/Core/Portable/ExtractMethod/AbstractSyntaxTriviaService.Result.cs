@@ -124,9 +124,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 var resolver = annotationResolver ?? s_defaultAnnotationResolver;
 
                 var tokens = Enumerable.Range(
-                        (int)TriviaLocation.BeforeBeginningOfSpan,
-                        TriviaLocationsCount
-                    )
+                    (int)TriviaLocation.BeforeBeginningOfSpan,
+                    TriviaLocationsCount
+                )
                     .Cast<TriviaLocation>()
                     .ToDictionary(
                         location => location,
@@ -138,9 +138,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         || tokens[TriviaLocation.BeforeEndOfSpan].RawKind == 0 /* don't care */
                         || tokens[TriviaLocation.AfterBeginningOfSpan]
                             == tokens[TriviaLocation.BeforeEndOfSpan]
-                        || tokens[TriviaLocation.AfterBeginningOfSpan].GetPreviousToken(
-                            includeZeroWidth: true
-                        ) == tokens[TriviaLocation.BeforeEndOfSpan]
+                        || tokens[TriviaLocation.AfterBeginningOfSpan]
+                            .GetPreviousToken(includeZeroWidth: true)
+                            == tokens[TriviaLocation.BeforeEndOfSpan]
                         || tokens[TriviaLocation.AfterBeginningOfSpan].Span.End
                             <= tokens[TriviaLocation.BeforeEndOfSpan].SpanStart
                 );
@@ -159,9 +159,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 var resolver = triviaResolver ?? s_defaultTriviaResolver;
 
                 var triviaPairs = Enumerable.Range(
-                        (int)TriviaLocation.BeforeBeginningOfSpan,
-                        TriviaLocationsCount
-                    )
+                    (int)TriviaLocation.BeforeBeginningOfSpan,
+                    TriviaLocationsCount
+                )
                     .Cast<TriviaLocation>()
                     .ToDictionary(
                         location => location,
@@ -273,32 +273,28 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 tokenPairs[TriviaLocation.BeforeBeginningOfSpan] = new PreviousNextTokenPair
                 {
                     PreviousToken = tokens[TriviaLocation.BeforeBeginningOfSpan],
-                    NextToken = tokens[TriviaLocation.BeforeBeginningOfSpan].GetNextToken(
-                        includeZeroWidth: true
-                    )
+                    NextToken = tokens[TriviaLocation.BeforeBeginningOfSpan]
+                        .GetNextToken(includeZeroWidth: true)
                 };
 
                 tokenPairs[TriviaLocation.AfterBeginningOfSpan] = new PreviousNextTokenPair
                 {
-                    PreviousToken = tokens[TriviaLocation.AfterBeginningOfSpan].GetPreviousToken(
-                        includeZeroWidth: true
-                    ),
+                    PreviousToken = tokens[TriviaLocation.AfterBeginningOfSpan]
+                        .GetPreviousToken(includeZeroWidth: true),
                     NextToken = tokens[TriviaLocation.AfterBeginningOfSpan]
                 };
 
                 tokenPairs[TriviaLocation.BeforeEndOfSpan] = new PreviousNextTokenPair
                 {
                     PreviousToken = tokens[TriviaLocation.BeforeEndOfSpan],
-                    NextToken = tokens[TriviaLocation.BeforeEndOfSpan].GetNextToken(
-                        includeZeroWidth: true
-                    )
+                    NextToken = tokens[TriviaLocation.BeforeEndOfSpan]
+                        .GetNextToken(includeZeroWidth: true)
                 };
 
                 tokenPairs[TriviaLocation.AfterEndOfSpan] = new PreviousNextTokenPair
                 {
-                    PreviousToken = tokens[TriviaLocation.AfterEndOfSpan].GetPreviousToken(
-                        includeZeroWidth: true
-                    ),
+                    PreviousToken = tokens[TriviaLocation.AfterEndOfSpan]
+                        .GetPreviousToken(includeZeroWidth: true),
                     NextToken = tokens[TriviaLocation.AfterEndOfSpan]
                 };
 
@@ -351,7 +347,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     nextTriviaPair.LeadingTrivia
                     ?? SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
 
-                return tokenPair.PreviousToken.TrailingTrivia.Concat(trailingTrivia)
+                return tokenPair.PreviousToken.TrailingTrivia
+                    .Concat(trailingTrivia)
                     .Concat(leadingTrivia)
                     .Concat(tokenPair.NextToken.LeadingTrivia);
             }

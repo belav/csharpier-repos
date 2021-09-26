@@ -35,10 +35,8 @@ namespace System.IO.Strategies
             ValueTask result = base.DisposeAsync();
             Debug.Assert(result.IsCompleted, "the method must be sync, as it performs no flushing");
 
-            Interlocked.Exchange(
-                ref _reusableValueTaskSource,
-                null
-            )?._preallocatedOverlapped.Dispose();
+            Interlocked.Exchange(ref _reusableValueTaskSource, null)?._preallocatedOverlapped
+                .Dispose();
 
             return result;
         }
@@ -49,10 +47,8 @@ namespace System.IO.Strategies
             // before _preallocatedOverlapped is disposed
             base.Dispose(disposing);
 
-            Interlocked.Exchange(
-                ref _reusableValueTaskSource,
-                null
-            )?._preallocatedOverlapped.Dispose();
+            Interlocked.Exchange(ref _reusableValueTaskSource, null)?._preallocatedOverlapped
+                .Dispose();
         }
 
         protected override void OnInitFromHandle(SafeFileHandle handle)
@@ -270,9 +266,9 @@ namespace System.IO.Strategies
 
         public override void Write(byte[] buffer, int offset, int count) =>
             WriteAsyncInternal(
-                    new ReadOnlyMemory<byte>(buffer, offset, count),
-                    CancellationToken.None
-                )
+                new ReadOnlyMemory<byte>(buffer, offset, count),
+                CancellationToken.None
+            )
                 .AsTask()
                 .GetAwaiter()
                 .GetResult();
@@ -439,14 +435,14 @@ namespace System.IO.Strategies
             try
             {
                 await FileStreamHelpers.AsyncModeCopyToAsync(
-                        _fileHandle,
-                        _path,
-                        CanSeek,
-                        _filePosition,
-                        destination,
-                        bufferSize,
-                        cancellationToken
-                    )
+                    _fileHandle,
+                    _path,
+                    CanSeek,
+                    _filePosition,
+                    destination,
+                    bufferSize,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 

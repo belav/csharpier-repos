@@ -269,12 +269,12 @@ namespace Microsoft.AspNetCore.Routing
 
             // Act
             var foundEndpoints = addressScheme.FindEndpoints(
-                    new RouteValuesAddress
-                    {
-                        ExplicitValues = new RouteValueDictionary(new { id = 7 }),
-                        AmbientValues = new RouteValueDictionary(new { zipCode = 3500 }),
-                    }
-                )
+                new RouteValuesAddress
+                {
+                    ExplicitValues = new RouteValueDictionary(new { id = 7 }),
+                    AmbientValues = new RouteValueDictionary(new { zipCode = 3500 }),
+                }
+            )
                 .ToList();
 
             // Assert

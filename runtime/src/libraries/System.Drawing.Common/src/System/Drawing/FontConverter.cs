@@ -93,15 +93,16 @@ namespace System.Drawing
 
                 if (destinationType == typeof(InstanceDescriptor))
                 {
-                    ConstructorInfo? met = typeof(Font).GetConstructor(
-                        new Type[]
-                        {
-                            typeof(string),
-                            typeof(float),
-                            typeof(FontStyle),
-                            typeof(GraphicsUnit)
-                        }
-                    );
+                    ConstructorInfo? met = typeof(Font)
+                        .GetConstructor(
+                            new Type[]
+                            {
+                                typeof(string),
+                                typeof(float),
+                                typeof(FontStyle),
+                                typeof(GraphicsUnit)
+                            }
+                        );
                     object[] args = new object[4];
                     args[0] = font.Name;
                     args[1] = font.Size;
@@ -163,11 +164,8 @@ namespace System.Drawing
             {
                 // Get the style index (if any). The size is a bit problematic because it can be formatted differently
                 // depending on the culture, we'll parse it last.
-                int styleIndex = culture.CompareInfo.IndexOf(
-                    font,
-                    StylePrefix,
-                    CompareOptions.IgnoreCase
-                );
+                int styleIndex = culture.CompareInfo
+                    .IndexOf(font, StylePrefix, CompareOptions.IgnoreCase);
 
                 if (styleIndex != -1)
                 {

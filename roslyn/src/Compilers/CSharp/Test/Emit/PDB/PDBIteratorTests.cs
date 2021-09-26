@@ -964,9 +964,8 @@ class C
             );
             CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     AssertEx.Equal(
@@ -1174,9 +1173,8 @@ class C
 
             var v = CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     Assert.Equal(
@@ -1567,9 +1565,8 @@ class C
             var v = CompileAndVerify(
                 source,
                 new[] { CSharpRef },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     Assert.Equal(
@@ -1768,9 +1765,8 @@ public class C
             var result = compilation.Emit(
                 peStream,
                 pdbStream,
-                options: EmitOptions.Default.WithDebugInformationFormat(
-                    DebugInformationFormat.PortablePdb
-                )
+                options: EmitOptions.Default
+                    .WithDebugInformationFormat(DebugInformationFormat.PortablePdb)
             );
 
             Assert.True(result.Success);

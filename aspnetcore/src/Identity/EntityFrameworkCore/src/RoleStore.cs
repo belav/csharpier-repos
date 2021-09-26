@@ -472,11 +472,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
                 throw new ArgumentNullException(nameof(claim));
             }
             var claims = await RoleClaims.Where(
-                    rc =>
-                        rc.RoleId.Equals(role.Id)
-                        && rc.ClaimValue == claim.Value
-                        && rc.ClaimType == claim.Type
-                )
+                rc =>
+                    rc.RoleId.Equals(role.Id)
+                    && rc.ClaimValue == claim.Value
+                    && rc.ClaimType == claim.Type
+            )
                 .ToListAsync(cancellationToken);
             foreach (var c in claims)
             {

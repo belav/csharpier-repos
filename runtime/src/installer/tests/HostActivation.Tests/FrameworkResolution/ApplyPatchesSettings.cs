@@ -25,10 +25,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void Default()
         {
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
                         runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.2")
                     )
-                )
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3");
         }
 
@@ -39,12 +40,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void AllLocations(SettingLocation location)
         {
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.2")
-                        )
-                        .With(ApplyPatchesSetting(location, false))
-                )
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
+                        runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.2")
+                    )
+                    .With(ApplyPatchesSetting(location, false))
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.2");
         }
 
@@ -53,31 +54,29 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void Priority()
         {
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
                         runtimeConfig =>
                             runtimeConfig.WithApplyPatches(true)
                                 .WithFramework(
-                                    new RuntimeConfig.Framework(
-                                        MicrosoftNETCoreApp,
-                                        "5.1.2"
-                                    ).WithApplyPatches(false)
+                                    new RuntimeConfig.Framework(MicrosoftNETCoreApp, "5.1.2")
+                                        .WithApplyPatches(false)
                                 )
                     )
-                )
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.2");
 
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
                         runtimeConfig =>
                             runtimeConfig.WithApplyPatches(false)
                                 .WithFramework(
-                                    new RuntimeConfig.Framework(
-                                        MicrosoftNETCoreApp,
-                                        "5.1.2"
-                                    ).WithApplyPatches(true)
+                                    new RuntimeConfig.Framework(MicrosoftNETCoreApp, "5.1.2")
+                                        .WithApplyPatches(true)
                                 )
                     )
-                )
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3");
         }
 
@@ -91,10 +90,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                     .RuntimeConfig(runtimeConfig => runtimeConfig.WithApplyPatches(false));
 
                 RunTest(
-                        new TestSettings().WithRuntimeConfigCustomizer(
+                    new TestSettings()
+                        .WithRuntimeConfigCustomizer(
                             runtimeConfig => runtimeConfig.WithFramework(MiddleWare, "2.1.0")
                         )
-                    )
+                )
                     .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.2")
                     .And.HaveResolvedFramework(MiddleWare, "2.1.2");
             }
@@ -113,10 +113,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                     );
 
                 RunTest(
-                        new TestSettings().WithRuntimeConfigCustomizer(
+                    new TestSettings()
+                        .WithRuntimeConfigCustomizer(
                             runtimeConfig => runtimeConfig.WithFramework(MiddleWare, "2.1.0")
                         )
-                    )
+                )
                     .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.2")
                     .And.HaveResolvedFramework(MiddleWare, "2.1.2");
             }
@@ -129,11 +130,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void NoInheritance(SettingLocation settingLocation)
         {
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                            runtimeConfig => runtimeConfig.WithFramework(MiddleWare, "2.1.2")
-                        )
-                        .With(ApplyPatchesSetting(settingLocation, false, MiddleWare))
-                )
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
+                        runtimeConfig => runtimeConfig.WithFramework(MiddleWare, "2.1.2")
+                    )
+                    .With(ApplyPatchesSetting(settingLocation, false, MiddleWare))
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3");
         }
 

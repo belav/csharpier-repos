@@ -57,13 +57,13 @@ namespace Microsoft.CodeAnalysis.AddImport
                 }
 
                 await FindNugetOrReferenceAssemblyTypeReferencesAsync(
-                        allReferences,
-                        nameNode,
-                        name,
-                        arity,
-                        inAttributeContext,
-                        cancellationToken
-                    )
+                    allReferences,
+                    nameNode,
+                    name,
+                    arity,
+                    inAttributeContext,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -79,24 +79,24 @@ namespace Microsoft.CodeAnalysis.AddImport
                 if (arity == 0 && inAttributeContext)
                 {
                     await FindNugetOrReferenceAssemblyTypeReferencesWorkerAsync(
-                            allReferences,
-                            nameNode,
-                            name + AttributeSuffix,
-                            arity,
-                            isAttributeSearch: true,
-                            cancellationToken: cancellationToken
-                        )
+                        allReferences,
+                        nameNode,
+                        name + AttributeSuffix,
+                        arity,
+                        isAttributeSearch: true,
+                        cancellationToken: cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
                 await FindNugetOrReferenceAssemblyTypeReferencesWorkerAsync(
-                        allReferences,
-                        nameNode,
-                        name,
-                        arity,
-                        isAttributeSearch: false,
-                        cancellationToken: cancellationToken
-                    )
+                    allReferences,
+                    nameNode,
+                    name,
+                    arity,
+                    isAttributeSearch: false,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -113,13 +113,13 @@ namespace Microsoft.CodeAnalysis.AddImport
                 {
                     cancellationToken.ThrowIfCancellationRequested();
                     await FindReferenceAssemblyTypeReferencesAsync(
-                            allReferences,
-                            nameNode,
-                            name,
-                            arity,
-                            isAttributeSearch,
-                            cancellationToken
-                        )
+                        allReferences,
+                        nameNode,
+                        name,
+                        arity,
+                        isAttributeSearch,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -127,14 +127,14 @@ namespace Microsoft.CodeAnalysis.AddImport
                 {
                     cancellationToken.ThrowIfCancellationRequested();
                     await FindNugetTypeReferencesAsync(
-                            packageSource,
-                            allReferences,
-                            nameNode,
-                            name,
-                            arity,
-                            isAttributeSearch,
-                            cancellationToken
-                        )
+                        packageSource,
+                        allReferences,
+                        nameNode,
+                        name,
+                        arity,
+                        isAttributeSearch,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -150,10 +150,10 @@ namespace Microsoft.CodeAnalysis.AddImport
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 var results = await _symbolSearchService.FindReferenceAssembliesWithTypeAsync(
-                        name,
-                        arity,
-                        cancellationToken
-                    )
+                    name,
+                    arity,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var project = _document.Project;
@@ -162,14 +162,14 @@ namespace Microsoft.CodeAnalysis.AddImport
                 {
                     cancellationToken.ThrowIfCancellationRequested();
                     await HandleReferenceAssemblyReferenceAsync(
-                            allReferences,
-                            nameNode,
-                            project,
-                            isAttributeSearch,
-                            result,
-                            weight: allReferences.Count,
-                            cancellationToken: cancellationToken
-                        )
+                        allReferences,
+                        nameNode,
+                        project,
+                        isAttributeSearch,
+                        result,
+                        weight: allReferences.Count,
+                        cancellationToken: cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -186,11 +186,11 @@ namespace Microsoft.CodeAnalysis.AddImport
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 var results = await _symbolSearchService.FindPackagesWithTypeAsync(
-                        source.Name,
-                        name,
-                        arity,
-                        cancellationToken
-                    )
+                    source.Name,
+                    name,
+                    arity,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var result in results)

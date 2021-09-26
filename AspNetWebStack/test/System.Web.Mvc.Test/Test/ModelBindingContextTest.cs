@@ -17,10 +17,8 @@ namespace System.Web.Mvc.Test
             ModelBindingContext originalBindingContext = new ModelBindingContext()
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(object)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(object)),
                 ModelName = "theName",
                 ModelState = new ModelStateDictionary(),
                 PropertyFilter = _ => false,
@@ -97,10 +95,8 @@ namespace System.Web.Mvc.Test
             // Act
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                    () => 42,
-                    typeof(int)
-                )
+                ModelMetadata = ModelMetadataProviders.Current
+                    .GetMetadataForType(() => 42, typeof(int))
             };
 
             // Assert

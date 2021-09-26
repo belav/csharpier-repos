@@ -2173,8 +2173,8 @@ namespace System.Web.Http.Owin
                     .Returns(false);
                 bool calledUseBufferedOutputStream = false;
                 bufferPolicyMock.Setup(
-                        p => p.UseBufferedOutputStream(It.IsAny<HttpResponseMessage>())
-                    )
+                    p => p.UseBufferedOutputStream(It.IsAny<HttpResponseMessage>())
+                )
                     .Callback(() => calledUseBufferedOutputStream = true)
                     .Returns(false);
                 options.BufferPolicySelector = bufferPolicyMock.Object;
@@ -2255,12 +2255,12 @@ namespace System.Web.Http.Owin
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<ExceptionHandlerContext, CancellationToken>((c, i) => c.Result = result)
                 .Returns(Task.FromResult(0));
             return mock.Object;
@@ -2300,8 +2300,8 @@ namespace System.Web.Http.Owin
             >(MockBehavior.Strict);
             object disableBufferingValue = disableBuffering;
             environmentMock.Setup(
-                    d => d.TryGetValue("server.DisableRequestBuffering", out disableBufferingValue)
-                )
+                d => d.TryGetValue("server.DisableRequestBuffering", out disableBufferingValue)
+            )
                 .Returns(true);
             IDictionary<string, object> environment = environmentMock.Object;
 
@@ -2348,8 +2348,8 @@ namespace System.Web.Http.Owin
             >(MockBehavior.Strict);
             object disableBufferingValue = disableBuffering;
             environmentMock.Setup(
-                    d => d.TryGetValue("server.DisableResponseBuffering", out disableBufferingValue)
-                )
+                d => d.TryGetValue("server.DisableResponseBuffering", out disableBufferingValue)
+            )
                 .Returns(true);
             IDictionary<string, object> environment = environmentMock.Object;
 
@@ -2395,24 +2395,24 @@ namespace System.Web.Http.Owin
             Mock<MediaTypeFormatter> mock = new Mock<MediaTypeFormatter>();
             mock.Setup(f => f.CanWriteType(It.IsAny<Type>())).Returns(true);
             mock.Setup(
-                    f =>
-                        f.GetPerRequestFormatterInstance(
-                            It.IsAny<Type>(),
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<MediaTypeHeaderValue>()
-                        )
-                )
+                f =>
+                    f.GetPerRequestFormatterInstance(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<MediaTypeHeaderValue>()
+                    )
+            )
                 .Returns(mock.Object);
             mock.Setup(
-                    f =>
-                        f.WriteToStreamAsync(
-                            It.IsAny<Type>(),
-                            It.IsAny<object>(),
-                            It.IsAny<Stream>(),
-                            It.IsAny<HttpContent>(),
-                            It.IsAny<TransportContext>()
-                        )
-                )
+                f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+            )
                 .Returns(CreateFaultedTask(exception));
             return mock.Object;
         }
@@ -2501,12 +2501,12 @@ namespace System.Web.Http.Owin
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(Task.FromResult(0));
             return mock;
         }
@@ -2520,12 +2520,8 @@ namespace System.Web.Http.Owin
         {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
             mock.Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(Task.FromResult(0));
             return mock;
         }

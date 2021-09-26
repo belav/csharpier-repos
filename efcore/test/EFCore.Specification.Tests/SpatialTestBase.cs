@@ -113,7 +113,8 @@ namespace Microsoft.EntityFrameworkCore
                 from e in db.Set<PointEntity>()
                 orderby e.Id
                 select new { e.Id, e.Point, Point.Empty, DateTime.UtcNow, Guid = Guid.NewGuid() }
-            ).FirstOrDefault();
+            )
+                .FirstOrDefault();
         }
 
         [ConditionalFact]

@@ -74,11 +74,8 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
                     Assert.True(feature.IsConsentNeeded);
                     Assert.False(feature.HasConsent);
                     Assert.False(feature.CanTrack);
-                    context.Response.Cookies.Append(
-                        "Test",
-                        "Value",
-                        new CookieOptions() { IsEssential = false }
-                    );
+                    context.Response.Cookies
+                        .Append("Test", "Value", new CookieOptions() { IsEssential = false });
                     return Task.CompletedTask;
                 }
             );
@@ -107,11 +104,8 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
                     Assert.True(feature.IsConsentNeeded);
                     Assert.False(feature.HasConsent);
                     Assert.False(feature.CanTrack);
-                    context.Response.Cookies.Append(
-                        "Test",
-                        "Value",
-                        new CookieOptions() { IsEssential = false }
-                    );
+                    context.Response.Cookies
+                        .Append("Test", "Value", new CookieOptions() { IsEssential = false });
                     return Task.CompletedTask;
                 }
             );
@@ -133,11 +127,8 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
                     Assert.True(feature.IsConsentNeeded);
                     Assert.False(feature.HasConsent);
                     Assert.False(feature.CanTrack);
-                    context.Response.Cookies.Append(
-                        "Test",
-                        "Value",
-                        new CookieOptions() { IsEssential = true }
-                    );
+                    context.Response.Cookies
+                        .Append("Test", "Value", new CookieOptions() { IsEssential = true });
                     return Task.CompletedTask;
                 }
             );
@@ -169,11 +160,8 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
                     Assert.True(feature.IsConsentNeeded);
                     Assert.True(feature.HasConsent);
                     Assert.True(feature.CanTrack);
-                    context.Response.Cookies.Append(
-                        "Test",
-                        "Value",
-                        new CookieOptions() { IsEssential = true }
-                    );
+                    context.Response.Cookies
+                        .Append("Test", "Value", new CookieOptions() { IsEssential = true });
                     return Task.CompletedTask;
                 }
             );
@@ -731,25 +719,22 @@ namespace Microsoft.AspNetCore.CookiePolicy.Test
         )
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.Configure(
-                                app =>
-                                {
-                                    app.UseCookiePolicy();
-                                    app.Run(handleRequest);
-                                }
-                            )
-                            .UseTestServer();
-                    }
-                )
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.Configure(configureOptions);
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.Configure(
+                        app =>
+                        {
+                            app.UseCookiePolicy();
+                            app.Run(handleRequest);
+                        }
+                    ).UseTestServer();
+                }
+            ).ConfigureServices(
+                services =>
+                {
+                    services.Configure(configureOptions);
+                }
+            ).Build();
 
             var server = host.GetTestServer();
 

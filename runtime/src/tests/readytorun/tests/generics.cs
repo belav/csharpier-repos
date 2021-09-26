@@ -246,109 +246,87 @@ class Program
         // FIELDS TEST
         var fobj1 = new GenBase<MyIdClass0, int>();
         var fobj2 = new GenBase<MyIdClass1, int>();
-        GenBase<MyIdClass0, int>.SetFieldsTest(
-            fobj1,
-            new MyIdClass0("1"),
-            new MyIdClass0("2"),
-            new MyIdClass0("3"),
-            1,
-            2,
-            3
-        );
-        GenBase<MyIdClass1, int>.SetFieldsTest(
-            fobj2,
-            new MyIdClass1("1"),
-            new MyIdClass1("2"),
-            new MyIdClass1("3"),
-            1,
-            2,
-            3
-        );
+        GenBase<MyIdClass0, int>
+            .SetFieldsTest(
+                fobj1,
+                new MyIdClass0("1"),
+                new MyIdClass0("2"),
+                new MyIdClass0("3"),
+                1,
+                2,
+                3
+            );
+        GenBase<MyIdClass1, int>
+            .SetFieldsTest(
+                fobj2,
+                new MyIdClass1("1"),
+                new MyIdClass1("2"),
+                new MyIdClass1("3"),
+                1,
+                2,
+                3
+            );
 
-        GenBase<MyIdClass0, int>.GetFieldsTest(
-            fobj1,
-            "MyIdClass0=1",
-            "MyIdClass0=2",
-            "MyIdClass0=3",
-            1,
-            2,
-            3
-        );
-        GenBase<MyIdClass1, int>.GetFieldsTest(
-            fobj2,
-            "MyIdClass1=1",
-            "MyIdClass1=2",
-            "MyIdClass1=3",
-            1,
-            2,
-            3
-        );
+        GenBase<MyIdClass0, int>
+            .GetFieldsTest(fobj1, "MyIdClass0=1", "MyIdClass0=2", "MyIdClass0=3", 1, 2, 3);
+        GenBase<MyIdClass1, int>
+            .GetFieldsTest(fobj2, "MyIdClass1=1", "MyIdClass1=2", "MyIdClass1=3", 1, 2, 3);
 
         Thread t = new Thread(
             new ThreadStart(
                 () =>
                 {
-                    GenBase<MyIdClass0, int>.SetFieldsTest(
-                        fobj1,
-                        new MyIdClass0("11"),
-                        new MyIdClass0("22"),
-                        new MyIdClass0("33"),
-                        11,
-                        22,
-                        33
-                    );
-                    GenBase<MyIdClass1, int>.SetFieldsTest(
-                        fobj2,
-                        new MyIdClass1("11"),
-                        new MyIdClass1("22"),
-                        new MyIdClass1("33"),
-                        11,
-                        22,
-                        33
-                    );
+                    GenBase<MyIdClass0, int>
+                        .SetFieldsTest(
+                            fobj1,
+                            new MyIdClass0("11"),
+                            new MyIdClass0("22"),
+                            new MyIdClass0("33"),
+                            11,
+                            22,
+                            33
+                        );
+                    GenBase<MyIdClass1, int>
+                        .SetFieldsTest(
+                            fobj2,
+                            new MyIdClass1("11"),
+                            new MyIdClass1("22"),
+                            new MyIdClass1("33"),
+                            11,
+                            22,
+                            33
+                        );
 
-                    GenBase<MyIdClass0, int>.GetFieldsTest(
-                        fobj1,
-                        "MyIdClass0=11",
-                        "MyIdClass0=22",
-                        "MyIdClass0=33",
-                        11,
-                        22,
-                        33
-                    );
-                    GenBase<MyIdClass1, int>.GetFieldsTest(
-                        fobj2,
-                        "MyIdClass1=11",
-                        "MyIdClass1=22",
-                        "MyIdClass1=33",
-                        11,
-                        22,
-                        33
-                    );
+                    GenBase<MyIdClass0, int>
+                        .GetFieldsTest(
+                            fobj1,
+                            "MyIdClass0=11",
+                            "MyIdClass0=22",
+                            "MyIdClass0=33",
+                            11,
+                            22,
+                            33
+                        );
+                    GenBase<MyIdClass1, int>
+                        .GetFieldsTest(
+                            fobj2,
+                            "MyIdClass1=11",
+                            "MyIdClass1=22",
+                            "MyIdClass1=33",
+                            11,
+                            22,
+                            33
+                        );
                 }
             )
         );
         t.Start();
         t.Join();
 
-        GenBase<MyIdClass0, int>.GetFieldsTest(
-            fobj1,
-            "MyIdClass0=11",
-            "MyIdClass0=22",
-            "MyIdClass0=3",
-            11,
-            22,
-            3
-        );
-        GenBase<MyIdClass1, int>.GetFieldsTest(
-            fobj2,
-            "MyIdClass1=11",
-            "MyIdClass1=22",
-            "MyIdClass1=3",
-            11,
-            22,
-            3
-        );
+        GenBase<MyIdClass0, int>
+            .GetFieldsTest(fobj1, "MyIdClass0=11", "MyIdClass0=22", "MyIdClass0=3", 11, 22, 3);
+        GenBase<MyIdClass1, int>
+            .GetFieldsTest(fobj2, "MyIdClass1=11", "MyIdClass1=22", "MyIdClass1=3", 11, 22, 3);
     }
 
     static void RunTest5()
@@ -1322,7 +1300,8 @@ class Program
             object o = new Foo<string>();
 
             {
-                MethodInfo mi = typeof(Foo<string>).GetMethod("SetAndCheck")
+                MethodInfo mi = typeof(Foo<string>)
+                    .GetMethod("SetAndCheck")
                     .MakeGenericMethod(typeof(string));
                 if (!(bool)mi.Invoke(o, new object[] { 123, "hello" }))
                     s_NumErrors++;
@@ -1337,7 +1316,8 @@ class Program
 
             // Uncomment when we have the type loader to buld invoke stub dictionaries.
             {
-                MethodInfo mi = typeof(Foo<string>).GetMethod("SetAndCheck")
+                MethodInfo mi = typeof(Foo<string>)
+                    .GetMethod("SetAndCheck")
                     .MakeGenericMethod(typeof(object));
                 if ((bool)mi.Invoke(o, new object[] { 123, new object() }))
                     s_NumErrors++;
@@ -1346,7 +1326,8 @@ class Program
             // VirtualInvokeMap testing
             {
                 // Rooting some methods to make them reflectable
-                new BaseClass<string>().Method1("string");
+                new BaseClass<string>()
+                    .Method1("string");
                 new BaseClass<string>().Method2("string");
                 new BaseClass<string>().Method3("string");
                 new BaseClass<string>().Method4("string");
@@ -1373,25 +1354,26 @@ class Program
                 new DerivedClass2<string>().GVMethod4<string>("string", "string2");
                 Func<IFace<string>> f = () => new BaseClass<string>(); // Hack to prevent devirtualization
                 f().IFaceMethod1("string");
-                ((IFace<string>)new BaseClass<string>()).IFaceGVMethod1<string>(
-                    "string1",
-                    "string2"
-                );
+                ((IFace<string>)new BaseClass<string>())
+                    .IFaceGVMethod1<string>("string1", "string2");
 
                 MethodInfo m1 = typeof(BaseClass<string>).GetMethod("Method1");
                 MethodInfo m2 = typeof(BaseClass<string>).GetMethod("Method2");
                 MethodInfo m3 = typeof(BaseClass<string>).GetMethod("Method3");
                 MethodInfo m4 = typeof(BaseClass<string>).GetMethod("Method4");
-                MethodInfo unusedMethod = typeof(BaseClass<string>).GetMethod(
-                    "VirtualButNotUsedVirtuallyMethod"
-                );
-                MethodInfo gvm1 = typeof(BaseClass<string>).GetMethod("GVMethod1")
+                MethodInfo unusedMethod = typeof(BaseClass<string>)
+                    .GetMethod("VirtualButNotUsedVirtuallyMethod");
+                MethodInfo gvm1 = typeof(BaseClass<string>)
+                    .GetMethod("GVMethod1")
                     .MakeGenericMethod(typeof(string));
-                MethodInfo gvm2 = typeof(BaseClass<string>).GetMethod("GVMethod2")
+                MethodInfo gvm2 = typeof(BaseClass<string>)
+                    .GetMethod("GVMethod2")
                     .MakeGenericMethod(typeof(string));
-                MethodInfo gvm3 = typeof(BaseClass<string>).GetMethod("GVMethod3")
+                MethodInfo gvm3 = typeof(BaseClass<string>)
+                    .GetMethod("GVMethod3")
                     .MakeGenericMethod(typeof(string));
-                MethodInfo gvm4 = typeof(BaseClass<string>).GetMethod("GVMethod4")
+                MethodInfo gvm4 = typeof(BaseClass<string>)
+                    .GetMethod("GVMethod4")
                     .MakeGenericMethod(typeof(string));
                 Verify("BaseClass.Method1", m1.Invoke(new BaseClass<string>(), new[] { "" }));
                 Verify("BaseClass.Method2", m2.Invoke(new BaseClass<string>(), new[] { "" }));
@@ -1476,11 +1458,14 @@ class Program
                 m1 = typeof(DerivedClass1<string>).GetMethod("Method1");
                 m2 = typeof(DerivedClass1<string>).GetMethod("Method2");
                 m3 = typeof(DerivedClass1<string>).GetMethod("Method3");
-                gvm1 = typeof(DerivedClass1<string>).GetMethod("GVMethod1")
+                gvm1 = typeof(DerivedClass1<string>)
+                    .GetMethod("GVMethod1")
                     .MakeGenericMethod(typeof(string));
-                gvm2 = typeof(DerivedClass1<string>).GetMethod("GVMethod2")
+                gvm2 = typeof(DerivedClass1<string>)
+                    .GetMethod("GVMethod2")
                     .MakeGenericMethod(typeof(string));
-                gvm3 = typeof(DerivedClass1<string>).GetMethod(
+                gvm3 = typeof(DerivedClass1<string>)
+                    .GetMethod(
                         "GVMethod3",
                         BindingFlags.Instance
                             | BindingFlags.Static
@@ -1539,7 +1524,8 @@ class Program
 
                 m3 = typeof(DerivedClass2<string>).GetMethod("Method3");
                 m4 = typeof(DerivedClass2<string>).GetMethod("Method4");
-                gvm3 = typeof(DerivedClass2<string>).GetMethod(
+                gvm3 = typeof(DerivedClass2<string>)
+                    .GetMethod(
                         "GVMethod3",
                         BindingFlags.Instance
                             | BindingFlags.Static
@@ -1547,7 +1533,8 @@ class Program
                             | BindingFlags.DeclaredOnly
                     )
                     .MakeGenericMethod(typeof(string));
-                gvm4 = typeof(DerivedClass2<string>).GetMethod(
+                gvm4 = typeof(DerivedClass2<string>)
+                    .GetMethod(
                         "GVMethod4",
                         BindingFlags.Instance
                             | BindingFlags.Static
@@ -1575,7 +1562,8 @@ class Program
                 // BaseClass<int>.Method1 has the same slot as BaseClass<float>.Method3 on CoreRT, because vtable entries
                 // get populated on demand (the first type won't get a Method3 entry, and the latter won't get a Method1 entry)
                 // On ProjectN, both types will get vtable entries for both methods.
-                new BaseClass<int>().Method1(1);
+                new BaseClass<int>()
+                    .Method1(1);
                 m1 = typeof(BaseClass<int>).GetMethod("Method1");
                 Verify(
                     "BaseClass.Method1",
@@ -1606,7 +1594,8 @@ class Program
                 );
 
                 m1 = typeof(IFace<string>).GetMethod("IFaceMethod1");
-                gvm1 = typeof(IFace<string>).GetMethod("IFaceGVMethod1")
+                gvm1 = typeof(IFace<string>)
+                    .GetMethod("IFaceGVMethod1")
                     .MakeGenericMethod(typeof(string));
                 Verify("BaseClass.IFaceMethod1", m1.Invoke(new BaseClass<string>(), new[] { "" }));
                 Verify(
@@ -1678,7 +1667,8 @@ class Program
                 throw new Exception();
 
             // Set the value from shared code
-            TypeWithThreadStaticField<string>.Write(112);
+            TypeWithThreadStaticField<string>
+                .Write(112);
 
             // Now read the value from non-shared code
             if (TypeWithThreadStaticField<string>.X != 112)
@@ -2227,14 +2217,12 @@ class Program
             }
 
             {
-                string res = (
-                    (IFace<string>)new AnotherDerivedClass<string>()
-                ).IFaceGVMethod1<string>("string1", "string2");
+                string res = ((IFace<string>)new AnotherDerivedClass<string>())
+                    .IFaceGVMethod1<string>("string1", "string2");
                 WriteLineWithVerification("AnotherBaseClass.IFaceGVMethod1", res);
 
-                res = ((IBar<int>)new BarImplementor()).IBarGVMethod<string>(
-                    (i) => "BarImplementor:" + i.ToString()
-                );
+                res = ((IBar<int>)new BarImplementor())
+                    .IBarGVMethod<string>((i) => "BarImplementor:" + i.ToString());
                 WriteLineWithVerification("BarImplementor:123", res);
 
                 Yahoo<int> y = new YahooDerived();
@@ -2608,9 +2596,8 @@ class Program
             }
 
             {
-                var dynamicDerivedOfString = typeof(DynamicDerived<>).MakeGenericType(
-                    typeof(string)
-                );
+                var dynamicDerivedOfString = typeof(DynamicDerived<>)
+                    .MakeGenericType(typeof(string));
                 object dynamicDerivedObj = Activator.CreateInstance(dynamicDerivedOfString);
                 var virtualMethodDynamicDerived = dynamicDerivedOfString.GetMethod("VirtualMethod");
                 string result = (string)virtualMethodDynamicDerived.Invoke(
@@ -2638,13 +2625,12 @@ class Program
             }
 
             {
-                var dynamicDerivedOfString = typeof(DynamicDerived<>).MakeGenericType(
-                    typeof(string)
-                );
+                var dynamicDerivedOfString = typeof(DynamicDerived<>)
+                    .MakeGenericType(typeof(string));
                 object dynamicDerivedObj = Activator.CreateInstance(dynamicDerivedOfString);
                 var virtualMethodDynamicDerived = dynamicDerivedOfString.GetMethod(
-                        "GenericVirtualMethod"
-                    )
+                    "GenericVirtualMethod"
+                )
                     .MakeGenericMethod(new[] { typeof(string) });
                 string result = (string)virtualMethodDynamicDerived.Invoke(
                     dynamicDerivedObj,
@@ -2716,7 +2702,8 @@ class Program
 
                 typeof(Foo<ClassType>).GetField("s_stringField").SetValue(null, "ThisIsAString1");
                 typeof(Foo<ClassType>).GetField("s_objectField").SetValue(null, "ThisIsAString2");
-                typeof(Foo<ClassType>).GetField("s_kvp")
+                typeof(Foo<ClassType>)
+                    .GetField("s_kvp")
                     .SetValue(null, new KeyValuePair<string, string>("ThisIs", "AString"));
                 Verify("ThisIsAString1", (string)Foo<ClassType>.s_stringField);
                 Verify("ThisIsAString2", (string)Foo<ClassType>.s_objectField);
@@ -2745,7 +2732,8 @@ class Program
 
                 typeof(Foo<StructType>).GetField("s_stringField").SetValue(null, "ThisIsAString3");
                 typeof(Foo<StructType>).GetField("s_objectField").SetValue(null, "ThisIsAString4");
-                typeof(Foo<StructType>).GetField("s_kvp")
+                typeof(Foo<StructType>)
+                    .GetField("s_kvp")
                     .SetValue(null, new KeyValuePair<string, string>("ThisIs1", "AString1"));
                 Verify("ThisIsAString3", (string)Foo<StructType>.s_stringField);
                 Verify("ThisIsAString4", (string)Foo<StructType>.s_objectField);
@@ -2774,7 +2762,8 @@ class Program
 
                 typeof(Bar).GetField("s_stringField").SetValue(null, "ThisIsAString5");
                 typeof(Bar).GetField("s_objectField").SetValue(null, "ThisIsAString6");
-                typeof(Bar).GetField("s_kvp")
+                typeof(Bar)
+                    .GetField("s_kvp")
                     .SetValue(null, new KeyValuePair<string, string>("ThisIs2", "AString2"));
                 Verify("ThisIsAString5", (string)Bar.s_stringField);
                 Verify("ThisIsAString6", (string)Bar.s_objectField);
@@ -2823,9 +2812,11 @@ class Program
                 fi = typeof(Foo<ClassType>).GetField("m_objectField");
                 Verify("4545", fi.GetValue(fooClassType));
 
-                typeof(Foo<ClassType>).GetField("m_stringField")
+                typeof(Foo<ClassType>)
+                    .GetField("m_stringField")
                     .SetValue(fooClassType, "ThisIsAString7");
-                typeof(Foo<ClassType>).GetField("m_objectField")
+                typeof(Foo<ClassType>)
+                    .GetField("m_objectField")
                     .SetValue(fooClassType, "ThisIsAString8");
                 Verify("ThisIsAString7", (string)fooClassType.m_stringField);
                 Verify("ThisIsAString8", (string)fooClassType.m_objectField);
@@ -2845,9 +2836,11 @@ class Program
                 fi = typeof(Foo<StructType>).GetField("m_objectField");
                 Verify("5656", fi.GetValue(fooStructType));
 
-                typeof(Foo<StructType>).GetField("m_stringField")
+                typeof(Foo<StructType>)
+                    .GetField("m_stringField")
                     .SetValue(fooStructType, "ThisIsAString9");
-                typeof(Foo<StructType>).GetField("m_objectField")
+                typeof(Foo<StructType>)
+                    .GetField("m_objectField")
                     .SetValue(fooStructType, "ThisIsAString10");
                 Verify("ThisIsAString9", (string)fooStructType.m_stringField);
                 Verify("ThisIsAString10", (string)fooStructType.m_objectField);
@@ -2878,10 +2871,10 @@ class Program
         {
             // Testing for compilation failures due to references to unused static bases
             // See: https://github.com/dotnet/corert/issues/3211
-            var a =
-                typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithGCStatics>).ToString();
-            var b =
-                typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithNonGCStatics>).ToString();
+            var a = typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithGCStatics>)
+                .ToString();
+            var b = typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithNonGCStatics>)
+                .ToString();
         }
 
         public static void Run()
@@ -2933,7 +2926,8 @@ class Program
             {
                 // Call an instance method on something we never allocated, but overrides a used virtual.
                 // This asserted the compiler when trying to build a template for Unused<__Canon>.
-                ((Unused<object>)s_ref).Blagh();
+                ((Unused<object>)s_ref)
+                    .Blagh();
             }
             catch (NullReferenceException)
             {

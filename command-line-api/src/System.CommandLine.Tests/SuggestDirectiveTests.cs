@@ -21,15 +21,11 @@ namespace System.CommandLine.Tests
 
         public SuggestDirectiveTests()
         {
-            _fruitOption = new Option<string>("--fruit").AddSuggestions(
-                "apple",
-                "banana",
-                "cherry"
-            );
+            _fruitOption = new Option<string>("--fruit")
+                .AddSuggestions("apple", "banana", "cherry");
 
-            _vegetableOption = new Option<string>("--vegetable").AddSuggestions(
-                (_, __) => new[] { "asparagus", "broccoli", "carrot" }
-            );
+            _vegetableOption = new Option<string>("--vegetable")
+                .AddSuggestions((_, __) => new[] { "asparagus", "broccoli", "carrot" });
 
             _eatCommand = new Command("eat") { _fruitOption, _vegetableOption };
         }
@@ -141,7 +137,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task It_writes_suggestions_for_partial_subcommand_aliases_under_root_command()
         {
-            var parser = new CommandLineBuilder().AddCommand(_eatCommand)
+            var parser = new CommandLineBuilder()
+                .AddCommand(_eatCommand)
                 .AddCommand(new Command("wash-dishes"))
                 .UseSuggestDirective()
                 .Build();
@@ -158,7 +155,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task It_writes_suggestions_for_partial_option_and_subcommand_aliases_under_root_command()
         {
-            var parser = new CommandLineBuilder().AddCommand(_eatCommand)
+            var parser = new CommandLineBuilder()
+                .AddCommand(_eatCommand)
                 .AddCommand(new Command("wash-dishes"))
                 .UseDefaults()
                 .Build();

@@ -111,13 +111,14 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
         private static readonly IList<string> Strings = Array.AsReadOnly(new[] { "a", "b" });
 
-        private static readonly string StringsXml = string.Concat(
-            "<Foo>",
-            "<Strings>",
-            "<string>a</string>",
-            "<string>b</string>",
-            "</Strings>",
-            "</Foo>"
-        );
+        private static readonly string StringsXml = string
+            .Concat(
+                "<Foo>",
+                "<Strings>",
+                "<string>a</string>",
+                "<string>b</string>",
+                "</Strings>",
+                "</Foo>"
+            );
     }
 }

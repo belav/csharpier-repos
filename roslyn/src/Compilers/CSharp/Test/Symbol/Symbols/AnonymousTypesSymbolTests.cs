@@ -304,14 +304,14 @@ class Query
 }
 ";
             CompileAndVerify(
-                    source,
-                    symbolValidator: module =>
-                        TestAnonymousTypeSymbols(
-                            module,
-                            new TypeDescr() { FieldNames = new string[] { "a", "b" } },
-                            new TypeDescr() { FieldNames = new string[] { "Length", "at1", "C" } }
-                        ),
-                    expectedOutput: @"
+                source,
+                symbolValidator: module =>
+                    TestAnonymousTypeSymbols(
+                        module,
+                        new TypeDescr() { FieldNames = new string[] { "a", "b" } },
+                        new TypeDescr() { FieldNames = new string[] { "Length", "at1", "C" } }
+                    ),
+                expectedOutput: @"
 <>f__AnonymousType0`2: 
   Private, InitOnly Int32 <a>i__Field
   Private, InitOnly Int32 <b>i__Field
@@ -323,10 +323,9 @@ class Query
   Private, InitOnly Char <a>i__Field
   Private, InitOnly <>f__AnonymousType0`2 <b>i__Field
 "
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>..ctor(<Length>j__TPar, <at1>j__TPar, <C>j__TPar)",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>..ctor(<Length>j__TPar, <at1>j__TPar, <C>j__TPar)",
+                @"{
   // Code size       28 (0x1c)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -342,40 +341,36 @@ class Query
   IL_0016:  stfld      ""<C>j__TPar <>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.<C>i__Field""
   IL_001b:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.Length.get",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.Length.get",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ldfld      ""<Length>j__TPar <>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.<Length>i__Field""
   IL_0006:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.at1.get",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.at1.get",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ldfld      ""<at1>j__TPar <>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.<at1>i__Field""
   IL_0006:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.C.get",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.C.get",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ldfld      ""<C>j__TPar <>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.<C>i__Field""
   IL_0006:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.Equals",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.Equals",
+                @"{
   // Code size       89 (0x59)
   .maxstack  3
   .locals init (<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar> V_0)
@@ -413,19 +408,14 @@ class Query
   IL_0057:  ldc.i4.1
   IL_0058:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.GetHashCode",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.GetHashCode",
+                @"{
   // Code size       75 (0x4b)
   .maxstack  3
   IL_0000:  ldc.i4     "
-                        + GetHashCodeInitialValue(
-                            "<Length>i__Field",
-                            "<at1>i__Field",
-                            "<C>i__Field"
-                        )
-                        + @"
+                    + GetHashCodeInitialValue("<Length>i__Field", "<at1>i__Field", "<C>i__Field")
+                    + @"
   IL_0005:  ldc.i4     0xa5555529
   IL_000a:  mul
   IL_000b:  call       ""System.Collections.Generic.EqualityComparer<<Length>j__TPar> System.Collections.Generic.EqualityComparer<<Length>j__TPar>.Default.get""
@@ -449,10 +439,9 @@ class Query
   IL_0049:  add
   IL_004a:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.ToString",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType1<<Length>j__TPar, <at1>j__TPar, <C>j__TPar>.ToString",
+                @"{
   // Code size      138 (0x8a)
   .maxstack  7
   .locals init (<Length>j__TPar V_0,
@@ -513,7 +502,7 @@ class Query
   IL_0084:  call       ""string string.Format(System.IFormatProvider, string, params object[])""
   IL_0089:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -668,29 +657,27 @@ class Query
 }
 ";
             CompileAndVerify(
-                    source,
-                    symbolValidator: module =>
-                        TestAnonymousTypeSymbols(
-                            module,
-                            new TypeDescr() { FieldNames = new string[] {  } }
-                        ),
-                    expectedOutput: @"
+                source,
+                symbolValidator: module =>
+                    TestAnonymousTypeSymbols(
+                        module,
+                        new TypeDescr() { FieldNames = new string[] {  } }
+                    ),
+                expectedOutput: @"
 <>f__AnonymousType0:
 "
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType0..ctor()",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType0..ctor()",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  call       ""object..ctor()""
   IL_0006:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType0.Equals",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType0.Equals",
+                @"{
   // Code size       18 (0x12)
   .maxstack  2
   .locals init (<>f__AnonymousType0 V_0)
@@ -707,25 +694,23 @@ class Query
   IL_0010:  ldc.i4.1
   IL_0011:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType0.GetHashCode",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType0.GetHashCode",
+                @"{
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldc.i4.0
   IL_0001:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType0.ToString",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType0.ToString",
+                @"{
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  ldstr      ""{ }""
   IL_0005:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(543022, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543022")]
@@ -807,25 +792,24 @@ class Query
 }
 ";
             CompileAndVerify(
-                    source,
-                    symbolValidator: module =>
-                        TestAnonymousTypeSymbols(
-                            module,
-                            new TypeDescr()
-                            {
-                                FieldNames = new string[] { "ToString", "Equals", "GetHashCode" }
-                            }
-                        ),
-                    expectedOutput: @"
+                source,
+                symbolValidator: module =>
+                    TestAnonymousTypeSymbols(
+                        module,
+                        new TypeDescr()
+                        {
+                            FieldNames = new string[] { "ToString", "Equals", "GetHashCode" }
+                        }
+                    ),
+                expectedOutput: @"
 <>f__AnonymousType0`3: 
   Private, InitOnly Int32 <ToString>i__Field
   Private, InitOnly Object <Equals>i__Field
   Private, InitOnly String <GetHashCode>i__Field
 "
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>..ctor",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>..ctor",
+                @"{
   // Code size       28 (0x1c)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -841,10 +825,9 @@ class Query
   IL_0016:  stfld      ""<GetHashCode>j__TPar <>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.<GetHashCode>i__Field""
   IL_001b:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.Equals",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.Equals",
+                @"{
   // Code size       89 (0x59)
   .maxstack  3
   .locals init (<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar> V_0)
@@ -882,10 +865,9 @@ class Query
   IL_0057:  ldc.i4.1
   IL_0058:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.GetHashCode",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.GetHashCode",
+                @"{
   // Code size       75 (0x4b)
   .maxstack  3
   IL_0000:  ldc.i4     0x3711624
@@ -912,10 +894,9 @@ class Query
   IL_0049:  add
   IL_004a:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.ToString",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.ToString",
+                @"{
   // Code size      138 (0x8a)
   .maxstack  7
   .locals init (<ToString>j__TPar V_0,
@@ -976,37 +957,34 @@ class Query
   IL_0084:  call       ""string string.Format(System.IFormatProvider, string, params object[])""
   IL_0089:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.ToString.get",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.ToString.get",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ldfld      ""<ToString>j__TPar <>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.<ToString>i__Field""
   IL_0006:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.Equals.get",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.Equals.get",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ldfld      ""<Equals>j__TPar <>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.<Equals>i__Field""
   IL_0006:  ret
 }"
-                )
-                .VerifyIL(
-                    "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.GetHashCode.get",
-                    @"{
+            ).VerifyIL(
+                "<>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.GetHashCode.get",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ldfld      ""<GetHashCode>j__TPar <>f__AnonymousType0<<ToString>j__TPar, <Equals>j__TPar, <GetHashCode>j__TPar>.<GetHashCode>i__Field""
   IL_0006:  ret
 }"
-                );
+            );
         }
 
         #region "Utility methods"
@@ -1043,9 +1021,8 @@ class Query
             for (int i = 0; i < cnt; i++)
             {
                 TestAnonymousType(
-                    module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "<>f__AnonymousType" + i.ToString()
-                    ),
+                    module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("<>f__AnonymousType" + i.ToString()),
                     i,
                     typeDescrs[i]
                 );
@@ -1560,9 +1537,8 @@ class Class3
 ";
             var compilation = CreateCompilationWithMscorlib40(
                 new string[] { source1, source2, source3 },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal),
                 parseOptions: TestOptions.Regular
             );
 
@@ -1572,7 +1548,8 @@ class Class3
                     compilation,
                     symbolValidator: module =>
                     {
-                        var types = module.GlobalNamespace.GetTypeMembers()
+                        var types = module.GlobalNamespace
+                            .GetTypeMembers()
                             .Where(t => t.Name.StartsWith("<>", StringComparison.Ordinal))
                             .Select(t => t.ToDisplayString())
                             .OrderBy(t => t)

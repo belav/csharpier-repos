@@ -466,8 +466,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             Mock<IAntiForgeryAdditionalDataProvider> mockAdditionalDataProvider =
                 new Mock<IAntiForgeryAdditionalDataProvider>();
             mockAdditionalDataProvider.Setup(
-                    o => o.ValidateAdditionalData(httpContext, "some-additional-data")
-                )
+                o => o.ValidateAdditionalData(httpContext, "some-additional-data")
+            )
                 .Returns(false);
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
@@ -504,8 +504,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             Mock<IAntiForgeryAdditionalDataProvider> mockAdditionalDataProvider =
                 new Mock<IAntiForgeryAdditionalDataProvider>();
             mockAdditionalDataProvider.Setup(
-                    o => o.ValidateAdditionalData(httpContext, "some-additional-data")
-                )
+                o => o.ValidateAdditionalData(httpContext, "some-additional-data")
+            )
                 .Returns(true);
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
@@ -538,8 +538,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             Mock<IAntiForgeryAdditionalDataProvider> mockAdditionalDataProvider =
                 new Mock<IAntiForgeryAdditionalDataProvider>();
             mockAdditionalDataProvider.Setup(
-                    o => o.ValidateAdditionalData(httpContext, "some-additional-data")
-                )
+                o => o.ValidateAdditionalData(httpContext, "some-additional-data")
+            )
                 .Returns(true);
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()

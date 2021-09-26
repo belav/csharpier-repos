@@ -65,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 testAssembly,
                 reporter,
                 new string[0]
-            ).CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
+            )
+                .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
                 .AddSingleton<IAnnotationCodeGenerator, AnnotationCodeGenerator>()
                 .AddSingleton<IProviderConfigurationCodeGenerator, TestProviderCodeGenerator>()
                 .BuildServiceProvider()

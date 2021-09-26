@@ -171,12 +171,11 @@ namespace System.ComponentModel.Composition.Registration.Tests
             var ctx = new RegistrationBuilder();
             // Implements<IFoo>
             ctx.ForTypesMatching(
-                    (t) =>
-                    {
-                        return t.IsClass && typeof(IFoo).IsAssignableFrom(t);
-                    }
-                )
-                .Export();
+                (t) =>
+                {
+                    return t.IsClass && typeof(IFoo).IsAssignableFrom(t);
+                }
+            ).Export();
             var catalog = new TypeCatalog(
                 new[] { typeof(IFoo), typeof(FooImplementation1), typeof(FooImplementation2) },
                 ctx
@@ -190,20 +189,18 @@ namespace System.ComponentModel.Composition.Registration.Tests
             var ctx = new RegistrationBuilder();
             // Implements<FooImplementation1>
             ctx.ForTypesMatching(
-                    (t) =>
-                    {
-                        return t.IsAssignableFrom(typeof(FooImplementation1));
-                    }
-                )
-                .Export();
+                (t) =>
+                {
+                    return t.IsAssignableFrom(typeof(FooImplementation1));
+                }
+            ).Export();
             // Implements<FooImplementation2>
             ctx.ForTypesMatching(
-                    (t) =>
-                    {
-                        return t.IsAssignableFrom(typeof(FooImplementation2));
-                    }
-                )
-                .Export();
+                (t) =>
+                {
+                    return t.IsAssignableFrom(typeof(FooImplementation2));
+                }
+            ).Export();
             var catalog = new TypeCatalog(
                 new[] { typeof(IFoo), typeof(FooImplementation1), typeof(FooImplementation2) },
                 ctx

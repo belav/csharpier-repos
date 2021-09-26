@@ -335,11 +335,12 @@ namespace TestNamespace
                 model =>
                     Assert.NotNull(
                         model.FindEntityType(
-                            string.Concat(
-                                modelGenerationOptions.ModelNamespace,
-                                ".",
-                                entityInAnotherNamespaceTypeName
-                            )
+                            string
+                                .Concat(
+                                    modelGenerationOptions.ModelNamespace,
+                                    ".",
+                                    entityInAnotherNamespaceTypeName
+                                )
                         )
                     )
             );
@@ -366,11 +367,12 @@ namespace TestNamespace
                 model =>
                     Assert.NotNull(
                         model.FindEntityType(
-                            string.Concat(
-                                modelGenerationOptions.ModelNamespace,
-                                ".",
-                                entityInAnotherNamespaceTypeName
-                            )
+                            string
+                                .Concat(
+                                    modelGenerationOptions.ModelNamespace,
+                                    ".",
+                                    entityInAnotherNamespaceTypeName
+                                )
                         )
                     )
             );

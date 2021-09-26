@@ -651,11 +651,8 @@ namespace Microsoft.CSharp
         {
             foreach (CodeStatement stmt in stmts)
             {
-                ((ICodeGenerator)this).GenerateCodeFromStatement(
-                    stmt,
-                    _output.InnerWriter,
-                    _options
-                );
+                ((ICodeGenerator)this)
+                    .GenerateCodeFromStatement(stmt, _output.InnerWriter, _options);
             }
         }
 
@@ -2021,11 +2018,12 @@ namespace Microsoft.CSharp
 
             if (member is CodeTypeDeclaration)
             {
-                ((ICodeGenerator)this).GenerateCodeFromType(
-                    (CodeTypeDeclaration)member,
-                    _output.InnerWriter,
-                    _options
-                );
+                ((ICodeGenerator)this)
+                    .GenerateCodeFromType(
+                        (CodeTypeDeclaration)member,
+                        _output.InnerWriter,
+                        _options
+                    );
 
                 // Nested types clobber the current class, so reset it.
                 _currentClass = declaredType;
@@ -2200,11 +2198,8 @@ namespace Microsoft.CSharp
                         Output.WriteLine();
                     }
                     CodeTypeDeclaration currentClass = (CodeTypeDeclaration)current;
-                    ((ICodeGenerator)this).GenerateCodeFromType(
-                        currentClass,
-                        _output.InnerWriter,
-                        _options
-                    );
+                    ((ICodeGenerator)this)
+                        .GenerateCodeFromType(currentClass, _output.InnerWriter, _options);
                 }
             }
         }
@@ -2224,11 +2219,8 @@ namespace Microsoft.CSharp
                 OutputIdentifier(arg.Name);
                 Output.Write('=');
             }
-            ((ICodeGenerator)this).GenerateCodeFromExpression(
-                arg.Value,
-                _output.InnerWriter,
-                _options
-            );
+            ((ICodeGenerator)this)
+                .GenerateCodeFromExpression(arg.Value, _output.InnerWriter, _options);
         }
 
         private void OutputDirection(FieldDirection dir)
@@ -2274,11 +2266,8 @@ namespace Microsoft.CSharp
                     else
                         Output.Write(", ");
                 }
-                ((ICodeGenerator)this).GenerateCodeFromExpression(
-                    current,
-                    _output.InnerWriter,
-                    _options
-                );
+                ((ICodeGenerator)this)
+                    .GenerateCodeFromExpression(current, _output.InnerWriter, _options);
             }
             Indent--;
         }
@@ -2689,10 +2678,8 @@ namespace Microsoft.CSharp
                 // other attributes.
 
                 if (
-                    current.Name.Equals(
-                        "system.paramarrayattribute",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    current.Name
+                        .Equals("system.paramarrayattribute", StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     paramArray = true;

@@ -70,8 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             var trailingTrivia = propertyDeclaration.GetTrailingTrivia();
 
             var updatedProperty = propertyDeclaration.WithAccessorList(
-                    UpdateAccessorList(propertyDeclaration.AccessorList)
-                )
+                UpdateAccessorList(propertyDeclaration.AccessorList)
+            )
                 .WithExpressionBody(null)
                 .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.None));
 
@@ -92,9 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                 }
 
                 var modifiers = SyntaxFactory.TokenList(
-                    updatedProperty.Modifiers.Where(
-                        token => !token.IsKind(SyntaxKind.ReadOnlyKeyword)
-                    )
+                    updatedProperty.Modifiers
+                        .Where(token => !token.IsKind(SyntaxKind.ReadOnlyKeyword))
                 );
 
                 updatedProperty = updatedProperty.WithModifiers(modifiers)
@@ -106,8 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             if (fieldInitializer != null)
             {
                 updatedProperty = updatedProperty.WithInitializer(
-                        SyntaxFactory.EqualsValueClause(fieldInitializer)
-                    )
+                    SyntaxFactory.EqualsValueClause(fieldInitializer)
+                )
                     .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
             }
 
@@ -168,11 +167,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                     return null;
                 }
 
-                return base.GetAdjustNewLinesOperation(
-                    in previousToken,
-                    in currentToken,
-                    in nextOperation
-                );
+                return base
+                    .GetAdjustNewLinesOperation(
+                        in previousToken,
+                        in currentToken,
+                        in nextOperation
+                    );
             }
 
             public override AdjustSpacesOperation GetAdjustSpacesOperation(
@@ -186,11 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                     return new AdjustSpacesOperation(1, AdjustSpacesOption.ForceSpaces);
                 }
 
-                return base.GetAdjustSpacesOperation(
-                    in previousToken,
-                    in currentToken,
-                    in nextOperation
-                );
+                return base
+                    .GetAdjustSpacesOperation(in previousToken, in currentToken, in nextOperation);
             }
         }
 
@@ -200,9 +197,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
         )
         {
             var variableDeclarator =
-                (VariableDeclaratorSyntax)await fieldSymbol.DeclaringSyntaxReferences[
-                    0
-                ].GetSyntaxAsync(cancellationToken).ConfigureAwait(false);
+                (VariableDeclaratorSyntax)await fieldSymbol.DeclaringSyntaxReferences[0]
+                    .GetSyntaxAsync(cancellationToken)
+                    .ConfigureAwait(false);
             return variableDeclarator.Initializer?.Value;
         }
 

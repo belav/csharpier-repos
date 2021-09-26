@@ -269,10 +269,8 @@ namespace Newtonsoft.Json.Schema
             if (_stack.Any(tc => tc.Type == type))
             {
                 throw new JsonException(
-                    "Unresolved circular reference for type '{0}'. Explicitly define an Id for the type using a JsonObject/JsonArray attribute or automatically generate a type Id using the UndefinedSchemaIdHandling property.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        type
-                    )
+                    "Unresolved circular reference for type '{0}'. Explicitly define an Id for the type using a JsonObject/JsonArray attribute or automatically generate a type Id using the UndefinedSchemaIdHandling property."
+                        .FormatWith(CultureInfo.InvariantCulture, type)
                 );
             }
 
@@ -322,13 +320,14 @@ namespace Newtonsoft.Json.Schema
                         if (collectionItemType != null)
                         {
                             CurrentSchema.Items = new List<JsonSchema>();
-                            CurrentSchema.Items.Add(
-                                GenerateInternal(
-                                    collectionItemType,
-                                    (!allowNullItem) ? Required.Always : Required.Default,
-                                    false
-                                )
-                            );
+                            CurrentSchema.Items
+                                .Add(
+                                    GenerateInternal(
+                                        collectionItemType,
+                                        (!allowNullItem) ? Required.Always : Required.Default,
+                                        false
+                                    )
+                                );
                         }
                         break;
                     case JsonContractType.Primitive:
@@ -401,10 +400,8 @@ namespace Newtonsoft.Json.Schema
                         break;
                     default:
                         throw new JsonException(
-                            "Unexpected contract type: {0}".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                contract
-                            )
+                            "Unexpected contract type: {0}"
+                                .FormatWith(CultureInfo.InvariantCulture, contract)
                         );
                 }
             }
@@ -554,11 +551,8 @@ namespace Newtonsoft.Json.Schema
                     return schemaType | JsonSchemaType.String;
                 default:
                     throw new JsonException(
-                        "Unexpected type code '{0}' for type '{1}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            typeCode,
-                            type
-                        )
+                        "Unexpected type code '{0}' for type '{1}'."
+                            .FormatWith(CultureInfo.InvariantCulture, typeCode, type)
                     );
             }
         }

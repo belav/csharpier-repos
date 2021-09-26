@@ -111,9 +111,8 @@ namespace System.Net
             {
                 connection._dataSocket = listenSocket.EndAccept(asyncResult);
                 if (
-                    !connection.ServerAddress.Equals(
-                        ((IPEndPoint)connection._dataSocket.RemoteEndPoint!).Address
-                    )
+                    !connection.ServerAddress
+                        .Equals(((IPEndPoint)connection._dataSocket.RemoteEndPoint!).Address)
                 )
                 {
                     connection._dataSocket.Close();
@@ -1146,12 +1145,13 @@ namespace System.Net
                     pos1++;
                     long result;
                     if (
-                        long.TryParse(
-                            str.AsSpan(pos1, pos2 - pos1),
-                            NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
-                            NumberFormatInfo.InvariantInfo,
-                            out result
-                        )
+                        long
+                            .TryParse(
+                                str.AsSpan(pos1, pos2 - pos1),
+                                NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
+                                NumberFormatInfo.InvariantInfo,
+                                out result
+                            )
                     )
                     {
                         _contentLength = result;

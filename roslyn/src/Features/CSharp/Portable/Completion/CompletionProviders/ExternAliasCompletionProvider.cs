@@ -77,11 +77,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     )
                 )
                 {
-                    var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+                    var compilation = await document.Project
+                        .GetCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
-                    var aliases = compilation.ExternalReferences.SelectMany(
-                            r => r.Properties.Aliases
-                        )
+                    var aliases = compilation.ExternalReferences
+                        .SelectMany(r => r.Properties.Aliases)
                         .ToSet();
 
                     if (aliases.Any())

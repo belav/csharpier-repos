@@ -54,10 +54,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 CultureInfo preferredCulture,
                 CancellationToken cancellationToken = default
             ) =>
-                string.Format(
-                    "<member name='{0}'><summary>{0}</summary></member>",
-                    documentationMemberID
-                );
+                string
+                    .Format(
+                        "<member name='{0}'><summary>{0}</summary></member>",
+                        documentationMemberID
+                    );
 
             public override bool Equals(object obj) => (object)this == obj;
 
@@ -570,7 +571,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             else if (language == LanguageNames.VisualBasic)
             {
                 return new VisualBasicParseOptions(
-                    preprocessorSymbols: preprocessorSymbolsAttribute.Value.Split(',')
+                    preprocessorSymbols: preprocessorSymbolsAttribute.Value
+                        .Split(',')
                         .Select(
                             v =>
                                 KeyValuePairUtil.Create(
@@ -620,10 +622,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             if (language == LanguageNames.CSharp)
             {
                 if (
-                    CodeAnalysis.CSharp.LanguageVersionFacts.TryParse(
-                        languageVersionAttribute.Value,
-                        out var languageVersion
-                    )
+                    CodeAnalysis.CSharp.LanguageVersionFacts
+                        .TryParse(languageVersionAttribute.Value, out var languageVersion)
                 )
                 {
                     return ((CSharpParseOptions)parseOptions).WithLanguageVersion(languageVersion);
@@ -633,15 +633,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 var languageVersion = CodeAnalysis.VisualBasic.LanguageVersion.Default;
                 if (
-                    CodeAnalysis.VisualBasic.LanguageVersionFacts.TryParse(
-                        languageVersionAttribute.Value,
-                        ref languageVersion
-                    )
+                    CodeAnalysis.VisualBasic.LanguageVersionFacts
+                        .TryParse(languageVersionAttribute.Value, ref languageVersion)
                 )
                 {
-                    return ((VisualBasicParseOptions)parseOptions).WithLanguageVersion(
-                        languageVersion
-                    );
+                    return ((VisualBasicParseOptions)parseOptions)
+                        .WithLanguageVersion(languageVersion);
                 }
             }
 
@@ -705,11 +702,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             if (!workspace.Services.SupportedLanguages.Contains(languageName))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        "Language should be one of '{0}' and it is {1}",
-                        string.Join(", ", workspace.Services.SupportedLanguages),
-                        languageName
-                    )
+                    string
+                        .Format(
+                            "Language should be one of '{0}' and it is {1}",
+                            string.Join(", ", workspace.Services.SupportedLanguages),
+                            languageName
+                        )
                 );
             }
 
@@ -890,14 +888,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                             OutputKind.WindowsRuntimeMetadata,
                             allowUnsafe: allowUnsafe
                         )
-                      : new VisualBasicCompilationOptions(
-                            OutputKind.WindowsRuntimeMetadata
-                        ).WithGlobalImports(globalImports)
-                            .WithRootNamespace(rootNamespace)
-                            .WithParseOptions(
-                                (VisualBasicParseOptions)parseOptions
-                                    ?? VisualBasicParseOptions.Default
-                            );
+                      : new VisualBasicCompilationOptions(OutputKind.WindowsRuntimeMetadata)
+                        .WithGlobalImports(globalImports)
+                        .WithRootNamespace(rootNamespace)
+                        .WithParseOptions(
+                            (VisualBasicParseOptions)parseOptions ?? VisualBasicParseOptions.Default
+                        );
                 }
             }
             else
@@ -931,18 +927,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             if (language == LanguageNames.CSharp)
             {
-                compilationOptions = ((CSharpCompilationOptions)compilationOptions).WithAllowUnsafe(
-                        allowUnsafe
-                    )
+                compilationOptions = ((CSharpCompilationOptions)compilationOptions)
+                    .WithAllowUnsafe(allowUnsafe)
                     .WithNullableContextOptions(nullable);
             }
 
             if (language == LanguageNames.VisualBasic)
             {
                 // VB needs Compilation.ParseOptions set (we do the same at the VS layer)
-                compilationOptions = (
-                    (VisualBasicCompilationOptions)compilationOptions
-                ).WithRootNamespace(rootNamespace)
+                compilationOptions = ((VisualBasicCompilationOptions)compilationOptions)
+                    .WithRootNamespace(rootNamespace)
                     .WithGlobalImports(globalImports)
                     .WithParseOptions(
                         (VisualBasicParseOptions)parseOptions ?? VisualBasicParseOptions.Default
@@ -985,22 +979,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     );
                 }
 
-                var originalProject = workspaceElement.Elements(ProjectElementName)
-                    .FirstOrDefault(
-                        p =>
+                var originalProject = workspaceElement.Elements(ProjectElementName).FirstOrDefault(
+                    p =>
+                    {
+                        if (originalAssemblyName != null)
                         {
-                            if (originalAssemblyName != null)
-                            {
-                                return p.Attribute(AssemblyNameAttributeName)?.Value
-                                    == originalAssemblyName;
-                            }
-                            else
-                            {
-                                return p.Attribute(ProjectNameAttribute)?.Value
-                                    == originalProjectName;
-                            }
+                            return p.Attribute(AssemblyNameAttributeName)?.Value
+                                == originalAssemblyName;
                         }
-                    );
+                        else
+                        {
+                            return p.Attribute(ProjectNameAttribute)?.Value == originalProjectName;
+                        }
+                    }
+                );
 
                 if (originalProject == null)
                 {
@@ -1029,14 +1021,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     );
                 }
 
-                documentElement = originalProject.Elements(DocumentElementName)
-                    .FirstOrDefault(
-                        d =>
-                        {
-                            return d.Attribute(FilePathAttributeName)?.Value
-                                == originalDocumentPath;
-                        }
-                    );
+                documentElement = originalProject.Elements(DocumentElementName).FirstOrDefault(
+                    d =>
+                    {
+                        return d.Attribute(FilePathAttributeName)?.Value == originalDocumentPath;
+                    }
+                );
 
                 if (documentElement == null)
                 {
@@ -1194,10 +1184,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 return null;
             }
 
-            var folderContainers = folderAttribute.Value.Split(
-                new[] { PathUtilities.DirectorySeparatorChar },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            var folderContainers = folderAttribute.Value
+                .Split(
+                    new[] { PathUtilities.DirectorySeparatorChar },
+                    StringSplitOptions.RemoveEmptyEntries
+                );
             return new ReadOnlyCollection<string>(folderContainers.ToList());
         }
 
@@ -1283,17 +1274,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         {
             if (LanguageNames.CSharp == options.Language)
             {
-                return Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseSyntaxTree(
-                    referencedCode,
-                    options
-                );
+                return Microsoft.CodeAnalysis.CSharp.SyntaxFactory
+                    .ParseSyntaxTree(referencedCode, options);
             }
             else
             {
-                return Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory.ParseSyntaxTree(
-                    referencedCode,
-                    options
-                );
+                return Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory
+                    .ParseSyntaxTree(referencedCode, options);
             }
         }
 

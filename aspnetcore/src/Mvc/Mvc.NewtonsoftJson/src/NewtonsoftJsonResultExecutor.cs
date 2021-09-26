@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             "application/json"
         ) {
             Encoding = Encoding.UTF8
-        }.ToString();
+        }
+            .ToString();
 
         private readonly IHttpResponseStreamWriterFactory _writerFactory;
         private readonly ILogger _logger;

@@ -39,12 +39,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var context = GetContext(actionResult);
             var factory = new Mock<IClientErrorFactory>();
             factory.Setup(
-                    f =>
-                        f.GetClientError(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<IClientErrorActionResult>()
-                        )
-                )
+                f =>
+                    f.GetClientError(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<IClientErrorActionResult>()
+                    )
+            )
                 .Returns((IActionResult)null)
                 .Verifiable();
 

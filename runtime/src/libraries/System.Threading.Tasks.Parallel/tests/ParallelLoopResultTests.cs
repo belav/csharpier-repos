@@ -1039,9 +1039,9 @@ namespace System.Threading.Tasks.Tests
                 }
                 IEnumerator<TSource>[] partitions = new IEnumerator<TSource>[partitionCount];
                 IEnumerable<KeyValuePair<long, TSource>> partitionEnumerable = Partitioner.Create(
-                        _data,
-                        true
-                    )
+                    _data,
+                    true
+                )
                     .GetOrderableDynamicPartitions();
                 for (int i = 0; i < partitionCount; i++)
                 {

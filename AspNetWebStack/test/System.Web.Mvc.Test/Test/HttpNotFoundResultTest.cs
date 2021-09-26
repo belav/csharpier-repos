@@ -16,8 +16,8 @@ namespace System.Web.Mvc.Test
             mockControllerContext.SetupSet(c => c.HttpContext.Response.StatusCode = 404)
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.StatusDescription = "Some description"
-                )
+                c => c.HttpContext.Response.StatusDescription = "Some description"
+            )
                 .Verifiable();
 
             HttpNotFoundResult result = new HttpNotFoundResult("Some description");

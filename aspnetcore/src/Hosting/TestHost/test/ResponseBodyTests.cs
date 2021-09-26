@@ -101,11 +101,8 @@ namespace Microsoft.AspNetCore.TestHost.Tests
                 async httpContext =>
                 {
                     await httpContext.Response.StartAsync();
-                    await httpContext.Response.Body.WriteAsync(
-                        contentBytes,
-                        0,
-                        contentBytes.Length
-                    );
+                    await httpContext.Response.Body
+                        .WriteAsync(contentBytes, 0, contentBytes.Length);
                     httpContext.Response.Body.Flush();
                     await httpContext.Response.CompleteAsync();
                 }
@@ -128,11 +125,8 @@ namespace Microsoft.AspNetCore.TestHost.Tests
                 async httpContext =>
                 {
                     await httpContext.Response.StartAsync();
-                    await httpContext.Response.Body.WriteAsync(
-                        contentBytes,
-                        0,
-                        contentBytes.Length
-                    );
+                    await httpContext.Response.Body
+                        .WriteAsync(contentBytes, 0, contentBytes.Length);
                     httpContext.Response.Body.Flush();
                     await httpContext.Response.CompleteAsync();
                 }
@@ -149,18 +143,16 @@ namespace Microsoft.AspNetCore.TestHost.Tests
         private Task<IHost> CreateHost(RequestDelegate appDelegate)
         {
             return new HostBuilder().ConfigureWebHost(
-                    webBuilder =>
-                    {
-                        webBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.Run(appDelegate);
-                                }
-                            );
-                    }
-                )
-                .StartAsync();
+                webBuilder =>
+                {
+                    webBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.Run(appDelegate);
+                        }
+                    );
+                }
+            ).StartAsync();
         }
     }
 }

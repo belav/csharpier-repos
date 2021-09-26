@@ -130,8 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                 case BoundKind.UsingLocalDeclarations:
                     // visit everything after this node
-                    ArrayBuilder<BoundStatement> builder =
-                        ArrayBuilder<BoundStatement>.GetInstance();
+                    ArrayBuilder<BoundStatement> builder = ArrayBuilder<BoundStatement>
+                        .GetInstance();
                     VisitStatementSubList(builder, statements, statementIndex + 1);
                     // make a using declaration with the visited statements as its body
                     replacedLocalDeclarations = true;

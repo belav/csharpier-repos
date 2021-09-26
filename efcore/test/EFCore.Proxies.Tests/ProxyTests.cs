@@ -248,7 +248,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Proxy_services_must_be_available()
         {
-            var withoutProxies = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var withoutProxies = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             using (
@@ -470,10 +471,10 @@ namespace Microsoft.EntityFrameworkCore
                 bool useChangeDetection = false
             )
             {
-                _internalServiceProvider =
-                    new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
-                        .AddEntityFrameworkProxies()
-                        .BuildServiceProvider();
+                _internalServiceProvider = new ServiceCollection()
+                    .AddEntityFrameworkInMemoryDatabase()
+                    .AddEntityFrameworkProxies()
+                    .BuildServiceProvider();
 
                 _dbName = dbName;
                 _useLazyLoadingProxies = useLazyLoading;
@@ -542,7 +543,8 @@ namespace Microsoft.EntityFrameworkCore
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder.UseLazyLoadingProxies()
                     .UseInternalServiceProvider(
-                        new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                        new ServiceCollection()
+                            .AddEntityFrameworkInMemoryDatabase()
                             .AddEntityFrameworkProxies()
                             .BuildServiceProvider()
                     )
@@ -577,10 +579,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder.UseInternalServiceProvider(
-                        new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
-                            .AddEntityFrameworkProxies()
-                            .BuildServiceProvider()
-                    )
+                    new ServiceCollection()
+                        .AddEntityFrameworkInMemoryDatabase()
+                        .AddEntityFrameworkProxies()
+                        .BuildServiceProvider()
+                )
                     .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
             protected override void OnModelCreating(ModelBuilder modelBuilder) =>
@@ -592,7 +595,8 @@ namespace Microsoft.EntityFrameworkCore
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder.UseLazyLoadingProxies(false)
                     .UseInternalServiceProvider(
-                        new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                        new ServiceCollection()
+                            .AddEntityFrameworkInMemoryDatabase()
                             .AddEntityFrameworkProxies()
                             .BuildServiceProvider()
                     )
@@ -615,7 +619,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 optionsBuilder.UseLazyLoadingProxies()
                     .UseInternalServiceProvider(
-                        new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                        new ServiceCollection()
+                            .AddEntityFrameworkInMemoryDatabase()
                             .AddEntityFrameworkProxies()
                             .BuildServiceProvider()
                     )

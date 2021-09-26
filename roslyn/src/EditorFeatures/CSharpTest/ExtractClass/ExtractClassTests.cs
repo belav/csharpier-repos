@@ -1726,8 +1726,8 @@ class Test : MyBase
                 }
 
                 var memberAnalysis = selections.Select(
-                        s => new ExtractClassMemberAnalysisResult(s.member, s.makeAbstract)
-                    )
+                    s => new ExtractClassMemberAnalysisResult(s.member, s.makeAbstract)
+                )
                     .ToImmutableArray();
 
                 return Task.FromResult(

@@ -1195,9 +1195,8 @@ public class Outer<T, U>
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       60 (0x3c)
   .maxstack  6
   IL_0000:  ldtoken    ""Outer<dynamic[], object[]>.Inner<Outer<object, dynamic>[], dynamic>""
@@ -1217,7 +1216,7 @@ public class Outer<T, U>
   IL_003a:  stind.ref
   IL_003b:  ret
 }"
-                        );
+                    );
                     locals.Free();
                 }
             );
@@ -1740,9 +1739,8 @@ class C
                     );
                     Assert.Null(error);
                     VerifyCustomTypeInfo(result, null);
-                    testData.GetMethodData("<>x.<>c.<<>m0>b__0_0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>c.<<>m0>b__0_0").VerifyIL(
+                        @"
 {
   // Code size      106 (0x6a)
   .maxstack  9
@@ -1779,7 +1777,7 @@ class C
   IL_0064:  callvirt   ""void System.Action<System.Runtime.CompilerServices.CallSite, System.Type, dynamic>.Invoke(System.Runtime.CompilerServices.CallSite, System.Type, dynamic)""
   IL_0069:  ret
 }"
-                        );
+                    );
 
                     context = CreateMethodContext(runtime, "C.<>c.<Goo>b__1_0");
                     testData = new CompilationTestData();
@@ -1861,9 +1859,8 @@ class C
                     var result = context.CompileExpression("Goo(x)", out error, testData);
                     Assert.Null(error);
                     VerifyCustomTypeInfo(result, 0x01);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size      103 (0x67)
   .maxstack  9
   .locals init (C.<>c__DisplayClass0_0 V_0, //CS$<>8__locals0
@@ -1902,14 +1899,13 @@ class C
   IL_0061:  callvirt   ""dynamic System.Func<System.Runtime.CompilerServices.CallSite, System.Type, dynamic, dynamic>.Invoke(System.Runtime.CompilerServices.CallSite, System.Type, dynamic)""
   IL_0066:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     result = context.CompileExpression("Goo(y)", out error, testData);
                     Assert.Null(error);
                     VerifyCustomTypeInfo(result, 0x01);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size      103 (0x67)
   .maxstack  9
   .locals init (C.<>c__DisplayClass0_0 V_0, //CS$<>8__locals0
@@ -1948,7 +1944,7 @@ class C
   IL_0061:  callvirt   ""dynamic System.Func<System.Runtime.CompilerServices.CallSite, System.Type, dynamic, dynamic>.Invoke(System.Runtime.CompilerServices.CallSite, System.Type, dynamic)""
   IL_0066:  ret
 }"
-                        );
+                    );
                 }
             );
         }

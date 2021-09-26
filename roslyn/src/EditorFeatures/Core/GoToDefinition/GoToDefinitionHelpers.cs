@@ -55,10 +55,10 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             }
 
             var definition = SymbolFinder.FindSourceDefinitionAsync(
-                    symbol,
-                    solution,
-                    cancellationToken
-                )
+                symbol,
+                solution,
+                cancellationToken
+            )
                 .WaitAndGetResult(cancellationToken);
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -71,9 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                 symbol = method.PartialImplementationPart ?? symbol;
             }
 
-            using var definitionsDisposer = ArrayBuilder<DefinitionItem>.GetInstance(
-                out var definitions
-            );
+            using var definitionsDisposer = ArrayBuilder<DefinitionItem>
+                .GetInstance(out var definitions);
 
             // Going to a symbol may end up actually showing the symbol in the Find-Usages window.
             // This happens when there is more than one location for the symbol (i.e. for partial
@@ -101,8 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
 
             if (thirdPartyNavigationAllowed)
             {
-                var factory =
-                    solution.Workspace.Services.GetService<IDefinitionsAndReferencesFactory>();
+                var factory = solution.Workspace.Services
+                    .GetService<IDefinitionsAndReferencesFactory>();
                 var thirdPartyItem = factory?.GetThirdPartyDefinitionItem(
                     solution,
                     definitionItem,
@@ -131,21 +130,23 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                 cancellationToken
             );
 
-            var title = string.Format(
-                EditorFeaturesResources._0_declarations,
-                FindUsagesHelpers.GetDisplayName(symbol)
-            );
+            var title = string
+                .Format(
+                    EditorFeaturesResources._0_declarations,
+                    FindUsagesHelpers.GetDisplayName(symbol)
+                );
 
-            return threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    streamingPresenter.TryNavigateToOrPresentItemsAsync(
-                        threadingContext,
-                        solution.Workspace,
-                        title,
-                        definitions,
-                        cancellationToken
-                    )
-            );
+            return threadingContext.JoinableTaskFactory
+                .Run(
+                    () =>
+                        streamingPresenter.TryNavigateToOrPresentItemsAsync(
+                            threadingContext,
+                            solution.Workspace,
+                            title,
+                            definitions,
+                            cancellationToken
+                        )
+                );
         }
 
         public static bool TryGoToDefinition(
@@ -160,16 +161,17 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             if (definitions.IsDefaultOrEmpty)
                 return false;
 
-            return threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    streamingPresenter.TryNavigateToOrPresentItemsAsync(
-                        threadingContext,
-                        solution.Workspace,
-                        title,
-                        definitions,
-                        cancellationToken
-                    )
-            );
+            return threadingContext.JoinableTaskFactory
+                .Run(
+                    () =>
+                        streamingPresenter.TryNavigateToOrPresentItemsAsync(
+                            threadingContext,
+                            solution.Workspace,
+                            title,
+                            definitions,
+                            cancellationToken
+                        )
+                );
         }
     }
 }

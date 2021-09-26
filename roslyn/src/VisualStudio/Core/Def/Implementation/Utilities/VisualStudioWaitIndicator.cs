@@ -82,8 +82,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             var workspace = componentModel.GetService<VisualStudioWorkspace>();
             Contract.ThrowIfNull(workspace);
 
-            var notificationService =
-                workspace.Services.GetService<IGlobalOperationNotificationService>();
+            var notificationService = workspace.Services
+                .GetService<IGlobalOperationNotificationService>();
             Contract.ThrowIfNull(notificationService);
 
             var dialogFactory = (IVsThreadedWaitDialogFactory)_serviceProvider.GetService(

@@ -99,9 +99,8 @@ namespace Microsoft.AspNetCore.Builder
             //
             // Each middleware gets its own collection of data sources, and all of those data sources also
             // get added to a global collection.
-            var routeOptions = builder.ApplicationServices.GetRequiredService<
-                IOptions<RouteOptions>
-            >();
+            var routeOptions = builder.ApplicationServices
+                .GetRequiredService<IOptions<RouteOptions>>();
             foreach (var dataSource in endpointRouteBuilder.DataSources)
             {
                 routeOptions.Value.EndpointDataSources.Add(dataSource);

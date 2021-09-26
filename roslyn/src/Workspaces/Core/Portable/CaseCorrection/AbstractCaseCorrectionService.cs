@@ -46,9 +46,9 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
             }
 
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    spans.Collapse(),
-                    cancellationToken
-                )
+                spans.Collapse(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var newRoot = CaseCorrect(

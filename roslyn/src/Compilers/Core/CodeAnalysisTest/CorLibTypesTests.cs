@@ -111,14 +111,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void SpecialTypeIsValueType()
         {
-            var comp = CSharp.CSharpCompilation.Create(
-                "c",
-                options: new CSharp.CSharpCompilationOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel
-                ),
-                references: new[] { TestMetadata.NetCoreApp.SystemRuntime }
-            );
+            var comp = CSharp.CSharpCompilation
+                .Create(
+                    "c",
+                    options: new CSharp.CSharpCompilationOptions(
+                        OutputKind.DynamicallyLinkedLibrary,
+                        warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel
+                    ),
+                    references: new[] { TestMetadata.NetCoreApp.SystemRuntime }
+                );
 
             var knownMissingTypes = new HashSet<SpecialType>() {  };
 

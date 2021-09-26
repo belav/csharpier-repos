@@ -31,7 +31,8 @@ namespace System.Linq.Tests
                 from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
                 where x > Int32.MinValue
                 select x
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(q.Take(9), q.Take(9));
 
@@ -64,7 +65,8 @@ namespace System.Linq.Tests
                 from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", String.Empty }
                 where !String.IsNullOrEmpty(x)
                 select x
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(q.Take(7), q.Take(7));
 
@@ -1109,7 +1111,8 @@ namespace System.Linq.Tests
                 new FastInfiniteEnumerator<int>().Take(largeNumber).Skip(largeNumber).Skip(42)
             );
             Assert.Empty(
-                new FastInfiniteEnumerator<int>().Take(largeNumber)
+                new FastInfiniteEnumerator<int>()
+                    .Take(largeNumber)
                     .Skip(largeNumber / 2)
                     .Skip(largeNumber / 2 + 1)
             );
@@ -1119,7 +1122,8 @@ namespace System.Linq.Tests
                 new FastInfiniteEnumerator<int>().Take(0..largeNumber).Skip(largeNumber).Skip(42)
             );
             Assert.Empty(
-                new FastInfiniteEnumerator<int>().Take(0..largeNumber)
+                new FastInfiniteEnumerator<int>()
+                    .Take(0..largeNumber)
                     .Skip(largeNumber / 2)
                     .Skip(largeNumber / 2 + 1)
             );
@@ -1424,7 +1428,8 @@ namespace System.Linq.Tests
             Assert.False(iterator3.MoveNext());
             Assert.True(isIteratorDisposed[3]);
 
-            IEnumerator<int> iterator4 = source[4].Take(^startIndexFromEnd..^endIndexFromEnd)
+            IEnumerator<int> iterator4 = source[4]
+                .Take(^startIndexFromEnd..^endIndexFromEnd)
                 .GetEnumerator();
             Assert.All(
                 Enumerable.Range(0, Math.Min(sourceCount, Math.Max(0, count))),

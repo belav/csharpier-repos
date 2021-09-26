@@ -167,11 +167,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
             var referenceCleanupService = new TestReferenceCleanupService();
 
             await UnusedReferencesRemover.ApplyReferenceUpdatesAsync(
-                    referenceCleanupService,
-                    string.Empty,
-                    referenceUpdates.ToImmutableArray(),
-                    CancellationToken.None
-                )
+                referenceCleanupService,
+                string.Empty,
+                referenceUpdates.ToImmutableArray(),
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             return referenceCleanupService.AppliedUpdates.ToImmutableArray();

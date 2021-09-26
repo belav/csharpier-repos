@@ -1008,12 +1008,11 @@ partial class Outer
                 onAfterWorkspaceCreated: w =>
                 {
                     w.TryApplyChanges(
-                        w.CurrentSolution.WithOptions(
-                            w.CurrentSolution.Options.WithChangedOption(
-                                FormattingOptions2.InsertFinalNewLine,
-                                true
+                        w.CurrentSolution
+                            .WithOptions(
+                                w.CurrentSolution.Options
+                                    .WithChangedOption(FormattingOptions2.InsertFinalNewLine, true)
                             )
-                        )
                     );
                 }
             );
@@ -1062,12 +1061,11 @@ partial class Outer
                 onAfterWorkspaceCreated: w =>
                 {
                     w.TryApplyChanges(
-                        w.CurrentSolution.WithOptions(
-                            w.CurrentSolution.Options.WithChangedOption(
-                                FormattingOptions2.InsertFinalNewLine,
-                                false
+                        w.CurrentSolution
+                            .WithOptions(
+                                w.CurrentSolution.Options
+                                    .WithChangedOption(FormattingOptions2.InsertFinalNewLine, false)
                             )
-                        )
                     );
                 }
             );

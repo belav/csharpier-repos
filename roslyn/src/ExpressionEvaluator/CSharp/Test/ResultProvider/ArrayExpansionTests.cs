@@ -474,11 +474,8 @@ class C
         public void NonZeroLowerBounds()
         {
             var rootExpr = "arrayExpr";
-            var array = (int[,])System.Array.CreateInstance(
-                typeof(int),
-                new[] { 2, 3 },
-                new[] { 3, 4 }
-            );
+            var array = (int[,])System.Array
+                .CreateInstance(typeof(int), new[] { 2, 3 }, new[] { 3, 4 });
             array[3, 4] = 1;
             array[3, 5] = 2;
             array[3, 6] = 3;
@@ -538,11 +535,8 @@ class C
         [Fact]
         public void HexadecimalNonZeroLowerBounds()
         {
-            var array = (int[,])System.Array.CreateInstance(
-                typeof(int),
-                new[] { 2, 1 },
-                new[] { -3, 4 }
-            );
+            var array = (int[,])System.Array
+                .CreateInstance(typeof(int), new[] { 2, 1 }, new[] { -3, 4 });
             array[-3, 4] = 1;
             array[-2, 4] = 2;
             var value = CreateDkmClrValue(array);
@@ -589,18 +583,15 @@ class C
                 GetChildren(evalResult, 0, null, out enumContext);
 
                 var items = GetItems(enumContext, offset, 2);
-                var indices1 = string.Format(
-                    "{0}, {1}, {2}",
-                    offset / 1000000,
-                    (offset % 1000000) / 1000,
-                    0
-                );
-                var indices2 = string.Format(
-                    "{0}, {1}, {2}",
-                    (offset + 1) / 1000000,
-                    ((offset + 1) % 1000000) / 1000,
-                    1
-                );
+                var indices1 = string
+                    .Format("{0}, {1}, {2}", offset / 1000000, (offset % 1000000) / 1000, 0);
+                var indices2 = string
+                    .Format(
+                        "{0}, {1}, {2}",
+                        (offset + 1) / 1000000,
+                        ((offset + 1) % 1000000) / 1000,
+                        1
+                    );
                 Verify(
                     items,
                     EvalResult(

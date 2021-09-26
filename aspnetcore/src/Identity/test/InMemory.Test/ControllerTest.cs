@@ -24,23 +24,22 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
             var context = new DefaultHttpContext();
             var auth = MockAuth(context);
             auth.Setup(
-                    a =>
-                        a.SignInAsync(
-                            context,
-                            IdentityConstants.ApplicationScheme,
-                            It.IsAny<ClaimsPrincipal>(),
-                            It.IsAny<AuthenticationProperties>()
-                        )
-                )
+                a =>
+                    a.SignInAsync(
+                        context,
+                        IdentityConstants.ApplicationScheme,
+                        It.IsAny<ClaimsPrincipal>(),
+                        It.IsAny<AuthenticationProperties>()
+                    )
+            )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
             // REVIEW: is persistant mocking broken
             //It.Is<AuthenticationProperties>(v => v.IsPersistent == isPersistent))).Returns(Task.FromResult(0)).Verifiable();
             var contextAccessor = new Mock<IHttpContextAccessor>();
             contextAccessor.Setup(a => a.HttpContext).Returns(context);
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                    new ConfigurationBuilder().Build()
-                )
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
                 .AddLogging()
                 .AddSingleton(contextAccessor.Object);
 
@@ -54,9 +53,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
             var user = new PocoUser { UserName = "Yolo" };
             const string password = "[PLACEHOLDER]-1a";
             var userManager = app.ApplicationServices.GetRequiredService<UserManager<PocoUser>>();
-            var signInManager = app.ApplicationServices.GetRequiredService<
-                SignInManager<PocoUser>
-            >();
+            var signInManager = app.ApplicationServices
+                .GetRequiredService<SignInManager<PocoUser>>();
 
             IdentityResultAssert.IsSuccess(await userManager.CreateAsync(user, password));
 
@@ -101,9 +99,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
                 .Returns(Task.FromResult(AuthenticateResult.NoResult()));
             var contextAccessor = new Mock<IHttpContextAccessor>();
             contextAccessor.Setup(a => a.HttpContext).Returns(context);
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                    new ConfigurationBuilder().Build()
-                )
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
                 .AddLogging()
                 .AddSingleton(contextAccessor.Object);
             services.AddIdentity<PocoUser, PocoRole>();
@@ -115,9 +112,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
             // Act
             var user = new PocoUser { UserName = "Yolo" };
             var userManager = app.ApplicationServices.GetRequiredService<UserManager<PocoUser>>();
-            var signInManager = app.ApplicationServices.GetRequiredService<
-                SignInManager<PocoUser>
-            >();
+            var signInManager = app.ApplicationServices
+                .GetRequiredService<SignInManager<PocoUser>>();
 
             IdentityResultAssert.IsSuccess(await userManager.CreateAsync(user));
             IdentityResultAssert.IsSuccess(
@@ -142,7 +138,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
         private Mock<IAuthenticationService> MockAuth(HttpContext context)
         {
             var auth = new Mock<IAuthenticationService>();
-            context.RequestServices = new ServiceCollection().AddSingleton(auth.Object)
+            context.RequestServices = new ServiceCollection()
+                .AddSingleton(auth.Object)
                 .BuildServiceProvider();
             return auth;
         }

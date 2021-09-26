@@ -236,9 +236,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void CastToStatic()
         {
-            CallSite<Func<CallSite, object, object>> site = CallSite<
-                Func<CallSite, object, object>
-            >.Create(Binder.Convert(CSharpBinderFlags.ConvertExplicit, typeof(Binder), GetType()));
+            CallSite<Func<CallSite, object, object>> site = CallSite<Func<CallSite, object, object>>
+                .Create(
+                    Binder.Convert(CSharpBinderFlags.ConvertExplicit, typeof(Binder), GetType())
+                );
             Func<CallSite, object, object> targ = site.Target;
             Assert.Throws<RuntimeBinderException>(() => targ(site, "abc"));
         }
@@ -276,15 +277,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void CtorCallOnNoCtorType()
         {
-            CallSite<Func<CallSite, Type, double>> callSite = CallSite<
-                Func<CallSite, Type, double>
-            >.Create(
-                Binder.InvokeConstructor(
-                    CSharpBinderFlags.InvokeSpecialName,
-                    GetType(),
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
-                )
-            );
+            CallSite<Func<CallSite, Type, double>> callSite = CallSite<Func<CallSite, Type, double>>
+                .Create(
+                    Binder.InvokeConstructor(
+                        CSharpBinderFlags.InvokeSpecialName,
+                        GetType(),
+                        new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                    )
+                );
             Func<CallSite, Type, double> target = callSite.Target;
             Assert.Throws<RuntimeBinderException>(() => target(callSite, typeof(double)));
         }
@@ -292,15 +292,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void NullaryCtorCallOnNoNullaryCtor()
         {
-            CallSite<Func<CallSite, Type, string>> callSite = CallSite<
-                Func<CallSite, Type, string>
-            >.Create(
-                Binder.InvokeConstructor(
-                    CSharpBinderFlags.InvokeSpecialName,
-                    GetType(),
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
-                )
-            );
+            CallSite<Func<CallSite, Type, string>> callSite = CallSite<Func<CallSite, Type, string>>
+                .Create(
+                    Binder.InvokeConstructor(
+                        CSharpBinderFlags.InvokeSpecialName,
+                        GetType(),
+                        new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                    )
+                );
             Func<CallSite, Type, string> target = callSite.Target;
             RuntimeBinderException rbe = Assert.Throws<RuntimeBinderException>(
                 () => target(callSite, typeof(string))
@@ -315,21 +314,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 Func<CallSite, Type, object, object, object, object, object, object>
             > callSite = CallSite<
                 Func<CallSite, Type, object, object, object, object, object, object>
-            >.Create(
-                Binder.InvokeConstructor(
-                    CSharpBinderFlags.InvokeSpecialName,
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.InvokeConstructor(
+                        CSharpBinderFlags.InvokeSpecialName,
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, Type, object, object, object, object, object, object> target =
                 callSite.Target;
             RuntimeBinderException rbe = Assert.Throws<RuntimeBinderException>(
@@ -398,20 +398,28 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object, object>> site = CallSite<
                 Func<CallSite, object, object, object, object>
-            >.Create(
-                Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "Equals",
-                    null,
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x")
-                    }
-                )
-            );
+            >
+                .Create(
+                    Microsoft.CSharp.RuntimeBinder.Binder
+                        .InvokeMember(
+                            CSharpBinderFlags.None,
+                            "Equals",
+                            null,
+                            GetType(),
+                            new[]
+                            {
+                                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                                CSharpArgumentInfo.Create(
+                                    CSharpArgumentInfoFlags.NamedArgument,
+                                    "x"
+                                ),
+                                CSharpArgumentInfo.Create(
+                                    CSharpArgumentInfoFlags.NamedArgument,
+                                    "x"
+                                )
+                            }
+                        )
+                );
             Func<CallSite, object, object, object, object> target = site.Target;
             Assert.Throws<RuntimeBinderException>(
                 () => target.Invoke(site, EqualityComparer<int>.Default, 2, 2)

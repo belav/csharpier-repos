@@ -47,14 +47,12 @@ class Program
     }
 }";
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "000123",
-                    verify: Verification.Fails
-                )
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "000123",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Program.MakeBlock",
                     @"{
@@ -128,14 +126,12 @@ unsafe class Test
     }
 }";
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "424242424242424242",
-                    verify: Verification.Fails
-                )
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "424242424242424242",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Test.M<T>(T)",
                     @"{
@@ -232,10 +228,9 @@ class Test
                 parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
             );
 
-            CompileAndVerify(comp, verify: Verification.Fails)
-                .VerifyIL(
-                    "Test.M<T>(T)",
-                    @"{
+            CompileAndVerify(comp, verify: Verification.Fails).VerifyIL(
+                "Test.M<T>(T)",
+                @"{
   // Code size      169 (0xa9)
   .maxstack  4
   IL_0000:  ldc.i4.3
@@ -312,7 +307,7 @@ class Test
   IL_00a7:  pop
   IL_00a8:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -333,14 +328,12 @@ public class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "2",
-                    verify: Verification.Fails
-                )
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "2",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Main",
                     @"{
@@ -397,13 +390,11 @@ static unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeReleaseExe,
-                    verify: Verification.Fails
-                )
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Main",
                     @"{
@@ -446,14 +437,12 @@ static unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeReleaseExe,
-                    expectedOutput: "12",
-                    verify: Verification.Passes
-                )
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "12",
+                verify: Verification.Passes
+            )
                 .VerifyIL(
                     "C.Main",
                     @"{
@@ -472,14 +461,12 @@ static unsafe class C
 }"
                 );
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeDebugExe,
-                    expectedOutput: "12",
-                    verify: Verification.Fails
-                )
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeDebugExe,
+                expectedOutput: "12",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Main",
                     @"{
@@ -543,13 +530,11 @@ static unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeReleaseExe,
-                    verify: Verification.Fails
-                )
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "C.Main",
                     @"{
@@ -586,14 +571,12 @@ static unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeReleaseExe,
-                    verify: Verification.Fails,
-                    expectedOutput: @"424242"
-                )
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"424242"
+            )
                 .VerifyIL(
                     "C.Main",
                     @"{
@@ -635,14 +618,12 @@ static unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeReleaseExe,
-                    verify: Verification.Fails,
-                    expectedOutput: @"ffffffffffffffffffffffff"
-                )
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"ffffffffffffffffffffffff"
+            )
                 .VerifyIL(
                     "C.Main",
                     @"{
@@ -689,14 +670,12 @@ static unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeReleaseExe,
-                    verify: Verification.Fails,
-                    expectedOutput: @"123456789"
-                )
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"123456789"
+            )
                 .VerifyIL(
                     "C.Main",
                     @"{
@@ -753,14 +732,12 @@ static unsafe class C
 }
 ";
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeReleaseExe,
-                    verify: Verification.Fails,
-                    expectedOutput: @"123"
-                )
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"123"
+            )
                 .VerifyIL(
                     "C.Main",
                     @"{
@@ -914,10 +891,9 @@ namespace System
                 options: TestOptions.UnsafeReleaseExe,
                 parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
             );
-            CompileAndVerify(comp, verify: Verification.Fails, expectedOutput: @"123")
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(comp, verify: Verification.Fails, expectedOutput: @"123").VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  4
@@ -934,7 +910,7 @@ namespace System
   IL_0014:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -971,10 +947,9 @@ namespace System
                 options: TestOptions.UnsafeReleaseExe,
                 parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
             );
-            CompileAndVerify(comp, verify: Verification.Fails, expectedOutput: @"123")
-                .VerifyIL(
-                    "C.Main",
-                    @"
+            CompileAndVerify(comp, verify: Verification.Fails, expectedOutput: @"123").VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  4
@@ -1004,7 +979,7 @@ namespace System
   IL_0021:  ret
 }
 "
-                );
+            );
         }
 
         private static string GetSource(string pointerType) =>
@@ -1029,14 +1004,12 @@ static unsafe class C
 
         private void Test(string pointerType, string il) =>
             CompileAndVerify(
-                    GetSource(pointerType),
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
-                    options: TestOptions.UnsafeReleaseExe,
-                    verify: Verification.Fails,
-                    expectedOutput: @"123"
-                )
+                GetSource(pointerType),
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"123"
+            )
                 .VerifyIL("C.Main", il);
     }
 }

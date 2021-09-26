@@ -52,16 +52,16 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
             )
             {
                 var semanticDocument = await SemanticDocument.CreateAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var state = await State.GenerateAsync(
-                        (TService)this,
-                        semanticDocument,
-                        node,
-                        cancellationToken
-                    )
+                    (TService)this,
+                    semanticDocument,
+                    node,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (state == null)
                 {

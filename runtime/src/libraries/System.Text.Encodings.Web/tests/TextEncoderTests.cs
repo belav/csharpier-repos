@@ -243,7 +243,8 @@ namespace System.Text.Encodings.Web.Tests
                             destination,
                             0,
                             expectedOutputBytesSoFar.Count + "[FFFD]".Length
-                        ).ToArray()
+                        )
+                            .ToArray()
                     );
                 }
 

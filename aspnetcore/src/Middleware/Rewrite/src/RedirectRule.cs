@@ -103,9 +103,8 @@ namespace Microsoft.AspNetCore.Rewrite
                     var querySplit = newPath.IndexOf('?');
                     if (querySplit >= 0)
                     {
-                        resolvedQuery = request.QueryString.Add(
-                            QueryString.FromUriComponent(newPath.Substring(querySplit))
-                        );
+                        resolvedQuery = request.QueryString
+                            .Add(QueryString.FromUriComponent(newPath.Substring(querySplit)));
                         resolvedPath = newPath.Substring(0, querySplit);
                     }
 

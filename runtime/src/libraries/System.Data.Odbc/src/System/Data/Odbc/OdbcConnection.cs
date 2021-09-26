@@ -196,10 +196,11 @@ namespace System.Data.Odbc
                         try
                         { // mdac 89269: driver may return malformatted string
                             ProviderInfo.IsV3Driver = (
-                                int.Parse(
-                                    ProviderInfo.DriverVersion.Substring(0, 2),
-                                    CultureInfo.InvariantCulture
-                                ) >= 3
+                                int
+                                    .Parse(
+                                        ProviderInfo.DriverVersion.Substring(0, 2),
+                                        CultureInfo.InvariantCulture
+                                    ) >= 3
                             );
                         }
                         catch (System.FormatException e)
@@ -384,7 +385,8 @@ namespace System.Data.Odbc
                 {
                     value = (
                         BitConverter.IsLittleEndian ? Encoding.Unicode : Encoding.BigEndianUnicode
-                    ).GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
+                    )
+                        .GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
                 }
                 else if (retcode == ODBC32.RetCode.ERROR)
                 {
@@ -498,7 +500,8 @@ namespace System.Data.Odbc
                 {
                     value = (
                         BitConverter.IsLittleEndian ? Encoding.Unicode : Encoding.BigEndianUnicode
-                    ).GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
+                    )
+                        .GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
                 }
                 else if (handleError)
                 {

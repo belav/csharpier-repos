@@ -521,10 +521,11 @@ namespace StressAllocator
                     else if (String.Compare(currentArg.ToLower(), "pinned") == 0)
                     {
                         currentArgValue = args[++i];
-                        percentPinned = float.Parse(
-                            currentArgValue,
-                            System.Globalization.CultureInfo.InvariantCulture
-                        );
+                        percentPinned = float
+                            .Parse(
+                                currentArgValue,
+                                System.Globalization.CultureInfo.InvariantCulture
+                            );
                     }
                     else if (String.Compare(currentArg.ToLower(), "usepoh") == 0)
                     {
@@ -538,34 +539,38 @@ namespace StressAllocator
                     else if (String.Compare(currentArg.ToLower(), "bucket1") == 0)
                     {
                         currentArgValue = args[++i];
-                        percentBucket1 = float.Parse(
-                            currentArgValue,
-                            System.Globalization.CultureInfo.InvariantCulture
-                        );
+                        percentBucket1 = float
+                            .Parse(
+                                currentArgValue,
+                                System.Globalization.CultureInfo.InvariantCulture
+                            );
                     }
                     else if (String.Compare(currentArg.ToLower(), "bucket2") == 0)
                     {
                         currentArgValue = args[++i];
-                        percentBucket2 = float.Parse(
-                            currentArgValue,
-                            System.Globalization.CultureInfo.InvariantCulture
-                        );
+                        percentBucket2 = float
+                            .Parse(
+                                currentArgValue,
+                                System.Globalization.CultureInfo.InvariantCulture
+                            );
                     }
                     else if (String.Compare(currentArg.ToLower(), "bucket3") == 0)
                     {
                         currentArgValue = args[++i];
-                        percentBucket3 = float.Parse(
-                            currentArgValue,
-                            System.Globalization.CultureInfo.InvariantCulture
-                        );
+                        percentBucket3 = float
+                            .Parse(
+                                currentArgValue,
+                                System.Globalization.CultureInfo.InvariantCulture
+                            );
                     }
                     else if (String.Compare(currentArg.ToLower(), "bucket4") == 0)
                     {
                         currentArgValue = args[++i];
-                        percentBucket4 = float.Parse(
-                            currentArgValue,
-                            System.Globalization.CultureInfo.InvariantCulture
-                        );
+                        percentBucket4 = float
+                            .Parse(
+                                currentArgValue,
+                                System.Globalization.CultureInfo.InvariantCulture
+                            );
                     }
                     else if (String.Compare(currentArg.ToLower(), "nolocks") == 0)
                     {

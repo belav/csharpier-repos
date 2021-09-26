@@ -62,10 +62,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             var tagHelpers = new[]
             {
                 TagHelperDescriptorBuilder.Create(
-                        ViewComponentTagHelperConventions.Kind,
-                        "TestTagHelper",
-                        "TestAssembly"
-                    )
+                    ViewComponentTagHelperConventions.Kind,
+                    "TestTagHelper",
+                    "TestAssembly"
+                )
                     .TypeName("__Generated__TagCloudViewComponentTagHelper")
                     .BoundAttributeDescriptor(
                         attribute =>
@@ -120,10 +120,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             var tagHelpers = new[]
             {
                 TagHelperDescriptorBuilder.Create(
-                        ViewComponentTagHelperConventions.Kind,
-                        "TestTagHelper",
-                        "TestAssembly"
-                    )
+                    ViewComponentTagHelperConventions.Kind,
+                    "TestTagHelper",
+                    "TestAssembly"
+                )
                     .TypeName("__Generated__TagCloudViewComponentTagHelper")
                     .BoundAttributeDescriptor(
                         attribute =>
@@ -186,10 +186,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
                     .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
                     .Build(),
                 TagHelperDescriptorBuilder.Create(
-                        ViewComponentTagHelperConventions.Kind,
-                        "TestTagHelper",
-                        "TestAssembly"
-                    )
+                    ViewComponentTagHelperConventions.Kind,
+                    "TestTagHelper",
+                    "TestAssembly"
+                )
                     .TypeName("__Generated__TagCloudViewComponentTagHelper")
                     .BoundAttributeDescriptor(
                         attribute =>
@@ -280,8 +280,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             // We also expect the default tag helper pass to run first.
             var documentNode = codeDocument.GetDocumentIntermediateNode();
 
-            var defaultTagHelperPass =
-                projectEngine.EngineFeatures.OfType<DefaultTagHelperOptimizationPass>().Single();
+            var defaultTagHelperPass = projectEngine.EngineFeatures
+                .OfType<DefaultTagHelperOptimizationPass>()
+                .Single();
             defaultTagHelperPass.Execute(codeDocument, documentNode);
 
             return codeDocument.GetDocumentIntermediateNode();

@@ -318,7 +318,8 @@ public class LocalTypes3
             Assert.Equal(0, localTypes1.GlobalNamespace.GetTypeMembers("S1", 0).Length);
             Assert.Equal(
                 0,
-                localTypes1.GlobalNamespace.GetMembers("NS1")
+                localTypes1.GlobalNamespace
+                    .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
                     .GetTypeMembers().Length
@@ -335,7 +336,8 @@ public class LocalTypes3
             Assert.Equal(0, localTypes2.GlobalNamespace.GetTypeMembers("S1", 0).Length);
             Assert.Equal(
                 0,
-                localTypes2.GlobalNamespace.GetMembers("NS1")
+                localTypes2.GlobalNamespace
+                    .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
                     .GetTypeMembers().Length
@@ -418,7 +420,8 @@ public class LocalTypes3
 
             var varI1 = pia1_1.GlobalNamespace.GetTypeMembers("I1").Single();
             var varS1 = pia1_1.GlobalNamespace.GetTypeMembers("S1").Single();
-            var varNS1 = pia1_1.GlobalNamespace.GetMembers("NS1")
+            var varNS1 = pia1_1.GlobalNamespace
+                .GetMembers("NS1")
                 .OfType<NamespaceSymbol>()
                 .Single();
             var varI2 = varNS1.GetTypeMembers("I2").Single();
@@ -505,7 +508,8 @@ public class LocalTypes3
 
             Assert.Same(pia1_3.GlobalNamespace.GetTypeMembers("I1").Single(), param[0].Type);
             Assert.Same(
-                pia1_3.GlobalNamespace.GetMembers("NS1")
+                pia1_3.GlobalNamespace
+                    .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
                     .GetTypeMembers("I2")
@@ -764,7 +768,8 @@ public class LocalTypes3
 
             var varI1 = pia1_1.GlobalNamespace.GetTypeMembers("I1").Single();
             var varS1 = pia1_1.GlobalNamespace.GetTypeMembers("S1").Single();
-            var varNS1 = pia1_1.GlobalNamespace.GetMembers("NS1")
+            var varNS1 = pia1_1.GlobalNamespace
+                .GetMembers("NS1")
                 .OfType<NamespaceSymbol>()
                 .Single();
             var varI2 = varNS1.GetTypeMembers("I2").Single();
@@ -851,7 +856,8 @@ public class LocalTypes3
 
             Assert.Same(pia1_3.GlobalNamespace.GetTypeMembers("I1").Single(), param[0].Type);
             Assert.Same(
-                pia1_3.GlobalNamespace.GetMembers("NS1")
+                pia1_3.GlobalNamespace
+                    .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
                     .GetTypeMembers("I2")
@@ -1119,7 +1125,8 @@ public class LocalTypes3
 
             var varI1 = pia1_1.GlobalNamespace.GetTypeMembers("I1").Single();
             var varS1 = pia1_1.GlobalNamespace.GetTypeMembers("S1").Single();
-            var varNS1 = pia1_1.GlobalNamespace.GetMembers("NS1")
+            var varNS1 = pia1_1.GlobalNamespace
+                .GetMembers("NS1")
                 .OfType<NamespaceSymbol>()
                 .Single();
             var varI2 = varNS1.GetTypeMembers("I2").Single();
@@ -1206,7 +1213,8 @@ public class LocalTypes3
 
             Assert.Same(pia1_3.GlobalNamespace.GetTypeMembers("I1").Single(), param[0].Type);
             Assert.Same(
-                pia1_3.GlobalNamespace.GetMembers("NS1")
+                pia1_3.GlobalNamespace
+                    .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
                     .GetTypeMembers("I2")

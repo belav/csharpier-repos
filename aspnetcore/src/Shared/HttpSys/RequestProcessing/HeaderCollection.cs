@@ -309,11 +309,12 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                     if (ch < 0x20)
                     {
                         throw new InvalidOperationException(
-                            string.Format(
-                                CultureInfo.CurrentCulture,
-                                "Invalid control character in header: 0x{0:X2}",
-                                (byte)ch
-                            )
+                            string
+                                .Format(
+                                    CultureInfo.CurrentCulture,
+                                    "Invalid control character in header: 0x{0:X2}",
+                                    (byte)ch
+                                )
                         );
                     }
                 }

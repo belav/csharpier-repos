@@ -358,11 +358,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // of the when clauses to see if they are all simple enough to conclude that they do
                 // not mutate pattern variables.
                 var mightAssignWalker = new WhenClauseMightAssignPatternVariableWalker();
-                bool canShareTemps = !decisionDag.TopologicallySortedNodes.Any(
-                    node =>
-                        node is BoundWhenDecisionDagNode w
-                        && mightAssignWalker.MightAssignSomething(w.WhenExpression)
-                );
+                bool canShareTemps = !decisionDag.TopologicallySortedNodes
+                    .Any(
+                        node =>
+                            node is BoundWhenDecisionDagNode w
+                            && mightAssignWalker.MightAssignSomething(w.WhenExpression)
+                    );
 
                 if (canShareTemps)
                 {
@@ -490,9 +491,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var whenTrue = evaluationNode.Next;
                     var whenFalse = testNode.WhenFalse;
-                    bool canEliminateEvaluationNode = !this._dagNodeLabels.ContainsKey(
-                        evaluationNode
-                    );
+                    bool canEliminateEvaluationNode = !this._dagNodeLabels
+                        .ContainsKey(evaluationNode);
 
                     if (canEliminateEvaluationNode)
                         loweredNodes.Add(evaluationNode);
@@ -659,20 +659,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                             input,
                             fac
                         );
-                        return ValueDispatchNode.RelationalDispatch.CreateBalanced(
-                            testNode.Syntax,
-                            relational.Value,
-                            relational.OperatorKind,
-                            whenTrue: whenTrue,
-                            whenFalse: whenFalse
-                        );
+                        return ValueDispatchNode.RelationalDispatch
+                            .CreateBalanced(
+                                testNode.Syntax,
+                                relational.Value,
+                                relational.OperatorKind,
+                                whenTrue: whenTrue,
+                                whenFalse: whenFalse
+                            );
                     }
                     case BoundDagValueTest value:
                     {
                         // Gather up the (value, label) pairs, starting with the first one
                         loweredNodes.Add(testNode);
-                        var cases =
-                            ArrayBuilder<(ConstantValue value, LabelSymbol label)>.GetInstance();
+                        var cases = ArrayBuilder<(ConstantValue value, LabelSymbol label)>
+                            .GetInstance();
                         cases.Add((value: value.Value, label: GetDagNodeLabel(testNode.WhenTrue)));
                         BoundTestDecisionDagNode previous = testNode;
                         while (
@@ -763,16 +764,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ConstantValue value
                 )
                 {
-                    var whenTrueBuilder =
-                        ArrayBuilder<(ConstantValue value, LabelSymbol label)>.GetInstance();
-                    var whenFalseBuilder =
-                        ArrayBuilder<(ConstantValue value, LabelSymbol label)>.GetInstance();
+                    var whenTrueBuilder = ArrayBuilder<(ConstantValue value, LabelSymbol label)>
+                        .GetInstance();
+                    var whenFalseBuilder = ArrayBuilder<(ConstantValue value, LabelSymbol label)>
+                        .GetInstance();
                     op = op.Operator();
                     foreach (var pair in cases)
                     {
-                        (
-                            fac.Related(op, pair.value, value) ? whenTrueBuilder : whenFalseBuilder
-                        ).Add(pair);
+                        (fac.Related(op, pair.value, value) ? whenTrueBuilder : whenFalseBuilder)
+                            .Add(pair);
                     }
 
                     return (
@@ -927,9 +927,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 _factory.SpecialType(SpecialType.System_Int64),
                                 input
                             );
-                            cases = node.Cases.SelectAsArray(
-                                p => (ConstantValue.Create((long)p.value.Int32Value), p.label)
-                            );
+                            cases = node.Cases
+                                .SelectAsArray(
+                                    p => (ConstantValue.Create((long)p.value.Int32Value), p.label)
+                                );
                             break;
                         }
                         case SpecialType.System_UIntPtr:
@@ -938,9 +939,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 _factory.SpecialType(SpecialType.System_UInt64),
                                 input
                             );
-                            cases = node.Cases.SelectAsArray(
-                                p => (ConstantValue.Create((ulong)p.value.UInt32Value), p.label)
-                            );
+                            cases = node.Cases
+                                .SelectAsArray(
+                                    p => (ConstantValue.Create((ulong)p.value.UInt32Value), p.label)
+                                );
                             break;
                         }
                         default:
@@ -1031,10 +1033,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // with each case label. We use the Dev10 Heuristic to determine this
                 // (see SwitchStringJumpTableEmitter.ShouldGenerateHashTableSwitch() for details).
                 if (
-                    !CodeAnalysis.CodeGen.SwitchStringJumpTableEmitter.ShouldGenerateHashTableSwitch(
-                        module,
-                        labelsCount
-                    )
+                    !CodeAnalysis.CodeGen.SwitchStringJumpTableEmitter
+                        .ShouldGenerateHashTableSwitch(module, labelsCount)
                 )
                 {
                     return;
@@ -1065,9 +1065,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 // cannot emit hash method if have no access to Chars.
-                var charsMember = _localRewriter._compilation.GetSpecialTypeMember(
-                    SpecialMember.System_String__Chars
-                );
+                var charsMember = _localRewriter._compilation
+                    .GetSpecialTypeMember(SpecialMember.System_String__Chars);
                 if ((object)charsMember == null || charsMember.HasUseSiteError)
                 {
                     return;
@@ -1128,8 +1127,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Only add instrumentation (such as a sequence point) if the node is not compiler-generated.
                     if (GenerateInstrumentation && !whenClause.WhenExpression.WasCompilerGenerated)
                     {
-                        conditionalGoto =
-                            _localRewriter._instrumenter.InstrumentSwitchWhenClauseConditionalGotoBody(
+                        conditionalGoto = _localRewriter._instrumenter
+                            .InstrumentSwitchWhenClauseConditionalGotoBody(
                                 whenClause.WhenExpression,
                                 conditionalGoto
                             );

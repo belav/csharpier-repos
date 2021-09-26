@@ -311,7 +311,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 "One",
                 Array.Empty<object>(),
                 new MethodCallCodeFragment("Two")
-            ).Chain("Three");
+            )
+                .Chain("Three");
 
             var result = new CSharpHelper(TypeMappingSource).Fragment(method);
 
@@ -325,13 +326,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 "One",
                 Array.Empty<object>(),
                 new MethodCallCodeFragment("Two")
-            ).Chain(
-                new MethodCallCodeFragment(
-                    "Three",
-                    Array.Empty<object>(),
-                    new MethodCallCodeFragment("Four")
-                )
-            );
+            )
+                .Chain(
+                    new MethodCallCodeFragment(
+                        "Three",
+                        Array.Empty<object>(),
+                        new MethodCallCodeFragment("Four")
+                    )
+                );
 
             var result = new CSharpHelper(TypeMappingSource).Fragment(method);
 
@@ -400,9 +402,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var typeMapping = CreateTypeMappingSource<SimpleTestType>(
                 v =>
                     Expression.New(
-                        typeof(SimpleTestType).GetConstructor(
-                            new[] { typeof(string), typeof(int?) }
-                        ),
+                        typeof(SimpleTestType)
+                            .GetConstructor(new[] { typeof(string), typeof(int?) }),
                         Expression.Constant(v.Arg1, typeof(string)),
                         Expression.Constant(v.Arg2, typeof(int?))
                     )
@@ -420,10 +421,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var typeMapping = CreateTypeMappingSource<SimpleTestType>(
                 v =>
                     Expression.Call(
-                        typeof(SimpleTestTypeFactory).GetMethod(
-                            nameof(SimpleTestTypeFactory.StaticCreate),
-                            new Type[0]
-                        )
+                        typeof(SimpleTestTypeFactory)
+                            .GetMethod(nameof(SimpleTestTypeFactory.StaticCreate), new Type[0])
                     )
             );
 
@@ -439,10 +438,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var typeMapping = CreateTypeMappingSource<SimpleTestType>(
                 v =>
                     Expression.Call(
-                        typeof(SimpleTestTypeFactory).GetMethod(
-                            nameof(SimpleTestTypeFactory.StaticCreate),
-                            new[] { typeof(string) }
-                        ),
+                        typeof(SimpleTestTypeFactory)
+                            .GetMethod(
+                                nameof(SimpleTestTypeFactory.StaticCreate),
+                                new[] { typeof(string) }
+                            ),
                         Expression.Constant(v.Arg1, typeof(string))
                     )
             );
@@ -459,10 +459,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var typeMapping = CreateTypeMappingSource<SimpleTestType>(
                 v =>
                     Expression.Call(
-                        typeof(SimpleTestTypeFactory).GetMethod(
-                            nameof(SimpleTestTypeFactory.StaticCreate),
-                            new[] { typeof(string), typeof(int?) }
-                        ),
+                        typeof(SimpleTestTypeFactory)
+                            .GetMethod(
+                                nameof(SimpleTestTypeFactory.StaticCreate),
+                                new[] { typeof(string), typeof(int?) }
+                            ),
                         Expression.Constant(v.Arg1, typeof(string)),
                         Expression.Constant(v.Arg2, typeof(int?))
                     )
@@ -481,10 +482,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 v =>
                     Expression.Call(
                         Expression.New(typeof(SimpleTestTypeFactory)),
-                        typeof(SimpleTestTypeFactory).GetMethod(
-                            nameof(SimpleTestTypeFactory.Create),
-                            new Type[0]
-                        )
+                        typeof(SimpleTestTypeFactory)
+                            .GetMethod(nameof(SimpleTestTypeFactory.Create), new Type[0])
                     )
             );
 
@@ -502,10 +501,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     Expression.Convert(
                         Expression.Call(
                             Expression.New(typeof(SimpleTestTypeFactory)),
-                            typeof(SimpleTestTypeFactory).GetMethod(
-                                nameof(SimpleTestTypeFactory.Create),
-                                new[] { typeof(string) }
-                            ),
+                            typeof(SimpleTestTypeFactory)
+                                .GetMethod(
+                                    nameof(SimpleTestTypeFactory.Create),
+                                    new[] { typeof(string) }
+                                ),
                             Expression.Constant(v.Arg1, typeof(string))
                         ),
                         typeof(SimpleTestType)
@@ -526,15 +526,15 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     Expression.Convert(
                         Expression.Call(
                             Expression.New(
-                                typeof(SimpleTestTypeFactory).GetConstructor(
-                                    new[] { typeof(string) }
-                                ),
+                                typeof(SimpleTestTypeFactory)
+                                    .GetConstructor(new[] { typeof(string) }),
                                 Expression.Constant("4096", typeof(string))
                             ),
-                            typeof(SimpleTestTypeFactory).GetMethod(
-                                nameof(SimpleTestTypeFactory.Create),
-                                new[] { typeof(string), typeof(int?) }
-                            ),
+                            typeof(SimpleTestTypeFactory)
+                                .GetMethod(
+                                    nameof(SimpleTestTypeFactory.Create),
+                                    new[] { typeof(string), typeof(int?) }
+                                ),
                             Expression.Constant(v.Arg1, typeof(string)),
                             Expression.Constant(v.Arg2, typeof(int?))
                         ),
@@ -556,15 +556,15 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     Expression.Convert(
                         Expression.Call(
                             Expression.New(
-                                typeof(SimpleTestTypeFactory).GetConstructor(
-                                    new[] { typeof(string) }
-                                ),
+                                typeof(SimpleTestTypeFactory)
+                                    .GetConstructor(new[] { typeof(string) }),
                                 Expression.Constant("4096", typeof(string))
                             ),
-                            typeof(SimpleTestTypeFactory).GetMethod(
-                                nameof(SimpleTestTypeFactory.Create),
-                                new[] { typeof(string), typeof(int?) }
-                            ),
+                            typeof(SimpleTestTypeFactory)
+                                .GetMethod(
+                                    nameof(SimpleTestTypeFactory.Create),
+                                    new[] { typeof(string), typeof(int?) }
+                                ),
                             Expression.Constant(v.Arg1, typeof(string)),
                             Expression.Convert(
                                 Expression.Constant(v.Arg2, typeof(int)),
@@ -605,9 +605,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 v =>
                     Expression.Property(
                         null,
-                        typeof(SimpleTestType).GetProperty(
-                            nameof(SimpleTestType.SomeStaticProperty)
-                        )
+                        typeof(SimpleTestType)
+                            .GetProperty(nameof(SimpleTestType.SomeStaticProperty))
                     )
             );
 
@@ -624,9 +623,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 v =>
                     Expression.Property(
                         Expression.New(typeof(SimpleTestType)),
-                        typeof(SimpleTestType).GetProperty(
-                            nameof(SimpleTestType.SomeInstanceProperty)
-                        )
+                        typeof(SimpleTestType)
+                            .GetProperty(nameof(SimpleTestType.SomeInstanceProperty))
                     )
             );
 

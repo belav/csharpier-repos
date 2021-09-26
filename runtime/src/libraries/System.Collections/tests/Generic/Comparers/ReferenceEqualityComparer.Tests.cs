@@ -12,9 +12,10 @@ namespace System.Collections.Generic.Tests
         [Fact]
         public void TypeHasNoPublicCtors()
         {
-            ConstructorInfo[] ctors = typeof(ReferenceEqualityComparer).GetConstructors(
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-            );
+            ConstructorInfo[] ctors = typeof(ReferenceEqualityComparer)
+                .GetConstructors(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                );
             Assert.DoesNotContain(
                 ctors,
                 ctor => ctor.IsPublic || ctor.IsFamily || ctor.IsFamilyOrAssembly

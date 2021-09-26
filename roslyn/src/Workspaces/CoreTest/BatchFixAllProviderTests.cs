@@ -50,7 +50,8 @@ class TestClass {{
             {
                 TestCode = testCode,
                 FixedCode = fixedCode,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp)]

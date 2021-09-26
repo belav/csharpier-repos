@@ -138,11 +138,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var rightSideOfComparison = comparison is BinaryExpressionSyntax binaryExpression
                 ? (SyntaxNode)binaryExpression.Right
                 : ((IsPatternExpressionSyntax)comparison).Pattern;
-            var newIdentifier = declarator.Identifier.WithoutTrivia()
+            var newIdentifier = declarator.Identifier
+                .WithoutTrivia()
                 .WithTrailingTrivia(rightSideOfComparison.GetTrailingTrivia());
 
             var declarationPattern = SyntaxFactory.DeclarationPattern(
-                ((TypeSyntax)asExpression.Right).WithoutTrivia()
+                ((TypeSyntax)asExpression.Right)
+                    .WithoutTrivia()
                     .WithTrailingTrivia(SyntaxFactory.ElasticMarker),
                 SyntaxFactory.SingleVariableDesignation(newIdentifier)
             );

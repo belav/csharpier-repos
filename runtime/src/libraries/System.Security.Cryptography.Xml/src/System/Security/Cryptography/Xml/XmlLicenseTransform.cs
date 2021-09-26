@@ -49,20 +49,19 @@ namespace System.Security.Cryptography.Xml
             for (int i = 0, count = encryptedGrantList.Count; i < count; i++)
             {
                 encryptionMethod =
-                    encryptedGrantList[i].SelectSingleNode(
-                        "//r:encryptedGrant/enc:EncryptionMethod",
-                        _namespaceManager
-                    ) as XmlElement;
+                    encryptedGrantList[i]
+                        .SelectSingleNode(
+                            "//r:encryptedGrant/enc:EncryptionMethod",
+                            _namespaceManager
+                        ) as XmlElement;
                 keyInfo =
-                    encryptedGrantList[i].SelectSingleNode(
-                        "//r:encryptedGrant/dsig:KeyInfo",
-                        _namespaceManager
-                    ) as XmlElement;
+                    encryptedGrantList[i]
+                        .SelectSingleNode("//r:encryptedGrant/dsig:KeyInfo", _namespaceManager)
+                    as XmlElement;
                 cipherData =
-                    encryptedGrantList[i].SelectSingleNode(
-                        "//r:encryptedGrant/enc:CipherData",
-                        _namespaceManager
-                    ) as XmlElement;
+                    encryptedGrantList[i]
+                        .SelectSingleNode("//r:encryptedGrant/enc:CipherData", _namespaceManager)
+                    as XmlElement;
                 if ((encryptionMethod != null) && (keyInfo != null) && (cipherData != null))
                 {
                     encryptionMethodObj = new EncryptionMethod();

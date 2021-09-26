@@ -771,9 +771,9 @@ namespace System.Threading
                     if (
                         asyncWaiter
                         == await Task.WhenAny(
-                                asyncWaiter,
-                                Task.Delay(millisecondsTimeout, cts.Token)
-                            )
+                            asyncWaiter,
+                            Task.Delay(millisecondsTimeout, cts.Token)
+                        )
                             .ConfigureAwait(false)
                     )
                     {

@@ -548,19 +548,18 @@ class C
             var provider = Assert.IsType<CrefCompletionProvider>(
                 service.GetTestAccessor().GetAllProviders(ImmutableHashSet<string>.Empty).Single()
             );
-            provider.GetTestAccessor()
-                .SetSpeculativeNodeCallback(
-                    n =>
-                    {
-                        // asserts that we aren't be asked speculate on nodes inside documentation trivia.
-                        // This verifies that the provider is asking for a speculative SemanticModel
-                        // by walking to the node the documentation is attached to.
+            provider.GetTestAccessor().SetSpeculativeNodeCallback(
+                n =>
+                {
+                    // asserts that we aren't be asked speculate on nodes inside documentation trivia.
+                    // This verifies that the provider is asking for a speculative SemanticModel
+                    // by walking to the node the documentation is attached to.
 
-                        called = true;
-                        var parent = n.GetAncestor<DocumentationCommentTriviaSyntax>();
-                        Assert.Null(parent);
-                    }
-                );
+                    called = true;
+                    var parent = n.GetAncestor<DocumentationCommentTriviaSyntax>();
+                    Assert.Null(parent);
+                }
+            );
 
             var completionList = await GetCompletionListAsync(
                 service,

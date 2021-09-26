@@ -36,14 +36,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         )
         {
             references = (references != null) ? references.Concat(s_asyncRefs) : s_asyncRefs;
-            return base.CompileAndVerify(
-                source,
-                targetFramework: TargetFramework.Empty,
-                expectedOutput: expectedOutput,
-                references: references,
-                options: options,
-                verify: verify
-            );
+            return base
+                .CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.Empty,
+                    expectedOutput: expectedOutput,
+                    references: references,
+                    options: options,
+                    verify: verify
+                );
         }
 
         private string GetFieldLoadsAndStores(CompilationVerifier c, string qualifiedMethodName)
@@ -51,15 +52,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             var actualLines = c.VisualizeIL(qualifiedMethodName)
                 .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
-            return string.Join(
-                Environment.NewLine,
-                from pair in actualLines.Zip(
-                    actualLines.Skip(1),
-                    (line1, line2) => new { line1, line2 }
-                )
-                where pair.line2.Contains("ldfld") || pair.line2.Contains("stfld")
-                select pair.line1.Trim() + Environment.NewLine + pair.line2.Trim()
-            );
+            return string
+                .Join(
+                    Environment.NewLine,
+                    from pair in actualLines.Zip(
+                        actualLines.Skip(1),
+                        (line1, line2) => new { line1, line2 }
+                    )
+                    where pair.line2.Contains("ldfld") || pair.line2.Contains("stfld")
+                    select pair.line1.Trim() + Environment.NewLine + pair.line2.Trim()
+                );
         }
 
         [Fact]
@@ -266,9 +268,8 @@ class C
 }";
             CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     AssertEx.Equal(
@@ -321,9 +322,8 @@ class C
 }";
             CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     AssertEx.Equal(
@@ -1026,16 +1026,15 @@ class Test
     }
 }";
             var reference = CreateCompilationWithMscorlib45(
-                    source,
-                    references: new MetadataReference[] { SystemRef_v4_0_30319_17929 }
-                )
+                source,
+                references: new MetadataReference[] { SystemRef_v4_0_30319_17929 }
+            )
                 .EmitToImageReference();
             var comp = CreateCompilationWithMscorlib45(
                 "",
                 new[] { reference },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             var testClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Test");
             var stateMachineClass = (NamedTypeSymbol)testClass.GetMembers()
@@ -1054,13 +1053,13 @@ class Test
             Assert.Equal(
                 1,
                 spillFieldsByType.Single(
-                        x =>
-                            TypeSymbol.Equals(
-                                x.Key,
-                                comp.GetSpecialType(SpecialType.System_Int32),
-                                TypeCompareKind.ConsiderEverything2
-                            )
-                    )
+                    x =>
+                        TypeSymbol.Equals(
+                            x.Key,
+                            comp.GetSpecialType(SpecialType.System_Int32),
+                            TypeCompareKind.ConsiderEverything2
+                        )
+                )
                     .Count()
             );
         }
@@ -1360,9 +1359,8 @@ public class C
                 source,
                 targetFramework: TargetFramework.Empty,
                 references: s_asyncRefs,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     AssertEx.Equal(

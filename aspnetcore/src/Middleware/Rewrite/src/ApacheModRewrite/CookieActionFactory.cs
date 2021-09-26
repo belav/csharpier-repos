@@ -95,12 +95,13 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
 
                     uint minutes;
                     if (
-                        !uint.TryParse(
-                            value,
-                            NumberStyles.Any,
-                            CultureInfo.InvariantCulture,
-                            out minutes
-                        )
+                        !uint
+                            .TryParse(
+                                value,
+                                NumberStyles.Any,
+                                CultureInfo.InvariantCulture,
+                                out minutes
+                            )
                     )
                     {
                         throw new FormatException(

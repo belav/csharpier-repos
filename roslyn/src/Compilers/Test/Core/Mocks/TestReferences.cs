@@ -21,8 +21,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.MetadataTests.NetModule01.AppCS
-                            )
+                            TestResources.MetadataTests.NetModule01.AppCS
+                        )
                             .GetReference(display: "AppCS"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -32,8 +32,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.MetadataTests.NetModule01.ModuleCS00
-                            )
+                            TestResources.MetadataTests.NetModule01.ModuleCS00
+                        )
                             .GetReference(display: "ModuleCS00.mod"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -43,8 +43,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.MetadataTests.NetModule01.ModuleCS01
-                            )
+                            TestResources.MetadataTests.NetModule01.ModuleCS01
+                        )
                             .GetReference(display: "ModuleCS01.mod"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -54,8 +54,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.MetadataTests.NetModule01.ModuleVB01
-                            )
+                            TestResources.MetadataTests.NetModule01.ModuleVB01
+                        )
                             .GetReference(display: "ModuleVB01.mod"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -68,8 +68,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.MetadataTests.InterfaceAndClass.CSClasses01
-                            )
+                            TestResources.MetadataTests.InterfaceAndClass.CSClasses01
+                        )
                             .GetReference(display: "CSClasses01.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -79,8 +79,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.MetadataTests.InterfaceAndClass.CSInterfaces01
-                            )
+                            TestResources.MetadataTests.InterfaceAndClass.CSInterfaces01
+                        )
                             .GetReference(display: "CSInterfaces01.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -90,8 +90,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.MetadataTests.InterfaceAndClass.VBClasses01
-                            )
+                            TestResources.MetadataTests.InterfaceAndClass.VBClasses01
+                        )
                             .GetReference(display: "VBClasses01.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -101,8 +101,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.MetadataTests.InterfaceAndClass.VBClasses02
-                            )
+                            TestResources.MetadataTests.InterfaceAndClass.VBClasses02
+                        )
                             .GetReference(display: "VBClasses02.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -112,8 +112,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.MetadataTests.InterfaceAndClass.VBInterfaces01
-                            )
+                            TestResources.MetadataTests.InterfaceAndClass.VBInterfaces01
+                        )
                             .GetReference(display: "VBInterfaces01.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -171,8 +171,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                ProprietaryTestResources.silverlight_v5_0_5_0.System_v5_0_5_0_silverlight
-                            )
+                            ProprietaryTestResources.silverlight_v5_0_5_0.System_v5_0_5_0_silverlight
+                        )
                             .GetReference(display: "System.v5.0.5.0_silverlight.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -186,8 +186,8 @@ public static class TestReferences
             new Lazy<PortableExecutableReference>(
                 () =>
                     AssemblyMetadata.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Runtime
-                        )
+                        ProprietaryTestResources.netstandard13.System_Runtime
+                    )
                         .GetReference(display: @"System.Runtime.dll (netstandard13 ref)"),
                 LazyThreadSafetyMode.PublicationOnly
             );
@@ -377,8 +377,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.netModule.netModule1
-                            )
+                            TestResources.SymbolsTests.netModule.netModule1
+                        )
                             .GetReference(display: "netModule1.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -388,8 +388,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.netModule.netModule2
-                            )
+                            TestResources.SymbolsTests.netModule.netModule2
+                        )
                             .GetReference(display: "netModule2.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -399,8 +399,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.netModule.CrossRefModule1
-                            )
+                            TestResources.SymbolsTests.netModule.CrossRefModule1
+                        )
                             .GetReference(display: "CrossRefModule1.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -410,8 +410,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.netModule.CrossRefModule2
-                            )
+                            TestResources.SymbolsTests.netModule.CrossRefModule2
+                        )
                             .GetReference(display: "CrossRefModule2.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -421,16 +421,16 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.Create(
-                                ModuleMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.netModule.CrossRefLib
-                                ),
-                                ModuleMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.netModule.CrossRefModule1
-                                ),
-                                ModuleMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.netModule.CrossRefModule2
-                                )
+                            ModuleMetadata.CreateFromImage(
+                                TestResources.SymbolsTests.netModule.CrossRefLib
+                            ),
+                            ModuleMetadata.CreateFromImage(
+                                TestResources.SymbolsTests.netModule.CrossRefModule1
+                            ),
+                            ModuleMetadata.CreateFromImage(
+                                TestResources.SymbolsTests.netModule.CrossRefModule2
                             )
+                        )
                             .GetReference(display: "CrossRefLib.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -440,8 +440,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.netModule.hash_module
-                            )
+                            TestResources.SymbolsTests.netModule.hash_module
+                        )
                             .GetReference(display: "hash_module.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -465,8 +465,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V1.MTTestLib1
-                                )
+                                TestResources.SymbolsTests.V1.MTTestLib1
+                            )
                                 .GetReference(display: "MTTestLib1.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -479,8 +479,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             ModuleMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V1.MTTestModule1
-                                )
+                                TestResources.SymbolsTests.V1.MTTestModule1
+                            )
                                 .GetReference(display: "MTTestModule1.netmodule"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -493,8 +493,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V1.MTTestLib2
-                                )
+                                TestResources.SymbolsTests.V1.MTTestLib2
+                            )
                                 .GetReference(display: "MTTestLib2.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -507,8 +507,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             ModuleMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V1.MTTestModule2
-                                )
+                                TestResources.SymbolsTests.V1.MTTestModule2
+                            )
                                 .GetReference(display: "MTTestModule2.netmodule"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -524,8 +524,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V2.MTTestLib1
-                                )
+                                TestResources.SymbolsTests.V2.MTTestLib1
+                            )
                                 .GetReference(display: "MTTestLib1.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -538,8 +538,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V2.MTTestModule1
-                                )
+                                TestResources.SymbolsTests.V2.MTTestModule1
+                            )
                                 .GetReference(display: "MTTestModule1.netmodule"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -552,8 +552,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V2.MTTestLib3
-                                )
+                                TestResources.SymbolsTests.V2.MTTestLib3
+                            )
                                 .GetReference(display: "MTTestLib3.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -566,8 +566,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             ModuleMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V2.MTTestModule3
-                                )
+                                TestResources.SymbolsTests.V2.MTTestModule3
+                            )
                                 .GetReference(display: "MTTestModule3.netmodule"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -583,8 +583,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V3.MTTestLib1
-                                )
+                                TestResources.SymbolsTests.V3.MTTestLib1
+                            )
                                 .GetReference(display: "MTTestLib1.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -597,8 +597,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V3.MTTestModule1
-                                )
+                                TestResources.SymbolsTests.V3.MTTestModule1
+                            )
                                 .GetReference(display: "MTTestModule1.netmodule"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -611,8 +611,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V3.MTTestLib4
-                                )
+                                TestResources.SymbolsTests.V3.MTTestLib4
+                            )
                                 .GetReference(display: "MTTestLib4.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -625,8 +625,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             ModuleMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.V3.MTTestModule4
-                                )
+                                TestResources.SymbolsTests.V3.MTTestModule4
+                            )
                                 .GetReference(display: "MTTestModule4.netmodule"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -640,16 +640,16 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.Create(
-                                ModuleMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.MultiModule.MultiModuleDll
-                                ),
-                                ModuleMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.MultiModule.mod2
-                                ),
-                                ModuleMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.MultiModule.mod3
-                                )
+                            ModuleMetadata.CreateFromImage(
+                                TestResources.SymbolsTests.MultiModule.MultiModuleDll
+                            ),
+                            ModuleMetadata.CreateFromImage(
+                                TestResources.SymbolsTests.MultiModule.mod2
+                            ),
+                            ModuleMetadata.CreateFromImage(
+                                TestResources.SymbolsTests.MultiModule.mod3
                             )
+                        )
                             .GetReference(display: "MultiModule.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -659,8 +659,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MultiModule.mod2
-                            )
+                            TestResources.SymbolsTests.MultiModule.mod2
+                        )
                             .GetReference(display: "mod2.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -670,8 +670,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MultiModule.mod3
-                            )
+                            TestResources.SymbolsTests.MultiModule.mod3
+                        )
                             .GetReference(display: "mod3.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -681,8 +681,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MultiModule.Consumer
-                            )
+                            TestResources.SymbolsTests.MultiModule.Consumer
+                        )
                             .GetReference(display: "Consumer.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -695,8 +695,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.DifferByCase.TypeAndNamespaceDifferByCase
-                            )
+                            TestResources.SymbolsTests.DifferByCase.TypeAndNamespaceDifferByCase
+                        )
                             .GetReference(display: "TypeAndNamespaceDifferByCase.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -707,8 +707,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.DifferByCase.Consumer
-                            )
+                            TestResources.SymbolsTests.DifferByCase.Consumer
+                        )
                             .GetReference(display: "Consumer.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -718,8 +718,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.DifferByCase.Consumer
-                            )
+                            TestResources.SymbolsTests.DifferByCase.Consumer
+                        )
                             .GetReference(display: "CsharpCaseSen.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -729,8 +729,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.DifferByCase.CSharpDifferCaseOverloads
-                            )
+                            TestResources.SymbolsTests.DifferByCase.CSharpDifferCaseOverloads
+                        )
                             .GetReference(display: "CSharpDifferCaseOverloads.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -746,8 +746,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.CorLibrary.GuidTest2
-                                )
+                                TestResources.SymbolsTests.CorLibrary.GuidTest2
+                            )
                                 .GetReference(display: "GuidTest2.exe"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -758,8 +758,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.CorLibrary.NoMsCorLibRef
-                            )
+                            TestResources.SymbolsTests.CorLibrary.NoMsCorLibRef
+                        )
                             .GetReference(display: "NoMsCorLibRef.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -771,8 +771,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.CorLibrary.FakeMsCorLib
-                                )
+                                TestResources.SymbolsTests.CorLibrary.FakeMsCorLib
+                            )
                                 .GetReference(display: "FakeMsCorLib.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -788,8 +788,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.CustomModifiers.Modifiers
-                                )
+                                TestResources.SymbolsTests.CustomModifiers.Modifiers
+                            )
                                 .GetReference(display: "Modifiers.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -799,8 +799,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             ModuleMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.CustomModifiers.ModifiersModule
-                                )
+                                TestResources.SymbolsTests.CustomModifiers.ModifiersModule
+                            )
                                 .GetReference(display: "Modifiers.netmodule"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -811,8 +811,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.CustomModifiers.ModoptTests
-                            )
+                            TestResources.SymbolsTests.CustomModifiers.ModoptTests
+                        )
                             .GetReference(display: "ModoptTests.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -824,8 +824,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.CustomModifiers.CppCli
-                                )
+                                TestResources.SymbolsTests.CustomModifiers.CppCli
+                            )
                                 .GetReference(display: "CppCli.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -838,8 +838,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.CustomModifiers.GenericMethodWithModifiers
-                                )
+                                TestResources.SymbolsTests.CustomModifiers.GenericMethodWithModifiers
+                            )
                                 .GetReference(display: "GenericMethodWithModifiers.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -855,8 +855,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.Cyclic.Cyclic1
-                                )
+                                TestResources.SymbolsTests.Cyclic.Cyclic1
+                            )
                                 .GetReference(display: "Cyclic1.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -869,8 +869,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.Cyclic.Cyclic2
-                                )
+                                TestResources.SymbolsTests.Cyclic.Cyclic2
+                            )
                                 .GetReference(display: "Cyclic2.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -884,8 +884,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.CyclicInheritance.Class1
-                            )
+                            TestResources.SymbolsTests.CyclicInheritance.Class1
+                        )
                             .GetReference(display: "Class1.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -895,8 +895,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.CyclicInheritance.Class2
-                            )
+                            TestResources.SymbolsTests.CyclicInheritance.Class2
+                        )
                             .GetReference(display: "Class2.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -906,8 +906,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.CyclicInheritance.Class3
-                            )
+                            TestResources.SymbolsTests.CyclicInheritance.Class3
+                        )
                             .GetReference(display: "Class3.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -918,8 +918,8 @@ public static class TestReferences
             new Lazy<PortableExecutableReference>(
                 () =>
                     AssemblyMetadata.CreateFromImage(
-                            TestResources.SymbolsTests.CyclicStructure.cycledstructs
-                        )
+                        TestResources.SymbolsTests.CyclicStructure.cycledstructs
+                    )
                         .GetReference(display: "cycledstructs.dll"),
                 LazyThreadSafetyMode.PublicationOnly
             );
@@ -935,8 +935,8 @@ public static class TestReferences
                         new Lazy<PortableExecutableReference>(
                             () =>
                                 AssemblyMetadata.CreateFromImage(
-                                        TestResources.SymbolsTests.RetargetingCycle.RetV1.ClassA
-                                    )
+                                    TestResources.SymbolsTests.RetargetingCycle.RetV1.ClassA
+                                )
                                     .GetReference(display: "ClassA.dll"),
                             LazyThreadSafetyMode.PublicationOnly
                         );
@@ -949,8 +949,8 @@ public static class TestReferences
                         new Lazy<PortableExecutableReference>(
                             () =>
                                 ModuleMetadata.CreateFromImage(
-                                        TestResources.SymbolsTests.RetargetingCycle.RetV1.ClassB
-                                    )
+                                    TestResources.SymbolsTests.RetargetingCycle.RetV1.ClassB
+                                )
                                     .GetReference(display: "ClassB.netmodule"),
                             LazyThreadSafetyMode.PublicationOnly
                         );
@@ -966,8 +966,8 @@ public static class TestReferences
                         new Lazy<PortableExecutableReference>(
                             () =>
                                 AssemblyMetadata.CreateFromImage(
-                                        TestResources.SymbolsTests.RetargetingCycle.RetV2.ClassA
-                                    )
+                                    TestResources.SymbolsTests.RetargetingCycle.RetV2.ClassA
+                                )
                                     .GetReference(display: "ClassA.dll"),
                             LazyThreadSafetyMode.PublicationOnly
                         );
@@ -980,8 +980,8 @@ public static class TestReferences
                         new Lazy<PortableExecutableReference>(
                             () =>
                                 AssemblyMetadata.CreateFromImage(
-                                        TestResources.SymbolsTests.RetargetingCycle.RetV2.ClassB
-                                    )
+                                    TestResources.SymbolsTests.RetargetingCycle.RetV2.ClassB
+                                )
                                     .GetReference(display: "ClassB.dll"),
                             LazyThreadSafetyMode.PublicationOnly
                         );
@@ -996,8 +996,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Methods.CSMethods
-                            )
+                            TestResources.SymbolsTests.Methods.CSMethods
+                        )
                             .GetReference(display: "CSMethods.Dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1007,8 +1007,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Methods.VBMethods
-                            )
+                            TestResources.SymbolsTests.Methods.VBMethods
+                        )
                             .GetReference(display: "VBMethods.Dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1018,8 +1018,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Methods.ILMethods
-                            )
+                            TestResources.SymbolsTests.Methods.ILMethods
+                        )
                             .GetReference(display: "ILMethods.Dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1029,8 +1029,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Methods.ByRefReturn
-                            )
+                            TestResources.SymbolsTests.Methods.ByRefReturn
+                        )
                             .GetReference(display: "ByRefReturn.Dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1045,8 +1045,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.Fields.CSFields
-                                )
+                                TestResources.SymbolsTests.Fields.CSFields
+                            )
                                 .GetReference(display: "CSFields.Dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -1059,8 +1059,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.Fields.VBFields
-                                )
+                                TestResources.SymbolsTests.Fields.VBFields
+                            )
                                 .GetReference(display: "VBFields.Dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -1071,8 +1071,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Fields.ConstantFields
-                            )
+                            TestResources.SymbolsTests.Fields.ConstantFields
+                        )
                             .GetReference(display: "ConstantFields.Dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1085,8 +1085,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MissingTypes.MDMissingType
-                            )
+                            TestResources.SymbolsTests.MissingTypes.MDMissingType
+                        )
                             .GetReference(display: "MDMissingType.Dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1096,8 +1096,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MissingTypes.MDMissingTypeLib
-                            )
+                            TestResources.SymbolsTests.MissingTypes.MDMissingTypeLib
+                        )
                             .GetReference(display: "MDMissingTypeLib.Dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1107,8 +1107,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MissingTypes.MissingTypesEquality1
-                            )
+                            TestResources.SymbolsTests.MissingTypes.MissingTypesEquality1
+                        )
                             .GetReference(display: "MissingTypesEquality1.Dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1119,8 +1119,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MissingTypes.MissingTypesEquality2
-                            )
+                            TestResources.SymbolsTests.MissingTypes.MissingTypesEquality2
+                        )
                             .GetReference(display: "MissingTypesEquality2.Dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1131,8 +1131,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MissingTypes.CL2
-                            )
+                            TestResources.SymbolsTests.MissingTypes.CL2
+                        )
                             .GetReference(display: "CL2.Dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1142,8 +1142,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MissingTypes.CL3
-                            )
+                            TestResources.SymbolsTests.MissingTypes.CL3
+                        )
                             .GetReference(display: "CL3.Dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1158,8 +1158,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.TypeForwarders.TypeForwarder
-                                )
+                                TestResources.SymbolsTests.TypeForwarders.TypeForwarder
+                            )
                                 .GetReference(display: "TypeForwarder.Dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -1172,8 +1172,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.TypeForwarders.TypeForwarderLib
-                                )
+                                TestResources.SymbolsTests.TypeForwarders.TypeForwarderLib
+                            )
                                 .GetReference(display: "TypeForwarderLib.Dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -1186,8 +1186,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.SymbolsTests.TypeForwarders.TypeForwarderBase
-                                )
+                                TestResources.SymbolsTests.TypeForwarders.TypeForwarderBase
+                            )
                                 .GetReference(display: "TypeForwarderBase.Dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -1201,8 +1201,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MultiTargeting.Source1Module
-                            )
+                            TestResources.SymbolsTests.MultiTargeting.Source1Module
+                        )
                             .GetReference(display: "Source1Module.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1212,8 +1212,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MultiTargeting.Source3Module
-                            )
+                            TestResources.SymbolsTests.MultiTargeting.Source3Module
+                        )
                             .GetReference(display: "Source3Module.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1223,8 +1223,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MultiTargeting.Source4Module
-                            )
+                            TestResources.SymbolsTests.MultiTargeting.Source4Module
+                        )
                             .GetReference(display: "Source4Module.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1234,8 +1234,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MultiTargeting.Source5Module
-                            )
+                            TestResources.SymbolsTests.MultiTargeting.Source5Module
+                        )
                             .GetReference(display: "Source5Module.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1245,8 +1245,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.MultiTargeting.Source7Module
-                            )
+                            TestResources.SymbolsTests.MultiTargeting.Source7Module
+                        )
                             .GetReference(display: "Source7Module.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1259,8 +1259,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                ProprietaryTestResources.ProprietaryPias.stdole
-                            )
+                            ProprietaryTestResources.ProprietaryPias.stdole
+                        )
                             .GetReference(display: "stdole.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1324,8 +1324,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.NoPia.GeneralPia
-                            )
+                            TestResources.SymbolsTests.NoPia.GeneralPia
+                        )
                             .GetReference(display: "GeneralPia.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1335,8 +1335,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.NoPia.GeneralPiaCopy
-                            )
+                            TestResources.SymbolsTests.NoPia.GeneralPiaCopy
+                        )
                             .GetReference(display: "GeneralPiaCopy.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1346,8 +1346,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.NoPia.NoPIAGenerics1_Asm1
-                            )
+                            TestResources.SymbolsTests.NoPia.NoPIAGenerics1_Asm1
+                        )
                             .GetReference(display: "NoPIAGenerics1-Asm1.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1358,8 +1358,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.NoPia.ExternalAsm1
-                            )
+                            TestResources.SymbolsTests.NoPia.ExternalAsm1
+                        )
                             .GetReference(display: "ExternalAsm1.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1387,8 +1387,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.NoPia.LocalTypes1
-                            )
+                            TestResources.SymbolsTests.NoPia.LocalTypes1
+                        )
                             .GetReference(display: "LocalTypes1.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1398,8 +1398,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.NoPia.LocalTypes2
-                            )
+                            TestResources.SymbolsTests.NoPia.LocalTypes2
+                        )
                             .GetReference(display: "LocalTypes2.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1409,8 +1409,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.NoPia.LocalTypes3
-                            )
+                            TestResources.SymbolsTests.NoPia.LocalTypes3
+                        )
                             .GetReference(display: "LocalTypes3.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1460,8 +1460,8 @@ public static class TestReferences
                         new Lazy<PortableExecutableReference>(
                             () =>
                                 AssemblyMetadata.CreateFromImage(
-                                        TestResources.SymbolsTests.NoPia.MissingPIAAttributes
-                                    )
+                                    TestResources.SymbolsTests.NoPia.MissingPIAAttributes
+                                )
                                     .GetReference(display: "MicrosoftPIAAttributes.dll"),
                             LazyThreadSafetyMode.PublicationOnly
                         );
@@ -1477,8 +1477,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Interface.StaticMethodInInterface
-                            )
+                            TestResources.SymbolsTests.Interface.StaticMethodInInterface
+                        )
                             .GetReference(display: "StaticMethodInInterface.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1489,8 +1489,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Interface.MDInterfaceMapping
-                            )
+                            TestResources.SymbolsTests.Interface.MDInterfaceMapping
+                        )
                             .GetReference(display: "MDInterfaceMapping.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1513,8 +1513,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         ModuleMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.netModule.netModule1
-                            )
+                            TestResources.SymbolsTests.netModule.netModule1
+                        )
                             .GetReference(display: "netModule1.netmodule"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1529,8 +1529,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.General.CSharpExplicitInterfaceImplementation
-                                )
+                                TestResources.General.CSharpExplicitInterfaceImplementation
+                            )
                                 .GetReference(display: "CSharpExplicitInterfaceImplementation.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -1540,8 +1540,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.General.ILExplicitInterfaceImplementation
-                                )
+                                TestResources.General.ILExplicitInterfaceImplementation
+                            )
                                 .GetReference(display: "ILExplicitInterfaceImplementation.dll"),
                         LazyThreadSafetyMode.PublicationOnly
                     );
@@ -1554,8 +1554,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.General.CSharpExplicitInterfaceImplementationProperties
-                                )
+                                TestResources.General.CSharpExplicitInterfaceImplementationProperties
+                            )
                                 .GetReference(
                                     display: "CSharpExplicitInterfaceImplementationProperties.dll"
                                 ),
@@ -1567,8 +1567,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.General.ILExplicitInterfaceImplementationProperties
-                                )
+                                TestResources.General.ILExplicitInterfaceImplementationProperties
+                            )
                                 .GetReference(
                                     display: "ILExplicitInterfaceImplementationProperties.dll"
                                 ),
@@ -1583,8 +1583,8 @@ public static class TestReferences
                     new Lazy<PortableExecutableReference>(
                         () =>
                             AssemblyMetadata.CreateFromImage(
-                                    TestResources.General.CSharpExplicitInterfaceImplementationEvents
-                                )
+                                TestResources.General.CSharpExplicitInterfaceImplementationEvents
+                            )
                                 .GetReference(
                                     display: "CSharpExplicitInterfaceImplementationEvents.dll"
                                 ),
@@ -1609,8 +1609,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.WithEvents.SimpleWithEvents
-                            )
+                            TestResources.SymbolsTests.WithEvents.SimpleWithEvents
+                        )
                             .GetReference(display: "SimpleWithEvents.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1623,8 +1623,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.General.DelegatesWithoutInvoke
-                            )
+                            TestResources.General.DelegatesWithoutInvoke
+                        )
                             .GetReference(display: "DelegatesWithoutInvoke.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1635,8 +1635,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.General.DelegateByRefParamArray
-                            )
+                            TestResources.General.DelegateByRefParamArray
+                        )
                             .GetReference(display: "DelegateByRefParamArray.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1650,8 +1650,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Metadata.InvalidCharactersInAssemblyName
-                            )
+                            TestResources.SymbolsTests.Metadata.InvalidCharactersInAssemblyName
+                        )
                             .GetReference(display: "InvalidCharactersInAssemblyName.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1662,8 +1662,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Metadata.MDTestAttributeDefLib
-                            )
+                            TestResources.SymbolsTests.Metadata.MDTestAttributeDefLib
+                        )
                             .GetReference(display: "MDTestAttributeDefLib.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1674,8 +1674,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Metadata.MDTestAttributeApplicationLib
-                            )
+                            TestResources.SymbolsTests.Metadata.MDTestAttributeApplicationLib
+                        )
                             .GetReference(display: "MDTestAttributeApplicationLib.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1686,8 +1686,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Metadata.AttributeInterop01
-                            )
+                            TestResources.SymbolsTests.Metadata.AttributeInterop01
+                        )
                             .GetReference(display: "AttributeInterop01.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1698,8 +1698,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Metadata.AttributeInterop02
-                            )
+                            TestResources.SymbolsTests.Metadata.AttributeInterop02
+                        )
                             .GetReference(display: "AttributeInterop02.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1710,8 +1710,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Metadata.AttributeTestLib01
-                            )
+                            TestResources.SymbolsTests.Metadata.AttributeTestLib01
+                        )
                             .GetReference(display: "AttributeTestLib01.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1722,8 +1722,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Metadata.AttributeTestDef01
-                            )
+                            TestResources.SymbolsTests.Metadata.AttributeTestDef01
+                        )
                             .GetReference(display: "AttributeTestDef01.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );
@@ -1734,8 +1734,8 @@ public static class TestReferences
                 new Lazy<PortableExecutableReference>(
                     () =>
                         AssemblyMetadata.CreateFromImage(
-                                TestResources.SymbolsTests.Metadata.DynamicAttribute
-                            )
+                            TestResources.SymbolsTests.Metadata.DynamicAttribute
+                        )
                             .GetReference(display: "DynamicAttribute.dll"),
                     LazyThreadSafetyMode.PublicationOnly
                 );

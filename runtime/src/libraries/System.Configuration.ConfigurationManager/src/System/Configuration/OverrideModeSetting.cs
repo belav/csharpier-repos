@@ -241,12 +241,13 @@ namespace System.Configuration
                         value = OverrideModeXmlValue;
                     }
 
-                    result = string.Format(
-                        CultureInfo.InvariantCulture,
-                        BaseConfigurationRecord.KeywordLocationOverrideModeString,
-                        attrib,
-                        value
-                    );
+                    result = string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            BaseConfigurationRecord.KeywordLocationOverrideModeString,
+                            attrib,
+                            value
+                        );
                 }
 
                 return result;

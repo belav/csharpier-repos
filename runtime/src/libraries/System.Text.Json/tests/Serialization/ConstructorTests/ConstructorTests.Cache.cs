@@ -26,9 +26,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Verify the test class has >32 properties since that is a threshold for using the fallback dictionary.
             Assert.True(
-                typeof(ClassWithConstructor_SimpleAndComplexParameters).GetProperties(
-                    BindingFlags.Instance | BindingFlags.Public
-                ).Length > 32
+                typeof(ClassWithConstructor_SimpleAndComplexParameters)
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public).Length > 32
             );
 
             async Task DeserializeObjectAsync(string json, Type type, JsonSerializerOptions options)
@@ -180,7 +179,8 @@ namespace System.Text.Json.Serialization.Tests
             async Task RunTestAsync<T>(T testObj, object[] args)
             {
                 // Get the test json with the default options to avoid cache pollution of DeserializeAsync() below.
-                ((ITestClass)testObj).Initialize();
+                ((ITestClass)testObj)
+                    .Initialize();
                 ((ITestClass)testObj).Verify();
                 string json = JsonSerializer.Serialize(testObj);
 

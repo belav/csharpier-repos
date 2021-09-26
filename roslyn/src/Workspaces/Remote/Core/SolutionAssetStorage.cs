@@ -75,10 +75,10 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             var remotableData = await FindAssetAsync(
-                    _solutionStates[scopeId].Solution,
-                    checksum,
-                    cancellationToken
-                )
+                _solutionStates[scopeId].Solution,
+                checksum,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (remotableData != null)
             {
@@ -115,11 +115,11 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             await FindAssetsAsync(
-                    _solutionStates[scopeId].Solution,
-                    checksumsToFind.Object,
-                    result,
-                    cancellationToken
-                )
+                _solutionStates[scopeId].Solution,
+                checksumsToFind.Object,
+                result,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (result.Count == numberOfChecksumsToSearch)
             {
@@ -153,11 +153,11 @@ namespace Microsoft.CodeAnalysis.Remote
             using var resultPool = Creator.CreateResultSet();
 
             await FindAssetsAsync(
-                    solutionState,
-                    checksumPool.Object,
-                    resultPool.Object,
-                    cancellationToken
-                )
+                solutionState,
+                checksumPool.Object,
+                resultPool.Object,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (resultPool.Object.Count == 1)
@@ -185,11 +185,11 @@ namespace Microsoft.CodeAnalysis.Remote
             using var resultPool = Creator.CreateResultSet();
 
             await FindAssetsAsync(
-                    solutionState,
-                    remainingChecksumsToFind,
-                    resultPool.Object,
-                    cancellationToken
-                )
+                solutionState,
+                remainingChecksumsToFind,
+                resultPool.Object,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             foreach (var (checksum, value) in resultPool.Object)
@@ -209,11 +209,11 @@ namespace Microsoft.CodeAnalysis.Remote
             Contract.ThrowIfFalse(solutionState.TryGetStateChecksums(out var stateChecksums));
 
             await stateChecksums.FindAsync(
-                    solutionState,
-                    remainingChecksumsToFind,
-                    result,
-                    cancellationToken
-                )
+                solutionState,
+                remainingChecksumsToFind,
+                result,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -236,10 +236,10 @@ namespace Microsoft.CodeAnalysis.Remote
                 foreach (var (scopeId, _) in _solutionAssetStorage._solutionStates)
                 {
                     var data = await _solutionAssetStorage.GetAssetAsync(
-                            scopeId,
-                            checksum,
-                            cancellationToken
-                        )
+                        scopeId,
+                        checksum,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (data != null)
                     {

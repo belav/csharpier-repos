@@ -104,9 +104,8 @@ namespace System.Composition
                 .GetRuntimeMethods()
                 .Where(
                     m =>
-                        m.CustomAttributes.Any(
-                            ca => ca.AttributeType == typeof(OnImportsSatisfiedAttribute)
-                        )
+                        m.CustomAttributes
+                            .Any(ca => ca.AttributeType == typeof(OnImportsSatisfiedAttribute))
                 );
 
             foreach (var ois in importsSatisfiedMethods)

@@ -451,10 +451,10 @@ namespace RunTests
         {
             var directory = Directory.GetCurrentDirectory();
             var dumpFiles = Directory.EnumerateFiles(
-                    directory,
-                    "*.dmp",
-                    SearchOption.AllDirectories
-                )
+                directory,
+                "*.dmp",
+                SearchOption.AllDirectories
+            )
                 .ToArray();
             long currentTotalSize = 0;
 

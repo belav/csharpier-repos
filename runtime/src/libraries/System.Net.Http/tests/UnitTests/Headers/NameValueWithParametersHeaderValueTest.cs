@@ -139,7 +139,8 @@ namespace System.Net.Http.Tests
             source.Parameters.Add(new NameValueHeaderValue("param1", "value1"));
             NameValueWithParametersHeaderValue clone = (NameValueWithParametersHeaderValue)(
                 (ICloneable)source
-            ).Clone();
+            )
+                .Clone();
             Assert.Equal(source.Name, clone.Name);
             Assert.Equal(source.Value, clone.Value);
             Assert.Equal(1, clone.Parameters.Count);

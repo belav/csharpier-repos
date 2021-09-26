@@ -733,7 +733,8 @@ namespace Microsoft.Data.Sqlite
                 {
                     using (var command = _command.Connection.CreateCommand())
                     {
-                        command.CommandText = new StringBuilder().AppendLine("SELECT COUNT(*)")
+                        command.CommandText = new StringBuilder()
+                            .AppendLine("SELECT COUNT(*)")
                             .AppendLine(
                                 "FROM pragma_index_list($table) i, pragma_index_info(i.name) c"
                             )
@@ -750,7 +751,8 @@ namespace Microsoft.Data.Sqlite
 
                         command.Parameters.Clear();
                         var columnType = "typeof(\"" + columnName.Replace("\"", "\"\"") + "\")";
-                        command.CommandText = new StringBuilder().AppendLine($"SELECT {columnType}")
+                        command.CommandText = new StringBuilder()
+                            .AppendLine($"SELECT {columnType}")
                             .AppendLine($"FROM \"{tableName}\"")
                             .AppendLine($"WHERE {columnType} != 'null'")
                             .AppendLine($"GROUP BY {columnType}")

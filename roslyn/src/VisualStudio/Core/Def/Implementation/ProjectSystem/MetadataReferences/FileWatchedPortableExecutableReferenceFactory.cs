@@ -79,9 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.M
             // TODO: set this to watch the NuGet directory as well; there's some concern that watching the entire directory
             // might make restores take longer because we'll be watching changes that may not impact your project.
 
-            _fileReferenceChangeContext = fileChangeWatcherProvider.Watcher.CreateContext(
-                referenceAssemblies
-            );
+            _fileReferenceChangeContext = fileChangeWatcherProvider.Watcher
+                .CreateContext(referenceAssemblies);
             _fileReferenceChangeContext.FileChanged += FileReferenceChangeContext_FileChanged;
         }
 
@@ -94,10 +93,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.M
         {
             lock (_gate)
             {
-                var reference = _visualStudioWorkspace.Value.CreatePortableExecutableReference(
-                    fullFilePath,
-                    properties
-                );
+                var reference = _visualStudioWorkspace.Value
+                    .CreatePortableExecutableReference(fullFilePath, properties);
                 var fileWatchingToken = _fileReferenceChangeContext.EnqueueWatchingFile(
                     fullFilePath
                 );
@@ -156,33 +153,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.M
                     cancellationTokenSource
                 );
 
-                Task.Delay(TimeSpan.FromSeconds(5), cancellationTokenSource.Token)
-                    .ContinueWith(
-                        _ =>
+                Task.Delay(TimeSpan.FromSeconds(5), cancellationTokenSource.Token).ContinueWith(
+                    _ =>
+                    {
+                        var needsNotification = false;
+
+                        lock (_gate)
                         {
-                            var needsNotification = false;
+                            // We need to re-check the cancellation token source under the lock, since it might have been cancelled and restarted
+                            // due to another event
+                            cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                            needsNotification = true;
 
-                            lock (_gate)
-                            {
-                                // We need to re-check the cancellation token source under the lock, since it might have been cancelled and restarted
-                                // due to another event
-                                cancellationTokenSource.Token.ThrowIfCancellationRequested();
-                                needsNotification = true;
+                            _metadataReferenceRefreshCancellationTokenSources.Remove(fullFilePath);
+                        }
 
-                                _metadataReferenceRefreshCancellationTokenSources.Remove(
-                                    fullFilePath
-                                );
-                            }
-
-                            if (needsNotification)
-                            {
-                                ReferenceChanged?.Invoke(this, fullFilePath);
-                            }
-                        },
-                        cancellationTokenSource.Token,
-                        TaskContinuationOptions.OnlyOnRanToCompletion,
-                        TaskScheduler.Default
-                    );
+                        if (needsNotification)
+                        {
+                            ReferenceChanged?.Invoke(this, fullFilePath);
+                        }
+                    },
+                    cancellationTokenSource.Token,
+                    TaskContinuationOptions.OnlyOnRanToCompletion,
+                    TaskScheduler.Default
+                );
             }
         }
     }

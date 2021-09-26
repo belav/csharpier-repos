@@ -59,9 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private static readonly ObjectPool<
             PooledDictionary<NamedTypeSymbol, NamedTypeSymbol>
-        > s_poolInstance = PooledDictionary<NamedTypeSymbol, NamedTypeSymbol>.CreatePool(
-            Symbols.SymbolEqualityComparer.IgnoringNullable
-        );
+        > s_poolInstance = PooledDictionary<NamedTypeSymbol, NamedTypeSymbol>
+            .CreatePool(Symbols.SymbolEqualityComparer.IgnoringNullable);
 
         internal static PooledDictionary<NamedTypeSymbol, NamedTypeSymbol> GetInstance()
         {
@@ -578,9 +577,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // or there may be input parameters fixed to _unfixed_ method type variables.
             // Both of those scenarios are legal.)
 
-            var fixedArguments = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                _methodTypeParameters.Length
-            );
+            var fixedArguments = ArrayBuilder<TypeWithAnnotations>
+                .GetInstance(_methodTypeParameters.Length);
             for (int iParam = 0; iParam < _methodTypeParameters.Length; iParam++)
             {
                 fixedArguments.Add(
@@ -2048,9 +2046,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (true, false) or (false, true) => false,
                     (true, true) => true,
                     _
-                      => sourceSignature.ParameterRefKinds.SequenceEqual(
-                          targetSignature.ParameterRefKinds
-                      )
+                      => sourceSignature.ParameterRefKinds
+                          .SequenceEqual(targetSignature.ParameterRefKinds)
                 };
         }
 
@@ -2235,10 +2232,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return default;
             }
 
-            return ((NamedTypeSymbol)target).TypeArgumentWithDefinitionUseSiteDiagnostics(
-                0,
-                ref useSiteInfo
-            );
+            return ((NamedTypeSymbol)target)
+                .TypeArgumentWithDefinitionUseSiteDiagnostics(0, ref useSiteInfo);
         }
 
         private bool LowerBoundArrayInference(
@@ -3166,11 +3161,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // https://github.com/dotnet/roslyn/issues/27961 Results may differ by tuple names or dynamic.
                 // See NullableReferenceTypesTests.TypeInference_TupleNameDifferences_01 for example.
                 Debug.Assert(
-                    best.Type.Equals(
-                        withoutNullability.Type,
-                        TypeCompareKind.IgnoreDynamicAndTupleNames
-                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                    )
+                    best.Type
+                        .Equals(
+                            withoutNullability.Type,
+                            TypeCompareKind.IgnoreDynamicAndTupleNames
+                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
                 );
             }
 #endif

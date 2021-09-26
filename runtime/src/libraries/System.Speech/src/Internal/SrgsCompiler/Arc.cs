@@ -193,11 +193,12 @@ namespace System.Speech.Internal.SrgsCompiler
                         }
                         else
                         {
-                            diff = string.Compare(
-                                arc1._ruleRef.Name,
-                                arc2._ruleRef.Name,
-                                StringComparison.CurrentCulture
-                            );
+                            diff = string
+                                .Compare(
+                                    arc1._ruleRef.Name,
+                                    arc2._ruleRef.Name,
+                                    StringComparison.CurrentCulture
+                                );
                         }
                     }
 
@@ -482,10 +483,11 @@ namespace System.Speech.Internal.SrgsCompiler
                     if (be != null)
                     {
                         int idTagName;
-                        newTag._cfgTag._nameOffset = be.Symbols.Add(
-                            tag._be.Symbols.FromOffset(tag._cfgTag._nameOffset),
-                            out idTagName
-                        );
+                        newTag._cfgTag._nameOffset = be.Symbols
+                            .Add(
+                                tag._be.Symbols.FromOffset(tag._cfgTag._nameOffset),
+                                out idTagName
+                            );
 #pragma warning disable 0618 // VarEnum is obsolete
                         if (
                             tag._cfgTag._valueOffset != 0
@@ -493,10 +495,11 @@ namespace System.Speech.Internal.SrgsCompiler
                                 == System.Runtime.InteropServices.VarEnum.VT_EMPTY
                         )
                         {
-                            newTag._cfgTag._valueOffset = be.Symbols.Add(
-                                tag._be.Symbols.FromOffset(tag._cfgTag._valueOffset),
-                                out idTagName
-                            );
+                            newTag._cfgTag._valueOffset = be.Symbols
+                                .Add(
+                                    tag._be.Symbols.FromOffset(tag._cfgTag._valueOffset),
+                                    out idTagName
+                                );
                         }
 #pragma warning restore 0618
                     }

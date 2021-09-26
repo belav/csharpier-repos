@@ -1593,13 +1593,13 @@ class C {
             );
             Assert.Equal(
                 GetSymbolNamesJoined(results1.ReadOutside),
-                string.Join(
-                    ", ",
-                    new string[] { "f" }.Concat(
-                            (results2.ReadOutside).Select(symbol => symbol.Name)
-                        )
-                        .OrderBy(name => name)
-                )
+                string
+                    .Join(
+                        ", ",
+                        new string[] { "f" }
+                            .Concat((results2.ReadOutside).Select(symbol => symbol.Name))
+                            .OrderBy(name => name)
+                    )
             );
             Assert.Equal(
                 GetSymbolNamesJoined(results1.WrittenInside),
@@ -1607,13 +1607,13 @@ class C {
             );
             Assert.Equal(
                 GetSymbolNamesJoined(results1.WrittenOutside),
-                string.Join(
-                    ", ",
-                    new string[] { "f" }.Concat(
-                            (results2.WrittenOutside).Select(symbol => symbol.Name)
-                        )
-                        .OrderBy(name => name)
-                )
+                string
+                    .Join(
+                        ", ",
+                        new string[] { "f" }
+                            .Concat((results2.WrittenOutside).Select(symbol => symbol.Name))
+                            .OrderBy(name => name)
+                    )
             );
         }
 
@@ -3139,7 +3139,8 @@ class C
             );
 
             var semanticModel = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var statement = compilation.SyntaxTrees[0].GetCompilationUnitRoot()
+            var statement = compilation.SyntaxTrees[0]
+                .GetCompilationUnitRoot()
                 .DescendantNodesAndSelf()
                 .OfType<StatementSyntax>()
                 .First();

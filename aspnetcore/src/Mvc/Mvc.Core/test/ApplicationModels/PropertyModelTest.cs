@@ -26,9 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             );
             propertyModel.BindingInfo = BindingInfo.GetBindingInfo(propertyModel.Attributes);
             propertyModel.PropertyName = "Property";
-            propertyModel.Properties.Add(
-                new KeyValuePair<object, object>("test key", "test value")
-            );
+            propertyModel.Properties
+                .Add(new KeyValuePair<object, object>("test key", "test value"));
 
             // Act
             var propertyModel2 = new PropertyModel(propertyModel);

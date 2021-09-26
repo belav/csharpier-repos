@@ -16,7 +16,8 @@ namespace System.CommandLine.Tests.Binding
         {
             var descriptor = ModelDescriptor.FromType<ClassWithMultiLetterSetters>();
 
-            descriptor.PropertyDescriptors.Select(p => p.ValueName)
+            descriptor.PropertyDescriptors
+                .Select(p => p.ValueName)
                 .Should()
                 .BeEquivalentTo(
                     nameof(ClassWithMultiLetterSetters.BoolOption),
@@ -31,7 +32,8 @@ namespace System.CommandLine.Tests.Binding
             var descriptor =
                 ModelDescriptor.FromType<ClassWithSettersAndCtorParametersWithDifferentNames>();
 
-            descriptor.ConstructorDescriptors.SelectMany(p => p.ParameterDescriptors)
+            descriptor.ConstructorDescriptors
+                .SelectMany(p => p.ParameterDescriptors)
                 .Select(p => p.ValueName)
                 .Should()
                 .BeEquivalentSequenceTo("i", "s", "b");

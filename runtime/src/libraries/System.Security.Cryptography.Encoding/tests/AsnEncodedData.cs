@@ -140,7 +140,8 @@ namespace System.Security.Cryptography.Encoding.Tests
                 + "870F20010DB8AC10FE01000000000000"
                 + "008704FFFFFFFF8704020F6364880529"
                 + "01020203"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             AsnEncodedData asnData = new AsnEncodedData(new Oid("2.5.29.17"), sanExtension);
 

@@ -297,8 +297,7 @@ namespace System.Reflection.Metadata.Tests
             var contentId = peBuilder.Serialize(peImageBuilder);
             var peImage = peImageBuilder.ToImmutableArray();
 
-            AssertEx.Equal(
-                new byte[]
+            AssertEx.Equal(new byte[]
                 {
                     // headers:
                     0x4D,
@@ -816,65 +815,25 @@ namespace System.Reflection.Metadata.Tests
                 }.
                 // .s1
                 Concat(
-                        Pad(
-                            512,
-                            new byte[]
-                            {
-                                0x31,
-                                0x31,
-                                0x31,
-                                0x31,
-                                0x31,
-                                0x31,
-                                0x31,
-                                0x31,
-                                0x31,
-                                0x31
-                            }
-                        )
+                    Pad(
+                        512,
+                        new byte[] { 0x31, 0x31, 0x31, 0x31, 0x31, 0x31, 0x31, 0x31, 0x31, 0x31 }
                     )
-                    .
-                    // .s2
-                    Concat(
-                        Pad(
-                            512,
-                            new byte[]
-                            {
-                                0x32,
-                                0x32,
-                                0x32,
-                                0x32,
-                                0x32,
-                                0x32,
-                                0x32,
-                                0x32,
-                                0x32,
-                                0x32
-                            }
-                        )
+                ).
+                // .s2
+                Concat(
+                    Pad(
+                        512,
+                        new byte[] { 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32 }
                     )
-                    .
-                    // .s3
-                    Concat(
-                        Pad(
-                            512,
-                            new byte[]
-                            {
-                                0x33,
-                                0x33,
-                                0x33,
-                                0x33,
-                                0x33,
-                                0x33,
-                                0x33,
-                                0x33,
-                                0x33,
-                                0x33
-                            }
-                        )
-                    ),
-                peImage
-            );
+                ).
+                // .s3
+                Concat(
+                    Pad(
+                        512,
+                        new byte[] { 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33 }
+                    )
+                ), peImage);
 
             return peImage;
         }
@@ -893,7 +852,8 @@ namespace System.Reflection.Metadata.Tests
         {
             string fullName = "System.Reflection.Metadata.Tests.Resources." + name;
             using (
-                var stream = typeof(ResourceHelper).GetTypeInfo()
+                var stream = typeof(ResourceHelper)
+                    .GetTypeInfo()
                     .Assembly.GetManifestResourceStream(fullName)
             )
             {

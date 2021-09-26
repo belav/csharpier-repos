@@ -28,9 +28,8 @@ namespace System.CommandLine.Rendering.Tests
         [Fact]
         public void A_formattable_string_containing_ansi_codes_can_be_converted_to_a_ContainerSpan()
         {
-            var span = new TextSpanFormatter().ParseToSpan(
-                $"some {StyleSpan.BlinkOn()}blinking{StyleSpan.BlinkOff()} text"
-            );
+            var span = new TextSpanFormatter()
+                .ParseToSpan($"some {StyleSpan.BlinkOn()}blinking{StyleSpan.BlinkOff()} text");
 
             var containerSpan = span.Should().BeOfType<ContainerSpan>().Subject;
 

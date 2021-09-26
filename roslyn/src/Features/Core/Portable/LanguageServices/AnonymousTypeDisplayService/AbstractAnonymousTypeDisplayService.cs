@@ -122,44 +122,42 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             if (symbol is IMethodSymbol method)
             {
                 return transitiveAnonymousTypeReferences.OrderBy(
-                        (n1, n2) =>
-                        {
-                            var index1 = method.TypeArguments.IndexOf(n1);
-                            var index2 = method.TypeArguments.IndexOf(n2);
-                            index1 = index1 < 0 ? int.MaxValue : index1;
-                            index2 = index2 < 0 ? int.MaxValue : index2;
+                    (n1, n2) =>
+                    {
+                        var index1 = method.TypeArguments.IndexOf(n1);
+                        var index2 = method.TypeArguments.IndexOf(n2);
+                        index1 = index1 < 0 ? int.MaxValue : index1;
+                        index2 = index2 < 0 ? int.MaxValue : index2;
 
-                            return index1 - index2;
-                        }
-                    )
-                    .ToList();
+                        return index1 - index2;
+                    }
+                ).ToList();
             }
             else if (symbol is IPropertySymbol property)
             {
                 return transitiveAnonymousTypeReferences.OrderBy(
-                        (n1, n2) =>
+                    (n1, n2) =>
+                    {
+                        if (
+                            n1.Equals(property.ContainingType)
+                            && !n2.Equals(property.ContainingType)
+                        )
                         {
-                            if (
-                                n1.Equals(property.ContainingType)
-                                && !n2.Equals(property.ContainingType)
-                            )
-                            {
-                                return -1;
-                            }
-                            else if (
-                                !n1.Equals(property.ContainingType)
-                                && n2.Equals(property.ContainingType)
-                            )
-                            {
-                                return 1;
-                            }
-                            else
-                            {
-                                return 0;
-                            }
+                            return -1;
                         }
-                    )
-                    .ToList();
+                        else if (
+                            !n1.Equals(property.ContainingType)
+                            && n2.Equals(property.ContainingType)
+                        )
+                        {
+                            return 1;
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                    }
+                ).ToList();
             }
 
             return transitiveAnonymousTypeReferences;

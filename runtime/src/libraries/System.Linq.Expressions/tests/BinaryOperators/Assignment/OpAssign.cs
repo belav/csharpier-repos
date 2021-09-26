@@ -55,8 +55,8 @@ namespace System.Linq.Expressions.Tests
                     );
                     Assert.True(
                         Expression.Lambda<Func<bool>>(
-                                Expression.Equal(woAssign, wAssignReturningVariable)
-                            )
+                            Expression.Equal(woAssign, wAssignReturningVariable)
+                        )
                             .Compile(useInterpreter)()
                     );
                 }
@@ -122,8 +122,8 @@ namespace System.Linq.Expressions.Tests
                     );
                     Assert.True(
                         Expression.Lambda<Func<bool>>(
-                                Expression.Equal(woAssign, wAssignReturningVariable)
-                            )
+                            Expression.Equal(woAssign, wAssignReturningVariable)
+                        )
                             .Compile(useInterpreter)()
                     );
                 }
@@ -165,8 +165,8 @@ namespace System.Linq.Expressions.Tests
                     Expression wAssignReturningVariable = Expression.Block(assignment, property);
                     Assert.True(
                         Expression.Lambda<Func<bool>>(
-                                Expression.Equal(woAssign, wAssignReturningVariable)
-                            )
+                            Expression.Equal(woAssign, wAssignReturningVariable)
+                        )
                             .Compile(useInterpreter)()
                     );
                 }
@@ -224,8 +224,8 @@ namespace System.Linq.Expressions.Tests
                     );
                     Assert.True(
                         Expression.Lambda<Func<bool>>(
-                                Expression.Equal(woAssign, wAssignReturningVariable)
-                            )
+                            Expression.Equal(woAssign, wAssignReturningVariable)
+                        )
                             .Compile(useInterpreter)()
                     );
                 }
@@ -368,7 +368,8 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> AssignmentMethods()
         {
-            MethodInfo[] expressionMethods = typeof(Expression).GetMethods()
+            MethodInfo[] expressionMethods = typeof(Expression)
+                .GetMethods()
                 .Where(mi => mi.GetParameters().Length == 2)
                 .ToArray();
             foreach (Tuple<string, string> names in AssignAndEquivalentMethodNames(true))
@@ -387,7 +388,8 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> AssignmentMethodsWithoutTypes()
         {
-            MethodInfo[] expressionMethods = typeof(Expression).GetMethods()
+            MethodInfo[] expressionMethods = typeof(Expression)
+                .GetMethods()
                 .Where(mi => mi.GetParameters().Length == 2)
                 .ToArray();
             return AssignAndEquivalentMethodNames(true)
@@ -399,7 +401,8 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> AssignAndEquivalentMethods()
         {
-            MethodInfo[] expressionMethods = typeof(Expression).GetMethods()
+            MethodInfo[] expressionMethods = typeof(Expression)
+                .GetMethods()
                 .Where(mi => mi.GetParameters().Length == 2)
                 .ToArray();
             foreach (Tuple<string, string> names in AssignAndEquivalentMethodNames(true))

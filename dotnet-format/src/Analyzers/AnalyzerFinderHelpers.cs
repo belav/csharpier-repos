@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 .ToImmutableArray();
 
             var diagnosticAnalyzers = types.Where(
-                    t => typeof(DiagnosticAnalyzer).IsAssignableFrom(t)
-                )
+                t => typeof(DiagnosticAnalyzer).IsAssignableFrom(t)
+            )
                 .Select(
                     type =>
                         type.TryCreateInstance<DiagnosticAnalyzer>(out var instance)

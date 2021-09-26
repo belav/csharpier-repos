@@ -124,9 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 return null;
             }
 
-            var accessibleConstructors = baseType.InstanceConstructors.WhereAsArray(
-                    c => c.IsAccessibleWithin(within)
-                )
+            var accessibleConstructors = baseType.InstanceConstructors
+                .WhereAsArray(c => c.IsAccessibleWithin(within))
                 .WhereAsArray(
                     c =>
                         c.IsEditorBrowsable(
@@ -152,15 +151,15 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             return CreateSignatureHelpItems(
                 accessibleConstructors.SelectAsArray(
-                        c =>
-                            Convert(
-                                c,
-                                baseTypeSyntax.ArgumentList.OpenParenToken,
-                                semanticModel,
-                                anonymousTypeDisplayService,
-                                documentationCommentFormattingService
-                            )
-                    )
+                    c =>
+                        Convert(
+                            c,
+                            baseTypeSyntax.ArgumentList.OpenParenToken,
+                            semanticModel,
+                            anonymousTypeDisplayService,
+                            documentationCommentFormattingService
+                        )
+                )
                     .ToList(),
                 textSpan,
                 GetCurrentArgumentState(root, position, syntaxFacts, textSpan, cancellationToken),
@@ -221,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetPreambleParts(constructor, semanticModel, position),
                 GetSeparatorParts(),
                 GetPostambleParts(),
-                constructor.Parameters.Select(
+                constructor.Parameters
+                    .Select(
                         p =>
                             Convert(
                                 p,

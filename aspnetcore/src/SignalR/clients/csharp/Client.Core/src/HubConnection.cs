@@ -58,12 +58,12 @@ namespace Microsoft.AspNetCore.SignalR.Client
         private static readonly UnboundedChannelOptions _receiveLoopOptions =
             new UnboundedChannelOptions { SingleReader = true, SingleWriter = true };
 
-        private static readonly MethodInfo _sendStreamItemsMethod =
-            typeof(HubConnection).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
-                .Single(m => m.Name.Equals(nameof(SendStreamItems)));
-        private static readonly MethodInfo _sendIAsyncStreamItemsMethod =
-            typeof(HubConnection).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
-                .Single(m => m.Name.Equals(nameof(SendIAsyncEnumerableStreamItems)));
+        private static readonly MethodInfo _sendStreamItemsMethod = typeof(HubConnection)
+            .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+            .Single(m => m.Name.Equals(nameof(SendStreamItems)));
+        private static readonly MethodInfo _sendIAsyncStreamItemsMethod = typeof(HubConnection)
+            .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+            .Single(m => m.Name.Equals(nameof(SendIAsyncEnumerableStreamItems)));
 
         // Persistent across all connections
         private readonly ILoggerFactory _loggerFactory;
@@ -420,11 +420,11 @@ namespace Microsoft.AspNetCore.SignalR.Client
             using (_logger.BeginScope(_logScope))
             {
                 return await StreamAsChannelCoreAsyncCore(
-                        methodName,
-                        returnType,
-                        args,
-                        cancellationToken
-                    )
+                    methodName,
+                    returnType,
+                    args,
+                    cancellationToken
+                )
                     .ForceAsync();
             }
         }
@@ -823,9 +823,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 if (ReflectionHelper.IsIAsyncEnumerable(reader.GetType()))
                 {
                     _ = _sendIAsyncStreamItemsMethod.MakeGenericMethod(
-                            reader.GetType()
-                                .GetInterface("IAsyncEnumerable`1")!.GetGenericArguments()
-                        )
+                        reader.GetType().GetInterface("IAsyncEnumerable`1")!.GetGenericArguments()
+                    )
                         .Invoke(
                             this,
                             new object[]
@@ -1337,10 +1336,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 startingConnectionState.Connection.Transport.Output
             );
 
-            var sendHandshakeResult =
-                await startingConnectionState.Connection.Transport.Output.FlushAsync(
-                    CancellationToken.None
-                );
+            var sendHandshakeResult = await startingConnectionState.Connection.Transport.Output
+                .FlushAsync(CancellationToken.None);
 
             if (sendHandshakeResult.IsCompleted)
             {
@@ -1854,14 +1851,15 @@ namespace Microsoft.AspNetCore.SignalR.Client
         {
             try
             {
-                return _reconnectPolicy!.NextRetryDelay(
-                    new RetryContext
-                    {
-                        PreviousRetryCount = previousRetryCount,
-                        ElapsedTime = elapsedTime,
-                        RetryReason = retryReason,
-                    }
-                );
+                return _reconnectPolicy!
+                    .NextRetryDelay(
+                        new RetryContext
+                        {
+                            PreviousRetryCount = previousRetryCount,
+                            ElapsedTime = elapsedTime,
+                            RetryReason = retryReason,
+                        }
+                    );
             }
             catch (Exception ex)
             {
@@ -2115,8 +2113,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
 
                 _logger = _hubConnection._logger;
                 _hasInherentKeepAlive =
-                    connection.Features.Get<IConnectionInherentKeepAliveFeature>()?.HasInherentKeepAlive
-                    ?? false;
+                    connection.Features
+                        .Get<IConnectionInherentKeepAliveFeature>()?.HasInherentKeepAlive ?? false;
             }
 
             public string GetNextId() =>

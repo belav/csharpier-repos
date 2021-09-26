@@ -51,9 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         public void InitializeFilterFactory_WithExpectedPropertyHelpers_ForViewDataAttributeProperties()
         {
             // Arrange
-            var expected = typeof(TestController_OneViewDataProperty).GetProperty(
-                nameof(TestController_OneViewDataProperty.Test2)
-            );
+            var expected = typeof(TestController_OneViewDataProperty)
+                .GetProperty(nameof(TestController_OneViewDataProperty.Test2));
             var provider = new ViewDataAttributeApplicationModelProvider();
             var context = GetContext(typeof(TestController_OneViewDataProperty));
 

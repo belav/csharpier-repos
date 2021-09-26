@@ -216,10 +216,11 @@ namespace System.Xml.Tests
                     "res",
                     BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase
                 )
-                ?? exceptionType.BaseType.GetField(
-                    "res",
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase
-                );
+                ?? exceptionType.BaseType
+                    .GetField(
+                        "res",
+                        BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase
+                    );
 
             if (fInfo == null)
                 throw new VerifyException("Cannot obtain Resource ID from Exception.");
@@ -360,10 +361,8 @@ namespace System.Xml.Tests
 
         private static string MakeEscapes(string str)
         {
-            return new[] { "\\", "$", "{", "[", "(", "|", ")", "*", "+", "?" }.Aggregate(
-                str,
-                (current, esc) => current.Replace(esc, "\\" + esc)
-            );
+            return new[] { "\\", "$", "{", "[", "(", "|", ")", "*", "+", "?" }
+                .Aggregate(str, (current, esc) => current.Replace(esc, "\\" + esc));
         }
 
         public string ConstructExpectedMessage(object[] IdsAndParams)
@@ -405,12 +404,8 @@ namespace System.Xml.Tests
                     var linePosition = lineInfo.LinePosition.ToString();
                     lineInfoMessage = string.IsNullOrEmpty(lineInfo.FilePath)
                         ? string.Format(lineInfoMessage, lineNumber, linePosition)
-                        : string.Format(
-                              lineInfoMessage,
-                              lineInfo.FilePath,
-                              lineNumber,
-                              linePosition
-                          );
+                        : string
+                          .Format(lineInfoMessage, lineInfo.FilePath, lineNumber, linePosition);
                 }
                 else
                     lineInfoMessage = ESCAPE_ANY;

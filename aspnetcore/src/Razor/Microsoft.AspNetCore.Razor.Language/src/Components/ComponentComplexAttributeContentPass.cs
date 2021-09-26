@@ -46,12 +46,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         && node.TagHelpers.Any(t => t.IsComponentTagHelper())
                     )
                     {
-                        node.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_UnsupportedComplexContent(
-                                propertyNode,
-                                propertyNode.AttributeName
-                            )
-                        );
+                        node.Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_UnsupportedComplexContent(
+                                    propertyNode,
+                                    propertyNode.AttributeName
+                                )
+                            );
                         node.Children.RemoveAt(i);
                         continue;
                     }
@@ -63,12 +64,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         && node.TagHelpers.Any(t => t.IsComponentTagHelper())
                     )
                     {
-                        node.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_UnsupportedComplexContent(
-                                htmlNode,
-                                htmlNode.AttributeName
-                            )
-                        );
+                        node.Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_UnsupportedComplexContent(
+                                    htmlNode,
+                                    htmlNode.AttributeName
+                                )
+                            );
                         node.Children.RemoveAt(i);
                         continue;
                     }
@@ -80,12 +82,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 {
                     if (!TrySimplifyContent(directiveAttributeNode))
                     {
-                        node.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_UnsupportedComplexContent(
-                                directiveAttributeNode,
-                                directiveAttributeNode.OriginalAttributeName
-                            )
-                        );
+                        node.Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_UnsupportedComplexContent(
+                                    directiveAttributeNode,
+                                    directiveAttributeNode.OriginalAttributeName
+                                )
+                            );
                         node.Children.RemoveAt(i);
                         continue;
                     }

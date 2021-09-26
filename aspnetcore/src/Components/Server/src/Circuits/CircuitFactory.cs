@@ -51,10 +51,10 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             var jsRuntime = (RemoteJSRuntime)scope.ServiceProvider.GetRequiredService<IJSRuntime>();
             jsRuntime.Initialize(client);
 
-            var navigationManager =
-                (RemoteNavigationManager)scope.ServiceProvider.GetRequiredService<NavigationManager>();
-            var navigationInterception =
-                (RemoteNavigationInterception)scope.ServiceProvider.GetRequiredService<INavigationInterception>();
+            var navigationManager = (RemoteNavigationManager)scope.ServiceProvider
+                .GetRequiredService<NavigationManager>();
+            var navigationInterception = (RemoteNavigationInterception)scope.ServiceProvider
+                .GetRequiredService<INavigationInterception>();
             if (client.Connected)
             {
                 navigationManager.AttachJsRuntime(jsRuntime);
@@ -67,8 +67,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 navigationManager.Initialize(baseUri, uri);
             }
 
-            var appLifetime =
-                scope.ServiceProvider.GetRequiredService<ComponentApplicationLifetime>();
+            var appLifetime = scope.ServiceProvider
+                .GetRequiredService<ComponentApplicationLifetime>();
             await appLifetime.RestoreStateAsync(store);
 
             var renderer = new RemoteRenderer(
@@ -80,7 +80,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 jsRuntime.ElementReferenceContext
             );
 
-            var circuitHandlers = scope.ServiceProvider.GetServices<CircuitHandler>()
+            var circuitHandlers = scope.ServiceProvider
+                .GetServices<CircuitHandler>()
                 .OrderBy(h => h.Order)
                 .ToArray();
 

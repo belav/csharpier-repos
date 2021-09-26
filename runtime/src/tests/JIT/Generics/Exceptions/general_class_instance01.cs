@@ -128,7 +128,8 @@ public class Test
                     RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>,
                     RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>
                 >
-            >().ExceptionTest(true)
+            >()
+                .ExceptionTest(true)
         );
         Eval(
             new Gen<
@@ -141,7 +142,8 @@ public class Test
                         string[][][][][][][][][][][]
                     >
                 >
-            >().ExceptionTest(true)
+            >()
+                .ExceptionTest(true)
         );
 
         Eval(new Gen<ValX1<int>>().ExceptionTest(true));
@@ -160,7 +162,8 @@ public class Test
                     ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>,
                     ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>
                 >
-            >().ExceptionTest(true)
+            >()
+                .ExceptionTest(true)
         );
         Eval(
             new Gen<
@@ -173,7 +176,8 @@ public class Test
                         string[][][][][][][][][][][]
                     >
                 >
-            >().ExceptionTest(true)
+            >()
+                .ExceptionTest(true)
         );
 
         if (result)

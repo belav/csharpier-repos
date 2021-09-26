@@ -77,9 +77,8 @@ namespace Microsoft.AspNetCore.Mvc
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    appEnvironment.Object
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(appEnvironment.Object)
                 .AddTransient<
                     IActionResultExecutor<VirtualFileResult>,
                     TestVirtualFileResultExecutor
@@ -129,9 +128,8 @@ namespace Microsoft.AspNetCore.Mvc
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    appEnvironment.Object
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(appEnvironment.Object)
                 .AddTransient<
                     IActionResultExecutor<VirtualFileResult>,
                     TestVirtualFileResultExecutor
@@ -182,9 +180,8 @@ namespace Microsoft.AspNetCore.Mvc
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    appEnvironment.Object
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(appEnvironment.Object)
                 .AddTransient<
                     IActionResultExecutor<VirtualFileResult>,
                     TestVirtualFileResultExecutor
@@ -232,9 +229,8 @@ namespace Microsoft.AspNetCore.Mvc
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    appEnvironment.Object
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(appEnvironment.Object)
                 .AddTransient<
                     IActionResultExecutor<VirtualFileResult>,
                     TestVirtualFileResultExecutor
@@ -287,9 +283,8 @@ namespace Microsoft.AspNetCore.Mvc
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    appEnvironment.Object
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(appEnvironment.Object)
                 .AddTransient<
                     IActionResultExecutor<VirtualFileResult>,
                     TestVirtualFileResultExecutor
@@ -335,9 +330,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             var httpContext = GetHttpContext();
             httpContext.Response.Body = new MemoryStream();
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    appEnvironment.Object
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(appEnvironment.Object)
                 .AddTransient<
                     IActionResultExecutor<VirtualFileResult>,
                     TestVirtualFileResultExecutor
@@ -387,9 +381,8 @@ namespace Microsoft.AspNetCore.Mvc
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    appEnvironment.Object
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(appEnvironment.Object)
                 .AddTransient<
                     IActionResultExecutor<VirtualFileResult>,
                     TestVirtualFileResultExecutor
@@ -433,9 +426,8 @@ namespace Microsoft.AspNetCore.Mvc
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    appEnvironment.Object
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(appEnvironment.Object)
                 .AddTransient<
                     IActionResultExecutor<VirtualFileResult>,
                     TestVirtualFileResultExecutor
@@ -479,9 +471,8 @@ namespace Microsoft.AspNetCore.Mvc
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    appEnvironment.Object
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(appEnvironment.Object)
                 .AddTransient<
                     IActionResultExecutor<VirtualFileResult>,
                     TestVirtualFileResultExecutor
@@ -550,9 +541,8 @@ namespace Microsoft.AspNetCore.Mvc
             var context = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
             var appEnvironment = new Mock<IWebHostEnvironment>();
             appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    appEnvironment.Object
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(appEnvironment.Object)
                 .AddTransient<
                     IActionResultExecutor<VirtualFileResult>,
                     TestVirtualFileResultExecutor
@@ -825,10 +815,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             public override Task ExecuteResultAsync(ActionContext context)
             {
-                var executor =
-                    (TestVirtualFileResultExecutor)context.HttpContext.RequestServices.GetRequiredService<
-                        IActionResultExecutor<VirtualFileResult>
-                    >();
+                var executor = (TestVirtualFileResultExecutor)context.HttpContext.RequestServices
+                    .GetRequiredService<IActionResultExecutor<VirtualFileResult>>();
                 return executor.ExecuteAsync(context, this);
             }
         }

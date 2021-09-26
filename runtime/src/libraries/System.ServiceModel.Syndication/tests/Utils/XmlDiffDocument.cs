@@ -733,17 +733,15 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 if (((XmlDiffNavigator)_iter.Current).CurrentNode is XmlDiffAttribute)
                 {
-                    (
-                        (XmlDiffElement)((XmlDiffNavigator)_iter.Current).CurrentNode.ParentNode
-                    ).DeleteAttribute(
-                        (XmlDiffAttribute)((XmlDiffNavigator)_iter.Current).CurrentNode
-                    );
+                    ((XmlDiffElement)((XmlDiffNavigator)_iter.Current).CurrentNode.ParentNode)
+                        .DeleteAttribute(
+                            (XmlDiffAttribute)((XmlDiffNavigator)_iter.Current).CurrentNode
+                        );
                 }
                 else
                 {
-                    ((XmlDiffNavigator)_iter.Current).CurrentNode.ParentNode.DeleteChild(
-                        ((XmlDiffNavigator)_iter.Current).CurrentNode
-                    );
+                    ((XmlDiffNavigator)_iter.Current).CurrentNode.ParentNode
+                        .DeleteChild(((XmlDiffNavigator)_iter.Current).CurrentNode);
                 }
             }
         }
@@ -882,10 +880,8 @@ namespace System.ServiceModel.Syndication.Tests
         {
             if (CurrentNode is XmlDiffElement)
             {
-                XmlDiffAttribute _attr = ((XmlDiffElement)CurrentNode).GetAttribute(
-                    localName,
-                    namespaceURI
-                );
+                XmlDiffAttribute _attr = ((XmlDiffElement)CurrentNode)
+                    .GetAttribute(localName, namespaceURI);
                 if (_attr != null)
                 {
                     CurrentNode = _attr;

@@ -341,7 +341,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             // Mock binder fails to bind all properties.
             var mockBinder = new StubModelBinder();
 
-            var parameter = typeof(ComplexTypeModelBinderTest).GetMethod(
+            var parameter = typeof(ComplexTypeModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithComplexParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -370,8 +371,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 .Returns(model)
                 .Verifiable();
             testableBinder.Setup(
-                    o => o.CanBindPropertyPublic(bindingContext, It.IsAny<ModelMetadata>())
-                )
+                o => o.CanBindPropertyPublic(bindingContext, It.IsAny<ModelMetadata>())
+            )
                 .Returns(false);
 
             // Act
@@ -390,7 +391,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModelAsync_CreatesModelAndAddsError_IfIsTopLevelObject_WithNoData()
         {
             // Arrange
-            var parameter = typeof(ComplexTypeModelBinderTest).GetMethod(
+            var parameter = typeof(ComplexTypeModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithComplexParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -447,7 +449,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModelAsync_CreatesModelAndAddsError_IfIsTopLevelObject_WithNoSettableProperties()
         {
             // Arrange
-            var parameter = typeof(ComplexTypeModelBinderTest).GetMethod(
+            var parameter = typeof(ComplexTypeModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithNoSettablePropertiesParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -496,7 +499,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModelAsync_CreatesModelAndAddsError_IfIsTopLevelObject_WithAllPropertiesExcluded()
         {
             // Arrange
-            var parameter = typeof(ComplexTypeModelBinderTest).GetMethod(
+            var parameter = typeof(ComplexTypeModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithAllPropertiesExcludedParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -619,12 +623,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 () => binder.CreateModelPublic(bindingContext)
             );
             Assert.Equal(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or "
-                        + "value types and must have a parameterless constructor.",
-                    typeof(PointStruct).FullName
-                ),
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or "
+                            + "value types and must have a parameterless constructor.",
+                        typeof(PointStruct).FullName
+                    ),
                 exception.Message
             );
         }
@@ -665,15 +670,16 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 () => binder.CreateModelPublic(bindingContext)
             );
             Assert.Equal(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or "
-                        + "value types and must have a parameterless constructor. Alternatively, set the '{1}' property to"
-                        + " a non-null value in the '{2}' constructor.",
-                    typeof(PointStruct).FullName,
-                    nameof(Location.Point),
-                    typeof(Location).FullName
-                ),
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or "
+                            + "value types and must have a parameterless constructor. Alternatively, set the '{1}' property to"
+                            + " a non-null value in the '{2}' constructor.",
+                        typeof(PointStruct).FullName,
+                        nameof(Location.Point),
+                        typeof(Location).FullName
+                    ),
                 exception.Message
             );
         }
@@ -684,10 +690,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             // Arrange
             var bindingContext = CreateContext(GetMetadataForType(typeof(Person)), new Person());
             var originalModel = bindingContext.Model;
-            var binders = bindingContext.ModelMetadata.Properties.ToDictionary(
-                keySelector: item => item,
-                elementSelector: item => (IModelBinder)null
-            );
+            var binders = bindingContext.ModelMetadata.Properties
+                .ToDictionary(
+                    keySelector: item => item,
+                    elementSelector: item => (IModelBinder)null
+                );
 
             var binder = new Mock<TestableComplexTypeModelBinder>(binders) { CallBase = true };
             binder.Setup(b => b.CreateModelPublic(It.IsAny<ModelBindingContext>())).Verifiable();
@@ -705,10 +712,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             // Arrange
             var bindingContext = CreateContext(GetMetadataForType(typeof(Person)), model: null);
-            var binders = bindingContext.ModelMetadata.Properties.ToDictionary(
-                keySelector: item => item,
-                elementSelector: item => (IModelBinder)null
-            );
+            var binders = bindingContext.ModelMetadata.Properties
+                .ToDictionary(
+                    keySelector: item => item,
+                    elementSelector: item => (IModelBinder)null
+                );
 
             var testableBinder = new Mock<TestableComplexTypeModelBinder>(binders)
             {
@@ -1650,16 +1658,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 get
                 {
                     return (m) =>
-                        !string.Equals(
-                            "Excluded1",
-                            m.PropertyName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && !string.Equals(
-                            "Excluded2",
-                            m.PropertyName,
-                            StringComparison.OrdinalIgnoreCase
-                        );
+                        !string
+                            .Equals("Excluded1", m.PropertyName, StringComparison.OrdinalIgnoreCase)
+                        && !string
+                            .Equals(
+                                "Excluded2",
+                                m.PropertyName,
+                                StringComparison.OrdinalIgnoreCase
+                            );
                 }
             }
         }

@@ -85,15 +85,16 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                "({0}:{1},{2} [{3}] {4})",
-                AbsoluteIndex,
-                LineIndex,
-                CharacterIndex,
-                Length,
-                FilePath
-            );
+            return string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "({0}:{1},{2} [{3}] {4})",
+                    AbsoluteIndex,
+                    LineIndex,
+                    CharacterIndex,
+                    Length,
+                    FilePath
+                );
         }
 
         public static bool operator ==(SourceSpan left, SourceSpan right)

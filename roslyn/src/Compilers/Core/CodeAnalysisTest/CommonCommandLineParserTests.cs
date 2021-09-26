@@ -22,9 +22,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         )
         {
             var actual = CommandLineParser.SplitCommandLineIntoArguments(
-                    commandLine,
-                    removeHashComments
-                )
+                commandLine,
+                removeHashComments
+            )
                 .ToArray();
 
             Assert.Equal(expected.Length, actual.Length);
@@ -172,12 +172,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             VerifyRuleSetError(
                 source,
                 () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetHasDuplicateRules,
-                        "CA1012",
-                        "Error",
-                        "Warn"
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.RuleSetHasDuplicateRules,
+                            "CA1012",
+                            "Error",
+                            "Warn"
+                        )
             );
         }
 
@@ -201,12 +202,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             VerifyRuleSetError(
                 source,
                 () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetHasDuplicateRules,
-                        "CA1012",
-                        "Error",
-                        "Warn"
-                    ),
+                    string
+                        .Format(
+                            CodeAnalysisResources.RuleSetHasDuplicateRules,
+                            "CA1012",
+                            "Error",
+                            "Warn"
+                        ),
                 locSpecific: false
             );
         }
@@ -387,11 +389,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             VerifyRuleSetError(
                 source,
                 () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetBadAttributeValue,
-                        "Action",
-                        "Default"
-                    )
+                    string
+                        .Format(CodeAnalysisResources.RuleSetBadAttributeValue, "Action", "Default")
             );
         }
 
@@ -446,11 +445,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             VerifyRuleSetError(
                 source,
                 () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetMissingAttribute,
-                        "Rules",
-                        "AnalyzerId"
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.RuleSetMissingAttribute,
+                            "Rules",
+                            "AnalyzerId"
+                        )
             );
         }
 
@@ -469,11 +469,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             VerifyRuleSetError(
                 source,
                 () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetMissingAttribute,
-                        "Rules",
-                        "RuleNamespace"
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.RuleSetMissingAttribute,
+                            "Rules",
+                            "RuleNamespace"
+                        )
             );
         }
 
@@ -493,11 +494,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             VerifyRuleSetError(
                 source,
                 () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetMissingAttribute,
-                        "RuleSet",
-                        "ToolsVersion"
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.RuleSetMissingAttribute,
+                            "RuleSet",
+                            "ToolsVersion"
+                        )
             );
         }
 
@@ -567,11 +569,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             VerifyRuleSetError(
                 source,
                 () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetBadAttributeValue,
-                        "Action",
-                        "Default"
-                    )
+                    string
+                        .Format(CodeAnalysisResources.RuleSetBadAttributeValue, "Action", "Default")
             );
         }
 
@@ -1172,15 +1171,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 catch (InvalidRuleSetException e)
                 {
                     Assert.Contains(
-                        string.Format(
-                            CodeAnalysisResources.InvalidRuleSetInclude,
-                            newFile.Path,
-                            string.Format(
-                                CodeAnalysisResources.RuleSetBadAttributeValue,
-                                "Action",
-                                "Default"
-                            )
-                        ),
+                        string
+                            .Format(
+                                CodeAnalysisResources.InvalidRuleSetInclude,
+                                newFile.Path,
+                                string
+                                    .Format(
+                                        CodeAnalysisResources.RuleSetBadAttributeValue,
+                                        "Action",
+                                        "Default"
+                                    )
+                            ),
                         e.Message,
                         StringComparison.Ordinal
                     );

@@ -388,11 +388,12 @@ namespace System.Reflection.Emit
                 {
                     if (m.IsVirtual && !IsVirtual)
                         throw new TypeLoadException(
-                            string.Format(
-                                "Method '{0}' override '{1}' but it is not virtual",
-                                name,
-                                m
-                            )
+                            string
+                                .Format(
+                                    "Method '{0}' override '{1}' but it is not virtual",
+                                    name,
+                                    m
+                                )
                         );
                 }
             }
@@ -413,11 +414,12 @@ namespace System.Reflection.Emit
                     ((ilgen == null) || (ilgen.ILOffset == 0)) && (code == null || code.Length == 0)
                 )
                     throw new InvalidOperationException(
-                        string.Format(
-                            "Method '{0}.{1}' does not have a method body.",
-                            DeclaringType!.FullName,
-                            Name
-                        )
+                        string
+                            .Format(
+                                "Method '{0}.{1}' does not have a method body.",
+                                DeclaringType!.FullName,
+                                Name
+                            )
                     );
             }
             if (ilgen != null)

@@ -101,11 +101,11 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal partial class BoundAttribute
     {
         protected override ImmutableArray<BoundNode?> Children =>
-            StaticCast<BoundNode?>.From(
-                this.ConstructorArguments.AddRange(
-                    StaticCast<BoundExpression>.From(this.NamedArguments)
-                )
-            );
+            StaticCast<BoundNode?>
+                .From(
+                    this.ConstructorArguments
+                        .AddRange(StaticCast<BoundExpression>.From(this.NamedArguments))
+                );
     }
 
     internal partial class BoundQueryClause
@@ -181,29 +181,29 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal partial class BoundStackAllocArrayCreation
     {
         protected override ImmutableArray<BoundNode?> Children =>
-            StaticCast<BoundNode?>.From(
-                GetChildInitializers(this.InitializerOpt).Insert(0, this.Count)
-            );
+            StaticCast<BoundNode?>
+                .From(GetChildInitializers(this.InitializerOpt).Insert(0, this.Count));
     }
 
     internal partial class BoundConvertedStackAllocExpression
     {
         protected override ImmutableArray<BoundNode?> Children =>
-            StaticCast<BoundNode?>.From(
-                GetChildInitializers(this.InitializerOpt).Insert(0, this.Count)
-            );
+            StaticCast<BoundNode?>
+                .From(GetChildInitializers(this.InitializerOpt).Insert(0, this.Count));
     }
 
     internal partial class BoundDynamicObjectCreationExpression
     {
         protected override ImmutableArray<BoundNode?> Children =>
-            StaticCast<BoundNode?>.From(
-                this.Arguments.AddRange(
-                    BoundObjectCreationExpression.GetChildInitializers(
-                        this.InitializerExpressionOpt
-                    )
-                )
-            );
+            StaticCast<BoundNode?>
+                .From(
+                    this.Arguments
+                        .AddRange(
+                            BoundObjectCreationExpression.GetChildInitializers(
+                                this.InitializerExpressionOpt
+                            )
+                        )
+                );
     }
 
     partial class BoundThrowExpression

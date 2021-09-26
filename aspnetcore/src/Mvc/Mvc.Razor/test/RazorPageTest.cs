@@ -877,16 +877,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public async Task ExecuteAsync_RendersSectionsAndBody()
         {
             // Arrange
-            var expected = string.Join(
-                Environment.NewLine,
-                "Layout start",
-                "Header section",
-                "Async Header section",
-                "body content",
-                "Async Footer section",
-                "Footer section",
-                "Layout end"
-            );
+            var expected = string
+                .Join(
+                    Environment.NewLine,
+                    "Layout start",
+                    "Header section",
+                    "Async Header section",
+                    "body content",
+                    "Async Footer section",
+                    "Footer section",
+                    "Layout end"
+                );
             var page = CreatePage(
                 async v =>
                 {
@@ -1562,13 +1563,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var view = new Mock<TestableRazorPage> { CallBase = true };
             if (executeAction != null)
             {
-                view.Setup(v => v.ExecuteAsync())
-                    .Returns(
-                        () =>
-                        {
-                            return executeAction(view.Object);
-                        }
-                    );
+                view.Setup(v => v.ExecuteAsync()).Returns(
+                    () =>
+                    {
+                        return executeAction(view.Object);
+                    }
+                );
             }
 
             view.Object.ViewContext = context;
@@ -1586,9 +1586,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             writer = writer ?? new ViewBufferTextWriter(buffer, Encoding.UTF8);
 
             var httpContext = new DefaultHttpContext();
-            var serviceProvider = new ServiceCollection().AddSingleton<IViewBufferScope>(
-                    bufferScope
-                )
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<IViewBufferScope>(bufferScope)
                 .BuildServiceProvider();
             httpContext.RequestServices = serviceProvider;
             var actionContext = new ActionContext(

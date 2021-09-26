@@ -44,15 +44,11 @@ namespace Internal.TypeSystem
         )
         {
             MethodSignatureBuilder sigBuilder = new MethodSignatureBuilder(_signature);
-            sigBuilder.ReturnType = _signature.ReturnType.InstantiateSignature(
-                typeInstantiation,
-                methodInstantiation
-            );
+            sigBuilder.ReturnType = _signature.ReturnType
+                .InstantiateSignature(typeInstantiation, methodInstantiation);
             for (int i = 0; i < _signature.Length; i++)
-                sigBuilder[i] = _signature[i].InstantiateSignature(
-                    typeInstantiation,
-                    methodInstantiation
-                );
+                sigBuilder[i] = _signature[i]
+                    .InstantiateSignature(typeInstantiation, methodInstantiation);
 
             MethodSignature instantiatedSignature = sigBuilder.ToSignature();
             if (instantiatedSignature != _signature)

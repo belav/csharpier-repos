@@ -73,16 +73,17 @@ namespace System.Security.Principal
         {
             if (m_name != null)
             {
-                base.AddClaim(
-                    new Claim(
-                        base.NameClaimType,
-                        m_name,
-                        ClaimValueTypes.String,
-                        ClaimsIdentity.DefaultIssuer,
-                        ClaimsIdentity.DefaultIssuer,
-                        this
-                    )
-                );
+                base
+                    .AddClaim(
+                        new Claim(
+                            base.NameClaimType,
+                            m_name,
+                            ClaimValueTypes.String,
+                            ClaimsIdentity.DefaultIssuer,
+                            ClaimsIdentity.DefaultIssuer,
+                            this
+                        )
+                    );
             }
         }
     }

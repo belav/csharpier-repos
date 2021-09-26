@@ -363,10 +363,8 @@ namespace Internal.Cryptography.Pal
                         publicKeyInfos[i].Dispose();
                     }
 
-                    ArrayPool<RentedSubjectPublicKeyInfo>.Shared.Return(
-                        publicKeyInfos,
-                        clearArray: true
-                    );
+                    ArrayPool<RentedSubjectPublicKeyInfo>.Shared
+                        .Return(publicKeyInfos, clearArray: true);
                 }
 
                 ArrayPool<CertBagAsn>.Shared.Return(certBags, clearArray: true);

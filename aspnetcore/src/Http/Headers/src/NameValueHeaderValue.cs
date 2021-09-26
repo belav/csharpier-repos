@@ -507,11 +507,12 @@ namespace Microsoft.Net.Http.Headers
             if (!(StringSegment.IsNullOrEmpty(value) || (GetValueLength(value, 0) == value.Length)))
             {
                 throw new FormatException(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "The header value is invalid: '{0}'",
-                        value
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "The header value is invalid: '{0}'",
+                            value
+                        )
                 );
             }
         }

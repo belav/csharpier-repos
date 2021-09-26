@@ -42,14 +42,15 @@ namespace System.Net
             string local = s_domainName ??=
                 "." + IPGlobalProperties.GetIPGlobalProperties().DomainName;
             return local.Length == (hostString.Length - dot)
-                && string.Compare(
-                    local,
-                    0,
-                    hostString,
-                    dot,
-                    local.Length,
-                    StringComparison.OrdinalIgnoreCase
-                ) == 0;
+                && string
+                    .Compare(
+                        local,
+                        0,
+                        hostString,
+                        dot,
+                        local.Length,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0;
         }
 
         /// <summary>Ensures we've registered with NetworkChange to clear out statically-cached state upon a network change notification.</summary>

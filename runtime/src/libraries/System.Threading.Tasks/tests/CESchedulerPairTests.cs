@@ -143,10 +143,11 @@ namespace System.Threading.Tasks.Tests
                     break;
                 default:
                     throw new NotImplementedException(
-                        string.Format(
-                            "The option specified {0} to create the ConcurrentExclusiveSchedulerPair is invalid",
-                            ctorType
-                        )
+                        string
+                            .Format(
+                                "The option specified {0} to create the ConcurrentExclusiveSchedulerPair is invalid",
+                                ctorType
+                            )
                     );
             }
 
@@ -225,12 +226,13 @@ namespace System.Threading.Tasks.Tests
                 Exception caughtException = null;
                 try
                 {
-                    Task.Factory.StartNew(
-                        () => { },
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        schedPairScheduler
-                    );
+                    Task.Factory
+                        .StartNew(
+                            () => { },
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            schedPairScheduler
+                        );
                 }
                 catch (Exception exc)
                 {
@@ -293,12 +295,13 @@ namespace System.Threading.Tasks.Tests
                     //in which they were executed. Also asserting inside the thread is fine since we just want the test to be marked as failure
                     Assert.True(
                         itemsExecutedCount.Value <= maxItemsPerTask,
-                        string.Format(
-                            "itemsExecutedCount={0} cant be greater than maxValue={1}. Parent TaskID={2}",
-                            itemsExecutedCount,
-                            maxItemsPerTask,
-                            id
-                        )
+                        string
+                            .Format(
+                                "itemsExecutedCount={0} cant be greater than maxValue={1}. Parent TaskID={2}",
+                                itemsExecutedCount,
+                                maxItemsPerTask,
+                                id
+                            )
                     );
                 }
                 else
@@ -309,7 +312,8 @@ namespace System.Threading.Tasks.Tests
                 //Give enough time for a Task to stay around, so that other tasks will be executed by the same CEScheduler Task
                 //or else the CESchedulerTask will die and each Task might get executed by a different CEScheduler Task. This does not affect the
                 //verifications, but its increases the chance of finding a bug if the maxItemPerTask is not respected
-                new ManualResetEvent(false).WaitOne(1);
+                new ManualResetEvent(false)
+                    .WaitOne(1);
             };
 
             List<Task> taskList = new List<Task>();
@@ -395,10 +399,11 @@ namespace System.Threading.Tasks.Tests
                     && (task.Status != TaskStatus.RanToCompletion);
                 Assert.True(
                     wasTaskStarted,
-                    string.Format(
-                        "Additional reader tasks should not start when scheduler concurrency is {0} and a reader task is blocked",
-                        customSchedulerConcurrency
-                    )
+                    string
+                        .Format(
+                            "Additional reader tasks should not start when scheduler concurrency is {0} and a reader task is blocked",
+                            customSchedulerConcurrency
+                        )
                 );
             }
 
@@ -569,18 +574,20 @@ namespace System.Threading.Tasks.Tests
                 for (int i = 0; i < cesps.Length; i++)
                 {
                     Action work = () => new ManualResetEvent(false).WaitOne(2);
-                    Task.Factory.StartNew(
-                        work,
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        cesps[i].ConcurrentScheduler
-                    );
-                    Task.Factory.StartNew(
-                        work,
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        cesps[i].ExclusiveScheduler
-                    );
+                    Task.Factory
+                        .StartNew(
+                            work,
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            cesps[i].ConcurrentScheduler
+                        );
+                    Task.Factory
+                        .StartNew(
+                            work,
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            cesps[i].ExclusiveScheduler
+                        );
                 }
                 for (int i = 0; i < cesps.Length; i++)
                 {
@@ -673,12 +680,13 @@ namespace System.Threading.Tasks.Tests
                 for (int i = 0; i < 2; i++)
                 {
                     tasks.Add(
-                        Task.Factory.StartNew(
-                            () => recursiveWork(2),
-                            CancellationToken.None,
-                            TaskCreationOptions.None,
-                            scheduler
-                        )
+                        Task.Factory
+                            .StartNew(
+                                () => recursiveWork(2),
+                                CancellationToken.None,
+                                TaskCreationOptions.None,
+                                scheduler
+                            )
                     );
                 }
             }
@@ -756,17 +764,16 @@ namespace System.Threading.Tasks.Tests
                                                             () =>
                                                             {
                                                                 Task.Factory.StartNew(
-                                                                        () =>
-                                                                        {
-                                                                            throw new InvalidOperationException(
-                                                                                errorString
-                                                                            );
-                                                                        },
-                                                                        CancellationToken.None,
-                                                                        TaskCreationOptions.AttachedToParent,
-                                                                        cesp.ExclusiveScheduler
-                                                                    )
-                                                                    .Wait();
+                                                                    () =>
+                                                                    {
+                                                                        throw new InvalidOperationException(
+                                                                            errorString
+                                                                        );
+                                                                    },
+                                                                    CancellationToken.None,
+                                                                    TaskCreationOptions.AttachedToParent,
+                                                                    cesp.ExclusiveScheduler
+                                                                ).Wait();
                                                             },
                                                             CancellationToken.None,
                                                             TaskCreationOptions.AttachedToParent,
@@ -842,14 +849,13 @@ namespace System.Threading.Tasks.Tests
                 case "ContinueWith":
                     for (int i = 0; i < taskCount; i++)
                     {
-                        new TaskFactory().StartNew(() => { })
-                            .ContinueWith(
-                                (t) =>
-                                {
-                                    work();
-                                },
-                                scheduler
-                            );
+                        new TaskFactory().StartNew(() => { }).ContinueWith(
+                            (t) =>
+                            {
+                                work();
+                            },
+                            scheduler
+                        );
                     }
                     break;
                 case "FromAsync":
@@ -890,10 +896,11 @@ namespace System.Threading.Tasks.Tests
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(
-                        string.Format(
-                            "Api name specified {0} is invalid or is of incorrect case",
-                            apiType
-                        )
+                        string
+                            .Format(
+                                "Api name specified {0} is invalid or is of incorrect case",
+                                apiType
+                            )
                     );
             }
         }

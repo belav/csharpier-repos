@@ -59,12 +59,12 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
         {
             if (!_policyToIssuerAddress.TryGetValue(policy, out var issuerAddress))
             {
-                _policyToIssuerAddress[policy] =
-                    context.ProtocolMessage.IssuerAddress.ToLowerInvariant()
-                        .Replace(
-                            $"/{defaultPolicy.ToLowerInvariant()}/",
-                            $"/{policy.ToLowerInvariant()}/"
-                        );
+                _policyToIssuerAddress[policy] = context.ProtocolMessage.IssuerAddress
+                    .ToLowerInvariant()
+                    .Replace(
+                        $"/{defaultPolicy.ToLowerInvariant()}/",
+                        $"/{policy.ToLowerInvariant()}/"
+                    );
             }
 
             return _policyToIssuerAddress[policy];
@@ -86,9 +86,10 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
             )
             {
                 // If the user clicked the reset password link, redirect to the reset password route
-                context.Response.Redirect(
-                    $"{context.Request.PathBase}/AzureADB2C/Account/ResetPassword/{SchemeName}"
-                );
+                context.Response
+                    .Redirect(
+                        $"{context.Request.PathBase}/AzureADB2C/Account/ResetPassword/{SchemeName}"
+                    );
             }
             // Access denied errors happen when a user cancels an action on the Azure Active Directory B2C UI. We just redirect back to
             // the main page in that case.

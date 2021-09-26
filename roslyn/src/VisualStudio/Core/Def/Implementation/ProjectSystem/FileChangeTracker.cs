@@ -121,9 +121,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     try
                     {
                         // TODO: Should we pass in cancellationToken here insead of CancellationToken.None?
-                        return await (
-                            (IVsAsyncFileChangeEx)_fileChangeService
-                        ).AdviseFileChangeAsync(
+                        return await ((IVsAsyncFileChangeEx)_fileChangeService)
+                            .AdviseFileChangeAsync(
                                 _filePath,
                                 _fileChangeFlags,
                                 this,
@@ -161,11 +160,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             lock (s_lastBackgroundTaskGate)
             {
                 s_lastBackgroundTask = s_lastBackgroundTask.ContinueWith(
-                        _ => _fileChangeCookie.GetValueAsync(CancellationToken.None),
-                        CancellationToken.None,
-                        TaskContinuationOptions.None,
-                        TaskScheduler.Default
-                    )
+                    _ => _fileChangeCookie.GetValueAsync(CancellationToken.None),
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                )
                     .Unwrap();
                 return s_lastBackgroundTask;
             }

@@ -59,9 +59,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var token = tree.FindTokenOnLeftOfPosition(position, cancellationToken)
                     .GetPreviousTokenIfTouchingWord(position);
                 var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                        token.SpanStart,
-                        cancellationToken
-                    )
+                    token.SpanStart,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var typeInferenceService = document.GetLanguageService<ITypeInferenceService>();
 

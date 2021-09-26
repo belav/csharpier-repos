@@ -609,9 +609,9 @@ namespace System.Net.Security
             }
 
             return ReadAsync(
-                    new AsyncReadWriteAdapter(InnerStream, cancellationToken),
-                    new Memory<byte>(buffer, offset, count)
-                )
+                new AsyncReadWriteAdapter(InnerStream, cancellationToken),
+                new Memory<byte>(buffer, offset, count)
+            )
                 .AsTask();
         }
 
@@ -685,10 +685,10 @@ namespace System.Net.Security
                     }
 
                     readBytes = await ReadAllAsync(
-                            adapter,
-                            new Memory<byte>(_readBuffer, 0, readBytes),
-                            allowZeroRead: false
-                        )
+                        adapter,
+                        new Memory<byte>(_readBuffer, 0, readBytes),
+                        allowZeroRead: false
+                    )
                         .ConfigureAwait(false);
 
                     // Decrypt into internal buffer, change "readBytes" to count now _Decrypted Bytes_
@@ -766,9 +766,9 @@ namespace System.Net.Security
             }
 
             WriteAsync(
-                    new SyncReadWriteAdapter(InnerStream),
-                    new ReadOnlyMemory<byte>(buffer, offset, count)
-                )
+                new SyncReadWriteAdapter(InnerStream),
+                new ReadOnlyMemory<byte>(buffer, offset, count)
+            )
                 .GetAwaiter()
                 .GetResult();
         }
@@ -1097,7 +1097,8 @@ namespace System.Net.Security
                         ? ReceiveBlobAsync(adapter)
                         : // server should listen for a client blob
                           SendBlobAsync(adapter, message: null)
-                ).ConfigureAwait(false); // client should send the first blob
+                )
+                    .ConfigureAwait(false); // client should send the first blob
             }
             catch (Exception e)
             {

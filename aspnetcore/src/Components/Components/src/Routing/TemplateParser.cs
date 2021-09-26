@@ -137,11 +137,12 @@ namespace Microsoft.AspNetCore.Components.Routing
                     }
 
                     if (
-                        string.Equals(
-                            currentSegment.Value,
-                            nextSegment.Value,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                currentSegment.Value,
+                                nextSegment.Value,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         throw new InvalidOperationException(

@@ -117,16 +117,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         )]
         public void ConstantEnumOnesComplement(object operand, object result)
         {
-            CallSite<Func<CallSite, object, object>> cs = CallSite<
-                Func<CallSite, object, object>
-            >.Create(
-                Binder.UnaryOperation(
-                    CSharpBinderFlags.None,
-                    ExpressionType.OnesComplement,
-                    GetType(),
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null) }
-                )
-            );
+            CallSite<Func<CallSite, object, object>> cs = CallSite<Func<CallSite, object, object>>
+                .Create(
+                    Binder.UnaryOperation(
+                        CSharpBinderFlags.None,
+                        ExpressionType.OnesComplement,
+                        GetType(),
+                        new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null) }
+                    )
+                );
             Assert.Equal(result, cs.Target(cs, operand));
         }
 
@@ -142,16 +141,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         )]
         public void ConstantCheckedEnumOnesComplement(object operand, object result)
         {
-            CallSite<Func<CallSite, object, object>> cs = CallSite<
-                Func<CallSite, object, object>
-            >.Create(
-                Binder.UnaryOperation(
-                    CSharpBinderFlags.CheckedContext,
-                    ExpressionType.OnesComplement,
-                    GetType(),
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null) }
-                )
-            );
+            CallSite<Func<CallSite, object, object>> cs = CallSite<Func<CallSite, object, object>>
+                .Create(
+                    Binder.UnaryOperation(
+                        CSharpBinderFlags.CheckedContext,
+                        ExpressionType.OnesComplement,
+                        GetType(),
+                        new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null) }
+                    )
+                );
             Assert.Equal(result, cs.Target(cs, operand));
         }
     }

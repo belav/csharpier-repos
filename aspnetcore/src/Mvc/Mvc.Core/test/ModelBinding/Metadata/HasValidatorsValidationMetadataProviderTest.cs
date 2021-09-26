@@ -57,8 +57,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var metadataBasedModelValidatorProvider =
                 new Mock<IMetadataBasedModelValidatorProvider>();
             metadataBasedModelValidatorProvider.Setup(
-                    p => p.HasValidators(typeof(object), It.IsAny<IList<object>>())
-                )
+                p => p.HasValidators(typeof(object), It.IsAny<IList<object>>())
+            )
                 .Returns(true)
                 .Verifiable();
 

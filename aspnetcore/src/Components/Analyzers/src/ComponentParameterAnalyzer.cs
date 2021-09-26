@@ -122,10 +122,11 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                                             captureUnmatchedValuesParameters.Add(property);
 
                                             // Check the type, we need to be able to assign a Dictionary<string, object>
-                                            var conversion = context.Compilation.ClassifyConversion(
-                                                symbols.ParameterCaptureUnmatchedValuesRuntimeType,
-                                                property.Type
-                                            );
+                                            var conversion = context.Compilation
+                                                .ClassifyConversion(
+                                                    symbols.ParameterCaptureUnmatchedValuesRuntimeType,
+                                                    property.Type
+                                                );
                                             if (!conversion.Exists || conversion.IsExplicit)
                                             {
                                                 context.ReportDiagnostic(
@@ -135,12 +136,14 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                                                         property.ToDisplayString(
                                                             SymbolDisplayFormat.CSharpErrorMessageFormat
                                                         ),
-                                                        property.Type.ToDisplayString(
-                                                            SymbolDisplayFormat.CSharpErrorMessageFormat
-                                                        ),
-                                                        symbols.ParameterCaptureUnmatchedValuesRuntimeType.ToDisplayString(
-                                                            SymbolDisplayFormat.CSharpErrorMessageFormat
-                                                        )
+                                                        property.Type
+                                                            .ToDisplayString(
+                                                                SymbolDisplayFormat.CSharpErrorMessageFormat
+                                                            ),
+                                                        symbols.ParameterCaptureUnmatchedValuesRuntimeType
+                                                            .ToDisplayString(
+                                                                SymbolDisplayFormat.CSharpErrorMessageFormat
+                                                            )
                                                     )
                                                 );
                                             }
@@ -159,16 +162,17 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                                                     SymbolDisplayFormat.CSharpErrorMessageFormat
                                                 ),
                                                 Environment.NewLine,
-                                                string.Join(
-                                                    Environment.NewLine,
-                                                    captureUnmatchedValuesParameters.Select(
+                                                string
+                                                    .Join(
+                                                        Environment.NewLine,
+                                                        captureUnmatchedValuesParameters.Select(
                                                             p =>
                                                                 p.ToDisplayString(
                                                                     SymbolDisplayFormat.CSharpErrorMessageFormat
                                                                 )
                                                         )
-                                                        .OrderBy(n => n)
-                                                )
+                                                            .OrderBy(n => n)
+                                                    )
                                             )
                                         );
                                     }

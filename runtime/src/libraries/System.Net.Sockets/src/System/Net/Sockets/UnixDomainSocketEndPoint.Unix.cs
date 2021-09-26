@@ -15,11 +15,12 @@ namespace System.Net.Sockets
 
         static UnixDomainSocketEndPoint()
         {
-            Interop.Sys.GetDomainSocketSizes(
-                out s_nativePathOffset,
-                out s_nativePathLength,
-                out s_nativeAddressSize
-            );
+            Interop.Sys
+                .GetDomainSocketSizes(
+                    out s_nativePathOffset,
+                    out s_nativePathLength,
+                    out s_nativeAddressSize
+                );
 
             Debug.Assert(s_nativePathOffset >= 0, "Expected path offset to be positive");
             Debug.Assert(

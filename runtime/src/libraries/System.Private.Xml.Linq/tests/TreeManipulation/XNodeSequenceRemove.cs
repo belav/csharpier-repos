@@ -535,8 +535,8 @@ namespace XLinqTests
                 .First();
             TestLog.Compare(e != null, "TEST_FAILED: wrong starting position");
             IEnumerable<XNode> toRemove = e.AncestorsAndSelf(
-                    useSelf ? @"{http://www.books.com/}book" : @"bookstore"
-                )
+                useSelf ? @"{http://www.books.com/}book" : @"bookstore"
+            )
                 .OfType<XNode>();
             if (_runWithEvents)
             {
@@ -665,8 +665,8 @@ namespace XLinqTests
             );
             XElement e = useSelf
                 ? doc.Descendants(@"{http://www.books.com/}book")
-                      .Where(x => x.Element("title").Value == "XQL The Golden Years")
-                      .First()
+                  .Where(x => x.Element("title").Value == "XQL The Golden Years")
+                  .First()
                 : doc.Root;
             TestLog.Compare(e != null, "TEST_FAILING: wrong starting position");
             IEnumerable<XNode> toRemove = e.DescendantsAndSelf(@"{http://www.books.com/}book")
@@ -691,7 +691,8 @@ namespace XLinqTests
                 FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
                 LoadOptions.PreserveWhitespace
             );
-            IEnumerable<XNode> toRemove = doc.Root.Descendants(@"{http://www.books.com/}book")
+            IEnumerable<XNode> toRemove = doc.Root
+                .Descendants(@"{http://www.books.com/}book")
                 .OfType<XNode>();
             if (_runWithEvents)
             {
@@ -738,7 +739,8 @@ namespace XLinqTests
                 FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
                 LoadOptions.PreserveWhitespace
             );
-            IEnumerable<XNode> toRemove = doc.Root.Elements(@"{http://www.books.com/}book")
+            IEnumerable<XNode> toRemove = doc.Root
+                .Elements(@"{http://www.books.com/}book")
                 .OfType<XNode>();
             if (_runWithEvents)
             {
@@ -861,13 +863,15 @@ namespace XLinqTests
                 "<A xmlns='b'>text1<X/>text2</A>",
                 LoadOptions.PreserveWhitespace
             );
-            IEnumerable<XNode> toRemove = doc1.Root.DescendantNodes()
+            IEnumerable<XNode> toRemove = doc1.Root
+                .DescendantNodes()
                 .Where(x => x.NodeType == XmlNodeType.Comment)
                 .Concat2(doc2.Root.Elements());
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc1);
-                count = doc1.Root.DescendantNodes()
+                count = doc1.Root
+                    .DescendantNodes()
                     .Where(x => x.NodeType == XmlNodeType.Comment)
                     .Count();
             }
@@ -1092,11 +1096,11 @@ namespace XLinqTests
 
             // Create array of parents
             IEnumerable<XContainer> parents = toRemove.Select(
-                    x =>
-                        (x == null)
-                            ? (XContainer)null
-                            : (x.Parent != null ? (XContainer)x.Parent : (XContainer)x.Document)
-                )
+                x =>
+                    (x == null)
+                        ? (XContainer)null
+                        : (x.Parent != null ? (XContainer)x.Parent : (XContainer)x.Document)
+            )
                 .ToList();
 
             // calculate the expected results for the parents of the processed elements
@@ -1153,10 +1157,8 @@ namespace XLinqTests
 
                         // Compare the rest of the elements
                         TestLog.Compare(
-                            expectedNodesForParent[parent].EqualAll(
-                                parent.Nodes(),
-                                XNode.EqualityComparer
-                            ),
+                            expectedNodesForParent[parent]
+                                .EqualAll(parent.Nodes(), XNode.EqualityComparer),
                             "The rest of the nodes"
                         );
                     }

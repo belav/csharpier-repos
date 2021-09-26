@@ -107,11 +107,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
             // Use the first item's preview.
             var firstItem = this.ViewModel.Items.OfType<CheckBoxOptionViewModel>().First();
-            this.ViewModel.SetOptionAndUpdatePreview(
-                firstItem.IsChecked,
-                firstItem.Option,
-                firstItem.GetPreview()
-            );
+            this.ViewModel
+                .SetOptionAndUpdatePreview(
+                    firstItem.IsChecked,
+                    firstItem.Option,
+                    firstItem.GetPreview()
+                );
 
             DataContext = ViewModel;
         }

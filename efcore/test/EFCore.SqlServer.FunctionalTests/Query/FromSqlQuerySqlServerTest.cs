@@ -219,9 +219,10 @@ WHERE [c].[CustomerID] = [o].[CustomerID]"
             bool async
         )
         {
-            await base.FromSqlRaw_queryable_multiple_composed_with_parameters_and_closure_parameters(
-                async
-            );
+            await base
+                .FromSqlRaw_queryable_multiple_composed_with_parameters_and_closure_parameters(
+                    async
+                );
 
             AssertSql(
                 @"p0='London' (Size = 4000)
@@ -333,9 +334,10 @@ SELECT * FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1"
             bool async
         )
         {
-            await base.FromSqlInterpolated_queryable_multiple_composed_with_parameters_and_closure_parameters_interpolated(
-                async
-            );
+            await base
+                .FromSqlInterpolated_queryable_multiple_composed_with_parameters_and_closure_parameters_interpolated(
+                    async
+                );
 
             AssertSql(
                 @"p0='London' (Size = 4000)

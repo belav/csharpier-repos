@@ -21,21 +21,18 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // it can properly set the "I gave up" flag when it encounters an Expression it's not familiar
             // with.
 
-            var methodsOnExpressionVisitorRequiringOverride = typeof(ExpressionVisitor).GetMethods(
-                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
-                )
+            var methodsOnExpressionVisitorRequiringOverride = typeof(ExpressionVisitor)
+                .GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
                 .Where(mi => mi.IsVirtual)
                 .Select(mi => mi.GetBaseDefinition())
                 .Where(mi => mi.DeclaringType == typeof(ExpressionVisitor));
-            var methodsOnFingerprintingExpressionVisitor =
-                typeof(FingerprintingExpressionVisitor).GetMethods(
-                        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
-                    )
-                    .Where(mi => mi.DeclaringType == typeof(FingerprintingExpressionVisitor));
+            var methodsOnFingerprintingExpressionVisitor = typeof(FingerprintingExpressionVisitor)
+                .GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
+                .Where(mi => mi.DeclaringType == typeof(FingerprintingExpressionVisitor));
 
             var missingMethods = methodsOnExpressionVisitorRequiringOverride.Except(
-                    methodsOnFingerprintingExpressionVisitor.Select(mi => mi.GetBaseDefinition())
-                )
+                methodsOnFingerprintingExpressionVisitor.Select(mi => mi.GetBaseDefinition())
+            )
                 .ToArray();
             if (missingMethods.Length != 0)
             {

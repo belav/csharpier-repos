@@ -53,11 +53,12 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             {
                 if (!string.IsNullOrEmpty(ConnectionId))
                 {
-                    _cachedToString = string.Format(
-                        CultureInfo.InvariantCulture,
-                        "TransportConnectionId:{0}",
-                        ConnectionId
-                    );
+                    _cachedToString = string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "TransportConnectionId:{0}",
+                            ConnectionId
+                        );
                 }
             }
 

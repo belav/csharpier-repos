@@ -36,12 +36,13 @@ namespace System.Net
                     SafeDeleteSslContext sslContext = (SafeDeleteSslContext)securityContext;
 
                     if (
-                        !Interop.AppleCrypto.SslCheckHostnameMatch(
-                            sslContext.SslContext,
-                            hostName!,
-                            remoteCertificate.NotBefore,
-                            out int osStatus
-                        )
+                        !Interop.AppleCrypto
+                            .SslCheckHostnameMatch(
+                                sslContext.SslContext,
+                                hostName!,
+                                remoteCertificate.NotBefore,
+                                out int osStatus
+                            )
                     )
                     {
                         errors |= SslPolicyErrors.RemoteCertificateNameMismatch;
@@ -110,10 +111,8 @@ namespace System.Net
                 {
                     for (int i = 0; i < chainSize; i++)
                     {
-                        IntPtr certHandle = Interop.AppleCrypto.X509ChainGetCertificateAtIndex(
-                            chainHandle,
-                            i
-                        );
+                        IntPtr certHandle = Interop.AppleCrypto
+                            .X509ChainGetCertificateAtIndex(chainHandle, i);
                         remoteCertificateStore.Add(new X509Certificate2(certHandle));
                     }
                 }
@@ -122,10 +121,8 @@ namespace System.Net
                 // to match what the Windows and Unix PALs do.
                 if (chainSize > 0)
                 {
-                    IntPtr certHandle = Interop.AppleCrypto.X509ChainGetCertificateAtIndex(
-                        chainHandle,
-                        0
-                    );
+                    IntPtr certHandle = Interop.AppleCrypto
+                        .X509ChainGetCertificateAtIndex(chainHandle, 0);
                     result = new X509Certificate2(certHandle);
                 }
             }
@@ -149,9 +146,8 @@ namespace System.Net
             }
 
             using (
-                SafeCFArrayHandle dnArray = Interop.AppleCrypto.SslCopyCADistinguishedNames(
-                    sslContext
-                )
+                SafeCFArrayHandle dnArray = Interop.AppleCrypto
+                    .SslCopyCADistinguishedNames(sslContext)
             )
             {
                 long size = Interop.CoreFoundation.CFArrayGetCount(dnArray);

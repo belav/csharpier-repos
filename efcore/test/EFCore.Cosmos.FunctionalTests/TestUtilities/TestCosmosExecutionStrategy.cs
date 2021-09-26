@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public TestCosmosExecutionStrategy()
             : base(
                 new DbContext(
-                    new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                    new DbContextOptionsBuilder()
+                        .EnableServiceProviderCaching(false)
                         .UseCosmos(
                             TestEnvironment.DefaultConnection,
                             TestEnvironment.AuthToken,

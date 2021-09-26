@@ -954,7 +954,8 @@ class D
 
             TestSyntaxReceiver testReceiver = (TestSyntaxReceiver)receiver!;
 
-            var classDeclarations = testReceiver.VisitedNodes.OfType<ClassDeclarationSyntax>()
+            var classDeclarations = testReceiver.VisitedNodes
+                .OfType<ClassDeclarationSyntax>()
                 .Select(c => c.Identifier.Text);
             Assert.Equal(new[] { "C", "D" }, classDeclarations);
         }
@@ -1022,7 +1023,8 @@ class D
             Assert.IsType<TestSyntaxReceiver>(receiver);
 
             TestSyntaxReceiver testReceiver = (TestSyntaxReceiver)receiver!;
-            var classDeclarations = testReceiver.VisitedNodes.OfType<ClassDeclarationSyntax>()
+            var classDeclarations = testReceiver.VisitedNodes
+                .OfType<ClassDeclarationSyntax>()
                 .Select(c => c.Identifier.Text);
             Assert.Equal(new[] { "C", "D" }, classDeclarations);
         }
@@ -1073,17 +1075,14 @@ class D
                                     )
                                     {
                                         // ensure we can query the semantic model for D
-                                        var dType =
-                                            ctx.SemanticModel.Compilation.GetTypeByMetadataName(
-                                                "D"
-                                            );
+                                        var dType = ctx.SemanticModel.Compilation
+                                            .GetTypeByMetadataName("D");
                                         Assert.NotNull(dType);
                                         Assert.False(dType.IsErrorType());
 
                                         // and the code referencing it now works
-                                        var typeInfo = ctx.SemanticModel.GetTypeInfo(
-                                            cds.BaseList!.Types[0].Type
-                                        );
+                                        var typeInfo = ctx.SemanticModel
+                                            .GetTypeInfo(cds.BaseList!.Types[0].Type);
                                         Assert.Same(dType, typeInfo.Type);
                                     }
                                 }

@@ -137,12 +137,8 @@ namespace System.Globalization
             int startYear;
             int startMonth;
             int startDay;
-            bool result = Interop.Globalization.GetJapaneseEraStartDate(
-                era,
-                out startYear,
-                out startMonth,
-                out startDay
-            );
+            bool result = Interop.Globalization
+                .GetJapaneseEraStartDate(era, out startYear, out startMonth, out startDay);
 
             if (result)
             {

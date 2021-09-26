@@ -122,16 +122,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             if (version != null)
             {
-                new DirectoryInfo(Path.Combine(_path, "host", "fxr", version.ToString())).Delete(
-                    recursive: true
-                );
+                new DirectoryInfo(Path.Combine(_path, "host", "fxr", version.ToString()))
+                    .Delete(recursive: true);
             }
             else
             {
                 foreach (
-                    var dir in new DirectoryInfo(
-                        Path.Combine(_path, "host", "fxr")
-                    ).GetDirectories()
+                    var dir in new DirectoryInfo(Path.Combine(_path, "host", "fxr"))
+                        .GetDirectories()
                 )
                 {
                     dir.Delete(recursive: true);
@@ -188,7 +186,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                                         new NetCoreAppBuilder.RuntimeFileBuilder(
                                             $"runtimes/{currentRid}/native/{coreclrFileName}"
                                         )
-                                    ).CopyFromFile(
+                                    )
+                                        .CopyFromFile(
                                             Path.Combine(
                                                 _repoDirectories.Artifacts,
                                                 "corehost_test",
@@ -213,7 +212,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                                         new NetCoreAppBuilder.RuntimeFileBuilder(
                                             $"runtimes/{currentRid}/native/{hostPolicyFileName}"
                                         )
-                                    ).CopyFromFile(
+                                    )
+                                        .CopyFromFile(
                                             Path.Combine(
                                                 _repoDirectories.Artifacts,
                                                 "corehost",

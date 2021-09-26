@@ -49,11 +49,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CancellationToken cancellationToken
         )
         {
-            return context.SyntaxTree.IsGlobalMemberDeclarationContext(
-                    context.Position,
-                    s_validGlobalModifiers,
-                    cancellationToken
-                )
+            return context.SyntaxTree
+                    .IsGlobalMemberDeclarationContext(
+                        context.Position,
+                        s_validGlobalModifiers,
+                        cancellationToken
+                    )
                 || context.IsMemberDeclarationContext(
                     validModifiers: s_validModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,

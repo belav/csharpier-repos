@@ -265,11 +265,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 );
                 var actualGreen = actualRed.Node;
 
-                var expectedGreen = InternalSyntax.SyntaxFactory.Token(
-                    InternalSyntax.SyntaxFactory.ElasticZeroSpace,
-                    kind,
-                    InternalSyntax.SyntaxFactory.ElasticZeroSpace
-                );
+                var expectedGreen = InternalSyntax.SyntaxFactory
+                    .Token(
+                        InternalSyntax.SyntaxFactory.ElasticZeroSpace,
+                        kind,
+                        InternalSyntax.SyntaxFactory.ElasticZeroSpace
+                    );
 
                 Assert.Same(expectedGreen, actualGreen); // Don't create a new token if we don't have to.
             }
@@ -528,11 +529,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("1l", literal.Text);
             Assert.Equal(Location.None, literal.GetLocation());
 
-            literal.GetDiagnostics()
-                .Verify(
-                    // warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-                    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix)
-                );
+            literal.GetDiagnostics().Verify(
+                // warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix)
+            );
         }
 
         [Fact]
@@ -563,12 +563,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(expectedLocation, expression.Token.GetLocation());
 
-            expression.Token.GetDiagnostics()
-                .Verify(
-                    // (1,2): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-                    // 1l
-                    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 2)
-                );
+            expression.Token.GetDiagnostics().Verify(
+                // (1,2): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                // 1l
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 2)
+            );
         }
 
         [Fact]
@@ -608,13 +607,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                             .WithMembers(
                                 SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
                                     SyntaxFactory.PropertyDeclaration(
-                                            SyntaxFactory.NullableType(
-                                                SyntaxFactory.PredefinedType(
-                                                    SyntaxFactory.Token(SyntaxKind.IntKeyword)
-                                                )
-                                            ),
-                                            SyntaxFactory.Identifier("P")
-                                        )
+                                        SyntaxFactory.NullableType(
+                                            SyntaxFactory.PredefinedType(
+                                                SyntaxFactory.Token(SyntaxKind.IntKeyword)
+                                            )
+                                        ),
+                                        SyntaxFactory.Identifier("P")
+                                    )
                                         .WithAccessorList(SyntaxFactory.AccessorList())
                                 )
                             )
@@ -637,11 +636,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                             .WithMembers(
                                 SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
                                     SyntaxFactory.PropertyDeclaration(
-                                            SyntaxFactory.NullableType(
-                                                SyntaxFactory.ParseTypeName("DateTime")
-                                            ),
-                                            SyntaxFactory.Identifier("P")
-                                        )
+                                        SyntaxFactory.NullableType(
+                                            SyntaxFactory.ParseTypeName("DateTime")
+                                        ),
+                                        SyntaxFactory.Identifier("P")
+                                    )
                                         .WithAccessorList(SyntaxFactory.AccessorList())
                                 )
                             )
@@ -745,14 +744,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var type = "delegate*<void>";
 
             var parsedWith8 = SyntaxFactory.ParseTypeName(type, options: TestOptions.Regular8);
-            parsedWith8.GetDiagnostics()
-                .Verify(
-                    // (1,1): error CS8400: Feature 'function pointers' is not available in C# 8.0. Please use language version 9.0 or greater.
-                    // delegate*<void>
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "delegate*<void>")
-                        .WithArguments("function pointers", "9.0")
-                        .WithLocation(1, 1)
-                );
+            parsedWith8.GetDiagnostics().Verify(
+                // (1,1): error CS8400: Feature 'function pointers' is not available in C# 8.0. Please use language version 9.0 or greater.
+                // delegate*<void>
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "delegate*<void>")
+                    .WithArguments("function pointers", "9.0")
+                    .WithLocation(1, 1)
+            );
 
             var parsedWithPreview = SyntaxFactory.ParseTypeName(
                 type,

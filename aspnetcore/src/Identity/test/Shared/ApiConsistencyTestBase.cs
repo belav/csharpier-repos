@@ -20,9 +20,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 where
                     type.IsVisible
                     && !type.IsSealed
-                    && type.DeclaredConstructors.Any(
-                        c => c.IsPublic || c.IsFamily || c.IsFamilyOrAssembly
-                    )
+                    && type.DeclaredConstructors
+                        .Any(c => c.IsPublic || c.IsFamily || c.IsFamilyOrAssembly)
                     && type.Namespace != null
                     && !type.Namespace.EndsWith(".Compiled", StringComparison.Ordinal)
                 from method in type.DeclaredMethods.Where(m => m.IsPublic && !m.IsStatic)
@@ -33,7 +32,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                     && !method.Name.StartsWith("set_", StringComparison.Ordinal)
                     && !method.Name.Equals("Dispose")
                 select type.Name + "." + method.Name
-            ).ToList();
+            )
+                .ToList();
 
             Assert.False(
                 nonVirtualMethods.Any(),
@@ -51,11 +51,12 @@ namespace Microsoft.AspNetCore.Identity.Test
                 where GetBasestTypeInAssembly(method.DeclaringType) == type
                 where typeof(Task).IsAssignableFrom(method.ReturnType)
                 select method
-            ).ToList();
+            )
+                .ToList();
 
             var missingSuffixMethods = asyncMethods.Where(
-                    method => !method.Name.EndsWith("Async", StringComparison.Ordinal)
-                )
+                method => !method.Name.EndsWith("Async", StringComparison.Ordinal)
+            )
                 .Select(method => method.DeclaringType.Name + "." + method.Name)
                 .Except(GetAsyncSuffixExceptions())
                 .ToList();

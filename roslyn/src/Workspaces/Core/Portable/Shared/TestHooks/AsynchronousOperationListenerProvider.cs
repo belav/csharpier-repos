@@ -138,8 +138,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
             )
             {
                 remoteHostClient = await remoteHostClientProvider.TryGetRemoteHostClientAsync(
-                        CancellationToken.None
-                    )
+                    CancellationToken.None
+                )
                     .ConfigureAwait(false);
             }
 
@@ -157,25 +157,25 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                         IRemoteAsynchronousOperationListenerService,
                         bool
                     >(
-                            (service, cancellationToken) =>
-                                service.IsCompletedAsync(
-                                    featureNames.ToImmutableArrayOrEmpty(),
-                                    cancellationToken
-                                ),
-                            CancellationToken.None
-                        )
+                        (service, cancellationToken) =>
+                            service.IsCompletedAsync(
+                                featureNames.ToImmutableArrayOrEmpty(),
+                                cancellationToken
+                            ),
+                        CancellationToken.None
+                    )
                         .ConfigureAwait(false);
                     if (isCompleted.HasValue && !isCompleted.Value)
                     {
                         tasks.Add(
                             remoteHostClient.TryInvokeAsync<IRemoteAsynchronousOperationListenerService>(
-                                    (service, cancellationToken) =>
-                                        service.ExpeditedWaitAsync(
-                                            featureNames.ToImmutableArrayOrEmpty(),
-                                            cancellationToken
-                                        ),
-                                    CancellationToken.None
-                                )
+                                (service, cancellationToken) =>
+                                    service.ExpeditedWaitAsync(
+                                        featureNames.ToImmutableArrayOrEmpty(),
+                                        cancellationToken
+                                    ),
+                                CancellationToken.None
+                            )
                                 .AsTask()
                         );
                     }
@@ -234,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// Get all saved DiagnosticAsyncToken to investigate tests failure easier
         /// </summary>
         public List<AsynchronousOperationListener.DiagnosticAsyncToken> GetTokens() =>
-            _singletonListeners.Values.Where(l => l.TrackActiveTokens)
+            _singletonListeners.Values
+                .Where(l => l.TrackActiveTokens)
                 .SelectMany(l => l.ActiveDiagnosticTokens)
                 .ToList();
 

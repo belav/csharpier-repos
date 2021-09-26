@@ -39,11 +39,8 @@ namespace A
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Move to namespace...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Move to namespace...", applyFix: true, blockUntilComplete: false);
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.ClickCancel();
@@ -75,11 +72,8 @@ namespace A
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Move to namespace...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Move to namespace...", applyFix: true, blockUntilComplete: false);
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.SetNamespace("B");
@@ -112,11 +106,8 @@ namespace A
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Move to namespace...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Move to namespace...", applyFix: true, blockUntilComplete: false);
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.ClickOK();
@@ -147,11 +138,8 @@ namespace A
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Move to namespace...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio.Editor.Verify
+                .CodeAction("Move to namespace...", applyFix: true, blockUntilComplete: false);
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.SetNamespace("B");

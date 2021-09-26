@@ -98,9 +98,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             yield return assembly;
 
             var relatedAssemblies = RelatedAssemblyAttribute.GetRelatedAssemblies(
-                    assembly,
-                    throwOnError: false
-                )
+                assembly,
+                throwOnError: false
+            )
                 .OrderBy(assembly => assembly.FullName, StringComparer.Ordinal);
 
             foreach (var relatedAssembly in relatedAssemblies)

@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Hosting
         {
             _hostingEnvironment = new HostingEnvironment();
 
-            _config = new ConfigurationBuilder().AddEnvironmentVariables(prefix: "ASPNETCORE_")
+            _config = new ConfigurationBuilder()
+                .AddEnvironmentVariables(prefix: "ASPNETCORE_")
                 .Build();
 
             if (string.IsNullOrEmpty(GetSetting(WebHostDefaults.EnvironmentKey)))
@@ -299,7 +300,8 @@ namespace Microsoft.AspNetCore.Hosting
             );
 
             // Initialize the hosting environment
-            ((IWebHostEnvironment)_hostingEnvironment).Initialize(contentRootPath, _options);
+            ((IWebHostEnvironment)_hostingEnvironment)
+                .Initialize(contentRootPath, _options);
             _context.HostingEnvironment = _hostingEnvironment;
 
             var services = new ServiceCollection();
@@ -312,9 +314,8 @@ namespace Microsoft.AspNetCore.Hosting
 #pragma warning restore CS0618 // Type or member is obsolete
             services.AddSingleton(_context);
 
-            var builder = new ConfigurationBuilder().SetBasePath(
-                    _hostingEnvironment.ContentRootPath
-                )
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(_hostingEnvironment.ContentRootPath)
                 .AddConfiguration(_config, shouldDisposeConfiguration: true);
 
             _configureAppConfigurationBuilder?.Invoke(_context, builder);

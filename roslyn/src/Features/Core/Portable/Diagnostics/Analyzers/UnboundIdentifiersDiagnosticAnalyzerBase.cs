@@ -61,9 +61,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.AddImport
                 DiagnosticCategory.Compiler,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                customTags: DiagnosticCustomTags.Microsoft.Append(
-                    WellKnownDiagnosticTags.NotConfigurable
-                )
+                customTags: DiagnosticCustomTags.Microsoft
+                    .Append(WellKnownDiagnosticTags.NotConfigurable)
             );
         }
 

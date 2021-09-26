@@ -531,8 +531,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             try
             {
                 return Expression.Lambda<Func<object>>(
-                        Expression.Convert(expression, typeof(object))
-                    )
+                    Expression.Convert(expression, typeof(object))
+                )
                     .Compile()
                     .Invoke();
             }

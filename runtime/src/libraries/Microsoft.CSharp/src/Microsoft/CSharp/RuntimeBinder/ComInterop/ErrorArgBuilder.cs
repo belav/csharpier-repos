@@ -29,12 +29,13 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         internal override Expression UnmarshalFromRef(Expression value)
         {
             // new ErrorWrapper(value)
-            return base.UnmarshalFromRef(
-                Expression.New(
-                    typeof(ErrorWrapper).GetConstructor(new Type[] { typeof(int) }),
-                    value
-                )
-            );
+            return base
+                .UnmarshalFromRef(
+                    Expression.New(
+                        typeof(ErrorWrapper).GetConstructor(new Type[] { typeof(int) }),
+                        value
+                    )
+                );
         }
     }
 }

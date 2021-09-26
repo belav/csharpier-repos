@@ -74,7 +74,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Where2()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .Where((n, i) => n > 1 || i == 0)
                 .Count();
             Assert.Equal(2, count);

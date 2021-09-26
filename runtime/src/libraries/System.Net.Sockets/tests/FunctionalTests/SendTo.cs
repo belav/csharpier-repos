@@ -45,7 +45,8 @@ namespace System.Net.Sockets.Tests
                 Array = new byte[length],
                 Count = count,
                 Offset = offset
-            }.ToActual();
+            }
+                .ToActual();
 
             await AssertThrowsSynchronously<ArgumentOutOfRangeException>(
                 () => SendToAsync(socket, buffer, GetGetDummyTestEndpoint())
@@ -222,11 +223,11 @@ namespace System.Net.Sockets.Tests
             OperationCanceledException ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(
                 () =>
                     sender.SendToAsync(
-                            new byte[1],
-                            SocketFlags.None,
-                            GetGetDummyTestEndpoint(),
-                            cts.Token
-                        )
+                        new byte[1],
+                        SocketFlags.None,
+                        GetGetDummyTestEndpoint(),
+                        cts.Token
+                    )
                         .AsTask()
             );
 

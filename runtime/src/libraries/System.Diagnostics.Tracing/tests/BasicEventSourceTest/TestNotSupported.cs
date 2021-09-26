@@ -23,51 +23,48 @@ namespace BasicEventSourceTests
         public void TestBasicOperations_IsSupported_False()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.RuntimeConfigurationOptions.Add(
-                "System.Diagnostics.Tracing.EventSource.IsSupported",
-                false
-            );
+            options.RuntimeConfigurationOptions
+                .Add("System.Diagnostics.Tracing.EventSource.IsSupported", false);
 
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    using (var log = new EventSourceTest())
                     {
-                        using (var log = new EventSourceTest())
+                        using (var listener = new LoudListener(log))
                         {
-                            using (var listener = new LoudListener(log))
-                            {
-                                IEnumerable<EventSource> sources = EventSource.GetSources();
-                                Assert.Empty(sources);
+                            IEnumerable<EventSource> sources = EventSource.GetSources();
+                            Assert.Empty(sources);
 
-                                Assert.Null(
-                                    EventSource.GenerateManifest(
-                                        typeof(SimpleEventSource),
-                                        string.Empty,
-                                        EventManifestOptions.OnlyIfNeededForRegistration
-                                    )
-                                );
-                                Assert.Null(
-                                    EventSource.GenerateManifest(
-                                        typeof(EventSourceTest),
-                                        string.Empty,
-                                        EventManifestOptions.AllCultures
-                                    )
-                                );
+                            Assert.Null(
+                                EventSource.GenerateManifest(
+                                    typeof(SimpleEventSource),
+                                    string.Empty,
+                                    EventManifestOptions.OnlyIfNeededForRegistration
+                                )
+                            );
+                            Assert.Null(
+                                EventSource.GenerateManifest(
+                                    typeof(EventSourceTest),
+                                    string.Empty,
+                                    EventManifestOptions.AllCultures
+                                )
+                            );
 
-                                log.Event0();
-                                Assert.Null(LoudListener.LastEvent);
+                            log.Event0();
+                            Assert.Null(LoudListener.LastEvent);
 
-                                EventSource.SendCommand(
-                                    log,
-                                    EventCommand.Enable,
-                                    commandArguments: null
-                                );
-                                Assert.False(log.IsEnabled());
-                            }
+                            EventSource.SendCommand(
+                                log,
+                                EventCommand.Enable,
+                                commandArguments: null
+                            );
+                            Assert.False(log.IsEnabled());
                         }
-                    },
-                    options
-                )
-                .Dispose();
+                    }
+                },
+                options
+            ).Dispose();
         }
     }
 }

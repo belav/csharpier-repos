@@ -37,9 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ComponentRenderedText result = default;
             try
             {
-                result = await _renderer.Dispatcher.InvokeAsync(
-                    () => _renderer.RenderComponentAsync(componentType, parameters)
-                );
+                result = await _renderer.Dispatcher
+                    .InvokeAsync(() => _renderer.RenderComponentAsync(componentType, parameters));
             }
             catch (NavigationException navigationException)
             {
@@ -81,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             async Task InitializeCore(HttpContext httpContext)
             {
                 var navigationManager =
-                    (IHostEnvironmentNavigationManager)httpContext.RequestServices.GetRequiredService<NavigationManager>();
+                    (IHostEnvironmentNavigationManager)httpContext.RequestServices
+                        .GetRequiredService<NavigationManager>();
                 navigationManager?.Initialize(
                     GetContextBaseUri(httpContext.Request),
                     GetFullUri(httpContext.Request)
@@ -100,8 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                 // It's important that this is initialized since a component might try to restore state during prerendering
                 // (which will obviously not work, but should not fail)
-                var componentApplicationLifetime =
-                    httpContext.RequestServices.GetRequiredService<ComponentApplicationLifetime>();
+                var componentApplicationLifetime = httpContext.RequestServices
+                    .GetRequiredService<ComponentApplicationLifetime>();
                 await componentApplicationLifetime.RestoreStateAsync(
                     new PrerenderComponentApplicationStore()
                 );

@@ -181,7 +181,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
             public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) =>
                 debugInfo["InMemoryDatabase:DatabaseRoot"] = (
                     Extension._databaseRoot?.GetHashCode() ?? 0L
-                ).ToString(CultureInfo.InvariantCulture);
+                )
+                    .ToString(CultureInfo.InvariantCulture);
         }
     }
 }

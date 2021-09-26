@@ -11,10 +11,10 @@ namespace AutoMapper.Execution
     using Internal;
     public class TypeMapPlanBuilder
     {
-        private static readonly MethodInfo CreateProxyMethod =
-            typeof(ObjectFactory).GetStaticMethod(nameof(ObjectFactory.CreateInterfaceProxy));
-        private static readonly MethodInfo MappingError =
-            typeof(TypeMapPlanBuilder).GetStaticMethod(nameof(MemberMappingError));
+        private static readonly MethodInfo CreateProxyMethod = typeof(ObjectFactory)
+            .GetStaticMethod(nameof(ObjectFactory.CreateInterfaceProxy));
+        private static readonly MethodInfo MappingError = typeof(TypeMapPlanBuilder)
+            .GetStaticMethod(nameof(MemberMappingError));
         private readonly IGlobalConfiguration _configurationProvider;
         private readonly ParameterExpression _destination;
         private readonly ParameterExpression _initialDestination;
@@ -71,10 +71,8 @@ namespace AutoMapper.Execution
                 {
                     return null;
                 }
-                var converterInterfaceType = typeof(ITypeConverter<, >).MakeGenericType(
-                    _typeMap.SourceType,
-                    DestinationType
-                );
+                var converterInterfaceType = typeof(ITypeConverter<, >)
+                    .MakeGenericType(_typeMap.SourceType, DestinationType);
                 var converter = ServiceLocator(_typeMap.TypeConverterType);
                 return Call(ToType(converter, converterInterfaceType), "Convert", parameters);
             }
@@ -255,9 +253,8 @@ namespace AutoMapper.Execution
             return Block(includedMembersVariables, actions);
             IEnumerable<ParameterExpression> IncludedMembers(List<Expression> actions)
             {
-                var includedMembersVariables = _typeMap.IncludedMembersTypeMaps.Select(
-                    i => i.Variable
-                );
+                var includedMembersVariables = _typeMap.IncludedMembersTypeMaps
+                    .Select(i => i.Variable);
                 var assignIncludedMembers = includedMembersVariables.Zip(
                     _typeMap.IncludedMembersTypeMaps,
                     (v, i) => Assign(v, i.MemberExpression.ReplaceParameters(Source).NullCheck())
@@ -270,9 +267,8 @@ namespace AutoMapper.Execution
         {
             var destination =
                 (
-                    (MemberExpression)pathMap.DestinationExpression.ConvertReplaceParameters(
-                        _destination
-                    )
+                    (MemberExpression)pathMap.DestinationExpression
+                        .ConvertReplaceParameters(_destination)
                 ).Expression;
             var createInnerObjects = CreateInnerObjects(destination);
             var setFinalValue = CreatePropertyMapFunc(
@@ -376,14 +372,15 @@ namespace AutoMapper.Execution
         private Expression ConstructorMapping(ConstructorMap constructorMap)
         {
             var ctorArgs = constructorMap.CtorParams.Select(CreateConstructorParameterExpression);
-            var variables = constructorMap.Ctor.GetParameters()
+            var variables = constructorMap.Ctor
+                .GetParameters()
                 .Select(parameter => Variable(parameter.ParameterType, parameter.Name))
                 .ToArray();
             var body = variables.Zip(
-                    ctorArgs,
-                    (variable, expression) =>
-                        (Expression)Assign(variable, ToType(expression, variable.Type))
-                )
+                ctorArgs,
+                (variable, expression) =>
+                    (Expression)Assign(variable, ToType(expression, variable.Type))
+            )
                 .Concat(new[] { CheckReferencesCache(New(constructorMap.Ctor, variables)) });
             return Block(variables, body);
         }
@@ -468,13 +465,14 @@ namespace AutoMapper.Execution
             {
                 _propertyMapExpressions.Add(
                     IfThen(
-                        memberMap.Condition.ConvertReplaceParameters(
-                            GetCustomSource(memberMap),
-                            _destination,
-                            mappedMemberVariable,
-                            destinationMemberGetter,
-                            ContextParameter
-                        ),
+                        memberMap.Condition
+                            .ConvertReplaceParameters(
+                                GetCustomSource(memberMap),
+                                _destination,
+                                mappedMemberVariable,
+                                destinationMemberGetter,
+                                ContextParameter
+                            ),
                         mapperExpr
                     )
                 );
@@ -516,11 +514,12 @@ namespace AutoMapper.Execution
             }
             void Precondition(MemberMap memberMap)
             {
-                var preCondition = memberMap.PreCondition.ConvertReplaceParameters(
-                    GetCustomSource(memberMap),
-                    _destination,
-                    ContextParameter
-                );
+                var preCondition = memberMap.PreCondition
+                    .ConvertReplaceParameters(
+                        GetCustomSource(memberMap),
+                        _destination,
+                        ContextParameter
+                    );
                 var ifThen = IfThen(preCondition, Block(_propertyMapExpressions));
                 _propertyMapExpressions.Clear();
                 _propertyMapExpressions.Add(ifThen);
@@ -669,15 +668,13 @@ namespace AutoMapper.Execution
             var iResolverType = valueResolverConfig.InterfaceType;
             if (iResolverType.ContainsGenericParameters)
             {
-                var typeArgs = new[] { typeMap.SourceType, typeMap.DestinationType }.Concat(
-                        iResolverType.GenericTypeArguments.Skip(2)
-                    )
+                var typeArgs = new[] { typeMap.SourceType, typeMap.DestinationType }
+                    .Concat(iResolverType.GenericTypeArguments.Skip(2))
                     .ToArray();
                 iResolverType = iResolverType.GetGenericTypeDefinition().MakeGenericType(typeArgs);
             }
-            var parameters = new[] { source, _destination, sourceMember, destValueExpr }.Where(
-                    p => p != null
-                )
+            var parameters = new[] { source, _destination, sourceMember, destValueExpr }
+                .Where(p => p != null)
                 .Zip(iResolverType.GenericTypeArguments, ToType)
                 .Concat(new[] { ContextParameter })
                 .ToArray();

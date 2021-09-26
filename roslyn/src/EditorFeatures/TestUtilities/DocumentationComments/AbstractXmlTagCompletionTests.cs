@@ -32,9 +32,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
             {
                 var testDocument = workspace.Documents.Single();
                 var view = testDocument.GetTextView();
-                view.Caret.MoveTo(
-                    new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
-                );
+                view.Caret
+                    .MoveTo(
+                        new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
+                    );
 
                 var commandHandler = CreateCommandHandler(workspace);
 
@@ -57,11 +58,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
                 var caretPosition = view.Caret.Position.BufferPosition.Position;
                 Assert.True(
                     expectedPosition == caretPosition,
-                    string.Format(
-                        "Caret positioned incorrectly. Should have been {0}, but was {1}.",
-                        expectedPosition,
-                        caretPosition
-                    )
+                    string
+                        .Format(
+                            "Caret positioned incorrectly. Should have been {0}, but was {1}.",
+                            expectedPosition,
+                            caretPosition
+                        )
                 );
             }
         }

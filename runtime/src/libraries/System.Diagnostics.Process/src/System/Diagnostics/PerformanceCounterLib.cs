@@ -86,10 +86,11 @@ namespace System.Diagnostics
                 () => new ConcurrentDictionary<(string, string), PerformanceCounterLib>()
             );
 
-            return PerformanceCounterLib.s_libraryTable.GetOrAdd(
-                (machineName, lcidString),
-                (key) => new PerformanceCounterLib(key.machineName, key.lcidString)
-            );
+            return PerformanceCounterLib.s_libraryTable
+                .GetOrAdd(
+                    (machineName, lcidString),
+                    (key) => new PerformanceCounterLib(key.machineName, key.lcidString)
+                );
         }
 
         internal byte[]? GetPerformanceData(string item)
@@ -179,12 +180,13 @@ namespace System.Diagnostics
 
                         int key;
                         if (
-                            !int.TryParse(
-                                names[index * 2],
-                                NumberStyles.Integer,
-                                CultureInfo.InvariantCulture,
-                                out key
-                            )
+                            !int
+                                .TryParse(
+                                    names[index * 2],
+                                    NumberStyles.Integer,
+                                    CultureInfo.InvariantCulture,
+                                    out key
+                                )
                         )
                         {
                             if (isHelp)

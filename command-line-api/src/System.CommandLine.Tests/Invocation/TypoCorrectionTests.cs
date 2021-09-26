@@ -23,7 +23,8 @@ namespace System.CommandLine.Tests.Invocation
 
             await result.InvokeAsync(_console);
 
-            _console.Out.ToString()
+            _console.Out
+                .ToString()
                 .Should()
                 .Contain("'niof' was not matched. Did you mean 'info'?");
         }
@@ -53,7 +54,8 @@ namespace System.CommandLine.Tests.Invocation
 
             await result.InvokeAsync(_console);
 
-            _console.Out.ToString()
+            _console.Out
+                .ToString()
                 .Should()
                 .Contain("'sertor' was not matched. Did you mean 'restore'?");
         }
@@ -61,7 +63,8 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public async Task When_there_are_multiple_matches_it_picks_the_best_matches()
         {
-            var parser = new CommandLineBuilder().AddCommand(new Command("from"))
+            var parser = new CommandLineBuilder()
+                .AddCommand(new Command("from"))
                 .AddCommand(new Command("seen"))
                 .AddOption(new Option("a"))
                 .AddOption(new Option("been"))
@@ -72,7 +75,8 @@ namespace System.CommandLine.Tests.Invocation
 
             await result.InvokeAsync(_console);
 
-            _console.Out.ToString()
+            _console.Out
+                .ToString()
                 .Should()
                 .Contain("'een' was not matched. Did you mean 'seen', or 'been'?");
         }
@@ -80,7 +84,8 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public async Task Hidden_commands_are_not_suggested()
         {
-            var parser = new CommandLineBuilder().AddCommand(new Command("from"))
+            var parser = new CommandLineBuilder()
+                .AddCommand(new Command("from"))
                 .AddCommand(new Command("seen") { IsHidden = true })
                 .AddCommand(new Command("been"))
                 .UseTypoCorrections()
@@ -96,7 +101,8 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public async Task Arguments_are_not_suggested()
         {
-            var parser = new CommandLineBuilder().AddArgument(new Argument("the-argument"))
+            var parser = new CommandLineBuilder()
+                .AddArgument(new Argument("the-argument"))
                 .AddCommand(new Command("been"))
                 .UseTypoCorrections()
                 .Build();
@@ -111,7 +117,8 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public async Task Hidden_options_are_not_suggested()
         {
-            var parser = new CommandLineBuilder().AddOption(new Option("from"))
+            var parser = new CommandLineBuilder()
+                .AddOption(new Option("from"))
                 .AddOption(new Option("seen") { IsHidden = true })
                 .AddOption(new Option("been"))
                 .UseTypoCorrections()
@@ -126,9 +133,8 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public async Task Suggestions_favor_matches_with_prefix()
         {
-            var parser = new CommandLineBuilder().AddOption(
-                    new Option(new[] { "/call", "-call", "--call" })
-                )
+            var parser = new CommandLineBuilder()
+                .AddOption(new Option(new[] { "/call", "-call", "--call" }))
                 .AddOption(new Option(new[] { "/email", "-email", "--email" }))
                 .UseTypoCorrections()
                 .Build();
@@ -136,7 +142,8 @@ namespace System.CommandLine.Tests.Invocation
 
             await result.InvokeAsync(_console);
 
-            _console.Out.ToString()
+            _console.Out
+                .ToString()
                 .Should()
                 .Contain("'-all' was not matched. Did you mean '-call'?");
         }

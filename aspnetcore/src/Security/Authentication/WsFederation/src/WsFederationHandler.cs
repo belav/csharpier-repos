@@ -67,11 +67,12 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                 Options.RemoteSignOutPath.HasValue
                 && Options.RemoteSignOutPath == Request.Path
                 && HttpMethods.IsGet(Request.Method)
-                && string.Equals(
-                    Request.Query[WsFederationConstants.WsFederationParameterNames.Wa],
-                    WsFederationConstants.WsFederationActions.SignOutCleanup,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && string
+                    .Equals(
+                        Request.Query[WsFederationConstants.WsFederationParameterNames.Wa],
+                        WsFederationConstants.WsFederationActions.SignOutCleanup,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 // We've received a remote sign-out request
@@ -89,9 +90,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         {
             if (_configuration == null)
             {
-                _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
-                    Context.RequestAborted
-                );
+                _configuration = await Options.ConfigurationManager
+                    .GetConfigurationAsync(Context.RequestAborted);
             }
 
             // Save the original challenge URI so we can redirect back to it when we're done.
@@ -163,10 +163,11 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                 HttpMethods.IsPost(Request.Method)
                 && !string.IsNullOrEmpty(Request.ContentType)
                 // May have media/type; charset=utf-8, allow partial match.
-                && Request.ContentType.StartsWith(
-                    "application/x-www-form-urlencoded",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && Request.ContentType
+                    .StartsWith(
+                        "application/x-www-form-urlencoded",
+                        StringComparison.OrdinalIgnoreCase
+                    )
                 && Request.Body.CanRead
             )
             {
@@ -205,10 +206,11 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                 else
                 {
                     // Extract the user state from properties and reset.
-                    properties.Items.TryGetValue(
-                        WsFederationDefaults.UserstatePropertiesKey,
-                        out var userState
-                    );
+                    properties.Items
+                        .TryGetValue(
+                            WsFederationDefaults.UserstatePropertiesKey,
+                            out var userState
+                        );
                     wsFederationMessage.Wctx = userState;
                 }
 
@@ -274,9 +276,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
 
                 if (_configuration == null)
                 {
-                    _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
-                        Context.RequestAborted
-                    );
+                    _configuration = await Options.ConfigurationManager
+                        .GetConfigurationAsync(Context.RequestAborted);
                 }
 
                 // Copy and augment to avoid cross request race conditions for updated configurations.
@@ -394,9 +395,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
 
             if (_configuration == null)
             {
-                _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
-                    Context.RequestAborted
-                );
+                _configuration = await Options.ConfigurationManager
+                    .GetConfigurationAsync(Context.RequestAborted);
             }
 
             var wsFederationMessage = new WsFederationMessage()
@@ -447,9 +447,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         protected virtual async Task<bool> HandleRemoteSignOutAsync()
         {
             var message = new WsFederationMessage(
-                Request.Query.Select(
-                    pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value)
-                )
+                Request.Query
+                    .Select(pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value))
             );
             var remoteSignOutContext = new RemoteSignOutContext(Context, Scheme, Options, message);
             await Events.RemoteSignOut(remoteSignOutContext);

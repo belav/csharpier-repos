@@ -66,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .TagWith("Yanni")
                 from o in context.Orders.OrderBy(o => o.OrderID).Take(5).TagWith("Laurel")
                 select c
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(5, customers.Count);
         }
@@ -101,14 +102,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Single_query_multiline_tag()
         {
             using var context = CreateContext();
-            var customer = context.Set<Customer>()
-                .OrderBy(c => c.CustomerID)
-                .TagWith(
-                    @"Yanni
+            var customer = context.Set<Customer>().OrderBy(c => c.CustomerID).TagWith(
+                @"Yanni
 AND
 Laurel"
-                )
-                .First();
+            ).First();
 
             Assert.NotNull(customer);
         }
@@ -117,20 +115,16 @@ Laurel"
         public virtual void Single_query_multiple_multiline_tag()
         {
             using var context = CreateContext();
-            var customer = context.Set<Customer>()
-                .OrderBy(c => c.CustomerID)
-                .TagWith(
-                    @"Yanni
+            var customer = context.Set<Customer>().OrderBy(c => c.CustomerID).TagWith(
+                @"Yanni
 AND
 Laurel"
-                )
-                .TagWith(
-                    @"Yet
+            ).TagWith(
+                @"Yet
 Another
 Multiline
 Tag"
-                )
-                .First();
+            ).First();
 
             Assert.NotNull(customer);
         }
@@ -139,16 +133,13 @@ Tag"
         public virtual void Single_query_multiline_tag_with_empty_lines()
         {
             using var context = CreateContext();
-            var customer = context.Set<Customer>()
-                .OrderBy(c => c.CustomerID)
-                .TagWith(
-                    @"Yanni
+            var customer = context.Set<Customer>().OrderBy(c => c.CustomerID).TagWith(
+                @"Yanni
 
 AND
 
 Laurel"
-                )
-                .First();
+            ).First();
 
             Assert.NotNull(customer);
         }

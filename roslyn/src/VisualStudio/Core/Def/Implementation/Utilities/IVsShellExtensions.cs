@@ -30,10 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                         {
                             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                            var shell = ServiceProvider.GlobalProvider.GetService<
-                                SVsShell,
-                                IVsShell
-                            >();
+                            var shell = ServiceProvider.GlobalProvider
+                                .GetService<SVsShell, IVsShell>();
                             return
                                 (shell != null)
                                 && ErrorHandler.Succeeded(

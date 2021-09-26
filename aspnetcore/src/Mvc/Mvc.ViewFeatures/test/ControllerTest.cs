@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.Test
         {
             get
             {
-                return typeof(Controller).GetTypeInfo()
+                return typeof(Controller)
+                    .GetTypeInfo()
                     .DeclaredMethods.Where(
                         method =>
                             method.IsPublic

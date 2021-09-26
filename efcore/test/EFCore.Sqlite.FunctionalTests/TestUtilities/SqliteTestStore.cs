@@ -17,11 +17,12 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             new(name, sharedCache: sharedCache);
 
         public static SqliteTestStore GetOrCreateInitialized(string name) =>
-            new SqliteTestStore(name).InitializeSqlite(
-                new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider(),
-                (Func<DbContext>)null,
-                null
-            );
+            new SqliteTestStore(name)
+                .InitializeSqlite(
+                    new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider(),
+                    (Func<DbContext>)null,
+                    null
+                );
 
         public static SqliteTestStore GetExisting(string name) => new(name, seed: false);
 
@@ -43,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             {
                 DataSource = Name + ".db",
                 Cache = sharedCache ? SqliteCacheMode.Shared : SqliteCacheMode.Private
-            }.ToString();
+            }
+                .ToString();
 
             var connection = new SqliteConnection(ConnectionString);
             SpatialiteLoader.TryLoad(connection);

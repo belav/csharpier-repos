@@ -48,11 +48,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             bool isCaseSensitive = true
         )
         {
-            using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(
-                names.Length,
-                fillWithValue: false,
-                out var isFixed
-            );
+            using var isFixedDisposer = ArrayBuilder<bool>
+                .GetInstance(names.Length, fillWithValue: false, out var isFixed);
 
             var result = ArrayBuilder<string>.GetInstance(names.Length);
             result.AddRange(names);
@@ -73,10 +70,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             bool isCaseSensitive = true
         )
         {
-            using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(
-                names.Length,
-                out var isFixedBuilder
-            );
+            using var isFixedDisposer = ArrayBuilder<bool>
+                .GetInstance(names.Length, out var isFixedBuilder);
             isFixedBuilder.AddRange(isFixed);
 
             var result = ArrayBuilder<string>.GetInstance(names.Length);

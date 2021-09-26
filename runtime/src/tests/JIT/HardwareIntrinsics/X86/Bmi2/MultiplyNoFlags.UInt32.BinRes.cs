@@ -148,7 +148,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             UInt32 buffer = 0;
 
-            var result = typeof(Bmi2).GetMethod(
+            var result = typeof(Bmi2)
+                .GetMethod(
                     nameof(Bmi2.MultiplyNoFlags),
                     new Type[] { typeof(UInt32), typeof(UInt32), typeof(UInt32*) }
                 )
@@ -263,9 +264,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi2)}.{nameof(Bmi2.MultiplyNoFlags)}<UInt32>(UInt32, UInt32, UInt32): MultiplyNoFlags failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi2)}.{nameof(Bmi2.MultiplyNoFlags)}<UInt32>(UInt32, UInt32, UInt32): MultiplyNoFlags failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"   op1: {op1}");
                 TestLibrary.TestFramework.LogInformation($"   op2: {op2}");
                 TestLibrary.TestFramework.LogInformation($" lower: {lower}");

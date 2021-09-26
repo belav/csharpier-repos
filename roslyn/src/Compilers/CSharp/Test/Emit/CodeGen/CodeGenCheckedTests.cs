@@ -1526,7 +1526,7 @@ class C
         public void Lambda_Statement()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static void F()
@@ -1541,10 +1541,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__0_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__0_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1554,14 +1553,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_QueryStmt()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 using System.Linq;
 
 class C
@@ -1575,10 +1574,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__0_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__0_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1588,14 +1586,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_QueryExpr()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 using System.Linq;
 
 class C
@@ -1606,10 +1604,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__0_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__0_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1619,14 +1616,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_AddOvfAssignment()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static void F()
@@ -1639,10 +1636,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__0_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__0_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1652,14 +1648,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_Add()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static void F()
@@ -1671,10 +1667,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__0_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__0_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1684,14 +1679,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_Cast()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {    
     static void F()
@@ -1703,10 +1698,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__0_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__0_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1716,14 +1710,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_AddOvfCompoundAssignment()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static void F()
@@ -1736,10 +1730,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__0_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__0_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1749,14 +1742,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_AddOvfArgument()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1770,10 +1763,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__1_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__1_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1783,14 +1775,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_AddOvfArgument2()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1804,10 +1796,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__1_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__1_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1817,14 +1808,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_AddArgument3()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {   
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1838,10 +1829,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__1_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__1_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1851,14 +1841,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_AddOvfArgument4()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1873,10 +1863,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__1_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__1_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1886,14 +1875,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_AddOvfArgument5()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1907,10 +1896,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__1_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__1_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1920,14 +1908,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_AddArgument6()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {   
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1941,10 +1929,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__1_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__1_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1954,14 +1941,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_AddArgument7()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1975,10 +1962,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__1_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__1_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1988,14 +1974,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_AddOvfArgument8()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {    
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -2009,10 +1995,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__1_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__1_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -2022,14 +2007,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_LambdaVsDelegate1()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {    
     static void F()
@@ -2038,10 +2023,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__0_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__0_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -2052,14 +2036,14 @@ class C
 }
 
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_LambdaVsDelegate2()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static void F()
@@ -2068,10 +2052,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__0_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__0_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -2081,14 +2064,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_LambdaVsDelegate3()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static void F()
@@ -2097,10 +2080,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__0_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__0_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -2110,14 +2092,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_NewDelegate1()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -2128,10 +2110,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__1_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__1_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -2141,14 +2122,14 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
         public void Lambda_NewDelegate2()
         {
             var verifier = CompileAndVerify(
-                    @"
+                @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -2159,10 +2140,9 @@ class C
     }
 }
 "
-                )
-                .VerifyIL(
-                    "C.<>c.<F>b__1_0(int)",
-                    @"
+            ).VerifyIL(
+                "C.<>c.<F>b__1_0(int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -2172,7 +2152,7 @@ class C
   IL_0003:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -2500,10 +2480,12 @@ class M
             comp.VerifyDiagnostics(
                 // (6,25): error CS0463: Evaluation of the decimal constant expression failed
                 //         var r = checked(decimal.MaxValue + 1);
-                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1").WithLocation(6, 25),
+                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1")
+                    .WithLocation(6, 25),
                 // (10,18): error CS0463: Evaluation of the decimal constant expression failed
                 //         var r1 = decimal.MaxValue + 1;
-                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1").WithLocation(10, 18)
+                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1")
+                    .WithLocation(10, 18)
             );
         }
 

@@ -18,10 +18,8 @@ namespace Roslyn.Test.Utilities
             params string[] featureNames
         )
         {
-            await ((AsynchronousOperationListenerProvider)provider).WaitAllAsync(
-                    workspace,
-                    featureNames
-                )
+            await ((AsynchronousOperationListenerProvider)provider)
+                .WaitAllAsync(workspace, featureNames)
                 .ConfigureAwait(false);
         }
 

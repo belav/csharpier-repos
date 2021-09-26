@@ -114,8 +114,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 // We don't expect both of these to be provided, and they are internal so there's
                 // no realistic way this could happen.
                 var dynamicPageMetadata = endpoint.Metadata.GetMetadata<DynamicPageMetadata>();
-                var transformerMetadata =
-                    endpoint.Metadata.GetMetadata<DynamicPageRouteValueTransformerMetadata>();
+                var transformerMetadata = endpoint.Metadata
+                    .GetMetadata<DynamicPageRouteValueTransformerMetadata>();
                 DynamicRouteValueTransformer transformer = null;
                 if (dynamicPageMetadata != null)
                 {
@@ -123,10 +123,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 }
                 else if (transformerMetadata != null)
                 {
-                    transformer =
-                        (DynamicRouteValueTransformer)httpContext.RequestServices.GetRequiredService(
-                            transformerMetadata.SelectorType
-                        );
+                    transformer = (DynamicRouteValueTransformer)httpContext.RequestServices
+                        .GetRequiredService(transformerMetadata.SelectorType);
                     if (transformer.State != null)
                     {
                         throw new InvalidOperationException(
@@ -159,10 +157,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     throw new InvalidOperationException(
                         "Cannot find the fallback endpoint specified by route values: "
                             + "{ "
-                            + string.Join(
-                                ", ",
-                                dynamicValues.Select(kvp => $"{kvp.Key}: {kvp.Value}")
-                            )
+                            + string
+                                .Join(", ", dynamicValues.Select(kvp => $"{kvp.Key}: {kvp.Value}"))
                             + " }."
                     );
                 }

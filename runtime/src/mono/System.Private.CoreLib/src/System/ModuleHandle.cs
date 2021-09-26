@@ -76,11 +76,12 @@ namespace System
             );
             if (res == IntPtr.Zero)
                 throw new TypeLoadException(
-                    string.Format(
-                        "Could not load type '0x{0:x}' from assembly '0x{1:x}'",
-                        typeToken,
-                        value.ToInt64()
-                    )
+                    string
+                        .Format(
+                            "Could not load type '0x{0:x}' from assembly '0x{1:x}'",
+                            typeToken,
+                            value.ToInt64()
+                        )
                 );
             else
                 return new RuntimeTypeHandle(res);
@@ -104,11 +105,12 @@ namespace System
             );
             if (res == IntPtr.Zero)
                 throw new Exception(
-                    string.Format(
-                        "Could not load method '0x{0:x}' from assembly '0x{1:x}'",
-                        methodToken,
-                        value.ToInt64()
-                    )
+                    string
+                        .Format(
+                            "Could not load method '0x{0:x}' from assembly '0x{1:x}'",
+                            methodToken,
+                            value.ToInt64()
+                        )
                 );
             else
                 return new RuntimeMethodHandle(res);
@@ -133,11 +135,12 @@ namespace System
             );
             if (res == IntPtr.Zero)
                 throw new Exception(
-                    string.Format(
-                        "Could not load field '0x{0:x}' from assembly '0x{1:x}'",
-                        fieldToken,
-                        value.ToInt64()
-                    )
+                    string
+                        .Format(
+                            "Could not load field '0x{0:x}' from assembly '0x{1:x}'",
+                            fieldToken,
+                            value.ToInt64()
+                        )
                 );
             else
                 return new RuntimeFieldHandle(res);

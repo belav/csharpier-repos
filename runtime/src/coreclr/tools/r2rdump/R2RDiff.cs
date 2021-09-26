@@ -140,20 +140,17 @@ namespace R2RDump
             );
             Dictionary<string, MethodPair> commonMethods = new Dictionary<string, MethodPair>(
                 leftMethods.Select(
-                        kvp =>
-                            new KeyValuePair<string, MethodPair>(
-                                kvp.Key,
-                                new MethodPair(
-                                    kvp.Value,
-                                    rightMethods.TryGetValue(
-                                        kvp.Key,
-                                        out ReadyToRunMethod rightMethod
-                                    )
-                                      ? rightMethod
-                                      : null
-                                )
+                    kvp =>
+                        new KeyValuePair<string, MethodPair>(
+                            kvp.Key,
+                            new MethodPair(
+                                kvp.Value,
+                                rightMethods.TryGetValue(kvp.Key, out ReadyToRunMethod rightMethod)
+                                  ? rightMethod
+                                  : null
                             )
-                    )
+                        )
+                )
                     .Where(kvp => kvp.Value.RightMethod != null)
             );
             if (_leftDumper.Options.DiffHideSameDisasm)
@@ -260,19 +257,15 @@ namespace R2RDump
                 foreach (string assemblyName in allComponentAssemblies.OrderBy(name => name))
                 {
                     if (
-                        !_leftDumper.Reader.ManifestReferenceAssemblies.TryGetValue(
-                            assemblyName,
-                            out int leftModuleIndex
-                        )
+                        !_leftDumper.Reader.ManifestReferenceAssemblies
+                            .TryGetValue(assemblyName, out int leftModuleIndex)
                     )
                     {
                         leftModuleIndex = InvalidModule;
                     }
                     if (
-                        !_rightDumper.Reader.ManifestReferenceAssemblies.TryGetValue(
-                            assemblyName,
-                            out int rightModuleIndex
-                        )
+                        !_rightDumper.Reader.ManifestReferenceAssemblies
+                            .TryGetValue(assemblyName, out int rightModuleIndex)
                     )
                     {
                         rightModuleIndex = InvalidModule;
@@ -304,18 +297,14 @@ namespace R2RDump
 
             foreach (KeyValuePair<string, int> left in leftMethods)
             {
-                (rightMethods.ContainsKey(left.Key) ? leftCommon : leftOnly).Add(
-                    left.Key,
-                    left.Value
-                );
+                (rightMethods.ContainsKey(left.Key) ? leftCommon : leftOnly)
+                    .Add(left.Key, left.Value);
             }
 
             foreach (KeyValuePair<string, int> right in rightMethods)
             {
-                (leftMethods.ContainsKey(right.Key) ? rightCommon : rightOnly).Add(
-                    right.Key,
-                    right.Value
-                );
+                (leftMethods.ContainsKey(right.Key) ? rightCommon : rightOnly)
+                    .Add(right.Key, right.Value);
             }
 
             string statTitle = $"LEFT COUNT | RIGHT COUNT | LEFT SIZE | RIGHT SIZE | {diffName}";
@@ -511,9 +500,9 @@ namespace R2RDump
         )
         {
             IEnumerable<ReadyToRunMethod> filteredMethods = TryGetMethods(
-                    dumper.Reader,
-                    moduleIndex
-                )
+                dumper.Reader,
+                moduleIndex
+            )
                 .Where(method => signatureFilter.ContainsKey(method.SignatureString))
                 .OrderBy(method => method.SignatureString);
 
@@ -581,18 +570,21 @@ namespace R2RDump
                                 }
                                 break;
                             }
-                            leftOffset += _leftDumper.Disassembler.GetInstruction(
-                                leftRuntimeFunction,
-                                _leftDumper.Reader.GetOffset(leftRuntimeFunction.StartAddress),
-                                leftOffset,
-                                out string leftInstruction
-                            );
-                            rightOffset += _rightDumper.Disassembler.GetInstruction(
-                                rightRuntimeFunction,
-                                _rightDumper.Reader.GetOffset(rightRuntimeFunction.StartAddress),
-                                rightOffset,
-                                out string rightInstruction
-                            );
+                            leftOffset += _leftDumper.Disassembler
+                                .GetInstruction(
+                                    leftRuntimeFunction,
+                                    _leftDumper.Reader.GetOffset(leftRuntimeFunction.StartAddress),
+                                    leftOffset,
+                                    out string leftInstruction
+                                );
+                            rightOffset += _rightDumper.Disassembler
+                                .GetInstruction(
+                                    rightRuntimeFunction,
+                                    _rightDumper.Reader
+                                        .GetOffset(rightRuntimeFunction.StartAddress),
+                                    rightOffset,
+                                    out string rightInstruction
+                                );
                             if (leftInstruction != rightInstruction)
                             {
                                 match = false;

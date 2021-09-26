@@ -130,9 +130,8 @@ namespace Microsoft.AspNetCore.Identity
                 throw new ArgumentNullException(nameof(principal));
             }
             return principal.Identities != null
-                && principal.Identities.Any(
-                    i => i.AuthenticationType == IdentityConstants.ApplicationScheme
-                );
+                && principal.Identities
+                    .Any(i => i.AuthenticationType == IdentityConstants.ApplicationScheme);
         }
 
         /// <summary>
@@ -829,9 +828,8 @@ namespace Microsoft.AspNetCore.Identity
             }
 
             var providerDisplayName =
-                (await GetExternalAuthenticationSchemesAsync()).FirstOrDefault(
-                    p => p.Name == provider
-                )?.DisplayName ?? provider;
+                (await GetExternalAuthenticationSchemesAsync())
+                    .FirstOrDefault(p => p.Name == provider)?.DisplayName ?? provider;
             return new ExternalLoginInfo(auth.Principal, provider, providerKey, providerDisplayName)
             {
                 AuthenticationTokens = auth.Properties.GetTokens(),

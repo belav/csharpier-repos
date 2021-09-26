@@ -262,12 +262,13 @@ namespace System.Net.NetworkInformation
             string socketStateHex = parser.MoveAndExtractNext();
             int nativeTcpState;
             if (
-                !int.TryParse(
-                    socketStateHex,
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture,
-                    out nativeTcpState
-                )
+                !int
+                    .TryParse(
+                        socketStateHex,
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out nativeTcpState
+                    )
             )
             {
                 throw ExceptionHelper.CreateForParseFailure();
@@ -300,12 +301,13 @@ namespace System.Net.NetworkInformation
             );
             int localPort;
             if (
-                !int.TryParse(
-                    portString,
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture,
-                    out localPort
-                )
+                !int
+                    .TryParse(
+                        portString,
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out localPort
+                    )
             )
             {
                 throw ExceptionHelper.CreateForParseFailure();
@@ -331,12 +333,13 @@ namespace System.Net.NetworkInformation
             );
             int port;
             if (
-                !int.TryParse(
-                    portString,
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture,
-                    out port
-                )
+                !int
+                    .TryParse(
+                        portString,
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out port
+                    )
             )
             {
                 throw ExceptionHelper.CreateForParseFailure();
@@ -374,12 +377,13 @@ namespace System.Net.NetworkInformation
             IPAddress ipAddress;
             long addressValue;
             if (
-                !long.TryParse(
-                    hexAddress,
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture,
-                    out addressValue
-                )
+                !long
+                    .TryParse(
+                        hexAddress,
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out addressValue
+                    )
             )
             {
                 throw ExceptionHelper.CreateForParseFailure();

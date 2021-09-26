@@ -35,10 +35,8 @@ namespace Microsoft.AspNetCore.Routing
             IList<OutboundMatchResult>? matchResults = null;
             if (string.IsNullOrEmpty(address.RouteName))
             {
-                matchResults = state.AllMatchesLinkGenerationTree.GetMatches(
-                    address.ExplicitValues,
-                    address.AmbientValues
-                );
+                matchResults = state.AllMatchesLinkGenerationTree
+                    .GetMatches(address.ExplicitValues, address.AmbientValues);
             }
             else if (state.NamedMatches.TryGetValue(address.RouteName, out var namedMatchResults))
             {
@@ -116,7 +114,8 @@ namespace Microsoft.AspNetCore.Routing
                 }
 
                 if (
-                    endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration
+                    endpoint.Metadata
+                        .GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration
                     == true
                 )
                 {

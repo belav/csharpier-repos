@@ -112,12 +112,13 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                     int cbPasswordBufferUsed; // we're not filling the entire buffer, just a partial buffer
                     fixed (char* pszPassword = password)
                     {
-                        cbPasswordBufferUsed = Encoding.UTF8.GetBytes(
-                            pszPassword,
-                            password.Length,
-                            pbPasswordBuffer,
-                            cbPasswordBuffer
-                        );
+                        cbPasswordBufferUsed = Encoding.UTF8
+                            .GetBytes(
+                                pszPassword,
+                                password.Length,
+                                pbPasswordBuffer,
+                                cbPasswordBuffer
+                            );
                     }
 
                     return PasswordToPbkdfKeyHandleStep2(

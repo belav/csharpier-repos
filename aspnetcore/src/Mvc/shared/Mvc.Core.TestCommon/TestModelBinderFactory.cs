@@ -64,9 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             {
                 options.Value.ModelBinderProviders.Add(provider);
             }
-            new MvcCoreMvcOptionsSetup(new TestHttpRequestStreamReaderFactory()).Configure(
-                options.Value
-            );
+            new MvcCoreMvcOptionsSetup(new TestHttpRequestStreamReaderFactory())
+                .Configure(options.Value);
             return new TestModelBinderFactory(metadataProvider, options);
         }
 

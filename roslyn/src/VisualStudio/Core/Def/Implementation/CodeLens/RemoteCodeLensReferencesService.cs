@@ -38,11 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
         )
         {
             // This value is more efficient to calculate in the current process
-            return CodeLensReferencesServiceFactory.Instance.GetProjectCodeLensVersionAsync(
-                solution,
-                projectId,
-                cancellationToken
-            );
+            return CodeLensReferencesServiceFactory.Instance
+                .GetProjectCodeLensVersionAsync(solution, projectId, cancellationToken);
         }
 
         public async Task<ReferenceCount?> GetReferenceCountAsync(
@@ -61,9 +58,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 }
 
                 var client = await RemoteHostClient.TryGetClientAsync(
-                        solution.Workspace,
-                        cancellationToken
-                    )
+                    solution.Workspace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (client != null)
                 {
@@ -71,23 +68,24 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                         IRemoteCodeLensReferencesService,
                         ReferenceCount?
                     >(
-                            solution,
-                            (service, solutionInfo, cancellationToken) =>
-                                service.GetReferenceCountAsync(
-                                    solutionInfo,
-                                    documentId,
-                                    syntaxNode.Span,
-                                    maxSearchResults,
-                                    cancellationToken
-                                ),
-                            cancellationToken
-                        )
+                        solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.GetReferenceCountAsync(
+                                solutionInfo,
+                                documentId,
+                                syntaxNode.Span,
+                                maxSearchResults,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return result.HasValue ? result.Value : null;
                 }
 
-                return await CodeLensReferencesServiceFactory.Instance.GetReferenceCountAsync(
+                return await CodeLensReferencesServiceFactory.Instance
+                    .GetReferenceCountAsync(
                         solution,
                         documentId,
                         syntaxNode,
@@ -115,11 +113,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 }
 
                 var descriptors = await FindReferenceLocationsWorkerAsync(
-                        solution,
-                        documentId,
-                        syntaxNode,
-                        cancellationToken
-                    )
+                    solution,
+                    documentId,
+                    syntaxNode,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (!descriptors.HasValue)
                 {
@@ -149,9 +147,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 }
 
                 var client = await RemoteHostClient.TryGetClientAsync(
-                        solution.Workspace,
-                        cancellationToken
-                    )
+                    solution.Workspace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (client != null)
                 {
@@ -159,27 +157,23 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                         IRemoteCodeLensReferencesService,
                         ImmutableArray<ReferenceMethodDescriptor>?
                     >(
-                            solution,
-                            (service, solutionInfo, cancellationToken) =>
-                                service.FindReferenceMethodsAsync(
-                                    solutionInfo,
-                                    documentId,
-                                    syntaxNode.Span,
-                                    cancellationToken
-                                ),
-                            cancellationToken
-                        )
+                        solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.FindReferenceMethodsAsync(
+                                solutionInfo,
+                                documentId,
+                                syntaxNode.Span,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return result.HasValue ? result.Value : null;
                 }
 
-                return await CodeLensReferencesServiceFactory.Instance.FindReferenceMethodsAsync(
-                        solution,
-                        documentId,
-                        syntaxNode,
-                        cancellationToken
-                    )
+                return await CodeLensReferencesServiceFactory.Instance
+                    .FindReferenceMethodsAsync(solution, documentId, syntaxNode, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -199,9 +193,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 }
 
                 var client = await RemoteHostClient.TryGetClientAsync(
-                        solution.Workspace,
-                        cancellationToken
-                    )
+                    solution.Workspace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (client != null)
                 {
@@ -209,27 +203,23 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                         IRemoteCodeLensReferencesService,
                         string
                     >(
-                            solution,
-                            (service, solutionInfo, cancellationToken) =>
-                                service.GetFullyQualifiedNameAsync(
-                                    solutionInfo,
-                                    documentId,
-                                    syntaxNode.Span,
-                                    cancellationToken
-                                ),
-                            cancellationToken
-                        )
+                        solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.GetFullyQualifiedNameAsync(
+                                solutionInfo,
+                                documentId,
+                                syntaxNode.Span,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return result.HasValue ? result.Value : null;
                 }
 
-                return await CodeLensReferencesServiceFactory.Instance.GetFullyQualifiedNameAsync(
-                        solution,
-                        documentId,
-                        syntaxNode,
-                        cancellationToken
-                    )
+                return await CodeLensReferencesServiceFactory.Instance
+                    .GetFullyQualifiedNameAsync(solution, documentId, syntaxNode, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -266,10 +256,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
 
                 var span = new TextSpan(descriptor.SpanStart, descriptor.SpanLength);
                 var results = await spanMapper.MapSpansAsync(
-                        document,
-                        SpecializedCollections.SingletonEnumerable(span),
-                        cancellationToken
-                    )
+                    document,
+                    SpecializedCollections.SingletonEnumerable(span),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // external component violated contracts. the mapper should preserve input order/count.
@@ -291,18 +281,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 }
 
                 var referenceExcerpt = await excerpter.TryExcerptAsync(
-                        document,
-                        span,
-                        ExcerptMode.SingleLine,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    ExcerptMode.SingleLine,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var tooltipExcerpt = await excerpter.TryExcerptAsync(
-                        document,
-                        span,
-                        ExcerptMode.Tooltip,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    ExcerptMode.Tooltip,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var (text, start, length) = GetReferenceInfo(referenceExcerpt, descriptor);
@@ -419,9 +409,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             }
 
             var client = await RemoteHostClient.TryGetClientAsync(
-                    solution.Workspace,
-                    cancellationToken
-                )
+                solution.Workspace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (client != null)
             {
@@ -429,28 +419,24 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     IRemoteCodeLensReferencesService,
                     ImmutableArray<ReferenceLocationDescriptor>?
                 >(
-                        solution,
-                        (service, solutionInfo, cancellationToken) =>
-                            service.FindReferenceLocationsAsync(
-                                solutionInfo,
-                                documentId,
-                                syntaxNode.Span,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    solution,
+                    (service, solutionInfo, cancellationToken) =>
+                        service.FindReferenceLocationsAsync(
+                            solutionInfo,
+                            documentId,
+                            syntaxNode.Span,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return result.HasValue ? result.Value : null;
             }
 
             // remote host is not running. this can happen if remote host is disabled.
-            return await CodeLensReferencesServiceFactory.Instance.FindReferenceLocationsAsync(
-                    solution,
-                    documentId,
-                    syntaxNode,
-                    cancellationToken
-                )
+            return await CodeLensReferencesServiceFactory.Instance
+                .FindReferenceLocationsAsync(solution, documentId, syntaxNode, cancellationToken)
                 .ConfigureAwait(false);
         }
     }

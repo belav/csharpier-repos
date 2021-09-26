@@ -278,10 +278,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspaceWithProject(workspaceKind, out var project);
             var declarations = await SymbolFinder.FindDeclarationsAsync(
-                    project,
-                    searchTerm,
-                    ignoreCase
-                )
+                project,
+                searchTerm,
+                ignoreCase
+            )
                 .ConfigureAwait(false);
             Verify(searchTerm, ignoreCase, workspaceKind, declarations, expectedResults);
         }
@@ -378,11 +378,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var submission0DocId = DocumentId.CreateNewId(submission0Id);
             const string submission0Name = "Submission#0";
             solution = solution.AddProject(
-                    submission0Id,
-                    submission0Name,
-                    submission0Name,
-                    LanguageNames.CSharp
-                )
+                submission0Id,
+                submission0Name,
+                submission0Name,
+                LanguageNames.CSharp
+            )
                 .AddMetadataReference(submission0Id, MscorlibRef)
                 .AddDocument(
                     submission0DocId,
@@ -401,11 +401,11 @@ public class Outer
             var submission1DocId = DocumentId.CreateNewId(submission1Id);
             const string submission1Name = "Submission#1";
             solution = solution.AddProject(
-                    submission1Id,
-                    submission1Name,
-                    submission1Name,
-                    LanguageNames.CSharp
-                )
+                submission1Id,
+                submission1Name,
+                submission1Name,
+                LanguageNames.CSharp
+            )
                 .AddMetadataReference(submission1Id, MscorlibRef)
                 .AddProjectReference(submission1Id, new ProjectReference(submission0Id))
                 .AddDocument(
@@ -422,10 +422,12 @@ Inner i;
                     "Inner",
                     ignoreCase: false
                 )
-            ).SingleOrDefault();
+            )
+                .SingleOrDefault();
             var expectedSymbol = (
                 await solution.GetProject(submission0Id).GetCompilationAsync()
-            ).GlobalNamespace.GetMembers("Outer")
+            ).GlobalNamespace
+                .GetMembers("Outer")
                 .SingleOrDefault()
                 .GetMembers("Inner")
                 .SingleOrDefault();
@@ -690,10 +692,10 @@ Inner i;
         {
             using var workspace = CreateWorkspaceWithProject(workspaceKind, out var project);
             var declarations = await SymbolFinder.FindSourceDeclarationsAsync(
-                    project,
-                    searchTerm,
-                    ignoreCase
-                )
+                project,
+                searchTerm,
+                ignoreCase
+            )
                 .ConfigureAwait(false);
             Verify(searchTerm, ignoreCase, workspaceKind, declarations, expectedResults);
         }
@@ -1011,10 +1013,10 @@ Inner i;
         {
             using var workspace = CreateWorkspaceWithSolution(workspaceKind, out var solution);
             var declarations = await SymbolFinder.FindSourceDeclarationsAsync(
-                    solution,
-                    searchTerm,
-                    ignoreCase
-                )
+                solution,
+                searchTerm,
+                ignoreCase
+            )
                 .ConfigureAwait(false);
             Verify(searchTerm, ignoreCase, workspaceKind, declarations, expectedResults);
         }
@@ -1121,9 +1123,9 @@ Inner i;
         {
             using var workspace = CreateWorkspaceWithProject(workspaceKind, out var project);
             var declarations = await SymbolFinder.FindSourceDeclarationsAsync(
-                    project,
-                    str => str.Contains("Test")
-                )
+                project,
+                str => str.Contains("Test")
+            )
                 .ConfigureAwait(false);
             Verify(workspaceKind, declarations, expectedResults);
         }
@@ -1275,9 +1277,9 @@ Inner i;
         {
             using var workspace = CreateWorkspaceWithSolution(workspaceKind, out var solution);
             var declarations = await SymbolFinder.FindSourceDeclarationsAsync(
-                    solution,
-                    str => str.Contains("Test")
-                )
+                solution,
+                str => str.Contains("Test")
+            )
                 .ConfigureAwait(false);
             Verify(workspaceKind, declarations, expectedResult);
         }
@@ -1302,9 +1304,9 @@ Inner i;
                 out var solution
             );
             var declarations = await SymbolFinder.FindSourceDeclarationsAsync(
-                    solution,
-                    str => false
-                )
+                solution,
+                str => false
+            )
                 .ConfigureAwait(false);
             Verify(SolutionKind.SingleClass, declarations);
         }
@@ -1405,9 +1407,9 @@ Inner i;
         {
             using var workspace = CreateWorkspaceWithProject(workspaceKind, out var project);
             var declarations = await SymbolFinder.FindSourceDeclarationsWithPatternAsync(
-                    project,
-                    "test"
-                )
+                project,
+                "test"
+            )
                 .ConfigureAwait(false);
             Verify(workspaceKind, declarations, expectedResults);
         }
@@ -1439,9 +1441,9 @@ Inner i;
         {
             using var workspace = CreateWorkspaceWithProject(workspaceKind, out var project);
             var declarations = await SymbolFinder.FindSourceDeclarationsWithPatternAsync(
-                    project,
-                    pattern
-                )
+                project,
+                pattern
+            )
                 .ConfigureAwait(false);
             Verify(workspaceKind, declarations, expectedResults);
         }
@@ -1569,9 +1571,9 @@ Inner i;
         {
             using var workspace = CreateWorkspaceWithSolution(workspaceKind, out var solution);
             var declarations = await SymbolFinder.FindSourceDeclarationsWithPatternAsync(
-                    solution,
-                    "test"
-                )
+                solution,
+                "test"
+            )
                 .ConfigureAwait(false);
             Verify(workspaceKind, declarations, expectedResult);
         }
@@ -1603,9 +1605,9 @@ Inner i;
         {
             using var workspace = CreateWorkspaceWithSolution(workspaceKind, out var solution);
             var declarations = await SymbolFinder.FindSourceDeclarationsWithPatternAsync(
-                    solution,
-                    pattern
-                )
+                solution,
+                pattern
+            )
                 .ConfigureAwait(false);
             Verify(workspaceKind, declarations, expectedResults);
         }
@@ -1704,12 +1706,8 @@ End Class
             // create solution
             var pid = ProjectId.CreateNewId();
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "VBProject",
-                    "VBProject",
-                    LanguageNames.VisualBasic
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(pid, "VBProject", "VBProject", LanguageNames.VisualBasic)
                 .AddMetadataReference(pid, MscorlibRef);
             var did = DocumentId.CreateNewId(pid);
             solution = solution.AddDocument(did, "VBDocument.vb", SourceText.From(source));

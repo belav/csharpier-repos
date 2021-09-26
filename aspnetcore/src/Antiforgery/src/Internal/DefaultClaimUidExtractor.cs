@@ -68,11 +68,8 @@ namespace Microsoft.AspNetCore.Antiforgery
 
                 var nameIdentifierClaim = identity.FindFirst(
                     claim =>
-                        string.Equals(
-                            ClaimTypes.NameIdentifier,
-                            claim.Type,
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(ClaimTypes.NameIdentifier, claim.Type, StringComparison.Ordinal)
                 );
                 if (nameIdentifierClaim != null && !string.IsNullOrEmpty(nameIdentifierClaim.Value))
                 {
@@ -137,9 +134,8 @@ namespace Microsoft.AspNetCore.Antiforgery
 
                 writer.Flush();
 
-                bool success = serializationContext.Stream.TryGetBuffer(
-                    out ArraySegment<byte> buffer
-                );
+                bool success = serializationContext.Stream
+                    .TryGetBuffer(out ArraySegment<byte> buffer);
                 if (!success)
                 {
                     throw new InvalidOperationException();

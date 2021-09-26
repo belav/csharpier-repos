@@ -257,7 +257,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            typeof(Avx2).GetMethod(
+            typeof(Avx2)
+                .GetMethod(
                     nameof(Avx2.MaskStore),
                     new Type[]
                     {
@@ -283,7 +284,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            typeof(Avx2).GetMethod(
+            typeof(Avx2)
+                .GetMethod(
                     nameof(Avx2.MaskStore),
                     new Type[]
                     {
@@ -309,7 +311,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            typeof(Avx2).GetMethod(
+            typeof(Avx2)
+                .GetMethod(
                     nameof(Avx2.MaskStore),
                     new Type[]
                     {
@@ -509,14 +512,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Avx2)}.{nameof(Avx2.MaskStore)}<UInt64>(Vector256<UInt64>, Vector256<UInt64>): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Avx2)}.{nameof(Avx2.MaskStore)}<UInt64>(Vector256<UInt64>, Vector256<UInt64>): {method} failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

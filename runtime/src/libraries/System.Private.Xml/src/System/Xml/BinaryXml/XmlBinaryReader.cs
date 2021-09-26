@@ -2567,10 +2567,8 @@ namespace System.Xml
                     // n.b. source buffer assumed to be well-formed UTF-16 machine endian
 
                     int cch = dstChars.Length;
-                    ReadOnlySpan<byte> srcBytes = state._data.AsSpan(
-                        state.pos,
-                        checked(cch * sizeof(char))
-                    );
+                    ReadOnlySpan<byte> srcBytes = state._data
+                        .AsSpan(state.pos, checked(cch * sizeof(char)));
                     Span<byte> dstBytes = MemoryMarshal.AsBytes(dstChars);
                     srcBytes.CopyTo(dstBytes);
                 }
@@ -2786,18 +2784,17 @@ namespace System.Xml
             if (BinXmlToken.XmlDecl == PeekToken())
             {
                 _pos++;
-                _attributes[0].Set(
-                    new QName(string.Empty, _xnt.Add("version"), string.Empty),
-                    ParseText()
-                );
+                _attributes[0]
+                    .Set(new QName(string.Empty, _xnt.Add("version"), string.Empty), ParseText());
                 _attrCount = 1;
                 if (BinXmlToken.Encoding == PeekToken())
                 {
                     _pos++;
-                    _attributes[1].Set(
-                        new QName(string.Empty, _xnt.Add("encoding"), string.Empty),
-                        ParseText()
-                    );
+                    _attributes[1]
+                        .Set(
+                            new QName(string.Empty, _xnt.Add("encoding"), string.Empty),
+                            ParseText()
+                        );
                     _attrCount++;
                 }
 
@@ -2808,10 +2805,11 @@ namespace System.Xml
                         break;
                     case 1:
                     case 2:
-                        _attributes[_attrCount].Set(
-                            new QName(string.Empty, _xnt.Add("standalone"), string.Empty),
-                            (standalone == 1) ? "yes" : "no"
-                        );
+                        _attributes[_attrCount]
+                            .Set(
+                                new QName(string.Empty, _xnt.Add("standalone"), string.Empty),
+                                (standalone == 1) ? "yes" : "no"
+                            );
                         _attrCount++;
                         break;
                     default:
@@ -2981,10 +2979,8 @@ namespace System.Xml
             {
                 string localname,
                     namespaceUri;
-                int hash = _attributes[i].GetLocalnameAndNamespaceUriAndHash(
-                    out localname,
-                    out namespaceUri
-                );
+                int hash = _attributes[i]
+                    .GetLocalnameAndNamespaceUriAndHash(out localname, out namespaceUri);
                 int index = hash & (tblSize - 1);
                 int next = _attrHashTbl[index];
                 _attrHashTbl[index] = i + 1;
@@ -3399,18 +3395,14 @@ namespace System.Xml
             if (BinXmlToken.System == PeekToken())
             {
                 _pos++;
-                _attributes[_attrCount++].Set(
-                    new QName(string.Empty, _xnt.Add("SYSTEM"), string.Empty),
-                    ParseText()
-                );
+                _attributes[_attrCount++]
+                    .Set(new QName(string.Empty, _xnt.Add("SYSTEM"), string.Empty), ParseText());
             }
             if (BinXmlToken.Public == PeekToken())
             {
                 _pos++;
-                _attributes[_attrCount++].Set(
-                    new QName(string.Empty, _xnt.Add("PUBLIC"), string.Empty),
-                    ParseText()
-                );
+                _attributes[_attrCount++]
+                    .Set(new QName(string.Empty, _xnt.Add("PUBLIC"), string.Empty), ParseText());
             }
             if (BinXmlToken.Subset == PeekToken())
             {
@@ -4652,7 +4644,8 @@ namespace System.Xml
                                     _tokDataPos,
                                     token == BinXmlToken.XSD_DECIMAL
                                 )
-                            ).ToDecimal(),
+                            )
+                                .ToDecimal(),
                             returnType,
                             namespaceResolver
                         );
@@ -4684,10 +4677,10 @@ namespace System.Xml
                     byte[] data = new byte[_tokLen];
                     Array.Copy(_data, _tokDataPos, data, 0, _tokLen);
                     value = GetValueConverter(
-                            token == BinXmlToken.XSD_BINHEX
-                              ? XmlTypeCode.HexBinary
-                              : XmlTypeCode.Base64Binary
-                        )
+                        token == BinXmlToken.XSD_BINHEX
+                          ? XmlTypeCode.HexBinary
+                          : XmlTypeCode.Base64Binary
+                    )
                         .ChangeType(data, returnType, namespaceResolver);
                     break;
                 }

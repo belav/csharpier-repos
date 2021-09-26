@@ -23,18 +23,17 @@ namespace System.Web.Http.ModelBinding.Binders
             >();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(KeyValuePair<int, string>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
                 ModelName = "someName",
                 ValueProvider = new SimpleHttpValueProvider()
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(
-                typeof(ModelBinderProvider),
-                new SimpleModelBinderProvider(typeof(KeyValuePair<int, string>), binder)
-            );
+            context.ControllerContext.Configuration.Services
+                .Replace(
+                    typeof(ModelBinderProvider),
+                    new SimpleModelBinderProvider(typeof(KeyValuePair<int, string>), binder)
+                );
 
             // Act
             bool retVal = binder.BindModel(context, bindingContext);
@@ -52,30 +51,28 @@ namespace System.Web.Http.ModelBinding.Binders
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(KeyValuePair<int, string>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
                 ModelName = "someName",
                 ValueProvider = new SimpleHttpValueProvider()
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(
-                typeof(ModelBinderProvider),
-                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
-                {
-                    SuppressPrefixCheck = true
-                }
-            );
-
-            mockIntBinder.Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns(
-                    (HttpActionContext cc, ModelBindingContext mbc) =>
+            context.ControllerContext.Configuration.Services
+                .Replace(
+                    typeof(ModelBinderProvider),
+                    new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
                     {
-                        mbc.Model = 42;
-                        return true;
+                        SuppressPrefixCheck = true
                     }
                 );
+
+            mockIntBinder.Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>())).Returns(
+                (HttpActionContext cc, ModelBindingContext mbc) =>
+                {
+                    mbc.Model = 42;
+                    return true;
+                }
+            );
             KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
                 int,
                 string
@@ -101,37 +98,35 @@ namespace System.Web.Http.ModelBinding.Binders
             Mock<IModelBinder> mockStringBinder = new Mock<IModelBinder>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(KeyValuePair<int, string>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
                 ModelName = "someName",
                 ValueProvider = new SimpleHttpValueProvider()
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.ReplaceRange(
-                typeof(ModelBinderProvider),
-                new ModelBinderProvider[]
-                {
-                    new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+            context.ControllerContext.Configuration.Services
+                .ReplaceRange(
+                    typeof(ModelBinderProvider),
+                    new ModelBinderProvider[]
                     {
-                        SuppressPrefixCheck = true
-                    },
-                    new SimpleModelBinderProvider(typeof(string), mockStringBinder.Object)
-                    {
-                        SuppressPrefixCheck = true
-                    }
-                }
-            );
-
-            mockIntBinder.Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns(
-                    (HttpActionContext cc, ModelBindingContext mbc) =>
-                    {
-                        mbc.Model = 42;
-                        return true;
+                        new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+                        {
+                            SuppressPrefixCheck = true
+                        },
+                        new SimpleModelBinderProvider(typeof(string), mockStringBinder.Object)
+                        {
+                            SuppressPrefixCheck = true
+                        }
                     }
                 );
+
+            mockIntBinder.Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>())).Returns(
+                (HttpActionContext cc, ModelBindingContext mbc) =>
+                {
+                    mbc.Model = 42;
+                    return true;
+                }
+            );
             mockStringBinder.Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
                 .Returns(
                     (HttpActionContext cc, ModelBindingContext mbc) =>

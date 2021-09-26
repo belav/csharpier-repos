@@ -221,16 +221,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             string typeName;
             if (
-                _metadataDecoder.Module.HasStringValuedAttribute(
-                    methodHandle,
-                    AttributeDescription.AsyncStateMachineAttribute,
-                    out typeName
-                )
-                || _metadataDecoder.Module.HasStringValuedAttribute(
-                    methodHandle,
-                    AttributeDescription.IteratorStateMachineAttribute,
-                    out typeName
-                )
+                _metadataDecoder.Module
+                    .HasStringValuedAttribute(
+                        methodHandle,
+                        AttributeDescription.AsyncStateMachineAttribute,
+                        out typeName
+                    )
+                || _metadataDecoder.Module
+                    .HasStringValuedAttribute(
+                        methodHandle,
+                        AttributeDescription.IteratorStateMachineAttribute,
+                        out typeName
+                    )
             )
             {
                 return _metadataDecoder.GetTypeSymbolForSerializedType(typeName);

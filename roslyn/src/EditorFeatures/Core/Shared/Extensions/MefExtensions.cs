@@ -43,8 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         ) where TMetadata : IContentTypeMetadata
         {
             return extensions.Where(
-                    h => contentTypes.Any(d => d.MatchesAny(h.Metadata.ContentTypes))
-                )
+                h => contentTypes.Any(d => d.MatchesAny(h.Metadata.ContentTypes))
+            )
                 .ToList();
         }
 

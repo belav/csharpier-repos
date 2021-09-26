@@ -93,11 +93,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var formatter = GetOutputFormatter();
             var expectedContent = "\"" + content + "\"";
             var mediaType = MediaTypeHeaderValue.Parse(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "application/json; charset={0}",
-                    encodingAsString
-                )
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "application/json; charset={0}",
+                        encodingAsString
+                    )
             );
             var encoding = CreateOrGetSupportedEncoding(
                 formatter,
@@ -234,9 +235,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             Encoding encoding = null;
             if (isDefaultEncoding)
             {
-                encoding = formatter.SupportedEncodings.First(
-                    (e) => e.WebName.Equals(encodingAsString, StringComparison.OrdinalIgnoreCase)
-                );
+                encoding = formatter.SupportedEncodings
+                    .First(
+                        (e) =>
+                            e.WebName.Equals(encodingAsString, StringComparison.OrdinalIgnoreCase)
+                    );
             }
             else
             {

@@ -156,21 +156,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
             helper.ViewData.TemplateInfo.HtmlFieldPrefix = "pre";
 
-            helper.ViewData.ModelState.SetModelValue(
-                "pre.Property3[key]",
-                "MProp3Val",
-                "MProp3Val"
-            );
-            helper.ViewData.ModelState.SetModelValue(
-                "pre.Property4.Property5",
-                "MProp5Val",
-                "MProp5Val"
-            );
-            helper.ViewData.ModelState.SetModelValue(
-                "pre.Property4.Property6[0]",
-                "MProp6Val",
-                "MProp6Val"
-            );
+            helper.ViewData.ModelState
+                .SetModelValue("pre.Property3[key]", "MProp3Val", "MProp3Val");
+            helper.ViewData.ModelState
+                .SetModelValue("pre.Property4.Property5", "MProp5Val", "MProp5Val");
+            helper.ViewData.ModelState
+                .SetModelValue("pre.Property4.Property6[0]", "MProp6Val", "MProp6Val");
 
             helper.ViewData.Model.Property3["key"] = "Prop3Val";
             helper.ViewData.Model.Property4.Property5 = "Prop5Val";

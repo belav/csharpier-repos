@@ -124,7 +124,8 @@ namespace XLinqTests
             XDocument doc = XDocument.Parse(
                 @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>"
             );
-            IEnumerable<XAttribute> allAttributes = doc.Root.Attributes()
+            IEnumerable<XAttribute> allAttributes = doc.Root
+                .Attributes()
                 .Concat(doc.Root.Attributes());
             try
             {
@@ -291,7 +292,8 @@ namespace XLinqTests
             XDocument doc = XDocument.Parse(
                 @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D datrt='dat'/></A>"
             );
-            IEnumerable<XAttribute> allAttributes = doc.Root.Element("{nbs}B")
+            IEnumerable<XAttribute> allAttributes = doc.Root
+                .Element("{nbs}B")
                 .Attributes()
                 .Where(a => a.IsNamespaceDeclaration);
             if (_runWithEvents)
@@ -314,7 +316,8 @@ namespace XLinqTests
             XDocument doc = XDocument.Parse(
                 @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D datrt='dat'/></A>"
             );
-            IEnumerable<XAttribute> allAttributes = doc.Root.Element("{nbs}B")
+            IEnumerable<XAttribute> allAttributes = doc.Root
+                .Element("{nbs}B")
                 .Attributes()
                 .Where(a => !a.IsNamespaceDeclaration);
             if (_runWithEvents)
@@ -392,10 +395,11 @@ namespace XLinqTests
 
                         // Compare the rest of the elements
                         TestLog.Compare(
-                            expectedAttrsForParent[parent].EqualAllAttributes(
-                                parent.Attributes(),
-                                Helpers.MyAttributeComparer
-                            ),
+                            expectedAttrsForParent[parent]
+                                .EqualAllAttributes(
+                                    parent.Attributes(),
+                                    Helpers.MyAttributeComparer
+                                ),
                             "The rest of the attributes"
                         );
                     }

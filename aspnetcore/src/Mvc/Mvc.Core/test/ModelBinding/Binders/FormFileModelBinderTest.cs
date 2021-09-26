@@ -83,10 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             // In this non-top-level binding case, FormFileModelBinder tries ModelName and succeeds.
             var propertyInfo = typeof(NestedFormFiles).GetProperty(propertyName);
-            var metadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
-                propertyInfo,
-                propertyInfo.PropertyType
-            );
+            var metadata = new EmptyModelMetadataProvider()
+                .GetMetadataForProperty(propertyInfo, propertyInfo.PropertyType);
             var bindingContext = DefaultModelBindingContext.CreateBindingContext(
                 new ActionContext { HttpContext = httpContext },
                 Mock.Of<IValueProvider>(),
@@ -127,10 +125,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             // nested context for the NestedFormFiles property. In this non-top-level binding case, FormFileModelBinder
             // tries ModelName then falls back to add an (OriginalModelName + ".") prefix.
             var propertyInfo = typeof(NestedFormFiles).GetProperty(propertyName);
-            var metadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
-                propertyInfo,
-                propertyInfo.PropertyType
-            );
+            var metadata = new EmptyModelMetadataProvider()
+                .GetMetadataForProperty(propertyInfo, propertyInfo.PropertyType);
             var bindingContext = DefaultModelBindingContext.CreateBindingContext(
                 new ActionContext { HttpContext = httpContext },
                 Mock.Of<IValueProvider>(),
@@ -437,8 +433,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty<ModelWithReadOnlyArray>(
-                    nameof(ModelWithReadOnlyArray.ArrayProperty)
-                )
+                nameof(ModelWithReadOnlyArray.ArrayProperty)
+            )
                 .BindingDetails(bd => bd.BindingSource = BindingSource.Header);
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithReadOnlyArray),

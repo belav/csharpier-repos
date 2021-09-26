@@ -55,12 +55,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    workspace.CurrentSolution.AddProject(
-                            projectId,
-                            "proj1",
-                            "proj1.dll",
-                            LanguageNames.CSharp
-                        )
+                    workspace.CurrentSolution
+                        .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp)
                         .AddDocument(
                             DocumentId.CreateNewId(projectId),
                             "goo.cs",
@@ -374,12 +370,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                    projectId,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(DocumentId.CreateNewId(projectId), "goo.cs", "public class Goo { }")
                 .AddAnalyzerConfigDocument(
                     DocumentId.CreateNewId(projectId),
@@ -635,9 +627,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 newSolution1.GetAdditionalDocument(documentId)!.TryGetText(out var actualText)
             );
             Assert.True(
-                newSolution1.GetAdditionalDocument(documentId)!.TryGetTextVersion(
-                    out var actualVersion
-                )
+                newSolution1.GetAdditionalDocument(documentId)!
+                    .TryGetTextVersion(out var actualVersion)
             );
             Assert.Same(textAndVersion.Text, actualText);
             Assert.Equal(textAndVersion.Version, actualVersion);
@@ -764,9 +755,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 newSolution1.GetAnalyzerConfigDocument(documentId)!.TryGetText(out var actualText)
             );
             Assert.True(
-                newSolution1.GetAnalyzerConfigDocument(documentId)!.TryGetTextVersion(
-                    out var actualVersion
-                )
+                newSolution1.GetAnalyzerConfigDocument(documentId)!
+                    .TryGetTextVersion(out var actualVersion)
             );
             Assert.Same(textAndVersion.Text, actualText);
             Assert.Equal(textAndVersion.Version, actualVersion);
@@ -828,7 +818,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
             Assert.Equal(
                 "new text",
-                newSolution1.GetDocument(documentId)!.GetTextSynchronously(CancellationToken.None)
+                newSolution1.GetDocument(documentId)!
+                    .GetTextSynchronously(CancellationToken.None)
                     .ToString()
             );
 
@@ -885,9 +876,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
             Assert.Equal(
                 "new text",
-                newSolution1.GetAdditionalDocument(documentId)!.GetTextSynchronously(
-                        CancellationToken.None
-                    )
+                newSolution1.GetAdditionalDocument(documentId)!
+                    .GetTextSynchronously(CancellationToken.None)
                     .ToString()
             );
 
@@ -949,9 +939,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
             Assert.Equal(
                 "new text",
-                newSolution1.GetAnalyzerConfigDocument(documentId)!.GetTextSynchronously(
-                        CancellationToken.None
-                    )
+                newSolution1.GetAnalyzerConfigDocument(documentId)!
+                    .GetTextSynchronously(CancellationToken.None)
                     .ToString()
             );
 
@@ -1004,12 +993,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                projectId,
-                "proj1",
-                "proj1.dll",
-                LanguageNames.CSharp
-            );
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
 
             // any character is allowed
             var assemblyName = "\0<>a/b/*.dll";
@@ -1038,12 +1023,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                projectId,
-                "proj1",
-                "proj1.dll",
-                LanguageNames.CSharp
-            );
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
 
             // any character is allowed
             var path = "\0<>a/b/*.dll";
@@ -1071,12 +1052,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                projectId,
-                "proj1",
-                "proj1.dll",
-                LanguageNames.CSharp
-            );
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
 
             // any character is allowed
             var path = "\0<>a/b/*.dll";
@@ -1104,12 +1081,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                projectId,
-                "proj1",
-                "proj1.dll",
-                LanguageNames.CSharp
-            );
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
 
             // any character is allowed
             var path = "\0<>a/b/*.dll";
@@ -1145,12 +1118,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                projectId,
-                "proj1",
-                "proj1.dll",
-                LanguageNames.CSharp
-            );
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
 
             // any character is allowed
             var defaultNamespace = "\0<>a/b/*";
@@ -1178,12 +1147,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                projectId,
-                "proj1",
-                "proj1.dll",
-                LanguageNames.CSharp
-            );
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
 
             // any character is allowed
             var projectName = "\0<>a/b/*";
@@ -1211,12 +1176,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                projectId,
-                "proj1",
-                "proj1.dll",
-                LanguageNames.CSharp
-            );
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
 
             // any character is allowed
             var path = "\0<>a/b/*.csproj";
@@ -1244,12 +1205,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                projectId,
-                "proj1",
-                "proj1.dll",
-                LanguageNames.CSharp
-            );
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
 
             var options = new CSharpCompilationOptions(OutputKind.NetModule);
 
@@ -1273,19 +1230,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             using var workspace = CreateWorkspace();
 
-            var solution = workspace.CurrentSolution.AddProject(
-                projectId,
-                "proj1",
-                "proj1.dll",
-                languageName
-            );
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "proj1", "proj1.dll", languageName);
 
             // We always have a non-null SyntaxTreeOptionsProvider for C# and VB projects
             var originalSyntaxTreeOptionsProvider =
                 solution.Projects.Single().CompilationOptions!.SyntaxTreeOptionsProvider;
             Assert.NotNull(originalSyntaxTreeOptionsProvider);
 
-            var defaultOptions = solution.Projects.Single()
+            var defaultOptions = solution.Projects
+                .Single()
                 .LanguageServices.GetRequiredService<ICompilationFactoryService>()
                 .GetDefaultCompilationOptions();
             Assert.Null(defaultOptions.SyntaxTreeOptionsProvider);
@@ -1306,12 +1260,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                projectId,
-                "proj1",
-                "proj1.dll",
-                LanguageNames.CSharp
-            );
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
 
             var options = new CSharpParseOptions(CS.LanguageVersion.CSharp1);
 
@@ -1554,11 +1504,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var submissionId3 = ProjectId.CreateNewId();
 
             solution = solution.AddProject(
-                    projectId0,
-                    "non-submission",
-                    "non-submission.dll",
-                    LanguageNames.CSharp
-                )
+                projectId0,
+                "non-submission",
+                "non-submission.dll",
+                LanguageNames.CSharp
+            )
                 .AddProject(
                     ProjectInfo.Create(
                         submissionId1,
@@ -2025,12 +1975,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var did = DocumentId.CreateNewId(pid);
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", "public class Goo { }");
 
             // verify project & document
@@ -2084,12 +2030,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentInfo2 = DocumentInfo.Create(DocumentId.CreateNewId(projectId), "file2.cs");
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                    projectId,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
 
             var project = Assert.Single(solution.Projects);
@@ -2112,12 +2054,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentInfo2 = DocumentInfo.Create(DocumentId.CreateNewId(projectId2), "file2.cs");
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                    projectId1,
-                    "project1",
-                    "project1.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp)
                 .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
                 .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
 
@@ -2144,12 +2082,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // We're only adding the first project, but not the second one
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                projectId1,
-                "project1",
-                "project1.dll",
-                LanguageNames.CSharp
-            );
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp);
 
             Assert.ThrowsAny<InvalidOperationException>(
                 () => solution.AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2))
@@ -2174,12 +2108,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentInfo2 = DocumentInfo.Create(DocumentId.CreateNewId(projectId), "file2.cs");
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                    projectId,
-                    "project1",
-                    "project1.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "project1", "project1.dll", LanguageNames.CSharp)
                 .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
 
             solution = solution.RemoveDocuments(
@@ -2201,12 +2131,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentInfo2 = DocumentInfo.Create(DocumentId.CreateNewId(projectId2), "file2.cs");
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                    projectId1,
-                    "project1",
-                    "project1.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp)
                 .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
                 .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
 
@@ -2228,12 +2154,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentInfo1 = DocumentInfo.Create(DocumentId.CreateNewId(projectId1), "file1.cs");
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                    projectId1,
-                    "project1",
-                    "project1.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp)
                 .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
                 .AddDocument(documentInfo1);
 
@@ -2258,12 +2180,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                    projectId1,
-                    "project1",
-                    "project1.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp)
                 .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
                 .AddAdditionalDocument(documentInfo1);
 
@@ -2288,12 +2206,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                    projectId1,
-                    "project1",
-                    "project1.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp)
                 .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
                 .AddAnalyzerConfigDocuments(ImmutableArray.Create(documentInfo1));
 
@@ -2312,7 +2226,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var workspace = CreateWorkspace();
 
             var solution =
-                workspace.CurrentSolution.AddProject("goo", "goo.dll", LanguageNames.CSharp)
+                workspace.CurrentSolution
+                    .AddProject("goo", "goo.dll", LanguageNames.CSharp)
                     .AddMetadataReference(s_mscorlib)
                     .AddDocument("goo.cs", "public class Goo { }").Project.Solution;
 
@@ -2329,12 +2244,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var doc1 = DocumentId.CreateNewId(pm1);
             var doc2 = DocumentId.CreateNewId(pm2);
 
-            var solution = workspace.CurrentSolution.AddProject(
-                    pm1,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(pm1, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddProject(pm2, "bar", "bar.dll", LanguageNames.CSharp)
                 .AddProjectReference(pm2, new ProjectReference(pm1))
                 .AddDocument(doc1, "goo.cs", "public class Goo { }")
@@ -2350,12 +2261,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pm2 = ProjectId.CreateNewId();
             using var workspace = CreateWorkspace();
 
-            var solution = workspace.CurrentSolution.AddProject(
-                    pm1,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(pm1, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddMetadataReference(pm1, s_mscorlib)
                 .AddProject(pm2, "bar", "bar.dll", LanguageNames.VisualBasic)
                 .AddMetadataReference(pm2, s_mscorlib)
@@ -2403,11 +2310,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 {
                     if (solution.ContainsProject(referenced.ProjectId))
                     {
-                        var referencedMetadata = await solution.State.GetMetadataReferenceAsync(
-                            referenced,
-                            solution.GetProjectState(project.Id),
-                            CancellationToken.None
-                        );
+                        var referencedMetadata = await solution.State
+                            .GetMetadataReferenceAsync(
+                                referenced,
+                                solution.GetProjectState(project.Id),
+                                CancellationToken.None
+                            );
                         Assert.NotNull(referencedMetadata);
                         if (referencedMetadata is CompilationReference compilationReference)
                         {
@@ -2512,9 +2420,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var assemblyReference = (IAssemblySymbol)solution.GetProject(project1)
                 .GetCompilationAsync()
                 .Result.GetAssemblyOrModuleSymbol(mefReference);
-            var namespacesAndTypes = assemblyReference.GlobalNamespace.GetAllNamespacesAndTypes(
-                CancellationToken.None
-            );
+            var namespacesAndTypes = assemblyReference.GlobalNamespace
+                .GetAllNamespacesAndTypes(CancellationToken.None);
             var foundSymbol =
                 from symbol in namespacesAndTypes
                 where symbol.Name.Equals("Enumerable")
@@ -2708,12 +2615,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var did = DocumentId.CreateNewId(pid);
 
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             var document = sol.GetDocument(did);
@@ -2733,12 +2636,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
             var documentId = DocumentId.CreateNewId(projectId);
             using var workspace = CreateWorkspace();
-            var solution1 = workspace.CurrentSolution.AddProject(
-                    projectId,
-                    "ProjectName",
-                    "AssemblyName",
-                    LanguageNames.CSharp
-                )
+            var solution1 = workspace.CurrentSolution
+                .AddProject(projectId, "ProjectName", "AssemblyName", LanguageNames.CSharp)
                 .AddDocument(documentId, "DocumentName", SourceText.From("class Class{}"));
 
             var document = solution1.GetDocument(documentId);
@@ -2760,12 +2659,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var did = DocumentId.CreateNewId(pid);
 
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             var document = sol.GetDocument(did);
@@ -2803,12 +2698,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             const string NewFilePath = @"Z:\NewFilePath.cs";
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution.AddProject(
-                    projectId,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var solution = workspace.CurrentSolution
+                .AddProject(projectId, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(
                     documentId,
                     "OldFilePath.cs",
@@ -2839,12 +2730,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var did = DocumentId.CreateNewId(pid);
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", "public class Goo { }");
 
             var observedRoot = GetObservedSyntaxTreeRoot(sol, did);
@@ -2897,12 +2784,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             var doc = sol.GetDocument(did);
@@ -2923,12 +2806,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var file = Temp.CreateFile().WriteAllText(text, Encoding.UTF8);
 
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "x", new FileTextLoader(file.Path, Encoding.UTF8));
 
             var doc = sol.GetDocument(did);
@@ -2948,12 +2827,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             // observe the text and then wait for the references to be GC'd
@@ -2976,12 +2851,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             var doc = sol.GetDocument(did);
@@ -3002,12 +2873,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var file = Temp.CreateFile().WriteAllText(text, Encoding.UTF8);
 
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "x", new FileTextLoader(file.Path, Encoding.UTF8));
 
             var doc = sol.GetDocument(did);
@@ -3023,17 +2890,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
 
-            var tree = CSharp.SyntaxFactory.ParseSyntaxTree("public class C {}")
+            var tree = CSharp.SyntaxFactory
+                .ParseSyntaxTree("public class C {}")
                 .GetRoot(CancellationToken.None);
             tree = tree.WithAdditionalAnnotations(new SyntaxAnnotation("test"));
 
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "x", tree);
 
             var doc = sol.GetDocument(did);
@@ -3052,12 +2916,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             var doc = sol.GetDocument(did);
@@ -3077,12 +2937,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var text = "public class C {}";
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             // observe the syntax tree root and wait for the references to be GC'd
@@ -3105,12 +2961,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             var proj = sol.GetProject(pid);
@@ -3129,12 +2981,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             var doc = sol.GetDocument(did);
@@ -3152,12 +3000,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             // observe the text and then wait for the references to be GC'd
@@ -3191,12 +3035,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             // observe the text and then wait for the references to be GC'd
@@ -3231,12 +3071,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var text = "public class C {}";
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             // get it async and wait for it to get GC'd
@@ -3264,12 +3100,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var text = "public class C {}";
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             // get it async and wait for it to get GC'd
@@ -3306,12 +3138,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 }";
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             TestRecoverableSyntaxTree(sol, did);
@@ -3341,12 +3169,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 End Class";
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.VisualBasic
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.VisualBasic)
                 .AddDocument(did, "goo.vb", text);
 
             TestRecoverableSyntaxTree(sol, did);
@@ -3372,11 +3196,8 @@ End Class";
             // reset the syntax root, to make it 'refactored' by adding an attribute
             var newRoot = doc.GetSyntaxRootAsync()
                 .Result.WithAdditionalAnnotations(SyntaxAnnotation.ElasticAnnotation);
-            var doc2 = doc.Project.Solution.WithDocumentSyntaxRoot(
-                    doc.Id,
-                    newRoot,
-                    PreservationMode.PreserveValue
-                )
+            var doc2 = doc.Project.Solution
+                .WithDocumentSyntaxRoot(doc.Id, newRoot, PreservationMode.PreserveValue)
                 .GetDocument(doc.Id);
 
             // get it async and wait for it to get GC'd
@@ -3402,12 +3223,8 @@ End Class";
 
             var text = "public class C {}";
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             // get it async and wait for it to get GC'd
@@ -3434,12 +3251,8 @@ End Class";
 
             var text = "public class C {}";
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "goo",
-                    "goo.dll",
-                    LanguageNames.CSharp
-                )
+            var sol = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddDocument(did, "goo.cs", text);
 
             // get it async and wait for it to get GC'd
@@ -3460,18 +3273,19 @@ End Class";
         [Fact]
         public void TestWorkspaceLanguageServiceOverride()
         {
-            var hostServices = FeaturesTestCompositions.Features.AddParts(
-                    new[] { typeof(TestLanguageServiceA), typeof(TestLanguageServiceB), }
-                )
+            var hostServices = FeaturesTestCompositions.Features
+                .AddParts(new[] { typeof(TestLanguageServiceA), typeof(TestLanguageServiceB), })
                 .GetHostServices();
 
             var ws = new AdhocWorkspace(hostServices, ServiceLayer.Host);
-            var service = ws.Services.GetLanguageServices(LanguageNames.CSharp)
+            var service = ws.Services
+                .GetLanguageServices(LanguageNames.CSharp)
                 .GetService<ITestLanguageService>();
             Assert.NotNull(service as TestLanguageServiceA);
 
             var ws2 = new AdhocWorkspace(hostServices, "Quasimodo");
-            var service2 = ws2.Services.GetLanguageServices(LanguageNames.CSharp)
+            var service2 = ws2.Services
+                .GetLanguageServices(LanguageNames.CSharp)
                 .GetService<ITestLanguageService>();
             Assert.NotNull(service2 as TestLanguageServiceB);
         }
@@ -3558,7 +3372,8 @@ End Class";
             var doc = solution.GetDocument(did);
             var text = await doc.GetTextAsync().ConfigureAwait(false);
 
-            var diagnostic = await doc.State.GetLoadDiagnosticAsync(CancellationToken.None)
+            var diagnostic = await doc.State
+                .GetLoadDiagnosticAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
             Assert.Equal(
@@ -3569,10 +3384,8 @@ End Class";
             Assert.Equal("", text.ToString());
 
             // Verify invariant: The compilation is guaranteed to have a syntax tree for each document of the project (even if the contnet fails to load).
-            var compilation = await solution.State.GetCompilationAsync(
-                    doc.Project.State,
-                    CancellationToken.None
-                )
+            var compilation = await solution.State
+                .GetCompilationAsync(doc.Project.State, CancellationToken.None)
                 .ConfigureAwait(false);
             var syntaxTree = compilation.SyntaxTrees.Single();
             Assert.Equal("", syntaxTree.ToString());
@@ -3611,12 +3424,8 @@ public class C : A {
 }
 ";
 
-            var solution = new AdhocWorkspace().CurrentSolution.AddProject(
-                    pid1,
-                    "GooA",
-                    "Goo.dll",
-                    LanguageNames.VisualBasic
-                )
+            var solution = new AdhocWorkspace().CurrentSolution
+                .AddProject(pid1, "GooA", "Goo.dll", LanguageNames.VisualBasic)
                 .AddDocument(did1, "A.vb", text1)
                 .AddMetadataReference(pid1, s_mscorlib)
                 .AddProject(pid2, "GooB", "Goo2.dll", LanguageNames.VisualBasic)
@@ -3779,12 +3588,11 @@ public class C : A {
             var maxLength = 1;
             var workspace = new AdhocWorkspace();
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        FileTextLoaderOptions.FileLengthThreshold,
-                        maxLength
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(FileTextLoaderOptions.FileLengthThreshold, maxLength)
                     )
-                )
             );
 
             using var root = new TempRoot();
@@ -3794,12 +3602,13 @@ public class C : A {
             var loader = new FileTextLoader(file.Path, Encoding.UTF8);
             var textLength = FileUtilities.GetFileLength(file.Path);
 
-            var expected = string.Format(
-                WorkspacesResources.File_0_size_of_1_exceeds_maximum_allowed_size_of_2,
-                file.Path,
-                textLength,
-                maxLength
-            );
+            var expected = string
+                .Format(
+                    WorkspacesResources.File_0_size_of_1_exceeds_maximum_allowed_size_of_2,
+                    file.Path,
+                    textLength,
+                    maxLength
+                );
             var exceptionThrown = false;
 
             try
@@ -4320,9 +4129,8 @@ public class C : A {
                 .WithProjectMetadataReferences(projectId, new[] { TestMetadata.Net451.mscorlib })
                 .WithProjectCompilationOptions(
                     projectId,
-                    new CSharpCompilationOptions(
-                        OutputKind.DynamicallyLinkedLibrary
-                    ).WithNullableContextOptions(NullableContextOptions.Enable)
+                    new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+                        .WithNullableContextOptions(NullableContextOptions.Enable)
                 );
             var src =
                 @"
@@ -4444,12 +4252,12 @@ class C
             const string editorConfigFilePath = @"Z:\.editorconfig";
 
             var projectInfo = ProjectInfo.Create(
-                    projectId,
-                    VersionStamp.Default,
-                    "Test",
-                    "Test",
-                    LanguageNames.CSharp
-                )
+                projectId,
+                VersionStamp.Default,
+                "Test",
+                "Test",
+                LanguageNames.CSharp
+            )
                 .WithAnalyzerConfigDocuments(
                     new[]
                     {
@@ -4486,12 +4294,12 @@ class C
 
             csBrokenProject = workspace.AddProject(
                 ProjectInfo.Create(
-                        ProjectId.CreateNewId(),
-                        VersionStamp.Create(),
-                        "CSharpProject",
-                        "CSharpProject",
-                        LanguageNames.CSharp
-                    )
+                    ProjectId.CreateNewId(),
+                    VersionStamp.Create(),
+                    "CSharpProject",
+                    "CSharpProject",
+                    LanguageNames.CSharp
+                )
                     .WithHasAllInformation(hasAllInformation: false)
             );
 
@@ -4645,7 +4453,8 @@ class C
             var root = await doc.GetSyntaxRootAsync();
             var newRoot = root.WithAdditionalAnnotations(new SyntaxAnnotation());
             Assert.NotSame(root, newRoot);
-            var newDoc = doc.Project.Solution.WithDocumentSyntaxRoot(doc.Id, newRoot)
+            var newDoc = doc.Project.Solution
+                .WithDocumentSyntaxRoot(doc.Id, newRoot)
                 .GetDocument(doc.Id);
             Assert.NotSame(doc, newDoc);
 

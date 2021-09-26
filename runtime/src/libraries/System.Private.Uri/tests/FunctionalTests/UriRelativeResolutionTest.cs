@@ -282,9 +282,9 @@ namespace System.PrivateUri.Tests
                 secondFilter == null
                     ? characters
                     : Enumerable.Range(0, 0xFFFF)
-                          .Select(c => (char)c)
-                          .Where(secondFilter)
-                          .ToArray();
+                      .Select(c => (char)c)
+                      .Where(secondFilter)
+                      .ToArray();
 
             return CartesianProduct(characters, secondCharacters, includeSingleChars);
         }

@@ -25,9 +25,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
     public class SuppressMessageAttributeWorkspaceTests : SuppressMessageAttributeTests
     {
         private static readonly TestComposition s_compositionWithMockDiagnosticUpdateSourceRegistrationService =
-            EditorTestCompositions.EditorFeatures.AddExcludedPartTypes(
-                    typeof(IDiagnosticUpdateSourceRegistrationService)
-                )
+            EditorTestCompositions.EditorFeatures
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
         private static readonly Lazy<MetadataReference> _unconditionalSuppressMessageRef =
@@ -55,16 +54,14 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }";
                     return CSharpCompilation.Create(
-                            "unconditionalsuppress",
-                            options: new CSharpCompilationOptions(
-                                OutputKind.DynamicallyLinkedLibrary
-                            ),
-                            syntaxTrees: new[]
-                            {
-                                CSharpSyntaxTree.ParseText(unconditionalSuppressMessageDef)
-                            },
-                            references: new[] { TestBase.MscorlibRef }
-                        )
+                        "unconditionalsuppress",
+                        options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary),
+                        syntaxTrees: new[]
+                        {
+                            CSharpSyntaxTree.ParseText(unconditionalSuppressMessageDef)
+                        },
+                        references: new[] { TestBase.MscorlibRef }
+                    )
                         .EmitToImageReference();
                 },
                 LazyThreadSafetyMode.PublicationOnly
@@ -81,12 +78,14 @@ namespace System.Diagnostics.CodeAnalysis
             using var workspace = CreateWorkspaceFromFile(source, language, rootNamespace);
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithAnalyzerReferences(
+                workspace.CurrentSolution
+                    .WithAnalyzerReferences(
                         new[] { new AnalyzerImageReference(analyzers.ToImmutableArray()) }
                     )
                     .WithProjectMetadataReferences(
                         workspace.Projects.Single().Id,
-                        workspace.Projects.Single()
+                        workspace.Projects
+                            .Single()
                             .MetadataReferences.Append(_unconditionalSuppressMessageRef.Value)
                     )
             );

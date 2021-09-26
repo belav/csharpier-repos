@@ -109,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore
             // DbSet instances, and this code becomes a no-op. However, if this set initializer is then saved and used later
             // for the Set method, then it makes the problem bigger because now an app is using the non-replaced services
             // even when it doesn't need to.
-            ServiceProviderCache.Instance.GetOrAdd(options, providerRequired: false)
+            ServiceProviderCache.Instance
+                .GetOrAdd(options, providerRequired: false)
                 .GetRequiredService<IDbSetInitializer>()
                 .InitializeSets(this);
 
@@ -287,10 +288,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="TEntity"> The type of entity for which a set should be returned. </typeparam>
         /// <returns> A set for the given entity type. </returns>
         public virtual DbSet<TEntity> Set<TEntity>() where TEntity : class =>
-            (DbSet<TEntity>)((IDbSetCache)this).GetOrAddSet(
-                DbContextDependencies.SetSource,
-                typeof(TEntity)
-            );
+            (DbSet<TEntity>)((IDbSetCache)this)
+                .GetOrAddSet(DbContextDependencies.SetSource, typeof(TEntity));
 
         /// <summary>
         ///     <para>
@@ -305,11 +304,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="TEntity"> The type of entity for which a set should be returned. </typeparam>
         /// <returns> A set for the given entity type. </returns>
         public virtual DbSet<TEntity> Set<TEntity>(string name) where TEntity : class =>
-            (DbSet<TEntity>)((IDbSetCache)this).GetOrAddSet(
-                DbContextDependencies.SetSource,
-                name,
-                typeof(TEntity)
-            );
+            (DbSet<TEntity>)((IDbSetCache)this)
+                .GetOrAddSet(DbContextDependencies.SetSource, name, typeof(TEntity));
 
         private IEntityFinder Finder(Type type)
         {
@@ -383,10 +379,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     var options = optionsBuilder.Options;
 
-                    _serviceScope = ServiceProviderCache.Instance.GetOrAdd(
-                            options,
-                            providerRequired: true
-                        )
+                    _serviceScope = ServiceProviderCache.Instance
+                        .GetOrAdd(options, providerRequired: true)
                         .GetRequiredService<IServiceScopeFactory>()
                         .CreateScope();
 
@@ -534,10 +528,8 @@ namespace Microsoft.EntityFrameworkCore
                     ? interceptionResult.Result
                     : DbContextDependencies.StateManager.SaveChanges(acceptAllChangesOnSuccess);
 
-                var result = DbContextDependencies.UpdateLogger.SaveChangesCompleted(
-                    this,
-                    entitiesSaved
-                );
+                var result = DbContextDependencies.UpdateLogger
+                    .SaveChangesCompleted(this, entitiesSaved);
 
                 SavedChanges?.Invoke(
                     this,
@@ -660,12 +652,9 @@ namespace Microsoft.EntityFrameworkCore
 
             SavingChanges?.Invoke(this, new SavingChangesEventArgs(acceptAllChangesOnSuccess));
 
-            var interceptionResult =
-                await DbContextDependencies.UpdateLogger.SaveChangesStartingAsync(
-                        this,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(acceptAllChangesOnSuccess);
+            var interceptionResult = await DbContextDependencies.UpdateLogger
+                .SaveChangesStartingAsync(this, cancellationToken)
+                .ConfigureAwait(acceptAllChangesOnSuccess);
 
             TryDetectChanges();
 
@@ -673,17 +662,12 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var entitiesSaved = interceptionResult.HasResult
                     ? interceptionResult.Result
-                    : await DbContextDependencies.StateManager.SaveChangesAsync(
-                              acceptAllChangesOnSuccess,
-                              cancellationToken
-                          )
+                    : await DbContextDependencies.StateManager
+                          .SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken)
                           .ConfigureAwait(false);
 
-                var result = await DbContextDependencies.UpdateLogger.SaveChangesCompletedAsync(
-                        this,
-                        entitiesSaved,
-                        cancellationToken
-                    )
+                var result = await DbContextDependencies.UpdateLogger
+                    .SaveChangesCompletedAsync(this, entitiesSaved, cancellationToken)
                     .ConfigureAwait(false);
 
                 SavedChanges?.Invoke(
@@ -697,11 +681,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 EntityFrameworkEventSource.Log.OptimisticConcurrencyFailure();
 
-                await DbContextDependencies.UpdateLogger.OptimisticConcurrencyExceptionAsync(
-                        this,
-                        exception,
-                        cancellationToken
-                    )
+                await DbContextDependencies.UpdateLogger
+                    .OptimisticConcurrencyExceptionAsync(this, exception, cancellationToken)
                     .ConfigureAwait(false);
 
                 SaveChangesFailed?.Invoke(
@@ -713,11 +694,8 @@ namespace Microsoft.EntityFrameworkCore
             }
             catch (Exception exception)
             {
-                await DbContextDependencies.UpdateLogger.SaveChangesFailedAsync(
-                        this,
-                        exception,
-                        cancellationToken
-                    )
+                await DbContextDependencies.UpdateLogger
+                    .SaveChangesFailedAsync(this, exception, cancellationToken)
                     .ConfigureAwait(false);
 
                 SaveChangesFailed?.Invoke(
@@ -1003,12 +981,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             if (entry.EntityState == EntityState.Detached)
             {
-                DbContextDependencies.EntityGraphAttacher.AttachGraph(
-                    entry,
-                    entityState,
-                    entityState,
-                    forceStateWhenUnknownKey: true
-                );
+                DbContextDependencies.EntityGraphAttacher
+                    .AttachGraph(entry, entityState, entityState, forceStateWhenUnknownKey: true);
             }
             else
             {
@@ -1027,7 +1001,8 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             return entry.EntityState == EntityState.Detached
-              ? DbContextDependencies.EntityGraphAttacher.AttachGraphAsync(
+              ? DbContextDependencies.EntityGraphAttacher
+                .AttachGraphAsync(
                     entry,
                     entityState,
                     entityState,
@@ -1096,10 +1071,10 @@ namespace Microsoft.EntityFrameworkCore
             var entry = EntryWithoutDetectChanges(Check.NotNull(entity, nameof(entity)));
 
             await SetEntityStateAsync(
-                    entry.GetInfrastructure(),
-                    EntityState.Added,
-                    cancellationToken
-                )
+                entry.GetInfrastructure(),
+                EntityState.Added,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return entry;
@@ -1302,10 +1277,10 @@ namespace Microsoft.EntityFrameworkCore
             var entry = EntryWithoutDetectChanges(Check.NotNull(entity, nameof(entity)));
 
             await SetEntityStateAsync(
-                    entry.GetInfrastructure(),
-                    EntityState.Added,
-                    cancellationToken
-                )
+                entry.GetInfrastructure(),
+                EntityState.Added,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return entry;
@@ -1632,10 +1607,10 @@ namespace Microsoft.EntityFrameworkCore
             foreach (var entity in entities)
             {
                 await SetEntityStateAsync(
-                        stateManager.GetOrCreateEntry(entity),
-                        EntityState.Added,
-                        cancellationToken
-                    )
+                    stateManager.GetOrCreateEntry(entity),
+                    EntityState.Added,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -1867,10 +1842,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             CheckDisposed();
 
-            return ((IEntityFinder<TEntity>)Finder(typeof(TEntity))).FindAsync(
-                keyValues,
-                cancellationToken
-            );
+            return ((IEntityFinder<TEntity>)Finder(typeof(TEntity)))
+                .FindAsync(keyValues, cancellationToken);
         }
 
         /// <summary>

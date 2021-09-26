@@ -47,9 +47,9 @@ namespace System.Reflection.Emit.Tests
             IntPtr funcPtr = Marshal.GetFunctionPointerForDelegate(del);
 
             object resultValue = dynamicType.GetMethod(
-                    "F",
-                    BindingFlags.Public | BindingFlags.Static
-                )
+                "F",
+                BindingFlags.Public | BindingFlags.Static
+            )
                 .Invoke(null, new object[] { funcPtr, a, b });
 
             GC.KeepAlive(del);
@@ -78,10 +78,11 @@ namespace System.Reflection.Emit.Tests
             methodBuilder.SetImplementationFlags(MethodImplAttributes.NoInlining);
 
             MethodInfo method =
-                typeof(ILGeneratorEmit4).GetMethod(
-                    nameof(ILGeneratorEmit4.Int32Sum),
-                    BindingFlags.NonPublic | BindingFlags.Static
-                ) ?? throw new InvalidOperationException("method is null");
+                typeof(ILGeneratorEmit4)
+                    .GetMethod(
+                        nameof(ILGeneratorEmit4.Int32Sum),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    ) ?? throw new InvalidOperationException("method is null");
             IntPtr funcPtr = method.MethodHandle.GetFunctionPointer();
 
             ILGenerator il = methodBuilder.GetILGenerator();
@@ -100,9 +101,9 @@ namespace System.Reflection.Emit.Tests
             Type dynamicType = typeBuilder.CreateType();
 
             object resultValue = dynamicType.GetMethod(
-                    "F",
-                    BindingFlags.Public | BindingFlags.Static
-                )
+                "F",
+                BindingFlags.Public | BindingFlags.Static
+            )
                 .Invoke(null, new object[] { funcPtr, a, b });
 
             Assert.IsType(returnType, resultValue);
@@ -183,9 +184,9 @@ namespace System.Reflection.Emit.Tests
             IntPtr funcPtr = Marshal.GetFunctionPointerForDelegate(del);
 
             object resultValue = dynamicType.GetMethod(
-                    "F",
-                    BindingFlags.Public | BindingFlags.Static
-                )
+                "F",
+                BindingFlags.Public | BindingFlags.Static
+            )
                 .Invoke(null, new object[] { funcPtr, input });
 
             GC.KeepAlive(del);

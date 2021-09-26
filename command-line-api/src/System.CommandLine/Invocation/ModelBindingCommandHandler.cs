@@ -117,7 +117,8 @@ namespace System.CommandLine.Invocation
         private ParameterDescriptor? FindParameterDescriptor(ParameterInfo? param) =>
             param == null
                 ? null
-                : _methodDescriptor.ParameterDescriptors.FirstOrDefault(
+                : _methodDescriptor.ParameterDescriptors
+                  .FirstOrDefault(
                       x => x.ValueName == param.Name && x.ValueType == param.ParameterType
                   );
     }

@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
             _context = fixture.CreateContext(noQueryCacheServiceProvider);
             _simpleQuery = _context.Products.AsNoTracking();
 
-            _complexQuery = _context.Products.AsNoTracking()
+            _complexQuery = _context.Products
+                .AsNoTracking()
                 .Where(p => p.Retail < 1000)
                 .OrderBy(p => p.Name)
                 .ThenBy(p => p.Retail)
@@ -58,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
                         }
                 );
 
-            _multipleJoinQuery = _context.Customers.AsNoTracking()
+            _multipleJoinQuery = _context.Customers
+                .AsNoTracking()
                 .Include(c => c.Orders)
                 .ThenInclude(o => o.OrderLines)
                 .ThenInclude(ol => ol.Product);

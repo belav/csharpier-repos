@@ -217,7 +217,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model.FindEntityType(typeof(ProductDetails))
                         .GetForeignKeys()
                         .Single().Properties[0]
-                ).FindGenerationProperty()
+                )
+                    .FindGenerationProperty()
             );
 
             Assert.Equal(
@@ -226,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model.FindEntityType(typeof(ProductDetailsTag))
                         .GetForeignKeys()
                         .Single().Properties[0]
-                ).FindGenerationProperty()
+                )
+                    .FindGenerationProperty()
             );
 
             Assert.Equal(
@@ -235,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model.FindEntityType(typeof(ProductDetailsTag))
                         .GetForeignKeys()
                         .Single().Properties[1]
-                ).FindGenerationProperty()
+                )
+                    .FindGenerationProperty()
             );
 
             Assert.Equal(
@@ -244,7 +247,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model.FindEntityType(typeof(ProductDetailsTagDetails))
                         .GetForeignKeys()
                         .Single().Properties[0]
-                ).FindGenerationProperty()
+                )
+                    .FindGenerationProperty()
             );
         }
 
@@ -259,7 +263,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model.FindEntityType(typeof(OrderDetails))
                         .GetForeignKeys()
                         .Single(k => k.Properties.First().Name == "OrderId").Properties[0]
-                ).FindGenerationProperty()
+                )
+                    .FindGenerationProperty()
             );
 
             Assert.Equal(
@@ -268,7 +273,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model.FindEntityType(typeof(OrderDetails))
                         .GetForeignKeys()
                         .Single(k => k.Properties.First().Name == "ProductId").Properties[0]
-                ).FindGenerationProperty()
+                )
+                    .FindGenerationProperty()
             );
         }
 

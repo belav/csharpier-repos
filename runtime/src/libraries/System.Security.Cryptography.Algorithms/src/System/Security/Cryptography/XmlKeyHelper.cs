@@ -301,7 +301,8 @@ namespace System.Security.Cryptography
                         "Parse",
                         BindingFlags.Static | BindingFlags.Public,
                         new[] { typeof(string) }
-                    )!.CreateDelegate<Func<string, object>>();
+                    )!
+                        .CreateDelegate<Func<string, object>>();
 
                     s_docRootProperty = xDocument.GetProperty("Root")!;
 

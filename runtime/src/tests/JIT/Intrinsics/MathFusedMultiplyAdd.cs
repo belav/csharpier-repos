@@ -154,10 +154,10 @@ namespace MathFusedMultiplyAddTest
             CompareFloats(
                 ReferenceMultiplyAdd(b, b, 333f),
                 Fma.MultiplyAdd(
-                        Vector128.CreateScalarUnsafe(b),
-                        Vector128.CreateScalarUnsafe(b),
-                        Vector128.CreateScalarUnsafe(333f)
-                    )
+                    Vector128.CreateScalarUnsafe(b),
+                    Vector128.CreateScalarUnsafe(b),
+                    Vector128.CreateScalarUnsafe(333f)
+                )
                     .ToScalar()
             );
         }
@@ -168,10 +168,10 @@ namespace MathFusedMultiplyAddTest
             CompareDoubles(
                 ReferenceMultiplyAdd(-b, -b, -333f),
                 Fma.MultiplyAdd(
-                        Vector128.CreateScalarUnsafe(-b),
-                        Vector128.CreateScalarUnsafe(-b),
-                        Vector128.CreateScalarUnsafe(-333f)
-                    )
+                    Vector128.CreateScalarUnsafe(-b),
+                    Vector128.CreateScalarUnsafe(-b),
+                    Vector128.CreateScalarUnsafe(-333f)
+                )
                     .ToScalar()
             );
         }
@@ -182,10 +182,10 @@ namespace MathFusedMultiplyAddTest
             CompareFloats(
                 ReferenceMultiplyAdd(b, b, b),
                 Fma.MultiplyAdd(
-                        Vector128.CreateScalarUnsafe(b),
-                        Vector128.CreateScalar(b),
-                        Vector128.Create(b)
-                    )
+                    Vector128.CreateScalarUnsafe(b),
+                    Vector128.CreateScalar(b),
+                    Vector128.Create(b)
+                )
                     .ToScalar()
             );
         }
@@ -325,10 +325,10 @@ namespace MathFusedMultiplyAddTest
             CompareDoubles(
                 ReferenceMultiplyAdd(b, b, b),
                 Fma.MultiplyAdd(
-                        Vector128.CreateScalarUnsafe(b),
-                        Vector128.CreateScalarUnsafe(b),
-                        Vector128.CreateScalarUnsafe(b)
-                    )
+                    Vector128.CreateScalarUnsafe(b),
+                    Vector128.CreateScalarUnsafe(b),
+                    Vector128.CreateScalarUnsafe(b)
+                )
                     .ToScalar()
             );
         }
@@ -339,10 +339,10 @@ namespace MathFusedMultiplyAddTest
             CompareDoubles(
                 ReferenceMultiplyAdd(-b, -b, -333.0),
                 Fma.MultiplyAdd(
-                        Vector128.CreateScalarUnsafe(-b),
-                        Vector128.CreateScalarUnsafe(-b),
-                        Vector128.CreateScalarUnsafe(-333.0)
-                    )
+                    Vector128.CreateScalarUnsafe(-b),
+                    Vector128.CreateScalarUnsafe(-b),
+                    Vector128.CreateScalarUnsafe(-333.0)
+                )
                     .ToScalar()
             );
         }
@@ -353,10 +353,10 @@ namespace MathFusedMultiplyAddTest
             CompareDoubles(
                 ReferenceMultiplyAdd(b, b, b),
                 Fma.MultiplyAdd(
-                        Vector128.CreateScalarUnsafe(b),
-                        Vector128.CreateScalar(b),
-                        Vector128.Create(b)
-                    )
+                    Vector128.CreateScalarUnsafe(b),
+                    Vector128.CreateScalar(b),
+                    Vector128.Create(b)
+                )
                     .ToScalar()
             );
         }

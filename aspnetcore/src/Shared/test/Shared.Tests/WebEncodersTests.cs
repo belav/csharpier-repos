@@ -48,7 +48,8 @@ namespace Microsoft.Extensions.Internal
         public void Base64UrlEncode_And_Decode(string base64Input, string expectedBase64Url)
         {
             // Arrange
-            byte[] input = new byte[3].Concat(Convert.FromBase64String(base64Input))
+            byte[] input = new byte[3]
+                .Concat(Convert.FromBase64String(base64Input))
                 .Concat(new byte[2])
                 .ToArray();
 
@@ -78,7 +79,8 @@ namespace Microsoft.Extensions.Internal
         )
         {
             // Arrange
-            var input = new byte[3].Concat(Convert.FromBase64String(base64Input))
+            var input = new byte[3]
+                .Concat(Convert.FromBase64String(base64Input))
                 .Concat(new byte[2])
                 .ToArray();
             var buffer = new char[30];

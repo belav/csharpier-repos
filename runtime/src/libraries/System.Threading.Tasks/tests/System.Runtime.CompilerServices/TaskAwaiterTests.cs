@@ -48,7 +48,8 @@ namespace System.Threading.Tasks.Tests
                 if (generic)
                 {
                     if (continueOnCapturedContext.HasValue)
-                        tcs.Task.ConfigureAwait(continueOnCapturedContext.Value)
+                        tcs.Task
+                            .ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
                             .OnCompleted(callback);
                     else
@@ -57,7 +58,8 @@ namespace System.Threading.Tasks.Tests
                 else
                 {
                     if (continueOnCapturedContext.HasValue)
-                        ((Task)tcs.Task).ConfigureAwait(continueOnCapturedContext.Value)
+                        ((Task)tcs.Task)
+                            .ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
                             .OnCompleted(callback);
                     else
@@ -127,7 +129,8 @@ namespace System.Threading.Tasks.Tests
                         if (generic)
                         {
                             if (continueOnCapturedContext.HasValue)
-                                tcs.Task.ConfigureAwait(continueOnCapturedContext.Value)
+                                tcs.Task
+                                    .ConfigureAwait(continueOnCapturedContext.Value)
                                     .GetAwaiter()
                                     .OnCompleted(callback);
                             else
@@ -136,7 +139,8 @@ namespace System.Threading.Tasks.Tests
                         else
                         {
                             if (continueOnCapturedContext.HasValue)
-                                ((Task)tcs.Task).ConfigureAwait(continueOnCapturedContext.Value)
+                                ((Task)tcs.Task)
+                                    .ConfigureAwait(continueOnCapturedContext.Value)
                                     .GetAwaiter()
                                     .OnCompleted(callback);
                             else
@@ -178,24 +182,23 @@ namespace System.Threading.Tasks.Tests
 
                     var ctx = new ValidateCorrectContextSynchronizationContext();
                     var tcs = new TaskCompletionSource();
-                    var ignored = Task.Delay(1)
-                        .ContinueWith(
-                            _ =>
+                    var ignored = Task.Delay(1).ContinueWith(
+                        _ =>
+                        {
+                            SynchronizationContext orig = SynchronizationContext.Current;
+                            SynchronizationContext.SetSynchronizationContext(ctx);
+                            try
                             {
-                                SynchronizationContext orig = SynchronizationContext.Current;
-                                SynchronizationContext.SetSynchronizationContext(ctx);
-                                try
-                                {
-                                    tcs.SetResult();
-                                }
+                                tcs.SetResult();
+                            }
 
-                                finally
-                                {
-                                    SynchronizationContext.SetSynchronizationContext(orig);
-                                }
-                            },
-                            TaskScheduler.Default
-                        );
+                            finally
+                            {
+                                SynchronizationContext.SetSynchronizationContext(orig);
+                            }
+                        },
+                        TaskScheduler.Default
+                    );
                     await tcs.Task;
 
                     Assert.Null(SynchronizationContext.Current);
@@ -263,89 +266,85 @@ namespace System.Threading.Tasks.Tests
         )
         {
             await Task.Factory.StartNew(
-                    async delegate
+                async delegate
+                {
+                    if (scheduler is SynchronizationContext sc)
                     {
-                        if (scheduler is SynchronizationContext sc)
-                        {
-                            SynchronizationContext.SetSynchronizationContext(sc);
-                        }
+                        SynchronizationContext.SetSynchronizationContext(sc);
+                    }
 
-                        var tcs = runContinuationsAsynchronously
-                            ? new TaskCompletionSource(
-                                  TaskCreationOptions.RunContinuationsAsynchronously
-                              )
-                            : new TaskCompletionSource();
+                    var tcs = runContinuationsAsynchronously
+                        ? new TaskCompletionSource(
+                              TaskCreationOptions.RunContinuationsAsynchronously
+                          )
+                        : new TaskCompletionSource();
 
-                        var tl = new ThreadLocal<int>();
-                        var tasks = new List<Task>();
+                    var tl = new ThreadLocal<int>();
+                    var tasks = new List<Task>();
 
-                        for (int i = 1; i <= numContinuations; i++)
-                        {
-                            bool expectedSync = i == 1 && !runContinuationsAsynchronously;
+                    for (int i = 1; i <= numContinuations; i++)
+                    {
+                        bool expectedSync = i == 1 && !runContinuationsAsynchronously;
 
-                            tasks.Add(
-                                ThenAsync(
-                                    tcs.Task,
-                                    () =>
+                        tasks.Add(
+                            ThenAsync(
+                                tcs.Task,
+                                () =>
+                                {
+                                    Assert.Equal(expectedSync ? 42 : 0, tl.Value);
+
+                                    switch (scheduler)
                                     {
-                                        Assert.Equal(expectedSync ? 42 : 0, tl.Value);
-
-                                        switch (scheduler)
-                                        {
-                                            case null:
-                                                Assert.Same(
-                                                    TaskScheduler.Default,
-                                                    TaskScheduler.Current
-                                                );
-                                                Assert.Null(SynchronizationContext.Current);
-                                                break;
-                                            case TaskScheduler ts:
-                                                Assert.Same(ts, TaskScheduler.Current);
-                                                Assert.Null(SynchronizationContext.Current);
-                                                break;
-                                            case SynchronizationContext sc:
-                                                Assert.Same(sc, SynchronizationContext.Current);
-                                                Assert.Same(
-                                                    TaskScheduler.Default,
-                                                    TaskScheduler.Current
-                                                );
-                                                break;
-                                        }
+                                        case null:
+                                            Assert.Same(
+                                                TaskScheduler.Default,
+                                                TaskScheduler.Current
+                                            );
+                                            Assert.Null(SynchronizationContext.Current);
+                                            break;
+                                        case TaskScheduler ts:
+                                            Assert.Same(ts, TaskScheduler.Current);
+                                            Assert.Null(SynchronizationContext.Current);
+                                            break;
+                                        case SynchronizationContext sc:
+                                            Assert.Same(sc, SynchronizationContext.Current);
+                                            Assert.Same(
+                                                TaskScheduler.Default,
+                                                TaskScheduler.Current
+                                            );
+                                            break;
                                     }
-                                )
-                            );
-
-                            async Task ThenAsync(Task task, Action action)
-                            {
-                                if (valueTask)
-                                {
-                                    await new ValueTask(task);
                                 }
-                                else
-                                {
-                                    await task;
-                                }
-                                action();
-                            }
-                        }
-
-                        Assert.All(
-                            tasks,
-                            t => Assert.Equal(TaskStatus.WaitingForActivation, t.Status)
+                            )
                         );
 
-                        tl.Value = 42;
-                        tcs.SetResult();
-                        tl.Value = 0;
+                        async Task ThenAsync(Task task, Action action)
+                        {
+                            if (valueTask)
+                            {
+                                await new ValueTask(task);
+                            }
+                            else
+                            {
+                                await task;
+                            }
+                            action();
+                        }
+                    }
 
-                        SynchronizationContext.SetSynchronizationContext(null);
-                        await Task.WhenAll(tasks);
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    scheduler as TaskScheduler ?? TaskScheduler.Default
-                )
-                .Unwrap();
+                    Assert.All(tasks, t => Assert.Equal(TaskStatus.WaitingForActivation, t.Status));
+
+                    tl.Value = 42;
+                    tcs.SetResult();
+                    tl.Value = 0;
+
+                    SynchronizationContext.SetSynchronizationContext(null);
+                    await Task.WhenAll(tasks);
+                },
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                scheduler as TaskScheduler ?? TaskScheduler.Default
+            ).Unwrap();
         }
 
         [Fact]
@@ -546,10 +545,8 @@ namespace System.Threading.Tasks.Tests
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource().Task.WaitAsync(
-                            timeout,
-                            new CancellationToken(true)
-                        )
+                        new TaskCompletionSource().Task
+                            .WaitAsync(timeout, new CancellationToken(true))
                 );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -559,18 +556,14 @@ namespace System.Threading.Tasks.Tests
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource<int>().Task.WaitAsync(
-                            timeout,
-                            CancellationToken.None
-                        )
+                        new TaskCompletionSource<int>().Task
+                            .WaitAsync(timeout, CancellationToken.None)
                 );
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource<int>().Task.WaitAsync(
-                            timeout,
-                            new CancellationToken(true)
-                        )
+                        new TaskCompletionSource<int>().Task
+                            .WaitAsync(timeout, new CancellationToken(true))
                 );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -981,10 +974,7 @@ namespace System.Threading.Tasks.Tests
             yield return new object[] { LineNumber(), Task.Run(() => nonGeneric), oce };
 
             // A FromAsync Task and Task<int>
-            yield return new object[]
-            {
-                LineNumber(),
-                Task.Factory.FromAsync(
+            yield return new object[] { LineNumber(), Task.Factory.FromAsync(
                     generic,
                     new Action<IAsyncResult>(
                         ar =>
@@ -992,13 +982,8 @@ namespace System.Threading.Tasks.Tests
                             throw oce;
                         }
                     )
-                ),
-                oce
-            };
-            yield return new object[]
-            {
-                LineNumber(),
-                Task<int>.Factory.FromAsync(
+                ), oce };
+            yield return new object[] { LineNumber(), Task<int>.Factory.FromAsync(
                     nonGeneric,
                     new Func<IAsyncResult, int>(
                         ar =>
@@ -1006,9 +991,7 @@ namespace System.Threading.Tasks.Tests
                             throw oce;
                         }
                     )
-                ),
-                oce
-            };
+                ), oce };
 
             // AsyncTaskMethodBuilder
             var atmb = new AsyncTaskMethodBuilder();

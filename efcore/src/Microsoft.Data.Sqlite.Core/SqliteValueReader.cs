@@ -66,11 +66,12 @@ namespace Microsoft.Data.Sqlite
         }
 
         public virtual decimal GetDecimal(int ordinal) =>
-            decimal.Parse(
-                GetString(ordinal),
-                NumberStyles.Number | NumberStyles.AllowExponent,
-                CultureInfo.InvariantCulture
-            );
+            decimal
+                .Parse(
+                    GetString(ordinal),
+                    NumberStyles.Number | NumberStyles.AllowExponent,
+                    CultureInfo.InvariantCulture
+                );
 
         public virtual double GetDouble(int ordinal) =>
             IsDBNull(ordinal)

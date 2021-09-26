@@ -1574,12 +1574,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             decimal result;
             if (
-                !decimal.TryParse(
-                    text,
-                    NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent,
-                    CultureInfo.InvariantCulture,
-                    out result
-                )
+                !decimal
+                    .TryParse(
+                        text,
+                        NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent,
+                        CultureInfo.InvariantCulture,
+                        out result
+                    )
             )
             {
                 //we've already lexed the literal, so the error must be from overflow
@@ -2060,11 +2061,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     // @0x[hexdigit]+
                     const int objectAddressOffset = 2;
                     Debug.Assert(
-                        string.Equals(
-                            info.Text.Substring(0, objectAddressOffset + 1),
-                            "@0x",
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                info.Text.Substring(0, objectAddressOffset + 1),
+                                "@0x",
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     );
                     var valueText = TextWindow.Intern(
                         _identBuffer,

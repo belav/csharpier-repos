@@ -24,9 +24,8 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             SetOptions(Options.WithChangedOption(CacheOptions.RecoverableTreeLengthThreshold, 0));
 
-            var documentOptionsProviderFactories = (
-                (IMefHostExportProvider)Services.HostServices
-            ).GetExports<IDocumentOptionsProviderFactory, OrderableMetadata>();
+            var documentOptionsProviderFactories = ((IMefHostExportProvider)Services.HostServices)
+                .GetExports<IDocumentOptionsProviderFactory, OrderableMetadata>();
 
             RegisterDocumentOptionProviders(documentOptionsProviderFactories);
 

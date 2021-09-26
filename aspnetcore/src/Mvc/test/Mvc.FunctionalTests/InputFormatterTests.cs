@@ -215,8 +215,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
-            var problemDetails =
-                await response.Content.ReadFromJsonAsync<ValidationProblemDetails>();
+            var problemDetails = await response.Content
+                .ReadFromJsonAsync<ValidationProblemDetails>();
             Assert.Collection(
                 problemDetails.Errors,
                 kvp =>

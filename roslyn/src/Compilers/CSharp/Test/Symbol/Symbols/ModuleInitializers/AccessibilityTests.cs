@@ -41,9 +41,9 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 // (6,6): error CS8796: Module initializer method 'M' must be accessible at the module level
                 //     [ModuleInitializer]
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M")
                     .WithLocation(6, 6)
             );
@@ -146,9 +146,9 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 // (8,10): error CS8796: Module initializer method 'M' must be accessible at the module level
                 //         [ModuleInitializer]
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M")
                     .WithLocation(8, 10)
             );
@@ -192,33 +192,33 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 // (7,6): error CS8814: Module initializer method 'M1' must be accessible at the module level
                 //     [ModuleInitializer] // 1
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M1")
                     .WithLocation(7, 6),
                 // (10,6): error CS8814: Module initializer method 'M2' must be accessible at the module level
                 //     [ModuleInitializer] // 2
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M2")
                     .WithLocation(10, 6),
                 // (15,6): error CS8814: Module initializer method 'M3' must be accessible at the module level
                 //     [ModuleInitializer] // 3
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M3")
                     .WithLocation(15, 6),
                 // (18,6): error CS8814: Module initializer method 'M4' must be accessible at the module level
                 //     [ModuleInitializer] // 4
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M4")
                     .WithLocation(18, 6),
                 // (20,6): error CS0579: Duplicate 'ModuleInitializer' attribute
@@ -271,41 +271,41 @@ namespace System.Runtime.CompilerServices
                 // (7,6): error CS8814: Module initializer method 'M1' must be accessible at the module level
                 //     [ModuleInitializer] // 1
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M1")
                     .WithLocation(7, 6),
                 // (10,6): error CS8814: Module initializer method 'M2' must be accessible at the module level
                 //     [ModuleInitializer] // 2
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M2")
                     .WithLocation(10, 6),
                 // (15,6): error CS8814: Module initializer method 'M3' must be accessible at the module level
                 //     [ModuleInitializer] // 3
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M3")
                     .WithLocation(15, 6),
                 // (18,6): error CS8814: Module initializer method 'M4' must be accessible at the module level
                 //     [ModuleInitializer] // 4
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M4")
                     .WithLocation(18, 6),
                 // (20,6): error CS8814: Module initializer method 'M4' must be accessible at the module level
                 //     [ModuleInitializer] // 5
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodMustBeAccessibleOutsideTopLevelType,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M4")
                     .WithLocation(20, 6)
             );

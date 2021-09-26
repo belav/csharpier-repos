@@ -49,15 +49,16 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             CancellationToken cancellationToken
         )
         {
-            var descriptionService = workspace.Services.GetLanguageServices(semanticModel.Language)
+            var descriptionService = workspace.Services
+                .GetLanguageServices(semanticModel.Language)
                 .GetRequiredService<ISymbolDisplayService>();
             var groups = await descriptionService.ToDescriptionGroupsAsync(
-                    workspace,
-                    semanticModel,
-                    span.Start,
-                    symbols,
-                    cancellationToken
-                )
+                workspace,
+                semanticModel,
+                span.Start,
+                symbols,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             using var _1 = ArrayBuilder<QuickInfoSection>.GetInstance(out var sections);
@@ -83,9 +84,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 {
                     // We'll take the existing message and wrap it with a message saying this was returned from the task.
                     var defaultSymbol = "{0}";
-                    var symbolIndex = FeaturesResources.Awaited_task_returns_0.IndexOf(
-                        defaultSymbol
-                    );
+                    var symbolIndex = FeaturesResources.Awaited_task_returns_0
+                        .IndexOf(defaultSymbol);
 
                     var builder = ImmutableArray.CreateBuilder<TaggedText>();
                     builder.AddText(
@@ -245,10 +245,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         )
         {
             if (
-                !workspace.Options.GetOption(
-                    QuickInfoOptions.ShowRemarksInQuickInfo,
-                    semanticModel.Language
-                )
+                !workspace.Options
+                    .GetOption(QuickInfoOptions.ShowRemarksInQuickInfo, semanticModel.Language)
             )
                 return default;
 

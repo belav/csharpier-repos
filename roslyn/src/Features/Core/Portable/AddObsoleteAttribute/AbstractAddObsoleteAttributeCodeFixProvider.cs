@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.AddObsoleteAttribute
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var attribute = compilation.GetTypeByMetadataName(typeof(ObsoleteAttribute).FullName);
             return attribute;
@@ -94,8 +95,8 @@ namespace Microsoft.CodeAnalysis.AddObsoleteAttribute
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             var containers = diagnostics.Select(
-                    d => GetContainer(root, d.Location.FindNode(cancellationToken))
-                )
+                d => GetContainer(root, d.Location.FindNode(cancellationToken))
+            )
                 .WhereNotNull()
                 .ToSet();
 

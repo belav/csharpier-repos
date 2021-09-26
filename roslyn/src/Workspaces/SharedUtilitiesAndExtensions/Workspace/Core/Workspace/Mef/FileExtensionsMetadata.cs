@@ -18,9 +18,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         public IEnumerable<string> Extensions { get; }
 
         public FileExtensionsMetadata(IDictionary<string, object> data) =>
-            this.Extensions = (
-                (IReadOnlyDictionary<string, object>)data
-            ).GetEnumerableMetadata<string>("Extensions");
+            this.Extensions = ((IReadOnlyDictionary<string, object>)data)
+                .GetEnumerableMetadata<string>("Extensions");
 
         public FileExtensionsMetadata(params string[] extensions)
         {

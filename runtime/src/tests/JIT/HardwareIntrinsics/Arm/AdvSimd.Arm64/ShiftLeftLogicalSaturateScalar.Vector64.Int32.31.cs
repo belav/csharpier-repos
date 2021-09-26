@@ -203,10 +203,8 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 fixed (Vector64<Int32>* pFld = &_fld)
                 {
-                    var result = AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar(
-                        AdvSimd.LoadVector64((Int32*)(pFld)),
-                        31
-                    );
+                    var result = AdvSimd.Arm64
+                        .ShiftLeftLogicalSaturateScalar(AdvSimd.LoadVector64((Int32*)(pFld)), 31);
 
                     Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                     testClass.ValidateResult(_fld, testClass._dataTable.outArrayPtr);
@@ -272,10 +270,11 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar(
-                Unsafe.Read<Vector64<Int32>>(_dataTable.inArrayPtr),
-                31
-            );
+            var result = AdvSimd.Arm64
+                .ShiftLeftLogicalSaturateScalar(
+                    Unsafe.Read<Vector64<Int32>>(_dataTable.inArrayPtr),
+                    31
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -285,10 +284,11 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar(
-                AdvSimd.LoadVector64((Int32*)(_dataTable.inArrayPtr)),
-                31
-            );
+            var result = AdvSimd.Arm64
+                .ShiftLeftLogicalSaturateScalar(
+                    AdvSimd.LoadVector64((Int32*)(_dataTable.inArrayPtr)),
+                    31
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -298,7 +298,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(
                     nameof(AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar),
                     new Type[] { typeof(Vector64<Int32>), typeof(byte) }
                 )
@@ -315,7 +316,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(
+            var result = typeof(AdvSimd.Arm64)
+                .GetMethod(
                     nameof(AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar),
                     new Type[] { typeof(Vector64<Int32>), typeof(byte) }
                 )
@@ -344,10 +346,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Int32>* pClsVar = &_clsVar)
             {
-                var result = AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar(
-                    AdvSimd.LoadVector64((Int32*)(pClsVar)),
-                    31
-                );
+                var result = AdvSimd.Arm64
+                    .ShiftLeftLogicalSaturateScalar(AdvSimd.LoadVector64((Int32*)(pClsVar)), 31);
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_clsVar, _dataTable.outArrayPtr);
@@ -395,10 +395,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Int32>* pFld = &test._fld)
             {
-                var result = AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar(
-                    AdvSimd.LoadVector64((Int32*)(pFld)),
-                    31
-                );
+                var result = AdvSimd.Arm64
+                    .ShiftLeftLogicalSaturateScalar(AdvSimd.LoadVector64((Int32*)(pFld)), 31);
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(test._fld, _dataTable.outArrayPtr);
@@ -421,10 +419,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Int32>* pFld = &_fld)
             {
-                var result = AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar(
-                    AdvSimd.LoadVector64((Int32*)(pFld)),
-                    31
-                );
+                var result = AdvSimd.Arm64
+                    .ShiftLeftLogicalSaturateScalar(AdvSimd.LoadVector64((Int32*)(pFld)), 31);
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_fld, _dataTable.outArrayPtr);
@@ -447,10 +443,8 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result = AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar(
-                AdvSimd.LoadVector64((Int32*)(&test._fld)),
-                31
-            );
+            var result = AdvSimd.Arm64
+                .ShiftLeftLogicalSaturateScalar(AdvSimd.LoadVector64((Int32*)(&test._fld)), 31);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld, _dataTable.outArrayPtr);
@@ -561,15 +555,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar)}<Int32>(Vector64<Int32>, 31): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.ShiftLeftLogicalSaturateScalar)}<Int32>(Vector64<Int32>, 31): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"   result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

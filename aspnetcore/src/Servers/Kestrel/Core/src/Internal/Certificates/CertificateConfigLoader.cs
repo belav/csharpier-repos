@@ -162,11 +162,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Certificates
                 }
                 default:
                     throw new InvalidOperationException(
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            CoreStrings.UnrecognizedCertificateKeyOid,
-                            certificate.PublicKey.Oid.Value
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                CoreStrings.UnrecognizedCertificateKeyOid,
+                                certificate.PublicKey.Oid.Value
+                            )
                     );
             }
         }

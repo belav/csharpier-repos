@@ -107,9 +107,8 @@ namespace System.Reflection.TypeLoading.Ecma
 
                 case HandleKind.TypeReference:
                 {
-                    RoDefinitionType outerType = ((TypeReferenceHandle)scope).ResolveTypeRef(
-                        module
-                    );
+                    RoDefinitionType outerType = ((TypeReferenceHandle)scope)
+                        .ResolveTypeRef(module);
                     RoDefinitionType? nestedType = outerType.GetNestedTypeCore(name);
                     return nestedType
                         ?? throw new TypeLoadException(
@@ -138,9 +137,8 @@ namespace System.Reflection.TypeLoading.Ecma
 
                 case HandleKind.ModuleReference:
                 {
-                    string moduleName = ((ModuleReferenceHandle)scope).GetModuleReference(
-                            module.Reader
-                        )
+                    string moduleName = ((ModuleReferenceHandle)scope)
+                        .GetModuleReference(module.Reader)
                         .Name.GetString(module.Reader);
                     RoModule? targetModule = module.GetRoAssembly().GetRoModule(moduleName);
                     if (targetModule == null)

@@ -393,9 +393,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     var graph = solution.GetProjectDependencyGraph();
 
                     if (
-                        solution.Workspace.Options.GetOption(
-                            InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly
-                        )
+                        solution.Workspace.Options
+                            .GetOption(
+                                InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly
+                            )
                     )
                     {
                         return graph.GetProjectsThatDirectlyDependOnThisProject(projectId)

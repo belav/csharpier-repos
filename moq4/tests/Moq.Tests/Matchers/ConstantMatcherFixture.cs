@@ -82,12 +82,12 @@ namespace Moq.Tests.Matchers
                 var mockA = new Mock<object>();
                 var mockB = new Mock<object>();
                 mockA.Setup(
-                        m => m.Equals(It.Is<object>(x => object.ReferenceEquals(x, mockA.Object)))
-                    )
+                    m => m.Equals(It.Is<object>(x => object.ReferenceEquals(x, mockA.Object)))
+                )
                     .Returns(true);
                 mockB.Setup(
-                        m => m.Equals(It.Is<object>(x => object.ReferenceEquals(x, mockB.Object)))
-                    )
+                    m => m.Equals(It.Is<object>(x => object.ReferenceEquals(x, mockB.Object)))
+                )
                     .Returns(true);
                 Assert.True(mockA.Object.Equals(mockA.Object));
                 Assert.False(mockA.Object.Equals(mockB.Object));

@@ -351,9 +351,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 {
                     await longPollingTransport.StartAsync(TestUri, TransferFormat.Binary);
 
-                    await longPollingTransport.Output.WriteAsync(
-                        Encoding.UTF8.GetBytes("Hello World")
-                    );
+                    await longPollingTransport.Output
+                        .WriteAsync(Encoding.UTF8.GetBytes("Hello World"));
 
                     await longPollingTransport.Running.DefaultTimeout();
 
@@ -797,9 +796,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await longPollingTransport.StartAsync(TestUri, TransferFormat.Binary);
 
                     var completedTask = await Task.WhenAny(
-                            completionTcs.Task,
-                            longPollingTransport.Running
-                        )
+                        completionTcs.Task,
+                        longPollingTransport.Running
+                    )
                         .DefaultTimeout();
                     Assert.Equal(completionTcs.Task, completedTask);
                 }
@@ -823,9 +822,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 await longPollingTransport.StartAsync(TestUri, TransferFormat.Binary);
                 await longPollingTransport.StopAsync();
 
-                var deleteRequest = handler.ReceivedRequests.SingleOrDefault(
-                    r => r.Method == HttpMethod.Delete
-                );
+                var deleteRequest = handler.ReceivedRequests
+                    .SingleOrDefault(r => r.Method == HttpMethod.Delete);
                 Assert.NotNull(deleteRequest);
                 Assert.Equal(TestUri, deleteRequest.RequestUri);
             }

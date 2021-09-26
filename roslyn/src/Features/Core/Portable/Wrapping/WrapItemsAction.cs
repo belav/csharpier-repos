@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
             CancellationToken cancellationToken
         )
         {
-            var operations = await base.ComputeOperationsAsync(cancellationToken)
+            var operations = await base
+                .ComputeOperationsAsync(cancellationToken)
                 .ConfigureAwait(false);
             var operationsList = operations.ToList();
 

@@ -98,16 +98,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             };
             request.Headers.Add("X-Pass-Thru", "Some-Value");
             Assert.True(
-                request.Headers.TryAddWithoutValidation(
-                    "X-Invalid-Request-Header",
-                    "Bearer 1234,5678"
-                )
+                request.Headers
+                    .TryAddWithoutValidation("X-Invalid-Request-Header", "Bearer 1234,5678")
             );
             Assert.True(
-                request.Content.Headers.TryAddWithoutValidation(
-                    "X-Invalid-Content-Header",
-                    "Bearer 1234,5678"
-                )
+                request.Content.Headers
+                    .TryAddWithoutValidation("X-Invalid-Content-Header", "Bearer 1234,5678")
             );
             var response = await Client.SendAsync(request);
 
@@ -166,8 +162,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Fact]
         public async Task TestingInfrastructure_WorksWithGenericHost()
         {
-            using var factory =
-                new WebApplicationFactory<GenericHostWebSite.Program>().WithWebHostBuilder(
+            using var factory = new WebApplicationFactory<GenericHostWebSite.Program>()
+                .WithWebHostBuilder(
                     builder =>
                         builder.ConfigureTestServices(
                             s =>

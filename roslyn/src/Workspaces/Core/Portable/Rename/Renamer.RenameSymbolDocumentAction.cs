@@ -32,14 +32,13 @@ namespace Microsoft.CodeAnalysis.Rename
             }
 
             public override string GetDescription(CultureInfo? culture) =>
-                string.Format(
-                    WorkspacesResources.ResourceManager.GetString(
-                        "Rename_0_to_1",
-                        culture ?? WorkspacesResources.Culture
-                    )!,
-                    _analysis.OriginalDocumentName,
-                    _analysis.NewDocumentName
-                );
+                string
+                    .Format(
+                        WorkspacesResources.ResourceManager
+                            .GetString("Rename_0_to_1", culture ?? WorkspacesResources.Culture)!,
+                        _analysis.OriginalDocumentName,
+                        _analysis.NewDocumentName
+                    );
 
             internal override async Task<Solution> GetModifiedSolutionAsync(
                 Document document,
@@ -54,16 +53,16 @@ namespace Microsoft.CodeAnalysis.Rename
                 // even if the document name changed, we're updating the types
                 // that are the same name as the analysis
                 var matchingTypeDeclaration = await GetMatchingTypeDeclarationAsync(
-                        document.WithName(_analysis.OriginalDocumentName),
-                        cancellationToken
-                    )
+                    document.WithName(_analysis.OriginalDocumentName),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (matchingTypeDeclaration is object)
                 {
                     var semanticModel = await document.GetRequiredSemanticModelAsync(
-                            cancellationToken
-                        )
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     var symbol = semanticModel.GetRequiredDeclaredSymbol(
                         matchingTypeDeclaration,
@@ -71,12 +70,12 @@ namespace Microsoft.CodeAnalysis.Rename
                     );
 
                     solution = await RenameSymbolAsync(
-                            solution,
-                            symbol,
-                            _analysis.NewSymbolName,
-                            optionSet,
-                            cancellationToken
-                        )
+                        solution,
+                        symbol,
+                        _analysis.NewSymbolName,
+                        optionSet,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -97,8 +96,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
                 var typeDeclarations = syntaxRoot.DescendantNodesAndSelf(
-                        n => !syntaxFacts.IsMethodBody(n)
-                    )
+                    n => !syntaxFacts.IsMethodBody(n)
+                )
                     .Where(syntaxFacts.IsTypeDeclaration);
                 return typeDeclarations.FirstOrDefault(
                     d =>
@@ -139,9 +138,9 @@ namespace Microsoft.CodeAnalysis.Rename
                 }
 
                 var matchingDeclaration = await GetMatchingTypeDeclarationAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (matchingDeclaration is null)

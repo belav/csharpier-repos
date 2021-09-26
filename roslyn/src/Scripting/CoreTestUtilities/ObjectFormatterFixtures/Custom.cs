@@ -57,9 +57,8 @@ namespace ObjectFormatterFixtures
 
     internal class Signatures
     {
-        public static readonly MethodInfo Arrays = typeof(Signatures).GetMethod(
-            nameof(ArrayParameters)
-        );
+        public static readonly MethodInfo Arrays = typeof(Signatures)
+            .GetMethod(nameof(ArrayParameters));
         public void ArrayParameters(int[] arrayOne, int[,] arrayTwo, int[,,] arrayThree) { }
     }
 

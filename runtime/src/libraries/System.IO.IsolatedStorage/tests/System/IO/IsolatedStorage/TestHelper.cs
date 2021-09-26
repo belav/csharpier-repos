@@ -15,10 +15,8 @@ namespace System.IO.IsolatedStorage
 
         static TestHelper()
         {
-            s_rootDirectoryProperty = typeof(IsolatedStorageFile).GetProperty(
-                "RootDirectory",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            s_rootDirectoryProperty = typeof(IsolatedStorageFile)
+                .GetProperty("RootDirectory", BindingFlags.NonPublic | BindingFlags.Instance);
 
             s_roots = new List<string>();
 

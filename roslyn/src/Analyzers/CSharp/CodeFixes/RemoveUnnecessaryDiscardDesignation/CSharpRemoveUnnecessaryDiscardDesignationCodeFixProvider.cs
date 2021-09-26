@@ -62,10 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
 
             foreach (var diagnostic in diagnostics)
             {
-                var discard = diagnostic.Location.FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var discard = diagnostic.Location
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 switch (discard.Parent)
                 {
                     case DeclarationPatternSyntax declarationPattern:
@@ -77,11 +75,11 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
                                 {
                                     var currentIsPattern = (IsPatternExpressionSyntax)current;
                                     return SyntaxFactory.BinaryExpression(
-                                            SyntaxKind.IsExpression,
-                                            currentIsPattern.Expression,
-                                            currentIsPattern.IsKeyword,
-                                            ((DeclarationPatternSyntax)isPattern.Pattern).Type
-                                        )
+                                        SyntaxKind.IsExpression,
+                                        currentIsPattern.Expression,
+                                        currentIsPattern.IsKeyword,
+                                        ((DeclarationPatternSyntax)isPattern.Pattern).Type
+                                    )
                                         .WithAdditionalAnnotations(Formatter.Annotation);
                                 }
                             );
@@ -92,8 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
                                 declarationPattern,
                                 (current, _) =>
                                     SyntaxFactory.TypePattern(
-                                            ((DeclarationPatternSyntax)current).Type
-                                        )
+                                        ((DeclarationPatternSyntax)current).Type
+                                    )
                                         .WithAdditionalAnnotations(Formatter.Annotation)
                             );
                         }
@@ -102,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
                         editor.ReplaceNode(
                             recursivePattern,
                             (current, _) =>
-                                ((RecursivePatternSyntax)current).WithDesignation(null)
+                                ((RecursivePatternSyntax)current)
+                                    .WithDesignation(null)
                                     .WithAdditionalAnnotations(Formatter.Annotation)
                         );
                         break;

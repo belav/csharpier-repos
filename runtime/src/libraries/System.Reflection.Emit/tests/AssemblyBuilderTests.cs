@@ -82,9 +82,8 @@ namespace System.Reflection.Emit.Tests
                 yield return new object[] { data[0], data[1], null };
                 yield return new object[] { data[0], data[1], new CustomAttributeBuilder[0] };
 
-                ConstructorInfo constructor = typeof(IntClassAttribute).GetConstructor(
-                    new Type[] { typeof(int) }
-                );
+                ConstructorInfo constructor = typeof(IntClassAttribute)
+                    .GetConstructor(new Type[] { typeof(int) });
                 yield return new object[]
                 {
                     data[0],
@@ -328,9 +327,8 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_ConstructorBuidler_ByteArray(AssemblyBuilderAccess access)
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly(access: access);
-            ConstructorInfo constructor = typeof(BoolAllAttribute).GetConstructor(
-                new Type[] { typeof(bool) }
-            );
+            ConstructorInfo constructor = typeof(BoolAllAttribute)
+                .GetConstructor(new Type[] { typeof(bool) });
             assembly.SetCustomAttribute(constructor, new byte[] { 1, 0, 1 });
 
             IEnumerable<Attribute> attributes = assembly.GetCustomAttributes();
@@ -351,9 +349,8 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_ConstructorBuidler_ByteArray_NullByteArray_ThrowsArgumentNullException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            ConstructorInfo constructor = typeof(IntAllAttribute).GetConstructor(
-                new Type[] { typeof(int) }
-            );
+            ConstructorInfo constructor = typeof(IntAllAttribute)
+                .GetConstructor(new Type[] { typeof(int) });
             AssertExtensions.Throws<ArgumentNullException>(
                 "binaryAttribute",
                 () => assembly.SetCustomAttribute(constructor, null)
@@ -366,9 +363,8 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_CustomAttributeBuilder(AssemblyBuilderAccess access)
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly(access: access);
-            ConstructorInfo constructor = typeof(IntClassAttribute).GetConstructor(
-                new Type[] { typeof(int) }
-            );
+            ConstructorInfo constructor = typeof(IntClassAttribute)
+                .GetConstructor(new Type[] { typeof(int) });
             CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(
                 constructor,
                 new object[] { 5 }
@@ -492,10 +488,8 @@ namespace System.Reflection.Emit.Tests
 
             var ilg = mb.GetILGenerator();
 
-            var callee = typeof(AssemblyTests).GetMethod(
-                "SamplePrivateMethod",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            var callee = typeof(AssemblyTests)
+                .GetMethod("SamplePrivateMethod", BindingFlags.Static | BindingFlags.NonPublic);
 
             ilg.Emit(OpCodes.Call, callee);
             ilg.Emit(OpCodes.Ret);
@@ -522,10 +516,8 @@ namespace System.Reflection.Emit.Tests
 
             var ilg = mb.GetILGenerator();
 
-            var callee = typeof(AssemblyTests).GetMethod(
-                "SampleInternalMethod",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            var callee = typeof(AssemblyTests)
+                .GetMethod("SampleInternalMethod", BindingFlags.Static | BindingFlags.NonPublic);
 
             ilg.Emit(OpCodes.Call, callee);
             ilg.Emit(OpCodes.Ret);

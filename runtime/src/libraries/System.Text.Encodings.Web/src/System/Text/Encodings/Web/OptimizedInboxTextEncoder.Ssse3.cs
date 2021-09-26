@@ -91,9 +91,9 @@ namespace System.Text.Encodings.Web
                 // Everything except the low byte of pmovksmb contains garbage and must be discarded.
 
                 var packed = Sse2.LoadScalarVector128(
-                        ( /* unaligned */
-                        ulong*)(pData + i)
-                    )
+                    ( /* unaligned */
+                    ulong*)(pData + i)
+                )
                     .AsByte();
                 var allowedCodePointsShuffled = Ssse3.Shuffle(allowedCodePoints, packed);
                 var vecPowersOfTwoShuffled = Ssse3.Shuffle(
@@ -117,9 +117,9 @@ namespace System.Text.Encodings.Web
                 // Everything except the low nibble of pmovksmb contains garbage and must be discarded.
 
                 var packed = Sse2.LoadScalarVector128(
-                        ( /* unaligned */
-                        uint*)(pData + i)
-                    )
+                    ( /* unaligned */
+                    uint*)(pData + i)
+                )
                     .AsByte();
                 var allowedCodePointsShuffled = Ssse3.Shuffle(allowedCodePoints, packed);
                 var vecPowersOfTwoShuffled = Ssse3.Shuffle(
@@ -263,9 +263,9 @@ namespace System.Text.Encodings.Web
 
                 var packed = Sse2.PackUnsignedSaturate(
                     Sse2.LoadScalarVector128(
-                            ( /* unaligned */
-                            ulong*)(pData + i)
-                        )
+                        ( /* unaligned */
+                        ulong*)(pData + i)
+                    )
                         .AsInt16(),
                     vecZero.AsInt16()
                 );

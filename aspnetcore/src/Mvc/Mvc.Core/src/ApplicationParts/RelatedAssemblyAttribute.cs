@@ -106,11 +106,12 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             {
                 var attribute = attributes[i];
                 if (
-                    string.Equals(
-                        assemblyName,
-                        attribute.AssemblyFileName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            assemblyName,
+                            attribute.AssemblyFileName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     throw new InvalidOperationException(

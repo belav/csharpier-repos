@@ -29,37 +29,34 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.FunctionalTests
         {
             // Arrange
             var client = Factory.WithWebHostBuilder(
-                    builder =>
-                        builder.ConfigureTestServices(
-                            services =>
-                            {
-                                services.AddAuthentication(
-                                        AzureADDefaults.BearerAuthenticationScheme
-                                    )
-                                    .AddAzureADBearer(
-                                        o =>
-                                        {
-                                            o.Instance = "https://login.microsoftonline.com/";
-                                            o.Domain = "test.onmicrosoft.com";
-                                            o.ClientId = "ClientId";
-                                            o.TenantId = "TenantId";
-                                        }
-                                    );
-
-                                services.Configure<JwtBearerOptions>(
-                                    AzureADDefaults.JwtBearerAuthenticationScheme,
+                builder =>
+                    builder.ConfigureTestServices(
+                        services =>
+                        {
+                            services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
+                                .AddAzureADBearer(
                                     o =>
                                     {
-                                        o.Configuration = new OpenIdConnectConfiguration()
-                                        {
-                                            Issuer = "https://www.example.com",
-                                        };
+                                        o.Instance = "https://login.microsoftonline.com/";
+                                        o.Domain = "test.onmicrosoft.com";
+                                        o.ClientId = "ClientId";
+                                        o.TenantId = "TenantId";
                                     }
                                 );
-                            }
-                        )
-                )
-                .CreateDefaultClient();
+
+                            services.Configure<JwtBearerOptions>(
+                                AzureADDefaults.JwtBearerAuthenticationScheme,
+                                o =>
+                                {
+                                    o.Configuration = new OpenIdConnectConfiguration()
+                                    {
+                                        Issuer = "https://www.example.com",
+                                    };
+                                }
+                            );
+                        }
+                    )
+            ).CreateDefaultClient();
 
             // Act
             var response = await client.GetAsync("/api/get");
@@ -73,37 +70,36 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.FunctionalTests
         {
             // Arrange
             var client = Factory.WithWebHostBuilder(
-                    builder =>
-                        builder.ConfigureTestServices(
-                            services =>
-                            {
-                                services.AddAuthentication(
-                                        AzureADB2CDefaults.BearerAuthenticationScheme
-                                    )
-                                    .AddAzureADB2CBearer(
-                                        o =>
-                                        {
-                                            o.Instance = "https://login.microsoftonline.com/";
-                                            o.Domain = "test.onmicrosoft.com";
-                                            o.ClientId = "ClientId";
-                                            o.SignUpSignInPolicyId = "B2c_1_SiSu";
-                                        }
-                                    );
-
-                                services.Configure<JwtBearerOptions>(
-                                    AzureADB2CDefaults.JwtBearerAuthenticationScheme,
+                builder =>
+                    builder.ConfigureTestServices(
+                        services =>
+                        {
+                            services.AddAuthentication(
+                                AzureADB2CDefaults.BearerAuthenticationScheme
+                            )
+                                .AddAzureADB2CBearer(
                                     o =>
                                     {
-                                        o.Configuration = new OpenIdConnectConfiguration()
-                                        {
-                                            Issuer = "https://www.example.com",
-                                        };
+                                        o.Instance = "https://login.microsoftonline.com/";
+                                        o.Domain = "test.onmicrosoft.com";
+                                        o.ClientId = "ClientId";
+                                        o.SignUpSignInPolicyId = "B2c_1_SiSu";
                                     }
                                 );
-                            }
-                        )
-                )
-                .CreateDefaultClient();
+
+                            services.Configure<JwtBearerOptions>(
+                                AzureADB2CDefaults.JwtBearerAuthenticationScheme,
+                                o =>
+                                {
+                                    o.Configuration = new OpenIdConnectConfiguration()
+                                    {
+                                        Issuer = "https://www.example.com",
+                                    };
+                                }
+                            );
+                        }
+                    )
+            ).CreateDefaultClient();
 
             // Act
             var response = await client.GetAsync("/api/get");

@@ -264,26 +264,31 @@ namespace Microsoft.EntityFrameworkCore
             Validate(modelBuilder);
 
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity1))
+                modelBuilder.Model
+                    .FindEntityType(typeof(AbstractBaseEntity1))
                     .FindProperty("BaseClassProperty")
             );
             Assert.NotNull(
-                modelBuilder.Model.FindEntityType(typeof(BaseEntity1))
+                modelBuilder.Model
+                    .FindEntityType(typeof(BaseEntity1))
                     .FindProperty("BaseClassProperty")
             );
             Assert.NotNull(
                 modelBuilder.Model.FindEntityType(typeof(Unit1)).FindProperty("BaseClassProperty")
             );
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity1))
+                modelBuilder.Model
+                    .FindEntityType(typeof(AbstractBaseEntity1))
                     .FindProperty("VirtualBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(BaseEntity1))
+                modelBuilder.Model
+                    .FindEntityType(typeof(BaseEntity1))
                     .FindProperty("VirtualBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(Unit1))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Unit1))
                     .FindProperty("VirtualBaseClassProperty")
             );
         }
@@ -327,15 +332,18 @@ namespace Microsoft.EntityFrameworkCore
             Validate(modelBuilder);
 
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity2))
+                modelBuilder.Model
+                    .FindEntityType(typeof(AbstractBaseEntity2))
                     .FindProperty("VirtualBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(BaseEntity2))
+                modelBuilder.Model
+                    .FindEntityType(typeof(BaseEntity2))
                     .FindProperty("VirtualBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(Unit2))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Unit2))
                     .FindProperty("VirtualBaseClassProperty")
             );
         }
@@ -379,12 +387,14 @@ namespace Microsoft.EntityFrameworkCore
             Validate(modelBuilder);
 
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity3))
+                modelBuilder.Model
+                    .FindEntityType(typeof(AbstractBaseEntity3))
                     .FindProperty("AbstractBaseClassProperty")
             );
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity3)));
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(Unit3))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Unit3))
                     .FindProperty("AbstractBaseClassProperty")
             );
         }
@@ -398,7 +408,8 @@ namespace Microsoft.EntityFrameworkCore
             modelBuilder.Entity<BaseEntity3>();
 
             Assert.NotNull(
-                modelBuilder.Model.FindEntityType(typeof(Unit3))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Unit3))
                     .FindProperty("VirtualBaseClassProperty")
             );
 
@@ -419,7 +430,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity3)));
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity3)));
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(Unit3))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Unit3))
                     .FindProperty("VirtualBaseClassProperty")
             );
         }
@@ -464,15 +476,18 @@ namespace Microsoft.EntityFrameworkCore
             Validate(modelBuilder);
 
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity3))
+                modelBuilder.Model
+                    .FindEntityType(typeof(AbstractBaseEntity3))
                     .FindProperty("AbstractBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(BaseEntity3))
+                modelBuilder.Model
+                    .FindEntityType(typeof(BaseEntity3))
                     .FindProperty("AbstractBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(Unit3))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Unit3))
                     .FindProperty("AbstractBaseClassProperty")
             );
         }
@@ -490,7 +505,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity2)));
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity2)));
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(Unit2))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Unit2))
                     .FindProperty("VirtualBaseClassProperty")
             );
         }
@@ -509,7 +525,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity1)));
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity1)));
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(Unit1))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Unit1))
                     .FindProperty("VirtualBaseClassProperty")
             );
         }
@@ -527,7 +544,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity5)));
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(Unit5)));
             Assert.Null(
-                modelBuilder.Model.FindEntityType(typeof(DifferentUnit5))
+                modelBuilder.Model
+                    .FindEntityType(typeof(DifferentUnit5))
                     .FindProperty("VirtualBaseClassProperty")
             );
         }
@@ -880,8 +898,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(LogLevel.Warning, logEntry.Level);
             Assert.Equal(
                 CoreResources.LogConflictingKeylessAndKeyAttributes(
-                        new TestLogger<TestLoggingDefinitions>()
-                    )
+                    new TestLogger<TestLoggingDefinitions>()
+                )
                     .GenerateMessage("NotAKey", nameof(KeylessAndKeyAttributes)),
                 logEntry.Message
             );
@@ -1949,7 +1967,8 @@ namespace Microsoft.EntityFrameworkCore
 
         protected class Book
         {
-            public static readonly PropertyInfo BookdDetailsNavigation = typeof(Book).GetTypeInfo()
+            public static readonly PropertyInfo BookdDetailsNavigation = typeof(Book)
+                .GetTypeInfo()
                 .GetDeclaredProperty("Details");
 
             public int Id { get; set; }
@@ -2171,8 +2190,8 @@ namespace Microsoft.EntityFrameworkCore
                 CoreStrings.WarningAsErrorTemplate(
                     CoreEventId.MultipleInversePropertiesSameTargetWarning,
                     CoreResources.LogMultipleInversePropertiesSameTarget(
-                            new TestLogger<TestLoggingDefinitions>()
-                        )
+                        new TestLogger<TestLoggingDefinitions>()
+                    )
                         .GenerateMessage(
                             $"{nameof(MultipleAnswersRepeatingInverse)}.{nameof(MultipleAnswersRepeatingInverse.Answers)},"
                                 + $" {nameof(MultipleAnswersInverse)}.{nameof(MultipleAnswersInverse.Answers)}",
@@ -2224,8 +2243,8 @@ namespace Microsoft.EntityFrameworkCore
                 CoreStrings.WarningAsErrorTemplate(
                     CoreEventId.MultipleInversePropertiesSameTargetWarning,
                     CoreResources.LogMultipleInversePropertiesSameTarget(
-                            new TestLogger<TestLoggingDefinitions>()
-                        )
+                        new TestLogger<TestLoggingDefinitions>()
+                    )
                         .GenerateMessage(
                             $"{nameof(AmbiguousInversePropertyRightDerived)}.{nameof(AmbiguousInversePropertyRightDerived.DerivedLefts)},"
                                 + $" {nameof(AmbiguousInversePropertyRight)}.{nameof(AmbiguousInversePropertyRight.BaseLefts)}",
@@ -2297,8 +2316,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(LogLevel.Warning, logEntry.Level);
             Assert.Equal(
                 CoreResources.LogForeignKeyAttributesOnBothProperties(
-                        new TestLogger<TestLoggingDefinitions>()
-                    )
+                    new TestLogger<TestLoggingDefinitions>()
+                )
                     .GenerateMessage(
                         nameof(PostDetails.Post),
                         nameof(PostDetails),
@@ -2346,8 +2365,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(LogLevel.Warning, logEntry.Level);
             Assert.Equal(
                 CoreResources.LogForeignKeyAttributesOnBothNavigations(
-                        new TestLogger<TestLoggingDefinitions>()
-                    )
+                    new TestLogger<TestLoggingDefinitions>()
+                )
                     .GenerateMessage(
                         nameof(Post),
                         nameof(Post.Author),
@@ -2390,8 +2409,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(LogLevel.Warning, logEntry.Level);
             Assert.Equal(
                 CoreResources.LogConflictingForeignKeyAttributesOnNavigationAndProperty(
-                        new TestLogger<TestLoggingDefinitions>()
-                    )
+                    new TestLogger<TestLoggingDefinitions>()
+                )
                     .GenerateMessage(
                         nameof(Author),
                         nameof(Author.AuthorDetails),
@@ -2899,12 +2918,13 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .ConfigureWarnings(
                         c =>
                             c.Log(
-                                    CoreEventId.ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning
-                                )
+                                CoreEventId.ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning
+                            )
                                 .Log(CoreEventId.ForeignKeyAttributesOnBothNavigationsWarning)
                                 .Log(CoreEventId.ForeignKeyAttributesOnBothPropertiesWarning)
                                 .Log(CoreEventId.ConflictingKeylessAndKeyAttributesWarning)

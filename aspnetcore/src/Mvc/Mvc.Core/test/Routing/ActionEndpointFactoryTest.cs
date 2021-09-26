@@ -346,8 +346,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             RequestDelegate del = context => Task.CompletedTask;
             var requestDelegateFactory = new Mock<IRequestDelegateFactory>();
             requestDelegateFactory.Setup(
-                    m => m.CreateRequestDelegate(action, It.IsAny<RouteValueDictionary>())
-                )
+                m => m.CreateRequestDelegate(action, It.IsAny<RouteValueDictionary>())
+            )
                 .Returns(del);
 
             // Act

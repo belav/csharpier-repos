@@ -36,13 +36,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsInParameterModifierContext(int position, CSharpSyntaxContext context)
         {
             if (
-                context.SyntaxTree.IsParameterModifierContext(
-                    position,
-                    context.LeftToken,
-                    includeOperators: true,
-                    out var parameterIndex,
-                    out var previousModifier
-                )
+                context.SyntaxTree
+                    .IsParameterModifierContext(
+                        position,
+                        context.LeftToken,
+                        includeOperators: true,
+                        out var parameterIndex,
+                        out var previousModifier
+                    )
             )
             {
                 if (previousModifier == SyntaxKind.None)
@@ -154,15 +155,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     //   join x |
                     if (
                         joinClause.Type != null
-                        && joinClause.Type.IsKind(
-                            SyntaxKind.IdentifierName,
-                            out IdentifierNameSyntax joinIdentifier
-                        )
+                        && joinClause.Type
+                            .IsKind(
+                                SyntaxKind.IdentifierName,
+                                out IdentifierNameSyntax joinIdentifier
+                            )
                         && token == joinIdentifier.Identifier
-                        && !joinClause.Type.IsPotentialTypeName(
-                            context.SemanticModel,
-                            cancellationToken
-                        )
+                        && !joinClause.Type
+                            .IsPotentialTypeName(context.SemanticModel, cancellationToken)
                     )
                     {
                         return true;

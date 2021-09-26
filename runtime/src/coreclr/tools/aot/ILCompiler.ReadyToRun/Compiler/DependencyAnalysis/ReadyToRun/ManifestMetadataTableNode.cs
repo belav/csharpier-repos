@@ -85,7 +85,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (!_nodeFactory.CompilationModuleGroup.IsCompositeBuildMode)
             {
                 MetadataReader mdReader =
-                    _nodeFactory.CompilationModuleGroup.CompilationModuleSet.Single().MetadataReader;
+                    _nodeFactory.CompilationModuleGroup.CompilationModuleSet
+                        .Single().MetadataReader;
                 _assemblyRefCount = mdReader.GetTableRowCount(TableIndex.AssemblyRef) + 1;
 
                 if (!_nodeFactory.CompilationModuleGroup.IsInputBubble)
@@ -291,9 +292,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             byte[] manifestAssemblyMvidTable = new byte[ManifestAssemblyMvidTableSize];
             for (int i = 0; i < _manifestAssemblyMvids.Count; i++)
             {
-                _manifestAssemblyMvids[i].TryWriteBytes(
-                    new Span<byte>(manifestAssemblyMvidTable, GuidByteSize * i, GuidByteSize)
-                );
+                _manifestAssemblyMvids[i]
+                    .TryWriteBytes(
+                        new Span<byte>(manifestAssemblyMvidTable, GuidByteSize * i, GuidByteSize)
+                    );
             }
             return manifestAssemblyMvidTable;
         }

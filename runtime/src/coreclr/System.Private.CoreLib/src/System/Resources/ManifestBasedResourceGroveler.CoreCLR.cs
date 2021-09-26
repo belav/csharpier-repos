@@ -15,11 +15,8 @@ namespace System.Resources
             Version? version
         )
         {
-            return ((RuntimeAssembly)mainAssembly).InternalGetSatelliteAssembly(
-                culture,
-                version,
-                throwOnFileNotFound: false
-            );
+            return ((RuntimeAssembly)mainAssembly)
+                .InternalGetSatelliteAssembly(culture, version, throwOnFileNotFound: false);
         }
     }
 }

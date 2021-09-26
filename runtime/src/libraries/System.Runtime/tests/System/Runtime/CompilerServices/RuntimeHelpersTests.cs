@@ -163,7 +163,8 @@ namespace System.Runtime.CompilerServices.Tests
 
             // Instantiated method without instantiation is valid
             RuntimeHelpers.PrepareMethod(
-                typeof(Array).GetMethod("Resize")
+                typeof(Array)
+                    .GetMethod("Resize")
                     .MakeGenericMethod(new Type[] { typeof(TestStruct) }).MethodHandle,
                 null
             );
@@ -282,10 +283,8 @@ namespace System.Runtime.CompilerServices.Tests
                 }; // shared by generic instantiations
             }
 
-            Type comObjType = typeof(object).Assembly.GetType(
-                "System.__ComObject",
-                throwOnError: false
-            );
+            Type comObjType = typeof(object).Assembly
+                .GetType("System.__ComObject", throwOnError: false);
             if (comObjType != null)
             {
                 yield return new[] { comObjType, typeof(NotSupportedException) }; // COM type

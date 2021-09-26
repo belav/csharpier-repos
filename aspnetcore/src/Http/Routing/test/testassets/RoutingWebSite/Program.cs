@@ -62,22 +62,21 @@ namespace RoutingWebSite
             }
 
             return new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel()
-                            .UseIISIntegration()
-                            .UseContentRoot(Environment.CurrentDirectory)
-                            .UseStartup(startupType)
-                            .UseTestServer();
-                    }
-                )
-                .ConfigureLogging(
-                    b =>
-                    {
-                        b.AddConsole();
-                        b.SetMinimumLevel(LogLevel.Critical);
-                    }
-                );
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel()
+                        .UseIISIntegration()
+                        .UseContentRoot(Environment.CurrentDirectory)
+                        .UseStartup(startupType)
+                        .UseTestServer();
+                }
+            ).ConfigureLogging(
+                b =>
+                {
+                    b.AddConsole();
+                    b.SetMinimumLevel(LogLevel.Critical);
+                }
+            );
         }
     }
 }

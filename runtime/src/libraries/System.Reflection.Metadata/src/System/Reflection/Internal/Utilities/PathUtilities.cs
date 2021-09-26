@@ -25,7 +25,8 @@ namespace System.Reflection.Metadata
                         Array.IndexOf(Path.GetInvalidFileNameChars(), '*') >= 0
                             ? DirectorySeparatorChar
                             : AltDirectorySeparatorChar
-                    ).ToString();
+                    )
+                        .ToString();
                 }
 
                 return s_platformSpecificDirectorySeparator;

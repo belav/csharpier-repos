@@ -328,9 +328,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 typeof(ClassWithMetadataOnAnotherClass)
             );
             PropertyDescriptorCollection properties = provider.GetTypeDescriptor(
-                    typeof(ClassWithMetadataOnAnotherClass),
-                    null
-                )
+                typeof(ClassWithMetadataOnAnotherClass),
+                null
+            )
                 .GetProperties();
             PropertyDescriptor descriptor = properties[
                 nameof(ClassWithMetadataOnAnotherClass.FirstName)
@@ -347,9 +347,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 typeof(ClassWithMetadataOnAnotherClass)
             );
             PropertyDescriptorCollection properties = provider.GetTypeDescriptor(
-                    typeof(ClassWithMetadataOnAnotherClass),
-                    null
-                )
+                typeof(ClassWithMetadataOnAnotherClass),
+                null
+            )
                 .GetProperties();
             PropertyDescriptor descriptor = properties[
                 nameof(ClassWithMetadataOnAnotherClass.FirstName)
@@ -368,9 +368,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 typeof(ClassWithMetadataOnAnotherClass)
             );
             PropertyDescriptorCollection properties = provider.GetTypeDescriptor(
-                    typeof(ClassWithMetadataOnAnotherClass),
-                    null
-                )
+                typeof(ClassWithMetadataOnAnotherClass),
+                null
+            )
                 .GetProperties();
             PropertyDescriptor descriptor = properties[
                 nameof(ClassWithMetadataOnAnotherClass.FirstName)
@@ -389,9 +389,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 typeof(ClassWithMetadataOnAnotherClass)
             );
             PropertyDescriptorCollection properties = provider.GetTypeDescriptor(
-                    typeof(ClassWithMetadataOnAnotherClass),
-                    null
-                )
+                typeof(ClassWithMetadataOnAnotherClass),
+                null
+            )
                 .GetProperties();
             PropertyDescriptor descriptor = properties[
                 nameof(ClassWithMetadataOnAnotherClass.FirstName)
@@ -408,9 +408,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 typeof(ClassWithMetadataOnAnotherClass)
             );
             PropertyDescriptorCollection properties = provider.GetTypeDescriptor(
-                    typeof(ClassWithMetadataOnAnotherClass),
-                    null
-                )
+                typeof(ClassWithMetadataOnAnotherClass),
+                null
+            )
                 .GetProperties();
             PropertyDescriptor descriptor = properties[
                 nameof(ClassWithMetadataOnAnotherClass.FirstName)
@@ -427,9 +427,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 typeof(ClassWithMetadataOnAnotherClass)
             );
             PropertyDescriptorCollection properties = provider.GetTypeDescriptor(
-                    typeof(ClassWithMetadataOnAnotherClass),
-                    null
-                )
+                typeof(ClassWithMetadataOnAnotherClass),
+                null
+            )
                 .GetProperties();
             PropertyDescriptor descriptor = properties[
                 nameof(ClassWithMetadataOnAnotherClass.FirstName)
@@ -450,9 +450,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 typeof(ClassWithMetadataOnAnotherClass)
             );
             PropertyDescriptorCollection properties = provider.GetTypeDescriptor(
-                    typeof(ClassWithMetadataOnAnotherClass),
-                    null
-                )
+                typeof(ClassWithMetadataOnAnotherClass),
+                null
+            )
                 .GetProperties();
             PropertyDescriptor descriptor = properties[
                 nameof(ClassWithMetadataOnAnotherClass.FirstName)

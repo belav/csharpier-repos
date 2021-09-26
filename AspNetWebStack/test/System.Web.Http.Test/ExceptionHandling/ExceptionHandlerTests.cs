@@ -35,12 +35,12 @@ namespace System.Web.Http.ExceptionHandling
             Task expectedTask = CreateCompletedTask();
             mock.Setup(h => h.ShouldHandle(It.IsAny<ExceptionHandlerContext>())).Returns(true);
             mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(expectedTask);
 
             IExceptionHandler product = mock.Object;

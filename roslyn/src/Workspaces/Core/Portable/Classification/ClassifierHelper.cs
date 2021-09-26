@@ -45,18 +45,18 @@ namespace Microsoft.CodeAnalysis.Classification
             try
             {
                 await classificationService.AddSyntacticClassificationsAsync(
-                        document,
-                        span,
-                        syntaxSpans,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    syntaxSpans,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 await classificationService.AddSemanticClassificationsAsync(
-                        document,
-                        span,
-                        semanticSpans,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    semanticSpans,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // MergeClassifiedSpans will ultimately filter multiple classifications for the same
@@ -150,9 +150,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 {
                     var isAdditiveClassification =
                         spans[i - 1].TextSpan == span.TextSpan
-                        && ClassificationTypeNames.AdditiveTypeNames.Contains(
-                            span.ClassificationType
-                        );
+                        && ClassificationTypeNames.AdditiveTypeNames
+                            .Contains(span.ClassificationType);
 
                     // Additive classifications are intended to overlap so do not ignore it.
                     if (

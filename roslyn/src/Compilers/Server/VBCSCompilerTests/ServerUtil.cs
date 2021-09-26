@@ -82,11 +82,11 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         )
         {
             using var client = await BuildServerConnection.TryConnectToServerAsync(
-                    PipeName,
-                    Timeout.Infinite,
-                    Logger,
-                    cancellationToken
-                )
+                PipeName,
+                Timeout.Infinite,
+                Logger,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             await request.WriteAsync(client).ConfigureAwait(false);
             return await BuildResponse.ReadAsync(client).ConfigureAwait(false);

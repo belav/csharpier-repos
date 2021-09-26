@@ -116,12 +116,13 @@ namespace System.Runtime.CompilerServices
                     // We're targeting a custom scheduler, so queue a task.
                     else
                     {
-                        Task.Factory.StartNew(
-                            continuation,
-                            default,
-                            TaskCreationOptions.PreferFairness,
-                            scheduler
-                        );
+                        Task.Factory
+                            .StartNew(
+                                continuation,
+                                default,
+                                TaskCreationOptions.PreferFairness,
+                                scheduler
+                            );
                     }
                 }
             }
@@ -154,13 +155,14 @@ namespace System.Runtime.CompilerServices
                     }
                     else
                     {
-                        Task.Factory.StartNew(
-                            static s => ((IAsyncStateMachineBox)s!).MoveNext(),
-                            box,
-                            default,
-                            TaskCreationOptions.PreferFairness,
-                            scheduler
-                        );
+                        Task.Factory
+                            .StartNew(
+                                static s => ((IAsyncStateMachineBox)s!).MoveNext(),
+                                box,
+                                default,
+                                TaskCreationOptions.PreferFairness,
+                                scheduler
+                            );
                     }
                 }
             }
@@ -174,11 +176,12 @@ namespace System.Runtime.CompilerServices
                 int continuationId = Task.NewId();
                 Task? currentTask = Task.InternalCurrent;
                 // fire the correlation ETW event
-                TplEventSource.Log.AwaitTaskContinuationScheduled(
-                    TaskScheduler.Current.Id,
-                    (currentTask != null) ? currentTask.Id : 0,
-                    continuationId
-                );
+                TplEventSource.Log
+                    .AwaitTaskContinuationScheduled(
+                        TaskScheduler.Current.Id,
+                        (currentTask != null) ? currentTask.Id : 0,
+                        continuationId
+                    );
 
                 return AsyncMethodBuilderCore.CreateContinuationWrapper(
                     continuation,

@@ -130,11 +130,8 @@ namespace System.Xml
                 }
                 else
                 {
-                    return XmlUntypedConverter.Untyped.ChangeType(
-                        typedValue,
-                        returnType,
-                        namespaceResolver
-                    );
+                    return XmlUntypedConverter.Untyped
+                        .ChangeType(typedValue, returnType, namespaceResolver);
                 }
             }
             catch (FormatException e)
@@ -267,19 +264,13 @@ namespace System.Xml
                         typedValue = originalStringValue;
                     }
 
-                    return xmlType.ValueConverter.ChangeType(
-                        typedValue,
-                        returnType,
-                        namespaceResolver
-                    );
+                    return xmlType.ValueConverter
+                        .ChangeType(typedValue, returnType, namespaceResolver);
                 }
                 else
                 {
-                    return XmlUntypedConverter.Untyped.ChangeType(
-                        typedValue,
-                        returnType,
-                        namespaceResolver
-                    );
+                    return XmlUntypedConverter.Untyped
+                        .ChangeType(typedValue, returnType, namespaceResolver);
                 }
             }
             catch (FormatException e)
@@ -571,10 +562,10 @@ namespace System.Xml
             // call to the helper
             Debug.Assert(_readBinaryHelper != null);
             int readCount = await _readBinaryHelper.ReadElementContentAsBase64Async(
-                    buffer,
-                    index,
-                    count
-                )
+                buffer,
+                index,
+                count
+            )
                 .ConfigureAwait(false);
 
             // set OnReadBinaryContent state again and return
@@ -610,10 +601,10 @@ namespace System.Xml
             // call to the helper
             Debug.Assert(_readBinaryHelper != null);
             int readCount = await _readBinaryHelper.ReadElementContentAsBinHexAsync(
-                    buffer,
-                    index,
-                    count
-                )
+                buffer,
+                index,
+                count
+            )
                 .ConfigureAwait(false);
 
             // set OnReadBinaryContent state again and return

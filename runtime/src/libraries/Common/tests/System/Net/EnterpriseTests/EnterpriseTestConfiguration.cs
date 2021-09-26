@@ -10,9 +10,10 @@ namespace System.Net.Test.Common
         public const string AlternativeService = "http://altweb.linux.contoso.com:8080";
 
         public static bool Enabled =>
-            !string.IsNullOrEmpty(
-                Environment.GetEnvironmentVariable("DOTNET_RUNTIME_ENTERPRISETESTS_ENABLED")
-            );
+            !string
+                .IsNullOrEmpty(
+                    Environment.GetEnvironmentVariable("DOTNET_RUNTIME_ENTERPRISETESTS_ENABLED")
+                );
         public static NetworkCredential ValidNetworkCredentials =>
             new NetworkCredential("user1", "password");
         public static NetworkCredential InvalidNetworkCredentials =>

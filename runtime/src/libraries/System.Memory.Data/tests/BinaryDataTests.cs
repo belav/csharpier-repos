@@ -272,9 +272,8 @@ namespace System.Tests
                 input.Length - bufferOffset
             );
             MemoryStream stream = new MemoryStream(buffer.Array, buffer.Offset, buffer.Count);
-            var payload = new ReadOnlyMemory<byte>(buffer.Array, buffer.Offset, buffer.Count).Slice(
-                (int)streamStart
-            );
+            var payload = new ReadOnlyMemory<byte>(buffer.Array, buffer.Offset, buffer.Count)
+                .Slice((int)streamStart);
 
             stream.Position = streamStart;
             BinaryData data = BinaryData.FromStream(stream);
@@ -306,9 +305,8 @@ namespace System.Tests
             MemoryStream stream = new MemoryStream();
             stream.Write(buffer.Array, buffer.Offset, buffer.Count);
 
-            var payload = new ReadOnlyMemory<byte>(buffer.Array, buffer.Offset, buffer.Count).Slice(
-                (int)streamStart
-            );
+            var payload = new ReadOnlyMemory<byte>(buffer.Array, buffer.Offset, buffer.Count)
+                .Slice((int)streamStart);
 
             stream.Position = streamStart;
             BinaryData data = BinaryData.FromStream(stream);

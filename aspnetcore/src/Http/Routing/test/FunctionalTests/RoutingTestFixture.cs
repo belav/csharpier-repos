@@ -16,12 +16,11 @@ namespace Microsoft.AspNetCore.Routing.FunctionalTests
         public RoutingTestFixture()
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseStartup(typeof(TStartup)).UseTestServer();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseStartup(typeof(TStartup)).UseTestServer();
+                }
+            ).Build();
 
             _server = host.GetTestServer();
 

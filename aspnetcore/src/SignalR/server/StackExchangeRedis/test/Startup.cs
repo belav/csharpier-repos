@@ -15,20 +15,17 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSignalR(
-                    options =>
-                    {
-                        options.EnableDetailedErrors = true;
-                    }
-                )
-                .AddMessagePackProtocol()
-                .AddStackExchangeRedis(
-                    options =>
-                    {
-                        options.Configuration.EndPoints.Add(
-                            Environment.GetEnvironmentVariable("REDIS_CONNECTION")
-                        );
-                    }
-                );
+                options =>
+                {
+                    options.EnableDetailedErrors = true;
+                }
+            ).AddMessagePackProtocol().AddStackExchangeRedis(
+                options =>
+                {
+                    options.Configuration.EndPoints
+                        .Add(Environment.GetEnvironmentVariable("REDIS_CONNECTION"));
+                }
+            );
 
             services.AddSingleton<IUserIdProvider, UserNameIdProvider>();
         }

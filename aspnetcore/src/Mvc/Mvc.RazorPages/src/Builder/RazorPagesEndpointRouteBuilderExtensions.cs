@@ -93,9 +93,8 @@ namespace Microsoft.AspNetCore.Builder
                 {
                     // MVC registers a policy that looks for this metadata.
                     b.Metadata.Add(CreateDynamicPageMetadata(page, area: null));
-                    b.Metadata.Add(
-                        new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId)
-                    );
+                    b.Metadata
+                        .Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
                 }
             );
             return builder;
@@ -167,9 +166,8 @@ namespace Microsoft.AspNetCore.Builder
                 {
                     // MVC registers a policy that looks for this metadata.
                     b.Metadata.Add(CreateDynamicPageMetadata(page, area: null));
-                    b.Metadata.Add(
-                        new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId)
-                    );
+                    b.Metadata
+                        .Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
                 }
             );
             return builder;
@@ -233,9 +231,8 @@ namespace Microsoft.AspNetCore.Builder
                 {
                     // MVC registers a policy that looks for this metadata.
                     b.Metadata.Add(CreateDynamicPageMetadata(page, area));
-                    b.Metadata.Add(
-                        new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId)
-                    );
+                    b.Metadata
+                        .Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
                 }
             );
             return builder;
@@ -309,9 +306,8 @@ namespace Microsoft.AspNetCore.Builder
                 {
                     // MVC registers a policy that looks for this metadata.
                     b.Metadata.Add(CreateDynamicPageMetadata(page, area));
-                    b.Metadata.Add(
-                        new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId)
-                    );
+                    b.Metadata
+                        .Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
                 }
             );
             return builder;
@@ -445,16 +441,17 @@ namespace Microsoft.AspNetCore.Builder
 
         private static void EnsureRazorPagesServices(IEndpointRouteBuilder endpoints)
         {
-            var marker =
-                endpoints.ServiceProvider.GetService<PageActionEndpointDataSourceFactory>();
+            var marker = endpoints.ServiceProvider
+                .GetService<PageActionEndpointDataSourceFactory>();
             if (marker == null)
             {
                 throw new InvalidOperationException(
-                    Mvc.Core.Resources.FormatUnableToFindServices(
-                        nameof(IServiceCollection),
-                        "AddRazorPages",
-                        "ConfigureServices(...)"
-                    )
+                    Mvc.Core.Resources
+                        .FormatUnableToFindServices(
+                            nameof(IServiceCollection),
+                            "AddRazorPages",
+                            "ConfigureServices(...)"
+                        )
                 );
             }
         }
@@ -463,14 +460,15 @@ namespace Microsoft.AspNetCore.Builder
             IEndpointRouteBuilder endpoints
         )
         {
-            var dataSource = endpoints.DataSources.OfType<PageActionEndpointDataSource>()
+            var dataSource = endpoints.DataSources
+                .OfType<PageActionEndpointDataSource>()
                 .FirstOrDefault();
             if (dataSource == null)
             {
-                var orderProviderCache =
-                    endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
-                var factory =
-                    endpoints.ServiceProvider.GetRequiredService<PageActionEndpointDataSourceFactory>();
+                var orderProviderCache = endpoints.ServiceProvider
+                    .GetRequiredService<OrderedEndpointsSequenceProviderCache>();
+                var factory = endpoints.ServiceProvider
+                    .GetRequiredService<PageActionEndpointDataSourceFactory>();
                 dataSource = factory.Create(
                     orderProviderCache.GetOrCreateOrderedEndpointsSequenceProvider(endpoints)
                 );

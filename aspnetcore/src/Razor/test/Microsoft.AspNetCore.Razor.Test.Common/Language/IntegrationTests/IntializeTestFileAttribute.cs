@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         public override void Before(MethodInfo methodUnderTest)
         {
             if (
-                typeof(IntegrationTestBase).GetTypeInfo()
+                typeof(IntegrationTestBase)
+                    .GetTypeInfo()
                     .IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo())
             )
             {
@@ -20,7 +21,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     $"TestFiles/IntegrationTests/{typeName}/{methodUnderTest.Name}";
             }
             else if (
-                typeof(RazorBaselineIntegrationTestBase).GetTypeInfo()
+                typeof(RazorBaselineIntegrationTestBase)
+                    .GetTypeInfo()
                     .IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo())
             )
             {
@@ -33,14 +35,16 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         public override void After(MethodInfo methodUnderTest)
         {
             if (
-                typeof(IntegrationTestBase).GetTypeInfo()
+                typeof(IntegrationTestBase)
+                    .GetTypeInfo()
                     .IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo())
             )
             {
                 IntegrationTestBase.FileName = null;
             }
             else if (
-                typeof(RazorBaselineIntegrationTestBase).GetTypeInfo()
+                typeof(RazorBaselineIntegrationTestBase)
+                    .GetTypeInfo()
                     .IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo())
             )
             {

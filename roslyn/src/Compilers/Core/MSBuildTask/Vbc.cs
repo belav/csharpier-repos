@@ -807,10 +807,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         );
                         foreach (VBError vberror in _vbErrorLines)
                         {
-                            base.LogEventsFromTextOutput(
-                                vberror.Message,
-                                vberror.MessageImportance
-                            );
+                            base
+                                .LogEventsFromTextOutput(
+                                    vberror.Message,
+                                    vberror.MessageImportance
+                                );
                         }
 
                         _vbErrorLines.Clear();

@@ -145,14 +145,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (textTypedSoFar.Length > 0)
             {
                 // Note that StartsWith ignores \0 at the end of textTypedSoFar on VS Mac and Mono.
-                return item.DisplayText.StartsWith(
-                        textTypedSoFar,
-                        StringComparison.CurrentCultureIgnoreCase
-                    )
-                    || item.FilterText.StartsWith(
-                        textTypedSoFar,
-                        StringComparison.CurrentCultureIgnoreCase
-                    );
+                return item.DisplayText
+                        .StartsWith(textTypedSoFar, StringComparison.CurrentCultureIgnoreCase)
+                    || item.FilterText
+                        .StartsWith(textTypedSoFar, StringComparison.CurrentCultureIgnoreCase);
             }
 
             return false;
@@ -166,10 +162,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             EditorAsyncCompletion.IAsyncCompletionSession session,
             out SnapshotPoint initialTriggerLocation
         ) =>
-            session.Properties.TryGetProperty(
-                CompletionSource.TriggerLocation,
-                out initialTriggerLocation
-            );
+            session.Properties
+                .TryGetProperty(CompletionSource.TriggerLocation, out initialTriggerLocation);
 
         // This is a temporarily method to support preference of IntelliCode items comparing to non-IntelliCode items.
         // We expect that Editor will introduce this support and we will get rid of relying on the "★" then.

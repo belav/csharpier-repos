@@ -59,17 +59,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             if (parseOptions.LanguageVersion.IsCSharp9OrAbove())
             {
                 return IsPatternExpression(
-                        argument,
-                        UnaryPattern(Token(SyntaxKind.NotKeyword), s_nullLiteralPattern)
-                    )
+                    argument,
+                    UnaryPattern(Token(SyntaxKind.NotKeyword), s_nullLiteralPattern)
+                )
                     .Parenthesize();
             }
 
             return BinaryExpression(
-                    SyntaxKind.IsExpression,
-                    argument,
-                    PredefinedType(Token(SyntaxKind.ObjectKeyword))
-                )
+                SyntaxKind.IsExpression,
+                argument,
+                PredefinedType(Token(SyntaxKind.ObjectKeyword))
+            )
                 .Parenthesize();
         }
 

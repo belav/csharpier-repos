@@ -151,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 {
                     new TodoComment(new TodoCommentDescriptor("Test1", 1), "Message1", 10),
                     new TodoComment(new TodoCommentDescriptor("Test2", 2), "Message2", 20)
-                }.ToList(),
+                }
+                    .ToList(),
                 (x, y) =>
                 {
                     return x.SequenceEqual(y) ? 0 : 1;

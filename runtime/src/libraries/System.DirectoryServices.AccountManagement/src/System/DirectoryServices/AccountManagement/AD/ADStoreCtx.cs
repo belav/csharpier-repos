@@ -1457,11 +1457,12 @@ namespace System.DirectoryServices.AccountManagement
                         foreach (GlobalCatalog g in gg)
                         {
                             if (
-                                string.Equals(
-                                    this.DnsDomainName,
-                                    g.Domain.Name,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                string
+                                    .Equals(
+                                        this.DnsDomainName,
+                                        g.Domain.Name,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                             {
                                 gc = g;
@@ -1479,11 +1480,12 @@ namespace System.DirectoryServices.AccountManagement
                         );
 
                         if (
-                            !string.Equals(
-                                this.DnsDomainName,
-                                gc.Domain.Name,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            !string
+                                .Equals(
+                                    this.DnsDomainName,
+                                    gc.Domain.Name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             //useASQ = false;
@@ -1742,19 +1744,21 @@ namespace System.DirectoryServices.AccountManagement
                 // If same forest but different domain then we have a child or alternate tree domain.  We don't have a starting user
                 // object and must do a search on all groups to find membership.
                 if (
-                    string.Equals(
-                        foreignADStore.DnsForestName,
-                        this.DnsForestName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            foreignADStore.DnsForestName,
+                            this.DnsForestName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     if (
-                        string.Equals(
-                            foreignADStore.DnsDomainName,
-                            this.DnsDomainName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                foreignADStore.DnsDomainName,
+                                this.DnsDomainName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         rootPrincipalExists = true;
@@ -2761,11 +2765,8 @@ namespace System.DirectoryServices.AccountManagement
                     ContextOptions remoteOptions = DefaultContextOptions.ADDefaultContextOption;
 
 #if USE_CTX_CACHE
-                    PrincipalContext remoteCtx = SDSCache.Domain.GetContext(
-                        domainName,
-                        this.credentials,
-                        remoteOptions
-                    );
+                    PrincipalContext remoteCtx = SDSCache.Domain
+                        .GetContext(domainName, this.credentials, remoteOptions);
 #else
                     PrincipalContext remoteCtx = new PrincipalContext(
                         ContextType.Domain,
@@ -3096,11 +3097,12 @@ namespace System.DirectoryServices.AccountManagement
                     // If it's not a "DC=" component, skip it
                     if (
                         (component.Length > 3)
-                        && string.Equals(
-                            component.Substring(0, 3),
-                            "DC=",
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        && string
+                            .Equals(
+                                component.Substring(0, 3),
+                                "DC=",
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         sb.Append(component, 3, component.Length - 3);
@@ -3257,9 +3259,8 @@ namespace System.DirectoryServices.AccountManagement
 
         internal override bool IsValidProperty(Principal p, string propertyName)
         {
-            return ((Hashtable)s_propertyMappingTableByProperty[this.MappingTableIndex]).Contains(
-                propertyName
-            );
+            return ((Hashtable)s_propertyMappingTableByProperty[this.MappingTableIndex])
+                .Contains(propertyName);
         }
     }
 }

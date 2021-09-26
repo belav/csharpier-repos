@@ -302,8 +302,8 @@ namespace Microsoft.Extensions.Logging.Test
                 builder =>
                 {
                     builder.Configure(
-                            o => o.ActivityTrackingOptions = ActivityTrackingOptions.Baggage
-                        )
+                        o => o.ActivityTrackingOptions = ActivityTrackingOptions.Baggage
+                    )
                         .AddProvider(loggerProvider);
                 }
             );
@@ -338,10 +338,10 @@ namespace Microsoft.Extensions.Logging.Test
                 builder =>
                 {
                     builder.Configure(
-                            o =>
-                                o.ActivityTrackingOptions =
-                                    ActivityTrackingOptions.TraceId | ActivityTrackingOptions.Tags
-                        )
+                        o =>
+                            o.ActivityTrackingOptions =
+                                ActivityTrackingOptions.TraceId | ActivityTrackingOptions.Tags
+                    )
                         .AddProvider(loggerProvider);
                 }
             );
@@ -375,12 +375,12 @@ namespace Microsoft.Extensions.Logging.Test
                 builder =>
                 {
                     builder.Configure(
-                            o =>
-                                o.ActivityTrackingOptions =
-                                    ActivityTrackingOptions.TraceId
-                                    | ActivityTrackingOptions.Baggage
-                                    | ActivityTrackingOptions.Tags
-                        )
+                        o =>
+                            o.ActivityTrackingOptions =
+                                ActivityTrackingOptions.TraceId
+                                | ActivityTrackingOptions.Baggage
+                                | ActivityTrackingOptions.Tags
+                    )
                         .AddProvider(loggerProvider);
                 }
             );
@@ -410,10 +410,10 @@ namespace Microsoft.Extensions.Logging.Test
                 builder =>
                 {
                     builder.Configure(
-                            o =>
-                                o.ActivityTrackingOptions =
-                                    ActivityTrackingOptions.Baggage | ActivityTrackingOptions.Tags
-                        )
+                        o =>
+                            o.ActivityTrackingOptions =
+                                ActivityTrackingOptions.Baggage | ActivityTrackingOptions.Tags
+                    )
                         .AddProvider(loggerProvider);
                 }
             );
@@ -495,12 +495,12 @@ namespace Microsoft.Extensions.Logging.Test
                 builder =>
                 {
                     builder.Configure(
-                            o =>
-                                o.ActivityTrackingOptions =
-                                    ActivityTrackingOptions.TraceId
-                                    | ActivityTrackingOptions.Baggage
-                                    | ActivityTrackingOptions.Tags
-                        )
+                        o =>
+                            o.ActivityTrackingOptions =
+                                ActivityTrackingOptions.TraceId
+                                | ActivityTrackingOptions.Baggage
+                                | ActivityTrackingOptions.Tags
+                    )
                         .AddProvider(loggerProvider);
                 }
             );

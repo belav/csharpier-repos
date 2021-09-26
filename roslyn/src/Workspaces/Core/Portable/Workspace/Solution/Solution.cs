@@ -1120,10 +1120,11 @@ namespace Microsoft.CodeAnalysis
             if (project == null)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        WorkspacesResources._0_is_not_part_of_the_workspace,
-                        documentId.ProjectId
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_not_part_of_the_workspace,
+                            documentId.ProjectId
+                        )
                 );
             }
 
@@ -1157,13 +1158,13 @@ namespace Microsoft.CodeAnalysis
             PreservationMode preservationMode = PreservationMode.PreserveValue
         ) =>
             this.AddDocument(
-                    documentId,
-                    name,
-                    SourceText.From(string.Empty),
-                    folders,
-                    filePath,
-                    isGenerated
-                )
+                documentId,
+                name,
+                SourceText.From(string.Empty),
+                folders,
+                filePath,
+                isGenerated
+            )
                 .WithDocumentSyntaxRoot(documentId, syntaxRoot, preservationMode);
 
         /// <summary>
@@ -1197,10 +1198,11 @@ namespace Microsoft.CodeAnalysis
             if (project == null)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        WorkspacesResources._0_is_not_part_of_the_workspace,
-                        documentId.ProjectId
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_not_part_of_the_workspace,
+                            documentId.ProjectId
+                        )
                 );
             }
 
@@ -1342,10 +1344,11 @@ namespace Microsoft.CodeAnalysis
             if (project is null)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        WorkspacesResources._0_is_not_part_of_the_workspace,
-                        documentId.ProjectId
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources._0_is_not_part_of_the_workspace,
+                            documentId.ProjectId
+                        )
                 );
             }
 
@@ -2194,11 +2197,12 @@ namespace Microsoft.CodeAnalysis
                 if (_state.ContainsTransitiveReference(projectReference.ProjectId, projectId))
                 {
                     throw new InvalidOperationException(
-                        string.Format(
-                            WorkspacesResources.Adding_project_reference_from_0_to_1_will_cause_a_circular_reference,
-                            projectId,
-                            projectReference.ProjectId
-                        )
+                        string
+                            .Format(
+                                WorkspacesResources.Adding_project_reference_from_0_to_1_will_cause_a_circular_reference,
+                                projectId,
+                                projectReference.ProjectId
+                            )
                     );
                 }
             }
@@ -2221,9 +2225,8 @@ namespace Microsoft.CodeAnalysis
             var isSubmission = projectState.IsSubmission;
             var hasSubmissionReference =
                 !ignoreExistingReferences
-                && projectState.ProjectReferences.Any(
-                    p => _state.GetRequiredProjectState(p.ProjectId).IsSubmission
-                );
+                && projectState.ProjectReferences
+                    .Any(p => _state.GetRequiredProjectState(p.ProjectId).IsSubmission);
 
             foreach (var projectReference in projectReferences)
             {

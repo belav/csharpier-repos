@@ -227,7 +227,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Pclmulqdq).GetMethod(
+            var result = typeof(Pclmulqdq)
+                .GetMethod(
                     nameof(Pclmulqdq.CarrylessMultiply),
                     new Type[] { typeof(Vector128<Int64>), typeof(Vector128<Int64>), typeof(byte) }
                 )
@@ -249,7 +250,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Pclmulqdq).GetMethod(
+            var result = typeof(Pclmulqdq)
+                .GetMethod(
                     nameof(Pclmulqdq.CarrylessMultiply),
                     new Type[] { typeof(Vector128<Int64>), typeof(Vector128<Int64>), typeof(byte) }
                 )
@@ -271,7 +273,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Pclmulqdq).GetMethod(
+            var result = typeof(Pclmulqdq)
+                .GetMethod(
                     nameof(Pclmulqdq.CarrylessMultiply),
                     new Type[] { typeof(Vector128<Int64>), typeof(Vector128<Int64>), typeof(byte) }
                 )
@@ -423,15 +426,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Pclmulqdq)}.{nameof(Pclmulqdq.CarrylessMultiply)}<Int64>(Vector128<Int64>, 129): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  expectedRet: ({string.Join(", ", _expectedRet)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Pclmulqdq)}.{nameof(Pclmulqdq.CarrylessMultiply)}<Int64>(Vector128<Int64>, 129): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  expectedRet: ({string.Join(", ", _expectedRet)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

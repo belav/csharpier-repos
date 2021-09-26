@@ -60,7 +60,8 @@ namespace System.IO.Tests.Enumeration
                 directory,
                 (ref FileSystemEntry entry) => new string(entry.FileName),
                 options
-            ).ToArray();
+            )
+                .ToArray();
         }
 
         [Fact]
@@ -81,7 +82,8 @@ namespace System.IO.Tests.Enumeration
     {
         protected override string[] GetNames(string directory, EnumerationOptions options)
         {
-            return new DirectoryInfo(directory).GetDirectories("*", options)
+            return new DirectoryInfo(directory)
+                .GetDirectories("*", options)
                 .Select(i => i.Name)
                 .ToArray();
         }

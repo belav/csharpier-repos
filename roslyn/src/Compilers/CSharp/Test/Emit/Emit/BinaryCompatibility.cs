@@ -33,10 +33,10 @@ public class Derived : Base
 }
 ";
             var lib0Image = CreateCompilationWithMscorlib46(
-                    lib0,
-                    options: TestOptions.ReleaseDll,
-                    assemblyName: "lib"
-                )
+                lib0,
+                options: TestOptions.ReleaseDll,
+                assemblyName: "lib"
+            )
                 .EmitToImageReference();
 
             var lib1 =
@@ -51,10 +51,10 @@ public class Derived : Base
 }
 ";
             var lib1Image = CreateCompilationWithMscorlib46(
-                    lib1,
-                    options: TestOptions.ReleaseDll,
-                    assemblyName: "lib"
-                )
+                lib1,
+                options: TestOptions.ReleaseDll,
+                assemblyName: "lib"
+            )
                 .EmitToImageReference();
 
             var client =
@@ -69,10 +69,10 @@ public class Client
 }
 ";
             var clientImage = CreateCompilationWithMscorlib46(
-                    client,
-                    references: new[] { lib0Image },
-                    options: TestOptions.ReleaseDll
-                )
+                client,
+                references: new[] { lib0Image },
+                options: TestOptions.ReleaseDll
+            )
                 .EmitToImageReference();
 
             var program =

@@ -639,17 +639,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         {
             Execute(
                 _ => { },
-                modelBuilder =>
-                    modelBuilder.Entity("X", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Y",
-                            x =>
-                            {
-                                x.ToTable("X");
-                                x.Property<int>("A");
-                                x.HasOne("X").WithOne("Y").HasForeignKey("Y", "Id");
-                            }
-                        ),
+                modelBuilder => modelBuilder.Entity("X", x => x.Property<int>("Id")).Entity(
+                        "Y",
+                        x =>
+                        {
+                            x.ToTable("X");
+                            x.Property<int>("A");
+                            x.HasOne("X").WithOne("Y").HasForeignKey("Y", "Id");
+                        }
+                    ),
                 operations =>
                 {
                     Assert.Equal(1, operations.Count);
@@ -669,17 +667,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         {
             Execute(
                 _ => { },
-                modelBuilder =>
-                    modelBuilder.Entity("X", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Y",
-                            x =>
-                            {
-                                x.ToTable("X");
-                                x.Property<int>("A");
-                                x.HasOne("X").WithOne().HasForeignKey("Y", "Id");
-                            }
-                        ),
+                modelBuilder => modelBuilder.Entity("X", x => x.Property<int>("Id")).Entity(
+                        "Y",
+                        x =>
+                        {
+                            x.ToTable("X");
+                            x.Property<int>("A");
+                            x.HasOne("X").WithOne().HasForeignKey("Y", "Id");
+                        }
+                    ),
                 operations =>
                 {
                     Assert.Equal(1, operations.Count);
@@ -699,16 +695,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         {
             Execute(
                 _ => { },
-                modelBuilder =>
-                    modelBuilder.Entity("X", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Y",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.HasOne("X", "X").WithMany("Ys").HasForeignKey("XId");
-                            }
-                        ),
+                modelBuilder => modelBuilder.Entity("X", x => x.Property<int>("Id")).Entity(
+                        "Y",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.HasOne("X", "X").WithMany("Ys").HasForeignKey("XId");
+                        }
+                    ),
                 operations =>
                 {
                     Assert.Equal(3, operations.Count);
@@ -732,16 +726,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         {
             Execute(
                 _ => { },
-                modelBuilder =>
-                    modelBuilder.Entity("X", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Y",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.HasOne("X").WithMany().HasForeignKey("XId");
-                            }
-                        ),
+                modelBuilder => modelBuilder.Entity("X", x => x.Property<int>("Id")).Entity(
+                        "Y",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.HasOne("X").WithMany().HasForeignKey("XId");
+                        }
+                    ),
                 operations =>
                 {
                     Assert.Equal(3, operations.Count);
@@ -824,22 +816,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         public void Create_FK_to_excluded_principal()
         {
             Execute(
-                common =>
-                    common.Entity(
-                            "X",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.ToTable("X", t => t.ExcludeFromMigrations());
-                            }
-                        )
-                        .Entity(
-                            "Y",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                            }
-                        ),
+                common => common.Entity(
+                        "X",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.ToTable("X", t => t.ExcludeFromMigrations());
+                        }
+                    ).Entity(
+                        "Y",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                        }
+                    ),
                 _ => { },
                 target =>
                     target.Entity(
@@ -7954,32 +7944,28 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         public void Add_foreign_key_to_renamed_table()
         {
             Execute(
-                source =>
-                    source.Entity("ReferencedTable", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.ToTable("Table", "old");
-                                x.Property<int>("Id");
-                                x.Property<int>("ForeignId");
-                                x.HasIndex("ForeignId");
-                            }
-                        ),
-                target =>
-                    target.Entity("ReferencedTable", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.ToTable("RenamedTable", "new");
-                                x.Property<int>("Id");
-                                x.HasKey("Id").HasName("PK_Table");
-                                x.Property<int>("ForeignId");
-                                x.HasIndex("ForeignId").HasDatabaseName("IX_Table_ForeignId");
-                                x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
-                            }
-                        ),
+                source => source.Entity("ReferencedTable", x => x.Property<int>("Id")).Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.ToTable("Table", "old");
+                            x.Property<int>("Id");
+                            x.Property<int>("ForeignId");
+                            x.HasIndex("ForeignId");
+                        }
+                    ),
+                target => target.Entity("ReferencedTable", x => x.Property<int>("Id")).Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.ToTable("RenamedTable", "new");
+                            x.Property<int>("Id");
+                            x.HasKey("Id").HasName("PK_Table");
+                            x.Property<int>("ForeignId");
+                            x.HasIndex("ForeignId").HasDatabaseName("IX_Table_ForeignId");
+                            x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
+                        }
+                    ),
                 operations =>
                 {
                     Assert.Equal(3, operations.Count);
@@ -8005,30 +7991,26 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         public void Add_foreign_key_to_renamed_column()
         {
             Execute(
-                source =>
-                    source.Entity("ReferencedTable", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.Property<int>("ForeignId");
-                                x.HasIndex("ForeignId");
-                            }
-                        ),
-                target =>
-                    target.Entity("ReferencedTable", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.HasKey("Id").HasName("PK_Table");
-                                x.Property<int>("ForeignId").HasColumnName("RenamedForeignId");
-                                x.HasIndex("ForeignId").HasDatabaseName("IX_Table_ForeignId");
-                                x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
-                            }
-                        ),
+                source => source.Entity("ReferencedTable", x => x.Property<int>("Id")).Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("ForeignId");
+                            x.HasIndex("ForeignId");
+                        }
+                    ),
+                target => target.Entity("ReferencedTable", x => x.Property<int>("Id")).Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.HasKey("Id").HasName("PK_Table");
+                            x.Property<int>("ForeignId").HasColumnName("RenamedForeignId");
+                            x.HasIndex("ForeignId").HasDatabaseName("IX_Table_ForeignId");
+                            x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
+                        }
+                    ),
                 operations =>
                 {
                     Assert.Equal(2, operations.Count);
@@ -8053,9 +8035,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 source =>
                     source.Entity(
-                            "ReferencedTable",
-                            x => x.ToTable("ReferencedTable", "old").Property<int>("Id")
-                        )
+                        "ReferencedTable",
+                        x => x.ToTable("ReferencedTable", "old").Property<int>("Id")
+                    )
                         .Entity(
                             "Table",
                             x =>
@@ -8065,25 +8047,23 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                                 x.HasIndex("ForeignId");
                             }
                         ),
-                target =>
-                    target.Entity(
-                            "ReferencedTable",
-                            x =>
-                            {
-                                x.ToTable("RenamedReferencedTable", "new");
-                                x.Property<int>("Id");
-                                x.HasKey("Id").HasName("PK_ReferencedTable");
-                            }
-                        )
-                        .Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.Property<int>("ForeignId");
-                                x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
-                            }
-                        ),
+                target => target.Entity(
+                        "ReferencedTable",
+                        x =>
+                        {
+                            x.ToTable("RenamedReferencedTable", "new");
+                            x.Property<int>("Id");
+                            x.HasKey("Id").HasName("PK_ReferencedTable");
+                        }
+                    ).Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("ForeignId");
+                            x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
+                        }
+                    ),
                 operations =>
                 {
                     Assert.Equal(3, operations.Count);
@@ -8109,17 +8089,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         public void Add_foreign_key_referencing_renamed_column_with_seed_data()
         {
             Execute(
-                common =>
-                    common.Entity("ReferencedTable", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.Property<int>("ForeignId");
-                                x.HasIndex("ForeignId");
-                            }
-                        ),
+                common => common.Entity("ReferencedTable", x => x.Property<int>("Id")).Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("ForeignId");
+                            x.HasIndex("ForeignId");
+                        }
+                    ),
                 source =>
                     source.Entity(
                         "Table",
@@ -8129,23 +8107,21 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             x.HasData(new { Id = 43 });
                         }
                     ),
-                target =>
-                    target.Entity(
-                            "ReferencedTable",
-                            x =>
-                            {
-                                x.Property<int>("Id").HasColumnName("ReferencedTableId");
-                                x.HasData(new { Id = 42 });
-                            }
-                        )
-                        .Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
-                                x.HasData(new { Id = 43, ForeignId = 42 });
-                            }
-                        ),
+                target => target.Entity(
+                        "ReferencedTable",
+                        x =>
+                        {
+                            x.Property<int>("Id").HasColumnName("ReferencedTableId");
+                            x.HasData(new { Id = 42 });
+                        }
+                    ).Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
+                            x.HasData(new { Id = 43, ForeignId = 42 });
+                        }
+                    ),
                 upOps =>
                     Assert.Collection(
                         upOps,
@@ -8230,25 +8206,23 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     source.Entity("ReferencedTable")
                         .ToTable("ReferencedTable", "old")
                         .Property<int>("Id"),
-                target =>
-                    target.Entity(
-                            "ReferencedTable",
-                            x =>
-                            {
-                                x.ToTable("RenamedReferencedTable", "new");
-                                x.Property<int>("Id");
-                                x.HasKey("Id").HasName("PK_ReferencedTable");
-                            }
-                        )
-                        .Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.Property<int>("ForeignId");
-                                x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
-                            }
-                        ),
+                target => target.Entity(
+                        "ReferencedTable",
+                        x =>
+                        {
+                            x.ToTable("RenamedReferencedTable", "new");
+                            x.Property<int>("Id");
+                            x.HasKey("Id").HasName("PK_ReferencedTable");
+                        }
+                    ).Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("ForeignId");
+                            x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
+                        }
+                    ),
                 operations =>
                 {
                     Assert.Equal(4, operations.Count);
@@ -8280,9 +8254,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 source => source.Entity("ReferencedTable").Property<int>("Id"),
                 target =>
                     target.Entity(
-                            "ReferencedTable",
-                            x => x.Property<int>("Id").HasColumnName("ReferencedTableId")
-                        )
+                        "ReferencedTable",
+                        x => x.Property<int>("Id").HasColumnName("ReferencedTableId")
+                    )
                         .Entity(
                             "Table",
                             x =>
@@ -8682,32 +8656,28 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         public void Drop_foreign_key_on_renamed_table()
         {
             Execute(
-                source =>
-                    source.Entity("ReferencedTable", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.ToTable("Table", "old");
-                                x.Property<int>("Id");
-                                x.Property<int>("ForeignId");
-                                x.HasIndex("ForeignId");
-                                x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
-                            }
-                        ),
-                target =>
-                    target.Entity("ReferencedTable", x => x.Property<int>("Id"))
-                        .Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.ToTable("RenamedTable", "new");
-                                x.Property<int>("Id");
-                                x.HasKey("Id").HasName("PK_Table");
-                                x.Property<int>("ForeignId");
-                                x.HasIndex("ForeignId").HasDatabaseName("IX_Table_ForeignId");
-                            }
-                        ),
+                source => source.Entity("ReferencedTable", x => x.Property<int>("Id")).Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.ToTable("Table", "old");
+                            x.Property<int>("Id");
+                            x.Property<int>("ForeignId");
+                            x.HasIndex("ForeignId");
+                            x.HasOne("ReferencedTable").WithMany().HasForeignKey("ForeignId");
+                        }
+                    ),
+                target => target.Entity("ReferencedTable", x => x.Property<int>("Id")).Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.ToTable("RenamedTable", "new");
+                            x.Property<int>("Id");
+                            x.HasKey("Id").HasName("PK_Table");
+                            x.Property<int>("ForeignId");
+                            x.HasIndex("ForeignId").HasDatabaseName("IX_Table_ForeignId");
+                        }
+                    ),
                 operations =>
                 {
                     Assert.Equal(3, operations.Count);
@@ -8960,28 +8930,26 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         }
                     ),
                 source => { },
-                target =>
-                    target.Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.HasAlternateKey("AlternateId");
-                                x.HasData(new { Id = 42, AlternateId = 4242 });
-                            }
-                        )
-                        .Entity(
-                            "ReferencingTable",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.Property<int>("ReferencedAlternateId");
-                                x.HasOne("Table")
-                                    .WithMany()
-                                    .HasForeignKey("ReferencedAlternateId")
-                                    .HasPrincipalKey("AlternateId");
-                                x.HasData(new { Id = 43, ReferencedAlternateId = 4242 });
-                            }
-                        ),
+                target => target.Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.HasAlternateKey("AlternateId");
+                            x.HasData(new { Id = 42, AlternateId = 4242 });
+                        }
+                    ).Entity(
+                        "ReferencingTable",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("ReferencedAlternateId");
+                            x.HasOne("Table")
+                                .WithMany()
+                                .HasForeignKey("ReferencedAlternateId")
+                                .HasPrincipalKey("AlternateId");
+                            x.HasData(new { Id = 43, ReferencedAlternateId = 4242 });
+                        }
+                    ),
                 upOps =>
                     Assert.Collection(
                         upOps,
@@ -9055,30 +9023,28 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         public void Update_AK_seed_value_with_a_referencing_foreign_key()
         {
             Execute(
-                common =>
-                    common.Entity(
-                            "ReferencedTable",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.Property<int>("AlternateId");
-                                x.HasAlternateKey("AlternateId");
-                            }
-                        )
-                        .Entity(
-                            "Table",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.Property<int>("ForeignId");
-                                x.HasIndex("ForeignId");
-                                x.HasOne("ReferencedTable")
-                                    .WithMany()
-                                    .HasForeignKey("ForeignId")
-                                    .IsRequired();
-                                x.HasData(new { Id = 43, ForeignId = 42 });
-                            }
-                        ),
+                common => common.Entity(
+                        "ReferencedTable",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("AlternateId");
+                            x.HasAlternateKey("AlternateId");
+                        }
+                    ).Entity(
+                        "Table",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("ForeignId");
+                            x.HasIndex("ForeignId");
+                            x.HasOne("ReferencedTable")
+                                .WithMany()
+                                .HasForeignKey("ForeignId")
+                                .IsRequired();
+                            x.HasData(new { Id = 43, ForeignId = 42 });
+                        }
+                    ),
                 source =>
                     source.Entity(
                         "ReferencedTable",
@@ -10553,17 +10519,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         {
             Execute(
                 source => source.Entity<Customer>().Ignore(c => c.Orders).OwnsOne(y => y.Mailing),
-                target =>
-                    target.Entity<Order>(
-                            x =>
-                            {
-                                x.OwnsOne(y => y.Billing);
-                                x.OwnsOne(y => y.Shipping);
-                            }
-                        )
-                        .Entity<Customer>()
-                        .Ignore(c => c.Orders)
-                        .OwnsOne(y => y.Mailing),
+                target => target.Entity<Order>(
+                        x =>
+                        {
+                            x.OwnsOne(y => y.Billing);
+                            x.OwnsOne(y => y.Shipping);
+                        }
+                    ).Entity<Customer>().Ignore(c => c.Orders).OwnsOne(y => y.Mailing),
                 operations =>
                 {
                     var operation = Assert.IsType<CreateTableOperation>(Assert.Single(operations));
@@ -11034,8 +10996,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 common =>
                     common.Entity<OldOrder>(
-                            x => x.HasOne(o => o.Billing).WithOne().HasForeignKey<Address>("Id")
-                        )
+                        x => x.HasOne(o => o.Billing).WithOne().HasForeignKey<Address>("Id")
+                    )
                         .Entity<Address>()
                         .ToTable("OldOrder"),
                 source =>
@@ -11069,18 +11031,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         .Entity("Address")
                         .HasBaseType("AddressBase")
                         .Property<int>("OldZip"),
-                target =>
-                    target.Entity(
-                            "AddressBase",
-                            x =>
-                            {
-                                x.Property<int>("Id");
-                                x.Property<int>("NotZip");
-                            }
-                        )
-                        .Entity("Address")
-                        .HasBaseType("AddressBase")
-                        .Property<int>("NewZip"),
+                target => target.Entity(
+                        "AddressBase",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("NotZip");
+                        }
+                    ).Entity("Address").HasBaseType("AddressBase").Property<int>("NewZip"),
                 operations =>
                 {
                     Assert.Equal(2, operations.Count);
@@ -11293,29 +11251,27 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         {
             Execute(
                 _ => { },
-                modelBuilder =>
-                    modelBuilder.Entity(
-                            "Entity1",
-                            x =>
-                            {
-                                x.ToTable("Entity");
+                modelBuilder => modelBuilder.Entity(
+                        "Entity1",
+                        x =>
+                        {
+                            x.ToTable("Entity");
 
-                                x.Property<int>("Id");
-                                x.Property<string>("Property1");
-                            }
-                        )
-                        .Entity(
-                            "Entity2",
-                            x =>
-                            {
-                                x.ToTable("Entity", "other");
+                            x.Property<int>("Id");
+                            x.Property<string>("Property1");
+                        }
+                    ).Entity(
+                        "Entity2",
+                        x =>
+                        {
+                            x.ToTable("Entity", "other");
 
-                                x.Property<int>("Id");
-                                x.Property<string>("Property2");
+                            x.Property<int>("Id");
+                            x.Property<string>("Property2");
 
-                                x.HasOne("Entity1", null).WithMany().HasForeignKey("Id");
-                            }
-                        ),
+                            x.HasOne("Entity1", null).WithMany().HasForeignKey("Id");
+                        }
+                    ),
                 operations =>
                 {
                     Assert.Equal(3, operations.Count);
@@ -11346,159 +11302,123 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         [ConditionalFact]
         public void Construction_of_shadow_values_buffer_account_for_shadow_navigations_1()
         {
-            Execute(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                            "User",
-                            b =>
-                            {
-                                b.Property<int>("Id");
-                                b.ToTable("Users");
-                                b.HasData(new { Id = 1 });
-                            }
-                        )
-                        .Entity(
-                            "BaseType",
-                            b =>
-                            {
-                                b.Property<int>("Id");
-                                b.Property<string>("Discriminator");
-                                b.Property<int>("UserId");
-                                b.ToTable("Type");
-                                b.HasDiscriminator<string>("Discriminator").HasValue("BaseType");
-                            }
-                        )
-                        .Entity(
-                            "DerivedType",
-                            b =>
-                            {
-                                b.HasBaseType("BaseType");
-                                b.Property<int>("LevelId");
-                                b.HasDiscriminator().HasValue("DerivedType");
-                                b.HasData(new { Id = 1, UserId = 1, LevelId = 1 });
-                            }
-                        )
-                        .Entity("BaseType")
-                        .HasOne("User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId"),
-                modelBuilder =>
-                    modelBuilder.Entity(
-                            "User",
-                            b =>
-                            {
-                                b.Property<int>("Id");
-                                b.ToTable("Users");
-                                b.HasData(new { Id = 1 });
-                            }
-                        )
-                        .Entity(
-                            "BaseType",
-                            b =>
-                            {
-                                b.Property<int>("Id");
-                                b.Property<string>("Discriminator");
-                                b.Property<int>("UserId");
-                                b.ToTable("Type");
-                                b.HasDiscriminator<string>("Discriminator").HasValue("BaseType");
-                            }
-                        )
-                        .Entity(
-                            "DerivedType",
-                            b =>
-                            {
-                                b.HasBaseType("BaseType");
-                                b.Property<int>("LevelId");
-                                b.HasDiscriminator().HasValue("DerivedType");
-                                b.HasData(new { Id = 1, UserId = 1, LevelId = 1 });
-                            }
-                        )
-                        .Entity("BaseType")
-                        .HasOne("User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId"),
-                ops => { }
-            );
+            Execute(modelBuilder => modelBuilder.Entity(
+                        "User",
+                        b =>
+                        {
+                            b.Property<int>("Id");
+                            b.ToTable("Users");
+                            b.HasData(new { Id = 1 });
+                        }
+                    ).Entity(
+                        "BaseType",
+                        b =>
+                        {
+                            b.Property<int>("Id");
+                            b.Property<string>("Discriminator");
+                            b.Property<int>("UserId");
+                            b.ToTable("Type");
+                            b.HasDiscriminator<string>("Discriminator").HasValue("BaseType");
+                        }
+                    ).Entity(
+                        "DerivedType",
+                        b =>
+                        {
+                            b.HasBaseType("BaseType");
+                            b.Property<int>("LevelId");
+                            b.HasDiscriminator().HasValue("DerivedType");
+                            b.HasData(new { Id = 1, UserId = 1, LevelId = 1 });
+                        }
+                    ).Entity("BaseType").HasOne("User", "User").WithMany().HasForeignKey("UserId"), modelBuilder => modelBuilder.Entity(
+                        "User",
+                        b =>
+                        {
+                            b.Property<int>("Id");
+                            b.ToTable("Users");
+                            b.HasData(new { Id = 1 });
+                        }
+                    ).Entity(
+                        "BaseType",
+                        b =>
+                        {
+                            b.Property<int>("Id");
+                            b.Property<string>("Discriminator");
+                            b.Property<int>("UserId");
+                            b.ToTable("Type");
+                            b.HasDiscriminator<string>("Discriminator").HasValue("BaseType");
+                        }
+                    ).Entity(
+                        "DerivedType",
+                        b =>
+                        {
+                            b.HasBaseType("BaseType");
+                            b.Property<int>("LevelId");
+                            b.HasDiscriminator().HasValue("DerivedType");
+                            b.HasData(new { Id = 1, UserId = 1, LevelId = 1 });
+                        }
+                    ).Entity("BaseType").HasOne("User", "User").WithMany().HasForeignKey("UserId"), ops => { });
         }
 
         [ConditionalFact]
         public void Construction_of_shadow_values_buffer_account_for_shadow_navigations_2()
         {
-            Execute(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                            "User",
-                            b =>
-                            {
-                                b.Property<int>("Id");
-                                b.ToTable("Users");
-                                b.HasData(new { Id = 1 });
-                            }
-                        )
-                        .Entity(
-                            "BaseType",
-                            b =>
-                            {
-                                b.Property<int>("Id");
-                                b.Property<string>("Discriminator");
-                                b.Property<int>("UserId");
-                                b.ToTable("Type");
-                                b.HasDiscriminator<string>("Discriminator").HasValue("BaseType");
-                            }
-                        )
-                        .Entity(
-                            "DerivedType",
-                            b =>
-                            {
-                                b.HasBaseType("BaseType");
-                                b.Property<int>("Level1Id");
-                                b.Property<double>("Level2Id");
-                                b.HasDiscriminator().HasValue("DerivedType");
-                                b.HasData(new { Id = 1, UserId = 1, Level1Id = 1, Level2Id = 1.0 });
-                            }
-                        )
-                        .Entity("BaseType")
-                        .HasOne("User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId"),
-                modelBuilder =>
-                    modelBuilder.Entity(
-                            "User",
-                            b =>
-                            {
-                                b.Property<int>("Id");
-                                b.ToTable("Users");
-                                b.HasData(new { Id = 1 });
-                            }
-                        )
-                        .Entity(
-                            "BaseType",
-                            b =>
-                            {
-                                b.Property<int>("Id");
-                                b.Property<string>("Discriminator");
-                                b.Property<int>("UserId");
-                                b.ToTable("Type");
-                                b.HasDiscriminator<string>("Discriminator").HasValue("BaseType");
-                            }
-                        )
-                        .Entity(
-                            "DerivedType",
-                            b =>
-                            {
-                                b.HasBaseType("BaseType");
-                                b.Property<int>("Level1Id");
-                                b.Property<double>("Level2Id");
-                                b.HasDiscriminator().HasValue("DerivedType");
-                                b.HasData(new { Id = 1, UserId = 1, Level1Id = 1, Level2Id = 1.0 });
-                            }
-                        )
-                        .Entity("BaseType")
-                        .HasOne("User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId"),
-                ops => { }
-            );
+            Execute(modelBuilder => modelBuilder.Entity(
+                        "User",
+                        b =>
+                        {
+                            b.Property<int>("Id");
+                            b.ToTable("Users");
+                            b.HasData(new { Id = 1 });
+                        }
+                    ).Entity(
+                        "BaseType",
+                        b =>
+                        {
+                            b.Property<int>("Id");
+                            b.Property<string>("Discriminator");
+                            b.Property<int>("UserId");
+                            b.ToTable("Type");
+                            b.HasDiscriminator<string>("Discriminator").HasValue("BaseType");
+                        }
+                    ).Entity(
+                        "DerivedType",
+                        b =>
+                        {
+                            b.HasBaseType("BaseType");
+                            b.Property<int>("Level1Id");
+                            b.Property<double>("Level2Id");
+                            b.HasDiscriminator().HasValue("DerivedType");
+                            b.HasData(new { Id = 1, UserId = 1, Level1Id = 1, Level2Id = 1.0 });
+                        }
+                    ).Entity("BaseType").HasOne("User", "User").WithMany().HasForeignKey("UserId"), modelBuilder => modelBuilder.Entity(
+                        "User",
+                        b =>
+                        {
+                            b.Property<int>("Id");
+                            b.ToTable("Users");
+                            b.HasData(new { Id = 1 });
+                        }
+                    ).Entity(
+                        "BaseType",
+                        b =>
+                        {
+                            b.Property<int>("Id");
+                            b.Property<string>("Discriminator");
+                            b.Property<int>("UserId");
+                            b.ToTable("Type");
+                            b.HasDiscriminator<string>("Discriminator").HasValue("BaseType");
+                        }
+                    ).Entity(
+                        "DerivedType",
+                        b =>
+                        {
+                            b.HasBaseType("BaseType");
+                            b.Property<int>("Level1Id");
+                            b.Property<double>("Level2Id");
+                            b.HasDiscriminator().HasValue("DerivedType");
+                            b.HasData(new { Id = 1, UserId = 1, Level1Id = 1, Level2Id = 1.0 });
+                        }
+                    ).Entity("BaseType").HasOne("User", "User").WithMany().HasForeignKey("UserId"), ops => { });
         }
 
         private class TestKeylessType
@@ -11516,10 +11436,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 _ => { },
                 modelBuilder =>
                     modelBuilder.HasDbFunction(
-                        typeof(MigrationsModelDifferTest).GetMethod(
-                            nameof(GetCountByYear),
-                            BindingFlags.NonPublic | BindingFlags.Static
-                        )
+                        typeof(MigrationsModelDifferTest)
+                            .GetMethod(
+                                nameof(GetCountByYear),
+                                BindingFlags.NonPublic | BindingFlags.Static
+                            )
                     ),
                 result => Assert.Equal(0, result.Count),
                 skipSourceConventions: true

@@ -25,38 +25,42 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         private const string ContainsFunctionName = "CONTAINS";
 
         private static readonly MethodInfo _freeTextMethodInfo =
-            typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.FreeText),
-                typeof(DbFunctions),
-                typeof(object),
-                typeof(string)
-            );
+            typeof(SqlServerDbFunctionsExtensions)
+                .GetRequiredRuntimeMethod(
+                    nameof(SqlServerDbFunctionsExtensions.FreeText),
+                    typeof(DbFunctions),
+                    typeof(object),
+                    typeof(string)
+                );
 
         private static readonly MethodInfo _freeTextMethodInfoWithLanguage =
-            typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.FreeText),
-                typeof(DbFunctions),
-                typeof(object),
-                typeof(string),
-                typeof(int)
-            );
+            typeof(SqlServerDbFunctionsExtensions)
+                .GetRequiredRuntimeMethod(
+                    nameof(SqlServerDbFunctionsExtensions.FreeText),
+                    typeof(DbFunctions),
+                    typeof(object),
+                    typeof(string),
+                    typeof(int)
+                );
 
         private static readonly MethodInfo _containsMethodInfo =
-            typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.Contains),
-                typeof(DbFunctions),
-                typeof(object),
-                typeof(string)
-            );
+            typeof(SqlServerDbFunctionsExtensions)
+                .GetRequiredRuntimeMethod(
+                    nameof(SqlServerDbFunctionsExtensions.Contains),
+                    typeof(DbFunctions),
+                    typeof(object),
+                    typeof(string)
+                );
 
         private static readonly MethodInfo _containsMethodInfoWithLanguage =
-            typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.Contains),
-                typeof(DbFunctions),
-                typeof(object),
-                typeof(string),
-                typeof(int)
-            );
+            typeof(SqlServerDbFunctionsExtensions)
+                .GetRequiredRuntimeMethod(
+                    nameof(SqlServerDbFunctionsExtensions.Contains),
+                    typeof(DbFunctions),
+                    typeof(object),
+                    typeof(string),
+                    typeof(int)
+                );
 
         private static readonly IDictionary<MethodInfo, string> _functionMapping = new Dictionary<
             MethodInfo,

@@ -22,14 +22,12 @@ namespace Microsoft.AspNetCore.Components.Server.Tests
             var called = false;
 
             // Act
-            var app = applicationBuilder.UseRouting()
-                .UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapBlazorHub(dispatchOptions => called = true);
-                    }
-                )
-                .Build();
+            var app = applicationBuilder.UseRouting().UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapBlazorHub(dispatchOptions => called = true);
+                }
+            ).Build();
 
             // Assert
             Assert.True(called);
@@ -43,14 +41,12 @@ namespace Microsoft.AspNetCore.Components.Server.Tests
             var called = false;
 
             // Act
-            var app = applicationBuilder.UseRouting()
-                .UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapBlazorHub("_blazor", dispatchOptions => called = true);
-                    }
-                )
-                .Build();
+            var app = applicationBuilder.UseRouting().UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapBlazorHub("_blazor", dispatchOptions => called = true);
+                }
+            ).Build();
 
             // Assert
             Assert.True(called);

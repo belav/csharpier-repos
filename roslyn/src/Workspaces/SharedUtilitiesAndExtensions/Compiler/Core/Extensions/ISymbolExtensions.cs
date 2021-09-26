@@ -518,12 +518,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
                 if (delegateType != null)
                 {
-                    var types = method.Parameters.Skip(skip)
+                    var types = method.Parameters
+                        .Skip(skip)
                         .Select(
                             p =>
-                                (
-                                    p.Type ?? compilation.GetSpecialType(SpecialType.System_Object)
-                                ).WithNullableAnnotation(p.NullableAnnotation)
+                                (p.Type ?? compilation.GetSpecialType(SpecialType.System_Object))
+                                    .WithNullableAnnotation(p.NullableAnnotation)
                         );
 
                     if (!method.ReturnsVoid)
@@ -533,7 +533,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                             (
                                 method.ReturnType
                                 ?? compilation.GetSpecialType(SpecialType.System_Object)
-                            ).WithNullableAnnotation(method.ReturnNullableAnnotation)
+                            )
+                                .WithNullableAnnotation(method.ReturnNullableAnnotation)
                         );
                     }
 
@@ -587,7 +588,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         )
         {
             Contract.ThrowIfFalse(symbol.IsNormalAnonymousType());
-            return ((INamedTypeSymbol)symbol).GetMembers()
+            return ((INamedTypeSymbol)symbol)
+                .GetMembers()
                 .OfType<IPropertySymbol>()
                 .Where(p => p.CanBeReferencedByName);
         }
@@ -607,15 +609,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 default:
                     return symbol.DeclaredAccessibility;
                 case Accessibility.ProtectedAndInternal:
-                    return symbol.ContainingAssembly.GivesAccessTo(
-                        finalDestination.ContainingAssembly
-                    )
+                    return symbol.ContainingAssembly
+                    .GivesAccessTo(finalDestination.ContainingAssembly)
                       ? Accessibility.ProtectedAndInternal
                       : Accessibility.Internal;
                 case Accessibility.ProtectedOrInternal:
-                    return symbol.ContainingAssembly.GivesAccessTo(
-                        finalDestination.ContainingAssembly
-                    )
+                    return symbol.ContainingAssembly
+                    .GivesAccessTo(finalDestination.ContainingAssembly)
                       ? Accessibility.ProtectedOrInternal
                       : Accessibility.Protected;
             }
@@ -639,7 +639,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return false;
             }
 
-            var declarationSyntax = symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax())
+            var declarationSyntax = symbol.DeclaringSyntaxReferences
+                .Select(r => r.GetSyntax())
                 .FirstOrDefault();
             return declarationSyntax != null && position < declarationSyntax.SpanStart;
         }
@@ -787,7 +788,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return false;
             }
 
-            var members = returnType.AllInterfaces.Concat(returnType.GetBaseTypesAndThis())
+            var members = returnType.AllInterfaces
+                .Concat(returnType.GetBaseTypesAndThis())
                 .SelectMany(x => x.GetMembers())
                 .Where(x => x.DeclaredAccessibility == Accessibility.Public)
                 .ToList();
@@ -806,20 +808,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             // bool MoveNext()
-            if (
-                !members.OfType<IMethodSymbol>()
-                    .Any(
-                        x =>
-                        {
-                            return x
-                                is {
-                                    Name: WellKnownMemberNames.MoveNextMethodName,
-                                    ReturnType: { SpecialType: SpecialType.System_Boolean },
-                                    Parameters: { Length: 0 },
-                                };
-                        }
-                    )
-            )
+            if (!members.OfType<IMethodSymbol>().Any(
+                    x =>
+                    {
+                        return x
+                            is {
+                                Name: WellKnownMemberNames.MoveNextMethodName,
+                                ReturnType: { SpecialType: SpecialType.System_Boolean },
+                                Parameters: { Length: 0 },
+                            };
+                    }
+                ))
             {
                 return false;
             }
@@ -839,7 +838,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return false;
             }
 
-            var members = returnType.AllInterfaces.Concat(returnType.GetBaseTypesAndThis())
+            var members = returnType.AllInterfaces
+                .Concat(returnType.GetBaseTypesAndThis())
                 .SelectMany(x => x.GetMembers())
                 .Where(x => x.DeclaredAccessibility == Accessibility.Public)
                 .ToList();

@@ -20,13 +20,11 @@ namespace Microsoft.EntityFrameworkCore
             var setFinder = new FakeSetFinder();
             var setSource = new DbSetSource();
 
-            var customServices = new ServiceCollection().AddSingleton<IDbSetInitializer>(
-                new DbSetInitializer(setFinder, setSource)
-            );
+            var customServices = new ServiceCollection()
+                .AddSingleton<IDbSetInitializer>(new DbSetInitializer(setFinder, setSource));
 
-            var serviceProvider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-                customServices
-            );
+            var serviceProvider = InMemoryTestHelpers.Instance
+                .CreateServiceProvider(customServices);
 
             using var context = new JustAContext(
                 new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider).Options

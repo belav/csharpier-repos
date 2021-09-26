@@ -968,9 +968,9 @@ class C
                 // (7,19): error CS8323: Named argument specifications must appear after all fixed arguments have been specified in a dynamic invocation.
                 //         d.M(a: 1, 2);
                 Diagnostic(
-                        ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgumentInDynamicInvocation,
-                        "2"
-                    )
+                    ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgumentInDynamicInvocation,
+                    "2"
+                )
                     .WithLocation(7, 19)
             );
 
@@ -1008,9 +1008,9 @@ class C
                 // (7,21): error CS8323: Named argument specifications must appear after all fixed arguments have been specified in a dynamic invocation.
                 //         local(x: 1, d);
                 Diagnostic(
-                        ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgumentInDynamicInvocation,
-                        "d"
-                    )
+                    ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgumentInDynamicInvocation,
+                    "d"
+                )
                     .WithLocation(7, 21)
             );
         }

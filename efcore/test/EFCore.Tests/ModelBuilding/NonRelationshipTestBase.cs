@@ -580,15 +580,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "{'" + nameof(Quarks.Down) + "'}"
                     ),
                     Assert.Throws<InvalidOperationException>(
-                        () =>
-                            CreateModelBuilder()
-                                .Entity<Quarks>(
-                                    b =>
-                                    {
-                                        b.HasAlternateKey(e => new { e.Down });
-                                        b.Property(e => e.Down).IsRequired(false);
-                                    }
-                                )
+                        () => CreateModelBuilder().Entity<Quarks>(
+                                b =>
+                                {
+                                    b.HasAlternateKey(e => new { e.Down });
+                                    b.Property(e => e.Down).IsRequired(false);
+                                }
+                            )
                     ).Message
                 );
             }
@@ -1545,7 +1543,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.DoesNotContain(
                     nameof(IEntityBase.Target),
-                    modelBuilder.Model.FindEntityType(typeof(EntityBase))
+                    modelBuilder.Model
+                        .FindEntityType(typeof(EntityBase))
                         .GetProperties()
                         .Select(p => p.Name)
                 );
@@ -1554,7 +1553,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Contains(
                     nameof(IEntityBase.Target),
-                    modelBuilder.Model.FindEntityType(typeof(EntityBase))
+                    modelBuilder.Model
+                        .FindEntityType(typeof(EntityBase))
                         .GetProperties()
                         .Select(p => p.Name)
                 );
@@ -1605,7 +1605,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Entity<EntityWithFields>().HasAlternateKey(e => e.CompanyId);
 
                 var entity = modelBuilder.Model.FindEntityType(typeof(EntityWithFields));
-                var properties = modelBuilder.Model.FindEntityType(typeof(EntityWithFields))
+                var properties = modelBuilder.Model
+                    .FindEntityType(typeof(EntityWithFields))
                     .GetProperties();
                 Assert.Single(properties);
                 var property = properties.Single();
@@ -1646,7 +1647,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.Entity<EntityWithFields>().Property(e => e.Id);
 
-                var properties = modelBuilder.Model.FindEntityType(typeof(EntityWithFields))
+                var properties = modelBuilder.Model
+                    .FindEntityType(typeof(EntityWithFields))
                     .GetProperties();
                 var property = Assert.Single(properties);
                 Assert.Equal(nameof(EntityWithFields.Id), property.Name);
@@ -1661,7 +1663,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.Entity<EntityWithFields>().HasIndex(e => e.CompanyId);
 
-                var indexes = modelBuilder.Model.FindEntityType(typeof(EntityWithFields))
+                var indexes = modelBuilder.Model
+                    .FindEntityType(typeof(EntityWithFields))
                     .GetIndexes();
                 var index = Assert.Single(indexes);
                 var property = Assert.Single(index.Properties);
@@ -1677,7 +1680,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Entity<EntityWithFields>()
                     .HasIndex(e => new { e.TenantId, e.CompanyId });
 
-                var indexes = modelBuilder.Model.FindEntityType(typeof(EntityWithFields))
+                var indexes = modelBuilder.Model
+                    .FindEntityType(typeof(EntityWithFields))
                     .GetIndexes();
                 var index = Assert.Single(indexes);
                 Assert.Equal(2, index.Properties.Count);
@@ -1776,7 +1780,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.FinalizeModel();
 
                 Assert.Empty(
-                    modelBuilder.Model.FindEntityType(typeof(Gamma))
+                    modelBuilder.Model
+                        .FindEntityType(typeof(Gamma))
                         .GetProperties()
                         .Where(p => p.Name == "PrivateProperty")
                 );

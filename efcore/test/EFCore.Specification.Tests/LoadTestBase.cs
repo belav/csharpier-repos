@@ -154,7 +154,8 @@ namespace Microsoft.EntityFrameworkCore
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
                 foreach (
-                    var child in parent.Children.Cast<object>()
+                    var child in parent.Children
+                        .Cast<object>()
                         .Concat(parent.ChildrenAk)
                         .Concat(parent.ChildrenShadowFk)
                         .Concat(parent.ChildrenCompositeKey)
@@ -6667,9 +6668,10 @@ namespace Microsoft.EntityFrameworkCore
             protected override IServiceCollection AddServices(
                 IServiceCollection serviceCollection
             ) =>
-                base.AddServices(
-                    serviceCollection.AddScoped<IChangeDetector, ChangeDetectorProxy>()
-                );
+                base
+                    .AddServices(
+                        serviceCollection.AddScoped<IChangeDetector, ChangeDetectorProxy>()
+                    );
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {

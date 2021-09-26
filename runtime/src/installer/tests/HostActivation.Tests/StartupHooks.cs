@@ -391,7 +391,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 "1.0.0"
             );
 
-            fixture.BuiltDotnet.Exec(fixture.TestProject.AppDll)
+            fixture.BuiltDotnet
+                .Exec(fixture.TestProject.AppDll)
                 .EnvironmentVariable(startupHookVarName, startupHookAssemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
@@ -605,8 +606,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 );
 
             // Initialize method takes parameters
-            var startupHookWithParameterFixture =
-                sharedTestState.StartupHookWithParameterFixture.Copy();
+            var startupHookWithParameterFixture = sharedTestState.StartupHookWithParameterFixture
+                .Copy();
             var startupHookWithParameterDll = startupHookWithParameterFixture.TestProject.AppDll;
             dotnet.Exec(appDll)
                 .EnvironmentVariable(startupHookVarName, startupHookWithParameterDll)
@@ -620,8 +621,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 );
 
             // Initialize method has non-void return type
-            var startupHookWithReturnTypeFixture =
-                sharedTestState.StartupHookWithReturnTypeFixture.Copy();
+            var startupHookWithReturnTypeFixture = sharedTestState.StartupHookWithReturnTypeFixture
+                .Copy();
             var startupHookWithReturnTypeDll = startupHookWithReturnTypeFixture.TestProject.AppDll;
             dotnet.Exec(appDll)
                 .EnvironmentVariable(startupHookVarName, startupHookWithReturnTypeDll)
@@ -684,33 +685,36 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 context.Target,
                 context.CompilationOptions,
                 context.CompileLibraries,
-                context.RuntimeLibraries.Select(
-                    lib =>
-                        new RuntimeLibrary(
-                            lib.Type,
-                            lib.Name,
-                            lib.Version,
-                            lib.Hash,
-                            lib.RuntimeAssemblyGroups.Select(
-                                    assemblyGroup =>
-                                        new RuntimeAssetGroup(
-                                            assemblyGroup.Runtime,
-                                            assemblyGroup.RuntimeFiles.Where(
-                                                f => !f.Path.EndsWith("SharedLibrary.dll")
+                context.RuntimeLibraries
+                    .Select(
+                        lib =>
+                            new RuntimeLibrary(
+                                lib.Type,
+                                lib.Name,
+                                lib.Version,
+                                lib.Hash,
+                                lib.RuntimeAssemblyGroups
+                                    .Select(
+                                        assemblyGroup =>
+                                            new RuntimeAssetGroup(
+                                                assemblyGroup.Runtime,
+                                                assemblyGroup.RuntimeFiles
+                                                    .Where(
+                                                        f => !f.Path.EndsWith("SharedLibrary.dll")
+                                                    )
                                             )
-                                        )
-                                )
-                                .ToList()
-                                .AsReadOnly(),
-                            lib.NativeLibraryGroups,
-                            lib.ResourceAssemblies,
-                            lib.Dependencies,
-                            lib.Serviceable,
-                            lib.Path,
-                            lib.HashPath,
-                            lib.RuntimeStoreManifestName
-                        )
-                ),
+                                    )
+                                    .ToList()
+                                    .AsReadOnly(),
+                                lib.NativeLibraryGroups,
+                                lib.ResourceAssemblies,
+                                lib.Dependencies,
+                                lib.Serviceable,
+                                lib.Path,
+                                lib.HashPath,
+                                lib.RuntimeStoreManifestName
+                            )
+                    ),
                 context.RuntimeGraph
             );
 
@@ -824,77 +828,101 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 RepoDirectories = new RepoDirectoriesProvider();
 
                 // Entry point projects
-                PortableAppFixture = new TestProjectFixture(
-                    "PortableApp",
-                    RepoDirectories
-                ).EnsureRestored().PublishProject();
+                PortableAppFixture = new TestProjectFixture("PortableApp", RepoDirectories)
+                    .EnsureRestored()
+                    .PublishProject();
 
                 PortableAppWithExceptionFixture = new TestProjectFixture(
                     "PortableAppWithException",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
                 // Entry point with missing reference assembly
                 PortableAppWithMissingRefFixture = new TestProjectFixture(
                     "PortableAppWithMissingRef",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
 
                 // Correct startup hooks
-                StartupHookFixture = new TestProjectFixture(
-                    "StartupHook",
-                    RepoDirectories
-                ).EnsureRestored().PublishProject();
+                StartupHookFixture = new TestProjectFixture("StartupHook", RepoDirectories)
+                    .EnsureRestored()
+                    .PublishProject();
                 StartupHookWithOverloadFixture = new TestProjectFixture(
                     "StartupHookWithOverload",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
                 // Missing startup hook type (no StartupHook type defined)
                 StartupHookWithoutStartupHookTypeFixture = new TestProjectFixture(
                     "StartupHookWithoutStartupHookType",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
                 // Missing startup hook method (no Initialize method defined)
                 StartupHookWithoutInitializeMethodFixture = new TestProjectFixture(
                     "StartupHookWithoutInitializeMethod",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
                 // Invalid startup hook assembly
                 StartupHookStartupHookInvalidAssemblyFixture = new TestProjectFixture(
                     "StartupHookFake",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
                 // Invalid startup hooks (incorrect signatures)
                 StartupHookWithNonPublicMethodFixture = new TestProjectFixture(
                     "StartupHookWithNonPublicMethod",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
                 StartupHookWithInstanceMethodFixture = new TestProjectFixture(
                     "StartupHookWithInstanceMethod",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
                 StartupHookWithParameterFixture = new TestProjectFixture(
                     "StartupHookWithParameter",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
                 StartupHookWithReturnTypeFixture = new TestProjectFixture(
                     "StartupHookWithReturnType",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
                 StartupHookWithMultipleIncorrectSignaturesFixture = new TestProjectFixture(
                     "StartupHookWithMultipleIncorrectSignatures",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
                 // Valid startup hooks with incorrect behavior
                 StartupHookWithDependencyFixture = new TestProjectFixture(
                     "StartupHookWithDependency",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
 
                 // Startup hook with an assembly resolver
                 StartupHookWithAssemblyResolver = new TestProjectFixture(
                     "StartupHookWithAssemblyResolver",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
             }
 
             public void Dispose()

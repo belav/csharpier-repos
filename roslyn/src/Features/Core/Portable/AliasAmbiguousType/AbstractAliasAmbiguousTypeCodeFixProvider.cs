@@ -86,10 +86,8 @@ namespace Microsoft.CodeAnalysis.AliasAmbiguousType
                     );
                 }
 
-                var groupingTitle = string.Format(
-                    FeaturesResources.Alias_ambiguous_type_0,
-                    diagnosticNode.ToString()
-                );
+                var groupingTitle = string
+                    .Format(FeaturesResources.Alias_ambiguous_type_0, diagnosticNode.ToString());
                 var groupingCodeAction = new CodeActionWithNestedActions(
                     groupingTitle,
                     codeActionsBuilder.ToImmutable(),
@@ -105,9 +103,8 @@ namespace Microsoft.CodeAnalysis.AliasAmbiguousType
             // Arity: Aliases can only name closed constructed types. (See also proposal https://github.com/dotnet/csharplang/issues/1239)
             // Aliasing as a closed constructed type is possible but would require to remove the type arguments from the diagnosed node.
             // It is unlikely that the user wants that and so generic types are not supported.
-            symbolInfo.CandidateSymbols.All(
-                symbol => symbol.IsKind(SymbolKind.NamedType) && symbol.GetArity() == 0
-            );
+            symbolInfo.CandidateSymbols
+                .All(symbol => symbol.IsKind(SymbolKind.NamedType) && symbol.GetArity() == 0);
 
         private class MyCodeAction : DocumentChangeAction
         {

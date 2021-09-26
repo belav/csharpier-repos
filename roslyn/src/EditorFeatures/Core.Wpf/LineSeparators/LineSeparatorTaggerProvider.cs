@@ -122,10 +122,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
                 var snapshotSpan = documentSnapshotSpan.SnapshotSpan;
                 var lineSeparatorService = document.GetLanguageService<ILineSeparatorService>();
                 var lineSeparatorSpans = await lineSeparatorService.GetLineSeparatorsAsync(
-                        document,
-                        snapshotSpan.Span.ToTextSpan(),
-                        cancellationToken
-                    )
+                    document,
+                    snapshotSpan.Span.ToTextSpan(),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
 

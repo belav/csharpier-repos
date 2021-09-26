@@ -32,9 +32,8 @@ namespace CodeGenerator
             }
             else if (args.Length < 5)
             {
-                Console.Error.WriteLine(
-                    "Missing path to TransportMultiplexedConnection.Generated.cs"
-                );
+                Console.Error
+                    .WriteLine("Missing path to TransportMultiplexedConnection.Generated.cs");
                 return 1;
             }
             else if (args.Length < 6)

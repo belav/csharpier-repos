@@ -29,10 +29,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
     public class SqlServerGeometryTypeMapping<TGeometry>
         : RelationalGeometryTypeMapping<TGeometry, SqlBytes> where TGeometry : Geometry
     {
-        private static readonly MethodInfo _getSqlBytes = typeof(SqlDataReader).GetRuntimeMethod(
-            nameof(SqlDataReader.GetSqlBytes),
-            new[] { typeof(int) }
-        )!;
+        private static readonly MethodInfo _getSqlBytes = typeof(SqlDataReader)
+            .GetRuntimeMethod(nameof(SqlDataReader.GetSqlBytes), new[] { typeof(int) })!;
 
         private static Action<DbParameter, SqlDbType>? _sqlDbTypeSetter;
         private static Action<DbParameter, string>? _udtTypeNameSetter;
@@ -188,14 +186,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             var valueParam = Expression.Parameter(typeof(SqlDbType), "value");
 
             return Expression.Lambda<Action<DbParameter, SqlDbType>>(
-                    Expression.Call(
-                        Expression.Convert(paramParam, paramType),
-                        paramType.GetProperty("SqlDbType")!.SetMethod!,
-                        valueParam
-                    ),
-                    paramParam,
+                Expression.Call(
+                    Expression.Convert(paramParam, paramType),
+                    paramType.GetProperty("SqlDbType")!.SetMethod!,
                     valueParam
-                )
+                ),
+                paramParam,
+                valueParam
+            )
                 .Compile();
         }
 
@@ -205,14 +203,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             var valueParam = Expression.Parameter(typeof(string), "value");
 
             return Expression.Lambda<Action<DbParameter, string>>(
-                    Expression.Call(
-                        Expression.Convert(paramParam, paramType),
-                        paramType.GetProperty("UdtTypeName")!.SetMethod!,
-                        valueParam
-                    ),
-                    paramParam,
+                Expression.Call(
+                    Expression.Convert(paramParam, paramType),
+                    paramType.GetProperty("UdtTypeName")!.SetMethod!,
                     valueParam
-                )
+                ),
+                paramParam,
+                valueParam
+            )
                 .Compile();
         }
     }

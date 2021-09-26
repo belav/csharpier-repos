@@ -384,8 +384,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var viewContext = GetViewContext();
             var protector = _dataprotectorProvider.CreateProtector(
-                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
-                )
+                ServerComponentSerializationSettings.DataProtectionProviderPurpose
+            )
                 .ToTimeLimitedDataProtector();
 
             // Act
@@ -435,8 +435,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var viewContext = GetViewContext();
             var protector = _dataprotectorProvider.CreateProtector(
-                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
-                )
+                ServerComponentSerializationSettings.DataProtectionProviderPurpose
+            )
                 .ToTimeLimitedDataProtector();
 
             // Act
@@ -536,8 +536,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var viewContext = GetViewContext();
             var protector = _dataprotectorProvider.CreateProtector(
-                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
-                )
+                ServerComponentSerializationSettings.DataProtectionProviderPurpose
+            )
                 .ToTimeLimitedDataProtector();
 
             // Act
@@ -625,8 +625,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var viewContext = GetViewContext();
             var protector = _dataprotectorProvider.CreateProtector(
-                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
-                )
+                ServerComponentSerializationSettings.DataProtectionProviderPurpose
+            )
                 .ToTimeLimitedDataProtector();
 
             // Act
@@ -679,8 +679,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var viewContext = GetViewContext();
             var protector = _dataprotectorProvider.CreateProtector(
-                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
-                )
+                ServerComponentSerializationSettings.DataProtectionProviderPurpose
+            )
                 .ToTimeLimitedDataProtector();
 
             // Act
@@ -736,8 +736,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewContext = GetViewContext();
             var writer = new StringWriter();
             var protector = _dataprotectorProvider.CreateProtector(
-                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
-                )
+                ServerComponentSerializationSettings.DataProtectionProviderPurpose
+            )
                 .ToTimeLimitedDataProtector();
 
             // Act
@@ -806,8 +806,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewContext = GetViewContext();
             var writer = new StringWriter();
             var protector = _dataprotectorProvider.CreateProtector(
-                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
-                )
+                ServerComponentSerializationSettings.DataProtectionProviderPurpose
+            )
                 .ToTimeLimitedDataProtector();
 
             // Act

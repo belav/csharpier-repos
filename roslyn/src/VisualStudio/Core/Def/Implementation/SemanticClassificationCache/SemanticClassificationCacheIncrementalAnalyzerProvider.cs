@@ -63,9 +63,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
 
                 var solution = document.Project.Solution;
                 var client = await RemoteHostClient.TryGetClientAsync(
-                        solution.Workspace,
-                        cancellationToken
-                    )
+                    solution.Workspace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (client == null)
                 {
@@ -75,8 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
                     return;
                 }
 
-                var statusService =
-                    document.Project.Solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+                var statusService = document.Project.Solution.Workspace.Services
+                    .GetRequiredService<IWorkspaceStatusService>();
 
                 // If we're not fully loaded, then we don't want to cache classifications.  The classifications we have
                 // will likely not be accurate.  And, if we shutdown after that, we'll have cached incomplete classifications.
@@ -86,15 +86,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
                     return;
 
                 await client.TryInvokeAsync<IRemoteSemanticClassificationCacheService>(
-                        document.Project.Solution,
-                        (service, solutionInfo, cancellationToken) =>
-                            service.CacheSemanticClassificationsAsync(
-                                solutionInfo,
-                                document.Id,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    document.Project.Solution,
+                    (service, solutionInfo, cancellationToken) =>
+                        service.CacheSemanticClassificationsAsync(
+                            solutionInfo,
+                            document.Id,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

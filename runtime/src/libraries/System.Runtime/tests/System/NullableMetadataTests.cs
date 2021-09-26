@@ -32,9 +32,9 @@ namespace System.Runtime.Tests
             this IEnumerable<CustomAttributeData> attributes
         ) =>
             attributes.Where(
-                    attribute =>
-                        attribute.AttributeType.FullName.Equals(NullablePublicOnlyAttributeFullName)
-                )
+                attribute =>
+                    attribute.AttributeType.FullName.Equals(NullablePublicOnlyAttributeFullName)
+            )
                 .FirstOrDefault();
 
         private static bool IsProtected(this MemberInfo info)
@@ -113,9 +113,8 @@ namespace System.Runtime.Tests
 
             Assert.True(type.CustomAttributes.GetNullableAttributes().Any());
 
-            bool foundAtLeastOneNullableAttribute = type.CustomAttributes.Where(
-                    a => a.AttributeType.Name.Equals(NullableContextAttributeFullName)
-                )
+            bool foundAtLeastOneNullableAttribute = type.CustomAttributes
+                .Where(a => a.AttributeType.Name.Equals(NullableContextAttributeFullName))
                 .Any();
 
             // If there is a NullableContextAttribute there is no guarantee that its members will have
@@ -137,7 +136,8 @@ namespace System.Runtime.Tests
                     if (publicMember is MethodInfo methodInfo)
                     {
                         if (
-                            methodInfo.ReturnParameter.CustomAttributes.GetNullableAttributes()
+                            methodInfo.ReturnParameter.CustomAttributes
+                                .GetNullableAttributes()
                                 .Any()
                         )
                         {
@@ -190,8 +190,8 @@ namespace System.Runtime.Tests
         [MemberData(nameof(NullableMetadataTypesTestData))]
         public static void NullablePublicOnlyAttributePresent(Type type)
         {
-            CustomAttributeData nullablePublicOnlyAttribute =
-                type.Module.CustomAttributes.GetNullablePublicOnlyAttribute();
+            CustomAttributeData nullablePublicOnlyAttribute = type.Module.CustomAttributes
+                .GetNullablePublicOnlyAttribute();
             Assert.NotNull(nullablePublicOnlyAttribute);
 
             Assert.False((bool)nullablePublicOnlyAttribute.ConstructorArguments.First().Value);

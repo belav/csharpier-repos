@@ -52,9 +52,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
                 return s_creationHook(assemblies);
             }
 
-            var compositionConfiguration = new ContainerConfiguration().WithAssemblies(
-                assemblies.Distinct()
-            );
+            var compositionConfiguration = new ContainerConfiguration()
+                .WithAssemblies(assemblies.Distinct());
             var container = compositionConfiguration.CreateContainer();
             return new MefHostServices(container);
         }

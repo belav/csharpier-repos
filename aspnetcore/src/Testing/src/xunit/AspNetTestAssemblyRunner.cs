@@ -44,16 +44,16 @@ namespace Microsoft.AspNetCore.Testing
                 {
                     var fixturesAttributes = (
                         (IReflectionAssemblyInfo)TestAssembly.Assembly
-                    ).Assembly.GetCustomAttributes(typeof(AssemblyFixtureAttribute), false)
+                    ).Assembly
+                        .GetCustomAttributes(typeof(AssemblyFixtureAttribute), false)
                         .Cast<AssemblyFixtureAttribute>()
                         .ToList();
 
                     // Instantiate all the fixtures
                     foreach (var fixtureAttribute in fixturesAttributes)
                     {
-                        var ctorWithDiagnostics = fixtureAttribute.FixtureType.GetConstructor(
-                            new[] { typeof(IMessageSink) }
-                        );
+                        var ctorWithDiagnostics = fixtureAttribute.FixtureType
+                            .GetConstructor(new[] { typeof(IMessageSink) });
                         object instance = null;
                         if (ctorWithDiagnostics != null)
                         {
@@ -109,6 +109,7 @@ namespace Microsoft.AspNetCore.Testing
                 TestCaseOrderer,
                 new ExceptionAggregator(Aggregator),
                 cancellationTokenSource
-            ).RunAsync();
+            )
+                .RunAsync();
     }
 }

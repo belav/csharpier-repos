@@ -274,7 +274,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Aes).GetMethod(
+            var result = typeof(Aes)
+                .GetMethod(
                     nameof(Aes.KeygenAssist),
                     new Type[] { typeof(Vector128<Byte>), typeof(byte) }
                 )
@@ -291,7 +292,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Aes).GetMethod(
+            var result = typeof(Aes)
+                .GetMethod(
                     nameof(Aes.KeygenAssist),
                     new Type[] { typeof(Vector128<Byte>), typeof(byte) }
                 )
@@ -308,7 +310,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Aes).GetMethod(
+            var result = typeof(Aes)
+                .GetMethod(
                     nameof(Aes.KeygenAssist),
                     new Type[] { typeof(Vector128<Byte>), typeof(byte) }
                 )
@@ -517,15 +520,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Aes)}.{nameof(Aes.KeygenAssist)}<Byte>(Vector128<Byte>, 5): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  expectedRet: ({string.Join(", ", _expectedRet)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Aes)}.{nameof(Aes.KeygenAssist)}<Byte>(Vector128<Byte>, 5): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  expectedRet: ({string.Join(", ", _expectedRet)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

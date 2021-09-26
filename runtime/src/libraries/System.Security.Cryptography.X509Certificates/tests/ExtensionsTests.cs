@@ -38,7 +38,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         "304c304a06082b06010505073002863e687474703a2f2f7777772e6d"
                         + "6963726f736f66742e636f6d2f706b692f63657274732f4d6963436f"
                         + "645369675043415f30382d33312d323031302e637274"
-                    ).HexToByteArray();
+                    )
+                        .HexToByteArray();
 
                     Assert.Equal(expectedDer, aia.RawData);
                 }
@@ -49,8 +50,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Assert.Equal("2.5.29.14", skid.Oid.Value);
                     Assert.False(skid.Critical);
 
-                    byte[] expected =
-                        "04145971a65a334dda980780ff841ebe87f9723241f2".HexToByteArray();
+                    byte[] expected = "04145971a65a334dda980780ff841ebe87f9723241f2"
+                        .HexToByteArray();
                     Assert.Equal(expected, skid.RawData);
 
                     Assert.True(skid is X509SubjectKeyIdentifierExtension);
@@ -72,7 +73,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         "3048a4463044310d300b060355040b13044d4f505231333031060355"
                         + "0405132a33313539352b34666166306237312d616433372d34616133"
                         + "2d613637312d373662633035323334346164"
-                    ).HexToByteArray();
+                    )
+                        .HexToByteArray();
 
                     Assert.Equal(expected, sans.RawData);
                 }
@@ -87,7 +89,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         "304d304ba049a0478645687474703a2f2f63726c2e6d6963726f736f"
                         + "66742e636f6d2f706b692f63726c2f70726f64756374732f4d696343"
                         + "6f645369675043415f30382d33312d323031302e63726c"
-                    ).HexToByteArray();
+                    )
+                        .HexToByteArray();
 
                     Assert.Equal(expected, cdps.RawData);
                 }
@@ -98,8 +101,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Assert.Equal("2.5.29.35", akid.Oid.Value);
                     Assert.False(akid.Critical);
 
-                    byte[] expected =
-                        "30168014cb11e8cad2b4165801c9372e331616b94c9a0a1f".HexToByteArray();
+                    byte[] expected = "30168014cb11e8cad2b4165801c9372e331616b94c9a0a1f"
+                        .HexToByteArray();
                     Assert.Equal(expected, akid.RawData);
                 }
 

@@ -38,14 +38,15 @@ namespace Internal.Cryptography.Pal.Windows
                 }
 
                 ContentInfo contentInfo = _hCryptMsg.GetContentInfo();
-                byte[]? cek = AnyOS.ManagedPkcsPal.ManagedKeyTransPal.DecryptCekCore(
-                    cert,
-                    key,
-                    recipientInfo.EncryptedKey,
-                    recipientInfo.KeyEncryptionAlgorithm.Oid.Value,
-                    recipientInfo.KeyEncryptionAlgorithm.Parameters,
-                    out exception
-                );
+                byte[]? cek = AnyOS.ManagedPkcsPal.ManagedKeyTransPal
+                    .DecryptCekCore(
+                        cert,
+                        key,
+                        recipientInfo.EncryptedKey,
+                        recipientInfo.KeyEncryptionAlgorithm.Oid.Value,
+                        recipientInfo.KeyEncryptionAlgorithm.Parameters,
+                        out exception
+                    );
 
                 // Pin CEK to prevent it from getting copied during heap compaction.
                 fixed (byte* pinnedCek = cek)
@@ -57,13 +58,14 @@ namespace Internal.Cryptography.Pal.Windows
                             return null;
                         }
 
-                        return AnyOS.ManagedPkcsPal.ManagedDecryptorPal.TryDecryptCore(
-                            cek!,
-                            contentInfo.ContentType.Value!,
-                            contentInfo.Content,
-                            _contentEncryptionAlgorithm,
-                            out exception
-                        );
+                        return AnyOS.ManagedPkcsPal.ManagedDecryptorPal
+                            .TryDecryptCore(
+                                cek!,
+                                contentInfo.ContentType.Value!,
+                                contentInfo.Content,
+                                _contentEncryptionAlgorithm,
+                                out exception
+                            );
                     }
 
                     finally
@@ -151,12 +153,13 @@ namespace Internal.Cryptography.Pal.Windows
                 int cbSize = 0;
 
                 if (
-                    Interop.Crypt32.CertGetCertificateContextProperty(
-                        hCertContext,
-                        CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
-                        null,
-                        ref cbSize
-                    )
+                    Interop.Crypt32
+                        .CertGetCertificateContextProperty(
+                            hCertContext,
+                            CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
+                            null,
+                            ref cbSize
+                        )
                 )
                 {
                     keySpec = CryptKeySpec.CERT_NCRYPT_KEY_SPEC;
@@ -164,12 +167,13 @@ namespace Internal.Cryptography.Pal.Windows
                 }
 
                 if (
-                    !Interop.Crypt32.CertGetCertificateContextProperty(
-                        hCertContext,
-                        CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                        null,
-                        ref cbSize
-                    )
+                    !Interop.Crypt32
+                        .CertGetCertificateContextProperty(
+                            hCertContext,
+                            CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                            null,
+                            ref cbSize
+                        )
                 )
                 {
                     ErrorCode errorCode = (ErrorCode)(Marshal.GetLastWin32Error());
@@ -183,12 +187,13 @@ namespace Internal.Cryptography.Pal.Windows
                     fixed (byte* pvData = pData)
                     {
                         if (
-                            !Interop.Crypt32.CertGetCertificateContextProperty(
-                                hCertContext,
-                                CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                                pData,
-                                ref cbSize
-                            )
+                            !Interop.Crypt32
+                                .CertGetCertificateContextProperty(
+                                    hCertContext,
+                                    CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                                    pData,
+                                    ref cbSize
+                                )
                         )
                         {
                             ErrorCode errorCode = (ErrorCode)(Marshal.GetLastWin32Error());
@@ -220,12 +225,8 @@ namespace Internal.Cryptography.Pal.Windows
             decryptPara.dwKeySpec = keySpec;
             decryptPara.dwRecipientIndex = pal.Index;
 
-            bool success = Interop.Crypt32.CryptMsgControl(
-                _hCryptMsg,
-                0,
-                MsgControlType.CMSG_CTRL_DECRYPT,
-                ref decryptPara
-            );
+            bool success = Interop.Crypt32
+                .CryptMsgControl(_hCryptMsg, 0, MsgControlType.CMSG_CTRL_DECRYPT, ref decryptPara);
             if (!success)
                 return Marshal.GetHRForLastWin32Error().ToCryptographicException();
 
@@ -325,12 +326,13 @@ namespace Internal.Cryptography.Pal.Windows
         private Exception? TryExecuteDecryptAgree(ref CMSG_CTRL_KEY_AGREE_DECRYPT_PARA decryptPara)
         {
             if (
-                !Interop.Crypt32.CryptMsgControl(
-                    _hCryptMsg,
-                    0,
-                    MsgControlType.CMSG_CTRL_KEY_AGREE_DECRYPT,
-                    ref decryptPara
-                )
+                !Interop.Crypt32
+                    .CryptMsgControl(
+                        _hCryptMsg,
+                        0,
+                        MsgControlType.CMSG_CTRL_KEY_AGREE_DECRYPT,
+                        ref decryptPara
+                    )
             )
             {
                 ErrorCode errorCode = (ErrorCode)(Marshal.GetHRForLastWin32Error());

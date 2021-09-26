@@ -411,13 +411,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                 }
                 else
                 {
-                    return SegmentedArraySortHelper<T>.InternalBinarySearch(
-                        array,
-                        index,
-                        length,
-                        value,
-                        comparer
-                    );
+                    return SegmentedArraySortHelper<T>
+                        .InternalBinarySearch(array, index, length, value, comparer);
                 }
             }
             catch (Exception e)
@@ -1081,11 +1076,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                 }
                 else
                 {
-                    SegmentedArraySortHelper<TKey, TValue>.IntrospectiveSort(
-                        keys,
-                        values,
-                        comparer
-                    );
+                    SegmentedArraySortHelper<TKey, TValue>
+                        .IntrospectiveSort(keys, values, comparer);
                 }
             }
             catch (IndexOutOfRangeException)

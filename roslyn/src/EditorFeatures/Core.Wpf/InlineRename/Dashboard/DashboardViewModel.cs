@@ -48,12 +48,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             _defaultRenameOverloadFlag =
                 session.OptionSet.GetOption(RenameOptions.RenameOverloads)
                 || session.ForceRenameOverloads;
-            _defaultRenameInStringsFlag = session.OptionSet.GetOption(
-                RenameOptions.RenameInStrings
-            );
-            _defaultRenameInCommentsFlag = session.OptionSet.GetOption(
-                RenameOptions.RenameInComments
-            );
+            _defaultRenameInStringsFlag = session.OptionSet
+                .GetOption(RenameOptions.RenameInStrings);
+            _defaultRenameInCommentsFlag = session.OptionSet
+                .GetOption(RenameOptions.RenameInComments);
             _defaultPreviewChangesFlag = session.OptionSet.GetOption(RenameOptions.PreviewChanges);
 
             _session.ReferenceLocationsChanged += OnReferenceLocationsChanged;
@@ -155,18 +153,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
             else if (fileCount == 1)
             {
-                _searchText = string.Format(
-                    EditorFeaturesResources.Rename_will_update_0_references_in_1_file,
-                    referenceCount
-                );
+                _searchText = string
+                    .Format(
+                        EditorFeaturesResources.Rename_will_update_0_references_in_1_file,
+                        referenceCount
+                    );
             }
             else
             {
-                _searchText = string.Format(
-                    EditorFeaturesResources.Rename_will_update_0_references_in_1_files,
-                    referenceCount,
-                    fileCount
-                );
+                _searchText = string
+                    .Format(
+                        EditorFeaturesResources.Rename_will_update_0_references_in_1_files,
+                        referenceCount,
+                        fileCount
+                    );
             }
 
             NotifyPropertyChanged("SearchText");
@@ -211,10 +211,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         {
             get
             {
-                return string.Format(
-                    EditorFeaturesResources.Rename_colon_0,
-                    Session.OriginalSymbolName
-                );
+                return string
+                    .Format(EditorFeaturesResources.Rename_colon_0, Session.OriginalSymbolName);
             }
         }
 
@@ -222,10 +220,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         {
             get
             {
-                return string.Format(
-                    EditorFeaturesResources.New_name_colon_0,
-                    Session.ReplacementText
-                );
+                return string
+                    .Format(EditorFeaturesResources.New_name_colon_0, Session.ReplacementText);
             }
         }
 
@@ -251,7 +247,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             get
             {
                 return _resolvableConflictCount >= 1
-                  ? string.Format(
+                  ? string
+                    .Format(
                         EditorFeaturesResources._0_conflict_s_will_be_resolved,
                         _resolvableConflictCount
                     )
@@ -269,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             get
             {
                 return _unresolvableConflictCount >= 1
-                  ? string.Format(
+                  ? string
+                    .Format(
                         EditorFeaturesResources._0_unresolvable_conflict_s,
                         _unresolvableConflictCount
                     )

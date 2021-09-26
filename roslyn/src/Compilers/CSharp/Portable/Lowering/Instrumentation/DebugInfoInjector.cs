@@ -285,10 +285,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return new BoundSequencePointWithSpan(
                 whileSyntax,
-                base.InstrumentWhileStatementConditionalGotoStartOrBreak(
-                    original,
-                    ifConditionGotoStart
-                ),
+                base
+                    .InstrumentWhileStatementConditionalGotoStartOrBreak(
+                        original,
+                        ifConditionGotoStart
+                    ),
                 conditionSequencePointSpan
             );
         }
@@ -330,10 +331,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             var forEachSyntax = (ForEachVariableStatementSyntax)original.Syntax;
             return new BoundSequencePointWithSpan(
                 forEachSyntax,
-                base.InstrumentForEachStatementDeconstructionVariablesDeclaration(
-                    original,
-                    iterationVarDecl
-                ),
+                base
+                    .InstrumentForEachStatementDeconstructionVariablesDeclaration(
+                        original,
+                        iterationVarDecl
+                    ),
                 forEachSyntax.Variable.Span
             );
         }
@@ -509,9 +511,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return AddSequencePoint(
                 original.Syntax.Kind() == SyntaxKind.VariableDeclarator
                   ? (VariableDeclaratorSyntax)original.Syntax
-                  : (
-                        (LocalDeclarationStatementSyntax)original.Syntax
-                    ).Declaration.Variables.First(),
+                  : ((LocalDeclarationStatementSyntax)original.Syntax).Declaration.Variables
+                    .First(),
                 base.InstrumentLocalInitialization(original, rewritten)
             );
         }
@@ -587,10 +588,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return new BoundSequencePointWithSpan(
                 syntax: whenClause,
-                statementOpt: base.InstrumentSwitchWhenClauseConditionalGotoBody(
-                    original,
-                    ifConditionGotoBody
-                ),
+                statementOpt: base
+                    .InstrumentSwitchWhenClauseConditionalGotoBody(original, ifConditionGotoBody),
                 span: whenClause.Span
             );
         }
@@ -652,11 +651,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return new BoundSequencePointExpression(
                 original.Syntax,
-                base.InstrumentSwitchExpressionArmExpression(
-                    original,
-                    rewrittenExpression,
-                    factory
-                ),
+                base
+                    .InstrumentSwitchExpressionArmExpression(
+                        original,
+                        rewrittenExpression,
+                        factory
+                    ),
                 rewrittenExpression.Type
             );
         }

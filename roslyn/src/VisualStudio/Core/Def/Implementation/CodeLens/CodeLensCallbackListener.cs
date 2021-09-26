@@ -75,10 +75,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     continue;
 
                 var projectVersion = await service.GetProjectCodeLensVersionAsync(
-                        solution,
-                        project.Id,
-                        cancellationToken
-                    )
+                    solution,
+                    project.Id,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 builder[projectGuid] = projectVersion.ToString();
             }
@@ -95,11 +95,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
         {
             var solution = _workspace.CurrentSolution;
             var (documentId, node) = await GetDocumentIdAndNodeAsync(
-                    solution,
-                    descriptor,
-                    descriptorContext.ApplicableSpan,
-                    cancellationToken
-                )
+                solution,
+                descriptor,
+                descriptorContext.ApplicableSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (documentId == null)
             {
@@ -111,10 +111,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             {
                 // Avoid calculating results if we already have a result for the current project version
                 var currentProjectVersion = await service.GetProjectCodeLensVersionAsync(
-                        solution,
-                        documentId.ProjectId,
-                        cancellationToken
-                    )
+                    solution,
+                    documentId.ProjectId,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (previousCount.Value.Version == currentProjectVersion.ToString())
                 {
@@ -125,12 +125,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             var maxSearchResults = await GetMaxResultCapAsync(cancellationToken)
                 .ConfigureAwait(false);
             return await service.GetReferenceCountAsync(
-                    solution,
-                    documentId,
-                    node,
-                    maxSearchResults,
-                    cancellationToken
-                )
+                solution,
+                documentId,
+                node,
+                maxSearchResults,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -142,11 +142,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
         {
             var solution = _workspace.CurrentSolution;
             var (documentId, node) = await GetDocumentIdAndNodeAsync(
-                    solution,
-                    descriptor,
-                    descriptorContext.ApplicableSpan,
-                    cancellationToken
-                )
+                solution,
+                descriptor,
+                descriptorContext.ApplicableSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (documentId == null)
             {
@@ -155,11 +155,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
 
             var service = _workspace.Services.GetRequiredService<ICodeLensReferencesService>();
             var references = await service.FindReferenceLocationsAsync(
-                    solution,
-                    documentId,
-                    node,
-                    cancellationToken
-                )
+                solution,
+                documentId,
+                node,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!references.HasValue)
             {
@@ -167,10 +167,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             }
 
             var projectVersion = await service.GetProjectCodeLensVersionAsync(
-                    solution,
-                    documentId.ProjectId,
-                    cancellationToken
-                )
+                solution,
+                documentId.ProjectId,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return (projectVersion.ToString(), references.Value);
         }
@@ -183,11 +183,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
         {
             var solution = _workspace.CurrentSolution;
             var (documentId, node) = await GetDocumentIdAndNodeAsync(
-                    solution,
-                    descriptor,
-                    descriptorContext.ApplicableSpan,
-                    cancellationToken
-                )
+                solution,
+                descriptor,
+                descriptorContext.ApplicableSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (documentId == null)
             {
@@ -196,11 +196,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
 
             var service = _workspace.Services.GetRequiredService<ICodeLensReferencesService>();
             return await service.FindReferenceMethodsAsync(
-                    solution,
-                    documentId,
-                    node,
-                    cancellationToken
-                )
+                solution,
+                documentId,
+                node,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

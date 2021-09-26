@@ -36,12 +36,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             int index = 0
         ) =>
             await TestChangeSignatureViaCodeActionAsync(
-                    markup,
-                    updatedSignature?.Select(i => new AddedParameterOrExistingIndex(i)).ToArray(),
-                    expectedCodeAction,
-                    expectedCode,
-                    index
-                )
+                markup,
+                updatedSignature?.Select(i => new AddedParameterOrExistingIndex(i)).ToArray(),
+                expectedCodeAction,
+                expectedCode,
+                index
+            )
                 .ConfigureAwait(false);
 
         internal async Task TestChangeSignatureViaCodeActionAsync(
@@ -57,8 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
                 var testOptions = new TestParameters();
 
                 using var workspace = CreateWorkspaceFromOptions(markup, testOptions);
-                var optionsService =
-                    (TestChangeSignatureOptionsService)workspace.Services.GetRequiredService<IChangeSignatureOptionsService>();
+                var optionsService = (TestChangeSignatureOptionsService)workspace.Services
+                    .GetRequiredService<IChangeSignatureOptionsService>();
                 optionsService.UpdatedSignature = updatedSignature;
 
                 var refactoring = await GetCodeRefactoringAsync(workspace, testOptions);
@@ -150,18 +150,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
                 // Allow testing of invocation document regardless of success/failure
                 if (expectedUpdatedInvocationDocumentCode != null)
                 {
-                    var updatedInvocationDocument = result.UpdatedSolution.GetDocument(
-                        testState.InvocationDocument.Id
-                    );
+                    var updatedInvocationDocument = result.UpdatedSolution
+                        .GetDocument(testState.InvocationDocument.Id);
                     var updatedCode = (await updatedInvocationDocument.GetTextAsync()).ToString();
                     Assert.Equal(expectedUpdatedInvocationDocumentCode, updatedCode);
                 }
 
                 if (verifyNoDiagnostics)
                 {
-                    var diagnostics = (
-                        await testState.InvocationDocument.GetSemanticModelAsync()
-                    ).GetDiagnostics();
+                    var diagnostics = (await testState.InvocationDocument.GetSemanticModelAsync())
+                        .GetDiagnostics();
 
                     if (diagnostics.Length > 0)
                     {
@@ -199,13 +197,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
                 return string.Empty;
             }
 
-            return string.Format(
-                "{0} diagnostic(s) introduced in signature configuration \"{1}\":\r\n{2}\r\n{3}",
-                diagnostics.Length,
-                GetSignatureDescriptionString(document, permutation, totalParameters),
-                string.Join("\r\n", diagnostics.Select(d => d.GetMessage())),
-                fileContents
-            );
+            return string
+                .Format(
+                    "{0} diagnostic(s) introduced in signature configuration \"{1}\":\r\n{2}\r\n{3}",
+                    diagnostics.Length,
+                    GetSignatureDescriptionString(document, permutation, totalParameters),
+                    string.Join("\r\n", diagnostics.Select(d => d.GetMessage())),
+                    fileContents
+                );
         }
 
         private static string GetSignatureDescriptionString(
@@ -234,20 +233,22 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
                     : string.Empty;
             }
 
-            var newParametersString = string.Join(
-                ",",
-                signature.Where(p => !p.IsExisting).Select(p => p.GetAddedParameter(document))
-            );
+            var newParametersString = string
+                .Join(
+                    ",",
+                    signature.Where(p => !p.IsExisting).Select(p => p.GetAddedParameter(document))
+                );
             var addDescription = !newParametersString.IsEmpty()
                 ? string.Format(", Added {{{0}}}", newParametersString)
                 : string.Empty;
 
-            return string.Format(
-                "Parameters: <{0}>{1}{2}",
-                string.Join(", ", signature.Select(item => item.ToString())),
-                removeDescription,
-                addDescription
-            );
+            return string
+                .Format(
+                    "Parameters: <{0}>{1}{2}",
+                    string.Join(", ", signature.Select(item => item.ToString())),
+                    removeDescription,
+                    addDescription
+                );
         }
 
         /// <summary>

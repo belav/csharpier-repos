@@ -200,9 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 return;
                             }
 
-                            var stack = ArrayBuilder<AssemblySymbol>.GetInstance(
-                                _lazyUsedAssemblyReferences.Count
-                            );
+                            var stack = ArrayBuilder<AssemblySymbol>
+                                .GetInstance(_lazyUsedAssemblyReferences.Count);
                             stack.AddRange(_lazyUsedAssemblyReferences);
 
                             while (stack.Count != 0)
@@ -218,10 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         // be emitted into the resulting binary for that compilation. An alternative
                                         // would be to attempt to emit and get the exact set of emitted references
                                         // in case of success. This might be too slow though.
-                                        usedAssemblies =
-                                            sourceAssembly.DeclaringCompilation.GetCompleteSetOfUsedAssemblies(
-                                                cancellationToken
-                                            );
+                                        usedAssemblies = sourceAssembly.DeclaringCompilation
+                                            .GetCompleteSetOfUsedAssemblies(cancellationToken);
                                         if (usedAssemblies is object)
                                         {
                                             foreach (AssemblySymbol dependency in usedAssemblies)
@@ -234,9 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                                     case RetargetingAssemblySymbol retargetingAssembly:
                                         usedAssemblies =
-                                            retargetingAssembly.UnderlyingAssembly.DeclaringCompilation.GetCompleteSetOfUsedAssemblies(
-                                                cancellationToken
-                                            );
+                                            retargetingAssembly.UnderlyingAssembly.DeclaringCompilation
+                                                .GetCompleteSetOfUsedAssemblies(cancellationToken);
                                         if (usedAssemblies is object)
                                         {
                                             foreach (
@@ -255,18 +251,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                                                             (RetargetingModuleSymbol)retargetingAssembly.Modules[
                                                                 0
                                                             ]
-                                                        ).RetargetingDefinitions(
-                                                            underlyingDependency,
-                                                            out dependency
                                                         )
+                                                            .RetargetingDefinitions(
+                                                                underlyingDependency,
+                                                                out dependency
+                                                            )
                                                     )
                                                     {
                                                         Debug.Assert(
                                                             retargetingAssembly.Modules[
                                                                 0
-                                                            ].ReferencedAssemblySymbols.Contains(
-                                                                underlyingDependency
-                                                            )
+                                                            ].ReferencedAssemblySymbols
+                                                                .Contains(underlyingDependency)
                                                         );
                                                         dependency = underlyingDependency;
                                                     }

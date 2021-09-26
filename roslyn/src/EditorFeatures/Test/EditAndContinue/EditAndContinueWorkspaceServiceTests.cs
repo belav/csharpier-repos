@@ -85,10 +85,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             SourceText.From(
                 "[*.*]"
                     + Environment.NewLine
-                    + string.Join(
-                        Environment.NewLine,
-                        analyzerConfig.Select(c => $"{c.key} = {c.value}")
-                    )
+                    + string
+                        .Join(
+                            Environment.NewLine,
+                            analyzerConfig.Select(c => $"{c.key} = {c.value}")
+                        )
             );
 
         private static (Solution, Document) AddDefaultTestProject(
@@ -170,8 +171,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
         private EditAndContinueWorkspaceService GetEditAndContinueService(Workspace workspace)
         {
-            var service =
-                (EditAndContinueWorkspaceService)workspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
+            var service = (EditAndContinueWorkspaceService)workspace.Services
+                .GetRequiredService<IEditAndContinueWorkspaceService>();
             var accessor = service.GetTestAccessor();
             accessor.SetOutputProvider(project => _mockCompilationOutputsProvider(project));
             accessor.SetReportTelemetry(
@@ -451,9 +452,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         }
                         else
                         {
-                            (
-                                (DebugInformationReaderProvider)reader
-                            ).CreateEditAndContinueMethodDebugInfoReader();
+                            ((DebugInformationReaderProvider)reader)
+                                .CreateEditAndContinueMethodDebugInfoReader();
                         }
                     }
                 );
@@ -635,12 +635,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             // design-time-only document with and without absolute path:
             solution = solution.AddDocument(
-                    CreateDesignTimeOnlyDocument(
-                        projectP.Id,
-                        name: "dt1.cs",
-                        path: Path.Combine(dir.Path, "dt1.cs")
-                    )
+                CreateDesignTimeOnlyDocument(
+                    projectP.Id,
+                    name: "dt1.cs",
+                    path: Path.Combine(dir.Path, "dt1.cs")
                 )
+            )
                 .AddDocument(
                     CreateDesignTimeOnlyDocument(projectP.Id, name: "dt2.cs", path: "dt2.cs")
                 );
@@ -988,17 +988,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     filePath: sourceFileA.Path
                 );
 
-            var documentB = documentA.Project.AddDocument(
-                "b.g.i.cs",
-                SourceText.From(sourceB, Encoding.UTF8),
-                filePath: "b.g.i.cs"
-            );
+            var documentB = documentA.Project
+                .AddDocument(
+                    "b.g.i.cs",
+                    SourceText.From(sourceB, Encoding.UTF8),
+                    filePath: "b.g.i.cs"
+                );
 
-            var documentC = documentB.Project.AddDocument(
-                "c.g.i.vb",
-                SourceText.From(sourceC, Encoding.UTF8),
-                filePath: "c.g.i.vb"
-            );
+            var documentC = documentB.Project
+                .AddDocument(
+                    "c.g.i.vb",
+                    SourceText.From(sourceC, Encoding.UTF8),
+                    filePath: "c.g.i.vb"
+                );
 
             solution = documentC.Project.Solution;
 
@@ -1605,10 +1607,8 @@ class C1
             // Since we find content matching the PDB checksum we update the committed solution with this source text.
             // If we used wrong encoding this would lead to a false change detected below.
             var currentDocument = solution.GetDocument(documentId);
-            await debuggingSession.LastCommittedSolution.OnSourceFileUpdatedAsync(
-                currentDocument,
-                debuggingSession.CancellationToken
-            );
+            await debuggingSession.LastCommittedSolution
+                .OnSourceFileUpdatedAsync(currentDocument, debuggingSession.CancellationToken);
 
             // EnC service queries for a document, which triggers read of the source file from disk.
             Assert.False(
@@ -1661,10 +1661,11 @@ class C1
                 new[]
                 {
                     "ENC0020: "
-                        + string.Format(
-                            FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
-                            FeaturesResources.method
-                        )
+                        + string
+                            .Format(
+                                FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
+                                FeaturesResources.method
+                            )
                 },
                 diagnostics1.Select(d => $"{d.Id}: {d.GetMessage()}")
             );
@@ -1760,7 +1761,8 @@ class C { int Y => 2; }
 
             var generatedDocument = (
                 await solution.Projects.Single().GetSourceGeneratedDocumentsAsync()
-            ).Single();
+            )
+                .Single();
 
             var diagnostics1 = await service.GetDocumentDiagnosticsAsync(
                 generatedDocument,
@@ -1771,10 +1773,11 @@ class C { int Y => 2; }
                 new[]
                 {
                     "ENC0020: "
-                        + string.Format(
-                            FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
-                            FeaturesResources.property_
-                        )
+                        + string
+                            .Format(
+                                FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
+                                FeaturesResources.property_
+                            )
                 },
                 diagnostics1.Select(d => $"{d.Id}: {d.GetMessage()}")
             );
@@ -1899,10 +1902,11 @@ class C { int Y => 2; }
                 new[]
                 {
                     "ENC0020: "
-                        + string.Format(
-                            FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
-                            FeaturesResources.method
-                        )
+                        + string
+                            .Format(
+                                FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
+                                FeaturesResources.method
+                            )
                 },
                 diagnostics.Select(d => $"{d.Id}: {d.GetMessage()}")
             );
@@ -2004,10 +2008,11 @@ class C { int Y => 2; }
                 new[]
                 {
                     "ENC0023: "
-                        + string.Format(
-                            FeaturesResources.Adding_an_abstract_0_or_overriding_an_inherited_0_will_prevent_the_debug_session_from_continuing,
-                            FeaturesResources.method
-                        )
+                        + string
+                            .Format(
+                                FeaturesResources.Adding_an_abstract_0_or_overriding_an_inherited_0_will_prevent_the_debug_session_from_continuing,
+                                FeaturesResources.method
+                            )
                 },
                 diagnostics.Select(d => $"{d.Id}: {d.GetMessage()}")
             );
@@ -2084,10 +2089,11 @@ class C { int Y => 2; }
                 new[]
                 {
                     "ENC0020: "
-                        + string.Format(
-                            FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
-                            FeaturesResources.method
-                        )
+                        + string
+                            .Format(
+                                FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
+                                FeaturesResources.method
+                            )
                 },
                 diagnostics.Select(d => $"{d.Id}: {d.GetMessage()}")
             );
@@ -2119,10 +2125,11 @@ class C { int Y => 2; }
                 new[]
                 {
                     "ENC0020: "
-                        + string.Format(
-                            FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
-                            FeaturesResources.method
-                        )
+                        + string
+                            .Format(
+                                FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
+                                FeaturesResources.method
+                            )
                 },
                 diagnostics.Select(d => $"{d.Id}: {d.GetMessage()}")
             );
@@ -2502,10 +2509,8 @@ class C { int Y => 2; }
             // Save the document:
             if (saveDocument)
             {
-                await debuggingSession.LastCommittedSolution.OnSourceFileUpdatedAsync(
-                    document2,
-                    debuggingSession.CancellationToken
-                );
+                await debuggingSession.LastCommittedSolution
+                    .OnSourceFileUpdatedAsync(document2, debuggingSession.CancellationToken);
                 sourceFile.WriteAllText(source2);
             }
 
@@ -2649,16 +2654,10 @@ class C { int Y => 2; }
             var currentDocument = solution.GetDocument(documentId);
 
             // save (note that this call will fail to match the content with the PDB since it uses the content prior to the actual file write)
-            await debuggingSession.LastCommittedSolution.OnSourceFileUpdatedAsync(
-                currentDocument,
-                debuggingSession.CancellationToken
-            );
-            var (doc, state) =
-                await debuggingSession.LastCommittedSolution.GetDocumentAndStateAsync(
-                    documentId,
-                    currentDocument,
-                    CancellationToken.None
-                );
+            await debuggingSession.LastCommittedSolution
+                .OnSourceFileUpdatedAsync(currentDocument, debuggingSession.CancellationToken);
+            var (doc, state) = await debuggingSession.LastCommittedSolution
+                .GetDocumentAndStateAsync(documentId, currentDocument, CancellationToken.None);
             Assert.Null(doc);
             Assert.Equal(CommittedSolution.DocumentState.OutOfSync, state);
             sourceFile.WriteAllText(source1);
@@ -2949,7 +2948,8 @@ class C { int Y => 2; }
                 // no change in non-remappable regions since we didn't have any active statements:
                 Assert.Empty(editSession.DebuggingSession.NonRemappableRegions);
 
-                var baselineReaders = editSession.DebuggingSession.GetTestAccessor()
+                var baselineReaders = editSession.DebuggingSession
+                    .GetTestAccessor()
                     .GetBaselineModuleReaders();
                 Assert.Equal(2, baselineReaders.Length);
                 Assert.Same(readers[0], baselineReaders[0]);
@@ -2958,7 +2958,8 @@ class C { int Y => 2; }
                 // verify that baseline is added:
                 Assert.Same(
                     newBaseline,
-                    editSession.DebuggingSession.GetTestAccessor()
+                    editSession.DebuggingSession
+                        .GetTestAccessor()
                         .GetProjectEmitBaseline(document2.Project.Id)
                 );
 
@@ -3142,7 +3143,8 @@ class C { int Y => 2; }
                 // verify that baseline is added:
                 Assert.Same(
                     newBaseline,
-                    editSession.DebuggingSession.GetTestAccessor()
+                    editSession.DebuggingSession
+                        .GetTestAccessor()
                         .GetProjectEmitBaseline(document2.Project.Id)
                 );
 
@@ -3290,12 +3292,13 @@ partial class E { int B = 2; public E(int a, int b) { A = a; B = new System.Func
                 TableIndex tableIndex;
                 MetadataTokens.TryGetTableIndex(row.Handle.Kind, out tableIndex);
 
-                return string.Format(
-                    "Row({0}, TableIndex.{1}, EditAndContinueOperation.{2})",
-                    MetadataTokens.GetRowNumber(row.Handle),
-                    tableIndex,
-                    row.Operation
-                );
+                return string
+                    .Format(
+                        "Row({0}, TableIndex.{1}, EditAndContinueOperation.{2})",
+                        MetadataTokens.GetRowNumber(row.Handle),
+                        tableIndex,
+                        row.Operation
+                    );
             }
         }
 
@@ -3311,7 +3314,8 @@ partial class E { int B = 2; public E(int a, int b) { A = a; B = new System.Func
                 Generate(syntaxTree.GetText().ToString(), fileName);
 
                 if (
-                    context.AnalyzerConfigOptions.GetOptions(syntaxTree)
+                    context.AnalyzerConfigOptions
+                        .GetOptions(syntaxTree)
                         .TryGetValue("enc_generator_output", out var optionValue)
                 )
                 {
@@ -3770,12 +3774,10 @@ class C { int Y => 1; }
 
             // the update should be stored on the service:
             var pendingUpdate = editSession.GetTestAccessor().GetPendingSolutionUpdate();
-            var (_, newBaselineA1) = pendingUpdate.EmitBaselines.Single(
-                b => b.ProjectId == projectA.Id
-            );
-            var (_, newBaselineB1) = pendingUpdate.EmitBaselines.Single(
-                b => b.ProjectId == projectB.Id
-            );
+            var (_, newBaselineA1) = pendingUpdate.EmitBaselines
+                .Single(b => b.ProjectId == projectA.Id);
+            var (_, newBaselineB1) = pendingUpdate.EmitBaselines
+                .Single(b => b.ProjectId == projectB.Id);
 
             var baselineA0 = newBaselineA1.GetInitialEmitBaseline();
             var baselineB0 = newBaselineB1.GetInitialEmitBaseline();
@@ -3850,12 +3852,10 @@ class C { int Y => 1; }
 
             // the update should be stored on the service:
             pendingUpdate = editSession.GetTestAccessor().GetPendingSolutionUpdate();
-            var (_, newBaselineA2) = pendingUpdate.EmitBaselines.Single(
-                b => b.ProjectId == projectA.Id
-            );
-            var (_, newBaselineB2) = pendingUpdate.EmitBaselines.Single(
-                b => b.ProjectId == projectB.Id
-            );
+            var (_, newBaselineA2) = pendingUpdate.EmitBaselines
+                .Single(b => b.ProjectId == projectA.Id);
+            var (_, newBaselineB2) = pendingUpdate.EmitBaselines
+                .Single(b => b.ProjectId == projectB.Id);
 
             Assert.NotSame(newBaselineA1, newBaselineA2);
             Assert.NotSame(newBaselineB1, newBaselineB2);
@@ -4039,12 +4039,10 @@ class C { int Y => 1; }
             var activeLineSpan12 = sourceTextV1.Lines.GetLinePositionSpan(activeSpan12);
             var activeLineSpan21 = sourceTextV2.Lines.GetLinePositionSpan(activeSpan21);
             var activeLineSpan22 = sourceTextV2.Lines.GetLinePositionSpan(activeSpan22);
-            var adjustedActiveLineSpan1 = sourceTextV2.Lines.GetLinePositionSpan(
-                adjustedActiveSpan1
-            );
-            var adjustedActiveLineSpan2 = sourceTextV2.Lines.GetLinePositionSpan(
-                adjustedActiveSpan2
-            );
+            var adjustedActiveLineSpan1 = sourceTextV2.Lines
+                .GetLinePositionSpan(adjustedActiveSpan1);
+            var adjustedActiveLineSpan2 = sourceTextV2.Lines
+                .GetLinePositionSpan(adjustedActiveSpan2);
 
             // default if not called in a break state
             Assert.True(
@@ -4308,9 +4306,8 @@ class C { int Y => 1; }
         [Fact]
         public async Task ActiveStatements_ForeignDocument()
         {
-            var composition = FeaturesTestCompositions.Features.AddParts(
-                typeof(DummyLanguageService)
-            );
+            var composition = FeaturesTestCompositions.Features
+                .AddParts(typeof(DummyLanguageService));
 
             using var _ = CreateWorkspace(
                 out var solution,
@@ -4621,7 +4618,8 @@ class C { int Y => 1; }
                     ImmutableArray.Create(documentId),
                     CancellationToken.None
                 )
-            ).Single();
+            )
+                .Single();
             AssertEx.Equal(
                 new[]
                 {
@@ -4666,7 +4664,8 @@ class C { int Y => 1; }
                     ImmutableArray.Create(documentId),
                     CancellationToken.None
                 )
-            ).Single();
+            )
+                .Single();
             AssertEx.Equal(
                 new[]
                 {
@@ -4805,7 +4804,8 @@ class C { int Y => 1; }
                     ImmutableArray.Create(documentId),
                     CancellationToken.None
                 )
-            ).Single();
+            )
+                .Single();
             AssertEx.Equal(
                 new[]
                 {
@@ -4887,10 +4887,11 @@ class C { int Y => 1; }
                 new[]
                 {
                     "ENC0020: "
-                        + string.Format(
-                            FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
-                            FeaturesResources.method
-                        )
+                        + string
+                            .Format(
+                                FeaturesResources.Renaming_0_will_prevent_the_debug_session_from_continuing,
+                                FeaturesResources.method
+                            )
                 },
                 result.diagnostics.Select(d => $"{d.Id}: {d.GetMessage()}")
             );

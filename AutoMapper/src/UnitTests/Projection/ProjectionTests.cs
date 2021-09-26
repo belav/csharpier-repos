@@ -35,7 +35,8 @@ namespace AutoMapper.UnitTests.Projection
                             o =>
                                 o.MapFrom(
                                     source =>
-                                        source.Articles.Where(
+                                        source.Articles
+                                            .Where(
                                                 x =>
                                                     x.IsDefault
                                                     && x.NationId == 1
@@ -63,7 +64,8 @@ namespace AutoMapper.UnitTests.Projection
                         new Article { Id = 1, IsDefault = true, NationId = 1, ProductId = 1 }
                     }
                 }
-            }.AsQueryable();
+            }
+                .AsQueryable();
             var projection = products.ProjectTo<ProductModel>(Configuration);
             var productModel = projection.First();
             productModel.Price.RegionId.ShouldBe((short)1);

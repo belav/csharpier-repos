@@ -123,8 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 LanguageVersion availableVersion =
                     ((CSharpParseOptions)errorLocation.SourceTree.Options).LanguageVersion;
-                LanguageVersion requiredVersion =
-                    MessageID.IDS_DefaultInterfaceImplementation.RequiredVersion();
+                LanguageVersion requiredVersion = MessageID.IDS_DefaultInterfaceImplementation
+                    .RequiredVersion();
                 if (availableVersion < requiredVersion)
                 {
                     DeclarationModifiers errorModifiers =

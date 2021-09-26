@@ -13,7 +13,8 @@ namespace R2RTest
     {
         public static CommandLineBuilder Build()
         {
-            var parser = new CommandLineBuilder().AddCommand(CompileFolder())
+            var parser = new CommandLineBuilder()
+                .AddCommand(CompileFolder())
                 .AddCommand(CompileSubtree())
                 .AddCommand(CompileFramework())
                 .AddCommand(CompileNugetPackages())
@@ -207,13 +208,15 @@ namespace R2RTest
                 new Option<DirectoryInfo>(
                     new[] { "--input-directory", "-in" },
                     "Folder containing assemblies to optimize"
-                ).ExistingOnly();
+                )
+                    .ExistingOnly();
 
             Option OutputDirectory() =>
                 new Option<DirectoryInfo>(
                     new[] { "--output-directory", "-out" },
                     "Folder to emit compiled assemblies"
-                ).LegalFilePathsOnly();
+                )
+                    .LegalFilePathsOnly();
 
             Option CoreRootDirectory() =>
                 new Option<DirectoryInfo>(
@@ -221,17 +224,16 @@ namespace R2RTest
                     "Location of the CoreCLR CORE_ROOT folder"
                 ) {
                     Required = true
-                }.ExistingOnly();
+                }
+                    .ExistingOnly();
 
             Option ReferencePath() =>
                 new Option<DirectoryInfo[]>(
                     new[] { "--reference-path", "-r" },
                     "Folder containing assemblies to reference during compilation"
                 ) {
-                    Argument = new Argument<DirectoryInfo[]>()
-                    {
-                        Arity = ArgumentArity.ZeroOrMore
-                    }.ExistingOnly()
+                    Argument = new Argument<DirectoryInfo[]>() { Arity = ArgumentArity.ZeroOrMore }
+                        .ExistingOnly()
                 };
 
             Option MibcPath() =>
@@ -239,10 +241,8 @@ namespace R2RTest
                     new[] { "--mibc-path", "-m" },
                     "Mibc files to use in compilation"
                 ) {
-                    Argument = new Argument<FileInfo[]>()
-                    {
-                        Arity = ArgumentArity.ZeroOrMore
-                    }.ExistingOnly()
+                    Argument = new Argument<FileInfo[]>() { Arity = ArgumentArity.ZeroOrMore }
+                        .ExistingOnly()
                 };
 
             Option Crossgen() =>
@@ -255,13 +255,15 @@ namespace R2RTest
                 new Option<FileInfo>(
                     new[] { "--crossgen-path", "-cp" },
                     "Explicit Crossgen path (useful for cross-targeting)"
-                ).ExistingOnly();
+                )
+                    .ExistingOnly();
 
             Option Crossgen2Path() =>
                 new Option<FileInfo>(
                     new[] { "--crossgen2-path", "-c2p" },
                     "Explicit Crossgen2 path (useful for cross-targeting)"
-                ).ExistingOnly();
+                )
+                    .ExistingOnly();
 
             Option VerifyTypeAndFieldLayout() =>
                 new Option<bool>(
@@ -362,10 +364,8 @@ namespace R2RTest
                 );
 
             Option R2RDumpPath() =>
-                new Option<FileInfo>(
-                    new[] { "--r2r-dump-path", "-r2r" },
-                    "Path to R2RDump.exe/dll"
-                ).ExistingOnly();
+                new Option<FileInfo>(new[] { "--r2r-dump-path", "-r2r" }, "Path to R2RDump.exe/dll")
+                    .ExistingOnly();
 
             Option MeasurePerf() =>
                 new Option<bool>(new[] { "--measure-perf" }, "Print out compilation time");
@@ -398,7 +398,8 @@ namespace R2RTest
                 new Option<FileInfo>(
                     new[] { "--package-list", "-pl" },
                     "Text file containing a package name on each line"
-                ).ExistingOnly();
+                )
+                    .ExistingOnly();
 
             //
             // compile-serp specific options
@@ -407,7 +408,8 @@ namespace R2RTest
                 new Option<DirectoryInfo>(
                     new[] { "--asp-net-path", "-asp" },
                     "Path to SERP's ASP.NET Core folder"
-                ).ExistingOnly();
+                )
+                    .ExistingOnly();
         }
     }
 }

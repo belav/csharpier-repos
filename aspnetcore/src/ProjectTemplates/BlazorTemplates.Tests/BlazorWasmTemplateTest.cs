@@ -133,9 +133,8 @@ namespace Templates.Test
                     // These are the same as chrome
                     request.Headers.AcceptEncoding.Clear();
                     request.Headers.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("gzip"));
-                    request.Headers.AcceptEncoding.Add(
-                        StringWithQualityHeaderValue.Parse("deflate")
-                    );
+                    request.Headers.AcceptEncoding
+                        .Add(StringWithQualityHeaderValue.Parse("deflate"));
                     request.Headers.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("br"));
 
                     return request;
@@ -276,7 +275,8 @@ namespace Templates.Test
             var serviceWorkerAssetsManifestVersionMatch = new Regex(
                 @"^\s*\""version\"":\s*(\""[^\""]+\"")",
                 RegexOptions.Multiline
-            ).Match(serviceWorkerAssetsManifestContents);
+            )
+                .Match(serviceWorkerAssetsManifestContents);
             Assert.True(serviceWorkerAssetsManifestVersionMatch.Success);
             var serviceWorkerAssetsManifestVersionJson =
                 serviceWorkerAssetsManifestVersionMatch.Groups[1].Captures[0].Value;
@@ -767,12 +767,10 @@ namespace Templates.Test
                     Path.Combine(serverProject.TemplateOutputDir, "appsettings.Development.json")
                 )
             );
-            ((JObject)appSettings["IdentityServer"]).Merge(
-                appSettingsDevelopment["IdentityServer"]
-            );
-            ((JObject)appSettings["IdentityServer"]).Merge(
-                new { IdentityServer = new { Key = new { FilePath = "./tempkey.json" } } }
-            );
+            ((JObject)appSettings["IdentityServer"])
+                .Merge(appSettingsDevelopment["IdentityServer"]);
+            ((JObject)appSettings["IdentityServer"])
+                .Merge(new { IdentityServer = new { Key = new { FilePath = "./tempkey.json" } } });
             var testAppSettings = appSettings.ToString();
             File.WriteAllText(
                 Path.Combine(serverProject.TemplatePublishDir, "appsettings.json"),

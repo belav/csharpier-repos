@@ -35,10 +35,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     // analyzer to run here.  However, we can still check to see if we could offer
                     // the feature here as a refactoring.
                     await ComputeRefactoringsAsync(
-                            context,
-                            optionValue.Value,
-                            analyzerActive: false
-                        )
+                        context,
+                        optionValue.Value,
+                        analyzerActive: false
+                    )
                         .ConfigureAwait(false);
                     return;
 

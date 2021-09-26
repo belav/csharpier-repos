@@ -141,8 +141,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     Assert.Equal(
                         RelationalResources.LogExplicitTransactionEnlisted(
-                                new TestLogger<TestRelationalLoggingDefinitions>()
-                            )
+                            new TestLogger<TestRelationalLoggingDefinitions>()
+                        )
                             .GenerateMessage("Serializable"),
                         Fixture.ListLoggerFactory.Log.First().Message
                     );
@@ -151,8 +151,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     Assert.Equal(
                         RelationalResources.LogAmbientTransaction(
-                                new TestLogger<TestRelationalLoggingDefinitions>()
-                            )
+                            new TestLogger<TestRelationalLoggingDefinitions>()
+                        )
                             .GenerateMessage(),
                         Fixture.ListLoggerFactory.Log.First().Message
                     );
@@ -321,8 +321,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     Assert.Equal(
                         RelationalResources.LogAmbientTransactionEnlisted(
-                                new TestLogger<TestRelationalLoggingDefinitions>()
-                            )
+                            new TestLogger<TestRelationalLoggingDefinitions>()
+                        )
                             .GenerateMessage("Serializable"),
                         Fixture.ListLoggerFactory.Log.Skip(2).First().Message
                     );
@@ -331,8 +331,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     Assert.Equal(
                         RelationalResources.LogAmbientTransaction(
-                                new TestLogger<TestRelationalLoggingDefinitions>()
-                            )
+                            new TestLogger<TestRelationalLoggingDefinitions>()
+                        )
                             .GenerateMessage(),
                         Fixture.ListLoggerFactory.Log.Skip(2).First().Message
                     );
@@ -960,9 +960,8 @@ namespace Microsoft.EntityFrameworkCore
                     if (DirtyReadsOccur)
                     {
                         using (
-                            await innerContext.Database.BeginTransactionAsync(
-                                IsolationLevel.ReadUncommitted
-                            )
+                            await innerContext.Database
+                                .BeginTransactionAsync(IsolationLevel.ReadUncommitted)
                         )
                         {
                             Assert.Equal(
@@ -975,9 +974,8 @@ namespace Microsoft.EntityFrameworkCore
                     if (SnapshotSupported)
                     {
                         using (
-                            await innerContext.Database.BeginTransactionAsync(
-                                IsolationLevel.Snapshot
-                            )
+                            await innerContext.Database
+                                .BeginTransactionAsync(IsolationLevel.Snapshot)
                         )
                         {
                             Assert.Equal(
@@ -1053,9 +1051,12 @@ namespace Microsoft.EntityFrameworkCore
             using var transaction = TestStore.BeginTransaction();
             using var context = CreateContextWithConnectionString();
             using (
-                context.Database.BeginTransaction(
-                    DirtyReadsOccur ? IsolationLevel.ReadUncommitted : IsolationLevel.Unspecified
-                )
+                context.Database
+                    .BeginTransaction(
+                        DirtyReadsOccur
+                          ? IsolationLevel.ReadUncommitted
+                          : IsolationLevel.Unspecified
+                    )
             )
             {
                 var ex = Assert.Throws<InvalidOperationException>(
@@ -1165,11 +1166,12 @@ namespace Microsoft.EntityFrameworkCore
 
             var ex = Assert.Throws<InvalidOperationException>(
                 () =>
-                    context.Database.BeginTransaction(
-                        DirtyReadsOccur
-                          ? IsolationLevel.ReadUncommitted
-                          : IsolationLevel.Unspecified
-                    )
+                    context.Database
+                        .BeginTransaction(
+                            DirtyReadsOccur
+                              ? IsolationLevel.ReadUncommitted
+                              : IsolationLevel.Unspecified
+                        )
             );
             Assert.Equal(RelationalStrings.ConflictingEnlistedTransaction, ex.Message);
             context.Database.CloseConnection();

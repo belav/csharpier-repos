@@ -16,13 +16,11 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task BasicStartup()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .UseStartup<HealthChecksSample.BasicStartup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().UseStartup<HealthChecksSample.BasicStartup>();
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -39,13 +37,12 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task CustomWriterStartup()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .UseStartup<HealthChecksSample.CustomWriterStartup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer()
+                        .UseStartup<HealthChecksSample.CustomWriterStartup>();
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -62,13 +59,12 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task LivenessProbeStartup_Liveness()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .UseStartup<HealthChecksSample.LivenessProbeStartup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer()
+                        .UseStartup<HealthChecksSample.LivenessProbeStartup>();
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -85,13 +81,12 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public async Task LivenessProbeStartup_Readiness()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .UseStartup<HealthChecksSample.LivenessProbeStartup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer()
+                        .UseStartup<HealthChecksSample.LivenessProbeStartup>();
+                }
+            ).Build();
 
             await host.StartAsync();
 

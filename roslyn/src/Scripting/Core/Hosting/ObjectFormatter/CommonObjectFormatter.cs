@@ -110,12 +110,13 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 if (fileName != null)
                 {
                     builder.Append(
-                        string.Format(
-                            CultureInfo.CurrentUICulture,
-                            ScriptingResources.AtFileLine,
-                            fileName,
-                            frame.GetFileLineNumber()
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentUICulture,
+                                ScriptingResources.AtFileLine,
+                                fileName,
+                                frame.GetFileLineNumber()
+                            )
                     );
                 }
 

@@ -296,11 +296,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref HashSet<TypeSymbol> checkedTypes
         )
         {
-            return this.PointedAtTypeWithAnnotations.GetUnificationUseSiteDiagnosticRecursive(
-                ref result,
-                owner,
-                ref checkedTypes
-            );
+            return this.PointedAtTypeWithAnnotations
+                .GetUnificationUseSiteDiagnosticRecursive(ref result, owner, ref checkedTypes);
         }
 
         protected override ISymbol CreateISymbol()

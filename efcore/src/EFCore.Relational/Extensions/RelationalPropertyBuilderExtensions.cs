@@ -140,7 +140,8 @@ namespace Microsoft.EntityFrameworkCore
                     fromDataAnnotation
                         ? ConfigurationSource.DataAnnotation
                         : ConfigurationSource.Convention
-                ).Overrides(overrides.GetColumnNameConfigurationSource())
+                )
+                    .Overrides(overrides.GetColumnNameConfigurationSource())
                 || overrides.ColumnName == name;
         }
 

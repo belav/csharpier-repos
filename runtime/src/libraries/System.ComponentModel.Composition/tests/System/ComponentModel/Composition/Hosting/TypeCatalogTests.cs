@@ -333,11 +333,12 @@ namespace System.ComponentModel.Composition
             {
                 var catalog = (ICompositionElement)CreateTypeCatalog(e);
 
-                string expected = string.Format(
-                    SR.TypeCatalog_DisplayNameFormat,
-                    typeof(TypeCatalog).Name,
-                    AttributedModelServices.GetTypeIdentity(e)
-                );
+                string expected = string
+                    .Format(
+                        SR.TypeCatalog_DisplayNameFormat,
+                        typeof(TypeCatalog).Name,
+                        AttributedModelServices.GetTypeIdentity(e)
+                    );
 
                 Assert.Equal(expected, catalog.DisplayName);
             }
@@ -425,11 +426,12 @@ namespace System.ComponentModel.Composition
             {
                 var catalog = (ICompositionElement)new DerivedTypeCatalog(e);
 
-                string expected = string.Format(
-                    SR.TypeCatalog_DisplayNameFormat,
-                    typeof(DerivedTypeCatalog).Name,
-                    AttributedModelServices.GetTypeIdentity(e)
-                );
+                string expected = string
+                    .Format(
+                        SR.TypeCatalog_DisplayNameFormat,
+                        typeof(DerivedTypeCatalog).Name,
+                        AttributedModelServices.GetTypeIdentity(e)
+                    );
 
                 Assert.Equal(expected, catalog.DisplayName);
             }
@@ -465,7 +467,8 @@ namespace System.ComponentModel.Composition
             Assert.True(matchingExports.Count() >= 0);
 
             IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> expectedMatchingExports =
-                catalog.Parts.SelectMany(
+                catalog.Parts
+                    .SelectMany(
                         part => part.ExportDefinitions,
                         (part, export) =>
                             new Tuple<ComposablePartDefinition, ExportDefinition>(part, export)
@@ -645,12 +648,13 @@ namespace System.ComponentModel.Composition
 
         private string GetDisplayName(bool useEllipses, Type catalogType, params Type[] types)
         {
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                SR.TypeCatalog_DisplayNameFormat,
-                catalogType.Name,
-                this.GetTypesDisplay(useEllipses, types)
-            );
+            return string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    SR.TypeCatalog_DisplayNameFormat,
+                    catalogType.Name,
+                    this.GetTypesDisplay(useEllipses, types)
+                );
         }
 
         private string GetTypesDisplay(bool useEllipses, Type[] types)

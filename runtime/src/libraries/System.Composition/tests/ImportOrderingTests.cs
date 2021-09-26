@@ -85,7 +85,8 @@ namespace System.Composition.UnitTests
 
         private CompositionContext CreateExtendedContainer(params Type[] partTypes)
         {
-            return new ContainerConfiguration().WithParts(partTypes)
+            return new ContainerConfiguration()
+                .WithParts(partTypes)
                 .WithProvider(new OrderedImportManyExportDescriptorProvider())
                 .CreateContainer();
         }

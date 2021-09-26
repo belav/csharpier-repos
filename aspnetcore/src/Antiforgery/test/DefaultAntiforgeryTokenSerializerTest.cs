@@ -75,9 +75,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             }
         );
         private static readonly ObjectPool<AntiforgerySerializationContext> _pool =
-            new DefaultObjectPoolProvider().Create(
-                new AntiforgerySerializationContextPooledObjectPolicy()
-            );
+            new DefaultObjectPoolProvider()
+                .Create(new AntiforgerySerializationContextPooledObjectPolicy());
         private const byte _salt = 0x05;
 
         [Theory]

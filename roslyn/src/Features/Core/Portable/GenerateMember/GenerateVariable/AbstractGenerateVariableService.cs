@@ -78,17 +78,17 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             )
             {
                 var semanticDocument = await SemanticDocument.CreateAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var state = await State.GenerateAsync(
-                        (TService)this,
-                        semanticDocument,
-                        node,
-                        cancellationToken
-                    )
+                    (TService)this,
+                    semanticDocument,
+                    node,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (state == null)
                 {
@@ -129,10 +129,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     // so as to not clutter the list.
                     return ImmutableArray.Create<CodeAction>(
                         new MyCodeAction(
-                            string.Format(
-                                FeaturesResources.Generate_variable_0,
-                                state.IdentifierToken.ValueText
-                            ),
+                            string
+                                .Format(
+                                    FeaturesResources.Generate_variable_0,
+                                    state.IdentifierToken.ValueText
+                                ),
                             actions.ToImmutable()
                         )
                     );

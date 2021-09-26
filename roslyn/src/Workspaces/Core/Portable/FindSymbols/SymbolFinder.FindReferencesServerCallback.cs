@@ -67,16 +67,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 Contract.ThrowIfTrue(dehydrated.Symbols.Count == 0);
 
-                using var _ = PooledDictionary<SerializableSymbolAndProjectId, ISymbol>.GetInstance(
-                    out var map
-                );
+                using var _ = PooledDictionary<SerializableSymbolAndProjectId, ISymbol>
+                    .GetInstance(out var map);
 
                 foreach (var symbolAndProjectId in dehydrated.Symbols)
                 {
                     var symbol = await symbolAndProjectId.TryRehydrateAsync(
-                            _solution,
-                            _cancellationToken
-                        )
+                        _solution,
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (symbol == null)
                         return;
@@ -122,9 +121,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 }
 
                 var referenceLocation = await reference.RehydrateAsync(
-                        _solution,
-                        _cancellationToken
-                    )
+                    _solution,
+                    _cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 await _progress.OnReferenceFoundAsync(symbolGroup, symbol, referenceLocation)

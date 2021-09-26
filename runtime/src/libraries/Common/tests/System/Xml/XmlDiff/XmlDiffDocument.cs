@@ -885,10 +885,8 @@ namespace System.Xml.XmlDiff
         {
             if (_currentNode is XmlDiffElement)
             {
-                XmlDiffAttribute _attr = ((XmlDiffElement)_currentNode).GetAttribute(
-                    localName,
-                    namespaceURI
-                );
+                XmlDiffAttribute _attr = ((XmlDiffElement)_currentNode)
+                    .GetAttribute(localName, namespaceURI);
                 if (_attr != null)
                 {
                     _currentNode = _attr;

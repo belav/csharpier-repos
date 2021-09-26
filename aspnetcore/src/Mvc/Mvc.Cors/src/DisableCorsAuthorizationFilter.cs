@@ -32,11 +32,12 @@ namespace Microsoft.AspNetCore.Mvc.Cors
                 CorsConstants.AccessControlRequestMethod
             ];
             if (
-                string.Equals(
-                    context.HttpContext.Request.Method,
-                    CorsConstants.PreflightHttpMethod,
-                    StringComparison.OrdinalIgnoreCase
-                ) && !StringValues.IsNullOrEmpty(accessControlRequestMethod)
+                string
+                    .Equals(
+                        context.HttpContext.Request.Method,
+                        CorsConstants.PreflightHttpMethod,
+                        StringComparison.OrdinalIgnoreCase
+                    ) && !StringValues.IsNullOrEmpty(accessControlRequestMethod)
             )
             {
                 // Short circuit if the request is preflight as that should not result in action execution.

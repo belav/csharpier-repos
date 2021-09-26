@@ -62,9 +62,8 @@ namespace Microsoft.EntityFrameworkCore
                 entityType,
                 ConfigurationSource.Convention
             );
-            var contextServices = RelationalTestHelpers.Instance.CreateContextServices(
-                model.FinalizeModel()
-            );
+            var contextServices = RelationalTestHelpers.Instance
+                .CreateContextServices(model.FinalizeModel());
 
             var fakeFactories = new Dictionary<Type, Func<object>>
             {

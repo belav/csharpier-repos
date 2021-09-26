@@ -78,10 +78,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
         public Task BroadcastItem()
         {
-            return Clients.All.SendAsync(
-                "Broadcast",
-                new Result { Message = "test", paramName = "param" }
-            );
+            return Clients.All
+                .SendAsync("Broadcast", new Result { Message = "test", paramName = "param" });
         }
 
         public Task SendArray()
@@ -329,10 +327,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             var tcs = new TaskCompletionSource<object>(
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
-            Context.ConnectionAborted.Register(
-                state => ((TaskCompletionSource<object>)state).SetResult(null),
-                tcs
-            );
+            Context.ConnectionAborted
+                .Register(state => ((TaskCompletionSource<object>)state).SetResult(null), tcs);
 
             await tcs.Task;
         }

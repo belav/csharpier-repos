@@ -108,11 +108,11 @@ namespace Microsoft.CodeAnalysis.Editing
             if (project != null)
             {
                 return await GetSymbolAsync(
-                        _currentSolution,
-                        project.Id,
-                        symbolId,
-                        cancellationToken
-                    )
+                    _currentSolution,
+                    project.Id,
+                    symbolId,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -121,11 +121,11 @@ namespace Microsoft.CodeAnalysis.Editing
             if (project != null)
             {
                 return await GetSymbolAsync(
-                        _currentSolution,
-                        project.Id,
-                        symbolId,
-                        cancellationToken
-                    )
+                    _currentSolution,
+                    project.Id,
+                    symbolId,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -133,11 +133,11 @@ namespace Microsoft.CodeAnalysis.Editing
             foreach (var projectId in this.GetProjectsForAssembly(symbol.ContainingAssembly))
             {
                 var currentSymbol = await GetSymbolAsync(
-                        _currentSolution,
-                        projectId,
-                        symbolId,
-                        cancellationToken
-                    )
+                    _currentSolution,
+                    projectId,
+                    symbolId,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (currentSymbol != null)
                 {
@@ -154,10 +154,8 @@ namespace Microsoft.CodeAnalysis.Editing
         {
             if (_assemblyNameToProjectIdMap == null)
             {
-                _assemblyNameToProjectIdMap = _originalSolution.Projects.ToLookup(
-                        p => p.AssemblyName,
-                        p => p.Id
-                    )
+                _assemblyNameToProjectIdMap = _originalSolution.Projects
+                    .ToLookup(p => p.AssemblyName, p => p.Id)
                     .ToImmutableDictionary(g => g.Key, g => ImmutableArray.CreateRange(g));
             }
 
@@ -227,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Editing
         /// </summary>
         private IEnumerable<SyntaxNode> GetDeclarations(ISymbol symbol)
         {
-            return symbol.DeclaringSyntaxReferences.Select(sr => sr.GetSyntax())
+            return symbol.DeclaringSyntaxReferences
+                .Select(sr => sr.GetSyntax())
                 .Select(
                     n =>
                         SyntaxGenerator.GetGenerator(_originalSolution.Workspace, n.Language)
@@ -287,11 +286,11 @@ namespace Microsoft.CodeAnalysis.Editing
             if (TryGetBestDeclarationForSingleEdit(currentSymbol, out var declaration))
             {
                 return await this.EditDeclarationAsync(
-                        currentSymbol,
-                        declaration,
-                        editAction,
-                        cancellationToken
-                    )
+                    currentSymbol,
+                    declaration,
+                    editAction,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -328,10 +327,11 @@ namespace Microsoft.CodeAnalysis.Editing
             if (currentSymbol == null)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources.The_symbol_0_cannot_be_located_within_the_current_solution,
-                        argSymbol.Name
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources.The_symbol_0_cannot_be_located_within_the_current_solution,
+                            argSymbol.Name
+                        )
                 );
             }
         }
@@ -355,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
             // try to find new symbol by looking up via original declaration
             var model = await newDoc.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var newDeclaration = model.SyntaxTree.GetRoot(cancellationToken)
+            var newDeclaration = model.SyntaxTree
+                .GetRoot(cancellationToken)
                 .GetCurrentNode(declaration);
             if (newDeclaration != null)
             {
@@ -449,16 +450,15 @@ namespace Microsoft.CodeAnalysis.Editing
                 .ConfigureAwait(false);
             CheckSymbolArgument(currentSymbol, symbol);
 
-            var decl = this.GetDeclarations(currentSymbol)
-                .FirstOrDefault(
-                    d =>
-                    {
-                        var doc = _currentSolution.GetDocument(d.SyntaxTree);
-                        return doc != null
-                            && doc.Id == documentId
-                            && d.FullSpan.IntersectsWith(position);
-                    }
-                );
+            var decl = this.GetDeclarations(currentSymbol).FirstOrDefault(
+                d =>
+                {
+                    var doc = _currentSolution.GetDocument(d.SyntaxTree);
+                    return doc != null
+                        && doc.Id == documentId
+                        && d.FullSpan.IntersectsWith(position);
+                }
+            );
 
             if (decl == null)
             {
@@ -469,11 +469,11 @@ namespace Microsoft.CodeAnalysis.Editing
             }
 
             return await this.EditDeclarationAsync(
-                    currentSymbol,
-                    decl,
-                    editAction,
-                    cancellationToken
-                )
+                currentSymbol,
+                decl,
+                editAction,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -516,19 +516,20 @@ namespace Microsoft.CodeAnalysis.Editing
             if (declaration == null)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        WorkspacesResources.The_member_0_is_not_declared_within_the_declaration_of_the_symbol,
-                        member.Name
-                    )
+                    string
+                        .Format(
+                            WorkspacesResources.The_member_0_is_not_declared_within_the_declaration_of_the_symbol,
+                            member.Name
+                        )
                 );
             }
 
             return await this.EditDeclarationAsync(
-                    currentSymbol,
-                    declaration,
-                    editAction,
-                    cancellationToken
-                )
+                currentSymbol,
+                declaration,
+                editAction,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -607,7 +608,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
                 foreach (var decl in declGroup)
                 {
-                    var newDeclaration = model.SyntaxTree.GetRoot(cancellationToken)
+                    var newDeclaration = model.SyntaxTree
+                        .GetRoot(cancellationToken)
                         .GetCurrentNode(decl);
                     if (newDeclaration != null)
                     {

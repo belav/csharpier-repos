@@ -127,9 +127,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 var candidateAssets = new Dictionary<(string, string), int>();
                 var rid = RuntimeInformation.RuntimeIdentifier;
                 var rids =
-                    DependencyContext.Default!.RuntimeGraph.FirstOrDefault(
-                        g => g.Runtime == rid
-                    )?.Fallbacks.ToList() ?? new List<string>();
+                    DependencyContext.Default!.RuntimeGraph
+                        .FirstOrDefault(g => g.Runtime == rid)?.Fallbacks.ToList()
+                    ?? new List<string>();
                 rids.Insert(0, rid);
 
                 foreach (var library in DependencyContext.Default.RuntimeLibraries)
@@ -139,11 +139,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         foreach (var file in group.RuntimeFiles)
                         {
                             if (
-                                string.Equals(
-                                    Path.GetFileName(file.Path),
-                                    "mod_spatialite" + _sharedLibraryExtension,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                string
+                                    .Equals(
+                                        Path.GetFileName(file.Path),
+                                        "mod_spatialite" + _sharedLibraryExtension,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                             {
                                 var fallbacks = rids.IndexOf(group.Runtime);
@@ -177,15 +178,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         string? assetFullPath = null;
                         var probingDirectories = (
                             (string)AppDomain.CurrentDomain.GetData("PROBING_DIRECTORIES")!
-                        ).Split(Path.PathSeparator);
+                        )
+                            .Split(Path.PathSeparator);
                         foreach (var directory in probingDirectories)
                         {
                             var candidateFullPath = Path.Combine(
                                 directory,
-                                (assetPath.Item1 + "/" + assetPath.Item2).Replace(
-                                    '/',
-                                    Path.DirectorySeparatorChar
-                                )
+                                (assetPath.Item1 + "/" + assetPath.Item2)
+                                    .Replace('/', Path.DirectorySeparatorChar)
                             );
                             if (File.Exists(candidateFullPath))
                             {
@@ -217,11 +217,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         || !currentPath.Split(Path.PathSeparator)
                             .Any(
                                 p =>
-                                    string.Equals(
-                                        p.TrimEnd(Path.DirectorySeparatorChar),
-                                        assetDirectory,
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                                    string
+                                        .Equals(
+                                            p.TrimEnd(Path.DirectorySeparatorChar),
+                                            assetDirectory,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
                             )
                     )
                     {

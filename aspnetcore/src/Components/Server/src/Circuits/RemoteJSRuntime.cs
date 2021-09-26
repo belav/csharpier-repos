@@ -27,9 +27,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             _logger = logger;
             DefaultAsyncTimeout = _options.JSInteropDefaultCallTimeout;
             ElementReferenceContext = new WebElementReferenceContext(this);
-            JsonSerializerOptions.Converters.Add(
-                new ElementReferenceJsonConverter(ElementReferenceContext)
-            );
+            JsonSerializerOptions.Converters
+                .Add(new ElementReferenceJsonConverter(ElementReferenceContext));
         }
 
         public JsonSerializerOptions ReadJsonSerializerOptions() => JsonSerializerOptions;

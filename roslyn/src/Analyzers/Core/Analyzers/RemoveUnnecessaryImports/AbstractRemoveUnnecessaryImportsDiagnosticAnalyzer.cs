@@ -77,9 +77,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                     helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
                         IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId
                     ),
-                    customTags: DiagnosticCustomTags.Unnecessary.Concat(
-                            EnforceOnBuildValues.RemoveUnnecessaryImports.ToCustomTag()
-                        )
+                    customTags: DiagnosticCustomTags.Unnecessary
+                        .Concat(EnforceOnBuildValues.RemoveUnnecessaryImports.ToCustomTag())
                         .ToArray()
                 );
 
@@ -197,11 +196,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 var getLastTokenFunc = GetLastTokenDelegateForContiguousSpans();
                 var contiguousSpans = unnecessaryImports.GetContiguousSpans(getLastTokenFunc);
                 var diagnostics = CreateClassificationDiagnostics(
-                        contiguousSpans,
-                        tree,
-                        descriptor,
-                        cancellationToken
-                    )
+                    contiguousSpans,
+                    tree,
+                    descriptor,
+                    cancellationToken
+                )
                     .Concat(CreateFixableDiagnostics(unnecessaryImports, tree, cancellationToken));
 
                 foreach (var diagnostic in diagnostics)

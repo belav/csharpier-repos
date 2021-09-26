@@ -811,15 +811,15 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var target = new Mock<IRouteConstraint>();
             target.Setup(
-                    e =>
-                        e.Match(
-                            It.IsAny<HttpContext>(),
-                            It.IsAny<IRouter>(),
-                            It.IsAny<string>(),
-                            It.IsAny<RouteValueDictionary>(),
-                            It.IsAny<RouteDirection>()
-                        )
-                )
+                e =>
+                    e.Match(
+                        It.IsAny<HttpContext>(),
+                        It.IsAny<IRouter>(),
+                        It.IsAny<string>(),
+                        It.IsAny<RouteValueDictionary>(),
+                        It.IsAny<RouteDirection>()
+                    )
+            )
                 .Returns(true)
                 .Verifiable();
             var endpoint = EndpointFactory.CreateRouteEndpoint(

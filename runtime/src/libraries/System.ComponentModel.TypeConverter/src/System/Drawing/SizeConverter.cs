@@ -100,9 +100,8 @@ namespace System.Drawing
                 }
                 else if (destinationType == typeof(InstanceDescriptor))
                 {
-                    ConstructorInfo ctor = typeof(Size).GetConstructor(
-                        new Type[] { typeof(int), typeof(int) }
-                    );
+                    ConstructorInfo ctor = typeof(Size)
+                        .GetConstructor(new Type[] { typeof(int), typeof(int) });
                     if (ctor != null)
                     {
                         return new InstanceDescriptor(

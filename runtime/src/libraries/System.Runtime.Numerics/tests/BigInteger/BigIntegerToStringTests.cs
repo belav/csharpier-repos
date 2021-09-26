@@ -2399,7 +2399,8 @@ namespace System.Numerics.Tests
                     temp,
                     nfi.NegativeSign.Length,
                     temp.Length - nfi.NegativeSign.Length
-                ).ToCharArray();
+                )
+                    .ToCharArray();
                 IsNeg = true;
             }
 
@@ -2523,9 +2524,9 @@ namespace System.Numerics.Tests
                 }
                 if (
                     output.Substring(
-                            expPlace - nfi.NumberDecimalSeparator.Length,
-                            nfi.NumberDecimalSeparator.Length
-                        )
+                        expPlace - nfi.NumberDecimalSeparator.Length,
+                        nfi.NumberDecimalSeparator.Length
+                    )
                         .Equals(nfi.NumberDecimalSeparator)
                 )
                 {
@@ -3006,7 +3007,8 @@ namespace System.Numerics.Tests
                     temp,
                     nfi.NegativeSign.Length,
                     temp.Length - nfi.NegativeSign.Length
-                ).ToCharArray();
+                )
+                    .ToCharArray();
                 IsNeg = true;
             }
 
@@ -3090,7 +3092,8 @@ namespace System.Numerics.Tests
                     temp,
                     nfi.NegativeSign.Length,
                     temp.Length - nfi.NegativeSign.Length
-                ).ToCharArray();
+                )
+                    .ToCharArray();
                 IsNeg = true;
             }
 
@@ -3504,10 +3507,11 @@ namespace System.Numerics.Tests
                 try
                 {
                     BigInteger x2 = (
-                        int.Parse(
-                            new string(new char[] { inArr[i] }),
-                            NumberStyles.AllowHexSpecifier
-                        ) * baseNum
+                        int
+                            .Parse(
+                                new string(new char[] { inArr[i] }),
+                                NumberStyles.AllowHexSpecifier
+                            ) * baseNum
                     );
                     x = x + x2;
                 }

@@ -88,18 +88,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             Console.WriteLine(string.Join(", ", storeNames));
             // Lambton Quay, Willis Street
 
-            string[] firstProductNames = o["Manufacturers"].Select(
-                    m => (string)m.SelectToken("Products[1].Name")
-                )
+            string[] firstProductNames = o["Manufacturers"]
+                .Select(m => (string)m.SelectToken("Products[1].Name"))
                 .Where(n => n != null)
                 .ToArray();
 
             Console.WriteLine(string.Join(", ", firstProductNames));
             // Headlight Fluid
 
-            decimal totalPrice = o["Manufacturers"].Sum(
-                m => (decimal)m.SelectToken("Products[0].Price")
-            );
+            decimal totalPrice = o["Manufacturers"]
+                .Sum(m => (decimal)m.SelectToken("Products[0].Price"));
 
             Console.WriteLine(totalPrice);
             // 149.95

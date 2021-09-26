@@ -96,14 +96,8 @@ namespace System.Reflection.Context.Custom
             ParameterModifier[] modifiers
         )
         {
-            PropertyInfo property = base.GetPropertyImpl(
-                name,
-                bindingAttr,
-                binder,
-                returnType,
-                types,
-                modifiers
-            );
+            PropertyInfo property = base
+                .GetPropertyImpl(name, bindingAttr, binder, returnType, types, modifiers);
 
             bool getIgnoreCase = (bindingAttr & BindingFlags.IgnoreCase) == BindingFlags.IgnoreCase;
             bool getDeclaredOnly =
@@ -222,14 +216,8 @@ namespace System.Reflection.Context.Custom
             ParameterModifier[] modifiers
         )
         {
-            MethodInfo method = base.GetMethodImpl(
-                name,
-                bindingAttr,
-                binder,
-                callConvention,
-                types,
-                modifiers
-            );
+            MethodInfo method = base
+                .GetMethodImpl(name, bindingAttr, binder, callConvention, types, modifiers);
 
             bool getIgnoreCase = (bindingAttr & BindingFlags.IgnoreCase) == BindingFlags.IgnoreCase;
             bool getDeclaredOnly =

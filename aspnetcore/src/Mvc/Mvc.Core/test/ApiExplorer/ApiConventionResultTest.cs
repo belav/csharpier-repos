@@ -13,8 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public void GetApiConvention_ReturnsNull_IfNoConventionMatches()
         {
             // Arrange
-            var method =
-                typeof(GetApiConvention_ReturnsNull_IfNoConventionMatchesController).GetMethod(
+            var method = typeof(GetApiConvention_ReturnsNull_IfNoConventionMatchesController)
+                .GetMethod(
                     nameof(GetApiConvention_ReturnsNull_IfNoConventionMatchesController.NoMatch)
                 );
             var attribute = new ApiConventionTypeAttribute(typeof(DefaultApiConventions));
@@ -40,9 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public void GetApiConvention_ReturnsResultFromConvention()
         {
             // Arrange
-            var method = typeof(GetApiConvention_ReturnsResultFromConventionController).GetMethod(
-                nameof(GetApiConvention_ReturnsResultFromConventionController.Match)
-            );
+            var method = typeof(GetApiConvention_ReturnsResultFromConventionController)
+                .GetMethod(nameof(GetApiConvention_ReturnsResultFromConventionController.Match));
             var attribute = new ApiConventionTypeAttribute(
                 typeof(GetApiConvention_ReturnsResultFromConventionType)
             );
@@ -84,8 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public void GetApiConvention_ReturnsResultFromFirstMatchingConvention()
         {
             // Arrange
-            var method =
-                typeof(GetApiConvention_ReturnsResultFromFirstMatchingConventionController).GetMethod(
+            var method = typeof(GetApiConvention_ReturnsResultFromFirstMatchingConventionController)
+                .GetMethod(
                     nameof(GetApiConvention_ReturnsResultFromFirstMatchingConventionController.Get)
                 );
             var attributes = new[]
@@ -122,9 +121,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public void GetApiConvention_GetAction_MatchesDefaultConvention()
         {
             // Arrange
-            var method = typeof(DefaultConventionController).GetMethod(
-                nameof(DefaultConventionController.GetUser)
-            );
+            var method = typeof(DefaultConventionController)
+                .GetMethod(nameof(DefaultConventionController.GetUser));
             var attributes = new[]
             {
                 new ApiConventionTypeAttribute(typeof(DefaultApiConventions))
@@ -151,9 +149,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public void GetApiConvention_PostAction_MatchesDefaultConvention()
         {
             // Arrange
-            var method = typeof(DefaultConventionController).GetMethod(
-                nameof(DefaultConventionController.PostUser)
-            );
+            var method = typeof(DefaultConventionController)
+                .GetMethod(nameof(DefaultConventionController.PostUser));
             var attributes = new[]
             {
                 new ApiConventionTypeAttribute(typeof(DefaultApiConventions))
@@ -180,9 +177,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public void GetApiConvention_PutAction_MatchesDefaultConvention()
         {
             // Arrange
-            var method = typeof(DefaultConventionController).GetMethod(
-                nameof(DefaultConventionController.PutUser)
-            );
+            var method = typeof(DefaultConventionController)
+                .GetMethod(nameof(DefaultConventionController.PutUser));
             var conventions = new[]
             {
                 new ApiConventionTypeAttribute(typeof(DefaultApiConventions)),
@@ -210,9 +206,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public void GetApiConvention_DeleteAction_MatchesDefaultConvention()
         {
             // Arrange
-            var method = typeof(DefaultConventionController).GetMethod(
-                nameof(DefaultConventionController.Delete)
-            );
+            var method = typeof(DefaultConventionController)
+                .GetMethod(nameof(DefaultConventionController.Delete));
             var conventions = new[]
             {
                 new ApiConventionTypeAttribute(typeof(DefaultApiConventions)),
@@ -240,9 +235,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public void GetApiConvention_UsesApiConventionMethod()
         {
             // Arrange
-            var method = typeof(DefaultConventionController).GetMethod(
-                nameof(DefaultConventionController.EditUser)
-            );
+            var method = typeof(DefaultConventionController)
+                .GetMethod(nameof(DefaultConventionController.EditUser));
             var conventions = new[]
             {
                 new ApiConventionTypeAttribute(typeof(DefaultApiConventions)),

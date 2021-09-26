@@ -4631,18 +4631,18 @@ class C
 
             edits.VerifySemanticDiagnostics(
                 Diagnostic(
-                        RudeEditKind.AccessingCapturedVariableInLambda,
-                        "x",
-                        "x",
-                        CSharpFeaturesResources.lambda
-                    )
+                    RudeEditKind.AccessingCapturedVariableInLambda,
+                    "x",
+                    "x",
+                    CSharpFeaturesResources.lambda
+                )
                     .WithFirstLine("x+ // 1"),
                 Diagnostic(
-                        RudeEditKind.AccessingCapturedVariableInLambda,
-                        "x",
-                        "x",
-                        CSharpFeaturesResources.lambda
-                    )
+                    RudeEditKind.AccessingCapturedVariableInLambda,
+                    "x",
+                    "x",
+                    CSharpFeaturesResources.lambda
+                )
                     .WithFirstLine("x; // 2")
             );
         }
@@ -5015,38 +5015,38 @@ class C
             // Including statement distance when matching would help.
             edits.VerifySemanticDiagnostics(
                 Diagnostic(
-                        RudeEditKind.NotAccessingCapturedVariableInLambda,
-                        "a",
-                        "this",
-                        CSharpFeaturesResources.lambda
-                    )
+                    RudeEditKind.NotAccessingCapturedVariableInLambda,
+                    "a",
+                    "this",
+                    CSharpFeaturesResources.lambda
+                )
                     .WithFirstLine(
                         "G(a => y1 + x0);   // error: connecting previously disconnected closures"
                     ),
                 Diagnostic(
-                        RudeEditKind.AccessingCapturedVariableInLambda,
-                        "y1",
-                        "y1",
-                        CSharpFeaturesResources.lambda
-                    )
+                    RudeEditKind.AccessingCapturedVariableInLambda,
+                    "y1",
+                    "y1",
+                    CSharpFeaturesResources.lambda
+                )
                     .WithFirstLine(
                         "G(a => y1 + x0);   // error: connecting previously disconnected closures"
                     ),
                 Diagnostic(
-                        RudeEditKind.AccessingCapturedVariableInLambda,
-                        "a",
-                        "this",
-                        CSharpFeaturesResources.lambda
-                    )
+                    RudeEditKind.AccessingCapturedVariableInLambda,
+                    "a",
+                    "this",
+                    CSharpFeaturesResources.lambda
+                )
                     .WithFirstLine(
                         "G(a => x);         // error: disconnecting previously connected closures"
                     ),
                 Diagnostic(
-                        RudeEditKind.NotAccessingCapturedVariableInLambda,
-                        "a",
-                        "y1",
-                        CSharpFeaturesResources.lambda
-                    )
+                    RudeEditKind.NotAccessingCapturedVariableInLambda,
+                    "a",
+                    "y1",
+                    CSharpFeaturesResources.lambda
+                )
                     .WithFirstLine(
                         "G(a => x);         // error: disconnecting previously connected closures"
                     )

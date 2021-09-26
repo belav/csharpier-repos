@@ -228,9 +228,12 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                 is JsonObjectContract jsonObjectContract
             )
             {
-                var pocoProperty = jsonObjectContract.Properties.FirstOrDefault(
-                    p => string.Equals(p.PropertyName, segment, StringComparison.OrdinalIgnoreCase)
-                );
+                var pocoProperty = jsonObjectContract.Properties
+                    .FirstOrDefault(
+                        p =>
+                            string
+                                .Equals(p.PropertyName, segment, StringComparison.OrdinalIgnoreCase)
+                    );
 
                 if (pocoProperty != null)
                 {

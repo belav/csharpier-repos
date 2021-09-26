@@ -22,10 +22,8 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             }
             else
             {
-                return new ReadOnlySpan<byte>(
-                    pBytes,
-                    byteCount
-                ).GetAsciiOrUTF8StringNonNullCharacters(Encoding);
+                return new ReadOnlySpan<byte>(pBytes, byteCount)
+                    .GetAsciiOrUTF8StringNonNullCharacters(Encoding);
             }
         }
 

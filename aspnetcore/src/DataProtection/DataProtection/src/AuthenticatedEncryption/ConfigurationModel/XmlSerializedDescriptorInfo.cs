@@ -36,9 +36,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
             }
 
             if (
-                !typeof(IAuthenticatedEncryptorDescriptorDeserializer).IsAssignableFrom(
-                    deserializerType
-                )
+                !typeof(IAuthenticatedEncryptorDescriptorDeserializer)
+                    .IsAssignableFrom(deserializerType)
             )
             {
                 throw new ArgumentException(

@@ -57,16 +57,15 @@ namespace AutoMapper.UnitTests.Bug
 
             for (int i = 0; i < threadCount; i++)
             {
-                Task.Factory.StartNew(doMapping)
-                    .ContinueWith(
-                        a =>
+                Task.Factory.StartNew(doMapping).ContinueWith(
+                    a =>
+                    {
+                        if (Interlocked.Increment(ref _done) == threadCount)
                         {
-                            if (Interlocked.Increment(ref _done) == threadCount)
-                            {
-                                _allDone.Set();
-                            }
+                            _allDone.Set();
                         }
-                    );
+                    }
+                );
             }
 
             _allDone.WaitOne(TimeSpan.FromSeconds(10));
@@ -663,9 +662,8 @@ namespace AutoMapper.UnitTests.Bug
                 .ToArray()
                 .Select(
                     s =>
-                        Task.Factory.StartNew(
-                            () => c.ResolveTypeMap(s.SourceType, s.DestinationType)
-                        )
+                        Task.Factory
+                            .StartNew(() => c.ResolveTypeMap(s.SourceType, s.DestinationType))
                 )
                 .ToArray();
             Task.WaitAll(tasks);
@@ -1208,9 +1206,8 @@ namespace AutoMapper.UnitTests.Bug
                 .ToArray()
                 .Select(
                     s =>
-                        Task.Factory.StartNew(
-                            () => mapper.Map(null, s.SourceType, s.DestinationType)
-                        )
+                        Task.Factory
+                            .StartNew(() => mapper.Map(null, s.SourceType, s.DestinationType))
                 )
                 .ToArray();
             Task.WaitAll(tasks);

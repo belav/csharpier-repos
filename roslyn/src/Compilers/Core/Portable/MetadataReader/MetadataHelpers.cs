@@ -510,7 +510,8 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(arity > 0);
             return (arity <= 9)
               ? s_aritySuffixesOneToNine[arity - 1]
-              : string.Concat(
+              : string
+                .Concat(
                     GenericTypeNameManglingString,
                     arity.ToString(CultureInfo.InvariantCulture)
                 );
@@ -563,12 +564,13 @@ namespace Microsoft.CodeAnalysis
             string stringRepresentingArity = emittedTypeName.Substring(indexOfManglingChar);
 
             int arity;
-            bool nonNumericCharFound = !int.TryParse(
-                stringRepresentingArity,
-                NumberStyles.None,
-                CultureInfo.InvariantCulture,
-                out arity
-            );
+            bool nonNumericCharFound = !int
+                .TryParse(
+                    stringRepresentingArity,
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out arity
+                );
 
             if (
                 nonNumericCharFound

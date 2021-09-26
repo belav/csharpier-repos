@@ -52,48 +52,42 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public async Task Http2_MethodsRequestWithoutData_Success(string method)
         {
             await new HostBuilder().UseHttp2Cat(
-                    Fixture.Client.BaseAddress.AbsoluteUri,
-                    async h2Connection =>
+                Fixture.Client.BaseAddress.AbsoluteUri,
+                async h2Connection =>
+                {
+                    await h2Connection.InitializeConnectionAsync();
+
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
+
+                    var headers = new[]
                     {
-                        await h2Connection.InitializeConnectionAsync();
+                        new KeyValuePair<string, string>(HeaderNames.Method, method),
+                        new KeyValuePair<string, string>(
+                            HeaderNames.Path,
+                            "/Http2_MethodsRequestWithoutData_Success"
+                        ),
+                        new KeyValuePair<string, string>(HeaderNames.Scheme, "https"),
+                        new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:443"),
+                    };
 
-                        h2Connection.Logger.LogInformation(
-                            "Initialized http2 connection. Starting stream 1."
-                        );
+                    await h2Connection.StartStreamAsync(1, headers, endStream: true);
 
-                        var headers = new[]
+                    await h2Connection.ReceiveHeadersAsync(
+                        1,
+                        decodedHeaders =>
                         {
-                            new KeyValuePair<string, string>(HeaderNames.Method, method),
-                            new KeyValuePair<string, string>(
-                                HeaderNames.Path,
-                                "/Http2_MethodsRequestWithoutData_Success"
-                            ),
-                            new KeyValuePair<string, string>(HeaderNames.Scheme, "https"),
-                            new KeyValuePair<string, string>(
-                                HeaderNames.Authority,
-                                "localhost:443"
-                            ),
-                        };
+                            Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
+                        }
+                    );
 
-                        await h2Connection.StartStreamAsync(1, headers, endStream: true);
+                    var dataFrame = await h2Connection.ReceiveFrameAsync();
 
-                        await h2Connection.ReceiveHeadersAsync(
-                            1,
-                            decodedHeaders =>
-                            {
-                                Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
-                            }
-                        );
+                    Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
 
-                        var dataFrame = await h2Connection.ReceiveFrameAsync();
-
-                        Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
-
-                        h2Connection.Logger.LogInformation("Connection stopped.");
-                    }
-                )
-                .Build()
-                .RunAsync();
+                    h2Connection.Logger.LogInformation("Connection stopped.");
+                }
+            ).Build().RunAsync();
         }
 
         [ConditionalTheory]
@@ -107,51 +101,40 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public async Task Http2_PostRequestWithoutData_LengthRequired(string method)
         {
             await new HostBuilder().UseHttp2Cat(
-                    Fixture.Client.BaseAddress.AbsoluteUri,
-                    async h2Connection =>
+                Fixture.Client.BaseAddress.AbsoluteUri,
+                async h2Connection =>
+                {
+                    await h2Connection.InitializeConnectionAsync();
+
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
+
+                    var headers = new[]
                     {
-                        await h2Connection.InitializeConnectionAsync();
+                        new KeyValuePair<string, string>(HeaderNames.Method, method),
+                        new KeyValuePair<string, string>(HeaderNames.Path, "/"),
+                        new KeyValuePair<string, string>(HeaderNames.Scheme, "https"),
+                        new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:443"),
+                    };
 
-                        h2Connection.Logger.LogInformation(
-                            "Initialized http2 connection. Starting stream 1."
-                        );
+                    await h2Connection.StartStreamAsync(1, headers, endStream: true);
 
-                        var headers = new[]
+                    await h2Connection.ReceiveHeadersAsync(
+                        1,
+                        decodedHeaders =>
                         {
-                            new KeyValuePair<string, string>(HeaderNames.Method, method),
-                            new KeyValuePair<string, string>(HeaderNames.Path, "/"),
-                            new KeyValuePair<string, string>(HeaderNames.Scheme, "https"),
-                            new KeyValuePair<string, string>(
-                                HeaderNames.Authority,
-                                "localhost:443"
-                            ),
-                        };
+                            Assert.Equal("411", decodedHeaders[HeaderNames.Status]);
+                        }
+                    );
 
-                        await h2Connection.StartStreamAsync(1, headers, endStream: true);
+                    var dataFrame = await h2Connection.ReceiveFrameAsync();
+                    Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: false, length: 344);
+                    dataFrame = await h2Connection.ReceiveFrameAsync();
+                    Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
 
-                        await h2Connection.ReceiveHeadersAsync(
-                            1,
-                            decodedHeaders =>
-                            {
-                                Assert.Equal("411", decodedHeaders[HeaderNames.Status]);
-                            }
-                        );
-
-                        var dataFrame = await h2Connection.ReceiveFrameAsync();
-                        Http2Utilities.VerifyDataFrame(
-                            dataFrame,
-                            1,
-                            endOfStream: false,
-                            length: 344
-                        );
-                        dataFrame = await h2Connection.ReceiveFrameAsync();
-                        Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
-
-                        h2Connection.Logger.LogInformation("Connection stopped.");
-                    }
-                )
-                .Build()
-                .RunAsync();
+                    h2Connection.Logger.LogInformation("Connection stopped.");
+                }
+            ).Build().RunAsync();
         }
 
         [ConditionalTheory]
@@ -170,88 +153,74 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public async Task Http2_RequestWithDataAndContentLength_Success(string method)
         {
             await new HostBuilder().UseHttp2Cat(
-                    Fixture.Client.BaseAddress.AbsoluteUri,
-                    async h2Connection =>
+                Fixture.Client.BaseAddress.AbsoluteUri,
+                async h2Connection =>
+                {
+                    await h2Connection.InitializeConnectionAsync();
+
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
+
+                    var headers = new[]
                     {
-                        await h2Connection.InitializeConnectionAsync();
+                        new KeyValuePair<string, string>(HeaderNames.Method, method),
+                        new KeyValuePair<string, string>(
+                            HeaderNames.Path,
+                            "/Http2_RequestWithDataAndContentLength_Success"
+                        ),
+                        new KeyValuePair<string, string>(HeaderNames.Scheme, "https"),
+                        new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:443"),
+                        new KeyValuePair<string, string>(HeaderNames.ContentLength, "11"),
+                    };
 
-                        h2Connection.Logger.LogInformation(
-                            "Initialized http2 connection. Starting stream 1."
-                        );
+                    await h2Connection.StartStreamAsync(1, headers, endStream: false);
 
-                        var headers = new[]
+                    await h2Connection.SendDataAsync(
+                        1,
+                        Encoding.UTF8.GetBytes("Hello World"),
+                        endStream: true
+                    );
+
+                    // Http.Sys no longer sends a window update here on later versions.
+                    if (Environment.OSVersion.Version < new Version(10, 0, 19041, 0))
+                    {
+                        var windowUpdate = await h2Connection.ReceiveFrameAsync();
+                        Assert.Equal(Http2FrameType.WINDOW_UPDATE, windowUpdate.Type);
+                    }
+
+                    await h2Connection.ReceiveHeadersAsync(
+                        1,
+                        decodedHeaders =>
                         {
-                            new KeyValuePair<string, string>(HeaderNames.Method, method),
-                            new KeyValuePair<string, string>(
-                                HeaderNames.Path,
-                                "/Http2_RequestWithDataAndContentLength_Success"
-                            ),
-                            new KeyValuePair<string, string>(HeaderNames.Scheme, "https"),
-                            new KeyValuePair<string, string>(
-                                HeaderNames.Authority,
-                                "localhost:443"
-                            ),
-                            new KeyValuePair<string, string>(HeaderNames.ContentLength, "11"),
-                        };
-
-                        await h2Connection.StartStreamAsync(1, headers, endStream: false);
-
-                        await h2Connection.SendDataAsync(
-                            1,
-                            Encoding.UTF8.GetBytes("Hello World"),
-                            endStream: true
-                        );
-
-                        // Http.Sys no longer sends a window update here on later versions.
-                        if (Environment.OSVersion.Version < new Version(10, 0, 19041, 0))
-                        {
-                            var windowUpdate = await h2Connection.ReceiveFrameAsync();
-                            Assert.Equal(Http2FrameType.WINDOW_UPDATE, windowUpdate.Type);
+                            Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
                         }
+                    );
 
-                        await h2Connection.ReceiveHeadersAsync(
-                            1,
-                            decodedHeaders =>
-                            {
-                                Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
-                            }
-                        );
+                    var dataFrame = await h2Connection.ReceiveFrameAsync();
+                    Assert.Equal(Http2FrameType.DATA, dataFrame.Type);
+                    Assert.Equal(1, dataFrame.StreamId);
 
-                        var dataFrame = await h2Connection.ReceiveFrameAsync();
+                    // Some versions send an empty data frame first.
+                    if (dataFrame.PayloadLength == 0)
+                    {
+                        Assert.False(dataFrame.DataEndStream);
+                        dataFrame = await h2Connection.ReceiveFrameAsync();
                         Assert.Equal(Http2FrameType.DATA, dataFrame.Type);
                         Assert.Equal(1, dataFrame.StreamId);
-
-                        // Some versions send an empty data frame first.
-                        if (dataFrame.PayloadLength == 0)
-                        {
-                            Assert.False(dataFrame.DataEndStream);
-                            dataFrame = await h2Connection.ReceiveFrameAsync();
-                            Assert.Equal(Http2FrameType.DATA, dataFrame.Type);
-                            Assert.Equal(1, dataFrame.StreamId);
-                        }
-
-                        Assert.Equal(11, dataFrame.PayloadLength);
-                        Assert.Equal(
-                            "Hello World",
-                            Encoding.UTF8.GetString(dataFrame.Payload.Span)
-                        );
-
-                        if (!dataFrame.DataEndStream)
-                        {
-                            dataFrame = await h2Connection.ReceiveFrameAsync();
-                            Http2Utilities.VerifyDataFrame(
-                                dataFrame,
-                                1,
-                                endOfStream: true,
-                                length: 0
-                            );
-                        }
-
-                        h2Connection.Logger.LogInformation("Connection stopped.");
                     }
-                )
-                .Build()
-                .RunAsync();
+
+                    Assert.Equal(11, dataFrame.PayloadLength);
+                    Assert.Equal("Hello World", Encoding.UTF8.GetString(dataFrame.Payload.Span));
+
+                    if (!dataFrame.DataEndStream)
+                    {
+                        dataFrame = await h2Connection.ReceiveFrameAsync();
+                        Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
+                    }
+
+                    h2Connection.Logger.LogInformation("Connection stopped.");
+                }
+            ).Build().RunAsync();
         }
 
         [ConditionalTheory]
@@ -270,87 +239,73 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public async Task Http2_RequestWithDataAndNoContentLength_Success(string method)
         {
             await new HostBuilder().UseHttp2Cat(
-                    Fixture.Client.BaseAddress.AbsoluteUri,
-                    async h2Connection =>
+                Fixture.Client.BaseAddress.AbsoluteUri,
+                async h2Connection =>
+                {
+                    await h2Connection.InitializeConnectionAsync();
+
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
+
+                    var headers = new[]
                     {
-                        await h2Connection.InitializeConnectionAsync();
+                        new KeyValuePair<string, string>(HeaderNames.Method, method),
+                        new KeyValuePair<string, string>(
+                            HeaderNames.Path,
+                            "/Http2_RequestWithDataAndNoContentLength_Success"
+                        ),
+                        new KeyValuePair<string, string>(HeaderNames.Scheme, "https"),
+                        new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:443"),
+                    };
 
-                        h2Connection.Logger.LogInformation(
-                            "Initialized http2 connection. Starting stream 1."
-                        );
+                    await h2Connection.StartStreamAsync(1, headers, endStream: false);
 
-                        var headers = new[]
+                    await h2Connection.SendDataAsync(
+                        1,
+                        Encoding.UTF8.GetBytes("Hello World"),
+                        endStream: true
+                    );
+
+                    // Http.Sys no longer sends a window update here on later versions.
+                    if (Environment.OSVersion.Version < new Version(10, 0, 19041, 0))
+                    {
+                        var windowUpdate = await h2Connection.ReceiveFrameAsync();
+                        Assert.Equal(Http2FrameType.WINDOW_UPDATE, windowUpdate.Type);
+                    }
+
+                    await h2Connection.ReceiveHeadersAsync(
+                        1,
+                        decodedHeaders =>
                         {
-                            new KeyValuePair<string, string>(HeaderNames.Method, method),
-                            new KeyValuePair<string, string>(
-                                HeaderNames.Path,
-                                "/Http2_RequestWithDataAndNoContentLength_Success"
-                            ),
-                            new KeyValuePair<string, string>(HeaderNames.Scheme, "https"),
-                            new KeyValuePair<string, string>(
-                                HeaderNames.Authority,
-                                "localhost:443"
-                            ),
-                        };
-
-                        await h2Connection.StartStreamAsync(1, headers, endStream: false);
-
-                        await h2Connection.SendDataAsync(
-                            1,
-                            Encoding.UTF8.GetBytes("Hello World"),
-                            endStream: true
-                        );
-
-                        // Http.Sys no longer sends a window update here on later versions.
-                        if (Environment.OSVersion.Version < new Version(10, 0, 19041, 0))
-                        {
-                            var windowUpdate = await h2Connection.ReceiveFrameAsync();
-                            Assert.Equal(Http2FrameType.WINDOW_UPDATE, windowUpdate.Type);
+                            Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
                         }
+                    );
 
-                        await h2Connection.ReceiveHeadersAsync(
-                            1,
-                            decodedHeaders =>
-                            {
-                                Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
-                            }
-                        );
+                    var dataFrame = await h2Connection.ReceiveFrameAsync();
+                    Assert.Equal(Http2FrameType.DATA, dataFrame.Type);
+                    Assert.Equal(1, dataFrame.StreamId);
 
-                        var dataFrame = await h2Connection.ReceiveFrameAsync();
+                    // Some versions send an empty data frame first.
+                    if (dataFrame.PayloadLength == 0)
+                    {
+                        Assert.False(dataFrame.DataEndStream);
+                        dataFrame = await h2Connection.ReceiveFrameAsync();
                         Assert.Equal(Http2FrameType.DATA, dataFrame.Type);
                         Assert.Equal(1, dataFrame.StreamId);
-
-                        // Some versions send an empty data frame first.
-                        if (dataFrame.PayloadLength == 0)
-                        {
-                            Assert.False(dataFrame.DataEndStream);
-                            dataFrame = await h2Connection.ReceiveFrameAsync();
-                            Assert.Equal(Http2FrameType.DATA, dataFrame.Type);
-                            Assert.Equal(1, dataFrame.StreamId);
-                        }
-
-                        Assert.Equal(11, dataFrame.PayloadLength);
-                        Assert.Equal(
-                            "Hello World",
-                            Encoding.UTF8.GetString(dataFrame.Payload.Span)
-                        );
-
-                        if (!dataFrame.DataEndStream)
-                        {
-                            dataFrame = await h2Connection.ReceiveFrameAsync();
-                            Http2Utilities.VerifyDataFrame(
-                                dataFrame,
-                                1,
-                                endOfStream: true,
-                                length: 0
-                            );
-                        }
-
-                        h2Connection.Logger.LogInformation("Connection stopped.");
                     }
-                )
-                .Build()
-                .RunAsync();
+
+                    Assert.Equal(11, dataFrame.PayloadLength);
+                    Assert.Equal("Hello World", Encoding.UTF8.GetString(dataFrame.Payload.Span));
+
+                    if (!dataFrame.DataEndStream)
+                    {
+                        dataFrame = await h2Connection.ReceiveFrameAsync();
+                        Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
+                    }
+
+                    h2Connection.Logger.LogInformation("Connection stopped.");
+                }
+            ).Build().RunAsync();
         }
 
         [ConditionalFact]
@@ -362,64 +317,53 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public async Task Http2_ResponseWithData_Success()
         {
             await new HostBuilder().UseHttp2Cat(
-                    Fixture.Client.BaseAddress.AbsoluteUri,
-                    async h2Connection =>
+                Fixture.Client.BaseAddress.AbsoluteUri,
+                async h2Connection =>
+                {
+                    await h2Connection.InitializeConnectionAsync();
+
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
+
+                    await h2Connection.StartStreamAsync(
+                        1,
+                        GetHeaders("/Http2_ResponseWithData_Success"),
+                        endStream: true
+                    );
+
+                    await h2Connection.ReceiveHeadersAsync(
+                        1,
+                        decodedHeaders =>
+                        {
+                            Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
+                        }
+                    );
+
+                    var dataFrame = await h2Connection.ReceiveFrameAsync();
+                    Assert.Equal(Http2FrameType.DATA, dataFrame.Type);
+                    Assert.Equal(1, dataFrame.StreamId);
+
+                    // Some versions send an empty data frame first.
+                    if (dataFrame.PayloadLength == 0)
                     {
-                        await h2Connection.InitializeConnectionAsync();
-
-                        h2Connection.Logger.LogInformation(
-                            "Initialized http2 connection. Starting stream 1."
-                        );
-
-                        await h2Connection.StartStreamAsync(
-                            1,
-                            GetHeaders("/Http2_ResponseWithData_Success"),
-                            endStream: true
-                        );
-
-                        await h2Connection.ReceiveHeadersAsync(
-                            1,
-                            decodedHeaders =>
-                            {
-                                Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
-                            }
-                        );
-
-                        var dataFrame = await h2Connection.ReceiveFrameAsync();
+                        Assert.False(dataFrame.DataEndStream);
+                        dataFrame = await h2Connection.ReceiveFrameAsync();
                         Assert.Equal(Http2FrameType.DATA, dataFrame.Type);
                         Assert.Equal(1, dataFrame.StreamId);
-
-                        // Some versions send an empty data frame first.
-                        if (dataFrame.PayloadLength == 0)
-                        {
-                            Assert.False(dataFrame.DataEndStream);
-                            dataFrame = await h2Connection.ReceiveFrameAsync();
-                            Assert.Equal(Http2FrameType.DATA, dataFrame.Type);
-                            Assert.Equal(1, dataFrame.StreamId);
-                        }
-
-                        Assert.Equal(11, dataFrame.PayloadLength);
-                        Assert.Equal(
-                            "Hello World",
-                            Encoding.UTF8.GetString(dataFrame.Payload.Span)
-                        );
-
-                        if (!dataFrame.DataEndStream)
-                        {
-                            dataFrame = await h2Connection.ReceiveFrameAsync();
-                            Http2Utilities.VerifyDataFrame(
-                                dataFrame,
-                                1,
-                                endOfStream: true,
-                                length: 0
-                            );
-                        }
-
-                        h2Connection.Logger.LogInformation("Connection stopped.");
                     }
-                )
-                .Build()
-                .RunAsync();
+
+                    Assert.Equal(11, dataFrame.PayloadLength);
+                    Assert.Equal("Hello World", Encoding.UTF8.GetString(dataFrame.Payload.Span));
+
+                    if (!dataFrame.DataEndStream)
+                    {
+                        dataFrame = await h2Connection.ReceiveFrameAsync();
+                        Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
+                    }
+
+                    h2Connection.Logger.LogInformation("Connection stopped.");
+                }
+            ).Build().RunAsync();
         }
 
         [ConditionalFact]
@@ -446,37 +390,34 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public async Task AppException_BeforeResponseHeaders_500()
         {
             await new HostBuilder().UseHttp2Cat(
-                    Fixture.Client.BaseAddress.AbsoluteUri,
-                    async h2Connection =>
-                    {
-                        await h2Connection.InitializeConnectionAsync();
+                Fixture.Client.BaseAddress.AbsoluteUri,
+                async h2Connection =>
+                {
+                    await h2Connection.InitializeConnectionAsync();
 
-                        h2Connection.Logger.LogInformation(
-                            "Initialized http2 connection. Starting stream 1."
-                        );
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
 
-                        await h2Connection.StartStreamAsync(
-                            1,
-                            GetHeaders("/AppException_BeforeResponseHeaders_500"),
-                            endStream: true
-                        );
+                    await h2Connection.StartStreamAsync(
+                        1,
+                        GetHeaders("/AppException_BeforeResponseHeaders_500"),
+                        endStream: true
+                    );
 
-                        await h2Connection.ReceiveHeadersAsync(
-                            1,
-                            decodedHeaders =>
-                            {
-                                Assert.Equal("500", decodedHeaders[HeaderNames.Status]);
-                            }
-                        );
+                    await h2Connection.ReceiveHeadersAsync(
+                        1,
+                        decodedHeaders =>
+                        {
+                            Assert.Equal("500", decodedHeaders[HeaderNames.Status]);
+                        }
+                    );
 
-                        var dataFrame = await h2Connection.ReceiveFrameAsync();
-                        Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
+                    var dataFrame = await h2Connection.ReceiveFrameAsync();
+                    Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
 
-                        h2Connection.Logger.LogInformation("Connection stopped.");
-                    }
-                )
-                .Build()
-                .RunAsync();
+                    h2Connection.Logger.LogInformation("Connection stopped.");
+                }
+            ).Build().RunAsync();
         }
 
         [ConditionalFact]

@@ -302,15 +302,16 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
               : () =>
                     (DbContext)factoryInterface.GetMethod(
                         nameof(IDbContextFactory<DbContext>.CreateDbContext)
-                    )!.Invoke(service, null)!;
+                    )!
+                        .Invoke(service, null)!;
         }
 
         private Func<DbContext>? FindContextFactory(Type contextType)
         {
-            var factoryInterface = typeof(IDesignTimeDbContextFactory<>).MakeGenericType(
-                contextType
-            );
-            var factory = contextType.Assembly.GetConstructibleTypes()
+            var factoryInterface = typeof(IDesignTimeDbContextFactory<>)
+                .MakeGenericType(contextType);
+            var factory = contextType.Assembly
+                .GetConstructibleTypes()
                 .FirstOrDefault(t => factoryInterface.IsAssignableFrom(t));
             return factory == null
               ? (Func<DbContext>?)null
@@ -321,11 +322,13 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             _reporter.WriteVerbose(DesignStrings.UsingDbContextFactory(factory.ShortDisplayName()));
 
-            return (DbContext)typeof(IDesignTimeDbContextFactory<>).MakeGenericType(contextType)
+            return (DbContext)typeof(IDesignTimeDbContextFactory<>)
+                .MakeGenericType(contextType)
                 .GetMethod(
                     nameof(IDesignTimeDbContextFactory<DbContext>.CreateDbContext),
                     new[] { typeof(string[]) }
-                )!.Invoke(Activator.CreateInstance(factory), new object[] { _args })!;
+                )!
+                .Invoke(Activator.CreateInstance(factory), new object[] { _args })!;
         }
 
         private KeyValuePair<Type, Func<DbContext>> FindContextType(string? name)
@@ -394,11 +397,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 : StringComparison.Ordinal;
 
             return types.Where(
-                    t =>
-                        string.Equals(t.Key.Name, name, comparisonType)
-                        || string.Equals(t.Key.FullName, name, comparisonType)
-                        || string.Equals(t.Key.AssemblyQualifiedName, name, comparisonType)
-                )
+                t =>
+                    string.Equals(t.Key.Name, name, comparisonType)
+                    || string.Equals(t.Key.FullName, name, comparisonType)
+                    || string.Equals(t.Key.AssemblyQualifiedName, name, comparisonType)
+            )
                 .ToDictionary(t => t.Key, t => t.Value);
         }
     }

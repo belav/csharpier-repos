@@ -24,17 +24,13 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             new()
             {
                 {
-                    typeof(char).GetRequiredRuntimeMethod(
-                        nameof(char.ToLower),
-                        new[] { typeof(char) }
-                    ),
+                    typeof(char)
+                        .GetRequiredRuntimeMethod(nameof(char.ToLower), new[] { typeof(char) }),
                     "lower"
                 },
                 {
-                    typeof(char).GetRequiredRuntimeMethod(
-                        nameof(char.ToUpper),
-                        new[] { typeof(char) }
-                    ),
+                    typeof(char)
+                        .GetRequiredRuntimeMethod(nameof(char.ToUpper), new[] { typeof(char) }),
                     "upper"
                 }
             };

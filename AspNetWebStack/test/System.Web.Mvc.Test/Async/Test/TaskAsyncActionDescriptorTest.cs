@@ -540,8 +540,8 @@ namespace System.Web.Mvc.Async.Test
                 .Returns(true)
                 .Verifiable();
             mockMethod.Setup(
-                    m => m.GetCustomAttributes(typeof(ActionMethodSelectorAttribute), true)
-                )
+                m => m.GetCustomAttributes(typeof(ActionMethodSelectorAttribute), true)
+            )
                 .Returns(new ActionMethodSelectorAttribute[] { mockAttr.Object });
 
             TaskAsyncActionDescriptor ad = new TaskAsyncActionDescriptor(

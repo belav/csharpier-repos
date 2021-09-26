@@ -136,18 +136,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 RuntimePropertiesFixture = new TestProjectFixture(
                     "RuntimeProperties",
                     RepoDirectories
-                ).EnsureRestored().BuildProject();
+                )
+                    .EnsureRestored()
+                    .BuildProject();
 
                 RuntimeConfig.FromFile(RuntimePropertiesFixture.TestProject.RuntimeConfigJson)
                     .WithProperty(AppTestPropertyName, AppTestPropertyValue)
                     .Save();
 
                 RuntimeConfig.FromFile(
-                        Path.Combine(
-                            RuntimePropertiesFixture.BuiltDotnet.GreatestVersionSharedFxPath,
-                            "Microsoft.NETCore.App.runtimeconfig.json"
-                        )
+                    Path.Combine(
+                        RuntimePropertiesFixture.BuiltDotnet.GreatestVersionSharedFxPath,
+                        "Microsoft.NETCore.App.runtimeconfig.json"
                     )
+                )
                     .WithProperty(FrameworkTestPropertyName, FrameworkTestPropertyValue)
                     .Save();
             }

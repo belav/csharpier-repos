@@ -59,12 +59,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullExpression()
         {
-            MemberInfo member = typeof(PropertyAndFields).GetMember(
-                nameof(PropertyAndFields.StringProperty)
-            )[0];
-            PropertyInfo property = typeof(PropertyAndFields).GetProperty(
-                nameof(PropertyAndFields.StringProperty)
-            );
+            MemberInfo member = typeof(PropertyAndFields)
+                .GetMember(nameof(PropertyAndFields.StringProperty))[0];
+            PropertyInfo property = typeof(PropertyAndFields)
+                .GetProperty(nameof(PropertyAndFields.StringProperty));
             AssertExtensions.Throws<ArgumentNullException>(
                 "expression",
                 () => Expression.Bind(member, null)
@@ -99,12 +97,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void WriteOnlyExpression()
         {
-            MemberInfo member = typeof(PropertyAndFields).GetMember(
-                nameof(PropertyAndFields.StringProperty)
-            )[0];
-            PropertyInfo property = typeof(PropertyAndFields).GetProperty(
-                nameof(PropertyAndFields.StringProperty)
-            );
+            MemberInfo member = typeof(PropertyAndFields)
+                .GetMember(nameof(PropertyAndFields.StringProperty))[0];
+            PropertyInfo property = typeof(PropertyAndFields)
+                .GetProperty(nameof(PropertyAndFields.StringProperty));
             Expression expression = Expression.Property(
                 Expression.Constant(new Unreadable<string>()),
                 typeof(Unreadable<string>),
@@ -138,12 +134,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void ExpressionTypeNotAssignable()
         {
-            MemberInfo member = typeof(PropertyAndFields).GetMember(
-                nameof(PropertyAndFields.StringProperty)
-            )[0];
-            PropertyInfo property = typeof(PropertyAndFields).GetProperty(
-                nameof(PropertyAndFields.StringProperty)
-            );
+            MemberInfo member = typeof(PropertyAndFields)
+                .GetMember(nameof(PropertyAndFields.StringProperty))[0];
+            PropertyInfo property = typeof(PropertyAndFields)
+                .GetProperty(nameof(PropertyAndFields.StringProperty));
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Expression.Bind(member, Expression.Constant(0))
@@ -172,12 +166,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void OpenGenericTypesNonGenericMember()
         {
-            MemberInfo member = typeof(GenericType<>).GetMember(
-                nameof(GenericType<int>.AlwaysInt32)
-            )[0];
-            PropertyInfo property = typeof(GenericType<>).GetProperty(
-                nameof(GenericType<int>.AlwaysInt32)
-            );
+            MemberInfo member = typeof(GenericType<>)
+                .GetMember(nameof(GenericType<int>.AlwaysInt32))[0];
+            PropertyInfo property = typeof(GenericType<>)
+                .GetProperty(nameof(GenericType<int>.AlwaysInt32));
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Expression.Bind(member, Expression.Constant(0))
@@ -206,18 +198,18 @@ namespace System.Linq.Expressions.Tests
         public void MemberAssignmentFromMember(bool useInterpreter)
         {
             PropertyAndFields result = Expression.Lambda<Func<PropertyAndFields>>(
-                    Expression.MemberInit(
-                        Expression.New(typeof(PropertyAndFields)),
-                        Expression.Bind(
-                            typeof(PropertyAndFields).GetMember("StringProperty")[0],
-                            Expression.Constant("Hello Property")
-                        ),
-                        Expression.Bind(
-                            typeof(PropertyAndFields).GetMember("StringField")[0],
-                            Expression.Constant("Hello Field")
-                        )
+                Expression.MemberInit(
+                    Expression.New(typeof(PropertyAndFields)),
+                    Expression.Bind(
+                        typeof(PropertyAndFields).GetMember("StringProperty")[0],
+                        Expression.Constant("Hello Property")
+                    ),
+                    Expression.Bind(
+                        typeof(PropertyAndFields).GetMember("StringField")[0],
+                        Expression.Constant("Hello Field")
                     )
                 )
+            )
                 .Compile(useInterpreter)();
 
             Assert.Equal("Hello Property", result.StringProperty);
@@ -228,14 +220,14 @@ namespace System.Linq.Expressions.Tests
         public void MemberAssignmentFromMethodInfo(bool useInterpreter)
         {
             PropertyAndFields result = Expression.Lambda<Func<PropertyAndFields>>(
-                    Expression.MemberInit(
-                        Expression.New(typeof(PropertyAndFields)),
-                        Expression.Bind(
-                            typeof(PropertyAndFields).GetProperty("StringProperty"),
-                            Expression.Constant("Hello Property")
-                        )
+                Expression.MemberInit(
+                    Expression.New(typeof(PropertyAndFields)),
+                    Expression.Bind(
+                        typeof(PropertyAndFields).GetProperty("StringProperty"),
+                        Expression.Constant("Hello Property")
                     )
                 )
+            )
                 .Compile(useInterpreter)();
 
             Assert.Equal("Hello Property", result.StringProperty);
@@ -245,9 +237,8 @@ namespace System.Linq.Expressions.Tests
         [ActiveIssue("https://github.com/mono/mono/issues/14918", TestRuntimes.Mono)]
         public void ConstantField(bool useInterpreter)
         {
-            MemberInfo member = typeof(PropertyAndFields).GetMember(
-                nameof(PropertyAndFields.ConstantString)
-            )[0];
+            MemberInfo member = typeof(PropertyAndFields)
+                .GetMember(nameof(PropertyAndFields.ConstantString))[0];
             Expression<Func<PropertyAndFields>> attemptAssignToConstant = Expression.Lambda<
                 Func<PropertyAndFields>
             >(
@@ -265,9 +256,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public void ReadonlyField(bool useInterpreter)
         {
-            MemberInfo member = typeof(PropertyAndFields).GetMember(
-                nameof(PropertyAndFields.ReadonlyStringField)
-            )[0];
+            MemberInfo member = typeof(PropertyAndFields)
+                .GetMember(nameof(PropertyAndFields.ReadonlyStringField))[0];
             Expression<Func<PropertyAndFields>> assignToReadonly = Expression.Lambda<
                 Func<PropertyAndFields>
             >(
@@ -283,12 +273,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void ReadonlyProperty()
         {
-            MemberInfo member = typeof(PropertyAndFields).GetMember(
-                nameof(PropertyAndFields.ReadonlyStringProperty)
-            )[0];
-            PropertyInfo property = typeof(PropertyAndFields).GetProperty(
-                nameof(PropertyAndFields.ReadonlyStringProperty)
-            );
+            MemberInfo member = typeof(PropertyAndFields)
+                .GetMember(nameof(PropertyAndFields.ReadonlyStringProperty))[0];
+            PropertyInfo property = typeof(PropertyAndFields)
+                .GetProperty(nameof(PropertyAndFields.ReadonlyStringProperty));
             AssertExtensions.Throws<ArgumentException>(
                 "member",
                 () => Expression.Bind(member, Expression.Constant(""))
@@ -302,12 +290,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void StaticReadonlyProperty()
         {
-            MemberInfo member = typeof(PropertyAndFields).GetMember(
-                nameof(PropertyAndFields.StaticReadonlyStringProperty)
-            )[0];
-            PropertyInfo property = typeof(PropertyAndFields).GetProperty(
-                nameof(PropertyAndFields.StaticReadonlyStringProperty)
-            );
+            MemberInfo member = typeof(PropertyAndFields)
+                .GetMember(nameof(PropertyAndFields.StaticReadonlyStringProperty))[0];
+            PropertyInfo property = typeof(PropertyAndFields)
+                .GetProperty(nameof(PropertyAndFields.StaticReadonlyStringProperty));
             AssertExtensions.Throws<ArgumentException>(
                 "member",
                 () => Expression.Bind(member, Expression.Constant(""))
@@ -321,9 +307,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public void StaticField(bool useInterpreter)
         {
-            MemberInfo member = typeof(PropertyAndFields).GetMember(
-                nameof(PropertyAndFields.StaticStringField)
-            )[0];
+            MemberInfo member = typeof(PropertyAndFields)
+                .GetMember(nameof(PropertyAndFields.StaticStringField))[0];
             Expression<Func<PropertyAndFields>> assignToReadonly = Expression.Lambda<
                 Func<PropertyAndFields>
             >(
@@ -341,9 +326,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public void StaticProperty(bool useInterpreter)
         {
-            MemberInfo member = typeof(PropertyAndFields).GetMember(
-                nameof(PropertyAndFields.StaticStringProperty)
-            )[0];
+            MemberInfo member = typeof(PropertyAndFields)
+                .GetMember(nameof(PropertyAndFields.StaticStringProperty))[0];
             Expression<Func<PropertyAndFields>> assignToStaticProperty = Expression.Lambda<
                 Func<PropertyAndFields>
             >(
@@ -400,9 +384,8 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> BogusBindings()
         {
-            MemberInfo member = typeof(PropertyAndFields).GetMember(
-                nameof(PropertyAndFields.StaticReadonlyStringField)
-            )[0];
+            MemberInfo member = typeof(PropertyAndFields)
+                .GetMember(nameof(PropertyAndFields.StaticReadonlyStringField))[0];
             foreach (
                 MemberBindingType type in new[]
                 {
@@ -431,9 +414,9 @@ namespace System.Linq.Expressions.Tests
         public void GlobalMethod()
         {
             ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(
-                    new AssemblyName("Name"),
-                    AssemblyBuilderAccess.RunAndCollect
-                )
+                new AssemblyName("Name"),
+                AssemblyBuilderAccess.RunAndCollect
+            )
                 .DefineDynamicModule("Module");
             MethodBuilder globalMethod = module.DefineGlobalMethod(
                 "GlobalMethod",
@@ -454,9 +437,9 @@ namespace System.Linq.Expressions.Tests
         public void GlobalField()
         {
             ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(
-                    new AssemblyName("Name"),
-                    AssemblyBuilderAccess.RunAndCollect
-                )
+                new AssemblyName("Name"),
+                AssemblyBuilderAccess.RunAndCollect
+            )
                 .DefineDynamicModule("Module");
             FieldBuilder fieldBuilder = module.DefineInitializedData(
                 "GlobalField",

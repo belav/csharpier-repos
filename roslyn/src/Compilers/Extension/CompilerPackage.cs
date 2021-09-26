@@ -59,10 +59,8 @@ namespace Roslyn.Compilers.Extension
                 {
                     Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.DisableMarkDirty =
                         true;
-                    Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.SetGlobalProperty(
-                        "RoslynHive",
-                        RoslynHive
-                    );
+                    Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection
+                        .SetGlobalProperty("RoslynHive", RoslynHive);
                 }
 
                 finally
@@ -86,9 +84,9 @@ namespace Roslyn.Compilers.Extension
             // to ensure our setting of targets path happens early enough
             filesToWrite.Add(
                 await GetMSBuildRelativePathAsync(
-                        $@"Imports\Microsoft.Common.props\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.props",
-                        cancellationToken
-                    )
+                    $@"Imports\Microsoft.Common.props\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.props",
+                    cancellationToken
+                )
                     .ConfigureAwait(true),
                 $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
@@ -117,17 +115,17 @@ namespace Roslyn.Compilers.Extension
 
             filesToWrite.Add(
                 await GetMSBuildRelativePathAsync(
-                        $@"Microsoft.CSharp.targets\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.targets",
-                        cancellationToken
-                    )
+                    $@"Microsoft.CSharp.targets\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.targets",
+                    cancellationToken
+                )
                     .ConfigureAwait(true),
                 targetsContent
             );
             filesToWrite.Add(
                 await GetMSBuildRelativePathAsync(
-                        $@"Microsoft.VisualBasic.targets\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.targets",
-                        cancellationToken
-                    )
+                    $@"Microsoft.VisualBasic.targets\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.targets",
+                    cancellationToken
+                )
                     .ConfigureAwait(true),
                 targetsContent
             );

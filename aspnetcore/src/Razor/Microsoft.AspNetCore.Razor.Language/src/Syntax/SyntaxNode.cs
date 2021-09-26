@@ -452,21 +452,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         {
             if (IsToken)
             {
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0};[{1}]",
-                    Kind,
-                    ToFullString()
-                );
+                return string
+                    .Format(CultureInfo.InvariantCulture, "{0};[{1}]", Kind, ToFullString());
             }
 
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "{0} [{1}..{2})",
-                Kind,
-                Position,
-                EndPosition
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "{0} [{1}..{2})",
+                    Kind,
+                    Position,
+                    EndPosition
+                );
         }
     }
 }

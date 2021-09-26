@@ -75,8 +75,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                             await connection.StartAsync().DefaultTimeout();
                             await connection.DisposeAsync().DefaultTimeout();
                             var exception = await Assert.ThrowsAsync<ObjectDisposedException>(
-                                    async () => await connection.StartAsync()
-                                )
+                                async () => await connection.StartAsync()
+                            )
                                 .DefaultTimeout();
 
                             Assert.Equal(nameof(HttpConnection), exception.ObjectName);
@@ -169,8 +169,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         async (connection) =>
                         {
                             var ex = await Assert.ThrowsAsync<AggregateException>(
-                                    () => connection.StartAsync()
-                                )
+                                () => connection.StartAsync()
+                            )
                                 .DefaultTimeout();
                             Assert.Equal(
                                 "Unable to connect to the server with any of the available transports. "
@@ -353,7 +353,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         async (connection) =>
                         {
                             await connection.StartAsync().DefaultTimeout();
-                            await connection.Transport.Output.WriteAsync(new byte[] { 0x42 })
+                            await connection.Transport.Output
+                                .WriteAsync(new byte[] { 0x42 })
                                 .DefaultTimeout();
 
                             await Assert.ThrowsAsync<HttpRequestException>(
@@ -515,8 +516,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                             // We aggregate failures that happen when we start the transport. The operation canceled exception will
                             // be an inner exception.
                             var ex = await Assert.ThrowsAsync<AggregateException>(
-                                    async () => await connection.StartAsync(cts.Token)
-                                )
+                                async () => await connection.StartAsync(cts.Token)
+                            )
                                 .DefaultTimeout();
                             Assert.Equal(3, ex.InnerExceptions.Count);
                             var innerEx = ex.InnerExceptions[2];
@@ -549,11 +550,11 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         async (connection) =>
                         {
                             await Assert.ThrowsAsync<TaskCanceledException>(
-                                    async () =>
-                                        await connection.StartAsync(
-                                            new CancellationToken(canceled: true)
-                                        )
-                                )
+                                async () =>
+                                    await connection.StartAsync(
+                                        new CancellationToken(canceled: true)
+                                    )
+                            )
                                 .DefaultTimeout();
                         }
                     );
@@ -598,8 +599,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         async (connection) =>
                         {
                             var ex = await Assert.ThrowsAsync<AggregateException>(
-                                    async () => await connection.StartAsync()
-                                )
+                                async () => await connection.StartAsync()
+                            )
                                 .DefaultTimeout();
                         }
                     );

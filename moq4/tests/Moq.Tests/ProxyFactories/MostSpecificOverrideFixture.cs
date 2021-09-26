@@ -62,7 +62,8 @@ namespace Moq.Tests.ProxyFactories
                     | BindingFlags.Instance
                     | BindingFlags.DeclaredOnly
             );
-            var proxy = typeof(Mock).GetMethod(
+            var proxy = typeof(Mock)
+                .GetMethod(
                     "Of",
                     BindingFlags.Public | BindingFlags.Static,
                     null,

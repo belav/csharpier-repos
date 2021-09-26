@@ -108,9 +108,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void DiscoverField(IConventionPropertyBaseBuilder conventionPropertyBaseBuilder)
         {
             if (
-                ConfigurationSource.Convention.Overrides(
-                    conventionPropertyBaseBuilder.Metadata.GetFieldInfoConfigurationSource()
-                )
+                ConfigurationSource.Convention
+                    .Overrides(
+                        conventionPropertyBaseBuilder.Metadata.GetFieldInfoConfigurationSource()
+                    )
             )
             {
                 var field = GetFieldToSet(conventionPropertyBaseBuilder.Metadata);
@@ -125,9 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             if (
                 propertyBase == null
-                || !ConfigurationSource.Convention.Overrides(
-                    propertyBase.GetFieldInfoConfigurationSource()
-                )
+                || !ConfigurationSource.Convention
+                    .Overrides(propertyBase.GetFieldInfoConfigurationSource())
                 || propertyBase.IsIndexerProperty()
                 || propertyBase.IsShadowProperty()
             )
@@ -321,15 +321,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     {
                         if (existingMatch != null && newMatch != existingMatch)
                         {
-                            propertyBase!.SetOrRemoveAnnotation(
-                                CoreAnnotationNames.AmbiguousField,
-                                CoreStrings.ConflictingBackingFields(
-                                    propertyName,
-                                    entityClrType.ShortDisplayName(),
-                                    existingMatch.Name,
-                                    newMatch.Name
-                                )
-                            );
+                            propertyBase!
+                                .SetOrRemoveAnnotation(
+                                    CoreAnnotationNames.AmbiguousField,
+                                    CoreStrings.ConflictingBackingFields(
+                                        propertyName,
+                                        entityClrType.ShortDisplayName(),
+                                        existingMatch.Name,
+                                        newMatch.Name
+                                    )
+                                );
                             return null;
                         }
 

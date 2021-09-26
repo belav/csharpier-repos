@@ -160,10 +160,11 @@ namespace System.Xml.Tests
             tw.WriteLine("<ATTRIBUTE3 a1='a1value' a2='a2value' a3='a3value' />");
             tw.WriteLine("<ATTRIBUTE4 a1='' />");
             tw.WriteLine(
-                string.Format(
-                    "<ATTRIBUTE5 CRLF='x{0}x' CR='x{0}x' LF='x\nx' MS='x     x' TAB='x\tx' />",
-                    Environment.NewLine
-                )
+                string
+                    .Format(
+                        "<ATTRIBUTE5 CRLF='x{0}x' CR='x{0}x' LF='x\nx' MS='x     x' TAB='x\tx' />",
+                        Environment.NewLine
+                    )
             );
             tw.WriteLine(string.Format("<ENDOFLINE1>x{0}x</ENDOFLINE1>", Environment.NewLine));
             tw.WriteLine(string.Format("<ENDOFLINE2>x{0}x</ENDOFLINE2>", Environment.NewLine));
@@ -346,10 +347,11 @@ namespace System.Xml.Tests
             tw.WriteLine("<COMPLEX>Text<!-- comment --><![CDATA[cdata]]></COMPLEX>");
             tw.WriteLine("<DUMMY />");
             tw.WriteLine(
-                string.Format(
-                    "<MULTISPACES att=' {0} \t {0}{0}  n1  {0} \t {0}{0}  n2  {0} \t {0}{0} ' />",
-                    Environment.NewLine
-                )
+                string
+                    .Format(
+                        "<MULTISPACES att=' {0} \t {0}{0}  n1  {0} \t {0}{0}  n2  {0} \t {0}{0} ' />",
+                        Environment.NewLine
+                    )
             );
             tw.WriteLine("<CAT>AB<![CDATA[CD]]> </CAT>");
             tw.WriteLine("<CATMIXED>AB<![CDATA[CD]]> </CATMIXED>");

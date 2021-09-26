@@ -44,12 +44,8 @@ namespace IgnitorSample
             CancellationToken cancellationToken = default
         )
         {
-            return client.HubConnection.InvokeAsync(
-                "OnLocationChanged",
-                url,
-                false,
-                cancellationToken
-            );
+            return client.HubConnection
+                .InvokeAsync("OnLocationChanged", url, false, cancellationToken);
         }
     }
 }

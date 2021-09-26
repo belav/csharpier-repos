@@ -810,8 +810,8 @@ namespace System.Data.OleDb
             {
                 Type[] ctorParams = new Type[] { typeof(string) };
                 object[] ctorValues = new object[] { options.ConnectionString };
-                System.Reflection.ConstructorInfo ctor =
-                    typeof(OleDbConnectionStringBuilder).GetConstructor(ctorParams)!;
+                System.Reflection.ConstructorInfo ctor = typeof(OleDbConnectionStringBuilder)
+                    .GetConstructor(ctorParams)!;
                 return new System.ComponentModel.Design.Serialization.InstanceDescriptor(
                     ctor,
                     ctorValues

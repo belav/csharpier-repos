@@ -45,8 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 return false;
             }
 
-            var commandService =
-                document.Project.LanguageServices.GetService<IXamlCommandService>();
+            var commandService = document.Project.LanguageServices
+                .GetService<IXamlCommandService>();
             if (commandService == null)
             {
                 return false;
@@ -60,11 +60,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 ((JToken)request.Arguments[1]).ToObject<XamlEventDescription>()
             };
             return await commandService.ExecuteCommandAsync(
-                    document,
-                    request.Command,
-                    arguments,
-                    cancellationToken
-                )
+                document,
+                request.Command,
+                arguments,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

@@ -17,14 +17,14 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression y = Expression.Variable(typeof(decimal));
             ParameterExpression z = Expression.Variable(typeof(string));
             IRuntimeVariables vars = Expression.Lambda<Func<IRuntimeVariables>>(
-                    Expression.Block(
-                        new[] { x, y, z },
-                        Expression.Assign(x, Expression.Constant(12)),
-                        Expression.Assign(y, Expression.Constant(34m)),
-                        Expression.Assign(z, Expression.Constant("hello")),
-                        Expression.RuntimeVariables(x, y, z)
-                    )
+                Expression.Block(
+                    new[] { x, y, z },
+                    Expression.Assign(x, Expression.Constant(12)),
+                    Expression.Assign(y, Expression.Constant(34m)),
+                    Expression.Assign(z, Expression.Constant("hello")),
+                    Expression.RuntimeVariables(x, y, z)
                 )
+            )
                 .Compile(useInterpreter)();
             Assert.Equal(3, vars.Count);
             Assert.Equal(12, vars[0]);
@@ -39,8 +39,8 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression x = Expression.Variable(typeof(int));
             ParameterExpression y = Expression.Variable(typeof(int));
             IRuntimeVariables vars = Expression.Lambda<Func<IRuntimeVariables>>(
-                    Expression.Block(new[] { x, y }, Expression.RuntimeVariables(x, y))
-                )
+                Expression.Block(new[] { x, y }, Expression.RuntimeVariables(x, y))
+            )
                 .Compile(useInterpreter)();
             Assert.Equal(2, vars.Count);
             Assert.Throws<IndexOutOfRangeException>(() => vars[-1]);
@@ -60,86 +60,84 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression b = Expression.Variable(typeof(bool));
             Assert.True(
                 Expression.Lambda<Func<bool>>(
-                        Expression.Block(
-                            new[] { x, y, z, r, b },
-                            Expression.Assign(x, Expression.Constant(45)),
-                            Expression.Assign(y, Expression.Constant(98.01m)),
-                            Expression.Assign(
-                                z,
-                                Expression.Constant("In fair Verona, where we lay our scene,")
-                            ),
-                            Expression.Assign(r, Expression.RuntimeVariables(x, y, z)),
-                            Expression.Assign(
-                                b,
-                                Expression.Equal(
-                                    Expression.Constant(45),
-                                    Expression.Convert(
-                                        Expression.Property(r, "Item", Expression.Constant(0)),
-                                        typeof(int)
-                                    )
+                    Expression.Block(
+                        new[] { x, y, z, r, b },
+                        Expression.Assign(x, Expression.Constant(45)),
+                        Expression.Assign(y, Expression.Constant(98.01m)),
+                        Expression.Assign(
+                            z,
+                            Expression.Constant("In fair Verona, where we lay our scene,")
+                        ),
+                        Expression.Assign(r, Expression.RuntimeVariables(x, y, z)),
+                        Expression.Assign(
+                            b,
+                            Expression.Equal(
+                                Expression.Constant(45),
+                                Expression.Convert(
+                                    Expression.Property(r, "Item", Expression.Constant(0)),
+                                    typeof(int)
                                 )
-                            ),
-                            Expression.AndAssign(
-                                b,
-                                Expression.Equal(
-                                    Expression.Constant(98.01m),
-                                    Expression.Convert(
-                                        Expression.Property(r, "Item", Expression.Constant(1)),
-                                        typeof(decimal)
-                                    )
+                            )
+                        ),
+                        Expression.AndAssign(
+                            b,
+                            Expression.Equal(
+                                Expression.Constant(98.01m),
+                                Expression.Convert(
+                                    Expression.Property(r, "Item", Expression.Constant(1)),
+                                    typeof(decimal)
                                 )
-                            ),
-                            Expression.AndAssign(
-                                b,
-                                Expression.Equal(
-                                    Expression.Constant("In fair Verona, where we lay our scene,"),
-                                    Expression.Convert(
-                                        Expression.Property(r, "Item", Expression.Constant(2)),
-                                        typeof(string)
-                                    )
+                            )
+                        ),
+                        Expression.AndAssign(
+                            b,
+                            Expression.Equal(
+                                Expression.Constant("In fair Verona, where we lay our scene,"),
+                                Expression.Convert(
+                                    Expression.Property(r, "Item", Expression.Constant(2)),
+                                    typeof(string)
                                 )
-                            ),
-                            Expression.Assign(
-                                Expression.Property(r, "Item", Expression.Constant(0)),
-                                Expression.Constant(988, typeof(object))
-                            ),
-                            Expression.Assign(
-                                Expression.Property(r, "Item", Expression.Constant(1)),
-                                Expression.Constant(0.01m, typeof(object))
-                            ),
-                            Expression.Assign(
-                                Expression.Property(r, "Item", Expression.Constant(2)),
-                                Expression.Constant(
-                                    "Where civil blood makes civil hands unclean.",
-                                    typeof(object)
-                                )
-                            ),
-                            Expression.AndAssign(
-                                b,
-                                Expression.Equal(
-                                    Expression.Convert(x, typeof(int)),
-                                    Expression.Constant(988)
-                                )
-                            ),
-                            Expression.AndAssign(
-                                b,
-                                Expression.Equal(
-                                    Expression.Convert(y, typeof(decimal)),
-                                    Expression.Constant(0.01m)
-                                )
-                            ),
-                            Expression.AndAssign(
-                                b,
-                                Expression.Equal(
-                                    Expression.Convert(z, typeof(string)),
-                                    Expression.Constant(
-                                        "Where civil blood makes civil hands unclean."
-                                    )
-                                )
-                            ),
-                            b
-                        )
+                            )
+                        ),
+                        Expression.Assign(
+                            Expression.Property(r, "Item", Expression.Constant(0)),
+                            Expression.Constant(988, typeof(object))
+                        ),
+                        Expression.Assign(
+                            Expression.Property(r, "Item", Expression.Constant(1)),
+                            Expression.Constant(0.01m, typeof(object))
+                        ),
+                        Expression.Assign(
+                            Expression.Property(r, "Item", Expression.Constant(2)),
+                            Expression.Constant(
+                                "Where civil blood makes civil hands unclean.",
+                                typeof(object)
+                            )
+                        ),
+                        Expression.AndAssign(
+                            b,
+                            Expression.Equal(
+                                Expression.Convert(x, typeof(int)),
+                                Expression.Constant(988)
+                            )
+                        ),
+                        Expression.AndAssign(
+                            b,
+                            Expression.Equal(
+                                Expression.Convert(y, typeof(decimal)),
+                                Expression.Constant(0.01m)
+                            )
+                        ),
+                        Expression.AndAssign(
+                            b,
+                            Expression.Equal(
+                                Expression.Convert(z, typeof(string)),
+                                Expression.Constant("Where civil blood makes civil hands unclean.")
+                            )
+                        ),
+                        b
                     )
+                )
                     .Compile(useInterpreter)()
             );
         }
@@ -153,26 +151,26 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(
                 15,
                 Expression.Lambda<Func<int>>(
-                        Expression.Block(
-                            new[] { x, r },
-                            Expression.Assign(x, Expression.Constant(8)),
-                            Expression.Assign(r, Expression.RuntimeVariables(x, x)),
-                            Expression.Assign(
-                                Expression.Property(r, "Item", Expression.Constant(1)),
-                                Expression.Convert(
-                                    Expression.Add(
-                                        Expression.Constant(7),
-                                        Expression.Convert(
-                                            Expression.Property(r, "Item", Expression.Constant(0)),
-                                            typeof(int)
-                                        )
-                                    ),
-                                    typeof(object)
-                                )
-                            ),
-                            x
-                        )
+                    Expression.Block(
+                        new[] { x, r },
+                        Expression.Assign(x, Expression.Constant(8)),
+                        Expression.Assign(r, Expression.RuntimeVariables(x, x)),
+                        Expression.Assign(
+                            Expression.Property(r, "Item", Expression.Constant(1)),
+                            Expression.Convert(
+                                Expression.Add(
+                                    Expression.Constant(7),
+                                    Expression.Convert(
+                                        Expression.Property(r, "Item", Expression.Constant(0)),
+                                        typeof(int)
+                                    )
+                                ),
+                                typeof(object)
+                            )
+                        ),
+                        x
                     )
+                )
                     .Compile(useInterpreter)()
             );
         }
@@ -184,16 +182,16 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression x = Expression.Variable(typeof(int));
             ParameterExpression y = Expression.Variable(typeof(int));
             IRuntimeVariables vars = Expression.Lambda<Func<IRuntimeVariables>>(
+                Expression.Block(
+                    new[] { x },
+                    Expression.Assign(x, Expression.Constant(3)),
                     Expression.Block(
-                        new[] { x },
-                        Expression.Assign(x, Expression.Constant(3)),
-                        Expression.Block(
-                            new[] { y },
-                            Expression.Assign(y, Expression.Constant(19)),
-                            Expression.RuntimeVariables(x, y)
-                        )
+                        new[] { y },
+                        Expression.Assign(y, Expression.Constant(19)),
+                        Expression.RuntimeVariables(x, y)
                     )
                 )
+            )
                 .Compile(useInterpreter)();
             Assert.Equal(3, vars[0]);
             Assert.Equal(19, vars[1]);
@@ -226,8 +224,8 @@ namespace System.Linq.Expressions.Tests
         public void ZeroVariables(bool useInterpreter)
         {
             IRuntimeVariables vars = Expression.Lambda<Func<IRuntimeVariables>>(
-                    Expression.RuntimeVariables()
-                )
+                Expression.RuntimeVariables()
+            )
                 .Compile(useInterpreter)();
             Assert.Equal(0, vars.Count);
             Assert.Throws<IndexOutOfRangeException>(() => vars[0]);

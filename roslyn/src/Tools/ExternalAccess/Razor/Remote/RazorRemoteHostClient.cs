@@ -39,9 +39,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         )
         {
             var client = await RemoteHostClient.TryGetClientAsync(
-                    workspace.Services,
-                    cancellationToken
-                )
+                workspace.Services,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var descriptors = new RazorServiceDescriptorsWrapper(
                 "dummy",
@@ -67,13 +67,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             CancellationToken cancellationToken
         ) =>
             await _client.RunRemoteAsync<T>(
-                    WellKnownServiceHubService.Razor,
-                    targetName,
-                    solution,
-                    arguments,
-                    callbackTarget: null,
-                    cancellationToken
-                )
+                WellKnownServiceHubService.Razor,
+                targetName,
+                solution,
+                arguments,
+                callbackTarget: null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
         public static async Task<RazorRemoteHostClient?> TryGetClientAsync(

@@ -459,13 +459,14 @@ namespace Microsoft.Extensions.FileProviders.Physical
                 return;
             }
 
-            Task.Factory.StartNew(
-                _cancelTokenSource,
-                matchInfo.TokenSource,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task.Factory
+                .StartNew(
+                    _cancelTokenSource,
+                    matchInfo.TokenSource,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         internal static void RaiseChangeEvents(object state)

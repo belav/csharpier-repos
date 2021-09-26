@@ -27,9 +27,8 @@ namespace Microsoft.CodeAnalysis
                     return default;
                 }
 
-                using var result = PooledArrayBuilder<IPointerTypeSymbol>.GetInstance(
-                    pointedAtTypeResolution.SymbolCount
-                );
+                using var result = PooledArrayBuilder<IPointerTypeSymbol>
+                    .GetInstance(pointedAtTypeResolution.SymbolCount);
                 foreach (var typeSymbol in pointedAtTypeResolution.OfType<ITypeSymbol>())
                 {
                     result.AddIfNotNull(reader.Compilation.CreatePointerTypeSymbol(typeSymbol));

@@ -276,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 IParameterSymbol parameter
                   => GetParameterDocumentation(parameter, compilation, cancellationToken),
                 ITypeParameterSymbol typeParam
-                  => typeParam.ContainingSymbol.GetDocumentationComment(
+                  => typeParam.ContainingSymbol
+                      .GetDocumentationComment(
                           compilation,
                           expandIncludes: true,
                           expandInheritdoc: true,
@@ -286,12 +287,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 IMethodSymbol method
                   => GetMethodDocumentation(method, compilation, cancellationToken).SummaryText,
                 IAliasSymbol alias
-                  => alias.Target.GetDocumentationComment(
-                      compilation,
-                      expandIncludes: true,
-                      expandInheritdoc: true,
-                      cancellationToken: cancellationToken
-                  ).SummaryText,
+                  => alias.Target
+                      .GetDocumentationComment(
+                          compilation,
+                          expandIncludes: true,
+                          expandInheritdoc: true,
+                          cancellationToken: cancellationToken
+                      ).SummaryText,
                 _
                   => symbol.GetDocumentationComment(
                       compilation,
@@ -393,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             // Get the comments from the original definition of the containing symbol.
-            return containingSymbol.OriginalDefinition.GetDocumentationComment(
+            return containingSymbol.OriginalDefinition
+                .GetDocumentationComment(
                     compilation,
                     expandIncludes: true,
                     expandInheritdoc: true,

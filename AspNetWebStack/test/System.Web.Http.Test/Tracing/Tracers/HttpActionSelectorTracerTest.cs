@@ -73,9 +73,8 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            HttpActionDescriptor selectedActionDescriptor = (
-                (IHttpActionSelector)tracer
-            ).SelectAction(_controllerContext);
+            HttpActionDescriptor selectedActionDescriptor = ((IHttpActionSelector)tracer)
+                .SelectAction(_controllerContext);
 
             // Assert
             Assert.Equal<TraceRecord>(
@@ -106,9 +105,8 @@ namespace System.Web.Http.Tracing.Tracers
             );
 
             // Act
-            HttpActionDescriptor selectedActionDescriptor = (
-                (IHttpActionSelector)tracer
-            ).SelectAction(_controllerContext);
+            HttpActionDescriptor selectedActionDescriptor = ((IHttpActionSelector)tracer)
+                .SelectAction(_controllerContext);
 
             // Assert
             Assert.Same(actionDescriptorTracer, selectedActionDescriptor);

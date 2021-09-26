@@ -792,9 +792,8 @@ namespace System.Data.Odbc
                         {
                             int lcid = System.Globalization.CultureInfo.CurrentCulture.LCID;
                             CultureInfo culInfo = new CultureInfo(lcid);
-                            Encoding cpe = System.Text.Encoding.GetEncoding(
-                                culInfo.TextInfo.ANSICodePage
-                            );
+                            Encoding cpe = System.Text.Encoding
+                                .GetEncoding(culInfo.TextInfo.ANSICodePage);
                             value = cpe.GetBytes(value.ToString()!);
                             size = ((byte[])value).Length;
                         }
@@ -1056,9 +1055,8 @@ namespace System.Data.Odbc
                         {
                             int lcid = System.Globalization.CultureInfo.CurrentCulture.LCID;
                             CultureInfo culInfo = new CultureInfo(lcid);
-                            Encoding cpe = System.Text.Encoding.GetEncoding(
-                                culInfo.TextInfo.ANSICodePage
-                            );
+                            Encoding cpe = System.Text.Encoding
+                                .GetEncoding(culInfo.TextInfo.ANSICodePage);
                             Value = cpe.GetString((byte[])Value);
                         }
                     }
@@ -1071,10 +1069,8 @@ namespace System.Data.Odbc
                     )
                     {
                         Debug.Assert(ODBC32.SQL_C.NUMERIC == _typemap._sql_c, "unexpected");
-                        Value = decimal.Parse(
-                            (string)Value,
-                            System.Globalization.CultureInfo.CurrentCulture
-                        );
+                        Value = decimal
+                            .Parse((string)Value, System.Globalization.CultureInfo.CurrentCulture);
                     }
                 }
             }

@@ -76,10 +76,11 @@ namespace System.Net.Quic.Tests
             bool flowExecutionContext,
             bool? continueOnCapturedContext
         ) =>
-            base.ReadAsync_ContinuesOnCurrentTaskSchedulerIfDesired(
-                flowExecutionContext,
-                continueOnCapturedContext
-            );
+            base
+                .ReadAsync_ContinuesOnCurrentTaskSchedulerIfDesired(
+                    flowExecutionContext,
+                    continueOnCapturedContext
+                );
         [ActiveIssue("https://github.com/dotnet/runtime/issues/49157")]
         public override Task ZeroByteRead_BlocksUntilDataAvailableOrNops(ReadWriteMode mode) =>
             base.ZeroByteRead_BlocksUntilDataAvailableOrNops(mode);
@@ -91,10 +92,11 @@ namespace System.Net.Quic.Tests
             bool flowExecutionContext,
             bool? continueOnCapturedContext
         ) =>
-            base.ReadAsync_ContinuesOnCurrentSynchronizationContextIfDesired(
-                flowExecutionContext,
-                continueOnCapturedContext
-            );
+            base
+                .ReadAsync_ContinuesOnCurrentSynchronizationContextIfDesired(
+                    flowExecutionContext,
+                    continueOnCapturedContext
+                );
         [ActiveIssue("https://github.com/dotnet/runtime/issues/49157")]
         public override Task ReadWriteByte_Success() => base.ReadWriteByte_Success();
         [ActiveIssue("https://github.com/dotnet/runtime/issues/49157")]
@@ -137,8 +139,8 @@ namespace System.Net.Quic.Tests
                     new SslApplicationProtocol("quictest")
                 },
                 // TODO: use a cert. MsQuic currently only allows certs that are trusted.
-                ServerCertificate =
-                    System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
+                ServerCertificate = System.Net.Test.Common.Configuration.Certificates
+                    .GetServerCertificate()
             };
         }
 

@@ -151,9 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     );
                     Assert.Null(error);
                     Assert.Equal(1, testData.GetExplicitlyDeclaredMethods().Length);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       25 (0x19)
   .maxstack  2
   IL_0000:  call       ""System.Exception Microsoft.VisualStudio.Debugger.Clr.IntrinsicMethods.GetException()""
@@ -165,7 +164,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0013:  castclass  ""System.InvalidOperationException""
   IL_0018:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -200,9 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                         testData
                     );
                     Assert.Equal(1, testData.GetExplicitlyDeclaredMethods().Length);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       22 (0x16)
   .maxstack  2
   IL_0000:  ldc.i4.0
@@ -215,7 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0010:  castclass  ""string""
   IL_0015:  ret
 }"
-                        );
+                    );
                     // Value type $ReturnValue.
                     context = CreateMethodContext(runtime, "C.M");
                     aliases = ImmutableArray.Create(ReturnValueAlias(type: typeof(int?)));
@@ -227,9 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       20 (0x14)
   .maxstack  1
   .locals init (int? V_0)
@@ -241,7 +238,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_000e:  call       ""bool int?.HasValue.get""
   IL_0013:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -272,9 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                         out error,
                         ReturnValueAlias()
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       14 (0xe)
   .maxstack  2
   IL_0000:  ldc.i4.0
@@ -284,7 +280,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_000c:  sub
   IL_000d:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -352,9 +348,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                         testData
                     );
                     Assert.Equal(1, testData.GetExplicitlyDeclaredMethods().Length);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       40 (0x28)
   .maxstack  2
   IL_0000:  ldstr      ""$23""
@@ -369,7 +364,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0022:  callvirt   ""System.Type System.Type.BaseType.get""
   IL_0027:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -420,9 +415,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                         testData
                     );
                     Assert.Empty(missingAssemblyIdentities);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       23 (0x17)
   .maxstack  2
   IL_0000:  ldstr      ""s""
@@ -433,7 +427,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0015:  add
   IL_0016:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -481,9 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                         testData
                     );
                     Assert.Empty(missingAssemblyIdentities);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       44 (0x2c)
   .maxstack  4
   IL_0000:  ldstr      ""a""
@@ -499,7 +492,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0026:  ldfld      ""object C.F""
   IL_002b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -651,10 +644,11 @@ class C
             {
                 Assert.Equal(
                     error,
-                    string.Format(
-                        "error CS0103: The name '{0}' does not exist in the current context",
-                        variableName
-                    )
+                    string
+                        .Format(
+                            "error CS0103: The name '{0}' does not exist in the current context",
+                            variableName
+                        )
                 );
             }
         }
@@ -732,9 +726,8 @@ class C
                         out error,
                         ExceptionAlias()
                     );
-                    testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()").VerifyIL(
+                        @"{
   // Code size       16 (0x10)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -745,7 +738,7 @@ class C
   IL_000a:  call       ""System.Exception Microsoft.VisualStudio.Debugger.Clr.IntrinsicMethods.GetException()""
   IL_000f:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -782,9 +775,8 @@ class C
                         preferredUICulture: EnsureEnglishUICulture.PreferredOrNull,
                         testData: testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       22 (0x16)
   .maxstack  2
   IL_0000:  call       ""System.Exception Microsoft.VisualStudio.Debugger.Clr.IntrinsicMethods.GetException()""
@@ -796,7 +788,7 @@ class C
   IL_0013:  starg.s    V_0
   IL_0015:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -954,9 +946,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       16 (0x10)
   .maxstack  3
   .locals init (T V_0,
@@ -970,7 +961,7 @@ class C
   IL_000e:  ldloc.1
   IL_000f:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     var result = context.CompileExpression(
                         "F(ref x)",
@@ -980,9 +971,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       16 (0x10)
   .maxstack  1
   .locals init (T V_0)
@@ -991,7 +981,7 @@ class C
   IL_000a:  call       ""int C.F<int>(ref int)""
   IL_000f:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1029,9 +1019,8 @@ class C
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       25 (0x19)
   .maxstack  3
   .locals init (object V_0)
@@ -1045,7 +1034,7 @@ class C
   IL_0017:  ldloc.0
   IL_0018:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1083,9 +1072,8 @@ class C
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       24 (0x18)
   .maxstack  3
   .locals init (int V_0)
@@ -1102,7 +1090,7 @@ class C
   IL_0016:  ldloc.0
   IL_0017:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1366,9 +1354,8 @@ class C
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       44 (0x2c)
   .maxstack  2
   .locals init (A<object> V_0) //o
@@ -1387,7 +1374,7 @@ class C
   IL_0026:  castclass  ""B<A<object>[]>""
   IL_002b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1481,9 +1468,8 @@ class B
                 testData
             );
             Assert.Null(error);
-            testData.GetMethodData("<>x<T>.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x<T>.<>m0").VerifyIL(
+                @"{
 // Code size       11 (0xb)
 .maxstack  1
 .locals init (object V_0) //o
@@ -1491,7 +1477,7 @@ IL_0000:  call       ""System.Exception Microsoft.VisualStudio.Debugger.Clr.Intr
 IL_0005:  castclass  ""E""
 IL_000a:  ret
 }"
-                );
+            );
             ResultProperties resultProperties;
             ImmutableArray<AssemblyIdentity> missingAssemblyIdentities;
             testData = new CompilationTestData();
@@ -1508,9 +1494,8 @@ IL_000a:  ret
             );
             Assert.Empty(missingAssemblyIdentities);
             Assert.Null(error);
-            testData.GetMethodData("<>x<T>.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x<T>.<>m0").VerifyIL(
+                @"{
 // Code size       17 (0x11)
 .maxstack  1
 .locals init (object V_0) //o
@@ -1520,7 +1505,7 @@ IL_000a:  castclass  ""A<B>""
 IL_000f:  stloc.0
 IL_0010:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(1140387, "DevDiv")]

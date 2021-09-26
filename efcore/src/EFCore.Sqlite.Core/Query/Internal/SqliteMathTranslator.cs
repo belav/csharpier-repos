@@ -43,129 +43,123 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     "abs"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Max),
-                        new[] { typeof(byte), typeof(byte) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(nameof(Math.Max), new[] { typeof(byte), typeof(byte) }),
                     "max"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Max),
-                        new[] { typeof(double), typeof(double) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(
+                            nameof(Math.Max),
+                            new[] { typeof(double), typeof(double) }
+                        ),
                     "max"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Max),
-                        new[] { typeof(float), typeof(float) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(
+                            nameof(Math.Max),
+                            new[] { typeof(float), typeof(float) }
+                        ),
                     "max"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Max),
-                        new[] { typeof(int), typeof(int) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(nameof(Math.Max), new[] { typeof(int), typeof(int) }),
                     "max"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Max),
-                        new[] { typeof(long), typeof(long) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(nameof(Math.Max), new[] { typeof(long), typeof(long) }),
                     "max"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Max),
-                        new[] { typeof(sbyte), typeof(sbyte) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(
+                            nameof(Math.Max),
+                            new[] { typeof(sbyte), typeof(sbyte) }
+                        ),
                     "max"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Max),
-                        new[] { typeof(short), typeof(short) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(
+                            nameof(Math.Max),
+                            new[] { typeof(short), typeof(short) }
+                        ),
                     "max"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Max),
-                        new[] { typeof(uint), typeof(uint) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(nameof(Math.Max), new[] { typeof(uint), typeof(uint) }),
                     "max"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Max),
-                        new[] { typeof(ushort), typeof(ushort) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(
+                            nameof(Math.Max),
+                            new[] { typeof(ushort), typeof(ushort) }
+                        ),
                     "max"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Min),
-                        new[] { typeof(byte), typeof(byte) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(nameof(Math.Min), new[] { typeof(byte), typeof(byte) }),
                     "min"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Min),
-                        new[] { typeof(double), typeof(double) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(
+                            nameof(Math.Min),
+                            new[] { typeof(double), typeof(double) }
+                        ),
                     "min"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Min),
-                        new[] { typeof(float), typeof(float) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(
+                            nameof(Math.Min),
+                            new[] { typeof(float), typeof(float) }
+                        ),
                     "min"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Min),
-                        new[] { typeof(int), typeof(int) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(nameof(Math.Min), new[] { typeof(int), typeof(int) }),
                     "min"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Min),
-                        new[] { typeof(long), typeof(long) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(nameof(Math.Min), new[] { typeof(long), typeof(long) }),
                     "min"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Min),
-                        new[] { typeof(sbyte), typeof(sbyte) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(
+                            nameof(Math.Min),
+                            new[] { typeof(sbyte), typeof(sbyte) }
+                        ),
                     "min"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Min),
-                        new[] { typeof(short), typeof(short) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(
+                            nameof(Math.Min),
+                            new[] { typeof(short), typeof(short) }
+                        ),
                     "min"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Min),
-                        new[] { typeof(uint), typeof(uint) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(nameof(Math.Min), new[] { typeof(uint), typeof(uint) }),
                     "min"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Min),
-                        new[] { typeof(ushort), typeof(ushort) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(
+                            nameof(Math.Min),
+                            new[] { typeof(ushort), typeof(ushort) }
+                        ),
                     "min"
                 },
                 {
@@ -173,10 +167,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     "round"
                 },
                 {
-                    typeof(Math).GetRequiredMethod(
-                        nameof(Math.Round),
-                        new[] { typeof(double), typeof(int) }
-                    ),
+                    typeof(Math)
+                        .GetRequiredMethod(
+                            nameof(Math.Round),
+                            new[] { typeof(double), typeof(int) }
+                        ),
                     "round"
                 }
             };

@@ -49,12 +49,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
         )
         {
             return workspaceServices.FindLanguageServices<IProjectFileLoader>(
-                    d =>
-                        d.GetEnumerableMetadata<string>("ProjectFileExtension")
-                            .Any(
-                                e => string.Equals(e, extension, StringComparison.OrdinalIgnoreCase)
-                            )
-                )
+                d =>
+                    d.GetEnumerableMetadata<string>("ProjectFileExtension")
+                        .Any(e => string.Equals(e, extension, StringComparison.OrdinalIgnoreCase))
+            )
                 .FirstOrDefault();
         }
     }

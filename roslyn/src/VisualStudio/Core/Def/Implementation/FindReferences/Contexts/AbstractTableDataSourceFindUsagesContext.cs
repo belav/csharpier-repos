@@ -125,14 +125,15 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
                 // Add ourselves as the source of results for the window.
                 // Additionally, add applicable custom columns to display custom reference information
-                _findReferencesWindow.Manager.AddSource(
-                    this,
-                    SelectCustomColumnsToInclude(
-                        customColumns,
-                        includeContainingTypeAndMemberColumns,
-                        includeKindColumn
-                    )
-                );
+                _findReferencesWindow.Manager
+                    .AddSource(
+                        this,
+                        SelectCustomColumnsToInclude(
+                            customColumns,
+                            includeContainingTypeAndMemberColumns,
+                            includeKindColumn
+                        )
+                    );
 
                 // After adding us as the source, the manager should immediately call into us to
                 // tell us what the data sink is.
@@ -341,16 +342,17 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 ImmutableDictionary<string, string> additionalProperties
             )
             {
-                var sourceText = await documentSpan.Document.GetTextAsync(CancellationToken)
+                var sourceText = await documentSpan.Document
+                    .GetTextAsync(CancellationToken)
                     .ConfigureAwait(false);
                 var (excerptResult, lineText) = await ExcerptAsync(sourceText, documentSpan)
                     .ConfigureAwait(false);
 
                 var mappedDocumentSpan = await AbstractDocumentSpanEntry.TryMapAndGetFirstAsync(
-                        documentSpan,
-                        sourceText,
-                        CancellationToken
-                    )
+                    documentSpan,
+                    sourceText,
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
                 if (mappedDocumentSpan == null)
                 {
@@ -376,16 +378,16 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 DocumentSpan documentSpan
             )
             {
-                var excerptService =
-                    documentSpan.Document.Services.GetService<IDocumentExcerptService>();
+                var excerptService = documentSpan.Document.Services
+                    .GetService<IDocumentExcerptService>();
                 if (excerptService != null)
                 {
                     var result = await excerptService.TryExcerptAsync(
-                            documentSpan.Document,
-                            documentSpan.SourceSpan,
-                            ExcerptMode.SingleLine,
-                            CancellationToken
-                        )
+                        documentSpan.Document,
+                        documentSpan.SourceSpan,
+                        ExcerptMode.SingleLine,
+                        CancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (result != null)
                     {
@@ -401,9 +403,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
                 var classificationResult =
                     await ClassifiedSpansAndHighlightSpanFactory.ClassifyAsync(
-                            documentSpan,
-                            CancellationToken
-                        )
+                        documentSpan,
+                        CancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 // need to fix the span issue tracking here - https://github.com/dotnet/roslyn/issues/31001

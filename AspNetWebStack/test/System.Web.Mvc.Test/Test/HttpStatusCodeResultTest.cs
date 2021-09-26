@@ -34,8 +34,8 @@ namespace System.Web.Mvc.Test
             mockControllerContext.SetupSet(c => c.HttpContext.Response.StatusCode = 666)
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.StatusDescription = "Foo Bar"
-                )
+                c => c.HttpContext.Response.StatusDescription = "Foo Bar"
+            )
                 .Verifiable();
             HttpStatusCodeResult result = new HttpStatusCodeResult(666, "Foo Bar");
 
@@ -96,8 +96,8 @@ namespace System.Web.Mvc.Test
             int unusedStatusCode = 306;
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.StatusCode = unusedStatusCode
-                )
+                c => c.HttpContext.Response.StatusCode = unusedStatusCode
+            )
                 .Verifiable();
 
             HttpStatusCodeResult result = new HttpStatusCodeResult(HttpStatusCode.Unused);

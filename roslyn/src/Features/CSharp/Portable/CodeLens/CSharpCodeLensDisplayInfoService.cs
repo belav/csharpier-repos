@@ -18,9 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeLens
     internal sealed class CSharpCodeLensDisplayInfoService : ICodeLensDisplayInfoService
     {
         private static readonly SymbolDisplayFormat Format =
-            SymbolDisplayFormat.CSharpErrorMessageFormat.RemoveMemberOptions(
-                SymbolDisplayMemberOptions.IncludeExplicitInterface
-            );
+            SymbolDisplayFormat.CSharpErrorMessageFormat
+                .RemoveMemberOptions(SymbolDisplayMemberOptions.IncludeExplicitInterface);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

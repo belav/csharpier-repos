@@ -79,7 +79,8 @@ public class TermInfo
     [PlatformSpecific(TestPlatforms.AnyUnix)] // Tests TermInfo
     public void VerifyTermInfoSupportsNewAndLegacyNcurses()
     {
-        MethodInfo readDbMethod = typeof(Console).GetTypeInfo()
+        MethodInfo readDbMethod = typeof(Console)
+            .GetTypeInfo()
             .Assembly.GetType(TerminfoDatabaseType)
             .GetTypeInfo()
             .GetDeclaredMethods(ReadDatabaseMethod)
@@ -154,7 +155,8 @@ public class TermInfo
 
     private object ReadTermInfoDatabase(string term)
     {
-        MethodInfo readDbMethod = typeof(Console).GetTypeInfo()
+        MethodInfo readDbMethod = typeof(Console)
+            .GetTypeInfo()
             .Assembly.GetType(TerminfoDatabaseType)
             .GetTypeInfo()
             .GetDeclaredMethods(ReadDatabaseMethod)
@@ -165,7 +167,8 @@ public class TermInfo
 
     private object CreateTermColorInfo(object db)
     {
-        return typeof(Console).GetTypeInfo()
+        return typeof(Console)
+            .GetTypeInfo()
             .Assembly.GetType(TerminalFormatStringsType)
             .GetTypeInfo()
             .DeclaredConstructors.Where(c => c.GetParameters().Count() == 1)
@@ -242,10 +245,12 @@ public class TermInfo
 
     private string EvaluateParameterizedStrings(string format, params object[] parameters)
     {
-        Type formatArrayType = typeof(Console).GetTypeInfo()
+        Type formatArrayType = typeof(Console)
+            .GetTypeInfo()
             .Assembly.GetType(FormatParamType)
             .MakeArrayType();
-        MethodInfo mi = typeof(Console).GetTypeInfo()
+        MethodInfo mi = typeof(Console)
+            .GetTypeInfo()
             .Assembly.GetType(ParameterizedStringsType)
             .GetTypeInfo()
             .GetDeclaredMethods(EvaluateMethod)

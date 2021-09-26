@@ -136,7 +136,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     public override ImmutableArray<DiagnosticTableItem> GetItems()
                     {
                         return _source.AggregateItems(
-                            _source._buildErrorSource.GetBuildErrors()
+                            _source._buildErrorSource
+                                .GetBuildErrors()
                                 .GroupBy(
                                     d => d,
                                     d => DiagnosticTableItem.Create(_source.Workspace, d),

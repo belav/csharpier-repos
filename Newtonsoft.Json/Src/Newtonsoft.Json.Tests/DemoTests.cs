@@ -715,8 +715,8 @@ namespace Newtonsoft.Json.Tests
             );
 
             List<JToken> newtonsoftPackages = packages.SelectTokens(
-                    @"$.[?(@.PackageId =~ /^Newtonsoft\.(.*)$/)]"
-                )
+                @"$.[?(@.PackageId =~ /^Newtonsoft\.(.*)$/)]"
+            )
                 .ToList();
 
             Console.WriteLine(newtonsoftPackages.Count);
@@ -784,7 +784,8 @@ namespace Newtonsoft.Json.Tests
         public void Return(char[] array)
         {
             // use System.Buffers shared pool
-            ArrayPool<char>.Shared.Return(array);
+            ArrayPool<char>.Shared
+                .Return(array);
         }
     }
 #endif

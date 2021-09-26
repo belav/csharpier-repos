@@ -69,12 +69,12 @@ namespace Microsoft.CodeAnalysis
                 if (linkedDocumentsWithChanges.Count() > 1)
                 {
                     var mergeGroupResult = await MergeLinkedDocumentGroupAsync(
-                            allLinkedDocuments,
-                            linkedDocumentsWithChanges,
-                            sessionInfo,
-                            mergeConflictHandler,
-                            cancellationToken
-                        )
+                        allLinkedDocuments,
+                        linkedDocumentsWithChanges,
+                        sessionInfo,
+                        mergeConflictHandler,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     linkedFileMergeResults.Add(mergeGroupResult);
                     mergedText = mergeGroupResult.MergedSourceText;
@@ -111,24 +111,24 @@ namespace Microsoft.CodeAnalysis
                 _oldSolution.Workspace.Services.GetService<IDocumentTextDifferencingService>()
                 ?? new DefaultDocumentTextDifferencingService();
             var appliedChanges = await textDifferencingService.GetTextChangesAsync(
-                    _oldSolution.GetDocument(linkedDocumentGroup.First()),
-                    _newSolution.GetDocument(linkedDocumentGroup.First()),
-                    cancellationToken
-                )
+                _oldSolution.GetDocument(linkedDocumentGroup.First()),
+                _newSolution.GetDocument(linkedDocumentGroup.First()),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var unmergedChanges = new List<UnmergedDocumentChanges>();
 
             foreach (var documentId in linkedDocumentGroup.Skip(1))
             {
                 appliedChanges = await AddDocumentMergeChangesAsync(
-                        _oldSolution.GetDocument(documentId),
-                        _newSolution.GetDocument(documentId),
-                        appliedChanges.ToList(),
-                        unmergedChanges,
-                        groupSessionInfo,
-                        textDifferencingService,
-                        cancellationToken
-                    )
+                    _oldSolution.GetDocument(documentId),
+                    _newSolution.GetDocument(documentId),
+                    appliedChanges.ToList(),
+                    unmergedChanges,
+                    groupSessionInfo,
+                    textDifferencingService,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -190,10 +190,10 @@ namespace Microsoft.CodeAnalysis
             var cumulativeChangeIndex = 0;
 
             var textchanges = await textDiffService.GetTextChangesAsync(
-                    oldDocument,
-                    newDocument,
-                    cancellationToken
-                )
+                oldDocument,
+                newDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             foreach (var change in textchanges)
             {

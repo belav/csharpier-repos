@@ -131,22 +131,19 @@ namespace Microsoft.CodeAnalysis.Options
 
             static string ToSnakeCaseName(string name)
             {
-                return new string(
-                    name.Select(
-                            ch =>
+                return new string(name.Select(
+                        ch =>
+                        {
+                            if (char.IsLetterOrDigit(ch))
                             {
-                                if (char.IsLetterOrDigit(ch))
-                                {
-                                    return char.ToLowerInvariant(ch);
-                                }
-                                else
-                                {
-                                    return '_';
-                                }
+                                return char.ToLowerInvariant(ch);
                             }
-                        )
-                        .ToArray()
-                );
+                            else
+                            {
+                                return '_';
+                            }
+                        }
+                    ).ToArray());
             }
         }
 

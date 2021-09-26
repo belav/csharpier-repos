@@ -21,8 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act
             using var factory = new CustomizedFactory<BasicWebSite.StartupWithoutEndpointRouting>();
             using var customized = factory.WithWebHostBuilder(
-                    builder => factory.ConfigureWebHostCalled.Add("Customization")
-                )
+                builder => factory.ConfigureWebHostCalled.Add("Customization")
+            )
                 .WithWebHostBuilder(
                     builder => factory.ConfigureWebHostCalled.Add("FurtherCustomization")
                 );
@@ -47,8 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act
             using var factory = new CustomizedFactory<GenericHostWebSite.Startup>();
             using var customized = factory.WithWebHostBuilder(
-                    builder => factory.ConfigureWebHostCalled.Add("Customization")
-                )
+                builder => factory.ConfigureWebHostCalled.Add("Customization")
+            )
                 .WithWebHostBuilder(
                     builder => factory.ConfigureWebHostCalled.Add("FurtherCustomization")
                 );
@@ -84,9 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             using var factory = new CustomizedFactory<GenericHostWebSite.Startup>();
             var callbackCalled = false;
 
-            var lifetimeService = (IHostApplicationLifetime)factory.Services.GetService(
-                typeof(IHostApplicationLifetime)
-            );
+            var lifetimeService = (IHostApplicationLifetime)factory.Services
+                .GetService(typeof(IHostApplicationLifetime));
             lifetimeService.ApplicationStopped.Register(
                 () =>
                 {

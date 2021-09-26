@@ -379,7 +379,8 @@ class Program
     {
         // Runtime should be able to load the same R2R image in another load context,
         // even though it will be treated as an IL-only image.
-        new MyLoadContext().TestMultipleLoads();
+        new MyLoadContext()
+            .TestMultipleLoads();
     }
 
     static void TestFieldLayoutNGenMixAndMatch()
@@ -417,48 +418,29 @@ class Program
                 typeof(FieldGetter<>).MakeGenericType(instArg)
             );
 
-            string expectedField1 = "System.Int32 Gen`1[???]::m_Field1".Replace(
-                "???",
-                instArg.ToString()
-            );
-            string expectedField2 = "System.String Gen`1[???]::m_Field2".Replace(
-                "???",
-                instArg.ToString()
-            );
+            string expectedField1 = "System.Int32 Gen`1[???]::m_Field1"
+                .Replace("???", instArg.ToString());
+            string expectedField2 = "System.String Gen`1[???]::m_Field2"
+                .Replace("???", instArg.ToString());
             string expectedField3 = "??? Gen`1[???]::m_Field3".Replace("???", instArg.ToString());
-            string expectedField4 =
-                "System.Collections.Generic.List`1[???] Gen`1[???]::m_Field4".Replace(
-                    "???",
-                    instArg.ToString()
-                );
+            string expectedField4 = "System.Collections.Generic.List`1[???] Gen`1[???]::m_Field4"
+                .Replace("???", instArg.ToString());
             string expectedField5 =
-                "System.Collections.Generic.KeyValuePair`2[???,System.Int32] Gen`1[???]::m_Field5".Replace(
-                    "???",
-                    instArg.ToString()
-                );
+                "System.Collections.Generic.KeyValuePair`2[???,System.Int32] Gen`1[???]::m_Field5"
+                    .Replace("???", instArg.ToString());
 
-            string expectedDllField1 = "System.String MyGeneric`2[???,???]::m_Field1".Replace(
-                "???",
-                instArg.ToString()
-            );
-            string expectedDllField2 = "??? MyGeneric`2[???,???]::m_Field2".Replace(
-                "???",
-                instArg.ToString()
-            );
+            string expectedDllField1 = "System.String MyGeneric`2[???,???]::m_Field1"
+                .Replace("???", instArg.ToString());
+            string expectedDllField2 = "??? MyGeneric`2[???,???]::m_Field2"
+                .Replace("???", instArg.ToString());
             string expectedDllField3 =
-                "System.Collections.Generic.List`1[???] MyGeneric`2[???,???]::m_Field3".Replace(
-                    "???",
-                    instArg.ToString()
-                );
+                "System.Collections.Generic.List`1[???] MyGeneric`2[???,???]::m_Field3"
+                    .Replace("???", instArg.ToString());
             string expectedDllField4 =
-                "System.Collections.Generic.KeyValuePair`2[???,System.Int32] MyGeneric`2[???,???]::m_Field4".Replace(
-                    "???",
-                    instArg.ToString()
-                );
-            string expectedDllField5 = "System.Int32 MyGeneric`2[???,???]::m_Field5".Replace(
-                "???",
-                instArg.ToString()
-            );
+                "System.Collections.Generic.KeyValuePair`2[???,System.Int32] MyGeneric`2[???,???]::m_Field4"
+                    .Replace("???", instArg.ToString());
+            string expectedDllField5 = "System.Int32 MyGeneric`2[???,???]::m_Field5"
+                .Replace("???", instArg.ToString());
 
             Assert.AreEqual(expectedField1, FieldFullName(getter.GetGenT_Field1()));
             Assert.AreEqual(expectedField2, FieldFullName(getter.GetGenT_Field2()));

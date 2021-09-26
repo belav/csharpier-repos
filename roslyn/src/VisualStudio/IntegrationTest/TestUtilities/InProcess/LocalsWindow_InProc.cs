@@ -53,10 +53,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
 
             var localHierarchicalName = string.Join("->", entryNames);
-            var allLocalsString = string.Join(
-                "\n",
-                GetAllLocals(dte.Debugger.CurrentStackFrame.Locals)
-            );
+            var allLocalsString = string
+                .Join("\n", GetAllLocals(dte.Debugger.CurrentStackFrame.Locals));
             throw new Exception(
                 $"\nCould not find the local named {localHierarchicalName}.\nAll available locals are: \n{allLocalsString}"
             );

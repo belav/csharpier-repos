@@ -58,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = CreateContext())
             {
-                var entityTypeMappings = context.Model.GetEntityTypes()
+                var entityTypeMappings = context.Model
+                    .GetEntityTypes()
                     .Select(e => new EntityTypeMapping(e))
                     .ToList();
 
@@ -207,7 +208,8 @@ namespace Microsoft.EntityFrameworkCore
                         TRoleClaim
                     >(context);
 
-                    var claims = (await userStore.GetClaimsAsync(user)).OrderBy(e => e.Type)
+                    var claims = (await userStore.GetClaimsAsync(user))
+                        .OrderBy(e => e.Type)
                         .ThenBy(e => e.Value)
                         .ToList();
                     Assert.Equal(3, claims.Count);
@@ -266,7 +268,8 @@ namespace Microsoft.EntityFrameworkCore
                         TRoleClaim
                     >(context);
 
-                    var claims = (await userStore.GetClaimsAsync(user)).OrderBy(e => e.Type)
+                    var claims = (await userStore.GetClaimsAsync(user))
+                        .OrderBy(e => e.Type)
                         .ThenBy(e => e.Value)
                         .ToList();
                     Assert.Equal(1, claims.Count);
@@ -300,9 +303,8 @@ namespace Microsoft.EntityFrameworkCore
                         TRoleClaim
                     >(context);
 
-                    var logins = (await userStore.GetLoginsAsync(user)).OrderBy(
-                            e => e.LoginProvider
-                        )
+                    var logins = (await userStore.GetLoginsAsync(user))
+                        .OrderBy(e => e.LoginProvider)
                         .ToList();
                     Assert.Equal(2, logins.Count);
                     Assert.Equal("ISCABBS", logins[0].LoginProvider);
@@ -449,7 +451,8 @@ namespace Microsoft.EntityFrameworkCore
                         TUserToken
                     >(context);
 
-                    var claims = (await userStore.GetClaimsAsync(user)).OrderBy(e => e.Type)
+                    var claims = (await userStore.GetClaimsAsync(user))
+                        .OrderBy(e => e.Type)
                         .ThenBy(e => e.Value)
                         .ToList();
                     Assert.Equal(3, claims.Count);
@@ -503,7 +506,8 @@ namespace Microsoft.EntityFrameworkCore
                         TUserToken
                     >(context);
 
-                    var claims = (await userStore.GetClaimsAsync(user)).OrderBy(e => e.Type)
+                    var claims = (await userStore.GetClaimsAsync(user))
+                        .OrderBy(e => e.Type)
                         .ThenBy(e => e.Value)
                         .ToList();
                     Assert.Equal(3, claims.Count);
@@ -556,7 +560,8 @@ namespace Microsoft.EntityFrameworkCore
                         TUserToken
                     >(context);
 
-                    var claims = (await userStore.GetClaimsAsync(user)).OrderBy(e => e.Type)
+                    var claims = (await userStore.GetClaimsAsync(user))
+                        .OrderBy(e => e.Type)
                         .ThenBy(e => e.Value)
                         .ToList();
                     Assert.Equal(1, claims.Count);
@@ -587,9 +592,8 @@ namespace Microsoft.EntityFrameworkCore
                         TUserToken
                     >(context);
 
-                    var logins = (await userStore.GetLoginsAsync(user)).OrderBy(
-                            e => e.LoginProvider
-                        )
+                    var logins = (await userStore.GetLoginsAsync(user))
+                        .OrderBy(e => e.LoginProvider)
                         .ToList();
                     Assert.Equal(2, logins.Count);
                     Assert.Equal("ISCABBS", logins[0].LoginProvider);
@@ -647,7 +651,8 @@ namespace Microsoft.EntityFrameworkCore
                     >(context);
                     var adminRole = roleStore.Roles.Single(r => r.NormalizedName == "admin");
 
-                    var claims = (await roleStore.GetClaimsAsync(adminRole)).OrderBy(e => e.Type)
+                    var claims = (await roleStore.GetClaimsAsync(adminRole))
+                        .OrderBy(e => e.Type)
                         .ThenBy(e => e.Value)
                         .ToList();
                     Assert.Equal(2, claims.Count);
@@ -713,7 +718,8 @@ namespace Microsoft.EntityFrameworkCore
         public abstract class AspNetIdentityFixtureBase : SharedStoreFixtureBase<TContext>
         {
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .EnableDetailedErrors()
                     .EnableSensitiveDataLogging()
                     .ConfigureWarnings(

@@ -221,10 +221,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             test.Attribute.ErrorMessage = "SomeErrorMessage";
 
-            var validationResult = test.Attribute.GetValidationResult(
-                test.Value,
-                test.ValidationContext
-            );
+            var validationResult = test.Attribute
+                .GetValidationResult(test.Value, test.ValidationContext);
             Assert.Equal("SomeErrorMessage", validationResult.ErrorMessage);
         }
 
@@ -240,10 +238,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             );
             test.Attribute.ErrorMessageResourceType = typeof(ErrorMessageResources);
 
-            var validationResult = test.Attribute.GetValidationResult(
-                test.Value,
-                test.ValidationContext
-            );
+            var validationResult = test.Attribute
+                .GetValidationResult(test.Value, test.ValidationContext);
             Assert.Equal(
                 "Error Message from ErrorMessageResources.InternalErrorMessageTestProperty",
                 validationResult.ErrorMessage

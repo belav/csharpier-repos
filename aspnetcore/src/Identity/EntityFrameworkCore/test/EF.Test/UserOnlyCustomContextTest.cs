@@ -110,12 +110,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         [ConditionalFact]
         public async Task EnsureStartupUsageWorks()
         {
-            var userStore = _builder.ApplicationServices.GetRequiredService<
-                IUserStore<IdentityUser>
-            >();
-            var userManager = _builder.ApplicationServices.GetRequiredService<
-                UserManager<IdentityUser>
-            >();
+            var userStore = _builder.ApplicationServices
+                .GetRequiredService<IUserStore<IdentityUser>>();
+            var userManager = _builder.ApplicationServices
+                .GetRequiredService<UserManager<IdentityUser>>();
 
             Assert.NotNull(userStore);
             Assert.NotNull(userManager);

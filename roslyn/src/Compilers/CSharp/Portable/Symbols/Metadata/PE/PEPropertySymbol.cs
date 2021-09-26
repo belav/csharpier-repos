@@ -110,9 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (propEx != null || isBad)
             {
-                result._lazyCachedUseSiteInfo.Initialize(
-                    new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, result)
-                );
+                result._lazyCachedUseSiteInfo
+                    .Initialize(new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, result));
             }
 
             return result;
@@ -315,9 +314,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     p =>
                         (
                             !p.RefCustomModifiers.IsDefaultOrEmpty
-                            && p.RefCustomModifiers.Any(
-                                m => !m.IsOptional && !m.Modifier.IsWellKnownTypeInAttribute()
-                            )
+                            && p.RefCustomModifiers
+                                .Any(m => !m.IsOptional && !m.Modifier.IsWellKnownTypeInAttribute())
                         ) || p.CustomModifiers.AnyRequired()
                 );
             }
@@ -464,9 +462,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                             if (
                                 !crossedAssemblyBoundaryWithoutInternalsVisibleTo
-                                && !curr.ContainingAssembly.HasInternalAccessTo(
-                                    next.ContainingAssembly
-                                )
+                                && !curr.ContainingAssembly
+                                    .HasInternalAccessTo(next.ContainingAssembly)
                             )
                             {
                                 crossedAssemblyBoundaryWithoutInternalsVisibleTo = true;
@@ -652,10 +649,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                return _containingType.ContainingPEModule.MetadataLocation.Cast<
-                    MetadataLocation,
-                    Location
-                >();
+                return _containingType.ContainingPEModule.MetadataLocation
+                    .Cast<MetadataLocation, Location>();
             }
         }
 

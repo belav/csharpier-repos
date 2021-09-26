@@ -224,9 +224,8 @@ namespace System.Linq.Tests
         [ConditionalFact(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
         public void IndexOverflow()
         {
-            var selected = new FastInfiniteEnumerator<int>().SelectMany(
-                (e, i) => Enumerable.Empty<int>()
-            );
+            var selected = new FastInfiniteEnumerator<int>()
+                .SelectMany((e, i) => Enumerable.Empty<int>());
             using (var en = selected.GetEnumerator())
                 Assert.Throws<OverflowException>(
                     () =>

@@ -28,9 +28,8 @@ namespace Microsoft.AspNetCore.Components.Test
         public void GivenNoParameters_RendersNothing()
         {
             // Arrange/Act
-            var setParametersTask = _renderer.Dispatcher.InvokeAsync(
-                () => _layoutViewComponent.SetParametersAsync(ParameterView.Empty)
-            );
+            var setParametersTask = _renderer.Dispatcher
+                .InvokeAsync(() => _layoutViewComponent.SetParametersAsync(ParameterView.Empty));
             Assert.True(setParametersTask.IsCompletedSuccessfully);
             var frames = _renderer.GetCurrentRenderTreeFrames(_layoutViewComponentId)
                 .AsEnumerable();
@@ -81,17 +80,18 @@ namespace Microsoft.AspNetCore.Components.Test
         public void GivenLayoutButNoContent_RendersLayoutWithEmptyBody()
         {
             // Arrange/Act
-            var setParametersTask = _renderer.Dispatcher.InvokeAsync(
-                () =>
-                    _layoutViewComponent.SetParametersAsync(
-                        ParameterView.FromDictionary(
-                            new Dictionary<string, object>
-                            {
-                                { nameof(LayoutView.Layout), typeof(RootLayout) }
-                            }
+            var setParametersTask = _renderer.Dispatcher
+                .InvokeAsync(
+                    () =>
+                        _layoutViewComponent.SetParametersAsync(
+                            ParameterView.FromDictionary(
+                                new Dictionary<string, object>
+                                {
+                                    { nameof(LayoutView.Layout), typeof(RootLayout) }
+                                }
+                            )
                         )
-                    )
-            );
+                );
 
             // Assert
             Assert.True(setParametersTask.IsCompletedSuccessfully);
@@ -335,17 +335,18 @@ namespace Microsoft.AspNetCore.Components.Test
             Assert.True(setParametersTask1.IsCompletedSuccessfully);
 
             // Act
-            var setParametersTask2 = _renderer.Dispatcher.InvokeAsync(
-                () =>
-                    _layoutViewComponent.SetParametersAsync(
-                        ParameterView.FromDictionary(
-                            new Dictionary<string, object>
-                            {
-                                { nameof(LayoutView.Layout), typeof(OtherNestedLayout) },
-                            }
+            var setParametersTask2 = _renderer.Dispatcher
+                .InvokeAsync(
+                    () =>
+                        _layoutViewComponent.SetParametersAsync(
+                            ParameterView.FromDictionary(
+                                new Dictionary<string, object>
+                                {
+                                    { nameof(LayoutView.Layout), typeof(OtherNestedLayout) },
+                                }
+                            )
                         )
-                    )
-            );
+                );
 
             // Assert
             Assert.True(setParametersTask2.IsCompletedSuccessfully);

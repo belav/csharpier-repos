@@ -339,94 +339,87 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     webHostBuilder =>
                     {
                         webHostBuilder.UseKestrel(
-                                options =>
-                                {
-                                    options.Listen(
-                                        new IPEndPoint(IPAddress.Loopback, 0),
-                                        listenOptions =>
+                            options =>
+                            {
+                                options.Listen(
+                                    new IPEndPoint(IPAddress.Loopback, 0),
+                                    listenOptions =>
+                                    {
+                                        if (useConnectionAdapter)
                                         {
-                                            if (useConnectionAdapter)
-                                            {
-                                                listenOptions.UsePassThrough();
-                                            }
+                                            listenOptions.UsePassThrough();
                                         }
-                                    );
-
-                                    options.Limits.MaxRequestBufferSize = maxRequestBufferSize;
-
-                                    if (
-                                        maxRequestBufferSize.HasValue
-                                        && maxRequestBufferSize.Value
-                                            < options.Limits.MaxRequestLineSize
-                                    )
-                                    {
-                                        options.Limits.MaxRequestLineSize =
-                                            (int)maxRequestBufferSize;
                                     }
+                                );
 
-                                    if (
-                                        maxRequestBufferSize.HasValue
-                                        && maxRequestBufferSize.Value
-                                            < options.Limits.MaxRequestHeadersTotalSize
-                                    )
-                                    {
-                                        options.Limits.MaxRequestHeadersTotalSize =
-                                            (int)maxRequestBufferSize;
-                                    }
+                                options.Limits.MaxRequestBufferSize = maxRequestBufferSize;
 
-                                    options.Limits.MinRequestBodyDataRate = null;
-
-                                    options.Limits.MaxRequestBodySize = _dataLength;
+                                if (
+                                    maxRequestBufferSize.HasValue
+                                    && maxRequestBufferSize.Value
+                                        < options.Limits.MaxRequestLineSize
+                                )
+                                {
+                                    options.Limits.MaxRequestLineSize = (int)maxRequestBufferSize;
                                 }
-                            )
-                            .UseContentRoot(Directory.GetCurrentDirectory())
-                            .Configure(
-                                app =>
-                                    app.Run(
-                                        async context =>
-                                        {
-                                            await startReadingRequestBody.Task.TimeoutAfter(
-                                                TimeSpan.FromSeconds(120)
-                                            );
 
-                                            var buffer = new byte[expectedBody.Length];
-                                            var bytesRead = 0;
-                                            while (bytesRead < buffer.Length)
-                                            {
-                                                bytesRead += await context.Request.Body.ReadAsync(
+                                if (
+                                    maxRequestBufferSize.HasValue
+                                    && maxRequestBufferSize.Value
+                                        < options.Limits.MaxRequestHeadersTotalSize
+                                )
+                                {
+                                    options.Limits.MaxRequestHeadersTotalSize =
+                                        (int)maxRequestBufferSize;
+                                }
+
+                                options.Limits.MinRequestBodyDataRate = null;
+
+                                options.Limits.MaxRequestBodySize = _dataLength;
+                            }
+                        ).UseContentRoot(Directory.GetCurrentDirectory()).Configure(
+                            app =>
+                                app.Run(
+                                    async context =>
+                                    {
+                                        await startReadingRequestBody.Task
+                                            .TimeoutAfter(TimeSpan.FromSeconds(120));
+
+                                        var buffer = new byte[expectedBody.Length];
+                                        var bytesRead = 0;
+                                        while (bytesRead < buffer.Length)
+                                        {
+                                            bytesRead += await context.Request.Body
+                                                .ReadAsync(
                                                     buffer,
                                                     bytesRead,
                                                     buffer.Length - bytesRead
                                                 );
-                                            }
+                                        }
 
-                                            await clientFinishedSendingRequestBody.Task.TimeoutAfter(
-                                                TimeSpan.FromSeconds(120)
-                                            );
+                                        await clientFinishedSendingRequestBody.Task
+                                            .TimeoutAfter(TimeSpan.FromSeconds(120));
 
-                                            // Verify client didn't send extra bytes
-                                            if (
-                                                await context.Request.Body.ReadAsync(
-                                                    new byte[1],
-                                                    0,
-                                                    1
-                                                ) != 0
-                                            )
-                                            {
-                                                context.Response.StatusCode =
-                                                    StatusCodes.Status500InternalServerError;
-                                                await context.Response.WriteAsync(
+                                        // Verify client didn't send extra bytes
+                                        if (
+                                            await context.Request.Body.ReadAsync(new byte[1], 0, 1)
+                                            != 0
+                                        )
+                                        {
+                                            context.Response.StatusCode =
+                                                StatusCodes.Status500InternalServerError;
+                                            await context.Response
+                                                .WriteAsync(
                                                     "Client sent more bytes than expectedBody.Length"
                                                 );
-                                                return;
-                                            }
-
-                                            await context.Response.WriteAsync(
-                                                $"bytesRead: {bytesRead}"
-                                            );
+                                            return;
                                         }
-                                    )
-                            );
+
+                                        await context.Response
+                                            .WriteAsync($"bytesRead: {bytesRead}");
+                                    }
+                                )
+                        );
                     }
                 )
                 .ConfigureServices(AddTestLogging)
@@ -485,10 +478,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             while (matchedChars < exptectedLength)
             {
                 var count = await stream.ReadAsync(
-                        responseBuffer,
-                        0,
-                        exptectedLength - matchedChars
-                    )
+                    responseBuffer,
+                    0,
+                    exptectedLength - matchedChars
+                )
                     .DefaultTimeout();
 
                 if (count == 0)

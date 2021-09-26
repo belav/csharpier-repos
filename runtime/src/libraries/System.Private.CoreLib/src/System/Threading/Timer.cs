@@ -573,19 +573,21 @@ namespace System.Threading
                 else
                 {
                     if (
-                        FrameworkEventSource.Log.IsEnabled(
-                            EventLevel.Informational,
-                            FrameworkEventSource.Keywords.ThreadTransfer
-                        )
+                        FrameworkEventSource.Log
+                            .IsEnabled(
+                                EventLevel.Informational,
+                                FrameworkEventSource.Keywords.ThreadTransfer
+                            )
                     )
-                        FrameworkEventSource.Log.ThreadTransferSendObj(
-                            this,
-                            1,
-                            string.Empty,
-                            true,
-                            (int)dueTime,
-                            (int)period
-                        );
+                        FrameworkEventSource.Log
+                            .ThreadTransferSendObj(
+                                this,
+                                1,
+                                string.Empty,
+                                true,
+                                (int)dueTime,
+                                (int)period
+                            );
                     success = _associatedTimerQueue.UpdateTimer(this, dueTime, period);
                 }
             }
@@ -746,10 +748,11 @@ namespace System.Threading
         internal void CallCallback(bool isThreadPool)
         {
             if (
-                FrameworkEventSource.Log.IsEnabled(
-                    EventLevel.Informational,
-                    FrameworkEventSource.Keywords.ThreadTransfer
-                )
+                FrameworkEventSource.Log
+                    .IsEnabled(
+                        EventLevel.Informational,
+                        FrameworkEventSource.Keywords.ThreadTransfer
+                    )
             )
                 FrameworkEventSource.Log.ThreadTransferReceiveObj(this, 1, string.Empty);
 

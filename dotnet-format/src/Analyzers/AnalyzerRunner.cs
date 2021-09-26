@@ -70,8 +70,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
             var compilerDiagnostics = !fixableCompilerDiagnostics.IsEmpty
                 ? compilation.GetDiagnostics(cancellationToken)
-                      .Where(diagnostic => fixableCompilerDiagnostics.Contains(diagnostic.Id))
-                      .ToImmutableArray()
+                  .Where(diagnostic => fixableCompilerDiagnostics.Contains(diagnostic.Id))
+                  .ToImmutableArray()
                 : ImmutableArray<Diagnostic>.Empty;
 
             ImmutableArray<Diagnostic> diagnostics;
@@ -93,8 +93,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 var analyzerCompilation = compilation.WithAnalyzers(analyzers, analyzerOptions);
 
                 diagnostics = await analyzerCompilation.GetAnalyzerDiagnosticsAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 diagnostics = diagnostics.AddRange(compilerDiagnostics);
             }
@@ -120,15 +120,15 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             {
                 // Use mscorlib to represent Runtime references being loaded.
                 if (
-                    !project.MetadataReferences.Any(
-                        reference => reference.Display?.EndsWith("mscorlib.dll") == true
-                    )
+                    !project.MetadataReferences
+                        .Any(reference => reference.Display?.EndsWith("mscorlib.dll") == true)
                 )
                 {
                     return false;
                 }
 
-                return project.ProjectReferences.Select(
+                return project.ProjectReferences
+                    .Select(
                         projectReference => project.Solution.GetProject(projectReference.ProjectId)
                     )
                     .All(

@@ -335,9 +335,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             }
 
             // CONSIDER: Do we want to add special handling for error types?  Right now, we expect they'll just fail to match.
-            var substituted = candidateParam.TypeWithAnnotations.SubstituteType(
-                candidateMethodTypeMap
-            );
+            var substituted = candidateParam.TypeWithAnnotations
+                .SubstituteType(candidateMethodTypeMap);
             if (
                 !TypeSymbol.Equals(
                     substituted.Type,
@@ -440,10 +439,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 if (
                     targetCustomModifier.IsOptional != candidateCustomModifier.IsOptional
-                    || !object.Equals(
-                        targetCustomModifier.Modifier,
-                        ((CSharpCustomModifier)candidateCustomModifier).ModifierSymbol
-                    )
+                    || !object
+                        .Equals(
+                            targetCustomModifier.Modifier,
+                            ((CSharpCustomModifier)candidateCustomModifier).ModifierSymbol
+                        )
                 )
                 {
                     return false;

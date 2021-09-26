@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
         private static Func<DbContext> CreateActivator(DbContextOptions<TContext> options)
         {
-            var constructors = typeof(TContext).GetTypeInfo()
+            var constructors = typeof(TContext)
+                .GetTypeInfo()
                 .DeclaredConstructors.Where(c => !c.IsStatic && c.IsPublic)
                 .ToArray();
 
@@ -66,8 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 )
                 {
                     return Expression.Lambda<Func<TContext>>(
-                            Expression.New(constructors[0], Expression.Constant(options))
-                        )
+                        Expression.New(constructors[0], Expression.Constant(options))
+                    )
                         .Compile();
                 }
             }

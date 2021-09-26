@@ -69,7 +69,8 @@ namespace System.MemoryTests
 
             Memory<int> memoryFromNonEmptyArrayButWithZeroLength = new Memory<int>(
                 new int[1] { 123 }
-            ).Slice(0, 0);
+            )
+                .Slice(0, 0);
 
             Assert.False(left.Equals(right));
             Assert.False(right.Equals(left));

@@ -164,13 +164,14 @@ namespace System.Linq.Expressions.Tests
             }
 
             _writer.WriteLine(
-                string.Format(
-                    "{3}IL_{0:x4}: {1,-10} {2}",
-                    instruction.Offset,
-                    instruction.OpCode.Name,
-                    operandString,
-                    _indent
-                )
+                string
+                    .Format(
+                        "{3}IL_{0:x4}: {1,-10} {2}",
+                        instruction.Offset,
+                        instruction.OpCode.Name,
+                        operandString,
+                        _indent
+                    )
             );
         }
 

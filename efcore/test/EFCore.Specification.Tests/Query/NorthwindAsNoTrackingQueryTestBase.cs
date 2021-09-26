@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 join o in context.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
                 where c.CustomerID == "ALFKI"
                 select o
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(6, customers.Count);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -56,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 from o in context.Set<Order>().AsNoTracking()
                 where c.CustomerID == o.CustomerID
                 select new { c, o }
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(830, customers.Count);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -71,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 join o in context.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
                 where c.CustomerID == "ALFKI"
                 select new { c.CustomerID, c, ocid = o.CustomerID, o }
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(6, customers.Count);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -86,7 +89,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 join o in context.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
                 where c.CustomerID == "ALFKI"
                 select new { c, o }
-            ).AsNoTracking().ToList();
+            )
+                .AsNoTracking()
+                .ToList();
 
             Assert.Equal(6, customers.Count);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -168,7 +173,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 from e in context.Set<Employee>()
                 from c in context.Set<Customer>()
                 select new { c, e }
-            ).AsNoTracking().ToList();
+            )
+                .AsNoTracking()
+                .ToList();
 
             Assert.Equal(819, results.Count);
         }

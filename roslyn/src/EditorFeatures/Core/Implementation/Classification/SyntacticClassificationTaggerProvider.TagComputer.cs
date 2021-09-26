@@ -227,10 +227,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 // Query the service to determine waht span of the document actually changed and should be
                 // reclassified in the host editor.
                 var changedSpan = await GetChangedSpanAsync(
-                        currentDocument,
-                        currentSnapshot,
-                        cancellationToken
-                    )
+                    currentDocument,
+                    currentSnapshot,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 lock (_gate)
@@ -269,11 +269,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     if (service != null)
                     {
                         var changeRange = await service.ComputeSyntacticChangeRangeAsync(
-                                previousDocument,
-                                currentDocument,
-                                _diffTimeout,
-                                cancellationToken
-                            )
+                            previousDocument,
+                            currentDocument,
+                            _diffTimeout,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (changeRange != null)
                             return currentSnapshot.GetSpan(
@@ -331,9 +331,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             private IClassificationService TryGetClassificationService(ITextSnapshot snapshot)
             {
-                var languageServices = _workspace.Services.GetLanguageServices(
-                    snapshot.ContentType
-                );
+                var languageServices = _workspace.Services
+                    .GetLanguageServices(snapshot.ContentType);
                 if (languageServices == null)
                     return null;
 
@@ -434,11 +433,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     tempList = ClassificationUtilities.GetOrCreateClassifiedSpanList();
 
                     classificationService.AddSyntacticClassificationsAsync(
-                            document,
-                            span.Span.ToTextSpan(),
-                            tempList,
-                            CancellationToken.None
-                        )
+                        document,
+                        span.Span.ToTextSpan(),
+                        tempList,
+                        CancellationToken.None
+                    )
                         .Wait(CancellationToken.None);
 
                     _lastLineCache.Update(span, tempList);
@@ -594,10 +593,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                         var newProject = args.NewSolution.GetProject(args.ProjectId);
 
                         // make sure in case of parse config change, we re-colorize whole document. not just edited section.
-                        var configChanged = !object.Equals(
-                            oldProject.ParseOptions,
-                            newProject.ParseOptions
-                        );
+                        var configChanged = !object
+                            .Equals(oldProject.ParseOptions, newProject.ParseOptions);
                         EnqueueProcessSnapshot(newProject.GetDocument(documentId));
                         break;
                     }

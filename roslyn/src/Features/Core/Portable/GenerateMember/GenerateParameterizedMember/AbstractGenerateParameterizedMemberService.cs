@@ -83,9 +83,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     )
                 );
 
-            var semanticFacts = document.Project.Solution.Workspace.Services.GetLanguageServices(
-                    state.TypeToGenerateIn.Language
-                )
+            var semanticFacts = document.Project.Solution.Workspace.Services
+                .GetLanguageServices(state.TypeToGenerateIn.Language)
                 .GetService<ISemanticFactsService>();
 
             if (
@@ -94,9 +93,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             )
             {
                 var typeParameters = state.SignatureInfo.DetermineTypeParameters(cancellationToken);
-                var returnType = await state.SignatureInfo.DetermineReturnTypeAsync(
-                        cancellationToken
-                    )
+                var returnType = await state.SignatureInfo
+                    .DetermineReturnTypeAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 if (typeParameters.Length == 0 && returnType.SpecialType != SpecialType.System_Void)

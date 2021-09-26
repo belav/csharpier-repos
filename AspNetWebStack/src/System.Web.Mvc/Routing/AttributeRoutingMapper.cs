@@ -310,8 +310,8 @@ namespace System.Web.Mvc.Routing
                 new AsyncControllerActionInvoker().DescriptorCache;
 
             return controllerTypes.Select(
-                    type => descriptorsCache.GetDescriptor(type, descriptorFactory, type)
-                )
+                type => descriptorsCache.GetDescriptor(type, descriptorFactory, type)
+            )
                 .Cast<ReflectedAsyncControllerDescriptor>();
         }
 

@@ -303,12 +303,13 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void ControllerMethodsDoNotHaveNonActionAttribute()
         {
-            var methods = typeof(Controller).GetMethods(
-                BindingFlags.Instance
-                    | BindingFlags.Static
-                    | BindingFlags.Public
-                    | BindingFlags.NonPublic
-            );
+            var methods = typeof(Controller)
+                .GetMethods(
+                    BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                );
             foreach (var method in methods)
             {
                 var attrs = method.GetCustomAttributes(
@@ -351,7 +352,8 @@ namespace System.Web.Mvc.Test
             controller.ActionInvoker = mockInvoker.Object;
 
             // Act
-            ((IController)controller).Execute(context.RequestContext);
+            ((IController)controller)
+                .Execute(context.RequestContext);
 
             // Assert
             Assert.True(controller.WasCalled);
@@ -779,13 +781,13 @@ namespace System.Web.Mvc.Test
             int invocationCount = 0;
             Mock<Controller> controllerMock = new Mock<Controller>();
             controllerMock.Setup(
-                    c =>
-                        c.RedirectToAction(
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<RouteValueDictionary>()
-                        )
-                )
+                c =>
+                    c.RedirectToAction(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<RouteValueDictionary>()
+                    )
+            )
                 .Callback(
                     () =>
                     {
@@ -921,8 +923,8 @@ namespace System.Web.Mvc.Test
             int invocationCount = 0;
             Mock<Controller> controllerMock = new Mock<Controller>();
             controllerMock.Setup(
-                    c => c.RedirectToRoute(It.IsAny<string>(), It.IsAny<RouteValueDictionary>())
-                )
+                c => c.RedirectToRoute(It.IsAny<string>(), It.IsAny<RouteValueDictionary>())
+            )
                 .Callback(
                     () =>
                     {
@@ -1348,18 +1350,18 @@ namespace System.Web.Mvc.Test
             foreach (PropertyDescriptor prop in props)
             {
                 requestMock.Setup(
-                        o =>
-                            o[
-                                It.Is<string>(
-                                    item =>
-                                        String.Equals(
-                                            prop.Name,
-                                            item,
-                                            StringComparison.OrdinalIgnoreCase
-                                        )
-                                )
-                            ]
-                    )
+                    o =>
+                        o[
+                            It.Is<string>(
+                                item =>
+                                    String.Equals(
+                                        prop.Name,
+                                        item,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                            )
+                        ]
+                )
                     .Returns((string)prop.GetValue(paramValues));
             }
         }
@@ -1464,10 +1466,11 @@ namespace System.Web.Mvc.Test
 
             // Act
             mockController.Object.TempData.Add("Key", "Value");
-            mockController.Object.TempData.Save(
-                mockController.Object.ControllerContext,
-                mockController.Object.TempDataProvider
-            );
+            mockController.Object.TempData
+                .Save(
+                    mockController.Object.ControllerContext,
+                    mockController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.True(mockController.Object.TempData.ContainsKey("Key"));
@@ -1482,10 +1485,11 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockDestinationController.Object
             );
-            mockDestinationController.Object.TempData.Load(
-                mockDestinationController.Object.ControllerContext,
-                mockDestinationController.Object.TempDataProvider
-            );
+            mockDestinationController.Object.TempData
+                .Load(
+                    mockDestinationController.Object.ControllerContext,
+                    mockDestinationController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.True(mockDestinationController.Object.TempData.ContainsKey("Key"));
@@ -1493,10 +1497,11 @@ namespace System.Web.Mvc.Test
             // Act
             mockDestinationController.Object.TempData["NewKey"] = "NewValue";
             Assert.True(mockDestinationController.Object.TempData.ContainsKey("NewKey"));
-            mockDestinationController.Object.TempData.Save(
-                mockDestinationController.Object.ControllerContext,
-                mockDestinationController.Object.TempDataProvider
-            );
+            mockDestinationController.Object.TempData
+                .Save(
+                    mockDestinationController.Object.ControllerContext,
+                    mockDestinationController.Object.TempDataProvider
+                );
 
             // Instantiate "second destination" controller with the same session state and see that it gets the temp data
             Mock<Controller> mockSecondDestinationController = new Mock<Controller>()
@@ -1510,10 +1515,11 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockSecondDestinationController.Object
             );
-            mockSecondDestinationController.Object.TempData.Load(
-                mockSecondDestinationController.Object.ControllerContext,
-                mockSecondDestinationController.Object.TempDataProvider
-            );
+            mockSecondDestinationController.Object.TempData
+                .Load(
+                    mockSecondDestinationController.Object.ControllerContext,
+                    mockSecondDestinationController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.True(mockSecondDestinationController.Object.TempData.ContainsKey("Key"));
@@ -1536,10 +1542,11 @@ namespace System.Web.Mvc.Test
 
             // Act
             mockController.Object.TempData.Add("Key", "Value");
-            mockController.Object.TempData.Save(
-                mockController.Object.ControllerContext,
-                mockController.Object.TempDataProvider
-            );
+            mockController.Object.TempData
+                .Save(
+                    mockController.Object.ControllerContext,
+                    mockController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.True(mockController.Object.TempData.ContainsKey("Key"));
@@ -1554,20 +1561,22 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockDestinationController.Object
             );
-            mockDestinationController.Object.TempData.Load(
-                mockDestinationController.Object.ControllerContext,
-                mockDestinationController.Object.TempDataProvider
-            );
+            mockDestinationController.Object.TempData
+                .Load(
+                    mockDestinationController.Object.ControllerContext,
+                    mockDestinationController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.True(mockDestinationController.Object.TempData.ContainsKey("Key"));
 
             // Act
             object value = mockDestinationController.Object.TempData["Key"];
-            mockDestinationController.Object.TempData.Save(
-                mockDestinationController.Object.ControllerContext,
-                mockDestinationController.Object.TempDataProvider
-            );
+            mockDestinationController.Object.TempData
+                .Save(
+                    mockDestinationController.Object.ControllerContext,
+                    mockDestinationController.Object.TempDataProvider
+                );
 
             // Instantiate "second destination" controller with the same session state and see that it gets the temp data
             Mock<Controller> mockSecondDestinationController = new Mock<Controller>()
@@ -1581,10 +1590,11 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockSecondDestinationController.Object
             );
-            mockSecondDestinationController.Object.TempData.Load(
-                mockSecondDestinationController.Object.ControllerContext,
-                mockSecondDestinationController.Object.TempDataProvider
-            );
+            mockSecondDestinationController.Object.TempData
+                .Load(
+                    mockSecondDestinationController.Object.ControllerContext,
+                    mockSecondDestinationController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.False(mockSecondDestinationController.Object.TempData.ContainsKey("Key"));
@@ -1944,7 +1954,8 @@ namespace System.Web.Mvc.Test
             controller.ValidateRequest = false;
 
             // Act
-            ((IController)controller).Execute(requestContext);
+            ((IController)controller)
+                .Execute(requestContext);
 
             // Assert
             tempDataProvider.Verify();

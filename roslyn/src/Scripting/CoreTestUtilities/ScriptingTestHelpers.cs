@@ -131,9 +131,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             catch (CompilationErrorException e)
             {
                 e.Diagnostics.Verify(expectedDiagnostics);
-                e.Diagnostics.Any(
-                    d => d.Severity == DiagnosticSeverity.Error && e.Message == d.ToString()
-                );
+                e.Diagnostics
+                    .Any(d => d.Severity == DiagnosticSeverity.Error && e.Message == d.ToString());
             }
             catch (Exception e)
             {

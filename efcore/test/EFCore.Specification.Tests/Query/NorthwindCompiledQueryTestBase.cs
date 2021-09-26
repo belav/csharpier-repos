@@ -256,10 +256,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var query = EF.CompileQuery(
                 (NorthwindContext context) =>
-                    context.Customers.OrderBy(c => c.CustomerID)
+                    context.Customers
+                        .OrderBy(c => c.CustomerID)
                         .Select(c => c.CustomerID)
                         .FirstOrDefault()
-                    + context.Orders.OrderBy(o => o.CustomerID)
+                    + context.Orders
+                        .OrderBy(o => o.CustomerID)
                         .Select(o => o.CustomerID)
                         .FirstOrDefault()
             );
@@ -887,44 +889,44 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
 
             var syncEnumerableResult = syncEnumerableQuery(
-                    context,
-                    "ALFKI",
-                    "ANATR",
-                    "ANTON",
-                    "AROUT",
-                    "BERGS",
-                    "BLAUS",
-                    "BLONP",
-                    "BOLID",
-                    "BONAP",
-                    "BSBEV",
-                    "CACTU",
-                    "CENTC",
-                    "CHOPS",
-                    "CONSH",
-                    "RANDM"
-                )
+                context,
+                "ALFKI",
+                "ANATR",
+                "ANTON",
+                "AROUT",
+                "BERGS",
+                "BLAUS",
+                "BLONP",
+                "BOLID",
+                "BONAP",
+                "BSBEV",
+                "CACTU",
+                "CENTC",
+                "CHOPS",
+                "CONSH",
+                "RANDM"
+            )
                 .ToList();
             Assert.Equal(14, syncEnumerableResult.Count);
 
             var syncIncludeEnumerableResult = syncIncludeEnumerableQuery(
-                    context,
-                    "ALFKI",
-                    "ANATR",
-                    "ANTON",
-                    "AROUT",
-                    "BERGS",
-                    "BLAUS",
-                    "BLONP",
-                    "BOLID",
-                    "BONAP",
-                    "BSBEV",
-                    "CACTU",
-                    "CENTC",
-                    "CHOPS",
-                    "CONSH",
-                    "RANDM"
-                )
+                context,
+                "ALFKI",
+                "ANATR",
+                "ANTON",
+                "AROUT",
+                "BERGS",
+                "BLAUS",
+                "BLONP",
+                "BOLID",
+                "BONAP",
+                "BSBEV",
+                "CACTU",
+                "CENTC",
+                "CHOPS",
+                "CONSH",
+                "RANDM"
+            )
                 .ToList();
             Assert.Equal(14, syncIncludeEnumerableResult.Count);
             Assert.All(syncIncludeEnumerableResult, t => Assert.NotNull(t.Orders));
@@ -952,44 +954,44 @@ namespace Microsoft.EntityFrameworkCore.Query
             );
 
             var asyncEnumerableResult = await asyncEnumerableQuery(
-                    context,
-                    "ALFKI",
-                    "ANATR",
-                    "ANTON",
-                    "AROUT",
-                    "BERGS",
-                    "BLAUS",
-                    "BLONP",
-                    "BOLID",
-                    "BONAP",
-                    "BSBEV",
-                    "CACTU",
-                    "CENTC",
-                    "CHOPS",
-                    "CONSH",
-                    "RANDM"
-                )
+                context,
+                "ALFKI",
+                "ANATR",
+                "ANTON",
+                "AROUT",
+                "BERGS",
+                "BLAUS",
+                "BLONP",
+                "BOLID",
+                "BONAP",
+                "BSBEV",
+                "CACTU",
+                "CENTC",
+                "CHOPS",
+                "CONSH",
+                "RANDM"
+            )
                 .ToListAsync();
             Assert.Equal(14, asyncEnumerableResult.Count);
 
             var asyncIncludeEnumerableResult = await asyncIncludeEnumerableQuery(
-                    context,
-                    "ALFKI",
-                    "ANATR",
-                    "ANTON",
-                    "AROUT",
-                    "BERGS",
-                    "BLAUS",
-                    "BLONP",
-                    "BOLID",
-                    "BONAP",
-                    "BSBEV",
-                    "CACTU",
-                    "CENTC",
-                    "CHOPS",
-                    "CONSH",
-                    "RANDM"
-                )
+                context,
+                "ALFKI",
+                "ANATR",
+                "ANTON",
+                "AROUT",
+                "BERGS",
+                "BLAUS",
+                "BLONP",
+                "BOLID",
+                "BONAP",
+                "BSBEV",
+                "CACTU",
+                "CENTC",
+                "CHOPS",
+                "CONSH",
+                "RANDM"
+            )
                 .ToListAsync();
             Assert.Equal(14, asyncIncludeEnumerableResult.Count);
             Assert.All(asyncIncludeEnumerableResult, t => Assert.NotNull(t.Orders));

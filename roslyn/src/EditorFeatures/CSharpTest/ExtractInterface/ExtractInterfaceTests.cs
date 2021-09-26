@@ -1413,8 +1413,8 @@ class $$Test<T, U>
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler =
-                workspace.ExportProvider.GetCommandHandler<ExtractInterfaceCommandHandler>(
+            var handler = workspace.ExportProvider
+                .GetCommandHandler<ExtractInterfaceCommandHandler>(
                     PredefinedCommandHandlerNames.ExtractInterface,
                     ContentTypeNames.CSharpContentType
                 );

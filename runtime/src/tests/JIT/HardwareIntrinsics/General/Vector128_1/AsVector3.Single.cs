@@ -66,15 +66,14 @@ namespace JIT.HardwareIntrinsics.General
             Vector128<Single> value;
 
             value = Vector128.Create(TestLibrary.Generator.GetSingle());
-            object Result = typeof(Vector128).GetMethod(nameof(Vector128.AsVector3))
+            object Result = typeof(Vector128)
+                .GetMethod(nameof(Vector128.AsVector3))
                 .Invoke(null, new object[] { value });
             ValidateResult((Vector3)(Result), value);
 
             value =
-                (Vector128<Single>)typeof(Vector128).GetMethod(
-                        nameof(Vector128.AsVector128),
-                        new Type[] { typeof(Vector3) }
-                    )
+                (Vector128<Single>)typeof(Vector128)
+                    .GetMethod(nameof(Vector128.AsVector128), new Type[] { typeof(Vector3) })
                     .Invoke(null, new object[] { Result });
             ValidateResult(value, (Vector3)(Result));
         }
@@ -151,15 +150,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<Single>.AsVector3: {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", valueElements)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128<Single>.AsVector3: {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", valueElements)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

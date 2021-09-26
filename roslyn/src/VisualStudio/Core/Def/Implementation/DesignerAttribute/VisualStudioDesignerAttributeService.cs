@@ -135,13 +135,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             // Now kick off scanning in the OOP process.
             // If the call fails an error has already been reported and there is nothing more to do.
             _ = await _lazyConnection.TryInvokeAsync(
-                    (service, callbackId, cancellationToken) =>
-                        service.StartScanningForDesignerAttributesAsync(
-                            callbackId,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                (service, callbackId, cancellationToken) =>
+                    service.StartScanningForDesignerAttributesAsync(callbackId, cancellationToken),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -149,8 +146,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             CancellationToken cancellation
         )
         {
-            var registrationService =
-                _workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var registrationService = _workspace.Services
+                .GetRequiredService<ISolutionCrawlerRegistrationService>();
             var analyzerProvider = new InProcDesignerAttributeIncrementalAnalyzerProvider(this);
 
             registrationService.AddAnalyzerProvider(
@@ -211,9 +208,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
         {
             // Delegate to the CPS or legacy notification services as necessary.
             var cpsUpdateService = await GetUpdateServiceIfCpsProjectAsync(
-                    projectId,
-                    cancellationToken
-                )
+                projectId,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var task =
                 cpsUpdateService == null
@@ -235,10 +232,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
         )
         {
             // legacy project system can only be talked to on the UI thread.
-            await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                alwaysYield: true,
-                cancellationToken
-            );
+            await ThreadingContext.JoinableTaskFactory
+                .SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
 
             AssertIsForeground();
 
@@ -285,11 +280,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
                     ? null
                     : (string)currentValue;
                 if (
-                    string.Equals(
-                        currentStringValue,
-                        data.Category,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            currentStringValue,
+                            data.Category,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                     return;
             }
@@ -369,10 +365,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
         {
             if (!_cpsProjects.TryGetValue(projectId, out var updateService))
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    alwaysYield: true,
-                    cancellationToken
-                );
+                await ThreadingContext.JoinableTaskFactory
+                    .SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
                 this.AssertIsForeground();
 
                 updateService = ComputeUpdateService();

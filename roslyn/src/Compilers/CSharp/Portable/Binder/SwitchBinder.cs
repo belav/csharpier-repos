@@ -487,8 +487,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                         diagnostics
                     );
-                    Conversion conversion =
-                        binder.Conversions.ClassifyImplicitUserDefinedConversionForV6SwitchGoverningType(
+                    Conversion conversion = binder.Conversions
+                        .ClassifyImplicitUserDefinedConversionForV6SwitchGoverningType(
                             switchGoverningType,
                             out resultantGoverningType,
                             ref useSiteInfo

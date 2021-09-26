@@ -135,12 +135,12 @@ namespace Microsoft.AspNetCore.Testing
                             await writer.WriteAsync($"Host: {requestUri.Authority}\r\n")
                                 .ConfigureAwait(false);
                             await writer.WriteAsync(
-                                    $"Content-Type: {content.Headers.ContentType}\r\n"
-                                )
+                                $"Content-Type: {content.Headers.ContentType}\r\n"
+                            )
                                 .ConfigureAwait(false);
                             await writer.WriteAsync(
-                                    $"Content-Length: {content.Headers.ContentLength}\r\n"
-                                )
+                                $"Content-Length: {content.Headers.ContentLength}\r\n"
+                            )
                                 .ConfigureAwait(false);
                             await writer.WriteAsync("\r\n").ConfigureAwait(false);
                         }
@@ -215,10 +215,8 @@ namespace Microsoft.AspNetCore.Testing
                 throw new InvalidDataException($"No StatusCode found in '{response}'");
             }
 
-            return (HttpStatusCode)int.Parse(
-                response.Substring(statusStart, statusLength),
-                CultureInfo.InvariantCulture
-            );
+            return (HttpStatusCode)int
+                .Parse(response.Substring(statusStart, statusLength), CultureInfo.InvariantCulture);
         }
 
         private static async Task<Stream> GetStream(Uri requestUri, bool validateCertificate)
@@ -237,11 +235,11 @@ namespace Microsoft.AspNetCore.Testing
                 );
 
                 await sslStream.AuthenticateAsClientAsync(
-                        requestUri.Host,
-                        clientCertificates: null,
-                        enabledSslProtocols: SslProtocols.None,
-                        checkCertificateRevocation: validateCertificate
-                    )
+                    requestUri.Host,
+                    clientCertificates: null,
+                    enabledSslProtocols: SslProtocols.None,
+                    checkCertificateRevocation: validateCertificate
+                )
                     .ConfigureAwait(false);
                 return sslStream;
             }

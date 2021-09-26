@@ -623,9 +623,8 @@ namespace AutoMapper.IntegrationTests
                             o =>
                                 o.MapFrom(
                                     s =>
-                                        s.InnerSourceDetailsWrapper.Select(
-                                                s => s.InnerSourceDetails
-                                            )
+                                        s.InnerSourceDetailsWrapper
+                                            .Select(s => s.InnerSourceDetails)
                                             .FirstOrDefault()
                                 )
                         );
@@ -1057,7 +1056,8 @@ namespace AutoMapper.IntegrationTests
                             o =>
                                 o.MapFrom(
                                     s =>
-                                        s.InnerSourceWrappers.Select(s => s.InnerSource)
+                                        s.InnerSourceWrappers
+                                            .Select(s => s.InnerSource)
                                             .FirstOrDefault()
                                 )
                         )
@@ -1068,7 +1068,8 @@ namespace AutoMapper.IntegrationTests
                     cfg.CreateProjection<InnerSource, DestinationDetails>()
                         .IncludeMembers(
                             s =>
-                                s.InnerSourceDetailsWrapper.Select(s => s.InnerSourceDetails)
+                                s.InnerSourceDetailsWrapper
+                                    .Select(s => s.InnerSourceDetails)
                                     .FirstOrDefault()
                         );
                     cfg.CreateProjection<OtherInnerSource, OtherDestinationDetails>()

@@ -429,11 +429,8 @@ namespace System
             {
                 if (
                     (
-                        parsedComponent = int.Parse(
-                            component,
-                            NumberStyles.Integer,
-                            CultureInfo.InvariantCulture
-                        )
+                        parsedComponent = int
+                            .Parse(component, NumberStyles.Integer, CultureInfo.InvariantCulture)
                     ) < 0
                 )
                 {
@@ -445,12 +442,13 @@ namespace System
                 return true;
             }
 
-            return int.TryParse(
-                    component,
-                    NumberStyles.Integer,
-                    CultureInfo.InvariantCulture,
-                    out parsedComponent
-                )
+            return int
+                    .TryParse(
+                        component,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out parsedComponent
+                    )
                 && parsedComponent >= 0;
         }
 

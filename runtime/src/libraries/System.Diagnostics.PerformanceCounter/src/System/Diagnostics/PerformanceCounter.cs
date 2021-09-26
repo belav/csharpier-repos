@@ -539,11 +539,12 @@ namespace System.Diagnostics
                     {
                         if (
                             currentMachineName != "."
-                            && !string.Equals(
-                                currentMachineName,
-                                PerformanceCounterLib.ComputerName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            && !string
+                                .Equals(
+                                    currentMachineName,
+                                    PerformanceCounterLib.ComputerName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                             throw new InvalidOperationException(SR.RemoteWriting);
 

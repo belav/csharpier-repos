@@ -346,7 +346,8 @@ namespace System.Collections.Tests
             )
             {
                 foreach (
-                    int shift in new[] { 0, 1, size / 2, size - 1, size }.Where(s => s >= 0)
+                    int shift in new[] { 0, 1, size / 2, size - 1, size }
+                        .Where(s => s >= 0)
                         .Distinct()
                 )
                 {

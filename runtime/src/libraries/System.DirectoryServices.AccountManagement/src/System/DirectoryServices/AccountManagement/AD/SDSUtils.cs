@@ -724,31 +724,34 @@ namespace System.DirectoryServices.AccountManagement
                 (
                     !testCantChangePassword
                     && (
-                        string.Equals(
-                            suggestedProperty,
-                            "userAccountControl",
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                suggestedProperty,
+                                "userAccountControl",
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                 )
                     || (
                         testCantChangePassword
                         && (
-                            string.Equals(
-                                suggestedProperty,
-                                "UserFlags",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    suggestedProperty,
+                                    "UserFlags",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
             );
 
             Debug.Assert(
-                !string.Equals(
-                    propertyName,
-                    PropertyNames.PwdInfoCannotChangePassword,
-                    StringComparison.OrdinalIgnoreCase
-                ) || testCantChangePassword
+                !string
+                    .Equals(
+                        propertyName,
+                        PropertyNames.PwdInfoCannotChangePassword,
+                        StringComparison.OrdinalIgnoreCase
+                    ) || testCantChangePassword
             );
 
             dSPropertyValueCollection values = properties[suggestedProperty];
@@ -833,21 +836,23 @@ namespace System.DirectoryServices.AccountManagement
                 (
                     !isSAM
                     && (
-                        string.Equals(
-                            suggestedProperty,
-                            "userAccountControl",
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                suggestedProperty,
+                                "userAccountControl",
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                 )
                     || (
                         isSAM
                         && (
-                            string.Equals(
-                                suggestedProperty,
-                                "UserFlags",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    suggestedProperty,
+                                    "UserFlags",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
             );
@@ -997,11 +1002,12 @@ namespace System.DirectoryServices.AccountManagement
             {
                 if (
                     (component.Length > 3)
-                    && string.Equals(
-                        component.Substring(0, 3),
-                        "DC=",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && string
+                        .Equals(
+                            component.Substring(0, 3),
+                            "DC=",
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     sb.Append(component, 3, component.Length - 3);

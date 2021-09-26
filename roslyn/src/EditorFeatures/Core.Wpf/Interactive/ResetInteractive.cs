@@ -112,10 +112,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             // If the user hits the cancel button on the wait indicator, then we want to stop the
             // build.
             using (
-                waitContext.CancellationToken.Register(
-                    () => CancelBuildProject(),
-                    useSynchronizationContext: true
-                )
+                waitContext.CancellationToken
+                    .Register(() => CancelBuildProject(), useSynchronizationContext: true)
             )
             {
                 // First, start a build.
@@ -147,9 +145,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             // Project's default namespace might be different from namespace used within project.
             // Filter out namespace imports that do not exist in interactive compilation.
             var namespacesToImport = await GetNamespacesToImportAsync(
-                    projectNamespaces,
-                    interactiveWindow
-                )
+                projectNamespaces,
+                interactiveWindow
+            )
                 .ConfigureAwait(true);
             var importNamespacesCommand = namespacesToImport.Select(_createImport)
                 .Join(editorOptions.GetNewLineCharacter());

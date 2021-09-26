@@ -58,16 +58,8 @@ namespace System.Security.Cryptography.Xml.Tests
             XmlNamespaceManager ns = new XmlNamespaceManager(xmlkey.OwnerDocument.NameTable);
             ns.AddNamespace("schema", SignedXml.XmlDsigNamespaceUrl);
 
-            IEnumerable<XmlNode> elements = new[]
-            {
-                "P",
-                "Q",
-                "G",
-                "Y",
-                "J",
-                "Seed",
-                "PgenCounter"
-            }.Select(
+            IEnumerable<XmlNode> elements = new[] { "P", "Q", "G", "Y", "J", "Seed", "PgenCounter" }
+                .Select(
                     elementName =>
                         xmlkey.SelectSingleNode($"/schema:DSAKeyValue/schema:{elementName}", ns)
                 )

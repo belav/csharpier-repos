@@ -100,10 +100,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 return (null, hr);
             }
 
-            var hresult = ((IVsUserData)activeVsTextView).GetData(
-                IWpfTextViewId,
-                out var wpfTextViewHost
-            );
+            var hresult = ((IVsUserData)activeVsTextView)
+                .GetData(IWpfTextViewId, out var wpfTextViewHost);
             return ((IWpfTextViewHost)wpfTextViewHost, hresult);
         }
 
@@ -269,10 +267,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             ExecuteOnActiveView(
                 view =>
                 {
-                    view.Caret.Position.BufferPosition.GetLineAndCharacter(
-                        out var lineNumber,
-                        out var characterIndex
-                    );
+                    view.Caret.Position.BufferPosition
+                        .GetLineAndCharacter(out var lineNumber, out var characterIndex);
                     return lineNumber;
                 }
             );
@@ -281,10 +277,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             ExecuteOnActiveView(
                 view =>
                 {
-                    view.Caret.Position.BufferPosition.GetLineAndCharacter(
-                        out var lineNumber,
-                        out var characterIndex
-                    );
+                    view.Caret.Position.BufferPosition
+                        .GetLineAndCharacter(out var lineNumber, out var characterIndex);
                     return characterIndex;
                 }
             );
@@ -373,14 +367,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         GetComponentModelService<IViewTagAggregatorFactoryService>();
                     var aggregator = viewTagAggregatorFactory.CreateTagAggregator<TTag>(view);
                     var tags = aggregator.GetTags(
-                            new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length)
-                        )
+                        new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length)
+                    )
                         .Where(t => filter(t.Tag))
                         .Cast<IMappingTagSpan<ITag>>();
                     return tags.Select(
-                            tag =>
-                                $"{tag.Tag}:{PrintSpan(tag.Span.GetSpans(view.TextBuffer).Single())}"
-                        )
+                        tag => $"{tag.Tag}:{PrintSpan(tag.Span.GetSpans(view.TextBuffer).Single())}"
+                    )
                         .ToArray();
                 }
             );
@@ -455,11 +448,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     var classifierAggregatorService =
                         GetComponentModelService<IViewClassifierAggregatorService>();
                     return await GetLightbulbPreviewClassificationsAsync(
-                            menuText,
-                            broker,
-                            view,
-                            classifierAggregatorService
-                        )
+                        menuText,
+                        broker,
+                        view,
+                        classifierAggregatorService
+                    )
                         .ConfigureAwait(false);
                 }
             );
@@ -478,10 +471,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             if (!broker.IsLightBulbSessionActive(view))
             {
                 throw new Exception(
-                    string.Format(
-                        "No Active Smart Tags in View!  Buffer content type={0}",
-                        bufferType
-                    )
+                    string
+                        .Format(
+                            "No Active Smart Tags in View!  Buffer content type={0}",
+                            bufferType
+                        )
                 );
             }
 
@@ -489,10 +483,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             if (activeSession == null || !activeSession.IsExpanded)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        "No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={0}",
-                        bufferType
-                    )
+                    string
+                        .Format(
+                            "No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={0}",
+                            bufferType
+                        )
                 );
             }
 
@@ -511,11 +506,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 if (set == null)
                 {
                     throw new InvalidOperationException(
-                        string.Format(
-                            "ISuggestionAction {0} not found.  Buffer content type={1}",
-                            menuText,
-                            bufferType
-                        )
+                        string
+                            .Format(
+                                "ISuggestionAction {0} not found.  Buffer content type={1}",
+                                menuText,
+                                bufferType
+                            )
                     );
                 }
 
@@ -535,10 +531,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 if (preview == null)
                 {
                     throw new InvalidOperationException(
-                        string.Format(
-                            "Could not find light bulb preview.  Buffer content type={0}",
-                            bufferType
-                        )
+                        string
+                            .Format(
+                                "Could not find light bulb preview.  Buffer content type={0}",
+                                bufferType
+                            )
                     );
                 }
 
@@ -552,12 +549,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     )
                 );
                 return classifiedSpans.Select(
-                        x =>
-                            new ClassifiedToken(
-                                x.Span.GetText().ToString(),
-                                x.ClassificationType.Classification
-                            )
-                    )
+                    x =>
+                        new ClassifiedToken(
+                            x.Span.GetText().ToString(),
+                            x.ClassificationType.Classification
+                        )
+                )
                     .ToArray();
             }
 
@@ -641,9 +638,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         private static IUIAutomationElement FindNavigateTo()
         {
-            var vsAutomationElement = Helper.Automation.ElementFromHandle(
-                (IntPtr)GetDTE().MainWindow.HWnd
-            );
+            var vsAutomationElement = Helper.Automation
+                .ElementFromHandle((IntPtr)GetDTE().MainWindow.HWnd);
             return vsAutomationElement.FindDescendantByAutomationId("PART_SearchBox");
         }
 
@@ -863,9 +859,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         cancellationToken =>
                         {
                             var button = designerHost.Container.Components[buttonName];
-                            var eventBindingService = (IEventBindingService)button.Site.GetService(
-                                typeof(IEventBindingService)
-                            );
+                            var eventBindingService = (IEventBindingService)button.Site
+                                .GetService(typeof(IEventBindingService));
                             var events = TypeDescriptor.GetEvents(button);
                             var eventProperty = eventBindingService.GetEventProperty(
                                 events.Find(eventName, ignoreCase: true)
@@ -940,10 +935,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         textLines.GetLanguageServiceID(out var languageServiceGuid)
                     );
                     Marshal.ThrowExceptionForHR(
-                        Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.QueryService(
-                            languageServiceGuid,
-                            out var languageService
-                        )
+                        Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider
+                            .QueryService(languageServiceGuid, out var languageService)
                     );
                     var languageContextProvider = languageService as IVsLanguageContextProvider;
 
@@ -1020,13 +1013,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         view
                     );
                     var matchingTags = tagAggregator.GetTags(
-                            new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length)
-                        )
+                        new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length)
+                    )
                         .Where(t => t.Tag.Type == tagId);
 
                     return matchingTags.Select(
-                            t => t.Span.GetSpans(view.TextBuffer).Single().Span.ToTextSpan()
-                        )
+                        t => t.Span.GetSpans(view.TextBuffer).Single().Span.ToTextSpan()
+                    )
                         .SelectMany(t => new List<int> { t.Start, t.Length })
                         .ToArray();
                 }

@@ -45,11 +45,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 .OrderBy(p => p.Name);
             foreach (var project in projects)
             {
-                var text = string.Format(
-                    FeaturesResources._0_1,
-                    project.Name,
-                    Supported(!InvalidProjects.Contains(project.Id))
-                );
+                var text = string
+                    .Format(
+                        FeaturesResources._0_1,
+                        project.Name,
+                        Supported(!InvalidProjects.Contains(project.Id))
+                    );
                 builder.AddText(text);
                 builder.AddLineBreak();
             }

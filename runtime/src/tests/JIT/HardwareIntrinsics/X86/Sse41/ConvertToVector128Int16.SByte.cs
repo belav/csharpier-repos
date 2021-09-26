@@ -192,7 +192,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_UnsafeRead()
         {
-            var result = typeof(Sse41).GetMethod(
+            var result = typeof(Sse41)
+                .GetMethod(
                     nameof(Sse41.ConvertToVector128Int16),
                     new Type[] { typeof(Vector128<SByte>) }
                 )
@@ -207,10 +208,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_Ptr()
         {
-            var result = typeof(Sse41).GetMethod(
-                    nameof(Sse41.ConvertToVector128Int16),
-                    new Type[] { typeof(SByte*) }
-                )
+            var result = typeof(Sse41)
+                .GetMethod(nameof(Sse41.ConvertToVector128Int16), new Type[] { typeof(SByte*) })
                 .Invoke(null, new object[] { Pointer.Box(_dataTable.inArrayPtr, typeof(SByte*)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Int16>)(result));
@@ -219,7 +218,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_Load()
         {
-            var result = typeof(Sse41).GetMethod(
+            var result = typeof(Sse41)
+                .GetMethod(
                     nameof(Sse41.ConvertToVector128Int16),
                     new Type[] { typeof(Vector128<SByte>) }
                 )
@@ -231,7 +231,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_LoadAligned()
         {
-            var result = typeof(Sse41).GetMethod(
+            var result = typeof(Sse41)
+                .GetMethod(
                     nameof(Sse41.ConvertToVector128Int16),
                     new Type[] { typeof(Vector128<SByte>) }
                 )

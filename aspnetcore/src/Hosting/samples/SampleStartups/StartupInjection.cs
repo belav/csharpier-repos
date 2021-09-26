@@ -22,17 +22,16 @@ namespace SampleStartups
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel()
-                            // Each of these three sets ApplicationName to the current assembly, which is needed in order to
-                            // scan the assembly for HostingStartupAttributes.
-                            // .UseSetting(WebHostDefaults.ApplicationKey, "SampleStartups")
-                            // .Configure(_ => { })
-                            .UseStartup<NormalStartup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel()
+                    // Each of these three sets ApplicationName to the current assembly, which is needed in order to
+                    // scan the assembly for HostingStartupAttributes.
+                    // .UseSetting(WebHostDefaults.ApplicationKey, "SampleStartups")
+                    // .Configure(_ => { })
+                    .UseStartup<NormalStartup>();
+                }
+            ).Build();
 
             return host.RunAsync();
         }

@@ -685,13 +685,12 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<HttpContextBase> webContextMock = new Mock<HttpContextBase>(MockBehavior.Strict);
             IPrincipal principal = null;
-            webContextMock.SetupSet(r => r.User = It.IsAny<IPrincipal>())
-                .Callback<IPrincipal>(
-                    value =>
-                    {
-                        principal = value;
-                    }
-                );
+            webContextMock.SetupSet(r => r.User = It.IsAny<IPrincipal>()).Callback<IPrincipal>(
+                value =>
+                {
+                    principal = value;
+                }
+            );
             HttpContextBase webContext = webContextMock.Object;
             HttpRequestBase webRequest = CreateDummyWebRequest();
 

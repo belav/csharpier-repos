@@ -31,9 +31,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             await inputComponent.SetCurrentValueAsStringAsync("invalidDate");
 
             // Assert
-            var validationMessages = rootComponent.EditContext.GetValidationMessages(
-                fieldIdentifier
-            );
+            var validationMessages = rootComponent.EditContext
+                .GetValidationMessages(fieldIdentifier);
             Assert.NotEmpty(validationMessages);
             Assert.Contains("The Date property field must be a date.", validationMessages);
         }

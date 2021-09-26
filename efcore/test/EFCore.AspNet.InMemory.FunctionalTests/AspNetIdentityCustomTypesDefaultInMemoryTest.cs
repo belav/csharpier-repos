@@ -30,12 +30,13 @@ namespace Microsoft.EntityFrameworkCore
             Func<CustomTypesIdentityContext, Task> nestedTestOperation3 = null
         )
         {
-            await base.ExecuteWithStrategyInTransactionAsync(
-                testOperation,
-                nestedTestOperation1,
-                nestedTestOperation2,
-                nestedTestOperation3
-            );
+            await base
+                .ExecuteWithStrategyInTransactionAsync(
+                    testOperation,
+                    nestedTestOperation1,
+                    nestedTestOperation2,
+                    nestedTestOperation3
+                );
             await Fixture.ReseedAsync();
         }
 
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore
             ) => base.AddServices(serviceCollection).AddEntityFrameworkProxies();
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .UseLazyLoadingProxies()
                     .ConfigureWarnings(e => e.Ignore(InMemoryEventId.TransactionIgnoredWarning));
 

@@ -25,15 +25,16 @@ namespace Microsoft.CodeAnalysis.Indentation
         )
         {
             var workspace = document.Project.Solution.Workspace;
-            var formattingRuleFactory =
-                workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleFactory = workspace.Services
+                .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
             var baseIndentationRule = formattingRuleFactory.CreateRule(document, position);
 
             var formattingRules = new[]
             {
                 baseIndentationRule,
                 this.GetSpecializedIndentationFormattingRule(indentStyle)
-            }.Concat(Formatter.GetDefaultFormattingRules(document));
+            }
+                .Concat(Formatter.GetDefaultFormattingRules(document));
             return formattingRules;
         }
 

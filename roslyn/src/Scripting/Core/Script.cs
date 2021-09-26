@@ -295,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Scripting
 
         // Apply recursive alias <host> to the host assembly reference, so that we hide its namespaces and global types behind it.
         internal static readonly MetadataReferenceProperties HostAssemblyReferenceProperties =
-            MetadataReferenceProperties.Assembly.WithAliases(ImmutableArray.Create("<host>"))
+            MetadataReferenceProperties.Assembly
+                .WithAliases(ImmutableArray.Create("<host>"))
                 .WithRecursiveAliases(true);
 
         /// <summary>
@@ -433,11 +434,12 @@ namespace Microsoft.CodeAnalysis.Scripting
             catch (CompilationErrorException e)
             {
                 return ImmutableArray.CreateRange(
-                    e.Diagnostics.Where(
-                        d =>
-                            d.Severity == DiagnosticSeverity.Error
-                            || d.Severity == DiagnosticSeverity.Warning
-                    )
+                    e.Diagnostics
+                        .Where(
+                            d =>
+                                d.Severity == DiagnosticSeverity.Error
+                                || d.Severity == DiagnosticSeverity.Warning
+                        )
                 );
             }
         }
@@ -714,12 +716,12 @@ namespace Microsoft.CodeAnalysis.Scripting
         {
             var exceptionOpt = (catchExceptionOpt != null) ? new StrongBox<Exception>() : null;
             T result = await executionState.RunSubmissionsAsync<T>(
-                    precedingExecutors,
-                    currentExecutor,
-                    exceptionOpt,
-                    catchExceptionOpt,
-                    cancellationToken
-                )
+                precedingExecutors,
+                currentExecutor,
+                exceptionOpt,
+                catchExceptionOpt,
+                cancellationToken
+            )
                 .ConfigureAwait(continueOnCapturedContext: false);
             return new ScriptState<T>(executionState, this, result, exceptionOpt?.Value);
         }
@@ -742,11 +744,12 @@ namespace Microsoft.CodeAnalysis.Scripting
                 if (!globalsTypeInfo.IsAssignableFrom(runtimeType))
                 {
                     throw new ArgumentException(
-                        string.Format(
-                            ScriptingResources.GlobalsNotAssignable,
-                            runtimeType,
-                            globalsTypeInfo
-                        ),
+                        string
+                            .Format(
+                                ScriptingResources.GlobalsNotAssignable,
+                                runtimeType,
+                                globalsTypeInfo
+                            ),
                         nameof(globals)
                     );
                 }

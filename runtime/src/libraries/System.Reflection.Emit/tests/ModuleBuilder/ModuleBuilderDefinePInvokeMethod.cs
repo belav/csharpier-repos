@@ -16,7 +16,8 @@ namespace System.Reflection.Emit.Tests
     public class ModuleBuilderDefinePInvokeMethodTests
     {
         public static IEnumerable<object[]> TheoryData1 =>
-            TypeBuilderDefinePInvokeMethodTests.TestData.Where(dpm => dpm.NoCMods)
+            TypeBuilderDefinePInvokeMethodTests.TestData
+                .Where(dpm => dpm.NoCMods)
                 .Select(dpm => new object[] { dpm });
         [Theory]
         [MemberData(nameof(TheoryData1))]
@@ -52,9 +53,8 @@ namespace System.Reflection.Emit.Tests
         }
 
         public static IEnumerable<object[]> TheoryData2 =>
-            TypeBuilderDefinePInvokeMethodTests.TestData.Where(
-                    dpm => dpm.NoCMods && dpm.EntrypointName == dpm.MethodName
-                )
+            TypeBuilderDefinePInvokeMethodTests.TestData
+                .Where(dpm => dpm.NoCMods && dpm.EntrypointName == dpm.MethodName)
                 .Select(dpm => new object[] { dpm });
         [Theory]
         [MemberData(nameof(TheoryData2))]

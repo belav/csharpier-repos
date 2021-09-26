@@ -71,10 +71,8 @@ public class GenerateHeaders
                         if ((NumericValue.StartsWith("0x")) || (NumericValue.StartsWith("0X")))
                         {
                             String HexResult = NumericValue.Substring(2);
-                            int num = int.Parse(
-                                HexResult,
-                                System.Globalization.NumberStyles.HexNumber
-                            );
+                            int num = int
+                                .Parse(HexResult, System.Globalization.NumberStyles.HexNumber);
 
                             if ((num > minSR) && (num <= maxSR))
                             {

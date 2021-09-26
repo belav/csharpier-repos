@@ -80,7 +80,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var firstScheme = Guid.NewGuid().ToString();
             var secondScheme = Guid.NewGuid().ToString();
             var thirdScheme = Guid.NewGuid().ToString();
-            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
                 .AddAuthenticationSchemes(firstScheme, secondScheme, thirdScheme)
                 .Build();
             var policyAuthorizationResult = PolicyAuthorizationResult.Challenge();
@@ -143,7 +144,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var firstScheme = Guid.NewGuid().ToString();
             var secondScheme = Guid.NewGuid().ToString();
             var thirdScheme = Guid.NewGuid().ToString();
-            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
                 .AddAuthenticationSchemes(firstScheme, secondScheme, thirdScheme)
                 .Build();
             var policyAuthorizationResult = PolicyAuthorizationResult.Forbid();

@@ -223,11 +223,12 @@ namespace PackageBaselineGenerator
                         var targetCondition =
                             $"'$(TargetFramework)' == '{group.TargetFramework.GetShortFolderName()}'";
                         if (
-                            string.Equals(
-                                group.TargetFramework.GetShortFolderName(),
-                                defaultTarget,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    group.TargetFramework.GetShortFolderName(),
+                                    defaultTarget,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             targetCondition =

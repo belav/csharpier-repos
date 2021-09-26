@@ -158,13 +158,13 @@ namespace System.Web.Http.Tracing.Tracers
             };
             bool innerInvoked = false;
             mockBinding.Setup(
-                    b =>
-                        b.ExecuteBindingAsync(
-                            It.IsAny<ModelMetadataProvider>(),
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                b =>
+                    b.ExecuteBindingAsync(
+                        It.IsAny<ModelMetadataProvider>(),
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(TaskHelpers.Completed())
                 .Callback(() => innerInvoked = true);
 
@@ -227,13 +227,13 @@ namespace System.Web.Http.Tracing.Tracers
             };
             InvalidOperationException exception = new InvalidOperationException("test");
             mockBinding.Setup(
-                    b =>
-                        b.ExecuteBindingAsync(
-                            It.IsAny<ModelMetadataProvider>(),
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                b =>
+                    b.ExecuteBindingAsync(
+                        It.IsAny<ModelMetadataProvider>(),
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Throws(exception);
 
             TestTraceWriter traceWriter = new TestTraceWriter();
@@ -303,13 +303,13 @@ namespace System.Web.Http.Tracing.Tracers
             tcs.TrySetException(exception);
 
             mockBinding.Setup(
-                    b =>
-                        b.ExecuteBindingAsync(
-                            It.IsAny<ModelMetadataProvider>(),
-                            It.IsAny<HttpActionContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                b =>
+                    b.ExecuteBindingAsync(
+                        It.IsAny<ModelMetadataProvider>(),
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(tcs.Task);
 
             TestTraceWriter traceWriter = new TestTraceWriter();

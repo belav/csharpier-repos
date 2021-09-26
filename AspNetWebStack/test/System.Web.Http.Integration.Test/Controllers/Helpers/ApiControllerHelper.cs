@@ -66,7 +66,8 @@ namespace System.Web.Http
                 from entry in routeValueDictionary
                 where entry.Value == RouteParameter.Optional
                 select entry.Key
-            ).ToArray();
+            )
+                .ToArray();
 
             foreach (string key in matchingKeys)
             {

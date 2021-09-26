@@ -384,7 +384,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
             await host.StartAsync();
 
-            var feature = host.Services.GetService<IServer>()
+            var feature = host.Services
+                .GetService<IServer>()
                 .Features.Get<IServerAddressesFeature>();
             var address = feature.Addresses.First().Replace("http", "ws") + "/socket";
 
@@ -394,15 +395,15 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             await client.ConnectAsync(new Uri(address), CancellationToken.None);
             Assert.Equal("protocol1", client.SubProtocol);
             await client.CloseOutputAsync(
-                    WebSocketCloseStatus.NormalClosure,
-                    "",
-                    CancellationToken.None
-                )
+                WebSocketCloseStatus.NormalClosure,
+                "",
+                CancellationToken.None
+            )
                 .DefaultTimeout();
             var result = await client.ReceiveAsync(
-                    new ArraySegment<byte>(new byte[1024]),
-                    CancellationToken.None
-                )
+                new ArraySegment<byte>(new byte[1024]),
+                CancellationToken.None
+            )
                 .DefaultTimeout();
             Assert.Equal(WebSocketMessageType.Close, result.MessageType);
         }
@@ -460,26 +461,22 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         private IHost BuildWebHost(Action<IEndpointRouteBuilder> configure)
         {
             return new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel()
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddConnections();
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRouting();
-                                    app.UseEndpoints(endpoints => configure(endpoints));
-                                }
-                            )
-                            .UseUrls("http://127.0.0.1:0");
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel().ConfigureServices(
+                        services =>
+                        {
+                            services.AddConnections();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseRouting();
+                            app.UseEndpoints(endpoints => configure(endpoints));
+                        }
+                    ).UseUrls("http://127.0.0.1:0");
+                }
+            ).Build();
         }
 
         private IHost BuildWebHost<TConnectionHandler>(
@@ -488,40 +485,35 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         ) where TConnectionHandler : ConnectionHandler
         {
             return new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseUrls("http://127.0.0.1:0")
-                            .UseKestrel()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseUrls("http://127.0.0.1:0").UseKestrel().ConfigureServices(
+                        services =>
+                        {
+                            services.AddConnections();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseRouting();
+                            app.UseEndpoints(
+                                routes =>
                                 {
-                                    services.AddConnections();
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRouting();
-                                    app.UseEndpoints(
-                                        routes =>
-                                        {
-                                            routes.MapConnectionHandler<TConnectionHandler>(
-                                                path,
-                                                configureOptions
-                                            );
-                                        }
+                                    routes.MapConnectionHandler<TConnectionHandler>(
+                                        path,
+                                        configureOptions
                                     );
                                 }
-                            )
-                            .ConfigureLogging(
-                                factory =>
-                                {
-                                    factory.AddXunit(_output, LogLevel.Trace);
-                                }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureLogging(
+                        factory =>
+                        {
+                            factory.AddXunit(_output, LogLevel.Trace);
+                        }
+                    );
+                }
+            ).Build();
         }
     }
 }

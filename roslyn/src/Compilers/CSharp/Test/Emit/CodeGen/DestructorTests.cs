@@ -598,7 +598,8 @@ class C
                 Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
                 // (14,20): warning CS0169: The field 'C.Finalize' is never used
                 //     private string Finalize;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "Finalize").WithArguments("C.Finalize")
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "Finalize")
+                    .WithArguments("C.Finalize")
             );
         }
 
@@ -842,10 +843,9 @@ public class B : A
             );
 
             // We produce unverifiable code here as per bug resolution (compat concerns, not common case).
-            CompileAndVerify(compilation, verify: Verification.Fails)
-                .VerifyIL(
-                    "B.Finalize",
-                    @"
+            CompileAndVerify(compilation, verify: Verification.Fails).VerifyIL(
+                "B.Finalize",
+                @"
 {
   // Code size       10 (0xa)
   .maxstack  1
@@ -862,7 +862,7 @@ public class B : A
   IL_0009:  ret
 }
 "
-                );
+            );
         }
 
         [WorkItem(528907, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528907")]
@@ -884,10 +884,9 @@ public class B : A
             // NOTE: calling object.Finalize, since A.Finalize has the wrong arity.
             // (Dev11 called A.Finalize and failed at runtime, since it wasn't providing
             // a type argument.)
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "B.Finalize",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "B.Finalize",
+                @"
 {
   // Code size       10 (0xa)
   .maxstack  1
@@ -904,7 +903,7 @@ public class B : A
   IL_0009:  ret
 }
 "
-                );
+            );
         }
 
         [WorkItem(528903, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528903")]
@@ -925,7 +924,8 @@ public class A
                     var peFileReader = assembly.GetMetadataReader();
 
                     // Find the handle and row for A.
-                    var pairA = peFileReader.TypeDefinitions.AsEnumerable()
+                    var pairA = peFileReader.TypeDefinitions
+                        .AsEnumerable()
                         .Select(
                             handle =>
                                 new
@@ -954,7 +954,8 @@ public class A
 
                     // Find the handle for System.Object.
                     TypeReferenceHandle handleObject =
-                        peFileReader.TypeReferences.AsEnumerable()
+                        peFileReader.TypeReferences
+                            .AsEnumerable()
                             .Select(
                                 handle =>
                                     new
@@ -971,7 +972,8 @@ public class A
 
                     // Find the handle for System.Object's destructor.
                     MemberReferenceHandle handleDestructorObject =
-                        peFileReader.MemberReferences.AsEnumerable()
+                        peFileReader.MemberReferences
+                            .AsEnumerable()
                             .Select(
                                 handle =>
                                     new

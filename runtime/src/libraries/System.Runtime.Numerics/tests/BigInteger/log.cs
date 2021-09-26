@@ -58,9 +58,13 @@ namespace System.Numerics.Tests
             for (int i = 0; i < s_samples; i++)
             {
                 Assert.True(
-                    double.IsNaN(
-                        BigInteger.Log(new BigInteger(GetRandomByteArray(s_random, 10)), double.NaN)
-                    )
+                    double
+                        .IsNaN(
+                            BigInteger.Log(
+                                new BigInteger(GetRandomByteArray(s_random, 10)),
+                                double.NaN
+                            )
+                        )
                 );
             }
 
@@ -68,12 +72,13 @@ namespace System.Numerics.Tests
             for (int i = 0; i < s_samples; i++)
             {
                 Assert.True(
-                    double.IsNaN(
-                        BigInteger.Log(
-                            new BigInteger(GetRandomByteArray(s_random, 10)),
-                            double.PositiveInfinity
+                    double
+                        .IsNaN(
+                            BigInteger.Log(
+                                new BigInteger(GetRandomByteArray(s_random, 10)),
+                                double.PositiveInfinity
+                            )
                         )
-                    )
                 );
             }
 
@@ -87,12 +92,13 @@ namespace System.Numerics.Tests
                 tempByteArray2 = GetRandomNegByteArray(s_random, 1);
                 VerifyLogString(Print(tempByteArray2) + Print(tempByteArray1) + "bLog");
                 Assert.True(
-                    double.IsNaN(
-                        BigInteger.Log(
-                            new BigInteger(GetRandomByteArray(s_random, 10)),
-                            -s_random.NextDouble()
+                    double
+                        .IsNaN(
+                            BigInteger.Log(
+                                new BigInteger(GetRandomByteArray(s_random, 10)),
+                                -s_random.NextDouble()
+                            )
                         )
-                    )
                 );
             }
 

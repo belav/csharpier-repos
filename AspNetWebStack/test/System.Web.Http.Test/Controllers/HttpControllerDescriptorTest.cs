@@ -85,13 +85,14 @@ namespace System.Web.Http
             HttpConfiguration config = new HttpConfiguration();
             HttpControllerDescriptor controllerDescriptor = new HttpControllerDescriptor();
 
-            Assert.Reflection.Property<HttpControllerDescriptor, HttpConfiguration>(
-                instance: controllerDescriptor,
-                propertyGetter: cd => cd.Configuration,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: config
-            );
+            Assert.Reflection
+                .Property<HttpControllerDescriptor, HttpConfiguration>(
+                    instance: controllerDescriptor,
+                    propertyGetter: cd => cd.Configuration,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: config
+                );
         }
 
         [Fact]
@@ -100,13 +101,14 @@ namespace System.Web.Http
             string controllerName = "UsersController";
             HttpControllerDescriptor controllerDescriptor = new HttpControllerDescriptor();
 
-            Assert.Reflection.Property<HttpControllerDescriptor, string>(
-                instance: controllerDescriptor,
-                propertyGetter: cd => cd.ControllerName,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: controllerName
-            );
+            Assert.Reflection
+                .Property<HttpControllerDescriptor, string>(
+                    instance: controllerDescriptor,
+                    propertyGetter: cd => cd.ControllerName,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: controllerName
+                );
         }
 
         [Fact]
@@ -115,13 +117,14 @@ namespace System.Web.Http
             Type controllerType = typeof(UsersController);
             HttpControllerDescriptor controllerDescriptor = new HttpControllerDescriptor();
 
-            Assert.Reflection.Property<HttpControllerDescriptor, Type>(
-                instance: controllerDescriptor,
-                propertyGetter: cd => cd.ControllerType,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: controllerType
-            );
+            Assert.Reflection
+                .Property<HttpControllerDescriptor, Type>(
+                    instance: controllerDescriptor,
+                    propertyGetter: cd => cd.ControllerType,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: controllerType
+                );
         }
 
         [Fact]
@@ -331,14 +334,10 @@ namespace System.Web.Http
                 HttpControllerDescriptor controllerDescriptor
             )
             {
-                settings.Services.Replace(
-                    typeof(IActionValueBinder),
-                    MyBaseController.ActionValueBinderBase
-                );
-                settings.Services.Replace(
-                    typeof(IHttpActionSelector),
-                    MyBaseController.SelectorBase
-                );
+                settings.Services
+                    .Replace(typeof(IActionValueBinder), MyBaseController.ActionValueBinderBase);
+                settings.Services
+                    .Replace(typeof(IHttpActionSelector), MyBaseController.SelectorBase);
             }
         }
 
@@ -364,10 +363,11 @@ namespace System.Web.Http
                 );
 
                 // Also overwrite them
-                settings.Services.Replace(
-                    typeof(IActionValueBinder),
-                    MyDerived1Controller.ActionValueBinderDerived1
-                );
+                settings.Services
+                    .Replace(
+                        typeof(IActionValueBinder),
+                        MyDerived1Controller.ActionValueBinderDerived1
+                    );
             }
         }
 
@@ -385,10 +385,11 @@ namespace System.Web.Http
                 );
 
                 // Also overwrite them
-                settings.Services.Replace(
-                    typeof(IActionValueBinder),
-                    MyDerived3Controller.ActionValueBinderDerived3
-                );
+                settings.Services
+                    .Replace(
+                        typeof(IActionValueBinder),
+                        MyDerived3Controller.ActionValueBinderDerived3
+                    );
             }
         }
 

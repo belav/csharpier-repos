@@ -349,12 +349,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     if (
                                         !closures.Contains(closure)
                                         && (
-                                            closure.CapturedVariables.Overlaps(
-                                                scope.DeclaredVariables
-                                            )
-                                            || closure.CapturedVariables.Overlaps(
-                                                closures.Select(c => c.OriginalMethodSymbol)
-                                            )
+                                            closure.CapturedVariables
+                                                .Overlaps(scope.DeclaredVariables)
+                                            || closure.CapturedVariables
+                                                .Overlaps(
+                                                    closures.Select(c => c.OriginalMethodSymbol)
+                                                )
                                         )
                                     )
                                     {
@@ -398,14 +398,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var closuresCapturingScopeVariables = PooledDictionary<
                     Scope,
                     PooledHashSet<NestedFunction>
-                >.GetInstance();
+                >
+                    .GetInstance();
 
                 // calculate functions which directly capture a scope
 
-                var environmentsToScopes = PooledDictionary<
-                    ClosureEnvironment,
-                    Scope
-                >.GetInstance();
+                var environmentsToScopes = PooledDictionary<ClosureEnvironment, Scope>
+                    .GetInstance();
 
                 VisitScopeTree(
                     ScopeTree,
@@ -413,8 +412,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (!(scope.DeclaredEnvironment is null))
                         {
-                            closuresCapturingScopeVariables[scope] =
-                                PooledHashSet<NestedFunction>.GetInstance();
+                            closuresCapturingScopeVariables[scope] = PooledHashSet<NestedFunction>
+                                .GetInstance();
                             environmentsToScopes[scope.DeclaredEnvironment] = scope;
                         }
 
@@ -426,9 +425,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // which we should have already visited
                                 Debug.Assert(environmentsToScopes.ContainsKey(env));
 
-                                closuresCapturingScopeVariables[environmentsToScopes[env]].Add(
-                                    closure
-                                );
+                                closuresCapturingScopeVariables[environmentsToScopes[env]]
+                                    .Add(closure);
                             }
                         }
                     }

@@ -22,9 +22,8 @@ namespace Microsoft.NET.HostModel.Tests
         /// </summary>
         private const string AppBinaryPathPlaceholder =
             "c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2";
-        private readonly static byte[] AppBinaryPathPlaceholderSearchValue = Encoding.UTF8.GetBytes(
-            AppBinaryPathPlaceholder
-        );
+        private readonly static byte[] AppBinaryPathPlaceholderSearchValue = Encoding.UTF8
+            .GetBytes(AppBinaryPathPlaceholder);
 
         [Fact]
         public void ItEmbedsAppBinaryPath()
@@ -671,19 +670,18 @@ namespace Microsoft.NET.HostModel.Tests
                 {
                     try
                     {
-                        s_fileSystem_fileStatusField = typeof(FileSystemInfo).GetField(
-                            "_fileStatus",
-                            BindingFlags.NonPublic | BindingFlags.Instance
-                        );
-                        s_fileStatus_fileStatusField =
-                            s_fileSystem_fileStatusField.FieldType.GetField(
+                        s_fileSystem_fileStatusField = typeof(FileSystemInfo)
+                            .GetField(
                                 "_fileStatus",
                                 BindingFlags.NonPublic | BindingFlags.Instance
                             );
-                        s_fileStatusModeField = s_fileStatus_fileStatusField.FieldType.GetField(
-                            "Mode",
-                            BindingFlags.NonPublic | BindingFlags.Instance
-                        );
+                        s_fileStatus_fileStatusField = s_fileSystem_fileStatusField.FieldType
+                            .GetField(
+                                "_fileStatus",
+                                BindingFlags.NonPublic | BindingFlags.Instance
+                            );
+                        s_fileStatusModeField = s_fileStatus_fileStatusField.FieldType
+                            .GetField("Mode", BindingFlags.NonPublic | BindingFlags.Instance);
                     }
                     catch (Exception ex)
                     {
@@ -730,12 +728,13 @@ namespace Microsoft.NET.HostModel.Tests
 
             public static TestDirectory Create([CallerMemberName] string callingMethod = "")
             {
-                string path = System.IO.Path.Combine(
-                    System.IO.Path.GetTempPath(),
-                    "dotNetSdkUnitTest_"
-                        + callingMethod
-                        + (Guid.NewGuid().ToString().Substring(0, 8))
-                );
+                string path = System.IO.Path
+                    .Combine(
+                        System.IO.Path.GetTempPath(),
+                        "dotNetSdkUnitTest_"
+                            + callingMethod
+                            + (Guid.NewGuid().ToString().Substring(0, 8))
+                    );
                 return new TestDirectory(path);
             }
 

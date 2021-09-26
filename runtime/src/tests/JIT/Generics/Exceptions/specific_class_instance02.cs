@@ -225,7 +225,8 @@ public class Test
                                 RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>,
                                 RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>
                             >
-                        >().ExceptionTest(true);
+                        >()
+                            .ExceptionTest(true);
                         break;
                     case 39:
                         cLabel++;
@@ -239,7 +240,8 @@ public class Test
                                     string[][][][][][][][][][][]
                                 >
                             >
-                        >().ExceptionTest(true);
+                        >()
+                            .ExceptionTest(true);
                         break;
 
                     case 40:
@@ -283,7 +285,8 @@ public class Test
                                 ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>,
                                 ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>
                             >
-                        >().ExceptionTest(true);
+                        >()
+                            .ExceptionTest(true);
                         break;
                     case 49:
                         cLabel++;
@@ -297,7 +300,8 @@ public class Test
                                     string[][][][][][][][][][][]
                                 >
                             >
-                        >().ExceptionTest(true);
+                        >()
+                            .ExceptionTest(true);
                         break;
                 }
             }

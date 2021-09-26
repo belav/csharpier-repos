@@ -28,11 +28,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                     }
 
                     if (
-                        string.Equals(
-                            SymbolNames.PartialMethod,
-                            method.Name,
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(
+                                SymbolNames.PartialMethod,
+                                method.Name,
+                                StringComparison.Ordinal
+                            )
                     )
                     {
                         context.ReportDiagnostic(
@@ -44,11 +45,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                         );
                     }
                     else if (
-                        string.Equals(
-                            SymbolNames.RenderPartialMethod,
-                            method.Name,
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(
+                                SymbolNames.RenderPartialMethod,
+                                method.Name,
+                                StringComparison.Ordinal
+                            )
                     )
                     {
                         context.ReportDiagnostic(

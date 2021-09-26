@@ -559,9 +559,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IReadOnlyList<ActionDescriptor> actions
         )
         {
-            return ActionSelectionTable<ActionDescriptor>.Create(
-                new ActionDescriptorCollection(actions, 0)
-            );
+            return ActionSelectionTable<ActionDescriptor>
+                .Create(new ActionDescriptorCollection(actions, 0));
         }
 
         private static ActionSelectionTable<Endpoint> CreateTableWithEndpoints(

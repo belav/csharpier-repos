@@ -368,9 +368,10 @@ public unsafe class Program
         );
 
         // Call P/Invoke via reflection
-        var method = typeof(CallingUnmanagedCallersOnlyDirectly).GetMethod(
-            nameof(CallingUnmanagedCallersOnlyDirectly.PInvokeMarkedWithUnmanagedCallersOnly)
-        );
+        var method = typeof(CallingUnmanagedCallersOnlyDirectly)
+            .GetMethod(
+                nameof(CallingUnmanagedCallersOnlyDirectly.PInvokeMarkedWithUnmanagedCallersOnly)
+            );
         Assert.Throws<NotSupportedException>(
             () =>
                 method.Invoke(

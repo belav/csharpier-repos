@@ -34,13 +34,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         )
         {
             references = (references != null) ? references.Concat(s_asyncRefs) : s_asyncRefs;
-            return base.CompileAndVerify(
-                source,
-                targetFramework: TargetFramework.Empty,
-                expectedOutput: expectedOutput,
-                references: references,
-                options: options
-            );
+            return base
+                .CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.Empty,
+                    expectedOutput: expectedOutput,
+                    references: references,
+                    options: options
+                );
         }
 
         [Fact]
@@ -223,10 +224,9 @@ class Test
                 @"
 10
 ";
-            CompileAndVerify(source, expectedOutput: expected)
-                .VerifyIL(
-                    "Test.<G>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-                    @"
+            CompileAndVerify(source, expectedOutput: expected).VerifyIL(
+                "Test.<G>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      819 (0x333)
   .maxstack  3
@@ -589,7 +589,7 @@ class Test
   IL_0332:  ret
 }
 "
-                );
+            );
         }
 
         [Fact, WorkItem(855080, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/855080")]
@@ -757,10 +757,9 @@ class Test
                 @"
 2
 ";
-            CompileAndVerify(source, expectedOutput: expected)
-                .VerifyIL(
-                    "Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-                    @"
+            CompileAndVerify(source, expectedOutput: expected).VerifyIL(
+                "Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      210 (0xd2)
   .maxstack  3
@@ -868,7 +867,7 @@ class Test
   IL_00d1:  ret
 }
 "
-                );
+            );
         }
 
         [ConditionalFact(
@@ -1546,10 +1545,9 @@ class Test
                 @"
 2
 ";
-            CompileAndVerify(source, expectedOutput: expected)
-                .VerifyIL(
-                    "Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-                    @"
+            CompileAndVerify(source, expectedOutput: expected).VerifyIL(
+                "Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      170 (0xaa)
   .maxstack  3
@@ -1648,7 +1646,7 @@ class Test
   IL_00a9:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]

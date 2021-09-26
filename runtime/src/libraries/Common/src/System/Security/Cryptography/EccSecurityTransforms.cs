@@ -124,11 +124,8 @@ namespace System.Security.Cryptography
         )
         {
             const string ExportPassword = "DotnetExportPassphrase";
-            byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
-                handle,
-                exportPrivate: true,
-                password: ExportPassword
-            );
+            byte[] keyBlob = Interop.AppleCrypto
+                .SecKeyExport(handle, exportPrivate: true, password: ExportPassword);
             EccKeyFormatHelper.ReadEncryptedPkcs8(
                 keyBlob,
                 ExportPassword,
@@ -153,11 +150,12 @@ namespace System.Security.Cryptography
                 throw new CryptographicException(SR.Cryptography_OpenInvalidHandle);
             }
 
-            byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
-                includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
-                exportPrivate: includePrivateParameters,
-                password: ExportPassword
-            );
+            byte[] keyBlob = Interop.AppleCrypto
+                .SecKeyExport(
+                    includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
+                    exportPrivate: includePrivateParameters,
+                    password: ExportPassword
+                );
 
             try
             {
@@ -278,10 +276,8 @@ namespace System.Security.Cryptography
 
             try
             {
-                return Interop.AppleCrypto.ImportEphemeralKey(
-                    rented.AsSpan(0, written),
-                    hasPrivateKey
-                );
+                return Interop.AppleCrypto
+                    .ImportEphemeralKey(rented.AsSpan(0, written), hasPrivateKey);
             }
 
             finally
@@ -303,10 +299,8 @@ namespace System.Security.Cryptography
                     // Validate the DER value and get the number of bytes.
                     EccKeyFormatHelper.ReadSubjectPublicKeyInfo(manager.Memory, out int localRead);
 
-                    SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.ImportEphemeralKey(
-                        source.Slice(0, localRead),
-                        false
-                    );
+                    SafeSecKeyRefHandle publicKey = Interop.AppleCrypto
+                        .ImportEphemeralKey(source.Slice(0, localRead), false);
                     SecKeyPair newKeys = SecKeyPair.PublicOnly(publicKey);
                     int size = GetKeySize(newKeys);
                     SetKey(newKeys);

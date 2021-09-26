@@ -1916,8 +1916,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             // Arrange
             var valueProviderFactory = new Mock<IValueProviderFactory>();
             valueProviderFactory.Setup(
-                    f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())
-                )
+                f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())
+            )
                 .Throws(new ValueProviderException("some error"));
 
             var pageModel = new TestPage

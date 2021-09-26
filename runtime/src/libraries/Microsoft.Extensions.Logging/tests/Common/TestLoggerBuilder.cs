@@ -10,7 +10,8 @@ namespace Microsoft.Extensions.Logging.Test
     {
         public static ILoggerFactory Create(Action<ILoggingBuilder> configure)
         {
-            return new ServiceCollection().AddLogging(configure)
+            return new ServiceCollection()
+                .AddLogging(configure)
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerFactory>();
         }

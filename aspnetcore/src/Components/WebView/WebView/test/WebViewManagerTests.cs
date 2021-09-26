@@ -127,7 +127,8 @@ namespace Microsoft.AspNetCore.Components.WebView
 
         private static IServiceCollection RegisterTestServices()
         {
-            return new ServiceCollection().AddSingleton<SingletonService>()
+            return new ServiceCollection()
+                .AddSingleton<SingletonService>()
                 .AddScoped<ScopedService>();
         }
 

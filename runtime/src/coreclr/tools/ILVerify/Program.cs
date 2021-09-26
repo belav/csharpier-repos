@@ -99,7 +99,8 @@ namespace ILVerify
                 new Option<FileInfo>(
                     new[] { "--include-file" },
                     "Same as --include, but the regular expression(s) are declared line by line in the specified file."
-                ).ExistingOnly()
+                )
+                    .ExistingOnly()
             );
             command.AddOption(
                 new Option<string[]>(
@@ -111,7 +112,8 @@ namespace ILVerify
                 new Option<FileInfo>(
                     new[] { "--exclude-file" },
                     "Same as --exclude, but the regular expression(s) are declared line by line in the specified file."
-                ).ExistingOnly()
+                )
+                    .ExistingOnly()
             );
             command.AddOption(
                 new Option<string[]>(
@@ -123,7 +125,8 @@ namespace ILVerify
                 new Option<FileInfo>(
                     new[] { "--ignore-error-file" },
                     "Same as --ignore-error, but the regular expression(s) are declared line by line in the specified file."
-                ).ExistingOnly()
+                )
+                    .ExistingOnly()
             );
             command.AddOption(
                 new Option<bool>(new[] { "--statistics" }, "Print verification statistics")

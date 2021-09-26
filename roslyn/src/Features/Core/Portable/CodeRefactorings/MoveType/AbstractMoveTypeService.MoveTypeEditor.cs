@@ -67,8 +67,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 //    file.
 
                 var documentWithMovedType = await AddNewDocumentWithSingleTypeDeclarationAsync(
-                        newDocumentId
-                    )
+                    newDocumentId
+                )
                     .ConfigureAwait(false);
 
                 var solutionWithNewDocument = documentWithMovedType.Project.Solution;
@@ -81,15 +81,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 // update source document to add partial modifiers to type chain
                 // and/or remove type declaration from original source document.
                 var solutionWithBothDocumentsUpdated = await RemoveTypeFromSourceDocumentAsync(
-                        sourceDocument
-                    )
+                    sourceDocument
+                )
                     .ConfigureAwait(false);
 
                 return await RemoveUnnecessaryImportsAsync(
-                        solutionWithBothDocumentsUpdated,
-                        sourceDocument.Id,
-                        documentWithMovedType.Id
-                    )
+                    solutionWithBothDocumentsUpdated,
+                    sourceDocument.Id,
+                    documentWithMovedType.Id
+                )
                     .ConfigureAwait(false);
             }
 
@@ -109,9 +109,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 // Remove all unnecessary imports from the new document we've created.
                 documentWithMovedType =
                     await removeUnnecessaryImports.RemoveUnnecessaryImportsAsync(
-                            documentWithMovedType,
-                            CancellationToken
-                        )
+                        documentWithMovedType,
+                        CancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 solution = solution.WithDocumentSyntaxRoot(
@@ -122,8 +122,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
                 // See which imports we kept around.
                 var rootWithMovedType = await documentWithMovedType.GetRequiredSyntaxRootAsync(
-                        CancellationToken
-                    )
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
                 var movedImports = rootWithMovedType.DescendantNodes()
                     .Where(syntaxFacts.IsUsingOrExternOrImport)
@@ -132,10 +132,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 // Now remove any unnecessary imports from the original doc that moved to the new doc.
                 var sourceDocument = solution.GetRequiredDocument(sourceDocumentId);
                 sourceDocument = await removeUnnecessaryImports.RemoveUnnecessaryImportsAsync(
-                        sourceDocument,
-                        n => movedImports.Contains(i => syntaxFacts.AreEquivalent(i, n)),
-                        CancellationToken
-                    )
+                    sourceDocument,
+                    n => movedImports.Contains(i => syntaxFacts.AreEquivalent(i, n)),
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return solution.WithDocumentSyntaxRoot(
@@ -184,12 +184,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     .ConfigureAwait(false);
 
                 // add an empty document to solution, so that we'll have options from the right context.
-                var solutionWithNewDocument = projectToBeUpdated.Solution.AddDocument(
-                    newDocumentId,
-                    FileName,
-                    text: string.Empty,
-                    folders: document.Folders
-                );
+                var solutionWithNewDocument = projectToBeUpdated.Solution
+                    .AddDocument(
+                        newDocumentId,
+                        FileName,
+                        text: string.Empty,
+                        folders: document.Folders
+                    );
 
                 // update the text for the new document
                 solutionWithNewDocument = solutionWithNewDocument.WithDocumentSyntaxRoot(
@@ -253,9 +254,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             private async Task<Solution> RemoveTypeFromSourceDocumentAsync(Document sourceDocument)
             {
                 var documentEditor = await DocumentEditor.CreateAsync(
-                        sourceDocument,
-                        CancellationToken
-                    )
+                    sourceDocument,
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // Make the type chain above the type we're moving 'partial'.
@@ -336,17 +337,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 bool removeTypeInheritance
             )
             {
-                var semanticFacts =
-                    State.SemanticDocument.Document.GetRequiredLanguageService<ISemanticFactsService>();
+                var semanticFacts = State.SemanticDocument.Document
+                    .GetRequiredLanguageService<ISemanticFactsService>();
                 var typeChain = State.TypeNode.Ancestors().OfType<TTypeDeclarationSyntax>();
 
                 foreach (var node in typeChain)
                 {
-                    var symbol =
-                        (ITypeSymbol?)State.SemanticDocument.SemanticModel.GetDeclaredSymbol(
-                            node,
-                            CancellationToken
-                        );
+                    var symbol = (ITypeSymbol?)State.SemanticDocument.SemanticModel
+                        .GetDeclaredSymbol(node, CancellationToken);
                     Contract.ThrowIfNull(symbol);
                     if (!semanticFacts.IsPartial(symbol, CancellationToken))
                     {
@@ -386,8 +384,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 TTypeDeclarationSyntax currentTypeNode
             )
             {
-                var syntaxFacts =
-                    State.SemanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = State.SemanticDocument.Document
+                    .GetRequiredLanguageService<ISyntaxFactsService>();
                 var withoutBlankLines = syntaxFacts.GetNodeWithoutLeadingBlankLines(
                     currentTypeNode
                 );

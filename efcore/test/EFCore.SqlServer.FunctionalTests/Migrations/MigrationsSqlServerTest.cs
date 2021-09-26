@@ -2106,7 +2106,8 @@ WHERE name = '{connection.Database}';";
             protected override IServiceCollection AddServices(
                 IServiceCollection serviceCollection
             ) =>
-                base.AddServices(serviceCollection)
+                base
+                    .AddServices(serviceCollection)
                     .AddScoped<IDatabaseModelFactory, SqlServerDatabaseModelFactory>();
         }
     }

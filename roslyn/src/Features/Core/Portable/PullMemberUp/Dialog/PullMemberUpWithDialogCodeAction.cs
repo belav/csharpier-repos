@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             {
                 var pullMemberUpOptionService =
                     _service
-                    ?? _document.Project.Solution.Workspace.Services.GetRequiredService<IPullMemberUpOptionsService>();
+                    ?? _document.Project.Solution.Workspace.Services
+                        .GetRequiredService<IPullMemberUpOptionsService>();
                 return pullMemberUpOptionService.GetPullMemberUpOptions(_document, _selectedMember);
             }
 
@@ -52,10 +53,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 if (options is PullMembersUpOptions pullMemberUpOptions)
                 {
                     var changedSolution = await MembersPuller.PullMembersUpAsync(
-                            _document,
-                            pullMemberUpOptions,
-                            cancellationToken
-                        )
+                        _document,
+                        pullMemberUpOptions,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     return new[] { new ApplyChangesOperation(changedSolution) };
                 }

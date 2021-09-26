@@ -149,10 +149,10 @@ namespace Microsoft.AspNetCore.Routing
                 //
                 // For example, ctor(string, IService) will beat ctor(string)
                 var matchingConstructors = constructors.Where(
-                        ci =>
-                            GetNonConvertableParameterTypeCount(serviceProvider, ci.GetParameters())
-                            == arguments.Length
-                    )
+                    ci =>
+                        GetNonConvertableParameterTypeCount(serviceProvider, ci.GetParameters())
+                        == arguments.Length
+                )
                     .OrderByDescending(ci => ci.GetParameters().Length)
                     .ToArray();
 

@@ -27,10 +27,8 @@ namespace Internal.IL.Stubs
                 codeStream.Emit(
                     ILOpcode.ldflda,
                     emit.NewToken(
-                        method.Context.SystemModule.GetKnownType(
-                                "System.Runtime.CompilerServices",
-                                "RawData"
-                            )
+                        method.Context.SystemModule
+                            .GetKnownType("System.Runtime.CompilerServices", "RawData")
                             .GetField("Data")
                     )
                 );

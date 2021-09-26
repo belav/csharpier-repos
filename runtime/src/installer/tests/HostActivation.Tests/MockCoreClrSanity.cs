@@ -24,7 +24,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 _dotnetDir,
                 Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"),
                 "exe"
-            ).AddMicrosoftNETCoreAppFrameworkMockCoreClr("9999.0.0").Build();
+            )
+                .AddMicrosoftNETCoreAppFrameworkMockCoreClr("9999.0.0")
+                .Build();
         }
 
         public void Dispose()

@@ -117,9 +117,8 @@ namespace Microsoft.AspNetCore.Localization
             var supportedUICultures = new[] { "en-US", "ar-YE" };
 
             // Act
-            var options = new RequestLocalizationOptions().AddSupportedUICultures(
-                supportedUICultures
-            );
+            var options = new RequestLocalizationOptions()
+                .AddSupportedUICultures(supportedUICultures);
 
             // Assert
             Assert.Equal(supportedUICultures, options.SupportedUICultures.Select(c => c.Name));

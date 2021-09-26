@@ -29,9 +29,10 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         [Fact]
         public static void EncryptDecryptKnownECB192()
         {
-            byte[] plainTextBytes = new ASCIIEncoding().GetBytes(
-                "This is a sentence that is longer than a block, it ensures that multi-block functions work."
-            );
+            byte[] plainTextBytes = new ASCIIEncoding()
+                .GetBytes(
+                    "This is a sentence that is longer than a block, it ensures that multi-block functions work."
+                );
 
             byte[] encryptedBytesExpected = new byte[]
             {

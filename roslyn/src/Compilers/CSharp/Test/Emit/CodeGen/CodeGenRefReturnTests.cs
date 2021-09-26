@@ -87,10 +87,9 @@ class Program
 }
 ";
 
-            CompileAndVerifyRef(text)
-                .VerifyIL(
-                    "Program.M()",
-                    @"
+            CompileAndVerifyRef(text).VerifyIL(
+                "Program.M()",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -100,7 +99,7 @@ class Program
   IL_0007:  ldelema    ""int""
   IL_000c:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -117,17 +116,16 @@ class Program
 }
 ";
 
-            CompileAndVerifyRef(text, verify: Verification.Skipped)
-                .VerifyIL(
-                    "Program.M(ref int)",
-                    @"
+            CompileAndVerifyRef(text, verify: Verification.Skipped).VerifyIL(
+                "Program.M(ref int)",
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -145,10 +143,9 @@ class Program
 }
 ";
 
-            CompileAndVerifyRef(text, verify: Verification.Fails)
-                .VerifyIL(
-                    "Program.M(out int)",
-                    @"
+            CompileAndVerifyRef(text, verify: Verification.Fails).VerifyIL(
+                "Program.M(out int)",
+                @"
 {
   // Code size        5 (0x5)
   .maxstack  2
@@ -158,7 +155,7 @@ class Program
   IL_0003:  ldarg.0
   IL_0004:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -177,10 +174,9 @@ class Program
 }
 ";
 
-            CompileAndVerifyRef(text, verify: Verification.Fails)
-                .VerifyIL(
-                    "Program.M(ref int)",
-                    @"
+            CompileAndVerifyRef(text, verify: Verification.Fails).VerifyIL(
+                "Program.M(ref int)",
+                @"
 {
   // Code size        5 (0x5)
   .maxstack  3
@@ -190,7 +186,7 @@ class Program
   IL_0003:  stind.i4
   IL_0004:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -714,17 +710,16 @@ class Program
 }
 ";
 
-            CompileAndVerifyRef(text)
-                .VerifyIL(
-                    "Program.M()",
-                    @"
+            CompileAndVerifyRef(text).VerifyIL(
+                "Program.M()",
+                @"
 {
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  ldsflda    ""D Program.d""
   IL_0005:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -791,17 +786,16 @@ class Program
 }
 ";
 
-            CompileAndVerifyRef(text)
-                .VerifyIL(
-                    "Program.M()",
-                    @"
+            CompileAndVerifyRef(text).VerifyIL(
+                "Program.M()",
+                @"
 {
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  ldsflda    ""int Program.i""
   IL_0005:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -916,17 +910,16 @@ class Program
 }
 ";
 
-            CompileAndVerifyRef(text)
-                .VerifyIL(
-                    "Program.M()",
-                    @"
+            CompileAndVerifyRef(text).VerifyIL(
+                "Program.M()",
+                @"
 {
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  call       ""ref int Program.M()""
   IL_0005:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1142,10 +1135,9 @@ class Program
 }
 ";
 
-            CompileAndVerifyRef(text)
-                .VerifyIL(
-                    "Program.M(ref int, ref int, object)",
-                    @"
+            CompileAndVerifyRef(text).VerifyIL(
+                "Program.M(ref int, ref int, object)",
+                @"
 {
   // Code size        9 (0x9)
   .maxstack  3
@@ -1155,7 +1147,7 @@ class Program
   IL_0003:  call       ""ref int Program.M(ref int, ref int, object)""
   IL_0008:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1397,10 +1389,9 @@ class Program
 }
 ";
 
-            CompileAndVerifyRef(text)
-                .VerifyIL(
-                    "Program.M(D)",
-                    @"
+            CompileAndVerifyRef(text).VerifyIL(
+                "Program.M(D)",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1408,7 +1399,7 @@ class Program
   IL_0001:  callvirt   ""ref int D.Invoke()""
   IL_0006:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1427,10 +1418,9 @@ class Program
 }
 ";
 
-            CompileAndVerifyRef(text)
-                .VerifyIL(
-                    "Program.M(D, ref int, ref int, object)",
-                    @"
+            CompileAndVerifyRef(text).VerifyIL(
+                "Program.M(D, ref int, ref int, object)",
+                @"
 {
   // Code size       10 (0xa)
   .maxstack  4
@@ -1441,7 +1431,7 @@ class Program
   IL_0004:  callvirt   ""ref int D.Invoke(ref int, ref int, object)""
   IL_0009:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1496,10 +1486,10 @@ class Program
 ";
 
             CompileAndVerifyRef(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Program.Main()",
                     @"
@@ -1694,10 +1684,10 @@ class Program
 ";
 
             CompileAndVerifyRef(
-                    text,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails
-                )
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Program.Main()",
                     @"
@@ -1805,20 +1795,18 @@ class Program
 }
 ";
 
-            CompileAndVerify(text, parseOptions: TestOptions.Regular)
-                .VerifyIL(
-                    "Program.M()",
-                    @"
+            CompileAndVerify(text, parseOptions: TestOptions.Regular).VerifyIL(
+                "Program.M()",
+                @"
 {
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  call       ""ref int Program.<M>g__N|0_0()""
   IL_0005:  ret
 }"
-                )
-                .VerifyIL(
-                    "Program.<M>g__N|0_0",
-                    @"
+            ).VerifyIL(
+                "Program.<M>g__N|0_0",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -1828,7 +1816,7 @@ class Program
   IL_0007:  ldelema    ""int""
   IL_000c:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1863,11 +1851,11 @@ class Program
 ";
 
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular,
-                    expectedOutput: "42",
-                    verify: Verification.Fails
-                )
+                text,
+                parseOptions: TestOptions.Regular,
+                expectedOutput: "42",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Program.M()",
                     @"
@@ -1954,11 +1942,11 @@ class Program
 ";
 
             CompileAndVerify(
-                    text,
-                    parseOptions: TestOptions.Regular,
-                    expectedOutput: "42",
-                    verify: Verification.Fails
-                )
+                text,
+                parseOptions: TestOptions.Regular,
+                expectedOutput: "42",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Program.M()",
                     @"
@@ -2065,10 +2053,9 @@ class Program
     }
 ";
 
-            CompileAndVerifyRef(text, expectedOutput: "12")
-                .VerifyIL(
-                    "Program.C1<T>.Test()",
-                    @"
+            CompileAndVerifyRef(text, expectedOutput: "12").VerifyIL(
+                "Program.C1<T>.Test()",
+                @"
 {
   // Code size      114 (0x72)
   .maxstack  2
@@ -2106,7 +2093,7 @@ class Program
   IL_006c:  call       ""void System.Console.Write(string)""
   IL_0071:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2161,10 +2148,9 @@ struct Mutable : IDisposable
 }
 ";
 
-            CompileAndVerifyRef(text, expectedOutput: "12", verify: Verification.Fails)
-                .VerifyIL(
-                    "Program.C1<T>.Test()",
-                    @"
+            CompileAndVerifyRef(text, expectedOutput: "12", verify: Verification.Fails).VerifyIL(
+                "Program.C1<T>.Test()",
+                @"
 {
   // Code size      115 (0x73)
   .maxstack  2
@@ -2203,7 +2189,7 @@ struct Mutable : IDisposable
   IL_006d:  call       ""void System.Console.Write(string)""
   IL_0072:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2263,10 +2249,9 @@ struct Mutable : IDisposable
 }
 ";
 
-            CompileAndVerifyRef(text, expectedOutput: "1234", verify: Verification.Fails)
-                .VerifyIL(
-                    "Program.C1<T>.Test()",
-                    @"
+            CompileAndVerifyRef(text, expectedOutput: "1234", verify: Verification.Fails).VerifyIL(
+                "Program.C1<T>.Test()",
+                @"
 {
   // Code size      129 (0x81)
   .maxstack  2
@@ -2319,7 +2304,7 @@ struct Mutable : IDisposable
   IL_007e:  blt.s      IL_0011
   IL_0080:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2372,10 +2357,9 @@ class Goo : IGoo<Goo>
 }
 ";
 
-            CompileAndVerifyRef(text, expectedOutput: "1True", verify: Verification.Fails)
-                .VerifyIL(
-                    "Program.C1<T>.Test()",
-                    @"
+            CompileAndVerifyRef(text, expectedOutput: "1True", verify: Verification.Fails).VerifyIL(
+                "Program.C1<T>.Test()",
+                @"
 {
   // Code size       84 (0x54)
   .maxstack  2
@@ -2409,7 +2393,7 @@ class Goo : IGoo<Goo>
   IL_004e:  call       ""void System.Console.Write(bool)""
   IL_0053:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2475,10 +2459,10 @@ class Goo : IGoo<Goo>
 ";
 
             CompileAndVerifyRef(
-                    text,
-                    expectedOutput: "1TrueTrue1TrueTrueTrueTrue1TrueTrue",
-                    verify: Verification.Fails
-                )
+                text,
+                expectedOutput: "1TrueTrue1TrueTrueTrueTrue1TrueTrue",
+                verify: Verification.Fails
+            )
                 .VerifyIL(
                     "Program.C1<T>.Test()",
                     @"
@@ -2968,24 +2952,23 @@ class E : Exception
     public E(int value) { this.Value = value; }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (4,36): error CS8115: A throw expression is not allowed in this context.
-                    //     static ref int P1 { get => ref throw new E(1); }
-                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(4, 36),
-                    // (5,30): error CS8115: A throw expression is not allowed in this context.
-                    //     static ref int P2 => ref throw new E(2);
-                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(5, 30),
-                    // (6,31): error CS8115: A throw expression is not allowed in this context.
-                    //     static ref int M() => ref throw new E(3);
-                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(6, 31),
-                    // (10,28): error CS8115: A throw expression is not allowed in this context.
-                    //         ref int L() => ref throw new E(4);
-                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(10, 28),
-                    // (11,25): error CS8115: A throw expression is not allowed in this context.
-                    //         D d = () => ref throw new E(5);
-                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(11, 25)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (4,36): error CS8115: A throw expression is not allowed in this context.
+                //     static ref int P1 { get => ref throw new E(1); }
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(4, 36),
+                // (5,30): error CS8115: A throw expression is not allowed in this context.
+                //     static ref int P2 => ref throw new E(2);
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(5, 30),
+                // (6,31): error CS8115: A throw expression is not allowed in this context.
+                //     static ref int M() => ref throw new E(3);
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(6, 31),
+                // (10,28): error CS8115: A throw expression is not allowed in this context.
+                //         ref int L() => ref throw new E(4);
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(10, 28),
+                // (11,25): error CS8115: A throw expression is not allowed in this context.
+                //         D d = () => ref throw new E(5);
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(11, 25)
+            );
         }
 
         [Fact]
@@ -3021,12 +3004,11 @@ class Program
     }
 }";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (24,19): error CS8150: By-value returns may only be used in methods that return by value
-                    //         B.F(() => o.F(), 2);
-                    Diagnostic(ErrorCode.ERR_MustHaveRefReturn, "o.F()").WithLocation(24, 19)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (24,19): error CS8150: By-value returns may only be used in methods that return by value
+                //         B.F(() => o.F(), 2);
+                Diagnostic(ErrorCode.ERR_MustHaveRefReturn, "o.F()").WithLocation(24, 19)
+            );
         }
 
         [Fact]
@@ -3098,12 +3080,11 @@ class Program
     }
 }";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (24,23): error CS8149: By-reference returns may only be used in methods that return by reference
-                    //         B.F(() => ref o.F(), 2);
-                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "o.F()").WithLocation(24, 23)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (24,23): error CS8149: By-reference returns may only be used in methods that return by reference
+                //         B.F(() => ref o.F(), 2);
+                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "o.F()").WithLocation(24, 23)
+            );
         }
 
         [Fact]
@@ -3192,19 +3173,18 @@ class Program
                         .WithArguments("A<int>.F()", "D<int>")
                         .WithLocation(26, 24)
                 );
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (24,13): error CS8189: Ref mismatch between 'A<int>.F()' and delegate 'D<int>'
-                    //         B.F(o.F, 2);
-                    Diagnostic(ErrorCode.ERR_DelegateRefMismatch, "o.F")
-                        .WithArguments("A<int>.F()", "D<int>")
-                        .WithLocation(24, 13),
-                    // (26,24): error CS8189: Ref mismatch between 'A<int>.F()' and delegate 'D<int>'
-                    //         B.F(new D<int>(o.F), 3);
-                    Diagnostic(ErrorCode.ERR_DelegateRefMismatch, "o.F")
-                        .WithArguments("A<int>.F()", "D<int>")
-                        .WithLocation(26, 24)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (24,13): error CS8189: Ref mismatch between 'A<int>.F()' and delegate 'D<int>'
+                //         B.F(o.F, 2);
+                Diagnostic(ErrorCode.ERR_DelegateRefMismatch, "o.F")
+                    .WithArguments("A<int>.F()", "D<int>")
+                    .WithLocation(24, 13),
+                // (26,24): error CS8189: Ref mismatch between 'A<int>.F()' and delegate 'D<int>'
+                //         B.F(new D<int>(o.F), 3);
+                Diagnostic(ErrorCode.ERR_DelegateRefMismatch, "o.F")
+                    .WithArguments("A<int>.F()", "D<int>")
+                    .WithLocation(26, 24)
+            );
         }
 
         [Fact]
@@ -3254,19 +3234,18 @@ class Program
                         .WithArguments("A<int>.F()", "D<int>")
                         .WithLocation(25, 24)
                 );
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (23,13): error CS8189: Ref mismatch between 'A<int>.F()' and delegate 'D<int>'
-                    //         B.F(o.F, 2);
-                    Diagnostic(ErrorCode.ERR_DelegateRefMismatch, "o.F")
-                        .WithArguments("A<int>.F()", "D<int>")
-                        .WithLocation(23, 13),
-                    // (25,24): error CS8189: Ref mismatch between 'A<int>.F()' and delegate 'D<int>'
-                    //         B.F(new D<int>(o.F), 3);
-                    Diagnostic(ErrorCode.ERR_DelegateRefMismatch, "o.F")
-                        .WithArguments("A<int>.F()", "D<int>")
-                        .WithLocation(25, 24)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (23,13): error CS8189: Ref mismatch between 'A<int>.F()' and delegate 'D<int>'
+                //         B.F(o.F, 2);
+                Diagnostic(ErrorCode.ERR_DelegateRefMismatch, "o.F")
+                    .WithArguments("A<int>.F()", "D<int>")
+                    .WithLocation(23, 13),
+                // (25,24): error CS8189: Ref mismatch between 'A<int>.F()' and delegate 'D<int>'
+                //         B.F(new D<int>(o.F), 3);
+                Diagnostic(ErrorCode.ERR_DelegateRefMismatch, "o.F")
+                    .WithArguments("A<int>.F()", "D<int>")
+                    .WithLocation(25, 24)
+            );
         }
 
         [Fact]
@@ -3301,13 +3280,11 @@ public class C
 
 ";
 
-            CreateCompilationWithMscorlib45AndCSharp(source)
-                .VerifyEmitDiagnostics(
-                    // (18,20): error CS8156: An expression cannot be used in this context because it may not be returned by reference
-                    //         return ref d.Length;
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "d.Length")
-                        .WithLocation(18, 20)
-                );
+            CreateCompilationWithMscorlib45AndCSharp(source).VerifyEmitDiagnostics(
+                // (18,20): error CS8156: An expression cannot be used in this context because it may not be returned by reference
+                //         return ref d.Length;
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "d.Length").WithLocation(18, 20)
+            );
         }
 
         [Fact]
@@ -3501,12 +3478,11 @@ public class C
 
 ";
 
-            CreateCompilationWithMscorlib45AndCSharp(source)
-                .VerifyEmitDiagnostics(
-                    // (17,20): error CS8156: An expression cannot be used in this context because it may not be returned by reference
-                    //         return ref d[0];
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "d[0]").WithLocation(17, 20)
-                );
+            CreateCompilationWithMscorlib45AndCSharp(source).VerifyEmitDiagnostics(
+                // (17,20): error CS8156: An expression cannot be used in this context because it may not be returned by reference
+                //         return ref d[0];
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "d[0]").WithLocation(17, 20)
+            );
         }
 
         [Fact]
@@ -3538,18 +3514,17 @@ public class C
 
 ";
 
-            CreateCompilationWithMscorlib45AndCSharp(source)
-                .VerifyEmitDiagnostics(
-                    // (14,26): error CS8156: An expression cannot be used in this context because it may not be returned by reference
-                    //         return ref G(ref d.Length);
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "d.Length")
-                        .WithLocation(14, 26),
-                    // (14,20): error CS8347: Cannot use a result of 'C.G(ref dynamic)' in this context because it may expose variables referenced by parameter 'd' outside of their declaration scope
-                    //         return ref G(ref d.Length);
-                    Diagnostic(ErrorCode.ERR_EscapeCall, "G(ref d.Length)")
-                        .WithArguments("C.G(ref dynamic)", "d")
-                        .WithLocation(14, 20)
-                );
+            CreateCompilationWithMscorlib45AndCSharp(source).VerifyEmitDiagnostics(
+                // (14,26): error CS8156: An expression cannot be used in this context because it may not be returned by reference
+                //         return ref G(ref d.Length);
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "d.Length")
+                    .WithLocation(14, 26),
+                // (14,20): error CS8347: Cannot use a result of 'C.G(ref dynamic)' in this context because it may expose variables referenced by parameter 'd' outside of their declaration scope
+                //         return ref G(ref d.Length);
+                Diagnostic(ErrorCode.ERR_EscapeCall, "G(ref d.Length)")
+                    .WithArguments("C.G(ref dynamic)", "d")
+                    .WithLocation(14, 20)
+            );
         }
 
         [Fact]
@@ -3573,39 +3548,38 @@ delegate ref Func<T> RefFunc3f<out T>();
 
 ";
 
-            CreateCompilationWithMscorlib45AndCSharp(source)
-                .VerifyEmitDiagnostics(
-                    // (6,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc3<T>.Invoke()'. 'T' is covariant.
-                    // delegate ref T RefFunc3<out T>();
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
-                        .WithArguments("RefFunc3<T>.Invoke()", "T", "covariant", "invariantly")
-                        .WithLocation(6, 10),
-                    // (5,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc2<T>.Invoke()'. 'T' is contravariant.
-                    // delegate ref T RefFunc2<in T>();
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
-                        .WithArguments("RefFunc2<T>.Invoke()", "T", "contravariant", "invariantly")
-                        .WithLocation(5, 10),
-                    // (14,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc3f<T>.Invoke()'. 'T' is covariant.
-                    // delegate ref Func<T> RefFunc3f<out T>();
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
-                        .WithArguments("RefFunc3f<T>.Invoke()", "T", "covariant", "invariantly")
-                        .WithLocation(14, 10),
-                    // (13,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc2f<T>.Invoke()'. 'T' is contravariant.
-                    // delegate ref Func<T> RefFunc2f<in T>();
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
-                        .WithArguments("RefFunc2f<T>.Invoke()", "T", "contravariant", "invariantly")
-                        .WithLocation(13, 10),
-                    // (10,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc3a<T>.Invoke()'. 'T' is covariant.
-                    // delegate ref Action<T> RefFunc3a<out T>();
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
-                        .WithArguments("RefFunc3a<T>.Invoke()", "T", "covariant", "invariantly")
-                        .WithLocation(10, 10),
-                    // (9,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc2a<T>.Invoke()'. 'T' is contravariant.
-                    // delegate ref Action<T> RefFunc2a<in T>();
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
-                        .WithArguments("RefFunc2a<T>.Invoke()", "T", "contravariant", "invariantly")
-                        .WithLocation(9, 10)
-                );
+            CreateCompilationWithMscorlib45AndCSharp(source).VerifyEmitDiagnostics(
+                // (6,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc3<T>.Invoke()'. 'T' is covariant.
+                // delegate ref T RefFunc3<out T>();
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
+                    .WithArguments("RefFunc3<T>.Invoke()", "T", "covariant", "invariantly")
+                    .WithLocation(6, 10),
+                // (5,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc2<T>.Invoke()'. 'T' is contravariant.
+                // delegate ref T RefFunc2<in T>();
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
+                    .WithArguments("RefFunc2<T>.Invoke()", "T", "contravariant", "invariantly")
+                    .WithLocation(5, 10),
+                // (14,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc3f<T>.Invoke()'. 'T' is covariant.
+                // delegate ref Func<T> RefFunc3f<out T>();
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
+                    .WithArguments("RefFunc3f<T>.Invoke()", "T", "covariant", "invariantly")
+                    .WithLocation(14, 10),
+                // (13,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc2f<T>.Invoke()'. 'T' is contravariant.
+                // delegate ref Func<T> RefFunc2f<in T>();
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
+                    .WithArguments("RefFunc2f<T>.Invoke()", "T", "contravariant", "invariantly")
+                    .WithLocation(13, 10),
+                // (10,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc3a<T>.Invoke()'. 'T' is covariant.
+                // delegate ref Action<T> RefFunc3a<out T>();
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
+                    .WithArguments("RefFunc3a<T>.Invoke()", "T", "covariant", "invariantly")
+                    .WithLocation(10, 10),
+                // (9,10): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'RefFunc2a<T>.Invoke()'. 'T' is contravariant.
+                // delegate ref Action<T> RefFunc2a<in T>();
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
+                    .WithArguments("RefFunc2a<T>.Invoke()", "T", "contravariant", "invariantly")
+                    .WithLocation(9, 10)
+            );
         }
 
         [Fact]
@@ -3629,39 +3603,38 @@ interface IM3f<out T> { ref Func<T> RefMethod(); }
 
 ";
 
-            CreateCompilationWithMscorlib45AndCSharp(source)
-                .VerifyEmitDiagnostics(
-                    // (6,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM3<T>.RefMethod()'. 'T' is covariant.
-                    // interface IM3<out T> { ref T RefMethod(); }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
-                        .WithArguments("IM3<T>.RefMethod()", "T", "covariant", "invariantly")
-                        .WithLocation(6, 24),
-                    // (10,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM3a<T>.RefMethod()'. 'T' is covariant.
-                    // interface IM3a<out T> { ref Action<T> RefMethod(); }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
-                        .WithArguments("IM3a<T>.RefMethod()", "T", "covariant", "invariantly")
-                        .WithLocation(10, 25),
-                    // (9,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM2a<T>.RefMethod()'. 'T' is contravariant.
-                    // interface IM2a<in T> { ref Action<T> RefMethod(); }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
-                        .WithArguments("IM2a<T>.RefMethod()", "T", "contravariant", "invariantly")
-                        .WithLocation(9, 24),
-                    // (13,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM2f<T>.RefMethod()'. 'T' is contravariant.
-                    // interface IM2f<in T> { ref Func<T> RefMethod(); }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
-                        .WithArguments("IM2f<T>.RefMethod()", "T", "contravariant", "invariantly")
-                        .WithLocation(13, 24),
-                    // (14,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM3f<T>.RefMethod()'. 'T' is covariant.
-                    // interface IM3f<out T> { ref Func<T> RefMethod(); }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
-                        .WithArguments("IM3f<T>.RefMethod()", "T", "covariant", "invariantly")
-                        .WithLocation(14, 25),
-                    // (5,23): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM2<T>.RefMethod()'. 'T' is contravariant.
-                    // interface IM2<in T> { ref T RefMethod(); }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
-                        .WithArguments("IM2<T>.RefMethod()", "T", "contravariant", "invariantly")
-                        .WithLocation(5, 23)
-                );
+            CreateCompilationWithMscorlib45AndCSharp(source).VerifyEmitDiagnostics(
+                // (6,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM3<T>.RefMethod()'. 'T' is covariant.
+                // interface IM3<out T> { ref T RefMethod(); }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
+                    .WithArguments("IM3<T>.RefMethod()", "T", "covariant", "invariantly")
+                    .WithLocation(6, 24),
+                // (10,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM3a<T>.RefMethod()'. 'T' is covariant.
+                // interface IM3a<out T> { ref Action<T> RefMethod(); }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
+                    .WithArguments("IM3a<T>.RefMethod()", "T", "covariant", "invariantly")
+                    .WithLocation(10, 25),
+                // (9,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM2a<T>.RefMethod()'. 'T' is contravariant.
+                // interface IM2a<in T> { ref Action<T> RefMethod(); }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
+                    .WithArguments("IM2a<T>.RefMethod()", "T", "contravariant", "invariantly")
+                    .WithLocation(9, 24),
+                // (13,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM2f<T>.RefMethod()'. 'T' is contravariant.
+                // interface IM2f<in T> { ref Func<T> RefMethod(); }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
+                    .WithArguments("IM2f<T>.RefMethod()", "T", "contravariant", "invariantly")
+                    .WithLocation(13, 24),
+                // (14,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM3f<T>.RefMethod()'. 'T' is covariant.
+                // interface IM3f<out T> { ref Func<T> RefMethod(); }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
+                    .WithArguments("IM3f<T>.RefMethod()", "T", "covariant", "invariantly")
+                    .WithLocation(14, 25),
+                // (5,23): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IM2<T>.RefMethod()'. 'T' is contravariant.
+                // interface IM2<in T> { ref T RefMethod(); }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
+                    .WithArguments("IM2<T>.RefMethod()", "T", "contravariant", "invariantly")
+                    .WithLocation(5, 23)
+            );
         }
 
         [Fact]
@@ -3685,39 +3658,38 @@ interface IP3f<out T> { ref Func<T> RefProp{get;} }
 
 ";
 
-            CreateCompilationWithMscorlib45AndCSharp(source)
-                .VerifyEmitDiagnostics(
-                    // (5,23): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2<T>.RefProp'. 'T' is contravariant.
-                    // interface IP2<in T> { ref T RefProp{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
-                        .WithArguments("IP2<T>.RefProp", "T", "contravariant", "invariantly")
-                        .WithLocation(5, 23),
-                    // (13,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2f<T>.RefProp'. 'T' is contravariant.
-                    // interface IP2f<in T> { ref Func<T> RefProp{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
-                        .WithArguments("IP2f<T>.RefProp", "T", "contravariant", "invariantly")
-                        .WithLocation(13, 24),
-                    // (9,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2a<T>.RefProp'. 'T' is contravariant.
-                    // interface IP2a<in T> { ref Action<T> RefProp{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
-                        .WithArguments("IP2a<T>.RefProp", "T", "contravariant", "invariantly")
-                        .WithLocation(9, 24),
-                    // (10,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3a<T>.RefProp'. 'T' is covariant.
-                    // interface IP3a<out T> { ref Action<T> RefProp{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
-                        .WithArguments("IP3a<T>.RefProp", "T", "covariant", "invariantly")
-                        .WithLocation(10, 25),
-                    // (14,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3f<T>.RefProp'. 'T' is covariant.
-                    // interface IP3f<out T> { ref Func<T> RefProp{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
-                        .WithArguments("IP3f<T>.RefProp", "T", "covariant", "invariantly")
-                        .WithLocation(14, 25),
-                    // (6,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3<T>.RefProp'. 'T' is covariant.
-                    // interface IP3<out T> { ref T RefProp{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
-                        .WithArguments("IP3<T>.RefProp", "T", "covariant", "invariantly")
-                        .WithLocation(6, 24)
-                );
+            CreateCompilationWithMscorlib45AndCSharp(source).VerifyEmitDiagnostics(
+                // (5,23): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2<T>.RefProp'. 'T' is contravariant.
+                // interface IP2<in T> { ref T RefProp{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
+                    .WithArguments("IP2<T>.RefProp", "T", "contravariant", "invariantly")
+                    .WithLocation(5, 23),
+                // (13,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2f<T>.RefProp'. 'T' is contravariant.
+                // interface IP2f<in T> { ref Func<T> RefProp{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
+                    .WithArguments("IP2f<T>.RefProp", "T", "contravariant", "invariantly")
+                    .WithLocation(13, 24),
+                // (9,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2a<T>.RefProp'. 'T' is contravariant.
+                // interface IP2a<in T> { ref Action<T> RefProp{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
+                    .WithArguments("IP2a<T>.RefProp", "T", "contravariant", "invariantly")
+                    .WithLocation(9, 24),
+                // (10,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3a<T>.RefProp'. 'T' is covariant.
+                // interface IP3a<out T> { ref Action<T> RefProp{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
+                    .WithArguments("IP3a<T>.RefProp", "T", "covariant", "invariantly")
+                    .WithLocation(10, 25),
+                // (14,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3f<T>.RefProp'. 'T' is covariant.
+                // interface IP3f<out T> { ref Func<T> RefProp{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
+                    .WithArguments("IP3f<T>.RefProp", "T", "covariant", "invariantly")
+                    .WithLocation(14, 25),
+                // (6,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3<T>.RefProp'. 'T' is covariant.
+                // interface IP3<out T> { ref T RefProp{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
+                    .WithArguments("IP3<T>.RefProp", "T", "covariant", "invariantly")
+                    .WithLocation(6, 24)
+            );
         }
 
         [Fact]
@@ -3741,39 +3713,38 @@ interface IP3f<out T> { ref Func<T> this[int i]{get;} }
 
 ";
 
-            CreateCompilationWithMscorlib45AndCSharp(source)
-                .VerifyEmitDiagnostics(
-                    // (6,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3<T>.this[int]'. 'T' is covariant.
-                    // interface IP3<out T> { ref T this[int i]{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
-                        .WithArguments("IP3<T>.this[int]", "T", "covariant", "invariantly")
-                        .WithLocation(6, 24),
-                    // (5,23): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2<T>.this[int]'. 'T' is contravariant.
-                    // interface IP2<in T> { ref T this[int i]{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
-                        .WithArguments("IP2<T>.this[int]", "T", "contravariant", "invariantly")
-                        .WithLocation(5, 23),
-                    // (9,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2a<T>.this[int]'. 'T' is contravariant.
-                    // interface IP2a<in T> { ref Action<T> this[int i]{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
-                        .WithArguments("IP2a<T>.this[int]", "T", "contravariant", "invariantly")
-                        .WithLocation(9, 24),
-                    // (10,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3a<T>.this[int]'. 'T' is covariant.
-                    // interface IP3a<out T> { ref Action<T> this[int i]{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
-                        .WithArguments("IP3a<T>.this[int]", "T", "covariant", "invariantly")
-                        .WithLocation(10, 25),
-                    // (13,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2f<T>.this[int]'. 'T' is contravariant.
-                    // interface IP2f<in T> { ref Func<T> this[int i]{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
-                        .WithArguments("IP2f<T>.this[int]", "T", "contravariant", "invariantly")
-                        .WithLocation(13, 24),
-                    // (14,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3f<T>.this[int]'. 'T' is covariant.
-                    // interface IP3f<out T> { ref Func<T> this[int i]{get;} }
-                    Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
-                        .WithArguments("IP3f<T>.this[int]", "T", "covariant", "invariantly")
-                        .WithLocation(14, 25)
-                );
+            CreateCompilationWithMscorlib45AndCSharp(source).VerifyEmitDiagnostics(
+                // (6,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3<T>.this[int]'. 'T' is covariant.
+                // interface IP3<out T> { ref T this[int i]{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
+                    .WithArguments("IP3<T>.this[int]", "T", "covariant", "invariantly")
+                    .WithLocation(6, 24),
+                // (5,23): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2<T>.this[int]'. 'T' is contravariant.
+                // interface IP2<in T> { ref T this[int i]{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref T")
+                    .WithArguments("IP2<T>.this[int]", "T", "contravariant", "invariantly")
+                    .WithLocation(5, 23),
+                // (9,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2a<T>.this[int]'. 'T' is contravariant.
+                // interface IP2a<in T> { ref Action<T> this[int i]{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
+                    .WithArguments("IP2a<T>.this[int]", "T", "contravariant", "invariantly")
+                    .WithLocation(9, 24),
+                // (10,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3a<T>.this[int]'. 'T' is covariant.
+                // interface IP3a<out T> { ref Action<T> this[int i]{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Action<T>")
+                    .WithArguments("IP3a<T>.this[int]", "T", "covariant", "invariantly")
+                    .WithLocation(10, 25),
+                // (13,24): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP2f<T>.this[int]'. 'T' is contravariant.
+                // interface IP2f<in T> { ref Func<T> this[int i]{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
+                    .WithArguments("IP2f<T>.this[int]", "T", "contravariant", "invariantly")
+                    .WithLocation(13, 24),
+                // (14,25): error CS1961: Invalid variance: The type parameter 'T' must be invariantly valid on 'IP3f<T>.this[int]'. 'T' is covariant.
+                // interface IP3f<out T> { ref Func<T> this[int i]{get;} }
+                Diagnostic(ErrorCode.ERR_UnexpectedVariance, "ref Func<T>")
+                    .WithArguments("IP3f<T>.this[int]", "T", "covariant", "invariantly")
+                    .WithLocation(14, 25)
+            );
         }
 
         [Fact]
@@ -3802,9 +3773,9 @@ class Program
 ";
 
             CreateCompilationWithMscorlib45AndCSharp(
-                    source,
-                    parseOptions: TestOptions.WithoutImprovedOverloadCandidates
-                )
+                source,
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            )
                 .VerifyEmitDiagnostics(
                     // (10,30): error CS0407: 'string Program.M1()' has the wrong return type
                     //         RefFunc1<object> f = M1;
@@ -3816,19 +3787,18 @@ class Program
                         .WithArguments("Program.M1()", "string")
                         .WithLocation(13, 34)
                 );
-            CreateCompilationWithMscorlib45AndCSharp(source)
-                .VerifyEmitDiagnostics(
-                    // (10,30): error CS0407: 'string Program.M1()' has the wrong return type
-                    //         RefFunc1<object> f = M1;
-                    Diagnostic(ErrorCode.ERR_BadRetType, "M1")
-                        .WithArguments("Program.M1()", "string")
-                        .WithLocation(10, 30),
-                    // (13,34): error CS0407: 'string Program.M1()' has the wrong return type
-                    //         f = new RefFunc1<object>(M1);
-                    Diagnostic(ErrorCode.ERR_BadRetType, "M1")
-                        .WithArguments("Program.M1()", "string")
-                        .WithLocation(13, 34)
-                );
+            CreateCompilationWithMscorlib45AndCSharp(source).VerifyEmitDiagnostics(
+                // (10,30): error CS0407: 'string Program.M1()' has the wrong return type
+                //         RefFunc1<object> f = M1;
+                Diagnostic(ErrorCode.ERR_BadRetType, "M1")
+                    .WithArguments("Program.M1()", "string")
+                    .WithLocation(10, 30),
+                // (13,34): error CS0407: 'string Program.M1()' has the wrong return type
+                //         f = new RefFunc1<object>(M1);
+                Diagnostic(ErrorCode.ERR_BadRetType, "M1")
+                    .WithArguments("Program.M1()", "string")
+                    .WithLocation(13, 34)
+            );
         }
 
         [Fact]
@@ -3867,9 +3837,9 @@ class Program
 ";
 
             CreateCompilationWithMscorlib45AndCSharp(
-                    source,
-                    parseOptions: TestOptions.WithoutImprovedOverloadCandidates
-                )
+                source,
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            )
                 .VerifyEmitDiagnostics(
                     // (22,38): error CS0407: 'Derived1 Program.M1(Derived1)' has the wrong return type
                     //         RefFunc1<Derived2, Base> f = M1;
@@ -3967,9 +3937,9 @@ class Program
 ";
 
             CreateCompilationWithMscorlib45AndCSharp(
-                    source,
-                    parseOptions: TestOptions.WithoutImprovedOverloadCandidates
-                )
+                source,
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            )
                 .VerifyEmitDiagnostics(
                     // (25,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Test(Program.RefFunc1<Derived2, Base>)' and 'Program.Test(Program.RefFunc1<Derived2, Derived1>)'
                     //         Test(M1);
@@ -4127,10 +4097,9 @@ Program+RefFunc1`2[Derived1,Base]",
     }
 ";
 
-            CompileAndVerifyRef(text, expectedOutput: "37", verify: Verification.Fails)
-                .VerifyIL(
-                    "Program.Main()",
-                    @"
+            CompileAndVerifyRef(text, expectedOutput: "37", verify: Verification.Fails).VerifyIL(
+                "Program.Main()",
+                @"
 {
   // Code size       75 (0x4b)
   .maxstack  3
@@ -4178,7 +4147,7 @@ Program+RefFunc1`2[Derived1,Base]",
   IL_0045:  call       ""void System.Console.Write(int)""
   IL_004a:  ret
 }"
-                );
+            );
         }
     }
 }

@@ -99,9 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             return overriddenByDefinitionMember;
                         }
 
-                        return overriddenByDefinitionMember.OriginalDefinition.SymbolAsMember(
-                            baseType
-                        );
+                        return overriddenByDefinitionMember.OriginalDefinition
+                            .SymbolAsMember(baseType);
                     }
                 }
 

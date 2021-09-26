@@ -22,7 +22,8 @@ namespace System.Net.Http.Tests
             );
             MediaTypeWithQualityHeaderValue clone = (MediaTypeWithQualityHeaderValue)(
                 (ICloneable)source
-            ).Clone();
+            )
+                .Clone();
             Assert.Equal(source.MediaType, clone.MediaType);
             Assert.Equal(0, clone.Parameters.Count);
 

@@ -125,9 +125,8 @@ public class WindowsIdentityTests
     {
         using (WindowsIdentity id = WindowsIdentity.GetCurrent())
         {
-            int manualCount = id.Claims.Count(
-                c => c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim)
-            );
+            int manualCount = id.Claims
+                .Count(c => c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim));
             int autoCount = id.DeviceClaims.Count();
 
             Assert.Equal(manualCount, autoCount);
@@ -205,9 +204,8 @@ public class WindowsIdentityTests
                         {
                             try
                             {
-                                Task<bool> task = testInfo.continueTask.WaitAsync(
-                                    ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                );
+                                Task<bool> task = testInfo.continueTask
+                                    .WaitAsync(ThreadTestHelpers.UnexpectedTimeoutMilliseconds);
                                 Assert.True(await task.ConfigureAwait(false));
                             }
                             catch (Exception ex)

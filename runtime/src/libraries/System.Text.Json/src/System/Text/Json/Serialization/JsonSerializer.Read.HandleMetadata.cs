@@ -555,9 +555,8 @@ namespace System.Text.Json
                             );
                         }
 
-                        referenceValue = state.ReferenceResolver.ResolveReference(
-                            property.Value.GetString()!
-                        );
+                        referenceValue = state.ReferenceResolver
+                            .ResolveReference(property.Value.GetString()!);
                         refMetadataFound = true;
                     }
                 }

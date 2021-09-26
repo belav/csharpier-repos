@@ -35,10 +35,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
         /// never actually call into this member.
         /// </summary>
         private static readonly FindReferencesSearchOptions s_nonParallelSearch =
-            FindReferencesSearchOptions.Default.With(
-                @explicit: false,
-                unidirectionalHierarchyCascade: true
-            );
+            FindReferencesSearchOptions.Default
+                .With(@explicit: false, unidirectionalHierarchyCascade: true);
 
         private static async Task<T?> FindAsync<T>(
             Solution solution,
@@ -76,13 +74,13 @@ namespace Microsoft.CodeAnalysis.CodeLens
             try
             {
                 await SymbolFinder.FindReferencesAsync(
-                        symbol,
-                        solution,
-                        progress,
-                        documents: null,
-                        s_nonParallelSearch,
-                        progress.CancellationToken
-                    )
+                    symbol,
+                    solution,
+                    progress,
+                    documents: null,
+                    s_nonParallelSearch,
+                    progress.CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return await onResults(progress).ConfigureAwait(false);
@@ -121,36 +119,36 @@ namespace Microsoft.CodeAnalysis.CodeLens
         )
         {
             var projectVersion = await GetProjectCodeLensVersionAsync(
-                    solution,
-                    documentId.ProjectId,
-                    cancellationToken
-                )
+                solution,
+                documentId.ProjectId,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return await FindAsync(
-                    solution,
-                    documentId,
-                    syntaxNode,
-                    progress =>
-                        Task.FromResult(
-                            new ReferenceCount(
-                                progress.SearchCap > 0
-                                  ? Math.Min(progress.ReferencesCount, progress.SearchCap)
-                                  : progress.ReferencesCount,
-                                progress.SearchCapReached,
-                                projectVersion.ToString()
-                            )
-                        ),
-                    progress =>
-                        Task.FromResult(
-                            new ReferenceCount(
-                                progress.SearchCap,
-                                isCapped: true,
-                                projectVersion.ToString()
-                            )
-                        ),
-                    maxSearchResults,
-                    cancellationToken
-                )
+                solution,
+                documentId,
+                syntaxNode,
+                progress =>
+                    Task.FromResult(
+                        new ReferenceCount(
+                            progress.SearchCap > 0
+                              ? Math.Min(progress.ReferencesCount, progress.SearchCap)
+                              : progress.ReferencesCount,
+                            progress.SearchCapReached,
+                            projectVersion.ToString()
+                        )
+                    ),
+                progress =>
+                    Task.FromResult(
+                        new ReferenceCount(
+                            progress.SearchCap,
+                            isCapped: true,
+                            projectVersion.ToString()
+                        )
+                    ),
+                maxSearchResults,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -174,19 +172,19 @@ namespace Microsoft.CodeAnalysis.CodeLens
             if (langServices == null)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        "Unsupported language '{0}'",
-                        semanticModel.Language
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            "Unsupported language '{0}'",
+                            semanticModel.Language
+                        ),
                     nameof(semanticModel)
                 );
             }
 
             var position = location.SourceSpan.Start;
-            var token = (
-                await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)
-            ).FindToken(position, true);
+            var token = (await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false))
+                .FindToken(position, true);
             var node = GetEnclosingCodeElementNode(
                 document,
                 token,
@@ -299,30 +297,30 @@ namespace Microsoft.CodeAnalysis.CodeLens
         )
         {
             return await FindAsync(
-                    solution,
-                    documentId,
-                    syntaxNode,
-                    async progress =>
-                    {
-                        var referenceTasks = progress.Locations.Select(
-                                location =>
-                                    GetDescriptorOfEnclosingSymbolAsync(
-                                        solution,
-                                        location,
-                                        cancellationToken
-                                    )
-                            )
-                            .ToArray();
+                solution,
+                documentId,
+                syntaxNode,
+                async progress =>
+                {
+                    var referenceTasks = progress.Locations
+                        .Select(
+                            location =>
+                                GetDescriptorOfEnclosingSymbolAsync(
+                                    solution,
+                                    location,
+                                    cancellationToken
+                                )
+                        )
+                        .ToArray();
 
-                        var result = await Task.WhenAll(referenceTasks).ConfigureAwait(false);
+                    var result = await Task.WhenAll(referenceTasks).ConfigureAwait(false);
 
-                        return result.ToImmutableArray();
-                    },
-                    onCapped: null,
-                    searchCap: 0,
-                    cancellationToken: cancellationToken
-                )
-                .ConfigureAwait(false);
+                    return result.ToImmutableArray();
+                },
+                onCapped: null,
+                searchCap: 0,
+                cancellationToken: cancellationToken
+            ).ConfigureAwait(false);
         }
 
         private static ISymbol GetEnclosingMethod(
@@ -402,7 +400,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 syntaxNode,
                 async progress =>
                 {
-                    var descriptorTasks = progress.Locations.Select(
+                    var descriptorTasks = progress.Locations
+                        .Select(
                             location =>
                                 TryGetMethodDescriptorAsync(location, solution, cancellationToken)
                         )

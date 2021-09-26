@@ -27,8 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
     public abstract class EditAndContinueTestBase : EmitMetadataTestBase
     {
         // PDB reader can only be accessed from a single thread, so avoid concurrent compilation:
-        protected readonly CSharpCompilationOptions ComSafeDebugDll =
-            TestOptions.DebugDll.WithConcurrentBuild(false);
+        protected readonly CSharpCompilationOptions ComSafeDebugDll = TestOptions.DebugDll
+            .WithConcurrentBuild(false);
 
         internal static readonly Func<
             MethodDefinitionHandle,
@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             new MetadataVisualizer(
                 new[] { baseline.MetadataReader }.Concat(deltas.Select(d => d.Reader)).ToArray(),
                 result
-            ).VisualizeAllGenerations();
+            )
+                .VisualizeAllGenerations();
             return result.ToString();
         }
 
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                 {
                     if (newNode.IsKind(kind))
                     {
-                        return method0.DeclaringSyntaxReferences.Single()
+                        return method0.DeclaringSyntaxReferences
+                            .Single()
                             .SyntaxTree.GetRoot()
                             .DescendantNodes()
                             .Single(n => n.IsKind(kind));
@@ -283,13 +285,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         )
         {
             var actualNames = handles.Select(
-                    handlePair =>
-                        string.Join(
+                handlePair =>
+                    string
+                        .Join(
                             ".",
                             readers.GetString(handlePair.Namespace),
                             readers.GetString(handlePair.Name)
                         )
-                )
+            )
                 .ToArray();
             AssertEx.Equal(expectedNames, actualNames);
         }
@@ -299,12 +302,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             TableIndex tableIndex;
             MetadataTokens.TryGetTableIndex(row.Handle.Kind, out tableIndex);
 
-            return string.Format(
-                "Row({0}, TableIndex.{1}, EditAndContinueOperation.{2})",
-                MetadataTokens.GetRowNumber(row.Handle),
-                tableIndex,
-                row.Operation
-            );
+            return string
+                .Format(
+                    "Row({0}, TableIndex.{1}, EditAndContinueOperation.{2})",
+                    MetadataTokens.GetRowNumber(row.Handle),
+                    tableIndex,
+                    row.Operation
+                );
         }
 
         internal static string EncMapRowToString(EntityHandle handle)
@@ -312,11 +316,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             TableIndex tableIndex;
             MetadataTokens.TryGetTableIndex(handle.Kind, out tableIndex);
 
-            return string.Format(
-                "Handle({0}, TableIndex.{1})",
-                MetadataTokens.GetRowNumber(handle),
-                tableIndex
-            );
+            return string
+                .Format(
+                    "Handle({0}, TableIndex.{1})",
+                    MetadataTokens.GetRowNumber(handle),
+                    tableIndex
+                );
         }
 
         internal static string AttributeRowToString(CustomAttributeRow row)
@@ -326,13 +331,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             MetadataTokens.TryGetTableIndex(row.ParentToken.Kind, out parentTableIndex);
             MetadataTokens.TryGetTableIndex(row.ConstructorToken.Kind, out constructorTableIndex);
 
-            return string.Format(
-                "new CustomAttributeRow(Handle({0}, TableIndex.{1}), Handle({2}, TableIndex.{3}))",
-                MetadataTokens.GetRowNumber(row.ParentToken),
-                parentTableIndex,
-                MetadataTokens.GetRowNumber(row.ConstructorToken),
-                constructorTableIndex
-            );
+            return string
+                .Format(
+                    "new CustomAttributeRow(Handle({0}, TableIndex.{1}), Handle({2}, TableIndex.{3}))",
+                    MetadataTokens.GetRowNumber(row.ParentToken),
+                    parentTableIndex,
+                    MetadataTokens.GetRowNumber(row.ConstructorToken),
+                    constructorTableIndex
+                );
         }
 
         internal static void SaveImages(

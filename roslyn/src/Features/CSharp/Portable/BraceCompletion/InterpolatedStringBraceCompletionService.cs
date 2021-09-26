@@ -46,10 +46,10 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
         ) =>
             OpeningBrace == brace
             && await IsPositionInInterpolatedStringContextAsync(
-                    document,
-                    openingPosition,
-                    cancellationToken
-                )
+                document,
+                openingPosition,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
         protected override bool IsValidOpeningBraceToken(SyntaxToken leftToken) =>
@@ -105,12 +105,13 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var token = root.FindTokenOnLeftOfPosition(start);
-            return root.SyntaxTree.IsExpressionContext(
-                    start,
-                    token,
-                    attributes: false,
-                    cancellationToken: cancellationToken
-                ) || root.SyntaxTree.IsStatementContext(start, token, cancellationToken);
+            return root.SyntaxTree
+                    .IsExpressionContext(
+                        start,
+                        token,
+                        attributes: false,
+                        cancellationToken: cancellationToken
+                    ) || root.SyntaxTree.IsStatementContext(start, token, cancellationToken);
         }
     }
 }

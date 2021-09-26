@@ -113,9 +113,8 @@ namespace System.Collections.Tests
 
             DebuggerAttributeInfo debuggerAttribute =
                 DebuggerAttributes.ValidateDebuggerTypeProxyProperties(testQueue);
-            PropertyInfo infoProperty = debuggerAttribute.Properties.Single(
-                property => property.Name == "Items"
-            );
+            PropertyInfo infoProperty = debuggerAttribute.Properties
+                .Single(property => property.Name == "Items");
             object[] items = (object[])infoProperty.GetValue(debuggerAttribute.Instance);
 
             Assert.Equal(testQueue.ToArray(), items);
@@ -1049,12 +1048,13 @@ namespace System.Collections.Tests
 
             for (int i = 0; i < _threadsToUse; i++)
             {
-                tasks[i] = Task.Factory.StartNew(
-                    action,
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                );
+                tasks[i] = Task.Factory
+                    .StartNew(
+                        action,
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
             }
 
             _threadCount = _threadsToUse;

@@ -249,9 +249,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 SqlServerStrings.IdentityBadType("Name", nameof(Splot), "string"),
                 Assert.Throws<ArgumentException>(
                     () =>
-                        new PropertyBuilder(
-                            (IMutableProperty)propertyBuilder.Metadata
-                        ).UseIdentityColumn()
+                        new PropertyBuilder((IMutableProperty)propertyBuilder.Metadata)
+                            .UseIdentityColumn()
                 ).Message
             );
         }

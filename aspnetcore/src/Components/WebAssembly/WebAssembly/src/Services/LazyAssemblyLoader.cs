@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
         public LazyAssemblyLoader(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
-            _loadedAssemblyCache = AppDomain.CurrentDomain.GetAssemblies()
+            _loadedAssemblyCache = AppDomain.CurrentDomain
+                .GetAssemblies()
                 .Select(a => a.GetName().Name + ".dll")
                 .ToHashSet();
         }
@@ -128,10 +129,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
                 var loadedAssembly =
                     pdb.Length == 0
                         ? AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(assembly))
-                        : AssemblyLoadContext.Default.LoadFromStream(
-                              new MemoryStream(assembly),
-                              new MemoryStream(pdb)
-                          );
+                        : AssemblyLoadContext.Default
+                          .LoadFromStream(new MemoryStream(assembly), new MemoryStream(pdb));
                 loadedAssemblies.Add(loadedAssembly);
                 _loadedAssemblyCache.Add(loadedAssembly.GetName().Name + ".dll");
             }

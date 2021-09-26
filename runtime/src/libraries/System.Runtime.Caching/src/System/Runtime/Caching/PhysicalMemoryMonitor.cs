@@ -96,13 +96,14 @@ namespace System.Runtime.Caching
                 }
 #if PERF
                 Debug.WriteLine(
-                    string.Format(
-                        "PhysicalMemoryMonitor.GetPercentToTrim: percent={0:N}, lastTrimPercent={1:N}, secondsSinceTrim={2:N}{3}",
-                        percent,
-                        lastTrimPercent,
-                        ticksSinceTrim / TimeSpan.TicksPerSecond,
-                        Environment.NewLine
-                    )
+                    string
+                        .Format(
+                            "PhysicalMemoryMonitor.GetPercentToTrim: percent={0:N}, lastTrimPercent={1:N}, secondsSinceTrim={2:N}{3}",
+                            percent,
+                            lastTrimPercent,
+                            ticksSinceTrim / TimeSpan.TicksPerSecond,
+                            Environment.NewLine
+                        )
                 );
 #endif
             }

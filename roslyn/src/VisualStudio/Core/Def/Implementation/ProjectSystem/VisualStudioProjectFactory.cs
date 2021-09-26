@@ -80,15 +80,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // moved off we'll need to fix up it's constructor to be free-threaded.
 
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            _visualStudioWorkspaceImpl.Services.GetRequiredService<VisualStudioMetadataReferenceManager>();
+            _visualStudioWorkspaceImpl.Services
+                .GetRequiredService<VisualStudioMetadataReferenceManager>();
 
             // Since we're on the UI thread here anyways, use that as an opportunity to grab the
             // IVsSolution object and solution file path.
             //
             // ConfigureAwait(true) as we have to come back to the UI thread to do the cast to IVsSolution2.
             var solution = (IVsSolution2?)await _serviceProvider.GetServiceAsync(
-                    typeof(SVsSolution)
-                )
+                typeof(SVsSolution)
+            )
                 .ConfigureAwait(true);
             var solutionFilePath =
                 solution != null
@@ -97,8 +98,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     : null;
 
             await _visualStudioWorkspaceImpl.EnsureDocumentOptionProvidersInitializedAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(true);
 
             // From this point on, we start mutating the solution.  So make us non cancellable.
@@ -137,15 +138,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 w =>
                 {
                     var projectInfo = ProjectInfo.Create(
-                            id,
-                            versionStamp,
-                            name: projectSystemName,
-                            assemblyName: assemblyName,
-                            language: language,
-                            filePath: creationInfo.FilePath,
-                            compilationOptions: creationInfo.CompilationOptions,
-                            parseOptions: creationInfo.ParseOptions
-                        )
+                        id,
+                        versionStamp,
+                        name: projectSystemName,
+                        assemblyName: assemblyName,
+                        language: language,
+                        filePath: creationInfo.FilePath,
+                        compilationOptions: creationInfo.CompilationOptions,
+                        parseOptions: creationInfo.ParseOptions
+                    )
                         .WithTelemetryId(creationInfo.ProjectGuid);
 
                     // If we don't have any projects and this is our first project being added, then we'll create a new SolutionId
@@ -155,12 +156,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                         w.OnSolutionAdded(
                             SolutionInfo.Create(
-                                    SolutionId.CreateNewId(solutionFilePath),
-                                    VersionStamp.Create(),
-                                    solutionFilePath,
-                                    projects: new[] { projectInfo },
-                                    analyzerReferences: w.CurrentSolution.AnalyzerReferences
-                                )
+                                SolutionId.CreateNewId(solutionFilePath),
+                                VersionStamp.Create(),
+                                solutionFilePath,
+                                projects: new[] { projectInfo },
+                                analyzerReferences: w.CurrentSolution.AnalyzerReferences
+                            )
                                 .WithTelemetryId(solutionSessionId)
                         );
                     }
@@ -196,20 +197,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             Guid projectGuid
         )
         {
-            return _threadingContext.JoinableTaskFactory.Run(
-                async () =>
-                    await (
-                        (IVsTypeScriptVisualStudioProjectFactory)this
-                    ).CreateAndAddToWorkspaceAsync(
-                            projectSystemName,
-                            language,
-                            projectFilePath,
-                            hierarchy,
-                            projectGuid,
-                            CancellationToken.None
-                        )
-                        .ConfigureAwait(false)
-            );
+            return _threadingContext.JoinableTaskFactory
+                .Run(
+                    async () =>
+                        await ((IVsTypeScriptVisualStudioProjectFactory)this)
+                            .CreateAndAddToWorkspaceAsync(
+                                projectSystemName,
+                                language,
+                                projectFilePath,
+                                hierarchy,
+                                projectGuid,
+                                CancellationToken.None
+                            )
+                            .ConfigureAwait(false)
+                );
         }
 
         async ValueTask<VSTypeScriptVisualStudioProjectWrapper> IVsTypeScriptVisualStudioProjectFactory.CreateAndAddToWorkspaceAsync(
@@ -228,11 +229,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 ProjectGuid = projectGuid,
             };
             var visualStudioProject = await this.CreateAndAddToWorkspaceAsync(
-                    projectSystemName,
-                    language,
-                    projectInfo,
-                    cancellationToken
-                )
+                projectSystemName,
+                language,
+                projectInfo,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return new VSTypeScriptVisualStudioProjectWrapper(visualStudioProject);
         }

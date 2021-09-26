@@ -66,18 +66,19 @@ namespace Microsoft.CodeAnalysis.Remote
                         var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                             .ConfigureAwait(false);
                         var syntaxNode = await TryFindNodeAsync(
-                                solution,
-                                documentId,
-                                textSpan,
-                                cancellationToken
-                            )
+                            solution,
+                            documentId,
+                            textSpan,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (syntaxNode == null)
                         {
                             return null;
                         }
 
-                        return await CodeLensReferencesServiceFactory.Instance.GetReferenceCountAsync(
+                        return await CodeLensReferencesServiceFactory.Instance
+                            .GetReferenceCountAsync(
                                 solution,
                                 documentId,
                                 syntaxNode,
@@ -112,18 +113,19 @@ namespace Microsoft.CodeAnalysis.Remote
                         var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                             .ConfigureAwait(false);
                         var syntaxNode = await TryFindNodeAsync(
-                                solution,
-                                documentId,
-                                textSpan,
-                                cancellationToken
-                            )
+                            solution,
+                            documentId,
+                            textSpan,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (syntaxNode == null)
                         {
                             return null;
                         }
 
-                        return await CodeLensReferencesServiceFactory.Instance.FindReferenceLocationsAsync(
+                        return await CodeLensReferencesServiceFactory.Instance
+                            .FindReferenceLocationsAsync(
                                 solution,
                                 documentId,
                                 syntaxNode,
@@ -157,18 +159,19 @@ namespace Microsoft.CodeAnalysis.Remote
                         var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                             .ConfigureAwait(false);
                         var syntaxNode = await TryFindNodeAsync(
-                                solution,
-                                documentId,
-                                textSpan,
-                                cancellationToken
-                            )
+                            solution,
+                            documentId,
+                            textSpan,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (syntaxNode == null)
                         {
                             return null;
                         }
 
-                        return await CodeLensReferencesServiceFactory.Instance.FindReferenceMethodsAsync(
+                        return await CodeLensReferencesServiceFactory.Instance
+                            .FindReferenceMethodsAsync(
                                 solution,
                                 documentId,
                                 syntaxNode,
@@ -202,18 +205,19 @@ namespace Microsoft.CodeAnalysis.Remote
                         var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                             .ConfigureAwait(false);
                         var syntaxNode = await TryFindNodeAsync(
-                                solution,
-                                documentId,
-                                textSpan,
-                                cancellationToken
-                            )
+                            solution,
+                            documentId,
+                            textSpan,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (syntaxNode == null)
                         {
                             return null;
                         }
 
-                        return await CodeLensReferencesServiceFactory.Instance.GetFullyQualifiedNameAsync(
+                        return await CodeLensReferencesServiceFactory.Instance
+                            .GetFullyQualifiedNameAsync(
                                 solution,
                                 documentId,
                                 syntaxNode,

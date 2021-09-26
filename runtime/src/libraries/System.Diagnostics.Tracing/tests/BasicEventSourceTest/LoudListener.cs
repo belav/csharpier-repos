@@ -27,19 +27,21 @@ namespace BasicEventSourceTests
 
             Debug.Write(string.Format("Event {0} ", eventData.EventId));
             Debug.Write(
-                string.Format(
-                    " (activity {0}{1}) ",
-                    eventData.ActivityId,
-                    eventData.RelatedActivityId != Guid.Empty
-                      ? "->" + eventData.RelatedActivityId
-                      : ""
-                )
+                string
+                    .Format(
+                        " (activity {0}{1}) ",
+                        eventData.ActivityId,
+                        eventData.RelatedActivityId != Guid.Empty
+                          ? "->" + eventData.RelatedActivityId
+                          : ""
+                    )
             );
             Debug.WriteLine(
-                string.Format(
-                    " ({0}).",
-                    eventData.Payload != null ? string.Join(", ", eventData.Payload) : ""
-                )
+                string
+                    .Format(
+                        " ({0}).",
+                        eventData.Payload != null ? string.Join(", ", eventData.Payload) : ""
+                    )
             );
         }
 

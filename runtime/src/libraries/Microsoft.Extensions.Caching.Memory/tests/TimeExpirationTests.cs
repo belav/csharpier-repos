@@ -64,9 +64,8 @@ namespace Microsoft.Extensions.Caching.Memory
             var value = new object();
             var callbackInvoked = new ManualResetEvent(false);
 
-            var options = new MemoryCacheEntryOptions().SetAbsoluteExpiration(
-                    clock.UtcNow + TimeSpan.FromMinutes(1)
-                )
+            var options = new MemoryCacheEntryOptions()
+                .SetAbsoluteExpiration(clock.UtcNow + TimeSpan.FromMinutes(1))
                 .RegisterPostEvictionCallback(
                     (subkey, subValue, reason, state) =>
                     {
@@ -107,9 +106,8 @@ namespace Microsoft.Extensions.Caching.Memory
                     cache.Set(
                         key,
                         value,
-                        new MemoryCacheEntryOptions().SetAbsoluteExpiration(
-                            TimeSpan.FromMinutes(-1)
-                        )
+                        new MemoryCacheEntryOptions()
+                            .SetAbsoluteExpiration(TimeSpan.FromMinutes(-1))
                     )
             );
         }
@@ -259,7 +257,8 @@ namespace Microsoft.Extensions.Caching.Memory
             var result = cache.Set(
                 key,
                 value,
-                new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(1))
+                new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(1))
                     .SetAbsoluteExpiration(TimeSpan.FromMinutes(2))
             );
             Assert.Same(value, result);

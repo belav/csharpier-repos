@@ -44,15 +44,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             // which are containers of managed module instances (see GetEmbeddedModules())
             // but not managed modules themselves. Since GetModuleInstances() will include the
             // embedded modules, we can simply ignore DkmClrNcContainerModuleInstances.
-            return runtime.GetModuleInstances()
-                .OfType<DkmClrModuleInstance>()
-                .Where(
-                    module =>
-                    {
-                        var moduleAppDomain = module.AppDomain;
-                        return !moduleAppDomain.IsUnloaded && (moduleAppDomain.Id == appDomainId);
-                    }
-                );
+            return runtime.GetModuleInstances().OfType<DkmClrModuleInstance>().Where(
+                module =>
+                {
+                    var moduleAppDomain = module.AppDomain;
+                    return !moduleAppDomain.IsUnloaded && (moduleAppDomain.Id == appDomainId);
+                }
+            );
         }
 
         internal static ImmutableArray<MetadataBlock> GetMetadataBlocks(
@@ -141,9 +139,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             var builder = ArrayBuilder<AssemblyReaders>.GetInstance();
             foreach (
-                DkmClrModuleInstance module in instructionAddress.RuntimeInstance.GetModulesInAppDomain(
-                    instructionAddress.ModuleInstance.AppDomain
-                )
+                DkmClrModuleInstance module in instructionAddress.RuntimeInstance
+                    .GetModulesInAppDomain(instructionAddress.ModuleInstance.AppDomain)
             )
             {
                 var symReader = module.GetSymReader();

@@ -20,11 +20,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public static InMemoryTestStore Create(string name) => new(name, shared: false);
 
         public static InMemoryTestStore CreateInitialized(string name) =>
-            new InMemoryTestStore(name, shared: false).InitializeInMemory(
-                null,
-                (Func<DbContext>)null,
-                null
-            );
+            new InMemoryTestStore(name, shared: false)
+                .InitializeInMemory(null, (Func<DbContext>)null, null);
 
         public InMemoryTestStore InitializeInMemory(
             IServiceProvider serviceProvider,

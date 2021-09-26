@@ -102,9 +102,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             }
 
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    objectCreationExpression,
-                    cancellationToken
-                )
+                objectCreationExpression,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (
                 semanticModel.GetTypeInfo(objectCreationExpression, cancellationToken).Type

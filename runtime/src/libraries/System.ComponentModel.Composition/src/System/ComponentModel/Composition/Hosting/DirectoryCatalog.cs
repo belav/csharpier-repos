@@ -510,8 +510,8 @@ namespace System.ComponentModel.Composition.Hosting
         public override IEnumerator<ComposablePartDefinition> GetEnumerator()
         {
             return _catalogCollection.SelectMany(
-                    catalog => catalog as IEnumerable<ComposablePartDefinition>
-                )
+                catalog => catalog as IEnumerable<ComposablePartDefinition>
+            )
                 .GetEnumerator();
         }
 
@@ -624,13 +624,13 @@ namespace System.ComponentModel.Composition.Hosting
 
                 // Notify listeners to give them a preview before completeting the changes
                 addedDefinitions = catalogsToAdd.SelectMany(
-                        cat => cat.Item2 as IEnumerable<ComposablePartDefinition>
-                    )
+                    cat => cat.Item2 as IEnumerable<ComposablePartDefinition>
+                )
                     .ToArray<ComposablePartDefinition>();
 
                 removedDefinitions = catalogsToRemove.SelectMany(
-                        cat => cat.Item2 as IEnumerable<ComposablePartDefinition>
-                    )
+                    cat => cat.Item2 as IEnumerable<ComposablePartDefinition>
+                )
                     .ToArray<ComposablePartDefinition>();
 
                 using (var atomicComposition = new AtomicComposition())

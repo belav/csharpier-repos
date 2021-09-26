@@ -45,11 +45,11 @@ namespace Microsoft.CodeAnalysis.Serialization
                 Contract.ThrowIfFalse(state.TryGetStateChecksums(out var stateChecksums));
 
                 await stateChecksums.FindAsync(
-                        state,
-                        searchingChecksumsLeft,
-                        result,
-                        cancellationToken
-                    )
+                    state,
+                    searchingChecksumsLeft,
+                    result,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (searchingChecksumsLeft.Count == 0)
                 {

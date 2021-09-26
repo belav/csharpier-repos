@@ -260,9 +260,9 @@ namespace System.IO
                 ThrowIfWritingNotSupported();
 
                 return _buffer.WriteAsync(
-                        new ReadOnlyMemory<byte>(buffer, offset, count),
-                        cancellationToken
-                    )
+                    new ReadOnlyMemory<byte>(buffer, offset, count),
+                    cancellationToken
+                )
                     .AsTask();
             }
 
@@ -434,9 +434,9 @@ namespace System.IO
                 ValidateBufferArguments(buffer, offset, count);
                 ThrowIfDisposed();
                 return _readBuffer.ReadAsync(
-                        new Memory<byte>(buffer, offset, count),
-                        cancellationToken
-                    )
+                    new Memory<byte>(buffer, offset, count),
+                    cancellationToken
+                )
                     .AsTask();
             }
 
@@ -478,9 +478,9 @@ namespace System.IO
                 ValidateBufferArguments(buffer, offset, count);
                 ThrowIfDisposed();
                 return _writeBuffer.WriteAsync(
-                        new ReadOnlyMemory<byte>(buffer, offset, count),
-                        cancellationToken
-                    )
+                    new ReadOnlyMemory<byte>(buffer, offset, count),
+                    cancellationToken
+                )
                     .AsTask();
             }
 

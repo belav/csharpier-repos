@@ -67,11 +67,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var nodes = await GetPartialsForNamespaceAndTypeAsync(
-                    symbol,
-                    true,
-                    solution,
-                    cancellationToken
-                )
+                symbol,
+                true,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var partials = nodes.ToArray();
 
@@ -129,11 +129,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
                     items.Add(
                         await GetPartialForTypeAsync(
-                                symbol.ContainingType,
-                                CodeGraphNodeIdName.Type,
-                                solution,
-                                cancellationToken
-                            )
+                            symbol.ContainingType,
+                            CodeGraphNodeIdName.Type,
+                            solution,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     );
                 }
@@ -171,12 +171,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
                 items.Add(
                     await GetPartialForTypeAsync(
-                            symbol,
-                            CodeGraphNodeIdName.Type,
-                            solution,
-                            cancellationToken,
-                            isInGenericArguments
-                        )
+                        symbol,
+                        CodeGraphNodeIdName.Type,
+                        solution,
+                        cancellationToken,
+                        isInGenericArguments
+                    )
                         .ConfigureAwait(false)
                 );
             }
@@ -195,42 +195,42 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             if (symbol is IArrayTypeSymbol arrayType)
             {
                 return await GetPartialForArrayTypeAsync(
-                        arrayType,
-                        nodeName,
-                        solution,
-                        cancellationToken
-                    )
+                    arrayType,
+                    nodeName,
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else if (symbol is INamedTypeSymbol namedType)
             {
                 return await GetPartialForNamedTypeAsync(
-                        namedType,
-                        nodeName,
-                        solution,
-                        cancellationToken,
-                        isInGenericArguments
-                    )
+                    namedType,
+                    nodeName,
+                    solution,
+                    cancellationToken,
+                    isInGenericArguments
+                )
                     .ConfigureAwait(false);
             }
             else if (symbol is IPointerTypeSymbol pointerType)
             {
                 return await GetPartialForPointerTypeAsync(
-                        pointerType,
-                        nodeName,
-                        solution,
-                        cancellationToken
-                    )
+                    pointerType,
+                    nodeName,
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else if (symbol is ITypeParameterSymbol typeParameter)
             {
                 return await GetPartialForTypeParameterSymbolAsync(
-                        typeParameter,
-                        nodeName,
-                        solution,
-                        cancellationToken
-                    )
+                    typeParameter,
+                    nodeName,
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else if (symbol is IDynamicTypeSymbol)
@@ -306,12 +306,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     foreach (var arg in namedType.TypeArguments)
                     {
                         var nodes = await GetPartialsForNamespaceAndTypeAsync(
-                                arg,
-                                includeNamespace: true,
-                                solution: solution,
-                                cancellationToken: cancellationToken,
-                                isInGenericArguments: true
-                            )
+                            arg,
+                            includeNamespace: true,
+                            solution: solution,
+                            cancellationToken: cancellationToken,
+                            isInGenericArguments: true
+                        )
                             .ConfigureAwait(false);
                         genericArguments.Add(GraphNodeId.GetNested(nodes.ToArray()));
                     }
@@ -328,12 +328,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 {
                     partials.Add(
                         await GetPartialForTypeAsync(
-                                namedType.ContainingType,
-                                CodeGraphNodeIdName.ParentType,
-                                solution,
-                                cancellationToken,
-                                hasGenericArguments
-                            )
+                            namedType.ContainingType,
+                            CodeGraphNodeIdName.ParentType,
+                            solution,
+                            cancellationToken,
+                            hasGenericArguments
+                        )
                             .ConfigureAwait(false)
                     );
                 }
@@ -373,11 +373,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             {
                 partials.Add(
                     await GetPartialForTypeAsync(
-                            pointerType.PointedAtType.ContainingType,
-                            CodeGraphNodeIdName.ParentType,
-                            solution,
-                            cancellationToken
-                        )
+                        pointerType.PointedAtType.ContainingType,
+                        CodeGraphNodeIdName.ParentType,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 );
             }
@@ -410,11 +410,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             );
             partials.Add(
                 await GetPartialForTypeAsync(
-                        arrayType.ElementType,
-                        CodeGraphNodeIdName.ParentType,
-                        solution,
-                        cancellationToken
-                    )
+                    arrayType.ElementType,
+                    CodeGraphNodeIdName.ParentType,
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             );
 
@@ -444,11 +444,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             else
             {
                 var nodes = await GetPartialsForNamespaceAndTypeAsync(
-                        typeParameterSymbol,
-                        false,
-                        solution,
-                        cancellationToken
-                    )
+                    typeParameterSymbol,
+                    false,
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return GraphNodeId.GetPartial(
                     nodeName,
@@ -482,11 +482,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             partials.AddRange(
                 await GetPartialsForNamespaceAndTypeAsync(
-                        member.ContainingType,
-                        true,
-                        solution,
-                        cancellationToken
-                    )
+                    member.ContainingType,
+                    true,
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             );
 
@@ -515,11 +515,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     foreach (var p in parameters)
                     {
                         var parameterIds = await GetPartialsForNamespaceAndTypeAsync(
-                                p.Type,
-                                true,
-                                solution,
-                                cancellationToken
-                            )
+                            p.Type,
+                            true,
+                            solution,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         var nodes = parameterIds.ToList();
                         if (p.IsRefOrOut())
@@ -548,11 +548,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         //     }
 
                         var nodes = await GetPartialsForNamespaceAndTypeAsync(
-                                methodSymbol.ReturnType,
-                                true,
-                                solution,
-                                cancellationToken
-                            )
+                            methodSymbol.ReturnType,
+                            true,
+                            solution,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         var returnTypePartial = nodes.ToList();
                         returnTypePartial.Add(
@@ -699,10 +699,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var assembly = await GetAssemblyFullPathAsync(
-                    assemblySymbol,
-                    solution,
-                    cancellationToken
-                )
+                assemblySymbol,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (assembly != null)
             {
@@ -776,20 +776,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             }
 
             var memberId = await GetIdForMemberAsync(
-                    symbol.ContainingSymbol,
-                    solution,
-                    cancellationToken
-                )
+                symbol.ContainingSymbol,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (memberId != null)
             {
                 var builder = new CodeQualifiedIdentifierBuilder(memberId);
                 builder.LocalVariable = symbol.Name;
                 builder.LocalVariableIndex = await GetLocalVariableIndexAsync(
-                        symbol,
-                        solution,
-                        cancellationToken
-                    )
+                    symbol,
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(continueOnCapturedContext: false);
 
                 return builder.ToQualifiedIdentifier();

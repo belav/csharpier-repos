@@ -82,11 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             // The base analyzer may impose further limitations
-            return base.ShouldAnalyzeForEachStatement(
-                forEachStatement,
-                semanticModel,
-                cancellationToken
-            );
+            return base
+                .ShouldAnalyzeForEachStatement(forEachStatement, semanticModel, cancellationToken);
         }
 
         protected override bool IsStylePreferred(in State state)
@@ -134,15 +131,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             if (
-                typeName.Parent.IsKind(
-                    SyntaxKind.VariableDeclaration,
-                    out VariableDeclarationSyntax? variableDeclaration
-                )
-                && typeName.Parent.IsParentKind(
-                    SyntaxKind.LocalDeclarationStatement,
-                    SyntaxKind.ForStatement,
-                    SyntaxKind.UsingStatement
-                )
+                typeName.Parent
+                    .IsKind(
+                        SyntaxKind.VariableDeclaration,
+                        out VariableDeclarationSyntax? variableDeclaration
+                    )
+                && typeName.Parent
+                    .IsParentKind(
+                        SyntaxKind.LocalDeclarationStatement,
+                        SyntaxKind.ForStatement,
+                        SyntaxKind.UsingStatement
+                    )
             )
             {
                 // implicitly typed variables cannot be constants.
@@ -171,8 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 if (!variableDeclaration.Type.IsKind(SyntaxKind.PointerType))
                 {
                     var containsStackAlloc = initializer.DescendantNodesAndSelf(
-                            descendIntoChildren: node => !node.IsAnyLambdaOrAnonymousMethod()
-                        )
+                        descendIntoChildren: node => !node.IsAnyLambdaOrAnonymousMethod()
+                    )
                         .Any(node => node.IsKind(SyntaxKind.StackAllocArrayCreationExpression));
 
                     if (containsStackAlloc)
@@ -264,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             );
 
             var newTree = tree.WithRootAndOptions(newRoot, tree.Options);
-            var newSemanticModel = semanticModel.Compilation.ReplaceSyntaxTree(tree, newTree)
+            var newSemanticModel = semanticModel.Compilation
+                .ReplaceSyntaxTree(tree, newTree)
                 .GetSemanticModel(newTree);
 
             var newDeclarationTypeNode = newTree.GetRoot(cancellationToken)
@@ -273,10 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             var newDeclarationType =
                 newSemanticModel.GetTypeInfo(newDeclarationTypeNode, cancellationToken).Type;
 
-            return SymbolEquivalenceComparer.TupleNamesMustMatchInstance.Equals(
-                declarationType,
-                newDeclarationType
-            );
+            return SymbolEquivalenceComparer.TupleNamesMustMatchInstance
+                .Equals(declarationType, newDeclarationType);
         }
 
         private static bool IsSafeToSwitchToVarWithoutNeedingSpeculation(
@@ -454,11 +452,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             // The base analyzer may impose further limitations
-            return base.ShouldAnalyzeDeclarationExpression(
-                declaration,
-                semanticModel,
-                cancellationToken
-            );
+            return base
+                .ShouldAnalyzeDeclarationExpression(declaration, semanticModel, cancellationToken);
         }
     }
 }

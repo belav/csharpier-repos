@@ -62,10 +62,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 }
             }
 
-            var id = string.Join(
-                "&",
-                bindingSources.Select(s => s.Id).OrderBy(s => s, StringComparer.Ordinal)
-            );
+            var id = string
+                .Join(
+                    "&",
+                    bindingSources.Select(s => s.Id).OrderBy(s => s, StringComparer.Ordinal)
+                );
             return new CompositeBindingSource(id, displayName, bindingSources);
         }
 

@@ -90,7 +90,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Select2()
         {
-            var count = (new object[] { 0, 1, 2 }).AsQueryable()
+            var count = (new object[] { 0, 1, 2 })
+                .AsQueryable()
                 .Select((o, i) => (int)o + i)
                 .Count();
             Assert.Equal(3, count);

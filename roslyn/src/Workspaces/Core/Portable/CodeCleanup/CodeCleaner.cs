@@ -53,11 +53,11 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             return await CleanupAsync(
-                    document,
-                    new TextSpan(0, text.Length),
-                    providers,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                new TextSpan(0, text.Length),
+                providers,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -75,13 +75,11 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             return await CleanupAsync(
-                    document,
-                    root.GetAnnotatedNodesAndTokens(annotation)
-                        .Select(n => n.Span)
-                        .ToImmutableArray(),
-                    providers,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                root.GetAnnotatedNodesAndTokens(annotation).Select(n => n.Span).ToImmutableArray(),
+                providers,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -142,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             CancellationToken cancellationToken = default
         )
         {
-            var cleanupService = workspace.Services.GetLanguageServices(root.Language)
+            var cleanupService = workspace.Services
+                .GetLanguageServices(root.Language)
                 .GetRequiredService<ICodeCleanerService>();
             return cleanupService.CleanupAsync(
                 root,

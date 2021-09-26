@@ -454,7 +454,8 @@ namespace AutoMapper.UnitTests
                     {
                         new DestinationValuePair { Key = "Key1", Value = "Value1" },
                         new DestinationValuePair { Key = "Key2", Value = "Value2" }
-                    }.ToArray()
+                    }
+                        .ToArray()
                 };
 
                 _result = Mapper.Map<FooDto, FooObject>(source);
@@ -532,7 +533,8 @@ namespace AutoMapper.UnitTests
                 {
                     new DestinationValuePair { Key = "Key1", Value = "Value1" },
                     new DestinationValuePair { Key = "Key2", Value = "Value2" }
-                }.ToArray()
+                }
+                    .ToArray()
             };
 
             _result = Mapper.Map<FooDto, FooObject>(source);
@@ -586,7 +588,8 @@ namespace AutoMapper.UnitTests
                 {
                     new DestinationValuePair { Key = "Key1", Value = "Value1" },
                     new DestinationValuePair { Key = "Key2", Value = "Value2" }
-                }.ToArray()
+                }
+                    .ToArray()
             };
 
             _result = Mapper.Map<FooDto, FooObject>(source);

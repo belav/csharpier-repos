@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     {
                         if (document.Project == project)
                             documentTasks.Add(
-                                Task.Factory.StartNew(
+                                Task.Factory
+                                    .StartNew(
                                         () => ProcessDocumentQueueAsync(document, documentQueue),
                                         _cancellationToken,
                                         TaskCreationOptions.None,

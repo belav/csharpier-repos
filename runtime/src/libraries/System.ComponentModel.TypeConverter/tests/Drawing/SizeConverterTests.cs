@@ -233,12 +233,13 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertFromString(int width, int height)
         {
             var point = (Size)Converter.ConvertFromString(
-                string.Format(
-                    "{0}{2} {1}",
-                    width,
-                    height,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                )
+                string
+                    .Format(
+                        "{0}{2} {1}",
+                        width,
+                        height,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
             );
             Assert.Equal(width, point.Width);
             Assert.Equal(height, point.Height);
@@ -270,12 +271,13 @@ namespace System.ComponentModel.TypeConverterTests
         {
             var str = Converter.ConvertToString(new Size(width, height));
             Assert.Equal(
-                string.Format(
-                    "{0}{2} {1}",
-                    width,
-                    height,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                ),
+                string
+                    .Format(
+                        "{0}{2} {1}",
+                        width,
+                        height,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    ),
                 str
             );
         }

@@ -27,12 +27,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
 
-            var solution = new AdhocWorkspace().CurrentSolution.AddProject(
-                    pid,
-                    "test",
-                    "test",
-                    LanguageNames.CSharp
-                )
+            var solution = new AdhocWorkspace().CurrentSolution
+                .AddProject(pid, "test", "test", LanguageNames.CSharp)
                 .AddMetadataReference(pid, TestMetadata.Net451.mscorlib)
                 .AddDocument(did, "goo.cs", SourceText.From(sourceText));
 

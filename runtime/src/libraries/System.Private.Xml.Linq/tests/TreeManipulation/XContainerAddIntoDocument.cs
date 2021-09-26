@@ -290,10 +290,10 @@ namespace XLinqTests
                 string stringOnlyContentCopy =
                     stringOnlyContent == null ? null : new string(stringOnlyContent.ToCharArray());
                 List<ExpectedValue> expectedNodes = CalculateExpectedContent(
-                        doc,
-                        toInsert,
-                        stringOnlyContentCopy
-                    )
+                    doc,
+                    toInsert,
+                    stringOnlyContentCopy
+                )
                     .ProcessNodes()
                     .ToList();
 

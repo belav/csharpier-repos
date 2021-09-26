@@ -38,26 +38,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Progression
             {
                 case SymbolKind.Assembly:
                     return await GraphNodeIdCreation.GetIdForAssemblyAsync(
-                            (IAssemblySymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        (IAssemblySymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 case SymbolKind.Namespace:
                     return await GraphNodeIdCreation.GetIdForNamespaceAsync(
-                            (INamespaceSymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        (INamespaceSymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 case SymbolKind.NamedType:
                     return await GraphNodeIdCreation.GetIdForTypeAsync(
-                            (ITypeSymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        (ITypeSymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 case SymbolKind.Method:
@@ -65,35 +65,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Progression
                 case SymbolKind.Property:
                 case SymbolKind.Event:
                     return await GraphNodeIdCreation.GetIdForMemberAsync(
-                            symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 case SymbolKind.Parameter:
                     return await GraphNodeIdCreation.GetIdForParameterAsync(
-                            (IParameterSymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        (IParameterSymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 case SymbolKind.Local:
                 case SymbolKind.RangeVariable:
                     return await GraphNodeIdCreation.GetIdForLocalVariableAsync(
-                            symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 default:
                     throw new ArgumentException(
-                        string.Format(
-                            ServicesVSResources.Can_t_create_a_node_id_for_this_symbol_kind_colon_0,
-                            symbol
-                        )
+                        string
+                            .Format(
+                                ServicesVSResources.Can_t_create_a_node_id_for_this_symbol_kind_colon_0,
+                                symbol
+                            )
                     );
             }
         }
@@ -121,11 +122,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Progression
             }
 
             return await GraphBuilder.GetOrCreateNodeAsync(
-                    graph,
-                    symbol,
-                    solution,
-                    cancellationToken
-                )
+                graph,
+                symbol,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

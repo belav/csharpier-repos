@@ -51,13 +51,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     )
                     {
                         var documentDiagnostics = await fixAllContext.GetDocumentDiagnosticsAsync(
-                                document
-                            )
+                            document
+                        )
                             .ConfigureAwait(false);
-                        return ImmutableDictionary<
-                            Document,
-                            ImmutableArray<Diagnostic>
-                        >.Empty.SetItem(document, documentDiagnostics);
+                        return ImmutableDictionary<Document, ImmutableArray<Diagnostic>>.Empty
+                            .SetItem(document, documentDiagnostics);
                     }
                     break;
 
@@ -67,9 +65,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     break;
 
                 case FixAllScope.Solution:
-                    var projectsToFix = project.Solution.Projects.Where(
-                            p => p.Language == project.Language
-                        )
+                    var projectsToFix = project.Solution.Projects
+                        .Where(p => p.Language == project.Language)
                         .ToImmutableArray();
 
                     // Update the progress dialog with the count of projects to actually fix. We'll update the progress
@@ -109,10 +106,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             }
 
             return await GetDocumentDiagnosticsToFixAsync(
-                    fixAllContext.Solution,
-                    allDiagnostics,
-                    fixAllContext.CancellationToken
-                )
+                fixAllContext.Solution,
+                allDiagnostics,
+                fixAllContext.CancellationToken
+            )
                 .ConfigureAwait(false);
 
             async Task AddDocumentDiagnosticsAsync(
@@ -123,8 +120,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 try
                 {
                     var projectDiagnostics = await fixAllContext.GetAllDiagnosticsAsync(
-                            projectToFix
-                        )
+                        projectToFix
+                    )
                         .ConfigureAwait(false);
                     diagnostics.TryAdd(projectToFix.Id, projectDiagnostics);
                 }
@@ -186,22 +183,22 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 FixAllScope.Custom
                   => string.Format(WorkspaceExtensionsResources.Fix_all_0, diagnosticId),
                 FixAllScope.Document
-                  => string.Format(
-                      WorkspaceExtensionsResources.Fix_all_0_in_1,
-                      diagnosticId,
-                      triggerDocument!.Name
-                  ),
+                  => string
+                      .Format(
+                          WorkspaceExtensionsResources.Fix_all_0_in_1,
+                          diagnosticId,
+                          triggerDocument!.Name
+                      ),
                 FixAllScope.Project
-                  => string.Format(
-                      WorkspaceExtensionsResources.Fix_all_0_in_1,
-                      diagnosticId,
-                      triggerProject.Name
-                  ),
+                  => string
+                      .Format(
+                          WorkspaceExtensionsResources.Fix_all_0_in_1,
+                          diagnosticId,
+                          triggerProject.Name
+                      ),
                 FixAllScope.Solution
-                  => string.Format(
-                      WorkspaceExtensionsResources.Fix_all_0_in_Solution,
-                      diagnosticId
-                  ),
+                  => string
+                      .Format(WorkspaceExtensionsResources.Fix_all_0_in_Solution, diagnosticId),
                 _ => throw ExceptionUtilities.UnexpectedValue(fixAllScope),
             };
         }

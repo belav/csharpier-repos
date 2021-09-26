@@ -215,11 +215,12 @@ namespace System.ComponentModel
                     if (ignoreCase)
                     {
                         if (
-                            string.Equals(
-                                _properties[i].Name,
-                                name,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    _properties[i].Name,
+                                    name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             _cachedFoundProperties[name] = _properties[i];

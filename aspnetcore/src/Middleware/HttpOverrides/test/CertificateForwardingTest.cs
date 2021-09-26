@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
         [Fact]
         public void VerifySettingNullHeaderOptionThrows()
         {
-            var services = new ServiceCollection().AddOptions()
+            var services = new ServiceCollection()
+                .AddOptions()
                 .AddCertificateForwarding(o => o.CertificateHeader = null);
             var options = services.BuildServiceProvider()
                 .GetRequiredService<IOptions<CertificateForwardingOptions>>();
@@ -33,7 +34,8 @@ namespace Microsoft.AspNetCore.HttpOverrides
         [Fact]
         public void VerifySettingEmptyHeaderOptionThrows()
         {
-            var services = new ServiceCollection().AddOptions()
+            var services = new ServiceCollection()
+                .AddOptions()
                 .AddCertificateForwarding(o => o.CertificateHeader = "");
             var options = services.BuildServiceProvider()
                 .GetRequiredService<IOptions<CertificateForwardingOptions>>();
@@ -44,41 +46,38 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task VerifyHeaderIsUsedIfNoCertificateAlreadySet()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddCertificateForwarding(options => { });
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.Use(
+                                async (context, next) =>
                                 {
-                                    services.AddCertificateForwarding(options => { });
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            Assert.Null(context.Connection.ClientCertificate);
-                                            await next();
-                                        }
-                                    );
-                                    app.UseCertificateForwarding();
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            Assert.Equal(
-                                                context.Connection.ClientCertificate,
-                                                Certificates.SelfSignedValidWithNoEku
-                                            );
-                                            await next();
-                                        }
-                                    );
+                                    Assert.Null(context.Connection.ClientCertificate);
+                                    await next();
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.UseCertificateForwarding();
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    Assert.Equal(
+                                        context.Connection.ClientCertificate,
+                                        Certificates.SelfSignedValidWithNoEku
+                                    );
+                                    await next();
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -98,43 +97,40 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task VerifyHeaderOverridesCertificateEvenAlreadySet()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddCertificateForwarding(options => { });
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.Use(
+                                async (context, next) =>
                                 {
-                                    services.AddCertificateForwarding(options => { });
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            Assert.Null(context.Connection.ClientCertificate);
-                                            context.Connection.ClientCertificate =
-                                                Certificates.SelfSignedNotYetValid;
-                                            await next();
-                                        }
-                                    );
-                                    app.UseCertificateForwarding();
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            Assert.Equal(
-                                                context.Connection.ClientCertificate,
-                                                Certificates.SelfSignedValidWithNoEku
-                                            );
-                                            await next();
-                                        }
-                                    );
+                                    Assert.Null(context.Connection.ClientCertificate);
+                                    context.Connection.ClientCertificate =
+                                        Certificates.SelfSignedNotYetValid;
+                                    await next();
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.UseCertificateForwarding();
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    Assert.Equal(
+                                        context.Connection.ClientCertificate,
+                                        Certificates.SelfSignedValidWithNoEku
+                                    );
+                                    await next();
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -154,43 +150,40 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task VerifySettingTheAzureHeaderOnTheForwarderOptionsWorks()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddCertificateForwarding(
+                                options => options.CertificateHeader = "X-ARR-ClientCert"
+                            );
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.Use(
+                                async (context, next) =>
                                 {
-                                    services.AddCertificateForwarding(
-                                        options => options.CertificateHeader = "X-ARR-ClientCert"
-                                    );
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            Assert.Null(context.Connection.ClientCertificate);
-                                            await next();
-                                        }
-                                    );
-                                    app.UseCertificateForwarding();
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            Assert.Equal(
-                                                context.Connection.ClientCertificate,
-                                                Certificates.SelfSignedValidWithNoEku
-                                            );
-                                            await next();
-                                        }
-                                    );
+                                    Assert.Null(context.Connection.ClientCertificate);
+                                    await next();
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.UseCertificateForwarding();
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    Assert.Equal(
+                                        context.Connection.ClientCertificate,
+                                        Certificates.SelfSignedValidWithNoEku
+                                    );
+                                    await next();
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -210,40 +203,37 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task VerifyACustomHeaderFailsIfTheHeaderIsNotPresent()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddCertificateForwarding(
+                                options => options.CertificateHeader = "some-random-header"
+                            );
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.Use(
+                                async (context, next) =>
                                 {
-                                    services.AddCertificateForwarding(
-                                        options => options.CertificateHeader = "some-random-header"
-                                    );
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            Assert.Null(context.Connection.ClientCertificate);
-                                            await next();
-                                        }
-                                    );
-                                    app.UseCertificateForwarding();
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            Assert.Null(context.Connection.ClientCertificate);
-                                            await next();
-                                        }
-                                    );
+                                    Assert.Null(context.Connection.ClientCertificate);
+                                    await next();
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.UseCertificateForwarding();
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    Assert.Null(context.Connection.ClientCertificate);
+                                    await next();
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -263,38 +253,35 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task VerifyArrHeaderEncodedCertFailsOnBadEncoding()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddCertificateForwarding(options => { });
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.Use(
+                                async (context, next) =>
                                 {
-                                    services.AddCertificateForwarding(options => { });
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            Assert.Null(context.Connection.ClientCertificate);
-                                            await next();
-                                        }
-                                    );
-                                    app.UseCertificateForwarding();
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            Assert.Null(context.Connection.ClientCertificate);
-                                            await next();
-                                        }
-                                    );
+                                    Assert.Null(context.Connection.ClientCertificate);
+                                    await next();
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.UseCertificateForwarding();
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    Assert.Null(context.Connection.ClientCertificate);
+                                    await next();
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

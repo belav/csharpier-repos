@@ -106,8 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 return;
             }
 
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 NextAction(operations, nextHandler);
@@ -116,9 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
 
             // feature off
             if (
-                !document.Project.Solution.Workspace.Options.GetOption(
-                    InternalFeatureOnOffOptions.AutomaticLineEnder
-                )
+                !document.Project.Solution.Workspace.Options
+                    .GetOption(InternalFeatureOnOffOptions.AutomaticLineEnder)
             )
             {
                 NextAction(operations, nextHandler);
@@ -126,10 +125,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             }
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Automatically_completing
-                )
+                context.OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesResources.Automatically_completing
+                    )
             )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
@@ -168,11 +168,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 if (selectNodeAndOperationKind != null)
                 {
                     var (selectedNode, addBrace) = selectNodeAndOperationKind.Value;
-                    using var transaction = args.TextView.CreateEditTransaction(
-                        EditorFeaturesResources.Automatic_Line_Ender,
-                        _undoRegistry,
-                        _editorOperationsFactoryService
-                    );
+                    using var transaction = args.TextView
+                        .CreateEditTransaction(
+                            EditorFeaturesResources.Automatic_Line_Ender,
+                            _undoRegistry,
+                            _editorOperationsFactoryService
+                        );
                     ModifySelectedNode(
                         args,
                         document,
@@ -194,11 +195,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 );
                 if (endingInsertionPosition != null)
                 {
-                    using var transaction = args.TextView.CreateEditTransaction(
-                        EditorFeaturesResources.Automatic_Line_Ender,
-                        _undoRegistry,
-                        _editorOperationsFactoryService
-                    );
+                    using var transaction = args.TextView
+                        .CreateEditTransaction(
+                            EditorFeaturesResources.Automatic_Line_Ender,
+                            _undoRegistry,
+                            _editorOperationsFactoryService
+                        );
                     InsertEnding(
                         args.TextView,
                         document,
@@ -212,11 +214,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 }
 
                 // Neither of the two operations could be performed
-                using var editTransaction = args.TextView.CreateEditTransaction(
-                    EditorFeaturesResources.Automatic_Line_Ender,
-                    _undoRegistry,
-                    _editorOperationsFactoryService
-                );
+                using var editTransaction = args.TextView
+                    .CreateEditTransaction(
+                        EditorFeaturesResources.Automatic_Line_Ender,
+                        _undoRegistry,
+                        _editorOperationsFactoryService
+                    );
                 NextAction(operations, nextHandler);
                 editTransaction.Complete();
             }
@@ -252,9 +255,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
 
             // if there is only whitespace, token doesn't need to be on same line
             if (
-                string.IsNullOrWhiteSpace(
-                    text.ToString(TextSpan.FromBounds(token.Span.End, line.End))
-                )
+                string
+                    .IsNullOrWhiteSpace(
+                        text.ToString(TextSpan.FromBounds(token.Span.End, line.End))
+                    )
             )
             {
                 return line.End;

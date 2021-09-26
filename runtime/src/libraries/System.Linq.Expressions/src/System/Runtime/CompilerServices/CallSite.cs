@@ -96,7 +96,8 @@ namespace System.Runtime.CompilerServices
 
             if (!ctors.TryGetValue(delegateType, out Func<CallSiteBinder, CallSite>? ctor))
             {
-                MethodInfo method = typeof(CallSite<>).MakeGenericType(delegateType)
+                MethodInfo method = typeof(CallSite<>)
+                    .MakeGenericType(delegateType)
                     .GetMethod(nameof(Create))!;
 
                 if (delegateType.IsCollectible)
@@ -318,43 +319,46 @@ namespace System.Runtime.CompilerServices
                 {
                     if (
                         target
-                        == System.Linq.Expressions.Compiler.DelegateHelpers.GetActionType(
-                            args.AddFirst(typeof(CallSite))
-                        )
+                        == System.Linq.Expressions.Compiler.DelegateHelpers
+                            .GetActionType(args.AddFirst(typeof(CallSite)))
                     )
                     {
-                        method = typeof(UpdateDelegates).GetMethod(
-                            "UpdateAndExecuteVoid" + args.Length,
-                            BindingFlags.NonPublic | BindingFlags.Static
-                        );
-                        noMatchMethod = typeof(UpdateDelegates).GetMethod(
-                            "NoMatchVoid" + args.Length,
-                            BindingFlags.NonPublic | BindingFlags.Static
-                        );
+                        method = typeof(UpdateDelegates)
+                            .GetMethod(
+                                "UpdateAndExecuteVoid" + args.Length,
+                                BindingFlags.NonPublic | BindingFlags.Static
+                            );
+                        noMatchMethod = typeof(UpdateDelegates)
+                            .GetMethod(
+                                "NoMatchVoid" + args.Length,
+                                BindingFlags.NonPublic | BindingFlags.Static
+                            );
                     }
                 }
                 else
                 {
                     if (
                         target
-                        == System.Linq.Expressions.Compiler.DelegateHelpers.GetFuncType(
-                            args.AddFirst(typeof(CallSite))
-                        )
+                        == System.Linq.Expressions.Compiler.DelegateHelpers
+                            .GetFuncType(args.AddFirst(typeof(CallSite)))
                     )
                     {
-                        method = typeof(UpdateDelegates).GetMethod(
-                            "UpdateAndExecute" + (args.Length - 1),
-                            BindingFlags.NonPublic | BindingFlags.Static
-                        );
-                        noMatchMethod = typeof(UpdateDelegates).GetMethod(
-                            "NoMatch" + (args.Length - 1),
-                            BindingFlags.NonPublic | BindingFlags.Static
-                        );
+                        method = typeof(UpdateDelegates)
+                            .GetMethod(
+                                "UpdateAndExecute" + (args.Length - 1),
+                                BindingFlags.NonPublic | BindingFlags.Static
+                            );
+                        noMatchMethod = typeof(UpdateDelegates)
+                            .GetMethod(
+                                "NoMatch" + (args.Length - 1),
+                                BindingFlags.NonPublic | BindingFlags.Static
+                            );
                     }
                 }
                 if (method != null)
                 {
-                    s_cachedNoMatch = (T)(object)noMatchMethod!.MakeGenericMethod(args)
+                    s_cachedNoMatch = (T)(object)noMatchMethod!
+                        .MakeGenericMethod(args)
                         .CreateDelegate(target);
                     return (T)(object)method.MakeGenericMethod(args).CreateDelegate(target);
                 }
@@ -689,15 +693,15 @@ namespace System.Runtime.CompilerServices
                 p => Expression.Parameter(p.ParameterType, p.Name)
             );
             return Expression.Lambda<T>(
-                    Expression.Block(
-                        Expression.Call(
-                            typeof(CallSiteOps).GetMethod(nameof(CallSiteOps.SetNotMatched))!,
-                            @params[0]
-                        ),
-                        Expression.Default(invoke.GetReturnType())
+                Expression.Block(
+                    Expression.Call(
+                        typeof(CallSiteOps).GetMethod(nameof(CallSiteOps.SetNotMatched))!,
+                        @params[0]
                     ),
-                    new TrueReadOnlyCollection<ParameterExpression>(@params)
-                )
+                    Expression.Default(invoke.GetReturnType())
+                ),
+                new TrueReadOnlyCollection<ParameterExpression>(@params)
+            )
                 .Compile();
         }
 

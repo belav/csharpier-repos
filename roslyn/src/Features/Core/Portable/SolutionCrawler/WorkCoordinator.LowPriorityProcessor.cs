@@ -191,18 +191,18 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                     using (Processor.EnableCaching(project.Id))
                                     {
                                         await Processor.RunAnalyzersAsync(
-                                                analyzers,
-                                                project,
-                                                workItem,
-                                                (a, p, c) =>
-                                                    a.AnalyzeProjectAsync(
-                                                        p,
-                                                        semanticsChanged,
-                                                        reasons,
-                                                        c
-                                                    ),
-                                                cancellationToken
-                                            )
+                                            analyzers,
+                                            project,
+                                            workItem,
+                                            (a, p, c) =>
+                                                a.AnalyzeProjectAsync(
+                                                    p,
+                                                    semanticsChanged,
+                                                    reasons,
+                                                    c
+                                                ),
+                                            cancellationToken
+                                        )
                                             .ConfigureAwait(false);
                                     }
                                 }
@@ -296,10 +296,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 if (uniqueIds.Add(item.ProjectId))
                                 {
                                     _lowPriorityProcessor.ProcessProjectAsync(
-                                            analyzers,
-                                            item,
-                                            CancellationToken.None
-                                        )
+                                        analyzers,
+                                        item,
+                                        CancellationToken.None
+                                    )
                                         .Wait();
                                 }
                             }

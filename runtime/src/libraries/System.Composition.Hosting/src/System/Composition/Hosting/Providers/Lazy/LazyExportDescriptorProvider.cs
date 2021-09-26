@@ -12,7 +12,8 @@ namespace System.Composition.Hosting.Providers.Lazy
     internal sealed class LazyExportDescriptorProvider : ExportDescriptorProvider
     {
         private static readonly MethodInfo s_getLazyDefinitionsMethod =
-            typeof(LazyExportDescriptorProvider).GetTypeInfo()
+            typeof(LazyExportDescriptorProvider)
+                .GetTypeInfo()
                 .GetDeclaredMethod("GetLazyDefinitions");
 
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
@@ -41,10 +42,10 @@ namespace System.Composition.Hosting.Providers.Lazy
         )
         {
             return definitionAccessor.ResolveDependencies(
-                    "value",
-                    lazyContract.ChangeType(typeof(TValue)),
-                    false
-                )
+                "value",
+                lazyContract.ChangeType(typeof(TValue)),
+                false
+            )
                 .Select(
                     d =>
                         new ExportDescriptorPromise(

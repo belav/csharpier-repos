@@ -1237,32 +1237,26 @@ namespace System.Net.NetworkInformation.Tests
             _output.WriteLine($"pinging '{localIpAddress}'");
 
             RemoteExecutor.Invoke(
-                    address =>
-                    {
-                        byte[] buffer = TestSettings.PayloadAsBytes;
-                        SendBatchPing(
-                            (ping) =>
-                                ping.Send(
-                                    address,
-                                    TestSettings.PingTimeout,
-                                    buffer,
-                                    new PingOptions()
-                                ),
-                            (pingReply) =>
-                            {
-                                PingResultValidator(
-                                    pingReply,
-                                    new IPAddress[] { IPAddress.Parse(address) },
-                                    null
-                                );
-                                Assert.Equal(buffer, pingReply.Buffer);
-                            }
-                        );
-                    },
-                    localIpAddress.ToString(),
-                    new RemoteInvokeOptions { RunAsSudo = true }
-                )
-                .Dispose();
+                address =>
+                {
+                    byte[] buffer = TestSettings.PayloadAsBytes;
+                    SendBatchPing(
+                        (ping) =>
+                            ping.Send(address, TestSettings.PingTimeout, buffer, new PingOptions()),
+                        (pingReply) =>
+                        {
+                            PingResultValidator(
+                                pingReply,
+                                new IPAddress[] { IPAddress.Parse(address) },
+                                null
+                            );
+                            Assert.Equal(buffer, pingReply.Buffer);
+                        }
+                    );
+                },
+                localIpAddress.ToString(),
+                new RemoteInvokeOptions { RunAsSudo = true }
+            ).Dispose();
         }
 
         [PlatformSpecific(TestPlatforms.AnyUnix)]
@@ -1294,24 +1288,23 @@ namespace System.Net.NetworkInformation.Tests
             remoteInvokeStartInfo.EnvironmentVariables["LC_ALL"] = envVar_LC_ALL;
 
             RemoteExecutor.Invoke(
-                    address =>
-                    {
-                        SendBatchPing(
-                            (ping) => ping.Send(address, TestSettings.PingTimeout),
-                            (pingReply) =>
-                            {
-                                PingResultValidator(
-                                    pingReply,
-                                    new IPAddress[] { IPAddress.Parse(address) },
-                                    null
-                                );
-                            }
-                        );
-                    },
-                    localIpAddress.ToString(),
-                    new RemoteInvokeOptions { StartInfo = remoteInvokeStartInfo }
-                )
-                .Dispose();
+                address =>
+                {
+                    SendBatchPing(
+                        (ping) => ping.Send(address, TestSettings.PingTimeout),
+                        (pingReply) =>
+                        {
+                            PingResultValidator(
+                                pingReply,
+                                new IPAddress[] { IPAddress.Parse(address) },
+                                null
+                            );
+                        }
+                    );
+                },
+                localIpAddress.ToString(),
+                new RemoteInvokeOptions { StartInfo = remoteInvokeStartInfo }
+            ).Dispose();
         }
 
         [PlatformSpecific(TestPlatforms.AnyUnix)]
@@ -1343,24 +1336,23 @@ namespace System.Net.NetworkInformation.Tests
             remoteInvokeStartInfo.EnvironmentVariables["LC_ALL"] = envVar_LC_ALL;
 
             RemoteExecutor.Invoke(
-                    async address =>
-                    {
-                        await SendBatchPingAsync(
-                            (ping) => ping.SendPingAsync(address),
-                            (pingReply) =>
-                            {
-                                PingResultValidator(
-                                    pingReply,
-                                    new IPAddress[] { IPAddress.Parse(address) },
-                                    null
-                                );
-                            }
-                        );
-                    },
-                    localIpAddress.ToString(),
-                    new RemoteInvokeOptions { StartInfo = remoteInvokeStartInfo }
-                )
-                .Dispose();
+                async address =>
+                {
+                    await SendBatchPingAsync(
+                        (ping) => ping.SendPingAsync(address),
+                        (pingReply) =>
+                        {
+                            PingResultValidator(
+                                pingReply,
+                                new IPAddress[] { IPAddress.Parse(address) },
+                                null
+                            );
+                        }
+                    );
+                },
+                localIpAddress.ToString(),
+                new RemoteInvokeOptions { StartInfo = remoteInvokeStartInfo }
+            ).Dispose();
         }
     }
 }

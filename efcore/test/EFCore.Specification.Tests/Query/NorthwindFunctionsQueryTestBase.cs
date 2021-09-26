@@ -394,10 +394,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Where(
                             c =>
-                                string.Compare(
-                                    c.CustomerID,
-                                    "ALFKI".Replace("ALF".ToUpper(), c.CustomerID)
-                                ) > 0
+                                string
+                                    .Compare(
+                                        c.CustomerID,
+                                        "ALFKI".Replace("ALF".ToUpper(), c.CustomerID)
+                                    ) > 0
                         )
             );
 
@@ -422,10 +423,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Where(
                             c =>
-                                string.Compare(
-                                    c.CustomerID,
-                                    "ALFKI".Replace("ALF".ToUpper(), c.CustomerID)
-                                ) == -1
+                                string
+                                    .Compare(
+                                        c.CustomerID,
+                                        "ALFKI".Replace("ALF".ToUpper(), c.CustomerID)
+                                    ) == -1
                         ),
                 entryCount: 91
             );
@@ -632,9 +634,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Where(
                             c =>
-                                c.CustomerID.CompareTo(
-                                    "ALFKI".Replace("ALF".ToUpper(), c.CustomerID)
-                                ) > 0
+                                c.CustomerID
+                                    .CompareTo("ALFKI".Replace("ALF".ToUpper(), c.CustomerID)) > 0
                         )
             );
 
@@ -658,9 +659,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Where(
                             c =>
-                                c.CustomerID.CompareTo(
-                                    "ALFKI".Replace("ALF".ToUpper(), c.CustomerID)
-                                ) == -1
+                                c.CustomerID
+                                    .CompareTo("ALFKI".Replace("ALF".ToUpper(), c.CustomerID)) == -1
                         ),
                 entryCount: 91
             );

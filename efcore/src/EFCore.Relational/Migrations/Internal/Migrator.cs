@@ -160,15 +160,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 var command = _rawSqlCommandBuilder.Build(_historyRepository.GetCreateScript());
 
                 await command.ExecuteNonQueryAsync(
-                        new RelationalCommandParameterObject(
-                            _connection,
-                            null,
-                            null,
-                            _currentContext.Context,
-                            _commandLogger
-                        ),
-                        cancellationToken
-                    )
+                    new RelationalCommandParameterObject(
+                        _connection,
+                        null,
+                        null,
+                        _currentContext.Context,
+                        _commandLogger
+                    ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -181,10 +181,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             foreach (var commandList in commandLists)
             {
                 await _migrationCommandExecutor.ExecuteNonQueryAsync(
-                        commandList(),
-                        _connection,
-                        cancellationToken
-                    )
+                    commandList(),
+                    _connection,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -293,35 +293,26 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             {
                 targetMigration = _migrationsAssembly.GetMigrationId(targetMigration);
                 migrationsToApply = unappliedMigrations.Where(
-                        m =>
-                            string.Compare(
-                                m.Key,
-                                targetMigration,
-                                StringComparison.OrdinalIgnoreCase
-                            ) <= 0
-                    )
+                    m =>
+                        string.Compare(m.Key, targetMigration, StringComparison.OrdinalIgnoreCase)
+                        <= 0
+                )
                     .OrderBy(m => m.Key)
                     .Select(p => _migrationsAssembly.CreateMigration(p.Value, _activeProvider))
                     .ToList();
                 migrationsToRevert = appliedMigrations.Where(
-                        m =>
-                            string.Compare(
-                                m.Key,
-                                targetMigration,
-                                StringComparison.OrdinalIgnoreCase
-                            ) > 0
-                    )
+                    m =>
+                        string.Compare(m.Key, targetMigration, StringComparison.OrdinalIgnoreCase)
+                        > 0
+                )
                     .OrderByDescending(m => m.Key)
                     .Select(p => _migrationsAssembly.CreateMigration(p.Value, _activeProvider))
                     .ToList();
                 actualTargetMigration = appliedMigrations.Where(
-                        m =>
-                            string.Compare(
-                                m.Key,
-                                targetMigration,
-                                StringComparison.OrdinalIgnoreCase
-                            ) == 0
-                    )
+                    m =>
+                        string.Compare(m.Key, targetMigration, StringComparison.OrdinalIgnoreCase)
+                        == 0
+                )
                     .Select(p => _migrationsAssembly.CreateMigration(p.Value, _activeProvider))
                     .SingleOrDefault();
             }
@@ -352,13 +343,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             else
             {
                 var fromMigrationId = _migrationsAssembly.GetMigrationId(fromMigration);
-                appliedMigrations = _migrationsAssembly.Migrations.Where(
+                appliedMigrations = _migrationsAssembly.Migrations
+                    .Where(
                         t =>
-                            string.Compare(
-                                t.Key,
-                                fromMigrationId,
-                                StringComparison.OrdinalIgnoreCase
-                            ) <= 0
+                            string
+                                .Compare(t.Key, fromMigrationId, StringComparison.OrdinalIgnoreCase)
+                            <= 0
                     )
                     .Select(t => t.Key);
             }
@@ -524,10 +514,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             );
 
             return _migrationsSqlGenerator.Generate(
-                    migration.UpOperations,
-                    FinalizeModel(migration.TargetModel),
-                    options
-                )
+                migration.UpOperations,
+                FinalizeModel(migration.TargetModel),
+                options
+            )
                 .Concat(
                     new[]
                     {
@@ -556,10 +546,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             );
 
             return _migrationsSqlGenerator.Generate(
-                    migration.DownOperations,
-                    previousMigration == null ? null : FinalizeModel(previousMigration.TargetModel),
-                    options
-                )
+                migration.DownOperations,
+                previousMigration == null ? null : FinalizeModel(previousMigration.TargetModel),
+                options
+            )
                 .Concat(
                     new[]
                     {

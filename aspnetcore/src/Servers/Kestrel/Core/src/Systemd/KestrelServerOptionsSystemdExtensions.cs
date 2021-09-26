@@ -42,21 +42,23 @@ namespace Microsoft.AspNetCore.Hosting
         )
         {
             if (
-                string.Equals(
-                    Environment.ProcessId.ToString(CultureInfo.InvariantCulture),
-                    Environment.GetEnvironmentVariable(ListenPidEnvVar),
-                    StringComparison.Ordinal
-                )
+                string
+                    .Equals(
+                        Environment.ProcessId.ToString(CultureInfo.InvariantCulture),
+                        Environment.GetEnvironmentVariable(ListenPidEnvVar),
+                        StringComparison.Ordinal
+                    )
             )
             {
                 // This matches sd_listen_fds behavior that requires %LISTEN_FDS% to be present and in range [1;INT_MAX-SD_LISTEN_FDS_START]
                 if (
-                    int.TryParse(
-                        Environment.GetEnvironmentVariable(ListenFdsEnvVar),
-                        NumberStyles.None,
-                        NumberFormatInfo.InvariantInfo,
-                        out var listenFds
-                    )
+                    int
+                        .TryParse(
+                            Environment.GetEnvironmentVariable(ListenFdsEnvVar),
+                            NumberStyles.None,
+                            NumberFormatInfo.InvariantInfo,
+                            out var listenFds
+                        )
                     && listenFds > 0
                     && listenFds <= int.MaxValue - SdListenFdsStart
                 )

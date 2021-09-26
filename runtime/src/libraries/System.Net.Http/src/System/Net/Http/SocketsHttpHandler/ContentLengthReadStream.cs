@@ -271,10 +271,8 @@ namespace System.Net.Http
                 if (drainTime != Timeout.InfiniteTimeSpan)
                 {
                     cts = new CancellationTokenSource((int)drainTime.TotalMilliseconds);
-                    ctr = cts.Token.Register(
-                        static s => ((HttpConnection)s!).Dispose(),
-                        _connection
-                    );
+                    ctr = cts.Token
+                        .Register(static s => ((HttpConnection)s!).Dispose(), _connection);
                 }
 
                 try

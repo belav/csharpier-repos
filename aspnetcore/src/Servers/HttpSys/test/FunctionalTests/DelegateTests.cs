@@ -38,8 +38,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.FunctionalTests
                 out var delegatorAddress,
                 httpContext =>
                 {
-                    var delegateFeature =
-                        httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
+                    var delegateFeature = httpContext.Features
+                        .Get<IHttpSysRequestDelegationFeature>();
                     delegateFeature.DelegateRequest(destination);
                     return Task.CompletedTask;
                 }
@@ -78,8 +78,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.FunctionalTests
                 async httpContext =>
                 {
                     await httpContext.Response.WriteAsync(_expectedResponseString);
-                    var delegateFeature =
-                        httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
+                    var delegateFeature = httpContext.Features
+                        .Get<IHttpSysRequestDelegationFeature>();
                     Assert.False(delegateFeature.CanDelegate);
                     Assert.Throws<InvalidOperationException>(
                         () => delegateFeature.DelegateRequest(destination)
@@ -118,8 +118,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.FunctionalTests
                 out var delegatorAddress,
                 httpContext =>
                 {
-                    var delegateFeature =
-                        httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
+                    var delegateFeature = httpContext.Features
+                        .Get<IHttpSysRequestDelegationFeature>();
                     delegateFeature.DelegateRequest(destination);
                     Assert.False(delegateFeature.CanDelegate);
                     httpContext.Response.WriteAsync(_expectedResponseString);
@@ -161,8 +161,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.FunctionalTests
                 {
                     var memoryStream = new MemoryStream();
                     await httpContext.Request.Body.CopyToAsync(memoryStream);
-                    var delegateFeature =
-                        httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
+                    var delegateFeature = httpContext.Features
+                        .Get<IHttpSysRequestDelegationFeature>();
                     Assert.Throws<InvalidOperationException>(
                         () => delegateFeature.DelegateRequest(destination)
                     );
@@ -184,8 +184,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.FunctionalTests
                 out var delegatorAddress,
                 httpContext =>
                 {
-                    var delegateFeature =
-                        httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
+                    var delegateFeature = httpContext.Features
+                        .Get<IHttpSysRequestDelegationFeature>();
                     Assert.Null(delegateFeature);
                     return Task.CompletedTask;
                 }
@@ -220,8 +220,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.FunctionalTests
                 out var delegatorAddress,
                 httpContext =>
                 {
-                    var delegateFeature =
-                        httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
+                    var delegateFeature = httpContext.Features
+                        .Get<IHttpSysRequestDelegationFeature>();
                     delegateFeature.DelegateRequest(destination);
                     return Task.CompletedTask;
                 }

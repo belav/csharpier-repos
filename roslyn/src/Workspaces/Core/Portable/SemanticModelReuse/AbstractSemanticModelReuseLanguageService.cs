@@ -82,10 +82,10 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             }
 
             return await TryGetSpeculativeSemanticModelWorkerAsync(
-                    previousSemanticModel,
-                    currentBodyNode,
-                    cancellationToken
-                )
+                previousSemanticModel,
+                currentBodyNode,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

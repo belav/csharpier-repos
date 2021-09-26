@@ -37,15 +37,14 @@ namespace System.Net.Tests
         public void DefaultWebProxy_SetThenGet_ValuesMatch()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        IWebProxy p = new WebProxy();
+                () =>
+                {
+                    IWebProxy p = new WebProxy();
 
-                        WebRequest.DefaultWebProxy = p;
-                        Assert.Same(p, WebRequest.DefaultWebProxy);
-                    }
-                )
-                .Dispose();
+                    WebRequest.DefaultWebProxy = p;
+                    Assert.Same(p, WebRequest.DefaultWebProxy);
+                }
+            ).Dispose();
         }
 
         [Fact]

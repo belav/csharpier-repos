@@ -148,18 +148,19 @@ namespace System.ComponentModel
                 }
 
                 return new InstanceDescriptor(
-                    typeof(DateTime).GetConstructor(
-                        new Type[]
-                        {
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int)
-                        }
-                    ),
+                    typeof(DateTime)
+                        .GetConstructor(
+                            new Type[]
+                            {
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int)
+                            }
+                        ),
                     new object[]
                     {
                         dt.Year,

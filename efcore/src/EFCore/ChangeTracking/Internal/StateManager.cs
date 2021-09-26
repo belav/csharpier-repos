@@ -667,7 +667,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     {
                         _referencedUntrackedEntities.Remove(keyValuePair.Key);
 
-                        var newList = keyValuePair.Value.Where(tuple => tuple.Item2 != entry)
+                        var newList = keyValuePair.Value
+                            .Where(tuple => tuple.Item2 != entry)
                             .ToList();
 
                         if (newList.Count > 0)
@@ -963,7 +964,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             );
             return dependentIdentityMap != null
               ? dependentIdentityMap.GetDependentsMap(foreignKey)
-                    .GetDependentsUsingRelationshipSnapshot(principalEntry)
+                .GetDependentsUsingRelationshipSnapshot(principalEntry)
               : Enumerable.Empty<IUpdateEntry>();
         }
 
@@ -1000,8 +1001,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
 
             return ((IEnumerable<object>)navigationValue)
-            // ReSharper disable once RedundantEnumerableCastCall
-            .Select(v => TryGetEntry(v, foreignKey.DeclaringEntityType))
+                // ReSharper disable once RedundantEnumerableCastCall
+                .Select(v => TryGetEntry(v, foreignKey.DeclaringEntityType))
                 .Where(e => e != null)
                 .Cast<IUpdateEntry>();
         }
@@ -1116,7 +1117,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 foreach (
                     InternalEntityEntry dependent in (
                         GetDependentsFromNavigation(entry, fk) ?? GetDependents(entry, fk)
-                    ).ToList()
+                    )
+                        .ToList()
                 )
                 {
                     if (dependent.SharedIdentityEntry == entry)
@@ -1284,15 +1286,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public virtual int SaveChanges(bool acceptAllChangesOnSuccess) =>
             Context.Database.AutoTransactionsEnabled
-                ? Dependencies.ExecutionStrategyFactory.Create()
-                      .Execute(
-                          (
-                              StateManager: this,
-                              AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess
-                          ),
-                          (_, t) => SaveChanges(t.StateManager, t.AcceptAllChangesOnSuccess),
-                          null
-                      )
+                ? Dependencies.ExecutionStrategyFactory
+                  .Create()
+                  .Execute(
+                      (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
+                      (_, t) => SaveChanges(t.StateManager, t.AcceptAllChangesOnSuccess),
+                      null
+                  )
                 : SaveChanges(this, acceptAllChangesOnSuccess);
 
         private static int SaveChanges(StateManager stateManager, bool acceptAllChangesOnSuccess)
@@ -1346,21 +1346,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             CancellationToken cancellationToken = default
         ) =>
             Context.Database.AutoTransactionsEnabled
-                ? Dependencies.ExecutionStrategyFactory.Create()
-                      .ExecuteAsync(
-                          (
-                              StateManager: this,
-                              AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess
+                ? Dependencies.ExecutionStrategyFactory
+                  .Create()
+                  .ExecuteAsync(
+                      (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
+                      (_, t, cancellationToken) =>
+                          SaveChangesAsync(
+                              t.StateManager,
+                              t.AcceptAllChangesOnSuccess,
+                              cancellationToken
                           ),
-                          (_, t, cancellationToken) =>
-                              SaveChangesAsync(
-                                  t.StateManager,
-                                  t.AcceptAllChangesOnSuccess,
-                                  cancellationToken
-                              ),
-                          null,
-                          cancellationToken
-                      )
+                      null,
+                      cancellationToken
+                  )
                 : SaveChangesAsync(this, acceptAllChangesOnSuccess, cancellationToken);
 
         private static async Task<int> SaveChangesAsync(

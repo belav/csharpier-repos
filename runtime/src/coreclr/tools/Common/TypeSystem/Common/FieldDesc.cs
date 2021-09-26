@@ -73,10 +73,11 @@ namespace Internal.TypeSystem
                 methodInstantiation
             );
             if (owningType != instantiatedOwningType)
-                field = instantiatedOwningType.Context.GetFieldForInstantiatedType(
-                    field.GetTypicalFieldDefinition(),
-                    (InstantiatedType)instantiatedOwningType
-                );
+                field = instantiatedOwningType.Context
+                    .GetFieldForInstantiatedType(
+                        field.GetTypicalFieldDefinition(),
+                        (InstantiatedType)instantiatedOwningType
+                    );
 
             return field;
         }

@@ -93,10 +93,8 @@ namespace Newtonsoft.Json.Converters
 
                     throw JsonSerializationException.Create(
                         reader,
-                        "Unexpected token when converting ExpandoObject: {0}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            reader.TokenType
-                        )
+                        "Unexpected token when converting ExpandoObject: {0}"
+                            .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                     );
             }
         }

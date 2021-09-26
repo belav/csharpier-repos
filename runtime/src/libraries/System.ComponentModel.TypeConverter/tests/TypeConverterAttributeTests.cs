@@ -32,9 +32,8 @@ namespace System.ComponentModel.Tests
         public static void Equals_Negative()
         {
             Assert.False(
-                TypeConverterAttributeTests.s_attributeFromType.Equals(
-                    TypeConverterAttributeTests.s_attributeFromString
-                )
+                TypeConverterAttributeTests.s_attributeFromType
+                    .Equals(TypeConverterAttributeTests.s_attributeFromString)
             );
             Assert.False(TypeConverterAttributeTests.s_attributeFromType.Equals(null));
         }
@@ -43,9 +42,8 @@ namespace System.ComponentModel.Tests
         public static void Equals_Positive()
         {
             Assert.True(
-                new TypeConverterAttribute("System.Int32").Equals(
-                    TypeConverterAttributeTests.s_attributeFromString
-                )
+                new TypeConverterAttribute("System.Int32")
+                    .Equals(TypeConverterAttributeTests.s_attributeFromString)
             );
         }
 

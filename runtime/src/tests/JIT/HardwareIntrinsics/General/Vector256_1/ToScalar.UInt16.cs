@@ -107,7 +107,8 @@ namespace JIT.HardwareIntrinsics.General
                 values[15]
             );
 
-            object result = typeof(Vector256).GetMethod(nameof(Vector256.ToScalar))
+            object result = typeof(Vector256)
+                .GetMethod(nameof(Vector256.ToScalar))
                 .MakeGenericMethod(typeof(UInt16))
                 .Invoke(null, new object[] { value });
 
@@ -122,12 +123,10 @@ namespace JIT.HardwareIntrinsics.General
         {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256<UInt16>.ToScalar(): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  values: ({string.Join(", ", values)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector256<UInt16>.ToScalar(): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"  values: ({string.Join(", ", values)})");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

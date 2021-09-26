@@ -130,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         }
 
         private static readonly SymbolDisplayFormat _displayFormat =
-            SymbolDisplayFormat.TestFormatWithConstraints.WithMemberOptions(
+            SymbolDisplayFormat.TestFormatWithConstraints
+                .WithMemberOptions(
                     SymbolDisplayMemberOptions.IncludeParameters
                         | SymbolDisplayMemberOptions.IncludeType
                         | SymbolDisplayMemberOptions.IncludeRef

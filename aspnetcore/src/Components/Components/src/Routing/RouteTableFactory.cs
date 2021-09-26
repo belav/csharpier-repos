@@ -18,9 +18,8 @@ namespace Microsoft.AspNetCore.Components
     {
         private static readonly ConcurrentDictionary<Key, RouteTable> Cache =
             new ConcurrentDictionary<Key, RouteTable>();
-        public static readonly IComparer<RouteEntry> RoutePrecedence = Comparer<RouteEntry>.Create(
-            RouteComparison
-        );
+        public static readonly IComparer<RouteEntry> RoutePrecedence = Comparer<RouteEntry>
+            .Create(RouteComparison);
 
         public static RouteTable Create(IEnumerable<Assembly> assemblies)
         {
@@ -80,9 +79,8 @@ namespace Microsoft.AspNetCore.Components
             var routes = new List<RouteEntry>();
             foreach (var keyValuePair in templatesByHandler)
             {
-                var parsedTemplates = keyValuePair.Value.Select(
-                        v => TemplateParser.ParseTemplate(v)
-                    )
+                var parsedTemplates = keyValuePair.Value
+                    .Select(v => TemplateParser.ParseTemplate(v))
                     .ToArray();
                 var allRouteParameterNames = parsedTemplates.SelectMany(GetParameterNames)
                     .Distinct(StringComparer.OrdinalIgnoreCase)
@@ -91,9 +89,9 @@ namespace Microsoft.AspNetCore.Components
                 foreach (var parsedTemplate in parsedTemplates)
                 {
                     var unusedRouteParameterNames = allRouteParameterNames.Except(
-                            GetParameterNames(parsedTemplate),
-                            StringComparer.OrdinalIgnoreCase
-                        )
+                        GetParameterNames(parsedTemplate),
+                        StringComparer.OrdinalIgnoreCase
+                    )
                         .ToArray();
                     var entry = new RouteEntry(
                         parsedTemplate,
@@ -165,10 +163,8 @@ namespace Microsoft.AspNetCore.Components
                 // If they are both literals we can disambiguate
                 if ((xRank, yRank) == (0, 0))
                 {
-                    currentResult = StringComparer.OrdinalIgnoreCase.Compare(
-                        xSegment.Value,
-                        ySegment.Value
-                    );
+                    currentResult = StringComparer.OrdinalIgnoreCase
+                        .Compare(xSegment.Value, ySegment.Value);
                 }
 
                 if (currentResult != 0)

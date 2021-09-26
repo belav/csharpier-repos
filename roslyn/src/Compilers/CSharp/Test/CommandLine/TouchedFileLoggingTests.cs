@@ -69,10 +69,8 @@ class C
             var hello = Temp.CreateFile().WriteAllText(helloWorldCS).Path;
             var touchedDir = Temp.CreateDirectory();
             var touchedBase = Path.Combine(touchedDir.Path, "touched");
-            var appConfigPath =
-                Temp.CreateFile()
-                    .WriteAllText(
-                        @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+            var appConfigPath = Temp.CreateFile().WriteAllText(
+                    @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
   <runtime>
     <assemblyBinding xmlns=""urn:schemas-microsoft-com:asm.v1"">
@@ -80,7 +78,7 @@ class C
     </assemblyBinding>
   </runtime>
 </configuration>"
-                    ).Path;
+                ).Path;
 
             var silverlight =
                 Temp.CreateFile()
@@ -158,15 +156,13 @@ class C
         [ConditionalFact(typeof(WindowsOnly))]
         public void XmlDocumentFileCsc()
         {
-            var sourcePath =
-                Temp.CreateFile()
-                    .WriteAllText(
-                        @"
+            var sourcePath = Temp.CreateFile().WriteAllText(
+                    @"
 /// <summary>
 /// A subtype of <see cref=""object""/>.
 /// </summary>
 public class C { }"
-                    ).Path;
+                ).Path;
             var xml = Temp.CreateFile();
             var touchedDir = Temp.CreateDirectory();
             var touchedBase = Path.Combine(touchedDir.Path, "touched");
@@ -197,9 +193,8 @@ public class C { }"
             var exitCode = cmd.Run(writer);
             Assert.Equal(string.Empty, writer.ToString().Trim());
             Assert.Equal(0, exitCode);
-            Assert.Equal(
-                string.Format(
-                        @"
+            Assert.Equal(string.Format(
+                    @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -213,11 +208,8 @@ public class C { }"
         </member>
     </members>
 </doc>",
-                        Path.GetFileNameWithoutExtension(sourcePath)
-                    )
-                    .Trim(),
-                xml.ReadAllText().Trim()
-            );
+                    Path.GetFileNameWithoutExtension(sourcePath)
+                ).Trim(), xml.ReadAllText().Trim());
 
             AssertTouchedFilesEqual(expectedReads, expectedWrites, touchedBase);
 

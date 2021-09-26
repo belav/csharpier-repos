@@ -77,16 +77,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 }
             }
 
-            var fromBodyParameters = action.Parameters.Where(
-                    p => p.BindingInfo!.BindingSource == BindingSource.Body
-                )
+            var fromBodyParameters = action.Parameters
+                .Where(p => p.BindingInfo!.BindingSource == BindingSource.Body)
                 .ToList();
             if (fromBodyParameters.Count > 1)
             {
-                var parameters = string.Join(
-                    Environment.NewLine,
-                    fromBodyParameters.Select(p => p.DisplayName)
-                );
+                var parameters = string
+                    .Join(Environment.NewLine, fromBodyParameters.Select(p => p.DisplayName));
                 var message = Resources.FormatApiController_MultipleBodyParametersFound(
                     action.DisplayName,
                     nameof(FromQueryAttribute),

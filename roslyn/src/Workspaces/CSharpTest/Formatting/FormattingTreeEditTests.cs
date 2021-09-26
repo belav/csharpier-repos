@@ -47,9 +47,9 @@ public class C
 }
 ",
                 Formatter.Format(
-                        root.ReplaceNode(param, g.AddAttributes(param, g.Attribute("MyAttr"))),
-                        document.Project.Solution.Workspace
-                    )
+                    root.ReplaceNode(param, g.AddAttributes(param, g.Attribute("MyAttr"))),
+                    document.Project.Solution.Workspace
+                )
                     .ToFullString()
             );
 
@@ -64,9 +64,9 @@ public class C
 }
 ",
                 Formatter.Format(
-                        root.ReplaceNode(method, g.AddAttributes(method, g.Attribute("MyAttr"))),
-                        document.Project.Solution.Workspace
-                    )
+                    root.ReplaceNode(method, g.AddAttributes(method, g.Attribute("MyAttr"))),
+                    document.Project.Solution.Workspace
+                )
                     .ToFullString()
             );
         }

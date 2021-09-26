@@ -43,12 +43,13 @@ namespace Internal.Cryptography.Pal
         public string NormalizeOid(string maybeOid, OidGroup expectedGroup)
         {
             string? oidValue =
-                Interop.Crypt32.FindOidInfo(
-                    CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
-                    maybeOid,
-                    expectedGroup,
-                    fallBackToAllGroups: true
-                ).OID;
+                Interop.Crypt32
+                    .FindOidInfo(
+                        CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
+                        maybeOid,
+                        expectedGroup,
+                        fallBackToAllGroups: true
+                    ).OID;
 
             if (oidValue == null)
             {
@@ -163,10 +164,11 @@ namespace Internal.Cryptography.Pal
                 (fileTime, compareResult),
                 static (state, pCertContext) =>
                 {
-                    int comparison = Interop.crypt32.CertVerifyTimeValidity(
-                        ref state.fileTime,
-                        pCertContext.CertContext->pCertInfo
-                    );
+                    int comparison = Interop.crypt32
+                        .CertVerifyTimeValidity(
+                            ref state.fileTime,
+                            pCertContext.CertContext->pCertInfo
+                        );
                     GC.KeepAlive(pCertContext);
                     return comparison == state.compareResult;
                 }
@@ -186,11 +188,12 @@ namespace Internal.Cryptography.Pal
                     bool foundMatch = false;
                     CERT_INFO* pCertInfo = pCertContext.CertContext->pCertInfo;
                     {
-                        CERT_EXTENSION* pV1Template = Interop.crypt32.CertFindExtension(
-                            Oids.EnrollCertTypeExtension,
-                            pCertInfo->cExtension,
-                            pCertInfo->rgExtension
-                        );
+                        CERT_EXTENSION* pV1Template = Interop.crypt32
+                            .CertFindExtension(
+                                Oids.EnrollCertTypeExtension,
+                                pCertInfo->cExtension,
+                                pCertInfo->rgExtension
+                            );
                         if (pV1Template != null)
                         {
                             byte[] extensionRawData = pV1Template->Value.ToByteArray();
@@ -222,11 +225,12 @@ namespace Internal.Cryptography.Pal
 
                     if (!foundMatch)
                     {
-                        CERT_EXTENSION* pV2Template = Interop.crypt32.CertFindExtension(
-                            Oids.CertificateTemplate,
-                            pCertInfo->cExtension,
-                            pCertInfo->rgExtension
-                        );
+                        CERT_EXTENSION* pV2Template = Interop.crypt32
+                            .CertFindExtension(
+                                Oids.CertificateTemplate,
+                                pCertInfo->cExtension,
+                                pCertInfo->rgExtension
+                            );
                         if (pV2Template != null)
                         {
                             byte[] extensionRawData = pV2Template->Value.ToByteArray();
@@ -242,12 +246,13 @@ namespace Internal.Cryptography.Pal
                                             pTemplateExt->pszObjId
                                         );
                                         string? expectedOidValue =
-                                            Interop.Crypt32.FindOidInfo(
-                                                CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
-                                                templateName,
-                                                OidGroup.Template,
-                                                fallBackToAllGroups: true
-                                            ).OID;
+                                            Interop.Crypt32
+                                                .FindOidInfo(
+                                                    CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
+                                                    templateName,
+                                                    OidGroup.Template,
+                                                    fallBackToAllGroups: true
+                                                ).OID;
                                         if (expectedOidValue == null)
                                             expectedOidValue = templateName;
                                         if (
@@ -281,13 +286,8 @@ namespace Internal.Cryptography.Pal
                     int numOids;
                     int cbData = 0;
                     if (
-                        !Interop.crypt32.CertGetValidUsages(
-                            1,
-                            ref pCertContext,
-                            out numOids,
-                            null,
-                            ref cbData
-                        )
+                        !Interop.crypt32
+                            .CertGetValidUsages(1, ref pCertContext, out numOids, null, ref cbData)
                     )
                         return false;
 
@@ -298,13 +298,14 @@ namespace Internal.Cryptography.Pal
                     fixed (byte* pOidsPointer = new byte[cbData])
                     {
                         if (
-                            !Interop.crypt32.CertGetValidUsages(
-                                1,
-                                ref pCertContext,
-                                out numOids,
-                                pOidsPointer,
-                                ref cbData
-                            )
+                            !Interop.crypt32
+                                .CertGetValidUsages(
+                                    1,
+                                    ref pCertContext,
+                                    out numOids,
+                                    pOidsPointer,
+                                    ref cbData
+                                )
                         )
                             return false;
 
@@ -328,11 +329,12 @@ namespace Internal.Cryptography.Pal
                 static (oidValue, pCertContext) =>
                 {
                     CERT_INFO* pCertInfo = pCertContext.CertContext->pCertInfo;
-                    CERT_EXTENSION* pCertExtension = Interop.crypt32.CertFindExtension(
-                        Oids.CertPolicies,
-                        pCertInfo->cExtension,
-                        pCertInfo->rgExtension
-                    );
+                    CERT_EXTENSION* pCertExtension = Interop.crypt32
+                        .CertFindExtension(
+                            Oids.CertPolicies,
+                            pCertInfo->cExtension,
+                            pCertInfo->rgExtension
+                        );
                     if (pCertExtension == null)
                         return false;
 
@@ -380,11 +382,8 @@ namespace Internal.Cryptography.Pal
                 static (oidValue, pCertContext) =>
                 {
                     CERT_INFO* pCertInfo = pCertContext.CertContext->pCertInfo;
-                    CERT_EXTENSION* pCertExtension = Interop.crypt32.CertFindExtension(
-                        oidValue,
-                        pCertInfo->cExtension,
-                        pCertInfo->rgExtension
-                    );
+                    CERT_EXTENSION* pCertExtension = Interop.crypt32
+                        .CertFindExtension(oidValue, pCertInfo->cExtension, pCertInfo->rgExtension);
                     GC.KeepAlive(pCertContext);
                     return pCertExtension != null;
                 }
@@ -400,12 +399,13 @@ namespace Internal.Cryptography.Pal
                     CERT_INFO* pCertInfo = pCertContext.CertContext->pCertInfo;
                     X509KeyUsageFlags actual;
                     if (
-                        !Interop.crypt32.CertGetIntendedKeyUsage(
-                            CertEncodingType.All,
-                            pCertInfo,
-                            out actual,
-                            sizeof(X509KeyUsageFlags)
-                        )
+                        !Interop.crypt32
+                            .CertGetIntendedKeyUsage(
+                                CertEncodingType.All,
+                                pCertInfo,
+                                out actual,
+                                sizeof(X509KeyUsageFlags)
+                            )
                     )
                         return true; // no key usage means it is valid for all key usages.
                     GC.KeepAlive(pCertContext);
@@ -422,23 +422,25 @@ namespace Internal.Cryptography.Pal
                 {
                     int cbData = 0;
                     if (
-                        !Interop.crypt32.CertGetCertificateContextProperty(
-                            pCertContext,
-                            CertContextPropId.CERT_KEY_IDENTIFIER_PROP_ID,
-                            null,
-                            ref cbData
-                        )
+                        !Interop.crypt32
+                            .CertGetCertificateContextProperty(
+                                pCertContext,
+                                CertContextPropId.CERT_KEY_IDENTIFIER_PROP_ID,
+                                null,
+                                ref cbData
+                            )
                     )
                         return false;
 
                     byte[] actual = new byte[cbData];
                     if (
-                        !Interop.crypt32.CertGetCertificateContextProperty(
-                            pCertContext,
-                            CertContextPropId.CERT_KEY_IDENTIFIER_PROP_ID,
-                            actual,
-                            ref cbData
-                        )
+                        !Interop.crypt32
+                            .CertGetCertificateContextProperty(
+                                pCertContext,
+                                CertContextPropId.CERT_KEY_IDENTIFIER_PROP_ID,
+                                actual,
+                                ref cbData
+                            )
                     )
                         return false;
 
@@ -467,25 +469,27 @@ namespace Internal.Cryptography.Pal
             Func<TState, SafeCertContextHandle, bool>? filter = null
         )
         {
-            SafeCertStoreHandle findResults = Interop.crypt32.CertOpenStore(
-                CertStoreProvider.CERT_STORE_PROV_MEMORY,
-                CertEncodingType.All,
-                IntPtr.Zero,
-                CertStoreFlags.CERT_STORE_ENUM_ARCHIVED_FLAG
-                    | CertStoreFlags.CERT_STORE_CREATE_NEW_FLAG,
-                null
-            );
+            SafeCertStoreHandle findResults = Interop.crypt32
+                .CertOpenStore(
+                    CertStoreProvider.CERT_STORE_PROV_MEMORY,
+                    CertEncodingType.All,
+                    IntPtr.Zero,
+                    CertStoreFlags.CERT_STORE_ENUM_ARCHIVED_FLAG
+                        | CertStoreFlags.CERT_STORE_CREATE_NEW_FLAG,
+                    null
+                );
             if (findResults.IsInvalid)
                 throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
 
             SafeCertContextHandle? pCertContext = null;
             while (
-                Interop.crypt32.CertFindCertificateInStore(
-                    _storePal.SafeCertStoreHandle,
-                    dwFindType,
-                    pvFindPara,
-                    ref pCertContext
-                )
+                Interop.crypt32
+                    .CertFindCertificateInStore(
+                        _storePal.SafeCertStoreHandle,
+                        dwFindType,
+                        pvFindPara,
+                        ref pCertContext
+                    )
             )
             {
                 if (filter != null && !filter(state, pCertContext))
@@ -498,12 +502,13 @@ namespace Internal.Cryptography.Pal
                 }
 
                 if (
-                    !Interop.crypt32.CertAddCertificateLinkToStore(
-                        findResults,
-                        pCertContext,
-                        CertStoreAddDisposition.CERT_STORE_ADD_ALWAYS,
-                        IntPtr.Zero
-                    )
+                    !Interop.crypt32
+                        .CertAddCertificateLinkToStore(
+                            findResults,
+                            pCertContext,
+                            CertStoreAddDisposition.CERT_STORE_ADD_ALWAYS,
+                            IntPtr.Zero
+                        )
                 )
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
             }
@@ -557,13 +562,14 @@ namespace Internal.Cryptography.Pal
         )
         {
             Debug.Assert(dwNameType != CertNameType.CERT_NAME_ATTR_TYPE);
-            return Interop.crypt32.CertGetNameString(
-                pCertContext,
-                dwNameType,
-                dwNameFlags,
-                CertNameStringType.CERT_X500_NAME_STR
-                    | CertNameStringType.CERT_NAME_STR_REVERSE_FLAG
-            );
+            return Interop.crypt32
+                .CertGetNameString(
+                    pCertContext,
+                    dwNameType,
+                    dwNameFlags,
+                    CertNameStringType.CERT_X500_NAME_STR
+                        | CertNameStringType.CERT_NAME_STR_REVERSE_FLAG
+                );
         }
     }
 }

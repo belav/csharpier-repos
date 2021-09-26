@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -83,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.TrueWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -109,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -136,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -157,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -182,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -208,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -235,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -257,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -280,7 +290,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -304,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -335,7 +347,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -367,7 +380,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -400,7 +414,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -422,7 +437,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -445,7 +461,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -474,7 +491,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -504,7 +522,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -535,7 +554,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -558,7 +578,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -582,7 +603,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -613,7 +635,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -645,7 +668,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -677,7 +701,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -701,7 +726,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -726,7 +752,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -758,7 +785,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -791,7 +819,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -824,7 +853,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.MultipleBlankL
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -848,7 +878,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -873,7 +904,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -906,7 +938,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -940,7 +973,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -975,7 +1009,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -1001,7 +1036,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -1031,7 +1067,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -1076,7 +1113,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -1125,7 +1163,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -1178,7 +1217,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
     }
 }

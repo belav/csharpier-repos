@@ -41,28 +41,28 @@ namespace Microsoft.Extensions.Caching.SqlConfig.Tools
                 throw new ArgumentException("Table name cannot be empty or null");
             }
 
-            var tableNameWithSchema = string.Format(
-                CultureInfo.InvariantCulture,
-                "{0}.{1}",
-                DelimitIdentifier(schemaName),
-                DelimitIdentifier(tableName)
-            );
-            CreateTable = string.Format(
-                CultureInfo.InvariantCulture,
-                CreateTableFormat,
-                tableNameWithSchema
-            );
-            CreateNonClusteredIndexOnExpirationTime = string.Format(
-                CultureInfo.InvariantCulture,
-                CreateNonClusteredIndexOnExpirationTimeFormat,
-                tableNameWithSchema
-            );
-            TableInfo = string.Format(
-                CultureInfo.InvariantCulture,
-                TableInfoFormat,
-                EscapeLiteral(schemaName),
-                EscapeLiteral(tableName)
-            );
+            var tableNameWithSchema = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}.{1}",
+                    DelimitIdentifier(schemaName),
+                    DelimitIdentifier(tableName)
+                );
+            CreateTable = string
+                .Format(CultureInfo.InvariantCulture, CreateTableFormat, tableNameWithSchema);
+            CreateNonClusteredIndexOnExpirationTime = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    CreateNonClusteredIndexOnExpirationTimeFormat,
+                    tableNameWithSchema
+                );
+            TableInfo = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    TableInfoFormat,
+                    EscapeLiteral(schemaName),
+                    EscapeLiteral(tableName)
+                );
         }
 
         public string CreateTable { get; }

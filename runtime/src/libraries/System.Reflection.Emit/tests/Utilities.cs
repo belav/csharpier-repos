@@ -186,11 +186,11 @@ namespace System.Reflection.Emit.Tests
             );
 
             ConstructorInfo createdConstructor = createdType.GetConstructors(
-                    BindingFlags.Static
-                        | BindingFlags.Instance
-                        | BindingFlags.Public
-                        | BindingFlags.NonPublic
-                )
+                BindingFlags.Static
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+            )
                 .Single(ctor => ctor.IsStatic == constructor.IsStatic);
 
             CallingConventions expectedCallingConvention = CallingConventions.Standard;

@@ -71,8 +71,8 @@ namespace Microsoft.CodeAnalysis.Options
 
             foreach (
                 var optionGrouping in options.Where(
-                        o => o.StorageLocations.Any(l => l is IEditorConfigStorageLocation2)
-                    )
+                    o => o.StorageLocations.Any(l => l is IEditorConfigStorageLocation2)
+                )
                     .GroupBy(o => (o as IOptionWithGroup)?.Group ?? OptionGroup.Default)
                     .OrderBy(g => g.Key.Priority)
             )

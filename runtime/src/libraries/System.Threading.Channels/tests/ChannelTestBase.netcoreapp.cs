@@ -192,9 +192,8 @@ namespace System.Threading.Channels.Tests
             for (int i = 0; i < 10; i++)
             {
                 Assert.True(c.Writer.TryWrite(i));
-                IAsyncEnumerator<int> e = (
-                    sameEnumerable ? enumerable : c.Reader.ReadAllAsync()
-                ).GetAsyncEnumerator();
+                IAsyncEnumerator<int> e = (sameEnumerable ? enumerable : c.Reader.ReadAllAsync())
+                    .GetAsyncEnumerator();
                 ValueTask<bool> vt = e.MoveNextAsync();
                 Assert.True(vt.IsCompletedSuccessfully);
                 Assert.True(vt.Result);
@@ -225,9 +224,8 @@ namespace System.Threading.Channels.Tests
             IAsyncEnumerable<int> enumerable = c.Reader.ReadAllAsync();
 
             IAsyncEnumerator<int> e1 = enumerable.GetAsyncEnumerator();
-            IAsyncEnumerator<int> e2 = (
-                sameEnumerable ? enumerable : c.Reader.ReadAllAsync()
-            ).GetAsyncEnumerator();
+            IAsyncEnumerator<int> e2 = (sameEnumerable ? enumerable : c.Reader.ReadAllAsync())
+                .GetAsyncEnumerator();
             Assert.NotSame(e1, e2);
 
             ValueTask<bool> vt1,

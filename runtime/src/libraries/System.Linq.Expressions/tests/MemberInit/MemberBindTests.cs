@@ -75,9 +75,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullBindings()
         {
-            PropertyInfo mem = typeof(PropertyAndFields).GetProperty(
-                nameof(PropertyAndFields.StringProperty)
-            );
+            PropertyInfo mem = typeof(PropertyAndFields)
+                .GetProperty(nameof(PropertyAndFields.StringProperty));
             MethodInfo meth = mem.GetGetMethod();
             AssertExtensions.Throws<ArgumentNullException>(
                 "bindings",
@@ -100,9 +99,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullBindingInBindings()
         {
-            PropertyInfo mem = typeof(PropertyAndFields).GetProperty(
-                nameof(PropertyAndFields.StringProperty)
-            );
+            PropertyInfo mem = typeof(PropertyAndFields)
+                .GetProperty(nameof(PropertyAndFields.StringProperty));
             MethodInfo meth = mem.GetGetMethod();
             AssertExtensions.Throws<ArgumentNullException>(
                 "bindings",
@@ -399,9 +397,9 @@ namespace System.Linq.Expressions.Tests
         public void GlobalMethod()
         {
             ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(
-                    new AssemblyName("Name"),
-                    AssemblyBuilderAccess.RunAndCollect
-                )
+                new AssemblyName("Name"),
+                AssemblyBuilderAccess.RunAndCollect
+            )
                 .DefineDynamicModule("Module");
             MethodBuilder globalMethod = module.DefineGlobalMethod(
                 "GlobalMethod",
@@ -440,9 +438,8 @@ namespace System.Linq.Expressions.Tests
                 typeof(Inner).GetProperty(nameof(Inner.Value)),
                 Expression.Constant(0)
             );
-            PropertyInfo property = typeof(Outer).GetProperty(
-                nameof(Outer.StaticWriteonlyInnerProperty)
-            );
+            PropertyInfo property = typeof(Outer)
+                .GetProperty(nameof(Outer.StaticWriteonlyInnerProperty));
             AssertExtensions.Throws<ArgumentException>(
                 "member",
                 () => Expression.MemberBind(property, bind)

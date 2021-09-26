@@ -91,11 +91,12 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             try
             {
-                MsQuicApi.Api.SetCallbackHandlerDelegate(
-                    _state.Handle,
-                    s_connectionDelegate,
-                    GCHandle.ToIntPtr(_stateHandle)
-                );
+                MsQuicApi.Api
+                    .SetCallbackHandlerDelegate(
+                        _state.Handle,
+                        s_connectionDelegate,
+                        GCHandle.ToIntPtr(_stateHandle)
+                    );
             }
             catch
             {
@@ -127,12 +128,13 @@ namespace System.Net.Quic.Implementations.MsQuic
                     options
                 );
 
-                uint status = MsQuicApi.Api.ConnectionOpenDelegate(
-                    MsQuicApi.Api.Registration,
-                    s_connectionDelegate,
-                    GCHandle.ToIntPtr(_stateHandle),
-                    out _state.Handle
-                );
+                uint status = MsQuicApi.Api
+                    .ConnectionOpenDelegate(
+                        MsQuicApi.Api.Registration,
+                        s_connectionDelegate,
+                        GCHandle.ToIntPtr(_stateHandle),
+                        out _state.Handle
+                    );
 
                 QuicExceptionHelpers.ThrowIfFailed(status, "Could not open the connection.");
             }
@@ -169,10 +171,11 @@ namespace System.Net.Quic.Implementations.MsQuic
                 state.Connection._localEndPoint = MsQuicAddressHelpers.INetToIPEndPoint(
                     ref inetAddress
                 );
-                state.Connection.SetNegotiatedAlpn(
-                    connectionEvent.Data.Connected.NegotiatedAlpn,
-                    connectionEvent.Data.Connected.NegotiatedAlpnLength
-                );
+                state.Connection
+                    .SetNegotiatedAlpn(
+                        connectionEvent.Data.Connected.NegotiatedAlpn,
+                        connectionEvent.Data.Connected.NegotiatedAlpnLength
+                    );
                 state.Connection = null;
 
                 state.Connected = true;
@@ -297,9 +300,8 @@ namespace System.Net.Quic.Implementations.MsQuic
                     chain = new X509Chain();
                     chain.ChainPolicy.RevocationMode = connection._revocationMode;
                     chain.ChainPolicy.RevocationFlag = X509RevocationFlag.ExcludeRoot;
-                    chain.ChainPolicy.ApplicationPolicy.Add(
-                        connection._isServer ? s_clientAuthOid : s_serverAuthOid
-                    );
+                    chain.ChainPolicy.ApplicationPolicy
+                        .Add(connection._isServer ? s_clientAuthOid : s_serverAuthOid);
 
                     if (!chain.Build(certificate))
                     {
@@ -360,7 +362,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             try
             {
-                stream = await _state.AcceptQueue.Reader.ReadAsync(cancellationToken)
+                stream = await _state.AcceptQueue.Reader
+                    .ReadAsync(cancellationToken)
                     .ConfigureAwait(false);
             }
             catch (ChannelClosedException)
@@ -445,13 +448,14 @@ namespace System.Net.Quic.Implementations.MsQuic
             _state.Connection = this;
             try
             {
-                uint status = MsQuicApi.Api.ConnectionStartDelegate(
-                    _state.Handle,
-                    _configuration,
-                    af,
-                    address,
-                    (ushort)port
-                );
+                uint status = MsQuicApi.Api
+                    .ConnectionStartDelegate(
+                        _state.Handle,
+                        _configuration,
+                        af,
+                        address,
+                        (ushort)port
+                    );
 
                 QuicExceptionHelpers.ThrowIfFailed(status, "Failed to connect to peer.");
             }

@@ -78,9 +78,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             var diagnostic = context.Diagnostics.First();
             var properties = diagnostic.Properties;
             var missingCases = bool.Parse(properties[PopulateSwitchStatementHelpers.MissingCases]!);
-            var missingDefaultCase = bool.Parse(
-                properties[PopulateSwitchStatementHelpers.MissingDefaultCase]!
-            );
+            var missingDefaultCase = bool
+                .Parse(properties[PopulateSwitchStatementHelpers.MissingDefaultCase]!);
 
             Debug.Assert(missingCases || missingDefaultCase);
 
@@ -194,14 +193,14 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             foreach (var diagnostic in diagnostics)
             {
                 await FixOneDiagnosticAsync(
-                        document,
-                        editor,
-                        diagnostic,
-                        addCases,
-                        addDefaultCase,
-                        diagnostics.Length == 1,
-                        cancellationToken
-                    )
+                    document,
+                    editor,
+                    diagnostic,
+                    addCases,
+                    addDefaultCase,
+                    diagnostics.Length == 1,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -216,12 +215,10 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             CancellationToken cancellationToken
         )
         {
-            var hasMissingCases = bool.Parse(
-                diagnostic.Properties[PopulateSwitchStatementHelpers.MissingCases]!
-            );
-            var hasMissingDefaultCase = bool.Parse(
-                diagnostic.Properties[PopulateSwitchStatementHelpers.MissingDefaultCase]!
-            );
+            var hasMissingCases = bool
+                .Parse(diagnostic.Properties[PopulateSwitchStatementHelpers.MissingCases]!);
+            var hasMissingDefaultCase = bool
+                .Parse(diagnostic.Properties[PopulateSwitchStatementHelpers.MissingDefaultCase]!);
 
             var switchLocation = diagnostic.AdditionalLocations[0];
             var switchNode =
@@ -274,9 +271,9 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                 var missingArms =
                     from e in GetMissingEnumMembers(switchOperation)
                     let caseLabel = (TMemberAccessExpression)generator.MemberAccessExpression(
-                            generator.TypeExpression(enumType),
-                            e.Name
-                        )
+                        generator.TypeExpression(enumType),
+                        e.Name
+                    )
                         .WithAdditionalAnnotations(Simplifier.Annotation)
                     select CreateSwitchArm(generator, semanticModel.Compilation, caseLabel);
 

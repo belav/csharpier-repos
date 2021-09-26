@@ -67,7 +67,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     ".NET 4.5.1",
                     "Microsoft SignalR/3.1 (Unknown Version; Linux; .NET; .NET 4.5.1)"
                 ),
-            }.ToDictionary(t => t.Name);
+            }
+                .ToDictionary(t => t.Name);
 
         public static IEnumerable<object[]> UserAgentTestDataNames =>
             UserAgents.Keys.Select(name => new object[] { name });

@@ -41,14 +41,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 && (
                     !_compareNavigations
                     || (
-                        new NavigationComparer(_compareAnnotations).Equals(
-                            x.DependentToPrincipal,
-                            y.DependentToPrincipal
-                        )
-                        && new NavigationComparer(_compareAnnotations).Equals(
-                            x.PrincipalToDependent,
-                            y.PrincipalToDependent
-                        )
+                        new NavigationComparer(_compareAnnotations)
+                            .Equals(x.DependentToPrincipal, y.DependentToPrincipal)
+                        && new NavigationComparer(_compareAnnotations)
+                            .Equals(x.PrincipalToDependent, y.PrincipalToDependent)
                     )
                 )
                 && (

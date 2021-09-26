@@ -347,10 +347,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 // We're specifically using OrdinalIgnoreCase here because Razor treats all paths as case-insensitive.
                 if (
-                    !document.Source.FilePath.StartsWith(
-                        directiveLocationDirectory,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    !document.Source.FilePath
+                        .StartsWith(directiveLocationDirectory, StringComparison.OrdinalIgnoreCase)
                     || document.Source.FilePath.Length <= directiveLocationDirectory.Length
                 )
                 {
@@ -361,9 +359,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 {
                     // We know that the document containing the namespace directive is in the current document's heirarchy.
                     // Let's compute the actual relative path that we'll use to compute the namespace suffix.
-                    relativePath = document.Source.FilePath.Substring(
-                        directiveLocationDirectory.Length
-                    );
+                    relativePath = document.Source.FilePath
+                        .Substring(directiveLocationDirectory.Length);
                 }
             }
             else if (fallbackToRootNamespace)
@@ -530,8 +527,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     )
                     {
                         LastNamespaceContent = directiveContent.Substring(
-                                NamespaceDirective.Directive.Directive.Length
-                            )
+                            NamespaceDirective.Directive.Directive.Length
+                        )
                             .Trim();
                         LastNamespaceLocation = node.GetSourceSpan(_source);
                     }

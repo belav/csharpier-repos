@@ -143,9 +143,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                 if (internalServiceProvider != null)
                 {
                     using var scope = internalServiceProvider.CreateScope();
-                    var conventionPlugins = scope.ServiceProvider.GetService<
-                        IEnumerable<IConventionSetPlugin>
-                    >();
+                    var conventionPlugins = scope.ServiceProvider
+                        .GetService<IEnumerable<IConventionSetPlugin>>();
                     if (conventionPlugins?.Any(s => s is ProxiesConventionSetPlugin) == false)
                     {
                         throw new InvalidOperationException(ProxiesStrings.ProxyServicesMissing);
@@ -190,11 +189,13 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             {
                 debugInfo["Proxies:" + nameof(ProxiesExtensions.UseLazyLoadingProxies)] = (
                     Extension._useLazyLoadingProxies ? 541 : 0
-                ).ToString(CultureInfo.InvariantCulture);
+                )
+                    .ToString(CultureInfo.InvariantCulture);
 
                 debugInfo["Proxies:" + nameof(ProxiesExtensions.UseChangeTrackingProxies)] = (
                     Extension._useChangeTrackingProxies ? 541 : 0
-                ).ToString(CultureInfo.InvariantCulture);
+                )
+                    .ToString(CultureInfo.InvariantCulture);
             }
         }
     }

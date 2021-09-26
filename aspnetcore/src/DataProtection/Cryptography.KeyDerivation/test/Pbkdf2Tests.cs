@@ -496,13 +496,8 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation
             string expectedDerivedKeyAsBase64
         ) where TProvider : IPbkdf2Provider, new()
         {
-            byte[] derivedKey = new TProvider().DeriveKey(
-                password,
-                salt,
-                prf,
-                iterationCount,
-                numBytesRequested
-            );
+            byte[] derivedKey = new TProvider()
+                .DeriveKey(password, salt, prf, iterationCount, numBytesRequested);
             Assert.Equal(numBytesRequested, derivedKey.Length);
             Assert.Equal(expectedDerivedKeyAsBase64, Convert.ToBase64String(derivedKey));
         }

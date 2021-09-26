@@ -108,8 +108,8 @@ namespace System.Linq.Expressions.Tests
 
     class CachedTypeFactory : DefaultTypeFactory
     {
-        private static readonly PropertyInfo s_RuntimeTypeHandle_Value =
-            typeof(RuntimeTypeHandle).GetProperty("Value");
+        private static readonly PropertyInfo s_RuntimeTypeHandle_Value = typeof(RuntimeTypeHandle)
+            .GetProperty("Value");
 
         private readonly Dictionary<IntPtr, Type> _cache = new Dictionary<IntPtr, Type>();
 

@@ -67,9 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             // Exception 2: Similar behavior for do-while
             if (common.ContainsDiagnostics && !CloseBraceOfTryOrDoBlock(endToken))
             {
-                smartTokenformattingRules = (new NoLineChangeFormattingRule()).Concat(
-                    _formattingRules
-                );
+                smartTokenformattingRules = (new NoLineChangeFormattingRule())
+                    .Concat(_formattingRules);
             }
 
             return Formatter.GetFormattedTextChanges(
@@ -131,9 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                 }
             }
 
-            var smartTokenformattingRules = (new SmartTokenFormattingRule()).Concat(
-                _formattingRules
-            );
+            var smartTokenformattingRules = (new SmartTokenFormattingRule())
+                .Concat(_formattingRules);
             var adjustedStartPosition = previousToken.SpanStart;
             var indentStyle = _optionSet.GetOption(
                 FormattingOptions.SmartIndent,
@@ -145,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             )
             {
                 RoslynDebug.AssertNotNull(token.SyntaxTree);
-                var text = await token.SyntaxTree.GetTextAsync(cancellationToken)
+                var text = await token.SyntaxTree
+                    .GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (token.IsFirstTokenOnLine(text))
                 {
@@ -172,11 +171,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             )
             {
                 // no line operation. no line changes what so ever
-                var lineOperation = base.GetAdjustNewLinesOperation(
-                    in previousToken,
-                    in currentToken,
-                    in nextOperation
-                );
+                var lineOperation = base
+                    .GetAdjustNewLinesOperation(
+                        in previousToken,
+                        in currentToken,
+                        in nextOperation
+                    );
                 if (lineOperation != null)
                 {
                     // ignore force if same line option
@@ -214,11 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                 in NextGetAdjustSpacesOperation nextOperation
             )
             {
-                var spaceOperation = base.GetAdjustSpacesOperation(
-                    in previousToken,
-                    in currentToken,
-                    in nextOperation
-                );
+                var spaceOperation = base
+                    .GetAdjustSpacesOperation(in previousToken, in currentToken, in nextOperation);
 
                 // if there is force space operation, convert it to ForceSpaceIfSingleLine operation.
                 // (force space basically means remove all line breaks)

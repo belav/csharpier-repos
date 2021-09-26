@@ -307,7 +307,8 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                return await this.TextAndVersionSource.GetValueAsync(cancellationToken)
+                return await this.TextAndVersionSource
+                    .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -330,7 +331,8 @@ namespace Microsoft.CodeAnalysis
             CancellationToken cancellationToken
         )
         {
-            var textAndVersion = await this.TextAndVersionSource.GetValueAsync(cancellationToken)
+            var textAndVersion = await this.TextAndVersionSource
+                .GetValueAsync(cancellationToken)
                 .ConfigureAwait(false);
             return textAndVersion.Version;
         }

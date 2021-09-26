@@ -75,7 +75,7 @@ class C
         public void FindLeafNodeAndPartner1()
         {
             var leftRoot = SyntaxFactory.ParseSyntaxTree(
-                    @"
+                @"
 using System;
 
 class C
@@ -89,12 +89,11 @@ class C
     }
 }
 "
-                )
-                .GetRoot();
+            ).GetRoot();
             var leftPosition =
                 leftRoot.DescendantNodes().OfType<LiteralExpressionSyntax>().ElementAt(2).SpanStart; // 0 within Console.WriteLine(0)
             var rightRoot = SyntaxFactory.ParseSyntaxTree(
-                    @"
+                @"
 using System;
 
 class C
@@ -111,8 +110,7 @@ class C
     }
 }
 "
-                )
-                .GetRoot();
+            ).GetRoot();
 
             SyntaxUtilities.FindLeafNodeAndPartner(
                 leftRoot,
@@ -131,7 +129,7 @@ class C
             // Check that the method does not fail even if the index of the child (4)
             // is greater than the count of children on the corresponding (from the upper side) node (3).
             var leftRoot = SyntaxFactory.ParseSyntaxTree(
-                    @"
+                @"
 using System;
 
 class C
@@ -148,13 +146,12 @@ class C
     }
 }
 "
-                )
-                .GetRoot();
+            ).GetRoot();
 
             var leftPosition =
                 leftRoot.DescendantNodes().OfType<LiteralExpressionSyntax>().ElementAt(5).SpanStart; // 3 within Console.WriteLine(3)
             var rightRoot = SyntaxFactory.ParseSyntaxTree(
-                    @"
+                @"
 using System;
 
 class C
@@ -174,8 +171,7 @@ class C
     }
 }
 "
-                )
-                .GetRoot();
+            ).GetRoot();
 
             SyntaxUtilities.FindLeafNodeAndPartner(
                 leftRoot,

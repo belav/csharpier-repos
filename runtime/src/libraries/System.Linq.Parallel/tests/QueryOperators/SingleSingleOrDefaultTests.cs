@@ -288,24 +288,20 @@ namespace System.Linq.Parallel.Tests
         public static void Single_AggregateException()
         {
             AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .Single(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                () => ParallelEnumerable.Range(0, 1).Single(
+                        x =>
+                        {
+                            throw new DeliberateTestException();
+                        }
+                    )
             );
             AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 1)
-                        .SingleOrDefault(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                () => ParallelEnumerable.Range(0, 1).SingleOrDefault(
+                        x =>
+                        {
+                            throw new DeliberateTestException();
+                        }
+                    )
             );
         }
 

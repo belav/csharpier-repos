@@ -379,7 +379,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void Lines_Simple_Document()
         {
             // Arrange
-            var content = new StringBuilder().Append("The quick brown")
+            var content = new StringBuilder()
+                .Append("The quick brown")
                 .Append('\n')
                 .Append("fox")
                 .Append("\r\n")

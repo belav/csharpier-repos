@@ -72,7 +72,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                             webSocketDebuggerUrl = "ws://localhost:9300/91d87807-8a81-4f49-878c-a5604103b0a4"
                         }
                     )
-                ).ToString();
+                )
+                    .ToString();
 
                 Logger.LogTrace($"webserver: sending: {response}");
                 await context.Response.WriteAsync(response, new CancellationTokenSource().Token);

@@ -492,7 +492,9 @@ IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean, IsInvalid) (
             {
                 // CS0128: A local variable or function named 'y' is already defined in this scope
                 //         if (/*<bind>*/x is int y/*</bind>*/) Console.WriteLine(y);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y").WithArguments("y").WithLocation(8, 32)
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y")
+                    .WithArguments("y")
+                    .WithLocation(8, 32)
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IsPatternExpressionSyntax>(

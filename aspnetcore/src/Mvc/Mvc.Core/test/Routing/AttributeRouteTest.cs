@@ -51,24 +51,23 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             Func<ActionDescriptor[], IRouter> handlerFactory = (_) =>
             {
                 var handler = new Mock<IRouter>();
-                handler.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-                    .Returns<RouteContext>(
-                        routeContext =>
+                handler.Setup(r => r.RouteAsync(It.IsAny<RouteContext>())).Returns<RouteContext>(
+                    routeContext =>
+                    {
+                        if (routeContext.RouteData.Values.ContainsKey("key1"))
                         {
-                            if (routeContext.RouteData.Values.ContainsKey("key1"))
-                            {
-                                selected = actions[0];
-                            }
-                            else if (routeContext.RouteData.Values.ContainsKey("key2"))
-                            {
-                                selected = actions[1];
-                            }
-
-                            routeContext.Handler = (c) => Task.CompletedTask;
-
-                            return Task.CompletedTask;
+                            selected = actions[0];
                         }
-                    );
+                        else if (routeContext.RouteData.Values.ContainsKey("key2"))
+                        {
+                            selected = actions[1];
+                        }
+
+                        routeContext.Handler = (c) => Task.CompletedTask;
+
+                        return Task.CompletedTask;
+                    }
+                );
                 return handler.Object;
             };
 
@@ -797,9 +796,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private static TreeRouteBuilder CreateBuilder()
         {
-            var services = new ServiceCollection().AddSingleton<ILoggerFactory>(
-                    NullLoggerFactory.Instance
-                )
+            var services = new ServiceCollection()
+                .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
                 .AddLogging()
                 .AddRouting()
                 .AddOptions()
@@ -843,9 +841,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             IActionDescriptorCollectionProvider actionDescriptorProvider
         )
         {
-            var services = new ServiceCollection().AddSingleton<ILoggerFactory>(
-                    NullLoggerFactory.Instance
-                )
+            var services = new ServiceCollection()
+                .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
                 .AddLogging()
                 .AddRouting()
                 .AddOptions()

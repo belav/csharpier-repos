@@ -55,9 +55,9 @@ namespace System.Text
 
             // extractedBits[i] = (value[i] >> 7) & (1 << (12 * (i % 2)));
             Vector128<byte> mostSignificantBitIsSet = AdvSimd.ShiftRightArithmetic(
-                    value.AsSByte(),
-                    7
-                )
+                value.AsSByte(),
+                7
+            )
                 .AsByte();
             Vector128<byte> extractedBits = AdvSimd.And(mostSignificantBitIsSet, bitmask);
 
@@ -1747,9 +1747,9 @@ namespace System.Text
                         (
                             Sse2.MoveMask(
                                 Sse2.AddSaturate(
-                                        utf16VectorFirst.AsUInt16(),
-                                        asciiMaskForAddSaturate
-                                    )
+                                    utf16VectorFirst.AsUInt16(),
+                                    asciiMaskForAddSaturate
+                                )
                                     .AsByte()
                             ) & NonAsciiDataSeenMask
                         ) != 0
@@ -2266,7 +2266,8 @@ namespace System.Text
             else if (AdvSimd.Arm64.IsSupported)
             {
                 Vector128<byte> vecNarrow = AdvSimd.DuplicateToVector128(value).AsByte();
-                Vector128<ulong> vecWide = AdvSimd.Arm64.ZipLow(vecNarrow, Vector128<byte>.Zero)
+                Vector128<ulong> vecWide = AdvSimd.Arm64
+                    .ZipLow(vecNarrow, Vector128<byte>.Zero)
                     .AsUInt64();
                 Unsafe.WriteUnaligned<ulong>(
                     ref Unsafe.As<char, byte>(ref outputBuffer),

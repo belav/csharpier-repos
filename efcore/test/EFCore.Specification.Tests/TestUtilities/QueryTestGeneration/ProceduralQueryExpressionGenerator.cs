@@ -503,21 +503,20 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
             catch (Exception exception)
             {
                 if (
-                    exception.Message.Contains(
-                        "A constant expression was encountered in the ORDER BY list"
-                    )
+                    exception.Message
+                        .Contains("A constant expression was encountered in the ORDER BY list")
                     || exception.Message.Contains("has already been associated with an expression.")
-                    || exception.Message.Contains(
-                        "Object reference not set to an instance of an object."
-                    )
+                    || exception.Message
+                        .Contains("Object reference not set to an instance of an object.")
                 ) { }
                 else if (exception.Message == @"Invalid column name 'Key'.") // 12564
                 { }
                 else if (
-                    exception.Message.StartsWith(
-                        @"Error generated for warning 'Microsoft.EntityFrameworkCore.Query.IncludeIgnoredWarning",
-                        StringComparison.Ordinal
-                    )
+                    exception.Message
+                        .StartsWith(
+                            @"Error generated for warning 'Microsoft.EntityFrameworkCore.Query.IncludeIgnoredWarning",
+                            StringComparison.Ordinal
+                        )
                 ) { }
                 else if (
                     exception.Message
@@ -530,9 +529,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                 {
                     if (
                         _knownFailingTests.ContainsKey(testMethodName)
-                        && _knownFailingTests[testMethodName].Any(
-                            e => exception.Message.Contains(e)
-                        )
+                        && _knownFailingTests[testMethodName]
+                            .Any(e => exception.Message.Contains(e))
                     ) { }
                     else
                     {

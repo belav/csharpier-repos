@@ -49,13 +49,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 return;
             }
 
-            base.ProcessPropertyAnnotationChanged(
-                propertyBuilder,
-                name,
-                annotation,
-                oldAnnotation,
-                context
-            );
+            base
+                .ProcessPropertyAnnotationChanged(
+                    propertyBuilder,
+                    name,
+                    annotation,
+                    oldAnnotation,
+                    context
+                );
         }
 
         /// <summary>

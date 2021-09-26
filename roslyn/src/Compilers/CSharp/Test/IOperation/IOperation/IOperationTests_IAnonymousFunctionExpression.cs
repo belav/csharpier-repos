@@ -470,13 +470,14 @@ class Program
                 .DescendantNodes()
                 .OfType<LocalDeclarationStatementSyntax>()
                 .Single();
-            var lambdaSyntax =
-                (LambdaExpressionSyntax)variableDeclaration.Declaration.Variables.Single().Initializer.Value;
+            var lambdaSyntax = (LambdaExpressionSyntax)variableDeclaration.Declaration.Variables
+                .Single().Initializer.Value;
 
             var variableDeclarationGroupOperation =
                 (IVariableDeclarationGroupOperation)semanticModel.GetOperation(variableDeclaration);
             var variableTreeLambdaOperation =
-                (IAnonymousFunctionOperation)variableDeclarationGroupOperation.Declarations.Single()
+                (IAnonymousFunctionOperation)variableDeclarationGroupOperation.Declarations
+                    .Single()
                     .Declarators.Single().Initializer.Value;
             var lambdaOperation = (IAnonymousFunctionOperation)semanticModel.GetOperation(
                 lambdaSyntax
@@ -489,7 +490,8 @@ class Program
             var variableDeclarationGroupOperationSecondRequest =
                 (IVariableDeclarationGroupOperation)semanticModel.GetOperation(variableDeclaration);
             var variableTreeLambdaOperationSecondRequest =
-                (IAnonymousFunctionOperation)variableDeclarationGroupOperation.Declarations.Single()
+                (IAnonymousFunctionOperation)variableDeclarationGroupOperation.Declarations
+                    .Single()
                     .Declarators.Single().Initializer.Value;
             var lambdaOperationSecondRequest =
                 (IAnonymousFunctionOperation)semanticModel.GetOperation(lambdaSyntax);
@@ -568,8 +570,8 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 .DescendantNodes()
                 .OfType<LocalDeclarationStatementSyntax>()
                 .Single();
-            var lambdaSyntax =
-                (LambdaExpressionSyntax)variableDeclaration.Declaration.Variables.Single().Initializer.Value;
+            var lambdaSyntax = (LambdaExpressionSyntax)variableDeclaration.Declaration.Variables
+                .Single().Initializer.Value;
             var lambdaOperation = (IAnonymousFunctionOperation)semanticModel.GetOperation(
                 lambdaSyntax
             );
@@ -976,9 +978,8 @@ struct C
 
             IFlowAnonymousFunctionOperation getLambda(ControlFlowGraph graph)
             {
-                return graph.Blocks.SelectMany(
-                        b => b.Operations.SelectMany(o => o.DescendantsAndSelf())
-                    )
+                return graph.Blocks
+                    .SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
                     .OfType<IFlowAnonymousFunctionOperation>()
                     .Single();
             }
@@ -1053,9 +1054,8 @@ struct C
 
             IFlowAnonymousFunctionOperation getLambda(ControlFlowGraph graph, int index)
             {
-                return graph.Blocks.SelectMany(
-                        b => b.Operations.SelectMany(o => o.DescendantsAndSelf())
-                    )
+                return graph.Blocks
+                    .SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
                     .OfType<IFlowAnonymousFunctionOperation>()
                     .ElementAt(index);
             }

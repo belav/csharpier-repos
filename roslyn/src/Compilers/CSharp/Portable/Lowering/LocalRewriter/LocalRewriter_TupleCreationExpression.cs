@@ -55,8 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(type.IsTupleType);
 
-            ArrayBuilder<NamedTypeSymbol> underlyingTupleTypeChain =
-                ArrayBuilder<NamedTypeSymbol>.GetInstance();
+            ArrayBuilder<NamedTypeSymbol> underlyingTupleTypeChain = ArrayBuilder<NamedTypeSymbol>
+                .GetInstance();
             NamedTypeSymbol.GetUnderlyingTypeChain(type, underlyingTupleTypeChain);
 
             try
@@ -104,11 +104,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     do
                     {
                         ImmutableArray<BoundExpression> ctorArguments = ImmutableArray.Create(
-                                rewrittenArguments,
-                                (underlyingTupleTypeChain.Count - 1)
-                                    * (NamedTypeSymbol.ValueTupleRestPosition - 1),
-                                NamedTypeSymbol.ValueTupleRestPosition - 1
-                            )
+                            rewrittenArguments,
+                            (underlyingTupleTypeChain.Count - 1)
+                                * (NamedTypeSymbol.ValueTupleRestPosition - 1),
+                            NamedTypeSymbol.ValueTupleRestPosition - 1
+                        )
                             .Add(currentCreation);
 
                         MethodSymbol constructor = tuple8Ctor.AsMember(

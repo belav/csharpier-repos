@@ -444,14 +444,12 @@ namespace System.IO.Pipelines.Tests
                 var tcs = new TaskCompletionSource<int>();
                 val.Value = 10;
 
-                pipe.Reader.ReadAsync()
-                    .GetAwaiter()
-                    .OnCompleted(
-                        () =>
-                        {
-                            tcs.TrySetResult(val.Value);
-                        }
-                    );
+                pipe.Reader.ReadAsync().GetAwaiter().OnCompleted(
+                    () =>
+                    {
+                        tcs.TrySetResult(val.Value);
+                    }
+                );
 
                 val.Value = 20;
 
@@ -514,14 +512,12 @@ namespace System.IO.Pipelines.Tests
                 val.Value = 10;
 
                 pipe.Writer.WriteEmpty(20);
-                pipe.Writer.FlushAsync()
-                    .GetAwaiter()
-                    .OnCompleted(
-                        () =>
-                        {
-                            tcs.TrySetResult(val.Value);
-                        }
-                    );
+                pipe.Writer.FlushAsync().GetAwaiter().OnCompleted(
+                    () =>
+                    {
+                        tcs.TrySetResult(val.Value);
+                    }
+                );
 
                 val.Value = 20;
 

@@ -17,11 +17,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             DependencyContextType context
         )
         {
-            DgmlWriter<DependencyContextType>.WriteDependencyGraphToStream(
-                stream,
-                analysis,
-                context
-            );
+            DgmlWriter<DependencyContextType>
+                .WriteDependencyGraphToStream(stream, analysis, context);
         }
     }
 

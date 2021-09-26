@@ -333,17 +333,14 @@ namespace AutoMapper.UnitTests
             var config = new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap<ModelObject, DtoObject>()
-                        .ForMember(
-                            d => d.BaseString,
-                            m =>
-                            {
-                                m.Condition(
-                                    src => !string.IsNullOrWhiteSpace(src.DifferentBaseString)
-                                );
-                                m.MapFrom(s => s.DifferentBaseString);
-                            }
-                        );
+                    cfg.CreateMap<ModelObject, DtoObject>().ForMember(
+                        d => d.BaseString,
+                        m =>
+                        {
+                            m.Condition(src => !string.IsNullOrWhiteSpace(src.DifferentBaseString));
+                            m.MapFrom(s => s.DifferentBaseString);
+                        }
+                    );
 
                     cfg.CreateMap<ModelSubObject, DtoSubObject>()
                         .IncludeBase<ModelObject, DtoObject>();
@@ -362,15 +359,14 @@ namespace AutoMapper.UnitTests
             var config = new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap<ModelObject, DtoObject>()
-                        .ForMember(
-                            d => d.BaseString,
-                            m =>
-                            {
-                                m.MapFrom(s => s.DifferentBaseString);
-                                m.NullSubstitute("12345");
-                            }
-                        );
+                    cfg.CreateMap<ModelObject, DtoObject>().ForMember(
+                        d => d.BaseString,
+                        m =>
+                        {
+                            m.MapFrom(s => s.DifferentBaseString);
+                            m.NullSubstitute("12345");
+                        }
+                    );
 
                     cfg.CreateMap<ModelSubObject, DtoSubObject>()
                         .IncludeBase<ModelObject, DtoObject>();

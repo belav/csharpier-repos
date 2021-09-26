@@ -16,13 +16,11 @@ namespace http2cat
         public static async Task Main(string[] args)
         {
             using var host = new HostBuilder().ConfigureLogging(
-                    loggingBuilder =>
-                    {
-                        loggingBuilder.AddConsole();
-                    }
-                )
-                .UseHttp2Cat("https://localhost:5001", RunTestCase)
-                .Build();
+                loggingBuilder =>
+                {
+                    loggingBuilder.AddConsole();
+                }
+            ).UseHttp2Cat("https://localhost:5001", RunTestCase).Build();
 
             await host.RunAsync();
         }
@@ -61,9 +59,8 @@ namespace http2cat
 
             h2Connection.Logger.LogInformation("Received data in a single frame.");
 
-            h2Connection.Logger.LogInformation(
-                Encoding.UTF8.GetString(dataFrame.Payload.ToArray())
-            );
+            h2Connection.Logger
+                .LogInformation(Encoding.UTF8.GetString(dataFrame.Payload.ToArray()));
 
             var trailersFrame = await h2Connection.ReceiveFrameAsync();
 

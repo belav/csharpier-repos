@@ -231,12 +231,11 @@ public class WindowAndCursorProps
     public static void Title_SetUnix_Success()
     {
         RemoteExecutor.Invoke(
-                () =>
-                {
-                    Console.Title = "Title set by unit test";
-                }
-            )
-            .Dispose();
+            () =>
+            {
+                Console.Title = "Title set by unit test";
+            }
+        ).Dispose();
     }
 
     [Fact]
@@ -283,29 +282,28 @@ public class WindowAndCursorProps
     {
         // Try to set the title to some other value.
         RemoteExecutor.Invoke(
-                lengthOfTitleString =>
-                {
-                    string newTitle = new string('a', int.Parse(lengthOfTitleString));
-                    Console.Title = newTitle;
+            lengthOfTitleString =>
+            {
+                string newTitle = new string('a', int.Parse(lengthOfTitleString));
+                Console.Title = newTitle;
 
-                    if (
-                        newTitle.Length >= 511
-                        && !PlatformDetection.IsNetCore
-                        && PlatformDetection.IsWindows10Version1703OrGreater
-                        && !PlatformDetection.IsWindows10Version1709OrGreater
-                    )
-                    {
-                        // RS2 has a bug when getting the window title when the title length is longer than 513 character
-                        Assert.Throws<IOException>(() => Console.Title);
-                    }
-                    else
-                    {
-                        Assert.Equal(newTitle, Console.Title);
-                    }
-                },
-                lengthOfTitle.ToString()
-            )
-            .Dispose();
+                if (
+                    newTitle.Length >= 511
+                    && !PlatformDetection.IsNetCore
+                    && PlatformDetection.IsWindows10Version1703OrGreater
+                    && !PlatformDetection.IsWindows10Version1709OrGreater
+                )
+                {
+                    // RS2 has a bug when getting the window title when the title length is longer than 513 character
+                    Assert.Throws<IOException>(() => Console.Title);
+                }
+                else
+                {
+                    Assert.Equal(newTitle, Console.Title);
+                }
+            },
+            lengthOfTitle.ToString()
+        ).Dispose();
     }
 
     [Fact]

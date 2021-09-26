@@ -462,7 +462,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 where b.IsVisible
                 select b.Url
-            ).ToList();
+            )
+                .ToList();
 
             var result = Assert.Single(query);
             Assert.Equal("http://blog.com", result);
@@ -486,7 +487,8 @@ namespace Microsoft.EntityFrameworkCore
                 from p in g.DefaultIfEmpty()
                 where b.IsVisible
                 select b.Url
-            ).ToList();
+            )
+                .ToList();
 
             var result = Assert.Single(query);
             Assert.Equal("http://blog.com", result);
@@ -657,8 +659,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Contains(
                 @"See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.",
                 Assert.Throws<InvalidOperationException>(
-                        () => context.Set<CollectionScalar>().Where(e => e.Tags.Any()).ToList()
-                    )
+                    () => context.Set<CollectionScalar>().Where(e => e.Tags.Any()).ToList()
+                )
                     .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -673,8 +675,8 @@ namespace Microsoft.EntityFrameworkCore
                     @"DbSet<CollectionScalar>()    .Where(c => c.Tags.Count == 2)"
                 ),
                 Assert.Throws<InvalidOperationException>(
-                        () => context.Set<CollectionScalar>().Where(e => e.Tags.Count == 2).ToList()
-                    )
+                    () => context.Set<CollectionScalar>().Where(e => e.Tags.Count == 2).ToList()
+                )
                     .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -694,11 +696,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Contains(
                 @"See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.",
                 Assert.Throws<InvalidOperationException>(
-                        () =>
-                            context.Set<CollectionEnum>()
-                                .Where(e => e.Roles.Contains(sameRole))
-                                .ToList()
-                    )
+                    () =>
+                        context.Set<CollectionEnum>()
+                            .Where(e => e.Roles.Contains(sameRole))
+                            .ToList()
+                )
                     .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -1502,10 +1504,11 @@ namespace Microsoft.EntityFrameworkCore
             {
                 public static string Serialize(IDictionary<string, string> dictionary)
                 {
-                    return string.Join(
-                        Environment.NewLine,
-                        dictionary.Select(kvp => $"{{{kvp.Key},{kvp.Value}}}")
-                    );
+                    return string
+                        .Join(
+                            Environment.NewLine,
+                            dictionary.Select(kvp => $"{{{kvp.Key},{kvp.Value}}}")
+                        );
                 }
 
                 public static IDictionary<string, string> Deserialize(string s)
@@ -1550,8 +1553,8 @@ namespace Microsoft.EntityFrameworkCore
                         v =>
                             v.Length > 0
                                 ? v.Split(new[] { ';' })
-                                      .Select(f => (Roles)Enum.Parse(typeof(Roles), f))
-                                      .ToList()
+                                  .Select(f => (Roles)Enum.Parse(typeof(Roles), f))
+                                  .ToList()
                                 : new List<Roles>()
                     ) { }
             }

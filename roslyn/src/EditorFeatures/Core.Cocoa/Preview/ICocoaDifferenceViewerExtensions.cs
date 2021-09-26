@@ -39,9 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             public async Task SizeToFitAsync(CancellationToken cancellationToken)
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext.JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task (containing method uses JTF)
                 await CalculateSizeAsync(cancellationToken);
@@ -49,10 +48,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
                 // We have the height and width required to display the inline diff snapshot now.
                 // Set the height and width of the ICocoaDifferenceViewer accordingly.
-                _diffViewer.VisualElement.SetFrameSize(new CoreGraphics.CGSize(_width, _height));
-                _diffViewer.VisualElement.Subviews[0].SetFrameSize(
-                    new CoreGraphics.CGSize(_width, _height)
-                );
+                _diffViewer.VisualElement
+                    .SetFrameSize(new CoreGraphics.CGSize(_width, _height));
+                _diffViewer.VisualElement.Subviews[0]
+                    .SetFrameSize(new CoreGraphics.CGSize(_width, _height));
             }
 
             private async Task<IProjectionSnapshot> GetInlineBufferSnapshotAsync(
@@ -78,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
                 try
                 {
-                    return await completionSource.Task.WithCancellation(cancellationToken)
+                    return await completionSource.Task
+                        .WithCancellation(cancellationToken)
                         .ConfigureAwaitRunInline();
                 }
 
@@ -105,9 +105,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             private async Task CalculateSizeAsync(CancellationToken cancellationToken)
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext.JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 ICocoaTextView textView;
                 ITextSnapshot snapshot;

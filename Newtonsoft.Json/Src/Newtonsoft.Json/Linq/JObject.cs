@@ -150,11 +150,8 @@ namespace Newtonsoft.Json.Linq
             if (o.Type != JTokenType.Property)
             {
                 throw new ArgumentException(
-                    "Can not add {0} to {1}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        o.GetType(),
-                        GetType()
-                    )
+                    "Can not add {0} to {1}."
+                        .FormatWith(CultureInfo.InvariantCulture, o.GetType(), GetType())
                 );
             }
 
@@ -173,11 +170,8 @@ namespace Newtonsoft.Json.Linq
             if (_properties.TryGetValue(newProperty.Name, out existing))
             {
                 throw new ArgumentException(
-                    "Can not add property {0} to {1}. Property with the same name already exists on object.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        newProperty.Name,
-                        GetType()
-                    )
+                    "Can not add property {0} to {1}. Property with the same name already exists on object."
+                        .FormatWith(CultureInfo.InvariantCulture, newProperty.Name, GetType())
                 );
             }
         }
@@ -362,10 +356,11 @@ namespace Newtonsoft.Json.Linq
                 if (!(key is string propertyName))
                 {
                     throw new ArgumentException(
-                        "Accessed JObject values with invalid key value: {0}. Object property name expected.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            MiscellaneousUtils.ToString(key)
-                        )
+                        "Accessed JObject values with invalid key value: {0}. Object property name expected."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                MiscellaneousUtils.ToString(key)
+                            )
                     );
                 }
 
@@ -378,10 +373,11 @@ namespace Newtonsoft.Json.Linq
                 if (!(key is string propertyName))
                 {
                     throw new ArgumentException(
-                        "Set JObject values with invalid key value: {0}. Object property name expected.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            MiscellaneousUtils.ToString(key)
-                        )
+                        "Set JObject values with invalid key value: {0}. Object property name expected."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                MiscellaneousUtils.ToString(key)
+                            )
                     );
                 }
 
@@ -465,10 +461,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Error reading JObject from JsonReader. Current JsonReader item is not an object: {0}".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Error reading JObject from JsonReader. Current JsonReader item is not an object: {0}"
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
 
@@ -547,10 +541,8 @@ namespace Newtonsoft.Json.Linq
             if (token.Type != JTokenType.Object)
             {
                 throw new ArgumentException(
-                    "Object serialized to {0}. JObject instance expected.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        token.Type
-                    )
+                    "Object serialized to {0}. JObject instance expected."
+                        .FormatWith(CultureInfo.InvariantCulture, token.Type)
                 );
             }
 

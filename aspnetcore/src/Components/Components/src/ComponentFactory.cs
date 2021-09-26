@@ -68,19 +68,19 @@ namespace Microsoft.AspNetCore.Components
         {
             // Do all the reflection up front
             var injectableProperties = MemberAssignment.GetPropertiesIncludingInherited(
-                    type,
-                    _injectablePropertyBindingFlags
-                )
+                type,
+                _injectablePropertyBindingFlags
+            )
                 .Where(p => p.IsDefined(typeof(InjectAttribute)));
 
             var injectables = injectableProperties.Select(
-                    property =>
-                        (
-                            propertyName: property.Name,
-                            propertyType: property.PropertyType,
-                            setter: new PropertySetter(type, property)
-                        )
-                )
+                property =>
+                    (
+                        propertyName: property.Name,
+                        propertyType: property.PropertyType,
+                        setter: new PropertySetter(type, property)
+                    )
+            )
                 .ToArray();
 
             return Initialize;

@@ -77,11 +77,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
                     return string.Empty;
                 }
 
-                return string.Format(
-                    ServicesVSResources.Move_0_above_1,
-                    MemberContainers[SelectedIndex.Value].SymbolAutomationText,
-                    MemberContainers[SelectedIndex.Value - 1].SymbolAutomationText
-                );
+                return string
+                    .Format(
+                        ServicesVSResources.Move_0_above_1,
+                        MemberContainers[SelectedIndex.Value].SymbolAutomationText,
+                        MemberContainers[SelectedIndex.Value - 1].SymbolAutomationText
+                    );
             }
         }
 
@@ -94,11 +95,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
                     return string.Empty;
                 }
 
-                return string.Format(
-                    ServicesVSResources.Move_0_below_1,
-                    MemberContainers[SelectedIndex.Value].SymbolAutomationText,
-                    MemberContainers[SelectedIndex.Value + 1].SymbolAutomationText
-                );
+                return string
+                    .Format(
+                        ServicesVSResources.Move_0_below_1,
+                        MemberContainers[SelectedIndex.Value].SymbolAutomationText,
+                        MemberContainers[SelectedIndex.Value + 1].SymbolAutomationText
+                    );
             }
         }
 

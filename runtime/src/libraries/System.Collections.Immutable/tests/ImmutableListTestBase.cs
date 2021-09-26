@@ -65,24 +65,22 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ForEachTest()
         {
-            this.GetListQuery(ImmutableList<int>.Empty)
-                .ForEach(
-                    n =>
-                    {
-                        throw new ShouldNotBeInvokedException();
-                    }
-                );
+            this.GetListQuery(ImmutableList<int>.Empty).ForEach(
+                n =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                }
+            );
 
             var list = ImmutableList<int>.Empty.AddRange(Enumerable.Range(5, 3));
             var hitTest = new bool[list.Max() + 1];
-            this.GetListQuery(list)
-                .ForEach(
-                    i =>
-                    {
-                        Assert.False(hitTest[i]);
-                        hitTest[i] = true;
-                    }
-                );
+            this.GetListQuery(list).ForEach(
+                i =>
+                {
+                    Assert.False(hitTest[i]);
+                    hitTest[i] = true;
+                }
+            );
 
             for (int i = 0; i < hitTest.Length; i++)
             {
@@ -122,16 +120,12 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void FindLastTest()
         {
-            Assert.Equal(
-                0,
-                this.GetListQuery(ImmutableList<int>.Empty)
-                    .FindLast(
-                        n =>
-                        {
-                            throw new ShouldNotBeInvokedException();
-                        }
-                    )
-            );
+            Assert.Equal(0, this.GetListQuery(ImmutableList<int>.Empty).FindLast(
+                    n =>
+                    {
+                        throw new ShouldNotBeInvokedException();
+                    }
+                ));
             var list = ImmutableList<int>.Empty.AddRange(new[] { 2, 3, 4, 5, 6 });
             Assert.Equal(5, this.GetListQuery(list).FindLast(n => (n % 2) == 1));
         }
@@ -147,9 +141,8 @@ namespace System.Collections.Immutable.Tests
             );
 
             // Create a list with contents: 100,101,102,103,104,100,101,102,103,104
-            var list = ImmutableList<int>.Empty.AddRange(
-                Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5))
-            );
+            var list = ImmutableList<int>.Empty
+                .AddRange(Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5)));
             var bclList = list.ToList();
             Assert.Equal(-1, this.GetListQuery(list).FindIndex(n => n == 6));
 
@@ -209,9 +202,8 @@ namespace System.Collections.Immutable.Tests
             );
 
             // Create a list with contents: 100,101,102,103,104,100,101,102,103,104
-            var list = ImmutableList<int>.Empty.AddRange(
-                Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5))
-            );
+            var list = ImmutableList<int>.Empty
+                .AddRange(Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5)));
             var bclList = list.ToList();
             Assert.Equal(-1, this.GetListQuery(list).FindLastIndex(n => n == 6));
 

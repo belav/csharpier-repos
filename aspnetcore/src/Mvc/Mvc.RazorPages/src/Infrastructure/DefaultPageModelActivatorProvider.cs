@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             }
 
             if (
-                typeof(IAsyncDisposable).GetTypeInfo()
+                typeof(IAsyncDisposable)
+                    .GetTypeInfo()
                     .IsAssignableFrom(actionDescriptor.ModelTypeInfo)
             )
             {

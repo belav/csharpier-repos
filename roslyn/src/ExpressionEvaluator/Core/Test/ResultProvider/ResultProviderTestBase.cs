@@ -25,9 +25,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             // Value should not be cached since it depends on the current CultureInfo.
             var exceptionType =
-                typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException).Assembly.GetType(
-                    "Microsoft.CSharp.RuntimeBinder.DynamicMetaObjectProviderDebugView+DynamicDebugViewEmptyException"
-                );
+                typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException).Assembly
+                    .GetType(
+                        "Microsoft.CSharp.RuntimeBinder.DynamicMetaObjectProviderDebugView+DynamicDebugViewEmptyException"
+                    );
             var emptyProperty = exceptionType.GetProperty("Empty");
             return (string)emptyProperty.GetValue(exceptionType.Instantiate());
         }
@@ -606,10 +607,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         || (
                             expectedSuccess.CustomUIVisualizers != null
                             && actualSuccess.CustomUIVisualizers != null
-                            && expectedSuccess.CustomUIVisualizers.SequenceEqual(
-                                actualSuccess.CustomUIVisualizers,
-                                CustomUIVisualizerInfoComparer.Instance
-                            )
+                            && expectedSuccess.CustomUIVisualizers
+                                .SequenceEqual(
+                                    actualSuccess.CustomUIVisualizers,
+                                    CustomUIVisualizerInfoComparer.Instance
+                                )
                         )
                 );
             }

@@ -42,23 +42,15 @@ namespace BasicEventSourceTests
             BindingFlags flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
             if (!PlatformDetection.IsNetFramework)
             {
-                Type sr = typeof(EventSource).Assembly.GetType(
-                    "System.SR",
-                    throwOnError: true,
-                    ignoreCase: false
-                );
+                Type sr = typeof(EventSource).Assembly
+                    .GetType("System.SR", throwOnError: true, ignoreCase: false);
                 PropertyInfo resourceProp = sr.GetProperty(key, flags);
                 return (string)resourceProp.GetValue(null);
             }
 
             Type[] paramsType = new Type[] { typeof(string) };
-            MethodInfo getResourceString = typeof(Environment).GetMethod(
-                "GetResourceString",
-                flags,
-                null,
-                paramsType,
-                null
-            );
+            MethodInfo getResourceString = typeof(Environment)
+                .GetMethod("GetResourceString", flags, null, paramsType, null);
             return (string)getResourceString.Invoke(null, new object[] { key });
         }
         #endregion
@@ -184,20 +176,21 @@ namespace BasicEventSourceTests
             );
             AsserExceptionStringsEqual(
                 () =>
-                    string.Join(
-                        Environment.NewLine,
-                        GetResourceString(
-                            "EventSource_IllegalKeywordsValue",
-                            "Kwd1",
-                            "0x100000000000"
+                    string
+                        .Join(
+                            Environment.NewLine,
+                            GetResourceString(
+                                "EventSource_IllegalKeywordsValue",
+                                "Kwd1",
+                                "0x100000000000"
+                            ),
+                            GetResourceString(
+                                "EventSource_KeywordCollision",
+                                "Session3",
+                                "Kwd1",
+                                "0x100000000000"
+                            )
                         ),
-                        GetResourceString(
-                            "EventSource_KeywordCollision",
-                            "Session3",
-                            "Kwd1",
-                            "0x100000000000"
-                        )
-                    ),
                 e
             );
 
@@ -245,15 +238,16 @@ namespace BasicEventSourceTests
             );
             AsserExceptionStringsEqual(
                 () =>
-                    string.Join(
-                        Environment.NewLine,
-                        GetResourceString("EventSource_IllegalOpcodeValue", "Op1", 3),
-                        GetResourceString(
-                            "EventSource_EventMustHaveTaskIfNonDefaultOpcode",
-                            "WriteInteger",
-                            1
-                        )
-                    ),
+                    string
+                        .Join(
+                            Environment.NewLine,
+                            GetResourceString("EventSource_IllegalOpcodeValue", "Op1", 3),
+                            GetResourceString(
+                                "EventSource_EventMustHaveTaskIfNonDefaultOpcode",
+                                "WriteInteger",
+                                1
+                            )
+                        ),
                 e
             );
 
@@ -268,15 +262,16 @@ namespace BasicEventSourceTests
             );
             AsserExceptionStringsEqual(
                 () =>
-                    string.Join(
-                        Environment.NewLine,
-                        GetResourceString("EventSource_IllegalOpcodeValue", "Op1", 3),
-                        GetResourceString(
-                            "EventSource_EventMustHaveTaskIfNonDefaultOpcode",
-                            "WriteInteger",
-                            1
-                        )
-                    ),
+                    string
+                        .Join(
+                            Environment.NewLine,
+                            GetResourceString("EventSource_IllegalOpcodeValue", "Op1", 3),
+                            GetResourceString(
+                                "EventSource_EventMustHaveTaskIfNonDefaultOpcode",
+                                "WriteInteger",
+                                1
+                            )
+                        ),
                 e
             );
 
@@ -304,16 +299,17 @@ namespace BasicEventSourceTests
             );
             AsserExceptionStringsEqual(
                 () =>
-                    string.Join(
-                        Environment.NewLine,
-                        GetResourceString(
-                            "EventSource_EnumKindMismatch",
-                            "Op1",
-                            "EventKeywords",
-                            "Opcodes"
+                    string
+                        .Join(
+                            Environment.NewLine,
+                            GetResourceString(
+                                "EventSource_EnumKindMismatch",
+                                "Op1",
+                                "EventKeywords",
+                                "Opcodes"
+                            ),
+                            GetResourceString("EventSource_UndefinedKeyword", "0x1", "WriteInteger")
                         ),
-                        GetResourceString("EventSource_UndefinedKeyword", "0x1", "WriteInteger")
-                    ),
                 e
             );
 
@@ -381,22 +377,23 @@ namespace BasicEventSourceTests
             );
             AsserExceptionStringsEqual(
                 () =>
-                    string.Join(
-                        Environment.NewLine,
-                        GetResourceString(
-                            "EventSource_EventIdReused",
-                            "WriteInteger2",
-                            1,
-                            "WriteInteger1"
+                    string
+                        .Join(
+                            Environment.NewLine,
+                            GetResourceString(
+                                "EventSource_EventIdReused",
+                                "WriteInteger2",
+                                1,
+                                "WriteInteger1"
+                            ),
+                            GetResourceString(
+                                "EventSource_TaskOpcodePairReused",
+                                "WriteInteger2",
+                                1,
+                                "WriteInteger1",
+                                1
+                            )
                         ),
-                        GetResourceString(
-                            "EventSource_TaskOpcodePairReused",
-                            "WriteInteger2",
-                            1,
-                            "WriteInteger1",
-                            1
-                        )
-                    ),
                 e
             );
 
@@ -411,22 +408,23 @@ namespace BasicEventSourceTests
             );
             AsserExceptionStringsEqual(
                 () =>
-                    string.Join(
-                        Environment.NewLine,
-                        GetResourceString(
-                            "EventSource_EventIdReused",
-                            "WriteInteger2",
-                            1,
-                            "WriteInteger1"
+                    string
+                        .Join(
+                            Environment.NewLine,
+                            GetResourceString(
+                                "EventSource_EventIdReused",
+                                "WriteInteger2",
+                                1,
+                                "WriteInteger1"
+                            ),
+                            GetResourceString(
+                                "EventSource_TaskOpcodePairReused",
+                                "WriteInteger2",
+                                1,
+                                "WriteInteger1",
+                                1
+                            )
                         ),
-                        GetResourceString(
-                            "EventSource_TaskOpcodePairReused",
-                            "WriteInteger2",
-                            1,
-                            "WriteInteger1",
-                            1
-                        )
-                    ),
                 e
             );
 
@@ -589,12 +587,13 @@ namespace BasicEventSourceTests
             );
             AsserExceptionStringsEqual(
                 () =>
-                    string.Join(
-                        Environment.NewLine,
-                        GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Keywords"),
-                        GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Tasks"),
-                        GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Opcodes")
-                    ),
+                    string
+                        .Join(
+                            Environment.NewLine,
+                            GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Keywords"),
+                            GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Tasks"),
+                            GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Opcodes")
+                        ),
                 e
             );
 
@@ -609,12 +608,13 @@ namespace BasicEventSourceTests
             );
             AsserExceptionStringsEqual(
                 () =>
-                    string.Join(
-                        Environment.NewLine,
-                        GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Keywords"),
-                        GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Tasks"),
-                        GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Opcodes")
-                    ),
+                    string
+                        .Join(
+                            Environment.NewLine,
+                            GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Keywords"),
+                            GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Tasks"),
+                            GetResourceString("EventSource_AbstractMustNotDeclareKTOC", "Opcodes")
+                        ),
                 e
             );
 

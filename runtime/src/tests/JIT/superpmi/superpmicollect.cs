@@ -119,11 +119,8 @@ namespace SuperPMICollection
             }
             catch (Exception ex)
             {
-                string err = string.Format(
-                    "Error deleting file \"{0}\": {1}",
-                    filePath,
-                    ex.Message
-                );
+                string err = string
+                    .Format("Error deleting file \"{0}\": {1}", filePath, ex.Message);
                 s_errors += err + System.Environment.NewLine;
                 Console.Error.WriteLine(err);
             }
@@ -264,7 +261,8 @@ namespace SuperPMICollection
             var spmiTestFullPaths = new List<string>();
 
             using (
-                var resourceStream = typeof(SuperPMICollectionClass).GetTypeInfo()
+                var resourceStream = typeof(SuperPMICollectionClass)
+                    .GetTypeInfo()
                     .Assembly.GetManifestResourceStream("SpmiTestNames")
             )
             using (var streamReader = new StreamReader(resourceStream))
@@ -411,12 +409,13 @@ namespace SuperPMICollection
                 }
                 catch (Exception ex)
                 {
-                    string err = string.Format(
-                        "Error moving file \"{0}\" to \"{1}\": {2}",
-                        s_baseMchFile,
-                        s_finalMchFile,
-                        ex.Message
-                    );
+                    string err = string
+                        .Format(
+                            "Error moving file \"{0}\" to \"{1}\": {2}",
+                            s_baseMchFile,
+                            s_finalMchFile,
+                            ex.Message
+                        );
                     s_errors += err + System.Environment.NewLine;
                     Console.Error.WriteLine(err);
                 }
@@ -592,9 +591,8 @@ namespace SuperPMICollection
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(
-                    "ERROR: unknown exception running collection: " + ex.Message
-                );
+                Console.Error
+                    .WriteLine("ERROR: unknown exception running collection: " + ex.Message);
                 result = 101;
             }
             finally
@@ -755,10 +753,8 @@ namespace SuperPMICollection
                             runProgramPath = Path.GetFullPath(args[i]);
                             if (!File.Exists(runProgramPath))
                             {
-                                Console.Error.WriteLine(
-                                    "Error: couldn't find program {0}",
-                                    runProgramPath
-                                );
+                                Console.Error
+                                    .WriteLine("Error: couldn't find program {0}", runProgramPath);
                                 return 101;
                             }
                             // The rest of the arguments, if any, are passed as arguments to the run program.
@@ -822,9 +818,8 @@ namespace SuperPMICollection
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(
-                    "ERROR: unknown exception running collection: " + ex.Message
-                );
+                Console.Error
+                    .WriteLine("ERROR: unknown exception running collection: " + ex.Message);
                 result = 101;
             }
 

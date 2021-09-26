@@ -46,9 +46,8 @@ namespace System.Reflection.Tests
 
             Assert.True(
                 hasgenericParam,
-                string.Format(
-                    "Failed!! TestContainsGenericParameter did not return correct result. "
-                )
+                string
+                    .Format("Failed!! TestContainsGenericParameter did not return correct result. ")
             );
         }
 
@@ -63,9 +62,8 @@ namespace System.Reflection.Tests
 
             Assert.False(
                 hasgenericParam,
-                string.Format(
-                    "Failed!! TestContainsGenericParameter did not return correct result. "
-                )
+                string
+                    .Format("Failed!! TestContainsGenericParameter did not return correct result. ")
             );
         }
 

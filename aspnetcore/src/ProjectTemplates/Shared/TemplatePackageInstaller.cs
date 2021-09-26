@@ -45,7 +45,8 @@ namespace Templates.Test.Helpers
 
         public static string CustomHivePath { get; } =
             (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix")))
-                ? typeof(TemplatePackageInstaller).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                ? typeof(TemplatePackageInstaller).Assembly
+                      .GetCustomAttributes<AssemblyMetadataAttribute>()
                       .Single(s => s.Key == "CustomTemplateHivePath").Value
                 : Path.Combine("Hives", ".templateEngine");
 
@@ -97,7 +98,8 @@ namespace Templates.Test.Helpers
             else
             {
                 packagesDir =
-                    typeof(TemplatePackageInstaller).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                    typeof(TemplatePackageInstaller).Assembly
+                        .GetCustomAttributes<AssemblyMetadataAttribute>()
                         .Single(a => a.Key == "ArtifactsShippingPackagesDir").Value;
             }
 

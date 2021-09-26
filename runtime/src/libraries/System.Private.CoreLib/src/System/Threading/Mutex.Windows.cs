@@ -20,12 +20,8 @@ namespace System.Threading
         private void CreateMutexCore(bool initiallyOwned, string? name, out bool createdNew)
         {
             uint mutexFlags = initiallyOwned ? Interop.Kernel32.CREATE_MUTEX_INITIAL_OWNER : 0;
-            SafeWaitHandle mutexHandle = Interop.Kernel32.CreateMutexEx(
-                IntPtr.Zero,
-                name,
-                mutexFlags,
-                AccessRights
-            );
+            SafeWaitHandle mutexHandle = Interop.Kernel32
+                .CreateMutexEx(IntPtr.Zero, name, mutexFlags, AccessRights);
             int errorCode = Marshal.GetLastWin32Error();
 
             if (mutexHandle.IsInvalid)

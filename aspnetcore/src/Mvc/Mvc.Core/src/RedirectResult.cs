@@ -109,9 +109,8 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var executor = context.HttpContext.RequestServices.GetRequiredService<
-                IActionResultExecutor<RedirectResult>
-            >();
+            var executor = context.HttpContext.RequestServices
+                .GetRequiredService<IActionResultExecutor<RedirectResult>>();
             return executor.ExecuteAsync(context, this);
         }
     }

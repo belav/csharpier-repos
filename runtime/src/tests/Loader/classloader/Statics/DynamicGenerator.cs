@@ -25,10 +25,11 @@ public class DynamicGenerator<G> : IDynGen
     static int mcount = 0;
     public DynamicGenerator()
     {
-        asmb = AppDomain.CurrentDomain.DefineDynamicAssembly(
-            new AssemblyName("tempasm" + (tcount++)),
-            AssemblyBuilderAccess.Run
-        );
+        asmb = AppDomain.CurrentDomain
+            .DefineDynamicAssembly(
+                new AssemblyName("tempasm" + (tcount++)),
+                AssemblyBuilderAccess.Run
+            );
         modb = asmb.DefineDynamicModule("tempasm.dll");
         typeb = modb.DefineType("t" + mcount);
         typeb2 = modb.DefineType("t2" + mcount);

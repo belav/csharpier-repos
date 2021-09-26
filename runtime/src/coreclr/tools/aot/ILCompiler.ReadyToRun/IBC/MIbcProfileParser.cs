@@ -461,10 +461,10 @@ namespace ILCompiler.IBC
                                         instrumentationDataLongs.Add(0); // PgoInstrumentationKind.Done (0)
                                         pgoSchemaData =
                                             PgoProcessor.ParsePgoData<TypeSystemEntityOrUnknown>(
-                                                    metadataLoader,
-                                                    instrumentationDataLongs,
-                                                    false
-                                                )
+                                                metadataLoader,
+                                                instrumentationDataLongs,
+                                                false
+                                            )
                                                 .ToArray();
                                     }
                                     state = MibcGroupParseState.LookingForOptionalData;

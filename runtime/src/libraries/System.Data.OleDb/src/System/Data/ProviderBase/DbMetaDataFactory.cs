@@ -619,11 +619,12 @@ namespace System.Data.ProviderBase
                     {
                         if (
                             0
-                            > string.Compare(
-                                _normalizedServerVersion,
-                                (string)version,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            > string
+                                .Compare(
+                                    _normalizedServerVersion,
+                                    (string)version,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             result = false;
@@ -645,11 +646,12 @@ namespace System.Data.ProviderBase
                         {
                             if (
                                 0
-                                < string.Compare(
-                                    _normalizedServerVersion,
-                                    (string)version,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                < string
+                                    .Compare(
+                                        _normalizedServerVersion,
+                                        (string)version,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                             {
                                 result = false;

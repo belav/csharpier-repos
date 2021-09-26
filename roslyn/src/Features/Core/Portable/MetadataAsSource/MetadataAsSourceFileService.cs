@@ -118,11 +118,11 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 Contract.ThrowIfNull(_workspace);
 
                 var infoKey = await GetUniqueDocumentKeyAsync(
-                        project,
-                        topLevelNamedType,
-                        allowDecompilation,
-                        cancellationToken
-                    )
+                    project,
+                    topLevelNamedType,
+                    allowDecompilation,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 fileInfo = _keyToInformation.GetOrAdd(
                     infoKey,
@@ -145,9 +145,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         _workspace,
                         loadFileFromDisk: false
                     );
-                    var temporaryDocument = _workspace.CurrentSolution.AddProject(
-                            temporaryProjectInfoAndDocumentId.Item1
-                        )
+                    var temporaryDocument = _workspace.CurrentSolution
+                        .AddProject(temporaryProjectInfoAndDocumentId.Item1)
                         .GetDocument(temporaryProjectInfoAndDocumentId.Item2);
 
                     Contract.ThrowIfNull(
@@ -158,7 +157,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                     var useDecompiler = allowDecompilation;
                     if (useDecompiler)
                     {
-                        useDecompiler = !symbol.ContainingAssembly.GetAttributes()
+                        useDecompiler = !symbol.ContainingAssembly
+                            .GetAttributes()
                             .Any(
                                 attribute =>
                                     attribute.AttributeClass?.Name
@@ -177,11 +177,11 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                             if (decompiledSourceService != null)
                             {
                                 temporaryDocument = await decompiledSourceService.AddSourceToAsync(
-                                        temporaryDocument,
-                                        compilation,
-                                        symbol,
-                                        cancellationToken
-                                    )
+                                    temporaryDocument,
+                                    compilation,
+                                    symbol,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                             }
                             else
@@ -198,14 +198,14 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
                     if (!useDecompiler)
                     {
-                        var sourceFromMetadataService =
-                            temporaryDocument.Project.LanguageServices.GetRequiredService<IMetadataAsSourceService>();
+                        var sourceFromMetadataService = temporaryDocument.Project.LanguageServices
+                            .GetRequiredService<IMetadataAsSourceService>();
                         temporaryDocument = await sourceFromMetadataService.AddSourceToAsync(
-                                temporaryDocument,
-                                compilation,
-                                symbol,
-                                cancellationToken
-                            )
+                            temporaryDocument,
+                            compilation,
+                            symbol,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -243,10 +243,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                     // Locate the target in the thing we just created
                     navigateLocation =
                         await MetadataAsSourceHelpers.GetLocationInGeneratedSourceAsync(
-                                symbolId,
-                                temporaryDocument,
-                                cancellationToken
-                            )
+                            symbolId,
+                            temporaryDocument,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                 }
 
@@ -254,19 +254,16 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 if (navigateLocation == null)
                 {
                     navigateLocation = await RelocateSymbol_NoLockAsync(
-                            fileInfo,
-                            symbolId,
-                            cancellationToken
-                        )
+                        fileInfo,
+                        symbolId,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
 
-            var documentName = string.Format(
-                "{0} [{1}]",
-                topLevelNamedType.Name,
-                FeaturesResources.from_metadata
-            );
+            var documentName = string
+                .Format("{0} [{1}]", topLevelNamedType.Name, FeaturesResources.from_metadata);
 
             var documentTooltip = topLevelNamedType.ToDisplayString(
                 new SymbolDisplayFormat(
@@ -298,10 +295,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 var document = _workspace.CurrentSolution.GetDocument(openDocumentId);
 
                 return await MetadataAsSourceHelpers.GetLocationInGeneratedSourceAsync(
-                        symbolId,
-                        document,
-                        cancellationToken
-                    )
+                    symbolId,
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -310,16 +307,15 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 _workspace,
                 loadFileFromDisk: true
             );
-            var temporaryDocument = _workspace.CurrentSolution.AddProject(
-                    temporaryProjectInfoAndDocumentId.Item1
-                )
+            var temporaryDocument = _workspace.CurrentSolution
+                .AddProject(temporaryProjectInfoAndDocumentId.Item1)
                 .GetDocument(temporaryProjectInfoAndDocumentId.Item2);
 
             return await MetadataAsSourceHelpers.GetLocationInGeneratedSourceAsync(
-                    symbolId,
-                    temporaryDocument,
-                    cancellationToken
-                )
+                symbolId,
+                temporaryDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -521,9 +517,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
                         // Let's look through directories to delete.
                         foreach (
-                            var directoryInfo in new DirectoryInfo(
-                                _rootTemporaryPath
-                            ).EnumerateDirectories()
+                            var directoryInfo in new DirectoryInfo(_rootTemporaryPath)
+                                .EnumerateDirectories()
                         )
                         {
                             // Is there a mutex for this one?
@@ -557,10 +552,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             try
             {
                 foreach (
-                    var fileInfo in new DirectoryInfo(directoryPath).EnumerateFiles(
-                        "*",
-                        SearchOption.AllDirectories
-                    )
+                    var fileInfo in new DirectoryInfo(directoryPath)
+                        .EnumerateFiles("*", SearchOption.AllDirectories)
                 )
                 {
                     fileInfo.IsReadOnly = false;

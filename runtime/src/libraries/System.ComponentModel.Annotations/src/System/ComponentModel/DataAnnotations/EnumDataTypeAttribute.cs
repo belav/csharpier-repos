@@ -115,10 +115,10 @@ namespace System.ComponentModel.DataAnnotations
 
         private static string? GetUnderlyingTypeValueString(Type enumType, object enumValue) =>
             Convert.ChangeType(
-                    enumValue,
-                    Enum.GetUnderlyingType(enumType),
-                    CultureInfo.InvariantCulture
-                )
+                enumValue,
+                Enum.GetUnderlyingType(enumType),
+                CultureInfo.InvariantCulture
+            )
                 .ToString();
     }
 }

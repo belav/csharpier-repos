@@ -73,9 +73,8 @@ namespace System.Net.Security
             if (context == null)
                 return null;
 
-            return Interop.AndroidCrypto.SSLStreamGetApplicationProtocol(
-                ((SafeDeleteSslContext)context).SslContext
-            );
+            return Interop.AndroidCrypto
+                .SSLStreamGetApplicationProtocol(((SafeDeleteSslContext)context).SslContext);
         }
 
         public static SecurityStatusPal EncryptMessage(
@@ -140,11 +139,8 @@ namespace System.Net.Security
 
                 sslContext.Write(buffer.AsSpan(offset, count));
 
-                PAL_SSLStreamStatus ret = Interop.AndroidCrypto.SSLStreamRead(
-                    sslHandle,
-                    buffer.AsSpan(offset, count),
-                    out int read
-                );
+                PAL_SSLStreamStatus ret = Interop.AndroidCrypto
+                    .SSLStreamRead(sslHandle, buffer.AsSpan(offset, count), out int read);
                 if (ret == PAL_SSLStreamStatus.Error)
                     return new SecurityStatusPal(SecurityStatusPalErrorCode.InternalError);
 

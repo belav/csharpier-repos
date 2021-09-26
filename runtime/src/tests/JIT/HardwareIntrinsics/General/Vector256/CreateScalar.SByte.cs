@@ -58,10 +58,8 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             SByte value = TestLibrary.Generator.GetSByte();
-            object result = typeof(Vector256).GetMethod(
-                    nameof(Vector256.CreateScalar),
-                    new Type[] { typeof(SByte) }
-                )
+            object result = typeof(Vector256)
+                .GetMethod(nameof(Vector256.CreateScalar), new Type[] { typeof(SByte) })
                 .Invoke(null, new object[] { value });
 
             ValidateResult((Vector256<SByte>)(result), value);
@@ -104,13 +102,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256.CreateScalar(SByte): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector256.CreateScalar(SByte): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

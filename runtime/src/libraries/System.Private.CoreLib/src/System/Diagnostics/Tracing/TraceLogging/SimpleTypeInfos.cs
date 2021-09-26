@@ -470,7 +470,8 @@ namespace System.Diagnostics.Tracing
                   : RuntimeHelpers.GetUninitializedObject(valueInfo.DataType)
             );
 #endif
-            this.valueInfo.WriteData(val);
+            this.valueInfo
+                .WriteData(val);
         }
     }
 }

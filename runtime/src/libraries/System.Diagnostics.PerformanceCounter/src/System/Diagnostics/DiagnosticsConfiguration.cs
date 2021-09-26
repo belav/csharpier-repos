@@ -68,7 +68,8 @@ namespace System.Diagnostics
         internal static bool CanInitialize()
         {
             bool setConfigurationSystemInProgress = (bool)(
-                typeof(ConfigurationManager).GetProperty(
+                typeof(ConfigurationManager)
+                    .GetProperty(
                         "SetConfigurationSystemInProgress",
                         BindingFlags.NonPublic | BindingFlags.Static
                     )
@@ -91,7 +92,8 @@ namespace System.Diagnostics
                 // we can't block them while we initialize from config. Therefore we just
                 // return immediately and they just use the default values.
                 bool setConfigurationSystemInProgress = (bool)(
-                    typeof(ConfigurationManager).GetProperty(
+                    typeof(ConfigurationManager)
+                        .GetProperty(
                             "SetConfigurationSystemInProgress",
                             BindingFlags.NonPublic | BindingFlags.Static
                         )

@@ -637,10 +637,11 @@ namespace Microsoft.CodeAnalysis
                             || reference is CompilationReference
                     );
                     throw new ArgumentException(
-                        string.Format(
-                            CodeAnalysisResources.ReferenceOfTypeIsInvalid1,
-                            reference.GetType()
-                        ),
+                        string
+                            .Format(
+                                CodeAnalysisResources.ReferenceOfTypeIsInvalid1,
+                                reference.GetType()
+                            ),
                         $"{nameof(references)}[{i}]"
                     );
                 }
@@ -1425,33 +1426,36 @@ namespace Microsoft.CodeAnalysis
             if (memberTypes.Length != memberNames.Length)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.AnonymousTypeMemberAndNamesCountMismatch2,
-                        nameof(memberTypes),
-                        nameof(memberNames)
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.AnonymousTypeMemberAndNamesCountMismatch2,
+                            nameof(memberTypes),
+                            nameof(memberNames)
+                        )
                 );
             }
 
             if (!memberLocations.IsDefault && memberLocations.Length != memberTypes.Length)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
-                        nameof(memberLocations),
-                        nameof(memberNames)
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
+                            nameof(memberLocations),
+                            nameof(memberNames)
+                        )
                 );
             }
 
             if (!memberIsReadOnly.IsDefault && memberIsReadOnly.Length != memberTypes.Length)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
-                        nameof(memberIsReadOnly),
-                        nameof(memberNames)
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
+                            nameof(memberIsReadOnly),
+                            nameof(memberNames)
+                        )
                 );
             }
 
@@ -1461,11 +1465,12 @@ namespace Microsoft.CodeAnalysis
             )
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
-                        nameof(memberNullableAnnotations),
-                        nameof(memberNames)
-                    )
+                    string
+                        .Format(
+                            CodeAnalysisResources.AnonymousTypeArgumentCountMismatch2,
+                            nameof(memberNullableAnnotations),
+                            nameof(memberNames)
+                        )
                 );
             }
 
@@ -1587,10 +1592,8 @@ namespace Microsoft.CodeAnalysis
             if (!(within is INamedTypeSymbol || within is IAssemblySymbol))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.IsSymbolAccessibleBadWithin,
-                        nameof(within)
-                    ),
+                    string
+                        .Format(CodeAnalysisResources.IsSymbolAccessibleBadWithin, nameof(within)),
                     nameof(within)
                 );
             }
@@ -1609,10 +1612,11 @@ namespace Microsoft.CodeAnalysis
                 if (!isContainingAssemblyInReferences(s))
                 {
                     throw new ArgumentException(
-                        string.Format(
-                            CodeAnalysisResources.IsSymbolAccessibleWrongAssembly,
-                            parameterName
-                        ),
+                        string
+                            .Format(
+                                CodeAnalysisResources.IsSymbolAccessibleWrongAssembly,
+                                parameterName
+                            ),
                         parameterName
                     );
                 }
@@ -1900,7 +1904,8 @@ namespace Microsoft.CodeAnalysis
                         // Applications use a default manifest if one is not specified.
                         if (manifestContents == null)
                         {
-                            manifestContents = typeof(Compilation).GetTypeInfo()
+                            manifestContents = typeof(Compilation)
+                                .GetTypeInfo()
                                 .Assembly.GetManifestResourceStream(
                                     "Microsoft.CodeAnalysis.Resources.default.win32manifest"
                                 );
@@ -3531,9 +3536,8 @@ namespace Microsoft.CodeAnalysis
                     {
                         if (nativePdbWriter != null)
                         {
-                            var nativePdbStream = pdbStreamProvider!.GetOrCreateStream(
-                                metadataDiagnostics
-                            );
+                            var nativePdbStream = pdbStreamProvider!
+                                .GetOrCreateStream(metadataDiagnostics);
                             Debug.Assert(
                                 nativePdbStream != null || metadataDiagnostics.HasAnyErrors()
                             );
@@ -3661,26 +3665,27 @@ namespace Microsoft.CodeAnalysis
             bool deterministicPrimaryOutput =
                 (metadataOnly && !includePrivateMembers) || isDeterministic;
             if (
-                !Cci.PeWriter.WritePeToStream(
-                    new EmitContext(
-                        moduleBeingBuilt,
-                        null,
-                        metadataDiagnostics,
+                !Cci.PeWriter
+                    .WritePeToStream(
+                        new EmitContext(
+                            moduleBeingBuilt,
+                            null,
+                            metadataDiagnostics,
+                            metadataOnly,
+                            includePrivateMembersOnPrimaryOutput
+                        ),
+                        messageProvider,
+                        getPeStream,
+                        getPortablePdbStreamOpt,
+                        nativePdbWriterOpt,
+                        pdbOptionsBlobReader,
+                        pdbPathOpt,
                         metadataOnly,
-                        includePrivateMembersOnPrimaryOutput
-                    ),
-                    messageProvider,
-                    getPeStream,
-                    getPortablePdbStreamOpt,
-                    nativePdbWriterOpt,
-                    pdbOptionsBlobReader,
-                    pdbPathOpt,
-                    metadataOnly,
-                    deterministicPrimaryOutput,
-                    emitTestCoverageData,
-                    privateKeyOpt,
-                    cancellationToken
-                )
+                        deterministicPrimaryOutput,
+                        emitTestCoverageData,
+                        privateKeyOpt,
+                        cancellationToken
+                    )
             )
             {
                 return false;
@@ -3693,26 +3698,27 @@ namespace Microsoft.CodeAnalysis
                 Debug.Assert(!includePrivateMembers);
 
                 if (
-                    !Cci.PeWriter.WritePeToStream(
-                        new EmitContext(
-                            moduleBeingBuilt,
-                            null,
-                            metadataDiagnostics,
+                    !Cci.PeWriter
+                        .WritePeToStream(
+                            new EmitContext(
+                                moduleBeingBuilt,
+                                null,
+                                metadataDiagnostics,
+                                metadataOnly: true,
+                                includePrivateMembers: false
+                            ),
+                            messageProvider,
+                            getMetadataPeStreamOpt,
+                            getPortablePdbStreamOpt: null,
+                            nativePdbWriterOpt: null,
+                            pdbOptionsBlobReader: null,
+                            pdbPathOpt: null,
                             metadataOnly: true,
-                            includePrivateMembers: false
-                        ),
-                        messageProvider,
-                        getMetadataPeStreamOpt,
-                        getPortablePdbStreamOpt: null,
-                        nativePdbWriterOpt: null,
-                        pdbOptionsBlobReader: null,
-                        pdbPathOpt: null,
-                        metadataOnly: true,
-                        isDeterministic: true,
-                        emitTestCoverageData: false,
-                        privateKeyOpt: privateKeyOpt,
-                        cancellationToken: cancellationToken
-                    )
+                            isDeterministic: true,
+                            emitTestCoverageData: false,
+                            privateKeyOpt: privateKeyOpt,
+                            cancellationToken: cancellationToken
+                        )
                 )
                 {
                     return false;
@@ -3969,14 +3975,15 @@ namespace Microsoft.CodeAnalysis
         {
             if (source == null || destination == null)
                 return this.AssemblyName ?? "";
-            return string.Format(
-                "{0}: {1} {2} -> {3} {4}",
-                this.AssemblyName,
-                source.TypeKind.ToString(),
-                source.Name,
-                destination.TypeKind.ToString(),
-                destination.Name
-            );
+            return string
+                .Format(
+                    "{0}: {1} {2} -> {3} {4}",
+                    this.AssemblyName,
+                    source.TypeKind.ToString(),
+                    source.Name,
+                    destination.TypeKind.ToString(),
+                    destination.Name
+                );
         }
 
         #endregion

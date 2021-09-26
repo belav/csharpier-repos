@@ -21,11 +21,12 @@ namespace Moq
             if (!type.CanCreateInstance())
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.TypeHasNoDefaultConstructor,
-                        type.GetFormattedName()
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.TypeHasNoDefaultConstructor,
+                            type.GetFormattedName()
+                        )
                 );
             }
         }
@@ -44,12 +45,13 @@ namespace Moq
             if (interfaceType.IsAssignableFrom(type) == false)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.TypeNotImplementInterface,
-                        type.GetFormattedName(),
-                        interfaceType.GetFormattedName()
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.TypeNotImplementInterface,
+                            type.GetFormattedName(),
+                            interfaceType.GetFormattedName()
+                        ),
                     paramName
                 );
             }
@@ -86,11 +88,12 @@ namespace Moq
             }
 
             throw new ArgumentException(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.SetupNotSetter,
-                    expression.ToStringFixed()
-                ),
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.SetupNotSetter,
+                        expression.ToStringFixed()
+                    ),
                 paramName
             );
         }
@@ -100,33 +103,37 @@ namespace Moq
             if (method.IsStatic)
             {
                 throw new NotSupportedException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.UnsupportedExpressionWithHint,
-                        expression.ToStringFixed(),
-                        string.Format(
+                    string
+                        .Format(
                             CultureInfo.CurrentCulture,
-                            method.IsExtensionMethod()
-                              ? Resources.UnsupportedExtensionMethod
-                              : Resources.UnsupportedStaticMember,
-                            $"{method.DeclaringType.GetFormattedName()}.{method.Name}"
+                            Resources.UnsupportedExpressionWithHint,
+                            expression.ToStringFixed(),
+                            string
+                                .Format(
+                                    CultureInfo.CurrentCulture,
+                                    method.IsExtensionMethod()
+                                      ? Resources.UnsupportedExtensionMethod
+                                      : Resources.UnsupportedStaticMember,
+                                    $"{method.DeclaringType.GetFormattedName()}.{method.Name}"
+                                )
                         )
-                    )
                 );
             }
             else if (!method.CanOverride())
             {
                 throw new NotSupportedException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.UnsupportedExpressionWithHint,
-                        expression.ToStringFixed(),
-                        string.Format(
+                    string
+                        .Format(
                             CultureInfo.CurrentCulture,
-                            Resources.UnsupportedNonOverridableMember,
-                            $"{method.DeclaringType.GetFormattedName()}.{method.Name}"
+                            Resources.UnsupportedExpressionWithHint,
+                            expression.ToStringFixed(),
+                            string
+                                .Format(
+                                    CultureInfo.CurrentCulture,
+                                    Resources.UnsupportedNonOverridableMember,
+                                    $"{method.DeclaringType.GetFormattedName()}.{method.Name}"
+                                )
                         )
-                    )
                 );
             }
         }
@@ -139,13 +146,14 @@ namespace Moq
             )
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.MethodNotVisibleToProxyFactory,
-                        method.DeclaringType.Name,
-                        method.Name,
-                        messageIfNotVisible
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.MethodNotVisibleToProxyFactory,
+                            method.DeclaringType.Name,
+                            method.Name,
+                            messageIfNotVisible
+                        )
                 );
             }
         }
@@ -164,11 +172,12 @@ namespace Moq
             }
 
             throw new ArgumentException(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.SetupNotEventAdd,
-                    expression.ToStringFixed()
-                ),
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.SetupNotEventAdd,
+                        expression.ToStringFixed()
+                    ),
                 paramName
             );
         }
@@ -187,11 +196,12 @@ namespace Moq
             }
 
             throw new ArgumentException(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.SetupNotEventRemove,
-                    expression.ToStringFixed()
-                ),
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.SetupNotEventRemove,
+                        expression.ToStringFixed()
+                    ),
                 paramName
             );
         }
@@ -257,12 +267,13 @@ namespace Moq
             if (!property.CanRead(out _))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.PropertyGetNotFound,
-                        property.DeclaringType.Name,
-                        property.Name
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.PropertyGetNotFound,
+                            property.DeclaringType.Name,
+                            property.Name
+                        )
                 );
             }
         }
@@ -272,12 +283,13 @@ namespace Moq
             if (!property.CanWrite(out _))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.PropertySetNotFound,
-                        property.DeclaringType.Name,
-                        property.Name
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.PropertySetNotFound,
+                            property.DeclaringType.Name,
+                            property.Name
+                        )
                 );
             }
         }

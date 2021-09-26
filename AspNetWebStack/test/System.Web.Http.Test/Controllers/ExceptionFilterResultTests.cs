@@ -268,12 +268,12 @@ namespace System.Web.Http.Controllers
 
                 Mock<IExceptionHandler> exceptionHandlerMock = new Mock<IExceptionHandler>();
                 exceptionHandlerMock.Setup(
-                        l =>
-                            l.HandleAsync(
-                                It.IsAny<ExceptionHandlerContext>(),
-                                It.IsAny<CancellationToken>()
-                            )
-                    )
+                    l =>
+                        l.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                     .Callback<ExceptionHandlerContext, CancellationToken>(
                         (c, i) =>
                         {
@@ -335,12 +335,12 @@ namespace System.Web.Http.Controllers
 
                 Mock<IExceptionFilter> filterMock = new Mock<IExceptionFilter>();
                 filterMock.Setup(
-                        f =>
-                            f.ExecuteExceptionFilterAsync(
-                                It.IsAny<HttpActionExecutedContext>(),
-                                It.IsAny<CancellationToken>()
-                            )
-                    )
+                    f =>
+                        f.ExecuteExceptionFilterAsync(
+                            It.IsAny<HttpActionExecutedContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                     .Callback<HttpActionExecutedContext, CancellationToken>(
                         (c, t) =>
                         {
@@ -447,12 +447,12 @@ namespace System.Web.Http.Controllers
         {
             Mock<IExceptionFilter> mock = new Mock<IExceptionFilter>();
             mock.Setup(
-                    f =>
-                        f.ExecuteExceptionFilterAsync(
-                            It.IsAny<HttpActionExecutedContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                f =>
+                    f.ExecuteExceptionFilterAsync(
+                        It.IsAny<HttpActionExecutedContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(executeExceptionFilterAsync);
             return mock.Object;
         }
@@ -463,12 +463,8 @@ namespace System.Web.Http.Controllers
         {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>();
             mock.Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(logAsync);
             return mock.Object;
         }
@@ -533,13 +529,12 @@ namespace System.Web.Http.Controllers
             Mock<IHttpActionResult> actionResultMock = new Mock<IHttpActionResult>(
                 MockBehavior.Strict
             );
-            actionResultMock.Setup(r => r.ExecuteAsync(It.IsAny<CancellationToken>()))
-                .Returns(
-                    () =>
-                    {
-                        return task;
-                    }
-                );
+            actionResultMock.Setup(r => r.ExecuteAsync(It.IsAny<CancellationToken>())).Returns(
+                () =>
+                {
+                    return task;
+                }
+            );
             return actionResultMock.Object;
         }
 
@@ -552,12 +547,12 @@ namespace System.Web.Http.Controllers
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>();
             mock.Setup(
-                    l =>
-                        l.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                l =>
+                    l.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(Task.FromResult<HttpResponseMessage>(null));
             return mock;
         }
@@ -571,12 +566,8 @@ namespace System.Web.Http.Controllers
         {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>();
             mock.Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(Task.FromResult(0));
             return mock;
         }

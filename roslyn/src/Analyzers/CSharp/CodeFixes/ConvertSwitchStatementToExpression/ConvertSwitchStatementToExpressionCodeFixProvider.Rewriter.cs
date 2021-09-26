@@ -106,12 +106,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 Debug.Assert(_assignmentTargetOpt != null);
 
                 return ExpressionStatement(
-                        AssignmentExpression(
-                            assignmentKind,
-                            left: _assignmentTargetOpt,
-                            right: switchExpression
-                        )
+                    AssignmentExpression(
+                        assignmentKind,
+                        left: _assignmentTargetOpt,
+                        right: switchExpression
                     )
+                )
                     .WithLeadingTrivia(leadingTrivia);
             }
 
@@ -248,8 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             )
             {
                 var switchArms = node.Sections
-                // The default label must come last in the switch expression.
-                .OrderBy(section => section.Labels.Any(label => IsDefaultSwitchLabel(label)))
+                    // The default label must come last in the switch expression.
+                    .OrderBy(section => section.Labels.Any(label => IsDefaultSwitchLabel(label)))
                     .Select(
                         s =>
                             (
@@ -296,16 +296,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     SeparatedList(
                         switchArms.Select(
                             t =>
-                                t.armExpression.WithLeadingTrivia(
-                                    t.tokensForLeadingTrivia.GetTrivia()
-                                        .FilterComments(addElasticMarker: false)
-                                )
+                                t.armExpression
+                                    .WithLeadingTrivia(
+                                        t.tokensForLeadingTrivia
+                                            .GetTrivia()
+                                            .FilterComments(addElasticMarker: false)
+                                    )
                         ),
                         switchArms.Select(
                             t =>
                                 Token(SyntaxKind.CommaToken)
                                     .WithTrailingTrivia(
-                                        t.tokensForTrailingTrivia.GetTrivia()
+                                        t.tokensForTrailingTrivia
+                                            .GetTrivia()
                                             .FilterComments(addElasticMarker: true)
                                     )
                         )
@@ -326,16 +329,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
                 if (
                     expressionConvertedType != null
-                    && !SymbolEqualityComparer.Default.Equals(
-                        expressionConvertedType,
-                        expressionType
-                    )
+                    && !SymbolEqualityComparer.Default
+                        .Equals(expressionConvertedType, expressionType)
                 )
                 {
                     return node.Update(
                         node.SwitchKeyword,
                         node.OpenParenToken,
-                        node.Expression.Cast(expressionConvertedType)
+                        node.Expression
+                            .Cast(expressionConvertedType)
                             .WithAdditionalAnnotations(Formatter.Annotation),
                         node.CloseParenToken,
                         node.OpenBraceToken,

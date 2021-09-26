@@ -222,13 +222,13 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<IAsyncController> mockController = new Mock<IAsyncController>();
             mockController.Setup(
-                    o =>
-                        o.BeginExecute(
-                            It.IsAny<RequestContext>(),
-                            It.IsAny<AsyncCallback>(),
-                            It.IsAny<object>()
-                        )
-                )
+                o =>
+                    o.BeginExecute(
+                        It.IsAny<RequestContext>(),
+                        It.IsAny<AsyncCallback>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Throws(new Exception("Some exception text."));
             mockController.As<IDisposable>().Setup(o => o.Dispose()).Verifiable();
 
@@ -256,22 +256,20 @@ namespace System.Web.Mvc.Test
 
                 Mock<IAsyncController> mockController = new Mock<IAsyncController>();
                 mockController.Setup(
-                        o =>
-                            o.BeginExecute(
-                                It.IsAny<RequestContext>(),
-                                It.IsAny<AsyncCallback>(),
-                                It.IsAny<object>()
-                            )
-                    )
+                    o =>
+                        o.BeginExecute(
+                            It.IsAny<RequestContext>(),
+                            It.IsAny<AsyncCallback>(),
+                            It.IsAny<object>()
+                        )
+                )
                     .Returns(innerAsyncResult);
-                mockController.As<IDisposable>()
-                    .Setup(o => o.Dispose())
-                    .Callback(
-                        delegate
-                        {
-                            disposeWasCalled = true;
-                        }
-                    );
+                mockController.As<IDisposable>().Setup(o => o.Dispose()).Callback(
+                    delegate
+                    {
+                        disposeWasCalled = true;
+                    }
+                );
 
                 MvcHandler handler = GetMvcHandler(mockController.Object);
 
@@ -297,21 +295,18 @@ namespace System.Web.Mvc.Test
             bool disposeWasCalled = false;
 
             Mock<IController> mockController = new Mock<IController>();
-            mockController.Setup(o => o.Execute(It.IsAny<RequestContext>()))
-                .Callback(
-                    delegate
-                    {
-                        executeWasCalled = true;
-                    }
-                );
-            mockController.As<IDisposable>()
-                .Setup(o => o.Dispose())
-                .Callback(
-                    delegate
-                    {
-                        disposeWasCalled = true;
-                    }
-                );
+            mockController.Setup(o => o.Execute(It.IsAny<RequestContext>())).Callback(
+                delegate
+                {
+                    executeWasCalled = true;
+                }
+            );
+            mockController.As<IDisposable>().Setup(o => o.Dispose()).Callback(
+                delegate
+                {
+                    disposeWasCalled = true;
+                }
+            );
 
             MvcHandler handler = GetMvcHandler(mockController.Object);
 

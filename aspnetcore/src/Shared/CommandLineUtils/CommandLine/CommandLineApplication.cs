@@ -152,11 +152,12 @@ namespace Microsoft.Extensions.CommandLineUtils
             var lastArg = Arguments.LastOrDefault();
             if (lastArg != null && lastArg.MultipleValues)
             {
-                var message = string.Format(
-                    CultureInfo.CurrentCulture,
-                    "The last argument '{0}' accepts multiple values. No more argument can be added.",
-                    lastArg.Name
-                );
+                var message = string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        "The last argument '{0}' accepts multiple values. No more argument can be added.",
+                        lastArg.Name
+                    );
                 throw new InvalidOperationException(message);
             }
 
@@ -212,11 +213,12 @@ namespace Microsoft.Extensions.CommandLineUtils
                         option = command.GetOptions()
                             .SingleOrDefault(
                                 opt =>
-                                    string.Equals(
-                                        opt.LongName,
-                                        longOptionName,
-                                        StringComparison.Ordinal
-                                    )
+                                    string
+                                        .Equals(
+                                            opt.LongName,
+                                            longOptionName,
+                                            StringComparison.Ordinal
+                                        )
                             );
 
                         if (option == null && _treatUnmatchedOptionsAsArguments)
@@ -308,11 +310,12 @@ namespace Microsoft.Extensions.CommandLineUtils
                         option = command.GetOptions()
                             .SingleOrDefault(
                                 opt =>
-                                    string.Equals(
-                                        opt.ShortName,
-                                        shortOption[0],
-                                        StringComparison.Ordinal
-                                    )
+                                    string
+                                        .Equals(
+                                            opt.ShortName,
+                                            shortOption[0],
+                                            StringComparison.Ordinal
+                                        )
                             );
 
                         if (option == null && _treatUnmatchedOptionsAsArguments)
@@ -342,11 +345,12 @@ namespace Microsoft.Extensions.CommandLineUtils
                             option = command.GetOptions()
                                 .SingleOrDefault(
                                     opt =>
-                                        string.Equals(
-                                            opt.SymbolName,
-                                            shortOption[0],
-                                            StringComparison.Ordinal
-                                        )
+                                        string
+                                            .Equals(
+                                                opt.SymbolName,
+                                                shortOption[0],
+                                                StringComparison.Ordinal
+                                            )
                                 );
                         }
 
@@ -518,11 +522,12 @@ namespace Microsoft.Extensions.CommandLineUtils
             if (OptionHelp != null)
             {
                 Out.WriteLine(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        "Specify --{0} for a list of available options and commands.",
-                        OptionHelp.LongName
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            "Specify --{0} for a list of available options and commands.",
+                            OptionHelp.LongName
+                        )
                 );
             }
         }
@@ -587,11 +592,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                 argumentsBuilder.AppendLine();
                 argumentsBuilder.AppendLine("Arguments:");
                 var maxArgLen = arguments.Max(a => a.Name.Length);
-                var outputFormat = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "  {{0, -{0}}}{{1}}",
-                    maxArgLen + 2
-                );
+                var outputFormat = string
+                    .Format(CultureInfo.InvariantCulture, "  {{0, -{0}}}{{1}}", maxArgLen + 2);
                 foreach (var arg in arguments)
                 {
                     argumentsBuilder.AppendFormat(
@@ -612,11 +614,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                 optionsBuilder.AppendLine();
                 optionsBuilder.AppendLine("Options:");
                 var maxOptLen = options.Max(o => o.Template.Length);
-                var outputFormat = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "  {{0, -{0}}}{{1}}",
-                    maxOptLen + 2
-                );
+                var outputFormat = string
+                    .Format(CultureInfo.InvariantCulture, "  {{0, -{0}}}{{1}}", maxOptLen + 2);
                 foreach (var opt in options)
                 {
                     optionsBuilder.AppendFormat(
@@ -637,11 +636,8 @@ namespace Microsoft.Extensions.CommandLineUtils
                 commandsBuilder.AppendLine();
                 commandsBuilder.AppendLine("Commands:");
                 var maxCmdLen = commands.Max(c => c.Name.Length);
-                var outputFormat = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "  {{0, -{0}}}{{1}}",
-                    maxCmdLen + 2
-                );
+                var outputFormat = string
+                    .Format(CultureInfo.InvariantCulture, "  {{0, -{0}}}{{1}}", maxCmdLen + 2);
                 foreach (var cmd in commands.OrderBy(c => c.Name))
                 {
                     commandsBuilder.AppendFormat(
@@ -697,12 +693,8 @@ namespace Microsoft.Extensions.CommandLineUtils
         {
             return ShortVersionGetter == null
               ? FullName
-              : string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0} {1}",
-                    FullName,
-                    ShortVersionGetter()
-                );
+              : string
+                .Format(CultureInfo.InvariantCulture, "{0} {1}", FullName, ShortVersionGetter());
         }
 
         public void ShowRootCommandFullNameAndVersion()
@@ -742,9 +734,8 @@ namespace Microsoft.Extensions.CommandLineUtils
             else
             {
                 // Store all remaining arguments for later use.
-                command.RemainingArguments.AddRange(
-                    new ArraySegment<string>(args, index, args.Length - index)
-                );
+                command.RemainingArguments
+                    .AddRange(new ArraySegment<string>(args, index, args.Length - index));
                 return false;
             }
         }

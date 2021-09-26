@@ -149,9 +149,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                     continue;
                 }
 
-                var editorConfigStorageLocation =
-                    key.Option.StorageLocations.OfType<IEditorConfigStorageLocation2>()
-                        .FirstOrDefault();
+                var editorConfigStorageLocation = key.Option.StorageLocations
+                    .OfType<IEditorConfigStorageLocation2>()
+                    .FirstOrDefault();
                 if (editorConfigStorageLocation is null)
                 {
                     remainingOptions.Add(KeyValuePairUtil.Create<OptionKey2, object?>(key, value));

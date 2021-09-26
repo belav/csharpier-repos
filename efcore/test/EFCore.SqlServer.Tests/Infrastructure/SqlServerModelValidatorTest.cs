@@ -638,8 +638,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyWarning(
                 SqlServerResources.LogDefaultDecimalTypeColumn(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage("Price", nameof(Animal)),
                 modelBuilder.Model
             );
@@ -653,8 +653,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyWarning(
                 SqlServerResources.LogDefaultDecimalTypeColumn(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage("Price", nameof(Animal)),
                 modelBuilder.Model
             );
@@ -668,8 +668,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyLogDoesNotContain(
                 SqlServerResources.LogDefaultDecimalTypeColumn(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage("Price", nameof(Animal)),
                 modelBuilder.Model
             );
@@ -685,8 +685,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyLogDoesNotContain(
                 SqlServerResources.LogDefaultDecimalTypeColumn(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage("Price", nameof(Animal)),
                 modelBuilder.Model
             );
@@ -702,8 +702,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyWarning(
                 SqlServerResources.LogDefaultDecimalTypeColumn(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage("Price", nameof(Animal)),
                 modelBuilder.Model
             );
@@ -718,8 +718,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyWarning(
                 SqlServerResources.LogByteIdentityColumn(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage("Bite", nameof(Dog)),
                 modelBuilder.Model
             );
@@ -734,8 +734,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyWarning(
                 SqlServerResources.LogByteIdentityColumn(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage("Bite", nameof(Dog)),
                 modelBuilder.Model
             );
@@ -852,8 +852,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyWarning(
                 SqlServerResources.LogConflictingValueGenerationStrategies(
-                        new TestLogger<SqlServerLoggingDefinitions>()
-                    )
+                    new TestLogger<SqlServerLoggingDefinitions>()
+                )
                     .GenerateMessage(
                         sqlServerValueGenerationStrategy.ToString(),
                         conflictingValueGenerationStrategy,
@@ -882,8 +882,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 new[]
                 {
                     SqlServerResources.LogConflictingValueGenerationStrategies(
-                            new TestLogger<SqlServerLoggingDefinitions>()
-                        )
+                        new TestLogger<SqlServerLoggingDefinitions>()
+                    )
                         .GenerateMessage(
                             sqlServerValueGenerationStrategy.ToString(),
                             "DefaultValue",
@@ -891,8 +891,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             nameof(Dog)
                         ),
                     RelationalResources.LogKeyHasDefaultValue(
-                            new TestLogger<SqlServerLoggingDefinitions>()
-                        )
+                        new TestLogger<SqlServerLoggingDefinitions>()
+                    )
                         .GenerateMessage("Id", nameof(Dog))
                 },
                 modelBuilder.Model

@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             var lineSpan = location.GetLineSpan();
             var start = location.SourceTree.GetText().Lines[lineSpan.StartLinePosition.Line].Start;
             var end = location.SourceTree.GetText().Lines[lineSpan.EndLinePosition.Line].End;
-            return location.SourceTree.GetText()
+            return location.SourceTree
+                .GetText()
                 .GetSubText(TextSpan.FromBounds(start, end))
                 .ToString();
         }
@@ -67,10 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             if (document != null)
             {
                 var navigator = _workspace.Services.GetService<IDocumentNavigationService>();
-                var options = _workspace.Options.WithChangedOption(
-                        NavigationOptions.PreferProvisionalTab,
-                        true
-                    )
+                var options = _workspace.Options
+                    .WithChangedOption(NavigationOptions.PreferProvisionalTab, true)
                     .WithChangedOption(NavigationOptions.ActivateTab, false);
                 // TODO: Get the platform to use and pass us an operation context, or create one ourselves.
                 navigator.TryNavigateToSpan(

@@ -48,11 +48,8 @@ namespace Microsoft.AspNetCore.Mvc
             {
                 if (token != null)
                 {
-                    expectedContent = string.Format(
-                        CultureInfo.InvariantCulture,
-                        expectedContent,
-                        token
-                    );
+                    expectedContent = string
+                        .Format(CultureInfo.InvariantCulture, expectedContent, token);
                 }
                 Assert.Equal(expectedContent, responseContent, ignoreLineEndingDifferences: true);
             }
@@ -242,11 +239,8 @@ namespace Microsoft.AspNetCore.Mvc
             var normalizedContent = content.Replace("\r", "").Replace("\n", "\r\n");
 
             if (
-                !string.Equals(
-                    normalizedPreviousContent,
-                    normalizedContent,
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(normalizedPreviousContent, normalizedContent, StringComparison.Ordinal)
             )
             {
                 // The build system compiles every file under the resources folder as a resource available at runtime

@@ -407,13 +407,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             out int? scale
         )
         {
-            var parsedName = base.ParseStoreTypeName(
-                storeTypeName,
-                out unicode,
-                out size,
-                out precision,
-                out scale
-            );
+            var parsedName = base
+                .ParseStoreTypeName(storeTypeName, out unicode, out size, out precision, out scale);
 
             if (
                 size.HasValue

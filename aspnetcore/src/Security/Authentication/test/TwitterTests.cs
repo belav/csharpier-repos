@@ -455,62 +455,58 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
             Func<HttpContext, Task<bool>> handler = null
         )
         {
-            var host = new HostBuilder().ConfigureWebHost(
-                    builder =>
-                        builder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseAuthentication();
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            var req = context.Request;
-                                            var res = context.Response;
-                                            if (req.Path == new PathString("/signIn"))
-                                            {
-                                                await Assert.ThrowsAsync<InvalidOperationException>(
-                                                    () =>
-                                                        context.SignInAsync(
-                                                            "Twitter",
-                                                            new ClaimsPrincipal()
-                                                        )
-                                                );
-                                            }
-                                            else if (req.Path == new PathString("/signOut"))
-                                            {
-                                                await Assert.ThrowsAsync<InvalidOperationException>(
-                                                    () => context.SignOutAsync("Twitter")
-                                                );
-                                            }
-                                            else if (req.Path == new PathString("/forbid"))
-                                            {
-                                                await Assert.ThrowsAsync<InvalidOperationException>(
-                                                    () => context.ForbidAsync("Twitter")
-                                                );
-                                            }
-                                            else if (handler == null || !await handler(context))
-                                            {
-                                                await next();
-                                            }
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    Action<TwitterOptions> wrapOptions = o =>
+            var host = new HostBuilder()
+                .ConfigureWebHost(builder => builder.UseTestServer().Configure(
+                            app =>
+                            {
+                                app.UseAuthentication();
+                                app.Use(
+                                    async (context, next) =>
                                     {
-                                        o.SignInScheme = "External";
-                                        options(o);
-                                    };
-                                    services.AddAuthentication()
-                                        .AddCookie("External", _ => { })
-                                        .AddTwitter(wrapOptions);
-                                }
-                            )
-                )
+                                        var req = context.Request;
+                                        var res = context.Response;
+                                        if (req.Path == new PathString("/signIn"))
+                                        {
+                                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                                () =>
+                                                    context.SignInAsync(
+                                                        "Twitter",
+                                                        new ClaimsPrincipal()
+                                                    )
+                                            );
+                                        }
+                                        else if (req.Path == new PathString("/signOut"))
+                                        {
+                                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                                () => context.SignOutAsync("Twitter")
+                                            );
+                                        }
+                                        else if (req.Path == new PathString("/forbid"))
+                                        {
+                                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                                () => context.ForbidAsync("Twitter")
+                                            );
+                                        }
+                                        else if (handler == null || !await handler(context))
+                                        {
+                                            await next();
+                                        }
+                                    }
+                                );
+                            }
+                        ).ConfigureServices(
+                            services =>
+                            {
+                                Action<TwitterOptions> wrapOptions = o =>
+                                {
+                                    o.SignInScheme = "External";
+                                    options(o);
+                                };
+                                services.AddAuthentication()
+                                    .AddCookie("External", _ => { })
+                                    .AddTwitter(wrapOptions);
+                            }
+                        ))
                 .Build();
 
             await host.StartAsync();

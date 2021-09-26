@@ -170,7 +170,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 .FirstOrDefault();
             result =
                 proxyAttribute != null
-                    ? string.Format(
+                    ? string
+                      .Format(
                           "{0} (Proxy = {1})",
                           result,
                           proxyAttribute.ProxyType.GetLmrType().ToString()
@@ -187,9 +188,9 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         private static System.Type GetProxyType(System.Type type)
         {
             var attribute = (DebuggerTypeProxyAttribute)type.GetCustomAttributes(
-                    typeof(DebuggerTypeProxyAttribute),
-                    inherit: false
-                )
+                typeof(DebuggerTypeProxyAttribute),
+                inherit: false
+            )
                 .FirstOrDefault();
             if (attribute == null)
             {
@@ -299,13 +300,11 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
             return new DkmClrDebuggerDisplayAttribute(type.AssemblyQualifiedName)
             {
-                Name = (string)attributeData.NamedArguments.SingleOrDefault(
-                    arg => arg.MemberName == "Name"
-                ).TypedValue.Value,
+                Name = (string)attributeData.NamedArguments
+                    .SingleOrDefault(arg => arg.MemberName == "Name").TypedValue.Value,
                 Value = (string)attributeData.ConstructorArguments.Single().Value,
-                TypeName = (string)attributeData.NamedArguments.SingleOrDefault(
-                    arg => arg.MemberName == "Type"
-                ).TypedValue.Value,
+                TypeName = (string)attributeData.NamedArguments
+                    .SingleOrDefault(arg => arg.MemberName == "Type").TypedValue.Value,
             };
         }
 
@@ -332,11 +331,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                     System.Type argValueType = null;
 
                     if (
-                        string.Equals(
-                            argumentType,
-                            "System.String",
-                            System.StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(argumentType, "System.String", System.StringComparison.Ordinal)
                     )
                     {
                         var typeName = (string)typedArg.Value;

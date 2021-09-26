@@ -131,7 +131,8 @@ namespace Microsoft.AspNetCore.Identity
         public virtual IdentityBuilder AddTokenProvider(string providerName, Type provider)
         {
             if (
-                !typeof(IUserTwoFactorTokenProvider<>).MakeGenericType(UserType)
+                !typeof(IUserTwoFactorTokenProvider<>)
+                    .MakeGenericType(UserType)
                     .IsAssignableFrom(provider)
             )
             {

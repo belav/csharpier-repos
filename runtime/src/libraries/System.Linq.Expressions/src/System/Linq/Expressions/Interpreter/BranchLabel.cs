@@ -22,13 +22,14 @@ namespace System.Linq.Expressions.Interpreter
 
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "->{0} C({1}) S({2})",
-                Index,
-                ContinuationStackDepth,
-                StackDepth
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "->{0} C({1}) S({2})",
+                    Index,
+                    ContinuationStackDepth,
+                    StackDepth
+                );
         }
     }
 

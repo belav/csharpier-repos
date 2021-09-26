@@ -38,7 +38,8 @@ namespace System.Globalization.Tests
                 fileName = "IdnaTest_6.txt";
 
             // test file 'IdnaTest.txt' is included as an embedded resource
-            var name = typeof(Factory).GetTypeInfo()
+            var name = typeof(Factory)
+                .GetTypeInfo()
                 .Assembly.GetManifestResourceNames()
                 .First(n => n.EndsWith(fileName, StringComparison.Ordinal));
             return typeof(Factory).GetTypeInfo().Assembly.GetManifestResourceStream(name);

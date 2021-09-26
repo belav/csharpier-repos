@@ -862,11 +862,12 @@ namespace System.DirectoryServices.AccountManagement
         )
         {
             Debug.Assert(
-                string.Equals(
-                    suggestedAdProperty,
-                    "userAccountControl",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        suggestedAdProperty,
+                        "userAccountControl",
+                        StringComparison.OrdinalIgnoreCase
+                    )
             );
 
             StringBuilder sb = new StringBuilder();
@@ -980,11 +981,12 @@ namespace System.DirectoryServices.AccountManagement
         )
         {
             Debug.Assert(
-                string.Equals(
-                    suggestedAdProperty,
-                    "accountExpires",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        suggestedAdProperty,
+                        "accountExpires",
+                        StringComparison.OrdinalIgnoreCase
+                    )
             );
             Debug.Assert(filter is ExpirationDateFilter);
 

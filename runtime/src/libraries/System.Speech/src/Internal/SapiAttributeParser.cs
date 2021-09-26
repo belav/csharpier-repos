@@ -22,11 +22,12 @@ namespace System.Speech.Internal
                 try
                 {
                     return new CultureInfo(
-                        int.Parse(
-                            langStringTrim,
-                            NumberStyles.HexNumber,
-                            CultureInfo.InvariantCulture
-                        ),
+                        int
+                            .Parse(
+                                langStringTrim,
+                                NumberStyles.HexNumber,
+                                CultureInfo.InvariantCulture
+                            ),
                         false
                     );
                 }

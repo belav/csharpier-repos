@@ -55,18 +55,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     IRemoteSymbolFinderService,
                     ImmutableArray<SerializableSymbolAndProjectId>
                 >(
-                        solution,
-                        (service, solutionInfo, cancellationToken) =>
-                            service.FindAllDeclarationsWithNormalQueryAsync(
-                                solutionInfo,
-                                project.Id,
-                                query.Name,
-                                query.Kind,
-                                criteria,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    solution,
+                    (service, solutionInfo, cancellationToken) =>
+                        service.FindAllDeclarationsWithNormalQueryAsync(
+                            solutionInfo,
+                            project.Id,
+                            query.Name,
+                            query.Kind,
+                            criteria,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!result.HasValue)
@@ -79,11 +79,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
 
             return await FindAllDeclarationsWithNormalQueryInCurrentProcessAsync(
-                    project,
-                    query,
-                    criteria,
-                    cancellationToken
-                )
+                project,
+                query,
+                criteria,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -105,12 +105,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 // get declarations from the compilation's assembly
                 await AddCompilationDeclarationsWithNormalQueryAsync(
-                        project,
-                        query,
-                        criteria,
-                        list,
-                        cancellationToken
-                    )
+                    project,
+                    query,
+                    criteria,
+                    list,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // get declarations from directly referenced projects and metadata
@@ -120,28 +120,28 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     if (assemblyProject != null)
                     {
                         await AddCompilationDeclarationsWithNormalQueryAsync(
-                                assemblyProject,
-                                query,
-                                criteria,
-                                list,
-                                compilation,
-                                assembly,
-                                cancellationToken
-                            )
+                            assemblyProject,
+                            query,
+                            criteria,
+                            list,
+                            compilation,
+                            assembly,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                     else
                     {
                         await AddMetadataDeclarationsWithNormalQueryAsync(
-                                project,
-                                assembly,
-                                compilation.GetMetadataReference(assembly)
-                                    as PortableExecutableReference,
-                                query,
-                                criteria,
-                                list,
-                                cancellationToken
-                            )
+                            project,
+                            assembly,
+                            compilation.GetMetadataReference(assembly)
+                                as PortableExecutableReference,
+                            query,
+                            criteria,
+                            list,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }

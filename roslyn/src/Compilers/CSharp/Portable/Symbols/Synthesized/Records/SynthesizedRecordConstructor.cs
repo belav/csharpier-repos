@@ -44,9 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsNullableAnalysisEnabled()
         {
-            return (
-                (SourceMemberContainerTypeSymbol)ContainingType
-            ).IsNullableEnabledForConstructorsAndInitializers(IsStatic);
+            return ((SourceMemberContainerTypeSymbol)ContainingType)
+                .IsNullableEnabledForConstructorsAndInitializers(IsStatic);
         }
 
         protected override bool IsWithinExpressionOrBlockBody(int position, out int offset)
@@ -63,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeDeclarationSyntax typeDecl = GetSyntax();
             InMethodBinder result = (
                 binderFactoryOpt ?? this.DeclaringCompilation.GetBinderFactory(typeDecl.SyntaxTree)
-            ).GetRecordConstructorInMethodBinder(this);
+            )
+                .GetRecordConstructorInMethodBinder(this);
             return new ExecutableCodeBinder(
                 SyntaxNode,
                 this,

@@ -128,10 +128,8 @@ namespace System.Threading.Tasks.Dataflow
                     dataflowBlockOptions.CancellationToken,
                     Completion,
                     state =>
-                        ((TargetCore<TInput>)state!).Complete(
-                            exception: null,
-                            dropPendingMessages: true
-                        ),
+                        ((TargetCore<TInput>)state!)
+                            .Complete(exception: null, dropPendingMessages: true),
                     _defaultTarget
                 );
             }
@@ -230,9 +228,8 @@ namespace System.Threading.Tasks.Dataflow
                 task.ContinueWith(
                     (completed, state) =>
                     {
-                        ((ActionBlock<TInput>)state!).AsyncCompleteProcessMessageWithTask(
-                            completed
-                        );
+                        ((ActionBlock<TInput>)state!)
+                            .AsyncCompleteProcessMessageWithTask(completed);
                     },
                     this,
                     CancellationToken.None,

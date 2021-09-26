@@ -210,8 +210,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var loopHandler = new LoopHttpHandler();
 
             var client = fixture.WithWebHostBuilder(
-                    builder => builder.ConfigureServices(ConfigureTestWeatherForecastService)
-                )
+                builder => builder.ConfigureServices(ConfigureTestWeatherForecastService)
+            )
                 .CreateClient();
 
             // We configure the inner handler with a handler to this TestServer instance so that calls to the

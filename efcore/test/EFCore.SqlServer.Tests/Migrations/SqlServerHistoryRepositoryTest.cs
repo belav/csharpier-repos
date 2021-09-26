@@ -176,14 +176,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
         private static IHistoryRepository CreateHistoryRepository(string schema = null) =>
             new TestDbContext(
-                new DbContextOptionsBuilder().UseInternalServiceProvider(
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(
                         SqlServerTestHelpers.Instance.CreateServiceProvider()
                     )
                     .UseSqlServer(
                         new SqlConnection("Database=DummyDatabase"),
                         b => b.MigrationsHistoryTable(HistoryRepository.DefaultTableName, schema)
                     ).Options
-            ).GetService<IHistoryRepository>();
+            )
+                .GetService<IHistoryRepository>();
 
         private class TestDbContext : DbContext
         {

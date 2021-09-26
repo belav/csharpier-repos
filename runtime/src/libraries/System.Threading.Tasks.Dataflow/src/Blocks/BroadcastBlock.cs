@@ -368,18 +368,19 @@ namespace System.Threading.Tasks.Dataflow
                 if (exception != null)
                 {
                     // Get out from under currently held locks. Complete re-acquires the locks it needs.
-                    Task.Factory.StartNew(
-                        exc =>
-                            CompleteCore(
-                                exception: (Exception)exc!,
-                                storeExceptionEvenIfAlreadyCompleting: true,
-                                revertProcessingState: true
-                            ),
-                        exception,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                    Task.Factory
+                        .StartNew(
+                            exc =>
+                                CompleteCore(
+                                    exception: (Exception)exc!,
+                                    storeExceptionEvenIfAlreadyCompleting: true,
+                                    revertProcessingState: true
+                                ),
+                            exception,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
             }
         }
@@ -470,11 +471,8 @@ namespace System.Threading.Tasks.Dataflow
                 bool consumed = false;
                 try
                 {
-                    T? consumedValue = sourceAndMessage.Key.ConsumeMessage(
-                        sourceAndMessage.Value,
-                        this,
-                        out consumed
-                    );
+                    T? consumedValue = sourceAndMessage.Key
+                        .ConsumeMessage(sourceAndMessage.Value, this, out consumed);
                     if (consumed)
                     {
                         _source.AddMessage(consumedValue!);
@@ -1065,9 +1063,8 @@ namespace System.Threading.Tasks.Dataflow
                     // so that _taskForOutputProcessing will be visibly set in the task loop.
                     _taskForOutputProcessing = new Task(
                         thisSourceCore =>
-                            (
-                                (BroadcastingSourceCore<TOutput>)thisSourceCore!
-                            ).OfferMessagesLoopCore(),
+                            ((BroadcastingSourceCore<TOutput>)thisSourceCore!)
+                                .OfferMessagesLoopCore(),
                         this,
                         Common.GetCreationOptionsForTask(isReplacementReplica)
                     );
@@ -1209,16 +1206,16 @@ namespace System.Threading.Tasks.Dataflow
                 _completionReserved = true;
 
                 // Run asynchronously to get out of the currently held locks
-                Task.Factory.StartNew(
-                    thisSourceCore =>
-                        (
-                            (BroadcastingSourceCore<TOutput>)thisSourceCore!
-                        ).CompleteBlockOncePossible(),
-                    this,
-                    CancellationToken.None,
-                    Common.GetCreationOptionsForTask(),
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        thisSourceCore =>
+                            ((BroadcastingSourceCore<TOutput>)thisSourceCore!)
+                                .CompleteBlockOncePossible(),
+                        this,
+                        CancellationToken.None,
+                        Common.GetCreationOptionsForTask(),
+                        TaskScheduler.Default
+                    );
             }
 
             /// <summary>

@@ -62,9 +62,10 @@ namespace SessionSample
                             int visits = 0;
                             visits = context.Session.GetInt32("visits") ?? 0;
                             context.Session.SetInt32("visits", ++visits);
-                            await context.Response.WriteAsync(
-                                "Counting: You have visited our page this many times: " + visits
-                            );
+                            await context.Response
+                                .WriteAsync(
+                                    "Counting: You have visited our page this many times: " + visits
+                                );
                         }
                     );
                 }
@@ -78,21 +79,20 @@ namespace SessionSample
                     await context.Response.WriteAsync("<html><body>");
                     if (visits == 0)
                     {
-                        await context.Response.WriteAsync(
-                            "Your session has not been established.<br>"
-                        );
+                        await context.Response
+                            .WriteAsync("Your session has not been established.<br>");
                         await context.Response.WriteAsync(DateTime.Now + "<br>");
-                        await context.Response.WriteAsync(
-                            "<a href=\"/session\">Establish session</a>.<br>"
-                        );
+                        await context.Response
+                            .WriteAsync("<a href=\"/session\">Establish session</a>.<br>");
                     }
                     else
                     {
                         context.Session.SetInt32("visits", ++visits);
-                        await context.Response.WriteAsync(
-                            "Your session was located, you've visited the site this many times: "
-                                + visits
-                        );
+                        await context.Response
+                            .WriteAsync(
+                                "Your session was located, you've visited the site this many times: "
+                                    + visits
+                            );
                     }
                     await context.Response.WriteAsync("</body></html>");
                 }
@@ -102,15 +102,14 @@ namespace SessionSample
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.ConfigureLogging(factory => factory.AddConsole())
-                            .UseKestrel()
-                            .UseIISIntegration()
-                            .UseStartup<Startup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.ConfigureLogging(factory => factory.AddConsole())
+                        .UseKestrel()
+                        .UseIISIntegration()
+                        .UseStartup<Startup>();
+                }
+            ).Build();
 
             return host.RunAsync();
         }

@@ -33,8 +33,8 @@ namespace System.Web.Mvc.Test
                 MockBehavior.Strict
             );
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentEncoding = contentEncoding
-                )
+                c => c.HttpContext.Response.ContentEncoding = contentEncoding
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(content)).Verifiable();
 
@@ -67,8 +67,8 @@ namespace System.Web.Mvc.Test
             mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType)
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentEncoding = contentEncoding
-                )
+                c => c.HttpContext.Response.ContentEncoding = contentEncoding
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(content)).Verifiable();
 
@@ -92,9 +92,10 @@ namespace System.Web.Mvc.Test
             Assert.ThrowsArgumentNull(
                 delegate
                 {
-                    new ContentResult().ExecuteResult(
-                        null /* context */
-                    );
+                    new ContentResult()
+                        .ExecuteResult(
+                            null /* context */
+                        );
                 },
                 "context"
             );
@@ -112,8 +113,8 @@ namespace System.Web.Mvc.Test
             mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType)
                 .Verifiable();
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentEncoding = contentEncoding
-                )
+                c => c.HttpContext.Response.ContentEncoding = contentEncoding
+            )
                 .Verifiable();
 
             ContentResult result = new ContentResult
@@ -169,8 +170,8 @@ namespace System.Web.Mvc.Test
                 MockBehavior.Strict
             );
             mockControllerContext.SetupSet(
-                    c => c.HttpContext.Response.ContentEncoding = contentEncoding
-                )
+                c => c.HttpContext.Response.ContentEncoding = contentEncoding
+            )
                 .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(content)).Verifiable();
 

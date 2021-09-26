@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         );
 
         internal static IEnumerable<int> GetIds(Match match) =>
-            match.Groups["Id"].Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            match.Groups["Id"].Value
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse);
 
         internal static int[] GetIds(string ids) =>
@@ -109,10 +110,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
         internal static IEnumerable<ValueTuple<int, int>> GetDottedIds(Match match)
         {
-            return from ids in match.Groups["Id"].Value.Split(
-                new[] { ',' },
-                StringSplitOptions.RemoveEmptyEntries
-            )
+            return from ids in match.Groups["Id"].Value
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
             let parts = ids.Split('.')
             select ValueTuple.Create(int.Parse(parts[0]), int.Parse(parts[1]));
         }

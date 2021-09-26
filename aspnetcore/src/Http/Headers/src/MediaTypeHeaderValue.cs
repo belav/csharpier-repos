@@ -668,11 +668,12 @@ namespace Microsoft.Net.Http.Headers
             }
             else
             {
-                mediaType = string.Concat(
-                    input.AsSpan().Slice(startIndex, typeLength),
-                    "/",
-                    input.AsSpan().Slice(current, subtypeLength)
-                );
+                mediaType = string
+                    .Concat(
+                        input.AsSpan().Slice(startIndex, typeLength),
+                        "/",
+                        input.AsSpan().Slice(current, subtypeLength)
+                    );
             }
 
             return mediaTypeLength;
@@ -691,11 +692,12 @@ namespace Microsoft.Net.Http.Headers
             if ((mediaTypeLength == 0) || (tempMediaType.Length != mediaType.Length))
             {
                 throw new FormatException(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Invalid media type '{0}'.",
-                        mediaType
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "Invalid media type '{0}'.",
+                            mediaType
+                        )
                 );
             }
         }
@@ -783,10 +785,8 @@ namespace Microsoft.Net.Http.Headers
         private bool MatchesSubtypeWithoutSuffix(MediaTypeHeaderValue set)
         {
             return set.MatchesAllSubTypesWithoutSuffix
-                || set.SubTypeWithoutSuffix.Equals(
-                    SubTypeWithoutSuffix,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                || set.SubTypeWithoutSuffix
+                    .Equals(SubTypeWithoutSuffix, StringComparison.OrdinalIgnoreCase);
         }
 
         private bool MatchesSubtypeWithoutSuffix(StringSegment subType, int startOfSuffix)

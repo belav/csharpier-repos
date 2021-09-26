@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.FoldingRanges
                 @"using {|foldingRange:System;
 using System.Linq;|}";
             using var testLspServer = CreateTestLspServer(markup, out var locations);
-            var expected = locations["foldingRange"].Select(
+            var expected = locations["foldingRange"]
+                .Select(
                     location => CreateFoldingRange(LSP.FoldingRangeKind.Imports, location.Range)
                 )
                 .ToArray();
@@ -40,7 +41,8 @@ using System.Linq;|}";
 {|foldingRange:/* A multiline
 comment */|}";
             using var testLspServer = CreateTestLspServer(markup, out var locations);
-            var expected = locations["foldingRange"].Select(
+            var expected = locations["foldingRange"]
+                .Select(
                     location => CreateFoldingRange(LSP.FoldingRangeKind.Comment, location.Range)
                 )
                 .ToArray();
@@ -57,9 +59,8 @@ comment */|}";
 #endregion|}
 }";
             using var testLspServer = CreateTestLspServer(markup, out var locations);
-            var expected = locations["foldingRange"].Select(
-                    location => CreateFoldingRange(LSP.FoldingRangeKind.Region, location.Range)
-                )
+            var expected = locations["foldingRange"]
+                .Select(location => CreateFoldingRange(LSP.FoldingRangeKind.Region, location.Range))
                 .ToArray();
 
             var results = await RunGetFoldingRangeAsync(testLspServer);

@@ -145,12 +145,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            return base.GetForwardedToAssemblyInUsingNamespaces(
-                name,
-                ref qualifierOpt,
-                diagnostics,
-                location
-            );
+            return base
+                .GetForwardedToAssemblyInUsingNamespaces(
+                    name,
+                    ref qualifierOpt,
+                    diagnostics,
+                    location
+                );
         }
 
         internal override ImportChain ImportChain

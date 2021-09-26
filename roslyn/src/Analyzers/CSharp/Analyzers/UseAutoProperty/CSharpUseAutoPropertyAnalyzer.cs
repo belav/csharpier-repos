@@ -95,12 +95,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
         )
         {
             var groups = analysisResults.Select(
-                    r =>
-                        (
-                            typeDeclaration: (TypeDeclarationSyntax)r.PropertyDeclaration.Parent!,
-                            r.SemanticModel
-                        )
-                )
+                r =>
+                    (
+                        typeDeclaration: (TypeDeclarationSyntax)r.PropertyDeclaration.Parent!,
+                        r.SemanticModel
+                    )
+            )
                 .Distinct()
                 .GroupBy(n => n.typeDeclaration.SyntaxTree);
 

@@ -370,7 +370,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                 if (
                     !_syntaxPredicate(
-                        d._location.SourceTree.GetRoot()
+                        d._location.SourceTree
+                            .GetRoot()
                             .FindToken(_location.SourceSpan.Start, true).Parent
                     )
                 )
@@ -388,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                 if (
                     !d._syntaxPredicate(
-                        _location.SourceTree.GetRoot()
+                        _location.SourceTree
+                            .GetRoot()
                             .FindToken(_location.SourceSpan.Start, true).Parent
                     )
                 )
@@ -624,7 +626,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         Indent(assertText, indentDepth);
                         assertText.Append("// ");
                         assertText.AppendLine(
-                            l.SourceTree.GetText()
+                            l.SourceTree
+                                .GetText()
                                 .Lines.GetLineFromPosition(l.SourceSpan.Start)
                                 .ToString()
                         );

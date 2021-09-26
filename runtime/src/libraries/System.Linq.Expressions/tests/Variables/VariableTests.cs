@@ -82,16 +82,16 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression variable = Expression.Variable(type);
             Assert.True(
                 Expression.Lambda<Func<bool>>(
-                        Expression.Equal(
-                            Expression.Constant(value),
-                            Expression.Block(
-                                type,
-                                new[] { variable },
-                                Expression.Assign(variable, Expression.Constant(value)),
-                                variable
-                            )
+                    Expression.Equal(
+                        Expression.Constant(value),
+                        Expression.Block(
+                            type,
+                            new[] { variable },
+                            Expression.Assign(variable, Expression.Constant(value)),
+                            variable
                         )
                     )
+                )
                     .Compile(useInterpreter)()
             );
         }
@@ -102,9 +102,9 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression variable = Expression.Variable(typeof(int));
             Func<int, int> addOne = Expression.Lambda<Func<int, int>>(
-                    Expression.Add(variable, Expression.Constant(1)),
-                    variable
-                )
+                Expression.Add(variable, Expression.Constant(1)),
+                variable
+            )
                 .Compile(useInterpreter);
             Assert.Equal(3, addOne(2));
         }

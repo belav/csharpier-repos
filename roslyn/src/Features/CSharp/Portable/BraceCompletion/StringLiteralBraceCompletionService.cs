@@ -41,22 +41,18 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             if (
                 OpeningBrace == brace
                 && await InterpolatedStringBraceCompletionService.IsPositionInInterpolatedStringContextAsync(
-                        document,
-                        openingPosition,
-                        cancellationToken
-                    )
+                    document,
+                    openingPosition,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             )
             {
                 return false;
             }
 
-            return await base.CanProvideBraceCompletionAsync(
-                    brace,
-                    openingPosition,
-                    document,
-                    cancellationToken
-                )
+            return await base
+                .CanProvideBraceCompletionAsync(brace, openingPosition, document, cancellationToken)
                 .ConfigureAwait(false);
         }
 

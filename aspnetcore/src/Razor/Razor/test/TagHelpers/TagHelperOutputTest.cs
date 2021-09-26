@@ -1147,7 +1147,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             var buffer = new HtmlContentBuilder();
 
             // Act
-            ((IHtmlContentContainer)output).CopyTo(buffer);
+            ((IHtmlContentContainer)output)
+                .CopyTo(buffer);
 
             // Assert
             buffer.WriteTo(writer, testEncoder);
@@ -1167,7 +1168,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             var buffer = new HtmlContentBuilder();
 
             // Act
-            ((IHtmlContentContainer)output).MoveTo(buffer);
+            ((IHtmlContentContainer)output)
+                .MoveTo(buffer);
 
             // Assert
             buffer.WriteTo(writer, testEncoder);

@@ -124,10 +124,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             }
 
             var window = _vsInteractiveWindow.InteractiveWindow;
-            window.TextView.Options.SetOptionValue(
-                DefaultTextViewHostOptions.SuggestionMarginId,
-                true
-            );
+            window.TextView.Options
+                .SetOptionValue(DefaultTextViewHostOptions.SuggestionMarginId, true);
 
             void closeEventDelegate(object sender, EventArgs e)
             {
@@ -189,23 +187,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         {
             // get all commands of coreContentType - generic interactive window commands
             var interactiveCommands = commands.Where(
-                    c =>
-                        c.GetType()
-                            .GetCustomAttributes(typeof(ContentTypeAttribute), inherit: true)
-                            .Any(a => ((ContentTypeAttribute)a).ContentTypes == coreContentType)
-                )
+                c =>
+                    c.GetType()
+                        .GetCustomAttributes(typeof(ContentTypeAttribute), inherit: true)
+                        .Any(a => ((ContentTypeAttribute)a).ContentTypes == coreContentType)
+            )
                 .ToArray();
 
             // get all commands of specializedContentType - smart C#/VB command implementations
             var specializedInteractiveCommands = commands.Where(
-                    c =>
-                        c.GetType()
-                            .GetCustomAttributes(typeof(ContentTypeAttribute), inherit: true)
-                            .Any(
-                                a =>
-                                    ((ContentTypeAttribute)a).ContentTypes == specializedContentType
-                            )
-                )
+                c =>
+                    c.GetType()
+                        .GetCustomAttributes(typeof(ContentTypeAttribute), inherit: true)
+                        .Any(a => ((ContentTypeAttribute)a).ContentTypes == specializedContentType)
+            )
                 .ToArray();
 
             // We should choose specialized C#/VB commands over generic core interactive window commands

@@ -80,10 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             title = null;
 
             var span = diagnostic.Location.SourceSpan;
-            var node = diagnostic.Location.FindNode(
-                getInnermostNodeForTie: true,
-                cancellationToken
-            );
+            var node = diagnostic.Location
+                .FindNode(getInnermostNodeForTie: true, cancellationToken);
             var (left, right, titleFormat) = node switch
             {
                 BinaryExpressionSyntax binary
@@ -150,10 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             if (matchingMember == null)
                 return false;
 
-            var memberContainer = matchingMember.ContainingType.ToMinimalDisplayString(
-                semanticModel,
-                span.Start
-            );
+            var memberContainer = matchingMember.ContainingType
+                .ToMinimalDisplayString(semanticModel, span.Start);
             title = string.Format(titleFormat, $"{memberContainer}.{matchingMember.Name}");
 
             leftName = left is MemberAccessExpressionSyntax memberAccess
@@ -198,10 +194,10 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
                 )
                 {
                     newExpr = MemberAccessExpression(
-                            SyntaxKind.SimpleMemberAccessExpression,
-                            ThisExpression(),
-                            newNameNode
-                        )
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        ThisExpression(),
+                        newNameNode
+                    )
                         .WithAdditionalAnnotations(Simplifier.Annotation);
                 }
 

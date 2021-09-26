@@ -132,14 +132,15 @@ namespace System.ComponentModel
                 if (IgnoreCase)
                 {
                     if (
-                        string.Compare(
-                            key,
-                            0,
-                            objectName,
-                            0,
-                            objectName.Length,
-                            StringComparison.OrdinalIgnoreCase
-                        ) != 0
+                        string
+                            .Compare(
+                                key,
+                                0,
+                                objectName,
+                                0,
+                                objectName.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            ) != 0
                     )
                     {
                         continue;

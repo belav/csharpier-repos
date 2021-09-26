@@ -169,10 +169,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         private static string DateTimeOffsetToFilenameSafeString(DateTimeOffset dateTime)
         {
             // similar to the XML format for dates, but with punctuation stripped
-            return dateTime.UtcDateTime.ToString(
-                "yyyyMMddTHHmmssFFFFFFFZ",
-                CultureInfo.InvariantCulture
-            );
+            return dateTime.UtcDateTime
+                .ToString("yyyyMMddTHHmmssFFFFFFFZ", CultureInfo.InvariantCulture);
         }
 
         /// <inheritdoc/>
@@ -334,9 +332,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             try
             {
-                string keyIdAsString = (string)revocationElement.Element(KeyElementName)!.Attribute(
-                    IdAttributeName
-                )!;
+                string keyIdAsString = (string)revocationElement.Element(KeyElementName)!
+                    .Attribute(IdAttributeName)!;
                 if (keyIdAsString == RevokeAllKeysValue)
                 {
                     // this is a mass revocation of all keys as of the specified revocation date
@@ -522,9 +519,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             {
                 // Figure out who will be deserializing this
                 var descriptorElement = keyElement.Element(DescriptorElementName);
-                string descriptorDeserializerTypeName = (string)descriptorElement!.Attribute(
-                    DeserializerTypeAttributeName
-                )!;
+                string descriptorDeserializerTypeName = (string)descriptorElement!
+                    .Attribute(DeserializerTypeAttributeName)!;
 
                 // Decrypt the descriptor element and pass it to the descriptor for consumption
                 var unencryptedInputToDeserializer = descriptorElement.Elements()
@@ -573,11 +569,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             );
 
             // Persist it to the underlying repository and trigger the cancellation token
-            var friendlyName = string.Format(
-                CultureInfo.InvariantCulture,
-                "revocation-{0:D}",
-                keyId
-            );
+            var friendlyName = string
+                .Format(CultureInfo.InvariantCulture, "revocation-{0:D}", keyId);
             KeyRepository.StoreElement(revocationElement, friendlyName);
             TriggerAndResetCacheExpirationToken();
         }

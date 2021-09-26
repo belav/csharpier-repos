@@ -97,9 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         public void OnProvidersExecuting_SetsKeyPrefixToEmptyString()
         {
             // Arrange
-            var expected = typeof(TestController_OneTempDataProperty).GetProperty(
-                nameof(TestController_OneTempDataProperty.Test2)
-            );
+            var expected = typeof(TestController_OneTempDataProperty)
+                .GetProperty(nameof(TestController_OneTempDataProperty.Test2));
             var type = typeof(TestController_OneTempDataProperty);
             var provider = CreateProvider();
             var context = GetContext(type);

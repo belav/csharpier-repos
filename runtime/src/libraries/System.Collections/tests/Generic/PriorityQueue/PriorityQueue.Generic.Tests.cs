@@ -324,10 +324,8 @@ namespace System.Collections.Tests
             (TElement Element, TPriority Priority)[] array,
             int index
         ) =>
-            ((ICollection)((EnumerablePriorityQueue)enumerable).UnorderedItems).CopyTo(
-                array,
-                index
-            );
+            ((ICollection)((EnumerablePriorityQueue)enumerable).UnorderedItems)
+                .CopyTo(array, index);
         protected override bool Remove(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable
         ) => ((EnumerablePriorityQueue)enumerable).TryDequeue(out _, out _);

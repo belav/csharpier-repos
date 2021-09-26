@@ -88,10 +88,8 @@ namespace Microsoft.CodeAnalysis.Razor
                     var attribute = attributes[j];
 
                     if (
-                        SymbolEqualityComparer.Default.Equals(
-                            attribute.AttributeClass,
-                            eventHandlerAttribute
-                        )
+                        SymbolEqualityComparer.Default
+                            .Equals(attribute.AttributeClass, eventHandlerAttribute)
                     )
                     {
                         var enablePreventDefault = false;
@@ -135,22 +133,22 @@ namespace Microsoft.CodeAnalysis.Razor
                     ComponentsApi.AssemblyName
                 );
                 builder.CaseSensitive = true;
-                builder.Documentation = string.Format(
-                    CultureInfo.CurrentCulture,
-                    ComponentResources.EventHandlerTagHelper_Documentation,
-                    attributeName,
-                    eventArgType
-                );
+                builder.Documentation = string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        ComponentResources.EventHandlerTagHelper_Documentation,
+                        attributeName,
+                        eventArgType
+                    );
 
-                builder.Metadata.Add(
-                    ComponentMetadata.SpecialKindKey,
-                    ComponentMetadata.EventHandler.TagHelperKind
-                );
+                builder.Metadata
+                    .Add(
+                        ComponentMetadata.SpecialKindKey,
+                        ComponentMetadata.EventHandler.TagHelperKind
+                    );
                 builder.Metadata.Add(ComponentMetadata.EventHandler.EventArgsType, eventArgType);
-                builder.Metadata.Add(
-                    TagHelperMetadata.Common.ClassifyAttributesOnly,
-                    bool.TrueString
-                );
+                builder.Metadata
+                    .Add(TagHelperMetadata.Common.ClassifyAttributesOnly, bool.TrueString);
                 builder.Metadata[TagHelperMetadata.Runtime.Name] =
                     ComponentMetadata.EventHandler.RuntimeName;
 
@@ -221,12 +219,13 @@ namespace Microsoft.CodeAnalysis.Razor
                 builder.BindAttribute(
                     a =>
                     {
-                        a.Documentation = string.Format(
-                            CultureInfo.CurrentCulture,
-                            ComponentResources.EventHandlerTagHelper_Documentation,
-                            attributeName,
-                            eventArgType
-                        );
+                        a.Documentation = string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                ComponentResources.EventHandlerTagHelper_Documentation,
+                                attributeName,
+                                eventArgType
+                            );
 
                         a.Name = attributeName;
 
@@ -236,7 +235,8 @@ namespace Microsoft.CodeAnalysis.Razor
 
                         // But make this weakly typed (don't type check) - delegates have their own type-checking
                         // logic that we don't want to interfere with.
-                        a.Metadata.Add(ComponentMetadata.Component.WeaklyTypedKey, bool.TrueString);
+                        a.Metadata
+                            .Add(ComponentMetadata.Component.WeaklyTypedKey, bool.TrueString);
 
                         a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
 
@@ -251,11 +251,12 @@ namespace Microsoft.CodeAnalysis.Razor
                                 {
                                     parameter.Name = "preventDefault";
                                     parameter.TypeName = typeof(bool).FullName;
-                                    parameter.Documentation = string.Format(
-                                        CultureInfo.CurrentCulture,
-                                        ComponentResources.EventHandlerTagHelper_PreventDefault_Documentation,
-                                        attributeName
-                                    );
+                                    parameter.Documentation = string
+                                        .Format(
+                                            CultureInfo.CurrentCulture,
+                                            ComponentResources.EventHandlerTagHelper_PreventDefault_Documentation,
+                                            attributeName
+                                        );
 
                                     parameter.SetPropertyName("PreventDefault");
                                 }
@@ -269,11 +270,12 @@ namespace Microsoft.CodeAnalysis.Razor
                                 {
                                     parameter.Name = "stopPropagation";
                                     parameter.TypeName = typeof(bool).FullName;
-                                    parameter.Documentation = string.Format(
-                                        CultureInfo.CurrentCulture,
-                                        ComponentResources.EventHandlerTagHelper_StopPropagation_Documentation,
-                                        attributeName
-                                    );
+                                    parameter.Documentation = string
+                                        .Format(
+                                            CultureInfo.CurrentCulture,
+                                            ComponentResources.EventHandlerTagHelper_StopPropagation_Documentation,
+                                            attributeName
+                                        );
 
                                     parameter.SetPropertyName("StopPropagation");
                                 }

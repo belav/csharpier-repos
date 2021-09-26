@@ -92,9 +92,9 @@ namespace Internal.TypeSystem.Ecma
                         {
                             MethodDefinitionHandle methodDefinitionHandle =
                                 (MethodDefinitionHandle)handle;
-                            TypeDefinitionHandle typeDefinitionHandle =
-                                _module._metadataReader.GetMethodDefinition(methodDefinitionHandle)
-                                    .GetDeclaringType();
+                            TypeDefinitionHandle typeDefinitionHandle = _module._metadataReader
+                                .GetMethodDefinition(methodDefinitionHandle)
+                                .GetDeclaringType();
                             EcmaType type = (EcmaType)_module.GetObject(
                                 typeDefinitionHandle,
                                 NotFoundBehavior.Throw
@@ -108,9 +108,9 @@ namespace Internal.TypeSystem.Ecma
                         {
                             FieldDefinitionHandle fieldDefinitionHandle =
                                 (FieldDefinitionHandle)handle;
-                            TypeDefinitionHandle typeDefinitionHandle =
-                                _module._metadataReader.GetFieldDefinition(fieldDefinitionHandle)
-                                    .GetDeclaringType();
+                            TypeDefinitionHandle typeDefinitionHandle = _module._metadataReader
+                                .GetFieldDefinition(fieldDefinitionHandle)
+                                .GetDeclaringType();
                             EcmaType type = (EcmaType)_module.GetObject(
                                 typeDefinitionHandle,
                                 NotFoundBehavior.Throw
@@ -588,12 +588,11 @@ namespace Internal.TypeSystem.Ecma
                                     ];
                                     for (int i = 0; i < newSubstitution.Length; i++)
                                     {
-                                        newSubstitutionTypes[i] = newSubstitution[
-                                            i
-                                        ].InstantiateSignature(
-                                            substitution,
-                                            default(Instantiation)
-                                        );
+                                        newSubstitutionTypes[i] = newSubstitution[i]
+                                            .InstantiateSignature(
+                                                substitution,
+                                                default(Instantiation)
+                                            );
                                     }
                                     newSubstitution = new Instantiation(newSubstitutionTypes);
                                 }
@@ -637,11 +636,12 @@ namespace Internal.TypeSystem.Ecma
 
             if (resolutionScope is ModuleDesc)
             {
-                object result = ((ModuleDesc)(resolutionScope)).GetType(
-                    _metadataReader.GetString(typeReference.Namespace),
-                    _metadataReader.GetString(typeReference.Name),
-                    NotFoundBehavior.ReturnResolutionFailure
-                );
+                object result = ((ModuleDesc)(resolutionScope))
+                    .GetType(
+                        _metadataReader.GetString(typeReference.Namespace),
+                        _metadataReader.GetString(typeReference.Name),
+                        NotFoundBehavior.ReturnResolutionFailure
+                    );
                 if (result == null)
                     result = ModuleDesc.GetTypeResolutionFailure;
                 return result;

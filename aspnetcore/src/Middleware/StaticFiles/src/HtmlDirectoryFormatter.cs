@@ -129,10 +129,8 @@ namespace Microsoft.AspNetCore.StaticFiles
 
             string cumulativePath = "/";
             foreach (
-                var segment in requestPath.Value!.Split(
-                    new[] { '/' },
-                    StringSplitOptions.RemoveEmptyEntries
-                )
+                var segment in requestPath.Value!
+                    .Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)
             )
             {
                 cumulativePath = cumulativePath + segment + "/";

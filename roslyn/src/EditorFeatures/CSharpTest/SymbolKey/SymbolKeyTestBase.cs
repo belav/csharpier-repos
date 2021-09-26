@@ -141,13 +141,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var ignoreAssemblyIds =
                 (comparison & SymbolKeyComparison.IgnoreAssemblyIds)
                 == SymbolKeyComparison.IgnoreAssemblyIds;
-            var message = string.Concat(
-                ignoreCase ? "SymbolID IgnoreCase" : "SymbolID",
-                ignoreAssemblyIds ? " IgnoreAssemblyIds " : " ",
-                "Compare"
-            );
+            var message = string
+                .Concat(
+                    ignoreCase ? "SymbolID IgnoreCase" : "SymbolID",
+                    ignoreAssemblyIds ? " IgnoreAssemblyIds " : " ",
+                    "Compare"
+                );
 
-            var ret = CodeAnalysis.SymbolKey.GetComparer(ignoreCase, ignoreAssemblyIds)
+            var ret = CodeAnalysis.SymbolKey
+                .GetComparer(ignoreCase, ignoreAssemblyIds)
                 .Equals(sid2, sid1);
             if (expectEqual)
             {

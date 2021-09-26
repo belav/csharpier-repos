@@ -81,19 +81,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "ProtectedPrivateMethod",
-                    null,
-                    _siblingType,
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.InvokeMember(
+                        CSharpBinderFlags.None,
+                        "ProtectedPrivateMethod",
+                        null,
+                        _siblingType,
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, object, object, object> target = callSite.Target;
             string message =
                 Assert.Throws<RuntimeBinderException>(
@@ -107,19 +108,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "ProtectedPrivateMethod",
-                    null,
-                    _internalDerived,
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.InvokeMember(
+                        CSharpBinderFlags.None,
+                        "ProtectedPrivateMethod",
+                        null,
+                        _internalDerived,
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, object, object, object> target = callSite.Target;
             string message =
                 Assert.Throws<RuntimeBinderException>(
@@ -133,19 +135,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "ProtectedPrivateMethod",
-                    null,
-                    _internalDerived,
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.InvokeMember(
+                        CSharpBinderFlags.None,
+                        "ProtectedPrivateMethod",
+                        null,
+                        _internalDerived,
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, object, object, object> target = callSite.Target;
             Assert.Equal(19, target(callSite, Activator.CreateInstance(_internalDerived), 19));
         }
@@ -155,19 +158,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "ProtectedPrivateMethod",
-                    null,
-                    _externalDerived,
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.InvokeMember(
+                        CSharpBinderFlags.None,
+                        "ProtectedPrivateMethod",
+                        null,
+                        _externalDerived,
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, object, object, object> target = callSite.Target;
             string message =
                 Assert.Throws<RuntimeBinderException>(
@@ -191,18 +195,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.SetMember(
-                    CSharpBinderFlags.None,
-                    "AField",
-                    _siblingType,
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.SetMember(
+                        CSharpBinderFlags.None,
+                        "AField",
+                        _siblingType,
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, object, object, object> target = callSite.Target;
             string message =
                 Assert.Throws<RuntimeBinderException>(
@@ -213,14 +218,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 return;
             CallSite<Func<CallSite, object, object>> getCallSite = CallSite<
                 Func<CallSite, object, object>
-            >.Create(
-                Binder.GetMember(
-                    CSharpBinderFlags.None,
-                    "AField",
-                    _siblingType,
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
-                )
-            );
+            >
+                .Create(
+                    Binder.GetMember(
+                        CSharpBinderFlags.None,
+                        "AField",
+                        _siblingType,
+                        new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                    )
+                );
             Func<CallSite, object, object> getTarget = getCallSite.Target;
             message =
                 Assert.Throws<RuntimeBinderException>(
@@ -234,18 +240,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.SetMember(
-                    CSharpBinderFlags.None,
-                    "AField",
-                    _internalDerived,
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.SetMember(
+                        CSharpBinderFlags.None,
+                        "AField",
+                        _internalDerived,
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, object, object, object> target = callSite.Target;
             string message =
                 Assert.Throws<RuntimeBinderException>(
@@ -255,14 +262,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             CallSite<Func<CallSite, object, object>> getCallSite = CallSite<
                 Func<CallSite, object, object>
-            >.Create(
-                Binder.GetMember(
-                    CSharpBinderFlags.None,
-                    "AField",
-                    _internalDerived,
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
-                )
-            );
+            >
+                .Create(
+                    Binder.GetMember(
+                        CSharpBinderFlags.None,
+                        "AField",
+                        _internalDerived,
+                        new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                    )
+                );
             Func<CallSite, object, object> getTarget = getCallSite.Target;
             message =
                 Assert.Throws<RuntimeBinderException>(
@@ -276,32 +284,34 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.SetMember(
-                    CSharpBinderFlags.None,
-                    "AField",
-                    _internalDerived,
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.SetMember(
+                        CSharpBinderFlags.None,
+                        "AField",
+                        _internalDerived,
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, object, object, object> target = callSite.Target;
             object obj = Activator.CreateInstance(_internalDerived);
             Assert.Equal(19, target(callSite, obj, 19));
 
             CallSite<Func<CallSite, object, object>> getCallSite = CallSite<
                 Func<CallSite, object, object>
-            >.Create(
-                Binder.GetMember(
-                    CSharpBinderFlags.None,
-                    "AField",
-                    _internalDerived,
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
-                )
-            );
+            >
+                .Create(
+                    Binder.GetMember(
+                        CSharpBinderFlags.None,
+                        "AField",
+                        _internalDerived,
+                        new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                    )
+                );
             Func<CallSite, object, object> getTarget = getCallSite.Target;
             Assert.Equal(19, getTarget(getCallSite, obj));
         }
@@ -311,18 +321,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(
-                Binder.SetMember(
-                    CSharpBinderFlags.None,
-                    "AField",
-                    _externalDerived,
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.SetMember(
+                        CSharpBinderFlags.None,
+                        "AField",
+                        _externalDerived,
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
             Func<CallSite, object, object, object> target = callSite.Target;
             string message =
                 Assert.Throws<RuntimeBinderException>(
@@ -330,14 +341,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 ).Message;
             Assert.Contains("BaseType.AField", message);
 
-            var getCallSite = CallSite<Func<CallSite, object, object>>.Create(
-                Binder.GetMember(
-                    CSharpBinderFlags.None,
-                    "AField",
-                    _externalDerived,
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), }
-                )
-            );
+            var getCallSite = CallSite<Func<CallSite, object, object>>
+                .Create(
+                    Binder.GetMember(
+                        CSharpBinderFlags.None,
+                        "AField",
+                        _externalDerived,
+                        new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), }
+                    )
+                );
             Func<CallSite, object, object> getTarget = getCallSite.Target;
             message =
                 Assert.Throws<RuntimeBinderException>(

@@ -155,7 +155,8 @@ namespace Microsoft.AspNetCore.Components.Authorization
             renderer.AssignRootComponentId(component);
             component.TriggerRender();
             var receiveAuthStateId =
-                renderer.Batches.Single()
+                renderer.Batches
+                    .Single()
                     .GetComponentFrames<ReceiveAuthStateComponent>()
                     .Single().ComponentId;
 

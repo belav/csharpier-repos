@@ -53,11 +53,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             // Act
             await Client.ExpectCircuitError(
                 () =>
-                    Client.HubConnection.SendAsync(
-                        "DispatchBrowserEvent",
-                        eventDescriptor,
-                        "{sadfadsf]"
-                    )
+                    Client.HubConnection
+                        .SendAsync("DispatchBrowserEvent", eventDescriptor, "{sadfadsf]")
             );
 
             // Assert
@@ -105,11 +102,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             // Act
             await Client.ExpectCircuitError(
                 () =>
-                    Client.HubConnection.SendAsync(
-                        "DispatchBrowserEvent",
-                        eventDescriptor,
-                        Serialize(eventArgs)
-                    )
+                    Client.HubConnection
+                        .SendAsync("DispatchBrowserEvent", eventDescriptor, Serialize(eventArgs))
             );
 
             // Assert

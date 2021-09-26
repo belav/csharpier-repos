@@ -36,12 +36,13 @@ public unsafe class C
 }
 ";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    options: TestOptions.UnsafeReleaseDll
-                )
+                source,
+                options: TestOptions.UnsafeReleaseDll
+            )
                 .VerifyDiagnostics(
                     // (7,20): error CS0029: Cannot implicitly convert type 'dynamic' to 'void*'
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "d").WithArguments("dynamic", "void*"),
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "d")
+                        .WithArguments("dynamic", "void*"),
                     // (8,19): error CS0030: Cannot convert type 'dynamic' to 'int*'
                     Diagnostic(ErrorCode.ERR_NoExplicitConv, "(int*)d")
                         .WithArguments("dynamic", "int*")
@@ -53,16 +54,18 @@ public unsafe class C
         {
             var c = CreateCompilation("", new[] { CSharpRef });
             HashSet<DiagnosticInfo> useSiteDiagnostics = null;
-            var dynamicToObject = c.Conversions.ClassifyConversionFromType(
-                DynamicTypeSymbol.Instance,
-                c.GetSpecialType(SpecialType.System_Object),
-                ref useSiteDiagnostics
-            );
-            var objectToDynamic = c.Conversions.ClassifyConversionFromType(
-                c.GetSpecialType(SpecialType.System_Object),
-                DynamicTypeSymbol.Instance,
-                ref useSiteDiagnostics
-            );
+            var dynamicToObject = c.Conversions
+                .ClassifyConversionFromType(
+                    DynamicTypeSymbol.Instance,
+                    c.GetSpecialType(SpecialType.System_Object),
+                    ref useSiteDiagnostics
+                );
+            var objectToDynamic = c.Conversions
+                .ClassifyConversionFromType(
+                    c.GetSpecialType(SpecialType.System_Object),
+                    DynamicTypeSymbol.Instance,
+                    ref useSiteDiagnostics
+                );
 
             Assert.Equal(ConversionKind.Identity, dynamicToObject.Kind);
             Assert.Equal(ConversionKind.Identity, objectToDynamic.Kind);
@@ -87,17 +90,16 @@ class B
     public static implicit operator dynamic[](B a) {return null; }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (7,37): error CS0557: Duplicate user-defined conversion in type 'A'
-                    //     public static explicit operator List<dynamic>(A a) {return null; }
-                    Diagnostic(ErrorCode.ERR_DuplicateConversionInClass, "List<dynamic>")
-                        .WithArguments("A"),
-                    // (13,37): error CS0557: Duplicate user-defined conversion in type 'B'
-                    //     public static implicit operator dynamic[](B a) {return null; }
-                    Diagnostic(ErrorCode.ERR_DuplicateConversionInClass, "dynamic[]")
-                        .WithArguments("B")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (7,37): error CS0557: Duplicate user-defined conversion in type 'A'
+                //     public static explicit operator List<dynamic>(A a) {return null; }
+                Diagnostic(ErrorCode.ERR_DuplicateConversionInClass, "List<dynamic>")
+                    .WithArguments("A"),
+                // (13,37): error CS0557: Duplicate user-defined conversion in type 'B'
+                //     public static implicit operator dynamic[](B a) {return null; }
+                Diagnostic(ErrorCode.ERR_DuplicateConversionInClass, "dynamic[]")
+                    .WithArguments("B")
+            );
         }
 
         [Fact]
@@ -169,29 +171,28 @@ class C
     const string c = ""x"";
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (5,18): error CS1763: 'd' is of type 'dynamic'. A default parameter value of a reference type other than string can only be initialized with null
-                    // void F2(dynamic d = "x") { }
-                    Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "d")
-                        .WithArguments("d", "dynamic"),
-                    // (6,18): error CS1763: 'd' is of type 'dynamic'. A default parameter value of a reference type other than string can only be initialized with null
-                    // void F3(dynamic d = 123) { }
-                    Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "d")
-                        .WithArguments("d", "dynamic"),
-                    // (7,19): error CS1763: 'd' is of type 'dynamic'. A default parameter value of a reference type other than string can only be initialized with null
-                    // void F4(dynamic d = true) { }
-                    Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "d")
-                        .WithArguments("d", "dynamic"),
-                    // (8,19): error CS1763: 'd' is of type 'dynamic'. A default parameter value of a reference type other than string can only be initialized with null
-                    // void F5(dynamic d = 1.0) { }
-                    Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "d")
-                        .WithArguments("d", "dynamic"),
-                    // (9,19): error CS1763: 'd' is of type 'dynamic'. A default parameter value of a reference type other than string can only be initialized with null
-                    // void F6(dynamic d = 1.0m) { }
-                    Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "d")
-                        .WithArguments("d", "dynamic")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (5,18): error CS1763: 'd' is of type 'dynamic'. A default parameter value of a reference type other than string can only be initialized with null
+                // void F2(dynamic d = "x") { }
+                Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "d")
+                    .WithArguments("d", "dynamic"),
+                // (6,18): error CS1763: 'd' is of type 'dynamic'. A default parameter value of a reference type other than string can only be initialized with null
+                // void F3(dynamic d = 123) { }
+                Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "d")
+                    .WithArguments("d", "dynamic"),
+                // (7,19): error CS1763: 'd' is of type 'dynamic'. A default parameter value of a reference type other than string can only be initialized with null
+                // void F4(dynamic d = true) { }
+                Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "d")
+                    .WithArguments("d", "dynamic"),
+                // (8,19): error CS1763: 'd' is of type 'dynamic'. A default parameter value of a reference type other than string can only be initialized with null
+                // void F5(dynamic d = 1.0) { }
+                Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "d")
+                    .WithArguments("d", "dynamic"),
+                // (9,19): error CS1763: 'd' is of type 'dynamic'. A default parameter value of a reference type other than string can only be initialized with null
+                // void F6(dynamic d = 1.0m) { }
+                Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "d")
+                    .WithArguments("d", "dynamic")
+            );
         }
 
         [Fact]
@@ -211,12 +212,11 @@ class C
     Goo(d);
   }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (11,9): error CS1503: Argument 1: cannot convert from 'dynamic' to '__arglist'
-                    Diagnostic(ErrorCode.ERR_BadArgType, "d")
-                        .WithArguments("1", "dynamic", "__arglist")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (11,9): error CS1503: Argument 1: cannot convert from 'dynamic' to '__arglist'
+                Diagnostic(ErrorCode.ERR_BadArgType, "d")
+                    .WithArguments("1", "dynamic", "__arglist")
+            );
         }
 
         [Fact]
@@ -298,20 +298,19 @@ class B : A
     public void I(ref object a) { }
 }
 ";
-            CreateCompilation(source, new[] { CSharpRef })
-                .VerifyDiagnostics(
-                    // (13,17): warning CS0108: 'B.G(object)' hides inherited member 'A.G(dynamic)'. Use the new keyword if hiding was intended.
-                    Diagnostic(ErrorCode.WRN_NewRequired, "G")
-                        .WithArguments("B.G(object)", "A.G(dynamic)"),
-                    // (14,17): warning CS0108: 'B.H(dynamic[])' hides inherited member 'A.H(params object[])'. Use the new keyword if hiding was intended.
-                    Diagnostic(ErrorCode.WRN_NewRequired, "H")
-                        .WithArguments("B.H(dynamic[])", "A.H(params object[])"),
-                    // (15,17): warning CS0108: 'B.I(ref object)' hides inherited member 'A.I(ref dynamic)'. Use the new keyword if hiding was intended.
-                    Diagnostic(ErrorCode.WRN_NewRequired, "I")
-                        .WithArguments("B.I(ref object)", "A.I(ref dynamic)"),
-                    // (12,20): warning CS0108: 'B.F(int)' hides inherited member 'A.F(int)'. Use the new keyword if hiding was intended.
-                    Diagnostic(ErrorCode.WRN_NewRequired, "F").WithArguments("B.F(int)", "A.F(int)")
-                );
+            CreateCompilation(source, new[] { CSharpRef }).VerifyDiagnostics(
+                // (13,17): warning CS0108: 'B.G(object)' hides inherited member 'A.G(dynamic)'. Use the new keyword if hiding was intended.
+                Diagnostic(ErrorCode.WRN_NewRequired, "G")
+                    .WithArguments("B.G(object)", "A.G(dynamic)"),
+                // (14,17): warning CS0108: 'B.H(dynamic[])' hides inherited member 'A.H(params object[])'. Use the new keyword if hiding was intended.
+                Diagnostic(ErrorCode.WRN_NewRequired, "H")
+                    .WithArguments("B.H(dynamic[])", "A.H(params object[])"),
+                // (15,17): warning CS0108: 'B.I(ref object)' hides inherited member 'A.I(ref dynamic)'. Use the new keyword if hiding was intended.
+                Diagnostic(ErrorCode.WRN_NewRequired, "I")
+                    .WithArguments("B.I(ref object)", "A.I(ref dynamic)"),
+                // (12,20): warning CS0108: 'B.F(int)' hides inherited member 'A.F(int)'. Use the new keyword if hiding was intended.
+                Diagnostic(ErrorCode.WRN_NewRequired, "F").WithArguments("B.F(int)", "A.F(int)")
+            );
         }
 
         [Fact]
@@ -643,15 +642,14 @@ class C
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics(
-                    // (9,30): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
-                    Diagnostic(ErrorCode.ERR_ManagedAddr, "&d").WithArguments("dynamic"),
-                    // (10,15): error CS0193: The * or -> operator must be applied to a pointer
-                    Diagnostic(ErrorCode.ERR_PtrExpected, "*d"),
-                    // (11,15): error CS0193: The * or -> operator must be applied to a pointer
-                    Diagnostic(ErrorCode.ERR_PtrExpected, "d->x")
-                );
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
+                // (9,30): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
+                Diagnostic(ErrorCode.ERR_ManagedAddr, "&d").WithArguments("dynamic"),
+                // (10,15): error CS0193: The * or -> operator must be applied to a pointer
+                Diagnostic(ErrorCode.ERR_PtrExpected, "*d"),
+                // (11,15): error CS0193: The * or -> operator must be applied to a pointer
+                Diagnostic(ErrorCode.ERR_PtrExpected, "d->x")
+            );
         }
 
         [Fact]
@@ -966,78 +964,77 @@ class C
     static void F() {}
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (8,13): error CS0019: Operator '<' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d < F()")
-                        .WithArguments("<", "dynamic", "void"),
-                    // (9,13): error CS0019: Operator '>' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d > F()")
-                        .WithArguments(">", "dynamic", "void"),
-                    // (10,13): error CS0019: Operator '>=' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d >= F()")
-                        .WithArguments(">=", "dynamic", "void"),
-                    // (11,13): error CS0019: Operator '<=' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d <= F()")
-                        .WithArguments("<=", "dynamic", "void"),
-                    // (12,13): error CS0019: Operator '==' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d == F()")
-                        .WithArguments("==", "dynamic", "void"),
-                    // (13,13): error CS0019: Operator '*' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d * F()")
-                        .WithArguments("*", "dynamic", "void"),
-                    // (14,13): error CS0019: Operator '%' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d % F()")
-                        .WithArguments("%", "dynamic", "void"),
-                    // (15,13): error CS0019: Operator '+' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d + F()")
-                        .WithArguments("+", "dynamic", "void"),
-                    // (16,13): error CS0019: Operator '-' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - F()")
-                        .WithArguments("-", "dynamic", "void"),
-                    // (17,13): error CS0019: Operator '^' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d ^ F()")
-                        .WithArguments("^", "dynamic", "void"),
-                    // (18,13): error CS0019: Operator '&' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d & F()")
-                        .WithArguments("&", "dynamic", "void"),
-                    // (19,13): error CS0019: Operator '|' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d | F()")
-                        .WithArguments("|", "dynamic", "void"),
-                    // (20,13): error CS0019: Operator '&&' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d && F()")
-                        .WithArguments("&&", "dynamic", "void"),
-                    // (21,13): error CS0019: Operator '||' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d || F()")
-                        .WithArguments("||", "dynamic", "void"),
-                    // (22,13): error CS0019: Operator '+=' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d += F()")
-                        .WithArguments("+=", "dynamic", "void"),
-                    // (23,13): error CS0019: Operator '-=' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d -= F()")
-                        .WithArguments("-=", "dynamic", "void"),
-                    // (24,13): error CS0019: Operator '/=' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d /= F()")
-                        .WithArguments("/=", "dynamic", "void"),
-                    // (25,13): error CS0019: Operator '%=' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d %= F()")
-                        .WithArguments("%=", "dynamic", "void"),
-                    // (26,13): error CS0019: Operator '&=' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d &= F()")
-                        .WithArguments("&=", "dynamic", "void"),
-                    // (27,13): error CS0019: Operator '|=' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d |= F()")
-                        .WithArguments("|=", "dynamic", "void"),
-                    // (28,13): error CS0019: Operator '^=' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d ^= F()")
-                        .WithArguments("^=", "dynamic", "void"),
-                    // (29,13): error CS0019: Operator '<<' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d << F()")
-                        .WithArguments("<<", "dynamic", "void"),
-                    // (30,13): error CS0019: Operator '>>' cannot be applied to operands of type 'dynamic' and 'void'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d >> F()")
-                        .WithArguments(">>", "dynamic", "void")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (8,13): error CS0019: Operator '<' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d < F()")
+                    .WithArguments("<", "dynamic", "void"),
+                // (9,13): error CS0019: Operator '>' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d > F()")
+                    .WithArguments(">", "dynamic", "void"),
+                // (10,13): error CS0019: Operator '>=' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d >= F()")
+                    .WithArguments(">=", "dynamic", "void"),
+                // (11,13): error CS0019: Operator '<=' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d <= F()")
+                    .WithArguments("<=", "dynamic", "void"),
+                // (12,13): error CS0019: Operator '==' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d == F()")
+                    .WithArguments("==", "dynamic", "void"),
+                // (13,13): error CS0019: Operator '*' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d * F()")
+                    .WithArguments("*", "dynamic", "void"),
+                // (14,13): error CS0019: Operator '%' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d % F()")
+                    .WithArguments("%", "dynamic", "void"),
+                // (15,13): error CS0019: Operator '+' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d + F()")
+                    .WithArguments("+", "dynamic", "void"),
+                // (16,13): error CS0019: Operator '-' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - F()")
+                    .WithArguments("-", "dynamic", "void"),
+                // (17,13): error CS0019: Operator '^' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d ^ F()")
+                    .WithArguments("^", "dynamic", "void"),
+                // (18,13): error CS0019: Operator '&' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d & F()")
+                    .WithArguments("&", "dynamic", "void"),
+                // (19,13): error CS0019: Operator '|' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d | F()")
+                    .WithArguments("|", "dynamic", "void"),
+                // (20,13): error CS0019: Operator '&&' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d && F()")
+                    .WithArguments("&&", "dynamic", "void"),
+                // (21,13): error CS0019: Operator '||' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d || F()")
+                    .WithArguments("||", "dynamic", "void"),
+                // (22,13): error CS0019: Operator '+=' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d += F()")
+                    .WithArguments("+=", "dynamic", "void"),
+                // (23,13): error CS0019: Operator '-=' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d -= F()")
+                    .WithArguments("-=", "dynamic", "void"),
+                // (24,13): error CS0019: Operator '/=' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d /= F()")
+                    .WithArguments("/=", "dynamic", "void"),
+                // (25,13): error CS0019: Operator '%=' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d %= F()")
+                    .WithArguments("%=", "dynamic", "void"),
+                // (26,13): error CS0019: Operator '&=' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d &= F()")
+                    .WithArguments("&=", "dynamic", "void"),
+                // (27,13): error CS0019: Operator '|=' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d |= F()")
+                    .WithArguments("|=", "dynamic", "void"),
+                // (28,13): error CS0019: Operator '^=' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d ^= F()")
+                    .WithArguments("^=", "dynamic", "void"),
+                // (29,13): error CS0019: Operator '<<' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d << F()")
+                    .WithArguments("<<", "dynamic", "void"),
+                // (30,13): error CS0019: Operator '>>' cannot be applied to operands of type 'dynamic' and 'void'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d >> F()")
+                    .WithArguments(">>", "dynamic", "void")
+            );
         }
 
         [Fact]
@@ -1352,9 +1349,9 @@ public unsafe class C
 }
 ";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    options: TestOptions.UnsafeReleaseDll
-                )
+                source,
+                options: TestOptions.UnsafeReleaseDll
+            )
                 .VerifyDiagnostics(
                     // (13,17): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'dynamic' and 'method group'
                     //         var y = s1 ? d2 : M;
@@ -1509,9 +1506,9 @@ IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic, IsI
                 // file.cs(8,31): error CS8324: Named argument specifications must appear after all fixed arguments have been specified in a dynamic invocation.
                 //         d.Goo(x: 123, y: 456, 789);
                 Diagnostic(
-                        ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgumentInDynamicInvocation,
-                        "789"
-                    )
+                    ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgumentInDynamicInvocation,
+                    "789"
+                )
                     .WithLocation(8, 31),
                 // file.cs(10,25): error CS1978: Cannot use an expression of type 'void' as an argument to a dynamically dispatched operation.
                 //         /*<bind>*/d.Goo(System.Console.WriteLine());/*</bind>*/
@@ -1808,11 +1805,10 @@ public class C<S, R>
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (11,14): error CS1503: Argument 2: cannot convert from 'R' to 'S'
-                    Diagnostic(ErrorCode.ERR_BadArgType, "default(R)").WithArguments("2", "R", "S")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (11,14): error CS1503: Argument 2: cannot convert from 'R' to 'S'
+                Diagnostic(ErrorCode.ERR_BadArgType, "default(R)").WithArguments("2", "R", "S")
+            );
         }
 
         [Fact]
@@ -1833,11 +1829,10 @@ class C
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (11,15): error CS1615: Argument 1 should not be passed with the 'ref' keyword
-                    Diagnostic(ErrorCode.ERR_BadArgExtraRef, "x").WithArguments("1", "ref")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (11,15): error CS1615: Argument 1 should not be passed with the 'ref' keyword
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "x").WithArguments("1", "ref")
+            );
         }
 
         [Fact, WorkItem(624410, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624410")]
@@ -1863,9 +1858,9 @@ public class C<T>
 ";
             // Dev11 reports error CS0411: The type arguments for method 'Program.Bar<T>(C<T>.E*[])' cannot be inferred from the usage.
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    options: TestOptions.UnsafeReleaseDll
-                )
+                source,
+                options: TestOptions.UnsafeReleaseDll
+            )
                 .VerifyDiagnostics();
         }
 
@@ -1953,19 +1948,18 @@ class Program
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (8,9): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Program.Goo<T>(int, T)'. There is no boxing conversion from 'int' to 'System.Collections.IEnumerable'.
-                    //         Goo<int>((dynamic)1, 1);
-                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "Goo<int>")
-                        .WithArguments(
-                            "Program.Goo<T>(int, T)",
-                            "System.Collections.IEnumerable",
-                            "T",
-                            "int"
-                        )
-                        .WithLocation(8, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (8,9): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Program.Goo<T>(int, T)'. There is no boxing conversion from 'int' to 'System.Collections.IEnumerable'.
+                //         Goo<int>((dynamic)1, 1);
+                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "Goo<int>")
+                    .WithArguments(
+                        "Program.Goo<T>(int, T)",
+                        "System.Collections.IEnumerable",
+                        "T",
+                        "int"
+                    )
+                    .WithLocation(8, 9)
+            );
         }
 
         [Fact]
@@ -2013,12 +2007,11 @@ class C
 ";
             // This should fail applicability. The type argument is known.
 
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (13,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C.F<T>(T, X<T>)'
-                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "F<string>")
-                        .WithArguments("C.F<T>(T, X<T>)", "T", "string")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (13,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C.F<T>(T, X<T>)'
+                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "F<string>")
+                    .WithArguments("C.F<T>(T, X<T>)", "T", "string")
+            );
         }
 
         [Fact]
@@ -2042,14 +2035,13 @@ class C
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (13,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C.F<T>(T, X<T>)'
-                    //         F<string>(d, null);
-                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "F<string>")
-                        .WithArguments("C.F<T>(T, X<T>)", "T", "string")
-                        .WithLocation(13, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (13,9): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C.F<T>(T, X<T>)'
+                //         F<string>(d, null);
+                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "F<string>")
+                    .WithArguments("C.F<T>(T, X<T>)", "T", "string")
+                    .WithLocation(13, 9)
+            );
         }
 
         [Fact]
@@ -2067,14 +2059,13 @@ public class C
 		F<int>(d, 1, 2);
 	}
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (9,3): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'C.F<T>(string, params T[])'. There is no boxing conversion from 'int' to 'C'.
-                    // 		F<int>(d, 1, 2);
-                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "F<int>")
-                        .WithArguments("C.F<T>(string, params T[])", "C", "T", "int")
-                        .WithLocation(9, 3)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (9,3): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'C.F<T>(string, params T[])'. There is no boxing conversion from 'int' to 'C'.
+                // 		F<int>(d, 1, 2);
+                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "F<int>")
+                    .WithArguments("C.F<T>(string, params T[])", "C", "T", "int")
+                    .WithLocation(9, 3)
+            );
         }
 
         [Fact]
@@ -2119,24 +2110,23 @@ class C
         NewConstraint<dynamic>();
     }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (14,9): error CS0311: The type 'dynamic' cannot be used as type parameter 'T' in the generic type or method 'C.CConstraint<T>()'. There is no implicit reference conversion from 'dynamic' to 'C'.
-                    Diagnostic(
-                            ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
-                            "CConstraint<dynamic>"
-                        )
-                        .WithArguments("C.CConstraint<T>()", "C", "T", "dynamic"),
-                    // (15,9): error CS0311: The type 'dynamic' cannot be used as type parameter 'T' in the generic type or method 'C.InterfaceConstraint<T>()'. There is no implicit reference conversion from 'dynamic' to 'I'.
-                    Diagnostic(
-                            ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
-                            "InterfaceConstraint<dynamic>"
-                        )
-                        .WithArguments("C.InterfaceConstraint<T>()", "I", "T", "dynamic"),
-                    // (16,9): error CS0453: The type 'dynamic' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C.StructConstraint<T>()'
-                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "StructConstraint<dynamic>")
-                        .WithArguments("C.StructConstraint<T>()", "T", "dynamic")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (14,9): error CS0311: The type 'dynamic' cannot be used as type parameter 'T' in the generic type or method 'C.CConstraint<T>()'. There is no implicit reference conversion from 'dynamic' to 'C'.
+                Diagnostic(
+                    ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                    "CConstraint<dynamic>"
+                )
+                    .WithArguments("C.CConstraint<T>()", "C", "T", "dynamic"),
+                // (15,9): error CS0311: The type 'dynamic' cannot be used as type parameter 'T' in the generic type or method 'C.InterfaceConstraint<T>()'. There is no implicit reference conversion from 'dynamic' to 'I'.
+                Diagnostic(
+                    ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                    "InterfaceConstraint<dynamic>"
+                )
+                    .WithArguments("C.InterfaceConstraint<T>()", "I", "T", "dynamic"),
+                // (16,9): error CS0453: The type 'dynamic' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C.StructConstraint<T>()'
+                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "StructConstraint<dynamic>")
+                    .WithArguments("C.StructConstraint<T>()", "T", "dynamic")
+            );
         }
 
         #endregion
@@ -2242,12 +2232,10 @@ public class Derived : Base<List<dynamic>>
         u[0].F();
     }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (15,10): error CS1061: 'object' does not contain a definition for 'F' and no extension method 'F' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "F")
-                        .WithArguments("object", "F")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (15,10): error CS1061: 'object' does not contain a definition for 'F' and no extension method 'F' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "F").WithArguments("object", "F")
+            );
         }
 
         [Fact]
@@ -2341,13 +2329,12 @@ class B : A<Func<int, dynamic>>
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (13,21): error CS1061: 'object' does not contain a definition for 'Bar' and no extension method 'Bar' accepting a first
-                    // argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Bar")
-                        .WithArguments("object", "Bar")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (13,21): error CS1061: 'object' does not contain a definition for 'Bar' and no extension method 'Bar' accepting a first
+                // argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Bar")
+                    .WithArguments("object", "Bar")
+            );
         }
 
         [Fact]
@@ -2376,9 +2363,9 @@ public class D<T>
 }
 ";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    options: TestOptions.UnsafeReleaseDll
-                )
+                source,
+                options: TestOptions.UnsafeReleaseDll
+            )
                 .VerifyDiagnostics(
                     // (13,18): error CS1503: Argument 1: cannot convert from 'int' to 'System.Action<D<object>.E*[]>'
                     Diagnostic(ErrorCode.ERR_BadArgType, "1")
@@ -2413,9 +2400,9 @@ public unsafe class C
 } 
 ";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    options: TestOptions.UnsafeReleaseDll
-                )
+                source,
+                options: TestOptions.UnsafeReleaseDll
+            )
                 .VerifyDiagnostics(
                     // (14,9): error CS1656: Cannot assign to 'M' because it is a 'method group'
                     Diagnostic(ErrorCode.ERR_AssgReadonlyLocalCause, "M")
@@ -2872,9 +2859,9 @@ unsafe class X
 } 
 ";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    options: TestOptions.UnsafeReleaseDll
-                )
+                source,
+                options: TestOptions.UnsafeReleaseDll
+            )
                 .VerifyDiagnostics(
                     // (14,17): error CS0428: Cannot convert method group 'M' to non-delegate type 'dynamic'. Did you intend to invoke the method?
                     Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "M").WithArguments("M", "dynamic"),
@@ -2919,9 +2906,9 @@ unsafe class C
 }
 ";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    options: TestOptions.UnsafeReleaseDll
-                )
+                source,
+                options: TestOptions.UnsafeReleaseDll
+            )
                 .VerifyDiagnostics(
                     // (15,17): error CS1976: Cannot use a method group as an argument to a dynamically dispatched operation. Did you intend to invoke the method?
                     Diagnostic(ErrorCode.ERR_BadDynamicMethodArgMemgrp, "M"),
@@ -3075,16 +3062,14 @@ class C : List<int>
 } 
 ";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    new[]
-                    {
-                        Parse(
-                            source,
-                            options: TestOptions.Regular.WithLanguageVersion(
-                                LanguageVersion.CSharp5
-                            )
-                        )
-                    }
-                )
+                new[]
+                {
+                    Parse(
+                        source,
+                        options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)
+                    )
+                }
+            )
                 .VerifyDiagnostics(
                     // (43,55): warning CS1981: Using 'is' to test compatibility with 'dynamic' is essentially identical to testing compatibility with 'Object' and will succeed for all non-null values
                     //         Expression<Func<dynamic, dynamic>> e18 = x => d is dynamic; // ok, warning
@@ -3155,9 +3140,9 @@ class C : List<int>
                     // (36,55): error CS1963: An expression tree may not contain a dynamic operation
                     //         Expression<Func<dynamic, dynamic>> e11 = x => f((dynamic)1);
                     Diagnostic(
-                            ErrorCode.ERR_ExpressionTreeContainsDynamicOperation,
-                            "f((dynamic)1)"
-                        )
+                        ErrorCode.ERR_ExpressionTreeContainsDynamicOperation,
+                        "f((dynamic)1)"
+                    )
                         .WithLocation(36, 55),
                     // (37,55): error CS1963: An expression tree may not contain a dynamic operation
                     //         Expression<Func<dynamic, dynamic>> e12 = x => f(d ?? null);
@@ -3178,9 +3163,9 @@ class C : List<int>
                     // (49,55): error CS1963: An expression tree may not contain a dynamic operation
                     //         Expression<Func<dynamic, dynamic>> e24 = x => new string(x);
                     Diagnostic(
-                            ErrorCode.ERR_ExpressionTreeContainsDynamicOperation,
-                            "new string(x)"
-                        )
+                        ErrorCode.ERR_ExpressionTreeContainsDynamicOperation,
+                        "new string(x)"
+                    )
                         .WithLocation(49, 55)
                 );
         }
@@ -3234,16 +3219,14 @@ class C : List<int>
 }
 ";
             CreateCompilationWithMscorlib40AndSystemCore(
-                    new[]
-                    {
-                        Parse(
-                            source,
-                            options: TestOptions.Regular.WithLanguageVersion(
-                                LanguageVersion.CSharp5
-                            )
-                        )
-                    }
-                )
+                new[]
+                {
+                    Parse(
+                        source,
+                        options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)
+                    )
+                }
+            )
                 .VerifyDiagnostics(
                     // (13,55): error CS1989: Async lambda expressions cannot be converted to expression trees
                     //         Expression<Func<dynamic, Task<dynamic>>> e1 = async x => await d;
@@ -3284,10 +3267,10 @@ public class Class1
     }
 }";
             CreateCompilationWithMscorlib45(
-                    source,
-                    new[] { SystemCoreRef },
-                    options: TestOptions.DebugDll
-                )
+                source,
+                new[] { SystemCoreRef },
+                options: TestOptions.DebugDll
+            )
                 .VerifyEmitDiagnostics(
                     // (10,28): error CS0656: Missing compiler required member 'Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create'
                     //         var result = await GetResponse();
@@ -3324,13 +3307,12 @@ class C
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (11,27): error CS1979: Query expressions over source type 'dynamic' or with a join sequence of type 'dynamic' are not allowed
-                    Diagnostic(ErrorCode.ERR_BadDynamicQuery, "D1"),
-                    // (12,27): error CS1979: Query expressions over source type 'dynamic' or with a join sequence of type 'dynamic' are not allowed
-                    Diagnostic(ErrorCode.ERR_BadDynamicQuery, "D2")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (11,27): error CS1979: Query expressions over source type 'dynamic' or with a join sequence of type 'dynamic' are not allowed
+                Diagnostic(ErrorCode.ERR_BadDynamicQuery, "D1"),
+                // (12,27): error CS1979: Query expressions over source type 'dynamic' or with a join sequence of type 'dynamic' are not allowed
+                Diagnostic(ErrorCode.ERR_BadDynamicQuery, "D2")
+            );
         }
 
         [Fact]
@@ -3404,12 +3386,11 @@ class C
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (15,17): error CS1942: The type of the expression in the select clause is incorrect.  Type inference failed in the call to 'Select'.
-                    Diagnostic(ErrorCode.ERR_QueryTypeInferenceFailed, "select")
-                        .WithArguments("select", "Select")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (15,17): error CS1942: The type of the expression in the select clause is incorrect.  Type inference failed in the call to 'Select'.
+                Diagnostic(ErrorCode.ERR_QueryTypeInferenceFailed, "select")
+                    .WithArguments("select", "Select")
+            );
         }
 
         [Fact]
@@ -3461,11 +3442,10 @@ class C
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (16,17): error CS1979: Query expressions over source type 'dynamic' or with a join sequence of type 'dynamic' are not allowed
-                    Diagnostic(ErrorCode.ERR_BadDynamicQuery, "select a + 1")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (16,17): error CS1979: Query expressions over source type 'dynamic' or with a join sequence of type 'dynamic' are not allowed
+                Diagnostic(ErrorCode.ERR_BadDynamicQuery, "select a + 1")
+            );
         }
 
         #endregion
@@ -3671,12 +3651,10 @@ class C
     return b && d;
   }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (10,12): error CS7083: Expression must be implicitly convertible to Boolean or its type 'B' must define operator 'false'.
-                    Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "b")
-                        .WithArguments("B", "false")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (10,12): error CS7083: Expression must be implicitly convertible to Boolean or its type 'B' must define operator 'false'.
+                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "b").WithArguments("B", "false")
+            );
         }
 
         [Fact]
@@ -3695,12 +3673,10 @@ class C
     return b || d;
   }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (10,12): error CS7083: Expression must be implicitly convertible to Boolean or its type 'B' must define operator 'true'.
-                    Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "b")
-                        .WithArguments("B", "true")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (10,12): error CS7083: Expression must be implicitly convertible to Boolean or its type 'B' must define operator 'true'.
+                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "b").WithArguments("B", "true")
+            );
         }
 
         [Fact]
@@ -3717,12 +3693,11 @@ class C
     return M && d;
   }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (8,12): error CS0019: Operator '&&' cannot be applied to operands of type 'method group' and 'dynamic'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "M && d")
-                        .WithArguments("&&", "method group", "dynamic")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (8,12): error CS0019: Operator '&&' cannot be applied to operands of type 'method group' and 'dynamic'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "M && d")
+                    .WithArguments("&&", "method group", "dynamic")
+            );
         }
 
         [Fact]
@@ -3857,14 +3832,14 @@ class D
 ";
             // NOTE: the error is that the type is not known, not that the feature is unavailable.
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp4)
-                )
+                source,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp4)
+            )
                 .VerifyDiagnostics();
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp3)
-                )
+                source,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp3)
+            )
                 .VerifyDiagnostics(
                     // (4,5): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a using directive or an assembly reference?)
                     //     dynamic M()
@@ -3955,10 +3930,10 @@ class Test
     }
 }";
             var verifier = CompileAndVerify(
-                    source,
-                    new[] { CSharpRef },
-                    expectedOutput: "System.Object"
-                )
+                source,
+                new[] { CSharpRef },
+                expectedOutput: "System.Object"
+            )
                 .VerifyDiagnostics();
 
             var tree = verifier.Compilation.SyntaxTrees.Single();
@@ -4006,10 +3981,10 @@ class Test
                 .VerifyDiagnostics();
 
             var verifier = CompileAndVerify(
-                    source,
-                    new[] { CSharpRef },
-                    expectedOutput: "System.Object"
-                )
+                source,
+                new[] { CSharpRef },
+                expectedOutput: "System.Object"
+            )
                 .VerifyDiagnostics();
 
             var tree = verifier.Compilation.SyntaxTrees.Single();
@@ -4046,10 +4021,10 @@ class Program
 }
 ";
             var verifier = CompileAndVerify(
-                    source,
-                    options: TestOptions.DebugDll.WithAllowUnsafe(true),
-                    verify: Verification.Fails
-                )
+                source,
+                options: TestOptions.DebugDll.WithAllowUnsafe(true),
+                verify: Verification.Fails
+            )
                 .VerifyDiagnostics();
 
             var tree = verifier.Compilation.SyntaxTrees.Single();
@@ -4086,10 +4061,10 @@ class Program
 }
 ";
             var verifier = CompileAndVerify(
-                    source,
-                    options: TestOptions.DebugDll.WithAllowUnsafe(true),
-                    verify: Verification.Fails
-                )
+                source,
+                options: TestOptions.DebugDll.WithAllowUnsafe(true),
+                verify: Verification.Fails
+            )
                 .VerifyDiagnostics();
 
             var tree = verifier.Compilation.SyntaxTrees.Single();
@@ -4154,10 +4129,10 @@ class Program
 }
 ";
             var verifier = CompileAndVerify(
-                    source,
-                    new[] { CSharpRef },
-                    options: TestOptions.DebugDll
-                )
+                source,
+                new[] { CSharpRef },
+                options: TestOptions.DebugDll
+            )
                 .VerifyDiagnostics();
 
             var tree = verifier.Compilation.SyntaxTrees.Single();

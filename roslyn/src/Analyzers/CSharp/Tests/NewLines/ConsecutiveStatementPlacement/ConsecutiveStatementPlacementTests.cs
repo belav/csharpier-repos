@@ -40,7 +40,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -65,7 +66,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -92,7 +94,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -119,7 +122,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -149,7 +153,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -179,7 +184,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -210,7 +216,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -241,7 +248,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -272,7 +280,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -303,7 +312,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -335,7 +345,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -366,7 +377,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -401,7 +413,8 @@ class C
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -471,7 +484,8 @@ class C
                         CodeStyleOptions2.TrueWithSilentEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -1057,7 +1071,8 @@ public class Foo
                         CodeStyleOptions2.FalseWithSuggestionEnforcement
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]

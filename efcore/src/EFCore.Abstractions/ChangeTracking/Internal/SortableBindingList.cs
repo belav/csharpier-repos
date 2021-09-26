@@ -107,7 +107,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 _prop = prop;
                 _direction = direction;
 
-                var property = typeof(Comparer<>).MakeGenericType(prop.PropertyType)
+                var property = typeof(Comparer<>)
+                    .MakeGenericType(prop.PropertyType)
                     .GetTypeInfo()
                     .GetDeclaredProperty("Default")!;
                 _comparer = (IComparer)property.GetValue(null, null)!;

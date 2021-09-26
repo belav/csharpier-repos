@@ -367,7 +367,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return _unbound
               ? GetMembers()
               : OriginalDefinition.GetEarlyAttributeDecodingMembers()
-                    .SelectAsArray(s_symbolAsMemberFunc, this);
+                .SelectAsArray(s_symbolAsMemberFunc, this);
         }
 
         internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(string name)

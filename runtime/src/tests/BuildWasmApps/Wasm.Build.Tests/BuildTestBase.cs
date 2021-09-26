@@ -138,14 +138,16 @@ namespace Wasm.Build.Tests
                 new object?[]
                 {
                     new BuildArgs("placeholder", "Debug", aot, "placeholder", string.Empty)
-                }.AsEnumerable(),
+                }
+                    .AsEnumerable(),
 #endif
 
                 // list of each member data - for Release+@aot
                 new object?[]
                 {
                     new BuildArgs("placeholder", "Release", aot, "placeholder", string.Empty)
-                }.AsEnumerable()
+                }
+                    .AsEnumerable()
             }.AsEnumerable();
 
         public static IEnumerable<object?[]> BuildAndRunData(
@@ -238,10 +240,8 @@ namespace Wasm.Build.Tests
             // App arguments
             if (envVars != null)
             {
-                var setenv = string.Join(
-                    ' ',
-                    envVars.Select(kvp => $"--setenv={kvp.Key}={kvp.Value}").ToArray()
-                );
+                var setenv = string
+                    .Join(' ', envVars.Select(kvp => $"--setenv={kvp.Key}={kvp.Value}").ToArray());
                 args.Append($" {setenv}");
             }
 

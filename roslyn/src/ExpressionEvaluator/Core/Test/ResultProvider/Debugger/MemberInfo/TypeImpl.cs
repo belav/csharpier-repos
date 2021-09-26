@@ -239,7 +239,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override MethodInfo[] GetMethods(BindingFlags flags)
         {
-            return this.Type.GetMethods((System.Reflection.BindingFlags)flags)
+            return this.Type
+                .GetMethods((System.Reflection.BindingFlags)flags)
                 .Select(m => new MethodInfoImpl(m))
                 .ToArray();
         }
@@ -319,13 +320,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             // good enough for our mock implementation.
             var infos = interfaceMaps.SelectMany(
                 map =>
-                    map.InterfaceMethods.Zip(
-                        map.TargetMethods,
-                        (interfaceMethod, implementingMethod) =>
-                            implementingMethod.Name.Contains(".")
-                                ? MakeExplicitInterfaceInfo(interfaceMethod, implementingMethod)
-                                : null
-                    )
+                    map.InterfaceMethods
+                        .Zip(
+                            map.TargetMethods,
+                            (interfaceMethod, implementingMethod) =>
+                                implementingMethod.Name.Contains(".")
+                                    ? MakeExplicitInterfaceInfo(interfaceMethod, implementingMethod)
+                                    : null
+                        )
             );
             return infos.Where(i => i != null).ToArray();
         }
@@ -335,10 +337,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             System.Reflection.MethodInfo implementingMethod
         )
         {
-            return (ExplicitInterfaceInfo)typeof(ExplicitInterfaceInfo).Instantiate(
-                new MethodInfoImpl(interfaceMethod),
-                new MethodInfoImpl(implementingMethod)
-            );
+            return (ExplicitInterfaceInfo)typeof(ExplicitInterfaceInfo)
+                .Instantiate(
+                    new MethodInfoImpl(interfaceMethod),
+                    new MethodInfoImpl(implementingMethod)
+                );
         }
 
         public override bool IsInstanceOfType(object o)
@@ -368,9 +371,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override Type MakeGenericType(params Type[] argTypes)
         {
-            return (TypeImpl)this.Type.MakeGenericType(
-                argTypes.Select(t => ((TypeImpl)t).Type).ToArray()
-            );
+            return (TypeImpl)this.Type
+                .MakeGenericType(argTypes.Select(t => ((TypeImpl)t).Type).ToArray());
         }
 
         public override Type MakePointerType()

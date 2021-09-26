@@ -30,7 +30,8 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
             Directory.CreateDirectory(dir);
             _tmpDirectories.Add(dir);
 
-            var secrets = new ConfigurationBuilder().AddJsonFile(secretsFilePath, optional: true)
+            var secrets = new ConfigurationBuilder()
+                .AddJsonFile(secretsFilePath, optional: true)
                 .Build()
                 .AsEnumerable()
                 .Where(i => i.Value != null)
@@ -63,9 +64,8 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
             var configKey = "MyDummySetting";
 
             SetSecret(TestSecretsId, configKey, randValue);
-            var config = new ConfigurationBuilder().AddUserSecrets(
-                    typeof(ConfigurationExtensionTest).Assembly
-                )
+            var config = new ConfigurationBuilder()
+                .AddUserSecrets(typeof(ConfigurationExtensionTest).Assembly)
                 .Build();
 
             Assert.Equal(randValue, config[configKey]);
@@ -84,7 +84,8 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
             var configKey = "MyDummySetting";
 
             SetSecret(TestSecretsId, configKey, randValue);
-            var config = new ConfigurationBuilder().AddUserSecrets<ConfigurationExtensionTest>()
+            var config = new ConfigurationBuilder()
+                .AddUserSecrets<ConfigurationExtensionTest>()
                 .Build();
 
             Assert.Equal(randValue, config[configKey]);
@@ -119,7 +120,8 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
         [Fact]
         public void AddUserSecrets_DoesNotThrowsIfOptional()
         {
-            var config = new ConfigurationBuilder().AddUserSecrets<string>(optional: true)
+            var config = new ConfigurationBuilder()
+                .AddUserSecrets<string>(optional: true)
                 .AddUserSecrets(typeof(List<>).Assembly, optional: true)
                 .Build();
 
@@ -138,10 +140,8 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
 
             Assert.Throws<FileNotFoundException>(
                 () =>
-                    new ConfigurationBuilder().AddUserSecrets(
-                            Assembly.GetExecutingAssembly(),
-                            false
-                        )
+                    new ConfigurationBuilder()
+                        .AddUserSecrets(Assembly.GetExecutingAssembly(), false)
                         .Build()
             );
         }

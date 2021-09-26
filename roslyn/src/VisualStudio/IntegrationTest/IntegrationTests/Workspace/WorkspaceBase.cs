@@ -40,11 +40,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
             VisualStudio.SolutionExplorer.CloseSolution();
             VisualStudio.SolutionExplorer.CreateSolution(nameof(WorkspacesDesktop));
             var testProj = new ProjectUtils.Project("TestProj");
-            VisualStudio.SolutionExplorer.AddProject(
-                testProj,
-                WellKnownProjectTemplates.ClassLibrary,
-                languageName: LanguageNames.VisualBasic
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    testProj,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    languageName: LanguageNames.VisualBasic
+                );
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(testProj);
             VisualStudio.Editor.SetText(
                 @"Imports System
@@ -72,36 +73,30 @@ End Class"
         {
             var project = new ProjectUtils.Project(ProjectName);
             var csProj2 = new ProjectUtils.Project("CSProj2");
-            VisualStudio.SolutionExplorer.AddProject(
-                csProj2,
-                projectTemplate: DefaultProjectTemplate,
-                languageName: LanguageName
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    csProj2,
+                    projectTemplate: DefaultProjectTemplate,
+                    languageName: LanguageName
+                );
             var projectName = new ProjectUtils.ProjectReference(ProjectName);
-            VisualStudio.SolutionExplorer.AddProjectReference(
-                fromProjectName: csProj2,
-                toProjectName: projectName
-            );
+            VisualStudio.SolutionExplorer
+                .AddProjectReference(fromProjectName: csProj2, toProjectName: projectName);
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(csProj2);
-            VisualStudio.SolutionExplorer.AddFile(
-                project,
-                "Program.cs",
-                open: true,
-                contents: "public class Class1 { }"
-            );
-            VisualStudio.SolutionExplorer.AddFile(
-                csProj2,
-                "Program.cs",
-                open: true,
-                contents: "public class Class2 { Class1 c; }"
-            );
+            VisualStudio.SolutionExplorer
+                .AddFile(project, "Program.cs", open: true, contents: "public class Class1 { }");
+            VisualStudio.SolutionExplorer
+                .AddFile(
+                    csProj2,
+                    "Program.cs",
+                    open: true,
+                    contents: "public class Class2 { Class1 c; }"
+                );
             VisualStudio.SolutionExplorer.OpenFile(csProj2, "Program.cs");
             VisualStudio.Editor.PlaceCaret("Class1");
             VisualStudio.Editor.Verify.CurrentTokenType("class name");
-            VisualStudio.SolutionExplorer.RemoveProjectReference(
-                projectReferenceName: projectName,
-                projectName: csProj2
-            );
+            VisualStudio.SolutionExplorer
+                .RemoveProjectReference(projectReferenceName: projectName, projectName: csProj2);
             VisualStudio.Editor.Verify.CurrentTokenType("identifier");
         }
 
@@ -160,11 +155,8 @@ End Module"
             // Verify we are connected to the project before...
             Assert.Contains(ProjectName, VisualStudio.Editor.GetProjectNavBarItems());
 
-            VisualStudio.SolutionExplorer.RenameFileViaDTE(
-                project,
-                "BeforeRename.cs",
-                "AfterRename.cs"
-            );
+            VisualStudio.SolutionExplorer
+                .RenameFileViaDTE(project, "BeforeRename.cs", "AfterRename.cs");
 
             // ...and after.
             Assert.Contains(ProjectName, VisualStudio.Editor.GetProjectNavBarItems());

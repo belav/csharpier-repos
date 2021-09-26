@@ -64,13 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CancellationToken cancellationToken
         )
         {
-            var newDocument = await base.AddEventAsync(
-                    solution,
-                    destination,
-                    @event,
-                    options,
-                    cancellationToken
-                )
+            var newDocument = await base
+                .AddEventAsync(solution, destination, @event, options, cancellationToken)
                 .ConfigureAwait(false);
 
             var namedType = @event.Type as INamedTypeSymbol;
@@ -78,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 // This is a VB event that declares its own type.  i.e. "Public Event E(x As Object)"
                 // We also have to generate "public void delegate EEventHandler(object x)"
-                var compilation = await newDocument.Project.GetCompilationAsync(cancellationToken)
+                var compilation = await newDocument.Project
+                    .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var newDestinationSymbol =
                     destination.GetSymbolKey(cancellationToken)
@@ -87,23 +83,23 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 if (newDestinationSymbol?.ContainingType != null)
                 {
                     return await this.AddNamedTypeAsync(
-                            newDocument.Project.Solution,
-                            newDestinationSymbol.ContainingType,
-                            namedType,
-                            options,
-                            cancellationToken
-                        )
+                        newDocument.Project.Solution,
+                        newDestinationSymbol.ContainingType,
+                        namedType,
+                        options,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else if (newDestinationSymbol?.ContainingNamespace != null)
                 {
                     return await this.AddNamedTypeAsync(
-                            newDocument.Project.Solution,
-                            newDestinationSymbol.ContainingNamespace,
-                            namedType,
-                            options,
-                            cancellationToken
-                        )
+                        newDocument.Project.Solution,
+                        newDestinationSymbol.ContainingNamespace,
+                        namedType,
+                        options,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -497,10 +493,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 newParams.Add(parameterSyntax);
             }
 
-            var finalMember = CSharpSyntaxGenerator.Instance.AddParameters(
-                destination,
-                newParams.ToImmutableAndFree()
-            );
+            var finalMember = CSharpSyntaxGenerator.Instance
+                .AddParameters(destination, newParams.ToImmutableAndFree());
 
             return Cast<TDeclarationNode>(finalMember);
         }
@@ -519,10 +513,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             }
 
             var attributeSyntaxList = AttributeGenerator.GenerateAttributeLists(
-                    attributes.ToImmutableArray(),
-                    options,
-                    target
-                )
+                attributes.ToImmutableArray(),
+                options,
+                target
+            )
                 .ToArray();
 
             return destination switch
@@ -595,9 +589,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 throw new ArgumentException("attributeToRemove");
             }
 
-            var attributeSyntaxToRemove = attributeToRemove.ApplicationSyntaxReference.GetSyntax(
-                cancellationToken
-            );
+            var attributeSyntaxToRemove = attributeToRemove.ApplicationSyntaxReference
+                .GetSyntax(cancellationToken);
             return RemoveAttribute(
                 destination,
                 attributeSyntaxToRemove,
@@ -817,9 +810,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 // Insert the new global statement(s) at the end of any current global statements.
                 // This code relies on 'LastIndexOf' returning -1 when no matching element is found.
                 var insertionIndex =
-                    compilationUnit.Members.LastIndexOf(
-                        memberDeclaration => memberDeclaration.IsKind(SyntaxKind.GlobalStatement)
-                    ) + 1;
+                    compilationUnit.Members
+                        .LastIndexOf(
+                            memberDeclaration =>
+                                memberDeclaration.IsKind(SyntaxKind.GlobalStatement)
+                        ) + 1;
                 var wrappedStatements = StatementGenerator.GenerateStatements(statements)
                     .Select(generated => SyntaxFactory.GlobalStatement(generated))
                     .ToArray();

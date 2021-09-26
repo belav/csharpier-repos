@@ -36,9 +36,8 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
             context.RegisterCompilationStartAction(
                 compilationContext =>
                 {
-                    var objectType = compilationContext.Compilation.GetSpecialType(
-                        SpecialType.System_Object
-                    );
+                    var objectType = compilationContext.Compilation
+                        .GetSpecialType(SpecialType.System_Object);
                     if (objectType != null)
                     {
                         var referenceEqualsMethod = objectType.GetMembers(nameof(ReferenceEquals))
@@ -130,10 +129,8 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
                 return;
             }
 
-            var properties = ImmutableDictionary<string, string>.Empty.Add(
-                UseIsNullConstants.Kind,
-                UseIsNullConstants.ReferenceEqualsKey
-            );
+            var properties = ImmutableDictionary<string, string>.Empty
+                .Add(UseIsNullConstants.Kind, UseIsNullConstants.ReferenceEqualsKey);
 
             var genericParameterSymbol = GetGenericParameterSymbol(
                 syntaxFacts,

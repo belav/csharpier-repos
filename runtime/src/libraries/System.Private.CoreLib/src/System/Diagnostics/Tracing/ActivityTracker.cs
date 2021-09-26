@@ -71,10 +71,11 @@ namespace System.Diagnostics.Tracing
                 m_checkedForEnable = true;
                 if (
                     useTplSource
-                    && TplEventSource.Log.IsEnabled(
-                        EventLevel.Informational,
-                        TplEventSource.Keywords.TasksFlowActivityIds
-                    )
+                    && TplEventSource.Log
+                        .IsEnabled(
+                            EventLevel.Informational,
+                            TplEventSource.Keywords.TasksFlowActivityIds
+                        )
                 )
                     Enable();
                 if (m_current == null)
@@ -91,10 +92,11 @@ namespace System.Diagnostics.Tracing
             if (tplDebug)
             {
                 log!.DebugFacilityMessage("OnStartEnter", fullActivityName);
-                log!.DebugFacilityMessage(
-                    "OnStartEnterActivityState",
-                    ActivityInfo.LiveActivities(currentActivity)
-                );
+                log!
+                    .DebugFacilityMessage(
+                        "OnStartEnterActivityState",
+                        ActivityInfo.LiveActivities(currentActivity)
+                    );
             }
 
             if (currentActivity != null)
@@ -148,15 +150,17 @@ namespace System.Diagnostics.Tracing
 
             if (tplDebug)
             {
-                log!.DebugFacilityMessage(
-                    "OnStartRetActivityState",
-                    ActivityInfo.LiveActivities(newActivity)
-                );
-                log!.DebugFacilityMessage1(
-                    "OnStartRet",
-                    activityId.ToString(),
-                    relatedActivityId.ToString()
-                );
+                log!
+                    .DebugFacilityMessage(
+                        "OnStartRetActivityState",
+                        ActivityInfo.LiveActivities(newActivity)
+                    );
+                log!
+                    .DebugFacilityMessage1(
+                        "OnStartRet",
+                        activityId.ToString(),
+                        relatedActivityId.ToString()
+                    );
             }
         }
 
@@ -184,10 +188,11 @@ namespace System.Diagnostics.Tracing
             if (tplDebug)
             {
                 log!.DebugFacilityMessage("OnStopEnter", fullActivityName);
-                log!.DebugFacilityMessage(
-                    "OnStopEnterActivityState",
-                    ActivityInfo.LiveActivities(m_current.Value)
-                );
+                log!
+                    .DebugFacilityMessage(
+                        "OnStopEnterActivityState",
+                        ActivityInfo.LiveActivities(m_current.Value)
+                    );
             }
 
             while (true) // This is a retry loop.
@@ -249,10 +254,11 @@ namespace System.Diagnostics.Tracing
 
                     if (tplDebug)
                     {
-                        log!.DebugFacilityMessage(
-                            "OnStopRetActivityState",
-                            ActivityInfo.LiveActivities(newCurrentActivity)
-                        );
+                        log!
+                            .DebugFacilityMessage(
+                                "OnStopRetActivityState",
+                                ActivityInfo.LiveActivities(newCurrentActivity)
+                            );
                         log!.DebugFacilityMessage("OnStopRet", activityId.ToString());
                     }
                     return;
@@ -276,11 +282,12 @@ namespace System.Diagnostics.Tracing
                 catch (NotImplementedException)
                 {
                     // send message to debugger without delay
-                    System.Diagnostics.Debugger.Log(
-                        0,
-                        null,
-                        "Activity Enabled() called but AsyncLocals Not Supported (pre V4.6).  Ignoring Enable"
-                    );
+                    System.Diagnostics.Debugger
+                        .Log(
+                            0,
+                            null,
+                            "Activity Enabled() called but AsyncLocals Not Supported (pre V4.6).  Ignoring Enable"
+                        );
                 }
             }
         }
@@ -322,21 +329,23 @@ namespace System.Diagnostics.Tracing
             if (activityName.EndsWith(EventSource.s_ActivityStartSuffix, StringComparison.Ordinal))
             {
 #if ES_BUILD_STANDALONE
-                return string.Concat(
-                    providerName,
-                    activityName.Substring(
-                        0,
-                        activityName.Length - EventSource.s_ActivityStartSuffix.Length
-                    )
-                );
+                return string
+                    .Concat(
+                        providerName,
+                        activityName.Substring(
+                            0,
+                            activityName.Length - EventSource.s_ActivityStartSuffix.Length
+                        )
+                    );
 #else
-                return string.Concat(
-                    providerName,
-                    activityName.AsSpan(
-                        0,
-                        activityName.Length - EventSource.s_ActivityStartSuffix.Length
-                    )
-                );
+                return string
+                    .Concat(
+                        providerName,
+                        activityName.AsSpan(
+                            0,
+                            activityName.Length - EventSource.s_ActivityStartSuffix.Length
+                        )
+                    );
 #endif
             }
             else if (
@@ -344,21 +353,23 @@ namespace System.Diagnostics.Tracing
             )
             {
 #if ES_BUILD_STANDALONE
-                return string.Concat(
-                    providerName,
-                    activityName.Substring(
-                        0,
-                        activityName.Length - EventSource.s_ActivityStopSuffix.Length
-                    )
-                );
+                return string
+                    .Concat(
+                        providerName,
+                        activityName.Substring(
+                            0,
+                            activityName.Length - EventSource.s_ActivityStopSuffix.Length
+                        )
+                    );
 #else
-                return string.Concat(
-                    providerName,
-                    activityName.AsSpan(
-                        0,
-                        activityName.Length - EventSource.s_ActivityStopSuffix.Length
-                    )
-                );
+                return string
+                    .Concat(
+                        providerName,
+                        activityName.AsSpan(
+                            0,
+                            activityName.Length - EventSource.s_ActivityStopSuffix.Length
+                        )
+                    );
 #endif
             }
             else if (task != 0)

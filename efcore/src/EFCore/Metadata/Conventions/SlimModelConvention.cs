@@ -196,9 +196,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 {
                     var slimNavigation = Create(navigation, slimEntityType);
 
-                    var inverse = slimNavigation.TargetEntityType.FindSkipNavigation(
-                        navigation.Inverse.Name
-                    );
+                    var inverse = slimNavigation.TargetEntityType
+                        .FindSkipNavigation(navigation.Inverse.Name);
                     if (inverse != null)
                     {
                         slimNavigation.Inverse = inverse;
@@ -315,7 +314,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             SlimEntityType entityType
         ) =>
             parameterBinding.With(
-                parameterBinding.ConsumedProperties.Select(
+                parameterBinding.ConsumedProperties
+                    .Select(
                         property =>
                             (
                                 entityType.FindProperty(property.Name)
@@ -332,9 +332,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             SlimEntityType entityType
         ) =>
             instantiationBinding?.With(
-                instantiationBinding.ParameterBindings.Select(
-                        binding => Create(binding, entityType)
-                    )
+                instantiationBinding.ParameterBindings
+                    .Select(binding => Create(binding, entityType))
                     .ToList()
             );
 
@@ -361,9 +360,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (annotations.TryGetValue(CoreAnnotationNames.QueryFilter, out var queryFilter))
                 {
                     annotations[CoreAnnotationNames.QueryFilter] =
-                        new QueryRootRewritingExpressionVisitor(slimEntityType.Model).Rewrite(
-                            (Expression)queryFilter!
-                        );
+                        new QueryRootRewritingExpressionVisitor(slimEntityType.Model)
+                            .Rewrite((Expression)queryFilter!);
                 }
 
 #pragma warning disable CS0612 // Type or member is obsolete
@@ -375,9 +373,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 )
                 {
                     annotations[CoreAnnotationNames.DefiningQuery] =
-                        new QueryRootRewritingExpressionVisitor(slimEntityType.Model).Rewrite(
-                            (Expression)definingQuery!
-                        );
+                        new QueryRootRewritingExpressionVisitor(slimEntityType.Model)
+                            .Rewrite((Expression)definingQuery!);
                 }
 #pragma warning restore CS0612 // Type or member is obsolete
             }
@@ -509,9 +506,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private SlimForeignKey Create(IForeignKey foreignKey, SlimEntityType slimEntityType)
         {
-            var principalEntityType = slimEntityType.Model.FindEntityType(
-                foreignKey.PrincipalEntityType.Name
-            )!;
+            var principalEntityType = slimEntityType.Model
+                .FindEntityType(foreignKey.PrincipalEntityType.Name)!;
             return slimEntityType.AddForeignKey(
                 slimEntityType.FindProperties(foreignKey.Properties.Select(p => p.Name))!,
                 GetKey(foreignKey.PrincipalKey, principalEntityType),
@@ -543,16 +539,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 navigation.IsOnDependent
                     ? slimForeigKey.DeclaringEntityType
                     : slimForeigKey.PrincipalEntityType
-            ).AddNavigation(
-                navigation.Name,
-                navigation.ClrType,
-                navigation.PropertyInfo,
-                navigation.FieldInfo,
-                slimForeigKey,
-                navigation.IsOnDependent,
-                navigation.GetPropertyAccessMode(),
-                navigation.IsEagerLoaded
-            );
+            )
+                .AddNavigation(
+                    navigation.Name,
+                    navigation.ClrType,
+                    navigation.PropertyInfo,
+                    navigation.FieldInfo,
+                    slimForeigKey,
+                    navigation.IsOnDependent,
+                    navigation.GetPropertyAccessMode(),
+                    navigation.IsEagerLoaded
+                );
 
         /// <summary>
         ///     Updates the navigation annotations that will be set on the read-only object.
@@ -587,9 +584,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 slimEntityType.Model.FindEntityType(navigation.TargetEntityType.Name)!,
                 GetForeignKey(
                     navigation.ForeignKey,
-                    slimEntityType.Model.FindEntityType(
-                        navigation.ForeignKey.DeclaringEntityType.Name
-                    )!
+                    slimEntityType.Model
+                        .FindEntityType(navigation.ForeignKey.DeclaringEntityType.Name)!
                 ),
                 navigation.IsCollection,
                 navigation.IsOnDependent,
@@ -608,12 +604,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             SlimEntityType entityType
         ) =>
             entityType.FindDeclaredForeignKeys(
-                    entityType.FindProperties(foreignKey.Properties.Select(p => p.Name))!
-                )
+                entityType.FindProperties(foreignKey.Properties.Select(p => p.Name))!
+            )
                 .Single(
                     fk =>
                         fk.PrincipalEntityType.Name == foreignKey.PrincipalEntityType.Name
-                        && fk.PrincipalKey.Properties.Select(p => p.Name)
+                        && fk.PrincipalKey.Properties
+                            .Select(p => p.Name)
                             .SequenceEqual(foreignKey.PrincipalKey.Properties.Select(p => p.Name))
                 );
 

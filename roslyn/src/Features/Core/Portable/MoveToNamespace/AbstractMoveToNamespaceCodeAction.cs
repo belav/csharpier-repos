@@ -49,10 +49,10 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             )
             {
                 var moveToNamespaceResult = await _moveToNamespaceService.MoveToNamespaceAsync(
-                        _moveToNamespaceAnalysisResult,
-                        moveToNamespaceOptions.Namespace,
-                        cancellationToken
-                    )
+                    _moveToNamespaceAnalysisResult,
+                    moveToNamespaceOptions.Namespace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (moveToNamespaceResult.Succeeded)
@@ -70,13 +70,13 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         {
             Debug.Assert(moveToNamespaceResult.Succeeded);
 
-            using var _ = PooledObjects.ArrayBuilder<CodeActionOperation>.GetInstance(
-                out var operations
-            );
+            using var _ = PooledObjects.ArrayBuilder<CodeActionOperation>
+                .GetInstance(out var operations);
             operations.Add(new ApplyChangesOperation(moveToNamespaceResult.UpdatedSolution));
 
             var symbolRenameCodeActionOperationFactory =
-                moveToNamespaceResult.UpdatedSolution.Workspace.Services.GetService<ISymbolRenamedCodeActionOperationFactoryWorkspaceService>();
+                moveToNamespaceResult.UpdatedSolution.Workspace.Services
+                    .GetService<ISymbolRenamedCodeActionOperationFactoryWorkspaceService>();
 
             // It's possible we're not in a host context providing this service, in which case
             // just provide a code action that won't notify of the symbol rename.

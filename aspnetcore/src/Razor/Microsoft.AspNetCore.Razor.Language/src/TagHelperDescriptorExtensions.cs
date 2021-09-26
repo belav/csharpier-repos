@@ -26,11 +26,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(tagHelper));
             }
 
-            return string.Equals(
-                tagHelper.Kind,
-                TagHelperConventions.DefaultKind,
-                StringComparison.Ordinal
-            );
+            return string
+                .Equals(tagHelper.Kind, TagHelperConventions.DefaultKind, StringComparison.Ordinal);
         }
 
         public static bool KindUsesDefaultTagHelperRuntime(this TagHelperDescriptor tagHelper)

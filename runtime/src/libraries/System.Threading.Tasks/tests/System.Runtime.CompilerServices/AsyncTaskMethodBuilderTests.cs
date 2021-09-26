@@ -657,36 +657,27 @@ namespace System.Threading.Tasks.Tests
                 ),
                 Task.WhenAny(twa1, twa2).Unwrap(),
                 Task.WhenAny<int>(
-                        Task.Run(
-                            new Func<Task<int>>(
-                                () =>
-                                {
-                                    throw new Exception("uh oh");
-                                }
-                            )
+                    Task.Run(
+                        new Func<Task<int>>(
+                            () =>
+                            {
+                                throw new Exception("uh oh");
+                            }
                         )
                     )
-                    .Unwrap(),
-                Task.Factory.StartNew(
-                        () =>
-                            Task.Factory.StartNew(
-                                () =>
-                                {
-                                    throw new Exception("uh oh");
-                                }
-                            )
-                    )
-                    .Unwrap(),
-                Task.Factory.StartNew<Task<int>>(
-                        () =>
-                            Task.Factory.StartNew<int>(
-                                () =>
-                                {
-                                    throw new Exception("uh oh");
-                                }
-                            )
-                    )
-                    .Unwrap(),
+                ).Unwrap(),
+                Task.Factory.StartNew(() => Task.Factory.StartNew(
+                            () =>
+                            {
+                                throw new Exception("uh oh");
+                            }
+                        )).Unwrap(),
+                Task.Factory.StartNew<Task<int>>(() => Task.Factory.StartNew<int>(
+                            () =>
+                            {
+                                throw new Exception("uh oh");
+                            }
+                        )).Unwrap(),
                 Task.Run(
                     () =>
                         Task.Run(
@@ -837,82 +828,81 @@ namespace System.Threading.Tasks.Tests
         public static void DroppedIncompleteStateMachine_RaisesIncompleteAsyncMethodEvent()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        using (
-                            var listener = new TestEventListener(
-                                "System.Threading.Tasks.TplEventSource",
-                                EventLevel.Verbose
-                            )
+                () =>
+                {
+                    using (
+                        var listener = new TestEventListener(
+                            "System.Threading.Tasks.TplEventSource",
+                            EventLevel.Verbose
                         )
+                    )
+                    {
+                        var events = new ConcurrentQueue<EventWrittenEventArgs>();
+                        listener.RunWithCallback(
+                            events.Enqueue,
+                            () =>
+                            {
+                                NeverCompletes();
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
+                                GC.WaitForPendingFinalizers();
+                            }
+                        );
+
+                        // To help diagnose https://github.com/dotnet/runtime/issues/2198
+                        // Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
+                        var sb = new StringBuilder();
+                        foreach (EventWrittenEventArgs ev in events)
                         {
-                            var events = new ConcurrentQueue<EventWrittenEventArgs>();
-                            listener.RunWithCallback(
-                                events.Enqueue,
-                                () =>
-                                {
-                                    NeverCompletes();
-                                    GC.Collect();
-                                    GC.WaitForPendingFinalizers();
-                                    GC.WaitForPendingFinalizers();
-                                }
-                            );
-
-                            // To help diagnose https://github.com/dotnet/runtime/issues/2198
-                            // Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
-                            var sb = new StringBuilder();
-                            foreach (EventWrittenEventArgs ev in events)
+                            if (ev.EventId == 0)
                             {
-                                if (ev.EventId == 0)
-                                {
-                                    sb.AppendLine("Events contained unexpected event:")
-                                        .AppendLine($"ActivityId: {ev.ActivityId}")
-                                        .AppendLine($"Channel: {ev.Channel}")
-                                        .AppendLine($"EventId: {ev.EventId}")
-                                        .AppendLine($"EventName: {ev.EventName}")
-                                        .AppendLine($"EventSource: {ev.EventSource}")
-                                        .AppendLine($"Keywords: {ev.Keywords}")
-                                        .AppendLine($"Level: {ev.Level}")
-                                        .AppendLine($"Message: {ev.Message}")
-                                        .AppendLine($"Opcode: {ev.Opcode}")
-                                        .AppendLine($"OSThreadId: {ev.OSThreadId}")
-                                        .AppendLine(
-                                            $"Payload: {(ev.Payload != null ? string.Join(", ", ev.Payload) : "(null)")}"
-                                        )
-                                        .AppendLine(
-                                            $"PayloadNames: {(ev.PayloadNames != null ? string.Join(", ", ev.PayloadNames) : "(null)")}"
-                                        )
-                                        .AppendLine($"RelatedActivityId: {ev.RelatedActivityId}")
-                                        .AppendLine($"Tags: {ev.Tags}")
-                                        .AppendLine($"Task: {ev.Task}")
-                                        .AppendLine($"TimeStamp: {ev.TimeStamp}")
-                                        .AppendLine($"Version: {ev.Version}")
-                                        .AppendLine();
-                                }
+                                sb.AppendLine("Events contained unexpected event:")
+                                    .AppendLine($"ActivityId: {ev.ActivityId}")
+                                    .AppendLine($"Channel: {ev.Channel}")
+                                    .AppendLine($"EventId: {ev.EventId}")
+                                    .AppendLine($"EventName: {ev.EventName}")
+                                    .AppendLine($"EventSource: {ev.EventSource}")
+                                    .AppendLine($"Keywords: {ev.Keywords}")
+                                    .AppendLine($"Level: {ev.Level}")
+                                    .AppendLine($"Message: {ev.Message}")
+                                    .AppendLine($"Opcode: {ev.Opcode}")
+                                    .AppendLine($"OSThreadId: {ev.OSThreadId}")
+                                    .AppendLine(
+                                        $"Payload: {(ev.Payload != null ? string.Join(", ", ev.Payload) : "(null)")}"
+                                    )
+                                    .AppendLine(
+                                        $"PayloadNames: {(ev.PayloadNames != null ? string.Join(", ", ev.PayloadNames) : "(null)")}"
+                                    )
+                                    .AppendLine($"RelatedActivityId: {ev.RelatedActivityId}")
+                                    .AppendLine($"Tags: {ev.Tags}")
+                                    .AppendLine($"Task: {ev.Task}")
+                                    .AppendLine($"TimeStamp: {ev.TimeStamp}")
+                                    .AppendLine($"Version: {ev.Version}")
+                                    .AppendLine();
                             }
-                            if (sb.Length > 0)
-                            {
-                                throw new XunitException(sb.ToString());
-                            }
-
-                            EventWrittenEventArgs iam = events.SingleOrDefault(
-                                e => e.EventName == "IncompleteAsyncMethod"
-                            );
-                            Assert.NotNull(iam);
-                            Assert.NotNull(iam.Payload);
-
-                            string description = iam.Payload[0] as string;
-                            Assert.NotNull(description);
-                            Assert.Contains(nameof(NeverCompletesAsync), description);
-                            Assert.Contains("__state", description);
-                            Assert.Contains("local1", description);
-                            Assert.Contains("local2", description);
-                            Assert.Contains("42", description);
-                            Assert.Contains("stored data", description);
                         }
+                        if (sb.Length > 0)
+                        {
+                            throw new XunitException(sb.ToString());
+                        }
+
+                        EventWrittenEventArgs iam = events.SingleOrDefault(
+                            e => e.EventName == "IncompleteAsyncMethod"
+                        );
+                        Assert.NotNull(iam);
+                        Assert.NotNull(iam.Payload);
+
+                        string description = iam.Payload[0] as string;
+                        Assert.NotNull(description);
+                        Assert.Contains(nameof(NeverCompletesAsync), description);
+                        Assert.Contains("__state", description);
+                        Assert.Contains("local1", description);
+                        Assert.Contains("local2", description);
+                        Assert.Contains("42", description);
+                        Assert.Contains("stored data", description);
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         #region Helper Methods / Classes

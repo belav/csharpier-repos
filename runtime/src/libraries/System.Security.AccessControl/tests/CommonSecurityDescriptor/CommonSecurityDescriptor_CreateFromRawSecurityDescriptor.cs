@@ -173,11 +173,12 @@ namespace System.Security.AccessControl.Tests
 
             string resultSddlForm = commonSecurityDescriptor.GetSddlForm(AccessControlSections.All);
             Assert.True(
-                string.Compare(
-                    verifierSddl,
-                    resultSddlForm,
-                    StringComparison.CurrentCultureIgnoreCase
-                ) == 0
+                string
+                    .Compare(
+                        verifierSddl,
+                        resultSddlForm,
+                        StringComparison.CurrentCultureIgnoreCase
+                    ) == 0
             );
         }
     }

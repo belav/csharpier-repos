@@ -65,23 +65,24 @@ namespace Microsoft.AspNetCore.DataProtection
                 Func<TState, Exception, string> formatter
             )
             {
-                string message = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Provider: {0}"
-                        + Environment.NewLine
-                        + "Log level: {1}"
-                        + Environment.NewLine
-                        + "Event id: {2}"
-                        + Environment.NewLine
-                        + "Exception: {3}"
-                        + Environment.NewLine
-                        + "Message: {4}",
-                    _name,
-                    logLevel,
-                    eventId,
-                    exception?.ToString(),
-                    formatter(state, exception)
-                );
+                string message = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "Provider: {0}"
+                            + Environment.NewLine
+                            + "Log level: {1}"
+                            + Environment.NewLine
+                            + "Event id: {2}"
+                            + Environment.NewLine
+                            + "Exception: {3}"
+                            + Environment.NewLine
+                            + "Message: {4}",
+                        _name,
+                        logLevel,
+                        eventId,
+                        exception?.ToString(),
+                        formatter(state, exception)
+                    );
                 _factory._log.AppendLine(message);
             }
 

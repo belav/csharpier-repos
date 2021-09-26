@@ -705,12 +705,14 @@ namespace parse_hb_log
 
             Console.WriteLine("Printing out proc [{0},[{1}", procStart, procEnd);
 
-            swPassOneFiles[(int)PassOneViewType.Thread].WriteLine(
-                "##########Thread view - indices of threads currently running on each proc in between GCs\n"
-            );
-            swPassOneFiles[(int)PassOneViewType.AllocHeap].WriteLine(
-                "##########Alloc heap view - alloc heaps for threads currently running on each proc in between GCs\n"
-            );
+            swPassOneFiles[(int)PassOneViewType.Thread]
+                .WriteLine(
+                    "##########Thread view - indices of threads currently running on each proc in between GCs\n"
+                );
+            swPassOneFiles[(int)PassOneViewType.AllocHeap]
+                .WriteLine(
+                    "##########Alloc heap view - alloc heaps for threads currently running on each proc in between GCs\n"
+                );
             string strHeader = string.Format("{0,6}", "ms");
             for (int procIndex = procStart; procIndex < procEnd; procIndex++)
             {
@@ -856,11 +858,12 @@ namespace parse_hb_log
                             strThread += string.Format(strCellFormat, tid.ToString(), strCount);
 
                             string strFlags = FormatFlags(currentSample.flags);
-                            strAllocHeap += string.Format(
-                                strCellFormat,
-                                currentSample.allocHeap.ToString(),
-                                strFlags
-                            );
+                            strAllocHeap += string
+                                .Format(
+                                    strCellFormat,
+                                    currentSample.allocHeap.ToString(),
+                                    strFlags
+                                );
                         }
                     }
                     //swPassOne.WriteLine("|");
@@ -869,11 +872,12 @@ namespace parse_hb_log
 
                     if (fPrintThreadInfoPerTimeUnit)
                     {
-                        swPassOneFiles[(int)PassOneViewType.Thread].WriteLine(
-                            "----{0,3} threads on {1,3} procs----",
-                            threadsSeenPerTimeUnit.Count,
-                            procsHadSamples
-                        );
+                        swPassOneFiles[(int)PassOneViewType.Thread]
+                            .WriteLine(
+                                "----{0,3} threads on {1,3} procs----",
+                                threadsSeenPerTimeUnit.Count,
+                                procsHadSamples
+                            );
                     }
 
                     strAllocHeap += "|";
@@ -1165,9 +1169,8 @@ namespace parse_hb_log
             }
 
             var threadsSeenTotalOrdered = threadsSeenTotal.OrderByDescending(i => i.Value);
-            swPassOneFiles[(int)PassOneViewType.Thread].WriteLine(
-                "\n-----------Total samples per thread-----------"
-            );
+            swPassOneFiles[(int)PassOneViewType.Thread]
+                .WriteLine("\n-----------Total samples per thread-----------");
             foreach (var item in threadsSeenTotalOrdered)
             {
                 int k = item.Key;

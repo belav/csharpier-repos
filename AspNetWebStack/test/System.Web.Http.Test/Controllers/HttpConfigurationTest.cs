@@ -18,10 +18,11 @@ namespace System.Web.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties<HttpConfiguration>(
-                TypeAssert.TypeProperties.IsPublicVisibleClass
-                    | TypeAssert.TypeProperties.IsDisposable
-            );
+            Assert.Type
+                .HasProperties<HttpConfiguration>(
+                    TypeAssert.TypeProperties.IsPublicVisibleClass
+                        | TypeAssert.TypeProperties.IsDisposable
+                );
         }
 
         [Fact]
@@ -268,14 +269,14 @@ namespace System.Web.Http
             HttpConfiguration config = new HttpConfiguration();
             Mock<ITraceWriter> mockTracer = new Mock<ITraceWriter>() { CallBase = true };
             mockTracer.Setup(
-                    m =>
-                        m.Trace(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<string>(),
-                            It.IsAny<TraceLevel>(),
-                            It.IsAny<Action<TraceRecord>>()
-                        )
-                )
+                m =>
+                    m.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
+            )
                 .Callback(
                     () =>
                     {
@@ -298,7 +299,8 @@ namespace System.Web.Http
                 settings,
                 config
             );
-            clonedConfig.Services.GetContentNegotiator()
+            clonedConfig.Services
+                .GetContentNegotiator()
                 .Negotiate(
                     typeof(string),
                     new HttpRequestMessage(),
@@ -317,14 +319,14 @@ namespace System.Web.Http
             HttpConfiguration config = new HttpConfiguration();
             Mock<ITraceWriter> mockTracer = new Mock<ITraceWriter>() { CallBase = true };
             mockTracer.Setup(
-                    m =>
-                        m.Trace(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<string>(),
-                            It.IsAny<TraceLevel>(),
-                            It.IsAny<Action<TraceRecord>>()
-                        )
-                )
+                m =>
+                    m.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
+            )
                 .Callback(
                     () =>
                     {
@@ -348,11 +350,12 @@ namespace System.Web.Http
                 settings,
                 config
             );
-            clonedConfig.Formatters[0].GetPerRequestFormatterInstance(
-                typeof(string),
-                new HttpRequestMessage(),
-                new MediaTypeHeaderValue("application/mine")
-            );
+            clonedConfig.Formatters[0]
+                .GetPerRequestFormatterInstance(
+                    typeof(string),
+                    new HttpRequestMessage(),
+                    new MediaTypeHeaderValue("application/mine")
+                );
 
             // Assert
             Assert.True(calledTrace);
@@ -366,14 +369,14 @@ namespace System.Web.Http
             HttpConfiguration config = new HttpConfiguration();
             Mock<ITraceWriter> mockTracer = new Mock<ITraceWriter>() { CallBase = true };
             mockTracer.Setup(
-                    m =>
-                        m.Trace(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<string>(),
-                            It.IsAny<TraceLevel>(),
-                            It.IsAny<Action<TraceRecord>>()
-                        )
-                )
+                m =>
+                    m.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
+            )
                 .Callback(
                     () =>
                     {
@@ -391,7 +394,8 @@ namespace System.Web.Http
                 settings,
                 config
             );
-            clonedConfig.Services.GetContentNegotiator()
+            clonedConfig.Services
+                .GetContentNegotiator()
                 .Negotiate(
                     typeof(string),
                     new HttpRequestMessage(),

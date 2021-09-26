@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     return solution;
                 }
 
-                var diagnostic = result.Diagnostics.SelectMany(kvp => kvp.Value)
+                var diagnostic = result.Diagnostics
+                    .SelectMany(kvp => kvp.Value)
                     .Where(diagnostic => diagnostic.Location.SourceTree != null)
                     .FirstOrDefault();
 
@@ -151,8 +152,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     cancellationToken
                 );
                 return projectDiagnostics.Where(
-                        diagnostic => diagnostic.Location.SourceTree?.FilePath == document.FilePath
-                    )
+                    diagnostic => diagnostic.Location.SourceTree?.FilePath == document.FilePath
+                )
                     .ToImmutableArray();
             }
 

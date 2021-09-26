@@ -57,23 +57,25 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                                 ] as string;
                             if (originalAttributeName != null)
                             {
-                                other.node.Diagnostics.Add(
-                                    ComponentDiagnosticFactory.Create_DuplicateMarkupAttributeDirective(
-                                        other.name,
-                                        originalAttributeName,
-                                        other.node.Source ?? node.Source
-                                    )
-                                );
+                                other.node.Diagnostics
+                                    .Add(
+                                        ComponentDiagnosticFactory.Create_DuplicateMarkupAttributeDirective(
+                                            other.name,
+                                            originalAttributeName,
+                                            other.node.Source ?? node.Source
+                                        )
+                                    );
                             }
                             else
                             {
                                 // This is a conflict in the code the user wrote.
-                                other.node.Diagnostics.Add(
-                                    ComponentDiagnosticFactory.Create_DuplicateMarkupAttribute(
-                                        other.name,
-                                        other.node.Source ?? node.Source
-                                    )
-                                );
+                                other.node.Diagnostics
+                                    .Add(
+                                        ComponentDiagnosticFactory.Create_DuplicateMarkupAttribute(
+                                            other.name,
+                                            other.node.Source ?? node.Source
+                                        )
+                                    );
                             }
                         }
 
@@ -113,23 +115,25 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                                 ] as string;
                             if (originalAttributeName != null)
                             {
-                                other.node.Diagnostics.Add(
-                                    ComponentDiagnosticFactory.Create_DuplicateComponentParameterDirective(
-                                        other.name,
-                                        originalAttributeName,
-                                        other.node.Source ?? node.Source
-                                    )
-                                );
+                                other.node.Diagnostics
+                                    .Add(
+                                        ComponentDiagnosticFactory.Create_DuplicateComponentParameterDirective(
+                                            other.name,
+                                            originalAttributeName,
+                                            other.node.Source ?? node.Source
+                                        )
+                                    );
                             }
                             else
                             {
                                 // This is a conflict in the code the user wrote.
-                                other.node.Diagnostics.Add(
-                                    ComponentDiagnosticFactory.Create_DuplicateComponentParameter(
-                                        other.name,
-                                        other.node.Source ?? node.Source
-                                    )
-                                );
+                                other.node.Diagnostics
+                                    .Add(
+                                        ComponentDiagnosticFactory.Create_DuplicateComponentParameter(
+                                            other.name,
+                                            other.node.Source ?? node.Source
+                                        )
+                                    );
                             }
                         }
 

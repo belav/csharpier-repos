@@ -27,17 +27,17 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
         public void AddWithBatchSize(int batchSize)
         {
             using var context = Fixture.CreateContext(batchSize);
-            context.Database.CreateExecutionStrategy()
-                .Execute(
-                    context,
-                    contextScoped =>
+            context.Database.CreateExecutionStrategy().Execute(
+                context,
+                contextScoped =>
+                {
+                    using (contextScoped.Database.BeginTransaction())
                     {
-                        using (contextScoped.Database.BeginTransaction())
+                        for (var i = 0; i < batchSize; i++)
                         {
-                            for (var i = 0; i < batchSize; i++)
-                            {
-                                var uuid = Guid.NewGuid().ToString();
-                                contextScoped.Products.Add(
+                            var uuid = Guid.NewGuid().ToString();
+                            contextScoped.Products
+                                .Add(
                                     new Product
                                     {
                                         Name = uuid,
@@ -46,12 +46,12 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
                                         SellStartDate = DateTime.Now
                                     }
                                 );
-                            }
-
-                            Assert.Equal(batchSize, contextScoped.SaveChanges());
                         }
+
+                        Assert.Equal(batchSize, contextScoped.SaveChanges());
                     }
-                );
+                }
+            );
         }
     }
 }

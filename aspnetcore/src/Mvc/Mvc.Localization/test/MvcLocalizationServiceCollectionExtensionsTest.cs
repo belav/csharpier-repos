@@ -78,9 +78,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization
         )
         {
             var matches = services.Where(
-                    sd =>
-                        sd.ServiceType == serviceType && sd.ImplementationType == implementationType
-                )
+                sd => sd.ServiceType == serviceType && sd.ImplementationType == implementationType
+            )
                 .ToArray();
 
             if (matches.Length == 0)

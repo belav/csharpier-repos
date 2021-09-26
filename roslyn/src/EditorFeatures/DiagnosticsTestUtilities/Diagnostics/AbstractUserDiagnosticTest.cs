@@ -57,9 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             // Special case for single diagnostic reported with annotated span.
             if (expected.Length == 1 && !expected[0].HasLocation)
             {
-                var hostDocumentsWithAnnotations = workspace.Documents.Where(
-                    d => d.SelectedSpans.Any()
-                );
+                var hostDocumentsWithAnnotations = workspace.Documents
+                    .Where(d => d.SelectedSpans.Any());
                 if (hostDocumentsWithAnnotations.Count() == 1)
                 {
                     var expectedSpan = hostDocumentsWithAnnotations.Single().SelectedSpans.Single();
@@ -130,8 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     ),
                     new AnalyzerFileReference(
                         DiagnosticExtensions.GetCompilerDiagnosticAnalyzer(
-                                LanguageNames.VisualBasic
-                            )
+                            LanguageNames.VisualBasic
+                        )
                             .GetType().Assembly.Location,
                         TestAnalyzerAssemblyLoader.LoadFromFile
                     )
@@ -254,8 +253,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Assert.NotEmpty(diagnostics);
 
             var intersectingDiagnostics = diagnostics.Where(
-                    d => d.Location.SourceSpan.IntersectsWith(span)
-                )
+                d => d.Location.SourceSpan.IntersectsWith(span)
+            )
                 .ToImmutableArray();
 
             var fixes = new List<CodeFix>();

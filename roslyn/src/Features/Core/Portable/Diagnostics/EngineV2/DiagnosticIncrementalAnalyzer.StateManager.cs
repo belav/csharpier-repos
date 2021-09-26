@@ -97,8 +97,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public IEnumerable<StateSet> GetOrUpdateStateSets(Project project)
             {
                 var projectStateSets = GetOrUpdateProjectStateSets(project);
-                return GetOrCreateHostStateSets(project, projectStateSets)
-                    .OrderedStateSets.Concat(projectStateSets.StateSetMap.Values);
+                return GetOrCreateHostStateSets(project, projectStateSets).OrderedStateSets
+                    .Concat(projectStateSets.StateSetMap.Values);
             }
 
             /// <summary>
@@ -110,8 +110,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public IEnumerable<StateSet> GetOrCreateStateSets(Project project)
             {
                 var projectStateSets = GetOrCreateProjectStateSets(project);
-                return GetOrCreateHostStateSets(project, projectStateSets)
-                    .OrderedStateSets.Concat(projectStateSets.StateSetMap.Values);
+                return GetOrCreateHostStateSets(project, projectStateSets).OrderedStateSets
+                    .Concat(projectStateSets.StateSetMap.Values);
             }
 
             /// <summary>
@@ -160,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 var hostStateSetMap = hostStateSets.StateSetMap;
 
                 // create project analyzer reference identity map
-                var projectAnalyzerReferenceIds = project.AnalyzerReferences.Select(r => r.Id)
+                var projectAnalyzerReferenceIds = project.AnalyzerReferences
+                    .Select(r => r.Id)
                     .ToSet();
 
                 // create build only stateSet array
@@ -237,9 +238,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 foreach (var stateSet in stateSets)
                 {
                     opened |= await stateSet.OnDocumentOpenedAsync(
-                            _persistentStorageService,
-                            document
-                        )
+                        _persistentStorageService,
+                        document
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -256,9 +257,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 foreach (var stateSet in stateSets)
                 {
                     removed |= await stateSet.OnDocumentClosedAsync(
-                            _persistentStorageService,
-                            document
-                        )
+                        _persistentStorageService,
+                        document
+                    )
                         .ConfigureAwait(false);
                 }
 

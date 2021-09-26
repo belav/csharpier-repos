@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     public static class ServiceCollectionExtensions
     {
         private static readonly MethodInfo _addDbContext =
-            typeof(EntityFrameworkServiceCollectionExtensions).GetTypeInfo()
+            typeof(EntityFrameworkServiceCollectionExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethods(nameof(EntityFrameworkServiceCollectionExtensions.AddDbContext))
                 .Single(
                     mi =>
@@ -41,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 );
 
         private static readonly MethodInfo _addDbContextPool =
-            typeof(EntityFrameworkServiceCollectionExtensions).GetTypeInfo()
+            typeof(EntityFrameworkServiceCollectionExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethods(
                     nameof(EntityFrameworkServiceCollectionExtensions.AddPooledDbContextFactory)
                 )

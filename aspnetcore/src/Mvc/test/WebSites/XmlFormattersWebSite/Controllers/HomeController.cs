@@ -37,13 +37,14 @@ namespace XmlFormattersWebSite
                 if (errors != null && errors.Count > 0)
                 {
                     allErrorMessages.Add(
-                        string.Join(
-                            ",",
-                            errors.Select(
-                                modelError =>
-                                    $"ErrorMessage:{modelError.ErrorMessage};Exception:{modelError.Exception}"
+                        string
+                            .Join(
+                                ",",
+                                errors.Select(
+                                    modelError =>
+                                        $"ErrorMessage:{modelError.ErrorMessage};Exception:{modelError.Exception}"
+                                )
                             )
-                        )
                     );
                 }
             }

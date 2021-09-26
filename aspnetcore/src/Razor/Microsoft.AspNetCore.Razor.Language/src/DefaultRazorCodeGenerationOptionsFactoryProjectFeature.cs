@@ -14,9 +14,9 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         protected override void OnInitialized()
         {
-            _configureOptions =
-                ProjectEngine.EngineFeatures.OfType<IConfigureRazorCodeGenerationOptionsFeature>()
-                    .ToArray();
+            _configureOptions = ProjectEngine.EngineFeatures
+                .OfType<IConfigureRazorCodeGenerationOptionsFeature>()
+                .ToArray();
         }
 
         public RazorCodeGenerationOptions Create(

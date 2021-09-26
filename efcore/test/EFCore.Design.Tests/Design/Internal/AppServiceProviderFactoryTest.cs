@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 Assert.Equal(args, new[] { "arg1" });
 
                 return new TestWebHost(
-                    new ServiceCollection().AddScoped<TestService>()
+                    new ServiceCollection()
+                        .AddScoped<TestService>()
                         .BuildServiceProvider(validateScopes: true)
                 );
             }

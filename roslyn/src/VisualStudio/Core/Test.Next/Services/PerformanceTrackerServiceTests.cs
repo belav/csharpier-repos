@@ -211,12 +211,13 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                 {
                     double result;
                     if (
-                        !double.TryParse(
-                            data[j],
-                            NumberStyles.Float | NumberStyles.AllowThousands,
-                            CultureInfo.InvariantCulture,
-                            out result
-                        )
+                        !double
+                            .TryParse(
+                                data[j],
+                                NumberStyles.Float | NumberStyles.AllowThousands,
+                                CultureInfo.InvariantCulture,
+                                out result
+                            )
                     )
                     {
                         // no data for this analyzer for this particular run

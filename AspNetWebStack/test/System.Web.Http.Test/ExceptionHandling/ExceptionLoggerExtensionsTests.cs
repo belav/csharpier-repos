@@ -17,12 +17,8 @@ namespace System.Web.Http.ExceptionHandling
             Task expectedTask = CreateCompletedTask();
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
             mock.Setup(
-                    h =>
-                        h.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h => h.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(expectedTask);
 
             IExceptionLogger logger = mock.Object;

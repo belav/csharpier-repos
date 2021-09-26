@@ -55,9 +55,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
             // Act
-            await _renderer.Dispatcher.InvokeAsync(
-                () => _router.RunOnNavigateAsync("http://example.com/jan", false)
-            );
+            await _renderer.Dispatcher
+                .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
 
             // Assert
             Assert.True(called);
@@ -86,12 +85,10 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
             // Act
-            var janTask = _renderer.Dispatcher.InvokeAsync(
-                () => _router.RunOnNavigateAsync("http://example.com/jan", false)
-            );
-            var febTask = _renderer.Dispatcher.InvokeAsync(
-                () => _router.RunOnNavigateAsync("http://example.com/feb", false)
-            );
+            var janTask = _renderer.Dispatcher
+                .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
+            var febTask = _renderer.Dispatcher
+                .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
 
             await janTask;
             await febTask;
@@ -130,12 +127,10 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
             // Act (start the operations then await them)
-            var jan = _renderer.Dispatcher.InvokeAsync(
-                () => _router.RunOnNavigateAsync("http://example.com/jan", false)
-            );
-            var feb = _renderer.Dispatcher.InvokeAsync(
-                () => _router.RunOnNavigateAsync("http://example.com/feb", false)
-            );
+            var jan = _renderer.Dispatcher
+                .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
+            var feb = _renderer.Dispatcher
+                .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
             triggerCancel.TrySetResult();
 
             await jan;
@@ -187,12 +182,10 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
             // Act
-            var jan = _renderer.Dispatcher.InvokeAsync(
-                () => _router.RunOnNavigateAsync("http://example.com/jan", false)
-            );
-            var feb = _renderer.Dispatcher.InvokeAsync(
-                () => _router.RunOnNavigateAsync("http://example.com/feb", false)
-            );
+            var jan = _renderer.Dispatcher
+                .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
+            var feb = _renderer.Dispatcher
+                .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
 
             await jan;
             await feb;
@@ -212,9 +205,10 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             };
 
             // Act
-            await _renderer.Dispatcher.InvokeAsync(
-                () => _router.SetParametersAsync(ParameterView.FromDictionary(parameters))
-            );
+            await _renderer.Dispatcher
+                .InvokeAsync(
+                    () => _router.SetParametersAsync(ParameterView.FromDictionary(parameters))
+                );
 
             // Assert
             var renderedFrame = _renderer.Batches.First().ReferenceFrames.First();

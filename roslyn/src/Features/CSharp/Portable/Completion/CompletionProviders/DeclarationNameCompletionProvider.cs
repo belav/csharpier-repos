@@ -60,16 +60,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var document = completionContext.Document;
                 var cancellationToken = completionContext.CancellationToken;
                 var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                        position,
-                        cancellationToken
-                    )
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (
-                    !completionContext.Options.GetOption(
-                        CompletionOptions.ShowNameSuggestions,
-                        LanguageNames.CSharp
-                    )
+                    !completionContext.Options
+                        .GetOption(CompletionOptions.ShowNameSuggestions, LanguageNames.CSharp)
                 )
                 {
                     return;
@@ -87,10 +85,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 }
 
                 var nameInfo = await NameDeclarationInfo.GetDeclarationInfoAsync(
-                        document,
-                        position,
-                        cancellationToken
-                    )
+                    document,
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var baseNames = GetBaseNames(semanticModel, nameInfo);
                 if (baseNames == default)
@@ -99,12 +97,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 }
 
                 var recommendedNames = await GetRecommendedNamesAsync(
-                        baseNames,
-                        nameInfo,
-                        context,
-                        document,
-                        cancellationToken
-                    )
+                    baseNames,
+                    nameInfo,
+                    context,
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var sortValue = 0;
                 foreach (var (name, kind) in recommendedNames)
@@ -252,12 +250,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     .FirstOrDefault(p => p.GetMethod != null)?.Type;
 
                 // This can happen for an un-implemented IEnumerable or IAsyncEnumerable.
-                collectionType ??= namedType.AllInterfaces.FirstOrDefault(
-                    t =>
-                        t.OriginalDefinition.SpecialType
-                            == SpecialType.System_Collections_Generic_IEnumerable_T
-                        || Equals(t.OriginalDefinition, compilation.IAsyncEnumerableOfTType())
-                )?.TypeArguments[0];
+                collectionType ??= namedType.AllInterfaces
+                    .FirstOrDefault(
+                        t =>
+                            t.OriginalDefinition.SpecialType
+                                == SpecialType.System_Collections_Generic_IEnumerable_T
+                            || Equals(t.OriginalDefinition, compilation.IAsyncEnumerableOfTType())
+                    )?.TypeArguments[0];
 
                 if (collectionType is not null)
                 {
@@ -312,9 +311,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         )
         {
             var rules = await document.GetNamingRulesAsync(
-                    FallbackNamingRules.CompletionOfferingRules,
-                    cancellationToken
-                )
+                FallbackNamingRules.CompletionOfferingRules,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var semanticFactsService = context.GetLanguageService<ISemanticFactsService>();
 
@@ -336,16 +335,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 foreach (var rule in rules)
                 {
                     if (
-                        rule.SymbolSpecification.AppliesTo(
-                            kind,
-                            declarationInfo.Modifiers,
-                            declarationInfo.DeclaredAccessibility
-                        )
+                        rule.SymbolSpecification
+                            .AppliesTo(
+                                kind,
+                                declarationInfo.Modifiers,
+                                declarationInfo.DeclaredAccessibility
+                            )
                     )
                     {
                         foreach (var baseName in baseNames)
                         {
-                            var name = rule.NamingStyle.CreateName(baseName)
+                            var name = rule.NamingStyle
+                                .CreateName(baseName)
                                 .EscapeIdentifier(context.IsInQuery);
 
                             // Don't add multiple items for the same name and only add valid identifiers

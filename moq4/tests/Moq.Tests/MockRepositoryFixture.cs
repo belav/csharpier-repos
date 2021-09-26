@@ -113,21 +113,23 @@ namespace Moq.Tests
 
             Assert.NotNull(ex);
             Assert.True(
-                ex.Message.ContainsConsecutiveLines(
-                    $"   {fooMock}:",
-                    $"   This mock failed verification due to the following unverified invocations:",
-                    $"   ",
-                    $"      MockRepositoryFixture.IFoo.Do()"
-                )
+                ex.Message
+                    .ContainsConsecutiveLines(
+                        $"   {fooMock}:",
+                        $"   This mock failed verification due to the following unverified invocations:",
+                        $"   ",
+                        $"      MockRepositoryFixture.IFoo.Do()"
+                    )
             );
 
             Assert.True(
-                ex.Message.ContainsConsecutiveLines(
-                    $"   {barMock}:",
-                    $"   This mock failed verification due to the following unverified invocations:",
-                    $"   ",
-                    $"      MockRepositoryFixture.IBar.Redo()"
-                )
+                ex.Message
+                    .ContainsConsecutiveLines(
+                        $"   {barMock}:",
+                        $"   This mock failed verification due to the following unverified invocations:",
+                        $"   ",
+                        $"      MockRepositoryFixture.IBar.Redo()"
+                    )
             );
         }
 
@@ -166,21 +168,23 @@ namespace Moq.Tests
 
             Assert.NotNull(ex);
             Assert.True(
-                ex.Message.ContainsConsecutiveLines(
-                    $"   {foo}:",
-                    $"   This mock failed verification due to the following:",
-                    $"   ",
-                    $"      MockRepositoryFixture.IFoo f => f.Do():"
-                )
+                ex.Message
+                    .ContainsConsecutiveLines(
+                        $"   {foo}:",
+                        $"   This mock failed verification due to the following:",
+                        $"   ",
+                        $"      MockRepositoryFixture.IFoo f => f.Do():"
+                    )
             );
 
             Assert.True(
-                ex.Message.ContainsConsecutiveLines(
-                    $"   {bar}:",
-                    $"   This mock failed verification due to the following:",
-                    $"   ",
-                    $"      MockRepositoryFixture.IBar b => b.Redo()"
-                )
+                ex.Message
+                    .ContainsConsecutiveLines(
+                        $"   {bar}:",
+                        $"   This mock failed verification due to the following:",
+                        $"   ",
+                        $"      MockRepositoryFixture.IBar b => b.Redo()"
+                    )
             );
         }
 

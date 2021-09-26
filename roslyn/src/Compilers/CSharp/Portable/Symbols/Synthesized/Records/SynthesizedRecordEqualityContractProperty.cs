@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ContainingType.Locations[0],
                 (CSharpSyntaxNode)(
                     (SourceMemberContainerTypeSymbol)ContainingType
-                ).SyntaxReferences[0].GetSyntax(),
+                ).SyntaxReferences[0]
+                    .GetSyntax(),
                 diagnostics
             );
         }
@@ -129,10 +130,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (
                     overridden is object
-                    && !overridden.ContainingType.Equals(
-                        overriding.ContainingType.BaseTypeNoUseSiteDiagnostics,
-                        TypeCompareKind.AllIgnoreOptions
-                    )
+                    && !overridden.ContainingType
+                        .Equals(
+                            overriding.ContainingType.BaseTypeNoUseSiteDiagnostics,
+                            TypeCompareKind.AllIgnoreOptions
+                        )
                 )
                 {
                     reportAnError = true;

@@ -638,7 +638,8 @@ namespace System
                 .Invoke(null, Array.Empty<object>())!;
 
         private static readonly MethodInfo _generateDefaultValueConstantMethod =
-            typeof(SharedTypeExtensions).GetTypeInfo()
+            typeof(SharedTypeExtensions)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(GenerateDefaultValueConstant))!;
 
         private static ConstantExpression GenerateDefaultValueConstant<TDefault>() =>

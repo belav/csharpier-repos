@@ -117,9 +117,8 @@ namespace AnalyzerRunner
                                 continue;
                             }
 
-                            var changes = applyChangesOperation.ChangedSolution.GetChanges(
-                                document.Project.Solution
-                            );
+                            var changes = applyChangesOperation.ChangedSolution
+                                .GetChanges(document.Project.Solution);
                             var projectChanges = changes.GetProjectChanges().ToArray();
                             if (
                                 projectChanges.Length != 1
@@ -287,8 +286,8 @@ namespace AnalyzerRunner
                 language => language,
                 language =>
                     refactorings.Where(
-                            refactoring => refactoring.Metadata.Languages.Contains(language)
-                        )
+                        refactoring => refactoring.Metadata.Languages.Contains(language)
+                    )
                         .ToImmutableArray()
             );
         }

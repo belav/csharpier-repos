@@ -207,7 +207,8 @@ class Program
                     Sources = { batchFixedSource },
                     MarkupHandling = MarkupMode.Allow,
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryImports)]
@@ -894,7 +895,8 @@ namespace SomeNS
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp5,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryImports)]
@@ -972,7 +974,8 @@ namespace SomeNS
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp5,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryImports)]
@@ -1850,19 +1853,22 @@ class C
             await new VerifyCS.Test
             {
                 TestState = { Sources = { code }, DocumentationMode = DocumentationMode.None, },
-            }.RunAsync();
+            }
+                .RunAsync();
 
             // fully parsing doc comments; System is necessary
             await new VerifyCS.Test
             {
                 TestState = { Sources = { code }, DocumentationMode = DocumentationMode.Parse, },
-            }.RunAsync();
+            }
+                .RunAsync();
 
             // fully parsing and diagnosing doc comments; System is necessary
             await new VerifyCS.Test
             {
                 TestState = { Sources = { code }, DocumentationMode = DocumentationMode.Diagnose, },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(751283, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/751283")]

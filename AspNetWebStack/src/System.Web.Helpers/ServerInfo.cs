@@ -214,9 +214,8 @@ namespace System.Web.Helpers
             info.Add("Cache Size", HttpRuntime.Cache.Count.ToString(CultureInfo.InvariantCulture));
             info.Add(
                 "Cache Effective Percentage Physical Memory Limit",
-                HttpRuntime.Cache.EffectivePercentagePhysicalMemoryLimit.ToString(
-                    CultureInfo.InvariantCulture
-                )
+                HttpRuntime.Cache.EffectivePercentagePhysicalMemoryLimit
+                    .ToString(CultureInfo.InvariantCulture)
             );
             info.Add(
                 "Cache Effective Private Bytes Limit",
@@ -335,10 +334,10 @@ namespace System.Web.Helpers
             {
                 builder.AppendLine("<caption>");
                 builder.AppendFormat(
-                        CultureInfo.InvariantCulture,
-                        "<h2>{0}</h2>",
-                        HttpUtility.HtmlEncode(sectionTitle)
-                    )
+                    CultureInfo.InvariantCulture,
+                    "<h2>{0}</h2>",
+                    HttpUtility.HtmlEncode(sectionTitle)
+                )
                     .AppendLine();
                 builder.AppendLine("</caption>");
             }

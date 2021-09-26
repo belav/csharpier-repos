@@ -84,7 +84,8 @@ namespace JitBench
             string workingDirectory = null
         )
         {
-            int exitCode = await new ProcessRunner("git", arguments).WithLog(output)
+            int exitCode = await new ProcessRunner("git", arguments)
+                .WithLog(output)
                 .WithWorkingDirectory(workingDirectory)
                 .Run();
 
@@ -135,10 +136,8 @@ namespace JitBench
                 FileTasks.DeleteDirectory(publishDir, output);
             }
             string dotNetExePath = dotNetInstall.DotNetExe;
-            await new ProcessRunner(
-                dotNetExePath,
-                $"publish -c Release -f {tfm}"
-            ).WithWorkingDirectory(GetWord2VecNetSrcDirectory(outputDir))
+            await new ProcessRunner(dotNetExePath, $"publish -c Release -f {tfm}")
+                .WithWorkingDirectory(GetWord2VecNetSrcDirectory(outputDir))
                 .WithEnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "0")
                 .WithEnvironmentVariable(
                     "WORD2VEC_FRAMEWORK_VERSION",
@@ -170,12 +169,8 @@ namespace JitBench
             ITestOutputHelper output
         )
         {
-            IterationResult result = base.RecordIterationMetrics(
-                scenarioIteration,
-                stdout,
-                stderr,
-                output
-            );
+            IterationResult result = base
+                .RecordIterationMetrics(scenarioIteration, stdout, stderr, output);
             AddConsoleMetrics(result, stdout, output);
             return result;
         }
@@ -264,11 +259,12 @@ namespace JitBench
             }
             else
             {
-                return base.TryGetBenchviewCustomMetricReporting(
-                    originalMetric,
-                    out newMetric,
-                    out newScenarioModelName
-                );
+                return base
+                    .TryGetBenchviewCustomMetricReporting(
+                        originalMetric,
+                        out newMetric,
+                        out newScenarioModelName
+                    );
             }
             newMetric = Metric.ElapsedTimeMilliseconds;
             return true;

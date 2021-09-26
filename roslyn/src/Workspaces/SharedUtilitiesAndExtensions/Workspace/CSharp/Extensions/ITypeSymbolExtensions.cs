@@ -21,9 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         public static ExpressionSyntax GenerateExpressionSyntax(this ITypeSymbol typeSymbol)
         {
-            return typeSymbol.Accept(
-                ExpressionSyntaxGeneratorVisitor.Instance
-            )!.WithAdditionalAnnotations(Simplifier.Annotation);
+            return typeSymbol.Accept(ExpressionSyntaxGeneratorVisitor.Instance)!
+                .WithAdditionalAnnotations(Simplifier.Annotation);
         }
 
         public static NameSyntax GenerateNameSyntax(
@@ -56,9 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 return SyntaxFactory.IdentifierName("var");
             }
 
-            var syntax = symbol.Accept(
-                TypeSyntaxGeneratorVisitor.Create(nameSyntax)
-            )!.WithAdditionalAnnotations(Simplifier.Annotation);
+            var syntax = symbol.Accept(TypeSyntaxGeneratorVisitor.Create(nameSyntax))!
+                .WithAdditionalAnnotations(Simplifier.Annotation);
 
             if (!allowVar)
             {
@@ -141,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     semanticModel = semanticModel.ParentModel;
                 }
 
-                var root = await semanticModel.SyntaxTree.GetRootAsync(cancellationToken)
+                var root = await semanticModel.SyntaxTree
+                    .GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var applicableUsings = GetApplicableUsings(position, (CompilationUnitSyntax)root);
@@ -169,9 +168,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxNode root
         )
         {
-            var namespaceUsings = root.FindToken(
-                position
-            ).Parent!.GetAncestors<NamespaceDeclarationSyntax>().SelectMany(n => n.Usings);
+            var namespaceUsings = root.FindToken(position).Parent!
+                .GetAncestors<NamespaceDeclarationSyntax>()
+                .SelectMany(n => n.Usings);
             var allUsings =
                 root is CompilationUnitSyntax
                     ? ((CompilationUnitSyntax)root).Usings.Concat(namespaceUsings)

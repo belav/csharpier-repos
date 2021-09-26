@@ -433,13 +433,14 @@ namespace System.Net.Mail
             {
                 do
                 {
-                    IAsyncResult result = _parent._bufferedStream.BeginRead(
-                        _parent._byteBuffer!,
-                        0,
-                        _parent._byteBuffer!.Length,
-                        s_readCallback,
-                        this
-                    );
+                    IAsyncResult result = _parent._bufferedStream
+                        .BeginRead(
+                            _parent._byteBuffer!,
+                            0,
+                            _parent._byteBuffer!.Length,
+                            s_readCallback,
+                            this
+                        );
                     if (!result.CompletedSynchronously)
                     {
                         return;
@@ -509,34 +510,33 @@ namespace System.Net.Mail
 
                     if (_parent._readState == ReadState.Status0)
                     {
-                        _lines!.Add(
-                            new LineInfo(
-                                _parent._statusCode,
-                                _builder.ToString(0, _builder.Length - 2)
-                            )
-                        ); // return everything except CRLF
+                        _lines!
+                            .Add(
+                                new LineInfo(
+                                    _parent._statusCode,
+                                    _builder.ToString(0, _builder.Length - 2)
+                                )
+                            ); // return everything except CRLF
                         _builder = new StringBuilder();
                         _statusRead = 0;
 
                         if (_oneLine)
                         {
-                            _parent._bufferedStream.Push(
-                                _parent._byteBuffer!,
-                                start,
-                                _read - start
-                            );
+                            _parent._bufferedStream
+                                .Push(_parent._byteBuffer!, start, _read - start);
                             InvokeCallback();
                             return false;
                         }
                     }
                     else if (_parent._readState == ReadState.Done)
                     {
-                        _lines!.Add(
-                            new LineInfo(
-                                _parent._statusCode,
-                                _builder.ToString(0, _builder.Length - 2)
-                            )
-                        ); // return everything except CRLF
+                        _lines!
+                            .Add(
+                                new LineInfo(
+                                    _parent._statusCode,
+                                    _builder.ToString(0, _builder.Length - 2)
+                                )
+                            ); // return everything except CRLF
                         _parent._bufferedStream.Push(_parent._byteBuffer!, start, _read - start);
                         InvokeCallback();
                         return false;

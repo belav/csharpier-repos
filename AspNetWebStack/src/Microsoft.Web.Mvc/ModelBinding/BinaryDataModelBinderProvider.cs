@@ -28,7 +28,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 let binder = provider.GetBinder(controllerContext, bindingContext)
                 where binder != null
                 select binder
-            ).FirstOrDefault();
+            )
+                .FirstOrDefault();
         }
 
         // This is essentially a clone of the ByteArrayModelBinder from core
@@ -51,9 +52,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             )
             {
                 ModelBinderUtil.ValidateBindingContext(bindingContext);
-                ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
-                    bindingContext.ModelName
-                );
+                ValueProviderResult valueProviderResult = bindingContext.ValueProvider
+                    .GetValue(bindingContext.ModelName);
 
                 // case 1: there was no <input ... /> element containing this data
                 if (valueProviderResult == null)

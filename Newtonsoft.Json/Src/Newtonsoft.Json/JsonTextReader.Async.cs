@@ -96,10 +96,8 @@ namespace Newtonsoft.Json
                     default:
                         throw JsonReaderException.Create(
                             this,
-                            "Unexpected state: {0}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                CurrentState
-                            )
+                            "Unexpected state: {0}."
+                                .FormatWith(CultureInfo.InvariantCulture, CurrentState)
                         );
                 }
             }
@@ -201,10 +199,8 @@ namespace Newtonsoft.Json
 
                             throw JsonReaderException.Create(
                                 this,
-                                "After parsing a value an unexpected character was encountered: {0}.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    currentChar
-                                )
+                                "After parsing a value an unexpected character was encountered: {0}."
+                                    .FormatWith(CultureInfo.InvariantCulture, currentChar)
                             );
                         }
                         break;
@@ -233,10 +229,8 @@ namespace Newtonsoft.Json
 
                 throw JsonReaderException.Create(
                     this,
-                    "Additional text encountered after finished reading JSON content: {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        _chars[_charPos]
-                    )
+                    "Additional text encountered after finished reading JSON content: {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                 );
             }
 
@@ -265,11 +259,11 @@ namespace Newtonsoft.Json
             PrepareBufferForReadData(append, charsRequired);
 
             int charsRead = await _reader.ReadAsync(
-                    _chars,
-                    _charsUsed,
-                    _chars.Length - _charsUsed - 1,
-                    cancellationToken
-                )
+                _chars,
+                _charsUsed,
+                _chars.Length - _charsUsed - 1,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             _charsUsed += charsRead;
@@ -458,10 +452,8 @@ namespace Newtonsoft.Json
                                 _charPos = charPos;
                                 throw JsonReaderException.Create(
                                     this,
-                                    "Unterminated string. Expected delimiter: {0}.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        quote
-                                    )
+                                    "Unterminated string. Expected delimiter: {0}."
+                                        .FormatWith(CultureInfo.InvariantCulture, quote)
                                 );
                             }
                         }
@@ -475,10 +467,8 @@ namespace Newtonsoft.Json
                         {
                             throw JsonReaderException.Create(
                                 this,
-                                "Unterminated string. Expected delimiter: {0}.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    quote
-                                )
+                                "Unterminated string. Expected delimiter: {0}."
+                                    .FormatWith(CultureInfo.InvariantCulture, quote)
                             );
                         }
 
@@ -588,10 +578,11 @@ namespace Newtonsoft.Json
                                 _charPos = charPos;
                                 throw JsonReaderException.Create(
                                     this,
-                                    "Bad JSON escape sequence: {0}.".FormatWith(
-                                        CultureInfo.InvariantCulture,
-                                        @"\" + currentChar
-                                    )
+                                    "Bad JSON escape sequence: {0}."
+                                        .FormatWith(
+                                            CultureInfo.InvariantCulture,
+                                            @"\" + currentChar
+                                        )
                                 );
                         }
 
@@ -787,10 +778,8 @@ namespace Newtonsoft.Json
             {
                 throw JsonReaderException.Create(
                     this,
-                    "Error parsing comment. Expected: *, got {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        _chars[_charPos]
-                    )
+                    "Error parsing comment. Expected: *, got {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                 );
             }
 
@@ -1073,10 +1062,8 @@ namespace Newtonsoft.Json
                     {
                         throw JsonReaderException.Create(
                             this,
-                            "Unexpected character while parsing constructor: {0}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                currentChar
-                            )
+                            "Unexpected character while parsing constructor: {0}."
+                                .FormatWith(CultureInfo.InvariantCulture, currentChar)
                         );
                     }
                 }
@@ -1094,10 +1081,8 @@ namespace Newtonsoft.Json
                 {
                     throw JsonReaderException.Create(
                         this,
-                        "Unexpected character while parsing constructor: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            _chars[_charPos]
-                        )
+                        "Unexpected character while parsing constructor: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                     );
                 }
 
@@ -1133,9 +1118,9 @@ namespace Newtonsoft.Json
             return ParseNumberPositiveInfinity(
                 readType,
                 await MatchValueWithTrailingSeparatorAsync(
-                        JsonConvert.PositiveInfinity,
-                        cancellationToken
-                    )
+                    JsonConvert.PositiveInfinity,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             );
         }
@@ -1148,9 +1133,9 @@ namespace Newtonsoft.Json
             return ParseNumberNegativeInfinity(
                 readType,
                 await MatchValueWithTrailingSeparatorAsync(
-                        JsonConvert.NegativeInfinity,
-                        cancellationToken
-                    )
+                    JsonConvert.NegativeInfinity,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             );
         }
@@ -1203,10 +1188,8 @@ namespace Newtonsoft.Json
             {
                 throw JsonReaderException.Create(
                     this,
-                    "Invalid property identifier character: {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        _chars[_charPos]
-                    )
+                    "Invalid property identifier character: {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                 );
             }
 
@@ -1234,10 +1217,8 @@ namespace Newtonsoft.Json
             {
                 throw JsonReaderException.Create(
                     this,
-                    "Invalid character after parsing property name. Expected ':' but got: {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        _chars[_charPos]
-                    )
+                    "Invalid character after parsing property name. Expected ':' but got: {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                 );
             }
 
@@ -1384,10 +1365,8 @@ namespace Newtonsoft.Json
                 {
                     throw JsonReaderException.Create(
                         this,
-                        "Additional text encountered after finished reading JSON content: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            _chars[_charPos]
-                        )
+                        "Additional text encountered after finished reading JSON content: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, _chars[_charPos])
                     );
                 }
             }
@@ -1484,9 +1463,9 @@ namespace Newtonsoft.Json
                                     currentChar == 't' ? JsonConvert.True : JsonConvert.False;
                                 if (
                                     !await MatchValueWithTrailingSeparatorAsync(
-                                            expected,
-                                            cancellationToken
-                                        )
+                                        expected,
+                                        cancellationToken
+                                    )
                                         .ConfigureAwait(false)
                                 )
                                 {
@@ -1497,9 +1476,9 @@ namespace Newtonsoft.Json
                                 return expected;
                             case 'I':
                                 return await ParseNumberPositiveInfinityAsync(
-                                        readType,
-                                        cancellationToken
-                                    )
+                                    readType,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                             case 'N':
                                 return await ParseNumberNaNAsync(readType, cancellationToken)
@@ -1557,10 +1536,8 @@ namespace Newtonsoft.Json
                 default:
                     throw JsonReaderException.Create(
                         this,
-                        "Unexpected state: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            CurrentState
-                        )
+                        "Unexpected state: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, CurrentState)
                     );
             }
         }
@@ -1615,9 +1592,9 @@ namespace Newtonsoft.Json
                                     .ConfigureAwait(false);
                             case 'I':
                                 return await ParseNumberPositiveInfinityAsync(
-                                        readType,
-                                        cancellationToken
-                                    )
+                                    readType,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                             case '-':
                                 if (
@@ -1627,9 +1604,9 @@ namespace Newtonsoft.Json
                                 )
                                 {
                                     return await ParseNumberNegativeInfinityAsync(
-                                            readType,
-                                            cancellationToken
-                                        )
+                                        readType,
+                                        cancellationToken
+                                    )
                                         .ConfigureAwait(false);
                                 }
                                 else
@@ -1702,10 +1679,8 @@ namespace Newtonsoft.Json
                 default:
                     throw JsonReaderException.Create(
                         this,
-                        "Unexpected state: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            CurrentState
-                        )
+                        "Unexpected state: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, CurrentState)
                     );
             }
         }
@@ -1764,10 +1739,10 @@ namespace Newtonsoft.Json
                             case '"':
                             case '\'':
                                 await ParseStringAsync(
-                                        currentChar,
-                                        ReadType.Read,
-                                        cancellationToken
-                                    )
+                                    currentChar,
+                                    ReadType.Read,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                                 return ReadBooleanString(_stringReference.ToString());
                             case 'n':
@@ -1806,9 +1781,9 @@ namespace Newtonsoft.Json
                                 bool isTrue = currentChar == 't';
                                 if (
                                     !await MatchValueWithTrailingSeparatorAsync(
-                                            isTrue ? JsonConvert.True : JsonConvert.False,
-                                            cancellationToken
-                                        )
+                                        isTrue ? JsonConvert.True : JsonConvert.False,
+                                        cancellationToken
+                                    )
                                         .ConfigureAwait(false)
                                 )
                                 {
@@ -1867,10 +1842,8 @@ namespace Newtonsoft.Json
                 default:
                     throw JsonReaderException.Create(
                         this,
-                        "Unexpected state: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            CurrentState
-                        )
+                        "Unexpected state: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, CurrentState)
                     );
             }
         }
@@ -1931,10 +1904,10 @@ namespace Newtonsoft.Json
                             case '"':
                             case '\'':
                                 await ParseStringAsync(
-                                        currentChar,
-                                        ReadType.ReadAsBytes,
-                                        cancellationToken
-                                    )
+                                    currentChar,
+                                    ReadType.ReadAsBytes,
+                                    cancellationToken
+                                )
                                     .ConfigureAwait(false);
                                 byte[]? data = (byte[]?)Value;
                                 if (isWrapped)
@@ -1945,10 +1918,8 @@ namespace Newtonsoft.Json
                                     {
                                         throw JsonReaderException.Create(
                                             this,
-                                            "Error reading bytes. Unexpected token: {0}.".FormatWith(
-                                                CultureInfo.InvariantCulture,
-                                                TokenType
-                                            )
+                                            "Error reading bytes. Unexpected token: {0}."
+                                                .FormatWith(CultureInfo.InvariantCulture, TokenType)
                                         );
                                     }
 
@@ -2021,10 +1992,8 @@ namespace Newtonsoft.Json
                 default:
                     throw JsonReaderException.Create(
                         this,
-                        "Unexpected state: {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            CurrentState
-                        )
+                        "Unexpected state: {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, CurrentState)
                     );
             }
         }
@@ -2050,10 +2019,8 @@ namespace Newtonsoft.Json
 
             throw JsonReaderException.Create(
                 this,
-                "Error reading bytes. Unexpected token: {0}.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    JsonToken.StartObject
-                )
+                "Error reading bytes. Unexpected token: {0}."
+                    .FormatWith(CultureInfo.InvariantCulture, JsonToken.StartObject)
             );
         }
 
@@ -2102,9 +2069,9 @@ namespace Newtonsoft.Json
         )
         {
             return (DateTimeOffset?)await ReadStringValueAsync(
-                    ReadType.ReadAsDateTimeOffset,
-                    cancellationToken
-                )
+                ReadType.ReadAsDateTimeOffset,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

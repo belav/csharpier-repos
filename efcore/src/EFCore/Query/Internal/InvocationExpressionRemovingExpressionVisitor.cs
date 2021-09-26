@@ -55,6 +55,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             new ReplacingExpressionVisitor(
                 lambdaExpression.Parameters.ToArray<Expression>(),
                 arguments.ToArray()
-            ).Visit(lambdaExpression.Body);
+            )
+                .Visit(lambdaExpression.Body);
     }
 }

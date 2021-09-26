@@ -2083,12 +2083,13 @@ namespace System.Reflection.Emit
 
             if (con == null)
             {
-                con = m_typeParent!.GetConstructor(
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                    null,
-                    EmptyTypes,
-                    null
-                );
+                con = m_typeParent!
+                    .GetConstructor(
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                        null,
+                        EmptyTypes,
+                        null
+                    );
             }
 
             if (con == null)

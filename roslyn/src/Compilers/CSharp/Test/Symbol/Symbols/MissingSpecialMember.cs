@@ -44,14 +44,12 @@ public class Program
                 // (10,5): error CS0656: Missing compiler required member 'System.Collections.Generic.IEnumerable`1.GetEnumerator'
                 //     {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"{
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"{
         yield return 0;
         yield return 1;
     }"
-                    )
-                    .WithArguments("System.Collections.Generic.IEnumerable`1", "GetEnumerator")
-                    .WithLocation(10, 5)
+                ).WithArguments("System.Collections.Generic.IEnumerable`1", "GetEnumerator").WithLocation(10, 5)
             );
         }
 
@@ -81,14 +79,12 @@ public class Program
                 // (10,5): error CS0656: Missing compiler required member 'System.IDisposable.Dispose'
                 //     {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"{
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"{
         yield return 0;
         yield return 1;
     }"
-                    )
-                    .WithArguments("System.IDisposable", "Dispose")
-                    .WithLocation(10, 5)
+                ).WithArguments("System.IDisposable", "Dispose").WithLocation(10, 5)
             );
         }
 
@@ -522,24 +518,23 @@ namespace System
 }}
 ";
 
-            var corlibRef = CreateEmptyCompilation(corlibSource)
-                .EmitToImageReference(
-                    expectedWarnings: new[]
-                    {
-                        // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                        Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
-                    }
-                );
+            var corlibRef = CreateEmptyCompilation(corlibSource).EmitToImageReference(
+                expectedWarnings: new[]
+                {
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
+                }
+            );
 
             var publicLibRef = CreateEmptyCompilation(
-                    string.Format(libSourceTemplate, "public"),
-                    new[] { corlibRef }
-                )
+                string.Format(libSourceTemplate, "public"),
+                new[] { corlibRef }
+            )
                 .EmitToImageReference();
             var internalLibRef = CreateEmptyCompilation(
-                    string.Format(libSourceTemplate, "internal"),
-                    new[] { corlibRef }
-                )
+                string.Format(libSourceTemplate, "internal"),
+                new[] { corlibRef }
+            )
                 .EmitToImageReference();
 
             var comp = CreateEmptyCompilation(
@@ -650,7 +645,9 @@ namespace System
                 SystemXmlLinqRef,
                 SystemWindowsFormsRef,
                 ValueTupleRef
-            }.Concat(WinRtRefs).ToArray();
+            }
+                .Concat(WinRtRefs)
+                .ToArray();
             var comp = CreateEmptyCompilation("", refs);
 
             for (var wkt = WellKnownType.First; wkt < WellKnownType.NextAvailable; wkt++)
@@ -966,7 +963,9 @@ namespace System
                 SystemXmlLinqRef,
                 SystemWindowsFormsRef,
                 ValueTupleRef
-            }.Concat(WinRtRefs).ToArray();
+            }
+                .Concat(WinRtRefs)
+                .ToArray();
             var comp = CreateEmptyCompilation("", refs);
 
             foreach (WellKnownMember wkm in Enum.GetValues(typeof(WellKnownMember)))
@@ -1108,9 +1107,9 @@ namespace RoslynAsyncDelegate
                 // (13,12): error CS0656: Missing compiler required member 'System.Delegate.Combine'
                 //            MyEvent += async delegate { await Task.Delay(0); };
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "MyEvent += async delegate { await Task.Delay(0); }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "MyEvent += async delegate { await Task.Delay(0); }"
+                )
                     .WithArguments("System.Delegate", "Combine")
                     .WithLocation(13, 12)
             );
@@ -1803,33 +1802,33 @@ class C
                 // (16,61): error CS0656: Missing compiler required member 'System.String.Concat'
                 //     public static S operator << (S x, int y) { return new S('(' + x.str + '<' + '<' + y.ToString() + ')'); }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "'(' + x.str + '<' + '<' + y.ToString() + ')'"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "'(' + x.str + '<' + '<' + y.ToString() + ')'"
+                )
                     .WithArguments("System.String", "Concat")
                     .WithLocation(16, 61),
                 // (17,61): error CS0656: Missing compiler required member 'System.String.Concat'
                 //     public static S operator >> (S x, int y) { return new S('(' + x.str + '>' + '>' + y.ToString() + ')'); }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "'(' + x.str + '>' + '>' + y.ToString() + ')'"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "'(' + x.str + '>' + '>' + y.ToString() + ')'"
+                )
                     .WithArguments("System.String", "Concat")
                     .WithLocation(17, 61),
                 // (18,59): error CS0656: Missing compiler required member 'System.String.Concat'
                 //     public static S operator >= (S x, S y) { return new S('(' + x.str + '>' + '=' + y.str + ')'); }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "'(' + x.str + '>' + '=' + y.str + ')'"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "'(' + x.str + '>' + '=' + y.str + ')'"
+                )
                     .WithArguments("System.String", "Concat")
                     .WithLocation(18, 59),
                 // (19,59): error CS0656: Missing compiler required member 'System.String.Concat'
                 //     public static S operator <= (S x, S y) { return new S('(' + x.str + '<' + '=' + y.str + ')'); }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "'(' + x.str + '<' + '=' + y.str + ')'"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "'(' + x.str + '<' + '=' + y.str + ')'"
+                )
                     .WithArguments("System.String", "Concat")
                     .WithLocation(19, 59),
                 // (20,58): error CS0656: Missing compiler required member 'System.String.Concat'
@@ -1989,14 +1988,12 @@ struct S : IDisposable
                 // (13,9): error CS0656: Missing compiler required member 'System.Nullable`1.GetValueOrDefault'
                 //         using (S? r = new S())
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"using (S? r = new S())
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"using (S? r = new S())
         {
             Console.Write(r);
         }"
-                    )
-                    .WithArguments("System.Nullable`1", "GetValueOrDefault")
-                    .WithLocation(13, 9)
+                ).WithArguments("System.Nullable`1", "GetValueOrDefault").WithLocation(13, 9)
             );
         }
 
@@ -2449,8 +2446,8 @@ class Program
                 // (8,9): error CS0656: Missing compiler required member 'System.String.get_Chars'
                 //         foreach (var c in "ab")
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"foreach (var c in ""ab"")
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"foreach (var c in ""ab"")
         {
            switch (c)
            {
@@ -2463,9 +2460,7 @@ class Program
                  break;
            }
         }"
-                    )
-                    .WithArguments("System.String", "get_Chars")
-                    .WithLocation(8, 9)
+                ).WithArguments("System.String", "get_Chars").WithLocation(8, 9)
             );
         }
 
@@ -2630,14 +2625,12 @@ class C
                 // (11,9): error CS0656: Missing compiler required member 'System.Array.GetLowerBound'
                 //         foreach (var x in values)
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"foreach (var x in values)
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"foreach (var x in values)
         {
             System.Console.WriteLine(x);
         }"
-                    )
-                    .WithArguments("System.Array", "GetLowerBound")
-                    .WithLocation(11, 9)
+                ).WithArguments("System.Array", "GetLowerBound").WithLocation(11, 9)
             );
         }
 
@@ -2667,14 +2660,12 @@ class C
                 // (11,9): error CS0656: Missing compiler required member 'System.Array.GetUpperBound'
                 //         foreach (var x in values)
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"foreach (var x in values)
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"foreach (var x in values)
         {
             System.Console.WriteLine(x);
         }"
-                    )
-                    .WithArguments("System.Array", "GetUpperBound")
-                    .WithLocation(11, 9)
+                ).WithArguments("System.Array", "GetUpperBound").WithLocation(11, 9)
             );
         }
 

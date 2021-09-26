@@ -645,9 +645,8 @@ namespace System.Security.Cryptography.Xml
                                             ? "xmlns:" + attrib.Prefix
                                             : "xmlns"
                                     );
-                                    XmlAttribute nsattrib = elem.OwnerDocument.CreateAttribute(
-                                        name
-                                    );
+                                    XmlAttribute nsattrib = elem.OwnerDocument
+                                        .CreateAttribute(name);
                                     nsattrib.Value = attrib.NamespaceURI;
                                     namespaces.Add(nsattrib);
                                 }
@@ -880,11 +879,12 @@ namespace System.Security.Cryptography.Xml
                 return false;
             X509Certificate2 certificate = elements[0].Certificate;
             if (
-                string.Equals(
-                    certificate.SubjectName.Name,
-                    certificate.IssuerName.Name,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        certificate.SubjectName.Name,
+                        certificate.IssuerName.Name,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
                 return true;
             return false;

@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore
                     && baseType != typeof(NonSharedModelTestBase)
                     && !concreteTests.Any(c => Implements(c, baseType))
                 select baseType.FullName
-            ).ToList();
+            )
+                .ToList();
 
             Assert.False(
                 nonImplementedBases.Count > 0,
@@ -43,9 +44,8 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         protected virtual IEnumerable<Type> GetBaseTestClasses() =>
-            typeof(ComplianceTestBase).Assembly.ExportedTypes.Where(
-                t => t.Name.Contains("TestBase")
-            );
+            typeof(ComplianceTestBase).Assembly.ExportedTypes
+                .Where(t => t.Name.Contains("TestBase"));
 
         private static bool Implements(Type type, Type interfaceOrBaseType) =>
             (type.IsPublic || type.IsNestedPublic) && interfaceOrBaseType.IsGenericTypeDefinition

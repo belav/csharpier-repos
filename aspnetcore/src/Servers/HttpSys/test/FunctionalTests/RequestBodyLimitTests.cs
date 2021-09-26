@@ -88,13 +88,16 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         Assert.False(feature.IsReadOnly);
                         Assert.Equal(11, httpContext.Request.ContentLength);
                         byte[] input = new byte[100];
-                        int read = httpContext.Request.Body.EndRead(
-                            httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null)
-                        );
+                        int read = httpContext.Request.Body
+                            .EndRead(
+                                httpContext.Request.Body
+                                    .BeginRead(input, 0, input.Length, null, null)
+                            );
                         httpContext.Response.ContentLength = read;
-                        httpContext.Response.Body.EndWrite(
-                            httpContext.Response.Body.BeginWrite(input, 0, read, null, null)
-                        );
+                        httpContext.Response.Body
+                            .EndWrite(
+                                httpContext.Response.Body.BeginWrite(input, 0, read, null, null)
+                            );
                         return Task.FromResult(0);
                     },
                     options => options.MaxRequestBodySize = 11
@@ -178,13 +181,16 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         Assert.False(feature.IsReadOnly);
                         Assert.Null(httpContext.Request.ContentLength);
                         byte[] input = new byte[100];
-                        int read = httpContext.Request.Body.EndRead(
-                            httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null)
-                        );
+                        int read = httpContext.Request.Body
+                            .EndRead(
+                                httpContext.Request.Body
+                                    .BeginRead(input, 0, input.Length, null, null)
+                            );
                         httpContext.Response.ContentLength = read;
-                        httpContext.Response.Body.EndWrite(
-                            httpContext.Response.Body.BeginWrite(input, 0, read, null, null)
-                        );
+                        httpContext.Response.Body
+                            .EndWrite(
+                                httpContext.Response.Body.BeginWrite(input, 0, read, null, null)
+                            );
                         return Task.FromResult(0);
                     },
                     options => options.MaxRequestBodySize = 11
@@ -302,13 +308,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         byte[] input = new byte[100];
                         var ex = Assert.Throws<BadHttpRequestException>(
                             () =>
-                                httpContext.Request.Body.BeginRead(
-                                    input,
-                                    0,
-                                    input.Length,
-                                    null,
-                                    null
-                                )
+                                httpContext.Request.Body
+                                    .BeginRead(input, 0, input.Length, null, null)
                         );
                         Assert.Equal(
                             "The request's Content-Length 11 is larger than the request body size limit 10.",
@@ -317,13 +318,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         Assert.Equal(StatusCodes.Status413PayloadTooLarge, ex.StatusCode);
                         ex = Assert.Throws<BadHttpRequestException>(
                             () =>
-                                httpContext.Request.Body.BeginRead(
-                                    input,
-                                    0,
-                                    input.Length,
-                                    null,
-                                    null
-                                )
+                                httpContext.Request.Body
+                                    .BeginRead(input, 0, input.Length, null, null)
                         );
                         Assert.Equal(
                             "The request's Content-Length 11 is larger than the request body size limit 10.",

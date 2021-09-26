@@ -57,26 +57,22 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             var config = configBuilder.Build();
 
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.ConfigureServices(
-                                s =>
-                                {
-                                    s.AddWebSockets(configure);
-                                    s.AddSingleton(loggerFactory);
-                                }
-                            )
-                            .UseConfiguration(config)
-                            .UseKestrel(
-                                options =>
-                                {
-                                    options.Listen(IPAddress.Loopback, 0);
-                                }
-                            )
-                            .Configure(startup);
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.ConfigureServices(
+                        s =>
+                        {
+                            s.AddWebSockets(configure);
+                            s.AddSingleton(loggerFactory);
+                        }
+                    ).UseConfiguration(config).UseKestrel(
+                        options =>
+                        {
+                            options.Listen(IPAddress.Loopback, 0);
+                        }
+                    ).Configure(startup);
+                }
+            ).Build();
 
             host.Start();
             port = host.GetPort();

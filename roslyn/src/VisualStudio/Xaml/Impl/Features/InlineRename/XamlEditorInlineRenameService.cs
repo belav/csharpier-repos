@@ -41,10 +41,10 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
         )
         {
             var renameInfo = await _renameService.GetRenameInfoAsync(
-                    document,
-                    position,
-                    cancellationToken
-                )
+                document,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return new InlineRenameInfo(document, renameInfo);
@@ -88,10 +88,10 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                 var references = new List<InlineRenameLocation>();
 
                 var renameLocations = await _renameInfo.FindRenameLocationsAsync(
-                        renameInStrings: optionSet.GetOption(RenameOptions.RenameInStrings),
-                        renameInComments: optionSet.GetOption(RenameOptions.RenameInComments),
-                        cancellationToken: cancellationToken
-                    )
+                    renameInStrings: optionSet.GetOption(RenameOptions.RenameInStrings),
+                    renameInComments: optionSet.GetOption(RenameOptions.RenameInComments),
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 references.AddRange(

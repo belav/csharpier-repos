@@ -60,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 }
 
                 foreach (
-                    var index in entityTypeBuilder.Metadata.GetDerivedTypesInclusive()
+                    var index in entityTypeBuilder.Metadata
+                        .GetDerivedTypesInclusive()
                         .SelectMany(et => et.GetDeclaredIndexes())
                 )
                 {
@@ -96,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         )
         {
             if (
-                indexBuilder.Metadata.DeclaringEntityType.GetAllBaseTypesInclusive()
+                indexBuilder.Metadata.DeclaringEntityType
+                    .GetAllBaseTypesInclusive()
                     .Any(et => et.IsMemoryOptimized())
             )
             {

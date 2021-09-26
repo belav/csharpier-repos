@@ -74,12 +74,12 @@ namespace System.Linq.Parallel
             if (_prematureMerge)
             {
                 intKeyStream = ExecuteAndCollectResults(
-                        inputStream,
-                        partitionCount,
-                        Child.OutputOrdered,
-                        preferStriping,
-                        settings
-                    )
+                    inputStream,
+                    partitionCount,
+                    Child.OutputOrdered,
+                    preferStriping,
+                    settings
+                )
                     .GetPartitionedStream();
                 Debug.Assert(intKeyStream.OrdinalIndexState == OrdinalIndexState.Indexable);
             }

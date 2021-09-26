@@ -114,11 +114,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                     for (int i = 0; i < SupportedEncodings.Count; i++)
                     {
                         if (
-                            string.Equals(
-                                requestEncoding.WebName,
-                                SupportedEncodings[i].WebName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    requestEncoding.WebName,
+                                    SupportedEncodings[i].WebName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             return SupportedEncodings[i];

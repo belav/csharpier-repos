@@ -14,9 +14,8 @@ namespace System.Net.Security
 {
     internal sealed class CipherSuitesPolicyPal
     {
-        private static readonly byte[] AllowNoEncryptionDefault = Encoding.ASCII.GetBytes(
-            "ALL:eNULL\0"
-        );
+        private static readonly byte[] AllowNoEncryptionDefault = Encoding.ASCII
+            .GetBytes("ALL:eNULL\0");
 
         private static readonly byte[] NoEncryptionDefault = Encoding.ASCII.GetBytes("eNULL\0");
 
@@ -56,11 +55,8 @@ namespace System.Net.Security
                     {
                         foreach (TlsCipherSuite cs in allowedCipherSuites)
                         {
-                            string? name = Interop.Ssl.GetOpenSslCipherSuiteName(
-                                ssl,
-                                cs,
-                                out bool isTls12OrLower
-                            );
+                            string? name = Interop.Ssl
+                                .GetOpenSslCipherSuiteName(ssl, cs, out bool isTls12OrLower);
 
                             if (name == null)
                             {
@@ -70,9 +66,8 @@ namespace System.Net.Security
                             }
 
                             _tlsCipherSuites.Add(cs);
-                            (isTls12OrLower ? cipherSuites : tls13CipherSuites).AllowCipherSuite(
-                                name
-                            );
+                            (isTls12OrLower ? cipherSuites : tls13CipherSuites)
+                                .AllowCipherSuite(name);
                         }
 
                         _cipherSuites = cipherSuites.GetOpenSslString();

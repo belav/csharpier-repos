@@ -28,9 +28,8 @@ namespace Microsoft.CodeAnalysis.Remote
             CancellationToken cancellationToken
         )
         {
-            using var _ = ArrayBuilder<(DocumentId, ImmutableArray<TextChange>)>.GetInstance(
-                out var builder
-            );
+            using var _ = ArrayBuilder<(DocumentId, ImmutableArray<TextChange>)>
+                .GetInstance(out var builder);
 
             var solutionChanges = newSolution.GetChanges(oldSolution);
             foreach (var projectChange in solutionChanges.GetProjectChanges())

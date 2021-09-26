@@ -1197,7 +1197,8 @@ namespace System.Reflection.Metadata
         internal string GetDebuggerDisplay()
         {
             return IsHead
-              ? string.Join(
+              ? string
+                .Join(
                     "->",
                     GetChunks().Select(chunk => $"[{Display(chunk._buffer, chunk.Length)}]")
                 )

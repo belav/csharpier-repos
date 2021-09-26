@@ -110,19 +110,16 @@ namespace Microsoft.AspNetCore.Routing.FunctionalTests
         {
             // Arrange
             using var host = new HostBuilder().ConfigureWebHost(
-                    webhostbuilder =>
-                    {
-                        webhostbuilder.Configure(
-                                app =>
-                                {
-                                    app.UseRouter(routeBuilder);
-                                }
-                            )
-                            .UseTestServer();
-                    }
-                )
-                .ConfigureServices(services => services.AddRouting())
-                .Build();
+                webhostbuilder =>
+                {
+                    webhostbuilder.Configure(
+                        app =>
+                        {
+                            app.UseRouter(routeBuilder);
+                        }
+                    ).UseTestServer();
+                }
+            ).ConfigureServices(services => services.AddRouting()).Build();
 
             var testServer = host.GetTestServer();
             await host.StartAsync();

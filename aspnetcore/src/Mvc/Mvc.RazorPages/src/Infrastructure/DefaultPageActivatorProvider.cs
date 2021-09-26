@@ -72,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             }
 
             if (
-                typeof(IAsyncDisposable).GetTypeInfo()
+                typeof(IAsyncDisposable)
+                    .GetTypeInfo()
                     .IsAssignableFrom(actionDescriptor.PageTypeInfo)
             )
             {
@@ -97,10 +98,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             // () => new Page();
             var pageFactory = Expression.Lambda<Func<PageContext, ViewContext, object>>(
-                    newExpression,
-                    parameter1,
-                    parameter2
-                )
+                newExpression,
+                parameter1,
+                parameter2
+            )
                 .Compile();
             return pageFactory;
         }

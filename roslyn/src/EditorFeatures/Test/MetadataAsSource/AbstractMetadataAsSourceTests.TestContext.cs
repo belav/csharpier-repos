@@ -167,9 +167,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
             {
                 if (compilation == null)
                 {
-                    compilation = await this.DefaultProject.GetRequiredCompilationAsync(
-                        CancellationToken.None
-                    );
+                    compilation = await this.DefaultProject
+                        .GetRequiredCompilationAsync(CancellationToken.None);
                     var diagnostics = compilation.GetDiagnostics().ToArray();
                     Assert.Equal(0, diagnostics.Length);
                 }
@@ -289,16 +288,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 
                 if (sourceWithSymbolReference != null)
                 {
-                    xmlString = string.Concat(
-                        xmlString,
-                        string.Format(
+                    xmlString = string.Concat(xmlString, string.Format(
                             @"
         <Document FilePath=""SourceDocument"">
 {0}
         </Document>",
                             sourceWithSymbolReference
-                        )
-                    );
+                        ));
                 }
 
                 xmlString = string.Concat(

@@ -128,7 +128,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<float>)typeof(Avx2).GetMethod(
+                        (Vector256<float>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector256),
                                 new Type[]
                                 {
@@ -276,7 +277,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vd =
-                        (Vector256<double>)typeof(Avx2).GetMethod(
+                        (Vector256<double>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector256),
                                 new Type[]
                                 {
@@ -417,7 +419,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<int>)typeof(Avx2).GetMethod(
+                        (Vector256<int>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector256),
                                 new Type[]
                                 {
@@ -544,7 +547,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<uint>)typeof(Avx2).GetMethod(
+                        (Vector256<uint>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector256),
                                 new Type[]
                                 {
@@ -669,7 +673,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<long>)typeof(Avx2).GetMethod(
+                        (Vector256<long>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector256),
                                 new Type[]
                                 {
@@ -796,7 +801,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<ulong>)typeof(Avx2).GetMethod(
+                        (Vector256<ulong>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector256),
                                 new Type[]
                                 {
@@ -925,7 +931,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<long>)typeof(Avx2).GetMethod(
+                        (Vector256<long>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector256),
                                 new Type[]
                                 {
@@ -1054,7 +1061,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector256<ulong>)typeof(Avx2).GetMethod(
+                        (Vector256<ulong>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector256),
                                 new Type[]
                                 {
@@ -1190,7 +1198,8 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vd =
-                        (Vector256<double>)typeof(Avx2).GetMethod(
+                        (Vector256<double>)typeof(Avx2)
+                            .GetMethod(
                                 nameof(Avx2.GatherMaskVector256),
                                 new Type[]
                                 {

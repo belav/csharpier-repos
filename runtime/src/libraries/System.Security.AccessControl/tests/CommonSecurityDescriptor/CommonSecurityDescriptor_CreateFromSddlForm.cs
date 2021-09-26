@@ -235,11 +235,12 @@ namespace System.Security.AccessControl.Tests
             commonSecurityDescriptor = new CommonSecurityDescriptor(isContainer, isDS, sddl);
             string resultSddlForm = commonSecurityDescriptor.GetSddlForm(AccessControlSections.All);
             Assert.True(
-                string.Compare(
-                    verifierSddl,
-                    resultSddlForm,
-                    StringComparison.CurrentCultureIgnoreCase
-                ) == 0
+                string
+                    .Compare(
+                        verifierSddl,
+                        resultSddlForm,
+                        StringComparison.CurrentCultureIgnoreCase
+                    ) == 0
             );
         }
     }

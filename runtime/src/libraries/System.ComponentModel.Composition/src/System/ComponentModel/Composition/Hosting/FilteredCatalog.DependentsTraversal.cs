@@ -64,10 +64,8 @@ namespace System.ComponentModel.Composition.Hosting
             private void AddToImportersIndex(string contractName, ComposablePartDefinition part)
             {
                 if (
-                    !_importersIndex!.TryGetValue(
-                        contractName,
-                        out List<ComposablePartDefinition>? parts
-                    )
+                    !_importersIndex!
+                        .TryGetValue(contractName, out List<ComposablePartDefinition>? parts)
                 )
                 {
                     parts = new List<ComposablePartDefinition>();
@@ -101,9 +99,8 @@ namespace System.ComponentModel.Composition.Hosting
                         foreach (var candidateReachablePart in candidateReachableParts)
                         {
                             foreach (
-                                ImportDefinition import in candidateReachablePart.ImportDefinitions.Where(
-                                    _importFilter
-                                )
+                                ImportDefinition import in candidateReachablePart.ImportDefinitions
+                                    .Where(_importFilter)
                             )
                             {
                                 if (

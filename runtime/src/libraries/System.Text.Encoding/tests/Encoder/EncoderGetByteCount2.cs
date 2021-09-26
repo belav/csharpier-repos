@@ -80,8 +80,8 @@ namespace System.Text.Tests
         [Fact]
         public void PosTest3()
         {
-            char[] chars =
-                "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+-=\\|/?<>  ,.`~".ToCharArray();
+            char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+-=\\|/?<>  ,.`~"
+                .ToCharArray();
             Encoder encoder = Encoding.UTF8.GetEncoder();
 
             VerificationHelper(encoder, chars, 0, chars.Length, true, chars.Length, "003.1");
@@ -111,8 +111,8 @@ namespace System.Text.Tests
         [Fact]
         public void PosTest4()
         {
-            char[] chars =
-                "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+-=\\|/?<>  ,.`~".ToCharArray();
+            char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+-=\\|/?<>  ,.`~"
+                .ToCharArray();
             Encoder encoder = Encoding.Unicode.GetEncoder();
 
             VerificationHelper(encoder, chars, 0, chars.Length, true, chars.Length * 2, "004.1");

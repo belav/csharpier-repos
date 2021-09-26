@@ -276,7 +276,7 @@ class C
         public void StackAllocParsedAsSpan_Declaration()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -287,17 +287,15 @@ class Test
         Span<int> c = stackalloc int [10];
     }
 }",
-                    TestOptions.UnsafeDebugDll
-                )
-                .GetParseDiagnostics()
-                .Verify();
+                TestOptions.UnsafeDebugDll
+            ).GetParseDiagnostics().Verify();
         }
 
         [Fact]
         public void StackAllocParsedAsSpan_LocalFunction()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -309,16 +307,14 @@ class Test
         }
     }
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify();
+            ).GetParseDiagnostics().Verify();
         }
 
         [Fact]
         public void StackAllocParsedAsSpan_MethodCall()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -328,16 +324,14 @@ class Test
     }
     public void Visit(Span<int> s) { }
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify();
+            ).GetParseDiagnostics().Verify();
         }
 
         [Fact]
         public void StackAllocParsedAsSpan_DotAccess()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -346,16 +340,14 @@ class Test
         Console.WriteLine((stackalloc int [10]).Length);
     }
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify();
+            ).GetParseDiagnostics().Verify();
         }
 
         [Fact]
         public void StackAllocParsedAsSpan_Cast()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -364,9 +356,7 @@ class Test
         void* x = (void*)(stackalloc int[10]);
     }
 }"
-                )
-                .GetParseDiagnostics()
-                .Verify();
+            ).GetParseDiagnostics().Verify();
         }
     }
 }

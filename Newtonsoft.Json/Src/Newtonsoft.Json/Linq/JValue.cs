@@ -363,10 +363,8 @@ namespace Newtonsoft.Json.Linq
                     throw MiscellaneousUtils.CreateArgumentOutOfRangeException(
                         nameof(valueType),
                         valueType,
-                        "Unexpected value type: {0}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            valueType
-                        )
+                        "Unexpected value type: {0}"
+                            .FormatWith(CultureInfo.InvariantCulture, valueType)
                     );
             }
         }
@@ -670,10 +668,8 @@ namespace Newtonsoft.Json.Linq
             }
 
             throw new ArgumentException(
-                "Could not determine JSON object type for type {0}.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    value.GetType()
-                )
+                "Could not determine JSON object type for type {0}."
+                    .FormatWith(CultureInfo.InvariantCulture, value.GetType())
             );
         }
 

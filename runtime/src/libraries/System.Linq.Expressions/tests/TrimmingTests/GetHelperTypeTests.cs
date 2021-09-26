@@ -28,8 +28,8 @@ internal class Program
             );
             // This code path for the Compile call excercises the method being tested.
             Func<string> func = Expression.Lambda<Func<string>>(
-                    Expression.ArrayAccess(array, indices)
-                )
+                Expression.ArrayAccess(array, indices)
+            )
                 .Compile(preferInterpretation: true);
 
             if (func() != "solitary value")

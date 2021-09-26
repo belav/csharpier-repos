@@ -261,10 +261,11 @@ namespace System.IO.Packaging
                             && (reader.Depth == 0)
                             && (string.CompareOrdinal(RelationshipsTagName, reader.LocalName) == 0)
                             && (
-                                string.CompareOrdinal(
-                                    PackagingUtilities.RelationshipNamespaceUri,
-                                    reader.NamespaceURI
-                                ) == 0
+                                string
+                                    .CompareOrdinal(
+                                        PackagingUtilities.RelationshipNamespaceUri,
+                                        reader.NamespaceURI
+                                    ) == 0
                             )
                         )
                         {
@@ -300,10 +301,11 @@ namespace System.IO.Packaging
                                         == 0
                                     )
                                     && (
-                                        string.CompareOrdinal(
-                                            PackagingUtilities.RelationshipNamespaceUri,
-                                            reader.NamespaceURI
-                                        ) == 0
+                                        string
+                                            .CompareOrdinal(
+                                                PackagingUtilities.RelationshipNamespaceUri,
+                                                reader.NamespaceURI
+                                            ) == 0
                                     )
                                 )
                                 {
@@ -342,10 +344,9 @@ namespace System.IO.Packaging
                                 }
                                 else if (
                                     !(
-                                        string.CompareOrdinal(
-                                            RelationshipsTagName,
-                                            reader.LocalName
-                                        ) == 0
+                                        string
+                                            .CompareOrdinal(RelationshipsTagName, reader.LocalName)
+                                            == 0
                                         && (reader.NodeType == XmlNodeType.EndElement)
                                     )
                                 )

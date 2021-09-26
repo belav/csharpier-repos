@@ -1138,7 +1138,8 @@ namespace System.Dynamic.Runtime.Tests
                 (object)mc.Method_ReturnCharNullable(
                     new MyClass[] { myclass0, (MyClass)myclass1, myclass2 }
                 )
-            ).ToString();
+            )
+                .ToString();
 
             Assert.Equal("z", s);
         }
@@ -1437,11 +1438,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
         public static int MainMethod()
         {
-            return new Test().TestMethod<Test>(
-                float.MaxValue,
-                float.NegativeInfinity,
-                float.PositiveInfinity
-            );
+            return new Test()
+                .TestMethod<Test>(float.MaxValue, float.NegativeInfinity, float.PositiveInfinity);
         }
 
         private int TestMethod<T>(float value1, float value2, float value3)
@@ -1557,9 +1555,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             MyClass myclass = new MyClass();
             decimal p2 = -1M;
             char p3 = 'a';
-            bool result = new Test().TestMethod(
-                (int?)dy.Method_ReturnIntNullable(out myclass, ref p2, p3)
-            );
+            bool result = new Test()
+                .TestMethod((int?)dy.Method_ReturnIntNullable(out myclass, ref p2, p3));
             if (result)
                 return 0;
             return 1;
@@ -1712,10 +1709,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         {
             dynamic dy = new MemberClass();
             ulong value = int.MaxValue;
-            bool result = new Test().TestMethod(
-                (MyClass)dy.Method_ReturnMyClass(value),
-                (int)value
-            );
+            bool result = new Test()
+                .TestMethod((MyClass)dy.Method_ReturnMyClass(value), (int)value);
             if (result)
                 return 0;
             return 1;
@@ -2031,9 +2026,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             dynamic index = 0;
             do
             {
-                result += (
-                    (MyEnum?)dy.Method_ReturnMyEnumNullable(new MyClass[0])
-                ).Value.GetHashCode();
+                result += ((MyEnum?)dy.Method_ReturnMyEnumNullable(new MyClass[0])).Value
+                    .GetHashCode();
             } while (index++ < 2);
             if (result == 9)
                 return 0;

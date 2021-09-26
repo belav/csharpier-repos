@@ -66,9 +66,8 @@ namespace ConsoleApplication1
             VisualStudio.Editor.PlaceCaret("CDATA");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "xml doc comment - delimiter");
             VisualStudio.Editor.PlaceCaret("cdata");
-            VisualStudio.Editor.Verify.CurrentTokenType(
-                tokenType: "xml doc comment - cdata section"
-            );
+            VisualStudio.Editor.Verify
+                .CurrentTokenType(tokenType: "xml doc comment - cdata section");
             VisualStudio.Editor.PlaceCaret("attribute");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "identifier");
         }

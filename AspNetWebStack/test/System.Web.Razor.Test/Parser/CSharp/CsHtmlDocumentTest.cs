@@ -171,14 +171,14 @@ namespace System.Web.Razor.Test.Parser.CSharp
                     new StatementBlock(
                         Factory.CodeTransition(),
                         Factory.Code(
-                                "if(Request.IsAuthenticated) {"
-                                    + Environment.NewLine
-                                    + "    var foo = \"@* User is logged in! ; *\";"
-                                    + Environment.NewLine
-                                    + "    Write(\"Hello friend!\");"
-                                    + Environment.NewLine
-                                    + "}"
-                            )
+                            "if(Request.IsAuthenticated) {"
+                                + Environment.NewLine
+                                + "    var foo = \"@* User is logged in! ; *\";"
+                                + Environment.NewLine
+                                + "    Write(\"Hello friend!\");"
+                                + Environment.NewLine
+                                + "}"
+                        )
                             .AsStatement()
                     )
                 )
@@ -201,14 +201,14 @@ namespace System.Web.Razor.Test.Parser.CSharp
                     new StatementBlock(
                         Factory.CodeTransition(),
                         Factory.Code(
-                                "if(Request.IsAuthenticated) {"
-                                    + Environment.NewLine
-                                    + "    var foo = /*@* User is logged in! */ *@ */;"
-                                    + Environment.NewLine
-                                    + "    Write(\"Hello friend!\");"
-                                    + Environment.NewLine
-                                    + "}"
-                            )
+                            "if(Request.IsAuthenticated) {"
+                                + Environment.NewLine
+                                + "    var foo = /*@* User is logged in! */ *@ */;"
+                                + Environment.NewLine
+                                + "    Write(\"Hello friend!\");"
+                                + Environment.NewLine
+                                + "}"
+                        )
                             .AsStatement()
                     )
                 )
@@ -231,14 +231,14 @@ namespace System.Web.Razor.Test.Parser.CSharp
                     new StatementBlock(
                         Factory.CodeTransition(),
                         Factory.Code(
-                                "if(Request.IsAuthenticated) {"
-                                    + Environment.NewLine
-                                    + "    var foo = //@* User is logged in! */ *@;"
-                                    + Environment.NewLine
-                                    + "    Write(\"Hello friend!\");"
-                                    + Environment.NewLine
-                                    + "}"
-                            )
+                            "if(Request.IsAuthenticated) {"
+                                + Environment.NewLine
+                                + "    var foo = //@* User is logged in! */ *@;"
+                                + Environment.NewLine
+                                + "    Write(\"Hello friend!\");"
+                                + Environment.NewLine
+                                + "}"
+                        )
                             .AsStatement()
                     )
                 )

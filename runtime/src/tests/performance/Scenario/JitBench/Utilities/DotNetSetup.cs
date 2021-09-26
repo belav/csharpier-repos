@@ -266,14 +266,15 @@ namespace JitBench
             string arch
         )
         {
-            return string.Format(
-                "{0}/Runtime/{1}/dotnet-runtime-{1}-{2}-{3}.{4}",
-                azureFeed,
-                version,
-                os,
-                arch,
-                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "zip" : "tar.gz"
-            );
+            return string
+                .Format(
+                    "{0}/Runtime/{1}/dotnet-runtime-{1}-{2}-{3}.{4}",
+                    azureFeed,
+                    version,
+                    os,
+                    arch,
+                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "zip" : "tar.gz"
+                );
         }
 
         public static string GetSDKDownloadLink(string version, Architecture arch)
@@ -303,14 +304,15 @@ namespace JitBench
             string arch
         )
         {
-            return string.Format(
-                "{0}/Sdk/{1}/dotnet-sdk-{1}-{2}-{3}.{4}",
-                azureFeed,
-                version,
-                os,
-                arch,
-                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "zip" : "tar.gz"
-            );
+            return string
+                .Format(
+                    "{0}/Sdk/{1}/dotnet-sdk-{1}-{2}-{3}.{4}",
+                    azureFeed,
+                    version,
+                    os,
+                    arch,
+                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "zip" : "tar.gz"
+                );
         }
 
         public static string GetTargetFrameworkMonikerForFrameworkVersion(string runtimeVersion)

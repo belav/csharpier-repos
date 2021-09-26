@@ -68,10 +68,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 cancellationToken.ThrowIfCancellationRequested();
                 TypeToGenerateIn =
                     await SymbolFinder.FindSourceDefinitionAsync(
-                            TypeToGenerateIn,
-                            document.Project.Solution,
-                            cancellationToken
-                        )
+                        TypeToGenerateIn,
+                        document.Project.Solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false) as INamedTypeSymbol;
                 if (TypeToGenerateIn.IsErrorType())
                 {
@@ -107,30 +107,29 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 var existingMethods = TypeToGenerateIn.GetMembers(IdentifierToken.ValueText)
                     .OfType<IMethodSymbol>();
 
-                var destinationProvider =
-                    document.Project.Solution.Workspace.Services.GetLanguageServices(
-                        TypeToGenerateIn.Language
-                    );
+                var destinationProvider = document.Project.Solution.Workspace.Services
+                    .GetLanguageServices(TypeToGenerateIn.Language);
                 var syntaxFacts = destinationProvider.GetService<ISyntaxFactsService>();
                 var syntaxFactory = destinationProvider.GetService<SyntaxGenerator>();
                 IsContainedInUnsafeType = service.ContainingTypesOrSelfHasUnsafeKeyword(
                     TypeToGenerateIn
                 );
                 var generatedMethod = await SignatureInfo.GenerateMethodAsync(
-                        syntaxFactory,
-                        false,
-                        cancellationToken
-                    )
+                    syntaxFactory,
+                    false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return !existingMethods.Any(
                     m =>
-                        SignatureComparer.Instance.HaveSameSignature(
-                            m,
-                            generatedMethod,
-                            caseSensitive: syntaxFacts.IsCaseSensitive,
-                            compareParameterName: true,
-                            isParameterCaseSensitive: syntaxFacts.IsCaseSensitive
-                        )
+                        SignatureComparer.Instance
+                            .HaveSameSignature(
+                                m,
+                                generatedMethod,
+                                caseSensitive: syntaxFacts.IsCaseSensitive,
+                                compareParameterName: true,
+                                isParameterCaseSensitive: syntaxFacts.IsCaseSensitive
+                            )
                 );
             }
         }

@@ -33,10 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             // Assert
             Assert.NotNull(context.ValidationMetadata.PropertyValidationFilter);
             Assert.False(
-                context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
-                    new ValidationEntry(),
-                    new ValidationEntry()
-                )
+                context.ValidationMetadata.PropertyValidationFilter
+                    .ShouldValidateEntry(new ValidationEntry(), new ValidationEntry())
             );
         }
 
@@ -106,10 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             // Assert
             Assert.NotNull(context.ValidationMetadata.PropertyValidationFilter);
             Assert.False(
-                context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
-                    new ValidationEntry(),
-                    new ValidationEntry()
-                )
+                context.ValidationMetadata.PropertyValidationFilter
+                    .ShouldValidateEntry(new ValidationEntry(), new ValidationEntry())
             );
         }
 
@@ -120,9 +116,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var provider = new DefaultValidationMetadataProvider();
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(ValidateNeverSubclass).GetProperty(
-                    nameof(ValidateNeverSubclass.SubclassName)
-                ),
+                typeof(ValidateNeverSubclass)
+                    .GetProperty(nameof(ValidateNeverSubclass.SubclassName)),
                 typeof(string),
                 typeof(ValidateNeverSubclass)
             );
@@ -137,10 +132,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             // Assert
             Assert.NotNull(context.ValidationMetadata.PropertyValidationFilter);
             Assert.False(
-                context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
-                    new ValidationEntry(),
-                    new ValidationEntry()
-                )
+                context.ValidationMetadata.PropertyValidationFilter
+                    .ShouldValidateEntry(new ValidationEntry(), new ValidationEntry())
             );
         }
 

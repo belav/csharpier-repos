@@ -29,9 +29,8 @@ namespace Microsoft.JSInterop.Infrastructure
         {
             // System.Text.Json handles caching the converters per type on our behalf. No caching is required here.
             var instanceType = typeToConvert.GetGenericArguments()[0];
-            var converterType = typeof(DotNetObjectReferenceJsonConverter<>).MakeGenericType(
-                instanceType
-            );
+            var converterType = typeof(DotNetObjectReferenceJsonConverter<>)
+                .MakeGenericType(instanceType);
 
             return (JsonConverter)Activator.CreateInstance(converterType, JSRuntime)!;
         }

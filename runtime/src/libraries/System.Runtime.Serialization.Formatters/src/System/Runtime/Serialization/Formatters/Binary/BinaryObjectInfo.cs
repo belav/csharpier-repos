@@ -833,10 +833,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         // when the assembly format is set appropriately.
                         if (
                             !_isSimpleAssembly
-                            && _cache._memberInfos[i].GetCustomAttribute(
-                                typeof(OptionalFieldAttribute),
-                                inherit: false
-                            ) == null
+                            && _cache._memberInfos[i]
+                                .GetCustomAttribute(typeof(OptionalFieldAttribute), inherit: false)
+                                == null
                         )
                         {
                             Debug.Assert(_cache._memberNames != null);

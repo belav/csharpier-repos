@@ -250,17 +250,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ? query
                 : Expression.Block(
                       _runtimeParameters.Select(
-                              kv =>
-                                  Expression.Call(
-                                      QueryContextParameter,
-                                      _queryContextAddParameterMethodInfo,
-                                      Expression.Constant(kv.Key),
-                                      Expression.Convert(
-                                          Expression.Invoke(kv.Value, QueryContextParameter),
-                                          typeof(object)
-                                      )
+                          kv =>
+                              Expression.Call(
+                                  QueryContextParameter,
+                                  _queryContextAddParameterMethodInfo,
+                                  Expression.Constant(kv.Key),
+                                  Expression.Convert(
+                                      Expression.Invoke(kv.Value, QueryContextParameter),
+                                      typeof(object)
                                   )
-                          )
+                              )
+                      )
                           .Append(query)
                   );
 

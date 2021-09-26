@@ -77,7 +77,8 @@ namespace Newtonsoft.Json.Linq
                 await task.ConfigureAwait(false);
                 for (; i < _properties.Count; i++)
                 {
-                    await _properties[i].WriteToAsync(Writer, CancellationToken, Converters)
+                    await _properties[i]
+                        .WriteToAsync(Writer, CancellationToken, Converters)
                         .ConfigureAwait(false);
                 }
 
@@ -136,10 +137,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Error reading JObject from JsonReader. Current JsonReader item is not an object: {0}".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Error reading JObject from JsonReader. Current JsonReader item is not an object: {0}"
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
 

@@ -460,38 +460,30 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(
                 float.MaxValue,
                 JsonSerializer.Deserialize<float>(
-                    float.MaxValue.ToString(
-                        JsonTestHelper.SingleFormatString,
-                        CultureInfo.InvariantCulture
-                    )
+                    float.MaxValue
+                        .ToString(JsonTestHelper.SingleFormatString, CultureInfo.InvariantCulture)
                 )
             );
             Assert.Equal(
                 float.MaxValue,
                 JsonSerializer.Deserialize<float?>(
-                    float.MaxValue.ToString(
-                        JsonTestHelper.SingleFormatString,
-                        CultureInfo.InvariantCulture
-                    )
+                    float.MaxValue
+                        .ToString(JsonTestHelper.SingleFormatString, CultureInfo.InvariantCulture)
                 )
             );
 
             Assert.Equal(
                 double.MaxValue,
                 JsonSerializer.Deserialize<double>(
-                    double.MaxValue.ToString(
-                        JsonTestHelper.DoubleFormatString,
-                        CultureInfo.InvariantCulture
-                    )
+                    double.MaxValue
+                        .ToString(JsonTestHelper.DoubleFormatString, CultureInfo.InvariantCulture)
                 )
             );
             Assert.Equal(
                 double.MaxValue,
                 JsonSerializer.Deserialize<double?>(
-                    double.MaxValue.ToString(
-                        JsonTestHelper.DoubleFormatString,
-                        CultureInfo.InvariantCulture
-                    )
+                    double.MaxValue
+                        .ToString(JsonTestHelper.DoubleFormatString, CultureInfo.InvariantCulture)
                 )
             );
         }

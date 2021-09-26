@@ -74,19 +74,17 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await context.Request.BodyReader.CopyToAsync(
-                                                context.Response.BodyWriter
-                                            )
-                                            .DefaultTimeout();
-                                    }
-                                )
-                        );
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    await context.Request.BodyReader
+                                        .CopyToAsync(context.Response.BodyWriter)
+                                        .DefaultTimeout();
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -98,9 +96,9 @@ namespace Interop.FunctionalTests
 
             using var request = CreateRequestMessage(HttpMethod.Post, url, new BulkContent());
             using var response = await client.SendAsync(
-                    request,
-                    HttpCompletionOption.ResponseHeadersRead
-                )
+                request,
+                HttpCompletionOption.ResponseHeadersRead
+            )
                 .DefaultTimeout();
 
             Assert.Equal(HttpVersion.Version20, response.Version);
@@ -124,26 +122,22 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    if (Interlocked.Increment(ref requestsReceived) == requestCount)
                                     {
-                                        if (
-                                            Interlocked.Increment(ref requestsReceived)
-                                            == requestCount
-                                        )
-                                        {
-                                            allRequestsReceived.SetResult(0);
-                                        }
-                                        await allRequestsReceived.Task;
-                                        var content = new BulkContent();
-                                        await content.CopyToAsync(context.Response.Body)
-                                            .DefaultTimeout();
+                                        allRequestsReceived.SetResult(0);
                                     }
-                                )
-                        );
+                                    await allRequestsReceived.Task;
+                                    var content = new BulkContent();
+                                    await content.CopyToAsync(context.Response.Body)
+                                        .DefaultTimeout();
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -161,9 +155,9 @@ namespace Interop.FunctionalTests
             async Task RunRequest(string url)
             {
                 using var response = await client.GetAsync(
-                        url,
-                        HttpCompletionOption.ResponseHeadersRead
-                    )
+                    url,
+                    HttpCompletionOption.ResponseHeadersRead
+                )
                     .DefaultTimeout();
 
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -190,27 +184,22 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    if (Interlocked.Increment(ref requestsReceived) == requestCount)
                                     {
-                                        if (
-                                            Interlocked.Increment(ref requestsReceived)
-                                            == requestCount
-                                        )
-                                        {
-                                            allRequestsReceived.SetResult(0);
-                                        }
-                                        await allRequestsReceived.Task;
-                                        await context.Request.BodyReader.CopyToAsync(
-                                                context.Response.BodyWriter
-                                            )
-                                            .DefaultTimeout();
+                                        allRequestsReceived.SetResult(0);
                                     }
-                                )
-                        );
+                                    await allRequestsReceived.Task;
+                                    await context.Request.BodyReader
+                                        .CopyToAsync(context.Response.BodyWriter)
+                                        .DefaultTimeout();
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -230,9 +219,9 @@ namespace Interop.FunctionalTests
             {
                 using var request = CreateRequestMessage(HttpMethod.Post, url, new BulkContent());
                 using var response = await client.SendAsync(
-                        request,
-                        HttpCompletionOption.ResponseHeadersRead
-                    )
+                    request,
+                    HttpCompletionOption.ResponseHeadersRead
+                )
                     .DefaultTimeout();
 
                 Assert.Equal(HttpVersion.Version20, response.Version);
@@ -322,51 +311,44 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    var reader = context.Request.BodyReader;
+                                    // Read Hello World and echo it back to the client, twice
+                                    for (var i = 0; i < 2; i++)
                                     {
-                                        var reader = context.Request.BodyReader;
-                                        // Read Hello World and echo it back to the client, twice
-                                        for (var i = 0; i < 2; i++)
+                                        var readResult = await reader.ReadAsync().DefaultTimeout();
+                                        while (
+                                            !readResult.IsCompleted
+                                            && readResult.Buffer.Length < "Hello World".Length
+                                        )
                                         {
-                                            var readResult = await reader.ReadAsync()
-                                                .DefaultTimeout();
-                                            while (
-                                                !readResult.IsCompleted
-                                                && readResult.Buffer.Length < "Hello World".Length
-                                            )
-                                            {
-                                                reader.AdvanceTo(
-                                                    readResult.Buffer.Start,
-                                                    readResult.Buffer.End
-                                                );
-                                                readResult = await reader.ReadAsync()
-                                                    .DefaultTimeout();
-                                            }
-
-                                            var sequence = readResult.Buffer.Slice(
-                                                0,
-                                                "Hello World".Length
+                                            reader.AdvanceTo(
+                                                readResult.Buffer.Start,
+                                                readResult.Buffer.End
                                             );
-                                            Assert.True(sequence.IsSingleSegment);
-                                            await context.Response.BodyWriter.WriteAsync(
-                                                    sequence.First
-                                                )
-                                                .DefaultTimeout();
-                                            reader.AdvanceTo(sequence.End);
+                                            readResult = await reader.ReadAsync().DefaultTimeout();
                                         }
 
-                                        var finalResult = await reader.ReadAsync().DefaultTimeout();
-                                        Assert.True(
-                                            finalResult.IsCompleted
-                                                && finalResult.Buffer.Length == 0
-                                        );
+                                        var sequence = readResult.Buffer
+                                            .Slice(0, "Hello World".Length);
+                                        Assert.True(sequence.IsSingleSegment);
+                                        await context.Response.BodyWriter
+                                            .WriteAsync(sequence.First)
+                                            .DefaultTimeout();
+                                        reader.AdvanceTo(sequence.End);
                                     }
-                                )
-                        );
+
+                                    var finalResult = await reader.ReadAsync().DefaultTimeout();
+                                    Assert.True(
+                                        finalResult.IsCompleted && finalResult.Buffer.Length == 0
+                                    );
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -407,15 +389,38 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
-                                    {
-                                        var reader = context.Request.BodyReader;
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    var reader = context.Request.BodyReader;
 
-                                        var readResult = await reader.ReadAsync().DefaultTimeout();
+                                    var readResult = await reader.ReadAsync().DefaultTimeout();
+                                    while (
+                                        !readResult.IsCompleted
+                                        && readResult.Buffer.Length < "Hello World".Length
+                                    )
+                                    {
+                                        reader.AdvanceTo(
+                                            readResult.Buffer.Start,
+                                            readResult.Buffer.End
+                                        );
+                                        readResult = await reader.ReadAsync().DefaultTimeout();
+                                    }
+
+                                    var sequence = readResult.Buffer.Slice(0, "Hello World".Length);
+                                    Assert.True(sequence.IsSingleSegment);
+                                    await context.Response.BodyWriter
+                                        .WriteAsync(sequence.First)
+                                        .DefaultTimeout();
+                                    reader.AdvanceTo(sequence.End);
+                                    await context.Response.CompleteAsync().DefaultTimeout();
+
+                                    try
+                                    {
+                                        // The client sends one more packet after the server completes
+                                        readResult = await reader.ReadAsync().DefaultTimeout();
                                         while (
                                             !readResult.IsCompleted
                                             && readResult.Buffer.Length < "Hello World".Length
@@ -428,54 +433,25 @@ namespace Interop.FunctionalTests
                                             readResult = await reader.ReadAsync().DefaultTimeout();
                                         }
 
-                                        var sequence = readResult.Buffer.Slice(
-                                            0,
-                                            "Hello World".Length
+                                        Assert.True(readResult.Buffer.IsSingleSegment);
+                                        var result = Encoding.UTF8
+                                            .GetString(readResult.Buffer.FirstSpan);
+                                        reader.AdvanceTo(readResult.Buffer.End);
+
+                                        var finalResult = await reader.ReadAsync().DefaultTimeout();
+                                        Assert.True(
+                                            finalResult.IsCompleted
+                                                && finalResult.Buffer.Length == 0
                                         );
-                                        Assert.True(sequence.IsSingleSegment);
-                                        await context.Response.BodyWriter.WriteAsync(sequence.First)
-                                            .DefaultTimeout();
-                                        reader.AdvanceTo(sequence.End);
-                                        await context.Response.CompleteAsync().DefaultTimeout();
-
-                                        try
-                                        {
-                                            // The client sends one more packet after the server completes
-                                            readResult = await reader.ReadAsync().DefaultTimeout();
-                                            while (
-                                                !readResult.IsCompleted
-                                                && readResult.Buffer.Length < "Hello World".Length
-                                            )
-                                            {
-                                                reader.AdvanceTo(
-                                                    readResult.Buffer.Start,
-                                                    readResult.Buffer.End
-                                                );
-                                                readResult = await reader.ReadAsync()
-                                                    .DefaultTimeout();
-                                            }
-
-                                            Assert.True(readResult.Buffer.IsSingleSegment);
-                                            var result = Encoding.UTF8.GetString(
-                                                readResult.Buffer.FirstSpan
-                                            );
-                                            reader.AdvanceTo(readResult.Buffer.End);
-
-                                            var finalResult = await reader.ReadAsync()
-                                                .DefaultTimeout();
-                                            Assert.True(
-                                                finalResult.IsCompleted
-                                                    && finalResult.Buffer.Length == 0
-                                            );
-                                            lastPacket.SetResult(result);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            lastPacket.SetException(ex);
-                                        }
+                                        lastPacket.SetResult(result);
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        lastPacket.SetException(ex);
+                                    }
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -521,32 +497,31 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
-                                    {
-                                        context.Response.ContentType = "text/plain";
-                                        await context.Response.WriteAsync("Hello World");
-                                        await context.Response.CompleteAsync().DefaultTimeout();
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    context.Response.ContentType = "text/plain";
+                                    await context.Response.WriteAsync("Hello World");
+                                    await context.Response.CompleteAsync().DefaultTimeout();
 
-                                        try
-                                        {
-                                            using var streamReader = new StreamReader(
-                                                context.Request.Body
-                                            );
-                                            var read = await streamReader.ReadToEndAsync()
-                                                .DefaultTimeout();
-                                            clientEcho.SetResult(read);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            clientEcho.SetException(ex);
-                                        }
+                                    try
+                                    {
+                                        using var streamReader = new StreamReader(
+                                            context.Request.Body
+                                        );
+                                        var read = await streamReader.ReadToEndAsync()
+                                            .DefaultTimeout();
+                                        clientEcho.SetResult(read);
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        clientEcho.SetException(ex);
+                                    }
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -560,9 +535,9 @@ namespace Interop.FunctionalTests
             var streamingContent = new StreamingContent();
             var request = CreateRequestMessage(HttpMethod.Post, url, streamingContent);
             using var response = await client.SendAsync(
-                    request,
-                    HttpCompletionOption.ResponseHeadersRead
-                )
+                request,
+                HttpCompletionOption.ResponseHeadersRead
+            )
                 .DefaultTimeout();
 
             Assert.Equal(HttpVersion.Version20, response.Version);
@@ -652,18 +627,17 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    context =>
-                                    {
-                                        context.Response.DeclareTrailer("TestTrailer");
-                                        context.Response.AppendTrailer("TestTrailer", "TestValue");
-                                        return Task.CompletedTask;
-                                    }
-                                )
-                        );
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                context =>
+                                {
+                                    context.Response.DeclareTrailer("TestTrailer");
+                                    context.Response.AppendTrailer("TestTrailer", "TestValue");
+                                    return Task.CompletedTask;
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -690,20 +664,19 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
-                                    {
-                                        context.Response.DeclareTrailer("TestTrailer");
-                                        await context.Response.WriteAsync("Hello ");
-                                        await headersReceived.Task.DefaultTimeout();
-                                        await context.Response.WriteAsync("World");
-                                        context.Response.AppendTrailer("TestTrailer", "TestValue");
-                                    }
-                                )
-                        );
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    context.Response.DeclareTrailer("TestTrailer");
+                                    await context.Response.WriteAsync("Hello ");
+                                    await headersReceived.Task.DefaultTimeout();
+                                    await context.Response.WriteAsync("World");
+                                    context.Response.AppendTrailer("TestTrailer", "TestValue");
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -732,17 +705,16 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    context =>
-                                    {
-                                        context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                                        return Task.CompletedTask;
-                                    }
-                                )
-                        );
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                context =>
+                                {
+                                    context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
+                                    return Task.CompletedTask;
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -750,8 +722,8 @@ namespace Interop.FunctionalTests
             var url = host.MakeUrl(scheme);
             using var client = CreateClient();
             var exception = await Assert.ThrowsAsync<HttpRequestException>(
-                    () => client.GetAsync(url)
-                )
+                () => client.GetAsync(url)
+            )
                 .DefaultTimeout();
             Assert.Equal(
                 "The HTTP/2 server reset the stream. HTTP/2 error code 'CANCEL' (0x8).",
@@ -771,18 +743,17 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await context.Response.BodyWriter.FlushAsync();
-                                        await receivedHeaders.Task.DefaultTimeout();
-                                        context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                                    }
-                                )
-                        );
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    await context.Response.BodyWriter.FlushAsync();
+                                    await receivedHeaders.Task.DefaultTimeout();
+                                    context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -794,8 +765,8 @@ namespace Interop.FunctionalTests
             response.EnsureSuccessStatusCode();
             receivedHeaders.SetResult(0);
             var exception = await Assert.ThrowsAsync<HttpRequestException>(
-                    () => response.Content.ReadAsStringAsync()
-                )
+                () => response.Content.ReadAsStringAsync()
+            )
                 .DefaultTimeout();
             Assert.Equal(
                 "The HTTP/2 server reset the stream. HTTP/2 error code 'CANCEL' (0x8).",
@@ -812,18 +783,17 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await context.Response.WriteAsync("Hello World");
-                                        await context.Response.CompleteAsync();
-                                        context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                                    }
-                                )
-                        );
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    await context.Response.WriteAsync("Hello World");
+                                    await context.Response.CompleteAsync();
+                                    context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -846,20 +816,19 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
-                                    {
-                                        context.Response.DeclareTrailer("TestTrailer");
-                                        await context.Response.WriteAsync("Hello World");
-                                        context.Response.AppendTrailer("TestTrailer", "TestValue");
-                                        await context.Response.CompleteAsync();
-                                        context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                                    }
-                                )
-                        );
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    context.Response.DeclareTrailer("TestTrailer");
+                                    await context.Response.WriteAsync("Hello World");
+                                    context.Response.AppendTrailer("TestTrailer", "TestValue");
+                                    await context.Response.CompleteAsync();
+                                    context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -894,34 +863,33 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
-                                    {
-                                        context.Response.ContentType = "text/plain";
-                                        await context.Response.BodyWriter.FlushAsync();
-                                        await headersReceived.Task.DefaultTimeout();
-                                        context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                                        serverReset.SetResult(0);
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    context.Response.ContentType = "text/plain";
+                                    await context.Response.BodyWriter.FlushAsync();
+                                    await headersReceived.Task.DefaultTimeout();
+                                    context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
+                                    serverReset.SetResult(0);
 
-                                        try
-                                        {
-                                            using var streamReader = new StreamReader(
-                                                context.Request.Body
-                                            );
-                                            var read = await streamReader.ReadToEndAsync()
-                                                .DefaultTimeout();
-                                            clientEcho.SetResult(read);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            clientEcho.SetException(ex);
-                                        }
+                                    try
+                                    {
+                                        using var streamReader = new StreamReader(
+                                            context.Request.Body
+                                        );
+                                        var read = await streamReader.ReadToEndAsync()
+                                            .DefaultTimeout();
+                                        clientEcho.SetResult(read);
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        clientEcho.SetException(ex);
+                                    }
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -935,9 +903,9 @@ namespace Interop.FunctionalTests
             var streamingContent = new StreamingContent();
             var request = CreateRequestMessage(HttpMethod.Post, url, streamingContent);
             using var response = await client.SendAsync(
-                    request,
-                    HttpCompletionOption.ResponseHeadersRead
-                )
+                request,
+                HttpCompletionOption.ResponseHeadersRead
+            )
                 .DefaultTimeout();
             headersReceived.SetResult(0);
 
@@ -978,41 +946,37 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    var count = await context.Request.Body
+                                        .ReadAsync(new byte[11], 0, 11);
+                                    Assert.Equal(11, count);
+
+                                    context.Response.ContentType = "text/plain";
+                                    await context.Response.BodyWriter.FlushAsync();
+                                    await responseHeadersReceived.Task.DefaultTimeout();
+                                    context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
+                                    serverReset.SetResult(0);
+
+                                    try
                                     {
-                                        var count = await context.Request.Body.ReadAsync(
-                                            new byte[11],
-                                            0,
-                                            11
+                                        using var streamReader = new StreamReader(
+                                            context.Request.Body
                                         );
-                                        Assert.Equal(11, count);
-
-                                        context.Response.ContentType = "text/plain";
-                                        await context.Response.BodyWriter.FlushAsync();
-                                        await responseHeadersReceived.Task.DefaultTimeout();
-                                        context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                                        serverReset.SetResult(0);
-
-                                        try
-                                        {
-                                            using var streamReader = new StreamReader(
-                                                context.Request.Body
-                                            );
-                                            var read = await streamReader.ReadToEndAsync()
-                                                .DefaultTimeout();
-                                            clientEcho.SetResult(read);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            clientEcho.SetException(ex);
-                                        }
+                                        var read = await streamReader.ReadToEndAsync()
+                                            .DefaultTimeout();
+                                        clientEcho.SetResult(read);
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        clientEcho.SetException(ex);
+                                    }
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1063,33 +1027,29 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    try
                                     {
-                                        try
-                                        {
-                                            var readTask = context.Request.Body.ReadAsync(
-                                                new byte[11],
-                                                0,
-                                                11
-                                            );
-                                            requestReceived.SetResult(0);
-                                            var ex = await Assert.ThrowsAsync<IOException>(
-                                                    () => readTask
-                                                )
-                                                .DefaultTimeout();
-                                            serverResult.SetResult(0);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            serverResult.SetException(ex);
-                                        }
+                                        var readTask = context.Request.Body
+                                            .ReadAsync(new byte[11], 0, 11);
+                                        requestReceived.SetResult(0);
+                                        var ex = await Assert.ThrowsAsync<IOException>(
+                                            () => readTask
+                                        )
+                                            .DefaultTimeout();
+                                        serverResult.SetResult(0);
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        serverResult.SetException(ex);
+                                    }
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1126,34 +1086,30 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    try
                                     {
-                                        try
-                                        {
-                                            await ReadStreamHelloWorld(context.Request.Body);
-                                            var readTask = context.Request.Body.ReadAsync(
-                                                new byte[11],
-                                                0,
-                                                11
-                                            );
-                                            requestReceived.SetResult(0);
-                                            var ex = await Assert.ThrowsAsync<IOException>(
-                                                    () => readTask
-                                                )
-                                                .DefaultTimeout();
-                                            serverResult.SetResult(0);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            serverResult.SetException(ex);
-                                        }
+                                        await ReadStreamHelloWorld(context.Request.Body);
+                                        var readTask = context.Request.Body
+                                            .ReadAsync(new byte[11], 0, 11);
+                                        requestReceived.SetResult(0);
+                                        var ex = await Assert.ThrowsAsync<IOException>(
+                                            () => readTask
+                                        )
+                                            .DefaultTimeout();
+                                        serverResult.SetResult(0);
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        serverResult.SetException(ex);
+                                    }
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1188,29 +1144,28 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    try
                                     {
-                                        try
-                                        {
-                                            context.RequestAborted.Register(
-                                                () => serverResult.SetResult(0)
-                                            );
-                                            requestReceived.SetResult(0);
-                                            await serverResult.Task.DefaultTimeout();
-                                            await context.Response.WriteAsync("Hello World")
-                                                .DefaultTimeout();
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            serverResult.SetException(ex);
-                                        }
+                                        context.RequestAborted
+                                            .Register(() => serverResult.SetResult(0));
+                                        requestReceived.SetResult(0);
+                                        await serverResult.Task.DefaultTimeout();
+                                        await context.Response
+                                            .WriteAsync("Hello World")
+                                            .DefaultTimeout();
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        serverResult.SetException(ex);
+                                    }
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1240,30 +1195,30 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    try
                                     {
-                                        try
-                                        {
-                                            context.RequestAborted.Register(
-                                                () => serverResult.SetResult(0)
-                                            );
-                                            await context.Response.WriteAsync("Hello World")
-                                                .DefaultTimeout();
-                                            await serverResult.Task.DefaultTimeout();
-                                            await context.Response.WriteAsync("Hello World")
-                                                .DefaultTimeout();
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            serverResult.SetException(ex);
-                                        }
+                                        context.RequestAborted
+                                            .Register(() => serverResult.SetResult(0));
+                                        await context.Response
+                                            .WriteAsync("Hello World")
+                                            .DefaultTimeout();
+                                        await serverResult.Task.DefaultTimeout();
+                                        await context.Response
+                                            .WriteAsync("Hello World")
+                                            .DefaultTimeout();
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        serverResult.SetException(ex);
+                                    }
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1293,30 +1248,29 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    try
                                     {
-                                        try
-                                        {
-                                            context.RequestAborted.Register(
-                                                () => serverResult.SetResult(0)
-                                            );
-                                            await context.Response.WriteAsync("Hello World")
-                                                .DefaultTimeout();
-                                            await serverResult.Task.DefaultTimeout();
-                                            context.Response.AppendTrailer("foo", "bar");
-                                            await context.Response.CompleteAsync();
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            serverResult.SetException(ex);
-                                        }
+                                        context.RequestAborted
+                                            .Register(() => serverResult.SetResult(0));
+                                        await context.Response
+                                            .WriteAsync("Hello World")
+                                            .DefaultTimeout();
+                                        await serverResult.Task.DefaultTimeout();
+                                        context.Response.AppendTrailer("foo", "bar");
+                                        await context.Response.CompleteAsync();
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        serverResult.SetException(ex);
+                                    }
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1347,31 +1301,30 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                context =>
+                                {
+                                    try
                                     {
-                                        try
+                                        for (var i = 0; i < 20; i++)
                                         {
-                                            for (var i = 0; i < 20; i++)
-                                            {
-                                                Assert.Equal(
-                                                    oneKbString + i,
-                                                    context.Request.Headers["header" + i]
-                                                );
-                                            }
-                                            serverResult.SetResult(0);
+                                            Assert.Equal(
+                                                oneKbString + i,
+                                                context.Request.Headers["header" + i]
+                                            );
                                         }
-                                        catch (Exception ex)
-                                        {
-                                            serverResult.SetException(ex);
-                                        }
-                                        return Task.CompletedTask;
+                                        serverResult.SetResult(0);
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        serverResult.SetException(ex);
+                                    }
+                                    return Task.CompletedTask;
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1393,20 +1346,24 @@ namespace Interop.FunctionalTests
             response.EnsureSuccessStatusCode();
 
             Assert.Single(
-                TestSink.Writes.Where(
-                    context =>
-                        context.Message.Contains(
-                            "received HEADERS frame for stream ID 1 with length 16384 and flags END_STREAM"
-                        )
-                )
+                TestSink.Writes
+                    .Where(
+                        context =>
+                            context.Message
+                                .Contains(
+                                    "received HEADERS frame for stream ID 1 with length 16384 and flags END_STREAM"
+                                )
+                    )
             );
             Assert.Single(
-                TestSink.Writes.Where(
-                    context =>
-                        context.Message.Contains(
-                            "received CONTINUATION frame for stream ID 1 with length 4390 and flags END_HEADERS"
-                        )
-                )
+                TestSink.Writes
+                    .Where(
+                        context =>
+                            context.Message
+                                .Contains(
+                                    "received CONTINUATION frame for stream ID 1 with length 4390 and flags END_HEADERS"
+                                )
+                    )
             );
 
             await host.StopAsync().DefaultTimeout();
@@ -1424,32 +1381,29 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                context =>
+                                {
+                                    try
                                     {
-                                        try
+                                        // The default frame size limit is 16kb, and the total header size limit is 64kb.
+                                        for (var i = 0; i < 59; i++)
                                         {
-                                            // The default frame size limit is 16kb, and the total header size limit is 64kb.
-                                            for (var i = 0; i < 59; i++)
-                                            {
-                                                context.Response.Headers.Append(
-                                                    "header" + i,
-                                                    oneKbString + i
-                                                );
-                                            }
-                                            serverResult.SetResult(0);
+                                            context.Response.Headers
+                                                .Append("header" + i, oneKbString + i);
                                         }
-                                        catch (Exception ex)
-                                        {
-                                            serverResult.SetException(ex);
-                                        }
-                                        return Task.CompletedTask;
+                                        serverResult.SetResult(0);
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        serverResult.SetException(ex);
+                                    }
+                                    return Task.CompletedTask;
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1466,30 +1420,36 @@ namespace Interop.FunctionalTests
             }
 
             Assert.Single(
-                TestSink.Writes.Where(
-                    context =>
-                        context.Message.Contains(
-                            "sending HEADERS frame for stream ID 1 with length 15610 and flags END_STREAM"
-                        )
-                )
+                TestSink.Writes
+                    .Where(
+                        context =>
+                            context.Message
+                                .Contains(
+                                    "sending HEADERS frame for stream ID 1 with length 15610 and flags END_STREAM"
+                                )
+                    )
             );
             Assert.Equal(
                 2,
-                TestSink.Writes.Where(
+                TestSink.Writes
+                    .Where(
                         context =>
-                            context.Message.Contains(
-                                "sending CONTINUATION frame for stream ID 1 with length 15585 and flags NONE"
-                            )
+                            context.Message
+                                .Contains(
+                                    "sending CONTINUATION frame for stream ID 1 with length 15585 and flags NONE"
+                                )
                     )
                     .Count()
             );
             Assert.Single(
-                TestSink.Writes.Where(
-                    context =>
-                        context.Message.Contains(
-                            "sending CONTINUATION frame for stream ID 1 with length 14546 and flags END_HEADERS"
-                        )
-                )
+                TestSink.Writes
+                    .Where(
+                        context =>
+                            context.Message
+                                .Contains(
+                                    "sending CONTINUATION frame for stream ID 1 with length 14546 and flags END_HEADERS"
+                                )
+                    )
             );
 
             await host.StopAsync().DefaultTimeout();
@@ -1517,31 +1477,30 @@ namespace Interop.FunctionalTests
                             options.Limits.Http2.HeaderTableSize = 1;
                         }
                     );
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                context =>
+                                {
+                                    try
                                     {
-                                        try
+                                        for (var i = 0; i < 14; i++)
                                         {
-                                            for (var i = 0; i < 14; i++)
-                                            {
-                                                Assert.Equal(
-                                                    oneKbString + i,
-                                                    context.Request.Headers["header" + i]
-                                                );
-                                            }
-                                            serverResult.SetResult(0);
+                                            Assert.Equal(
+                                                oneKbString + i,
+                                                context.Request.Headers["header" + i]
+                                            );
                                         }
-                                        catch (Exception ex)
-                                        {
-                                            serverResult.SetException(ex);
-                                        }
-                                        return Task.CompletedTask;
+                                        serverResult.SetResult(0);
                                     }
-                                )
-                        );
+                                    catch (Exception ex)
+                                    {
+                                        serverResult.SetException(ex);
+                                    }
+                                    return Task.CompletedTask;
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1563,12 +1522,14 @@ namespace Interop.FunctionalTests
             response.EnsureSuccessStatusCode();
 
             Assert.Single(
-                TestSink.Writes.Where(
-                    context =>
-                        context.Message.Contains(
-                            "received HEADERS frame for stream ID 1 with length 14540 and flags END_STREAM, END_HEADERS"
-                        )
-                )
+                TestSink.Writes
+                    .Where(
+                        context =>
+                            context.Message
+                                .Contains(
+                                    "received HEADERS frame for stream ID 1 with length 14540 and flags END_STREAM, END_HEADERS"
+                                )
+                    )
             );
 
             await host.StopAsync().DefaultTimeout();
@@ -1597,29 +1558,28 @@ namespace Interop.FunctionalTests
                             options.Limits.Http2.MaxStreamsPerConnection = 5;
                         }
                     );
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    // The stream limit should mean we never hit the semaphore limit.
+                                    Assert.True(sync.Wait(0));
+                                    var count = Interlocked.Increment(ref requestCount);
+
+                                    if (count == 5)
                                     {
-                                        // The stream limit should mean we never hit the semaphore limit.
-                                        Assert.True(sync.Wait(0));
-                                        var count = Interlocked.Increment(ref requestCount);
-
-                                        if (count == 5)
-                                        {
-                                            requestBlock.TrySetResult(0);
-                                        }
-                                        else
-                                        {
-                                            await requestBlock.Task.DefaultTimeout();
-                                        }
-
-                                        sync.Release();
+                                        requestBlock.TrySetResult(0);
                                     }
-                                )
-                        );
+                                    else
+                                    {
+                                        await requestBlock.Task.DefaultTimeout();
+                                    }
+
+                                    sync.Release();
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1669,29 +1629,28 @@ namespace Interop.FunctionalTests
                             options.Limits.Http2.MaxStreamsPerConnection = 5;
                         }
                     );
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    // The stream limit should mean we never hit the semaphore limit.
+                                    Assert.True(sync.Wait(0));
+                                    var count = Interlocked.Increment(ref requestCount);
+
+                                    if (count == 5)
                                     {
-                                        // The stream limit should mean we never hit the semaphore limit.
-                                        Assert.True(sync.Wait(0));
-                                        var count = Interlocked.Increment(ref requestCount);
-
-                                        if (count == 5)
-                                        {
-                                            requestBlock.TrySetResult(0);
-                                        }
-                                        else
-                                        {
-                                            await requestBlock.Task.DefaultTimeout();
-                                        }
-
-                                        sync.Release();
+                                        requestBlock.TrySetResult(0);
                                     }
-                                )
-                        );
+                                    else
+                                    {
+                                        await requestBlock.Task.DefaultTimeout();
+                                    }
+
+                                    sync.Release();
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1806,24 +1765,21 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                context =>
+                                {
+                                    // The total header size limit is 64kb.
+                                    for (var i = 0; i < 65; i++)
                                     {
-                                        // The total header size limit is 64kb.
-                                        for (var i = 0; i < 65; i++)
-                                        {
-                                            context.Response.Headers.Append(
-                                                "header" + i,
-                                                oneKbString + i
-                                            );
-                                        }
-                                        return Task.CompletedTask;
+                                        context.Response.Headers
+                                            .Append("header" + i, oneKbString + i);
                                     }
-                                )
-                        );
+                                    return Task.CompletedTask;
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1855,18 +1811,17 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await requestFinished.Task.DefaultTimeout();
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    await requestFinished.Task.DefaultTimeout();
 
-                                        await context.Response.WriteAsync("Hello World");
-                                    }
-                                )
-                        );
+                                    await context.Response.WriteAsync("Hello World");
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1905,27 +1860,28 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    // The spec default window is 64kb - 1.
+                                    // We should be able to send the entire response body without getting blocked by flow control.
+                                    var oneKbString = new string('a', 1024);
+                                    for (var i = 0; i < 63; i++)
                                     {
-                                        // The spec default window is 64kb - 1.
-                                        // We should be able to send the entire response body without getting blocked by flow control.
-                                        var oneKbString = new string('a', 1024);
-                                        for (var i = 0; i < 63; i++)
-                                        {
-                                            await context.Response.WriteAsync(oneKbString)
-                                                .DefaultTimeout();
-                                        }
-                                        await context.Response.WriteAsync(new string('a', 1023))
+                                        await context.Response
+                                            .WriteAsync(oneKbString)
                                             .DefaultTimeout();
-                                        await context.Response.CompleteAsync().DefaultTimeout();
-                                        responseFinished.SetResult(0);
                                     }
-                                )
-                        );
+                                    await context.Response
+                                        .WriteAsync(new string('a', 1023))
+                                        .DefaultTimeout();
+                                    await context.Response.CompleteAsync().DefaultTimeout();
+                                    responseFinished.SetResult(0);
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1951,29 +1907,25 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                async context =>
+                                {
+                                    await requestFinished.Task.DefaultTimeout();
+                                    var buffer = new byte[1024];
+                                    var read = 0;
+                                    do
                                     {
-                                        await requestFinished.Task.DefaultTimeout();
-                                        var buffer = new byte[1024];
-                                        var read = 0;
-                                        do
-                                        {
-                                            read = await context.Request.Body.ReadAsync(
-                                                    buffer,
-                                                    0,
-                                                    buffer.Length
-                                                )
-                                                .DefaultTimeout();
-                                        } while (read > 0);
+                                        read = await context.Request.Body
+                                            .ReadAsync(buffer, 0, buffer.Length)
+                                            .DefaultTimeout();
+                                    } while (read > 0);
 
-                                        await context.Response.WriteAsync("Hello World");
-                                    }
-                                )
-                        );
+                                    await context.Response.WriteAsync("Hello World");
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -2020,19 +1972,16 @@ namespace Interop.FunctionalTests
                 webHostBuilder =>
                 {
                     ConfigureKestrel(webHostBuilder, scheme);
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    context =>
-                                    {
-                                        Assert.Equal("點.看", context.Request.Host.Host);
-                                        return context.Response.WriteAsync(
-                                            context.Request.Host.Host
-                                        );
-                                    }
-                                )
-                        );
+                    webHostBuilder.ConfigureServices(AddTestLogging).Configure(
+                        app =>
+                            app.Run(
+                                context =>
+                                {
+                                    Assert.Equal("點.看", context.Request.Host.Host);
+                                    return context.Response.WriteAsync(context.Request.Host.Host);
+                                }
+                            )
+                    );
                 }
             );
             using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -2071,8 +2020,8 @@ namespace Interop.FunctionalTests
             using var client = CreateClient();
             // Skipped controls, '?' and '#'.
             var response = await client.GetAsync(
-                    url + " !\"$%&'()*++,-./0123456789:;<>=@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`{|}~點看"
-                )
+                url + " !\"$%&'()*++,-./0123456789:;<>=@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`{|}~點看"
+            )
                 .DefaultTimeout();
             response.EnsureSuccessStatusCode();
             Assert.Equal(
@@ -2135,10 +2084,10 @@ namespace Interop.FunctionalTests
             do
             {
                 var read = await stream.ReadAsync(
-                        responseBuffer,
-                        totalRead,
-                        responseBuffer.Length - totalRead
-                    )
+                    responseBuffer,
+                    totalRead,
+                    responseBuffer.Length - totalRead
+                )
                     .DefaultTimeout();
                 totalRead += read;
                 if (read == 0)

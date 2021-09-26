@@ -55,18 +55,17 @@ namespace Microsoft.CodeAnalysis.TodoComments
 
             // Otherwise, report that there should now be no todo comments for this doc.
             return ReportTodoCommentDataAsync(
-                    documentId,
-                    ImmutableArray<TodoCommentData>.Empty,
-                    cancellationToken
-                )
+                documentId,
+                ImmutableArray<TodoCommentData>.Empty,
+                cancellationToken
+            )
                 .AsTask();
         }
 
         private ImmutableArray<TodoCommentDescriptor> GetTodoCommentDescriptors(Document document)
         {
-            var optionText = document.Project.Solution.Options.GetOption<string>(
-                TodoCommentOptions.TokenList
-            );
+            var optionText = document.Project.Solution.Options
+                .GetOption<string>(TodoCommentOptions.TokenList);
 
             lock (_gate)
             {
@@ -94,10 +93,10 @@ namespace Microsoft.CodeAnalysis.TodoComments
 
             // We're out of date.  Recompute this info.
             var todoComments = await todoCommentService.GetTodoCommentsAsync(
-                    document,
-                    descriptors,
-                    cancellationToken
-                )
+                document,
+                descriptors,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Convert the roslyn-level results to the more VS oriented line/col data.

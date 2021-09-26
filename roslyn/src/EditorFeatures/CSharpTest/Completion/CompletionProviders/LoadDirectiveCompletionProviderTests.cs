@@ -110,8 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var position = textWithPositionMarker.IndexOf("$$");
             var text = textWithPositionMarker.Replace("$$", "");
 
-            var services =
-                (IMefHostExportProvider)FeaturesTestCompositions.Features.GetHostServices();
+            var services = (IMefHostExportProvider)FeaturesTestCompositions.Features
+                .GetHostServices();
             var provider =
                 services.GetExports<CompletionProvider, CompletionProviderMetadata>()
                     .Single(

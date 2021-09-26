@@ -13,13 +13,14 @@ namespace System.Reflection.Tests
         [Fact]
         public static void MethodInvoke()
         {
-            MethodInfo m = typeof(TestClass).GetMethod(
-                nameof(TestClass.Moo),
-                BindingFlags.Public
-                    | BindingFlags.Static
-                    | BindingFlags.Instance
-                    | BindingFlags.DeclaredOnly
-            );
+            MethodInfo m = typeof(TestClass)
+                .GetMethod(
+                    nameof(TestClass.Moo),
+                    BindingFlags.Public
+                        | BindingFlags.Static
+                        | BindingFlags.Instance
+                        | BindingFlags.DeclaredOnly
+                );
             TestDoNotWrap<MyException1>(
                 (bf) => m.Invoke(null, bf, null, Array.Empty<object>(), null)
             );
@@ -28,22 +29,21 @@ namespace System.Reflection.Tests
         [Fact]
         public static void ConstructorInvoke()
         {
-            ConstructorInfo c = typeof(TestClass).GetConstructor(
-                BindingFlags.Public | BindingFlags.Instance,
-                null,
-                Type.EmptyTypes,
-                null
-            );
+            ConstructorInfo c = typeof(TestClass)
+                .GetConstructor(
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    Type.EmptyTypes,
+                    null
+                );
             TestDoNotWrap<MyException2>((bf) => c.Invoke(bf, null, Array.Empty<object>(), null));
         }
 
         [Fact]
         public static void ConstructorInvokeTwoArgs()
         {
-            ConstructorInfo c = typeof(TestClass).GetConstructor(
-                BindingFlags.Public | BindingFlags.Instance,
-                Type.EmptyTypes
-            );
+            ConstructorInfo c = typeof(TestClass)
+                .GetConstructor(BindingFlags.Public | BindingFlags.Instance, Type.EmptyTypes);
             TestDoNotWrap<MyException2>((bf) => c.Invoke(bf, null, Array.Empty<object>(), null));
         }
 
@@ -51,12 +51,13 @@ namespace System.Reflection.Tests
         public static void ConstructorInvokeStringCtor()
         {
             // Code coverage: Project N - String constructors go through a separate code path.
-            ConstructorInfo c = typeof(string).GetConstructor(
-                BindingFlags.Public | BindingFlags.Instance,
-                null,
-                new Type[] { typeof(char[]), typeof(int), typeof(int) },
-                null
-            );
+            ConstructorInfo c = typeof(string)
+                .GetConstructor(
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    new Type[] { typeof(char[]), typeof(int), typeof(int) },
+                    null
+                );
             TestDoNotWrap<ArgumentNullException>(
                 (bf) => c.Invoke(bf, null, new object[] { null, 0, 0 }, null)
             );
@@ -65,10 +66,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void ConstructorInvokeStringCtorTwoArgs()
         {
-            ConstructorInfo c = typeof(string).GetConstructor(
-                BindingFlags.Public | BindingFlags.Instance,
-                new Type[] { typeof(char[]), typeof(int), typeof(int) }
-            );
+            ConstructorInfo c = typeof(string)
+                .GetConstructor(
+                    BindingFlags.Public | BindingFlags.Instance,
+                    new Type[] { typeof(char[]), typeof(int), typeof(int) }
+                );
             TestDoNotWrap<ArgumentNullException>(
                 (bf) => c.Invoke(bf, null, new object[] { null, 0, 0 }, null)
             );
@@ -77,12 +79,13 @@ namespace System.Reflection.Tests
         [Fact]
         public static void ConstructorInvokeUsingMethodInfoInvoke()
         {
-            ConstructorInfo c = typeof(TestClass).GetConstructor(
-                BindingFlags.Public | BindingFlags.Instance,
-                null,
-                Type.EmptyTypes,
-                null
-            );
+            ConstructorInfo c = typeof(TestClass)
+                .GetConstructor(
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    Type.EmptyTypes,
+                    null
+                );
             TestDoNotWrap<MyException2>(
                 (bf) => c.Invoke(new TestClass(0), bf, null, Array.Empty<object>(), null)
             );

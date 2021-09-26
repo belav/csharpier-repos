@@ -554,8 +554,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
             var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
             var method = testConvention.GetMembers(
-                    nameof(TestConvention.MethodWithoutMatchBehavior)
-                )
+                nameof(TestConvention.MethodWithoutMatchBehavior)
+            )
                 .First();
 
             // Act
@@ -575,8 +575,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
             var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
             var method = testConvention.GetMembers(
-                    nameof(TestConvention.MethodWithRandomAttributes)
-                )
+                nameof(TestConvention.MethodWithRandomAttributes)
+            )
                 .First();
 
             // Act
@@ -634,8 +634,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
             var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
             var method = (IMethodSymbol)testConvention.GetMembers(
-                    nameof(TestConvention.MethodParameterWithRandomAttributes)
-                )
+                nameof(TestConvention.MethodParameterWithRandomAttributes)
+            )
                 .First();
             var parameter = method.Parameters[0];
 
@@ -656,8 +656,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
             var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
             var method = (IMethodSymbol)testConvention.GetMembers(
-                    nameof(TestConvention.MethodWithAnyTypeMatchBehaviorParameter)
-                )
+                nameof(TestConvention.MethodWithAnyTypeMatchBehaviorParameter)
+            )
                 .First();
             var parameter = method.Parameters[0];
 

@@ -85,9 +85,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     var httpMethods = GetHttpMethods(action);
                     foreach (var httpMethod in httpMethods)
                     {
-                        context.Results.Add(
-                            CreateApiDescription(action, httpMethod, extensionData.GroupName)
-                        );
+                        context.Results
+                            .Add(CreateApiDescription(action, httpMethod, extensionData.GroupName));
                     }
                 }
             }
@@ -156,9 +155,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                         // Add all declared media types since FormFiles do not get processed by formatters.
                         foreach (var contentType in contentTypes)
                         {
-                            apiDescription.SupportedRequestFormats.Add(
-                                new ApiRequestFormat { MediaType = contentType, }
-                            );
+                            apiDescription.SupportedRequestFormats
+                                .Add(new ApiRequestFormat { MediaType = contentType, });
                         }
                     }
                 }
@@ -214,10 +212,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 foreach (var actionParameter in context.ActionDescriptor.BoundProperties)
                 {
                     var visitor = new PseudoModelBindingVisitor(context, actionParameter);
-                    var modelMetadata = context.MetadataProvider.GetMetadataForProperty(
-                        containerType: context.ActionDescriptor.ControllerTypeInfo.AsType(),
-                        propertyName: actionParameter.Name
-                    );
+                    var modelMetadata = context.MetadataProvider
+                        .GetMetadataForProperty(
+                            containerType: context.ActionDescriptor.ControllerTypeInfo.AsType(),
+                            propertyName: actionParameter.Name
+                        );
 
                     var bindingContext = ApiParameterDescriptionContext.GetContext(
                         modelMetadata,
@@ -293,14 +292,15 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             // a partner.
             foreach (var routeParameter in routeParameters)
             {
-                context.Results.Add(
-                    new ApiParameterDescription()
-                    {
-                        Name = routeParameter.Key,
-                        RouteInfo = routeParameter.Value,
-                        Source = BindingSource.Path,
-                    }
-                );
+                context.Results
+                    .Add(
+                        new ApiParameterDescription()
+                        {
+                            Name = routeParameter.Key,
+                            RouteInfo = routeParameter.Value,
+                            Source = BindingSource.Path,
+                        }
+                    );
             }
         }
 
@@ -389,7 +389,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             if (action.ActionConstraints != null && action.ActionConstraints.Count > 0)
             {
-                return action.ActionConstraints.OfType<HttpMethodActionConstraint>()
+                return action.ActionConstraints
+                    .OfType<HttpMethodActionConstraint>()
                     .SelectMany(c => c.HttpMethods);
             }
             else
@@ -515,7 +516,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             // while searching for a filter that implements IApiRequestMetadataProvider.
             //
             // The workaround for that is to implement the metadata interface on the IFilterFactory.
-            return action.FilterDescriptors.Select(fd => fd.Filter)
+            return action.FilterDescriptors
+                .Select(fd => fd.Filter)
                 .OfType<IApiRequestMetadataProvider>()
                 .ToArray();
         }
@@ -612,9 +614,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     || modelMetadata.Properties.Count == 0
                 )
                 {
-                    Context.Results.Add(
-                        CreateResult(bindingContext, source ?? ambientSource, containerName)
-                    );
+                    Context.Results
+                        .Add(CreateResult(bindingContext, source ?? ambientSource, containerName));
                     return;
                 }
 
@@ -670,9 +671,14 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     else
                     {
                         // This is cycle, so just add a result rather than traversing.
-                        Context.Results.Add(
-                            CreateResult(propertyContext, source ?? ambientSource, newContainerName)
-                        );
+                        Context.Results
+                            .Add(
+                                CreateResult(
+                                    propertyContext,
+                                    source ?? ambientSource,
+                                    newContainerName
+                                )
+                            );
                     }
                 }
             }

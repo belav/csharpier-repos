@@ -175,9 +175,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // but there's no regular listener for mouseover in the application at this point
             Browser.Exists(By.Id("register-custom-mouseover")).Click();
 
-            new Actions(Browser).MoveToElement(
-                    Browser.FindElement(By.Id("test-event-target-child"))
-                )
+            new Actions(Browser)
+                .MoveToElement(Browser.FindElement(By.Id("test-event-target-child")))
                 .Perform();
 
             // Nonetheless, the custom event is still received

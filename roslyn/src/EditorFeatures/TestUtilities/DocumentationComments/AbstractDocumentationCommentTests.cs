@@ -249,19 +249,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
 
                     var isReversed = selectedSpan.Start == startCaretPosition ? true : false;
 
-                    view.Selection.Select(
-                        new SnapshotSpan(
-                            view.TextSnapshot,
-                            selectedSpan.Start,
-                            selectedSpan.Length
-                        ),
-                        isReversed
-                    );
+                    view.Selection
+                        .Select(
+                            new SnapshotSpan(
+                                view.TextSnapshot,
+                                selectedSpan.Start,
+                                selectedSpan.Length
+                            ),
+                            isReversed
+                        );
                 }
 
-                view.Caret.MoveTo(
-                    new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
-                );
+                view.Caret
+                    .MoveTo(
+                        new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
+                    );
 
                 execute(workspace, view, workspace.GetService<IEditorOperationsFactoryService>());
                 MarkupTestFile.GetPosition(
@@ -275,11 +277,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
                 var endCaretPosition = view.Caret.Position.BufferPosition.Position;
                 Assert.True(
                     expectedPosition == endCaretPosition,
-                    string.Format(
-                        "Caret positioned incorrectly. Should have been {0}, but was {1}.",
-                        expectedPosition,
-                        endCaretPosition
-                    )
+                    string
+                        .Format(
+                            "Caret positioned incorrectly. Should have been {0}, but was {1}.",
+                            expectedPosition,
+                            endCaretPosition
+                        )
                 );
             }
         }

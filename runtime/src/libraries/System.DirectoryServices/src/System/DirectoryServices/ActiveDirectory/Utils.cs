@@ -171,10 +171,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             (dsNameResultItem.name.Length - 1) == dsNameResultItem.name.IndexOf('/')
                         )
                         {
-                            dnsName = dsNameResultItem.name.Substring(
-                                0,
-                                dsNameResultItem.name.Length - 1
-                            );
+                            dnsName = dsNameResultItem.name
+                                .Substring(0, dsNameResultItem.name.Length - 1);
                         }
                         else
                         {
@@ -935,11 +933,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     )
                     {
                         if (
-                            string.Equals(
-                                supportedCapability,
-                                SupportedCapability.ADOid,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    supportedCapability,
+                                    SupportedCapability.ADOid,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             result = true;
@@ -956,11 +955,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     )
                     {
                         if (
-                            string.Equals(
-                                supportedCapability,
-                                SupportedCapability.ADAMOid,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    supportedCapability,
+                                    SupportedCapability.ADAMOid,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             result = true;
@@ -977,16 +977,18 @@ namespace System.DirectoryServices.ActiveDirectory
                     )
                     {
                         if (
-                            string.Equals(
-                                supportedCapability,
-                                SupportedCapability.ADAMOid,
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                            || string.Equals(
-                                supportedCapability,
-                                SupportedCapability.ADOid,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(
+                                    supportedCapability,
+                                    SupportedCapability.ADAMOid,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            || string
+                                .Equals(
+                                    supportedCapability,
+                                    SupportedCapability.ADOid,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             result = true;
@@ -1373,22 +1375,22 @@ namespace System.DirectoryServices.ActiveDirectory
                             {
                                 // it is not a server in the root domain, so we need to do dc location
                                 serverName = Locator.GetDomainControllerInfo(
-                                        null,
-                                        source,
-                                        null,
-                                        (long)flag
-                                    )
+                                    null,
+                                    source,
+                                    null,
+                                    (long)flag
+                                )
                                     .DomainControllerName.Substring(2);
                             }
                         }
                         else
                         {
                             serverName = Locator.GetDomainControllerInfo(
-                                    null,
-                                    source,
-                                    null,
-                                    (long)flag
-                                )
+                                null,
+                                source,
+                                null,
+                                (long)flag
+                            )
                                 .DomainControllerName.Substring(2);
                         }
                     }
@@ -2178,14 +2180,15 @@ namespace System.DirectoryServices.ActiveDirectory
                                             foundPartitionEntry = true;
 
                                             if (
-                                                string.Compare(
-                                                    dnString,
-                                                    10,
-                                                    "0",
-                                                    0,
-                                                    1,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                ) == 0
+                                                string
+                                                    .Compare(
+                                                        dnString,
+                                                        10,
+                                                        "0",
+                                                        0,
+                                                        1,
+                                                        StringComparison.OrdinalIgnoreCase
+                                                    ) == 0
                                             )
                                             {
                                                 // this server has the partition fully instantiated
@@ -2347,14 +2350,15 @@ namespace System.DirectoryServices.ActiveDirectory
                                         foreach (string property in res.Properties.PropertyNames)
                                         {
                                             if (
-                                                string.Compare(
-                                                    property,
-                                                    0,
-                                                    PropertyManager.MsDSHasInstantiatedNCs,
-                                                    0,
-                                                    PropertyManager.MsDSHasInstantiatedNCs.Length,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                ) == 0
+                                                string
+                                                    .Compare(
+                                                        property,
+                                                        0,
+                                                        PropertyManager.MsDSHasInstantiatedNCs,
+                                                        0,
+                                                        PropertyManager.MsDSHasInstantiatedNCs.Length,
+                                                        StringComparison.OrdinalIgnoreCase
+                                                    ) == 0
                                             )
                                             {
                                                 propertyName = property;
@@ -2400,14 +2404,15 @@ namespace System.DirectoryServices.ActiveDirectory
                                             foundPartitionEntry = true;
 
                                             if (
-                                                string.Compare(
-                                                    dnString,
-                                                    10,
-                                                    "0",
-                                                    0,
-                                                    1,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                ) == 0
+                                                string
+                                                    .Compare(
+                                                        dnString,
+                                                        10,
+                                                        "0",
+                                                        0,
+                                                        1,
+                                                        StringComparison.OrdinalIgnoreCase
+                                                    ) == 0
                                             )
                                             {
                                                 ntdsaNames.Add(ntdsaName);

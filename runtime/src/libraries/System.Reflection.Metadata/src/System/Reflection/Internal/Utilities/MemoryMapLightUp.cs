@@ -27,11 +27,8 @@ namespace System.Reflection.Internal
         {
             try
             {
-                return ((MemoryMappedFile)memoryMap).CreateViewAccessor(
-                    start,
-                    size,
-                    MemoryMappedFileAccess.Read
-                );
+                return ((MemoryMappedFile)memoryMap)
+                    .CreateViewAccessor(start, size, MemoryMappedFileAccess.Read);
             }
             catch (UnauthorizedAccessException e)
             {

@@ -23,8 +23,9 @@ namespace Microsoft.EntityFrameworkCore
 
         private class ChangedRowNumberContext : DbContext
         {
-            private static readonly IServiceProvider _serviceProvider =
-                new ServiceCollection().AddEntityFrameworkSqlServer().BuildServiceProvider();
+            private static readonly IServiceProvider _serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
+                .BuildServiceProvider();
 
             private readonly bool _setInternalServiceProvider;
 

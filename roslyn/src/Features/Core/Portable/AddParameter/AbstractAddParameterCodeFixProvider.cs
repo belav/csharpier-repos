@@ -240,17 +240,15 @@ namespace Microsoft.CodeAnalysis.AddParameter
         )
         {
             var comparer = syntaxFacts.StringComparer;
-            var methodsAndArgumentToAdd = ArrayBuilder<
-                ArgumentInsertPositionData<TArgumentSyntax>
-            >.GetInstance();
+            var methodsAndArgumentToAdd = ArrayBuilder<ArgumentInsertPositionData<TArgumentSyntax>>
+                .GetInstance();
 
             foreach (var method in methodCandidates.OrderBy(m => m.Parameters.Length))
             {
                 if (method.IsNonImplicitAndFromSource())
                 {
-                    var isNamedArgument = !string.IsNullOrWhiteSpace(
-                        syntaxFacts.GetNameForArgument(argumentOpt)
-                    );
+                    var isNamedArgument = !string
+                        .IsNullOrWhiteSpace(syntaxFacts.GetNameForArgument(argumentOpt));
 
                     if (isNamedArgument || NonParamsParameterCount(method) < arguments.Count)
                     {
@@ -313,10 +311,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
 
             ImmutableArray<CodeAction> NestByOverload()
             {
-                using var builderDisposer = ArrayBuilder<CodeAction>.GetInstance(
-                    codeFixData.Length,
-                    out var builder
-                );
+                using var builderDisposer = ArrayBuilder<CodeAction>
+                    .GetInstance(codeFixData.Length, out var builder);
                 foreach (var data in codeFixData)
                 {
                     // We create the mandatory data.CreateChangedSolutionNonCascading fix first.
@@ -365,10 +361,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
 
             ImmutableArray<CodeAction> NestByCascading()
             {
-                using var builderDisposer = ArrayBuilder<CodeAction>.GetInstance(
-                    capacity: 2,
-                    out var builder
-                );
+                using var builderDisposer = ArrayBuilder<CodeAction>
+                    .GetInstance(capacity: 2, out var builder);
 
                 var nonCascadingActions = ImmutableArray.CreateRange<CodeFixData, CodeAction>(
                     codeFixData,
@@ -450,10 +444,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             ImmutableArray<ArgumentInsertPositionData<TArgumentSyntax>> methodsAndArgumentsToAdd
         )
         {
-            using var builderDisposer = ArrayBuilder<CodeFixData>.GetInstance(
-                methodsAndArgumentsToAdd.Length,
-                out var builder
-            );
+            using var builderDisposer = ArrayBuilder<CodeFixData>
+                .GetInstance(methodsAndArgumentsToAdd.Length, out var builder);
 
             // Order by the furthest argument index to the nearest argument index.  The ones with
             // larger argument indexes mean that we matched more earlier arguments (and thus are
@@ -467,9 +459,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                 var methodToUpdate = argumentInsertPositionData.MethodToUpdate;
                 var argumentToInsert = argumentInsertPositionData.ArgumentToInsert;
 
-                var cascadingFix = AddParameterService.Instance.HasCascadingDeclarations(
-                    methodToUpdate
-                )
+                var cascadingFix = AddParameterService.Instance
+                .HasCascadingDeclarations(methodToUpdate)
                     ? new Func<CancellationToken, Task<Solution>>(
                           c =>
                               FixAsync(
@@ -538,23 +529,24 @@ namespace Microsoft.CodeAnalysis.AddParameter
         )
         {
             var (argumentType, refKind) = await GetArgumentTypeAndRefKindAsync(
-                    invocationDocument,
-                    argument,
-                    cancellationToken
-                )
+                invocationDocument,
+                argument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // The argumentNameSuggestion is the base for the parameter name.
             // For each method declaration the name is made unique to avoid name collisions.
             var (argumentNameSuggestion, isNamedArgument) = await GetNameSuggestionForArgumentAsync(
-                    invocationDocument,
-                    argument,
-                    cancellationToken
-                )
+                invocationDocument,
+                argument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var newParameterIndex = isNamedArgument ? (int?)null : argumentList.IndexOf(argument);
-            return await AddParameterService.Instance.AddParameterAsync(
+            return await AddParameterService.Instance
+                .AddParameterAsync(
                     invocationDocument,
                     method,
                     argumentType,
@@ -600,8 +592,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             else
             {
                 var semanticModel = await invocationDocument.GetSemanticModelAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var expression = syntaxFacts.GetExpressionOfArgument(argument);
                 var semanticFacts = invocationDocument.GetLanguageService<ISemanticFactsService>();

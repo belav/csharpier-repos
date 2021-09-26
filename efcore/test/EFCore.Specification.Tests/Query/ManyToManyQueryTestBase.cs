@@ -330,8 +330,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from t in ss.Set<EntityCompositeKey>()
                     join s in ss.Set<EntityCompositeKey>()
-                        on t.TwoSkipShared.OrderBy(e => e.Id)
-                            .FirstOrDefault().Id equals s.ThreeSkipFull.OrderBy(e => e.Id)
+                        on t.TwoSkipShared
+                            .OrderBy(e => e.Id)
+                            .FirstOrDefault().Id equals s.ThreeSkipFull
+                            .OrderBy(e => e.Id)
                             .FirstOrDefault().Id
                         into grouping
                     from s in grouping.DefaultIfEmpty()
@@ -340,9 +342,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from t in ss.Set<EntityCompositeKey>()
                     join s in ss.Set<EntityCompositeKey>()
-                        on t.TwoSkipShared.OrderBy(e => e.Id)
+                        on t.TwoSkipShared
+                            .OrderBy(e => e.Id)
                             .FirstOrDefault()
-                            .MaybeScalar(e => e.Id) equals s.ThreeSkipFull.OrderBy(e => e.Id)
+                            .MaybeScalar(e => e.Id) equals s.ThreeSkipFull
+                            .OrderBy(e => e.Id)
                             .FirstOrDefault()
                             .MaybeScalar(e => e.Id)
                         into grouping
@@ -494,7 +498,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from r in ss.Set<EntityThree>()
                     orderby r.Id
-                    select r.CompositeKeySkipFull.OrderBy(e => e.Key1)
+                    select r.CompositeKeySkipFull
+                        .OrderBy(e => e.Key1)
                         .ThenBy(e => e.Key2)
                         .FirstOrDefault(),
                 assertOrder: true,
@@ -948,9 +953,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Assert.Equal(
                 CoreStrings.MultipleFilteredIncludesOnSameNavigation(
-                        "navigation    .Where(i => i.Id < 20)",
-                        "navigation    .Where(i => i.Id < 10)"
-                    )
+                    "navigation    .Where(i => i.Id < 20)",
+                    "navigation    .Where(i => i.Id < 10)"
+                )
                     .Replace("\r", "")
                     .Replace("\n", ""),
                 (
@@ -966,7 +971,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         .ThenInclude(e => e.ThreeSkipPayloadFull)
                             )
                     )
-                ).Message.Replace("\r", "").Replace("\n", "")
+                ).Message
+                    .Replace("\r", "")
+                    .Replace("\n", "")
             );
         }
 
@@ -976,9 +983,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Assert.Equal(
                 CoreStrings.MultipleFilteredIncludesOnSameNavigation(
-                        "navigation    .Where(i => i.Id < 20)",
-                        "navigation    .Where(i => i.Id < 10)"
-                    )
+                    "navigation    .Where(i => i.Id < 20)",
+                    "navigation    .Where(i => i.Id < 10)"
+                )
                     .Replace("\r", "")
                     .Replace("\n", ""),
                 (
@@ -996,7 +1003,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         .ThenInclude(e => e.ThreeSkipPayloadFull)
                             )
                     )
-                ).Message.Replace("\r", "").Replace("\n", "")
+                ).Message
+                    .Replace("\r", "")
+                    .Replace("\n", "")
             );
         }
 
@@ -1159,9 +1168,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Assert.Equal(
                 CoreStrings.MultipleFilteredIncludesOnSameNavigation(
-                        "navigation    .Where(i => i.Id < 20)",
-                        "navigation    .Where(i => i.Id < 10)"
-                    )
+                    "navigation    .Where(i => i.Id < 20)",
+                    "navigation    .Where(i => i.Id < 10)"
+                )
                     .Replace("\r", "")
                     .Replace("\n", ""),
                 (
@@ -1178,7 +1187,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         .ThenInclude(e => e.Collection.Where(i => i.Id < 10))
                             )
                     )
-                ).Message.Replace("\r", "").Replace("\n", "")
+                ).Message
+                    .Replace("\r", "")
+                    .Replace("\n", "")
             );
         }
 

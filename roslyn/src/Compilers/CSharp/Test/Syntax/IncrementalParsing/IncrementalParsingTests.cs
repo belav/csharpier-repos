@@ -1855,9 +1855,11 @@ namespace N"
 
             // Verify that the first child node of the root is equivalent between incremental tree and full parse tree
             Assert.Equal(
-                parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].AsNode()
+                parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens()[0]
+                    .AsNode()
                     .ToFullString(),
-                incrementalTree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].AsNode()
+                incrementalTree.GetCompilationUnitRoot().ChildNodesAndTokens()[0]
+                    .AsNode()
                     .ToFullString()
             );
         }
@@ -2831,12 +2833,11 @@ System.Console.WriteLine(true)
             var reparsedTree = startTree.WithChangedText(newText);
             var parsedTree = SyntaxFactory.ParseSyntaxTree(newText, options: TestOptions.Script);
 
-            parsedTree.GetDiagnostics()
-                .Verify(
-                    // (1,32): error CS1002: ; expected
-                    // System.Console.WriteLine(false)
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 32)
-                );
+            parsedTree.GetDiagnostics().Verify(
+                // (1,32): error CS1002: ; expected
+                // System.Console.WriteLine(false)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 32)
+            );
 
             CompareIncToFullParseErrors(reparsedTree, parsedTree);
         }
@@ -2869,12 +2870,11 @@ System.Console.WriteLine(false)
             var reparsedTree = startTree.WithChangedText(newText);
 
             var parsedTree = SyntaxFactory.ParseSyntaxTree(newText, options: TestOptions.Script);
-            parsedTree.GetDiagnostics()
-                .Verify(
-                    // (1,31): error CS1002: ; expected
-                    // System.Console.WriteLine(true)
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 31)
-                );
+            parsedTree.GetDiagnostics().Verify(
+                // (1,31): error CS1002: ; expected
+                // System.Console.WriteLine(true)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 31)
+            );
 
             CompareIncToFullParseErrors(reparsedTree, parsedTree);
         }
@@ -2909,12 +2909,11 @@ System.Console.WriteLine(true)
             var reparsedTree = startTree.WithChangedText(newText);
             var parsedTree = SyntaxFactory.ParseSyntaxTree(newText, options: TestOptions.Script);
 
-            parsedTree.GetDiagnostics()
-                .Verify(
-                    // (2,31): error CS1002: ; expected
-                    // System.Console.WriteLine(true)
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 31)
-                );
+            parsedTree.GetDiagnostics().Verify(
+                // (2,31): error CS1002: ; expected
+                // System.Console.WriteLine(true)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 31)
+            );
 
             CompareIncToFullParseErrors(reparsedTree, parsedTree);
         }

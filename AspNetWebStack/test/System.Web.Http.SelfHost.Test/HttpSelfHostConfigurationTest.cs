@@ -309,31 +309,33 @@ namespace System.Web.Http.SelfHost
         [Fact]
         public void HttpSelfHostConfiguration_MaxConcurrentRequests_RoundTrips()
         {
-            Assert.Reflection.IntegerProperty(
-                new HttpSelfHostConfiguration("http://localhost"),
-                c => c.MaxConcurrentRequests,
-                expectedDefaultValue: GetDefaultMaxConcurrentRequests(),
-                minLegalValue: 1,
-                illegalLowerValue: 0,
-                maxLegalValue: null,
-                illegalUpperValue: null,
-                roundTripTestValue: 10
-            );
+            Assert.Reflection
+                .IntegerProperty(
+                    new HttpSelfHostConfiguration("http://localhost"),
+                    c => c.MaxConcurrentRequests,
+                    expectedDefaultValue: GetDefaultMaxConcurrentRequests(),
+                    minLegalValue: 1,
+                    illegalLowerValue: 0,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 10
+                );
         }
 
         [Fact]
         public void HttpSelfHostConfiguration_MaxBufferSize_RoundTrips()
         {
-            Assert.Reflection.IntegerProperty(
-                new HttpSelfHostConfiguration("http://localhost"),
-                c => c.MaxBufferSize,
-                expectedDefaultValue: 64 * 1024,
-                minLegalValue: 1,
-                illegalLowerValue: 0,
-                maxLegalValue: null,
-                illegalUpperValue: null,
-                roundTripTestValue: 10
-            );
+            Assert.Reflection
+                .IntegerProperty(
+                    new HttpSelfHostConfiguration("http://localhost"),
+                    c => c.MaxBufferSize,
+                    expectedDefaultValue: 64 * 1024,
+                    minLegalValue: 1,
+                    illegalLowerValue: 0,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 10
+                );
         }
 
         [Theory]
@@ -396,16 +398,17 @@ namespace System.Web.Http.SelfHost
         [Fact]
         public void HttpSelfHostConfiguration_MaxReceivedMessageSize_RoundTrips()
         {
-            Assert.Reflection.IntegerProperty(
-                new HttpSelfHostConfiguration("http://localhost"),
-                c => c.MaxReceivedMessageSize,
-                expectedDefaultValue: 64 * 1024,
-                minLegalValue: 1,
-                illegalLowerValue: 0,
-                maxLegalValue: null,
-                illegalUpperValue: null,
-                roundTripTestValue: 10
-            );
+            Assert.Reflection
+                .IntegerProperty(
+                    new HttpSelfHostConfiguration("http://localhost"),
+                    c => c.MaxReceivedMessageSize,
+                    expectedDefaultValue: 64 * 1024,
+                    minLegalValue: 1,
+                    illegalLowerValue: 0,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 10
+                );
         }
 
         [Fact]
@@ -413,15 +416,16 @@ namespace System.Web.Http.SelfHost
         {
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration("http://localhost");
 
-            Assert.Reflection.EnumPropertyWithoutIllegalValueCheck<
-                HttpSelfHostConfiguration,
-                HttpClientCredentialType
-            >(
-                config,
-                c => c.ClientCredentialType,
-                expectedDefaultValue: HttpClientCredentialType.None,
-                roundTripTestValue: HttpClientCredentialType.Windows
-            );
+            Assert.Reflection
+                .EnumPropertyWithoutIllegalValueCheck<
+                    HttpSelfHostConfiguration,
+                    HttpClientCredentialType
+                >(
+                    config,
+                    c => c.ClientCredentialType,
+                    expectedDefaultValue: HttpClientCredentialType.None,
+                    roundTripTestValue: HttpClientCredentialType.Windows
+                );
 
             // now let us check the illegal value differently
             config.ClientCredentialType = (HttpClientCredentialType)999;
@@ -440,13 +444,14 @@ namespace System.Web.Http.SelfHost
             UserNamePasswordValidator userNamePasswordValidator =
                 new Mock<UserNamePasswordValidator>().Object;
 
-            Assert.Reflection.Property(
-                new HttpSelfHostConfiguration("http://localhost"),
-                c => c.UserNamePasswordValidator,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: userNamePasswordValidator
-            );
+            Assert.Reflection
+                .Property(
+                    new HttpSelfHostConfiguration("http://localhost"),
+                    c => c.UserNamePasswordValidator,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: userNamePasswordValidator
+                );
         }
 
         [Fact]
@@ -456,37 +461,40 @@ namespace System.Web.Http.SelfHost
             X509CertificateValidator x509CertificateValidator =
                 new Mock<X509CertificateValidator>().Object;
 
-            Assert.Reflection.Property(
-                new HttpSelfHostConfiguration("http://localhost"),
-                c => c.X509CertificateValidator,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: x509CertificateValidator
-            );
+            Assert.Reflection
+                .Property(
+                    new HttpSelfHostConfiguration("http://localhost"),
+                    c => c.X509CertificateValidator,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: x509CertificateValidator
+                );
         }
 
         [Fact]
         public void HttpSelfHostConfiguration_TransferMode_RoundTrips()
         {
-            Assert.Reflection.EnumProperty(
-                new HttpSelfHostConfiguration("http://localhost"),
-                c => c.TransferMode,
-                expectedDefaultValue: TransferMode.Buffered,
-                illegalValue: (TransferMode)999,
-                roundTripTestValue: TransferMode.Streamed
-            );
+            Assert.Reflection
+                .EnumProperty(
+                    new HttpSelfHostConfiguration("http://localhost"),
+                    c => c.TransferMode,
+                    expectedDefaultValue: TransferMode.Buffered,
+                    illegalValue: (TransferMode)999,
+                    roundTripTestValue: TransferMode.Streamed
+                );
         }
 
         [Fact]
         public void HttpSelfHostConfiguration_HostNameComparisonMode_RoundTrips()
         {
-            Assert.Reflection.EnumProperty(
-                new HttpSelfHostConfiguration("http://localhost"),
-                c => c.HostNameComparisonMode,
-                expectedDefaultValue: HostNameComparisonMode.StrongWildcard,
-                illegalValue: (HostNameComparisonMode)999,
-                roundTripTestValue: HostNameComparisonMode.Exact
-            );
+            Assert.Reflection
+                .EnumProperty(
+                    new HttpSelfHostConfiguration("http://localhost"),
+                    c => c.HostNameComparisonMode,
+                    expectedDefaultValue: HostNameComparisonMode.StrongWildcard,
+                    illegalValue: (HostNameComparisonMode)999,
+                    roundTripTestValue: HostNameComparisonMode.Exact
+                );
         }
 
         [Fact]

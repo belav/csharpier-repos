@@ -199,8 +199,8 @@ namespace System.Security.Cryptography.Pkcs
                     newSignerInfo.Version = 1;
                     break;
                 case SubjectIdentifierType.SubjectKeyIdentifier:
-                    newSignerInfo.Sid.SubjectKeyIdentifier =
-                        PkcsPal.Instance.GetSubjectKeyIdentifier(Certificate!);
+                    newSignerInfo.Sid.SubjectKeyIdentifier = PkcsPal.Instance
+                        .GetSubjectKeyIdentifier(Certificate!);
                     newSignerInfo.Version = 3;
                     break;
                 case SubjectIdentifierType.NoSignature:
@@ -315,7 +315,8 @@ namespace System.Security.Cryptography.Pkcs
                         if (
                             i == last
                             && IncludeOption == X509IncludeOption.ExcludeRoot
-                            && cert.SubjectName.RawData.AsSpan()
+                            && cert.SubjectName.RawData
+                                .AsSpan()
                                 .SequenceEqual(cert.IssuerName.RawData)
                         )
                         {

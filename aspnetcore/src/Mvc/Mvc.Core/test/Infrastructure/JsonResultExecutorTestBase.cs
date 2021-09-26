@@ -72,9 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_UsesEncodingSpecifiedInContentType()
         {
             // Arrange
-            var expected = Encoding.Unicode.GetBytes(
-                JsonSerializer.Serialize(new { foo = "abcd" })
-            );
+            var expected = Encoding.Unicode
+                .GetBytes(JsonSerializer.Serialize(new { foo = "abcd" }));
 
             var context = GetActionContext();
             context.HttpContext.Response.ContentType = "text/json; charset=utf-8";
@@ -98,9 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_UsesEncodingSpecifiedInResponseContentType()
         {
             // Arrange
-            var expected = Encoding.Unicode.GetBytes(
-                JsonSerializer.Serialize(new { foo = "abcd" })
-            );
+            var expected = Encoding.Unicode
+                .GetBytes(JsonSerializer.Serialize(new { foo = "abcd" }));
 
             var context = GetActionContext();
             context.HttpContext.Response.ContentType = "text/json; charset=utf-16";
@@ -125,10 +123,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var context = GetActionContext();
 
             var result = new JsonResult(new { foo = "abcd" });
-            result.ContentType = new MediaTypeHeaderValue("text/json")
-            {
-                Encoding = Encoding.ASCII
-            }.ToString();
+            result.ContentType = new MediaTypeHeaderValue("text/json") { Encoding = Encoding.ASCII }
+                .ToString();
             var executor = CreateExecutor();
 
             // Act
@@ -192,12 +188,13 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_UsesPassedInSerializerSettings()
         {
             // Arrange
-            var expected = Encoding.UTF8.GetBytes(
-                JsonSerializer.Serialize(
-                    new { foo = "abcd" },
-                    new JsonSerializerOptions { WriteIndented = true }
-                )
-            );
+            var expected = Encoding.UTF8
+                .GetBytes(
+                    JsonSerializer.Serialize(
+                        new { foo = "abcd" },
+                        new JsonSerializerOptions { WriteIndented = true }
+                    )
+                );
 
             var context = GetActionContext();
 
@@ -296,14 +293,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var stream = new Mock<Stream>();
             stream.Setup(
-                    v =>
-                        v.WriteAsync(
-                            It.IsAny<byte[]>(),
-                            It.IsAny<int>(),
-                            It.IsAny<int>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                v =>
+                    v.WriteAsync(
+                        It.IsAny<byte[]>(),
+                        It.IsAny<int>(),
+                        It.IsAny<int>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(Task.CompletedTask)
                 .Verifiable();
             stream.SetupGet(s => s.CanWrite).Returns(true);
@@ -367,9 +364,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_SerializesAsyncEnumerables()
         {
             // Arrange
-            var expected = Encoding.UTF8.GetBytes(
-                JsonSerializer.Serialize(new[] { "Hello", "world" })
-            );
+            var expected = Encoding.UTF8
+                .GetBytes(JsonSerializer.Serialize(new[] { "Hello", "world" }));
 
             var context = GetActionContext();
             var result = new JsonResult(TestAsyncEnumerable());

@@ -137,11 +137,12 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             var webHostConfig = XDocument.Load(Path.GetFullPath("HostableWebCore.config"));
             webHostConfig.XPathSelectElement(
-                    "/configuration/system.webServer/globalModules/add[@name='AspNetCoreModuleV2']"
-                )
+                "/configuration/system.webServer/globalModules/add[@name='AspNetCoreModuleV2']"
+            )
                 .SetAttributeValue("image", AspNetCoreModuleLocation);
 
-            var siteElement = webHostConfig.Root.RequiredElement("system.applicationHost")
+            var siteElement = webHostConfig.Root
+                .RequiredElement("system.applicationHost")
                 .RequiredElement("sites")
                 .RequiredElement("site");
 
@@ -155,39 +156,36 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         private int Main(IntPtr argc, IntPtr argv)
         {
             _host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseIIS()
-                            .UseSetting(
-                                WebHostDefaults.ApplicationKey,
-                                typeof(TestServer).GetTypeInfo().Assembly.FullName
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.Map(
-                                        "/start",
-                                        builder =>
-                                            builder.Run(
-                                                context => context.Response.WriteAsync("Done")
-                                            )
-                                    );
-                                    _appBuilder(app);
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.Configure<IISServerOptions>(
-                                        options =>
-                                            options.MaxRequestBodySize = _options.MaxRequestBodySize
-                                    );
-                                    services.AddSingleton(_loggerFactory);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseIIS()
+                        .UseSetting(
+                            WebHostDefaults.ApplicationKey,
+                            typeof(TestServer).GetTypeInfo().Assembly.FullName
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Map(
+                                    "/start",
+                                    builder =>
+                                        builder.Run(context => context.Response.WriteAsync("Done"))
+                                );
+                                _appBuilder(app);
+                            }
+                        )
+                        .ConfigureServices(
+                            services =>
+                            {
+                                services.Configure<IISServerOptions>(
+                                    options =>
+                                        options.MaxRequestBodySize = _options.MaxRequestBodySize
+                                );
+                                services.AddSingleton(_loggerFactory);
+                            }
+                        );
+                }
+            ).Build();
 
             var doneEvent = new ManualResetEventSlim();
             var lifetime = _host.Services.GetService<IHostApplicationLifetime>();

@@ -918,7 +918,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 return checkbox;
             }
 
-            return new HtmlContentBuilder(capacity: 2).AppendHtml(checkbox)
+            return new HtmlContentBuilder(capacity: 2)
+                .AppendHtml(checkbox)
                 .AppendHtml(hiddenForCheckbox);
         }
 
@@ -1089,9 +1090,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var shouldGenerateAntiforgery = antiforgery ?? method != FormMethod.Get;
             if (shouldGenerateAntiforgery)
             {
-                ViewContext.FormContext.EndOfFormContent.Add(
-                    _htmlGenerator.GenerateAntiforgery(ViewContext)
-                );
+                ViewContext.FormContext.EndOfFormContent
+                    .Add(_htmlGenerator.GenerateAntiforgery(ViewContext));
             }
 
             return CreateForm();
@@ -1149,9 +1149,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var shouldGenerateAntiforgery = antiforgery ?? method != FormMethod.Get;
             if (shouldGenerateAntiforgery)
             {
-                ViewContext.FormContext.EndOfFormContent.Add(
-                    _htmlGenerator.GenerateAntiforgery(ViewContext)
-                );
+                ViewContext.FormContext.EndOfFormContent
+                    .Add(_htmlGenerator.GenerateAntiforgery(ViewContext));
             }
 
             return CreateForm();

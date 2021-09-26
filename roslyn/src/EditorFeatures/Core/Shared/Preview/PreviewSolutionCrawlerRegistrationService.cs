@@ -78,24 +78,23 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
                 // this can't be called twice
                 Contract.ThrowIfFalse(_analyzeTask == null);
 
-                var asyncToken = _owner._listener.BeginAsyncOperation(
-                    nameof(PreviewSolutionCrawlerRegistrationServiceFactory)
-                        + "."
-                        + nameof(Service)
-                        + "."
-                        + nameof(Register)
-                );
+                var asyncToken = _owner._listener
+                    .BeginAsyncOperation(
+                        nameof(PreviewSolutionCrawlerRegistrationServiceFactory)
+                            + "."
+                            + nameof(Service)
+                            + "."
+                            + nameof(Register)
+                    );
                 _analyzeTask = AnalyzeAsync().CompletesAsyncOperation(asyncToken);
             }
 
             private async Task AnalyzeAsync()
             {
-                var workerBackOffTimeSpanInMS = _workspace.Options.GetOption(
-                    InternalSolutionCrawlerOptions.PreviewBackOffTimeSpanInMS
-                );
-                var incrementalAnalyzer = _owner._analyzerService.CreateIncrementalAnalyzer(
-                    _workspace
-                );
+                var workerBackOffTimeSpanInMS = _workspace.Options
+                    .GetOption(InternalSolutionCrawlerOptions.PreviewBackOffTimeSpanInMS);
+                var incrementalAnalyzer = _owner._analyzerService
+                    .CreateIncrementalAnalyzer(_workspace);
 
                 var solution = _workspace.CurrentSolution;
                 var documentIds = _workspace.GetOpenDocumentIds().ToImmutableArray();
@@ -118,26 +117,26 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
                         if (textDocument is Document document)
                         {
                             await incrementalAnalyzer.AnalyzeSyntaxAsync(
-                                    document,
-                                    InvocationReasons.Empty,
-                                    _source.Token
-                                )
+                                document,
+                                InvocationReasons.Empty,
+                                _source.Token
+                            )
                                 .ConfigureAwait(false);
                             await incrementalAnalyzer.AnalyzeDocumentAsync(
-                                    document,
-                                    bodyOpt: null,
-                                    reasons: InvocationReasons.Empty,
-                                    cancellationToken: _source.Token
-                                )
+                                document,
+                                bodyOpt: null,
+                                reasons: InvocationReasons.Empty,
+                                cancellationToken: _source.Token
+                            )
                                 .ConfigureAwait(false);
                         }
                         else if (incrementalAnalyzer is IIncrementalAnalyzer2 incrementalAnalyzer2)
                         {
                             await incrementalAnalyzer2.AnalyzeNonSourceDocumentAsync(
-                                    textDocument,
-                                    InvocationReasons.Empty,
-                                    _source.Token
-                                )
+                                textDocument,
+                                InvocationReasons.Empty,
+                                _source.Token
+                            )
                                 .ConfigureAwait(false);
                         }
                         // don't call project one.

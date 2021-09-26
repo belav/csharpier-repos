@@ -286,7 +286,8 @@ struct S
                 Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "default").WithLocation(5, 21),
                 // (6,21): warning CS8601: Possible null reference assignment.
                 //     internal T F4 = default(T);
-                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "default(T)").WithLocation(6, 21)
+                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "default(T)")
+                    .WithLocation(6, 21)
             );
         }
 
@@ -2553,7 +2554,8 @@ public class C
             comp.VerifyDiagnostics(
                 // (6,28): warning CS8601: Possible null reference assignment.
                 //     static string Field1 = M(Field2); // 1
-                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "M(Field2)").WithLocation(6, 28),
+                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "M(Field2)")
+                    .WithLocation(6, 28),
                 // (7,28): warning CS8601: Possible null reference assignment.
                 //     static string Field2 = M(Field1); // 2
                 Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "M(Field1)").WithLocation(7, 28)

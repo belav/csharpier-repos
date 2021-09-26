@@ -258,9 +258,10 @@ FROM ""Orders"" AS ""o"""
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
-                                async
-                            )
+                            base
+                                .Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -273,9 +274,10 @@ FROM ""Orders"" AS ""o"""
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Correlated_collection_after_distinct_not_containing_original_identifier(
-                                async
-                            )
+                            base
+                                .Correlated_collection_after_distinct_not_containing_original_identifier(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -288,9 +290,10 @@ FROM ""Orders"" AS ""o"""
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
-                                async
-                            )
+                            base
+                                .Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -303,9 +306,10 @@ FROM ""Orders"" AS ""o"""
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
-                                async
-                            )
+                            base
+                                .Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -327,9 +331,10 @@ FROM ""Orders"" AS ""o"""
             bool async
         )
         {
-            return base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
-                async
-            );
+            return base
+                .Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
+                    async
+                );
         }
 
         public override Task Member_binding_after_ctor_arguments_fails_with_client_eval(bool async)
@@ -344,9 +349,10 @@ FROM ""Orders"" AS ""o"""
             bool async
         )
         {
-            return base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
-                async
-            );
+            return base
+                .SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
+                    async
+                );
         }
 
         public override async Task Collection_projection_selecting_outer_element_followed_by_take(
@@ -357,9 +363,10 @@ FROM ""Orders"" AS ""o"""
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Collection_projection_selecting_outer_element_followed_by_take(
-                                async
-                            )
+                            base
+                                .Collection_projection_selecting_outer_element_followed_by_take(
+                                    async
+                                )
                     )
                 ).Message
             );
@@ -372,9 +379,10 @@ FROM ""Orders"" AS ""o"""
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Take_on_top_level_and_on_collection_projection_with_outer_apply(
-                                async
-                            )
+                            base
+                                .Take_on_top_level_and_on_collection_projection_with_outer_apply(
+                                    async
+                                )
                     )
                 ).Message
             );

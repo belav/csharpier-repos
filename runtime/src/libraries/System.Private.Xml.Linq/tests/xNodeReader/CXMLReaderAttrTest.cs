@@ -1896,10 +1896,8 @@ namespace CoreXml.Test.XLinq
                 void TestUriChar(char ch)
                 {
                     string filename = string.Format("f{0}.dtd", ch);
-                    string strxml = string.Format(
-                        "<!DOCTYPE ROOT SYSTEM '{0}' []><ROOT></ROOT>",
-                        filename
-                    );
+                    string strxml = string
+                        .Format("<!DOCTYPE ROOT SYSTEM '{0}' []><ROOT></ROOT>", filename);
 
                     XmlReader r = GetReaderStr(strxml);
 

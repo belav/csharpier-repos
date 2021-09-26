@@ -100,14 +100,14 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                         var modifiers = generator.GetModifiers(fieldDeclarators.Key);
 
                         var newDeclaration = generator.FieldDeclaration(
-                                symbol.Name,
-                                generator.TypeExpression(symbol.Type),
-                                Accessibility.Private,
-                                fieldDeclarators.Contains(declarator)
-                                  ? WithReadOnly(modifiers)
-                                  : modifiers,
-                                GetInitializerNode(declarator)
-                            )
+                            symbol.Name,
+                            generator.TypeExpression(symbol.Type),
+                            Accessibility.Private,
+                            fieldDeclarators.Contains(declarator)
+                              ? WithReadOnly(modifiers)
+                              : modifiers,
+                            GetInitializerNode(declarator)
+                        )
                             .WithAdditionalAnnotations(Formatter.Annotation);
 
                         editor.InsertAfter(fieldDeclarators.Key, newDeclaration);

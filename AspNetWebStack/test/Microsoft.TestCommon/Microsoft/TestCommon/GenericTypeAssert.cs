@@ -621,8 +621,8 @@ namespace Microsoft.TestCommon
             Assert.NotNull(parameterInfos);
             Assert.NotNull(parameterTypes);
             Type[] parameterInfoTypes = parameterInfos.Select<ParameterInfo, Type>(
-                    (info) => info.ParameterType
-                )
+                (info) => info.ParameterType
+            )
                 .ToArray();
             if (parameterInfoTypes.Length != parameterTypes.Length)
             {
@@ -654,8 +654,8 @@ namespace Microsoft.TestCommon
             Assert.NotNull(parameterInfos);
             Assert.NotNull(parameterValues);
             Type[] parameterTypes = parameterInfos.Select<ParameterInfo, Type>(
-                    (info) => info.ParameterType
-                )
+                (info) => info.ParameterType
+            )
                 .ToArray();
             return AreAssignableFrom(parameterTypes, parameterValues);
         }

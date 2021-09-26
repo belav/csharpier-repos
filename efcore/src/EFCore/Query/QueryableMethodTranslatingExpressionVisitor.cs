@@ -821,9 +821,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             );
 
                             LambdaExpression GetLambdaExpressionFromArgument(int argumentIndex) =>
-                                methodCallExpression.Arguments[
-                                    argumentIndex
-                                ].UnwrapLambdaFromQuote();
+                                methodCallExpression.Arguments[argumentIndex]
+                                    .UnwrapLambdaFromQuote();
                     }
                 }
             }
@@ -908,7 +907,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 new ReplacingExpressionVisitor(
                     new[] { original1, original2 },
                     new[] { replacement1, replacement2 }
-                ).Visit(resultSelector.Body),
+                )
+                    .Visit(resultSelector.Body),
                 transparentIdentifierParameter
             );
 
@@ -930,11 +930,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             outerShaper = new MemberAccessShiftingExpressionVisitor(
                 queryExpression,
                 outerMemberInfo
-            ).Visit(outerShaper);
+            )
+                .Visit(outerShaper);
             innerShaper = new MemberAccessShiftingExpressionVisitor(
                 queryExpression,
                 innerMemberInfo
-            ).Visit(innerShaper);
+            )
+                .Visit(innerShaper);
 
             return Expression.New(
                 transparentIdentifierType.GetTypeInfo().DeclaredConstructors.Single(),

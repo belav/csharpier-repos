@@ -273,8 +273,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             _sb.Append("{");
 
             var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
-                    model.GetAnnotations()
-                )
+                model.GetAnnotations()
+            )
                 .ToDictionary(a => a.Name, a => a);
 
             _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(model, annotations);
@@ -361,8 +361,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             GenerateKey(entityType.FindPrimaryKey(), entityType, useDataAnnotations);
 
             var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
-                    entityType.GetAnnotations()
-                )
+                entityType.GetAnnotations()
+            )
                 .ToDictionary(a => a.Name, a => a);
             _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(entityType, annotations);
 
@@ -401,8 +401,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 // If there are annotations that cannot be represented using an IndexAttribute then use fluent API even
                 // if useDataAnnotations is true.
                 var indexAnnotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
-                        index.GetAnnotations()
-                    )
+                    index.GetAnnotations()
+                )
                     .ToDictionary(a => a.Name, a => a);
                 _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(
                     index,
@@ -469,8 +469,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             }
 
             var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
-                    key.GetAnnotations()
-                )
+                key.GetAnnotations()
+            )
                 .ToDictionary(a => a.Name, a => a);
             _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(key, annotations);
 
@@ -481,12 +481,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             {
                 if (
                     key is IConventionKey conventionKey
-                    && conventionKey.Properties.SequenceEqual(
-                        KeyDiscoveryConvention.DiscoverKeyProperties(
-                            conventionKey.DeclaringEntityType,
-                            conventionKey.DeclaringEntityType.GetProperties()
+                    && conventionKey.Properties
+                        .SequenceEqual(
+                            KeyDiscoveryConvention.DiscoverKeyProperties(
+                                conventionKey.DeclaringEntityType,
+                                conventionKey.DeclaringEntityType.GetProperties()
+                            )
                         )
-                    )
                 )
                 {
                     return;
@@ -570,8 +571,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         private void GenerateIndex(IIndex index)
         {
             var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
-                    index.GetAnnotations()
-                )
+                index.GetAnnotations()
+            )
                 .ToDictionary(a => a.Name, a => a);
             _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(index, annotations);
 
@@ -604,8 +605,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             };
 
             var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
-                    property.GetAnnotations()
-                )
+                property.GetAnnotations()
+            )
                 .ToDictionary(a => a.Name, a => a);
             _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(property, annotations);
             annotations.Remove(ScaffoldingAnnotationNames.ColumnOrdinal);
@@ -744,8 +745,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             var canUseDataAnnotations = true;
             var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
-                    foreignKey.GetAnnotations()
-                )
+                foreignKey.GetAnnotations()
+            )
                 .ToDictionary(a => a.Name, a => a);
             _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(foreignKey, annotations);
 
@@ -881,8 +882,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
         private IList<string> GenerateAnnotations(IEnumerable<IAnnotation> annotations) =>
             annotations.Select(
-                    a => $".HasAnnotation({_code.Literal(a.Name)}, {_code.UnknownLiteral(a.Value)})"
-                )
+                a => $".HasAnnotation({_code.Literal(a.Name)}, {_code.UnknownLiteral(a.Value)})"
+            )
                 .ToList();
     }
 }

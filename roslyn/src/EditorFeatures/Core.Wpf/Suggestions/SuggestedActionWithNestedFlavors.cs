@@ -70,10 +70,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 // We use ConfigureAwait(true) to stay on the UI thread.
                 _nestedFlavors = await extensionManager.PerformFunctionAsync(
-                        Provider,
-                        () => CreateAllFlavorsAsync(cancellationToken),
-                        defaultValue: ImmutableArray<SuggestedActionSet>.Empty
-                    )
+                    Provider,
+                    () => CreateAllFlavorsAsync(cancellationToken),
+                    defaultValue: ImmutableArray<SuggestedActionSet>.Empty
+                )
                     .ConfigureAwait(true);
             }
 
@@ -89,8 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
             // We use ConfigureAwait(true) to stay on the UI thread.
             var previewChangesSuggestedActionSet = await GetPreviewChangesFlavorAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(true);
             if (previewChangesSuggestedActionSet != null)
             {
@@ -111,9 +111,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         {
             // We use ConfigureAwait(true) to stay on the UI thread.
             var previewChangesAction = await PreviewChangesSuggestedAction.CreateAsync(
-                    this,
-                    cancellationToken
-                )
+                this,
+                cancellationToken
+            )
                 .ConfigureAwait(true);
             if (previewChangesAction == null)
             {
@@ -157,33 +157,32 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
             var extensionManager = this.Workspace.Services.GetService<IExtensionManager>();
             var previewContents = await extensionManager.PerformFunctionAsync(
-                    Provider,
-                    async () =>
+                Provider,
+                async () =>
+                {
+                    // We need to stay on UI thread after GetPreviewResultAsync() so that TakeNextPreviewAsync()
+                    // below can execute on UI thread. We use ConfigureAwait(true) to stay on the UI thread.
+                    var previewResult = await GetPreviewResultAsync(cancellationToken)
+                        .ConfigureAwait(true);
+                    if (previewResult == null)
                     {
-                        // We need to stay on UI thread after GetPreviewResultAsync() so that TakeNextPreviewAsync()
-                        // below can execute on UI thread. We use ConfigureAwait(true) to stay on the UI thread.
-                        var previewResult = await GetPreviewResultAsync(cancellationToken)
+                        return null;
+                    }
+                    else
+                    {
+                        // TakeNextPreviewAsync() needs to run on UI thread.
+                        AssertIsForeground();
+                        return await previewResult.GetPreviewsAsync(
+                            preferredDocumentId,
+                            preferredProjectId,
+                            cancellationToken
+                        )
                             .ConfigureAwait(true);
-                        if (previewResult == null)
-                        {
-                            return null;
-                        }
-                        else
-                        {
-                            // TakeNextPreviewAsync() needs to run on UI thread.
-                            AssertIsForeground();
-                            return await previewResult.GetPreviewsAsync(
-                                    preferredDocumentId,
-                                    preferredProjectId,
-                                    cancellationToken
-                                )
-                                .ConfigureAwait(true);
-                        }
-                        // GetPreviewPane() below needs to run on UI thread. We use ConfigureAwait(true) to stay on the UI thread.
-                    },
-                    defaultValue: null
-                )
-                .ConfigureAwait(true);
+                    }
+                    // GetPreviewPane() below needs to run on UI thread. We use ConfigureAwait(true) to stay on the UI thread.
+                },
+                defaultValue: null
+            ).ConfigureAwait(true);
 
             // GetPreviewPane() needs to run on the UI thread.
             AssertIsForeground();

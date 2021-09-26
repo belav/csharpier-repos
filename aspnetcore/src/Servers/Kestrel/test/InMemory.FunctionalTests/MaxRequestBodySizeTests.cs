@@ -462,11 +462,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         do
                         {
-                            count = await context.Request.Body.ReadAsync(
-                                buffer,
-                                offset,
-                                11 - offset
-                            );
+                            count = await context.Request.Body
+                                .ReadAsync(buffer, offset, 11 - offset);
                             offset += count;
                         } while (count != 0);
 

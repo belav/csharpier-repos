@@ -480,13 +480,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             );
 
-        private static readonly MethodInfo _containsKeyMethod = typeof(IDictionary<
-            string,
-            object
-        >).GetRequiredMethod(
-            nameof(IDictionary<string, object>.ContainsKey),
-            new[] { typeof(string) }
-        );
+        private static readonly MethodInfo _containsKeyMethod = typeof(IDictionary<string, object>)
+            .GetRequiredMethod(
+                nameof(IDictionary<string, object>.ContainsKey),
+                new[] { typeof(string) }
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

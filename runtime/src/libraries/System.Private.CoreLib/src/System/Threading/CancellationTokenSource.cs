@@ -768,7 +768,8 @@ namespace System.Threading
                     catch (Exception ex) when (!throwOnFirstException)
                     {
                         // Store the exception and continue
-                        (exceptionList ??= new List<Exception>()).Add(ex);
+                        (exceptionList ??= new List<Exception>())
+                            .Add(ex);
                     }
                     // Drop the node. While we could add it to the free list, doing so has cost (we'd need to take the lock again)
                     // and very limited value.  Since a source can only be canceled once, and after it's canceled registrations don't
@@ -928,10 +929,8 @@ namespace System.Threading
                 {
                     if (tokens[i].CanBeCanceled)
                     {
-                        _linkingRegistrations[i] = tokens[i].UnsafeRegister(
-                            s_linkedTokenCancelDelegate,
-                            this
-                        );
+                        _linkingRegistrations[i] = tokens[i]
+                            .UnsafeRegister(s_linkedTokenCancelDelegate, this);
                     }
                     // Empty slots in the array will be default(CancellationTokenRegistration), which are nops to Dispose.
                     // Based on usage patterns, such occurrences should also be rare, such that it's not worth resizing
@@ -1145,26 +1144,22 @@ namespace System.Threading
                 // callback to complete. While such polling isn't ideal, we expect this to be a rare case (disposing while
                 // the associated callback is running), and brief when it happens (so the polling will be minimal), and making
                 // this work with a callback mechanism will add additional cost to other more common cases.
-                return new ValueTask(
-                    Task.Factory.StartNew(
-                            static async s =>
+                return new ValueTask(Task.Factory.StartNew(
+                        static async s =>
+                        {
+                            var state = (TupleSlim<Registrations, long>)s!;
+                            while (
+                                Volatile.Read(ref state.Item1.ExecutingCallbackId) == state.Item2
+                            )
                             {
-                                var state = (TupleSlim<Registrations, long>)s!;
-                                while (
-                                    Volatile.Read(ref state.Item1.ExecutingCallbackId)
-                                    == state.Item2
-                                )
-                                {
-                                    await Task.Yield();
-                                }
-                            },
-                            new TupleSlim<Registrations, long>(this, id),
-                            CancellationToken.None,
-                            TaskCreationOptions.None,
-                            TaskScheduler.Default
-                        )
-                        .Unwrap()
-                );
+                                await Task.Yield();
+                            }
+                        },
+                        new TupleSlim<Registrations, long>(this, id),
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        TaskScheduler.Default
+                    ).Unwrap());
             }
 
             /// <summary>Enters the lock for this instance.  The current thread must not be holding the lock, but that is not validated.</summary>

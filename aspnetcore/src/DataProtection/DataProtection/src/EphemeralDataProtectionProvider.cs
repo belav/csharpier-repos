@@ -116,24 +116,25 @@ namespace Microsoft.AspNetCore.DataProtection
                 {
                     Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
 
-                    var descriptor =
-                        (CngGcmAuthenticatedEncryptorDescriptor)new T().CreateNewDescriptor();
-                    return new CngGcmAuthenticatedEncryptorFactory(
-                        loggerFactory
-                    ).CreateAuthenticatedEncryptorInstance(descriptor.MasterKey, cngConfiguration);
+                    var descriptor = (CngGcmAuthenticatedEncryptorDescriptor)new T()
+                        .CreateNewDescriptor();
+                    return new CngGcmAuthenticatedEncryptorFactory(loggerFactory)
+                        .CreateAuthenticatedEncryptorInstance(
+                            descriptor.MasterKey,
+                            cngConfiguration
+                        );
                 }
                 else if (
                     configuration is ManagedAuthenticatedEncryptorConfiguration managedConfiguration
                 )
                 {
-                    var descriptor =
-                        (ManagedAuthenticatedEncryptorDescriptor)new T().CreateNewDescriptor();
-                    return new ManagedAuthenticatedEncryptorFactory(
-                        loggerFactory
-                    ).CreateAuthenticatedEncryptorInstance(
-                        descriptor.MasterKey,
-                        managedConfiguration
-                    );
+                    var descriptor = (ManagedAuthenticatedEncryptorDescriptor)new T()
+                        .CreateNewDescriptor();
+                    return new ManagedAuthenticatedEncryptorFactory(loggerFactory)
+                        .CreateAuthenticatedEncryptorInstance(
+                            descriptor.MasterKey,
+                            managedConfiguration
+                        );
                 }
 
                 return null;

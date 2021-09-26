@@ -46,9 +46,8 @@ namespace Internal.Cryptography.Pal
 
                 if (applePal != null)
                 {
-                    SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(
-                        applePal.CertificateHandle
-                    );
+                    SafeSecKeyRefHandle key = Interop.AppleCrypto
+                        .X509GetPublicKey(applePal.CertificateHandle);
 
                     switch (oid.Value)
                     {
@@ -89,9 +88,8 @@ namespace Internal.Cryptography.Pal
                     throw new NotSupportedException(SR.NotSupported_KeyAlgorithm);
 
                 AppleCertificatePal applePal = (AppleCertificatePal)certificatePal;
-                SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(
-                    applePal.CertificateHandle
-                );
+                SafeSecKeyRefHandle key = Interop.AppleCrypto
+                    .X509GetPublicKey(applePal.CertificateHandle);
 
                 // If X509GetPublicKey uses the new SecCertificateCopyKey API it can return an invalid
                 // key reference for unsupported algorithms. This currently happens for the BrainpoolP160r1

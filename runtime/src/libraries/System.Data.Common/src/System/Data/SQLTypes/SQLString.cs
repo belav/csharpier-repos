@@ -420,15 +420,8 @@ namespace System.Data.SqlTypes
 
                 CompareOptions options = CompareOptionsFromSqlCompareOptions(x.m_flag);
 
-                iCmpResult = x.m_cmpInfo!.Compare(
-                    x.m_value,
-                    0,
-                    cwchX,
-                    y.m_value,
-                    0,
-                    cwchY,
-                    options
-                );
+                iCmpResult = x.m_cmpInfo!
+                    .Compare(x.m_value, 0, cwchX, y.m_value, 0, cwchY, options);
             }
 
             return iCmpResult;

@@ -422,27 +422,24 @@ class C
         )
         {
             var actualDefinitionCount = referenceItems.Select(
-                    item =>
-                        ((ClassifiedTextElement)item.Text).Runs.Where(
-                            run => run.MarkerTagType == DefinitionHighlightTag.TagId
-                        )
-                )
+                item =>
+                    ((ClassifiedTextElement)item.Text).Runs
+                        .Where(run => run.MarkerTagType == DefinitionHighlightTag.TagId)
+            )
                 .Where(i => i.Any())
                 .Count();
             var actualWrittenReferenceCount = referenceItems.Select(
-                    item =>
-                        ((ClassifiedTextElement)item.Text).Runs.Where(
-                            run => run.MarkerTagType == WrittenReferenceHighlightTag.TagId
-                        )
-                )
+                item =>
+                    ((ClassifiedTextElement)item.Text).Runs
+                        .Where(run => run.MarkerTagType == WrittenReferenceHighlightTag.TagId)
+            )
                 .Where(i => i.Any())
                 .Count();
             var actualReferenceCount = referenceItems.Select(
-                    item =>
-                        ((ClassifiedTextElement)item.Text).Runs.Where(
-                            run => run.MarkerTagType == ReferenceHighlightTag.TagId
-                        )
-                )
+                item =>
+                    ((ClassifiedTextElement)item.Text).Runs
+                        .Where(run => run.MarkerTagType == ReferenceHighlightTag.TagId)
+            )
                 .Where(i => i.Any())
                 .Count();
 

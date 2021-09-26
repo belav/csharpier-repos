@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
             protected AnalysisData()
             {
-                _allocatedBasicBlockAnalysisDatas =
-                    ArrayBuilder<BasicBlockAnalysisData>.GetInstance();
+                _allocatedBasicBlockAnalysisDatas = ArrayBuilder<BasicBlockAnalysisData>
+                    .GetInstance();
                 _referenceTakenSymbolsBuilder = PooledHashSet<ISymbol>.GetInstance();
                 CurrentBlockAnalysisData = CreateBlockAnalysisData();
                 AdditionalConditionalBranchAnalysisData = CreateBlockAnalysisData();
@@ -179,10 +179,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 bool
             > CreateSymbolsWriteMap(ImmutableArray<IParameterSymbol> parameters)
             {
-                var symbolsWriteMap = PooledDictionary<
-                    (ISymbol Symbol, IOperation Write),
-                    bool
-                >.GetInstance();
+                var symbolsWriteMap = PooledDictionary<(ISymbol Symbol, IOperation Write), bool>
+                    .GetInstance();
                 return UpdateSymbolsWriteMap(symbolsWriteMap, parameters);
             }
 

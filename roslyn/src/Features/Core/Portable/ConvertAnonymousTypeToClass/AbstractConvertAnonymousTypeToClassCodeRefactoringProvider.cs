@@ -48,10 +48,10 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
         {
             var (document, textSpan, cancellationToken) = context;
             var (anonymousObject, anonymousType) = await TryGetAnonymousObjectAsync(
-                    document,
-                    textSpan,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (anonymousObject == null || anonymousType == null)
@@ -99,9 +99,9 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             // E.g.: `var a = new [||]{ b=1,[||] c=2 };` both match due to the caret being next to `,` and `{`.
             var anonymousObject =
                 await document.TryGetRelevantNodeAsync<TAnonymousObjectCreationExpressionSyntax>(
-                        span,
-                        cancellationToken
-                    )
+                    span,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             if (anonymousObject == null)
                 return default;
@@ -123,10 +123,10 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
         )
         {
             var (anonymousObject, anonymousType) = await TryGetAnonymousObjectAsync(
-                    document,
-                    span,
-                    cancellationToken
-                )
+                document,
+                span,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             Debug.Assert(anonymousObject != null);
@@ -155,12 +155,12 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             // Next, generate the full class that will be used to replace all instances of this
             // anonymous type.
             var namedTypeSymbol = await GenerateFinalNamedTypeAsync(
-                    document,
-                    className,
-                    isRecord,
-                    properties,
-                    cancellationToken
-                )
+                document,
+                className,
+                isRecord,
+                properties,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var generator = SyntaxGenerator.GetGenerator(document);
@@ -177,25 +177,25 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             // the new PascalCased name we've picked for the new properties that will go in
             // the named type.
             await ReplacePropertyReferencesAsync(
-                    document,
-                    editor,
-                    containingMember,
-                    propertyMap,
-                    cancellationToken
-                )
+                document,
+                editor,
+                containingMember,
+                propertyMap,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Next, go through and replace all matching anonymous types in this method with a call
             // to construct the new named type we've generated.
             await ReplaceMatchingAnonymousTypesAsync(
-                    document,
-                    editor,
-                    namedTypeSymbol,
-                    containingMember,
-                    anonymousObject,
-                    anonymousType,
-                    cancellationToken
-                )
+                document,
+                editor,
+                namedTypeSymbol,
+                containingMember,
+                anonymousObject,
+                anonymousType,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Then, actually insert the new class in the appropriate container.
@@ -230,9 +230,9 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             var equalsAndGetHashCodeService =
                 document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
             return await equalsAndGetHashCodeService.FormatDocumentAsync(
-                    updatedDocument,
-                    cancellationToken
-                )
+                updatedDocument,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -340,7 +340,7 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
                     var classNameToken =
                         startingCreationNode == childCreation
                             ? g.Identifier(className)
-                                  .WithAdditionalAnnotations(RenameAnnotation.Create())
+                              .WithAdditionalAnnotations(RenameAnnotation.Create())
                             : g.Identifier(className);
 
                     var classNameNode =
@@ -422,28 +422,27 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
                 // Generate Equals/GetHashCode.  Only readonly properties are suitable for these
                 // methods.  We can defer to our existing language service for this so that we
                 // generate the same Equals/GetHashCode that our other IDE features generate.
-                var readonlyProperties = ImmutableArray<ISymbol>.CastUp(
-                    properties.WhereAsArray(p => p.SetMethod == null)
-                );
+                var readonlyProperties = ImmutableArray<ISymbol>
+                    .CastUp(properties.WhereAsArray(p => p.SetMethod == null));
 
                 var equalsAndGetHashCodeService =
                     document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
 
                 var equalsMethod = await equalsAndGetHashCodeService.GenerateEqualsMethodAsync(
-                        document,
-                        namedTypeWithoutMembers,
-                        readonlyProperties,
-                        localNameOpt: SyntaxGeneratorExtensions.OtherName,
-                        cancellationToken
-                    )
+                    document,
+                    namedTypeWithoutMembers,
+                    readonlyProperties,
+                    localNameOpt: SyntaxGeneratorExtensions.OtherName,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var getHashCodeMethod =
                     await equalsAndGetHashCodeService.GenerateGetHashCodeMethodAsync(
-                            document,
-                            namedTypeWithoutMembers,
-                            readonlyProperties,
-                            cancellationToken
-                        )
+                        document,
+                        namedTypeWithoutMembers,
+                        readonlyProperties,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 members.AddRange(properties);

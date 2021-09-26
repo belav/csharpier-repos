@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore
                                 SubjectId = "Su1"
                             }
                         )
-                    ).ToList();
+                    )
+                        .ToList();
 
                     Assert.Equal(2, results.Count);
                 }
@@ -317,7 +318,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = CreateContext())
             {
-                var entityTypeMappings = context.Model.GetEntityTypes()
+                var entityTypeMappings = context.Model
+                    .GetEntityTypes()
                     .Select(e => new EntityTypeMapping(e))
                     .ToList();
 
@@ -404,7 +406,8 @@ namespace Microsoft.EntityFrameworkCore
             ) => base.AddServices(serviceCollection).AddSingleton<OperationalStoreOptions>();
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .EnableDetailedErrors()
                     .EnableSensitiveDataLogging()
                     .ConfigureWarnings(

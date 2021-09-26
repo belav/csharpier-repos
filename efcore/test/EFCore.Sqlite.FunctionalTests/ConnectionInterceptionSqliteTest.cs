@@ -29,10 +29,11 @@ namespace Microsoft.EntityFrameworkCore
                 IServiceCollection serviceCollection,
                 IEnumerable<IInterceptor> injectedInterceptors
             ) =>
-                base.InjectInterceptors(
-                    serviceCollection.AddEntityFrameworkSqlite(),
-                    injectedInterceptors
-                );
+                base
+                    .InjectInterceptors(
+                        serviceCollection.AddEntityFrameworkSqlite(),
+                        injectedInterceptors
+                    );
         }
 
         public class ConnectionInterceptionSqliteTest

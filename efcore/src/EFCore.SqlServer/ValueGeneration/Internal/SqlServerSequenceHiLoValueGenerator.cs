@@ -58,11 +58,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
         protected override long GetNewLowValue() =>
             (long)Convert.ChangeType(
                 _rawSqlCommandBuilder.Build(
-                        _sqlGenerator.GenerateNextSequenceValueOperation(
-                            _sequence.Name,
-                            _sequence.Schema
-                        )
+                    _sqlGenerator.GenerateNextSequenceValueOperation(
+                        _sequence.Name,
+                        _sequence.Schema
                     )
+                )
                     .ExecuteScalar(
                         new RelationalCommandParameterObject(
                             _connection,
@@ -87,11 +87,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
         ) =>
             (long)Convert.ChangeType(
                 await _rawSqlCommandBuilder.Build(
-                        _sqlGenerator.GenerateNextSequenceValueOperation(
-                            _sequence.Name,
-                            _sequence.Schema
-                        )
+                    _sqlGenerator.GenerateNextSequenceValueOperation(
+                        _sequence.Name,
+                        _sequence.Schema
                     )
+                )
                     .ExecuteScalarAsync(
                         new RelationalCommandParameterObject(
                             _connection,

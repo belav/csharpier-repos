@@ -373,10 +373,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA64_01) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.test1Argument_HVA64_01),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.test1Argument_HVA64_01), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] { hva64_01 };
         }
 
@@ -394,10 +392,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA64_02) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.test1Argument_HVA64_02),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.test1Argument_HVA64_02), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] { hva64_02 };
         }
 
@@ -416,10 +412,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA64_03) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.test1Argument_HVA64_03),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.test1Argument_HVA64_03), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] { hva64_03 };
         }
 
@@ -439,10 +433,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA64_04) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.test1Argument_HVA64_04),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.test1Argument_HVA64_04), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] { hva64_04 };
         }
 
@@ -463,10 +455,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA64_05) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.test1Argument_HVA64_05),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.test1Argument_HVA64_05), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] { hva64_05 };
         }
 
@@ -491,10 +481,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] {  };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.returnTest_HVA64_01),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.returnTest_HVA64_01), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] {  };
         }
 
@@ -531,10 +519,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] {  };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.returnTest_HVA64_02),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.returnTest_HVA64_02), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] {  };
         }
 
@@ -573,10 +559,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] {  };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.returnTest_HVA64_03),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.returnTest_HVA64_03), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] {  };
         }
 
@@ -625,10 +609,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] {  };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.returnTest_HVA64_04),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.returnTest_HVA64_04), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] {  };
         }
 
@@ -683,10 +665,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] {  };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.returnTest_HVA64_05),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.returnTest_HVA64_05), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] {  };
         }
 
@@ -738,10 +718,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA128_01) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.test1Argument_HVA128_01),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.test1Argument_HVA128_01), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] { hva128_01 };
         }
 
@@ -759,10 +737,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA128_02) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.test1Argument_HVA128_02),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.test1Argument_HVA128_02), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] { hva128_02 };
         }
 
@@ -781,10 +757,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA128_03) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.test1Argument_HVA128_03),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.test1Argument_HVA128_03), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] { hva128_03 };
         }
 
@@ -804,10 +778,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA128_04) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.test1Argument_HVA128_04),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.test1Argument_HVA128_04), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] { hva128_04 };
         }
 
@@ -828,10 +800,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA128_05) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.test1Argument_HVA128_05),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.test1Argument_HVA128_05), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] { hva128_05 };
         }
 
@@ -853,10 +823,8 @@ public static class VectorMgdMgd
         public void Init_Reflection_Return_HVA128_01()
         {
             reflectionParameterTypes = new Type[] {  };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.returnTest_HVA128_01),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.returnTest_HVA128_01), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] {  };
         }
 
@@ -893,10 +861,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] {  };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.returnTest_HVA128_02),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.returnTest_HVA128_02), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] {  };
         }
 
@@ -935,10 +901,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] {  };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.returnTest_HVA128_03),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.returnTest_HVA128_03), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] {  };
         }
 
@@ -987,10 +951,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] {  };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.returnTest_HVA128_04),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.returnTest_HVA128_04), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] {  };
         }
 
@@ -1045,10 +1007,8 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] {  };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
-                nameof(HVATests<T>.returnTest_HVA128_05),
-                reflectionParameterTypes
-            );
+            reflectionMethodInfo = typeof(HVATests<T>)
+                .GetMethod(nameof(HVATests<T>.returnTest_HVA128_05), reflectionParameterTypes);
             reflectionInvokeArgs = new object[] {  };
         }
 

@@ -256,10 +256,9 @@ namespace Microsoft.AspNetCore.Routing.Template
             {
                 // Parameter with a required value is matched as a literal
                 if (
-                    routePattern.RequiredValues.TryGetValue(
-                        parameterPart.Name,
-                        out var requiredValue
-                    ) && !RouteValueEqualityComparer.Default.Equals(requiredValue, string.Empty)
+                    routePattern.RequiredValues
+                        .TryGetValue(parameterPart.Name, out var requiredValue)
+                    && !RouteValueEqualityComparer.Default.Equals(requiredValue, string.Empty)
                 )
                 {
                     return 1;

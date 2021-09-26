@@ -48,14 +48,15 @@ namespace Microsoft.AspNetCore.Hosting
                         catch (Exception ex)
                         {
                             throw new Exception(
-                                string.Format(
-                                    CultureInfo.InvariantCulture,
-                                    "Could not resolve a service of type '{0}' for the parameter '{1}' of method '{2}' on type '{3}'.",
-                                    parameterInfo.ParameterType.FullName,
-                                    parameterInfo.Name,
-                                    MethodInfo.Name,
-                                    MethodInfo.DeclaringType?.FullName
-                                ),
+                                string
+                                    .Format(
+                                        CultureInfo.InvariantCulture,
+                                        "Could not resolve a service of type '{0}' for the parameter '{1}' of method '{2}' on type '{3}'.",
+                                        parameterInfo.ParameterType.FullName,
+                                        parameterInfo.Name,
+                                        MethodInfo.Name,
+                                        MethodInfo.DeclaringType?.FullName
+                                    ),
                                 ex
                             );
                         }

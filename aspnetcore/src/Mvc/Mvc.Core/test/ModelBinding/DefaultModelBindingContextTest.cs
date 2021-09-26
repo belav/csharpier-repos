@@ -32,15 +32,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             };
 
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider.ForType<object>()
-                .BindingDetails(
-                    d =>
-                    {
-                        d.BindingSource = BindingSource.Custom;
-                        d.BinderType = typeof(TestModelBinder);
-                        d.BinderModelName = "custom";
-                    }
-                );
+            metadataProvider.ForType<object>().BindingDetails(
+                d =>
+                {
+                    d.BindingSource = BindingSource.Custom;
+                    d.BinderType = typeof(TestModelBinder);
+                    d.BinderModelName = "custom";
+                }
+            );
 
             var newModelMetadata = metadataProvider.GetMetadataForType(typeof(object));
 

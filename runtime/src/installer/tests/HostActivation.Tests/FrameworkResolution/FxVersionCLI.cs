@@ -35,15 +35,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(
-                                    MicrosoftNETCoreApp,
-                                    frameworkReferenceVersion
-                                )
-                        )
-                        .WithCommandLine(Constants.FxVersion.CommandLineArgument, fxVersion)
-                )
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
+                        runtimeConfig =>
+                            runtimeConfig.WithFramework(
+                                MicrosoftNETCoreApp,
+                                frameworkReferenceVersion
+                            )
+                    )
+                    .WithCommandLine(Constants.FxVersion.CommandLineArgument, fxVersion)
+            )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
 
@@ -62,19 +63,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         )
         {
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(MicrosoftNETCoreApp, "2.5.4")
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
+                        runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "2.5.4")
+                    )
+                    .WithCommandLine(Constants.FxVersion.CommandLineArgument, "2.5.5")
+                    .With(
+                        RollForwardOnNoCandidateFxSetting(
+                            SettingLocation.CommandLine,
+                            rollForwardOnNoCandidateFx
                         )
-                        .WithCommandLine(Constants.FxVersion.CommandLineArgument, "2.5.5")
-                        .With(
-                            RollForwardOnNoCandidateFxSetting(
-                                SettingLocation.CommandLine,
-                                rollForwardOnNoCandidateFx
-                            )
-                        )
-                        .With(ApplyPatchesSetting(SettingLocation.RuntimeOptions, applyPatches))
-                )
+                    )
+                    .With(ApplyPatchesSetting(SettingLocation.RuntimeOptions, applyPatches))
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "2.5.5");
         }
 
@@ -90,13 +91,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void IgnoresRollForwardSettings(string rollForward)
         {
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(MicrosoftNETCoreApp, "2.5.4")
-                        )
-                        .WithCommandLine(Constants.FxVersion.CommandLineArgument, "2.5.5")
-                        .With(RollForwardSetting(SettingLocation.CommandLine, rollForward))
-                )
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
+                        runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "2.5.4")
+                    )
+                    .WithCommandLine(Constants.FxVersion.CommandLineArgument, "2.5.5")
+                    .With(RollForwardSetting(SettingLocation.CommandLine, rollForward))
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "2.5.5");
         }
 
@@ -105,13 +106,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void AppliesToFirstFrameworkReference_NETCoreAppFirst()
         {
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(MicrosoftNETCoreApp, "1.0.0")
-                                    .WithFramework(MiddleWare, "2.1.2")
-                        )
-                        .WithCommandLine(Constants.FxVersion.CommandLineArgument, "2.5.5")
-                )
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
+                        runtimeConfig =>
+                            runtimeConfig.WithFramework(MicrosoftNETCoreApp, "1.0.0")
+                                .WithFramework(MiddleWare, "2.1.2")
+                    )
+                    .WithCommandLine(Constants.FxVersion.CommandLineArgument, "2.5.5")
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "2.5.5");
         }
 
@@ -120,13 +122,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void AppliesToFirstFrameworkReference_MiddleWareFirst()
         {
             RunTest(
-                    new TestSettings().WithRuntimeConfigCustomizer(
-                            runtimeConfig =>
-                                runtimeConfig.WithFramework(MiddleWare, "1.0.0")
-                                    .WithFramework(MicrosoftNETCoreApp, "2.5.0")
-                        )
-                        .WithCommandLine(Constants.FxVersion.CommandLineArgument, "2.1.2")
-                )
+                new TestSettings()
+                    .WithRuntimeConfigCustomizer(
+                        runtimeConfig =>
+                            runtimeConfig.WithFramework(MiddleWare, "1.0.0")
+                                .WithFramework(MicrosoftNETCoreApp, "2.5.0")
+                    )
+                    .WithCommandLine(Constants.FxVersion.CommandLineArgument, "2.1.2")
+            )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "2.5.5");
         }
 

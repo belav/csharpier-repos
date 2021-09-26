@@ -238,7 +238,8 @@ partial class C
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestCode = code,
                 FixedCode = code
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInitializeParameter)]
@@ -279,7 +280,8 @@ partial class C
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestCode = code,
                 FixedCode = code
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInitializeParameter)]
@@ -478,17 +480,17 @@ class C
     {{
         if (string.IsNullOrEmpty(a))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}").Replace("\"", "\\\"")}"", nameof(a));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}") .Replace("\"", "\\\"")}"", nameof(a));
         }}
 
         if (string.IsNullOrEmpty(b))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(b)}").Replace("\"", "\\\"")}"", nameof(b));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(b)}") .Replace("\"", "\\\"")}"", nameof(b));
         }}
 
         if (string.IsNullOrEmpty(c))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}").Replace("\"", "\\\"")}"", nameof(c));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}") .Replace("\"", "\\\"")}"", nameof(c));
         }}
     }}
 }}",
@@ -540,12 +542,12 @@ class C
     {{
         if (string.IsNullOrEmpty(a))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}").Replace("\"", "\\\"")}"", nameof(a));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}") .Replace("\"", "\\\"")}"", nameof(a));
         }}
 
         if (string.IsNullOrEmpty(c))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}").Replace("\"", "\\\"")}"", nameof(c));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}") .Replace("\"", "\\\"")}"", nameof(c));
         }}
     }}
 }}",
@@ -581,12 +583,12 @@ class C
     {{
         if (string.IsNullOrEmpty(a))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}").Replace("\"", "\\\"")}"", nameof(a));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}") .Replace("\"", "\\\"")}"", nameof(a));
         }}
 
         if (string.IsNullOrEmpty(c))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}").Replace("\"", "\\\"")}"", nameof(c));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}") .Replace("\"", "\\\"")}"", nameof(c));
         }}
     }}
 }}",
@@ -622,7 +624,7 @@ class C
     {{
         if (string.IsNullOrEmpty(a))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}").Replace("\"", "\\\"")}"", nameof(a));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}") .Replace("\"", "\\\"")}"", nameof(a));
         }}
 
         if (b is null)
@@ -632,7 +634,7 @@ class C
 
         if (string.IsNullOrEmpty(c))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}").Replace("\"", "\\\"")}"", nameof(c));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}") .Replace("\"", "\\\"")}"", nameof(c));
         }}
     }}
 }}",
@@ -1674,7 +1676,7 @@ class C
     {{
         if (string.IsNullOrEmpty(s))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
         }}
     }}
 }}",
@@ -1708,7 +1710,7 @@ class C
     {{
         if (string.IsNullOrWhiteSpace(s))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_whitespace, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_whitespace, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
         }}
     }}
 }}",
@@ -1746,7 +1748,7 @@ class C
     {{
         if (string.IsNullOrEmpty(s))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
         }}
     }}
 }}",
@@ -1800,7 +1802,7 @@ class Program
     {{
         if (String.IsNullOrEmpty(bar))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(bar)}").Replace("\"", "\\\"")}"", nameof(bar));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(bar)}") .Replace("\"", "\\\"")}"", nameof(bar));
         }}
     }}
 }}",
@@ -2111,7 +2113,9 @@ class C
                 new[]
                 {
                     // /0/Test0.cs(8,12): error CS0103: The name 'x' does not exist in the current context
-                    DiagnosticResult.CompilerError("CS0103").WithLocation(8, 12).WithArguments("x"),
+                    DiagnosticResult.CompilerError("CS0103")
+                        .WithLocation(8, 12)
+                        .WithArguments("x"),
                     // /0/Test0.cs(8,13): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithLocation(8, 13),
                     // /0/Test0.cs(8,13): error CS1026: ) expected
@@ -2420,7 +2424,7 @@ class C
     public C(string s)
     {{
         if (string.IsNullOrEmpty(s))
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
     }}
 }}",
                 Options =
@@ -2459,7 +2463,7 @@ class C
     public C(string s)
     {{
         if (string.IsNullOrEmpty(s))
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
     }}
 }}",
                 Options =
@@ -2499,7 +2503,7 @@ class C
     {{
         if (string.IsNullOrEmpty(s))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
         }}
     }}
 }}",
@@ -2538,7 +2542,7 @@ class C
 {{
     public C(string s)
     {{
-        if (string.IsNullOrEmpty(s)) throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+        if (string.IsNullOrEmpty(s)) throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
     }}
 }}",
                 Options =
@@ -2576,7 +2580,7 @@ class C
 {{
     public C(string s)
     {{
-        if (string.IsNullOrEmpty(s)) throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+        if (string.IsNullOrEmpty(s)) throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
     }}
 }}",
                 Options =
@@ -2616,7 +2620,7 @@ class C
     {{
         if (string.IsNullOrEmpty(s))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string .Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
         }}
     }}
 }}",

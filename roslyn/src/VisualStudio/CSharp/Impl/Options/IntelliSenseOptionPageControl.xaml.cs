@@ -40,10 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
                 LanguageNames.CSharp
             );
             Show_completion_list_after_a_character_is_deleted.IsChecked =
-                this.OptionStore.GetOption(
-                    CompletionOptions.TriggerOnDeletion,
-                    LanguageNames.CSharp
-                ) == true;
+                this.OptionStore
+                    .GetOption(CompletionOptions.TriggerOnDeletion, LanguageNames.CSharp) == true;
             Show_completion_list_after_a_character_is_deleted.IsEnabled =
                 Show_completion_list_after_a_character_is_typed.IsChecked == true;
 
@@ -96,14 +94,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
                 LanguageNames.CSharp
             );
 
-            Show_items_from_unimported_namespaces.IsChecked = this.OptionStore.GetOption(
-                CompletionOptions.ShowItemsFromUnimportedNamespaces,
-                LanguageNames.CSharp
-            );
-            Tab_twice_to_insert_arguments.IsChecked = this.OptionStore.GetOption(
-                CompletionOptions.EnableArgumentCompletionSnippets,
-                LanguageNames.CSharp
-            );
+            Show_items_from_unimported_namespaces.IsChecked = this.OptionStore
+                .GetOption(
+                    CompletionOptions.ShowItemsFromUnimportedNamespaces,
+                    LanguageNames.CSharp
+                );
+            Tab_twice_to_insert_arguments.IsChecked = this.OptionStore
+                .GetOption(
+                    CompletionOptions.EnableArgumentCompletionSnippets,
+                    LanguageNames.CSharp
+                );
         }
 
         private void Show_completion_list_after_a_character_is_typed_Checked(
@@ -128,21 +128,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
             object sender,
             RoutedEventArgs e
         ) =>
-            this.OptionStore.SetOption(
-                CompletionOptions.TriggerOnDeletion,
-                LanguageNames.CSharp,
-                value: true
-            );
+            this.OptionStore
+                .SetOption(CompletionOptions.TriggerOnDeletion, LanguageNames.CSharp, value: true);
 
         private void Show_completion_list_after_a_character_is_deleted_Unchecked(
             object sender,
             RoutedEventArgs e
         ) =>
-            this.OptionStore.SetOption(
-                CompletionOptions.TriggerOnDeletion,
-                LanguageNames.CSharp,
-                value: false
-            );
+            this.OptionStore
+                .SetOption(CompletionOptions.TriggerOnDeletion, LanguageNames.CSharp, value: false);
 
         private void Show_items_from_unimported_namespaces_CheckedChanged(
             object sender,
@@ -150,21 +144,23 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         )
         {
             Show_items_from_unimported_namespaces.IsThreeState = false;
-            this.OptionStore.SetOption(
-                CompletionOptions.ShowItemsFromUnimportedNamespaces,
-                LanguageNames.CSharp,
-                value: Show_items_from_unimported_namespaces.IsChecked
-            );
+            this.OptionStore
+                .SetOption(
+                    CompletionOptions.ShowItemsFromUnimportedNamespaces,
+                    LanguageNames.CSharp,
+                    value: Show_items_from_unimported_namespaces.IsChecked
+                );
         }
 
         private void Tab_twice_to_insert_arguments_CheckedChanged(object sender, RoutedEventArgs e)
         {
             Tab_twice_to_insert_arguments.IsThreeState = false;
-            this.OptionStore.SetOption(
-                CompletionOptions.EnableArgumentCompletionSnippets,
-                LanguageNames.CSharp,
-                value: Tab_twice_to_insert_arguments.IsChecked
-            );
+            this.OptionStore
+                .SetOption(
+                    CompletionOptions.EnableArgumentCompletionSnippets,
+                    LanguageNames.CSharp,
+                    value: Tab_twice_to_insert_arguments.IsChecked
+                );
         }
     }
 }

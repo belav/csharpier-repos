@@ -25,9 +25,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             using (Logger.LogBlock(FunctionId.FindReference, cancellationToken))
             {
                 var client = await RemoteHostClient.TryGetClientAsync(
-                        solution.Workspace,
-                        cancellationToken
-                    )
+                    solution.Workspace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (client != null)
                 {
@@ -37,28 +37,28 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     var serverCallback = new FindLiteralsServerCallback(solution, progress);
 
                     _ = await client.TryInvokeAsync<IRemoteSymbolFinderService>(
-                            solution,
-                            (service, solutionInfo, callbackId, cancellationToken) =>
-                                service.FindLiteralReferencesAsync(
-                                    solutionInfo,
-                                    callbackId,
-                                    value,
-                                    typeCode,
-                                    cancellationToken
-                                ),
-                            serverCallback,
-                            cancellationToken
-                        )
+                        solution,
+                        (service, solutionInfo, callbackId, cancellationToken) =>
+                            service.FindLiteralReferencesAsync(
+                                solutionInfo,
+                                callbackId,
+                                value,
+                                typeCode,
+                                cancellationToken
+                            ),
+                        serverCallback,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else
                 {
                     await FindLiteralReferencesInCurrentProcessAsync(
-                            value,
-                            solution,
-                            progress,
-                            cancellationToken
-                        )
+                        value,
+                        solution,
+                        progress,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }

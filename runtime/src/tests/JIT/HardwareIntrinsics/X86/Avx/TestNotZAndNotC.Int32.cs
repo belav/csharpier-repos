@@ -352,7 +352,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Avx).GetMethod(
+            var result = typeof(Avx)
+                .GetMethod(
                     nameof(Avx.TestNotZAndNotC),
                     new Type[] { typeof(Vector256<Int32>), typeof(Vector256<Int32>) }
                 )
@@ -372,7 +373,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Avx).GetMethod(
+            var result = typeof(Avx)
+                .GetMethod(
                     nameof(Avx.TestNotZAndNotC),
                     new Type[] { typeof(Vector256<Int32>), typeof(Vector256<Int32>) }
                 )
@@ -392,7 +394,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Avx).GetMethod(
+            var result = typeof(Avx)
+                .GetMethod(
                     nameof(Avx.TestNotZAndNotC),
                     new Type[] { typeof(Vector256<Int32>), typeof(Vector256<Int32>) }
                 )
@@ -645,9 +648,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Avx)}.{nameof(Avx.TestNotZAndNotC)}<Int32>(Vector256<Int32>, Vector256<Int32>): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Avx)}.{nameof(Avx.TestNotZAndNotC)}<Int32>(Vector256<Int32>, Vector256<Int32>): {method} failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");

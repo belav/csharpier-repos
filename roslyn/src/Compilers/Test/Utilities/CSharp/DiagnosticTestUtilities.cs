@@ -26,13 +26,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public override string ToString()
         {
-            return string.Format(
-                "Line={0}, Column={1}, Code={2}, IsWarning={3}",
-                this.Line,
-                this.Column,
-                this.Code,
-                this.IsWarning
-            );
+            return string
+                .Format(
+                    "Line={0}, Column={1}, Code={2}, IsWarning={3}",
+                    this.Line,
+                    this.Column,
+                    this.Code,
+                    this.IsWarning
+                );
         }
     }
 
@@ -180,13 +181,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 )
                 orderby ae.Code ,ae.Line ,ae.Column
                 select ae
-            ).ToList();
+            )
+                .ToList();
 
             var expectedSortedDesp = (
                 from ee in expectedErrorDesp
                 orderby ee.Code ,ee.Line ,ee.Column
                 select ee
-            ).ToList();
+            )
+                .ToList();
 
             int idx = 0;
             // actual >= expected
@@ -256,11 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             // allow actual errors contain more same errors, no line & column check
             Assert.InRange(expectedErrorDesp.Length, 0, actualErrors.Count());
 
-            var expectedCodes = (
-                from e in expectedErrorDesp
-                orderby e.Code
-                group e by e.Code
-            ).ToList();
+            var expectedCodes = (from e in expectedErrorDesp orderby e.Code  group e by e.Code)
+                .ToList();
 
             var actualCodes = (from e in actualErrors orderby e.Code  group e by e.Code).ToList();
 

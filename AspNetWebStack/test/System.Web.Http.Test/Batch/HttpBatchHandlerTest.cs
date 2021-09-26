@@ -139,8 +139,8 @@ namespace System.Web.Http
         {
             Mock<HttpBatchHandler> handler = new Mock<HttpBatchHandler>(new HttpServer());
             handler.Setup(
-                    h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
-                )
+                h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
+            )
                 .Returns(
                     Task.FromResult(
                         new HttpResponseMessage(HttpStatusCode.Redirect)
@@ -165,8 +165,8 @@ namespace System.Web.Http
         {
             Mock<HttpBatchHandler> handler = new Mock<HttpBatchHandler>(new HttpServer());
             handler.Setup(
-                    h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
-                )
+                h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
+            )
                 .Returns(
                     () =>
                     {
@@ -304,12 +304,12 @@ namespace System.Web.Http
                 MockBehavior.Strict
             );
             exceptionHandlerMock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<ExceptionHandlerContext, CancellationToken>((c, i) => c.Result = null)
                 .Returns(Task.FromResult(0));
             IExceptionHandler exceptionHandler = exceptionHandlerMock.Object;
@@ -352,12 +352,12 @@ namespace System.Web.Http
                     MockBehavior.Strict
                 );
                 exceptionHandlerMock.Setup(
-                        h =>
-                            h.HandleAsync(
-                                It.IsAny<ExceptionHandlerContext>(),
-                                It.IsAny<CancellationToken>()
-                            )
-                    )
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                     .Callback<ExceptionHandlerContext, CancellationToken>(
                         (c, i) => c.Result = new ResponseMessageResult(expectedResponse)
                     )
@@ -395,8 +395,8 @@ namespace System.Web.Http
         {
             Mock<HttpBatchHandler> handler = new Mock<HttpBatchHandler>(new HttpServer());
             handler.Setup(
-                    h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
-                )
+                h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
+            )
                 .Returns(
                     () =>
                     {
@@ -496,12 +496,12 @@ namespace System.Web.Http
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(Task.FromResult(0));
             return mock;
         }
@@ -515,12 +515,8 @@ namespace System.Web.Http
         {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
             mock.Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(Task.FromResult(0));
             return mock;
         }

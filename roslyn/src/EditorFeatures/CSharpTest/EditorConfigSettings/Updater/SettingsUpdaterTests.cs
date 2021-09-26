@@ -35,12 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    workspace.CurrentSolution.AddProject(
-                            projectId,
-                            "proj1",
-                            "proj1.dll",
-                            LanguageNames.CSharp
-                        )
+                    workspace.CurrentSolution
+                        .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp)
                         .AddDocument(
                             DocumentId.CreateNewId(projectId),
                             "goo.cs",
@@ -65,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         )
         {
             var solution = workspace.CurrentSolution;
-            var documentId = solution.Projects.Single()
+            var documentId = solution.Projects
+                .Single()
                 .State.AnalyzerConfigDocumentStates.Ids.First();
             var text = SourceText.From(contents);
             var newSolution1 = solution.WithAnalyzerConfigDocumentText(

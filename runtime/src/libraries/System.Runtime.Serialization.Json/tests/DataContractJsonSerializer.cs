@@ -25,10 +25,8 @@ public static partial class DataContractJsonSerializerTests
 
     static DataContractJsonSerializerTests()
     {
-        MethodInfo method = typeof(DataContractSerializer).GetMethod(
-            SerializationOptionSetterName,
-            BindingFlags.NonPublic | BindingFlags.Static
-        );
+        MethodInfo method = typeof(DataContractSerializer)
+            .GetMethod(SerializationOptionSetterName, BindingFlags.NonPublic | BindingFlags.Static);
         Assert.True(method != null, $"No method named {SerializationOptionSetterName}");
         method.Invoke(null, new object[] { 1 });
     }
@@ -144,14 +142,14 @@ public static partial class DataContractJsonSerializerTests
     {
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2013, 1, 2)
-        ).TotalMinutes;
-        var timeZoneString = string.Format(
-            "{0:+;-}{1}",
-            offsetMinutes,
-            new TimeSpan(0, offsetMinutes, 0).ToString(@"hhmm")
-        );
+        var offsetMinutes = (int)TimeZoneInfo.Local
+            .GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
+        var timeZoneString = string
+            .Format(
+                "{0:+;-}{1}",
+                offsetMinutes,
+                new TimeSpan(0, offsetMinutes, 0).ToString(@"hhmm")
+            );
         Assert.StrictEqual(
             SerializeAndDeserialize<DateTime>(
                 new DateTime(2013, 1, 2).AddMinutes(offsetMinutes),
@@ -168,9 +166,8 @@ public static partial class DataContractJsonSerializerTests
         );
         Assert.StrictEqual(
             SerializeAndDeserialize<DateTime>(
-                new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Unspecified).AddMinutes(
-                    offsetMinutes
-                ),
+                new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Unspecified)
+                    .AddMinutes(offsetMinutes),
                 string.Format(@"""\/Date(1357095845006{0})\/""", timeZoneString)
             ),
             new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Unspecified).AddMinutes(offsetMinutes)
@@ -1565,14 +1562,14 @@ public static partial class DataContractJsonSerializerTests
         Assert.Equal(jaggedStringArray[1], actualJaggedStringArray[1]);
         Assert.Equal(jaggedStringArray[2], actualJaggedStringArray[2]);
 
-        var offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2013, 1, 2)
-        ).TotalMinutes;
-        var timeZoneString = string.Format(
-            "{0:+;-}{1}",
-            offsetMinutes,
-            new TimeSpan(0, offsetMinutes, 0).ToString(@"hhmm")
-        );
+        var offsetMinutes = (int)TimeZoneInfo.Local
+            .GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
+        var timeZoneString = string
+            .Format(
+                "{0:+;-}{1}",
+                offsetMinutes,
+                new TimeSpan(0, offsetMinutes, 0).ToString(@"hhmm")
+            );
         object[] objectArray = new object[]
         {
             1,
@@ -1584,10 +1581,11 @@ public static partial class DataContractJsonSerializerTests
         };
         var actualObjectArray = SerializeAndDeserialize<object[]>(
             objectArray,
-            string.Format(
-                @"[1,1,1,""string"",""2054fd3e-e118-476a-9962-1a882be51860"",""\/Date(1357084800000{0})\/""]",
-                timeZoneString
-            )
+            string
+                .Format(
+                    @"[1,1,1,""string"",""2054fd3e-e118-476a-9962-1a882be51860"",""\/Date(1357084800000{0})\/""]",
+                    timeZoneString
+                )
         );
 
         Assert.StrictEqual(1, actualObjectArray[0]);
@@ -1649,19 +1647,21 @@ public static partial class DataContractJsonSerializerTests
             var offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(date).TotalMinutes;
             original.Add(date.AddMinutes(offsetMinutes));
             timeZoneStrings.Add(
-                string.Format(
-                    "{0:+;-}{1}",
-                    offsetMinutes,
-                    new TimeSpan(0, offsetMinutes, 0).ToString(@"hhmm")
-                )
+                string
+                    .Format(
+                        "{0:+;-}{1}",
+                        offsetMinutes,
+                        new TimeSpan(0, offsetMinutes, 0).ToString(@"hhmm")
+                    )
             );
         }
         var actual = SerializeAndDeserialize<EnumerableCollection>(
             original,
-            string.Format(
-                @"[""\/Date(946684800000{0})\/"",""\/Date(946771200000{0})\/"",""\/Date(946857600000{0})\/""]",
-                timeZoneStrings.ToArray()
-            )
+            string
+                .Format(
+                    @"[""\/Date(946684800000{0})\/"",""\/Date(946771200000{0})\/"",""\/Date(946857600000{0})\/""]",
+                    timeZoneStrings.ToArray()
+                )
         );
 
         Assert.Equal((IEnumerable<DateTime>)actual, (IEnumerable<DateTime>)original);
@@ -2559,10 +2559,8 @@ public static partial class DataContractJsonSerializerTests
         Assert.Throws<InvalidDataContractException>(
             () =>
             {
-                (new DataContractJsonSerializer(typeof(RecursiveCollection))).WriteObject(
-                    new MemoryStream(),
-                    new RecursiveCollection()
-                );
+                (new DataContractJsonSerializer(typeof(RecursiveCollection)))
+                    .WriteObject(new MemoryStream(), new RecursiveCollection());
             }
         );
     }
@@ -3355,11 +3353,12 @@ public static partial class DataContractJsonSerializerTests
         };
         var value = new DateTime(2010, 12, 1);
         var offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(value).TotalMinutes;
-        var timeZoneString = string.Format(
-            "{0:+;-}{1}",
-            offsetMinutes,
-            new TimeSpan(0, offsetMinutes, 0).ToString(@"hhmm")
-        );
+        var timeZoneString = string
+            .Format(
+                "{0:+;-}{1}",
+                offsetMinutes,
+                new TimeSpan(0, offsetMinutes, 0).ToString(@"hhmm")
+            );
         var baseline =
             $"\"\\/Date({1291161600000 - offsetMinutes * 60 * 1000}{timeZoneString})\\/\"";
         var actual = SerializeAndDeserialize(value, baseline, dcjsSettings);
@@ -3889,10 +3888,11 @@ public static partial class DataContractJsonSerializerTests
                     new DataContractSerializer(
                         typeof(TypeWithKnownTypesOfCollectionsWithConflictingXmlName)
                     )
-                ).WriteObject(
-                    new MemoryStream(),
-                    new TypeWithKnownTypesOfCollectionsWithConflictingXmlName()
-                );
+                )
+                    .WriteObject(
+                        new MemoryStream(),
+                        new TypeWithKnownTypesOfCollectionsWithConflictingXmlName()
+                    );
             }
         );
     }
@@ -3931,14 +3931,15 @@ public static partial class DataContractJsonSerializerTests
                 Utils.CompareResult result = Utils.Compare(baseline, actualOutput, false);
                 Assert.True(
                     result.Equal,
-                    string.Format(
-                        "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                        Environment.NewLine,
-                        result.ErrorMessage,
-                        value,
-                        baseline,
-                        actualOutput
-                    )
+                    string
+                        .Format(
+                            "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                            Environment.NewLine,
+                            result.ErrorMessage,
+                            value,
+                            baseline,
+                            actualOutput
+                        )
                 );
             }
 
@@ -4026,14 +4027,15 @@ public static partial class DataContractJsonSerializerTests
                 Utils.CompareResult result = Utils.Compare(baseline, actualOutput, false);
                 Assert.True(
                     result.Equal,
-                    string.Format(
-                        "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                        Environment.NewLine,
-                        result.ErrorMessage,
-                        value,
-                        baseline,
-                        actualOutput
-                    )
+                    string
+                        .Format(
+                            "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                            Environment.NewLine,
+                            result.ErrorMessage,
+                            value,
+                            baseline,
+                            actualOutput
+                        )
                 );
             }
             ms.Position = 0;

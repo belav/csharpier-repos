@@ -139,7 +139,8 @@ namespace System.Web.Mvc.Test
             string actionMethodName
         )
         {
-            ParameterInfo pInfo = typeof(MyController).GetMethod(actionMethodName)
+            ParameterInfo pInfo = typeof(MyController)
+                .GetMethod(actionMethodName)
                 .GetParameters()
                 .Single(p => p.Name == paramName);
             object returnValueObject;

@@ -29,13 +29,12 @@ namespace Microsoft.AspNetCore.Hosting
             var randomEnvKey = Guid.NewGuid().ToString();
             Environment.SetEnvironmentVariable("ASPNETCORE_" + randomEnvKey, "true");
             using var host = new HostBuilder().ConfigureWebHost(
-                    _ => { },
-                    webHostBulderOptions =>
-                    {
-                        webHostBulderOptions.SuppressEnvironmentConfiguration = true;
-                    }
-                )
-                .Build();
+                _ => { },
+                webHostBulderOptions =>
+                {
+                    webHostBulderOptions.SuppressEnvironmentConfiguration = true;
+                }
+            ).Build();
             var config = host.Services.GetRequiredService<IConfiguration>();
             Assert.Null(config[randomEnvKey]);
             Environment.SetEnvironmentVariable("ASPNETCORE_" + randomEnvKey, null);

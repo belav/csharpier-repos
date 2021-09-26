@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
             // Assert
             var tagHelper = FindTagHelperNode(irDocument);
-            var setProperty = tagHelper.Children.OfType<TagHelperPropertyIntermediateNode>()
+            var setProperty = tagHelper.Children
+                .OfType<TagHelperPropertyIntermediateNode>()
                 .Single();
 
             var token = Assert.IsAssignableFrom<IntermediateToken>(
@@ -85,7 +86,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
             // Assert
             var tagHelper = FindTagHelperNode(irDocument);
-            var setProperty = tagHelper.Children.OfType<TagHelperPropertyIntermediateNode>()
+            var setProperty = tagHelper.Children
+                .OfType<TagHelperPropertyIntermediateNode>()
                 .Single();
 
             var expression = Assert.IsType<CSharpExpressionIntermediateNode>(
@@ -134,7 +136,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
             // Assert
             var tagHelper = FindTagHelperNode(irDocument);
-            var setProperty = tagHelper.Children.OfType<TagHelperPropertyIntermediateNode>()
+            var setProperty = tagHelper.Children
+                .OfType<TagHelperPropertyIntermediateNode>()
                 .Single();
 
             var expression = Assert.IsType<CSharpExpressionIntermediateNode>(

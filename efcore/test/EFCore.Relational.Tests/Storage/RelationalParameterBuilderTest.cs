@@ -80,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var property = model.AddEntityType("MyType").AddProperty("MyProp", typeof(string));
             property.IsNullable = nullable;
 
-            RelationalTestHelpers.Instance.CreateContextServices()
+            RelationalTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<IModelRuntimeInitializer>()
                 .Initialize(model.FinalizeModel(), designTime: false, validationLogger: null);
 

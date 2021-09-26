@@ -40,10 +40,8 @@ namespace Microsoft.CodeAnalysis.Razor
             var targetAssembly = context.Items.GetTargetAssembly();
             if (
                 targetAssembly is not null
-                && !SymbolEqualityComparer.Default.Equals(
-                    targetAssembly,
-                    renderTreeBuilderType.ContainingAssembly
-                )
+                && !SymbolEqualityComparer.Default
+                    .Equals(targetAssembly, renderTreeBuilderType.ContainingAssembly)
             )
             {
                 return;
@@ -62,10 +60,8 @@ namespace Microsoft.CodeAnalysis.Razor
             builder.CaseSensitive = true;
             builder.Documentation = ComponentResources.KeyTagHelper_Documentation;
 
-            builder.Metadata.Add(
-                ComponentMetadata.SpecialKindKey,
-                ComponentMetadata.Key.TagHelperKind
-            );
+            builder.Metadata
+                .Add(ComponentMetadata.SpecialKindKey, ComponentMetadata.Key.TagHelperKind);
             builder.Metadata.Add(TagHelperMetadata.Common.ClassifyAttributesOnly, bool.TrueString);
             builder.Metadata[TagHelperMetadata.Runtime.Name] = ComponentMetadata.Key.RuntimeName;
 

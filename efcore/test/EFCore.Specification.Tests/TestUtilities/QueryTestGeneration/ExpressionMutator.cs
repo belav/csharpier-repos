@@ -20,28 +20,27 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
 
         static ExpressionMutator()
         {
-            IncludeMethodInfo = typeof(EntityFrameworkQueryableExtensions).GetMethods()
+            IncludeMethodInfo = typeof(EntityFrameworkQueryableExtensions)
+                .GetMethods()
                 .Where(
                     m =>
                         m.Name == nameof(EntityFrameworkQueryableExtensions.Include)
                         && m.GetParameters()[1].ParameterType != typeof(string)
                 )
                 .Single();
-            ThenIncludeCollectionMethodInfo =
-                typeof(EntityFrameworkQueryableExtensions).GetMethods()
-                    .Where(
-                        m =>
-                            m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
-                            && m.GetParameters()[0].ParameterType.GetGenericArguments()[
-                                1
-                            ].IsGenericType
-                            && m.GetParameters()[0].ParameterType.GetGenericArguments()[
-                                1
-                            ].GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                    )
-                    .Single();
+            ThenIncludeCollectionMethodInfo = typeof(EntityFrameworkQueryableExtensions)
+                .GetMethods()
+                .Where(
+                    m =>
+                        m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
+                        && m.GetParameters()[0].ParameterType.GetGenericArguments()[1].IsGenericType
+                        && m.GetParameters()[0].ParameterType.GetGenericArguments()[1]
+                            .GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                )
+                .Single();
 
-            ThenIncludeReferenceMethodInfo = typeof(EntityFrameworkQueryableExtensions).GetMethods()
+            ThenIncludeReferenceMethodInfo = typeof(EntityFrameworkQueryableExtensions)
+                .GetMethods()
                 .Where(
                     m =>
                         m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
@@ -104,11 +103,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
             if (type.IsArray)
             {
                 properties = properties.Where(
-                        p =>
-                            p.Name != "Rank"
-                            && p.Name != "IsFixedSize"
-                            && p.Name != "IsSynchronized"
-                    )
+                    p => p.Name != "Rank" && p.Name != "IsFixedSize" && p.Name != "IsSynchronized"
+                )
                     .ToList();
             }
 
@@ -121,12 +117,12 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
             if (entityType != null)
             {
                 properties = properties.Where(
-                        p =>
-                            entityType.GetProperties()
-                                .Where(pp => pp.PropertyInfo != null)
-                                .Select(pp => pp.Name)
-                                .Contains(p.Name)
-                    )
+                    p =>
+                        entityType.GetProperties()
+                            .Where(pp => pp.PropertyInfo != null)
+                            .Select(pp => pp.Name)
+                            .Contains(p.Name)
+                )
                     .ToList();
             }
 

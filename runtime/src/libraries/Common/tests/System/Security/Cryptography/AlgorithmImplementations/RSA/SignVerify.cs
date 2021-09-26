@@ -3825,7 +3825,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 + "7043497E7459A83349FE74320E77D471008CB7B43707561FA8DC9251F8EAE531"
                 + "5AC1894C4F9E6B7BECF993C146C5D6CF0DB60992A297F358A0895831965887C4"
                 + "B9153B96771C998CD61DA0C487D63555AE66F917F1BFDF509BFFEB21440F6A3C"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyExpectedSignature_Pss(
                 TestData.RSA2048Params,
@@ -3903,7 +3904,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 + "F169F0B64C353A40BC4AFF467C4B304B70751248B1B09F3781DDB84087B972FD"
                 + "0C92C6ABE141D38327BD810F87F0E058098B6E8A538E236C40955005AC4A232D"
                 + "22F7F9B479D0C093F18C4C4756B06F80132980E30716A3282306D1352CBBCD31"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyExpectedSignature_Pss(
                 TestData.RSA16384Params,
@@ -3922,7 +3924,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 + "7D5929A15DFEF58B51E6D43F46238FC1121AAA3A5F3DF6B56E0FE2B6205192AB"
                 + "BA9752FC9CFD3000B08E3A823514A93FD90871FD09A005DA191431487DAF6364"
                 + "22"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyExpectedSignature_Pss(
                 TestData.RSA1032Parameters,
@@ -3944,7 +3947,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 + "A859C17F4C7D611DE4C451291A3096A0D6230EE2699B79CD571DE6D441CB372A"
                 + "9D6E46080AB8041D45D4B9475CBE6B48D10F4332910869D8C3931133224475D9"
                 + "BA1E0B92161BB2C17A96F92432F2BA1AEBAD8C7CD33D79F5C6EFB9BF6F192205"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifyExpectedSignature_Pss(
                 TestData.RSA2048Params,
@@ -4046,7 +4050,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 + "E86380E9A68F6D7E8E8BD5C57B04E831DBBDBDCA20403EC988635F62D4B48382"
                 + "56E2AF4213FDCA6BF801C06AF6381DAC61288C13B08806A323B3E956A13BCB29"
                 + "680F62CCA9880A8A1FD1A2CA61DCFE008AC7FC55E98ACCE9B7BE010E5BCB836A"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             using (RSA rsa = RSAFactory.Create(TestData.RSA2048Params))
             {

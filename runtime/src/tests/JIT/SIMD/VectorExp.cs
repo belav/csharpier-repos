@@ -52,12 +52,8 @@ internal partial class VectorTest
         int returnVal = Pass;
 
         if (
-            VectorExpTest<float>.VectorExp(
-                Vector<float>.One,
-                (float)Math.Exp(1d),
-                Single.Epsilon,
-                1E-06f
-            ) != Pass
+            VectorExpTest<float>
+                .VectorExp(Vector<float>.One, (float)Math.Exp(1d), Single.Epsilon, 1E-06f) != Pass
         )
         {
             returnVal = Fail;

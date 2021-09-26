@@ -37,10 +37,8 @@ namespace System.ComponentModel.Tests
             yield return ConvertTest.Valid(
                 timeSpan,
                 new InstanceDescriptor(
-                    typeof(TimeSpan).GetMethod(
-                        nameof(TimeSpan.Parse),
-                        new Type[] { typeof(string) }
-                    ),
+                    typeof(TimeSpan)
+                        .GetMethod(nameof(TimeSpan.Parse), new Type[] { typeof(string) }),
                     new object[] { timeSpan.ToString() }
                 )
             );

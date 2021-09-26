@@ -397,7 +397,8 @@ namespace System.Reflection.Tests
                 | BindingFlags.DeclaredOnly
                 | BindingFlags.ExactBinding;
             MethodInfo mooNong = theT2.GetMethod("Moo", bf, null, new Type[] { theT2 }, null);
-            MethodInfo mooGeneric = typeof(TestClassWithGenericMethod<>).GetTypeInfo()
+            MethodInfo mooGeneric = typeof(TestClassWithGenericMethod<>)
+                .GetTypeInfo()
                 .GetDeclaredMethods("Moo")
                 .Single(m => m.IsGenericMethod);
             Type theM = mooGeneric.GetGenericArguments()[0];

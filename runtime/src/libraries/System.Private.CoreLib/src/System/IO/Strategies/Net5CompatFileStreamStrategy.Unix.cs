@@ -244,13 +244,14 @@ namespace System.IO.Strategies
             if (_useAsyncIO && _writePos > 0)
             {
                 return new ValueTask(
-                    Task.Factory.StartNew(
-                        static s => ((Net5CompatFileStreamStrategy)s!).Dispose(),
-                        this,
-                        CancellationToken.None,
-                        TaskCreationOptions.DenyChildAttach,
-                        TaskScheduler.Default
-                    )
+                    Task.Factory
+                        .StartNew(
+                            static s => ((Net5CompatFileStreamStrategy)s!).Dispose(),
+                            this,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            TaskScheduler.Default
+                        )
                 );
             }
 
@@ -456,9 +457,8 @@ namespace System.IO.Strategies
                     {
                         PrepareForReading();
 
-                        new Span<byte>(GetBuffer(), _readPos, destination.Length).CopyTo(
-                            destination.Span
-                        );
+                        new Span<byte>(GetBuffer(), _readPos, destination.Length)
+                            .CopyTo(destination.Span);
                         _readPos += destination.Length;
 
                         synchronousResult = destination.Length;

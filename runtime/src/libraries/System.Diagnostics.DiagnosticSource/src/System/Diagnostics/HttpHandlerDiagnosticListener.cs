@@ -578,8 +578,8 @@ namespace System.Diagnostics
                 {
                     // we expect baggage to be empty or contain a few items
                     using (
-                        IEnumerator<KeyValuePair<string, string>> e =
-                            activity.Baggage.GetEnumerator()
+                        IEnumerator<KeyValuePair<string, string>> e = activity.Baggage
+                            .GetEnumerator()
                     )
                     {
                         if (e.MoveNext())
@@ -671,10 +671,8 @@ namespace System.Diagnostics
 
             // First step: Get all the reflection objects we will ever need.
             Assembly systemNetHttpAssembly = typeof(ServicePoint).Assembly;
-            s_connectionGroupListField = typeof(ServicePoint).GetField(
-                "m_ConnectionGroupList",
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            s_connectionGroupListField = typeof(ServicePoint)
+                .GetField("m_ConnectionGroupList", BindingFlags.Instance | BindingFlags.NonPublic);
             s_connectionGroupType = systemNetHttpAssembly?.GetType("System.Net.ConnectionGroup");
             s_connectionListField = s_connectionGroupType?.GetField(
                 "m_ConnectionList",
@@ -734,10 +732,8 @@ namespace System.Diagnostics
 
         private static void PerformInjection()
         {
-            FieldInfo servicePointTableField = typeof(ServicePointManager).GetField(
-                "s_ServicePointTable",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            FieldInfo servicePointTableField = typeof(ServicePointManager)
+                .GetField("s_ServicePointTable", BindingFlags.Static | BindingFlags.NonPublic);
             if (servicePointTableField == null)
             {
                 // If anything went wrong here, just return false. There is nothing we can do.

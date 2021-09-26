@@ -64,13 +64,13 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task
             }
 
             return items.Select(
-                    er =>
-                        new EmbeddedItem
-                        {
-                            ManifestFilePath = GetManifestPath(er),
-                            AssemblyResourceName = GetAssemblyResourceName(er)
-                        }
-                )
+                er =>
+                    new EmbeddedItem
+                    {
+                        ManifestFilePath = GetManifestPath(er),
+                        AssemblyResourceName = GetAssemblyResourceName(er)
+                    }
+            )
                 .ToArray();
         }
 
@@ -91,18 +91,14 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task
         }
 
         private string GetManifestPath(ITaskItem taskItem) =>
-            string.Equals(
-                taskItem.GetMetadata(LogicalName),
-                taskItem.GetMetadata(ManifestResourceName)
-            )
+            string
+            .Equals(taskItem.GetMetadata(LogicalName), taskItem.GetMetadata(ManifestResourceName))
                 ? taskItem.GetMetadata(TargetPath)
                 : NormalizePath(taskItem.GetMetadata(LogicalName));
 
         private string GetAssemblyResourceName(ITaskItem taskItem) =>
-            string.Equals(
-                taskItem.GetMetadata(LogicalName),
-                taskItem.GetMetadata(ManifestResourceName)
-            )
+            string
+            .Equals(taskItem.GetMetadata(LogicalName), taskItem.GetMetadata(ManifestResourceName))
                 ? taskItem.GetMetadata(ManifestResourceName)
                 : taskItem.GetMetadata(LogicalName);
 

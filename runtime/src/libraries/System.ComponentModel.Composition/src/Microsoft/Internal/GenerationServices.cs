@@ -14,9 +14,8 @@ namespace Microsoft.Internal
     internal static class GenerationServices
     {
         // Type.GetTypeFromHandle
-        private static readonly MethodInfo s_typeGetTypeFromHandleMethod = typeof(Type).GetMethod(
-            "GetTypeFromHandle"
-        )!;
+        private static readonly MethodInfo s_typeGetTypeFromHandleMethod = typeof(Type)
+            .GetMethod("GetTypeFromHandle")!;
 
         // typeofs are pretty expensive, so we cache them statically
         private static readonly Type s_typeType = typeof(System.Type);
@@ -37,13 +36,11 @@ namespace Microsoft.Internal
             typeof(System.Collections.Generic.IEnumerable<>);
         private static readonly Type s_iEnumerableType = typeof(System.Collections.IEnumerable);
 
-        private static readonly MethodInfo ExceptionGetData = typeof(Exception).GetProperty(
-            "Data"
-        )!.GetGetMethod()!;
+        private static readonly MethodInfo ExceptionGetData = typeof(Exception).GetProperty("Data")!
+            .GetGetMethod()!;
         private static readonly MethodInfo DictionaryAdd = typeof(IDictionary).GetMethod("Add")!;
-        private static readonly ConstructorInfo ObjectCtor = typeof(object).GetConstructor(
-            Type.EmptyTypes
-        )!;
+        private static readonly ConstructorInfo ObjectCtor = typeof(object)
+            .GetConstructor(Type.EmptyTypes)!;
 
         public static ILGenerator CreateGeneratorForPublicConstructor(
             this TypeBuilder typeBuilder,

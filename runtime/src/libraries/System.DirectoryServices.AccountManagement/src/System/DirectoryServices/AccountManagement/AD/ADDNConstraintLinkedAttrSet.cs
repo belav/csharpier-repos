@@ -111,13 +111,13 @@ namespace System.DirectoryServices.AccountManagement
                         case ConstraintType.ContainerStringMatch:
 
                             if (this.current is SearchResult)
-                                dn = ((SearchResult)this.current).Properties["distinguishedName"][
-                                    0
-                                ].ToString();
+                                dn = ((SearchResult)this.current).Properties["distinguishedName"][0]
+                                    .ToString();
                             else
                                 dn = ((DirectoryEntry)this.current).Properties[
                                     "distinguishedName"
-                                ].Value.ToString();
+                                ].Value
+                                    .ToString();
 
                             if (dn.EndsWith((string)_constraintData, StringComparison.Ordinal))
                                 match = true;

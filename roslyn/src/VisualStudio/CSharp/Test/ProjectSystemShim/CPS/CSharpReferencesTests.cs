@@ -63,14 +63,14 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
 
             IEnumerable<ProjectReference> GetProject3ProjectReferences()
             {
-                return environment.Workspace.CurrentSolution.GetProject(
-                    project3.Id
-                ).ProjectReferences;
+                return environment.Workspace.CurrentSolution
+                    .GetProject(project3.Id).ProjectReferences;
             }
 
             IEnumerable<PortableExecutableReference> GetProject3MetadataReferences()
             {
-                return environment.Workspace.CurrentSolution.GetProject(project3.Id)
+                return environment.Workspace.CurrentSolution
+                    .GetProject(project3.Id)
                     .MetadataReferences.Cast<PortableExecutableReference>();
             }
 
@@ -184,7 +184,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
 
             bool AnalyzersContainsAnalyzer()
             {
-                return environment.Workspace.CurrentSolution.Projects.Single()
+                return environment.Workspace.CurrentSolution.Projects
+                    .Single()
                     .AnalyzerReferences.Cast<AnalyzerReference>()
                     .Any(a => a.FullPath == analyzerAssemblyFullPath);
             }

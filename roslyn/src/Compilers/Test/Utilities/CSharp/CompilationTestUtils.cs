@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string[] symbolDescriptions = (
                 from s in symbols
                 select s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
-            ).ToArray();
+            )
+                .ToArray();
             Array.Sort(descriptions);
             Array.Sort(symbolDescriptions);
 
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string[] symbolDescriptions = (
                 from s in symbols
                 select s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
-            ).ToArray();
+            )
+                .ToArray();
             Array.Sort(descriptions);
             Array.Sort(symbolDescriptions);
 
@@ -277,7 +279,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 get
                 {
-                    return this.MemberGroup.WhereAsArray(s => s.Kind == SymbolKind.Method)
+                    return this.MemberGroup
+                        .WhereAsArray(s => s.Kind == SymbolKind.Method)
                         .SelectAsArray(s => (IMethodSymbol)s);
                 }
             }
@@ -570,11 +573,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var model = compilation.GetSemanticModel(tree);
             var annotationsByMethod = allAnnotations.GroupBy(
-                    annotation =>
-                        annotation.Expression.Ancestors()
-                            .OfType<BaseMethodDeclarationSyntax>()
-                            .First()
-                )
+                annotation =>
+                    annotation.Expression.Ancestors().OfType<BaseMethodDeclarationSyntax>().First()
+            )
                 .ToArray();
             foreach (var annotations in annotationsByMethod)
             {
@@ -592,15 +593,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         );
                         // https://github.com/dotnet/roslyn/issues/35035: After refactoring symboldisplay, we should be able to just call something like typeInfo.Type.ToDisplayString(typeInfo.Nullability.FlowState, TypeWithState.TestDisplayFormat)
                         var type = TypeWithState.Create(
-                                (
-                                    annotation.IsConverted ? typeInfo.ConvertedType : typeInfo.Type
-                                ).GetSymbol(),
-                                (
-                                    annotation.IsConverted
-                                        ? typeInfo.ConvertedNullability
-                                        : typeInfo.Nullability
-                                ).FlowState.ToInternalFlowState()
-                            )
+                            (annotation.IsConverted ? typeInfo.ConvertedType : typeInfo.Type)
+                                .GetSymbol(),
+                            (
+                                annotation.IsConverted
+                                    ? typeInfo.ConvertedNullability
+                                    : typeInfo.Nullability
+                            ).FlowState
+                                .ToInternalFlowState()
+                        )
                             .ToTypeWithAnnotations(compilation);
                         return type.ToDisplayString(TypeWithAnnotations.TestDisplayFormat);
                     }

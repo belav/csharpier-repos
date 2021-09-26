@@ -145,12 +145,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             if (count <= 1)
                 return host;
 
-            return string.Join(
-                "",
-                new[] { host }.Concat(
-                    Enumerable.Range(0, count - 1).Select(i => $"Header-{i}: value{i}\r\n")
-                )
-            );
+            return string
+                .Join(
+                    "",
+                    new[] { host }
+                        .Concat(
+                            Enumerable.Range(0, count - 1).Select(i => $"Header-{i}: value{i}\r\n")
+                        )
+                );
         }
 
         private TestServer CreateServer(

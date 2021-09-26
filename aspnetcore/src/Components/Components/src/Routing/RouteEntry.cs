@@ -79,12 +79,13 @@ namespace Microsoft.AspNetCore.Components.Routing
                     {
                         // Unconstrained catch all, we can stop early
                         parameters ??= new(StringComparer.OrdinalIgnoreCase);
-                        parameters[templateSegment.Value] = string.Join(
-                            '/',
-                            context.Segments,
-                            pathIndex,
-                            context.Segments.Length - pathIndex
-                        );
+                        parameters[templateSegment.Value] = string
+                            .Join(
+                                '/',
+                                context.Segments,
+                                pathIndex,
+                                context.Segments.Length - pathIndex
+                            );
 
                         // Mark the remaining segments as consumed.
                         pathIndex = context.Segments.Length;
@@ -101,12 +102,13 @@ namespace Microsoft.AspNetCore.Components.Routing
                         if (pathIndex == context.Segments.Length)
                         {
                             parameters ??= new(StringComparer.OrdinalIgnoreCase);
-                            parameters[templateSegment.Value] = string.Join(
-                                '/',
-                                context.Segments,
-                                templateIndex,
-                                context.Segments.Length - templateIndex
-                            );
+                            parameters[templateSegment.Value] = string
+                                .Join(
+                                    '/',
+                                    context.Segments,
+                                    templateIndex,
+                                    context.Segments.Length - templateIndex
+                                );
 
                             // This is important to signal that we consumed the entire template.
                             templateIndex++;

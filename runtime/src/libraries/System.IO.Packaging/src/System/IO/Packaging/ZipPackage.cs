@@ -54,9 +54,8 @@ namespace System.IO.Packaging
             // Create new Zip item.
             // We need to remove the leading "/" character at the beginning of the part name.
             // The partUri object must be a ValidatedPartUri
-            string zipItemName = ((PackUriHelper.ValidatedPartUri)partUri).PartUriString.Substring(
-                1
-            );
+            string zipItemName = ((PackUriHelper.ValidatedPartUri)partUri).PartUriString
+                .Substring(1);
 
             ZipArchiveEntry zipArchiveEntry = _zipArchive.CreateEntry(zipItemName, level);
 
@@ -600,10 +599,11 @@ namespace System.IO.Packaging
                 //Refer to PackUriHelper.ValidatedPartUri.GetNormalizedPartUri method.
                 //Currently normalization just involves upper-casing ASCII and hence the simplification.
                 return (
-                    string.CompareOrdinal(
-                        extensionA.ToUpperInvariant(),
-                        extensionB.ToUpperInvariant()
-                    ) == 0
+                    string
+                        .CompareOrdinal(
+                            extensionA.ToUpperInvariant(),
+                            extensionB.ToUpperInvariant()
+                        ) == 0
                 );
             }
 
@@ -702,9 +702,8 @@ namespace System.IO.Packaging
                     || (
                         _defaultDictionary.ContainsKey(extension)
                         && !(
-                            foundMatchingDefault = _defaultDictionary[
-                                extension
-                            ].AreTypeAndSubTypeEqual(contentType)
+                            foundMatchingDefault = _defaultDictionary[extension]
+                                .AreTypeAndSubTypeEqual(contentType)
                         )
                     )
                 )
@@ -970,7 +969,8 @@ namespace System.IO.Packaging
                 foreach (ZipArchiveEntry zipFileInfo in zipFiles)
                 {
                     if (
-                        zipFileInfo.Name.ToUpperInvariant()
+                        zipFileInfo.Name
+                            .ToUpperInvariant()
                             .StartsWith(ContentTypesFileUpperInvariant, StringComparison.Ordinal)
                     )
                     {

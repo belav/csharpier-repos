@@ -86,15 +86,15 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters(variant);
 
-            deploymentParameters.WebConfigActionList.Add(
-                WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true")
-            );
-            deploymentParameters.WebConfigActionList.Add(
-                WebConfigHelpers.AddOrModifyAspNetCoreSection(
-                    "stdoutLogFile",
-                    Path.Combine("Q:", "std")
-                )
-            );
+            deploymentParameters.WebConfigActionList
+                .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true"));
+            deploymentParameters.WebConfigActionList
+                .Add(
+                    WebConfigHelpers.AddOrModifyAspNetCoreSection(
+                        "stdoutLogFile",
+                        Path.Combine("Q:", "std")
+                    )
+                );
 
             var deploymentResult = await DeployAsync(deploymentParameters);
 

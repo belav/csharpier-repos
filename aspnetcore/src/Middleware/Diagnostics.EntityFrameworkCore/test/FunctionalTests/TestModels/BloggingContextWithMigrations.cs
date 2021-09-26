@@ -51,14 +51,14 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
             protected override void Up(MigrationBuilder migrationBuilder)
             {
                 migrationBuilder.CreateTable(
-                        "Blogs",
-                        c =>
-                            new
-                            {
-                                BlogId = c.Column<int>().Annotation("Sqlite:Autoincrement", true),
-                                Name = c.Column<string>(nullable: true),
-                            }
-                    )
+                    "Blogs",
+                    c =>
+                        new
+                        {
+                            BlogId = c.Column<int>().Annotation("Sqlite:Autoincrement", true),
+                            Name = c.Column<string>(nullable: true),
+                        }
+                )
                     .PrimaryKey("PK_Blog", t => t.BlogId);
             }
 

@@ -46,12 +46,13 @@ namespace Castle.DynamicProxy
                 + "[assembly: InternalsVisibleTo({0})] attribute, because assembly {1} "
                 + "is{2} strong-named.";
 
-            var instructions = string.Format(
-                instructionsFormat,
-                assemblyToBeVisibleTo,
-                targetAssembly.GetName().Name,
-                strongNamedOrNotIndicator
-            );
+            var instructions = string
+                .Format(
+                    instructionsFormat,
+                    assemblyToBeVisibleTo,
+                    targetAssembly.GetName().Name,
+                    strongNamedOrNotIndicator
+                );
             return instructions;
 
             bool ReferencesCastleCore(Assembly ia)
@@ -79,11 +80,8 @@ namespace Castle.DynamicProxy
 
             var messageFormat = "Can not create proxy for type {0} because {1} is not accessible. ";
 
-            var message = string.Format(
-                messageFormat,
-                typeToProxy.GetBestName(),
-                inaccessibleTypeDescription
-            );
+            var message = string
+                .Format(messageFormat, typeToProxy.GetBestName(), inaccessibleTypeDescription);
 
             var instructions = CreateInstructionsToMakeVisible(targetAssembly);
 

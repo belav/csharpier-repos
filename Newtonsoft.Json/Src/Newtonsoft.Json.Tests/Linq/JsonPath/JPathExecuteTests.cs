@@ -94,12 +94,9 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                 () =>
                 {
                     regexBacktrackingData.SelectTokens(
-                            $"[?(@.b =~ /{RegexBacktrackingPattern}/)]",
-                            new JsonSelectSettings
-                            {
-                                RegexMatchTimeout = TimeSpan.FromSeconds(0.01)
-                            }
-                        )
+                        $"[?(@.b =~ /{RegexBacktrackingPattern}/)]",
+                        new JsonSelectSettings { RegexMatchTimeout = TimeSpan.FromSeconds(0.01) }
+                    )
                         .ToArray();
                 }
             );
@@ -1340,8 +1337,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             );
 
             IList<JToken> t = o.SelectTokens(
-                    "$.prop[?(@.childProp =='ff2dc672-6e15-4aa2-afb0-18f4f69596ad')]"
-                )
+                "$.prop[?(@.childProp =='ff2dc672-6e15-4aa2-afb0-18f4f69596ad')]"
+            )
                 .ToList();
             Assert.AreEqual(2, t.Count);
 
@@ -1416,16 +1413,14 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             // Lambton Quay
             // Willis Street
 
-            IList<string> firstProductNames = o["Manufacturers"].Select(
-                    m => (string)m.SelectToken("Products[1].Name")
-                )
+            IList<string> firstProductNames = o["Manufacturers"]
+                .Select(m => (string)m.SelectToken("Products[1].Name"))
                 .ToList();
             // null
             // Headlight Fluid
 
-            decimal totalPrice = o["Manufacturers"].Sum(
-                m => (decimal)m.SelectToken("Products[0].Price")
-            );
+            decimal totalPrice = o["Manufacturers"]
+                .Sum(m => (decimal)m.SelectToken("Products[0].Price"));
             // 149.95
 
             Assert.AreEqual(2, storeNames.Count);
@@ -1610,8 +1605,8 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             };
 
             List<JToken> result = rootObject.SelectTokens(
-                    "$.dateObjectsArray[?(@.date == $.referenceDate)]"
-                )
+                "$.dateObjectsArray[?(@.date == $.referenceDate)]"
+            )
                 .ToList();
             Assert.AreEqual(2, result.Count);
         }
@@ -1644,12 +1639,12 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             IEnumerable<string> mustBeString1 = o.SelectTokens("Values[?(@.Coercible !== 1)].Name")
                 .Select(x => (string)x);
             IEnumerable<string> mustBeString2 = o.SelectTokens(
-                    "Values[?(@.Coercible === '1')].Name"
-                )
+                "Values[?(@.Coercible === '1')].Name"
+            )
                 .Select(x => (string)x);
             IEnumerable<string> mustBeNumber2 = o.SelectTokens(
-                    "Values[?(@.Coercible !== '1')].Name"
-                )
+                "Values[?(@.Coercible !== '1')].Name"
+            )
                 .Select(x => (string)x);
 
             // FAILS-- JPath returns { "String" }

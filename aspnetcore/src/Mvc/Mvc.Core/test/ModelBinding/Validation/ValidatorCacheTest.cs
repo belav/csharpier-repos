@@ -15,10 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         {
             // Arrange
             var cache = new ValidatorCache();
-            var metadata = new TestModelMetadataProvider().GetMetadataForProperty(
-                typeof(TypeWithProperty),
-                "Property1"
-            );
+            var metadata = new TestModelMetadataProvider()
+                .GetMetadataForProperty(typeof(TypeWithProperty), "Property1");
             var validatorProvider = TestModelValidatorProvider.CreateDefaultProvider();
 
             // Act - 1
@@ -45,10 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         {
             // Arrange
             var cache = new ValidatorCache();
-            var metadata = new TestModelMetadataProvider().GetMetadataForProperty(
-                typeof(TypeWithProperty),
-                "Property1"
-            );
+            var metadata = new TestModelMetadataProvider()
+                .GetMetadataForProperty(typeof(TypeWithProperty), "Property1");
             var validatorProvider = new ProviderWithNonReusableValidators();
 
             // Act - 1

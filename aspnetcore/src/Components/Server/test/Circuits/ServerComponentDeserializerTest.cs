@@ -24,8 +24,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         {
             _ephemeralDataProtectionProvider = new EphemeralDataProtectionProvider();
             _protector = _ephemeralDataProtectionProvider.CreateProtector(
-                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
-                )
+                ServerComponentSerializationSettings.DataProtectionProviderPurpose
+            )
                 .ToTimeLimitedDataProtector();
         }
 
@@ -240,10 +240,10 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             // Arrange
             var firstChain = CreateMarkers(typeof(TestComponent));
             var secondChain = CreateMarkers(
-                    new ServerComponentInvocationSequence(),
-                    typeof(TestComponent),
-                    typeof(TestComponent)
-                )
+                new ServerComponentInvocationSequence(),
+                typeof(TestComponent),
+                typeof(TestComponent)
+            )
                 .Skip(1);
             var markers = SerializeMarkers(firstChain.Concat(secondChain).ToArray());
             var serverComponentDeserializer = CreateServerComponentDeserializer();
@@ -282,10 +282,10 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         {
             // Arrange
             var brokenChain = CreateMarkers(
-                    typeof(TestComponent),
-                    typeof(TestComponent),
-                    typeof(TestComponent)
-                )
+                typeof(TestComponent),
+                typeof(TestComponent),
+                typeof(TestComponent)
+            )
                 .Where(m => m.Sequence != 1)
                 .ToArray();
 

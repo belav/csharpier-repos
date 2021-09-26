@@ -126,11 +126,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                     new Asn1Tag(TagClass.ContextSpecific, 0)
                 );
                 System.Security.Cryptography.X509Certificates.Asn1.DistributionPointNameAsn tmpDistributionPoint;
-                System.Security.Cryptography.X509Certificates.Asn1.DistributionPointNameAsn.Decode(
-                    ref explicitReader,
-                    rebind,
-                    out tmpDistributionPoint
-                );
+                System.Security.Cryptography.X509Certificates.Asn1.DistributionPointNameAsn
+                    .Decode(ref explicitReader, rebind, out tmpDistributionPoint);
                 decoded.DistributionPoint = tmpDistributionPoint;
 
                 explicitReader.ThrowIfNotEmpty();
@@ -164,11 +161,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Asn1.GeneralNameAsn.Decode(
-                            ref collectionReader,
-                            rebind,
-                            out tmpItem
-                        );
+                        System.Security.Cryptography.Asn1.GeneralNameAsn
+                            .Decode(ref collectionReader, rebind, out tmpItem);
                         tmpList.Add(tmpItem);
                     }
 

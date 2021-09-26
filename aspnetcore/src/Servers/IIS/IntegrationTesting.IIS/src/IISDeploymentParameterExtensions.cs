@@ -155,16 +155,16 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             string path
         )
         {
-            deploymentParameters.WebConfigActionList.Add(
-                WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true")
-            );
+            deploymentParameters.WebConfigActionList
+                .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true"));
 
-            deploymentParameters.WebConfigActionList.Add(
-                WebConfigHelpers.AddOrModifyAspNetCoreSection(
-                    "stdoutLogFile",
-                    Path.Combine(path, "std")
-                )
-            );
+            deploymentParameters.WebConfigActionList
+                .Add(
+                    WebConfigHelpers.AddOrModifyAspNetCoreSection(
+                        "stdoutLogFile",
+                        Path.Combine(path, "std")
+                    )
+                );
         }
 
         public static void EnableFreb(
@@ -243,8 +243,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                 (element, contentRoot) =>
                 {
                     var traceFailedRequestsElement = element.RequiredElement(
-                            "system.applicationHost"
-                        )
+                        "system.applicationHost"
+                    )
                         .Element("sites")
                         .Element("siteDefaults")
                         .Element("traceFailedRequestsLogging");
@@ -320,7 +320,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                         ?? element.Element("location")
                             .RequiredElement("system.webServer")
                             .RequiredElement("modules")
-                    ).GetOrAdd("add", "name", moduleName);
+                    )
+                        .GetOrAdd("add", "name", moduleName);
                 }
             );
         }

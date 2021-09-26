@@ -55,9 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxNode variableDeclarator,
             SyntaxNode initializer
         ) =>
-            ((VariableDeclaratorSyntax)variableDeclarator).WithInitializer(
-                (EqualsValueClauseSyntax)initializer
-            );
+            ((VariableDeclaratorSyntax)variableDeclarator)
+                .WithInitializer((EqualsValueClauseSyntax)initializer);
 
         internal override SyntaxNode EqualsValueClause(
             SyntaxToken operatorToken,

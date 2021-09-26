@@ -23,10 +23,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// </param>
         /// <returns> <see langword="true" /> if SQL Server is being used; <see langword="false" /> otherwise. </returns>
         public static bool IsSqlServer(this MigrationBuilder migrationBuilder) =>
-            string.Equals(
-                migrationBuilder.ActiveProvider,
-                typeof(SqlServerOptionsExtension).Assembly.GetName().Name,
-                StringComparison.Ordinal
-            );
+            string
+                .Equals(
+                    migrationBuilder.ActiveProvider,
+                    typeof(SqlServerOptionsExtension).Assembly.GetName().Name,
+                    StringComparison.Ordinal
+                );
     }
 }

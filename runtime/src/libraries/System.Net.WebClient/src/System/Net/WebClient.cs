@@ -655,11 +655,12 @@ namespace System.Net
             string? contentType = headers[HttpKnownHeaderNames.ContentType];
             if (
                 contentType != null
-                && !string.Equals(
-                    contentType,
-                    UploadValuesContentType,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && !string
+                    .Equals(
+                        contentType,
+                        UploadValuesContentType,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 throw new WebException(SR.net_webclient_ContentType);
@@ -1016,8 +1017,8 @@ namespace System.Net
                             }
 
                             await writeStream.WriteAsync(
-                                    new ReadOnlyMemory<byte>(copyBuffer, 0, bytesRead)
-                                )
+                                new ReadOnlyMemory<byte>(copyBuffer, 0, bytesRead)
+                            )
                                 .ConfigureAwait(false);
                         }
                     }
@@ -1159,8 +1160,8 @@ namespace System.Net
                                 if (bytesRead <= 0)
                                     break;
                                 await writeStream.WriteAsync(
-                                        new ReadOnlyMemory<byte>(buffer, 0, bytesRead)
-                                    )
+                                    new ReadOnlyMemory<byte>(buffer, 0, bytesRead)
+                                )
                                     .ConfigureAwait(false);
 
                                 _progress.BytesSent += bytesRead;
@@ -1178,8 +1179,8 @@ namespace System.Net
                                 toWrite = chunkSize;
                             }
                             await writeStream.WriteAsync(
-                                    new ReadOnlyMemory<byte>(buffer, pos, toWrite)
-                                )
+                                new ReadOnlyMemory<byte>(buffer, pos, toWrite)
+                            )
                                 .ConfigureAwait(false);
                             pos += toWrite;
                             _progress.BytesSent += toWrite;
@@ -1338,9 +1339,8 @@ namespace System.Net
             if (str == null)
                 return null;
             byte[] bytes = Encoding.UTF8.GetBytes(str);
-            return Encoding.ASCII.GetString(
-                UrlEncodeBytesToBytesInternal(bytes, 0, bytes.Length, false)
-            );
+            return Encoding.ASCII
+                .GetString(UrlEncodeBytesToBytesInternal(bytes, 0, bytes.Length, false));
         }
 
         private static byte[] UrlEncodeBytesToBytesInternal(

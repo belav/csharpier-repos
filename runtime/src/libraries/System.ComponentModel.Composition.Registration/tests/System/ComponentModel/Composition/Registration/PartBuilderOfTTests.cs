@@ -282,8 +282,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             var builder = InternalCalls.PartBuilder<FooImplWithConstructors>(t => true);
             builder.SelectConstructor(
-                    param => new FooImplWithConstructors(param.Import<IEnumerable<IFoo>>())
-                )
+                param => new FooImplWithConstructors(param.Import<IEnumerable<IFoo>>())
+            )
                 .Export<IFoo>();
 
             IEnumerable<Attribute> typeAtts;
@@ -299,7 +299,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Assert.Equal(2, configuredMembers.Count);
 
             Tuple<object, List<Attribute>> tuple = configuredMembers[0]; // Constructor
-            ConstructorInfo ci = typeof(FooImplWithConstructors).GetConstructors()
+            ConstructorInfo ci = typeof(FooImplWithConstructors)
+                .GetConstructors()
                 .Where(c => c.GetParameters().Length == 1)
                 .Single();
             Assert.True(tuple.Item1 is ConstructorInfo);
@@ -318,8 +319,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             var builder = InternalCalls.PartBuilder<FooImplWithConstructors>(t => true);
             builder.SelectConstructor(
-                    param => new FooImplWithConstructors(param.Import<IEnumerable<IFoo>>())
-                )
+                param => new FooImplWithConstructors(param.Import<IEnumerable<IFoo>>())
+            )
                 .Export<IFoo>();
 
             IEnumerable<Attribute> typeAtts;
@@ -334,7 +335,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Assert.Equal(1, typeAtts.Count());
             Assert.Equal(2, configuredMembers.Count);
 
-            ConstructorInfo ci = typeof(FooImplWithConstructors).GetConstructors()
+            ConstructorInfo ci = typeof(FooImplWithConstructors)
+                .GetConstructors()
                 .Where(c => c.GetParameters().Length == 1)
                 .Single();
 

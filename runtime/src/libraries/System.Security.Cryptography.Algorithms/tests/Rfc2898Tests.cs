@@ -600,10 +600,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
         [Fact]
         public static void GetBytes_ExceedCounterLimit()
         {
-            FieldInfo blockField = typeof(Rfc2898DeriveBytes).GetField(
-                "_block",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            FieldInfo blockField = typeof(Rfc2898DeriveBytes)
+                .GetField("_block", BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.NotNull(blockField);
 
             using (

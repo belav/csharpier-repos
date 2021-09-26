@@ -119,10 +119,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // or that was explicitly written in code (so that GetSemanticInfo can find the syntax in the bound tree).
                 if (
                     !isCast
-                    && source.Type.Equals(
-                        destination,
-                        TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                    )
+                    && source.Type
+                        .Equals(
+                            destination,
+                            TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
                 )
                 {
                     return source;
@@ -337,7 +338,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     targetType: null,
                     constantValue,
                     type: destination
-                ).WithSuppression(source.IsSuppressed);
+                )
+                    .WithSuppression(source.IsSuppressed);
             }
 
             return new BoundConversion(
@@ -531,10 +533,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var constantValue = FoldConditionalOperator(condition, trueExpr, falseExpr);
             hasErrors |= constantValue?.IsBad == true;
             if (targetTyped && !destination.IsErrorType())
-                MessageID.IDS_FeatureTargetTypedConditional.CheckFeatureAvailability(
-                    diagnostics,
-                    source.Syntax
-                );
+                MessageID.IDS_FeatureTargetTypedConditional
+                    .CheckFeatureAvailability(diagnostics, source.Syntax);
 
             return new BoundConditionalOperator(
                 source.Syntax,
@@ -547,7 +547,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 wasTargetTyped: targetTyped,
                 destination,
                 hasErrors
-            ).WithSuppression(source.IsSuppressed);
+            )
+                .WithSuppression(source.IsSuppressed);
         }
 
         /// <summary>
@@ -569,9 +570,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || destination.Equals(source.Type, TypeCompareKind.ConsiderEverything)
             );
             ImmutableArray<Conversion> underlyingConversions = conversion.UnderlyingConversions;
-            var builder = ArrayBuilder<BoundSwitchExpressionArm>.GetInstance(
-                source.SwitchArms.Length
-            );
+            var builder = ArrayBuilder<BoundSwitchExpressionArm>
+                .GetInstance(source.SwitchArms.Length);
             for (int i = 0, n = source.SwitchArms.Length; i < n; i++)
             {
                 var oldCase = source.SwitchArms[i];
@@ -1082,7 +1082,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 sourceTuple.ArgumentNamesOpt,
                 sourceTuple.InferredNamesOpt,
                 targetType
-            ).WithSuppression(sourceTuple.IsSuppressed);
+            )
+                .WithSuppression(sourceTuple.IsSuppressed);
 
             if (
                 !TypeSymbol.Equals(

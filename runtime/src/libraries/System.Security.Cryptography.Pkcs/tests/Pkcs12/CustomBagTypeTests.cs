@@ -36,7 +36,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             byte[] input = (
                 "3033020103302E06092A864886F70D010701A021041F301D301B06092A864886"
                 + "F70D010701A00E040C300A3008060100A003040102"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             Pkcs12Info info = Pkcs12Info.Decode(input, out _, skipCopy: true);
             Assert.Equal(Pkcs12IntegrityMode.None, info.IntegrityMode);

@@ -150,10 +150,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 {
                     foreach (var typeAndBuilderPair in _exceptionTextBuilders)
                     {
-                        _comment._exceptionTexts.Add(
-                            typeAndBuilderPair.Key,
-                            typeAndBuilderPair.Value.AsImmutable()
-                        );
+                        _comment._exceptionTexts
+                            .Add(typeAndBuilderPair.Key, typeAndBuilderPair.Value.AsImmutable());
                     }
                 }
 
@@ -177,11 +175,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 builder.ParseCallback(reader);
 
             private static string TrimEachLine(string text) =>
-                string.Join(
-                    Environment.NewLine,
-                    text.Split(s_NewLineAsStringArray, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(i => i.Trim())
-                );
+                string
+                    .Join(
+                        Environment.NewLine,
+                        text.Split(s_NewLineAsStringArray, StringSplitOptions.RemoveEmptyEntries)
+                            .Select(i => i.Trim())
+                    );
 
             private void ParseCallback(XmlReader reader)
             {
@@ -236,7 +235,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             (
                                 _parameterNamesBuilder
                                 ?? (_parameterNamesBuilder = ImmutableArray.CreateBuilder<string>())
-                            ).Add(name);
+                            )
+                                .Add(name);
                             _comment._parameterTexts.Add(name, TrimEachLine(paramText));
                         }
                     }
@@ -256,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                                     _typeParameterNamesBuilder =
                                         ImmutableArray.CreateBuilder<string>()
                                 )
-                            ).Add(name);
+                            )
+                                .Add(name);
                             _comment._typeParameterTexts.Add(name, TrimEachLine(typeParamText));
                         }
                     }
@@ -278,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                                         _exceptionTypesBuilder =
                                             ImmutableArray.CreateBuilder<string>()
                                     )
-                                ).Add(type);
+                                )
+                                    .Add(type);
                                 (
                                     _exceptionTextBuilders
                                     ?? (
@@ -287,7 +289,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                                             ImmutableArray<string>.Builder
                                         >()
                                     )
-                                ).Add(type, ImmutableArray.CreateBuilder<string>());
+                                )
+                                    .Add(type, ImmutableArray.CreateBuilder<string>());
                             }
 
                             _exceptionTextBuilders[type].Add(exceptionText);

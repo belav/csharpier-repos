@@ -16,10 +16,8 @@ namespace Microsoft.Web.Mvc.Test
         public void RedirectToAction_DifferentController()
         {
             // Act
-            RedirectToRouteResult result =
-                new SampleController().RedirectToAction<DifferentController>(
-                    x => x.SomeOtherMethod(84)
-                );
+            RedirectToRouteResult result = new SampleController()
+                .RedirectToAction<DifferentController>(x => x.SomeOtherMethod(84));
 
             // Assert
             Assert.NotNull(result);
@@ -34,9 +32,8 @@ namespace Microsoft.Web.Mvc.Test
         public void RedirectToAction_SameController()
         {
             // Act
-            RedirectToRouteResult result = new SampleController().RedirectToAction(
-                x => x.SomeMethod(42)
-            );
+            RedirectToRouteResult result = new SampleController()
+                .RedirectToAction(x => x.SomeMethod(42));
 
             // Assert
             Assert.NotNull(result);

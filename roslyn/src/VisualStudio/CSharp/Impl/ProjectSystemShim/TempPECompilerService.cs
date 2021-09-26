@@ -76,9 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 trees,
                 parsedArguments.ResolveMetadataReferences(metadataResolver)
                     .Where(m => !(m is UnresolvedMetadataReference)),
-                parsedArguments.CompilationOptions.WithAssemblyIdentityComparer(
-                        DesktopAssemblyIdentityComparer.Default
-                    )
+                parsedArguments.CompilationOptions
+                    .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
                     .WithSourceReferenceResolver(SourceFileResolver.Default)
                     .WithXmlReferenceResolver(XmlFileResolver.Default)
                     .WithMetadataReferenceResolver(metadataResolver)
@@ -108,10 +107,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 {
                     // We get a pipe-delimited list of references, so split them back apart
                     foreach (
-                        var reference in ((string)optionValue).Split(
-                            new[] { '|' },
-                            StringSplitOptions.RemoveEmptyEntries
-                        )
+                        var reference in ((string)optionValue)
+                            .Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)
                     )
                     {
                         arguments.Add(string.Format("/r:\"{0}\"", reference));
@@ -134,11 +131,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 }
             }
 
-            return CSharpCommandLineParser.Default.Parse(
-                arguments,
-                baseDirectory,
-                RuntimeEnvironment.GetRuntimeDirectory()
-            );
+            return CSharpCommandLineParser.Default
+                .Parse(arguments, baseDirectory, RuntimeEnvironment.GetRuntimeDirectory());
         }
     }
 }

@@ -43,9 +43,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             var newLocalName = SyntaxFactory.IdentifierName(newLocalNameToken);
 
             var letClause = SyntaxFactory.LetClause(
-                    newLocalNameToken.WithAdditionalAnnotations(RenameAnnotation.Create()),
-                    expression
-                )
+                newLocalNameToken.WithAdditionalAnnotations(RenameAnnotation.Create()),
+                expression
+            )
                 .WithAdditionalAnnotations(Formatter.Annotation);
 
             var matches = FindMatches(

@@ -183,14 +183,15 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
                 // Match the remaining letters with exact case. i.e. match "ame" from "personName", "name"
                 index++;
-                return string.Compare(
-                        name,
-                        index,
-                        conventionName,
-                        1,
-                        conventionName.Length - 1,
-                        StringComparison.Ordinal
-                    ) == 0;
+                return string
+                        .Compare(
+                            name,
+                            index,
+                            conventionName,
+                            1,
+                            conventionName.Length - 1,
+                            StringComparison.Ordinal
+                        ) == 0;
             }
         }
 

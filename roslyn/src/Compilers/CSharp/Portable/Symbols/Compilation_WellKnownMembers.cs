@@ -140,9 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(type.IsValid());
 
-            bool ignoreCorLibraryDuplicatedTypes = this.Options.TopLevelBinderFlags.Includes(
-                BinderFlags.IgnoreCorLibraryDuplicatedTypes
-            );
+            bool ignoreCorLibraryDuplicatedTypes = this.Options.TopLevelBinderFlags
+                .Includes(BinderFlags.IgnoreCorLibraryDuplicatedTypes);
 
             int index = (int)type - (int)WellKnownType.First;
             if (_lazyWellKnownTypes == null || _lazyWellKnownTypes[index] is null)
@@ -170,15 +169,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // well-known types introduced before CSharp7 allow lookup ambiguity and report a warning
                     DiagnosticBag? legacyWarnings =
                         (type <= WellKnownType.CSharp7Sentinel) ? warnings : null;
-                    result = this.Assembly.GetTypeByMetadataName(
-                        mdName,
-                        includeReferences: true,
-                        useCLSCompliantNameArityEncoding: true,
-                        isWellKnownType: true,
-                        conflicts: out conflicts,
-                        warnings: legacyWarnings,
-                        ignoreCorLibraryDuplicatedTypes: ignoreCorLibraryDuplicatedTypes
-                    );
+                    result = this.Assembly
+                        .GetTypeByMetadataName(
+                            mdName,
+                            includeReferences: true,
+                            useCLSCompliantNameArityEncoding: true,
+                            isWellKnownType: true,
+                            conflicts: out conflicts,
+                            warnings: legacyWarnings,
+                            ignoreCorLibraryDuplicatedTypes: ignoreCorLibraryDuplicatedTypes
+                        );
                 }
 
                 if (result is null)
@@ -1399,10 +1399,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             );
                         }
 
-                        twa.Type.VisitType(
-                            visitor,
-                            (transformFlagsBuilder, addCustomModifierFlags)
-                        );
+                        twa.Type
+                            .VisitType(visitor, (transformFlagsBuilder, addCustomModifierFlags));
                     }
                 }
             }

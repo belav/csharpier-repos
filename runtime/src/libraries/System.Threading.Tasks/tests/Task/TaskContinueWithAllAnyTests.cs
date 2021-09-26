@@ -128,78 +128,64 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     {
                         if (_api == API.ContinueWhenAll)
                         {
-                            _continuation = Task.Factory.ContinueWhenAll(
-                                _tasks,
-                                allCompletedAction,
-                                _cancellationToken
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll(_tasks, allCompletedAction, _cancellationToken);
                         }
                         else // must be API.ContinueWhenAny
                         {
-                            _continuation = Task.Factory.ContinueWhenAny(
-                                _tasks,
-                                oneCompletedAction,
-                                _cancellationToken
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny(_tasks, oneCompletedAction, _cancellationToken);
                         }
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
                         {
-                            _continuation = Task.Factory.ContinueWhenAll(
-                                _tasks,
-                                allCompletedAction,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll(
+                                    _tasks,
+                                    allCompletedAction,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                         }
                         else // must be API.ContinueWhenAny
                         {
-                            _continuation = Task.Factory.ContinueWhenAny(
-                                _tasks,
-                                oneCompletedAction,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny(
+                                    _tasks,
+                                    oneCompletedAction,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                         }
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
                         {
-                            _continuation = Task.Factory.ContinueWhenAll(
-                                _tasks,
-                                allCompletedAction,
-                                _tcOption
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll(_tasks, allCompletedAction, _tcOption);
                         }
                         else // must be API.ContinueWhenAny
                         {
-                            _continuation = Task.Factory.ContinueWhenAny(
-                                _tasks,
-                                oneCompletedAction,
-                                _tcOption
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny(_tasks, oneCompletedAction, _tcOption);
                         }
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
                         {
-                            _continuation = Task.Factory.ContinueWhenAll(
-                                _tasks,
-                                allCompletedAction
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll(_tasks, allCompletedAction);
                         }
                         else // must be API.ContinueWhenAny
                         {
-                            _continuation = Task.Factory.ContinueWhenAny(
-                                _tasks,
-                                oneCompletedAction
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny(_tasks, oneCompletedAction);
                         }
                     }
                     break;
@@ -213,64 +199,66 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     if (_cancellationToken.CanBeCanceled)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double>(
-                                taskDoubles,
-                                allCompletedActionT,
-                                _cancellationToken
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<double>(
+                                    taskDoubles,
+                                    allCompletedActionT,
+                                    _cancellationToken
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double>(
-                                taskDoubles,
-                                oneCompletedActionT,
-                                _cancellationToken
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<double>(
+                                    taskDoubles,
+                                    oneCompletedActionT,
+                                    _cancellationToken
+                                );
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double>(
-                                taskDoubles,
-                                allCompletedActionT,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<double>(
+                                    taskDoubles,
+                                    allCompletedActionT,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double>(
-                                taskDoubles,
-                                oneCompletedActionT,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<double>(
+                                    taskDoubles,
+                                    oneCompletedActionT,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double>(
-                                taskDoubles,
-                                allCompletedActionT,
-                                _tcOption
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<double>(
+                                    taskDoubles,
+                                    allCompletedActionT,
+                                    _tcOption
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double>(
-                                taskDoubles,
-                                oneCompletedActionT,
-                                _tcOption
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<double>(
+                                    taskDoubles,
+                                    oneCompletedActionT,
+                                    _tcOption
+                                );
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double>(
-                                taskDoubles,
-                                allCompletedActionT
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<double>(taskDoubles, allCompletedActionT);
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double>(
-                                taskDoubles,
-                                oneCompletedActionT
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<double>(taskDoubles, oneCompletedActionT);
                     }
                     break;
 
@@ -279,64 +267,58 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     if (_cancellationToken.CanBeCanceled)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<bool>(
-                                _tasks,
-                                allCompletedFunc,
-                                _cancellationToken
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<bool>(
+                                    _tasks,
+                                    allCompletedFunc,
+                                    _cancellationToken
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<bool>(
-                                _tasks,
-                                oneCompletedFunc,
-                                _cancellationToken
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<bool>(
+                                    _tasks,
+                                    oneCompletedFunc,
+                                    _cancellationToken
+                                );
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<bool>(
-                                _tasks,
-                                allCompletedFunc,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<bool>(
+                                    _tasks,
+                                    allCompletedFunc,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<bool>(
-                                _tasks,
-                                oneCompletedFunc,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<bool>(
+                                    _tasks,
+                                    oneCompletedFunc,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<bool>(
-                                _tasks,
-                                allCompletedFunc,
-                                _tcOption
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<bool>(_tasks, allCompletedFunc, _tcOption);
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<bool>(
-                                _tasks,
-                                oneCompletedFunc,
-                                _tcOption
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<bool>(_tasks, oneCompletedFunc, _tcOption);
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<bool>(
-                                _tasks,
-                                allCompletedFunc
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<bool>(_tasks, allCompletedFunc);
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<bool>(
-                                _tasks,
-                                oneCompletedFunc
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<bool>(_tasks, oneCompletedFunc);
                     }
                     break;
 
@@ -345,64 +327,50 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     if (_cancellationToken.CanBeCanceled)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll(
-                                _tasks,
-                                allCompletedFunc,
-                                _cancellationToken
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAll(_tasks, allCompletedFunc, _cancellationToken);
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny(
-                                _tasks,
-                                oneCompletedFunc,
-                                _cancellationToken
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAny(_tasks, oneCompletedFunc, _cancellationToken);
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll(
-                                _tasks,
-                                allCompletedFunc,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAll(
+                                    _tasks,
+                                    allCompletedFunc,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny(
-                                _tasks,
-                                oneCompletedFunc,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAny(
+                                    _tasks,
+                                    oneCompletedFunc,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll(
-                                _tasks,
-                                allCompletedFunc,
-                                _tcOption
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAll(_tasks, allCompletedFunc, _tcOption);
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny(
-                                _tasks,
-                                oneCompletedFunc,
-                                _tcOption
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAny(_tasks, oneCompletedFunc, _tcOption);
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll(
-                                _tasks,
-                                allCompletedFunc
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAll(_tasks, allCompletedFunc);
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny(
-                                _tasks,
-                                oneCompletedFunc
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAny(_tasks, oneCompletedFunc);
                     }
                     break;
 
@@ -415,64 +383,66 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     if (_cancellationToken.CanBeCanceled)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(
-                                taskDoublesB,
-                                allCompletedFuncT,
-                                _cancellationToken
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<double, bool>(
+                                    taskDoublesB,
+                                    allCompletedFuncT,
+                                    _cancellationToken
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(
-                                taskDoublesB,
-                                oneCompletedFuncT,
-                                _cancellationToken
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<double, bool>(
+                                    taskDoublesB,
+                                    oneCompletedFuncT,
+                                    _cancellationToken
+                                );
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(
-                                taskDoublesB,
-                                allCompletedFuncT,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<double, bool>(
+                                    taskDoublesB,
+                                    allCompletedFuncT,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(
-                                taskDoublesB,
-                                oneCompletedFuncT,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<double, bool>(
+                                    taskDoublesB,
+                                    oneCompletedFuncT,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(
-                                taskDoublesB,
-                                allCompletedFuncT,
-                                _tcOption
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<double, bool>(
+                                    taskDoublesB,
+                                    allCompletedFuncT,
+                                    _tcOption
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(
-                                taskDoublesB,
-                                oneCompletedFuncT,
-                                _tcOption
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<double, bool>(
+                                    taskDoublesB,
+                                    oneCompletedFuncT,
+                                    _tcOption
+                                );
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(
-                                taskDoublesB,
-                                allCompletedFuncT
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAll<double, bool>(taskDoublesB, allCompletedFuncT);
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(
-                                taskDoublesB,
-                                oneCompletedFuncT
-                            );
+                            _continuation = Task.Factory
+                                .ContinueWhenAny<double, bool>(taskDoublesB, oneCompletedFuncT);
                     }
                     break;
 
@@ -484,64 +454,66 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     if (_cancellationToken.CanBeCanceled)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(
-                                taskDoublesC,
-                                allCompletedFuncT,
-                                _cancellationToken
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAll<double>(
+                                    taskDoublesC,
+                                    allCompletedFuncT,
+                                    _cancellationToken
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(
-                                taskDoublesC,
-                                oneCompletedFuncT,
-                                _cancellationToken
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAny<double>(
+                                    taskDoublesC,
+                                    oneCompletedFuncT,
+                                    _cancellationToken
+                                );
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(
-                                taskDoublesC,
-                                allCompletedFuncT,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAll<double>(
+                                    taskDoublesC,
+                                    allCompletedFuncT,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(
-                                taskDoublesC,
-                                oneCompletedFuncT,
-                                _cancellationToken,
-                                _tcOption,
-                                _tm
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAny<double>(
+                                    taskDoublesC,
+                                    oneCompletedFuncT,
+                                    _cancellationToken,
+                                    _tcOption,
+                                    _tm
+                                );
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(
-                                taskDoublesC,
-                                allCompletedFuncT,
-                                _tcOption
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAll<double>(
+                                    taskDoublesC,
+                                    allCompletedFuncT,
+                                    _tcOption
+                                );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(
-                                taskDoublesC,
-                                oneCompletedFuncT,
-                                _tcOption
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAny<double>(
+                                    taskDoublesC,
+                                    oneCompletedFuncT,
+                                    _tcOption
+                                );
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(
-                                taskDoublesC,
-                                allCompletedFuncT
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAll<double>(taskDoublesC, allCompletedFuncT);
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(
-                                taskDoublesC,
-                                oneCompletedFuncT
-                            );
+                            _continuation = Task<bool>.Factory
+                                .ContinueWhenAny<double>(taskDoublesC, oneCompletedFuncT);
                     }
                     break;
             }
@@ -625,10 +597,11 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             if (firstIncompleteTaskIndex != -1)
                 Assert.True(
                     false,
-                    string.Format(
-                        "ContinueWhenAll contract is broken -- Task at Index = {0} does not finish",
-                        firstIncompleteTaskIndex
-                    )
+                    string
+                        .Format(
+                            "ContinueWhenAll contract is broken -- Task at Index = {0} does not finish",
+                            firstIncompleteTaskIndex
+                        )
                 );
 
             // do the sanity check against the input tasks
@@ -654,10 +627,11 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             if (firstIncompleteTaskIndex != -1)
                 Assert.True(
                     false,
-                    string.Format(
-                        "ContinueWhenAll contract is broken -- Task at Index = {0} does not finish",
-                        firstIncompleteTaskIndex
-                    )
+                    string
+                        .Format(
+                            "ContinueWhenAll contract is broken -- Task at Index = {0} does not finish",
+                            firstIncompleteTaskIndex
+                        )
                 );
 
             // do the sanity check against the input tasks
@@ -742,11 +716,12 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                 if (_continuation.CreationOptions != option)
                     Assert.True(
                         false,
-                        string.Format(
-                            "Wrong TaskCreationOption of {0}, expecting {1}",
-                            _continuation.CreationOptions,
-                            _tcOption
-                        )
+                        string
+                            .Format(
+                                "Wrong TaskCreationOption of {0}, expecting {1}",
+                                _continuation.CreationOptions,
+                                _tcOption
+                            )
                     );
             }
             else
@@ -754,11 +729,12 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                 if (_continuation.CreationOptions != TaskCreationOptions.None)
                     Assert.True(
                         false,
-                        string.Format(
-                            "Wrong TaskCreationOption of {0}, expecting {1}",
-                            _continuation.CreationOptions,
-                            TaskCreationOptions.None
-                        )
+                        string
+                            .Format(
+                                "Wrong TaskCreationOption of {0}, expecting {1}",
+                                _continuation.CreationOptions,
+                                TaskCreationOptions.None
+                            )
                     );
             }
 
@@ -767,11 +743,12 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             if (TaskScheduler.Current != _tm)
                 Assert.True(
                     false,
-                    string.Format(
-                        "Wrong TaskScheduler of {0}, expecting {1}",
-                        TaskScheduler.Current.Id,
-                        _tm.Id
-                    )
+                    string
+                        .Format(
+                            "Wrong TaskScheduler of {0}, expecting {1}",
+                            TaskScheduler.Current.Id,
+                            _tm.Id
+                        )
                 );
 
             // check for the workload results
@@ -790,23 +767,22 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                         // should never come here
                         Assert.True(
                             false,
-                            string.Format(
-                                "excepted TPLTestException in Task at Index = {0}  NOT caught",
-                                i
-                            )
+                            string
+                                .Format(
+                                    "excepted TPLTestException in Task at Index = {0}  NOT caught",
+                                    i
+                                )
                         );
                     }
                     catch (AggregateException ex)
                     {
-                        ex.Flatten()
-                            .Handle(
-                                (e) =>
-                                {
-                                    TPLTestException expectedExp = e as TPLTestException;
-                                    return expectedExp != null
-                                        && expectedExp.FromTaskId == ti.Task.Id;
-                                }
-                            );
+                        ex.Flatten().Handle(
+                            (e) =>
+                            {
+                                TPLTestException expectedExp = e as TPLTestException;
+                                return expectedExp != null && expectedExp.FromTaskId == ti.Task.Id;
+                            }
+                        );
                     }
                 }
                 else if (workType == WorkloadType.Cancelled)
@@ -818,22 +794,22 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                         // should never come here
                         Assert.True(
                             false,
-                            string.Format(
-                                "excepted TaskCanceledException in Task at Index = {0}  NOT caught",
-                                i
-                            )
+                            string
+                                .Format(
+                                    "excepted TaskCanceledException in Task at Index = {0}  NOT caught",
+                                    i
+                                )
                         );
                     }
                     catch (AggregateException ex)
                     {
-                        ex.Flatten()
-                            .Handle(
-                                (e) =>
-                                {
-                                    TaskCanceledException expectedExp = e as TaskCanceledException;
-                                    return expectedExp != null && expectedExp.Task == ti.Task;
-                                }
-                            );
+                        ex.Flatten().Handle(
+                            (e) =>
+                            {
+                                TaskCanceledException expectedExp = e as TaskCanceledException;
+                                return expectedExp != null && expectedExp.Task == ti.Task;
+                            }
+                        );
                     }
                 }
                 else
@@ -843,12 +819,13 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     if (ti.Task.IsCompleted && !CheckResult(result))
                         Assert.True(
                             false,
-                            string.Format(
-                                "Failed result verification in Task at Index = {0}. Task result is {1} TaskStatus is {2}",
-                                i,
-                                result,
-                                ti.Task.Status
-                            )
+                            string
+                                .Format(
+                                    "Failed result verification in Task at Index = {0}. Task result is {1} TaskStatus is {2}",
+                                    i,
+                                    result,
+                                    ti.Task.Status
+                                )
                         );
                     //else if (ti.Thread == null && result != -1)
                     //{

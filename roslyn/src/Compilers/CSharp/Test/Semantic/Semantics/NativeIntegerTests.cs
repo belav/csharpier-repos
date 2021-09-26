@@ -81,10 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             Assert.Equal("void I.F1(System.IntPtr x, nint y)", method.ToTestDisplayString());
             Assert.Equal(
                 "Sub I.F1(x As System.IntPtr, y As System.IntPtr)",
-                VisualBasic.SymbolDisplay.ToDisplayString(
-                    method.GetPublicSymbol(),
-                    SymbolDisplayFormat.TestFormat
-                )
+                VisualBasic.SymbolDisplay
+                    .ToDisplayString(method.GetPublicSymbol(), SymbolDisplayFormat.TestFormat)
             );
             VerifyTypes(
                 (NamedTypeSymbol)method.Parameters[0].Type,
@@ -96,10 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             Assert.Equal("void I.F2(System.UIntPtr x, nuint y)", method.ToTestDisplayString());
             Assert.Equal(
                 "Sub I.F2(x As System.UIntPtr, y As System.UIntPtr)",
-                VisualBasic.SymbolDisplay.ToDisplayString(
-                    method.GetPublicSymbol(),
-                    SymbolDisplayFormat.TestFormat
-                )
+                VisualBasic.SymbolDisplay
+                    .ToDisplayString(method.GetPublicSymbol(), SymbolDisplayFormat.TestFormat)
             );
             VerifyTypes(
                 (NamedTypeSymbol)method.Parameters[0].Type,
@@ -355,8 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                 .Sort(SymbolComparison)
                 .SelectAsArray(m => m.ToTestDisplayString());
             var actualMembers = nativeIntegerMembers.WhereAsArray(
-                    m => includeNativeIntegerMember(m)
-                )
+                m => includeNativeIntegerMember(m)
+            )
                 .Sort(SymbolComparison)
                 .SelectAsArray(
                     m =>
@@ -550,8 +546,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             var expectedMembers = underlyingMembers.WhereAsArray(m => includeUnderlyingMember(m))
                 .Sort(SymbolComparison);
             var actualMembers = nativeIntegerMembers.WhereAsArray(
-                    m => includeNativeIntegerMember(m)
-                )
+                m => includeNativeIntegerMember(m)
+            )
                 .Sort(SymbolComparison);
 
             Assert.Equal(expectedMembers.Length, actualMembers.Length);
@@ -778,12 +774,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
 
             bool containsType(TypeWithAnnotations type, bool useNativeInteger)
             {
-                return type.Type.VisitType(
-                    (type, unused1, unused2) =>
-                        type.SpecialType == specialType
-                        && useNativeInteger == type.IsNativeIntegerType,
-                    (object)null
-                )
+                return type.Type
+                    .VisitType(
+                        (type, unused1, unused2) =>
+                            type.SpecialType == specialType
+                            && useNativeInteger == type.IsNativeIntegerType,
+                        (object)null
+                    )
                     is { };
             }
 
@@ -5626,11 +5623,12 @@ False
                 )
                 {
                     var builder = ArrayBuilder<UnaryOperatorSignature>.GetInstance();
-                    comp.builtInOperators.GetSimpleBuiltInOperators(
-                        operatorKind,
-                        builder,
-                        skipNativeIntegerOperators
-                    );
+                    comp.builtInOperators
+                        .GetSimpleBuiltInOperators(
+                            operatorKind,
+                            builder,
+                            skipNativeIntegerOperators
+                        );
                     var operators = builder.ToImmutableAndFree();
                     int expectedSigned = skipNativeIntegerOperators ? 0 : 1;
                     int expectedUnsigned = skipNativeIntegerOperators
@@ -5657,11 +5655,12 @@ False
                 )
                 {
                     var builder = ArrayBuilder<BinaryOperatorSignature>.GetInstance();
-                    comp.builtInOperators.GetSimpleBuiltInOperators(
-                        operatorKind,
-                        builder,
-                        skipNativeIntegerOperators
-                    );
+                    comp.builtInOperators
+                        .GetSimpleBuiltInOperators(
+                            operatorKind,
+                            builder,
+                            skipNativeIntegerOperators
+                        );
                     var operators = builder.ToImmutableAndFree();
                     int expected = skipNativeIntegerOperators ? 0 : 1;
                     verifyOperators(
@@ -7203,8 +7202,8 @@ class A
             var model = comp.GetSemanticModel(tree);
             var nodes = tree.GetRoot().DescendantNodes().OfType<PrefixUnaryExpressionSyntax>();
             var actualOperators = nodes.Select(
-                    n => model.GetSymbolInfo(n).Symbol.ToTestDisplayString()
-                )
+                n => model.GetSymbolInfo(n).Symbol.ToTestDisplayString()
+            )
                 .ToArray();
             var expectedOperators = new[]
             {
@@ -7254,8 +7253,8 @@ class A
             var model = comp.GetSemanticModel(tree);
             var nodes = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>();
             var actualOperators = nodes.Select(
-                    n => model.GetSymbolInfo(n).Symbol.ToTestDisplayString()
-                )
+                n => model.GetSymbolInfo(n).Symbol.ToTestDisplayString()
+            )
                 .ToArray();
             var expectedOperators = new[]
             {
@@ -15848,9 +15847,10 @@ enum E {{ }}
                 Assert.Equal(
                     expectedSymbol,
                     symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
                     )
                 );
 
@@ -15932,9 +15932,9 @@ enum E {{ }}
                     if (expectedSymbol == null && diagnostic == null)
                     {
                         diagnostic = Diagnostic(
-                                ErrorCode.ERR_BadUnaryOp,
-                                isPrefix ? op + "operand" : "operand" + op
-                            )
+                            ErrorCode.ERR_BadUnaryOp,
+                            isPrefix ? op + "operand" : "operand" + op
+                        )
                             .WithArguments(op, opType);
                     }
                     return diagnostic != null
@@ -16351,9 +16351,10 @@ class Program
                 Assert.Equal(
                     expectedSymbol,
                     symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
                     )
                 );
 
@@ -16645,9 +16646,10 @@ class Program
                 Assert.Equal(
                     expectedSymbol,
                     symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
                     )
                 );
 
@@ -22135,9 +22137,10 @@ class Program
                 Assert.Equal(
                     expectedSymbol,
                     symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
                     )
                 );
 
@@ -25492,9 +25495,9 @@ class CF : I<(System.IntPtr X, object? Y)>, I<(nint, dynamic)> { } // difference
                 // (6,40): error CS1966: 'C3': cannot implement a dynamic interface 'I<(IntPtr, dynamic)>'
                 // class C3 : I<(System.IntPtr, object)>, I<(System.IntPtr, dynamic)> { } // differences: dynamic
                 Diagnostic(
-                        ErrorCode.ERR_DeriveFromConstructedDynamic,
-                        "I<(System.IntPtr, dynamic)>"
-                    )
+                    ErrorCode.ERR_DeriveFromConstructedDynamic,
+                    "I<(System.IntPtr, dynamic)>"
+                )
                     .WithArguments("C3", "I<(System.IntPtr, dynamic)>")
                     .WithLocation(6, 40),
                 // (7,7): warning CS8645: 'I<(IntPtr, object)>' is already listed in the interface list on type 'C4' with different nullability of reference types.
@@ -25519,9 +25522,9 @@ class CF : I<(System.IntPtr X, object? Y)>, I<(nint, dynamic)> { } // difference
                 // (9,44): error CS1966: 'C6': cannot implement a dynamic interface 'I<(IntPtr, dynamic)>'
                 // class C6 : I<(System.IntPtr X, object Y)>, I<(System.IntPtr, dynamic)> { } // differences: names, dynamic
                 Diagnostic(
-                        ErrorCode.ERR_DeriveFromConstructedDynamic,
-                        "I<(System.IntPtr, dynamic)>"
-                    )
+                    ErrorCode.ERR_DeriveFromConstructedDynamic,
+                    "I<(System.IntPtr, dynamic)>"
+                )
                     .WithArguments("C6", "I<(System.IntPtr, dynamic)>")
                     .WithLocation(9, 44),
                 // (10,7): error CS8140: 'I<(IntPtr, object)>' is already listed in the interface list on type 'C7' with different tuple element names, as 'I<(IntPtr X, object? Y)>'.

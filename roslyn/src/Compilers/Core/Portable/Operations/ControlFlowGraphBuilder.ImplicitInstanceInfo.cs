@@ -49,10 +49,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 ImplicitInstance = null;
                 AnonymousType = currentInitializedAnonymousType;
-                AnonymousTypePropertyValues = PooledDictionary<
-                    IPropertySymbol,
-                    IOperation
-                >.GetInstance();
+                AnonymousTypePropertyValues = PooledDictionary<IPropertySymbol, IOperation>
+                    .GetInstance();
             }
 
             public ImplicitInstanceInfo(in Context context)
@@ -69,10 +67,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 {
                     ImplicitInstance = null;
                     AnonymousType = context.AnonymousType;
-                    AnonymousTypePropertyValues = PooledDictionary<
-                        IPropertySymbol,
-                        IOperation
-                    >.GetInstance();
+                    AnonymousTypePropertyValues = PooledDictionary<IPropertySymbol, IOperation>
+                        .GetInstance();
 
                     foreach (
                         KeyValuePair<

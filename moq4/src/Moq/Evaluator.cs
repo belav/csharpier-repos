@@ -26,9 +26,8 @@ namespace Moq
             Func<Expression, bool> fnCanBeEvaluated
         )
         {
-            return new SubtreeEvaluator(new Nominator(fnCanBeEvaluated).Nominate(expression)).Eval(
-                expression
-            );
+            return new SubtreeEvaluator(new Nominator(fnCanBeEvaluated).Nominate(expression))
+                .Eval(expression);
         }
 
         /// <summary>

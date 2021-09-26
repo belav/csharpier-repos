@@ -25,10 +25,10 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                 var testSourceCode = await File.ReadAllTextAsync(src).ConfigureAwait(false);
 
                 var (d, r) = await RoslynTestUtils.RunGenerator(
-                        new LoggerMessageGenerator(),
-                        new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
-                        new[] { testSourceCode }
-                    )
+                    new LoggerMessageGenerator(),
+                    new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
+                    new[] { testSourceCode }
+                )
                     .ConfigureAwait(false);
 
                 Assert.Empty(d);
@@ -94,15 +94,15 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         private async Task VerifyAgainstBaselineUsingFile(string filename, string testSourceCode)
         {
             string[] expectedLines = await File.ReadAllLinesAsync(
-                    Path.Combine("Baselines", filename)
-                )
+                Path.Combine("Baselines", filename)
+            )
                 .ConfigureAwait(false);
 
             var (d, r) = await RoslynTestUtils.RunGenerator(
-                    new LoggerMessageGenerator(),
-                    new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
-                    new[] { testSourceCode }
-                )
+                new LoggerMessageGenerator(),
+                new[] { typeof(ILogger).Assembly, typeof(LoggerMessageAttribute).Assembly },
+                new[] { testSourceCode }
+            )
                 .ConfigureAwait(false);
 
             Assert.Empty(d);
@@ -118,11 +118,12 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         {
             if (expectedLines.Length != sourceText.Lines.Count)
             {
-                message = string.Format(
-                    "Line numbers do not match. Expected: {0} lines, but generated {1}",
-                    expectedLines.Length,
-                    sourceText.Lines.Count
-                );
+                message = string
+                    .Format(
+                        "Line numbers do not match. Expected: {0} lines, but generated {1}",
+                        expectedLines.Length,
+                        sourceText.Lines.Count
+                    );
                 return false;
             }
             int index = 0;
@@ -131,13 +132,14 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
                 string expectedLine = expectedLines[index];
                 if (!expectedLine.Equals(textLine.ToString(), StringComparison.Ordinal))
                 {
-                    message = string.Format(
-                        "Line {0} does not match.{1}Expected Line:{1}{2}{1}Actual Line:{1}{3}",
-                        textLine.LineNumber,
-                        Environment.NewLine,
-                        expectedLine,
-                        textLine
-                    );
+                    message = string
+                        .Format(
+                            "Line {0} does not match.{1}Expected Line:{1}{2}{1}Actual Line:{1}{3}",
+                            textLine.LineNumber,
+                            Environment.NewLine,
+                            expectedLine,
+                            textLine
+                        );
                     return false;
                 }
                 index++;

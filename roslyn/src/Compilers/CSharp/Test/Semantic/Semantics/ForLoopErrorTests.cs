@@ -172,17 +172,13 @@ class C
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    Diagnostic(
-                            ErrorCode.ERR_NoImplicitConv,
-                            @"from x in new[] { 1, 2, 3 }
+            CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(Diagnostic(
+                    ErrorCode.ERR_NoImplicitConv,
+                    @"from x in new[] { 1, 2, 3 }
              let z = x.ToString()
              select z into w
              select w"
-                        )
-                        .WithArguments("System.Collections.Generic.IEnumerable<string>", "bool")
-                );
+                ).WithArguments("System.Collections.Generic.IEnumerable<string>", "bool"));
         }
 
         // Query expression in iterator expressions

@@ -352,12 +352,13 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 Assert.Equal(2, serializedValueMatch.Groups.Count);
                 string jsonValue = serializedValueMatch.Groups[1].Value;
                 Assert.True(
-                    double.TryParse(
-                        jsonValue,
-                        NumberStyles.Any,
-                        CultureInfo.InvariantCulture,
-                        out var floatingPointValue
-                    ),
+                    double
+                        .TryParse(
+                            jsonValue,
+                            NumberStyles.Any,
+                            CultureInfo.InvariantCulture,
+                            out var floatingPointValue
+                        ),
                     "The json doesn not contain a floating point value: " + jsonValue
                 );
                 Assert.Equal(1.2, floatingPointValue, 2);
@@ -627,11 +628,13 @@ namespace Microsoft.Extensions.Logging.Console.Test
             string json = GetJson(rootException, indented);
 
             Assert.Contains(rootException.Message, json);
-            rootException.InnerExceptions.ToList()
+            rootException.InnerExceptions
+                .ToList()
                 .ForEach((inner) => Assert.Contains(inner.Message, json));
 
             Assert.Contains(GetContent(rootException, indented), json);
-            rootException.InnerExceptions.ToList()
+            rootException.InnerExceptions
+                .ToList()
                 .ForEach((inner) => Assert.Contains(GetContent(inner, indented), json));
         }
     }

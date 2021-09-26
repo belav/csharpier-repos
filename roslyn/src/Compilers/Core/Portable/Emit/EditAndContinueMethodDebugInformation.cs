@@ -80,14 +80,15 @@ namespace Microsoft.CodeAnalysis.Emit
             data.CopyTo(offset, right, 0, right.Length);
 
             throw new InvalidDataException(
-                string.Format(
-                    CodeAnalysisResources.InvalidDataAtOffset,
-                    offset,
-                    (start != 0) ? "..." : "",
-                    BitConverter.ToString(left),
-                    BitConverter.ToString(right),
-                    (end != data.Length) ? "..." : ""
-                )
+                string
+                    .Format(
+                        CodeAnalysisResources.InvalidDataAtOffset,
+                        offset,
+                        (start != 0) ? "..." : "",
+                        BitConverter.ToString(left),
+                        BitConverter.ToString(right),
+                        (end != data.Length) ? "..." : ""
+                    )
             );
         }
 

@@ -61,9 +61,8 @@ namespace System.Web.Http.Tracing.Tracers
             );
 
             // Act
-            HttpActionBinding actualBinding = ((IActionValueBinder)tracer).GetBinding(
-                mockActionDescriptor.Object
-            );
+            HttpActionBinding actualBinding = ((IActionValueBinder)tracer)
+                .GetBinding(mockActionDescriptor.Object);
 
             // Assert
             Assert.IsType<HttpActionBindingTracer>(actualBinding);
@@ -117,9 +116,8 @@ namespace System.Web.Http.Tracing.Tracers
             );
 
             // Act
-            HttpActionBinding actualBinding = ((IActionValueBinder)tracer).GetBinding(
-                mockActionDescriptor.Object
-            );
+            HttpActionBinding actualBinding = ((IActionValueBinder)tracer)
+                .GetBinding(mockActionDescriptor.Object);
 
             // Assert
             Assert.IsAssignableFrom<HttpParameterBindingTracer>(actualBinding.ParameterBindings[0]);
@@ -175,9 +173,8 @@ namespace System.Web.Http.Tracing.Tracers
             );
 
             // Act
-            HttpActionBinding actualBinding = ((IActionValueBinder)tracer).GetBinding(
-                mockActionDescriptor.Object
-            );
+            HttpActionBinding actualBinding = ((IActionValueBinder)tracer)
+                .GetBinding(mockActionDescriptor.Object);
 
             // Assert
             Assert.IsAssignableFrom<FormatterParameterBindingTracer>(
@@ -225,9 +222,8 @@ namespace System.Web.Http.Tracing.Tracers
             );
 
             // Act
-            HttpActionBinding actualBinding = ((IActionValueBinder)tracer).GetBinding(
-                mockActionDescriptor.Object
-            );
+            HttpActionBinding actualBinding = ((IActionValueBinder)tracer)
+                .GetBinding(mockActionDescriptor.Object);
 
             // Assert
             Assert.Same(actionBindingTracer, actualBinding);

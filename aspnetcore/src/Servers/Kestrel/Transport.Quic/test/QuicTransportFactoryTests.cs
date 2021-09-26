@@ -29,14 +29,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
 
             // Act
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        quicTransportFactory.BindAsync(
-                                new IPEndPoint(0, 0),
-                                features: null,
-                                cancellationToken: CancellationToken.None
-                            )
-                            .AsTask()
-                )
+                () =>
+                    quicTransportFactory.BindAsync(
+                        new IPEndPoint(0, 0),
+                        features: null,
+                        cancellationToken: CancellationToken.None
+                    )
+                        .AsTask()
+            )
                 .DefaultTimeout();
 
             // Assert
@@ -57,14 +57,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
 
             // Act
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        quicTransportFactory.BindAsync(
-                                new IPEndPoint(0, 0),
-                                features: features,
-                                cancellationToken: CancellationToken.None
-                            )
-                            .AsTask()
-                )
+                () =>
+                    quicTransportFactory.BindAsync(
+                        new IPEndPoint(0, 0),
+                        features: features,
+                        cancellationToken: CancellationToken.None
+                    )
+                        .AsTask()
+            )
                 .DefaultTimeout();
 
             // Assert

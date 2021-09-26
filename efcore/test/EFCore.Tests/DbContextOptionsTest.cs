@@ -20,9 +20,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Warnings_can_be_configured()
         {
-            var optionsBuilder = new DbContextOptionsBuilder().ConfigureWarnings(
-                c => c.Default(WarningBehavior.Throw)
-            );
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .ConfigureWarnings(c => c.Default(WarningBehavior.Throw));
 
             var warningConfiguration =
                 optionsBuilder.Options.FindExtension<CoreOptionsExtension>().WarningsConfiguration;
@@ -45,12 +44,14 @@ namespace Microsoft.EntityFrameworkCore
         {
             var model = new Model();
 
-            var optionsBuilder = new DbContextOptionsBuilder().UseModel(model.FinalizeModel())
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseModel(model.FinalizeModel())
                 .EnableSensitiveDataLogging();
 
             Assert.Same(model, optionsBuilder.Options.FindExtension<CoreOptionsExtension>().Model);
             Assert.True(
-                optionsBuilder.Options.FindExtension<CoreOptionsExtension>().IsSensitiveDataLoggingEnabled
+                optionsBuilder.Options
+                    .FindExtension<CoreOptionsExtension>().IsSensitiveDataLoggingEnabled
             );
         }
 
@@ -67,9 +68,8 @@ namespace Microsoft.EntityFrameworkCore
             );
 
             var extension = new FakeDbContextOptionsExtension1();
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension);
 
             Assert.Same(
                 extension,
@@ -88,12 +88,10 @@ namespace Microsoft.EntityFrameworkCore
             var extension1 = new FakeDbContextOptionsExtension1();
             var extension2 = new FakeDbContextOptionsExtension2();
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension1
-            );
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension2
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension1);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension2);
 
             Assert.Equal(2, optionsBuilder.Options.Extensions.Count());
             Assert.Contains(extension1, optionsBuilder.Options.Extensions);
@@ -117,12 +115,10 @@ namespace Microsoft.EntityFrameworkCore
             var extension1 = new FakeDbContextOptionsExtension1 { Something = "One " };
             var extension2 = new FakeDbContextOptionsExtension1 { Something = "Two " };
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension1
-            );
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension2
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension1);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension2);
 
             Assert.Single(optionsBuilder.Options.Extensions);
             Assert.DoesNotContain(extension1, optionsBuilder.Options.Extensions);
@@ -143,9 +139,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var extension = new FakeDbContextOptionsExtension2();
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension);
 
             Assert.True(optionsBuilder.IsConfigured);
             Assert.False(extension.AppliedServices);
@@ -159,9 +154,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.False(optionsBuilder.IsConfigured);
 
             var extension = new FakeDbContextOptionsExtension1();
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(extension);
 
             Assert.False(optionsBuilder.IsConfigured);
             Assert.False(extension.AppliedServices);
@@ -283,9 +277,8 @@ namespace Microsoft.EntityFrameworkCore
             var serviceProvider = new FakeServiceProvider();
 
             var optionsBuilder = GenericCheck(
-                new DbContextOptionsBuilder<UnkoolContext>().UseInternalServiceProvider(
-                    serviceProvider
-                )
+                new DbContextOptionsBuilder<UnkoolContext>()
+                    .UseInternalServiceProvider(serviceProvider)
             );
 
             Assert.Same(
@@ -315,9 +308,8 @@ namespace Microsoft.EntityFrameworkCore
         public void UseQueryTrackingBehavior_on_generic_builder_returns_generic_builder()
         {
             var optionsBuilder = GenericCheck(
-                new DbContextOptionsBuilder<UnkoolContext>().UseQueryTrackingBehavior(
-                    QueryTrackingBehavior.NoTracking
-                )
+                new DbContextOptionsBuilder<UnkoolContext>()
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
             );
 
             Assert.Equal(
@@ -330,9 +322,8 @@ namespace Microsoft.EntityFrameworkCore
         public void ConfigureWarnings_on_generic_builder_returns_generic_builder()
         {
             var optionsBuilder = GenericCheck(
-                new DbContextOptionsBuilder<UnkoolContext>().ConfigureWarnings(
-                    c => c.Default(WarningBehavior.Throw)
-                )
+                new DbContextOptionsBuilder<UnkoolContext>()
+                    .ConfigureWarnings(c => c.Default(WarningBehavior.Throw))
             );
 
             var warningConfiguration =

@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (node != null)
             {
                 // no stackguard
-                ((CSharpSyntaxNode)node).Accept(this);
+                ((CSharpSyntaxNode)node)
+                    .Accept(this);
             }
         }
 

@@ -53,10 +53,11 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
             if (!string.IsNullOrEmpty(foundSolution) && !string.IsNullOrEmpty(foundProject))
             {
                 throw new FileNotFoundException(
-                    string.Format(
-                        Resources.Both_a_MSBuild_project_file_and_solution_file_found_in_0_Specify_which_to_use_with_the_workspace_argument,
-                        searchDirectory
-                    )
+                    string
+                        .Format(
+                            Resources.Both_a_MSBuild_project_file_and_solution_file_found_in_0_Specify_which_to_use_with_the_workspace_argument,
+                            searchDirectory
+                        )
                 );
             }
 
@@ -71,10 +72,11 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
             }
 
             throw new FileNotFoundException(
-                string.Format(
-                    Resources.Could_not_find_a_MSBuild_project_or_solution_file_in_0_Specify_which_to_use_with_the_workspace_argument,
-                    searchDirectory
-                )
+                string
+                    .Format(
+                        Resources.Could_not_find_a_MSBuild_project_or_solution_file_in_0_Specify_which_to_use_with_the_workspace_argument,
+                        searchDirectory
+                    )
             );
         }
 
@@ -95,10 +97,11 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
             if (!isSolution && !isProject)
             {
                 throw new FileNotFoundException(
-                    string.Format(
-                        Resources.The_file_0_does_not_appear_to_be_a_valid_project_or_solution_file,
-                        Path.GetFileName(workspacePath)
-                    )
+                    string
+                        .Format(
+                            Resources.The_file_0_does_not_appear_to_be_a_valid_project_or_solution_file,
+                            Path.GetFileName(workspacePath)
+                        )
                 );
             }
 

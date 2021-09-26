@@ -49,9 +49,9 @@ namespace System.IO.Pipes.Tests
                 () =>
                 {
                     CreateAndVerifyAnonymousPipe(
-                            GetBasicPipeSecurity(),
-                            inheritability: inheritability
-                        )
+                        GetBasicPipeSecurity(),
+                        inheritability: inheritability
+                    )
                         .Dispose();
                 }
             );
@@ -89,11 +89,11 @@ namespace System.IO.Pipes.Tests
         )
         {
             CreateAndVerifyAnonymousPipe(
-                    GetBasicPipeSecurity(),
-                    direction,
-                    inheritability,
-                    bufferSize
-                )
+                GetBasicPipeSecurity(),
+                direction,
+                inheritability,
+                bufferSize
+            )
                 .Dispose();
         }
 
@@ -130,11 +130,11 @@ namespace System.IO.Pipes.Tests
                     () =>
                     {
                         AnonymousPipeServerStreamAcl.Create(
-                                DefaultPipeDirection,
-                                DefaultInheritability,
-                                DefaultBufferSize,
-                                security
-                            )
+                            DefaultPipeDirection,
+                            DefaultInheritability,
+                            DefaultBufferSize,
+                            security
+                        )
                             .Dispose();
                     }
                 );

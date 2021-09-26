@@ -942,130 +942,90 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Sum_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 2)
-                        .Sum(
-                            (Func<int, int>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 2).Sum(
+                        (Func<int, int>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 2)
-                        .Sum(
-                            (Func<int, int?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 2).Sum(
+                        (Func<int, int?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 2)
-                        .Sum(
-                            (Func<int, long>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 2).Sum(
+                        (Func<int, long>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 2)
-                        .Sum(
-                            (Func<int, long?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 2).Sum(
+                        (Func<int, long?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 2)
-                        .Sum(
-                            (Func<int, float>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 2).Sum(
+                        (Func<int, float>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 2)
-                        .Sum(
-                            (Func<int, float?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 2).Sum(
+                        (Func<int, float?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 2)
-                        .Sum(
-                            (Func<int, double>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 2).Sum(
+                        (Func<int, double>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 2)
-                        .Sum(
-                            (Func<int, double?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 2).Sum(
+                        (Func<int, double?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 2)
-                        .Sum(
-                            (Func<int, decimal>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 2).Sum(
+                        (Func<int, decimal>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable.Range(0, 2)
-                        .Sum(
-                            (Func<int, decimal?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 2).Sum(
+                        (Func<int, decimal?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
         }
 
         [Fact]

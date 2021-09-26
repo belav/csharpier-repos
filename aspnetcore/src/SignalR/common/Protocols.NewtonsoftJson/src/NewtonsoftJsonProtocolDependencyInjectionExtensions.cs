@@ -38,9 +38,10 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<NewtonsoftJsonHubProtocolOptions> configure
         ) where TBuilder : ISignalRBuilder
         {
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<IHubProtocol, NewtonsoftJsonHubProtocol>()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<IHubProtocol, NewtonsoftJsonHubProtocol>()
+                );
             builder.Services.Configure(configure);
             return builder;
         }

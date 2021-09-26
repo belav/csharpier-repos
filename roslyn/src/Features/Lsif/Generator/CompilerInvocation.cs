@@ -53,9 +53,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             var mapPath = GetPathMapper(invocationInfo);
 
             var splitCommandLine = CommandLineParser.SplitCommandLineIntoArguments(
-                    invocationInfo.Arguments,
-                    removeHashComments: false
-                )
+                invocationInfo.Arguments,
+                removeHashComments: false
+            )
                 .ToList();
 
             // Unfortunately for us there are a few paths that get directly read by the command line parse which we need to remap,
@@ -103,37 +103,33 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             var projectId = ProjectId.CreateNewId(invocationInfo.ProjectFilePath);
 
             var projectInfo = ProjectInfo.Create(
-                    projectId,
-                    VersionStamp.Default,
-                    name: Path.GetFileNameWithoutExtension(invocationInfo.ProjectFilePath),
-                    assemblyName: parsedCommandLine.CompilationName!,
-                    language: languageName,
-                    filePath: invocationInfo.ProjectFilePath,
-                    outputFilePath: parsedCommandLine.OutputFileName,
-                    parsedCommandLine.CompilationOptions,
-                    parsedCommandLine.ParseOptions,
-                    parsedCommandLine.SourceFiles.Select(
-                        s => CreateDocumentInfo(unmappedPath: s.Path)
-                    ),
-                    metadataReferences: parsedCommandLine.MetadataReferences.Select(
+                projectId,
+                VersionStamp.Default,
+                name: Path.GetFileNameWithoutExtension(invocationInfo.ProjectFilePath),
+                assemblyName: parsedCommandLine.CompilationName!,
+                language: languageName,
+                filePath: invocationInfo.ProjectFilePath,
+                outputFilePath: parsedCommandLine.OutputFileName,
+                parsedCommandLine.CompilationOptions,
+                parsedCommandLine.ParseOptions,
+                parsedCommandLine.SourceFiles.Select(s => CreateDocumentInfo(unmappedPath: s.Path)),
+                metadataReferences: parsedCommandLine.MetadataReferences
+                    .Select(
                         r => MetadataReference.CreateFromFile(mapPath(r.Reference), r.Properties)
                     ),
-                    additionalDocuments: parsedCommandLine.AdditionalFiles.Select(
-                        f => CreateDocumentInfo(unmappedPath: f.Path)
-                    ),
-                    analyzerReferences: parsedCommandLine.AnalyzerReferences.Select(
-                        r => new AnalyzerFileReference(r.FilePath, analyzerLoader)
-                    )
-                )
+                additionalDocuments: parsedCommandLine.AdditionalFiles
+                    .Select(f => CreateDocumentInfo(unmappedPath: f.Path)),
+                analyzerReferences: parsedCommandLine.AnalyzerReferences
+                    .Select(r => new AnalyzerFileReference(r.FilePath, analyzerLoader))
+            )
                 .WithAnalyzerConfigDocuments(
                     parsedCommandLine.AnalyzerConfigPaths.Select(CreateDocumentInfo)
                 );
 
             workspace.AddProject(projectInfo);
 
-            var compilation = await workspace.CurrentSolution.GetProject(
-                projectId
-            )!.GetRequiredCompilationAsync(CancellationToken.None);
+            var compilation = await workspace.CurrentSolution.GetProject(projectId)!
+                .GetRequiredCompilationAsync(CancellationToken.None);
 
             return new CompilerInvocation(
                 compilation,

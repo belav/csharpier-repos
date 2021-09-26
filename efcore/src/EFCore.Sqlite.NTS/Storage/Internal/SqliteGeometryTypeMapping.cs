@@ -25,10 +25,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
     public class SqliteGeometryTypeMapping<TGeometry>
         : RelationalGeometryTypeMapping<TGeometry, byte[]> where TGeometry : Geometry
     {
-        private static readonly MethodInfo _getBytes = typeof(DbDataReader).GetRuntimeMethod(
-            nameof(DbDataReader.GetFieldValue),
-            new[] { typeof(int) }
-        )!.MakeGenericMethod(typeof(byte[]));
+        private static readonly MethodInfo _getBytes = typeof(DbDataReader)
+            .GetRuntimeMethod(nameof(DbDataReader.GetFieldValue), new[] { typeof(int) })!
+            .MakeGenericMethod(typeof(byte[]));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

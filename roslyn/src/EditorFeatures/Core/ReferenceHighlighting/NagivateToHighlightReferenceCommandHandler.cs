@@ -102,10 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
                 var destTag = GetDestinationTag(tagUnderCursor.Value, spans, navigateToNext);
 
                 if (
-                    args.TextView.TryMoveCaretToAndEnsureVisible(
-                        destTag.Start,
-                        _outliningManagerService
-                    )
+                    args.TextView
+                        .TryMoveCaretToAndEnsureVisible(destTag.Start, _outliningManagerService)
                 )
                 {
                     args.TextView.SetSelection(destTag);

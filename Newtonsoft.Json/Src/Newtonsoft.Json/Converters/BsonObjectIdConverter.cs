@@ -78,10 +78,8 @@ namespace Newtonsoft.Json.Converters
             if (reader.TokenType != JsonToken.Bytes)
             {
                 throw new JsonSerializationException(
-                    "Expected Bytes but got {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Expected Bytes but got {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
 

@@ -119,10 +119,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             var method = (IMethodSymbol)modelType.GetMembers("ActionMethod").First();
 
             Assert.True(
-                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
-                    compilation,
-                    out var symbolCache
-                )
+                TopLevelParameterNameAnalyzer.SymbolCache
+                    .TryCreate(compilation, out var symbolCache)
             );
 
             Assert.Collection(
@@ -197,10 +195,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             var parameter = method.Parameters[0];
 
             Assert.True(
-                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
-                    compilation,
-                    out var symbolCache
-                )
+                TopLevelParameterNameAnalyzer.SymbolCache
+                    .TryCreate(compilation, out var symbolCache)
             );
 
             var result = TopLevelParameterNameAnalyzer.IsProblematicParameter(
@@ -216,10 +212,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             var methodName = nameof(GetNameTests.SingleAttribute);
             var compilation = await GetCompilationForGetName();
             Assert.True(
-                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
-                    compilation,
-                    out var symbolCache
-                )
+                TopLevelParameterNameAnalyzer.SymbolCache
+                    .TryCreate(compilation, out var symbolCache)
             );
 
             var type = compilation.GetTypeByMetadataName(typeof(GetNameTests).FullName);
@@ -237,10 +231,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             var methodName = nameof(GetNameTests.NoAttribute);
             var compilation = await GetCompilationForGetName();
             Assert.True(
-                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
-                    compilation,
-                    out var symbolCache
-                )
+                TopLevelParameterNameAnalyzer.SymbolCache
+                    .TryCreate(compilation, out var symbolCache)
             );
 
             var type = compilation.GetTypeByMetadataName(typeof(GetNameTests).FullName);
@@ -258,10 +250,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             var methodName = nameof(GetNameTests.SingleAttributeWithoutName);
             var compilation = await GetCompilationForGetName();
             Assert.True(
-                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
-                    compilation,
-                    out var symbolCache
-                )
+                TopLevelParameterNameAnalyzer.SymbolCache
+                    .TryCreate(compilation, out var symbolCache)
             );
 
             var type = compilation.GetTypeByMetadataName(typeof(GetNameTests).FullName);
@@ -279,10 +269,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             var methodName = nameof(GetNameTests.MultipleAttributes);
             var compilation = await GetCompilationForGetName();
             Assert.True(
-                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
-                    compilation,
-                    out var symbolCache
-                )
+                TopLevelParameterNameAnalyzer.SymbolCache
+                    .TryCreate(compilation, out var symbolCache)
             );
 
             var type = compilation.GetTypeByMetadataName(typeof(GetNameTests).FullName);
@@ -320,10 +308,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
 
             var compilation = await project.GetCompilationAsync();
             Assert.True(
-                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
-                    compilation,
-                    out var symbolCache
-                )
+                TopLevelParameterNameAnalyzer.SymbolCache
+                    .TryCreate(compilation, out var symbolCache)
             );
 
             var type = compilation.GetTypeByMetadataName(typeof(SpecifiesModelTypeTests).FullName);
@@ -348,10 +334,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
 
             var compilation = await project.GetCompilationAsync();
             Assert.True(
-                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
-                    compilation,
-                    out var symbolCache
-                )
+                TopLevelParameterNameAnalyzer.SymbolCache
+                    .TryCreate(compilation, out var symbolCache)
             );
 
             var type = compilation.GetTypeByMetadataName(typeof(SpecifiesModelTypeTests).FullName);
@@ -376,10 +360,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
 
             var compilation = await project.GetCompilationAsync();
             Assert.True(
-                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
-                    compilation,
-                    out var symbolCache
-                )
+                TopLevelParameterNameAnalyzer.SymbolCache
+                    .TryCreate(compilation, out var symbolCache)
             );
 
             var type = compilation.GetTypeByMetadataName(typeof(SpecifiesModelTypeTests).FullName);
@@ -427,12 +409,13 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                     Assert.Same(descriptor, diagnostic.Descriptor);
                     AnalyzerAssert.DiagnosticLocation(expectedLocation, diagnostic.Location);
                     Assert.Equal(
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            descriptor.MessageFormat.ToString(CultureInfo.InvariantCulture),
-                            typeName,
-                            parameterName
-                        ),
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                descriptor.MessageFormat.ToString(CultureInfo.InvariantCulture),
+                                typeName,
+                                parameterName
+                            ),
                         diagnostic.GetMessage(CultureInfo.InvariantCulture)
                     );
                 }

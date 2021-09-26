@@ -78,7 +78,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Distinct2()
         {
-            var count = (new int[] { 0, 1, 2, 2, 0 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2, 2, 0 })
+                .AsQueryable()
                 .Distinct(EqualityComparer<int>.Default)
                 .Count();
             Assert.Equal(3, count);

@@ -293,7 +293,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _expressionPrinter.Print(
                     Expression.Call(
                         Expression.Constant("Foo"),
-                        typeof(string).GetMethods()
+                        typeof(string)
+                            .GetMethods()
                             .Single(
                                 m =>
                                     m.Name == nameof(string.ToUpper)
@@ -315,7 +316,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _expressionPrinter.Print(
                     Expression.Call(
                         Expression.Constant("Foobar"),
-                        typeof(string).GetMethods()
+                        typeof(string)
+                            .GetMethods()
                             .Single(
                                 m =>
                                     m.Name == nameof(string.Substring)
@@ -333,7 +335,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public void Linq_methods_printed_as_extensions()
         {
             Expression<Func<object, object>> expr = _ =>
-                new[] { 1, 2, 3 }.AsQueryable()
+                new[] { 1, 2, 3 }
+                    .AsQueryable()
                     .Select(x => x.ToString())
                     .AsEnumerable()
                     .Where(x => x.Length > 1);

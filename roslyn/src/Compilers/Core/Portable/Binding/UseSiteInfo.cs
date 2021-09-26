@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis
         {
             secondaryDependencies = (
                 secondaryDependencies ?? ImmutableHashSet<TAssemblySymbol>.Empty
-            ).Union(SecondaryDependencies ?? ImmutableHashSet<TAssemblySymbol>.Empty);
+            )
+                .Union(SecondaryDependencies ?? ImmutableHashSet<TAssemblySymbol>.Empty);
             primaryDependency ??= PrimaryDependency;
 
             if (!object.Equals(primaryDependency, PrimaryDependency) && PrimaryDependency is object)
@@ -386,9 +387,8 @@ namespace Microsoft.CodeAnalysis
                     )
                 )
                 {
-                    (_dependencies ??= new HashSet<TAssemblySymbol>()).AddAll(
-                        info.SecondaryDependencies
-                    );
+                    (_dependencies ??= new HashSet<TAssemblySymbol>())
+                        .AddAll(info.SecondaryDependencies);
                 }
             }
         }

@@ -29,7 +29,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, TSource, TTarget>> callSite = CallSite<
                 Func<CallSite, TSource, TTarget>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, TSource, TTarget> func = callSite.Target;
             switch (expected)
             {

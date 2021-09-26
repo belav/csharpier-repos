@@ -70,9 +70,10 @@ namespace TestUtil
             if (this._outLimit > 0 && this.ToString().Length > this._outLimit)
             {
                 this._bufferIsFull = true;
-                this._outStream.WriteLine(
-                    "ERROR: Output exceeded maximum limit, extra output will be discarded!"
-                );
+                this._outStream
+                    .WriteLine(
+                        "ERROR: Output exceeded maximum limit, extra output will be discarded!"
+                    );
             }
         }
     }
@@ -158,12 +159,10 @@ namespace TestUtil
             {
                 string newLine = this.testOut.NewLine;
                 string delimStr = newLine[0].ToString();
-                string[] actualLines = (
-                    (this.ActualOutput.Trim()).Replace(newLine, delimStr)
-                ).Split(delimStr.ToCharArray());
-                string[] expectedLines = (
-                    (this.ExpectedOutput.Trim()).Replace(newLine, delimStr)
-                ).Split(delimStr.ToCharArray());
+                string[] actualLines = ((this.ActualOutput.Trim()).Replace(newLine, delimStr))
+                    .Split(delimStr.ToCharArray());
+                string[] expectedLines = ((this.ExpectedOutput.Trim()).Replace(newLine, delimStr))
+                    .Split(delimStr.ToCharArray());
                 int commonLineCount =
                     actualLines.Length < expectedLines.Length
                         ? actualLines.Length

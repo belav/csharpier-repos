@@ -33,11 +33,12 @@ namespace Repro
                 x.MoveNext();
                 T t = x.Current;
                 throw new Exception(
-                    string.Format(
-                        "An InvalidCastException should be thrown for {0} and {1}",
-                        typeof(K),
-                        typeof(T)
-                    )
+                    string
+                        .Format(
+                            "An InvalidCastException should be thrown for {0} and {1}",
+                            typeof(K),
+                            typeof(T)
+                        )
                 );
             }
             catch (InvalidCastException) { }

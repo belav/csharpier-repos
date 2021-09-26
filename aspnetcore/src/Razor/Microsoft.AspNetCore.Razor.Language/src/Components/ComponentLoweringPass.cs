@@ -53,13 +53,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         // the first one and ignore the others.
                         if (++count > 1)
                         {
-                            node.Diagnostics.Add(
-                                ComponentDiagnosticFactory.Create_MultipleComponents(
-                                    node.Source,
-                                    node.TagName,
-                                    node.TagHelpers
-                                )
-                            );
+                            node.Diagnostics
+                                .Add(
+                                    ComponentDiagnosticFactory.Create_MultipleComponents(
+                                        node.Source,
+                                        node.TagName,
+                                        node.TagHelpers
+                                    )
+                                );
                             break;
                         }
                     }
@@ -189,18 +190,21 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 // 5. Each 'child content' element will generate its own lambda, and be assigned to the property
                 //    that matches the element name.
                 if (
-                    !node.Children.OfType<TagHelperIntermediateNode>()
+                    !node.Children
+                        .OfType<TagHelperIntermediateNode>()
                         .Any(t => t.TagHelpers.Any(th => th.IsChildContentTagHelper()))
                 )
                 {
                     // This node has implicit child content. It may or may not have an attribute that matches.
-                    var attribute = _component.Component.BoundAttributes.Where(
+                    var attribute = _component.Component.BoundAttributes
+                        .Where(
                             a =>
-                                string.Equals(
-                                    a.Name,
-                                    ComponentsApi.RenderTreeBuilder.ChildContent,
-                                    StringComparison.Ordinal
-                                )
+                                string
+                                    .Equals(
+                                        a.Name,
+                                        ComponentsApi.RenderTreeBuilder.ChildContent,
+                                        StringComparison.Ordinal
+                                    )
                         )
                         .FirstOrDefault();
                     _children.Add(RewriteChildContent(attribute, node.Source, node.Children));
@@ -225,13 +229,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     )
                     {
                         // This is a child content element
-                        var attribute = _component.Component.BoundAttributes.Where(
+                        var attribute = _component.Component.BoundAttributes
+                            .Where(
                                 a =>
-                                    string.Equals(
-                                        a.Name,
-                                        tagHelperNode.TagName,
-                                        StringComparison.Ordinal
-                                    )
+                                    string
+                                        .Equals(
+                                            a.Name,
+                                            tagHelperNode.TagName,
+                                            StringComparison.Ordinal
+                                        )
                             )
                             .FirstOrDefault();
                         _children.Add(RewriteChildContent(attribute, child.Source, child.Children));
@@ -239,12 +245,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     }
 
                     // If we get here then this is significant content inside a component with explicit child content.
-                    child.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_ChildContentMixedWithExplicitChildContent(
-                            child.Source,
-                            _component
-                        )
-                    );
+                    child.Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_ChildContentMixedWithExplicitChildContent(
+                                child.Source,
+                                _component
+                            )
+                        );
                     _children.Add(child);
                 }
 
@@ -307,48 +314,52 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                             }
 
                             // The parameter name is invalid.
-                            childContent.Diagnostics.Add(
-                                ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameter(
+                            childContent.Diagnostics
+                                .Add(
+                                    ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameter(
+                                        property.Source,
+                                        property.AttributeName,
+                                        attribute.Name
+                                    )
+                                );
+                            continue;
+                        }
+
+                        // This is an unrecognized tag helper bound attribute. This will practically never happen unless the child content descriptor was misconfigured.
+                        childContent.Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
                                     property.Source,
                                     property.AttributeName,
                                     attribute.Name
                                 )
                             );
-                            continue;
-                        }
-
-                        // This is an unrecognized tag helper bound attribute. This will practically never happen unless the child content descriptor was misconfigured.
-                        childContent.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
-                                property.Source,
-                                property.AttributeName,
-                                attribute.Name
-                            )
-                        );
                     }
                     else if (child is TagHelperHtmlAttributeIntermediateNode a)
                     {
                         // This is an HTML attribute on a child content.
-                        childContent.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
-                                a.Source,
-                                a.AttributeName,
-                                attribute.Name
-                            )
-                        );
+                        childContent.Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
+                                    a.Source,
+                                    a.AttributeName,
+                                    attribute.Name
+                                )
+                            );
                     }
                     else if (
                         child is TagHelperDirectiveAttributeIntermediateNode directiveAttribute
                     )
                     {
                         // We don't support directive attributes inside child content, this is possible if you try to do something like put '@ref' on a child content.
-                        childContent.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
-                                directiveAttribute.Source,
-                                directiveAttribute.OriginalAttributeName,
-                                attribute.Name
-                            )
-                        );
+                        childContent.Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
+                                    directiveAttribute.Source,
+                                    directiveAttribute.OriginalAttributeName,
+                                    attribute.Name
+                                )
+                            );
                     }
                     else
                     {
@@ -371,10 +382,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     && property.Children[0] is HtmlContentIntermediateNode html
                 )
                 {
-                    content = string.Join(
-                        string.Empty,
-                        html.Children.OfType<IntermediateToken>().Select(n => n.Content)
-                    );
+                    content = string
+                        .Join(
+                            string.Empty,
+                            html.Children.OfType<IntermediateToken>().Select(n => n.Content)
+                        );
                     return true;
                 }
 
@@ -477,13 +489,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     }
 
                     // The parameter name is invalid.
-                    _component.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameterOnComponent(
-                            node.Source,
-                            node.AttributeName,
-                            _component.TagName
-                        )
-                    );
+                    _component.Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameterOnComponent(
+                                node.Source,
+                                node.AttributeName,
+                                _component.TagName
+                            )
+                        );
                     return;
                 }
 

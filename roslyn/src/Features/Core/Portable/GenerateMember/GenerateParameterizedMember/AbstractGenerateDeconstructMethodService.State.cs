@@ -45,12 +45,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 var state = new State();
                 if (
                     !await state.TryInitializeMethodAsync(
-                            service,
-                            document,
-                            targetVariables,
-                            typeToGenerateIn,
-                            cancellationToken
-                        )
+                        service,
+                        document,
+                        targetVariables,
+                        typeToGenerateIn,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -123,10 +123,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 }
 
                 var tupleElements = ((INamedTypeSymbol)targetType).TupleElements;
-                using var builderDisposer = ArrayBuilder<IParameterSymbol>.GetInstance(
-                    tupleElements.Length,
-                    out var builder
-                );
+                using var builderDisposer = ArrayBuilder<IParameterSymbol>
+                    .GetInstance(tupleElements.Length, out var builder);
                 foreach (var element in tupleElements)
                 {
                     builder.Add(

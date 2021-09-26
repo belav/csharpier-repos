@@ -45,15 +45,12 @@ namespace ABIStress
 
         private static MethodInfo s_gcHandleFromIntPtr = typeof(GCHandle).GetMethod("FromIntPtr");
         private static MethodInfo s_gcHandle_getTarget = typeof(GCHandle).GetMethod("get_Target");
-        private static MethodInfo s_compareNumbers = typeof(StubsTestHelpers).GetMethod(
-            "CompareNumbers"
-        );
-        private static MethodInfo s_isTypeHandleObject = typeof(StubsTestHelpers).GetMethod(
-            "IsTypeHandleObject"
-        );
-        private static MethodInfo s_isTypeHandleInt = typeof(StubsTestHelpers).GetMethod(
-            "IsTypeHandleInt"
-        );
+        private static MethodInfo s_compareNumbers = typeof(StubsTestHelpers)
+            .GetMethod("CompareNumbers");
+        private static MethodInfo s_isTypeHandleObject = typeof(StubsTestHelpers)
+            .GetMethod("IsTypeHandleObject");
+        private static MethodInfo s_isTypeHandleInt = typeof(StubsTestHelpers)
+            .GetMethod("IsTypeHandleInt");
 
         enum GenericShape
         {
@@ -111,21 +108,17 @@ namespace ABIStress
                 case 12:
                     return typeof(Func<, , , , , , , , , , , , >).MakeGenericType(genericArguments);
                 case 13:
-                    return typeof(Func<, , , , , , , , , , , , , >).MakeGenericType(
-                        genericArguments
-                    );
+                    return typeof(Func<, , , , , , , , , , , , , >)
+                        .MakeGenericType(genericArguments);
                 case 14:
-                    return typeof(Func<, , , , , , , , , , , , , , >).MakeGenericType(
-                        genericArguments
-                    );
+                    return typeof(Func<, , , , , , , , , , , , , , >)
+                        .MakeGenericType(genericArguments);
                 case 15:
-                    return typeof(Func<, , , , , , , , , , , , , , , >).MakeGenericType(
-                        genericArguments
-                    );
+                    return typeof(Func<, , , , , , , , , , , , , , , >)
+                        .MakeGenericType(genericArguments);
                 case 16:
-                    return typeof(Func<, , , , , , , , , , , , , , , , >).MakeGenericType(
-                        genericArguments
-                    );
+                    return typeof(Func<, , , , , , , , , , , , , , , , >)
+                        .MakeGenericType(genericArguments);
 
                 default:
                     throw new Exception();

@@ -98,10 +98,10 @@ namespace System.IO.Compression
                     if (_mode == CompressionMode.Compress)
                     {
                         await WriteAsyncMemoryCore(
-                                ReadOnlyMemory<byte>.Empty,
-                                CancellationToken.None,
-                                isFinalBlock: true
-                            )
+                            ReadOnlyMemory<byte>.Empty,
+                            CancellationToken.None,
+                            isFinalBlock: true
+                        )
                             .ConfigureAwait(false);
                     }
 

@@ -1037,10 +1037,8 @@ namespace SerializationTestTypes
                         object dictEnumObj = null;
                         try
                         {
-                            dictEnumObj = collectionContract.GetEnumeratorMethod.Invoke(
-                                data,
-                                new object[] {  }
-                            );
+                            dictEnumObj = collectionContract.GetEnumeratorMethod
+                                .Invoke(data, new object[] {  });
                         }
                         catch (Exception) { }
                         IDictionaryEnumerator dictEnum = dictEnumObj as IDictionaryEnumerator;

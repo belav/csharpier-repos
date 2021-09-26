@@ -997,8 +997,8 @@ catch(bar) { baz(); }",
                                         new ExpressionBlock(
                                             Factory.CodeTransition(),
                                             Factory.Code(
-                                                    "Html.ActionUrl(\"Products\", \"Detail\", new { id = p.Id })"
-                                                )
+                                                "Html.ActionUrl(\"Products\", \"Detail\", new { id = p.Id })"
+                                            )
                                                 .AsImplicitExpression(
                                                     CSharpCodeParser.DefaultKeywords
                                                 )

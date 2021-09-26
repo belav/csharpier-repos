@@ -138,7 +138,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                             tempKeys,
                             0,
                             _symmetricAlgorithmSubkeyLengthInBytes
-                        ).AsStandaloneArray(),
+                        )
+                            .AsStandaloneArray(),
                         rgbIV: new byte[_symmetricAlgorithmBlockSizeInBytes]
                     )
                 )
@@ -162,7 +163,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                         tempKeys,
                         _symmetricAlgorithmSubkeyLengthInBytes,
                         _validationAlgorithmSubkeyLengthInBytes
-                    ).AsStandaloneArray()
+                    )
+                        .AsStandaloneArray()
                 )
             )
             {

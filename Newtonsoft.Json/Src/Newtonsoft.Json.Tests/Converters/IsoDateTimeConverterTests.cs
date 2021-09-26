@@ -193,26 +193,10 @@ namespace Newtonsoft.Json.Tests.Converters
         public void SerializeUTC()
         {
             DateTimeTestClass c = new DateTimeTestClass();
-            c.DateTimeField = new DateTime(
-                2008,
-                12,
-                12,
-                12,
-                12,
-                12,
-                0,
-                DateTimeKind.Utc
-            ).ToLocalTime();
-            c.DateTimeOffsetField = new DateTime(
-                2008,
-                12,
-                12,
-                12,
-                12,
-                12,
-                0,
-                DateTimeKind.Utc
-            ).ToLocalTime();
+            c.DateTimeField = new DateTime(2008, 12, 12, 12, 12, 12, 0, DateTimeKind.Utc)
+                .ToLocalTime();
+            c.DateTimeOffsetField = new DateTime(2008, 12, 12, 12, 12, 12, 0, DateTimeKind.Utc)
+                .ToLocalTime();
             c.PreField = "Pre";
             c.PostField = "Post";
             string json = JsonConvert.SerializeObject(
@@ -226,16 +210,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             //test the other edge case too
             c.DateTimeField = new DateTime(2008, 1, 1, 1, 1, 1, 0, DateTimeKind.Utc).ToLocalTime();
-            c.DateTimeOffsetField = new DateTime(
-                2008,
-                1,
-                1,
-                1,
-                1,
-                1,
-                0,
-                DateTimeKind.Utc
-            ).ToLocalTime();
+            c.DateTimeOffsetField = new DateTime(2008, 1, 1, 1, 1, 1, 0, DateTimeKind.Utc)
+                .ToLocalTime();
             c.PreField = "Pre";
             c.PostField = "Post";
             json = JsonConvert.SerializeObject(
@@ -252,26 +228,10 @@ namespace Newtonsoft.Json.Tests.Converters
         public void NullableSerializeUTC()
         {
             NullableDateTimeTestClass c = new NullableDateTimeTestClass();
-            c.DateTimeField = new DateTime(
-                2008,
-                12,
-                12,
-                12,
-                12,
-                12,
-                0,
-                DateTimeKind.Utc
-            ).ToLocalTime();
-            c.DateTimeOffsetField = new DateTime(
-                2008,
-                12,
-                12,
-                12,
-                12,
-                12,
-                0,
-                DateTimeKind.Utc
-            ).ToLocalTime();
+            c.DateTimeField = new DateTime(2008, 12, 12, 12, 12, 12, 0, DateTimeKind.Utc)
+                .ToLocalTime();
+            c.DateTimeOffsetField = new DateTime(2008, 12, 12, 12, 12, 12, 0, DateTimeKind.Utc)
+                .ToLocalTime();
             c.PreField = "Pre";
             c.PostField = "Post";
             string json = JsonConvert.SerializeObject(

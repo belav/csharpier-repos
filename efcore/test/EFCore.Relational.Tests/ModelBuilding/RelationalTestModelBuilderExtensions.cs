@@ -163,24 +163,28 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             switch (builder)
             {
                 case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                    genericBuilder.Instance.ToTable(
-                        name,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(b)
-                            )
-                    );
+                    genericBuilder.Instance
+                        .ToTable(
+                            name,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(
+                                        b
+                                    )
+                                )
+                        );
                     break;
                 case IInfrastructure<EntityTypeBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.ToTable(
-                        name,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
-                                    b
+                    nongenericBuilder.Instance
+                        .ToTable(
+                            name,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
             }
 
@@ -197,26 +201,30 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             switch (builder)
             {
                 case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                    genericBuilder.Instance.ToTable(
-                        name,
-                        schema,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(b)
-                            )
-                    );
+                    genericBuilder.Instance
+                        .ToTable(
+                            name,
+                            schema,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(
+                                        b
+                                    )
+                                )
+                        );
                     break;
                 case IInfrastructure<EntityTypeBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.ToTable(
-                        name,
-                        schema,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
-                                    b
+                    nongenericBuilder.Instance
+                        .ToTable(
+                            name,
+                            schema,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
             }
 

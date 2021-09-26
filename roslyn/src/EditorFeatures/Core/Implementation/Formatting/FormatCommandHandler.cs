@@ -82,11 +82,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             )
             {
                 var changes = formattingService.GetFormattingChangesAsync(
-                        document,
-                        selectionOpt,
-                        documentOptions: null,
-                        cancellationToken
-                    )
+                    document,
+                    selectionOpt,
+                    documentOptions: null,
+                    cancellationToken
+                )
                     .WaitAndGetResult(cancellationToken);
                 if (changes.Count == 0)
                 {
@@ -107,8 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
         {
             if (selectionOpt.HasValue)
             {
-                var ruleFactory =
-                    document.Project.Solution.Workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+                var ruleFactory = document.Project.Solution.Workspace.Services
+                    .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
 
                 changes = ruleFactory.FilterFormattedChanges(document, selectionOpt.Value, changes)
                     .ToList();
@@ -120,11 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
 
             using (Logger.LogBlock(FunctionId.Formatting_ApplyResultToBuffer, cancellationToken))
             {
-                document.Project.Solution.Workspace.ApplyTextChanges(
-                    document.Id,
-                    changes,
-                    cancellationToken
-                );
+                document.Project.Solution.Workspace
+                    .ApplyTextChanges(document.Id, changes, cancellationToken);
             }
         }
 
@@ -177,8 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 return;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
@@ -201,11 +198,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 }
 
                 textChanges = service.GetFormattingChangesOnReturnAsync(
-                        document,
-                        caretPosition.Value,
-                        documentOptions: null,
-                        cancellationToken
-                    )
+                    document,
+                    caretPosition.Value,
+                    documentOptions: null,
+                    cancellationToken
+                )
                     .WaitAndGetResult(cancellationToken);
             }
             else if (args is TypeCharCommandArgs typeCharArgs)
@@ -216,12 +213,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 }
 
                 textChanges = service.GetFormattingChangesAsync(
-                        document,
-                        typeCharArgs.TypedChar,
-                        caretPosition.Value,
-                        documentOptions: null,
-                        cancellationToken
-                    )
+                    document,
+                    typeCharArgs.TypedChar,
+                    caretPosition.Value,
+                    documentOptions: null,
+                    cancellationToken
+                )
                     .WaitAndGetResult(cancellationToken);
             }
             else
@@ -242,11 +239,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             )
             {
                 transaction.MergePolicy = AutomaticCodeChangeMergePolicy.Instance;
-                document.Project.Solution.Workspace.ApplyTextChanges(
-                    document.Id,
-                    textChanges,
-                    cancellationToken
-                );
+                document.Project.Solution.Workspace
+                    .ApplyTextChanges(document.Id, textChanges, cancellationToken);
                 transaction.Complete();
             }
 
@@ -259,14 +253,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
 
             var snapshotAfterFormatting = args.SubjectBuffer.CurrentSnapshot;
 
-            var oldCaretPosition = caretPosition.Value.TranslateTo(
-                snapshotAfterFormatting,
-                PointTrackingMode.Negative
-            );
-            var newCaretPosition = newCaretPositionMarker.Value.TranslateTo(
-                snapshotAfterFormatting,
-                PointTrackingMode.Negative
-            );
+            var oldCaretPosition = caretPosition.Value
+                .TranslateTo(snapshotAfterFormatting, PointTrackingMode.Negative);
+            var newCaretPosition = newCaretPositionMarker.Value
+                .TranslateTo(snapshotAfterFormatting, PointTrackingMode.Negative);
             if (oldCaretPosition.Position == newCaretPosition.Position)
             {
                 return;

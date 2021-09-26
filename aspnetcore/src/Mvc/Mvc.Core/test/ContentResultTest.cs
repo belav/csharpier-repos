@@ -30,10 +30,8 @@ namespace Microsoft.AspNetCore.Mvc
             var contentResult = new ContentResult
             {
                 Content = null,
-                ContentType = new MediaTypeHeaderValue("text/plain")
-                {
-                    Encoding = Encoding.Unicode
-                }.ToString()
+                ContentType = new MediaTypeHeaderValue("text/plain") { Encoding = Encoding.Unicode }
+                    .ToString()
             };
             var httpContext = GetHttpContext();
             var actionContext = GetActionContext(httpContext);

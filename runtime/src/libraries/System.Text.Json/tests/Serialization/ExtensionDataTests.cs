@@ -51,7 +51,8 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Equal(1, obj.MyInt);
                 Assert.Equal(2, obj.MyOverflow["MyIntMissing"].GetInt32());
 
-                JsonProperty[] properties = obj.MyOverflow["MyNestedClassMissing"].EnumerateObject()
+                JsonProperty[] properties = obj.MyOverflow["MyNestedClassMissing"]
+                    .EnumerateObject()
                     .ToArray();
 
                 // Verify a couple properties
@@ -105,7 +106,8 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Equal(1, obj.MyInt);
                 Assert.Equal(2, obj.MyOverflow["MyIntMissing"].GetInt32());
 
-                JsonProperty[] properties = obj.MyOverflow["MyNestedClassMissing"].EnumerateObject()
+                JsonProperty[] properties = obj.MyOverflow["MyNestedClassMissing"]
+                    .EnumerateObject()
                     .ToArray();
 
                 // Verify a couple properties
@@ -458,7 +460,8 @@ namespace System.Text.Json.Serialization.Tests
             Type converterType
         )
         {
-            typeof(ExtensionDataTests).GetMethod(
+            typeof(ExtensionDataTests)
+                .GetMethod(
                     nameof(ExtensionProperty_SupportsWritingToCustomSerializerWithOptionsInternal),
                     BindingFlags.Static | BindingFlags.NonPublic
                 )
@@ -541,7 +544,8 @@ namespace System.Text.Json.Serialization.Tests
             Type dictionaryType
         )
         {
-            typeof(ExtensionDataTests).GetMethod(
+            typeof(ExtensionDataTests)
+                .GetMethod(
                     nameof(
                         ExtensionProperty_SupportsWritingToCustomSerializerWithExplicitConverterInternal
                     ),
@@ -591,7 +595,8 @@ namespace System.Text.Json.Serialization.Tests
             Type elementType
         )
         {
-            typeof(ExtensionDataTests).GetMethod(
+            typeof(ExtensionDataTests)
+                .GetMethod(
                     nameof(ExtensionProperty_IgnoresCustomSerializerWithOptionsInternal),
                     BindingFlags.Static | BindingFlags.NonPublic
                 )
@@ -644,7 +649,8 @@ namespace System.Text.Json.Serialization.Tests
             Type elementType
         )
         {
-            typeof(ExtensionDataTests).GetMethod(
+            typeof(ExtensionDataTests)
+                .GetMethod(
                     nameof(ExtensionProperty_IgnoresCustomSerializerWithExplicitConverterInternal),
                     BindingFlags.Static | BindingFlags.NonPublic
                 )
@@ -777,10 +783,11 @@ namespace System.Text.Json.Serialization.Tests
             obj.MyOverflow.Add("test2", "text");
             obj.MyOverflow.Add("test3", new DummyObj() { Prop = "ObjectProp" });
             obj.MyOverflow.Add("test4", new DummyStruct() { Prop = "StructProp" });
-            obj.MyOverflow.Add(
-                "test5",
-                new Dictionary<string, object>() { { "Key", "Value" }, { "Key1", "Value1" }, }
-            );
+            obj.MyOverflow
+                .Add(
+                    "test5",
+                    new Dictionary<string, object>() { { "Key", "Value" }, { "Key1", "Value1" }, }
+                );
 
             string json = JsonSerializer.Serialize(obj);
             ClassWithExtensionPropertyAlreadyInstantiated roundTripObj =
@@ -970,20 +977,22 @@ namespace System.Text.Json.Serialization.Tests
         public static void NestedClassWithJsonElementExtensionDataProperty()
         {
             var child = new ChildClassWithJsonElement { Number = 4 };
-            child.ExtensionData.Add(
-                "SpecialInformation",
-                JsonDocument.Parse(
-                    JsonSerializer.SerializeToUtf8Bytes("I am child class")
-                ).RootElement
-            );
+            child.ExtensionData
+                .Add(
+                    "SpecialInformation",
+                    JsonDocument.Parse(
+                        JsonSerializer.SerializeToUtf8Bytes("I am child class")
+                    ).RootElement
+                );
 
             var parent = new ParentClassWithJsonElement { Text = "Hello World" };
-            parent.ExtensionData.Add(
-                "SpecialInformation",
-                JsonDocument.Parse(
-                    JsonSerializer.SerializeToUtf8Bytes("I am parent class")
-                ).RootElement
-            );
+            parent.ExtensionData
+                .Add(
+                    "SpecialInformation",
+                    JsonDocument.Parse(
+                        JsonSerializer.SerializeToUtf8Bytes("I am parent class")
+                    ).RootElement
+                );
             parent.Children.Add(child);
 
             Verify();
@@ -1030,7 +1039,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, obj.MyOverflow.Count);
             Assert.Equal(
                 1,
-                ((JsonElement)obj.MyOverflow["MyOverflow"]).EnumerateObject()
+                ((JsonElement)obj.MyOverflow["MyOverflow"])
+                    .EnumerateObject()
                     .First()
                     .Value.GetInt32()
             );
@@ -1069,7 +1079,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, obj.ActualDictionary.Count);
             Assert.Equal(
                 -1,
-                ((JsonElement)obj.ActualDictionary["Key"]).EnumerateObject()
+                ((JsonElement)obj.ActualDictionary["Key"])
+                    .EnumerateObject()
                     .First()
                     .Value.GetInt32()
             );

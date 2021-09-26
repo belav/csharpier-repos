@@ -553,16 +553,16 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             customerID = "ALFKI";
 
-            var customers = context.Customers.Where(
-                    c => orders.Any(o => o.CustomerID == c.CustomerID)
-                )
+            var customers = context.Customers
+                .Where(c => orders.Any(o => o.CustomerID == c.CustomerID))
                 .ToList();
 
             Assert.Single(customers);
 
             customerID = "ANATR";
 
-            customers = context.Customers.Where(c => orders.Any(o => o.CustomerID == c.CustomerID))
+            customers = context.Customers
+                .Where(c => orders.Any(o => o.CustomerID == c.CustomerID))
                 .ToList();
 
             Assert.Equal("ANATR", customers.Single().CustomerID);
@@ -2191,9 +2191,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Where_navigation_contains()
         {
             using var context = CreateContext();
-            var customer = context.Customers.Include(c => c.Orders)
+            var customer = context.Customers
+                .Include(c => c.Orders)
                 .Single(c => c.CustomerID == "ALFKI");
-            var orderDetails = context.OrderDetails.Where(od => customer.Orders.Contains(od.Order))
+            var orderDetails = context.OrderDetails
+                .Where(od => customer.Orders.Contains(od.Order))
                 .ToList();
 
             Assert.Equal(12, orderDetails.Count);

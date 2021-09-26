@@ -207,10 +207,8 @@ namespace System.Linq.Parallel
                                 bool channelIsDone = false;
                                 if (
                                     !_done[i]
-                                    && _channels[i].TryDequeue(
-                                        ref _currentElement,
-                                        ref channelIsDone
-                                    )
+                                    && _channels[i]
+                                        .TryDequeue(ref _currentElement, ref channelIsDone)
                                 )
                                 {
                                     // The channel has received an item since the last time we checked.

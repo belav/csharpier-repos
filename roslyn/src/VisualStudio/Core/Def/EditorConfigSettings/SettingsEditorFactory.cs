@@ -47,8 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             IThreadingContext threadingContext
         )
         {
-            _settingsDataProviderFactory =
-                workspace.Services.GetRequiredService<ISettingsAggregator>();
+            _settingsDataProviderFactory = workspace.Services
+                .GetRequiredService<ISettingsAggregator>();
             _workspace = workspace;
             _controlProvider = controlProvider;
             _tableMangerProvider = tableMangerProvider;

@@ -48,9 +48,10 @@ namespace System.Web.Mvc.Test
             Assert.ThrowsArgumentNull(
                 delegate
                 {
-                    new JavaScriptResult().ExecuteResult(
-                        null /* context */
-                    );
+                    new JavaScriptResult()
+                        .ExecuteResult(
+                            null /* context */
+                        );
                 },
                 "context"
             );

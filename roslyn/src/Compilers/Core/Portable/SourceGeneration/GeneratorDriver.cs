@@ -135,9 +135,8 @@ namespace Microsoft.CodeAnalysis
             // set editsFailed true, as we won't be able to apply edits with a new generator
             var newState = _state.With(
                 generators: _state.Generators.AddRange(generators),
-                generatorStates: _state.GeneratorStates.AddRange(
-                    new GeneratorState[generators.Length]
-                ),
+                generatorStates: _state.GeneratorStates
+                    .AddRange(new GeneratorState[generators.Length]),
                 editsFailed: true
             );
             return FromState(newState);
@@ -178,24 +177,25 @@ namespace Microsoft.CodeAnalysis
 
         public GeneratorDriverRunResult GetRunResult()
         {
-            var results = _state.Generators.ZipAsArray(
-                _state.GeneratorStates,
-                (generator, generatorState) =>
-                    new GeneratorRunResult(
-                        generator,
-                        diagnostics: generatorState.Diagnostics,
-                        exception: generatorState.Exception,
-                        generatedSources: getGeneratorSources(generatorState)
-                    )
-            );
+            var results = _state.Generators
+                .ZipAsArray(
+                    _state.GeneratorStates,
+                    (generator, generatorState) =>
+                        new GeneratorRunResult(
+                            generator,
+                            diagnostics: generatorState.Diagnostics,
+                            exception: generatorState.Exception,
+                            generatedSources: getGeneratorSources(generatorState)
+                        )
+                );
             return new GeneratorDriverRunResult(results);
 
             static ImmutableArray<GeneratedSourceResult> getGeneratorSources(
                 GeneratorState generatorState
             )
             {
-                ArrayBuilder<GeneratedSourceResult> sources =
-                    ArrayBuilder<GeneratedSourceResult>.GetInstance(
+                ArrayBuilder<GeneratedSourceResult> sources = ArrayBuilder<GeneratedSourceResult>
+                    .GetInstance(
                         generatorState.PostInitTrees.Length + generatorState.GeneratedTrees.Length
                     );
                 foreach (var tree in generatorState.PostInitTrees)
@@ -226,10 +226,8 @@ namespace Microsoft.CodeAnalysis
             var state = StateWithPendingEditsApplied(_state);
             var stateBuilder = ArrayBuilder<GeneratorState>.GetInstance(state.Generators.Length);
             var constantSourcesBuilder = ArrayBuilder<SyntaxTree>.GetInstance();
-            var walkerBuilder = ArrayBuilder<GeneratorSyntaxWalker?>.GetInstance(
-                state.Generators.Length,
-                fillWithValue: null
-            ); // we know there is at max 1 per generator
+            var walkerBuilder = ArrayBuilder<GeneratorSyntaxWalker?>
+                .GetInstance(state.Generators.Length, fillWithValue: null); // we know there is at max 1 per generator
             int receiverCount = 0;
 
             for (int i = 0; i < state.Generators.Length; i++)
@@ -479,19 +477,20 @@ namespace Microsoft.CodeAnalysis
                     // update the state with the new edits
                     var additionalSources = previousSources.ToImmutableAndFree();
                     state = state.With(
-                        generatorStates: state.GeneratorStates.SetItem(
-                            i,
-                            new GeneratorState(
-                                generatorState.Info,
-                                generatorState.PostInitTrees,
-                                generatedTrees: ParseAdditionalSources(
-                                    generator,
-                                    additionalSources,
-                                    cancellationToken
-                                ),
-                                diagnostics: ImmutableArray<Diagnostic>.Empty
+                        generatorStates: state.GeneratorStates
+                            .SetItem(
+                                i,
+                                new GeneratorState(
+                                    generatorState.Info,
+                                    generatorState.PostInitTrees,
+                                    generatedTrees: ParseAdditionalSources(
+                                        generator,
+                                        additionalSources,
+                                        cancellationToken
+                                    ),
+                                    diagnostics: ImmutableArray<Diagnostic>.Empty
+                                )
                             )
-                        )
                     );
                 }
             }
@@ -596,10 +595,11 @@ namespace Microsoft.CodeAnalysis
             // ISSUE: Exceptions also don't support IFormattable, so will always be in the current UI Culture.
             // ISSUE: See https://github.com/dotnet/roslyn/issues/46939
 
-            var description = string.Format(
-                provider.GetDescription(errorCode).ToString(CultureInfo.CurrentUICulture),
-                e
-            );
+            var description = string
+                .Format(
+                    provider.GetDescription(errorCode).ToString(CultureInfo.CurrentUICulture),
+                    e
+                );
 
             var descriptor = new DiagnosticDescriptor(
                 provider.GetIdForErrorCode(errorCode),

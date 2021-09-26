@@ -92,8 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
             )
             {
                 return analyzers.SelectMany(
-                        a => _analyzerService.AnalyzerInfoCache.GetDiagnosticDescriptors(a)
-                    )
+                    a => _analyzerService.AnalyzerInfoCache.GetDiagnosticDescriptors(a)
+                )
                     .GroupBy(d => d.Id)
                     .OrderBy(g => g.Key, StringComparer.CurrentCulture)
                     .Select(

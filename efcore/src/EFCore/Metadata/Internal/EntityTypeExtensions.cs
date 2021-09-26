@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string navigationName
         )
         {
-            var memberInfo = entityType.ClrType.GetMembersInHierarchy(navigationName)
+            var memberInfo = entityType.ClrType
+                .GetMembersInHierarchy(navigationName)
                 .FirstOrDefault();
 
             if (memberInfo == null)

@@ -3241,12 +3241,13 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                @"{{ First = {0}, Second = {1} }}",
-                First,
-                Second
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    @"{{ First = {0}, Second = {1} }}",
+                    First,
+                    Second
+                );
         }
     }
 }

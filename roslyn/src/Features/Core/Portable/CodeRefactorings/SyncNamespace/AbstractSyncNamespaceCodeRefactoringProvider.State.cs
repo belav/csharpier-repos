@@ -97,10 +97,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 //       end up in different namespace.
 
                 var applicableNode = await provider.TryGetApplicableInvocationNodeAsync(
-                        document,
-                        textSpan,
-                        cancellationToken
-                    )
+                    document,
+                    textSpan,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (applicableNode == null)
                 {
@@ -109,10 +109,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
 
                 var changeNamespaceService = document.GetLanguageService<IChangeNamespaceService>();
                 var canChange = await changeNamespaceService.CanChangeNamespaceAsync(
-                        document,
-                        applicableNode,
-                        cancellationToken
-                    )
+                    document,
+                    applicableNode,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!canChange || !IsDocumentPathRootedInProjectFolder(document))

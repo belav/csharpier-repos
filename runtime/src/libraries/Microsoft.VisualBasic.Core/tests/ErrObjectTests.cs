@@ -52,8 +52,8 @@ namespace Microsoft.VisualBasic.Tests
 
             ProjectData.SetProjectError(new InvalidOperationException());
             _ = Assert.Throws<Exception>(
-                    () => Information.Err().Raise(1, Description: "MyDescription")
-                )
+                () => Information.Err().Raise(1, Description: "MyDescription")
+            )
                 .ToString();
         }
 

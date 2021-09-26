@@ -261,7 +261,8 @@ namespace System.Data.OleDb
                             parameter.ParameterName = Convert.ToString(
                                 dataRow[parameterName, DataRowVersion.Default],
                                 CultureInfo.InvariantCulture
-                            )!.TrimStart(new char[] { '@', ' ', ':' });
+                            )!
+                                .TrimStart(new char[] { '@', ' ', ':' });
                         }
                         if (
                             (null != parameterDirection)

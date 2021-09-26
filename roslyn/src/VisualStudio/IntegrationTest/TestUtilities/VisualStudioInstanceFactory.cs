@@ -126,7 +126,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             Debug.WriteLine(
                 $"'{eventArgs.RequestingAssembly}' is attempting to resolve '{eventArgs.Name}'"
             );
-            var resolvedAssembly = AppDomain.CurrentDomain.GetAssemblies()
+            var resolvedAssembly = AppDomain.CurrentDomain
+                .GetAssemblies()
                 .Where((assembly) => assembly.FullName.Equals(eventArgs.Name))
                 .SingleOrDefault();
 
@@ -149,9 +150,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             {
                 var shouldStartNewInstance = ShouldStartNewInstance(requiredPackageIds);
                 await UpdateCurrentlyRunningInstanceAsync(
-                        requiredPackageIds,
-                        shouldStartNewInstance
-                    )
+                    requiredPackageIds,
+                    shouldStartNewInstance
+                )
                     .ConfigureAwait(true);
 
                 return new VisualStudioInstanceContext(_currentlyRunningInstance, this);
@@ -216,9 +217,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 installationPath = instance.GetInstallationPath();
 
                 var instanceVersion = instance.GetInstallationVersion();
-                var majorVersion = int.Parse(
-                    instanceVersion.Substring(0, instanceVersion.IndexOf('.'))
-                );
+                var majorVersion = int
+                    .Parse(instanceVersion.Substring(0, instanceVersion.IndexOf('.')));
                 hostProcess = StartNewVisualStudioProcess(
                     installationPath,
                     majorVersion,
@@ -233,8 +233,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
                 // We wait until the DTE instance is up before we're good
                 dte = await IntegrationHelper.WaitForNotNullAsync(
-                        () => IntegrationHelper.TryLocateDteForProcess(hostProcess)
-                    )
+                    () => IntegrationHelper.TryLocateDteForProcess(hostProcess)
+                )
                     .ConfigureAwait(true);
             }
             else
@@ -250,8 +250,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
                 hostProcess = _currentlyRunningInstance.HostProcess;
                 dte = await IntegrationHelper.WaitForNotNullAsync(
-                        () => IntegrationHelper.TryLocateDteForProcess(hostProcess)
-                    )
+                    () => IntegrationHelper.TryLocateDteForProcess(hostProcess)
+                )
                     .ConfigureAwait(true);
                 supportedPackageIds = _currentlyRunningInstance.SupportedPackageIds;
                 installationPath = _currentlyRunningInstance.InstallationPath;
@@ -325,34 +325,33 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 );
             }
 
-            var instances = EnumerateVisualStudioInstances()
-                .Where(
-                    (instance) =>
+            var instances = EnumerateVisualStudioInstances().Where(
+                (instance) =>
+                {
+                    var isMatch = true;
                     {
-                        var isMatch = true;
+                        if (haveVsInstallDir)
                         {
-                            if (haveVsInstallDir)
-                            {
-                                var installationPath = instance.GetInstallationPath();
-                                installationPath = Path.GetFullPath(installationPath);
-                                installationPath = installationPath.TrimEnd(
-                                    Path.DirectorySeparatorChar,
-                                    Path.AltDirectorySeparatorChar
-                                );
-                                isMatch &= installationPath.Equals(
-                                    vsInstallDir,
-                                    StringComparison.OrdinalIgnoreCase
-                                );
-                            }
-                            else
-                            {
-                                isMatch &= instance.GetInstallationVersion()
-                                    .StartsWith(VsProductVersion);
-                            }
+                            var installationPath = instance.GetInstallationPath();
+                            installationPath = Path.GetFullPath(installationPath);
+                            installationPath = installationPath.TrimEnd(
+                                Path.DirectorySeparatorChar,
+                                Path.AltDirectorySeparatorChar
+                            );
+                            isMatch &= installationPath.Equals(
+                                vsInstallDir,
+                                StringComparison.OrdinalIgnoreCase
+                            );
                         }
-                        return isMatch;
+                        else
+                        {
+                            isMatch &= instance.GetInstallationVersion()
+                                .StartsWith(VsProductVersion);
+                        }
                     }
-                );
+                    return isMatch;
+                }
+            );
 
             var messages = new List<string>();
 
@@ -360,8 +359,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             {
                 var instancePackagesIds = instance.GetPackages().Select(p => p.GetId()).ToHashSet();
                 var missingPackageIds = requiredPackageIds.Where(
-                        p => !instancePackagesIds.Contains(p)
-                    )
+                    p => !instancePackagesIds.Contains(p)
+                )
                     .ToList();
 
                 if (missingPackageIds.Count > 0)
@@ -407,11 +406,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 {
                     // Make sure the start window doesn't show on launch
                     Process.Start(
-                            CreateSilentStartInfo(
-                                vsRegEditExeFile,
-                                $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU General OnEnvironmentStartup dword 10"
-                            )
+                        CreateSilentStartInfo(
+                            vsRegEditExeFile,
+                            $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU General OnEnvironmentStartup dword 10"
                         )
+                    )
                         .WaitForExit();
                 }
 
@@ -420,44 +419,44 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 Process.Start(CreateSilentStartInfo(vsExeFile, $"/clearcache {VsLaunchArgs}"))
                     .WaitForExit();
                 Process.Start(
-                        CreateSilentStartInfo(vsExeFile, $"/updateconfiguration {VsLaunchArgs}")
-                    )
+                    CreateSilentStartInfo(vsExeFile, $"/updateconfiguration {VsLaunchArgs}")
+                )
                     .WaitForExit();
                 Process.Start(
-                        CreateSilentStartInfo(
-                            vsExeFile,
-                            $"/resetsettings General.vssettings /command \"File.Exit\" {VsLaunchArgs}"
-                        )
+                    CreateSilentStartInfo(
+                        vsExeFile,
+                        $"/resetsettings General.vssettings /command \"File.Exit\" {VsLaunchArgs}"
                     )
+                )
                     .WaitForExit();
 
                 // Disable roaming settings to avoid interference from the online user profile
                 Process.Start(
-                        CreateSilentStartInfo(
-                            vsRegEditExeFile,
-                            $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU \"ApplicationPrivateSettings\\Microsoft\\VisualStudio\" RoamingEnabled string \"1*System.Boolean*False\""
-                        )
+                    CreateSilentStartInfo(
+                        vsRegEditExeFile,
+                        $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU \"ApplicationPrivateSettings\\Microsoft\\VisualStudio\" RoamingEnabled string \"1*System.Boolean*False\""
                     )
+                )
                     .WaitForExit();
 
                 // Disable background download UI to avoid toasts
                 Process.Start(
-                        CreateSilentStartInfo(
-                            vsRegEditExeFile,
-                            $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU \"FeatureFlags\\Setup\\BackgroundDownload\" Value dword 0"
-                        )
+                    CreateSilentStartInfo(
+                        vsRegEditExeFile,
+                        $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU \"FeatureFlags\\Setup\\BackgroundDownload\" Value dword 0"
                     )
+                )
                     .WaitForExit();
 
                 var lspRegistryValue = isUsingLspEditor ? "1" : "0";
                 var lspFeatureFlagName =
                     VisualStudioWorkspaceContextService.LspEditorFeatureFlagName.Replace(".", "\\");
                 Process.Start(
-                        CreateSilentStartInfo(
-                            vsRegEditExeFile,
-                            $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU \"FeatureFlags\\{lspFeatureFlagName}\" Value dword {lspRegistryValue}"
-                        )
+                    CreateSilentStartInfo(
+                        vsRegEditExeFile,
+                        $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU \"FeatureFlags\\{lspFeatureFlagName}\" Value dword {lspRegistryValue}"
                     )
+                )
                     .WaitForExit();
                 Registry.SetValue(
                     @"HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\Telemetry\Channels",
@@ -478,22 +477,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 if (
                     disabledFlights.Any(
                         flight =>
-                            string.Equals(
-                                flight,
-                                "completionapi",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(flight, "completionapi", StringComparison.OrdinalIgnoreCase)
                     )
                 )
                 {
                     disabledFlights = disabledFlights.Where(
-                            flight =>
-                                !string.Equals(
-                                    flight,
-                                    "completionapi",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                        )
+                        flight =>
+                            !string
+                                .Equals(flight, "completionapi", StringComparison.OrdinalIgnoreCase)
+                    )
                         .ToArray();
                     Registry.SetValue(
                         @"HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\ABExp\LocalTest",
@@ -506,28 +499,29 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 // Disable text editor error reporting because it pops up a dialog. We want to either fail fast in our
                 // custom handler or fail silently and continue testing.
                 Process.Start(
-                        CreateSilentStartInfo(
-                            vsRegEditExeFile,
-                            $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU \"Text Editor\" \"Report Exceptions\" dword 0"
-                        )
+                    CreateSilentStartInfo(
+                        vsRegEditExeFile,
+                        $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU \"Text Editor\" \"Report Exceptions\" dword 0"
                     )
+                )
                     .WaitForExit();
 
                 // Configure RemoteHostOptions.OOP64Bit for testing
                 if (
-                    string.Equals(
-                        Environment.GetEnvironmentVariable("ROSLYN_OOP64BIT"),
-                        "false",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            Environment.GetEnvironmentVariable("ROSLYN_OOP64BIT"),
+                            "false",
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     Process.Start(
-                            CreateSilentStartInfo(
-                                vsRegEditExeFile,
-                                $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU \"Roslyn\\Internal\\OnOff\\Features\" OOP64Bit dword 0"
-                            )
+                        CreateSilentStartInfo(
+                            vsRegEditExeFile,
+                            $"set \"{installationPath}\" {Settings.Default.VsRootSuffix} HKCU \"Roslyn\\Internal\\OnOff\\Features\" OOP64Bit dword 0"
                         )
+                    )
                         .WaitForExit();
                 }
 
@@ -560,10 +554,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
             // The first element of the path in CI is a .dotnet used for the Roslyn build. Make sure to remove that.
             if (
-                processStartInfo.Environment.TryGetValue(
-                    "BUILD_SOURCESDIRECTORY",
-                    out var sourcesDirectory
-                )
+                processStartInfo.Environment
+                    .TryGetValue("BUILD_SOURCESDIRECTORY", out var sourcesDirectory)
             )
             {
                 var environmentPath = processStartInfo.Environment["PATH"];
@@ -601,11 +593,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
         private static bool IsUsingLspEditor()
         {
-            return string.Equals(
-                Environment.GetEnvironmentVariable("ROSLYN_LSPEDITOR"),
-                "true",
-                StringComparison.OrdinalIgnoreCase
-            );
+            return string
+                .Equals(
+                    Environment.GetEnvironmentVariable("ROSLYN_LSPEDITOR"),
+                    "true",
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
         public void Dispose()

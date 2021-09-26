@@ -69,12 +69,16 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     // TODO: fully render nested structure of include tree
                     expressionPrinter.Append(
                         " | IncludePaths: "
-                            + string.Join(
-                                " ",
-                                IncludePaths.Select(
-                                    ip => ip.Value.Count() > 0 ? ip.Key.Name + "->..." : ip.Key.Name
+                            + string
+                                .Join(
+                                    " ",
+                                    IncludePaths.Select(
+                                        ip =>
+                                            ip.Value.Count() > 0
+                                                ? ip.Key.Name + "->..."
+                                                : ip.Key.Name
+                                    )
                                 )
-                            )
                     );
                 }
             }
@@ -122,10 +126,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 {
                     if (
                         navigation is INavigation concreteNavigation
-                        && _entityReference.ForeignKeyExpansionMap.TryGetValue(
-                            (concreteNavigation.ForeignKey, concreteNavigation.IsOnDependent),
-                            out var expansion
-                        )
+                        && _entityReference.ForeignKeyExpansionMap
+                            .TryGetValue(
+                                (concreteNavigation.ForeignKey, concreteNavigation.IsOnDependent),
+                                out var expansion
+                            )
                     )
                     {
                         // Value known to be non-null
@@ -133,20 +138,20 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     }
                     else if (
                         navigation is ISkipNavigation skipNavigation
-                        && _entityReference.ForeignKeyExpansionMap.TryGetValue(
-                            (skipNavigation.ForeignKey, skipNavigation.IsOnDependent),
-                            out var firstExpansion
-                        )
+                        && _entityReference.ForeignKeyExpansionMap
+                            .TryGetValue(
+                                (skipNavigation.ForeignKey, skipNavigation.IsOnDependent),
+                                out var firstExpansion
+                            )
                         // Value known to be non-null
-                        && UnwrapEntityReference(
-                            firstExpansion
-                        )!.ForeignKeyExpansionMap.TryGetValue(
-                            (
-                                skipNavigation.Inverse.ForeignKey,
-                                !skipNavigation.Inverse.IsOnDependent
-                            ),
-                            out var secondExpansion
-                        )
+                        && UnwrapEntityReference(firstExpansion)!.ForeignKeyExpansionMap
+                            .TryGetValue(
+                                (
+                                    skipNavigation.Inverse.ForeignKey,
+                                    !skipNavigation.Inverse.IsOnDependent
+                                ),
+                                out var secondExpansion
+                            )
                     )
                     {
                         // Value known to be non-null

@@ -303,10 +303,10 @@ namespace System.Net.NetworkInformation
                 int ipHeaderLength = socketConfig.IsIpv4 ? MinIpHeaderLengthInBytes : 0;
 
                 await socket.SendToAsync(
-                        new ArraySegment<byte>(socketConfig.SendBuffer),
-                        SocketFlags.None,
-                        socketConfig.EndPoint
-                    )
+                    new ArraySegment<byte>(socketConfig.SendBuffer),
+                    SocketFlags.None,
+                    socketConfig.EndPoint
+                )
                     .ConfigureAwait(false);
 
                 byte[] receiveBuffer = new byte[
@@ -329,8 +329,8 @@ namespace System.Net.NetworkInformation
                     try
                     {
                         await receiveTask.WaitAsync(
-                                TimeSpan.FromMilliseconds(timeout - (int)elapsed)
-                            )
+                            TimeSpan.FromMilliseconds(timeout - (int)elapsed)
+                        )
                             .ConfigureAwait(false);
                     }
                     catch (TimeoutException)
@@ -453,7 +453,8 @@ namespace System.Net.NetworkInformation
 
                 try
                 {
-                    await processCompletion.Task.WaitAsync(TimeSpan.FromMilliseconds(timeout))
+                    await processCompletion.Task
+                        .WaitAsync(TimeSpan.FromMilliseconds(timeout))
                         .ConfigureAwait(false);
                 }
                 catch (TimeoutException)

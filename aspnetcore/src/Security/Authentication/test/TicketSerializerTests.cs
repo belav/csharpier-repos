@@ -41,9 +41,8 @@ namespace Microsoft.AspNetCore.Authentication
             var properties = new AuthenticationProperties();
 
             var ticket = new AuthenticationTicket(new ClaimsPrincipal(), properties, "Hello");
-            ticket.Principal.AddIdentity(
-                new ClaimsIdentity("misc") { BootstrapContext = "bootstrap" }
-            );
+            ticket.Principal
+                .AddIdentity(new ClaimsIdentity("misc") { BootstrapContext = "bootstrap" });
 
             using (var stream = new MemoryStream())
             using (var writer = new BinaryWriter(stream))

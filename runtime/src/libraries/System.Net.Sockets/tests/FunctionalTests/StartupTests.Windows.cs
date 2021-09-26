@@ -19,13 +19,12 @@ namespace System.Net.Sockets.Tests
         {
             bool parentSupported = Socket.OSSupportsIPv4;
             RemoteExecutor.Invoke(
-                    parentSupported =>
-                    {
-                        Assert.Equal(bool.Parse(parentSupported), Socket.OSSupportsIPv4);
-                    },
-                    parentSupported.ToString()
-                )
-                .Dispose();
+                parentSupported =>
+                {
+                    Assert.Equal(bool.Parse(parentSupported), Socket.OSSupportsIPv4);
+                },
+                parentSupported.ToString()
+            ).Dispose();
         }
 
         [Fact]
@@ -33,13 +32,12 @@ namespace System.Net.Sockets.Tests
         {
             bool parentSupported = Socket.OSSupportsIPv6;
             RemoteExecutor.Invoke(
-                    parentSupported =>
-                    {
-                        Assert.Equal(bool.Parse(parentSupported), Socket.OSSupportsIPv6);
-                    },
-                    parentSupported.ToString()
-                )
-                .Dispose();
+                parentSupported =>
+                {
+                    Assert.Equal(bool.Parse(parentSupported), Socket.OSSupportsIPv6);
+                },
+                parentSupported.ToString()
+            ).Dispose();
         }
 
         [Fact]
@@ -47,16 +45,12 @@ namespace System.Net.Sockets.Tests
         {
             bool parentSupported = Socket.OSSupportsUnixDomainSockets;
             RemoteExecutor.Invoke(
-                    parentSupported =>
-                    {
-                        Assert.Equal(
-                            bool.Parse(parentSupported),
-                            Socket.OSSupportsUnixDomainSockets
-                        );
-                    },
-                    parentSupported.ToString()
-                )
-                .Dispose();
+                parentSupported =>
+                {
+                    Assert.Equal(bool.Parse(parentSupported), Socket.OSSupportsUnixDomainSockets);
+                },
+                parentSupported.ToString()
+            ).Dispose();
         }
 
 #pragma warning disable CS0618 // SupportsIPv4 and SupportsIPv6 are obsolete
@@ -65,13 +59,12 @@ namespace System.Net.Sockets.Tests
         {
             bool parentSupported = Socket.SupportsIPv4;
             RemoteExecutor.Invoke(
-                    parentSupported =>
-                    {
-                        Assert.Equal(bool.Parse(parentSupported), Socket.SupportsIPv4);
-                    },
-                    parentSupported.ToString()
-                )
-                .Dispose();
+                parentSupported =>
+                {
+                    Assert.Equal(bool.Parse(parentSupported), Socket.SupportsIPv4);
+                },
+                parentSupported.ToString()
+            ).Dispose();
         }
 
         [Fact]
@@ -79,13 +72,12 @@ namespace System.Net.Sockets.Tests
         {
             bool parentSupported = Socket.SupportsIPv6;
             RemoteExecutor.Invoke(
-                    parentSupported =>
-                    {
-                        Assert.Equal(bool.Parse(parentSupported), Socket.SupportsIPv6);
-                    },
-                    parentSupported.ToString()
-                )
-                .Dispose();
+                parentSupported =>
+                {
+                    Assert.Equal(bool.Parse(parentSupported), Socket.SupportsIPv6);
+                },
+                parentSupported.ToString()
+            ).Dispose();
         }
 #pragma warning restore CS0618
 
@@ -93,48 +85,41 @@ namespace System.Net.Sockets.Tests
         public static void Ctor_SocketType_ProtocolType()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        new Socket(SocketType.Stream, ProtocolType.Tcp).Dispose();
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    new Socket(SocketType.Stream, ProtocolType.Tcp).Dispose();
+                }
+            ).Dispose();
         }
 
         [Fact]
         public static void Ctor_AddressFamily_SocketType_ProtocolType()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        new Socket(
-                            AddressFamily.InterNetwork,
-                            SocketType.Stream,
-                            ProtocolType.Tcp
-                        ).Dispose();
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+                        .Dispose();
+                }
+            ).Dispose();
         }
 
         [Fact]
-        public static void Ctor_SafeHandle() =>
-            RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        using var pipe = new AnonymousPipeServerStream();
-                        SocketException se = Assert.Throws<SocketException>(
-                            () =>
-                                new Socket(
-                                    new SafeSocketHandle(
-                                        pipe.ClientSafePipeHandle.DangerousGetHandle(),
-                                        ownsHandle: false
-                                    )
+        public static void Ctor_SafeHandle() => RemoteExecutor.Invoke(
+                () =>
+                {
+                    using var pipe = new AnonymousPipeServerStream();
+                    SocketException se = Assert.Throws<SocketException>(
+                        () =>
+                            new Socket(
+                                new SafeSocketHandle(
+                                    pipe.ClientSafePipeHandle.DangerousGetHandle(),
+                                    ownsHandle: false
                                 )
-                        );
-                        Assert.Equal(SocketError.NotSocket, se.SocketErrorCode);
-                    }
-                )
-                .Dispose();
+                            )
+                    );
+                    Assert.Equal(SocketError.NotSocket, se.SocketErrorCode);
+                }
+            ).Dispose();
     }
 }

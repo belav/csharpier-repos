@@ -653,10 +653,8 @@ namespace System.Text.Encodings.Web.Tests
         {
             Span<byte> allowedCharAsUtf8 = stackalloc byte[3];
             Assert.True(
-                new Rune(bmpAllowedChar).TryEncodeToUtf8(
-                    allowedCharAsUtf8,
-                    out int allowedCharUtf8CodeUnitCount
-                )
+                new Rune(bmpAllowedChar)
+                    .TryEncodeToUtf8(allowedCharAsUtf8, out int allowedCharUtf8CodeUnitCount)
             );
             allowedCharAsUtf8 = allowedCharAsUtf8.Slice(0, allowedCharUtf8CodeUnitCount);
 
@@ -694,10 +692,8 @@ namespace System.Text.Encodings.Web.Tests
 
             Span<byte> allowedCharAsUtf8 = stackalloc byte[3];
             Assert.True(
-                new Rune(bmpAllowedChar).TryEncodeToUtf8(
-                    allowedCharAsUtf8,
-                    out int allowedCharUtf8CodeUnitCount
-                )
+                new Rune(bmpAllowedChar)
+                    .TryEncodeToUtf8(allowedCharAsUtf8, out int allowedCharUtf8CodeUnitCount)
             );
             allowedCharAsUtf8 = allowedCharAsUtf8.Slice(0, allowedCharUtf8CodeUnitCount);
 
@@ -993,9 +989,8 @@ namespace System.Text.Encodings.Web.Tests
         protected void _RunEncodeUtf8_Battery(byte[][] inputs, string[] expectedOutputsAsUtf16)
         {
             byte[] accumInput = new byte[] { (byte)_disallowedChar };
-            byte[] accumExpectedOutput = Encoding.UTF8.GetBytes(
-                GetExpectedEscapedRepresentation(new Rune(_disallowedChar))
-            );
+            byte[] accumExpectedOutput = Encoding.UTF8
+                .GetBytes(GetExpectedEscapedRepresentation(new Rune(_disallowedChar)));
             byte[][] expectedOutputs = expectedOutputsAsUtf16.Select(Encoding.UTF8.GetBytes)
                 .ToArray();
 
@@ -1098,9 +1093,9 @@ namespace System.Text.Encodings.Web.Tests
                     Assert.Equal(accumExpectedOutput.Length - outputToAppend.Length, bytesWritten);
                     Assert.Equal(
                         accumExpectedOutput.AsSpan(
-                                0,
-                                accumExpectedOutput.Length - outputToAppend.Length
-                            )
+                            0,
+                            accumExpectedOutput.Length - outputToAppend.Length
+                        )
                             .ToArray(),
                         destination.AsSpan(0, bytesWritten).ToArray()
                     );

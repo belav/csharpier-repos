@@ -110,9 +110,10 @@ namespace System.Net.Http.Functional.Tests
                         {
                             byte[] postData = new byte[numBytes];
                             while (
-                                !string.IsNullOrEmpty(
-                                    await connection.ReadLineAsync().ConfigureAwait(false)
-                                )
+                                !string
+                                    .IsNullOrEmpty(
+                                        await connection.ReadLineAsync().ConfigureAwait(false)
+                                    )
                             )
                                 ;
                             Assert.Equal(
@@ -245,7 +246,8 @@ namespace System.Net.Http.Functional.Tests
                         Task<string>[] tasks = (
                             from i in Enumerable.Range(0, numRequests)
                             select client.GetStringAsync(url)
-                        ).ToArray();
+                        )
+                            .ToArray();
 
                         Assert.All(
                             tasks,
@@ -290,22 +292,23 @@ namespace System.Net.Http.Functional.Tests
         )
         {
             LoopbackServerFactory.CreateServerAsync(
-                    (server, url) =>
+                (server, url) =>
+                {
+                    Task<HttpResponseMessage> getAsync = client.GetAsync(url, completionOption);
+
+                    new Task[]
                     {
-                        Task<HttpResponseMessage> getAsync = client.GetAsync(url, completionOption);
-
-                        new Task[]
-                        {
-                            getAsync,
-                            server.HandleRequestAsync(HttpStatusCode.OK, headers, content)
-                        }.WhenAllOrAnyFailed().GetAwaiter().GetResult();
-
-                        getAsync.Result.Dispose();
-                        return Task.CompletedTask;
+                        getAsync,
+                        server.HandleRequestAsync(HttpStatusCode.OK, headers, content)
                     }
-                )
-                .GetAwaiter()
-                .GetResult();
+                        .WhenAllOrAnyFailed()
+                        .GetAwaiter()
+                        .GetResult();
+
+                    getAsync.Result.Dispose();
+                    return Task.CompletedTask;
+                }
+            ).GetAwaiter().GetResult();
         }
 
         private async Task CreateServerAndGetAsync(
@@ -324,7 +327,9 @@ namespace System.Net.Http.Functional.Tests
                     {
                         getAsync,
                         server.HandleRequestAsync(HttpStatusCode.OK, headers, content),
-                    }.WhenAllOrAnyFailed().ConfigureAwait(false);
+                    }
+                        .WhenAllOrAnyFailed()
+                        .ConfigureAwait(false);
 
                     getAsync.Result.Dispose();
                 }
@@ -388,51 +393,42 @@ namespace System.Net.Http.Functional.Tests
         {
             var sched = new ThreadPerTaskScheduler();
             int nextAvailableIndex = 0;
-            return Task.WhenAll(
-                Enumerable.Range(0, dop)
-                    .Select(
-                        _ =>
-                            Task.Factory.StartNew(
-                                    async delegate
-                                    {
-                                        int index;
-                                        while (
-                                            (
-                                                index =
-                                                    Interlocked.Increment(ref nextAvailableIndex)
-                                                    - 1
-                                            ) < count
-                                        )
-                                        {
-                                            try
-                                            {
-                                                await bodyAsync(index);
-                                            }
-                                            catch
-                                            {
-                                                Volatile.Write(ref nextAvailableIndex, count); // avoid any further iterations
-                                                throw;
-                                            }
-                                        }
-                                    },
-                                    CancellationToken.None,
-                                    TaskCreationOptions.None,
-                                    sched
+            return Task.WhenAll(Enumerable.Range(0, dop).Select(_ => Task.Factory.StartNew(
+                            async delegate
+                            {
+                                int index;
+                                while (
+                                    (index = Interlocked.Increment(ref nextAvailableIndex) - 1)
+                                    < count
                                 )
-                                .Unwrap()
-                    )
-            );
+                                {
+                                    try
+                                    {
+                                        await bodyAsync(index);
+                                    }
+                                    catch
+                                    {
+                                        Volatile.Write(ref nextAvailableIndex, count); // avoid any further iterations
+                                        throw;
+                                    }
+                                }
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            sched
+                        ).Unwrap()));
         }
 
         private sealed class ThreadPerTaskScheduler : TaskScheduler
         {
             protected override void QueueTask(Task task) =>
-                Task.Factory.StartNew(
-                    () => TryExecuteTask(task),
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        () => TryExecuteTask(task),
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
 
             protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) =>
                 TryExecuteTask(task);

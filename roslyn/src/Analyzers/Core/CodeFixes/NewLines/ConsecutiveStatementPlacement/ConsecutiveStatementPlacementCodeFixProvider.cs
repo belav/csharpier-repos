@@ -62,10 +62,8 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
                 .ConfigureAwait(false);
 
 #if CODE_STYLE
-            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
-                root.SyntaxTree,
-                cancellationToken
-            );
+            var options = document.Project.AnalyzerOptions
+                .GetAnalyzerOptionSet(root.SyntaxTree, cancellationToken);
 #else
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 #endif

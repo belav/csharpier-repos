@@ -229,12 +229,13 @@ namespace System.Reflection
                     throw new TargetException("Non-static field requires a target");
                 if (!DeclaringType!.IsAssignableFrom(obj.GetType()))
                     throw new ArgumentException(
-                        string.Format(
-                            "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
-                            Name,
-                            DeclaringType,
-                            obj.GetType()
-                        ),
+                        string
+                            .Format(
+                                "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
+                                Name,
+                                DeclaringType,
+                                obj.GetType()
+                            ),
                         nameof(obj)
                     );
             }
@@ -266,12 +267,13 @@ namespace System.Reflection
                     throw new TargetException("Non-static field requires a target");
                 if (!DeclaringType!.IsAssignableFrom(obj.GetType()))
                     throw new ArgumentException(
-                        string.Format(
-                            "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
-                            Name,
-                            DeclaringType,
-                            obj.GetType()
-                        ),
+                        string
+                            .Format(
+                                "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
+                                Name,
+                                DeclaringType,
+                                obj.GetType()
+                            ),
                         nameof(obj)
                     );
             }

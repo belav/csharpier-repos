@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // Assert
             var rewrittenTree = codeDocument.GetSyntaxTree();
-            var erroredNode = rewrittenTree.Root.DescendantNodes()
+            var erroredNode = rewrittenTree.Root
+                .DescendantNodes()
                 .First(n => n.GetSpanContext()?.ChunkGenerator is AddTagHelperChunkGenerator);
             var chunkGenerator = Assert.IsType<AddTagHelperChunkGenerator>(
                 erroredNode.GetSpanContext().ChunkGenerator
@@ -108,7 +109,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // Assert
             var rewrittenTree = codeDocument.GetSyntaxTree();
-            var erroredNode = rewrittenTree.Root.DescendantNodes()
+            var erroredNode = rewrittenTree.Root
+                .DescendantNodes()
                 .First(n => n.GetSpanContext()?.ChunkGenerator is RemoveTagHelperChunkGenerator);
             var chunkGenerator = Assert.IsType<RemoveTagHelperChunkGenerator>(
                 erroredNode.GetSpanContext().ChunkGenerator
@@ -160,7 +162,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // Assert
             var rewrittenTree = codeDocument.GetSyntaxTree();
-            var erroredNode = rewrittenTree.Root.DescendantNodes()
+            var erroredNode = rewrittenTree.Root
+                .DescendantNodes()
                 .First(
                     n =>
                         n.GetSpanContext()?.ChunkGenerator is TagHelperPrefixDirectiveChunkGenerator
@@ -211,8 +214,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
             var tagHelperNodes = descendantNodes.Where(
-                    n => n is MarkupTagHelperElementSyntax tagHelper
-                )
+                n => n is MarkupTagHelperElementSyntax tagHelper
+            )
                 .Cast<MarkupTagHelperElementSyntax>()
                 .ToArray();
             Assert.Equal("form", tagHelperNodes[0].TagHelperInfo.TagName);
@@ -254,8 +257,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
             var tagHelperNodes = descendantNodes.Where(
-                    n => n is MarkupTagHelperElementSyntax tagHelper
-                )
+                n => n is MarkupTagHelperElementSyntax tagHelper
+            )
                 .Cast<MarkupTagHelperElementSyntax>()
                 .ToArray();
             Assert.Equal("form", tagHelperNodes[0].TagHelperInfo.TagName);
@@ -299,8 +302,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
             var tagHelperNodes = descendantNodes.Where(
-                    n => n is MarkupTagHelperElementSyntax tagHelper
-                )
+                n => n is MarkupTagHelperElementSyntax tagHelper
+            )
                 .Cast<MarkupTagHelperElementSyntax>()
                 .ToArray();
             Assert.Equal("form", tagHelperNodes[0].TagHelperInfo.TagName);
@@ -344,8 +347,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
             var tagHelperNodes = descendantNodes.Where(
-                    n => n is MarkupTagHelperElementSyntax tagHelper
-                )
+                n => n is MarkupTagHelperElementSyntax tagHelper
+            )
                 .Cast<MarkupTagHelperElementSyntax>()
                 .ToArray();
             Assert.Empty(tagHelperNodes);
@@ -408,8 +411,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
             var tagHelperNodes = descendantNodes.Where(
-                    n => n is MarkupTagHelperElementSyntax tagHelper
-                )
+                n => n is MarkupTagHelperElementSyntax tagHelper
+            )
                 .Cast<MarkupTagHelperElementSyntax>()
                 .ToArray();
 
@@ -475,8 +478,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
             var tagHelperNodes = descendantNodes.Where(
-                    n => n is MarkupTagHelperElementSyntax tagHelper
-                )
+                n => n is MarkupTagHelperElementSyntax tagHelper
+            )
                 .Cast<MarkupTagHelperElementSyntax>()
                 .ToArray();
 
@@ -526,8 +529,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
             var tagHelperNodes = descendantNodes.Where(
-                    n => n is MarkupTagHelperElementSyntax tagHelper
-                )
+                n => n is MarkupTagHelperElementSyntax tagHelper
+            )
                 .Cast<MarkupTagHelperElementSyntax>()
                 .ToArray();
 
@@ -1305,10 +1308,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             Assert.Null(visitor.TagHelperPrefix);
             var match = Assert.Single(visitor.Matches);
             Assert.Same(componentDescriptor, match);
-            var directiveChunkGenerator =
-                (TagHelperPrefixDirectiveChunkGenerator)tree.Root.DescendantNodes()
-                    .First(n => n is CSharpStatementLiteralSyntax)
-                    .GetSpanContext().ChunkGenerator;
+            var directiveChunkGenerator = (TagHelperPrefixDirectiveChunkGenerator)tree.Root
+                .DescendantNodes()
+                .First(n => n is CSharpStatementLiteralSyntax)
+                .GetSpanContext().ChunkGenerator;
             var diagnostic = Assert.Single(directiveChunkGenerator.Diagnostics);
             Assert.Equal("RZ9978", diagnostic.Id);
         }
@@ -1507,11 +1510,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         )
         {
             // Arrange & Act
-            var result =
-                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTypeInNamespace(
-                    typeName,
-                    @namespace
-                );
+            var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor
+                .IsTypeInNamespace(typeName, @namespace);
 
             // Assert
             Assert.Equal(expected, result);
@@ -1532,10 +1532,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         )
         {
             // Arrange & Act
-            var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTypeInScope(
-                typeName,
-                currentNamespace
-            );
+            var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor
+                .IsTypeInScope(typeName, currentNamespace);
 
             // Assert
             Assert.Equal(expected, result);
@@ -1555,10 +1553,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
 
             // Act
-            var result =
-                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTagHelperFromMangledClass(
-                    descriptor
-                );
+            var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor
+                .IsTagHelperFromMangledClass(descriptor);
 
             // Assert
             Assert.True(result);
@@ -1581,28 +1577,20 @@ namespace Microsoft.AspNetCore.Razor.Language
         )
         {
             // Arrange & Act
-            var result =
-                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.TrySplitNamespaceAndType(
-                    fullTypeName,
-                    out var @namespace,
-                    out var typeName
-                );
+            var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor
+                .TrySplitNamespaceAndType(fullTypeName, out var @namespace, out var typeName);
 
             // Assert
             Assert.Equal(expectedResult, result);
             Assert.Equal(
                 expectedNamespace,
-                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.GetTextSpanContent(
-                    @namespace,
-                    fullTypeName
-                )
+                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor
+                    .GetTextSpanContent(@namespace, fullTypeName)
             );
             Assert.Equal(
                 expectedTypeName,
-                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.GetTextSpanContent(
-                    typeName,
-                    fullTypeName
-                )
+                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor
+                    .GetTextSpanContent(typeName, fullTypeName)
             );
         }
 

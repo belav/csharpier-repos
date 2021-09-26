@@ -102,8 +102,8 @@ namespace System.Text.Tests
         {
             Assert.Equal(2, partialStart.Length);
 
-            char[] chars =
-                "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+-=\\|/?<>  ,.`~".ToCharArray();
+            char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+-=\\|/?<>  ,.`~"
+                .ToCharArray();
             byte[] bytes = new byte[chars.Length * size];
             VerificationHelper(
                 encoder,

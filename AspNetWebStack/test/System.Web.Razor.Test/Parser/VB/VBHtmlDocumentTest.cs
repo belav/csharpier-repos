@@ -78,8 +78,8 @@ namespace System.Web.Razor.Test.Parser.VB
                     new StatementBlock(
                         Factory.CodeTransition(),
                         Factory.Code(
-                                "If Request.IsAuthenticated Then" + Environment.NewLine + "    "
-                            )
+                            "If Request.IsAuthenticated Then" + Environment.NewLine + "    "
+                        )
                             .AsStatement(),
                         new CommentBlock(
                             Factory.CodeTransition(VBSymbolType.RazorCommentTransition),
@@ -94,12 +94,12 @@ namespace System.Web.Razor.Test.Parser.VB
                             Factory.CodeTransition(VBSymbolType.RazorCommentTransition)
                         ),
                         Factory.Code(
-                                ""
-                                    + Environment.NewLine
-                                    + "    Write(\"Hello friend!\")"
-                                    + Environment.NewLine
-                                    + "End If"
-                            )
+                            ""
+                                + Environment.NewLine
+                                + "    Write(\"Hello friend!\")"
+                                + Environment.NewLine
+                                + "End If"
+                        )
                             .AsStatement()
                             .Accepts(AcceptedCharacters.None)
                     ),
@@ -124,10 +124,10 @@ namespace System.Web.Razor.Test.Parser.VB
                     new StatementBlock(
                         Factory.CodeTransition(),
                         Factory.Code(
-                                "If Request.IsAuthenticated Then"
-                                    + Environment.NewLine
-                                    + "    Dim foo = "
-                            )
+                            "If Request.IsAuthenticated Then"
+                                + Environment.NewLine
+                                + "    Dim foo = "
+                        )
                             .AsStatement(),
                         new CommentBlock(
                             Factory.CodeTransition(VBSymbolType.RazorCommentTransition),
@@ -142,12 +142,12 @@ namespace System.Web.Razor.Test.Parser.VB
                             Factory.CodeTransition(VBSymbolType.RazorCommentTransition)
                         ),
                         Factory.Code(
-                                " bar"
-                                    + Environment.NewLine
-                                    + "    Write(\"Hello friend!\")"
-                                    + Environment.NewLine
-                                    + "End If"
-                            )
+                            " bar"
+                                + Environment.NewLine
+                                + "    Write(\"Hello friend!\")"
+                                + Environment.NewLine
+                                + "End If"
+                        )
                             .AsStatement()
                             .Accepts(AcceptedCharacters.None)
                     ),
@@ -172,14 +172,14 @@ namespace System.Web.Razor.Test.Parser.VB
                     new StatementBlock(
                         Factory.CodeTransition(),
                         Factory.Code(
-                                "If Request.IsAuthenticated Then"
-                                    + Environment.NewLine
-                                    + "    Dim foo = \"@* User is logged in! End If *@ bar\""
-                                    + Environment.NewLine
-                                    + "    Write(\"Hello friend!\")"
-                                    + Environment.NewLine
-                                    + "End If"
-                            )
+                            "If Request.IsAuthenticated Then"
+                                + Environment.NewLine
+                                + "    Dim foo = \"@* User is logged in! End If *@ bar\""
+                                + Environment.NewLine
+                                + "    Write(\"Hello friend!\")"
+                                + Environment.NewLine
+                                + "End If"
+                        )
                             .AsStatement()
                             .Accepts(AcceptedCharacters.None)
                     ),
@@ -204,14 +204,14 @@ namespace System.Web.Razor.Test.Parser.VB
                     new StatementBlock(
                         Factory.CodeTransition(),
                         Factory.Code(
-                                "If Request.IsAuthenticated Then"
-                                    + Environment.NewLine
-                                    + "    Dim foo = '@* User is logged in! End If *@ bar"
-                                    + Environment.NewLine
-                                    + "    Write(\"Hello friend!\")"
-                                    + Environment.NewLine
-                                    + "End If"
-                            )
+                            "If Request.IsAuthenticated Then"
+                                + Environment.NewLine
+                                + "    Dim foo = '@* User is logged in! End If *@ bar"
+                                + Environment.NewLine
+                                + "    Write(\"Hello friend!\")"
+                                + Environment.NewLine
+                                + "End If"
+                        )
                             .AsStatement()
                             .Accepts(AcceptedCharacters.None)
                     ),
@@ -236,14 +236,14 @@ namespace System.Web.Razor.Test.Parser.VB
                     new StatementBlock(
                         Factory.CodeTransition(),
                         Factory.Code(
-                                "If Request.IsAuthenticated Then"
-                                    + Environment.NewLine
-                                    + "    Dim foo = REM @* User is logged in! End If *@ bar"
-                                    + Environment.NewLine
-                                    + "    Write(\"Hello friend!\")"
-                                    + Environment.NewLine
-                                    + "End If"
-                            )
+                            "If Request.IsAuthenticated Then"
+                                + Environment.NewLine
+                                + "    Dim foo = REM @* User is logged in! End If *@ bar"
+                                + Environment.NewLine
+                                + "    Write(\"Hello friend!\")"
+                                + Environment.NewLine
+                                + "End If"
+                        )
                             .AsStatement()
                             .Accepts(AcceptedCharacters.None)
                     ),

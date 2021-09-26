@@ -694,22 +694,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxNode node
         )
         {
-            return node.GetAncestorOrThis<CompilationUnitSyntax>()!.Usings.Concat(
-                node.GetAncestorsOrThis<NamespaceDeclarationSyntax>()
-                    .Reverse()
-                    .SelectMany(n => n.Usings)
-            );
+            return node.GetAncestorOrThis<CompilationUnitSyntax>()!.Usings
+                .Concat(
+                    node.GetAncestorsOrThis<NamespaceDeclarationSyntax>()
+                        .Reverse()
+                        .SelectMany(n => n.Usings)
+                );
         }
 
         public static IEnumerable<ExternAliasDirectiveSyntax> GetEnclosingExternAliasDirectives(
             this SyntaxNode node
         )
         {
-            return node.GetAncestorOrThis<CompilationUnitSyntax>()!.Externs.Concat(
-                node.GetAncestorsOrThis<NamespaceDeclarationSyntax>()
-                    .Reverse()
-                    .SelectMany(n => n.Externs)
-            );
+            return node.GetAncestorOrThis<CompilationUnitSyntax>()!.Externs
+                .Concat(
+                    node.GetAncestorsOrThis<NamespaceDeclarationSyntax>()
+                        .Reverse()
+                        .SelectMany(n => n.Externs)
+                );
         }
 
         public static bool IsUnsafeContext(this SyntaxNode node)
@@ -922,11 +924,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             TextSpan span,
             CancellationToken cancellationToken
         ) =>
-            CSharpSyntaxFacts.Instance.ContainsInterleavedDirective(
-                span,
-                syntaxNode,
-                cancellationToken
-            );
+            CSharpSyntaxFacts.Instance
+                .ContainsInterleavedDirective(span, syntaxNode, cancellationToken);
 
         public static bool ContainsInterleavedDirective(
             this SyntaxToken token,
@@ -977,9 +976,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         )
                 )
                 {
-                    var match = ((DirectiveTriviaSyntax)structure).GetMatchingDirective(
-                        cancellationToken
-                    );
+                    var match = ((DirectiveTriviaSyntax)structure)
+                        .GetMatchingDirective(cancellationToken);
                     if (match != null)
                     {
                         var matchSpan = match.Span;
@@ -996,9 +994,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         .IsKind(SyntaxKind.ElseDirectiveTrivia, SyntaxKind.ElifDirectiveTrivia)
                 )
                 {
-                    var directives = (
-                        (DirectiveTriviaSyntax)structure
-                    ).GetMatchingConditionalDirectives(cancellationToken);
+                    var directives = ((DirectiveTriviaSyntax)structure)
+                        .GetMatchingConditionalDirectives(cancellationToken);
                     if (directives != null && directives.Count > 0)
                     {
                         if (
@@ -1119,10 +1116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this TSyntaxNode node,
             out ImmutableArray<SyntaxTrivia> strippedTrivia
         ) where TSyntaxNode : SyntaxNode =>
-            CSharpSyntaxFacts.Instance.GetNodeWithoutLeadingBannerAndPreprocessorDirectives(
-                node,
-                out strippedTrivia
-            );
+            CSharpSyntaxFacts.Instance
+                .GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node, out strippedTrivia);
 
         public static bool IsVariableDeclaratorValue(this SyntaxNode node) =>
             node.IsParentKind(
@@ -1522,9 +1517,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             params SyntaxNodeOrToken[] trailingNodesOrTokens
         ) where T : SyntaxNode =>
             node.WithLeadingTrivia(
-                    leadingTrivia.Concat(node.GetLeadingTrivia())
-                        .FilterComments(addElasticMarker: false)
-                )
+                leadingTrivia.Concat(node.GetLeadingTrivia())
+                    .FilterComments(addElasticMarker: false)
+            )
                 .WithTrailingTrivia(
                     node.GetTrailingTrivia()
                         .Concat(

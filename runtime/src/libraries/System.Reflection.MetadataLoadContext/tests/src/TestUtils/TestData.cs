@@ -651,7 +651,8 @@ namespace System.Reflection.Tests
             + "9193434DF400102D1805E6C2FCF72706049600E7716C9CDB197554B2205F1CE0"
             + "0DDD65BB5442993E5C2C749BDCDE45F37A3CAFD3BE65BD075F9809938183D85C"
             + "E911410758065C6628BEB68BDE42AF66057AFEDB608CAD7F843EC978E745DDDA"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static readonly byte[] s_PublicKeyToken1ee753223f71263dImage =
             Convert.FromBase64String(
@@ -2206,7 +2207,8 @@ namespace System.Reflection.Tests
             + "8c0100001ba2251909a2251a1104a2280700000a13051105280800000a0000198d0e000001130611062513082c0611088e692d0616e013072b0a"
             + "1108168f0e0000011307001106280900000a0000de0516e01307dc00de2a750f000001252d0426162b0c260914fe011309110916fe03fe112600"
             + "7201000070280800000a0000de002a"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         public static readonly byte[] s_AssemblyWithMethodBodyImage = Convert.FromBase64String(
             "TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFt"

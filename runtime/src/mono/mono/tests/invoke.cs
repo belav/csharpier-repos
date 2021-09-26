@@ -73,10 +73,12 @@ class Tests
     public static int test_0_string_ctor_sharing()
     {
         // Test the sharing of runtime invoke wrappers for string ctors
-        typeof(string).GetConstructor(new Type[] { typeof(char[]) })
+        typeof(string)
+            .GetConstructor(new Type[] { typeof(char[]) })
             .Invoke(new object[] { new char[] { 'a', 'b', 'c' } });
 
-        typeof(Assembly).GetMethod("GetType", new Type[] { typeof(string), })
+        typeof(Assembly)
+            .GetMethod("GetType", new Type[] { typeof(string), })
             .Invoke(typeof(int).Assembly, new object[] { "A" });
 
         return 0;

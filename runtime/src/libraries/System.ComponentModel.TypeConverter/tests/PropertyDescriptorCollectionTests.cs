@@ -221,13 +221,14 @@ namespace System.ComponentModel.Tests
 
                     PropertyDescriptor expected = propertyDescriptors.First(
                         p =>
-                            string.Equals(
-                                p.Name,
-                                name,
-                                ignoreCase
-                                  ? StringComparison.OrdinalIgnoreCase
-                                  : StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    p.Name,
+                                    name,
+                                    ignoreCase
+                                      ? StringComparison.OrdinalIgnoreCase
+                                      : StringComparison.Ordinal
+                                )
                     );
 
                     Assert.Equal(expected, result);

@@ -399,9 +399,8 @@ namespace Newtonsoft.Json.Serialization
 
             if (
                 HasFlag(
-                    property.DefaultValueHandling.GetValueOrDefault(
-                        Serializer._defaultValueHandling
-                    ),
+                    property.DefaultValueHandling
+                        .GetValueOrDefault(Serializer._defaultValueHandling),
                     DefaultValueHandling.Ignore
                 ) && MiscellaneousUtils.ValueEquals(memberValue, property.GetResolvedDefaultValue())
             )
@@ -463,15 +462,11 @@ namespace Newtonsoft.Json.Serialization
                 string message = "Self referencing loop detected";
                 if (property != null)
                 {
-                    message += " for property '{0}'".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        property.PropertyName
-                    );
+                    message += " for property '{0}'"
+                        .FormatWith(CultureInfo.InvariantCulture, property.PropertyName);
                 }
-                message += " with type '{0}'.".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    value.GetType()
-                );
+                message += " with type '{0}'."
+                    .FormatWith(CultureInfo.InvariantCulture, value.GetType());
 
                 switch (
                     referenceLoopHandling.GetValueOrDefault(Serializer._referenceLoopHandling)
@@ -530,11 +525,8 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         null,
                         writer.Path,
-                        "Writing object reference to Id '{0}' for {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            reference,
-                            value.GetType()
-                        )
+                        "Writing object reference to Id '{0}' for {1}."
+                            .FormatWith(CultureInfo.InvariantCulture, reference, value.GetType())
                     ),
                     null
                 );
@@ -559,10 +551,8 @@ namespace Newtonsoft.Json.Serialization
                 throw JsonSerializationException.Create(
                     null,
                     writer.ContainerPath,
-                    "Error writing object reference for '{0}'.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        value.GetType()
-                    ),
+                    "Error writing object reference for '{0}'."
+                        .FormatWith(CultureInfo.InvariantCulture, value.GetType()),
                     ex
                 );
             }
@@ -619,10 +609,8 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         null,
                         writer.Path,
-                        "Started serializing {0}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            contract.UnderlyingType
-                        )
+                        "Started serializing {0}"
+                            .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                     ),
                     null
                 );
@@ -640,10 +628,8 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         null,
                         writer.Path,
-                        "Finished serializing {0}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            contract.UnderlyingType
-                        )
+                        "Finished serializing {0}"
+                            .FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)
                     ),
                     null
                 );
@@ -791,9 +777,8 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (property.PropertyContract == null)
                 {
-                    property.PropertyContract = Serializer._contractResolver.ResolveContract(
-                        property.PropertyType!
-                    );
+                    property.PropertyContract = Serializer._contractResolver
+                        .ResolveContract(property.PropertyType!);
                 }
 
                 memberValue = property.ValueProvider!.GetValue(value);
@@ -843,10 +828,11 @@ namespace Newtonsoft.Json.Serialization
                             throw JsonSerializationException.Create(
                                 null,
                                 writer.ContainerPath,
-                                "Cannot write a null value for property '{0}'. Property requires a value.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    property.PropertyName
-                                ),
+                                "Cannot write a null value for property '{0}'. Property requires a value."
+                                    .FormatWith(
+                                        CultureInfo.InvariantCulture,
+                                        property.PropertyName
+                                    ),
                                 null
                             );
                         }
@@ -855,10 +841,11 @@ namespace Newtonsoft.Json.Serialization
                             throw JsonSerializationException.Create(
                                 null,
                                 writer.ContainerPath,
-                                "Cannot write a null value for property '{0}'. Property requires a non-null value.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    property.PropertyName
-                                ),
+                                "Cannot write a null value for property '{0}'. Property requires a non-null value."
+                                    .FormatWith(
+                                        CultureInfo.InvariantCulture,
+                                        property.PropertyName
+                                    ),
                                 null
                             );
                         }
@@ -939,11 +926,8 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         null,
                         writer.Path,
-                        "Writing object reference Id '{0}' for {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            reference,
-                            type
-                        )
+                        "Writing object reference Id '{0}' for {1}."
+                            .FormatWith(CultureInfo.InvariantCulture, reference, type)
                     ),
                     null
                 );
@@ -968,11 +952,8 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         null,
                         writer.Path,
-                        "Writing type name '{0}' for {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            typeName,
-                            type
-                        )
+                        "Writing type name '{0}' for {1}."
+                            .FormatWith(CultureInfo.InvariantCulture, typeName, type)
                     ),
                     null
                 );
@@ -1035,11 +1016,12 @@ namespace Newtonsoft.Json.Serialization
                         JsonPosition.FormatMessage(
                             null,
                             writer.Path,
-                            "Started serializing {0} with converter {1}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                value.GetType(),
-                                converter.GetType()
-                            )
+                            "Started serializing {0} with converter {1}."
+                                .FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    value.GetType(),
+                                    converter.GetType()
+                                )
                         ),
                         null
                     );
@@ -1054,11 +1036,12 @@ namespace Newtonsoft.Json.Serialization
                         JsonPosition.FormatMessage(
                             null,
                             writer.Path,
-                            "Finished serializing {0} with converter {1}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                value.GetType(),
-                                converter.GetType()
-                            )
+                            "Finished serializing {0} with converter {1}."
+                                .FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    value.GetType(),
+                                    converter.GetType()
+                                )
                         ),
                         null
                     );
@@ -1346,9 +1329,8 @@ namespace Newtonsoft.Json.Serialization
 
             if (contract.ItemContract == null)
             {
-                contract.ItemContract = Serializer._contractResolver.ResolveContract(
-                    contract.CollectionItemType ?? typeof(object)
-                );
+                contract.ItemContract = Serializer._contractResolver
+                    .ResolveContract(contract.CollectionItemType ?? typeof(object));
             }
 
             return writeMetadataObject;
@@ -1661,9 +1643,8 @@ namespace Newtonsoft.Json.Serialization
                 }
                 else if (_rootType != null && _serializeStack.Count == _rootLevel)
                 {
-                    JsonContract rootContract = Serializer._contractResolver.ResolveContract(
-                        _rootType
-                    );
+                    JsonContract rootContract = Serializer._contractResolver
+                        .ResolveContract(_rootType);
 
                     if (contract.NonNullableUnderlyingType != rootContract.CreatedType)
                     {
@@ -1703,16 +1684,14 @@ namespace Newtonsoft.Json.Serialization
 
             if (contract.ItemContract == null)
             {
-                contract.ItemContract = Serializer._contractResolver.ResolveContract(
-                    contract.DictionaryValueType ?? typeof(object)
-                );
+                contract.ItemContract = Serializer._contractResolver
+                    .ResolveContract(contract.DictionaryValueType ?? typeof(object));
             }
 
             if (contract.KeyContract == null)
             {
-                contract.KeyContract = Serializer._contractResolver.ResolveContract(
-                    contract.DictionaryKeyType ?? typeof(object)
-                );
+                contract.KeyContract = Serializer._contractResolver
+                    .ResolveContract(contract.DictionaryKeyType ?? typeof(object));
             }
 
             int initialDepth = writer.Top;
@@ -1932,12 +1911,13 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         null,
                         writer.Path,
-                        "ShouldSerialize result for property '{0}' on {1}: {2}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            property.PropertyName,
-                            property.DeclaringType,
-                            shouldSerialize
-                        )
+                        "ShouldSerialize result for property '{0}' on {1}: {2}"
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                property.PropertyName,
+                                property.DeclaringType,
+                                shouldSerialize
+                            )
                     ),
                     null
                 );
@@ -1962,12 +1942,13 @@ namespace Newtonsoft.Json.Serialization
                     JsonPosition.FormatMessage(
                         null,
                         writer.Path,
-                        "IsSpecified result for property '{0}' on {1}: {2}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            property.PropertyName,
-                            property.DeclaringType,
-                            isSpecified
-                        )
+                        "IsSpecified result for property '{0}' on {1}: {2}"
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                property.PropertyName,
+                                property.DeclaringType,
+                                isSpecified
+                            )
                     ),
                     null
                 );

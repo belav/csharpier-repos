@@ -296,14 +296,14 @@ namespace System.Diagnostics
                                 _waitInProgress == null
                                     ? WaitForExitAsync()
                                     : _waitInProgress.ContinueWith(
-                                              (_, state) =>
-                                                  ((ProcessWaitState)state!).WaitForExitAsync(),
-                                              this,
-                                              CancellationToken.None,
-                                              TaskContinuationOptions.None,
-                                              TaskScheduler.Default
-                                          )
-                                          .Unwrap();
+                                          (_, state) =>
+                                              ((ProcessWaitState)state!).WaitForExitAsync(),
+                                          this,
+                                          CancellationToken.None,
+                                          TaskContinuationOptions.None,
+                                          TaskScheduler.Default
+                                      )
+                                      .Unwrap();
                         }
                     }
                 }

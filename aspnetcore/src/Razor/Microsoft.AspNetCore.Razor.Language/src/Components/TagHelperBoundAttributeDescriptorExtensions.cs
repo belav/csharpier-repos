@@ -44,10 +44,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(attribute));
             }
 
-            return attribute.Metadata.TryGetValue(
-                    ComponentMetadata.Component.GenericTypedKey,
-                    out var value
-                ) && string.Equals(value, bool.TrueString);
+            return attribute.Metadata
+                    .TryGetValue(ComponentMetadata.Component.GenericTypedKey, out var value)
+                && string.Equals(value, bool.TrueString);
         }
 
         public static bool IsTypeParameterProperty(this BoundAttributeDescriptor attribute)
@@ -57,10 +56,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(attribute));
             }
 
-            return attribute.Metadata.TryGetValue(
-                    ComponentMetadata.Component.TypeParameterKey,
-                    out var value
-                ) && string.Equals(value, bool.TrueString);
+            return attribute.Metadata
+                    .TryGetValue(ComponentMetadata.Component.TypeParameterKey, out var value)
+                && string.Equals(value, bool.TrueString);
         }
 
         public static bool IsCascadingTypeParameterProperty(this BoundAttributeDescriptor attribute)
@@ -70,10 +68,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(attribute));
             }
 
-            return attribute.Metadata.TryGetValue(
-                    ComponentMetadata.Component.TypeParameterIsCascadingKey,
-                    out var value
-                ) && string.Equals(value, bool.TrueString);
+            return attribute.Metadata
+                    .TryGetValue(
+                        ComponentMetadata.Component.TypeParameterIsCascadingKey,
+                        out var value
+                    ) && string.Equals(value, bool.TrueString);
         }
 
         public static bool IsWeaklyTyped(this BoundAttributeDescriptor attribute)
@@ -140,11 +139,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             return attribute.IsChildContentProperty()
-                && !string.Equals(
-                    attribute.TypeName,
-                    ComponentsApi.RenderFragment.FullTypeName,
-                    StringComparison.Ordinal
-                );
+                && !string
+                    .Equals(
+                        attribute.TypeName,
+                        ComponentsApi.RenderFragment.FullTypeName,
+                        StringComparison.Ordinal
+                    );
         }
 
         /// <summary>
@@ -163,11 +163,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             return attribute.IsChildContentProperty()
-                && !string.Equals(
-                    attribute.TypeName,
-                    ComponentsApi.RenderFragment.FullTypeName,
-                    StringComparison.Ordinal
-                );
+                && !string
+                    .Equals(
+                        attribute.TypeName,
+                        ComponentsApi.RenderFragment.FullTypeName,
+                        StringComparison.Ordinal
+                    );
         }
 
         /// <summary>

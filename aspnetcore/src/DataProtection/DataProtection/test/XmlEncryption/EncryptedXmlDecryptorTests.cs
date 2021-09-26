@@ -44,9 +44,8 @@ namespace Microsoft.AspNetCore.DataProtection.Test.XmlEncryption
                 Path.Combine(AppContext.BaseDirectory, "TestFiles", "TestCert2.pfx"),
                 "password"
             );
-            var services = new ServiceCollection().Configure<XmlKeyDecryptionOptions>(
-                    o => o.AddKeyDecryptionCertificate(testCert2)
-                )
+            var services = new ServiceCollection()
+                .Configure<XmlKeyDecryptionOptions>(o => o.AddKeyDecryptionCertificate(testCert2))
                 .BuildServiceProvider();
             var encryptor = new CertificateXmlEncryptor(testCert1, NullLoggerFactory.Instance);
             var data = new XElement("SampleData", "Lorem ipsum");
@@ -70,7 +69,8 @@ namespace Microsoft.AspNetCore.DataProtection.Test.XmlEncryption
                 Path.Combine(AppContext.BaseDirectory, "TestFiles", "TestCert1.PublicKeyOnly.cer"),
                 ""
             );
-            var services = new ServiceCollection().Configure<XmlKeyDecryptionOptions>(
+            var services = new ServiceCollection()
+                .Configure<XmlKeyDecryptionOptions>(
                     o => o.AddKeyDecryptionCertificate(publicKeyOnly)
                 )
                 .BuildServiceProvider();
@@ -97,13 +97,12 @@ namespace Microsoft.AspNetCore.DataProtection.Test.XmlEncryption
                 "password"
             );
             var services = new ServiceCollection().Configure<XmlKeyDecryptionOptions>(
-                    o =>
-                    {
-                        o.AddKeyDecryptionCertificate(testCert1);
-                        o.AddKeyDecryptionCertificate(testCert2);
-                    }
-                )
-                .BuildServiceProvider();
+                o =>
+                {
+                    o.AddKeyDecryptionCertificate(testCert1);
+                    o.AddKeyDecryptionCertificate(testCert2);
+                }
+            ).BuildServiceProvider();
             var encryptor = new CertificateXmlEncryptor(testCert1, NullLoggerFactory.Instance);
             var data = new XElement("SampleData", "Lorem ipsum");
             var encryptedXml = encryptor.Encrypt(data);

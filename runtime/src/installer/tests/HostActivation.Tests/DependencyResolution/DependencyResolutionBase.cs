@@ -73,8 +73,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     "ComponentWithNoDependencies"
                 );
                 NetCoreAppBuilder builder = NetCoreAppBuilder.PortableForNETCoreApp(
-                        componentWithNoDependencies
-                    )
+                    componentWithNoDependencies
+                )
                     .WithProject(p => p.WithAssemblyGroup(null, g => g.WithMainAssembly()));
                 customizer?.Invoke(builder);
 
@@ -125,11 +125,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                                     g
                                     // ./coreclr.dll - this is a mock, will not actually run CoreClr
                                     .WithAsset(
-                                        (
-                                            new NetCoreAppBuilder.RuntimeFileBuilder(
-                                                coreclrFileName
-                                            )
-                                        ).CopyFromFile(
+                                        (new NetCoreAppBuilder.RuntimeFileBuilder(coreclrFileName))
+                                            .CopyFromFile(
                                                 Path.Combine(
                                                     RepoDirectories.Artifacts,
                                                     "corehost_test",
@@ -150,11 +147,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                                     g
                                     // ./hostfxr.dll - this is the real component and will load hostpolicy library
                                     .WithAsset(
-                                        (
-                                            new NetCoreAppBuilder.RuntimeFileBuilder(
-                                                hostFxrFileName
-                                            )
-                                        ).CopyFromFile(
+                                        (new NetCoreAppBuilder.RuntimeFileBuilder(hostFxrFileName))
+                                            .CopyFromFile(
                                                 Path.Combine(
                                                     RepoDirectories.Artifacts,
                                                     "corehost",
@@ -179,7 +173,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                                             new NetCoreAppBuilder.RuntimeFileBuilder(
                                                 hostPolicyFileName
                                             )
-                                        ).CopyFromFile(
+                                        )
+                                            .CopyFromFile(
                                                 Path.Combine(
                                                     RepoDirectories.Artifacts,
                                                     "corehost",

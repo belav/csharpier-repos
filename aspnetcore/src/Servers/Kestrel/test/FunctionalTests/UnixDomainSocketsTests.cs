@@ -50,16 +50,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 async Task EchoServer(ConnectionContext connection)
                 {
                     // For graceful shutdown
-                    var notificationFeature =
-                        connection.Features.Get<IConnectionLifetimeNotificationFeature>();
+                    var notificationFeature = connection.Features
+                        .Get<IConnectionLifetimeNotificationFeature>();
 
                     try
                     {
                         while (true)
                         {
-                            var result = await connection.Transport.Input.ReadAsync(
-                                notificationFeature.ConnectionClosedRequested
-                            );
+                            var result = await connection.Transport.Input
+                                .ReadAsync(notificationFeature.ConnectionClosedRequested);
 
                             if (result.IsCompleted)
                             {
@@ -88,26 +87,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     }
                 }
 
-                var hostBuilder = TransportSelector.GetHostBuilder()
-                    .ConfigureWebHost(
-                        webHostBuilder =>
-                        {
-                            webHostBuilder.UseKestrel(
-                                    o =>
+                var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseKestrel(
+                            o =>
+                            {
+                                o.ListenUnixSocket(
+                                    path,
+                                    builder =>
                                     {
-                                        o.ListenUnixSocket(
-                                            path,
-                                            builder =>
-                                            {
-                                                builder.Run(EchoServer);
-                                            }
-                                        );
+                                        builder.Run(EchoServer);
                                     }
-                                )
-                                .Configure(c => { });
-                        }
-                    )
-                    .ConfigureServices(AddTestLogging);
+                                );
+                            }
+                        ).Configure(c => { });
+                    }
+                ).ConfigureServices(AddTestLogging);
 
                 using (var host = hostBuilder.Build())
                 {
@@ -132,9 +128,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         while (read < data.Length)
                         {
                             var bytesReceived = await socket.ReceiveAsync(
-                                    buffer.AsMemory(read, buffer.Length - read),
-                                    SocketFlags.None
-                                )
+                                buffer.AsMemory(read, buffer.Length - read),
+                                SocketFlags.None
+                            )
                                 .DefaultTimeout();
                             read += bytesReceived;
                             if (bytesReceived <= 0)
@@ -179,26 +175,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
             try
             {
-                var hostBuilder = TransportSelector.GetHostBuilder()
-                    .ConfigureWebHost(
-                        webHostBuilder =>
-                        {
-                            webHostBuilder.UseUrls(url)
-                                .UseKestrel()
-                                .Configure(
-                                    app =>
+                var hostBuilder = TransportSelector.GetHostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseUrls(url).UseKestrel().Configure(
+                            app =>
+                            {
+                                app.Run(
+                                    async context =>
                                     {
-                                        app.Run(
-                                            async context =>
-                                            {
-                                                await context.Response.WriteAsync("Hello World");
-                                            }
-                                        );
+                                        await context.Response.WriteAsync("Hello World");
                                     }
                                 );
-                        }
-                    )
-                    .ConfigureServices(AddTestLogging);
+                            }
+                        );
+                    }
+                ).ConfigureServices(AddTestLogging);
 
                 using (var host = hostBuilder.Build())
                 {
@@ -217,9 +209,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         await socket.ConnectAsync(new UnixDomainSocketEndPoint(path))
                             .DefaultTimeout();
 
-                        var httpRequest = Encoding.ASCII.GetBytes(
-                            "GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n"
-                        );
+                        var httpRequest = Encoding.ASCII
+                            .GetBytes("GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n");
                         await socket.SendAsync(httpRequest, SocketFlags.None).DefaultTimeout();
 
                         var readBuffer = new byte[512];
@@ -227,9 +218,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         while (true)
                         {
                             var bytesReceived = await socket.ReceiveAsync(
-                                    readBuffer.AsMemory(read),
-                                    SocketFlags.None
-                                )
+                                readBuffer.AsMemory(read),
+                                SocketFlags.None
+                            )
                                 .DefaultTimeout();
                             read += bytesReceived;
                             if (bytesReceived <= 0)
@@ -247,13 +238,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                             $"Second space not found in '{httpResponse}'."
                         );
 
-                        var httpStatus = int.Parse(
-                            httpResponse.Substring(
-                                httpStatusStart,
-                                httpStatusEnd - httpStatusStart
-                            ),
-                            CultureInfo.InvariantCulture
-                        );
+                        var httpStatus = int
+                            .Parse(
+                                httpResponse.Substring(
+                                    httpStatusStart,
+                                    httpStatusEnd - httpStatusStart
+                                ),
+                                CultureInfo.InvariantCulture
+                            );
                         Assert.Equal(httpStatus, StatusCodes.Status200OK);
                     }
                     await host.StopAsync().DefaultTimeout();

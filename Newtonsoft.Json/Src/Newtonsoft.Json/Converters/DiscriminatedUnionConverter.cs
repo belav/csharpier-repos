@@ -122,16 +122,10 @@ namespace Newtonsoft.Json.Converters
                     (int)FSharpUtils.Instance.GetUnionCaseInfoTag(unionCaseInfo),
                     (string)FSharpUtils.Instance.GetUnionCaseInfoName(unionCaseInfo),
                     (PropertyInfo[])FSharpUtils.Instance.GetUnionCaseInfoFields(unionCaseInfo)!,
-                    (FSharpFunction)FSharpUtils.Instance.PreComputeUnionReader(
-                        null,
-                        unionCaseInfo,
-                        null
-                    ),
-                    (FSharpFunction)FSharpUtils.Instance.PreComputeUnionConstructor(
-                        null,
-                        unionCaseInfo,
-                        null
-                    )
+                    (FSharpFunction)FSharpUtils.Instance
+                        .PreComputeUnionReader(null, unionCaseInfo, null),
+                    (FSharpFunction)FSharpUtils.Instance
+                        .PreComputeUnionConstructor(null, unionCaseInfo, null)
                 );
 
                 u.Cases.Add(unionCase);
@@ -220,11 +214,8 @@ namespace Newtonsoft.Json.Converters
             {
                 string propertyName = reader.Value!.ToString();
                 if (
-                    string.Equals(
-                        propertyName,
-                        CasePropertyName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(propertyName, CasePropertyName, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     reader.ReadAndAssert();
@@ -239,19 +230,18 @@ namespace Newtonsoft.Json.Converters
                     {
                         throw JsonSerializationException.Create(
                             reader,
-                            "No union type found with the name '{0}'.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                caseName
-                            )
+                            "No union type found with the name '{0}'."
+                                .FormatWith(CultureInfo.InvariantCulture, caseName)
                         );
                     }
                 }
                 else if (
-                    string.Equals(
-                        propertyName,
-                        FieldsPropertyName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            propertyName,
+                            FieldsPropertyName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     reader.ReadAndAssert();
@@ -269,10 +259,8 @@ namespace Newtonsoft.Json.Converters
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Unexpected property '{0}' found when reading union.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            propertyName
-                        )
+                        "Unexpected property '{0}' found when reading union."
+                            .FormatWith(CultureInfo.InvariantCulture, propertyName)
                     );
                 }
 
@@ -283,10 +271,8 @@ namespace Newtonsoft.Json.Converters
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "No '{0}' property with union name found.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        CasePropertyName
-                    )
+                    "No '{0}' property with union name found."
+                        .FormatWith(CultureInfo.InvariantCulture, CasePropertyName)
                 );
             }
 
@@ -296,10 +282,8 @@ namespace Newtonsoft.Json.Converters
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "No '{0}' property with union fields found.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        FieldsPropertyName
-                    )
+                    "No '{0}' property with union fields found."
+                        .FormatWith(CultureInfo.InvariantCulture, FieldsPropertyName)
                 );
             }
 
@@ -309,10 +293,8 @@ namespace Newtonsoft.Json.Converters
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "The number of field values does not match the number of properties defined by union '{0}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            caseName
-                        )
+                        "The number of field values does not match the number of properties defined by union '{0}'."
+                            .FormatWith(CultureInfo.InvariantCulture, caseName)
                     );
                 }
 

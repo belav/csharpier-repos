@@ -404,10 +404,8 @@ namespace Microsoft.TestCommon
             Func<object> testDataProvider
         )
         {
-            this.registeredTestDataVariations.Add(
-                variation,
-                new TestDataVariationProvider(type, testDataProvider)
-            );
+            this.registeredTestDataVariations
+                .Add(variation, new TestDataVariationProvider(type, testDataProvider));
         }
 
         private class TestDataVariationProvider

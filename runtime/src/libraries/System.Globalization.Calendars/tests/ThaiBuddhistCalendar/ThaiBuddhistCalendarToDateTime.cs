@@ -45,15 +45,8 @@ namespace System.Globalization.Tests
         )
         {
             ThaiBuddhistCalendar calendar = new ThaiBuddhistCalendar();
-            DateTime expected = new GregorianCalendar().ToDateTime(
-                year,
-                month,
-                day,
-                hour,
-                minute,
-                second,
-                millisecond
-            );
+            DateTime expected = new GregorianCalendar()
+                .ToDateTime(year, month, day, hour, minute, second, millisecond);
             Assert.Equal(
                 expected,
                 calendar.ToDateTime(year + 543, month, day, hour, minute, second, millisecond)

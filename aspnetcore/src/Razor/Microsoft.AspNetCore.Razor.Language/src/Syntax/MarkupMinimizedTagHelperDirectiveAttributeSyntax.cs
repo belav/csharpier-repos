@@ -24,12 +24,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         {
             get
             {
-                var fullName = string.Concat(
-                    Transition.GetContent(),
-                    Name.GetContent(),
-                    Colon?.GetContent() ?? string.Empty,
-                    ParameterName?.GetContent() ?? string.Empty
-                );
+                var fullName = string
+                    .Concat(
+                        Transition.GetContent(),
+                        Name.GetContent(),
+                        Colon?.GetContent() ?? string.Empty,
+                        ParameterName?.GetContent() ?? string.Empty
+                    );
                 return fullName;
             }
         }

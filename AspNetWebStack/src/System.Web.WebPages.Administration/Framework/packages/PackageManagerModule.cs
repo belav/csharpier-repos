@@ -143,8 +143,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             lock (_sourceFileLock)
             {
                 return packageSources.Where(
-                        source => source.Name.Equals(sourceName, StringComparison.OrdinalIgnoreCase)
-                    )
+                    source => source.Name.Equals(sourceName, StringComparison.OrdinalIgnoreCase)
+                )
                     .FirstOrDefault();
             }
         }

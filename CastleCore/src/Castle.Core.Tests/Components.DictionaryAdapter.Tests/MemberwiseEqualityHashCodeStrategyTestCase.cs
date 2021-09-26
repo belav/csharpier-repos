@@ -135,10 +135,11 @@ namespace Castle.Components.DictionaryAdapter.Tests
             return (T)factory.GetAdapter(
                 typeof(T),
                 new Hashtable(),
-                new PropertyDescriptor().AddBehaviors(
-                    XmlMetadataBehavior.Default,
-                    new MemberwiseEqualityHashCodeStrategy()
-                )
+                new PropertyDescriptor()
+                    .AddBehaviors(
+                        XmlMetadataBehavior.Default,
+                        new MemberwiseEqualityHashCodeStrategy()
+                    )
             );
         }
 
@@ -148,11 +149,12 @@ namespace Castle.Components.DictionaryAdapter.Tests
             return (T)factory.GetAdapter(
                 typeof(T),
                 new Hashtable(),
-                new PropertyDescriptor().AddBehaviors(
-                    XmlMetadataBehavior.Default,
-                    xpath,
-                    new MemberwiseEqualityHashCodeStrategy()
-                )
+                new PropertyDescriptor()
+                    .AddBehaviors(
+                        XmlMetadataBehavior.Default,
+                        xpath,
+                        new MemberwiseEqualityHashCodeStrategy()
+                    )
             );
         }
     }

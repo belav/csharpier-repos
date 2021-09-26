@@ -882,11 +882,12 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                         if (ns == null)
                         {
                             throw new InvalidOperationException(
-                                string.Format(
-                                    "Undefined use of prefix at attribute: {0}, {1}",
-                                    prefix,
-                                    localName
-                                )
+                                string
+                                    .Format(
+                                        "Undefined use of prefix at attribute: {0}, {1}",
+                                        prefix,
+                                        localName
+                                    )
                             );
                         }
                     }
@@ -990,11 +991,12 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 if (ns == null)
                 {
                     throw new InvalidOperationException(
-                        string.Format(
-                            "Undefined use of prefix at Element: {0}, {1}",
-                            prefix,
-                            localName
-                        )
+                        string
+                            .Format(
+                                "Undefined use of prefix at Element: {0}, {1}",
+                                prefix,
+                                localName
+                            )
                     );
                 }
             }
@@ -1300,11 +1302,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
             public int Compare(AttributeEntry x, AttributeEntry y)
             {
-                int namespaceCompareResult = string.Compare(
-                    x.namespaceUri,
-                    y.namespaceUri,
-                    StringComparison.Ordinal
-                );
+                int namespaceCompareResult = string
+                    .Compare(x.namespaceUri, y.namespaceUri, StringComparison.Ordinal);
                 if (namespaceCompareResult != 0)
                 {
                     return namespaceCompareResult;

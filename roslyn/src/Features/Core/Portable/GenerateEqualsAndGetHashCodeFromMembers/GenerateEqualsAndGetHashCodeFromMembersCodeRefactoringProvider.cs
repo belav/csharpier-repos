@@ -71,10 +71,10 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             }
 
             var actions = await GenerateEqualsAndGetHashCodeFromMembersAsync(
-                    document,
-                    textSpan,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
 
@@ -144,15 +144,15 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             GetExistingMemberInfo(containingType, out var hasEquals, out var hasGetHashCode);
 
             var actions = await CreateActionsAsync(
-                    document,
-                    typeDeclaration,
-                    containingType,
-                    viableMembers,
-                    hasEquals,
-                    hasGetHashCode,
-                    withDialog: true,
-                    cancellationToken
-                )
+                document,
+                typeDeclaration,
+                containingType,
+                viableMembers,
+                hasEquals,
+                hasGetHashCode,
+                withDialog: true,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             context.RegisterRefactorings(actions);
@@ -183,9 +183,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             // options if the type is a ref struct.
             if (!containingType.IsRefLikeType)
             {
-                var equatableTypeOpt = semanticModel.Compilation.GetTypeByMetadataName(
-                    typeof(IEquatable<>).FullName!
-                );
+                var equatableTypeOpt = semanticModel.Compilation
+                    .GetTypeByMetadataName(typeof(IEquatable<>).FullName!);
                 if (equatableTypeOpt != null)
                 {
                     constructedType = equatableTypeOpt.Construct(containingType);
@@ -229,11 +228,11 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             )
             {
                 var info = await GetSelectedMemberInfoAsync(
-                        document,
-                        textSpan,
-                        allowPartialSelection: false,
-                        cancellationToken
-                    )
+                    document,
+                    textSpan,
+                    allowPartialSelection: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (info != null && info.SelectedMembers.All(IsReadableInstanceFieldOrProperty))
                 {
@@ -259,15 +258,15 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                         RoslynDebug.AssertNotNull(typeDeclaration);
 
                         return await CreateActionsAsync(
-                                document,
-                                typeDeclaration,
-                                info.ContainingType,
-                                info.SelectedMembers,
-                                hasEquals,
-                                hasGetHashCode,
-                                withDialog: false,
-                                cancellationToken
-                            )
+                            document,
+                            typeDeclaration,
+                            info.ContainingType,
+                            info.SelectedMembers,
+                            hasEquals,
+                            hasGetHashCode,
+                            withDialog: false,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }

@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
 
             if (transaction.Response.Headers.Contains("Set-Cookie"))
             {
-                transaction.SetCookie = transaction.Response.Headers.GetValues("Set-Cookie")
+                transaction.SetCookie = transaction.Response.Headers
+                    .GetValues("Set-Cookie")
                     .ToList();
             }
 

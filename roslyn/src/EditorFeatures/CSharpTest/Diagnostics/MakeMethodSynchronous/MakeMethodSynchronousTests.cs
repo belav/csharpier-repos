@@ -465,7 +465,8 @@ public class Class1
                 TestCode = source,
                 FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
@@ -506,7 +507,8 @@ public class Class1
                 TestCode = source,
                 FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
@@ -547,7 +549,8 @@ public class Class1
                 TestCode = source,
                 FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
@@ -588,7 +591,8 @@ public class Class1
                 TestCode = source,
                 FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
@@ -631,7 +635,8 @@ public class Class1
                 TestCode = source,
                 FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
@@ -674,7 +679,8 @@ public class Class1
                 TestCode = source,
                 FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodAsynchronous)]
@@ -982,7 +988,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetStandard.NetStandard21,
                 TestCode = source,
                 FixedCode = expected,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodSynchronous)]
@@ -1024,7 +1031,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetStandard.NetStandard21,
                 TestCode = source,
                 FixedCode = expected,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
     }
 }

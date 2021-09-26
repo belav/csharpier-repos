@@ -115,10 +115,10 @@ namespace Microsoft.AspNetCore.SignalR.Specification.Tests
                 await manager1.OnConnectedAsync(connection).DefaultTimeout();
 
                 await manager2.SendConnectionAsync(
-                        connection.ConnectionId,
-                        "Hello",
-                        new object[] { "World" }
-                    )
+                    connection.ConnectionId,
+                    "Hello",
+                    new object[] { "World" }
+                )
                     .DefaultTimeout();
 
                 await AssertMessageAsync(client);
@@ -357,10 +357,10 @@ namespace Microsoft.AspNetCore.SignalR.Specification.Tests
                 await manager2.OnConnectedAsync(connection).DefaultTimeout();
 
                 await manager1.SendConnectionAsync(
-                        connection.ConnectionId,
-                        "Hello",
-                        new object[] { "World" }
-                    )
+                    connection.ConnectionId,
+                    "Hello",
+                    new object[] { "World" }
+                )
                     .DefaultTimeout();
 
                 await AssertMessageAsync(client);
@@ -389,10 +389,10 @@ namespace Microsoft.AspNetCore.SignalR.Specification.Tests
                 // This doesn't throw because there is no connection.ConnectionId on this server so it has to publish to the backplane.
                 // And once that happens there is no way to know if the invocation was successful or not.
                 await manager1.SendConnectionAsync(
-                        connectionMock.ConnectionId,
-                        "Hello",
-                        new object[] { "World" }
-                    )
+                    connectionMock.ConnectionId,
+                    "Hello",
+                    new object[] { "World" }
+                )
                     .DefaultTimeout();
             }
         }

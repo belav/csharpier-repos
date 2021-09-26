@@ -11,12 +11,11 @@ namespace FormatterWebSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers(
-                    options =>
-                    {
-                        options.RespectBrowserAcceptHeader = true;
-                    }
-                )
-                .AddNewtonsoftJson();
+                options =>
+                {
+                    options.RespectBrowserAcceptHeader = true;
+                }
+            ).AddNewtonsoftJson();
         }
 
         public void Configure(IApplicationBuilder app)

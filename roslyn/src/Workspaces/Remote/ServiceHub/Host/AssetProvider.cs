@@ -213,11 +213,11 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             return await _assetSource.GetAssetsAsync(
-                    _scopeId,
-                    checksums,
-                    _serializerService,
-                    cancellationToken
-                )
+                _scopeId,
+                checksums,
+                _serializerService,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

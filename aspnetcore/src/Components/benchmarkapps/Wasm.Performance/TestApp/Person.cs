@@ -44,9 +44,9 @@ namespace Wasm.Performance.TestApp
                     _ => (object)(rng.Next(0, 2) == 0)
                 ),
                 Subordinates = Enumerable.Range(
-                        0,
-                        thisDepth < totalDepth ? numDescendantsPerNode : 0
-                    )
+                    0,
+                    thisDepth < totalDepth ? numDescendantsPerNode : 0
+                )
                     .Select(
                         index =>
                             GenerateOrgChart(

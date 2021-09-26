@@ -72,19 +72,20 @@ public class Test
         Gen<Exception>.ExceptionTest(new GenException<int>());
         Gen<Exception>.ExceptionTest(new GenException<string>());
         Gen<Exception>.ExceptionTest(new GenException<Guid>());
-        Gen<Exception>.ExceptionTest(
-            new GenException<
-                ValX3<
-                    ValX1<int[][,,,]>,
-                    ValX2<object[,,,][][], Guid[][][]>,
+        Gen<Exception>
+            .ExceptionTest(
+                new GenException<
                     ValX3<
-                        double[,,,,,,,,,,],
-                        Guid[][][][,,,,][,,,,][][][],
-                        string[][][][][][][][][][][]
+                        ValX1<int[][,,,]>,
+                        ValX2<object[,,,][][], Guid[][][]>,
+                        ValX3<
+                            double[,,,,,,,,,,],
+                            Guid[][][][,,,,][,,,,][][][],
+                            string[][][][][][][][][][][]
+                        >
                     >
-                >
-            >()
-        );
+                >()
+            );
 
         Gen<InvalidOperationException>.ExceptionTest(new InvalidOperationException());
 
@@ -103,19 +104,20 @@ public class Test
                     >
                 >
             >
-        >.ExceptionTest(
-            new GenException<
-                ValX3<
-                    ValX1<int[][,,,]>,
-                    ValX2<object[,,,][][], Guid[][][]>,
+        >
+            .ExceptionTest(
+                new GenException<
                     ValX3<
-                        double[,,,,,,,,,,],
-                        Guid[][][][,,,,][,,,,][][][],
-                        string[][][][][][][][][][][]
+                        ValX1<int[][,,,]>,
+                        ValX2<object[,,,][][], Guid[][][]>,
+                        ValX3<
+                            double[,,,,,,,,,,],
+                            Guid[][][][,,,,][,,,,][][][],
+                            string[][][][][][][][][][][]
+                        >
                     >
-                >
-            >()
-        );
+                >()
+            );
 
         if (result)
         {

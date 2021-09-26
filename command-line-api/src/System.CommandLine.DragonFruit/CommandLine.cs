@@ -113,7 +113,8 @@ namespace System.CommandLine.DragonFruit
 
         private static Parser BuildParser(MethodInfo method, string xmlDocsFilePath, object target)
         {
-            var builder = new CommandLineBuilder().ConfigureRootCommandFromMethod(method, target)
+            var builder = new CommandLineBuilder()
+                .ConfigureRootCommandFromMethod(method, target)
                 .ConfigureHelpFromXmlComments(method, xmlDocsFilePath)
                 .UseDefaults()
                 .UseAnsiTerminalWhenAvailable();
@@ -248,11 +249,12 @@ namespace System.CommandLine.DragonFruit
                             {
                                 var argument = builder.Command.Arguments[i];
                                 if (
-                                    string.Equals(
-                                        argument.Name,
-                                        kebabCasedParameterName,
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                                    string
+                                        .Equals(
+                                            argument.Name,
+                                            kebabCasedParameterName,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
                                 )
                                 {
                                     argument.Description = parameterDescription.Value;
@@ -307,9 +309,8 @@ namespace System.CommandLine.DragonFruit
             };
 
             foreach (
-                var option in descriptor.ParameterDescriptors.Where(
-                        d => !omittedTypes.Contains(d.ValueType)
-                    )
+                var option in descriptor.ParameterDescriptors
+                    .Where(d => !omittedTypes.Contains(d.ValueType))
                     .Where(d => !_argumentParameterNames.Contains(d.ValueName))
                     .Select(p => p.BuildOption())
             )

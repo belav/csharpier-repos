@@ -42,9 +42,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 )
                 {
                     var client = await RemoteHostClient.TryGetClientAsync(
-                            solution.Workspace,
-                            cancellationToken
-                        )
+                        solution.Workspace,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (client != null)
                     {
@@ -59,19 +59,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         var documentIds = documents?.SelectAsArray(d => d.Id) ?? default;
 
                         await client.TryInvokeAsync<IRemoteSymbolFinderService>(
-                                solution,
-                                (service, solutionInfo, callbackId, cancellationToken) =>
-                                    service.FindReferencesAsync(
-                                        solutionInfo,
-                                        callbackId,
-                                        serializedSymbol,
-                                        documentIds,
-                                        options,
-                                        cancellationToken
-                                    ),
-                                serverCallback,
-                                cancellationToken
-                            )
+                            solution,
+                            (service, solutionInfo, callbackId, cancellationToken) =>
+                                service.FindReferencesAsync(
+                                    solutionInfo,
+                                    callbackId,
+                                    serializedSymbol,
+                                    documentIds,
+                                    options,
+                                    cancellationToken
+                                ),
+                            serverCallback,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         return;
@@ -80,13 +80,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 // Couldn't effectively search in OOP. Perform the search in-proc.
                 await FindReferencesInCurrentProcessAsync(
-                        symbol,
-                        solution,
-                        progress,
-                        documents,
-                        options,
-                        cancellationToken
-                    )
+                    symbol,
+                    solution,
+                    progress,
+                    documents,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

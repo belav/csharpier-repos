@@ -57,10 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                         result.Add(
                             Tuple.Create(
                                 view,
-                                view.BufferGraph.CreateMappingPoint(
-                                    point.Value,
-                                    PointTrackingMode.Negative
-                                )
+                                view.BufferGraph
+                                    .CreateMappingPoint(point.Value, PointTrackingMode.Negative)
                             )
                         );
                     }

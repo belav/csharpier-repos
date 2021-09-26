@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
             fixAllContext.CancellationToken.ThrowIfCancellationRequested();
             return await codeAction.GetChangedSolutionInternalAsync(
-                    cancellationToken: fixAllContext.CancellationToken
-                )
+                cancellationToken: fixAllContext.CancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -56,11 +56,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             }
 
             return await GetFixAllOperationsAsync(
-                    codeAction,
-                    showPreviewChangesDialog,
-                    fixAllContext.State,
-                    fixAllContext.CancellationToken
-                )
+                codeAction,
+                showPreviewChangesDialog,
+                fixAllContext.State,
+                fixAllContext.CancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 CodeAction action = null;
                 try
                 {
-                    action = await fixAllContext.FixAllProvider.GetFixAsync(fixAllContext)
+                    action = await fixAllContext.FixAllProvider
+                        .GetFixAsync(fixAllContext)
                         .ConfigureAwait(false);
                 }
                 catch (OperationCanceledException)
@@ -139,8 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
             cancellationToken.ThrowIfCancellationRequested();
             var newSolution = await codeAction.GetChangedSolutionInternalAsync(
-                    cancellationToken: cancellationToken
-                )
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (showPreviewChangesDialog)
@@ -216,10 +217,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 #endif
 
                 var changedSolution = previewService.PreviewChanges(
-                    string.Format(
-                        EditorFeaturesResources.Preview_Changes_0,
-                        fixAllPreviewChangesTitle
-                    ),
+                    string
+                        .Format(
+                            EditorFeaturesResources.Preview_Changes_0,
+                            fixAllPreviewChangesTitle
+                        ),
                     "vs.codefix.fixall",
                     fixAllTopLevelHeader,
                     fixAllPreviewChangesTitle,

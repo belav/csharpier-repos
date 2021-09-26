@@ -269,7 +269,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             bindingContext.ModelName = "modelName";
 
             var metadataProvider = new TestModelMetadataProvider();
-            var parameter = typeof(CollectionModelBinderTest).GetMethod(
+            var parameter = typeof(CollectionModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithListParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -305,7 +306,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             bindingContext.ModelName = "modelName";
 
             var metadataProvider = new TestModelMetadataProvider();
-            var parameter = typeof(CollectionModelBinderTest).GetMethod(
+            var parameter = typeof(CollectionModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithListParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -395,9 +397,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty(
-                    typeof(ModelWithListProperty),
-                    nameof(ModelWithListProperty.ListProperty)
-                )
+                typeof(ModelWithListProperty),
+                nameof(ModelWithListProperty.ListProperty)
+            )
                 .BindingDetails(b => b.IsBindingRequired = isBindingRequired);
             bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithListProperty),
@@ -485,8 +487,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty<ModelWithIListProperty>(
-                    nameof(ModelWithIListProperty.ListProperty)
-                )
+                nameof(ModelWithIListProperty.ListProperty)
+            )
                 .BindingDetails(bd => bd.IsReadOnly = isReadOnly);
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithIListProperty),

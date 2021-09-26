@@ -20,18 +20,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public Http3FrameWriterTests()
         {
             var memoryBlock = new Mock<IMemoryOwner<byte>>();
-            memoryBlock.Setup(block => block.Memory)
-                .Returns(
-                    () =>
+            memoryBlock.Setup(block => block.Memory).Returns(
+                () =>
+                {
+                    var blockArray = new byte[4096];
+                    for (int i = 0; i < 4096; i++)
                     {
-                        var blockArray = new byte[4096];
-                        for (int i = 0; i < 4096; i++)
-                        {
-                            blockArray[i] = 0xff;
-                        }
-                        return new Memory<byte>(blockArray);
+                        blockArray[i] = 0xff;
                     }
-                );
+                    return new Memory<byte>(blockArray);
+                }
+            );
 
             var dirtyMemoryPool = new Mock<MemoryPool<byte>>();
             dirtyMemoryPool.Setup(pool => pool.Rent(It.IsAny<int>())).Returns(memoryBlock.Object);

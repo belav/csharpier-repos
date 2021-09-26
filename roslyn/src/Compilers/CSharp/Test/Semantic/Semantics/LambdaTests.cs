@@ -190,9 +190,9 @@ class C
                 // (21,17): error CS1661: Cannot convert lambda expression to delegate type 'C.D1' because the parameter types do not match the delegate parameter types
                 //         D1 q6 = (double x6, ref int y6, ref int z6)=>1;
                 Diagnostic(
-                        ErrorCode.ERR_CantConvAnonMethParams,
-                        "(double x6, ref int y6, ref int z6)=>1"
-                    )
+                    ErrorCode.ERR_CantConvAnonMethParams,
+                    "(double x6, ref int y6, ref int z6)=>1"
+                )
                     .WithArguments("lambda expression", "C.D1")
                     .WithLocation(21, 17),
                 // (21,25): error CS1678: Parameter 1 is declared as type 'double' but should be 'ref int'
@@ -237,7 +237,8 @@ class C
                     .WithLocation(38, 23),
                 // (52,28): error CS8030: Anonymous function converted to a void returning delegate cannot return a value
                 //         Action q11 = ()=>{ return 1; };
-                Diagnostic(ErrorCode.ERR_RetNoObjectRequiredLambda, "return").WithLocation(52, 28),
+                Diagnostic(ErrorCode.ERR_RetNoObjectRequiredLambda, "return")
+                    .WithLocation(52, 28),
                 // (54,26): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         Action q12 = ()=>1;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(54, 26),
@@ -340,17 +341,16 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.Goo(Func<IComparable<I>>)' and 'C.Goo(Func<I>)'
-                    //         Goo(() => null);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Goo")
-                        .WithArguments(
-                            "C.Goo(System.Func<System.IComparable<I>>)",
-                            "C.Goo(System.Func<I>)"
-                        )
-                        .WithLocation(12, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.Goo(Func<IComparable<I>>)' and 'C.Goo(Func<I>)'
+                //         Goo(() => null);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Goo")
+                    .WithArguments(
+                        "C.Goo(System.Func<System.IComparable<I>>)",
+                        "C.Goo(System.Func<I>)"
+                    )
+                    .WithLocation(12, 9)
+            );
         }
 
         [WorkItem(18645, "https://github.com/dotnet/roslyn/issues/18645")]
@@ -372,27 +372,26 @@ class C
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (9,41): error CS1593: Delegate 'Func<int, int>' does not take 0 arguments
-                    //         Expression<Func<int,int>> ex1 = () => 1;
-                    Diagnostic(ErrorCode.ERR_BadDelArgCount, "() => 1")
-                        .WithArguments("System.Func<int, int>", "0")
-                        .WithLocation(9, 41),
-                    // (10,41): error CS1661: Cannot convert lambda expression to type 'Expression<Func<int, int>>' because the parameter types do not match the delegate parameter types
-                    //         Expression<Func<int,int>> ex2 = (double d) => 1;
-                    Diagnostic(ErrorCode.ERR_CantConvAnonMethParams, "(double d) => 1")
-                        .WithArguments(
-                            "lambda expression",
-                            "System.Linq.Expressions.Expression<System.Func<int, int>>"
-                        )
-                        .WithLocation(10, 41),
-                    // (10,49): error CS1678: Parameter 1 is declared as type 'double' but should be 'int'
-                    //         Expression<Func<int,int>> ex2 = (double d) => 1;
-                    Diagnostic(ErrorCode.ERR_BadParamType, "d")
-                        .WithArguments("1", "", "double", "", "int")
-                        .WithLocation(10, 49)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (9,41): error CS1593: Delegate 'Func<int, int>' does not take 0 arguments
+                //         Expression<Func<int,int>> ex1 = () => 1;
+                Diagnostic(ErrorCode.ERR_BadDelArgCount, "() => 1")
+                    .WithArguments("System.Func<int, int>", "0")
+                    .WithLocation(9, 41),
+                // (10,41): error CS1661: Cannot convert lambda expression to type 'Expression<Func<int, int>>' because the parameter types do not match the delegate parameter types
+                //         Expression<Func<int,int>> ex2 = (double d) => 1;
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethParams, "(double d) => 1")
+                    .WithArguments(
+                        "lambda expression",
+                        "System.Linq.Expressions.Expression<System.Func<int, int>>"
+                    )
+                    .WithLocation(10, 41),
+                // (10,49): error CS1678: Parameter 1 is declared as type 'double' but should be 'int'
+                //         Expression<Func<int,int>> ex2 = (double d) => 1;
+                Diagnostic(ErrorCode.ERR_BadParamType, "d")
+                    .WithArguments("1", "", "double", "", "int")
+                    .WithLocation(10, 49)
+            );
         }
 
         [WorkItem(539976, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539976")]
@@ -597,11 +596,12 @@ Public Module M
 End Module
 ";
 
-            var vbProject = VisualBasic.VisualBasicCompilation.Create(
-                "VBProject",
-                references: new[] { MscorlibRef },
-                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
-            );
+            var vbProject = VisualBasic.VisualBasicCompilation
+                .Create(
+                    "VBProject",
+                    references: new[] { MscorlibRef },
+                    syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
+                );
 
             var csSource =
                 @"
@@ -654,11 +654,12 @@ Public Module M
 End Module
 ";
 
-            var vbProject = VisualBasic.VisualBasicCompilation.Create(
-                "VBProject",
-                references: new[] { MscorlibRef },
-                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
-            );
+            var vbProject = VisualBasic.VisualBasicCompilation
+                .Create(
+                    "VBProject",
+                    references: new[] { MscorlibRef },
+                    syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
+                );
 
             var csSource =
                 @"
@@ -728,35 +729,34 @@ class Program
 }
 ";
 
-            CreateCompilation(csSource)
-                .VerifyDiagnostics(
-                    // (7,39): error CS0029: Cannot implicitly convert type 'string' to 'int'
-                    //         ((Func<int>)delegate { return ""; })();
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""")
-                        .WithArguments("string", "int")
-                        .WithLocation(7, 39),
-                    // (7,39): error CS1662: Cannot convert anonymous method to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
-                    //         ((Func<int>)delegate { return ""; })();
-                    Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, @"""""")
-                        .WithArguments("anonymous method")
-                        .WithLocation(7, 39),
-                    // (8,21): error CS1643: Not all code paths return a value in anonymous method of type 'Func<int>'
-                    //         ((Func<int>)delegate { })();
-                    Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "delegate")
-                        .WithArguments("anonymous method", "System.Func<int>")
-                        .WithLocation(8, 21),
-                    // (9,32): error CS0020: Division by constant zero
-                    //         ((Func<int>)delegate { 1 / 0; })();
-                    Diagnostic(ErrorCode.ERR_IntDivByZero, "1 / 0").WithLocation(9, 32),
-                    // (9,32): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                    //         ((Func<int>)delegate { 1 / 0; })();
-                    Diagnostic(ErrorCode.ERR_IllegalStatement, "1 / 0").WithLocation(9, 32),
-                    // (9,21): error CS1643: Not all code paths return a value in anonymous method of type 'Func<int>'
-                    //         ((Func<int>)delegate { 1 / 0; })();
-                    Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "delegate")
-                        .WithArguments("anonymous method", "System.Func<int>")
-                        .WithLocation(9, 21)
-                );
+            CreateCompilation(csSource).VerifyDiagnostics(
+                // (7,39): error CS0029: Cannot implicitly convert type 'string' to 'int'
+                //         ((Func<int>)delegate { return ""; })();
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""")
+                    .WithArguments("string", "int")
+                    .WithLocation(7, 39),
+                // (7,39): error CS1662: Cannot convert anonymous method to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                //         ((Func<int>)delegate { return ""; })();
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, @"""""")
+                    .WithArguments("anonymous method")
+                    .WithLocation(7, 39),
+                // (8,21): error CS1643: Not all code paths return a value in anonymous method of type 'Func<int>'
+                //         ((Func<int>)delegate { })();
+                Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "delegate")
+                    .WithArguments("anonymous method", "System.Func<int>")
+                    .WithLocation(8, 21),
+                // (9,32): error CS0020: Division by constant zero
+                //         ((Func<int>)delegate { 1 / 0; })();
+                Diagnostic(ErrorCode.ERR_IntDivByZero, "1 / 0").WithLocation(9, 32),
+                // (9,32): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                //         ((Func<int>)delegate { 1 / 0; })();
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "1 / 0").WithLocation(9, 32),
+                // (9,21): error CS1643: Not all code paths return a value in anonymous method of type 'Func<int>'
+                //         ((Func<int>)delegate { 1 / 0; })();
+                Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "delegate")
+                    .WithArguments("anonymous method", "System.Func<int>")
+                    .WithLocation(9, 21)
+            );
         }
 
         [WorkItem(540181, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540181")]
@@ -775,14 +775,13 @@ class Program
     }
 }";
 
-            CreateCompilation(csSource)
-                .VerifyDiagnostics(
-                    // (5,37): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
-                    Diagnostic(ErrorCode.ERR_AnonMethToNonDel, @"() => x")
-                        .WithArguments("lambda expression", "string"),
-                    // (8,55): error CS0103: The name 'nulF' does not exist in the current context
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, @"nulF").WithArguments("nulF")
-                );
+            CreateCompilation(csSource).VerifyDiagnostics(
+                // (5,37): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
+                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, @"() => x")
+                    .WithArguments("lambda expression", "string"),
+                // (8,55): error CS0103: The name 'nulF' does not exist in the current context
+                Diagnostic(ErrorCode.ERR_NameNotInContext, @"nulF").WithArguments("nulF")
+            );
         }
 
         [WorkItem(541725, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541725")]
@@ -805,15 +804,14 @@ class Program
             // for its side effects, a delegate-creation-expression is not allowed as a
             // statement expression.
 
-            CreateCompilation(csSource)
-                .VerifyDiagnostics(
-                    // (7,21): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                    //         D d = () => new D(() => { });
-                    Diagnostic(ErrorCode.ERR_IllegalStatement, "new D(() => { })"),
-                    // (8,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                    //         new D(()=>{});
-                    Diagnostic(ErrorCode.ERR_IllegalStatement, "new D(()=>{})")
-                );
+            CreateCompilation(csSource).VerifyDiagnostics(
+                // (7,21): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                //         D d = () => new D(() => { });
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "new D(() => { })"),
+                // (8,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                //         new D(()=>{});
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "new D(()=>{})")
+            );
         }
 
         [WorkItem(542336, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542336")]
@@ -832,12 +830,11 @@ class Program
         };
     }
 }";
-            CreateCompilation(csSource)
-                .VerifyDiagnostics(
-                    // (8,24): error CS0026: Keyword 'this' is not valid in a static property, static method, or static field initializer
-                    //             object o = this;
-                    Diagnostic(ErrorCode.ERR_ThisInStaticMeth, "this")
-                );
+            CreateCompilation(csSource).VerifyDiagnostics(
+                // (8,24): error CS0026: Keyword 'this' is not valid in a static property, static method, or static field initializer
+                //             object o = this;
+                Diagnostic(ErrorCode.ERR_ThisInStaticMeth, "this")
+            );
         }
 
         [WorkItem(542431, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542431")]
@@ -853,12 +850,11 @@ class C
         System.Func<int> f = new System.Func<int>(r => 0);
     }
 }";
-            CreateCompilation(csSource)
-                .VerifyDiagnostics(
-                    // (6,51): error CS1593: Delegate 'System.Func<int>' does not take 1 arguments
-                    Diagnostic(ErrorCode.ERR_BadDelArgCount, "r => 0")
-                        .WithArguments("System.Func<int>", "1")
-                );
+            CreateCompilation(csSource).VerifyDiagnostics(
+                // (6,51): error CS1593: Delegate 'System.Func<int>' does not take 1 arguments
+                Diagnostic(ErrorCode.ERR_BadDelArgCount, "r => 0")
+                    .WithArguments("System.Func<int>", "1")
+            );
         }
 
         [Fact, WorkItem(529054, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529054")]
@@ -874,12 +870,11 @@ public class Program
         bool exists = System.Array.Exists(b, o => o != ""BB"");
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,46): error CS1977: Cannot use a lambda expression as an argument to a dynamically dispatched operation without first casting it to a delegate or expression tree type.
-                    //         bool exists = System.Array.Exists(b, o => o != "BB");
-                    Diagnostic(ErrorCode.ERR_BadDynamicMethodArgLambda, @"o => o != ""BB""")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,46): error CS1977: Cannot use a lambda expression as an argument to a dynamically dispatched operation without first casting it to a delegate or expression tree type.
+                //         bool exists = System.Array.Exists(b, o => o != "BB");
+                Diagnostic(ErrorCode.ERR_BadDynamicMethodArgLambda, @"o => o != ""BB""")
+            );
         }
 
         [Fact, WorkItem(529389, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529389")]
@@ -954,18 +949,14 @@ public class TestClass
     }
 }
 ";
-            CreateCompilation(csSource)
-                .VerifyDiagnostics(
-                    // (4,29): error CS0133: The expression being assigned to 'TestClass.Test.aa' must be constant
-                    Diagnostic(
-                            ErrorCode.ERR_NotConstantExpression,
-                            "((System.Func<int>)(() => 1))()"
-                        )
-                        .WithArguments("TestClass.Test.aa"),
-                    // (5,10): warning CS0414: The field 'TestClass.MyTest' is assigned but its value is never used
-                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "MyTest")
-                        .WithArguments("TestClass.MyTest")
-                );
+            CreateCompilation(csSource).VerifyDiagnostics(
+                // (4,29): error CS0133: The expression being assigned to 'TestClass.Test.aa' must be constant
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "((System.Func<int>)(() => 1))()")
+                    .WithArguments("TestClass.Test.aa"),
+                // (5,10): warning CS0414: The field 'TestClass.MyTest' is assigned but its value is never used
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "MyTest")
+                    .WithArguments("TestClass.MyTest")
+            );
         }
 
         [WorkItem(544932, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544932")]
@@ -1233,9 +1224,9 @@ class TestDataPointBase
                 // (10,14): error CS4033: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task'.
                 //         if (!await Task.Run(() => this.integrationService.TryGetDocumentId(null, out documentId), token).ConfigureAwait(false))
                 Diagnostic(
-                        ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod,
-                        "await Task.Run(() => this.integrationService.TryGetDocumentId(null, out documentId), token).ConfigureAwait(false)"
-                    )
+                    ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod,
+                    "await Task.Run(() => this.integrationService.TryGetDocumentId(null, out documentId), token).ConfigureAwait(false)"
+                )
                     .WithLocation(10, 14),
                 // (6,54): warning CS0649: Field 'TestDataPointBase.integrationService' is never assigned to, and will always have its default value null
                 //     private readonly IVisualStudioIntegrationService integrationService;
@@ -1451,18 +1442,17 @@ class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(text)
-                .VerifyDiagnostics(
-                    // (11,22): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                    //         ME(() => ref i);
-                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "i").WithLocation(11, 22),
-                    // (12,20): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                    //         ME(() => { return ref i; });
-                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(12, 20),
-                    // (13,23): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                    //         ME(delegate { return ref i; });
-                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(13, 23)
-                );
+            CreateCompilationWithMscorlib45(text).VerifyDiagnostics(
+                // (11,22): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                //         ME(() => ref i);
+                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "i").WithLocation(11, 22),
+                // (12,20): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                //         ME(() => { return ref i; });
+                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(12, 20),
+                // (13,23): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                //         ME(delegate { return ref i; });
+                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(13, 23)
+            );
         }
 
         [Fact]
@@ -1484,18 +1474,17 @@ class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(text)
-                .VerifyDiagnostics(
-                    // (9,33): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                    //         var e = new E(() => ref i);
-                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "i").WithLocation(9, 33),
-                    // (10,27): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                    //         e = new E(() => { return ref i; });
-                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(10, 27),
-                    // (11,30): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                    //         e = new E(delegate { return ref i; });
-                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(11, 30)
-                );
+            CreateCompilationWithMscorlib45(text).VerifyDiagnostics(
+                // (9,33): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                //         var e = new E(() => ref i);
+                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "i").WithLocation(9, 33),
+                // (10,27): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                //         e = new E(() => { return ref i; });
+                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(10, 27),
+                // (11,30): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                //         e = new E(delegate { return ref i; });
+                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(11, 30)
+            );
         }
 
         [Fact]
@@ -1532,15 +1521,14 @@ class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(text)
-                .VerifyDiagnostics(
-                    // (18,13): error CS8150: By-value returns may only be used in by-value returning methods.
-                    //             return i;
-                    Diagnostic(ErrorCode.ERR_MustHaveRefReturn, "return").WithLocation(18, 13),
-                    // (23,17): error CS8149: By-reference returns may only be used in by-reference returning methods.
-                    //                 return ref i;
-                    Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(23, 17)
-                );
+            CreateCompilationWithMscorlib45(text).VerifyDiagnostics(
+                // (18,13): error CS8150: By-value returns may only be used in by-value returning methods.
+                //             return i;
+                Diagnostic(ErrorCode.ERR_MustHaveRefReturn, "return").WithLocation(18, 13),
+                // (23,17): error CS8149: By-reference returns may only be used in by-reference returning methods.
+                //                 return ref i;
+                Diagnostic(ErrorCode.ERR_MustNotHaveRefReturn, "return").WithLocation(23, 17)
+            );
         }
 
         [WorkItem(1112875, "DevDiv")]
@@ -1822,14 +1810,13 @@ public class Class1
 
 public ref struct Struct1 { }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
-                    //         Method((Class1 c) => c.Method2(default(Struct1)));
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default(Struct1)")
-                        .WithArguments("Struct1")
-                        .WithLocation(8, 40)
-                );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
+                //         Method((Class1 c) => c.Method2(default(Struct1)));
+                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default(Struct1)")
+                    .WithArguments("Struct1")
+                    .WithLocation(8, 40)
+            );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
@@ -1853,14 +1840,13 @@ public class Class1
 
 public ref struct Struct1 { }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
-                    //         Method((Class1 c) => c.Method2(default));
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default")
-                        .WithArguments("Struct1")
-                        .WithLocation(8, 40)
-                );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
+                //         Method((Class1 c) => c.Method2(default));
+                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default")
+                    .WithArguments("Struct1")
+                    .WithLocation(8, 40)
+            );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
@@ -1884,14 +1870,13 @@ public class Class1
 
 public ref struct Struct1 { }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (8,50): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
-                    //         Method((Class1 c) => c.Method2((Struct1) default));
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default")
-                        .WithArguments("Struct1")
-                        .WithLocation(8, 50)
-                );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (8,50): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
+                //         Method((Class1 c) => c.Method2((Struct1) default));
+                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default")
+                    .WithArguments("Struct1")
+                    .WithLocation(8, 50)
+            );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
@@ -1915,14 +1900,13 @@ public class Class1
 
 public ref struct Struct1 { }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
-                    //         Method((Class1 c) => c.Method2(new Struct1()));
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "new Struct1()")
-                        .WithArguments("Struct1")
-                        .WithLocation(8, 40)
-                );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (8,40): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
+                //         Method((Class1 c) => c.Method2(new Struct1()));
+                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "new Struct1()")
+                    .WithArguments("Struct1")
+                    .WithLocation(8, 40)
+            );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
@@ -1947,14 +1931,13 @@ public class Class1
 
 public ref struct Struct1 { }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (9,25): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
-                    //         Method((Struct1 s) => Method2());
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "s")
-                        .WithArguments("Struct1")
-                        .WithLocation(9, 25)
-                );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (9,25): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Struct1'.
+                //         Method((Struct1 s) => Method2());
+                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "s")
+                    .WithArguments("Struct1")
+                    .WithLocation(9, 25)
+            );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
@@ -2000,14 +1983,13 @@ public class Class1
     public static void Method(Expression<Action> expression) { }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (8,30): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
-                    //         Method(() => Method2(default));
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default")
-                        .WithArguments("TypedReference")
-                        .WithLocation(8, 30)
-                );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (8,30): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
+                //         Method(() => Method2(default));
+                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default")
+                    .WithArguments("TypedReference")
+                    .WithLocation(8, 30)
+            );
         }
 
         [Fact, WorkItem(30776, "https://github.com/dotnet/roslyn/issues/30776")]
@@ -2030,14 +2012,13 @@ public class Class1
     public static void Method(Expression<Delegate1> expression) { }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (9,32): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
-                    //         Method((TypedReference tr) => Method2());
-                    Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "tr")
-                        .WithArguments("TypedReference")
-                        .WithLocation(9, 32)
-                );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (9,32): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
+                //         Method((TypedReference tr) => Method2());
+                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "tr")
+                    .WithArguments("TypedReference")
+                    .WithLocation(9, 32)
+            );
         }
 
         [Fact, WorkItem(5363, "https://github.com/dotnet/roslyn/issues/5363")]
@@ -2139,17 +2120,16 @@ class C
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,47): error CS1002: ; expected
-                    //         Action a = () => { new X().ToString() };
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(7, 47),
-                    // (7,32): error CS0246: The type or namespace name 'X' could not be found (are you missing a using directive or an assembly reference?)
-                    //         Action a = () => { new X().ToString() };
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "X")
-                        .WithArguments("X")
-                        .WithLocation(7, 32)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,47): error CS1002: ; expected
+                //         Action a = () => { new X().ToString() };
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(7, 47),
+                // (7,32): error CS0246: The type or namespace name 'X' could not be found (are you missing a using directive or an assembly reference?)
+                //         Action a = () => { new X().ToString() };
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "X")
+                    .WithArguments("X")
+                    .WithLocation(7, 32)
+            );
         }
 
         [Fact, WorkItem(4527, "https://github.com/dotnet/roslyn/issues/4527")]
@@ -2212,20 +2192,19 @@ namespace RoslynAsyncDelegate
             var source =
                 @"using System.Linq;
 class C { C() { string.Empty.Select(() => { new Unbound1 }); } }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (2,58): error CS1526: A new expression requires (), [], or {} after type
-                    // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
-                    Diagnostic(ErrorCode.ERR_BadNewExpr, "}").WithLocation(2, 58),
-                    // (2,58): error CS1002: ; expected
-                    // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(2, 58),
-                    // (2,49): error CS0246: The type or namespace name 'Unbound1' could not be found (are you missing a using directive or an assembly reference?)
-                    // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unbound1")
-                        .WithArguments("Unbound1")
-                        .WithLocation(2, 49)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (2,58): error CS1526: A new expression requires (), [], or {} after type
+                // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
+                Diagnostic(ErrorCode.ERR_BadNewExpr, "}").WithLocation(2, 58),
+                // (2,58): error CS1002: ; expected
+                // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(2, 58),
+                // (2,49): error CS0246: The type or namespace name 'Unbound1' could not be found (are you missing a using directive or an assembly reference?)
+                // class C { C() { string.Empty.Select(() => { new Unbound1 }); } }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unbound1")
+                    .WithArguments("Unbound1")
+                    .WithLocation(2, 49)
+            );
         }
 
         [Fact]
@@ -2235,17 +2214,16 @@ class C { C() { string.Empty.Select(() => { new Unbound1 }); } }";
             var source =
                 @"using System.Linq;
 class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (2,62): error CS1002: ; expected
-                    // class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(2, 62),
-                    // (2,49): error CS0246: The type or namespace name 'Unbound1' could not be found (are you missing a using directive or an assembly reference?)
-                    // class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unbound1")
-                        .WithArguments("Unbound1")
-                        .WithLocation(2, 49)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (2,62): error CS1002: ; expected
+                // class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(2, 62),
+                // (2,49): error CS0246: The type or namespace name 'Unbound1' could not be found (are you missing a using directive or an assembly reference?)
+                // class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unbound1")
+                    .WithArguments("Unbound1")
+                    .WithLocation(2, 49)
+            );
         }
 
         [Fact]
@@ -2255,29 +2233,28 @@ class C { C() { string.Empty.Select(() => { new Unbound1 ( ) }); } }";
             var source =
                 @"using System.Linq;
 class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (2,61): error CS1003: Syntax error, ',' expected
-                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "Unbound2")
-                        .WithArguments(",", "")
-                        .WithLocation(2, 61),
-                    // (2,52): error CS0103: The name 'Unbound2' does not exist in the current context
-                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
-                        .WithArguments("Unbound2")
-                        .WithLocation(2, 52),
-                    // (2,61): error CS0103: The name 'Unbound2' does not exist in the current context
-                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
-                        .WithArguments("Unbound2")
-                        .WithLocation(2, 61),
-                    // (2,42): error CS0103: The name 'Unbound1' does not exist in the current context
-                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1")
-                        .WithArguments("Unbound1")
-                        .WithLocation(2, 42)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (2,61): error CS1003: Syntax error, ',' expected
+                // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
+                Diagnostic(ErrorCode.ERR_SyntaxError, "Unbound2")
+                    .WithArguments(",", "")
+                    .WithLocation(2, 61),
+                // (2,52): error CS0103: The name 'Unbound2' does not exist in the current context
+                // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
+                    .WithArguments("Unbound2")
+                    .WithLocation(2, 52),
+                // (2,61): error CS0103: The name 'Unbound2' does not exist in the current context
+                // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
+                    .WithArguments("Unbound2")
+                    .WithLocation(2, 61),
+                // (2,42): error CS0103: The name 'Unbound1' does not exist in the current context
+                // class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1")
+                    .WithArguments("Unbound1")
+                    .WithLocation(2, 42)
+            );
         }
 
         [Fact]
@@ -2287,19 +2264,18 @@ class C { C() { string.Empty.Select(x => Unbound1, Unbound2 Unbound2); } }";
             var source =
                 @"using System.Linq;
 class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (2,52): error CS0103: The name 'Unbound2' does not exist in the current context
-                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
-                        .WithArguments("Unbound2")
-                        .WithLocation(2, 52),
-                    // (2,42): error CS0103: The name 'Unbound1' does not exist in the current context
-                    // class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1")
-                        .WithArguments("Unbound1")
-                        .WithLocation(2, 42)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (2,52): error CS0103: The name 'Unbound2' does not exist in the current context
+                // class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
+                    .WithArguments("Unbound2")
+                    .WithLocation(2, 52),
+                // (2,42): error CS0103: The name 'Unbound1' does not exist in the current context
+                // class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1")
+                    .WithArguments("Unbound1")
+                    .WithLocation(2, 42)
+            );
         }
 
         [Fact]
@@ -2309,19 +2285,18 @@ class C { C() { string.Empty.Select(x => Unbound1, Unbound2); } }";
             var source =
                 @"using System.Linq;
 class C { C() { Unbound2.Select(x => Unbound1); } }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyDiagnostics(
-                    // (2,17): error CS0103: The name 'Unbound2' does not exist in the current context
-                    // class C { C() { Unbound2.Select(x => Unbound1); } }
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
-                        .WithArguments("Unbound2")
-                        .WithLocation(2, 17),
-                    // (2,38): error CS0103: The name 'Unbound1' does not exist in the current context
-                    // class C { C() { Unbound2.Select(x => Unbound1); } }
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1")
-                        .WithArguments("Unbound1")
-                        .WithLocation(2, 38)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
+                // (2,17): error CS0103: The name 'Unbound2' does not exist in the current context
+                // class C { C() { Unbound2.Select(x => Unbound1); } }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound2")
+                    .WithArguments("Unbound2")
+                    .WithLocation(2, 17),
+                // (2,38): error CS0103: The name 'Unbound1' does not exist in the current context
+                // class C { C() { Unbound2.Select(x => Unbound1); } }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unbound1")
+                    .WithArguments("Unbound1")
+                    .WithLocation(2, 38)
+            );
         }
 
         [Fact]
@@ -2681,7 +2656,8 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf()
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
                 Assert.Equal("x", reference.ToString());
@@ -2731,7 +2707,8 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf()
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
                 Assert.Equal("x", reference.ToString());
@@ -2781,7 +2758,8 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf()
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
                 Assert.Equal("x", reference.ToString());
@@ -2818,7 +2796,8 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf()
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
                 Assert.Equal("x", reference.ToString());
@@ -2855,7 +2834,8 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf()
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
                 Assert.Equal("x", reference.ToString());
@@ -2896,7 +2876,8 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body.DescendantNodesAndSelf()
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
                 Assert.Equal("x", reference.ToString());

@@ -92,12 +92,13 @@ namespace System.Runtime.Serialization.Json
             {
                 int intValue;
                 if (
-                    int.TryParse(
-                        value,
-                        NumberStyles.Float,
-                        NumberFormatInfo.InvariantInfo,
-                        out intValue
-                    )
+                    int
+                        .TryParse(
+                            value,
+                            NumberStyles.Float,
+                            NumberFormatInfo.InvariantInfo,
+                            out intValue
+                        )
                 )
                 {
                     objectTypeCode = TypeCode.Int32;
@@ -106,12 +107,13 @@ namespace System.Runtime.Serialization.Json
 
                 long longValue;
                 if (
-                    long.TryParse(
-                        value,
-                        NumberStyles.Float,
-                        NumberFormatInfo.InvariantInfo,
-                        out longValue
-                    )
+                    long
+                        .TryParse(
+                            value,
+                            NumberStyles.Float,
+                            NumberFormatInfo.InvariantInfo,
+                            out longValue
+                        )
                 )
                 {
                     objectTypeCode = TypeCode.Int64;
@@ -121,12 +123,13 @@ namespace System.Runtime.Serialization.Json
 
             decimal decimalValue;
             if (
-                decimal.TryParse(
-                    value,
-                    NumberStyles.Float,
-                    NumberFormatInfo.InvariantInfo,
-                    out decimalValue
-                )
+                decimal
+                    .TryParse(
+                        value,
+                        NumberStyles.Float,
+                        NumberFormatInfo.InvariantInfo,
+                        out decimalValue
+                    )
             )
             {
                 objectTypeCode = TypeCode.Decimal;

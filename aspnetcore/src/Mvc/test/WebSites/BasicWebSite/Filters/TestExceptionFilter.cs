@@ -11,10 +11,8 @@ namespace BasicWebSite.Filters
         public override void OnException(ExceptionContext context)
         {
             if (
-                context.HttpContext.Request.Query.TryGetValue(
-                    "handleException",
-                    out var handleException
-                )
+                context.HttpContext.Request.Query
+                    .TryGetValue("handleException", out var handleException)
             )
             {
                 if (handleException.Equals("true"))

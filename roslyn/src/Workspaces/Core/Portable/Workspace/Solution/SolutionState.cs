@@ -357,9 +357,8 @@ namespace Microsoft.CodeAnalysis
         {
             return documentId != null
                 && this.ContainsProject(documentId.ProjectId)
-                && this.GetProjectState(documentId.ProjectId)!.AdditionalDocumentStates.Contains(
-                    documentId
-                );
+                && this.GetProjectState(documentId.ProjectId)!.AdditionalDocumentStates
+                    .Contains(documentId);
         }
 
         /// <summary>
@@ -371,24 +370,23 @@ namespace Microsoft.CodeAnalysis
         {
             return documentId != null
                 && this.ContainsProject(documentId.ProjectId)
-                && this.GetProjectState(
-                    documentId.ProjectId
-                )!.AnalyzerConfigDocumentStates.Contains(documentId);
+                && this.GetProjectState(documentId.ProjectId)!.AnalyzerConfigDocumentStates
+                    .Contains(documentId);
         }
 
         private DocumentState GetRequiredDocumentState(DocumentId documentId) =>
-            GetRequiredProjectState(documentId.ProjectId)
-                .DocumentStates.GetRequiredState(documentId);
+            GetRequiredProjectState(documentId.ProjectId).DocumentStates
+                .GetRequiredState(documentId);
 
         private TextDocumentState GetRequiredAdditionalDocumentState(DocumentId documentId) =>
-            GetRequiredProjectState(documentId.ProjectId)
-                .AdditionalDocumentStates.GetRequiredState(documentId);
+            GetRequiredProjectState(documentId.ProjectId).AdditionalDocumentStates
+                .GetRequiredState(documentId);
 
         private AnalyzerConfigDocumentState GetRequiredAnalyzerConfigDocumentState(
             DocumentId documentId
         ) =>
-            GetRequiredProjectState(documentId.ProjectId)
-                .AnalyzerConfigDocumentStates.GetRequiredState(documentId);
+            GetRequiredProjectState(documentId.ProjectId).AnalyzerConfigDocumentStates
+                .GetRequiredState(documentId);
 
         internal DocumentState? GetDocumentState(SyntaxTree? syntaxTree, ProjectId? projectId)
         {
@@ -623,7 +621,8 @@ namespace Microsoft.CodeAnalysis
         private static IEnumerable<TextDocumentState> GetDocumentStates(
             ProjectState projectState
         ) =>
-            projectState.DocumentStates.States.Concat(projectState.AdditionalDocumentStates.States)
+            projectState.DocumentStates.States
+                .Concat(projectState.AdditionalDocumentStates.States)
                 .Concat(projectState.AnalyzerConfigDocumentStates.States);
 
         /// <summary>
@@ -1405,10 +1404,11 @@ namespace Microsoft.CodeAnalysis
                 if (oldProjectState == null)
                 {
                     throw new InvalidOperationException(
-                        string.Format(
-                            WorkspacesResources._0_is_not_part_of_the_workspace,
-                            documentIdsInProject.Key
-                        )
+                        string
+                            .Format(
+                                WorkspacesResources._0_is_not_part_of_the_workspace,
+                                documentIdsInProject.Key
+                            )
                     );
                 }
 
@@ -1897,13 +1897,13 @@ namespace Microsoft.CodeAnalysis
             ImmutableDictionary<ProjectId, ProjectState> projectStates
         )
         {
-            var map = projectStates.Values.Select(
+            var map = projectStates.Values
+                .Select(
                     state =>
                         new KeyValuePair<ProjectId, ImmutableHashSet<ProjectId>>(
                             state.Id,
-                            state.ProjectReferences.Where(
-                                    pr => projectStates.ContainsKey(pr.ProjectId)
-                                )
+                            state.ProjectReferences
+                                .Where(pr => projectStates.ContainsKey(pr.ProjectId))
                                 .Select(pr => pr.ProjectId)
                                 .ToImmutableHashSet()
                         )
@@ -2149,9 +2149,8 @@ namespace Microsoft.CodeAnalysis
                     continue;
                 }
 
-                var doc = GetProjectState(documentId.ProjectId)?.DocumentStates.GetState(
-                    documentId
-                );
+                var doc = GetProjectState(documentId.ProjectId)?.DocumentStates
+                    .GetState(documentId);
                 if (doc != null)
                 {
                     if (!doc.TryGetText(out var existingText) || existingText != text)
@@ -2206,8 +2205,8 @@ namespace Microsoft.CodeAnalysis
         {
             return project.SupportsCompilation
               ? GetCompilationTracker(project.Id)
-                    .GetCompilationAsync(this, cancellationToken)
-                    .AsNullable()
+                .GetCompilationAsync(this, cancellationToken)
+                .AsNullable()
               : SpecializedTasks.Null<Compilation>();
         }
 
@@ -2223,7 +2222,7 @@ namespace Microsoft.CodeAnalysis
             // regardless whether project support compilation or not, if projectInfo is not complete, we can't guarantee its reference completeness
             return project.SupportsCompilation
               ? this.GetCompilationTracker(project.Id)
-                    .HasSuccessfullyLoadedAsync(this, cancellationToken)
+                .HasSuccessfullyLoadedAsync(this, cancellationToken)
               : project.HasAllInformation ? SpecializedTasks.True : SpecializedTasks.False;
         }
 
@@ -2239,7 +2238,7 @@ namespace Microsoft.CodeAnalysis
         {
             return project.SupportsCompilation
               ? GetCompilationTracker(project.Id)
-                    .GetSourceGeneratedDocumentStatesAsync(this, cancellationToken)
+                .GetSourceGeneratedDocumentStatesAsync(this, cancellationToken)
               : new(TextDocumentStates<SourceGeneratedDocumentState>.Empty);
         }
 

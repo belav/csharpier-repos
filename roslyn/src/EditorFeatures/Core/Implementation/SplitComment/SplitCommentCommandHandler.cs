@@ -89,19 +89,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
                 return false;
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Split_comment
-                )
+                context.OperationContext
+                    .AddScope(allowCancellation: true, EditorFeaturesResources.Split_comment)
             )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
                 var result = SplitCommentAsync(
-                        textView,
-                        document,
-                        new SnapshotSpan(snapshot, selectionSpan),
-                        cancellationToken
-                    )
+                    textView,
+                    document,
+                    new SnapshotSpan(snapshot, selectionSpan),
+                    cancellationToken
+                )
                     .WaitAndGetResult(cancellationToken);
                 if (result == null)
                     return false;

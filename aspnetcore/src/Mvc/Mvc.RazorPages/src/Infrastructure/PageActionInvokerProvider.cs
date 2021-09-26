@@ -80,9 +80,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 // With legacy routing, we're forced to perform a blocking call. The exceptation is that
                 // in the most common case - build time views or successsively cached runtime views - this should finish synchronously.
                 page.CompiledPageDescriptor = _pageLoader.LoadAsync(
-                        page,
-                        EndpointMetadataCollection.Empty
-                    )
+                    page,
+                    EndpointMetadataCollection.Empty
+                )
                     .GetAwaiter()
                     .GetResult();
             }

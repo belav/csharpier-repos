@@ -580,8 +580,10 @@ namespace A
                 composition: EditorTestCompositions.EditorFeaturesWpf
             );
 
-            var solution = workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
+            var solution = workspace.CurrentSolution
+                .WithOptions(
+                    workspace.Options
+                        .WithChangedOption(
                             GenerationOptions.PlaceSystemNamespaceFirst,
                             LanguageNames.CSharp,
                             systemUsingsFirst

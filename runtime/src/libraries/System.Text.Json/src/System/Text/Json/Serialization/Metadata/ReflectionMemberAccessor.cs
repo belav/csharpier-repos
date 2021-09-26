@@ -153,9 +153,8 @@ namespace System.Text.Json.Serialization.Metadata
             TCollection
         > CreateImmutableEnumerableCreateRangeDelegate<TCollection, TElement>()
         {
-            MethodInfo createRange = typeof(TCollection).GetImmutableEnumerableCreateRangeMethod(
-                typeof(TElement)
-            );
+            MethodInfo createRange = typeof(TCollection)
+                .GetImmutableEnumerableCreateRangeMethod(typeof(TElement));
             return (Func<IEnumerable<TElement>, TCollection>)createRange.CreateDelegate(
                 typeof(Func<IEnumerable<TElement>, TCollection>)
             );
@@ -166,10 +165,8 @@ namespace System.Text.Json.Serialization.Metadata
             TCollection
         > CreateImmutableDictionaryCreateRangeDelegate<TCollection, TKey, TValue>()
         {
-            MethodInfo createRange = typeof(TCollection).GetImmutableDictionaryCreateRangeMethod(
-                typeof(TKey),
-                typeof(TValue)
-            );
+            MethodInfo createRange = typeof(TCollection)
+                .GetImmutableDictionaryCreateRangeMethod(typeof(TKey), typeof(TValue));
             return (Func<
                 IEnumerable<KeyValuePair<TKey, TValue>>,
                 TCollection

@@ -36,11 +36,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 var state = new State();
                 if (
                     !await state.TryInitializeConversionAsync(
-                            service,
-                            document,
-                            interfaceNode,
-                            cancellationToken
-                        )
+                        service,
+                        document,
+                        interfaceNode,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -102,10 +102,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     return false;
                 }
 
-                ContainingType = document.SemanticModel.GetEnclosingNamedType(
-                    node.SpanStart,
-                    cancellationToken
-                );
+                ContainingType = document.SemanticModel
+                    .GetEnclosingNamedType(node.SpanStart, cancellationToken);
                 if (ContainingType == null)
                 {
                     return false;
@@ -142,10 +140,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     return false;
                 }
 
-                ContainingType = document.SemanticModel.GetEnclosingNamedType(
-                    node.SpanStart,
-                    cancellationToken
-                );
+                ContainingType = document.SemanticModel
+                    .GetEnclosingNamedType(node.SpanStart, cancellationToken);
                 if (ContainingType == null)
                 {
                     return false;

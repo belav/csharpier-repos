@@ -34,13 +34,14 @@ namespace Microsoft.CodeAnalysis.Remote
             await TaskScheduler.Default;
 
             using var provider = await _client.GetProxyAsync<ISolutionAssetProvider>(
-                    SolutionAssetProvider.ServiceDescriptor,
-                    cancellationToken
-                )
+                SolutionAssetProvider.ServiceDescriptor,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             Contract.ThrowIfNull(provider.Proxy);
 
-            return await new RemoteCallback<ISolutionAssetProvider>(provider.Proxy).InvokeAsync(
+            return await new RemoteCallback<ISolutionAssetProvider>(provider.Proxy)
+                .InvokeAsync(
                     (proxy, pipeWriter, cancellationToken) =>
                         proxy.GetAssetsAsync(
                             pipeWriter,
@@ -70,13 +71,14 @@ namespace Microsoft.CodeAnalysis.Remote
             await TaskScheduler.Default;
 
             using var provider = await _client.GetProxyAsync<ISolutionAssetProvider>(
-                    SolutionAssetProvider.ServiceDescriptor,
-                    cancellationToken
-                )
+                SolutionAssetProvider.ServiceDescriptor,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             Contract.ThrowIfNull(provider.Proxy);
 
-            return await new RemoteCallback<ISolutionAssetProvider>(provider.Proxy).InvokeAsync(
+            return await new RemoteCallback<ISolutionAssetProvider>(provider.Proxy)
+                .InvokeAsync(
                     (self, cancellationToken) =>
                         provider.Proxy.IsExperimentEnabledAsync(experimentName, cancellationToken),
                     cancellationToken

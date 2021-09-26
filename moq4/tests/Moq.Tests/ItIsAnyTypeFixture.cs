@@ -101,15 +101,14 @@ namespace Moq.Tests
         {
             Type typeArgument = null;
             var mock = new Mock<IZ>();
-            mock.Setup(z => z.Method<It.IsAnyType>())
-                .Callback(
-                    new InvocationAction(
-                        invocation =>
-                        {
-                            typeArgument = invocation.Method.GetGenericArguments()[0];
-                        }
-                    )
-                );
+            mock.Setup(z => z.Method<It.IsAnyType>()).Callback(
+                new InvocationAction(
+                    invocation =>
+                    {
+                        typeArgument = invocation.Method.GetGenericArguments()[0];
+                    }
+                )
+            );
 
             _ = mock.Object.Method<string>();
 
@@ -120,16 +119,15 @@ namespace Moq.Tests
         public void Type_arguments_can_be_discovered_in_Returns_through_a_InvocationFunc_callback()
         {
             var mock = new Mock<IZ>();
-            mock.Setup(z => z.Method<It.IsAnyType>())
-                .Returns(
-                    new InvocationFunc(
-                        invocation =>
-                        {
-                            var typeArgument = invocation.Method.GetGenericArguments()[0];
-                            return Activator.CreateInstance(typeArgument);
-                        }
-                    )
-                );
+            mock.Setup(z => z.Method<It.IsAnyType>()).Returns(
+                new InvocationFunc(
+                    invocation =>
+                    {
+                        var typeArgument = invocation.Method.GetGenericArguments()[0];
+                        return Activator.CreateInstance(typeArgument);
+                    }
+                )
+            );
 
             var result = mock.Object.Method<DateTime>();
 

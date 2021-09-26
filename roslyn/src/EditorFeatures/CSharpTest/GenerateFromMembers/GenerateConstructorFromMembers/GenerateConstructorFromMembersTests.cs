@@ -696,11 +696,12 @@ class Program
     [|bool b;
     HashSet<string> s;|]
 }",
-                string.Format(
-                    FeaturesResources.Generate_constructor_0_1,
-                    "Program",
-                    "bool, HashSet<string>"
-                )
+                string
+                    .Format(
+                        FeaturesResources.Generate_constructor_0_1,
+                        "Program",
+                        "bool, HashSet<string>"
+                    )
             );
         }
 
@@ -720,11 +721,12 @@ class Program
         this.b = b;
     }
 }",
-                string.Format(
-                    FeaturesResources.Generate_field_assigning_constructor_0_1,
-                    "Program",
-                    "bool, HashSet<string>"
-                )
+                string
+                    .Format(
+                        FeaturesResources.Generate_field_assigning_constructor_0_1,
+                        "Program",
+                        "bool, HashSet<string>"
+                    )
             );
         }
 
@@ -744,11 +746,12 @@ class Program
         this.b = b;
     }
 }",
-                string.Format(
-                    FeaturesResources.Generate_delegating_constructor_0_1,
-                    "Program",
-                    "bool, HashSet<string>"
-                ),
+                string
+                    .Format(
+                        FeaturesResources.Generate_delegating_constructor_0_1,
+                        "Program",
+                        "bool, HashSet<string>"
+                    ),
                 index: 1
             );
         }
@@ -1289,9 +1292,8 @@ class Z
                 chosenSymbols: new string[] { "a", "b" },
                 optionsCallback: options => options[0].Value = true,
                 parameters: new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp6
-                    ),
+                    parseOptions: CSharpParseOptions.Default
+                        .WithLanguageVersion(LanguageVersion.CSharp6),
                     options: Option(
                         CSharpCodeStyleOptions.PreferThrowExpression,
                         CodeStyleOptions2.FalseWithSilentEnforcement

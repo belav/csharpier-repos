@@ -182,21 +182,19 @@ namespace AutoMapper.Configuration.Conventions
             MemberInfo matchingMemberInfo = null;
             for (var i = 1; i <= matches.Length; i++)
             {
-                var first = string.Join(
-                    sourceMemberNamingConvention.SeparatorCharacter,
-                    matches.Take(i).Select(SplitMembers)
-                );
-                var second = string.Join(
-                    sourceMemberNamingConvention.SeparatorCharacter,
-                    matches.Skip(i).Select(SplitMembers)
-                );
+                var first = string
+                    .Join(
+                        sourceMemberNamingConvention.SeparatorCharacter,
+                        matches.Take(i).Select(SplitMembers)
+                    );
+                var second = string
+                    .Join(
+                        sourceMemberNamingConvention.SeparatorCharacter,
+                        matches.Skip(i).Select(SplitMembers)
+                    );
 
-                matchingMemberInfo = parent.NameMapper.GetMatchingMemberInfo(
-                    sourceType,
-                    destType,
-                    destMemberType,
-                    first
-                );
+                matchingMemberInfo = parent.NameMapper
+                    .GetMatchingMemberInfo(sourceType, destType, destMemberType, first);
 
                 if (matchingMemberInfo != null)
                 {
@@ -221,10 +219,8 @@ namespace AutoMapper.Configuration.Conventions
             }
             return matchingMemberInfo != null;
             string SplitMembers(string value) =>
-                sourceMemberNamingConvention.SplittingExpression.Replace(
-                    value,
-                    sourceMemberNamingConvention.ReplaceValue
-                );
+                sourceMemberNamingConvention.SplittingExpression
+                    .Replace(value, sourceMemberNamingConvention.ReplaceValue);
         }
     }
 }

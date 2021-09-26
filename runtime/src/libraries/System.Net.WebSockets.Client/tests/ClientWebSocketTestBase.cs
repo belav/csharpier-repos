@@ -22,8 +22,8 @@ namespace System.Net.WebSockets.Client.Tests
         public static readonly object[][] EchoHeadersServers =
             System.Net.Test.Common.Configuration.WebSockets.EchoHeadersServers;
         public static readonly object[][] EchoServersAndBoolean = EchoServers.SelectMany(
-                o => new object[][] { new object[] { o[0], false }, new object[] { o[0], true } }
-            )
+            o => new object[][] { new object[] { o[0], false }, new object[] { o[0], true } }
+        )
             .ToArray();
 
         public const int TimeOutMilliseconds = 30000;

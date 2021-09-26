@@ -102,30 +102,29 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             {
                 // If the return type is Task, then make the new return type "void".
                 newReturnType = SyntaxFactory.PredefinedType(
-                        SyntaxFactory.Token(SyntaxKind.VoidKeyword)
-                    )
+                    SyntaxFactory.Token(SyntaxKind.VoidKeyword)
+                )
                     .WithTriviaFrom(returnTypeSyntax);
             }
             else if (returnType.OriginalDefinition.Equals(knownTypes._taskOfTType))
             {
                 // If the return type is Task<T>, then make the new return type "T".
-                newReturnType = returnType.GetTypeArguments()[0].GenerateTypeSyntax()
+                newReturnType = returnType.GetTypeArguments()[0]
+                    .GenerateTypeSyntax()
                     .WithTriviaFrom(returnTypeSyntax);
             }
             else if (returnType.OriginalDefinition.Equals(knownTypes._iAsyncEnumerableOfTTypeOpt))
             {
                 // If the return type is IAsyncEnumerable<T>, then make the new return type IEnumerable<T>.
-                newReturnType = knownTypes._iEnumerableOfTType.Construct(
-                        methodSymbol.ReturnType.GetTypeArguments()[0]
-                    )
+                newReturnType = knownTypes._iEnumerableOfTType
+                    .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
                     .GenerateTypeSyntax();
             }
             else if (returnType.OriginalDefinition.Equals(knownTypes._iAsyncEnumeratorOfTTypeOpt))
             {
                 // If the return type is IAsyncEnumerator<T>, then make the new return type IEnumerator<T>.
-                newReturnType = knownTypes._iEnumeratorOfTType.Construct(
-                        methodSymbol.ReturnType.GetTypeArguments()[0]
-                    )
+                newReturnType = knownTypes._iEnumeratorOfTType
+                    .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
                     .GenerateTypeSyntax();
             }
 

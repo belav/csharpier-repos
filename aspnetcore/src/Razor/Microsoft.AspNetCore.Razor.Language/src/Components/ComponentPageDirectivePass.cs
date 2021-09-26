@@ -48,11 +48,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     || directive.Node.IsImported()
                 )
                 {
-                    directive.Node.Diagnostics.Add(
-                        ComponentDiagnosticFactory.CreatePageDirective_CannotBeImported(
-                            directive.Node.Source.Value
-                        )
-                    );
+                    directive.Node.Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.CreatePageDirective_CannotBeImported(
+                                directive.Node.Source.Value
+                            )
+                        );
                 }
             }
 
@@ -86,11 +87,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 }
                 else
                 {
-                    pageDirective.Diagnostics.Add(
-                        ComponentDiagnosticFactory.CreatePageDirective_MustSpecifyRoute(
-                            pageDirective.Source
-                        )
-                    );
+                    pageDirective.Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.CreatePageDirective_MustSpecifyRoute(
+                                pageDirective.Source
+                            )
+                        );
                 }
             }
         }

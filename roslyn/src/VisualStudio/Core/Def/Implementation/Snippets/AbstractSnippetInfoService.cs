@@ -68,8 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         {
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
             var textManager = (IVsTextManager2?)await asyncServiceProvider.GetServiceAsync(
-                    typeof(SVsTextManager)
-                )
+                typeof(SVsTextManager)
+            )
                 .ConfigureAwait(true);
             Assumes.Present(textManager);
 
@@ -135,13 +135,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             // Call the asynchronous IExpansionManager API from a background thread
             await TaskScheduler.Default;
             var expansionEnumerator = await expansionManager.EnumerateExpansionsAsync(
-                    _languageGuidForSnippets,
-                    0, // shortCutOnly
-                    Array.Empty<string>(), // types
-                    0, // countTypes
-                    1, // includeNULLTypes
-                    1 // includeDulicates: Allows snippets with the same title but different shortcuts
-                )
+                _languageGuidForSnippets,
+                0, // shortCutOnly
+                Array.Empty<string>(), // types
+                0, // countTypes
+                1, // includeNULLTypes
+                1 // includeDulicates: Allows snippets with the same title but different shortcuts
+            )
                 .ConfigureAwait(false);
 
             // The rest of the process requires being on the UI thread, see the explanation on
@@ -244,7 +244,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             return new HashSet<string>(
                 updatedSnippets.Select(s => s.Shortcut),
                 StringComparer.OrdinalIgnoreCase
-            ).ToImmutableHashSet(StringComparer.OrdinalIgnoreCase);
+            )
+                .ToImmutableHashSet(StringComparer.OrdinalIgnoreCase);
         }
 
         private static VsExpansion ConvertToVsExpansionAndFree(IntPtr expansionPtr)

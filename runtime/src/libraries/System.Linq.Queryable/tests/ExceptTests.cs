@@ -88,7 +88,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Except1()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .Except((new int[] { 1, 2, 3 }).AsQueryable())
                 .Count();
             Assert.Equal(1, count);
@@ -97,7 +98,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Except2()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .Except((new int[] { 1, 2, 3 }).AsQueryable(), EqualityComparer<int>.Default)
                 .Count();
             Assert.Equal(1, count);

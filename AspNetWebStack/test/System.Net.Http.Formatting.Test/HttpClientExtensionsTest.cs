@@ -30,12 +30,9 @@ namespace System.Net.Http
                 CallBase = true
             };
             handlerMock.Setup(
-                    h =>
-                        h.SendAsyncPublic(
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.SendAsyncPublic(It.IsAny<HttpRequestMessage>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(
                     (HttpRequestMessage request, CancellationToken _) =>
                         Task.FromResult(new HttpResponseMessage() { RequestMessage = request })

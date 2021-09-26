@@ -54,15 +54,13 @@ namespace SourceGenerators.Tests
                 }
             }
 
-            return new AdhocWorkspace().AddSolution(
-                    SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Create())
-                )
+            return new AdhocWorkspace()
+                .AddSolution(SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Create()))
                 .AddProject("Test", "test.dll", "C#")
                 .WithMetadataReferences(refs)
                 .WithCompilationOptions(
-                    new CSharpCompilationOptions(
-                        OutputKind.DynamicallyLinkedLibrary
-                    ).WithNullableContextOptions(NullableContextOptions.Enable)
+                    new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+                        .WithNullableContextOptions(NullableContextOptions.Enable)
                 );
         }
 
@@ -172,7 +170,8 @@ namespace SourceGenerators.Tests
 
             Assert.True(proj.Solution.Workspace.TryApplyChanges(proj.Solution));
 
-            Compilation? comp = await proj!.GetCompilationAsync(CancellationToken.None)
+            Compilation? comp = await proj!
+                .GetCompilationAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
             CSharpGeneratorDriver cgd = CSharpGeneratorDriver.Create(
@@ -203,7 +202,8 @@ namespace SourceGenerators.Tests
             ImmutableArray<DiagnosticAnalyzer> analyzers = ImmutableArray.Create(analyzer);
 
             Compilation? comp = await proj!.GetCompilationAsync().ConfigureAwait(false);
-            return await comp!.WithAnalyzers(analyzers)
+            return await comp!
+                .WithAnalyzers(analyzers)
                 .GetAllDiagnosticsAsync()
                 .ConfigureAwait(false);
         }
@@ -238,7 +238,8 @@ namespace SourceGenerators.Tests
             while (true)
             {
                 Compilation? comp = await proj!.GetCompilationAsync().ConfigureAwait(false);
-                ImmutableArray<Diagnostic> diags = await comp!.WithAnalyzers(analyzers)
+                ImmutableArray<Diagnostic> diags = await comp!
+                    .WithAnalyzers(analyzers)
                     .GetAllDiagnosticsAsync()
                     .ConfigureAwait(false);
                 if (diags.IsEmpty)
@@ -267,9 +268,9 @@ namespace SourceGenerators.Tests
                     break;
                 }
 
-                ImmutableArray<CodeActionOperation> operations = await actions[
-                    0
-                ].GetOperationsAsync(CancellationToken.None).ConfigureAwait(false);
+                ImmutableArray<CodeActionOperation> operations = await actions[0]
+                    .GetOperationsAsync(CancellationToken.None)
+                    .ConfigureAwait(false);
                 Solution solution =
                     operations.OfType<ApplyChangesOperation>().Single().ChangedSolution;
                 Project? changedProj = solution.GetProject(proj.Id);

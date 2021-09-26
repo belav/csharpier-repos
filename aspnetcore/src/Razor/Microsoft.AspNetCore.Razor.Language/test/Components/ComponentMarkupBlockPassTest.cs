@@ -500,10 +500,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             var document = codeDocument.GetDocumentIntermediateNode();
-            Engine.Features.OfType<ComponentDocumentClassifierPass>()
+            Engine.Features
+                .OfType<ComponentDocumentClassifierPass>()
                 .Single()
                 .Execute(codeDocument, document);
-            Engine.Features.OfType<ComponentMarkupDiagnosticPass>()
+            Engine.Features
+                .OfType<ComponentMarkupDiagnosticPass>()
                 .Single()
                 .Execute(codeDocument, document);
             return document;

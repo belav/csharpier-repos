@@ -109,10 +109,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         {
             Assert.Throws<FormatException>(
                 () =>
-                    new InputParser(null, false).ParseInputString(
-                        "{apiMap:{R:1}}",
-                        UriMatchPart.Path
-                    )
+                    new InputParser(null, false)
+                        .ParseInputString("{apiMap:{R:1}}", UriMatchPart.Path)
             );
         }
 
@@ -125,10 +123,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
             var maps = new IISRewriteMapCollection { map };
             Assert.Throws<FormatException>(
                 () =>
-                    new InputParser(maps, false).ParseInputString(
-                        $"{{{undefinedMapName}:{{R:1}}}}",
-                        UriMatchPart.Path
-                    )
+                    new InputParser(maps, false)
+                        .ParseInputString($"{{{undefinedMapName}:{{R:1}}}}", UriMatchPart.Path)
             );
         }
 
@@ -143,10 +139,8 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
             var maps = new IISRewriteMapCollection { map };
 
             var inputString = $"{{{expectedMapName}:{{R:1}}}}";
-            var pattern = new InputParser(maps, false).ParseInputString(
-                inputString,
-                UriMatchPart.Path
-            );
+            var pattern = new InputParser(maps, false)
+                .ParseInputString(inputString, UriMatchPart.Path);
             Assert.Equal(1, pattern.PatternSegments.Count);
 
             var segment = pattern.PatternSegments.Single();

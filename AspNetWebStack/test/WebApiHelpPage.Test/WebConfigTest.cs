@@ -25,16 +25,16 @@ namespace WebApiHelpPageWebHost.UnitTest
                 + mvcVersion
                 + ", Culture=neutral, PublicKeyToken=31BF3856AD364E35";
             using (
-                Stream webConfigStream = typeof(WebConfigTest).Assembly.GetManifestResourceStream(
-                    @"WebApiHelpPage.TestFiles.Web.config"
-                )
+                Stream webConfigStream = typeof(WebConfigTest).Assembly
+                    .GetManifestResourceStream(@"WebApiHelpPage.TestFiles.Web.config")
             )
             {
                 XDocument document = XDocument.Load(webConfigStream);
 
                 // Act
                 string actualFactoryType =
-                    document.Root.Element("system.web.webPages.razor")
+                    document.Root
+                        .Element("system.web.webPages.razor")
                         .Element("host")
                         .Attribute("factoryType").Value;
 

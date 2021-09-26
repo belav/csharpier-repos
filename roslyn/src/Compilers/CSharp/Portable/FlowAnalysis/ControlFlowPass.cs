@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly PooledDictionary<LabelSymbol, BoundBlock> _labelsDefined =
             PooledDictionary<LabelSymbol, BoundBlock>.GetInstance();
-        private readonly PooledHashSet<LabelSymbol> _labelsUsed =
-            PooledHashSet<LabelSymbol>.GetInstance();
+        private readonly PooledHashSet<LabelSymbol> _labelsUsed = PooledHashSet<LabelSymbol>
+            .GetInstance();
         protected bool _convertInsufficientExecutionStackExceptionToCancelledByStackGuardException =
             false; // By default, just let the original exception to bubble up.
 

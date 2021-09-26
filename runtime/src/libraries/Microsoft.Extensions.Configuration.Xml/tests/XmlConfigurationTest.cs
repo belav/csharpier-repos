@@ -31,9 +31,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                         </Inventory>
                     </Data.Setting>
                 </settings>";
-            var config = new ConfigurationBuilder().AddXmlStream(
-                    TestStreamHelpers.StringToStream(xml)
-                )
+            var config = new ConfigurationBuilder()
+                .AddXmlStream(TestStreamHelpers.StringToStream(xml))
                 .Build();
 
             Assert.Equal(
@@ -55,9 +54,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                 @"
                 <settings>
                 </settings>";
-            var config = new ConfigurationBuilder().AddXmlStream(
-                    TestStreamHelpers.StringToStream(xml)
-                )
+            var config = new ConfigurationBuilder()
+                .AddXmlStream(TestStreamHelpers.StringToStream(xml))
                 .Build();
             Assert.Throws<InvalidOperationException>(() => config.Reload());
         }
@@ -852,7 +850,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         {
             var ex = Assert.Throws<FileNotFoundException>(
                 () =>
-                    new ConfigurationBuilder().AddXmlFile("NotExistingConfig.xml", optional: false)
+                    new ConfigurationBuilder()
+                        .AddXmlFile("NotExistingConfig.xml", optional: false)
                         .Build()
             );
             Assert.StartsWith(
@@ -864,10 +863,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         [Fact]
         public void XmlConfiguration_Does_Not_Throw_On_Optional_Configuration()
         {
-            var config = new ConfigurationBuilder().AddXmlFile(
-                    "NotExistingConfig.xml",
-                    optional: true
-                )
+            var config = new ConfigurationBuilder()
+                .AddXmlFile("NotExistingConfig.xml", optional: true)
                 .Build();
         }
 

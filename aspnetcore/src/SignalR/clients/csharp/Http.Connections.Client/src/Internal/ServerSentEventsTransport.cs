@@ -44,9 +44,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             }
 
             _httpClient = httpClient;
-            _logger = (
-                loggerFactory ?? NullLoggerFactory.Instance
-            ).CreateLogger<ServerSentEventsTransport>();
+            _logger = (loggerFactory ?? NullLoggerFactory.Instance)
+                .CreateLogger<ServerSentEventsTransport>();
         }
 
         public async Task StartAsync(

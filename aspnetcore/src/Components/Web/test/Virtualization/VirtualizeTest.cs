@@ -25,9 +25,8 @@ namespace Microsoft.AspNetCore.Components.Virtualization
                 InnerContent = BuildVirtualize(0f, EmptyItemsProvider<int>, null)
             };
 
-            var serviceProvider = new ServiceCollection().AddTransient(
-                    (sp) => Mock.Of<IJSRuntime>()
-                )
+            var serviceProvider = new ServiceCollection()
+                .AddTransient((sp) => Mock.Of<IJSRuntime>())
                 .BuildServiceProvider();
 
             var testRenderer = new TestRenderer(serviceProvider);
@@ -47,9 +46,8 @@ namespace Microsoft.AspNetCore.Components.Virtualization
                 InnerContent = BuildVirtualize(10f, EmptyItemsProvider<int>, new List<int>())
             };
 
-            var serviceProvider = new ServiceCollection().AddTransient(
-                    (sp) => Mock.Of<IJSRuntime>()
-                )
+            var serviceProvider = new ServiceCollection()
+                .AddTransient((sp) => Mock.Of<IJSRuntime>())
                 .BuildServiceProvider();
 
             var testRenderer = new TestRenderer(serviceProvider);
@@ -69,9 +67,8 @@ namespace Microsoft.AspNetCore.Components.Virtualization
                 InnerContent = BuildVirtualize<int>(10f, null, null)
             };
 
-            var serviceProvider = new ServiceCollection().AddTransient(
-                    (sp) => Mock.Of<IJSRuntime>()
-                )
+            var serviceProvider = new ServiceCollection()
+                .AddTransient((sp) => Mock.Of<IJSRuntime>())
                 .BuildServiceProvider();
 
             var testRenderer = new TestRenderer(serviceProvider);
@@ -98,9 +95,8 @@ namespace Microsoft.AspNetCore.Components.Virtualization
                 )
             };
 
-            var serviceProvider = new ServiceCollection().AddTransient(
-                    (sp) => Mock.Of<IJSRuntime>()
-                )
+            var serviceProvider = new ServiceCollection()
+                .AddTransient((sp) => Mock.Of<IJSRuntime>())
                 .BuildServiceProvider();
 
             var testRenderer = new TestRenderer(serviceProvider);
@@ -112,7 +108,8 @@ namespace Microsoft.AspNetCore.Components.Virtualization
             Assert.NotNull(renderedVirtualize);
 
             // Simulate a JS spacer callback.
-            ((IVirtualizeJsCallbacks)renderedVirtualize).OnAfterSpacerVisible(10f, 50f, 100f);
+            ((IVirtualizeJsCallbacks)renderedVirtualize)
+                .OnAfterSpacerVisible(10f, 50f, 100f);
 
             // Validate that the exception is dispatched through the renderer.
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(

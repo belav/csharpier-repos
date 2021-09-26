@@ -27,10 +27,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.Api
             ServiceBrokerClient client,
             CancellationToken cancellationToken
         ) =>
-            RemoteWorkspaceManager.Default.GetSolutionAsync(
-                client,
-                solutionInfo.UnderlyingObject,
-                cancellationToken
-            );
+            RemoteWorkspaceManager.Default
+                .GetSolutionAsync(client, solutionInfo.UnderlyingObject, cancellationToken);
     }
 }

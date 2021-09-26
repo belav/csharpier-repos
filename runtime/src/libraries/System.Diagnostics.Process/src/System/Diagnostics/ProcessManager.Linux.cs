@@ -118,26 +118,28 @@ namespace System.Diagnostics
                     int tid;
                     Interop.procfs.ParsedStat stat;
                     if (
-                        int.TryParse(
-                            dirName,
-                            NumberStyles.Integer,
-                            CultureInfo.InvariantCulture,
-                            out tid
-                        ) && Interop.procfs.TryReadStatFile(pid, tid, out stat)
+                        int
+                            .TryParse(
+                                dirName,
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out tid
+                            ) && Interop.procfs.TryReadStatFile(pid, tid, out stat)
                     )
                     {
-                        pi._threadInfoList.Add(
-                            new ThreadInfo()
-                            {
-                                _processId = pid,
-                                _threadId = (ulong)tid,
-                                _basePriority = pi.BasePriority,
-                                _currentPriority = (int)stat.nice,
-                                _startAddress = IntPtr.Zero,
-                                _threadState = ProcFsStateToThreadState(stat.state),
-                                _threadWaitReason = ThreadWaitReason.Unknown
-                            }
-                        );
+                        pi._threadInfoList
+                            .Add(
+                                new ThreadInfo()
+                                {
+                                    _processId = pid,
+                                    _threadId = (ulong)tid,
+                                    _basePriority = pi.BasePriority,
+                                    _currentPriority = (int)stat.nice,
+                                    _startAddress = IntPtr.Zero,
+                                    _threadState = ProcFsStateToThreadState(stat.state),
+                                    _threadWaitReason = ThreadWaitReason.Unknown
+                                }
+                            );
                     }
                 }
             }
@@ -165,12 +167,13 @@ namespace System.Diagnostics
                 string dirName = Path.GetFileName(procDir);
                 int pid;
                 if (
-                    int.TryParse(
-                        dirName,
-                        NumberStyles.Integer,
-                        CultureInfo.InvariantCulture,
-                        out pid
-                    )
+                    int
+                        .TryParse(
+                            dirName,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out pid
+                        )
                 )
                 {
                     Debug.Assert(pid >= 0);

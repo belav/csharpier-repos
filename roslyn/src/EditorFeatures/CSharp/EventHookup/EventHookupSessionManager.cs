@@ -53,15 +53,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 _toolTipPresenter == null
                 && CurrentSession == analyzedSession
                 && caretPoint.HasValue
-                && analyzedSession.TrackingSpan.GetSpan(CurrentSession.TextView.TextSnapshot)
+                && analyzedSession.TrackingSpan
+                    .GetSpan(CurrentSession.TextView.TextSnapshot)
                     .Contains(caretPoint.Value)
             )
             {
                 // Create a tooltip presenter that stays alive, even when the user types, without tracking the mouse.
-                _toolTipPresenter = this._toolTipService.CreatePresenter(
-                    analyzedSession.TextView,
-                    new ToolTipParameters(trackMouse: false, ignoreBufferChange: true)
-                );
+                _toolTipPresenter = this._toolTipService
+                    .CreatePresenter(
+                        analyzedSession.TextView,
+                        new ToolTipParameters(trackMouse: false, ignoreBufferChange: true)
+                    );
 
                 // tooltips text is: Program_MyEvents;      (Press TAB to insert)
                 // GetEventNameTask() gets back the event name, only needs to add a semicolon after it.
@@ -179,9 +181,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 CancelAndDismissExistingSessions();
             }
 
-            var snapshotSpan = CurrentSession.TrackingSpan.GetSpan(
-                CurrentSession.TextView.TextSnapshot
-            );
+            var snapshotSpan = CurrentSession.TrackingSpan
+                .GetSpan(CurrentSession.TextView.TextSnapshot);
             if (
                 snapshotSpan.Snapshot != caretPoint.Value.Snapshot
                 || !snapshotSpan.Contains(caretPoint.Value)

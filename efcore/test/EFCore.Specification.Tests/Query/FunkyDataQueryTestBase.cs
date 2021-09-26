@@ -899,10 +899,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 new Dictionary<Type, Func<object, object>>
                 {
                     { typeof(FunkyCustomer), e => ((FunkyCustomer)e)?.Id }
-                }.ToDictionary(e => e.Key, e => (object)e.Value);
+                }
+                    .ToDictionary(e => e.Key, e => (object)e.Value);
 
-            public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
-                new Dictionary<Type, Action<object, object>>
+            public IReadOnlyDictionary<Type, object> GetEntityAsserters() => new Dictionary<
+                    Type,
+                    Action<object, object>
+                >
                 {
                     {
                         typeof(FunkyCustomer),

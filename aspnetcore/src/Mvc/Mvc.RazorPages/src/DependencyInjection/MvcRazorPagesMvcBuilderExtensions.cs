@@ -68,9 +68,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 );
             }
 
-            builder.Services.Configure<RazorPagesOptions>(
-                options => options.RootDirectory = rootDirectory
-            );
+            builder.Services
+                .Configure<RazorPagesOptions>(options => options.RootDirectory = rootDirectory);
             return builder;
         }
 

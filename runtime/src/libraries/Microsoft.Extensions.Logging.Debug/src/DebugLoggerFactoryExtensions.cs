@@ -18,9 +18,10 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The extension method argument.</param>
         public static ILoggingBuilder AddDebug(this ILoggingBuilder builder)
         {
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<ILoggerProvider, DebugLoggerProvider>()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<ILoggerProvider, DebugLoggerProvider>()
+                );
 
             return builder;
         }

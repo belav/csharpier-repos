@@ -42,7 +42,8 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             var definition = CreateDefinition(typeof(PublicImportsExpectingPublicExports));
             EnumerableAssert.AreEqual(
-                definition.ImportDefinitions.Cast<ContractBasedImportDefinition>()
+                definition.ImportDefinitions
+                    .Cast<ContractBasedImportDefinition>()
                     .Select(i => i.ContractName),
                 "PublicField",
                 "PublicProperty",
@@ -62,9 +63,8 @@ namespace System.ComponentModel.Composition.AttributedModel
 
             Assert.Equal(
                 CreationPolicy.Any,
-                definition.Metadata.GetValue<CreationPolicy>(
-                    CompositionConstants.PartCreationPolicyMetadataName
-                )
+                definition.Metadata
+                    .GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName)
             );
         }
 
@@ -80,9 +80,8 @@ namespace System.ComponentModel.Composition.AttributedModel
 
             Assert.Equal(
                 CreationPolicy.Any,
-                definition.Metadata.GetValue<CreationPolicy>(
-                    CompositionConstants.PartCreationPolicyMetadataName
-                )
+                definition.Metadata
+                    .GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName)
             );
         }
 
@@ -98,9 +97,8 @@ namespace System.ComponentModel.Composition.AttributedModel
 
             Assert.Equal(
                 CreationPolicy.Shared,
-                definition.Metadata.GetValue<CreationPolicy>(
-                    CompositionConstants.PartCreationPolicyMetadataName
-                )
+                definition.Metadata
+                    .GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName)
             );
         }
 
@@ -116,9 +114,8 @@ namespace System.ComponentModel.Composition.AttributedModel
 
             Assert.Equal(
                 CreationPolicy.NonShared,
-                definition.Metadata.GetValue<CreationPolicy>(
-                    CompositionConstants.PartCreationPolicyMetadataName
-                )
+                definition.Metadata
+                    .GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName)
             );
         }
 
@@ -140,9 +137,8 @@ namespace System.ComponentModel.Composition.AttributedModel
             // CompositionConstants.PartCreationPolicyMetadataName should be ignored
             Assert.NotEqual(
                 CreationPolicy.NonShared,
-                definition.Metadata.GetValue<CreationPolicy>(
-                    CompositionConstants.PartCreationPolicyMetadataName
-                )
+                definition.Metadata
+                    .GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName)
             );
 
             // Key ShouldNotBeIgnored should actually be in the dictionary
@@ -343,9 +339,8 @@ namespace System.ComponentModel.Composition.AttributedModel
 
             Assert.Equal(
                 CreationPolicy.Shared,
-                part.Metadata.GetValue<CreationPolicy>(
-                    CompositionConstants.PartCreationPolicyMetadataName
-                )
+                part.Metadata
+                    .GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName)
             );
         }
 

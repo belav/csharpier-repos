@@ -56,11 +56,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             Assert.Same(
                 typeof(ObservableHashSet<Random>),
-                new CollectionTypeFactory().TryFindTypeToInstantiate(
-                    typeof(DummyNotifying),
-                    typeof(ICollection<Random>),
-                    false
-                )
+                new CollectionTypeFactory()
+                    .TryFindTypeToInstantiate(
+                        typeof(DummyNotifying),
+                        typeof(ICollection<Random>),
+                        false
+                    )
             );
         }
 
@@ -69,11 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             Assert.Same(
                 typeof(ObservableHashSet<Random>),
-                new CollectionTypeFactory().TryFindTypeToInstantiate(
-                    typeof(object),
-                    typeof(ICollection<Random>),
-                    true
-                )
+                new CollectionTypeFactory()
+                    .TryFindTypeToInstantiate(typeof(object), typeof(ICollection<Random>), true)
             );
         }
 
@@ -101,11 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             Assert.Same(
                 typeof(List<Random>),
-                new CollectionTypeFactory().TryFindTypeToInstantiate(
-                    typeof(object),
-                    typeof(IList<Random>),
-                    false
-                )
+                new CollectionTypeFactory()
+                    .TryFindTypeToInstantiate(typeof(object), typeof(IList<Random>), false)
             );
         }
 

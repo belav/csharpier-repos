@@ -50,38 +50,33 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             );
 
         private EnvDTE.Project GetProject(string nameOrFileName) =>
-            GetDTE()
-                .Solution.Projects.OfType<EnvDTE.Project>()
+            GetDTE().Solution.Projects
+                .OfType<EnvDTE.Project>()
                 .First(
                     p =>
-                        string.Compare(
-                            p.FileName,
-                            nameOrFileName,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
-                        || string.Compare(
-                            p.Name,
-                            nameOrFileName,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                        string
+                            .Compare(p.FileName, nameOrFileName, StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        || string
+                            .Compare(p.Name, nameOrFileName, StringComparison.OrdinalIgnoreCase)
+                            == 0
                 );
 
         public bool IsPrettyListingOn(string languageName) =>
-            _visualStudioWorkspace.Options.GetOption(
-                FeatureOnOffOptions.PrettyListing,
-                languageName
-            );
+            _visualStudioWorkspace.Options
+                .GetOption(FeatureOnOffOptions.PrettyListing, languageName);
 
         public void SetPrettyListing(string languageName, bool value) =>
             InvokeOnUIThread(
                 cancellationToken =>
                 {
                     _visualStudioWorkspace.SetOptions(
-                        _visualStudioWorkspace.Options.WithChangedOption(
-                            FeatureOnOffOptions.PrettyListing,
-                            languageName,
-                            value
-                        )
+                        _visualStudioWorkspace.Options
+                            .WithChangedOption(
+                                FeatureOnOffOptions.PrettyListing,
+                                languageName,
+                                value
+                            )
                     );
                 }
             );
@@ -91,10 +86,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 cancellationToken =>
                 {
                     _visualStudioWorkspace.SetOptions(
-                        _visualStudioWorkspace.Options.WithChangedOption(
-                            InternalFeatureOnOffOptions.QuickInfo,
-                            value
-                        )
+                        _visualStudioWorkspace.Options
+                            .WithChangedOption(InternalFeatureOnOffOptions.QuickInfo, value)
                     );
                 }
             );
@@ -192,15 +185,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
             catch (Exception e)
             {
-                var listenerProvider = GetComponentModel()
-                    .DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+                var listenerProvider = GetComponentModel().DefaultExportProvider
+                    .GetExportedValue<IAsynchronousOperationListenerProvider>();
                 var messageBuilder = new StringBuilder(
                     "Failed to clean up listeners in a timely manner."
                 );
                 foreach (
-                    var token in (
-                        (AsynchronousOperationListenerProvider)listenerProvider
-                    ).GetTokens()
+                    var token in ((AsynchronousOperationListenerProvider)listenerProvider)
+                        .GetTokens()
                 )
                 {
                     messageBuilder.AppendLine().Append($"  {token}");
@@ -272,8 +264,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             InvokeOnUIThread(
                 cancellationToken =>
                 {
-                    var provider = GetComponentModel()
-                        .DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+                    var provider = GetComponentModel().DefaultExportProvider
+                        .GetExportedValue<IAsynchronousOperationListenerProvider>();
 
                     if (provider == null)
                     {
@@ -309,8 +301,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public string GetWorkingFolder()
         {
-            var service =
-                _visualStudioWorkspace.Services.GetRequiredService<IPersistentStorageLocationService>();
+            var service = _visualStudioWorkspace.Services
+                .GetRequiredService<IPersistentStorageLocationService>();
             return service.TryGetStorageLocation(_visualStudioWorkspace.CurrentSolution);
         }
     }

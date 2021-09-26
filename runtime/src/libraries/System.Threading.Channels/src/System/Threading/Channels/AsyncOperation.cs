@@ -324,13 +324,14 @@ namespace System.Threading.Channels
                 else
                 {
                     Debug.Assert(ts != null);
-                    Task.Factory.StartNew(
-                        continuation,
-                        state,
-                        CancellationToken.None,
-                        TaskCreationOptions.DenyChildAttach,
-                        ts
-                    );
+                    Task.Factory
+                        .StartNew(
+                            continuation,
+                            state,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            ts
+                        );
                 }
             }
         }
@@ -471,14 +472,16 @@ namespace System.Threading.Channels
                     Debug.Assert(ts != null, "Expected a TaskScheduler");
                     if (_runContinuationsAsynchronously || ts != TaskScheduler.Current)
                     {
-                        Task.Factory.StartNew(
-                            static s =>
-                                ((AsyncOperation<TResult>)s!).SetCompletionAndInvokeContinuation(),
-                            this,
-                            CancellationToken.None,
-                            TaskCreationOptions.DenyChildAttach,
-                            ts
-                        );
+                        Task.Factory
+                            .StartNew(
+                                static s =>
+                                    ((AsyncOperation<TResult>)s!)
+                                        .SetCompletionAndInvokeContinuation(),
+                                this,
+                                CancellationToken.None,
+                                TaskCreationOptions.DenyChildAttach,
+                                ts
+                            );
                         return;
                     }
                 }

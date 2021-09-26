@@ -117,9 +117,10 @@ namespace Microsoft.CodeAnalysis
             if (projectInfoFixed.CompilationOptions != null)
             {
                 projectInfoFixed = projectInfoFixed.WithCompilationOptions(
-                    projectInfoFixed.CompilationOptions.WithSyntaxTreeOptionsProvider(
-                        new WorkspaceSyntaxTreeOptionsProvider(_lazyAnalyzerConfigSet)
-                    )
+                    projectInfoFixed.CompilationOptions
+                        .WithSyntaxTreeOptionsProvider(
+                            new WorkspaceSyntaxTreeOptionsProvider(_lazyAnalyzerConfigSet)
+                        )
                 );
             }
 
@@ -377,13 +378,15 @@ namespace Microsoft.CodeAnalysis
 
             public override AnalyzerConfigOptions GlobalOptions =>
                 new WorkspaceAnalyzerConfigOptions(
-                    _projectState._lazyAnalyzerConfigSet.GetValue(CancellationToken.None)
+                    _projectState._lazyAnalyzerConfigSet
+                        .GetValue(CancellationToken.None)
                         .GetOptionsForSourcePath(string.Empty)
                 );
 
             public override AnalyzerConfigOptions GetOptions(SyntaxTree tree) =>
                 new WorkspaceAnalyzerConfigOptions(
-                    _projectState._lazyAnalyzerConfigSet.GetValue(CancellationToken.None)
+                    _projectState._lazyAnalyzerConfigSet
+                        .GetValue(CancellationToken.None)
                         .GetOptionsForSourcePath(tree.FilePath)
                 );
 
@@ -391,14 +394,16 @@ namespace Microsoft.CodeAnalysis
             {
                 // TODO: correctly find the file path, since it looks like we give this the document's .Name under the covers if we don't have one
                 return new WorkspaceAnalyzerConfigOptions(
-                    _projectState._lazyAnalyzerConfigSet.GetValue(CancellationToken.None)
+                    _projectState._lazyAnalyzerConfigSet
+                        .GetValue(CancellationToken.None)
                         .GetOptionsForSourcePath(textFile.Path)
                 );
             }
 
             public AnalyzerConfigOptions GetOptionsForSourcePath(string path) =>
                 new WorkspaceAnalyzerConfigOptions(
-                    _projectState._lazyAnalyzerConfigSet.GetValue(CancellationToken.None)
+                    _projectState._lazyAnalyzerConfigSet
+                        .GetValue(CancellationToken.None)
                         .GetOptionsForSourcePath(path)
                 );
 
@@ -476,9 +481,8 @@ namespace Microsoft.CodeAnalysis
             return new AsyncLazy<CachingAnalyzerConfigSet>(
                 asynchronousComputeFunction: async cancellationToken =>
                 {
-                    var tasks = analyzerConfigDocumentStates.States.Select(
-                        a => a.GetAnalyzerConfigAsync(cancellationToken)
-                    );
+                    var tasks = analyzerConfigDocumentStates.States
+                        .Select(a => a.GetAnalyzerConfigAsync(cancellationToken));
                     var analyzerConfigs = await Task.WhenAll(tasks).ConfigureAwait(false);
 
                     cancellationToken.ThrowIfCancellationRequested();
@@ -505,8 +509,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             var docVersion = await _lazyLatestDocumentTopLevelChangeVersion.GetValueAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return docVersion.GetNewerVersion(this.Version);
         }
@@ -707,8 +711,8 @@ namespace Microsoft.CodeAnalysis
 
             return With(
                 projectInfo: ProjectInfo.WithCompilationOptions(
-                        options.WithSyntaxTreeOptionsProvider(newProvider)
-                    )
+                    options.WithSyntaxTreeOptionsProvider(newProvider)
+                )
                     .WithVersion(Version.GetNewerVersion())
             );
         }

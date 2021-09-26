@@ -42,9 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(replacement, nameof(replacement));
             Check.NotNull(tree, nameof(tree));
 
-            return new ReplacingExpressionVisitor(new[] { original }, new[] { replacement }).Visit(
-                tree
-            );
+            return new ReplacingExpressionVisitor(new[] { original }, new[] { replacement })
+                .Visit(tree);
         }
 
         /// <summary>
@@ -119,9 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             );
             if (
                 mayBeMemberInitExpression is MemberInitExpression memberInitExpression
-                && memberInitExpression.Bindings.SingleOrDefault(
-                    mb => mb.Member.IsSameAs(memberExpression.Member)
-                )
+                && memberInitExpression.Bindings
+                    .SingleOrDefault(mb => mb.Member.IsSameAs(memberExpression.Member))
                     is MemberAssignment memberAssignment
             )
             {
@@ -158,9 +156,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 );
                 if (
                     mayBeMemberInitExpression is MemberInitExpression memberInitExpression
-                    && memberInitExpression.Bindings.SingleOrDefault(
-                        mb => mb.Member.Name == propertyName
-                    )
+                    && memberInitExpression.Bindings
+                        .SingleOrDefault(mb => mb.Member.Name == propertyName)
                         is MemberAssignment memberAssignment
                 )
                 {

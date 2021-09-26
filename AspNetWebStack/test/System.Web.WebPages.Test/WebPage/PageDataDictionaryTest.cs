@@ -206,10 +206,8 @@ namespace System.Web.WebPages.Test
                 { "my-key", "value" },
                 { "test", "test-val" }
             };
-            var dict = PageDataDictionary<dynamic>.CreatePageDataFromParameters(
-                new PageDataDictionary<dynamic>(),
-                innerDict
-            );
+            var dict = PageDataDictionary<dynamic>
+                .CreatePageDataFromParameters(new PageDataDictionary<dynamic>(), innerDict);
 
             // Act
             dict.Add("my-key", "added-value");
@@ -228,10 +226,11 @@ namespace System.Web.WebPages.Test
         public void AddValueOverwritesIndexDictionaryIfKeyExists()
         {
             // Act
-            var dict = PageDataDictionary<dynamic>.CreatePageDataFromParameters(
-                new PageDataDictionary<dynamic>(),
-                new[] { "index-0-orig", "index-1" }
-            );
+            var dict = PageDataDictionary<dynamic>
+                .CreatePageDataFromParameters(
+                    new PageDataDictionary<dynamic>(),
+                    new[] { "index-0-orig", "index-1" }
+                );
 
             // Act
             dict[0] = "index-0-new";

@@ -148,9 +148,8 @@ namespace System.Security.Cryptography.Xml
             {
                 if (!s_haveInformationLogging)
                 {
-                    s_informationLogging = s_traceSource.Switch.ShouldTrace(
-                        TraceEventType.Information
-                    );
+                    s_informationLogging = s_traceSource.Switch
+                        .ShouldTrace(TraceEventType.Information);
                     s_haveInformationLogging = true;
                 }
 
@@ -831,11 +830,8 @@ namespace System.Security.Cryptography.Xml
                 string resource = verified
                     ? SR.Log_VerificationWithKeySuccessful
                     : SR.Log_VerificationWithKeyNotSuccessful;
-                string logMessage = string.Format(
-                    CultureInfo.InvariantCulture,
-                    resource,
-                    GetKeyName(key)
-                );
+                string logMessage = string
+                    .Format(CultureInfo.InvariantCulture, resource, GetKeyName(key));
 
                 WriteLine(
                     signedXml,

@@ -83,9 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Configures_DbCommand_with_timeout()
         {
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnectionString(
-                    ConnectionString
-                )
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnectionString(ConnectionString)
                 .WithCommandTimeout(42);
 
             var fakeConnection = CreateConnection(CreateOptions(optionsExtension));
@@ -122,9 +121,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -172,9 +170,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -222,9 +219,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -272,9 +268,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -324,9 +319,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -383,9 +377,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1115,9 +1108,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1163,9 +1155,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 new FakeCommandExecutor()
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1223,7 +1214,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     new RelationalCommandBuilderDependencies(
                         new TestRelationalTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                            TestServiceFactory.Instance
+                                .Create<RelationalTypeMappingSourceDependencies>()
                         )
                     ),
                     commandText,
@@ -1269,9 +1261,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1335,9 +1326,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1464,9 +1454,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool async
         )
         {
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnectionString(
-                ConnectionString
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnectionString(ConnectionString);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1523,8 +1512,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(LogLevel.Warning, logFactory.Log[2].Level);
             Assert.Equal(
                 CoreResources.LogSensitiveDataLoggingEnabled(
-                        new TestLogger<TestRelationalLoggingDefinitions>()
-                    )
+                    new TestLogger<TestRelationalLoggingDefinitions>()
+                )
                     .GenerateMessage(),
                 logFactory.Log[2].Message
             );
@@ -1640,9 +1629,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension = new FakeRelationalOptionsExtension()
+                .WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1731,10 +1719,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                optionsExtension
-                    ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString)
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(
+                    optionsExtension
+                        ?? new FakeRelationalOptionsExtension()
+                            .WithConnectionString(ConnectionString)
+                );
 
             return optionsBuilder.Options;
         }
@@ -1764,7 +1754,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 new RelationalCommandBuilderDependencies(
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        TestServiceFactory.Instance
+                            .Create<RelationalTypeMappingSourceDependencies>()
                     )
                 ),
                 commandText,

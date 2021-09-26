@@ -52,10 +52,8 @@ public class TypeGetHashCode
             testClass tc = new testClass(ActualResult);
             if (ActualResult != tc.GetHashCode())
             {
-                TestLibrary.TestFramework.LogError(
-                    "001",
-                    "the ActualResult is not the ExpectResult"
-                );
+                TestLibrary.TestFramework
+                    .LogError("001", "the ActualResult is not the ExpectResult");
                 retVal = false;
             }
         }
@@ -83,10 +81,8 @@ public class TypeGetHashCode
             int ActualResult2 = tpB.GetHashCode();
             if (ActualResult != ActualResult2)
             {
-                TestLibrary.TestFramework.LogError(
-                    "003",
-                    "the ActualResult is not the ExpectResult"
-                );
+                TestLibrary.TestFramework
+                    .LogError("003", "the ActualResult is not the ExpectResult");
                 retVal = false;
             }
         }

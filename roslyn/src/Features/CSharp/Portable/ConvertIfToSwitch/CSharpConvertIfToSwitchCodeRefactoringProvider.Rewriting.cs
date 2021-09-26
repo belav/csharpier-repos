@@ -100,9 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
                     .WithTriviaFrom(ifStatement.IfKeyword),
                 openParenToken: ifStatement.OpenParenToken,
                 expression: (ExpressionSyntax)expression,
-                closeParenToken: ifStatement.CloseParenToken.WithPrependedLeadingTrivia(
-                    ElasticMarker
-                ),
+                closeParenToken: ifStatement.CloseParenToken
+                    .WithPrependedLeadingTrivia(ElasticMarker),
                 openBraceToken: block?.OpenBraceToken ?? Token(SyntaxKind.OpenBraceToken),
                 sections: List(sectionList.Cast<SwitchSectionSyntax>()),
                 closeBraceToken: block?.CloseBraceToken.WithoutLeadingTrivia()
@@ -112,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
 
         private static WhenClauseSyntax? AsWhenClause(AnalyzedSwitchLabel label) =>
             AsWhenClause(
-                label.Guards.Select(e => e.WalkUpParentheses())
+                label.Guards
+                    .Select(e => e.WalkUpParentheses())
                     .AggregateOrDefault(
                         (prev, current) =>
                             BinaryExpression(SyntaxKind.LogicalAndExpression, prev, current)
@@ -161,9 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
             Debug.Assert(operation.SemanticModel is not null);
             var requiresBreak =
                 operation.SemanticModel.AnalyzeControlFlow(node).EndPointIsReachable;
-            var requiresBlock = !operation.SemanticModel.AnalyzeDataFlow(
-                node
-            ).VariablesDeclared.IsDefaultOrEmpty;
+            var requiresBlock = !operation.SemanticModel
+                .AnalyzeDataFlow(node).VariablesDeclared.IsDefaultOrEmpty;
 
             var statements = ArrayBuilder<SyntaxNode>.GetInstance();
             if (node is BlockSyntax block)

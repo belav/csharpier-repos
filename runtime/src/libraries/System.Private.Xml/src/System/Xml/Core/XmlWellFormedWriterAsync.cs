@@ -759,8 +759,8 @@ namespace System.Xml
                                 if (_rawWriter.SupportsNamespaceDeclarationInChunks)
                                 {
                                     await _rawWriter.WriteStartNamespaceDeclarationAsync(
-                                            string.Empty
-                                        )
+                                        string.Empty
+                                    )
                                         .ConfigureAwait(false);
                                     await _attrValueCache.ReplayAsync(_rawWriter)
                                         .ConfigureAwait(false);
@@ -770,19 +770,19 @@ namespace System.Xml
                                 else
                                 {
                                     await _rawWriter.WriteNamespaceDeclarationAsync(
-                                            string.Empty,
-                                            value
-                                        )
+                                        string.Empty,
+                                        value
+                                    )
                                         .ConfigureAwait(false);
                                 }
                             }
                             else
                             {
                                 await _writer.WriteStartAttributeAsync(
-                                        string.Empty,
-                                        "xmlns",
-                                        XmlReservedNs.NsXmlNs
-                                    )
+                                    string.Empty,
+                                    "xmlns",
+                                    XmlReservedNs.NsXmlNs
+                                )
                                     .ConfigureAwait(false);
                                 await _attrValueCache.ReplayAsync(_writer).ConfigureAwait(false);
                                 await _writer.WriteEndAttributeAsync().ConfigureAwait(false);
@@ -813,8 +813,8 @@ namespace System.Xml
                                 if (_rawWriter.SupportsNamespaceDeclarationInChunks)
                                 {
                                     await _rawWriter.WriteStartNamespaceDeclarationAsync(
-                                            _curDeclPrefix
-                                        )
+                                        _curDeclPrefix
+                                    )
                                         .ConfigureAwait(false);
                                     await _attrValueCache.ReplayAsync(_rawWriter)
                                         .ConfigureAwait(false);
@@ -824,19 +824,19 @@ namespace System.Xml
                                 else
                                 {
                                     await _rawWriter.WriteNamespaceDeclarationAsync(
-                                            _curDeclPrefix,
-                                            value
-                                        )
+                                        _curDeclPrefix,
+                                        value
+                                    )
                                         .ConfigureAwait(false);
                                 }
                             }
                             else
                             {
                                 await _writer.WriteStartAttributeAsync(
-                                        "xmlns",
-                                        _curDeclPrefix,
-                                        XmlReservedNs.NsXmlNs
-                                    )
+                                    "xmlns",
+                                    _curDeclPrefix,
+                                    XmlReservedNs.NsXmlNs
+                                )
                                     .ConfigureAwait(false);
                                 await _attrValueCache.ReplayAsync(_writer).ConfigureAwait(false);
                                 await _writer.WriteEndAttributeAsync().ConfigureAwait(false);

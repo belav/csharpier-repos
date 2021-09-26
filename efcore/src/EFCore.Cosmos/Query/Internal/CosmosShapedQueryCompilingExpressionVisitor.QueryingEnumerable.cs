@@ -95,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         (SelectExpression)new InExpressionValuesExpandingExpressionVisitor(
                             _sqlExpressionFactory,
                             _cosmosQueryContext.ParameterValues
-                        ).Visit(_selectExpression),
+                        )
+                            .Visit(_selectExpression),
                         _cosmosQueryContext.ParameterValues
                     );
 
@@ -168,7 +169,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                                 EntityFrameworkEventSource.Log.QueryExecuting();
 
-                                _enumerator = _cosmosQueryContext.CosmosClient.ExecuteSqlQuery(
+                                _enumerator = _cosmosQueryContext.CosmosClient
+                                    .ExecuteSqlQuery(
                                         _selectExpression.Container,
                                         _partitionKey,
                                         sqlQuery
@@ -260,7 +262,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                                 EntityFrameworkEventSource.Log.QueryExecuting();
 
-                                _enumerator = _cosmosQueryContext.CosmosClient.ExecuteSqlQueryAsync(
+                                _enumerator = _cosmosQueryContext.CosmosClient
+                                    .ExecuteSqlQueryAsync(
                                         _selectExpression.Container,
                                         _partitionKey,
                                         sqlQuery

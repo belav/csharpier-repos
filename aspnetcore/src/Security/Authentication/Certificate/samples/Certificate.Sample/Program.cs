@@ -13,24 +13,22 @@ namespace Certificate.Sample
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(
-                    webBuilder =>
-                    {
-                        webBuilder.UseStartup<Startup>()
-                            .ConfigureKestrel(
-                                options =>
+            Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(
+                webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>().ConfigureKestrel(
+                        options =>
+                        {
+                            options.ConfigureHttpsDefaults(
+                                opt =>
                                 {
-                                    options.ConfigureHttpsDefaults(
-                                        opt =>
-                                        {
-                                            opt.ClientCertificateMode =
-                                                ClientCertificateMode.RequireCertificate;
-                                        }
-                                    );
+                                    opt.ClientCertificateMode =
+                                        ClientCertificateMode.RequireCertificate;
                                 }
                             );
-                    }
-                );
+                        }
+                    );
+                }
+            );
     }
 }

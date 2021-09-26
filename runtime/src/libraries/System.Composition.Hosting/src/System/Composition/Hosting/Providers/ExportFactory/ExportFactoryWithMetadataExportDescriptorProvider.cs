@@ -14,7 +14,8 @@ namespace System.Composition.Hosting.Providers.ExportFactory
         : ExportDescriptorProvider
     {
         private static readonly MethodInfo s_getLazyDefinitionsMethod =
-            typeof(ExportFactoryWithMetadataExportDescriptorProvider).GetTypeInfo()
+            typeof(ExportFactoryWithMetadataExportDescriptorProvider)
+                .GetTypeInfo()
                 .GetDeclaredMethod("GetExportFactoryDescriptors");
 
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
@@ -60,44 +61,42 @@ namespace System.Composition.Hosting.Providers.ExportFactory
 
             var metadataProvider = MetadataViewProvider.GetMetadataViewProvider<TMetadata>();
 
-            return definitionAccessor.ResolveDependencies("product", productContract, false)
-                .Select(
-                    d =>
-                        new ExportDescriptorPromise(
-                            exportFactoryContract,
-                            typeof(ExportFactory<TProduct, TMetadata>).Name,
-                            false,
-                            () => new[] { d },
-                            _ =>
-                            {
-                                var dsc = d.Target.GetDescriptor();
-                                return ExportDescriptor.Create(
-                                    (c, o) =>
-                                    {
-                                        return new ExportFactory<TProduct, TMetadata>(
-                                            () =>
-                                            {
-                                                var lifetimeContext = new LifetimeContext(
-                                                    c,
-                                                    boundaries
-                                                );
-                                                return Tuple.Create<TProduct, Action>(
-                                                    (TProduct)CompositionOperation.Run(
-                                                        lifetimeContext,
-                                                        dsc.Activator
-                                                    ),
-                                                    lifetimeContext.Dispose
-                                                );
-                                            },
-                                            metadataProvider(dsc.Metadata)
-                                        );
-                                    },
-                                    dsc.Metadata
-                                );
-                            }
-                        )
-                )
-                .ToArray();
+            return definitionAccessor.ResolveDependencies("product", productContract, false).Select(
+                d =>
+                    new ExportDescriptorPromise(
+                        exportFactoryContract,
+                        typeof(ExportFactory<TProduct, TMetadata>).Name,
+                        false,
+                        () => new[] { d },
+                        _ =>
+                        {
+                            var dsc = d.Target.GetDescriptor();
+                            return ExportDescriptor.Create(
+                                (c, o) =>
+                                {
+                                    return new ExportFactory<TProduct, TMetadata>(
+                                        () =>
+                                        {
+                                            var lifetimeContext = new LifetimeContext(
+                                                c,
+                                                boundaries
+                                            );
+                                            return Tuple.Create<TProduct, Action>(
+                                                (TProduct)CompositionOperation.Run(
+                                                    lifetimeContext,
+                                                    dsc.Activator
+                                                ),
+                                                lifetimeContext.Dispose
+                                            );
+                                        },
+                                        metadataProvider(dsc.Metadata)
+                                    );
+                                },
+                                dsc.Metadata
+                            );
+                        }
+                    )
+            ).ToArray();
         }
     }
 }

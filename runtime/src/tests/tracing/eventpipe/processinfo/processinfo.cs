@@ -140,12 +140,12 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {commandLineLength})"
             );
-            Logger.logger.Log(
-                $"commandLine bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
-            );
-            string commandLine = System.Text.Encoding.Unicode.GetString(
-                    response.Payload[start..end]
-                )
+            Logger.logger
+                .Log(
+                    $"commandLine bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
+                );
+            string commandLine = System.Text.Encoding.Unicode
+                .GetString(response.Payload[start..end])
                 .TrimEnd('\0');
             Logger.logger.Log($"commandLine: \"{commandLine}\"");
 
@@ -180,10 +180,12 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {OSLength})"
             );
-            Logger.logger.Log(
-                $"OS bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
-            );
-            string OS = System.Text.Encoding.Unicode.GetString(response.Payload[start..end])
+            Logger.logger
+                .Log(
+                    $"OS bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
+                );
+            string OS = System.Text.Encoding.Unicode
+                .GetString(response.Payload[start..end])
                 .TrimEnd('\0');
             Logger.logger.Log($"OS: \"{OS}\"");
 
@@ -226,10 +228,12 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {archLength})"
             );
-            Logger.logger.Log(
-                $"arch bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
-            );
-            string arch = System.Text.Encoding.Unicode.GetString(response.Payload[start..end])
+            Logger.logger
+                .Log(
+                    $"arch bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
+                );
+            string arch = System.Text.Encoding.Unicode
+                .GetString(response.Payload[start..end])
                 .TrimEnd('\0');
             Logger.logger.Log($"arch: \"{arch}\"");
 
@@ -253,9 +257,10 @@ namespace Tracing.Tests.ProcessInfoValidation
                 $"Full payload should have been read. Expected: {totalSize}, Received: {end}"
             );
 
-            Logger.logger.Log(
-                $"\n{{\n\tprocessId: {processId},\n\truntimeCookie: {runtimeCookie},\n\tcommandLine: {commandLine},\n\tOS: {OS},\n\tArch: {arch}\n}}"
-            );
+            Logger.logger
+                .Log(
+                    $"\n{{\n\tprocessId: {processId},\n\truntimeCookie: {runtimeCookie},\n\tcommandLine: {commandLine},\n\tOS: {OS},\n\tArch: {arch}\n}}"
+                );
 
             return 100;
         }

@@ -58,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = SqlServerTestHelpers.Instance.CreateContextServices(model)
+            var selector = SqlServerTestHelpers.Instance
+                .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
             Assert.IsType<TExpected>(
@@ -80,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = SqlServerTestHelpers.Instance.CreateContextServices(model)
+            var selector = SqlServerTestHelpers.Instance
+                .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
             Assert.IsType<TemporaryGuidValueGenerator>(
@@ -102,7 +104,8 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = SqlServerTestHelpers.Instance.CreateContextServices(model)
+            var selector = SqlServerTestHelpers.Instance
+                .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
             var generator = selector.Select(entityType.FindProperty("String"), entityType);
@@ -124,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = SqlServerTestHelpers.Instance.CreateContextServices(model)
+            var selector = SqlServerTestHelpers.Instance
+                .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
             var generator = selector.Select(entityType.FindProperty("Binary"), entityType);
@@ -182,7 +186,8 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = InMemoryTestHelpers.Instance.CreateContextServices(model)
+            var selector = InMemoryTestHelpers.Instance
+                .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
             Assert.Equal(
@@ -205,7 +210,8 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.UseHiLo().FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = SqlServerTestHelpers.Instance.CreateContextServices(model)
+            var selector = SqlServerTestHelpers.Instance
+                .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
             Assert.IsType<SqlServerSequenceHiLoValueGenerator<int>>(

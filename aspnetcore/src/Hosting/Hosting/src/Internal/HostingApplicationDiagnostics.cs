@@ -278,10 +278,8 @@ namespace Microsoft.AspNetCore.Hosting
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void RecordRequestStartEventLog(HttpContext httpContext)
         {
-            HostingEventSource.Log.RequestStart(
-                httpContext.Request.Method,
-                httpContext.Request.Path
-            );
+            HostingEventSource.Log
+                .RequestStart(httpContext.Request.Method, httpContext.Request.Path);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]

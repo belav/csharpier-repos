@@ -291,7 +291,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(byte?)),
                     Expression.Constant(b, typeof(byte?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableByte")
                 )
             );
@@ -309,7 +310,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(char?)),
                     Expression.Constant(b, typeof(char?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableChar")
                 )
             );
@@ -331,7 +333,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(decimal?)),
                     Expression.Constant(b, typeof(decimal?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableDecimal")
                 )
             );
@@ -361,7 +364,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(double?)),
                     Expression.Constant(b, typeof(double?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableDouble")
                 )
             );
@@ -380,7 +384,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(float?)),
                     Expression.Constant(b, typeof(float?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableFloat")
                 )
             );
@@ -395,7 +400,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(int?)),
                     Expression.Constant(b, typeof(int?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableInt")
                 )
             );
@@ -414,7 +420,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(long?)),
                     Expression.Constant(b, typeof(long?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableLong")
                 )
             );
@@ -444,7 +451,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(sbyte?)),
                     Expression.Constant(b, typeof(sbyte?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableSByte")
                 )
             );
@@ -468,7 +476,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(short?)),
                     Expression.Constant(b, typeof(short?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableShort")
                 )
             );
@@ -487,7 +496,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(uint?)),
                     Expression.Constant(b, typeof(uint?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableUInt")
                 )
             );
@@ -509,7 +519,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(ulong?)),
                     Expression.Constant(b, typeof(ulong?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableULong")
                 )
             );
@@ -531,7 +542,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.SubtractChecked(
                     Expression.Constant(a, typeof(ushort?)),
                     Expression.Constant(b, typeof(ushort?)),
-                    typeof(LiftedSubtractCheckedNullableTests).GetTypeInfo()
+                    typeof(LiftedSubtractCheckedNullableTests)
+                        .GetTypeInfo()
                         .GetDeclaredMethod("SubtractCheckedNullableUShort")
                 )
             );

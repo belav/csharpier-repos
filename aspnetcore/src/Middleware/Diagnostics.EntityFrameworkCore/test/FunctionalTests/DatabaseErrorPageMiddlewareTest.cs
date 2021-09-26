@@ -29,19 +29,17 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         public async Task Successful_requests_pass_thru()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer()
 #pragma warning disable CS0618 // Type or member is obsolete
-                            .Configure(
-                                app =>
-                                    app.UseDatabaseErrorPage()
+                        .Configure(
+                            app => app.UseDatabaseErrorPage()
 #pragma warning restore CS0618 // Type or member is obsolete
-                                        .UseMiddleware<SuccessMiddleware>()
-                            );
-                    }
-                )
-                .Build();
+                                .UseMiddleware<SuccessMiddleware>()
+                        );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -69,19 +67,17 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         public async Task Non_database_exceptions_pass_thru()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer()
 #pragma warning disable CS0618 // Type or member is obsolete
-                            .Configure(
-                                app =>
-                                    app.UseDatabaseErrorPage()
+                        .Configure(
+                            app => app.UseDatabaseErrorPage()
 #pragma warning restore CS0618 // Type or member is obsolete
-                                        .UseMiddleware<ExceptionMiddleware>()
-                            );
-                    }
-                )
-                .Build();
+                                .UseMiddleware<ExceptionMiddleware>()
+                        );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -333,8 +329,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
 
             public virtual Task Invoke(HttpContext context)
             {
-                var db =
-                    context.RequestServices.GetService<BloggingContextWithPendingModelChanges>();
+                var db = context.RequestServices
+                    .GetService<BloggingContextWithPendingModelChanges>();
                 db.Database.Migrate();
 
                 db.Blogs.Add(new Blog());
@@ -425,38 +421,33 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
             using (var database = SqlTestStore.CreateScratch())
             {
                 using var host = new HostBuilder().ConfigureWebHost(
-                        webHostBuilder =>
-                        {
-                            webHostBuilder.UseTestServer()
-                                .Configure(
-                                    app =>
-                                    {
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseTestServer().Configure(
+                            app =>
+                            {
 #pragma warning disable CS0618 // Type or member is obsolete
-                                        app.UseDatabaseErrorPage(
-                                            new DatabaseErrorPageOptions
-                                            {
-                                                MigrationsEndPointPath = new PathString(
-                                                    migrationsEndpoint
-                                                )
-                                            }
-                                        );
-#pragma warning restore CS0618 // Type or member is obsolete
-
-                                        app.UseMiddleware<PendingMigrationsMiddleware>();
-                                    }
-                                )
-                                .ConfigureServices(
-                                    services =>
+                                app.UseDatabaseErrorPage(
+                                    new DatabaseErrorPageOptions
                                     {
-                                        services.AddDbContext<BloggingContextWithMigrations>(
-                                            optionsBuilder =>
-                                                optionsBuilder.UseSqlite(database.ConnectionString)
-                                        );
+                                        MigrationsEndPointPath = new PathString(migrationsEndpoint)
                                     }
                                 );
-                        }
-                    )
-                    .Build();
+#pragma warning restore CS0618 // Type or member is obsolete
+
+                                app.UseMiddleware<PendingMigrationsMiddleware>();
+                            }
+                        ).ConfigureServices(
+                            services =>
+                            {
+                                services.AddDbContext<BloggingContextWithMigrations>(
+                                    optionsBuilder =>
+                                        optionsBuilder.UseSqlite(database.ConnectionString)
+                                );
+                            }
+                        );
+                    }
+                ).Build();
 
                 await host.StartAsync();
 
@@ -483,25 +474,24 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
             var logProvider = new TestLoggerProvider();
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
 #pragma warning disable CS0618 // Type or member is obsolete
-                                    app.UseDatabaseErrorPage();
+                            app.UseDatabaseErrorPage();
 #pragma warning restore CS0618 // Type or member is obsolete
-                                    app.UseMiddleware<ContextNotRegisteredInServicesMiddleware>();
+                            app.UseMiddleware<ContextNotRegisteredInServicesMiddleware>();
 #pragma warning disable CS0618 // Type or member is obsolete
-                                    app.ApplicationServices.GetService<ILoggerFactory>()
-                                        .AddProvider(logProvider);
+                            app.ApplicationServices
+                                .GetService<ILoggerFactory>()
+                                .AddProvider(logProvider);
 #pragma warning restore CS0618 // Type or member is obsolete
-                                }
-                            );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -539,9 +529,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
             {
                 using (var database = SqlTestStore.CreateScratch())
                 {
-                    var optionsBuilder = new DbContextOptionsBuilder().UseLoggerFactory(
-                            context.RequestServices.GetService<ILoggerFactory>()
-                        )
+                    var optionsBuilder = new DbContextOptionsBuilder()
+                        .UseLoggerFactory(context.RequestServices.GetService<ILoggerFactory>())
                         .UseSqlite(database.ConnectionString);
 
                     var db = new BloggingContext(optionsBuilder.Options);
@@ -598,8 +587,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
 
             public virtual Task Invoke(HttpContext context)
             {
-                var db =
-                    context.RequestServices.GetService<BloggingContextWithSnapshotThatThrows>();
+                var db = context.RequestServices
+                    .GetService<BloggingContextWithSnapshotThatThrows>();
                 db.Blogs.Add(new Blog());
                 db.SaveChanges();
                 throw new Exception("SaveChanges should have thrown");
@@ -661,39 +650,37 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         ) where TContext : DbContext
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
 #pragma warning disable CS0618 // Type or member is obsolete
-                                    app.UseDatabaseErrorPage();
+                            app.UseDatabaseErrorPage();
 #pragma warning restore CS0618 // Type or member is obsolete
 
-                                    app.UseMiddleware<TMiddleware>();
+                            app.UseMiddleware<TMiddleware>();
 
-                                    if (logProvider != null)
-                                    {
+                            if (logProvider != null)
+                            {
 #pragma warning disable CS0618 // Type or member is obsolete
-                                        app.ApplicationServices.GetService<ILoggerFactory>()
-                                            .AddProvider(logProvider);
+                                app.ApplicationServices
+                                    .GetService<ILoggerFactory>()
+                                    .AddProvider(logProvider);
 #pragma warning restore CS0618 // Type or member is obsolete
-                                    }
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddDbContext<TContext>(
-                                        optionsBuilder =>
-                                            optionsBuilder.UseSqlite(database.ConnectionString)
-                                    );
-                                }
+                            }
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddDbContext<TContext>(
+                                optionsBuilder =>
+                                    optionsBuilder.UseSqlite(database.ConnectionString)
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

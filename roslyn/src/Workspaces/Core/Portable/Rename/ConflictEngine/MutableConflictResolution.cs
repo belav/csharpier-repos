@@ -139,10 +139,10 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         internal void AddOrReplaceRelatedLocation(RelatedLocation location)
         {
             var existingRelatedLocation = RelatedLocations.Where(
-                    rl =>
-                        rl.ConflictCheckSpan == location.ConflictCheckSpan
-                        && rl.DocumentId == location.DocumentId
-                )
+                rl =>
+                    rl.ConflictCheckSpan == location.ConflictCheckSpan
+                    && rl.DocumentId == location.DocumentId
+            )
                 .FirstOrNull();
             if (existingRelatedLocation != null)
                 RelatedLocations.Remove(existingRelatedLocation.Value);
@@ -155,19 +155,19 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             if (ErrorMessage != null)
                 return new ConflictResolution(ErrorMessage);
 
-            var documentIds = this._renamedSpansTracker.DocumentIds.Concat(
-                    this.RelatedLocations.Select(l => l.DocumentId)
-                )
+            var documentIds = this._renamedSpansTracker.DocumentIds
+                .Concat(this.RelatedLocations.Select(l => l.DocumentId))
                 .Distinct()
                 .ToImmutableArray();
 
             var relatedLocations = this.RelatedLocations.ToImmutableArray();
 
-            var documentToModifiedSpansMap =
-                this._renamedSpansTracker.GetDocumentToModifiedSpansMap();
-            var documentToComplexifiedSpansMap =
-                this._renamedSpansTracker.GetDocumentToComplexifiedSpansMap();
-            var documentToRelatedLocationsMap = this.RelatedLocations.GroupBy(loc => loc.DocumentId)
+            var documentToModifiedSpansMap = this._renamedSpansTracker
+                .GetDocumentToModifiedSpansMap();
+            var documentToComplexifiedSpansMap = this._renamedSpansTracker
+                .GetDocumentToComplexifiedSpansMap();
+            var documentToRelatedLocationsMap = this.RelatedLocations
+                .GroupBy(loc => loc.DocumentId)
                 .ToImmutableDictionary(g => g.Key, g => g.ToImmutableArray());
 
             return new ConflictResolution(

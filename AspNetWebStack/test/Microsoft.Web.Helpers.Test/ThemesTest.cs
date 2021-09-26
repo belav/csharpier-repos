@@ -509,13 +509,13 @@ namespace Microsoft.Web.Helpers.Test
                 var directoryPath = themeRoot + '\\' + directory.Name;
                 dir.SetupGet(d => d.Name).Returns(directory.Name);
                 mockVpp.Setup(
-                        c =>
-                            c.GetDirectory(
-                                It.Is<string>(
-                                    p => p.Equals(directoryPath, StringComparison.OrdinalIgnoreCase)
-                                )
+                    c =>
+                        c.GetDirectory(
+                            It.Is<string>(
+                                p => p.Equals(directoryPath, StringComparison.OrdinalIgnoreCase)
                             )
-                    )
+                        )
+                )
                     .Returns(dir.Object);
 
                 var fileList = new List<VirtualFile>();

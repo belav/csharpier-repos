@@ -16,9 +16,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public void GetApiResources_ReadsApisFromConfiguration()
         {
             // Arrange
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
-                    new Dictionary<string, string> { ["MyAPI:Profile"] = "API" }
-                )
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(new Dictionary<string, string> { ["MyAPI:Profile"] = "API" })
                 .Build();
             var localApiDescriptor = new TestLocalApiDescriptor();
             var configurationLoader = new ConfigureApiResources(
@@ -42,7 +41,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         {
             // Arrange
             var expectedScopes = new[] { "First", "Second", "Third" };
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new Dictionary<string, string>
                     {
                         ["MyAPI:Profile"] = "API",
@@ -101,9 +101,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public void Configure_AddsResourcesToExistingResourceList()
         {
             // Arrange
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
-                    new Dictionary<string, string> { ["MyAPI:Profile"] = "API" }
-                )
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(new Dictionary<string, string> { ["MyAPI:Profile"] = "API" })
                 .Build();
             var localApiDescriptor = new TestLocalApiDescriptor();
             var configurationLoader = new ConfigureApiResources(

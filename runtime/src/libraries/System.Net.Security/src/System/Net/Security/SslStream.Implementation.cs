@@ -241,10 +241,10 @@ namespace System.Net.Security
                 else
                 {
                     ForceAuthenticationAsync(
-                            new SyncReadWriteAdapter(InnerStream),
-                            _context!.IsServer,
-                            null
-                        )
+                        new SyncReadWriteAdapter(InnerStream),
+                        _context!.IsServer,
+                        null
+                    )
                         .GetAwaiter()
                         .GetResult();
                     return null;
@@ -258,10 +258,8 @@ namespace System.Net.Security
             CancellationToken cancellationToken
         )
         {
-            NetSecurityTelemetry.Log.HandshakeStart(
-                _context!.IsServer,
-                _sslAuthenticationOptions!.TargetHost
-            );
+            NetSecurityTelemetry.Log
+                .HandshakeStart(_context!.IsServer, _sslAuthenticationOptions!.TargetHost);
             ValueStopwatch stopwatch = ValueStopwatch.StartNew();
 
             try
@@ -307,10 +305,10 @@ namespace System.Net.Security
                 else
                 {
                     ForceAuthenticationAsync(
-                            new SyncReadWriteAdapter(InnerStream),
-                            _context.IsServer,
-                            null
-                        )
+                        new SyncReadWriteAdapter(InnerStream),
+                        _context.IsServer,
+                        null
+                    )
                         .GetAwaiter()
                         .GetResult();
                     LogSuccess(this, stopwatch);
@@ -341,11 +339,12 @@ namespace System.Net.Security
                     Interlocked.CompareExchange(ref thisRef._connectionOpenedStatus, 1, 0) == 0;
 #pragma warning restore CS0197
 
-                NetSecurityTelemetry.Log.HandshakeCompleted(
-                    thisRef.GetSslProtocolInternal(),
-                    stopwatch,
-                    connectionOpen
-                );
+                NetSecurityTelemetry.Log
+                    .HandshakeCompleted(
+                        thisRef.GetSslProtocolInternal(),
+                        stopwatch,
+                        connectionOpen
+                    );
             }
         }
 
@@ -567,16 +566,17 @@ namespace System.Net.Security
             }
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource.Log.SspiSelectedCipherSuite(
-                    nameof(ForceAuthenticationAsync),
-                    SslProtocol,
-                    CipherAlgorithm,
-                    CipherStrength,
-                    HashAlgorithm,
-                    HashStrength,
-                    KeyExchangeAlgorithm,
-                    KeyExchangeStrength
-                );
+                NetEventSource.Log
+                    .SspiSelectedCipherSuite(
+                        nameof(ForceAuthenticationAsync),
+                        SslProtocol,
+                        CipherAlgorithm,
+                        CipherStrength,
+                        HashAlgorithm,
+                        HashStrength,
+                        KeyExchangeAlgorithm,
+                        KeyExchangeStrength
+                    );
         }
 
         private async ValueTask<ProtocolToken> ReceiveBlobAsync<TIOAdapter>(TIOAdapter adapter)
@@ -685,14 +685,14 @@ namespace System.Net.Security
                         {
                             SslServerAuthenticationOptions userOptions =
                                 await _sslAuthenticationOptions.ServerOptionDelegate(
-                                        this,
-                                        new SslClientHelloInfo(
-                                            _sslAuthenticationOptions.TargetHost,
-                                            _lastFrame.SupportedVersions
-                                        ),
-                                        _sslAuthenticationOptions.UserState,
-                                        adapter.CancellationToken
-                                    )
+                                    this,
+                                    new SslClientHelloInfo(
+                                        _sslAuthenticationOptions.TargetHost,
+                                        _lastFrame.SupportedVersions
+                                    ),
+                                    _sslAuthenticationOptions.UserState,
+                                    adapter.CancellationToken
+                                )
                                     .ConfigureAwait(false);
                             _sslAuthenticationOptions.UpdateOptions(userOptions);
                         }
@@ -903,7 +903,8 @@ namespace System.Net.Security
                     if (status.ErrorCode == SecurityStatusPalErrorCode.TryAgain)
                     {
                         // No need to hold on the buffer any more.
-                        ArrayPool<byte>.Shared.Return(bufferToReturn);
+                        ArrayPool<byte>.Shared
+                            .Return(bufferToReturn);
                         bufferToReturn = null;
                         // Call WriteSingleChunk() recursively to avoid code duplication.
                         // This should be extremely rare in cases when second renegotiation happens concurrently with Write.
@@ -1012,8 +1013,8 @@ namespace System.Net.Security
                         // doesn't read enough), and to minimize the chances that in the common case the FillBufferAsync
                         // helper needs to yield and allocate a state machine.
                         int readBytes = await adapter.ReadAsync(
-                                _internalBuffer.AsMemory(_internalBufferCount)
-                            )
+                            _internalBuffer.AsMemory(_internalBufferCount)
+                        )
                             .ConfigureAwait(false);
                         if (readBytes == 0)
                         {
@@ -1218,8 +1219,8 @@ namespace System.Net.Security
             while (_internalBufferCount < numBytesRequired)
             {
                 int bytesRead = await adapter.ReadAsync(
-                        _internalBuffer.AsMemory(_internalBufferCount)
-                    )
+                    _internalBuffer.AsMemory(_internalBufferCount)
+                )
                     .ConfigureAwait(false);
                 if (bytesRead == 0)
                 {
@@ -1295,9 +1296,8 @@ namespace System.Net.Security
             int copyBytes = Math.Min(_decryptedBytesCount, buffer.Length);
             if (copyBytes != 0)
             {
-                new ReadOnlySpan<byte>(_internalBuffer, _decryptedBytesOffset, copyBytes).CopyTo(
-                    buffer.Span
-                );
+                new ReadOnlySpan<byte>(_internalBuffer, _decryptedBytesOffset, copyBytes)
+                    .CopyTo(buffer.Span);
 
                 _decryptedBytesOffset += copyBytes;
                 _decryptedBytesCount -= copyBytes;

@@ -35,9 +35,9 @@ namespace System.Linq.Parallel.Tests
                         Labeled.Label(
                             query.ToString(),
                             Partitioner.Create(
-                                    Enumerable.Range(0, (int)results[1]).ToArray(),
-                                    false
-                                )
+                                Enumerable.Range(0, (int)results[1]).ToArray(),
+                                false
+                            )
                                 .AsParallel()
                         ),
                         results[1],
@@ -56,7 +56,8 @@ namespace System.Linq.Parallel.Tests
                                     EnumerablePartitionerOptions.NoBuffering
                                 ),
                                 (int)results[1]
-                            ).AsParallel()
+                            )
+                                .AsParallel()
                         ),
                         results[1],
                         results[2]
@@ -105,14 +106,13 @@ namespace System.Linq.Parallel.Tests
                 var barrier = new Barrier(degree);
                 Assert.Equal(
                     Functions.SumRange(0, count),
-                    labeled.Item.WithDegreeOfParallelism(degree)
-                        .Sum(
-                            x =>
-                            {
-                                barrier.SignalAndWait();
-                                return x;
-                            }
-                        )
+                    labeled.Item.WithDegreeOfParallelism(degree).Sum(
+                        x =>
+                        {
+                            barrier.SignalAndWait();
+                            return x;
+                        }
+                    )
                 );
             }
         }
@@ -137,7 +137,8 @@ namespace System.Linq.Parallel.Tests
             {
                 int expected = 1 - count;
                 foreach (
-                    int result in labeled.Item.WithDegreeOfParallelism(degree)
+                    int result in labeled.Item
+                        .WithDegreeOfParallelism(degree)
                         .Select(x => -x)
                         .OrderBy(x => x)
                 )
@@ -166,20 +167,15 @@ namespace System.Linq.Parallel.Tests
         {
             using (ThreadPoolHelpers.EnsureMinThreadsAtLeast(degree))
             {
-                Assert.True(
-                    labeled.Item.WithDegreeOfParallelism(degree)
-                        .Select(
-                            x =>
-                            {
-                                var sw = new SpinWait();
-                                while (!sw.NextSpinWillYield)
-                                    sw.SpinOnce(); // brief spin to wait a small amount of time
-                                return -x;
-                            }
-                        )
-                        .OrderBy(x => x)
-                        .SequenceEqual(ParallelEnumerable.Range(1 - count, count).AsOrdered())
-                );
+                Assert.True(labeled.Item.WithDegreeOfParallelism(degree).Select(
+                        x =>
+                        {
+                            var sw = new SpinWait();
+                            while (!sw.NextSpinWillYield)
+                                sw.SpinOnce(); // brief spin to wait a small amount of time
+                            return -x;
+                        }
+                    ).OrderBy(x => x).SequenceEqual(ParallelEnumerable.Range(1 - count, count).AsOrdered()));
             }
         }
 
@@ -203,17 +199,16 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> query = labeled.Item;
             int accumulatorCombineCount = 0;
 
-            int actual = query.WithDegreeOfParallelism(degree)
-                .Aggregate(
-                    0,
-                    (accumulator, x) => accumulator + x,
-                    (left, right) =>
-                    {
-                        Interlocked.Increment(ref accumulatorCombineCount);
-                        return left + right;
-                    },
-                    result => result
-                );
+            int actual = query.WithDegreeOfParallelism(degree).Aggregate(
+                0,
+                (accumulator, x) => accumulator + x,
+                (left, right) =>
+                {
+                    Interlocked.Increment(ref accumulatorCombineCount);
+                    return left + right;
+                },
+                result => result
+            );
             Assert.Equal(Functions.SumRange(0, count), actual);
             Assert.Equal(degree - 1, accumulatorCombineCount);
         }
@@ -239,21 +234,20 @@ namespace System.Linq.Parallel.Tests
             int accumulatorCombineCount = 0;
             int seedFunctionCallCount = 0;
 
-            int actual = query.WithDegreeOfParallelism(degree)
-                .Aggregate(
-                    () =>
-                    {
-                        Interlocked.Increment(ref seedFunctionCallCount);
-                        return 0;
-                    },
-                    (accumulator, x) => accumulator + x,
-                    (left, right) =>
-                    {
-                        Interlocked.Increment(ref accumulatorCombineCount);
-                        return left + right;
-                    },
-                    result => result
-                );
+            int actual = query.WithDegreeOfParallelism(degree).Aggregate(
+                () =>
+                {
+                    Interlocked.Increment(ref seedFunctionCallCount);
+                    return 0;
+                },
+                (accumulator, x) => accumulator + x,
+                (left, right) =>
+                {
+                    Interlocked.Increment(ref accumulatorCombineCount);
+                    return left + right;
+                },
+                result => result
+            );
             Assert.Equal(Functions.SumRange(0, count), actual);
             Assert.Equal(seedFunctionCallCount, degree);
             Assert.Equal(seedFunctionCallCount - 1, accumulatorCombineCount);

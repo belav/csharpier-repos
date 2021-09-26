@@ -380,8 +380,8 @@ namespace System.Net.Http.Functional.Tests
                             await connection.WriteStringAsync("HTTP/1.1 200 OK\r\n")
                                 .ConfigureAwait(false);
                             await connection.WriteStringAsync(
-                                    $"Date: {DateTimeOffset.UtcNow:R}\r\n"
-                                )
+                                $"Date: {DateTimeOffset.UtcNow:R}\r\n"
+                            )
                                 .ConfigureAwait(false);
                             await connection.WriteStringAsync("Content-Type: text/plain\r\n")
                                 .ConfigureAwait(false);
@@ -395,15 +395,16 @@ namespace System.Net.Http.Functional.Tests
                             // Write response body
                             if (transferType == TransferType.Chunked)
                             {
-                                string chunkSizeInHex = string.Format(
-                                    "{0:x}\r\n",
-                                    content.Length
-                                        + (
-                                            transferError == TransferError.ChunkSizeTooLarge
-                                                ? 42
-                                                : 0
-                                        )
-                                );
+                                string chunkSizeInHex = string
+                                    .Format(
+                                        "{0:x}\r\n",
+                                        content.Length
+                                            + (
+                                                transferError == TransferError.ChunkSizeTooLarge
+                                                    ? 42
+                                                    : 0
+                                            )
+                                    );
                                 await connection.WriteStringAsync(chunkSizeInHex)
                                     .ConfigureAwait(false);
                                 await connection.WriteStringAsync($"{content}\r\n")

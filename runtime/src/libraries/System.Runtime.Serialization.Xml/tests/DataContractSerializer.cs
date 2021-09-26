@@ -32,10 +32,8 @@ public static partial class DataContractSerializerTests
 
     static DataContractSerializerTests()
     {
-        MethodInfo method = typeof(DataContractSerializer).GetMethod(
-            SerializationOptionSetterName,
-            BindingFlags.NonPublic | BindingFlags.Static
-        );
+        MethodInfo method = typeof(DataContractSerializer)
+            .GetMethod(SerializationOptionSetterName, BindingFlags.NonPublic | BindingFlags.Static);
         Assert.True(method != null, $"No method named {SerializationOptionSetterName}");
         method.Invoke(null, new object[] { 1 });
     }
@@ -45,9 +43,8 @@ public static partial class DataContractSerializerTests
     {
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2013, 1, 2)
-        ).TotalMinutes;
+        var offsetMinutes = (int)TimeZoneInfo.Local
+            .GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         var objs = new DateTimeOffset[]
         {
             // Adding offsetMinutes so the DateTime component in serialized strings are time-zone independent
@@ -56,9 +53,8 @@ public static partial class DataContractSerializerTests
                 new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Local).AddMinutes(offsetMinutes)
             ),
             new DateTimeOffset(
-                new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Unspecified).AddMinutes(
-                    offsetMinutes
-                )
+                new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Unspecified)
+                    .AddMinutes(offsetMinutes)
             ),
             new DateTimeOffset(new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Utc)),
             new DateTimeOffset(DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc)),
@@ -66,18 +62,21 @@ public static partial class DataContractSerializerTests
         };
         var serializedStrings = new string[]
         {
-            string.Format(
-                @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>2013-01-02T03:04:05.006Z</DateTime><OffsetMinutes>{0}</OffsetMinutes></DateTimeOffset>",
-                offsetMinutes
-            ),
-            string.Format(
-                @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>2013-01-02T03:04:05.006Z</DateTime><OffsetMinutes>{0}</OffsetMinutes></DateTimeOffset>",
-                offsetMinutes
-            ),
-            string.Format(
-                @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>2013-01-02T03:04:05.006Z</DateTime><OffsetMinutes>{0}</OffsetMinutes></DateTimeOffset>",
-                offsetMinutes
-            ),
+            string
+                .Format(
+                    @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>2013-01-02T03:04:05.006Z</DateTime><OffsetMinutes>{0}</OffsetMinutes></DateTimeOffset>",
+                    offsetMinutes
+                ),
+            string
+                .Format(
+                    @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>2013-01-02T03:04:05.006Z</DateTime><OffsetMinutes>{0}</OffsetMinutes></DateTimeOffset>",
+                    offsetMinutes
+                ),
+            string
+                .Format(
+                    @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>2013-01-02T03:04:05.006Z</DateTime><OffsetMinutes>{0}</OffsetMinutes></DateTimeOffset>",
+                    offsetMinutes
+                ),
             @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>2013-01-02T03:04:05.006Z</DateTime><OffsetMinutes>0</OffsetMinutes></DateTimeOffset>",
             @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>0001-01-01T00:00:00Z</DateTime><OffsetMinutes>0</OffsetMinutes></DateTimeOffset>",
             @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>9999-12-31T23:59:59.9999999Z</DateTime><OffsetMinutes>0</OffsetMinutes></DateTimeOffset>"
@@ -197,9 +196,8 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_DateTimeAsRoot()
     {
-        var offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2013, 1, 2)
-        ).TotalMinutes;
+        var offsetMinutes = (int)TimeZoneInfo.Local
+            .GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         Assert.StrictEqual(
             DataContractSerializerHelper.SerializeAndDeserialize<DateTime>(
                 new DateTime(2013, 1, 2),
@@ -210,11 +208,12 @@ public static partial class DataContractSerializerTests
         Assert.StrictEqual(
             DataContractSerializerHelper.SerializeAndDeserialize<DateTime>(
                 new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Local),
-                string.Format(
-                    @"<dateTime xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">2013-01-02T03:04:05.006{0:+;-}{1}</dateTime>",
-                    offsetMinutes,
-                    new TimeSpan(0, offsetMinutes, 0).ToString(@"hh\:mm")
-                )
+                string
+                    .Format(
+                        @"<dateTime xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">2013-01-02T03:04:05.006{0:+;-}{1}</dateTime>",
+                        offsetMinutes,
+                        new TimeSpan(0, offsetMinutes, 0).ToString(@"hh\:mm")
+                    )
             ),
             new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Local)
         );
@@ -265,10 +264,11 @@ public static partial class DataContractSerializerTests
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<decimal>(
                     value,
-                    string.Format(
-                        @"<decimal xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</decimal>",
-                        value.ToString(CultureInfo.InvariantCulture)
-                    )
+                    string
+                        .Format(
+                            @"<decimal xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</decimal>",
+                            value.ToString(CultureInfo.InvariantCulture)
+                        )
                 ),
                 value
             );
@@ -368,10 +368,11 @@ public static partial class DataContractSerializerTests
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<Guid>(
                     value,
-                    string.Format(
-                        @"<guid xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</guid>",
-                        value.ToString()
-                    )
+                    string
+                        .Format(
+                            @"<guid xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</guid>",
+                            value.ToString()
+                        )
                 ),
                 value
             );
@@ -386,10 +387,11 @@ public static partial class DataContractSerializerTests
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<int>(
                     value,
-                    string.Format(
-                        @"<int xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</int>",
-                        value
-                    )
+                    string
+                        .Format(
+                            @"<int xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</int>",
+                            value
+                        )
                 ),
                 value
             );
@@ -406,10 +408,11 @@ public static partial class DataContractSerializerTests
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<long>(
                     value,
-                    string.Format(
-                        @"<long xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</long>",
-                        value
-                    )
+                    string
+                        .Format(
+                            @"<long xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</long>",
+                            value
+                        )
                 ),
                 value
             );
@@ -484,10 +487,11 @@ public static partial class DataContractSerializerTests
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<short>(
                     value,
-                    string.Format(
-                        @"<short xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</short>",
-                        value
-                    )
+                    string
+                        .Format(
+                            @"<short xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</short>",
+                            value
+                        )
                 ),
                 value
             );
@@ -502,10 +506,11 @@ public static partial class DataContractSerializerTests
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<sbyte>(
                     value,
-                    string.Format(
-                        @"<byte xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</byte>",
-                        value
-                    )
+                    string
+                        .Format(
+                            @"<byte xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</byte>",
+                            value
+                        )
                 ),
                 value
             );
@@ -599,10 +604,11 @@ public static partial class DataContractSerializerTests
             Assert.StrictEqual<uint>(
                 DataContractSerializerHelper.SerializeAndDeserialize<uint>(
                     value,
-                    string.Format(
-                        @"<unsignedInt xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</unsignedInt>",
-                        value
-                    )
+                    string
+                        .Format(
+                            @"<unsignedInt xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</unsignedInt>",
+                            value
+                        )
                 ),
                 value
             );
@@ -617,10 +623,11 @@ public static partial class DataContractSerializerTests
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<ulong>(
                     value,
-                    string.Format(
-                        @"<unsignedLong xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</unsignedLong>",
-                        value
-                    )
+                    string
+                        .Format(
+                            @"<unsignedLong xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</unsignedLong>",
+                            value
+                        )
                 ),
                 value
             );
@@ -637,10 +644,11 @@ public static partial class DataContractSerializerTests
             Assert.StrictEqual(
                 DataContractSerializerHelper.SerializeAndDeserialize<ushort>(
                     value,
-                    string.Format(
-                        @"<unsignedShort xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</unsignedShort>",
-                        value
-                    )
+                    string
+                        .Format(
+                            @"<unsignedShort xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">{0}</unsignedShort>",
+                            value
+                        )
                 ),
                 value
             );
@@ -947,9 +955,8 @@ public static partial class DataContractSerializerTests
         {
             Assert.True(
                 dict2.DictionaryProperty.ContainsKey(entry.Key)
-                    && dict2.DictionaryProperty[entry.Key].Equals(
-                        dict.DictionaryProperty[entry.Key]
-                    )
+                    && dict2.DictionaryProperty[entry.Key]
+                        .Equals(dict.DictionaryProperty[entry.Key])
             );
         }
     }
@@ -1343,14 +1350,15 @@ public static partial class DataContractSerializerTests
             Utils.CompareResult result = Utils.Compare(baseline, actualOutput);
             Assert.True(
                 result.Equal,
-                string.Format(
-                    "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                    Environment.NewLine,
-                    result.ErrorMessage,
-                    x,
-                    baseline,
-                    actualOutput
-                )
+                string
+                    .Format(
+                        "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                        Environment.NewLine,
+                        result.ErrorMessage,
+                        x,
+                        baseline,
+                        actualOutput
+                    )
             );
         }
     }
@@ -2478,9 +2486,8 @@ public static partial class DataContractSerializerTests
 
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2013, 1, 2)
-        ).TotalMinutes;
+        var offsetMinutes = (int)TimeZoneInfo.Local
+            .GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         // Adding offsetMinutes to ModifiedTime property so the DateTime component in serialized strings are time-zone independent
         value = new TypeWithDateTimeOffsetTypeProperty()
         {
@@ -2490,10 +2497,11 @@ public static partial class DataContractSerializerTests
         };
         actual = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
-            string.Format(
-                @"<TypeWithDateTimeOffsetTypeProperty xmlns=""http://schemas.datacontract.org/2004/07/SerializationTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><ModifiedTime xmlns:a=""http://schemas.datacontract.org/2004/07/System""><a:DateTime>2013-01-02T03:04:05.006Z</a:DateTime><a:OffsetMinutes>{0}</a:OffsetMinutes></ModifiedTime></TypeWithDateTimeOffsetTypeProperty>",
-                offsetMinutes
-            )
+            string
+                .Format(
+                    @"<TypeWithDateTimeOffsetTypeProperty xmlns=""http://schemas.datacontract.org/2004/07/SerializationTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><ModifiedTime xmlns:a=""http://schemas.datacontract.org/2004/07/System""><a:DateTime>2013-01-02T03:04:05.006Z</a:DateTime><a:OffsetMinutes>{0}</a:OffsetMinutes></ModifiedTime></TypeWithDateTimeOffsetTypeProperty>",
+                    offsetMinutes
+                )
         );
         Assert.StrictEqual(value.ModifiedTime, actual.ModifiedTime);
 
@@ -2505,10 +2513,11 @@ public static partial class DataContractSerializerTests
         };
         actual = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
-            string.Format(
-                @"<TypeWithDateTimeOffsetTypeProperty xmlns=""http://schemas.datacontract.org/2004/07/SerializationTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><ModifiedTime xmlns:a=""http://schemas.datacontract.org/2004/07/System""><a:DateTime>2013-01-02T03:04:05.006Z</a:DateTime><a:OffsetMinutes>{0}</a:OffsetMinutes></ModifiedTime></TypeWithDateTimeOffsetTypeProperty>",
-                offsetMinutes
-            )
+            string
+                .Format(
+                    @"<TypeWithDateTimeOffsetTypeProperty xmlns=""http://schemas.datacontract.org/2004/07/SerializationTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><ModifiedTime xmlns:a=""http://schemas.datacontract.org/2004/07/System""><a:DateTime>2013-01-02T03:04:05.006Z</a:DateTime><a:OffsetMinutes>{0}</a:OffsetMinutes></ModifiedTime></TypeWithDateTimeOffsetTypeProperty>",
+                    offsetMinutes
+                )
         );
         Assert.StrictEqual(value.ModifiedTime, actual.ModifiedTime);
     }
@@ -3348,10 +3357,8 @@ public static partial class DataContractSerializerTests
         Assert.Throws<InvalidDataContractException>(
             () =>
             {
-                (new DataContractSerializer(typeof(RecursiveCollection))).WriteObject(
-                    new MemoryStream(),
-                    new RecursiveCollection()
-                );
+                (new DataContractSerializer(typeof(RecursiveCollection)))
+                    .WriteObject(new MemoryStream(), new RecursiveCollection());
             }
         );
     }
@@ -4429,10 +4436,8 @@ public static partial class DataContractSerializerTests
         CompareBaseline(baseline, ms);
         ms.Position = 0;
         var dcrVariationsReturning = dcs2.ReadObject(ms);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            dcrVariationsGoing,
-            dcrVariationsReturning
-        );
+        SerializationTestTypes.ComparisonHelper
+            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
     [Fact]
@@ -4457,10 +4462,8 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false, dcr2);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            dcrVariationsGoing,
-            dcrVariationsReturning
-        );
+        SerializationTestTypes.ComparisonHelper
+            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
     [Fact]
@@ -4489,10 +4492,8 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            dcrVariationsGoing,
-            dcrVariationsReturning
-        );
+        SerializationTestTypes.ComparisonHelper
+            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
     [Fact]
@@ -4521,10 +4522,8 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false, dcr2);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            dcrVariationsGoing,
-            dcrVariationsReturning
-        );
+        SerializationTestTypes.ComparisonHelper
+            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
     private static void CompareBaseline(string baseline, MemoryStream ms)
@@ -4534,13 +4533,14 @@ public static partial class DataContractSerializerTests
         var result = Utils.Compare(baseline, actualOutput);
         Assert.True(
             result.Equal,
-            string.Format(
-                "{1}{0}Test failed.{0}Expected: {2}{0}Actual: {3}",
-                Environment.NewLine,
-                result.ErrorMessage,
-                baseline,
-                actualOutput
-            )
+            string
+                .Format(
+                    "{1}{0}Test failed.{0}Expected: {2}{0}Actual: {3}",
+                    Environment.NewLine,
+                    result.ErrorMessage,
+                    baseline,
+                    actualOutput
+                )
         );
     }
 
@@ -5526,7 +5526,8 @@ public static partial class DataContractSerializerTests
         );
 
         Assert.True(
-            valueSerPublicDatasetPublic.Data.GetType()
+            valueSerPublicDatasetPublic.Data
+                .GetType()
                 .Equals(resultSerPublicDatasetPublic.Data.GetType())
         );
         var valueDataSetPublic = (SerializationTestTypes.SerPublicDatasetPublic)(
@@ -5578,7 +5579,8 @@ public static partial class DataContractSerializerTests
         );
 
         Assert.True(
-            valueSerPublicDatasetPrivate.Data.GetType()
+            valueSerPublicDatasetPrivate.Data
+                .GetType()
                 .Equals(resultSerPublicDatasetPrivate.Data.GetType())
         );
         var valueDataSetPrivate = (SerializationTestTypes.SerPublicDatasetPrivate)(
@@ -6578,9 +6580,8 @@ public static partial class DataContractSerializerTests
     public static void DCS_TypeWithCollectionAndDateTimeOffset()
     {
         // Adding offsetMinutes so the DateTime component in serialized strings are time-zone independent
-        int offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2013, 1, 2)
-        ).TotalMinutes;
+        int offsetMinutes = (int)TimeZoneInfo.Local
+            .GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         DateTimeOffset dateTimeOffset = new DateTimeOffset(
             new DateTime(2013, 1, 2, 3, 4, 5, 6).AddMinutes(offsetMinutes)
         );
@@ -6604,9 +6605,8 @@ public static partial class DataContractSerializerTests
     public static void DCS_TypeWithCollectionAndDateTimeOffset_ListIsNull()
     {
         // Adding offsetMinutes so the DateTime component in serialized strings are time-zone independent
-        int offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2013, 1, 2)
-        ).TotalMinutes;
+        int offsetMinutes = (int)TimeZoneInfo.Local
+            .GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         DateTimeOffset dateTimeOffset = new DateTimeOffset(
             new DateTime(2013, 1, 2, 3, 4, 5, 6).AddMinutes(offsetMinutes)
         );
@@ -6702,10 +6702,11 @@ public static partial class DataContractSerializerTests
                     new DataContractSerializer(
                         typeof(TypeWithKnownTypesOfCollectionsWithConflictingXmlName)
                     )
-                ).WriteObject(
-                    new MemoryStream(),
-                    new TypeWithKnownTypesOfCollectionsWithConflictingXmlName()
-                );
+                )
+                    .WriteObject(
+                        new MemoryStream(),
+                        new TypeWithKnownTypesOfCollectionsWithConflictingXmlName()
+                    );
             }
         );
     }
@@ -6812,17 +6813,13 @@ public static partial class DataContractSerializerTests
         //netcorePayload
         var deserializedNetcoreObject = DeserializeString<T>(netcorePayload, settings: settings);
         Assert.NotNull(deserializedNetcoreObject);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            value,
-            deserializedNetcoreObject
-        );
+        SerializationTestTypes.ComparisonHelper
+            .CompareRecursively(value, deserializedNetcoreObject);
 
         //desktopPayload
         var deserializedDesktopObject = DeserializeString<T>(desktopPayload, settings: settings);
         Assert.NotNull(deserializedDesktopObject);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            value,
-            deserializedDesktopObject
-        );
+        SerializationTestTypes.ComparisonHelper
+            .CompareRecursively(value, deserializedDesktopObject);
     }
 }

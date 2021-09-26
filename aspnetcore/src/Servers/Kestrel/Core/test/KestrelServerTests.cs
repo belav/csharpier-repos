@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         private KestrelServerOptions CreateServerOptions()
         {
             var serverOptions = new KestrelServerOptions();
-            serverOptions.ApplicationServices = new ServiceCollection().AddLogging()
+            serverOptions.ApplicationServices = new ServiceCollection()
+                .AddLogging()
                 .BuildServiceProvider();
             return serverOptions;
         }
@@ -117,7 +118,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             using (var server = CreateServer(new KestrelServerOptions(), testLogger))
             {
-                server.Features.Get<IServerAddressesFeature>()
+                server.Features
+                    .Get<IServerAddressesFeature>()
                     .Addresses.Add("http://127.0.0.1:0/base");
 
                 var exception = Assert.Throws<InvalidOperationException>(
@@ -305,22 +307,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var mockTransport = new Mock<IConnectionListener>();
             var mockTransportFactory = new Mock<IConnectionListenerFactory>();
             mockTransportFactory.Setup(
-                    transportFactory =>
-                        transportFactory.BindAsync(
-                            It.IsAny<EndPoint>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                transportFactory =>
+                    transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
+            )
                 .Returns<EndPoint, CancellationToken>(
                     (e, token) =>
                     {
                         mockTransport.Setup(
-                                transport => transport.AcceptAsync(It.IsAny<CancellationToken>())
-                            )
+                            transport => transport.AcceptAsync(It.IsAny<CancellationToken>())
+                        )
                             .Returns(new ValueTask<ConnectionContext>((ConnectionContext)null));
                         mockTransport.Setup(
-                                transport => transport.UnbindAsync(It.IsAny<CancellationToken>())
-                            )
+                            transport => transport.UnbindAsync(It.IsAny<CancellationToken>())
+                        )
                             .Returns(() => new ValueTask(unbind.WaitAsync()));
                         mockTransport.Setup(transport => transport.DisposeAsync())
                             .Returns(() => new ValueTask(stop.WaitAsync()));
@@ -377,22 +376,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var mockTransport = new Mock<IConnectionListener>();
             var mockTransportFactory = new Mock<IConnectionListenerFactory>();
             mockTransportFactory.Setup(
-                    transportFactory =>
-                        transportFactory.BindAsync(
-                            It.IsAny<EndPoint>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                transportFactory =>
+                    transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
+            )
                 .Returns<EndPoint, CancellationToken>(
                     (e, token) =>
                     {
                         mockTransport.Setup(
-                                transport => transport.AcceptAsync(It.IsAny<CancellationToken>())
-                            )
+                            transport => transport.AcceptAsync(It.IsAny<CancellationToken>())
+                        )
                             .Returns(new ValueTask<ConnectionContext>((ConnectionContext)null));
                         mockTransport.Setup(
-                                transport => transport.UnbindAsync(It.IsAny<CancellationToken>())
-                            )
+                            transport => transport.UnbindAsync(It.IsAny<CancellationToken>())
+                        )
                             .Returns(
                                 async () =>
                                 {
@@ -471,22 +467,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var mockTransport = new Mock<IConnectionListener>();
             var mockTransportFactory = new Mock<IConnectionListenerFactory>();
             mockTransportFactory.Setup(
-                    transportFactory =>
-                        transportFactory.BindAsync(
-                            It.IsAny<EndPoint>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                transportFactory =>
+                    transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
+            )
                 .Returns<EndPoint, CancellationToken>(
                     (e, token) =>
                     {
                         mockTransport.Setup(
-                                transport => transport.AcceptAsync(It.IsAny<CancellationToken>())
-                            )
+                            transport => transport.AcceptAsync(It.IsAny<CancellationToken>())
+                        )
                             .Returns(new ValueTask<ConnectionContext>((ConnectionContext)null));
                         mockTransport.Setup(
-                                transport => transport.UnbindAsync(It.IsAny<CancellationToken>())
-                            )
+                            transport => transport.UnbindAsync(It.IsAny<CancellationToken>())
+                        )
                             .Returns(new ValueTask(unbindTcs.Task));
                         mockTransport.Setup(transport => transport.EndPoint).Returns(e);
 
@@ -574,7 +567,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task ReloadsOnConfigurationChangeWhenOptedIn()
         {
-            var currentConfig = new ConfigurationBuilder().AddInMemoryCollection(
+            var currentConfig = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:A:Url", "http://*:5000"),
@@ -588,8 +582,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             var mockChangeToken = new Mock<IChangeToken>();
             mockChangeToken.Setup(
-                    t => t.RegisterChangeCallback(It.IsAny<Action<object>>(), It.IsAny<object>())
-                )
+                t => t.RegisterChangeCallback(It.IsAny<Action<object>>(), It.IsAny<object>())
+            )
                 .Returns<Action<object>, object>(
                     (callback, state) =>
                     {
@@ -633,19 +627,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var mockTransports = new List<Mock<IConnectionListener>>();
             var mockTransportFactory = new Mock<IConnectionListenerFactory>();
             mockTransportFactory.Setup(
-                    transportFactory =>
-                        transportFactory.BindAsync(
-                            It.IsAny<EndPoint>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                transportFactory =>
+                    transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
+            )
                 .Returns<EndPoint, CancellationToken>(
                     (e, token) =>
                     {
                         var mockTransport = new Mock<IConnectionListener>();
                         mockTransport.Setup(
-                                transport => transport.AcceptAsync(It.IsAny<CancellationToken>())
-                            )
+                            transport => transport.AcceptAsync(It.IsAny<CancellationToken>())
+                        )
                             .Returns(new ValueTask<ConnectionContext>(result: null));
                         mockTransport.Setup(transport => transport.EndPoint).Returns(e);
 
@@ -708,7 +699,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 );
             }
 
-            currentConfig = new ConfigurationBuilder().AddInMemoryCollection(
+            currentConfig = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:A:Url", "http://*:5000"),
@@ -773,7 +765,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 }
             }
 
-            currentConfig = new ConfigurationBuilder().AddInMemoryCollection(
+            currentConfig = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:A:Url", "http://*:5000"),
@@ -861,7 +854,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task DoesNotReloadOnConfigurationChangeByDefault()
         {
-            var currentConfig = new ConfigurationBuilder().AddInMemoryCollection(
+            var currentConfig = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:A:Url", "http://*:5000"),
@@ -894,19 +888,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var mockTransports = new List<Mock<IConnectionListener>>();
             var mockTransportFactory = new Mock<IConnectionListenerFactory>();
             mockTransportFactory.Setup(
-                    transportFactory =>
-                        transportFactory.BindAsync(
-                            It.IsAny<EndPoint>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                transportFactory =>
+                    transportFactory.BindAsync(It.IsAny<EndPoint>(), It.IsAny<CancellationToken>())
+            )
                 .Returns<EndPoint, CancellationToken>(
                     (e, token) =>
                     {
                         var mockTransport = new Mock<IConnectionListener>();
                         mockTransport.Setup(
-                                transport => transport.AcceptAsync(It.IsAny<CancellationToken>())
-                            )
+                            transport => transport.AcceptAsync(It.IsAny<CancellationToken>())
+                        )
                             .Returns(new ValueTask<ConnectionContext>(result: null));
                         mockTransport.Setup(transport => transport.EndPoint).Returns(e);
 
@@ -972,9 +963,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         private static void StartDummyApplication(IServer server)
         {
             server.StartAsync(
-                    new DummyApplication(context => Task.CompletedTask),
-                    CancellationToken.None
-                )
+                new DummyApplication(context => Task.CompletedTask),
+                CancellationToken.None
+            )
                 .GetAwaiter()
                 .GetResult();
         }

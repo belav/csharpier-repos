@@ -53,7 +53,8 @@ public class Test
         if (result != 100)
             return -result;
 
-        return (int)typeof(Test).GetMethod("TestMethod")
+        return (int)typeof(Test)
+            .GetMethod("TestMethod")
             .Invoke(null, new object[] { hfaStruct, intStruct });
     }
 }

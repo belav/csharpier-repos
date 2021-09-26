@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 // happens to capture one of the method's type parameters.
                 var bindingMap = GetSemanticMap(cancellationToken);
                 if (
-                    bindingMap.AllReferencedSymbols.OfType<ITypeParameterSymbol>()
+                    bindingMap.AllReferencedSymbols
+                        .OfType<ITypeParameterSymbol>()
                         .Where(tp => tp.TypeParameterKind == TypeParameterKind.Method)
                         .Any()
                 )

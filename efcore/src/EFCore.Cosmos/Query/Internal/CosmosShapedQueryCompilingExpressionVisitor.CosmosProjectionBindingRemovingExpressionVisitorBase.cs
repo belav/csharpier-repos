@@ -28,28 +28,30 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             : ExpressionVisitor
         {
             private static readonly MethodInfo _getItemMethodInfo =
-                typeof(JObject).GetRuntimeProperties()
+                typeof(JObject)
+                    .GetRuntimeProperties()
                     .Single(
                         pi =>
                             pi.Name == "Item"
                             && pi.GetIndexParameters()[0].ParameterType == typeof(string)
                     ).GetMethod;
 
-            private static readonly PropertyInfo _jTokenTypePropertyInfo =
-                typeof(JToken).GetRuntimeProperties().Single(mi => mi.Name == nameof(JToken.Type));
+            private static readonly PropertyInfo _jTokenTypePropertyInfo = typeof(JToken)
+                .GetRuntimeProperties()
+                .Single(mi => mi.Name == nameof(JToken.Type));
 
-            private static readonly MethodInfo _jTokenToObjectMethodInfo =
-                typeof(JToken).GetRuntimeMethods()
-                    .Single(
-                        mi => mi.Name == nameof(JToken.ToObject) && mi.GetParameters().Length == 0
-                    );
+            private static readonly MethodInfo _jTokenToObjectMethodInfo = typeof(JToken)
+                .GetRuntimeMethods()
+                .Single(mi => mi.Name == nameof(JToken.ToObject) && mi.GetParameters().Length == 0);
 
             private static readonly MethodInfo _collectionAccessorAddMethodInfo =
-                typeof(IClrCollectionAccessor).GetTypeInfo()
+                typeof(IClrCollectionAccessor)
+                    .GetTypeInfo()
                     .GetDeclaredMethod(nameof(IClrCollectionAccessor.Add));
 
             private static readonly MethodInfo _collectionAccessorGetOrCreateMethodInfo =
-                typeof(IClrCollectionAccessor).GetTypeInfo()
+                typeof(IClrCollectionAccessor)
+                    .GetTypeInfo()
                     .GetDeclaredMethod(nameof(IClrCollectionAccessor.GetOrCreate));
 
             private readonly ParameterExpression _jObjectParameter;
@@ -74,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             private List<IncludeExpression> _pendingIncludes = new();
 
             private static readonly MethodInfo _toObjectMethodInfo =
-                typeof(CosmosProjectionBindingRemovingExpressionVisitorBase).GetRuntimeMethods()
+                typeof(CosmosProjectionBindingRemovingExpressionVisitorBase)
+                    .GetRuntimeMethods()
                     .Single(mi => mi.Name == nameof(SafeToObject));
 
             public CosmosProjectionBindingRemovingExpressionVisitorBase(
@@ -374,10 +377,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         innerShaper = AddIncludes(innerShaper);
 
                         var entities = Expression.Call(
-                            EnumerableMethods.SelectWithOrdinal.MakeGenericMethod(
-                                typeof(JObject),
-                                innerShaper.Type
-                            ),
+                            EnumerableMethods.SelectWithOrdinal
+                                .MakeGenericMethod(typeof(JObject), innerShaper.Type),
                             Expression.Call(
                                 EnumerableMethods.Cast.MakeGenericMethod(typeof(JObject)),
                                 jArray
@@ -495,9 +496,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     : (Expression)Expression.Constant(null, typeof(InternalEntityEntry));
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
-                var concreteEntityTypeVariable = shaperBlock.Variables.Single(
-                    v => v.Type == typeof(IEntityType)
-                );
+                var concreteEntityTypeVariable = shaperBlock.Variables
+                    .Single(v => v.Type == typeof(IEntityType));
                 var inverseNavigation = navigation.Inverse;
                 var fixup = GenerateFixup(
                     includingClrType,
@@ -531,7 +531,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             }
 
             private static readonly MethodInfo _includeReferenceMethodInfo =
-                typeof(CosmosProjectionBindingRemovingExpressionVisitorBase).GetTypeInfo()
+                typeof(CosmosProjectionBindingRemovingExpressionVisitorBase)
+                    .GetTypeInfo()
                     .GetDeclaredMethod(nameof(IncludeReference));
 
             private static void IncludeReference<TIncludingEntity, TIncludedEntity>(
@@ -576,7 +577,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             }
 
             private static readonly MethodInfo _includeCollectionMethodInfo =
-                typeof(CosmosProjectionBindingRemovingExpressionVisitorBase).GetTypeInfo()
+                typeof(CosmosProjectionBindingRemovingExpressionVisitorBase)
+                    .GetTypeInfo()
                     .GetDeclaredMethod(nameof(IncludeCollection));
 
             private static void IncludeCollection<TIncludingEntity, TIncludedEntity>(
@@ -682,10 +684,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 }
 
                 return Expression.Lambda(
-                        Expression.Block(typeof(void), expressions),
-                        entityParameter,
-                        relatedEntityParameter
-                    )
+                    Expression.Block(typeof(void), expressions),
+                    entityParameter,
+                    relatedEntityParameter
+                )
                     .Compile();
             }
 
@@ -706,9 +708,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 );
 
                 return Expression.Lambda(
-                        Expression.Block(typeof(void), getOrCreateExpression),
-                        entityParameter
-                    )
+                    Expression.Block(typeof(void), getOrCreateExpression),
+                    entityParameter
+                )
                     .Compile();
             }
 
@@ -718,8 +720,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 INavigation navigation
             ) =>
                 entity.MakeMemberAccess(
-                        navigation.GetMemberInfo(forMaterialization: true, forSet: true)
-                    )
+                    navigation.GetMemberInfo(forMaterialization: true, forSet: true)
+                )
                     .Assign(relatedEntity);
 
             private static Expression AddToCollectionNavigation(
@@ -736,7 +738,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 );
 
             private static readonly MethodInfo _populateCollectionMethodInfo =
-                typeof(CosmosProjectionBindingRemovingExpressionVisitorBase).GetTypeInfo()
+                typeof(CosmosProjectionBindingRemovingExpressionVisitorBase)
+                    .GetTypeInfo()
                     .GetDeclaredMethod(nameof(PopulateCollection));
 
             private static TCollection PopulateCollection<TEntity, TCollection>(
@@ -806,9 +809,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             if (_ownerMappings.TryGetValue(jObjectExpression, out var ownerInfo))
                             {
                                 Check.DebugAssert(
-                                    principalProperty.DeclaringEntityType.IsAssignableFrom(
-                                        ownerInfo.EntityType
-                                    ),
+                                    principalProperty.DeclaringEntityType
+                                        .IsAssignableFrom(ownerInfo.EntityType),
                                     $"{principalProperty.DeclaringEntityType} is not assignable from {ownerInfo.EntityType}"
                                 );
 

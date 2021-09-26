@@ -107,10 +107,10 @@ namespace Microsoft.DotNet.Build.Tasks
             if (!PermitDllAndExeFilesLackingFileVersion)
             {
                 var versionlessFiles = fileVersions.Where(
-                        p =>
-                            p.Key.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)
-                            || p.Key.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
-                    )
+                    p =>
+                        p.Key.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)
+                        || p.Key.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
+                )
                     .Where(p => (p.Value.FileVersion ?? ZeroVersion) == ZeroVersion)
                     .Select(p => p.Value.File.ItemSpec)
                     .ToArray();

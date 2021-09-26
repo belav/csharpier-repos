@@ -318,14 +318,16 @@ namespace Microsoft.AspNetCore
             GetTestDataValue("AspNetCoreTargetingPackDependencies");
 
         public static bool VerifyAncmBinary() =>
-            string.Equals(
-                GetTestDataValue("VerifyAncmBinary"),
-                "true",
-                StringComparison.OrdinalIgnoreCase
-            );
+            string
+                .Equals(
+                    GetTestDataValue("VerifyAncmBinary"),
+                    "true",
+                    StringComparison.OrdinalIgnoreCase
+                );
 
         public static string GetTestDataValue(string key) =>
-            typeof(TestData).Assembly.GetCustomAttributes<TestDataAttribute>()
+            typeof(TestData).Assembly
+                .GetCustomAttributes<TestDataAttribute>()
                 .Single(d => d.Key == key).Value;
     }
 }

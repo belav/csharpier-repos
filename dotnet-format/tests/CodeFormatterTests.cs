@@ -239,10 +239,11 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
                 expectedFileCount: 0
             );
 
-            var pattern = string.Format(
-                Resources.Could_not_format_0_Format_currently_supports_only_CSharp_and_Visual_Basic_projects,
-                "(.*)"
-            );
+            var pattern = string
+                .Format(
+                    Resources.Could_not_format_0_Format_currently_supports_only_CSharp_and_Visual_Basic_projects,
+                    "(.*)"
+                );
             var match = new Regex(pattern, RegexOptions.Multiline).Match(log);
 
             Assert.True(match.Success, log);
@@ -334,9 +335,9 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
             );
 
             var formatLocations = log.Split(
-                    Environment.NewLine,
-                    StringSplitOptions.RemoveEmptyEntries
-                )
+                Environment.NewLine,
+                StringSplitOptions.RemoveEmptyEntries
+            )
                 .Where(line => FindFormattingLogLine.Match(line).Success)
                 .ToArray();
 
@@ -358,7 +359,9 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
                 @"Program.cs(11,3): Fix whitespace formatting.",
                 @"other_items\OtherClass.cs(12,2): Add final newline.",
                 @"Program.cs(12,2): Add final newline.",
-            }.Select(path => path.Replace('\\', Path.DirectorySeparatorChar)).ToArray();
+            }
+                .Select(path => path.Replace('\\', Path.DirectorySeparatorChar))
+                .ToArray();
 
             // We can't assert the location of the format message because different platform
             // line endings change the position in the file.
@@ -389,9 +392,9 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
             );
 
             var formatLocations = log.Split(
-                    Environment.NewLine,
-                    StringSplitOptions.RemoveEmptyEntries
-                )
+                Environment.NewLine,
+                StringSplitOptions.RemoveEmptyEntries
+            )
                 .Where(line => FindFormattingLogLine.Match(line).Success);
 
             Assert.Empty(formatLocations);

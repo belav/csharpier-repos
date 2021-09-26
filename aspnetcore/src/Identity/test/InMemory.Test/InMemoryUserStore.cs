@@ -51,14 +51,15 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         {
             foreach (var claim in claims)
             {
-                user.Claims.Add(
-                    new PocoUserClaim
-                    {
-                        ClaimType = claim.Type,
-                        ClaimValue = claim.Value,
-                        UserId = user.Id
-                    }
-                );
+                user.Claims
+                    .Add(
+                        new PocoUserClaim
+                        {
+                            ClaimType = claim.Type,
+                            ClaimValue = claim.Value,
+                            UserId = user.Id
+                        }
+                    );
             }
             return Task.FromResult(0);
         }
@@ -70,9 +71,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             CancellationToken cancellationToken = default(CancellationToken)
         )
         {
-            var matchedClaims = user.Claims.Where(
-                    uc => uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type
-                )
+            var matchedClaims = user.Claims
+                .Where(uc => uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type)
                 .ToList();
             foreach (var matchedClaim in matchedClaims)
             {
@@ -90,12 +90,13 @@ namespace Microsoft.AspNetCore.Identity.InMemory
         {
             foreach (var claim in claims)
             {
-                var entity = user.Claims.FirstOrDefault(
-                    uc =>
-                        uc.UserId == user.Id
-                        && uc.ClaimType == claim.Type
-                        && uc.ClaimValue == claim.Value
-                );
+                var entity = user.Claims
+                    .FirstOrDefault(
+                        uc =>
+                            uc.UserId == user.Id
+                            && uc.ClaimType == claim.Type
+                            && uc.ClaimValue == claim.Value
+                    );
                 if (entity != null)
                 {
                     user.Claims.Remove(entity);
@@ -239,15 +240,16 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             CancellationToken cancellationToken = default(CancellationToken)
         )
         {
-            user.Logins.Add(
-                new PocoUserLogin
-                {
-                    UserId = user.Id,
-                    ProviderKey = login.ProviderKey,
-                    LoginProvider = login.LoginProvider,
-                    ProviderDisplayName = login.ProviderDisplayName
-                }
-            );
+            user.Logins
+                .Add(
+                    new PocoUserLogin
+                    {
+                        UserId = user.Id,
+                        ProviderKey = login.ProviderKey,
+                        LoginProvider = login.LoginProvider,
+                        ProviderDisplayName = login.ProviderDisplayName
+                    }
+                );
             _logins[GetLoginKey(login.LoginProvider, login.ProviderKey)] = user;
             return Task.FromResult(0);
         }
@@ -259,12 +261,13 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             CancellationToken cancellationToken = default(CancellationToken)
         )
         {
-            var loginEntity = user.Logins.SingleOrDefault(
-                l =>
-                    l.ProviderKey == providerKey
-                    && l.LoginProvider == loginProvider
-                    && l.UserId == user.Id
-            );
+            var loginEntity = user.Logins
+                .SingleOrDefault(
+                    l =>
+                        l.ProviderKey == providerKey
+                        && l.LoginProvider == loginProvider
+                        && l.UserId == user.Id
+                );
             if (loginEntity != null)
             {
                 user.Logins.Remove(loginEntity);
@@ -278,7 +281,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             CancellationToken cancellationToken = default(CancellationToken)
         )
         {
-            IList<UserLoginInfo> result = user.Logins.Select(
+            IList<UserLoginInfo> result = user.Logins
+                .Select(
                     l => new UserLoginInfo(l.LoginProvider, l.ProviderKey, l.ProviderDisplayName)
                 )
                 .ToList();
@@ -507,7 +511,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             var query =
                 from user in Users
                 where
-                    user.Claims.Where(x => x.ClaimType == claim.Type && x.ClaimValue == claim.Value)
+                    user.Claims
+                        .Where(x => x.ClaimType == claim.Type && x.ClaimValue == claim.Value)
                         .FirstOrDefault() != null
                 select user;
 
@@ -522,24 +527,29 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             CancellationToken cancellationToken
         )
         {
-            var tokenEntity = user.Tokens.SingleOrDefault(
-                l => l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
-            );
+            var tokenEntity = user.Tokens
+                .SingleOrDefault(
+                    l =>
+                        l.TokenName == name
+                        && l.LoginProvider == loginProvider
+                        && l.UserId == user.Id
+                );
             if (tokenEntity != null)
             {
                 tokenEntity.TokenValue = value;
             }
             else
             {
-                user.Tokens.Add(
-                    new PocoUserToken
-                    {
-                        UserId = user.Id,
-                        LoginProvider = loginProvider,
-                        TokenName = name,
-                        TokenValue = value
-                    }
-                );
+                user.Tokens
+                    .Add(
+                        new PocoUserToken
+                        {
+                            UserId = user.Id,
+                            LoginProvider = loginProvider,
+                            TokenName = name,
+                            TokenValue = value
+                        }
+                    );
             }
             return Task.FromResult(0);
         }
@@ -551,9 +561,13 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             CancellationToken cancellationToken
         )
         {
-            var tokenEntity = user.Tokens.SingleOrDefault(
-                l => l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
-            );
+            var tokenEntity = user.Tokens
+                .SingleOrDefault(
+                    l =>
+                        l.TokenName == name
+                        && l.LoginProvider == loginProvider
+                        && l.UserId == user.Id
+                );
             if (tokenEntity != null)
             {
                 user.Tokens.Remove(tokenEntity);
@@ -568,9 +582,13 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             CancellationToken cancellationToken
         )
         {
-            var tokenEntity = user.Tokens.SingleOrDefault(
-                l => l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
-            );
+            var tokenEntity = user.Tokens
+                .SingleOrDefault(
+                    l =>
+                        l.TokenName == name
+                        && l.LoginProvider == loginProvider
+                        && l.UserId == user.Id
+                );
             return Task.FromResult(tokenEntity?.TokenValue);
         }
 

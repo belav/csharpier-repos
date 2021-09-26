@@ -37,8 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     /// </summary>
     public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
     {
-        private static readonly PropertyInfo _cancellationTokenMemberInfo =
-            typeof(QueryContext).GetRequiredProperty(nameof(QueryContext.CancellationToken));
+        private static readonly PropertyInfo _cancellationTokenMemberInfo = typeof(QueryContext)
+            .GetRequiredProperty(nameof(QueryContext.CancellationToken));
 
         private readonly Expression _cancellationTokenParameter;
         private readonly EntityMaterializerInjectingExpressionVisitor _entityMaterializerInjectingExpressionVisitor;
@@ -116,9 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 _cancellationTokenParameter
                             )
                           : Expression.Call(
-                                EnumerableMethods.SingleWithoutPredicate.MakeGenericMethod(
-                                    serverEnumerable.Type.GetSequenceType()
-                                ),
+                                EnumerableMethods.SingleWithoutPredicate
+                                    .MakeGenericMethod(serverEnumerable.Type.GetSequenceType()),
                                 serverEnumerable
                             );
 
@@ -132,9 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 _cancellationTokenParameter
                             )
                           : Expression.Call(
-                                EnumerableMethods.SingleOrDefaultWithoutPredicate.MakeGenericMethod(
-                                    serverEnumerable.Type.GetSequenceType()
-                                ),
+                                EnumerableMethods.SingleOrDefaultWithoutPredicate
+                                    .MakeGenericMethod(serverEnumerable.Type.GetSequenceType()),
                                 serverEnumerable
                             );
                 }
@@ -144,12 +142,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         private static readonly MethodInfo _singleAsyncMethodInfo =
-            typeof(ShapedQueryCompilingExpressionVisitor).GetTypeInfo()
+            typeof(ShapedQueryCompilingExpressionVisitor)
+                .GetTypeInfo()
                 .GetDeclaredMethods(nameof(SingleAsync))
                 .Single(mi => mi.GetParameters().Length == 2);
 
         private static readonly MethodInfo _singleOrDefaultAsyncMethodInfo =
-            typeof(ShapedQueryCompilingExpressionVisitor).GetTypeInfo()
+            typeof(ShapedQueryCompilingExpressionVisitor)
+                .GetTypeInfo()
                 .GetDeclaredMethods(nameof(SingleOrDefaultAsync))
                 .Single(mi => mi.GetParameters().Length == 2);
 
@@ -330,31 +330,30 @@ namespace Microsoft.EntityFrameworkCore.Query
         private sealed class EntityMaterializerInjectingExpressionVisitor : ExpressionVisitor
         {
             private static readonly ConstructorInfo _materializationContextConstructor =
-                typeof(MaterializationContext).GetConstructors()
+                typeof(MaterializationContext)
+                    .GetConstructors()
                     .Single(ci => ci.GetParameters().Length == 2);
 
-            private static readonly ConstructorInfo _valueBufferConstructor =
-                typeof(ValueBuffer).GetTypeInfo()
-                    .DeclaredConstructors.Single(ci => ci.GetParameters().Length == 1);
+            private static readonly ConstructorInfo _valueBufferConstructor = typeof(ValueBuffer)
+                .GetTypeInfo()
+                .DeclaredConstructors.Single(ci => ci.GetParameters().Length == 1);
 
-            private static readonly PropertyInfo _dbContextMemberInfo =
-                typeof(QueryContext).GetRequiredProperty(nameof(QueryContext.Context));
+            private static readonly PropertyInfo _dbContextMemberInfo = typeof(QueryContext)
+                .GetRequiredProperty(nameof(QueryContext.Context));
 
-            private static readonly PropertyInfo _entityMemberInfo =
-                typeof(InternalEntityEntry).GetRequiredProperty(nameof(InternalEntityEntry.Entity));
+            private static readonly PropertyInfo _entityMemberInfo = typeof(InternalEntityEntry)
+                .GetRequiredProperty(nameof(InternalEntityEntry.Entity));
 
-            private static readonly PropertyInfo _entityTypeMemberInfo =
-                typeof(InternalEntityEntry).GetRequiredProperty(
-                    nameof(InternalEntityEntry.EntityType)
-                );
+            private static readonly PropertyInfo _entityTypeMemberInfo = typeof(InternalEntityEntry)
+                .GetRequiredProperty(nameof(InternalEntityEntry.EntityType));
 
-            private static readonly MethodInfo _tryGetEntryMethodInfo =
-                typeof(QueryContext).GetTypeInfo()
-                    .GetDeclaredMethods(nameof(QueryContext.TryGetEntry))
-                    .Single(mi => mi.GetParameters().Length == 4);
+            private static readonly MethodInfo _tryGetEntryMethodInfo = typeof(QueryContext)
+                .GetTypeInfo()
+                .GetDeclaredMethods(nameof(QueryContext.TryGetEntry))
+                .Single(mi => mi.GetParameters().Length == 4);
 
-            private static readonly MethodInfo _startTrackingMethodInfo =
-                typeof(QueryContext).GetRequiredMethod(
+            private static readonly MethodInfo _startTrackingMethodInfo = typeof(QueryContext)
+                .GetRequiredMethod(
                     nameof(QueryContext.StartTracking),
                     new[] { typeof(IEntityType), typeof(object), typeof(ValueBuffer) }
                 );
@@ -488,14 +487,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 Expression.Constant(primaryKey),
                                 Expression.NewArrayInit(
                                     typeof(object),
-                                    primaryKey.Properties.Select(
-                                        p =>
-                                            valueBufferExpression.CreateValueBufferReadValueExpression(
-                                                typeof(object),
-                                                p.GetIndex(),
-                                                p
-                                            )
-                                    )
+                                    primaryKey.Properties
+                                        .Select(
+                                            p =>
+                                                valueBufferExpression.CreateValueBufferReadValueExpression(
+                                                    typeof(object),
+                                                    p.GetIndex(),
+                                                    p
+                                                )
+                                        )
                                 ),
                                 Expression.Constant(!entityShaperExpression.IsNullable),
                                 hasNullKeyVariable
@@ -547,7 +547,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         expressions.Add(
                             Expression.IfThen(
-                                primaryKey.Properties.Select(
+                                primaryKey.Properties
+                                    .Select(
                                         p =>
                                             Expression.NotEqual(
                                                 valueBufferExpression.CreateValueBufferReadValueExpression(

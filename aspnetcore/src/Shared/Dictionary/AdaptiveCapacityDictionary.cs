@@ -339,10 +339,8 @@ namespace Microsoft.AspNetCore.Internal
                 return;
             }
 
-            ((ICollection<KeyValuePair<TKey, TValue>>)_dictionaryStorage!).CopyTo(
-                array,
-                arrayIndex
-            );
+            ((ICollection<KeyValuePair<TKey, TValue>>)_dictionaryStorage!)
+                .CopyTo(array, arrayIndex);
         }
 
         /// <inheritdoc />

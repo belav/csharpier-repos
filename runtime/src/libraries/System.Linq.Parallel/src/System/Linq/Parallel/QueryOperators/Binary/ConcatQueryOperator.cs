@@ -46,12 +46,10 @@ namespace System.Linq.Parallel
             Debug.Assert(secondChild != null, "second child data source cannot be null");
             _outputOrdered = LeftChild.OutputOrdered || RightChild.OutputOrdered;
 
-            _prematureMergeLeft = LeftChild.OrdinalIndexState.IsWorseThan(
-                OrdinalIndexState.Increasing
-            );
-            _prematureMergeRight = RightChild.OrdinalIndexState.IsWorseThan(
-                OrdinalIndexState.Increasing
-            );
+            _prematureMergeLeft = LeftChild.OrdinalIndexState
+                .IsWorseThan(OrdinalIndexState.Increasing);
+            _prematureMergeRight = RightChild.OrdinalIndexState
+                .IsWorseThan(OrdinalIndexState.Increasing);
 
             if (
                 (LeftChild.OrdinalIndexState == OrdinalIndexState.Indexable)
@@ -183,10 +181,8 @@ namespace System.Linq.Parallel
             int partitionCount = leftStreamInc.PartitionCount;
 
             // Generate the shared data.
-            IComparer<ConcatKey<TLeftKey, TRightKey>> comparer = ConcatKey<
-                TLeftKey,
-                TRightKey
-            >.MakeComparer(leftStreamInc.KeyComparer, rightStreamInc.KeyComparer);
+            IComparer<ConcatKey<TLeftKey, TRightKey>> comparer = ConcatKey<TLeftKey, TRightKey>
+                .MakeComparer(leftStreamInc.KeyComparer, rightStreamInc.KeyComparer);
             var outputStream = new PartitionedStream<TSource, ConcatKey<TLeftKey, TRightKey>>(
                 partitionCount,
                 comparer,

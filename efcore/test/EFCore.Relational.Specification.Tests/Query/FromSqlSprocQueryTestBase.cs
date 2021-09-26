@@ -120,7 +120,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             var query = context.Set<MostExpensiveProduct>()
                 .FromSqlRaw(TenMostExpensiveProductsSproc, GetTenMostExpensiveProductsParameters());
 
-            var actual = (async ? await query.ToListAsync() : query.ToList()).Select(
+            var actual = (async ? await query.ToListAsync() : query.ToList())
+                .Select(
                     mep =>
                         new MostExpensiveProduct
                         {
@@ -182,9 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             var query = context.Set<MostExpensiveProduct>()
                 .FromSqlRaw(TenMostExpensiveProductsSproc, GetTenMostExpensiveProductsParameters());
 
-            var actual = (async ? await query.ToListAsync() : query.ToList()).Where(
-                    mep => mep.TenMostExpensiveProducts.Contains("C")
-                )
+            var actual = (async ? await query.ToListAsync() : query.ToList())
+                .Where(mep => mep.TenMostExpensiveProducts.Contains("C"))
                 .OrderBy(mep => mep.UnitPrice)
                 .ToArray();
 
@@ -230,9 +230,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             var query = context.Set<CustomerOrderHistory>()
                 .FromSqlRaw(CustomerOrderHistorySproc, GetCustomerOrderHistorySprocParameters());
 
-            var actual = (async ? await query.ToListAsync() : query.ToList()).Where(
-                    coh => coh.ProductName.Contains("C")
-                )
+            var actual = (async ? await query.ToListAsync() : query.ToList())
+                .Where(coh => coh.ProductName.Contains("C"))
                 .OrderBy(coh => coh.Total)
                 .ToArray();
 
@@ -273,9 +272,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             var query = context.Set<MostExpensiveProduct>()
                 .FromSqlRaw(TenMostExpensiveProductsSproc, GetTenMostExpensiveProductsParameters());
 
-            var actual = (async ? await query.ToListAsync() : query.ToList()).OrderByDescending(
-                    mep => mep.UnitPrice
-                )
+            var actual = (async ? await query.ToListAsync() : query.ToList())
+                .OrderByDescending(mep => mep.UnitPrice)
                 .Take(2)
                 .ToArray();
 
@@ -400,7 +398,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 from b in results2
                 where a.TenMostExpensiveProducts == b.TenMostExpensiveProducts
                 select new { a, b }
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(10, actual.Length);
         }
@@ -455,7 +454,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 from p in results2
                 where mep.TenMostExpensiveProducts == p.ProductName
                 select new { mep, p }
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(10, actual.Length);
         }
@@ -511,7 +511,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 from mep in results2
                 where mep.TenMostExpensiveProducts == p.ProductName
                 select new { mep, p }
-            ).ToArray();
+            )
+                .ToArray();
 
             Assert.Equal(10, actual.Length);
         }

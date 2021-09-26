@@ -402,9 +402,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         continue;
                     }
 
-                    var binderFactory = this.DeclaringCompilation.GetBinderFactory(
-                        syntaxRef.SyntaxTree
-                    );
+                    var binderFactory = this.DeclaringCompilation
+                        .GetBinderFactory(syntaxRef.SyntaxTree);
                     Binder binder;
                     ImmutableArray<TypeParameterConstraintClause> constraints;
 
@@ -450,8 +449,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         (
                             otherPartialClauses ??= ArrayBuilder<
                                 ImmutableArray<TypeParameterConstraintClause>
-                            >.GetInstance()
-                        ).Add(constraints);
+                            >
+                                .GetInstance()
+                        )
+                            .Add(constraints);
                     }
                 }
 
@@ -519,9 +520,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         continue;
                     }
 
-                    var binderFactory = this.DeclaringCompilation.GetBinderFactory(
-                        syntaxRef.SyntaxTree
-                    );
+                    var binderFactory = this.DeclaringCompilation
+                        .GetBinderFactory(syntaxRef.SyntaxTree);
                     Binder binder;
                     ImmutableArray<TypeParameterConstraintClause> constraints;
 
@@ -569,8 +569,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         (
                             otherPartialClauses ??= ArrayBuilder<
                                 ImmutableArray<TypeParameterConstraintClause>
-                            >.GetInstance()
-                        ).Add(constraints);
+                            >
+                                .GetInstance()
+                        )
+                            .Add(constraints);
                     }
                 }
 
@@ -687,18 +689,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     for (int j = 0; j < originalConstraintTypes.Length; j++)
                     {
                         Debug.Assert(
-                            originalConstraintTypes[j].Equals(
-                                mergedConstraintTypes[j],
-                                TypeCompareKind.ObliviousNullableModifierMatchesAny
-                            )
+                            originalConstraintTypes[j]
+                                .Equals(
+                                    mergedConstraintTypes[j],
+                                    TypeCompareKind.ObliviousNullableModifierMatchesAny
+                                )
                         );
                     }
 #endif
                     if (builder == null)
                     {
-                        builder = ArrayBuilder<TypeParameterConstraintClause>.GetInstance(
-                            constraintClauses.Length
-                        );
+                        builder = ArrayBuilder<TypeParameterConstraintClause>
+                            .GetInstance(constraintClauses.Length);
                         builder.AddRange(constraintClauses);
                     }
 
@@ -782,9 +784,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // Mismatch with oblivious, merge
                         if (mergedConstraintTypes == null)
                         {
-                            mergedConstraintTypes = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                                originalConstraintTypes.Length
-                            );
+                            mergedConstraintTypes = ArrayBuilder<TypeWithAnnotations>
+                                .GetInstance(originalConstraintTypes.Length);
                             mergedConstraintTypes.AddRange(originalConstraintTypes);
                         }
 
@@ -900,9 +901,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     if (builder == null)
                     {
-                        builder = ArrayBuilder<TypeParameterConstraintClause>.GetInstance(
-                            constraintClauses.Length
-                        );
+                        builder = ArrayBuilder<TypeParameterConstraintClause>
+                            .GetInstance(constraintClauses.Length);
                         builder.AddRange(constraintClauses);
                     }
 
@@ -1168,11 +1168,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                boundAttribute = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    out hasAnyDiagnostics
-                );
+                boundAttribute = arguments.Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        out hasAnyDiagnostics
+                    );
                 if (!boundAttribute.HasErrors)
                 {
                     arguments.GetOrCreateData<CommonTypeEarlyWellKnownAttributeData>().HasComImportAttribute =
@@ -1194,11 +1195,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                boundAttribute = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    out hasAnyDiagnostics
-                );
+                boundAttribute = arguments.Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        out hasAnyDiagnostics
+                    );
                 if (!boundAttribute.HasErrors)
                 {
                     arguments.GetOrCreateData<CommonTypeEarlyWellKnownAttributeData>().HasCodeAnalysisEmbeddedAttribute =
@@ -1220,11 +1222,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                boundAttribute = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    out hasAnyDiagnostics
-                );
+                boundAttribute = arguments.Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        out hasAnyDiagnostics
+                    );
                 if (!boundAttribute.HasErrors)
                 {
                     string name = boundAttribute.GetConstructorArgument<string>(
@@ -1268,11 +1271,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                boundAttribute = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    out hasAnyDiagnostics
-                );
+                boundAttribute = arguments.Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        out hasAnyDiagnostics
+                    );
                 if (!boundAttribute.HasErrors)
                 {
                     AttributeUsageInfo info = this.DecodeAttributeUsageAttribute(
@@ -1560,7 +1564,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var syntaxTree = list.Node.SyntaxTree;
                 QuickAttributeChecker checker =
-                    this.DeclaringCompilation.GetBinderFactory(list.Node.SyntaxTree)
+                    this.DeclaringCompilation
+                        .GetBinderFactory(list.Node.SyntaxTree)
                         .GetBinder(list.Node).QuickAttributeChecker;
 
                 foreach (AttributeListSyntax attrList in list)
@@ -2002,13 +2007,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
 
-            base.PostDecodeWellKnownAttributes(
-                boundAttributes,
-                allAttributeSyntaxNodes,
-                diagnostics,
-                symbolPart,
-                decodedData
-            );
+            base
+                .PostDecodeWellKnownAttributes(
+                    boundAttributes,
+                    allAttributeSyntaxNodes,
+                    diagnostics,
+                    symbolPart,
+                    decodedData
+                );
         }
 
         /// <remarks>

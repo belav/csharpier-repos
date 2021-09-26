@@ -210,7 +210,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160c4"
                 + "96726216e986869eed578bda652855c85604a056201538ee56b6c4302b06092a864886f70d010701301406082a864886f70d"
                 + "030704083adadf63cd297a86800835edc437e31d0b70"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -247,7 +248,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160c4"
                 + "96726216e986869eed578bda652855c85604a056201538ee56b6c4302b06092a864886f70d010701301406082a864886f70d"
                 + "030704083adadf63cd297a86800835edc437e31d0b70"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -299,12 +301,13 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "2deea8d92b069486a41c7c4fc3cd0174a918a559f79319039b40ae797bcacc909c361275ee2a5b1f0ff09fb5c19508e3f5ac"
                 + "051ac0f03603c27fb8993d49ac428f8bcfc23a90ef9b0fac0f423a302b06092a864886f70d010701301406082a864886f70d"
                 + "0307040828dc4d72ca3132e48008546cc90f2c5d4b79"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 cer =
-                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cer = Certificates.RSAKeyTransfer1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 if (cer == null)
@@ -351,12 +354,13 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "2deea8d92b069486a41c7c4fc3cd0174a918a559f79319039b40ae797bcacc909c361275ee2a5b1f0ff09fb5c19508e3f5ac"
                 + "051ac0f03603c27fb8993d49ac428f8bcfc23a90ef9b0fac0f423a302b06092a864886f70d010701301406082a864886f70d"
                 + "0307040828dc4d72ca3132e48008546cc90f2c5d4b79"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 cer =
-                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cer = Certificates.RSAKeyTransfer1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 if (cer == null)
@@ -406,22 +410,23 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "d9672a9f8ef9426326cccaaf5954f2ae657f8c7b13aef2f811adb4954323aa8319a1e8f2ad4e5c96c1d3fbe413ae479e471b"
                 + "b701cbdfa145c9b64f5e1f69f472804995d56c31351553f779cf8efec237303c06092a864886f70d010701301d0609608648"
                 + "01650304012a041023a114c149d7d4017ce2f5ec7c5d53f980104e50ab3c15533743dd054ef3ff8b9d83"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 cert1 =
-                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert1 = Certificates.RSAKeyTransfer1
+                    .TryGetCertificateWithPrivateKey()
             )
             using (
-                X509Certificate2 cert2 =
-                    Certificates.RSAKeyTransfer2.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert2 = Certificates.RSAKeyTransfer2
+                    .TryGetCertificateWithPrivateKey()
             )
             using (
-                X509Certificate2 cert3 =
-                    Certificates.RSAKeyTransfer3.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert3 = Certificates.RSAKeyTransfer3
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 if (cert1 == null || cert2 == null || cert3 == null)
@@ -470,7 +475,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "DA1C38478C400261C734D6789C4197C20143C4312CEAA99ECB1849718326D4FC3B7FBB2D1D23281E31584A63E99F2C17"
                 + "132BCD8EDDB632967125CD0A4BAA1EFA8CE4C855F7C093339211BDF990CEF5CCE6CD74302106092A864886F70D010701"
                 + "301406082A864886F70D03070408779B3DE045826B18"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encoded);
             using (X509Certificate2 cert = Certificates.RSAKeyTransfer1.GetCertificate())

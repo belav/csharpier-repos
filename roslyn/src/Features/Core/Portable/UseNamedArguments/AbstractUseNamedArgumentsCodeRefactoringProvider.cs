@@ -39,9 +39,9 @@ namespace Microsoft.CodeAnalysis.UseNamedArguments
                 var (document, textSpan, cancellationToken) = context;
 
                 var potentialArguments = await document.GetRelevantNodesAsync<TBaseArgumentSyntax>(
-                        textSpan,
-                        cancellationToken
-                    )
+                    textSpan,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var argument =
                     potentialArguments.FirstOrDefault(n => n?.Parent is TArgumentListSyntax)
@@ -143,10 +143,11 @@ namespace Microsoft.CodeAnalysis.UseNamedArguments
 
                     context.RegisterRefactoring(
                         new MyCodeAction(
-                            string.Format(
-                                FeaturesResources.Add_argument_name_0_including_trailing_arguments,
-                                argumentName
-                            ),
+                            string
+                                .Format(
+                                    FeaturesResources.Add_argument_name_0_including_trailing_arguments,
+                                    argumentName
+                                ),
                             c =>
                                 AddNamedArgumentsAsync(
                                     root,
@@ -212,7 +213,7 @@ namespace Microsoft.CodeAnalysis.UseNamedArguments
                     (argument, i) =>
                         ShouldAddName(argument, i)
                             ? WithName((TSimpleArgumentSyntax)argument, parameters[i].Name)
-                                  .WithTriviaFrom(argument)
+                              .WithTriviaFrom(argument)
                             : argument
                 );
 

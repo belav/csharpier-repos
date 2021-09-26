@@ -295,8 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return _namespacesToMerge.SelectMany(
-                        namespaceSymbol => namespaceSymbol.DeclaringSyntaxReferences
-                    )
+                    namespaceSymbol => namespaceSymbol.DeclaringSyntaxReferences
+                )
                     .AsImmutable();
             }
         }

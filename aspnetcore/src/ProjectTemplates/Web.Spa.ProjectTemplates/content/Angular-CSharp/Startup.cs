@@ -47,8 +47,8 @@ namespace Company.WebApplication1
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(
-                    options => options.SignIn.RequireConfirmedAccount = true
-                )
+                options => options.SignIn.RequireConfirmedAccount = true
+            )
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()

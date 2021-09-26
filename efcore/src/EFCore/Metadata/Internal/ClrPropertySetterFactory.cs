@@ -73,10 +73,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             var setter = Expression.Lambda<Action<TEntity, TValue>>(
-                    writeExpression,
-                    entityParameter,
-                    valueParameter
-                )
+                writeExpression,
+                entityParameter,
+                valueParameter
+            )
                 .Compile();
 
             var propertyType = propertyBase?.ClrType ?? memberInfo.GetMemberType();

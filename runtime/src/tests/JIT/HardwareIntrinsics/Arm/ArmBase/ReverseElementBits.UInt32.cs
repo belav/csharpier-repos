@@ -120,10 +120,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(ArmBase).GetMethod(
-                    nameof(ArmBase.ReverseElementBits),
-                    new Type[] { typeof(UInt32) }
-                )
+            var result = typeof(ArmBase)
+                .GetMethod(nameof(ArmBase.ReverseElementBits), new Type[] { typeof(UInt32) })
                 .Invoke(
                     null,
                     new object[]
@@ -223,9 +221,10 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(ArmBase)}.{nameof(ArmBase.ReverseElementBits)}<UInt32>(UInt32): ReverseElementBits failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(ArmBase)}.{nameof(ArmBase.ReverseElementBits)}<UInt32>(UInt32): ReverseElementBits failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

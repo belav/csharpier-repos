@@ -451,12 +451,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
 
             var cmw = new BlobBuilder();
 
-            new EditAndContinueMethodDebugInformation(
-                123,
-                slots,
-                closures,
-                lambdas
-            ).SerializeLocalSlots(cmw);
+            new EditAndContinueMethodDebugInformation(123, slots, closures, lambdas)
+                .SerializeLocalSlots(cmw);
 
             var bytes = cmw.ToImmutableArray();
             AssertEx.Equal(
@@ -508,12 +504,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
 
             var cmw = new BlobBuilder();
 
-            new EditAndContinueMethodDebugInformation(
-                0x7b,
-                slots,
-                closures,
-                lambdas
-            ).SerializeLambdaMap(cmw);
+            new EditAndContinueMethodDebugInformation(0x7b, slots, closures, lambdas)
+                .SerializeLambdaMap(cmw);
 
             var bytes = cmw.ToImmutableArray();
 
@@ -561,12 +553,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
 
             var cmw = new BlobBuilder();
 
-            new EditAndContinueMethodDebugInformation(
-                -1,
-                slots,
-                closures,
-                lambdas
-            ).SerializeLambdaMap(cmw);
+            new EditAndContinueMethodDebugInformation(-1, slots, closures, lambdas)
+                .SerializeLambdaMap(cmw);
 
             var bytes = cmw.ToImmutableArray();
 
@@ -592,12 +580,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
 
             var cmw = new BlobBuilder();
 
-            new EditAndContinueMethodDebugInformation(
-                10,
-                slots,
-                closures,
-                lambdas
-            ).SerializeLambdaMap(cmw);
+            new EditAndContinueMethodDebugInformation(10, slots, closures, lambdas)
+                .SerializeLambdaMap(cmw);
 
             var bytes = cmw.ToImmutableArray();
 

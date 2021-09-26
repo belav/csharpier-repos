@@ -42,12 +42,13 @@ namespace Castle.Components.DictionaryAdapter
             {
                 if (CanValidate && validators != null)
                 {
-                    return string.Join(
-                        Environment.NewLine,
-                        validators.Select(v => v.Validate(this))
-                            .Where(e => !string.IsNullOrEmpty(e))
-                            .ToArray()
-                    );
+                    return string
+                        .Join(
+                            Environment.NewLine,
+                            validators.Select(v => v.Validate(this))
+                                .Where(e => !string.IsNullOrEmpty(e))
+                                .ToArray()
+                        );
                 }
                 return string.Empty;
             }
@@ -62,12 +63,13 @@ namespace Castle.Components.DictionaryAdapter
                     PropertyDescriptor property;
                     if (This.Properties.TryGetValue(columnName, out property))
                     {
-                        return string.Join(
-                            Environment.NewLine,
-                            validators.Select(v => v.Validate(this, property))
-                                .Where(e => !string.IsNullOrEmpty(e))
-                                .ToArray()
-                        );
+                        return string
+                            .Join(
+                                Environment.NewLine,
+                                validators.Select(v => v.Validate(this, property))
+                                    .Where(e => !string.IsNullOrEmpty(e))
+                                    .ToArray()
+                            );
                     }
                 }
                 return string.Empty;

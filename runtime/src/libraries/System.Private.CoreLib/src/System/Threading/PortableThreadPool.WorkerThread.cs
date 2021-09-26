@@ -27,9 +27,11 @@ namespace System.Threading
                 {
                     if (NativeRuntimeEventSource.Log.IsEnabled())
                     {
-                        NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadWait(
-                            (uint)ThreadPoolInstance._separated.counts.VolatileRead().NumExistingThreads
-                        );
+                        NativeRuntimeEventSource.Log
+                            .ThreadPoolWorkerThreadWait(
+                                (uint)ThreadPoolInstance._separated.counts
+                                    .VolatileRead().NumExistingThreads
+                            );
                     }
                 }
             );
@@ -44,9 +46,11 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadStart(
-                        (uint)threadPoolInstance._separated.counts.VolatileRead().NumExistingThreads
-                    );
+                    NativeRuntimeEventSource.Log
+                        .ThreadPoolWorkerThreadStart(
+                            (uint)threadPoolInstance._separated.counts
+                                .VolatileRead().NumExistingThreads
+                        );
                 }
 
                 LowLevelLock hillClimbingThreadAdjustmentLock =
@@ -135,23 +139,20 @@ namespace System.Threading
                             );
                             newCounts.NumThreadsGoal = newNumThreadsGoal;
 
-                            ThreadCounts oldCounts =
-                                threadPoolInstance._separated.counts.InterlockedCompareExchange(
-                                    newCounts,
-                                    counts
-                                );
+                            ThreadCounts oldCounts = threadPoolInstance._separated.counts
+                                .InterlockedCompareExchange(newCounts, counts);
                             if (oldCounts == counts)
                             {
-                                HillClimbing.ThreadPoolHillClimber.ForceChange(
-                                    newNumThreadsGoal,
-                                    HillClimbing.StateOrTransition.ThreadTimedOut
-                                );
+                                HillClimbing.ThreadPoolHillClimber
+                                    .ForceChange(
+                                        newNumThreadsGoal,
+                                        HillClimbing.StateOrTransition.ThreadTimedOut
+                                    );
 
                                 if (NativeRuntimeEventSource.Log.IsEnabled())
                                 {
-                                    NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadStop(
-                                        (uint)newNumExistingThreads
-                                    );
+                                    NativeRuntimeEventSource.Log
+                                        .ThreadPoolWorkerThreadStop((uint)newNumExistingThreads);
                                 }
                                 return;
                             }
@@ -177,11 +178,8 @@ namespace System.Threading
                 {
                     ThreadCounts newCounts = currentCounts;
                     newCounts.SubtractNumProcessingWork(1);
-                    ThreadCounts oldCounts =
-                        threadPoolInstance._separated.counts.InterlockedCompareExchange(
-                            newCounts,
-                            currentCounts
-                        );
+                    ThreadCounts oldCounts = threadPoolInstance._separated.counts
+                        .InterlockedCompareExchange(newCounts, currentCounts);
 
                     if (oldCounts == currentCounts)
                     {
@@ -223,11 +221,8 @@ namespace System.Threading
                     newCounts.NumProcessingWork = newNumProcessingWork;
                     newCounts.NumExistingThreads = newNumExistingThreads;
 
-                    ThreadCounts oldCounts =
-                        threadPoolInstance._separated.counts.InterlockedCompareExchange(
-                            newCounts,
-                            counts
-                        );
+                    ThreadCounts oldCounts = threadPoolInstance._separated.counts
+                        .InterlockedCompareExchange(newCounts, counts);
 
                     if (oldCounts == counts)
                     {
@@ -260,11 +255,8 @@ namespace System.Threading
                         newCounts.SubtractNumProcessingWork((short)toCreate);
                         newCounts.SubtractNumExistingThreads((short)toCreate);
 
-                        ThreadCounts oldCounts =
-                            threadPoolInstance._separated.counts.InterlockedCompareExchange(
-                                newCounts,
-                                counts
-                            );
+                        ThreadCounts oldCounts = threadPoolInstance._separated.counts
+                            .InterlockedCompareExchange(newCounts, counts);
                         if (oldCounts == counts)
                         {
                             break;
@@ -301,11 +293,8 @@ namespace System.Threading
                     ThreadCounts newCounts = counts;
                     newCounts.SubtractNumProcessingWork(1);
 
-                    ThreadCounts oldCounts =
-                        threadPoolInstance._separated.counts.InterlockedCompareExchange(
-                            newCounts,
-                            counts
-                        );
+                    ThreadCounts oldCounts = threadPoolInstance._separated.counts
+                        .InterlockedCompareExchange(newCounts, counts);
 
                     if (oldCounts == counts)
                     {

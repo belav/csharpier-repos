@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.DataProtection
         [Fact]
         public void AddsOptions()
         {
-            var services = new ServiceCollection().AddDataProtection()
+            var services = new ServiceCollection()
+                .AddDataProtection()
                 .Services.BuildServiceProvider();
 
             Assert.NotNull(services.GetService<IOptions<DataProtectionOptions>>());
@@ -23,11 +24,13 @@ namespace Microsoft.AspNetCore.DataProtection
         [Fact]
         public void DoesNotOverrideLogging()
         {
-            var services1 = new ServiceCollection().AddLogging()
+            var services1 = new ServiceCollection()
+                .AddLogging()
                 .AddDataProtection()
                 .Services.BuildServiceProvider();
 
-            var services2 = new ServiceCollection().AddDataProtection()
+            var services2 = new ServiceCollection()
+                .AddDataProtection()
                 .Services.AddLogging()
                 .BuildServiceProvider();
 

@@ -107,13 +107,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     length--;
                 }
 
-                reference.Parent.Children.Insert(
-                    start,
-                    new MarkupBlockIntermediateNode()
-                    {
-                        Content = rewriteVisitor.Builder.ToString(),
-                    }
-                );
+                reference.Parent.Children
+                    .Insert(
+                        start,
+                        new MarkupBlockIntermediateNode()
+                        {
+                            Content = rewriteVisitor.Builder.ToString(),
+                        }
+                    );
 
                 rewriteVisitor.Builder.Clear();
             }
@@ -173,11 +174,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     {
                         if (
                             ancestor is MarkupElementIntermediateNode element
-                            && string.Equals(
-                                "select",
-                                element.TagName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            && string
+                                .Equals(
+                                    "select",
+                                    element.TagName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             _foundNonHtml = true;

@@ -41,10 +41,11 @@ namespace Microsoft.CodeAnalysis.Tools
             var logWorkspaceWarnings = formatOptions.LogLevel == LogLevel.Trace;
 
             logger.LogInformation(
-                string.Format(
-                    Resources.Formatting_code_files_in_workspace_0,
-                    formatOptions.WorkspaceFilePath
-                )
+                string
+                    .Format(
+                        Resources.Formatting_code_files_in_workspace_0,
+                        formatOptions.WorkspaceFilePath
+                    )
             );
 
             logger.LogTrace(Resources.Loading_workspace);
@@ -58,15 +59,15 @@ namespace Microsoft.CodeAnalysis.Tools
                           formatOptions.FileMatcher
                       )
                     : await OpenMSBuildWorkspaceAsync(
-                              formatOptions.WorkspaceFilePath,
-                              formatOptions.WorkspaceType,
-                              formatOptions.NoRestore,
-                              formatOptions.FixCategory != FixCategory.Whitespace,
-                              binaryLogPath,
-                              logWorkspaceWarnings,
-                              logger,
-                              cancellationToken
-                          )
+                          formatOptions.WorkspaceFilePath,
+                          formatOptions.WorkspaceType,
+                          formatOptions.NoRestore,
+                          formatOptions.FixCategory != FixCategory.Whitespace,
+                          binaryLogPath,
+                          logWorkspaceWarnings,
+                          logger,
+                          cancellationToken
+                      )
                           .ConfigureAwait(false);
 
             if (workspace is null)
@@ -101,12 +102,12 @@ namespace Microsoft.CodeAnalysis.Tools
             logger.LogTrace(Resources.Determining_formattable_files);
 
             var (fileCount, formatableFiles) = await DetermineFormattableFilesAsync(
-                    solution,
-                    projectPath,
-                    formatOptions,
-                    logger,
-                    cancellationToken
-                )
+                solution,
+                projectPath,
+                formatOptions,
+                logger,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var determineFilesMS = workspaceStopwatch.ElapsedMilliseconds - loadWorkspaceMS;
@@ -116,13 +117,13 @@ namespace Microsoft.CodeAnalysis.Tools
 
             var formattedFiles = new List<FormattedFile>(fileCount);
             var formattedSolution = await RunCodeFormattersAsync(
-                    solution,
-                    formatableFiles,
-                    formatOptions,
-                    logger,
-                    formattedFiles,
-                    cancellationToken
-                )
+                solution,
+                formatableFiles,
+                formatOptions,
+                logger,
+                formattedFiles,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var formatterRanMS =
@@ -225,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Tools
                     continue;
                 }
 
-                formattedSolution = await s_codeFormatters[index].FormatAsync(
+                formattedSolution = await s_codeFormatters[index]
+                    .FormatAsync(
                         formattedSolution,
                         formattableDocuments,
                         formatOptions,
@@ -322,9 +324,9 @@ namespace Microsoft.CodeAnalysis.Tools
                     if (
                         !formatOptions.IncludeGeneratedFiles
                         && await GeneratedCodeUtilities.IsGeneratedCodeAsync(
-                                syntaxTree,
-                                cancellationToken
-                            )
+                            syntaxTree,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {
@@ -333,9 +335,8 @@ namespace Microsoft.CodeAnalysis.Tools
 
                     // Track files covered by an editorconfig separately from those not covered.
                     var analyzerConfigOptions =
-                        document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                            syntaxTree
-                        );
+                        document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider
+                            .GetOptions(syntaxTree);
                     if (analyzerConfigOptions != null)
                     {
                         if (

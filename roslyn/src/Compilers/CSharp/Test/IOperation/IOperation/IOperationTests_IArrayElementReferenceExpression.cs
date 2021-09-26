@@ -707,7 +707,9 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'c[0]')
             {
                 // CS0021: Cannot apply indexing with [] to an expression of type 'C'
                 //         var a = /*<bind>*/c[0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "c[0]").WithArguments("C").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "c[0]")
+                    .WithArguments("C")
+                    .WithLocation(6, 27)
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -1077,7 +1079,8 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
             {
                 // CS1742: An array access may not have a named argument specifier
                 //         var a = /*<bind>*/args[name: 0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NamedArgumentForArray, "args[name: 0]").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_NamedArgumentForArray, "args[name: 0]")
+                    .WithLocation(6, 27)
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(

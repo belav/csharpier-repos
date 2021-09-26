@@ -197,9 +197,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     {
                         var sourceGeneratedDocument =
                             await solution.GetSourceGeneratedDocumentAsync(
-                                    documentId,
-                                    cancellationToken
-                                )
+                                documentId,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         if (sourceGeneratedDocument != null)
                         {
@@ -238,33 +238,32 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             // run file IO on a background thread:
             var (matchingSourceText, pdbHasDocument) = await Task.Run(
-                    () =>
+                () =>
+                {
+                    var compilationOutputs = _debuggingSession.GetCompilationOutputs(
+                        document.Project
+                    );
+                    using var debugInfoReaderProvider = GetMethodDebugInfoReader(
+                        compilationOutputs,
+                        document.Project.Name
+                    );
+                    if (debugInfoReaderProvider == null)
                     {
-                        var compilationOutputs = _debuggingSession.GetCompilationOutputs(
-                            document.Project
-                        );
-                        using var debugInfoReaderProvider = GetMethodDebugInfoReader(
-                            compilationOutputs,
-                            document.Project.Name
-                        );
-                        if (debugInfoReaderProvider == null)
-                        {
-                            return (null, null);
-                        }
+                        return (null, null);
+                    }
 
-                        var debugInfoReader =
-                            debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
+                    var debugInfoReader =
+                        debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
 
-                        Contract.ThrowIfNull(document.FilePath);
-                        return TryGetPdbMatchingSourceText(
-                            debugInfoReader,
-                            document.FilePath,
-                            sourceText.Encoding
-                        );
-                    },
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+                    Contract.ThrowIfNull(document.FilePath);
+                    return TryGetPdbMatchingSourceText(
+                        debugInfoReader,
+                        document.FilePath,
+                        sourceText.Encoding
+                    );
+                },
+                cancellationToken
+            ).ConfigureAwait(false);
 
             lock (_guard)
             {
@@ -446,23 +445,25 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 if (debugInfoReaderProvider == null)
                 {
-                    EditAndContinueWorkspaceService.Log.Write(
-                        "Source file of project '{0}' doesn't match output PDB: PDB '{1}' not found",
-                        projectName,
-                        compilationOutputs.PdbDisplayPath
-                    );
+                    EditAndContinueWorkspaceService.Log
+                        .Write(
+                            "Source file of project '{0}' doesn't match output PDB: PDB '{1}' not found",
+                            projectName,
+                            compilationOutputs.PdbDisplayPath
+                        );
                 }
 
                 return debugInfoReaderProvider;
             }
             catch (Exception e)
             {
-                EditAndContinueWorkspaceService.Log.Write(
-                    "Source file of project '{0}' doesn't match output PDB: error opening PDB '{1}': {2}",
-                    projectName,
-                    compilationOutputs.PdbDisplayPath,
-                    e.Message
-                );
+                EditAndContinueWorkspaceService.Log
+                    .Write(
+                        "Source file of project '{0}' doesn't match output PDB: error opening PDB '{1}': {2}",
+                        projectName,
+                        compilationOutputs.PdbDisplayPath,
+                        e.Message
+                    );
                 return null;
             }
         }
@@ -517,19 +518,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return (sourceText, hasDocument);
                 }
 
-                EditAndContinueWorkspaceService.Log.Write(
-                    "Checksum differs for source file '{0}'",
-                    sourceFilePath
-                );
+                EditAndContinueWorkspaceService.Log
+                    .Write("Checksum differs for source file '{0}'", sourceFilePath);
                 return (Source: null, hasDocument);
             }
             catch (Exception e)
             {
-                EditAndContinueWorkspaceService.Log.Write(
-                    "Error calculating checksum for source file '{0}': '{1}'",
-                    sourceFilePath,
-                    e.Message
-                );
+                EditAndContinueWorkspaceService.Log
+                    .Write(
+                        "Error calculating checksum for source file '{0}': '{1}'",
+                        sourceFilePath,
+                        e.Message
+                    );
                 return (Source: null, HasDocument: null);
             }
         }
@@ -560,10 +560,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     )
                 )
                 {
-                    EditAndContinueWorkspaceService.Log.Write(
-                        "Source '{0}' doesn't match output PDB: no document",
-                        sourceFilePath
-                    );
+                    EditAndContinueWorkspaceService.Log
+                        .Write(
+                            "Source '{0}' doesn't match output PDB: no document",
+                            sourceFilePath
+                        );
                     return false;
                 }
 
@@ -571,21 +572,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 if (algorithm == SourceHashAlgorithm.None)
                 {
                     // This can only happen if the PDB was post-processed by a misbehaving tool.
-                    EditAndContinueWorkspaceService.Log.Write(
-                        "Source '{0}' doesn't match PDB: unknown checksum alg",
-                        sourceFilePath
-                    );
+                    EditAndContinueWorkspaceService.Log
+                        .Write(
+                            "Source '{0}' doesn't match PDB: unknown checksum alg",
+                            sourceFilePath
+                        );
                 }
 
                 return true;
             }
             catch (Exception e)
             {
-                EditAndContinueWorkspaceService.Log.Write(
-                    "Source '{0}' doesn't match output PDB: error reading symbols: {1}",
-                    sourceFilePath,
-                    e.Message
-                );
+                EditAndContinueWorkspaceService.Log
+                    .Write(
+                        "Source '{0}' doesn't match output PDB: error reading symbols: {1}",
+                        sourceFilePath,
+                        e.Message
+                    );
             }
 
             return null;

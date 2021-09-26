@@ -38,9 +38,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             var solutionCrawlerService = _workspace.Services.GetService<ISolutionCrawlerService>();
             if (solutionCrawlerService != null)
             {
-                var analyzer = ((IIncrementalAnalyzerProvider)this).CreateIncrementalAnalyzer(
-                    _workspace
-                )!;
+                var analyzer = ((IIncrementalAnalyzerProvider)this)
+                    .CreateIncrementalAnalyzer(_workspace)!;
                 solutionCrawlerService.Reanalyze(
                     _workspace,
                     analyzer,
@@ -57,8 +56,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             IUnitTestingIncrementalAnalyzerProviderImplementation provider
         )
         {
-            var solutionCrawlerRegistrationService =
-                workspace.Services.GetService<ISolutionCrawlerRegistrationService>();
+            var solutionCrawlerRegistrationService = workspace.Services
+                .GetService<ISolutionCrawlerRegistrationService>();
             if (solutionCrawlerRegistrationService == null)
             {
                 return null;

@@ -65,9 +65,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     accessTokenProvider: null
                 );
                 await webSocketsTransport.StartAsync(
-                        new Uri(server.WebSocketsUrl + "/echo"),
-                        TransferFormat.Binary
-                    )
+                    new Uri(server.WebSocketsUrl + "/echo"),
+                    TransferFormat.Binary
+                )
                     .DefaultTimeout();
                 await webSocketsTransport.StopAsync().DefaultTimeout();
                 await webSocketsTransport.Running.DefaultTimeout();
@@ -86,9 +86,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     accessTokenProvider: null
                 );
                 await webSocketsTransport.StartAsync(
-                        new Uri(server.WebSocketsUrl + "/httpheader"),
-                        TransferFormat.Binary
-                    )
+                    new Uri(server.WebSocketsUrl + "/httpheader"),
+                    TransferFormat.Binary
+                )
                     .DefaultTimeout();
 
                 await webSocketsTransport.Output.WriteAsync(Encoding.UTF8.GetBytes("User-Agent"));
@@ -101,8 +101,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var userAgent = Encoding.UTF8.GetString(result.Buffer.ToArray());
 
                 // user agent version should come from version embedded in assembly metadata
-                var assemblyVersion =
-                    typeof(Constants).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+                var assemblyVersion = typeof(Constants).Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
 
                 var majorVersion = typeof(HttpConnection).Assembly.GetName().Version.Major;
                 var minorVersion = typeof(HttpConnection).Assembly.GetName().Version.Minor;
@@ -126,14 +126,13 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     accessTokenProvider: null
                 );
                 await webSocketsTransport.StartAsync(
-                        new Uri(server.WebSocketsUrl + "/httpheader"),
-                        TransferFormat.Binary
-                    )
+                    new Uri(server.WebSocketsUrl + "/httpheader"),
+                    TransferFormat.Binary
+                )
                     .DefaultTimeout();
 
-                await webSocketsTransport.Output.WriteAsync(
-                    Encoding.UTF8.GetBytes(HeaderNames.XRequestedWith)
-                );
+                await webSocketsTransport.Output
+                    .WriteAsync(Encoding.UTF8.GetBytes(HeaderNames.XRequestedWith));
 
                 // The HTTP header endpoint closes the connection immediately after sending response which should stop the transport
                 await webSocketsTransport.Running.DefaultTimeout();
@@ -212,9 +211,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 );
 
                 await webSocketsTransport.StartAsync(
-                        new Uri(server.WebSocketsUrl + "/echo"),
-                        transferFormat
-                    )
+                    new Uri(server.WebSocketsUrl + "/echo"),
+                    transferFormat
+                )
                     .DefaultTimeout();
 
                 await webSocketsTransport.StopAsync().DefaultTimeout();

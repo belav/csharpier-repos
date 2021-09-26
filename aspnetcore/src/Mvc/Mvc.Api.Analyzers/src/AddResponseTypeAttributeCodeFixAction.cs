@@ -125,19 +125,16 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 );
             }
 
-            var apiConventionMethodAttribute = context.Method.GetAttributes(
-                    context.SymbolCache.ApiConventionMethodAttribute
-                )
+            var apiConventionMethodAttribute = context.Method
+                .GetAttributes(context.SymbolCache.ApiConventionMethodAttribute)
                 .FirstOrDefault();
 
             if (apiConventionMethodAttribute != null)
             {
                 // Remove [ApiConventionMethodAttribute] declared on the method since it's no longer required
-                var attributeSyntax =
-                    await apiConventionMethodAttribute.ApplicationSyntaxReference.GetSyntaxAsync(
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
+                var attributeSyntax = await apiConventionMethodAttribute.ApplicationSyntaxReference
+                    .GetSyntaxAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 documentEditor.RemoveNode(attributeSyntax);
             }
@@ -194,9 +191,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 throw new ArgumentNullException(nameof(semanticModel));
             }
 
-            var statusCodesType = semanticModel.Compilation.GetTypeByMetadataName(
-                ApiSymbolNames.HttpStatusCodes
-            );
+            var statusCodesType = semanticModel.Compilation
+                .GetTypeByMetadataName(ApiSymbolNames.HttpStatusCodes);
 
             if (statusCodesType == null)
             {
@@ -275,10 +271,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                         metadata,
                         result: out var declaredMetadata
                     )
-                    && SymbolEqualityComparer.Default.Equals(
-                        declaredMetadata.AttributeSource,
-                        context.Method
-                    )
+                    && SymbolEqualityComparer.Default
+                        .Equals(declaredMetadata.AttributeSource, context.Method)
                 )
                 {
                     // A ProducesResponseType attribute is declared on the method for the current status code.
@@ -333,8 +327,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             );
             var responseTypeAttribute = SyntaxFactory.TypeOfExpression(
                 SyntaxFactory.ParseTypeName(
-                        typeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
-                    )
+                    typeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                )
                     .WithAdditionalAnnotations(Simplifier.Annotation)
             );
 

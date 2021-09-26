@@ -53,8 +53,8 @@ namespace System.Web.Mvc.Test
             mockControllerContext.Setup(c => c.HttpContext.Session)
                 .Returns(mockSessionStateBase.Object);
             mockSessionStateBase.Setup(
-                    ssb => ssb[SessionStateTempDataProvider.TempDataSessionStateKey]
-                )
+                ssb => ssb[SessionStateTempDataProvider.TempDataSessionStateKey]
+            )
                 .Returns(42);
 
             // Act
@@ -80,8 +80,8 @@ namespace System.Web.Mvc.Test
             mockControllerContext.Setup(c => c.HttpContext.Session)
                 .Returns(mockSessionStateBase.Object);
             mockSessionStateBase.Setup(
-                    ssb => ssb[SessionStateTempDataProvider.TempDataSessionStateKey]
-                )
+                ssb => ssb[SessionStateTempDataProvider.TempDataSessionStateKey]
+            )
                 .Returns(tempData);
 
             // Act
@@ -165,8 +165,8 @@ namespace System.Web.Mvc.Test
                 MockBehavior.Strict
             );
             mockControllerContext.Setup(
-                    o => o.HttpContext.Session[SessionStateTempDataProvider.TempDataSessionStateKey]
-                )
+                o => o.HttpContext.Session[SessionStateTempDataProvider.TempDataSessionStateKey]
+            )
                 .Returns(null);
 
             // Act
@@ -187,15 +187,14 @@ namespace System.Web.Mvc.Test
                 MockBehavior.Strict
             );
             mockControllerContext.Setup(
-                    o => o.HttpContext.Session[SessionStateTempDataProvider.TempDataSessionStateKey]
-                )
+                o => o.HttpContext.Session[SessionStateTempDataProvider.TempDataSessionStateKey]
+            )
                 .Returns(new object());
             mockControllerContext.Setup(
-                    o =>
-                        o.HttpContext.Session.Remove(
-                            SessionStateTempDataProvider.TempDataSessionStateKey
-                        )
-                )
+                o =>
+                    o.HttpContext.Session
+                        .Remove(SessionStateTempDataProvider.TempDataSessionStateKey)
+            )
                 .Verifiable();
 
             // Act

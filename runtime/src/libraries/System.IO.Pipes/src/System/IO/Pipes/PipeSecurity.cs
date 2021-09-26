@@ -76,17 +76,18 @@ namespace System.IO.Pipes
             // fake a call to AccessMaskFromRights as though the ACL is for Deny
             if (rule.PipeAccessRights != PipeAccessRights.FullControl)
             {
-                return base.RemoveAccessRule(
-                    new PipeAccessRule(
-                        rule.IdentityReference,
-                        PipeAccessRule.AccessMaskFromRights(
-                            rule.PipeAccessRights,
-                            AccessControlType.Deny
-                        ),
-                        false,
-                        rule.AccessControlType
-                    )
-                );
+                return base
+                    .RemoveAccessRule(
+                        new PipeAccessRule(
+                            rule.IdentityReference,
+                            PipeAccessRule.AccessMaskFromRights(
+                                rule.PipeAccessRights,
+                                AccessControlType.Deny
+                            ),
+                            false,
+                            rule.AccessControlType
+                        )
+                    );
             }
             else
             {
@@ -131,17 +132,18 @@ namespace System.IO.Pipes
             // AccessMaskFromRights as though the ACL is for Deny
             if (rule.PipeAccessRights != PipeAccessRights.FullControl)
             {
-                base.RemoveAccessRuleSpecific(
-                    new PipeAccessRule(
-                        rule.IdentityReference,
-                        PipeAccessRule.AccessMaskFromRights(
-                            rule.PipeAccessRights,
-                            AccessControlType.Deny
-                        ),
-                        false,
-                        rule.AccessControlType
-                    )
-                );
+                base
+                    .RemoveAccessRuleSpecific(
+                        new PipeAccessRule(
+                            rule.IdentityReference,
+                            PipeAccessRule.AccessMaskFromRights(
+                                rule.PipeAccessRights,
+                                AccessControlType.Deny
+                            ),
+                            false,
+                            rule.AccessControlType
+                        )
+                    );
             }
             else
             {

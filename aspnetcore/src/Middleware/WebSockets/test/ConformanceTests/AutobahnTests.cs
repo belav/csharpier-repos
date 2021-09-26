@@ -50,20 +50,22 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest
                 outDir = outDir.Replace("\\", "\\\\");
 
                 // 9.* is Limits/Performance which is VERY SLOW; 12.*/13.* are compression which we don't implement
-                var spec = new AutobahnSpec(outDir).IncludeCase("*")
+                var spec = new AutobahnSpec(outDir)
+                    .IncludeCase("*")
                     .ExcludeCase("9.*", "12.*", "13.*");
 
                 var cts = new CancellationTokenSource();
                 cts.CancelAfter(TestTimeout); // These tests generally complete in just over 1 minute.
 
                 using (
-                    cts.Token.Register(
-                        () =>
-                            logger.LogError(
-                                "Test run is taking longer than maximum duration of {timeoutMinutes:0.00} minutes. Aborting...",
-                                TestTimeout.TotalMinutes
-                            )
-                    )
+                    cts.Token
+                        .Register(
+                            () =>
+                                logger.LogError(
+                                    "Test run is taking longer than maximum duration of {timeoutMinutes:0.00} minutes. Aborting...",
+                                    TestTimeout.TotalMinutes
+                                )
+                        )
                 )
                 {
                     AutobahnResult result;

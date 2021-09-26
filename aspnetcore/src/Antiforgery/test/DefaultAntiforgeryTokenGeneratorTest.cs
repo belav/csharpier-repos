@@ -161,8 +161,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             var mockClaimUidExtractor = new Mock<IClaimUidExtractor>();
             mockClaimUidExtractor.Setup(
-                    o => o.ExtractClaimUid(It.Is<ClaimsPrincipal>(c => c.Identity == identity))
-                )
+                o => o.ExtractClaimUid(It.Is<ClaimsPrincipal>(c => c.Identity == identity))
+            )
                 .Returns(base64ClaimUId);
 
             var tokenProvider = new DefaultAntiforgeryTokenGenerator(
@@ -443,8 +443,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             var mockClaimUidExtractor = new Mock<IClaimUidExtractor>();
             mockClaimUidExtractor.Setup(
-                    o => o.ExtractClaimUid(It.Is<ClaimsPrincipal>(c => c.Identity == identity))
-                )
+                o => o.ExtractClaimUid(It.Is<ClaimsPrincipal>(c => c.Identity == identity))
+            )
                 .Returns((string)null);
 
             var tokenProvider = new DefaultAntiforgeryTokenGenerator(
@@ -489,8 +489,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             var differentToken = new BinaryBlob(256);
             var mockClaimUidExtractor = new Mock<IClaimUidExtractor>();
             mockClaimUidExtractor.Setup(
-                    o => o.ExtractClaimUid(It.Is<ClaimsPrincipal>(c => c.Identity == identity))
-                )
+                o => o.ExtractClaimUid(It.Is<ClaimsPrincipal>(c => c.Identity == identity))
+            )
                 .Returns(Convert.ToBase64String(differentToken.GetData()));
 
             var tokenProvider = new DefaultAntiforgeryTokenGenerator(
@@ -535,8 +535,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             var mockAdditionalDataProvider = new Mock<IAntiforgeryAdditionalDataProvider>();
             mockAdditionalDataProvider.Setup(
-                    o => o.ValidateAdditionalData(httpContext, "some-additional-data")
-                )
+                o => o.ValidateAdditionalData(httpContext, "some-additional-data")
+            )
                 .Returns(false);
 
             var tokenProvider = new DefaultAntiforgeryTokenGenerator(
@@ -579,8 +579,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             var mockAdditionalDataProvider = new Mock<IAntiforgeryAdditionalDataProvider>();
             mockAdditionalDataProvider.Setup(
-                    o => o.ValidateAdditionalData(httpContext, "some-additional-data")
-                )
+                o => o.ValidateAdditionalData(httpContext, "some-additional-data")
+            )
                 .Returns(true);
 
             var tokenProvider = new DefaultAntiforgeryTokenGenerator(
@@ -621,8 +621,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             var mockAdditionalDataProvider = new Mock<IAntiforgeryAdditionalDataProvider>();
             mockAdditionalDataProvider.Setup(
-                    o => o.ValidateAdditionalData(httpContext, "some-additional-data")
-                )
+                o => o.ValidateAdditionalData(httpContext, "some-additional-data")
+            )
                 .Returns(true);
 
             var tokenProvider = new DefaultAntiforgeryTokenGenerator(
@@ -662,8 +662,8 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             var mockClaimUidExtractor = new Mock<IClaimUidExtractor>();
             mockClaimUidExtractor.Setup(
-                    o => o.ExtractClaimUid(It.Is<ClaimsPrincipal>(c => c.Identity == identity))
-                )
+                o => o.ExtractClaimUid(It.Is<ClaimsPrincipal>(c => c.Identity == identity))
+            )
                 .Returns(Convert.ToBase64String(fieldtoken.ClaimUid.GetData()));
 
             var tokenProvider = new DefaultAntiforgeryTokenGenerator(

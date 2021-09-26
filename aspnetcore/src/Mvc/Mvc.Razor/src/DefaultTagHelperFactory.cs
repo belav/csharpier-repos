@@ -45,11 +45,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             _activator = activator;
             _injectActions = new ConcurrentDictionary<Type, PropertyActivator<ViewContext>[]>();
             _getPropertiesToActivate = type =>
-                PropertyActivator<ViewContext>.GetPropertiesToActivate(
-                    type,
-                    typeof(ViewContextAttribute),
-                    _createActivateInfo
-                );
+                PropertyActivator<ViewContext>
+                    .GetPropertiesToActivate(
+                        type,
+                        typeof(ViewContextAttribute),
+                        _createActivateInfo
+                    );
         }
 
         /// <inheritdoc />

@@ -394,10 +394,10 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             using (var outerScope = provider.CreateScope())
             using (var innerScope = outerScope.ServiceProvider.CreateScope())
             {
-                var outerScopedService =
-                    outerScope.ServiceProvider.GetService<IFakeScopedService>();
-                var innerScopedService =
-                    innerScope.ServiceProvider.GetService<IFakeScopedService>();
+                var outerScopedService = outerScope.ServiceProvider
+                    .GetService<IFakeScopedService>();
+                var innerScopedService = innerScope.ServiceProvider
+                    .GetService<IFakeScopedService>();
 
                 // Assert
                 Assert.NotNull(outerScopedService);
@@ -464,8 +464,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var transient3 = Assert.IsType<FakeService>(provider.GetService<IFakeService>());
             using (var scope = provider.CreateScope())
             {
-                disposableService =
-                    (FakeService)scope.ServiceProvider.GetService<IFakeScopedService>();
+                disposableService = (FakeService)scope.ServiceProvider
+                    .GetService<IFakeScopedService>();
                 transient1 = (FakeService)scope.ServiceProvider.GetService<IFakeService>();
                 transient2 = (FakeService)scope.ServiceProvider.GetService<IFakeService>();
                 singleton = (FakeService)scope.ServiceProvider.GetService<IFakeSingletonService>();
@@ -564,10 +564,10 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             using (var outerScope = provider.CreateScope())
             using (var innerScope = outerScope.ServiceProvider.CreateScope())
             {
-                var outerScopedService =
-                    outerScope.ServiceProvider.GetService<IFakeScopedService>();
-                var innerScopedService =
-                    innerScope.ServiceProvider.GetService<IFakeScopedService>();
+                var outerScopedService = outerScope.ServiceProvider
+                    .GetService<IFakeScopedService>();
+                var innerScopedService = innerScope.ServiceProvider
+                    .GetService<IFakeScopedService>();
 
                 // Assert
                 Assert.NotSame(outerScopedService, innerScopedService);
@@ -617,7 +617,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var allServices = provider.GetServices<IFakeOpenGenericService<PocoClass>>().ToList();
             var constrainedServices = provider.GetServices<
                 IFakeOpenGenericService<IFakeSingletonService>
-            >().ToList();
+            >()
+                .ToList();
             var singletonService = provider.GetService<IFakeSingletonService>();
             // Assert
             Assert.Equal(2, allServices.Count);
@@ -641,7 +642,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             // Act
             var constrainedServices = provider.GetServices<
                 IFakeOpenGenericService<IFakeSingletonService>
-            >().ToList();
+            >()
+                .ToList();
             // Assert
             Assert.Equal(0, constrainedServices.Count);
         }
@@ -666,10 +668,12 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             // Act
             var allServices = provider.GetServices<
                 IFakeOpenGenericService<ClassImplementingIEnumerable>
-            >().ToList();
+            >()
+                .ToList();
             var constrainedServices = provider.GetServices<
                 IFakeOpenGenericService<IFakeSingletonService>
-            >().ToList();
+            >()
+                .ToList();
             var singletonService = provider.GetService<IFakeSingletonService>();
             // Assert
             Assert.Equal(2, allServices.Count);
@@ -701,7 +705,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             // Act
             var allServices = provider.GetServices<
                 IFakeOpenGenericService<ClassInheritingClassInheritingAbstractClass>
-            >().ToList();
+            >()
+                .ToList();
             var constrainedServices = provider.GetServices<IFakeOpenGenericService<PocoClass>>()
                 .ToList();
             // Assert
@@ -783,12 +788,14 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                         new TypeWithSupersetConstructors(factoryService)
                     },
                     {
-                        new TestServiceCollection().AddSingleton<IFakeService>(fakeService)
+                        new TestServiceCollection()
+                            .AddSingleton<IFakeService>(fakeService)
                             .AddSingleton<IFactoryService>(factoryService),
                         new TypeWithSupersetConstructors(fakeService, factoryService)
                     },
                     {
-                        new TestServiceCollection().AddSingleton<IFakeService>(fakeService)
+                        new TestServiceCollection()
+                            .AddSingleton<IFakeService>(fakeService)
                             .AddSingleton<IFakeMultipleService>(multipleService)
                             .AddSingleton<IFactoryService>(factoryService),
                         new TypeWithSupersetConstructors(
@@ -798,7 +805,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                         )
                     },
                     {
-                        new TestServiceCollection().AddSingleton<IFakeService>(fakeService)
+                        new TestServiceCollection()
+                            .AddSingleton<IFakeService>(fakeService)
                             .AddSingleton<IFakeMultipleService>(multipleService)
                             .AddSingleton<IFakeScopedService>(scopedService)
                             .AddSingleton<IFactoryService>(factoryService),
@@ -859,7 +867,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var multipleServices = outer.MultipleServices.ToArray();
 
             // Act
-            ((IDisposable)serviceProvider).Dispose();
+            ((IDisposable)serviceProvider)
+                .Dispose();
 
             // Assert
             Assert.Equal(outer, callback.Disposed[0]);
@@ -892,7 +901,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             var enumerable = serviceProvider.GetService<
                 IEnumerable<IFakeOpenGenericService<PocoClass>>
-            >().ToArray();
+            >()
+                .ToArray();
 
             // Assert
             Assert.Equal(3, enumerable.Length);
@@ -950,7 +960,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 var enumerable = (
                     scope.ServiceProvider.GetService(typeof(IEnumerable<>).MakeGenericType(resolve))
                     as IEnumerable
-                ).OfType<object>().ToArray();
+                )
+                    .OfType<object>()
+                    .ToArray();
                 var service = scope.ServiceProvider.GetService(resolve);
 
                 // Assert

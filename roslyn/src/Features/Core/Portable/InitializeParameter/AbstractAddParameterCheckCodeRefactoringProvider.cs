@@ -254,27 +254,27 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 if (parameter.Type.SpecialType == SpecialType.System_String)
                 {
                     document = await AddStringCheckAsync(
-                            document,
-                            parameter,
-                            functionDeclaration,
-                            (IMethodSymbol)parameter.ContainingSymbol,
-                            blockStatementOpt,
-                            nameof(string.IsNullOrEmpty),
-                            cancellationToken
-                        )
+                        document,
+                        parameter,
+                        functionDeclaration,
+                        (IMethodSymbol)parameter.ContainingSymbol,
+                        blockStatementOpt,
+                        nameof(string.IsNullOrEmpty),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     continue;
                 }
 
                 // For all other parameters, add null check - updates document
                 document = await AddNullCheckAsync(
-                        document,
-                        parameter,
-                        functionDeclaration,
-                        (IMethodSymbol)parameter.ContainingSymbol,
-                        blockStatementOpt,
-                        cancellationToken
-                    )
+                    document,
+                    parameter,
+                    functionDeclaration,
+                    (IMethodSymbol)parameter.ContainingSymbol,
+                    blockStatementOpt,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -480,11 +480,11 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         {
             // First see if we can convert a statement of the form "this.s = s" into "this.s = s ?? throw ...".
             var documentOpt = await TryAddNullCheckToAssignmentAsync(
-                    document,
-                    parameter,
-                    blockStatementOpt,
-                    cancellationToken
-                )
+                document,
+                parameter,
+                blockStatementOpt,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (documentOpt != null)
@@ -495,14 +495,14 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             // If we can't, then just offer to add an "if (s == null)" statement.
             var optionSet = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             return await AddNullCheckStatementAsync(
-                    document,
-                    parameter,
-                    functionDeclaration,
-                    method,
-                    blockStatementOpt,
-                    (s, g) => CreateNullCheckStatement(optionSet, s, g, parameter),
-                    cancellationToken
-                )
+                document,
+                parameter,
+                functionDeclaration,
+                method,
+                blockStatementOpt,
+                (s, g) => CreateNullCheckStatement(optionSet, s, g, parameter),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -518,21 +518,15 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         {
             var optionSet = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             return await AddNullCheckStatementAsync(
-                    document,
-                    parameter,
-                    functionDeclaration,
-                    method,
-                    blockStatementOpt,
-                    (s, g) =>
-                        CreateStringCheckStatement(
-                            optionSet,
-                            s.Compilation,
-                            g,
-                            parameter,
-                            methodName
-                        ),
-                    cancellationToken
-                )
+                document,
+                parameter,
+                functionDeclaration,
+                method,
+                blockStatementOpt,
+                (s, g) =>
+                    CreateStringCheckStatement(optionSet, s.Compilation, g, parameter, methodName),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -763,7 +757,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 {
                     // Found one.  Convert it to a coalesce expression with an appropriate
                     // throw expression.
-                    var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+                    var compilation = await document.Project
+                        .GetCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
 
                     var root = await document.GetSyntaxRootAsync(cancellationToken)
@@ -832,13 +827,15 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                       nameof(FeaturesResources._0_cannot_be_null_or_empty),
                       FeaturesResources.ResourceManager,
                       typeof(FeaturesResources)
-                  ).ToString(),
+                  )
+                      .ToString(),
                 nameof(string.IsNullOrWhiteSpace)
                   => new LocalizableResourceString(
                       nameof(FeaturesResources._0_cannot_be_null_or_whitespace),
                       FeaturesResources.ResourceManager,
                       typeof(FeaturesResources)
-                  ).ToString(),
+                  )
+                      .ToString(),
                 _ => throw ExceptionUtilities.Unreachable,
             };
 

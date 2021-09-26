@@ -248,7 +248,9 @@ class C
             comp.VerifyDiagnostics(
                 // (20,19): warning CS8305: 'A' is for evaluation purposes only and is subject to change or removal in future updates.
                 //     static void F(A a)
-                Diagnostic(ErrorCode.WRN_Experimental, "A").WithArguments("A").WithLocation(20, 19),
+                Diagnostic(ErrorCode.WRN_Experimental, "A")
+                    .WithArguments("A")
+                    .WithLocation(20, 19),
                 // (23,9): warning CS0618: 'A.F1()' is obsolete: ''
                 //         a.F1();
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "a.F1()")
@@ -271,7 +273,9 @@ class C
                     .WithLocation(26, 9),
                 // (27,14): warning CS8305: 'A' is for evaluation purposes only and is subject to change or removal in future updates.
                 //         (new A.B()).ToString();
-                Diagnostic(ErrorCode.WRN_Experimental, "A").WithArguments("A").WithLocation(27, 14),
+                Diagnostic(ErrorCode.WRN_Experimental, "A")
+                    .WithArguments("A")
+                    .WithLocation(27, 14),
                 // (27,14): warning CS8305: 'A.B' is for evaluation purposes only and is subject to change or removal in future updates.
                 //         (new A.B()).ToString();
                 Diagnostic(ErrorCode.WRN_Experimental, "A.B")
@@ -803,7 +807,9 @@ class P
                     .WithLocation(19, 21),
                 // (20,21): warning CS8305: 'D' is for evaluation purposes only and is subject to change or removal in future updates.
                 //         o = default(CD);
-                Diagnostic(ErrorCode.WRN_Experimental, "CD").WithArguments("D").WithLocation(20, 21)
+                Diagnostic(ErrorCode.WRN_Experimental, "CD")
+                    .WithArguments("D")
+                    .WithLocation(20, 21)
             );
         }
     }

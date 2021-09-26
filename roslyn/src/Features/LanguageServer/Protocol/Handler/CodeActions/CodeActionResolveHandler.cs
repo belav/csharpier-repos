@@ -63,13 +63,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             var data = ((JToken)codeAction.Data!).ToObject<CodeActionResolveData>();
             var codeActions = await CodeActionHelpers.GetCodeActionsAsync(
-                    _codeActionsCache,
-                    document,
-                    data.Range,
-                    _codeFixService,
-                    _codeRefactoringService,
-                    cancellationToken
-                )
+                _codeActionsCache,
+                document,
+                data.Range,
+                _codeFixService,
+                _codeRefactoringService,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var codeActionToResolve = CodeActionHelpers.GetCodeActionToResolve(
@@ -103,8 +103,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (applyChangesOperations.Any())
             {
                 var solution = document.Project.Solution;
-                var textDiffService =
-                    solution.Workspace.Services.GetService<IDocumentTextDifferencingService>();
+                var textDiffService = solution.Workspace.Services
+                    .GetService<IDocumentTextDifferencingService>();
 
                 using var _ = ArrayBuilder<TextDocumentEdit>.GetInstance(out var textDocumentEdits);
                 foreach (var applyChangesOperation in applyChangesOperations)
@@ -162,35 +162,35 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
                     // Changed documents
                     await AddTextDocumentEditsAsync(
-                            textDocumentEdits,
-                            changedDocuments,
-                            applyChangesOperation.ChangedSolution.GetDocument,
-                            solution.GetDocument,
-                            textDiffService,
-                            cancellationToken
-                        )
+                        textDocumentEdits,
+                        changedDocuments,
+                        applyChangesOperation.ChangedSolution.GetDocument,
+                        solution.GetDocument,
+                        textDiffService,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     // Changed analyzer config documents
                     await AddTextDocumentEditsAsync(
-                            textDocumentEdits,
-                            changedAnalyzerConfigDocuments,
-                            applyChangesOperation.ChangedSolution.GetAnalyzerConfigDocument,
-                            solution.GetAnalyzerConfigDocument,
-                            textDiffService: null,
-                            cancellationToken
-                        )
+                        textDocumentEdits,
+                        changedAnalyzerConfigDocuments,
+                        applyChangesOperation.ChangedSolution.GetAnalyzerConfigDocument,
+                        solution.GetAnalyzerConfigDocument,
+                        textDiffService: null,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     // Changed additional documents
                     await AddTextDocumentEditsAsync(
-                            textDocumentEdits,
-                            changedAdditionalDocuments,
-                            applyChangesOperation.ChangedSolution.GetAdditionalDocument,
-                            solution.GetAdditionalDocument,
-                            textDiffService: null,
-                            cancellationToken
-                        )
+                        textDocumentEdits,
+                        changedAdditionalDocuments,
+                        applyChangesOperation.ChangedSolution.GetAdditionalDocument,
+                        solution.GetAdditionalDocument,
+                        textDiffService: null,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -239,10 +239,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     {
                         Contract.ThrowIfNull(textDiffService);
                         textChanges = await textDiffService.GetTextChangesAsync(
-                                oldDoc,
-                                newDoc,
-                                cancellationToken
-                            )
+                            oldDoc,
+                            newDoc,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                     else
@@ -253,8 +253,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     }
 
                     var edits = textChanges.Select(
-                            tc => ProtocolConversions.TextChangeToTextEdit(tc, oldText)
-                        )
+                        tc => ProtocolConversions.TextChangeToTextEdit(tc, oldText)
+                    )
                         .ToArray();
                     var documentIdentifier = new VersionedTextDocumentIdentifier
                     {

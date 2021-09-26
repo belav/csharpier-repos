@@ -167,15 +167,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             }
 
             // Now i has the right insertion point.
-            node.Children.Insert(
-                i,
-                new DefaultTagHelperCreateIntermediateNode()
-                {
-                    FieldName = context.GetFieldName(tagHelper),
-                    TagHelper = tagHelper,
-                    TypeName = tagHelper.GetTypeName(),
-                }
-            );
+            node.Children
+                .Insert(
+                    i,
+                    new DefaultTagHelperCreateIntermediateNode()
+                    {
+                        FieldName = context.GetFieldName(tagHelper),
+                        TagHelper = tagHelper,
+                        TypeName = tagHelper.GetTypeName(),
+                    }
+                );
 
             // Next we need to rewrite any property nodes to use the field and property name for this
             // tag helper.
@@ -220,22 +221,23 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 i++;
             }
 
-            context.Class.Children.Insert(
-                i,
-                new FieldDeclarationIntermediateNode()
-                {
-                    Annotations =
+            context.Class.Children
+                .Insert(
+                    i,
+                    new FieldDeclarationIntermediateNode()
                     {
+                        Annotations =
                         {
-                            CommonAnnotations.DefaultTagHelperExtension.TagHelperField,
-                            bool.TrueString
+                            {
+                                CommonAnnotations.DefaultTagHelperExtension.TagHelperField,
+                                bool.TrueString
+                            },
                         },
-                    },
-                    Modifiers = { "private", },
-                    FieldName = context.GetFieldName(tagHelper),
-                    FieldType = "global::" + tagHelper.GetTypeName(),
-                }
-            );
+                        Modifiers = { "private", },
+                        FieldName = context.GetFieldName(tagHelper),
+                        FieldType = "global::" + tagHelper.GetTypeName(),
+                    }
+                );
         }
 
         private bool IsTagHelperRuntimeNode(TagHelperIntermediateNode node)

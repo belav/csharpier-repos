@@ -36,11 +36,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
 
             if (
-                !string.Equals(
-                    descriptorX.AssemblyName,
-                    descriptorY.AssemblyName,
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        descriptorX.AssemblyName,
+                        descriptorY.AssemblyName,
+                        StringComparison.Ordinal
+                    )
             )
             {
                 return false;
@@ -53,14 +54,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             if (
                 !Enumerable.SequenceEqual(
-                    descriptorX.BoundAttributes.OrderBy(
-                        attribute => attribute.Name,
-                        StringComparer.Ordinal
-                    ),
-                    descriptorY.BoundAttributes.OrderBy(
-                        attribute => attribute.Name,
-                        StringComparer.Ordinal
-                    ),
+                    descriptorX.BoundAttributes
+                        .OrderBy(attribute => attribute.Name, StringComparer.Ordinal),
+                    descriptorY.BoundAttributes
+                        .OrderBy(attribute => attribute.Name, StringComparer.Ordinal),
                     BoundAttributeDescriptorComparer.Default
                 )
             )
@@ -70,14 +67,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             if (
                 !Enumerable.SequenceEqual(
-                    descriptorX.TagMatchingRules.OrderBy(
-                        rule => rule.TagName,
-                        StringComparer.Ordinal
-                    ),
-                    descriptorY.TagMatchingRules.OrderBy(
-                        rule => rule.TagName,
-                        StringComparer.Ordinal
-                    ),
+                    descriptorX.TagMatchingRules
+                        .OrderBy(rule => rule.TagName, StringComparer.Ordinal),
+                    descriptorY.TagMatchingRules
+                        .OrderBy(rule => rule.TagName, StringComparer.Ordinal),
                     TagMatchingRuleDescriptorComparer.Default
                 )
             )
@@ -92,14 +85,10 @@ namespace Microsoft.AspNetCore.Razor.Language
                         descriptorX.AllowedChildTags != null
                         && descriptorY.AllowedChildTags != null
                         && Enumerable.SequenceEqual(
-                            descriptorX.AllowedChildTags.OrderBy(
-                                childTag => childTag.Name,
-                                StringComparer.Ordinal
-                            ),
-                            descriptorY.AllowedChildTags.OrderBy(
-                                childTag => childTag.Name,
-                                StringComparer.Ordinal
-                            ),
+                            descriptorX.AllowedChildTags
+                                .OrderBy(childTag => childTag.Name, StringComparer.Ordinal),
+                            descriptorY.AllowedChildTags
+                                .OrderBy(childTag => childTag.Name, StringComparer.Ordinal),
                             AllowedChildTagDescriptorComparer.Default
                         )
                     )
@@ -115,33 +104,36 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
 
             if (
-                !string.Equals(
-                    descriptorX.Documentation,
-                    descriptorY.Documentation,
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        descriptorX.Documentation,
+                        descriptorY.Documentation,
+                        StringComparison.Ordinal
+                    )
             )
             {
                 return false;
             }
 
             if (
-                !string.Equals(
-                    descriptorX.DisplayName,
-                    descriptorY.DisplayName,
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        descriptorX.DisplayName,
+                        descriptorY.DisplayName,
+                        StringComparison.Ordinal
+                    )
             )
             {
                 return false;
             }
 
             if (
-                !string.Equals(
-                    descriptorX.TagOutputHint,
-                    descriptorY.TagOutputHint,
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        descriptorX.TagOutputHint,
+                        descriptorY.TagOutputHint,
+                        StringComparison.Ordinal
+                    )
             )
             {
                 return false;
@@ -154,10 +146,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             if (
                 !Enumerable.SequenceEqual(
-                    descriptorX.Metadata.OrderBy(
-                        metadataX => metadataX.Key,
-                        StringComparer.Ordinal
-                    ),
+                    descriptorX.Metadata
+                        .OrderBy(metadataX => metadataX.Key, StringComparer.Ordinal),
                     descriptorY.Metadata.OrderBy(metadataY => metadataY.Key, StringComparer.Ordinal)
                 )
             )

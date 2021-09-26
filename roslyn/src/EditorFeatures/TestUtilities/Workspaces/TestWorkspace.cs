@@ -457,11 +457,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 var hostProject = this.GetTestProject(projectChanges.NewProject.Id);
                 hostProject.OnProjectFilePathChanged(projectChanges.NewProject.FilePath);
-                base.OnProjectNameChanged(
-                    projectChanges.NewProject.Id,
-                    projectChanges.NewProject.Name,
-                    projectChanges.NewProject.FilePath
-                );
+                base
+                    .OnProjectNameChanged(
+                        projectChanges.NewProject.Id,
+                        projectChanges.NewProject.Name,
+                        projectChanges.NewProject.FilePath
+                    );
             }
 
             base.ApplyProjectChanges(projectChanges);
@@ -555,18 +556,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     var snapshotSpan = span.ToSnapshotSpan(
                         document.GetTextBuffer().CurrentSnapshot
                     );
-                    var mappedSpan = projectionBuffer.CurrentSnapshot.MapFromSourceSnapshot(
-                            snapshotSpan
-                        )
+                    var mappedSpan = projectionBuffer.CurrentSnapshot
+                        .MapFromSourceSnapshot(snapshotSpan)
                         .Single();
-                    mappedSpans[string.Empty] = mappedSpans[string.Empty].Add(
-                        mappedSpan.ToTextSpan()
-                    );
+                    mappedSpans[string.Empty] = mappedSpans[string.Empty]
+                        .Add(mappedSpan.ToTextSpan());
                 }
 
                 // Order unnamed spans as they would be ordered by the normal span finding
                 // algorithm in MarkupTestFile
-                mappedSpans[string.Empty] = mappedSpans[string.Empty].OrderBy(s => s.End)
+                mappedSpans[string.Empty] = mappedSpans[string.Empty]
+                    .OrderBy(s => s.End)
                     .ThenBy(s => -s.Start)
                     .ToImmutableArray();
 
@@ -581,9 +581,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         var snapshotSpan = span.ToSnapshotSpan(
                             document.GetTextBuffer().CurrentSnapshot
                         );
-                        var mappedSpan = projectionBuffer.CurrentSnapshot.MapFromSourceSnapshot(
-                                snapshotSpan
-                            )
+                        var mappedSpan = projectionBuffer.CurrentSnapshot
+                            .MapFromSourceSnapshot(snapshotSpan)
                             .Cast<Span?>()
                             .SingleOrDefault();
                         if (mappedSpan == null)
@@ -804,12 +803,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         spanIndex++;
                     }
 
-                    tempMappedMarkupSpans[key].Add(
-                        new TextSpan(
-                            spanStartLocation!.Value,
-                            spanEndLocationExclusive!.Value - spanStartLocation.Value
-                        )
-                    );
+                    tempMappedMarkupSpans[key]
+                        .Add(
+                            new TextSpan(
+                                spanStartLocation!.Value,
+                                spanEndLocationExclusive!.Value - spanStartLocation.Value
+                            )
+                        );
                 }
             }
 

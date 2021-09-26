@@ -279,10 +279,10 @@ namespace System.Net.Http
 
                 // Write footer boundary.
                 await EncodeStringToStreamAsync(
-                        stream,
-                        CrLf + "--" + _boundary + "--" + CrLf,
-                        cancellationToken
-                    )
+                    stream,
+                    CrLf + "--" + _boundary + "--" + CrLf,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception ex)

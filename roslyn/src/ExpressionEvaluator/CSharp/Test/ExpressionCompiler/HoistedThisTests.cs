@@ -948,9 +948,8 @@ class C
                     var dummyComp = CreateCompilation(
                         "",
                         new[] { comp.EmitToImageReference() },
-                        options: TestOptions.DebugDll.WithMetadataImportOptions(
-                            MetadataImportOptions.All
-                        )
+                        options: TestOptions.DebugDll
+                            .WithMetadataImportOptions(MetadataImportOptions.All)
                     );
                     var typeC = dummyComp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
                     var displayClassTypes = typeC.GetMembers().OfType<NamedTypeSymbol>();
@@ -972,11 +971,8 @@ class C
                                 )
                         )
                         {
-                            var lambdaMethodName = string.Format(
-                                "C.{0}.{1}",
-                                displayClassName,
-                                displayClassMethod.Name
-                            );
+                            var lambdaMethodName = string
+                                .Format("C.{0}.{1}", displayClassName, displayClassMethod.Name);
                             var context = CreateMethodContext(runtime, lambdaMethodName);
                             var expectedIL = string.Format(expectedILTemplate, displayClassName);
                             VerifyHasThis(context, "C", expectedIL);
@@ -1040,9 +1036,8 @@ class C
                     var dummyComp = CreateCompilation(
                         "",
                         new[] { comp.EmitToImageReference() },
-                        options: TestOptions.DebugDll.WithMetadataImportOptions(
-                            MetadataImportOptions.All
-                        )
+                        options: TestOptions.DebugDll
+                            .WithMetadataImportOptions(MetadataImportOptions.All)
                     );
                     var typeC = dummyComp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
                     var displayClassTypes = typeC.GetMembers().OfType<NamedTypeSymbol>();
@@ -1064,11 +1059,8 @@ class C
                                 )
                         )
                         {
-                            var lambdaMethodName = string.Format(
-                                "C.{0}.{1}",
-                                displayClassName,
-                                displayClassMethod.Name
-                            );
+                            var lambdaMethodName = string
+                                .Format("C.{0}.{1}", displayClassName, displayClassMethod.Name);
                             var context = CreateMethodContext(runtime, lambdaMethodName);
                             VerifyNoThis(context);
                         }
@@ -1256,9 +1248,8 @@ class C
                     string error;
                     var testData = new CompilationTestData();
                     context.CompileExpression("this.x", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1268,7 +1259,7 @@ class C
   IL_0006:  ldfld      ""object C.x""
   IL_000b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1302,9 +1293,8 @@ class C
                     string error;
                     var testData = new CompilationTestData();
                     context.CompileExpression("this.x", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1317,7 +1307,7 @@ class C
   IL_0006:  ldfld      ""object C.x""
   IL_000b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1345,9 +1335,8 @@ class C
                     string error;
                     var testData = new CompilationTestData();
                     context.CompileExpression("this.x", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1355,7 +1344,7 @@ class C
   IL_0001:  ldfld      ""object C.x""
   IL_0006:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1388,9 +1377,8 @@ class Derived : Base
                     string error;
                     var testData = new CompilationTestData();
                     context.CompileExpression("base.x", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1400,7 +1388,7 @@ class Derived : Base
   IL_0006:  ldfld      ""int Base.x""
   IL_000b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1439,9 +1427,8 @@ class Derived : Base
                     string error;
                     var testData = new CompilationTestData();
                     context.CompileExpression("base.x", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1454,7 +1441,7 @@ class Derived : Base
   IL_0006:  ldfld      ""int Base.x""
   IL_000b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1488,9 +1475,8 @@ class Derived : Base
                     string error;
                     var testData = new CompilationTestData();
                     context.CompileExpression("this.x", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1498,7 +1484,7 @@ class Derived : Base
   IL_0001:  ldfld      ""object Derived.x""
   IL_0006:  ret
 }"
-                        );
+                    );
                 }
             );
         }

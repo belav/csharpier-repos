@@ -684,29 +684,29 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var currentValues = new string[0];
             htmlGenerator.Setup(
-                    real =>
-                        real.GetCurrentValues(
-                            viewContext,
-                            modelExplorer,
-                            string.Empty, // expression
-                            false
-                        )
-                ) // allowMultiple
+                real =>
+                    real.GetCurrentValues(
+                        viewContext,
+                        modelExplorer,
+                        string.Empty, // expression
+                        false
+                    )
+            ) // allowMultiple
                 .Returns(currentValues)
                 .Verifiable();
             htmlGenerator.Setup(
-                    real =>
-                        real.GenerateSelect(
-                            viewContext,
-                            modelExplorer,
-                            null, // optionLabel
-                            string.Empty, // expression
-                            expectedItems,
-                            currentValues,
-                            false, // allowMultiple
-                            null
-                        )
-                ) // htmlAttributes
+                real =>
+                    real.GenerateSelect(
+                        viewContext,
+                        modelExplorer,
+                        null, // optionLabel
+                        string.Empty, // expression
+                        expectedItems,
+                        currentValues,
+                        false, // allowMultiple
+                        null
+                    )
+            ) // htmlAttributes
                 .Returns((TagBuilder)null)
                 .Verifiable();
 
@@ -776,29 +776,29 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             );
             var currentValues = new string[0];
             htmlGenerator.Setup(
-                    real =>
-                        real.GetCurrentValues(
-                            viewContext,
-                            modelExplorer,
-                            propertyName, // expression
-                            allowMultiple
-                        )
-                )
+                real =>
+                    real.GetCurrentValues(
+                        viewContext,
+                        modelExplorer,
+                        propertyName, // expression
+                        allowMultiple
+                    )
+            )
                 .Returns(currentValues)
                 .Verifiable();
             htmlGenerator.Setup(
-                    real =>
-                        real.GenerateSelect(
-                            viewContext,
-                            modelExplorer,
-                            null, // optionLabel
-                            propertyName, // expression
-                            It.IsAny<IEnumerable<SelectListItem>>(),
-                            currentValues,
-                            allowMultiple,
-                            null
-                        )
-                ) // htmlAttributes
+                real =>
+                    real.GenerateSelect(
+                        viewContext,
+                        modelExplorer,
+                        null, // optionLabel
+                        propertyName, // expression
+                        It.IsAny<IEnumerable<SelectListItem>>(),
+                        currentValues,
+                        allowMultiple,
+                        null
+                    )
+            ) // htmlAttributes
                 .Returns((TagBuilder)null)
                 .Verifiable();
 
@@ -933,12 +933,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var selectList = Array.Empty<SelectListItem>();
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    gen =>
-                        gen.GenerateGroupsAndOptions( /* optionLabel: */
-                            null,
-                            selectList
-                        )
-                )
+                gen =>
+                    gen.GenerateGroupsAndOptions( /* optionLabel: */
+                        null,
+                        selectList
+                    )
+            )
                 .Returns(HtmlString.Empty)
                 .Verifiable();
 

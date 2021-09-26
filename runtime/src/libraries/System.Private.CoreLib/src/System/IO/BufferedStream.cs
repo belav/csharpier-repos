@@ -454,9 +454,9 @@ namespace System.IO
             );
 
             await _stream.WriteAsync(
-                    new ReadOnlyMemory<byte>(_buffer, 0, _writePos),
-                    cancellationToken
-                )
+                new ReadOnlyMemory<byte>(_buffer, 0, _writePos),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             _writePos = 0;
             await _stream.FlushAsync(cancellationToken).ConfigureAwait(false);
@@ -674,11 +674,11 @@ namespace System.IO
 
             // Delegate to the async implementation.
             return ReadFromUnderlyingStreamAsync(
-                    new Memory<byte>(buffer, offset + bytesFromBuffer, count - bytesFromBuffer),
-                    cancellationToken,
-                    bytesFromBuffer,
-                    semaphoreLockTask
-                )
+                new Memory<byte>(buffer, offset + bytesFromBuffer, count - bytesFromBuffer),
+                cancellationToken,
+                bytesFromBuffer,
+                semaphoreLockTask
+            )
                 .AsTask();
         }
 
@@ -785,9 +785,9 @@ namespace System.IO
                 // Ok. We can fill the buffer:
                 EnsureBufferAllocated();
                 _readLen = await _stream.ReadAsync(
-                        new Memory<byte>(_buffer, 0, _bufferSize),
-                        cancellationToken
-                    )
+                    new Memory<byte>(_buffer, 0, _bufferSize),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 bytesFromBuffer = ReadFromBuffer(buffer.Span);
@@ -1197,9 +1197,9 @@ namespace System.IO
                     Debug.Assert(_buffer != null);
 
                     await _stream.WriteAsync(
-                            new ReadOnlyMemory<byte>(_buffer, 0, _writePos),
-                            cancellationToken
-                        )
+                        new ReadOnlyMemory<byte>(_buffer, 0, _writePos),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     _writePos = 0;
 
@@ -1226,18 +1226,18 @@ namespace System.IO
                             buffer.Span.CopyTo(new Span<byte>(_buffer, _writePos, buffer.Length));
 
                             await _stream.WriteAsync(
-                                    new ReadOnlyMemory<byte>(_buffer, 0, totalUserBytes),
-                                    cancellationToken
-                                )
+                                new ReadOnlyMemory<byte>(_buffer, 0, totalUserBytes),
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             _writePos = 0;
                             return;
                         }
 
                         await _stream.WriteAsync(
-                                new ReadOnlyMemory<byte>(_buffer, 0, _writePos),
-                                cancellationToken
-                            )
+                            new ReadOnlyMemory<byte>(_buffer, 0, _writePos),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         _writePos = 0;
                     }
@@ -1446,9 +1446,9 @@ namespace System.IO
                         "Write buffer must be empty if there's data in the read buffer"
                     );
                     await destination.WriteAsync(
-                            new ReadOnlyMemory<byte>(_buffer, _readPos, readBytes),
-                            cancellationToken
-                        )
+                        new ReadOnlyMemory<byte>(_buffer, _readPos, readBytes),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     _readPos = _readLen = 0;
                 }

@@ -190,10 +190,11 @@ enum E
                         );
                         // CONSIDER: change error code to make text less confusing?
                         Assert.Equal(
-                            string.Format(
-                                "error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('{0}')",
-                                type
-                            ),
+                            string
+                                .Format(
+                                    "error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('{0}')",
+                                    type
+                                ),
                             error
                         );
                     }

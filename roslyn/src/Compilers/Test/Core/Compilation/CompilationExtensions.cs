@@ -65,9 +65,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 if (MonoHelpers.IsRunningOnMono() || PathUtilities.IsUnixLikePlatform)
                 {
-                    options = (options ?? EmitOptions.Default).WithDebugInformationFormat(
-                        DebugInformationFormat.PortablePdb
-                    );
+                    options = (options ?? EmitOptions.Default)
+                        .WithDebugInformationFormat(DebugInformationFormat.PortablePdb);
                 }
 
                 var discretePdb =
@@ -303,10 +302,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                 if (
                     !string.IsNullOrEmpty(symbolToVerify)
-                    && !declaration.DeclaredSymbol.Name.Equals(
-                        symbolToVerify,
-                        StringComparison.Ordinal
-                    )
+                    && !declaration.DeclaredSymbol.Name
+                        .Equals(symbolToVerify, StringComparison.Ordinal)
                 )
                 {
                     continue;
@@ -374,8 +371,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
 
             var compilation = createCompilation();
-            var roots =
-                ArrayBuilder<(IOperation operation, ISymbol associatedSymbol)>.GetInstance();
+            var roots = ArrayBuilder<(IOperation operation, ISymbol associatedSymbol)>
+                .GetInstance();
             var stopWatch = new Stopwatch();
             if (!System.Diagnostics.Debugger.IsAttached)
             {

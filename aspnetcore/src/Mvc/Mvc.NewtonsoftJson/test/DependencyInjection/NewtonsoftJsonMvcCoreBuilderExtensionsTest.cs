@@ -21,14 +21,13 @@ namespace Microsoft.Extensions.DependencyInjection
             var services = new ServiceCollection();
 
             // Act
-            services.AddMvcCore()
-                .AddNewtonsoftJson(
-                    (options) =>
-                    {
-                        options.SerializerSettings.ContractResolver =
-                            new CamelCasePropertyNamesContractResolver();
-                    }
-                );
+            services.AddMvcCore().AddNewtonsoftJson(
+                (options) =>
+                {
+                    options.SerializerSettings.ContractResolver =
+                        new CamelCasePropertyNamesContractResolver();
+                }
+            );
 
             // Assert
             Assert.Single(
@@ -41,10 +40,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public void AddServicesCore_ReplacesDefaultJsonHelper()
         {
             // Arrange
-            var services = new ServiceCollection().AddSingleton<
-                IJsonHelper,
-                SystemTextJsonHelper
-            >();
+            var services = new ServiceCollection()
+                .AddSingleton<IJsonHelper, SystemTextJsonHelper>();
 
             // Act
             NewtonsoftJsonMvcCoreBuilderExtensions.AddServicesCore(services);
@@ -58,10 +55,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public void AddServicesCore_ReplacesDefaultTempDataSerializer()
         {
             // Arrange
-            var services = new ServiceCollection().AddSingleton<
-                TempDataSerializer,
-                DefaultTempDataSerializer
-            >();
+            var services = new ServiceCollection()
+                .AddSingleton<TempDataSerializer, DefaultTempDataSerializer>();
 
             // Act
             NewtonsoftJsonMvcCoreBuilderExtensions.AddServicesCore(services);
@@ -78,10 +73,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public void AddServicesCore_ReplacesDefaultJsonResultExecutor()
         {
             // Arrange
-            var services = new ServiceCollection().AddSingleton<
-                IActionResultExecutor<JsonResult>,
-                SystemTextJsonResultExecutor
-            >();
+            var services = new ServiceCollection()
+                .AddSingleton<IActionResultExecutor<JsonResult>, SystemTextJsonResultExecutor>();
 
             // Act
             NewtonsoftJsonMvcCoreBuilderExtensions.AddServicesCore(services);

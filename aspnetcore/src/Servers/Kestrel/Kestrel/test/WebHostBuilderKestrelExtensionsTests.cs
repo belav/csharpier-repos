@@ -42,13 +42,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         {
             // Arrange
             var hostBuilder = new WebHostBuilder().UseKestrel(
-                    options =>
-                    {
-                        // Assert
-                        Assert.NotNull(options.ApplicationServices);
-                    }
-                )
-                .Configure(app => { });
+                options =>
+                {
+                    // Assert
+                    Assert.NotNull(options.ApplicationServices);
+                }
+            ).Configure(app => { });
 
             // Act
             hostBuilder.Build();
@@ -76,7 +75,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
             );
 
 #pragma warning disable CS0618
-            var hostBuilderReversed = new WebHostBuilder().UseLibuv()
+            var hostBuilderReversed = new WebHostBuilder()
+                .UseLibuv()
                 .UseKestrel()
                 .Configure(app => { });
 #pragma warning restore CS0618
@@ -95,7 +95,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                 hostBuilder.Build().Services.GetService<IConnectionListenerFactory>()
             );
 
-            var hostBuilderReversed = new WebHostBuilder().UseSockets()
+            var hostBuilderReversed = new WebHostBuilder()
+                .UseSockets()
                 .UseKestrel()
                 .Configure(app => { });
 

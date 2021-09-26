@@ -79,23 +79,23 @@ namespace Microsoft.Web.Helpers.Test
         public void FlashWithExposedOptions()
         {
             string html = Video.Flash(
-                    GetContext(),
-                    _pathUtility,
-                    "http://foo.bar.com/foo.swf",
-                    width: "100px",
-                    height: "100px",
-                    play: false,
-                    loop: false,
-                    menu: false,
-                    backgroundColor: "#000",
-                    quality: "Q",
-                    scale: "S",
-                    windowMode: "WM",
-                    baseUrl: "http://foo.bar.com/",
-                    version: "1.0.0.0",
-                    htmlAttributes: new { id = "fl" },
-                    embedName: "efl"
-                )
+                GetContext(),
+                _pathUtility,
+                "http://foo.bar.com/foo.swf",
+                width: "100px",
+                height: "100px",
+                play: false,
+                loop: false,
+                menu: false,
+                backgroundColor: "#000",
+                quality: "Q",
+                scale: "S",
+                windowMode: "WM",
+                baseUrl: "http://foo.bar.com/",
+                version: "1.0.0.0",
+                htmlAttributes: new { id = "fl" },
+                embedName: "efl"
+            )
                 .ToString()
                 .Replace("\r\n", "");
 
@@ -134,11 +134,11 @@ namespace Microsoft.Web.Helpers.Test
         public void FlashWithUnexposedOptions()
         {
             string html = Video.Flash(
-                    GetContext(),
-                    _pathUtility,
-                    "http://foo.bar.com/foo.swf",
-                    options: new { X = "Y", Z = 123 }
-                )
+                GetContext(),
+                _pathUtility,
+                "http://foo.bar.com/foo.swf",
+                options: new { X = "Y", Z = 123 }
+            )
                 .ToString()
                 .Replace("\r\n", "");
             Assert.Contains("<param name=\"X\" value=\"Y\" />", html);
@@ -176,10 +176,10 @@ namespace Microsoft.Web.Helpers.Test
         public void MediaPlayerDefaults()
         {
             string html = Video.MediaPlayer(
-                    GetContext(),
-                    _pathUtility,
-                    "http://foo.bar.com/foo.wmv"
-                )
+                GetContext(),
+                _pathUtility,
+                "http://foo.bar.com/foo.wmv"
+            )
                 .ToString()
                 .Replace("\r\n", "");
             Assert.StartsWith(
@@ -222,22 +222,22 @@ namespace Microsoft.Web.Helpers.Test
         public void MediaPlayerWithExposedOptions()
         {
             string html = Video.MediaPlayer(
-                    GetContext(),
-                    _pathUtility,
-                    "http://foo.bar.com/foo.wmv",
-                    width: "100px",
-                    height: "100px",
-                    autoStart: false,
-                    playCount: 2,
-                    uiMode: "UIMODE",
-                    stretchToFit: true,
-                    enableContextMenu: false,
-                    mute: true,
-                    volume: 1,
-                    baseUrl: "http://foo.bar.com/",
-                    htmlAttributes: new { id = "mp" },
-                    embedName: "emp"
-                )
+                GetContext(),
+                _pathUtility,
+                "http://foo.bar.com/foo.wmv",
+                width: "100px",
+                height: "100px",
+                autoStart: false,
+                playCount: 2,
+                uiMode: "UIMODE",
+                stretchToFit: true,
+                enableContextMenu: false,
+                mute: true,
+                volume: 1,
+                baseUrl: "http://foo.bar.com/",
+                htmlAttributes: new { id = "mp" },
+                embedName: "emp"
+            )
                 .ToString()
                 .Replace("\r\n", "");
             Assert.StartsWith(
@@ -274,11 +274,11 @@ namespace Microsoft.Web.Helpers.Test
         public void MediaPlayerWithUnexposedOptions()
         {
             string html = Video.MediaPlayer(
-                    GetContext(),
-                    _pathUtility,
-                    "http://foo.bar.com/foo.wmv",
-                    options: new { X = "Y", Z = 123 }
-                )
+                GetContext(),
+                _pathUtility,
+                "http://foo.bar.com/foo.wmv",
+                options: new { X = "Y", Z = 123 }
+            )
                 .ToString()
                 .Replace("\r\n", "");
             Assert.Contains("<param name=\"X\" value=\"Y\" />", html);
@@ -317,12 +317,12 @@ namespace Microsoft.Web.Helpers.Test
         public void SilverlightDefaults()
         {
             string html = Video.Silverlight(
-                    GetContext(),
-                    _pathUtility,
-                    "http://foo.bar.com/foo.xap",
-                    "100px",
-                    "100px"
-                )
+                GetContext(),
+                _pathUtility,
+                "http://foo.bar.com/foo.xap",
+                "100px",
+                "100px"
+            )
                 .ToString()
                 .Replace("\r\n", "");
             Assert.StartsWith(
@@ -440,17 +440,17 @@ namespace Microsoft.Web.Helpers.Test
         public void SilverlightWithExposedOptions()
         {
             string html = Video.Silverlight(
-                    GetContext(),
-                    _pathUtility,
-                    "http://foo.bar.com/foo.xap",
-                    width: "85%",
-                    height: "85%",
-                    backgroundColor: "red",
-                    initParameters: "X=Y",
-                    minimumVersion: "1.0.0.0",
-                    autoUpgrade: false,
-                    htmlAttributes: new { id = "sl" }
-                )
+                GetContext(),
+                _pathUtility,
+                "http://foo.bar.com/foo.xap",
+                width: "85%",
+                height: "85%",
+                backgroundColor: "red",
+                initParameters: "X=Y",
+                minimumVersion: "1.0.0.0",
+                autoUpgrade: false,
+                htmlAttributes: new { id = "sl" }
+            )
                 .ToString()
                 .Replace("\r\n", "");
             Assert.StartsWith(
@@ -471,13 +471,13 @@ namespace Microsoft.Web.Helpers.Test
         public void SilverlightWithUnexposedOptions()
         {
             string html = Video.Silverlight(
-                    GetContext(),
-                    _pathUtility,
-                    "http://foo.bar.com/foo.xap",
-                    width: "50px",
-                    height: "50px",
-                    options: new { X = "Y", Z = 123 }
-                )
+                GetContext(),
+                _pathUtility,
+                "http://foo.bar.com/foo.xap",
+                width: "50px",
+                height: "50px",
+                options: new { X = "Y", Z = 123 }
+            )
                 .ToString()
                 .Replace("\r\n", "");
             Assert.Contains("<param name=\"X\" value=\"Y\" />", html);

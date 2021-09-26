@@ -49,8 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             _componentModel = (IComponentModel)await GetServiceAsync(typeof(SComponentModel))
                 .ConfigureAwait(true);
             var menuCommandService = (OleMenuCommandService)await GetServiceAsync(
-                    typeof(IMenuCommandService)
-                )
+                typeof(IMenuCommandService)
+            )
                 .ConfigureAwait(true);
             cancellationToken.ThrowIfCancellationRequested();
             Assumes.Present(shell);
@@ -72,8 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             SetErrorHandlers(typeof(IInteractiveWindow).Assembly, fatalHandler, nonFatalHandler);
             SetErrorHandlers(typeof(IVsInteractiveWindow).Assembly, fatalHandler, nonFatalHandler);
 
-            _interactiveWindowProvider =
-                _componentModel.DefaultExportProvider.GetExportedValue<TVsInteractiveWindowProvider>();
+            _interactiveWindowProvider = _componentModel.DefaultExportProvider
+                .GetExportedValue<TVsInteractiveWindowProvider>();
 
             InitializeMenuCommands(menuCommandService);
         }
@@ -85,9 +85,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         )
         {
             var type = assembly.GetType(
-                    "Microsoft.VisualStudio.InteractiveWindow.FatalError",
-                    throwOnError: true
-                )
+                "Microsoft.VisualStudio.InteractiveWindow.FatalError",
+                throwOnError: true
+            )
                 .GetTypeInfo();
 
             var handlerSetter = type.GetDeclaredMethod("set_Handler");

@@ -33,11 +33,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 
             VisualStudio.SolutionExplorer.CreateSolution(nameof(BasicBuild));
             var testProj = new ProjectUtils.Project("TestProj");
-            VisualStudio.SolutionExplorer.AddProject(
-                testProj,
-                WellKnownProjectTemplates.ConsoleApplication,
-                LanguageNames.VisualBasic
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    testProj,
+                    WellKnownProjectTemplates.ConsoleApplication,
+                    LanguageNames.VisualBasic
+                );
         }
 
         // Also "https://github.com/dotnet/roslyn/issues/37689")]
@@ -65,10 +66,8 @@ End Module
 "
             );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
             VisualStudio.Debugger.SetBreakPoint(module1FileName, "names(0)");
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Editor.Activate();
@@ -98,10 +97,8 @@ Module Module1
 End Module"
             );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
             VisualStudio.Debugger.SetBreakPoint(module1FileName, "Console.WriteLine(1)");
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Editor.Activate();
@@ -112,10 +109,8 @@ Console.WriteLine(1)
 Catch ex As Exception
 End Try"
             );
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
             VisualStudio.Debugger.StepOver(waitForBreakOrEnd: true);
             VisualStudio.Editor.Verify.CurrentLineText("End Try");
         }
@@ -138,10 +133,8 @@ Module Module1
 End Module"
             );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
             VisualStudio.Debugger.SetBreakPoint(module1FileName, "x * x", charsOffset: -1);
 
             VisualStudio.Debugger.Go(waitForBreakMode: true);
@@ -177,10 +170,8 @@ Module Module1
 End Module"
             );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Debugger.SetBreakPoint(module1FileName, "Dim x", charsOffset: 1);
             VisualStudio.Debugger.ExecuteStatement("Module1.Main()");
@@ -193,18 +184,20 @@ End Module"
         private void SetupMultiProjectSolution()
         {
             var basicLibrary = new ProjectUtils.Project("BasicLibrary1");
-            VisualStudio.SolutionExplorer.AddProject(
-                basicLibrary,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.VisualBasic
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    basicLibrary,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.VisualBasic
+                );
 
             var cSharpLibrary = new ProjectUtils.Project("CSharpLibrary1");
-            VisualStudio.SolutionExplorer.AddProject(
-                cSharpLibrary,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    cSharpLibrary,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.CSharp
+                );
             VisualStudio.SolutionExplorer.AddFile(cSharpLibrary, "File1.cs");
 
             VisualStudio.SolutionExplorer.OpenFile(basicLibrary, "Class1.vb");
@@ -223,10 +216,8 @@ End Class
             );
 
             var project = new ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddProjectReference(
-                project,
-                new ProjectUtils.ProjectReference("BasicLibrary1")
-            );
+            VisualStudio.SolutionExplorer
+                .AddProjectReference(project, new ProjectUtils.ProjectReference("BasicLibrary1"));
             VisualStudio.SolutionExplorer.OpenFile(project, module1FileName);
 
             VisualStudio.Editor.SetText(
@@ -243,10 +234,8 @@ End Module
 "
             );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         // Also https://github.com/dotnet/roslyn/issues/36763
@@ -279,17 +268,13 @@ Module Module1
 End Module
 "
             );
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
             VisualStudio.Debugger.SetBreakPoint(module1FileName, "End Sub");
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Editor.Activate();
-            VisualStudio.Editor.ReplaceText(
-                "Dim goo As String = \"abc\"",
-                "Dim goo As Single = 10"
-            );
+            VisualStudio.Editor
+                .ReplaceText("Dim goo As String = \"abc\"", "Dim goo As Single = 10");
             VisualStudio.Editor.SelectTextInCurrentDocument("Sub Main()");
             VisualStudio.Debugger.SetNextStatement();
             VisualStudio.Debugger.Go(waitForBreakMode: true);
@@ -321,14 +306,10 @@ Module Module1
 End Module
 "
             );
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
-            VisualStudio.Debugger.SetBreakPoint(
-                module1FileName,
-                "Function bar(ByVal moo As Long) As Decimal"
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Debugger
+                .SetBreakPoint(module1FileName, "Function bar(ByVal moo As Long) As Decimal");
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Editor.Activate();
             VisualStudio.Editor.ReplaceText("Dim lLng As Long = 5", "Dim lLng As Long = 444");
@@ -359,10 +340,8 @@ End Module
 "
             );
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.Editor.Activate();
 

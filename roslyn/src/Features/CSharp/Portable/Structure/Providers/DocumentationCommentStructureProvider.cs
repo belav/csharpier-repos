@@ -33,11 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 BlockStructureOptions.MaximumBannerLength,
                 LanguageNames.CSharp
             );
-            var bannerText = CSharpSyntaxFacts.Instance.GetBannerText(
-                documentationComment,
-                bannerLength,
-                cancellationToken
-            );
+            var bannerText = CSharpSyntaxFacts.Instance
+                .GetBannerText(documentationComment, bannerLength, cancellationToken);
 
             spans.Add(
                 new BlockSpan(

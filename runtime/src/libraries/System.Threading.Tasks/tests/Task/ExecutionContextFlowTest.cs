@@ -21,7 +21,8 @@ namespace System.Threading.Tasks.Tests
             try
             {
                 var asyncLocal = new AsyncLocal<int>();
-                Task.Factory.StartNew(
+                Task.Factory
+                    .StartNew(
                         () => asyncLocal.Value = 42,
                         CancellationToken.None,
                         TaskCreationOptions.None,

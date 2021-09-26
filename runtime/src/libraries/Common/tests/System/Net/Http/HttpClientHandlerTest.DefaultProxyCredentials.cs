@@ -59,9 +59,8 @@ namespace System.Net.Http.Functional.Tests
             string expectCreds =
                 "Basic "
                 + Convert.ToBase64String(
-                    Encoding.UTF8.GetBytes(
-                        $"{explicitProxyCreds.UserName}:{explicitProxyCreds.Password}"
-                    )
+                    Encoding.UTF8
+                        .GetBytes($"{explicitProxyCreds.UserName}:{explicitProxyCreds.Password}")
                 );
 
             await LoopbackServer.CreateClientAndServerAsync(
@@ -125,44 +124,43 @@ namespace System.Net.Http.Functional.Tests
                             psi.Environment.Add("http_proxy", $"http://{uri.Host}:{uri.Port}");
 
                             RemoteExecutor.Invoke(
-                                    async (useProxyString, useVersionString, uriString) =>
+                                async (useProxyString, useVersionString, uriString) =>
+                                {
+                                    using (
+                                        HttpClientHandler handler = CreateHttpClientHandler(
+                                            useVersionString
+                                        )
+                                    )
+                                    using (
+                                        HttpClient client = CreateHttpClient(
+                                            handler,
+                                            useVersionString
+                                        )
+                                    )
                                     {
-                                        using (
-                                            HttpClientHandler handler = CreateHttpClientHandler(
-                                                useVersionString
-                                            )
-                                        )
-                                        using (
-                                            HttpClient client = CreateHttpClient(
-                                                handler,
-                                                useVersionString
-                                            )
-                                        )
-                                        {
-                                            var creds = new NetworkCredential(
-                                                ExpectedUsername,
-                                                ExpectedPassword
-                                            );
-                                            handler.DefaultProxyCredentials = creds;
-                                            handler.UseProxy = bool.Parse(useProxyString);
+                                        var creds = new NetworkCredential(
+                                            ExpectedUsername,
+                                            ExpectedPassword
+                                        );
+                                        handler.DefaultProxyCredentials = creds;
+                                        handler.UseProxy = bool.Parse(useProxyString);
 
-                                            HttpResponseMessage response = await client.GetAsync(
-                                                uriString
-                                            );
-                                            // Correctness of user and password is done in server part.
-                                            Assert.True(response.StatusCode == HttpStatusCode.OK);
-                                        }
-                                        ;
-                                    },
-                                    useProxy.ToString(),
-                                    UseVersion.ToString(),
-                                    // If proxy is used , the url does not matter. We set it to be different to avoid confusion.
-                                    useProxy
-                                      ? Configuration.Http.RemoteEchoServer.ToString()
-                                      : uri.ToString(),
-                                    new RemoteInvokeOptions { StartInfo = psi }
-                                )
-                                .Dispose();
+                                        HttpResponseMessage response = await client.GetAsync(
+                                            uriString
+                                        );
+                                        // Correctness of user and password is done in server part.
+                                        Assert.True(response.StatusCode == HttpStatusCode.OK);
+                                    }
+                                    ;
+                                },
+                                useProxy.ToString(),
+                                UseVersion.ToString(),
+                                // If proxy is used , the url does not matter. We set it to be different to avoid confusion.
+                                useProxy
+                                  ? Configuration.Http.RemoteEchoServer.ToString()
+                                  : uri.ToString(),
+                                new RemoteInvokeOptions { StartInfo = psi }
+                            ).Dispose();
                         }
                     ),
                 server =>
@@ -183,9 +181,9 @@ namespace System.Net.Http.Functional.Tests
                             {
                                 // Reject request and wait for authenticated one.
                                 await connection.SendResponseAsync(
-                                        HttpStatusCode.ProxyAuthenticationRequired,
-                                        "Proxy-Authenticate: Basic realm=\"NetCore\"\r\n"
-                                    )
+                                    HttpStatusCode.ProxyAuthenticationRequired,
+                                    "Proxy-Authenticate: Basic realm=\"NetCore\"\r\n"
+                                )
                                     .ConfigureAwait(false);
 
                                 lines = await connection.ReadRequestHeaderAsync()

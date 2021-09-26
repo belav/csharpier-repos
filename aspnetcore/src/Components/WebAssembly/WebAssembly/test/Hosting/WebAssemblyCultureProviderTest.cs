@@ -39,26 +39,26 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             using var cultureReplacer = new CultureReplacer("en-GB");
             var invoker = new Mock<IJSUnmarshalledRuntime>();
             invoker.Setup(
-                    i =>
-                        i.InvokeUnmarshalled<string[], object, object, Task<object>>(
-                            GetSatelliteAssemblies,
-                            new[] { "en-GB", "en" },
-                            null,
-                            null
-                        )
-                )
+                i =>
+                    i.InvokeUnmarshalled<string[], object, object, Task<object>>(
+                        GetSatelliteAssemblies,
+                        new[] { "en-GB", "en" },
+                        null,
+                        null
+                    )
+            )
                 .Returns(Task.FromResult<object>(1))
                 .Verifiable();
 
             invoker.Setup(
-                    i =>
-                        i.InvokeUnmarshalled<object, object, object, object[]>(
-                            ReadSatelliteAssemblies,
-                            null,
-                            null,
-                            null
-                        )
-                )
+                i =>
+                    i.InvokeUnmarshalled<object, object, object, object[]>(
+                        ReadSatelliteAssemblies,
+                        null,
+                        null,
+                        null
+                    )
+            )
                 .Returns(new object[] { File.ReadAllBytes(GetType().Assembly.Location) })
                 .Verifiable();
 
@@ -82,14 +82,14 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             using var cultureReplacer = new CultureReplacer("en-GB");
             var invoker = new Mock<IJSUnmarshalledRuntime>();
             invoker.Setup(
-                    i =>
-                        i.InvokeUnmarshalled<string[], object, object, Task<object>>(
-                            GetSatelliteAssemblies,
-                            new[] { "en-GB", "en" },
-                            null,
-                            null
-                        )
-                )
+                i =>
+                    i.InvokeUnmarshalled<string[], object, object, Task<object>>(
+                        GetSatelliteAssemblies,
+                        new[] { "en-GB", "en" },
+                        null,
+                        null
+                    )
+            )
                 .Returns(Task.FromResult<object>(0))
                 .Verifiable();
 

@@ -48,11 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var sqlExpressionFactory = relationalDependencies.SqlExpressionFactory;
             _queryCompilationContext = queryCompilationContext;
-            _sqlTranslator =
-                relationalDependencies.RelationalSqlTranslatingExpressionVisitorFactory.Create(
-                    queryCompilationContext,
-                    this
-                );
+            _sqlTranslator = relationalDependencies.RelationalSqlTranslatingExpressionVisitorFactory
+                .Create(queryCompilationContext, this);
             _weakEntityExpandingExpressionVisitor = new WeakEntityExpandingExpressionVisitor(
                 _sqlTranslator,
                 sqlExpressionFactory
@@ -80,11 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             RelationalDependencies = parentVisitor.RelationalDependencies;
             _queryCompilationContext = parentVisitor._queryCompilationContext;
-            _sqlTranslator =
-                RelationalDependencies.RelationalSqlTranslatingExpressionVisitorFactory.Create(
-                    parentVisitor._queryCompilationContext,
-                    parentVisitor
-                );
+            _sqlTranslator = RelationalDependencies.RelationalSqlTranslatingExpressionVisitorFactory
+                .Create(parentVisitor._queryCompilationContext, parentVisitor);
             _weakEntityExpandingExpressionVisitor = new WeakEntityExpandingExpressionVisitor(
                 _sqlTranslator,
                 parentVisitor._sqlExpressionFactory
@@ -108,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         _sqlExpressionFactory.Select(
                             fromSqlQueryRootExpression.EntityType,
                             new FromSqlExpression(
-                                fromSqlQueryRootExpression.EntityType.GetDefaultMappings()
+                                fromSqlQueryRootExpression.EntityType
+                                    .GetDefaultMappings()
                                     .Single()
                                     .Table.Name.Substring(0, 1)
                                     .ToLowerInvariant(),
@@ -165,7 +160,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     return CreateShapedQueryExpression(entityType, queryExpression);
 
                 case QueryRootExpression queryRootExpression
-                      when queryRootExpression.EntityType.GetSqlQueryMappings()
+                      when queryRootExpression.EntityType
+                          .GetSqlQueryMappings()
                           .FirstOrDefault(m => m.IsDefaultSqlQueryMapping)?.SqlQuery
                           is ISqlQuery sqlQuery:
                     return Visit(
@@ -368,10 +364,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(source1, nameof(source1));
             Check.NotNull(source2, nameof(source2));
 
-            ((SelectExpression)source1.QueryExpression).ApplyUnion(
-                (SelectExpression)source2.QueryExpression,
-                distinct: false
-            );
+            ((SelectExpression)source1.QueryExpression)
+                .ApplyUnion((SelectExpression)source2.QueryExpression, distinct: false);
 
             return source1.UpdateShaperExpression(
                 MatchShaperNullabilityForSetOperation(
@@ -478,9 +472,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             if (defaultValue == null)
             {
-                ((SelectExpression)source.QueryExpression).ApplyDefaultIfEmpty(
-                    _sqlExpressionFactory
-                );
+                ((SelectExpression)source.QueryExpression)
+                    .ApplyDefaultIfEmpty(_sqlExpressionFactory);
                 return source.UpdateShaperExpression(MarkShaperNullable(source.ShaperExpression));
             }
 
@@ -499,7 +492,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 && selectExpression.Offset == null
             )
             {
-                _queryCompilationContext.Logger.DistinctAfterOrderByWithoutRowLimitingOperatorWarning();
+                _queryCompilationContext.Logger
+                    .DistinctAfterOrderByWithoutRowLimitingOperatorWarning();
             }
 
             selectExpression.ApplyDistinct();
@@ -528,10 +522,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(source1, nameof(source1));
             Check.NotNull(source2, nameof(source2));
 
-            ((SelectExpression)source1.QueryExpression).ApplyExcept(
-                (SelectExpression)source2.QueryExpression,
-                distinct: true
-            );
+            ((SelectExpression)source1.QueryExpression)
+                .ApplyExcept((SelectExpression)source2.QueryExpression, distinct: true);
 
             // Since except has result from source1, we don't need to change shaper
             return source1;
@@ -625,7 +617,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 var newResultSelectorBody = new ReplacingExpressionVisitor(
                     new Expression[] { original1, original2 },
                     new[] { translatedKey, groupByShaper }
-                ).Visit(resultSelector.Body);
+                )
+                    .Visit(resultSelector.Body);
 
                 newResultSelectorBody = ExpandWeakEntities(selectExpression, newResultSelectorBody);
 
@@ -728,10 +721,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(source1, nameof(source1));
             Check.NotNull(source2, nameof(source2));
 
-            ((SelectExpression)source1.QueryExpression).ApplyIntersect(
-                (SelectExpression)source2.QueryExpression,
-                distinct: true
-            );
+            ((SelectExpression)source1.QueryExpression)
+                .ApplyIntersect((SelectExpression)source2.QueryExpression, distinct: true);
 
             // For intersect since result comes from both sides, if one of them is non-nullable then both are non-nullable
             return source1.UpdateShaperExpression(
@@ -1124,9 +1115,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 return null;
             }
 
-            ((SelectExpression)source.QueryExpression).ApplyOrdering(
-                new OrderingExpression(translation, ascending)
-            );
+            ((SelectExpression)source.QueryExpression)
+                .ApplyOrdering(new OrderingExpression(translation, ascending));
 
             return source;
         }
@@ -1469,9 +1459,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 return null;
             }
 
-            ((SelectExpression)source.QueryExpression).AppendOrdering(
-                new OrderingExpression(translation, ascending)
-            );
+            ((SelectExpression)source.QueryExpression)
+                .AppendOrdering(new OrderingExpression(translation, ascending));
 
             return source;
         }
@@ -1485,10 +1474,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(source1, nameof(source1));
             Check.NotNull(source2, nameof(source2));
 
-            ((SelectExpression)source1.QueryExpression).ApplyUnion(
-                (SelectExpression)source2.QueryExpression,
-                distinct: true
-            );
+            ((SelectExpression)source1.QueryExpression)
+                .ApplyUnion((SelectExpression)source2.QueryExpression, distinct: true);
 
             return source1.UpdateShaperExpression(
                 MatchShaperNullabilityForSetOperation(
@@ -1559,8 +1546,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private sealed class WeakEntityExpandingExpressionVisitor : ExpressionVisitor
         {
-            private static readonly MethodInfo _objectEqualsMethodInfo =
-                typeof(object).GetRequiredRuntimeMethod(
+            private static readonly MethodInfo _objectEqualsMethodInfo = typeof(object)
+                .GetRequiredRuntimeMethod(
                     nameof(object.Equals),
                     new[] { typeof(object), typeof(object) }
                 );
@@ -1687,9 +1674,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         _sqlExpressionFactory.Select(targetEntityType)
                     );
 
-                    var makeNullable = foreignKey.PrincipalKey.Properties.Concat(
-                            foreignKey.Properties
-                        )
+                    var makeNullable = foreignKey.PrincipalKey.Properties
+                        .Concat(foreignKey.Properties)
                         .Select(p => p.ClrType)
                         .Any(t => t.IsNullableType());
 
@@ -1719,17 +1705,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                         ? Expression.AndAlso(
                               outerKey is NewArrayExpression newArrayExpression
                                 ? newArrayExpression.Expressions.Select(
-                                          e =>
-                                          {
-                                              var left = (e as UnaryExpression)?.Operand ?? e;
+                                      e =>
+                                      {
+                                          var left = (e as UnaryExpression)?.Operand ?? e;
 
-                                              return Expression.NotEqual(
-                                                  left,
-                                                  Expression.Constant(null, left.Type)
-                                              );
-                                          }
-                                      )
-                                      .Aggregate((l, r) => Expression.AndAlso(l, r))
+                                          return Expression.NotEqual(
+                                              left,
+                                              Expression.Constant(null, left.Type)
+                                          );
+                                      }
+                                  ).Aggregate((l, r) => Expression.AndAlso(l, r))
                                 : Expression.NotEqual(
                                       outerKey,
                                       Expression.Constant(null, outerKey.Type)
@@ -1770,13 +1755,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                         navigation.DeclaringEntityType.BaseType == null
                         || entityType.FindDiscriminatorProperty() != null
                             ? navigation.DeclaringEntityType.GetViewOrTableMappings().Single().Table
-                            : navigation.DeclaringEntityType.GetViewOrTableMappings()
-                                  .Select(tm => tm.Table)
-                                  .Except(
-                                      navigation.DeclaringEntityType.BaseType.GetViewOrTableMappings()
-                                          .Select(tm => tm.Table)
-                                  )
-                                  .Single();
+                            : navigation.DeclaringEntityType
+                              .GetViewOrTableMappings()
+                              .Select(tm => tm.Table)
+                              .Except(
+                                  navigation.DeclaringEntityType.BaseType
+                                      .GetViewOrTableMappings()
+                                      .Select(tm => tm.Table)
+                              )
+                              .Single();
                     if (
                         table.GetReferencingRowInternalForeignKeys(
                             foreignKey.PrincipalEntityType
@@ -1796,9 +1783,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             // and for dependent on derived table
                             || (
                                 entityType.FindDiscriminatorProperty() == null
-                                && navigation.DeclaringEntityType.IsStrictlyDerivedFrom(
-                                    entityShaperExpression.EntityType
-                                )
+                                && navigation.DeclaringEntityType
+                                    .IsStrictlyDerivedFrom(entityShaperExpression.EntityType)
                             );
 
                         var entityProjection =
@@ -1833,9 +1819,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             innerSelectExpression
                         );
 
-                        var makeNullable = foreignKey.PrincipalKey.Properties.Concat(
-                                foreignKey.Properties
-                            )
+                        var makeNullable = foreignKey.PrincipalKey.Properties
+                            .Concat(foreignKey.Properties)
                             .Select(p => p.ClrType)
                             .Any(t => t.IsNullableType());
 
@@ -1845,12 +1830,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                               : foreignKey.PrincipalKey.Properties,
                             makeNullable
                         );
-                        var innerKey = innerShapedQuery.ShaperExpression.CreateKeyValuesExpression(
-                            navigation.IsOnDependent
-                              ? foreignKey.PrincipalKey.Properties
-                              : foreignKey.Properties,
-                            makeNullable
-                        );
+                        var innerKey = innerShapedQuery.ShaperExpression
+                            .CreateKeyValuesExpression(
+                                navigation.IsOnDependent
+                                  ? foreignKey.PrincipalKey.Properties
+                                  : foreignKey.Properties,
+                                makeNullable
+                            );
 
                         var joinPredicate = _sqlTranslator.Translate(
                             Expression.Equal(outerKey, innerKey)
@@ -1908,7 +1894,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 new ReplacingExpressionVisitor(
                     new[] { original1, original2 },
                     new[] { replacement1, replacement2 }
-                ).Visit(resultSelector.Body),
+                )
+                    .Visit(resultSelector.Body),
                 transparentIdentifierParameter
             );
 
@@ -2052,7 +2039,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         ? (Expression)Expression.Default(resultType)
                         : Expression.Throw(
                               Expression.New(
-                                  typeof(InvalidOperationException).GetConstructors()
+                                  typeof(InvalidOperationException)
+                                      .GetConstructors()
                                       .Single(ci => ci.GetParameters().Length == 1),
                                   Expression.Constant(CoreStrings.SequenceContainsNoElements)
                               ),

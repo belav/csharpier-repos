@@ -68,9 +68,8 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var patch = new JsonPatchDocument<Customer>();
-            patch.Operations.Add(
-                new Operation<Customer>("replace", "/CustomerName", null, "James")
-            );
+            patch.Operations
+                .Add(new Operation<Customer>("replace", "/CustomerName", null, "James"));
             var model = new Customer();
             var modelState = new ModelStateDictionary();
 

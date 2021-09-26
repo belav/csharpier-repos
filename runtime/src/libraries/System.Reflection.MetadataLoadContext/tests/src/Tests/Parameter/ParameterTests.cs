@@ -13,7 +13,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestRawDefaultValue1()
         {
-            ParameterInfo p = typeof(ParametersWithDefaultValues).Project()
+            ParameterInfo p = typeof(ParametersWithDefaultValues)
+                .Project()
                 .GetTypeInfo()
                 .GetDeclaredMethod("Foo1")
                 .GetParameters()[0];
@@ -24,7 +25,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestRawDefaultValue2()
         {
-            ParameterInfo p = typeof(ParametersWithDefaultValues).Project()
+            ParameterInfo p = typeof(ParametersWithDefaultValues)
+                .Project()
                 .GetTypeInfo()
                 .GetDeclaredMethod("Foo2")
                 .GetParameters()[0];
@@ -35,7 +37,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestRawDefaultValue3()
         {
-            ParameterInfo p = typeof(ParametersWithDefaultValues).Project()
+            ParameterInfo p = typeof(ParametersWithDefaultValues)
+                .Project()
                 .GetTypeInfo()
                 .GetDeclaredMethod("Foo3")
                 .GetParameters()[0];
@@ -48,7 +51,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestRawDefaultValue4()
         {
-            ParameterInfo p = typeof(ParametersWithDefaultValues).Project()
+            ParameterInfo p = typeof(ParametersWithDefaultValues)
+                .Project()
                 .GetTypeInfo()
                 .GetDeclaredMethod("Foo4")
                 .GetParameters()[0];
@@ -61,7 +65,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestRawDefaultValue5()
         {
-            ParameterInfo p = typeof(ParametersWithDefaultValues).Project()
+            ParameterInfo p = typeof(ParametersWithDefaultValues)
+                .Project()
                 .GetTypeInfo()
                 .GetDeclaredMethod("Foo5")
                 .GetParameters()[0];
@@ -74,7 +79,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestRawDefaultValue6()
         {
-            ParameterInfo p = typeof(ParametersWithDefaultValues).Project()
+            ParameterInfo p = typeof(ParametersWithDefaultValues)
+                .Project()
                 .GetTypeInfo()
                 .GetDeclaredMethod("Foo6")
                 .GetParameters()[0];
@@ -88,39 +94,36 @@ namespace System.Reflection.Tests
         [ActiveIssue("https://github.com/mono/mono/issues/15340", TestRuntimes.Mono)]
         public static void TestPseudoCustomAttributes()
         {
-            MethodInfo m = typeof(ParametersWithPseudoCustomtAttributes).Project()
+            MethodInfo m = typeof(ParametersWithPseudoCustomtAttributes)
+                .Project()
                 .GetTypeInfo()
                 .GetDeclaredMethod("Foo");
             ParameterInfo[] pis = m.GetParameters();
             {
                 ParameterInfo p = pis[0];
-                CustomAttributeData cad = p.CustomAttributes.Single(
-                    c => c.AttributeType == typeof(InAttribute).Project()
-                );
+                CustomAttributeData cad = p.CustomAttributes
+                    .Single(c => c.AttributeType == typeof(InAttribute).Project());
                 InAttribute i = cad.UnprojectAndInstantiate<InAttribute>();
             }
 
             {
                 ParameterInfo p = pis[1];
-                CustomAttributeData cad = p.CustomAttributes.Single(
-                    c => c.AttributeType == typeof(OutAttribute).Project()
-                );
+                CustomAttributeData cad = p.CustomAttributes
+                    .Single(c => c.AttributeType == typeof(OutAttribute).Project());
                 OutAttribute o = cad.UnprojectAndInstantiate<OutAttribute>();
             }
 
             {
                 ParameterInfo p = pis[2];
-                CustomAttributeData cad = p.CustomAttributes.Single(
-                    c => c.AttributeType == typeof(OptionalAttribute).Project()
-                );
+                CustomAttributeData cad = p.CustomAttributes
+                    .Single(c => c.AttributeType == typeof(OptionalAttribute).Project());
                 OptionalAttribute o = cad.UnprojectAndInstantiate<OptionalAttribute>();
             }
 
             {
                 ParameterInfo p = pis[3];
-                CustomAttributeData cad = p.CustomAttributes.Single(
-                    c => c.AttributeType == typeof(MarshalAsAttribute).Project()
-                );
+                CustomAttributeData cad = p.CustomAttributes
+                    .Single(c => c.AttributeType == typeof(MarshalAsAttribute).Project());
                 MarshalAsAttribute ma = cad.UnprojectAndInstantiate<MarshalAsAttribute>();
                 Assert.Equal(UnmanagedType.I4, ma.Value);
             }

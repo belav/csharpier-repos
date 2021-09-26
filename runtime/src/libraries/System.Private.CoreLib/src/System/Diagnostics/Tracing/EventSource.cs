@@ -785,9 +785,8 @@ namespace System.Diagnostics.Tracing
                 if (eventID == 0)
                     continue;
 
-                byte[]? metadata = EventPipeMetadataGenerator.Instance.GenerateEventMetadata(
-                    m_eventData[i]
-                );
+                byte[]? metadata = EventPipeMetadataGenerator.Instance
+                    .GenerateEventMetadata(m_eventData[i]);
                 uint metadataLength = (metadata != null) ? (uint)metadata.Length : 0;
 
                 string eventName = m_eventData[i].Name;
@@ -797,15 +796,16 @@ namespace System.Diagnostics.Tracing
 
                 fixed (byte* pMetadata = metadata)
                 {
-                    IntPtr eventHandle = m_eventPipeProvider.m_eventProvider.DefineEventHandle(
-                        eventID,
-                        eventName,
-                        keywords,
-                        eventVersion,
-                        level,
-                        pMetadata,
-                        metadataLength
-                    );
+                    IntPtr eventHandle = m_eventPipeProvider.m_eventProvider
+                        .DefineEventHandle(
+                            eventID,
+                            eventName,
+                            keywords,
+                            eventVersion,
+                            level,
+                            pMetadata,
+                            metadataLength
+                        );
 
                     Debug.Assert(eventHandle != IntPtr.Zero);
                     m_eventData[i].EventHandle = eventHandle;
@@ -2587,8 +2587,8 @@ namespace System.Diagnostics.Tracing
                                     string eventName = "EventSourceMessage";
                                     EventParameterInfo paramInfo = default(EventParameterInfo);
                                     paramInfo.SetInfo("message", typeof(string));
-                                    byte[]? metadata =
-                                        EventPipeMetadataGenerator.Instance.GenerateMetadata(
+                                    byte[]? metadata = EventPipeMetadataGenerator.Instance
+                                        .GenerateMetadata(
                                             0,
                                             eventName,
                                             keywords,
@@ -2603,15 +2603,16 @@ namespace System.Diagnostics.Tracing
                                     fixed (byte* pMetadata = metadata)
                                     {
                                         m_writeEventStringEventHandle =
-                                            m_eventPipeProvider.m_eventProvider.DefineEventHandle(
-                                                0,
-                                                eventName,
-                                                keywords,
-                                                0,
-                                                (uint)level,
-                                                pMetadata,
-                                                metadataLength
-                                            );
+                                            m_eventPipeProvider.m_eventProvider
+                                                .DefineEventHandle(
+                                                    0,
+                                                    eventName,
+                                                    keywords,
+                                                    0,
+                                                    (uint)level,
+                                                    pMetadata,
+                                                    metadataLength
+                                                );
                                     }
                                 }
                             }
@@ -3536,33 +3537,29 @@ namespace System.Diagnostics.Tracing
                 attributeType == reflectedAttributeType
                 ||
                 // are the full typenames equal?
-                string.Equals(
-                    attributeType.FullName,
-                    reflectedAttributeType.FullName,
-                    StringComparison.Ordinal
-                )
+                string
+                    .Equals(
+                        attributeType.FullName,
+                        reflectedAttributeType.FullName,
+                        StringComparison.Ordinal
+                    )
                 ||
                 // are the typenames equal and the namespaces under "Diagnostics.Tracing" (typically
                 // either Microsoft.Diagnostics.Tracing or System.Diagnostics.Tracing)?
-                string.Equals(
-                    attributeType.Name,
-                    reflectedAttributeType.Name,
-                    StringComparison.Ordinal
-                )
-                    && attributeType.Namespace!.EndsWith(
-                        "Diagnostics.Tracing",
+                string
+                    .Equals(
+                        attributeType.Name,
+                        reflectedAttributeType.Name,
                         StringComparison.Ordinal
                     )
+                    && attributeType.Namespace!
+                        .EndsWith("Diagnostics.Tracing", StringComparison.Ordinal)
                     && (
-                        reflectedAttributeType.Namespace!.EndsWith(
-                            "Diagnostics.Tracing",
-                            StringComparison.Ordinal
-                        )
+                        reflectedAttributeType.Namespace!
+                            .EndsWith("Diagnostics.Tracing", StringComparison.Ordinal)
 #if EVENT_SOURCE_LEGACY_NAMESPACE_SUPPORT
-                        || reflectedAttributeType.Namespace.EndsWith(
-                            "Diagnostics.Eventing",
-                            StringComparison.Ordinal
-                        )
+                        || reflectedAttributeType.Namespace
+                            .EndsWith("Diagnostics.Eventing", StringComparison.Ordinal)
 #endif
                     );
         }
@@ -3876,16 +3873,17 @@ namespace System.Diagnostics.Tracing
                                     if (
                                         string.Compare(eventName, 0, taskName, 0, taskName.Length)
                                             == 0
-                                        && string.Compare(
-                                            eventName,
-                                            taskName.Length,
-                                            s_ActivityStartSuffix,
-                                            0,
-                                            Math.Max(
-                                                eventName.Length - taskName.Length,
-                                                s_ActivityStartSuffix.Length
-                                            )
-                                        ) == 0
+                                        && string
+                                            .Compare(
+                                                eventName,
+                                                taskName.Length,
+                                                s_ActivityStartSuffix,
+                                                0,
+                                                Math.Max(
+                                                    eventName.Length - taskName.Length,
+                                                    s_ActivityStartSuffix.Length
+                                                )
+                                            ) == 0
                                     )
                                     {
                                         // Add a task that is just the task name for the start event.   This suppress the auto-task generation
@@ -3911,24 +3909,26 @@ namespace System.Diagnostics.Tracing
                                         if (
                                             startEventMetadata.Descriptor.Opcode
                                                 == (byte)EventOpcode.Start
-                                            && string.Compare(
-                                                startEventMetadata.Name,
-                                                0,
-                                                taskName,
-                                                0,
-                                                taskName.Length
-                                            ) == 0
-                                            && string.Compare(
-                                                startEventMetadata.Name,
-                                                taskName.Length,
-                                                s_ActivityStartSuffix,
-                                                0,
-                                                Math.Max(
-                                                    startEventMetadata.Name.Length
-                                                        - taskName.Length,
-                                                    s_ActivityStartSuffix.Length
-                                                )
-                                            ) == 0
+                                            && string
+                                                .Compare(
+                                                    startEventMetadata.Name,
+                                                    0,
+                                                    taskName,
+                                                    0,
+                                                    taskName.Length
+                                                ) == 0
+                                            && string
+                                                .Compare(
+                                                    startEventMetadata.Name,
+                                                    taskName.Length,
+                                                    s_ActivityStartSuffix,
+                                                    0,
+                                                    Math.Max(
+                                                        startEventMetadata.Name.Length
+                                                            - taskName.Length,
+                                                        s_ActivityStartSuffix.Length
+                                                    )
+                                                ) == 0
                                         )
                                         {
                                             // Make the stop event match the start event
@@ -4088,11 +4088,8 @@ namespace System.Diagnostics.Tracing
             if (
                 args.Length > 0
                 && args[0].ParameterType == typeof(Guid)
-                && string.Equals(
-                    args[0].Name,
-                    "relatedActivityId",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && string
+                    .Equals(args[0].Name, "relatedActivityId", StringComparison.OrdinalIgnoreCase)
             )
             {
                 var newargs = new ParameterInfo[args.Length - 1];
@@ -4401,7 +4398,8 @@ namespace System.Diagnostics.Tracing
             //
             // If we find this pattern we return the XXX.  Otherwise we return -1.
 #if ES_BUILD_STANDALONE
-            (new ReflectionPermission(ReflectionPermissionFlag.MemberAccess)).Assert();
+            (new ReflectionPermission(ReflectionPermissionFlag.MemberAccess))
+                .Assert();
 #endif
             byte[] instrs = method.GetMethodBody()!.GetILAsByteArray()!;
             int retVal = -1;
@@ -4527,11 +4525,12 @@ namespace System.Diagnostics.Tracing
                 }
 
                 // send message to debugger
-                System.Diagnostics.Debugger.Log(
-                    0,
-                    null,
-                    string.Format("EventSource Error: {0}{1}", msg, System.Environment.NewLine)
-                );
+                System.Diagnostics.Debugger
+                    .Log(
+                        0,
+                        null,
+                        string.Format("EventSource Error: {0}{1}", msg, System.Environment.NewLine)
+                    );
 
                 // Send it to all listeners.
                 WriteEventString(msg);
@@ -4881,13 +4880,8 @@ namespace System.Diagnostics.Tracing
 #if FEATURE_PERFTRACING
             if (eventSource.GetType() == typeof(NativeRuntimeEventSource))
             {
-                EventPipeEventDispatcher.Instance.SendCommand(
-                    this,
-                    EventCommand.Update,
-                    true,
-                    level,
-                    matchAnyKeyword
-                );
+                EventPipeEventDispatcher.Instance
+                    .SendCommand(this, EventCommand.Update, true, level, matchAnyKeyword);
             }
 #endif // FEATURE_PERFTRACING
         }
@@ -4917,13 +4911,14 @@ namespace System.Diagnostics.Tracing
 #if FEATURE_PERFTRACING
             if (eventSource.GetType() == typeof(NativeRuntimeEventSource))
             {
-                EventPipeEventDispatcher.Instance.SendCommand(
-                    this,
-                    EventCommand.Update,
-                    false,
-                    EventLevel.LogAlways,
-                    EventKeywords.None
-                );
+                EventPipeEventDispatcher.Instance
+                    .SendCommand(
+                        this,
+                        EventCommand.Update,
+                        false,
+                        EventLevel.LogAlways,
+                        EventKeywords.None
+                    );
             }
 #endif // FEATURE_PERFTRACING
         }

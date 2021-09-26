@@ -83,30 +83,30 @@ class Program
                 // (16,55): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
                 //         Expression<Func<int[], int>> e = (int[] a) => a[new Index(0, true)]; // 1
                 Diagnostic(
-                        ErrorCode.ERR_ExpressionTreeContainsPatternIndexOrRangeIndexer,
-                        "a[new Index(0, true)]"
-                    )
+                    ErrorCode.ERR_ExpressionTreeContainsPatternIndexOrRangeIndexer,
+                    "a[new Index(0, true)]"
+                )
                     .WithLocation(16, 55),
                 // (17,64): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
                 //         Expression<Func<List<int>, int>> e2 = (List<int> a) => a[new Index(0, true)]; // 2
                 Diagnostic(
-                        ErrorCode.ERR_ExpressionTreeContainsPatternIndexOrRangeIndexer,
-                        "a[new Index(0, true)]"
-                    )
+                    ErrorCode.ERR_ExpressionTreeContainsPatternIndexOrRangeIndexer,
+                    "a[new Index(0, true)]"
+                )
                     .WithLocation(17, 64),
                 // (19,58): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
                 //         Expression<Func<int[], int[]>> e3 = (int[] a) => a[new Range(0, 1)]; // 3
                 Diagnostic(
-                        ErrorCode.ERR_ExpressionTreeContainsPatternIndexOrRangeIndexer,
-                        "a[new Range(0, 1)]"
-                    )
+                    ErrorCode.ERR_ExpressionTreeContainsPatternIndexOrRangeIndexer,
+                    "a[new Range(0, 1)]"
+                )
                     .WithLocation(19, 58),
                 // (20,46): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
                 //         Expression<Func<S, S>> e4 = (S s) => s[new Range(0, 1)]; // 4
                 Diagnostic(
-                        ErrorCode.ERR_ExpressionTreeContainsPatternIndexOrRangeIndexer,
-                        "s[new Range(0, 1)]"
-                    )
+                    ErrorCode.ERR_ExpressionTreeContainsPatternIndexOrRangeIndexer,
+                    "s[new Range(0, 1)]"
+                )
                     .WithLocation(20, 46)
             );
         }
@@ -2329,10 +2329,9 @@ public static class Util
 }"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Util.Convert",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Util.Convert",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -2341,7 +2340,7 @@ public static class Util
   IL_0002:  newobj     ""System.Index..ctor(int, bool)""
   IL_0007:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2356,10 +2355,9 @@ public static class Util
 }"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Util.Convert",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Util.Convert",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -2381,7 +2379,7 @@ public static class Util
   IL_0022:  newobj     ""System.Index?..ctor(System.Index)""
   IL_0027:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2448,10 +2446,9 @@ public static class Util
 }"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Util.Create",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Util.Create",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -2460,7 +2457,7 @@ public static class Util
   IL_0002:  newobj     ""System.Range..ctor(System.Index, System.Index)""
   IL_0007:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2475,10 +2472,9 @@ public static class Util
 }"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Util.Create",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Util.Create",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  2
@@ -2503,7 +2499,7 @@ public static class Util
   IL_0024:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0029:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2518,10 +2514,9 @@ public static class Util
 }"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Util.Create",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Util.Create",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  2
@@ -2546,7 +2541,7 @@ public static class Util
   IL_0024:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0029:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2561,10 +2556,9 @@ public static class Util
 }"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Util.Create",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Util.Create",
+                @"
 {
   // Code size       56 (0x38)
   .maxstack  2
@@ -2593,7 +2587,7 @@ public static class Util
   IL_0032:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0037:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2608,10 +2602,9 @@ public static class Util
 }"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Util.ToEnd",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Util.ToEnd",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -2619,7 +2612,7 @@ public static class Util
   IL_0001:  call       ""System.Range System.Range.EndAt(System.Index)""
   IL_0006:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2634,10 +2627,9 @@ public static class Util
 }"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Util.ToEnd",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Util.ToEnd",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  1
@@ -2658,7 +2650,7 @@ public static class Util
   IL_0021:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0026:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2673,10 +2665,9 @@ public static class Util
 }"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Util.FromStart",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Util.FromStart",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -2684,7 +2675,7 @@ public static class Util
   IL_0001:  call       ""System.Range System.Range.StartAt(System.Index)""
   IL_0006:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2699,10 +2690,9 @@ public static class Util
 }"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Util.FromStart",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Util.FromStart",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  1
@@ -2723,7 +2713,7 @@ public static class Util
   IL_0021:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0026:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2738,17 +2728,16 @@ public static class Util
 }"
             );
 
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Util.All",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Util.All",
+                @"
 {
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  call       ""System.Range System.Range.All.get""
   IL_0005:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2854,7 +2843,7 @@ p: value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'True''
         public void PassingAsArguments()
         {
             var compilation = CreateCompilationWithIndexAndRange(
-                    @"
+                @"
 using System;
 partial class Program
 {
@@ -2867,9 +2856,8 @@ partial class Program
         Console.WriteLine(Print(4..5));
     }
 }" + PrintIndexesAndRangesCode,
-                    options: TestOptions.ReleaseExe
-                )
-                .VerifyDiagnostics();
+                options: TestOptions.ReleaseExe
+            ).VerifyDiagnostics();
 
             CompileAndVerify(
                 compilation,
@@ -2916,14 +2904,13 @@ public static class Util
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"
+                compilation,
+                expectedOutput: @"
 1
 2"
-                )
-                .VerifyIL(
-                    "Util.Create",
-                    @"
+            ).VerifyIL(
+                "Util.Create",
+                @"
 {
   // Code size       56 (0x38)
   .maxstack  2
@@ -2953,7 +2940,7 @@ public static class Util
   IL_0036:  ldloc.3
   IL_0037:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2990,14 +2977,13 @@ public static class Util
             );
 
             CompileAndVerify(
-                    compilation,
-                    expectedOutput: @"
+                compilation,
+                expectedOutput: @"
 1
 2"
-                )
-                .VerifyIL(
-                    "Util.Create",
-                    @"
+            ).VerifyIL(
+                "Util.Create",
+                @"
 {
   // Code size       56 (0x38)
   .maxstack  2
@@ -3027,7 +3013,7 @@ public static class Util
   IL_0036:  ldloc.3
   IL_0037:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -3056,8 +3042,8 @@ partial class Program
         public void Index_NullableAlwaysHasValue()
         {
             CompileAndVerify(
-                    CreateCompilationWithIndexAndRange(
-                        @"
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3071,13 +3057,12 @@ partial class Program
         return ^new Nullable<int>(5);
     }
 }" + PrintIndexesAndRangesCode,
-                        options: TestOptions.ReleaseExe
-                    ),
-                    expectedOutput: "value: '5', fromEnd: 'True'"
-                )
-                .VerifyIL(
-                    "Program.Create",
-                    @"
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: '5', fromEnd: 'True'"
+            ).VerifyIL(
+                "Program.Create",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -3087,15 +3072,15 @@ partial class Program
   IL_0007:  newobj     ""System.Index?..ctor(System.Index)""
   IL_000c:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void Range_NullableAlwaysHasValue_Left()
         {
             CompileAndVerify(
-                    CreateCompilationWithIndexAndRange(
-                        @"
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3109,13 +3094,12 @@ partial class Program
         return new Nullable<Index>(arg)..;
     }
 }" + PrintIndexesAndRangesCode,
-                        options: TestOptions.ReleaseExe
-                    ),
-                    expectedOutput: "value: 'value: '1', fromEnd: 'True'', fromEnd: 'value: '0', fromEnd: 'True''"
-                )
-                .VerifyIL(
-                    "Program.Create",
-                    @"
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: 'value: '1', fromEnd: 'True'', fromEnd: 'value: '0', fromEnd: 'True''"
+            ).VerifyIL(
+                "Program.Create",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -3124,15 +3108,15 @@ partial class Program
   IL_0006:  newobj     ""System.Range?..ctor(System.Range)""
   IL_000b:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void Range_NullableAlwaysHasValue_Right()
         {
             CompileAndVerify(
-                    CreateCompilationWithIndexAndRange(
-                        @"
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3146,13 +3130,12 @@ partial class Program
         return ..new Nullable<Index>(arg);
     }
 }" + PrintIndexesAndRangesCode,
-                        options: TestOptions.ReleaseExe
-                    ),
-                    expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '1', fromEnd: 'True''"
-                )
-                .VerifyIL(
-                    "Program.Create",
-                    @"
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '1', fromEnd: 'True''"
+            ).VerifyIL(
+                "Program.Create",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -3161,15 +3144,15 @@ partial class Program
   IL_0006:  newobj     ""System.Range?..ctor(System.Range)""
   IL_000b:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void Range_NullableAlwaysHasValue_Both()
         {
             CompileAndVerify(
-                    CreateCompilationWithIndexAndRange(
-                        @"
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3183,13 +3166,12 @@ partial class Program
         return new Nullable<Index>(arg1)..new Nullable<Index>(arg2);
     }
 }" + PrintIndexesAndRangesCode,
-                        options: TestOptions.ReleaseExe
-                    ),
-                    expectedOutput: "value: 'value: '2', fromEnd: 'True'', fromEnd: 'value: '1', fromEnd: 'True''"
-                )
-                .VerifyIL(
-                    "Program.Create",
-                    @"
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: 'value: '2', fromEnd: 'True'', fromEnd: 'value: '1', fromEnd: 'True''"
+            ).VerifyIL(
+                "Program.Create",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -3199,15 +3181,15 @@ partial class Program
   IL_0007:  newobj     ""System.Range?..ctor(System.Range)""
   IL_000c:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void Index_NullableNeverHasValue()
         {
             CompileAndVerify(
-                    CreateCompilationWithIndexAndRange(
-                        @"
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3221,13 +3203,12 @@ partial class Program
         return ^new Nullable<int>();
     }
 }" + PrintIndexesAndRangesCode,
-                        options: TestOptions.ReleaseExe
-                    ),
-                    expectedOutput: "value: '0', fromEnd: 'True'"
-                )
-                .VerifyIL(
-                    "Program.Create",
-                    @"
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: '0', fromEnd: 'True'"
+            ).VerifyIL(
+                "Program.Create",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -3237,15 +3218,15 @@ partial class Program
   IL_0007:  newobj     ""System.Index?..ctor(System.Index)""
   IL_000c:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void Range_NullableNeverhasValue_Left()
         {
             CompileAndVerify(
-                    CreateCompilationWithIndexAndRange(
-                        @"
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3259,13 +3240,12 @@ partial class Program
         return new Nullable<Index>()..;
     }
 }" + PrintIndexesAndRangesCode,
-                        options: TestOptions.ReleaseExe
-                    ),
-                    expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'True''"
-                )
-                .VerifyIL(
-                    "Program.Create",
-                    @"
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'True''"
+            ).VerifyIL(
+                "Program.Create",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -3277,15 +3257,15 @@ partial class Program
   IL_000e:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0013:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void Range_NullableNeverHasValue_Right()
         {
             CompileAndVerify(
-                    CreateCompilationWithIndexAndRange(
-                        @"
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3299,13 +3279,12 @@ partial class Program
         return ..new Nullable<Index>();
     }
 }" + PrintIndexesAndRangesCode,
-                        options: TestOptions.ReleaseExe
-                    ),
-                    expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'False''"
-                )
-                .VerifyIL(
-                    "Program.Create",
-                    @"
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'False''"
+            ).VerifyIL(
+                "Program.Create",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -3317,15 +3296,15 @@ partial class Program
   IL_000e:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0013:  ret
 }"
-                );
+            );
         }
 
         [Fact]
         public void Range_NullableNeverHasValue_Both()
         {
             CompileAndVerify(
-                    CreateCompilationWithIndexAndRange(
-                        @"
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3339,13 +3318,12 @@ partial class Program
         return new Nullable<Index>()..new Nullable<Index>();
     }
 }" + PrintIndexesAndRangesCode,
-                        options: TestOptions.ReleaseExe
-                    ),
-                    expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'False''"
-                )
-                .VerifyIL(
-                    "Program.Create",
-                    @"
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'False''"
+            ).VerifyIL(
+                "Program.Create",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -3360,7 +3338,7 @@ partial class Program
   IL_0017:  newobj     ""System.Range?..ctor(System.Range)""
   IL_001c:  ret
 }"
-                );
+            );
         }
 
         [Fact]

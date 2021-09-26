@@ -35,9 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             bufferMock.SetupGet(x => x.Properties)
                 .Returns(new VisualStudio.Utilities.PropertyCollection());
 
-            var textContainer = CodeAnalysis.Text.Extensions.TextBufferContainer.From(
-                bufferMock.Object
-            );
+            var textContainer = CodeAnalysis.Text.Extensions.TextBufferContainer
+                .From(bufferMock.Object);
 
             CodeAnalysis.Text.Extensions.GetTextBuffer(textContainer);
         }

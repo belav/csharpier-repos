@@ -130,18 +130,17 @@ namespace Microsoft.AspNetCore.Localization
                 }
             }
 
-            context.Features.Set<IRequestCultureFeature>(
-                new RequestCultureFeature(requestCulture, winningProvider)
-            );
+            context.Features
+                .Set<IRequestCultureFeature>(
+                    new RequestCultureFeature(requestCulture, winningProvider)
+                );
 
             SetCurrentThreadCulture(requestCulture);
 
             if (_options.ApplyCurrentCultureToResponseHeaders)
             {
-                context.Response.Headers.Add(
-                    HeaderNames.ContentLanguage,
-                    requestCulture.UICulture.Name
-                );
+                context.Response.Headers
+                    .Add(HeaderNames.ContentLanguage, requestCulture.UICulture.Name);
             }
 
             await _next(context);

@@ -50,10 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             _listener = listener;
 
             // Advise / Unadvise for the RDT is free threaded past 16.0
-            ((IVsRunningDocumentTable)_runningDocumentTable).AdviseRunningDocTableEvents(
-                this,
-                out _runningDocumentTableEventsCookie
-            );
+            ((IVsRunningDocumentTable)_runningDocumentTable)
+                .AdviseRunningDocTableEvents(this, out _runningDocumentTableEventsCookie);
         }
 
         public int OnAfterFirstDocumentLock(

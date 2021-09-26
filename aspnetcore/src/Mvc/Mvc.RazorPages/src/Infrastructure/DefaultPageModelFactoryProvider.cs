@@ -34,12 +34,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             }
 
             var modelActivator = _modelActivator.CreateActivator(descriptor);
-            var propertyActivator = PropertyActivator<PageContext>.GetPropertiesToActivate(
-                descriptor.ModelTypeInfo.AsType(),
-                typeof(PageContextAttribute),
-                _createActivateInfo,
-                includeNonPublic: false
-            );
+            var propertyActivator = PropertyActivator<PageContext>
+                .GetPropertiesToActivate(
+                    descriptor.ModelTypeInfo.AsType(),
+                    typeof(PageContextAttribute),
+                    _createActivateInfo,
+                    includeNonPublic: false
+                );
 
             return pageContext =>
             {

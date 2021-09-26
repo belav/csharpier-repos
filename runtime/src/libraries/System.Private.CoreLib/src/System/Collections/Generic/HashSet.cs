@@ -1034,9 +1034,8 @@ namespace System.Collections.Generic
             {
                 Debug.Assert(_comparer is NonRandomizedStringEqualityComparer);
                 _comparer =
-                    (IEqualityComparer<T>)(
-                        (NonRandomizedStringEqualityComparer)_comparer
-                    ).GetRandomizedEqualityComparer();
+                    (IEqualityComparer<T>)((NonRandomizedStringEqualityComparer)_comparer)
+                        .GetRandomizedEqualityComparer();
 
                 for (int i = 0; i < count; i++)
                 {

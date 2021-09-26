@@ -442,9 +442,8 @@ namespace System.Diagnostics.Tests
 
                 // Subscribe, which delivers catch-up event for the Default listener
                 using (
-                    var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
-                        MakeObserver(onNewListener)
-                    )
+                    var allListenerSubscription = DiagnosticListener.AllListeners
+                        .Subscribe(MakeObserver(onNewListener))
                 )
                 {
                     Assert.Equal(listener, returnedListener);
@@ -458,9 +457,8 @@ namespace System.Diagnostics.Tests
 
                 // Resubscribe
                 using (
-                    var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
-                        MakeObserver(onNewListener)
-                    )
+                    var allListenerSubscription = DiagnosticListener.AllListeners
+                        .Subscribe(MakeObserver(onNewListener))
                 )
                 {
                     Assert.Equal(listener, returnedListener);
@@ -484,9 +482,8 @@ namespace System.Diagnostics.Tests
 
                 // Check that we are back to just the DefaultListener.
                 using (
-                    var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
-                        MakeObserver(onNewListener)
-                    )
+                    var allListenerSubscription = DiagnosticListener.AllListeners
+                        .Subscribe(MakeObserver(onNewListener))
                 )
                 {
                     Assert.Equal(listener, returnedListener);
@@ -547,56 +544,42 @@ namespace System.Diagnostics.Tests
             Assert.Equal(0, GetActiveListenersWithPrefix(nameof(AllSubscriberStress)).Count);
 
             // Run lots of threads to add/remove listeners
-            Task.WaitAll(
-                Enumerable.Range(0, numThreads)
-                    .Select(
-                        i =>
-                            Task.Factory.StartNew(
-                                delegate
+            Task.WaitAll(Enumerable.Range(0, numThreads).Select(i => Task.Factory.StartNew(
+                            delegate
+                            {
+                                // Create a set of DiagnosticListeners, which add themselves to the AllListeners list.
+                                var listeners = new List<DiagnosticListener>(numListenersPerThread);
+                                for (int j = 0; j < numListenersPerThread; j++)
                                 {
-                                    // Create a set of DiagnosticListeners, which add themselves to the AllListeners list.
-                                    var listeners = new List<DiagnosticListener>(
-                                        numListenersPerThread
+                                    var listener = new DiagnosticListener(
+                                        $"{nameof(AllSubscriberStress)}_Task {i} TestListener{j}"
                                     );
-                                    for (int j = 0; j < numListenersPerThread; j++)
-                                    {
-                                        var listener = new DiagnosticListener(
-                                            $"{nameof(AllSubscriberStress)}_Task {i} TestListener{j}"
-                                        );
-                                        listeners.Add(listener);
-                                    }
+                                    listeners.Add(listener);
+                                }
 
-                                    // They are all in the list.
-                                    List<DiagnosticListener> list = GetActiveListenersWithPrefix(
-                                        nameof(AllSubscriberStress)
-                                    );
-                                    Assert.All(
-                                        listeners,
-                                        listener => Assert.Contains(listener, list)
-                                    );
+                                // They are all in the list.
+                                List<DiagnosticListener> list = GetActiveListenersWithPrefix(
+                                    nameof(AllSubscriberStress)
+                                );
+                                Assert.All(listeners, listener => Assert.Contains(listener, list));
 
-                                    // Dispose them all, first the even then the odd, just to mix it up and be more stressful.
-                                    for (int j = 0; j < listeners.Count; j += 2) // even
-                                        listeners[j].Dispose();
-                                    for (int j = 1; j < listeners.Count; j += 2) // odd
-                                        listeners[j].Dispose();
+                                // Dispose them all, first the even then the odd, just to mix it up and be more stressful.
+                                for (int j = 0; j < listeners.Count; j += 2) // even
+                                    listeners[j].Dispose();
+                                for (int j = 1; j < listeners.Count; j += 2) // odd
+                                    listeners[j].Dispose();
 
-                                    // None should be left in the list
-                                    list = GetActiveListenersWithPrefix(
-                                        nameof(AllSubscriberStress)
-                                    );
-                                    Assert.All(
-                                        listeners,
-                                        listener => Assert.DoesNotContain(listener, list)
-                                    );
-                                },
-                                CancellationToken.None,
-                                TaskCreationOptions.LongRunning,
-                                TaskScheduler.Default
-                            )
-                    )
-                    .ToArray()
-            );
+                                // None should be left in the list
+                                list = GetActiveListenersWithPrefix(nameof(AllSubscriberStress));
+                                Assert.All(
+                                    listeners,
+                                    listener => Assert.DoesNotContain(listener, list)
+                                );
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )).ToArray());
 
             // None of the created listeners should remain
             Assert.Equal(0, GetActiveListenersWithPrefix(nameof(AllSubscriberStress)).Count);
@@ -637,15 +620,12 @@ namespace System.Diagnostics.Tests
             int count1 = 0,
                 count2 = 0,
                 count3 = 0;
-            IDisposable sub1 = DiagnosticListener.AllListeners.Subscribe(
-                MakeObserver<DiagnosticListener>(onCompleted: () => count1++)
-            );
-            IDisposable sub2 = DiagnosticListener.AllListeners.Subscribe(
-                MakeObserver<DiagnosticListener>(onCompleted: () => count2++)
-            );
-            IDisposable sub3 = DiagnosticListener.AllListeners.Subscribe(
-                MakeObserver<DiagnosticListener>(onCompleted: () => count3++)
-            );
+            IDisposable sub1 = DiagnosticListener.AllListeners
+                .Subscribe(MakeObserver<DiagnosticListener>(onCompleted: () => count1++));
+            IDisposable sub2 = DiagnosticListener.AllListeners
+                .Subscribe(MakeObserver<DiagnosticListener>(onCompleted: () => count2++));
+            IDisposable sub3 = DiagnosticListener.AllListeners
+                .Subscribe(MakeObserver<DiagnosticListener>(onCompleted: () => count3++));
 
             Assert.Equal(0, count1);
             Assert.Equal(0, count2);
@@ -805,9 +785,8 @@ namespace System.Diagnostics.Tests
 
             // Subscribe, which gives you the list
             using (
-                var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
-                    MakeObserver(onNewListener)
-                )
+                var allListenerSubscription = DiagnosticListener.AllListeners
+                    .Subscribe(MakeObserver(onNewListener))
             ) { } // Unsubscribe to remove side effects.
             return ret;
         }

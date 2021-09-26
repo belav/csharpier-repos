@@ -147,10 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         if (sourceType != null)
                         {
                             foreach (
-                                var converterInfo in Dependencies.ValueConverterSelector.Select(
-                                    sourceType,
-                                    providerType
-                                )
+                                var converterInfo in Dependencies.ValueConverterSelector
+                                    .Select(sourceType, providerType)
                             )
                             {
                                 var mappingInfoUsed = info.WithConverter(converterInfo);
@@ -159,9 +157,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                 if (mapping == null && providerType != null)
                                 {
                                     foreach (
-                                        var secondConverterInfo in Dependencies.ValueConverterSelector.Select(
-                                            providerType
-                                        )
+                                        var secondConverterInfo in Dependencies.ValueConverterSelector
+                                            .Select(providerType)
                                     )
                                     {
                                         mapping = FindMapping(
@@ -508,31 +505,40 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         if (comma > openParen && comma < closeParen)
                         {
                             if (
-                                int.TryParse(
-                                    storeTypeName.Substring(openParen + 1, comma - openParen - 1),
-                                    out var parsedPrecision
-                                )
+                                int
+                                    .TryParse(
+                                        storeTypeName.Substring(
+                                            openParen + 1,
+                                            comma - openParen - 1
+                                        ),
+                                        out var parsedPrecision
+                                    )
                             )
                             {
                                 precision = parsedPrecision;
                             }
 
                             if (
-                                int.TryParse(
-                                    storeTypeName.Substring(comma + 1, closeParen - comma - 1),
-                                    out var parsedScale
-                                )
+                                int
+                                    .TryParse(
+                                        storeTypeName.Substring(comma + 1, closeParen - comma - 1),
+                                        out var parsedScale
+                                    )
                             )
                             {
                                 scale = parsedScale;
                             }
                         }
                         else if (
-                            int.TryParse(
-                                storeTypeName.Substring(openParen + 1, closeParen - openParen - 1)
-                                    .Trim(),
-                                out var parsedSize
-                            )
+                            int
+                                .TryParse(
+                                    storeTypeName.Substring(
+                                        openParen + 1,
+                                        closeParen - openParen - 1
+                                    )
+                                        .Trim(),
+                                    out var parsedSize
+                                )
                         )
                         {
                             size = parsedSize;

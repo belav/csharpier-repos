@@ -43,9 +43,8 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                dbConnection
-            );
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>())
+                .UseConnection(dbConnection);
 
             Assert.Same(dbConnection, context.Database.GetDbConnection());
         }
@@ -53,8 +52,10 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Relational_specific_methods_throws_when_non_relational_provider_is_in_use()
         {
-            var optionsBuilder = new DbContextOptionsBuilder().UseInternalServiceProvider(
-                    new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseInternalServiceProvider(
+                    new ServiceCollection()
+                        .AddEntityFrameworkInMemoryDatabase()
                         .BuildServiceProvider()
                 )
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
@@ -76,9 +77,8 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                dbConnection
-            );
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>())
+                .UseConnection(dbConnection);
 
             if (async)
             {
@@ -100,9 +100,8 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                dbConnection
-            );
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>())
+                .UseConnection(dbConnection);
 
             if (async)
             {
@@ -125,9 +124,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                dbConnection
-            );
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>())
+                .UseConnection(dbConnection);
 
             var transaction = async
                 ? await context.Database.BeginTransactionAsync(IsolationLevel.Chaos)
@@ -142,9 +140,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                dbConnection
-            );
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>())
+                .UseConnection(dbConnection);
             var transaction = new FakeDbTransaction(dbConnection, IsolationLevel.Chaos);
 
             Assert.Same(
@@ -160,12 +157,11 @@ namespace Microsoft.EntityFrameworkCore
             bool async
         )
         {
-            var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddScoped<
-                    IDbContextTransactionManager,
-                    FakeDbContextTransactionManager
-                >()
-            );
+            var context = InMemoryTestHelpers.Instance
+                .CreateContext(
+                    new ServiceCollection()
+                        .AddScoped<IDbContextTransactionManager, FakeDbContextTransactionManager>()
+                );
 
             var transactionManager =
                 (FakeDbContextTransactionManager)context.GetService<IDbContextTransactionManager>();
@@ -252,9 +248,10 @@ namespace Microsoft.EntityFrameworkCore
                 Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo))
             };
 
-            var db = RelationalTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IMigrationsAssembly>(migrationsAssembly)
-            );
+            var db = RelationalTestHelpers.Instance
+                .CreateContext(
+                    new ServiceCollection().AddSingleton<IMigrationsAssembly>(migrationsAssembly)
+                );
 
             Assert.Equal(migrations, db.Database.GetMigrations());
         }
@@ -283,9 +280,10 @@ namespace Microsoft.EntityFrameworkCore
                 AppliedMigrations = migrations.Select(id => new HistoryRow(id, "1.1.0")).ToList()
             };
 
-            var context = RelationalTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IHistoryRepository>(repository)
-            );
+            var context = RelationalTestHelpers.Instance
+                .CreateContext(
+                    new ServiceCollection().AddSingleton<IHistoryRepository>(repository)
+                );
 
             Assert.Equal(
                 migrations,
@@ -353,10 +351,12 @@ namespace Microsoft.EntityFrameworkCore
                     .ToList()
             };
 
-            var context = RelationalTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IHistoryRepository>(repository)
-                    .AddSingleton<IMigrationsAssembly>(migrationsAssembly)
-            );
+            var context = RelationalTestHelpers.Instance
+                .CreateContext(
+                    new ServiceCollection()
+                        .AddSingleton<IHistoryRepository>(repository)
+                        .AddSingleton<IMigrationsAssembly>(migrationsAssembly)
+                );
 
             Assert.Equal(
                 new[] { "00000000000003_Three" },

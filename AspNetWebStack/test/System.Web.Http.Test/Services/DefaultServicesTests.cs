@@ -110,16 +110,16 @@ namespace System.Web.Http.Services
             Assert.IsType<MutableObjectModelBinderProvider>(modelBinderProviders[7]);
 
             object[] validatorProviders = defaultServices.GetServices(
-                    typeof(ModelValidatorProvider)
-                )
+                typeof(ModelValidatorProvider)
+            )
                 .ToArray();
             Assert.Equal(2, validatorProviders.Length);
             Assert.IsType<DataAnnotationsModelValidatorProvider>(validatorProviders[0]);
             Assert.IsType<DataMemberModelValidatorProvider>(validatorProviders[1]);
 
             object[] valueProviderFactories = defaultServices.GetServices(
-                    typeof(ValueProviderFactory)
-                )
+                typeof(ValueProviderFactory)
+            )
                 .ToArray();
             Assert.Equal(2, valueProviderFactories.Length);
             Assert.IsType<QueryStringValueProviderFactory>(valueProviderFactories[0]);

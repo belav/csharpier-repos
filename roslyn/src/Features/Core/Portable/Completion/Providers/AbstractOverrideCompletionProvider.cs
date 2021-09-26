@@ -41,11 +41,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         public override async Task ProvideCompletionsAsync(CompletionContext context)
         {
             var state = await ItemGetter.CreateAsync(
-                    this,
-                    context.Document,
-                    context.Position,
-                    context.CancellationToken
-                )
+                this,
+                context.Document,
+                context.Position,
+                context.CancellationToken
+            )
                 .ConfigureAwait(false);
             var items = await state.GetItemsAsync().ConfigureAwait(false);
 
@@ -79,9 +79,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             {
                 newOverriddenMember = CodeGenerationSymbolFactory.CreateMethodSymbol(
                     methodSymbol,
-                    returnType: methodSymbol.ReturnType.WithNullableAnnotation(
-                        NullableAnnotation.NotAnnotated
-                    )
+                    returnType: methodSymbol.ReturnType
+                        .WithNullableAnnotation(NullableAnnotation.NotAnnotated)
                 );
             }
 

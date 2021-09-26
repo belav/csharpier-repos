@@ -109,22 +109,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
             AssertExtensions.Throws<ArgumentException>(
                 "messageHeader",
                 () =>
-                    new JoinBlock<int, int>().Target1.OfferMessage(
-                        default(DataflowMessageHeader),
-                        1,
-                        null,
-                        false
-                    )
+                    new JoinBlock<int, int>().Target1
+                        .OfferMessage(default(DataflowMessageHeader), 1, null, false)
             );
             AssertExtensions.Throws<ArgumentException>(
                 "consumeToAccept",
                 () =>
-                    new JoinBlock<int, int>().Target1.OfferMessage(
-                        new DataflowMessageHeader(1),
-                        1,
-                        null,
-                        true
-                    )
+                    new JoinBlock<int, int>().Target1
+                        .OfferMessage(new DataflowMessageHeader(1), 1, null, true)
             );
 
             DataflowTestHelpers.TestArgumentsExceptions<Tuple<int, int>>(new JoinBlock<int, int>());
@@ -426,44 +418,34 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestNonGreedyFailToConsumeReservedMessage()
         {
-            var sources = Enumerable.Range(0, 2)
-                .Select(
-                    i =>
-                        new DelegatePropagator<int, int>
+            var sources = Enumerable.Range(0, 2).Select(
+                i =>
+                    new DelegatePropagator<int, int>
+                    {
+                        ReserveMessageDelegate = delegate
                         {
-                            ReserveMessageDelegate = delegate
-                            {
-                                return true;
-                            },
-                            ConsumeMessageDelegate = delegate(
-                                DataflowMessageHeader messageHeader,
-                                ITargetBlock<int> target,
-                                out bool messageConsumed
-                            )
-                            {
-                                messageConsumed = false; // fail consumption of a message already reserved
-                                Assert.Equal(expected: 0, actual: i); // shouldn't get to second source
-                                return 0;
-                            }
+                            return true;
+                        },
+                        ConsumeMessageDelegate = delegate(
+                            DataflowMessageHeader messageHeader,
+                            ITargetBlock<int> target,
+                            out bool messageConsumed
+                        )
+                        {
+                            messageConsumed = false; // fail consumption of a message already reserved
+                            Assert.Equal(expected: 0, actual: i); // shouldn't get to second source
+                            return 0;
                         }
-                )
-                .ToArray();
+                    }
+            ).ToArray();
 
             var options = new GroupingDataflowBlockOptions { Greedy = false };
             JoinBlock<int, int> join = new JoinBlock<int, int>(options);
 
-            join.Target1.OfferMessage(
-                new DataflowMessageHeader(1),
-                0,
-                sources[0],
-                consumeToAccept: true
-            ); // call back ConsumeMassage
-            join.Target2.OfferMessage(
-                new DataflowMessageHeader(1),
-                0,
-                sources[1],
-                consumeToAccept: true
-            ); // call back ConsumeMassage
+            join.Target1
+                .OfferMessage(new DataflowMessageHeader(1), 0, sources[0], consumeToAccept: true); // call back ConsumeMassage
+            join.Target2
+                .OfferMessage(new DataflowMessageHeader(1), 0, sources[1], consumeToAccept: true); // call back ConsumeMassage
 
             await Assert.ThrowsAsync<InvalidOperationException>(() => join.Completion);
         }
@@ -496,12 +478,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 }
             };
 
-            joinBlock.Target1.OfferMessage(
-                new DataflowMessageHeader(1),
-                1,
-                source,
-                consumeToAccept: true
-            );
+            joinBlock.Target1
+                .OfferMessage(new DataflowMessageHeader(1), 1, source, consumeToAccept: true);
             joinBlock.Complete();
 
             await Assert.ThrowsAsync<FormatException>(() => joinBlock.Completion);
@@ -526,12 +504,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 }
             };
 
-            joinBlock.Target1.OfferMessage(
-                new DataflowMessageHeader(1),
-                1,
-                source1,
-                consumeToAccept: true
-            );
+            joinBlock.Target1
+                .OfferMessage(new DataflowMessageHeader(1), 1, source1, consumeToAccept: true);
 
             var source2 = new BufferBlock<int>();
             source2.Post(2);

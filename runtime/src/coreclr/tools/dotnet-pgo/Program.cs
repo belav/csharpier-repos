@@ -525,10 +525,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 if (commandLineOptions.TraceFile.FullName.EndsWith(nettraceExtension))
                 {
                     etlFileName =
-                        commandLineOptions.TraceFile.FullName.Substring(
-                            0,
-                            commandLineOptions.TraceFile.FullName.Length - nettraceExtension.Length
-                        ) + ".etlx";
+                        commandLineOptions.TraceFile.FullName
+                            .Substring(
+                                0,
+                                commandLineOptions.TraceFile.FullName.Length
+                                    - nettraceExtension.Length
+                            ) + ".etlx";
                     PrintMessage(
                         $"Creating ETLX file {etlFileName} from {commandLineOptions.TraceFile.FullName}"
                     );
@@ -543,10 +545,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             if (commandLineOptions.TraceFile.FullName.EndsWith(lttngExtension))
             {
                 etlFileName =
-                    commandLineOptions.TraceFile.FullName.Substring(
-                        0,
-                        commandLineOptions.TraceFile.FullName.Length - lttngExtension.Length
-                    ) + ".etlx";
+                    commandLineOptions.TraceFile.FullName
+                        .Substring(
+                            0,
+                            commandLineOptions.TraceFile.FullName.Length - lttngExtension.Length
+                        ) + ".etlx";
                 PrintMessage(
                     $"Creating ETLX file {etlFileName} from {commandLineOptions.TraceFile.FullName}"
                 );
@@ -673,7 +676,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     HashSet<int> clrInstanceIds = new HashSet<int>();
                     HashSet<int> examinedClrInstanceIds = new HashSet<int>();
                     foreach (
-                        var assemblyLoadTrace in p.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>()
+                        var assemblyLoadTrace in p.EventsInProcess
+                            .ByEventType<AssemblyLoadUnloadTraceData>()
                     )
                     {
                         if (examinedClrInstanceIds.Add(assemblyLoadTrace.ClrInstanceID))
@@ -975,9 +979,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     );
 
                                 if (
-                                    !ILCompiler.Reflection.ReadyToRun.ReadyToRunReader.IsReadyToRunImage(
-                                        r2rCheckPEReader
-                                    )
+                                    !ILCompiler.Reflection.ReadyToRun.ReadyToRunReader
+                                        .IsReadyToRunImage(r2rCheckPEReader)
                                 )
                                     continue;
                             }
@@ -1269,10 +1272,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             );
                             methodData.InstrumentationData =
                                 PgoProcessor.ParsePgoData<TypeSystemEntityOrUnknown>(
-                                        pgoDataLoader,
-                                        intDecompressor,
-                                        true
-                                    )
+                                    pgoDataLoader,
+                                    intDecompressor,
+                                    true
+                                )
                                     .ToArray();
                         }
                         methodsUsedInProcess.Add(methodData);

@@ -15,15 +15,14 @@ namespace CookieSample
         {
             // This can be removed after https://github.com/aspnet/IISIntegration/issues/371
             services.AddAuthentication(
-                    options =>
-                    {
-                        options.DefaultAuthenticateScheme =
-                            CookieAuthenticationDefaults.AuthenticationScheme;
-                        options.DefaultChallengeScheme =
-                            CookieAuthenticationDefaults.AuthenticationScheme;
-                    }
-                )
-                .AddCookie();
+                options =>
+                {
+                    options.DefaultAuthenticateScheme =
+                        CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme =
+                        CookieAuthenticationDefaults.AuthenticationScheme;
+                }
+            ).AddCookie();
         }
 
         public void Configure(IApplicationBuilder app)

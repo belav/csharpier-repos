@@ -28,22 +28,16 @@ namespace Microsoft.Extensions.Internal
             typeof(PropertyHelper).GetMethod(nameof(CallPropertyGetter), DeclaredOnlyLookup)!;
 
         private static readonly MethodInfo CallPropertyGetterByReferenceOpenGenericMethod =
-            typeof(PropertyHelper).GetMethod(
-                nameof(CallPropertyGetterByReference),
-                DeclaredOnlyLookup
-            )!;
+            typeof(PropertyHelper)
+                .GetMethod(nameof(CallPropertyGetterByReference), DeclaredOnlyLookup)!;
 
         private static readonly MethodInfo CallNullSafePropertyGetterOpenGenericMethod =
-            typeof(PropertyHelper).GetMethod(
-                nameof(CallNullSafePropertyGetter),
-                DeclaredOnlyLookup
-            )!;
+            typeof(PropertyHelper)
+                .GetMethod(nameof(CallNullSafePropertyGetter), DeclaredOnlyLookup)!;
 
         private static readonly MethodInfo CallNullSafePropertyGetterByReferenceOpenGenericMethod =
-            typeof(PropertyHelper).GetMethod(
-                nameof(CallNullSafePropertyGetterByReference),
-                DeclaredOnlyLookup
-            )!;
+            typeof(PropertyHelper)
+                .GetMethod(nameof(CallNullSafePropertyGetterByReference), DeclaredOnlyLookup)!;
 
         private static readonly MethodInfo CallPropertySetterOpenGenericMethod =
             typeof(PropertyHelper).GetMethod(nameof(CallPropertySetter), DeclaredOnlyLookup)!;

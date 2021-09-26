@@ -75,9 +75,8 @@ namespace ContextualReflectionTest
                 alc = AssemblyLoadContext.GetLoadContext(alcAssembly);
                 alcProgramType = typeof(Program);
                 alcProgramInstance = this;
-                defaultAssembly = AssemblyLoadContext.Default.LoadFromAssemblyName(
-                    alcAssembly.GetName()
-                );
+                defaultAssembly = AssemblyLoadContext.Default
+                    .LoadFromAssemblyName(alcAssembly.GetName());
             }
         }
 
@@ -133,16 +132,14 @@ namespace ContextualReflectionTest
             TestResolve.Assert(
                 ResolveEvents.ExpectedEvent,
                 () =>
-                    AssemblyLoadContext.Default.LoadFromAssemblyName(
-                        new AssemblyName("TestDefaultLoad")
-                    )
+                    AssemblyLoadContext.Default
+                        .LoadFromAssemblyName(new AssemblyName("TestDefaultLoad"))
             );
             TestResolve.Assert(
                 ResolveEvents.NoEvent,
                 () =>
-                    AssemblyLoadContext.Default.LoadFromAssemblyName(
-                        new AssemblyName("TestIsolatedLoad")
-                    )
+                    AssemblyLoadContext.Default
+                        .LoadFromAssemblyName(new AssemblyName("TestIsolatedLoad"))
             );
             TestResolve.Assert(
                 ResolveEvents.ExpectedEvent,
@@ -157,16 +154,14 @@ namespace ContextualReflectionTest
             TestResolve.Assert(
                 ResolveEvents.ExpectedEvent,
                 () =>
-                    AssemblyLoadContext.Default.LoadFromAssemblyName(
-                        new AssemblyName("TestDefaultLoad")
-                    )
+                    AssemblyLoadContext.Default
+                        .LoadFromAssemblyName(new AssemblyName("TestDefaultLoad"))
             );
             TestResolve.Assert(
                 ResolveEvents.NoEvent,
                 () =>
-                    AssemblyLoadContext.Default.LoadFromAssemblyName(
-                        new AssemblyName("TestIsolatedLoad")
-                    )
+                    AssemblyLoadContext.Default
+                        .LoadFromAssemblyName(new AssemblyName("TestIsolatedLoad"))
             );
             TestResolve.Assert(
                 ResolveEvents.ExpectedEvent,
@@ -247,8 +242,8 @@ namespace ContextualReflectionTest
                 using IDisposable alcScope = alc.EnterContextualReflection();
                 Assert.AreEqual(alc, AssemblyLoadContext.CurrentContextualReflectionContext);
                 {
-                    using IDisposable defaultScope =
-                        AssemblyLoadContext.Default.EnterContextualReflection();
+                    using IDisposable defaultScope = AssemblyLoadContext.Default
+                        .EnterContextualReflection();
                     Assert.AreEqual(
                         AssemblyLoadContext.Default,
                         AssemblyLoadContext.CurrentContextualReflectionContext
@@ -264,8 +259,8 @@ namespace ContextualReflectionTest
                 Assert.AreEqual(alc, AssemblyLoadContext.CurrentContextualReflectionContext);
                 try
                 {
-                    using IDisposable defaultScope =
-                        AssemblyLoadContext.Default.EnterContextualReflection();
+                    using IDisposable defaultScope = AssemblyLoadContext.Default
+                        .EnterContextualReflection();
                     Assert.AreEqual(
                         AssemblyLoadContext.Default,
                         AssemblyLoadContext.CurrentContextualReflectionContext
@@ -282,8 +277,8 @@ namespace ContextualReflectionTest
             {
                 using IDisposable alcScope = alc.EnterContextualReflection();
                 Assert.AreEqual(alc, AssemblyLoadContext.CurrentContextualReflectionContext);
-                using IDisposable defaultScope =
-                    AssemblyLoadContext.Default.EnterContextualReflection();
+                using IDisposable defaultScope = AssemblyLoadContext.Default
+                    .EnterContextualReflection();
                 Assert.AreEqual(
                     AssemblyLoadContext.Default,
                     AssemblyLoadContext.CurrentContextualReflectionContext
@@ -635,10 +630,11 @@ namespace ContextualReflectionTest
                 isolated,
                 (string assemblyName) =>
                     assembly.GetType(
-                        string.Format(
-                            "ContextualReflectionTest.AGenericClass`1[[MyType, {0}]]",
-                            assemblyName
-                        )
+                        string
+                            .Format(
+                                "ContextualReflectionTest.AGenericClass`1[[MyType, {0}]]",
+                                assemblyName
+                            )
                     )
             );
 
@@ -799,10 +795,11 @@ namespace ContextualReflectionTest
                 (string assemblyName) =>
                     Activator.CreateInstance(
                         "System.Private.CoreLib",
-                        string.Format(
-                            "System.Collections.Generic.List`1[[MyType, {0}]]",
-                            assemblyName
-                        )
+                        string
+                            .Format(
+                                "System.Collections.Generic.List`1[[MyType, {0}]]",
+                                assemblyName
+                            )
                     ),
                 skipNullIsolated: true
             );
@@ -812,10 +809,11 @@ namespace ContextualReflectionTest
                 (string assemblyName) =>
                     Activator.CreateInstance(
                         "ContextualReflection",
-                        string.Format(
-                            "ContextualReflectionTest.AGenericClass`1[[MyType, {0}]]",
-                            assemblyName
-                        )
+                        string
+                            .Format(
+                                "ContextualReflectionTest.AGenericClass`1[[MyType, {0}]]",
+                                assemblyName
+                            )
                     )
             );
 
@@ -1032,9 +1030,14 @@ namespace ContextualReflectionTest
             }
 
             Assert.IsTrue(
-                assemblyLoadContext.Assemblies.Any(
-                    a => AssemblyName.ReferenceMatchesDefinition(a.GetName(), dynamicAssemblyName)
-                )
+                assemblyLoadContext.Assemblies
+                    .Any(
+                        a =>
+                            AssemblyName.ReferenceMatchesDefinition(
+                                a.GetName(),
+                                dynamicAssemblyName
+                            )
+                    )
             );
         }
 

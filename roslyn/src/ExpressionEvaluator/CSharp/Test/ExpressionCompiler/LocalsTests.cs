@@ -1680,16 +1680,15 @@ class P
                         expectedGeneric: true
                     );
 
-                    testData.GetMethodData("<>c__TypeVariables<T, U>..ctor")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>c__TypeVariables<T, U>..ctor").VerifyIL(
+                        @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  call       ""object..ctor()""
   IL_0006:  ret
 }"
-                        );
+                    );
 
                     locals.Free();
                 }
@@ -1962,9 +1961,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       37 (0x25)
   .maxstack  2
   IL_0000:  ldsfld     ""System.Action <>x.<>c.<>9__0_0""
@@ -1979,7 +1977,7 @@ class C
   IL_001f:  callvirt   ""void System.Action.Invoke()""
   IL_0024:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2012,9 +2010,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       38 (0x26)
   .maxstack  2
   IL_0000:  ldsfld     ""System.Action<int> <>x.<>c.<>9__0_0""
@@ -2030,7 +2027,7 @@ class C
   IL_0020:  callvirt   ""void System.Action<int>.Invoke(int)""
   IL_0025:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2063,9 +2060,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       37 (0x25)
   .maxstack  2
   IL_0000:  ldsfld     ""System.Action <>x.<>c.<>9__0_0""
@@ -2080,7 +2076,7 @@ class C
   IL_001f:  callvirt   ""void System.Action.Invoke()""
   IL_0024:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -3541,9 +3537,8 @@ class C
                     context.CompileExpression("o = null", out error, testData);
                     Assert.Null(error); // In regular code, there would be an error about modifying a lock local.
 
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        5 (0x5)
   .maxstack  2
   .locals init (object V_0,
@@ -3554,15 +3549,14 @@ class C
   IL_0002:  starg.s    V_1
   IL_0004:  ret
 }"
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     context.CompileAssignment("o", "null", out error, testData);
                     Assert.Null(error); // In regular code, there would be an error about modifying a lock local.
 
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        4 (0x4)
   .maxstack  1
   .locals init (object V_0,
@@ -3572,7 +3566,7 @@ class C
   IL_0001:  starg.s    V_1
   IL_0003:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -3654,9 +3648,8 @@ class C
                     context.CompileAssignment("c", "(byte)(b + 3)", out error, testData);
                     Assert.Null(error);
 
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        3 (0x3)
   .maxstack  1
@@ -3666,7 +3659,7 @@ class C
   IL_0002:  ret
 }
 "
-                        );
+                    );
                 }
             );
         }
@@ -4221,13 +4214,8 @@ class C
                         locals[0],
                         "<>m0",
                         "x",
-                        expectedILOpt: string.Format(
-                            ilTemplate,
-                            "int",
-                            "int",
-                            displayClassName,
-                            "x"
-                        )
+                        expectedILOpt: string
+                            .Format(ilTemplate, "int", "int", displayClassName, "x")
                     );
                     locals.Clear();
 
@@ -4248,13 +4236,8 @@ class C
                         locals[0],
                         "<>m0",
                         "x",
-                        expectedILOpt: string.Format(
-                            ilTemplate,
-                            "float",
-                            "int",
-                            displayClassName,
-                            "x"
-                        )
+                        expectedILOpt: string
+                            .Format(ilTemplate, "float", "int", displayClassName, "x")
                     );
                     VerifyLocal(
                         testData,
@@ -4262,13 +4245,8 @@ class C
                         locals[1],
                         "<>m1",
                         "y",
-                        expectedILOpt: string.Format(
-                            ilTemplate,
-                            "float",
-                            "float",
-                            displayClassName,
-                            "y"
-                        )
+                        expectedILOpt: string
+                            .Format(ilTemplate, "float", "float", displayClassName, "y")
                     );
                     locals.Clear();
 
@@ -4289,13 +4267,8 @@ class C
                         locals[0],
                         "<>m0",
                         "x",
-                        expectedILOpt: string.Format(
-                            ilTemplate,
-                            "float",
-                            "int",
-                            displayClassName,
-                            "x"
-                        )
+                        expectedILOpt: string
+                            .Format(ilTemplate, "float", "int", displayClassName, "x")
                     );
                     VerifyLocal(
                         testData,
@@ -4303,13 +4276,8 @@ class C
                         locals[1],
                         "<>m1",
                         "y",
-                        expectedILOpt: string.Format(
-                            ilTemplate,
-                            "float",
-                            "float",
-                            displayClassName,
-                            "y"
-                        )
+                        expectedILOpt: string
+                            .Format(ilTemplate, "float", "float", displayClassName, "y")
                     );
                     locals.Clear();
 
@@ -4330,13 +4298,8 @@ class C
                         locals[0],
                         "<>m0",
                         "x",
-                        expectedILOpt: string.Format(
-                            ilTemplate,
-                            "T",
-                            "T",
-                            displayClassName + "<T>",
-                            "x"
-                        )
+                        expectedILOpt: string
+                            .Format(ilTemplate, "T", "T", displayClassName + "<T>", "x")
                     );
                     locals.Clear();
 
@@ -4357,13 +4320,8 @@ class C
                         locals[0],
                         "<>m0",
                         "x",
-                        expectedILOpt: string.Format(
-                            ilTemplate,
-                            "int",
-                            "int",
-                            displayClassName,
-                            "x"
-                        )
+                        expectedILOpt: string
+                            .Format(ilTemplate, "int", "int", displayClassName, "x")
                     );
                     locals.Clear();
 
@@ -4856,12 +4814,8 @@ class C<T>
                         locals[0],
                         "<>m0",
                         "x",
-                        expectedILOpt: string.Format(
-                            iteratorILTemplate,
-                            "int",
-                            displayClassName,
-                            "x"
-                        )
+                        expectedILOpt: string
+                            .Format(iteratorILTemplate, "int", displayClassName, "x")
                     );
                     locals.Clear();
 
@@ -4882,12 +4836,8 @@ class C<T>
                         locals[0],
                         "<>m0",
                         "x",
-                        expectedILOpt: string.Format(
-                            iteratorILTemplate,
-                            "int",
-                            displayClassName,
-                            "x"
-                        )
+                        expectedILOpt: string
+                            .Format(iteratorILTemplate, "int", displayClassName, "x")
                     );
                     locals.Clear();
 
@@ -4934,12 +4884,8 @@ class C<T>
                         locals[0],
                         "<>m0",
                         "x",
-                        expectedILOpt: string.Format(
-                            asyncILTemplate,
-                            "T",
-                            displayClassName + "<T>",
-                            "x"
-                        )
+                        expectedILOpt: string
+                            .Format(asyncILTemplate, "T", displayClassName + "<T>", "x")
                     );
                     locals.Clear();
 
@@ -4960,12 +4906,8 @@ class C<T>
                         locals[0],
                         "<>m0",
                         "x",
-                        expectedILOpt: string.Format(
-                            asyncILTemplate,
-                            "T",
-                            displayClassName + "<T>",
-                            "x"
-                        )
+                        expectedILOpt: string
+                            .Format(asyncILTemplate, "T", displayClassName + "<T>", "x")
                     );
                     locals.Clear();
 
@@ -5666,9 +5608,8 @@ class Program
                             return Roslyn.Test.Utilities.HResult.E_NOTIMPL;
                         }
                     );
-                    var debugInfo = new MethodDebugInfoBytes.Builder(
-                        constants: new[] { badConst }
-                    ).Build();
+                    var debugInfo = new MethodDebugInfoBytes.Builder(constants: new[] { badConst })
+                        .Build();
                     var locals = ArrayBuilder<LocalAndMethod>.GetInstance();
 
                     GetLocals(runtime, "Program.Main", debugInfo, locals, count: 0);
@@ -7475,10 +7416,8 @@ class C
             );
 
             var symReader = new MockSymUnmanagedReader(
-                new Dictionary<int, MethodDebugInfoBytes>()
-                {
-                    { methodToken, debugInfo }
-                }.ToImmutableDictionary()
+                new Dictionary<int, MethodDebugInfoBytes>() { { methodToken, debugInfo } }
+                    .ToImmutableDictionary()
             );
             var context = CreateMethodContext(
                 new AppDomain(),

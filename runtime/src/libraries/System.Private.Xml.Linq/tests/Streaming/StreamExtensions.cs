@@ -106,10 +106,11 @@ namespace System.Xml.Linq
                 throw new InvalidOperationException("The reader state should be Interactive.");
             if (source.Name != XNamespace.Get(_reader.NamespaceURI).GetName(_reader.LocalName))
                 throw new InvalidOperationException(
-                    string.Format(
-                        "The reader should be on an element with the name '{0}'.",
-                        source.Name
-                    )
+                    string
+                        .Format(
+                            "The reader should be on an element with the name '{0}'.",
+                            source.Name
+                        )
                 );
             if (_reader.MoveToFirstAttribute())
             {
@@ -210,10 +211,11 @@ namespace System.Xml.Linq
                         break;
                     default:
                         throw new InvalidOperationException(
-                            string.Format(
-                                "The reader should not be on a node of type '{0}'.",
-                                _reader.NodeType
-                            )
+                            string
+                                .Format(
+                                    "The reader should not be on a node of type '{0}'.",
+                                    _reader.NodeType
+                                )
                         );
                 }
             } while (_reader.Read());
@@ -285,10 +287,11 @@ namespace System.Xml.Linq
             }
             if (reader.MoveToContent() != XmlNodeType.Element)
                 throw new InvalidOperationException(
-                    string.Format(
-                        "The reader should be on a node of type '{0}'.",
-                        XmlNodeType.Element
-                    )
+                    string
+                        .Format(
+                            "The reader should be on a node of type '{0}'.",
+                            XmlNodeType.Element
+                        )
                 );
             XElement source = new XElement(rootName);
             StreamLoader loader = new StreamLoader(reader, streamNames);

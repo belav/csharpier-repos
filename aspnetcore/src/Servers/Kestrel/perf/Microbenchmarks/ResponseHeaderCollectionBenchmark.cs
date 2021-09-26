@@ -21,9 +21,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
     {
         private const int InnerLoopCount = 128;
 
-        private static readonly byte[] _bytesServer = Encoding.ASCII.GetBytes(
-            "\r\nServer: Kestrel"
-        );
+        private static readonly byte[] _bytesServer = Encoding.ASCII
+            .GetBytes("\r\nServer: Kestrel");
         private static readonly DateHeaderValueManager _dateHeaderValueManager =
             new DateHeaderValueManager();
         private HttpResponseHeaders _responseHeadersDirect;

@@ -99,9 +99,8 @@ namespace System.Web.Http.Owin
                 MockBehavior.Strict
             );
             mock.Setup(
-                    d =>
-                        d.TryGetValue("server.DisableResponseBuffering", out disableBufferingAction)
-                )
+                d => d.TryGetValue("server.DisableResponseBuffering", out disableBufferingAction)
+            )
                 .Returns(hasDisableBufferingAction);
             return mock.Object;
         }

@@ -266,10 +266,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var derivedEntityTypeBuilder = CreateInternalEntityTypeBuilder<DerivedEntity>();
             var baseEntityType =
-                derivedEntityTypeBuilder.ModelBuilder.Entity(
-                    typeof(BaseEntity),
-                    ConfigurationSource.Explicit
-                ).Metadata;
+                derivedEntityTypeBuilder.ModelBuilder
+                    .Entity(typeof(BaseEntity), ConfigurationSource.Explicit).Metadata;
             derivedEntityTypeBuilder.HasBaseType(baseEntityType, ConfigurationSource.Explicit);
 
             var propertyBuilder = derivedEntityTypeBuilder.Property(
@@ -295,10 +293,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var derivedEntityTypeBuilder =
                 CreateInternalEntityTypeBuilder<CompositeKeyDerivedEntity>();
-            var baseEntityTypeBuilder = derivedEntityTypeBuilder.ModelBuilder.Entity(
-                typeof(BaseEntity),
-                ConfigurationSource.Explicit
-            );
+            var baseEntityTypeBuilder = derivedEntityTypeBuilder.ModelBuilder
+                .Entity(typeof(BaseEntity), ConfigurationSource.Explicit);
             derivedEntityTypeBuilder.HasBaseType(
                 baseEntityTypeBuilder.Metadata,
                 ConfigurationSource.Explicit
@@ -862,9 +858,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
         {
             var conventionSet = new ConventionSet();
-            conventionSet.EntityTypeAddedConventions.Add(
-                new PropertyDiscoveryConvention(CreateDependencies())
-            );
+            conventionSet.EntityTypeAddedConventions
+                .Add(new PropertyDiscoveryConvention(CreateDependencies()));
 
             var modelBuilder = new Model(conventionSet).Builder;
 
@@ -880,52 +875,34 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             new BackingFieldConvention(dependencies).ProcessPropertyAdded(propertyBuilder, context);
 
-            new ConcurrencyCheckAttributeConvention(dependencies).ProcessPropertyAdded(
-                propertyBuilder,
-                context
-            );
+            new ConcurrencyCheckAttributeConvention(dependencies)
+                .ProcessPropertyAdded(propertyBuilder, context);
 
-            new DatabaseGeneratedAttributeConvention(dependencies).ProcessPropertyAdded(
-                propertyBuilder,
-                context
-            );
+            new DatabaseGeneratedAttributeConvention(dependencies)
+                .ProcessPropertyAdded(propertyBuilder, context);
 
-            new RequiredPropertyAttributeConvention(dependencies).ProcessPropertyAdded(
-                propertyBuilder,
-                context
-            );
+            new RequiredPropertyAttributeConvention(dependencies)
+                .ProcessPropertyAdded(propertyBuilder, context);
 
-            new MaxLengthAttributeConvention(dependencies).ProcessPropertyAdded(
-                propertyBuilder,
-                context
-            );
+            new MaxLengthAttributeConvention(dependencies)
+                .ProcessPropertyAdded(propertyBuilder, context);
 
-            new StringLengthAttributeConvention(dependencies).ProcessPropertyAdded(
-                propertyBuilder,
-                context
-            );
+            new StringLengthAttributeConvention(dependencies)
+                .ProcessPropertyAdded(propertyBuilder, context);
 
-            new TimestampAttributeConvention(dependencies).ProcessPropertyAdded(
-                propertyBuilder,
-                context
-            );
+            new TimestampAttributeConvention(dependencies)
+                .ProcessPropertyAdded(propertyBuilder, context);
 
-            new BackingFieldAttributeConvention(dependencies).ProcessPropertyAdded(
-                propertyBuilder,
-                context
-            );
+            new BackingFieldAttributeConvention(dependencies)
+                .ProcessPropertyAdded(propertyBuilder, context);
 
             new KeyAttributeConvention(dependencies).ProcessPropertyAdded(propertyBuilder, context);
 
-            new UnicodeAttributeConvention(dependencies).ProcessPropertyAdded(
-                propertyBuilder,
-                context
-            );
+            new UnicodeAttributeConvention(dependencies)
+                .ProcessPropertyAdded(propertyBuilder, context);
 
-            new PrecisionAttributeConvention(dependencies).ProcessPropertyAdded(
-                propertyBuilder,
-                context
-            );
+            new PrecisionAttributeConvention(dependencies)
+                .ProcessPropertyAdded(propertyBuilder, context);
         }
 
         private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)
@@ -934,10 +911,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityTypeBuilder.Metadata.Model.ConventionDispatcher
             );
 
-            new NotMappedMemberAttributeConvention(CreateDependencies()).ProcessEntityTypeAdded(
-                entityTypeBuilder,
-                context
-            );
+            new NotMappedMemberAttributeConvention(CreateDependencies())
+                .ProcessEntityTypeAdded(entityTypeBuilder, context);
         }
 
         private void Validate(InternalEntityTypeBuilder entityTypeBuilder)
@@ -946,14 +921,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityTypeBuilder.Metadata.Model.ConventionDispatcher
             );
 
-            new KeyAttributeConvention(CreateDependencies()).ProcessModelFinalizing(
-                entityTypeBuilder.ModelBuilder,
-                context
-            );
+            new KeyAttributeConvention(CreateDependencies())
+                .ProcessModelFinalizing(entityTypeBuilder.ModelBuilder, context);
         }
 
         private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private class A

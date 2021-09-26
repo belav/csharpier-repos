@@ -199,9 +199,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             AttributeData attribute
         )
         {
-            var syntax = attribute.ApplicationSyntaxReference.GetSyntax(
-                symbolAnalysisContext.CancellationToken
-            );
+            var syntax = attribute.ApplicationSyntaxReference
+                .GetSyntax(symbolAnalysisContext.CancellationToken);
             return syntax?.GetLocation() ?? Location.None;
         }
 

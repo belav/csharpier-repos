@@ -48,8 +48,8 @@ namespace Mono.Linker
             )
             {
                 var offset = ILOffset ?? 0;
-                SequencePoint correspondingSequencePoint =
-                    method.DebugInformation.SequencePoints.Where(s => s.Offset <= offset)?.Last();
+                SequencePoint correspondingSequencePoint = method.DebugInformation.SequencePoints
+                    .Where(s => s.Offset <= offset)?.Last();
                 if (correspondingSequencePoint != null)
                 {
                     fileName = correspondingSequencePoint.Document.Url;
@@ -93,13 +93,14 @@ namespace Mono.Linker
                     MemberDefinition.DeclaringType?.Module?.Assembly?.Name?.Name,
                     MemberDefinition.DeclaringType?.Name,
                     MemberDefinition?.Name
-                ).CompareTo(
-                    (
-                        other.MemberDefinition.DeclaringType?.Module?.Assembly?.Name?.Name,
-                        other.MemberDefinition.DeclaringType?.Name,
-                        other.MemberDefinition?.Name
-                    )
-                );
+                )
+                    .CompareTo(
+                        (
+                            other.MemberDefinition.DeclaringType?.Module?.Assembly?.Name?.Name,
+                            other.MemberDefinition.DeclaringType?.Name,
+                            other.MemberDefinition?.Name
+                        )
+                    );
             }
             else if (MemberDefinition == null && other.MemberDefinition == null)
             {
@@ -109,9 +110,8 @@ namespace Mono.Linker
                 }
                 else if (FileName == null && other.FileName == null)
                 {
-                    return (SourceLine, SourceColumn).CompareTo(
-                        (other.SourceLine, other.SourceColumn)
-                    );
+                    return (SourceLine, SourceColumn)
+                        .CompareTo((other.SourceLine, other.SourceColumn));
                 }
 
                 return (FileName == null) ? 1 : -1;

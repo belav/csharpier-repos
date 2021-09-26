@@ -39,12 +39,13 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                 }
 
                 var valueString = Convert.ToString(value, CultureInfo.InvariantCulture);
-                return double.TryParse(
-                    valueString,
-                    NumberStyles.Float | NumberStyles.AllowThousands,
-                    CultureInfo.InvariantCulture,
-                    out _
-                );
+                return double
+                    .TryParse(
+                        valueString,
+                        NumberStyles.Float | NumberStyles.AllowThousands,
+                        CultureInfo.InvariantCulture,
+                        out _
+                    );
             }
 
             return false;

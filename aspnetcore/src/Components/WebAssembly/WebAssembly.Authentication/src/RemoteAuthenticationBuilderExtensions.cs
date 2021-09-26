@@ -33,12 +33,13 @@ namespace Microsoft.Extensions.DependencyInjection
             where TAccount : RemoteUserAccount
             where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<TAccount>
         {
-            builder.Services.Replace(
-                ServiceDescriptor.Scoped<
-                    AccountClaimsPrincipalFactory<TAccount>,
-                    TAccountClaimsPrincipalFactory
-                >()
-            );
+            builder.Services
+                .Replace(
+                    ServiceDescriptor.Scoped<
+                        AccountClaimsPrincipalFactory<TAccount>,
+                        TAccountClaimsPrincipalFactory
+                    >()
+                );
 
             return builder;
         }

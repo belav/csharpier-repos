@@ -258,8 +258,8 @@ namespace System.Web.Razor.Test.Parser.CSharp
                     + "}",
                 new StatementBlock(
                     Factory.Code(
-                            "if(foo) {\r\n    var foo = \"After this statement there are 10 spaces\";          \r\n"
-                        )
+                        "if(foo) {\r\n    var foo = \"After this statement there are 10 spaces\";          \r\n"
+                    )
                         .AsStatement(),
                     new MarkupBlock(
                         Factory.Markup("    <p>\r\n        Foo\r\n"),

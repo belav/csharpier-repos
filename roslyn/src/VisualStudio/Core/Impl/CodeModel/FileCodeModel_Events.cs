@@ -56,9 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return needMoreTime;
             }
 
-            var projectCodeModel = this.State.ProjectCodeModelFactory.GetProjectCodeModel(
-                document.Project.Id
-            );
+            var projectCodeModel = this.State.ProjectCodeModelFactory
+                .GetProjectCodeModel(document.Project.Id);
             if (projectCodeModel == null)
             {
                 return needMoreTime;
@@ -74,9 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return needMoreTime;
             }
 
-            var extensibility = (EnvDTE80.IVsExtensibility2)this.State.ServiceProvider.GetService(
-                typeof(EnvDTE.IVsExtensibility)
-            );
+            var extensibility = (EnvDTE80.IVsExtensibility2)this.State.ServiceProvider
+                .GetService(typeof(EnvDTE.IVsExtensibility));
             if (extensibility == null)
                 return false;
 
@@ -175,10 +173,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             if (codeModelEvent.Node == null)
             {
-                element = this.CodeModelService.CreateUnknownRootNamespaceCodeElement(
-                    this.State,
-                    this
-                );
+                element = this.CodeModelService
+                    .CreateUnknownRootNamespaceCodeElement(this.State, this);
             }
             else if (this.CodeModelService.IsParameterNode(codeModelEvent.Node))
             {
@@ -199,11 +195,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 if (codeModelEvent.Type == CodeModelEventType.Remove)
                 {
-                    element = this.CodeModelService.CreateUnknownCodeElement(
-                        this.State,
-                        this,
-                        codeModelEvent.Node
-                    );
+                    element = this.CodeModelService
+                        .CreateUnknownCodeElement(this.State, this, codeModelEvent.Node);
                 }
                 else
                 {

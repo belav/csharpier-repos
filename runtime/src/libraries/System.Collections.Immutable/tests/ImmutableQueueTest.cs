@@ -195,18 +195,21 @@ namespace System.Collections.Immutable.Tests
                 ImmutableQueue<int>.Empty.Enqueue(5).Equals(ImmutableQueue<int>.Empty.Enqueue(3))
             );
             Assert.False(
-                ImmutableQueue<int>.Empty.Enqueue(3)
+                ImmutableQueue<int>.Empty
+                    .Enqueue(3)
                     .Enqueue(5)
                     .Equals(ImmutableQueue<int>.Empty.Enqueue(3))
             );
             Assert.False(
-                ImmutableQueue<int>.Empty.Enqueue(3)
+                ImmutableQueue<int>.Empty
+                    .Enqueue(3)
                     .Equals(ImmutableQueue<int>.Empty.Enqueue(3).Enqueue(5))
             );
 
             // Also be sure to compare equality of partially dequeued queues since that moves data to different fields.
             Assert.False(
-                ImmutableQueue<int>.Empty.Enqueue(3)
+                ImmutableQueue<int>.Empty
+                    .Enqueue(3)
                     .Enqueue(1)
                     .Enqueue(2)
                     .Dequeue()
@@ -277,11 +280,12 @@ namespace System.Collections.Immutable.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 queue
             );
-            PropertyInfo itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                    == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(
+                    pr =>
+                        pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                        == DebuggerBrowsableState.RootHidden
+                );
             string[] items = itemProperty.GetValue(info.Instance) as string[];
             Assert.Equal(queue, items);
         }

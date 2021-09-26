@@ -89,8 +89,8 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
                 var sb = new StringBuilder();
                 sb.AppendLine("### PROCESS INFORMATION:");
                 sb.AppendFormat(
-                        $"###\tArchitecture: {RuntimeInformation.ProcessArchitecture.ToString()}"
-                    )
+                    $"###\tArchitecture: {RuntimeInformation.ProcessArchitecture.ToString()}"
+                )
                     .AppendLine();
                 foreach (
                     string prop in new string[]

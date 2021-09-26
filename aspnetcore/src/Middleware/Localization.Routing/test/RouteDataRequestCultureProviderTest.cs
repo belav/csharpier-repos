@@ -38,69 +38,65 @@ namespace Microsoft.AspNetCore.Localization.Routing
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRouter(
+                                routes =>
                                 {
-                                    app.UseRouter(
-                                        routes =>
+                                    routes.MapMiddlewareRoute(
+                                        routeTemplate,
+                                        fork =>
                                         {
-                                            routes.MapMiddlewareRoute(
-                                                routeTemplate,
-                                                fork =>
+                                            var options = new RequestLocalizationOptions
+                                            {
+                                                DefaultRequestCulture = new RequestCulture("en-US"),
+                                                SupportedCultures = new List<CultureInfo>
                                                 {
-                                                    var options = new RequestLocalizationOptions
-                                                    {
-                                                        DefaultRequestCulture = new RequestCulture(
-                                                            "en-US"
-                                                        ),
-                                                        SupportedCultures = new List<CultureInfo>
-                                                        {
-                                                            new CultureInfo("ar-SA")
-                                                        },
-                                                        SupportedUICultures = new List<CultureInfo>
-                                                        {
-                                                            new CultureInfo("ar-YE")
-                                                        }
-                                                    };
-                                                    options.RequestCultureProviders = new[]
-                                                    {
-                                                        new RouteDataRequestCultureProvider()
-                                                        {
-                                                            Options = options
-                                                        }
-                                                    };
-                                                    fork.UseRequestLocalization(options);
+                                                    new CultureInfo("ar-SA")
+                                                },
+                                                SupportedUICultures = new List<CultureInfo>
+                                                {
+                                                    new CultureInfo("ar-YE")
+                                                }
+                                            };
+                                            options.RequestCultureProviders = new[]
+                                            {
+                                                new RouteDataRequestCultureProvider()
+                                                {
+                                                    Options = options
+                                                }
+                                            };
+                                            fork.UseRequestLocalization(options);
 
-                                                    fork.Run(
-                                                        context =>
-                                                        {
-                                                            var requestCultureFeature =
-                                                                context.Features.Get<IRequestCultureFeature>();
-                                                            var requestCulture =
-                                                                requestCultureFeature.RequestCulture;
-                                                            return context.Response.WriteAsync(
-                                                                $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
-                                                            );
-                                                        }
-                                                    );
+                                            fork.Run(
+                                                context =>
+                                                {
+                                                    var requestCultureFeature = context.Features
+                                                        .Get<IRequestCultureFeature>();
+                                                    var requestCulture =
+                                                        requestCultureFeature.RequestCulture;
+                                                    return context.Response
+                                                        .WriteAsync(
+                                                            $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
+                                                        );
                                                 }
                                             );
                                         }
                                     );
                                 }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddRouting();
-                                }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddRouting();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -119,39 +115,37 @@ namespace Microsoft.AspNetCore.Localization.Routing
         public async Task GetDefaultCultureInfo_IfCultureKeysAreMissing()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            var options = new RequestLocalizationOptions
+                            {
+                                DefaultRequestCulture = new RequestCulture("en-US")
+                            };
+                            options.RequestCultureProviders = new[]
+                            {
+                                new RouteDataRequestCultureProvider() { Options = options }
+                            };
+                            app.UseRequestLocalization(options);
+                            app.Run(
+                                context =>
                                 {
-                                    var options = new RequestLocalizationOptions
-                                    {
-                                        DefaultRequestCulture = new RequestCulture("en-US")
-                                    };
-                                    options.RequestCultureProviders = new[]
-                                    {
-                                        new RouteDataRequestCultureProvider() { Options = options }
-                                    };
-                                    app.UseRequestLocalization(options);
-                                    app.Run(
-                                        context =>
-                                        {
-                                            var requestCultureFeature =
-                                                context.Features.Get<IRequestCultureFeature>();
-                                            var requestCulture =
-                                                requestCultureFeature.RequestCulture;
+                                    var requestCultureFeature = context.Features
+                                        .Get<IRequestCultureFeature>();
+                                    var requestCulture = requestCultureFeature.RequestCulture;
 
-                                            return context.Response.WriteAsync(
-                                                $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
-                                            );
-                                        }
-                                    );
+                                    return context.Response
+                                        .WriteAsync(
+                                            $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
+                                        );
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -180,72 +174,68 @@ namespace Microsoft.AspNetCore.Localization.Routing
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRouter(
+                                routes =>
                                 {
-                                    app.UseRouter(
-                                        routes =>
+                                    routes.MapMiddlewareRoute(
+                                        routeTemplate,
+                                        fork =>
                                         {
-                                            routes.MapMiddlewareRoute(
-                                                routeTemplate,
-                                                fork =>
+                                            var options = new RequestLocalizationOptions
+                                            {
+                                                DefaultRequestCulture = new RequestCulture("en-US"),
+                                                SupportedCultures = new List<CultureInfo>
                                                 {
-                                                    var options = new RequestLocalizationOptions
-                                                    {
-                                                        DefaultRequestCulture = new RequestCulture(
-                                                            "en-US"
-                                                        ),
-                                                        SupportedCultures = new List<CultureInfo>
-                                                        {
-                                                            new CultureInfo("ar-SA")
-                                                        },
-                                                        SupportedUICultures = new List<CultureInfo>
-                                                        {
-                                                            new CultureInfo("ar-YE")
-                                                        }
-                                                    };
-                                                    options.RequestCultureProviders = new[]
-                                                    {
-                                                        new RouteDataRequestCultureProvider()
-                                                        {
-                                                            Options = options,
-                                                            RouteDataStringKey = "c",
-                                                            UIRouteDataStringKey = "uic"
-                                                        }
-                                                    };
-                                                    fork.UseRequestLocalization(options);
+                                                    new CultureInfo("ar-SA")
+                                                },
+                                                SupportedUICultures = new List<CultureInfo>
+                                                {
+                                                    new CultureInfo("ar-YE")
+                                                }
+                                            };
+                                            options.RequestCultureProviders = new[]
+                                            {
+                                                new RouteDataRequestCultureProvider()
+                                                {
+                                                    Options = options,
+                                                    RouteDataStringKey = "c",
+                                                    UIRouteDataStringKey = "uic"
+                                                }
+                                            };
+                                            fork.UseRequestLocalization(options);
 
-                                                    fork.Run(
-                                                        context =>
-                                                        {
-                                                            var requestCultureFeature =
-                                                                context.Features.Get<IRequestCultureFeature>();
-                                                            var requestCulture =
-                                                                requestCultureFeature.RequestCulture;
+                                            fork.Run(
+                                                context =>
+                                                {
+                                                    var requestCultureFeature = context.Features
+                                                        .Get<IRequestCultureFeature>();
+                                                    var requestCulture =
+                                                        requestCultureFeature.RequestCulture;
 
-                                                            return context.Response.WriteAsync(
-                                                                $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
-                                                            );
-                                                        }
-                                                    );
+                                                    return context.Response
+                                                        .WriteAsync(
+                                                            $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
+                                                        );
                                                 }
                                             );
                                         }
                                     );
                                 }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddRouting();
-                                }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddRouting();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

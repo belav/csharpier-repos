@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                 return null;
 
             var settings = settingsToUpdate.Select(
-                    x => TryGetOptionValueAndLanguage(x.option, x.value)
-                )
+                x => TryGetOptionValueAndLanguage(x.option, x.value)
+            )
                 .ToList();
 
             return TryUpdateAnalyzerConfigDocument(originalText, filePath, settings);
@@ -68,8 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
 
             var updatedText = originalText;
             var settings = settingsToUpdate.Select(
-                    x => TryGetOptionValueAndLanguage(x.option, x.value, optionSet)
-                )
+                x => TryGetOptionValueAndLanguage(x.option, x.value, optionSet)
+            )
                 .Where(x => x.success)
                 .Select(x => (x.option, x.value, x.language))
                 .ToList();
@@ -315,9 +315,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                 // We splice on the last occurrence of '.' to account for filenames containing periods.
                 var nameExtensionSplitIndex = mostRecentHeaderText.LastIndexOf('.');
                 var fileName = mostRecentHeaderText.Substring(0, nameExtensionSplitIndex);
-                var splicedFileExtensions = mostRecentHeaderText[
-                    (nameExtensionSplitIndex + 1)..
-                ].Split(',', ' ', '{', '}');
+                var splicedFileExtensions = mostRecentHeaderText[(nameExtensionSplitIndex + 1)..]
+                    .Split(',', ' ', '{', '}');
 
                 // Replacing characters in the header with the regex equivalent.
                 fileName = fileName.Replace(".", @"\.");

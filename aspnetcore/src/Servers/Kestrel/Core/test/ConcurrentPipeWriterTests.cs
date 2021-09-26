@@ -427,9 +427,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     Assert.Equal(1, mockPipeWriter.CancelPendingFlushCallCount);
                 }
 
-                pipeWriterFlushTcsArray[0].SetResult(
-                    new FlushResult(isCanceled: true, isCompleted: false)
-                );
+                pipeWriterFlushTcsArray[0]
+                    .SetResult(new FlushResult(isCanceled: true, isCompleted: false));
 
                 Assert.True((await flushTask0.DefaultTimeout()).IsCanceled);
                 Assert.True((await flushTask1.DefaultTimeout()).IsCanceled);

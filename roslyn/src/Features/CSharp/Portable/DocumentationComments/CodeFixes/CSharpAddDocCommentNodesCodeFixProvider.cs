@@ -87,9 +87,9 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
         protected override List<string> GetParameterNames(MemberDeclarationSyntax member)
         {
             var parameterList = (ParameterListSyntax)member.DescendantNodes(
-                    descendIntoChildren: _ => true,
-                    descendIntoTrivia: false
-                )
+                descendIntoChildren: _ => true,
+                descendIntoTrivia: false
+            )
                 .FirstOrDefault(f => f is ParameterListSyntax);
 
             return parameterList != null

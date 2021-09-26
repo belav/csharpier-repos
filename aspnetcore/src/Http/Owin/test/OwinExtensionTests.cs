@@ -68,8 +68,8 @@ namespace Microsoft.AspNetCore.Owin
         {
             var list = new List<CreateMiddleware>();
             AddMiddleware build = list.Add;
-            IServiceProvider expectedServiceProvider =
-                new ServiceCollection().BuildServiceProvider();
+            IServiceProvider expectedServiceProvider = new ServiceCollection()
+                .BuildServiceProvider();
             IServiceProvider serviceProvider = null;
             FakeService fakeService = null;
             bool builderExecuted = false;
@@ -170,11 +170,8 @@ namespace Microsoft.AspNetCore.Owin
                 Assert.Single(
                     environment,
                     kvp =>
-                        string.Equals(
-                            typeof(HttpContext).FullName,
-                            kvp.Key,
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(typeof(HttpContext).FullName, kvp.Key, StringComparison.Ordinal)
                 ).Value;
             Assert.Equal(context, value);
             Assert.False(environment.ContainsKey("websocket.Accept"));

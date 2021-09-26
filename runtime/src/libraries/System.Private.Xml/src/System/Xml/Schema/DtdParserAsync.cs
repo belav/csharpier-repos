@@ -2287,10 +2287,10 @@ namespace System.Xml
                             continue;
                         }
                         await HandleEntityReferenceAsync(
-                                true,
-                                true,
-                                literalType == LiteralType.AttributeValue
-                            )
+                            true,
+                            true,
+                            literalType == LiteralType.AttributeValue
+                        )
                             .ConfigureAwait(false);
                         _tokenStartPos = _curPos;
                         continue;
@@ -2310,8 +2310,8 @@ namespace System.Xml
                         {
                             SaveParsingBuffer();
                             int endPos = await _readerAdapter.ParseNumericCharRefAsync(
-                                    SaveInternalSubsetValue ? _internalSubsetValueSb : null
-                                )
+                                SaveInternalSubsetValue ? _internalSubsetValueSb : null
+                            )
                                 .ConfigureAwait(false);
                             LoadParsingBuffer();
                             _stringBuilder.Append(_chars, _curPos, endPos - _curPos);
@@ -2327,9 +2327,9 @@ namespace System.Xml
                             if (literalType == LiteralType.AttributeValue)
                             {
                                 int endPos = await _readerAdapter.ParseNamedCharRefAsync(
-                                        true,
-                                        SaveInternalSubsetValue ? _internalSubsetValueSb : null
-                                    )
+                                    true,
+                                    SaveInternalSubsetValue ? _internalSubsetValueSb : null
+                                )
                                     .ConfigureAwait(false);
                                 LoadParsingBuffer();
 
@@ -2352,9 +2352,9 @@ namespace System.Xml
                             else
                             {
                                 int endPos = await _readerAdapter.ParseNamedCharRefAsync(
-                                        false,
-                                        null
-                                    )
+                                    false,
+                                    null
+                                )
                                     .ConfigureAwait(false);
                                 LoadParsingBuffer();
 

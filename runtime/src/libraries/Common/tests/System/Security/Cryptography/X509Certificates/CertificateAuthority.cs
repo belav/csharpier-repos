@@ -295,9 +295,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             }
 
             request.CertificateExtensions.Add(_akidExtension);
-            request.CertificateExtensions.Add(
-                new X509SubjectKeyIdentifierExtension(request.PublicKey, false)
-            );
+            request.CertificateExtensions
+                .Add(new X509SubjectKeyIdentifierExtension(request.PublicKey, false));
 
             byte[] serial = new byte[sizeof(long)];
             RandomNumberGenerator.Fill(serial);
@@ -792,8 +791,9 @@ SingleResponse ::= SEQUENCE {
 
         private X509Extension CreateAkidExtension()
         {
-            X509SubjectKeyIdentifierExtension skid =
-                _cert.Extensions.OfType<X509SubjectKeyIdentifierExtension>().SingleOrDefault();
+            X509SubjectKeyIdentifierExtension skid = _cert.Extensions
+                .OfType<X509SubjectKeyIdentifierExtension>()
+                .SingleOrDefault();
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
 
@@ -973,9 +973,9 @@ SingleResponse ::= SEQUENCE {
                         intermedPub.Dispose();
                     }
 
-                    X509SubjectKeyIdentifierExtension intermedSkid =
-                        intermedCert.Extensions.OfType<X509SubjectKeyIdentifierExtension>()
-                            .Single();
+                    X509SubjectKeyIdentifierExtension intermedSkid = intermedCert.Extensions
+                        .OfType<X509SubjectKeyIdentifierExtension>()
+                        .Single();
 
                     certUrl = $"{responder.UriPrefix}cert/{intermedSkid.SubjectKeyIdentifier}.cer";
                     cdpUrl = $"{responder.UriPrefix}crl/{intermedSkid.SubjectKeyIdentifier}.crl";

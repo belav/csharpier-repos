@@ -894,11 +894,12 @@ public delegate dynamic[] MyDelegate(dynamic[] x);
             {
                 var synthesizedDynamicAttributes = attributes.Where(
                     (attr) =>
-                        string.Equals(
-                            attr.AttributeClass.Name,
-                            "DynamicAttribute",
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(
+                                attr.AttributeClass.Name,
+                                "DynamicAttribute",
+                                StringComparison.Ordinal
+                            )
                 );
 
                 if (!expectedDynamicAttribute)
@@ -918,12 +919,13 @@ public delegate dynamic[] MyDelegate(dynamic[] x);
                     {
                         Assert.Equal(
                             "System.Boolean[]",
-                            dynamicAttribute.AttributeConstructor.Parameters.Single()
+                            dynamicAttribute.AttributeConstructor.Parameters
+                                .Single()
                                 .TypeWithAnnotations.ToTestDisplayString()
                         );
 
-                        TypedConstant argument =
-                            dynamicAttribute.CommonConstructorArguments.Single();
+                        TypedConstant argument = dynamicAttribute.CommonConstructorArguments
+                            .Single();
                         Assert.Equal(TypedConstantKind.Array, argument.Kind);
 
                         ImmutableArray<TypedConstant> actualTransformFlags = argument.Values;
@@ -1388,7 +1390,8 @@ dynamic x = 0;
                 comp,
                 symbolValidator: module =>
                 {
-                    var implicitField = module.GlobalNamespace.GetTypeMember("Script")
+                    var implicitField = module.GlobalNamespace
+                        .GetTypeMember("Script")
                         .GetMember<FieldSymbol>("x");
                     DynamicAttributeValidator.ValidateDynamicAttribute(
                         implicitField.GetAttributes(),
@@ -1434,7 +1437,8 @@ Gen<dynamic> x = null;";
                 comp,
                 symbolValidator: module =>
                 {
-                    var implicitField = module.GlobalNamespace.GetTypeMember("Script")
+                    var implicitField = module.GlobalNamespace
+                        .GetTypeMember("Script")
                         .GetMember<FieldSymbol>("x");
                     var expectedTransformsFlags = new bool[] { false, true };
                     DynamicAttributeValidator.ValidateDynamicAttribute(
@@ -1455,9 +1459,9 @@ Gen<dynamic> x = null;";
 Gen<dynamic> x = null;";
 
             var comp = CreateCompilationWithMscorlib45(
-                    source: source,
-                    parseOptions: TestOptions.Script
-                )
+                source: source,
+                parseOptions: TestOptions.Script
+            )
                 .VerifyDiagnostics(
                     // (20,5): error CS1980: Cannot define a class or member that utilizes 'dynamic' because the compiler required type 'System.Runtime.CompilerServices.DynamicAttribute' cannot be found. Are you missing a reference?
                     // Gen<dynamic> x = null;
@@ -1485,7 +1489,8 @@ Gen<dynamic> x = null;";
                 comp,
                 symbolValidator: module =>
                 {
-                    var implicitField = module.GlobalNamespace.GetTypeMember("Script")
+                    var implicitField = module.GlobalNamespace
+                        .GetTypeMember("Script")
                         .GetMember<FieldSymbol>("x");
                     var expectedTransformsFlags = new bool[] { false, true };
                     DynamicAttributeValidator.ValidateDynamicAttribute(
@@ -1591,21 +1596,20 @@ public class C
 [Dynamic(new bool[] { true })]
 public struct S { }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (4,2): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
-                    Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new[] { true })"),
-                    // (19,2): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
-                    Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new bool[] { true })"),
-                    // (10,6): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
-                    Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new[] { true })"),
-                    // (13,14): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
-                    Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new[] { true })"),
-                    // (14,20): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
-                    Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new[] { true })"),
-                    // (7,6): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
-                    Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new[] { true })")
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (4,2): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
+                Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new[] { true })"),
+                // (19,2): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
+                Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new bool[] { true })"),
+                // (10,6): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
+                Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new[] { true })"),
+                // (13,14): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
+                Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new[] { true })"),
+                // (14,20): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
+                Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new[] { true })"),
+                // (7,6): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
+                Diagnostic(ErrorCode.ERR_ExplicitDynamicAttr, "Dynamic(new[] { true })")
+            );
         }
 
         [Fact]
@@ -1621,49 +1625,48 @@ public class C
     public void dynamic([dynamic]dynamic dynamic) { }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(text)
-                .VerifyDiagnostics(
-                    // (2,2): error CS0246: The type or namespace name 'dynamicAttribute' could not be found (are you missing a using directive or an assembly reference?)
-                    // [dynamic]
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
-                        .WithArguments("dynamicAttribute")
-                        .WithLocation(2, 2),
-                    // (2,2): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a using directive or an assembly reference?)
-                    // [dynamic]
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
-                        .WithArguments("dynamic")
-                        .WithLocation(2, 2),
-                    // (6,6): error CS0246: The type or namespace name 'dynamicAttribute' could not be found (are you missing a using directive or an assembly reference?)
-                    //     [dynamic]
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
-                        .WithArguments("dynamicAttribute")
-                        .WithLocation(6, 6),
-                    // (6,6): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a using directive or an assembly reference?)
-                    //     [dynamic]
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
-                        .WithArguments("dynamic")
-                        .WithLocation(6, 6),
-                    // (5,14): error CS0246: The type or namespace name 'dynamicAttribute' could not be found (are you missing a using directive or an assembly reference?)
-                    //     [return: dynamic]
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
-                        .WithArguments("dynamicAttribute")
-                        .WithLocation(5, 14),
-                    // (5,14): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a using directive or an assembly reference?)
-                    //     [return: dynamic]
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
-                        .WithArguments("dynamic")
-                        .WithLocation(5, 14),
-                    // (7,26): error CS0246: The type or namespace name 'dynamicAttribute' could not be found (are you missing a using directive or an assembly reference?)
-                    //     public void dynamic([dynamic]dynamic dynamic) { }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
-                        .WithArguments("dynamicAttribute")
-                        .WithLocation(7, 26),
-                    // (7,26): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a using directive or an assembly reference?)
-                    //     public void dynamic([dynamic]dynamic dynamic) { }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
-                        .WithArguments("dynamic")
-                        .WithLocation(7, 26)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
+                // (2,2): error CS0246: The type or namespace name 'dynamicAttribute' could not be found (are you missing a using directive or an assembly reference?)
+                // [dynamic]
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
+                    .WithArguments("dynamicAttribute")
+                    .WithLocation(2, 2),
+                // (2,2): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a using directive or an assembly reference?)
+                // [dynamic]
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
+                    .WithArguments("dynamic")
+                    .WithLocation(2, 2),
+                // (6,6): error CS0246: The type or namespace name 'dynamicAttribute' could not be found (are you missing a using directive or an assembly reference?)
+                //     [dynamic]
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
+                    .WithArguments("dynamicAttribute")
+                    .WithLocation(6, 6),
+                // (6,6): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a using directive or an assembly reference?)
+                //     [dynamic]
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
+                    .WithArguments("dynamic")
+                    .WithLocation(6, 6),
+                // (5,14): error CS0246: The type or namespace name 'dynamicAttribute' could not be found (are you missing a using directive or an assembly reference?)
+                //     [return: dynamic]
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
+                    .WithArguments("dynamicAttribute")
+                    .WithLocation(5, 14),
+                // (5,14): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a using directive or an assembly reference?)
+                //     [return: dynamic]
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
+                    .WithArguments("dynamic")
+                    .WithLocation(5, 14),
+                // (7,26): error CS0246: The type or namespace name 'dynamicAttribute' could not be found (are you missing a using directive or an assembly reference?)
+                //     public void dynamic([dynamic]dynamic dynamic) { }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
+                    .WithArguments("dynamicAttribute")
+                    .WithLocation(7, 26),
+                // (7,26): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a using directive or an assembly reference?)
+                //     public void dynamic([dynamic]dynamic dynamic) { }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
+                    .WithArguments("dynamic")
+                    .WithLocation(7, 26)
+            );
         }
 
         [Fact]
@@ -1685,9 +1688,8 @@ class C
             CompileAndVerify(
                 source,
                 references: new[] { CSharpRef },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     var c = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
@@ -2024,12 +2026,12 @@ public class Gen2<T> : X    // CS1980
 }";
 
             CreateCompilationWithMscorlib45(
-                    source: source,
-                    parseOptions: new CSharpParseOptions(
-                        kind: sourceCodeKind,
-                        languageVersion: LanguageVersion.CSharp7_2
-                    )
+                source: source,
+                parseOptions: new CSharpParseOptions(
+                    kind: sourceCodeKind,
+                    languageVersion: LanguageVersion.CSharp7_2
                 )
+            )
                 .VerifyDiagnostics(
                     // (21,24): error CS1980: Cannot define a class or member that utilizes 'dynamic' because the compiler required type 'System.Runtime.CompilerServices.DynamicAttribute' cannot be found. Are you missing a reference?
                     // public class Gen2<T> : X    // CS1980

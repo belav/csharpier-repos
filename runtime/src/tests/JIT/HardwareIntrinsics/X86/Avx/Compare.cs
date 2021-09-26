@@ -162,7 +162,8 @@ namespace IntelHardwareIntrinsicTest
 
                     try
                     {
-                        var ve = typeof(Avx).GetMethod(
+                        var ve = typeof(Avx)
+                            .GetMethod(
                                 nameof(Avx.Compare),
                                 new Type[]
                                 {
@@ -194,7 +195,8 @@ namespace IntelHardwareIntrinsicTest
 
                     try
                     {
-                        var ve = typeof(Avx).GetMethod(
+                        var ve = typeof(Avx)
+                            .GetMethod(
                                 nameof(Avx.Compare),
                                 new Type[]
                                 {

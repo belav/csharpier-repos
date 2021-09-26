@@ -234,7 +234,8 @@ namespace System.Reflection.Internal
             //       However, on .NET < 4.6, there isn't no-op fast path for zero-initialization case so we'd slow down.
             //       Plus, mutating a System.String is no better than the reflection here.
 
-            IEnumerable<MethodInfo> createStringInfos = typeof(string).GetTypeInfo()
+            IEnumerable<MethodInfo> createStringInfos = typeof(string)
+                .GetTypeInfo()
                 .GetDeclaredMethods("CreateStringFromEncoding");
             foreach (var methodInfo in createStringInfos)
             {

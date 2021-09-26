@@ -54,9 +54,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             );
 
             var simplifiedDocument = Simplifier.ReduceAsync(
-                    documentWithAnnotations,
-                    cancellationToken: cancellationToken
-                )
+                documentWithAnnotations,
+                cancellationToken: cancellationToken
+            )
                 .WaitAndGetResult(cancellationToken);
             simplifiedTypeName = simplifiedDocument.GetSyntaxRootSynchronously(cancellationToken)
                 .GetAnnotatedNodesAndTokens(typeAnnotation)

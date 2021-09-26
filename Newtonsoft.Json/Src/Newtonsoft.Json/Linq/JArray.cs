@@ -126,10 +126,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Error reading JArray from JsonReader. Current JsonReader item is not an array: {0}".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Error reading JArray from JsonReader. Current JsonReader item is not an array: {0}"
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
 
@@ -202,10 +200,8 @@ namespace Newtonsoft.Json.Linq
             if (token.Type != JTokenType.Array)
             {
                 throw new ArgumentException(
-                    "Object serialized to {0}. JArray instance expected.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        token.Type
-                    )
+                    "Object serialized to {0}. JArray instance expected."
+                        .FormatWith(CultureInfo.InvariantCulture, token.Type)
                 );
             }
 
@@ -242,10 +238,11 @@ namespace Newtonsoft.Json.Linq
                 if (!(key is int))
                 {
                     throw new ArgumentException(
-                        "Accessed JArray values with invalid key value: {0}. Int32 array index expected.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            MiscellaneousUtils.ToString(key)
-                        )
+                        "Accessed JArray values with invalid key value: {0}. Int32 array index expected."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                MiscellaneousUtils.ToString(key)
+                            )
                     );
                 }
 
@@ -258,10 +255,11 @@ namespace Newtonsoft.Json.Linq
                 if (!(key is int))
                 {
                     throw new ArgumentException(
-                        "Set JArray values with invalid key value: {0}. Int32 array index expected.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            MiscellaneousUtils.ToString(key)
-                        )
+                        "Set JArray values with invalid key value: {0}. Int32 array index expected."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                MiscellaneousUtils.ToString(key)
+                            )
                     );
                 }
 

@@ -205,18 +205,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             if (Thread.FatalError == null)
             {
                 await Thread.PostAsync(
-                        listener =>
-                        {
-                            listener.DispatchPipe.Dispose();
-                            listener.FreeBuffer();
+                    listener =>
+                    {
+                        listener.DispatchPipe.Dispose();
+                        listener.FreeBuffer();
 
-                            listener._closed = true;
+                        listener._closed = true;
 
-                            listener.StopAcceptingConnections();
-                        },
-                        this
-                    )
-                    .ConfigureAwait(false);
+                        listener.StopAcceptingConnections();
+                    },
+                    this
+                ).ConfigureAwait(false);
             }
             else
             {

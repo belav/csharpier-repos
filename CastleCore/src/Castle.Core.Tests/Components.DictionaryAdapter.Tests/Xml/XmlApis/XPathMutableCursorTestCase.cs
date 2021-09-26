@@ -122,17 +122,18 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             cursor.Value = "h";
 
             CustomAssert.AreXmlEquivalent(
-                string.Concat(
-                    "<X>",
-                    "<A>",
-                    "<C H='h'>",
-                    "<D> <E/> <F>f</F> </D>",
-                    "<G/>",
-                    "</C>",
-                    "<B>b</B>",
-                    "</A>",
-                    "</X>"
-                ),
+                string
+                    .Concat(
+                        "<X>",
+                        "<A>",
+                        "<C H='h'>",
+                        "<D> <E/> <F>f</F> </D>",
+                        "<G/>",
+                        "</C>",
+                        "<B>b</B>",
+                        "</A>",
+                        "</X>"
+                    ),
                 xml
             );
         }

@@ -184,10 +184,10 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void Imports_CardinalityIgnored_WhenNotSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple =
-                typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional =
-                typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple)
+                .AsPart();
+            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally)
+                .AsPart();
 
             Assert.True(part1.Imports(typeof(IContract1)));
             Assert.True(part1Optional.Imports(typeof(IContract1)));
@@ -198,10 +198,10 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void Imports_CardinalityNotIgnored_WhenSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple =
-                typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional =
-                typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple)
+                .AsPart();
+            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally)
+                .AsPart();
 
             Assert.True(part1.Imports(typeof(IContract1), ImportCardinality.ExactlyOne));
             Assert.False(part1.Imports(typeof(IContract1), ImportCardinality.ZeroOrMore));
@@ -246,10 +246,10 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void ImportsGeneric_CardinalityIgnored_WhenNotSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple =
-                typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional =
-                typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple)
+                .AsPart();
+            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally)
+                .AsPart();
 
             Assert.True(part1.Imports<IContract1>());
             Assert.True(part1Optional.Imports<IContract1>());
@@ -260,10 +260,10 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void ImportsGeneric_CardinalityNotIgnored_WhenSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple =
-                typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional =
-                typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple)
+                .AsPart();
+            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally)
+                .AsPart();
 
             Assert.True(part1.Imports<IContract1>(ImportCardinality.ExactlyOne));
             Assert.False(part1.Imports<IContract1>(ImportCardinality.ZeroOrMore));

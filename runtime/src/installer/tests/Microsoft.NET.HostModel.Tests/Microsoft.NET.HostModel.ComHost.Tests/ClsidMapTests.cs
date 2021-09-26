@@ -185,20 +185,23 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
             {
                 RepoDirectories = new RepoDirectoriesProvider();
 
-                ComLibraryFixture = new TestProjectFixture(
-                    "ComLibrary",
-                    RepoDirectories
-                ).EnsureRestored().BuildProject();
+                ComLibraryFixture = new TestProjectFixture("ComLibrary", RepoDirectories)
+                    .EnsureRestored()
+                    .BuildProject();
 
                 ComLibraryMissingGuidFixture = new TestProjectFixture(
                     "ComLibraryMissingGuid",
                     RepoDirectories
-                ).EnsureRestored().BuildProject();
+                )
+                    .EnsureRestored()
+                    .BuildProject();
 
                 ComLibraryConflictingGuidFixture = new TestProjectFixture(
                     "ComLibraryConflictingGuid",
                     RepoDirectories
-                ).EnsureRestored().BuildProject();
+                )
+                    .EnsureRestored()
+                    .BuildProject();
             }
 
             public RepoDirectoriesProvider RepoDirectories { get; }

@@ -31,9 +31,8 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void Should_not_validate()
         {
-            new Action(
-                Configuration.AssertConfigurationIsValid
-            ).ShouldThrow<AutoMapperConfigurationException>();
+            new Action(Configuration.AssertConfigurationIsValid)
+                .ShouldThrow<AutoMapperConfigurationException>();
         }
     }
 }

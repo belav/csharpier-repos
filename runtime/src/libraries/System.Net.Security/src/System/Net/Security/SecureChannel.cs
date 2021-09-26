@@ -54,13 +54,14 @@ namespace System.Net.Security
         )
         {
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource.Log.SecureChannelCtor(
-                    this,
-                    sslStream,
-                    sslAuthenticationOptions.TargetHost!,
-                    sslAuthenticationOptions.ClientCertificates,
-                    sslAuthenticationOptions.EncryptionPolicy
-                );
+                NetEventSource.Log
+                    .SecureChannelCtor(
+                        this,
+                        sslStream,
+                        sslAuthenticationOptions.TargetHost!,
+                        sslAuthenticationOptions.ClientCertificates,
+                        sslAuthenticationOptions.EncryptionPolicy
+                    );
 
             SslStreamPal.VerifyPackageInfo();
             Debug.Assert(
@@ -220,11 +221,8 @@ namespace System.Net.Security
                 X509Store? store = CertificateValidationPal.EnsureStoreOpened(isServer);
                 if (store != null)
                 {
-                    collectionEx = store.Certificates.Find(
-                        X509FindType.FindByThumbprint,
-                        certHash,
-                        false
-                    );
+                    collectionEx = store.Certificates
+                        .Find(X509FindType.FindByThumbprint, certHash, false);
                     if (collectionEx.Count > 0 && collectionEx[0].HasPrivateKey)
                     {
                         if (NetEventSource.Log.IsEnabled())
@@ -236,11 +234,8 @@ namespace System.Net.Security
                 store = CertificateValidationPal.EnsureStoreOpened(!isServer);
                 if (store != null)
                 {
-                    collectionEx = store.Certificates.Find(
-                        X509FindType.FindByThumbprint,
-                        certHash,
-                        false
-                    );
+                    collectionEx = store.Certificates
+                        .Find(X509FindType.FindByThumbprint, certHash, false);
                     if (collectionEx.Count > 0 && collectionEx[0].HasPrivateKey)
                     {
                         if (NetEventSource.Log.IsEnabled())
@@ -522,10 +517,8 @@ namespace System.Net.Security
                     }
 
                     if (NetEventSource.Log.IsEnabled())
-                        NetEventSource.Log.SelectedCert(
-                            _sslAuthenticationOptions.ClientCertificates[i],
-                            this
-                        );
+                        NetEventSource.Log
+                            .SelectedCert(_sslAuthenticationOptions.ClientCertificates[i], this);
 
                     EnsureInitialized(ref filteredCerts)
                         .Add(_sslAuthenticationOptions.ClientCertificates[i]);
@@ -1106,9 +1099,10 @@ namespace System.Net.Security
                     chain.ChainPolicy.RevocationFlag = X509RevocationFlag.ExcludeRoot;
 
                     // Authenticate the remote party: (e.g. when operating in server mode, authenticate the client).
-                    chain.ChainPolicy.ApplicationPolicy.Add(
-                        _sslAuthenticationOptions.IsServer ? s_clientAuthOid : s_serverAuthOid
-                    );
+                    chain.ChainPolicy.ApplicationPolicy
+                        .Add(
+                            _sslAuthenticationOptions.IsServer ? s_clientAuthOid : s_serverAuthOid
+                        );
 
                     if (remoteCertificateStore != null)
                     {
@@ -1376,18 +1370,14 @@ namespace System.Net.Security
                 NetEventSource.Log.RemoteCertificateError(this, SR.net_log_remote_cert_has_errors);
                 if ((sslPolicyErrors & SslPolicyErrors.RemoteCertificateNotAvailable) != 0)
                 {
-                    NetEventSource.Log.RemoteCertificateError(
-                        this,
-                        SR.net_log_remote_cert_not_available
-                    );
+                    NetEventSource.Log
+                        .RemoteCertificateError(this, SR.net_log_remote_cert_not_available);
                 }
 
                 if ((sslPolicyErrors & SslPolicyErrors.RemoteCertificateNameMismatch) != 0)
                 {
-                    NetEventSource.Log.RemoteCertificateError(
-                        this,
-                        SR.net_log_remote_cert_name_mismatch
-                    );
+                    NetEventSource.Log
+                        .RemoteCertificateError(this, SR.net_log_remote_cert_name_mismatch);
                 }
 
                 if ((sslPolicyErrors & SslPolicyErrors.RemoteCertificateChainErrors) != 0)

@@ -815,7 +815,8 @@ class Program
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
             var nameSyntaxes = GetNameAttributeValues(compilation).ToArray();
 
-            var method = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
+            var method = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("Program")
                 .GetMember<MethodSymbol>("M")
                 .GetPublicSymbol();
 
@@ -871,7 +872,8 @@ class C
             var names = GetNameAttributeValues(compilation).ToArray();
             var model = compilation.GetSemanticModel(tree);
 
-            var method = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var method = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M")
                 .GetPublicSymbol();
             var expectedParameter = method.Parameters.Single();

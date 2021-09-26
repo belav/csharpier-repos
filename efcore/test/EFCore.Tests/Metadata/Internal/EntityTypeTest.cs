@@ -1613,9 +1613,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 new[] { navigation1, navigation2 }.SequenceEqual(customerType.GetNavigations())
             );
             Assert.True(
-                new[] { navigation1, navigation2 }.SequenceEqual(
-                    ((IReadOnlyEntityType)customerType).GetNavigations()
-                )
+                new[] { navigation1, navigation2 }
+                    .SequenceEqual(((IReadOnlyEntityType)customerType).GetNavigations())
             );
         }
 
@@ -2363,12 +2362,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         public class HiddenFieldBase
         {
-            public static readonly FieldInfo DateField = typeof(HiddenFieldBase).GetRuntimeFields()
+            public static readonly FieldInfo DateField = typeof(HiddenFieldBase)
+                .GetRuntimeFields()
                 .Single(f => f.Name == nameof(_date));
 
-            public static readonly PropertyInfo RaisinProperty =
-                typeof(HiddenFieldBase).GetRuntimeProperties()
-                    .Single(p => p.Name == nameof(Raisin));
+            public static readonly PropertyInfo RaisinProperty = typeof(HiddenFieldBase)
+                .GetRuntimeProperties()
+                .Single(p => p.Name == nameof(Raisin));
 
             private string _date;
             private string Raisin { get; set; }
@@ -2896,10 +2896,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ),
                 Assert.Throws<InvalidOperationException>(
                     () =>
-                        ((IConventionEntityType)entityType).AddIndexerProperty(
-                            "Nation",
-                            typeof(string)
-                        )
+                        ((IConventionEntityType)entityType)
+                            .AddIndexerProperty("Nation", typeof(string))
                 ).Message
             );
         }
@@ -3919,20 +3917,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class Customer : BaseType
         {
-            public static readonly PropertyInfo IdProperty = typeof(BaseType).GetProperty(
-                nameof(Id)
-            );
-            public static readonly PropertyInfo NameProperty = typeof(Customer).GetProperty(
-                nameof(Name)
-            );
-            public static readonly PropertyInfo OrdersProperty = typeof(Customer).GetProperty(
-                nameof(Orders)
-            );
-            public static readonly PropertyInfo MoreOrdersProperty = typeof(Customer).GetProperty(
-                nameof(MoreOrders)
-            );
-            public static readonly PropertyInfo NotCollectionOrdersProperty =
-                typeof(Customer).GetProperty(nameof(NotCollectionOrders));
+            public static readonly PropertyInfo IdProperty = typeof(BaseType)
+                .GetProperty(nameof(Id));
+            public static readonly PropertyInfo NameProperty = typeof(Customer)
+                .GetProperty(nameof(Name));
+            public static readonly PropertyInfo OrdersProperty = typeof(Customer)
+                .GetProperty(nameof(Orders));
+            public static readonly PropertyInfo MoreOrdersProperty = typeof(Customer)
+                .GetProperty(nameof(MoreOrders));
+            public static readonly PropertyInfo NotCollectionOrdersProperty = typeof(Customer)
+                .GetProperty(nameof(NotCollectionOrders));
 
             public int AlternateId { get; set; }
             public Guid Unique { get; set; }
@@ -3950,8 +3944,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class SpecialCustomer : Customer
         {
-            public static readonly PropertyInfo DerivedOrdersProperty =
-                typeof(SpecialCustomer).GetProperty(nameof(DerivedOrders));
+            public static readonly PropertyInfo DerivedOrdersProperty = typeof(SpecialCustomer)
+                .GetProperty(nameof(DerivedOrders));
 
             public IEnumerable<SpecialOrder> DerivedOrders { get; set; }
         }
@@ -3963,21 +3957,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private class Order : BaseType
         {
             public static readonly PropertyInfo IdProperty = typeof(Order).GetProperty(nameof(Id));
-            public static readonly PropertyInfo CustomerProperty = typeof(Order).GetProperty(
-                nameof(Customer)
-            );
-            public static readonly PropertyInfo CustomerIdProperty = typeof(Order).GetProperty(
-                nameof(CustomerId)
-            );
-            public static readonly PropertyInfo CustomerUniqueProperty = typeof(Order).GetProperty(
-                nameof(CustomerUnique)
-            );
-            public static readonly PropertyInfo RelatedOrderProperty = typeof(Order).GetProperty(
-                nameof(RelatedOrder)
-            );
-            public static readonly PropertyInfo ProductsProperty = typeof(Order).GetProperty(
-                nameof(Products)
-            );
+            public static readonly PropertyInfo CustomerProperty = typeof(Order)
+                .GetProperty(nameof(Customer));
+            public static readonly PropertyInfo CustomerIdProperty = typeof(Order)
+                .GetProperty(nameof(CustomerId));
+            public static readonly PropertyInfo CustomerUniqueProperty = typeof(Order)
+                .GetProperty(nameof(CustomerUnique));
+            public static readonly PropertyInfo RelatedOrderProperty = typeof(Order)
+                .GetProperty(nameof(RelatedOrder));
+            public static readonly PropertyInfo ProductsProperty = typeof(Order)
+                .GetProperty(nameof(Products));
 
             public int CustomerId { get; set; }
             public Guid CustomerUnique { get; set; }
@@ -3989,8 +3978,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class SpecialOrder : Order
         {
-            public static readonly PropertyInfo DerivedCustomerProperty =
-                typeof(SpecialOrder).GetProperty(nameof(DerivedCustomer));
+            public static readonly PropertyInfo DerivedCustomerProperty = typeof(SpecialOrder)
+                .GetProperty(nameof(DerivedCustomer));
 
             public SpecialCustomer DerivedCustomer { get; set; }
         }
@@ -4001,11 +3990,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class OrderProduct
         {
-            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(
-                nameof(OrderId)
-            );
-            public static readonly PropertyInfo ProductIdProperty =
-                typeof(OrderProduct).GetProperty(nameof(ProductId));
+            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct)
+                .GetProperty(nameof(OrderId));
+            public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct)
+                .GetProperty(nameof(ProductId));
 
             public int OrderId { get; set; }
             public int ProductId { get; set; }
@@ -4015,9 +4003,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class Product
         {
-            public static readonly PropertyInfo IdProperty = typeof(Product).GetProperty(
-                nameof(Id)
-            );
+            public static readonly PropertyInfo IdProperty = typeof(Product)
+                .GetProperty(nameof(Id));
 
             public int Id { get; set; }
             public virtual ICollection<Order> Orders { get; set; }
@@ -4084,15 +4071,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private class SelfRef
         {
             public static readonly PropertyInfo IdProperty = typeof(SelfRef).GetProperty("Id");
-            public static readonly PropertyInfo ForeignKeyProperty = typeof(SelfRef).GetProperty(
-                "ForeignKey"
-            );
-            public static readonly PropertyInfo SelfRef1Property = typeof(SelfRef).GetProperty(
-                nameof(SelfRef1)
-            );
-            public static readonly PropertyInfo SelfRef2Property = typeof(SelfRef).GetProperty(
-                nameof(SelfRef2)
-            );
+            public static readonly PropertyInfo ForeignKeyProperty = typeof(SelfRef)
+                .GetProperty("ForeignKey");
+            public static readonly PropertyInfo SelfRef1Property = typeof(SelfRef)
+                .GetProperty(nameof(SelfRef1));
+            public static readonly PropertyInfo SelfRef2Property = typeof(SelfRef)
+                .GetProperty(nameof(SelfRef2));
 
             public int Id { get; set; }
             public SelfRef SelfRef1 { get; set; }

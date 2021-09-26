@@ -58,11 +58,11 @@ namespace System.IO.Tests
             // create the file
             string fileName = GetTestFilePath();
             CreateFileStream(
-                    fileName,
-                    FileMode.CreateNew,
-                    FileAccess.ReadWrite,
-                    FileShare.ReadWrite | FileShare.Delete
-                )
+                fileName,
+                FileMode.CreateNew,
+                FileAccess.ReadWrite,
+                FileShare.ReadWrite | FileShare.Delete
+            )
                 .Dispose();
 
             // just check that the inputs are accepted, actual sharing varies by platform so we separate the behavior testing
@@ -96,40 +96,39 @@ namespace System.IO.Tests
         public void FileShareOpen_Inheritable()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        int i = 0;
-                        foreach (
-                            FileAccess access in new[]
-                            {
-                                FileAccess.ReadWrite,
-                                FileAccess.Write,
-                                FileAccess.Read
-                            }
-                        )
+                () =>
+                {
+                    int i = 0;
+                    foreach (
+                        FileAccess access in new[]
                         {
-                            foreach (FileShare share in s_shares)
-                            {
-                                string fileName = GetTestFilePath(i++);
-                                CreateFileStream(
-                                        fileName,
-                                        FileMode.CreateNew,
-                                        FileAccess.ReadWrite,
-                                        FileShare.ReadWrite | FileShare.Delete
-                                    )
-                                    .Dispose();
-                                CreateFileStream(
-                                        fileName,
-                                        FileMode.Open,
-                                        access,
-                                        share | FileShare.Inheritable
-                                    )
-                                    .Dispose();
-                            }
+                            FileAccess.ReadWrite,
+                            FileAccess.Write,
+                            FileAccess.Read
+                        }
+                    )
+                    {
+                        foreach (FileShare share in s_shares)
+                        {
+                            string fileName = GetTestFilePath(i++);
+                            CreateFileStream(
+                                fileName,
+                                FileMode.CreateNew,
+                                FileAccess.ReadWrite,
+                                FileShare.ReadWrite | FileShare.Delete
+                            )
+                                .Dispose();
+                            CreateFileStream(
+                                fileName,
+                                FileMode.Open,
+                                access,
+                                share | FileShare.Inheritable
+                            )
+                                .Dispose();
                         }
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         [Fact]

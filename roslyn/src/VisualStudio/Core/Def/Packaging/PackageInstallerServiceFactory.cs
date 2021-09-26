@@ -180,10 +180,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             try
             {
                 if (_packageSourceProvider != null)
-                    return _packageSourceProvider.Value.GetSources(
-                            includeUnOfficial: true,
-                            includeDisabled: false
-                        )
+                    return _packageSourceProvider.Value
+                        .GetSources(includeUnOfficial: true, includeDisabled: false)
                         .SelectAsArray(r => new PackageSource(r.Key, r.Value));
             }
             catch (Exception ex)
@@ -356,37 +354,38 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             {
                 if (!_packageInstallerServices.Value.IsPackageInstalled(dteProject, packageName))
                 {
-                    dte.StatusBar.Text = string.Format(
-                        ServicesVSResources.Installing_0,
-                        packageName
-                    );
+                    dte.StatusBar.Text = string
+                        .Format(ServicesVSResources.Installing_0, packageName);
 
                     if (versionOpt == null)
                     {
-                        _packageInstaller.Value.InstallLatestPackage(
-                            source,
-                            dteProject,
-                            packageName,
-                            includePrerelease,
-                            ignoreDependencies: false
-                        );
+                        _packageInstaller.Value
+                            .InstallLatestPackage(
+                                source,
+                                dteProject,
+                                packageName,
+                                includePrerelease,
+                                ignoreDependencies: false
+                            );
                     }
                     else
                     {
-                        _packageInstaller.Value.InstallPackage(
-                            source,
-                            dteProject,
-                            packageName,
-                            versionOpt,
-                            ignoreDependencies: false
-                        );
+                        _packageInstaller.Value
+                            .InstallPackage(
+                                source,
+                                dteProject,
+                                packageName,
+                                versionOpt,
+                                ignoreDependencies: false
+                            );
                     }
 
                     var installedVersion = GetInstalledVersion(packageName, dteProject);
-                    dte.StatusBar.Text = string.Format(
-                        ServicesVSResources.Installing_0_completed,
-                        GetStatusBarText(packageName, installedVersion)
-                    );
+                    dte.StatusBar.Text = string
+                        .Format(
+                            ServicesVSResources.Installing_0_completed,
+                            GetStatusBarText(packageName, installedVersion)
+                        );
 
                     return true;
                 }
@@ -394,18 +393,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             }
             catch (Exception e) when (FatalError.ReportAndCatch(e))
             {
-                dte.StatusBar.Text = string.Format(
-                    ServicesVSResources.Package_install_failed_colon_0,
-                    e.Message
-                );
+                dte.StatusBar.Text = string
+                    .Format(ServicesVSResources.Package_install_failed_colon_0, e.Message);
 
                 var notificationService = _workspace.Services.GetService<INotificationService>();
                 notificationService?.SendNotification(
-                    string.Format(
-                        ServicesVSResources.Installing_0_failed_Additional_information_colon_1,
-                        packageName,
-                        e.Message
-                    ),
+                    string
+                        .Format(
+                            ServicesVSResources.Installing_0_failed_Additional_information_colon_1,
+                            packageName,
+                            e.Message
+                        ),
                     severity: NotificationSeverity.Error
                 );
                 // fall through.
@@ -430,21 +428,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             {
                 if (_packageInstallerServices.Value.IsPackageInstalled(dteProject, packageName))
                 {
-                    dte.StatusBar.Text = string.Format(
-                        ServicesVSResources.Uninstalling_0,
-                        packageName
-                    );
+                    dte.StatusBar.Text = string
+                        .Format(ServicesVSResources.Uninstalling_0, packageName);
                     var installedVersion = GetInstalledVersion(packageName, dteProject);
-                    _packageUninstaller.Value.UninstallPackage(
-                        dteProject,
-                        packageName,
-                        removeDependencies: true
-                    );
+                    _packageUninstaller.Value
+                        .UninstallPackage(dteProject, packageName, removeDependencies: true);
 
-                    dte.StatusBar.Text = string.Format(
-                        ServicesVSResources.Uninstalling_0_completed,
-                        GetStatusBarText(packageName, installedVersion)
-                    );
+                    dte.StatusBar.Text = string
+                        .Format(
+                            ServicesVSResources.Uninstalling_0_completed,
+                            GetStatusBarText(packageName, installedVersion)
+                        );
 
                     return true;
                 }
@@ -452,18 +446,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             }
             catch (Exception e) when (FatalError.ReportAndCatch(e))
             {
-                dte.StatusBar.Text = string.Format(
-                    ServicesVSResources.Package_uninstall_failed_colon_0,
-                    e.Message
-                );
+                dte.StatusBar.Text = string
+                    .Format(ServicesVSResources.Package_uninstall_failed_colon_0, e.Message);
 
                 var notificationService = _workspace.Services.GetService<INotificationService>();
                 notificationService?.SendNotification(
-                    string.Format(
-                        ServicesVSResources.Uninstalling_0_failed_Additional_information_colon_1,
-                        packageName,
-                        e.Message
-                    ),
+                    string
+                        .Format(
+                            ServicesVSResources.Uninstalling_0_failed_Additional_information_colon_1,
+                            packageName,
+                            e.Message
+                        ),
                     severity: NotificationSeverity.Error
                 );
                 // fall through.
@@ -479,9 +472,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
 
             try
             {
-                var installedPackages = _packageInstallerServices.Value.GetInstalledPackages(
-                    dteProject
-                );
+                var installedPackages = _packageInstallerServices.Value
+                    .GetInstalledPackages(dteProject);
                 var metadata = installedPackages.FirstOrDefault(m => m.Id == packageName);
                 return metadata?.VersionString;
             }
@@ -554,8 +546,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
 
             var serviceContainer =
                 (IBrokeredServiceContainer?)await _asyncServiceProvider.GetServiceAsync(
-                        typeof(SVsBrokeredServiceContainer)
-                    )
+                    typeof(SVsBrokeredServiceContainer)
+                )
                     .ConfigureAwait(false);
             var serviceBroker = serviceContainer?.GetFullAccessServiceBroker();
             if (serviceBroker == null)
@@ -565,9 +557,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             await TaskScheduler.Default;
 
             var nugetService = await serviceBroker.GetProxyAsync<INuGetProjectService>(
-                    NuGetServices.NuGetProjectServiceV1,
-                    cancellationToken: cancellationToken
-                )
+                NuGetServices.NuGetProjectServiceV1,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             using (nugetService as IDisposable)
@@ -588,11 +580,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 {
                     cancellationToken.ThrowIfCancellationRequested();
                     await ProcessProjectChangeAsync(
-                            nugetService,
-                            solution,
-                            projectId,
-                            cancellationToken
-                        )
+                        nugetService,
+                        solution,
+                        projectId,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -646,10 +638,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 if (projectGuid != Guid.Empty)
                 {
                     newState = await GetCurrentProjectStateAsync(
-                            nugetService,
-                            projectGuid,
-                            cancellationToken
-                        )
+                        nugetService,
+                        projectGuid,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -670,14 +662,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             try
             {
                 var installedPackagesResult = await nugetService.GetInstalledPackagesAsync(
-                        projectGuid,
-                        cancellationToken
-                    )
+                    projectGuid,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
-                using var _ = PooledDictionary<string, string>.GetInstance(
-                    out var installedPackages
-                );
+                using var _ = PooledDictionary<string, string>
+                    .GetInstance(out var installedPackages);
                 if (installedPackagesResult?.Status == InstalledPackageResultStatus.Successful)
                 {
                     foreach (var installedPackage in installedPackagesResult.Packages)
@@ -716,8 +707,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             // Essentially, we try to break the version on dots, and then we use a LogicalComparer
             // to try to more naturally order the things we see between the dots.
             var versionsAndSplits = installedVersions.Select(
-                    v => new { Version = v, Split = v.Split('.') }
-                )
+                v => new { Version = v, Split = v.Split('.') }
+            )
                 .ToList();
 
             versionsAndSplits.Sort(

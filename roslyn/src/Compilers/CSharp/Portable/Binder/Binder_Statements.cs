@@ -269,11 +269,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             var method = (MethodSymbol)this.ContainingMemberOrLambda;
             if (method.IsAsync)
             {
-                MessageID.IDS_FeatureAsyncStreams.CheckFeatureAvailability(
-                    diagnostics,
-                    method.DeclaringCompilation,
-                    method.Locations[0]
-                );
+                MessageID.IDS_FeatureAsyncStreams
+                    .CheckFeatureAvailability(
+                        diagnostics,
+                        method.DeclaringCompilation,
+                        method.Locations[0]
+                    );
             }
         }
 
@@ -633,13 +634,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (binder != null)
             {
                 result.Clear();
-                binder.Next.LookupSymbolsWithFallback(
-                    result,
-                    node.Identifier.ValueText,
-                    arity: 0,
-                    useSiteInfo: ref useSiteInfo,
-                    options: LookupOptions.LabelsOnly
-                );
+                binder.Next
+                    .LookupSymbolsWithFallback(
+                        result,
+                        node.Identifier.ValueText,
+                        arity: 0,
+                        useSiteInfo: ref useSiteInfo,
+                        options: LookupOptions.LabelsOnly
+                    );
                 if (result.IsMultiViable)
                 {
                     // The label '{0}' shadows another label by the same name in a contained scope
@@ -719,10 +721,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // already defined symbol in containing block
             var localSymbol = this.LookupLocalFunction(node.Identifier);
 
-            var hasErrors = localSymbol.ScopeBinder.ValidateDeclarationNameConflictsInScope(
-                localSymbol,
-                diagnostics
-            );
+            var hasErrors = localSymbol.ScopeBinder
+                .ValidateDeclarationNameConflictsInScope(localSymbol, diagnostics);
 
             BoundBlock blockBody = null;
             BoundBlock expressionBody = null;
@@ -1253,10 +1253,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             RefKind expressionRefKind = RefKind.None;
-            value = initializer?.Value.CheckAndUnwrapRefExpression(
-                diagnostics,
-                out expressionRefKind
-            );
+            value = initializer?.Value
+                .CheckAndUnwrapRefExpression(diagnostics, out expressionRefKind);
             if (variableRefKind == RefKind.None)
             {
                 valueKind = BindValueKind.RValue;
@@ -1343,10 +1341,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Check for variable declaration errors.
             // Use the binder that owns the scope for the local because this (the current) binder
             // might own nested scope.
-            bool nameConflict = localSymbol.ScopeBinder.ValidateDeclarationNameConflictsInScope(
-                localSymbol,
-                diagnostics
-            );
+            bool nameConflict = localSymbol.ScopeBinder
+                .ValidateDeclarationNameConflictsInScope(localSymbol, diagnostics);
             bool hasErrors = false;
 
             if (localSymbol.RefKind != RefKind.None)
@@ -1573,11 +1569,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         bool _ = false;
                         foreach (var expressionSyntax in rankSpecifier.Sizes)
                         {
-                            var size = args.binder.BindArrayDimension(
-                                expressionSyntax,
-                                args.diagnostics,
-                                ref _
-                            );
+                            var size = args.binder
+                                .BindArrayDimension(expressionSyntax, args.diagnostics, ref _);
                             if (size != null)
                             {
                                 args.invalidDimensions.Add(size);
@@ -1901,11 +1894,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            Conversion elementConversion = this.Conversions.ClassifyConversionFromType(
-                pointerType,
-                declType,
-                ref useSiteInfo
-            );
+            Conversion elementConversion = this.Conversions
+                .ClassifyConversionFromType(pointerType, declType, ref useSiteInfo);
             diagnostics.Add(initializerSyntax, useSiteInfo);
 
             if (!elementConversion.IsValid || !elementConversion.IsImplicit)
@@ -2223,10 +2213,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (
                 !propertySymbol.IsDefinition
-                && propertySymbol.ContainingType.Equals(
-                    propertySymbol.ContainingType.OriginalDefinition,
-                    TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                )
+                && propertySymbol.ContainingType
+                    .Equals(
+                        propertySymbol.ContainingType.OriginalDefinition,
+                        TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
             )
             {
                 propertySymbol = propertySymbol.OriginalDefinition;
@@ -2352,9 +2343,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var syntaxStatements = node.Statements;
             int nStatements = syntaxStatements.Count;
 
-            ArrayBuilder<BoundStatement> boundStatements = ArrayBuilder<BoundStatement>.GetInstance(
-                nStatements
-            );
+            ArrayBuilder<BoundStatement> boundStatements = ArrayBuilder<BoundStatement>
+                .GetInstance(nStatements);
 
             for (int i = 0; i < nStatements; i++)
             {
@@ -2424,11 +2414,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            var conversion = this.Conversions.ClassifyConversionFromExpression(
-                expression,
-                targetType,
-                ref useSiteInfo
-            );
+            var conversion = this.Conversions
+                .ClassifyConversionFromExpression(expression, targetType, ref useSiteInfo);
             diagnostics.Add(expression.Syntax, useSiteInfo);
 
             if (isRefAssignment)
@@ -3068,11 +3055,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
                     )
                     {
-                        var conversion = this.Conversions.ClassifyImplicitConversionFromExpression(
-                            expr,
-                            targetType,
-                            ref useSiteInfo
-                        );
+                        var conversion = this.Conversions
+                            .ClassifyImplicitConversionFromExpression(
+                                expr,
+                                targetType,
+                                ref useSiteInfo
+                            );
                         if (!conversion.IsImplicit || !conversion.IsValid)
                         {
                             GenerateImplicitConversionError(
@@ -3304,11 +3292,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            var conversion = this.Conversions.ClassifyConversionFromExpression(
-                expr,
-                boolean,
-                ref useSiteInfo
-            );
+            var conversion = this.Conversions
+                .ClassifyConversionFromExpression(expr, boolean, ref useSiteInfo);
             diagnostics.Add(expr.Syntax, useSiteInfo);
 
             if (conversion.IsImplicit)
@@ -3934,20 +3919,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else
                 {
                     returnType = returnType.GetMemberTypeArgumentsNoUseSiteDiagnostics().Single();
-                    conversion = this.Conversions.ClassifyConversionFromExpression(
-                        argument,
-                        returnType,
-                        ref useSiteInfo
-                    );
+                    conversion = this.Conversions
+                        .ClassifyConversionFromExpression(argument, returnType, ref useSiteInfo);
                 }
             }
             else
             {
-                conversion = this.Conversions.ClassifyConversionFromExpression(
-                    argument,
-                    returnType,
-                    ref useSiteInfo
-                );
+                conversion = this.Conversions
+                    .ClassifyConversionFromExpression(argument, returnType, ref useSiteInfo);
             }
 
             diagnostics.Add(syntax, useSiteInfo);
@@ -4307,20 +4286,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case LambdaExpressionSyntax lambdaSyntax:
                     return Location.Create(
                         lambdaSyntax.SyntaxTree,
-                        Text.TextSpan.FromBounds(
-                            lambdaSyntax.SpanStart,
-                            lambdaSyntax.ArrowToken.Span.End
-                        )
+                        Text.TextSpan
+                            .FromBounds(lambdaSyntax.SpanStart, lambdaSyntax.ArrowToken.Span.End)
                     );
 
                 case AnonymousMethodExpressionSyntax anonymousMethodSyntax:
                     return Location.Create(
                         anonymousMethodSyntax.SyntaxTree,
-                        Text.TextSpan.FromBounds(
-                            anonymousMethodSyntax.SpanStart,
-                            anonymousMethodSyntax.ParameterList?.Span.End
-                                ?? anonymousMethodSyntax.DelegateKeyword.Span.End
-                        )
+                        Text.TextSpan
+                            .FromBounds(
+                                anonymousMethodSyntax.SpanStart,
+                                anonymousMethodSyntax.ParameterList?.Span.End
+                                    ?? anonymousMethodSyntax.DelegateKeyword.Span.End
+                            )
                     );
             }
 
@@ -4527,8 +4505,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 RefKind refKind;
-                ExpressionSyntax expressionSyntax =
-                    expressionBody.Expression.CheckAndUnwrapRefExpression(diagnostics, out refKind);
+                ExpressionSyntax expressionSyntax = expressionBody.Expression
+                    .CheckAndUnwrapRefExpression(diagnostics, out refKind);
                 BindValueKind requiredValueKind = bodyBinder.GetRequiredReturnValueKind(refKind);
                 BoundExpression expression = bodyBinder.BindValue(
                     expressionSyntax,
@@ -4679,8 +4657,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            ArrayBuilder<BoundStatement> boundStatements =
-                ArrayBuilder<BoundStatement>.GetInstance();
+            ArrayBuilder<BoundStatement> boundStatements = ArrayBuilder<BoundStatement>
+                .GetInstance();
             foreach (var statement in compilationUnit.Members)
             {
                 if (statement is GlobalStatementSyntax topLevelStatement)
@@ -4693,10 +4671,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new BoundNonConstructorMethodBody(
                 compilationUnit,
                 FinishBindBlockParts(
-                        compilationUnit,
-                        boundStatements.ToImmutableAndFree(),
-                        diagnostics
-                    )
+                    compilationUnit,
+                    boundStatements.ToImmutableAndFree(),
+                    diagnostics
+                )
                     .MakeCompilerGenerated(),
                 expressionBody: null
             );
@@ -4729,7 +4707,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     recordDecl,
                     ImmutableArray<LocalSymbol>.Empty,
                     ImmutableArray<BoundStatement>.Empty
-                ).MakeCompilerGenerated(),
+                )
+                    .MakeCompilerGenerated(),
                 expressionBody: null
             );
         }

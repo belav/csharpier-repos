@@ -28,7 +28,8 @@ namespace TestCase
     {
         protected virtual int FindGenericMethod<T>()
         {
-            var method = typeof(TDerived).GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
+            var method = typeof(TDerived)
+                .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
                 .FirstOrDefault(x => x.Name == "FindGenericMethod" && x.IsGenericMethod);
 
             Console.WriteLine("TDerived = {0}", typeof(TDerived));

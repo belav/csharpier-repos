@@ -50,9 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             }
 
             var elements = new List<object>();
-            var descSection = quickInfoItem.Sections.FirstOrDefault(
-                s => s.Kind == QuickInfoSectionKinds.Description
-            );
+            var descSection = quickInfoItem.Sections
+                .FirstOrDefault(s => s.Kind == QuickInfoSectionKinds.Description);
             if (descSection != null)
             {
                 var isFirstElement = true;
@@ -84,9 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 new ContainerElement(ContainerElementStyle.Wrapped, firstLineElements)
             );
 
-            var documentationCommentSection = quickInfoItem.Sections.FirstOrDefault(
-                s => s.Kind == QuickInfoSectionKinds.DocumentationComments
-            );
+            var documentationCommentSection = quickInfoItem.Sections
+                .FirstOrDefault(s => s.Kind == QuickInfoSectionKinds.DocumentationComments);
             if (documentationCommentSection != null)
             {
                 var isFirstElement = true;
@@ -121,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
 
             // Add the remaining sections as Stacked style
             elements.AddRange(
-                quickInfoItem.Sections.Where(
+                quickInfoItem.Sections
+                    .Where(
                         s =>
                             s.Kind != QuickInfoSectionKinds.Description
                             && s.Kind != QuickInfoSectionKinds.DocumentationComments
@@ -144,18 +143,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 foreach (var span in quickInfoItem.RelatedSpans)
                 {
                     var classifiedSpans = await ClassifierHelper.GetClassifiedSpansAsync(
-                            document,
-                            span,
-                            cancellationToken
-                        )
+                        document,
+                        span,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     classifiedSpanList.AddRange(classifiedSpans);
                 }
 
-                var tabSize = document.Project.Solution.Workspace.Options.GetOption(
-                    FormattingOptions.TabSize,
-                    document.Project.Language
-                );
+                var tabSize = document.Project.Solution.Workspace.Options
+                    .GetOption(FormattingOptions.TabSize, document.Project.Language);
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
                 var spans = IndentationHelper.GetSpansWithAlignedIndentation(
                     text,
@@ -193,12 +190,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
         )
         {
             var content = await BuildInteractiveContentAsync(
-                    quickInfoItem,
-                    document,
-                    threadingContext,
-                    streamingPresenter,
-                    cancellationToken
-                )
+                quickInfoItem,
+                document,
+                threadingContext,
+                streamingPresenter,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return new IntellisenseQuickInfoItem(trackingSpan, content);

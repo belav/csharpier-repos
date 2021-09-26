@@ -293,8 +293,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                     break;
                 case RemoteAuthenticationStatus.Failure:
                     var uri = Navigation.ToAbsoluteUri(
-                            $"{ApplicationPaths.LogInFailedPath}?message={Uri.EscapeDataString(result.ErrorMessage)}"
-                        )
+                        $"{ApplicationPaths.LogInFailedPath}?message={Uri.EscapeDataString(result.ErrorMessage)}"
+                    )
                         .ToString();
                     await NavigateToReturnUrl(uri);
                     break;
@@ -379,8 +379,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                     break;
                 case RemoteAuthenticationStatus.Failure:
                     var uri = Navigation.ToAbsoluteUri(
-                            $"{ApplicationPaths.LogOutFailedPath}?message={Uri.EscapeDataString(result.ErrorMessage)}"
-                        )
+                        $"{ApplicationPaths.LogOutFailedPath}?message={Uri.EscapeDataString(result.ErrorMessage)}"
+                    )
                         .ToString();
                     await NavigateToReturnUrl(uri);
                     break;

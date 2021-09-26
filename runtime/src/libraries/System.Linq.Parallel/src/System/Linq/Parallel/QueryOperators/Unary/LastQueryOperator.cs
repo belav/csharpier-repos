@@ -39,9 +39,8 @@ namespace System.Linq.Parallel
         {
             Debug.Assert(child != null, "child data source cannot be null");
             _predicate = predicate;
-            _prematureMergeNeeded = Child.OrdinalIndexState.IsWorseThan(
-                OrdinalIndexState.Increasing
-            );
+            _prematureMergeNeeded = Child.OrdinalIndexState
+                .IsWorseThan(OrdinalIndexState.Increasing);
         }
 
         //---------------------------------------------------------------------------------------
@@ -66,12 +65,12 @@ namespace System.Linq.Parallel
             if (_prematureMergeNeeded)
             {
                 PartitionedStream<TSource, int> intKeyStream = ExecuteAndCollectResults(
-                        inputStream,
-                        inputStream.PartitionCount,
-                        Child.OutputOrdered,
-                        preferStriping,
-                        settings
-                    )
+                    inputStream,
+                    inputStream.PartitionCount,
+                    Child.OutputOrdered,
+                    preferStriping,
+                    settings
+                )
                     .GetPartitionedStream();
                 WrapHelper<int>(intKeyStream, recipient, settings);
             }

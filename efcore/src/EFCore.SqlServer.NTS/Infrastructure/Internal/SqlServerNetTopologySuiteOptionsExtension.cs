@@ -52,9 +52,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
             if (internalServiceProvider != null)
             {
                 using var scope = internalServiceProvider.CreateScope();
-                var plugins = scope.ServiceProvider.GetService<
-                    IEnumerable<IRelationalTypeMappingSourcePlugin>
-                >();
+                var plugins = scope.ServiceProvider
+                    .GetService<IEnumerable<IRelationalTypeMappingSourcePlugin>>();
                 if (
                     plugins?.Any(s => s is SqlServerNetTopologySuiteTypeMappingSourcePlugin) != true
                 )

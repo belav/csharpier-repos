@@ -13,8 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests
 {
     public class CodeGenerationIntegrationTest : IntegrationTestBase
     {
-        private readonly static CSharpCompilation DefaultBaseCompilation =
-            MvcShim.BaseCompilation.WithAssemblyName("AppCode");
+        private readonly static CSharpCompilation DefaultBaseCompilation = MvcShim.BaseCompilation
+            .WithAssemblyName("AppCode");
 
         public CodeGenerationIntegrationTest()
             : base(
@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests
             AssertDocumentNodeMatchesBaseline(compiled.CodeDocument.GetDocumentIntermediateNode());
             AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
 
-            var diagnostics = compiled.Compilation.GetDiagnostics()
+            var diagnostics = compiled.Compilation
+                .GetDiagnostics()
                 .Where(d => d.Severity >= DiagnosticSeverity.Warning);
             Assert.Equal(
                 "The using directive for 'System' appeared previously in this namespace",
@@ -517,7 +518,8 @@ public class AllTagHelper : {typeof(TagHelper).FullName}
             AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
             AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-            var diagnostics = compiled.Compilation.GetDiagnostics()
+            var diagnostics = compiled.Compilation
+                .GetDiagnostics()
                 .Where(d => d.Severity >= DiagnosticSeverity.Warning);
             Assert.Equal(
                 "The using directive for 'System' appeared previously in this namespace",

@@ -614,9 +614,8 @@ namespace System.Runtime.CompilerServices
             NullableContextOptions nullableContextOptions
         )
         {
-            return (options ?? TestOptions.ReleaseDll).WithNullableContextOptions(
-                nullableContextOptions
-            );
+            return (options ?? TestOptions.ReleaseDll)
+                .WithNullableContextOptions(nullableContextOptions);
         }
 
         internal CompilationVerifier CompileAndVerifyWithMscorlib40(
@@ -712,11 +711,12 @@ namespace System.Runtime.CompilerServices
         {
             options =
                 options
-                ?? TestOptions.ReleaseDll.WithOutputKind(
-                    (expectedOutput != null)
-                      ? OutputKind.ConsoleApplication
-                      : OutputKind.DynamicallyLinkedLibrary
-                );
+                ?? TestOptions.ReleaseDll
+                    .WithOutputKind(
+                        (expectedOutput != null)
+                          ? OutputKind.ConsoleApplication
+                          : OutputKind.DynamicallyLinkedLibrary
+                    );
             var compilation = CreateExperimentalCompilationWithMscorlib45(
                 source,
                 feature,
@@ -839,11 +839,12 @@ namespace System.Runtime.CompilerServices
         {
             options =
                 options
-                ?? TestOptions.ReleaseDll.WithOutputKind(
-                    (expectedOutput != null)
-                      ? OutputKind.ConsoleApplication
-                      : OutputKind.DynamicallyLinkedLibrary
-                );
+                ?? TestOptions.ReleaseDll
+                    .WithOutputKind(
+                        (expectedOutput != null)
+                          ? OutputKind.ConsoleApplication
+                          : OutputKind.DynamicallyLinkedLibrary
+                    );
             var compilation = CreateCompilation(
                 source,
                 references,
@@ -1242,9 +1243,8 @@ namespace System.Runtime.CompilerServices
                 parseOptions != null
                     ? parseOptions.WithDocumentationMode(DocumentationMode.Diagnose)
                     : TestOptions.RegularWithDocumentationComments;
-            options = (options ?? TestOptions.ReleaseDll).WithXmlReferenceResolver(
-                XmlFileResolver.Default
-            );
+            options = (options ?? TestOptions.ReleaseDll)
+                .WithXmlReferenceResolver(XmlFileResolver.Default);
             return CreateCompilation(
                 source,
                 references,
@@ -1372,9 +1372,8 @@ namespace System.Runtime.CompilerServices
 
             if (experimentalFeature.HasValue)
             {
-                parseOptions = (parseOptions ?? TestOptions.Regular).WithExperimental(
-                    experimentalFeature.Value
-                );
+                parseOptions = (parseOptions ?? TestOptions.Regular)
+                    .WithExperimental(experimentalFeature.Value);
             }
 
             Func<CSharpCompilation> createCompilationLambda = () =>
@@ -1421,9 +1420,8 @@ namespace System.Runtime.CompilerServices
             var compileDiagnostics = comp.GetDiagnostics();
             var emitDiagnostics = comp.GetEmitDiagnostics();
 
-            var resolvedReferences = comp.References.Where(
-                r => r.Properties.Kind == MetadataImageKind.Assembly
-            );
+            var resolvedReferences = comp.References
+                .Where(r => r.Properties.Kind == MetadataImageKind.Assembly);
 
             if (
                 !compileDiagnostics.Any(d => d.DefaultSeverity == DiagnosticSeverity.Error)
@@ -1445,9 +1443,8 @@ namespace System.Runtime.CompilerServices
                         var comp2 = comp.RemoveAllReferences()
                             .AddReferences(
                                 used.Concat(
-                                    comp.References.Where(
-                                        r => r.Properties.Kind == MetadataImageKind.Module
-                                    )
+                                    comp.References
+                                        .Where(r => r.Properties.Kind == MetadataImageKind.Module)
                                 )
                             );
                         comp2.GetEmitDiagnostics()
@@ -1518,7 +1515,8 @@ namespace System.Runtime.CompilerServices
             var builder = ArrayBuilder<Symbol>.GetInstance();
             UsesIsNullableVisitor.GetUses(builder, symbol);
 
-            var format = SymbolDisplayFormat.TestFormat.AddMiscellaneousOptions(
+            var format = SymbolDisplayFormat.TestFormat
+                .AddMiscellaneousOptions(
                     SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
                         | SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
                 )
@@ -2151,9 +2149,8 @@ namespace System.Runtime.CompilerServices
             if (!bodyBlock.LocalSignature.IsNil)
             {
                 var signature =
-                    peModule.Module.MetadataReader.GetStandaloneSignature(
-                        bodyBlock.LocalSignature
-                    ).Signature;
+                    peModule.Module.MetadataReader
+                        .GetStandaloneSignature(bodyBlock.LocalSignature).Signature;
                 var signatureReader = peModule.Module.GetMemoryReaderOrThrow(signature);
                 var localInfos = methodDecoder.DecodeLocalSignatureOrThrow(ref signatureReader);
                 localDefinitions = ToLocalDefinitions(localInfos, methodData.ILBuilder);
@@ -2251,12 +2248,13 @@ namespace System.Runtime.CompilerServices
                 Symbol reference = _decoder.GetSymbolForILToken(
                     MetadataTokens.EntityHandle((int)token)
                 );
-                return string.Format(
-                    "\"{0}\"",
-                    (reference is Symbol symbol)
-                      ? symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
-                      : (object)reference
-                );
+                return string
+                    .Format(
+                        "\"{0}\"",
+                        (reference is Symbol symbol)
+                          ? symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
+                          : (object)reference
+                    );
             }
 
             public override string VisualizeLocalType(object type)
@@ -2939,9 +2937,9 @@ namespace System
         )
         {
             var reference = CreateCompilation(
-                    new[] { TestSources.Index, TestSources.Range, TestSources.Span },
-                    options: TestOptions.UnsafeReleaseDll
-                )
+                new[] { TestSources.Index, TestSources.Range, TestSources.Span },
+                options: TestOptions.UnsafeReleaseDll
+            )
                 .VerifyDiagnostics();
 
             return CreateCompilation(

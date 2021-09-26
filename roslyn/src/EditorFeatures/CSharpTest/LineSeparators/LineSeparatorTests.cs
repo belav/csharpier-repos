@@ -576,7 +576,8 @@ class Program
             using var workspace = TestWorkspace.CreateCSharp(contents, options);
             var document = workspace.CurrentSolution.GetDocument(workspace.Documents.First().Id);
             var lineSeparatorService = Assert.IsType<CSharpLineSeparatorService>(
-                workspace.Services.GetLanguageServices(LanguageNames.CSharp)
+                workspace.Services
+                    .GetLanguageServices(LanguageNames.CSharp)
                     .GetService<ILineSeparatorService>()
             );
             var spans = await lineSeparatorService.GetLineSeparatorsAsync(
@@ -584,9 +585,8 @@ class Program
                 (await document.GetSyntaxRootAsync()).FullSpan,
                 CancellationToken.None
             );
-            var tokens = (
-                await document.GetSyntaxRootAsync(CancellationToken.None)
-            ).DescendantTokens()
+            var tokens = (await document.GetSyntaxRootAsync(CancellationToken.None))
+                .DescendantTokens()
                 .Where(
                     t =>
                         t.Kind() == SyntaxKind.CloseBraceToken
@@ -602,12 +602,13 @@ class Program
 
                 var expectedSpan = expectedToken.Span;
 
-                var message = string.Format(
-                    "Expected to match curly {0} at span {1}.  Actual span {2}",
-                    tokenIndices[i],
-                    expectedSpan,
-                    span
-                );
+                var message = string
+                    .Format(
+                        "Expected to match curly {0} at span {1}.  Actual span {2}",
+                        tokenIndices[i],
+                        expectedSpan,
+                        span
+                    );
                 Assert.True(expectedSpan == span, message);
                 ++i;
             }

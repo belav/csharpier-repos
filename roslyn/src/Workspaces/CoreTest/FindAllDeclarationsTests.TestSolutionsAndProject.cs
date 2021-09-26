@@ -39,14 +39,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var expectedResultCount = expectedResults.Length;
             Assert.True(
                 expectedResultCount == actualResultCount,
-                string.Format(
-                    "Search term '{0}' expected '{1}' results, found '{2}.  Ignore case was set to '{3}', Workspace {4} was used",
-                    searchTerm,
-                    expectedResultCount,
-                    actualResultCount,
-                    respectCase,
-                    Enum.GetName(typeof(SolutionKind), workspaceKind)
-                )
+                string
+                    .Format(
+                        "Search term '{0}' expected '{1}' results, found '{2}.  Ignore case was set to '{3}', Workspace {4} was used",
+                        searchTerm,
+                        expectedResultCount,
+                        actualResultCount,
+                        respectCase,
+                        Enum.GetName(typeof(SolutionKind), workspaceKind)
+                    )
             );
             if (actualResultCount > 0)
             {
@@ -64,12 +65,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var expectedResultCount = expectedResults.Length;
             Assert.True(
                 expectedResultCount == actualResultCount,
-                string.Format(
-                    "Expected '{0}' results, found '{1}. Workspace {2} was used",
-                    expectedResultCount,
-                    actualResultCount,
-                    Enum.GetName(typeof(SolutionKind), workspaceKind)
-                )
+                string
+                    .Format(
+                        "Expected '{0}' results, found '{1}. Workspace {2} was used",
+                        expectedResultCount,
+                        actualResultCount,
+                        Enum.GetName(typeof(SolutionKind), workspaceKind)
+                    )
             );
             if (actualResultCount > 0)
             {
@@ -103,8 +105,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             if (testHost == TestHost.OutOfProcess)
             {
-                var remoteHostProvider =
-                    (InProcRemoteHostClientProvider)workspace.Services.GetRequiredService<IRemoteHostClientProvider>();
+                var remoteHostProvider = (InProcRemoteHostClientProvider)workspace.Services
+                    .GetRequiredService<IRemoteHostClientProvider>();
                 remoteHostProvider.TraceListener = new XunitTraceListener(_logger);
             }
 
@@ -120,12 +122,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
             var workspace = CreateWorkspace(testHost);
 
-            solution = workspace.CurrentSolution.AddProject(
-                    pid,
-                    "TestCases",
-                    "TestCases",
-                    LanguageNames.CSharp
-                )
+            solution = workspace.CurrentSolution
+                .AddProject(pid, "TestCases", "TestCases", LanguageNames.CSharp)
                 .AddMetadataReference(pid, MscorlibRef);
             for (var i = 0; i < sourceTexts.Length; i++)
             {
@@ -153,11 +151,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 var pid = ProjectId.CreateNewId();
                 var did = DocumentId.CreateNewId(pid);
                 solution = solution.AddProject(
-                        pid,
-                        "TestCases" + i,
-                        "TestCases" + i,
-                        LanguageNames.CSharp
-                    )
+                    pid,
+                    "TestCases" + i,
+                    "TestCases" + i,
+                    LanguageNames.CSharp
+                )
                     .AddMetadataReference(pid, MscorlibRef);
                 solution = solution.AddDocument(
                     did,

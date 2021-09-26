@@ -117,7 +117,8 @@ class H
                     .WithArguments("C", "op_Multiply"),
                 // (30,32): error CS0111: Type 'C' already defines a member called 'op_Modulus' with the same parameter types
                 //     public static int operator % (C c1, C c2) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "%").WithArguments("op_Modulus", "C"),
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "%")
+                    .WithArguments("op_Modulus", "C"),
                 // (35,37): error CS0557: Duplicate user-defined conversion in type 'C'
                 //     public static explicit operator string(C c) { return null; }
                 Diagnostic(ErrorCode.ERR_DuplicateConversionInClass, "string").WithArguments("C"),

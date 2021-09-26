@@ -65,9 +65,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             }
 
             var allActions = allDestinations.Select(
-                    destination =>
-                        MembersPuller.TryComputeCodeAction(document, selectedMember, destination)
-                )
+                destination =>
+                    MembersPuller.TryComputeCodeAction(document, selectedMember, destination)
+            )
                 .WhereNotNull()
                 .Concat(new PullMemberUpWithDialogCodeAction(document, selectedMember, _service))
                 .ToImmutableArray();
@@ -89,8 +89,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             var containingType = selectedMember.ContainingType;
             var allDestinations = selectedMember.IsKind(SymbolKind.Field)
                 ? containingType.GetBaseTypes().ToImmutableArray()
-                : containingType.AllInterfaces.Concat(containingType.GetBaseTypes())
-                      .ToImmutableArray();
+                : containingType.AllInterfaces
+                  .Concat(containingType.GetBaseTypes())
+                  .ToImmutableArray();
 
             return allDestinations.WhereAsArray(
                 destination =>

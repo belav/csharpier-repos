@@ -39,11 +39,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Manifest resource: {0} not found",
-                        ResourceName
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "Manifest resource: {0} not found",
+                            ResourceName
+                        )
                 );
             }
 

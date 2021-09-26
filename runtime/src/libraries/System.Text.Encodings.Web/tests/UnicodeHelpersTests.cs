@@ -108,19 +108,22 @@ namespace System.Text.Encodings.Web.Tests
 
             bool[] retVal = new bool[0x10000];
             string[] allLines = new StreamReader(
-                typeof(UnicodeHelpersTests).GetTypeInfo()
+                typeof(UnicodeHelpersTests)
+                    .GetTypeInfo()
                     .Assembly.GetManifestResourceStream(UnicodeDataFileName)
-            ).ReadAllLines();
+            )
+                .ReadAllLines();
 
             uint startSpanCodepoint = 0;
             foreach (string line in allLines)
             {
                 string[] splitLine = line.Split(';');
-                uint codePoint = uint.Parse(
-                    splitLine[0],
-                    NumberStyles.AllowHexSpecifier,
-                    CultureInfo.InvariantCulture
-                );
+                uint codePoint = uint
+                    .Parse(
+                        splitLine[0],
+                        NumberStyles.AllowHexSpecifier,
+                        CultureInfo.InvariantCulture
+                    );
                 if (codePoint >= retVal.Length)
                 {
                     continue; // don't care about supplementary chars

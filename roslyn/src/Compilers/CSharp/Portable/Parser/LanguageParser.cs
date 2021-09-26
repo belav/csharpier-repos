@@ -469,12 +469,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             var attributeLists = _pool.Allocate<AttributeListSyntax>();
                             var modifiers = _pool.Allocate();
 
-                            body.Members.Add(
-                                adjustStateAndReportStatementOutOfOrder(
-                                    ref seen,
-                                    this.ParseNamespaceDeclaration(attributeLists, modifiers)
-                                )
-                            );
+                            body.Members
+                                .Add(
+                                    adjustStateAndReportStatementOutOfOrder(
+                                        ref seen,
+                                        this.ParseNamespaceDeclaration(attributeLists, modifiers)
+                                    )
+                                );
 
                             _pool.Free(attributeLists);
                             _pool.Free(modifiers);
@@ -702,12 +703,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 // incomplete members must be processed before we add any nodes to the body:
                                 AddIncompleteMembers(ref pendingIncompleteMembers, ref body);
 
-                                body.Members.Add(
-                                    adjustStateAndReportStatementOutOfOrder(
-                                        ref seen,
-                                        memberOrStatement
-                                    )
-                                );
+                                body.Members
+                                    .Add(
+                                        adjustStateAndReportStatementOutOfOrder(
+                                            ref seen,
+                                            memberOrStatement
+                                        )
+                                    );
                                 reportUnexpectedToken = true;
                             }
                             break;

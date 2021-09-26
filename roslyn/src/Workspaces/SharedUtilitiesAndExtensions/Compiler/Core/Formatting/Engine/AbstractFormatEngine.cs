@@ -105,9 +105,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 // start anchor task that will be used later
                 cancellationToken.ThrowIfCancellationRequested();
-                var anchorContext = nodeOperations.AnchorIndentationOperations.Do(
-                    context.AddAnchorIndentationOperation
-                );
+                var anchorContext = nodeOperations.AnchorIndentationOperations
+                    .Do(context.AddAnchorIndentationOperation);
 
                 BuildContext(context, nodeOperations, cancellationToken);
 
@@ -302,7 +301,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             // remove all leading indentation
-            var triviaInfo = context.TokenStream.GetTriviaDataAtBeginningOfTree()
+            var triviaInfo = context.TokenStream
+                .GetTriviaDataAtBeginningOfTree()
                 .WithIndentation(0, context, _formattingRules, cancellationToken);
 
             triviaInfo.Format(
@@ -340,7 +340,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             // remove all trailing indentation
-            var triviaInfo = context.TokenStream.GetTriviaDataAtEndOfTree()
+            var triviaInfo = context.TokenStream
+                .GetTriviaDataAtEndOfTree()
                 .WithIndentation(0, context, _formattingRules, cancellationToken);
 
             triviaInfo.Format(
@@ -440,23 +441,22 @@ namespace Microsoft.CodeAnalysis.Formatting
                 );
 
                 // go through all relative indent block operation, and see whether it is affected by previous operations
-                context.GetAllRelativeIndentBlockOperations()
-                    .Do(
-                        o =>
-                        {
-                            cancellationToken.ThrowIfCancellationRequested();
-                            applier.ApplyBaseTokenIndentationChangesFromTo(
-                                FindCorrectBaseTokenOfRelativeIndentBlockOperation(
-                                    o,
-                                    context.TokenStream
-                                ),
-                                o.StartToken,
-                                o.EndToken,
-                                previousChangesMap,
-                                cancellationToken
-                            );
-                        }
-                    );
+                context.GetAllRelativeIndentBlockOperations().Do(
+                    o =>
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        applier.ApplyBaseTokenIndentationChangesFromTo(
+                            FindCorrectBaseTokenOfRelativeIndentBlockOperation(
+                                o,
+                                context.TokenStream
+                            ),
+                            o.StartToken,
+                            o.EndToken,
+                            previousChangesMap,
+                            cancellationToken
+                        );
+                    }
+                );
             }
         }
 
@@ -488,23 +488,22 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 // go through all relative indent block operation, and see whether it is affected by the anchor operation
-                context.GetAllRelativeIndentBlockOperations()
-                    .Do(
-                        o =>
-                        {
-                            cancellationToken.ThrowIfCancellationRequested();
-                            applier.ApplyBaseTokenIndentationChangesFromTo(
-                                FindCorrectBaseTokenOfRelativeIndentBlockOperation(
-                                    o,
-                                    context.TokenStream
-                                ),
-                                o.StartToken,
-                                o.EndToken,
-                                previousChangesMap,
-                                cancellationToken
-                            );
-                        }
-                    );
+                context.GetAllRelativeIndentBlockOperations().Do(
+                    o =>
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        applier.ApplyBaseTokenIndentationChangesFromTo(
+                            FindCorrectBaseTokenOfRelativeIndentBlockOperation(
+                                o,
+                                context.TokenStream
+                            ),
+                            o.StartToken,
+                            o.EndToken,
+                            previousChangesMap,
+                            cancellationToken
+                        );
+                    }
+                );
             }
         }
 
@@ -632,12 +631,13 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         private string FormatSummary()
         {
-            return string.Format(
-                "({0}) ({1} - {2})",
-                this.SpanToFormat,
-                _token1.ToString().Replace("\r\n", "\\r\\n"),
-                _token2.ToString().Replace("\r\n", "\\r\\n")
-            );
+            return string
+                .Format(
+                    "({0}) ({1} - {2})",
+                    this.SpanToFormat,
+                    _token1.ToString().Replace("\r\n", "\\r\\n"),
+                    _token2.ToString().Replace("\r\n", "\\r\\n")
+                );
         }
     }
 }

@@ -89,8 +89,8 @@ namespace Microsoft.Extensions.Hosting
             CancellationToken token = default
         )
         {
-            IHostApplicationLifetime applicationLifetime =
-                host.Services.GetService<IHostApplicationLifetime>();
+            IHostApplicationLifetime applicationLifetime = host.Services
+                .GetService<IHostApplicationLifetime>();
 
             token.Register(
                 state =>

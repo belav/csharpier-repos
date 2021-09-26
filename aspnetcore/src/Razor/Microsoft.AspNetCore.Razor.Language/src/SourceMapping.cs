@@ -47,12 +47,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                "{0} -> {1}",
-                OriginalSpan,
-                GeneratedSpan
-            );
+            return string
+                .Format(CultureInfo.CurrentCulture, "{0} -> {1}", OriginalSpan, GeneratedSpan);
         }
     }
 }

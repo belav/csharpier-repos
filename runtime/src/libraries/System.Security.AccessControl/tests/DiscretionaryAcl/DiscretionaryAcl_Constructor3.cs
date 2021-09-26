@@ -552,7 +552,8 @@ namespace System.Security.AccessControl.Tests
             capacity = 5;
             sid = new SecurityIdentifier(
                 Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-            ).ToString();
+            )
+                .ToString();
             rawAcl = new RawAcl(revision, capacity);
             //0 access Mask
             gAce = new CommonAce(

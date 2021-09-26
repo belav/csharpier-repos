@@ -226,11 +226,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             bool expectedIsModelSet
         )
         {
-            return base.ReadAsync_WithInputThatDeserializesToNull_SetsModelOnlyIfAllowingEmptyInput(
-                content,
-                treatEmptyInputAsDefaultValue,
-                expectedIsModelSet
-            );
+            return base
+                .ReadAsync_WithInputThatDeserializesToNull_SetsModelOnlyIfAllowingEmptyInput(
+                    content,
+                    treatEmptyInputAsDefaultValue,
+                    expectedIsModelSet
+                );
         }
 
         [Theory]

@@ -368,11 +368,12 @@ namespace System.Resources.Extensions.Tests
                     assemblyName = assemblyQualifiedTypeName.Substring(pos + 1).TrimStart();
                     string newTypeName = assemblyQualifiedTypeName.Substring(0, pos);
                     if (
-                        !string.Equals(
-                            newTypeName,
-                            serializedType.FullName,
-                            StringComparison.InvariantCulture
-                        )
+                        !string
+                            .Equals(
+                                newTypeName,
+                                serializedType.FullName,
+                                StringComparison.InvariantCulture
+                            )
                     )
                     {
                         typeName = newTypeName;

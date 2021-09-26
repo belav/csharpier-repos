@@ -2777,10 +2777,10 @@ namespace System.Net.Sockets
             ValidateBufferArguments(buffer, offset, size);
 
             Task<int> t = SendAsync(
-                    new ReadOnlyMemory<byte>(buffer, offset, size),
-                    socketFlags,
-                    default
-                )
+                new ReadOnlyMemory<byte>(buffer, offset, size),
+                socketFlags,
+                default
+            )
                 .AsTask();
             if (t.IsFaulted || t.IsCanceled)
             {
@@ -2925,11 +2925,11 @@ namespace System.Net.Sockets
             ValidateBufferArguments(buffer, offset, size);
             return TaskToApm.Begin(
                 ReceiveAsync(
-                        new ArraySegment<byte>(buffer, offset, size),
-                        socketFlags,
-                        fromNetworkStream: false,
-                        default
-                    )
+                    new ArraySegment<byte>(buffer, offset, size),
+                    socketFlags,
+                    fromNetworkStream: false,
+                    default
+                )
                     .AsTask(),
                 callback,
                 state
@@ -2949,11 +2949,11 @@ namespace System.Net.Sockets
             ThrowIfDisposed();
             ValidateBufferArguments(buffer, offset, size);
             Task<int> t = ReceiveAsync(
-                    new ArraySegment<byte>(buffer, offset, size),
-                    socketFlags,
-                    fromNetworkStream: false,
-                    default
-                )
+                new ArraySegment<byte>(buffer, offset, size),
+                socketFlags,
+                fromNetworkStream: false,
+                default
+            )
                 .AsTask();
 
             if (t.IsFaulted || t.IsCanceled)
@@ -3019,7 +3019,8 @@ namespace System.Net.Sockets
             if (!ti.IsCompleted)
             {
                 // TODO https://github.com/dotnet/runtime/issues/17148: Wait without throwing
-                ((IAsyncResult)ti).AsyncWaitHandle.WaitOne();
+                ((IAsyncResult)ti).AsyncWaitHandle
+                    .WaitOne();
             }
 
             if (ti.IsCompletedSuccessfully)
@@ -3050,10 +3051,10 @@ namespace System.Net.Sockets
             ValidateReceiveFromEndpointAndState(remoteEP, nameof(remoteEP));
 
             Task<SocketReceiveMessageFromResult> t = ReceiveMessageFromAsync(
-                    buffer.AsMemory(offset, size),
-                    socketFlags,
-                    remoteEP
-                )
+                buffer.AsMemory(offset, size),
+                socketFlags,
+                remoteEP
+            )
                 .AsTask();
             // In case of synchronous completion, ReceiveMessageFromAsync() returns a completed task.
             // When this happens, we need to update 'remoteEP' in order to conform to the historical behavior of BeginReceiveMessageFrom().
@@ -3120,10 +3121,10 @@ namespace System.Net.Sockets
             ValidateReceiveFromEndpointAndState(remoteEP, nameof(remoteEP));
 
             Task<SocketReceiveFromResult> t = ReceiveFromAsync(
-                    buffer.AsMemory(offset, size),
-                    socketFlags,
-                    remoteEP
-                )
+                buffer.AsMemory(offset, size),
+                socketFlags,
+                remoteEP
+            )
                 .AsTask();
             // In case of synchronous completion, ReceiveFromAsync() returns a completed task.
             // When this happens, we need to update 'remoteEP' in order to conform to the historical behavior of BeginReceiveFrom().

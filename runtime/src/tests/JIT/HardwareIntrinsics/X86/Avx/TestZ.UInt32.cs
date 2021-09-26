@@ -350,7 +350,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Avx).GetMethod(
+            var result = typeof(Avx)
+                .GetMethod(
                     nameof(Avx.TestZ),
                     new Type[] { typeof(Vector256<UInt32>), typeof(Vector256<UInt32>) }
                 )
@@ -370,7 +371,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Avx).GetMethod(
+            var result = typeof(Avx)
+                .GetMethod(
                     nameof(Avx.TestZ),
                     new Type[] { typeof(Vector256<UInt32>), typeof(Vector256<UInt32>) }
                 )
@@ -390,7 +392,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Avx).GetMethod(
+            var result = typeof(Avx)
+                .GetMethod(
                     nameof(Avx.TestZ),
                     new Type[] { typeof(Vector256<UInt32>), typeof(Vector256<UInt32>) }
                 )
@@ -636,9 +639,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Avx)}.{nameof(Avx.TestZ)}<UInt32>(Vector256<UInt32>, Vector256<UInt32>): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Avx)}.{nameof(Avx.TestZ)}<UInt32>(Vector256<UInt32>, Vector256<UInt32>): {method} failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");

@@ -58,9 +58,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             }
 
             var storage = await persistentService.GetStorageAsync(
-                    project.Solution,
-                    cancellationToken
-                )
+                project.Solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             await using var _ = storage.ConfigureAwait(false);
 
@@ -96,9 +96,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             Contract.ThrowIfFalse(textDocument == null || textDocument.Project == project);
 
             var storage = await persistentService.GetStorageAsync(
-                    project.Solution,
-                    cancellationToken
-                )
+                project.Solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             await using var _ = storage.ConfigureAwait(false);
 
@@ -388,8 +388,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             var documentId =
                 document != null
                     ? document.Id
-                    : project.Solution.GetDocumentIdsWithFilePath(originalFile)
-                          .FirstOrDefault(documentId => documentId.ProjectId == project.Id);
+                    : project.Solution
+                      .GetDocumentIdsWithFilePath(originalFile)
+                      .FirstOrDefault(documentId => documentId.ProjectId == project.Id);
 
             return new DiagnosticDataLocation(
                 documentId,

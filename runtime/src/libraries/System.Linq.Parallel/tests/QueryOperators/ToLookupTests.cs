@@ -392,20 +392,15 @@ namespace System.Linq.Parallel.Tests
         {
             _ = count;
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToLookup(
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToLookup(
                         (Func<int, int>)(
                             x =>
                             {
                                 throw new DeliberateTestException();
                             }
                         )
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToLookup(
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToLookup(
                         (Func<int, int>)(
                             x =>
                             {
@@ -413,11 +408,8 @@ namespace System.Linq.Parallel.Tests
                             }
                         ),
                         y => y
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToLookup(
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToLookup(
                         x => x,
                         (Func<int, int>)(
                             y =>
@@ -425,12 +417,9 @@ namespace System.Linq.Parallel.Tests
                                 throw new DeliberateTestException();
                             }
                         )
-                    )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToLookup(
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToLookup(
                         (Func<int, int>)(
                             x =>
                             {
@@ -438,11 +427,8 @@ namespace System.Linq.Parallel.Tests
                             }
                         ),
                         EqualityComparer<int>.Default
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToLookup(
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToLookup(
                         (Func<int, int>)(
                             x =>
                             {
@@ -451,11 +437,8 @@ namespace System.Linq.Parallel.Tests
                         ),
                         y => y,
                         EqualityComparer<int>.Default
-                    )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    labeled.Item.ToLookup(
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() => labeled.Item.ToLookup(
                         x => x,
                         (Func<int, int>)(
                             y =>
@@ -464,8 +447,7 @@ namespace System.Linq.Parallel.Tests
                             }
                         ),
                         EqualityComparer<int>.Default
-                    )
-            );
+                    ));
 
             AssertThrows.Wrapped<DeliberateTestException>(
                 () => labeled.Item.ToLookup(x => x, new FailingEqualityComparer<int>())
@@ -493,11 +475,8 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
                 () =>
-                    ((ParallelQuery<int>)null).ToLookup(
-                        x => x,
-                        y => y,
-                        EqualityComparer<int>.Default
-                    )
+                    ((ParallelQuery<int>)null)
+                        .ToLookup(x => x, y => y, EqualityComparer<int>.Default)
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "keySelector",

@@ -112,8 +112,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             using var context = new KClrContext();
             var ownerEntry = context.Entry(
-                    new OwnerClass { Id = 1, Owned = new OwnedClass { Value = "Kool" } }
-                )
+                new OwnerClass { Id = 1, Owned = new OwnedClass { Value = "Kool" } }
+            )
                 .GetInfrastructure();
 
             var entry = context.Entry(((OwnerClass)ownerEntry.Entity).Owned).GetInfrastructure();

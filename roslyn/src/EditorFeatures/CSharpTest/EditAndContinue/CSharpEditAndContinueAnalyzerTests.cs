@@ -290,10 +290,8 @@ class C
             var oldText = await oldDocument.GetTextAsync();
             var oldSyntaxRoot = await oldDocument.GetSyntaxRootAsync();
             var documentId = oldDocument.Id;
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                documentId,
-                SourceText.From(source2)
-            );
+            var newSolution = workspace.CurrentSolution
+                .WithDocumentText(documentId, SourceText.From(source2));
             var newDocument = newSolution.GetDocument(documentId);
             var newText = await newDocument.GetTextAsync();
             var newSyntaxRoot = await newDocument.GetSyntaxRootAsync();
@@ -368,10 +366,8 @@ class C
             var oldProject = oldSolution.Projects.Single();
             var oldDocument = oldProject.Documents.Single();
             var documentId = oldDocument.Id;
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                documentId,
-                SourceText.From(source2)
-            );
+            var newSolution = workspace.CurrentSolution
+                .WithDocumentText(documentId, SourceText.From(source2));
 
             var baseActiveStatements = ImmutableArray.Create<ActiveStatement>();
             var analyzer = new CSharpEditAndContinueAnalyzer();
@@ -453,10 +449,8 @@ class C
             var oldDocument = oldProject.Documents.Single();
             var documentId = oldDocument.Id;
 
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                documentId,
-                SourceText.From(source2)
-            );
+            var newSolution = workspace.CurrentSolution
+                .WithDocumentText(documentId, SourceText.From(source2));
 
             var baseActiveStatements = ImmutableArray.Create<ActiveStatement>();
             var analyzer = new CSharpEditAndContinueAnalyzer();
@@ -563,10 +557,8 @@ class C
                 var oldDocument = oldProject.Documents.Single();
                 var documentId = oldDocument.Id;
 
-                var newSolution = workspace.CurrentSolution.WithDocumentText(
-                    documentId,
-                    SourceText.From(source2)
-                );
+                var newSolution = workspace.CurrentSolution
+                    .WithDocumentText(documentId, SourceText.From(source2));
 
                 var baseActiveStatements = ImmutableArray.Create<ActiveStatement>();
                 var analyzer = new CSharpEditAndContinueAnalyzer();
@@ -660,10 +652,8 @@ class C
             var oldDocument = oldProject.Documents.Single();
             var documentId = oldDocument.Id;
 
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                documentId,
-                SourceText.From(source2)
-            );
+            var newSolution = workspace.CurrentSolution
+                .WithDocumentText(documentId, SourceText.From(source2));
 
             var baseActiveStatements = ImmutableArray.Create<ActiveStatement>();
             var analyzer = new CSharpEditAndContinueAnalyzer();
@@ -714,10 +704,8 @@ class C
             var oldDocument = oldProject.Documents.Single();
             var documentId = oldDocument.Id;
 
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                documentId,
-                SourceText.From(source2)
-            );
+            var newSolution = workspace.CurrentSolution
+                .WithDocumentText(documentId, SourceText.From(source2));
 
             var baseActiveStatements = ImmutableArray.Create<ActiveStatement>();
             var analyzer = new CSharpEditAndContinueAnalyzer();
@@ -915,14 +903,14 @@ class D
                 :
                   // Because the error message that is formatted into this template string includes a stacktrace with newlines, we need to replicate that behavior
                   // here so that any trailing punctuation is removed from the translated template string.
-                  $"ENC0080: {string.Format(FeaturesResources.Modifying_source_file_will_prevent_the_debug_session_from_continuing_due_to_internal_error, "src.cs", "System.NullReferenceException: NullRef!\n")}".Split(
-                          '\n'
-                      )
-                      .First();
+                  $"ENC0080: {string.Format(FeaturesResources.Modifying_source_file_will_prevent_the_debug_session_from_continuing_due_to_internal_error, "src.cs", "System.NullReferenceException: NullRef!\n")}"
+                  .Split('\n')
+                  .First();
 
             AssertEx.Equal(
                 new[] { expectedDiagnostic },
-                result.RudeEditErrors.Select(d => d.ToDiagnostic(newSyntaxTree))
+                result.RudeEditErrors
+                    .Select(d => d.ToDiagnostic(newSyntaxTree))
                     .Select(
                         d =>
                             $"{d.Id}: {d.GetMessage().Split(new[] { Environment.NewLine }, StringSplitOptions.None).First()}"

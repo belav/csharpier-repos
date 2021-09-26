@@ -224,10 +224,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             // Treat the expression as string if we don't find anything better.
             var stringMetadata = metadataProvider.GetMetadataForType(typeof(string));
-            return viewData.ModelExplorer.GetExplorerForExpression(
-                stringMetadata,
-                modelAccessor: null
-            );
+            return viewData.ModelExplorer
+                .GetExplorerForExpression(stringMetadata, modelAccessor: null);
         }
 
         private static ModelExplorer FromModel(

@@ -226,41 +226,44 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             // ValueType members work without access to the type.
             CallSite<Func<CallSite, SomeValueType?, object>> site = CallSite<
                 Func<CallSite, SomeValueType?, object>
-            >.Create(
-                Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "ToString",
-                    null,
-                    null,
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), }
-                )
-            );
+            >
+                .Create(
+                    Binder.InvokeMember(
+                        CSharpBinderFlags.None,
+                        "ToString",
+                        null,
+                        null,
+                        new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), }
+                    )
+                );
             Func<CallSite, SomeValueType?, object> target = site.Target;
             Assert.Equal("test", target(site, new SomeValueType()));
 
             // Nullable<T> members work with access to the type.
-            site = CallSite<Func<CallSite, SomeValueType?, object>>.Create(
-                Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "GetValueOrDefault",
-                    null,
-                    GetType(),
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), }
-                )
-            );
+            site = CallSite<Func<CallSite, SomeValueType?, object>>
+                .Create(
+                    Binder.InvokeMember(
+                        CSharpBinderFlags.None,
+                        "GetValueOrDefault",
+                        null,
+                        GetType(),
+                        new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), }
+                    )
+                );
             target = site.Target;
             Assert.Equal(new SomeValueType(), target(site, new SomeValueType()));
 
             // Nullable<T> members don't work without access to the type.
-            site = CallSite<Func<CallSite, SomeValueType?, object>>.Create(
-                Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "GetValueOrDefault",
-                    null,
-                    null,
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), }
-                )
-            );
+            site = CallSite<Func<CallSite, SomeValueType?, object>>
+                .Create(
+                    Binder.InvokeMember(
+                        CSharpBinderFlags.None,
+                        "GetValueOrDefault",
+                        null,
+                        null,
+                        new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), }
+                    )
+                );
             target = site.Target;
             Assert.Throws<RuntimeBinderException>(() => target(site, new SomeValueType()));
         }

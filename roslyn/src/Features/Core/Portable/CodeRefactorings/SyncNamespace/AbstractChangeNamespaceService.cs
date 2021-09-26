@@ -88,9 +88,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         protected static SyntaxAnnotation ContainerAnnotation { get; } = new SyntaxAnnotation();
 
         protected static SyntaxAnnotation WarningAnnotation { get; } =
-            CodeActions.WarningAnnotation.Create(
-                FeaturesResources.Warning_colon_changing_namespace_may_produce_invalid_code_and_change_code_meaning
-            );
+            CodeActions.WarningAnnotation
+                .Create(
+                    FeaturesResources.Warning_colon_changing_namespace_may_produce_invalid_code_and_change_code_meaning
+                );
 
         protected abstract TCompilationUnitSyntax ChangeNamespaceDeclaration(
             TCompilationUnitSyntax root,
@@ -145,10 +146,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             }
 
             var applicableContainers = await GetValidContainersFromAllLinkedDocumentsAsync(
-                    document,
-                    container,
-                    cancellationToken
-                )
+                document,
+                container,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return !applicableContainers.IsDefault;
         }
@@ -167,9 +168,9 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             // ChangeNamespaceService only controls top level declarations right now.
             // Don't use namespaces that already match the target namespace
             var originalNamespaceDeclarations = await GetTopLevelNamespacesAsync(
-                    document,
-                    cancellationToken
-                )
+                document,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (originalNamespaceDeclarations.Length == 0)
@@ -180,9 +181,9 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var originalNamespaceName = semanticModel.GetRequiredDeclaredSymbol(
-                    originalNamespaceDeclarations.First(),
-                    cancellationToken
-                )
+                originalNamespaceDeclarations.First(),
+                cancellationToken
+            )
                 .ToDisplayString();
             var solution = document.Project.Solution;
 
@@ -192,9 +193,9 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             for (var i = 0; i < originalNamespaceDeclarations.Length; i++)
             {
                 var namespaceName = semanticModel.GetRequiredDeclaredSymbol(
-                        originalNamespaceDeclarations[i],
-                        cancellationToken
-                    )
+                    originalNamespaceDeclarations[i],
+                    cancellationToken
+                )
                     .ToDisplayString();
                 if (namespaceName != originalNamespaceName)
                 {
@@ -215,11 +216,11 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
 
                 var namespaceToRename = namespaces[i];
                 solution = await ChangeNamespaceAsync(
-                        document,
-                        namespaceToRename,
-                        targetNamespace,
-                        cancellationToken
-                    )
+                    document,
+                    namespaceToRename,
+                    targetNamespace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 document = solution.GetRequiredDocument(document.Id);
             }
@@ -268,10 +269,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             var solution = document.Project.Solution;
 
             var containersFromAllDocuments = await GetValidContainersFromAllLinkedDocumentsAsync(
-                    document,
-                    container,
-                    cancellationToken
-                )
+                document,
+                container,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (containersFromAllDocuments.IsDefault)
             {
@@ -287,10 +288,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
 
             // Annotate the container nodes so we can still find and modify them after syntax tree has changed.
             var annotatedSolution = await AnnotateContainersAsync(
-                    solution,
-                    containersFromAllDocuments,
-                    cancellationToken
-                )
+                solution,
+                containersFromAllDocuments,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Here's the entire process for changing namespace:
@@ -308,22 +309,22 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             foreach (var documentId in documentIds)
             {
                 var (newSolution, refDocumentIds) = await ChangeNamespaceInSingleDocumentAsync(
-                        solutionAfterNamespaceChange,
-                        documentId,
-                        declaredNamespace,
-                        targetNamespace,
-                        cancellationToken
-                    )
+                    solutionAfterNamespaceChange,
+                    documentId,
+                    declaredNamespace,
+                    targetNamespace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 solutionAfterNamespaceChange = newSolution;
                 referenceDocuments.AddRange(refDocumentIds);
             }
 
             var solutionAfterFirstMerge = await MergeDiffAsync(
-                    solution,
-                    solutionAfterNamespaceChange,
-                    cancellationToken
-                )
+                solution,
+                solutionAfterNamespaceChange,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // After changing documents, we still need to remove unnecessary imports related to our change.
@@ -344,26 +345,26 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             // unnecessary imports separately.
 
             var solutionAfterImportsRemoved = await RemoveUnnecessaryImportsAsync(
-                    solutionAfterFirstMerge,
-                    documentIds,
-                    GetAllNamespaceImportsForDeclaringDocument(declaredNamespace, targetNamespace),
-                    cancellationToken
-                )
+                solutionAfterFirstMerge,
+                documentIds,
+                GetAllNamespaceImportsForDeclaringDocument(declaredNamespace, targetNamespace),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             solutionAfterImportsRemoved = await RemoveUnnecessaryImportsAsync(
-                    solutionAfterImportsRemoved,
-                    referenceDocuments.ToImmutableArray(),
-                    ImmutableArray.Create(declaredNamespace, targetNamespace),
-                    cancellationToken
-                )
+                solutionAfterImportsRemoved,
+                referenceDocuments.ToImmutableArray(),
+                ImmutableArray.Create(declaredNamespace, targetNamespace),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return await MergeDiffAsync(
-                    solutionAfterFirstMerge,
-                    solutionAfterImportsRemoved,
-                    cancellationToken
-                )
+                solutionAfterFirstMerge,
+                solutionAfterImportsRemoved,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -382,21 +383,18 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             // will return false. We use span of namespace declaration found in each document to decide if they are identical.
 
             var documents = ids.SelectAsArray(id => solution.GetRequiredDocument(id));
-            using var containersDisposer = ArrayBuilder<(DocumentId, SyntaxNode)>.GetInstance(
-                ids.Length,
-                out var containers
-            );
-            using var spanForContainersDisposer = PooledHashSet<TextSpan>.GetInstance(
-                out var spanForContainers
-            );
+            using var containersDisposer = ArrayBuilder<(DocumentId, SyntaxNode)>
+                .GetInstance(ids.Length, out var containers);
+            using var spanForContainersDisposer = PooledHashSet<TextSpan>
+                .GetInstance(out var spanForContainers);
 
             foreach (var document in documents)
             {
                 var container = await TryGetApplicableContainerFromSpanAsync(
-                        document,
-                        span,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (container is TNamespaceDeclarationSyntax)
@@ -433,9 +431,9 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             foreach (var (id, container) in containers)
             {
                 var documentEditor = await solutionEditor.GetDocumentEditorAsync(
-                        id,
-                        cancellationToken
-                    )
+                    id,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 documentEditor.ReplaceNode(
                     container,
@@ -552,10 +550,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
-            using var builderDisposer = ArrayBuilder<SyntaxNode>.GetInstance(
-                names.Length,
-                out var builder
-            );
+            using var builderDisposer = ArrayBuilder<SyntaxNode>
+                .GetInstance(names.Length, out var builder);
             for (var i = 0; i < names.Length; ++i)
             {
                 builder.Add(CreateImport(generator, names[i], withFormatterAnnotation));
@@ -600,10 +596,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             // Get types declared in the changing namespace, because we need to fix all references to them,
             // e.g. change the namespace for qualified name, add imports to proper containers, etc.
             var declaredSymbols = await GetDeclaredSymbolsInContainerAsync(
-                    document,
-                    container,
-                    cancellationToken
-                )
+                document,
+                container,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var editor = await DocumentEditor.CreateAsync(document, cancellationToken)
@@ -615,15 +611,15 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             var refLocationsInOtherDocuments = new List<LocationForAffectedSymbol>();
 
             var refLocations = await Task.WhenAll(
-                    declaredSymbols.Select(
-                        declaredSymbol =>
-                            FindReferenceLocationsForSymbolAsync(
-                                document,
-                                declaredSymbol,
-                                cancellationToken
-                            )
-                    )
+                declaredSymbols.Select(
+                    declaredSymbol =>
+                        FindReferenceLocationsForSymbolAsync(
+                            document,
+                            declaredSymbol,
+                            cancellationToken
+                        )
                 )
+            )
                 .ConfigureAwait(false);
 
             foreach (var refLocation in refLocations.SelectMany(locs => locs))
@@ -644,37 +640,35 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             }
 
             var documentWithNewNamespace = await FixDeclarationDocumentAsync(
-                    document,
-                    refLocationsInCurrentDocument,
-                    oldNamespace,
-                    newNamespace,
-                    cancellationToken
-                )
+                document,
+                refLocationsInCurrentDocument,
+                oldNamespace,
+                newNamespace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var solutionWithChangedNamespace = documentWithNewNamespace.Project.Solution;
 
             var refLocationGroups = refLocationsInOtherDocuments.GroupBy(loc => loc.Document.Id);
 
             var fixedDocuments = await Task.WhenAll(
-                    refLocationGroups.Select(
-                        refInOneDocument =>
-                            FixReferencingDocumentAsync(
-                                solutionWithChangedNamespace.GetRequiredDocument(
-                                    refInOneDocument.Key
-                                ),
-                                refInOneDocument,
-                                newNamespace,
-                                cancellationToken
-                            )
-                    )
+                refLocationGroups.Select(
+                    refInOneDocument =>
+                        FixReferencingDocumentAsync(
+                            solutionWithChangedNamespace.GetRequiredDocument(refInOneDocument.Key),
+                            refInOneDocument,
+                            newNamespace,
+                            cancellationToken
+                        )
                 )
+            )
                 .ConfigureAwait(false);
 
             var solutionWithFixedReferences = await MergeDocumentChangesAsync(
-                    solutionWithChangedNamespace,
-                    fixedDocuments,
-                    cancellationToken
-                )
+                solutionWithChangedNamespace,
+                fixedDocuments,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return (solutionWithFixedReferences, refLocationGroups.SelectAsArray(g => g.Key));
@@ -753,10 +747,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                     if (methodSymbol.IsExtensionMethod)
                     {
                         var referencedMethodSymbols = await FindReferencesAsync(
-                                methodSymbol,
-                                document,
-                                cancellationToken
-                            )
+                            methodSymbol,
+                            document,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         builder.AddRange(
                             referencedMethodSymbols.SelectMany(refSymbol => refSymbol.Locations)
@@ -784,13 +778,13 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             cancellationToken.ThrowIfCancellationRequested();
             var progress = new StreamingProgressCollector();
             await SymbolFinder.FindReferencesAsync(
-                    symbol,
-                    document.Project.Solution,
-                    progress,
-                    documents: null,
-                    FindReferencesSearchOptions.Default,
-                    cancellationToken
-                )
+                symbol,
+                document.Project.Solution,
+                progress,
+                documents: null,
+                FindReferencesSearchOptions.Default,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return progress.GetReferencedSymbols();
@@ -833,13 +827,13 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             if (refLocations.Count > 0)
             {
                 (document, containersToAddImports) = await FixReferencesAsync(
-                        document,
-                        this,
-                        addImportService,
-                        refLocations,
-                        newNamespaceParts,
-                        cancellationToken
-                    )
+                    document,
+                    this,
+                    addImportService,
+                    refLocations,
+                    newNamespaceParts,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else
@@ -871,24 +865,24 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             var allowInHiddenRegions = document.CanAddImportsInHiddenRegions();
 
             var documentWithAddedImports = await AddImportsInContainersAsync(
-                    document,
-                    addImportService,
-                    containersToAddImports,
-                    namesToImport,
-                    placeSystemNamespaceFirst,
-                    allowInHiddenRegions,
-                    cancellationToken
-                )
+                document,
+                addImportService,
+                containersToAddImports,
+                namesToImport,
+                placeSystemNamespaceFirst,
+                allowInHiddenRegions,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var root = await documentWithAddedImports.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             root = ChangeNamespaceDeclaration(
-                    (TCompilationUnitSyntax)root,
-                    oldNamespaceParts,
-                    newNamespaceParts
-                )
+                (TCompilationUnitSyntax)root,
+                oldNamespaceParts,
+                newNamespaceParts
+            )
                 .WithAdditionalAnnotations(Formatter.Annotation);
 
             // Need to invoke formatter explicitly since we are doing the diff merge ourselves.
@@ -924,13 +918,13 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             var newNamespaceParts = GetNamespaceParts(newNamespace);
 
             var (documentWithRefFixed, containers) = await FixReferencesAsync(
-                    document,
-                    changeNamespaceService,
-                    addImportService,
-                    refLocations,
-                    newNamespaceParts,
-                    cancellationToken
-                )
+                document,
+                changeNamespaceService,
+                addImportService,
+                refLocations,
+                newNamespaceParts,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var optionSet = await documentWithRefFixed.GetOptionsAsync(cancellationToken)
@@ -942,23 +936,23 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             var allowInHiddenRegions = document.CanAddImportsInHiddenRegions();
 
             var documentWithAdditionalImports = await AddImportsInContainersAsync(
-                    documentWithRefFixed,
-                    addImportService,
-                    containers,
-                    ImmutableArray.Create(newNamespace),
-                    placeSystemNamespaceFirst,
-                    allowInHiddenRegions,
-                    cancellationToken
-                )
+                documentWithRefFixed,
+                addImportService,
+                containers,
+                ImmutableArray.Create(newNamespace),
+                placeSystemNamespaceFirst,
+                allowInHiddenRegions,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Need to invoke formatter explicitly since we are doing the diff merge ourselves.
             var formattedDocument = await Formatter.FormatAsync(
-                    documentWithAdditionalImports,
-                    Formatter.Annotation,
-                    optionSet,
-                    cancellationToken
-                )
+                documentWithAdditionalImports,
+                Formatter.Annotation,
+                optionSet,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return await Simplifier.ReduceAsync(formattedDocument, optionSet, cancellationToken)
@@ -1093,10 +1087,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                 documentsToProcessBuilder.Add(document);
 
                 document = await RemoveUnnecessaryImportsWorker(
-                        document,
-                        CreateImports(document, names, withFormatterAnnotation: false),
-                        cancellationToken
-                    )
+                    document,
+                    CreateImports(document, names, withFormatterAnnotation: false),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 solution = document.Project.Solution;
             }
@@ -1104,15 +1098,15 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             var documentsToProcess = documentsToProcessBuilder.ToImmutableAndFree();
 
             var changeDocuments = await Task.WhenAll(
-                    documentsToProcess.Select(
-                        doc =>
-                            RemoveUnnecessaryImportsWorker(
-                                doc,
-                                CreateImports(doc, names, withFormatterAnnotation: false),
-                                cancellationToken
-                            )
-                    )
+                documentsToProcess.Select(
+                    doc =>
+                        RemoveUnnecessaryImportsWorker(
+                            doc,
+                            CreateImports(doc, names, withFormatterAnnotation: false),
+                            cancellationToken
+                        )
                 )
+            )
                 .ConfigureAwait(false);
 
             return await MergeDocumentChangesAsync(solution, changeDocuments, cancellationToken)
@@ -1171,9 +1165,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                         ? container.DescendantNodes().First()
                         : container;
 
-                var compilation = await document.Project.GetRequiredCompilationAsync(
-                        cancellationToken
-                    )
+                var compilation = await document.Project
+                    .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -1206,9 +1199,9 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                 newSolution.GetChanges(oldSolution)
             );
             var mergeResult = await diffMergingSession.MergeDiffsAsync(
-                    mergeConflictHandler: null,
-                    cancellationToken: cancellationToken
-                )
+                mergeConflictHandler: null,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             return mergeResult.MergedSolution;
         }

@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var workspace = document.Project.Solution.Workspace;
 
             // do not load EnC service and its dependencies if the app is not running:
-            var debuggingService =
-                workspace.Services.GetRequiredService<IDebuggingWorkspaceService>();
+            var debuggingService = workspace.Services
+                .GetRequiredService<IDebuggingWorkspaceService>();
             if (debuggingService.CurrentDebuggingState == DebuggingState.Design)
             {
                 return SpecializedTasks.EmptyImmutableArray<Diagnostic>();
@@ -70,18 +70,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var activeStatementSpanProvider = new DocumentActiveStatementSpanProvider(
                 async cancellationToken =>
                 {
-                    var trackingService =
-                        workspace.Services.GetRequiredService<IActiveStatementTrackingService>();
+                    var trackingService = workspace.Services
+                        .GetRequiredService<IActiveStatementTrackingService>();
                     return await trackingService.GetSpansAsync(document, cancellationToken)
                         .ConfigureAwait(false);
                 }
             );
 
             return proxy.GetDocumentDiagnosticsAsync(
-                    document,
-                    activeStatementSpanProvider,
-                    cancellationToken
-                )
+                document,
+                activeStatementSpanProvider,
+                cancellationToken
+            )
                 .AsTask();
         }
     }

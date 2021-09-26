@@ -470,9 +470,8 @@ namespace Goo<T>
         {
             var source = @"public class C { }";
 
-            var aliasedCorlib = TestMetadata.Net451.mscorlib.WithAliases(
-                ImmutableArray.Create("Goo")
-            );
+            var aliasedCorlib = TestMetadata.Net451.mscorlib
+                .WithAliases(ImmutableArray.Create("Goo"));
 
             var comp = CreateEmptyCompilation(source, new[] { aliasedCorlib });
 
@@ -567,11 +566,10 @@ public namespace NS // CS1671
     }
 }
 ";
-            CreateCompilationWithMscorlib45(test)
-                .VerifyDiagnostics(
-                    // (2,1): error CS1671: A namespace declaration cannot have modifiers or attributes
-                    Diagnostic(ErrorCode.ERR_BadModifiersOnNamespace, "public").WithLocation(2, 1)
-                );
+            CreateCompilationWithMscorlib45(test).VerifyDiagnostics(
+                // (2,1): error CS1671: A namespace declaration cannot have modifiers or attributes
+                Diagnostic(ErrorCode.ERR_BadModifiersOnNamespace, "public").WithLocation(2, 1)
+            );
         }
 
         [Fact]
@@ -582,12 +580,11 @@ public namespace NS // CS1671
 namespace N { }
 ";
 
-            CreateCompilationWithMscorlib45(test)
-                .VerifyDiagnostics(
-                    // (2,1): error CS1671: A namespace declaration cannot have modifiers or attributes
-                    Diagnostic(ErrorCode.ERR_BadModifiersOnNamespace, "[System.Obsolete]")
-                        .WithLocation(1, 1)
-                );
+            CreateCompilationWithMscorlib45(test).VerifyDiagnostics(
+                // (2,1): error CS1671: A namespace declaration cannot have modifiers or attributes
+                Diagnostic(ErrorCode.ERR_BadModifiersOnNamespace, "[System.Obsolete]")
+                    .WithLocation(1, 1)
+            );
         }
     }
 }

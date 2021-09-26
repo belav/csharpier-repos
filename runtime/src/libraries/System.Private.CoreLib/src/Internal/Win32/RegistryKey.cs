@@ -90,16 +90,17 @@ namespace Internal.Win32
             // Make sure that the name does not contain double slahes
             Debug.Assert(!name.Contains(@"\\"));
 
-            int ret = Interop.Advapi32.RegOpenKeyEx(
-                _hkey,
-                name,
-                0,
-                writable
-                  ? Interop.Advapi32.RegistryOperations.KEY_READ
-                        | Interop.Advapi32.RegistryOperations.KEY_WRITE
-                  : Interop.Advapi32.RegistryOperations.KEY_READ,
-                out SafeRegistryHandle result
-            );
+            int ret = Interop.Advapi32
+                .RegOpenKeyEx(
+                    _hkey,
+                    name,
+                    0,
+                    writable
+                      ? Interop.Advapi32.RegistryOperations.KEY_READ
+                            | Interop.Advapi32.RegistryOperations.KEY_WRITE
+                      : Interop.Advapi32.RegistryOperations.KEY_READ,
+                    out SafeRegistryHandle result
+                );
 
             if (ret == 0 && !result.IsInvalid)
             {
@@ -132,16 +133,17 @@ namespace Internal.Win32
 
                 while (
                     (
-                        result = Interop.Advapi32.RegEnumKeyEx(
-                            _hkey,
-                            names.Count,
-                            name,
-                            ref nameLength,
-                            null,
-                            null,
-                            null,
-                            null
-                        )
+                        result = Interop.Advapi32
+                            .RegEnumKeyEx(
+                                _hkey,
+                                names.Count,
+                                name,
+                                ref nameLength,
+                                null,
+                                null,
+                                null,
+                                null
+                            )
                     ) != Interop.Errors.ERROR_NO_MORE_ITEMS
                 )
                 {
@@ -188,16 +190,17 @@ namespace Internal.Win32
 
                 while (
                     (
-                        result = Interop.Advapi32.RegEnumValue(
-                            _hkey,
-                            names.Count,
-                            name,
-                            ref nameLength,
-                            IntPtr.Zero,
-                            null,
-                            null,
-                            null
-                        )
+                        result = Interop.Advapi32
+                            .RegEnumValue(
+                                _hkey,
+                                names.Count,
+                                name,
+                                ref nameLength,
+                                IntPtr.Zero,
+                                null,
+                                null,
+                                null
+                            )
                     ) != Interop.Errors.ERROR_NO_MORE_ITEMS
                 )
                 {
@@ -250,14 +253,8 @@ namespace Internal.Win32
             int type = 0;
             int datasize = 0;
 
-            int ret = Interop.Advapi32.RegQueryValueEx(
-                _hkey,
-                name,
-                null,
-                ref type,
-                (byte[]?)null,
-                ref datasize
-            );
+            int ret = Interop.Advapi32
+                .RegQueryValueEx(_hkey, name, null, ref type, (byte[]?)null, ref datasize);
 
             if (ret != 0)
             {
@@ -285,14 +282,8 @@ namespace Internal.Win32
 
                     {
                         byte[] blob = new byte[datasize];
-                        ret = Interop.Advapi32.RegQueryValueEx(
-                            _hkey,
-                            name,
-                            null,
-                            ref type,
-                            blob,
-                            ref datasize
-                        );
+                        ret = Interop.Advapi32
+                            .RegQueryValueEx(_hkey, name, null, ref type, blob, ref datasize);
                         data = blob;
                     }
                     break;
@@ -307,14 +298,8 @@ namespace Internal.Win32
                         long blob = 0;
                         Debug.Assert(datasize == 8, "datasize==8");
                         // Here, datasize must be 8 when calling this
-                        ret = Interop.Advapi32.RegQueryValueEx(
-                            _hkey,
-                            name,
-                            null,
-                            ref type,
-                            ref blob,
-                            ref datasize
-                        );
+                        ret = Interop.Advapi32
+                            .RegQueryValueEx(_hkey, name, null, ref type, ref blob, ref datasize);
 
                         data = blob;
                     }
@@ -330,14 +315,8 @@ namespace Internal.Win32
                         int blob = 0;
                         Debug.Assert(datasize == 4, "datasize==4");
                         // Here, datasize must be four when calling this
-                        ret = Interop.Advapi32.RegQueryValueEx(
-                            _hkey,
-                            name,
-                            null,
-                            ref type,
-                            ref blob,
-                            ref datasize
-                        );
+                        ret = Interop.Advapi32
+                            .RegQueryValueEx(_hkey, name, null, ref type, ref blob, ref datasize);
 
                         data = blob;
                     }
@@ -360,14 +339,8 @@ namespace Internal.Win32
                         }
                         char[] blob = new char[datasize / 2];
 
-                        ret = Interop.Advapi32.RegQueryValueEx(
-                            _hkey,
-                            name,
-                            null,
-                            ref type,
-                            blob,
-                            ref datasize
-                        );
+                        ret = Interop.Advapi32
+                            .RegQueryValueEx(_hkey, name, null, ref type, blob, ref datasize);
                         if (blob.Length > 0 && blob[^1] == (char)0)
                         {
                             data = new string(blob, 0, blob.Length - 1);
@@ -398,14 +371,8 @@ namespace Internal.Win32
                         }
                         char[] blob = new char[datasize / 2];
 
-                        ret = Interop.Advapi32.RegQueryValueEx(
-                            _hkey,
-                            name,
-                            null,
-                            ref type,
-                            blob,
-                            ref datasize
-                        );
+                        ret = Interop.Advapi32
+                            .RegQueryValueEx(_hkey, name, null, ref type, blob, ref datasize);
 
                         if (blob.Length > 0 && blob[^1] == (char)0)
                         {
@@ -438,14 +405,8 @@ namespace Internal.Win32
                         }
                         char[] blob = new char[datasize / 2];
 
-                        ret = Interop.Advapi32.RegQueryValueEx(
-                            _hkey,
-                            name,
-                            null,
-                            ref type,
-                            blob,
-                            ref datasize
-                        );
+                        ret = Interop.Advapi32
+                            .RegQueryValueEx(_hkey, name, null, ref type, blob, ref datasize);
 
                         // make sure the string is null terminated before processing the data
                         if (blob.Length > 0 && blob[^1] != (char)0)
@@ -529,14 +490,15 @@ namespace Internal.Win32
             if (name != null && name.Length > MaxValueLength)
                 throw new ArgumentException(SR.Arg_RegValStrLenBug, nameof(name));
 
-            int ret = Interop.Advapi32.RegSetValueEx(
-                _hkey,
-                name,
-                0,
-                Interop.Advapi32.RegistryValues.REG_SZ,
-                value,
-                checked(value.Length * 2 + 2)
-            );
+            int ret = Interop.Advapi32
+                .RegSetValueEx(
+                    _hkey,
+                    name,
+                    0,
+                    Interop.Advapi32.RegistryValues.REG_SZ,
+                    value,
+                    checked(value.Length * 2 + 2)
+                );
 
             if (ret != 0)
             {

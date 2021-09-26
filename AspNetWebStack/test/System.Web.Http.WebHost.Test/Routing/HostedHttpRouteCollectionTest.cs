@@ -546,11 +546,12 @@ namespace System.Web.Http.WebHost.Routing
                 new HostedHttpRouteCollection(new RouteCollection())
             );
             config.Routes.IgnoreRoute("Bar", "api/{*pathInfo}");
-            config.Routes.IgnoreRoute(
-                "Constraints",
-                "constraint/values/{id}",
-                constraints: new { constraint = new CustomIgnoreRouteConstraint() }
-            );
+            config.Routes
+                .IgnoreRoute(
+                    "Constraints",
+                    "constraint/values/{id}",
+                    constraints: new { constraint = new CustomIgnoreRouteConstraint() }
+                );
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{action}");
             config.MapHttpAttributeRoutes();
 
@@ -614,13 +615,12 @@ namespace System.Web.Http.WebHost.Routing
 
             if (appPathModifierReturnValue == string.Empty)
             {
-                mockContext.Setup(c => c.Response.ApplyAppPathModifier(It.IsAny<string>()))
-                    .Returns(
-                        (string s) =>
-                        {
-                            return s;
-                        }
-                    );
+                mockContext.Setup(c => c.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns(
+                    (string s) =>
+                    {
+                        return s;
+                    }
+                );
             }
             else
             {

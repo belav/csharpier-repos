@@ -266,12 +266,14 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            string.Format(
-                                "RunContinueWithPreCancelTests_State: > FAILED.  {0}.",
-                                message
+                        string
+                            .Format(
+                                string
+                                    .Format(
+                                        "RunContinueWithPreCancelTests_State: > FAILED.  {0}.",
+                                        message
+                                    )
                             )
-                        )
                     );
                 }
             };
@@ -366,9 +368,10 @@ namespace System.Threading.Tasks.Tests
                 c2.Wait();
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithPreCancelTests_State:  Expected c2.Wait to throw AE/TCE"
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithPreCancelTests_State:  Expected c2.Wait to throw AE/TCE"
+                        )
                 );
             }
             catch (Exception ex)
@@ -391,9 +394,10 @@ namespace System.Threading.Tasks.Tests
                 c4.Wait();
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithPreCancelTests_State:  Expected c4.Wait to throw AE/TCE"
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithPreCancelTests_State:  Expected c4.Wait to throw AE/TCE"
+                        )
                 );
             }
             catch (Exception ex)
@@ -426,11 +430,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithPreCancelTests_State: > FAILED.  doneCount[{0}] should be 1, is {1}",
-                            i,
-                            doneCount[i]
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithPreCancelTests_State: > FAILED.  doneCount[{0}] should be 1, is {1}",
+                                i,
+                                doneCount[i]
+                            )
                     );
                 }
             }
@@ -464,33 +469,31 @@ namespace System.Threading.Tasks.Tests
                 stateParam
             );
             Task<int> t4 = t3.ContinueWith(
-                    delegate(Task<int> t, Object obj)
-                    {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 10;
-                            }
-                        );
-                    },
-                    stateParam
-                )
-                .Unwrap();
+                delegate(Task<int> t, Object obj)
+                {
+                    return Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            return 10;
+                        }
+                    );
+                },
+                stateParam
+            ).Unwrap();
             Task<string> t5 = t4.ContinueWith(
-                    delegate(Task<int> t, Object obj)
-                    {
-                        return Task<string>.Factory.StartNew(
-                            delegate
-                            {
-                                for (int i = 0; i < 400; i++)
-                                    ;
-                                return "worked";
-                            }
-                        );
-                    },
-                    stateParam
-                )
-                .Unwrap();
+                delegate(Task<int> t, Object obj)
+                {
+                    return Task<string>.Factory.StartNew(
+                        delegate
+                        {
+                            for (int i = 0; i < 400; i++)
+                                ;
+                            return "worked";
+                        }
+                    );
+                },
+                stateParam
+            ).Unwrap();
 
             try
             {
@@ -499,50 +502,55 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationChainingTest_State:    > FAILED! t5.Result should be \"worked\", is {0}",
-                            t5.Result
-                        )
+                        string
+                            .Format(
+                                "RunContinuationChainingTest_State:    > FAILED! t5.Result should be \"worked\", is {0}",
+                                t5.Result
+                            )
                     );
                 }
                 if (t4.Result != 10)
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationChainingTest_State:    > FAILED! t4.Result should be 10, is {0}",
-                            t4.Result
-                        )
+                        string
+                            .Format(
+                                "RunContinuationChainingTest_State:    > FAILED! t4.Result should be 10, is {0}",
+                                t4.Result
+                            )
                     );
                 }
                 if (t3.Result != 5)
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationChainingTest_State:    > FAILED! t3.Result should be 5, is {0}",
-                            t3.Result
-                        )
+                        string
+                            .Format(
+                                "RunContinuationChainingTest_State:    > FAILED! t3.Result should be 5, is {0}",
+                                t3.Result
+                            )
                     );
                 }
                 if (y != 1)
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationChainingTest_State:    > FAILED! y should be 1, is {0}",
-                            y
-                        )
+                        string
+                            .Format(
+                                "RunContinuationChainingTest_State:    > FAILED! y should be 1, is {0}",
+                                y
+                            )
                     );
                 }
                 if (x != 1)
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinuationChainingTest_State:    > FAILED! x should be 1, is {0}",
-                            x
-                        )
+                        string
+                            .Format(
+                                "RunContinuationChainingTest_State:    > FAILED! x should be 1, is {0}",
+                                x
+                            )
                     );
                 }
             }
@@ -550,10 +558,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinuationChainingTest_State:    > FAILED! Exception = {0}",
-                        e
-                    )
+                    string
+                        .Format(
+                            "RunContinuationChainingTest_State:    > FAILED! Exception = {0}",
+                            e
+                        )
                 );
             }
         }
@@ -574,9 +583,10 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithOnDisposedTaskTest_State:    > FAILED!  should NOT have seen an exception."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithOnDisposedTaskTest_State:    > FAILED!  should NOT have seen an exception."
+                        )
                 );
             }
         }
@@ -645,27 +655,30 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest_State    > FAILED.  Continuation task w/NotOnCanceled should have been canceled when antecedent was canceled."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest_State    > FAILED.  Continuation task w/NotOnCanceled should have been canceled when antecedent was canceled."
+                        )
                 );
             }
             if (c1c.Status != TaskStatus.RanToCompletion)
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest_State    > FAILED.  Continuation task w/ canceled antecedent should have run to completion."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest_State    > FAILED.  Continuation task w/ canceled antecedent should have run to completion."
+                        )
                 );
             }
             if (c2b.Status != TaskStatus.Canceled)
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest_State    > FAILED.  Continuation task w/NotOnRanToCompletion should have been canceled when antecedent completed."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest_State    > FAILED.  Continuation task w/NotOnRanToCompletion should have been canceled when antecedent completed."
+                        )
                 );
             }
             c2c.Wait();
@@ -673,9 +686,10 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest_State    > FAILED.  Continuation task w/ completed antecedent should have run to completion."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest_State    > FAILED.  Continuation task w/ completed antecedent should have run to completion."
+                        )
                 );
             }
         }
@@ -695,9 +709,10 @@ namespace System.Threading.Tasks.Tests
                 );
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest_State    > FAILED.  Should have seen exception from illegal continuation options."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest_State    > FAILED.  Should have seen exception from illegal continuation options."
+                        )
                 );
             }
             catch { }
@@ -712,9 +727,10 @@ namespace System.Threading.Tasks.Tests
                 );
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest_State    > FAILED.  Should have seen exception when combining LongRunning and ExecuteSynchronously"
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest_State    > FAILED.  Should have seen exception when combining LongRunning and ExecuteSynchronously"
+                        )
                 );
             }
             catch { }
@@ -730,9 +746,10 @@ namespace System.Threading.Tasks.Tests
                 );
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunContinueWithParamsTest_State    > FAILED.  Should have seen exception from illegal NotOnAny continuation options."
-                    )
+                    string
+                        .Format(
+                            "RunContinueWithParamsTest_State    > FAILED.  Should have seen exception from illegal NotOnAny continuation options."
+                        )
                 );
             }
             catch (Exception) { }
@@ -1046,11 +1063,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue(),
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue(),
+                                cancel
+                            )
                     );
                 }
             }
@@ -1096,11 +1114,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue(),
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue(),
+                                cancel
+                            )
                     );
                 }
             }
@@ -1158,11 +1177,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue(),
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue(),
+                                cancel
+                            )
                     );
                 }
             }
@@ -1215,11 +1235,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue(),
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue(),
+                                cancel
+                            )
                     );
                 }
             }
@@ -1268,11 +1289,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue,
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue,
+                                cancel
+                            )
                     );
                 }
             }
@@ -1326,11 +1348,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue(),
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue(),
+                                cancel
+                            )
                     );
                 }
             }
@@ -1355,12 +1378,13 @@ namespace System.Threading.Tasks.Tests
                 exception = ((AggregateException)exception).InnerException;
                 Assert.True(
                     false,
-                    string.Format(
-                        message
-                            + " (threw "
-                            + exception.GetType().Name
-                            + " instead of TaskCanceledException)"
-                    )
+                    string
+                        .Format(
+                            message
+                                + " (threw "
+                                + exception.GetType().Name
+                                + " instead of TaskCanceledException)"
+                        )
                 );
             }
         }

@@ -15,21 +15,17 @@ namespace ServerComparison.TestSites
         public static void Main(string[] args)
         {
             var builder = new HostBuilder().ConfigureHostConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddCommandLine(args)
-                            .AddEnvironmentVariables(prefix: "DOTNET_");
-                    }
-                )
-                .ConfigureLogging(
-                    (_, factory) =>
-                    {
-                        factory.AddConsole();
-                        factory.AddFilter<ConsoleLoggerProvider>(
-                            level => level >= LogLevel.Warning
-                        );
-                    }
-                );
+                configBuilder =>
+                {
+                    configBuilder.AddCommandLine(args).AddEnvironmentVariables(prefix: "DOTNET_");
+                }
+            ).ConfigureLogging(
+                (_, factory) =>
+                {
+                    factory.AddConsole();
+                    factory.AddFilter<ConsoleLoggerProvider>(level => level >= LogLevel.Warning);
+                }
+            );
             using (var host = builder.Build())
             {
                 var config = host.Services.GetRequiredService<IConfiguration>();

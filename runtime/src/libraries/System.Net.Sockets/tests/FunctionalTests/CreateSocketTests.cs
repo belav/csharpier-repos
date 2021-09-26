@@ -160,135 +160,131 @@ namespace System.Net.Sockets.Tests
             // Run the test in another process so as to not have trouble with other tests
             // launching child processes that might impact inheritance.
             RemoteExecutor.Invoke(
-                    (validateClientString, acceptApiString) =>
-                    {
-                        bool validateClient = bool.Parse(validateClientString);
-                        int acceptApi = int.Parse(acceptApiString);
+                (validateClientString, acceptApiString) =>
+                {
+                    bool validateClient = bool.Parse(validateClientString);
+                    int acceptApi = int.Parse(acceptApiString);
 
-                        // Create a listening server.
+                    // Create a listening server.
+                    using (
+                        var listener = new Socket(
+                            AddressFamily.InterNetwork,
+                            SocketType.Stream,
+                            ProtocolType.Tcp
+                        )
+                    )
+                    {
+                        listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
+                        listener.Listen();
+                        EndPoint ep = listener.LocalEndPoint;
+
+                        // Create a client and connect to that listener.
                         using (
-                            var listener = new Socket(
+                            var client = new Socket(
                                 AddressFamily.InterNetwork,
                                 SocketType.Stream,
                                 ProtocolType.Tcp
                             )
                         )
                         {
-                            listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
-                            listener.Listen();
-                            EndPoint ep = listener.LocalEndPoint;
+                            client.Connect(ep);
 
-                            // Create a client and connect to that listener.
+                            // Accept the connection using one of multiple accept mechanisms.
+                            Socket server =
+                                acceptApi == 0
+                                    ? listener.Accept()
+                                    : acceptApi == 1
+                                        ? listener.AcceptAsync().GetAwaiter().GetResult()
+                                        : acceptApi == 2
+                                            ? Task.Factory
+                                              .FromAsync(
+                                                  listener.BeginAccept,
+                                                  listener.EndAccept,
+                                                  null
+                                              )
+                                              .GetAwaiter()
+                                              .GetResult()
+                                            : throw new Exception(
+                                                  $"Unexpected {nameof(acceptApi)}: {acceptApi}"
+                                              );
+
+                            // Get streams for the client and server, and create a pipe that we'll use
+                            // to communicate with a child process.
+                            using (var serverStream = new NetworkStream(server, ownsSocket: true))
+                            using (var clientStream = new NetworkStream(client, ownsSocket: true))
                             using (
-                                var client = new Socket(
-                                    AddressFamily.InterNetwork,
-                                    SocketType.Stream,
-                                    ProtocolType.Tcp
+                                var serverPipe = new AnonymousPipeServerStream(
+                                    PipeDirection.Out,
+                                    HandleInheritability.Inheritable
                                 )
                             )
                             {
-                                client.Connect(ep);
-
-                                // Accept the connection using one of multiple accept mechanisms.
-                                Socket server =
-                                    acceptApi == 0
-                                        ? listener.Accept()
-                                        : acceptApi == 1
-                                            ? listener.AcceptAsync().GetAwaiter().GetResult()
-                                            : acceptApi == 2
-                                                ? Task.Factory.FromAsync(
-                                                          listener.BeginAccept,
-                                                          listener.EndAccept,
-                                                          null
-                                                      )
-                                                      .GetAwaiter()
-                                                      .GetResult()
-                                                : throw new Exception(
-                                                      $"Unexpected {nameof(acceptApi)}: {acceptApi}"
-                                                  );
-
-                                // Get streams for the client and server, and create a pipe that we'll use
-                                // to communicate with a child process.
+                                // Create a child process that blocks waiting to receive a signal on the anonymous pipe.
+                                // The whole purpose of the child is to test whether handles are inherited, so we
+                                // keep the child process alive until we're done validating that handles close as expected.
                                 using (
-                                    var serverStream = new NetworkStream(server, ownsSocket: true)
-                                )
-                                using (
-                                    var clientStream = new NetworkStream(client, ownsSocket: true)
-                                )
-                                using (
-                                    var serverPipe = new AnonymousPipeServerStream(
-                                        PipeDirection.Out,
-                                        HandleInheritability.Inheritable
+                                    RemoteExecutor.Invoke(
+                                        clientPipeHandle =>
+                                        {
+                                            using (
+                                                var clientPipe = new AnonymousPipeClientStream(
+                                                    PipeDirection.In,
+                                                    clientPipeHandle
+                                                )
+                                            )
+                                            {
+                                                Assert.Equal(42, clientPipe.ReadByte());
+                                            }
+                                        },
+                                        serverPipe.GetClientHandleAsString()
                                     )
                                 )
                                 {
-                                    // Create a child process that blocks waiting to receive a signal on the anonymous pipe.
-                                    // The whole purpose of the child is to test whether handles are inherited, so we
-                                    // keep the child process alive until we're done validating that handles close as expected.
+                                    if (validateClient) // Validate that the child isn't keeping alive the "new Socket" for the client
+                                    {
+                                        // Send data from the server to client, then validate the client gets EOF when the server closes.
+                                        serverStream.WriteByte(84);
+                                        Assert.Equal(84, clientStream.ReadByte());
+                                        serverStream.Close();
+                                        Assert.Equal(-1, clientStream.ReadByte());
+                                    }
+                                    else // Validate that the child isn't keeping alive the "listener.Accept" for the server
+                                    {
+                                        // Send data from the client to server, then validate the server gets EOF when the client closes.
+                                        clientStream.WriteByte(84);
+                                        Assert.Equal(84, serverStream.ReadByte());
+                                        clientStream.Close();
+                                        Assert.Equal(-1, serverStream.ReadByte());
+                                    }
+
+                                    // And validate that we after closing the listening socket, we're not able to connect.
+                                    listener.Dispose();
                                     using (
-                                        RemoteExecutor.Invoke(
-                                            clientPipeHandle =>
-                                            {
-                                                using (
-                                                    var clientPipe = new AnonymousPipeClientStream(
-                                                        PipeDirection.In,
-                                                        clientPipeHandle
-                                                    )
-                                                )
-                                                {
-                                                    Assert.Equal(42, clientPipe.ReadByte());
-                                                }
-                                            },
-                                            serverPipe.GetClientHandleAsString()
+                                        var tmpClient = new Socket(
+                                            AddressFamily.InterNetwork,
+                                            SocketType.Stream,
+                                            ProtocolType.Tcp
                                         )
                                     )
                                     {
-                                        if (validateClient) // Validate that the child isn't keeping alive the "new Socket" for the client
-                                        {
-                                            // Send data from the server to client, then validate the client gets EOF when the server closes.
-                                            serverStream.WriteByte(84);
-                                            Assert.Equal(84, clientStream.ReadByte());
-                                            serverStream.Close();
-                                            Assert.Equal(-1, clientStream.ReadByte());
-                                        }
-                                        else // Validate that the child isn't keeping alive the "listener.Accept" for the server
-                                        {
-                                            // Send data from the client to server, then validate the server gets EOF when the client closes.
-                                            clientStream.WriteByte(84);
-                                            Assert.Equal(84, serverStream.ReadByte());
-                                            clientStream.Close();
-                                            Assert.Equal(-1, serverStream.ReadByte());
-                                        }
+                                        bool connected = tmpClient.TryConnect(
+                                            ep,
+                                            ConnectionTimeoutMs
+                                        );
 
-                                        // And validate that we after closing the listening socket, we're not able to connect.
-                                        listener.Dispose();
-                                        using (
-                                            var tmpClient = new Socket(
-                                                AddressFamily.InterNetwork,
-                                                SocketType.Stream,
-                                                ProtocolType.Tcp
-                                            )
-                                        )
-                                        {
-                                            bool connected = tmpClient.TryConnect(
-                                                ep,
-                                                ConnectionTimeoutMs
-                                            );
+                                        // Let the child process terminate.
+                                        serverPipe.WriteByte(42);
 
-                                            // Let the child process terminate.
-                                            serverPipe.WriteByte(42);
-
-                                            Assert.False(connected);
-                                        }
+                                        Assert.False(connected);
                                     }
                                 }
                             }
                         }
-                    },
-                    validateClientOuter.ToString(),
-                    acceptApiOuter.ToString()
-                )
-                .Dispose();
+                    }
+                },
+                validateClientOuter.ToString(),
+                acceptApiOuter.ToString()
+            ).Dispose();
         }
 
         [Theory]

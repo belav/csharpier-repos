@@ -214,7 +214,8 @@ Now {updatedSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}"
                 private readonly PooledDictionary<Symbol, int> _symbolToSlot = PooledDictionary<
                     Symbol,
                     int
-                >.GetInstance();
+                >
+                    .GetInstance();
                 private int _currentWalkerSlot = -1;
 
                 internal SnapshotManager ToManagerAndFree()

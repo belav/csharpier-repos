@@ -61,7 +61,8 @@ namespace ILCompiler
             _compositeRootPath = compositeRootPath;
 
             // R2R field layout needs compilation group information
-            ((ReadyToRunCompilerContext)context).SetCompilationGroup(group);
+            ((ReadyToRunCompilerContext)context)
+                .SetCompilationGroup(group);
         }
 
         public override CompilationBuilder UseBackendOptions(IEnumerable<string> options)

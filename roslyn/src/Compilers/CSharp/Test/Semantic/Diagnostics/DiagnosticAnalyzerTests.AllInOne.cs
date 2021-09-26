@@ -90,13 +90,12 @@ public class C
         public void DiagnosticAnalyzerExpressionBodiedProperty()
         {
             var comp = CreateCompilationWithMscorlib45(
-                    @"
+                @"
 public class C
 {
     public int P => 10;
 }"
-                )
-                .VerifyAnalyzerDiagnostics(new[] { new CSharpTrackingDiagnosticAnalyzer() });
+            ).VerifyAnalyzerDiagnostics(new[] { new CSharpTrackingDiagnosticAnalyzer() });
         }
 
         #endregion
@@ -110,9 +109,10 @@ public class C
                 new[] { new TestAdditionalText() }.ToImmutableArray<AdditionalText>()
             );
 
-            ThrowingDiagnosticAnalyzer<SyntaxKind>.VerifyAnalyzerEngineIsSafeAgainstExceptions(
-                analyzer => compilation.GetAnalyzerDiagnostics(new[] { analyzer }, options)
-            );
+            ThrowingDiagnosticAnalyzer<SyntaxKind>
+                .VerifyAnalyzerEngineIsSafeAgainstExceptions(
+                    analyzer => compilation.GetAnalyzerDiagnostics(new[] { analyzer }, options)
+                );
         }
 
         [Fact]
@@ -120,10 +120,8 @@ public class C
         {
             var text = new StringText(string.Empty, encodingOpt: null);
             AnalyzerOptions options = new AnalyzerOptions(
-                new[]
-                {
-                    new TestAdditionalText("myfilepath", text)
-                }.ToImmutableArray<AdditionalText>()
+                new[] { new TestAdditionalText("myfilepath", text) }
+                    .ToImmutableArray<AdditionalText>()
             );
 
             var compilation = CreateCompilationWithMscorlib45(TestResource.AllInOneCSharpCode);

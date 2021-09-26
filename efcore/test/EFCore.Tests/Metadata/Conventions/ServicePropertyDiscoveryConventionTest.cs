@@ -157,15 +157,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Does_not_find_service_property_configured_as_property()
         {
-            var entityType = new Model().AddEntityType(
-                typeof(BlogOneService),
-                ConfigurationSource.Explicit
-            );
-            entityType!.Builder.Property(
-                typeof(ILazyLoader),
-                nameof(BlogOneService.Loader),
-                ConfigurationSource.Explicit
-            )!.HasConversion(typeof(string), ConfigurationSource.Explicit);
+            var entityType = new Model()
+                .AddEntityType(typeof(BlogOneService), ConfigurationSource.Explicit);
+            entityType!.Builder
+                .Property(
+                    typeof(ILazyLoader),
+                    nameof(BlogOneService.Loader),
+                    ConfigurationSource.Explicit
+                )!
+                .HasConversion(typeof(string), ConfigurationSource.Explicit);
 
             RunConvention(entityType);
 
@@ -181,11 +181,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 typeof(BlogOneService),
                 ConfigurationSource.Explicit
             );
-            entityType!.Builder.HasRelationship(
-                model.AddEntityType(typeof(LazyLoader), ConfigurationSource.Explicit)!,
-                nameof(BlogOneService.Loader),
-                ConfigurationSource.Explicit
-            );
+            entityType!.Builder
+                .HasRelationship(
+                    model.AddEntityType(typeof(LazyLoader), ConfigurationSource.Explicit)!,
+                    nameof(BlogOneService.Loader),
+                    ConfigurationSource.Explicit
+                );
 
             RunConvention(entityType);
 
@@ -198,10 +199,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityType = RunConvention<BlogDuplicateService>();
 
-            entityType.Builder.Ignore(
-                nameof(BlogDuplicateService.ContextTwo),
-                ConfigurationSource.Convention
-            );
+            entityType.Builder
+                .Ignore(nameof(BlogDuplicateService.ContextTwo), ConfigurationSource.Convention);
 
             Assert.NotNull(entityType.FindServiceProperty(nameof(BlogDuplicateService.ContextOne)));
             Assert.Null(entityType.FindServiceProperty(nameof(BlogDuplicateService.ContextTwo)));
@@ -239,7 +238,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance.CreateContextServices()
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private class BlogOneService : Blog
@@ -305,27 +305,34 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     b =>
                     {
                         // Because private properties on un-mapped base types are not found by convention
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("Context")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("Context2")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("EntityType")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("EntityType2")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader2")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("LazyLoader")!
-                        );
+                        b.Metadata
+                            .AddServiceProperty(
+                                typeof(PrivateUnmappedBase).GetAnyProperty("Context")!
+                            );
+                        b.Metadata
+                            .AddServiceProperty(
+                                typeof(PrivateUnmappedBase).GetAnyProperty("Context2")!
+                            );
+                        b.Metadata
+                            .AddServiceProperty(
+                                typeof(PrivateUnmappedBase).GetAnyProperty("EntityType")!
+                            );
+                        b.Metadata
+                            .AddServiceProperty(
+                                typeof(PrivateUnmappedBase).GetAnyProperty("EntityType2")!
+                            );
+                        b.Metadata
+                            .AddServiceProperty(
+                                typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader")!
+                            );
+                        b.Metadata
+                            .AddServiceProperty(
+                                typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader2")!
+                            );
+                        b.Metadata
+                            .AddServiceProperty(
+                                typeof(PrivateUnmappedBase).GetAnyProperty("LazyLoader")!
+                            );
                     }
                 );
             }

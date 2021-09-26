@@ -262,7 +262,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var myService = new MyService();
             var htmlHelper = Mock.Of<IHtmlHelper<object>>();
 
-            var serviceProvider = new ServiceCollection().AddSingleton(myService)
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton(myService)
                 .AddSingleton(htmlHelper)
                 .BuildServiceProvider();
 

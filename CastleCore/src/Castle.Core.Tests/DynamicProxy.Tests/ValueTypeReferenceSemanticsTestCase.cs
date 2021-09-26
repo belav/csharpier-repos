@@ -27,9 +27,8 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Can_proxy_method_having_valuetyped_parameter_without_in_modifier()
         {
-            var proxy = this.generator.CreateInterfaceProxyWithoutTarget<IWithoutInModifier>(
-                new DoNothingInterceptor()
-            );
+            var proxy = this.generator
+                .CreateInterfaceProxyWithoutTarget<IWithoutInModifier>(new DoNothingInterceptor());
             var readOnlyStruct = new ReadOnlyStruct();
             proxy.Method(readOnlyStruct);
         }
@@ -37,9 +36,8 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Can_proxy_method_having_valuetyped_parameter_with_in_modifier()
         {
-            var proxy = this.generator.CreateInterfaceProxyWithoutTarget<IWithInModifier>(
-                new DoNothingInterceptor()
-            );
+            var proxy = this.generator
+                .CreateInterfaceProxyWithoutTarget<IWithInModifier>(new DoNothingInterceptor());
             var readOnlyStruct = new ReadOnlyStruct();
             proxy.Method(in readOnlyStruct);
         }
@@ -73,9 +71,10 @@ namespace Castle.DynamicProxy.Tests
         )]
         public void Can_proxy_method_in_generic_type_having_valuetyped_parameter_with_in_modifier()
         {
-            var proxy = this.generator.CreateInterfaceProxyWithoutTarget<
-                IGenericTypeWithInModifier<bool>
-            >(new DoNothingInterceptor());
+            var proxy = this.generator
+                .CreateInterfaceProxyWithoutTarget<IGenericTypeWithInModifier<bool>>(
+                    new DoNothingInterceptor()
+                );
             var readOnlyStruct = new ReadOnlyStruct();
             proxy.Method(in readOnlyStruct);
         }
@@ -87,8 +86,8 @@ namespace Castle.DynamicProxy.Tests
         )]
         public void Can_proxy_generic_method_in_nongeneric_type_having_valuetyped_parameter_with_in_modifier()
         {
-            var proxy =
-                this.generator.CreateInterfaceProxyWithoutTarget<IGenericMethodWithInModifier>(
+            var proxy = this.generator
+                .CreateInterfaceProxyWithoutTarget<IGenericMethodWithInModifier>(
                     new DoNothingInterceptor()
                 );
             var readOnlyStruct = new ReadOnlyStruct();
@@ -102,9 +101,10 @@ namespace Castle.DynamicProxy.Tests
         )]
         public void Can_proxy_generic_method_in_generic_type_having_valuetyped_parameter_with_in_modifier()
         {
-            var proxy = this.generator.CreateInterfaceProxyWithoutTarget<
-                IGenericTypeAndMethodWithInModifier<bool>
-            >(new DoNothingInterceptor());
+            var proxy = this.generator
+                .CreateInterfaceProxyWithoutTarget<IGenericTypeAndMethodWithInModifier<bool>>(
+                    new DoNothingInterceptor()
+                );
             var readOnlyStruct = new ReadOnlyStruct();
             proxy.Method<int>(in readOnlyStruct);
         }

@@ -200,18 +200,16 @@ namespace System.ComponentModel.Composition.Registration.Tests
             ctx.ForType<SpecificMembershipServiceImpl>()
                 .Export<IMembershipService>((c) => c.AsContractName("membershipService"));
             ctx.ForType<HttpRequestValidator>().Export();
-            ctx.ForType<ManyConstructorsController>()
-                .SelectConstructor(
-                    null,
-                    (pi, import) =>
+            ctx.ForType<ManyConstructorsController>().SelectConstructor(
+                null,
+                (pi, import) =>
+                {
+                    if (typeof(IMembershipService).IsAssignableFrom(pi.ParameterType))
                     {
-                        if (typeof(IMembershipService).IsAssignableFrom(pi.ParameterType))
-                        {
-                            import.AsContractName("membershipService");
-                        }
+                        import.AsContractName("membershipService");
                     }
-                )
-                .Export();
+                }
+            ).Export();
 
             var catalog = new TypeCatalog(
                 new[]

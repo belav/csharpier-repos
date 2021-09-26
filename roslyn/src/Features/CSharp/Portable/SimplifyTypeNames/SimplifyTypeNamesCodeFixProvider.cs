@@ -46,10 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyTypeNames
                     return string.Format(CSharpFeaturesResources.Simplify_name_0, nodeText);
 
                 case IDEDiagnosticIds.SimplifyMemberAccessDiagnosticId:
-                    return string.Format(
-                        CSharpFeaturesResources.Simplify_member_access_0,
-                        nodeText
-                    );
+                    return string
+                        .Format(CSharpFeaturesResources.Simplify_member_access_0, nodeText);
 
                 case IDEDiagnosticIds.RemoveQualificationDiagnosticId:
                     return CSharpFeaturesResources.Remove_this_qualification;

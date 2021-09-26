@@ -15,9 +15,8 @@ namespace Microsoft.EntityFrameworkCore
     // ReSharper disable once InconsistentNaming
     public static partial class EF
     {
-        internal static readonly MethodInfo PropertyMethod = typeof(EF).GetRequiredDeclaredMethod(
-            nameof(Property)
-        );
+        internal static readonly MethodInfo PropertyMethod = typeof(EF)
+            .GetRequiredDeclaredMethod(nameof(Property));
 
         /// <summary>
         ///     <para>

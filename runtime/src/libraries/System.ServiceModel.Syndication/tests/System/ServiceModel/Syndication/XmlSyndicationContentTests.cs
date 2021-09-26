@@ -20,7 +20,8 @@ namespace System.ServiceModel.Syndication.Tests
                 new XElement(
                     "ParentObject",
                     new XElement("ExtensionObject", new XElement("Value", 10))
-                ).CreateReader()
+                )
+                    .CreateReader()
             );
             Assert.Empty(content.AttributeExtensions);
             Assert.Equal("text/xml", content.Type);
@@ -57,7 +58,8 @@ namespace System.ServiceModel.Syndication.Tests
                         new XAttribute("ignored", "value"),
                         new XElement("Value", 10)
                     )
-                ).CreateReader()
+                )
+                    .CreateReader()
             );
             Assert.Equal(2, content.AttributeExtensions.Count);
             Assert.Equal("value1", content.AttributeExtensions[new XmlQualifiedName("name1")]);
@@ -148,9 +150,8 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal(string.IsNullOrEmpty(type) ? "text/xml" : type, content.Type);
             Assert.Equal(
                 10,
-                content.Extension.GetObject<ExtensionObject>(
-                    new XmlSerializer(typeof(ExtensionObject))
-                ).Value
+                content.Extension
+                    .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>().Value);
             Assert.Equal(
@@ -192,9 +193,8 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal(string.IsNullOrEmpty(type) ? "text/xml" : type, content.Type);
             Assert.Equal(
                 10,
-                content.Extension.GetObject<ExtensionObject>(
-                    new XmlSerializer(typeof(ExtensionObject))
-                ).Value
+                content.Extension
+                    .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>().Value);
             Assert.Equal(
@@ -292,7 +292,8 @@ namespace System.ServiceModel.Syndication.Tests
                 new XElement(
                     "ParentObject",
                     new XElement("ExtensionObject", new XElement("Value", 10))
-                ).CreateReader()
+                )
+                    .CreateReader()
             );
             CompareHelper.AssertEqualWriteOutput(
                 @"<OuterElementName type=""text/xml"" xmlns=""OuterElementNamespace"">
@@ -378,7 +379,8 @@ namespace System.ServiceModel.Syndication.Tests
                 new XElement(
                     "ParentObject",
                     new XElement("ExtensionObject", new XElement("Value", 10))
-                ).CreateReader()
+                )
+                    .CreateReader()
             );
             XmlReader reader = content.GetReaderAtContent();
             CompareHelper.AssertEqualLongString(

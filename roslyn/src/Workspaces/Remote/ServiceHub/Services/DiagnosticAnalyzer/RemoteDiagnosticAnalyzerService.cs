@@ -76,22 +76,23 @@ namespace Microsoft.CodeAnalysis.Remote
                         );
 
                         var result = await diagnosticComputer.GetDiagnosticsAsync(
-                                arguments.AnalyzerIds,
-                                reportSuppressedDiagnostics: arguments.ReportSuppressedDiagnostics,
-                                logPerformanceInfo: arguments.LogPerformanceInfo,
-                                getTelemetryInfo: arguments.GetTelemetryInfo,
-                                cancellationToken
-                            )
+                            arguments.AnalyzerIds,
+                            reportSuppressedDiagnostics: arguments.ReportSuppressedDiagnostics,
+                            logPerformanceInfo: arguments.LogPerformanceInfo,
+                            getTelemetryInfo: arguments.GetTelemetryInfo,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         // save log for debugging
-                        var diagnosticCount = result.Diagnostics.Sum(
-                            entry =>
-                                entry.diagnosticMap.Syntax.Length
-                                + entry.diagnosticMap.Semantic.Length
-                                + entry.diagnosticMap.NonLocal.Length
-                                + entry.diagnosticMap.Other.Length
-                        );
+                        var diagnosticCount = result.Diagnostics
+                            .Sum(
+                                entry =>
+                                    entry.diagnosticMap.Syntax.Length
+                                    + entry.diagnosticMap.Semantic.Length
+                                    + entry.diagnosticMap.NonLocal.Length
+                                    + entry.diagnosticMap.Other.Length
+                            );
 
                         Log(
                             TraceEventType.Information,
@@ -123,8 +124,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        var service = GetWorkspace()
-                            .Services.GetService<IPerformanceTrackerService>();
+                        var service = GetWorkspace().Services
+                            .GetService<IPerformanceTrackerService>();
                         if (service == null)
                         {
                             return default;

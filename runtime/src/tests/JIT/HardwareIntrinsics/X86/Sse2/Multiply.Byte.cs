@@ -199,7 +199,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_UnsafeRead()
         {
-            var result = typeof(Sse2).GetMethod(
+            var result = typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.Multiply),
                     new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) }
                 )
@@ -218,7 +219,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_Load()
         {
-            var result = typeof(Sse2).GetMethod(
+            var result = typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.Multiply),
                     new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) }
                 )
@@ -237,7 +239,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_LoadAligned()
         {
-            var result = typeof(Sse2).GetMethod(
+            var result = typeof(Sse2)
+                .GetMethod(
                     nameof(Sse2.Multiply),
                     new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>) }
                 )

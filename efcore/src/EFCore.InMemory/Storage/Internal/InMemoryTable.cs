@@ -270,10 +270,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                     (comparer != null && !comparer.Equals(rowValue, originalValue))
                     || (
                         comparer == null
-                        && !StructuralComparisons.StructuralEqualityComparer.Equals(
-                            rowValue,
-                            originalValue
-                        )
+                        && !StructuralComparisons.StructuralEqualityComparer
+                            .Equals(rowValue, originalValue)
                     )
                 )
                 {
@@ -469,15 +467,19 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                         ),
                         entry.BuildOriginalValuesString(concurrencyConflicts.Keys),
                         "{"
-                            + string.Join(
-                                ", ",
-                                concurrencyConflicts.Select(
-                                    c =>
-                                        c.Key.Name
-                                        + ": "
-                                        + Convert.ToString(c.Value, CultureInfo.InvariantCulture)
+                            + string
+                                .Join(
+                                    ", ",
+                                    concurrencyConflicts.Select(
+                                        c =>
+                                            c.Key.Name
+                                            + ": "
+                                            + Convert.ToString(
+                                                c.Value,
+                                                CultureInfo.InvariantCulture
+                                            )
+                                    )
                                 )
-                            )
                             + "}"
                     ),
                     new[] { entry }

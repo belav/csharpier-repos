@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public override ImmutableArray<Symbol> GetMembers(string name)
         {
-            return (from sym in _children where sym.Name == name select sym).ToArray()
+            return (from sym in _children where sym.Name == name select sym)
+                .ToArray()
                 .AsImmutableOrNull();
         }
 
@@ -96,11 +97,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers()
         {
-            return (
-                from sym in _children
-                where sym is NamedTypeSymbol
-                select (NamedTypeSymbol)sym
-            ).ToArray().AsImmutableOrNull();
+            return (from sym in _children where sym is NamedTypeSymbol select (NamedTypeSymbol)sym)
+                .ToArray()
+                .AsImmutableOrNull();
         }
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name, int arity)
@@ -112,7 +111,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     && sym.Name == name
                     && ((NamedTypeSymbol)sym).Arity == arity
                 select (NamedTypeSymbol)sym
-            ).ToArray().AsImmutableOrNull();
+            )
+                .ToArray()
+                .AsImmutableOrNull();
         }
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name)
@@ -121,7 +122,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 from sym in _children
                 where sym is NamedTypeSymbol && sym.Name == name
                 select (NamedTypeSymbol)sym
-            ).ToArray().AsImmutableOrNull();
+            )
+                .ToArray()
+                .AsImmutableOrNull();
         }
 
         public override TypeKind TypeKind

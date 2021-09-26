@@ -21,10 +21,8 @@ namespace System.Runtime.InteropServices.Tests
             yield return new NonGenericStruct();
             yield return Int32Enum.Value1;
 
-            MethodInfo method = typeof(GetTypedObjectForIUnknownTests).GetMethod(
-                nameof(NonGenericMethod),
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            MethodInfo method = typeof(GetTypedObjectForIUnknownTests)
+                .GetMethod(nameof(NonGenericMethod), BindingFlags.NonPublic | BindingFlags.Static);
             Delegate d = method.CreateDelegate(typeof(NonGenericDelegate));
             yield return d;
         }

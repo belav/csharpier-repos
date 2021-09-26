@@ -145,9 +145,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     out address,
                     async httpContext =>
                     {
-                        var input = await new StreamReader(
-                            httpContext.Request.Body
-                        ).ReadToEndAsync();
+                        var input = await new StreamReader(httpContext.Request.Body)
+                            .ReadToEndAsync();
                         Assert.Equal("Hello World", input);
                         httpContext.Response.ContentLength = 11;
                         await httpContext.Response.WriteAsync("Hello World");

@@ -410,15 +410,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         public abstract class NavigationBase
         {
-            public static readonly PropertyInfo IdProperty = typeof(NavigationBase).GetProperty(
-                nameof(Id)
-            );
+            public static readonly PropertyInfo IdProperty = typeof(NavigationBase)
+                .GetProperty(nameof(Id));
 
-            public static readonly PropertyInfo OneToManyDependentsProperty =
-                typeof(NavigationBase).GetProperty(nameof(OneToManyDependents));
+            public static readonly PropertyInfo OneToManyDependentsProperty = typeof(NavigationBase)
+                .GetProperty(nameof(OneToManyDependents));
 
-            public static readonly PropertyInfo OneToManyPrincipalProperty =
-                typeof(NavigationBase).GetProperty(nameof(OneToManyPrincipal));
+            public static readonly PropertyInfo OneToManyPrincipalProperty = typeof(NavigationBase)
+                .GetProperty(nameof(OneToManyPrincipal));
 
             public int Id { get; set; }
             public IEnumerable<OneToManyDependent> OneToManyDependents { get; set; }
@@ -436,8 +435,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         public class OneToManyDependent : NavigationBase
         {
-            public static readonly PropertyInfo DeceptionProperty =
-                typeof(OneToManyDependent).GetProperty(nameof(Deception));
+            public static readonly PropertyInfo DeceptionProperty = typeof(OneToManyDependent)
+                .GetProperty(nameof(Deception));
 
             public OneToManyPrincipal Deception { get; set; }
         }
@@ -453,11 +452,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             foreignKey1.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty);
 
             var newFkProp = foreignKey1.DeclaringEntityType.AddProperty("FkProp", typeof(int));
-            var foreignKey2 = foreignKey1.DeclaringEntityType.AddForeignKey(
-                new[] { newFkProp },
-                foreignKey1.PrincipalEntityType.FindPrimaryKey(),
-                foreignKey1.PrincipalEntityType
-            );
+            var foreignKey2 = foreignKey1.DeclaringEntityType
+                .AddForeignKey(
+                    new[] { newFkProp },
+                    foreignKey1.PrincipalEntityType.FindPrimaryKey(),
+                    foreignKey1.PrincipalEntityType
+                );
 
             Assert.Equal(
                 CoreStrings.NavigationForWrongForeignKey(
@@ -479,11 +479,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             foreignKey1.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty);
 
             var newFkProp = foreignKey1.DeclaringEntityType.AddProperty("FkProp", typeof(int));
-            var foreignKey2 = foreignKey1.DeclaringEntityType.AddForeignKey(
-                new[] { newFkProp },
-                foreignKey1.PrincipalEntityType.FindPrimaryKey(),
-                foreignKey1.PrincipalEntityType
-            );
+            var foreignKey2 = foreignKey1.DeclaringEntityType
+                .AddForeignKey(
+                    new[] { newFkProp },
+                    foreignKey1.PrincipalEntityType.FindPrimaryKey(),
+                    foreignKey1.PrincipalEntityType
+                );
 
             Assert.Equal(
                 CoreStrings.NavigationForWrongForeignKey(
@@ -553,13 +554,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private class SelfRef
         {
             public static readonly PropertyInfo IdProperty = typeof(SelfRef).GetProperty("Id");
-            public static readonly PropertyInfo SelfRefIdProperty = typeof(SelfRef).GetProperty(
-                nameof(SelfRefId)
-            );
-            public static readonly PropertyInfo SelfRefPrincipalProperty =
-                typeof(SelfRef).GetProperty(nameof(SelfRefPrincipal));
-            public static readonly PropertyInfo SelfRefDependentProperty =
-                typeof(SelfRef).GetProperty(nameof(SelfRefDependent));
+            public static readonly PropertyInfo SelfRefIdProperty = typeof(SelfRef)
+                .GetProperty(nameof(SelfRefId));
+            public static readonly PropertyInfo SelfRefPrincipalProperty = typeof(SelfRef)
+                .GetProperty(nameof(SelfRefPrincipal));
+            public static readonly PropertyInfo SelfRefDependentProperty = typeof(SelfRef)
+                .GetProperty(nameof(SelfRefDependent));
 
             public int Id { get; set; }
             public SelfRef SelfRefPrincipal { get; set; }

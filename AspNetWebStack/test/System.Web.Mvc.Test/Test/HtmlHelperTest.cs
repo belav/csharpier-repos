@@ -357,13 +357,13 @@ namespace System.Web.Mvc.Test
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             engine.Setup(
-                    e =>
-                        e.FindPartialView(
-                            It.IsAny<ControllerContext>(),
-                            "partial-view",
-                            It.IsAny<bool>()
-                        )
-                )
+                e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+            )
                 .Returns(new ViewEngineResult(view.Object, engine.Object))
                 .Verifiable();
             view.Setup(v => v.Render(It.IsAny<ViewContext>(), writer))
@@ -399,13 +399,13 @@ namespace System.Web.Mvc.Test
             TestableHtmlHelper helper = TestableHtmlHelper.Create();
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             engine.Setup(
-                    e =>
-                        e.FindPartialView(
-                            It.IsAny<ControllerContext>(),
-                            "partial-view",
-                            It.IsAny<bool>()
-                        )
-                )
+                e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+            )
                 .Returns(new ViewEngineResult(new[] { "location1", "location2" }))
                 .Verifiable();
 
@@ -442,13 +442,13 @@ namespace System.Web.Mvc.Test
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             engine.Setup(
-                    e =>
-                        e.FindPartialView(
-                            It.IsAny<ControllerContext>(),
-                            "partial-view",
-                            It.IsAny<bool>()
-                        )
-                )
+                e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+            )
                 .Returns(new ViewEngineResult(view.Object, engine.Object))
                 .Verifiable();
             view.Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
@@ -490,13 +490,13 @@ namespace System.Web.Mvc.Test
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             engine.Setup(
-                    e =>
-                        e.FindPartialView(
-                            It.IsAny<ControllerContext>(),
-                            "partial-view",
-                            It.IsAny<bool>()
-                        )
-                )
+                e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+            )
                 .Returns(new ViewEngineResult(view.Object, engine.Object))
                 .Verifiable();
             view.Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
@@ -540,13 +540,13 @@ namespace System.Web.Mvc.Test
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             engine.Setup(
-                    e =>
-                        e.FindPartialView(
-                            It.IsAny<ControllerContext>(),
-                            "partial-view",
-                            It.IsAny<bool>()
-                        )
-                )
+                e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+            )
                 .Returns(new ViewEngineResult(view.Object, engine.Object))
                 .Verifiable();
             view.Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
@@ -592,13 +592,13 @@ namespace System.Web.Mvc.Test
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             engine.Setup(
-                    e =>
-                        e.FindPartialView(
-                            It.IsAny<ControllerContext>(),
-                            "partial-view",
-                            It.IsAny<bool>()
-                        )
-                )
+                e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+            )
                 .Returns(new ViewEngineResult(view.Object, engine.Object))
                 .Verifiable();
             view.Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
@@ -1409,13 +1409,14 @@ namespace System.Web.Mvc.Test
                 params IViewEngine[] engines
             )
             {
-                base.RenderPartialInternal(
-                    partialViewName,
-                    viewData,
-                    model,
-                    writer,
-                    new ViewEngineCollection(engines)
-                );
+                base
+                    .RenderPartialInternal(
+                        partialViewName,
+                        viewData,
+                        model,
+                        writer,
+                        new ViewEngineCollection(engines)
+                    );
             }
         }
 

@@ -81,11 +81,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 return false;
             }
 
-            return entityType.Builder.CanSetAnnotation(
-                CoreAnnotationNames.DiscriminatorValue,
-                value,
-                fromDataAnnotation
-            );
+            return entityType.Builder
+                .CanSetAnnotation(
+                    CoreAnnotationNames.DiscriminatorValue,
+                    value,
+                    fromDataAnnotation
+                );
         }
     }
 }

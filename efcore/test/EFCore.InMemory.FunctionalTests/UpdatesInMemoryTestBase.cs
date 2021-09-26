@@ -22,11 +22,12 @@ namespace Microsoft.EntityFrameworkCore
             Action<UpdatesContext> nestedTestOperation2 = null
         )
         {
-            base.ExecuteWithStrategyInTransaction(
-                testOperation,
-                nestedTestOperation1,
-                nestedTestOperation2
-            );
+            base
+                .ExecuteWithStrategyInTransaction(
+                    testOperation,
+                    nestedTestOperation1,
+                    nestedTestOperation2
+                );
             Fixture.Reseed();
         }
 
@@ -36,11 +37,12 @@ namespace Microsoft.EntityFrameworkCore
             Func<UpdatesContext, Task> nestedTestOperation2 = null
         )
         {
-            await base.ExecuteWithStrategyInTransactionAsync(
-                testOperation,
-                nestedTestOperation1,
-                nestedTestOperation2
-            );
+            await base
+                .ExecuteWithStrategyInTransactionAsync(
+                    testOperation,
+                    nestedTestOperation1,
+                    nestedTestOperation2
+                );
             Fixture.Reseed();
         }
     }

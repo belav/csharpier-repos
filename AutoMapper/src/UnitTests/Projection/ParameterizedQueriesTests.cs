@@ -135,9 +135,9 @@
             _sources = new[] { new Source() }.AsQueryable();
 
             _dests = _sources.ProjectTo<Dest>(
-                    Configuration,
-                    new Dictionary<string, object> { { "value", 10 } }
-                )
+                Configuration,
+                new Dictionary<string, object> { { "value", 10 } }
+            )
                 .ToArray();
         }
 
@@ -151,9 +151,9 @@
         public void Should_not_cache_parameter_value()
         {
             var newDests = _sources.ProjectTo<Dest>(
-                    Configuration,
-                    new Dictionary<string, object> { { "value", 15 } }
-                )
+                Configuration,
+                new Dictionary<string, object> { { "value", 15 } }
+            )
                 .ToArray();
 
             newDests[0].Value.ShouldBe(20);
@@ -201,7 +201,8 @@
                         Id = 3,
                         Name = "Jim Schmoe"
                     },
-                }.AsQueryable();
+                }
+                    .AsQueryable();
             }
             public IQueryable<User> Users { get; }
         }
@@ -228,7 +229,8 @@
         {
             var db = new DB();
 
-            var user = db.Users.ProjectTo<UserViewModel>(Configuration, new { db })
+            var user = db.Users
+                .ProjectTo<UserViewModel>(Configuration, new { db })
                 .FirstOrDefault(a => a.Id == 2);
 
             user.position.ShouldBe(1);

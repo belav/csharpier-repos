@@ -28,14 +28,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     public S(int i) {}
 }";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (3,16): error CS0573: 'S': cannot have instance property or field initializers in structs
-                    //     public int I = 9;
-                    Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "I")
-                        .WithArguments("S")
-                        .WithLocation(3, 16)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (3,16): error CS0573: 'S': cannot have instance property or field initializers in structs
+                //     public int I = 9;
+                Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "I")
+                    .WithArguments("S")
+                    .WithLocation(3, 16)
+            );
         }
 
         [Fact]
@@ -260,7 +259,8 @@ class C1
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("C1")
+            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("C1")
                 .Single();
             FieldSymbol ein = (FieldSymbol)c1.GetMembers("in").Single();
             Assert.Equal("in", ein.Name);
@@ -282,9 +282,8 @@ class C
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol type1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers(
-                    "C"
-                )
+            NamedTypeSymbol type1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("C")
                 .Single();
             FieldSymbol mem = (FieldSymbol)type1.GetMembers("x").Single();
             Assert.Equal("x", mem.Name);
@@ -385,9 +384,9 @@ class A
 
             // CONSIDER: Roslyn's cascading errors are much uglier than Dev10's.
             CreateCompilationWithMscorlib46(
-                    source,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
-                )
+                source,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+            )
                 .VerifyDiagnostics(
                     // (4,11): error CS1031: Type expected
                     //     const delegate void D();
@@ -467,16 +466,15 @@ class A
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,5): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a using directive or an assembly reference?)
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown")
-                        .WithArguments("Unknown"),
-                    // (4,13): warning CS0169: The field 'A.a' is never used
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "a").WithArguments("A.a"),
-                    // (4,16): warning CS0169: The field 'A.b' is never used
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "b").WithArguments("A.b")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,5): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a using directive or an assembly reference?)
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown")
+                    .WithArguments("Unknown"),
+                // (4,13): warning CS0169: The field 'A.a' is never used
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "a").WithArguments("A.a"),
+                // (4,16): warning CS0169: The field 'A.b' is never used
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "b").WithArguments("A.b")
+            );
         }
 
         /// <summary>

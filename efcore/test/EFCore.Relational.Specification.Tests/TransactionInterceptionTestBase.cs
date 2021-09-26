@@ -90,9 +90,8 @@ namespace Microsoft.EntityFrameworkCore
                 using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
                 using (
                     var _ = async
-                        ? await context.Database.BeginTransactionAsync(
-                              IsolationLevel.ReadUncommitted
-                          )
+                        ? await context.Database
+                              .BeginTransactionAsync(IsolationLevel.ReadUncommitted)
                         : context.Database.BeginTransaction(IsolationLevel.ReadUncommitted)
                 )
                 {
@@ -134,9 +133,10 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.TransactionStarting(connection, eventData, result);
 
-                return InterceptionResult<DbTransaction>.SuppressWithResult(
-                    new FakeDbTransaction(connection, eventData.IsolationLevel)
-                );
+                return InterceptionResult<DbTransaction>
+                    .SuppressWithResult(
+                        new FakeDbTransaction(connection, eventData.IsolationLevel)
+                    );
             }
 
             public override async ValueTask<
@@ -148,16 +148,13 @@ namespace Microsoft.EntityFrameworkCore
                 CancellationToken cancellationToken = default
             )
             {
-                await base.TransactionStartingAsync(
-                    connection,
-                    eventData,
-                    result,
-                    cancellationToken
-                );
+                await base
+                    .TransactionStartingAsync(connection, eventData, result, cancellationToken);
 
-                return InterceptionResult<DbTransaction>.SuppressWithResult(
-                    new FakeDbTransaction(connection, eventData.IsolationLevel)
-                );
+                return InterceptionResult<DbTransaction>
+                    .SuppressWithResult(
+                        new FakeDbTransaction(connection, eventData.IsolationLevel)
+                    );
             }
         }
 
@@ -201,12 +198,8 @@ namespace Microsoft.EntityFrameworkCore
                 CancellationToken cancellationToken = default
             )
             {
-                result = await base.TransactionStartedAsync(
-                    connection,
-                    eventData,
-                    result,
-                    cancellationToken
-                );
+                result = await base
+                    .TransactionStartedAsync(connection, eventData, result, cancellationToken);
 
                 return new WrappedDbTransaction(result);
             }
@@ -229,12 +222,8 @@ namespace Microsoft.EntityFrameworkCore
                 CancellationToken cancellationToken = default
             )
             {
-                result = await base.TransactionUsedAsync(
-                    connection,
-                    eventData,
-                    result,
-                    cancellationToken
-                );
+                result = await base
+                    .TransactionUsedAsync(connection, eventData, result, cancellationToken);
 
                 return new WrappedDbTransaction(result);
             }
@@ -531,12 +520,8 @@ namespace Microsoft.EntityFrameworkCore
                 CancellationToken cancellationToken = default
             )
             {
-                await base.TransactionCommittingAsync(
-                    transaction,
-                    eventData,
-                    result,
-                    cancellationToken
-                );
+                await base
+                    .TransactionCommittingAsync(transaction, eventData, result, cancellationToken);
 
                 return InterceptionResult.Suppress();
             }
@@ -559,12 +544,8 @@ namespace Microsoft.EntityFrameworkCore
                 CancellationToken cancellationToken = default
             )
             {
-                await base.TransactionRollingBackAsync(
-                    transaction,
-                    eventData,
-                    result,
-                    cancellationToken
-                );
+                await base
+                    .TransactionRollingBackAsync(transaction, eventData, result, cancellationToken);
 
                 return InterceptionResult.Suppress();
             }

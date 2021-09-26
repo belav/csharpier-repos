@@ -36,7 +36,9 @@ namespace System.Net.Http
                 }
 
                 // Write chunk length in hex followed by \r\n
-                connection.WriteHexInt32Async(buffer.Length, async: false).GetAwaiter().GetResult();
+                connection.WriteHexInt32Async(buffer.Length, async: false)
+                    .GetAwaiter()
+                    .GetResult();
                 connection.WriteTwoBytesAsync((byte)'\r', (byte)'\n', async: false)
                     .GetAwaiter()
                     .GetResult();

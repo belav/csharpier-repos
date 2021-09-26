@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 rule.Attribute("Action").Value = newAction;
             }
 
-            var allMatchingRules = ruleSet.Root.Descendants("Rule")
+            var allMatchingRules = ruleSet.Root
+                .Descendants("Rule")
                 .Where(r => r.Attribute("Id").Value.Equals(ruleId))
                 .ToList();
 
@@ -101,7 +102,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             string analyzerID
         )
         {
-            var rulesElement = ruleSetDocument.Root.Elements("Rules")
+            var rulesElement = ruleSetDocument.Root
+                .Elements("Rules")
                 .FirstOrDefault(r => r.Attribute("AnalyzerId").Value.Equals(analyzerID));
 
             if (rulesElement == null)

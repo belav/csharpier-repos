@@ -247,7 +247,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 return;
             }
 
-            var callerDeclarationNode = await callerReferences[0].GetSyntaxAsync(cancellationToken)
+            var callerDeclarationNode = await callerReferences[0]
+                .GetSyntaxAsync(cancellationToken)
                 .ConfigureAwait(false);
             var invocationOperation =
                 semanticModel.GetOperation(calleeInvocationNode, cancellationToken)
@@ -368,25 +369,25 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     .FirstOrDefault(node => node is TStatementSyntax) as TStatementSyntax;
 
             var methodParametersInfo = await GetMethodParametersInfoAsync(
-                    document,
-                    calleeInvocationNode,
-                    calleeMethodNode,
-                    statementContainsInvocation,
-                    rawInlineExpression,
-                    invocationOperation,
-                    cancellationToken
-                )
+                document,
+                calleeInvocationNode,
+                calleeMethodNode,
+                statementContainsInvocation,
+                rawInlineExpression,
+                invocationOperation,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var inlineContext = await GetInlineMethodContextAsync(
-                    document,
-                    calleeMethodNode,
-                    calleeInvocationNode,
-                    calleeMethodSymbol,
-                    rawInlineExpression,
-                    methodParametersInfo,
-                    cancellationToken
-                )
+                document,
+                calleeMethodNode,
+                calleeInvocationNode,
+                calleeMethodSymbol,
+                rawInlineExpression,
+                methodParametersInfo,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var solution = document.Project.Solution;
@@ -397,32 +398,32 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 if (calleeDocumentId != null)
                 {
                     var calleeDocumentEditor = await solutionEditor.GetDocumentEditorAsync(
-                            calleeDocumentId,
-                            cancellationToken
-                        )
+                        calleeDocumentId,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     calleeDocumentEditor.RemoveNode(calleeMethodNode);
                 }
             }
 
             var newCallerMethodNode = await GetChangedCallerAsync(
-                    document,
-                    calleeInvocationNode,
-                    calleeMethodSymbol,
-                    callerSymbol,
-                    callerNode,
-                    statementContainsInvocation,
-                    rawInlineExpression,
-                    methodParametersInfo,
-                    inlineContext,
-                    cancellationToken
-                )
+                document,
+                calleeInvocationNode,
+                calleeMethodSymbol,
+                callerSymbol,
+                callerNode,
+                statementContainsInvocation,
+                rawInlineExpression,
+                methodParametersInfo,
+                inlineContext,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var callerDocumentEditor = await solutionEditor.GetDocumentEditorAsync(
-                    document.Id,
-                    cancellationToken
-                )
+                document.Id,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             callerDocumentEditor.ReplaceNode(callerNode, newCallerMethodNode);
             return solutionEditor.GetChangedSolution();
@@ -635,8 +636,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 if (CanBeReplacedByThrowExpression(calleeInvocationNode))
                 {
                     var throwExpression = (TExpressionSyntax)syntaxGenerator.ThrowExpression(
-                            inlineMethodContext.InlineExpression
-                        )
+                        inlineMethodContext.InlineExpression
+                    )
                         .WithTriviaFrom(calleeInvocationNode);
                     return (
                         calleeInvocationNode,

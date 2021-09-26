@@ -182,14 +182,8 @@ namespace System.Security.Cryptography.Dsa.Tests
                 data = bigger;
             }
 
-            return ((DSA)key.Key).VerifyData(
-                data,
-                offset,
-                count,
-                signature,
-                hashAlgorithm,
-                signatureFormat
-            );
+            return ((DSA)key.Key)
+                .VerifyData(data, offset, count, signature, hashAlgorithm, signatureFormat);
         }
 
         [Fact]
@@ -349,12 +343,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             ReadOnlySpan<byte> readOnlyData = data;
             ReadOnlySpan<byte> readOnlySignature = signature;
 
-            return ((DSA)key.Key).VerifyData(
-                readOnlyData,
-                readOnlySignature,
-                hashAlgorithm,
-                signatureFormat
-            );
+            return ((DSA)key.Key)
+                .VerifyData(readOnlyData, readOnlySignature, hashAlgorithm, signatureFormat);
         }
 
         private static int GetExpectedSize(int fieldSizeInBits)

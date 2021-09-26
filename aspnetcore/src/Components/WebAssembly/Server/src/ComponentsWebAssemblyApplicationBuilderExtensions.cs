@@ -38,8 +38,8 @@ namespace Microsoft.AspNetCore.Builder
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            var webHostEnvironment =
-                builder.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
+            var webHostEnvironment = builder.ApplicationServices
+                .GetRequiredService<IWebHostEnvironment>();
 
             var options = CreateStaticFilesOptions(webHostEnvironment.WebRootFileProvider);
 
@@ -53,10 +53,8 @@ namespace Microsoft.AspNetCore.Builder
                     subBuilder.Use(
                         async (context, next) =>
                         {
-                            context.Response.Headers.Append(
-                                "Blazor-Environment",
-                                webHostEnvironment.EnvironmentName
-                            );
+                            context.Response.Headers
+                                .Append("Blazor-Environment", webHostEnvironment.EnvironmentName);
 
                             // DOTNET_MODIFIABLE_ASSEMBLIES is used by the runtime to initialize hot-reload specific environment variables and is configured
                             // by the launching process (dotnet-watch / Visual Studio).
@@ -70,12 +68,13 @@ namespace Microsoft.AspNetCore.Builder
                                     is not null
                             )
                             {
-                                context.Response.Headers.Append(
-                                    "DOTNET-MODIFIABLE-ASSEMBLIES",
-                                    Environment.GetEnvironmentVariable(
-                                        "DOTNET_MODIFIABLE_ASSEMBLIES"
-                                    )
-                                );
+                                context.Response.Headers
+                                    .Append(
+                                        "DOTNET-MODIFIABLE-ASSEMBLIES",
+                                        Environment.GetEnvironmentVariable(
+                                            "DOTNET_MODIFIABLE_ASSEMBLIES"
+                                        )
+                                    );
                             }
 
                             await next();

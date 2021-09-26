@@ -262,14 +262,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CancellationToken cancellationToken
         ) =>
             GetPushDiagnosticsAsync(
-                    workspace,
-                    projectId,
-                    documentId,
-                    id,
-                    includeSuppressedDiagnostics,
-                    InternalDiagnosticsOptions.NormalDiagnosticMode,
-                    cancellationToken
-                )
+                workspace,
+                projectId,
+                documentId,
+                id,
+                includeSuppressedDiagnostics,
+                InternalDiagnosticsOptions.NormalDiagnosticMode,
+                cancellationToken
+            )
                 .AsTask()
                 .WaitAndGetResult_CanCallOnBackground(cancellationToken);
 
@@ -374,13 +374,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 if (source.SupportGetDiagnostics)
                 {
                     var diagnostics = await source.GetDiagnosticsAsync(
-                            workspace,
-                            projectId,
-                            documentId,
-                            id,
-                            includeSuppressedDiagnostics,
-                            cancellationToken
-                        )
+                        workspace,
+                        projectId,
+                        documentId,
+                        id,
+                        includeSuppressedDiagnostics,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (diagnostics.Length > 0)
                         return diagnostics;
@@ -422,13 +422,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     result.AddRange(
                         await source.GetDiagnosticsAsync(
-                                workspace,
-                                projectId,
-                                documentId,
-                                id: null,
-                                includeSuppressedDiagnostics,
-                                cancellationToken
-                            )
+                            workspace,
+                            projectId,
+                            documentId,
+                            id: null,
+                            includeSuppressedDiagnostics,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     );
                 }

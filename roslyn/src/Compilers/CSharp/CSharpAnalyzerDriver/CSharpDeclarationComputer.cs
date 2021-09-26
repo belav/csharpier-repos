@@ -269,8 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     foreach (var decl in t.Declaration.Variables)
                     {
                         var codeBlocks = SpecializedCollections.SingletonEnumerable(
-                                decl.Initializer
-                            )
+                            decl.Initializer
+                        )
                             .Concat(attributes);
                         builder.Add(
                             GetDeclarationInfo(

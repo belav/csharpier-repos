@@ -979,9 +979,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncIteratorMethodBuilder.AwaitOnCompleted'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Runtime.CompilerServices.AsyncIteratorMethodBuilder",
                         "AwaitOnCompleted"
@@ -994,9 +994,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncIteratorMethodBuilder.AwaitUnsafeOnCompleted'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Runtime.CompilerServices.AsyncIteratorMethodBuilder",
                         "AwaitUnsafeOnCompleted"
@@ -1009,9 +1009,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncIteratorMethodBuilder.Complete'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Runtime.CompilerServices.AsyncIteratorMethodBuilder",
                         "Complete"
@@ -1024,9 +1024,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncIteratorMethodBuilder.Create'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Runtime.CompilerServices.AsyncIteratorMethodBuilder",
                         "Create"
@@ -1039,9 +1039,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncIteratorMethodBuilder.MoveNext'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Runtime.CompilerServices.AsyncIteratorMethodBuilder",
                         "MoveNext"
@@ -1058,9 +1058,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.GetResult'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "GetResult"
@@ -1073,9 +1073,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.GetStatus'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "GetStatus"
@@ -1088,9 +1088,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.get_Version'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "get_Version"
@@ -1103,9 +1103,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.OnCompleted'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "OnCompleted"
@@ -1118,9 +1118,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.Reset'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "Reset"
@@ -1133,9 +1133,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.SetException'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "SetException"
@@ -1148,9 +1148,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.SetResult'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "SetResult"
@@ -1163,9 +1163,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.GetResult'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "GetResult"
@@ -1174,9 +1174,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.GetStatus'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "GetStatus"
@@ -1185,9 +1185,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.get_Version'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "get_Version"
@@ -1196,9 +1196,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.OnCompleted'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "OnCompleted"
@@ -1207,9 +1207,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.Reset'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "Reset"
@@ -1218,9 +1218,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.SetException'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "SetException"
@@ -1229,9 +1229,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.SetResult'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "SetResult"
@@ -1248,9 +1248,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource`1.GetResult'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource`1", "GetResult")
                     .WithLocation(5, 64)
             );
@@ -1260,9 +1260,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource`1.GetStatus'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource`1", "GetStatus")
                     .WithLocation(5, 64)
             );
@@ -1272,9 +1272,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource`1.OnCompleted'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.IValueTaskSource`1",
                         "OnCompleted"
@@ -1287,33 +1287,33 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.ValueTask`1..ctor'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.ValueTask`1", ".ctor")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource`1.GetResult'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource`1", "GetResult")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource`1.GetStatus'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource`1", "GetStatus")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource`1.OnCompleted'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.IValueTaskSource`1",
                         "OnCompleted"
@@ -1330,9 +1330,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource.GetResult'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource", "GetResult")
                     .WithLocation(5, 64)
             );
@@ -1342,9 +1342,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource.GetStatus'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource", "GetStatus")
                     .WithLocation(5, 64)
             );
@@ -1354,9 +1354,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource.OnCompleted'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource", "OnCompleted")
                     .WithLocation(5, 64)
             );
@@ -1366,33 +1366,33 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.ValueTask..ctor'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.ValueTask", ".ctor")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource.GetResult'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource", "GetResult")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource.GetStatus'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource", "GetStatus")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource.OnCompleted'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource", "OnCompleted")
                     .WithLocation(5, 64)
             );
@@ -1406,9 +1406,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncIteratorMethodBuilder.Create'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Runtime.CompilerServices.AsyncIteratorMethodBuilder",
                         "Create"
@@ -1425,9 +1425,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Runtime.CompilerServices.IAsyncStateMachine", "MoveNext")
                     .WithLocation(5, 64)
             );
@@ -1437,9 +1437,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Runtime.CompilerServices.IAsyncStateMachine",
                         "SetStateMachine"
@@ -1452,17 +1452,17 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Runtime.CompilerServices.IAsyncStateMachine", "MoveNext")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Runtime.CompilerServices.IAsyncStateMachine",
                         "SetStateMachine"
@@ -1480,9 +1480,9 @@ public class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Collections.Generic.IAsyncEnumerable`1.GetAsyncEnumerator'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Collections.Generic.IAsyncEnumerable`1",
                         "GetAsyncEnumerator"
@@ -1546,9 +1546,9 @@ class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.GetStatus'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "GetStatus"
@@ -1557,17 +1557,17 @@ class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource`1.GetStatus'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource`1", "GetStatus")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource.GetStatus'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource", "GetStatus")
                     .WithLocation(5, 64)
             );
@@ -1581,9 +1581,9 @@ class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.OnCompleted'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1",
                         "OnCompleted"
@@ -1592,9 +1592,9 @@ class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource`1.OnCompleted'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.Tasks.Sources.IValueTaskSource`1",
                         "OnCompleted"
@@ -1603,9 +1603,9 @@ class C
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.Sources.IValueTaskSource.OnCompleted'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.Sources.IValueTaskSource", "OnCompleted")
                     .WithLocation(5, 64)
             );
@@ -1658,9 +1658,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Collections.Generic.IAsyncEnumerator`1.MoveNextAsync'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Collections.Generic.IAsyncEnumerator`1", "MoveNextAsync")
                     .WithLocation(5, 64)
             );
@@ -1670,9 +1670,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Collections.Generic.IAsyncEnumerator`1.get_Current'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Collections.Generic.IAsyncEnumerator`1", "get_Current")
                     .WithLocation(5, 64)
             );
@@ -1696,9 +1696,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Collections.Generic.IAsyncEnumerable`1.GetAsyncEnumerator'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Collections.Generic.IAsyncEnumerable`1",
                         "GetAsyncEnumerator"
@@ -1707,17 +1707,17 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Collections.Generic.IAsyncEnumerator`1.MoveNextAsync'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Collections.Generic.IAsyncEnumerator`1", "MoveNextAsync")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Collections.Generic.IAsyncEnumerator`1.get_Current'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Collections.Generic.IAsyncEnumerator`1", "get_Current")
                     .WithLocation(5, 64)
             );
@@ -1731,9 +1731,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.IAsyncDisposable.DisposeAsync'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.IAsyncDisposable", "DisposeAsync")
                     .WithLocation(5, 64)
             );
@@ -1743,9 +1743,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.IAsyncDisposable.DisposeAsync'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.IAsyncDisposable", "DisposeAsync")
                     .WithLocation(5, 64)
             );
@@ -1759,9 +1759,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.ValueTask`1..ctor'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.ValueTask`1", ".ctor")
                     .WithLocation(5, 64)
             );
@@ -1771,9 +1771,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.ValueTask`1..ctor'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.ValueTask`1", ".ctor")
                     .WithLocation(5, 64)
             );
@@ -1783,25 +1783,25 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Collections.Generic.IAsyncEnumerator`1.MoveNextAsync'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Collections.Generic.IAsyncEnumerator`1", "MoveNextAsync")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.ValueTask`1..ctor'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.ValueTask`1", ".ctor")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.ValueTask`1..ctor'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.ValueTask`1", ".ctor")
                     .WithLocation(5, 64)
             );
@@ -1815,9 +1815,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.ValueTask..ctor'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.ValueTask", ".ctor")
                     .WithLocation(5, 64)
             );
@@ -1827,17 +1827,17 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.IAsyncDisposable.DisposeAsync'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.IAsyncDisposable", "DisposeAsync")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.Tasks.ValueTask..ctor'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.Tasks.ValueTask", ".ctor")
                     .WithLocation(5, 64)
             );
@@ -1852,9 +1852,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.CancellationToken.Equals'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.CancellationToken", "Equals")
                     .WithLocation(5, 64)
             );
@@ -1870,9 +1870,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Collections.Generic.IAsyncEnumerable`1.GetAsyncEnumerator'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Collections.Generic.IAsyncEnumerable`1",
                         "GetAsyncEnumerator"
@@ -1881,17 +1881,17 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.CancellationToken.Equals'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.CancellationToken", "Equals")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.CancellationTokenSource.CreateLinkedTokenSource'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.CancellationTokenSource",
                         "CreateLinkedTokenSource"
@@ -1900,9 +1900,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.CancellationTokenSource.Token'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.CancellationTokenSource", "Token")
                     .WithLocation(5, 64)
             );
@@ -1919,9 +1919,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.CancellationTokenSource.CreateLinkedTokenSource'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.CancellationTokenSource",
                         "CreateLinkedTokenSource"
@@ -1935,9 +1935,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.CancellationTokenSource.Token'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.CancellationTokenSource", "Token")
                     .WithLocation(5, 64)
             );
@@ -1948,9 +1948,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.CancellationTokenSource.Dispose'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.CancellationTokenSource", "Dispose")
                     .WithLocation(5, 64)
             );
@@ -1961,9 +1961,9 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.CancellationTokenSource.CreateLinkedTokenSource'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments(
                         "System.Threading.CancellationTokenSource",
                         "CreateLinkedTokenSource"
@@ -1972,17 +1972,17 @@ namespace System.Collections.Generic
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.CancellationTokenSource.Token'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.CancellationTokenSource", "Token")
                     .WithLocation(5, 64),
                 // (5,64): error CS0656: Missing compiler required member 'System.Threading.CancellationTokenSource.Dispose'
                 //     async System.Collections.Generic.IAsyncEnumerable<int> M() { await Task.CompletedTask; yield return 3; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.CompletedTask; yield return 3; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.CompletedTask; yield return 3; }"
+                )
                     .WithArguments("System.Threading.CancellationTokenSource", "Dispose")
                     .WithLocation(5, 64)
             );
@@ -2242,9 +2242,8 @@ class C
                         "System.Threading.Tasks.Sources.IValueTaskSource",
                         "System.Collections.Generic.IAsyncEnumerator<System.Int32>"
                     },
-                    type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys.Select(
-                        m => m.ToTestDisplayString()
-                    )
+                    type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys
+                        .Select(m => m.ToTestDisplayString())
                 );
             }
         }
@@ -2381,9 +2380,9 @@ class C
                 // (7,9): error CS4032: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task<IAsyncEnumerator<int>>'.
                 //         await System.Threading.Tasks.Task.CompletedTask;
                 Diagnostic(
-                        ErrorCode.ERR_BadAwaitWithoutAsyncMethod,
-                        "await System.Threading.Tasks.Task.CompletedTask"
-                    )
+                    ErrorCode.ERR_BadAwaitWithoutAsyncMethod,
+                    "await System.Threading.Tasks.Task.CompletedTask"
+                )
                     .WithArguments("System.Collections.Generic.IAsyncEnumerator<int>")
                     .WithLocation(7, 9)
             );
@@ -2857,9 +2856,8 @@ class C
                         "System.Collections.Generic.IAsyncEnumerable<System.Int32>",
                         "System.Collections.Generic.IAsyncEnumerator<System.Int32>"
                     },
-                    type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys.Select(
-                        m => m.ToTestDisplayString()
-                    )
+                    type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys
+                        .Select(m => m.ToTestDisplayString())
                 );
             }
         }
@@ -4757,13 +4755,14 @@ class C
         {
             var peReader = new PEReader(comp.EmitToArray());
             var metadataReader = peReader.GetMetadataReader();
-            var types = metadataReader.TypeDefinitions.Select(
-                t => metadataReader.GetString(metadataReader.GetTypeDefinition(t).Name)
-            );
-            var type = metadataReader.TypeDefinitions.Single(
-                t =>
-                    metadataReader.GetString(metadataReader.GetTypeDefinition(t).Name) == methodName
-            );
+            var types = metadataReader.TypeDefinitions
+                .Select(t => metadataReader.GetString(metadataReader.GetTypeDefinition(t).Name));
+            var type = metadataReader.TypeDefinitions
+                .Single(
+                    t =>
+                        metadataReader.GetString(metadataReader.GetTypeDefinition(t).Name)
+                        == methodName
+                );
             var fields = metadataReader.GetTypeDefinition(type)
                 .GetFields()
                 .Select(f => metadataReader.Dump(f));
@@ -8562,9 +8561,9 @@ class C
                 // (6,73): warning CS8424: The EnumeratorCancellationAttribute applied to parameter 'value' will have no effect. The attribute is only effective on a parameter of type CancellationToken in an async-enumerable method
                 //     static async System.Collections.Generic.IAsyncEnumerable<int> Iter([EnumeratorCancellation] int value)
                 Diagnostic(
-                        ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
-                        "EnumeratorCancellation"
-                    )
+                    ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
+                    "EnumeratorCancellation"
+                )
                     .WithArguments("value")
                     .WithLocation(6, 73)
             );
@@ -8603,9 +8602,9 @@ class C
                 // (12,77): warning CS8424: The EnumeratorCancellationAttribute applied to parameter 'value' will have no effect. The attribute is only effective on a parameter of type CancellationToken in an async-iterator method returning IAsyncEnumerable
                 //         static async System.Collections.Generic.IAsyncEnumerable<int> Iter([EnumeratorCancellation] int value) // 1
                 Diagnostic(
-                        ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
-                        "EnumeratorCancellation"
-                    )
+                    ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
+                    "EnumeratorCancellation"
+                )
                     .WithArguments("value")
                     .WithLocation(12, 77)
             );
@@ -8635,9 +8634,9 @@ class C
                 // (7,73): warning CS8424: The EnumeratorCancellationAttribute applied to parameter 'value' will have no effect. The attribute is only effective on a parameter of type CancellationToken in an async-iterator method returning IAsyncEnumerable
                 //     static async System.Collections.Generic.IAsyncEnumerator<int> Iter([EnumeratorCancellation] CancellationToken value)
                 Diagnostic(
-                        ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
-                        "EnumeratorCancellation"
-                    )
+                    ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
+                    "EnumeratorCancellation"
+                )
                     .WithArguments("value")
                     .WithLocation(7, 73)
             );
@@ -8664,9 +8663,9 @@ class C
                 // (6,62): warning CS8424: The EnumeratorCancellationAttribute applied to parameter 'token' will have no effect. The attribute is only effective on a parameter of type CancellationToken in an async-enumerable method
                 //     static System.Collections.Generic.IEnumerable<int> Iter([EnumeratorCancellation] CancellationToken token)
                 Diagnostic(
-                        ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
-                        "EnumeratorCancellation"
-                    )
+                    ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
+                    "EnumeratorCancellation"
+                )
                     .WithArguments("token")
                     .WithLocation(6, 62)
             );
@@ -8694,9 +8693,9 @@ class C
                 // (7,30): warning CS8424: The EnumeratorCancellationAttribute applied to parameter 'token' will have no effect. The attribute is only effective on a parameter of type CancellationToken in an async-enumerable method
                 //     static async Task Async([EnumeratorCancellation] CancellationToken token)
                 Diagnostic(
-                        ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
-                        "EnumeratorCancellation"
-                    )
+                    ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
+                    "EnumeratorCancellation"
+                )
                     .WithArguments("token")
                     .WithLocation(7, 30)
             );
@@ -8722,9 +8721,9 @@ class C
                 // (6,20): warning CS8424: The EnumeratorCancellationAttribute applied to parameter 'token' will have no effect. The attribute is only effective on a parameter of type CancellationToken in an async-enumerable method
                 //     static void M([EnumeratorCancellation] CancellationToken token)
                 Diagnostic(
-                        ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
-                        "EnumeratorCancellation"
-                    )
+                    ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
+                    "EnumeratorCancellation"
+                )
                     .WithArguments("token")
                     .WithLocation(6, 20)
             );
@@ -8748,9 +8747,9 @@ class C
                 // (6,15): warning CS8424: The EnumeratorCancellationAttribute applied to parameter 'key' will have no effect. The attribute is only effective on a parameter of type CancellationToken in an async-enumerable method
                 //     int this[[EnumeratorCancellation] CancellationToken key] => 0;
                 Diagnostic(
-                        ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
-                        "EnumeratorCancellation"
-                    )
+                    ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
+                    "EnumeratorCancellation"
+                )
                     .WithArguments("key")
                     .WithLocation(6, 15)
             );
@@ -8806,9 +8805,9 @@ class C
                 // (2,1): hidden CS8019: Unnecessary using directive.
                 // using System.Runtime.CompilerServices;
                 Diagnostic(
-                        ErrorCode.HDN_UnusedUsingDirective,
-                        "using System.Runtime.CompilerServices;"
-                    )
+                    ErrorCode.HDN_UnusedUsingDirective,
+                    "using System.Runtime.CompilerServices;"
+                )
                     .WithLocation(2, 1),
                 // (7,67): error CS8425: Async-iterator 'C.Iter(int, CancellationToken)' has one or more parameters of type 'CancellationToken' but none of them is decorated with the 'EnumeratorCancellation' attribute, so the cancellation token parameter from the generated 'IAsyncEnumerable<>.GetAsyncEnumerator' will be unconsumed
                 //     static async System.Collections.Generic.IAsyncEnumerable<int> Iter(int value, [EnumeratorCancellation] CancellationToken token1)
@@ -9045,25 +9044,25 @@ public partial class C2
                 // (7,74): warning CS8424: The EnumeratorCancellationAttribute applied to parameter 'token' will have no effect. The attribute is only effective on a parameter of type CancellationToken in an async-iterator method returning IAsyncEnumerable
                 //     public abstract System.Collections.Generic.IAsyncEnumerable<int> M2([EnumeratorCancellation] CancellationToken token); // 2
                 Diagnostic(
-                        ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
-                        "EnumeratorCancellation"
-                    )
+                    ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
+                    "EnumeratorCancellation"
+                )
                     .WithArguments("token")
                     .WithLocation(7, 74),
                 // (11,57): warning CS8424: The EnumeratorCancellationAttribute applied to parameter 'token' will have no effect. The attribute is only effective on a parameter of type CancellationToken in an async-iterator method returning IAsyncEnumerable
                 //     System.Collections.Generic.IAsyncEnumerable<int> M([EnumeratorCancellation] CancellationToken token); // 3
                 Diagnostic(
-                        ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
-                        "EnumeratorCancellation"
-                    )
+                    ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
+                    "EnumeratorCancellation"
+                )
                     .WithArguments("token")
                     .WithLocation(11, 57),
                 // (15,80): warning CS8424: The EnumeratorCancellationAttribute applied to parameter 'token' will have no effect. The attribute is only effective on a parameter of type CancellationToken in an async-iterator method returning IAsyncEnumerable
                 //     public delegate System.Collections.Generic.IAsyncEnumerable<int> Delegate([EnumeratorCancellation] CancellationToken token); // 4
                 Diagnostic(
-                        ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
-                        "EnumeratorCancellation"
-                    )
+                    ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
+                    "EnumeratorCancellation"
+                )
                     .WithArguments("token")
                     .WithLocation(15, 80),
                 // (16,62): error CS8794: Partial method 'C2.M(CancellationToken)' must have accessibility modifiers because it has a non-void return type.
@@ -9074,9 +9073,9 @@ public partial class C2
                 // (16,65): warning CS8424: The EnumeratorCancellationAttribute applied to parameter 'token' will have no effect. The attribute is only effective on a parameter of type CancellationToken in an async-iterator method returning IAsyncEnumerable
                 //     partial System.Collections.Generic.IAsyncEnumerable<int> M([EnumeratorCancellation] CancellationToken token); // 5
                 Diagnostic(
-                        ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
-                        "EnumeratorCancellation"
-                    )
+                    ErrorCode.WRN_UnconsumedEnumeratorCancellationAttributeUsage,
+                    "EnumeratorCancellation"
+                )
                     .WithArguments("token")
                     .WithLocation(16, 65),
                 // (17,68): error CS8794: Partial method 'C2.M2(CancellationToken)' must have accessibility modifiers because it has a non-void return type.

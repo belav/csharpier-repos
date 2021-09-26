@@ -226,9 +226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 Debug.Assert(AdaptedTypeParameterSymbol.IsDefinition);
-                return (
-                    (NamedTypeSymbol)AdaptedTypeParameterSymbol.ContainingSymbol
-                ).GetCciAdapter();
+                return ((NamedTypeSymbol)AdaptedTypeParameterSymbol.ContainingSymbol)
+                    .GetCciAdapter();
             }
         }
 
@@ -248,9 +247,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
 
                 var modifier = CSharpCustomModifier.CreateRequired(
-                    moduleBeingBuilt.Compilation.GetWellKnownType(
-                        WellKnownType.System_Runtime_InteropServices_UnmanagedType
-                    )
+                    moduleBeingBuilt.Compilation
+                        .GetWellKnownType(
+                            WellKnownType.System_Runtime_InteropServices_UnmanagedType
+                        )
                 );
 
                 // emit "(class [mscorlib]System.ValueType modreq([mscorlib]System.Runtime.InteropServices.UnmanagedType" pattern as "unmanaged"
@@ -363,9 +363,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 CheckDefinitionInvariant();
-                return (
-                    (NamedTypeSymbol)AdaptedTypeParameterSymbol.ContainingSymbol
-                ).GetCciAdapter();
+                return ((NamedTypeSymbol)AdaptedTypeParameterSymbol.ContainingSymbol)
+                    .GetCciAdapter();
             }
         }
     }

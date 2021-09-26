@@ -506,9 +506,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             {
                 Log.PostNotAllowedForWebSockets(_logger);
                 context.Response.StatusCode = StatusCodes.Status405MethodNotAllowed;
-                await context.Response.WriteAsync(
-                    "POST requests are not allowed for WebSocket connections."
-                );
+                await context.Response
+                    .WriteAsync("POST requests are not allowed for WebSocket connections.");
                 return;
             }
 
@@ -532,10 +531,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 {
                     try
                     {
-                        await context.Request.Body.CopyToAsync(
-                            connection.ApplicationStream,
-                            bufferSize
-                        );
+                        await context.Request.Body
+                            .CopyToAsync(connection.ApplicationStream, bufferSize);
                     }
                     catch (InvalidOperationException ex)
                     {
@@ -610,9 +607,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 Log.ReceivedDeleteRequestForUnsupportedTransport(_logger, connection.TransportType);
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 context.Response.ContentType = "text/plain";
-                await context.Response.WriteAsync(
-                    "Cannot terminate this connection using the DELETE endpoint."
-                );
+                await context.Response
+                    .WriteAsync("Cannot terminate this connection using the DELETE endpoint.");
                 return;
             }
 
@@ -642,9 +638,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 context.Response.ContentType = "text/plain";
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
                 Log.TransportNotSupported(_logger, transportType);
-                await context.Response.WriteAsync(
-                    $"{transportType} transport not supported by this end point type"
-                );
+                await context.Response
+                    .WriteAsync($"{transportType} transport not supported by this end point type");
                 return false;
             }
 

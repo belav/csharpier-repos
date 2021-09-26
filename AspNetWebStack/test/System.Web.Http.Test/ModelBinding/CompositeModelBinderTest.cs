@@ -49,10 +49,8 @@ namespace System.Web.Http.ModelBinding
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelName = "someName",
                 //ModelState = executionContext.Controller.ViewData.ModelState,
                 //PropertyFilter = _ => true,
@@ -104,10 +102,8 @@ namespace System.Web.Http.ModelBinding
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(List<int>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(List<int>)),
                 ModelName = "someName",
                 //ModelState = executionContext.Controller.ViewData.ModelState,
                 //PropertyFilter = _ => true,
@@ -167,10 +163,8 @@ namespace System.Web.Http.ModelBinding
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = false,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(List<int>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(List<int>)),
                 //ModelState = executionContext.Controller.ViewData.ModelState
             };
 
@@ -193,8 +187,8 @@ namespace System.Web.Http.ModelBinding
             );
             Mock<ModelBinderProvider> mockBinderProvider = new Mock<ModelBinderProvider>();
             mockBinderProvider.Setup(
-                    o => o.GetBinder(It.IsAny<HttpConfiguration>(), It.IsAny<Type>())
-                )
+                o => o.GetBinder(It.IsAny<HttpConfiguration>(), It.IsAny<Type>())
+            )
                 .Returns((IModelBinder)null)
                 .Verifiable();
             List<ModelBinderProvider> binderProviders = new List<ModelBinderProvider>()
@@ -211,10 +205,8 @@ namespace System.Web.Http.ModelBinding
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 //ModelState = executionContext.Controller.ViewData.ModelState
             };
 

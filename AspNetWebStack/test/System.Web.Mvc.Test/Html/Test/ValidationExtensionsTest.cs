@@ -46,12 +46,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider.Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
-                    )
+                    vp => vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
+                )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
 
@@ -163,12 +159,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider.Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
-                    )
+                    vp => vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
+                )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
 
@@ -537,12 +529,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider.Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
-                    )
+                    vp => vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
+                )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
 
@@ -607,12 +595,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider.Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
-                    )
+                    vp => vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
+                )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
 
@@ -666,12 +650,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider.Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
-                    )
+                    vp => vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
+                )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
 
@@ -736,12 +716,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider.Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
-                    )
+                    vp => vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
+                )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
 
@@ -796,9 +772,9 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.ValidationMessage(
-                    modelName: "name",
-                    htmlAttributes: new { attribute = text, }
-                )
+                modelName: "name",
+                htmlAttributes: new { attribute = text, }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -975,10 +951,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.ValidationMessage(
-                    modelName: "name",
-                    validationMessage: null,
-                    tag: text
-                )
+                modelName: "name",
+                validationMessage: null,
+                tag: text
+            )
                 .ToHtmlString();
 
             // Assert
@@ -1010,9 +986,9 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.ValidationMessage(
-                    modelName: "name",
-                    htmlAttributes: new { attribute = text, }
-                )
+                modelName: "name",
+                htmlAttributes: new { attribute = text, }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -1189,10 +1165,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.ValidationMessage(
-                    modelName: "name",
-                    validationMessage: null,
-                    tag: text
-                )
+                modelName: "name",
+                validationMessage: null,
+                tag: text
+            )
                 .ToHtmlString();
 
             // Assert
@@ -1475,12 +1451,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider.Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
-                    )
+                    vp => vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
+                )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
 
@@ -1546,12 +1518,8 @@ namespace System.Web.Mvc.Html.Test
                 Mock<ModelValidatorProvider> mockValidatorProvider =
                     new Mock<ModelValidatorProvider>();
                 mockValidatorProvider.Setup(
-                        vp =>
-                            vp.GetValidators(
-                                It.IsAny<ModelMetadata>(),
-                                It.IsAny<ControllerContext>()
-                            )
-                    )
+                    vp => vp.GetValidators(It.IsAny<ModelMetadata>(), It.IsAny<ControllerContext>())
+                )
                     .Returns(new[] { mockValidator.Object });
                 ModelValidatorProviders.Providers.Add(mockValidatorProvider.Object);
 
@@ -1609,10 +1577,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.ValidationMessageFor(
-                    m => name,
-                    validationMessage: null,
-                    htmlAttributes: new { attribute = text, }
-                )
+                m => name,
+                validationMessage: null,
+                htmlAttributes: new { attribute = text, }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -1798,10 +1766,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.ValidationMessageFor(
-                    m => name,
-                    validationMessage: null,
-                    htmlAttributes: new { attribute = text, }
-                )
+                m => name,
+                validationMessage: null,
+                htmlAttributes: new { attribute = text, }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -2481,10 +2449,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.ValidationSummary(
-                    excludePropertyErrors: true,
-                    message: null,
-                    htmlAttributes: new { attribute = text, }
-                )
+                excludePropertyErrors: true,
+                message: null,
+                htmlAttributes: new { attribute = text, }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -2635,9 +2603,8 @@ namespace System.Web.Mvc.Html.Test
             ModelState modelStateBar = new ModelState();
             ModelState modelStateBaz = new ModelState();
 
-            modelStateFoo.Errors.Add(
-                new ModelError(new InvalidOperationException("foo error from exception"))
-            );
+            modelStateFoo.Errors
+                .Add(new ModelError(new InvalidOperationException("foo error from exception")));
             modelStateFoo.Errors.Add(new ModelError("foo error <1>"));
             modelStateFoo.Errors.Add(new ModelError("foo error 2"));
             modelStateBar.Errors.Add(new ModelError("bar error <1>"));
@@ -2647,14 +2614,10 @@ namespace System.Web.Mvc.Html.Test
             viewData.ModelState["bar"] = modelStateBar;
             viewData.ModelState["baz"] = modelStateBaz;
 
-            viewData.ModelState.SetModelValue(
-                "quux",
-                new ValueProviderResult(null, "quuxValue", null)
-            );
-            viewData.ModelState.AddModelError(
-                "quux",
-                new InvalidOperationException("Some error text.")
-            );
+            viewData.ModelState
+                .SetModelValue("quux", new ValueProviderResult(null, "quuxValue", null));
+            viewData.ModelState
+                .AddModelError("quux", new InvalidOperationException("Some error text."));
             return viewData;
         }
 
@@ -2672,14 +2635,10 @@ namespace System.Web.Mvc.Html.Test
             viewData.ModelState["foo"] = modelStateFoo;
             viewData.ModelState["bar"] = modelStateBar;
             viewData.ModelState["baz"] = modelStateBaz;
-            viewData.ModelState.SetModelValue(
-                "quux",
-                new ValueProviderResult(null, "quuxValue", null)
-            );
-            viewData.ModelState.AddModelError(
-                "quux",
-                new InvalidOperationException("Some error text.")
-            );
+            viewData.ModelState
+                .SetModelValue("quux", new ValueProviderResult(null, "quuxValue", null));
+            viewData.ModelState
+                .AddModelError("quux", new InvalidOperationException("Some error text."));
             viewData.ModelState.AddModelError(String.Empty, "Something is wrong.");
             viewData.ModelState.AddModelError(String.Empty, "Something else is also wrong.");
             return viewData;
@@ -2700,14 +2659,10 @@ namespace System.Web.Mvc.Html.Test
             viewData.ModelState[prefix + ".foo"] = modelStateFoo;
             viewData.ModelState[prefix + ".bar"] = modelStateBar;
             viewData.ModelState[prefix + ".baz"] = modelStateBaz;
-            viewData.ModelState.SetModelValue(
-                prefix + ".quux",
-                new ValueProviderResult(null, "quuxValue", null)
-            );
-            viewData.ModelState.AddModelError(
-                prefix + ".quux",
-                new InvalidOperationException("Some error text.")
-            );
+            viewData.ModelState
+                .SetModelValue(prefix + ".quux", new ValueProviderResult(null, "quuxValue", null));
+            viewData.ModelState
+                .AddModelError(prefix + ".quux", new InvalidOperationException("Some error text."));
             return viewData;
         }
 

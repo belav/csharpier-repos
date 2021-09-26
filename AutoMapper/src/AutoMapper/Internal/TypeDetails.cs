@@ -144,14 +144,15 @@ namespace AutoMapper.Internal
                     from extensionMethod in sourceExtensionMethodSearch
                     where !extensionMethod.IsGenericMethodDefinition
                     select extensionMethod
-                ).Concat(
-                    from extensionMethod in sourceExtensionMethodSearch
-                    where
-                        extensionMethod.IsGenericMethodDefinition
-                        && extensionMethod.GetGenericArguments().Length
-                            == genericInterfaceArguments.Length
-                    select extensionMethod.MakeGenericMethod(genericInterfaceArguments)
                 )
+                    .Concat(
+                        from extensionMethod in sourceExtensionMethodSearch
+                        where
+                            extensionMethod.IsGenericMethodDefinition
+                            && extensionMethod.GetGenericArguments().Length
+                                == genericInterfaceArguments.Length
+                        select extensionMethod.MakeGenericMethod(genericInterfaceArguments)
+                    )
                 from methodMatch in matchedMethods
                 where
                     methodMatch.GetParameters()[0].ParameterType.IsAssignableFrom(genericInterface)

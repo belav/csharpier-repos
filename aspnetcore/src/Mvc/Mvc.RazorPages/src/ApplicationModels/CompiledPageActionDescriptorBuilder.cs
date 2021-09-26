@@ -28,11 +28,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             var boundProperties = CreateBoundProperties(applicationModel);
             var filters = Enumerable.Concat(
-                    globalFilters.Select(f => new FilterDescriptor(f, FilterScope.Global)),
-                    applicationModel.Filters.Select(
-                        f => new FilterDescriptor(f, FilterScope.Action)
-                    )
-                )
+                globalFilters.Select(f => new FilterDescriptor(f, FilterScope.Global)),
+                applicationModel.Filters.Select(f => new FilterDescriptor(f, FilterScope.Action))
+            )
                 .ToArray();
             var handlerMethods = CreateHandlerMethods(applicationModel);
 

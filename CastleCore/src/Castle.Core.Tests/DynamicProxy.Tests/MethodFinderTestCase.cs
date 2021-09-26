@@ -33,9 +33,8 @@ namespace Castle.DynamicProxy.Tests
                 typeof(object),
                 BindingFlags.Instance | BindingFlags.Public
             );
-            MethodInfo[] realMethods = typeof(object).GetMethods(
-                BindingFlags.Instance | BindingFlags.Public
-            );
+            MethodInfo[] realMethods = typeof(object)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Public);
             CollectionAssert.AreEquivalent(realMethods, methods);
         }
 
@@ -46,9 +45,8 @@ namespace Castle.DynamicProxy.Tests
                 typeof(object),
                 BindingFlags.Instance | BindingFlags.NonPublic
             );
-            MethodInfo[] realMethods = typeof(object).GetMethods(
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            MethodInfo[] realMethods = typeof(object)
+                .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic);
             CollectionAssert.AreEquivalent(realMethods, methods);
         }
 
@@ -59,9 +57,8 @@ namespace Castle.DynamicProxy.Tests
                 typeof(object),
                 BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
             );
-            MethodInfo[] realMethods = typeof(object).GetMethods(
-                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
-            );
+            MethodInfo[] realMethods = typeof(object)
+                .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             CollectionAssert.AreEquivalent(realMethods, methods);
         }
 

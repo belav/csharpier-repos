@@ -519,9 +519,9 @@ namespace System.IO.Strategies
                 if (_writePos > 0)
                 {
                     await _strategy.WriteAsync(
-                            MemoryMarshal.CreateFromPinnedArray(_buffer, 0, _writePos),
-                            cancellationToken
-                        )
+                        MemoryMarshal.CreateFromPinnedArray(_buffer, 0, _writePos),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     _writePos = 0;
                 }
@@ -537,9 +537,9 @@ namespace System.IO.Strategies
                 // Ok. We can fill the buffer:
                 EnsureBufferAllocated();
                 _readLen = await _strategy.ReadAsync(
-                        MemoryMarshal.CreateFromPinnedArray(_buffer, 0, _bufferSize),
-                        cancellationToken
-                    )
+                    MemoryMarshal.CreateFromPinnedArray(_buffer, 0, _bufferSize),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 bytesFromBuffer = Math.Min(_readLen, buffer.Length);
@@ -842,9 +842,9 @@ namespace System.IO.Strategies
                     }
 
                     await _strategy.WriteAsync(
-                            MemoryMarshal.CreateFromPinnedArray(_buffer, 0, _writePos),
-                            cancellationToken
-                        )
+                        MemoryMarshal.CreateFromPinnedArray(_buffer, 0, _writePos),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     _writePos = 0;
                 }
@@ -964,9 +964,9 @@ namespace System.IO.Strategies
                 if (_writePos > 0)
                 {
                     await _strategy.WriteAsync(
-                            MemoryMarshal.CreateFromPinnedArray(_buffer, 0, _writePos),
-                            cancellationToken
-                        )
+                        MemoryMarshal.CreateFromPinnedArray(_buffer, 0, _writePos),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     _writePos = 0;
                     Debug.Assert(_writePos == 0 && _readPos == 0 && _readLen == 0);
@@ -1041,9 +1041,9 @@ namespace System.IO.Strategies
                         "Write buffer must be empty if there's data in the read buffer"
                     );
                     await destination.WriteAsync(
-                            MemoryMarshal.CreateFromPinnedArray(_buffer, _readPos, readBytes),
-                            cancellationToken
-                        )
+                        MemoryMarshal.CreateFromPinnedArray(_buffer, _readPos, readBytes),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     _readPos = _readLen = 0;
                 }
@@ -1051,9 +1051,9 @@ namespace System.IO.Strategies
                 {
                     // If there's write data in the buffer, flush it back to the underlying stream, as does ReadAsync.
                     await _strategy.WriteAsync(
-                            MemoryMarshal.CreateFromPinnedArray(_buffer, 0, _writePos),
-                            cancellationToken
-                        )
+                        MemoryMarshal.CreateFromPinnedArray(_buffer, 0, _writePos),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     _writePos = 0;
                 }

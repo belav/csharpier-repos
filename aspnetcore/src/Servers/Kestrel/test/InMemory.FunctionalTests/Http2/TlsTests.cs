@@ -51,9 +51,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2
                             SslApplicationProtocol.Http2.Protocol
                         );
 
-                        return context.Response.WriteAsync(
-                            "hello world " + context.Request.Protocol
-                        );
+                        return context.Response
+                            .WriteAsync("hello world " + context.Request.Protocol);
                     },
                     new TestServiceContext(LoggerFactory),
                     listenOptions =>

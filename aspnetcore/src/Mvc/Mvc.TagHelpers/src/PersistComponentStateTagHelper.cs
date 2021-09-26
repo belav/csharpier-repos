@@ -90,11 +90,13 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             if (store != null)
             {
                 await manager.PersistStateAsync(store, renderer);
-                output.Content.SetHtmlContent(
-                    new HtmlContentBuilder().AppendHtml("<!--Blazor-Component-State:")
-                        .AppendHtml(store.PersistedState)
-                        .AppendHtml("-->")
-                );
+                output.Content
+                    .SetHtmlContent(
+                        new HtmlContentBuilder()
+                            .AppendHtml("<!--Blazor-Component-State:")
+                            .AppendHtml(store.PersistedState)
+                            .AppendHtml("-->")
+                    );
             }
         }
     }

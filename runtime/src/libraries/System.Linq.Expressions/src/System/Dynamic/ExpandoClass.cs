@@ -66,11 +66,12 @@ namespace System.Dynamic
                     }
 
                     if (
-                        string.Equals(
-                            klass._keys[klass._keys.Length - 1],
-                            newKey,
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(
+                                klass._keys[klass._keys.Length - 1],
+                                newKey,
+                                StringComparison.Ordinal
+                            )
                     )
                     {
                         // the new key is the key we added in this transition

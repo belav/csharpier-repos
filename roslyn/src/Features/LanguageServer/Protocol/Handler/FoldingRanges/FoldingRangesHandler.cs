@@ -46,17 +46,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return Array.Empty<FoldingRange>();
             }
 
-            var blockStructureService =
-                document.Project.LanguageServices.GetService<BlockStructureService>();
+            var blockStructureService = document.Project.LanguageServices
+                .GetService<BlockStructureService>();
             if (blockStructureService == null)
             {
                 return Array.Empty<FoldingRange>();
             }
 
             var blockStructure = await blockStructureService.GetBlockStructureAsync(
-                    document,
-                    cancellationToken
-                )
+                document,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (blockStructure == null)
             {

@@ -57,9 +57,8 @@ namespace Castle.Components.DictionaryAdapter
                 if (IsEditing && updates.Any(level => level.Count > 0))
                     return true;
 
-                return This.Properties.Values.Where(
-                        prop => typeof(IChangeTracking).IsAssignableFrom(prop.PropertyType)
-                    )
+                return This.Properties.Values
+                    .Where(prop => typeof(IChangeTracking).IsAssignableFrom(prop.PropertyType))
                     .Select(prop => GetProperty(prop.PropertyName, true))
                     .Cast<IChangeTracking>()
                     .Any(track => track != null && track.IsChanged);

@@ -126,9 +126,8 @@ namespace System.Web.Helpers
         public string GetSelectUrl()
         {
             NameValueCollection queryString = new NameValueCollection(1);
-            queryString[WebGrid.SelectionFieldName] = (_rowIndex + 1L).ToString(
-                CultureInfo.CurrentCulture
-            );
+            queryString[WebGrid.SelectionFieldName] = (_rowIndex + 1L)
+                .ToString(CultureInfo.CurrentCulture);
             return WebGrid.GetPath(queryString);
         }
 

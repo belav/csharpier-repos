@@ -510,15 +510,16 @@ namespace System.Security.Cryptography
 
             // Bind to matching ctor.
             ConstructorInfo? rci =
-                Type.DefaultBinder.BindToMethod(
-                    ConstructorDefault,
-                    cons,
-                    ref args,
-                    null,
-                    null,
-                    null,
-                    out object? state
-                ) as ConstructorInfo;
+                Type.DefaultBinder
+                    .BindToMethod(
+                        ConstructorDefault,
+                        cons,
+                        ref args,
+                        null,
+                        null,
+                        null,
+                        out object? state
+                    ) as ConstructorInfo;
 
             // Check for ctor we don't like (non-existent, delegate or decorated with declarative linktime demand).
             if (rci == null || typeof(Delegate).IsAssignableFrom(rci.DeclaringType))

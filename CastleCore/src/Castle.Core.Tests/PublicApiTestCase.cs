@@ -95,10 +95,8 @@ namespace Castle
                             $"ref/{assemblyName}-{framework}.cs does not exist"
                         );
 
-                        string expectedPublicApi = string.Join(
-                            Environment.NewLine,
-                            File.ReadAllLines(assemblyRefPath)
-                        );
+                        string expectedPublicApi = string
+                            .Join(Environment.NewLine, File.ReadAllLines(assemblyRefPath));
                         Assert.AreEqual(
                             expectedPublicApi,
                             publicApi,

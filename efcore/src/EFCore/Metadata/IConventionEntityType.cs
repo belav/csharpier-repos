@@ -225,7 +225,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <returns> Base types. </returns>
         new IEnumerable<IConventionEntityType> GetAllBaseTypesInclusiveAscending() =>
-            ((IReadOnlyEntityType)this).GetAllBaseTypesInclusiveAscending()
+            ((IReadOnlyEntityType)this)
+                .GetAllBaseTypesInclusiveAscending()
                 .Cast<IConventionEntityType>();
 
         /// <summary>
@@ -269,9 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     or <see langword="null" /> if they have not common parent.
         /// </returns>
         new IConventionEntityType? FindClosestCommonParent(IReadOnlyEntityType otherEntityType) =>
-            (IConventionEntityType?)((IReadOnlyEntityType)this).FindClosestCommonParent(
-                otherEntityType
-            );
+            (IConventionEntityType?)((IReadOnlyEntityType)this)
+                .FindClosestCommonParent(otherEntityType);
 
         /// <summary>
         ///     Gets the least derived type between the specified two.
@@ -526,7 +526,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         new IEnumerable<IConventionForeignKey> FindDeclaredForeignKeys(
             IReadOnlyList<IReadOnlyProperty> properties
         ) =>
-            ((IReadOnlyEntityType)this).FindDeclaredForeignKeys(properties)
+            ((IReadOnlyEntityType)this)
+                .FindDeclaredForeignKeys(properties)
                 .Cast<IConventionForeignKey>();
 
         /// <summary>
@@ -564,7 +565,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <returns> The foreign keys that reference the given entity type. </returns>
         new IEnumerable<IConventionForeignKey> GetDeclaredReferencingForeignKeys() =>
-            ((IReadOnlyEntityType)this).GetDeclaredReferencingForeignKeys()
+            ((IReadOnlyEntityType)this)
+                .GetDeclaredReferencingForeignKeys()
                 .Cast<IConventionForeignKey>();
 
         /// <summary>
@@ -629,9 +631,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="name"> The name of the navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
         new IConventionNavigation? FindDeclaredNavigation(string name) =>
-            (IConventionNavigation?)((IReadOnlyEntityType)this).FindDeclaredNavigation(
-                Check.NotNull(name, nameof(name))
-            );
+            (IConventionNavigation?)((IReadOnlyEntityType)this)
+                .FindDeclaredNavigation(Check.NotNull(name, nameof(name)));
 
         /// <summary>
         ///     <para>
@@ -718,9 +719,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="name"> The name of the navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
         new IConventionSkipNavigation? FindDeclaredSkipNavigation(string name) =>
-            (IConventionSkipNavigation?)((IReadOnlyEntityType)this).FindDeclaredSkipNavigation(
-                name
-            );
+            (IConventionSkipNavigation?)((IReadOnlyEntityType)this)
+                .FindDeclaredSkipNavigation(name);
 
         /// <summary>
         ///     <para>
@@ -734,7 +734,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <returns> Declared foreign keys. </returns>
         new IEnumerable<IConventionSkipNavigation> GetDeclaredSkipNavigations() =>
-            ((IReadOnlyEntityType)this).GetDeclaredSkipNavigations()
+            ((IReadOnlyEntityType)this)
+                .GetDeclaredSkipNavigations()
                 .Cast<IConventionSkipNavigation>();
 
         /// <summary>
@@ -749,7 +750,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <returns> Derived skip navigation properties. </returns>
         new IEnumerable<IConventionSkipNavigation> GetDerivedSkipNavigations() =>
-            ((IReadOnlyEntityType)this).GetDerivedSkipNavigations()
+            ((IReadOnlyEntityType)this)
+                .GetDerivedSkipNavigations()
                 .Cast<IConventionSkipNavigation>();
 
         /// <summary>
@@ -1038,9 +1040,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         new IReadOnlyList<IConventionProperty>? FindProperties(
             IReadOnlyList<string> propertyNames
         ) =>
-            (IReadOnlyList<IConventionProperty>?)((IReadOnlyEntityType)this).FindProperties(
-                propertyNames
-            );
+            (IReadOnlyList<IConventionProperty>?)((IReadOnlyEntityType)this)
+                .FindProperties(propertyNames);
 
         /// <summary>
         ///     <para>
@@ -1143,7 +1144,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <returns> Declared service properties. </returns>
         new IEnumerable<IConventionServiceProperty> GetDeclaredServiceProperties() =>
-            ((IReadOnlyEntityType)this).GetDeclaredServiceProperties()
+            ((IReadOnlyEntityType)this)
+                .GetDeclaredServiceProperties()
                 .Cast<IConventionServiceProperty>();
 
         /// <summary>
@@ -1158,7 +1160,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <returns> Derived service properties. </returns>
         new IEnumerable<IConventionServiceProperty> GetDerivedServiceProperties() =>
-            ((IReadOnlyEntityType)this).GetDerivedServiceProperties()
+            ((IReadOnlyEntityType)this)
+                .GetDerivedServiceProperties()
                 .Cast<IConventionServiceProperty>();
 
         /// <summary>

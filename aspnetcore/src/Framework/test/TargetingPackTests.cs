@@ -39,9 +39,8 @@ namespace Microsoft.AspNetCore
                 "Microsoft.AspNetCore.App.Ref",
                 TestData.GetTestDataValue("TargetingPackVersion")
             );
-            _isTargetingPackBuilding = bool.Parse(
-                TestData.GetTestDataValue("IsTargetingPackBuilding")
-            );
+            _isTargetingPackBuilding = bool
+                .Parse(TestData.GetTestDataValue("IsTargetingPackBuilding"));
         }
 
         [Fact]
@@ -53,13 +52,13 @@ namespace Microsoft.AspNetCore
             }
 
             var actualAssemblies = Directory.GetFiles(
-                    Path.Combine(_targetingPackRoot, "ref", _targetingPackTfm),
-                    "*.dll"
-                )
+                Path.Combine(_targetingPackRoot, "ref", _targetingPackTfm),
+                "*.dll"
+            )
                 .Select(Path.GetFileNameWithoutExtension)
                 .ToHashSet();
-            var listedTargetingPackAssemblies =
-                TestData.ListedTargetingPackAssemblies.Keys.ToHashSet();
+            var listedTargetingPackAssemblies = TestData.ListedTargetingPackAssemblies.Keys
+                .ToHashSet();
 
             _output.WriteLine("==== actual assemblies ====");
             _output.WriteLine(string.Join('\n', actualAssemblies.OrderBy(i => i)));
@@ -104,10 +103,8 @@ namespace Microsoft.AspNetCore
                     var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
                     var assemblyDefinition = reader.GetAssemblyDefinition();
 
-                    TestData.ListedTargetingPackAssemblies.TryGetValue(
-                        fileName,
-                        out var expectedVersion
-                    );
+                    TestData.ListedTargetingPackAssemblies
+                        .TryGetValue(fileName, out var expectedVersion);
                     Assert.Equal(expectedVersion, assemblyDefinition.Version.ToString());
                 }
             );
@@ -135,11 +132,12 @@ namespace Microsoft.AspNetCore
                     // Skip netstandard2.0 System.IO.Pipelines assembly. References have old versions.
                     var filename = Path.GetFileName(path);
                     if (
-                        !string.Equals(
-                            "System.IO.Pipelines.dll",
-                            filename,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        !string
+                            .Equals(
+                                "System.IO.Pipelines.dll",
+                                filename,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         using var fileStream = File.OpenRead(path);
@@ -267,27 +265,25 @@ namespace Microsoft.AspNetCore
                     using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
                     var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
                     var assemblyDefinition = reader.GetAssemblyDefinition();
-                    var hasRefAssemblyAttribute = assemblyDefinition.GetCustomAttributes()
-                        .Any(
-                            attr =>
-                            {
-                                var attribute = reader.GetCustomAttribute(attr);
-                                var attributeConstructor = reader.GetMemberReference(
-                                    (MemberReferenceHandle)attribute.Constructor
-                                );
-                                var attributeType = reader.GetTypeReference(
-                                    (TypeReferenceHandle)attributeConstructor.Parent
-                                );
-                                return reader.StringComparer.Equals(
+                    var hasRefAssemblyAttribute = assemblyDefinition.GetCustomAttributes().Any(
+                        attr =>
+                        {
+                            var attribute = reader.GetCustomAttribute(attr);
+                            var attributeConstructor = reader.GetMemberReference(
+                                (MemberReferenceHandle)attribute.Constructor
+                            );
+                            var attributeType = reader.GetTypeReference(
+                                (TypeReferenceHandle)attributeConstructor.Parent
+                            );
+                            return reader.StringComparer
+                                    .Equals(
                                         attributeType.Namespace,
                                         typeof(ReferenceAssemblyAttribute).Namespace
                                     )
-                                    && reader.StringComparer.Equals(
-                                        attributeType.Name,
-                                        nameof(ReferenceAssemblyAttribute)
-                                    );
-                            }
-                        );
+                                && reader.StringComparer
+                                    .Equals(attributeType.Name, nameof(ReferenceAssemblyAttribute));
+                        }
+                    );
 
                     Assert.True(
                         hasRefAssemblyAttribute,
@@ -333,17 +329,15 @@ namespace Microsoft.AspNetCore
 
             var manifestFileLines = File.ReadAllLines(platformManifestPath);
 
-            var actualAssemblies = manifestFileLines.Where(s => !string.IsNullOrEmpty(s))
-                .Select(
-                    i =>
-                    {
-                        var fileName = i.Split('|')[0];
-                        return fileName.EndsWith(".dll", StringComparison.Ordinal)
-                          ? fileName.Substring(0, fileName.Length - 4)
-                          : fileName;
-                    }
-                )
-                .ToHashSet();
+            var actualAssemblies = manifestFileLines.Where(s => !string.IsNullOrEmpty(s)).Select(
+                i =>
+                {
+                    var fileName = i.Split('|')[0];
+                    return fileName.EndsWith(".dll", StringComparison.Ordinal)
+                      ? fileName.Substring(0, fileName.Length - 4)
+                      : fileName;
+                }
+            ).ToHashSet();
 
             if (!TestData.VerifyAncmBinary())
             {
@@ -405,25 +399,25 @@ namespace Microsoft.AspNetCore
 
             _output.WriteLine("==== file contents ====");
             _output.WriteLine(
-                string.Join(
-                    '\n',
-                    frameworkListEntries.Select(i => i.Attribute("AssemblyName").Value)
-                        .OrderBy(i => i)
-                )
+                string
+                    .Join(
+                        '\n',
+                        frameworkListEntries.Select(i => i.Attribute("AssemblyName").Value)
+                            .OrderBy(i => i)
+                    )
             );
             _output.WriteLine("==== expected assemblies ====");
             _output.WriteLine(string.Join('\n', expectedAssemblies.OrderBy(i => i)));
 
             var actualAssemblies = frameworkListEntries.Select(
-                    i =>
-                    {
-                        var fileName = i.Attribute("AssemblyName").Value;
-                        return fileName.EndsWith(".dll", StringComparison.Ordinal)
-                          ? fileName.Substring(0, fileName.Length - 4)
-                          : fileName;
-                    }
-                )
-                .ToHashSet();
+                i =>
+                {
+                    var fileName = i.Attribute("AssemblyName").Value;
+                    return fileName.EndsWith(".dll", StringComparison.Ordinal)
+                      ? fileName.Substring(0, fileName.Length - 4)
+                      : fileName;
+                }
+            ).ToHashSet();
 
             var missing = expectedAssemblies.Except(actualAssemblies);
             var unexpected = actualAssemblies.Except(expectedAssemblies);
@@ -481,9 +475,8 @@ namespace Microsoft.AspNetCore
 
             ZipArchive archive = ZipFile.OpenRead(targetingPackPath);
 
-            var actualPaths = archive.Entries.Where(
-                    i => i.FullName.EndsWith(".dll", StringComparison.Ordinal)
-                )
+            var actualPaths = archive.Entries
+                .Where(i => i.FullName.EndsWith(".dll", StringComparison.Ordinal))
                 .Select(i => i.FullName)
                 .ToHashSet();
 

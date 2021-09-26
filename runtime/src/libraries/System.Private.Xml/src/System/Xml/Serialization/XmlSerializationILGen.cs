@@ -243,10 +243,8 @@ namespace System.Xml.Serialization
             // this 'if' ends in GenerateHashtableGetEnd
             ilg.If(Cmp.EqualTo);
 
-            ConstructorInfo Hashtable_ctor = typeof(Hashtable).GetConstructor(
-                CodeGenerator.InstanceBindingFlags,
-                Type.EmptyTypes
-            )!;
+            ConstructorInfo Hashtable_ctor = typeof(Hashtable)
+                .GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
             LocalBuilder _tmpLoc = ilg.DeclareLocal(typeof(Hashtable), "_tmp");
             ilg.New(Hashtable_ctor);
             ilg.Stloc(_tmpLoc);
@@ -298,10 +296,8 @@ namespace System.Xml.Serialization
                 && xmlMappings.Length == methods.Length
             )
             {
-                MethodInfo Hashtable_set_Item = typeof(Hashtable).GetMethod(
-                    "set_Item",
-                    new Type[] { typeof(object), typeof(object) }
-                )!;
+                MethodInfo Hashtable_set_Item = typeof(Hashtable)
+                    .GetMethod("set_Item", new Type[] { typeof(object), typeof(object) })!;
                 for (int i = 0; i < methods.Length; i++)
                 {
                     if (methods[i] == null)
@@ -376,10 +372,8 @@ namespace System.Xml.Serialization
                 Type.EmptyTypes
             );
 
-            ConstructorInfo readerCtor = CreatedTypes[readerClass].GetConstructor(
-                CodeGenerator.InstanceBindingFlags,
-                Type.EmptyTypes
-            )!;
+            ConstructorInfo readerCtor = CreatedTypes[readerClass]
+                .GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
             ilg = new CodeGenerator(baseSerializerTypeBuilder);
             ilg.BeginMethod(
                 typeof(XmlSerializationReader),
@@ -391,10 +385,8 @@ namespace System.Xml.Serialization
             ilg.New(readerCtor);
             ilg.EndMethod();
 
-            ConstructorInfo writerCtor = CreatedTypes[writerClass].GetConstructor(
-                CodeGenerator.InstanceBindingFlags,
-                Type.EmptyTypes
-            )!;
+            ConstructorInfo writerCtor = CreatedTypes[writerClass]
+                .GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
             ilg.BeginMethod(
                 typeof(XmlSerializationWriter),
                 "CreateWriter",
@@ -458,11 +450,12 @@ namespace System.Xml.Serialization
             }
             else
             {
-                MethodInfo XmlReader_IsStartElement = typeof(XmlReader).GetMethod(
-                    "IsStartElement",
-                    CodeGenerator.InstanceBindingFlags,
-                    new Type[] { typeof(string), typeof(string) }
-                )!;
+                MethodInfo XmlReader_IsStartElement = typeof(XmlReader)
+                    .GetMethod(
+                        "IsStartElement",
+                        CodeGenerator.InstanceBindingFlags,
+                        new Type[] { typeof(string), typeof(string) }
+                    )!;
                 ilg.Ldarg(ilg.GetArg("xmlReader"));
                 ilg.Ldstr(GetCSharpString(mapping.Accessor.Name));
                 ilg.Ldstr(GetCSharpString(mapping.Accessor.Namespace));
@@ -484,14 +477,15 @@ namespace System.Xml.Serialization
                     new string[] { "objectToSerialize", "writer" },
                     CodeGenerator.ProtectedOverrideMethodAttributes
                 );
-                MethodInfo writerType_writeMethod = CreatedTypes[writerClass].GetMethod(
-                    writeMethod,
-                    CodeGenerator.InstanceBindingFlags,
-                    new Type[]
-                    {
-                        (mapping is XmlMembersMapping) ? typeof(object[]) : typeof(object)
-                    }
-                )!;
+                MethodInfo writerType_writeMethod = CreatedTypes[writerClass]
+                    .GetMethod(
+                        writeMethod,
+                        CodeGenerator.InstanceBindingFlags,
+                        new Type[]
+                        {
+                            (mapping is XmlMembersMapping) ? typeof(object[]) : typeof(object)
+                        }
+                    )!;
                 ilg.Ldarg("writer");
                 ilg.Castclass(CreatedTypes[writerClass]);
                 ilg.Ldarg("objectToSerialize");
@@ -512,11 +506,8 @@ namespace System.Xml.Serialization
                     new string[] { "reader" },
                     CodeGenerator.ProtectedOverrideMethodAttributes
                 );
-                MethodInfo readerType_readMethod = CreatedTypes[readerClass].GetMethod(
-                    readMethod,
-                    CodeGenerator.InstanceBindingFlags,
-                    Type.EmptyTypes
-                )!;
+                MethodInfo readerType_readMethod = CreatedTypes[readerClass]
+                    .GetMethod(readMethod, CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
                 ilg.Ldarg("reader");
                 ilg.Castclass(CreatedTypes[readerClass]);
                 ilg.Call(readerType_readMethod);
@@ -543,18 +534,17 @@ namespace System.Xml.Serialization
                 "TypedSerializers",
                 serializerContractTypeBuilder
             );
-            MethodInfo Hashtable_Add = typeof(Hashtable).GetMethod(
-                "Add",
-                CodeGenerator.InstanceBindingFlags,
-                new Type[] { typeof(object), typeof(object) }
-            )!;
+            MethodInfo Hashtable_Add = typeof(Hashtable)
+                .GetMethod(
+                    "Add",
+                    CodeGenerator.InstanceBindingFlags,
+                    new Type[] { typeof(object), typeof(object) }
+                )!;
 
             foreach (string key in serializers.Keys)
             {
-                ConstructorInfo ctor = CreatedTypes[(string)serializers[key]].GetConstructor(
-                    CodeGenerator.InstanceBindingFlags,
-                    Type.EmptyTypes
-                )!;
+                ConstructorInfo ctor = CreatedTypes[(string)serializers[key]]
+                    .GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
                 ilg!.Ldloc(typeof(Hashtable), "_tmp");
                 ilg.Ldstr(GetCSharpString(key));
                 ilg.New(ctor);
@@ -599,7 +589,8 @@ namespace System.Xml.Serialization
                     {
                         ConstructorInfo ctor = CreatedTypes[
                             (string)serializers[xmlMappings[i].Key!]
-                        ].GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
+                        ]
+                            .GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
                         ilg.New(ctor);
                         ilg.Stloc(ilg.ReturnLocal);
                         ilg.Br(ilg.ReturnLabel);
@@ -654,10 +645,8 @@ namespace System.Xml.Serialization
                 CodeGenerator.PublicOverrideMethodAttributes | MethodAttributes.SpecialName
             );
             propertyBuilder.SetGetMethod(ilg.MethodBuilder!);
-            ConstructorInfo ctor = CreatedTypes[readerType].GetConstructor(
-                CodeGenerator.InstanceBindingFlags,
-                Type.EmptyTypes
-            )!;
+            ConstructorInfo ctor = CreatedTypes[readerType]
+                .GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
             ilg.New(ctor);
             ilg.EndMethod();
 
@@ -680,10 +669,8 @@ namespace System.Xml.Serialization
                 CodeGenerator.PublicOverrideMethodAttributes | MethodAttributes.SpecialName
             );
             propertyBuilder.SetGetMethod(ilg.MethodBuilder!);
-            ctor = CreatedTypes[writerType].GetConstructor(
-                CodeGenerator.InstanceBindingFlags,
-                Type.EmptyTypes
-            )!;
+            ctor = CreatedTypes[writerType]
+                .GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
             ilg.New(ctor);
             ilg.EndMethod();
 
@@ -709,10 +696,8 @@ namespace System.Xml.Serialization
             GenerateGetSerializer(serializers, xmlMappings, serializerContractTypeBuilder);
 
             // Default ctor
-            ConstructorInfo baseCtor = typeof(XmlSerializerImplementation).GetConstructor(
-                CodeGenerator.InstanceBindingFlags,
-                Type.EmptyTypes
-            )!;
+            ConstructorInfo baseCtor = typeof(XmlSerializerImplementation)
+                .GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
             ilg = new CodeGenerator(serializerContractTypeBuilder);
             ilg.BeginMethod(
                 typeof(void),

@@ -128,7 +128,8 @@ WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND NOT((c[""IsVisible""]
         [ConditionalFact]
         public override void Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_EFProperty()
         {
-            base.Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_EFProperty();
+            base
+                .Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_EFProperty();
 
             AssertSql(
                 @"SELECT c
@@ -140,7 +141,8 @@ WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND (c[""IsVisible""] = "
         [ConditionalFact]
         public override void Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_indexer()
         {
-            base.Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_indexer();
+            base
+                .Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_indexer();
 
             AssertSql(
                 @"SELECT c

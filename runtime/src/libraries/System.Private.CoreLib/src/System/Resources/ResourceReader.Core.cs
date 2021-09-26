@@ -124,10 +124,11 @@ namespace System.Resources
                     object?,
                     Stream,
                     object
-                >?)typeof(ResourceReader).GetMethod(
-                    nameof(CreateUntypedDelegate),
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )?.MakeGenericMethod(binaryFormatterType)
+                >?)typeof(ResourceReader)
+                    .GetMethod(
+                        nameof(CreateUntypedDelegate),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )?.MakeGenericMethod(binaryFormatterType)
                     .Invoke(null, new[] { binaryFormatterDeserialize });
 
                 Interlocked.CompareExchange(ref s_binaryFormatterType, binaryFormatterType, null);

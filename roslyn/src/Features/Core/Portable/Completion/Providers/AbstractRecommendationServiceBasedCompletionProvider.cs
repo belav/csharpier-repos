@@ -56,23 +56,21 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             );
 
             var shouldPreselectInferredTypes = await ShouldPreselectInferredTypesAsync(
-                    completionContext,
-                    position,
-                    options,
-                    cancellationToken
-                )
+                completionContext,
+                position,
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!shouldPreselectInferredTypes)
                 return recommendedSymbols.NamedSymbols.SelectAsArray(s => (s, preselect: false));
 
-            var inferredTypes = context.InferredTypes.Where(
-                    t => t.SpecialType != SpecialType.System_Void
-                )
+            var inferredTypes = context.InferredTypes
+                .Where(t => t.SpecialType != SpecialType.System_Void)
                 .ToSet();
 
-            using var _ = ArrayBuilder<(ISymbol symbol, bool preselect)>.GetInstance(
-                out var result
-            );
+            using var _ = ArrayBuilder<(ISymbol symbol, bool preselect)>
+                .GetInstance(out var result);
 
             foreach (var symbol in recommendedSymbols.NamedSymbols)
             {
@@ -193,11 +191,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 var context = await CreateContextAsync(relatedDocument, position, cancellationToken)
                     .ConfigureAwait(false);
                 var symbols = await TryGetSymbolsForContextAsync(
-                        completionContext: null,
-                        context,
-                        options,
-                        cancellationToken
-                    )
+                    completionContext: null,
+                    context,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!symbols.IsDefault)
@@ -229,12 +227,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         }
 
                         return await SymbolCompletionItem.GetDescriptionAsync(
-                                item,
-                                bestSymbols.SelectAsArray(t => t.symbol),
-                                document,
-                                context.SemanticModel,
-                                cancellationToken
-                            )
+                            item,
+                            bestSymbols.SelectAsArray(t => t.symbol),
+                            document,
+                            context.SemanticModel,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                 }

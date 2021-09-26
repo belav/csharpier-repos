@@ -105,8 +105,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             )
             {
                 return tree.GetIntersectingSpans(
-                        new SnapshotSpan(point.Snapshot, new Span(point, 0))
-                    )
+                    new SnapshotSpan(point.Snapshot, new Span(point, 0))
+                )
                     .Where(s => s.Span.Contains(point));
             }
 

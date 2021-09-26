@@ -42,21 +42,23 @@ namespace JIT.HardwareIntrinsics.General
 
             string expected =
                 '<'
-                + string.Join(
-                    ", ",
-                    values.Select(
-                        x => x.ToString("G", System.Globalization.CultureInfo.InvariantCulture)
+                + string
+                    .Join(
+                        ", ",
+                        values.Select(
+                            x => x.ToString("G", System.Globalization.CultureInfo.InvariantCulture)
+                        )
                     )
-                )
                 + '>';
 
             bool succeeded = string.Equals(expected, actual, StringComparison.Ordinal);
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256SingleToString: Vector256<Single>.ToString() returned an unexpected result."
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"Vector256SingleToString: Vector256<Single>.ToString() returned an unexpected result."
+                    );
                 TestLibrary.TestFramework.LogInformation($"Expected: {expected}");
                 TestLibrary.TestFramework.LogInformation($"Actual: {actual}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

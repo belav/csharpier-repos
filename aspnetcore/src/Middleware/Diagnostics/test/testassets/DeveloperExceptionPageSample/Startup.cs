@@ -42,15 +42,16 @@ namespace DeveloperExceptionPageSample
                 context =>
                 {
                     throw new Exception(
-                        string.Concat(
-                            "Demonstration exception. The list:",
-                            "\r\n",
-                            "New Line 1",
-                            "\n",
-                            "New Line 2",
-                            Environment.NewLine,
-                            "New Line 3"
-                        )
+                        string
+                            .Concat(
+                                "Demonstration exception. The list:",
+                                "\r\n",
+                                "New Line 1",
+                                "\n",
+                                "New Line 2",
+                                Environment.NewLine,
+                                "New Line 3"
+                            )
                     );
                 }
             );
@@ -59,12 +60,11 @@ namespace DeveloperExceptionPageSample
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel().UseIISIntegration().UseStartup<Startup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel().UseIISIntegration().UseStartup<Startup>();
+                }
+            ).Build();
 
             return host.RunAsync();
         }

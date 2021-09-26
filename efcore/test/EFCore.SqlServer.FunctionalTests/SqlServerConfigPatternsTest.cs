@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore
                 using (SqlServerTestStore.GetNorthwindStore())
                 {
                     using var context = new NorthwindContext(
-                        new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                        new DbContextOptionsBuilder()
+                            .EnableServiceProviderCaching(false)
                             .UseSqlServer(
                                 SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
                                 b => b.ApplyConfiguration()
@@ -82,10 +83,12 @@ namespace Microsoft.EntityFrameworkCore
                 using (SqlServerTestStore.GetNorthwindStore())
                 {
                     using var context = new NorthwindContext(
-                        new DbContextOptionsBuilder().UseInternalServiceProvider(
-                            new ServiceCollection().AddEntityFrameworkSqlServer()
-                                .BuildServiceProvider()
-                        ).Options
+                        new DbContextOptionsBuilder()
+                            .UseInternalServiceProvider(
+                                new ServiceCollection()
+                                    .AddEntityFrameworkSqlServer()
+                                    .BuildServiceProvider()
+                            ).Options
                     );
                     Assert.Equal(91, await context.Customers.CountAsync());
                 }
@@ -116,12 +119,14 @@ namespace Microsoft.EntityFrameworkCore
                 using (SqlServerTestStore.GetNorthwindStore())
                 {
                     using var context = new NorthwindContext(
-                        new DbContextOptionsBuilder().UseSqlServer(
+                        new DbContextOptionsBuilder()
+                            .UseSqlServer(
                                 SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
                                 b => b.ApplyConfiguration()
                             )
                             .UseInternalServiceProvider(
-                                new ServiceCollection().AddEntityFrameworkSqlServer()
+                                new ServiceCollection()
+                                    .AddEntityFrameworkSqlServer()
                                     .BuildServiceProvider()
                             ).Options
                     );
@@ -153,10 +158,12 @@ namespace Microsoft.EntityFrameworkCore
                             () =>
                             {
                                 using var context = new NorthwindContext(
-                                    new DbContextOptionsBuilder().UseInternalServiceProvider(
-                                        new ServiceCollection().AddEntityFrameworkSqlServer()
-                                            .BuildServiceProvider()
-                                    ).Options
+                                    new DbContextOptionsBuilder()
+                                        .UseInternalServiceProvider(
+                                            new ServiceCollection()
+                                                .AddEntityFrameworkSqlServer()
+                                                .BuildServiceProvider()
+                                        ).Options
                                 );
                                 Assert.Equal(91, context.Customers.Count());
                             }
@@ -225,9 +232,8 @@ namespace Microsoft.EntityFrameworkCore
                             () =>
                             {
                                 using var context = new NorthwindContext(
-                                    new DbContextOptionsBuilder().UseInternalServiceProvider(
-                                        serviceProvider
-                                    ).Options
+                                    new DbContextOptionsBuilder()
+                                        .UseInternalServiceProvider(serviceProvider).Options
                                 );
                                 Assert.Equal(91, context.Customers.Count());
                             }
@@ -258,7 +264,8 @@ namespace Microsoft.EntityFrameworkCore
             [ConditionalFact]
             public async Task Can_register_context_with_DI_container_and_have_it_injected()
             {
-                var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+                var serviceProvider = new ServiceCollection()
+                    .AddEntityFrameworkSqlServer()
                     .AddTransient<NorthwindContext>()
                     .AddTransient<MyController>()
                     .AddSingleton(
@@ -312,10 +319,12 @@ namespace Microsoft.EntityFrameworkCore
             [ConditionalFact]
             public async Task Can_register_context_and_configuration_with_DI_container_and_have_both_injected()
             {
-                var serviceProvider = new ServiceCollection().AddTransient<MyController>()
+                var serviceProvider = new ServiceCollection()
+                    .AddTransient<MyController>()
                     .AddTransient<NorthwindContext>()
                     .AddSingleton(
-                        new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                        new DbContextOptionsBuilder()
+                            .EnableServiceProviderCaching(false)
                             .UseSqlServer(
                                 SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
                                 b => b.ApplyConfiguration()
@@ -366,7 +375,8 @@ namespace Microsoft.EntityFrameworkCore
                 using (SqlServerTestStore.GetNorthwindStore())
                 {
                     using var context = new NorthwindContext(
-                        new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                        new DbContextOptionsBuilder()
+                            .EnableServiceProviderCaching(false)
                             .UseSqlServer(
                                 SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
                                 b => b.ApplyConfiguration()
@@ -428,7 +438,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using (SqlServerTestStore.GetNorthwindStore())
                 {
-                    var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+                    var serviceProvider = new ServiceCollection()
+                        .AddEntityFrameworkSqlServer()
                         .BuildServiceProvider();
 
                     using var context1 = new NorthwindContext(serviceProvider);

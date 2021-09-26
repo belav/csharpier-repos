@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             {
                                 if (declaration.HasUsings || declaration.HasExternAliases)
                                 {
-                                    this.DeclaringCompilation.GetImports(declaration)
+                                    this.DeclaringCompilation
+                                        .GetImports(declaration)
                                         .Complete(cancellationToken);
                                 }
                             }

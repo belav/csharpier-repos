@@ -200,10 +200,11 @@ WHERE [s].[ParentId] = @__p_0"
             CascadeTiming cascadeDeleteTiming
         )
         {
-            base.Lazy_load_one_to_one_reference_to_dependent_already_loaded(
-                state,
-                cascadeDeleteTiming
-            );
+            base
+                .Lazy_load_one_to_one_reference_to_dependent_already_loaded(
+                    state,
+                    cascadeDeleteTiming
+                );
 
             AssertSql("");
         }
@@ -835,11 +836,12 @@ WHERE [s].[ParentId] = @__p_0"
             CascadeTiming cascadeDeleteTiming
         )
         {
-            await base.Load_one_to_one_reference_to_principal_already_loaded(
-                state,
-                async,
-                cascadeDeleteTiming
-            );
+            await base
+                .Load_one_to_one_reference_to_principal_already_loaded(
+                    state,
+                    async,
+                    cascadeDeleteTiming
+                );
 
             AssertSql("");
         }
@@ -850,11 +852,12 @@ WHERE [s].[ParentId] = @__p_0"
             CascadeTiming cascadeDeleteTiming
         )
         {
-            await base.Load_one_to_one_reference_to_dependent_already_loaded(
-                state,
-                async,
-                cascadeDeleteTiming
-            );
+            await base
+                .Load_one_to_one_reference_to_dependent_already_loaded(
+                    state,
+                    async,
+                    cascadeDeleteTiming
+                );
 
             AssertSql("");
         }
@@ -885,11 +888,8 @@ WHERE [s].[ParentId] = @__p_0"
             CascadeTiming cascadeDeleteTiming
         )
         {
-            await base.Load_collection_using_Query_already_loaded(
-                state,
-                async,
-                cascadeDeleteTiming
-            );
+            await base
+                .Load_collection_using_Query_already_loaded(state, async, cascadeDeleteTiming);
 
             AssertSql(
                 @"@__p_0='707' (Nullable = true)
@@ -905,10 +905,8 @@ WHERE [c].[ParentId] = @__p_0"
             bool async
         )
         {
-            await base.Load_many_to_one_reference_to_principal_using_Query_already_loaded(
-                state,
-                async
-            );
+            await base
+                .Load_many_to_one_reference_to_principal_using_Query_already_loaded(state, async);
 
             AssertSql(
                 @"@__p_0='707'
@@ -924,10 +922,8 @@ WHERE [p].[Id] = @__p_0"
             bool async
         )
         {
-            await base.Load_one_to_one_reference_to_principal_using_Query_already_loaded(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_reference_to_principal_using_Query_already_loaded(state, async);
 
             AssertSql(
                 @"@__p_0='707'
@@ -944,11 +940,12 @@ WHERE [p].[Id] = @__p_0"
             CascadeTiming cascadeDeleteTiming
         )
         {
-            await base.Load_one_to_one_reference_to_dependent_using_Query_already_loaded(
-                state,
-                async,
-                cascadeDeleteTiming
-            );
+            await base
+                .Load_one_to_one_reference_to_dependent_using_Query_already_loaded(
+                    state,
+                    async,
+                    cascadeDeleteTiming
+                );
 
             AssertSql(
                 @"@__p_0='707' (Nullable = true)
@@ -964,10 +961,11 @@ WHERE [s].[ParentId] = @__p_0"
             bool async
         )
         {
-            await base.Load_one_to_one_PK_to_PK_reference_to_principal_using_Query_already_loaded(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_PK_to_PK_reference_to_principal_using_Query_already_loaded(
+                    state,
+                    async
+                );
 
             AssertSql(
                 @"@__p_0='707'
@@ -983,10 +981,11 @@ WHERE [p].[Id] = @__p_0"
             bool async
         )
         {
-            await base.Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query_already_loaded(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query_already_loaded(
+                    state,
+                    async
+                );
 
             AssertSql(
                 @"@__p_0='707'
@@ -1204,10 +1203,11 @@ WHERE [c].[ParentId] = @__p_0"
             bool async
         )
         {
-            await base.Load_many_to_one_reference_to_principal_using_Query_not_found_untyped(
-                state,
-                async
-            );
+            await base
+                .Load_many_to_one_reference_to_principal_using_Query_not_found_untyped(
+                    state,
+                    async
+                );
 
             AssertSql(
                 @"@__p_0='787'
@@ -1223,10 +1223,8 @@ WHERE [p].[Id] = @__p_0"
             bool async
         )
         {
-            await base.Load_one_to_one_reference_to_principal_using_Query_not_found_untyped(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_reference_to_principal_using_Query_not_found_untyped(state, async);
 
             AssertSql(
                 @"@__p_0='787'
@@ -1242,10 +1240,8 @@ WHERE [p].[Id] = @__p_0"
             bool async
         )
         {
-            await base.Load_one_to_one_reference_to_dependent_using_Query_not_found_untyped(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_reference_to_dependent_using_Query_not_found_untyped(state, async);
 
             AssertSql(
                 @"@__p_0='767' (Nullable = true)
@@ -1293,11 +1289,12 @@ WHERE [s].[ParentId] = @__p_0"
             CascadeTiming cascadeDeleteTiming
         )
         {
-            await base.Load_one_to_one_reference_to_dependent_already_loaded_untyped(
-                state,
-                async,
-                cascadeDeleteTiming
-            );
+            await base
+                .Load_one_to_one_reference_to_dependent_already_loaded_untyped(
+                    state,
+                    async,
+                    cascadeDeleteTiming
+                );
 
             AssertSql("");
         }
@@ -1308,11 +1305,12 @@ WHERE [s].[ParentId] = @__p_0"
             CascadeTiming cascadeDeleteTiming
         )
         {
-            await base.Load_collection_using_Query_already_loaded_untyped(
-                state,
-                async,
-                cascadeDeleteTiming
-            );
+            await base
+                .Load_collection_using_Query_already_loaded_untyped(
+                    state,
+                    async,
+                    cascadeDeleteTiming
+                );
 
             AssertSql(
                 @"@__p_0='707' (Nullable = true)
@@ -1328,10 +1326,11 @@ WHERE [c].[ParentId] = @__p_0"
             bool async
         )
         {
-            await base.Load_many_to_one_reference_to_principal_using_Query_already_loaded_untyped(
-                state,
-                async
-            );
+            await base
+                .Load_many_to_one_reference_to_principal_using_Query_already_loaded_untyped(
+                    state,
+                    async
+                );
 
             AssertSql(
                 @"@__p_0='707'
@@ -1347,10 +1346,11 @@ WHERE [p].[Id] = @__p_0"
             bool async
         )
         {
-            await base.Load_one_to_one_reference_to_principal_using_Query_already_loaded_untyped(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_reference_to_principal_using_Query_already_loaded_untyped(
+                    state,
+                    async
+                );
 
             AssertSql(
                 @"@__p_0='707'
@@ -1367,11 +1367,12 @@ WHERE [p].[Id] = @__p_0"
             CascadeTiming cascadeDeleteTiming
         )
         {
-            await base.Load_one_to_one_reference_to_dependent_using_Query_already_loaded_untyped(
-                state,
-                async,
-                cascadeDeleteTiming
-            );
+            await base
+                .Load_one_to_one_reference_to_dependent_using_Query_already_loaded_untyped(
+                    state,
+                    async,
+                    cascadeDeleteTiming
+                );
 
             AssertSql(
                 @"@__p_0='707' (Nullable = true)
@@ -1464,10 +1465,8 @@ WHERE [c].[ParentId] = @__p_0"
             bool async
         )
         {
-            await base.Load_many_to_one_reference_to_principal_using_Query_alternate_key(
-                state,
-                async
-            );
+            await base
+                .Load_many_to_one_reference_to_principal_using_Query_alternate_key(state, async);
 
             AssertSql(
                 @"@__p_0='Root' (Size = 450)
@@ -1483,10 +1482,8 @@ WHERE [p].[AlternateId] = @__p_0"
             bool async
         )
         {
-            await base.Load_one_to_one_reference_to_principal_using_Query_alternate_key(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_reference_to_principal_using_Query_alternate_key(state, async);
 
             AssertSql(
                 @"@__p_0='Root' (Size = 450)
@@ -1502,10 +1499,8 @@ WHERE [p].[AlternateId] = @__p_0"
             bool async
         )
         {
-            await base.Load_one_to_one_reference_to_dependent_using_Query_alternate_key(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_reference_to_dependent_using_Query_alternate_key(state, async);
 
             AssertSql(
                 @"@__p_0='Root' (Size = 450)
@@ -1541,10 +1536,11 @@ WHERE [s].[ParentId] = @__p_0"
             bool async
         )
         {
-            await base.Load_many_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
-                state,
-                async
-            );
+            await base
+                .Load_many_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
+                    state,
+                    async
+                );
 
             AssertSql(
                 @"SELECT TOP(2) [p].[Id], [p].[AlternateId]
@@ -1558,10 +1554,11 @@ WHERE 0 = 1"
             bool async
         )
         {
-            await base.Load_one_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
+                    state,
+                    async
+                );
 
             AssertSql(
                 @"SELECT TOP(2) [p].[Id], [p].[AlternateId]
@@ -1720,10 +1717,11 @@ WHERE [s].[ParentId] = @__p_0"
             bool async
         )
         {
-            await base.Load_many_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(
-                state,
-                async
-            );
+            await base
+                .Load_many_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(
+                    state,
+                    async
+                );
 
             AssertSql(
                 @"SELECT TOP(2) [p].[Id], [p].[AlternateId]
@@ -1737,10 +1735,8 @@ WHERE 0 = 1"
             bool async
         )
         {
-            await base.Load_one_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(state, async);
 
             AssertSql(
                 @"SELECT TOP(2) [p].[Id], [p].[AlternateId]
@@ -1836,10 +1832,8 @@ WHERE ([c].[ParentAlternateId] = @__p_0) AND ([c].[ParentId] = @__p_1)"
             bool async
         )
         {
-            await base.Load_many_to_one_reference_to_principal_using_Query_composite_key(
-                state,
-                async
-            );
+            await base
+                .Load_many_to_one_reference_to_principal_using_Query_composite_key(state, async);
 
             AssertSql(
                 @"@__p_0='Root' (Size = 450)
@@ -1856,10 +1850,8 @@ WHERE ([p].[AlternateId] = @__p_0) AND ([p].[Id] = @__p_1)"
             bool async
         )
         {
-            await base.Load_one_to_one_reference_to_principal_using_Query_composite_key(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_reference_to_principal_using_Query_composite_key(state, async);
 
             AssertSql(
                 @"@__p_0='Root' (Size = 450)
@@ -1876,10 +1868,8 @@ WHERE ([p].[AlternateId] = @__p_0) AND ([p].[Id] = @__p_1)"
             bool async
         )
         {
-            await base.Load_one_to_one_reference_to_dependent_using_Query_composite_key(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_reference_to_dependent_using_Query_composite_key(state, async);
 
             AssertSql(
                 @"@__p_0='Root' (Size = 450)
@@ -1916,10 +1906,11 @@ WHERE ([s].[ParentAlternateId] = @__p_0) AND ([s].[ParentId] = @__p_1)"
             bool async
         )
         {
-            await base.Load_many_to_one_reference_to_principal_using_Query_null_FK_composite_key(
-                state,
-                async
-            );
+            await base
+                .Load_many_to_one_reference_to_principal_using_Query_null_FK_composite_key(
+                    state,
+                    async
+                );
 
             AssertSql(
                 @"SELECT TOP(2) [p].[Id], [p].[AlternateId]
@@ -1933,10 +1924,11 @@ WHERE 0 = 1"
             bool async
         )
         {
-            await base.Load_one_to_one_reference_to_principal_using_Query_null_FK_composite_key(
-                state,
-                async
-            );
+            await base
+                .Load_one_to_one_reference_to_principal_using_Query_null_FK_composite_key(
+                    state,
+                    async
+                );
 
             AssertSql(
                 @"SELECT TOP(2) [p].[Id], [p].[AlternateId]
@@ -1961,10 +1953,9 @@ WHERE 0 = 1"
             }
             catch
             {
-                var methodCallLine = Environment.StackTrace.Split(
-                    new[] { Environment.NewLine },
-                    StringSplitOptions.RemoveEmptyEntries
-                )[2].Substring(6);
+                var methodCallLine = Environment.StackTrace
+                    .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)[2]
+                    .Substring(6);
 
                 var testName = methodCallLine.Substring(0, methodCallLine.IndexOf(')') + 1);
                 var lineIndex = methodCallLine.LastIndexOf("line", StringComparison.Ordinal);

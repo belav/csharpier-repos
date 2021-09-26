@@ -44,11 +44,12 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
             {
                 // If this is an informational test result, we can't compare it to anything
                 if (
-                    !string.Equals(
-                        caseResult.ActualBehavior,
-                        "INFORMATIONAL",
-                        StringComparison.Ordinal
-                    )
+                    !string
+                        .Equals(
+                            caseResult.ActualBehavior,
+                            "INFORMATIONAL",
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     Expectation expectation;

@@ -193,33 +193,31 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             const int iterationCount = 2000;
             var ce = new CountdownEvent(s_dop); // used to block tasks until all are ready for execution
-            return Task.WhenAll(
-                Enumerable.Range(0, s_dop)
-                    .Select(
-                        _ =>
-                            Task.Run(
-                                () =>
+            return Task.WhenAll(Enumerable.Range(0, s_dop).Select(
+                    _ =>
+                        Task.Run(
+                            () =>
+                            {
+                                ce.Signal();
+                                ce.Wait();
+                                for (int iteration = 0; iteration < iterationCount; iteration++)
                                 {
-                                    ce.Signal();
-                                    ce.Wait();
-                                    for (int iteration = 0; iteration < iterationCount; iteration++)
-                                    {
-                                        var result = method(arg);
-                                        Assert.True(
-                                            result.Equals(expected),
-                                            string.Format(
+                                    var result = method(arg);
+                                    Assert.True(
+                                        result.Equals(expected),
+                                        string
+                                            .Format(
                                                 "{0} {1}. {2}!={3}",
                                                 blockName,
                                                 methodName,
                                                 result,
                                                 expected
                                             )
-                                        );
-                                    }
+                                    );
                                 }
-                            )
-                    )
-            );
+                            }
+                        )
+                ));
         }
 
         private static BufferBlock<int> ConstructBufferNewWithNMessages(int messagesCount)

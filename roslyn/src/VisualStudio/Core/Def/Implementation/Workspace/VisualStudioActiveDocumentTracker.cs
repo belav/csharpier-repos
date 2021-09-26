@@ -59,14 +59,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ThreadingContext.RunWithShutdownBlockAsync(
                 async cancellationToken =>
                 {
-                    await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+                    await ThreadingContext.JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
 
                     var monitorSelectionService =
                         (IVsMonitorSelection)await asyncServiceProvider.GetServiceAsync(
-                                typeof(SVsShellMonitorSelection)
-                            )
+                            typeof(SVsShellMonitorSelection)
+                        )
                             .ConfigureAwait(true);
                     Assumes.Present(monitorSelectionService);
 
@@ -255,10 +254,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     if (docData is IVsTextBuffer bufferAdapter)
                     {
-                        _textBuffer =
-                            _documentTracker._editorAdaptersFactoryService.GetDocumentBuffer(
-                                bufferAdapter
-                            );
+                        _textBuffer = _documentTracker._editorAdaptersFactoryService
+                            .GetDocumentBuffer(bufferAdapter);
 
                         if (
                             _textBuffer != null

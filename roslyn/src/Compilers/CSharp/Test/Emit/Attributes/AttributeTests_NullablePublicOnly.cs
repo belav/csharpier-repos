@@ -187,9 +187,8 @@ public class B : A<object?>
 public class B : A<object>
 {
 }";
-            var options = TestOptions.ReleaseDll.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var options = TestOptions.ReleaseDll
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var parseOptions = TestOptions.Regular7;
 
             var comp = CreateCompilation(source, options: options, parseOptions: parseOptions);
@@ -355,9 +354,8 @@ public class A
             comp = CreateCompilation(
                 source1,
                 references: new[] { ref0 },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular8.WithNullablePublicOnly()
             );
             comp.VerifyDiagnostics(
@@ -539,9 +537,8 @@ public class Program
         L();
     }
 }";
-            var options = TestOptions.ReleaseExe.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var options = TestOptions.ReleaseExe
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var parseOptions = TestOptions.Regular8;
 
             var comp = CreateCompilation(source, options: options, parseOptions: parseOptions);
@@ -568,9 +565,8 @@ public class Program
         L();
     }
 }";
-            var options = TestOptions.ReleaseExe.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var options = TestOptions.ReleaseExe
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var parseOptions = TestOptions.Regular8;
             CSharpTestSource sources = new[]
             {
@@ -740,9 +736,10 @@ public class Program
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NullablePublicOnlyAttribute"
-                    );
+                    var attributeType = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>(
+                            "System.Runtime.CompilerServices.NullablePublicOnlyAttribute"
+                        );
                     AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
                     Assert.False(attributeUsage.Inherited);
                     Assert.False(attributeUsage.AllowMultiple);

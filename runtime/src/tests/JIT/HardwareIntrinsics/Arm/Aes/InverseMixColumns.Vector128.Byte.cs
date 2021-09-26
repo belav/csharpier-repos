@@ -311,10 +311,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Aes).GetMethod(
-                    nameof(Aes.InverseMixColumns),
-                    new Type[] { typeof(Vector128<Byte>) }
-                )
+            var result = typeof(Aes)
+                .GetMethod(nameof(Aes.InverseMixColumns), new Type[] { typeof(Vector128<Byte>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector128<Byte>>(_dataTable.inArray1Ptr) }
@@ -328,10 +326,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Aes).GetMethod(
-                    nameof(Aes.InverseMixColumns),
-                    new Type[] { typeof(Vector128<Byte>) }
-                )
+            var result = typeof(Aes)
+                .GetMethod(nameof(Aes.InverseMixColumns), new Type[] { typeof(Vector128<Byte>) })
                 .Invoke(
                     null,
                     new object[] { AdvSimd.LoadVector128((Byte*)(_dataTable.inArray1Ptr)) }
@@ -522,15 +518,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Aes)}.{nameof(Aes.InverseMixColumns)}<Byte>(Vector128<Byte>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  expectedRet: ({string.Join(", ", _expectedRet)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Aes)}.{nameof(Aes.InverseMixColumns)}<Byte>(Vector128<Byte>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  expectedRet: ({string.Join(", ", _expectedRet)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

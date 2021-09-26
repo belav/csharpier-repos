@@ -478,12 +478,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     };
                     Assert.Equal(
                         expected: DataflowMessageStatus.Postponed,
-                        actual: ((ITargetBlock<int>)bb).OfferMessage(
-                            new DataflowMessageHeader(2),
-                            2,
-                            badSource,
-                            consumeToAccept: true
-                        )
+                        actual: ((ITargetBlock<int>)bb)
+                            .OfferMessage(
+                                new DataflowMessageHeader(2),
+                                2,
+                                badSource,
+                                consumeToAccept: true
+                            )
                     );
 
                     if (!linkGoodFirst)

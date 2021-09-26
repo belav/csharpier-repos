@@ -537,9 +537,8 @@ namespace System.Reflection.Metadata
 
             private MethodDefinitionHandle GetCurrentMethodIndirect()
             {
-                return _reader.MethodPtrTable.GetMethodFor(
-                    _currentRowId & (int)TokenTypeIds.RIDMask
-                );
+                return _reader.MethodPtrTable
+                    .GetMethodFor(_currentRowId & (int)TokenTypeIds.RIDMask);
             }
 
             public bool MoveNext()
@@ -781,9 +780,8 @@ namespace System.Reflection.Metadata
 
             private PropertyDefinitionHandle GetCurrentPropertyIndirect()
             {
-                return _reader.PropertyPtrTable.GetPropertyFor(
-                    _currentRowId & (int)TokenTypeIds.RIDMask
-                );
+                return _reader.PropertyPtrTable
+                    .GetPropertyFor(_currentRowId & (int)TokenTypeIds.RIDMask);
             }
 
             public bool MoveNext()
@@ -957,11 +955,8 @@ namespace System.Reflection.Metadata
             }
             else
             {
-                reader.MethodImplTable.GetMethodImplRange(
-                    containingType,
-                    out _firstRowId,
-                    out _lastRowId
-                );
+                reader.MethodImplTable
+                    .GetMethodImplRange(containingType, out _firstRowId, out _lastRowId);
             }
         }
 
@@ -1174,11 +1169,8 @@ namespace System.Reflection.Metadata
             Debug.Assert(!implementingType.IsNil);
             _reader = reader;
 
-            reader.InterfaceImplTable.GetInterfaceImplRange(
-                implementingType,
-                out _firstRowId,
-                out _lastRowId
-            );
+            reader.InterfaceImplTable
+                .GetInterfaceImplRange(implementingType, out _firstRowId, out _lastRowId);
         }
 
         public int Count

@@ -105,10 +105,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             if (entityTypeBuilder.CanSetIsMemoryOptimized(memoryOptimized, fromDataAnnotation))
             {
-                entityTypeBuilder.Metadata.SetIsMemoryOptimized(
-                    memoryOptimized,
-                    fromDataAnnotation
-                );
+                entityTypeBuilder.Metadata
+                    .SetIsMemoryOptimized(memoryOptimized, fromDataAnnotation);
                 return entityTypeBuilder;
             }
 

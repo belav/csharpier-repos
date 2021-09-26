@@ -104,13 +104,13 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 return ImmutableArray<CodeAction>.Empty;
 
             var fieldOrProperty = await TryFindMatchingUninitializedFieldOrPropertySymbolAsync(
-                    document,
-                    parameter,
-                    blockStatementOpt,
-                    rules,
-                    parameterNameParts.BaseNameParts,
-                    cancellationToken
-                )
+                document,
+                parameter,
+                blockStatementOpt,
+                rules,
+                parameterNameParts.BaseNameParts,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (fieldOrProperty != null)
@@ -125,14 +125,14 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             }
 
             return await HandleNoExistingFieldOrPropertyAsync(
-                    document,
-                    parameter,
-                    constructorDeclaration,
-                    method,
-                    blockStatementOpt,
-                    rules,
-                    cancellationToken
-                )
+                document,
+                parameter,
+                constructorDeclaration,
+                method,
+                blockStatementOpt,
+                rules,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -537,13 +537,13 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 var fieldOrProperty = fieldsOrProperties[i];
 
                 var currentSemanticModel = await currentDocument.GetRequiredSemanticModelAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var currentCompilation = currentSemanticModel.Compilation;
                 var currentRoot = await currentDocument.GetRequiredSyntaxRootAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var currentConstructorDeclaration = currentRoot.GetCurrentNode(
@@ -572,13 +572,13 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 // fieldOrProperty is a new member.  So we don't have to track it to this edit we're making.
 
                 currentDocument = await AddSingleSymbolInitializationAsync(
-                        currentDocument,
-                        currentConstructorDeclaration,
-                        currentBlockStatementOpt,
-                        currentParameter,
-                        fieldOrProperty,
-                        cancellationToken
-                    )
+                    currentDocument,
+                    currentConstructorDeclaration,
+                    currentBlockStatementOpt,
+                    currentParameter,
+                    fieldOrProperty,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -708,9 +708,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
 
                 if (statement != null && fieldOrProperty is TSymbol symbol)
                 {
-                    var symbolSyntax = symbol.DeclaringSyntaxReferences[0].GetSyntax(
-                        cancellationToken
-                    );
+                    var symbolSyntax = symbol.DeclaringSyntaxReferences[0]
+                        .GetSyntax(cancellationToken);
                     if (symbolSyntax.Ancestors().Contains(typeDeclaration))
                     {
                         if (before)
@@ -742,9 +741,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IParameterSymbol parameter
         )
         {
-            using var _ = ArrayBuilder<(IParameterSymbol, bool before)>.GetInstance(
-                out var siblings
-            );
+            using var _ = ArrayBuilder<(IParameterSymbol, bool before)>
+                .GetInstance(out var siblings);
 
             if (parameter.ContainingSymbol is IMethodSymbol method)
             {
@@ -876,7 +874,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             // Use a variety of heuristics around the name/type to see if this is a match.
 
             var containingType = parameter.ContainingType;
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             // Walk through the naming rules against this parameter's name to see what

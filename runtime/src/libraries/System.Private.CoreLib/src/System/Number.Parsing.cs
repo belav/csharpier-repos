@@ -2146,19 +2146,17 @@ namespace System
                     valueTrim = valueTrim.Slice(info.PositiveSign.Length);
 
                     if (
-                        !info.PositiveInfinitySymbol.StartsWith(
-                            info.PositiveSign,
-                            StringComparison.OrdinalIgnoreCase
-                        ) && valueTrim.EqualsOrdinalIgnoreCase(info.PositiveInfinitySymbol)
+                        !info.PositiveInfinitySymbol
+                            .StartsWith(info.PositiveSign, StringComparison.OrdinalIgnoreCase)
+                        && valueTrim.EqualsOrdinalIgnoreCase(info.PositiveInfinitySymbol)
                     )
                     {
                         result = Half.PositiveInfinity;
                     }
                     else if (
-                        !info.NaNSymbol.StartsWith(
-                            info.PositiveSign,
-                            StringComparison.OrdinalIgnoreCase
-                        ) && valueTrim.EqualsOrdinalIgnoreCase(info.NaNSymbol)
+                        !info.NaNSymbol
+                            .StartsWith(info.PositiveSign, StringComparison.OrdinalIgnoreCase)
+                        && valueTrim.EqualsOrdinalIgnoreCase(info.NaNSymbol)
                     )
                     {
                         result = Half.NaN;
@@ -2171,10 +2169,8 @@ namespace System
                 }
                 else if (
                     valueTrim.StartsWith(info.NegativeSign, StringComparison.OrdinalIgnoreCase)
-                    && !info.NaNSymbol.StartsWith(
-                        info.NegativeSign,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !info.NaNSymbol
+                        .StartsWith(info.NegativeSign, StringComparison.OrdinalIgnoreCase)
                     && valueTrim.Slice(info.NegativeSign.Length)
                         .EqualsOrdinalIgnoreCase(info.NaNSymbol)
                 )
@@ -2184,10 +2180,8 @@ namespace System
                 else if (
                     info.AllowHyphenDuringParsing
                     && SpanStartsWith(valueTrim, '-')
-                    && !info.NaNSymbol.StartsWith(
-                        info.NegativeSign,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !info.NaNSymbol
+                        .StartsWith(info.NegativeSign, StringComparison.OrdinalIgnoreCase)
                     && !info.NaNSymbol.StartsWith('-')
                     && valueTrim.Slice(1).EqualsOrdinalIgnoreCase(info.NaNSymbol)
                 )
@@ -2253,19 +2247,17 @@ namespace System
                     valueTrim = valueTrim.Slice(info.PositiveSign.Length);
 
                     if (
-                        !info.PositiveInfinitySymbol.StartsWith(
-                            info.PositiveSign,
-                            StringComparison.OrdinalIgnoreCase
-                        ) && valueTrim.EqualsOrdinalIgnoreCase(info.PositiveInfinitySymbol)
+                        !info.PositiveInfinitySymbol
+                            .StartsWith(info.PositiveSign, StringComparison.OrdinalIgnoreCase)
+                        && valueTrim.EqualsOrdinalIgnoreCase(info.PositiveInfinitySymbol)
                     )
                     {
                         result = float.PositiveInfinity;
                     }
                     else if (
-                        !info.NaNSymbol.StartsWith(
-                            info.PositiveSign,
-                            StringComparison.OrdinalIgnoreCase
-                        ) && valueTrim.EqualsOrdinalIgnoreCase(info.NaNSymbol)
+                        !info.NaNSymbol
+                            .StartsWith(info.PositiveSign, StringComparison.OrdinalIgnoreCase)
+                        && valueTrim.EqualsOrdinalIgnoreCase(info.NaNSymbol)
                     )
                     {
                         result = float.NaN;
@@ -2278,10 +2270,8 @@ namespace System
                 }
                 else if (
                     valueTrim.StartsWith(info.NegativeSign, StringComparison.OrdinalIgnoreCase)
-                    && !info.NaNSymbol.StartsWith(
-                        info.NegativeSign,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !info.NaNSymbol
+                        .StartsWith(info.NegativeSign, StringComparison.OrdinalIgnoreCase)
                     && valueTrim.Slice(info.NegativeSign.Length)
                         .EqualsOrdinalIgnoreCase(info.NaNSymbol)
                 )
@@ -2291,10 +2281,8 @@ namespace System
                 else if (
                     info.AllowHyphenDuringParsing
                     && SpanStartsWith(valueTrim, '-')
-                    && !info.NaNSymbol.StartsWith(
-                        info.NegativeSign,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !info.NaNSymbol
+                        .StartsWith(info.NegativeSign, StringComparison.OrdinalIgnoreCase)
                     && !info.NaNSymbol.StartsWith('-')
                     && valueTrim.Slice(1).EqualsOrdinalIgnoreCase(info.NaNSymbol)
                 )

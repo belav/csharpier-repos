@@ -40,9 +40,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         }
 
         private static string Literal(Geometry value, string storeType) =>
-            new SqlServerGeometryTypeMapping<Geometry>(
-                NtsGeometryServices.Instance,
-                storeType
-            ).GenerateSqlLiteral(value);
+            new SqlServerGeometryTypeMapping<Geometry>(NtsGeometryServices.Instance, storeType)
+                .GenerateSqlLiteral(value);
     }
 }

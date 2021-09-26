@@ -455,7 +455,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var categoryFk = productsNavigation.ForeignKey;
                 Assert.Equal("CategoryWithAttributeId", categoryFk.Properties.Single().Name);
 
-                var categoryNavigation = productsNavigation.TargetEntityType.GetSkipNavigations()
+                var categoryNavigation = productsNavigation.TargetEntityType
+                    .GetSkipNavigations()
                     .Single();
                 var productFk = categoryNavigation.ForeignKey;
                 Assert.Equal("ProductWithAttributeId", productFk.Properties.Single().Name);
@@ -527,9 +528,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Equal(
                     "_randomField",
-                    model.FindEntityType(typeof(ManyToManyNavPrincipal))!.FindSkipNavigation(
-                        "Dependents"
-                    )!.GetFieldName()
+                    model.FindEntityType(typeof(ManyToManyNavPrincipal))!
+                        .FindSkipNavigation("Dependents")!
+                        .GetFieldName()
                 );
             }
 

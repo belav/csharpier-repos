@@ -134,7 +134,8 @@ namespace System.Xml
             int capacity = _data != null ? _data.Length : 0;
             if (strData != null)
                 capacity += strData.Length;
-            string newValue = new StringBuilder(capacity).Append(_data)
+            string newValue = new StringBuilder(capacity)
+                .Append(_data)
                 .Insert(offset, strData)
                 .ToString();
             XmlNodeChangedEventArgs? args = GetEventArgs(

@@ -142,9 +142,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     {
                         if (
                             char.IsWhiteSpace(character)
-                            || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(
-                                character
-                            )
+                            || HtmlConventions.InvalidNonWhitespaceHtmlCharacters
+                                .Contains(character)
                         )
                         {
                             var diagnostic =

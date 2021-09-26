@@ -15,12 +15,11 @@ namespace Company.Application1
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureServices(
-                    (hostContext, services) =>
-                    {
-                        services.AddHostedService<Worker>();
-                    }
-                );
+            Host.CreateDefaultBuilder(args).ConfigureServices(
+                (hostContext, services) =>
+                {
+                    services.AddHostedService<Worker>();
+                }
+            );
     }
 }

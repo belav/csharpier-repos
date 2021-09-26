@@ -210,9 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
 
                 var newSourceText = newDocument.GetSyntaxRootSynchronously(CancellationToken)
                     .SyntaxTree.GetText(CancellationToken);
-                var baseLine = newSourceText.Lines.GetLineFromPosition(
-                    desiredIndentation.BasePosition
-                );
+                var baseLine = newSourceText.Lines
+                    .GetLineFromPosition(desiredIndentation.BasePosition);
 
                 var baseOffsetInLineInPositions = desiredIndentation.BasePosition - baseLine.Start;
                 var baseOffsetInLineInColumns = baseLine.GetColumnFromLineOffset(

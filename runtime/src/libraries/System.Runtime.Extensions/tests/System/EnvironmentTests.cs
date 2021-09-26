@@ -49,21 +49,20 @@ namespace System.Tests
         public void CurrentDirectory_SetToValidOtherDirectory()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Environment.CurrentDirectory = TestDirectory;
-                        Assert.Equal(Directory.GetCurrentDirectory(), Environment.CurrentDirectory);
+                () =>
+                {
+                    Environment.CurrentDirectory = TestDirectory;
+                    Assert.Equal(Directory.GetCurrentDirectory(), Environment.CurrentDirectory);
 
-                        if (!OperatingSystem.IsMacOS())
-                        {
-                            // On OSX, the temp directory /tmp/ is a symlink to /private/tmp, so setting the current
-                            // directory to a symlinked path will result in GetCurrentDirectory returning the absolute
-                            // path that followed the symlink.
-                            Assert.Equal(TestDirectory, Directory.GetCurrentDirectory());
-                        }
+                    if (!OperatingSystem.IsMacOS())
+                    {
+                        // On OSX, the temp directory /tmp/ is a symlink to /private/tmp, so setting the current
+                        // directory to a symlinked path will result in GetCurrentDirectory returning the absolute
+                        // path that followed the symlink.
+                        Assert.Equal(TestDirectory, Directory.GetCurrentDirectory());
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         [Fact]
@@ -78,9 +77,7 @@ namespace System.Tests
             var ids = new HashSet<int>();
             Barrier b = new Barrier(10);
             Task.WaitAll(
-                (
-                    from i in Enumerable.Range(0, b.ParticipantCount)
-                    select Task.Factory.StartNew(
+                (from i in Enumerable.Range(0, b.ParticipantCount) select Task.Factory.StartNew(
                         () =>
                         {
                             b.SignalAndWait();
@@ -91,8 +88,7 @@ namespace System.Tests
                         CancellationToken.None,
                         TaskCreationOptions.LongRunning,
                         TaskScheduler.Default
-                    )
-                ).ToArray()
+                    )).ToArray()
             );
             Assert.Equal(b.ParticipantCount, ids.Count);
         }
@@ -232,10 +228,8 @@ namespace System.Tests
             int revision
         )
         {
-            var getOSMethod = typeof(Environment).GetMethod(
-                "GetOperatingSystem",
-                BindingFlags.Static | BindingFlags.NonPublic
-            );
+            var getOSMethod = typeof(Environment)
+                .GetMethod("GetOperatingSystem", BindingFlags.Static | BindingFlags.NonPublic);
 
             var expected = new Version(major, minor, build, revision);
             var actual =

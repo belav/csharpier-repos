@@ -36,9 +36,10 @@ namespace System.Web.WebPages.ApplicationParts
         {
             get
             {
-                return _applicationParts.Values.FirstOrDefault(
-                    appPart => appPart.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-                );
+                return _applicationParts.Values
+                    .FirstOrDefault(
+                        appPart => appPart.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+                    );
             }
         }
 
@@ -118,9 +119,9 @@ namespace System.Web.WebPages.ApplicationParts
         )
         {
             var virtualPathAttribute = webPageType.GetCustomAttributes(
-                    typeof(PageVirtualPathAttribute),
-                    false
-                )
+                typeof(PageVirtualPathAttribute),
+                false
+            )
                 .Cast<PageVirtualPathAttribute>()
                 .SingleOrDefault();
 

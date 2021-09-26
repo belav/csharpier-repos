@@ -74,16 +74,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     )
                     {
                         if (
-                            string.Equals(
-                                existingDeclaration.AttributeName,
-                                node.AttributeName,
-                                StringComparison.Ordinal
-                            )
-                            && string.Equals(
-                                existingDeclaration.Value,
-                                plainTextValue,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    existingDeclaration.AttributeName,
+                                    node.AttributeName,
+                                    StringComparison.Ordinal
+                                )
+                            && string
+                                .Equals(
+                                    existingDeclaration.Value,
+                                    plainTextValue,
+                                    StringComparison.Ordinal
+                                )
                             && existingDeclaration.AttributeStructure == node.AttributeStructure
                         )
                         {
@@ -147,16 +149,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     )
                     {
                         if (
-                            string.Equals(
-                                existingDeclaration.AttributeName,
-                                node.AttributeName,
-                                StringComparison.Ordinal
-                            )
-                            && string.Equals(
-                                existingDeclaration.Value,
-                                plainTextValue,
-                                StringComparison.Ordinal
-                            )
+                            string
+                                .Equals(
+                                    existingDeclaration.AttributeName,
+                                    node.AttributeName,
+                                    StringComparison.Ordinal
+                                )
+                            && string
+                                .Equals(
+                                    existingDeclaration.Value,
+                                    plainTextValue,
+                                    StringComparison.Ordinal
+                                )
                             && existingDeclaration.AttributeStructure == node.AttributeStructure
                         )
                         {

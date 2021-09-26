@@ -732,14 +732,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (8,13): error CS0570: 'TestRef.M(in int)' is not supported by the language
-                    //         obj.M(value);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("TestRef.M(in int)")
-                        .WithLocation(8, 13)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (8,13): error CS0570: 'TestRef.M(in int)' is not supported by the language
+                //         obj.M(value);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("TestRef.M(in int)")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
@@ -795,14 +794,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (7,38): error CS0570: 'TestRef.M()' is not supported by the language
-                    //         System.Console.WriteLine(obj.M());
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("TestRef.M()")
-                        .WithLocation(7, 38)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (7,38): error CS0570: 'TestRef.M()' is not supported by the language
+                //         System.Console.WriteLine(obj.M());
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("TestRef.M()")
+                    .WithLocation(7, 38)
+            );
         }
 
         [Fact]
@@ -861,14 +859,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (7,38): error CS1546: Property, indexer, or event 'TestRef.P' is not supported by the language; try directly calling accessor method 'TestRef.get_P()'
-                    //         System.Console.WriteLine(obj.P);
-                    Diagnostic(ErrorCode.ERR_BindToBogusProp1, "P")
-                        .WithArguments("TestRef.P", "TestRef.get_P()")
-                        .WithLocation(7, 38)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (7,38): error CS1546: Property, indexer, or event 'TestRef.P' is not supported by the language; try directly calling accessor method 'TestRef.get_P()'
+                //         System.Console.WriteLine(obj.P);
+                Diagnostic(ErrorCode.ERR_BindToBogusProp1, "P")
+                    .WithArguments("TestRef.P", "TestRef.get_P()")
+                    .WithLocation(7, 38)
+            );
 
             code =
                 @"
@@ -881,14 +878,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (7,38): error CS0570: 'TestRef.get_P()' is not supported by the language
-                    //         System.Console.WriteLine(obj.get_P());
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "get_P")
-                        .WithArguments("TestRef.get_P()")
-                        .WithLocation(7, 38)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (7,38): error CS0570: 'TestRef.get_P()' is not supported by the language
+                //         System.Console.WriteLine(obj.get_P());
+                Diagnostic(ErrorCode.ERR_BindToBogus, "get_P")
+                    .WithArguments("TestRef.get_P()")
+                    .WithLocation(7, 38)
+            );
         }
 
         [Fact]
@@ -944,14 +940,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (8,9): error CS1546: Property, indexer, or event 'TestRef.this[in int]' is not supported by the language; try directly calling accessor method 'TestRef.set_Item(in int, int)'
-                    //         obj[value] = 0;
-                    Diagnostic(ErrorCode.ERR_BindToBogusProp1, "obj[value]")
-                        .WithArguments("TestRef.this[in int]", "TestRef.set_Item(in int, int)")
-                        .WithLocation(8, 9)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (8,9): error CS1546: Property, indexer, or event 'TestRef.this[in int]' is not supported by the language; try directly calling accessor method 'TestRef.set_Item(in int, int)'
+                //         obj[value] = 0;
+                Diagnostic(ErrorCode.ERR_BindToBogusProp1, "obj[value]")
+                    .WithArguments("TestRef.this[in int]", "TestRef.set_Item(in int, int)")
+                    .WithLocation(8, 9)
+            );
 
             code =
                 @"
@@ -965,14 +960,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (8,13): error CS0570: 'TestRef.set_Item(in int, int)' is not supported by the language
-                    //         obj.set_Item(value, 0);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "set_Item")
-                        .WithArguments("TestRef.set_Item(in int, int)")
-                        .WithLocation(8, 13)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (8,13): error CS0570: 'TestRef.set_Item(in int, int)' is not supported by the language
+                //         obj.set_Item(value, 0);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "set_Item")
+                    .WithArguments("TestRef.set_Item(in int, int)")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
@@ -1035,14 +1029,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (7,34): error CS1546: Property, indexer, or event 'TestRef.this[int]' is not supported by the language; try directly calling accessor method 'TestRef.get_Item(int)'
-                    //         System.Console.WriteLine(obj[0]);
-                    Diagnostic(ErrorCode.ERR_BindToBogusProp1, "obj[0]")
-                        .WithArguments("TestRef.this[int]", "TestRef.get_Item(int)")
-                        .WithLocation(7, 34)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (7,34): error CS1546: Property, indexer, or event 'TestRef.this[int]' is not supported by the language; try directly calling accessor method 'TestRef.get_Item(int)'
+                //         System.Console.WriteLine(obj[0]);
+                Diagnostic(ErrorCode.ERR_BindToBogusProp1, "obj[0]")
+                    .WithArguments("TestRef.this[int]", "TestRef.get_Item(int)")
+                    .WithLocation(7, 34)
+            );
 
             code =
                 @"
@@ -1055,14 +1048,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (7,38): error CS0570: 'TestRef.get_Item(int)' is not supported by the language
-                    //         System.Console.WriteLine(obj.get_Item(0));
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "get_Item")
-                        .WithArguments("TestRef.get_Item(int)")
-                        .WithLocation(7, 38)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (7,38): error CS0570: 'TestRef.get_Item(int)' is not supported by the language
+                //         System.Console.WriteLine(obj.get_Item(0));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "get_Item")
+                    .WithArguments("TestRef.get_Item(int)")
+                    .WithLocation(7, 38)
+            );
         }
 
         [Fact]
@@ -1119,22 +1111,18 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (6,17): error CS0570: 'D.Invoke(in int)' is not supported by the language
-                    //         Process((in int p) => System.Console.WriteLine(p));
-                    Diagnostic(
-                            ErrorCode.ERR_BindToBogus,
-                            "(in int p) => System.Console.WriteLine(p)"
-                        )
-                        .WithArguments("D.Invoke(in int)")
-                        .WithLocation(6, 17),
-                    // (12,9): error CS0570: 'D.Invoke(in int)' is not supported by the language
-                    //         func(value);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "func(value)")
-                        .WithArguments("D.Invoke(in int)")
-                        .WithLocation(12, 9)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (6,17): error CS0570: 'D.Invoke(in int)' is not supported by the language
+                //         Process((in int p) => System.Console.WriteLine(p));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "(in int p) => System.Console.WriteLine(p)")
+                    .WithArguments("D.Invoke(in int)")
+                    .WithLocation(6, 17),
+                // (12,9): error CS0570: 'D.Invoke(in int)' is not supported by the language
+                //         func(value);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "func(value)")
+                    .WithArguments("D.Invoke(in int)")
+                    .WithLocation(12, 9)
+            );
         }
 
         [Fact]
@@ -1190,19 +1178,18 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (8,17): error CS0570: 'D.Invoke()' is not supported by the language
-                    //         Process(() => ref value);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "() => ref value")
-                        .WithArguments("D.Invoke()")
-                        .WithLocation(8, 17),
-                    // (13,34): error CS0570: 'D.Invoke()' is not supported by the language
-                    //         System.Console.WriteLine(func());
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "func()")
-                        .WithArguments("D.Invoke()")
-                        .WithLocation(13, 34)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (8,17): error CS0570: 'D.Invoke()' is not supported by the language
+                //         Process(() => ref value);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "() => ref value")
+                    .WithArguments("D.Invoke()")
+                    .WithLocation(8, 17),
+                // (13,34): error CS0570: 'D.Invoke()' is not supported by the language
+                //         System.Console.WriteLine(func());
+                Diagnostic(ErrorCode.ERR_BindToBogus, "func()")
+                    .WithArguments("D.Invoke()")
+                    .WithLocation(13, 34)
+            );
         }
 
         [Fact]
@@ -1254,14 +1241,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (8,13): error CS0570: 'TestRef.M(in int)' is not supported by the language
-                    //         obj.M(value);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("TestRef.M(in int)")
-                        .WithLocation(8, 13)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (8,13): error CS0570: 'TestRef.M(in int)' is not supported by the language
+                //         obj.M(value);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("TestRef.M(in int)")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
@@ -1317,14 +1303,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (7,38): error CS0570: 'TestRef.M()' is not supported by the language
-                    //         System.Console.WriteLine(obj.M());
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("TestRef.M()")
-                        .WithLocation(7, 38)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (7,38): error CS0570: 'TestRef.M()' is not supported by the language
+                //         System.Console.WriteLine(obj.M());
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("TestRef.M()")
+                    .WithLocation(7, 38)
+            );
         }
 
         [Fact]
@@ -1383,14 +1368,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (7,38): error CS1546: Property, indexer, or event 'TestRef.P' is not supported by the language; try directly calling accessor method 'TestRef.get_P()'
-                    //         System.Console.WriteLine(obj.P);
-                    Diagnostic(ErrorCode.ERR_BindToBogusProp1, "P")
-                        .WithArguments("TestRef.P", "TestRef.get_P()")
-                        .WithLocation(7, 38)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (7,38): error CS1546: Property, indexer, or event 'TestRef.P' is not supported by the language; try directly calling accessor method 'TestRef.get_P()'
+                //         System.Console.WriteLine(obj.P);
+                Diagnostic(ErrorCode.ERR_BindToBogusProp1, "P")
+                    .WithArguments("TestRef.P", "TestRef.get_P()")
+                    .WithLocation(7, 38)
+            );
 
             code =
                 @"
@@ -1403,14 +1387,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (7,38): error CS0570: 'TestRef.get_P()' is not supported by the language
-                    //         System.Console.WriteLine(obj.get_P());
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "get_P")
-                        .WithArguments("TestRef.get_P()")
-                        .WithLocation(7, 38)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (7,38): error CS0570: 'TestRef.get_P()' is not supported by the language
+                //         System.Console.WriteLine(obj.get_P());
+                Diagnostic(ErrorCode.ERR_BindToBogus, "get_P")
+                    .WithArguments("TestRef.get_P()")
+                    .WithLocation(7, 38)
+            );
         }
 
         [Fact]
@@ -1466,14 +1449,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (8,9): error CS1546: Property, indexer, or event 'TestRef.this[in int]' is not supported by the language; try directly calling accessor method 'TestRef.set_Item(in int, int)'
-                    //         obj[value] = 0;
-                    Diagnostic(ErrorCode.ERR_BindToBogusProp1, "obj[value]")
-                        .WithArguments("TestRef.this[in int]", "TestRef.set_Item(in int, int)")
-                        .WithLocation(8, 9)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (8,9): error CS1546: Property, indexer, or event 'TestRef.this[in int]' is not supported by the language; try directly calling accessor method 'TestRef.set_Item(in int, int)'
+                //         obj[value] = 0;
+                Diagnostic(ErrorCode.ERR_BindToBogusProp1, "obj[value]")
+                    .WithArguments("TestRef.this[in int]", "TestRef.set_Item(in int, int)")
+                    .WithLocation(8, 9)
+            );
 
             code =
                 @"
@@ -1487,14 +1469,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (8,13): error CS0570: 'TestRef.set_Item(in int, int)' is not supported by the language
-                    //         obj.set_Item(value, 0);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "set_Item")
-                        .WithArguments("TestRef.set_Item(in int, int)")
-                        .WithLocation(8, 13)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (8,13): error CS0570: 'TestRef.set_Item(in int, int)' is not supported by the language
+                //         obj.set_Item(value, 0);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "set_Item")
+                    .WithArguments("TestRef.set_Item(in int, int)")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
@@ -1557,14 +1538,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (7,34): error CS1546: Property, indexer, or event 'TestRef.this[int]' is not supported by the language; try directly calling accessor method 'TestRef.get_Item(int)'
-                    //         System.Console.WriteLine(obj[0]);
-                    Diagnostic(ErrorCode.ERR_BindToBogusProp1, "obj[0]")
-                        .WithArguments("TestRef.this[int]", "TestRef.get_Item(int)")
-                        .WithLocation(7, 34)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (7,34): error CS1546: Property, indexer, or event 'TestRef.this[int]' is not supported by the language; try directly calling accessor method 'TestRef.get_Item(int)'
+                //         System.Console.WriteLine(obj[0]);
+                Diagnostic(ErrorCode.ERR_BindToBogusProp1, "obj[0]")
+                    .WithArguments("TestRef.this[int]", "TestRef.get_Item(int)")
+                    .WithLocation(7, 34)
+            );
 
             code =
                 @"
@@ -1577,14 +1557,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (7,38): error CS0570: 'TestRef.get_Item(int)' is not supported by the language
-                    //         System.Console.WriteLine(obj.get_Item(0));
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "get_Item")
-                        .WithArguments("TestRef.get_Item(int)")
-                        .WithLocation(7, 38)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (7,38): error CS0570: 'TestRef.get_Item(int)' is not supported by the language
+                //         System.Console.WriteLine(obj.get_Item(0));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "get_Item")
+                    .WithArguments("TestRef.get_Item(int)")
+                    .WithLocation(7, 38)
+            );
         }
 
         [Fact]
@@ -1641,22 +1620,18 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (6,17): error CS0570: 'D.Invoke(in int)' is not supported by the language
-                    //         Process((in int p) => System.Console.WriteLine(p));
-                    Diagnostic(
-                            ErrorCode.ERR_BindToBogus,
-                            "(in int p) => System.Console.WriteLine(p)"
-                        )
-                        .WithArguments("D.Invoke(in int)")
-                        .WithLocation(6, 17),
-                    // (12,9): error CS0570: 'D.Invoke(in int)' is not supported by the language
-                    //         func(value);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "func(value)")
-                        .WithArguments("D.Invoke(in int)")
-                        .WithLocation(12, 9)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (6,17): error CS0570: 'D.Invoke(in int)' is not supported by the language
+                //         Process((in int p) => System.Console.WriteLine(p));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "(in int p) => System.Console.WriteLine(p)")
+                    .WithArguments("D.Invoke(in int)")
+                    .WithLocation(6, 17),
+                // (12,9): error CS0570: 'D.Invoke(in int)' is not supported by the language
+                //         func(value);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "func(value)")
+                    .WithArguments("D.Invoke(in int)")
+                    .WithLocation(12, 9)
+            );
         }
 
         [Fact]
@@ -1712,19 +1687,18 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyDiagnostics(
-                    // (8,17): error CS0570: 'D.Invoke()' is not supported by the language
-                    //         Process(() => ref value);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "() => ref value")
-                        .WithArguments("D.Invoke()")
-                        .WithLocation(8, 17),
-                    // (13,34): error CS0570: 'D.Invoke()' is not supported by the language
-                    //         System.Console.WriteLine(func());
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "func()")
-                        .WithArguments("D.Invoke()")
-                        .WithLocation(13, 34)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
+                // (8,17): error CS0570: 'D.Invoke()' is not supported by the language
+                //         Process(() => ref value);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "() => ref value")
+                    .WithArguments("D.Invoke()")
+                    .WithLocation(8, 17),
+                // (13,34): error CS0570: 'D.Invoke()' is not supported by the language
+                //         System.Console.WriteLine(func());
+                Diagnostic(ErrorCode.ERR_BindToBogus, "func()")
+                    .WithArguments("D.Invoke()")
+                    .WithLocation(13, 34)
+            );
         }
 
         [Fact]
@@ -1742,14 +1716,13 @@ class Test
     public virtual void M(in object x) { }
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,27): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
-                    //     public virtual void M(in object x) { }
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "in object x")
-                        .WithArguments("System.Runtime.InteropServices.InAttribute")
-                        .WithLocation(9, 27)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (9,27): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
+                //     public virtual void M(in object x) { }
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "in object x")
+                    .WithArguments("System.Runtime.InteropServices.InAttribute")
+                    .WithLocation(9, 27)
+            );
         }
 
         [Fact]
@@ -1768,14 +1741,13 @@ class Test
     public virtual ref readonly object M() => ref value;
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (10,20): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
-                    //     public virtual ref readonly object M() => ref value;
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "ref readonly object")
-                        .WithArguments("System.Runtime.InteropServices.InAttribute")
-                        .WithLocation(10, 20)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (10,20): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
+                //     public virtual ref readonly object M() => ref value;
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "ref readonly object")
+                    .WithArguments("System.Runtime.InteropServices.InAttribute")
+                    .WithLocation(10, 20)
+            );
         }
 
         [Fact]
@@ -1794,14 +1766,13 @@ class Test
     public virtual ref readonly object M => ref value;
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (10,20): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
-                    //     public virtual ref readonly object M => ref value;
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "ref readonly object")
-                        .WithArguments("System.Runtime.InteropServices.InAttribute")
-                        .WithLocation(10, 20)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (10,20): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
+                //     public virtual ref readonly object M => ref value;
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "ref readonly object")
+                    .WithArguments("System.Runtime.InteropServices.InAttribute")
+                    .WithLocation(10, 20)
+            );
         }
 
         [Fact]
@@ -1819,14 +1790,13 @@ class Test
     public virtual object this[in object p] => null;
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (9,32): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
-                    //     public virtual object this[in object p] => null;
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "in object p")
-                        .WithArguments("System.Runtime.InteropServices.InAttribute")
-                        .WithLocation(9, 32)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (9,32): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
+                //     public virtual object this[in object p] => null;
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "in object p")
+                    .WithArguments("System.Runtime.InteropServices.InAttribute")
+                    .WithLocation(9, 32)
+            );
         }
 
         [Fact]
@@ -1845,14 +1815,13 @@ class Test
     public virtual ref readonly object this[object p] => ref value;
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (10,20): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
-                    //     public virtual ref readonly object this[object p] => ref value;
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "ref readonly object")
-                        .WithArguments("System.Runtime.InteropServices.InAttribute")
-                        .WithLocation(10, 20)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (10,20): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
+                //     public virtual ref readonly object this[object p] => ref value;
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "ref readonly object")
+                    .WithArguments("System.Runtime.InteropServices.InAttribute")
+                    .WithLocation(10, 20)
+            );
         }
 
         [Fact]
@@ -1871,14 +1840,13 @@ namespace System
 }
 public delegate void D(in int p);";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (11,24): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
-                    // public delegate void D(in int p);
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "in int p")
-                        .WithArguments("System.Runtime.InteropServices.InAttribute")
-                        .WithLocation(11, 24)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (11,24): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
+                // public delegate void D(in int p);
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "in int p")
+                    .WithArguments("System.Runtime.InteropServices.InAttribute")
+                    .WithLocation(11, 24)
+            );
         }
 
         [Fact]
@@ -1897,14 +1865,13 @@ namespace System
 }
 public delegate ref readonly int D();";
 
-            CreateEmptyCompilation(code)
-                .VerifyDiagnostics(
-                    // (11,17): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
-                    // public delegate ref readonly int D();
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "ref readonly int")
-                        .WithArguments("System.Runtime.InteropServices.InAttribute")
-                        .WithLocation(11, 17)
-                );
+            CreateEmptyCompilation(code).VerifyDiagnostics(
+                // (11,17): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
+                // public delegate ref readonly int D();
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "ref readonly int")
+                    .WithArguments("System.Runtime.InteropServices.InAttribute")
+                    .WithLocation(11, 17)
+            );
         }
 
         [Fact]
@@ -1919,7 +1886,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var parameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var parameter = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method")
                     .Parameters.Single();
 
@@ -1947,7 +1915,8 @@ abstract class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var parameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var parameter = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method")
                     .Parameters.Single();
 
@@ -1976,7 +1945,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var method = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var method = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method");
 
                 Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
@@ -2003,7 +1973,8 @@ abstract class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var method = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var method = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method");
 
                 Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
@@ -2031,7 +2002,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var method = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var method = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method");
 
                 Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
@@ -2059,7 +2031,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var method = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var method = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method");
 
                 Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
@@ -2087,7 +2060,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var property = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var property = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("Property");
 
                 Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
@@ -2114,7 +2088,8 @@ abstract class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var property = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var property = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("Property");
 
                 Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
@@ -2142,7 +2117,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var property = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var property = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("Property");
 
                 Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
@@ -2170,7 +2146,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var property = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var property = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("Property");
 
                 Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
@@ -2197,7 +2174,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var parameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var parameter = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]")
                     .Parameters.Single();
 
@@ -2225,7 +2203,8 @@ abstract class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var parameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var parameter = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]")
                     .Parameters.Single();
 
@@ -2254,7 +2233,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var indexer = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var indexer = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]");
 
                 Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
@@ -2281,7 +2261,8 @@ abstract class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var indexer = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var indexer = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]");
 
                 Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
@@ -2310,7 +2291,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var indexer = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var indexer = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]");
 
                 Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
@@ -2393,7 +2375,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var parameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var parameter = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method")
                     .Parameters.Single();
 
@@ -2421,7 +2404,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var parameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var parameter = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method")
                     .Parameters.Single();
 
@@ -2449,7 +2433,8 @@ class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var parameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var parameter = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]")
                     .Parameters.Single();
 
@@ -2477,7 +2462,8 @@ public class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var parameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var parameter = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("op_LogicalNot")
                     .Parameters.Single();
 
@@ -2506,7 +2492,8 @@ public class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var parameters =
-                    module.ContainingAssembly.GetTypeByMetadataName("Test")
+                    module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("op_Addition").Parameters;
                 Assert.Equal(2, parameters.Length);
 
@@ -2537,7 +2524,8 @@ public class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var parameter = module.ContainingAssembly.GetTypeByMetadataName("Test")
+                var parameter = module.ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod(".ctor")
                     .Parameters.Single();
 
@@ -2589,14 +2577,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { CompileIL(ilSource) })
-                .VerifyDiagnostics(
-                    // (8,13): error CS0570: 'TestRef.M(ref int)' is not supported by the language
-                    //         obj.M(ref value);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("TestRef.M(ref int)")
-                        .WithLocation(8, 13)
-                );
+            CreateCompilation(code, references: new[] { CompileIL(ilSource) }).VerifyDiagnostics(
+                // (8,13): error CS0570: 'TestRef.M(ref int)' is not supported by the language
+                //         obj.M(ref value);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("TestRef.M(ref int)")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
@@ -2646,14 +2633,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { CompileIL(ilSource) })
-                .VerifyDiagnostics(
-                    // (7,25): error CS0570: 'TestRef.M()' is not supported by the language
-                    //         var value = obj.M();
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "M")
-                        .WithArguments("TestRef.M()")
-                        .WithLocation(7, 25)
-                );
+            CreateCompilation(code, references: new[] { CompileIL(ilSource) }).VerifyDiagnostics(
+                // (7,25): error CS0570: 'TestRef.M()' is not supported by the language
+                //         var value = obj.M();
+                Diagnostic(ErrorCode.ERR_BindToBogus, "M")
+                    .WithArguments("TestRef.M()")
+                    .WithLocation(7, 25)
+            );
         }
 
         [Fact]
@@ -2702,14 +2688,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { CompileIL(ilSource) })
-                .VerifyDiagnostics(
-                    // (7,25): error CS0570: 'TestRef.P' is not supported by the language
-                    //         var value = obj.P;
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "P")
-                        .WithArguments("TestRef.P")
-                        .WithLocation(7, 25)
-                );
+            CreateCompilation(code, references: new[] { CompileIL(ilSource) }).VerifyDiagnostics(
+                // (7,25): error CS0570: 'TestRef.P' is not supported by the language
+                //         var value = obj.P;
+                Diagnostic(ErrorCode.ERR_BindToBogus, "P")
+                    .WithArguments("TestRef.P")
+                    .WithLocation(7, 25)
+            );
         }
 
         [Fact]
@@ -2760,14 +2745,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { CompileIL(ilSource) })
-                .VerifyDiagnostics(
-                    // (8,9): error CS1546: Property, indexer, or event 'TestRef.this[ref int]' is not supported by the language; try directly calling accessor method 'TestRef.set_Item(ref int, int)'
-                    //         obj[value] = 0;
-                    Diagnostic(ErrorCode.ERR_BindToBogusProp1, "obj[value]")
-                        .WithArguments("TestRef.this[ref int]", "TestRef.set_Item(ref int, int)")
-                        .WithLocation(8, 9)
-                );
+            CreateCompilation(code, references: new[] { CompileIL(ilSource) }).VerifyDiagnostics(
+                // (8,9): error CS1546: Property, indexer, or event 'TestRef.this[ref int]' is not supported by the language; try directly calling accessor method 'TestRef.set_Item(ref int, int)'
+                //         obj[value] = 0;
+                Diagnostic(ErrorCode.ERR_BindToBogusProp1, "obj[value]")
+                    .WithArguments("TestRef.this[ref int]", "TestRef.set_Item(ref int, int)")
+                    .WithLocation(8, 9)
+            );
 
             code =
                 @"
@@ -2781,14 +2765,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { CompileIL(ilSource) })
-                .VerifyDiagnostics(
-                    // (8,13): error CS0570: 'TestRef.set_Item(ref int, int)' is not supported by the language
-                    //         obj.set_Item(value, 0);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "set_Item")
-                        .WithArguments("TestRef.set_Item(ref int, int)")
-                        .WithLocation(8, 13)
-                );
+            CreateCompilation(code, references: new[] { CompileIL(ilSource) }).VerifyDiagnostics(
+                // (8,13): error CS0570: 'TestRef.set_Item(ref int, int)' is not supported by the language
+                //         obj.set_Item(value, 0);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "set_Item")
+                    .WithArguments("TestRef.set_Item(ref int, int)")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
@@ -2839,14 +2822,13 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { CompileIL(ilSource) })
-                .VerifyDiagnostics(
-                    // (7,21): error CS0570: 'TestRef.this[int]' is not supported by the language
-                    //         var value = obj[5];
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "obj[5]")
-                        .WithArguments("TestRef.this[int]")
-                        .WithLocation(7, 21)
-                );
+            CreateCompilation(code, references: new[] { CompileIL(ilSource) }).VerifyDiagnostics(
+                // (7,21): error CS0570: 'TestRef.this[int]' is not supported by the language
+                //         var value = obj[5];
+                Diagnostic(ErrorCode.ERR_BindToBogus, "obj[5]")
+                    .WithArguments("TestRef.this[int]")
+                    .WithLocation(7, 21)
+            );
         }
 
         [Fact]
@@ -2894,22 +2876,18 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { CompileIL(ilSource) })
-                .VerifyDiagnostics(
-                    // (6,17): error CS0570: 'D.Invoke(ref int)' is not supported by the language
-                    //         Process((in int p) => System.Console.WriteLine(p));
-                    Diagnostic(
-                            ErrorCode.ERR_BindToBogus,
-                            "(in int p) => System.Console.WriteLine(p)"
-                        )
-                        .WithArguments("D.Invoke(ref int)")
-                        .WithLocation(6, 17),
-                    // (12,9): error CS0570: 'D.Invoke(ref int)' is not supported by the language
-                    //         func(value);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "func(value)")
-                        .WithArguments("D.Invoke(ref int)")
-                        .WithLocation(12, 9)
-                );
+            CreateCompilation(code, references: new[] { CompileIL(ilSource) }).VerifyDiagnostics(
+                // (6,17): error CS0570: 'D.Invoke(ref int)' is not supported by the language
+                //         Process((in int p) => System.Console.WriteLine(p));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "(in int p) => System.Console.WriteLine(p)")
+                    .WithArguments("D.Invoke(ref int)")
+                    .WithLocation(6, 17),
+                // (12,9): error CS0570: 'D.Invoke(ref int)' is not supported by the language
+                //         func(value);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "func(value)")
+                    .WithArguments("D.Invoke(ref int)")
+                    .WithLocation(12, 9)
+            );
         }
 
         [Fact]
@@ -2958,19 +2936,18 @@ public class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { CompileIL(ilSource) })
-                .VerifyDiagnostics(
-                    // (8,17): error CS0570: 'D.Invoke()' is not supported by the language
-                    //         Process(() => ref value);
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "() => ref value")
-                        .WithArguments("D.Invoke()")
-                        .WithLocation(8, 17),
-                    // (13,34): error CS0570: 'D.Invoke()' is not supported by the language
-                    //         System.Console.WriteLine(func());
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "func()")
-                        .WithArguments("D.Invoke()")
-                        .WithLocation(13, 34)
-                );
+            CreateCompilation(code, references: new[] { CompileIL(ilSource) }).VerifyDiagnostics(
+                // (8,17): error CS0570: 'D.Invoke()' is not supported by the language
+                //         Process(() => ref value);
+                Diagnostic(ErrorCode.ERR_BindToBogus, "() => ref value")
+                    .WithArguments("D.Invoke()")
+                    .WithLocation(8, 17),
+                // (13,34): error CS0570: 'D.Invoke()' is not supported by the language
+                //         System.Console.WriteLine(func());
+                Diagnostic(ErrorCode.ERR_BindToBogus, "func()")
+                    .WithArguments("D.Invoke()")
+                    .WithLocation(13, 34)
+            );
         }
 
         [Fact]
@@ -3152,7 +3129,8 @@ public class Program
                 var explicitImplementation = type.GetMethod("Parent.M");
                 Assert.Equal(
                     "void Parent.M(in modreq(System.Runtime.InteropServices.InAttribute) System.Int32 p)",
-                    explicitImplementation.ExplicitInterfaceImplementations.Single()
+                    explicitImplementation.ExplicitInterfaceImplementations
+                        .Single()
                         .ToTestDisplayString()
                 );
 
@@ -4096,7 +4074,8 @@ public class Program
                 var explicitImplementation = type.GetMethod("Parent.set_Item");
                 Assert.Equal(
                     "void Parent.this[in modreq(System.Runtime.InteropServices.InAttribute) System.Int32 p].set",
-                    explicitImplementation.ExplicitInterfaceImplementations.Single()
+                    explicitImplementation.ExplicitInterfaceImplementations
+                        .Single()
                         .ToTestDisplayString()
                 );
 
@@ -4566,7 +4545,8 @@ public class Program
                 reference,
                 symbolValidator: module =>
                 {
-                    var parameter = module.ContainingAssembly.GetTypeByMetadataName("D")
+                    var parameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("D")
                         .DelegateInvokeMethod.Parameters.Single();
 
                     Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
@@ -4666,7 +4646,8 @@ public delegate void D(in int p);"
                 reference,
                 symbolValidator: module =>
                 {
-                    var parameter = module.ContainingAssembly.GetTypeByMetadataName("D")
+                    var parameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("D")
                         .DelegateInvokeMethod.Parameters.Single();
 
                     Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
@@ -4778,17 +4759,13 @@ public class Test : ITest
     public int M() => 0;
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (6,21): error CS8152: 'Test' does not implement interface member 'ITest.M()'. 'Test.M()' cannot implement 'ITest.M()' because it does not have matching return by reference.
-                    // public class Test : ITest
-                    Diagnostic(
-                            ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongRefReturn,
-                            "ITest"
-                        )
-                        .WithArguments("Test", "ITest.M()", "Test.M()")
-                        .WithLocation(6, 21)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (6,21): error CS8152: 'Test' does not implement interface member 'ITest.M()'. 'Test.M()' cannot implement 'ITest.M()' because it does not have matching return by reference.
+                // public class Test : ITest
+                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongRefReturn, "ITest")
+                    .WithArguments("Test", "ITest.M()", "Test.M()")
+                    .WithLocation(6, 21)
+            );
 
             var interfaceMethod = comp.GetTypeByMetadataName("ITest").GetMethod("M");
             Assert.Equal(RefKind.RefReadOnly, interfaceMethod.RefKind);
@@ -4815,14 +4792,13 @@ public class Test : ParentTest
     public override int M() => 0;
 }";
 
-            var comp = CreateCompilation(code)
-                .VerifyDiagnostics(
-                    // (8,25): error CS8148: 'Test.M()' must match by reference return of overridden member 'ParentTest.M()'
-                    //     public override int M() => 0;
-                    Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "M")
-                        .WithArguments("Test.M()", "ParentTest.M()")
-                        .WithLocation(8, 25)
-                );
+            var comp = CreateCompilation(code).VerifyDiagnostics(
+                // (8,25): error CS8148: 'Test.M()' must match by reference return of overridden member 'ParentTest.M()'
+                //     public override int M() => 0;
+                Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "M")
+                    .WithArguments("Test.M()", "ParentTest.M()")
+                    .WithLocation(8, 25)
+            );
 
             var parentMethod = comp.GetTypeByMetadataName("ParentTest").GetMethod("M");
             Assert.Equal(RefKind.RefReadOnly, parentMethod.RefKind);
@@ -5152,7 +5128,8 @@ public class Parent
                 symbolValidator: module =>
                 {
                     var parentModifier =
-                        module.ContainingAssembly.GetTypeByMetadataName("Parent")
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName("Parent")
                             .GetMethod("M")
                             .RefCustomModifiers.Single().Modifier;
                     Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
@@ -5181,7 +5158,8 @@ public class Program
             Action<ModuleSymbol> validator = module =>
             {
                 var childModifier =
-                    module.ContainingAssembly.GetTypeByMetadataName("Child")
+                    module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .RefCustomModifiers.Single().Modifier;
                 Assert.Equal("testRef", childModifier.ContainingAssembly.Name);
@@ -5224,7 +5202,8 @@ public abstract class Parent
                 symbolValidator: module =>
                 {
                     var parentModifier =
-                        module.ContainingAssembly.GetTypeByMetadataName("Parent")
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName("Parent")
                             .GetMethod("M")
                             .RefCustomModifiers.Single().Modifier;
                     Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
@@ -5253,7 +5232,8 @@ public class Program
             Action<ModuleSymbol> validator = module =>
             {
                 var childModifier =
-                    module.ContainingAssembly.GetTypeByMetadataName("Child")
+                    module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .RefCustomModifiers.Single().Modifier;
                 Assert.Equal("testRef", childModifier.ContainingAssembly.Name);
@@ -5296,7 +5276,8 @@ public interface Parent
                 symbolValidator: module =>
                 {
                     var parentModifier =
-                        module.ContainingAssembly.GetTypeByMetadataName("Parent")
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName("Parent")
                             .GetMethod("M")
                             .RefCustomModifiers.Single().Modifier;
                     Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
@@ -5368,7 +5349,8 @@ public interface Parent
                 symbolValidator: module =>
                 {
                     var parentModifier =
-                        module.ContainingAssembly.GetTypeByMetadataName("Parent")
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName("Parent")
                             .GetMethod("M")
                             .RefCustomModifiers.Single().Modifier;
                     Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
@@ -5446,7 +5428,8 @@ public interface Parent
                 symbolValidator: module =>
                 {
                     var parentModifier =
-                        module.ContainingAssembly.GetTypeByMetadataName("Parent")
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName("Parent")
                             .GetMethod("M")
                             .RefCustomModifiers.Single().Modifier;
                     Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
@@ -5566,14 +5549,14 @@ namespace System.Runtime.InteropServices
 }";
 
             var ref1 = CreateEmptyCompilation(
-                    refCode,
-                    references: new[] { corlibWithoutInAttributeRef }
-                )
+                refCode,
+                references: new[] { corlibWithoutInAttributeRef }
+            )
                 .EmitToImageReference();
             var ref2 = CreateEmptyCompilation(
-                    refCode,
-                    references: new[] { corlibWithoutInAttributeRef }
-                )
+                refCode,
+                references: new[] { corlibWithoutInAttributeRef }
+            )
                 .EmitToImageReference();
 
             var user =
@@ -5584,9 +5567,9 @@ public class Test
 }";
 
             CreateEmptyCompilation(
-                    user,
-                    references: new[] { ref1, ref2, corlibWithoutInAttributeRef }
-                )
+                user,
+                references: new[] { ref1, ref2, corlibWithoutInAttributeRef }
+            )
                 .VerifyDiagnostics(
                     // (4,12): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
                     //     public ref readonly int M() => throw null;
@@ -5615,46 +5598,49 @@ class Child: Parent, IM
 }";
 
             CompileAndVerify(
-                    code,
-                    verify: Verification.Passes,
-                    symbolValidator: module =>
-                    {
-                        // Nothing on Parent
-                        var parentMethod = module.ContainingAssembly.GetTypeByMetadataName("Parent")
-                            .GetMethod("M");
-                        Assert.False(parentMethod.IsMetadataVirtual());
-                        Assert.Empty(parentMethod.Parameters.Single().RefCustomModifiers);
+                code,
+                verify: Verification.Passes,
+                symbolValidator: module =>
+                {
+                    // Nothing on Parent
+                    var parentMethod = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
+                        .GetMethod("M");
+                    Assert.False(parentMethod.IsMetadataVirtual());
+                    Assert.Empty(parentMethod.Parameters.Single().RefCustomModifiers);
 
-                        // Nothing on Child
-                        var childMethod = module.ContainingAssembly.GetTypeByMetadataName("Child")
-                            .GetMethod("M");
-                        Assert.False(childMethod.IsMetadataVirtual());
-                        Assert.Empty(childMethod.Parameters.Single().RefCustomModifiers);
+                    // Nothing on Child
+                    var childMethod = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
+                        .GetMethod("M");
+                    Assert.False(childMethod.IsMetadataVirtual());
+                    Assert.Empty(childMethod.Parameters.Single().RefCustomModifiers);
 
-                        // Modreq on Interface
-                        var interfaceMethod = module.ContainingAssembly.GetTypeByMetadataName("IM")
-                            .GetMethod("M");
-                        Assert.True(interfaceMethod.IsMetadataVirtual());
-                        AssertSingleInAttributeRequiredModifier(
-                            interfaceMethod.Parameters.Single().RefCustomModifiers
-                        );
+                    // Modreq on Interface
+                    var interfaceMethod = module.ContainingAssembly
+                        .GetTypeByMetadataName("IM")
+                        .GetMethod("M");
+                    Assert.True(interfaceMethod.IsMetadataVirtual());
+                    AssertSingleInAttributeRequiredModifier(
+                        interfaceMethod.Parameters.Single().RefCustomModifiers
+                    );
 
-                        // Modreq on proxy
-                        var proxyMethod = module.ContainingAssembly.GetTypeByMetadataName("Child")
-                            .GetMethod("IM.M");
-                        Assert.True(proxyMethod.IsMetadataVirtual());
-                        AssertSingleInAttributeRequiredModifier(
-                            proxyMethod.Parameters.Single().RefCustomModifiers
-                        );
-                    }
-                )
-                .VerifyDiagnostics(
-                    // (12,17): warning CS0108: 'Child.M(in int)' hides inherited member 'Parent.M(in int)'. Use the new keyword if hiding was intended.
-                    //     public void M(in int x) { }
-                    Diagnostic(ErrorCode.WRN_NewRequired, "M")
-                        .WithArguments("Child.M(in int)", "Parent.M(in int)")
-                        .WithLocation(12, 17)
-                );
+                    // Modreq on proxy
+                    var proxyMethod = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
+                        .GetMethod("IM.M");
+                    Assert.True(proxyMethod.IsMetadataVirtual());
+                    AssertSingleInAttributeRequiredModifier(
+                        proxyMethod.Parameters.Single().RefCustomModifiers
+                    );
+                }
+            ).VerifyDiagnostics(
+                // (12,17): warning CS0108: 'Child.M(in int)' hides inherited member 'Parent.M(in int)'. Use the new keyword if hiding was intended.
+                //     public void M(in int x) { }
+                Diagnostic(ErrorCode.WRN_NewRequired, "M")
+                    .WithArguments("Child.M(in int)", "Parent.M(in int)")
+                    .WithLocation(12, 17)
+            );
         }
 
         [Fact]
@@ -5675,40 +5661,42 @@ class Child: Parent, IM
 }";
 
             CompileAndVerify(
-                    code,
-                    verify: Verification.Passes,
-                    symbolValidator: module =>
-                    {
-                        // Nothing on Parent
-                        var parentMethod = module.ContainingAssembly.GetTypeByMetadataName("Parent")
-                            .GetMethod("M");
-                        Assert.False(parentMethod.IsMetadataVirtual());
-                        Assert.Empty(parentMethod.Parameters.Single().RefCustomModifiers);
+                code,
+                verify: Verification.Passes,
+                symbolValidator: module =>
+                {
+                    // Nothing on Parent
+                    var parentMethod = module.ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
+                        .GetMethod("M");
+                    Assert.False(parentMethod.IsMetadataVirtual());
+                    Assert.Empty(parentMethod.Parameters.Single().RefCustomModifiers);
 
-                        // No method on Child
-                        Assert.DoesNotContain(
-                            "M",
-                            module.ContainingAssembly.GetTypeByMetadataName("Child").MemberNames
-                        );
+                    // No method on Child
+                    Assert.DoesNotContain(
+                        "M",
+                        module.ContainingAssembly.GetTypeByMetadataName("Child").MemberNames
+                    );
 
-                        // Modreq on Interface
-                        var interfaceMethod = module.ContainingAssembly.GetTypeByMetadataName("IM")
-                            .GetMethod("M");
-                        Assert.True(interfaceMethod.IsMetadataVirtual());
-                        AssertSingleInAttributeRequiredModifier(
-                            interfaceMethod.Parameters.Single().RefCustomModifiers
-                        );
+                    // Modreq on Interface
+                    var interfaceMethod = module.ContainingAssembly
+                        .GetTypeByMetadataName("IM")
+                        .GetMethod("M");
+                    Assert.True(interfaceMethod.IsMetadataVirtual());
+                    AssertSingleInAttributeRequiredModifier(
+                        interfaceMethod.Parameters.Single().RefCustomModifiers
+                    );
 
-                        // Modreq on proxy
-                        var proxyMethod = module.ContainingAssembly.GetTypeByMetadataName("Child")
-                            .GetMethod("IM.M");
-                        Assert.True(proxyMethod.IsMetadataVirtual());
-                        AssertSingleInAttributeRequiredModifier(
-                            proxyMethod.Parameters.Single().RefCustomModifiers
-                        );
-                    }
-                )
-                .VerifyDiagnostics();
+                    // Modreq on proxy
+                    var proxyMethod = module.ContainingAssembly
+                        .GetTypeByMetadataName("Child")
+                        .GetMethod("IM.M");
+                    Assert.True(proxyMethod.IsMetadataVirtual());
+                    AssertSingleInAttributeRequiredModifier(
+                        proxyMethod.Parameters.Single().RefCustomModifiers
+                    );
+                }
+            ).VerifyDiagnostics();
         }
 
         private void AssertSingleInAttributeRequiredModifier(

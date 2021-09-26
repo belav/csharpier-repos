@@ -28,12 +28,11 @@ namespace Microsoft.AspNetCore.StaticFiles
         public async Task ReturnsNotFoundWithoutWwwroot()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer().Configure(app => app.UseStaticFiles());
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(app => app.UseStaticFiles());
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -61,19 +60,18 @@ namespace Microsoft.AspNetCore.StaticFiles
             try
             {
                 using var host = new HostBuilder().ConfigureWebHost(
-                        webHostBuilder =>
-                        {
-                            webHostBuilder.UseTestServer()
-                                .Configure(
-                                    app =>
-                                        app.UseStaticFiles(
-                                            new StaticFileOptions { ServeUnknownFileTypes = true }
-                                        )
-                                )
-                                .UseWebRoot(AppContext.BaseDirectory);
-                        }
-                    )
-                    .Build();
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseTestServer()
+                            .Configure(
+                                app =>
+                                    app.UseStaticFiles(
+                                        new StaticFileOptions { ServeUnknownFileTypes = true }
+                                    )
+                            )
+                            .UseWebRoot(AppContext.BaseDirectory);
+                    }
+                ).Build();
 
                 await host.StartAsync();
 
@@ -96,39 +94,36 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             var mockSendFile = new Mock<IHttpResponseBodyFeature>();
             mockSendFile.Setup(
-                    m =>
-                        m.SendFileAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<long>(),
-                            It.IsAny<long?>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                m =>
+                    m.SendFileAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<long>(),
+                        It.IsAny<long?>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .ThrowsAsync(new FileNotFoundException());
             mockSendFile.Setup(m => m.Stream).Returns(Stream.Null);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.Use(
+                                async (ctx, next) =>
                                 {
-                                    app.Use(
-                                        async (ctx, next) =>
-                                        {
-                                            ctx.Features.Set(mockSendFile.Object);
-                                            await next();
-                                        }
-                                    );
-                                    app.UseStaticFiles(
-                                        new StaticFileOptions { ServeUnknownFileTypes = true }
-                                    );
+                                    ctx.Features.Set(mockSendFile.Object);
+                                    await next();
                                 }
-                            )
-                            .UseWebRoot(AppContext.BaseDirectory);
-                    }
-                )
-                .Build();
+                            );
+                            app.UseStaticFiles(
+                                new StaticFileOptions { ServeUnknownFileTypes = true }
+                            );
+                        }
+                    ).UseWebRoot(AppContext.BaseDirectory);
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -161,7 +156,8 @@ namespace Microsoft.AspNetCore.StaticFiles
                     last.Minute,
                     last.Second,
                     last.Offset
-                ).ToUniversalTime();
+                )
+                    .ToUniversalTime();
 
                 Assert.Equal(response.Content.Headers.LastModified.Value, trimmed);
             }

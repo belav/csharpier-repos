@@ -42,7 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
         public void CompilationChain_NestedTypesClass()
         {
             var script = CSharpScript.Create(
-                    @"
+                @"
 static string outerStr = null;
 public static void Goo(string str) { outerStr = str; }
 class InnerClass
@@ -51,18 +51,16 @@ class InnerClass
    public void Goo() { Goo(""test""); innerStr = outerStr; }       
 }
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 InnerClass iC = new InnerClass();
 iC.Goo();
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 System.Console.WriteLine(iC.innerStr);
 "
-                );
+            );
 
             ScriptingTestHelpers.RunScriptWithOutput(script, "test");
         }
@@ -71,7 +69,7 @@ System.Console.WriteLine(iC.innerStr);
         public void CompilationChain_NestedTypesStruct()
         {
             var script = CSharpScript.Create(
-                    @"
+                @"
 static string outerStr = null;
 public static void Goo(string str) { outerStr = str; }
 struct InnerStruct
@@ -80,18 +78,16 @@ struct InnerStruct
    public void Goo() { Goo(""test""); innerStr = outerStr; }            
 }
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 InnerStruct iS = new InnerStruct();     
 iS.Goo();
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 System.Console.WriteLine(iS.innerStr);
 "
-                );
+            );
 
             ScriptingTestHelpers.RunScriptWithOutput(script, "test");
         }
@@ -100,23 +96,21 @@ System.Console.WriteLine(iS.innerStr);
         public async Task CompilationChain_InterfaceTypes()
         {
             var script = CSharpScript.Create(
-                    @"
+                @"
 interface I1 { int Goo();}
 class InnerClass : I1
 {
   public int Goo() { return 1; }
 }"
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 I1 iC = new InnerClass();
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 iC.Goo()
 "
-                );
+            );
 
             Assert.Equal(1, await script.EvaluateAsync());
         }
@@ -125,14 +119,13 @@ iC.Goo()
         public void ScriptMemberAccessFromNestedClass()
         {
             var script = CSharpScript.Create(
-                    @"
+                @"
 object field;
 object Property { get; set; }
 void Method() { }
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 class C 
 {
     public void Goo() 
@@ -143,7 +136,7 @@ class C
     }
 }
 "
-                );
+            );
 
             ScriptingTestHelpers.AssertCompilationError(
                 script,
@@ -162,22 +155,20 @@ class C
         public void AnonymousTypes_TopLevel_MultipleSubmissions()
         {
             var script = CSharpScript.Create(
-                    @"
+                @"
 var a = new { f = 1 };
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 var b = new { g = 1 };
 "
-                )
-                .ContinueWith<Array>(
-                    @"
+            ).ContinueWith<Array>(
+                @"
 var c = new { f = 1 };
 var d = new { g = 1 };
 new object[] { new[] { a, c }, new[] { b, d } }
 "
-                );
+            );
 
             var result = script.EvaluateAsync().Result;
 
@@ -190,17 +181,15 @@ new object[] { new[] { a, c }, new[] { b, d } }
         public void AnonymousTypes_TopLevel_MultipleSubmissions2()
         {
             var script = CSharpScript.Create(
-                    @"
+                @"
 var a = new { f = 1 };
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 var b = new { g = 1 };
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 var c = new { f = 1 };
 var d = new { g = 1 };
 
@@ -208,7 +197,7 @@ object.ReferenceEquals(a.GetType(), c.GetType()).ToString() + "" "" +
     object.ReferenceEquals(a.GetType(), b.GetType()).ToString() + "" "" + 
     object.ReferenceEquals(b.GetType(), d.GetType()).ToString()
 "
-                );
+            );
 
             Assert.Equal("True False True", script.EvaluateAsync().Result.ToString());
         }
@@ -218,20 +207,18 @@ object.ReferenceEquals(a.GetType(), c.GetType()).ToString() + "" "" +
         public void AnonymousTypes_Redefinition()
         {
             var script = CSharpScript.Create(
-                    @"
+                @"
 var x = new { Goo = ""goo"" };
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 var x = new { Goo = ""goo"" };
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 x.Goo
 "
-                );
+            );
 
             var result = script.EvaluateAsync().Result;
             Assert.Equal("goo", result);
@@ -241,22 +228,20 @@ x.Goo
         public void AnonymousTypes_TopLevel_Empty()
         {
             var script = CSharpScript.Create(
-                    @"
+                @"
 var a = new { };
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 var b = new { };
 "
-                )
-                .ContinueWith<Array>(
-                    @"
+            ).ContinueWith<Array>(
+                @"
 var c = new { };
 var d = new { };
 new object[] { new[] { a, c }, new[] { b, d } }
 "
-                );
+            );
             var result = script.EvaluateAsync().Result;
 
             Assert.Equal(2, result.Length);
@@ -271,28 +256,28 @@ new object[] { new[] { a, c }, new[] { b, d } }
         [Fact]
         public void Dynamic_Expando()
         {
-            var options = ScriptOptions.Default.AddReferences(
-                    typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException).GetTypeInfo().Assembly,
+            var options = ScriptOptions.Default
+                .AddReferences(
+                    typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
+                        .GetTypeInfo().Assembly,
                     typeof(System.Dynamic.ExpandoObject).GetTypeInfo().Assembly
                 )
                 .AddImports("System.Dynamic");
 
             var script = CSharpScript.Create(
-                    @"
+                @"
 dynamic expando = new ExpandoObject();  
 ",
-                    options
-                )
-                .ContinueWith(
-                    @"
+                options
+            ).ContinueWith(
+                @"
 expando.goo = 1;
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 expando.goo
 "
-                );
+            );
 
             Assert.Equal(1, script.EvaluateAsync().Result);
         }
@@ -352,9 +337,9 @@ typeof(C)
 
             // Reflection synthesizes DllImportAttribute
             var dllImport = (DllImportAttribute)m.GetCustomAttributes(
-                    typeof(DllImportAttribute),
-                    inherit: false
-                )
+                typeof(DllImportAttribute),
+                inherit: false
+            )
                 .Single();
             Assert.True(dllImport.BestFitMapping);
             Assert.Equal(CallingConvention.Cdecl, dllImport.CallingConvention);
@@ -450,27 +435,25 @@ private class C
         public void Fields_Visibility()
         {
             var script = CSharpScript.Create(
-                    @"
+                @"
 private int i = 2;     // test comment;
 public int j = 2;
 protected int k = 2;
 internal protected int l = 2;
 internal int pi = 2;
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 i = i + i;
 j = j + j;
 k = k + k;
 l = l + l;
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 pi = i + j + k + l;
 "
-                );
+            );
 
             Assert.Equal(4, script.ContinueWith<int>("i").EvaluateAsync().Result);
             Assert.Equal(4, script.ContinueWith<int>("j").EvaluateAsync().Result);
@@ -508,9 +491,9 @@ pi = i + j + k + l;
         {
             var result =
                 CSharpScript.Create(
-                        "using InteractiveFixtures.C;",
-                        ScriptOptions.Default.AddReferences(HostAssembly)
-                    )
+                    "using InteractiveFixtures.C;",
+                    ScriptOptions.Default.AddReferences(HostAssembly)
+                )
                     .ContinueWith("using InteractiveFixtures.C;")
                     .ContinueWith("System.Environment.ProcessorCount")
                     .EvaluateAsync().Result;
@@ -530,13 +513,12 @@ pi = i + j + k + l;
 
             Assert.Equal(1, state.Result.ReturnValue);
 
-            state = s0.ContinueWith("class X { public int goo() { return 1; } }")
-                .ContinueWith(
-                    @"
+            state = s0.ContinueWith("class X { public int goo() { return 1; } }").ContinueWith(
+                @"
 using InteractiveFixtures.A;
 new X().goo()
 "
-                );
+            );
 
             Assert.Equal(1, state.Result.ReturnValue);
         }
@@ -545,22 +527,20 @@ new X().goo()
         public void CompilationChain_UsingDuplicates()
         {
             var script = CSharpScript.Create(
-                    @"
+                @"
 using System;
 using System;
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 using System;
 using System;
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 Environment.ProcessorCount
 "
-                );
+            );
 
             Assert.Equal(Environment.ProcessorCount, script.EvaluateAsync().Result);
         }
@@ -845,23 +825,21 @@ public override string ToString() { return null; }
         public void CompilationChain_GenericTypes()
         {
             var script = CSharpScript.Create(
-                    @"
+                @"
 class InnerClass<T> 
 {
     public int method(int value) { return value + 1; }            
     public int field = 2;
 }"
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 InnerClass<int> iC = new InnerClass<int>();
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 iC.method(iC.field)
 "
-                );
+            );
 
             Assert.Equal(3, script.EvaluateAsync().Result);
         }
@@ -1086,17 +1064,16 @@ result
         public void Arrays()
         {
             var s = CSharpScript.RunAsync(
-                    @"
+                @"
 int[] arr_1 = { 1, 2, 3 };
 int[] arr_2 = new int[] { 1, 2, 3 };
 int[] arr_3 = new int[5];
 "
-                )
-                .ContinueWith(
-                    @"
+            ).ContinueWith(
+                @"
 arr_2[0] = 5;
 "
-                );
+            );
 
             Assert.Equal(3, s.ContinueWith(@"arr_1[2]").Result.ReturnValue);
             Assert.Equal(5, s.ContinueWith(@"arr_2[0]").Result.ReturnValue);
@@ -1163,17 +1140,11 @@ result
         [Fact]
         public void TestInteractiveClosures()
         {
-            var result =
-                CSharpScript.RunAsync(
-                        @"
+            var result = CSharpScript.RunAsync(
+                    @"
 using System.Collections.Generic;
 static List<int> result = new List<int>();"
-                    )
-                    .ContinueWith("int x = 1;")
-                    .ContinueWith("System.Func<int> f = () => x++;")
-                    .ContinueWith("result.Add(f());")
-                    .ContinueWith("result.Add(x);")
-                    .ContinueWith<List<int>>("result").Result.ReturnValue;
+                ).ContinueWith("int x = 1;").ContinueWith("System.Func<int> f = () => x++;").ContinueWith("result.Add(f());").ContinueWith("result.Add(x);").ContinueWith<List<int>>("result").Result.ReturnValue;
 
             Assert.Equal(2, result.Count);
             Assert.Equal(1, result[0]);
@@ -1183,9 +1154,8 @@ static List<int> result = new List<int>();"
         [Fact]
         public void ExtensionMethods()
         {
-            var options = ScriptOptions.Default.AddReferences(
-                typeof(Enumerable).GetTypeInfo().Assembly
-            );
+            var options = ScriptOptions.Default
+                .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
 
             var result =
                 CSharpScript.EvaluateAsync<int>(
@@ -1320,7 +1290,8 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact]
         public void AwaitChain1()
         {
-            var options = ScriptOptions.Default.AddReferences(typeof(Task).GetTypeInfo().Assembly)
+            var options = ScriptOptions.Default
+                .AddReferences(typeof(Task).GetTypeInfo().Assembly)
                 .AddImports("System.Threading.Tasks");
 
             var state =
@@ -1336,7 +1307,8 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact]
         public void AwaitChain2()
         {
-            var options = ScriptOptions.Default.AddReferences(typeof(Task).GetTypeInfo().Assembly)
+            var options = ScriptOptions.Default
+                .AddReferences(typeof(Task).GetTypeInfo().Assembly)
                 .AddImports("System.Threading.Tasks");
 
             var state =
@@ -1361,9 +1333,8 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task CSharp9PatternForms()
         {
-            var options = ScriptOptions.Default.WithLanguageVersion(
-                MessageID.IDS_FeatureAndPattern.RequiredVersion()
-            );
+            var options = ScriptOptions.Default
+                .WithLanguageVersion(MessageID.IDS_FeatureAndPattern.RequiredVersion());
             var state = await CSharpScript.RunAsync("object x = 1;", options: options);
             state = await state.ContinueWithAsync("x is long or int", options: options);
             Assert.Equal(true, state.ReturnValue);
@@ -1576,7 +1547,8 @@ public class E { }
 
             var script = CSharpScript.Create(
                 @"new C()",
-                ScriptOptions.Default.WithReferences(libRef.WithAliases(new[] { "Hidden" }))
+                ScriptOptions.Default
+                    .WithReferences(libRef.WithAliases(new[] { "Hidden" }))
                     .WithImports("Hidden::N")
             );
 
@@ -1606,7 +1578,8 @@ d
         [Fact]
         public void Usings1()
         {
-            var options = ScriptOptions.Default.AddImports("System", "System.Linq")
+            var options = ScriptOptions.Default
+                .AddImports("System", "System.Linq")
                 .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
 
             object result =
@@ -1618,7 +1591,8 @@ d
         [Fact]
         public void Usings2()
         {
-            var options = ScriptOptions.Default.AddImports("System", "System.Linq")
+            var options = ScriptOptions.Default
+                .AddImports("System", "System.Linq")
                 .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
 
             var s1 = CSharpScript.RunAsync("new int[] { 1, 2, 3 }.First()", options);
@@ -1666,7 +1640,8 @@ d
             ScriptingTestHelpers.AssertCompilationError(
                 () => CSharpScript.EvaluateAsync("1", options),
                 // error CS7088: Invalid 'Usings' value: '.abc'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("Usings", "a\0bc")
+                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                    .WithArguments("Usings", "a\0bc")
             );
         }
 
@@ -1914,12 +1889,11 @@ new List<ArgumentException>()
         public void HostObjectAssemblyReference1()
         {
             var scriptCompilation = CSharpScript.Create(
-                    "nameof(Microsoft.CodeAnalysis.Scripting)",
-                    ScriptOptions.Default.WithMetadataResolver(
-                        TestRuntimeMetadataReferenceResolver.Instance
-                    ),
-                    globalsType: typeof(CommandLineScriptGlobals)
-                )
+                "nameof(Microsoft.CodeAnalysis.Scripting)",
+                ScriptOptions.Default
+                    .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance),
+                globalsType: typeof(CommandLineScriptGlobals)
+            )
                 .GetCompilation();
 
             scriptCompilation.VerifyDiagnostics(
@@ -1932,7 +1906,8 @@ new List<ArgumentException>()
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
             string hostObjectAssemblyName =
-                scriptCompilation.ScriptCompilationInfo.GlobalsType.GetTypeInfo()
+                scriptCompilation.ScriptCompilationInfo.GlobalsType
+                    .GetTypeInfo()
                     .Assembly.GetName().Name;
 
             // The host adds
@@ -1982,20 +1957,20 @@ new List<ArgumentException>()
         public void HostObjectAssemblyReference2()
         {
             var scriptCompilation = CSharpScript.Create(
-                    "typeof(Microsoft.CodeAnalysis.Scripting.Script)",
-                    options: ScriptOptions.Default.WithMetadataResolver(
-                            TestRuntimeMetadataReferenceResolver.Instance
-                        )
-                        .WithReferences(typeof(CSharpScript).GetTypeInfo().Assembly),
-                    globalsType: typeof(CommandLineScriptGlobals)
-                )
+                "typeof(Microsoft.CodeAnalysis.Scripting.Script)",
+                options: ScriptOptions.Default
+                    .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance)
+                    .WithReferences(typeof(CSharpScript).GetTypeInfo().Assembly),
+                globalsType: typeof(CommandLineScriptGlobals)
+            )
                 .GetCompilation();
 
             scriptCompilation.VerifyDiagnostics();
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
             string hostObjectAssemblyName =
-                scriptCompilation.ScriptCompilationInfo.GlobalsType.GetTypeInfo()
+                scriptCompilation.ScriptCompilationInfo.GlobalsType
+                    .GetTypeInfo()
                     .Assembly.GetName().Name;
 
             // The host adds
@@ -2058,19 +2033,19 @@ new List<ArgumentException>()
 typeof(Microsoft.CodeAnalysis.Scripting.Script)
 ";
             var scriptCompilation = CSharpScript.Create(
-                    source,
-                    ScriptOptions.Default.WithMetadataResolver(
-                        TestRuntimeMetadataReferenceResolver.Instance
-                    ),
-                    globalsType: typeof(CommandLineScriptGlobals)
-                )
+                source,
+                ScriptOptions.Default
+                    .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance),
+                globalsType: typeof(CommandLineScriptGlobals)
+            )
                 .GetCompilation();
 
             scriptCompilation.VerifyDiagnostics();
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
             string hostObjectAssemblyName =
-                scriptCompilation.ScriptCompilationInfo.GlobalsType.GetTypeInfo()
+                scriptCompilation.ScriptCompilationInfo.GlobalsType
+                    .GetTypeInfo()
                     .Assembly.GetName().Name;
 
             // The host adds
@@ -2525,24 +2500,22 @@ int F() => i + j + k + l;
         [Fact]
         public void LocalFunction_PreviousSubmissionAndGlobal()
         {
-            var result =
-                CSharpScript.RunAsync(
-                        @"int InInitialSubmission()
+            var result = CSharpScript.RunAsync(
+                    @"int InInitialSubmission()
 {
     return LocalFunction();
     int LocalFunction() => Y;
 }",
-                        globals: new C()
-                    )
-                    .ContinueWith(
-                        @"var lambda = new System.Func<int>(() =>
+                    globals: new C()
+                ).ContinueWith(
+                    @"var lambda = new System.Func<int>(() =>
 {
     return LocalFunction();
     int LocalFunction() => Y + InInitialSubmission();
 });
 
 lambda.Invoke()"
-                    ).Result.ReturnValue;
+                ).Result.ReturnValue;
 
             Assert.Equal(4, result);
         }

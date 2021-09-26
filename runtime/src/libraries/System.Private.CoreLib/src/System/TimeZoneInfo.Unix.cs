@@ -282,9 +282,8 @@ namespace System
                     // The last splitted rule would start from the Jan 1st of the end year of the original rule and ends at the end transition time of the original rule.
 
                     // Add the first rule.
-                    DateTime endForFirstRule = new DateTime(start.Year + 1, 1, 1).AddMilliseconds(
-                        -1
-                    ); // At the end of the first year
+                    DateTime endForFirstRule = new DateTime(start.Year + 1, 1, 1)
+                        .AddMilliseconds(-1); // At the end of the first year
                     TransitionTime startTransition = TransitionTime.CreateFixedDateRule(
                         GetTimeOnlyInMillisecondsPrecision(start),
                         start.Month,
@@ -681,12 +680,8 @@ namespace System
                             // Read each entry from the enumerator
                             Interop.Sys.DirectoryEntry dirent;
                             while (
-                                Interop.Sys.ReadDirR(
-                                    dirHandle,
-                                    dirBufferPtr,
-                                    bufferSize,
-                                    out dirent
-                                ) == 0
+                                Interop.Sys
+                                    .ReadDirR(dirHandle, dirBufferPtr, bufferSize, out dirent) == 0
                             )
                             {
                                 string? fullPath = GetDirectoryEntryFullPath(
@@ -788,16 +783,18 @@ namespace System
                     {
                         // skip the localtime and posixrules file, since they won't give us the correct id
                         if (
-                            !string.Equals(
-                                filePath,
-                                localtimeFilePath,
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                            && !string.Equals(
-                                filePath,
-                                posixrulesFilePath,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            !string
+                                .Equals(
+                                    filePath,
+                                    localtimeFilePath,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            && !string
+                                .Equals(
+                                    filePath,
+                                    posixrulesFilePath,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             if (CompareTimeZoneFile(filePath, buffer, rawData))

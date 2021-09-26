@@ -92,7 +92,8 @@ namespace Microsoft.Extensions.Logging.EventLog
                 return;
             }
 
-            StringBuilder builder = new StringBuilder().Append("Category: ")
+            StringBuilder builder = new StringBuilder()
+                .Append("Category: ")
                 .AppendLine(_name)
                 .Append("EventId: ")
                 .Append(eventId.Id)

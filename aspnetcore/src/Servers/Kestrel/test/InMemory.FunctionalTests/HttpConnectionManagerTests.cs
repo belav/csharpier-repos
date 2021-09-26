@@ -32,13 +32,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var appStartedWh = new SemaphoreSlim(0);
 
             var mockTrace = new Mock<KestrelTrace>(Logger) { CallBase = true };
-            mockTrace.Setup(trace => trace.ApplicationNeverCompleted(It.IsAny<string>()))
-                .Callback(
-                    () =>
-                    {
-                        logWh.Release();
-                    }
-                );
+            mockTrace.Setup(trace => trace.ApplicationNeverCompleted(It.IsAny<string>())).Callback(
+                () =>
+                {
+                    logWh.Release();
+                }
+            );
 
             var testContext = new TestServiceContext(new LoggerFactory(), mockTrace.Object);
             testContext.InitializeHeartbeat();

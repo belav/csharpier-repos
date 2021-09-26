@@ -243,9 +243,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ? ImmutableArray<LocalSymbol>.Empty
                     : ImmutableArray.Create<LocalSymbol>(boundTemp.LocalSymbol);
 
-            ArrayBuilder<BoundExpression> sideEffects = ArrayBuilder<BoundExpression>.GetInstance(
-                2
-            ); //max size
+            ArrayBuilder<BoundExpression> sideEffects = ArrayBuilder<BoundExpression>
+                .GetInstance(2); //max size
             if (clearCall != null)
                 sideEffects.Add(clearCall);
             if (tempAssignment != null)
@@ -468,12 +467,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             var module = this.EmitModule;
             if (module != null)
             {
-                module.EmbeddedTypesManagerOpt.EmbedEventIfNeedTo(
-                    node.Event.GetCciAdapter(),
-                    node.Syntax,
-                    _diagnostics.DiagnosticBag,
-                    isUsedForComAwareEventBinding: true
-                );
+                module.EmbeddedTypesManagerOpt
+                    .EmbedEventIfNeedTo(
+                        node.Event.GetCciAdapter(),
+                        node.Syntax,
+                        _diagnostics.DiagnosticBag,
+                        isUsedForComAwareEventBinding: true
+                    );
             }
 
             if (result != null)

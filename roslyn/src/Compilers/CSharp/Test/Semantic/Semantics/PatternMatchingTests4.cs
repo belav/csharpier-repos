@@ -994,9 +994,9 @@ public class C : System.Runtime.CompilerServices.ITuple
                 // (11,18): warning CS0618: 'ITuple' is obsolete: 'WarningOnly'
                 // public class C : System.Runtime.CompilerServices.ITuple
                 Diagnostic(
-                        ErrorCode.WRN_DeprecatedSymbolStr,
-                        "System.Runtime.CompilerServices.ITuple"
-                    )
+                    ErrorCode.WRN_DeprecatedSymbolStr,
+                    "System.Runtime.CompilerServices.ITuple"
+                )
                     .WithArguments("System.Runtime.CompilerServices.ITuple", "WarningOnly")
                     .WithLocation(11, 18)
             );
@@ -3588,10 +3588,10 @@ unsafe class C
 }";
 
             CreateCompilation(
-                    source,
-                    options: TestOptions.UnsafeReleaseDll,
-                    parseOptions: TestOptions.Regular7_3
-                )
+                source,
+                options: TestOptions.UnsafeReleaseDll,
+                parseOptions: TestOptions.Regular7_3
+            )
                 .VerifyDiagnostics(
                     // (7,20): error CS8521: Pattern-matching is not permitted for pointer types.
                     //         _ = ptr is var v;
@@ -3622,10 +3622,10 @@ class Class1
     }
 }";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular7,
-                    options: TestOptions.ReleaseDll
-                )
+                source,
+                parseOptions: TestOptions.Regular7,
+                options: TestOptions.ReleaseDll
+            )
                 .VerifyDiagnostics();
             CreatePatternCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics();
         }
@@ -3647,10 +3647,10 @@ class Class1
     }
 }";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular7,
-                    options: TestOptions.ReleaseDll
-                )
+                source,
+                parseOptions: TestOptions.Regular7,
+                options: TestOptions.ReleaseDll
+            )
                 .VerifyDiagnostics();
             CreatePatternCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics();
         }
@@ -3672,10 +3672,10 @@ class Class1
     }
 }";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular7,
-                    options: TestOptions.ReleaseDll
-                )
+                source,
+                parseOptions: TestOptions.Regular7,
+                options: TestOptions.ReleaseDll
+            )
                 .VerifyDiagnostics();
             CreatePatternCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics();
         }
@@ -3697,10 +3697,10 @@ class Class1
     }
 }";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular7,
-                    options: TestOptions.ReleaseDll
-                )
+                source,
+                parseOptions: TestOptions.Regular7,
+                options: TestOptions.ReleaseDll
+            )
                 .VerifyDiagnostics();
             CreatePatternCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics();
         }
@@ -3724,10 +3724,10 @@ class Class1
     }
 }";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular7,
-                    options: TestOptions.ReleaseDll
-                )
+                source,
+                parseOptions: TestOptions.Regular7,
+                options: TestOptions.ReleaseDll
+            )
                 .VerifyDiagnostics();
             CreatePatternCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics();
         }
@@ -3754,10 +3754,10 @@ class Class1
     }
 }";
             CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.Regular7,
-                    options: TestOptions.ReleaseDll
-                )
+                source,
+                parseOptions: TestOptions.Regular7,
+                options: TestOptions.ReleaseDll
+            )
                 .VerifyDiagnostics();
             CreatePatternCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics();
         }

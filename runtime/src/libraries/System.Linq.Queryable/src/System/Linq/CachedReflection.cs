@@ -23,8 +23,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, object, object>>,
                     object
-                >(Queryable.Aggregate).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Aggregate)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Aggregate_TSource_TAccumulate_3;
 
@@ -35,8 +38,11 @@ namespace System.Linq
                     object,
                     Expression<Func<object, object, object>>,
                     object
-                >(Queryable.Aggregate).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TAccumulate);
+                >(Queryable.Aggregate)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TAccumulate);
 
         private static MethodInfo? s_Aggregate_TSource_TAccumulate_TResult_4;
 
@@ -52,8 +58,11 @@ namespace System.Linq
                     Expression<Func<object, object, object>>,
                     Expression<Func<object, object>>,
                     object
-                >(Queryable.Aggregate).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TAccumulate, TResult);
+                >(Queryable.Aggregate)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TAccumulate, TResult);
 
         private static MethodInfo? s_All_TSource_2;
 
@@ -63,17 +72,21 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     bool
-                >(Queryable.All).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.All)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Any_TSource_1;
 
         public static MethodInfo Any_TSource_1(Type TSource) =>
             (
-                s_Any_TSource_1 ??= new Func<IQueryable<object>, bool>(
-                    Queryable.Any
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                s_Any_TSource_1 ??= new Func<IQueryable<object>, bool>(Queryable.Any)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Any_TSource_2;
 
@@ -83,78 +96,73 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     bool
-                >(Queryable.Any).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Any)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Average_Int32_1;
 
         public static MethodInfo Average_Int32_1 =>
-            s_Average_Int32_1 ??= new Func<IQueryable<int>, double>(
-                Queryable.Average
-            ).GetMethodInfo();
+            s_Average_Int32_1 ??= new Func<IQueryable<int>, double>(Queryable.Average)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Average_NullableInt32_1;
 
         public static MethodInfo Average_NullableInt32_1 =>
-            s_Average_NullableInt32_1 ??= new Func<IQueryable<int?>, double?>(
-                Queryable.Average
-            ).GetMethodInfo();
+            s_Average_NullableInt32_1 ??= new Func<IQueryable<int?>, double?>(Queryable.Average)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Average_Int64_1;
 
         public static MethodInfo Average_Int64_1 =>
-            s_Average_Int64_1 ??= new Func<IQueryable<long>, double>(
-                Queryable.Average
-            ).GetMethodInfo();
+            s_Average_Int64_1 ??= new Func<IQueryable<long>, double>(Queryable.Average)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Average_NullableInt64_1;
 
         public static MethodInfo Average_NullableInt64_1 =>
-            s_Average_NullableInt64_1 ??= new Func<IQueryable<long?>, double?>(
-                Queryable.Average
-            ).GetMethodInfo();
+            s_Average_NullableInt64_1 ??= new Func<IQueryable<long?>, double?>(Queryable.Average)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Average_Single_1;
 
         public static MethodInfo Average_Single_1 =>
-            s_Average_Single_1 ??= new Func<IQueryable<float>, float>(
-                Queryable.Average
-            ).GetMethodInfo();
+            s_Average_Single_1 ??= new Func<IQueryable<float>, float>(Queryable.Average)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Average_NullableSingle_1;
 
         public static MethodInfo Average_NullableSingle_1 =>
-            s_Average_NullableSingle_1 ??= new Func<IQueryable<float?>, float?>(
-                Queryable.Average
-            ).GetMethodInfo();
+            s_Average_NullableSingle_1 ??= new Func<IQueryable<float?>, float?>(Queryable.Average)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Average_Double_1;
 
         public static MethodInfo Average_Double_1 =>
-            s_Average_Double_1 ??= new Func<IQueryable<double>, double>(
-                Queryable.Average
-            ).GetMethodInfo();
+            s_Average_Double_1 ??= new Func<IQueryable<double>, double>(Queryable.Average)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Average_NullableDouble_1;
 
         public static MethodInfo Average_NullableDouble_1 =>
-            s_Average_NullableDouble_1 ??= new Func<IQueryable<double?>, double?>(
-                Queryable.Average
-            ).GetMethodInfo();
+            s_Average_NullableDouble_1 ??= new Func<IQueryable<double?>, double?>(Queryable.Average)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Average_Decimal_1;
 
         public static MethodInfo Average_Decimal_1 =>
-            s_Average_Decimal_1 ??= new Func<IQueryable<decimal>, decimal>(
-                Queryable.Average
-            ).GetMethodInfo();
+            s_Average_Decimal_1 ??= new Func<IQueryable<decimal>, decimal>(Queryable.Average)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Average_NullableDecimal_1;
 
         public static MethodInfo Average_NullableDecimal_1 =>
             s_Average_NullableDecimal_1 ??= new Func<IQueryable<decimal?>, decimal?>(
                 Queryable.Average
-            ).GetMethodInfo();
+            )
+                .GetMethodInfo();
 
         private static MethodInfo? s_Average_Int32_TSource_2;
 
@@ -164,8 +172,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, int>>,
                     double
-                >(Queryable.Average).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Average)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Average_NullableInt32_TSource_2;
 
@@ -175,8 +186,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, int?>>,
                     double?
-                >(Queryable.Average).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Average)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Average_Single_TSource_2;
 
@@ -186,8 +200,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, float>>,
                     float
-                >(Queryable.Average).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Average)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Average_NullableSingle_TSource_2;
 
@@ -197,8 +214,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, float?>>,
                     float?
-                >(Queryable.Average).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Average)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Average_Int64_TSource_2;
 
@@ -208,8 +228,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, long>>,
                     double
-                >(Queryable.Average).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Average)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Average_NullableInt64_TSource_2;
 
@@ -219,8 +242,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, long?>>,
                     double?
-                >(Queryable.Average).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Average)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Average_Double_TSource_2;
 
@@ -230,8 +256,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, double>>,
                     double
-                >(Queryable.Average).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Average)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Average_NullableDouble_TSource_2;
 
@@ -241,8 +270,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, double?>>,
                     double?
-                >(Queryable.Average).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Average)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Average_Decimal_TSource_2;
 
@@ -252,8 +284,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, decimal>>,
                     decimal
-                >(Queryable.Average).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Average)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Average_NullableDecimal_TSource_2;
 
@@ -263,8 +298,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, decimal?>>,
                     decimal?
-                >(Queryable.Average).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Average)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Cast_TResult_1;
 
@@ -272,8 +310,11 @@ namespace System.Linq
             (
                 s_Cast_TResult_1 ??= new Func<IQueryable, IQueryable<object>>(
                     Queryable.Cast<object>
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TResult);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TResult);
 
         private static MethodInfo? s_Chunk_TSource_1;
 
@@ -281,8 +322,11 @@ namespace System.Linq
             (
                 s_Chunk_TSource_1 ??= new Func<IQueryable<object>, int, IQueryable<object>>(
                     Queryable.Chunk
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Concat_TSource_2;
 
@@ -292,8 +336,11 @@ namespace System.Linq
                     IQueryable<object>,
                     IEnumerable<object>,
                     IQueryable<object>
-                >(Queryable.Concat).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Concat)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Contains_TSource_2;
 
@@ -301,8 +348,11 @@ namespace System.Linq
             (
                 s_Contains_TSource_2 ??= new Func<IQueryable<object>, object, bool>(
                     Queryable.Contains
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Contains_TSource_3;
 
@@ -313,17 +363,21 @@ namespace System.Linq
                     object,
                     IEqualityComparer<object>,
                     bool
-                >(Queryable.Contains).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Contains)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Count_TSource_1;
 
         public static MethodInfo Count_TSource_1(Type TSource) =>
             (
-                s_Count_TSource_1 ??= new Func<IQueryable<object>, int>(
-                    Queryable.Count
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                s_Count_TSource_1 ??= new Func<IQueryable<object>, int>(Queryable.Count)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Count_TSource_2;
 
@@ -333,8 +387,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     int
-                >(Queryable.Count).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Count)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_DefaultIfEmpty_TSource_1;
 
@@ -342,8 +399,11 @@ namespace System.Linq
             (
                 s_DefaultIfEmpty_TSource_1 ??= new Func<IQueryable<object>, IQueryable<object>>(
                     Queryable.DefaultIfEmpty
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_DefaultIfEmpty_TSource_2;
 
@@ -353,8 +413,11 @@ namespace System.Linq
                     IQueryable<object>,
                     object,
                     IQueryable<object>
-                >(Queryable.DefaultIfEmpty).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.DefaultIfEmpty)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Distinct_TSource_1;
 
@@ -362,8 +425,11 @@ namespace System.Linq
             (
                 s_Distinct_TSource_1 ??= new Func<IQueryable<object>, IQueryable<object>>(
                     Queryable.Distinct
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Distinct_TSource_2;
 
@@ -373,8 +439,11 @@ namespace System.Linq
                     IQueryable<object>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.Distinct).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Distinct)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_DistinctBy_TSource_TKey_2;
 
@@ -384,8 +453,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, object>>,
                     IQueryable<object>
-                >(Queryable.DistinctBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.DistinctBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_DistinctBy_TSource_TKey_3;
 
@@ -396,8 +468,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.DistinctBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.DistinctBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_ElementAt_Int32_TSource_2;
 
@@ -405,8 +480,11 @@ namespace System.Linq
             (
                 s_ElementAt_Int32_TSource_2 ??= new Func<IQueryable<object>, int, object>(
                     Queryable.ElementAt
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_ElementAt_Index_TSource_2;
 
@@ -414,8 +492,11 @@ namespace System.Linq
             (
                 s_ElementAt_Index_TSource_2 ??= new Func<IQueryable<object>, Index, object>(
                     Queryable.ElementAt
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_ElementAtOrDefault_Int32_TSource_2;
 
@@ -423,8 +504,11 @@ namespace System.Linq
             (
                 s_ElementAtOrDefault_Int32_TSource_2 ??= new Func<IQueryable<object>, int, object?>(
                     Queryable.ElementAtOrDefault
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_ElementAtOrDefault_Index_TSource_2;
 
@@ -434,8 +518,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Index,
                     object?
-                >(Queryable.ElementAtOrDefault).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.ElementAtOrDefault)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Except_TSource_2;
 
@@ -445,8 +532,11 @@ namespace System.Linq
                     IQueryable<object>,
                     IEnumerable<object>,
                     IQueryable<object>
-                >(Queryable.Except).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Except)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Except_TSource_3;
 
@@ -457,8 +547,11 @@ namespace System.Linq
                     IEnumerable<object>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.Except).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Except)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_ExceptBy_TSource_TKey_3;
 
@@ -469,8 +562,11 @@ namespace System.Linq
                     IEnumerable<object>,
                     Expression<Func<object, object>>,
                     IQueryable<object>
-                >(Queryable.ExceptBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.ExceptBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_ExceptBy_TSource_TKey_4;
 
@@ -482,17 +578,21 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.ExceptBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.ExceptBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_First_TSource_1;
 
         public static MethodInfo First_TSource_1(Type TSource) =>
             (
-                s_First_TSource_1 ??= new Func<IQueryable<object>, object>(
-                    Queryable.First
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                s_First_TSource_1 ??= new Func<IQueryable<object>, object>(Queryable.First)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_First_TSource_2;
 
@@ -502,8 +602,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     object
-                >(Queryable.First).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.First)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_FirstOrDefault_TSource_1;
 
@@ -511,8 +614,11 @@ namespace System.Linq
             (
                 s_FirstOrDefault_TSource_1 ??= new Func<IQueryable<object>, object?>(
                     Queryable.FirstOrDefault
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_FirstOrDefault_TSource_2;
 
@@ -522,8 +628,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     object?
-                >(Queryable.FirstOrDefault).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.FirstOrDefault)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_FirstOrDefault_TSource_3;
 
@@ -533,9 +642,12 @@ namespace System.Linq
                 ?? (
                     s_FirstOrDefault_TSource_3 = new Func<IQueryable<object>, object, object>(
                         Queryable.FirstOrDefault
-                    ).GetMethodInfo().GetGenericMethodDefinition()
+                    )
+                        .GetMethodInfo()
+                        .GetGenericMethodDefinition()
                 )
-            ).MakeGenericMethod(TSource);
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_FirstOrDefault_TSource_4;
 
@@ -548,9 +660,12 @@ namespace System.Linq
                         Expression<Func<object, bool>>,
                         object,
                         object
-                    >(Queryable.FirstOrDefault).GetMethodInfo().GetGenericMethodDefinition()
+                    >(Queryable.FirstOrDefault)
+                        .GetMethodInfo()
+                        .GetGenericMethodDefinition()
                 )
-            ).MakeGenericMethod(TSource);
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_GroupBy_TSource_TKey_2;
 
@@ -560,8 +675,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, object>>,
                     IQueryable<IGrouping<object, object>>
-                >(Queryable.GroupBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.GroupBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_GroupBy_TSource_TKey_3;
 
@@ -572,8 +690,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IEqualityComparer<object>,
                     IQueryable<IGrouping<object, object>>
-                >(Queryable.GroupBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.GroupBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_GroupBy_TSource_TKey_TElement_3;
 
@@ -588,8 +709,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     Expression<Func<object, object>>,
                     IQueryable<IGrouping<object, object>>
-                >(Queryable.GroupBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey, TElement);
+                >(Queryable.GroupBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey, TElement);
 
         private static MethodInfo? s_GroupBy_TSource_TKey_TElement_4;
 
@@ -605,8 +729,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IEqualityComparer<object>,
                     IQueryable<IGrouping<object, object>>
-                >(Queryable.GroupBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey, TElement);
+                >(Queryable.GroupBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey, TElement);
 
         private static MethodInfo? s_GroupBy_TSource_TKey_TResult_3;
 
@@ -621,8 +748,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     Expression<Func<object, IEnumerable<object>, object>>,
                     IQueryable<object>
-                >(Queryable.GroupBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey, TResult);
+                >(Queryable.GroupBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey, TResult);
 
         private static MethodInfo? s_GroupBy_TSource_TKey_TResult_4;
 
@@ -638,8 +768,11 @@ namespace System.Linq
                     Expression<Func<object, IEnumerable<object>, object>>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.GroupBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey, TResult);
+                >(Queryable.GroupBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey, TResult);
 
         private static MethodInfo? s_GroupBy_TSource_TKey_TElement_TResult_4;
 
@@ -656,8 +789,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     Expression<Func<object, IEnumerable<object>, object>>,
                     IQueryable<object>
-                >(Queryable.GroupBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey, TElement, TResult);
+                >(Queryable.GroupBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey, TElement, TResult);
 
         private static MethodInfo? s_GroupBy_TSource_TKey_TElement_TResult_5;
 
@@ -675,8 +811,11 @@ namespace System.Linq
                     Expression<Func<object, IEnumerable<object>, object>>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.GroupBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey, TElement, TResult);
+                >(Queryable.GroupBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey, TElement, TResult);
 
         private static MethodInfo? s_GroupJoin_TOuter_TInner_TKey_TResult_5;
 
@@ -694,8 +833,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     Expression<Func<object, IEnumerable<object>, object>>,
                     IQueryable<object>
-                >(Queryable.GroupJoin).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TOuter, TInner, TKey, TResult);
+                >(Queryable.GroupJoin)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TOuter, TInner, TKey, TResult);
 
         private static MethodInfo? s_GroupJoin_TOuter_TInner_TKey_TResult_6;
 
@@ -714,8 +856,11 @@ namespace System.Linq
                     Expression<Func<object, IEnumerable<object>, object>>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.GroupJoin).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TOuter, TInner, TKey, TResult);
+                >(Queryable.GroupJoin)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TOuter, TInner, TKey, TResult);
 
         private static MethodInfo? s_Intersect_TSource_2;
 
@@ -725,8 +870,11 @@ namespace System.Linq
                     IQueryable<object>,
                     IEnumerable<object>,
                     IQueryable<object>
-                >(Queryable.Intersect).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Intersect)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Intersect_TSource_3;
 
@@ -737,8 +885,11 @@ namespace System.Linq
                     IEnumerable<object>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.Intersect).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Intersect)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_IntersectBy_TSource_TKey_3;
 
@@ -749,8 +900,11 @@ namespace System.Linq
                     IEnumerable<object>,
                     Expression<Func<object, object>>,
                     IQueryable<object>
-                >(Queryable.IntersectBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.IntersectBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_IntersectBy_TSource_TKey_4;
 
@@ -762,8 +916,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.IntersectBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.IntersectBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_Join_TOuter_TInner_TKey_TResult_5;
 
@@ -781,8 +938,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     Expression<Func<object, object, object>>,
                     IQueryable<object>
-                >(Queryable.Join).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TOuter, TInner, TKey, TResult);
+                >(Queryable.Join)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TOuter, TInner, TKey, TResult);
 
         private static MethodInfo? s_Join_TOuter_TInner_TKey_TResult_6;
 
@@ -801,17 +961,21 @@ namespace System.Linq
                     Expression<Func<object, object, object>>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.Join).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TOuter, TInner, TKey, TResult);
+                >(Queryable.Join)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TOuter, TInner, TKey, TResult);
 
         private static MethodInfo? s_Last_TSource_1;
 
         public static MethodInfo Last_TSource_1(Type TSource) =>
             (
-                s_Last_TSource_1 ??= new Func<IQueryable<object>, object>(
-                    Queryable.Last
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                s_Last_TSource_1 ??= new Func<IQueryable<object>, object>(Queryable.Last)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Last_TSource_2;
 
@@ -821,8 +985,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     object
-                >(Queryable.Last).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Last)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_LastOrDefault_TSource_1;
 
@@ -830,8 +997,11 @@ namespace System.Linq
             (
                 s_LastOrDefault_TSource_1 ??= new Func<IQueryable<object>, object?>(
                     Queryable.LastOrDefault
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_LastOrDefault_TSource_2;
 
@@ -841,8 +1011,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     object?
-                >(Queryable.LastOrDefault).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.LastOrDefault)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_LastOrDefault_TSource_3;
 
@@ -852,9 +1025,12 @@ namespace System.Linq
                 ?? (
                     s_LastOrDefault_TSource_3 = new Func<IQueryable<object>, object, object>(
                         Queryable.LastOrDefault
-                    ).GetMethodInfo().GetGenericMethodDefinition()
+                    )
+                        .GetMethodInfo()
+                        .GetGenericMethodDefinition()
                 )
-            ).MakeGenericMethod(TSource);
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_LastOrDefault_TSource_4;
 
@@ -867,18 +1043,22 @@ namespace System.Linq
                         Expression<Func<object, bool>>,
                         object,
                         object
-                    >(Queryable.LastOrDefault).GetMethodInfo().GetGenericMethodDefinition()
+                    >(Queryable.LastOrDefault)
+                        .GetMethodInfo()
+                        .GetGenericMethodDefinition()
                 )
-            ).MakeGenericMethod(TSource);
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_LongCount_TSource_1;
 
         public static MethodInfo LongCount_TSource_1(Type TSource) =>
             (
-                s_LongCount_TSource_1 ??= new Func<IQueryable<object>, long>(
-                    Queryable.LongCount
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                s_LongCount_TSource_1 ??= new Func<IQueryable<object>, long>(Queryable.LongCount)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_LongCount_TSource_2;
 
@@ -888,17 +1068,21 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     long
-                >(Queryable.LongCount).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.LongCount)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Max_TSource_1;
 
         public static MethodInfo Max_TSource_1(Type TSource) =>
             (
-                s_Max_TSource_1 ??= new Func<IQueryable<object>, object?>(
-                    Queryable.Max
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                s_Max_TSource_1 ??= new Func<IQueryable<object>, object?>(Queryable.Max)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Max_TSource_2;
 
@@ -906,8 +1090,11 @@ namespace System.Linq
             (
                 s_Max_TSource_2 ??= new Func<IQueryable<object>, IComparer<object>, object?>(
                     Queryable.Max
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Max_TSource_TResult_2;
 
@@ -917,8 +1104,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, object>>,
                     object?
-                >(Queryable.Max).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TResult);
+                >(Queryable.Max)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TResult);
 
         private static MethodInfo? s_MaxBy_TSource_TKey_2;
 
@@ -928,8 +1118,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, object>>,
                     object?
-                >(Queryable.MaxBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.MaxBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_MaxBy_TSource_TKey_3;
 
@@ -940,17 +1133,21 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IComparer<object>,
                     object?
-                >(Queryable.MaxBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.MaxBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_Min_TSource_1;
 
         public static MethodInfo Min_TSource_1(Type TSource) =>
             (
-                s_Min_TSource_1 ??= new Func<IQueryable<object>, object?>(
-                    Queryable.Min
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                s_Min_TSource_1 ??= new Func<IQueryable<object>, object?>(Queryable.Min)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Min_TSource_2;
 
@@ -958,8 +1155,11 @@ namespace System.Linq
             (
                 s_Min_TSource_2 ??= new Func<IQueryable<object>, IComparer<object>, object?>(
                     Queryable.Min
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Min_TSource_TResult_2;
 
@@ -969,8 +1169,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, object>>,
                     object?
-                >(Queryable.Min).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TResult);
+                >(Queryable.Min)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TResult);
 
         private static MethodInfo? s_MinBy_TSource_TKey_2;
 
@@ -980,8 +1183,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, object>>,
                     object?
-                >(Queryable.MinBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.MinBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_MinBy_TSource_TKey_3;
 
@@ -992,8 +1198,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IComparer<object>,
                     object?
-                >(Queryable.MinBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.MinBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_OfType_TResult_1;
 
@@ -1001,8 +1210,11 @@ namespace System.Linq
             (
                 s_OfType_TResult_1 ??= new Func<IQueryable, IQueryable<object>>(
                     Queryable.OfType<object>
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TResult);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TResult);
 
         private static MethodInfo? s_OrderBy_TSource_TKey_2;
 
@@ -1012,8 +1224,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, object>>,
                     IOrderedQueryable<object>
-                >(Queryable.OrderBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.OrderBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_OrderBy_TSource_TKey_3;
 
@@ -1024,8 +1239,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IComparer<object>,
                     IOrderedQueryable<object>
-                >(Queryable.OrderBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.OrderBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_OrderByDescending_TSource_TKey_2;
 
@@ -1035,8 +1253,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, object>>,
                     IOrderedQueryable<object>
-                >(Queryable.OrderByDescending).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.OrderByDescending)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_OrderByDescending_TSource_TKey_3;
 
@@ -1047,8 +1268,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IComparer<object>,
                     IOrderedQueryable<object>
-                >(Queryable.OrderByDescending).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.OrderByDescending)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_Reverse_TSource_1;
 
@@ -1056,8 +1280,11 @@ namespace System.Linq
             (
                 s_Reverse_TSource_1 ??= new Func<IQueryable<object>, IQueryable<object>>(
                     Queryable.Reverse
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Select_TSource_TResult_2;
 
@@ -1067,8 +1294,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, object>>,
                     IQueryable<object>
-                >(Queryable.Select).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TResult);
+                >(Queryable.Select)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TResult);
 
         private static MethodInfo? s_Select_Index_TSource_TResult_2;
 
@@ -1078,8 +1308,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, int, object>>,
                     IQueryable<object>
-                >(Queryable.Select).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TResult);
+                >(Queryable.Select)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TResult);
 
         private static MethodInfo? s_SelectMany_TSource_TResult_2;
 
@@ -1089,8 +1322,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, IEnumerable<object>>>,
                     IQueryable<object>
-                >(Queryable.SelectMany).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TResult);
+                >(Queryable.SelectMany)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TResult);
 
         private static MethodInfo? s_SelectMany_Index_TSource_TResult_2;
 
@@ -1100,8 +1336,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, int, IEnumerable<object>>>,
                     IQueryable<object>
-                >(Queryable.SelectMany).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TResult);
+                >(Queryable.SelectMany)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TResult);
 
         private static MethodInfo? s_SelectMany_Index_TSource_TCollection_TResult_3;
 
@@ -1116,8 +1355,11 @@ namespace System.Linq
                     Expression<Func<object, int, IEnumerable<object>>>,
                     Expression<Func<object, object, object>>,
                     IQueryable<object>
-                >(Queryable.SelectMany).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TCollection, TResult);
+                >(Queryable.SelectMany)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TCollection, TResult);
 
         private static MethodInfo? s_SelectMany_TSource_TCollection_TResult_3;
 
@@ -1132,8 +1374,11 @@ namespace System.Linq
                     Expression<Func<object, IEnumerable<object>>>,
                     Expression<Func<object, object, object>>,
                     IQueryable<object>
-                >(Queryable.SelectMany).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TCollection, TResult);
+                >(Queryable.SelectMany)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TCollection, TResult);
 
         private static MethodInfo? s_SequenceEqual_TSource_2;
 
@@ -1143,8 +1388,11 @@ namespace System.Linq
                     IQueryable<object>,
                     IEnumerable<object>,
                     bool
-                >(Queryable.SequenceEqual).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.SequenceEqual)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_SequenceEqual_TSource_3;
 
@@ -1155,17 +1403,21 @@ namespace System.Linq
                     IEnumerable<object>,
                     IEqualityComparer<object>,
                     bool
-                >(Queryable.SequenceEqual).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.SequenceEqual)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Single_TSource_1;
 
         public static MethodInfo Single_TSource_1(Type TSource) =>
             (
-                s_Single_TSource_1 ??= new Func<IQueryable<object>, object>(
-                    Queryable.Single
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                s_Single_TSource_1 ??= new Func<IQueryable<object>, object>(Queryable.Single)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Single_TSource_2;
 
@@ -1175,8 +1427,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     object
-                >(Queryable.Single).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Single)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_SingleOrDefault_TSource_1;
 
@@ -1184,8 +1439,11 @@ namespace System.Linq
             (
                 s_SingleOrDefault_TSource_1 ??= new Func<IQueryable<object>, object?>(
                     Queryable.SingleOrDefault
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_SingleOrDefault_TSource_2;
 
@@ -1195,8 +1453,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     object?
-                >(Queryable.SingleOrDefault).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.SingleOrDefault)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_SingleOrDefault_TSource_3;
 
@@ -1206,9 +1467,12 @@ namespace System.Linq
                 ?? (
                     s_SingleOrDefault_TSource_3 = new Func<IQueryable<object>, object, object>(
                         Queryable.SingleOrDefault
-                    ).GetMethodInfo().GetGenericMethodDefinition()
+                    )
+                        .GetMethodInfo()
+                        .GetGenericMethodDefinition()
                 )
-            ).MakeGenericMethod(TSource);
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_SingleOrDefault_TSource_4;
 
@@ -1221,9 +1485,12 @@ namespace System.Linq
                         Expression<Func<object, bool>>,
                         object,
                         object
-                    >(Queryable.SingleOrDefault).GetMethodInfo().GetGenericMethodDefinition()
+                    >(Queryable.SingleOrDefault)
+                        .GetMethodInfo()
+                        .GetGenericMethodDefinition()
                 )
-            ).MakeGenericMethod(TSource);
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Skip_TSource_2;
 
@@ -1231,8 +1498,11 @@ namespace System.Linq
             (
                 s_Skip_TSource_2 ??= new Func<IQueryable<object>, int, IQueryable<object>>(
                     Queryable.Skip
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_SkipWhile_TSource_2;
 
@@ -1242,8 +1512,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     IQueryable<object>
-                >(Queryable.SkipWhile).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.SkipWhile)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_SkipWhile_Index_TSource_2;
 
@@ -1253,8 +1526,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, int, bool>>,
                     IQueryable<object>
-                >(Queryable.SkipWhile).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.SkipWhile)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Sum_Int32_1;
 
@@ -1264,9 +1540,8 @@ namespace System.Linq
         private static MethodInfo? s_Sum_NullableInt32_1;
 
         public static MethodInfo Sum_NullableInt32_1 =>
-            s_Sum_NullableInt32_1 ??= new Func<IQueryable<int?>, int?>(
-                Queryable.Sum
-            ).GetMethodInfo();
+            s_Sum_NullableInt32_1 ??= new Func<IQueryable<int?>, int?>(Queryable.Sum)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Sum_Int64_1;
 
@@ -1276,9 +1551,8 @@ namespace System.Linq
         private static MethodInfo? s_Sum_NullableInt64_1;
 
         public static MethodInfo Sum_NullableInt64_1 =>
-            s_Sum_NullableInt64_1 ??= new Func<IQueryable<long?>, long?>(
-                Queryable.Sum
-            ).GetMethodInfo();
+            s_Sum_NullableInt64_1 ??= new Func<IQueryable<long?>, long?>(Queryable.Sum)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Sum_Single_1;
 
@@ -1288,9 +1562,8 @@ namespace System.Linq
         private static MethodInfo? s_Sum_NullableSingle_1;
 
         public static MethodInfo Sum_NullableSingle_1 =>
-            s_Sum_NullableSingle_1 ??= new Func<IQueryable<float?>, float?>(
-                Queryable.Sum
-            ).GetMethodInfo();
+            s_Sum_NullableSingle_1 ??= new Func<IQueryable<float?>, float?>(Queryable.Sum)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Sum_Double_1;
 
@@ -1300,23 +1573,20 @@ namespace System.Linq
         private static MethodInfo? s_Sum_NullableDouble_1;
 
         public static MethodInfo Sum_NullableDouble_1 =>
-            s_Sum_NullableDouble_1 ??= new Func<IQueryable<double?>, double?>(
-                Queryable.Sum
-            ).GetMethodInfo();
+            s_Sum_NullableDouble_1 ??= new Func<IQueryable<double?>, double?>(Queryable.Sum)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Sum_Decimal_1;
 
         public static MethodInfo Sum_Decimal_1 =>
-            s_Sum_Decimal_1 ??= new Func<IQueryable<decimal>, decimal>(
-                Queryable.Sum
-            ).GetMethodInfo();
+            s_Sum_Decimal_1 ??= new Func<IQueryable<decimal>, decimal>(Queryable.Sum)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Sum_NullableDecimal_1;
 
         public static MethodInfo Sum_NullableDecimal_1 =>
-            s_Sum_NullableDecimal_1 ??= new Func<IQueryable<decimal?>, decimal?>(
-                Queryable.Sum
-            ).GetMethodInfo();
+            s_Sum_NullableDecimal_1 ??= new Func<IQueryable<decimal?>, decimal?>(Queryable.Sum)
+                .GetMethodInfo();
 
         private static MethodInfo? s_Sum_NullableDecimal_TSource_2;
 
@@ -1326,8 +1596,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, decimal?>>,
                     decimal?
-                >(Queryable.Sum).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Sum)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Sum_Int32_TSource_2;
 
@@ -1337,8 +1610,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, int>>,
                     int
-                >(Queryable.Sum).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Sum)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Sum_NullableInt32_TSource_2;
 
@@ -1348,8 +1624,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, int?>>,
                     int?
-                >(Queryable.Sum).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Sum)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Sum_Int64_TSource_2;
 
@@ -1359,8 +1638,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, long>>,
                     long
-                >(Queryable.Sum).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Sum)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Sum_NullableInt64_TSource_2;
 
@@ -1370,8 +1652,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, long?>>,
                     long?
-                >(Queryable.Sum).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Sum)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Sum_Single_TSource_2;
 
@@ -1381,8 +1666,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, float>>,
                     float
-                >(Queryable.Sum).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Sum)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Sum_NullableSingle_TSource_2;
 
@@ -1392,8 +1680,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, float?>>,
                     float?
-                >(Queryable.Sum).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Sum)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Sum_Double_TSource_2;
 
@@ -1403,8 +1694,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, double>>,
                     double
-                >(Queryable.Sum).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Sum)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Sum_NullableDouble_TSource_2;
 
@@ -1414,8 +1708,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, double?>>,
                     double?
-                >(Queryable.Sum).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Sum)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Sum_Decimal_TSource_2;
 
@@ -1425,8 +1722,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, decimal>>,
                     decimal
-                >(Queryable.Sum).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Sum)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Take_Int32_TSource_2;
 
@@ -1434,8 +1734,11 @@ namespace System.Linq
             (
                 s_Take_Int32_TSource_2 ??= new Func<IQueryable<object>, int, IQueryable<object>>(
                     Queryable.Take
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Take_Range_TSource_2;
 
@@ -1443,8 +1746,11 @@ namespace System.Linq
             (
                 s_Take_Range_TSource_2 ??= new Func<IQueryable<object>, Range, IQueryable<object>>(
                     Queryable.Take
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_TakeWhile_TSource_2;
 
@@ -1454,8 +1760,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     IQueryable<object>
-                >(Queryable.TakeWhile).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.TakeWhile)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_TakeWhile_Index_TSource_2;
 
@@ -1465,8 +1774,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, int, bool>>,
                     IQueryable<object>
-                >(Queryable.TakeWhile).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.TakeWhile)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_ThenBy_TSource_TKey_2;
 
@@ -1476,8 +1788,11 @@ namespace System.Linq
                     IOrderedQueryable<object>,
                     Expression<Func<object, object>>,
                     IOrderedQueryable<object>
-                >(Queryable.ThenBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.ThenBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_ThenBy_TSource_TKey_3;
 
@@ -1488,8 +1803,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IComparer<object>,
                     IOrderedQueryable<object>
-                >(Queryable.ThenBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.ThenBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_ThenByDescending_TSource_TKey_2;
 
@@ -1499,8 +1817,11 @@ namespace System.Linq
                     IOrderedQueryable<object>,
                     Expression<Func<object, object>>,
                     IOrderedQueryable<object>
-                >(Queryable.ThenByDescending).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.ThenByDescending)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_ThenByDescending_TSource_TKey_3;
 
@@ -1511,8 +1832,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IComparer<object>,
                     IOrderedQueryable<object>
-                >(Queryable.ThenByDescending).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.ThenByDescending)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_Union_TSource_2;
 
@@ -1522,8 +1846,11 @@ namespace System.Linq
                     IQueryable<object>,
                     IEnumerable<object>,
                     IQueryable<object>
-                >(Queryable.Union).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Union)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Union_TSource_3;
 
@@ -1534,8 +1861,11 @@ namespace System.Linq
                     IEnumerable<object>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.Union).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Union)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_UnionBy_TSource_TKey_3;
 
@@ -1546,8 +1876,11 @@ namespace System.Linq
                     IEnumerable<object>,
                     Expression<Func<object, object>>,
                     IQueryable<object>
-                >(Queryable.UnionBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.UnionBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_UnionBy_TSource_TKey_4;
 
@@ -1559,8 +1892,11 @@ namespace System.Linq
                     Expression<Func<object, object>>,
                     IEqualityComparer<object>,
                     IQueryable<object>
-                >(Queryable.UnionBy).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource, TKey);
+                >(Queryable.UnionBy)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource, TKey);
 
         private static MethodInfo? s_Where_TSource_2;
 
@@ -1570,8 +1906,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, bool>>,
                     IQueryable<object>
-                >(Queryable.Where).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Where)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Where_Index_TSource_2;
 
@@ -1581,8 +1920,11 @@ namespace System.Linq
                     IQueryable<object>,
                     Expression<Func<object, int, bool>>,
                     IQueryable<object>
-                >(Queryable.Where).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                >(Queryable.Where)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Zip_TFirst_TSecond_2;
 
@@ -1592,8 +1934,11 @@ namespace System.Linq
                     IQueryable<object>,
                     IEnumerable<object>,
                     IQueryable<(object, object)>
-                >(Queryable.Zip).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TFirst, TSecond);
+                >(Queryable.Zip)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TFirst, TSecond);
 
         private static MethodInfo? s_Zip_TFirst_TSecond_TResult_3;
 
@@ -1608,8 +1953,11 @@ namespace System.Linq
                     IEnumerable<object>,
                     Expression<Func<object, object, object>>,
                     IQueryable<object>
-                >(Queryable.Zip).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TFirst, TSecond, TResult);
+                >(Queryable.Zip)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TFirst, TSecond, TResult);
 
         private static MethodInfo? s_Zip_TFirst_TSecond_TThird_3;
 
@@ -1624,8 +1972,11 @@ namespace System.Linq
                     IEnumerable<object>,
                     IEnumerable<object>,
                     IQueryable<(object, object, object)>
-                >(Queryable.Zip).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TFirst, TSecond, TThird);
+                >(Queryable.Zip)
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TFirst, TSecond, TThird);
 
         private static MethodInfo? s_SkipLast_TSource_2;
 
@@ -1633,8 +1984,11 @@ namespace System.Linq
             (
                 s_SkipLast_TSource_2 ??= new Func<IQueryable<object>, int, IQueryable<object>>(
                     Queryable.SkipLast
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_TakeLast_TSource_2;
 
@@ -1642,8 +1996,11 @@ namespace System.Linq
             (
                 s_TakeLast_TSource_2 ??= new Func<IQueryable<object>, int, IQueryable<object>>(
                     Queryable.TakeLast
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Append_TSource_2;
 
@@ -1651,8 +2008,11 @@ namespace System.Linq
             (
                 s_Append_TSource_2 ??= new Func<IQueryable<object>, object, IQueryable<object>>(
                     Queryable.Append
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Prepend_TSource_2;
 
@@ -1660,7 +2020,10 @@ namespace System.Linq
             (
                 s_Prepend_TSource_2 ??= new Func<IQueryable<object>, object, IQueryable<object>>(
                     Queryable.Prepend
-                ).GetMethodInfo().GetGenericMethodDefinition()
-            ).MakeGenericMethod(TSource);
+                )
+                    .GetMethodInfo()
+                    .GetGenericMethodDefinition()
+            )
+                .MakeGenericMethod(TSource);
     }
 }

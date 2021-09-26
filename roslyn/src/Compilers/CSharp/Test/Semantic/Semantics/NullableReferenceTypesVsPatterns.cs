@@ -1842,7 +1842,8 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next").WithLocation(11, 13),
                 // (16,13): warning CS8602: Dereference of a possibly null reference.
                 //             n.Next.Next.ToString(); // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(16, 13),
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next")
+                    .WithLocation(16, 13),
                 // (21,13): warning CS8602: Dereference of a possibly null reference.
                 //             n.Next.Next.Next.ToString(); // 3
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next.Next")
@@ -1888,7 +1889,8 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next").WithLocation(11, 13),
                 // (17,13): warning CS8602: Dereference of a possibly null reference.
                 //             n.Next.Next.ToString(); // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(17, 13),
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next")
+                    .WithLocation(17, 13),
                 // (23,13): warning CS8602: Dereference of a possibly null reference.
                 //             n.Next.Next.Next.ToString(); // 3
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next.Next")
@@ -1934,7 +1936,8 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next").WithLocation(11, 13),
                 // (17,13): warning CS8602: Dereference of a possibly null reference.
                 //             n.Next.Next.ToString(), // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next").WithLocation(17, 13),
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next")
+                    .WithLocation(17, 13),
                 // (23,13): warning CS8602: Dereference of a possibly null reference.
                 //             n.Next.Next.Next.ToString(), // 3
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Next.Next.Next")
@@ -1988,19 +1991,22 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "n").WithLocation(7, 22),
                 // (13,23): warning CS8602: Dereference of a possibly null reference.
                 //             (_, _) => n.Value.s1.ToString(), // 2: n.Value.s1
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Value.s1").WithLocation(13, 23),
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Value.s1")
+                    .WithLocation(13, 23),
                 // (14,23): warning CS8629: Nullable value type may be null.
                 //             _      => n.Value.ToString(), // 3: n
                 Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "n").WithLocation(14, 23),
                 // (21,24): warning CS8602: Dereference of a possibly null reference.
                 //             (_, _)  => n.Value.s1.ToString(), // 4: n.Value.s1
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Value.s1").WithLocation(21, 24),
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Value.s1")
+                    .WithLocation(21, 24),
                 // (22,24): warning CS8629: Nullable value type may be null.
                 //             _       => n.Value.ToString(), // 5: n
                 Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "n").WithLocation(22, 24),
                 // (28,26): warning CS8602: Dereference of a possibly null reference.
                 //             (null, _) => n.Value.s2.ToString(), // 6: n.Value.s2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Value.s2").WithLocation(28, 26),
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "n.Value.s2")
+                    .WithLocation(28, 26),
                 // (31,26): warning CS8629: Nullable value type may be null.
                 //             _         => n.Value.ToString(), // 7: n
                 Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "n").WithLocation(31, 26)
@@ -2099,10 +2105,12 @@ public interface IOut<out T> { }
             c.VerifyDiagnostics(
                 // (33,15): error CS8506: No best type was found for the switch expression.
                 //         _ = i switch { 5 => x, _ => y }/*T:<null>!*//*CT:!*/; // 1
-                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(33, 15),
+                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
+                    .WithLocation(33, 15),
                 // (34,15): error CS8506: No best type was found for the switch expression.
                 //         _ = i switch { 5 => y, _ => x }/*T:<null>!*//*CT:!*/; // 2
-                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(34, 15),
+                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
+                    .WithLocation(34, 15),
                 // (39,37): warning CS8619: Nullability of reference types in value of type 'I<string?>' doesn't match target type 'I<string>'.
                 //         _ = i switch { 6 => x, _ => y }/*T:I<string!>!*/; // 3
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "y")
@@ -2175,7 +2183,8 @@ class C
             c.VerifyDiagnostics(
                 // (47,9): warning CS8602: Dereference of a possibly null reference.
                 //         c.otherField.ToString(); // W
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c.otherField").WithLocation(47, 9)
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c.otherField")
+                    .WithLocation(47, 9)
             );
         }
 
@@ -2716,7 +2725,8 @@ class C
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "s1").WithLocation(11, 34),
                 // (12,35): warning CS8603: Possible null reference return.
                 //                    false => () => s1?.ToString()
-                Diagnostic(ErrorCode.WRN_NullReferenceReturn, "s1?.ToString()").WithLocation(12, 35)
+                Diagnostic(ErrorCode.WRN_NullReferenceReturn, "s1?.ToString()")
+                    .WithLocation(12, 35)
             );
         }
 
@@ -2745,9 +2755,9 @@ class C
                 // (9,15): warning CS8604: Possible null reference argument for parameter 't2' in 'I C.M1<I>(I t1, I t2)'.
                 //         M1(i, @bool switch { true => a, false => b }).ToString();
                 Diagnostic(
-                        ErrorCode.WRN_NullReferenceArgument,
-                        "@bool switch { true => a, false => b }"
-                    )
+                    ErrorCode.WRN_NullReferenceArgument,
+                    "@bool switch { true => a, false => b }"
+                )
                     .WithArguments("t2", "I C.M1<I>(I t1, I t2)")
                     .WithLocation(9, 15)
             );

@@ -595,10 +595,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private static Exception IdNotFoundError(int id)
         {
-            var message = string.Format(
-                "The given ID ({0}) was not present in the underlying data.",
-                id
-            );
+            var message = string
+                .Format("The given ID ({0}) was not present in the underlying data.", id);
             return new KeyNotFoundException(message);
         }
     }

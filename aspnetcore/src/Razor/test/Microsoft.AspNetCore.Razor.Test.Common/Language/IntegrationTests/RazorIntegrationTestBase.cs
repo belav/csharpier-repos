@@ -41,9 +41,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             };
 
             var referenceAssemblies = referenceAssemblyRoots.SelectMany(
-                    assembly =>
-                        assembly.GetReferencedAssemblies().Concat(new[] { assembly.GetName() })
-                )
+                assembly => assembly.GetReferencedAssemblies().Concat(new[] { assembly.GetName() })
+            )
                 .Distinct()
                 .Select(Assembly.Load)
                 .Select(assembly => MetadataReference.CreateFromFile(assembly.Location))
@@ -140,9 +139,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     }
 
                     b.Features.Add(new CompilationTagHelperFeature());
-                    b.Features.Add(
-                        new DefaultMetadataReferenceFeature() { References = references, }
-                    );
+                    b.Features
+                        .Add(new DefaultMetadataReferenceFeature() { References = references, });
 
                     b.SetCSharpLanguageVersion(CSharpParseOptions.LanguageVersion);
 
@@ -263,9 +261,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 var tempAssembly = CompileToAssembly(declaration, throwOnFailure);
 
                 // Add the 'temp' compilation as a metadata reference
-                var references = BaseCompilation.References.Concat(
-                        new[] { tempAssembly.Compilation.ToMetadataReference() }
-                    )
+                var references = BaseCompilation.References
+                    .Concat(new[] { tempAssembly.Compilation.ToMetadataReference() })
                     .ToArray();
                 projectEngine = CreateProjectEngine(Configuration, references);
 
@@ -355,10 +352,11 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         {
             if (cSharpResult.Diagnostics.Any() && throwOnFailure)
             {
-                var diagnosticsLog = string.Join(
-                    Environment.NewLine,
-                    cSharpResult.Diagnostics.Select(d => d.ToString()).ToArray()
-                );
+                var diagnosticsLog = string
+                    .Join(
+                        Environment.NewLine,
+                        cSharpResult.Diagnostics.Select(d => d.ToString()).ToArray()
+                    );
                 throw new InvalidOperationException(
                     $"Aborting compilation to assembly because RazorCompiler returned nonempty diagnostics: {diagnosticsLog}"
                 );
@@ -425,10 +423,11 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 throw new XunitException(
                     $"Failed to find component type '{fullTypeName}'. Found types:"
                         + Environment.NewLine
-                        + string.Join(
-                            Environment.NewLine,
-                            assemblyResult.Assembly.ExportedTypes.Select(t => t.FullName)
-                        )
+                        + string
+                            .Join(
+                                Environment.NewLine,
+                                assemblyResult.Assembly.ExportedTypes.Select(t => t.FullName)
+                            )
                 );
             }
 
@@ -452,9 +451,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 var windowsPath = Path.Combine(
-                        ArbitraryWindowsPath,
-                        generated.CodeDocument.Source.RelativePath
-                    )
+                    ArbitraryWindowsPath,
+                    generated.CodeDocument.Source.RelativePath
+                )
                     .Replace('/', '\\');
                 expected = expected.Replace(windowsPath, generated.CodeDocument.Source.FilePath);
             }
@@ -548,10 +547,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
             protected override void ExecuteCore(RazorCodeDocument codeDocument)
             {
-                var field = typeof(CodeRenderingContext).GetField(
-                    "NewLineString",
-                    BindingFlags.Static | BindingFlags.NonPublic
-                );
+                var field = typeof(CodeRenderingContext)
+                    .GetField("NewLineString", BindingFlags.Static | BindingFlags.NonPublic);
                 var key = field.GetValue(null);
                 codeDocument.Items[key] = LineEnding;
             }

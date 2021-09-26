@@ -24,9 +24,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private static string CurrentDirectory => Environment.CurrentDirectory;
 
         public static SqlServerTestStore GetNorthwindStore() =>
-            (SqlServerTestStore)SqlServerNorthwindTestStoreFactory.Instance.GetOrCreate(
-                    SqlServerNorthwindTestStoreFactory.Name
-                )
+            (SqlServerTestStore)SqlServerNorthwindTestStoreFactory.Instance
+                .GetOrCreate(SqlServerNorthwindTestStoreFactory.Name)
                 .Initialize(null, (Func<DbContext>)null);
 
         public static SqlServerTestStore GetOrCreate(string name) => new(name);
@@ -53,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 useFileName,
                 shared: false,
                 multipleActiveResultSets: multipleActiveResultSets
-            ).InitializeSqlServer(null, (Func<DbContext>)null, null);
+            )
+                .InitializeSqlServer(null, (Func<DbContext>)null, null);
 
         private readonly string _fileName;
         private readonly string _scriptPath;
@@ -184,7 +184,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                             "^GO",
                             RegexOptions.IgnoreCase | RegexOptions.Multiline,
                             TimeSpan.FromMilliseconds(1000.0)
-                        ).Split(script).Where(b => !string.IsNullOrEmpty(b))
+                        )
+                            .Split(script)
+                            .Where(b => !string.IsNullOrEmpty(b))
                     )
                     {
                         command.CommandText = batch;
@@ -198,10 +200,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         }
 
         private static void WaitForExists(SqlConnection connection) =>
-            new TestSqlServerRetryingExecutionStrategy().Execute(
-                connection,
-                WaitForExistsImplementation
-            );
+            new TestSqlServerRetryingExecutionStrategy()
+                .Execute(connection, WaitForExistsImplementation);
 
         private static void WaitForExistsImplementation(SqlConnection connection)
         {
@@ -273,32 +273,25 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public void DeleteDatabase()
         {
             using var master = new SqlConnection(CreateConnectionString("master"));
-            ExecuteNonQuery(
-                master,
-                string.Format(
+            ExecuteNonQuery(master, string.Format(
                     @"IF EXISTS (SELECT * FROM sys.databases WHERE name = N'{0}')
                                           BEGIN
                                               ALTER DATABASE [{0}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
                                               DROP DATABASE [{0}];
                                           END",
                     Name
-                )
-            );
+                ));
 
             SqlConnection.ClearAllPools();
         }
 
         public override void OpenConnection() =>
-            new TestSqlServerRetryingExecutionStrategy().Execute(
-                Connection,
-                connection => connection.Open()
-            );
+            new TestSqlServerRetryingExecutionStrategy()
+                .Execute(Connection, connection => connection.Open());
 
         public override Task OpenConnectionAsync() =>
-            new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
-                Connection,
-                connection => connection.OpenAsync()
-            );
+            new TestSqlServerRetryingExecutionStrategy()
+                .ExecuteAsync(Connection, connection => connection.OpenAsync());
 
         public T ExecuteScalar<T>(string sql, params object[] parameters) =>
             ExecuteScalar<T>(Connection, sql, parameters);
@@ -411,17 +404,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             bool useTransaction = false,
             object[] parameters = null
         ) =>
-            new TestSqlServerRetryingExecutionStrategy().Execute(
-                new { connection, execute, sql, useTransaction, parameters },
-                state =>
-                    ExecuteCommand(
-                        state.connection,
-                        state.execute,
-                        state.sql,
-                        state.useTransaction,
-                        state.parameters
-                    )
-            );
+            new TestSqlServerRetryingExecutionStrategy()
+                .Execute(
+                    new { connection, execute, sql, useTransaction, parameters },
+                    state =>
+                        ExecuteCommand(
+                            state.connection,
+                            state.execute,
+                            state.sql,
+                            state.useTransaction,
+                            state.parameters
+                        )
+                );
 
         private static T ExecuteCommand<T>(
             DbConnection connection,
@@ -468,17 +462,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             bool useTransaction = false,
             IReadOnlyList<object> parameters = null
         ) =>
-            new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
-                new { connection, executeAsync, sql, useTransaction, parameters },
-                state =>
-                    ExecuteCommandAsync(
-                        state.connection,
-                        state.executeAsync,
-                        state.sql,
-                        state.useTransaction,
-                        state.parameters
-                    )
-            );
+            new TestSqlServerRetryingExecutionStrategy()
+                .ExecuteAsync(
+                    new { connection, executeAsync, sql, useTransaction, parameters },
+                    state =>
+                        ExecuteCommandAsync(
+                            state.connection,
+                            state.executeAsync,
+                            state.sql,
+                            state.useTransaction,
+                            state.parameters
+                        )
+                );
 
         private static async Task<T> ExecuteCommandAsync<T>(
             DbConnection connection,

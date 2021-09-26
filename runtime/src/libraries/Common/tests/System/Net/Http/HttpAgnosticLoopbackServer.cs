@@ -102,9 +102,9 @@ namespace System.Net.Test.Common
                         sslOptions.ServerCertificate = cert;
 
                         await sslStream.AuthenticateAsServerAsync(
-                                sslOptions,
-                                CancellationToken.None
-                            )
+                            sslOptions,
+                            CancellationToken.None
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -112,13 +112,9 @@ namespace System.Net.Test.Common
                     if (sslStream.NegotiatedApplicationProtocol == SslApplicationProtocol.Http2)
                     {
                         // Do not pass original options so the CreateConnectionAsync won't try to do ALPN again.
-                        return connection =
-                            await Http2LoopbackServerFactory.Singleton.CreateConnectionAsync(
-                                    socket,
-                                    stream,
-                                    options
-                                )
-                                .ConfigureAwait(false);
+                        return connection = await Http2LoopbackServerFactory.Singleton
+                            .CreateConnectionAsync(socket, stream, options)
+                            .ConfigureAwait(false);
                     }
                     if (
                         sslStream.NegotiatedApplicationProtocol == SslApplicationProtocol.Http11
@@ -126,13 +122,9 @@ namespace System.Net.Test.Common
                     )
                     {
                         // Do not pass original options so the CreateConnectionAsync won't try to do ALPN again.
-                        return connection =
-                            await Http11LoopbackServerFactory.Singleton.CreateConnectionAsync(
-                                    socket,
-                                    stream,
-                                    options
-                                )
-                                .ConfigureAwait(false);
+                        return connection = await Http11LoopbackServerFactory.Singleton
+                            .CreateConnectionAsync(socket, stream, options)
+                            .ConfigureAwait(false);
                     }
                     else
                     {
@@ -154,10 +146,10 @@ namespace System.Net.Test.Common
                 while (position < buffer.Length)
                 {
                     var readBytes = await stream.ReadAsync(
-                            buffer,
-                            position,
-                            buffer.Length - position
-                        )
+                        buffer,
+                        position,
+                        buffer.Length - position
+                    )
                         .ConfigureAwait(false);
                     if (readBytes == 0)
                     {
@@ -177,13 +169,9 @@ namespace System.Net.Test.Common
                         || _options.ClearTextVersion == HttpVersion.Unknown
                     )
                     {
-                        return connection =
-                            await Http2LoopbackServerFactory.Singleton.CreateConnectionAsync(
-                                    socket,
-                                    stream,
-                                    options
-                                )
-                                .ConfigureAwait(false);
+                        return connection = await Http2LoopbackServerFactory.Singleton
+                            .CreateConnectionAsync(socket, stream, options)
+                            .ConfigureAwait(false);
                     }
                 }
                 else
@@ -193,13 +181,9 @@ namespace System.Net.Test.Common
                         || _options.ClearTextVersion == HttpVersion.Unknown
                     )
                     {
-                        return connection =
-                            await Http11LoopbackServerFactory.Singleton.CreateConnectionAsync(
-                                    socket,
-                                    stream,
-                                    options
-                                )
-                                .ConfigureAwait(false);
+                        return connection = await Http11LoopbackServerFactory.Singleton
+                            .CreateConnectionAsync(socket, stream, options)
+                            .ConfigureAwait(false);
                     }
                 }
 
@@ -277,7 +261,8 @@ namespace System.Net.Test.Common
                 Task clientTask = clientFunc(server.Address);
                 Task serverTask = serverFunc(server);
 
-                await new Task[] { clientTask, serverTask }.WhenAllOrAnyFailed(timeout)
+                await new Task[] { clientTask, serverTask }
+                    .WhenAllOrAnyFailed(timeout)
                     .ConfigureAwait(false);
             }
         }

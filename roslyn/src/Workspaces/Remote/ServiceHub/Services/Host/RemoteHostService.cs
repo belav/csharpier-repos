@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 // Server GC runs processor-affinitized threads with high priority. To avoid interfering with other
                 // applications while still allowing efficient out-of-process execution, slightly reduce the process
                 // priority when using server GC.
-                Process.GetCurrentProcess().TrySetPriorityClass(ProcessPriorityClass.BelowNormal);
+                Process.GetCurrentProcess()
+                    .TrySetPriorityClass(ProcessPriorityClass.BelowNormal);
             }
 
             // this is the very first service which will be called from client (VS)
@@ -170,39 +171,38 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             return await RunServiceAsync(
-                    () =>
-                    {
-                        using (
-                            RoslynLogger.LogBlock(
-                                FunctionId.RemoteHostService_GetAssetsAsync,
-                                (serviceId, checksums) =>
-                                    $"{serviceId} - {Checksum.GetChecksumsLogInfo(checksums)}",
-                                scopeId,
-                                checksums,
-                                cancellationToken
-                            )
+                () =>
+                {
+                    using (
+                        RoslynLogger.LogBlock(
+                            FunctionId.RemoteHostService_GetAssetsAsync,
+                            (serviceId, checksums) =>
+                                $"{serviceId} - {Checksum.GetChecksumsLogInfo(checksums)}",
+                            scopeId,
+                            checksums,
+                            cancellationToken
                         )
-                        {
-                            return EndPoint.InvokeAsync(
-                                nameof(IRemoteHostServiceCallback.GetAssetsAsync),
-                                new object[] { scopeId, checksums.ToArray() },
-                                (stream, cancellationToken) =>
-                                    Task.FromResult(
-                                        RemoteHostAssetSerialization.ReadData(
-                                            stream,
-                                            scopeId,
-                                            checksums,
-                                            serializerService,
-                                            cancellationToken
-                                        )
-                                    ),
-                                cancellationToken
-                            );
-                        }
-                    },
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+                    )
+                    {
+                        return EndPoint.InvokeAsync(
+                            nameof(IRemoteHostServiceCallback.GetAssetsAsync),
+                            new object[] { scopeId, checksums.ToArray() },
+                            (stream, cancellationToken) =>
+                                Task.FromResult(
+                                    RemoteHostAssetSerialization.ReadData(
+                                        stream,
+                                        scopeId,
+                                        checksums,
+                                        serializerService,
+                                        cancellationToken
+                                    )
+                                ),
+                            cancellationToken
+                        );
+                    }
+                },
+                cancellationToken
+            ).ConfigureAwait(false);
         }
 
         // TODO: remove (https://github.com/dotnet/roslyn/issues/43477)
@@ -212,26 +212,25 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             return await RunServiceAsync(
-                    () =>
-                    {
-                        using (
-                            RoslynLogger.LogBlock(
-                                FunctionId.RemoteHostService_IsExperimentEnabledAsync,
-                                experimentName,
-                                cancellationToken
-                            )
+                () =>
+                {
+                    using (
+                        RoslynLogger.LogBlock(
+                            FunctionId.RemoteHostService_IsExperimentEnabledAsync,
+                            experimentName,
+                            cancellationToken
                         )
-                        {
-                            return EndPoint.InvokeAsync<bool>(
-                                nameof(IRemoteHostServiceCallback.IsExperimentEnabledAsync),
-                                new object[] { experimentName },
-                                cancellationToken
-                            );
-                        }
-                    },
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+                    )
+                    {
+                        return EndPoint.InvokeAsync<bool>(
+                            nameof(IRemoteHostServiceCallback.IsExperimentEnabledAsync),
+                            new object[] { experimentName },
+                            cancellationToken
+                        );
+                    }
+                },
+                cancellationToken
+            ).ConfigureAwait(false);
         }
 
         /// <summary>

@@ -14,7 +14,8 @@ namespace BasicWebSite
         // Do not change. This is the pattern our test infrastructure uses to initialize a IWebHostBuilder from
         // a users app.
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder().UseContentRoot(Directory.GetCurrentDirectory())
+            new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<StartupWithoutEndpointRouting>()
                 .UseKestrel()
                 .UseIISIntegration();

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.TestHost
 
         internal static bool? CanHaveBody(this HttpRequest request)
         {
-            return request.HttpContext.Features.Get<IHttpRequestBodyDetectionFeature>()?.CanHaveBody;
+            return request.HttpContext.Features
+                .Get<IHttpRequestBodyDetectionFeature>()?.CanHaveBody;
         }
     }
 }

@@ -78,13 +78,11 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             context.RegisterCompilationStartAction(
                 startContext =>
                 {
-                    var expressionTypeOpt = startContext.Compilation.GetTypeByMetadataName(
-                        "System.Linq.Expressions.Expression`1"
-                    );
+                    var expressionTypeOpt = startContext.Compilation
+                        .GetTypeByMetadataName("System.Linq.Expressions.Expression`1");
 
-                    var objectType = startContext.Compilation.GetSpecialType(
-                        SpecialType.System_Object
-                    );
+                    var objectType = startContext.Compilation
+                        .GetSpecialType(SpecialType.System_Object);
                     var referenceEqualsMethodOpt = objectType?.GetMembers(nameof(ReferenceEquals))
                         .OfType<IMethodSymbol>()
                         .FirstOrDefault(

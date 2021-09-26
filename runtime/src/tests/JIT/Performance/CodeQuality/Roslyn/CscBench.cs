@@ -47,11 +47,8 @@ public static class CscBench
     public static bool CompileBench()
     {
         var expression = "6 * 7";
-        var text =
-            @"public class Calculator { public static object Evaluate() { return $; } }".Replace(
-                "$",
-                expression
-            );
+        var text = @"public class Calculator { public static object Evaluate() { return $; } }"
+            .Replace("$", expression);
         var tree = SyntaxFactory.ParseSyntaxTree(text);
         var compilation = CSharpCompilation.Create(
             "calc.dll",
@@ -157,10 +154,8 @@ class C {
                 firstStatement,
                 lastStatement
             );
-            string declaredVars = string.Join(
-                ",",
-                regionDataFlowAnalysis.VariablesDeclared.Select(symbol => symbol.Name)
-            );
+            string declaredVars = string
+                .Join(",", regionDataFlowAnalysis.VariablesDeclared.Select(symbol => symbol.Name));
 
             result &= "b,x,y,z".Equals(declaredVars);
         }

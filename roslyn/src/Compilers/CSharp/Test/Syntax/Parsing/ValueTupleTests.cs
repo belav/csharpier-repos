@@ -523,15 +523,14 @@ class C
                 options: TestOptions.Regular
             );
 
-            tree.GetDiagnostics()
-                .Verify(
-                    // (4,20): error CS8124: Tuple must contain at least two elements.
-                    //     void M(int x, () y, (int a) z) { }
-                    Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 20),
-                    // (4,31): error CS8124: Tuple must contain at least two elements.
-                    //     void M(int x, () y, (int a) z) { }
-                    Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 31)
-                );
+            tree.GetDiagnostics().Verify(
+                // (4,20): error CS8124: Tuple must contain at least two elements.
+                //     void M(int x, () y, (int a) z) { }
+                Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 20),
+                // (4,31): error CS8124: Tuple must contain at least two elements.
+                //     void M(int x, () y, (int a) z) { }
+                Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 31)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -636,17 +635,16 @@ class C
                 options: TestOptions.Regular
             );
 
-            tree.GetDiagnostics()
-                .Verify(
-                    // (4,26): error CS8124: Tuple must contain at least two elements.
-                    //     object x = ((Alice: 1), ());
-                    Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 26),
-                    // (4,30): error CS1525: Invalid expression term ')'
-                    //     object x = ((Alice: 1), ());
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
-                        .WithArguments(")")
-                        .WithLocation(4, 30)
-                );
+            tree.GetDiagnostics().Verify(
+                // (4,26): error CS8124: Tuple must contain at least two elements.
+                //     object x = ((Alice: 1), ());
+                Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 26),
+                // (4,30): error CS1525: Invalid expression term ')'
+                //     object x = ((Alice: 1), ());
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(4, 30)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {

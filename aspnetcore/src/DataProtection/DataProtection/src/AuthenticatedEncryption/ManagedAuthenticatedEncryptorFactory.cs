@@ -101,9 +101,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
                     nameof(configuration.EncryptionAlgorithmType)
                 );
             }
-            typeof(SymmetricAlgorithm).AssertIsAssignableFrom(
-                configuration.EncryptionAlgorithmType
-            );
+            typeof(SymmetricAlgorithm)
+                .AssertIsAssignableFrom(configuration.EncryptionAlgorithmType);
             if (configuration.EncryptionAlgorithmKeySize < 0)
             {
                 throw Error.Common_PropertyMustBeNonNegative(

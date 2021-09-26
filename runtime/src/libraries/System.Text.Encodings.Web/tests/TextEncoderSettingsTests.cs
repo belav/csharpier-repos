@@ -17,10 +17,11 @@ namespace System.Text.Encodings.Web.Tests
 
         private static IntPtr InitializeGetBitmapFnPtr()
         {
-            var mi = typeof(TextEncoderSettings).GetMethod(
-                "GetAllowedCodePointsBitmap",
-                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
-            );
+            var mi = typeof(TextEncoderSettings)
+                .GetMethod(
+                    "GetAllowedCodePointsBitmap",
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+                );
             return mi.MethodHandle.GetFunctionPointer();
         }
 
@@ -409,9 +410,9 @@ namespace System.Text.Encodings.Web.Tests
         {
             // Arrange
             var expected = Enumerable.Range(
-                    UnicodeRanges.BasicLatin.FirstCodePoint,
-                    UnicodeRanges.BasicLatin.Length
-                )
+                UnicodeRanges.BasicLatin.FirstCodePoint,
+                UnicodeRanges.BasicLatin.Length
+            )
                 .Concat(
                     Enumerable.Range(
                         UnicodeRanges.Specials.FirstCodePoint,

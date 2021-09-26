@@ -58,10 +58,8 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             UInt64 value = TestLibrary.Generator.GetUInt64();
-            object result = typeof(Vector256).GetMethod(
-                    nameof(Vector256.CreateScalarUnsafe),
-                    new Type[] { typeof(UInt64) }
-                )
+            object result = typeof(Vector256)
+                .GetMethod(nameof(Vector256.CreateScalarUnsafe), new Type[] { typeof(UInt64) })
                 .Invoke(null, new object[] { value });
 
             ValidateResult((Vector256<UInt64>)(result), value);
@@ -106,13 +104,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256.CreateScalarUnsafe(UInt64): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector256.CreateScalarUnsafe(UInt64): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

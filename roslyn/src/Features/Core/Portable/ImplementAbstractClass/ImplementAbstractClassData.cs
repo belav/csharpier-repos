@@ -102,20 +102,20 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
         )
         {
             var data = await TryGetDataAsync(
-                    document,
-                    classNode,
-                    classIdentifier,
-                    cancellationToken
-                )
+                document,
+                classNode,
+                classIdentifier,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (data == null)
                 return null;
 
             return await data.ImplementAbstractClassAsync(
-                    throughMember: null,
-                    canDelegateAllMembers: null,
-                    cancellationToken
-                )
+                throughMember: null,
+                canDelegateAllMembers: null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -125,7 +125,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             CancellationToken cancellationToken
         )
         {
-            var compilation = await _document.Project.GetRequiredCompilationAsync(cancellationToken)
+            var compilation = await _document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             var options = await _document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);

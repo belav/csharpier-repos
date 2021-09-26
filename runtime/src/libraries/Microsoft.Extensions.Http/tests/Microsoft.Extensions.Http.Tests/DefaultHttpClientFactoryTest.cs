@@ -189,13 +189,12 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var count = 0;
-            Options.Get("github")
-                .HttpClientActions.Add(
-                    b =>
-                    {
-                        count++;
-                    }
-                );
+            Options.Get("github").HttpClientActions.Add(
+                b =>
+                {
+                    count++;
+                }
+            );
 
             var factory = new TestHttpClientFactory(
                 Services,
@@ -228,15 +227,14 @@ namespace Microsoft.Extensions.Http
                 Mock.Of<HttpMessageHandler>(), // Set as primary handler by options
             };
 
-            Options.Get("github")
-                .HttpMessageHandlerBuilderActions.Add(
-                    b =>
-                    {
-                        b.PrimaryHandler = expected[7];
+            Options.Get("github").HttpMessageHandlerBuilderActions.Add(
+                b =>
+                {
+                    b.PrimaryHandler = expected[7];
 
-                        b.AdditionalHandlers.Add((DelegatingHandler)expected[3]);
-                    }
-                );
+                    b.AdditionalHandlers.Add((DelegatingHandler)expected[3]);
+                }
+            );
 
             var filter1 = new Mock<IHttpMessageHandlerBuilderFilter>();
             filter1.Setup(f => f.Configure(It.IsAny<Action<HttpMessageHandlerBuilder>>()))
@@ -411,13 +409,12 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var disposeHandler = new DisposeTrackingHandler();
-            Options.Get("github")
-                .HttpMessageHandlerBuilderActions.Add(
-                    b =>
-                    {
-                        b.AdditionalHandlers.Add(disposeHandler);
-                    }
-                );
+            Options.Get("github").HttpMessageHandlerBuilderActions.Add(
+                b =>
+                {
+                    b.AdditionalHandlers.Add(disposeHandler);
+                }
+            );
 
             var factory = new TestHttpClientFactory(
                 Services,
@@ -493,13 +490,12 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var disposeHandler = new DisposeTrackingHandler();
-            Options.Get("github")
-                .HttpMessageHandlerBuilderActions.Add(
-                    b =>
-                    {
-                        b.AdditionalHandlers.Add(disposeHandler);
-                    }
-                );
+            Options.Get("github").HttpMessageHandlerBuilderActions.Add(
+                b =>
+                {
+                    b.AdditionalHandlers.Add(disposeHandler);
+                }
+            );
 
             var factory = new TestHttpClientFactory(
                 Services,

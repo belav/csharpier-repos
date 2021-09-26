@@ -36,16 +36,13 @@ namespace TestServer
                         "AllowAll",
                         policy =>
                             policy.SetIsOriginAllowed(
-                                    host =>
-                                        host.StartsWith(
-                                            "http://localhost:",
-                                            StringComparison.Ordinal
-                                        )
-                                        || host.StartsWith(
-                                            "http://127.0.0.1:",
-                                            StringComparison.Ordinal
-                                        )
-                                )
+                                host =>
+                                    host.StartsWith("http://localhost:", StringComparison.Ordinal)
+                                    || host.StartsWith(
+                                        "http://127.0.0.1:",
+                                        StringComparison.Ordinal
+                                    )
+                            )
                                 .AllowAnyHeader()
                                 .WithExposedHeaders("MyCustomHeader")
                                 .AllowAnyMethod()

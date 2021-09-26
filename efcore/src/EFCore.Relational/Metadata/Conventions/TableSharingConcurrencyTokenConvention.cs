@@ -136,13 +136,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     foreach (var entityTypeToExampleProperty in entityTypesMissingConcurrencyColumn)
                     {
                         var exampleProperty = entityTypeToExampleProperty.Value;
-                        entityTypeToExampleProperty.Key.Builder.CreateUniqueProperty(
-                            exampleProperty.ClrType,
-                            ConcurrencyPropertyPrefix + exampleProperty.Name,
-                            !exampleProperty.IsNullable
-                        )!.HasColumnName(concurrencyColumnName)!.HasColumnType(
-                            exampleProperty.GetColumnType()
-                        )!.IsConcurrencyToken(true)!.ValueGenerated(exampleProperty.ValueGenerated);
+                        entityTypeToExampleProperty.Key.Builder
+                            .CreateUniqueProperty(
+                                exampleProperty.ClrType,
+                                ConcurrencyPropertyPrefix + exampleProperty.Name,
+                                !exampleProperty.IsNullable
+                            )!
+                            .HasColumnName(concurrencyColumnName)!
+                            .HasColumnType(exampleProperty.GetColumnType())!
+                            .IsConcurrencyToken(true)!
+                            .ValueGenerated(exampleProperty.ValueGenerated);
                     }
                 }
             }
@@ -242,8 +245,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 }
 
                 var linkingFks = declaringEntityType.FindForeignKeys(
-                        declaringEntityType.FindPrimaryKey()!.Properties
-                    )
+                    declaringEntityType.FindPrimaryKey()!.Properties
+                )
                     .Where(
                         fk =>
                             fk.PrincipalKey.IsPrimaryKey()
@@ -277,8 +280,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var toRemove = new HashSet<KeyValuePair<IConventionEntityType, T>>();
             var entityTypesWithDerivedTypes = entityTypeDictionary.Where(
-                    e => e.Key.GetDirectlyDerivedTypes().Any()
-                )
+                e => e.Key.GetDirectlyDerivedTypes().Any()
+            )
                 .ToList();
             foreach (var entityType in entityTypeDictionary.Where(e => e.Key.BaseType != null))
             {

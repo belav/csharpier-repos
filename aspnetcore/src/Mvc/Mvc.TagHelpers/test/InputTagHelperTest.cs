@@ -1170,12 +1170,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             Assert.Equal(
                 expectedEndOfFormContent,
-                string.Join(
-                    "",
-                    viewContext.FormContext.EndOfFormContent.Select(
-                        html => HtmlContentUtilities.HtmlContentToString(html)
+                string
+                    .Join(
+                        "",
+                        viewContext.FormContext.EndOfFormContent
+                            .Select(html => HtmlContentUtilities.HtmlContentToString(html))
                     )
-                )
             );
             Assert.True(
                 string.IsNullOrEmpty(HtmlContentUtilities.HtmlContentToString(output.PostElement))
@@ -1302,25 +1302,25 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var tagBuilder = new TagBuilder("input") { TagRenderMode = TagRenderMode.SelfClosing };
             htmlGenerator.Setup(
-                    mock =>
-                        mock.GenerateCheckBox(
-                            tagHelper.ViewContext,
-                            tagHelper.For.ModelExplorer,
-                            tagHelper.For.Name,
-                            null, // isChecked
-                            It.IsAny<object>()
-                        )
-                ) // htmlAttributes
+                mock =>
+                    mock.GenerateCheckBox(
+                        tagHelper.ViewContext,
+                        tagHelper.For.ModelExplorer,
+                        tagHelper.For.Name,
+                        null, // isChecked
+                        It.IsAny<object>()
+                    )
+            ) // htmlAttributes
                 .Returns(tagBuilder)
                 .Verifiable();
             htmlGenerator.Setup(
-                    mock =>
-                        mock.GenerateHiddenForCheckbox(
-                            tagHelper.ViewContext,
-                            tagHelper.For.ModelExplorer,
-                            tagHelper.For.Name
-                        )
-                )
+                mock =>
+                    mock.GenerateHiddenForCheckbox(
+                        tagHelper.ViewContext,
+                        tagHelper.For.ModelExplorer,
+                        tagHelper.For.Name
+                    )
+            )
                 .Returns(new TagBuilder("hidden") { TagRenderMode = TagRenderMode.SelfClosing })
                 .Verifiable();
 
@@ -1414,16 +1414,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 Attributes = { { "class", "hidden-control" }, },
             };
             htmlGenerator.Setup(
-                    mock =>
-                        mock.GenerateTextBox(
-                            tagHelper.ViewContext,
-                            tagHelper.For.ModelExplorer,
-                            tagHelper.For.Name,
-                            model, // value
-                            format,
-                            new Dictionary<string, object> { { "type", "hidden" } }
-                        )
-                ) // htmlAttributes
+                mock =>
+                    mock.GenerateTextBox(
+                        tagHelper.ViewContext,
+                        tagHelper.For.ModelExplorer,
+                        tagHelper.For.Name,
+                        model, // value
+                        format,
+                        new Dictionary<string, object> { { "type", "hidden" } }
+                    )
+            ) // htmlAttributes
                 .Returns(tagBuilder)
                 .Verifiable();
 
@@ -1519,15 +1519,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 Attributes = { { "class", "password-control" }, },
             };
             htmlGenerator.Setup(
-                    mock =>
-                        mock.GeneratePassword(
-                            tagHelper.ViewContext,
-                            tagHelper.For.ModelExplorer,
-                            tagHelper.For.Name,
-                            null, // value
-                            null
-                        )
-                ) // htmlAttributes
+                mock =>
+                    mock.GeneratePassword(
+                        tagHelper.ViewContext,
+                        tagHelper.For.ModelExplorer,
+                        tagHelper.For.Name,
+                        null, // value
+                        null
+                    )
+            ) // htmlAttributes
                 .Returns(tagBuilder)
                 .Verifiable();
 
@@ -1616,16 +1616,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 Attributes = { { "class", "radio-control" }, },
             };
             htmlGenerator.Setup(
-                    mock =>
-                        mock.GenerateRadioButton(
-                            tagHelper.ViewContext,
-                            tagHelper.For.ModelExplorer,
-                            tagHelper.For.Name,
-                            value,
-                            null, // isChecked
-                            null
-                        )
-                ) // htmlAttributes
+                mock =>
+                    mock.GenerateRadioButton(
+                        tagHelper.ViewContext,
+                        tagHelper.For.ModelExplorer,
+                        tagHelper.For.Name,
+                        value,
+                        null, // isChecked
+                        null
+                    )
+            ) // htmlAttributes
                 .Returns(tagBuilder)
                 .Verifiable();
 
@@ -1736,16 +1736,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 Attributes = { { "class", "text-control" }, },
             };
             htmlGenerator.Setup(
-                    mock =>
-                        mock.GenerateTextBox(
-                            tagHelper.ViewContext,
-                            tagHelper.For.ModelExplorer,
-                            tagHelper.For.Name,
-                            model, // value
-                            format,
-                            It.Is<Dictionary<string, object>>(m => m.ContainsKey("type"))
-                        )
-                ) // htmlAttributes
+                mock =>
+                    mock.GenerateTextBox(
+                        tagHelper.ViewContext,
+                        tagHelper.For.ModelExplorer,
+                        tagHelper.For.Name,
+                        model, // value
+                        format,
+                        It.Is<Dictionary<string, object>>(m => m.ContainsKey("type"))
+                    )
+            ) // htmlAttributes
                 .Returns(tagBuilder)
                 .Verifiable();
 
@@ -1859,16 +1859,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 htmlAttributes["multiple"] = "multiple";
             }
             htmlGenerator.Setup(
-                    mock =>
-                        mock.GenerateTextBox(
-                            tagHelper.ViewContext,
-                            tagHelper.For.ModelExplorer,
-                            tagHelper.For.Name,
-                            null, // value
-                            expectedFormat,
-                            htmlAttributes
-                        )
-                ) // htmlAttributes
+                mock =>
+                    mock.GenerateTextBox(
+                        tagHelper.ViewContext,
+                        tagHelper.For.ModelExplorer,
+                        tagHelper.For.Name,
+                        null, // value
+                        expectedFormat,
+                        htmlAttributes
+                    )
+            ) // htmlAttributes
                 .Returns(tagBuilder)
                 .Verifiable();
 
@@ -1927,16 +1927,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             tagHelper.InputTypeName = "datetime";
             var tagBuilder = new TagBuilder("input");
             htmlGenerator.Setup(
-                    mock =>
-                        mock.GenerateTextBox(
-                            tagHelper.ViewContext,
-                            tagHelper.For.ModelExplorer,
-                            tagHelper.For.Name,
-                            null, // value
-                            @"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}",
-                            htmlAttributes
-                        )
-                ) // htmlAttributes
+                mock =>
+                    mock.GenerateTextBox(
+                        tagHelper.ViewContext,
+                        tagHelper.For.ModelExplorer,
+                        tagHelper.For.Name,
+                        null, // value
+                        @"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}",
+                        htmlAttributes
+                    )
+            ) // htmlAttributes
                 .Returns(tagBuilder)
                 .Verifiable();
 
@@ -2042,16 +2042,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var tagBuilder = new TagBuilder("input");
             htmlGenerator.Setup(
-                    mock =>
-                        mock.GenerateTextBox(
-                            tagHelper.ViewContext,
-                            tagHelper.For.ModelExplorer,
-                            tagHelper.For.Name,
-                            null, // value
-                            expectedFormat,
-                            htmlAttributes
-                        )
-                ) // htmlAttributes
+                mock =>
+                    mock.GenerateTextBox(
+                        tagHelper.ViewContext,
+                        tagHelper.For.ModelExplorer,
+                        tagHelper.For.Name,
+                        null, // value
+                        expectedFormat,
+                        htmlAttributes
+                    )
+            ) // htmlAttributes
                 .Returns(tagBuilder)
                 .Verifiable();
 

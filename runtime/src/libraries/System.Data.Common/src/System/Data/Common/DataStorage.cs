@@ -571,9 +571,8 @@ namespace System.Data.Common
             );
             Debug.Assert(
                 revertibleChangeTracking
-                    == typeof(System.ComponentModel.IRevertibleChangeTracking).IsAssignableFrom(
-                        dataType
-                    ),
+                    == typeof(System.ComponentModel.IRevertibleChangeTracking)
+                        .IsAssignableFrom(dataType),
                 "IRevertibleChangeTracking"
             );
             Debug.Assert(

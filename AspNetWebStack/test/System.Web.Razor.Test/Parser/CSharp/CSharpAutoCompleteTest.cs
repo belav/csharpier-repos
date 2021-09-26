@@ -199,13 +199,13 @@ namespace System.Web.Razor.Test.Parser.CSharp
                                 .Accepts(AcceptedCharacters.None)
                         ),
                         Factory.Span(
-                                SpanKind.Code,
-                                new CSharpSymbol(
-                                    Factory.LocationTracker.CurrentLocation,
-                                    String.Empty,
-                                    CSharpSymbolType.Unknown
-                                )
+                            SpanKind.Code,
+                            new CSharpSymbol(
+                                Factory.LocationTracker.CurrentLocation,
+                                String.Empty,
+                                CSharpSymbolType.Unknown
                             )
+                        )
                             .With(new StatementCodeGenerator())
                     )
                 ),
@@ -263,13 +263,13 @@ namespace System.Web.Razor.Test.Parser.CSharp
                             .Accepts(AcceptedCharacters.None)
                     ),
                     Factory.Span(
-                            SpanKind.Code,
-                            new CSharpSymbol(
-                                Factory.LocationTracker.CurrentLocation,
-                                String.Empty,
-                                CSharpSymbolType.Unknown
-                            )
+                        SpanKind.Code,
+                        new CSharpSymbol(
+                            Factory.LocationTracker.CurrentLocation,
+                            String.Empty,
+                            CSharpSymbolType.Unknown
                         )
+                    )
                         .With(new StatementCodeGenerator())
                 ),
                 new RazorError(

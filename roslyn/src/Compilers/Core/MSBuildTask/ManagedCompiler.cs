@@ -732,10 +732,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
                 case BuildResponse.ResponseType.AnalyzerInconsistency:
                     var analyzerResponse = (AnalyzerInconsistencyBuildResponse)response;
-                    var combinedMessage = string.Join(
-                        ", ",
-                        analyzerResponse.ErrorMessages.ToArray()
-                    );
+                    var combinedMessage = string
+                        .Join(", ", analyzerResponse.ErrorMessages.ToArray());
                     LogCompilationMessage(
                         logger,
                         requestId,
@@ -1102,11 +1100,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             {
                 // If debugtype is none then only show debug- else use the debug type and the debugsymbols as is.
                 if (
-                    string.Compare(
-                        (string?)_store[nameof(DebugType)],
-                        "none",
-                        StringComparison.OrdinalIgnoreCase
-                    ) == 0
+                    string
+                        .Compare(
+                            (string?)_store[nameof(DebugType)],
+                            "none",
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
                 )
                 {
                     _store[nameof(DebugType)] = null;

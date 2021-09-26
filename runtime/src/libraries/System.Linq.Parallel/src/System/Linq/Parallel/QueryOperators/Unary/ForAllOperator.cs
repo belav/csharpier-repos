@@ -55,9 +55,9 @@ namespace System.Linq.Parallel
 
             // stuff in appropriate defaults for unspecified options.
             QuerySettings settingsWithDefaults = SpecifiedQuerySettings.WithPerExecutionSettings(
-                    dummyInternalCancellationTokenSource,
-                    dummyTopLevelDisposeFlag
-                )
+                dummyInternalCancellationTokenSource,
+                dummyTopLevelDisposeFlag
+            )
                 .WithDefaults();
 
             QueryLifecycle.LogicalQueryExecutionBegin(settingsWithDefaults.QueryId);

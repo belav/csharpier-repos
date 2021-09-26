@@ -67,13 +67,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return (
                 from n in numbers
                 where
-                    string.Equals(
-                        GetKey(n, ignoreCase),
-                        key,
-                        ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            GetKey(n, ignoreCase),
+                            key,
+                            ignoreCase
+                              ? StringComparison.OrdinalIgnoreCase
+                              : StringComparison.Ordinal
+                        )
                 select n
-            ).ToArray().AsImmutableOrNull();
+            )
+                .ToArray()
+                .AsImmutableOrNull();
         }
 
         private ILookup<string, int> CreateLookup(int[] numbers, bool randomCase)

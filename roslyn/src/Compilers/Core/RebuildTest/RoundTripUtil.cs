@@ -106,9 +106,10 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
             var compilationFactory = CompilationFactory.Create(assemblyFileName, optionsReader);
             var rebuild = compilationFactory.CreateCompilation(
-                original.SyntaxTrees.SelectAsArray(
-                    x => compilationFactory.CreateSyntaxTree(x.FilePath, x.GetText())
-                ),
+                original.SyntaxTrees
+                    .SelectAsArray(
+                        x => compilationFactory.CreateSyntaxTree(x.FilePath, x.GetText())
+                    ),
                 original.References.ToImmutableArray()
             );
 
@@ -140,7 +141,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 rebuildPdbBytes = new ReadOnlySpan<byte>(
                     rebuildPdbReader.MetadataPointer,
                     rebuildPdbReader.MetadataLength
-                ).ToArray().ToImmutableArray();
+                )
+                    .ToArray()
+                    .ToImmutableArray();
             }
             else
             {
@@ -191,8 +194,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
                         var pdbBytes = pdbStream.ToImmutable();
                         var originalPdbReader = MetadataReaderProvider.FromPortablePdbImage(
-                                pdbBytes
-                            )
+                            pdbBytes
+                        )
                             .GetMetadataReader();
                         return new EmitInfo(
                             originalBytes,

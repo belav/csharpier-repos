@@ -52,8 +52,8 @@ namespace Microsoft.EntityFrameworkCore
                 base.OnModelCreating(modelBuilder, context);
 
                 modelBuilder.SharedTypeEntity<Dictionary<string, object>>(
-                        "JoinOneToThreePayloadFullShared"
-                    )
+                    "JoinOneToThreePayloadFullShared"
+                )
                     .Ignore("Payload"); // Mutable properties aren't proxyable on Dictionary
 
                 modelBuilder.Entity<EntityOne>().Property(e => e.Id).ValueGeneratedOnAdd();

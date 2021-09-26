@@ -376,12 +376,13 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 () => executor.ExecuteAsync(actionContext, result)
             );
 
-            var expectedMessage = string.Format(
-                CultureInfo.CurrentCulture,
-                "The content-type '{0}' added in the 'ContentTypes' property is "
-                    + "invalid. Media types which match all types or match all subtypes are not supported.",
-                invalidContentType
-            );
+            var expectedMessage = string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "The content-type '{0}' added in the 'ContentTypes' property is "
+                        + "invalid. Media types which match all types or match all subtypes are not supported.",
+                    invalidContentType
+                );
             Assert.Equal(expectedMessage, exception.Message);
         }
 

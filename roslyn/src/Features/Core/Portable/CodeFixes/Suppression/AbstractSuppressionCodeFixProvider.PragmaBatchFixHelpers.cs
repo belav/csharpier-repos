@@ -105,18 +105,19 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     );
 
                     var newSuppressionFixes = await suppressionFixProvider.GetFixesAsync(
-                            currentDocument,
-                            currentDiagnosticSpan,
-                            SpecializedCollections.SingletonEnumerable(diagnostic),
-                            cancellationToken
-                        )
+                        currentDocument,
+                        currentDiagnosticSpan,
+                        SpecializedCollections.SingletonEnumerable(diagnostic),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     var newSuppressionFix = newSuppressionFixes.SingleOrDefault();
                     if (newSuppressionFix != null)
                     {
                         var newPragmaAction =
                             newSuppressionFix.Action as IPragmaBasedCodeAction
-                            ?? newSuppressionFix.Action.NestedCodeActions.OfType<IPragmaBasedCodeAction>()
+                            ?? newSuppressionFix.Action.NestedCodeActions
+                                .OfType<IPragmaBasedCodeAction>()
                                 .SingleOrDefault();
                         if (newPragmaAction != null)
                         {
@@ -124,21 +125,21 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                             // Note: We do it one token at a time to ensure we get single text change in the new document, otherwise UpdateDiagnosticSpans won't function as expected.
                             // Update the diagnostics spans based on the text changes.
                             var startTokenChanges = await GetTextChangesAsync(
-                                    newPragmaAction,
-                                    currentDocument,
-                                    includeStartTokenChange: true,
-                                    includeEndTokenChange: false,
-                                    cancellationToken: cancellationToken
-                                )
+                                newPragmaAction,
+                                currentDocument,
+                                includeStartTokenChange: true,
+                                includeEndTokenChange: false,
+                                cancellationToken: cancellationToken
+                            )
                                 .ConfigureAwait(false);
 
                             var endTokenChanges = await GetTextChangesAsync(
-                                    newPragmaAction,
-                                    currentDocument,
-                                    includeStartTokenChange: false,
-                                    includeEndTokenChange: true,
-                                    cancellationToken: cancellationToken
-                                )
+                                newPragmaAction,
+                                currentDocument,
+                                includeStartTokenChange: false,
+                                includeEndTokenChange: true,
+                                cancellationToken: cancellationToken
+                            )
                                 .ConfigureAwait(false);
 
                             var currentText = await currentDocument.GetTextAsync(cancellationToken)
@@ -171,10 +172,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             )
             {
                 var newDocument = await pragmaAction.GetChangedDocumentAsync(
-                        includeStartTokenChange,
-                        includeEndTokenChange,
-                        cancellationToken
-                    )
+                    includeStartTokenChange,
+                    includeEndTokenChange,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return await newDocument.GetTextChangesAsync(currentDocument, cancellationToken)
                     .ConfigureAwait(false);

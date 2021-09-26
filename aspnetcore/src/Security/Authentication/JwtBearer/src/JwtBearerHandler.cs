@@ -96,9 +96,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
 
                 if (_configuration == null && Options.ConfigurationManager != null)
                 {
-                    _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
-                        Context.RequestAborted
-                    );
+                    _configuration = await Options.ConfigurationManager
+                        .GetConfigurationAsync(Context.RequestAborted);
                 }
 
                 var validationParameters = Options.TokenValidationParameters.Clone();
@@ -169,12 +168,17 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
 
                         if (Options.SaveToken)
                         {
-                            tokenValidatedContext.Properties.StoreTokens(
-                                new[]
-                                {
-                                    new AuthenticationToken { Name = "access_token", Value = token }
-                                }
-                            );
+                            tokenValidatedContext.Properties
+                                .StoreTokens(
+                                    new[]
+                                    {
+                                        new AuthenticationToken
+                                        {
+                                            Name = "access_token",
+                                            Value = token
+                                        }
+                                    }
+                                );
                         }
 
                         tokenValidatedContext.Success();

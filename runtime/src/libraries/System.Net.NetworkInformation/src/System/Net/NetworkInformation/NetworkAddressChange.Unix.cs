@@ -178,7 +178,8 @@ namespace System.Net.NetworkInformation
             {
                 IsBackground = true,
                 Name = ".NET Network Address Change"
-            }.UnsafeStart(newSocket);
+            }
+                .UnsafeStart(newSocket);
         }
 
         private static void CloseSocket()

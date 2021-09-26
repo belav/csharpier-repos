@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Authentication
             };
             if (transaction.Response.Headers.Contains("Set-Cookie"))
             {
-                transaction.SetCookie = transaction.Response.Headers.GetValues("Set-Cookie")
+                transaction.SetCookie = transaction.Response.Headers
+                    .GetValues("Set-Cookie")
                     .ToList();
             }
             transaction.ResponseText = await transaction.Response.Content.ReadAsStringAsync();
@@ -63,15 +64,16 @@ namespace Microsoft.AspNetCore.Authentication
                 foreach (var identity in principal.Identities)
                 {
                     xml.Add(
-                        identity.Claims.Select(
-                            claim =>
-                                new XElement(
-                                    "claim",
-                                    new XAttribute("type", claim.Type),
-                                    new XAttribute("value", claim.Value),
-                                    new XAttribute("issuer", claim.Issuer)
-                                )
-                        )
+                        identity.Claims
+                            .Select(
+                                claim =>
+                                    new XElement(
+                                        "claim",
+                                        new XAttribute("type", claim.Type),
+                                        new XAttribute("value", claim.Value),
+                                        new XAttribute("issuer", claim.Issuer)
+                                    )
+                            )
                     );
                 }
             }

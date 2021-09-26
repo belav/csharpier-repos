@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (
                 var context = new BooFooContext(
-                    new DbContextOptionsBuilder().UseInMemoryDatabase(nameof(BooFooContext))
+                    new DbContextOptionsBuilder()
+                        .UseInMemoryDatabase(nameof(BooFooContext))
                         .EnableSensitiveDataLogging().Options
                 )
             )
@@ -54,9 +55,8 @@ namespace Microsoft.EntityFrameworkCore
                 context.SaveChanges();
             }
 
-            var serviceProvider = new ServiceCollection().AddDbContext<BooFooContext>(
-                    b => b.UseInMemoryDatabase(nameof(BooFooContext))
-                )
+            var serviceProvider = new ServiceCollection()
+                .AddDbContext<BooFooContext>(b => b.UseInMemoryDatabase(nameof(BooFooContext)))
                 .BuildServiceProvider();
 
             using var scope = serviceProvider.CreateScope();
@@ -71,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (
                 var context = new BooFooContext(
-                    new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                    new DbContextOptionsBuilder()
+                        .EnableServiceProviderCaching(false)
                         .UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot).Options
                 )
             )
@@ -82,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (
                 var context = new BooFooContext(
-                    new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                    new DbContextOptionsBuilder()
+                        .EnableServiceProviderCaching(false)
                         .UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot)
                         .EnableSensitiveDataLogging().Options
                 )
@@ -132,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (
                 var context = new BooFooContext(
-                    new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                    new DbContextOptionsBuilder()
+                        .EnableServiceProviderCaching(false)
                         .UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot).Options
                 )
             )
@@ -141,7 +144,8 @@ namespace Microsoft.EntityFrameworkCore
                 context.SaveChanges();
             }
 
-            var serviceProvider = new ServiceCollection().AddDbContext<BooFooContext>(
+            var serviceProvider = new ServiceCollection()
+                .AddDbContext<BooFooContext>(
                     b =>
                         b.UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot)
                             .EnableServiceProviderCaching(false)
@@ -177,8 +181,9 @@ namespace Microsoft.EntityFrameworkCore
 
         private class ChangeSdlCacheContext : DbContext
         {
-            private static readonly IServiceProvider _serviceProvider =
-                new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
+            private static readonly IServiceProvider _serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
 
             private readonly bool _on;
 

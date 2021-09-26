@@ -150,14 +150,8 @@ namespace System.IO.Tests
                 ReadWriteMode.SyncAPM
                   => stream.EndRead(stream.BeginRead(buffer, offset, count, null, null)),
                 ReadWriteMode.AsyncAPM
-                  => await Task.Factory.FromAsync(
-                      stream.BeginRead,
-                      stream.EndRead,
-                      buffer,
-                      offset,
-                      count,
-                      null
-                  ),
+                  => await Task.Factory
+                      .FromAsync(stream.BeginRead, stream.EndRead, buffer, offset, count, null),
                 _ => throw new Exception($"Unknown mode: {mode}"),
             };
         }
@@ -238,14 +232,8 @@ namespace System.IO.Tests
                     break;
 
                 case ReadWriteMode.AsyncAPM:
-                    await Task.Factory.FromAsync(
-                        stream.BeginWrite,
-                        stream.EndWrite,
-                        buffer,
-                        offset,
-                        count,
-                        null
-                    );
+                    await Task.Factory
+                        .FromAsync(stream.BeginWrite, stream.EndWrite, buffer, offset, count, null);
                     break;
 
                 default:
@@ -613,14 +601,8 @@ namespace System.IO.Tests
                 await Assert.ThrowsAsync(
                     UnsupportedReadWriteExceptionType,
                     () =>
-                        Task.Factory.FromAsync(
-                            stream.BeginRead,
-                            stream.EndRead,
-                            new byte[1],
-                            0,
-                            1,
-                            null
-                        )
+                        Task.Factory
+                            .FromAsync(stream.BeginRead, stream.EndRead, new byte[1], 0, 1, null)
                 );
                 Assert.True(
                     Record.Exception(() => stream.EndRead(new NotImplementedIAsyncResult()))
@@ -841,14 +823,8 @@ namespace System.IO.Tests
                 await Assert.ThrowsAsync(
                     UnsupportedReadWriteExceptionType,
                     () =>
-                        Task.Factory.FromAsync(
-                            stream.BeginWrite,
-                            stream.EndWrite,
-                            new byte[1],
-                            0,
-                            1,
-                            null
-                        )
+                        Task.Factory
+                            .FromAsync(stream.BeginWrite, stream.EndWrite, new byte[1], 0, 1, null)
                 );
                 Assert.True(
                     Record.Exception(() => stream.EndWrite(new NotImplementedIAsyncResult()))
@@ -2617,14 +2593,15 @@ namespace System.IO.Tests
             );
             await Assert.ThrowsAsync<IOException>(
                 () =>
-                    Task.Factory.FromAsync(
-                        writeable.BeginWrite,
-                        writeable.EndWrite,
-                        buffer,
-                        0,
-                        buffer.Length,
-                        null
-                    )
+                    Task.Factory
+                        .FromAsync(
+                            writeable.BeginWrite,
+                            writeable.EndWrite,
+                            buffer,
+                            0,
+                            buffer.Length,
+                            null
+                        )
             );
             Assert.Throws<IOException>(() => writeable.Flush());
         }
@@ -3183,21 +3160,18 @@ namespace System.IO.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public virtual async Task Parallel_ReadWriteMultipleStreamsConcurrently()
         {
-            await Task.WhenAll(
-                Enumerable.Range(0, 20)
-                    .Select(
-                        _ =>
-                            Task.Run(
-                                async () =>
-                                {
-                                    await CopyToAsync_AllDataCopied(
-                                        byteCount: 10 * 1024,
-                                        useAsync: true
-                                    );
-                                }
-                            )
-                    )
-            );
+            await Task.WhenAll(Enumerable.Range(0, 20).Select(
+                    _ =>
+                        Task.Run(
+                            async () =>
+                            {
+                                await CopyToAsync_AllDataCopied(
+                                    byteCount: 10 * 1024,
+                                    useAsync: true
+                                );
+                            }
+                        )
+                ));
         }
 
         [Fact]
@@ -3369,14 +3343,15 @@ namespace System.IO.Tests
             await Assert.ThrowsAsync<IOException>(
                 async () =>
                 {
-                    await Task.Factory.FromAsync(
-                        writeable.BeginWrite,
-                        writeable.EndWrite,
-                        new byte[1],
-                        0,
-                        1,
-                        null
-                    );
+                    await Task.Factory
+                        .FromAsync(
+                            writeable.BeginWrite,
+                            writeable.EndWrite,
+                            new byte[1],
+                            0,
+                            1,
+                            null
+                        );
                 }
             );
         }

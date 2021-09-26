@@ -45,12 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             _reporter = new TestOperationReporter();
 
             var assembly = typeof(RelationalDatabaseModelFactoryTest).Assembly;
-            _factory = new DesignTimeServicesBuilder(
-                assembly,
-                assembly,
-                _reporter,
-                new string[0]
-            ).CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
+            _factory = new DesignTimeServicesBuilder(assembly, assembly, _reporter, new string[0])
+                .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
                 .AddSingleton<IScaffoldingModelFactory, FakeScaffoldingModelFactory>()
                 .BuildServiceProvider()
                 .GetRequiredService<IScaffoldingModelFactory>();
@@ -204,9 +200,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
             };
 
             var entityType = (EntityType)_factory.Create(
-                    info,
-                    new ModelReverseEngineerOptions { NoPluralize = true }
-                )
+                info,
+                new ModelReverseEngineerOptions { NoPluralize = true }
+            )
                 .FindEntityType("Jobs");
 
             Assert.Collection(
@@ -289,9 +285,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
             };
 
             var entityType = _factory.Create(
-                    info,
-                    new ModelReverseEngineerOptions { UseDatabaseNames = true, NoPluralize = true }
-                )
+                info,
+                new ModelReverseEngineerOptions { UseDatabaseNames = true, NoPluralize = true }
+            )
                 .FindEntityType("NaturalProducts");
 
             Assert.Collection(
@@ -342,9 +338,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
             };
 
             var entityType = _factory.Create(
-                    info,
-                    new ModelReverseEngineerOptions { NoPluralize = true }
-                )
+                info,
+                new ModelReverseEngineerOptions { NoPluralize = true }
+            )
                 .FindEntityType("NaturalProducts");
 
             Assert.Collection(
@@ -463,7 +459,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 }
             };
 
-            info.Tables.First()
+            info.Tables
+                .First()
                 .Columns.Add(
                     new DatabaseColumn
                     {
@@ -558,9 +555,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
             };
 
             var entityType = (EntityType)_factory.Create(
-                    databaseModel,
-                    new ModelReverseEngineerOptions()
-                )
+                databaseModel,
+                new ModelReverseEngineerOptions()
+            )
                 .GetEntityTypes()
                 .Single();
             var index = entityType.GetIndexes().Single();
@@ -599,9 +596,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
             };
 
             var entityType = (EntityType)_factory.Create(
-                    databaseModel,
-                    new ModelReverseEngineerOptions()
-                )
+                databaseModel,
+                new ModelReverseEngineerOptions()
+            )
                 .GetEntityTypes()
                 .Single();
             var index = entityType.GetIndexes().Single();
@@ -645,9 +642,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
             };
 
             var entityType = (EntityType)_factory.Create(
-                    databaseModel,
-                    new ModelReverseEngineerOptions()
-                )
+                databaseModel,
+                new ModelReverseEngineerOptions()
+            )
                 .GetEntityTypes()
                 .Single();
             var index = entityType.GetIndexes().Single();
@@ -678,59 +675,65 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     Columns = { c1 }
                 }
             };
-            table.Indexes.Add(
-                new DatabaseIndex
-                {
-                    Table = Table,
-                    Name = "IDX_C1",
-                    Columns = { table.Columns.ElementAt(0) },
-                    IsUnique = false
-                }
-            );
-            table.Indexes.Add(
-                new DatabaseIndex
-                {
-                    Table = Table,
-                    Name = "IDX_C2",
-                    Columns = { table.Columns.ElementAt(1) },
-                    IsUnique = true
-                }
-            );
-            table.Indexes.Add(
-                new DatabaseIndex
-                {
-                    Table = Table,
-                    Name = "",
-                    Columns = { table.Columns.ElementAt(2) },
-                    IsUnique = true
-                }
-            );
-            table.Indexes.Add(
-                new DatabaseIndex
-                {
-                    Table = Table,
-                    Name = "IDX_C2_C1",
-                    Columns = { table.Columns.ElementAt(1), table.Columns.ElementAt(0) },
-                    IsUnique = false
-                }
-            );
-            table.Indexes.Add(
-                new DatabaseIndex
-                {
-                    Table = Table,
-                    Columns = { table.Columns.ElementAt(1), table.Columns.ElementAt(2) },
-                    IsUnique = false
-                }
-            );
-            table.Indexes.Add(
-                new DatabaseIndex
-                {
-                    Table = Table,
-                    Name = "UNQ_C3_C1",
-                    Columns = { table.Columns.ElementAt(2), table.Columns.ElementAt(0) },
-                    IsUnique = true
-                }
-            );
+            table.Indexes
+                .Add(
+                    new DatabaseIndex
+                    {
+                        Table = Table,
+                        Name = "IDX_C1",
+                        Columns = { table.Columns.ElementAt(0) },
+                        IsUnique = false
+                    }
+                );
+            table.Indexes
+                .Add(
+                    new DatabaseIndex
+                    {
+                        Table = Table,
+                        Name = "IDX_C2",
+                        Columns = { table.Columns.ElementAt(1) },
+                        IsUnique = true
+                    }
+                );
+            table.Indexes
+                .Add(
+                    new DatabaseIndex
+                    {
+                        Table = Table,
+                        Name = "",
+                        Columns = { table.Columns.ElementAt(2) },
+                        IsUnique = true
+                    }
+                );
+            table.Indexes
+                .Add(
+                    new DatabaseIndex
+                    {
+                        Table = Table,
+                        Name = "IDX_C2_C1",
+                        Columns = { table.Columns.ElementAt(1), table.Columns.ElementAt(0) },
+                        IsUnique = false
+                    }
+                );
+            table.Indexes
+                .Add(
+                    new DatabaseIndex
+                    {
+                        Table = Table,
+                        Columns = { table.Columns.ElementAt(1), table.Columns.ElementAt(2) },
+                        IsUnique = false
+                    }
+                );
+            table.Indexes
+                .Add(
+                    new DatabaseIndex
+                    {
+                        Table = Table,
+                        Name = "UNQ_C3_C1",
+                        Columns = { table.Columns.ElementAt(2), table.Columns.ElementAt(0) },
+                        IsUnique = true
+                    }
+                );
 
             var info = new DatabaseModel { Tables = { table } };
 
@@ -815,17 +818,18 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 },
                 PrimaryKey = IdPrimaryKey
             };
-            childrenTable.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = childrenTable,
-                    Name = "FK_Foo",
-                    Columns = { childrenTable.Columns.ElementAt(1) },
-                    PrincipalTable = parentTable,
-                    PrincipalColumns = { parentTable.Columns.ElementAt(0) },
-                    OnDelete = ReferentialAction.Cascade
-                }
-            );
+            childrenTable.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = childrenTable,
+                        Name = "FK_Foo",
+                        Columns = { childrenTable.Columns.ElementAt(1) },
+                        PrincipalTable = parentTable,
+                        PrincipalColumns = { parentTable.Columns.ElementAt(0) },
+                        OnDelete = ReferentialAction.Cascade
+                    }
+                );
 
             var model = _factory.Create(
                 new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -874,16 +878,17 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 StoreType = "int"
             };
             detailTable.Columns.Add(masterIdColumn);
-            detailTable.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = detailTable,
-                    Name = null,
-                    Columns = { masterIdColumn },
-                    PrincipalTable = masterTable,
-                    PrincipalColumns = { idColumn }
-                }
-            );
+            detailTable.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = detailTable,
+                        Name = null,
+                        Columns = { masterIdColumn },
+                        PrincipalTable = masterTable,
+                        PrincipalColumns = { idColumn }
+                    }
+                );
             databaseModel.Tables.Add(detailTable);
 
             var model = _factory.Create(databaseModel, new ModelReverseEngineerOptions());
@@ -913,14 +918,15 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 PrimaryKey = IdPrimaryKey
             };
 
-            parentTable.UniqueConstraints.Add(
-                new DatabaseUniqueConstraint
-                {
-                    Table = parentTable,
-                    Name = "AK_Foo",
-                    Columns = { keyColumn }
-                }
-            );
+            parentTable.UniqueConstraints
+                .Add(
+                    new DatabaseUniqueConstraint
+                    {
+                        Table = parentTable,
+                        Name = "AK_Foo",
+                        Columns = { keyColumn }
+                    }
+                );
 
             var childrenTable = new DatabaseTable
             {
@@ -930,17 +936,18 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 PrimaryKey = IdPrimaryKey
             };
 
-            childrenTable.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = childrenTable,
-                    Name = "FK_Foo",
-                    Columns = { childrenTable.Columns.ElementAt(0) },
-                    PrincipalTable = parentTable,
-                    PrincipalColumns = { parentTable.Columns.ElementAt(1) },
-                    OnDelete = ReferentialAction.Cascade,
-                }
-            );
+            childrenTable.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = childrenTable,
+                        Name = "FK_Foo",
+                        Columns = { childrenTable.Columns.ElementAt(0) },
+                        PrincipalTable = parentTable,
+                        PrincipalColumns = { parentTable.Columns.ElementAt(1) },
+                        OnDelete = ReferentialAction.Cascade,
+                    }
+                );
 
             var model = _factory.Create(
                 new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -982,17 +989,18 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 Columns = { IdColumn },
                 PrimaryKey = IdPrimaryKey
             };
-            childrenTable.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = childrenTable,
-                    Name = "FK_Foo",
-                    Columns = { childrenTable.Columns.ElementAt(0) },
-                    PrincipalTable = parentTable,
-                    PrincipalColumns = { parentTable.Columns.ElementAt(0) },
-                    OnDelete = ReferentialAction.NoAction
-                }
-            );
+            childrenTable.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = childrenTable,
+                        Name = "FK_Foo",
+                        Columns = { childrenTable.Columns.ElementAt(0) },
+                        PrincipalTable = parentTable,
+                        PrincipalColumns = { parentTable.Columns.ElementAt(0) },
+                        OnDelete = ReferentialAction.NoAction
+                    }
+                );
 
             var model = _factory.Create(
                 new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -1035,25 +1043,26 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 },
                 PrimaryKey = IdPrimaryKey
             };
-            childrenTable.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = childrenTable,
-                    Name = "FK_Foo",
-                    Columns =
+            childrenTable.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
                     {
-                        childrenTable.Columns.ElementAt(1),
-                        childrenTable.Columns.ElementAt(2)
-                    },
-                    PrincipalTable = parentTable,
-                    PrincipalColumns =
-                    {
-                        parentTable.Columns.ElementAt(0),
-                        parentTable.Columns.ElementAt(1)
-                    },
-                    OnDelete = ReferentialAction.SetNull
-                }
-            );
+                        Table = childrenTable,
+                        Name = "FK_Foo",
+                        Columns =
+                        {
+                            childrenTable.Columns.ElementAt(1),
+                            childrenTable.Columns.ElementAt(2)
+                        },
+                        PrincipalTable = parentTable,
+                        PrincipalColumns =
+                        {
+                            parentTable.Columns.ElementAt(0),
+                            parentTable.Columns.ElementAt(1)
+                        },
+                        OnDelete = ReferentialAction.SetNull
+                    }
+                );
 
             var model = _factory.Create(
                 new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -1097,16 +1106,17 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 },
                 PrimaryKey = IdPrimaryKey
             };
-            table.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = table,
-                    Name = "FK_Foo",
-                    Columns = { table.Columns.ElementAt(1) },
-                    PrincipalTable = table,
-                    PrincipalColumns = { table.Columns.ElementAt(0) }
-                }
-            );
+            table.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = table,
+                        Name = "FK_Foo",
+                        Columns = { table.Columns.ElementAt(1) },
+                        PrincipalTable = table,
+                        PrincipalColumns = { table.Columns.ElementAt(0) }
+                    }
+                );
 
             var model = _factory.Create(
                 new DatabaseModel { Tables = { table } },
@@ -1148,16 +1158,17 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 },
                 PrimaryKey = IdPrimaryKey
             };
-            childrenTable.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = childrenTable,
-                    Name = "FK_Foo",
-                    Columns = { childrenTable.Columns.ElementAt(1) },
-                    PrincipalTable = parentTable,
-                    PrincipalColumns = { parentTable.Columns.ElementAt(1) }
-                }
-            );
+            childrenTable.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = childrenTable,
+                        Name = "FK_Foo",
+                        Columns = { childrenTable.Columns.ElementAt(1) },
+                        PrincipalTable = parentTable,
+                        PrincipalColumns = { parentTable.Columns.ElementAt(1) }
+                    }
+                );
 
             _factory.Create(
                 new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -1199,26 +1210,28 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 },
                 PrimaryKey = IdPrimaryKey
             };
-            childrenTable.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = childrenTable,
-                    Name = "FK_Foo",
-                    Columns = { childrenTable.Columns.ElementAt(1) },
-                    PrincipalTable = parentTable,
-                    PrincipalColumns = { parentTable.Columns.ElementAt(0) }
-                }
-            );
-            childrenTable.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = childrenTable,
-                    Name = "FK_Another_Foo",
-                    Columns = { childrenTable.Columns.ElementAt(1) },
-                    PrincipalTable = parentTable,
-                    PrincipalColumns = { parentTable.Columns.ElementAt(0) }
-                }
-            );
+            childrenTable.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = childrenTable,
+                        Name = "FK_Foo",
+                        Columns = { childrenTable.Columns.ElementAt(1) },
+                        PrincipalTable = parentTable,
+                        PrincipalColumns = { parentTable.Columns.ElementAt(0) }
+                    }
+                );
+            childrenTable.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = childrenTable,
+                        Name = "FK_Another_Foo",
+                        Columns = { childrenTable.Columns.ElementAt(1) },
+                        PrincipalTable = parentTable,
+                        PrincipalColumns = { parentTable.Columns.ElementAt(0) }
+                    }
+                );
 
             _factory.Create(
                 new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -1258,30 +1271,32 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 },
                 PrimaryKey = IdPrimaryKey
             };
-            table.Indexes.Add(
-                new DatabaseIndex
-                {
-                    Table = Table,
-                    Name = "IX_Foo",
-                    IsUnique = true,
-                    Columns = { table.Columns.ElementAt(1) }
-                }
-            );
-            table.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = table,
-                    Name = "FK_Foo",
-                    Columns = { table.Columns.ElementAt(1) },
-                    PrincipalTable = table,
-                    PrincipalColumns = { table.Columns.ElementAt(0) }
-                }
-            );
+            table.Indexes
+                .Add(
+                    new DatabaseIndex
+                    {
+                        Table = Table,
+                        Name = "IX_Foo",
+                        IsUnique = true,
+                        Columns = { table.Columns.ElementAt(1) }
+                    }
+                );
+            table.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = table,
+                        Name = "FK_Foo",
+                        Columns = { table.Columns.ElementAt(1) },
+                        PrincipalTable = table,
+                        PrincipalColumns = { table.Columns.ElementAt(0) }
+                    }
+                );
 
             var model = _factory.Create(
-                    new DatabaseModel { Tables = { table } },
-                    new ModelReverseEngineerOptions { NoPluralize = true }
-                )
+                new DatabaseModel { Tables = { table } },
+                new ModelReverseEngineerOptions { NoPluralize = true }
+            )
                 .FindEntityType("Friends");
 
             var buddyIdProperty = model.FindProperty("BuddyId");
@@ -1315,30 +1330,32 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 },
                 PrimaryKey = IdPrimaryKey
             };
-            table.Indexes.Add(
-                new DatabaseIndex
-                {
-                    Table = Table,
-                    Name = "FriendsNameUniqueIndex",
-                    Columns = { table.Columns.ElementAt(1) },
-                    IsUnique = true
-                }
-            );
-            table.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = table,
-                    Name = "FK_Foo",
-                    Columns = { table.Columns.ElementAt(1) },
-                    PrincipalTable = table,
-                    PrincipalColumns = { table.Columns.ElementAt(1) }
-                }
-            );
+            table.Indexes
+                .Add(
+                    new DatabaseIndex
+                    {
+                        Table = Table,
+                        Name = "FriendsNameUniqueIndex",
+                        Columns = { table.Columns.ElementAt(1) },
+                        IsUnique = true
+                    }
+                );
+            table.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = table,
+                        Name = "FK_Foo",
+                        Columns = { table.Columns.ElementAt(1) },
+                        PrincipalTable = table,
+                        PrincipalColumns = { table.Columns.ElementAt(1) }
+                    }
+                );
 
             var model = _factory.Create(
-                    new DatabaseModel { Tables = { table } },
-                    new ModelReverseEngineerOptions { NoPluralize = true }
-                )
+                new DatabaseModel { Tables = { table } },
+                new ModelReverseEngineerOptions { NoPluralize = true }
+            )
                 .FindEntityType("Friends");
 
             var buddyIdProperty = model.FindProperty("BuddyId");
@@ -1394,37 +1411,39 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 },
                 PrimaryKey = IdPrimaryKey
             };
-            childrenTable.Indexes.Add(
-                new DatabaseIndex
-                {
-                    Table = Table,
-                    Name = "IX_Foo",
-                    IsUnique = true,
-                    Columns =
+            childrenTable.Indexes
+                .Add(
+                    new DatabaseIndex
                     {
-                        childrenTable.Columns.ElementAt(1),
-                        childrenTable.Columns.ElementAt(2)
+                        Table = Table,
+                        Name = "IX_Foo",
+                        IsUnique = true,
+                        Columns =
+                        {
+                            childrenTable.Columns.ElementAt(1),
+                            childrenTable.Columns.ElementAt(2)
+                        }
                     }
-                }
-            );
-            childrenTable.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = childrenTable,
-                    Name = "FK_Foo",
-                    Columns =
+                );
+            childrenTable.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
                     {
-                        childrenTable.Columns.ElementAt(1),
-                        childrenTable.Columns.ElementAt(2)
-                    },
-                    PrincipalTable = parentTable,
-                    PrincipalColumns =
-                    {
-                        parentTable.Columns.ElementAt(0),
-                        parentTable.Columns.ElementAt(1)
+                        Table = childrenTable,
+                        Name = "FK_Foo",
+                        Columns =
+                        {
+                            childrenTable.Columns.ElementAt(1),
+                            childrenTable.Columns.ElementAt(2)
+                        },
+                        PrincipalTable = parentTable,
+                        PrincipalColumns =
+                        {
+                            parentTable.Columns.ElementAt(0),
+                            parentTable.Columns.ElementAt(1)
+                        }
                     }
-                }
-            );
+                );
 
             var model = _factory.Create(
                 new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -1707,17 +1726,18 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 PrimaryKey = IdPrimaryKey
             };
 
-            postTable.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = postTable,
-                    Name = "FK_Foo",
-                    Columns = { postTable.Columns.ElementAt(1) },
-                    PrincipalTable = blogTable,
-                    PrincipalColumns = { blogTable.Columns.ElementAt(0) },
-                    OnDelete = ReferentialAction.Cascade
-                }
-            );
+            postTable.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = postTable,
+                        Name = "FK_Foo",
+                        Columns = { postTable.Columns.ElementAt(1) },
+                        PrincipalTable = blogTable,
+                        PrincipalColumns = { blogTable.Columns.ElementAt(0) },
+                        OnDelete = ReferentialAction.Cascade
+                    }
+                );
 
             var info = new DatabaseModel { Tables = { blogTable, postTable } };
 
@@ -1766,17 +1786,18 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 PrimaryKey = IdPrimaryKey
             };
 
-            postTable.ForeignKeys.Add(
-                new DatabaseForeignKey
-                {
-                    Table = postTable,
-                    Name = "FK_Foo",
-                    Columns = { postTable.Columns.ElementAt(1) },
-                    PrincipalTable = blogTable,
-                    PrincipalColumns = { blogTable.Columns.ElementAt(0) },
-                    OnDelete = ReferentialAction.Cascade
-                }
-            );
+            postTable.ForeignKeys
+                .Add(
+                    new DatabaseForeignKey
+                    {
+                        Table = postTable,
+                        Name = "FK_Foo",
+                        Columns = { postTable.Columns.ElementAt(1) },
+                        PrincipalTable = blogTable,
+                        PrincipalColumns = { blogTable.Columns.ElementAt(0) },
+                        OnDelete = ReferentialAction.Cascade
+                    }
+                );
 
             var info = new DatabaseModel { Tables = { blogTable, postTable } };
 

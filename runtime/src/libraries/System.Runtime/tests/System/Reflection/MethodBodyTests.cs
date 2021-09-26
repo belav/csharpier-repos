@@ -14,10 +14,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Test_MethodBody_ExceptionHandlingClause()
         {
-            MethodInfo mi = typeof(MethodBodyTests).GetMethod(
-                "MethodBodyExample",
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            MethodInfo mi = typeof(MethodBodyTests)
+                .GetMethod("MethodBodyExample", BindingFlags.NonPublic | BindingFlags.Static);
             MethodBody mb = mi.GetMethodBody();
 
             Assert.True(mb.InitLocals); // local variables are initialized

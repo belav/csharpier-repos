@@ -154,10 +154,11 @@ namespace N
                 new[]
                 {
                     string.Format(EditorFeaturesResources.Calls_To_0, "Goo"),
-                    string.Format(
-                        EditorFeaturesResources.Calls_To_Interface_Implementation_0,
-                        "N.I.Goo()"
-                    )
+                    string
+                        .Format(
+                            EditorFeaturesResources.Calls_To_Interface_Implementation_0,
+                            "N.I.Goo()"
+                        )
                 }
             );
             testState.VerifyResult(
@@ -167,10 +168,11 @@ namespace N
             );
             testState.VerifyResult(
                 root,
-                string.Format(
-                    EditorFeaturesResources.Calls_To_Interface_Implementation_0,
-                    "N.I.Goo()"
-                ),
+                string
+                    .Format(
+                        EditorFeaturesResources.Calls_To_Interface_Implementation_0,
+                        "N.I.Goo()"
+                    ),
                 new[] { "N.G.Main()" }
             );
         }

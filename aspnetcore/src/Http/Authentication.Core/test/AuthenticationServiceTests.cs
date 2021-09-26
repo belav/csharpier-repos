@@ -15,14 +15,12 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task AuthenticateThrowsForSchemeMismatch()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<BaseHandler>("base", "whatever");
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<BaseHandler>("base", "whatever");
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -37,15 +35,12 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         public async Task CustomHandlersAuthenticateRunsClaimsTransformationEveryTime()
         {
             var transform = new RunOnce();
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<BaseHandler>("base", "whatever");
-                    }
-                )
-                .AddSingleton<IClaimsTransformation>(transform)
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<BaseHandler>("base", "whatever");
+                }
+            ).AddSingleton<IClaimsTransformation>(transform).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -63,14 +58,12 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task ChallengeThrowsForSchemeMismatch()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<BaseHandler>("base", "whatever");
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<BaseHandler>("base", "whatever");
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -84,14 +77,12 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task ForbidThrowsForSchemeMismatch()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<BaseHandler>("base", "whatever");
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<BaseHandler>("base", "whatever");
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -105,14 +96,12 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task CanOnlySignInWithIsAuthenticated()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<SignInHandler>("signin", "whatever");
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<SignInHandler>("signin", "whatever");
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -129,15 +118,13 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task CanSignInWithoutIsAuthenticated()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<SignInHandler>("signin", "whatever");
-                        o.RequireAuthenticatedSignIn = false;
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<SignInHandler>("signin", "whatever");
+                    o.RequireAuthenticatedSignIn = false;
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -152,17 +139,15 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task CanOnlySignInIfSupported()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<UberHandler>("uber", "whatever");
-                        o.AddScheme<BaseHandler>("base", "whatever");
-                        o.AddScheme<SignInHandler>("signin", "whatever");
-                        o.AddScheme<SignOutHandler>("signout", "whatever");
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<UberHandler>("uber", "whatever");
+                    o.AddScheme<BaseHandler>("base", "whatever");
+                    o.AddScheme<SignInHandler>("signin", "whatever");
+                    o.AddScheme<SignOutHandler>("signout", "whatever");
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -201,17 +186,15 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task CanOnlySignOutIfSupported()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<UberHandler>("uber", "whatever");
-                        o.AddScheme<BaseHandler>("base", "whatever");
-                        o.AddScheme<SignInHandler>("signin", "whatever");
-                        o.AddScheme<SignOutHandler>("signout", "whatever");
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<UberHandler>("uber", "whatever");
+                    o.AddScheme<BaseHandler>("base", "whatever");
+                    o.AddScheme<SignInHandler>("signin", "whatever");
+                    o.AddScheme<SignOutHandler>("signout", "whatever");
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -228,15 +211,13 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task ServicesWithDefaultIAuthenticationHandlerMethodsTest()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<BaseHandler>("base", "whatever");
-                        o.DefaultScheme = "base";
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<BaseHandler>("base", "whatever");
+                    o.DefaultScheme = "base";
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -256,15 +237,13 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task ServicesWithDefaultUberMethodsTest()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<UberHandler>("base", "whatever");
-                        o.DefaultScheme = "base";
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<UberHandler>("base", "whatever");
+                    o.DefaultScheme = "base";
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -278,15 +257,13 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task ServicesWithDefaultSignInMethodsTest()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<SignInHandler>("base", "whatever");
-                        o.DefaultScheme = "base";
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<SignInHandler>("base", "whatever");
+                    o.DefaultScheme = "base";
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -300,15 +277,13 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task ServicesWithDefaultSignOutMethodsTest()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<SignOutHandler>("base", "whatever");
-                        o.DefaultScheme = "base";
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<SignOutHandler>("base", "whatever");
+                    o.DefaultScheme = "base";
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 
@@ -325,15 +300,13 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public async Task ServicesWithDefaultForbidMethod_CallsForbidMethod()
         {
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.AddScheme<ForbidHandler>("forbid", "whatever");
-                        o.DefaultForbidScheme = "forbid";
-                    }
-                )
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.AddScheme<ForbidHandler>("forbid", "whatever");
+                    o.DefaultForbidScheme = "forbid";
+                }
+            ).BuildServiceProvider();
             var context = new DefaultHttpContext();
             context.RequestServices = services;
 

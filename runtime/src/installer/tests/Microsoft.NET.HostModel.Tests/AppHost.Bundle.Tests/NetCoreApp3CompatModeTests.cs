@@ -31,9 +31,9 @@ namespace AppHost.Bundle.Tests
             var extractionBaseDir = BundleHelper.GetExtractionRootDir(fixture);
 
             Command.Create(
-                    singleFile,
-                    "executing_assembly_location trusted_platform_assemblies assembly_location System.Console"
-                )
+                singleFile,
+                "executing_assembly_location trusted_platform_assemblies assembly_location System.Console"
+            )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .EnvironmentVariable(
@@ -58,10 +58,10 @@ namespace AppHost.Bundle.Tests
                 .Select(file => file.Name)
                 .ToArray();
             var publishedFiles = Directory.GetFiles(
-                    BundleHelper.GetPublishPath(fixture),
-                    searchPattern: "*",
-                    searchOption: SearchOption.AllDirectories
-                )
+                BundleHelper.GetPublishPath(fixture),
+                searchPattern: "*",
+                searchOption: SearchOption.AllDirectories
+            )
                 .Select(file => Path.GetFileName(file))
                 .Except(bundleFiles)
                 .ToArray();

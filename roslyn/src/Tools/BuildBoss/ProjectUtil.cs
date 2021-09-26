@@ -66,7 +66,8 @@ namespace BuildBoss
             var targetFrameworks = GetTargetFrameworks();
             if (targetFrameworks != null)
             {
-                var all = targetFrameworks.Value.ToString()
+                var all = targetFrameworks.Value
+                    .ToString()
                     .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                 return all;
             }
@@ -123,10 +124,11 @@ namespace BuildBoss
                 if (referenceOutputAssemblyValue != null)
                 {
                     if (
-                        bool.TryParse(
-                            referenceOutputAssemblyValue.Trim().ToLower(),
-                            out var isRealReference
-                        ) && !isRealReference
+                        bool
+                            .TryParse(
+                                referenceOutputAssemblyValue.Trim().ToLower(),
+                                out var isRealReference
+                            ) && !isRealReference
                     )
                     {
                         continue;
@@ -194,9 +196,8 @@ namespace BuildBoss
         {
             var targetAssembly = element.Attribute("Include")?.Value.Trim();
             var key = element.Attribute("Key")?.Value.Trim();
-            var loadsWithinVisualStudio = element.Attribute(
-                "LoadsWithinVisualStudio"
-            )?.Value.Trim();
+            var loadsWithinVisualStudio = element.Attribute("LoadsWithinVisualStudio")?.Value
+                .Trim();
             var workItem = element.Attribute("WorkItem")?.Value.Trim();
             return new InternalsVisibleTo(targetAssembly, key, loadsWithinVisualStudio, workItem);
         }

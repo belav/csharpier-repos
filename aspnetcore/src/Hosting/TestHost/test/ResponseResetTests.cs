@@ -177,18 +177,16 @@ namespace Microsoft.AspNetCore.TestHost
         private Task<IHost> CreateHost(RequestDelegate appDelegate)
         {
             return new HostBuilder().ConfigureWebHost(
-                    webBuilder =>
-                    {
-                        webBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.Run(appDelegate);
-                                }
-                            );
-                    }
-                )
-                .StartAsync();
+                webBuilder =>
+                {
+                    webBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.Run(appDelegate);
+                        }
+                    );
+                }
+            ).StartAsync();
         }
     }
 }

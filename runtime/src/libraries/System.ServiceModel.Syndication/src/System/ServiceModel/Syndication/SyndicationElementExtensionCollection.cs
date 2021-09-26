@@ -79,14 +79,15 @@ namespace System.ServiceModel.Syndication
                     dataContractExtension.GetType()
                 );
             }
-            base.Add(
-                new SyndicationElementExtension(
-                    outerName,
-                    outerNamespace,
-                    dataContractExtension,
-                    dataContractSerializer
-                )
-            );
+            base
+                .Add(
+                    new SyndicationElementExtension(
+                        outerName,
+                        outerNamespace,
+                        dataContractExtension,
+                        dataContractSerializer
+                    )
+                );
         }
 
         public void Add(object xmlSerializerExtension, XmlSerializer serializer)
@@ -269,14 +270,15 @@ namespace System.ServiceModel.Syndication
                 int index = 0;
                 while (reader.IsStartElement())
                 {
-                    base.Add(
-                        new SyndicationElementExtension(
-                            _buffer,
-                            index,
-                            reader.LocalName,
-                            reader.NamespaceURI
-                        )
-                    );
+                    base
+                        .Add(
+                            new SyndicationElementExtension(
+                                _buffer,
+                                index,
+                                reader.LocalName,
+                                reader.NamespaceURI
+                            )
+                        );
                     reader.Skip();
                     ++index;
                 }

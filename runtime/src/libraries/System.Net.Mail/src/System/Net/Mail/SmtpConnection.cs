@@ -118,13 +118,8 @@ namespace System.Net.Mail
 
         internal IAsyncResult BeginFlush(AsyncCallback? callback, object? state)
         {
-            return _networkStream!.BeginWrite(
-                _bufferBuilder.GetBuffer(),
-                0,
-                _bufferBuilder.Length,
-                callback,
-                state
-            );
+            return _networkStream!
+                .BeginWrite(_bufferBuilder.GetBuffer(), 0, _bufferBuilder.Length, callback, state);
         }
 
         internal void EndFlush(IAsyncResult result)
@@ -311,13 +306,8 @@ namespace System.Net.Mail
 
                         while ((int)info.StatusCode == 334)
                         {
-                            auth = _authenticationModules[i].Authenticate(
-                                info.Line,
-                                null,
-                                this,
-                                _client.TargetName,
-                                null
-                            );
+                            auth = _authenticationModules[i]
+                                .Authenticate(info.Line, null, this, _client.TargetName, null);
                             if (auth == null)
                             {
                                 throw new SmtpException(SR.SmtpAuthenticationFailed);
@@ -394,13 +384,14 @@ namespace System.Net.Mail
         private static void AuthenticateCallback(object? state)
         {
             AuthenticateCallbackContext context = (AuthenticateCallbackContext)state!;
-            context._result = context._module.Authenticate(
-                null,
-                context._credential,
-                context._thisPtr,
-                context._spn,
-                context._token
-            );
+            context._result = context._module
+                .Authenticate(
+                    null,
+                    context._credential,
+                    context._thisPtr,
+                    context._spn,
+                    context._token
+                );
         }
 
         private sealed class AuthenticateCallbackContext
@@ -601,9 +592,8 @@ namespace System.Net.Mail
                     {
                         try
                         {
-                            LineInfo info = thisPtr._connection.Reader!.CurrentReader!.EndReadLine(
-                                result
-                            );
+                            LineInfo info = thisPtr._connection.Reader!.CurrentReader!
+                                .EndReadLine(result);
                             if (info.StatusCode != SmtpStatusCode.ServiceReady)
                             {
                                 thisPtr.InvokeCallback(
@@ -816,9 +806,8 @@ namespace System.Net.Mail
                     _host,
                     _connection._clientCertificates
                 );
-                IAsyncResult result = (
-                    (TlsStream)_connection._networkStream
-                ).BeginAuthenticateAsClient(TlsStreamAuthenticateCallback, this);
+                IAsyncResult result = ((TlsStream)_connection._networkStream)
+                    .BeginAuthenticateAsClient(TlsStreamAuthenticateCallback, this);
                 if (result.CompletedSynchronously)
                 {
                     ((TlsStream)_connection._networkStream).EndAuthenticateAsClient(result);
@@ -839,9 +828,8 @@ namespace System.Net.Mail
                         (ConnectAndHandshakeAsyncResult)result.AsyncState!;
                     try
                     {
-                        (thisPtr._connection._networkStream as TlsStream)!.EndAuthenticateAsClient(
-                            result
-                        );
+                        (thisPtr._connection._networkStream as TlsStream)!
+                            .EndAuthenticateAsClient(result);
                         thisPtr._connection._responseReader = new SmtpReplyReaderFactory(
                             thisPtr._connection._networkStream
                         );
@@ -871,11 +859,8 @@ namespace System.Net.Mail
                             continue;
                         }
 
-                        NetworkCredential? credential = _connection._credentials.GetCredential(
-                            _host,
-                            _port,
-                            module.AuthenticationType
-                        );
+                        NetworkCredential? credential = _connection._credentials
+                            .GetCredential(_host, _port, module.AuthenticationType);
                         if (credential == null)
                             continue;
                         Authorization? auth = _connection.SetContextAndTryAuthenticate(
@@ -944,9 +929,8 @@ namespace System.Net.Mail
                         }
                         else if ((int)info.StatusCode == 235)
                         {
-                            thisPtr._connection._authenticationModules[
-                                thisPtr._currentModule
-                            ].CloseContext(thisPtr._connection);
+                            thisPtr._connection._authenticationModules[thisPtr._currentModule]
+                                .CloseContext(thisPtr._connection);
                             thisPtr._connection._isConnected = true;
                             thisPtr.InvokeCallback();
                             return;
@@ -967,15 +951,14 @@ namespace System.Net.Mail
                 {
                     // We don't need credential on the continued auth assuming they were captured on the first call.
                     // That should always work, otherwise what if a new credential has been returned?
-                    Authorization? auth = _connection._authenticationModules[
-                        _currentModule
-                    ].Authenticate(
-                        _authResponse,
-                        null,
-                        _connection,
-                        _connection._client!.TargetName,
-                        null
-                    );
+                    Authorization? auth = _connection._authenticationModules[_currentModule]
+                        .Authenticate(
+                            _authResponse,
+                            null,
+                            _connection,
+                            _connection._client!.TargetName,
+                            null
+                        );
                     if (auth == null)
                     {
                         throw new SmtpException(SR.SmtpAuthenticationFailed);
@@ -995,9 +978,8 @@ namespace System.Net.Mail
                     LineInfo info = AuthCommand.EndSend(result);
                     if ((int)info.StatusCode == 235)
                     {
-                        _connection._authenticationModules[_currentModule].CloseContext(
-                            _connection
-                        );
+                        _connection._authenticationModules[_currentModule]
+                            .CloseContext(_connection);
                         _connection._isConnected = true;
                         InvokeCallback();
                         return false;
@@ -1021,9 +1003,8 @@ namespace System.Net.Mail
                         LineInfo info = AuthCommand.EndSend(result);
                         if ((int)info.StatusCode == 235)
                         {
-                            thisPtr._connection._authenticationModules[
-                                thisPtr._currentModule
-                            ].CloseContext(thisPtr._connection);
+                            thisPtr._connection._authenticationModules[thisPtr._currentModule]
+                                .CloseContext(thisPtr._connection);
                             thisPtr._connection._isConnected = true;
                             thisPtr.InvokeCallback();
                             return;

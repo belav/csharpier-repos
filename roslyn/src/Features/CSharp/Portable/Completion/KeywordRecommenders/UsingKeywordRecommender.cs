@@ -115,10 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
             if (
                 token.Kind() == SyntaxKind.OpenBraceToken
-                && token.Parent.IsKind(
-                    SyntaxKind.NamespaceDeclaration,
-                    out NamespaceDeclarationSyntax _
-                )
+                && token.Parent
+                    .IsKind(SyntaxKind.NamespaceDeclaration, out NamespaceDeclarationSyntax _)
             )
             {
                 // a child using can't come before externs

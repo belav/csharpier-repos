@@ -879,53 +879,46 @@ public E e4;
                 previous: c0
             );
 
-            CreateSubmission(@"protected A x;", previous: c1)
-                .VerifyDiagnostics(
-                    // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
-                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A"),
-                    // (1,13): warning CS0628: 'x': new protected member declared in sealed type
-                    Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x")
-                );
+            CreateSubmission(@"protected A x;", previous: c1).VerifyDiagnostics(
+                // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
+                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A"),
+                // (1,13): warning CS0628: 'x': new protected member declared in sealed type
+                Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x")
+            );
 
-            CreateSubmission(@"internal A x;", previous: c1)
-                .VerifyDiagnostics(
-                    // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
-                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A")
-                );
+            CreateSubmission(@"internal A x;", previous: c1).VerifyDiagnostics(
+                // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
+                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A")
+            );
 
-            CreateSubmission(@"internal protected A x;", previous: c1)
-                .VerifyDiagnostics(
-                    // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
-                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A"),
-                    // (1,13): warning CS0628: 'x': new protected member declared in sealed type
-                    Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x")
-                );
+            CreateSubmission(@"internal protected A x;", previous: c1).VerifyDiagnostics(
+                // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
+                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A"),
+                // (1,13): warning CS0628: 'x': new protected member declared in sealed type
+                Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x")
+            );
 
-            CreateSubmission(@"public A x;", previous: c1)
-                .VerifyDiagnostics(
-                    // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
-                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A")
-                );
+            CreateSubmission(@"public A x;", previous: c1).VerifyDiagnostics(
+                // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
+                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A")
+            );
 
-            CreateSubmission(@"internal B x;", previous: c1)
-                .VerifyDiagnostics(
-                    // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
-                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B")
-                );
+            CreateSubmission(@"internal B x;", previous: c1).VerifyDiagnostics(
+                // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
+                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B")
+            );
 
-            CreateSubmission(@"internal protected B x;", previous: c1)
-                .VerifyDiagnostics(
-                    // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
-                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B"),
-                    // (1,13): warning CS0628: 'x': new protected member declared in sealed type
-                    Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x")
-                );
+            CreateSubmission(@"internal protected B x;", previous: c1).VerifyDiagnostics(
+                // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
+                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B"),
+                // (1,13): warning CS0628: 'x': new protected member declared in sealed type
+                Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x")
+            );
 
-            CreateSubmission(@"public B x;", previous: c1)
-                .VerifyDiagnostics(
-                    // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
-                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B")
-                );
+            CreateSubmission(@"public B x;", previous: c1).VerifyDiagnostics(
+                // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
+                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B")
+            );
         }
 
         [ConditionalFact(
@@ -1044,12 +1037,14 @@ class D
             submission.VerifyDiagnostics(
                 // (1,7): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a using directive or an assembly reference?)
                 // using Unknown;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown").WithArguments("Unknown")
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown")
+                    .WithArguments("Unknown")
             );
 
             submission.VerifyEmitDiagnostics(
                 // (1,7): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a using directive or an assembly reference?)
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown").WithArguments("Unknown")
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown")
+                    .WithArguments("Unknown")
             );
         }
 
@@ -1383,10 +1378,11 @@ goto Label;"
         public void Errors_01()
         {
             var code = "System.Console.WriteLine(1);";
-            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
-                code,
-                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
-            );
+            var compilationUnit = CSharp.SyntaxFactory
+                .ParseCompilationUnit(
+                    code,
+                    options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+                );
             var syntaxTree = compilationUnit.SyntaxTree;
             var compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree });
             var semanticModel = compilation.GetSemanticModel(syntaxTree, true);
@@ -1528,10 +1524,11 @@ goto Label;"
         [WorkItem(44418, "https://github.com/dotnet/roslyn/issues/44418")]
         public void Errors_02()
         {
-            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
-                "\nSystem.Console.WriteLine(1);",
-                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
-            );
+            var compilationUnit = CSharp.SyntaxFactory
+                .ParseCompilationUnit(
+                    "\nSystem.Console.WriteLine(1);",
+                    options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+                );
             var syntaxTree1 = compilationUnit.SyntaxTree;
             var syntaxTree2 = SyntaxFactory.ParseSyntaxTree(
                 "System.Console.WriteLine(2);",
@@ -1581,10 +1578,11 @@ goto Label;"
         public void Errors_03()
         {
             var code = "System.Console.WriteLine(out var x, x);";
-            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
-                code,
-                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
-            );
+            var compilationUnit = CSharp.SyntaxFactory
+                .ParseCompilationUnit(
+                    code,
+                    options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+                );
             var syntaxTree = compilationUnit.SyntaxTree;
             var compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree });
             var semanticModel = compilation.GetSemanticModel(syntaxTree, true);

@@ -111,11 +111,12 @@ Class VBTest
 End Class"
             );
             var csharpProject = new ProjectUtils.Project("CSharpProject");
-            VisualStudio.SolutionExplorer.AddProject(
-                csharpProject,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    csharpProject,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.CSharp
+                );
             VisualStudio.Editor.SetText(
                 @"
 public class CSharpClass
@@ -139,10 +140,8 @@ public class CSharpClass
             VisualStudio.SolutionExplorer.AddProjectReference(project, csharpProjectReference);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.vb");
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
 
             ChangeSignatureDialog.Invoke();
             ChangeSignatureDialog.VerifyOpen();
@@ -301,11 +300,12 @@ Class VBTest
 End Class"
             );
             var csharpProject = new ProjectUtils.Project("CSharpProject");
-            VisualStudio.SolutionExplorer.AddProject(
-                csharpProject,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(
+                    csharpProject,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.CSharp
+                );
             VisualStudio.Editor.SetText(
                 @"
 public class CSharpClass
@@ -322,10 +322,8 @@ public class CSharpClass
             VisualStudio.SolutionExplorer.AddProjectReference(project, csharpProjectReference);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.vb");
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
 
             ChangeSignatureDialog.Invoke();
             ChangeSignatureDialog.VerifyOpen();

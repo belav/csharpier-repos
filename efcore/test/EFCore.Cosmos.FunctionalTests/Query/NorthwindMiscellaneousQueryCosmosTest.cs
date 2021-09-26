@@ -208,7 +208,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] != null))"
                     from c in customerRepository.Find().Where(c => c.CustomerID == "ALFKI")
                     where orderRepository.Find().Any(o => o.CustomerID == c.CustomerID)
                     select c
-                ).ToList();
+                )
+                    .ToList();
 
                 Assert.Single(results);
 
@@ -440,9 +441,8 @@ WHERE (c[""Discriminator""] = ""Employee"")"
             bool async
         )
         {
-            return base.Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
-                async
-            );
+            return base
+                .Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(async);
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -458,9 +458,8 @@ WHERE (c[""Discriminator""] = ""Employee"")"
             bool async
         )
         {
-            await base.Where_query_composition_entity_equality_multiple_elements_FirstOrDefault(
-                async
-            );
+            await base
+                .Where_query_composition_entity_equality_multiple_elements_FirstOrDefault(async);
 
             AssertSql(
                 @"SELECT c
@@ -1715,7 +1714,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                         from o in ss.Set<Order>().Where(or => or.OrderID < 10300)
                         orderby c.CustomerID ,o.OrderID
                         select new { c, o }
-                    ).Take(1).Cast<object>(),
+                    )
+                        .Take(1)
+                        .Cast<object>(),
                 entryCount: 2
             );
 
@@ -2166,7 +2167,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10300))"
         [ConditionalFact(Skip = "Issue #17246")]
         public override void Select_DTO_with_member_init_distinct_in_subquery_used_in_projection_translated_to_server()
         {
-            base.Select_DTO_with_member_init_distinct_in_subquery_used_in_projection_translated_to_server();
+            base
+                .Select_DTO_with_member_init_distinct_in_subquery_used_in_projection_translated_to_server();
 
             AssertSql(
                 @"SELECT c
@@ -2690,9 +2692,10 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            await base.Handle_materialization_properly_when_more_than_two_query_sources_are_involved(
-                async
-            );
+            await base
+                .Handle_materialization_properly_when_more_than_two_query_sources_are_involved(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c
@@ -3141,9 +3144,10 @@ WHERE (c[""Discriminator""] = ""Order"")"
             bool async
         )
         {
-            await base.No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition1(
-                async
-            );
+            await base
+                .No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition1(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c
@@ -3156,9 +3160,10 @@ WHERE (c[""Discriminator""] = ""Order"")"
             bool async
         )
         {
-            await base.No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition2(
-                async
-            );
+            await base
+                .No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition2(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c
@@ -3345,7 +3350,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                             c =>
                                 new
                                 {
-                                    A = c.Orders.OrderByDescending(o => o.OrderID)
+                                    A = c.Orders
+                                        .OrderByDescending(o => o.OrderID)
                                         .FirstOrDefault().OrderDate
                                 }
                         )
@@ -3458,7 +3464,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                                 new DTO<DateTime?>
                                 {
                                     Property =
-                                        c.Orders.OrderByDescending(o => o.OrderID)
+                                        c.Orders
+                                            .OrderByDescending(o => o.OrderID)
                                             .FirstOrDefault().OrderDate
                                 }
                         )
@@ -3504,7 +3511,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] = 10300))"
                 async,
                 ss =>
                     from c in ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI")
-                    let lastOrder = c.Orders.OrderByDescending(o => o.OrderID)
+                    let lastOrder = c.Orders
+                        .OrderByDescending(o => o.OrderID)
                         .Select(o => o.CustomerID)
                         .FirstOrDefault()
                     where lastOrder == null
@@ -3525,7 +3533,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
                 async,
                 ss =>
                     from c in ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI")
-                    let lastOrder = c.Orders.OrderByDescending(o => o.OrderID)
+                    let lastOrder = c.Orders
+                        .OrderByDescending(o => o.OrderID)
                         .Select(o => o.CustomerID)
                         .FirstOrDefault()
                     where lastOrder != null
@@ -4054,9 +4063,10 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            await base.Complex_nested_query_doesnt_try_binding_to_grandparent_when_parent_returns_complex_result(
-                async
-            );
+            await base
+                .Complex_nested_query_doesnt_try_binding_to_grandparent_when_parent_returns_complex_result(
+                    async
+                );
 
             AssertSql(
                 @"SELECT c
@@ -4080,7 +4090,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
                                 new
                                 {
                                     c.CustomerID,
-                                    OuterOrders = c.Orders.Where(o => o.OrderID < 10250)
+                                    OuterOrders = c.Orders
+                                        .Where(o => o.OrderID < 10250)
                                         .Count(o => c.Orders.Count() > 0)
                                 }
                         )
@@ -4127,28 +4138,30 @@ OFFSET @__p_0 LIMIT @__p_1"
             using (var context = CreateContext())
             {
                 var results = (
-                    context.Customers.Where(c => c.CustomerID == "ALFKI")
+                    context.Customers
+                        .Where(c => c.CustomerID == "ALFKI")
                         .Select(
                             c =>
                                 new
                                 {
                                     c.CustomerID,
-                                    Orders = context.Orders.Where(
-                                        o => o.Customer.CustomerID == c.CustomerID
-                                    )
+                                    Orders = context.Orders
+                                        .Where(o => o.Customer.CustomerID == c.CustomerID)
                                 }
                         )
                         .ToList()
-                ).Select(
+                )
+                    .Select(
                         x =>
                             new
                             {
-                                Orders = x.Orders.GroupJoin(
-                                    new[] { "ALFKI" },
-                                    y => x.CustomerID,
-                                    y => y,
-                                    (h, id) => new { h.Customer }
-                                )
+                                Orders = x.Orders
+                                    .GroupJoin(
+                                        new[] { "ALFKI" },
+                                        y => x.CustomerID,
+                                        y => y,
+                                        (h, id) => new { h.Customer }
+                                    )
                             }
                     )
                     .ToList();
@@ -4291,7 +4304,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                     ss.Set<Customer>()
                         .Where(
                             c =>
-                                c.Orders.Where(o => o.OrderID < 10250)
+                                c.Orders
+                                    .Where(o => o.OrderID < 10250)
                                     .OrderBy(o => o.OrderID)
                                     .FirstOrDefault().OrderDetails == null
                         ),
@@ -4299,7 +4313,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                     ss.Set<Customer>()
                         .Where(
                             c =>
-                                c.Orders.Where(o => o.OrderID < 10250)
+                                c.Orders
+                                    .Where(o => o.OrderID < 10250)
                                     .OrderBy(o => o.OrderID)
                                     .FirstOrDefault() == null
                         ),
@@ -4324,7 +4339,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                     ss.Set<Customer>()
                         .Where(
                             c =>
-                                c.Orders.Where(o => o.OrderID < 10250)
+                                c.Orders
+                                    .Where(o => o.OrderID < 10250)
                                     .OrderBy(o => o.OrderID)
                                     .FirstOrDefault().Customer == null
                         ),
@@ -4332,7 +4348,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                     ss.Set<Customer>()
                         .Where(
                             c =>
-                                c.Orders.Where(o => o.OrderID < 10250)
+                                c.Orders
+                                    .Where(o => o.OrderID < 10250)
                                     .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
                                     .FirstOrDefault() == null
@@ -4508,9 +4525,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            return base.Select_DTO_with_member_init_distinct_in_subquery_translated_to_server_2(
-                async
-            );
+            return base
+                .Select_DTO_with_member_init_distinct_in_subquery_translated_to_server_2(async);
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -4718,9 +4734,10 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ALFKI"
             bool async
         )
         {
-            return base.Pending_selector_in_cardinality_reducing_method_is_applied_before_expanding_collection_navigation_member(
-                async
-            );
+            return base
+                .Pending_selector_in_cardinality_reducing_method_is_applied_before_expanding_collection_navigation_member(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "Non embedded collection subquery Issue#17246")]
@@ -4779,9 +4796,10 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ALFKI"
         {
             return AssertTranslationFailedWithDetails(
                 () =>
-                    base.Using_static_string_Equals_with_StringComparison_throws_informative_error(
-                        async
-                    ),
+                    base
+                        .Using_static_string_Equals_with_StringComparison_throws_informative_error(
+                            async
+                        ),
                 CoreStrings.QueryUnableToTranslateStringEqualsWithStringComparison
             );
         }
@@ -4808,9 +4826,10 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ALFKI"
             bool async
         )
         {
-            return base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(
-                async
-            );
+            return base
+                .Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
@@ -4818,9 +4837,10 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] IN (""ALFKI"
             bool async
         )
         {
-            return base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(
-                async
-            );
+            return base
+                .Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(
+                    async
+                );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]

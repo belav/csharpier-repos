@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                 new CSharpUseDefaultLiteralCodeFixProvider()
             );
 
-        private static readonly CSharpParseOptions s_parseOptions =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_1);
+        private static readonly CSharpParseOptions s_parseOptions = CSharpParseOptions.Default
+            .WithLanguageVersion(LanguageVersion.CSharp7_1);
 
         private static readonly TestParameters s_testParameters = new TestParameters(
             parseOptions: s_parseOptions
@@ -48,9 +48,8 @@ class C
     }
 }",
                 parameters: new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7
-                    )
+                    parseOptions: CSharpParseOptions.Default
+                        .WithLanguageVersion(LanguageVersion.CSharp7)
                 )
             );
         }

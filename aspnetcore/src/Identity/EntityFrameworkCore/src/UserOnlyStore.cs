@@ -447,11 +447,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             }
 
             var matchedClaims = await UserClaims.Where(
-                    uc =>
-                        uc.UserId.Equals(user.Id)
-                        && uc.ClaimValue == claim.Value
-                        && uc.ClaimType == claim.Type
-                )
+                uc =>
+                    uc.UserId.Equals(user.Id)
+                    && uc.ClaimValue == claim.Value
+                    && uc.ClaimType == claim.Type
+            )
                 .ToListAsync(cancellationToken);
             foreach (var matchedClaim in matchedClaims)
             {
@@ -485,11 +485,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             foreach (var claim in claims)
             {
                 var matchedClaims = await UserClaims.Where(
-                        uc =>
-                            uc.UserId.Equals(user.Id)
-                            && uc.ClaimValue == claim.Value
-                            && uc.ClaimType == claim.Type
-                    )
+                    uc =>
+                        uc.UserId.Equals(user.Id)
+                        && uc.ClaimValue == claim.Value
+                        && uc.ClaimType == claim.Type
+                )
                     .ToListAsync(cancellationToken);
                 foreach (var c in matchedClaims)
                 {

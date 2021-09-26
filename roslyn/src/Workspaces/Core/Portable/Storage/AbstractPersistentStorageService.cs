@@ -51,12 +51,12 @@ namespace Microsoft.CodeAnalysis.Storage
         [Obsolete("Use GetStorageAsync instead")]
         IPersistentStorage IPersistentStorageService.GetStorage(Solution solution) =>
             GetStorageAsync(
-                    solution.Workspace,
-                    SolutionKey.ToSolutionKey(solution),
-                    solution,
-                    checkBranchId: true,
-                    CancellationToken.None
-                )
+                solution.Workspace,
+                SolutionKey.ToSolutionKey(solution),
+                solution,
+                checkBranchId: true,
+                CancellationToken.None
+            )
                 .AsTask()
                 .GetAwaiter()
                 .GetResult();
@@ -66,12 +66,12 @@ namespace Microsoft.CodeAnalysis.Storage
             CancellationToken cancellationToken
         ) =>
             await GetStorageAsync(
-                    solution.Workspace,
-                    SolutionKey.ToSolutionKey(solution),
-                    solution,
-                    checkBranchId: true,
-                    cancellationToken
-                )
+                solution.Workspace,
+                SolutionKey.ToSolutionKey(solution),
+                solution,
+                checkBranchId: true,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
         public ValueTask<IChecksummedPersistentStorage> GetStorageAsync(
@@ -456,13 +456,8 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage.Target.WriteStreamAsync(
-                    project,
-                    name,
-                    stream,
-                    checksum,
-                    cancellationToken
-                );
+                _storage.Target
+                    .WriteStreamAsync(project, name, stream, checksum, cancellationToken);
 
             public Task<bool> WriteStreamAsync(
                 Document document,
@@ -471,13 +466,8 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage.Target.WriteStreamAsync(
-                    document,
-                    name,
-                    stream,
-                    checksum,
-                    cancellationToken
-                );
+                _storage.Target
+                    .WriteStreamAsync(document, name, stream, checksum, cancellationToken);
 
             public Task<bool> WriteStreamAsync(
                 ProjectKey projectKey,
@@ -486,13 +476,8 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage.Target.WriteStreamAsync(
-                    projectKey,
-                    name,
-                    stream,
-                    checksum,
-                    cancellationToken
-                );
+                _storage.Target
+                    .WriteStreamAsync(projectKey, name, stream, checksum, cancellationToken);
 
             public Task<bool> WriteStreamAsync(
                 DocumentKey documentKey,
@@ -501,13 +486,8 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage.Target.WriteStreamAsync(
-                    documentKey,
-                    name,
-                    stream,
-                    checksum,
-                    cancellationToken
-                );
+                _storage.Target
+                    .WriteStreamAsync(documentKey, name, stream, checksum, cancellationToken);
         }
     }
 }

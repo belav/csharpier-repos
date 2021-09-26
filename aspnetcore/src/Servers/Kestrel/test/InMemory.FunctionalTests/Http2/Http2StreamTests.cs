@@ -956,11 +956,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     var total = read;
                     while (read > 0)
                     {
-                        read = await context.Request.Body.ReadAsync(
-                            buffer,
-                            total,
-                            buffer.Length - total
-                        );
+                        read = await context.Request.Body
+                            .ReadAsync(buffer, total, buffer.Length - total);
                         total += read;
                     }
                     Assert.Equal(12, total);
@@ -1007,10 +1004,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     var readResult = await context.Request.BodyReader.ReadAsync();
                     while (!readResult.IsCompleted)
                     {
-                        context.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        context.Request.BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                         readResult = await context.Request.BodyReader.ReadAsync();
                     }
 
@@ -1069,11 +1064,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     var total = read;
                     while (read > 0)
                     {
-                        read = await context.Request.Body.ReadAsync(
-                            buffer,
-                            total,
-                            buffer.Length - total
-                        );
+                        read = await context.Request.Body
+                            .ReadAsync(buffer, total, buffer.Length - total);
                         total += read;
                     }
 
@@ -1363,10 +1355,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     var readResult = await context.Request.BodyReader.ReadAsync();
                     while (!readResult.IsCompleted)
                     {
-                        context.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        context.Request.BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                         readResult = await context.Request.BodyReader.ReadAsync();
                     }
 
@@ -1446,9 +1436,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.Contains(
                 LogMessages,
                 m =>
-                    m.Exception?.Message.Contains(
-                        "Response Content-Length mismatch: too many bytes written (12 of 11)."
-                    ) ?? false
+                    m.Exception?.Message
+                        .Contains(
+                            "Response Content-Length mismatch: too many bytes written (12 of 11)."
+                        ) ?? false
             );
 
             await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -2141,9 +2132,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.Contains(
                 LogMessages,
                 m =>
-                    m.Message.Contains(
-                        "the application completed without reading the entire request body."
-                    )
+                    m.Message
+                        .Contains(
+                            "the application completed without reading the entire request body."
+                        )
             );
 
             await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -2250,9 +2242,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.Contains(
                 LogMessages,
                 m =>
-                    m.Message.Contains(
-                        "the application completed without reading the entire request body."
-                    )
+                    m.Message
+                        .Contains(
+                            "the application completed without reading the entire request body."
+                        )
             );
 
             await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -2328,9 +2321,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.Contains(
                 LogMessages,
                 m =>
-                    m.Message.Contains(
-                        "the application completed without reading the entire request body."
-                    )
+                    m.Message
+                        .Contains(
+                            "the application completed without reading the entire request body."
+                        )
             );
 
             await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -2730,10 +2724,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 async context =>
                 {
                     await context.Response.WriteAsync("Hello World");
-                    context.Response.AppendTrailer(
-                        "too_long",
-                        new string('a', (int)Http2PeerSettings.DefaultMaxFrameSize)
-                    );
+                    context.Response
+                        .AppendTrailer(
+                            "too_long",
+                            new string('a', (int)Http2PeerSettings.DefaultMaxFrameSize)
+                        );
                 }
             );
 
@@ -2782,44 +2777,43 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
             await InitializeConnectionAsync(
-                    async context =>
-                    {
-                        await context.Response.StartAsync();
+                async context =>
+                {
+                    await context.Response.StartAsync();
 
-                        // Body exceeds flow control available and requires the client to allow more
-                        // data via updating the window
-                        context.Response.BodyWriter.GetMemory(windowSize + 1);
-                        context.Response.BodyWriter.Advance(windowSize + 1);
+                    // Body exceeds flow control available and requires the client to allow more
+                    // data via updating the window
+                    context.Response.BodyWriter.GetMemory(windowSize + 1);
+                    context.Response.BodyWriter.Advance(windowSize + 1);
 
-                        context.Response.AppendTrailer("CustomName", "Custom Value");
-                    }
-                )
-                .DefaultTimeout();
+                    context.Response.AppendTrailer("CustomName", "Custom Value");
+                }
+            ).DefaultTimeout();
 
             await StartStreamAsync(1, headers, endStream: true).DefaultTimeout();
 
             var headersFrame = await ExpectAsync(
-                    Http2FrameType.HEADERS,
-                    withLength: 32,
-                    withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-                    withStreamId: 1
-                )
+                Http2FrameType.HEADERS,
+                withLength: 32,
+                withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             await ExpectAsync(
-                    Http2FrameType.DATA,
-                    withLength: 16384,
-                    withFlags: (byte)Http2DataFrameFlags.NONE,
-                    withStreamId: 1
-                )
+                Http2FrameType.DATA,
+                withLength: 16384,
+                withFlags: (byte)Http2DataFrameFlags.NONE,
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             var dataTask = ExpectAsync(
-                    Http2FrameType.DATA,
-                    withLength: 1,
-                    withFlags: (byte)Http2DataFrameFlags.NONE,
-                    withStreamId: 1
-                )
+                Http2FrameType.DATA,
+                withLength: 1,
+                withFlags: (byte)Http2DataFrameFlags.NONE,
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             // Reading final frame of data requires window update
@@ -2831,13 +2825,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             await dataTask;
 
             var trailersFrame = await ExpectAsync(
-                    Http2FrameType.HEADERS,
-                    withLength: 25,
-                    withFlags: (byte)(
-                        Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
-                    ),
-                    withStreamId: 1
-                )
+                Http2FrameType.HEADERS,
+                withLength: 25,
+                withFlags: (byte)(
+                    Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+                ),
+                withStreamId: 1
+            )
                 .DefaultTimeout();
 
             await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false)
@@ -3105,14 +3099,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
                     try
                     {
-                        var readTask = context.Request.Body.ReadAsync(new byte[100], 0, 100)
+                        var readTask = context.Request.Body
+                            .ReadAsync(new byte[100], 0, 100)
                             .DefaultTimeout();
                         sem.Release();
                         await readTask;
 
-                        _runningStreams[streamIdFeature.StreamId].TrySetException(
-                            new Exception("ReadAsync was expected to throw.")
-                        );
+                        _runningStreams[streamIdFeature.StreamId]
+                            .TrySetException(new Exception("ReadAsync was expected to throw."));
                     }
                     catch (IOException) // Expected failure
                     {
@@ -3152,16 +3146,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
                     try
                     {
-                        var read = await context.Request.Body.ReadAsync(new byte[100], 0, 100)
+                        var read = await context.Request.Body
+                            .ReadAsync(new byte[100], 0, 100)
                             .DefaultTimeout();
-                        var readTask = context.Request.Body.ReadAsync(new byte[100], 0, 100)
+                        var readTask = context.Request.Body
+                            .ReadAsync(new byte[100], 0, 100)
                             .DefaultTimeout();
                         sem.Release();
                         await readTask;
 
-                        _runningStreams[streamIdFeature.StreamId].TrySetException(
-                            new Exception("ReadAsync was expected to throw.")
-                        );
+                        _runningStreams[streamIdFeature.StreamId]
+                            .TrySetException(new Exception("ReadAsync was expected to throw."));
                     }
                     catch (IOException) // Expected failure
                     {
@@ -3387,11 +3382,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     var bodyControlFeature = context.Features.Get<IHttpBodyControlFeature>();
                     bodyControlFeature.AllowSynchronousIO = true;
                     // Fill the flow control window to create async back pressure.
-                    await context.Response.Body.WriteAsync(
-                        new byte[windowSize + 1],
-                        0,
-                        windowSize + 1
-                    );
+                    await context.Response.Body
+                        .WriteAsync(new byte[windowSize + 1], 0, windowSize + 1);
                     context.Response.Body.Write(new byte[1], 0, 1);
                 }
             );
@@ -3453,8 +3445,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                         (int)Http2PeerSettings.DefaultMaxFrameSize
                     );
                     var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => context.Response.WriteAsync("Hello World")
-                        )
+                        () => context.Response.WriteAsync("Hello World")
+                    )
                         .DefaultTimeout();
                     appFinished.TrySetResult(ex.InnerException.Message);
                 }
@@ -3704,9 +3696,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     await response.StartAsync();
                     var memory = response.BodyWriter.GetMemory();
                     Assert.Equal(4096, memory.Length);
-                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes(
-                        new string('a', memory.Length)
-                    );
+                    var fisrtPartOfResponse = Encoding.ASCII
+                        .GetBytes(new string('a', memory.Length));
                     fisrtPartOfResponse.CopyTo(memory);
                     response.BodyWriter.Advance(memory.Length);
 
@@ -3770,9 +3761,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     await response.BodyWriter.FlushAsync();
 
                     var memory = response.BodyWriter.GetMemory();
-                    var fisrtPartOfResponse = Encoding.ASCII.GetBytes(
-                        new string('a', memory.Length)
-                    );
+                    var fisrtPartOfResponse = Encoding.ASCII
+                        .GetBytes(new string('a', memory.Length));
                     fisrtPartOfResponse.CopyTo(memory);
                     response.BodyWriter.Advance(memory.Length);
 
@@ -4279,9 +4269,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 async httpContext =>
                 {
                     httpContext.Response.ContentLength = 12;
-                    await httpContext.Response.Body.WriteAsync(
-                        Encoding.ASCII.GetBytes("hello, world")
-                    );
+                    await httpContext.Response.Body
+                        .WriteAsync(Encoding.ASCII.GetBytes("hello, world"));
                 }
             );
 
@@ -4340,9 +4329,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     response.BodyWriter.Advance(8);
                     await response.BodyWriter.FlushAsync();
                     await response.Body.WriteAsync(Encoding.ASCII.GetBytes("hello, world\r\n"));
-                    await response.BodyWriter.WriteAsync(
-                        Encoding.ASCII.GetBytes("hello, world\r\n")
-                    );
+                    await response.BodyWriter
+                        .WriteAsync(Encoding.ASCII.GetBytes("hello, world\r\n"));
                     await response.WriteAsync("hello, world");
                 }
             );
@@ -6071,9 +6059,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.Contains(
                 LogMessages,
                 m =>
-                    m.Message.Equals(
-                        "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
-                    )
+                    m.Message
+                        .Equals(
+                            "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
+                        )
             );
         }
     }

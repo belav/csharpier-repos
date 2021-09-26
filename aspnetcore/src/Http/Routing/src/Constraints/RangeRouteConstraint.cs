@@ -66,12 +66,13 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             {
                 var valueString = Convert.ToString(value, CultureInfo.InvariantCulture);
                 if (
-                    long.TryParse(
-                        valueString,
-                        NumberStyles.Integer,
-                        CultureInfo.InvariantCulture,
-                        out var longValue
-                    )
+                    long
+                        .TryParse(
+                            valueString,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out var longValue
+                        )
                 )
                 {
                     return longValue >= Min && longValue <= Max;

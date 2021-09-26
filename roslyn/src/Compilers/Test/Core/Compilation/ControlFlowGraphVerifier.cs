@@ -143,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var anonymousFunctionsMap = PooledDictionary<
                 IFlowAnonymousFunctionOperation,
                 ControlFlowGraph
-            >.GetInstance();
+            >
+                .GetInstance();
             var referencedLocalsAndMethods = PooledHashSet<ISymbol>.GetInstance();
             var referencedCaptureIds = PooledHashSet<CaptureId>.GetInstance();
 
@@ -460,10 +461,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 var longLivedIds = PooledHashSet<CaptureId>.GetInstance();
                 var referencedIds = PooledHashSet<CaptureId>.GetInstance();
-                var entryStates = ArrayBuilder<PooledHashSet<CaptureId>>.GetInstance(
-                    blocks.Length,
-                    fillWithValue: null
-                );
+                var entryStates = ArrayBuilder<PooledHashSet<CaptureId>>
+                    .GetInstance(blocks.Length, fillWithValue: null);
                 var regions = ArrayBuilder<ControlFlowRegion>.GetInstance();
 
                 for (int i = 1; i < blocks.Length - 1; i++)
@@ -806,7 +805,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             parent
                                 is VisualBasic.Syntax.ConditionalAccessExpressionSyntax conditional
                             && conditional.Expression == syntax
-                            && conditional.WhenNotNull.DescendantNodesAndSelf()
+                            && conditional.WhenNotNull
+                                .DescendantNodesAndSelf()
                                 .Any(
                                     n =>
                                         n.IsKind(VisualBasic.SyntaxKind.XmlElementAccessExpression)
@@ -1309,11 +1309,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     caseStmt == referenceSyntax
                                     || caseStmt.Cases.Contains(referenceSyntax as CaseClauseSyntax)
                                 )
-                                && caseStmt.Cases.Contains(
-                                    applyParenthesizedIfAnyVB(
-                                        (VisualBasicSyntaxNode)binOp.RightOperand.Syntax
-                                    ) as CaseClauseSyntax
-                                )
+                                && caseStmt.Cases
+                                    .Contains(
+                                        applyParenthesizedIfAnyVB(
+                                            (VisualBasicSyntaxNode)binOp.RightOperand.Syntax
+                                        ) as CaseClauseSyntax
+                                    )
                             )
                             {
                                 return true;
@@ -1757,7 +1758,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     if (block.BranchValue != null)
                     {
                         foreach (
-                            IFlowCaptureReferenceOperation reference in block.BranchValue.DescendantsAndSelf()
+                            IFlowCaptureReferenceOperation reference in block.BranchValue
+                                .DescendantsAndSelf()
                                 .OfType<IFlowCaptureReferenceOperation>()
                         )
                         {

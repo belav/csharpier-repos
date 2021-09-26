@@ -244,9 +244,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         public int GetHashCode(ISymbol? x) =>
             GetGetHashCodeVisitor(
-                    compareMethodTypeParametersByIndex: false,
-                    objectAndDynamicCompareEqually: false
-                )
+                compareMethodTypeParametersByIndex: false,
+                objectAndDynamicCompareEqually: false
+            )
                 .GetHashCode(x, currentHash: 0);
 
         private static ISymbol UnwrapAlias(ISymbol symbol) =>

@@ -116,61 +116,61 @@ namespace Microsoft.Extensions.StackTrace.Sources
             {
                 genericArguments =
                     "<"
-                    + string.Join(
-                        ", ",
-                        method.GetGenericArguments()
-                            .Select(
-                                arg =>
-                                    TypeNameHelper.GetTypeDisplayName(
-                                        arg,
-                                        fullName: false,
-                                        includeGenericParameterNames: true
-                                    )
-                            )
-                    )
+                    + string
+                        .Join(
+                            ", ",
+                            method.GetGenericArguments()
+                                .Select(
+                                    arg =>
+                                        TypeNameHelper.GetTypeDisplayName(
+                                            arg,
+                                            fullName: false,
+                                            includeGenericParameterNames: true
+                                        )
+                                )
+                        )
                     + ">";
             }
 
             // Method parameters
-            var parameters = method.GetParameters()
-                .Select(
-                    parameter =>
+            var parameters = method.GetParameters().Select(
+                parameter =>
+                {
+                    var parameterType = parameter.ParameterType;
+
+                    var prefix = string.Empty;
+                    if (parameter.IsOut)
                     {
-                        var parameterType = parameter.ParameterType;
-
-                        var prefix = string.Empty;
-                        if (parameter.IsOut)
-                        {
-                            prefix = "out";
-                        }
-                        else if (parameterType != null && parameterType.IsByRef)
-                        {
-                            prefix = "ref";
-                        }
-
-                        var parameterTypeString = "?";
-                        if (parameterType != null)
-                        {
-                            if (parameterType.IsByRef)
-                            {
-                                parameterType = parameterType.GetElementType();
-                            }
-
-                            parameterTypeString = TypeNameHelper.GetTypeDisplayName(
-                                parameterType!,
-                                fullName: false,
-                                includeGenericParameterNames: true
-                            );
-                        }
-
-                        return new ParameterDisplayInfo
-                        {
-                            Prefix = prefix,
-                            Name = parameter.Name,
-                            Type = parameterTypeString,
-                        };
+                        prefix = "out";
                     }
-                );
+                    else if (parameterType != null && parameterType.IsByRef)
+                    {
+                        prefix = "ref";
+                    }
+
+                    var parameterTypeString = "?";
+                    if (parameterType != null)
+                    {
+                        if (parameterType.IsByRef)
+                        {
+                            parameterType = parameterType.GetElementType();
+                        }
+
+                        parameterTypeString = TypeNameHelper.GetTypeDisplayName(
+                            parameterType!,
+                            fullName: false,
+                            includeGenericParameterNames: true
+                        );
+                    }
+
+                    return new ParameterDisplayInfo
+                    {
+                        Prefix = prefix,
+                        Name = parameter.Name,
+                        Type = parameterTypeString,
+                    };
+                }
+            );
 
             var methodDisplayInfo = new MethodDisplayInfo(
                 declaringTypeName,

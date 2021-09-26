@@ -379,19 +379,18 @@ Public Class Derived2 : Inherits Derived
 End Class
 ";
             var ERR_InvalidOverrideDueToReturn2 =
-                typeof(VisualBasic.VisualBasicCompilation).Assembly.GetType(
-                        "Microsoft.CodeAnalysis.VisualBasic.ERRID"
-                    )
+                typeof(VisualBasic.VisualBasicCompilation).Assembly
+                    .GetType("Microsoft.CodeAnalysis.VisualBasic.ERRID")
                     .GetField("ERR_InvalidOverrideDueToReturn2")
                     .GetValue(null);
             CreateVisualBasicCompilation(
-                    vbSource,
-                    referencedAssemblies: new[]
-                    {
-                        CorelibraryWithCovariantReturnSupport,
-                        csharpReference
-                    }
-                )
+                vbSource,
+                referencedAssemblies: new[]
+                {
+                    CorelibraryWithCovariantReturnSupport,
+                    csharpReference
+                }
+            )
                 .VerifyDiagnostics(
                     //BC30437: 'Public Overrides Function M() As Object' cannot override 'Public Overridable Overloads Function M() As String' because they differ by their return types.
                     //Public Overrides Function M() As Object
@@ -480,16 +479,17 @@ End Class
 ";
             var compilationOptions = new VisualBasic.VisualBasicCompilationOptions(
                 OutputKind.ConsoleApplication
-            ).WithOptimizationLevel(OptimizationLevel.Release);
+            )
+                .WithOptimizationLevel(OptimizationLevel.Release);
             var vbCompilation = CreateVisualBasicCompilation(
-                    vbSource,
-                    compilationOptions: compilationOptions,
-                    referencedAssemblies: new[]
-                    {
-                        CorelibraryWithCovariantReturnSupport,
-                        csharpReference
-                    }
-                )
+                vbSource,
+                compilationOptions: compilationOptions,
+                referencedAssemblies: new[]
+                {
+                    CorelibraryWithCovariantReturnSupport,
+                    csharpReference
+                }
+            )
                 .VerifyDiagnostics();
 
             var expectedOutput = !ExecutionConditionUtil.RuntimeSupportsCovariantReturnsOfClasses
@@ -505,10 +505,10 @@ Derived2.M
 Derived2.P
 Derived2[]";
             CompileAndVerify(
-                    vbCompilation,
-                    verify: Verification.Skipped,
-                    expectedOutput: expectedOutput
-                )
+                vbCompilation,
+                verify: Verification.Skipped,
+                expectedOutput: expectedOutput
+            )
                 .VerifyIL(
                     "Derived2.Test",
                     @"
@@ -575,10 +575,10 @@ public class Mid : Base
 }
 ";
             var ref1a = CreateCovariantCompilation(
-                    s1a,
-                    references: new[] { ref0 },
-                    assemblyName: "ref1"
-                )
+                s1a,
+                references: new[] { ref0 },
+                assemblyName: "ref1"
+            )
                 .VerifyEmitDiagnostics()
                 .EmitToImageReference();
 
@@ -590,10 +590,10 @@ public class Mid : Base
 }
 ";
             var ref1b = CreateCovariantCompilation(
-                    s1b,
-                    references: new[] { ref0 },
-                    assemblyName: "ref1"
-                )
+                s1b,
+                references: new[] { ref0 },
+                assemblyName: "ref1"
+            )
                 .VerifyEmitDiagnostics()
                 .EmitToImageReference();
 
@@ -605,10 +605,10 @@ public class Derived : Mid
 }
 ";
             var ref2 = CreateCovariantCompilation(
-                    s2,
-                    references: new[] { ref0, ref1a },
-                    assemblyName: "ref2"
-                )
+                s2,
+                references: new[] { ref0, ref1a },
+                assemblyName: "ref2"
+            )
                 .VerifyEmitDiagnostics()
                 .EmitToImageReference();
 

@@ -28,13 +28,12 @@ namespace BasicTestApp
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<Index>("root");
 
-            builder.Services.AddSingleton(
-                new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }
-            );
-            builder.Services.AddSingleton<
-                AuthenticationStateProvider,
-                ServerAuthenticationStateProvider
-            >();
+            builder.Services
+                .AddSingleton(
+                    new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }
+                );
+            builder.Services
+                .AddSingleton<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
             builder.Services.AddAuthorizationCore(
                 options =>
                 {
@@ -52,13 +51,14 @@ namespace BasicTestApp
 
             builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
-            builder.Logging.Services.AddSingleton<ILoggerProvider, PrependMessageLoggerProvider>(
-                s =>
-                    new PrependMessageLoggerProvider(
-                        builder.Configuration["Logging:PrependMessage:Message"],
-                        s.GetService<IJSRuntime>()
-                    )
-            );
+            builder.Logging.Services
+                .AddSingleton<ILoggerProvider, PrependMessageLoggerProvider>(
+                    s =>
+                        new PrependMessageLoggerProvider(
+                            builder.Configuration["Logging:PrependMessage:Message"],
+                            s.GetService<IJSRuntime>()
+                        )
+                );
 
             var host = builder.Build();
             ConfigureCulture(host);

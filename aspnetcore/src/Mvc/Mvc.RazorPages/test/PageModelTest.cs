@@ -1858,8 +1858,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             // Arrange
             var valueProviderFactory = new Mock<IValueProviderFactory>();
             valueProviderFactory.Setup(
-                    f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())
-                )
+                f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())
+            )
                 .Throws(new ValueProviderException("some error"));
 
             var pageModel = new TestPageModel
@@ -1892,9 +1892,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var urlHelperFactory = new Mock<IUrlHelperFactory>();
             urlHelperFactory.Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>()))
                 .Returns(urlHelper);
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    urlHelperFactory.Object
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(urlHelperFactory.Object)
                 .BuildServiceProvider();
             var actionContext = new ActionContext { HttpContext = httpContext, };
             var pageContext = new PageContext { HttpContext = httpContext, };
@@ -1966,10 +1965,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 .Verifiable();
 
             // Act
-            await testPageModel.Object.OnPageHandlerExecutionAsync(
-                pageHandlerExecutingContext,
-                () => Task.FromResult(pageHandlerExecutedContext)
-            );
+            await testPageModel.Object
+                .OnPageHandlerExecutionAsync(
+                    pageHandlerExecutingContext,
+                    () => Task.FromResult(pageHandlerExecutedContext)
+                );
 
             testPageModel.Verify();
         }
@@ -2009,10 +2009,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 .Throws(new Exception("Shouldn't be called"));
 
             // Act
-            await testPageModel.Object.OnPageHandlerExecutionAsync(
-                pageHandlerExecutingContext,
-                () => Task.FromResult(pageHandlerExecutedContext)
-            );
+            await testPageModel.Object
+                .OnPageHandlerExecutionAsync(
+                    pageHandlerExecutingContext,
+                    () => Task.FromResult(pageHandlerExecutedContext)
+                );
 
             testPageModel.Verify();
         }

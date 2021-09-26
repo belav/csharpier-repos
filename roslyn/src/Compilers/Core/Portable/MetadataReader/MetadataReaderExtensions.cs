@@ -31,18 +31,20 @@ namespace Microsoft.CodeAnalysis
                     var parts = version.Substring(prefix.Length).Split('.');
                     if (
                         (parts.Length == 2)
-                        && int.TryParse(
-                            parts[0],
-                            NumberStyles.None,
-                            CultureInfo.InvariantCulture,
-                            out majorVersion
-                        )
-                        && int.TryParse(
-                            parts[1],
-                            NumberStyles.None,
-                            CultureInfo.InvariantCulture,
-                            out minorVersion
-                        )
+                        && int
+                            .TryParse(
+                                parts[0],
+                                NumberStyles.None,
+                                CultureInfo.InvariantCulture,
+                                out majorVersion
+                            )
+                        && int
+                            .TryParse(
+                                parts[1],
+                                NumberStyles.None,
+                                CultureInfo.InvariantCulture,
+                                out minorVersion
+                            )
                     )
                     {
                         return true;
@@ -80,9 +82,8 @@ namespace Microsoft.CodeAnalysis
             this MetadataReader reader
         )
         {
-            var result = ArrayBuilder<AssemblyIdentity>.GetInstance(
-                reader.AssemblyReferences.Count
-            );
+            var result = ArrayBuilder<AssemblyIdentity>
+                .GetInstance(reader.AssemblyReferences.Count);
             try
             {
                 foreach (var assemblyRef in reader.AssemblyReferences)

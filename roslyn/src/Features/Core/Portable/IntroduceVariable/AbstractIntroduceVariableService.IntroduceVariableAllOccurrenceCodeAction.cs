@@ -48,22 +48,22 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             )
             {
                 document = await Simplifier.ReduceAsync(
-                        document,
-                        Simplifier.Annotation,
-                        cancellationToken: cancellationToken
-                    )
+                    document,
+                    Simplifier.Annotation,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 document = await Formatter.FormatAsync(
-                        document,
-                        Formatter.Annotation,
-                        cancellationToken: cancellationToken
-                    )
+                    document,
+                    Formatter.Annotation,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 document = await CaseCorrector.CaseCorrectAsync(
-                        document,
-                        CaseCorrector.Annotation,
-                        cancellationToken
-                    )
+                    document,
+                    CaseCorrector.Annotation,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return document;
             }

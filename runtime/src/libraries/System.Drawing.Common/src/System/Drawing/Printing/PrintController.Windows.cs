@@ -264,9 +264,8 @@ namespace System.Drawing.Printing
         /// </summary>
         public virtual void OnStartPrint(PrintDocument document, PrintEventArgs e)
         {
-            _modeHandle = (SafeDeviceModeHandle)document.PrinterSettings.GetHdevmode(
-                document.DefaultPageSettings
-            );
+            _modeHandle = (SafeDeviceModeHandle)document.PrinterSettings
+                .GetHdevmode(document.DefaultPageSettings);
         }
 
         /// <summary>

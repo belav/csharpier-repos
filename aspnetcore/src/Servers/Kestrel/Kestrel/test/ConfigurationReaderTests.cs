@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadCertificatesWhenEmptyCertificatesSection_ReturnsEmptyCollection()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[] { new KeyValuePair<string, string>("Certificates", ""), }
                 )
                 .Build();
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadCertificatesSection_ReturnsCollection()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -95,7 +97,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadCertificatesSection_IsCaseInsensitive()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -126,7 +129,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         {
             var exception = Assert.Throws<ArgumentException>(
                 () =>
-                    new ConfigurationBuilder().AddInMemoryCollection(
+                    new ConfigurationBuilder()
+                        .AddInMemoryCollection(
                             new[]
                             {
                                 new KeyValuePair<string, string>(
@@ -158,9 +162,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointsWhenEmptyEndpointsSection_ReturnsEmptyCollection()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
-                    new[] { new KeyValuePair<string, string>("Endpoints", ""), }
-                )
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("Endpoints", ""), })
                 .Build();
             var reader = new ConfigurationReader(config);
             var endpoints = reader.Endpoints;
@@ -171,7 +174,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointWithMissingUrl_Throws()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[] { new KeyValuePair<string, string>("Endpoints:End1", ""), }
                 )
                 .Build();
@@ -182,7 +186,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointWithEmptyUrl_Throws()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", ""), }
                 )
                 .Build();
@@ -193,7 +198,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointsSection_ReturnsCollection()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -292,7 +298,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointWithSingleSslProtocolSet_ReturnsCorrectValue()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -309,7 +316,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointWithMultipleSslProtocolsSet_ReturnsCorrectValue()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -327,7 +335,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointWithSslProtocolSet_ReadsCaseInsensitive()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -344,7 +353,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointWithNoSslProtocolSettings_ReturnsNull()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -360,7 +370,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointWithEmptySniSection_ReturnsEmptyCollection()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -378,7 +389,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointWithEmptySniKey_Throws()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -396,7 +408,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointWithSniConfigured_ReturnsCorrectValue()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -443,7 +456,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointDefaultsWithSingleSslProtocolSet_ReturnsCorrectValue()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -472,7 +486,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointWithNoClientCertificateModeSettings_ReturnsNull()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
@@ -488,7 +503,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void ReadEndpointDefaultsWithClientCertificateModeSet_ReturnsCorrectValue()
         {
-            var config = new ConfigurationBuilder().AddInMemoryCollection(
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(

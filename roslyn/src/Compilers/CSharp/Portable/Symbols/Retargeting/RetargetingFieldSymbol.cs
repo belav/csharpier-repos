@@ -56,10 +56,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
         {
-            return this.RetargetingTranslator.Retarget(
-                _underlyingField.GetFieldType(fieldsBeingBound),
-                RetargetOptions.RetargetPrimitiveTypesByTypeCode
-            );
+            return this.RetargetingTranslator
+                .Retarget(
+                    _underlyingField.GetFieldType(fieldsBeingBound),
+                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                );
         }
 
         public override Symbol ContainingSymbol
@@ -69,19 +70,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            return this.RetargetingTranslator.GetRetargetedAttributes(
-                _underlyingField.GetAttributes(),
-                ref _lazyCustomAttributes
-            );
+            return this.RetargetingTranslator
+                .GetRetargetedAttributes(
+                    _underlyingField.GetAttributes(),
+                    ref _lazyCustomAttributes
+                );
         }
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
         )
         {
-            return this.RetargetingTranslator.RetargetAttributes(
-                _underlyingField.GetCustomAttributesToEmit(moduleBuilder)
-            );
+            return this.RetargetingTranslator
+                .RetargetAttributes(_underlyingField.GetCustomAttributesToEmit(moduleBuilder));
         }
 
         public override AssemblySymbol ContainingAssembly

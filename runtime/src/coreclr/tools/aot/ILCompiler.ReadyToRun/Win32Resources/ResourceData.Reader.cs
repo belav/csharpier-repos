@@ -61,8 +61,8 @@ namespace ILCompiler.Win32Resources
 
                         // The actual resource data offset is relative to the start address of the file
                         BlobReader resourceDataBlob = peFile.GetSectionData(
-                                checked((int)resourceData.OffsetToData)
-                            )
+                            checked((int)resourceData.OffsetToData)
+                        )
                             .GetReader(0, checked((int)resourceData.Size));
                         byte[] data = resourceDataBlob.ReadBytes((int)resourceData.Size);
 

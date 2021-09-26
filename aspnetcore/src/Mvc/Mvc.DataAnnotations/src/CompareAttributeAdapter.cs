@@ -85,12 +85,13 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             public override string FormatErrorMessage(string name)
             {
                 var displayName = ValidationContext.ModelMetadata.GetDisplayName();
-                return string.Format(
-                    CultureInfo.CurrentCulture,
-                    ErrorMessageString,
-                    displayName,
-                    GetOtherPropertyDisplayName(ValidationContext, this)
-                );
+                return string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        ErrorMessageString,
+                        displayName,
+                        GetOtherPropertyDisplayName(ValidationContext, this)
+                    );
             }
 
             public static string GetOtherPropertyDisplayName(
@@ -107,10 +108,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     && validationContext.ModelMetadata.ContainerType != null
                 )
                 {
-                    var otherProperty = validationContext.MetadataProvider.GetMetadataForProperty(
-                        validationContext.ModelMetadata.ContainerType,
-                        attribute.OtherProperty
-                    );
+                    var otherProperty = validationContext.MetadataProvider
+                        .GetMetadataForProperty(
+                            validationContext.ModelMetadata.ContainerType,
+                            attribute.OtherProperty
+                        );
                     if (otherProperty != null)
                     {
                         return otherProperty.GetDisplayName();

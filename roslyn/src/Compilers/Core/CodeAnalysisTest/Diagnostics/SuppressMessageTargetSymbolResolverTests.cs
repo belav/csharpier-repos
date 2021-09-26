@@ -1701,24 +1701,26 @@ End Class
                     {
                         Assert.True(
                             false,
-                            string.Format(
-                                "Expected to resolve FxCop fully-qualified name '{0}' to '{1}': got multiple symbols:\r\n{2}",
-                                fxCopName,
-                                expectedSymbol,
-                                string.Join("\r\n", symbols)
-                            )
+                            string
+                                .Format(
+                                    "Expected to resolve FxCop fully-qualified name '{0}' to '{1}': got multiple symbols:\r\n{2}",
+                                    fxCopName,
+                                    expectedSymbol,
+                                    string.Join("\r\n", symbols)
+                                )
                         );
                     }
 
                     var symbol = symbols.SingleOrDefault();
                     Assert.True(
                         expectedSymbol == symbol,
-                        string.Format(
-                            "Failed to resolve FxCop fully-qualified name '{0}' to symbol '{1}': got '{2}'",
-                            fxCopName,
-                            expectedSymbol,
-                            symbol
-                        )
+                        string
+                            .Format(
+                                "Failed to resolve FxCop fully-qualified name '{0}' to symbol '{1}': got '{2}'",
+                                fxCopName,
+                                expectedSymbol,
+                                symbol
+                            )
                     );
                 }
                 else
@@ -1727,12 +1729,13 @@ End Class
                     {
                         Assert.True(
                             expectedSymbols.Contains(symbol),
-                            string.Format(
-                                "Failed to resolve FxCop fully-qualified name '{0}' to symbols:\r\n{1}\r\nResolved to unexpected symbol '{2}'",
-                                fxCopName,
-                                string.Join("\r\n", expectedSymbols),
-                                symbol
-                            )
+                            string
+                                .Format(
+                                    "Failed to resolve FxCop fully-qualified name '{0}' to symbols:\r\n{1}\r\nResolved to unexpected symbol '{2}'",
+                                    fxCopName,
+                                    string.Join("\r\n", expectedSymbols),
+                                    symbol
+                                )
                         );
                     }
                 }
@@ -1776,11 +1779,12 @@ End Class
 
                 Assert.True(
                     symbols.FirstOrDefault() == null,
-                    string.Format(
-                        "Did not expect FxCop fully-qualified name '{0}' to resolve to any symbol: resolved to:\r\n{1}",
-                        fxCopName,
-                        string.Join("\r\n", symbols)
-                    )
+                    string
+                        .Format(
+                            "Did not expect FxCop fully-qualified name '{0}' to resolve to any symbol: resolved to:\r\n{1}",
+                            fxCopName,
+                            string.Join("\r\n", symbols)
+                        )
                 );
             }
         }

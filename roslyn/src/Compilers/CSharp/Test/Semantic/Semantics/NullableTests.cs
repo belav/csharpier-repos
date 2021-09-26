@@ -1997,17 +1997,16 @@ class A
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,18): error CS0019: Operator '&&' cannot be applied to operands of type 'bool?' and 'bool?'
-                    //         var bb = b1 && b2;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "b1 && b2")
-                        .WithArguments("&&", "bool?", "bool?"),
-                    // (8,14): error CS0019: Operator '||' cannot be applied to operands of type 'bool?' and 'bool?'
-                    //         bb = b1 || b2;
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "b1 || b2")
-                        .WithArguments("||", "bool?", "bool?")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,18): error CS0019: Operator '&&' cannot be applied to operands of type 'bool?' and 'bool?'
+                //         var bb = b1 && b2;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "b1 && b2")
+                    .WithArguments("&&", "bool?", "bool?"),
+                // (8,14): error CS0019: Operator '||' cannot be applied to operands of type 'bool?' and 'bool?'
+                //         bb = b1 || b2;
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "b1 || b2")
+                    .WithArguments("||", "bool?", "bool?")
+            );
         }
 
         [Fact]
@@ -2168,14 +2167,13 @@ class Program
     }
 }";
 
-            CompileAndVerify(source, expectedOutput: "False")
-                .VerifyDiagnostics(
-                    // (9,28): warning CS0458: The result of the expression is always 'null' of type 'int?'
-                    //         Console.WriteLine((xn0 - null).HasValue);
-                    Diagnostic(ErrorCode.WRN_AlwaysNull, "xn0 - null")
-                        .WithArguments("int?")
-                        .WithLocation(9, 28)
-                );
+            CompileAndVerify(source, expectedOutput: "False").VerifyDiagnostics(
+                // (9,28): warning CS0458: The result of the expression is always 'null' of type 'int?'
+                //         Console.WriteLine((xn0 - null).HasValue);
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "xn0 - null")
+                    .WithArguments("int?")
+                    .WithLocation(9, 28)
+            );
         }
 
         [Fact]

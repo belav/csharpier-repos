@@ -102,7 +102,8 @@ namespace Microsoft.AspNetCore.Mvc
 
         private static IServiceProvider CreateServices(IAuthenticationService auth)
         {
-            return new ServiceCollection().AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
+            return new ServiceCollection()
+                .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
                 .AddSingleton(auth)
                 .BuildServiceProvider();
         }

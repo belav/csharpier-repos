@@ -107,11 +107,11 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         )
         {
             var context = await GetChangeSignatureContextAsync(
-                    document,
-                    span.Start,
-                    restrictToDeclarations: true,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                span.Start,
+                restrictToDeclarations: true,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return
@@ -131,20 +131,20 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         )
         {
             var (symbol, selectedIndex) = await GetInvocationSymbolAsync(
-                    document,
-                    position,
-                    restrictToDeclarations,
-                    cancellationToken
-                )
+                document,
+                position,
+                restrictToDeclarations,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Cross-language symbols will show as metadata, so map it to source if possible.
             symbol =
                 await SymbolFinder.FindSourceDefinitionAsync(
-                        symbol,
-                        document.Project.Solution,
-                        cancellationToken
-                    )
+                    symbol,
+                    document.Project.Solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false) ?? symbol;
 
             if (symbol == null)
@@ -253,10 +253,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             {
                 ChangeSignatureAnalysisSucceededContext changeSignatureAnalyzedSucceedContext
                   => await GetChangeSignatureResultAsync(
-                          changeSignatureAnalyzedSucceedContext,
-                          options,
-                          cancellationToken
-                      )
+                      changeSignatureAnalyzedSucceedContext,
+                      options,
+                      cancellationToken
+                  )
                       .ConfigureAwait(false),
                 CannotChangeSignatureAnalyzedContext cannotChangeSignatureAnalyzedContext
                   => new ChangeSignatureResult(
@@ -278,10 +278,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 }
 
                 var (updatedSolution, confirmationMessage) = await CreateUpdatedSolutionAsync(
-                        context,
-                        options,
-                        cancellationToken
-                    )
+                    context,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return new ChangeSignatureResult(
                     updatedSolution != null,
@@ -304,8 +304,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 return null;
             }
 
-            var changeSignatureOptionsService =
-                succeededContext.Solution.Workspace.Services.GetRequiredService<IChangeSignatureOptionsService>();
+            var changeSignatureOptionsService = succeededContext.Solution.Workspace.Services
+                .GetRequiredService<IChangeSignatureOptionsService>();
 
             return changeSignatureOptionsService.GetChangeSignatureOptions(
                 succeededContext.Document,
@@ -330,9 +330,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 var engine = new FindReferencesSearchEngine(
                     solution,
                     documents: null,
-                    ReferenceFinders.DefaultReferenceFinders.Add(
-                        DelegateInvokeMethodReferenceFinder.DelegateInvokeMethod
-                    ),
+                    ReferenceFinders.DefaultReferenceFinders
+                        .Add(DelegateInvokeMethodReferenceFinder.DelegateInvokeMethod),
                     streamingProgress,
                     FindReferencesSearchOptions.Default,
                     cancellationToken
@@ -362,10 +361,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             string? confirmationMessage = null;
 
             var symbols = await FindChangeSignatureReferencesAsync(
-                    declaredSymbol,
-                    context.Solution,
-                    cancellationToken
-                )
+                declaredSymbol,
+                context.Solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var declaredSymbolParametersCount = declaredSymbol.GetParameters().Length;
@@ -525,8 +524,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             foreach (var docId in nodesToUpdate.Keys)
             {
                 var doc = currentSolution.GetRequiredDocument(docId);
-                var updater =
-                    doc.Project.LanguageServices.GetRequiredService<AbstractChangeSignatureService>();
+                var updater = doc.Project.LanguageServices
+                    .GetRequiredService<AbstractChangeSignatureService>();
                 var root = await doc.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
                 if (root is null)
                 {
@@ -542,16 +541,16 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     (originalNode, potentiallyUpdatedNode) =>
                     {
                         return updater.ChangeSignatureAsync(
-                                doc,
+                            doc,
+                            definitionToUse[originalNode],
+                            potentiallyUpdatedNode,
+                            originalNode,
+                            UpdateSignatureChangeToIncludeExtraParametersFromTheDeclarationSymbol(
                                 definitionToUse[originalNode],
-                                potentiallyUpdatedNode,
-                                originalNode,
-                                UpdateSignatureChangeToIncludeExtraParametersFromTheDeclarationSymbol(
-                                    definitionToUse[originalNode],
-                                    options.UpdatedSignature
-                                ),
-                                cancellationToken
-                            )
+                                options.UpdatedSignature
+                            ),
+                            cancellationToken
+                        )
                             .WaitAndGetResult_CanCallOnBackground(cancellationToken);
                     }
                 );
@@ -578,21 +577,21 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 var updatedDoc = currentSolution.GetRequiredDocument(docId)
                     .WithSyntaxRoot(updatedRoots[docId]);
                 var docWithImports = await ImportAdder.AddImportsFromSymbolAnnotationAsync(
-                        updatedDoc,
-                        cancellationToken: cancellationToken
-                    )
+                    updatedDoc,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 var reducedDoc = await Simplifier.ReduceAsync(
-                        docWithImports,
-                        Simplifier.Annotation,
-                        cancellationToken: cancellationToken
-                    )
+                    docWithImports,
+                    Simplifier.Annotation,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 var formattedDoc = await Formatter.FormatAsync(
-                        reducedDoc,
-                        SyntaxAnnotation.ElasticAnnotation,
-                        cancellationToken: cancellationToken
-                    )
+                    reducedDoc,
+                    SyntaxAnnotation.ElasticAnnotation,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 currentSolution = currentSolution.WithDocumentSyntaxRoot(
@@ -700,9 +699,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             argumentsToPermute.Sort(
                 (a1, a2) =>
                 {
-                    return parameterToIndexMap[argumentToParameterMap[a1]].CompareTo(
-                        parameterToIndexMap[argumentToParameterMap[a2]]
-                    );
+                    return parameterToIndexMap[argumentToParameterMap[a1]]
+                        .CompareTo(parameterToIndexMap[argumentToParameterMap[a2]]);
                 }
             );
 
@@ -787,7 +785,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
 
                 if (
                     !arguments[i].IsNamed
-                    || updatedSignature.UpdatedConfiguration.ToListOfParameters()
+                    || updatedSignature.UpdatedConfiguration
+                        .ToListOfParameters()
                         .Any(p => p.Name == arguments[i].GetName())
                 )
                 {
@@ -813,10 +812,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 > updatedSignature.OriginalConfiguration.ToListOfParameters().Length
             )
             {
-                var originalConfigurationParameters =
-                    updatedSignature.OriginalConfiguration.ToListOfParameters();
-                var updatedConfigurationParameters =
-                    updatedSignature.UpdatedConfiguration.ToListOfParameters();
+                var originalConfigurationParameters = updatedSignature.OriginalConfiguration
+                    .ToListOfParameters();
+                var updatedConfigurationParameters = updatedSignature.UpdatedConfiguration
+                    .ToListOfParameters();
 
                 var realParameters = declarationSymbol.GetParameters();
                 var bonusParameters = realParameters.Skip(originalConfigurationParameters.Length);
@@ -1072,11 +1071,11 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                         }
 
                         var expression = await GenerateInferredCallsiteExpressionAsync(
-                                document,
-                                position,
-                                addedParameter,
-                                cancellationToken
-                            )
+                            document,
+                            position,
+                            addedParameter,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                         if (expression == null)
@@ -1234,12 +1233,12 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var recommendations = await Recommender.GetRecommendedSymbolsAtPositionAsync(
-                    semanticModel,
-                    position,
-                    document.Project.Solution.Workspace,
-                    options: null,
-                    cancellationToken
-                )
+                semanticModel,
+                position,
+                document.Project.Solution.Workspace,
+                options: null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var sourceSymbols = recommendations.Where(r => r.IsNonImplicitAndFromSource());
@@ -1248,8 +1247,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             // we do not have to worry about filtering out inaccessible locals.
             // TODO: Support range variables here as well: https://github.com/dotnet/roslyn/issues/44689
             var orderedLocalAndParameterSymbols = sourceSymbols.Where(
-                    s => s.IsKind(SymbolKind.Local) || s.IsKind(SymbolKind.Parameter)
-                )
+                s => s.IsKind(SymbolKind.Local) || s.IsKind(SymbolKind.Parameter)
+            )
                 .OrderByDescending(s => s.Locations.First().SourceSpan.Start);
 
             // No particular ordering preference for properties/fields.
@@ -1270,10 +1269,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 }
 
                 if (
-                    semanticModel.Compilation.ClassifyCommonConversion(
-                        symbolType,
-                        addedParameter.Type
-                    ).IsImplicit
+                    semanticModel.Compilation
+                        .ClassifyCommonConversion(symbolType, addedParameter.Type).IsImplicit
                 )
                 {
                     return Generator.IdentifierName(symbol.Name);
@@ -1332,7 +1329,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     if (index < permutedParamNodes.Length)
                     {
                         updatedNodeList.Add(
-                            permutedParamNodes[index].WithLeadingTrivia(content.GetLeadingTrivia())
+                            permutedParamNodes[index]
+                                .WithLeadingTrivia(content.GetLeadingTrivia())
                                 .WithTrailingTrivia(content.GetTrailingTrivia())
                         );
                         index++;
@@ -1348,8 +1346,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     updatedNodeList.ToImmutableAndFree()
                 );
                 newDocComments = newDocComments.WithLeadingTrivia(
-                        structuredTrivia.GetLeadingTrivia()
-                    )
+                    structuredTrivia.GetLeadingTrivia()
+                )
                     .WithTrailingTrivia(structuredTrivia.GetTrailingTrivia());
                 var newTrivia = Generator.Trivia(newDocComments);
                 updatedLeadingTrivia.Add(newTrivia);
@@ -1368,10 +1366,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     extraNodeList,
                     node.GetTrailingTrivia(),
                     lastWhiteSpaceTrivia,
-                    document.Project.Solution.Options.GetOption(
-                        FormattingOptions.NewLine,
-                        document.Project.Language
-                    )
+                    document.Project.Solution.Options
+                        .GetOption(FormattingOptions.NewLine, document.Project.Language)
                 );
 
                 var newTrivia = Generator.Trivia(extraDocComments);
@@ -1417,10 +1413,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                             cancellationToken
                         );
                         var toType = methodSymbol.Parameters.Last().Type;
-                        return !semanticModel.Compilation.HasImplicitConversion(
-                            fromType.Type,
-                            toType
-                        );
+                        return !semanticModel.Compilation
+                            .HasImplicitConversion(fromType.Type, toType);
                     }
                 }
             }

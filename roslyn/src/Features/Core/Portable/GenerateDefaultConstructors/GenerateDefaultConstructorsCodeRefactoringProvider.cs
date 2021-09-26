@@ -61,10 +61,10 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
 
             var service = document.GetLanguageService<IGenerateDefaultConstructorsService>();
             var actions = await service.GenerateDefaultConstructorsAsync(
-                    document,
-                    textSpan,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
         }

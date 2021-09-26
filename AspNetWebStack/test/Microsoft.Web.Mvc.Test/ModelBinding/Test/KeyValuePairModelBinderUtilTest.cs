@@ -17,10 +17,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
                 ModelBinderProviders = new ModelBinderProviderCollection(),
@@ -29,8 +27,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -39,11 +37,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                true /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    true /* suppressPrefixCheck */
+                );
 
             // Act
             int model;
@@ -69,10 +68,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
                 ModelBinderProviders = new ModelBinderProviderCollection(),
@@ -81,8 +78,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -90,11 +87,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                true /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    true /* suppressPrefixCheck */
+                );
 
             // Act
             int model;
@@ -120,10 +118,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
                 ModelBinderProviders = new ModelBinderProviderCollection(),

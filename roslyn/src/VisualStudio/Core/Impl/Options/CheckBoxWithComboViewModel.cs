@@ -53,8 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             SetProperty(ref _isChecked, codeStyleOption.Value);
 
             var notificationViewModel = items.Where(
-                    i => i.Notification.Severity == codeStyleOption.Notification.Severity
-                )
+                i => i.Notification.Severity == codeStyleOption.Notification.Severity
+            )
                 .Single();
             SetProperty(ref _selectedNotificationOption, notificationViewModel);
         }

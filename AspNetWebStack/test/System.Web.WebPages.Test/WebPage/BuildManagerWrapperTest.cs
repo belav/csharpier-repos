@@ -269,9 +269,8 @@ namespace System.Web.WebPages.Test
             // Assert
             vpp.Verify();
             Assert.False(exists);
-            object cachedValue = HttpRuntime.Cache.Get(
-                BuildManagerWrapper.KeyGuid + "_" + virtualPath
-            );
+            object cachedValue = HttpRuntime.Cache
+                .Get(BuildManagerWrapper.KeyGuid + "_" + virtualPath);
             Assert.NotNull(cachedValue);
             Assert.False(
                 (bool)cachedValue.GetType().GetProperty("Exists").GetValue(cachedValue, null)
@@ -287,25 +286,25 @@ namespace System.Web.WebPages.Test
 
             Mock<VirtualPathProvider> mockProvider1 = new Mock<VirtualPathProvider>();
             mockProvider1.Setup(
-                    c => c.FileExists(It.Is<string>(p => p.Equals(_precompileConfigFileName)))
-                )
+                c => c.FileExists(It.Is<string>(p => p.Equals(_precompileConfigFileName)))
+            )
                 .Returns(true)
                 .Verifiable();
             mockProvider1.Setup(
-                    c => c.GetFile(It.Is<string>(p => p.Equals(_precompileConfigFileName)))
-                )
+                c => c.GetFile(It.Is<string>(p => p.Equals(_precompileConfigFileName)))
+            )
                 .Returns(GetFile(fileContent))
                 .Verifiable();
 
             Mock<VirtualPathProvider> mockProvider2 = new Mock<VirtualPathProvider>();
             mockProvider2.Setup(
-                    c => c.FileExists(It.Is<string>(p => p.Equals(_precompileConfigFileName)))
-                )
+                c => c.FileExists(It.Is<string>(p => p.Equals(_precompileConfigFileName)))
+            )
                 .Returns(true)
                 .Verifiable();
             mockProvider2.Setup(
-                    c => c.GetFile(It.Is<string>(p => p.Equals(_precompileConfigFileName)))
-                )
+                c => c.GetFile(It.Is<string>(p => p.Equals(_precompileConfigFileName)))
+            )
                 .Returns(GetFile(fileContent))
                 .Verifiable();
 

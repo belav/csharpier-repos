@@ -29,12 +29,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             controller.Actions.Add(action);
             action.Controller = controller;
 
-            controller.ControllerProperties.Add(
-                new PropertyModel(
-                    controller.ControllerType.AsType().GetProperty("TestProperty"),
-                    new List<object>() {  }
-                )
-            );
+            controller.ControllerProperties
+                .Add(
+                    new PropertyModel(
+                        controller.ControllerType.AsType().GetProperty("TestProperty"),
+                        new List<object>() {  }
+                    )
+                );
 
             var route = new AttributeRouteModel(new HttpGetAttribute("api/Products"));
             controller.Selectors.Add(new SelectorModel() { AttributeRouteModel = route });
@@ -80,21 +81,21 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             );
 
             var selectorModel = new SelectorModel();
-            selectorModel.ActionConstraints.Add(
-                new HttpMethodActionConstraint(new string[] { "GET" })
-            );
+            selectorModel.ActionConstraints
+                .Add(new HttpMethodActionConstraint(new string[] { "GET" }));
             controller.Selectors.Add(selectorModel);
             controller.Application = new ApplicationModel();
             controller.ControllerName = "cool";
             controller.Filters.Add(new MyFilterAttribute());
             controller.RouteValues.Add("key", "value");
             controller.Properties.Add(new KeyValuePair<object, object>("test key", "test value"));
-            controller.ControllerProperties.Add(
-                new PropertyModel(
-                    typeof(TestController).GetProperty("TestProperty"),
-                    new List<object>()
-                )
-            );
+            controller.ControllerProperties
+                .Add(
+                    new PropertyModel(
+                        typeof(TestController).GetProperty("TestProperty"),
+                        new List<object>()
+                    )
+                );
 
             // Act
             var controller2 = new ControllerModel(controller);

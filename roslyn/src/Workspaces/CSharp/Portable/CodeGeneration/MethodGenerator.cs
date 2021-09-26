@@ -240,17 +240,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (methodDeclaration.ExpressionBody == null)
             {
                 var expressionBodyPreference =
-                    options.Options.GetOption(
-                        CSharpCodeStyleOptions.PreferExpressionBodiedMethods
-                    ).Value;
+                    options.Options
+                        .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedMethods).Value;
                 if (
-                    methodDeclaration.Body.TryConvertToArrowExpressionBody(
-                        methodDeclaration.Kind(),
-                        parseOptions,
-                        expressionBodyPreference,
-                        out var expressionBody,
-                        out var semicolonToken
-                    )
+                    methodDeclaration.Body
+                        .TryConvertToArrowExpressionBody(
+                            methodDeclaration.Kind(),
+                            parseOptions,
+                            expressionBodyPreference,
+                            out var expressionBody,
+                            out var semicolonToken
+                        )
                 )
                 {
                     return methodDeclaration.WithBody(null)
@@ -271,17 +271,19 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (localFunctionDeclaration.ExpressionBody == null)
             {
                 var expressionBodyPreference =
-                    options.Options.GetOption(
-                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions
-                    ).Value;
+                    options.Options
+                        .GetOption(
+                            CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions
+                        ).Value;
                 if (
-                    localFunctionDeclaration.Body.TryConvertToArrowExpressionBody(
-                        localFunctionDeclaration.Kind(),
-                        parseOptions,
-                        expressionBodyPreference,
-                        out var expressionBody,
-                        out var semicolonToken
-                    )
+                    localFunctionDeclaration.Body
+                        .TryConvertToArrowExpressionBody(
+                            localFunctionDeclaration.Kind(),
+                            parseOptions,
+                            expressionBodyPreference,
+                            out var expressionBody,
+                            out var semicolonToken
+                        )
                 )
                 {
                     return localFunctionDeclaration.WithBody(null)

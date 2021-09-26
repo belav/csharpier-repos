@@ -142,9 +142,9 @@ namespace System.Linq.Parallel
                     querySettings.CancellationState.ExternalCancellationToken
                 );
                 return ExceptionAggregator.WrapEnumerable(
-                        opSequential,
-                        querySettings.CancellationState
-                    )
+                    opSequential,
+                    querySettings.CancellationState
+                )
                     .GetEnumerator();
             }
 
@@ -163,7 +163,8 @@ namespace System.Linq.Parallel
 
             if (querySettings.CancellationState.MergedCancellationToken.IsCancellationRequested)
             {
-                querySettings.CancellationState.ExternalCancellationToken.ThrowIfCancellationRequested();
+                querySettings.CancellationState.ExternalCancellationToken
+                    .ThrowIfCancellationRequested();
                 throw new OperationCanceledException();
             }
 
@@ -234,9 +235,9 @@ namespace System.Linq.Parallel
                         querySettings.CancellationState.ExternalCancellationToken
                     );
                     return ExceptionAggregator.WrapEnumerable(
-                            opSequentialWithCancelChecks,
-                            querySettings.CancellationState
-                        )
+                        opSequentialWithCancelChecks,
+                        querySettings.CancellationState
+                    )
                         .ToArray();
                 }
 
@@ -248,7 +249,8 @@ namespace System.Linq.Parallel
 
                 if (querySettings.CancellationState.MergedCancellationToken.IsCancellationRequested)
                 {
-                    querySettings.CancellationState.ExternalCancellationToken.ThrowIfCancellationRequested();
+                    querySettings.CancellationState.ExternalCancellationToken
+                        .ThrowIfCancellationRequested();
                     throw new OperationCanceledException();
                 }
 
@@ -330,15 +332,16 @@ namespace System.Linq.Parallel
             TaskScheduler? taskScheduler = settings.TaskScheduler;
             Debug.Assert(taskScheduler != null);
 
-            MergeExecutor<TOutput> executor = MergeExecutor<TOutput>.Execute<TKey>(
-                openedChild,
-                false,
-                ParallelMergeOptions.FullyBuffered,
-                taskScheduler,
-                outputOrdered,
-                settings.CancellationState,
-                settings.QueryId
-            );
+            MergeExecutor<TOutput> executor = MergeExecutor<TOutput>
+                .Execute<TKey>(
+                    openedChild,
+                    false,
+                    ParallelMergeOptions.FullyBuffered,
+                    taskScheduler,
+                    outputOrdered,
+                    settings.CancellationState,
+                    settings.QueryId
+                );
             return new ListQueryResults<TOutput>(
                 executor.GetResultsAsArray()!,
                 partitionCount,

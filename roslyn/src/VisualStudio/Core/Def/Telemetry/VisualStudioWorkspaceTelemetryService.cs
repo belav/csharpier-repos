@@ -48,9 +48,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                 async () =>
                 {
                     var client = await RemoteHostClient.TryGetClientAsync(
-                            _workspace,
-                            CancellationToken.None
-                        )
+                        _workspace,
+                        CancellationToken.None
+                    )
                         .ConfigureAwait(false);
                     if (client == null)
                     {
@@ -62,13 +62,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
 
                     // initialize session in the remote service
                     await client.RunRemoteAsync(
-                            WellKnownServiceHubService.RemoteHost,
-                            nameof(IRemoteHostService.InitializeTelemetrySession),
-                            solution: null,
-                            new object?[] { Process.GetCurrentProcess().Id, settings },
-                            callbackTarget: null,
-                            CancellationToken.None
-                        )
+                        WellKnownServiceHubService.RemoteHost,
+                        nameof(IRemoteHostService.InitializeTelemetrySession),
+                        solution: null,
+                        new object?[] { Process.GetCurrentProcess().Id, settings },
+                        callbackTarget: null,
+                        CancellationToken.None
+                    )
                         .ConfigureAwait(false);
                 }
             );

@@ -81,10 +81,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             }
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Applying_Extract_Method_refactoring
-                )
+                context.OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesResources.Applying_Extract_Method_refactoring
+                    )
             )
             {
                 return Execute(args.SubjectBuffer, args.TextView, context.OperationContext);
@@ -105,8 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                 return false;
             }
 
-            var document =
-                textBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+            var document = textBuffer.CurrentSnapshot
+                .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                     waitContext,
                     _threadingContext
                 );
@@ -116,11 +117,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             }
 
             var result = ExtractMethodService.ExtractMethodAsync(
-                    document,
-                    spans.Single().Span.ToTextSpan(),
-                    localFunction: false,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                spans.Single().Span.ToTextSpan(),
+                localFunction: false,
+                cancellationToken: cancellationToken
+            )
                 .WaitAndGetResult(cancellationToken);
             Contract.ThrowIfNull(result);
 
@@ -135,8 +136,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                 );
                 if (newResult != null)
                 {
-                    var notificationService =
-                        document.Project.Solution.Workspace.Services.GetService<INotificationService>();
+                    var notificationService = document.Project.Solution.Workspace.Services
+                        .GetService<INotificationService>();
                     if (notificationService != null)
                     {
                         // We are about to show a modal UI dialog so we should take over the command execution
@@ -213,8 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             waitContext.TakeOwnership();
             var project = document.Project;
             var solution = project.Solution;
-            var notificationService =
-                solution.Workspace.Services.GetService<INotificationService>();
+            var notificationService = solution.Workspace.Services
+                .GetService<INotificationService>();
 
             // see whether we will allow best effort extraction and if it is possible.
             if (
@@ -228,10 +229,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                     notificationService.SendNotification(
                         EditorFeaturesResources.Extract_method_encountered_the_following_issues
                             + Environment.NewLine
-                            + string.Join(
-                                "",
-                                result.Reasons.Select(r => Environment.NewLine + "  " + r)
-                            ),
+                            + string
+                                .Join(
+                                    "",
+                                    result.Reasons.Select(r => Environment.NewLine + "  " + r)
+                                ),
                         title: EditorFeaturesResources.Extract_Method,
                         severity: NotificationSeverity.Error
                     );
@@ -247,10 +249,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                     !notificationService.ConfirmMessageBox(
                         EditorFeaturesResources.Extract_method_encountered_the_following_issues
                             + Environment.NewLine
-                            + string.Join(
-                                "",
-                                result.Reasons.Select(r => Environment.NewLine + "  " + r)
-                            )
+                            + string
+                                .Join(
+                                    "",
+                                    result.Reasons.Select(r => Environment.NewLine + "  " + r)
+                                )
                             + Environment.NewLine
                             + Environment.NewLine
                             + EditorFeaturesResources.Do_you_still_want_to_proceed_This_may_produce_broken_code,
@@ -287,17 +290,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
 
             var reason = result.Reasons.FirstOrDefault();
             var length =
-                FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket.IndexOf(
-                    ':'
-                );
+                FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket
+                    .IndexOf(':');
             if (
                 reason != null
                 && length > 0
                 && reason.IndexOf(
-                    FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket.Substring(
-                        0,
-                        length
-                    ),
+                    FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket
+                        .Substring(0, length),
                     0,
                     length,
                     StringComparison.Ordinal
@@ -310,12 +310,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                     true
                 );
                 var newResult = ExtractMethodService.ExtractMethodAsync(
-                        document,
-                        spans.Single().Span.ToTextSpan(),
-                        localFunction: false,
-                        options,
-                        cancellationToken
-                    )
+                    document,
+                    spans.Single().Span.ToTextSpan(),
+                    localFunction: false,
+                    options,
+                    cancellationToken
+                )
                     .WaitAndGetResult(cancellationToken);
 
                 // retry succeeded, return new result

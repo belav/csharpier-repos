@@ -168,9 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 case SyntaxKind.InterpolatedStringEndToken:
                 {
                     return token.Parent is InterpolatedStringExpressionSyntax interpolatedString
-                        && interpolatedString.StringStartToken.IsKind(
-                            SyntaxKind.InterpolatedVerbatimStringStartToken
-                        );
+                        && interpolatedString.StringStartToken
+                            .IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
                 }
 
                 case SyntaxKind.InterpolatedStringTextToken:
@@ -182,9 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
 
                     return interpolatedStringText.Parent
                             is InterpolatedStringExpressionSyntax interpolatedString
-                        && interpolatedString.StringStartToken.IsKind(
-                            SyntaxKind.InterpolatedVerbatimStringStartToken
-                        );
+                        && interpolatedString.StringStartToken
+                            .IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
                 }
             }
 
@@ -201,20 +199,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 return GetClassificationForTypeDeclarationIdentifier(token);
             }
             else if (
-                token.Parent.IsKind(
-                    SyntaxKind.DelegateDeclaration,
-                    out DelegateDeclarationSyntax? delegateDecl
-                )
+                token.Parent
+                    .IsKind(
+                        SyntaxKind.DelegateDeclaration,
+                        out DelegateDeclarationSyntax? delegateDecl
+                    )
                 && delegateDecl.Identifier == token
             )
             {
                 return ClassificationTypeNames.DelegateName;
             }
             else if (
-                token.Parent.IsKind(
-                    SyntaxKind.TypeParameter,
-                    out TypeParameterSyntax? typeParameter
-                )
+                token.Parent
+                    .IsKind(SyntaxKind.TypeParameter, out TypeParameterSyntax? typeParameter)
                 && typeParameter.Identifier == token
             )
             {
@@ -428,9 +425,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
         }
 
         private static bool IsExtensionMethod(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.ParameterList.Parameters.FirstOrDefault()?.Modifiers.Any(
-                SyntaxKind.ThisKeyword
-            ) == true;
+            methodDeclaration.ParameterList.Parameters.FirstOrDefault()?.Modifiers
+                .Any(SyntaxKind.ThisKeyword) == true;
 
         private static string? GetClassificationForTypeDeclarationIdentifier(
             SyntaxToken identifier
@@ -544,10 +540,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
         private static bool IsActualContextualKeyword(SyntaxToken token)
         {
             if (
-                token.Parent.IsKind(
-                    SyntaxKind.LabeledStatement,
-                    out LabeledStatementSyntax? statement
-                )
+                token.Parent
+                    .IsKind(SyntaxKind.LabeledStatement, out LabeledStatementSyntax? statement)
                 && statement.Identifier == token
             )
             {

@@ -69,19 +69,20 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 foo.Value = "value";
 
                 CustomAssert.AreXmlEquivalent(
-                    string.Concat(
-                        "<Foo>",
-                        "<A>",
-                        "<C H='value'>",
-                        "<D E=''>",
-                        "<F>f</F>",
-                        "</D>",
-                        "<G/>",
-                        "</C>",
-                        "<B>b</B>",
-                        "</A>",
-                        "</Foo>"
-                    ),
+                    string
+                        .Concat(
+                            "<Foo>",
+                            "<A>",
+                            "<C H='value'>",
+                            "<D E=''>",
+                            "<F>f</F>",
+                            "</D>",
+                            "<G/>",
+                            "</C>",
+                            "<B>b</B>",
+                            "</A>",
+                            "</Foo>"
+                        ),
                     xml
                 );
                 Assert.AreEqual("value", foo.Value);
@@ -130,15 +131,16 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 foo.Value = "value";
 
                 CustomAssert.AreXmlEquivalent(
-                    string.Concat(
-                        "<Foo>",
-                        "<A D='value'>",
-                        "<B>",
-                        "<C>2</C>",
-                        "</B>",
-                        "</A>",
-                        "</Foo>"
-                    ),
+                    string
+                        .Concat(
+                            "<Foo>",
+                            "<A D='value'>",
+                            "<B>",
+                            "<C>2</C>",
+                            "</B>",
+                            "</A>",
+                            "</Foo>"
+                        ),
                     xml
                 );
                 Assert.AreEqual("value", foo.Value);
@@ -331,13 +333,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 Create<IFoo>(xml).A = null;
 
                 CustomAssert.AreXmlEquivalent(
-                    string.Concat(
-                        "<Foo>",
-                        "<A>",
-                        "<B Id='1'> <C>value1</C> </B>",
-                        "</A>",
-                        "</Foo>"
-                    ),
+                    string
+                        .Concat("<Foo>", "<A>", "<B Id='1'> <C>value1</C> </B>", "</A>", "</Foo>"),
                     xml
                 );
             }
@@ -357,13 +354,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 Create<IFoo>(xml).A = null;
 
                 CustomAssert.AreXmlEquivalent(
-                    string.Concat(
-                        "<Foo>",
-                        "<A>",
-                        "<B Id='1'> <C>value1</C> </B>",
-                        "</A>",
-                        "</Foo>"
-                    ),
+                    string
+                        .Concat("<Foo>", "<A>", "<B Id='1'> <C>value1</C> </B>", "</A>", "</Foo>"),
                     xml
                 );
             }
@@ -484,7 +476,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [Test]
             public void VariableMetadata()
             {
-                var variable = typeof(IFoo).GetCustomAttributes(false)
+                var variable = typeof(IFoo)
+                    .GetCustomAttributes(false)
                     .OfType<IXsltContextVariable>()
                     .Single();
 
@@ -534,7 +527,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [Test]
             public void FunctionMetadata()
             {
-                var function = typeof(IFoo).GetCustomAttributes(false)
+                var function = typeof(IFoo)
+                    .GetCustomAttributes(false)
                     .OfType<IXsltContextFunction>()
                     .Single();
 

@@ -58,15 +58,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
                     NotificationPreferences = new List<NotificationOptionViewModel>(_notifications)
                 };
 
-                viewModel.SelectedSpecification = viewModel.Specifications.Single(
-                    s => s.ID == namingRule.SymbolSpecificationID
-                );
-                viewModel.SelectedStyle = viewModel.NamingStyles.Single(
-                    s => s.ID == namingRule.NamingStyleID
-                );
-                viewModel.SelectedNotificationPreference = viewModel.NotificationPreferences.Single(
-                    n => n.Notification.Severity == namingRule.EnforcementLevel
-                );
+                viewModel.SelectedSpecification = viewModel.Specifications
+                    .Single(s => s.ID == namingRule.SymbolSpecificationID);
+                viewModel.SelectedStyle = viewModel.NamingStyles
+                    .Single(s => s.ID == namingRule.NamingStyleID);
+                viewModel.SelectedNotificationPreference = viewModel.NotificationPreferences
+                    .Single(n => n.Notification.Severity == namingRule.EnforcementLevel);
 
                 viewModels.Add(viewModel);
             }
@@ -111,19 +108,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
         internal void UpdateSpecificationList(ManageSymbolSpecificationsDialogViewModel viewModel)
         {
-            var symbolSpecifications = viewModel.Items.Cast<SymbolSpecificationViewModel>()
+            var symbolSpecifications = viewModel.Items
+                .Cast<SymbolSpecificationViewModel>()
                 .Select(
                     n =>
                         new SymbolSpecification(
                             n.ID,
                             n.ItemName,
-                            n.SymbolKindList.Where(s => s.IsChecked)
+                            n.SymbolKindList
+                                .Where(s => s.IsChecked)
                                 .Select(k => k.CreateSymbolOrTypeOrMethodKind())
                                 .ToImmutableArray(),
-                            n.AccessibilityList.Where(s => s.IsChecked)
+                            n.AccessibilityList
+                                .Where(s => s.IsChecked)
                                 .Select(a => a._accessibility)
                                 .ToImmutableArray(),
-                            n.ModifierList.Where(s => s.IsChecked)
+                            n.ModifierList
+                                .Where(s => s.IsChecked)
                                 .Select(m => new SymbolSpecification.ModifierKind(m._modifier))
                                 .ToImmutableArray()
                         )
@@ -155,9 +156,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
                 if (selectedSpecification != null)
                 {
-                    rule.SelectedSpecification = rule.Specifications.Single(
-                        s => s.ID == selectedSpecification.ID
-                    );
+                    rule.SelectedSpecification = rule.Specifications
+                        .Single(s => s.ID == selectedSpecification.ID);
                 }
             }
         }
@@ -189,7 +189,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
         internal void UpdateStyleList(ManageNamingStylesDialogViewModel viewModel)
         {
-            var namingStyles = viewModel.Items.Cast<NamingStyleViewModel>()
+            var namingStyles = viewModel.Items
+                .Cast<NamingStyleViewModel>()
                 .Select(
                     n =>
                         new MutableNamingStyle(

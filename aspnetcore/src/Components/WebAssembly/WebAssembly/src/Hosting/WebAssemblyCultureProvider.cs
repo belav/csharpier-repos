@@ -69,14 +69,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
                 Environment.GetEnvironmentVariable("__BLAZOR_SHARDED_ICU") == "1"
                 && (
                     (
-                        !CultureInfo.CurrentCulture.Name.Equals(
-                            InitialCulture.Name,
-                            StringComparison.Ordinal
-                        )
-                        || !CultureInfo.CurrentUICulture.Name.Equals(
-                            InitialUICulture.Name,
-                            StringComparison.Ordinal
-                        )
+                        !CultureInfo.CurrentCulture.Name
+                            .Equals(InitialCulture.Name, StringComparison.Ordinal)
+                        || !CultureInfo.CurrentUICulture.Name
+                            .Equals(InitialUICulture.Name, StringComparison.Ordinal)
                     )
                 )
             )

@@ -12,15 +12,17 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest
 
         private static bool IsOnCi =>
             !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION"))
-            || string.Equals(
-                Environment.GetEnvironmentVariable("TRAVIS"),
-                "true",
-                StringComparison.OrdinalIgnoreCase
-            )
-            || string.Equals(
-                Environment.GetEnvironmentVariable("APPVEYOR"),
-                "true",
-                StringComparison.OrdinalIgnoreCase
-            );
+            || string
+                .Equals(
+                    Environment.GetEnvironmentVariable("TRAVIS"),
+                    "true",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            || string
+                .Equals(
+                    Environment.GetEnvironmentVariable("APPVEYOR"),
+                    "true",
+                    StringComparison.OrdinalIgnoreCase
+                );
     }
 }

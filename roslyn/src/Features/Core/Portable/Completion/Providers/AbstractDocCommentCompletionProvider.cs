@@ -150,11 +150,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             var items = await GetItemsWorkerAsync(
-                    context.Document,
-                    context.Position,
-                    context.Trigger,
-                    context.CancellationToken
-                )
+                context.Document,
+                context.Position,
+                context.Trigger,
+                context.CancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (items != null)

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         ExpressionBodyPreference.WhenPossible
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         private static async Task TestWithUseBlockBody(string code, string fixedCode)
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         ExpressionBodyPreference.Never
                     }
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]

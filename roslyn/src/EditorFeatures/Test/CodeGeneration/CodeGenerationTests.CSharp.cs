@@ -1617,12 +1617,13 @@ class C { }";
                 var newModifiers = new[]
                 {
                     SyntaxFactory.Token(SyntaxKind.InternalKeyword).WithLeadingTrivia(eol)
-                }.Concat(
-                    CreateModifierTokens(
-                        new Editing.DeclarationModifiers(isSealed: true, isPartial: true),
-                        LanguageNames.CSharp
-                    )
-                );
+                }
+                    .Concat(
+                        CreateModifierTokens(
+                            new Editing.DeclarationModifiers(isSealed: true, isPartial: true),
+                            LanguageNames.CSharp
+                        )
+                    );
 
                 await TestUpdateDeclarationAsync<ClassDeclarationSyntax>(
                     input,

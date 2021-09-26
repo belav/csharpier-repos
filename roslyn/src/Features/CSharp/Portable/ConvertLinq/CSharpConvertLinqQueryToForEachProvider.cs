@@ -53,12 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
             CancellationToken cancellationToken,
             out DocumentUpdateInfo documentUpdateInfo
         ) =>
-            new Converter(
-                semanticModel,
-                semanticFacts,
-                queryExpression,
-                cancellationToken
-            ).TryConvert(out documentUpdateInfo);
+            new Converter(semanticModel, semanticFacts, queryExpression, cancellationToken)
+                .TryConvert(out documentUpdateInfo);
 
         /// <summary>
         /// Finds a QueryExpressionSyntax node for the span.
@@ -168,9 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     case SyntaxKind.WhereClause:
                         return SyntaxFactory.Block(
                             SyntaxFactory.IfStatement(
-                                ((WhereClauseSyntax)node).Condition.WithAdditionalAnnotations(
-                                        Simplifier.Annotation
-                                    )
+                                ((WhereClauseSyntax)node).Condition
+                                    .WithAdditionalAnnotations(Simplifier.Annotation)
                                     .WithoutTrivia(),
                                 statement
                             )
@@ -270,43 +265,44 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                             //  {
                             //      ...
                             return SyntaxFactory.Block(
-                                    SyntaxFactory.ForEachStatement(
-                                        joinClause.Type ?? VarNameIdentifier,
-                                        joinClause.Identifier,
-                                        expression2,
-                                        SyntaxFactory.Block(
-                                            SyntaxFactory.IfStatement(
-                                                SyntaxFactory.InvocationExpression(
-                                                    SyntaxFactory.MemberAccessExpression(
-                                                        SyntaxKind.SimpleMemberAccessExpression,
-                                                        SyntaxFactory.PredefinedType(
-                                                            SyntaxFactory.Token(
-                                                                SyntaxKind.ObjectKeyword
-                                                            )
-                                                        ),
-                                                        SyntaxFactory.IdentifierName(
-                                                            nameof(object.Equals)
+                                SyntaxFactory.ForEachStatement(
+                                    joinClause.Type ?? VarNameIdentifier,
+                                    joinClause.Identifier,
+                                    expression2,
+                                    SyntaxFactory.Block(
+                                        SyntaxFactory.IfStatement(
+                                            SyntaxFactory.InvocationExpression(
+                                                SyntaxFactory.MemberAccessExpression(
+                                                    SyntaxKind.SimpleMemberAccessExpression,
+                                                    SyntaxFactory.PredefinedType(
+                                                        SyntaxFactory.Token(
+                                                            SyntaxKind.ObjectKeyword
                                                         )
                                                     ),
-                                                    SyntaxFactory.ArgumentList(
-                                                        SyntaxFactory.SeparatedList(
-                                                            new[]
-                                                            {
-                                                                SyntaxFactory.Argument(
-                                                                    joinClause.LeftExpression
-                                                                ),
-                                                                SyntaxFactory.Argument(
-                                                                    joinClause.RightExpression.WithoutTrailingTrivia()
-                                                                )
-                                                            }
-                                                        )
+                                                    SyntaxFactory.IdentifierName(
+                                                        nameof(object.Equals)
                                                     )
                                                 ),
-                                                statement
-                                            )
+                                                SyntaxFactory.ArgumentList(
+                                                    SyntaxFactory.SeparatedList(
+                                                        new[]
+                                                        {
+                                                            SyntaxFactory.Argument(
+                                                                joinClause.LeftExpression
+                                                            ),
+                                                            SyntaxFactory.Argument(
+                                                                joinClause.RightExpression
+                                                                    .WithoutTrailingTrivia()
+                                                            )
+                                                        }
+                                                    )
+                                                )
+                                            ),
+                                            statement
                                         )
                                     )
                                 )
+                            )
                                 .WithAdditionalAnnotations(Simplifier.Annotation);
                         }
                     case SyntaxKind.SelectClause:
@@ -754,20 +750,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
             {
                 var typeSyntax = generateTypeFromExpression
                     ? _semanticModel.GetTypeInfo(expression, _cancellationToken)
-                          .ConvertedType.GenerateTypeSyntax()
+                      .ConvertedType.GenerateTypeSyntax()
                     : VarNameIdentifier;
                 return SyntaxFactory.LocalDeclarationStatement(
-                        SyntaxFactory.VariableDeclaration(
-                            typeSyntax,
-                            SyntaxFactory.SingletonSeparatedList(
-                                SyntaxFactory.VariableDeclarator(
-                                    identifier,
-                                    argumentList: null,
-                                    SyntaxFactory.EqualsValueClause(expression)
-                                )
+                    SyntaxFactory.VariableDeclaration(
+                        typeSyntax,
+                        SyntaxFactory.SingletonSeparatedList(
+                            SyntaxFactory.VariableDeclarator(
+                                identifier,
+                                argumentList: null,
+                                SyntaxFactory.EqualsValueClause(expression)
                             )
                         )
                     )
+                )
                     .WithAdditionalAnnotations(Simplifier.Annotation);
             }
 
@@ -854,8 +850,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                 );
 
                 var localFunctionInvocation = SyntaxFactory.InvocationExpression(
-                        SyntaxFactory.IdentifierName(localFunctionToken)
-                    )
+                    SyntaxFactory.IdentifierName(localFunctionToken)
+                )
                     .WithAdditionalAnnotations(Simplifier.Annotation);
                 var newParentExpressionStatement = parentStatement.ReplaceNode(
                     _source.WalkUpParentheses(),
@@ -944,9 +940,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                         lastSelectExpression is IdentifierNameSyntax identifierName
                         && forEachStatement.Identifier.ValueText
                             == identifierName.Identifier.ValueText
-                        && queryExpressionProcessingInfo.IdentifierNames.Contains(
-                            identifierName.Identifier.ValueText
-                        )
+                        && queryExpressionProcessingInfo.IdentifierNames
+                            .Contains(identifierName.Identifier.ValueText)
                     )
                     {
                         var forEachStatementTypeSymbolType =
@@ -1000,20 +995,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                 var statements = GenerateStatements(
                     expression =>
                         AddToBlockTop(
-                                SyntaxFactory.LocalDeclarationStatement(
-                                    SyntaxFactory.VariableDeclaration(
-                                        forEachStatement.Type,
-                                        SyntaxFactory.SingletonSeparatedList(
-                                            SyntaxFactory.VariableDeclarator(
-                                                forEachStatement.Identifier,
-                                                argumentList: null,
-                                                SyntaxFactory.EqualsValueClause(expression)
-                                            )
+                            SyntaxFactory.LocalDeclarationStatement(
+                                SyntaxFactory.VariableDeclaration(
+                                    forEachStatement.Type,
+                                    SyntaxFactory.SingletonSeparatedList(
+                                        SyntaxFactory.VariableDeclarator(
+                                            forEachStatement.Identifier,
+                                            argumentList: null,
+                                            SyntaxFactory.EqualsValueClause(expression)
                                         )
                                     )
-                                ),
-                                forEachStatement.Statement
-                            )
+                                )
+                            ),
+                            forEachStatement.Statement
+                        )
                             .WithAdditionalAnnotations(Formatter.Annotation),
                     queryExpressionProcessingInfo
                 );

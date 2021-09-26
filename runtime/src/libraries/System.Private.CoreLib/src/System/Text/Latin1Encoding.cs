@@ -706,12 +706,8 @@ namespace System.Text
                     fixed (byte* pBytes = args.bytes)
                     fixed (char* pChars = chars)
                     {
-                        args.encoding.GetCharsCommon(
-                            pBytes,
-                            args.bytes.Length,
-                            pChars,
-                            chars.Length
-                        );
+                        args.encoding
+                            .GetCharsCommon(pBytes, args.bytes.Length, pChars, chars.Length);
                     }
                 }
             );
@@ -753,12 +749,13 @@ namespace System.Text
                     fixed (byte* pBytes = args.bytes)
                     fixed (char* pChars = chars)
                     {
-                        args.encoding.GetCharsCommon(
-                            pBytes + args.index,
-                            chars.Length,
-                            pChars,
-                            chars.Length
-                        );
+                        args.encoding
+                            .GetCharsCommon(
+                                pBytes + args.index,
+                                chars.Length,
+                                pChars,
+                                chars.Length
+                            );
                     }
                 }
             );

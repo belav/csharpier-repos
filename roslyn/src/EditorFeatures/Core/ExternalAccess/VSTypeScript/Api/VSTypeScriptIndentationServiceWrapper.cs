@@ -33,10 +33,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         )
         {
             var result = await _underlyingObject.GetDesiredIndentation(
-                    document,
-                    lineNumber,
-                    cancellationToken
-                )
+                document,
+                lineNumber,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return result.HasValue
               ? new VSTypeScriptIndentationResultWrapper(result.Value)

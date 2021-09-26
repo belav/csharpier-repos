@@ -17,11 +17,8 @@ namespace System.Web.Mvc
         private static readonly ReaderWriterLockSlim _tryGetValueDelegateCacheLock =
             new ReaderWriterLockSlim();
 
-        private static readonly MethodInfo _strongTryGetValueImplInfo =
-            typeof(TypeHelpers).GetMethod(
-                "StrongTryGetValueImpl",
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+        private static readonly MethodInfo _strongTryGetValueImplInfo = typeof(TypeHelpers)
+            .GetMethod("StrongTryGetValueImpl", BindingFlags.NonPublic | BindingFlags.Static);
 
         public static readonly Assembly MsCorLibAssembly = typeof(string).Assembly;
         public static readonly Assembly MvcAssembly = typeof(Controller).Assembly;
@@ -56,7 +53,8 @@ namespace System.Web.Mvc
         ) where TDelegate : class
         {
             // ensure target method exists
-            ParameterInfo[] delegateParameters = typeof(TDelegate).GetMethod("Invoke")
+            ParameterInfo[] delegateParameters = typeof(TDelegate)
+                .GetMethod("Invoke")
                 .GetParameters();
             Type[] argumentTypes = Array.ConvertAll(
                 delegateParameters,

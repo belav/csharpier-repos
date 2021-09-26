@@ -115,9 +115,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Debug.Assert(analyzerConfigPath != null);
             Debug.Assert(PathUtilities.IsAbsolute(analyzerConfigPath));
 
-            return project.AnalyzerConfigDocuments.FirstOrDefault(
-                d => d.FilePath == analyzerConfigPath
-            );
+            return project.AnalyzerConfigDocuments
+                .FirstOrDefault(d => d.FilePath == analyzerConfigPath);
         }
 
         public static AnalyzerConfigDocument? GetOrCreateAnalyzerConfigDocument(
@@ -139,9 +138,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 ".editorconfig",
                 filePath: analyzerConfigPath
             );
-            var newSolution = project.Solution.AddAnalyzerConfigDocuments(
-                ImmutableArray.Create(documentInfo)
-            );
+            var newSolution = project.Solution
+                .AddAnalyzerConfigDocuments(ImmutableArray.Create(documentInfo));
             return newSolution.GetProject(project.Id)?.GetAnalyzerConfigDocument(id);
         }
 
@@ -155,10 +153,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (compilation == null)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        WorkspaceExtensionsResources.Compilation_is_required_to_accomplish_the_task_but_is_not_supported_by_project_0,
-                        project.Name
-                    )
+                    string
+                        .Format(
+                            WorkspaceExtensionsResources.Compilation_is_required_to_accomplish_the_task_but_is_not_supported_by_project_0,
+                            project.Name
+                        )
                 );
             }
 

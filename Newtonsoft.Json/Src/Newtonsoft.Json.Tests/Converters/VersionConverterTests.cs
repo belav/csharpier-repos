@@ -86,11 +86,12 @@ namespace Newtonsoft.Json.Tests.Converters
 
             internal static void DeserializeVersionClass(string version1, string version2)
             {
-                string json = string.Format(
-                    @"{{""StringProperty1"": ""StringProperty1"", ""Version1"": ""{0}"", ""Version2"": ""{1}"", ""StringProperty2"": ""StringProperty2""}}",
-                    version1,
-                    version2
-                );
+                string json = string
+                    .Format(
+                        @"{{""StringProperty1"": ""StringProperty1"", ""Version1"": ""{0}"", ""Version2"": ""{1}"", ""StringProperty2"": ""StringProperty2""}}",
+                        version1,
+                        version2
+                    );
                 Version expectedVersion1 = new Version(version1);
                 Version expectedVersion2 = new Version(version2);
 

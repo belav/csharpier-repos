@@ -837,9 +837,8 @@ class C
             // Add N.M.A attribute to p1.
             var editor = await DocumentEditor.CreateAsync(document, CancellationToken.None)
                 .ConfigureAwait(false);
-            var attributeSyntax = editor.Generator.Attribute(
-                editor.Generator.TypeExpression(attribute)
-            );
+            var attributeSyntax = editor.Generator
+                .Attribute(editor.Generator.TypeExpression(attribute));
 
             editor.AddAttribute(p1SyntaxNode, attributeSyntax);
             var documentWithAttribute = editor.GetChangedDocument();
@@ -847,16 +846,16 @@ class C
             // Add namespace import.
             var imported = useSymbolAnnotations
                 ? await ImportAdder.AddImportsFromSymbolAnnotationAsync(
-                          documentWithAttribute,
-                          null,
-                          CancellationToken.None
-                      )
+                      documentWithAttribute,
+                      null,
+                      CancellationToken.None
+                  )
                       .ConfigureAwait(false)
                 : await ImportAdder.AddImportsFromSyntaxesAsync(
-                          documentWithAttribute,
-                          null,
-                          CancellationToken.None
-                      )
+                      documentWithAttribute,
+                      null,
+                      CancellationToken.None
+                  )
                       .ConfigureAwait(false);
 
             var formatted = await Formatter.FormatAsync(imported, options);

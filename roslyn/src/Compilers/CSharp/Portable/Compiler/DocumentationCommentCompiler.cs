@@ -323,11 +323,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     CultureInfo.CurrentUICulture
                 );
                 WriteLine(
-                    string.Format(
-                        CultureInfo.CurrentUICulture,
-                        message,
-                        symbol.GetDocumentationCommentId()
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentUICulture,
+                            message,
+                            symbol.GetDocumentationCommentId()
+                        )
                 );
                 return;
             }
@@ -388,11 +389,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     CultureInfo.CurrentUICulture
                 );
                 WriteLine(
-                    string.Format(
-                        CultureInfo.CurrentUICulture,
-                        message,
-                        symbol.GetDocumentationCommentId()
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentUICulture,
+                            message,
+                            symbol.GetDocumentationCommentId()
+                        )
                 );
                 return;
             }
@@ -527,8 +529,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 _cancellationToken.ThrowIfCancellationRequested();
 
-                bool reportDiagnosticsForCurrentTrivia =
-                    trivia.SyntaxTree.ReportDocumentationCommentDiagnostics();
+                bool reportDiagnosticsForCurrentTrivia = trivia.SyntaxTree
+                    .ReportDocumentationCommentDiagnostics();
 
                 if (!processedDocComment)
                 {
@@ -1425,12 +1427,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     typeof(XmlException).GetTypeInfo().Assembly
                 );
                 string locationTemplate = manager.GetString("Xml_MessageWithErrorPosition");
-                string locationString = string.Format(
-                    locationTemplate,
-                    "",
-                    e.LineNumber,
-                    e.LinePosition
-                ); // first arg is where the problem description goes
+                string locationString = string
+                    .Format(locationTemplate, "", e.LineNumber, e.LinePosition); // first arg is where the problem description goes
                 int position = message.IndexOf(locationString, StringComparison.Ordinal); // Expect exact match
                 return position < 0 ? message : message.Remove(position, locationString.Length);
             }

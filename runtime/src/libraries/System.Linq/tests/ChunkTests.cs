@@ -26,7 +26,8 @@ namespace System.Linq.Tests
         [Fact]
         public void ChunkSourceLazily()
         {
-            using IEnumerator<int[]> chunks = new FastInfiniteEnumerator<int>().Chunk(5)
+            using IEnumerator<int[]> chunks = new FastInfiniteEnumerator<int>()
+                .Chunk(5)
                 .GetEnumerator();
             chunks.MoveNext();
             Assert.Equal(new[] { 0, 0, 0, 0, 0 }, chunks.Current);

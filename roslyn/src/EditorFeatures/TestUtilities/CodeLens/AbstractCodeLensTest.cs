@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
                         foreach (var span in annotatedSpan.Value)
                         {
                             var declarationSyntaxNode = syntaxNode.FindNode(span);
-                            var result =
-                                await new CodeLensReferencesService().GetReferenceCountAsync(
+                            var result = await new CodeLensReferencesService()
+                                .GetReferenceCountAsync(
                                     workspace.CurrentSolution,
                                     annotatedDocument.Id,
                                     declarationSyntaxNode,
@@ -73,8 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
                         foreach (var span in annotatedSpan.Value)
                         {
                             var declarationSyntaxNode = syntaxNode.FindNode(span);
-                            var result =
-                                await new CodeLensReferencesService().FindReferenceLocationsAsync(
+                            var result = await new CodeLensReferencesService()
+                                .FindReferenceLocationsAsync(
                                     workspace.CurrentSolution,
                                     annotatedDocument.Id,
                                     declarationSyntaxNode,
@@ -108,8 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
                         foreach (var span in annotatedSpan.Value)
                         {
                             var declarationSyntaxNode = syntaxNode.FindNode(span);
-                            var result =
-                                await new CodeLensReferencesService().FindReferenceMethodsAsync(
+                            var result = await new CodeLensReferencesService()
+                                .FindReferenceMethodsAsync(
                                     workspace.CurrentSolution,
                                     annotatedDocument.Id,
                                     declarationSyntaxNode,
@@ -143,8 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
                         foreach (var span in annotatedSpan.Value)
                         {
                             var declarationSyntaxNode = syntaxNode.FindNode(span);
-                            var actual =
-                                await new CodeLensReferencesService().GetFullyQualifiedNameAsync(
+                            var actual = await new CodeLensReferencesService()
+                                .GetFullyQualifiedNameAsync(
                                     workspace.CurrentSolution,
                                     annotatedDocument.Id,
                                     declarationSyntaxNode,

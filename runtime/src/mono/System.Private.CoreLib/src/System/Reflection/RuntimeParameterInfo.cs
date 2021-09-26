@@ -221,10 +221,8 @@ namespace System.Reflection
 
         internal static object? GetDefaultValueImpl(ParameterInfo pinfo)
         {
-            FieldInfo field = typeof(ParameterInfo).GetField(
-                "DefaultValueImpl",
-                BindingFlags.Instance | BindingFlags.NonPublic
-            )!;
+            FieldInfo field = typeof(ParameterInfo)
+                .GetField("DefaultValueImpl", BindingFlags.Instance | BindingFlags.NonPublic)!;
             return field.GetValue(pinfo);
         }
 

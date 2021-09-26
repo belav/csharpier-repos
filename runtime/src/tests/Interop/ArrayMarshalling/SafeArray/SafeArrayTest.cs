@@ -56,8 +56,8 @@ public class Tester
             );
 
             var nonBlittableRecords = boolArray.Select(
-                    b => new SafeArrayNative.NonBlittableRecord { b = b }
-                )
+                b => new SafeArrayNative.NonBlittableRecord { b = b }
+            )
                 .ToArray();
             Assert.AreAllEqual(
                 nonBlittableRecords,

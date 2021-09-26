@@ -352,11 +352,12 @@ namespace System.Threading.Tasks
             m_options = options;
             m_taskScheduler = scheduler;
             if (TplEventSource.Log.IsEnabled())
-                TplEventSource.Log.TraceOperationBegin(
-                    m_task.Id,
-                    "Task.ContinueWith: " + task.m_action!.Method.Name,
-                    0
-                );
+                TplEventSource.Log
+                    .TraceOperationBegin(
+                        m_task.Id,
+                        "Task.ContinueWith: " + task.m_action!.Method.Name,
+                        0
+                    );
 
             if (Task.s_asyncDebuggingEnabled)
                 Task.AddToActiveTasks(m_task);
@@ -397,10 +398,11 @@ namespace System.Threading.Tasks
                 if (TplEventSource.Log.IsEnabled() && !continuationTask.IsCanceled)
                 {
                     // Log now that we are sure that this continuation is being ran
-                    TplEventSource.Log.TraceOperationRelation(
-                        continuationTask.Id,
-                        CausalityRelation.AssignDelegate
-                    );
+                    TplEventSource.Log
+                        .TraceOperationRelation(
+                            continuationTask.Id,
+                            CausalityRelation.AssignDelegate
+                        );
                 }
                 continuationTask.m_taskScheduler = m_taskScheduler;
 
@@ -520,10 +522,8 @@ namespace System.Threading.Tasks
             TplEventSource log = TplEventSource.Log;
             if (log.IsEnabled() && log.TasksSetActivityIds && c.m_continuationId != 0)
             {
-                c.m_syncContext.Post(
-                    s_postCallback,
-                    GetActionLogDelegate(c.m_continuationId, c.m_action)
-                );
+                c.m_syncContext
+                    .Post(s_postCallback, GetActionLogDelegate(c.m_continuationId, c.m_action));
             }
             else
             {
@@ -536,10 +536,8 @@ namespace System.Threading.Tasks
             return () =>
             {
                 Guid activityId = TplEventSource.CreateGuidForTaskID(continuationId);
-                System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(
-                    activityId,
-                    out Guid savedActivityId
-                );
+                System.Diagnostics.Tracing.EventSource
+                    .SetCurrentThreadActivityId(activityId, out Guid savedActivityId);
                 try
                 {
                     action();
@@ -547,9 +545,8 @@ namespace System.Threading.Tasks
 
                 finally
                 {
-                    System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(
-                        savedActivityId
-                    );
+                    System.Diagnostics.Tracing.EventSource
+                        .SetCurrentThreadActivityId(savedActivityId);
                 }
             };
         }
@@ -770,10 +767,8 @@ namespace System.Threading.Tasks
             if (log.IsEnabled() && log.TasksSetActivityIds && m_continuationId != 0)
             {
                 Guid activityId = TplEventSource.CreateGuidForTaskID(m_continuationId);
-                System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(
-                    activityId,
-                    out savedActivityId
-                );
+                System.Diagnostics.Tracing.EventSource
+                    .SetCurrentThreadActivityId(activityId, out savedActivityId);
             }
             try
             {
@@ -799,9 +794,8 @@ namespace System.Threading.Tasks
             {
                 if (log.IsEnabled() && log.TasksSetActivityIds && m_continuationId != 0)
                 {
-                    System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(
-                        savedActivityId
-                    );
+                    System.Diagnostics.Tracing.EventSource
+                        .SetCurrentThreadActivityId(savedActivityId);
                 }
             }
         }

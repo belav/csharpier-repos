@@ -37,9 +37,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             };
 
             var referenceAssemblies = referenceAssemblyRoots.SelectMany(
-                    assembly =>
-                        assembly.GetReferencedAssemblies().Concat(new[] { assembly.GetName() })
-                )
+                assembly => assembly.GetReferencedAssemblies().Concat(new[] { assembly.GetName() })
+            )
                 .Distinct()
                 .Select(Assembly.Load)
                 .Select(assembly => MetadataReference.CreateFromFile(assembly.Location))
@@ -257,9 +256,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         )
         {
             var compilation = CreateCompilation();
-            var references = compilation.References.Concat(
-                    new[] { compilation.ToMetadataReference(), }
-                )
+            var references = compilation.References
+                .Concat(new[] { compilation.ToMetadataReference(), })
                 .ToArray();
 
             var projectEngine = CreateProjectEngine(
@@ -311,10 +309,11 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             var cSharpDocument = code.CodeDocument.GetCSharpDocument();
             if (cSharpDocument.Diagnostics.Any())
             {
-                var diagnosticsLog = string.Join(
-                    Environment.NewLine,
-                    cSharpDocument.Diagnostics.Select(d => d.ToString()).ToArray()
-                );
+                var diagnosticsLog = string
+                    .Join(
+                        Environment.NewLine,
+                        cSharpDocument.Diagnostics.Select(d => d.ToString()).ToArray()
+                    );
                 throw new InvalidOperationException(
                     $"Aborting compilation to assembly because RazorCompiler returned nonempty diagnostics: {diagnosticsLog}"
                 );
@@ -347,7 +346,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             using (var peStream = new MemoryStream())
             {
                 var emit = compilation.Emit(peStream);
-                diagnostics = emit.Diagnostics.Where(d => d.Severity >= DiagnosticSeverity.Warning)
+                diagnostics = emit.Diagnostics
+                    .Where(d => d.Severity >= DiagnosticSeverity.Warning)
                     .ToArray();
                 if (diagnostics.Length > 0 && throwOnFailure)
                 {
@@ -381,9 +381,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         )
         {
             var compilation = CreateCompilation();
-            var references = compilation.References.Concat(
-                    new[] { compilation.ToMetadataReference(), }
-                )
+            var references = compilation.References
+                .Concat(new[] { compilation.ToMetadataReference(), })
                 .ToArray();
             return CreateProjectEngine(Configuration, references, configure);
         }
@@ -407,9 +406,10 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     if (!b.Features.OfType<ITagHelperFeature>().Any())
                     {
                         b.Features.Add(new CompilationTagHelperFeature());
-                        b.Features.Add(
-                            new DefaultMetadataReferenceFeature() { References = references, }
-                        );
+                        b.Features
+                            .Add(
+                                new DefaultMetadataReferenceFeature() { References = references, }
+                            );
                     }
 
                     b.Features.Add(new DefaultTypeNameFeature());
@@ -506,7 +506,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     TestProjectRoot,
                     baselineDiagnosticsFileName
                 );
-                var lines = cSharpDocument.Diagnostics.Select(RazorDiagnosticSerializer.Serialize)
+                var lines = cSharpDocument.Diagnostics
+                    .Select(RazorDiagnosticSerializer.Serialize)
                     .ToArray();
                 if (lines.Any())
                 {
@@ -542,11 +543,13 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 baselineDiagnostics = diagnosticsFile.ReadAllText();
             }
 
-            var actualDiagnostics = string.Concat(
-                cSharpDocument.Diagnostics.Select(
-                    d => NormalizeNewLines(RazorDiagnosticSerializer.Serialize(d)) + "\r\n"
-                )
-            );
+            var actualDiagnostics = string
+                .Concat(
+                    cSharpDocument.Diagnostics
+                        .Select(
+                            d => NormalizeNewLines(RazorDiagnosticSerializer.Serialize(d)) + "\r\n"
+                        )
+                );
             Assert.Equal(baselineDiagnostics, actualDiagnostics);
         }
 
@@ -631,10 +634,11 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     var mapping = csharpDocument.SourceMappings[j];
                     if (mapping.OriginalSpan == sourceSpan)
                     {
-                        var actualSpan = csharpDocument.GeneratedCode.Substring(
-                            mapping.GeneratedSpan.AbsoluteIndex,
-                            mapping.GeneratedSpan.Length
-                        );
+                        var actualSpan = csharpDocument.GeneratedCode
+                            .Substring(
+                                mapping.GeneratedSpan.AbsoluteIndex,
+                                mapping.GeneratedSpan.Length
+                            );
 
                         if (!string.Equals(expectedSpan, actualSpan, StringComparison.Ordinal))
                         {

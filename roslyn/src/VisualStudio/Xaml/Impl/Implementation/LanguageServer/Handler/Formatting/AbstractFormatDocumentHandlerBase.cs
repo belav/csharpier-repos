@@ -30,8 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             using var _ = ArrayBuilder<LSP.TextEdit>.GetInstance(out var edits);
 
             var document = context.Document;
-            var formattingService =
-                document?.Project.LanguageServices.GetService<IXamlFormattingService>();
+            var formattingService = document?.Project.LanguageServices
+                .GetService<IXamlFormattingService>();
 
             if (document != null && formattingService != null)
             {
@@ -49,11 +49,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                     OtherOptions = formattingOptions.OtherOptions
                 };
                 var textChanges = await formattingService.GetFormattingChangesAsync(
-                        document,
-                        options,
-                        textSpan,
-                        cancellationToken
-                    )
+                    document,
+                    options,
+                    textSpan,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 edits.AddRange(
                     textChanges.Select(

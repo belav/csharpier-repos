@@ -18,9 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void EmptyFile()
         {
             var code = "#load \"\"";
-            var options = TestOptions.DebugDll.WithSourceReferenceResolver(
-                TestSourceReferenceResolver.Default
-            );
+            var options = TestOptions.DebugDll
+                .WithSourceReferenceResolver(TestSourceReferenceResolver.Default);
             var compilation = CreateCompilationWithMscorlib45(
                 code,
                 options: options,
@@ -40,9 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void MissingFile()
         {
             var code = "#load \"missing\"";
-            var options = TestOptions.DebugDll.WithSourceReferenceResolver(
-                TestSourceReferenceResolver.Default
-            );
+            var options = TestOptions.DebugDll
+                .WithSourceReferenceResolver(TestSourceReferenceResolver.Default);
             var compilation = CreateCompilationWithMscorlib45(
                 code,
                 options: options,
@@ -80,27 +78,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 );
 
                 Assert.Equal(2, compilation.SyntaxTrees.Length);
-                compilation.GetParseDiagnostics()
-                    .Verify(
-                        // a.csx(2,27): error CS1504: Source file 'b.csx' could not be opened -- Could not find file.
-                        //                     #load "b.csx";
-                        Diagnostic(ErrorCode.ERR_NoSourceFile, @"""b.csx""")
-                            .WithArguments("b.csx", "Could not find file.")
-                            .WithLocation(2, 27)
-                    );
-                compilation.GetDiagnostics()
-                    .Verify(
-                        // a.csx(2,27): error CS1504: Source file 'b.csx' could not be opened -- Could not find file.
-                        //                     #load "b.csx";
-                        Diagnostic(ErrorCode.ERR_NoSourceFile, @"""b.csx""")
-                            .WithArguments("b.csx", "Could not find file.")
-                            .WithLocation(2, 27),
-                        // a.csx(3,21): error CS0103: The name 'asdf' does not exist in the current context
-                        //                     asdf();
-                        Diagnostic(ErrorCode.ERR_NameNotInContext, "asdf")
-                            .WithArguments("asdf")
-                            .WithLocation(3, 21)
-                    );
+                compilation.GetParseDiagnostics().Verify(
+                    // a.csx(2,27): error CS1504: Source file 'b.csx' could not be opened -- Could not find file.
+                    //                     #load "b.csx";
+                    Diagnostic(ErrorCode.ERR_NoSourceFile, @"""b.csx""")
+                        .WithArguments("b.csx", "Could not find file.")
+                        .WithLocation(2, 27)
+                );
+                compilation.GetDiagnostics().Verify(
+                    // a.csx(2,27): error CS1504: Source file 'b.csx' could not be opened -- Could not find file.
+                    //                     #load "b.csx";
+                    Diagnostic(ErrorCode.ERR_NoSourceFile, @"""b.csx""")
+                        .WithArguments("b.csx", "Could not find file.")
+                        .WithLocation(2, 27),
+                    // a.csx(3,21): error CS0103: The name 'asdf' does not exist in the current context
+                    //                     asdf();
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "asdf")
+                        .WithArguments("asdf")
+                        .WithLocation(3, 21)
+                );
             }
         }
 
@@ -127,14 +123,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             compilation = compilation.AddSyntaxTrees(external2);
 
             Assert.Equal(3, compilation.SyntaxTrees.Length);
-            compilation.GetParseDiagnostics()
-                .Verify(
-                    // (1,7): error CS2015: 'a.csx' is a binary file instead of a text file
-                    // #load "a.csx"
-                    Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
-                        .WithArguments("a.csx")
-                        .WithLocation(1, 7)
-                );
+            compilation.GetParseDiagnostics().Verify(
+                // (1,7): error CS2015: 'a.csx' is a binary file instead of a text file
+                // #load "a.csx"
+                Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
+                    .WithArguments("a.csx")
+                    .WithLocation(1, 7)
+            );
 
             var external3 = Parse(
                 @"
@@ -146,49 +141,46 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             compilation = compilation.ReplaceSyntaxTree(external1, external3);
 
             Assert.Equal(3, compilation.SyntaxTrees.Length);
-            compilation.GetParseDiagnostics()
-                .Verify(
-                    // external3.csx(3,23): error CS2015: 'a.csx' is a binary file instead of a text file
-                    //                 #load "a.csx"
-                    Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
-                        .WithArguments("a.csx")
-                        .WithLocation(3, 23),
-                    // b.csx(1,7): error CS2015: 'a.csx' is a binary file instead of a text file
-                    // #load "a.csx"
-                    Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
-                        .WithArguments("a.csx")
-                        .WithLocation(1, 7)
-                );
+            compilation.GetParseDiagnostics().Verify(
+                // external3.csx(3,23): error CS2015: 'a.csx' is a binary file instead of a text file
+                //                 #load "a.csx"
+                Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
+                    .WithArguments("a.csx")
+                    .WithLocation(3, 23),
+                // b.csx(1,7): error CS2015: 'a.csx' is a binary file instead of a text file
+                // #load "a.csx"
+                Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
+                    .WithArguments("a.csx")
+                    .WithLocation(1, 7)
+            );
 
             var external4 = Parse("#load \"a.csx\"", "external4.csx", TestOptions.Script);
             compilation = compilation.ReplaceSyntaxTree(external3, external4);
 
             Assert.Equal(3, compilation.SyntaxTrees.Length);
-            compilation.GetParseDiagnostics()
-                .Verify(
-                    // external4.csx(1,7): error CS2015: 'a.csx' is a binary file instead of a text file
-                    // #load "a.csx"
-                    Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
-                        .WithArguments("a.csx")
-                        .WithLocation(1, 7),
-                    // b.csx(1,7): error CS2015: 'a.csx' is a binary file instead of a text file
-                    // #load "a.csx"
-                    Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
-                        .WithArguments("a.csx")
-                        .WithLocation(1, 7)
-                );
+            compilation.GetParseDiagnostics().Verify(
+                // external4.csx(1,7): error CS2015: 'a.csx' is a binary file instead of a text file
+                // #load "a.csx"
+                Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
+                    .WithArguments("a.csx")
+                    .WithLocation(1, 7),
+                // b.csx(1,7): error CS2015: 'a.csx' is a binary file instead of a text file
+                // #load "a.csx"
+                Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
+                    .WithArguments("a.csx")
+                    .WithLocation(1, 7)
+            );
 
             compilation = compilation.RemoveSyntaxTrees(external2);
 
             Assert.Equal(external4, compilation.SyntaxTrees.Single());
-            compilation.GetParseDiagnostics()
-                .Verify(
-                    // external4.csx(1,7): error CS2015: 'a.csx' is a binary file instead of a text file
-                    // #load "a.csx"
-                    Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
-                        .WithArguments("a.csx")
-                        .WithLocation(1, 7)
-                );
+            compilation.GetParseDiagnostics().Verify(
+                // external4.csx(1,7): error CS2015: 'a.csx' is a binary file instead of a text file
+                // #load "a.csx"
+                Diagnostic(ErrorCode.ERR_BinaryFile, @"""a.csx""")
+                    .WithArguments("a.csx")
+                    .WithLocation(1, 7)
+            );
         }
 
         [Fact]

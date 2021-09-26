@@ -373,18 +373,19 @@ namespace System.Threading.Tasks.Dataflow
                 if (exception != null)
                 {
                     // Get out from under currently held locks. CompleteCore re-acquires the locks it needs.
-                    Task.Factory.StartNew(
-                        exc =>
-                            CompleteCore(
-                                exception: (Exception)exc!,
-                                storeExceptionEvenIfAlreadyCompleting: true,
-                                revertProcessingState: true
-                            ),
-                        exception,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                    Task.Factory
+                        .StartNew(
+                            exc =>
+                                CompleteCore(
+                                    exception: (Exception)exc!,
+                                    storeExceptionEvenIfAlreadyCompleting: true,
+                                    revertProcessingState: true
+                                ),
+                            exception,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
             }
         }
@@ -477,11 +478,8 @@ namespace System.Threading.Tasks.Dataflow
                 bool consumed = false;
                 try
                 {
-                    T? consumedValue = sourceAndMessage.Key.ConsumeMessage(
-                        sourceAndMessage.Value,
-                        this,
-                        out consumed
-                    );
+                    T? consumedValue = sourceAndMessage.Key
+                        .ConsumeMessage(sourceAndMessage.Value, this, out consumed);
                     if (consumed)
                     {
                         _source.AddMessage(consumedValue!);

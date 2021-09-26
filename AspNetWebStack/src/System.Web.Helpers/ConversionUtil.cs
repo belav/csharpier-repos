@@ -85,10 +85,8 @@ namespace System.Web.Helpers
             result = null;
             if (_stringToEnumMethod == null)
             {
-                _stringToEnumMethod = typeof(ConversionUtil).GetMethod(
-                    "TryFromStringToEnum",
-                    BindingFlags.Static | BindingFlags.NonPublic
-                );
+                _stringToEnumMethod = typeof(ConversionUtil)
+                    .GetMethod("TryFromStringToEnum", BindingFlags.Static | BindingFlags.NonPublic);
                 Debug.Assert(_stringToEnumMethod != null);
             }
             var args = new object[] { value, null };

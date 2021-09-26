@@ -74,8 +74,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             var solution = context.Solution;
 
-            var documentTrackingService =
-                solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
+            var documentTrackingService = solution.Workspace.Services
+                .GetRequiredService<IDocumentTrackingService>();
 
             // Collect all the documents from the solution in the order we'd like to get diagnostics for.  This will
             // prioritize the files from currently active projects, but then also include all other docs in all projects
@@ -106,10 +106,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 // solution analysis on.
                 if (!isOpen)
                 {
-                    var analysisScope = solution.Workspace.Options.GetOption(
-                        SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                        project.Language
-                    );
+                    var analysisScope = solution.Workspace.Options
+                        .GetOption(
+                            SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                            project.Language
+                        );
                     if (analysisScope != BackgroundAnalysisScope.FullSolution)
                     {
                         context.TraceInformation(
@@ -147,11 +148,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             // date.  However, that's fine as these are closed files and won't be in the process of being edited.  So
             // any deviations in the spans of diagnostics shouldn't be impactful for the user.
             return DiagnosticService.GetPullDiagnosticsAsync(
-                    document,
-                    includeSuppressedDiagnostics: false,
-                    diagnosticMode,
-                    cancellationToken
-                )
+                document,
+                includeSuppressedDiagnostics: false,
+                diagnosticMode,
+                cancellationToken
+            )
                 .AsTask();
         }
     }

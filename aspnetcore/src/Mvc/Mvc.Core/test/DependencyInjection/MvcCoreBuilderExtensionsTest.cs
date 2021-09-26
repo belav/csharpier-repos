@@ -46,9 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.DependencyInjection
             );
 
             var attribute = new CustomAttributeBuilder(
-                typeof(ProvideApplicationPartFactoryAttribute).GetConstructor(
-                    new[] { typeof(Type) }
-                ),
+                typeof(ProvideApplicationPartFactoryAttribute)
+                    .GetConstructor(new[] { typeof(Type) }),
                 new[] { typeof(TestApplicationPartFactory) }
             );
 

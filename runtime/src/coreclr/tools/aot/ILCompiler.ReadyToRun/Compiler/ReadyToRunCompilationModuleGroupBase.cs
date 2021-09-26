@@ -467,9 +467,8 @@ namespace ILCompiler
                         else
                         {
                             entityDefinitionInstantiation =
-                                (
-                                    (MethodDesc)entityWithInstantiation
-                                ).GetTypicalMethodDefinition().Instantiation;
+                                ((MethodDesc)entityWithInstantiation)
+                                    .GetTypicalMethodDefinition().Instantiation;
                         }
 
                         GenericParameterDesc genericParam =

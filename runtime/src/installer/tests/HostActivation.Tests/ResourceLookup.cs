@@ -78,12 +78,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 ResourceLookupFixture_Built = new TestProjectFixture(
                     "ResourceLookup",
                     RepoDirectories
-                ).EnsureRestored().BuildProject();
+                )
+                    .EnsureRestored()
+                    .BuildProject();
 
                 ResourceLookupFixture_Published = new TestProjectFixture(
                     "ResourceLookup",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
             }
 
             public void Dispose()

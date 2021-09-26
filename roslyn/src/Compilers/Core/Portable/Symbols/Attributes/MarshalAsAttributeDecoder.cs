@@ -143,15 +143,13 @@ namespace Microsoft.CodeAnalysis
                 == SpecialType.System_Int16
             )
             {
-                unmanagedType = (UnmanagedType)attribute.CommonConstructorArguments[
-                    0
-                ].DecodeValue<short>(SpecialType.System_Int16);
+                unmanagedType = (UnmanagedType)attribute.CommonConstructorArguments[0]
+                    .DecodeValue<short>(SpecialType.System_Int16);
             }
             else
             {
-                unmanagedType = attribute.CommonConstructorArguments[0].DecodeValue<UnmanagedType>(
-                    SpecialType.System_Enum
-                );
+                unmanagedType = attribute.CommonConstructorArguments[0]
+                    .DecodeValue<UnmanagedType>(SpecialType.System_Enum);
             }
 
             return unmanagedType;
@@ -198,9 +196,8 @@ namespace Microsoft.CodeAnalysis
                         break;
 
                     case "MarshalTypeRef":
-                        typeSymbol = namedArg.Value.DecodeValue<ITypeSymbolInternal>(
-                            SpecialType.None
-                        );
+                        typeSymbol = namedArg.Value
+                            .DecodeValue<ITypeSymbolInternal>(SpecialType.None);
                         hasTypeSymbol = true; // even if MarshalTypeRef == null
                         break;
 
@@ -319,9 +316,8 @@ namespace Microsoft.CodeAnalysis
                 {
                     // array:
                     case "ArraySubType":
-                        elementType = namedArg.Value.DecodeValue<UnmanagedType>(
-                            SpecialType.System_Enum
-                        );
+                        elementType = namedArg.Value
+                            .DecodeValue<UnmanagedType>(SpecialType.System_Enum);
 
                         // for some reason, Dev10 metadata writer disallows CustomMarshaler type as an element type of non-fixed arrays
                         if (
@@ -365,9 +361,8 @@ namespace Microsoft.CodeAnalysis
                             goto case "SafeArraySubType";
                         }
 
-                        parameterIndex = namedArg.Value.DecodeValue<short>(
-                            SpecialType.System_Int16
-                        );
+                        parameterIndex = namedArg.Value
+                            .DecodeValue<short>(SpecialType.System_Int16);
                         if (parameterIndex < 0)
                         {
                             messageProvider.ReportInvalidNamedArgument(
@@ -431,9 +426,8 @@ namespace Microsoft.CodeAnalysis
                 switch (namedArg.Key)
                 {
                     case "SafeArraySubType":
-                        elementTypeVariant = namedArg.Value.DecodeValue<Cci.VarEnum>(
-                            SpecialType.System_Enum
-                        );
+                        elementTypeVariant = namedArg.Value
+                            .DecodeValue<Cci.VarEnum>(SpecialType.System_Enum);
                         if (
                             elementTypeVariant < 0
                             || (int)elementTypeVariant
@@ -452,9 +446,8 @@ namespace Microsoft.CodeAnalysis
                         break;
 
                     case "SafeArrayUserDefinedSubType":
-                        elementTypeSymbol = namedArg.Value.DecodeValue<ITypeSymbolInternal>(
-                            SpecialType.None
-                        );
+                        elementTypeSymbol = namedArg.Value
+                            .DecodeValue<ITypeSymbolInternal>(SpecialType.None);
                         symbolIndex = position;
                         break;
 

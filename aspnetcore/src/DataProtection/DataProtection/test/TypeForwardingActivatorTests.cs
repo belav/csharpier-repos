@@ -102,11 +102,8 @@ namespace Microsoft.AspNetCore.DataProtection
         [InlineData(typeof(FactAttribute))]
         public void CreateInstance_DoesNotForwardingTypesExternalTypes(Type type)
         {
-            new TypeForwardingActivator(null).CreateInstance(
-                typeof(object),
-                type.AssemblyQualifiedName,
-                out var forwarded
-            );
+            new TypeForwardingActivator(null)
+                .CreateInstance(typeof(object), type.AssemblyQualifiedName, out var forwarded);
             Assert.False(
                 forwarded,
                 "Should not have forwarded types that are not in Microsoft.AspNetCore.DataProjection"

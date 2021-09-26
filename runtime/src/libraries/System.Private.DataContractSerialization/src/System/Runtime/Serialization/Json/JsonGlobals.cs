@@ -66,11 +66,9 @@ namespace System.Runtime.Serialization.Json
         public const char WhitespaceChar = ' ';
         public const string serverTypeString = "__type";
         public const int maxScopeSize = 25;
-        public static readonly XmlDictionaryString itemDictionaryString = new XmlDictionary().Add(
-            "item"
-        );
-        public static readonly XmlDictionaryString rootDictionaryString = new XmlDictionary().Add(
-            "root"
-        );
+        public static readonly XmlDictionaryString itemDictionaryString = new XmlDictionary()
+            .Add("item");
+        public static readonly XmlDictionaryString rootDictionaryString = new XmlDictionary()
+            .Add("root");
     }
 }

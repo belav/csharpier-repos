@@ -53,18 +53,20 @@ public class Tests
             return 1;
 
         // Regression test for bug #59193 (shared runtime wrappers)
-        ConstructorInfo con1 = typeof(A).GetConstructor(
-            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-            null,
-            new Type[1] { typeof(int) },
-            null
-        );
-        ConstructorInfo con2 = typeof(B).GetConstructor(
-            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-            null,
-            new Type[1] { typeof(int) },
-            null
-        );
+        ConstructorInfo con1 = typeof(A)
+            .GetConstructor(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                null,
+                new Type[1] { typeof(int) },
+                null
+            );
+        ConstructorInfo con2 = typeof(B)
+            .GetConstructor(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                null,
+                new Type[1] { typeof(int) },
+                null
+            );
 
         con1.Invoke(new Object[] { 0 });
         con2.Invoke(new Object[] { 0 });

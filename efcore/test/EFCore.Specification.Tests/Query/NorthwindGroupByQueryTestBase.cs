@@ -507,7 +507,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             into grouping
                         from c in grouping.DefaultIfEmpty()
                         select o
-                    ).GroupBy(o => o.OrderID)
+                    )
+                        .GroupBy(o => o.OrderID)
                         .Select(
                             g => new { Value = g.Key + g.Key, Average = g.Average(o => o.OrderID) }
                         )
@@ -1719,7 +1720,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         from o in ss.Set<Order>()
                         join c in ss.Set<Customer>() on o.CustomerID equals c.CustomerID
                         group o by c.CustomerID
-                    ).Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
+                    )
+                        .Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
                 e => e.Key
             );
         }
@@ -1757,7 +1759,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             .Take(50)
                             on o.CustomerID equals c.CustomerID
                         group o by c.CustomerID
-                    ).Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
+                    )
+                        .Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
                 e => e.Key
             );
         }
@@ -1775,7 +1778,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         from o in grouping.DefaultIfEmpty()
                         where o != null
                         select o
-                    ).GroupBy(o => o.CustomerID)
+                    )
+                        .GroupBy(o => o.CustomerID)
                         .Select(g => new { g.Key, Average = g.Average(o => o.OrderID) }),
                 e => e.Key
             );
@@ -1793,7 +1797,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into grouping
                         from o in grouping.DefaultIfEmpty()
                         select c
-                    ).GroupBy(c => c.CustomerID)
+                    )
+                        .GroupBy(c => c.CustomerID)
                         .Select(g => new { g.Key, Max = g.Max(c => c.City) }),
                 e => e.Key
             );
@@ -1813,7 +1818,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             into grouping
                         from c in grouping.DefaultIfEmpty()
                         select o
-                    ).GroupBy(o => o.CustomerID)
+                    )
+                        .GroupBy(o => o.CustomerID)
                         .Select(g => new { g.Key, Average = g.Average(o => o.OrderID) }),
                 e => e.Key
             );
@@ -1831,7 +1837,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into grouping
                         from o in grouping.DefaultIfEmpty()
                         select c
-                    ).GroupBy(c => c.CustomerID)
+                    )
+                        .GroupBy(c => c.CustomerID)
                         .Select(g => new { Value = g.Key, Max = g.Max(c => c.City) }),
                 e => e.Value
             );
@@ -1851,7 +1858,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             into grouping
                         from c in grouping.DefaultIfEmpty()
                         select o
-                    ).GroupBy(o => o.OrderID)
+                    )
+                        .GroupBy(o => o.OrderID)
                         .Select(g => new { Value = g.Key, Average = g.Average(o => o.OrderID) }),
                 e => e.Value
             );
@@ -1893,7 +1901,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         from o in grouping
                         where o.OrderID > 10300
                         select o
-                    ).GroupBy(o => o.CustomerID)
+                    )
+                        .GroupBy(o => o.CustomerID)
                         .Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
                 e => e.Key
             );
@@ -1910,7 +1919,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         from o1 in ss.Set<Order>().Where(o => o.OrderID < 10400)
                         join o2 in ss.Set<Order>() on o1.OrderID equals o2.OrderID
                         group o2 by o1.CustomerID
-                    ).Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
+                    )
+                        .Select(g => new { g.Key, Count = g.Average(o => o.OrderID) }),
                 e => e.Key
             );
         }
@@ -2340,27 +2350,21 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_with_result_selector(bool async)
         {
-            return AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>()
-                        .GroupBy(
-                            o => o.CustomerID,
-                            (k, g) =>
-                                new
-                                {
-                                    // ReSharper disable once PossibleMultipleEnumeration
-                                    Sum = g.Sum(o => o.OrderID),
-                                    // ReSharper disable once PossibleMultipleEnumeration
-                                    Min = g.Min(o => o.OrderID),
-                                    // ReSharper disable once PossibleMultipleEnumeration
-                                    Max = g.Max(o => o.OrderID),
-                                    // ReSharper disable once PossibleMultipleEnumeration
-                                    Avg = g.Average(o => o.OrderID)
-                                }
-                        ),
-                e => e.Min + " " + e.Max
-            );
+            return AssertQuery(async, ss => ss.Set<Order>().GroupBy(
+                        o => o.CustomerID,
+                        (k, g) =>
+                            new
+                            {
+                                // ReSharper disable once PossibleMultipleEnumeration
+                                Sum = g.Sum(o => o.OrderID),
+                                // ReSharper disable once PossibleMultipleEnumeration
+                                Min = g.Min(o => o.OrderID),
+                                // ReSharper disable once PossibleMultipleEnumeration
+                                Max = g.Max(o => o.OrderID),
+                                // ReSharper disable once PossibleMultipleEnumeration
+                                Avg = g.Average(o => o.OrderID)
+                            }
+                    ), e => e.Min + " " + e.Max);
         }
 
         [ConditionalTheory]
@@ -2710,7 +2714,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         from c in ss.Set<Customer>()
                                         where c.CustomerID == g.Key
                                         select c
-                                    ).Count()
+                                    )
+                                        .Count()
                                 }
                         )
             );
@@ -2776,7 +2781,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                             .Select(e => new { e.Key, Max = e.Max(i => i.OrderDate) })
                             on c.CustomerID equals o.Key
                         select new { c, o.Max }
-                    ).OrderBy(e => e.Max).ThenBy(c => c.c.CustomerID).Skip(10).Take(10),
+                    )
+                        .OrderBy(e => e.Max)
+                        .ThenBy(c => c.c.CustomerID)
+                        .Skip(10)
+                        .Take(10),
                 assertOrder: true,
                 elementAsserter: (e, a) =>
                 {
@@ -3033,13 +3042,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                         from o in ss.Set<Order>()
                         group o by new { o.CustomerID } into g
                         select g.Where(e => e.OrderID < 10300).Count()
-                    ).LongCount(),
+                    )
+                        .LongCount(),
                 ss =>
                     (
                         from o in ss.Set<Order>()
                         group o by new { o.CustomerID } into g
                         select g.Where(e => e.OrderID < 10300).Count()
-                    ).LongCountAsync(default)
+                    )
+                        .LongCountAsync(default)
             );
         }
 
@@ -3510,7 +3521,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = c.CustomerID,
-                                    Subquery = c.Orders.Select(
+                                    Subquery = c.Orders
+                                        .Select(
                                             o => new { First = o.CustomerID, Second = o.OrderID }
                                         )
                                         .GroupBy(x => x.First)
@@ -3540,7 +3552,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = c.CustomerID,
-                                    Subquery = c.Orders.Select(
+                                    Subquery = c.Orders
+                                        .Select(
                                             o => new { First = o.CustomerID, Second = o.OrderID }
                                         )
                                         .GroupBy(x => x.First)
@@ -3615,7 +3628,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Key = c.CustomerID,
-                                    Subquery = c.Orders.Select(
+                                    Subquery = c.Orders
+                                        .Select(
                                             o =>
                                                 new
                                                 {

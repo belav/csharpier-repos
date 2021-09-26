@@ -187,12 +187,13 @@ namespace Roslyn.Utilities
             {
                 // If we're recursing too deep, move the work to another thread to do so we
                 // don't blow the stack.
-                var task = Task.Factory.StartNew(
-                    () => ReadValueWorker(),
-                    _cancellationToken,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                );
+                var task = Task.Factory
+                    .StartNew(
+                        () => ReadValueWorker(),
+                        _cancellationToken,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
 
                 // We must not proceed until the additional task completes. After returning from a read, the underlying
                 // stream providing access to raw memory will be closed; if this occurs before the separate thread
@@ -763,10 +764,11 @@ namespace Roslyn.Utilities
         private static Exception NoSerializationTypeException(string typeName)
         {
             return new InvalidOperationException(
-                string.Format(
-                    Resources.The_type_0_is_not_understood_by_the_serialization_binder,
-                    typeName
-                )
+                string
+                    .Format(
+                        Resources.The_type_0_is_not_understood_by_the_serialization_binder,
+                        typeName
+                    )
             );
         }
 

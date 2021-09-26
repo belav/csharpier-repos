@@ -832,13 +832,14 @@ namespace System.Text
             }
             else
             {
-                return base.GetCharsWithFallback(
-                    bytes,
-                    originalBytesLength,
-                    chars,
-                    originalCharsLength,
-                    decoder
-                );
+                return base
+                    .GetCharsWithFallback(
+                        bytes,
+                        originalBytesLength,
+                        chars,
+                        originalCharsLength,
+                        decoder
+                    );
             }
         }
 

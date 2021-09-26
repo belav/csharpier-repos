@@ -42,9 +42,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             Func<WriteContext, bool> expectedErrorsFilter = null
         ) where T : class
         {
-            var disposable = base.StartVerifiableLog(
-                ResolveExpectedErrorsFilter(expectedErrorsFilter)
-            );
+            var disposable = base
+                .StartVerifiableLog(ResolveExpectedErrorsFilter(expectedErrorsFilter));
             return InProcessTestServer<T>.StartServer(LoggerFactory, disposable);
         }
     }

@@ -105,10 +105,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     method = new MethodWithToken(
                         method.Method,
-                        factory.SignatureContext.GetModuleTokenForMethod(
-                            method.Method,
-                            throwIfNotFound: false
-                        ),
+                        factory.SignatureContext
+                            .GetModuleTokenForMethod(method.Method, throwIfNotFound: false),
                         method.ConstrainedType,
                         unboxing: _method.Unboxing,
                         null
@@ -120,10 +118,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         method = new MethodWithToken(
                             method.Method,
-                            factory.SignatureContext.GetModuleTokenForMethod(
-                                method.Method,
-                                throwIfNotFound: false
-                            ),
+                            factory.SignatureContext
+                                .GetModuleTokenForMethod(method.Method, throwIfNotFound: false),
                             method.ConstrainedType,
                             unboxing: _method.Unboxing,
                             null

@@ -67,8 +67,8 @@ namespace TypeSystemTests
             Assert.Equal(4, virtualSlots.Count);
 
             List<MethodDesc> vtable = virtualSlots.Select(
-                    s => t.FindVirtualFunctionTargetMethodOnObjectType(s)
-                )
+                s => t.FindVirtualFunctionTargetMethodOnObjectType(s)
+            )
                 .ToList();
 
             Assert.Contains(vtable, m => m.Name == "Equals" && m.OwningType == t);
@@ -105,8 +105,8 @@ namespace TypeSystemTests
             Assert.Equal(4, virtualSlots.Count);
 
             List<MethodDesc> vtable = virtualSlots.Select(
-                    s => t.FindVirtualFunctionTargetMethodOnObjectType(s)
-                )
+                s => t.FindVirtualFunctionTargetMethodOnObjectType(s)
+            )
                 .ToList();
 
             Assert.Contains(vtable, m => m.Name == "Equals" && m.OwningType == baseType);
@@ -143,8 +143,8 @@ namespace TypeSystemTests
             Assert.Equal(4, virtualSlots.Count);
 
             List<MethodDesc> vtable = virtualSlots.Select(
-                    s => t.FindVirtualFunctionTargetMethodOnObjectType(s)
-                )
+                s => t.FindVirtualFunctionTargetMethodOnObjectType(s)
+            )
                 .ToList();
 
             Assert.Contains(vtable, m => m.Name == "Equals" && m.OwningType == t);

@@ -280,11 +280,12 @@ namespace System.Security.Permissions
                     principal.Identity.IsAuthenticated
                     && (
                         idRole.ID == null
-                        || string.Equals(
-                            principal.Identity.Name,
-                            idRole.ID,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        || string
+                            .Equals(
+                                principal.Identity.Name,
+                                idRole.ID,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                 )
                 {

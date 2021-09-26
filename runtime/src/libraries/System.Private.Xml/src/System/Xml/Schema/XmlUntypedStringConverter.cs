@@ -205,9 +205,8 @@ namespace System.Xml.Schema
 
         private TimeSpan StringToDuration(string value)
         {
-            return new XsdDuration(value, XsdDuration.DurationType.Duration).ToTimeSpan(
-                XsdDuration.DurationType.Duration
-            );
+            return new XsdDuration(value, XsdDuration.DurationType.Duration)
+                .ToTimeSpan(XsdDuration.DurationType.Duration);
         }
 
         private static XmlQualifiedName StringToQName(
@@ -383,11 +382,8 @@ namespace System.Xml.Schema
             T[] arrDst = new T[stringArray.Length];
             for (int i = 0; i < stringArray.Length; i++)
             {
-                arrDst[i] = (T)_listItemConverter!.FromString(
-                    stringArray[i],
-                    typeof(T),
-                    nsResolver
-                );
+                arrDst[i] = (T)_listItemConverter!
+                    .FromString(stringArray[i], typeof(T), nsResolver);
             }
             return arrDst;
         }

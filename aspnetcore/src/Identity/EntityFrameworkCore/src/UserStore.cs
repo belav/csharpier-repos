@@ -458,11 +458,12 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             if (roleEntity == null)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.RoleNotFound,
-                        normalizedRoleName
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.RoleNotFound,
+                            normalizedRoleName
+                        )
                 );
             }
             UserRoles.Add(CreateUserRole(user, roleEntity));
@@ -648,11 +649,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             }
 
             var matchedClaims = await UserClaims.Where(
-                    uc =>
-                        uc.UserId.Equals(user.Id)
-                        && uc.ClaimValue == claim.Value
-                        && uc.ClaimType == claim.Type
-                )
+                uc =>
+                    uc.UserId.Equals(user.Id)
+                    && uc.ClaimValue == claim.Value
+                    && uc.ClaimType == claim.Type
+            )
                 .ToListAsync(cancellationToken);
             foreach (var matchedClaim in matchedClaims)
             {
@@ -686,11 +687,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             foreach (var claim in claims)
             {
                 var matchedClaims = await UserClaims.Where(
-                        uc =>
-                            uc.UserId.Equals(user.Id)
-                            && uc.ClaimValue == claim.Value
-                            && uc.ClaimType == claim.Type
-                    )
+                    uc =>
+                        uc.UserId.Equals(user.Id)
+                        && uc.ClaimValue == claim.Value
+                        && uc.ClaimType == claim.Type
+                )
                     .ToListAsync(cancellationToken);
                 foreach (var c in matchedClaims)
                 {

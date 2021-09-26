@@ -56,10 +56,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var descriptor = TagHelperDescriptorBuilder.Create(
-                    "other-kind",
-                    "TestTagHelper",
-                    "TestAssembly"
-                )
+                "other-kind",
+                "TestTagHelper",
+                "TestAssembly"
+            )
                 .Build();
 
             // Act

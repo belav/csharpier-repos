@@ -1117,8 +1117,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 var minReadRate = input.Http1Connection.MinRequestBodyDataRate;
                 var mockTimeoutControl = new Mock<ITimeoutControl>();
                 mockTimeoutControl.Setup(
-                        timeoutControl => timeoutControl.StartRequestBody(minReadRate)
-                    )
+                    timeoutControl => timeoutControl.StartRequestBody(minReadRate)
+                )
                     .Callback(() => startRequestBodyCalled = true);
 
                 input.Http1ConnectionContext.TimeoutControl = mockTimeoutControl.Object;

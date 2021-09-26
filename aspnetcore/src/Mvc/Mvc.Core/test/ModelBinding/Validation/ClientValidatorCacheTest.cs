@@ -15,10 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         {
             // Arrange
             var cache = new ClientValidatorCache();
-            var metadata = new TestModelMetadataProvider().GetMetadataForProperty(
-                typeof(TypeWithProperty),
-                "Property1"
-            );
+            var metadata = new TestModelMetadataProvider()
+                .GetMetadataForProperty(typeof(TypeWithProperty), "Property1");
             var validatorProvider = TestClientModelValidatorProvider.CreateDefaultProvider();
 
             // Act - 1
@@ -47,10 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         {
             // Arrange
             var cache = new ClientValidatorCache();
-            var metadata = new TestModelMetadataProvider().GetMetadataForProperty(
-                typeof(TypeWithProperty),
-                "Property1"
-            );
+            var metadata = new TestModelMetadataProvider()
+                .GetMetadataForProperty(typeof(TypeWithProperty), "Property1");
             var validatorProvider = new ProviderWithNonReusableValidators();
 
             // Act - 1
@@ -83,9 +79,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             var modelMetadataProvider = new TestModelMetadataProvider();
             var metadata = modelMetadataProvider.GetMetadataForType(typeof(TestRecordType));
             var property = metadata.Properties[nameof(TestRecordType.Property1)];
-            var parameter = metadata.BoundConstructor.BoundConstructorParameters.First(
-                f => f.Name == nameof(TestRecordType.Property1)
-            );
+            var parameter = metadata.BoundConstructor.BoundConstructorParameters
+                .First(f => f.Name == nameof(TestRecordType.Property1));
             var validatorProvider = new ProviderWithNonReusableValidators();
 
             // Act

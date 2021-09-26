@@ -101,8 +101,8 @@ namespace System.Web.Razor.Parser
 
             // Pull out the type name
             string sessionStateValue = String.Concat(
-                    Span.Symbols.Cast<CSharpSymbol>().Select(sym => sym.Content)
-                )
+                Span.Symbols.Cast<CSharpSymbol>().Select(sym => sym.Content)
+            )
                 .Trim();
 
             // Set up code generation

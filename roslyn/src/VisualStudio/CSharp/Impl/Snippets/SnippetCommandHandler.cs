@@ -125,10 +125,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             if (
                 args.TypedChar == ';'
                 && AreSnippetsEnabled(args)
-                && args.TextView.Properties.TryGetProperty(
-                    typeof(AbstractSnippetExpansionClient),
-                    out AbstractSnippetExpansionClient snippetExpansionClient
-                )
+                && args.TextView.Properties
+                    .TryGetProperty(
+                        typeof(AbstractSnippetExpansionClient),
+                        out AbstractSnippetExpansionClient snippetExpansionClient
+                    )
                 && snippetExpansionClient.IsFullMethodCallSnippet
             )
             {
@@ -148,10 +149,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
         )
         {
             if (
-                !textView.Properties.TryGetProperty(
-                    typeof(AbstractSnippetExpansionClient),
-                    out AbstractSnippetExpansionClient expansionClient
-                )
+                !textView.Properties
+                    .TryGetProperty(
+                        typeof(AbstractSnippetExpansionClient),
+                        out AbstractSnippetExpansionClient expansionClient
+                    )
             )
             {
                 expansionClient = new SnippetExpansionClient(
@@ -164,10 +166,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                     EditorAdaptersFactoryService,
                     _argumentProviders
                 );
-                textView.Properties.AddProperty(
-                    typeof(AbstractSnippetExpansionClient),
-                    expansionClient
-                );
+                textView.Properties
+                    .AddProperty(typeof(AbstractSnippetExpansionClient), expansionClient);
             }
 
             return expansionClient;

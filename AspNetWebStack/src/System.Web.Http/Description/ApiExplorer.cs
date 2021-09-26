@@ -146,9 +146,9 @@ namespace System.Web.Http.Description
             IList<HttpMethod> supportedMethods = new List<HttpMethod>();
             IList<HttpMethod> actionHttpMethods = actionDescriptor.SupportedHttpMethods;
             HttpMethodConstraint httpMethodConstraint =
-                route.Constraints.Values.FirstOrDefault(
-                    c => typeof(HttpMethodConstraint).IsAssignableFrom(c.GetType())
-                ) as HttpMethodConstraint;
+                route.Constraints.Values
+                    .FirstOrDefault(c => typeof(HttpMethodConstraint).IsAssignableFrom(c.GetType()))
+                as HttpMethodConstraint;
 
             if (httpMethodConstraint == null)
             {
@@ -156,7 +156,8 @@ namespace System.Web.Http.Description
             }
             else
             {
-                supportedMethods = httpMethodConstraint.AllowedMethods.Intersect(actionHttpMethods)
+                supportedMethods = httpMethodConstraint.AllowedMethods
+                    .Intersect(actionHttpMethods)
                     .ToList();
             }
 
@@ -215,8 +216,8 @@ namespace System.Web.Http.Description
         private Collection<ApiDescription> InitializeApiDescriptions()
         {
             Collection<ApiDescription> apiDescriptions = new Collection<ApiDescription>();
-            IHttpControllerSelector controllerSelector =
-                _config.Services.GetHttpControllerSelector();
+            IHttpControllerSelector controllerSelector = _config.Services
+                .GetHttpControllerSelector();
             IDictionary<string, HttpControllerDescriptor> controllerMappings =
                 controllerSelector.GetControllerMapping();
             if (controllerMappings != null)
@@ -499,9 +500,8 @@ namespace System.Web.Http.Description
             );
             IEnumerable<MediaTypeFormatter> supportedRequestBodyFormatters =
                 bodyParameter != null
-                    ? actionDescriptor.Configuration.Formatters.Where(
-                          f => f.CanReadType(bodyParameter.ParameterDescriptor.ParameterType)
-                      )
+                    ? actionDescriptor.Configuration.Formatters
+                      .Where(f => f.CanReadType(bodyParameter.ParameterDescriptor.ParameterType))
                     : Enumerable.Empty<MediaTypeFormatter>();
 
             // response formatters
@@ -509,9 +509,8 @@ namespace System.Web.Http.Description
             Type returnType = responseDescription.ResponseType ?? responseDescription.DeclaredType;
             IEnumerable<MediaTypeFormatter> supportedResponseFormatters =
                 (returnType != null && returnType != typeof(void))
-                    ? actionDescriptor.Configuration.Formatters.Where(
-                          f => f.CanWriteType(returnType)
-                      )
+                    ? actionDescriptor.Configuration.Formatters
+                      .Where(f => f.CanWriteType(returnType))
                     : Enumerable.Empty<MediaTypeFormatter>();
 
             // Replacing the formatter tracers with formatters if tracers are present.
@@ -726,9 +725,9 @@ namespace System.Web.Http.Description
             if (elementType == null)
             {
                 elementType = CollectionModelBinderUtil.GetGenericBinderTypeArgs(
-                        typeof(ICollection<>),
-                        collectionType
-                    )
+                    typeof(ICollection<>),
+                    collectionType
+                )
                     .First();
             }
             return elementType;

@@ -72,11 +72,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
 
         public string GetUnderlyingString()
         {
-            return InspectionContext.InspectionSession.InvokeResultProvider(
-                this,
-                MethodId.GetUnderlyingString,
-                r => r.GetUnderlyingString(this)
-            );
+            return InspectionContext.InspectionSession
+                .InvokeResultProvider(
+                    this,
+                    MethodId.GetUnderlyingString,
+                    r => r.GetUnderlyingString(this)
+                );
         }
     }
 }

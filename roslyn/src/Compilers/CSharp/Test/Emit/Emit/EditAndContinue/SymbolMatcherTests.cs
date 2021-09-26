@@ -340,9 +340,11 @@ abstract class C
                 peAssemblySymbol
             );
 
-            var f0 = peAssemblySymbol.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var f0 = peAssemblySymbol.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember("F");
-            var g0 = peAssemblySymbol.GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var g0 = peAssemblySymbol.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember("G");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
             var g1 = compilation1.GetMember<MethodSymbol>("C.G");

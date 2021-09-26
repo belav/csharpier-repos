@@ -96,7 +96,8 @@ namespace Microsoft.AspNetCore.Routing
             string? GetEndpointName(Endpoint endpoint)
             {
                 if (
-                    endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration
+                    endpoint.Metadata
+                        .GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration
                     == true
                 )
                 {

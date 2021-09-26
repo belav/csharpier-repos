@@ -55,9 +55,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
 
         private void OnCompilationStart(CompilationStartAnalysisContext context)
         {
-            var ienumerableType = context.Compilation.GetTypeByMetadataName(
-                typeof(IEnumerable).FullName!
-            );
+            var ienumerableType = context.Compilation
+                .GetTypeByMetadataName(typeof(IEnumerable).FullName!);
             if (ienumerableType != null)
             {
                 var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
@@ -96,10 +95,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
 
             // Object creation can only be converted to collection initializer if it
             // implements the IEnumerable type.
-            var objectType = context.SemanticModel.GetTypeInfo(
-                objectCreationExpression,
-                cancellationToken
-            );
+            var objectType = context.SemanticModel
+                .GetTypeInfo(objectCreationExpression, cancellationToken);
             if (objectType.Type == null || !objectType.Type.AllInterfaces.Contains(ienumerableType))
             {
                 return;
@@ -113,7 +110,13 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                 TInvocationExpressionSyntax,
                 TExpressionStatementSyntax,
                 TVariableDeclaratorSyntax
-            >.Analyze(semanticModel, GetSyntaxFacts(), objectCreationExpression, cancellationToken);
+            >
+                .Analyze(
+                    semanticModel,
+                    GetSyntaxFacts(),
+                    objectCreationExpression,
+                    cancellationToken
+                );
 
             if (matches == null || matches.Value.Length == 0)
             {

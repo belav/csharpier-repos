@@ -43,17 +43,18 @@ namespace System.Text.Json.Serialization.Metadata
             JsonSerializerOptions options
         )
         {
-            base.Initialize(
-                parentClassType,
-                declaredPropertyType,
-                runtimePropertyType,
-                runtimeClassType,
-                memberInfo,
-                converter,
-                ignoreCondition,
-                parentTypeNumberHandling,
-                options
-            );
+            base
+                .Initialize(
+                    parentClassType,
+                    declaredPropertyType,
+                    runtimePropertyType,
+                    runtimeClassType,
+                    memberInfo,
+                    converter,
+                    ignoreCondition,
+                    parentTypeNumberHandling,
+                    options
+                );
 
             switch (memberInfo)
             {

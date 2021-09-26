@@ -26,11 +26,12 @@ namespace AutobahnTestApp
                         .UseStartup<Startup>();
 
                     if (
-                        string.Equals(
-                            webHostBuilder.GetSetting("server"),
-                            "Microsoft.AspNetCore.Server.HttpSys",
-                            System.StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(
+                                webHostBuilder.GetSetting("server"),
+                                "Microsoft.AspNetCore.Server.HttpSys",
+                                System.StringComparison.Ordinal
+                            )
                     )
                     {
                         scenarioName = "HttpSysServer";
@@ -75,10 +76,8 @@ namespace AutobahnTestApp
                                     listenOptions =>
                                     {
                                         if (
-                                            uri.Scheme.Equals(
-                                                "https",
-                                                StringComparison.OrdinalIgnoreCase
-                                            )
+                                            uri.Scheme
+                                                .Equals("https", StringComparison.OrdinalIgnoreCase)
                                         )
                                         {
                                             scenarioName = "Kestrel(SSL)";

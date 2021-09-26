@@ -33,11 +33,12 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             _supportsAllRequests = _ => true;
             _supportsNonGetRequests = context =>
-                !string.Equals(
-                    context.HttpContext.Request.Method,
-                    "GET",
-                    StringComparison.OrdinalIgnoreCase
-                );
+                !string
+                    .Equals(
+                        context.HttpContext.Request.Method,
+                        "GET",
+                        StringComparison.OrdinalIgnoreCase
+                    );
         }
 
         /// <inheritdoc />
@@ -173,10 +174,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             AddRange(controllerModel.Selectors, CreateSelectors(attributes));
 
-            controllerModel.ControllerName = typeInfo.Name.EndsWith(
-                "Controller",
-                StringComparison.OrdinalIgnoreCase
-            )
+            controllerModel.ControllerName = typeInfo.Name
+            .EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
                 ? typeInfo.Name.Substring(0, typeInfo.Name.Length - "Controller".Length)
                 : typeInfo.Name;
 
@@ -184,10 +183,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             foreach (var routeValueProvider in attributes.OfType<IRouteValueProvider>())
             {
-                controllerModel.RouteValues.Add(
-                    routeValueProvider.RouteKey,
-                    routeValueProvider.RouteValue
-                );
+                controllerModel.RouteValues
+                    .Add(routeValueProvider.RouteKey, routeValueProvider.RouteValue);
             }
 
             var apiVisibility = attributes.OfType<IApiDescriptionVisibilityProvider>()
@@ -333,10 +330,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             foreach (var routeValueProvider in attributes.OfType<IRouteValueProvider>())
             {
-                actionModel.RouteValues.Add(
-                    routeValueProvider.RouteKey,
-                    routeValueProvider.RouteValue
-                );
+                actionModel.RouteValues
+                    .Add(routeValueProvider.RouteKey, routeValueProvider.RouteValue);
             }
 
             // Now we need to determine the action selection info (cross-section of routes and constraints)

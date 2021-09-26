@@ -297,7 +297,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            typeof(AdvSimd).GetMethod(
+            typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.StoreSelectedScalar),
                     new Type[] { typeof(Int16*), typeof(Vector128<Int16>), typeof(byte) }
                 )
@@ -318,7 +319,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            typeof(AdvSimd).GetMethod(
+            typeof(AdvSimd)
+                .GetMethod(
                     nameof(AdvSimd.StoreSelectedScalar),
                     new Type[] { typeof(Int16*), typeof(Vector128<Int16>), typeof(byte) }
                 )
@@ -547,15 +549,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.StoreSelectedScalar)}<Int16>(Int16*, Vector128<Int16>, 7): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.StoreSelectedScalar)}<Int16>(Int16*, Vector128<Int16>, 7): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

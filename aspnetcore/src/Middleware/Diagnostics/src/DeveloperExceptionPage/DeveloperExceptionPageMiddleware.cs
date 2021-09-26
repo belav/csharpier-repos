@@ -261,8 +261,8 @@ namespace Microsoft.AspNetCore.Diagnostics
                     endpointModel.RoutePattern = routeEndpoint.RoutePattern.RawText;
                     endpointModel.Order = routeEndpoint.Order;
 
-                    var httpMethods =
-                        endpoint.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods;
+                    var httpMethods = endpoint.Metadata
+                        .GetMetadata<IHttpMethodMetadata>()?.HttpMethods;
                     if (httpMethods != null)
                     {
                         endpointModel.HttpMethods = string.Join(", ", httpMethods);

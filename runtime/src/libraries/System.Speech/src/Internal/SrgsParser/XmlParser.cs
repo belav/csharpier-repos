@@ -222,25 +222,27 @@ namespace System.Speech.Internal.SrgsParser
                 int position = xmlTextReader.LinePosition;
                 if (filename == null)
                 {
-                    sError += string.Format(
-                        CultureInfo.InvariantCulture,
-                        " [{0}={1}, {2}={3}]",
-                        sLine,
-                        line,
-                        sPosition,
-                        position
-                    );
+                    sError += string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            " [{0}={1}, {2}={3}]",
+                            sLine,
+                            line,
+                            sPosition,
+                            position
+                        );
                 }
                 else
                 {
-                    sError = string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0}({1},{2}): error : {3}",
-                        filename,
-                        line,
-                        position,
-                        sError
-                    );
+                    sError = string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}({1},{2}): error : {3}",
+                            filename,
+                            line,
+                            position,
+                            sError
+                        );
                 }
             }
             throw new FormatException(sError, innerException);
@@ -1128,9 +1130,8 @@ namespace System.Speech.Internal.SrgsParser
                 return semanticTag;
             }
 
-            System.Diagnostics.Debug.Assert(
-                _parser.Grammar.TagFormat == SrgsTagFormat.KeyValuePairs
-            );
+            System.Diagnostics.Debug
+                .Assert(_parser.Grammar.TagFormat == SrgsTagFormat.KeyValuePairs);
 
             IPropertyTag propertyTag = _parser.CreatePropertyTag(parent);
             string name;

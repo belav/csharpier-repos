@@ -32,10 +32,8 @@ namespace WebMatrix.Data
             {
                 if (_appSettings == null)
                 {
-                    _appSettings = (
-                        from string key in ConfigurationManager.AppSettings
-                        select key
-                    ).ToDictionary(key => key, key => ConfigurationManager.AppSettings[key]);
+                    _appSettings = (from string key in ConfigurationManager.AppSettings select key)
+                        .ToDictionary(key => key, key => ConfigurationManager.AppSettings[key]);
                 }
                 return _appSettings;
             }

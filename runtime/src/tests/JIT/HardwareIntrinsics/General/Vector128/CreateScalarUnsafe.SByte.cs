@@ -58,10 +58,8 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             SByte value = TestLibrary.Generator.GetSByte();
-            object result = typeof(Vector128).GetMethod(
-                    nameof(Vector128.CreateScalarUnsafe),
-                    new Type[] { typeof(SByte) }
-                )
+            object result = typeof(Vector128)
+                .GetMethod(nameof(Vector128.CreateScalarUnsafe), new Type[] { typeof(SByte) })
                 .Invoke(null, new object[] { value });
 
             ValidateResult((Vector128<SByte>)(result), value);
@@ -106,13 +104,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128.CreateScalarUnsafe(SByte): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128.CreateScalarUnsafe(SByte): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

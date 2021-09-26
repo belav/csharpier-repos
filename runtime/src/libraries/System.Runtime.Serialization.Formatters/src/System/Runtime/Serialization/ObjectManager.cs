@@ -582,10 +582,8 @@ namespace System.Runtime.Serialization
                                 }
                                 else
                                 {
-                                    ((Array)(holder.ObjectValue)).SetValue(
-                                        tempObjectHolder.ObjectValue,
-                                        ((int[])fixupInfo)
-                                    );
+                                    ((Array)(holder.ObjectValue))
+                                        .SetValue(tempObjectHolder.ObjectValue, ((int[])fixupInfo));
                                 }
                                 break;
                             case FixupHolder.MemberFixup:
@@ -1937,10 +1935,12 @@ namespace System.Runtime.Serialization
     internal static class SerializationInfoExtensions
     {
         private static readonly Action<SerializationInfo, string, object, Type> s_updateValue =
-            typeof(SerializationInfo).GetMethod(
-                "UpdateValue",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            )!.CreateDelegate<Action<SerializationInfo, string, object, Type>>();
+            typeof(SerializationInfo)
+                .GetMethod(
+                    "UpdateValue",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                )!
+                .CreateDelegate<Action<SerializationInfo, string, object, Type>>();
 
         public static void UpdateValue(
             this SerializationInfo si,

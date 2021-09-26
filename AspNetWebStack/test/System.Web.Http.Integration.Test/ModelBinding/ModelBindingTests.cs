@@ -12,11 +12,12 @@ namespace System.Web.Http.ModelBinding
 
         protected override void ApplyConfiguration(HttpConfiguration configuration)
         {
-            configuration.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{action}",
-                new { controller = "ModelBinding" }
-            );
+            configuration.Routes
+                .MapHttpRoute(
+                    "Default",
+                    "{controller}/{action}",
+                    new { controller = "ModelBinding" }
+                );
         }
     }
 }

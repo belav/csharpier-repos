@@ -90,11 +90,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
         public async Task<Memory<byte>> ReceiveChunk()
         {
-            var length = int.Parse(
-                await ReadLineAsync(),
-                System.Globalization.NumberStyles.HexNumber,
-                CultureInfo.InvariantCulture
-            );
+            var length = int
+                .Parse(
+                    await ReadLineAsync(),
+                    System.Globalization.NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture
+                );
 
             var bytes = await Receive(length);
 

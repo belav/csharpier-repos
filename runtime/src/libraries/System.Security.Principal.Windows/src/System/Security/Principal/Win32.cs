@@ -38,12 +38,13 @@ namespace System.Security.Principal
         internal static SafeLsaPolicyHandle LsaOpenPolicy(string? systemName, PolicyRights rights)
         {
             Interop.OBJECT_ATTRIBUTES attributes = default;
-            uint error = Interop.Advapi32.LsaOpenPolicy(
-                systemName,
-                ref attributes,
-                (int)rights,
-                out SafeLsaPolicyHandle policyHandle
-            );
+            uint error = Interop.Advapi32
+                .LsaOpenPolicy(
+                    systemName,
+                    ref attributes,
+                    (int)rights,
+                    out SafeLsaPolicyHandle policyHandle
+                );
             if (error == 0)
             {
                 return policyHandle;
@@ -181,12 +182,8 @@ namespace System.Security.Principal
 
             if (
                 FALSE
-                != Interop.Advapi32.CreateWellKnownSid(
-                    (int)sidType,
-                    domainSid?.BinaryForm,
-                    resultSid,
-                    ref length
-                )
+                != Interop.Advapi32
+                    .CreateWellKnownSid((int)sidType, domainSid?.BinaryForm, resultSid, ref length)
             )
             {
                 return Interop.Errors.ERROR_SUCCESS;
@@ -240,9 +237,8 @@ namespace System.Security.Principal
             // We don't know the real size of the referenced domains yet, so we need to set an initial
             // size based on the LSA_REFERENCED_DOMAIN_LIST structure, then resize it to include all of
             // the domains.
-            referencedDomains!.Initialize(
-                (uint)Marshal.SizeOf<Interop.LSA_REFERENCED_DOMAIN_LIST>()
-            );
+            referencedDomains!
+                .Initialize((uint)Marshal.SizeOf<Interop.LSA_REFERENCED_DOMAIN_LIST>());
             Interop.LSA_REFERENCED_DOMAIN_LIST domainList =
                 referencedDomains.Read<Interop.LSA_REFERENCED_DOMAIN_LIST>(0);
             unsafe
@@ -295,11 +291,8 @@ namespace System.Security.Principal
 
             if (
                 FALSE
-                != Interop.Advapi32.GetWindowsAccountDomainSid(
-                    BinaryForm,
-                    resultSidBinary,
-                    ref sidLength
-                )
+                != Interop.Advapi32
+                    .GetWindowsAccountDomainSid(BinaryForm, resultSidBinary, ref sidLength)
             )
             {
                 resultSid = new SecurityIdentifier(resultSidBinary, 0);

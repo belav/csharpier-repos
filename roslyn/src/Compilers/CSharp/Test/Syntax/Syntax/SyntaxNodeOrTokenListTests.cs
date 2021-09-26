@@ -47,9 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             Assert.Throws<NotSupportedException>(
                 () =>
-                    default(SyntaxNodeOrTokenList.Enumerator).Equals(
-                        default(SyntaxNodeOrTokenList.Enumerator)
-                    )
+                    default(SyntaxNodeOrTokenList.Enumerator)
+                        .Equals(default(SyntaxNodeOrTokenList.Enumerator))
             );
         }
 

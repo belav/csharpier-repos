@@ -25,9 +25,8 @@ namespace R2RDumpTests
                 if (Path.GetDirectoryName(exe) == String.Empty)
                 {
                     foreach (
-                        string test in (Environment.GetEnvironmentVariable("PATH") ?? "").Split(
-                            Path.PathSeparator
-                        )
+                        string test in (Environment.GetEnvironmentVariable("PATH") ?? "")
+                            .Split(Path.PathSeparator)
                     )
                     {
                         string path = test.Trim();
@@ -66,18 +65,19 @@ namespace R2RDumpTests
                 UseShellExecute = false,
                 FileName = DotNetAbsolutePath,
                 // TODO, what flags do we like to test?
-                Arguments = string.Join(
-                    " ",
-                    new string[]
-                    {
-                        "exec",
-                        R2RDumpAbsolutePath,
-                        "--in",
-                        CoreLibAbsolutePath,
-                        "--out",
-                        OutputFile
-                    }
-                )
+                Arguments = string
+                    .Join(
+                        " ",
+                        new string[]
+                        {
+                            "exec",
+                            R2RDumpAbsolutePath,
+                            "--in",
+                            CoreLibAbsolutePath,
+                            "--out",
+                            OutputFile
+                        }
+                    )
             };
 
             Process process = Process.Start(processStartInfo);

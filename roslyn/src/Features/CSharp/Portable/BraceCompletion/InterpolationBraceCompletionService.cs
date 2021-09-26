@@ -45,10 +45,10 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
         ) =>
             OpeningBrace == brace
             && await IsPositionInInterpolationContextAsync(
-                    document,
-                    openingPosition,
-                    cancellationToken
-                )
+                document,
+                openingPosition,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
         protected override Task<bool> IsValidOpenBraceTokenAtPositionAsync(

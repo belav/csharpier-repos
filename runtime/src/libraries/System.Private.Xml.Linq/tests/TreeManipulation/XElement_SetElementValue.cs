@@ -197,19 +197,19 @@ namespace XLinqTests
             XElement changed = e.Element(newName);
 
             IEnumerable<ExpectedValue> nodeIdentityExpValues = getExpectedValues(
-                    e,
-                    newName,
-                    newValue,
-                    true
-                )
+                e,
+                newName,
+                newValue,
+                true
+            )
                 .ProcessNodes()
                 .ToList();
             IEnumerable<ExpectedValue> valueExpectedValues = getExpectedValues(
-                    e,
-                    newName,
-                    newValue,
-                    false
-                )
+                e,
+                newName,
+                newValue,
+                false
+            )
                 .ProcessNodes()
                 .ToList();
             IEnumerable<XAttribute> attr = changed == null ? null : changed.Attributes().ToArray();

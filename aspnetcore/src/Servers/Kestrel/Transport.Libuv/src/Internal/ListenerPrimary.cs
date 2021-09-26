@@ -219,18 +219,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             if (Thread.FatalError == null && ListenPipe != null)
             {
                 await Thread.PostAsync(
-                        listener =>
-                        {
-                            listener.ListenPipe.Dispose();
+                    listener =>
+                    {
+                        listener.ListenPipe.Dispose();
 
-                            foreach (var pipe in listener._createdPipes)
-                            {
-                                pipe.Dispose();
-                            }
-                        },
-                        this
-                    )
-                    .ConfigureAwait(false);
+                        foreach (var pipe in listener._createdPipes)
+                        {
+                            pipe.Dispose();
+                        }
+                    },
+                    this
+                ).ConfigureAwait(false);
             }
         }
 
@@ -256,10 +255,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 int suggestedSize
             )
             {
-                return dispatchPipe.Libuv.buf_init(
-                    _bufPtr + _bytesRead,
-                    _bufferLength - _bytesRead
-                );
+                return dispatchPipe.Libuv
+                    .buf_init(_bufPtr + _bytesRead, _bufferLength - _bytesRead);
             }
 
             public void ReadCallback(UvStreamHandle dispatchPipe, int status)

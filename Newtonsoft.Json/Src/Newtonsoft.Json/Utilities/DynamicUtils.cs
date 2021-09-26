@@ -73,10 +73,8 @@ namespace Newtonsoft.Json.Utilities
                     if (binderType == null)
                     {
                         throw new InvalidOperationException(
-                            "Could not resolve type '{0}'. You may need to add a reference to Microsoft.CSharp.dll to work with dynamic types.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                BinderTypeName
-                            )
+                            "Could not resolve type '{0}'. You may need to add a reference to Microsoft.CSharp.dll to work with dynamic types."
+                                .FormatWith(CultureInfo.InvariantCulture, BinderTypeName)
                         );
                     }
 
@@ -116,9 +114,8 @@ namespace Newtonsoft.Json.Utilities
                 Type csharpBinderFlagsType = Type.GetType(CSharpBinderFlagsTypeName, true);
                 Type binderType = Type.GetType(BinderTypeName, true);
 
-                Type csharpArgumentInfoTypeEnumerableType = typeof(IEnumerable<>).MakeGenericType(
-                    csharpArgumentInfoType
-                );
+                Type csharpArgumentInfoTypeEnumerableType = typeof(IEnumerable<>)
+                    .MakeGenericType(csharpArgumentInfoType);
 
                 MethodInfo getMemberMethod = binderType.GetMethod(
                     "GetMember",
@@ -130,10 +127,8 @@ namespace Newtonsoft.Json.Utilities
                         csharpArgumentInfoTypeEnumerableType
                     }
                 );
-                _getMemberCall =
-                    JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                        getMemberMethod
-                    );
+                _getMemberCall = JsonTypeReflector.ReflectionDelegateFactory
+                    .CreateMethodCall<object?>(getMemberMethod);
 
                 MethodInfo setMemberMethod = binderType.GetMethod(
                     "SetMember",
@@ -145,10 +140,8 @@ namespace Newtonsoft.Json.Utilities
                         csharpArgumentInfoTypeEnumerableType
                     }
                 );
-                _setMemberCall =
-                    JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                        setMemberMethod
-                    );
+                _setMemberCall = JsonTypeReflector.ReflectionDelegateFactory
+                    .CreateMethodCall<object?>(setMemberMethod);
             }
 #endif
 

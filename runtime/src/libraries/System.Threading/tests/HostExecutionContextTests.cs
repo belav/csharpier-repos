@@ -31,7 +31,8 @@ namespace System.Threading.Tests
             Assert.True(hec.DisposeTrueCalled);
 
             // Dispose(bool) is public
-            new HostExecutionContext().Dispose(true);
+            new HostExecutionContext()
+                .Dispose(true);
         }
 
         private class TestHostExecutionContext : HostExecutionContext

@@ -676,7 +676,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(201, responseType.StatusCode);
             Assert.Equal(
                 expectedMediaTypes,
-                responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                responseType.ResponseFormats
+                    .Select(responseFormat => responseFormat.MediaType)
                     .OrderBy(o => o)
                     .ToArray()
             );
@@ -685,7 +686,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(400, responseType.StatusCode);
             Assert.Equal(
                 expectedMediaTypes,
-                responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                responseType.ResponseFormats
+                    .Select(responseFormat => responseFormat.MediaType)
                     .OrderBy(o => o)
                     .ToArray()
             );
@@ -715,7 +717,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(201, responseType.StatusCode);
             Assert.Equal(
                 expectedMediaTypes,
-                responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                responseType.ResponseFormats
+                    .Select(responseFormat => responseFormat.MediaType)
                     .ToArray()
             );
             responseType = description.SupportedResponseTypes[1];
@@ -723,7 +726,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(400, responseType.StatusCode);
             Assert.Equal(
                 expectedMediaTypes,
-                responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                responseType.ResponseFormats
+                    .Select(responseFormat => responseFormat.MediaType)
                     .ToArray()
             );
         }
@@ -758,7 +762,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(200, responseType.StatusCode);
             Assert.Equal(
                 expectedMediaTypes,
-                responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                responseType.ResponseFormats
+                    .Select(responseFormat => responseFormat.MediaType)
                     .OrderBy(o => o)
                     .ToArray()
             );
@@ -767,7 +772,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(400, responseType.StatusCode);
             Assert.Equal(
                 expectedMediaTypes,
-                responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                responseType.ResponseFormats
+                    .Select(responseFormat => responseFormat.MediaType)
                     .OrderBy(o => o)
                     .ToArray()
             );
@@ -797,7 +803,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(200, responseType.StatusCode);
             Assert.Equal(
                 expectedMediaTypes,
-                responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                responseType.ResponseFormats
+                    .Select(responseFormat => responseFormat.MediaType)
                     .ToArray()
             );
             responseType = description.SupportedResponseTypes[1];
@@ -805,7 +812,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(400, responseType.StatusCode);
             Assert.Equal(
                 expectedMediaTypes,
-                responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                responseType.ResponseFormats
+                    .Select(responseFormat => responseFormat.MediaType)
                     .ToArray()
             );
         }
@@ -1448,7 +1456,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 {
                     Assert.Equal(typeof(IEnumerable<Product>).FullName, responseType.ResponseType);
                     Assert.Equal(200, responseType.StatusCode);
-                    var actualMediaTypes = responseType.ResponseFormats.Select(r => r.MediaType)
+                    var actualMediaTypes = responseType.ResponseFormats
+                        .Select(r => r.MediaType)
                         .OrderBy(r => r);
                     Assert.Equal(expectedMediaTypes, actualMediaTypes);
                 }
@@ -1730,7 +1739,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         private IEnumerable<string> GetSortedMediaTypes(ApiExplorerResponseType apiResponseType)
         {
-            return apiResponseType.ResponseFormats.OrderBy(format => format.MediaType)
+            return apiResponseType.ResponseFormats
+                .OrderBy(format => format.MediaType)
                 .Select(format => format.MediaType);
         }
 

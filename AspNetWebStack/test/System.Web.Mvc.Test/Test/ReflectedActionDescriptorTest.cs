@@ -11,10 +11,8 @@ namespace System.Web.Mvc.Test
 {
     public class ReflectedActionDescriptorTest
     {
-        private static readonly MethodInfo _int32EqualsIntMethod = typeof(int).GetMethod(
-            "Equals",
-            new Type[] { typeof(int) }
-        );
+        private static readonly MethodInfo _int32EqualsIntMethod = typeof(int)
+            .GetMethod("Equals", new Type[] { typeof(int) });
 
         [Fact]
         public void ConstructorSetsActionNameProperty()
@@ -440,8 +438,8 @@ namespace System.Web.Mvc.Test
                 .Returns(true)
                 .Verifiable();
             mockMethod.Setup(
-                    m => m.GetCustomAttributes(typeof(ActionMethodSelectorAttribute), true)
-                )
+                m => m.GetCustomAttributes(typeof(ActionMethodSelectorAttribute), true)
+            )
                 .Returns(new ActionMethodSelectorAttribute[] { mockAttr.Object });
 
             ReflectedActionDescriptor ad = GetActionDescriptor(mockMethod.Object);

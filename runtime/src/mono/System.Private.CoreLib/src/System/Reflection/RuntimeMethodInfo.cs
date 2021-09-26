@@ -762,11 +762,12 @@ namespace System.Reflection
             MethodInfo ret = MakeGenericMethod_impl(methodInstantiation);
             if (ret == null)
                 throw new ArgumentException(
-                    string.Format(
-                        "The method has {0} generic parameter(s) but {1} generic argument(s) were provided.",
-                        GetGenericArguments().Length,
-                        methodInstantiation.Length
-                    )
+                    string
+                        .Format(
+                            "The method has {0} generic parameter(s) but {1} generic argument(s) were provided.",
+                            GetGenericArguments().Length,
+                            methodInstantiation.Length
+                        )
                 );
             return ret;
         }
@@ -938,10 +939,11 @@ namespace System.Reflection
             if ((invokeAttr & BindingFlags.CreateInstance) != 0 && DeclaringType.IsAbstract)
             {
                 throw new MemberAccessException(
-                    string.Format(
-                        "Cannot create an instance of {0} because it is an abstract class",
-                        DeclaringType
-                    )
+                    string
+                        .Format(
+                            "Cannot create an instance of {0} because it is an abstract class",
+                            DeclaringType
+                        )
                 );
             }
 

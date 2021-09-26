@@ -199,11 +199,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             string definingNavigationName,
             IConventionEntityType definingEntityType
         ) =>
-            (IConventionEntityType?)((IReadOnlyModel)this).FindEntityType(
-                type,
-                definingNavigationName,
-                definingEntityType
-            );
+            (IConventionEntityType?)((IReadOnlyModel)this)
+                .FindEntityType(type, definingNavigationName, definingEntityType);
 
         /// <summary>
         ///     Removes an entity type from the model.
@@ -278,10 +275,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Type type,
             Func<IReadOnlyEntityType, bool>? condition = null
         ) =>
-            ((IReadOnlyModel)this).FindLeastDerivedEntityTypes(
-                    type,
-                    condition == null ? null : t => condition(t)
-                )
+            ((IReadOnlyModel)this)
+                .FindLeastDerivedEntityTypes(type, condition == null ? null : t => condition(t))
                 .Cast<IConventionEntityType>();
 
         /// <summary>

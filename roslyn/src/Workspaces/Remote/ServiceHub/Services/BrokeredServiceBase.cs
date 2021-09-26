@@ -32,9 +32,8 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             _logger = (TraceSource)arguments.ServiceProvider.GetService(typeof(TraceSource));
 
-            TestData = (RemoteHostTestData?)arguments.ServiceProvider.GetService(
-                typeof(RemoteHostTestData)
-            );
+            TestData = (RemoteHostTestData?)arguments.ServiceProvider
+                .GetService(typeof(RemoteHostTestData));
             WorkspaceManager = TestData?.WorkspaceManager ?? RemoteWorkspaceManager.Default;
 
 #pragma warning disable VSTHRD012 // Provide JoinableTaskFactory where allowed

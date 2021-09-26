@@ -142,8 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 return false;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;
@@ -227,9 +227,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
 
             if (args.TextView.Selection.SelectedSpans.Count > 0)
             {
-                var selectedSpan = args.TextView.Selection.GetSnapshotSpansOnBuffer(
-                        args.SubjectBuffer
-                    )
+                var selectedSpan = args.TextView.Selection
+                    .GetSnapshotSpansOnBuffer(args.SubjectBuffer)
                     .FirstOrNull();
 
                 originalPosition =
@@ -284,8 +283,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 return CommandState.Unavailable;
             }
 
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return CommandState.Unavailable;
@@ -319,10 +318,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
         public bool ExecuteCommand(InsertCommentCommandArgs args, CommandExecutionContext context)
         {
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Inserting_documentation_comment
-                )
+                context.OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesResources.Inserting_documentation_comment
+                    )
             )
             {
                 return CompleteComment(
@@ -365,8 +365,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             // Allow nextHandler() to run and then insert exterior trivia if necessary.
             nextHandler();
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
@@ -406,8 +406,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 return;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
@@ -434,8 +434,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 return;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
@@ -479,8 +479,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
 
         private bool CurrentLineStartsWithExteriorTrivia(ITextBuffer subjectBuffer, int position)
         {
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;
@@ -504,13 +504,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 return false;
             }
 
-            return string.CompareOrdinal(
-                    lineText,
-                    lineOffset,
-                    ExteriorTriviaText,
-                    0,
-                    ExteriorTriviaText.Length
-                ) == 0;
+            return string
+                    .CompareOrdinal(
+                        lineText,
+                        lineOffset,
+                        ExteriorTriviaText,
+                        0,
+                        ExteriorTriviaText.Length
+                    ) == 0;
         }
     }
 }

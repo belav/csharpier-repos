@@ -290,9 +290,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                 // If this diagnostic is for LSP only, then we won't show it here
                 if (
-                    diagnostic.Properties.ContainsKey(
-                        nameof(DocumentPropertiesService.DiagnosticsLspClientName)
-                    )
+                    diagnostic.Properties
+                        .ContainsKey(nameof(DocumentPropertiesService.DiagnosticsLspClientName))
                 )
                 {
                     return false;
@@ -361,14 +360,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 {
                     var provider = _source._diagnosticService;
                     var items = provider.GetPushDiagnosticsAsync(
-                            _workspace,
-                            _projectId,
-                            _documentId,
-                            _id,
-                            includeSuppressedDiagnostics: true,
-                            InternalDiagnosticsOptions.NormalDiagnosticMode,
-                            cancellationToken: CancellationToken.None
-                        )
+                        _workspace,
+                        _projectId,
+                        _documentId,
+                        _id,
+                        includeSuppressedDiagnostics: true,
+                        InternalDiagnosticsOptions.NormalDiagnosticMode,
+                        cancellationToken: CancellationToken.None
+                    )
                         .AsTask()
                         .WaitAndGetResult_CanCallOnBackground(CancellationToken.None)
                         .Where(ShouldInclude)
@@ -506,10 +505,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 private ErrorRank GetErrorRank(DiagnosticData item)
                 {
                     if (
-                        !item.Properties.TryGetValue(
-                            WellKnownDiagnosticPropertyNames.Origin,
-                            out var value
-                        )
+                        !item.Properties
+                            .TryGetValue(WellKnownDiagnosticPropertyNames.Origin, out var value)
                     )
                     {
                         return ErrorRank.Other;

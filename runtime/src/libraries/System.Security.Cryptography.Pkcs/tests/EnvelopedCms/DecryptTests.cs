@@ -134,7 +134,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "BA695CFE8CDB2DE3E77196303C06092A864886F70D010701301D060960864801"
                 + "650304012A0410280AC7A629BFC9FD6FB24F8A42F094B48010B78CDFECFF32A8"
                 + "E86D448989382A93E7"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             VerifySimpleDecrypt(
                 message,
@@ -160,7 +161,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "BA11E7D0623E4C8B848826BBF99EB411CB88B4731740D1AD834F0E4076BAD0D4"
                 + "BA695CFE8CDB2DE3E77196302A06092A864886F70D010701301D060960864801"
                 + "650304012A0410280AC7A629BFC9FD6FB24F8A42F094B4"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             if (PlatformDetection.IsNetFramework)
             {
@@ -194,7 +196,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "BA11E7D0623E4C8B848826BBF99EB411CB88B4731740D1AD834F0E4076BAD0D4"
                 + "BA695CFE8CDB2DE3E77195302A06092A864886F70D010701301D060960864801"
                 + "650304012A0410280AC7A629BFC9FD6FB24F8A42F094B4"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             Assert.ThrowsAny<CryptographicException>(
                 () =>
@@ -230,7 +233,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "eb64c3e093a628b257c0cfc183ecf11697ac84f2af882b8de0c793572af38dc15d1b6f3d8f2392ba1cc71210e177c146fd16"
                 + "b77a583b6411e801d7a2640d612f2fe99d87e9718e0e505a7ab9536d71dbde329da21816ce7da1416a74a3e0a112b86b33af"
                 + "336a2ba6ae2443d0ab"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             ContentInfo contentInfo = new ContentInfo(new Oid(Oids.Pkcs7Signed), content);
             TestSimpleDecrypt_RoundTrip(
@@ -254,7 +258,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "8443760a9ae94770d6373e0197be23a6a891f0c522ca96b3e8008bf23547474b7e24e7f32e8134df3862d84f4dea2470548e"
                 + "c774dd74f149a56cdd966e141122900d00ad9d10ea1848541294a1302b06092a864886f70d010701301406082a864886f70d"
                 + "030704089c8119f6cf6b174c8008bcea3a10d0737eb9"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             ContentInfo contentInfo = new ContentInfo(new Oid(Oids.Pkcs7SignedEnveloped), content);
             TestSimpleDecrypt_RoundTrip(
@@ -329,7 +334,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "DC0D59DDE17AA6DB0F9384C919FC8BC6CB561A980A9AE6095486FDF9F52249FB466B3676E4AEFE4035C15DC"
                 + "EE769F25E4660D4BE664E7F303C06092A864886F70D010701301D060960864801650304010204100A068EE9"
                 + "03E085EA5A03D1D8B4B73DD88010740E5DE9B798AA062B449F104D0F5D35"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] expectedContent = { 1, 2, 3, 4 };
             ContentInfo expectedContentInfo = new ContentInfo(expectedContent);
@@ -354,7 +360,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "06F9FAFB32F5A9A4074E10FCCB0758A708CA758C12A17A4961969FCB3B2A6E6C9EB49F5E688D107E1B1DF3D"
                 + "531BC684B944FCE6BD4550C303C06092A864886F70D010701301D06096086480165030401160410FD7CBBF5"
                 + "6101854387E584C1B6EF3B08801034BD11C68228CB683E0A43AB5D27A8A4"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] expectedContent = { 1, 2, 3, 4 };
             ContentInfo expectedContentInfo = new ContentInfo(expectedContent);
@@ -379,7 +386,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "B5DE125487CCA658DF261C836720E2E14440DA60E2F12D6D5E3992A0DB59973929DF6FC23D8E891F97CA956"
                 + "2A7AD160B502FA3C10477AA303C06092A864886F70D010701301D060960864801650304012A04101287FE80"
                 + "93F3C517AE86AFB95E599D7E80101823D88F47191857BE0743C4C730E39E"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] expectedContent = { 1, 2, 3, 4 };
             ContentInfo expectedContentInfo = new ContentInfo(expectedContent);
@@ -404,7 +412,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "9E97D1B3535FAE70E4E7C8F2F866232CBFC6448E89CF9D72B948EDCF9C9FC9C153BCC7104680282A4BBBC1E"
                 + "E367F094F627EE45FCD302B06092A864886F70D010701301406082A864886F70D030704081E3F12D42E4041"
                 + "58800877A4A100165DD0F2"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] expectedContent = { 1, 2, 3, 4 };
             ContentInfo expectedContentInfo = new ContentInfo(expectedContent);
@@ -429,7 +438,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "D9DDEE409FDC9DC3326B6C5BA9F433A9E031FF9B09473176637F50303C06092A864886F70D010701301D060"
                 + "960864801650304012A0410314DA87435ED110DFE4F52FA70CEF7B080104DDA6C617338DEBDD10913A9141B"
                 + "EE52"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] expectedContent = { 1, 2, 3, 4 };
             ContentInfo expectedContentInfo = new ContentInfo(expectedContent);
@@ -454,7 +464,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "FA002C9B27AD1FCF9B8AF24EDDA927BB6728D11530B3F96EBFC859ED6B9F7B009F992171FACB587A7D05E8B"
                 + "467B3A1DACC08B2F3341413A7E96576303C06092A864886F70D010701301D060960864801650304012A0410"
                 + "6F911E14D9D991DAB93C0B7738D1EC208010044264D201501735F73052FFCA4B2A95"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] expectedContent = { 1, 2, 3, 4 };
             ContentInfo expectedContentInfo = new ContentInfo(expectedContent);
@@ -479,7 +490,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "82A3D7F743F7543AB20A61A7831FE4DFB24A1652B072B3758FE4B2588D3B94A29575B6422DC5EF52E432565"
                 + "36CA25A11BB92817D61FEAFBDDDEC6EE331303C06092A864886F70D010701301D060960864801650304012A"
                 + "041021D59FDB89C13A3EC3766EF32FB333D080105AE8DEB71DF50DD85F66FEA63C8113F4"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] expectedContent = { 1, 2, 3, 4 };
             ContentInfo expectedContentInfo = new ContentInfo(expectedContent);
@@ -504,7 +516,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "9E2FC6F9D7B92125F571CBFC945C892EE4764D9B63369350FD2DAEFE455B367F48E100CB461F112808E792A"
                 + "8AA49B66C79E511508A877530BBAA896696303C06092A864886F70D010701301D060960864801650304012A"
                 + "0410D653E25E06BFF2EEB0BED4A90D00FE2680106B7EF143912ABA5C24F5E2C151E59D7D"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] expectedContent = { 1, 2, 3, 4 };
             ContentInfo expectedContentInfo = new ContentInfo(expectedContent);
@@ -529,7 +542,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "582BC48AF1B3DEF6849A57D2033586AF01079D67C9AB3AA9F6B51754BCC479A19581D4045EBE23145370219"
                 + "98ECB6F5E1BCF8D6BED6A75FE957A40077D303C06092A864886F70D010701301D060960864801650304012A"
                 + "04100B696608E489E7C35914D0A3DB9EB27F80103D362181B54721FB2CB7CE461CB31030"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] expectedContent = { 1, 2, 3, 4 };
             ContentInfo expectedContentInfo = new ContentInfo(expectedContent);
@@ -557,7 +571,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "EF79A1FDC680F3A3DC395E3E9C0B10394DF35AE134E6CB719E35152F8E5303C06092A864886F70D01070130"
                 + "1D060960864801650304012A041085072D8771A2A2BB403E3236A7C60C2A80105C71A04E73C57FE75C1DEDD"
                 + "94B57FD01"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             byte[] expectedContent = { 1, 2, 3, 4 };
             ContentInfo expectedContentInfo = new ContentInfo(expectedContent);
@@ -590,7 +605,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "eb64c3e093a628b257c0cfc183ecf11697ac84f2af882b8de0c793572af38dc15d1b6f3d8f2392ba1cc71210e177c146fd16"
                 + "b77a583b6411e801d7a2640d612f2fe99d87e9718e0e505a7ab9536d71dbde329da21816ce7da1416a74a3e0a112b86b33af"
                 + "336a2ba6ae2443d0ab"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             ContentInfo expectedContentInfo = new ContentInfo(
                 new Oid(Oids.Pkcs7Signed),
@@ -648,7 +664,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "eb64c3e093a628b257c0cfc183ecf11697ac84f2af882b8de0c793572af38dc15d1b6f3d8f2392ba1cc71210e177c146fd16"
                 + "b77a583b6411e801d7a2640d612f2fe99d87e9718e0e505a7ab9536d71dbde329da21816ce7da1416a74a3e0a112b86b33af"
                 + "336a2ba6ae2443d0ab"
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             ContentInfo expectedContentInfo = new ContentInfo(
                 new Oid(Oids.Pkcs7Signed),
@@ -1094,7 +1111,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 {
                     using (X509Certificate2 pubCert = certLoader.GetCertificate())
                     {
-                        RecipientInfo recipient = ecms.RecipientInfos.Cast<RecipientInfo>()
+                        RecipientInfo recipient = ecms.RecipientInfos
+                            .Cast<RecipientInfo>()
                             .Where((r) => r.RecipientIdentifier.MatchesCertificate(cert))
                             .Single();
                         ecms.Decrypt(recipient, cert.PrivateKey);

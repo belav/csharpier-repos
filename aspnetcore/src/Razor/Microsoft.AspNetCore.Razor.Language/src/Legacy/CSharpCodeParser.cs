@@ -226,11 +226,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             builder.Add(OutputTokensAsStatementLiteral());
 
                             if (
-                                string.Equals(
-                                    CurrentToken.Content,
-                                    SyntaxConstants.CSharp.HelperKeyword,
-                                    StringComparison.Ordinal
-                                )
+                                string
+                                    .Equals(
+                                        CurrentToken.Content,
+                                        SyntaxConstants.CSharp.HelperKeyword,
+                                        StringComparison.Ordinal
+                                    )
                             )
                             {
                                 var diagnostic =
@@ -307,31 +308,34 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                         if (At(SyntaxKind.Whitespace) || At(SyntaxKind.NewLine))
                         {
-                            Context.ErrorSink.OnError(
-                                RazorDiagnosticFactory.CreateParsing_UnexpectedWhiteSpaceAtStartOfCodeBlock(
-                                    new SourceSpan(CurrentStart, CurrentToken.Content.Length)
-                                )
-                            );
+                            Context.ErrorSink
+                                .OnError(
+                                    RazorDiagnosticFactory.CreateParsing_UnexpectedWhiteSpaceAtStartOfCodeBlock(
+                                        new SourceSpan(CurrentStart, CurrentToken.Content.Length)
+                                    )
+                                );
                         }
                         else if (EndOfFile)
                         {
-                            Context.ErrorSink.OnError(
-                                RazorDiagnosticFactory.CreateParsing_UnexpectedEndOfFileAtStartOfCodeBlock(
-                                    new SourceSpan(
-                                        CurrentStart,
-                                        contentLength: 1 /* end of file */
+                            Context.ErrorSink
+                                .OnError(
+                                    RazorDiagnosticFactory.CreateParsing_UnexpectedEndOfFileAtStartOfCodeBlock(
+                                        new SourceSpan(
+                                            CurrentStart,
+                                            contentLength: 1 /* end of file */
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         else
                         {
-                            Context.ErrorSink.OnError(
-                                RazorDiagnosticFactory.CreateParsing_UnexpectedCharacterAtStartOfCodeBlock(
-                                    new SourceSpan(CurrentStart, CurrentToken.Content.Length),
-                                    CurrentToken.Content
-                                )
-                            );
+                            Context.ErrorSink
+                                .OnError(
+                                    RazorDiagnosticFactory.CreateParsing_UnexpectedCharacterAtStartOfCodeBlock(
+                                        new SourceSpan(CurrentStart, CurrentToken.Content.Length),
+                                        CurrentToken.Content
+                                    )
+                                );
                         }
                     }
 
@@ -374,17 +378,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     if (!success)
                     {
                         AcceptUntil(SyntaxKind.LessThan);
-                        Context.ErrorSink.OnError(
-                            RazorDiagnosticFactory.CreateParsing_ExpectedEndOfBlockBeforeEOF(
-                                new SourceSpan(
-                                    block.Start,
-                                    contentLength: 1 /* ( */
-                                ),
-                                block.Name,
-                                ")",
-                                "("
-                            )
-                        );
+                        Context.ErrorSink
+                            .OnError(
+                                RazorDiagnosticFactory.CreateParsing_ExpectedEndOfBlockBeforeEOF(
+                                    new SourceSpan(
+                                        block.Start,
+                                        contentLength: 1 /* ( */
+                                    ),
+                                    block.Name,
+                                    ")",
+                                    "("
+                                )
+                            );
                     }
 
                     // If necessary, put an empty-content marker token here
@@ -667,17 +672,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                 if (EndOfFile)
                 {
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_ExpectedEndOfBlockBeforeEOF(
-                            new SourceSpan(
-                                block.Start,
-                                contentLength: 1 /* { OR } */
-                            ),
-                            block.Name,
-                            "}",
-                            "{"
-                        )
-                    );
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_ExpectedEndOfBlockBeforeEOF(
+                                new SourceSpan(
+                                    block.Start,
+                                    contentLength: 1 /* { OR } */
+                                ),
+                                block.Name,
+                                "}",
+                                "{"
+                            )
+                        );
                 }
 
                 EnsureCurrent();
@@ -777,11 +783,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 // Put back the whitespace unless it precedes a '<text>' tag.
                 if (
                     nextToken != null
-                    && !string.Equals(
-                        nextToken.Content,
-                        SyntaxConstants.TextTagName,
-                        StringComparison.Ordinal
-                    )
+                    && !string
+                        .Equals(
+                            nextToken.Content,
+                            SyntaxConstants.TextTagName,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     PutBack(lastWhitespace);
@@ -797,14 +804,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             {
                 if (kind == SyntaxKind.Transition && !isSingleLineMarkup)
                 {
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_AtInCodeMustBeFollowedByColonParenOrIdentifierStart(
-                            new SourceSpan(
-                                location,
-                                contentLength: 1 /* @ */
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_AtInCodeMustBeFollowedByColonParenOrIdentifierStart(
+                                new SourceSpan(
+                                    location,
+                                    contentLength: 1 /* @ */
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // Markup block
@@ -846,17 +854,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                         if (EndOfFile)
                         {
-                            Context.ErrorSink.OnError(
-                                RazorDiagnosticFactory.CreateParsing_ExpectedEndOfBlockBeforeEOF(
-                                    new SourceSpan(
-                                        block.Start,
-                                        contentLength: 1 /* { OR } */
-                                    ),
-                                    block.Name,
-                                    "}",
-                                    "{"
-                                )
-                            );
+                            Context.ErrorSink
+                                .OnError(
+                                    RazorDiagnosticFactory.CreateParsing_ExpectedEndOfBlockBeforeEOF(
+                                        new SourceSpan(
+                                            block.Start,
+                                            contentLength: 1 /* { OR } */
+                                        ),
+                                        block.Name,
+                                        "}",
+                                        "{"
+                                    )
+                                );
                         }
                         else
                         {
@@ -917,14 +926,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 // Throw errors as necessary, but continue parsing
                 if (At(SyntaxKind.LeftBrace))
                 {
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_UnexpectedNestedCodeBlock(
-                            new SourceSpan(
-                                CurrentStart,
-                                contentLength: 1 /* { */
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_UnexpectedNestedCodeBlock(
+                                new SourceSpan(
+                                    CurrentStart,
+                                    contentLength: 1 /* { */
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // @( or @foo - Nested expression, parse a child block
@@ -1043,14 +1053,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             if (Context.InTemplateContext)
             {
-                Context.ErrorSink.OnError(
-                    RazorDiagnosticFactory.CreateParsing_InlineMarkupBlocksCannotBeNested(
-                        new SourceSpan(
-                            CurrentStart,
-                            contentLength: 1 /* @ */
+                Context.ErrorSink
+                    .OnError(
+                        RazorDiagnosticFactory.CreateParsing_InlineMarkupBlocksCannotBeNested(
+                            new SourceSpan(
+                                CurrentStart,
+                                contentLength: 1 /* @ */
+                            )
                         )
-                    )
-                );
+                    );
             }
             if (SpanContext.ChunkGenerator is ExpressionChunkGenerator)
             {
@@ -1147,12 +1158,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     if (!char.IsWhiteSpace(@char))
                     {
                         var currentDirective = CurrentToken.Content;
-                        Context.ErrorSink.OnError(
-                            RazorDiagnosticFactory.CreateParsing_DirectiveMustAppearAtStartOfLine(
-                                new SourceSpan(CurrentStart, currentDirective.Length),
-                                currentDirective
-                            )
-                        );
+                        Context.ErrorSink
+                            .OnError(
+                                RazorDiagnosticFactory.CreateParsing_DirectiveMustAppearAtStartOfLine(
+                                    new SourceSpan(CurrentStart, currentDirective.Length),
+                                    currentDirective
+                                )
+                            );
                         break;
                     }
                 }
@@ -1364,12 +1376,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                     if (EndOfFile || At(SyntaxKind.NewLine))
                     {
-                        Context.ErrorSink.OnError(
-                            RazorDiagnosticFactory.CreateParsing_DirectiveMustHaveValue(
-                                new SourceSpan(keywordStartLocation, keywordLength),
-                                keyword
-                            )
-                        );
+                        Context.ErrorSink
+                            .OnError(
+                                RazorDiagnosticFactory.CreateParsing_DirectiveMustHaveValue(
+                                    new SourceSpan(keywordStartLocation, keywordLength),
+                                    keyword
+                                )
+                            );
 
                         directiveValue = string.Empty;
                     }
@@ -1383,21 +1396,21 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         AcceptUntil(SyntaxKind.NewLine);
 
                         // Pull out the value and remove whitespaces and optional quotes
-                        var rawValue = string.Concat(
-                                TokenBuilder.ToList().Nodes.Select(s => s.Content)
-                            )
+                        var rawValue = string
+                            .Concat(TokenBuilder.ToList().Nodes.Select(s => s.Content))
                             .Trim();
 
                         var startsWithQuote = rawValue.StartsWith("\"", StringComparison.Ordinal);
                         var endsWithQuote = rawValue.EndsWith("\"", StringComparison.Ordinal);
                         if (startsWithQuote != endsWithQuote)
                         {
-                            Context.ErrorSink.OnError(
-                                RazorDiagnosticFactory.CreateParsing_IncompleteQuotesAroundDirective(
-                                    new SourceSpan(valueStartLocation.Value, rawValue.Length),
-                                    keyword
-                                )
-                            );
+                            Context.ErrorSink
+                                .OnError(
+                                    RazorDiagnosticFactory.CreateParsing_IncompleteQuotesAroundDirective(
+                                        new SourceSpan(valueStartLocation.Value, rawValue.Length),
+                                        keyword
+                                    )
+                                );
                         }
 
                         directiveValue = rawValue;
@@ -1610,12 +1623,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         if (!At(SyntaxKind.Whitespace) && !At(SyntaxKind.NewLine) && !EndOfFile)
                         {
                             // This case should never happen in a real scenario. We're just being defensive.
-                            Context.ErrorSink.OnError(
-                                RazorDiagnosticFactory.CreateParsing_DirectiveTokensMustBeSeparatedByWhitespace(
-                                    new SourceSpan(CurrentStart, CurrentToken.Content.Length),
-                                    descriptor.Directive
-                                )
-                            );
+                            Context.ErrorSink
+                                .OnError(
+                                    RazorDiagnosticFactory.CreateParsing_DirectiveTokensMustBeSeparatedByWhitespace(
+                                        new SourceSpan(CurrentStart, CurrentToken.Content.Length),
+                                        descriptor.Directive
+                                    )
+                                );
 
                             builder.Add(BuildDirective());
                             return;
@@ -1670,13 +1684,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         }
                         else if (EndOfFile)
                         {
-                            Context.ErrorSink.OnError(
-                                RazorDiagnosticFactory.CreateParsing_UnexpectedEOFAfterDirective(
-                                    new SourceSpan(CurrentStart, contentLength: 1),
-                                    descriptor.Directive,
-                                    tokenDescriptor.Kind.ToString().ToLowerInvariant()
-                                )
-                            );
+                            Context.ErrorSink
+                                .OnError(
+                                    RazorDiagnosticFactory.CreateParsing_UnexpectedEOFAfterDirective(
+                                        new SourceSpan(CurrentStart, contentLength: 1),
+                                        descriptor.Directive,
+                                        tokenDescriptor.Kind.ToString().ToLowerInvariant()
+                                    )
+                                );
                             builder.Add(BuildDirective());
                             return;
                         }
@@ -1686,15 +1701,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             case DirectiveTokenKind.Type:
                                 if (!TryParseNamespaceOrTypeName(directiveBuilder))
                                 {
-                                    Context.ErrorSink.OnError(
-                                        RazorDiagnosticFactory.CreateParsing_DirectiveExpectsTypeName(
-                                            new SourceSpan(
-                                                CurrentStart,
-                                                CurrentToken.Content.Length
-                                            ),
-                                            descriptor.Directive
-                                        )
-                                    );
+                                    Context.ErrorSink
+                                        .OnError(
+                                            RazorDiagnosticFactory.CreateParsing_DirectiveExpectsTypeName(
+                                                new SourceSpan(
+                                                    CurrentStart,
+                                                    CurrentToken.Content.Length
+                                                ),
+                                                descriptor.Directive
+                                            )
+                                        );
 
                                     builder.Add(BuildDirective());
                                     return;
@@ -1704,12 +1720,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             case DirectiveTokenKind.Namespace:
                                 if (!TryParseQualifiedIdentifier(out var identifierLength))
                                 {
-                                    Context.ErrorSink.OnError(
-                                        RazorDiagnosticFactory.CreateParsing_DirectiveExpectsNamespace(
-                                            new SourceSpan(CurrentStart, identifierLength),
-                                            descriptor.Directive
-                                        )
-                                    );
+                                    Context.ErrorSink
+                                        .OnError(
+                                            RazorDiagnosticFactory.CreateParsing_DirectiveExpectsNamespace(
+                                                new SourceSpan(CurrentStart, identifierLength),
+                                                descriptor.Directive
+                                            )
+                                        );
 
                                     builder.Add(BuildDirective());
                                     return;
@@ -1724,15 +1741,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                 }
                                 else
                                 {
-                                    Context.ErrorSink.OnError(
-                                        RazorDiagnosticFactory.CreateParsing_DirectiveExpectsIdentifier(
-                                            new SourceSpan(
-                                                CurrentStart,
-                                                CurrentToken.Content.Length
-                                            ),
-                                            descriptor.Directive
-                                        )
-                                    );
+                                    Context.ErrorSink
+                                        .OnError(
+                                            RazorDiagnosticFactory.CreateParsing_DirectiveExpectsIdentifier(
+                                                new SourceSpan(
+                                                    CurrentStart,
+                                                    CurrentToken.Content.Length
+                                                ),
+                                                descriptor.Directive
+                                            )
+                                        );
                                     builder.Add(BuildDirective());
                                     return;
                                 }
@@ -1748,15 +1766,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                 }
                                 else
                                 {
-                                    Context.ErrorSink.OnError(
-                                        RazorDiagnosticFactory.CreateParsing_DirectiveExpectsQuotedStringLiteral(
-                                            new SourceSpan(
-                                                CurrentStart,
-                                                CurrentToken.Content.Length
-                                            ),
-                                            descriptor.Directive
-                                        )
-                                    );
+                                    Context.ErrorSink
+                                        .OnError(
+                                            RazorDiagnosticFactory.CreateParsing_DirectiveExpectsQuotedStringLiteral(
+                                                new SourceSpan(
+                                                    CurrentStart,
+                                                    CurrentToken.Content.Length
+                                                ),
+                                                descriptor.Directive
+                                            )
+                                        );
                                     builder.Add(BuildDirective());
                                     return;
                                 }
@@ -1769,15 +1788,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                 }
                                 else
                                 {
-                                    Context.ErrorSink.OnError(
-                                        RazorDiagnosticFactory.CreateParsing_DirectiveExpectsBooleanLiteral(
-                                            new SourceSpan(
-                                                CurrentStart,
-                                                CurrentToken.Content.Length
-                                            ),
-                                            descriptor.Directive
-                                        )
-                                    );
+                                    Context.ErrorSink
+                                        .OnError(
+                                            RazorDiagnosticFactory.CreateParsing_DirectiveExpectsBooleanLiteral(
+                                                new SourceSpan(
+                                                    CurrentStart,
+                                                    CurrentToken.Content.Length
+                                                ),
+                                                descriptor.Directive
+                                            )
+                                        );
                                     builder.Add(BuildDirective());
                                     return;
                                 }
@@ -1793,15 +1813,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                 }
                                 else
                                 {
-                                    Context.ErrorSink.OnError(
-                                        RazorDiagnosticFactory.CreateParsing_DirectiveExpectsCSharpAttribute(
-                                            new SourceSpan(
-                                                CurrentStart,
-                                                CurrentToken.Content.Length
-                                            ),
-                                            descriptor.Directive
-                                        )
-                                    );
+                                    Context.ErrorSink
+                                        .OnError(
+                                            RazorDiagnosticFactory.CreateParsing_DirectiveExpectsCSharpAttribute(
+                                                new SourceSpan(
+                                                    CurrentStart,
+                                                    CurrentToken.Content.Length
+                                                ),
+                                                descriptor.Directive
+                                            )
+                                        );
                                     builder.Add(BuildDirective());
                                     return;
                                 }
@@ -1809,13 +1830,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             case DirectiveTokenKind.GenericTypeConstraint:
                                 if (
                                     At(SyntaxKind.Keyword)
-                                    && string.Equals(
-                                        CurrentToken.Content,
-                                        CSharpLanguageCharacteristics.GetKeyword(
-                                            CSharpKeyword.Where
-                                        ),
-                                        StringComparison.Ordinal
-                                    )
+                                    && string
+                                        .Equals(
+                                            CurrentToken.Content,
+                                            CSharpLanguageCharacteristics.GetKeyword(
+                                                CSharpKeyword.Where
+                                            ),
+                                            StringComparison.Ordinal
+                                        )
                                 )
                                 {
                                     // Consume the 'where' keyword plus any aditional whitespace
@@ -1824,26 +1846,28 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                     // Check that the type name matches the type name before the where clause.
                                     // Find a better way to do this
                                     if (
-                                        !string.Equals(
-                                            CurrentToken.Content,
-                                            lastSeenMemberIdentifier,
-                                            StringComparison.Ordinal
-                                        )
+                                        !string
+                                            .Equals(
+                                                CurrentToken.Content,
+                                                lastSeenMemberIdentifier,
+                                                StringComparison.Ordinal
+                                            )
                                     )
                                     {
                                         // @typeparam TKey where TValue : ...
                                         // The type parameter in the generic type constraint 'TValue' does not match the type parameter 'TKey' defined in the directive '@typeparam'.
-                                        Context.ErrorSink.OnError(
-                                            RazorDiagnosticFactory.CreateParsing_GenericTypeParameterIdentifierMismatch(
-                                                new SourceSpan(
-                                                    CurrentStart,
-                                                    CurrentToken.Content.Length
-                                                ),
-                                                descriptor.Directive,
-                                                CurrentToken.Content,
-                                                lastSeenMemberIdentifier
-                                            )
-                                        );
+                                        Context.ErrorSink
+                                            .OnError(
+                                                RazorDiagnosticFactory.CreateParsing_GenericTypeParameterIdentifierMismatch(
+                                                    new SourceSpan(
+                                                        CurrentStart,
+                                                        CurrentToken.Content.Length
+                                                    ),
+                                                    descriptor.Directive,
+                                                    CurrentToken.Content,
+                                                    lastSeenMemberIdentifier
+                                                )
+                                            );
                                         builder.Add(BuildDirective());
                                         return;
                                     }
@@ -1862,18 +1886,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                 }
                                 else
                                 {
-                                    Context.ErrorSink.OnError(
-                                        RazorDiagnosticFactory.CreateParsing_UnexpectedIdentifier(
-                                            new SourceSpan(
-                                                CurrentStart,
-                                                CurrentToken.Content.Length
-                                            ),
-                                            CurrentToken.Content,
-                                            CSharpLanguageCharacteristics.GetKeyword(
-                                                CSharpKeyword.Where
+                                    Context.ErrorSink
+                                        .OnError(
+                                            RazorDiagnosticFactory.CreateParsing_UnexpectedIdentifier(
+                                                new SourceSpan(
+                                                    CurrentStart,
+                                                    CurrentToken.Content.Length
+                                                ),
+                                                CurrentToken.Content,
+                                                CSharpLanguageCharacteristics.GetKeyword(
+                                                    CSharpKeyword.Where
+                                                )
                                             )
-                                        )
-                                    );
+                                        );
 
                                     builder.Add(BuildDirective());
                                     return;
@@ -1915,13 +1940,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             }
                             else if (!EndOfFile)
                             {
-                                Context.ErrorSink.OnError(
-                                    RazorDiagnosticFactory.CreateParsing_UnexpectedDirectiveLiteral(
-                                        new SourceSpan(CurrentStart, CurrentToken.Content.Length),
-                                        descriptor.Directive,
-                                        Resources.ErrorComponent_Newline
-                                    )
-                                );
+                                Context.ErrorSink
+                                    .OnError(
+                                        RazorDiagnosticFactory.CreateParsing_UnexpectedDirectiveLiteral(
+                                            new SourceSpan(
+                                                CurrentStart,
+                                                CurrentToken.Content.Length
+                                            ),
+                                            descriptor.Directive,
+                                            Resources.ErrorComponent_Newline
+                                        )
+                                    );
                             }
 
                             // This should contain the optional whitespace after the optional semicolon and the new line.
@@ -2050,12 +2079,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     // There will always be at least 1 child because of the `@` transition.
                     var errorLength = /* @ */
                         1 + descriptor.Directive.Length;
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_DuplicateDirective(
-                            new SourceSpan(directiveStart, errorLength),
-                            descriptor.Directive
-                        )
-                    );
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_DuplicateDirective(
+                                new SourceSpan(directiveStart, errorLength),
+                                descriptor.Directive
+                            )
+                        );
 
                     return;
                 }
@@ -2129,26 +2159,28 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             if (EndOfFile)
             {
-                Context.ErrorSink.OnError(
-                    RazorDiagnosticFactory.CreateParsing_UnexpectedEOFAfterDirective(
-                        new SourceSpan(
-                            CurrentStart,
-                            contentLength: 1 /* { */
-                        ),
-                        descriptor.Directive,
-                        "{"
-                    )
-                );
+                Context.ErrorSink
+                    .OnError(
+                        RazorDiagnosticFactory.CreateParsing_UnexpectedEOFAfterDirective(
+                            new SourceSpan(
+                                CurrentStart,
+                                contentLength: 1 /* { */
+                            ),
+                            descriptor.Directive,
+                            "{"
+                        )
+                    );
             }
             else if (!At(SyntaxKind.LeftBrace))
             {
-                Context.ErrorSink.OnError(
-                    RazorDiagnosticFactory.CreateParsing_UnexpectedDirectiveLiteral(
-                        new SourceSpan(CurrentStart, CurrentToken.Content.Length),
-                        descriptor.Directive,
-                        "{"
-                    )
-                );
+                Context.ErrorSink
+                    .OnError(
+                        RazorDiagnosticFactory.CreateParsing_UnexpectedDirectiveLiteral(
+                            new SourceSpan(CurrentStart, CurrentToken.Content.Length),
+                            descriptor.Directive,
+                            "{"
+                        )
+                    );
             }
             else
             {
@@ -2175,17 +2207,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (!TryAccept(SyntaxKind.RightBrace))
                 {
                     editHandler.AutoCompleteString = "}";
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_ExpectedEndOfBlockBeforeEOF(
-                            new SourceSpan(
-                                startingBraceLocation,
-                                contentLength: 1 /* } */
-                            ),
-                            descriptor.Directive,
-                            "}",
-                            "{"
-                        )
-                    );
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_ExpectedEndOfBlockBeforeEOF(
+                                new SourceSpan(
+                                    startingBraceLocation,
+                                    contentLength: 1 /* } */
+                                ),
+                                descriptor.Directive,
+                                "}",
+                                "{"
+                            )
+                        );
 
                     Accept(SyntaxFactory.MissingToken(SyntaxKind.RightBrace));
                 }
@@ -2406,35 +2439,38 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (At(SyntaxKind.LessThan))
                 {
                     // if (...) <p>Hello World</p>
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_SingleLineControlFlowStatementsCannotContainMarkup(
-                            new SourceSpan(CurrentStart, CurrentToken.Content.Length)
-                        )
-                    );
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_SingleLineControlFlowStatementsCannotContainMarkup(
+                                new SourceSpan(CurrentStart, CurrentToken.Content.Length)
+                            )
+                        );
                 }
                 else if (At(SyntaxKind.Transition) && NextIs(SyntaxKind.Colon))
                 {
                     // if (...) @: <p>The time is @DateTime.Now</p>
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_SingleLineControlFlowStatementsCannotContainMarkup(
-                            new SourceSpan(
-                                CurrentStart,
-                                contentLength: 2 /* @: */
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_SingleLineControlFlowStatementsCannotContainMarkup(
+                                new SourceSpan(
+                                    CurrentStart,
+                                    contentLength: 2 /* @: */
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else if (At(SyntaxKind.Transition) && NextIs(SyntaxKind.Transition))
                 {
                     // if (...) @@JohnDoe <strong>Hi!</strong>
-                    Context.ErrorSink.OnError(
-                        RazorDiagnosticFactory.CreateParsing_SingleLineControlFlowStatementsCannotContainMarkup(
-                            new SourceSpan(
-                                CurrentStart,
-                                contentLength: 2 /* @@ */
+                    Context.ErrorSink
+                        .OnError(
+                            RazorDiagnosticFactory.CreateParsing_SingleLineControlFlowStatementsCannotContainMarkup(
+                                new SourceSpan(
+                                    CurrentStart,
+                                    contentLength: 2 /* @@ */
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // Parse the statement and then we're done
@@ -2692,11 +2728,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                     if (!Context.FeatureFlags.AllowUsingVariableDeclarations)
                     {
-                        Context.ErrorSink.OnError(
-                            RazorDiagnosticFactory.CreateParsing_NamespaceImportAndTypeAliasCannotExistWithinCodeBlock(
-                                new SourceSpan(block.Start, block.Name.Length)
-                            )
-                        );
+                        Context.ErrorSink
+                            .OnError(
+                                RazorDiagnosticFactory.CreateParsing_NamespaceImportAndTypeAliasCannotExistWithinCodeBlock(
+                                    new SourceSpan(block.Start, block.Name.Length)
+                                )
+                            );
                     }
 
                     // There are cases when a user will do @using var x = 123; At which point we let C# notify the user
@@ -2935,12 +2972,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             CSharpTransitionSyntax transition
         )
         {
-            Context.ErrorSink.OnError(
-                RazorDiagnosticFactory.CreateParsing_ReservedWord(
-                    new SourceSpan(CurrentStart, CurrentToken.Content.Length),
-                    CurrentToken.Content
-                )
-            );
+            Context.ErrorSink
+                .OnError(
+                    RazorDiagnosticFactory.CreateParsing_ReservedWord(
+                        new SourceSpan(CurrentStart, CurrentToken.Content.Length),
+                        CurrentToken.Content
+                    )
+                );
 
             AcceptAndMoveNext();
             SpanContext.EditHandler.AcceptedCharacters = AcceptedCharactersInternal.None;
@@ -3127,16 +3165,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 && ((mode & BalancingModes.NoErrorOnFailure) != BalancingModes.NoErrorOnFailure)
             )
             {
-                Context.ErrorSink.OnError(
-                    RazorDiagnosticFactory.CreateParsing_ExpectedCloseBracketBeforeEOF(
-                        new SourceSpan(
-                            start,
-                            contentLength: 1 /* { OR } */
-                        ),
-                        Language.GetSample(left),
-                        Language.GetSample(right)
-                    )
-                );
+                Context.ErrorSink
+                    .OnError(
+                        RazorDiagnosticFactory.CreateParsing_ExpectedCloseBracketBeforeEOF(
+                            new SourceSpan(
+                                start,
+                                contentLength: 1 /* { OR } */
+                            ),
+                            Language.GetSample(left),
+                            Language.GetSample(right)
+                        )
+                    );
             }
 
             return Balance(builder, mode, left, right, start);
@@ -3195,16 +3234,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 {
                     if ((mode & BalancingModes.NoErrorOnFailure) != BalancingModes.NoErrorOnFailure)
                     {
-                        Context.ErrorSink.OnError(
-                            RazorDiagnosticFactory.CreateParsing_ExpectedCloseBracketBeforeEOF(
-                                new SourceSpan(
-                                    start,
-                                    contentLength: 1 /* { OR } */
-                                ),
-                                Language.GetSample(left),
-                                Language.GetSample(right)
-                            )
-                        );
+                        Context.ErrorSink
+                            .OnError(
+                                RazorDiagnosticFactory.CreateParsing_ExpectedCloseBracketBeforeEOF(
+                                    new SourceSpan(
+                                        start,
+                                        contentLength: 1 /* { OR } */
+                                    ),
+                                    Language.GetSample(left),
+                                    Language.GetSample(right)
+                                )
+                            );
                     }
                     if (
                         (mode & BalancingModes.BacktrackOnFailure)

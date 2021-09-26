@@ -77,12 +77,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             var buffer = workspace.Documents.Single().GetTextBuffer();
             var nextHandlerInvoked = false;
 
-            view.Caret.MoveTo(
-                new SnapshotPoint(
-                    buffer.CurrentSnapshot,
-                    workspace.Documents.Single(d => d.CursorPosition.HasValue).CursorPosition.Value
-                )
-            );
+            view.Caret
+                .MoveTo(
+                    new SnapshotPoint(
+                        buffer.CurrentSnapshot,
+                        workspace.Documents
+                            .Single(d => d.CursorPosition.HasValue).CursorPosition.Value
+                    )
+                );
 
             var commandHandler = GetCommandHandler(workspace);
             var nextHandler = assertNextHandlerInvoked

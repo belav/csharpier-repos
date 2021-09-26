@@ -23,9 +23,9 @@ namespace Microsoft.Web.Helpers.Test
         public void RenderEncodesDefaultImageUrl()
         {
             string render = Gravatar.GetHtml(
-                    "foo@bar.com",
-                    defaultImage: "http://example.com/images/example.jpg"
-                )
+                "foo@bar.com",
+                defaultImage: "http://example.com/images/example.jpg"
+            )
                 .ToString();
             Assert.Equal(
                 "<img src=\"http://www.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8?s=80&amp;d=http%3a%2f%2fexample.com%2fimages%2fexample.jpg\" alt=\"gravatar\" />",
@@ -156,9 +156,9 @@ namespace Microsoft.Web.Helpers.Test
         public void RenderWithAttributes()
         {
             string render = Gravatar.GetHtml(
-                    "foo@bar.com",
-                    attributes: new { id = "gravatar", alT = "<b>foo@bar.com</b>", srC = "ignored" }
-                )
+                "foo@bar.com",
+                attributes: new { id = "gravatar", alT = "<b>foo@bar.com</b>", srC = "ignored" }
+            )
                 .ToString();
             // beware of attributes ordering in tests
             Assert.Equal(

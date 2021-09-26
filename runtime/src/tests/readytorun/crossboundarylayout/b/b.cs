@@ -223,7 +223,8 @@ namespace CrossBoundaryLayout
                 if (
                     1
                     != (
-                        (ByteStruct)typeof(B_A_byte_Generic<ByteStruct>).GetField("_bVal")
+                        (ByteStruct)typeof(B_A_byte_Generic<ByteStruct>)
+                            .GetField("_bVal")
                             .GetValue(b8)
                     )._dVal
                 )

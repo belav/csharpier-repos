@@ -65,32 +65,32 @@ namespace Microsoft.CodeAnalysis.AddImport
                 }
 
                 (var newContextNode, var newDocument) = await ReplaceNameNodeAsync(
-                        contextNode,
-                        document,
-                        cancellationToken
-                    )
+                    contextNode,
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var updatedDocument = await provider.AddImportAsync(
-                        newContextNode,
-                        SymbolResult.Symbol,
-                        newDocument,
-                        placeSystemNamespaceFirst,
-                        allowInHiddenRegions,
-                        cancellationToken
-                    )
+                    newContextNode,
+                    SymbolResult.Symbol,
+                    newDocument,
+                    placeSystemNamespaceFirst,
+                    allowInHiddenRegions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var cleanedDocument = await CodeAction.CleanupDocumentAsync(
-                        updatedDocument,
-                        cancellationToken
-                    )
+                    updatedDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var textChanges = await cleanedDocument.GetTextChangesAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return textChanges.ToImmutableArray();
@@ -142,13 +142,13 @@ namespace Microsoft.CodeAnalysis.AddImport
                 }
 
                 var textChanges = await GetTextChangesAsync(
-                        document,
-                        node,
-                        placeSystemNamespaceFirst,
-                        allowInHiddenRegions,
-                        hasExistingImport,
-                        cancellationToken
-                    )
+                    document,
+                    node,
+                    placeSystemNamespaceFirst,
+                    allowInHiddenRegions,
+                    hasExistingImport,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return GetFixData(document, textChanges, description, tags, GetPriority(document));

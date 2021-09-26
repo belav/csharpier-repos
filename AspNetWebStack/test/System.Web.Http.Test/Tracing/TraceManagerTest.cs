@@ -163,7 +163,8 @@ namespace System.Web.Http.Tracing
             object defaultService = config.Services.GetService(serviceType);
 
             // Act
-            new TraceManager().Initialize(config);
+            new TraceManager()
+                .Initialize(config);
 
             // Assert
             Assert.Same(
@@ -189,7 +190,8 @@ namespace System.Web.Http.Tracing
             object defaultService = config.Services.GetService(serviceType);
 
             // Act
-            new TraceManager().Initialize(config);
+            new TraceManager()
+                .Initialize(config);
 
             // Assert
             Assert.NotSame(
@@ -207,7 +209,8 @@ namespace System.Web.Http.Tracing
             config.MessageHandlers.Add(mockHandler.Object);
 
             // Act
-            new TraceManager().Initialize(config);
+            new TraceManager()
+                .Initialize(config);
 
             // Assert
             Assert.Equal(
@@ -227,7 +230,8 @@ namespace System.Web.Http.Tracing
             config.MessageHandlers.Add(mockHandler.Object);
 
             // Act
-            new TraceManager().Initialize(config);
+            new TraceManager()
+                .Initialize(config);
 
             // Assert
             Assert.IsAssignableFrom<RequestMessageHandlerTracer>(config.MessageHandlers[0]);
@@ -245,7 +249,8 @@ namespace System.Web.Http.Tracing
             HttpConfiguration config = new HttpConfiguration();
 
             // Act
-            new TraceManager().Initialize(config);
+            new TraceManager()
+                .Initialize(config);
 
             // Assert
             foreach (var formatter in config.Formatters)
@@ -263,7 +268,8 @@ namespace System.Web.Http.Tracing
             config.Services.Replace(typeof(ITraceWriter), traceWriter.Object);
 
             // Act
-            new TraceManager().Initialize(config);
+            new TraceManager()
+                .Initialize(config);
 
             // Assert
             foreach (var formatter in config.Formatters)

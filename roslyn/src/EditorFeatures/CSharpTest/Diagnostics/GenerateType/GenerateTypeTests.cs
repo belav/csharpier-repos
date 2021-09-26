@@ -36,9 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateTyp
 
         // TODO: Requires WPF due to IInlineRenameService dependency (https://github.com/dotnet/roslyn/issues/46153)
         protected override TestComposition GetComposition() =>
-            EditorTestCompositions.EditorFeaturesWpf.AddExcludedPartTypes(
-                    typeof(IDiagnosticUpdateSourceRegistrationService)
-                )
+            EditorTestCompositions.EditorFeaturesWpf
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
         #region Generate Class
@@ -4851,12 +4850,13 @@ internal class GooAttribute : CustomConstantAttribute
         {
             await TestSmartTagTextAsync(
                 @"class C : [|Goo|]",
-                string.Format(
-                    FeaturesResources.Generate_0_1_in_new_file,
-                    "class",
-                    "Goo",
-                    FeaturesResources.Global_Namespace
-                )
+                string
+                    .Format(
+                        FeaturesResources.Generate_0_1_in_new_file,
+                        "class",
+                        "Goo",
+                        FeaturesResources.Global_Namespace
+                    )
             );
         }
 
@@ -4970,12 +4970,13 @@ class Program
                 code,
                 new[]
                 {
-                    string.Format(
-                        FeaturesResources.Generate_0_1_in_new_file,
-                        "class",
-                        "Goo",
-                        FeaturesResources.Global_Namespace
-                    ),
+                    string
+                        .Format(
+                            FeaturesResources.Generate_0_1_in_new_file,
+                            "class",
+                            "Goo",
+                            FeaturesResources.Global_Namespace
+                        ),
                     string.Format(FeaturesResources.Generate_nested_0_1, "class", "Goo", "Program"),
                     FeaturesResources.Generate_new_type
                 }

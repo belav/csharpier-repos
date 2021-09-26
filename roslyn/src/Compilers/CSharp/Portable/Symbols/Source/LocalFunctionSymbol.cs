@@ -47,9 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             _declarationModifiers =
                 DeclarationModifiers.Private
-                | syntax.Modifiers.ToDeclarationModifiers(
-                    diagnostics: _declarationDiagnostics.DiagnosticBag
-                );
+                | syntax.Modifiers
+                    .ToDeclarationModifiers(diagnostics: _declarationDiagnostics.DiagnosticBag);
 
             if (SyntaxFacts.HasYieldOperations(syntax.Body))
             {
@@ -475,8 +474,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         )
         {
-            var diagnosticInfo =
-                MessageID.IDS_FeatureLocalFunctionAttributes.GetFeatureAvailabilityDiagnosticInfo(
+            var diagnosticInfo = MessageID.IDS_FeatureLocalFunctionAttributes
+                .GetFeatureAvailabilityDiagnosticInfo(
                     (CSharpParseOptions)syntaxReferenceOpt.SyntaxTree.Options
                 );
             if (diagnosticInfo is object)

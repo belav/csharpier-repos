@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
 #if OLD_FROM_SQL
                         ctx.Database.ExecuteSqlCommand(StoredProcedureCreationScript);
 #else
-                        ctx.Database.ExecuteSqlRaw(StoredProcedureCreationScript);
+                        ctx.Database
+                            .ExecuteSqlRaw(StoredProcedureCreationScript);
 #endif
                     }
                 }
@@ -69,9 +70,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
             var sql = @"SELECT * FROM ""Products""";
             var query = _context.Products
 #if OLD_FROM_SQL
-            .FromSql(sql)
+                .FromSql(sql)
 #else
-            .FromSqlRaw(sql)
+                .FromSqlRaw(sql)
 #endif
                 .ApplyTracking(Tracking);
 
@@ -92,9 +93,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
                 @"SELECT * FROM ""Products"" WHERE ""CurrentPrice"" >= @p0 AND ""CurrentPrice"" <= @p1";
             var query = _context.Products
 #if OLD_FROM_SQL
-            .FromSql(sql, 10, 14)
+                .FromSql(sql, 10, 14)
 #else
-            .FromSqlRaw(sql, 10, 14)
+                .FromSqlRaw(sql, 10, 14)
 #endif
                 .ApplyTracking(Tracking);
 
@@ -114,9 +115,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
             var sql = @"SELECT * FROM ""Products""";
             var query = _context.Products
 #if OLD_FROM_SQL
-            .FromSql(sql)
+                .FromSql(sql)
 #else
-            .FromSqlRaw(sql)
+                .FromSqlRaw(sql)
 #endif
                 .ApplyTracking(Tracking)
                 .Where(p => p.ActualStockLevel >= 2 && p.ActualStockLevel <= 6)
@@ -138,9 +139,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
             var sql = @"EXECUTE dbo.SearchProducts @p0, @p1";
             var query = _context.Products
 #if OLD_FROM_SQL
-            .FromSql(sql, 10, 14)
+                .FromSql(sql, 10, 14)
 #else
-            .FromSqlRaw(sql, 10, 14)
+                .FromSqlRaw(sql, 10, 14)
 #endif
                 .ApplyTracking(Tracking);
 

@@ -71,11 +71,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 await manager.OnConnectedAsync(connection2).DefaultTimeout();
                 var cts = new CancellationTokenSource();
                 var sendTask = manager.SendAllExceptAsync(
-                        "Hello",
-                        new object[] { "World" },
-                        new List<string> { connection1.ConnectionId },
-                        cts.Token
-                    )
+                    "Hello",
+                    new object[] { "World" },
+                    new List<string> { connection1.ConnectionId },
+                    cts.Token
+                )
                     .DefaultTimeout();
                 Assert.False(sendTask.IsCompleted);
                 cts.Cancel();
@@ -106,11 +106,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 await manager.OnConnectedAsync(connection1).DefaultTimeout();
                 var cts = new CancellationTokenSource();
                 var sendTask = manager.SendConnectionAsync(
-                        connection1.ConnectionId,
-                        "Hello",
-                        new object[] { "World" },
-                        cts.Token
-                    )
+                    connection1.ConnectionId,
+                    "Hello",
+                    new object[] { "World" },
+                    cts.Token
+                )
                     .DefaultTimeout();
                 Assert.False(sendTask.IsCompleted);
                 cts.Cancel();
@@ -139,11 +139,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 await manager.OnConnectedAsync(connection1).DefaultTimeout();
                 var cts = new CancellationTokenSource();
                 var sendTask = manager.SendConnectionsAsync(
-                        new List<string> { connection1.ConnectionId },
-                        "Hello",
-                        new object[] { "World" },
-                        cts.Token
-                    )
+                    new List<string> { connection1.ConnectionId },
+                    "Hello",
+                    new object[] { "World" },
+                    cts.Token
+                )
                     .DefaultTimeout();
                 Assert.False(sendTask.IsCompleted);
                 cts.Cancel();
@@ -173,11 +173,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 await manager.AddToGroupAsync(connection1.ConnectionId, "group").DefaultTimeout();
                 var cts = new CancellationTokenSource();
                 var sendTask = manager.SendGroupAsync(
-                        "group",
-                        "Hello",
-                        new object[] { "World" },
-                        cts.Token
-                    )
+                    "group",
+                    "Hello",
+                    new object[] { "World" },
+                    cts.Token
+                )
                     .DefaultTimeout();
                 Assert.False(sendTask.IsCompleted);
                 cts.Cancel();
@@ -211,12 +211,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 await manager.AddToGroupAsync(connection2.ConnectionId, "group").DefaultTimeout();
                 var cts = new CancellationTokenSource();
                 var sendTask = manager.SendGroupExceptAsync(
-                        "group",
-                        "Hello",
-                        new object[] { "World" },
-                        new List<string> { connection1.ConnectionId },
-                        cts.Token
-                    )
+                    "group",
+                    "Hello",
+                    new object[] { "World" },
+                    new List<string> { connection1.ConnectionId },
+                    cts.Token
+                )
                     .DefaultTimeout();
                 Assert.False(sendTask.IsCompleted);
                 cts.Cancel();
@@ -248,11 +248,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 await manager.AddToGroupAsync(connection1.ConnectionId, "group").DefaultTimeout();
                 var cts = new CancellationTokenSource();
                 var sendTask = manager.SendGroupsAsync(
-                        new List<string> { "group" },
-                        "Hello",
-                        new object[] { "World" },
-                        cts.Token
-                    )
+                    new List<string> { "group" },
+                    "Hello",
+                    new object[] { "World" },
+                    cts.Token
+                )
                     .DefaultTimeout();
                 Assert.False(sendTask.IsCompleted);
                 cts.Cancel();
@@ -290,11 +290,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 await manager.OnConnectedAsync(connection2).DefaultTimeout();
                 var cts = new CancellationTokenSource();
                 var sendTask = manager.SendUserAsync(
-                        "user",
-                        "Hello",
-                        new object[] { "World" },
-                        cts.Token
-                    )
+                    "user",
+                    "Hello",
+                    new object[] { "World" },
+                    cts.Token
+                )
                     .DefaultTimeout();
                 Assert.False(sendTask.IsCompleted);
                 cts.Cancel();
@@ -337,11 +337,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 await manager.OnConnectedAsync(connection2).DefaultTimeout();
                 var cts = new CancellationTokenSource();
                 var sendTask = manager.SendUsersAsync(
-                        new List<string> { "user1", "user2" },
-                        "Hello",
-                        new object[] { "World" },
-                        cts.Token
-                    )
+                    new List<string> { "user1", "user2" },
+                    "Hello",
+                    new object[] { "World" },
+                    cts.Token
+                )
                     .DefaultTimeout();
                 Assert.False(sendTask.IsCompleted);
                 cts.Cancel();

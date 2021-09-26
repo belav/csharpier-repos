@@ -52,10 +52,10 @@ namespace JitBench
             {
                 FileTasks.DeleteDirectory(helloWorldProjectDir, output);
                 FileTasks.CreateDirectory(helloWorldProjectDir, output);
-                await new ProcessRunner(
-                    dotNetInstall.DotNetExe,
-                    "new console"
-                ).WithWorkingDirectory(helloWorldProjectDir).WithLog(output).Run();
+                await new ProcessRunner(dotNetInstall.DotNetExe, "new console")
+                    .WithWorkingDirectory(helloWorldProjectDir)
+                    .WithLog(output)
+                    .Run();
 
                 RetargetProjects(
                     dotNetInstall,

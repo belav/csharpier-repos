@@ -88,7 +88,8 @@ namespace System.Security.AccessControl.Tests
             string sid = "BA";
             sid = new SecurityIdentifier(
                 Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-            ).ToString();
+            )
+                .ToString();
             int expectedLength = 0;
 
             //case 1, SystemAcl with huge number of Aces

@@ -284,10 +284,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd).GetMethod(
-                    nameof(AdvSimd.Not),
-                    new Type[] { typeof(Vector128<Single>) }
-                )
+            var result = typeof(AdvSimd)
+                .GetMethod(nameof(AdvSimd.Not), new Type[] { typeof(Vector128<Single>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr) }
@@ -301,10 +299,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd).GetMethod(
-                    nameof(AdvSimd.Not),
-                    new Type[] { typeof(Vector128<Single>) }
-                )
+            var result = typeof(AdvSimd)
+                .GetMethod(nameof(AdvSimd.Not), new Type[] { typeof(Vector128<Single>) })
                 .Invoke(
                     null,
                     new object[] { AdvSimd.LoadVector128((Single*)(_dataTable.inArray1Ptr)) }
@@ -527,15 +523,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.Not)}<Single>(Vector128<Single>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.Not)}<Single>(Vector128<Single>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

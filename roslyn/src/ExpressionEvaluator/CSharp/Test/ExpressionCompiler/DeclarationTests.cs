@@ -54,9 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       85 (0x55)
   .maxstack  4
   .locals init (object V_0, //y
@@ -89,7 +88,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0053:  stind.i4
   IL_0054:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -158,9 +157,8 @@ class C
                         resultProperties.ModifierFlags
                     );
 
-                    testData.GetMethodData("<>x.<>m0(C)")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0(C)").VerifyIL(
+                        @"
 {
   // Code size       92 (0x5c)
   .maxstack  4
@@ -194,7 +192,7 @@ class C
   IL_0056:  newobj     ""System.ValueTuple<int, string>..ctor(int, string)""
   IL_005b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -263,9 +261,8 @@ class C
                         resultProperties.ModifierFlags
                     );
 
-                    testData.GetMethodData("<>x.<>m0(C)")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0(C)").VerifyIL(
+                        @"
 {
   // Code size       50 (0x32)
   .maxstack  4
@@ -288,7 +285,7 @@ class C
   IL_0031:  ret
 }
 "
-                        );
+                    );
                 }
             );
         }
@@ -333,9 +330,8 @@ class C
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       47 (0x2f)
   .maxstack  4
   .locals init (object V_0, //y
@@ -356,7 +352,7 @@ class C
   IL_0029:  call       ""void C.Test(object, out int)""
   IL_002e:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -398,9 +394,8 @@ class C
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       69 (0x45)
   .maxstack  4
   .locals init (object V_0, //y
@@ -432,7 +427,7 @@ class C
   IL_003f:  call       ""void C.Test(bool)""
   IL_0044:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -474,9 +469,8 @@ class C
                     string error;
                     testData = new CompilationTestData();
                     context.CompileAssignment("x", "Test(out var z)", out error, testData);
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       48 (0x30)
   .maxstack  4
   .locals init (object V_0, //y
@@ -497,7 +491,7 @@ class C
   IL_002d:  starg.s    V_0
   IL_002f:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -548,9 +542,8 @@ class C
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       88 (0x58)
   .maxstack  4
   .locals init (object V_0, //y
@@ -582,7 +575,7 @@ class C
   IL_0056:  stind.i4
   IL_0057:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -631,9 +624,8 @@ class C
                     );
 
                     Assert.Equal(1, testData.GetExplicitlyDeclaredMethods().Length);
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       78 (0x4e)
   .maxstack  2
   .locals init (object V_0) //y
@@ -667,7 +659,7 @@ class C
   IL_0048:  ldsfld     ""object C.G""
   IL_004d:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -700,9 +692,8 @@ class C
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       18 (0x12)
   .maxstack  3
   .locals init (char V_0)
@@ -716,7 +707,7 @@ class C
   IL_0010:  ldloc.0
   IL_0011:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -873,9 +864,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       62 (0x3e)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -896,7 +886,7 @@ class C
   IL_003c:  stind.ref
   IL_003d:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -930,9 +920,8 @@ class C
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       43 (0x2b)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -950,7 +939,7 @@ class C
   IL_0029:  stind.i4
   IL_002a:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -987,9 +976,8 @@ class C
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       62 (0x3e)
   .maxstack  7
   IL_0000:  ldtoken    ""object""
@@ -1015,7 +1003,7 @@ class C
   IL_003c:  stind.ref
   IL_003d:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1175,9 +1163,8 @@ class C
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size      115 (0x73)
   .maxstack  4
   .locals init (System.Guid V_0,
@@ -1212,7 +1199,7 @@ class C
   IL_006d:  stobj      ""T""
   IL_0072:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1252,9 +1239,8 @@ class C
                     // compilation succeeds and references to the local in the initializer
                     // are treated as default(T). That matches the legacy EE.
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       57 (0x39)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -1277,7 +1263,7 @@ class C
   IL_0037:  stind.ref
   IL_0038:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     context.CompileExpression(
                         "string s = s.Substring(0);",
@@ -1286,9 +1272,8 @@ class C
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       63 (0x3f)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -1310,7 +1295,7 @@ class C
   IL_003d:  stind.ref
   IL_003e:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1492,9 +1477,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       82 (0x52)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -1521,7 +1505,7 @@ class C
   IL_0050:  stind.ref
   IL_0051:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1556,9 +1540,8 @@ class C
                     );
                     // Legacy EE reports "Invalid expression term 'const'".
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       43 (0x2b)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -1576,7 +1559,7 @@ class C
   IL_0029:  stind.i4
   IL_002a:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1609,9 +1592,8 @@ class C
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       47 (0x2f)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -1629,7 +1611,7 @@ class C
   IL_0029:  stobj      ""T""
   IL_002e:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1727,9 +1709,8 @@ class C
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       73 (0x49)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -1755,7 +1736,7 @@ class C
   IL_0047:  stind.ref
   IL_0048:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1842,9 +1823,8 @@ class Generic<T>
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       43 (0x2b)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -1862,7 +1842,7 @@ class Generic<T>
   IL_0029:  stind.ref
   IL_002a:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1905,9 +1885,8 @@ class Generic<T>
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       43 (0x2b)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -1925,7 +1904,7 @@ class Generic<T>
   IL_0029:  stind.ref
   IL_002a:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1968,9 +1947,8 @@ struct S
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       44 (0x2c)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -1989,7 +1967,7 @@ struct S
   IL_002a:  stind.i
   IL_002b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2028,9 +2006,8 @@ class C
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       44 (0x2c)
   .maxstack  4
   .locals init (System.Guid V_0)
@@ -2049,7 +2026,7 @@ class C
   IL_002a:  stind.i
   IL_002b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2092,9 +2069,8 @@ struct S
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       55 (0x37)
   .maxstack  4
   .locals init (System.Guid V_0,
@@ -2115,7 +2091,7 @@ struct S
   IL_0031:  stobj      ""S?""
   IL_0036:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2154,9 +2130,8 @@ class C
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       55 (0x37)
   .maxstack  4
   .locals init (System.Guid V_0,
@@ -2177,7 +2152,7 @@ class C
   IL_0031:  stobj      ""int?""
   IL_0036:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2255,9 +2230,8 @@ class C
                     string error;
                     testData = new CompilationTestData();
                     context.CompileAssignment("x", "Test(x is int i)", out error, testData);
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       71 (0x47)
   .maxstack  4
   .locals init (object V_0, //y
@@ -2290,7 +2264,7 @@ class C
   IL_0044:  starg.s    V_0
   IL_0046:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2328,9 +2302,8 @@ class C
                     string error;
                     testData = new CompilationTestData();
                     context.CompileAssignment("x", "Test(x is string i)", out error, testData);
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       67 (0x43)
   .maxstack  4
   .locals init (object V_0, //y
@@ -2362,7 +2335,7 @@ class C
   IL_0040:  starg.s    V_0
   IL_0042:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2400,9 +2373,8 @@ class C
                     string error;
                     testData = new CompilationTestData();
                     context.CompileAssignment("x", "Test(x is object i)", out error, testData);
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       57 (0x39)
   .maxstack  4
   .locals init (object V_0, //y
@@ -2430,7 +2402,7 @@ class C
   IL_0036:  starg.s    V_0
   IL_0038:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2468,9 +2440,8 @@ class C
                     string error;
                     testData = new CompilationTestData();
                     context.CompileAssignment("x", "Test(x is int i)", out error, testData);
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       51 (0x33)
   .maxstack  4
   .locals init (object V_0, //y
@@ -2494,7 +2465,7 @@ class C
   IL_0030:  starg.s    V_0
   IL_0032:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2532,9 +2503,8 @@ class C
                     string error;
                     testData = new CompilationTestData();
                     context.CompileAssignment("x", "Test(x is int i)", out error, testData);
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       74 (0x4a)
   .maxstack  4
   .locals init (object V_0, //y
@@ -2569,7 +2539,7 @@ class C
   IL_0047:  starg.s    V_0
   IL_0049:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2616,9 +2586,8 @@ class C
                         DkmClrCompilationResultFlags.PotentialSideEffect
                             | DkmClrCompilationResultFlags.ReadOnlyResult
                     );
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size      110 (0x6e)
   .maxstack  4
   .locals init (object V_0, //y
@@ -2661,7 +2630,7 @@ class C
   IL_006c:  stind.i4
   IL_006d:  ret
 }"
-                        );
+                    );
                 }
             );
         }

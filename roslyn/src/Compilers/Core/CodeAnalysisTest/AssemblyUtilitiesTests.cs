@@ -228,9 +228,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 .WriteAllBytes(TestResources.AssemblyLoadTests.Alpha);
 
             var results = AssemblyUtilities.IdentifyMissingDependencies(
-                    alphaDll.Path,
-                    new[] { alphaDll.Path }
-                )
+                alphaDll.Path,
+                new[] { alphaDll.Path }
+            )
                 .Select(identity => identity.Name);
 
             Assert.Equal(expected: 2, actual: results.Count());

@@ -3612,10 +3612,11 @@ namespace System.Xml.Xsl.Xslt
                         }
                     }
                     int index = ((localName == null ? 1 : 0) + (namespaceName == null ? 1 : 0));
-                    _curStylesheet!.AddWhitespaceRule(
-                        index,
-                        new WhitespaceRule(localName, namespaceName, preserveSpace)
-                    );
+                    _curStylesheet!
+                        .AddWhitespaceRule(
+                            index,
+                            new WhitespaceRule(localName, namespaceName, preserveSpace)
+                        );
                 }
             }
         }

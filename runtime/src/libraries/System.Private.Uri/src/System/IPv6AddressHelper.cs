@@ -44,26 +44,20 @@ namespace System
                     pos += charsWritten;
 
                     stackSpace[pos++] = '.';
-                    success = (numbers[i] & 0xFF).TryFormat(
-                        stackSpace.Slice(pos),
-                        out charsWritten
-                    );
+                    success = (numbers[i] & 0xFF)
+                        .TryFormat(stackSpace.Slice(pos), out charsWritten);
                     Debug.Assert(success);
                     pos += charsWritten;
 
                     stackSpace[pos++] = '.';
-                    success = (numbers[i + 1] >> 8).TryFormat(
-                        stackSpace.Slice(pos),
-                        out charsWritten
-                    );
+                    success = (numbers[i + 1] >> 8)
+                        .TryFormat(stackSpace.Slice(pos), out charsWritten);
                     Debug.Assert(success);
                     pos += charsWritten;
 
                     stackSpace[pos++] = '.';
-                    success = (numbers[i + 1] & 0xFF).TryFormat(
-                        stackSpace.Slice(pos),
-                        out charsWritten
-                    );
+                    success = (numbers[i + 1] & 0xFF)
+                        .TryFormat(stackSpace.Slice(pos), out charsWritten);
                     Debug.Assert(success);
                     pos += charsWritten;
                     break;
@@ -92,11 +86,8 @@ namespace System
                 {
                     stackSpace[pos++] = ':';
                 }
-                success = numbers[i].TryFormat(
-                    stackSpace.Slice(pos),
-                    out charsWritten,
-                    format: "x"
-                );
+                success = numbers[i]
+                    .TryFormat(stackSpace.Slice(pos), out charsWritten, format: "x");
                 Debug.Assert(success);
                 pos += charsWritten;
             }

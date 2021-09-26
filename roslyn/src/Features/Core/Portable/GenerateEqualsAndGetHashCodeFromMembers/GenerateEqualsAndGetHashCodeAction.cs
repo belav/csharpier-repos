@@ -69,17 +69,17 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 }
 
                 var constructedTypeToImplement = await GetConstructedTypeToImplementAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (constructedTypeToImplement is object)
                 {
                     methods.Add(
                         await CreateIEquatableEqualsMethodAsync(
-                                constructedTypeToImplement,
-                                cancellationToken
-                            )
+                            constructedTypeToImplement,
+                            cancellationToken
+                        )
                             .ConfigureAwait((bool)false)
                     );
                 }
@@ -116,18 +116,18 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 }
 
                 var newDocument = await UpdateDocumentAndAddImportsAsync(
-                        _typeDeclaration,
-                        newTypeDeclaration,
-                        cancellationToken
-                    )
+                    _typeDeclaration,
+                    newTypeDeclaration,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var service =
                     _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
                 var formattedDocument = await service.FormatDocumentAsync(
-                        newDocument,
-                        cancellationToken
-                    )
+                    newDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return formattedDocument;
@@ -142,9 +142,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 
                 var semanticModel = await _document.GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var equatableType = semanticModel.Compilation.GetTypeByMetadataName(
-                    typeof(IEquatable<>).FullName!
-                );
+                var equatableType = semanticModel.Compilation
+                    .GetTypeByMetadataName(typeof(IEquatable<>).FullName!);
                 if (equatableType == null)
                     return null;
 
@@ -170,9 +169,9 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     .ConfigureAwait(false);
                 var newDocument = _document.WithSyntaxRoot(oldRoot.ReplaceNode(oldType, newType));
                 newDocument = await ImportAdder.AddImportsFromSymbolAnnotationAsync(
-                        newDocument,
-                        cancellationToken: cancellationToken
-                    )
+                    newDocument,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 return newDocument;
             }
@@ -182,9 +181,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 CancellationToken cancellationToken
             )
             {
-                var compilation = await _document.Project.GetRequiredCompilationAsync(
-                        cancellationToken
-                    )
+                var compilation = await _document.Project
+                    .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var generator = _document.GetRequiredLanguageService<SyntaxGenerator>();
@@ -307,12 +305,12 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 var service =
                     _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
                 return await service.GenerateIEquatableEqualsMethodAsync(
-                        _document,
-                        _containingType,
-                        _selectedMembers,
-                        constructedEquatableType,
-                        cancellationToken
-                    )
+                    _document,
+                    _containingType,
+                    _selectedMembers,
+                    constructedEquatableType,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 

@@ -1802,10 +1802,9 @@ class Program
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyIL(
-                    "Program.M()",
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyIL(
+                "Program.M()",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -1818,7 +1817,7 @@ class Program
   IL_000d:  stloc.0
   IL_000e:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1835,10 +1834,9 @@ class Program
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyIL(
-                    "Program.M(ref int)",
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyIL(
+                "Program.M(ref int)",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  1
@@ -1848,7 +1846,7 @@ class Program
   IL_0002:  stloc.0
   IL_0003:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1866,10 +1864,9 @@ class Program
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyIL(
-                    "Program.M(out int)",
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyIL(
+                "Program.M(out int)",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -1882,7 +1879,7 @@ class Program
   IL_0005:  stloc.0
   IL_0006:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1900,10 +1897,9 @@ class Program
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyIL(
-                    "Program.M(ref int)",
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyIL(
+                "Program.M(ref int)",
+                @"
 {
   // Code size        6 (0x6)
   .maxstack  1
@@ -1916,7 +1912,7 @@ class Program
   IL_0004:  stloc.1
   IL_0005:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2480,10 +2476,9 @@ class Program
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyIL(
-                    "Program.M()",
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyIL(
+                "Program.M()",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  1
@@ -2493,7 +2488,7 @@ class Program
   IL_0006:  stloc.0
   IL_0007:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2567,10 +2562,9 @@ class Program
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyIL(
-                    "Program.M()",
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyIL(
+                "Program.M()",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -2583,7 +2577,7 @@ class Program
   IL_000d:  stind.i4
   IL_000e:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -3382,10 +3376,9 @@ class Program
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.DebugDll)
-                .VerifyIL(
-                    "Program.M(D)",
-                    @"
+            CompileAndVerify(text, options: TestOptions.DebugDll).VerifyIL(
+                "Program.M(D)",
+                @"
 {
   // Code size        9 (0x9)
   .maxstack  1
@@ -3396,7 +3389,7 @@ class Program
   IL_0007:  stloc.0
   IL_0008:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -3769,9 +3762,9 @@ public class C
                 // (11,17): error CS0820: Cannot initialize an implicitly-typed variable with an array initializer
                 //         ref var b = ref {4, 5, 6};
                 Diagnostic(
-                        ErrorCode.ERR_ImplicitlyTypedVariableAssignedArrayInitializer,
-                        "b = ref {4, 5, 6}"
-                    )
+                    ErrorCode.ERR_ImplicitlyTypedVariableAssignedArrayInitializer,
+                    "b = ref {4, 5, 6}"
+                )
                     .WithLocation(11, 17),
                 // (14,28): error CS0622: Can only use array initializer expressions to assign to array types. Try using a new expression instead.
                 //         ref object c = ref {7,8,9};

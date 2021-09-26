@@ -82,8 +82,7 @@ namespace System.Net.Security.Tests
                     server.AuthenticateAsServerAsync()
                 );
 
-                await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    Task.Factory.FromAsync(
+                await TestConfiguration.WhenAllOrAnyFailedWithTimeout(Task.Factory.FromAsync(
                         client.BeginWrite,
                         (asyncResult) =>
                         {
@@ -103,8 +102,7 @@ namespace System.Net.Security.Tests
                         0,
                         s_sampleMsg.Length,
                         client
-                    ),
-                    Task.Factory.FromAsync(
+                    ), Task.Factory.FromAsync(
                         server.BeginRead,
                         (asyncResult) =>
                         {
@@ -124,8 +122,7 @@ namespace System.Net.Security.Tests
                         0,
                         s_sampleMsg.Length,
                         server
-                    )
-                );
+                    ));
             }
         }
 
@@ -309,8 +306,7 @@ namespace System.Net.Security.Tests
             using (var client = new NegotiateStream(stream1))
             using (var server = new NegotiateStream(stream2))
             {
-                await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    Task.Factory.FromAsync(
+                await TestConfiguration.WhenAllOrAnyFailedWithTimeout(Task.Factory.FromAsync(
                         client.BeginAuthenticateAsClient,
                         (asyncResult) =>
                         {
@@ -331,8 +327,7 @@ namespace System.Net.Security.Tests
                         CredentialCache.DefaultNetworkCredentials,
                         string.Empty,
                         client
-                    ),
-                    Task.Factory.FromAsync(
+                    ), Task.Factory.FromAsync(
                         server.BeginAuthenticateAsServer,
                         (asyncResult) =>
                         {
@@ -351,8 +346,7 @@ namespace System.Net.Security.Tests
                             authStream.EndAuthenticateAsServer(asyncResult);
                         },
                         server
-                    )
-                );
+                    ));
             }
         }
 

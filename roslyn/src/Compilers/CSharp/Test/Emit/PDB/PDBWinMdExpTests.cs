@@ -29,10 +29,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
 </token-map>";
 
             var compilation = CreateCompilationWithMscorlib45(
-                    text,
-                    options: TestOptions.ReleaseWinMD,
-                    sourceFileName: "source.cs"
-                )
+                text,
+                options: TestOptions.ReleaseWinMD,
+                sourceFileName: "source.cs"
+            )
                 .VerifyDiagnostics();
 
             string actual = PdbTestUtilities.GetTokenToLocationMap(compilation, true);
@@ -117,10 +117,10 @@ namespace X
 </token-map>";
 
             var compilation = CreateCompilationWithMscorlib45(
-                    text,
-                    options: TestOptions.ReleaseWinMD,
-                    sourceFileName: "source.cs"
-                )
+                text,
+                options: TestOptions.ReleaseWinMD,
+                sourceFileName: "source.cs"
+            )
                 .VerifyDiagnostics();
 
             string actual = PdbTestUtilities.GetTokenToLocationMap(compilation, true);
@@ -171,10 +171,10 @@ namespace X
 </token-map>";
 
             var compilation = CreateCompilationWithMscorlib45(
-                    text,
-                    options: TestOptions.ReleaseWinMD,
-                    sourceFileName: "source.cs"
-                )
+                text,
+                options: TestOptions.ReleaseWinMD,
+                sourceFileName: "source.cs"
+            )
                 .VerifyDiagnostics();
 
             string actual = PdbTestUtilities.GetTokenToLocationMap(compilation, true);
@@ -257,10 +257,10 @@ namespace X
 </token-map>";
 
             var compilation = CreateCompilationWithMscorlib45(
-                    text,
-                    options: TestOptions.ReleaseWinMD,
-                    sourceFileName: "source.cs"
-                )
+                text,
+                options: TestOptions.ReleaseWinMD,
+                sourceFileName: "source.cs"
+            )
                 .VerifyDiagnostics(
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("X.TestCase.E"),
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E2").WithArguments("X.TestCase.E2")
@@ -301,10 +301,10 @@ namespace X
 </token-map>";
 
             var compilation = CreateCompilationWithMscorlib45(
-                    text,
-                    options: TestOptions.ReleaseWinMD,
-                    sourceFileName: "source.cs"
-                )
+                text,
+                options: TestOptions.ReleaseWinMD,
+                sourceFileName: "source.cs"
+            )
                 .VerifyDiagnostics();
 
             string actual = PdbTestUtilities.GetTokenToLocationMap(compilation, true);

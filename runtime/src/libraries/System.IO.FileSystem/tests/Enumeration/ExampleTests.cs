@@ -91,7 +91,8 @@ namespace System.IO.Tests.Enumeration
                 ) {
                     ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
                 }
-            ).Count();
+            )
+                .Count();
         }
 
         [Fact]
@@ -120,7 +121,8 @@ namespace System.IO.Tests.Enumeration
                 ) {
                     ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
                 }
-            ).Sum();
+            )
+                .Sum();
         }
 
         [Fact]

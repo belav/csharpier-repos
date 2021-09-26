@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             return ImmutableDictionary<
                 WellKnownSynchronizationKind,
                 Func<object[], ChecksumWithChildren>
-            >.Empty.Add(
+            >.Empty
+                .Add(
                     WellKnownSynchronizationKind.SolutionState,
                     children => new SolutionStateChecksums(children)
                 )

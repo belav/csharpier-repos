@@ -51,8 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             if (workspaceServices.Workspace is VisualStudioWorkspace vsWorkspace)
             {
-                var experimentationService =
-                    vsWorkspace.Services.GetRequiredService<IExperimentationService>();
+                var experimentationService = vsWorkspace.Services
+                    .GetRequiredService<IExperimentationService>();
                 if (
                     !experimentationService.IsExperimentEnabled(
                         WellKnownExperimentNames.PartialLoadMode
@@ -109,10 +109,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     {
                         // Use the disposal token, since the caller's cancellation token will apply instead to the
                         // JoinAsync operation in GetProgressStageStatusAsync.
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            alwaysYield: true,
-                            _threadingContext.DisposalToken
-                        );
+                        await _threadingContext.JoinableTaskFactory
+                            .SwitchToMainThreadAsync(
+                                alwaysYield: true,
+                                _threadingContext.DisposalToken
+                            );
 
                         // Make sure the HubClient package is loaded, since we rely on it for proffered OOP services
                         var shell = await _serviceProvider.GetServiceAsync<SVsShell, IVsShell7>()
@@ -132,14 +133,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             "StatusChanged_EventSubscription"
                         );
 
-                        await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            alwaysYield: true,
-                            _threadingContext.DisposalToken
-                        );
+                        await threadingContext.JoinableTaskFactory
+                            .SwitchToMainThreadAsync(
+                                alwaysYield: true,
+                                _threadingContext.DisposalToken
+                            );
                         var service = await serviceProvider.GetServiceAsync<
                             SVsOperationProgress,
                             IVsOperationProgressStatusService
-                        >(throwOnFailure: false).ConfigureAwait(true);
+                        >(throwOnFailure: false)
+                            .ConfigureAwait(true);
                         if (service is null)
                             return null;
 

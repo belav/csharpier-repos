@@ -69,9 +69,8 @@ class C
     }
 }",
                 new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp5
-                    )
+                    parseOptions: CSharpParseOptions.Default
+                        .WithLanguageVersion(LanguageVersion.CSharp5)
                 )
             );
         }

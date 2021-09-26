@@ -151,10 +151,8 @@ namespace System.Net.WebSockets
 
                 using (linkedCancellation)
                 {
-                    response = await new HttpMessageInvoker(handler).SendAsync(
-                            request,
-                            externalAndAbortCancellation.Token
-                        )
+                    response = await new HttpMessageInvoker(handler)
+                        .SendAsync(request, externalAndAbortCancellation.Token)
                         .ConfigureAwait(false);
                     externalAndAbortCancellation.Token.ThrowIfCancellationRequested(); // poll in case sends/receives in request/response didn't observe cancellation
                 }
@@ -181,10 +179,11 @@ namespace System.Net.WebSockets
                 // already got one in a previous header), fail. Otherwise, track which one we got.
                 string? subprotocol = null;
                 if (
-                    response.Headers.TryGetValues(
-                        HttpKnownHeaderNames.SecWebSocketProtocol,
-                        out IEnumerable<string>? subprotocolEnumerableValues
-                    )
+                    response.Headers
+                        .TryGetValues(
+                            HttpKnownHeaderNames.SecWebSocketProtocol,
+                            out IEnumerable<string>? subprotocolEnumerableValues
+                        )
                 )
                 {
                     Debug.Assert(subprotocolEnumerableValues is string[]);
@@ -285,19 +284,21 @@ namespace System.Net.WebSockets
             ClientWebSocketOptions options
         )
         {
-            request.Headers.TryAddWithoutValidation(
-                HttpKnownHeaderNames.Connection,
-                HttpKnownHeaderNames.Upgrade
-            );
+            request.Headers
+                .TryAddWithoutValidation(
+                    HttpKnownHeaderNames.Connection,
+                    HttpKnownHeaderNames.Upgrade
+                );
             request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.Upgrade, "websocket");
             request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.SecWebSocketVersion, "13");
             request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.SecWebSocketKey, secKey);
             if (options._requestedSubProtocols?.Count > 0)
             {
-                request.Headers.TryAddWithoutValidation(
-                    HttpKnownHeaderNames.SecWebSocketProtocol,
-                    string.Join(", ", options.RequestedSubProtocols)
-                );
+                request.Headers
+                    .TryAddWithoutValidation(
+                        HttpKnownHeaderNames.SecWebSocketProtocol,
+                        string.Join(", ", options.RequestedSubProtocols)
+                    );
             }
         }
 

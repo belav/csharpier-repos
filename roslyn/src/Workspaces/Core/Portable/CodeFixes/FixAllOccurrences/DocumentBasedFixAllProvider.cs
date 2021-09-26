@@ -90,10 +90,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     fixAllContext.Scope is FixAllScope.Document or FixAllScope.Project
                 );
                 currentSolution = await FixSingleContextAsync(
-                        currentSolution,
-                        fixAllContext,
-                        progressTracker
-                    )
+                    currentSolution,
+                    fixAllContext,
+                    progressTracker
+                )
                     .ConfigureAwait(false);
             }
 
@@ -112,19 +112,19 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
             // Second, get the fixes for all the diagnostics, and apply them to determine the new root/text for each doc.
             var docIdToNewRootOrText = await GetFixedDocumentsAsync(
-                    fixAllContext,
-                    progressTracker,
-                    diagnostics
-                )
+                fixAllContext,
+                progressTracker,
+                diagnostics
+            )
                 .ConfigureAwait(false);
 
             // Finally, cleanup the new doc roots, and apply the results to the solution.
             currentSolution = await CleanupAndApplyChangesAsync(
-                    fixAllContext,
-                    progressTracker,
-                    currentSolution,
-                    docIdToNewRootOrText
-                )
+                fixAllContext,
+                progressTracker,
+                currentSolution,
+                docIdToNewRootOrText
+            )
                 .ConfigureAwait(false);
 
             return currentSolution;
@@ -164,9 +164,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             var cancellationToken = fixAllContext.CancellationToken;
 
             using var _1 = progressTracker.ItemCompletedScope();
-            using var _2 = ArrayBuilder<
-                Task<(DocumentId, (SyntaxNode? node, SourceText? text))>
-            >.GetInstance(out var tasks);
+            using var _2 = ArrayBuilder<Task<(DocumentId, (SyntaxNode? node, SourceText? text))>>
+                .GetInstance(out var tasks);
 
             var docIdToNewRootOrText = new Dictionary<
                 DocumentId,
@@ -193,10 +192,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                             async () =>
                             {
                                 var newDocument = await this.FixAllAsync(
-                                        fixAllContext,
-                                        document,
-                                        documentDiagnostics
-                                    )
+                                    fixAllContext,
+                                    document,
+                                    documentDiagnostics
+                                )
                                     .ConfigureAwait(false);
                                 if (newDocument == null || newDocument == document)
                                     return default;
@@ -205,8 +204,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                                 // language that doesn't support that, then just grab the text.
                                 var node = newDocument.SupportsSyntaxTree
                                     ? await newDocument.GetRequiredSyntaxRootAsync(
-                                              cancellationToken
-                                          )
+                                          cancellationToken
+                                      )
                                           .ConfigureAwait(false)
                                     : null;
                                 var text = newDocument.SupportsSyntaxTree
@@ -270,9 +269,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 // the cleaned tree (both of which can be much more expensive than just text).
                 //
                 // Do this in parallel across all the documents that were fixed.
-                using var _2 = ArrayBuilder<
-                    Task<(DocumentId docId, SourceText sourceText)>
-                >.GetInstance(out var tasks);
+                using var _2 = ArrayBuilder<Task<(DocumentId docId, SourceText sourceText)>>
+                    .GetInstance(out var tasks);
 
                 foreach (var (docId, (newRoot, _)) in docIdToNewRootOrText)
                 {
@@ -283,15 +281,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                             Task.Run(
                                 async () =>
                                 {
-                                    var cleanedDocument =
-                                        await PostProcessCodeAction.Instance.PostProcessChangesAsync(
-                                                dirtyDocument,
-                                                cancellationToken
-                                            )
-                                            .ConfigureAwait(false);
+                                    var cleanedDocument = await PostProcessCodeAction.Instance
+                                        .PostProcessChangesAsync(dirtyDocument, cancellationToken)
+                                        .ConfigureAwait(false);
                                     var cleanedText = await cleanedDocument.GetTextAsync(
-                                            cancellationToken
-                                        )
+                                        cancellationToken
+                                    )
                                         .ConfigureAwait(false);
                                     return (dirtyDocument.Id, cleanedText);
                                 },

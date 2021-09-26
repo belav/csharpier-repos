@@ -1028,7 +1028,8 @@ class A
             var image = compilation.EmitToArray();
             using var reader = new PEReader(image);
             var metadataReader = reader.GetMetadataReader();
-            var main = metadataReader.MethodDefinitions.Where(mh => getMethodName(mh) == "<Main>")
+            var main = metadataReader.MethodDefinitions
+                .Where(mh => getMethodName(mh) == "<Main>")
                 .Single();
             Assert.Equal(
                 new[]
@@ -1497,10 +1498,10 @@ class A
     }
 }";
             CreateCompilationWithMscorlib45(
-                    source,
-                    options: TestOptions.ReleaseExe,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_1)
-                )
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_1)
+            )
                 .VerifyDiagnostics(
                     // (6,23): warning CS0402: 'A.Main<T>()': an entry point cannot be generic or in a generic type
                     //     async static void Main<T>()
@@ -1584,10 +1585,10 @@ class A
     }
 }";
             var compilation = CreateCompilationWithMscorlib45(
-                    source,
-                    options: TestOptions.ReleaseExe,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7)
-                )
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7)
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "Non Task Main", expectedReturnCode: 0);
         }
@@ -1612,10 +1613,10 @@ class A
     }
 }";
             var compilation = CreateCompilationWithMscorlib45(
-                    source,
-                    options: TestOptions.ReleaseExe,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_1)
-                )
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_1)
+            )
                 .VerifyDiagnostics(
                     // (10,23): warning CS8892: Method 'A.Main(string[])' will not be used as an entry point because a synchronous entry point 'A.Main()' was found.
                     //     async static Task Main(string[] args)
@@ -1648,9 +1649,9 @@ class A
     }
 }";
             var compilation = CreateCompilationWithMscorlib45(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics(
                     // (11,22): error CS1983: The return type of an async method must be void, Task or Task<T>
                     //     async static int Main()
@@ -1686,10 +1687,10 @@ class A
     }
 }";
             var compilation = CreateCompilationWithMscorlib45(
-                    source,
-                    options: TestOptions.ReleaseExe,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_1)
-                )
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_1)
+            )
                 .VerifyDiagnostics(
                     // (6,23): error CS4009: A void or int returning entry point cannot be async
                     //     static async void Main(string[] args)
@@ -1721,9 +1722,9 @@ class A
     }
 }";
             var compilation = CreateCompilationWithMscorlib45(
-                    source,
-                    options: TestOptions.ReleaseExe.WithMainTypeName("A")
-                )
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("A")
+            )
                 .VerifyDiagnostics(
                     // (10,23): warning CS8892: Method 'A.Main(string[])' will not be used as an entry point because a synchronous entry point 'A.Main()' was found.
                     //     async static Task Main(string[] args)
@@ -1756,10 +1757,10 @@ class A
     }
 }";
             var compilation = CreateCompilationWithMscorlib45(
-                    source,
-                    options: TestOptions.ReleaseDebugExe,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7)
-                )
+                source,
+                options: TestOptions.ReleaseDebugExe,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7)
+            )
                 .VerifyDiagnostics(
                     // (6,28): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                     //     async static Task<int> Main()
@@ -1804,10 +1805,10 @@ class A
     }
 }";
             var compilation = CreateCompilationWithMscorlib45(
-                    source,
-                    options: TestOptions.ReleaseDebugExe,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7)
-                )
+                source,
+                options: TestOptions.ReleaseDebugExe,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7)
+            )
                 .VerifyDiagnostics(
                     // (6,12): error CS8107: Feature 'async main' is not available in C# 7. Please use language version 7.1 or greater.
                     //     static Task<int> Main()
@@ -1846,9 +1847,9 @@ class A
     }
 }";
             var compilation = CreateCompilationWithMscorlib45(
-                    source,
-                    options: TestOptions.ReleaseExe
-                )
+                source,
+                options: TestOptions.ReleaseExe
+            )
                 .VerifyDiagnostics(
                     // (10,30): warning CS0028: 'A.Main(string[])' has the wrong signature to be an entry point
                     //     async static Task<float> Main(string[] args)
@@ -1881,9 +1882,9 @@ class A
     }
 }";
             var compilation = CreateCompilationWithMscorlib45(
-                    source,
-                    options: TestOptions.ReleaseExe.WithMainTypeName("A")
-                )
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("A")
+            )
                 .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "Non Task Main", expectedReturnCode: 0);
         }

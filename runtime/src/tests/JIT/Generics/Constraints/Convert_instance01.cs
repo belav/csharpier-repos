@@ -4,17 +4,11 @@
 
 using System;
 
-public interface IFoo
-{
-}
+public interface IFoo { }
 
-public class FooClass : IFoo
-{
-}
+public class FooClass : IFoo { }
 
-public struct FooStruct : IFoo
-{
-}
+public struct FooStruct : IFoo { }
 
 public class GenClass<T> where T : IFoo
 {
@@ -53,34 +47,40 @@ public class Test
     public static int Main()
     {
         Eval(
-            new GenClass<FooClass>().ConvertToConstraint(new FooClass())
+            new GenClass<FooClass>()
+                .ConvertToConstraint(new FooClass())
                 .GetType()
                 .Equals(typeof(FooClass))
         );
         Eval(
-            new GenClass<FooStruct>().ConvertToConstraint(new FooStruct())
+            new GenClass<FooStruct>()
+                .ConvertToConstraint(new FooStruct())
                 .GetType()
                 .Equals(typeof(FooStruct))
         );
 
         Eval(
-            new GenClass<FooClass>().VirtConvertToConstraint(new FooClass())
+            new GenClass<FooClass>()
+                .VirtConvertToConstraint(new FooClass())
                 .GetType()
                 .Equals(typeof(FooClass))
         );
         Eval(
-            new GenClass<FooStruct>().VirtConvertToConstraint(new FooStruct())
+            new GenClass<FooStruct>()
+                .VirtConvertToConstraint(new FooStruct())
                 .GetType()
                 .Equals(typeof(FooStruct))
         );
 
         Eval(
-            new GenStruct<FooClass>().ConvertToConstraint(new FooClass())
+            new GenStruct<FooClass>()
+                .ConvertToConstraint(new FooClass())
                 .GetType()
                 .Equals(typeof(FooClass))
         );
         Eval(
-            new GenStruct<FooStruct>().ConvertToConstraint(new FooStruct())
+            new GenStruct<FooStruct>()
+                .ConvertToConstraint(new FooStruct())
                 .GetType()
                 .Equals(typeof(FooStruct))
         );

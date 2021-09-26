@@ -137,17 +137,20 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var project = await workspace.OpenProjectAsync(projectFilePath);
             AssertFailures(workspace);
 
-            var hasFacades = project.MetadataReferences.OfType<PortableExecutableReference>()
+            var hasFacades = project.MetadataReferences
+                .OfType<PortableExecutableReference>()
                 .Any(r => r.FilePath.Contains("Facade"));
             Assert.True(
                 hasFacades,
                 userMessage: "Expected to find facades in the project references:"
                     + Environment.NewLine
-                    + string.Join(
-                        Environment.NewLine,
-                        project.MetadataReferences.OfType<PortableExecutableReference>()
-                            .Select(r => r.FilePath)
-                    )
+                    + string
+                        .Join(
+                            Environment.NewLine,
+                            project.MetadataReferences
+                                .OfType<PortableExecutableReference>()
+                                .Select(r => r.FilePath)
+                        )
             );
         }
 
@@ -238,14 +241,16 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         }
 
         private static MetadataReference GetMetadataReference(Project project, string name) =>
-            project.MetadataReferences.OfType<PortableExecutableReference>()
+            project.MetadataReferences
+                .OfType<PortableExecutableReference>()
                 .SingleOrDefault(mr => mr.FilePath.Contains(name));
 
         private static MetadataReference GetMetadataReferenceByAlias(
             Project project,
             string aliasName
         ) =>
-            project.MetadataReferences.OfType<PortableExecutableReference>()
+            project.MetadataReferences
+                .OfType<PortableExecutableReference>()
                 .SingleOrDefault(
                     mr =>
                         !mr.Properties.Aliases.IsDefault
@@ -296,9 +301,11 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             // Exactly one of them should have a compilation to the other. Which one it is, is unspecced
             Assert.True(
-                compilation1.References.OfType<CompilationReference>()
+                compilation1.References
+                    .OfType<CompilationReference>()
                     .Any(c => c.Compilation == compilation2)
-                    || compilation2.References.OfType<CompilationReference>()
+                    || compilation2.References
+                        .OfType<CompilationReference>()
                         .Any(c => c.Compilation == compilation1)
             );
         }
@@ -366,7 +373,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             // prove that vb project refers to csharp project via generated metadata (skeleton) assembly.
             // it should be a MetadataImageReference
             var c2 = await p2.GetCompilationAsync();
-            var pref = c2.References.OfType<PortableExecutableReference>()
+            var pref = c2.References
+                .OfType<PortableExecutableReference>()
                 .FirstOrDefault(r => r.Display == "CSharpProject");
             Assert.NotNull(pref);
         }
@@ -390,7 +398,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var root = await d1.GetSyntaxRootAsync();
             var decl = root.DescendantNodes().OfType<CS.Syntax.ClassDeclarationSyntax>().First();
             var newDecl = decl.WithIdentifier(
-                CS.SyntaxFactory.Identifier("Pogrom")
+                CS.SyntaxFactory
+                    .Identifier("Pogrom")
                     .WithLeadingTrivia(decl.Identifier.LeadingTrivia)
                     .WithTrailingTrivia(decl.Identifier.TrailingTrivia)
             );
@@ -401,7 +410,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             // we should now find a MetadataImageReference that was generated instead of a MetadataFileReference
             var c2 = await p2.GetCompilationAsync();
-            var pref = c2.References.OfType<PortableExecutableReference>()
+            var pref = c2.References
+                .OfType<PortableExecutableReference>()
                 .FirstOrDefault(r => r.Display == "EmittedCSharpProject");
             Assert.NotNull(pref);
         }
@@ -413,20 +423,14 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         public async Task TestInternalsVisibleToSigned()
         {
             var solution = await SolutionAsync(
-                Project(
-                    ProjectName("Project1"),
-                    Sign,
-                    Document(
-                        string.Format(
+                Project(ProjectName("Project1"), Sign, Document(string.Format(
                             @"using System.Runtime.CompilerServices;
 [assembly:InternalsVisibleTo(""Project2, PublicKey={0}"")]
 class C1
 {{
 }}",
                             PublicKey
-                        )
-                    )
-                ),
+                        ))),
                 Project(
                     ProjectName("Project2"),
                     Sign,
@@ -1237,11 +1241,12 @@ class C1
                 }
             );
 
-            var expected = string.Format(
-                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
-                GetSolutionFileName(ProjFileName),
-                ".nyi"
-            );
+            var expected = string
+                .Format(
+                    WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                    GetSolutionFileName(ProjFileName),
+                    ".nyi"
+                );
             Assert.Equal(expected, e.Message);
         }
 
@@ -1264,11 +1269,12 @@ class C1
             );
 
             // the exception should tell us something about the language being unrecognized.
-            var expected = string.Format(
-                WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported,
-                projFileName,
-                language
-            );
+            var expected = string
+                .Format(
+                    WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported,
+                    projFileName,
+                    language
+                );
             Assert.Equal(expected, e.Message);
         }
 
@@ -1644,11 +1650,12 @@ class C1
             );
 
             var noProjFullFileName = GetSolutionFileName(NoProjFileName);
-            var expected = string.Format(
-                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
-                noProjFullFileName,
-                ".noproj"
-            );
+            var expected = string
+                .Format(
+                    WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                    noProjFullFileName,
+                    ".noproj"
+                );
             Assert.Equal(expected, e.Message);
         }
 
@@ -1678,11 +1685,12 @@ class C1
             );
 
             var projFileName = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
-            var expected = string.Format(
-                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
-                projFileName,
-                ".csproj"
-            );
+            var expected = string
+                .Format(
+                    WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                    projFileName,
+                    ".csproj"
+                );
             Assert.Equal(expected, e.Message);
         }
 
@@ -1705,11 +1713,12 @@ class C1
             var solution = await workspace.OpenSolutionAsync(solutionFilePath);
 
             var projFileName = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
-            var expected = string.Format(
-                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
-                projFileName,
-                ".csproj"
-            );
+            var expected = string
+                .Format(
+                    WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                    projFileName,
+                    ".csproj"
+                );
             Assert.Equal(expected, workspace.Diagnostics.Single().Message);
         }
 
@@ -1731,11 +1740,12 @@ class C1
                 () => workspace.OpenProjectAsync(projectName)
             );
 
-            var expected = string.Format(
-                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
-                projectName,
-                ".csproj"
-            );
+            var expected = string
+                .Format(
+                    WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                    projectName,
+                    ".csproj"
+                );
             Assert.Equal(expected, e.Message);
         }
 
@@ -2878,10 +2888,8 @@ class C1
             var compilation = await project.GetCompilationAsync();
             var metadataBytes = compilation.EmitToArray();
             var mtref = MetadataReference.CreateFromImage(metadataBytes);
-            var mtcomp = CS.CSharpCompilation.Create(
-                "MT",
-                references: new MetadataReference[] { mtref }
-            );
+            var mtcomp = CS.CSharpCompilation
+                .Create("MT", references: new MetadataReference[] { mtref });
             var sym = (IAssemblySymbol)mtcomp.GetAssemblyOrModuleSymbol(mtref);
             var attrs = sym.GetAttributes();
 
@@ -2912,10 +2920,8 @@ class C1
             var compilation = await project.GetCompilationAsync();
             var metadataBytes = compilation.EmitToArray();
             var mtref = MetadataReference.CreateFromImage(metadataBytes);
-            var mtcomp = CS.CSharpCompilation.Create(
-                "MT",
-                references: new MetadataReference[] { mtref }
-            );
+            var mtcomp = CS.CSharpCompilation
+                .Create("MT", references: new MetadataReference[] { mtref });
             var sym = (IAssemblySymbol)mtcomp.GetAssemblyOrModuleSymbol(mtref);
             var attrs = sym.GetAttributes();
 
@@ -2951,10 +2957,8 @@ class C1
             var compilation = await project.GetCompilationAsync();
             var metadataBytes = compilation.EmitToArray();
             var mtref = MetadataReference.CreateFromImage(metadataBytes);
-            var mtcomp = CS.CSharpCompilation.Create(
-                "MT",
-                references: new MetadataReference[] { mtref }
-            );
+            var mtcomp = CS.CSharpCompilation
+                .Create("MT", references: new MetadataReference[] { mtref });
             var sym = (IAssemblySymbol)mtcomp.GetAssemblyOrModuleSymbol(mtref);
             var attrs = sym.GetAttributes();
 
@@ -2985,10 +2989,8 @@ class C1
             var compilation = await project.GetCompilationAsync();
             var metadataBytes = compilation.EmitToArray();
             var mtref = MetadataReference.CreateFromImage(metadataBytes);
-            var mtcomp = CS.CSharpCompilation.Create(
-                "MT",
-                references: new MetadataReference[] { mtref }
-            );
+            var mtcomp = CS.CSharpCompilation
+                .Create("MT", references: new MetadataReference[] { mtref });
             var sym = (IAssemblySymbol)mtcomp.GetAssemblyOrModuleSymbol(mtref);
             var attrs = sym.GetAttributes();
 
@@ -3064,7 +3066,8 @@ class C1
             // reload project & solution to prove project file change was good
             using var workspaceB = CreateMSBuildWorkspace();
             var solutionB = await workspaceB.OpenSolutionAsync(solutionFilePath);
-            var projectB = workspaceB.CurrentSolution.GetProjectsByName("CSharpProject")
+            var projectB = workspaceB.CurrentSolution
+                .GetProjectsByName("CSharpProject")
                 .FirstOrDefault();
             var documentsB = projectB.Documents.ToList();
             Assert.Equal(4, documentsB.Count);
@@ -3227,16 +3230,18 @@ class C1
                 delegate
                 {
                     workspace.TryApplyChanges(
-                        workspace.CurrentSolution.AddAdditionalDocument(
-                            DocumentId.CreateNewId(csProjectId),
-                            "foo.xaml",
-                            SourceText.From("<foo></foo>")
-                        )
+                        workspace.CurrentSolution
+                            .AddAdditionalDocument(
+                                DocumentId.CreateNewId(csProjectId),
+                                "foo.xaml",
+                                SourceText.From("<foo></foo>")
+                            )
                     );
                 }
             );
 
-            var xaml = workspace.CurrentSolution.GetProject(csProjectId)
+            var xaml = workspace.CurrentSolution
+                .GetProject(csProjectId)
                 .AdditionalDocuments.FirstOrDefault(d => d.Name == "XamlFile.xaml");
             Assert.NotNull(xaml);
 
@@ -3280,20 +3285,22 @@ class C1
             var newText = "/* new text */\r\n" + text.ToString();
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithDocumentText(
-                    doc.Id,
-                    SourceText.From(newText),
-                    PreservationMode.PreserveIdentity
-                )
+                workspace.CurrentSolution
+                    .WithDocumentText(
+                        doc.Id,
+                        SourceText.From(newText),
+                        PreservationMode.PreserveIdentity
+                    )
             );
 
             Assert.True(
                 eventWaiter.WaitForEventToFire(AsyncEventTimeout),
-                string.Format(
-                    "event {0} was not fired within {1}",
-                    Enum.GetName(typeof(WorkspaceChangeKind), expectedEventKind),
-                    AsyncEventTimeout
-                )
+                string
+                    .Format(
+                        "event {0} was not fired within {1}",
+                        Enum.GetName(typeof(WorkspaceChangeKind), expectedEventKind),
+                        AsyncEventTimeout
+                    )
             );
         }
 
@@ -3325,20 +3332,22 @@ class C1
             var newText = "/* new text */\r\n" + text.ToString();
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithDocumentText(
-                    doc.Id,
-                    SourceText.From(newText),
-                    PreservationMode.PreserveIdentity
-                )
+                workspace.CurrentSolution
+                    .WithDocumentText(
+                        doc.Id,
+                        SourceText.From(newText),
+                        PreservationMode.PreserveIdentity
+                    )
             );
 
             Assert.True(
                 eventWanter.WaitForEventToFire(AsyncEventTimeout),
-                string.Format(
-                    "event {0} was not fired within {1}",
-                    Enum.GetName(typeof(WorkspaceChangeKind), expectedEventKind),
-                    AsyncEventTimeout
-                )
+                string
+                    .Format(
+                        "event {0} was not fired within {1}",
+                        Enum.GetName(typeof(WorkspaceChangeKind), expectedEventKind),
+                        AsyncEventTimeout
+                    )
             );
         }
 
@@ -3399,10 +3408,8 @@ class C1
                 var analyzerReference = proj.AnalyzerReferences[0] as AnalyzerFileReference;
                 Assert.NotNull(analyzerReference);
                 Assert.True(
-                    analyzerReference.FullPath.EndsWith(
-                        "CSharpProject.dll",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    analyzerReference.FullPath
+                        .EndsWith("CSharpProject.dll", StringComparison.OrdinalIgnoreCase)
                 );
             }
 
@@ -3460,18 +3467,12 @@ class C1
             var infos = await loader.LoadProjectInfoAsync(projectFullPath);
 
             var doc = infos[0].Documents[0];
-            var tav = doc.TextLoader.LoadTextAndVersionSynchronously(
-                workspace,
-                doc.Id,
-                CancellationToken.None
-            );
+            var tav = doc.TextLoader
+                .LoadTextAndVersionSynchronously(workspace, doc.Id, CancellationToken.None);
 
             var adoc = infos[0].AdditionalDocuments.First(a => a.Name == "XamlFile.xaml");
-            var atav = adoc.TextLoader.LoadTextAndVersionSynchronously(
-                workspace,
-                adoc.Id,
-                CancellationToken.None
-            );
+            var atav = adoc.TextLoader
+                .LoadTextAndVersionSynchronously(workspace, adoc.Id, CancellationToken.None);
             Assert.Contains("Window", atav.Text.ToString(), StringComparison.Ordinal);
         }
 
@@ -3710,9 +3711,8 @@ class C1
 
             using var workspace = CreateMSBuildWorkspace();
             var solution = await workspace.OpenSolutionAsync(solutionFilePath);
-            var csproject = workspace.CurrentSolution.Projects.First(
-                p => p.Language == LanguageNames.CSharp
-            );
+            var csproject = workspace.CurrentSolution.Projects
+                .First(p => p.Language == LanguageNames.CSharp);
             var csoptions = (CS.CSharpParseOptions)csproject.ParseOptions;
             Assert.Equal(DocumentationMode.Parse, csoptions.DocumentationMode);
             var cscomp = await csproject.GetCompilationAsync();
@@ -3720,9 +3720,8 @@ class C1
             var cscomment = cssymbol.GetDocumentationCommentXml();
             Assert.NotNull(cscomment);
 
-            var vbproject = workspace.CurrentSolution.Projects.First(
-                p => p.Language == LanguageNames.VisualBasic
-            );
+            var vbproject = workspace.CurrentSolution.Projects
+                .First(p => p.Language == LanguageNames.VisualBasic);
             var vboptions = (VB.VisualBasicParseOptions)vbproject.ParseOptions;
             Assert.Equal(DocumentationMode.Diagnose, vboptions.DocumentationMode);
             var vbcomp = await vbproject.GetCompilationAsync();
@@ -3979,10 +3978,8 @@ class C1
             var files = new FileSet(
                 (
                     "Encoding.csproj",
-                    Resources.ProjectFiles.CSharp.Encoding.Replace(
-                        "<CodePage>ReplaceMe</CodePage>",
-                        "<CodePage>1254</CodePage>"
-                    )
+                    Resources.ProjectFiles.CSharp.Encoding
+                        .Replace("<CodePage>ReplaceMe</CodePage>", "<CodePage>1254</CodePage>")
                 ),
                 ("class1.cs", "//\u201C")
             );
@@ -4013,10 +4010,8 @@ class C1
             var files = new FileSet(
                 (
                     "Encoding.csproj",
-                    Resources.ProjectFiles.CSharp.Encoding.Replace(
-                        "<CodePage>ReplaceMe</CodePage>",
-                        "<CodePage>-1</CodePage>"
-                    )
+                    Resources.ProjectFiles.CSharp.Encoding
+                        .Replace("<CodePage>ReplaceMe</CodePage>", "<CodePage>-1</CodePage>")
                 ),
                 ("class1.cs", "//\u201C")
             );
@@ -4045,10 +4040,8 @@ class C1
             var files = new FileSet(
                 (
                     "Encoding.csproj",
-                    Resources.ProjectFiles.CSharp.Encoding.Replace(
-                        "<CodePage>ReplaceMe</CodePage>",
-                        "<CodePage>Broken</CodePage>"
-                    )
+                    Resources.ProjectFiles.CSharp.Encoding
+                        .Replace("<CodePage>ReplaceMe</CodePage>", "<CodePage>Broken</CodePage>")
                 ),
                 ("class1.cs", "//\u201C")
             );
@@ -4077,10 +4070,8 @@ class C1
             var files = new FileSet(
                 (
                     "Encoding.csproj",
-                    Resources.ProjectFiles.CSharp.Encoding.Replace(
-                        "<CodePage>ReplaceMe</CodePage>",
-                        string.Empty
-                    )
+                    Resources.ProjectFiles.CSharp.Encoding
+                        .Replace("<CodePage>ReplaceMe</CodePage>", string.Empty)
                 ),
                 ("class1.cs", "//\u201C")
             );
@@ -4159,10 +4150,8 @@ class C { }";
             var files = new FileSet(
                 (
                     "Encoding.csproj",
-                    Resources.ProjectFiles.CSharp.Encoding.Replace(
-                        "<CodePage>ReplaceMe</CodePage>",
-                        string.Empty
-                    )
+                    Resources.ProjectFiles.CSharp.Encoding
+                        .Replace("<CodePage>ReplaceMe</CodePage>", string.Empty)
                 ),
                 ("class1.cs", encoding.GetBytesWithPreamble(fileContent))
             );
@@ -4248,7 +4237,8 @@ class C { }";
 
             // remove reference to System.Xaml
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.GetProject(project.Id)
+                workspace.CurrentSolution
+                    .GetProject(project.Id)
                     .RemoveMetadataReference(mref).Solution
             );
             projFileText = File.ReadAllText(projFile);
@@ -4282,9 +4272,8 @@ class C { }";
             var csProject = solution.Projects.First(p => p.Language == LanguageNames.CSharp);
             var vbProject = solution.Projects.First(p => p.Language == LanguageNames.VisualBasic);
 
-            var numericsMetadata = csProject.MetadataReferences.Single(
-                m => m.Display.Contains("System.Numerics")
-            );
+            var numericsMetadata = csProject.MetadataReferences
+                .Single(m => m.Display.Contains("System.Numerics"));
 
             // add reference to System.Xaml
             workspace.TryApplyChanges(vbProject.AddMetadataReference(numericsMetadata).Solution);
@@ -4293,7 +4282,8 @@ class C { }";
 
             // remove reference MyAssembly.dll
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.GetProject(vbProject.Id)
+                workspace.CurrentSolution
+                    .GetProject(vbProject.Id)
                     .RemoveMetadataReference(numericsMetadata).Solution
             );
             var newVbProjFileText2 = File.ReadAllText(vbProjFile);
@@ -4331,7 +4321,8 @@ class C { }";
 
             // remove reference MyAssembly.dll
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.GetProject(project.Id)
+                workspace.CurrentSolution
+                    .GetProject(project.Id)
                     .RemoveMetadataReference(mref).Solution
             );
             projFileText = File.ReadAllText(projFile);
@@ -4369,7 +4360,8 @@ class C { }";
 
             // remove reference MyAnalyzer.dll
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.GetProject(project.Id)
+                workspace.CurrentSolution
+                    .GetProject(project.Id)
                     .RemoveAnalyzerReference(aref).Solution
             );
             projFileText = File.ReadAllText(projFile);
@@ -4400,7 +4392,8 @@ class C { }";
 
             // remove project reference
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.GetProject(project.Id)
+                workspace.CurrentSolution
+                    .GetProject(project.Id)
                     .RemoveProjectReference(pref).Solution
             );
             Assert.Empty(workspace.CurrentSolution.GetProject(project.Id).ProjectReferences);
@@ -4578,7 +4571,8 @@ class C { }";
             CreateFiles(GetSimpleCSharpSolutionFiles());
 
             using var workspace = CreateMSBuildWorkspace();
-            var loader = workspace.Services.GetLanguageServices(LanguageNames.CSharp)
+            var loader = workspace.Services
+                .GetLanguageServices(LanguageNames.CSharp)
                 .GetRequiredService<IProjectFileLoader>();
 
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
@@ -4593,10 +4587,12 @@ class C { }";
             );
             var projectFileInfo = (
                 await projectFile.GetProjectFileInfosAsync(CancellationToken.None)
-            ).Single();
+            )
+                .Single();
             buildManager.EndBatchBuild();
 
-            var commandLineParser = workspace.Services.GetLanguageServices(loader.Language)
+            var commandLineParser = workspace.Services
+                .GetLanguageServices(loader.Language)
                 .GetRequiredService<ICommandLineParserService>();
 
             var projectDirectory = Path.GetDirectoryName(projectFilePath);
@@ -4604,7 +4600,8 @@ class C { }";
                 arguments: projectFileInfo.CommandLineArgs,
                 baseDirectory: projectDirectory,
                 isInteractive: false,
-                sdkDirectory: System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory()
+                sdkDirectory: System.Runtime.InteropServices.RuntimeEnvironment
+                    .GetRuntimeDirectory()
             );
 
             Assert.Empty(commandLineArgs.Errors);
@@ -4754,17 +4751,15 @@ class C { }";
 
             using var workspace = CreateMSBuildWorkspace();
             var solution = await workspace.OpenSolutionAsync(fullPath);
-            var project = solution.Projects.Single(
-                p => p.FilePath.EndsWith("CSharpProject_ProjectReference.csproj")
-            );
+            var project = solution.Projects
+                .Single(p => p.FilePath.EndsWith("CSharpProject_ProjectReference.csproj"));
 
             Assert.Single(project.ProjectReferences);
 
             AssertEx.Equal(
                 new[] { "EmptyLibrary.dll", "System.Core.dll", "mscorlib.dll" },
-                project.MetadataReferences.Select(
-                        r => Path.GetFileName(((PortableExecutableReference)r).FilePath)
-                    )
+                project.MetadataReferences
+                    .Select(r => Path.GetFileName(((PortableExecutableReference)r).FilePath))
                     .OrderBy(StringComparer.Ordinal)
             );
 

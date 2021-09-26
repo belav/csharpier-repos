@@ -46,13 +46,13 @@ namespace System.Web.Razor.Test.Framework
         public static SpanConstructor EmptyHtml(this SpanFactory self)
         {
             return self.Span(
-                    SpanKind.Markup,
-                    new HtmlSymbol(
-                        self.LocationTracker.CurrentLocation,
-                        String.Empty,
-                        HtmlSymbolType.Unknown
-                    )
+                SpanKind.Markup,
+                new HtmlSymbol(
+                    self.LocationTracker.CurrentLocation,
+                    String.Empty,
+                    HtmlSymbolType.Unknown
                 )
+            )
                 .With(new MarkupCodeGenerator());
         }
 
@@ -403,12 +403,12 @@ namespace System.Web.Razor.Test.Framework
         public SpanConstructor AsImplicitExpression(ISet<string> keywords, bool acceptTrailingDot)
         {
             return _self.With(
-                    new ImplicitExpressionEditHandler(
-                        SpanConstructor.TestTokenizer,
-                        keywords,
-                        acceptTrailingDot
-                    )
+                new ImplicitExpressionEditHandler(
+                    SpanConstructor.TestTokenizer,
+                    keywords,
+                    acceptTrailingDot
                 )
+            )
                 .With(new ExpressionCodeGenerator());
         }
 

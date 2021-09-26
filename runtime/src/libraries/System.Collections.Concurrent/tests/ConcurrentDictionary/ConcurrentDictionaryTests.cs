@@ -190,15 +190,16 @@ namespace System.Collections.Concurrent.Tests
             {
                 Assert.True(
                     expectKeys[i].Equals(gotKeys[i]),
-                    string.Format(
-                        "The set of keys in the dictionary is are not the same as the expected"
-                            + Environment.NewLine
-                            + "TestAdd1(cLevel={0}, initSize={1}, threads={2}, addsPerThread={3})",
-                        cLevel,
-                        initSize,
-                        threads,
-                        addsPerThread
-                    )
+                    string
+                        .Format(
+                            "The set of keys in the dictionary is are not the same as the expected"
+                                + Environment.NewLine
+                                + "TestAdd1(cLevel={0}, initSize={1}, threads={2}, addsPerThread={3})",
+                            cLevel,
+                            initSize,
+                            threads,
+                            addsPerThread
+                        )
                 );
             }
 
@@ -256,13 +257,14 @@ namespace System.Collections.Concurrent.Tests
                 Assert.Equal(0, rem);
                 Assert.True(
                     div > 1 && div <= threads + 1,
-                    string.Format(
-                        "* Invalid value={3}! TestUpdate1(cLevel={0}, threads={1}, updatesPerThread={2})",
-                        cLevel,
-                        threads,
-                        updatesPerThread,
-                        div
-                    )
+                    string
+                        .Format(
+                            "* Invalid value={3}! TestUpdate1(cLevel={0}, threads={1}, updatesPerThread={2})",
+                            cLevel,
+                            threads,
+                            updatesPerThread,
+                            div
+                        )
                 );
             }
 
@@ -281,14 +283,15 @@ namespace System.Collections.Concurrent.Tests
             {
                 Assert.True(
                     expectKeys[i].Equals(gotKeys[i]),
-                    string.Format(
-                        "The set of keys in the dictionary is are not the same as the expected."
-                            + Environment.NewLine
-                            + "TestUpdate1(cLevel={0}, threads={1}, updatesPerThread={2})",
-                        cLevel,
-                        threads,
-                        updatesPerThread
-                    )
+                    string
+                        .Format(
+                            "The set of keys in the dictionary is are not the same as the expected."
+                                + Environment.NewLine
+                                + "TestUpdate1(cLevel={0}, threads={1}, updatesPerThread={2})",
+                            cLevel,
+                            threads,
+                            updatesPerThread
+                        )
                 );
             }
         }
@@ -356,12 +359,13 @@ namespace System.Collections.Concurrent.Tests
         public static void TestRemove1(int cLevel, int threads, int removesPerThread)
         {
             ConcurrentDictionary<int, int> dict = new ConcurrentDictionary<int, int>(cLevel, 1);
-            string methodparameters = string.Format(
-                "* TestRemove1(cLevel={0}, threads={1}, removesPerThread={2})",
-                cLevel,
-                threads,
-                removesPerThread
-            );
+            string methodparameters = string
+                .Format(
+                    "* TestRemove1(cLevel={0}, threads={1}, removesPerThread={2})",
+                    cLevel,
+                    threads,
+                    removesPerThread
+                );
             int N = 2 * threads * removesPerThread;
 
             for (int i = 0; i < N; i++)
@@ -483,10 +487,11 @@ namespace System.Collections.Concurrent.Tests
             {
                 Assert.False(
                     seen[0][i] == seen[1][i],
-                    string.Format(
-                        "> FAILED. Two threads appear to have removed the same element. TestRemove2(removesPerThread={0})",
-                        removesPerThread
-                    )
+                    string
+                        .Format(
+                            "> FAILED. Two threads appear to have removed the same element. TestRemove2(removesPerThread={0})",
+                            removesPerThread
+                        )
                 );
             }
         }
@@ -539,9 +544,8 @@ namespace System.Collections.Concurrent.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "item",
                 () =>
-                    new ConcurrentDictionary<string, int>().TryRemove(
-                        new KeyValuePair<string, int>(null, 42)
-                    )
+                    new ConcurrentDictionary<string, int>()
+                        .TryRemove(new KeyValuePair<string, int>(null, 42))
             );
             new ConcurrentDictionary<int, int>().TryRemove(new KeyValuePair<int, int>(0, 0)); // no error when using default value type
             new ConcurrentDictionary<int?, int>().TryRemove(new KeyValuePair<int?, int>(0, 0)); // or nullable
@@ -687,16 +691,17 @@ namespace System.Collections.Concurrent.Tests
             {
                 Assert.True(
                     expectKeys[i].Equals(gotKeys[i]),
-                    string.Format(
-                        "* Test '{4}': Level={0}, initSize={1}, threads={2}, addsPerThread={3})"
-                            + Environment.NewLine
-                            + "> FAILED.  The set of keys in the dictionary is are not the same as the expected.",
-                        cLevel,
-                        initSize,
-                        threads,
-                        addsPerThread,
-                        isAdd ? "GetOrAdd" : "GetOrUpdate"
-                    )
+                    string
+                        .Format(
+                            "* Test '{4}': Level={0}, initSize={1}, threads={2}, addsPerThread={3})"
+                                + Environment.NewLine
+                                + "> FAILED.  The set of keys in the dictionary is are not the same as the expected.",
+                            cLevel,
+                            initSize,
+                            threads,
+                            addsPerThread,
+                            isAdd ? "GetOrAdd" : "GetOrUpdate"
+                        )
                 );
             }
 
@@ -751,11 +756,12 @@ namespace System.Collections.Concurrent.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 dict
             );
-            PropertyInfo itemProperty = info.Properties.Single(
-                pr =>
-                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                    == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(
+                    pr =>
+                        pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                        == DebuggerBrowsableState.RootHidden
+                );
             KeyValuePair<string, int>[] items =
                 itemProperty.GetValue(info.Instance) as KeyValuePair<string, int>[];
             Assert.Equal(dict, items);
@@ -1018,11 +1024,12 @@ namespace System.Collections.Concurrent.Tests
                 int expectedValue = int.Parse(key);
                 Assert.True(
                     value == expectedValue,
-                    string.Format(
-                        "TestIDictionary:  FAILED.  Unexpected value returned from GetEnumerator, expected {0}, actual {1}",
-                        value,
-                        expectedValue
-                    )
+                    string
+                        .Format(
+                            "TestIDictionary:  FAILED.  Unexpected value returned from GetEnumerator, expected {0}, actual {1}",
+                            value,
+                            expectedValue
+                        )
                 );
                 count++;
             }
@@ -1105,7 +1112,8 @@ namespace System.Collections.Concurrent.Tests
             int key = -1;
             int value = +1;
             //add one item to the dictionary
-            ((ConcurrentDictionary<int, int>)dictionary).TryAdd(key, value);
+            ((ConcurrentDictionary<int, int>)dictionary)
+                .TryAdd(key, value);
 
             var objectArray = new object[1];
             dictionary.CopyTo(objectArray, 0);
@@ -1148,7 +1156,8 @@ namespace System.Collections.Concurrent.Tests
             // "TestICollection:  FAILED.  CopyTo didn't throw AORE when negative index passed");
 
             //add one item to the dictionary
-            ((ConcurrentDictionary<int, int>)dictionary).TryAdd(1, 1);
+            ((ConcurrentDictionary<int, int>)dictionary)
+                .TryAdd(1, 1);
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => dictionary.CopyTo(new object[] {  }, 0)
@@ -1255,22 +1264,24 @@ namespace System.Collections.Concurrent.Tests
             Assert.True(numberSucceeded == tasks.Length, "One or more threads failed!");
             Assert.True(
                 totalKeysUpdated == dictionary.Count,
-                string.Format(
-                    "TestTryUpdate:  FAILED.  The updated keys count doesn't match the dictionary count, expected {0}, actual {1}",
-                    dictionary.Count,
-                    totalKeysUpdated
-                )
+                string
+                    .Format(
+                        "TestTryUpdate:  FAILED.  The updated keys count doesn't match the dictionary count, expected {0}, actual {1}",
+                        dictionary.Count,
+                        totalKeysUpdated
+                    )
             );
             foreach (var value in updatedKeys.Values)
             {
                 for (int i = 0; i < value.Keys.Count; i++)
                     Assert.True(
                         dictionary[value.Keys[i]] == value.ThreadIndex,
-                        string.Format(
-                            "TestTryUpdate:  FAILED.  The updated value doesn't match the thread index, expected {0} actual {1}",
-                            value.ThreadIndex,
-                            dictionary[value.Keys[i]]
-                        )
+                        string
+                            .Format(
+                                "TestTryUpdate:  FAILED.  The updated value doesn't match the thread index, expected {0} actual {1}",
+                                value.ThreadIndex,
+                                dictionary[value.Keys[i]]
+                            )
                     );
             }
 

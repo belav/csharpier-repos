@@ -53,9 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 selectExpression.ApplyProjection();
             }
 
-            query = new CosmosValueConverterCompensatingExpressionVisitor(
-                _sqlExpressionFactory
-            ).Visit(query);
+            query = new CosmosValueConverterCompensatingExpressionVisitor(_sqlExpressionFactory)
+                .Visit(query);
 
             return query;
         }

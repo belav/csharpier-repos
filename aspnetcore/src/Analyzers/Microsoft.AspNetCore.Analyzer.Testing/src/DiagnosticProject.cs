@@ -40,12 +40,13 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
                 if (!_solutionCache.TryGetValue(testAssembly, out solution))
                 {
                     var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
-                    solution = new AdhocWorkspace().CurrentSolution.AddProject(
-                        projectId,
-                        TestProjectName,
-                        TestProjectName,
-                        LanguageNames.CSharp
-                    );
+                    solution = new AdhocWorkspace().CurrentSolution
+                        .AddProject(
+                            projectId,
+                            TestProjectName,
+                            TestProjectName,
+                            LanguageNames.CSharp
+                        );
 
                     foreach (
                         var defaultCompileLibrary in DependencyContext.Load(

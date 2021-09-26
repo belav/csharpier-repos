@@ -241,10 +241,11 @@ namespace Microsoft.AspNetCore.Owin
         {
             get
             {
-                return int.Parse(
-                    Prop<string>(OwinConstants.CommonKeys.RemotePort),
-                    CultureInfo.InvariantCulture
-                );
+                return int
+                    .Parse(
+                        Prop<string>(OwinConstants.CommonKeys.RemotePort),
+                        CultureInfo.InvariantCulture
+                    );
             }
             set
             {
@@ -259,10 +260,11 @@ namespace Microsoft.AspNetCore.Owin
         {
             get
             {
-                return int.Parse(
-                    Prop<string>(OwinConstants.CommonKeys.LocalPort),
-                    CultureInfo.InvariantCulture
-                );
+                return int
+                    .Parse(
+                        Prop<string>(OwinConstants.CommonKeys.LocalPort),
+                        CultureInfo.InvariantCulture
+                    );
             }
             set
             {
@@ -301,11 +303,12 @@ namespace Microsoft.AspNetCore.Owin
             {
                 object obj;
                 if (
-                    string.Equals(
-                        "https",
-                        ((IHttpRequestFeature)this).Scheme,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            "https",
+                            ((IHttpRequestFeature)this).Scheme,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                     && (
                         Environment.TryGetValue(
                             OwinConstants.CommonKeys.LoadClientCertAsync,

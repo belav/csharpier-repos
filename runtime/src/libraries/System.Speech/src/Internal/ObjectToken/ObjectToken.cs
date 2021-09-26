@@ -204,11 +204,12 @@ namespace System.Speech.Internal.ObjectTokens
             get
             {
                 string description = string.Empty;
-                string sCultureId = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0:x}",
-                    CultureInfo.CurrentUICulture.LCID
-                );
+                string sCultureId = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "{0:x}",
+                        CultureInfo.CurrentUICulture.LCID
+                    );
                 if (!TryGetString(sCultureId, out description))
                 {
                     TryGetString(null, out description);

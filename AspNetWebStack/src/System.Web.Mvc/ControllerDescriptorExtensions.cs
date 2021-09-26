@@ -40,9 +40,9 @@ namespace System.Web.Mvc
         public static RouteAreaAttribute GetAreaFrom(this ControllerDescriptor controllerDescriptor)
         {
             RouteAreaAttribute areaAttribute = controllerDescriptor.GetCustomAttributes(
-                    typeof(RouteAreaAttribute),
-                    inherit: true
-                )
+                typeof(RouteAreaAttribute),
+                inherit: true
+            )
                 .Cast<RouteAreaAttribute>()
                 .FirstOrDefault();
             return areaAttribute;

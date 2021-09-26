@@ -1199,9 +1199,8 @@ namespace Microsoft.Extensions.DependencyInjection
         private PageConventionCollection GetConventions(bool enableEndpointRouting = true)
         {
             var options = new MvcOptions { EnableEndpointRouting = enableEndpointRouting };
-            var serviceProvider = new ServiceCollection().AddSingleton<IOptions<MvcOptions>>(
-                    Options.Options.Create(options)
-                )
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<IOptions<MvcOptions>>(Options.Options.Create(options))
                 .BuildServiceProvider();
             return new PageConventionCollection(serviceProvider);
         }

@@ -209,8 +209,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember
                 if (propertyPatternClause != null)
                 {
                     // something like: { [|X|]: int i } or like: Blah { [|X|]: int i }
-                    var inferenceService =
-                        semanticDocument.Document.GetLanguageService<ITypeInferenceService>();
+                    var inferenceService = semanticDocument.Document
+                        .GetLanguageService<ITypeInferenceService>();
                     typeToGenerateIn =
                         inferenceService.InferType(
                             semanticModel,

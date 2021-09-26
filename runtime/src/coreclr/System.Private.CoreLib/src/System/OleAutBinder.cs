@@ -67,11 +67,11 @@ namespace System
                 // Specify the LocalBool flag to have BOOL values converted to local language rather
                 // than 0 or -1.
                 object RetObj = OAVariantLib.ChangeType(
-                        myValue,
-                        type,
-                        OAVariantLib.LocalBool,
-                        cultureInfo
-                    )
+                    myValue,
+                    type,
+                    OAVariantLib.LocalBool,
+                    cultureInfo
+                )
                     .ToObject()!;
 
 #if DISPLAY_DEBUG_INFO

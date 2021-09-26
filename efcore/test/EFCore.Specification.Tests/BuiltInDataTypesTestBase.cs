@@ -255,10 +255,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<short>(e, nameof(BuiltInDataTypes.TestInt16)) == param1
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<short>(e, nameof(BuiltInDataTypes.TestInt16)) == param1
+                )
                     .ToList()
                     .Single()
             );
@@ -267,10 +267,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<int>(e, nameof(BuiltInDataTypes.TestInt32)) == param2
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<int>(e, nameof(BuiltInDataTypes.TestInt32)) == param2
+                )
                     .ToList()
                     .Single()
             );
@@ -281,11 +281,10 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<long>(e, nameof(BuiltInDataTypes.TestInt64))
-                                    == param3
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<long>(e, nameof(BuiltInDataTypes.TestInt64)) == param3
+                    )
                         .ToList()
                         .Single()
                 );
@@ -297,11 +296,10 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble))
-                                    == param4
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble)) == param4
+                    )
                         .ToList()
                         .Single()
                 );
@@ -313,21 +311,19 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (
+                        e =>
+                            e.Id == 11
+                            && (
+                                EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble))
+                                    == param4
+                                || (
                                     EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble))
-                                        == param4
-                                    || (
-                                        EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble))
-                                            > param4l
-                                        && EF.Property<double>(
-                                            e,
-                                            nameof(BuiltInDataTypes.TestDouble)
-                                        ) < param4h
-                                    )
+                                        > param4l
+                                    && EF.Property<double>(e, nameof(BuiltInDataTypes.TestDouble))
+                                        < param4h
                                 )
-                        )
+                            )
+                    )
                         .ToList()
                         .Single()
                 );
@@ -337,11 +333,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<decimal>(e, nameof(BuiltInDataTypes.TestDecimal))
-                                == param5
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<decimal>(e, nameof(BuiltInDataTypes.TestDecimal)) == param5
+                )
                     .ToList()
                     .Single()
             );
@@ -350,11 +345,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<DateTime>(e, nameof(BuiltInDataTypes.TestDateTime))
-                                == param6
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<DateTime>(e, nameof(BuiltInDataTypes.TestDateTime)) == param6
+                )
                     .ToList()
                     .Single()
             );
@@ -365,13 +359,13 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<DateTimeOffset>(
-                                    e,
-                                    nameof(BuiltInDataTypes.TestDateTimeOffset)
-                                ) == param7
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<DateTimeOffset>(
+                                e,
+                                nameof(BuiltInDataTypes.TestDateTimeOffset)
+                            ) == param7
+                    )
                         .ToList()
                         .Single()
                 );
@@ -383,11 +377,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<TimeSpan>(e, nameof(BuiltInDataTypes.TestTimeSpan))
-                                    == param8
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<TimeSpan>(e, nameof(BuiltInDataTypes.TestTimeSpan))
+                                == param8
+                    )
                         .ToList()
                         .Single()
                 );
@@ -399,11 +393,10 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle))
-                                    == param9
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle)) == param9
+                    )
                         .ToList()
                         .Single()
                 );
@@ -415,21 +408,18 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (
+                        e =>
+                            e.Id == 11
+                            && (
+                                EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle)) == param9
+                                || (
                                     EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle))
-                                        == param9
-                                    || (
-                                        EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle))
-                                            > param9l
-                                        && EF.Property<float>(
-                                            e,
-                                            nameof(BuiltInDataTypes.TestSingle)
-                                        ) < param9h
-                                    )
+                                        > param9l
+                                    && EF.Property<float>(e, nameof(BuiltInDataTypes.TestSingle))
+                                        < param9h
                                 )
-                        )
+                            )
+                    )
                         .ToList()
                         .Single()
                 );
@@ -439,10 +429,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<bool>(e, nameof(BuiltInDataTypes.TestBoolean)) == param10
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<bool>(e, nameof(BuiltInDataTypes.TestBoolean)) == param10
+                )
                     .ToList()
                     .Single()
             );
@@ -453,11 +443,10 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<byte>(e, nameof(BuiltInDataTypes.TestByte))
-                                    == param11
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<byte>(e, nameof(BuiltInDataTypes.TestByte)) == param11
+                    )
                         .ToList()
                         .Single()
                 );
@@ -467,10 +456,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64)) == param12
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64)) == param12
+                )
                     .ToList()
                     .Single()
             );
@@ -479,10 +468,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32)) == param13
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32)) == param13
+                )
                     .ToList()
                     .Single()
             );
@@ -491,10 +480,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16)) == param14
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16)) == param14
+                )
                     .ToList()
                     .Single()
             );
@@ -505,10 +494,10 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8)) == param15
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8)) == param15
+                    )
                         .ToList()
                         .Single()
                 );
@@ -520,13 +509,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<ushort>(
-                                    e,
-                                    nameof(BuiltInDataTypes.TestUnsignedInt16)
-                                ) == param16
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<ushort>(e, nameof(BuiltInDataTypes.TestUnsignedInt16))
+                                == param16
+                    )
                         .ToList()
                         .Single()
                 );
@@ -538,11 +525,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<uint>(e, nameof(BuiltInDataTypes.TestUnsignedInt32))
-                                    == param17
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<uint>(e, nameof(BuiltInDataTypes.TestUnsignedInt32))
+                                == param17
+                    )
                         .ToList()
                         .Single()
                 );
@@ -554,11 +541,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<ulong>(e, nameof(BuiltInDataTypes.TestUnsignedInt64))
-                                    == param18
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<ulong>(e, nameof(BuiltInDataTypes.TestUnsignedInt64))
+                                == param18
+                    )
                         .ToList()
                         .Single()
                 );
@@ -570,11 +557,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<char>(e, nameof(BuiltInDataTypes.TestCharacter))
-                                    == param19
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<char>(e, nameof(BuiltInDataTypes.TestCharacter))
+                                == param19
+                    )
                         .ToList()
                         .Single()
                 );
@@ -586,11 +573,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<sbyte>(e, nameof(BuiltInDataTypes.TestSignedByte))
-                                    == param20
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<sbyte>(e, nameof(BuiltInDataTypes.TestSignedByte))
+                                == param20
+                    )
                         .ToList()
                         .Single()
                 );
@@ -602,11 +589,10 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<EnumU64>(e, nameof(BuiltInDataTypes.EnumU64))
-                                    == param21
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<EnumU64>(e, nameof(BuiltInDataTypes.EnumU64)) == param21
+                    )
                         .ToList()
                         .Single()
                 );
@@ -618,11 +604,10 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<EnumU32>(e, nameof(BuiltInDataTypes.EnumU32))
-                                    == param22
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<EnumU32>(e, nameof(BuiltInDataTypes.EnumU32)) == param22
+                    )
                         .ToList()
                         .Single()
                 );
@@ -634,11 +619,10 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<EnumU16>(e, nameof(BuiltInDataTypes.EnumU16))
-                                    == param23
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<EnumU16>(e, nameof(BuiltInDataTypes.EnumU16)) == param23
+                    )
                         .ToList()
                         .Single()
                 );
@@ -650,11 +634,10 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<EnumS8>(e, nameof(BuiltInDataTypes.EnumS8))
-                                    == param24
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<EnumS8>(e, nameof(BuiltInDataTypes.EnumS8)) == param24
+                    )
                         .ToList()
                         .Single()
                 );
@@ -670,22 +653,22 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64))
-                                    == (Enum64)param25
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64))
+                                == (Enum64)param25
+                    )
                         .ToList()
                         .Single()
                 );
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (int)EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64))
-                                    == param25
-                        )
+                        e =>
+                            e.Id == 11
+                            && (int)EF.Property<Enum64>(e, nameof(BuiltInDataTypes.Enum64))
+                                == param25
+                    )
                         .ToList()
                         .Single()
                 );
@@ -701,22 +684,22 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32))
-                                    == (Enum32)param26
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32))
+                                == (Enum32)param26
+                    )
                         .ToList()
                         .Single()
                 );
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (int)EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32))
-                                    == param26
-                        )
+                        e =>
+                            e.Id == 11
+                            && (int)EF.Property<Enum32>(e, nameof(BuiltInDataTypes.Enum32))
+                                == param26
+                    )
                         .ToList()
                         .Single()
                 );
@@ -732,22 +715,22 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16))
-                                    == (Enum16)param27
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16))
+                                == (Enum16)param27
+                    )
                         .ToList()
                         .Single()
                 );
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (int)EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16))
-                                    == param27
-                        )
+                        e =>
+                            e.Id == 11
+                            && (int)EF.Property<Enum16>(e, nameof(BuiltInDataTypes.Enum16))
+                                == param27
+                    )
                         .ToList()
                         .Single()
                 );
@@ -763,22 +746,21 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8))
-                                    == (Enum8)param28
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8))
+                                == (Enum8)param28
+                    )
                         .ToList()
                         .Single()
                 );
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (int)EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8))
-                                    == param28
-                        )
+                        e =>
+                            e.Id == 11
+                            && (int)EF.Property<Enum8>(e, nameof(BuiltInDataTypes.Enum8)) == param28
+                    )
                         .ToList()
                         .Single()
                 );
@@ -803,37 +785,38 @@ namespace Microsoft.EntityFrameworkCore
         {
             var entityEntry = set.Add(new TEntity { Id = 11 });
 
-            entityEntry.CurrentValues.SetValues(
-                new BuiltInDataTypes
-                {
-                    Id = 11,
-                    PartitionId = 1,
-                    TestInt16 = -1234,
-                    TestInt32 = -123456789,
-                    TestInt64 = -1234567890123456789L,
-                    TestDouble = -1.23456789,
-                    TestDecimal = -1234567890.01M,
-                    TestDateTime = Fixture.DefaultDateTime,
-                    TestDateTimeOffset = new DateTimeOffset(new DateTime(), TimeSpan.Zero),
-                    TestTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
-                    TestSingle = -1.234F,
-                    TestBoolean = true,
-                    TestByte = 255,
-                    TestUnsignedInt16 = 1234,
-                    TestUnsignedInt32 = 1234565789U,
-                    TestUnsignedInt64 = 1234567890123456789UL,
-                    TestCharacter = 'a',
-                    TestSignedByte = -128,
-                    Enum64 = Enum64.SomeValue,
-                    Enum32 = Enum32.SomeValue,
-                    Enum16 = Enum16.SomeValue,
-                    Enum8 = Enum8.SomeValue,
-                    EnumU64 = EnumU64.SomeValue,
-                    EnumU32 = EnumU32.SomeValue,
-                    EnumU16 = EnumU16.SomeValue,
-                    EnumS8 = EnumS8.SomeValue
-                }
-            );
+            entityEntry.CurrentValues
+                .SetValues(
+                    new BuiltInDataTypes
+                    {
+                        Id = 11,
+                        PartitionId = 1,
+                        TestInt16 = -1234,
+                        TestInt32 = -123456789,
+                        TestInt64 = -1234567890123456789L,
+                        TestDouble = -1.23456789,
+                        TestDecimal = -1234567890.01M,
+                        TestDateTime = Fixture.DefaultDateTime,
+                        TestDateTimeOffset = new DateTimeOffset(new DateTime(), TimeSpan.Zero),
+                        TestTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
+                        TestSingle = -1.234F,
+                        TestBoolean = true,
+                        TestByte = 255,
+                        TestUnsignedInt16 = 1234,
+                        TestUnsignedInt32 = 1234565789U,
+                        TestUnsignedInt64 = 1234567890123456789UL,
+                        TestCharacter = 'a',
+                        TestSignedByte = -128,
+                        Enum64 = Enum64.SomeValue,
+                        Enum32 = Enum32.SomeValue,
+                        Enum16 = Enum16.SomeValue,
+                        Enum8 = Enum8.SomeValue,
+                        EnumU64 = EnumU64.SomeValue,
+                        EnumU32 = EnumU32.SomeValue,
+                        EnumU16 = EnumU16.SomeValue,
+                        EnumS8 = EnumS8.SomeValue
+                    }
+                );
 
             return entityEntry;
         }
@@ -874,13 +857,13 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<short?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableInt16)
-                            ) == param1
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<short?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableInt16)
+                        ) == param1
+                )
                     .ToList()
                     .Single()
             );
@@ -889,13 +872,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<int?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableInt32)
-                            ) == param2
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<int?>(e, nameof(BuiltInNullableDataTypes.TestNullableInt32))
+                            == param2
+                )
                     .ToList()
                     .Single()
             );
@@ -904,13 +885,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<long?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableInt64)
-                            ) == param3
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<long?>(e, nameof(BuiltInNullableDataTypes.TestNullableInt64))
+                            == param3
+                )
                     .ToList()
                     .Single()
             );
@@ -921,13 +900,13 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<double?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.TestNullableDouble)
-                                ) == param4
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<double?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableDouble)
+                            ) == param4
+                    )
                         .ToList()
                         .Single()
                 );
@@ -939,25 +918,25 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (
+                        e =>
+                            e.Id == 11
+                            && (
+                                EF.Property<double?>(
+                                    e,
+                                    nameof(BuiltInNullableDataTypes.TestNullableDouble)
+                                ) == param4
+                                || (
                                     EF.Property<double?>(
                                         e,
                                         nameof(BuiltInNullableDataTypes.TestNullableDouble)
-                                    ) == param4
-                                    || (
-                                        EF.Property<double?>(
-                                            e,
-                                            nameof(BuiltInNullableDataTypes.TestNullableDouble)
-                                        ) > param4l
-                                        && EF.Property<double?>(
-                                            e,
-                                            nameof(BuiltInNullableDataTypes.TestNullableDouble)
-                                        ) < param4h
-                                    )
+                                    ) > param4l
+                                    && EF.Property<double?>(
+                                        e,
+                                        nameof(BuiltInNullableDataTypes.TestNullableDouble)
+                                    ) < param4h
                                 )
-                        )
+                            )
+                    )
                         .ToList()
                         .Single()
                 );
@@ -967,13 +946,13 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<decimal?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableDecimal)
-                            ) == param5
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<decimal?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableDecimal)
+                        ) == param5
+                )
                     .ToList()
                     .Single()
             );
@@ -982,13 +961,13 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<DateTime?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableDateTime)
-                            ) == param6
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<DateTime?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableDateTime)
+                        ) == param6
+                )
                     .ToList()
                     .Single()
             );
@@ -1005,13 +984,13 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<DateTimeOffset?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.TestNullableDateTimeOffset)
-                                ) == param7
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<DateTimeOffset?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableDateTimeOffset)
+                            ) == param7
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1026,13 +1005,13 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<TimeSpan?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.TestNullableTimeSpan)
-                                ) == param8
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<TimeSpan?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableTimeSpan)
+                            ) == param8
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1044,13 +1023,13 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<float?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.TestNullableSingle)
-                                ) == param9
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<float?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableSingle)
+                            ) == param9
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1062,25 +1041,25 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (
+                        e =>
+                            e.Id == 11
+                            && (
+                                EF.Property<float?>(
+                                    e,
+                                    nameof(BuiltInNullableDataTypes.TestNullableSingle)
+                                ) == param9
+                                || (
                                     EF.Property<float?>(
                                         e,
                                         nameof(BuiltInNullableDataTypes.TestNullableSingle)
-                                    ) == param9
-                                    || (
-                                        EF.Property<float?>(
-                                            e,
-                                            nameof(BuiltInNullableDataTypes.TestNullableSingle)
-                                        ) > param9l
-                                        && EF.Property<float?>(
-                                            e,
-                                            nameof(BuiltInNullableDataTypes.TestNullableSingle)
-                                        ) < param9h
-                                    )
+                                    ) > param9l
+                                    && EF.Property<float?>(
+                                        e,
+                                        nameof(BuiltInNullableDataTypes.TestNullableSingle)
+                                    ) < param9h
                                 )
-                        )
+                            )
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1090,13 +1069,13 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<bool?>(
-                                e,
-                                nameof(BuiltInNullableDataTypes.TestNullableBoolean)
-                            ) == param10
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<bool?>(
+                            e,
+                            nameof(BuiltInNullableDataTypes.TestNullableBoolean)
+                        ) == param10
+                )
                     .ToList()
                     .Single()
             );
@@ -1107,13 +1086,13 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<byte?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.TestNullableByte)
-                                ) == param11
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<byte?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableByte)
+                            ) == param11
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1123,11 +1102,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64))
-                                == param12
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64))
+                            == param12
+                )
                     .ToList()
                     .Single()
             );
@@ -1136,11 +1115,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32))
-                                == param13
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32))
+                            == param13
+                )
                     .ToList()
                     .Single()
             );
@@ -1149,11 +1128,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 entity,
                 set.Where(
-                        e =>
-                            e.Id == 11
-                            && EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16))
-                                == param14
-                    )
+                    e =>
+                        e.Id == 11
+                        && EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16))
+                            == param14
+                )
                     .ToList()
                     .Single()
             );
@@ -1164,11 +1143,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8))
-                                    == param15
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8))
+                                == param15
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1183,13 +1162,13 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<ushort?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt16)
-                                ) == param16
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<ushort?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt16)
+                            ) == param16
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1204,13 +1183,13 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<uint?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt32)
-                                ) == param17
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<uint?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt32)
+                            ) == param17
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1225,13 +1204,13 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<ulong?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt64)
-                                ) == param18
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<ulong?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt64)
+                            ) == param18
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1246,13 +1225,13 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<char?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.TestNullableCharacter)
-                                ) == param19
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<char?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableCharacter)
+                            ) == param19
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1267,13 +1246,13 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<sbyte?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.TestNullableSignedByte)
-                                ) == param20
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<sbyte?>(
+                                e,
+                                nameof(BuiltInNullableDataTypes.TestNullableSignedByte)
+                            ) == param20
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1285,13 +1264,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<EnumU64?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.EnumU64)
-                                ) == param21
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<EnumU64?>(e, nameof(BuiltInNullableDataTypes.EnumU64))
+                                == param21
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1303,13 +1280,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<EnumU32?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.EnumU32)
-                                ) == param22
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<EnumU32?>(e, nameof(BuiltInNullableDataTypes.EnumU32))
+                                == param22
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1321,13 +1296,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<EnumU16?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.EnumU16)
-                                ) == param23
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<EnumU16?>(e, nameof(BuiltInNullableDataTypes.EnumU16))
+                                == param23
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1339,11 +1312,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<EnumS8?>(e, nameof(BuiltInNullableDataTypes.EnumS8))
-                                    == param24
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<EnumS8?>(e, nameof(BuiltInNullableDataTypes.EnumS8))
+                                == param24
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1361,24 +1334,22 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64))
-                                    == (Enum64)param25
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64))
+                                == (Enum64)param25
+                    )
                         .ToList()
                         .Single()
                 );
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (int)EF.Property<Enum64?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.Enum64)
-                                ) == param25
-                        )
+                        e =>
+                            e.Id == 11
+                            && (int)EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64))
+                                == param25
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1396,24 +1367,22 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32))
-                                    == (Enum32)param26
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32))
+                                == (Enum32)param26
+                    )
                         .ToList()
                         .Single()
                 );
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (int)EF.Property<Enum32?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.Enum32)
-                                ) == param26
-                        )
+                        e =>
+                            e.Id == 11
+                            && (int)EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32))
+                                == param26
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1431,24 +1400,22 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16))
-                                    == (Enum16)param27
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16))
+                                == (Enum16)param27
+                    )
                         .ToList()
                         .Single()
                 );
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (int)EF.Property<Enum16?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.Enum16)
-                                ) == param27
-                        )
+                        e =>
+                            e.Id == 11
+                            && (int)EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16))
+                                == param27
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1466,24 +1433,22 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8))
-                                    == (Enum8)param28
-                        )
+                        e =>
+                            e.Id == 11
+                            && EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8))
+                                == (Enum8)param28
+                    )
                         .ToList()
                         .Single()
                 );
                 Assert.Same(
                     entity,
                     set.Where(
-                            e =>
-                                e.Id == 11
-                                && (int)EF.Property<Enum8?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.Enum8)
-                                ) == param28
-                        )
+                        e =>
+                            e.Id == 11
+                            && (int)EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8))
+                                == param28
+                    )
                         .ToList()
                         .Single()
                 );
@@ -1509,40 +1474,41 @@ namespace Microsoft.EntityFrameworkCore
         {
             var entityEntry = set.Add(new TEntity { Id = 11 });
 
-            entityEntry.CurrentValues.SetValues(
-                new BuiltInNullableDataTypes
-                {
-                    Id = 11,
-                    PartitionId = 1,
-                    TestNullableInt16 = -1234,
-                    TestNullableInt32 = -123456789,
-                    TestNullableInt64 = -1234567890123456789L,
-                    TestNullableDouble = -1.23456789,
-                    TestNullableDecimal = -1234567890.01M,
-                    TestNullableDateTime = Fixture.DefaultDateTime,
-                    TestNullableDateTimeOffset = new DateTimeOffset(
-                        new DateTime(),
-                        TimeSpan.FromHours(-8.0)
-                    ),
-                    TestNullableTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
-                    TestNullableSingle = -1.234F,
-                    TestNullableBoolean = true,
-                    TestNullableByte = 255,
-                    TestNullableUnsignedInt16 = 1234,
-                    TestNullableUnsignedInt32 = 1234565789U,
-                    TestNullableUnsignedInt64 = 1234567890123456789UL,
-                    TestNullableCharacter = 'a',
-                    TestNullableSignedByte = -128,
-                    Enum64 = Enum64.SomeValue,
-                    Enum32 = Enum32.SomeValue,
-                    Enum16 = Enum16.SomeValue,
-                    Enum8 = Enum8.SomeValue,
-                    EnumU64 = EnumU64.SomeValue,
-                    EnumU32 = EnumU32.SomeValue,
-                    EnumU16 = EnumU16.SomeValue,
-                    EnumS8 = EnumS8.SomeValue
-                }
-            );
+            entityEntry.CurrentValues
+                .SetValues(
+                    new BuiltInNullableDataTypes
+                    {
+                        Id = 11,
+                        PartitionId = 1,
+                        TestNullableInt16 = -1234,
+                        TestNullableInt32 = -123456789,
+                        TestNullableInt64 = -1234567890123456789L,
+                        TestNullableDouble = -1.23456789,
+                        TestNullableDecimal = -1234567890.01M,
+                        TestNullableDateTime = Fixture.DefaultDateTime,
+                        TestNullableDateTimeOffset = new DateTimeOffset(
+                            new DateTime(),
+                            TimeSpan.FromHours(-8.0)
+                        ),
+                        TestNullableTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
+                        TestNullableSingle = -1.234F,
+                        TestNullableBoolean = true,
+                        TestNullableByte = 255,
+                        TestNullableUnsignedInt16 = 1234,
+                        TestNullableUnsignedInt32 = 1234565789U,
+                        TestNullableUnsignedInt64 = 1234567890123456789UL,
+                        TestNullableCharacter = 'a',
+                        TestNullableSignedByte = -128,
+                        Enum64 = Enum64.SomeValue,
+                        Enum32 = Enum32.SomeValue,
+                        Enum16 = Enum16.SomeValue,
+                        Enum8 = Enum8.SomeValue,
+                        EnumU64 = EnumU64.SomeValue,
+                        EnumU32 = EnumU32.SomeValue,
+                        EnumU16 = EnumU16.SomeValue,
+                        EnumS8 = EnumS8.SomeValue
+                    }
+                );
 
             return entityEntry;
         }

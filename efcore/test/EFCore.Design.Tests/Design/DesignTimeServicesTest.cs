@@ -29,19 +29,19 @@ namespace Microsoft.EntityFrameworkCore.Design
         public void Services_are_registered_using_correct_priority(bool useContext)
         {
             using var context = new MyContext(
-                new DbContextOptionsBuilder<MyContext>().UseSqlServer()
+                new DbContextOptionsBuilder<MyContext>()
+                    .UseSqlServer()
                     .ReplaceService<IMigrationsIdGenerator, ContextMigrationsIdGenerator>()
                     .ReplaceService<IHistoryRepository, ContextHistoryRepository>().Options
             );
 
-            var serviceProvider =
-                CreateDesignServiceProvider(
-                        @"
+            var serviceProvider = CreateDesignServiceProvider(
+                    @"
 using Microsoft.EntityFrameworkCore.Design;
 
 [assembly: DesignTimeServicesReference(""Microsoft.EntityFrameworkCore.Design.DesignTimeServicesTest+TryAddDesignTimeServices, Microsoft.EntityFrameworkCore.Design.Tests"")]
 ",
-                        @"
+                    @"
 using System;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -78,9 +78,8 @@ public class UserMigrationsIdGenerator : IMigrationsIdGenerator
     public bool IsValidId(string value) => throw new NotImplementedException();
 }
 ",
-                        useContext ? context : null
-                    )
-                    .CreateScope().ServiceProvider;
+                    useContext ? context : null
+                ).CreateScope().ServiceProvider;
 
             // Base design-time services are resolved
             Assert.Equal(
@@ -293,7 +292,8 @@ public class UserMigrationsIdGenerator : IMigrationsIdGenerator
                           "Microsoft.EntityFrameworkCore.SqlServer"
                       )
                     : servicesBuilder.CreateServiceCollection(context)
-            ).BuildServiceProvider();
+            )
+                .BuildServiceProvider();
         }
 
         private Assembly Compile(string assemblyCode)

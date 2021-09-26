@@ -87,13 +87,14 @@ namespace Microsoft.AspNetCore.Razor.Language
             if (
                 rule.TagName != ElementCatchAllName
                 && rule.TagName != null
-                && !string.Equals(
-                    tagNameWithoutPrefix,
-                    rule.TagName,
-                    rule.CaseSensitive
-                      ? StringComparison.Ordinal
-                      : StringComparison.OrdinalIgnoreCase
-                )
+                && !string
+                    .Equals(
+                        tagNameWithoutPrefix,
+                        rule.TagName,
+                        rule.CaseSensitive
+                          ? StringComparison.Ordinal
+                          : StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 return false;
@@ -114,13 +115,14 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             if (
                 rule.ParentTag != null
-                && !string.Equals(
-                    parentTagNameWithoutPrefix,
-                    rule.ParentTag,
-                    rule.CaseSensitive
-                      ? StringComparison.Ordinal
-                      : StringComparison.OrdinalIgnoreCase
-                )
+                && !string
+                    .Equals(
+                        parentTagNameWithoutPrefix,
+                        rule.ParentTag,
+                        rule.CaseSensitive
+                          ? StringComparison.Ordinal
+                          : StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 return false;
@@ -145,19 +147,20 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
 
             if (
-                !rule.Attributes.All(
-                    static (requiredAttribute, tagAttributes) =>
-                        tagAttributes.Any(
-                            static (attribute, requiredAttribute) =>
-                                SatisfiesRequiredAttribute(
-                                    attribute.Key,
-                                    attribute.Value,
-                                    requiredAttribute
-                                ),
-                            requiredAttribute
-                        ),
-                    tagAttributes
-                )
+                !rule.Attributes
+                    .All(
+                        static (requiredAttribute, tagAttributes) =>
+                            tagAttributes.Any(
+                                static (attribute, requiredAttribute) =>
+                                    SatisfiesRequiredAttribute(
+                                        attribute.Key,
+                                        attribute.Value,
+                                        requiredAttribute
+                                    ),
+                                requiredAttribute
+                            ),
+                        tagAttributes
+                    )
             )
             {
                 return false;
@@ -173,9 +176,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             return SatisfiesBoundAttributeName(name, descriptor)
                 || SatisfiesBoundAttributeIndexer(name, descriptor)
-                || descriptor.BoundAttributeParameters.Any(
-                    p => SatisfiesBoundAttributeWithParameter(name, descriptor, p)
-                );
+                || descriptor.BoundAttributeParameters
+                    .Any(p => SatisfiesBoundAttributeWithParameter(name, descriptor, p));
         }
 
         public static bool SatisfiesBoundAttributeIndexer(
@@ -209,13 +211,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                     attributeName,
                     parent
                 );
-                var matchesParameter = string.Equals(
-                    descriptor.Name,
-                    parameterName,
-                    descriptor.CaseSensitive
-                      ? StringComparison.Ordinal
-                      : StringComparison.OrdinalIgnoreCase
-                );
+                var matchesParameter = string
+                    .Equals(
+                        descriptor.Name,
+                        parameterName,
+                        descriptor.CaseSensitive
+                          ? StringComparison.Ordinal
+                          : StringComparison.OrdinalIgnoreCase
+                    );
                 return (satisfiesBoundAttributeName || satisfiesBoundAttributeIndexer)
                     && matchesParameter;
             }
@@ -265,9 +268,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             // First, check if we have a bound attribute descriptor that matches the parameter if it exists.
             foreach (var attribute in descriptor.BoundAttributes)
             {
-                boundAttributeParameter = attribute.BoundAttributeParameters.FirstOrDefault(
-                    p => SatisfiesBoundAttributeWithParameter(name, attribute, p)
-                );
+                boundAttributeParameter = attribute.BoundAttributeParameters
+                    .FirstOrDefault(p => SatisfiesBoundAttributeWithParameter(name, attribute, p));
 
                 if (boundAttributeParameter != null)
                 {
@@ -299,13 +301,14 @@ namespace Microsoft.AspNetCore.Razor.Language
             BoundAttributeDescriptor descriptor
         )
         {
-            return string.Equals(
-                descriptor.Name,
-                name,
-                descriptor.CaseSensitive
-                  ? StringComparison.Ordinal
-                  : StringComparison.OrdinalIgnoreCase
-            );
+            return string
+                .Equals(
+                    descriptor.Name,
+                    name,
+                    descriptor.CaseSensitive
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
+                );
         }
 
         // Internal for testing
@@ -321,13 +324,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                 == RequiredAttributeDescriptor.NameComparisonMode.FullMatch
             )
             {
-                nameMatches = string.Equals(
-                    descriptor.Name,
-                    attributeName,
-                    descriptor.CaseSensitive
-                      ? StringComparison.Ordinal
-                      : StringComparison.OrdinalIgnoreCase
-                );
+                nameMatches = string
+                    .Equals(
+                        descriptor.Name,
+                        attributeName,
+                        descriptor.CaseSensitive
+                          ? StringComparison.Ordinal
+                          : StringComparison.OrdinalIgnoreCase
+                    );
             }
             else if (
                 descriptor.NameComparison

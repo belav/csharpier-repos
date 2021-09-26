@@ -65,9 +65,8 @@ namespace System
                 return remoteStackTraceString;
 
             return remoteStackTraceString
-                + new StackTrace(this, needFileInfo).ToString(
-                    Diagnostics.StackTrace.TraceFormat.Normal
-                );
+                + new StackTrace(this, needFileInfo)
+                    .ToString(Diagnostics.StackTrace.TraceFormat.Normal);
         }
 
         internal DispatchState CaptureDispatchState()

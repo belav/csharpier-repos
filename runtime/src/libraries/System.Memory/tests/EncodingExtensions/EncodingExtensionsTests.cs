@@ -110,7 +110,8 @@ namespace System.Text.Tests
 
             // Then, a large input with no flushing and leftover data.
 
-            inputData = Encoding.UTF8.GetBytes(new string('x', 20_000_000))
+            inputData = Encoding.UTF8
+                .GetBytes(new string('x', 20_000_000))
                 .Concat(new byte[] { 0xE0, 0xA0 })
                 .ToArray();
             EncodingExtensions.Convert(
@@ -126,9 +127,8 @@ namespace System.Text.Tests
 
             // Then, a large input with flushing and leftover data (should be replaced).
 
-            inputData = new byte[] { 0x80 }.Concat(
-                    Encoding.UTF8.GetBytes(new string('x', 20_000_000))
-                )
+            inputData = new byte[] { 0x80 }
+                .Concat(Encoding.UTF8.GetBytes(new string('x', 20_000_000)))
                 .Concat(new byte[] { 0xE0 })
                 .ToArray();
             EncodingExtensions.Convert(
@@ -330,7 +330,8 @@ namespace System.Text.Tests
             // Use SequenceEqual instead of Assert.Equal for perf.
 
             Assert.True(
-                Encoding.UTF8.GetBytes(
+                Encoding.UTF8
+                    .GetBytes(
                         "Hello"
                             + new string('x', 20_000_000)
                             + "\U00010000"
@@ -543,9 +544,9 @@ namespace System.Text.Tests
             Assert.Equal(
                 expected: Encoding.UTF8.GetBytes("Hello!"),
                 actual: destination.Slice(
-                        0,
-                        EncodingExtensions.GetBytes(Encoding.UTF8, sequence, destination)
-                    )
+                    0,
+                    EncodingExtensions.GetBytes(Encoding.UTF8, sequence, destination)
+                )
                     .ToArray()
             );
 
@@ -565,9 +566,9 @@ namespace System.Text.Tests
             Assert.Equal(
                 expected: Encoding.UTF8.GetBytes("\u0020\u0061\u0080\U00010000\U0010FFFF\ufffd"),
                 actual: destination.Slice(
-                        0,
-                        EncodingExtensions.GetBytes(Encoding.UTF8, sequence, destination)
-                    )
+                    0,
+                    EncodingExtensions.GetBytes(Encoding.UTF8, sequence, destination)
+                )
                     .ToArray()
             );
         }
@@ -639,7 +640,8 @@ namespace System.Text.Tests
             // Now make sure all of the data was encoded properly.
 
             Assert.True(
-                Encoding.UTF8.GetBytes(largeString + "\ufffd")
+                Encoding.UTF8
+                    .GetBytes(largeString + "\ufffd")
                     .AsSpan()
                     .SequenceEqual(writer.WrittenSpan)
             );
@@ -745,9 +747,9 @@ namespace System.Text.Tests
             Assert.Equal(
                 "Hello!",
                 destination.Slice(
-                        0,
-                        EncodingExtensions.GetChars(Encoding.UTF8, sequence, destination)
-                    )
+                    0,
+                    EncodingExtensions.GetChars(Encoding.UTF8, sequence, destination)
+                )
                     .ToString()
             );
 
@@ -767,9 +769,9 @@ namespace System.Text.Tests
             Assert.Equal(
                 "\u0020\u0061\u0080\ud7ff\U00100000\ufffd",
                 destination.Slice(
-                        0,
-                        EncodingExtensions.GetChars(Encoding.UTF8, sequence, destination)
-                    )
+                    0,
+                    EncodingExtensions.GetChars(Encoding.UTF8, sequence, destination)
+                )
                     .ToString()
             );
         }
@@ -822,7 +824,8 @@ namespace System.Text.Tests
             // that we're flowing the 'flush' parameter through the system correctly.
 
             writer = new ArrayBufferWriter<char>();
-            inputData = Encoding.UTF8.GetBytes(new string('\u1234', 5_000_000))
+            inputData = Encoding.UTF8
+                .GetBytes(new string('\u1234', 5_000_000))
                 .Concat(new byte[] { 0xE0 })
                 .ToArray();
             charsWritten = EncodingExtensions.GetChars(Encoding.UTF8, inputData, writer);
@@ -905,9 +908,8 @@ namespace System.Text.Tests
             public void Advance(int count)
             {
                 ReadOnlySpan<T> bufferSpan = _buffer.AsSpan(0, count);
-                ReadOnlySpan<T> remainingGoodDataSpan = _knownGoodData.Span.Slice(
-                    (int)(TotalElementsWritten % _knownGoodData.Length)
-                );
+                ReadOnlySpan<T> remainingGoodDataSpan = _knownGoodData.Span
+                    .Slice((int)(TotalElementsWritten % _knownGoodData.Length));
 
                 while (!bufferSpan.IsEmpty)
                 {

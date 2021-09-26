@@ -109,9 +109,10 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Bmi1.X64.ResetLowestSetBit(
-                Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data))
-            );
+            var result = Bmi1.X64
+                .ResetLowestSetBit(
+                    Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data))
+                );
 
             ValidateResult(_data, result);
         }
@@ -120,10 +121,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi1.X64).GetMethod(
-                    nameof(Bmi1.X64.ResetLowestSetBit),
-                    new Type[] { typeof(UInt64) }
-                )
+            var result = typeof(Bmi1.X64)
+                .GetMethod(nameof(Bmi1.X64.ResetLowestSetBit), new Type[] { typeof(UInt64) })
                 .Invoke(
                     null,
                     new object[]
@@ -223,9 +222,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.ResetLowestSetBit)}<UInt64>(UInt64): ResetLowestSetBit failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.ResetLowestSetBit)}<UInt64>(UInt64): ResetLowestSetBit failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

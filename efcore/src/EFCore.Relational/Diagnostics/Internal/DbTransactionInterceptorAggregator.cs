@@ -77,12 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].TransactionStartingAsync(
-                            connection,
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .TransactionStartingAsync(connection, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -98,12 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].TransactionStartedAsync(
-                            connection,
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .TransactionStartedAsync(connection, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -133,12 +125,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].TransactionUsedAsync(
-                            connection,
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .TransactionUsedAsync(connection, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -179,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].TransactionCommittingAsync(
+                    result = await _interceptors[i]
+                        .TransactionCommittingAsync(
                             transaction,
                             eventData,
                             result,
@@ -199,11 +188,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].TransactionCommittedAsync(
-                            transaction,
-                            eventData,
-                            cancellationToken
-                        )
+                    await _interceptors[i]
+                        .TransactionCommittedAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -216,11 +202,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = _interceptors[i].TransactionRollingBack(
-                        transaction,
-                        eventData,
-                        result
-                    );
+                    result = _interceptors[i]
+                        .TransactionRollingBack(transaction, eventData, result);
                 }
 
                 return result;
@@ -246,7 +229,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].TransactionRollingBackAsync(
+                    result = await _interceptors[i]
+                        .TransactionRollingBackAsync(
                             transaction,
                             eventData,
                             result,
@@ -266,11 +250,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].TransactionRolledBackAsync(
-                            transaction,
-                            eventData,
-                            cancellationToken
-                        )
+                    await _interceptors[i]
+                        .TransactionRolledBackAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -306,12 +287,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].CreatingSavepointAsync(
-                            transaction,
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .CreatingSavepointAsync(transaction, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -326,11 +303,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].CreatedSavepointAsync(
-                            transaction,
-                            eventData,
-                            cancellationToken
-                        )
+                    await _interceptors[i]
+                        .CreatedSavepointAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -343,11 +317,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = _interceptors[i].RollingBackToSavepoint(
-                        transaction,
-                        eventData,
-                        result
-                    );
+                    result = _interceptors[i]
+                        .RollingBackToSavepoint(transaction, eventData, result);
                 }
 
                 return result;
@@ -373,7 +344,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].RollingBackToSavepointAsync(
+                    result = await _interceptors[i]
+                        .RollingBackToSavepointAsync(
                             transaction,
                             eventData,
                             result,
@@ -393,11 +365,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].RolledBackToSavepointAsync(
-                            transaction,
-                            eventData,
-                            cancellationToken
-                        )
+                    await _interceptors[i]
+                        .RolledBackToSavepointAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -433,12 +402,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].ReleasingSavepointAsync(
-                            transaction,
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .ReleasingSavepointAsync(transaction, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -453,11 +418,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].ReleasedSavepointAsync(
-                            transaction,
-                            eventData,
-                            cancellationToken
-                        )
+                    await _interceptors[i]
+                        .ReleasedSavepointAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -481,11 +443,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].TransactionFailedAsync(
-                            transaction,
-                            eventData,
-                            cancellationToken
-                        )
+                    await _interceptors[i]
+                        .TransactionFailedAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }

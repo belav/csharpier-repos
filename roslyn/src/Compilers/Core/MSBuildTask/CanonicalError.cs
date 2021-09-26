@@ -256,12 +256,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         private static int ConvertToIntWithDefault(string value)
         {
             int result;
-            bool success = int.TryParse(
-                value,
-                NumberStyles.Integer,
-                CultureInfo.InvariantCulture,
-                out result
-            );
+            bool success = int
+                .TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out result);
 
             if (!success || (result < 0))
             {

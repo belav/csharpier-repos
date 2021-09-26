@@ -582,8 +582,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             public override Task ExecuteResultAsync(ActionContext context)
             {
-                var executor =
-                    context.HttpContext.RequestServices.GetRequiredService<TestPhysicalFileResultExecutor>();
+                var executor = context.HttpContext.RequestServices
+                    .GetRequiredService<TestPhysicalFileResultExecutor>();
                 return executor.ExecuteAsync(context, this);
             }
         }

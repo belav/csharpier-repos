@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             if (makeSeparateBufferForCursor)
             {
                 var languageName = Workspace.Projects.First().Language;
-                var contentType = Workspace.Services.GetLanguageServices(languageName)
+                var contentType = Workspace.Services
+                    .GetLanguageServices(languageName)
                     .GetRequiredService<IContentTypeLanguageService>()
                     .GetDefaultContentType();
                 _createdTextView = EditorFactory.CreateView(
@@ -89,10 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 _subjectBuffer = cursorDocument.GetTextBuffer();
 
                 if (
-                    cursorDocument.AnnotatedSpans.TryGetValue(
-                        "Selection",
-                        out var selectionSpanList
-                    )
+                    cursorDocument.AnnotatedSpans
+                        .TryGetValue("Selection", out var selectionSpanList)
                 )
                 {
                     var firstSpan = selectionSpanList.First();
@@ -143,10 +142,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                         isReversed = cursorPosition == firstSpan.End;
                     }
 
-                    _textView.Selection.Select(
-                        new SnapshotSpan(boxSelectionStart, boxSelectionEnd),
-                        isReversed: isReversed
-                    );
+                    _textView.Selection
+                        .Select(
+                            new SnapshotSpan(boxSelectionStart, boxSelectionEnd),
+                            isReversed: isReversed
+                        );
                 }
             }
 
@@ -175,10 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 
         #region MEF
         public Lazy<TExport, TMetadata> GetExport<TExport, TMetadata>() =>
-            (Lazy<TExport, TMetadata>)(object)Workspace.ExportProvider.GetExport<
-                TExport,
-                TMetadata
-            >();
+            (Lazy<TExport, TMetadata>)(object)Workspace.ExportProvider
+                .GetExport<TExport, TMetadata>();
 
         public IEnumerable<Lazy<TExport, TMetadata>> GetExports<TExport, TMetadata>() =>
             Workspace.ExportProvider.GetExports<TExport, TMetadata>();
@@ -263,8 +261,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         /// </summary>
         public void AssertNoAsynchronousOperationsRunning()
         {
-            var provider =
-                Workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var provider = Workspace.ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             Assert.False(
                 provider.HasPendingWaiter(
                     FeatureAttribute.EventHookup,
@@ -278,8 +276,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         // This one is not used by the completion but used by SignatureHelp.
         public async Task WaitForAsynchronousOperationsAsync()
         {
-            var provider =
-                Workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var provider = Workspace.ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             await provider.WaitAllDispatcherOperationAndTasksAsync(
                 Workspace,
                 FeatureAttribute.EventHookup,

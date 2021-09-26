@@ -143,29 +143,28 @@ namespace System.Net.WebSockets.Client.Tests
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "sendBufferSize",
                 () =>
-                    cws.Options.SetBuffer(
-                        minReceiveBufferSize,
-                        0,
-                        new ArraySegment<byte>(new byte[1])
-                    )
+                    cws.Options
+                        .SetBuffer(minReceiveBufferSize, 0, new ArraySegment<byte>(new byte[1]))
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "buffer.Array",
                 () =>
-                    cws.Options.SetBuffer(
-                        minReceiveBufferSize,
-                        minSendBufferSize,
-                        default(ArraySegment<byte>)
-                    )
+                    cws.Options
+                        .SetBuffer(
+                            minReceiveBufferSize,
+                            minSendBufferSize,
+                            default(ArraySegment<byte>)
+                        )
             );
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 bufferName,
                 () =>
-                    cws.Options.SetBuffer(
-                        minReceiveBufferSize,
-                        minSendBufferSize,
-                        new ArraySegment<byte>(new byte[0])
-                    )
+                    cws.Options
+                        .SetBuffer(
+                            minReceiveBufferSize,
+                            minSendBufferSize,
+                            new ArraySegment<byte>(new byte[0])
+                        )
             );
         }
 
@@ -276,8 +275,8 @@ namespace System.Net.WebSockets.Client.Tests
             }
 
             using (
-                X509Certificate2 clientCert =
-                    Test.Common.Configuration.Certificates.GetClientCertificate()
+                X509Certificate2 clientCert = Test.Common.Configuration.Certificates
+                    .GetClientCertificate()
             )
             {
                 await LoopbackServer.CreateClientAndServerAsync(

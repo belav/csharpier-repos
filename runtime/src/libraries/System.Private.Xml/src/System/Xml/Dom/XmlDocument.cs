@@ -1192,9 +1192,8 @@ namespace System.Xml
             for (int iAttr = 0; iAttr < cAttr; iAttr++)
             {
                 if (fromElem.Attributes[iAttr].Specified)
-                    toElem.Attributes!.SetNamedItem(
-                        ImportNodeInternal(fromElem.Attributes[iAttr], true)
-                    );
+                    toElem.Attributes!
+                        .SetNamedItem(ImportNodeInternal(fromElem.Attributes[iAttr], true));
             }
         }
 

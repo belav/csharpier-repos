@@ -50,8 +50,7 @@ namespace System.Text.Json.Tests
                 new JsonSerializerOptions { WriteIndented = true }
             );
 
-            Assert.Equal(
-                @"{
+            Assert.Equal(@"{
   ""Id"": ""00000001-0002-0003-0405-060708090a0b"",
   ""Year"": 2010,
   ""Company"": ""Company!"",
@@ -64,9 +63,7 @@ namespace System.Text.Json.Tests
     ""Last"": 2147483647
   },
   ""NullDecimalRange"": null
-}".NormalizeLineEndings(),
-                json
-            );
+}".NormalizeLineEndings(), json);
         }
 
         [Fact]
@@ -130,13 +127,10 @@ namespace System.Text.Json.Tests
                 new JsonSerializerOptions { WriteIndented = true }
             );
 
-            Assert.Equal(
-                @"{
+            Assert.Equal(@"{
   ""ByteArray"": ""VGhpcyBpcyBzb21lIHRlc3QgZGF0YSEhIQ=="",
   ""NullByteArray"": null
-}".NormalizeLineEndings(),
-                json
-            );
+}".NormalizeLineEndings(), json);
         }
 
         [Fact]
@@ -154,9 +148,8 @@ namespace System.Text.Json.Tests
             Assert.Null(byteArrayClass.NullByteArray);
         }
 
-        private static readonly byte[] s_testData = Encoding.UTF8.GetBytes(
-            "This is some test data!!!"
-        );
+        private static readonly byte[] s_testData = Encoding.UTF8
+            .GetBytes("This is some test data!!!");
 
         [Fact]
         public void AssertShouldSerializeTest()

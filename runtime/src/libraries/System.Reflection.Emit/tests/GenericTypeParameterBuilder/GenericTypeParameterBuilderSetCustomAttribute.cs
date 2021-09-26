@@ -38,9 +38,8 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             string[] typeParamNames = new string[] { "TFirst" };
             GenericTypeParameterBuilder[] typeParams = type.DefineGenericParameters(typeParamNames);
-            ConstructorInfo attributeConstructor = typeof(HelperAttribute).GetConstructor(
-                new Type[0]
-            );
+            ConstructorInfo attributeConstructor = typeof(HelperAttribute)
+                .GetConstructor(new Type[0]);
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "binaryAttribute",
@@ -54,9 +53,8 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             string[] typeParamNames = new string[] { "TFirst" };
             GenericTypeParameterBuilder[] typeParams = type.DefineGenericParameters(typeParamNames);
-            ConstructorInfo constructorinfo = typeof(HelperAttribute).GetConstructor(
-                new Type[] { typeof(string) }
-            );
+            ConstructorInfo constructorinfo = typeof(HelperAttribute)
+                .GetConstructor(new Type[] { typeof(string) });
             CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(
                 constructorinfo,
                 new object[] { "TestString" }

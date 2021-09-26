@@ -57,15 +57,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
                 IRemoteSemanticClassificationCacheService,
                 SerializableClassifiedSpans?
             >(
-                    (service, cancellationToken) =>
-                        service.GetCachedSemanticClassificationsAsync(
-                            documentKey,
-                            textSpan,
-                            checksum,
-                            cancellationToken
-                        ),
-                    cancellationToken
-                )
+                (service, cancellationToken) =>
+                    service.GetCachedSemanticClassificationsAsync(
+                        documentKey,
+                        textSpan,
+                        checksum,
+                        cancellationToken
+                    ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (!classifiedSpans.HasValue || classifiedSpans.Value == null)

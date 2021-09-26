@@ -1338,10 +1338,8 @@ _____'propertyName': NaN,
             if (!enumType.IsEnum())
             {
                 throw new ArgumentException(
-                    "Type {0} is not an enum.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        enumType.Name
-                    ),
+                    "Type {0} is not an enum."
+                        .FormatWith(CultureInfo.InvariantCulture, enumType.Name),
                     nameof(enumType)
                 );
             }
@@ -1598,13 +1596,8 @@ _____'propertyName': NaN,
                 if (newText != oldText)
                 {
                     throw new Exception(
-                        "Difference for char '{0}' (value {1}). Old text: {2}, New text: {3}".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            c,
-                            (int)c,
-                            oldText,
-                            newText
-                        )
+                        "Difference for char '{0}' (value {1}). Old text: {2}, New text: {3}"
+                            .FormatWith(CultureInfo.InvariantCulture, c, (int)c, oldText, newText)
                     );
                 }
 

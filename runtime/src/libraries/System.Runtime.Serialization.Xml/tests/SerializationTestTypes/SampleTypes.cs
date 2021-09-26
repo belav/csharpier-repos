@@ -432,10 +432,11 @@ namespace SerializationTestTypes
         public DCHashtableContainerPublic(bool init)
         {
             this.List.Add(new Guid("2838c886-08d4-4cb4-9995-45f79b4359fe"), new PublicDC());
-            this.List.Add(
-                new Guid("881d2d4c-1342-48ee-8403-7ca8ca5b3d18"),
-                new PublicDCClassPublicDM(true)
-            );
+            this.List
+                .Add(
+                    new Guid("881d2d4c-1342-48ee-8403-7ca8ca5b3d18"),
+                    new PublicDCClassPublicDM(true)
+                );
             this.List.Add(int.MaxValue, int.MinValue);
             this.List.Add("null", null);
             this.List.Add(DateTime.MinValue, DateTime.MaxValue);
@@ -470,55 +471,61 @@ namespace SerializationTestTypes
         public DCHashtableContainerMixedTypes(bool init)
         {
             this.List.Add(new Guid("00000000-0000-0000-0000-000000000000"), new PublicDC());
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000001"),
-                new PublicDCClassPublicDM(true)
-            );
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000002"),
-                new PublicDCClassPrivateDM_DerivedDCClassPublic()
-            );
+            this.List
+                .Add(
+                    new Guid("00000000-0000-0000-0000-000000000001"),
+                    new PublicDCClassPublicDM(true)
+                );
+            this.List
+                .Add(
+                    new Guid("00000000-0000-0000-0000-000000000002"),
+                    new PublicDCClassPrivateDM_DerivedDCClassPublic()
+                );
 
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000003"),
-                new PrivateDCClassPublicDM_DerivedDCClassPrivate()
-            );
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000004"),
-                new PrivateDCClassPrivateDM(true)
-            );
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000005"),
-                new PrivateCallBackSample_IDeserializationCallback()
-            );
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000006"),
-                new PrivateCallBackSample_OnDeserialized()
-            );
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000007"),
-                new PrivateCallBackSample_OnSerialized()
-            );
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000008"),
-                new PrivateDCStruct(true)
-            );
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000009"),
-                new PrivateDefaultCtorIXmlSerializables(true)
-            );
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000010"),
-                new PrivateIXmlSerializables()
-            );
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000011"),
-                new Derived_Override_Prop_GetPrivate_Private(true)
-            );
-            this.List.Add(
-                new Guid("00000000-0000-0000-0000-000000000012"),
-                new DerivedFromPriC(100)
-            );
+            this.List
+                .Add(
+                    new Guid("00000000-0000-0000-0000-000000000003"),
+                    new PrivateDCClassPublicDM_DerivedDCClassPrivate()
+                );
+            this.List
+                .Add(
+                    new Guid("00000000-0000-0000-0000-000000000004"),
+                    new PrivateDCClassPrivateDM(true)
+                );
+            this.List
+                .Add(
+                    new Guid("00000000-0000-0000-0000-000000000005"),
+                    new PrivateCallBackSample_IDeserializationCallback()
+                );
+            this.List
+                .Add(
+                    new Guid("00000000-0000-0000-0000-000000000006"),
+                    new PrivateCallBackSample_OnDeserialized()
+                );
+            this.List
+                .Add(
+                    new Guid("00000000-0000-0000-0000-000000000007"),
+                    new PrivateCallBackSample_OnSerialized()
+                );
+            this.List
+                .Add(new Guid("00000000-0000-0000-0000-000000000008"), new PrivateDCStruct(true));
+            this.List
+                .Add(
+                    new Guid("00000000-0000-0000-0000-000000000009"),
+                    new PrivateDefaultCtorIXmlSerializables(true)
+                );
+            this.List
+                .Add(
+                    new Guid("00000000-0000-0000-0000-000000000010"),
+                    new PrivateIXmlSerializables()
+                );
+            this.List
+                .Add(
+                    new Guid("00000000-0000-0000-0000-000000000011"),
+                    new Derived_Override_Prop_GetPrivate_Private(true)
+                );
+            this.List
+                .Add(new Guid("00000000-0000-0000-0000-000000000012"), new DerivedFromPriC(100));
 
             this.List.Add(string.Empty, string.Empty);
             this.List.Add("null", null);

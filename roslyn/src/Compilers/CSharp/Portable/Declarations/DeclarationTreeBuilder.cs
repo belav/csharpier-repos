@@ -194,9 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             ? SingleTypeDeclaration.TypeDeclarationFlags.HasReturnWithExpression
                             : SingleTypeDeclaration.TypeDeclarationFlags.None
                     ),
-                syntaxReference: firstGlobalStatement.SyntaxTree.GetReference(
-                    firstGlobalStatement.Parent
-                ),
+                syntaxReference: firstGlobalStatement.SyntaxTree
+                    .GetReference(firstGlobalStatement.Parent),
                 nameLocation: new SourceLocation(firstGlobalStatement.GetFirstToken()),
                 memberNames: ImmutableHashSet<string>.Empty,
                 children: ImmutableArray<SingleTypeDeclaration>.Empty,
@@ -761,9 +760,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (member.Kind)
             {
                 case SyntaxKind.CompilationUnit:
-                    return (
-                        ((Syntax.InternalSyntax.CompilationUnitSyntax)member).AttributeLists
-                    ).Any();
+                    return (((Syntax.InternalSyntax.CompilationUnitSyntax)member).AttributeLists)
+                        .Any();
 
                 case SyntaxKind.ClassDeclaration:
                 case SyntaxKind.StructDeclaration:
@@ -772,18 +770,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.RecordDeclaration:
                     return (
                         ((Syntax.InternalSyntax.BaseTypeDeclarationSyntax)member).AttributeLists
-                    ).Any();
+                    )
+                        .Any();
 
                 case SyntaxKind.DelegateDeclaration:
                     return (
                         ((Syntax.InternalSyntax.DelegateDeclarationSyntax)member).AttributeLists
-                    ).Any();
+                    )
+                        .Any();
 
                 case SyntaxKind.FieldDeclaration:
                 case SyntaxKind.EventFieldDeclaration:
                     return (
                         ((Syntax.InternalSyntax.BaseFieldDeclarationSyntax)member).AttributeLists
-                    ).Any();
+                    )
+                        .Any();
 
                 case SyntaxKind.MethodDeclaration:
                 case SyntaxKind.OperatorDeclaration:
@@ -792,7 +793,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.DestructorDeclaration:
                     return (
                         ((Syntax.InternalSyntax.BaseMethodDeclarationSyntax)member).AttributeLists
-                    ).Any();
+                    )
+                        .Any();
 
                 case SyntaxKind.PropertyDeclaration:
                 case SyntaxKind.EventDeclaration:
@@ -885,9 +887,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.ConstructorDeclaration:
                     anyNonTypeMembers = true;
                     set.Add(
-                        ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member).Modifiers.Any(
-                            (int)SyntaxKind.StaticKeyword
-                        )
+                        ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member).Modifiers
+                        .Any((int)SyntaxKind.StaticKeyword)
                           ? WellKnownMemberNames.StaticConstructorName
                           : WellKnownMemberNames.InstanceConstructorName
                     );

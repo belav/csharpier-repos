@@ -67,10 +67,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
                 return false;
             }
 
-            return symbol.Name.EndsWith(
-                    ViewComponentTypes.ViewComponentSuffix,
-                    StringComparison.Ordinal
-                ) || AttributeIsDefined(symbol, _viewComponentAttribute);
+            return symbol.Name
+                    .EndsWith(ViewComponentTypes.ViewComponentSuffix, StringComparison.Ordinal)
+                || AttributeIsDefined(symbol, _viewComponentAttribute);
         }
 
         private static bool AttributeIsDefined(

@@ -96,11 +96,12 @@ namespace Microsoft.AspNetCore.Http.Extensions
                 length--;
             }
 
-            return string.Create(
-                length,
-                (scheme, hostText, pathBaseText, pathText, queryText, fragmentText),
-                InitializeAbsoluteUriStringSpanAction
-            );
+            return string
+                .Create(
+                    length,
+                    (scheme, hostText, pathBaseText, pathText, queryText, fragmentText),
+                    InitializeAbsoluteUriStringSpanAction
+                );
         }
 
         /// <summary>
@@ -248,7 +249,8 @@ namespace Microsoft.AspNetCore.Http.Extensions
                 + path.Length
                 + queryString.Length;
 
-            return new StringBuilder(length).Append(scheme)
+            return new StringBuilder(length)
+                .Append(scheme)
                 .Append(SchemeDelimiter)
                 .Append(host)
                 .Append(pathBase)

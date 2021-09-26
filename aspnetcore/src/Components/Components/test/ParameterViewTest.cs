@@ -106,19 +106,20 @@ namespace Microsoft.AspNetCore.Components
                     RenderTreeFrame.Attribute(1, "attribute 1", attribute1Value)
                 },
                 0
-            ).WithCascadingParameters(
-                new List<CascadingParameterState>
-                {
-                    new CascadingParameterState(
-                        "attribute 2",
-                        new TestCascadingValue(attribute2Value)
-                    ),
-                    new CascadingParameterState(
-                        "attribute 3",
-                        new TestCascadingValue(attribute3Value)
-                    ),
-                }
-            );
+            )
+                .WithCascadingParameters(
+                    new List<CascadingParameterState>
+                    {
+                        new CascadingParameterState(
+                            "attribute 2",
+                            new TestCascadingValue(attribute2Value)
+                        ),
+                        new CascadingParameterState(
+                            "attribute 3",
+                            new TestCascadingValue(attribute3Value)
+                        ),
+                    }
+                );
 
             // Assert
             Assert.Collection(
@@ -231,12 +232,13 @@ namespace Microsoft.AspNetCore.Components
                     RenderTreeFrame.Attribute(1, "some other entry", new object())
                 },
                 0
-            ).WithCascadingParameters(
-                new List<CascadingParameterState>
-                {
-                    new CascadingParameterState("another entry", new TestCascadingValue(null))
-                }
-            );
+            )
+                .WithCascadingParameters(
+                    new List<CascadingParameterState>
+                    {
+                        new CascadingParameterState("another entry", new TestCascadingValue(null))
+                    }
+                );
 
             // Act
             var result = parameters.GetValueOrDefault<DateTime>("nonexisting entry");
@@ -368,14 +370,24 @@ namespace Microsoft.AspNetCore.Components
                     RenderTreeFrame.Attribute(1, "unrelated value", new object())
                 },
                 0
-            ).WithCascadingParameters(
-                new List<CascadingParameterState>
-                {
-                    new CascadingParameterState("unrelated value 2", new TestCascadingValue(null)),
-                    new CascadingParameterState("my entry", new TestCascadingValue(myEntryValue)),
-                    new CascadingParameterState("unrelated value 3", new TestCascadingValue(null)),
-                }
-            );
+            )
+                .WithCascadingParameters(
+                    new List<CascadingParameterState>
+                    {
+                        new CascadingParameterState(
+                            "unrelated value 2",
+                            new TestCascadingValue(null)
+                        ),
+                        new CascadingParameterState(
+                            "my entry",
+                            new TestCascadingValue(myEntryValue)
+                        ),
+                        new CascadingParameterState(
+                            "unrelated value 3",
+                            new TestCascadingValue(null)
+                        ),
+                    }
+                );
 
             // Act
             var result = parameters.GetValueOrDefault<object>("my entry");

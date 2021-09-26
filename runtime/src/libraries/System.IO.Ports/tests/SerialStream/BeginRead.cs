@@ -209,13 +209,14 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com2.Open();
 
-                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(
-                    new byte[numRndBytesToRead],
-                    0,
-                    numRndBytesToRead,
-                    callbackHandler.Callback,
-                    null
-                );
+                IAsyncResult readAsyncResult = com1.BaseStream
+                    .BeginRead(
+                        new byte[numRndBytesToRead],
+                        0,
+                        numRndBytesToRead,
+                        callbackHandler.Callback,
+                        null
+                    );
                 callbackHandler.BeginReadAsyncResult = readAsyncResult;
 
                 Assert.Null(readAsyncResult.AsyncState);
@@ -273,13 +274,14 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com2.Open();
 
-                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(
-                    new byte[numRndBytesToRead],
-                    0,
-                    numRndBytesToRead,
-                    callbackHandler.Callback,
-                    null
-                );
+                IAsyncResult readAsyncResult = com1.BaseStream
+                    .BeginRead(
+                        new byte[numRndBytesToRead],
+                        0,
+                        numRndBytesToRead,
+                        callbackHandler.Callback,
+                        null
+                    );
                 callbackHandler.BeginReadAsyncResult = readAsyncResult;
 
                 Assert.Null(readAsyncResult.AsyncState);
@@ -334,13 +336,14 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com2.Open();
 
-                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(
-                    new byte[numRndBytesToRead],
-                    0,
-                    numRndBytesToRead,
-                    callbackHandler.Callback,
-                    this
-                );
+                IAsyncResult readAsyncResult = com1.BaseStream
+                    .BeginRead(
+                        new byte[numRndBytesToRead],
+                        0,
+                        numRndBytesToRead,
+                        callbackHandler.Callback,
+                        this
+                    );
                 callbackHandler.BeginReadAsyncResult = readAsyncResult;
                 Assert.Equal(this, readAsyncResult.AsyncState);
                 Assert.False(readAsyncResult.CompletedSynchronously);
@@ -466,13 +469,8 @@ namespace System.IO.Ports.Tests
 
             do
             {
-                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(
-                    rcvBuffer,
-                    offset,
-                    count,
-                    callbackHandler.Callback,
-                    this
-                );
+                IAsyncResult readAsyncResult = com1.BaseStream
+                    .BeginRead(rcvBuffer, offset, count, callbackHandler.Callback, this);
                 readAsyncResult.AsyncWaitHandle.WaitOne();
                 callbackHandler.BeginReadAsyncResult = readAsyncResult;
 

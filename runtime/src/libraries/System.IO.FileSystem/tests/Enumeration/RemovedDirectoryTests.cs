@@ -79,11 +79,12 @@ namespace System.IO.Tests.Enumeration
                 {
                     // Using a flag file to kill the directory in the middle of processing returned data
                     if (
-                        string.Equals(
-                            enumerator.Current,
-                            testFile.Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                enumerator.Current,
+                                testFile.Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         testSubdirectory.Delete();
@@ -116,11 +117,12 @@ namespace System.IO.Tests.Enumeration
                 {
                     // Using a flag file to replace the directory in the middle of processing returned data
                     if (
-                        string.Equals(
-                            enumerator.Current,
-                            testFile.Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                enumerator.Current,
+                                testFile.Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         testSubdirectory.Delete();

@@ -168,15 +168,16 @@ namespace System.Runtime.Serialization.Json
         {
             if (dataContract.IsReference)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(
-                            SR.JsonUnsupportedForIsReference,
-                            DataContract.GetClrTypeFullName(dataContract.UnderlyingType),
-                            dataContract.IsReference
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.JsonUnsupportedForIsReference,
+                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType),
+                                dataContract.IsReference
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -282,10 +283,8 @@ namespace System.Runtime.Serialization.Json
                     bool memberAccessFlag = classContract.RequiresMemberAccessForWrite(null);
                     try
                     {
-                        classContract.OnSerializing.Invoke(
-                            value,
-                            new object[] { context.GetStreamingContext() }
-                        );
+                        classContract.OnSerializing
+                            .Invoke(value, new object[] { context.GetStreamingContext() });
                     }
                     catch (SecurityException securityException)
                     {
@@ -325,10 +324,8 @@ namespace System.Runtime.Serialization.Json
                     bool memberAccessFlag = classContract.RequiresMemberAccessForWrite(null);
                     try
                     {
-                        classContract.OnSerialized.Invoke(
-                            value,
-                            new object[] { context.GetStreamingContext() }
-                        );
+                        classContract.OnSerialized
+                            .Invoke(value, new object[] { context.GetStreamingContext() });
                     }
                     catch (SecurityException securityException)
                     {
@@ -368,10 +365,8 @@ namespace System.Runtime.Serialization.Json
                     bool memberAccessFlag = classContract.RequiresMemberAccessForRead(null);
                     try
                     {
-                        classContract.OnDeserializing.Invoke(
-                            value,
-                            new object[] { context.GetStreamingContext() }
-                        );
+                        classContract.OnDeserializing
+                            .Invoke(value, new object[] { context.GetStreamingContext() });
                     }
                     catch (SecurityException securityException)
                     {
@@ -411,10 +406,8 @@ namespace System.Runtime.Serialization.Json
                     bool memberAccessFlag = classContract.RequiresMemberAccessForRead(null);
                     try
                     {
-                        classContract.OnDeserialized.Invoke(
-                            value,
-                            new object[] { context.GetStreamingContext() }
-                        );
+                        classContract.OnDeserialized
+                            .Invoke(value, new object[] { context.GetStreamingContext() });
                     }
                     catch (SecurityException securityException)
                     {
@@ -1119,9 +1112,8 @@ namespace System.Runtime.Serialization.Json
                     && (itemType.GetGenericTypeDefinition() == Globals.TypeOfKeyValue)
                 )
                 {
-                    itemType = Globals.TypeOfKeyValuePair.MakeGenericType(
-                        itemType.GenericTypeArguments
-                    );
+                    itemType = Globals.TypeOfKeyValuePair
+                        .MakeGenericType(itemType.GenericTypeArguments);
                 }
                 this.knownTypeList!.Add(itemType);
                 typeToCheck = itemType;

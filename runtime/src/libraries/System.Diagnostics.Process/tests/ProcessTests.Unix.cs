@@ -239,28 +239,23 @@ namespace System.Diagnostics.Tests
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.StartInfo.EnvironmentVariables["PATH"] = path;
             RemoteExecutor.Invoke(
-                    fileToOpen =>
-                    {
-                        using (
-                            var px = Process.Start(
-                                new ProcessStartInfo
-                                {
-                                    UseShellExecute = true,
-                                    FileName = fileToOpen
-                                }
-                            )
+                fileToOpen =>
+                {
+                    using (
+                        var px = Process.Start(
+                            new ProcessStartInfo { UseShellExecute = true, FileName = fileToOpen }
                         )
-                        {
-                            Assert.NotNull(px);
-                            px.WaitForExit();
-                            Assert.True(px.HasExited);
-                            Assert.Equal(42, px.ExitCode);
-                        }
-                    },
-                    filename,
-                    options
-                )
-                .Dispose();
+                    )
+                    {
+                        Assert.NotNull(px);
+                        px.WaitForExit();
+                        Assert.True(px.HasExited);
+                        Assert.Equal(42, px.ExitCode);
+                    }
+                },
+                filename,
+                options
+            ).Dispose();
         }
 
         [Fact]
@@ -337,39 +332,38 @@ namespace System.Diagnostics.Tests
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.StartInfo.EnvironmentVariables["PATH"] = path;
             RemoteExecutor.Invoke(
-                    (argVerb, argValid) =>
+                (argVerb, argValid) =>
+                {
+                    if (argVerb == "<null>")
                     {
-                        if (argVerb == "<null>")
-                        {
-                            argVerb = null;
-                        }
+                        argVerb = null;
+                    }
 
-                        var psi = new ProcessStartInfo
+                    var psi = new ProcessStartInfo
+                    {
+                        UseShellExecute = true,
+                        FileName = "/",
+                        Verb = argVerb
+                    };
+                    if (bool.Parse(argValid))
+                    {
+                        using (var px = Process.Start(psi))
                         {
-                            UseShellExecute = true,
-                            FileName = "/",
-                            Verb = argVerb
-                        };
-                        if (bool.Parse(argValid))
-                        {
-                            using (var px = Process.Start(psi))
-                            {
-                                Assert.NotNull(px);
-                                px.WaitForExit();
-                                Assert.True(px.HasExited);
-                                Assert.Equal(42, px.ExitCode);
-                            }
+                            Assert.NotNull(px);
+                            px.WaitForExit();
+                            Assert.True(px.HasExited);
+                            Assert.Equal(42, px.ExitCode);
                         }
-                        else
-                        {
-                            Assert.Throws<Win32Exception>(() => Process.Start(psi));
-                        }
-                    },
-                    verb ?? "<null>",
-                    isValid.ToString(),
-                    options
-                )
-                .Dispose();
+                    }
+                    else
+                    {
+                        Assert.Throws<Win32Exception>(() => Process.Start(psi));
+                    }
+                },
+                verb ?? "<null>",
+                isValid.ToString(),
+                options
+            ).Dispose();
         }
 
         [Fact]
@@ -1056,9 +1050,8 @@ namespace System.Diagnostics.Tests
                 );
                 using (createNonChildProcess)
                 {
-                    nonChildPid = int.Parse(
-                        createNonChildProcess.Process.StandardOutput.ReadToEnd()
-                    );
+                    nonChildPid = int
+                        .Parse(createNonChildProcess.Process.StandardOutput.ReadToEnd());
                 }
                 return Process.GetProcessById(nonChildPid);
             }
@@ -1077,10 +1070,8 @@ namespace System.Diagnostics.Tests
 
         private static object GetProcessWaitState(Process p)
         {
-            MethodInfo getWaitState = typeof(Process).GetMethod(
-                "GetWaitState",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            MethodInfo getWaitState = typeof(Process)
+                .GetMethod("GetWaitState", BindingFlags.NonPublic | BindingFlags.Instance);
             return getWaitState.Invoke(p, null);
         }
 

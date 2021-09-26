@@ -38,10 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         {
             var (symbols, properties) = GetConversionSymbolsAndProperties(context, conversion);
 
-            var targetTypeName = conversion.ReturnType.ToMinimalDisplayString(
-                semanticModel,
-                position
-            );
+            var targetTypeName = conversion.ReturnType
+                .ToMinimalDisplayString(semanticModel, position);
             context.AddItem(
                 SymbolCompletionItem.CreateWithSymbolId(
                     displayTextPrefix: "(",
@@ -139,11 +137,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 return null;
 
             return await SymbolCompletionItem.GetDescriptionForSymbolsAsync(
-                    item,
-                    document,
-                    ImmutableArray.Create(conversion),
-                    cancellationToken
-                )
+                item,
+                document,
+                ImmutableArray.Create(conversion),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -157,10 +155,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (item.Properties.ContainsKey(RehydrateName))
             {
                 var symbols = await SymbolCompletionItem.GetSymbolsAsync(
-                        item,
-                        document,
-                        cancellationToken
-                    )
+                    item,
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (
                     symbols.Length == 3
@@ -186,10 +184,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             {
                 // Otherwise, just go retrieve the conversion directly.
                 var symbols = await SymbolCompletionItem.GetSymbolsAsync(
-                        item,
-                        document,
-                        cancellationToken
-                    )
+                    item,
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return symbols.Length == 1 ? symbols.Single() : null;
             }

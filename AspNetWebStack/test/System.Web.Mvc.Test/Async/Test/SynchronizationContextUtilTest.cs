@@ -17,14 +17,13 @@ namespace System.Web.Mvc.Async.Test
             bool sendWasCalled = false;
 
             Mock<SynchronizationContext> mockSyncContext = new Mock<SynchronizationContext>();
-            mockSyncContext.Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null))
-                .Callback(
-                    delegate(SendOrPostCallback d, object state)
-                    {
-                        sendWasCalled = true;
-                        d(state);
-                    }
-                );
+            mockSyncContext.Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null)).Callback(
+                delegate(SendOrPostCallback d, object state)
+                {
+                    sendWasCalled = true;
+                    d(state);
+                }
+            );
 
             // Act
             SynchronizationContextUtil.Sync(
@@ -49,20 +48,19 @@ namespace System.Web.Mvc.Async.Test
             );
 
             Mock<SynchronizationContext> mockSyncContext = new Mock<SynchronizationContext>();
-            mockSyncContext.Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null))
-                .Callback(
-                    delegate(SendOrPostCallback d, object state)
+            mockSyncContext.Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null)).Callback(
+                delegate(SendOrPostCallback d, object state)
+                {
+                    try
                     {
-                        try
-                        {
-                            d(state);
-                        }
-                        catch
-                        {
-                            // swallow exceptions, just like AspNetSynchronizationContext
-                        }
+                        d(state);
                     }
-                );
+                    catch
+                    {
+                        // swallow exceptions, just like AspNetSynchronizationContext
+                    }
+                }
+            );
 
             // Act & assert
             SynchronousOperationException thrownException =
@@ -90,14 +88,13 @@ namespace System.Web.Mvc.Async.Test
             bool sendWasCalled = false;
 
             Mock<SynchronizationContext> mockSyncContext = new Mock<SynchronizationContext>();
-            mockSyncContext.Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null))
-                .Callback(
-                    delegate(SendOrPostCallback d, object state)
-                    {
-                        sendWasCalled = true;
-                        d(state);
-                    }
-                );
+            mockSyncContext.Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null)).Callback(
+                delegate(SendOrPostCallback d, object state)
+                {
+                    sendWasCalled = true;
+                    d(state);
+                }
+            );
 
             // Act
             int retVal = SynchronizationContextUtil.Sync(mockSyncContext.Object, () => 42);

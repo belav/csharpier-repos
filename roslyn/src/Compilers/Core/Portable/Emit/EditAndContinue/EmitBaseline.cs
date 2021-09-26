@@ -134,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 );
             }
 
-            var hasPortablePdb = module.Module.PEReaderOpt.ReadDebugDirectory()
+            var hasPortablePdb = module.Module.PEReaderOpt
+                .ReadDebugDirectory()
                 .Any(entry => entry.IsPortableCodeView);
 
             var localSigProvider = new Func<MethodDefinitionHandle, StandaloneSignatureHandle>(

@@ -150,10 +150,8 @@ namespace System.Web.Http.ModelBinding
                 Quantity = 1,
                 Customer = new ModelBindCustomer { Name = "Fred" }
             };
-            var formatter = new MediaTypeFormatterCollection().FindWriter(
-                typeof(ModelBindOrder),
-                new MediaTypeHeaderValue(mediaType)
-            );
+            var formatter = new MediaTypeFormatterCollection()
+                .FindWriter(typeof(ModelBindOrder), new MediaTypeHeaderValue(mediaType));
             HttpRequestMessage request = new HttpRequestMessage
             {
                 Content = new ObjectContent<ModelBindOrder>(expectedItem, formatter),
@@ -186,10 +184,8 @@ namespace System.Web.Http.ModelBinding
                 Quantity = 1,
                 Customer = new ModelBindCustomer { Name = "Fred" }
             };
-            var formatter = new MediaTypeFormatterCollection().FindWriter(
-                typeof(ModelBindOrder),
-                new MediaTypeHeaderValue(mediaType)
-            );
+            var formatter = new MediaTypeFormatterCollection()
+                .FindWriter(typeof(ModelBindOrder), new MediaTypeHeaderValue(mediaType));
             HttpRequestMessage request = new HttpRequestMessage
             {
                 Content = new ObjectContent<ModelBindOrder>(expectedItem, formatter),

@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Simplification
                 throw new ArgumentNullException(nameof(workspace));
             }
 
-            var result = workspace.Services.GetLanguageServices(node.Language)
+            var result = workspace.Services
+                .GetLanguageServices(node.Language)
                 .GetService<ISimplificationService>()
                 .Expand(
                     node,
@@ -178,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Simplification
                 throw new ArgumentNullException(nameof(workspace));
             }
 
-            return workspace.Services.GetLanguageServices(token.Language)
+            return workspace.Services
+                .GetLanguageServices(token.Language)
                 .GetService<ISimplificationService>()
                 .Expand(token, semanticModel, expandInsideNode, cancellationToken);
         }
@@ -225,11 +227,11 @@ namespace Microsoft.CodeAnalysis.Simplification
 
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             return await ReduceAsync(
-                    document,
-                    root.GetAnnotatedNodesAndTokens(annotation).Select(t => t.FullSpan),
-                    optionSet,
-                    cancellationToken
-                )
+                document,
+                root.GetAnnotatedNodesAndTokens(annotation).Select(t => t.FullSpan),
+                optionSet,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

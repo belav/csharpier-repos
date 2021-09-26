@@ -87,18 +87,20 @@ namespace MiddlewareAnaysisSample
                     if (context.Request.Path == "/")
                     {
                         context.Response.ContentType = "text/html";
-                        await context.Response.WriteAsync(
-                            "<html><body>Welcome to the sample<br><br>\r\n"
-                        );
-                        await context.Response.WriteAsync(
-                            "Click here to take a side branch: <a href=\"/map/foo\">Map</a><br>\r\n"
-                        );
-                        await context.Response.WriteAsync(
-                            "Click here to throw an exception: <a href=\"/throw\">Throw</a><br>\r\n"
-                        );
-                        await context.Response.WriteAsync(
-                            "Click here to for a 404: <a href=\"/404\">404</a><br>\r\n"
-                        );
+                        await context.Response
+                            .WriteAsync("<html><body>Welcome to the sample<br><br>\r\n");
+                        await context.Response
+                            .WriteAsync(
+                                "Click here to take a side branch: <a href=\"/map/foo\">Map</a><br>\r\n"
+                            );
+                        await context.Response
+                            .WriteAsync(
+                                "Click here to throw an exception: <a href=\"/throw\">Throw</a><br>\r\n"
+                            );
+                        await context.Response
+                            .WriteAsync(
+                                "Click here to for a 404: <a href=\"/404\">404</a><br>\r\n"
+                            );
                         await context.Response.WriteAsync("</body></html>\r\n");
                         return;
                     }
@@ -114,21 +116,17 @@ namespace MiddlewareAnaysisSample
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.ConfigureLogging(
-                                (_, factory) =>
-                                {
-                                    factory.AddConsole();
-                                    factory.AddFilter("Console", level => level >= LogLevel.Debug);
-                                }
-                            )
-                            .UseKestrel()
-                            .UseIISIntegration()
-                            .UseStartup<Startup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.ConfigureLogging(
+                        (_, factory) =>
+                        {
+                            factory.AddConsole();
+                            factory.AddFilter("Console", level => level >= LogLevel.Debug);
+                        }
+                    ).UseKestrel().UseIISIntegration().UseStartup<Startup>();
+                }
+            ).Build();
 
             return host.RunAsync();
         }

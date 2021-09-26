@@ -32,19 +32,18 @@ namespace Wasm.Authentication.Server
             );
 
             services.AddDefaultIdentity<ApplicationUser>(
-                    options => options.SignIn.RequireConfirmedAccount = true
-                )
+                options => options.SignIn.RequireConfirmedAccount = true
+            )
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(
-                    options =>
-                    {
-                        options.IdentityResources["openid"].UserClaims.Add("role");
-                        options.ApiResources.Single().UserClaims.Add("role");
-                    }
-                );
+            services.AddIdentityServer().AddApiAuthorization<ApplicationUser, ApplicationDbContext>(
+                options =>
+                {
+                    options.IdentityResources["openid"].UserClaims.Add("role");
+                    options.ApiResources.Single().UserClaims.Add("role");
+                }
+            );
 
             // Need to do this as it maps "role" to ClaimTypes.Role and causes issues
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");

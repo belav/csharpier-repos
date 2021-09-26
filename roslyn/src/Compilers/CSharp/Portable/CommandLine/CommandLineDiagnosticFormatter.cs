@@ -35,23 +35,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (_displayEndLocations)
             {
-                return string.Format(
-                    formatter,
-                    "({0},{1},{2},{3})",
-                    span.Start.Line + 1,
-                    span.Start.Character + 1,
-                    span.End.Line + 1,
-                    span.End.Character + 1
-                );
+                return string
+                    .Format(
+                        formatter,
+                        "({0},{1},{2},{3})",
+                        span.Start.Line + 1,
+                        span.Start.Character + 1,
+                        span.End.Line + 1,
+                        span.End.Character + 1
+                    );
             }
             else
             {
-                return string.Format(
-                    formatter,
-                    "({0},{1})",
-                    span.Start.Line + 1,
-                    span.Start.Character + 1
-                );
+                return string
+                    .Format(formatter, "({0},{1})", span.Start.Line + 1, span.Start.Character + 1);
             }
         }
 

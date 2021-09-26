@@ -160,11 +160,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             catch (InvalidOperationException exception)
                 when (exception.InnerException != null
                     && exception.InnerException.InnerException == null
-                    && string.Equals(
-                        "Microsoft.GeneratedCode",
-                        exception.InnerException.Source,
-                        StringComparison.InvariantCulture
-                    )
+                    && string
+                        .Equals(
+                            "Microsoft.GeneratedCode",
+                            exception.InnerException.Source,
+                            StringComparison.InvariantCulture
+                        )
                 )
             {
                 // Know this was an XML parsing error because the inner Exception was thrown in the (generated)

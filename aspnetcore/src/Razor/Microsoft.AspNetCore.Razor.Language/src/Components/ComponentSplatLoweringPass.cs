@@ -50,9 +50,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         {
             var result = new SplatIntermediateNode() { Source = node.Source, };
 
-            result.Children.AddRange(
-                node.FindDescendantNodes<IntermediateToken>().Where(t => t.IsCSharp)
-            );
+            result.Children
+                .AddRange(node.FindDescendantNodes<IntermediateToken>().Where(t => t.IsCSharp));
             result.Diagnostics.AddRange(node.Diagnostics);
             return result;
         }

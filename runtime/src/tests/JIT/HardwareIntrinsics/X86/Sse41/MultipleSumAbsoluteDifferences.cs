@@ -244,7 +244,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             const byte imm8 = 3;
 
-            var result = typeof(Sse41).GetMethod(
+            var result = typeof(Sse41)
+                .GetMethod(
                     nameof(Sse41.MultipleSumAbsoluteDifferences),
                     new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>), typeof(Byte) }
                 )
@@ -271,7 +272,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             const byte imm8 = 4;
 
-            var result = typeof(Sse41).GetMethod(
+            var result = typeof(Sse41)
+                .GetMethod(
                     nameof(Sse41.MultipleSumAbsoluteDifferences),
                     new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>), typeof(Byte) }
                 )
@@ -298,7 +300,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             const byte imm8 = 5;
 
-            var result = typeof(Sse41).GetMethod(
+            var result = typeof(Sse41)
+                .GetMethod(
                     nameof(Sse41.MultipleSumAbsoluteDifferences),
                     new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>), typeof(Byte) }
                 )

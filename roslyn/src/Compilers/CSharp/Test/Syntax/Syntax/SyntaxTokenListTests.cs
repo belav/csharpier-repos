@@ -83,9 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             Assert.Throws<NotSupportedException>(
                 () =>
-                    default(SyntaxTokenList.Reversed.Enumerator).Equals(
-                        default(SyntaxTokenList.Reversed.Enumerator)
-                    )
+                    default(SyntaxTokenList.Reversed.Enumerator)
+                        .Equals(default(SyntaxTokenList.Reversed.Enumerator))
             );
         }
 

@@ -28,12 +28,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        CacheOptions.RecoverableTreeLengthThreshold,
-                        0
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(CacheOptions.RecoverableTreeLengthThreshold, 0)
                     )
-                )
             );
             return workspace;
         }
@@ -45,14 +44,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var id = ProjectId.CreateNewId();
             return solution.AddProject(
-                    ProjectInfo.Create(
-                        id,
-                        VersionStamp.Default,
-                        name: "TestProject",
-                        assemblyName: "TestProject",
-                        language: languageName
-                    )
+                ProjectInfo.Create(
+                    id,
+                    VersionStamp.Default,
+                    name: "TestProject",
+                    assemblyName: "TestProject",
+                    language: languageName
                 )
+            )
                 .GetRequiredProject(id);
         }
 

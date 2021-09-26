@@ -107,10 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Cache simplified/translated replacement for each translated dag node. Since we always visit
             // a node's successors before the node, the replacement should always be in the cache when we need it.
-            var replacement = PooledDictionary<
-                BoundDecisionDagNode,
-                BoundDecisionDagNode
-            >.GetInstance();
+            var replacement = PooledDictionary<BoundDecisionDagNode, BoundDecisionDagNode>
+                .GetInstance();
 
             Func<BoundDecisionDagNode, BoundDecisionDagNode> getReplacementForChild = n =>
                 replacement[n];

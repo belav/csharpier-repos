@@ -300,9 +300,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (data.HasNames)
             {
                 var binder = new LocalScopeBinder(this);
-                bool allowShadowingNames = binder.Compilation.IsFeatureEnabled(
-                    MessageID.IDS_FeatureNameShadowingInNestedFunctions
-                );
+                bool allowShadowingNames = binder.Compilation
+                    .IsFeatureEnabled(MessageID.IDS_FeatureNameShadowingInNestedFunctions);
                 var pNames = PooledHashSet<string>.GetInstance();
                 bool seenDiscard = false;
 
@@ -320,11 +319,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (seenDiscard)
                         {
                             // We only report the diagnostic on the second and subsequent underscores
-                            MessageID.IDS_FeatureLambdaDiscardParameters.CheckFeatureAvailability(
-                                diagnostics,
-                                binder.Compilation,
-                                lambda.ParameterLocation(i)
-                            );
+                            MessageID.IDS_FeatureLambdaDiscardParameters
+                                .CheckFeatureAvailability(
+                                    diagnostics,
+                                    binder.Compilation,
+                                    lambda.ParameterLocation(i)
+                                );
                         }
 
                         seenDiscard = true;

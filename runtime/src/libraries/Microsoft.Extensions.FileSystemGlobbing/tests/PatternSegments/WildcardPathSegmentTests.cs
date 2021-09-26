@@ -39,11 +39,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             var wildcardPathSegment = (WildcardPathSegment)segment;
             Assert.True(
                 wildcardPathSegment.Match(testSample),
-                string.Format(
-                    "[TestSample: {0}] [Wildcard: {1}]",
-                    testSample,
-                    Serialize(wildcardPathSegment)
-                )
+                string
+                    .Format(
+                        "[TestSample: {0}] [Wildcard: {1}]",
+                        testSample,
+                        Serialize(wildcardPathSegment)
+                    )
             );
         }
 
@@ -54,11 +55,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             var wildcardPathSegment = (WildcardPathSegment)segment;
             Assert.False(
                 wildcardPathSegment.Match(testSample),
-                string.Format(
-                    "[TestSample: {0}] [Wildcard: {1}]",
-                    testSample,
-                    Serialize(wildcardPathSegment)
-                )
+                string
+                    .Format(
+                        "[TestSample: {0}] [Wildcard: {1}]",
+                        testSample,
+                        Serialize(wildcardPathSegment)
+                    )
             );
         }
 
@@ -69,11 +71,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             var wildcardPathSegment = (WildcardPathSegment)segment;
             Assert.True(
                 wildcardPathSegment.Match(testSample),
-                string.Format(
-                    "[TestSample: {0}] [Wildcard: {1}]",
-                    testSample,
-                    Serialize(wildcardPathSegment)
-                )
+                string
+                    .Format(
+                        "[TestSample: {0}] [Wildcard: {1}]",
+                        testSample,
+                        Serialize(wildcardPathSegment)
+                    )
             );
         }
 
@@ -84,11 +87,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             var wildcardPathSegment = (WildcardPathSegment)segment;
             Assert.False(
                 wildcardPathSegment.Match(testSample),
-                string.Format(
-                    "[TestSample: {0}] [Wildcard: {1}]",
-                    testSample,
-                    Serialize(wildcardPathSegment)
-                )
+                string
+                    .Format(
+                        "[TestSample: {0}] [Wildcard: {1}]",
+                        testSample,
+                        Serialize(wildcardPathSegment)
+                    )
             );
         }
 
@@ -286,12 +290,13 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
 
         private static string Serialize(WildcardPathSegment segment)
         {
-            return string.Format(
-                "{0}:{1}:{2}",
-                segment.BeginsWith,
-                string.Join(",", segment.Contains.ToArray()),
-                segment.EndsWith
-            );
+            return string
+                .Format(
+                    "{0}:{1}:{2}",
+                    segment.BeginsWith,
+                    string.Join(",", segment.Contains.ToArray()),
+                    segment.EndsWith
+                );
         }
     }
 }

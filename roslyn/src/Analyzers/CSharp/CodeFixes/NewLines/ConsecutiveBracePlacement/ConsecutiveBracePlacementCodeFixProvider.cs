@@ -62,9 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
-            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>.GetInstance(
-                out var tokenToToken
-            );
+            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>
+                .GetInstance(out var tokenToToken);
 
             foreach (var diagnostic in diagnostics)
                 FixOne(root, text, tokenToToken, diagnostic, cancellationToken);

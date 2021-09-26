@@ -71,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             bindingContext.ModelName = "modelName";
 
             var metadataProvider = new TestModelMetadataProvider();
-            var parameter = typeof(ArrayModelBinderTest).GetMethod(
+            var parameter = typeof(ArrayModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithArrayParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -107,7 +108,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             bindingContext.ModelName = "modelName";
 
             var metadataProvider = new TestModelMetadataProvider();
-            var parameter = typeof(ArrayModelBinderTest).GetMethod(
+            var parameter = typeof(ArrayModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithArrayParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -161,9 +163,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty(
-                    typeof(ModelWithArrayProperty),
-                    nameof(ModelWithArrayProperty.ArrayProperty)
-                )
+                typeof(ModelWithArrayProperty),
+                nameof(ModelWithArrayProperty.ArrayProperty)
+            )
                 .BindingDetails(b => b.IsBindingRequired = isBindingRequired);
             bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithArrayProperty),
@@ -205,9 +207,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty(
-                    typeof(ModelWithIntArrayProperty),
-                    nameof(ModelWithIntArrayProperty.ArrayProperty)
-                )
+                typeof(ModelWithIntArrayProperty),
+                nameof(ModelWithIntArrayProperty.ArrayProperty)
+            )
                 .BindingDetails(bd => bd.IsReadOnly = false);
             bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithIntArrayProperty),

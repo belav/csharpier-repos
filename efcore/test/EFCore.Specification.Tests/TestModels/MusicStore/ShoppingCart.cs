@@ -24,9 +24,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore
         public async Task AddToCart(Album album)
         {
             // Get the matching cart and album instances
-            var cartItem = await _dbContext.CartItems.SingleOrDefaultAsync(
-                c => c.CartId == _shoppingCartId && c.AlbumId == album.AlbumId
-            );
+            var cartItem = await _dbContext.CartItems
+                .SingleOrDefaultAsync(
+                    c => c.CartId == _shoppingCartId && c.AlbumId == album.AlbumId
+                );
 
             if (cartItem == null)
             {
@@ -51,9 +52,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore
         public int RemoveFromCart(int id)
         {
             // Get the cart
-            var cartItem = _dbContext.CartItems.SingleOrDefault(
-                cart => cart.CartId == _shoppingCartId && cart.CartItemId == id
-            );
+            var cartItem = _dbContext.CartItems
+                .SingleOrDefault(cart => cart.CartId == _shoppingCartId && cart.CartItemId == id);
 
             int itemCount = 0;
 
@@ -75,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore
 
         public async Task EmptyCart()
         {
-            var cartItems = await _dbContext.CartItems.Where(cart => cart.CartId == _shoppingCartId)
+            var cartItems = await _dbContext.CartItems
+                .Where(cart => cart.CartId == _shoppingCartId)
                 .ToArrayAsync();
 
             _dbContext.CartItems.RemoveRange(cartItems);
@@ -83,14 +84,16 @@ namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore
 
         public Task<List<CartItem>> GetCartItems()
         {
-            return _dbContext.CartItems.Where(cart => cart.CartId == _shoppingCartId)
+            return _dbContext.CartItems
+                .Where(cart => cart.CartId == _shoppingCartId)
                 .Include(c => c.Album)
                 .ToListAsync();
         }
 
         public Task<List<string>> GetCartAlbumTitles()
         {
-            return _dbContext.CartItems.Where(cart => cart.CartId == _shoppingCartId)
+            return _dbContext.CartItems
+                .Where(cart => cart.CartId == _shoppingCartId)
                 .Select(c => c.Album.Title)
                 .OrderBy(n => n)
                 .ToListAsync();
@@ -99,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore
         public Task<int> GetCount()
         {
             // Get the count of each item in the cart and sum them up
-            return _dbContext.CartItems.Where(c => c.CartId == _shoppingCartId)
+            return _dbContext.CartItems
+                .Where(c => c.CartId == _shoppingCartId)
                 .Select(c => c.Count)
                 .SumAsync();
         }
@@ -112,10 +116,12 @@ namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore
 
             // No way to do decimal sum on server with SQLite, but client eval is fine here
             return (
-                await _dbContext.CartItems.Where(c => c.CartId == _shoppingCartId)
+                await _dbContext.CartItems
+                    .Where(c => c.CartId == _shoppingCartId)
                     .Select(c => c.Album.Price * c.Count)
                     .ToListAsync()
-            ).Sum();
+            )
+                .Sum();
         }
 
         public async Task CreateOrder(Order order)

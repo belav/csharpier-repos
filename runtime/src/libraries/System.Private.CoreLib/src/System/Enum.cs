@@ -227,9 +227,10 @@ namespace System
 
             Debug.Assert(foundItemsCount > 0);
             const int SeparatorStringLength = 2; // ", "
-            string result = string.FastAllocateString(
-                checked(resultLength + (SeparatorStringLength * (foundItemsCount - 1)))
-            );
+            string result = string
+                .FastAllocateString(
+                    checked(resultLength + (SeparatorStringLength * (foundItemsCount - 1)))
+                );
 
             Span<char> resultSpan = new Span<char>(ref result.GetRawStringData(), result.Length);
             string name = names[foundItems[--foundItemsCount]];

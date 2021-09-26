@@ -32,9 +32,8 @@ namespace Microsoft.Extensions.Configuration
             ""zipcode"": ""12345""
         }
 }";
-            var config = new ConfigurationBuilder().AddJsonStream(
-                    TestStreamHelpers.StringToStream(json)
-                )
+            var config = new ConfigurationBuilder()
+                .AddJsonStream(TestStreamHelpers.StringToStream(json))
                 .Build();
             Assert.Equal("test", config["firstname"]);
             Assert.Equal("last.name", config["test.last.name"]);
@@ -50,9 +49,8 @@ namespace Microsoft.Extensions.Configuration
 {
     ""firstname"": ""test""
 }";
-            var config = new ConfigurationBuilder().AddJsonStream(
-                    TestStreamHelpers.StringToStream(json)
-                )
+            var config = new ConfigurationBuilder()
+                .AddJsonStream(TestStreamHelpers.StringToStream(json))
                 .Build();
             Assert.Throws<InvalidOperationException>(() => config.Reload());
         }
@@ -218,10 +216,8 @@ namespace Microsoft.Extensions.Configuration
         [Fact]
         public void JsonConfiguration_Throws_On_Missing_Configuration_File()
         {
-            var config = new ConfigurationBuilder().AddJsonFile(
-                "NotExistingConfig.json",
-                optional: false
-            );
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("NotExistingConfig.json", optional: false);
             var exception = Assert.Throws<FileNotFoundException>(() => config.Build());
 
             // Assert
@@ -234,10 +230,8 @@ namespace Microsoft.Extensions.Configuration
         [Fact]
         public void JsonConfiguration_Does_Not_Throw_On_Optional_Configuration()
         {
-            var config = new ConfigurationBuilder().AddJsonFile(
-                    "NotExistingConfig.json",
-                    optional: true
-                )
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("NotExistingConfig.json", optional: true)
                 .Build();
         }
 

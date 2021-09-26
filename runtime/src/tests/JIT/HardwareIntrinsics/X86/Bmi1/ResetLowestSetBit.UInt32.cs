@@ -120,10 +120,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi1).GetMethod(
-                    nameof(Bmi1.ResetLowestSetBit),
-                    new Type[] { typeof(UInt32) }
-                )
+            var result = typeof(Bmi1)
+                .GetMethod(nameof(Bmi1.ResetLowestSetBit), new Type[] { typeof(UInt32) })
                 .Invoke(
                     null,
                     new object[]
@@ -223,9 +221,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi1)}.{nameof(Bmi1.ResetLowestSetBit)}<UInt32>(UInt32): ResetLowestSetBit failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi1)}.{nameof(Bmi1.ResetLowestSetBit)}<UInt32>(UInt32): ResetLowestSetBit failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

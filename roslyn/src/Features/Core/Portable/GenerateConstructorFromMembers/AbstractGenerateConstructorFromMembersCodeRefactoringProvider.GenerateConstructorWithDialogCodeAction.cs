@@ -75,9 +75,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                     return SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
                 }
 
-                var addNullChecksOption = result.Options.FirstOrDefault(
-                    o => o.Id == AddNullChecksId
-                );
+                var addNullChecksOption = result.Options
+                    .FirstOrDefault(o => o.Id == AddNullChecksId);
                 if (addNullChecksOption != null)
                 {
                     // If we presented the 'Add null check' option, then persist whatever value
@@ -88,13 +87,13 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 
                 var addNullChecks = (addNullChecksOption?.Value ?? false);
                 var state = await State.TryGenerateAsync(
-                        _service,
-                        _document,
-                        _textSpan,
-                        _containingType,
-                        result.Members,
-                        cancellationToken
-                    )
+                    _service,
+                    _document,
+                    _textSpan,
+                    _containingType,
+                    result.Members,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (state == null)
@@ -123,13 +122,12 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                         0
                     ];
                     var constructorSyntax = await constructorReference.GetSyntaxAsync(
-                            cancellationToken
-                        )
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     var constructorTree = constructorSyntax.SyntaxTree;
-                    var constructorDocument = _document.Project.Solution.GetRequiredDocument(
-                        constructorTree
-                    );
+                    var constructorDocument = _document.Project.Solution
+                        .GetRequiredDocument(constructorTree);
                     return ImmutableArray.Create<CodeActionOperation>(
                         new DocumentNavigationOperation(
                             constructorDocument.Id,
@@ -163,17 +161,19 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 CancellationToken cancellationToken
             )
             {
-                var solution = await base.GetChangedSolutionAsync(cancellationToken)
+                var solution = await base
+                    .GetChangedSolutionAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 if (_addNullCheckOptionValue.HasValue)
                 {
                     solution = solution?.WithOptions(
-                        solution.Options.WithChangedOption(
-                            GenerateConstructorFromMembersOptions.AddNullChecks,
-                            _document.Project.Language,
-                            _addNullCheckOptionValue.Value
-                        )
+                        solution.Options
+                            .WithChangedOption(
+                                GenerateConstructorFromMembersOptions.AddNullChecks,
+                                _document.Project.Language,
+                                _addNullCheckOptionValue.Value
+                            )
                     );
                 }
 

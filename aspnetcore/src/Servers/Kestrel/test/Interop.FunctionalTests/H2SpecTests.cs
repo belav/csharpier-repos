@@ -25,31 +25,27 @@ namespace Interop.FunctionalTests
         public async Task RunIndividualTestCase(H2SpecTestCase testCase)
         {
             var hostBuilder = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(
+                                IPAddress.Loopback,
+                                0,
+                                listenOptions =>
                                 {
-                                    options.Listen(
-                                        IPAddress.Loopback,
-                                        0,
-                                        listenOptions =>
-                                        {
-                                            listenOptions.Protocols = HttpProtocols.Http2;
-                                            if (testCase.Https)
-                                            {
-                                                listenOptions.UseHttps(
-                                                    TestResources.GetTestCertificate()
-                                                );
-                                            }
-                                        }
-                                    );
+                                    listenOptions.Protocols = HttpProtocols.Http2;
+                                    if (testCase.Https)
+                                    {
+                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                    }
                                 }
-                            )
-                            .Configure(ConfigureHelloWorld);
-                    }
-                )
-                .ConfigureServices(AddTestLogging);
+                            );
+                        }
+                    ).Configure(ConfigureHelloWorld);
+                }
+            ).ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {

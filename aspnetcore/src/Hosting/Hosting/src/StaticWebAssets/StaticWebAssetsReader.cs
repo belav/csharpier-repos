@@ -18,11 +18,12 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
         {
             var document = XDocument.Load(manifest);
             if (
-                !string.Equals(
-                    document.Root!.Name.LocalName,
-                    ManifestRootElementName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                !string
+                    .Equals(
+                        document.Root!.Name.LocalName,
+                        ManifestRootElementName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 throw new InvalidOperationException(
@@ -48,11 +49,12 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             foreach (var element in document.Root.Elements())
             {
                 if (
-                    !string.Equals(
-                        element.Name.LocalName,
-                        ContentRootElementName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    !string
+                        .Equals(
+                            element.Name.LocalName,
+                            ContentRootElementName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     throw new InvalidOperationException(

@@ -47,9 +47,8 @@ namespace Templates.Test
             get
             {
                 using (
-                    var stream = typeof(BaselineTest).Assembly.GetManifestResourceStream(
-                        "ProjectTemplates.Tests.template-baselines.json"
-                    )
+                    var stream = typeof(BaselineTest).Assembly
+                        .GetManifestResourceStream("ProjectTemplates.Tests.template-baselines.json")
                 )
                 {
                     using (var jsonReader = new JsonTextReader(new StreamReader(stream)))
@@ -62,7 +61,8 @@ namespace Templates.Test
                             {
                                 data.Add(
                                     (string)authOption.Value["Arguments"],
-                                    ((JArray)authOption.Value["Files"]).Select(s => (string)s)
+                                    ((JArray)authOption.Value["Files"])
+                                        .Select(s => (string)s)
                                         .ToArray()
                                 );
                             }
@@ -141,12 +141,12 @@ namespace Templates.Test
         private string SanitizeArgs(string arguments)
         {
             var text = TemplateNameRegex.Match(arguments)
-                .Groups.TryGetValue("template", out var template)
+            .Groups.TryGetValue("template", out var template)
                 ? template.Value
                 : "";
 
             text += AuthenticationOptionRegex.Match(arguments)
-                .Groups.TryGetValue("auth", out var auth)
+            .Groups.TryGetValue("auth", out var auth)
                 ? auth.Value
                 : "";
 

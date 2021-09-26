@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             // Components provide some built-in target extensions that don't apply to
             // legacy documents.
-            Extensions = new[] { new ComponentTemplateTargetExtension(), }.Concat(extensions)
+            Extensions = new[] { new ComponentTemplateTargetExtension(), }
+                .Concat(extensions)
                 .ToArray();
         }
 

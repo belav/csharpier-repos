@@ -44,12 +44,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         [Benchmark]
         public Task WriteAsync()
         {
-            return _http1Connection.ResponseBody.WriteAsync(
-                _writeData,
-                0,
-                _writeData.Length,
-                default
-            );
+            return _http1Connection.ResponseBody
+                .WriteAsync(_writeData, 0, _writeData.Length, default);
         }
 
         [Benchmark]
@@ -61,20 +57,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             for (int i = 0; i < 9; i++)
             {
                 // Ignore the first nine tasks.
-                _ = _http1Connection.ResponseBody.WriteAsync(
-                    _writeData,
-                    i * segmentSize,
-                    segmentSize,
-                    default
-                );
+                _ = _http1Connection.ResponseBody
+                    .WriteAsync(_writeData, i * segmentSize, segmentSize, default);
             }
 
-            return _http1Connection.ResponseBody.WriteAsync(
-                _writeData,
-                9 * segmentSize,
-                segmentSize,
-                default
-            );
+            return _http1Connection.ResponseBody
+                .WriteAsync(_writeData, 9 * segmentSize, segmentSize, default);
         }
 
         private TestHttp1Connection MakeHttp1Connection()

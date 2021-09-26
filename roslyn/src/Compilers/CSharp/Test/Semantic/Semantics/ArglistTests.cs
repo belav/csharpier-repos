@@ -148,33 +148,33 @@ public struct C
                 // (9,42): error CS7053: An expression tree may not contain '__reftype'
                 //         Expression<Func<Type>> ex2 = ()=>__reftype(default(TypedReference));
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotValidInExpressionTree,
-                        "__reftype(default(TypedReference))"
-                    )
+                    ErrorCode.ERR_FeatureNotValidInExpressionTree,
+                    "__reftype(default(TypedReference))"
+                )
                     .WithArguments("__reftype")
                     .WithLocation(9, 42),
                 // (9,52): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
                 //         Expression<Func<Type>> ex2 = ()=>__reftype(default(TypedReference));
                 Diagnostic(
-                        ErrorCode.ERR_ExpressionTreeCantContainRefStruct,
-                        "default(TypedReference)"
-                    )
+                    ErrorCode.ERR_ExpressionTreeCantContainRefStruct,
+                    "default(TypedReference)"
+                )
                     .WithArguments("TypedReference")
                     .WithLocation(9, 52),
                 // (10,41): error CS7053: An expression tree may not contain '__refvalue'
                 //         Expression<Func<int>> ex3 = ()=>__refvalue(default(TypedReference), int);
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotValidInExpressionTree,
-                        "__refvalue(default(TypedReference), int)"
-                    )
+                    ErrorCode.ERR_FeatureNotValidInExpressionTree,
+                    "__refvalue(default(TypedReference), int)"
+                )
                     .WithArguments("__refvalue")
                     .WithLocation(10, 41),
                 // (10,52): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
                 //         Expression<Func<int>> ex3 = ()=>__refvalue(default(TypedReference), int);
                 Diagnostic(
-                        ErrorCode.ERR_ExpressionTreeCantContainRefStruct,
-                        "default(TypedReference)"
-                    )
+                    ErrorCode.ERR_ExpressionTreeCantContainRefStruct,
+                    "default(TypedReference)"
+                )
                     .WithArguments("TypedReference")
                     .WithLocation(10, 52),
                 // (11,44): error CS1952: An expression tree lambda may not contain a method with variable arguments
@@ -649,9 +649,9 @@ public class MyAttribute : System.Attribute
                 // (38,29): error CS0828: Cannot assign System.TypedReference to anonymous type property
                 //         object obj3 = new { X = new System.TypedReference() };
                 Diagnostic(
-                        ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue,
-                        "X = new System.TypedReference()"
-                    )
+                    ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue,
+                    "X = new System.TypedReference()"
+                )
                     .WithArguments("System.TypedReference")
                     .WithLocation(38, 29)
             );
@@ -672,12 +672,11 @@ class error
 }
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (7,24): error CS1669: __arglist is not valid in this context
-                    // 		Action a = delegate (__arglist) { };
-                    Diagnostic(ErrorCode.ERR_IllegalVarArgs, "__arglist")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (7,24): error CS1669: __arglist is not valid in this context
+                // 		Action a = delegate (__arglist) { };
+                Diagnostic(ErrorCode.ERR_IllegalVarArgs, "__arglist")
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
@@ -1285,7 +1284,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var constructor = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("A")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(0, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(0, constructor.Parameters.Length);
@@ -1305,7 +1305,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var constructor = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("A")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(1, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(1, constructor.Parameters.Length);
@@ -1325,7 +1326,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var constructor = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("A")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(1, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(1, constructor.Parameters.Length);
@@ -1345,7 +1347,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var constructor = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("A")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(1, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(1, constructor.Parameters.Length);
@@ -1365,7 +1368,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var indexer = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("A")
                 .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(0, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(0, indexer.Parameters.Length);
@@ -1393,7 +1397,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var indexer = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("A")
                 .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(1, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(1, indexer.Parameters.Length);
@@ -1421,7 +1426,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var indexer = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("A")
                 .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(1, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(1, indexer.Parameters.Length);
@@ -1449,7 +1455,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var indexer = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("A")
                 .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(1, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(1, indexer.Parameters.Length);
@@ -1580,69 +1587,68 @@ class E
         D.M(null, null, __arglist());
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (26,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'A.A(object, __arglist)'
-                    //         new A(__arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "A")
-                        .WithArguments("__arglist", "A.A(object, __arglist)")
-                        .WithLocation(26, 13),
-                    // (28,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'A.M(object, __arglist)'
-                    //         A.M(__arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
-                        .WithArguments("__arglist", "A.M(object, __arglist)")
-                        .WithLocation(28, 11),
-                    // (31,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'B.B(object, __arglist)'
-                    //         new B(__arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "B")
-                        .WithArguments("__arglist", "B.B(object, __arglist)")
-                        .WithLocation(31, 13),
-                    // (33,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'B.M(object, __arglist)'
-                    //         B.M(__arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
-                        .WithArguments("__arglist", "B.M(object, __arglist)")
-                        .WithLocation(33, 11),
-                    // (36,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.C(object, object, __arglist)'
-                    //         new C(__arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C")
-                        .WithArguments("__arglist", "C.C(object, object, __arglist)")
-                        .WithLocation(36, 13),
-                    // (37,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.C(object, object, __arglist)'
-                    //         new C(null, __arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C")
-                        .WithArguments("__arglist", "C.C(object, object, __arglist)")
-                        .WithLocation(37, 13),
-                    // (39,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.M(object, object, __arglist)'
-                    //         C.M(__arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
-                        .WithArguments("__arglist", "C.M(object, object, __arglist)")
-                        .WithLocation(39, 11),
-                    // (40,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.M(object, object, __arglist)'
-                    //         C.M(null, __arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
-                        .WithArguments("__arglist", "C.M(object, object, __arglist)")
-                        .WithLocation(40, 11),
-                    // (43,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.D(object, object, __arglist)'
-                    //         new D(__arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "D")
-                        .WithArguments("__arglist", "D.D(object, object, __arglist)")
-                        .WithLocation(43, 13),
-                    // (44,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.D(object, object, __arglist)'
-                    //         new D(null, __arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "D")
-                        .WithArguments("__arglist", "D.D(object, object, __arglist)")
-                        .WithLocation(44, 13),
-                    // (46,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.M(object, object, __arglist)'
-                    //         D.M(__arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
-                        .WithArguments("__arglist", "D.M(object, object, __arglist)")
-                        .WithLocation(46, 11),
-                    // (47,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.M(object, object, __arglist)'
-                    //         D.M(null, __arglist());
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
-                        .WithArguments("__arglist", "D.M(object, object, __arglist)")
-                        .WithLocation(47, 11)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (26,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'A.A(object, __arglist)'
+                //         new A(__arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "A")
+                    .WithArguments("__arglist", "A.A(object, __arglist)")
+                    .WithLocation(26, 13),
+                // (28,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'A.M(object, __arglist)'
+                //         A.M(__arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                    .WithArguments("__arglist", "A.M(object, __arglist)")
+                    .WithLocation(28, 11),
+                // (31,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'B.B(object, __arglist)'
+                //         new B(__arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "B")
+                    .WithArguments("__arglist", "B.B(object, __arglist)")
+                    .WithLocation(31, 13),
+                // (33,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'B.M(object, __arglist)'
+                //         B.M(__arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                    .WithArguments("__arglist", "B.M(object, __arglist)")
+                    .WithLocation(33, 11),
+                // (36,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.C(object, object, __arglist)'
+                //         new C(__arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C")
+                    .WithArguments("__arglist", "C.C(object, object, __arglist)")
+                    .WithLocation(36, 13),
+                // (37,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.C(object, object, __arglist)'
+                //         new C(null, __arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C")
+                    .WithArguments("__arglist", "C.C(object, object, __arglist)")
+                    .WithLocation(37, 13),
+                // (39,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.M(object, object, __arglist)'
+                //         C.M(__arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                    .WithArguments("__arglist", "C.M(object, object, __arglist)")
+                    .WithLocation(39, 11),
+                // (40,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.M(object, object, __arglist)'
+                //         C.M(null, __arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                    .WithArguments("__arglist", "C.M(object, object, __arglist)")
+                    .WithLocation(40, 11),
+                // (43,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.D(object, object, __arglist)'
+                //         new D(__arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "D")
+                    .WithArguments("__arglist", "D.D(object, object, __arglist)")
+                    .WithLocation(43, 13),
+                // (44,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.D(object, object, __arglist)'
+                //         new D(null, __arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "D")
+                    .WithArguments("__arglist", "D.D(object, object, __arglist)")
+                    .WithLocation(44, 13),
+                // (46,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.M(object, object, __arglist)'
+                //         D.M(__arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                    .WithArguments("__arglist", "D.M(object, object, __arglist)")
+                    .WithLocation(46, 11),
+                // (47,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.M(object, object, __arglist)'
+                //         D.M(null, __arglist());
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                    .WithArguments("__arglist", "D.M(object, object, __arglist)")
+                    .WithLocation(47, 11)
+            );
         }
 
         [WorkItem(649808, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/649808")]
@@ -1701,17 +1707,16 @@ namespace ConsoleApplication21
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics(
-                    // (12,44): error CS7036: There is no argument given that corresponds to the required formal parameter 'context' of 'GooBar.AllocateNativeOverlapped(IOCompletionCallback, object, byte[])'
-                    //             NativeOverlapped* overlapped = AllocateNativeOverlapped(() => { });
-                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "AllocateNativeOverlapped")
-                        .WithArguments(
-                            "context",
-                            "ConsoleApplication21.GooBar.AllocateNativeOverlapped(System.Threading.IOCompletionCallback, object, byte[])"
-                        )
-                        .WithLocation(12, 44)
-                );
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
+                // (12,44): error CS7036: There is no argument given that corresponds to the required formal parameter 'context' of 'GooBar.AllocateNativeOverlapped(IOCompletionCallback, object, byte[])'
+                //             NativeOverlapped* overlapped = AllocateNativeOverlapped(() => { });
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "AllocateNativeOverlapped")
+                    .WithArguments(
+                        "context",
+                        "ConsoleApplication21.GooBar.AllocateNativeOverlapped(System.Threading.IOCompletionCallback, object, byte[])"
+                    )
+                    .WithLocation(12, 44)
+            );
         }
 
         [Fact, WorkItem(8152, "https://github.com/dotnet/roslyn/issues/8152")]
@@ -1731,30 +1736,29 @@ public class SpecialCases
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics(
-                    // (8,17): error CS0111: Type 'SpecialCases' already defines a member called 'ArgListMethod' with the same parameter types
-                    //     public void ArgListMethod(__arglist)
-                    Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "ArgListMethod")
-                        .WithArguments("ArgListMethod", "SpecialCases")
-                        .WithLocation(8, 17),
-                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
-                    //         ArgListMethod(__arglist(""));
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "ArgListMethod")
-                        .WithArguments(
-                            "SpecialCases.ArgListMethod(__arglist)",
-                            "SpecialCases.ArgListMethod(__arglist)"
-                        )
-                        .WithLocation(6, 9),
-                    // (10,9): error CS0121: The call is ambiguous between the following methods or properties: 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
-                    //         ArgListMethod(__arglist(""));
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "ArgListMethod")
-                        .WithArguments(
-                            "SpecialCases.ArgListMethod(__arglist)",
-                            "SpecialCases.ArgListMethod(__arglist)"
-                        )
-                        .WithLocation(10, 9)
-                );
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
+                // (8,17): error CS0111: Type 'SpecialCases' already defines a member called 'ArgListMethod' with the same parameter types
+                //     public void ArgListMethod(__arglist)
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "ArgListMethod")
+                    .WithArguments("ArgListMethod", "SpecialCases")
+                    .WithLocation(8, 17),
+                // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
+                //         ArgListMethod(__arglist(""));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "ArgListMethod")
+                    .WithArguments(
+                        "SpecialCases.ArgListMethod(__arglist)",
+                        "SpecialCases.ArgListMethod(__arglist)"
+                    )
+                    .WithLocation(6, 9),
+                // (10,9): error CS0121: The call is ambiguous between the following methods or properties: 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
+                //         ArgListMethod(__arglist(""));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "ArgListMethod")
+                    .WithArguments(
+                        "SpecialCases.ArgListMethod(__arglist)",
+                        "SpecialCases.ArgListMethod(__arglist)"
+                    )
+                    .WithLocation(10, 9)
+            );
         }
 
         [ConditionalFact(
@@ -1764,7 +1768,7 @@ public class SpecialCases
         public void ArgListMayNotHaveAnOutArgument()
         {
             CreateCompilation(
-                    @"
+                @"
 class Program
 {
     static void Test(__arglist)
@@ -1774,19 +1778,18 @@ class Program
     }
 }
 "
-                )
-                .VerifyDiagnostics(
-                    // (7,25): error CS8378: __arglist cannot have an argument passed by 'in' or 'out'
-                    //     	Test(__arglist(out a));
-                    Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "a").WithLocation(7, 25)
-                );
+            ).VerifyDiagnostics(
+                // (7,25): error CS8378: __arglist cannot have an argument passed by 'in' or 'out'
+                //     	Test(__arglist(out a));
+                Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "a").WithLocation(7, 25)
+            );
         }
 
         [Fact]
         public void ArgListMayNotHaveAnInArgument()
         {
             CreateCompilation(
-                    @"
+                @"
 class Program
 {
     static void Test(__arglist)
@@ -1796,12 +1799,11 @@ class Program
     }
 }
 "
-                )
-                .VerifyDiagnostics(
-                    // (7,24): error CS8378: __arglist cannot have an argument passed by 'in' or 'out'
-                    //     	Test(__arglist(in a));
-                    Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "a").WithLocation(7, 24)
-                );
+            ).VerifyDiagnostics(
+                // (7,24): error CS8378: __arglist cannot have an argument passed by 'in' or 'out'
+                //     	Test(__arglist(in a));
+                Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "a").WithLocation(7, 24)
+            );
         }
 
         [ConditionalFact(

@@ -26,8 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 $"{Namespace}.{nameof(GetAttributes_OnMethodWithoutAttributesClass)}"
             );
             var method = (IMethodSymbol)testClass.GetMembers(
-                    nameof(GetAttributes_OnMethodWithoutAttributesClass.Method)
-                )
+                nameof(GetAttributes_OnMethodWithoutAttributesClass.Method)
+            )
                 .First();
 
             // Act
@@ -49,8 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 $"{Namespace}.{nameof(GetAttributes_WithoutMethodOverriding)}"
             );
             var method = (IMethodSymbol)testClass.GetMembers(
-                    nameof(GetAttributes_WithoutMethodOverriding.Method)
-                )
+                nameof(GetAttributes_WithoutMethodOverriding.Method)
+            )
                 .First();
 
             // Act
@@ -75,10 +75,10 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 $"{Namespace}.{nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass)}"
             );
             var method = (IMethodSymbol)testClass.GetMembers(
-                    nameof(
-                        GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method
-                    )
+                nameof(
+                    GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method
                 )
+            )
                 .First();
 
             // Act
@@ -107,10 +107,10 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 $"{Namespace}.{nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass)}"
             );
             var method = (IMethodSymbol)testClass.GetMembers(
-                    nameof(
-                        GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method
-                    )
+                nameof(
+                    GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method
                 )
+            )
                 .First();
 
             // Act
@@ -138,10 +138,10 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 $"{Namespace}.{nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass)}"
             );
             var method = (IMethodSymbol)testClass.GetMembers(
-                    nameof(
-                        GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method
-                    )
+                nameof(
+                    GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method
                 )
+            )
                 .First();
 
             // Act
@@ -168,8 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 $"{Namespace}.{nameof(GetAttributes_WithNewMethodDerived)}"
             );
             var method = (IMethodSymbol)testClass.GetMembers(
-                    nameof(GetAttributes_WithNewMethodDerived.VirtualMethod)
-                )
+                nameof(GetAttributes_WithNewMethodDerived.VirtualMethod)
+            )
                 .First();
 
             // Act
@@ -194,8 +194,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 $"{Namespace}.{nameof(GetAttributes_WithNewMethodDerived)}"
             );
             var method = (IMethodSymbol)testClass.GetMembers(
-                    nameof(GetAttributes_WithNewMethodDerived.NotVirtualMethod)
-                )
+                nameof(GetAttributes_WithNewMethodDerived.NotVirtualMethod)
+            )
                 .First();
 
             // Act

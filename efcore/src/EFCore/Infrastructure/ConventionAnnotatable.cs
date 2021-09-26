@@ -44,10 +44,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             object? value,
             ConfigurationSource configurationSource
         ) =>
-            (ConventionAnnotation)base.AddAnnotation(
-                name,
-                CreateAnnotation(name, value, configurationSource)
-            );
+            (ConventionAnnotation)base
+                .AddAnnotation(name, CreateAnnotation(name, value, configurationSource));
 
         /// <summary>
         ///     Sets the annotation stored under the given key. Overwrites the existing annotation if an
@@ -85,11 +83,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 );
             }
 
-            return (ConventionAnnotation?)base.SetAnnotation(
-                name,
-                CreateAnnotation(name, value, configurationSource),
-                oldAnnotation
-            );
+            return (ConventionAnnotation?)base
+                .SetAnnotation(
+                    name,
+                    CreateAnnotation(name, value, configurationSource),
+                    oldAnnotation
+                );
         }
 
         /// <summary>

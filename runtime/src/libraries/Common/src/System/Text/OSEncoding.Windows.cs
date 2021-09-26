@@ -335,16 +335,17 @@ namespace System.Text
             int byteCount
         )
         {
-            int result = Interop.Kernel32.WideCharToMultiByte(
-                (uint)codePage,
-                0,
-                pChars,
-                count,
-                pBytes,
-                byteCount,
-                IntPtr.Zero,
-                IntPtr.Zero
-            );
+            int result = Interop.Kernel32
+                .WideCharToMultiByte(
+                    (uint)codePage,
+                    0,
+                    pChars,
+                    count,
+                    pBytes,
+                    byteCount,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
             if (result <= 0)
                 throw new ArgumentException(SR.Argument_InvalidCharSequenceNoIndex);
             return result;
@@ -358,14 +359,8 @@ namespace System.Text
             int count
         )
         {
-            int result = Interop.Kernel32.MultiByteToWideChar(
-                (uint)codePage,
-                0,
-                pBytes,
-                byteCount,
-                pChars,
-                count
-            );
+            int result = Interop.Kernel32
+                .MultiByteToWideChar((uint)codePage, 0, pBytes, byteCount, pChars, count);
             if (result <= 0)
                 throw new ArgumentException(SR.Argument_InvalidCharSequenceNoIndex);
             return result;

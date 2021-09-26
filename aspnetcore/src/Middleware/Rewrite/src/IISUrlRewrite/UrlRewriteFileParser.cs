@@ -337,12 +337,13 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
                 case ActionType.CustomResponse:
                     int statusCode;
                     if (
-                        !int.TryParse(
-                            urlAction.Attribute(RewriteTags.StatusCode)?.Value,
-                            NumberStyles.None,
-                            CultureInfo.InvariantCulture,
-                            out statusCode
-                        )
+                        !int
+                            .TryParse(
+                                urlAction.Attribute(RewriteTags.StatusCode)?.Value,
+                                NumberStyles.None,
+                                CultureInfo.InvariantCulture,
+                                out statusCode
+                            )
                     )
                     {
                         throw new InvalidUrlRewriteFormatException(

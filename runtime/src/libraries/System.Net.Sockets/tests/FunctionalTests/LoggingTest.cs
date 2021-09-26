@@ -22,11 +22,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(Socket).Assembly.GetType(
-                "System.Net.NetEventSource",
-                throwOnError: true,
-                ignoreCase: false
-            );
+            Type esType = typeof(Socket).Assembly
+                .GetType("System.Net.NetEventSource", throwOnError: true, ignoreCase: false);
             Assert.NotNull(esType);
 
             Assert.Equal(
@@ -46,80 +43,65 @@ namespace System.Net.Sockets.Tests
         public void EventSource_EventsRaisedAsExpected()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        using (
-                            var listener = new TestEventListener(
-                                "Private.InternalDiagnostics.System.Net.Sockets",
-                                EventLevel.Verbose
-                            )
+                () =>
+                {
+                    using (
+                        var listener = new TestEventListener(
+                            "Private.InternalDiagnostics.System.Net.Sockets",
+                            EventLevel.Verbose
                         )
-                        {
-                            var events = new ConcurrentQueue<EventWrittenEventArgs>();
-                            listener.RunWithCallback(
-                                events.Enqueue,
-                                () =>
-                                {
-                                    // Invoke several tests to execute code paths while tracing is enabled
+                    )
+                    {
+                        var events = new ConcurrentQueue<EventWrittenEventArgs>();
+                        listener.RunWithCallback(
+                            events.Enqueue,
+                            () =>
+                            {
+                                // Invoke several tests to execute code paths while tracing is enabled
 
-                                    new SendReceive_Sync(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            false
-                                        )
-                                        .GetAwaiter();
-                                    new SendReceive_Sync(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            true
-                                        )
-                                        .GetAwaiter();
+                                new SendReceive_Sync(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .GetAwaiter();
+                                new SendReceive_Sync(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .GetAwaiter();
 
-                                    new SendReceive_Task(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            false
-                                        )
-                                        .GetAwaiter();
-                                    new SendReceive_Task(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            true
-                                        )
-                                        .GetAwaiter();
+                                new SendReceive_Task(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .GetAwaiter();
+                                new SendReceive_Task(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .GetAwaiter();
 
-                                    new SendReceive_Eap(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            false
-                                        )
-                                        .GetAwaiter();
-                                    new SendReceive_Eap(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            true
-                                        )
-                                        .GetAwaiter();
+                                new SendReceive_Eap(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .GetAwaiter();
+                                new SendReceive_Eap(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .GetAwaiter();
 
-                                    new SendReceive_Apm(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            false
-                                        )
-                                        .GetAwaiter();
-                                    new SendReceive_Apm(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            true
-                                        )
-                                        .GetAwaiter();
+                                new SendReceive_Apm(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .GetAwaiter();
+                                new SendReceive_Apm(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .GetAwaiter();
 
-                                    new NetworkStreamTest().CopyToAsync_AllDataCopied(4096, true)
-                                        .GetAwaiter()
-                                        .GetResult();
-                                    new NetworkStreamTest().Timeout_Roundtrips()
-                                        .GetAwaiter()
-                                        .GetResult();
-                                }
-                            );
-                            Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
-                            Assert.InRange(events.Count, 1, int.MaxValue);
-                        }
+                                new NetworkStreamTest()
+                                    .CopyToAsync_AllDataCopied(4096, true)
+                                    .GetAwaiter()
+                                    .GetResult();
+                                new NetworkStreamTest()
+                                    .Timeout_Roundtrips()
+                                    .GetAwaiter()
+                                    .GetResult();
+                            }
+                        );
+                        Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
+                        Assert.InRange(events.Count, 1, int.MaxValue);
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
     }
 }

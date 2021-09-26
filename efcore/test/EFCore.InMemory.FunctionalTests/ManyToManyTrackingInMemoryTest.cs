@@ -22,12 +22,13 @@ namespace Microsoft.EntityFrameworkCore
             Action<ManyToManyContext> nestedTestOperation3 = null
         )
         {
-            base.ExecuteWithStrategyInTransaction(
-                testOperation,
-                nestedTestOperation1,
-                nestedTestOperation2,
-                nestedTestOperation3
-            );
+            base
+                .ExecuteWithStrategyInTransaction(
+                    testOperation,
+                    nestedTestOperation1,
+                    nestedTestOperation2,
+                    nestedTestOperation3
+                );
 
             Fixture.Reseed();
         }
@@ -39,12 +40,13 @@ namespace Microsoft.EntityFrameworkCore
             Func<ManyToManyContext, Task> nestedTestOperation3 = null
         )
         {
-            await base.ExecuteWithStrategyInTransactionAsync(
-                testOperation,
-                nestedTestOperation1,
-                nestedTestOperation2,
-                nestedTestOperation3
-            );
+            await base
+                .ExecuteWithStrategyInTransactionAsync(
+                    testOperation,
+                    nestedTestOperation1,
+                    nestedTestOperation2,
+                    nestedTestOperation3
+                );
 
             await Fixture.ReseedAsync();
         }
@@ -57,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore
                 InMemoryTestStoreFactory.Instance;
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .ConfigureWarnings(w => w.Log(InMemoryEventId.TransactionIgnoredWarning))
                     .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
         }

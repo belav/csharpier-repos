@@ -148,7 +148,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             if ((options & ChangeTrackerDebugStringOptions.IncludeNavigations) != 0)
             {
                 foreach (
-                    var navigation in entry.EntityType.GetNavigations()
+                    var navigation in entry.EntityType
+                        .GetNavigations()
                         .Concat<INavigationBase>(entry.EntityType.GetSkipNavigations())
                 )
                 {
@@ -168,7 +169,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                         builder.Append('[');
 
                         const int maxRelatedToShow = 32;
-                        var relatedEntities = ((IEnumerable)currentValue).Cast<object>()
+                        var relatedEntities = ((IEnumerable)currentValue)
+                            .Cast<object>()
                             .Take(maxRelatedToShow + 1)
                             .ToList();
 
@@ -228,11 +230,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             void AppendRelatedKey(IEntityType targetType, object value)
             {
-                var otherEntry = entry.StateManager.TryGetEntry(
-                    value,
-                    targetType,
-                    throwOnTypeMismatch: false
-                );
+                var otherEntry = entry.StateManager
+                    .TryGetEntry(value, targetType, throwOnTypeMismatch: false);
 
                 builder.Append(
                     otherEntry == null
@@ -253,9 +252,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         public static string BuildCurrentValuesString(
             this IUpdateEntry entry,
             IEnumerable<IPropertyBase> properties
-        ) =>
-            "{"
-            + string.Join(
+        ) => "{" + string.Join(
                 ", ",
                 properties.Select(
                     p =>
@@ -270,8 +267,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                             );
                     }
                 )
-            )
-            + "}";
+            ) + "}";
 
         /// <summary>
         ///     Creates a formatted string representation of the given properties and their original
@@ -284,9 +280,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         public static string BuildOriginalValuesString(
             this IUpdateEntry entry,
             IEnumerable<IPropertyBase> properties
-        ) =>
-            "{"
-            + string.Join(
+        ) => "{" + string.Join(
                 ", ",
                 properties.Select(
                     p =>
@@ -301,7 +295,6 @@ namespace Microsoft.EntityFrameworkCore.Update
                             );
                     }
                 )
-            )
-            + "}";
+            ) + "}";
     }
 }

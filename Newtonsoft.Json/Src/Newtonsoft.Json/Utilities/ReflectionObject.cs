@@ -111,10 +111,8 @@ namespace Newtonsoft.Json.Utilities
                 if (members.Length != 1)
                 {
                     throw new ArgumentException(
-                        "Expected a single member with the name '{0}'.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            memberName
-                        )
+                        "Expected a single member with the name '{0}'."
+                            .FormatWith(CultureInfo.InvariantCulture, memberName)
                     );
                 }
 
@@ -157,11 +155,12 @@ namespace Newtonsoft.Json.Utilities
                         break;
                     default:
                         throw new ArgumentException(
-                            "Unexpected member type '{0}' for member '{1}'.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                member.MemberType(),
-                                member.Name
-                            )
+                            "Unexpected member type '{0}' for member '{1}'."
+                                .FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    member.MemberType(),
+                                    member.Name
+                                )
                         );
                 }
 

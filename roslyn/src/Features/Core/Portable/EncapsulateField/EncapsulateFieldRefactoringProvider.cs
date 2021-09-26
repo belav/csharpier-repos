@@ -35,10 +35,10 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             var (document, textSpan, cancellationToken) = context;
             var service = document.GetLanguageService<AbstractEncapsulateFieldService>();
             var actions = await service.GetEncapsulateFieldCodeActionsAsync(
-                    document,
-                    textSpan,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
         }

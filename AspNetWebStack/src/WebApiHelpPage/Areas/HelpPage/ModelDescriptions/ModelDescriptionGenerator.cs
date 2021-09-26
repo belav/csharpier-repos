@@ -219,9 +219,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                         );
                     }
 
-                    Type keyValuePairType = typeof(KeyValuePair<, >).MakeGenericType(
-                        genericArguments
-                    );
+                    Type keyValuePairType = typeof(KeyValuePair<, >)
+                        .MakeGenericType(genericArguments);
                     if (keyValuePairType.IsAssignableFrom(modelType))
                     {
                         return GenerateKeyValuePairModelDescription(

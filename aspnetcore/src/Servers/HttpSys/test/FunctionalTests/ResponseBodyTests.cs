@@ -219,9 +219,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     {
                         httpContext.Response.Headers["transfeR-Encoding"] = "CHunked";
                         Stream stream = httpContext.Response.Body;
-                        var responseBytes = Encoding.ASCII.GetBytes(
-                            "10\r\nManually Chunked\r\n0\r\n\r\n"
-                        );
+                        var responseBytes = Encoding.ASCII
+                            .GetBytes("10\r\nManually Chunked\r\n0\r\n\r\n");
                         await stream.WriteAsync(responseBytes, 0, responseBytes.Length);
                     }
                 )
@@ -445,9 +444,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             },
                             httpContext
                         );
-                        httpContext.Response.Body.EndWrite(
-                            httpContext.Response.Body.BeginWrite(new byte[10], 0, 10, null, null)
-                        );
+                        httpContext.Response.Body
+                            .EndWrite(
+                                httpContext.Response.Body
+                                    .BeginWrite(new byte[10], 0, 10, null, null)
+                            );
                         return Task.FromResult(0);
                     }
                 )

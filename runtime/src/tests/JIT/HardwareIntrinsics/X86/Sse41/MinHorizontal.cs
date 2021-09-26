@@ -180,10 +180,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_UnsafeRead()
         {
-            var result = typeof(Sse41).GetMethod(
-                    nameof(Sse41.MinHorizontal),
-                    new Type[] { typeof(Vector128<UInt16>) }
-                )
+            var result = typeof(Sse41)
+                .GetMethod(nameof(Sse41.MinHorizontal), new Type[] { typeof(Vector128<UInt16>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector128<UInt16>>(_dataTable.inArrayPtr) }
@@ -195,10 +193,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_Load()
         {
-            var result = typeof(Sse41).GetMethod(
-                    nameof(Sse41.MinHorizontal),
-                    new Type[] { typeof(Vector128<UInt16>) }
-                )
+            var result = typeof(Sse41)
+                .GetMethod(nameof(Sse41.MinHorizontal), new Type[] { typeof(Vector128<UInt16>) })
                 .Invoke(
                     null,
                     new object[] { Sse2.LoadVector128((UInt16*)(_dataTable.inArrayPtr)) }
@@ -210,10 +206,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_LoadAligned()
         {
-            var result = typeof(Sse41).GetMethod(
-                    nameof(Sse41.MinHorizontal),
-                    new Type[] { typeof(Vector128<UInt16>) }
-                )
+            var result = typeof(Sse41)
+                .GetMethod(nameof(Sse41.MinHorizontal), new Type[] { typeof(Vector128<UInt16>) })
                 .Invoke(
                     null,
                     new object[] { Sse2.LoadAlignedVector128((UInt16*)(_dataTable.inArrayPtr)) }

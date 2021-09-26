@@ -134,14 +134,15 @@ namespace Internal.Cryptography
         [MemberNotNull(nameof(_ctx))]
         private void OpenKey(IntPtr algorithm, byte[] key, int effectiveKeyLength)
         {
-            _ctx = Interop.Crypto.EvpCipherCreate(
-                algorithm,
-                ref MemoryMarshal.GetReference(key.AsSpan()),
-                key.Length * 8,
-                effectiveKeyLength,
-                ref MemoryMarshal.GetReference(IV.AsSpan()),
-                _encrypting ? 1 : 0
-            );
+            _ctx = Interop.Crypto
+                .EvpCipherCreate(
+                    algorithm,
+                    ref MemoryMarshal.GetReference(key.AsSpan()),
+                    key.Length * 8,
+                    effectiveKeyLength,
+                    ref MemoryMarshal.GetReference(IV.AsSpan()),
+                    _encrypting ? 1 : 0
+                );
 
             Interop.Crypto.CheckValidOpenSslHandle(_ctx);
 

@@ -1419,9 +1419,9 @@ namespace System.ComponentModel
             }
 
             PropertyDescriptorCollection properties = GetDescriptor(
-                    componentType,
-                    nameof(componentType)
-                )
+                componentType,
+                nameof(componentType)
+            )
                 .GetProperties(attributes);
 
             if (attributes != null && attributes.Length > 0)
@@ -3295,10 +3295,8 @@ namespace System.ComponentModel
             {
                 MemberDescriptor leftMember = left as MemberDescriptor;
                 MemberDescriptor rightMember = right as MemberDescriptor;
-                return CultureInfo.InvariantCulture.CompareInfo.Compare(
-                    leftMember?.Name,
-                    rightMember?.Name
-                );
+                return CultureInfo.InvariantCulture.CompareInfo
+                    .Compare(leftMember?.Name, rightMember?.Name);
             }
         }
 

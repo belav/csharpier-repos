@@ -37,10 +37,11 @@ namespace Microsoft.CodeAnalysis.Rename
             }
 
             public override string GetDescription(CultureInfo? culture) =>
-                WorkspacesResources.ResourceManager.GetString(
-                    "Sync_namespace_to_folder_structure",
-                    culture ?? WorkspacesResources.Culture
-                )!;
+                WorkspacesResources.ResourceManager
+                    .GetString(
+                        "Sync_namespace_to_folder_structure",
+                        culture ?? WorkspacesResources.Culture
+                    )!;
 
             internal override async Task<Solution> GetModifiedSolutionAsync(
                 Document document,
@@ -51,10 +52,10 @@ namespace Microsoft.CodeAnalysis.Rename
                 var changeNamespaceService =
                     document.GetRequiredLanguageService<IChangeNamespaceService>();
                 var solution = await changeNamespaceService.TryChangeTopLevelNamespacesAsync(
-                        document,
-                        _analysis.TargetNamespace,
-                        cancellationToken
-                    )
+                    document,
+                    _analysis.TargetNamespace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // If the solution fails to update fail silently. The user will see no large

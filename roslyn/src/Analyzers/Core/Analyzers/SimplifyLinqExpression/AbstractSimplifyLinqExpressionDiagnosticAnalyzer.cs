@@ -133,9 +133,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
                 out ImmutableArray<IMethodSymbol> linqMethods
             )
             {
-                using var _ = ArrayBuilder<IMethodSymbol>.GetInstance(
-                    out var linqMethodSymbolsBuilder
-                );
+                using var _ = ArrayBuilder<IMethodSymbol>
+                    .GetInstance(out var linqMethodSymbolsBuilder);
                 foreach (var method in enumerableType.GetMembers().OfType<IMethodSymbol>())
                 {
                     if (
@@ -160,7 +159,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
         )
         {
             if (
-                context.Operation.Syntax.GetDiagnostics()
+                context.Operation.Syntax
+                    .GetDiagnostics()
                     .Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error)
             )
             {

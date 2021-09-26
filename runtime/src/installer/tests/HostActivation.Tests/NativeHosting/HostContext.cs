@@ -124,9 +124,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 
             string[] appArgs = { SharedTestState.AppPropertyName, newPropertyName };
             CommandResult result = sharedState.CreateNativeHostCommand(
-                    args.Concat(commandArgs).Concat(appArgs),
-                    sharedState.DotNetRoot
-                )
+                args.Concat(commandArgs).Concat(appArgs),
+                sharedState.DotNetRoot
+            )
                 .Execute();
 
             result.Should()
@@ -302,9 +302,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 SharedTestState.ConfigPropertyName
             };
             CommandResult result = sharedState.CreateNativeHostCommand(
-                    args.Concat(appArgs),
-                    sharedState.DotNetRoot
-                )
+                args.Concat(appArgs),
+                sharedState.DotNetRoot
+            )
                 .EnvironmentVariable("COREHOST_TRACE_VERBOSITY", "3")
                 .EnvironmentVariable(
                     "TEST_BLOCK_MOCK_EXECUTE_ASSEMBLY",
@@ -890,7 +890,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     BaseDirectory,
                     Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"),
                     "mockRuntime"
-                ).AddMicrosoftNETCoreAppFrameworkMockCoreClr(NetCoreAppVersion).Build();
+                )
+                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr(NetCoreAppVersion)
+                    .Build();
                 DotNetRoot = dotNet.BinPath;
 
                 HostFxrPath = Path.Combine(

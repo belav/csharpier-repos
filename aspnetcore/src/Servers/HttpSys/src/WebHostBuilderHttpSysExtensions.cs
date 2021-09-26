@@ -68,13 +68,12 @@ namespace Microsoft.AspNetCore.Hosting
             Action<HttpSysOptions> options
         )
         {
-            return hostBuilder.UseHttpSys()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.Configure(options);
-                    }
-                );
+            return hostBuilder.UseHttpSys().ConfigureServices(
+                services =>
+                {
+                    services.Configure(options);
+                }
+            );
         }
     }
 }

@@ -89,10 +89,8 @@ namespace Newtonsoft.Json.Converters
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Cannot convert null value to {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            objectType
-                        )
+                        "Cannot convert null value to {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, objectType)
                     );
                 }
 
@@ -106,11 +104,8 @@ namespace Newtonsoft.Json.Converters
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "Unexpected token or value when parsing date. Token: {0}, Value: {1}".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType,
-                        reader.Value
-                    )
+                    "Unexpected token or value when parsing date. Token: {0}, Value: {1}"
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType, reader.Value)
                 );
             }
 

@@ -74,16 +74,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _tags,
                 splitQuery,
                 nonComposedFromSql
-            ).ProcessShaper(
-                shapedQueryExpression.ShaperExpression,
-                out var relationalCommandCache,
-                out var relatedDataLoaders
-            );
+            )
+                .ProcessShaper(
+                    shapedQueryExpression.ShaperExpression,
+                    out var relationalCommandCache,
+                    out var relatedDataLoaders
+                );
 
             if (nonComposedFromSql)
             {
                 return Expression.New(
-                    typeof(FromSqlQueryingEnumerable<>).MakeGenericType(shaper.ReturnType)
+                    typeof(FromSqlQueryingEnumerable<>)
+                        .MakeGenericType(shaper.ReturnType)
                         .GetConstructors()[0],
                     Expression.Convert(
                         QueryCompilationContext.QueryContextParameter,
@@ -91,9 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ),
                     Expression.Constant(relationalCommandCache),
                     Expression.Constant(
-                        selectExpression.Projection.Select(
-                                pe => ((ColumnExpression)pe.Expression).Name
-                            )
+                        selectExpression.Projection
+                            .Select(pe => ((ColumnExpression)pe.Expression).Name)
                             .ToList(),
                         typeof(IReadOnlyList<string>)
                     ),
@@ -126,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 );
 
                 return Expression.New(
-                    typeof(SplitQueryingEnumerable<>).MakeGenericType(shaper.ReturnType)
+                    typeof(SplitQueryingEnumerable<>)
+                        .MakeGenericType(shaper.ReturnType)
                         .GetConstructors()
                         .Single(),
                     Expression.Convert(
@@ -148,7 +150,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             return Expression.New(
-                typeof(SingleQueryingEnumerable<>).MakeGenericType(shaper.ReturnType)
+                typeof(SingleQueryingEnumerable<>)
+                    .MakeGenericType(shaper.ReturnType)
                     .GetConstructors()[0],
                 Expression.Convert(
                     QueryCompilationContext.QueryContextParameter,

@@ -204,10 +204,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Avx2).GetMethod(
-                    nameof(Avx2.ConvertToUInt32),
-                    new Type[] { typeof(Vector256<UInt32>) }
-                )
+            var result = typeof(Avx2)
+                .GetMethod(nameof(Avx2.ConvertToUInt32), new Type[] { typeof(Vector256<UInt32>) })
                 .Invoke(
                     null,
                     new object[] { Unsafe.Read<Vector256<UInt32>>(_dataTable.inArrayPtr) }
@@ -220,10 +218,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Avx2).GetMethod(
-                    nameof(Avx2.ConvertToUInt32),
-                    new Type[] { typeof(Vector256<UInt32>) }
-                )
+            var result = typeof(Avx2)
+                .GetMethod(nameof(Avx2.ConvertToUInt32), new Type[] { typeof(Vector256<UInt32>) })
                 .Invoke(null, new object[] { Avx.LoadVector256((UInt32*)(_dataTable.inArrayPtr)) });
 
             ValidateResult(_dataTable.inArrayPtr, (UInt32)(result));
@@ -233,10 +229,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Avx2).GetMethod(
-                    nameof(Avx2.ConvertToUInt32),
-                    new Type[] { typeof(Vector256<UInt32>) }
-                )
+            var result = typeof(Avx2)
+                .GetMethod(nameof(Avx2.ConvertToUInt32), new Type[] { typeof(Vector256<UInt32>) })
                 .Invoke(
                     null,
                     new object[] { Avx.LoadAlignedVector256((UInt32*)(_dataTable.inArrayPtr)) }
@@ -383,12 +377,12 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Avx2)}.{nameof(Avx2.ConvertToUInt32)}<UInt32>(Vector256<UInt32>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Avx2)}.{nameof(Avx2.ConvertToUInt32)}<UInt32>(Vector256<UInt32>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($"   result: result");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

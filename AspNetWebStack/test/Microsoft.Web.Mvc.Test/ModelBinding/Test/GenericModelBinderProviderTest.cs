@@ -348,10 +348,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             return new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => null,
-                    modelType
-                )
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => null, modelType)
             };
         }
 

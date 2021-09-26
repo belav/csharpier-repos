@@ -126,15 +126,13 @@ namespace System.Web.Http.Dispatcher
             int count = 0;
             var controller = new ControllerWithCtorParams(42);
             var mockScope = new Mock<IDependencyScope>();
-            mockScope.Setup(r => r.GetService(typeof(ControllerWithCtorParams)))
-                .Returns(
-                    () =>
-                    {
-                        count++;
-                        return new ControllerWithCtorParams(42);
-                    }
-                )
-                .Verifiable();
+            mockScope.Setup(r => r.GetService(typeof(ControllerWithCtorParams))).Returns(
+                () =>
+                {
+                    count++;
+                    return new ControllerWithCtorParams(42);
+                }
+            ).Verifiable();
             var config = new HttpConfiguration();
             var request = new HttpRequestMessage();
             request.SetConfiguration(config);

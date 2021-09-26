@@ -116,9 +116,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 : null;
 
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    simpleName,
-                    cancellationToken
-                )
+                simpleName,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var leftSymbol =
@@ -172,15 +172,15 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             return CreateSignatureHelpItems(
                 accessibleSymbols.Select(
-                        s =>
-                            Convert(
-                                s,
-                                lessThanToken,
-                                semanticModel,
-                                anonymousTypeDisplayService,
-                                documentationCommentFormattingService
-                            )
-                    )
+                    s =>
+                        Convert(
+                            s,
+                            lessThanToken,
+                            semanticModel,
+                            anonymousTypeDisplayService,
+                            documentationCommentFormattingService
+                        )
+                )
                     .ToList(),
                 textSpan,
                 GetCurrentArgumentState(root, position, syntaxFacts, textSpan, cancellationToken),
@@ -268,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     GetPreambleParts(namedType, semanticModel, position),
                     GetSeparatorParts(),
                     GetPostambleParts(),
-                    namedType.TypeParameters.Select(
+                    namedType.TypeParameters
+                        .Select(
                             p =>
                                 Convert(
                                     p,
@@ -299,7 +300,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     GetPreambleParts(method, semanticModel, position),
                     GetSeparatorParts(),
                     GetPostambleParts(method, semanticModel, position),
-                    method.TypeParameters.Select(
+                    method.TypeParameters
+                        .Select(
                             p =>
                                 Convert(
                                     p,
@@ -316,10 +318,11 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         }
 
         private static readonly SymbolDisplayFormat s_minimallyQualifiedFormat =
-            SymbolDisplayFormat.MinimallyQualifiedFormat.WithGenericsOptions(
-                SymbolDisplayFormat.MinimallyQualifiedFormat.GenericsOptions
-                    | SymbolDisplayGenericsOptions.IncludeVariance
-            );
+            SymbolDisplayFormat.MinimallyQualifiedFormat
+                .WithGenericsOptions(
+                    SymbolDisplayFormat.MinimallyQualifiedFormat.GenericsOptions
+                        | SymbolDisplayGenericsOptions.IncludeVariance
+                );
 
         private static SignatureHelpSymbolParameter Convert(
             ITypeParameterSymbol parameter,

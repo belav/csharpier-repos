@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Async
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken)
+            var root = await context.Document
+                .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             if (!TryGetNode(root, context.Span, out var node))
             {
@@ -48,11 +49,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Async
             var diagnostic = context.Diagnostics.FirstOrDefault();
 
             var codeAction = await GetCodeActionAsync(
-                    node,
-                    context.Document,
-                    diagnostic,
-                    context.CancellationToken
-                )
+                node,
+                context.Document,
+                diagnostic,
+                context.CancellationToken
+            )
                 .ConfigureAwait(false);
             if (codeAction != null)
             {
@@ -84,11 +85,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Async
                 .ConfigureAwait(false);
 
             var result = await GetRootInOtherSyntaxTreeAsync(
-                    node,
-                    semanticModel,
-                    diagnostic,
-                    cancellationToken
-                )
+                node,
+                semanticModel,
+                diagnostic,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (result == null)
                 return null;

@@ -24,10 +24,11 @@ namespace Internal.IL
                 if (type.IsValueType && type.GetParameterlessConstructor() == null)
                 {
                     // Replace the body with implementation that just returns "default"
-                    MethodDesc createDefaultInstance = method.OwningType.GetKnownMethod(
-                        "CreateDefaultInstance",
-                        method.GetTypicalMethodDefinition().Signature
-                    );
+                    MethodDesc createDefaultInstance = method.OwningType
+                        .GetKnownMethod(
+                            "CreateDefaultInstance",
+                            method.GetTypicalMethodDefinition().Signature
+                        );
                     return GetMethodIL(createDefaultInstance.MakeInstantiatedMethod(type));
                 }
             }

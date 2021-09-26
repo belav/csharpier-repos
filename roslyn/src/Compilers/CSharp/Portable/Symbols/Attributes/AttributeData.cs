@@ -125,9 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             int argumentCount =
                 (attributeSyntax.ArgumentList != null)
-                    ? attributeSyntax.ArgumentList.Arguments.Count<AttributeArgumentSyntax>(
-                          (arg) => arg.NameEquals == null
-                      )
+                    ? attributeSyntax.ArgumentList.Arguments
+                      .Count<AttributeArgumentSyntax>((arg) => arg.NameEquals == null)
                     : 0;
             return AttributeData.IsTargetEarlyAttribute(attributeType, argumentCount, description);
         }
@@ -156,10 +155,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Debug.Assert(AttributeClass is object);
                 var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
                 _lazyIsSecurityAttribute = AttributeClass.IsDerivedFrom(
-                        wellKnownType,
-                        TypeCompareKind.ConsiderEverything,
-                        useSiteInfo: ref discardedUseSiteInfo
-                    )
+                    wellKnownType,
+                    TypeCompareKind.ConsiderEverything,
+                    useSiteInfo: ref discardedUseSiteInfo
+                )
                     .ToThreeState();
             }
 
@@ -176,9 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (this.AttributeClass is object)
             {
-                string className = this.AttributeClass.ToDisplayString(
-                    SymbolDisplayFormat.QualifiedNameOnlyFormat
-                );
+                string className = this.AttributeClass
+                    .ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat);
 
                 if (!this.CommonConstructorArguments.Any() & !this.CommonNamedArguments.Any())
                 {
@@ -323,10 +321,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (!compilation.Options.AllowUnsafe)
             {
                 Debug.Assert(arguments.AttributeSyntaxOpt is object);
-                ((BindingDiagnosticBag)arguments.Diagnostics).Add(
-                    ErrorCode.ERR_IllegalUnsafe,
-                    arguments.AttributeSyntaxOpt.Location
-                );
+                ((BindingDiagnosticBag)arguments.Diagnostics)
+                    .Add(ErrorCode.ERR_IllegalUnsafe, arguments.AttributeSyntaxOpt.Location);
             }
         }
 
@@ -391,11 +387,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             Debug.Assert(arguments.AttributeSyntaxOpt is object);
-            ((BindingDiagnosticBag)arguments.Diagnostics).Add(
-                ErrorCode.WRN_MemberNotNullBadMember,
-                arguments.AttributeSyntaxOpt.Location,
-                memberName
-            );
+            ((BindingDiagnosticBag)arguments.Diagnostics)
+                .Add(
+                    ErrorCode.WRN_MemberNotNullBadMember,
+                    arguments.AttributeSyntaxOpt.Location,
+                    memberName
+                );
         }
 
         internal static void DecodeMemberNotNullWhenAttribute<T>(
@@ -413,9 +410,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            var sense = arguments.Attribute.CommonConstructorArguments[0].DecodeValue<bool>(
-                SpecialType.System_Boolean
-            );
+            var sense = arguments.Attribute.CommonConstructorArguments[0]
+                .DecodeValue<bool>(SpecialType.System_Boolean);
             if (value.Kind != TypedConstantKind.Array)
             {
                 var memberName = value.DecodeValue<string>(SpecialType.System_String);
@@ -1106,10 +1102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             Debug.Assert(attribute is SourceAttributeData);
-            return ((SourceAttributeData)attribute).GetAttributeArgumentSyntax(
-                parameterIndex,
-                attributeSyntax
-            );
+            return ((SourceAttributeData)attribute)
+                .GetAttributeArgumentSyntax(parameterIndex, attributeSyntax);
         }
 
         internal static string? DecodeNotNullIfNotNullAttribute(this CSharpAttributeData attribute)
@@ -1134,10 +1128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             Debug.Assert(attribute is SourceAttributeData);
-            return ((SourceAttributeData)attribute).GetAttributeArgumentSyntax(
-                parameterIndex,
-                attributeSyntaxOpt
-            ).Location;
+            return ((SourceAttributeData)attribute)
+                .GetAttributeArgumentSyntax(parameterIndex, attributeSyntaxOpt).Location;
         }
     }
 }

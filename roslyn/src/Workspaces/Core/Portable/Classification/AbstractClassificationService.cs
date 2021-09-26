@@ -57,9 +57,9 @@ namespace Microsoft.CodeAnalysis.Classification
             }
 
             var client = await RemoteHostClient.TryGetClientAsync(
-                    document.Project,
-                    cancellationToken
-                )
+                document.Project,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (client != null)
             {
@@ -67,16 +67,16 @@ namespace Microsoft.CodeAnalysis.Classification
                     IRemoteSemanticClassificationService,
                     SerializableClassifiedSpans
                 >(
-                        document.Project.Solution,
-                        (service, solutionInfo, cancellationToken) =>
-                            service.GetSemanticClassificationsAsync(
-                                solutionInfo,
-                                document.Id,
-                                textSpan,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    document.Project.Solution,
+                    (service, solutionInfo, cancellationToken) =>
+                        service.GetSemanticClassificationsAsync(
+                            solutionInfo,
+                            document.Id,
+                            textSpan,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // if the remote call fails do nothing (error has already been reported)
@@ -89,11 +89,11 @@ namespace Microsoft.CodeAnalysis.Classification
             {
                 using var _ = ArrayBuilder<ClassifiedSpan>.GetInstance(out var temp);
                 await AddSemanticClassificationsInCurrentProcessAsync(
-                        document,
-                        textSpan,
-                        temp,
-                        cancellationToken
-                    )
+                    document,
+                    textSpan,
+                    temp,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 AddRange(temp, result);
             }
@@ -109,8 +109,8 @@ namespace Microsoft.CodeAnalysis.Classification
             var classificationService =
                 document.GetRequiredLanguageService<ISyntaxClassificationService>();
 
-            var extensionManager =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager = document.Project.Solution.Workspace.Services
+                .GetRequiredService<IExtensionManager>();
             var classifiers = classificationService.GetDefaultSyntaxClassifiers();
 
             var getNodeClassifiers = extensionManager.CreateNodeExtensionGetter(
@@ -123,13 +123,13 @@ namespace Microsoft.CodeAnalysis.Classification
             );
 
             await classificationService.AddSemanticClassificationsAsync(
-                    document,
-                    textSpan,
-                    getNodeClassifiers,
-                    getTokenClassifiers,
-                    result,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                getNodeClassifiers,
+                getTokenClassifiers,
+                result,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

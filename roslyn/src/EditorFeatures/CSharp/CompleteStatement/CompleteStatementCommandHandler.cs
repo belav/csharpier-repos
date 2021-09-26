@@ -118,9 +118,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             }
 
             if (
-                !args.SubjectBuffer.GetFeatureOnOffOption(
-                    FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon
-                )
+                !args.SubjectBuffer
+                    .GetFeatureOnOffOption(
+                        FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon
+                    )
             )
             {
                 return false;
@@ -440,9 +441,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             {
                 case SyntaxKind.DoStatement:
                     //  Move caret after the do statement's closing paren.
-                    targetPosition = caret.Snapshot.GetPoint(
-                        ((DoStatementSyntax)statementNode).CloseParenToken.Span.End
-                    );
+                    targetPosition = caret.Snapshot
+                        .GetPoint(((DoStatementSyntax)statementNode).CloseParenToken.Span.End);
                     return true;
                 case SyntaxKind.ForStatement:
                     // `For` statements can have semicolon after initializer/declaration or after condition.

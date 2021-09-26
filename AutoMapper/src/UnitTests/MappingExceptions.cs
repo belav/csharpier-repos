@@ -29,9 +29,8 @@ namespace AutoMapper.UnitTests.MappingExceptions
         public void Should_provide_a_contextual_exception()
         {
             var source = new Source { Value = "adsf" };
-            typeof(AutoMapperMappingException).ShouldBeThrownBy(
-                () => Mapper.Map<Source, Dest>(source)
-            );
+            typeof(AutoMapperMappingException)
+                .ShouldBeThrownBy(() => Mapper.Map<Source, Dest>(source));
         }
 
         [Fact]
@@ -83,9 +82,8 @@ namespace AutoMapper.UnitTests.MappingExceptions
         public void Should_provide_a_contextual_exception()
         {
             var source = new Source { Value = "adsf" };
-            typeof(AutoMapperMappingException).ShouldBeThrownBy(
-                () => Mapper.Map<Source, Dest>(source)
-            );
+            typeof(AutoMapperMappingException)
+                .ShouldBeThrownBy(() => Mapper.Map<Source, Dest>(source));
         }
 
         [Fact]

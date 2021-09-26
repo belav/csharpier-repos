@@ -75,9 +75,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 // For the starting symbol, always cascade up and down the inheritance hierarchy.
                 var symbols = await DetermineAllSymbolsAsync(
-                        symbol,
-                        FindReferencesCascadeDirection.UpAndDown
-                    )
+                    symbol,
+                    FindReferencesCascadeDirection.UpAndDown
+                )
                     .ConfigureAwait(false);
 
                 var projectMap = await CreateProjectMapAsync(symbols).ConfigureAwait(false);
@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 foreach (var (project, documentMap) in projectToDocumentMap)
                     tasks.Add(
-                        Task.Factory.StartNew(
+                        Task.Factory
+                            .StartNew(
                                 () => ProcessProjectAsync(project, documentMap),
                                 _cancellationToken,
                                 TaskCreationOptions.None,

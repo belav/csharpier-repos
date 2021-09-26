@@ -105,10 +105,10 @@ namespace Microsoft.CodeAnalysis.InvertLogical
             // a new document at each step so that we'll be able to properly analyze things as we go
             // along.
             var document2 = await InvertInnerExpressionAsync(
-                    document1,
-                    binaryExpression,
-                    cancellationToken
-                )
+                document1,
+                binaryExpression,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var document3 = await InvertOuterExpressionAsync(document2, cancellationToken)
                 .ConfigureAwait(false);
@@ -184,13 +184,14 @@ namespace Microsoft.CodeAnalysis.InvertLogical
         }
 
         private string GetTitle(ISyntaxKindsService syntaxKinds, int binaryExprKind) =>
-            string.Format(
-                FeaturesResources.Replace_0_with_1,
-                GetOperatorText(syntaxKinds.Convert<TSyntaxKind>(binaryExprKind)),
-                GetOperatorText(
-                    syntaxKinds.Convert<TSyntaxKind>(InvertedKind(syntaxKinds, binaryExprKind))
-                )
-            );
+            string
+                .Format(
+                    FeaturesResources.Replace_0_with_1,
+                    GetOperatorText(syntaxKinds.Convert<TSyntaxKind>(binaryExprKind)),
+                    GetOperatorText(
+                        syntaxKinds.Convert<TSyntaxKind>(InvertedKind(syntaxKinds, binaryExprKind))
+                    )
+                );
 
         private static int InvertedKind(ISyntaxKindsService syntaxKinds, int binaryExprKind) =>
             binaryExprKind == syntaxKinds.LogicalAndExpression

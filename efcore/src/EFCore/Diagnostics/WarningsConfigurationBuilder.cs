@@ -143,11 +143,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 _optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
                 ?? new CoreOptionsExtension();
 
-            ((IDbContextOptionsBuilderInfrastructure)_optionsBuilder).AddOrUpdateExtension(
-                coreOptionsExtension.WithWarningsConfiguration(
-                    withFunc(coreOptionsExtension.WarningsConfiguration)
-                )
-            );
+            ((IDbContextOptionsBuilderInfrastructure)_optionsBuilder)
+                .AddOrUpdateExtension(
+                    coreOptionsExtension.WithWarningsConfiguration(
+                        withFunc(coreOptionsExtension.WarningsConfiguration)
+                    )
+                );
 
             return this;
         }

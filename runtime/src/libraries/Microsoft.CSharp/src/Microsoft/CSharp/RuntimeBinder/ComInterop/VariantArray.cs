@@ -103,10 +103,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 // See if we can find an existing type
                 foreach (Type t in s_generatedTypes)
                 {
-                    int arity = int.Parse(
-                        t.Name.Substring("VariantArray".Length),
-                        CultureInfo.InvariantCulture
-                    );
+                    int arity = int
+                        .Parse(
+                            t.Name.Substring("VariantArray".Length),
+                            CultureInfo.InvariantCulture
+                        );
                     if (size == arity)
                     {
                         return t;
@@ -123,11 +124,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private static Type CreateCustomType(int size)
         {
             TypeAttributes attrs = TypeAttributes.NotPublic | TypeAttributes.SequentialLayout;
-            TypeBuilder type = UnsafeMethods.DynamicModule.DefineType(
-                "VariantArray" + size,
-                attrs,
-                typeof(ValueType)
-            );
+            TypeBuilder type = UnsafeMethods.DynamicModule
+                .DefineType("VariantArray" + size, attrs, typeof(ValueType));
             GenericTypeParameterBuilder T = type.DefineGenericParameters(new string[] { "T" })[0];
             for (int i = 0; i < size; i++)
             {

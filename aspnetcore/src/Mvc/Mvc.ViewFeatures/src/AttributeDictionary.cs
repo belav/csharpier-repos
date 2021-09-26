@@ -223,11 +223,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
             else
             {
-                return string.Equals(
-                    item.Value,
-                    Get(index).Value,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                return string
+                    .Equals(item.Value, Get(index).Value, StringComparison.OrdinalIgnoreCase);
             }
         }
 
@@ -435,11 +432,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 for (var i = 0; i < _attributes.Count; i++)
                 {
                     if (
-                        string.Equals(
-                            item,
-                            _attributes.Get(i).Key,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                item,
+                                _attributes.Get(i).Key,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         return true;
@@ -547,11 +545,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 for (var i = 0; i < _attributes.Count; i++)
                 {
                     if (
-                        string.Equals(
-                            item,
-                            _attributes.Get(i).Value,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                item,
+                                _attributes.Get(i).Value,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         return true;

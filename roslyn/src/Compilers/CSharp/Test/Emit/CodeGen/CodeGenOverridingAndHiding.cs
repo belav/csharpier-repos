@@ -1513,9 +1513,9 @@ Derived.Method(BASEREF List<int> a)
                                     // (5,25): warning CS1957: Member 'Derived.Method(ref List<int>, out List<int>)' overrides 'Base<int, int>.Method(ref List<int>, out List<int>)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
                                     //     public virtual void Method(ref List<T> x, out List<U> y) { y = null; Console.WriteLine("Base<T, U>.Method(ref List<T> x, out List<U> y)"); }
                                     Diagnostic(
-                                            ErrorCode.WRN_MultipleRuntimeOverrideMatches,
-                                            "Method"
-                                        )
+                                        ErrorCode.WRN_MultipleRuntimeOverrideMatches,
+                                        "Method"
+                                    )
                                         .WithArguments(
                                             "Base<int, int>.Method(ref System.Collections.Generic.List<int>, out System.Collections.Generic.List<int>)",
                                             "Derived.Method(ref System.Collections.Generic.List<int>, out System.Collections.Generic.List<int>)"
@@ -1528,9 +1528,9 @@ Derived.Method(BASEREF List<int> a)
                                     // (6,25): warning CS1957: Member 'Derived.Method(ref List<int>, out List<int>)' overrides 'Base<int, int>.Method(ref List<int>, out List<int>)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
                                     //     public virtual void Method(ref List<T> x, out List<U> y) { y = null; Console.WriteLine("Base<T, U>.Method(ref List<T> x, out List<U> y)"); }
                                     Diagnostic(
-                                            ErrorCode.WRN_MultipleRuntimeOverrideMatches,
-                                            "Method"
-                                        )
+                                        ErrorCode.WRN_MultipleRuntimeOverrideMatches,
+                                        "Method"
+                                    )
                                         .WithArguments(
                                             "Base<int, int>.Method(ref System.Collections.Generic.List<int>, out System.Collections.Generic.List<int>)",
                                             "Derived.Method(ref System.Collections.Generic.List<int>, out System.Collections.Generic.List<int>)"
@@ -3494,10 +3494,9 @@ public class Test
             // from assembly 'Dev10, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
             // is overriding a method that is not visible from that assembly.
 
-            CompileAndVerify(outerCompilation, verify: Verification.Fails)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(outerCompilation, verify: Verification.Fails).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       65 (0x41)
   .maxstack  4
@@ -3530,7 +3529,7 @@ public class Test
   IL_0040:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -4702,7 +4701,8 @@ public class Test
             var comp = (CSharpCompilation)verifier.Compilation;
             comp.VerifyDiagnostics();
 
-            var baseType = comp.GlobalNamespace.GetMember<NamespaceSymbol>("Metadata")
+            var baseType = comp.GlobalNamespace
+                .GetMember<NamespaceSymbol>("Metadata")
                 .GetMember<NamedTypeSymbol>("LeastModoptsWin");
             var derivedType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Derived");
 
@@ -5579,11 +5579,11 @@ Derived.M(y:2)"
             CompileAndVerify(B).VerifyDiagnostics();
 
             var D = CreateCSharpCompilation(
-                    "D",
-                    @"public class D : C, B { }",
-                    compilationOptions: TestOptions.ReleaseDll,
-                    referencedCompilations: new[] { B, C }
-                )
+                "D",
+                @"public class D : C, B { }",
+                compilationOptions: TestOptions.ReleaseDll,
+                referencedCompilations: new[] { B, C }
+            )
                 .VerifyDiagnostics(
                     // (1,21): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     // public class D : C, B { }

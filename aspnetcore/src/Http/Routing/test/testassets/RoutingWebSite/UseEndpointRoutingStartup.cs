@@ -20,9 +20,8 @@ namespace RoutingWebSite
 {
     public class UseEndpointRoutingStartup
     {
-        private static readonly byte[] _homePayload = Encoding.UTF8.GetBytes(
-            "Endpoint Routing sample endpoints:" + Environment.NewLine + "/plaintext"
-        );
+        private static readonly byte[] _homePayload = Encoding.UTF8
+            .GetBytes("Endpoint Routing sample endpoints:" + Environment.NewLine + "/plaintext");
         private static readonly byte[] _plainTextPayload = Encoding.UTF8.GetBytes("Plain text!");
 
         public void ConfigureServices(IServiceCollection services)
@@ -57,13 +56,14 @@ namespace RoutingWebSite
                         "/",
                         (httpContext) =>
                         {
-                            var dataSource =
-                                httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
+                            var dataSource = httpContext.RequestServices
+                                .GetRequiredService<EndpointDataSource>();
 
                             var sb = new StringBuilder();
                             sb.AppendLine("Endpoints:");
                             foreach (
-                                var endpoint in dataSource.Endpoints.OfType<RouteEndpoint>()
+                                var endpoint in dataSource.Endpoints
+                                    .OfType<RouteEndpoint>()
                                     .OrderBy(
                                         e => e.RoutePattern.RawText,
                                         StringComparer.OrdinalIgnoreCase
@@ -92,23 +92,23 @@ namespace RoutingWebSite
                         }
                     );
                     endpoints.MapGet(
-                            "/convention",
-                            (httpContext) =>
-                            {
-                                var endpoint = httpContext.GetEndpoint();
-                                return httpContext.Response.WriteAsync(
+                        "/convention",
+                        (httpContext) =>
+                        {
+                            var endpoint = httpContext.GetEndpoint();
+                            return httpContext.Response
+                                .WriteAsync(
                                     (endpoint.Metadata.GetMetadata<CustomMetadata>() != null)
                                       ? "Has metadata"
                                       : "No metadata"
                                 );
-                            }
-                        )
-                        .Add(
-                            b =>
-                            {
-                                b.Metadata.Add(new CustomMetadata());
-                            }
-                        );
+                        }
+                    ).Add(
+                        b =>
+                        {
+                            b.Metadata.Add(new CustomMetadata());
+                        }
+                    );
                     endpoints.MapGet(
                         "/withconstraints/{id:endsWith(_001)}",
                         (httpContext) =>
@@ -130,51 +130,45 @@ namespace RoutingWebSite
                         }
                     );
                     endpoints.MapGet(
-                            "/WithSingleAsteriskCatchAll/{*path}",
-                            (httpContext) =>
-                            {
-                                var linkGenerator =
-                                    httpContext.RequestServices.GetRequiredService<LinkGenerator>();
+                        "/WithSingleAsteriskCatchAll/{*path}",
+                        (httpContext) =>
+                        {
+                            var linkGenerator = httpContext.RequestServices
+                                .GetRequiredService<LinkGenerator>();
 
-                                var response = httpContext.Response;
-                                response.StatusCode = 200;
-                                response.ContentType = "text/plain";
-                                return response.WriteAsync(
-                                    "Link: "
-                                        + linkGenerator.GetPathByRouteValues(
-                                            httpContext,
-                                            "WithSingleAsteriskCatchAll",
-                                            new {  }
-                                        )
-                                );
-                            }
-                        )
-                        .WithMetadata(
-                            new RouteNameMetadata(routeName: "WithSingleAsteriskCatchAll")
-                        );
+                            var response = httpContext.Response;
+                            response.StatusCode = 200;
+                            response.ContentType = "text/plain";
+                            return response.WriteAsync(
+                                "Link: "
+                                    + linkGenerator.GetPathByRouteValues(
+                                        httpContext,
+                                        "WithSingleAsteriskCatchAll",
+                                        new {  }
+                                    )
+                            );
+                        }
+                    ).WithMetadata(new RouteNameMetadata(routeName: "WithSingleAsteriskCatchAll"));
                     endpoints.MapGet(
-                            "/WithDoubleAsteriskCatchAll/{**path}",
-                            (httpContext) =>
-                            {
-                                var linkGenerator =
-                                    httpContext.RequestServices.GetRequiredService<LinkGenerator>();
+                        "/WithDoubleAsteriskCatchAll/{**path}",
+                        (httpContext) =>
+                        {
+                            var linkGenerator = httpContext.RequestServices
+                                .GetRequiredService<LinkGenerator>();
 
-                                var response = httpContext.Response;
-                                response.StatusCode = 200;
-                                response.ContentType = "text/plain";
-                                return response.WriteAsync(
-                                    "Link: "
-                                        + linkGenerator.GetPathByRouteValues(
-                                            httpContext,
-                                            "WithDoubleAsteriskCatchAll",
-                                            new {  }
-                                        )
-                                );
-                            }
-                        )
-                        .WithMetadata(
-                            new RouteNameMetadata(routeName: "WithDoubleAsteriskCatchAll")
-                        );
+                            var response = httpContext.Response;
+                            response.StatusCode = 200;
+                            response.ContentType = "text/plain";
+                            return response.WriteAsync(
+                                "Link: "
+                                    + linkGenerator.GetPathByRouteValues(
+                                        httpContext,
+                                        "WithDoubleAsteriskCatchAll",
+                                        new {  }
+                                    )
+                            );
+                        }
+                    ).WithMetadata(new RouteNameMetadata(routeName: "WithDoubleAsteriskCatchAll"));
 
                     MapHostEndpoint(endpoints);
                     MapHostEndpoint(endpoints, "*.0.0.1");
@@ -230,9 +224,8 @@ namespace RoutingWebSite
                     endpoints.MapGet(
                         "api/get/{id}",
                         (context) =>
-                            context.Response.WriteAsync(
-                                $"{name} - API Get {context.Request.RouteValues["id"]}"
-                            )
+                            context.Response
+                                .WriteAsync($"{name} - API Get {context.Request.RouteValues["id"]}")
                     );
                 }
             );

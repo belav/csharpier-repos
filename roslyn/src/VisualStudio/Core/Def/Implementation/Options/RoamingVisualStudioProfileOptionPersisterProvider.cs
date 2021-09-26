@@ -50,8 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var settingsManager = (ISettingsManager?)await _serviceProvider.GetServiceAsync(
-                    typeof(SVsSettingsPersistenceManager)
-                )
+                typeof(SVsSettingsPersistenceManager)
+            )
                 .ConfigureAwait(true);
 
             _lazyPersister ??= new RoamingVisualStudioProfileOptionPersister(

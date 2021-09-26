@@ -57,45 +57,40 @@ namespace Microsoft.Extensions.Caching.SqlServer
 
         public SqlQueries(string schemaName, string tableName)
         {
-            var tableNameWithSchema = string.Format(
-                CultureInfo.InvariantCulture,
-                "{0}.{1}",
-                DelimitIdentifier(schemaName),
-                DelimitIdentifier(tableName)
-            );
+            var tableNameWithSchema = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}.{1}",
+                    DelimitIdentifier(schemaName),
+                    DelimitIdentifier(tableName)
+                );
 
             // when retrieving an item, we do an UPDATE first and then a SELECT
-            GetCacheItem = string.Format(
-                CultureInfo.InvariantCulture,
-                UpdateCacheItemFormat + GetCacheItemFormat,
-                tableNameWithSchema
-            );
-            GetCacheItemWithoutValue = string.Format(
-                CultureInfo.InvariantCulture,
-                UpdateCacheItemFormat,
-                tableNameWithSchema
-            );
-            DeleteCacheItem = string.Format(
-                CultureInfo.InvariantCulture,
-                DeleteCacheItemFormat,
-                tableNameWithSchema
-            );
-            DeleteExpiredCacheItems = string.Format(
-                CultureInfo.InvariantCulture,
-                DeleteExpiredCacheItemsFormat,
-                tableNameWithSchema
-            );
-            SetCacheItem = string.Format(
-                CultureInfo.InvariantCulture,
-                SetCacheItemFormat,
-                tableNameWithSchema
-            );
-            TableInfo = string.Format(
-                CultureInfo.InvariantCulture,
-                TableInfoFormat,
-                EscapeLiteral(schemaName),
-                EscapeLiteral(tableName)
-            );
+            GetCacheItem = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    UpdateCacheItemFormat + GetCacheItemFormat,
+                    tableNameWithSchema
+                );
+            GetCacheItemWithoutValue = string
+                .Format(CultureInfo.InvariantCulture, UpdateCacheItemFormat, tableNameWithSchema);
+            DeleteCacheItem = string
+                .Format(CultureInfo.InvariantCulture, DeleteCacheItemFormat, tableNameWithSchema);
+            DeleteExpiredCacheItems = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    DeleteExpiredCacheItemsFormat,
+                    tableNameWithSchema
+                );
+            SetCacheItem = string
+                .Format(CultureInfo.InvariantCulture, SetCacheItemFormat, tableNameWithSchema);
+            TableInfo = string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    TableInfoFormat,
+                    EscapeLiteral(schemaName),
+                    EscapeLiteral(tableName)
+                );
         }
 
         public string TableInfo { get; }

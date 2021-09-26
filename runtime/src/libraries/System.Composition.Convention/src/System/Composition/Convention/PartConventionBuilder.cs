@@ -99,8 +99,8 @@ namespace System.Composition.Convention
         /// <returns>A part builder allowing further configuration of the part.</returns>
         public PartConventionBuilder Export<T>()
         {
-            ExportConventionBuilder exportBuilder =
-                new ExportConventionBuilder().AsContractType<T>();
+            ExportConventionBuilder exportBuilder = new ExportConventionBuilder()
+                .AsContractType<T>();
             _typeExportBuilders.Add(exportBuilder);
             return this;
         }
@@ -117,8 +117,8 @@ namespace System.Composition.Convention
                 throw new ArgumentNullException(nameof(exportConfiguration));
             }
 
-            ExportConventionBuilder exportBuilder =
-                new ExportConventionBuilder().AsContractType<T>();
+            ExportConventionBuilder exportBuilder = new ExportConventionBuilder()
+                .AsContractType<T>();
             exportConfiguration(exportBuilder);
             _typeExportBuilders.Add(exportBuilder);
             return this;
@@ -807,10 +807,8 @@ namespace System.Composition.Convention
                         && mi.GetParameters().Length == 0
                     )
                     {
-                        MethodInfo underlyingMi = mi.DeclaringType.GetRuntimeMethod(
-                            mi.Name,
-                            _emptyTypeArray
-                        );
+                        MethodInfo underlyingMi = mi.DeclaringType
+                            .GetRuntimeMethod(mi.Name, _emptyTypeArray);
                         if (underlyingMi != null)
                         {
                             bool checkedIfConfigured = false;
@@ -825,8 +823,8 @@ namespace System.Composition.Convention
                                     {
                                         isConfigured =
                                             mi.GetCustomAttributes<OnImportsSatisfiedAttribute>(
-                                                    false
-                                                )
+                                                false
+                                            )
                                                 .FirstOrDefault() != null;
                                         checkedIfConfigured = true;
                                     }

@@ -390,17 +390,13 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(
-                            m => m.MyCollection,
-                            opt =>
-                            {
-                                opt.MapFrom(src => src.MyCollection);
-                            }
-                        )
-            );
+            new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>().ForMember(
+                        m => m.MyCollection,
+                        opt =>
+                        {
+                            opt.MapFrom(src => src.MyCollection);
+                        }
+                    ));
 
         [Fact]
         public void Should_map_ok()
@@ -426,9 +422,8 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>());
         [Fact]
         public void Should_fail() =>
-            new Action(
-                () => Mapper.Map(new Source(), new Destination())
-            ).ShouldThrow<AutoMapperMappingException>()
+            new Action(() => Mapper.Map(new Source(), new Destination()))
+                .ShouldThrow<AutoMapperMappingException>()
                 .InnerException.ShouldBeOfType<NotSupportedException>()
                 .Message.ShouldBe("Collection is read-only.");
     }
@@ -449,17 +444,13 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(
-                            m => m.MyCollection,
-                            opt =>
-                            {
-                                opt.MapFrom(src => src.MyCollection);
-                            }
-                        )
-            );
+            new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>().ForMember(
+                        m => m.MyCollection,
+                        opt =>
+                        {
+                            opt.MapFrom(src => src.MyCollection);
+                        }
+                    ));
 
         [Fact]
         public void Should_map_ok()
@@ -486,18 +477,14 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(
-                            m => m.MyCollection,
-                            opt =>
-                            {
-                                opt.MapFrom(src => src.MyCollection);
-                                opt.UseDestinationValue();
-                            }
-                        )
-            );
+            new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>().ForMember(
+                        m => m.MyCollection,
+                        opt =>
+                        {
+                            opt.MapFrom(src => src.MyCollection);
+                            opt.UseDestinationValue();
+                        }
+                    ));
 
         [Fact]
         public void Should_map_ok()
@@ -611,15 +598,15 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_report_missing_map()
         {
-            new Action(
-                Configuration.AssertConfigurationIsValid
-            ).ShouldThrowException<AutoMapperConfigurationException>(
-                ex =>
-                {
-                    ex.MemberMap.SourceMember.ShouldBe(typeof(SourceItem).GetProperty("ShipsTo"));
-                    ex.Types.Value.ShouldBe(new TypePair(typeof(SourceItem), typeof(DestItem)));
-                }
-            );
+            new Action(Configuration.AssertConfigurationIsValid)
+                .ShouldThrowException<AutoMapperConfigurationException>(
+                    ex =>
+                    {
+                        ex.MemberMap.SourceMember
+                            .ShouldBe(typeof(SourceItem).GetProperty("ShipsTo"));
+                        ex.Types.Value.ShouldBe(new TypePair(typeof(SourceItem), typeof(DestItem)));
+                    }
+                );
         }
     }
 

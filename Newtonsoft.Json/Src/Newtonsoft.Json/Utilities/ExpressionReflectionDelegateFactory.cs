@@ -331,9 +331,9 @@ namespace Newtonsoft.Json.Utilities
             fieldExpression = EnsureCastExpression(fieldExpression, typeof(object));
 
             Func<T, object?> compiled = Expression.Lambda<Func<T, object?>>(
-                    fieldExpression,
-                    sourceParameter
-                )
+                fieldExpression,
+                sourceParameter
+            )
                 .Compile();
             return compiled;
         }
@@ -472,10 +472,8 @@ namespace Newtonsoft.Json.Utilities
 
                 if (allowWidening && targetType.IsPrimitive())
                 {
-                    MethodInfo toTargetTypeMethod = typeof(Convert).GetMethod(
-                        "To" + targetType.Name,
-                        new[] { typeof(object) }
-                    );
+                    MethodInfo toTargetTypeMethod = typeof(Convert)
+                        .GetMethod("To" + targetType.Name, new[] { typeof(object) });
 
                     if (toTargetTypeMethod != null)
                     {

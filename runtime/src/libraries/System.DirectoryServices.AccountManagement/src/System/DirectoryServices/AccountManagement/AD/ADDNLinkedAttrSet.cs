@@ -908,11 +908,12 @@ namespace System.DirectoryServices.AccountManagement
                         ContextOptions remoteOptions = DefaultContextOptions.ADDefaultContextOption;
 
 #if USE_CTX_CACHE
-                        PrincipalContext remoteCtx = SDSCache.Domain.GetContext(
-                            foreignSid.sidIssuerName,
-                            _storeCtx.Credentials,
-                            remoteOptions
-                        );
+                        PrincipalContext remoteCtx = SDSCache.Domain
+                            .GetContext(
+                                foreignSid.sidIssuerName,
+                                _storeCtx.Credentials,
+                                remoteOptions
+                            );
 #else
                         PrincipalContext remoteCtx = new PrincipalContext(
                             ContextType.Domain,
@@ -943,7 +944,8 @@ namespace System.DirectoryServices.AccountManagement
                                 Utils.ConvertNativeSidToByteArray(_foreignMembersToReturn[0].pSid),
                                 0
                             )
-                        ).ToString(),
+                        )
+                            .ToString(),
                         DateTime.UtcNow
                     );
 
@@ -1088,10 +1090,8 @@ namespace System.DirectoryServices.AccountManagement
             Debug.Assert(foreignGroup.Context.QueryCtx is ADStoreCtx);
             Debug.Assert(foreignGroup.UnderlyingObject is DirectoryEntry);
             Debug.Assert(
-                ((DirectoryEntry)foreignGroup.UnderlyingObject).Path.StartsWith(
-                    "LDAP:",
-                    StringComparison.Ordinal
-                )
+                ((DirectoryEntry)foreignGroup.UnderlyingObject).Path
+                    .StartsWith("LDAP:", StringComparison.Ordinal)
             );
 
             _storeCtx = (ADStoreCtx)foreignGroup.Context.QueryCtx;
@@ -1134,10 +1134,8 @@ namespace System.DirectoryServices.AccountManagement
             Debug.Assert(foreignGroup.Context.QueryCtx is ADStoreCtx);
             Debug.Assert(foreignGroup.UnderlyingObject is DirectoryEntry);
             Debug.Assert(
-                ((DirectoryEntry)foreignGroup.UnderlyingObject).Path.StartsWith(
-                    "LDAP:",
-                    StringComparison.Ordinal
-                )
+                ((DirectoryEntry)foreignGroup.UnderlyingObject).Path
+                    .StartsWith("LDAP:", StringComparison.Ordinal)
             );
 
             _storeCtx = (ADStoreCtx)foreignGroup.Context.QueryCtx;

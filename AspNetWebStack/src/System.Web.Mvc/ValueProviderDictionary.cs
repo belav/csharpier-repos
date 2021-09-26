@@ -114,9 +114,8 @@ namespace System.Web.Mvc
 
         public bool Contains(KeyValuePair<string, ValueProviderResult> item)
         {
-            return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).Contains(
-                item
-            );
+            return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary)
+                .Contains(item);
         }
 
         public bool ContainsKey(string key)
@@ -126,17 +125,14 @@ namespace System.Web.Mvc
 
         public void CopyTo(KeyValuePair<string, ValueProviderResult>[] array, int arrayIndex)
         {
-            ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).CopyTo(
-                array,
-                arrayIndex
-            );
+            ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary)
+                .CopyTo(array, arrayIndex);
         }
 
         public IEnumerator<KeyValuePair<string, ValueProviderResult>> GetEnumerator()
         {
-            return (
-                (IEnumerable<KeyValuePair<string, ValueProviderResult>>)Dictionary
-            ).GetEnumerator();
+            return ((IEnumerable<KeyValuePair<string, ValueProviderResult>>)Dictionary)
+                .GetEnumerator();
         }
 
         private void PopulateDictionary()
@@ -203,9 +199,8 @@ namespace System.Web.Mvc
 
         public bool Remove(KeyValuePair<string, ValueProviderResult> item)
         {
-            return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).Remove(
-                item
-            );
+            return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary)
+                .Remove(item);
         }
 
         public bool Remove(string key)

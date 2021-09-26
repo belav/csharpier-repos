@@ -180,8 +180,8 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Func<Decrementable?> func = Expression.Lambda<Func<Decrementable?>>(
-                    Expression.Decrement(Expression.Constant(operand, typeof(Decrementable?)))
-                )
+                Expression.Decrement(Expression.Constant(operand, typeof(Decrementable?)))
+            )
                 .Compile(useInterpreter);
             Assert.Equal(expected, func());
         }
@@ -196,10 +196,10 @@ namespace System.Linq.Expressions.Tests
             Func<DecrementableWhenNullable?> func = Expression.Lambda<
                 Func<DecrementableWhenNullable?>
             >(
-                    Expression.Decrement(
-                        Expression.Constant(operand, typeof(DecrementableWhenNullable?))
-                    )
+                Expression.Decrement(
+                    Expression.Constant(operand, typeof(DecrementableWhenNullable?))
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(expected, func());
         }
@@ -213,11 +213,8 @@ namespace System.Linq.Expressions.Tests
         {
             MethodInfo method = typeof(IncrementDecrementTests).GetMethod(nameof(DoublyDecrement));
             Func<Decrementable?> func = Expression.Lambda<Func<Decrementable?>>(
-                    Expression.Decrement(
-                        Expression.Constant(operand, typeof(Decrementable?)),
-                        method
-                    )
-                )
+                Expression.Decrement(Expression.Constant(operand, typeof(Decrementable?)), method)
+            )
                 .Compile(useInterpreter);
             Assert.Equal(expected, func());
         }
@@ -229,12 +226,11 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            MethodInfo method = typeof(IncrementDecrementTests).GetMethod(
-                nameof(DoublyDecrementInt32)
-            );
+            MethodInfo method = typeof(IncrementDecrementTests)
+                .GetMethod(nameof(DoublyDecrementInt32));
             Func<int?> func = Expression.Lambda<Func<int?>>(
-                    Expression.Decrement(Expression.Constant(operand, typeof(int?)), method)
-                )
+                Expression.Decrement(Expression.Constant(operand, typeof(int?)), method)
+            )
                 .Compile(useInterpreter);
             Assert.Equal(expected, func());
         }

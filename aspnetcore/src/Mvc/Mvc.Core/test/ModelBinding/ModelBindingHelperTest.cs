@@ -192,11 +192,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             };
 
             Func<ModelMetadata, bool> propertyFilter = (m) =>
-                string.Equals(
-                    m.PropertyName,
-                    "IncludedProperty",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(m.PropertyName, "IncludedProperty", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(m.PropertyName, "MyProperty", StringComparison.OrdinalIgnoreCase);
 
             var valueProvider = new TestValueProvider(values);
@@ -378,12 +375,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             );
 
             Assert.Equal(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    "The passed expression of expression node type '{0}' is invalid."
-                        + " Only simple member access expressions for model properties are supported.",
-                    expression.Body.NodeType
-                ),
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        "The passed expression of expression node type '{0}' is invalid."
+                            + " Only simple member access expressions for model properties are supported.",
+                        expression.Body.NodeType
+                    ),
                 ex.Message
             );
         }
@@ -548,11 +546,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             };
 
             Func<ModelMetadata, bool> propertyFilter = (m) =>
-                string.Equals(
-                    m.PropertyName,
-                    "IncludedProperty",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(m.PropertyName, "IncludedProperty", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(m.PropertyName, "MyProperty", StringComparison.OrdinalIgnoreCase);
 
             var valueProvider = new TestValueProvider(values);

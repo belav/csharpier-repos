@@ -93,9 +93,9 @@ partial class C
                 // (4,25): error CS8793: Partial method 'C.M1()' must have an implementation part because it has accessibility modifiers.
                 //     private partial int M1();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M1"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M1"
+                )
                     .WithArguments("C.M1()")
                     .WithLocation(4, 25)
             );
@@ -229,9 +229,9 @@ partial class C
                 // (4,26): error CS8793: Partial method 'C.M1(out int)' must have an implementation part because it has accessibility modifiers.
                 //     private partial void M1(out int i);
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M1"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M1"
+                )
                     .WithArguments("C.M1(out int)")
                     .WithLocation(4, 26)
             );
@@ -446,9 +446,9 @@ partial class C
                 // (4,27): error CS8795: Partial method C.M1() must have an implementation part because it has accessibility modifiers.
                 //     {mod} partial void M1();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M1"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M1"
+                )
                     .WithArguments("C.M1()")
             );
         }
@@ -561,9 +561,9 @@ partial class C
                 // (4,35): error CS8793: Partial method 'C.M1()' must have an implementation part because it has accessibility modifiers.
                 //     internal virtual partial void M1();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M1"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M1"
+                )
                     .WithArguments("C.M1()")
                     .WithLocation(4, 35)
             );
@@ -642,10 +642,10 @@ public class D : C
     }
 }";
             CompileAndVerify(
-                    text1,
-                    parseOptions: TestOptions.RegularWithExtendedPartialMethods,
-                    expectedOutput: "12"
-                )
+                text1,
+                parseOptions: TestOptions.RegularWithExtendedPartialMethods,
+                expectedOutput: "12"
+            )
                 .VerifyDiagnostics();
         }
 
@@ -972,9 +972,9 @@ partial class D : C
                 // (9,36): error CS8793: Partial method 'D.M1()' must have an implementation part because it has accessibility modifiers.
                 //     internal override partial void M1();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M1"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M1"
+                )
                     .WithArguments("D.M1()")
                     .WithLocation(9, 36)
             );
@@ -1622,9 +1622,9 @@ partial class C
                 // (6,33): error CS8793: Partial method 'C.M()' must have an implementation part because it has accessibility modifiers.
                 //     internal async partial Task M();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M"
+                )
                     .WithArguments("C.M()")
                     .WithLocation(6, 33),
                 // (6,33): error CS1994: The 'async' modifier can only be used in methods that have a body.
@@ -1792,9 +1792,9 @@ partial class D : C
                 // (9,31): error CS8793: Partial method 'D.M1()' must have an implementation part because it has accessibility modifiers.
                 //     internal new partial void M1();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M1"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M1"
+                )
                     .WithArguments("D.M1()")
                     .WithLocation(9, 31)
             );
@@ -2003,9 +2003,9 @@ partial class C
                 // (13,25): warning CS8767: Nullability of reference types in type of parameter 's1' of 'void C.M(string s1)' doesn't match implicitly implemented member 'void I.M(string s1)' (possibly because of nullability attributes).
                 //     public partial void M(string s1);
                 Diagnostic(
-                        ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnImplicitImplementation,
-                        "M"
-                    )
+                    ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnImplicitImplementation,
+                    "M"
+                )
                     .WithArguments("s1", "void C.M(string s1)", "void I.M(string s1)")
                     .WithLocation(13, 25)
             );
@@ -2117,9 +2117,9 @@ partial interface I
                 // (6,27): error CS8793: Partial method 'I.M(string)' must have an implementation part because it has accessibility modifiers.
                 //     internal partial void M(string s1);
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M"
+                )
                     .WithArguments("I.M(string)")
                     .WithLocation(6, 27)
             );
@@ -2219,17 +2219,17 @@ class C : I
                 // (17,12): warning CS8769: Nullability of reference types in type of parameter 's1' doesn't match implemented member 'void I.M(string s1, string s2)' (possibly because of nullability attributes).
                 //     void I.M(string s1, string s2) { } // 3, 4
                 Diagnostic(
-                        ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnExplicitImplementation,
-                        "M"
-                    )
+                    ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnExplicitImplementation,
+                    "M"
+                )
                     .WithArguments("s1", "void I.M(string s1, string s2)")
                     .WithLocation(17, 12),
                 // (17,12): warning CS8769: Nullability of reference types in type of parameter 's2' doesn't match implemented member 'void I.M(string s1, string s2)' (possibly because of nullability attributes).
                 //     void I.M(string s1, string s2) { } // 3, 4
                 Diagnostic(
-                        ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnExplicitImplementation,
-                        "M"
-                    )
+                    ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnExplicitImplementation,
+                    "M"
+                )
                     .WithArguments("s2", "void I.M(string s1, string s2)")
                     .WithLocation(17, 12)
             );
@@ -2427,7 +2427,8 @@ public partial class C
 
             void validator(ModuleSymbol module)
             {
-                var method = module.ContainingAssembly.GetTypeByMetadataName("C")
+                var method = module.ContainingAssembly
+                    .GetTypeByMetadataName("C")
                     .GetMember<MethodSymbol>("M");
 
                 Assert.Equal(
@@ -2457,9 +2458,9 @@ partial class Program
                 // (4,34): error CS8793: Partial method 'Program.M(ref object)' must have an implementation part because it has accessibility modifiers.
                 //     internal static partial void M(ref object o);
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "M"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "M"
+                )
                     .WithArguments("Program.M(ref object)")
                     .WithLocation(4, 34),
                 // (5,34): error CS0663: 'Program' cannot define an overloaded method that differs only on parameter modifiers 'out' and 'ref'
@@ -2925,9 +2926,9 @@ public partial class C
                 // (6,32): error CS8793: Partial method 'C.Main()' must have an implementation part because it has accessibility modifiers.
                 //     public static partial Task Main();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "Main"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "Main"
+                )
                     .WithArguments("C.Main()")
                     .WithLocation(6, 32)
             );
@@ -2984,9 +2985,9 @@ public partial class C
                 // (6,37): error CS8793: Partial method 'C.Main()' must have an implementation part because it has accessibility modifiers.
                 //     public static partial Task<int> Main();
                 Diagnostic(
-                        ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
-                        "Main"
-                    )
+                    ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                    "Main"
+                )
                     .WithArguments("C.Main()")
                     .WithLocation(6, 37)
             );
@@ -3315,7 +3316,8 @@ partial class C
             comp.VerifyDiagnostics(
                 // (5,25): error CS8817: Both partial method declarations must have the same return type.
                 //     public partial long M() => 42; // 1
-                Diagnostic(ErrorCode.ERR_PartialMethodReturnTypeDifference, "M").WithLocation(5, 25)
+                Diagnostic(ErrorCode.ERR_PartialMethodReturnTypeDifference, "M")
+                    .WithLocation(5, 25)
             );
         }
 
@@ -3336,7 +3338,8 @@ partial class C
             comp.VerifyDiagnostics(
                 // (5,24): error CS8817: Both partial method declarations must have the same return type.
                 //     public partial int M() => 42; // 1
-                Diagnostic(ErrorCode.ERR_PartialMethodReturnTypeDifference, "M").WithLocation(5, 24)
+                Diagnostic(ErrorCode.ERR_PartialMethodReturnTypeDifference, "M")
+                    .WithLocation(5, 24)
             );
         }
 
@@ -3606,7 +3609,8 @@ partial class C
                     .WithLocation(5, 24),
                 // (8,28): error CS8818: Partial method declarations must have matching ref return values.
                 //     public partial ref int M2() => throw null!; // 2
-                Diagnostic(ErrorCode.ERR_PartialMethodRefReturnDifference, "M2").WithLocation(8, 28)
+                Diagnostic(ErrorCode.ERR_PartialMethodRefReturnDifference, "M2")
+                    .WithLocation(8, 28)
             );
         }
 
@@ -3775,7 +3779,8 @@ partial class C
                     .WithLocation(5, 37),
                 // (8,28): error CS8818: Partial method declarations must have matching ref return values.
                 //     public partial ref int M2() => throw null!; // 2
-                Diagnostic(ErrorCode.ERR_PartialMethodRefReturnDifference, "M2").WithLocation(8, 28)
+                Diagnostic(ErrorCode.ERR_PartialMethodRefReturnDifference, "M2")
+                    .WithLocation(8, 28)
             );
         }
 
@@ -3876,7 +3881,8 @@ partial class C
                     .WithLocation(4, 27),
                 // (4,27): error CS8818: Partial method declarations must have matching ref return values.
                 //     public partial string F1() => null;
-                Diagnostic(ErrorCode.ERR_PartialMethodRefReturnDifference, "F1").WithLocation(4, 27)
+                Diagnostic(ErrorCode.ERR_PartialMethodRefReturnDifference, "F1")
+                    .WithLocation(4, 27)
             );
         }
 
@@ -3896,7 +3902,8 @@ partial class C
             comp.VerifyDiagnostics(
                 // (4,31): error CS8818: Partial method declarations must have matching ref return values.
                 //     public partial (int, int) F1() => default;
-                Diagnostic(ErrorCode.ERR_PartialMethodRefReturnDifference, "F1").WithLocation(4, 31)
+                Diagnostic(ErrorCode.ERR_PartialMethodRefReturnDifference, "F1")
+                    .WithLocation(4, 31)
             );
         }
 

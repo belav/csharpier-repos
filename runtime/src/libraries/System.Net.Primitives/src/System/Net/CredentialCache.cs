@@ -34,25 +34,28 @@ namespace System.Net
                 (cred is SystemNetworkCredential)
                 && !(
                     (
-                        string.Equals(
-                            authType,
-                            NegotiationInfoClass.NTLM,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                authType,
+                                NegotiationInfoClass.NTLM,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     || (
-                        string.Equals(
-                            authType,
-                            NegotiationInfoClass.Kerberos,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                authType,
+                                NegotiationInfoClass.Kerberos,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     || (
-                        string.Equals(
-                            authType,
-                            NegotiationInfoClass.Negotiate,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                authType,
+                                NegotiationInfoClass.Negotiate,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                 )
             )
@@ -115,25 +118,28 @@ namespace System.Net
                 (credential is SystemNetworkCredential)
                 && !(
                     (
-                        string.Equals(
-                            authenticationType,
-                            NegotiationInfoClass.NTLM,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                authenticationType,
+                                NegotiationInfoClass.NTLM,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     || (
-                        string.Equals(
-                            authenticationType,
-                            NegotiationInfoClass.Kerberos,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                authenticationType,
+                                NegotiationInfoClass.Kerberos,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     || (
-                        string.Equals(
-                            authenticationType,
-                            NegotiationInfoClass.Negotiate,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                authenticationType,
+                                NegotiationInfoClass.Negotiate,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                 )
             )
@@ -544,11 +550,12 @@ namespace System.Net
         public bool Equals(CredentialHostKey other)
         {
             bool equals =
-                string.Equals(
-                    AuthenticationType,
-                    other.AuthenticationType,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        AuthenticationType,
+                        other.AuthenticationType,
+                        StringComparison.OrdinalIgnoreCase
+                    )
                 && string.Equals(Host, other.Host, StringComparison.OrdinalIgnoreCase)
                 && Port == other.Port;
 
@@ -590,11 +597,12 @@ namespace System.Net
 
             // If the protocols don't match, this credential is not applicable for the given Uri.
             if (
-                !string.Equals(
-                    authenticationType,
-                    AuthenticationType,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                !string
+                    .Equals(
+                        authenticationType,
+                        AuthenticationType,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 return false;
@@ -638,14 +646,15 @@ namespace System.Net
                 return false;
             }
 
-            return string.Compare(
-                    uri.AbsolutePath,
-                    0,
-                    prefixUri.AbsolutePath,
-                    0,
-                    prefixLen,
-                    StringComparison.OrdinalIgnoreCase
-                ) == 0;
+            return string
+                    .Compare(
+                        uri.AbsolutePath,
+                        0,
+                        prefixUri.AbsolutePath,
+                        0,
+                        prefixLen,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0;
         }
 
         public override int GetHashCode() =>
@@ -660,11 +669,12 @@ namespace System.Net
             }
 
             bool equals =
-                string.Equals(
-                    AuthenticationType,
-                    other.AuthenticationType,
-                    StringComparison.OrdinalIgnoreCase
-                ) && UriPrefix.Equals(other.UriPrefix);
+                string
+                    .Equals(
+                        AuthenticationType,
+                        other.AuthenticationType,
+                        StringComparison.OrdinalIgnoreCase
+                    ) && UriPrefix.Equals(other.UriPrefix);
 
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this, $"Equals({this},{other}) returns {equals}");

@@ -93,10 +93,10 @@ namespace System.Net.Connections
             )
             {
                 Connection con = await _baseFactory.ConnectAsync(
-                        endPoint,
-                        options,
-                        cancellationToken
-                    )
+                    endPoint,
+                    options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 try
                 {

@@ -125,11 +125,8 @@ namespace B
             using var workspace = new TestWorkspace(
                 composition: EditorTestCompositions.EditorFeatures
             );
-            var document = workspace.CurrentSolution.AddProject(
-                    "TestProject",
-                    "TestProject",
-                    LanguageNames.CSharp
-                )
+            var document = workspace.CurrentSolution
+                .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", code);
 
             var data = new DiagnosticData(
@@ -170,11 +167,8 @@ namespace B
                 composition: EditorTestCompositions.EditorFeatures
             );
 
-            var additionalDocument = workspace.CurrentSolution.AddProject(
-                    "TestProject",
-                    "TestProject",
-                    LanguageNames.CSharp
-                )
+            var additionalDocument = workspace.CurrentSolution
+                .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("test.cs", "")
                 .Project.AddAdditionalDocument(
                     "AdditionalDocument.txt",

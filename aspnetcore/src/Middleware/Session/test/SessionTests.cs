@@ -32,33 +32,30 @@ namespace Microsoft.AspNetCore.Session
         public async Task ReadingEmptySessionDoesNotCreateCookie()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseSession();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
 
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.Null(context.Session.GetString("NotFound"));
-                                            return Task.FromResult(0);
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
+                            app.Run(
+                                context =>
                                 {
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession();
+                                    Assert.Null(context.Session.GetString("NotFound"));
+                                    return Task.FromResult(0);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddDistributedMemoryCache();
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -75,34 +72,31 @@ namespace Microsoft.AspNetCore.Session
         public async Task SettingAValueCausesTheCookieToBeCreated()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.Null(context.Session.GetString("Key"));
-                                            context.Session.SetString("Key", "Value");
-                                            Assert.Equal("Value", context.Session.GetString("Key"));
-                                            return Task.FromResult(0);
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession();
+                                    Assert.Null(context.Session.GetString("Key"));
+                                    context.Session.SetString("Key", "Value");
+                                    Assert.Equal("Value", context.Session.GetString("Key"));
+                                    return Task.FromResult(0);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddDistributedMemoryCache();
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -131,43 +125,40 @@ namespace Microsoft.AspNetCore.Session
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession(
+                                new SessionOptions
                                 {
-                                    app.UseSession(
-                                        new SessionOptions
-                                        {
-                                            Cookie =
-                                            {
-                                                Name = "TestCookie",
-                                                SecurePolicy = cookieSecurePolicy
-                                            }
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.Null(context.Session.GetString("Key"));
-                                            context.Session.SetString("Key", "Value");
-                                            Assert.Equal("Value", context.Session.GetString("Key"));
-                                            return Task.FromResult(0);
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession();
+                                    Cookie =
+                                    {
+                                        Name = "TestCookie",
+                                        SecurePolicy = cookieSecurePolicy
+                                    }
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.Run(
+                                context =>
+                                {
+                                    Assert.Null(context.Session.GetString("Key"));
+                                    context.Session.SetString("Key", "Value");
+                                    Assert.Equal("Value", context.Session.GetString("Key"));
+                                    return Task.FromResult(0);
+                                }
+                            );
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddDistributedMemoryCache();
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -193,41 +184,39 @@ namespace Microsoft.AspNetCore.Session
         public async Task SessionCanBeAccessedOnTheNextRequest()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            int? value = context.Session.GetInt32("Key");
-                                            if (context.Request.Path == new PathString("/first"))
-                                            {
-                                                Assert.False(value.HasValue);
-                                                value = 0;
-                                            }
-                                            Assert.True(value.HasValue);
-                                            context.Session.SetInt32("Key", value.Value + 1);
-                                            return context.Response.WriteAsync(
-                                                value.Value.ToString(CultureInfo.InvariantCulture)
-                                            );
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession();
+                                    int? value = context.Session.GetInt32("Key");
+                                    if (context.Request.Path == new PathString("/first"))
+                                    {
+                                        Assert.False(value.HasValue);
+                                        value = 0;
+                                    }
+                                    Assert.True(value.HasValue);
+                                    context.Session.SetInt32("Key", value.Value + 1);
+                                    return context.Response
+                                        .WriteAsync(
+                                            value.Value.ToString(CultureInfo.InvariantCulture)
+                                        );
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddDistributedMemoryCache();
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -240,13 +229,11 @@ namespace Microsoft.AspNetCore.Session
 
                 client = server.CreateClient();
                 var cookie = SetCookieHeaderValue.ParseList(
-                        response.Headers.GetValues("Set-Cookie").ToList()
-                    )
+                    response.Headers.GetValues("Set-Cookie").ToList()
+                )
                     .First();
-                client.DefaultRequestHeaders.Add(
-                    "Cookie",
-                    new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-                );
+                client.DefaultRequestHeaders
+                    .Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
                 Assert.Equal("1", await client.GetStringAsync("/"));
                 Assert.Equal("2", await client.GetStringAsync("/"));
                 Assert.Equal("3", await client.GetStringAsync("/"));
@@ -257,55 +244,49 @@ namespace Microsoft.AspNetCore.Session
         public async Task RemovedItemCannotBeAccessedAgain()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            int? value = context.Session.GetInt32("Key");
-                                            if (context.Request.Path == new PathString("/first"))
-                                            {
-                                                Assert.False(value.HasValue);
-                                                value = 0;
-                                                context.Session.SetInt32("Key", 1);
-                                            }
-                                            else if (
-                                                context.Request.Path == new PathString("/second")
-                                            )
-                                            {
-                                                Assert.True(value.HasValue);
-                                                Assert.Equal(1, value);
-                                                context.Session.Remove("Key");
-                                            }
-                                            else if (
-                                                context.Request.Path == new PathString("/third")
-                                            )
-                                            {
-                                                Assert.False(value.HasValue);
-                                                value = 2;
-                                            }
-                                            return context.Response.WriteAsync(
-                                                value.Value.ToString(CultureInfo.InvariantCulture)
-                                            );
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession();
+                                    int? value = context.Session.GetInt32("Key");
+                                    if (context.Request.Path == new PathString("/first"))
+                                    {
+                                        Assert.False(value.HasValue);
+                                        value = 0;
+                                        context.Session.SetInt32("Key", 1);
+                                    }
+                                    else if (context.Request.Path == new PathString("/second"))
+                                    {
+                                        Assert.True(value.HasValue);
+                                        Assert.Equal(1, value);
+                                        context.Session.Remove("Key");
+                                    }
+                                    else if (context.Request.Path == new PathString("/third"))
+                                    {
+                                        Assert.False(value.HasValue);
+                                        value = 2;
+                                    }
+                                    return context.Response
+                                        .WriteAsync(
+                                            value.Value.ToString(CultureInfo.InvariantCulture)
+                                        );
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddDistributedMemoryCache();
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -318,13 +299,11 @@ namespace Microsoft.AspNetCore.Session
 
                 client = server.CreateClient();
                 var cookie = SetCookieHeaderValue.ParseList(
-                        response.Headers.GetValues("Set-Cookie").ToList()
-                    )
+                    response.Headers.GetValues("Set-Cookie").ToList()
+                )
                     .First();
-                client.DefaultRequestHeaders.Add(
-                    "Cookie",
-                    new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-                );
+                client.DefaultRequestHeaders
+                    .Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
                 Assert.Equal("1", await client.GetStringAsync("/second"));
                 Assert.Equal("2", await client.GetStringAsync("/third"));
             }
@@ -334,55 +313,49 @@ namespace Microsoft.AspNetCore.Session
         public async Task ClearedItemsCannotBeAccessedAgain()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            int? value = context.Session.GetInt32("Key");
-                                            if (context.Request.Path == new PathString("/first"))
-                                            {
-                                                Assert.False(value.HasValue);
-                                                value = 0;
-                                                context.Session.SetInt32("Key", 1);
-                                            }
-                                            else if (
-                                                context.Request.Path == new PathString("/second")
-                                            )
-                                            {
-                                                Assert.True(value.HasValue);
-                                                Assert.Equal(1, value);
-                                                context.Session.Clear();
-                                            }
-                                            else if (
-                                                context.Request.Path == new PathString("/third")
-                                            )
-                                            {
-                                                Assert.False(value.HasValue);
-                                                value = 2;
-                                            }
-                                            return context.Response.WriteAsync(
-                                                value.Value.ToString(CultureInfo.InvariantCulture)
-                                            );
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession();
+                                    int? value = context.Session.GetInt32("Key");
+                                    if (context.Request.Path == new PathString("/first"))
+                                    {
+                                        Assert.False(value.HasValue);
+                                        value = 0;
+                                        context.Session.SetInt32("Key", 1);
+                                    }
+                                    else if (context.Request.Path == new PathString("/second"))
+                                    {
+                                        Assert.True(value.HasValue);
+                                        Assert.Equal(1, value);
+                                        context.Session.Clear();
+                                    }
+                                    else if (context.Request.Path == new PathString("/third"))
+                                    {
+                                        Assert.False(value.HasValue);
+                                        value = 2;
+                                    }
+                                    return context.Response
+                                        .WriteAsync(
+                                            value.Value.ToString(CultureInfo.InvariantCulture)
+                                        );
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddDistributedMemoryCache();
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -395,13 +368,11 @@ namespace Microsoft.AspNetCore.Session
 
                 client = server.CreateClient();
                 var cookie = SetCookieHeaderValue.ParseList(
-                        response.Headers.GetValues("Set-Cookie").ToList()
-                    )
+                    response.Headers.GetValues("Set-Cookie").ToList()
+                )
                     .First();
-                client.DefaultRequestHeaders.Add(
-                    "Cookie",
-                    new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-                );
+                client.DefaultRequestHeaders
+                    .Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
                 Assert.Equal("1", await client.GetStringAsync("/second"));
                 Assert.Equal("2", await client.GetStringAsync("/third"));
             }
@@ -416,33 +387,30 @@ namespace Microsoft.AspNetCore.Session
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            context.Session.SetString("Key", "Value");
-                                            return Task.FromResult(0);
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession();
+                                    context.Session.SetString("Key", "Value");
+                                    return Task.FromResult(0);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                            services.AddDistributedMemoryCache();
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -471,50 +439,44 @@ namespace Microsoft.AspNetCore.Session
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            int? value = context.Session.GetInt32("Key");
-                                            if (context.Request.Path == new PathString("/first"))
-                                            {
-                                                Assert.False(value.HasValue);
-                                                value = 1;
-                                                context.Session.SetInt32("Key", 1);
-                                            }
-                                            else if (
-                                                context.Request.Path == new PathString("/second")
-                                            )
-                                            {
-                                                Assert.False(value.HasValue);
-                                                value = 2;
-                                            }
-                                            return context.Response.WriteAsync(
-                                                value.Value.ToString(CultureInfo.InvariantCulture)
-                                            );
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession(
-                                        o => o.IdleTimeout = TimeSpan.FromMilliseconds(30)
-                                    );
+                                    int? value = context.Session.GetInt32("Key");
+                                    if (context.Request.Path == new PathString("/first"))
+                                    {
+                                        Assert.False(value.HasValue);
+                                        value = 1;
+                                        context.Session.SetInt32("Key", 1);
+                                    }
+                                    else if (context.Request.Path == new PathString("/second"))
+                                    {
+                                        Assert.False(value.HasValue);
+                                        value = 2;
+                                    }
+                                    return context.Response
+                                        .WriteAsync(
+                                            value.Value.ToString(CultureInfo.InvariantCulture)
+                                        );
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                            services.AddDistributedMemoryCache();
+                            services.AddSession(o => o.IdleTimeout = TimeSpan.FromMilliseconds(30));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -527,13 +489,11 @@ namespace Microsoft.AspNetCore.Session
 
                 client = server.CreateClient();
                 var cookie = SetCookieHeaderValue.ParseList(
-                        response.Headers.GetValues("Set-Cookie").ToList()
-                    )
+                    response.Headers.GetValues("Set-Cookie").ToList()
+                )
                     .First();
-                client.DefaultRequestHeaders.Add(
-                    "Cookie",
-                    new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-                );
+                client.DefaultRequestHeaders
+                    .Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
                 Thread.Sleep(50);
                 result = await client.GetStringAsync("/second");
             }
@@ -555,66 +515,57 @@ namespace Microsoft.AspNetCore.Session
         {
             var clock = new TestClock();
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            string responseData = string.Empty;
-                                            if (
-                                                context.Request.Path
-                                                == new PathString("/AddDataToSession")
-                                            )
-                                            {
-                                                context.Session.SetInt32("Key", 10);
-                                                responseData = "added data to session";
-                                            }
-                                            else if (
-                                                context.Request.Path
-                                                == new PathString("/AccessSessionData")
-                                            )
-                                            {
-                                                var value = context.Session.GetInt32("Key");
-                                                responseData =
-                                                    (value == null)
-                                                        ? "No value found in session."
-                                                        : value.ToString();
-                                            }
-                                            else if (
-                                                context.Request.Path
-                                                == new PathString("/DoNotAccessSessionData")
-                                            )
-                                            {
-                                                responseData = "did not access session data";
-                                            }
+                                    string responseData = string.Empty;
+                                    if (context.Request.Path == new PathString("/AddDataToSession"))
+                                    {
+                                        context.Session.SetInt32("Key", 10);
+                                        responseData = "added data to session";
+                                    }
+                                    else if (
+                                        context.Request.Path == new PathString("/AccessSessionData")
+                                    )
+                                    {
+                                        var value = context.Session.GetInt32("Key");
+                                        responseData =
+                                            (value == null)
+                                                ? "No value found in session."
+                                                : value.ToString();
+                                    }
+                                    else if (
+                                        context.Request.Path
+                                        == new PathString("/DoNotAccessSessionData")
+                                    )
+                                    {
+                                        responseData = "did not access session data";
+                                    }
 
-                                            return context.Response.WriteAsync(responseData);
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(
-                                        typeof(ILoggerFactory),
-                                        NullLoggerFactory.Instance
-                                    );
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession(
-                                        o => o.IdleTimeout = TimeSpan.FromMinutes(20)
-                                    );
-                                    services.Configure<MemoryCacheOptions>(o => o.Clock = clock);
+                                    return context.Response.WriteAsync(responseData);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(
+                                typeof(ILoggerFactory),
+                                NullLoggerFactory.Instance
+                            );
+                            services.AddDistributedMemoryCache();
+                            services.AddSession(o => o.IdleTimeout = TimeSpan.FromMinutes(20));
+                            services.Configure<MemoryCacheOptions>(o => o.Clock = clock);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -626,13 +577,11 @@ namespace Microsoft.AspNetCore.Session
 
                 client = server.CreateClient();
                 var cookie = SetCookieHeaderValue.ParseList(
-                        response.Headers.GetValues("Set-Cookie").ToList()
-                    )
+                    response.Headers.GetValues("Set-Cookie").ToList()
+                )
                     .First();
-                client.DefaultRequestHeaders.Add(
-                    "Cookie",
-                    new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-                );
+                client.DefaultRequestHeaders
+                    .Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
 
                 for (var i = 0; i < 5; i++)
                 {
@@ -649,44 +598,39 @@ namespace Microsoft.AspNetCore.Session
         public async Task SessionFeature_IsUnregistered_WhenResponseGoingOut()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.Use(
+                                async (httpContext, next) =>
                                 {
-                                    app.Use(
-                                        async (httpContext, next) =>
-                                        {
-                                            await next();
+                                    await next();
 
-                                            Assert.Null(
-                                                httpContext.Features.Get<ISessionFeature>()
-                                            );
-                                        }
-                                    );
-
-                                    app.UseSession();
-
-                                    app.Run(
-                                        context =>
-                                        {
-                                            context.Session.SetString("key", "value");
-                                            return Task.FromResult(0);
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession();
+                                    Assert.Null(httpContext.Features.Get<ISessionFeature>());
                                 }
                             );
-                    }
-                )
-                .Build();
+
+                            app.UseSession();
+
+                            app.Run(
+                                context =>
+                                {
+                                    context.Session.SetString("key", "value");
+                                    return Task.FromResult(0);
+                                }
+                            );
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddDistributedMemoryCache();
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -702,54 +646,47 @@ namespace Microsoft.AspNetCore.Session
         public async Task SessionFeature_IsUnregistered_WhenResponseGoingOut_AndAnUnhandledExcetionIsThrown()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.Use(
+                                async (httpContext, next) =>
                                 {
-                                    app.Use(
-                                        async (httpContext, next) =>
-                                        {
-                                            var exceptionThrown = false;
-                                            try
-                                            {
-                                                await next();
-                                            }
-                                            catch
-                                            {
-                                                exceptionThrown = true;
-                                            }
+                                    var exceptionThrown = false;
+                                    try
+                                    {
+                                        await next();
+                                    }
+                                    catch
+                                    {
+                                        exceptionThrown = true;
+                                    }
 
-                                            Assert.True(exceptionThrown);
-                                            Assert.Null(
-                                                httpContext.Features.Get<ISessionFeature>()
-                                            );
-                                        }
-                                    );
-
-                                    app.UseSession();
-
-                                    app.Run(
-                                        context =>
-                                        {
-                                            throw new InvalidOperationException(
-                                                "An error occurred."
-                                            );
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession();
+                                    Assert.True(exceptionThrown);
+                                    Assert.Null(httpContext.Features.Get<ISessionFeature>());
                                 }
                             );
-                    }
-                )
-                .Build();
+
+                            app.UseSession();
+
+                            app.Run(
+                                context =>
+                                {
+                                    throw new InvalidOperationException("An error occurred.");
+                                }
+                            );
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddDistributedMemoryCache();
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -764,35 +701,32 @@ namespace Microsoft.AspNetCore.Session
         public async Task SessionKeys_AreCaseSensitive()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            context.Session.SetString("KEY", "VALUE");
-                                            context.Session.SetString("key", "value");
-                                            Assert.Equal("VALUE", context.Session.GetString("KEY"));
-                                            Assert.Equal("value", context.Session.GetString("key"));
-                                            return Task.FromResult(0);
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddDistributedMemoryCache();
-                                    services.AddSession();
+                                    context.Session.SetString("KEY", "VALUE");
+                                    context.Session.SetString("key", "value");
+                                    Assert.Equal("VALUE", context.Session.GetString("KEY"));
+                                    Assert.Equal("value", context.Session.GetString("key"));
+                                    return Task.FromResult(0);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddDistributedMemoryCache();
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -813,44 +747,38 @@ namespace Microsoft.AspNetCore.Session
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.False(
-                                                context.Session.TryGetValue("key", out var value)
-                                            );
-                                            Assert.Null(value);
-                                            Assert.Equal(string.Empty, context.Session.Id);
-                                            Assert.False(context.Session.Keys.Any());
-                                            return Task.FromResult(0);
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
-                                    services.AddSingleton<IDistributedCache>(
-                                        new UnreliableCache(
-                                            new MemoryCache(new MemoryCacheOptions())
-                                        ) {
-                                            DisableGet = true
-                                        }
-                                    );
-                                    services.AddSession();
+                                    Assert.False(context.Session.TryGetValue("key", out var value));
+                                    Assert.Null(value);
+                                    Assert.Equal(string.Empty, context.Session.Id);
+                                    Assert.False(context.Session.Keys.Any());
+                                    return Task.FromResult(0);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                            services.AddSingleton<IDistributedCache>(
+                                new UnreliableCache(new MemoryCache(new MemoryCacheOptions()))
+                                {
+                                    DisableGet = true
+                                }
+                            );
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -876,43 +804,39 @@ namespace Microsoft.AspNetCore.Session
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                async context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        async context =>
-                                        {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                                () => context.Session.LoadAsync()
-                                            );
-                                            Assert.False(context.Session.IsAvailable);
-                                            Assert.Equal(string.Empty, context.Session.Id);
-                                            Assert.False(context.Session.Keys.Any());
-                                        }
+                                    await Assert.ThrowsAsync<InvalidOperationException>(
+                                        () => context.Session.LoadAsync()
                                     );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
-                                    services.AddSingleton<IDistributedCache>(
-                                        new UnreliableCache(
-                                            new MemoryCache(new MemoryCacheOptions())
-                                        ) {
-                                            DisableGet = true
-                                        }
-                                    );
-                                    services.AddSession();
+                                    Assert.False(context.Session.IsAvailable);
+                                    Assert.Equal(string.Empty, context.Session.Id);
+                                    Assert.False(context.Session.Keys.Any());
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                            services.AddSingleton<IDistributedCache>(
+                                new UnreliableCache(new MemoryCache(new MemoryCacheOptions()))
+                                {
+                                    DisableGet = true
+                                }
+                            );
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -938,45 +862,38 @@ namespace Microsoft.AspNetCore.Session
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession(
+                                new SessionOptions() { IOTimeout = TimeSpan.FromSeconds(0.5) }
+                            );
+                            app.Run(
+                                async context =>
                                 {
-                                    app.UseSession(
-                                        new SessionOptions()
-                                        {
-                                            IOTimeout = TimeSpan.FromSeconds(0.5)
-                                        }
+                                    await Assert.ThrowsAsync<OperationCanceledException>(
+                                        () => context.Session.LoadAsync()
                                     );
-                                    app.Run(
-                                        async context =>
-                                        {
-                                            await Assert.ThrowsAsync<OperationCanceledException>(
-                                                () => context.Session.LoadAsync()
-                                            );
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
-                                    services.AddSingleton<IDistributedCache>(
-                                        new UnreliableCache(
-                                            new MemoryCache(new MemoryCacheOptions())
-                                        ) {
-                                            DelayGetAsync = true
-                                        }
-                                    );
-                                    services.AddSession();
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                            services.AddSingleton<IDistributedCache>(
+                                new UnreliableCache(new MemoryCache(new MemoryCacheOptions()))
+                                {
+                                    DelayGetAsync = true
+                                }
+                            );
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1001,43 +918,39 @@ namespace Microsoft.AspNetCore.Session
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                async context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        async context =>
-                                        {
-                                            var cts = new CancellationTokenSource();
-                                            var token = cts.Token;
-                                            cts.Cancel();
-                                            await Assert.ThrowsAsync<OperationCanceledException>(
-                                                () => context.Session.LoadAsync(token)
-                                            );
-                                        }
+                                    var cts = new CancellationTokenSource();
+                                    var token = cts.Token;
+                                    cts.Cancel();
+                                    await Assert.ThrowsAsync<OperationCanceledException>(
+                                        () => context.Session.LoadAsync(token)
                                     );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
-                                    services.AddSingleton<IDistributedCache>(
-                                        new UnreliableCache(
-                                            new MemoryCache(new MemoryCacheOptions())
-                                        ) {
-                                            DelayGetAsync = true
-                                        }
-                                    );
-                                    services.AddSession();
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                            services.AddSingleton<IDistributedCache>(
+                                new UnreliableCache(new MemoryCache(new MemoryCacheOptions()))
+                                {
+                                    DelayGetAsync = true
+                                }
+                            );
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1068,39 +981,35 @@ namespace Microsoft.AspNetCore.Session
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            context.Session.SetInt32("key", 0);
-                                            return Task.FromResult(0);
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
-                                    services.AddSingleton<IDistributedCache>(
-                                        new UnreliableCache(
-                                            new MemoryCache(new MemoryCacheOptions())
-                                        ) {
-                                            DisableSetAsync = true
-                                        }
-                                    );
-                                    services.AddSession();
+                                    context.Session.SetInt32("key", 0);
+                                    return Task.FromResult(0);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                            services.AddSingleton<IDistributedCache>(
+                                new UnreliableCache(new MemoryCache(new MemoryCacheOptions()))
+                                {
+                                    DisableSetAsync = true
+                                }
+                            );
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1111,24 +1020,22 @@ namespace Microsoft.AspNetCore.Session
                 response.EnsureSuccessStatusCode();
             }
 
-            var sessionLogMessage = sink.Writes.Where(
+            var sessionLogMessage = sink.Writes
+                .Where(
                     message =>
-                        message.LoggerName.Equals(
-                            typeof(DistributedSession).FullName,
-                            StringComparison.Ordinal
-                        )
+                        message.LoggerName
+                            .Equals(typeof(DistributedSession).FullName, StringComparison.Ordinal)
                 )
                 .Single();
 
             Assert.Contains("Session started", sessionLogMessage.State.ToString());
             Assert.Equal(LogLevel.Information, sessionLogMessage.LogLevel);
 
-            var sessionMiddlewareLogMessage = sink.Writes.Where(
+            var sessionMiddlewareLogMessage = sink.Writes
+                .Where(
                     message =>
-                        message.LoggerName.Equals(
-                            typeof(SessionMiddleware).FullName,
-                            StringComparison.Ordinal
-                        )
+                        message.LoggerName
+                            .Equals(typeof(SessionMiddleware).FullName, StringComparison.Ordinal)
                 )
                 .Single();
 
@@ -1156,44 +1063,37 @@ namespace Microsoft.AspNetCore.Session
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession(
+                                new SessionOptions() { IOTimeout = TimeSpan.FromSeconds(0.5) }
+                            );
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession(
-                                        new SessionOptions()
-                                        {
-                                            IOTimeout = TimeSpan.FromSeconds(0.5)
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            context.Session.SetInt32("key", 0);
-                                            return Task.FromResult(0);
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
-                                    services.AddSingleton<IDistributedCache>(
-                                        new UnreliableCache(
-                                            new MemoryCache(new MemoryCacheOptions())
-                                        ) {
-                                            DelaySetAsync = true
-                                        }
-                                    );
-                                    services.AddSession();
+                                    context.Session.SetInt32("key", 0);
+                                    return Task.FromResult(0);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                            services.AddSingleton<IDistributedCache>(
+                                new UnreliableCache(new MemoryCache(new MemoryCacheOptions()))
+                                {
+                                    DelaySetAsync = true
+                                }
+                            );
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1204,12 +1104,11 @@ namespace Microsoft.AspNetCore.Session
                 response.EnsureSuccessStatusCode();
             }
 
-            var sessionLogMessages = sink.Writes.Where(
+            var sessionLogMessages = sink.Writes
+                .Where(
                     message =>
-                        message.LoggerName.Equals(
-                            typeof(DistributedSession).FullName,
-                            StringComparison.Ordinal
-                        )
+                        message.LoggerName
+                            .Equals(typeof(DistributedSession).FullName, StringComparison.Ordinal)
                 )
                 .ToList();
 
@@ -1222,12 +1121,11 @@ namespace Microsoft.AspNetCore.Session
             );
             Assert.Equal(LogLevel.Warning, sessionLogMessages[1].LogLevel);
 
-            var sessionMiddlewareLogs = sink.Writes.Where(
+            var sessionMiddlewareLogs = sink.Writes
+                .Where(
                     message =>
-                        message.LoggerName.Equals(
-                            typeof(SessionMiddleware).FullName,
-                            StringComparison.Ordinal
-                        )
+                        message.LoggerName
+                            .Equals(typeof(SessionMiddleware).FullName, StringComparison.Ordinal)
                 )
                 .ToList();
 
@@ -1255,44 +1153,40 @@ namespace Microsoft.AspNetCore.Session
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                async context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        async context =>
-                                        {
-                                            context.Session.SetInt32("key", 0);
-                                            var cts = new CancellationTokenSource();
-                                            var token = cts.Token;
-                                            cts.Cancel();
-                                            await Assert.ThrowsAsync<OperationCanceledException>(
-                                                () => context.Session.CommitAsync(token)
-                                            );
-                                        }
+                                    context.Session.SetInt32("key", 0);
+                                    var cts = new CancellationTokenSource();
+                                    var token = cts.Token;
+                                    cts.Cancel();
+                                    await Assert.ThrowsAsync<OperationCanceledException>(
+                                        () => context.Session.CommitAsync(token)
                                     );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
-                                    services.AddSingleton<IDistributedCache>(
-                                        new UnreliableCache(
-                                            new MemoryCache(new MemoryCacheOptions())
-                                        ) {
-                                            DelaySetAsync = true
-                                        }
-                                    );
-                                    services.AddSession();
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                            services.AddSingleton<IDistributedCache>(
+                                new UnreliableCache(new MemoryCache(new MemoryCacheOptions()))
+                                {
+                                    DelaySetAsync = true
+                                }
+                            );
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1304,12 +1198,11 @@ namespace Microsoft.AspNetCore.Session
             }
 
             // The session is automatically committed on unwind even after the manual commit was canceled.
-            var sessionLogMessages = sink.Writes.Where(
+            var sessionLogMessages = sink.Writes
+                .Where(
                     message =>
-                        message.LoggerName.Equals(
-                            typeof(DistributedSession).FullName,
-                            StringComparison.Ordinal
-                        )
+                        message.LoggerName
+                            .Equals(typeof(DistributedSession).FullName, StringComparison.Ordinal)
                 )
                 .ToList();
 
@@ -1320,13 +1213,15 @@ namespace Microsoft.AspNetCore.Session
             Assert.Equal(LogLevel.Debug, sessionLogMessages[1].LogLevel);
 
             Assert.Empty(
-                sink.Writes.Where(
-                    message =>
-                        message.LoggerName.Equals(
-                            typeof(SessionMiddleware).FullName,
-                            StringComparison.Ordinal
-                        )
-                )
+                sink.Writes
+                    .Where(
+                        message =>
+                            message.LoggerName
+                                .Equals(
+                                    typeof(SessionMiddleware).FullName,
+                                    StringComparison.Ordinal
+                                )
+                    )
             );
         }
 
@@ -1347,43 +1242,39 @@ namespace Microsoft.AspNetCore.Session
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            context.Session.SetInt32("key", 0);
-                                            var cts = new CancellationTokenSource();
-                                            var token = cts.Token;
-                                            cts.Cancel();
-                                            context.RequestAborted = token;
-                                            return Task.CompletedTask;
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
-                                    services.AddSingleton<IDistributedCache>(
-                                        new UnreliableCache(
-                                            new MemoryCache(new MemoryCacheOptions())
-                                        ) {
-                                            DelaySetAsync = true
-                                        }
-                                    );
-                                    services.AddSession();
+                                    context.Session.SetInt32("key", 0);
+                                    var cts = new CancellationTokenSource();
+                                    var token = cts.Token;
+                                    cts.Cancel();
+                                    context.RequestAborted = token;
+                                    return Task.CompletedTask;
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                            services.AddSingleton<IDistributedCache>(
+                                new UnreliableCache(new MemoryCache(new MemoryCacheOptions()))
+                                {
+                                    DelaySetAsync = true
+                                }
+                            );
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1394,12 +1285,11 @@ namespace Microsoft.AspNetCore.Session
                 response.EnsureSuccessStatusCode();
             }
 
-            var sessionLogMessages = sink.Writes.Where(
+            var sessionLogMessages = sink.Writes
+                .Where(
                     message =>
-                        message.LoggerName.Equals(
-                            typeof(DistributedSession).FullName,
-                            StringComparison.Ordinal
-                        )
+                        message.LoggerName
+                            .Equals(typeof(DistributedSession).FullName, StringComparison.Ordinal)
                 )
                 .ToList();
 
@@ -1410,13 +1300,15 @@ namespace Microsoft.AspNetCore.Session
             Assert.Equal(LogLevel.Debug, sessionLogMessages[1].LogLevel);
 
             Assert.Empty(
-                sink.Writes.Where(
-                    message =>
-                        message.LoggerName.Equals(
-                            typeof(SessionMiddleware).FullName,
-                            StringComparison.Ordinal
-                        )
-                )
+                sink.Writes
+                    .Where(
+                        message =>
+                            message.LoggerName
+                                .Equals(
+                                    typeof(SessionMiddleware).FullName,
+                                    StringComparison.Ordinal
+                                )
+                    )
             );
         }
 
@@ -1429,39 +1321,35 @@ namespace Microsoft.AspNetCore.Session
             );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseSession();
+                            app.Run(
+                                context =>
                                 {
-                                    app.UseSession();
-                                    app.Run(
-                                        context =>
-                                        {
-                                            // The middleware calls context.Session.CommitAsync() once per request
-                                            return Task.FromResult(0);
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
-                                    services.AddSingleton<IDistributedCache>(
-                                        new UnreliableCache(
-                                            new MemoryCache(new MemoryCacheOptions())
-                                        ) {
-                                            DisableRefreshAsync = true
-                                        }
-                                    );
-                                    services.AddSession();
+                                    // The middleware calls context.Session.CommitAsync() once per request
+                                    return Task.FromResult(0);
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(typeof(ILoggerFactory), loggerFactory);
+                            services.AddSingleton<IDistributedCache>(
+                                new UnreliableCache(new MemoryCache(new MemoryCacheOptions()))
+                                {
+                                    DisableRefreshAsync = true
+                                }
+                            );
+                            services.AddSession();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

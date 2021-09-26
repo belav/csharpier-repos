@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext();
             Assert.True(
-                context.Model.FindEntityType(typeof(One))
+                context.Model
+                    .FindEntityType(typeof(One))
                     .FindProperty("RowVersion").IsConcurrencyToken
             );
         }
@@ -26,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 10,
-                context.Model.FindEntityType(typeof(One))
+                context.Model
+                    .FindEntityType(typeof(One))
                     .FindProperty("MaxLengthProperty")
                     .GetMaxLength()
             );
@@ -36,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext();
             Assert.True(
-                context.Model.FindEntityType(typeof(BookDetails))
+                context.Model
+                    .FindEntityType(typeof(BookDetails))
                     .FindNavigation(nameof(BookDetails.AnotherBook)).ForeignKey.IsRequired
             );
         }
@@ -62,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext();
             Assert.True(
-                context.Model.FindEntityType(typeof(Two))
+                context.Model
+                    .FindEntityType(typeof(Two))
                     .FindProperty("Timestamp").IsConcurrencyToken
             );
         }
@@ -75,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore
                 InMemoryTestStoreFactory.Instance;
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
-                base.AddOptions(builder)
+                base
+                    .AddOptions(builder)
                     .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning));
         }
     }

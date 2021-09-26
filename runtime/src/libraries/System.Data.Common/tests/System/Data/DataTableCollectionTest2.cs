@@ -122,12 +122,13 @@ namespace System.Data.Tests
             ds.Tables.Add(DataProvider.CreateParentDataTable());
             ds.Tables.Add(DataProvider.CreateChildDataTable());
 
-            ds.Relations.Add(
-                "rel",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"],
-                false
-            );
+            ds.Relations
+                .Add(
+                    "rel",
+                    ds.Tables[0].Columns["ParentId"],
+                    ds.Tables[1].Columns["ParentId"],
+                    false
+                );
 
             Assert.False(ds.Tables.CanRemove(ds.Tables[0]));
             Assert.False(ds.Tables.CanRemove(ds.Tables[1]));

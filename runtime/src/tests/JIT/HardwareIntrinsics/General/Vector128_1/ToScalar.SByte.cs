@@ -107,7 +107,8 @@ namespace JIT.HardwareIntrinsics.General
                 values[15]
             );
 
-            object result = typeof(Vector128).GetMethod(nameof(Vector128.ToScalar))
+            object result = typeof(Vector128)
+                .GetMethod(nameof(Vector128.ToScalar))
                 .MakeGenericMethod(typeof(SByte))
                 .Invoke(null, new object[] { value });
 
@@ -122,12 +123,10 @@ namespace JIT.HardwareIntrinsics.General
         {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128<SByte>.ToScalar(): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  values: ({string.Join(", ", values)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128<SByte>.ToScalar(): {method} failed:");
+                TestLibrary.TestFramework
+                    .LogInformation($"  values: ({string.Join(", ", values)})");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

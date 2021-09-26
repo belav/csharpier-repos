@@ -43,29 +43,29 @@ namespace System.Tests
             {
                 case 1:
                     RemoteExecutor.Invoke(
-                            (arg) => CheckCommandLineArgs(new string[] { arg }),
-                            args[0]
-                        )
+                        (arg) => CheckCommandLineArgs(new string[] { arg }),
+                        args[0]
+                    )
                         .Dispose();
                     break;
 
                 case 2:
                     RemoteExecutor.Invoke(
-                            (arg1, arg2) => CheckCommandLineArgs(new string[] { arg1, arg2 }),
-                            args[0],
-                            args[1]
-                        )
+                        (arg1, arg2) => CheckCommandLineArgs(new string[] { arg1, arg2 }),
+                        args[0],
+                        args[1]
+                    )
                         .Dispose();
                     break;
 
                 case 3:
                     RemoteExecutor.Invoke(
-                            (arg1, arg2, arg3) =>
-                                CheckCommandLineArgs(new string[] { arg1, arg2, arg3 }),
-                            args[0],
-                            args[1],
-                            args[2]
-                        )
+                        (arg1, arg2, arg3) =>
+                            CheckCommandLineArgs(new string[] { arg1, arg2, arg3 }),
+                        args[0],
+                        args[1],
+                        args[2]
+                    )
                         .Dispose();
                     break;
 

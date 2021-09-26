@@ -75,7 +75,8 @@ namespace N
                 CodeActionIndex = 0,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
@@ -131,7 +132,8 @@ namespace N
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
@@ -195,7 +197,8 @@ namespace N
                 CodeActionIndex = 2,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
@@ -235,7 +238,8 @@ namespace N
                 CodeActionIndex = 0,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
@@ -283,7 +287,8 @@ namespace N
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
@@ -331,7 +336,8 @@ namespace N
                 CodeActionIndex = 0,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
@@ -371,7 +377,8 @@ namespace N
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
@@ -431,7 +438,8 @@ namespace N
                 CodeActionIndex = 0,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
@@ -491,7 +499,8 @@ namespace N
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
@@ -563,7 +572,8 @@ namespace N
                 CodeActionIndex = 2,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(23847, "https://github.com/dotnet/roslyn/issues/23847")]
@@ -608,7 +618,8 @@ public class Class1
                 CodeActionIndex = 0,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(23847, "https://github.com/dotnet/roslyn/issues/23847")]
@@ -651,7 +662,8 @@ public class Class1
                 CodeActionIndex = 0,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(23847, "https://github.com/dotnet/roslyn/issues/23847")]
@@ -687,7 +699,8 @@ a"";
                 CodeActionIndex = 0,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(23847, "https://github.com/dotnet/roslyn/issues/23847")]
@@ -723,7 +736,8 @@ b"";
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(23847, "https://github.com/dotnet/roslyn/issues/23847")]
@@ -805,7 +819,8 @@ namespace N
                 CodeActionIndex = 0,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21107, "https://github.com/dotnet/roslyn/issues/21107")]
@@ -861,7 +876,8 @@ namespace N
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21107, "https://github.com/dotnet/roslyn/issues/21107")]
@@ -923,7 +939,8 @@ namespace N
                 CodeActionIndex = 2,
                 CodeActionEquivalenceKey =
                     AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
     }
 }

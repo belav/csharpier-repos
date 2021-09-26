@@ -19,12 +19,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
             var culture = formatter as CultureInfo;
 
-            return string.Format(
-                formatter,
-                "{0}: {1}",
-                GetMessagePrefix(diagnostic),
-                diagnostic.GetMessage(culture)
-            );
+            return string
+                .Format(
+                    formatter,
+                    "{0}: {1}",
+                    GetMessagePrefix(diagnostic),
+                    diagnostic.GetMessage(culture)
+                );
         }
 
         internal static new readonly DebuggerDiagnosticFormatter Instance =

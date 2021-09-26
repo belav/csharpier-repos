@@ -22,16 +22,14 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             JsonSerializerSettingsProvider.CreateSerializerSettings()
         );
 
-        private static readonly MethodInfo _convertArrayMethodInfo =
-            typeof(BsonTempDataSerializer).GetMethod(
-                nameof(ConvertArray),
-                BindingFlags.Static | BindingFlags.NonPublic
-            )!;
+        private static readonly MethodInfo _convertArrayMethodInfo = typeof(BsonTempDataSerializer)
+            .GetMethod(nameof(ConvertArray), BindingFlags.Static | BindingFlags.NonPublic)!;
         private static readonly MethodInfo _convertDictionaryMethodInfo =
-            typeof(BsonTempDataSerializer).GetMethod(
-                nameof(ConvertDictionary),
-                BindingFlags.Static | BindingFlags.NonPublic
-            )!;
+            typeof(BsonTempDataSerializer)
+                .GetMethod(
+                    nameof(ConvertDictionary),
+                    BindingFlags.Static | BindingFlags.NonPublic
+                )!;
 
         private static readonly ConcurrentDictionary<Type, Func<JArray, object>> _arrayConverters =
             new ConcurrentDictionary<Type, Func<JArray, object>>();

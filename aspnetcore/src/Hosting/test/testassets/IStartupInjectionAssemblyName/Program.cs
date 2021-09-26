@@ -21,7 +21,8 @@ namespace IStartupInjectionAssemblyName
 
         // Do not change the signature of this method. It's used for tests.
         private static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder().SuppressStatusMessages(true)
+            new WebHostBuilder()
+                .SuppressStatusMessages(true)
                 .ConfigureServices(services => services.AddSingleton<IStartup, Startup>());
     }
 }

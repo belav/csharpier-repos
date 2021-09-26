@@ -552,10 +552,10 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType<OnImportsSatisfiedTestClass>()
                 .NotifyImportsSatisfied(p => p.OnImportsSatisfied());
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<OnImportsSatisfiedTestClass>(builder)
-                    .WithPart<ExportValues>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<OnImportsSatisfiedTestClass>(builder)
+                .WithPart<ExportValues>(builder)
+                .CreateContainer();
             OnImportsSatisfiedTestClass test = container.GetExport<OnImportsSatisfiedTestClass>();
 
             Assert.NotNull(test.P1);
@@ -569,10 +569,10 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType<OnImportsSatisfiedConfiguredClass>()
                 .NotifyImportsSatisfied(p => p.OnImportsSatisfied());
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<OnImportsSatisfiedConfiguredClass>(builder)
-                    .WithPart<ExportValues>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<OnImportsSatisfiedConfiguredClass>(builder)
+                .WithPart<ExportValues>(builder)
+                .CreateContainer();
             OnImportsSatisfiedConfiguredClass test =
                 container.GetExport<OnImportsSatisfiedConfiguredClass>();
 
@@ -587,10 +587,10 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType<OnImportsSatisfiedDerivedClass>()
                 .NotifyImportsSatisfied(p => p.OnImportsSatisfied());
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<OnImportsSatisfiedDerivedClass>(builder)
-                    .WithPart<ExportValues>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<OnImportsSatisfiedDerivedClass>(builder)
+                .WithPart<ExportValues>(builder)
+                .CreateContainer();
             OnImportsSatisfiedDerivedClass test =
                 container.GetExport<OnImportsSatisfiedDerivedClass>();
 
@@ -605,11 +605,11 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType<OnImportsSatisfiedDerivedClass>()
                 .NotifyImportsSatisfied(p => p.OnImportsSatisfied());
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<OnImportsSatisfiedTestClass>(builder)
-                    .WithPart<OnImportsSatisfiedDerivedClass>(builder)
-                    .WithPart<ExportValues>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<OnImportsSatisfiedTestClass>(builder)
+                .WithPart<OnImportsSatisfiedDerivedClass>(builder)
+                .WithPart<ExportValues>(builder)
+                .CreateContainer();
             OnImportsSatisfiedTestClass test = container.GetExport<OnImportsSatisfiedTestClass>();
 
             Assert.NotNull(test.P1);
@@ -625,10 +625,10 @@ namespace System.Composition.Convention.Tests
                 .NotifyImportsSatisfied(p => p.OnImportsSatisfied1());
             builder.ForType<OnImportsSatisfiedMultipleClass>()
                 .NotifyImportsSatisfied(p => p.OnImportsSatisfied2());
-            CompositionHost container =
-                new ContainerConfiguration().WithPart<OnImportsSatisfiedMultipleClass>(builder)
-                    .WithPart<ExportValues>(builder)
-                    .CreateContainer();
+            CompositionHost container = new ContainerConfiguration()
+                .WithPart<OnImportsSatisfiedMultipleClass>(builder)
+                .WithPart<ExportValues>(builder)
+                .CreateContainer();
             OnImportsSatisfiedMultipleClass test =
                 container.GetExport<OnImportsSatisfiedMultipleClass>();
 

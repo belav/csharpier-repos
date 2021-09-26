@@ -537,11 +537,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class OrderProduct
         {
-            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(
-                nameof(OrderId)
-            );
-            public static readonly PropertyInfo ProductIdProperty =
-                typeof(OrderProduct).GetProperty(nameof(ProductId));
+            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct)
+                .GetProperty(nameof(OrderId));
+            public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct)
+                .GetProperty(nameof(ProductId));
 
             public int OrderId { get; set; }
             public int ProductId { get; set; }
@@ -551,9 +550,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class Product
         {
-            public static readonly PropertyInfo IdProperty = typeof(Product).GetProperty(
-                nameof(Id)
-            );
+            public static readonly PropertyInfo IdProperty = typeof(Product)
+                .GetProperty(nameof(Id));
 
             public int Id { get; set; }
 

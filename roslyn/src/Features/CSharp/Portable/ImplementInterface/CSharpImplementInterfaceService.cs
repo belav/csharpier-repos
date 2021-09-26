@@ -51,11 +51,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                 )
                 {
                     if (
-                        interfaceNode.Parent.Parent.IsParentKind(
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.StructDeclaration,
-                            SyntaxKind.RecordDeclaration
-                        )
+                        interfaceNode.Parent.Parent
+                            .IsParentKind(
+                                SyntaxKind.ClassDeclaration,
+                                SyntaxKind.StructDeclaration,
+                                SyntaxKind.RecordDeclaration
+                            )
                     )
                     {
                         var interfaceSymbolInfo = model.GetSymbolInfo(
@@ -118,10 +119,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             // Dispose(false)
             var disposeStatement = (StatementSyntax)AddComment(
                 g,
-                string.Format(
-                    FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method,
-                    disposeMethodDisplayString
-                ),
+                string
+                    .Format(
+                        FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method,
+                        disposeMethodDisplayString
+                    ),
                 g.ExpressionStatement(
                     g.InvocationExpression(
                         g.IdentifierName(nameof(IDisposable.Dispose)),
@@ -135,10 +137,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
 
             return AddComment(
                 g,
-                string.Format(
-                    FeaturesResources.TODO_colon_override_finalizer_only_if_0_has_code_to_free_unmanaged_resources,
-                    disposeMethodDisplayString
-                ),
+                string
+                    .Format(
+                        FeaturesResources.TODO_colon_override_finalizer_only_if_0_has_code_to_free_unmanaged_resources,
+                        disposeMethodDisplayString
+                    ),
                 methodDecl
             );
         }

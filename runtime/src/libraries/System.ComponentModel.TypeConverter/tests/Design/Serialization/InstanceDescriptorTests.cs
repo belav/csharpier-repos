@@ -84,9 +84,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
         [Fact]
         public void Ctor_StaticConstructor_ThrowsArgumentException()
         {
-            ConstructorInfo constructor = typeof(StaticConstructor).GetConstructors(
-                    BindingFlags.Static | BindingFlags.NonPublic
-                )
+            ConstructorInfo constructor = typeof(StaticConstructor)
+                .GetConstructors(BindingFlags.Static | BindingFlags.NonPublic)
                 .Single();
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -165,9 +164,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
         [Fact]
         public void Ctor_NonStaticPropertyInfo_ThrowsArgumentException()
         {
-            PropertyInfo pi = typeof(InstanceProperty).GetProperty(
-                nameof(InstanceProperty.Property)
-            );
+            PropertyInfo pi = typeof(InstanceProperty)
+                .GetProperty(nameof(InstanceProperty.Property));
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => new InstanceDescriptor(pi, null)
@@ -243,9 +241,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
         [Fact]
         public void Invoke_ArgumentInstanceDescriptor_InvokesArgument()
         {
-            MethodInfo argumentMethod = typeof(MethodClass).GetMethod(
-                nameof(MethodClass.IntMethod)
-            );
+            MethodInfo argumentMethod = typeof(MethodClass)
+                .GetMethod(nameof(MethodClass.IntMethod));
             var argumentInstanceDescriptor = new InstanceDescriptor(argumentMethod, null);
 
             MethodInfo method = typeof(MethodClass).GetMethod(nameof(MethodClass.StaticMethod));

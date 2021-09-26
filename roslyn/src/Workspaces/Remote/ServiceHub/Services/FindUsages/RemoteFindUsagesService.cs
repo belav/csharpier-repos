@@ -52,9 +52,9 @@ namespace Microsoft.CodeAnalysis.Remote
                     var project = solution.GetProject(symbolAndProjectId.ProjectId);
 
                     var symbol = await symbolAndProjectId.TryRehydrateAsync(
-                            solution,
-                            cancellationToken
-                        )
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     if (symbol == null)
@@ -66,11 +66,11 @@ namespace Microsoft.CodeAnalysis.Remote
                         cancellationToken
                     );
                     await AbstractFindUsagesService.FindReferencesAsync(
-                            context,
-                            symbol,
-                            project,
-                            options
-                        )
+                        context,
+                        symbol,
+                        project,
+                        options
+                    )
                         .ConfigureAwait(false);
                 },
                 cancellationToken
@@ -92,9 +92,9 @@ namespace Microsoft.CodeAnalysis.Remote
                     var project = solution.GetProject(symbolAndProjectId.ProjectId);
 
                     var symbol = await symbolAndProjectId.TryRehydrateAsync(
-                            solution,
-                            cancellationToken
-                        )
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (symbol == null)
                         return;
@@ -105,10 +105,10 @@ namespace Microsoft.CodeAnalysis.Remote
                         cancellationToken
                     );
                     await AbstractFindUsagesService.FindImplementationsAsync(
-                            symbol,
-                            project,
-                            context
-                        )
+                        symbol,
+                        project,
+                        context
+                    )
                         .ConfigureAwait(false);
                 },
                 cancellationToken

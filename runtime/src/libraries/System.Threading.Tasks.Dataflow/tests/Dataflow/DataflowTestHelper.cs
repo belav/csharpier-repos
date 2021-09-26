@@ -255,11 +255,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
             block = blockFactory("foo {0} bar {1}"); // two args
             Assert.Equal(
-                expected: string.Format(
-                    "foo {0} bar {1}",
-                    block.GetType().Name,
-                    block.Completion.Id
-                ),
+                expected: string
+                    .Format("foo {0} bar {1}", block.GetType().Name, block.Completion.Id),
                 actual: block.ToString()
             );
         }

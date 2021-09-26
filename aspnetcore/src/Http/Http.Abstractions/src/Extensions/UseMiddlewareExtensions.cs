@@ -21,11 +21,8 @@ namespace Microsoft.AspNetCore.Builder
         internal const string InvokeMethodName = "Invoke";
         internal const string InvokeAsyncMethodName = "InvokeAsync";
 
-        private static readonly MethodInfo GetServiceInfo =
-            typeof(UseMiddlewareExtensions).GetMethod(
-                nameof(GetService),
-                BindingFlags.NonPublic | BindingFlags.Static
-            )!;
+        private static readonly MethodInfo GetServiceInfo = typeof(UseMiddlewareExtensions)
+            .GetMethod(nameof(GetService), BindingFlags.NonPublic | BindingFlags.Static)!;
 
         // We're going to keep all public constructors and public methods on middleware
         private const DynamicallyAccessedMemberTypes MiddlewareAccessibility =
@@ -83,14 +80,11 @@ namespace Microsoft.AspNetCore.Builder
                         BindingFlags.Instance | BindingFlags.Public
                     );
                     var invokeMethods = methods.Where(
-                            m =>
-                                string.Equals(m.Name, InvokeMethodName, StringComparison.Ordinal)
-                                || string.Equals(
-                                    m.Name,
-                                    InvokeAsyncMethodName,
-                                    StringComparison.Ordinal
-                                )
-                        )
+                        m =>
+                            string.Equals(m.Name, InvokeMethodName, StringComparison.Ordinal)
+                            || string
+                                .Equals(m.Name, InvokeAsyncMethodName, StringComparison.Ordinal)
+                    )
                         .ToArray();
 
                     if (invokeMethods.Length > 1)
@@ -187,10 +181,8 @@ namespace Microsoft.AspNetCore.Builder
                 {
                     return async context =>
                     {
-                        var middlewareFactory =
-                            (IMiddlewareFactory?)context.RequestServices.GetService(
-                                typeof(IMiddlewareFactory)
-                            );
+                        var middlewareFactory = (IMiddlewareFactory?)context.RequestServices
+                            .GetService(typeof(IMiddlewareFactory));
                         if (middlewareFactory == null)
                         {
                             // No middleware factory

@@ -166,9 +166,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
 
             if (Options.SessionStore != null)
             {
-                var claim = ticket.Principal.Claims.FirstOrDefault(
-                    c => c.Type.Equals(SessionIdClaim)
-                );
+                var claim = ticket.Principal.Claims
+                    .FirstOrDefault(c => c.Type.Equals(SessionIdClaim));
                 if (claim == null)
                 {
                     return AuthenticateResult.Fail("SessionId missing");
@@ -294,12 +293,13 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
                     cookieOptions.Expires = _refreshExpiresUtc.Value.ToUniversalTime();
                 }
 
-                Options.CookieManager.AppendResponseCookie(
-                    Context,
-                    Options.Cookie.Name!,
-                    cookieValue,
-                    cookieOptions
-                );
+                Options.CookieManager
+                    .AppendResponseCookie(
+                        Context,
+                        Options.Cookie.Name!,
+                        cookieValue,
+                        cookieOptions
+                    );
 
                 await ApplyHeaders(shouldRedirectToReturnUrl: false, properties: properties);
             }
@@ -395,12 +395,13 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
 
             var cookieValue = Options.TicketDataFormat.Protect(ticket, GetTlsTokenBinding());
 
-            Options.CookieManager.AppendResponseCookie(
-                Context,
-                Options.Cookie.Name!,
-                cookieValue,
-                signInContext.CookieOptions
-            );
+            Options.CookieManager
+                .AppendResponseCookie(
+                    Context,
+                    Options.Cookie.Name!,
+                    cookieValue,
+                    signInContext.CookieOptions
+                );
 
             var signedInContext = new CookieSignedInContext(
                 Context,
@@ -444,11 +445,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
 
             await Events.SigningOut(context);
 
-            Options.CookieManager.DeleteCookie(
-                Context,
-                Options.Cookie.Name!,
-                context.CookieOptions
-            );
+            Options.CookieManager
+                .DeleteCookie(Context, Options.Cookie.Name!, context.CookieOptions);
 
             // Only redirect on the logout path
             var shouldRedirect = Options.LogoutPath.HasValue && OriginalPath == Options.LogoutPath;
@@ -556,8 +554,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
 
         private string? GetTlsTokenBinding()
         {
-            var binding =
-                Context.Features.Get<ITlsTokenBindingFeature>()?.GetProvidedTokenBindingId();
+            var binding = Context.Features
+                .Get<ITlsTokenBindingFeature>()?.GetProvidedTokenBindingId();
             return binding == null ? null : Convert.ToBase64String(binding);
         }
     }

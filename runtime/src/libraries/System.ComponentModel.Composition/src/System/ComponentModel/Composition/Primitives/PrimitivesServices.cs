@@ -33,17 +33,14 @@ namespace System.ComponentModel.Composition.Primitives
         {
             import = import.GetProductImportDefinition();
             string contractName = import.ContractName;
-            string? genericContractName = import.Metadata.GetValue<string>(
-                CompositionConstants.GenericContractMetadataName
-            );
-            int[]? importParametersOrder = import.Metadata.GetValue<int[]>(
-                CompositionConstants.GenericImportParametersOrderMetadataName
-            );
+            string? genericContractName = import.Metadata
+                .GetValue<string>(CompositionConstants.GenericContractMetadataName);
+            int[]? importParametersOrder = import.Metadata
+                .GetValue<int[]>(CompositionConstants.GenericImportParametersOrderMetadataName);
             if (importParametersOrder != null)
             {
-                int partArity = part.Metadata.GetValue<int>(
-                    CompositionConstants.GenericPartArityMetadataName
-                );
+                int partArity = part.Metadata
+                    .GetValue<int>(CompositionConstants.GenericPartArityMetadataName);
                 if (partArity > 0)
                 {
                     contractName = GenericServices.GetGenericName(
@@ -97,17 +94,15 @@ namespace System.ComponentModel.Composition.Primitives
                 return import;
             }
 
-            int[]? importParametersOrder = contractBasedImport.Metadata.GetValue<int[]>(
-                CompositionConstants.GenericImportParametersOrderMetadataName
-            );
+            int[]? importParametersOrder = contractBasedImport.Metadata
+                .GetValue<int[]>(CompositionConstants.GenericImportParametersOrderMetadataName);
             if (importParametersOrder == null)
             {
                 return import;
             }
 
-            int partArity = part.Metadata.GetValue<int>(
-                CompositionConstants.GenericPartArityMetadataName
-            );
+            int partArity = part.Metadata
+                .GetValue<int>(CompositionConstants.GenericPartArityMetadataName);
             if (partArity == 0)
             {
                 return import;

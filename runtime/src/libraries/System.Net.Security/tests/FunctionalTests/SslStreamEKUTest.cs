@@ -20,19 +20,19 @@ namespace System.Net.Security.Tests
 
         public const int TestTimeoutMilliseconds = 15 * 1000;
 
-        public static X509Certificate2 serverCertificateServerEku =
-            Configuration.Certificates.GetServerCertificate();
-        public static X509Certificate2 serverCertificateNoEku =
-            Configuration.Certificates.GetNoEKUCertificate();
-        public static X509Certificate2 serverCertificateWrongEku =
-            Configuration.Certificates.GetClientCertificate();
+        public static X509Certificate2 serverCertificateServerEku = Configuration.Certificates
+            .GetServerCertificate();
+        public static X509Certificate2 serverCertificateNoEku = Configuration.Certificates
+            .GetNoEKUCertificate();
+        public static X509Certificate2 serverCertificateWrongEku = Configuration.Certificates
+            .GetClientCertificate();
 
-        public static X509Certificate2 clientCertificateWrongEku =
-            Configuration.Certificates.GetServerCertificate();
-        public static X509Certificate2 clientCertificateNoEku =
-            Configuration.Certificates.GetNoEKUCertificate();
-        public static X509Certificate2 clientCertificateClientEku =
-            Configuration.Certificates.GetClientCertificate();
+        public static X509Certificate2 clientCertificateWrongEku = Configuration.Certificates
+            .GetServerCertificate();
+        public static X509Certificate2 clientCertificateNoEku = Configuration.Certificates
+            .GetNoEKUCertificate();
+        public static X509Certificate2 clientCertificateClientEku = Configuration.Certificates
+            .GetClientCertificate();
 
         [ConditionalFact(nameof(IsRootCertificateInstalled))]
         public async Task SslStream_NoEKUServerAuth_Ok()
@@ -47,10 +47,8 @@ namespace System.Net.Security.Tests
                 var clientOptions = new HttpsTestClient.Options(
                     new IPEndPoint(IPAddress.Loopback, server.Port)
                 );
-                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(
-                    X509NameType.SimpleName,
-                    false
-                );
+                clientOptions.ServerName = serverOptions.ServerCertificate
+                    .GetNameInfo(X509NameType.SimpleName, false);
 
                 var client = new HttpsTestClient(clientOptions);
 
@@ -76,10 +74,8 @@ namespace System.Net.Security.Tests
                 var clientOptions = new HttpsTestClient.Options(
                     new IPEndPoint(IPAddress.Loopback, server.Port)
                 );
-                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(
-                    X509NameType.SimpleName,
-                    false
-                );
+                clientOptions.ServerName = serverOptions.ServerCertificate
+                    .GetNameInfo(X509NameType.SimpleName, false);
 
                 var client = new HttpsTestClient(clientOptions);
 
@@ -105,10 +101,8 @@ namespace System.Net.Security.Tests
                 var clientOptions = new HttpsTestClient.Options(
                     new IPEndPoint(IPAddress.Loopback, server.Port)
                 );
-                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(
-                    X509NameType.SimpleName,
-                    false
-                );
+                clientOptions.ServerName = serverOptions.ServerCertificate
+                    .GetNameInfo(X509NameType.SimpleName, false);
                 clientOptions.ClientCertificate = clientCertificateNoEku;
 
                 var client = new HttpsTestClient(clientOptions);
@@ -136,10 +130,8 @@ namespace System.Net.Security.Tests
                 var clientOptions = new HttpsTestClient.Options(
                     new IPEndPoint(IPAddress.Loopback, server.Port)
                 );
-                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(
-                    X509NameType.SimpleName,
-                    false
-                );
+                clientOptions.ServerName = serverOptions.ServerCertificate
+                    .GetNameInfo(X509NameType.SimpleName, false);
                 clientOptions.ClientCertificate = clientCertificateWrongEku;
 
                 var client = new HttpsTestClient(clientOptions);
@@ -178,12 +170,10 @@ namespace System.Net.Security.Tests
                 var clientOptions = new HttpsTestClient.Options(
                     new IPEndPoint(IPAddress.Loopback, server.Port)
                 );
-                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(
-                    X509NameType.SimpleName,
-                    false
-                );
-                clientOptions.ClientCertificate =
-                    Configuration.Certificates.GetSelfSignedClientCertificate();
+                clientOptions.ServerName = serverOptions.ServerCertificate
+                    .GetNameInfo(X509NameType.SimpleName, false);
+                clientOptions.ClientCertificate = Configuration.Certificates
+                    .GetSelfSignedClientCertificate();
 
                 var client = new HttpsTestClient(clientOptions);
 

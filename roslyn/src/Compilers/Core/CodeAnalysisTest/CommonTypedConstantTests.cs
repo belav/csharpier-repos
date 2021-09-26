@@ -30,12 +30,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             _intType = _compilation.GetSpecialType(SpecialType.System_Int32);
             _stringType = _compilation.GetSpecialType(SpecialType.System_String);
             _enumString1 = _compilation.GetSpecialType(
-                    SpecialType.System_Collections_Generic_IEnumerable_T
-                )
+                SpecialType.System_Collections_Generic_IEnumerable_T
+            )
                 .Construct(_compilation.GetSpecialType(SpecialType.System_String));
             _enumString2 = _compilation.GetSpecialType(
-                    SpecialType.System_Collections_Generic_IEnumerable_T
-                )
+                SpecialType.System_Collections_Generic_IEnumerable_T
+            )
                 .Construct(_compilation.GetSpecialType(SpecialType.System_String));
         }
 

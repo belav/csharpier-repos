@@ -43,8 +43,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
                         isNonPublicSupported: true
                     );
                     var parts = Task.Run(
-                            () => discovery.CreatePartsAsync(MefHostServices.DefaultAssemblies)
-                        )
+                        () => discovery.CreatePartsAsync(MefHostServices.DefaultAssemblies)
+                    )
                         .GetAwaiter()
                         .GetResult();
                     var catalog = ComposableCatalog.Create(Resolver.DefaultInstance)
@@ -487,9 +487,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
         )
         {
             var projectId = ProjectId.CreateNewId(debugName: DefaultTestProjectName);
-            var solution = (
-                await CreateSolutionAsync(projectId, language, editorConfigText)
-            ).AddAnalyzerReferences(projectId, analyzerReferences)
+            var solution = (await CreateSolutionAsync(projectId, language, editorConfigText))
+                .AddAnalyzerReferences(projectId, analyzerReferences)
                 .AddMetadataReferences(projectId, additionalMetadataReferences);
 
             for (var i = 0; i < sources.Length; i++)
@@ -553,18 +552,18 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             );
 
             var projectInfo = ProjectInfo.Create(
-                    projectId,
-                    VersionStamp.Create(),
-                    name: DefaultTestProjectName,
-                    assemblyName: DefaultTestProjectName,
-                    language,
-                    filePath: DefaultTestProjectPath,
-                    outputFilePath: Path.ChangeExtension(DefaultTestProjectPath, "dll"),
-                    compilationOptions: compilationOptions,
-                    parseOptions: parseOptions,
-                    metadataReferences: referenceAssemblies,
-                    isSubmission: false
-                )
+                projectId,
+                VersionStamp.Create(),
+                name: DefaultTestProjectName,
+                assemblyName: DefaultTestProjectName,
+                language,
+                filePath: DefaultTestProjectPath,
+                outputFilePath: Path.ChangeExtension(DefaultTestProjectPath, "dll"),
+                compilationOptions: compilationOptions,
+                parseOptions: parseOptions,
+                metadataReferences: referenceAssemblies,
+                isSubmission: false
+            )
                 .WithDefaultNamespace(DefaultTestProjectName)
                 .WithAnalyzerConfigDocuments(ImmutableArray.Create(editorConfigDocument));
 

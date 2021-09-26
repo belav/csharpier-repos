@@ -18,9 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         : EntityTypeAttributeConventionBase<EntityTypeConfigurationAttribute>
     {
         private static readonly MethodInfo _configureMethod =
-            typeof(EntityTypeConfigurationEntityTypeAttributeConvention).GetRequiredDeclaredMethod(
-                nameof(Configure)
-            );
+            typeof(EntityTypeConfigurationEntityTypeAttributeConvention)
+                .GetRequiredDeclaredMethod(nameof(Configure));
 
         /// <summary>
         ///     Creates a new instance of <see cref="EntityTypeConfigurationEntityTypeAttributeConvention" />.

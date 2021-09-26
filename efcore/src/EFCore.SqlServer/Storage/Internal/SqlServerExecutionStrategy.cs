@@ -89,10 +89,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             try
             {
                 return await operation(
-                        Dependencies.CurrentContext.Context,
-                        state,
-                        cancellationToken
-                    )
+                    Dependencies.CurrentContext.Context,
+                    state,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception ex)

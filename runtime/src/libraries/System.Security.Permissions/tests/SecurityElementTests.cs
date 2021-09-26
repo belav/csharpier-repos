@@ -497,11 +497,12 @@ namespace System.Security.Permissions.Tests
             se.Tag = "Name&Address";
             Assert.Equal("Name&Address", se.Tag);
             Assert.Equal(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "<Name&Address/>{0}",
-                    Environment.NewLine
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "<Name&Address/>{0}",
+                        Environment.NewLine
+                    ),
                 se.ToString()
             );
             se.Tag = string.Empty;
@@ -594,10 +595,11 @@ namespace System.Security.Permissions.Tests
             se.AddAttribute("Attribute1", "One");
             se.AddAttribute("Attribute2", "Two");
 
-            string expected = string.Format(
-                "<Multiple Attribute1=\"One\"{0}Attribute2=\"Two\"/>{0}",
-                Environment.NewLine
-            );
+            string expected = string
+                .Format(
+                    "<Multiple Attribute1=\"One\"{0}Attribute2=\"Two\"/>{0}",
+                    Environment.NewLine
+                );
             Assert.Equal(expected, se.ToString());
         }
 

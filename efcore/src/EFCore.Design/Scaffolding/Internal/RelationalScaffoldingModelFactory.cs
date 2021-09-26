@@ -563,10 +563,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             property.Metadata.SetColumnOrdinal(column.Table.Columns.IndexOf(column));
 
-            property.Metadata.AddAnnotations(
-                column.GetAnnotations()
-                    .Where(a => a.Name != ScaffoldingAnnotationNames.ConcurrencyToken)
-            );
+            property.Metadata
+                .AddAnnotations(
+                    column.GetAnnotations()
+                        .Where(a => a.Name != ScaffoldingAnnotationNames.ConcurrencyToken)
+                );
 
             return property;
         }
@@ -587,7 +588,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             var primaryKey = table.PrimaryKey!;
 
-            var unmappedColumns = primaryKey.Columns.Where(c => _unmappedColumns.Contains(c))
+            var unmappedColumns = primaryKey.Columns
+                .Where(c => _unmappedColumns.Contains(c))
                 .Select(c => c.Name)
                 .ToList();
             if (unmappedColumns.Count > 0)
@@ -595,10 +597,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _reporter.WriteWarning(
                     DesignStrings.PrimaryKeyErrorPropertyNotFound(
                         table.DisplayName(),
-                        string.Join(
-                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                            unmappedColumns
-                        )
+                        string
+                            .Join(
+                                CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                                unmappedColumns
+                            )
                     )
                 );
                 return null;
@@ -612,9 +615,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 && primaryKey.Columns[0].DefaultValueSql == null
             )
             {
-                var property = builder.Metadata.FindProperty(
-                    GetPropertyName(primaryKey.Columns[0])
-                );
+                var property = builder.Metadata
+                    .FindProperty(GetPropertyName(primaryKey.Columns[0]));
                 if (property != null)
                 {
                     var conventionalValueGenerated = ValueGenerationConvention.GetValueGenerated(
@@ -676,7 +678,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(uniqueConstraint, nameof(uniqueConstraint));
 
-            var unmappedColumns = uniqueConstraint.Columns.Where(c => _unmappedColumns.Contains(c))
+            var unmappedColumns = uniqueConstraint.Columns
+                .Where(c => _unmappedColumns.Contains(c))
                 .Select(c => c.Name)
                 .ToList();
             if (unmappedColumns.Count > 0)
@@ -684,10 +687,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _reporter.WriteWarning(
                     DesignStrings.UnableToScaffoldIndexMissingProperty(
                         uniqueConstraint.Name,
-                        string.Join(
-                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                            unmappedColumns
-                        )
+                        string
+                            .Join(
+                                CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                                unmappedColumns
+                            )
                     )
                 );
                 return null;
@@ -736,7 +740,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(index, nameof(index));
 
-            var unmappedColumns = index.Columns.Where(c => _unmappedColumns.Contains(c))
+            var unmappedColumns = index.Columns
+                .Where(c => _unmappedColumns.Contains(c))
                 .Select(c => c.Name)
                 .ToList();
             if (unmappedColumns.Count > 0)
@@ -744,10 +749,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _reporter.WriteWarning(
                     DesignStrings.UnableToScaffoldIndexMissingProperty(
                         index.Name,
-                        string.Join(
-                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                            unmappedColumns
-                        )
+                        string
+                            .Join(
+                                CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                                unmappedColumns
+                            )
                     )
                 );
                 return null;
@@ -793,7 +799,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             // navigation properties otherwise naming of navigation properties
             // when there are multiple foreign keys does not work.
             foreach (
-                var foreignKey in modelBuilder.Model.GetEntityTypes()
+                var foreignKey in modelBuilder.Model
+                    .GetEntityTypes()
                     .SelectMany(et => et.GetForeignKeys())
             )
             {
@@ -832,17 +839,15 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 return null;
             }
 
-            var dependentEntityType = modelBuilder.Model.FindEntityType(
-                GetEntityTypeName(foreignKey.Table)
-            );
+            var dependentEntityType = modelBuilder.Model
+                .FindEntityType(GetEntityTypeName(foreignKey.Table));
             if (dependentEntityType == null)
             {
                 return null;
             }
 
-            var unmappedDependentColumns = foreignKey.Columns.Where(
-                    c => _unmappedColumns.Contains(c)
-                )
+            var unmappedDependentColumns = foreignKey.Columns
+                .Where(c => _unmappedColumns.Contains(c))
                 .Select(c => c.Name)
                 .ToList();
             if (unmappedDependentColumns.Count > 0)
@@ -850,23 +855,24 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _reporter.WriteWarning(
                     DesignStrings.ForeignKeyScaffoldErrorPropertyNotFound(
                         foreignKey.DisplayName(),
-                        string.Join(
-                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                            unmappedDependentColumns
-                        )
+                        string
+                            .Join(
+                                CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                                unmappedDependentColumns
+                            )
                     )
                 );
                 return null;
             }
 
-            var dependentProperties = foreignKey.Columns.Select(GetPropertyName)
+            var dependentProperties = foreignKey.Columns
+                .Select(GetPropertyName)
                 .Select(name => dependentEntityType.FindProperty(name)!)
                 .ToList()
                 .AsReadOnly();
 
-            var principalEntityType = modelBuilder.Model.FindEntityType(
-                GetEntityTypeName(foreignKey.PrincipalTable)
-            );
+            var principalEntityType = modelBuilder.Model
+                .FindEntityType(GetEntityTypeName(foreignKey.PrincipalTable));
             if (principalEntityType == null)
             {
                 _reporter.WriteWarning(
@@ -878,9 +884,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 return null;
             }
 
-            var unmappedPrincipalColumns = foreignKey.PrincipalColumns.Where(
-                    pc => principalEntityType.FindProperty(GetPropertyName(pc)) == null
-                )
+            var unmappedPrincipalColumns = foreignKey.PrincipalColumns
+                .Where(pc => principalEntityType.FindProperty(GetPropertyName(pc)) == null)
                 .Select(pc => pc.Name)
                 .ToList();
             if (unmappedPrincipalColumns.Count > 0)
@@ -888,16 +893,18 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _reporter.WriteWarning(
                     DesignStrings.ForeignKeyScaffoldErrorPropertyNotFound(
                         foreignKey.DisplayName(),
-                        string.Join(
-                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                            unmappedPrincipalColumns
-                        )
+                        string
+                            .Join(
+                                CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                                unmappedPrincipalColumns
+                            )
                     )
                 );
                 return null;
             }
 
-            var principalPropertiesMap = foreignKey.PrincipalColumns.Select(
+            var principalPropertiesMap = foreignKey.PrincipalColumns
+                .Select(
                     fc =>
                         (
                             property: principalEntityType.FindProperty(GetPropertyName(fc))!,
@@ -919,8 +926,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     // ensure all principal properties are non-nullable even if the columns
                     // are nullable on the database. EF's concept of a key requires this.
                     var nullablePrincipalProperties = principalPropertiesMap.Where(
-                            tuple => tuple.property.IsNullable
-                        )
+                        tuple => tuple.property.IsNullable
+                    )
                         .ToList();
                     if (nullablePrincipalProperties.Count > 0)
                     {
@@ -929,8 +936,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                                 foreignKey.DisplayName(),
                                 index.GetDatabaseName(),
                                 nullablePrincipalProperties.Select(
-                                        tuple => tuple.column.DisplayName()
-                                    )
+                                    tuple => tuple.column.DisplayName()
+                                )
                                     .ToList()
                                     .Aggregate((a, b) => a + "," + b)
                             )
@@ -950,10 +957,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     _reporter.WriteWarning(
                         DesignStrings.ForeignKeyScaffoldErrorPrincipalKeyNotFound(
                             foreignKey.DisplayName(),
-                            string.Join(
-                                CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                                principalColumns
-                            ),
+                            string
+                                .Join(
+                                    CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                                    principalColumns
+                                ),
                             principalEntityType.Name
                         )
                     );
@@ -1038,7 +1046,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 foreignKey.PrincipalEntityType
             );
             var principalEndNavigationPropertyCandidateName = foreignKey.IsSelfReferencing()
-                ? string.Format(
+                ? string
+                  .Format(
                       CultureInfo.CurrentCulture,
                       SelfReferencingPrincipalEndNavigationNamePattern,
                       dependentEndNavigationPropertyName
@@ -1152,11 +1161,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 return proposedIdentifier;
             }
 
-            var finalIdentifier = string.Format(
-                CultureInfo.CurrentCulture,
-                NavigationNameUniquifyingPattern,
-                proposedIdentifier
-            );
+            var finalIdentifier = string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    NavigationNameUniquifyingPattern,
+                    proposedIdentifier
+                );
             var suffix = 1;
             while (existingIdentifiers.Contains(finalIdentifier))
             {

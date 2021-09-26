@@ -32,11 +32,12 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             if (string.IsNullOrEmpty(ClientId))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.Exception_OptionMustBeProvided,
-                        nameof(ClientId)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Exception_OptionMustBeProvided,
+                            nameof(ClientId)
+                        ),
                     nameof(ClientId)
                 );
             }
@@ -44,11 +45,12 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             if (string.IsNullOrEmpty(ClientSecret))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.Exception_OptionMustBeProvided,
-                        nameof(ClientSecret)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Exception_OptionMustBeProvided,
+                            nameof(ClientSecret)
+                        ),
                     nameof(ClientSecret)
                 );
             }
@@ -56,11 +58,12 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             if (string.IsNullOrEmpty(AuthorizationEndpoint))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.Exception_OptionMustBeProvided,
-                        nameof(AuthorizationEndpoint)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Exception_OptionMustBeProvided,
+                            nameof(AuthorizationEndpoint)
+                        ),
                     nameof(AuthorizationEndpoint)
                 );
             }
@@ -68,11 +71,12 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             if (string.IsNullOrEmpty(TokenEndpoint))
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.Exception_OptionMustBeProvided,
-                        nameof(TokenEndpoint)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Exception_OptionMustBeProvided,
+                            nameof(TokenEndpoint)
+                        ),
                     nameof(TokenEndpoint)
                 );
             }
@@ -80,11 +84,12 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             if (!CallbackPath.HasValue)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.Exception_OptionMustBeProvided,
-                        nameof(CallbackPath)
-                    ),
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Exception_OptionMustBeProvided,
+                            nameof(CallbackPath)
+                        ),
                     nameof(CallbackPath)
                 );
             }

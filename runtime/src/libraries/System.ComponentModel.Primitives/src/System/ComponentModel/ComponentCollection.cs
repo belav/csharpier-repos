@@ -26,11 +26,8 @@ namespace System.ComponentModel
                             comp != null
                             && comp.Site != null
                             && comp.Site.Name != null
-                            && string.Equals(
-                                comp.Site.Name,
-                                name,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            && string
+                                .Equals(comp.Site.Name, name, StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             return comp;

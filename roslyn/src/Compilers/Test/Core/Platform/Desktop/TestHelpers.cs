@@ -34,22 +34,20 @@ namespace Roslyn.Test.Utilities
                 );
             }
 
-            return assembly.GetTypes()
-                .Where(
-                    (t) =>
+            return assembly.GetTypes().Where(
+                (t) =>
+                {
+                    // simplest way to get types that implement mef type
+                    // we might need to actually check whether type export the interface type later
+                    if (t.IsAbstract)
                     {
-                        // simplest way to get types that implement mef type
-                        // we might need to actually check whether type export the interface type later
-                        if (t.IsAbstract)
-                        {
-                            return false;
-                        }
-
-                        var candidate = t.GetInterface(interfaceType.ToString());
-                        return candidate != null && candidate.Equals(interfaceType);
+                        return false;
                     }
-                )
-                .ToList();
+
+                    var candidate = t.GetInterface(interfaceType.ToString());
+                    return candidate != null && candidate.Equals(interfaceType);
+                }
+            ).ToList();
         }
 
         public static IEnumerable<Type> GetAllTypesSubclassingType(Assembly assembly, Type type)
@@ -64,7 +62,8 @@ namespace Roslyn.Test.Utilities
                 where !t.IsAbstract
                 where type.IsAssignableFrom(t)
                 select t
-            ).ToList();
+            )
+                .ToList();
         }
 
         public static TempFile CreateCSharpAnalyzerAssemblyWithTestAnalyzer(
@@ -159,19 +158,19 @@ namespace Microsoft.CodeAnalysis
 }
 ";
             var minSystemCollectionsImmutableImage = CSharpCompilation.Create(
-                    "System.Collections.Immutable",
-                    new[] { SyntaxFactory.ParseSyntaxTree(minSystemCollectionsImmutableSource) },
-                    new[]
-                    {
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Runtime
-                        )
-                    },
-                    new CSharpCompilationOptions(
-                        OutputKind.DynamicallyLinkedLibrary,
-                        cryptoPublicKey: TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a
+                "System.Collections.Immutable",
+                new[] { SyntaxFactory.ParseSyntaxTree(minSystemCollectionsImmutableSource) },
+                new[]
+                {
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Runtime
                     )
+                },
+                new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    cryptoPublicKey: TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a
                 )
+            )
                 .EmitToArray();
 
             var minSystemCollectionsImmutableRef = MetadataReference.CreateFromImage(
@@ -179,20 +178,20 @@ namespace Microsoft.CodeAnalysis
             );
 
             var minCodeAnalysisImage = CSharpCompilation.Create(
-                    "Microsoft.CodeAnalysis",
-                    new[] { SyntaxFactory.ParseSyntaxTree(minCodeAnalysisSource) },
-                    new[]
-                    {
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Runtime
-                        ),
-                        minSystemCollectionsImmutableRef
-                    },
-                    new CSharpCompilationOptions(
-                        OutputKind.DynamicallyLinkedLibrary,
-                        cryptoPublicKey: TestResources.TestKeys.PublicKey_31bf3856ad364e35
-                    )
+                "Microsoft.CodeAnalysis",
+                new[] { SyntaxFactory.ParseSyntaxTree(minCodeAnalysisSource) },
+                new[]
+                {
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Runtime
+                    ),
+                    minSystemCollectionsImmutableRef
+                },
+                new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    cryptoPublicKey: TestResources.TestKeys.PublicKey_31bf3856ad364e35
                 )
+            )
                 .EmitToArray();
 
             var minCodeAnalysisRef = MetadataReference.CreateFromImage(minCodeAnalysisImage);
@@ -277,120 +276,120 @@ public class TestAnalyzer : DiagnosticAnalyzer
 }";
 
             var analyzerImage = CSharpCompilation.Create(
-                    analyzerAssemblyName,
-                    new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(analyzerSource) },
-                    new MetadataReference[]
-                    {
-                        minCodeAnalysisRef,
-                        minSystemCollectionsImmutableRef,
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.Microsoft_Win32_Primitives
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_AppContext
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Console
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_ValueTuple
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Diagnostics_FileVersionInfo
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Diagnostics_Process
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Diagnostics_StackTrace
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Globalization_Calendars
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_IO_Compression
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_IO_Compression_ZipFile
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_IO_FileSystem
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_IO_FileSystem_Primitives
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_IO_Pipes
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Net_Http
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Net_Security
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Net_Sockets
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Reflection_TypeExtensions
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Runtime
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Runtime_InteropServices_RuntimeInformation
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Runtime_Serialization_Primitives
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Security_AccessControl
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Security_Claims
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Security_Cryptography_Algorithms
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Security_Cryptography_Csp
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Security_Cryptography_Encoding
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Security_Cryptography_Primitives
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Security_Cryptography_X509Certificates
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Security_Principal_Windows
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Threading_Thread
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Threading_Tasks_Extensions
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Xml_ReaderWriter
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Xml_XmlDocument
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Xml_XPath
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Xml_XPath_XDocument
-                        ),
-                        MetadataReference.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Text_Encoding_CodePages
-                        )
-                    },
-                    new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
-                )
+                analyzerAssemblyName,
+                new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(analyzerSource) },
+                new MetadataReference[]
+                {
+                    minCodeAnalysisRef,
+                    minSystemCollectionsImmutableRef,
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.Microsoft_Win32_Primitives
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_AppContext
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Console
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_ValueTuple
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Diagnostics_FileVersionInfo
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Diagnostics_Process
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Diagnostics_StackTrace
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Globalization_Calendars
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_IO_Compression
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_IO_Compression_ZipFile
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_IO_FileSystem
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_IO_FileSystem_Primitives
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_IO_Pipes
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Net_Http
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Net_Security
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Net_Sockets
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Reflection_TypeExtensions
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Runtime
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Runtime_InteropServices_RuntimeInformation
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Runtime_Serialization_Primitives
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Security_AccessControl
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Security_Claims
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Security_Cryptography_Algorithms
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Security_Cryptography_Csp
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Security_Cryptography_Encoding
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Security_Cryptography_Primitives
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Security_Cryptography_X509Certificates
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Security_Principal_Windows
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Threading_Thread
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Threading_Tasks_Extensions
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Xml_ReaderWriter
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Xml_XmlDocument
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Xml_XPath
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Xml_XPath_XDocument
+                    ),
+                    MetadataReference.CreateFromImage(
+                        ProprietaryTestResources.netstandard13.System_Text_Encoding_CodePages
+                    )
+                },
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+            )
                 .EmitToArray();
 
             return analyzerImage;
@@ -400,10 +399,8 @@ public class TestAnalyzer : DiagnosticAnalyzer
         {
             var vsVersion = Environment.GetEnvironmentVariable("VisualStudioVersion") ?? "14.0";
             using (
-                var key = Registry.LocalMachine.OpenSubKey(
-                    $@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\{vsVersion}",
-                    false
-                )
+                var key = Registry.LocalMachine
+                    .OpenSubKey($@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\{vsVersion}", false)
             )
             {
                 if (key != null)

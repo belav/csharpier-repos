@@ -45,27 +45,12 @@ namespace System.IO.Ports.Tests
 
                 com.Open();
 
-                IAsyncResult readAsyncResult1 = com.BaseStream.BeginWrite(
-                    new byte[numBytesToWrite1],
-                    0,
-                    numBytesToWrite1,
-                    null,
-                    null
-                );
-                IAsyncResult readAsyncResult2 = com.BaseStream.BeginWrite(
-                    new byte[numBytesToWrite2],
-                    0,
-                    numBytesToWrite2,
-                    null,
-                    null
-                );
-                IAsyncResult readAsyncResult3 = com.BaseStream.BeginWrite(
-                    new byte[numBytesToWrite3],
-                    0,
-                    numBytesToWrite3,
-                    null,
-                    null
-                );
+                IAsyncResult readAsyncResult1 = com.BaseStream
+                    .BeginWrite(new byte[numBytesToWrite1], 0, numBytesToWrite1, null, null);
+                IAsyncResult readAsyncResult2 = com.BaseStream
+                    .BeginWrite(new byte[numBytesToWrite2], 0, numBytesToWrite2, null, null);
+                IAsyncResult readAsyncResult3 = com.BaseStream
+                    .BeginWrite(new byte[numBytesToWrite3], 0, numBytesToWrite3, null, null);
 
                 com.BaseStream.EndWrite(readAsyncResult1);
                 com.BaseStream.EndWrite(readAsyncResult2);
@@ -92,27 +77,12 @@ namespace System.IO.Ports.Tests
 
                 com.Open();
 
-                IAsyncResult readAsyncResult1 = com.BaseStream.BeginWrite(
-                    new byte[numBytesToWrite1],
-                    0,
-                    numBytesToWrite1,
-                    null,
-                    null
-                );
-                IAsyncResult readAsyncResult2 = com.BaseStream.BeginWrite(
-                    new byte[numBytesToWrite2],
-                    0,
-                    numBytesToWrite2,
-                    null,
-                    null
-                );
-                IAsyncResult readAsyncResult3 = com.BaseStream.BeginWrite(
-                    new byte[numBytesToWrite3],
-                    0,
-                    numBytesToWrite3,
-                    null,
-                    null
-                );
+                IAsyncResult readAsyncResult1 = com.BaseStream
+                    .BeginWrite(new byte[numBytesToWrite1], 0, numBytesToWrite1, null, null);
+                IAsyncResult readAsyncResult2 = com.BaseStream
+                    .BeginWrite(new byte[numBytesToWrite2], 0, numBytesToWrite2, null, null);
+                IAsyncResult readAsyncResult3 = com.BaseStream
+                    .BeginWrite(new byte[numBytesToWrite3], 0, numBytesToWrite3, null, null);
 
                 com.BaseStream.EndWrite(readAsyncResult2);
                 com.BaseStream.EndWrite(readAsyncResult3);

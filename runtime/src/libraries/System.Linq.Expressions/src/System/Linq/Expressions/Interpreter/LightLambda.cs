@@ -190,12 +190,12 @@ namespace System.Linq.Expressions.Interpreter
                     InstructionList.DebugView.InstructionView instructionView = instructionViews[i];
 
                     sb.AppendFormat(
-                            CultureInfo.InvariantCulture,
-                            "{0}IP_{1}: {2}",
-                            _indent,
-                            i.ToString().PadLeft(4, '0'),
-                            instructionView.GetValue()
-                        )
+                        CultureInfo.InvariantCulture,
+                        "{0}IP_{1}: {2}",
+                        _indent,
+                        i.ToString().PadLeft(4, '0'),
+                        instructionView.GetValue()
+                    )
                         .AppendLine();
                 }
 
@@ -266,19 +266,15 @@ namespace System.Linq.Expressions.Interpreter
                 && paramInfos[1].ParameterType.IsByRef
             )
             {
-                runMethod = typeof(LightLambda).GetMethod(
-                    "RunVoidRef2",
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                );
+                runMethod = typeof(LightLambda)
+                    .GetMethod("RunVoidRef2", BindingFlags.NonPublic | BindingFlags.Instance);
                 paramTypes[0] = paramInfos[0].ParameterType.GetElementType();
                 paramTypes[1] = paramInfos[1].ParameterType.GetElementType();
             }
             else if (method.ReturnType == typeof(void) && paramTypes.Length == 0)
             {
-                runMethod = typeof(LightLambda).GetMethod(
-                    "RunVoid0",
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                );
+                runMethod = typeof(LightLambda)
+                    .GetMethod("RunVoid0", BindingFlags.NonPublic | BindingFlags.Instance);
             }
             else
             {
@@ -301,10 +297,11 @@ namespace System.Linq.Expressions.Interpreter
                 }
 #endif
 
-                runMethod = typeof(LightLambda).GetMethod(
-                    name + paramInfos.Length,
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                );
+                runMethod = typeof(LightLambda)
+                    .GetMethod(
+                        name + paramInfos.Length,
+                        BindingFlags.NonPublic | BindingFlags.Instance
+                    );
             }
 
             /*
@@ -406,17 +403,13 @@ namespace System.Linq.Expressions.Interpreter
             MethodInfo method = delegateType.GetInvokeMethod();
             if (method.ReturnType == typeof(void))
             {
-                return System.Dynamic.Utils.DelegateHelpers.CreateObjectArrayDelegate(
-                    delegateType,
-                    RunVoid
-                );
+                return System.Dynamic.Utils.DelegateHelpers
+                    .CreateObjectArrayDelegate(delegateType, RunVoid);
             }
             else
             {
-                return System.Dynamic.Utils.DelegateHelpers.CreateObjectArrayDelegate(
-                    delegateType,
-                    Run
-                );
+                return System.Dynamic.Utils.DelegateHelpers
+                    .CreateObjectArrayDelegate(delegateType, Run);
             }
 #else
             Func<

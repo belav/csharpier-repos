@@ -57,12 +57,8 @@ namespace System.Reflection.Metadata.Tests
             )
             {
                 foreach (
-                    var edit in base.GetEdits(
-                            sequenceA,
-                            sequenceA.Count,
-                            sequenceB,
-                            sequenceB.Count
-                        )
+                    var edit in base
+                        .GetEdits(sequenceA, sequenceA.Count, sequenceB, sequenceB.Count)
                         .Reverse()
                 )
                 {

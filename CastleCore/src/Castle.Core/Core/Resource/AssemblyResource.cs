@@ -56,12 +56,13 @@ namespace Castle.Core.Resource
 
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                "AssemblyResource: [{0}] [{1}]",
-                assemblyName,
-                resourcePath
-            );
+            return string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    "AssemblyResource: [{0}] [{1}]",
+                    assemblyName,
+                    resourcePath
+                );
         }
 
         private Stream CreateResourceFromPath(string resource, string path)
@@ -101,11 +102,12 @@ namespace Castle.Core.Resource
 
             if (nameFound == null)
             {
-                string message = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "The assembly resource {0} could not be located",
-                    resourcePath
-                );
+                string message = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "The assembly resource {0} could not be located",
+                        resourcePath
+                    );
                 throw new ResourceException(message);
             }
 
@@ -132,12 +134,8 @@ namespace Castle.Core.Resource
         {
             assembly = GetSimpleName(assembly);
             // TODO: use path for relative name construction
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                "{0}{1}",
-                assembly,
-                resource.Replace('/', '.')
-            );
+            return string
+                .Format(CultureInfo.CurrentCulture, "{0}{1}", assembly, resource.Replace('/', '.'));
         }
 
         private string GetSimpleName(string assembly)
@@ -168,11 +166,12 @@ namespace Castle.Core.Resource
             }
             catch (Exception ex)
             {
-                string message = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "The assembly {0} could not be loaded",
-                    assemblyName
-                );
+                string message = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "The assembly {0} could not be loaded",
+                        assemblyName
+                    );
                 throw new ResourceException(message, ex);
             }
         }

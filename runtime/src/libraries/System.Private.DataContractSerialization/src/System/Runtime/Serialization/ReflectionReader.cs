@@ -32,17 +32,18 @@ namespace System.Runtime.Serialization
         );
 
         private static readonly MethodInfo s_getCollectionSetItemDelegateMethod =
-            typeof(ReflectionReader).GetMethod(
-                nameof(GetCollectionSetItemDelegate),
-                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
-            )!;
-        private static readonly MethodInfo s_objectToKeyValuePairGetKey =
-            typeof(ReflectionReader).GetMethod(
+            typeof(ReflectionReader)
+                .GetMethod(
+                    nameof(GetCollectionSetItemDelegate),
+                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+                )!;
+        private static readonly MethodInfo s_objectToKeyValuePairGetKey = typeof(ReflectionReader)
+            .GetMethod(
                 nameof(ObjectToKeyValuePairGetKey),
                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
             )!;
-        private static readonly MethodInfo s_objectToKeyValuePairGetValue =
-            typeof(ReflectionReader).GetMethod(
+        private static readonly MethodInfo s_objectToKeyValuePairGetValue = typeof(ReflectionReader)
+            .GetMethod(
                 nameof(ObjectToKeyValuePairGetValue),
                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
             )!;
@@ -316,8 +317,8 @@ namespace System.Runtime.Serialization
 
             if (!isReadOnlyCollection && IsArrayLikeCollection(collectionContract))
             {
-                MethodInfo trimArraySizeMethod =
-                    XmlFormatGeneratorStatics.TrimArraySizeMethod.MakeGenericMethod(itemType);
+                MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics.TrimArraySizeMethod
+                    .MakeGenericMethod(itemType);
                 resultCollection = trimArraySizeMethod.Invoke(
                     null,
                     new object[] { resultCollection, index }
@@ -772,9 +773,8 @@ namespace System.Runtime.Serialization
                 && collectionContract.UnderlyingType.IsInterface
             )
             {
-                Type type = Globals.TypeOfDictionaryGeneric.MakeGenericType(
-                    collectionContract.ItemType.GetGenericArguments()
-                );
+                Type type = Globals.TypeOfDictionaryGeneric
+                    .MakeGenericType(collectionContract.ItemType.GetGenericArguments());
                 ConstructorInfo ci = type.GetConstructor(
                     BindingFlags.Instance | BindingFlags.Public,
                     Type.EmptyTypes
@@ -871,10 +871,8 @@ namespace System.Runtime.Serialization
                         object? key = objectToKeyValuePairGetKey(collectionItem!);
                         object? value = objectToKeyValuePairGetValue(collectionItem!);
 
-                        collectionContract.AddMethod!.Invoke(
-                            resultCollection,
-                            new object?[] { key, value }
-                        );
+                        collectionContract.AddMethod!
+                            .Invoke(resultCollection, new object?[] { key, value });
                         return resultCollection;
                     };
                 }
@@ -917,16 +915,17 @@ namespace System.Runtime.Serialization
                     MethodInfo? addMethod = collectionContract.AddMethod;
                     if (addMethod == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.Format(
-                                    SR.CollectionMustHaveAddMethod,
-                                    DataContract.GetClrTypeFullName(
-                                        collectionContract.UnderlyingType
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.Format(
+                                        SR.CollectionMustHaveAddMethod,
+                                        DataContract.GetClrTypeFullName(
+                                            collectionContract.UnderlyingType
+                                        )
                                     )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     return (resultCollection, collectionItem, index) =>

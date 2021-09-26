@@ -134,19 +134,21 @@ namespace System.IO
         }
 
         private static string ConfigData =>
-            string.Format(
-                "value0 00{0}value0 0{0}value1 1{0}value2 2{0}value3 3{0}",
-                Environment.NewLine
-            );
+            string
+                .Format(
+                    "value0 00{0}value0 0{0}value1 1{0}value2 2{0}value3 3{0}",
+                    Environment.NewLine
+                );
 
         private static string ConfigDataExtraNewlines =>
             $"value0 00{Newlines(5)}value0 0{Newlines(3)}value1 1{Newlines(1)}value2 2{Newlines(4)}value3 3{Newlines(6)}";
 
         private static string ConfigDataNoTrailingNewline =>
-            string.Format(
-                "value0 00{0}value0 0{0}value1 1{0}value2 2{0}value3 3",
-                Environment.NewLine
-            );
+            string
+                .Format(
+                    "value0 00{0}value0 0{0}value1 1{0}value2 2{0}value3 3",
+                    Environment.NewLine
+                );
 
         private static string Newlines(int count)
         {

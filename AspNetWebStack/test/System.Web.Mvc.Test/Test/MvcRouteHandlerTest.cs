@@ -42,8 +42,8 @@ namespace System.Web.Mvc.Test
             var requestContext = new RequestContext(httpContext.Object, routeData);
             var controllerFactory = new Mock<IControllerFactory>();
             controllerFactory.Setup(
-                    f => f.GetControllerSessionBehavior(requestContext, "controllerName")
-                )
+                f => f.GetControllerSessionBehavior(requestContext, "controllerName")
+            )
                 .Returns(SessionStateBehavior.ReadOnly)
                 .Verifiable();
             IRouteHandler routeHandler = new MvcRouteHandler(controllerFactory.Object);

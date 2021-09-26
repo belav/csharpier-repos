@@ -48,13 +48,14 @@ namespace System.Net.Http
                         proxyHelper,
                         $"AutoSettingsUsed, calling {nameof(Interop.WinHttp.WinHttpOpen)}"
                     );
-                sessionHandle = Interop.WinHttp.WinHttpOpen(
-                    IntPtr.Zero,
-                    Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY,
-                    Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
-                    Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
-                    (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
-                );
+                sessionHandle = Interop.WinHttp
+                    .WinHttpOpen(
+                        IntPtr.Zero,
+                        Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY,
+                        Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
+                        Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
+                        (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
+                    );
 
                 if (sessionHandle.IsInvalid)
                 {
@@ -107,27 +108,29 @@ namespace System.Net.Http
                         }
                         ;
                         if (
-                            string.Compare(
-                                proxyHelper.ProxyBypass,
-                                idx,
-                                "http://",
-                                0,
-                                7,
-                                StringComparison.OrdinalIgnoreCase
-                            ) == 0
+                            string
+                                .Compare(
+                                    proxyHelper.ProxyBypass,
+                                    idx,
+                                    "http://",
+                                    0,
+                                    7,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
                         )
                         {
                             idx += 7;
                         }
                         else if (
-                            string.Compare(
-                                proxyHelper.ProxyBypass,
-                                idx,
-                                "https://",
-                                0,
-                                8,
-                                StringComparison.OrdinalIgnoreCase
-                            ) == 0
+                            string
+                                .Compare(
+                                    proxyHelper.ProxyBypass,
+                                    idx,
+                                    "https://",
+                                    0,
+                                    8,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
                         )
                         {
                             idx += 8;
@@ -160,14 +163,15 @@ namespace System.Net.Http
                             tmp = null;
                         }
                         else if (
-                            string.Compare(
-                                proxyHelper.ProxyBypass,
-                                start,
-                                "<local>",
-                                0,
-                                7,
-                                StringComparison.OrdinalIgnoreCase
-                            ) == 0
+                            string
+                                .Compare(
+                                    proxyHelper.ProxyBypass,
+                                    start,
+                                    "<local>",
+                                    0,
+                                    7,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
                         )
                         {
                             _bypassLocal = true;

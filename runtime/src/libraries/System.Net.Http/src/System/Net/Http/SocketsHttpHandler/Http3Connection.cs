@@ -103,8 +103,8 @@ namespace System.Net.Http
                 : authority.IdnHost
                   + ":"
                   + authority.Port.ToString(Globalization.CultureInfo.InvariantCulture);
-            _altUsedEncodedHeader =
-                QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(
+            _altUsedEncodedHeader = QPack.QPackEncoder
+                .EncodeLiteralHeaderFieldWithoutNameReferenceToArray(
                     KnownHeaders.AltUsed.Name,
                     altUsedValue
                 );
@@ -495,13 +495,14 @@ namespace System.Net.Http
             string message,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource.Log.HandlerMessage(
-                _pool?.GetHashCode() ?? 0, // pool ID
-                GetHashCode(), // connection ID
-                (int)streamId, // stream ID
-                memberName, // method name
-                message
-            ); // message
+            NetEventSource.Log
+                .HandlerMessage(
+                    _pool?.GetHashCode() ?? 0, // pool ID
+                    GetHashCode(), // connection ID
+                    (int)streamId, // stream ID
+                    memberName, // method name
+                    message
+                ); // message
 
         private async Task SendSettingsAsync()
         {
@@ -509,9 +510,9 @@ namespace System.Net.Http
             {
                 _clientControl = _connection!.OpenUnidirectionalStream();
                 await _clientControl.WriteAsync(
-                        _pool.Settings.Http3SettingsFrame,
-                        CancellationToken.None
-                    )
+                    _pool.Settings.Http3SettingsFrame,
+                    CancellationToken.None
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -598,9 +599,9 @@ namespace System.Net.Http
                     try
                     {
                         bytesRead = await stream.ReadAsync(
-                                buffer.AvailableMemory,
-                                CancellationToken.None
-                            )
+                            buffer.AvailableMemory,
+                            CancellationToken.None
+                        )
                             .ConfigureAwait(false);
                     }
                     catch (QuicStreamAbortedException)
@@ -693,9 +694,9 @@ namespace System.Net.Http
                                         VariableLengthIntegerHelper.MaximumEncodedLength
                                     );
                                     bytesRead = await stream.ReadAsync(
-                                            buffer.AvailableMemory,
-                                            CancellationToken.None
-                                        )
+                                        buffer.AvailableMemory,
+                                        CancellationToken.None
+                                    )
                                         .ConfigureAwait(false);
 
                                     if (bytesRead == 0)
@@ -797,9 +798,9 @@ namespace System.Net.Http
                             return;
                         default:
                             await SkipUnknownPayloadAsync(
-                                    frameType.GetValueOrDefault(),
-                                    payloadLength
-                                )
+                                frameType.GetValueOrDefault(),
+                                payloadLength
+                            )
                                 .ConfigureAwait(false);
                             break;
                     }
@@ -825,9 +826,9 @@ namespace System.Net.Http
                         VariableLengthIntegerHelper.MaximumEncodedLength * 2
                     );
                     bytesRead = await stream.ReadAsync(
-                            buffer.AvailableMemory,
-                            CancellationToken.None
-                        )
+                        buffer.AvailableMemory,
+                        CancellationToken.None
+                    )
                         .ConfigureAwait(false);
 
                     if (bytesRead != 0)
@@ -872,9 +873,9 @@ namespace System.Net.Http
                             VariableLengthIntegerHelper.MaximumEncodedLength * 2
                         );
                         bytesRead = await stream.ReadAsync(
-                                buffer.AvailableMemory,
-                                CancellationToken.None
-                            )
+                            buffer.AvailableMemory,
+                            CancellationToken.None
+                        )
                             .ConfigureAwait(false);
 
                         if (bytesRead != 0)
@@ -930,9 +931,9 @@ namespace System.Net.Http
                 {
                     buffer.EnsureAvailableSpace(VariableLengthIntegerHelper.MaximumEncodedLength);
                     bytesRead = await stream.ReadAsync(
-                            buffer.AvailableMemory,
-                            CancellationToken.None
-                        )
+                        buffer.AvailableMemory,
+                        CancellationToken.None
+                    )
                         .ConfigureAwait(false);
 
                     if (bytesRead != 0)
@@ -963,9 +964,9 @@ namespace System.Net.Http
                     if (buffer.ActiveLength == 0)
                     {
                         int bytesRead = await stream.ReadAsync(
-                                buffer.AvailableMemory,
-                                CancellationToken.None
-                            )
+                            buffer.AvailableMemory,
+                            CancellationToken.None
+                        )
                             .ConfigureAwait(false);
 
                         if (bytesRead != 0)

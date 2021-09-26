@@ -22,23 +22,21 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task XForwardedForDefaultSettingsChangeRemoteIpAndPort()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedFor
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedFor
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -69,24 +67,22 @@ namespace Microsoft.AspNetCore.HttpOverrides
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedFor,
-                                            ForwardLimit = limit,
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedFor,
+                                    ForwardLimit = limit,
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -235,26 +231,24 @@ namespace Microsoft.AspNetCore.HttpOverrides
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    var options = new ForwardedHeadersOptions
-                                    {
-                                        ForwardedHeaders = ForwardedHeaders.XForwardedFor,
-                                        RequireHeaderSymmetry = requireSymmetry,
-                                        ForwardLimit = limit,
-                                    };
-                                    options.KnownProxies.Clear();
-                                    options.KnownNetworks.Clear();
-                                    app.UseForwardedHeaders(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            var options = new ForwardedHeadersOptions
+                            {
+                                ForwardedHeaders = ForwardedHeaders.XForwardedFor,
+                                RequireHeaderSymmetry = requireSymmetry,
+                                ForwardLimit = limit,
+                            };
+                            options.KnownProxies.Clear();
+                            options.KnownNetworks.Clear();
+                            app.UseForwardedHeaders(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -283,23 +277,21 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task XForwardedForLoopback(string originalIp, bool expectForwarded)
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedFor,
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedFor,
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -477,31 +469,28 @@ namespace Microsoft.AspNetCore.HttpOverrides
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    var options = new ForwardedHeadersOptions
-                                    {
-                                        ForwardedHeaders = ForwardedHeaders.XForwardedFor,
-                                        RequireHeaderSymmetry = requireSymmetry,
-                                        ForwardLimit = limit,
-                                    };
-                                    foreach (
-                                        var ip in knownIPs.Split(',')
-                                            .Select(text => IPAddress.Parse(text))
-                                    )
-                                    {
-                                        options.KnownProxies.Add(ip);
-                                    }
-                                    app.UseForwardedHeaders(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            var options = new ForwardedHeadersOptions
+                            {
+                                ForwardedHeaders = ForwardedHeaders.XForwardedFor,
+                                RequireHeaderSymmetry = requireSymmetry,
+                                ForwardLimit = limit,
+                            };
+                            foreach (
+                                var ip in knownIPs.Split(',').Select(text => IPAddress.Parse(text))
+                            )
+                            {
+                                options.KnownProxies.Add(ip);
+                            }
+                            app.UseForwardedHeaders(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -524,23 +513,21 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task XForwardedForOverrideBadIpDoesntChangeRemoteIp()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedFor
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedFor
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -560,23 +547,21 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task XForwardedHostOverrideChangesRequestHost()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedHost
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedHost
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -634,34 +619,29 @@ namespace Microsoft.AspNetCore.HttpOverrides
             var assertsExecuted = false;
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedHost
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.Equal(
-                                                hostHeader,
-                                                context.Request.Host.ToString()
-                                            );
-                                            assertsExecuted = true;
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedHost
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.Run(
+                                context =>
+                                {
+                                    Assert.Equal(hostHeader, context.Request.Host.ToString());
+                                    assertsExecuted = true;
+                                    return Task.FromResult(0);
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -732,31 +712,29 @@ namespace Microsoft.AspNetCore.HttpOverrides
             var assertsExecuted = false;
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedHost
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.NotEqual(hostHeader, context.Request.Host.Value);
-                                            assertsExecuted = true;
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedHost
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.Run(
+                                context =>
+                                {
+                                    Assert.NotEqual(hostHeader, context.Request.Host.Value);
+                                    assertsExecuted = true;
+                                    return Task.FromResult(0);
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -791,38 +769,36 @@ namespace Microsoft.AspNetCore.HttpOverrides
         {
             bool assertsExecuted = false;
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedHost,
-                                            AllowedHosts = allowedHost.Split(
-                                                new[] { ';' },
-                                                StringSplitOptions.RemoveEmptyEntries
-                                            )
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.Equal(
-                                                hostHeader,
-                                                context.Request.Headers[HeaderNames.Host]
-                                            );
-                                            assertsExecuted = true;
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedHost,
+                                    AllowedHosts = allowedHost.Split(
+                                        new[] { ';' },
+                                        StringSplitOptions.RemoveEmptyEntries
+                                    )
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.Run(
+                                context =>
+                                {
+                                    Assert.Equal(
+                                        hostHeader,
+                                        context.Request.Headers[HeaderNames.Host]
+                                    );
+                                    assertsExecuted = true;
+                                    return Task.FromResult(0);
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -857,35 +833,33 @@ namespace Microsoft.AspNetCore.HttpOverrides
         {
             bool assertsExecuted = false;
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedHost,
-                                            AllowedHosts = new[] { allowedHost }
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.NotEqual<string>(
-                                                hostHeader,
-                                                context.Request.Headers[HeaderNames.Host]
-                                            );
-                                            assertsExecuted = true;
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedHost,
+                                    AllowedHosts = new[] { allowedHost }
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.Run(
+                                context =>
+                                {
+                                    Assert.NotEqual<string>(
+                                        hostHeader,
+                                        context.Request.Headers[HeaderNames.Host]
+                                    );
+                                    assertsExecuted = true;
+                                    return Task.FromResult(0);
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -904,36 +878,34 @@ namespace Microsoft.AspNetCore.HttpOverrides
         {
             bool assertsExecuted = false;
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedHost,
-                                            ForwardLimit = 10,
-                                            AllowedHosts = new[] { "bar.com", "*.foo.com" }
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.Equal(
-                                                "bar.foo.com:432",
-                                                context.Request.Headers[HeaderNames.Host]
-                                            );
-                                            assertsExecuted = true;
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedHost,
+                                    ForwardLimit = 10,
+                                    AllowedHosts = new[] { "bar.com", "*.foo.com" }
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.Run(
+                                context =>
+                                {
+                                    Assert.Equal(
+                                        "bar.foo.com:432",
+                                        context.Request.Headers[HeaderNames.Host]
+                                    );
+                                    assertsExecuted = true;
+                                    return Task.FromResult(0);
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -963,24 +935,22 @@ namespace Microsoft.AspNetCore.HttpOverrides
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedProto,
-                                            ForwardLimit = limit,
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedProto,
+                                    ForwardLimit = limit,
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1012,31 +982,29 @@ namespace Microsoft.AspNetCore.HttpOverrides
             var assertsExecuted = false;
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedProto
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.Equal(scheme, context.Request.Scheme);
-                                            assertsExecuted = true;
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedProto
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.Run(
+                                context =>
+                                {
+                                    Assert.Equal(scheme, context.Request.Scheme);
+                                    assertsExecuted = true;
+                                    return Task.FromResult(0);
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1079,31 +1047,29 @@ namespace Microsoft.AspNetCore.HttpOverrides
             var assertsExecuted = false;
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.XForwardedProto,
-                                        }
-                                    );
-                                    app.Run(
-                                        context =>
-                                        {
-                                            Assert.Equal("http", context.Request.Scheme);
-                                            assertsExecuted = true;
-                                            return Task.FromResult(0);
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedProto,
                                 }
                             );
-                    }
-                )
-                .Build();
+                            app.Run(
+                                context =>
+                                {
+                                    Assert.Equal("http", context.Request.Scheme);
+                                    assertsExecuted = true;
+                                    return Task.FromResult(0);
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1135,27 +1101,25 @@ namespace Microsoft.AspNetCore.HttpOverrides
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders =
-                                                ForwardedHeaders.XForwardedProto
-                                                | ForwardedHeaders.XForwardedFor,
-                                            RequireHeaderSymmetry = true,
-                                            ForwardLimit = limit,
-                                        }
-                                    );
+                                    ForwardedHeaders =
+                                        ForwardedHeaders.XForwardedProto
+                                        | ForwardedHeaders.XForwardedFor,
+                                    RequireHeaderSymmetry = true,
+                                    ForwardLimit = limit,
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1191,27 +1155,25 @@ namespace Microsoft.AspNetCore.HttpOverrides
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders =
-                                                ForwardedHeaders.XForwardedProto
-                                                | ForwardedHeaders.XForwardedFor,
-                                            RequireHeaderSymmetry = false,
-                                            ForwardLimit = limit,
-                                        }
-                                    );
+                                    ForwardedHeaders =
+                                        ForwardedHeaders.XForwardedProto
+                                        | ForwardedHeaders.XForwardedFor,
+                                    RequireHeaderSymmetry = false,
+                                    ForwardLimit = limit,
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1250,31 +1212,29 @@ namespace Microsoft.AspNetCore.HttpOverrides
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    var options = new ForwardedHeadersOptions
-                                    {
-                                        ForwardedHeaders =
-                                            ForwardedHeaders.XForwardedProto
-                                            | ForwardedHeaders.XForwardedFor,
-                                        RequireHeaderSymmetry = true,
-                                        ForwardLimit = 5,
-                                    };
-                                    if (!loopback)
-                                    {
-                                        options.KnownNetworks.Clear();
-                                        options.KnownProxies.Clear();
-                                    }
-                                    app.UseForwardedHeaders(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            var options = new ForwardedHeadersOptions
+                            {
+                                ForwardedHeaders =
+                                    ForwardedHeaders.XForwardedProto
+                                    | ForwardedHeaders.XForwardedFor,
+                                RequireHeaderSymmetry = true,
+                                ForwardLimit = 5,
+                            };
+                            if (!loopback)
+                            {
+                                options.KnownNetworks.Clear();
+                                options.KnownProxies.Clear();
+                            }
+                            app.UseForwardedHeaders(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1306,23 +1266,21 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task AllForwardsEnabledChangeRequestRemoteIpHostandProtocol()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.All
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.All
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1346,23 +1304,21 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task AllOptionsDisabledRequestDoesntChange()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders = ForwardedHeaders.None
-                                        }
-                                    );
+                                    ForwardedHeaders = ForwardedHeaders.None
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1386,25 +1342,23 @@ namespace Microsoft.AspNetCore.HttpOverrides
         public async Task PartiallyEnabledForwardsPartiallyChangesRequest()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(
+                                new ForwardedHeadersOptions
                                 {
-                                    app.UseForwardedHeaders(
-                                        new ForwardedHeadersOptions
-                                        {
-                                            ForwardedHeaders =
-                                                ForwardedHeaders.XForwardedFor
-                                                | ForwardedHeaders.XForwardedProto
-                                        }
-                                    );
+                                    ForwardedHeaders =
+                                        ForwardedHeaders.XForwardedFor
+                                        | ForwardedHeaders.XForwardedProto
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1487,18 +1441,16 @@ namespace Microsoft.AspNetCore.HttpOverrides
             }
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseForwardedHeaders(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1525,34 +1477,30 @@ namespace Microsoft.AspNetCore.HttpOverrides
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.Configure<ForwardedHeadersOptions>(
+                                options =>
                                 {
-                                    services.Configure<ForwardedHeadersOptions>(
-                                        options =>
-                                        {
-                                            options.ForwardedHeaders =
-                                                ForwardedHeaders.XForwardedProto;
-                                            options.KnownProxies.Clear();
-                                            options.KnownNetworks.Clear();
-                                            options.ForwardLimit = limit;
-                                        }
-                                    );
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseForwardedHeaders();
-                                    app.UseForwardedHeaders();
+                                    options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
+                                    options.KnownProxies.Clear();
+                                    options.KnownNetworks.Clear();
+                                    options.ForwardLimit = limit;
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            app.UseForwardedHeaders();
+                            app.UseForwardedHeaders();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -1580,26 +1528,24 @@ namespace Microsoft.AspNetCore.HttpOverrides
         )
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    var options = new ForwardedHeadersOptions
-                                    {
-                                        ForwardedHeaders = ForwardedHeaders.XForwardedProto,
-                                        ForwardLimit = limit,
-                                    };
-                                    options.KnownProxies.Clear();
-                                    options.KnownNetworks.Clear();
-                                    app.UseForwardedHeaders(options);
-                                    app.UseForwardedHeaders(options);
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            var options = new ForwardedHeadersOptions
+                            {
+                                ForwardedHeaders = ForwardedHeaders.XForwardedProto,
+                                ForwardLimit = limit,
+                            };
+                            options.KnownProxies.Clear();
+                            options.KnownNetworks.Clear();
+                            app.UseForwardedHeaders(options);
+                            app.UseForwardedHeaders(options);
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

@@ -117,8 +117,8 @@ namespace System.Web.Razor.Test.Parser.VB
                 new StatementBlock(
                     Factory.MetaCode("Code").Accepts(AcceptedCharacters.None),
                     Factory.Code(
-                            "\r\n    If foo IsNot Nothing\r\n        Bar(foo)\r\n    End If\r\n"
-                        )
+                        "\r\n    If foo IsNot Nothing\r\n        Bar(foo)\r\n    End If\r\n"
+                    )
                         .AsStatement(),
                     Factory.MetaCode("End Code").Accepts(AcceptedCharacters.None)
                 )
@@ -143,8 +143,8 @@ namespace System.Web.Razor.Test.Parser.VB
                 new StatementBlock(
                     Factory.MetaCode("Code").Accepts(AcceptedCharacters.None),
                     Factory.Code(
-                            "\r\n    If foo IsNot Nothing\r\n        Bar(foo)\r\n    End If\r\nEnd\r\nCode"
-                        )
+                        "\r\n    If foo IsNot Nothing\r\n        Bar(foo)\r\n    End If\r\nEnd\r\nCode"
+                    )
                         .AsStatement()
                 ),
                 new RazorError(
@@ -176,8 +176,8 @@ namespace System.Web.Razor.Test.Parser.VB
                 new StatementBlock(
                     Factory.MetaCode("Code").Accepts(AcceptedCharacters.None),
                     Factory.Code(
-                            "\r\n    If foo IsNot Nothing\r\n        Bar(foo)\r\n    End If\r\n"
-                        )
+                        "\r\n    If foo IsNot Nothing\r\n        Bar(foo)\r\n    End If\r\n"
+                    )
                         .AsStatement(),
                     Factory.MetaCode("End _\r\n_\r\n _\r\nCode").Accepts(AcceptedCharacters.None)
                 )
@@ -207,8 +207,8 @@ namespace System.Web.Razor.Test.Parser.VB
                 new FunctionsBlock(
                     Factory.MetaCode("Functions").Accepts(AcceptedCharacters.None),
                     Factory.Code(
-                            "\r\n    Public Sub Foo()\r\n        Bar()\r\n    End Sub\r\n\r\n    Private Function Bar() As Object\r\n        Return Nothing\r\n    End Function\r\n"
-                        )
+                        "\r\n    Public Sub Foo()\r\n        Bar()\r\n    End Sub\r\n\r\n    Private Function Bar() As Object\r\n        Return Nothing\r\n    End Function\r\n"
+                    )
                         .AsFunctionsBody(),
                     Factory.MetaCode("End Functions").Accepts(AcceptedCharacters.None)
                 )
@@ -233,8 +233,8 @@ namespace System.Web.Razor.Test.Parser.VB
                 new FunctionsBlock(
                     Factory.MetaCode("Functions").Accepts(AcceptedCharacters.None),
                     Factory.Code(
-                            "\r\n    If foo IsNot Nothing\r\n        Bar(foo)\r\n    End If\r\nEnd\r\nFunctions"
-                        )
+                        "\r\n    If foo IsNot Nothing\r\n        Bar(foo)\r\n    End If\r\nEnd\r\nFunctions"
+                    )
                         .AsFunctionsBody()
                 ),
                 new RazorError(
@@ -270,8 +270,8 @@ namespace System.Web.Razor.Test.Parser.VB
                 new FunctionsBlock(
                     Factory.MetaCode("Functions").Accepts(AcceptedCharacters.None),
                     Factory.Code(
-                            "\r\n    If foo IsNot Nothing\r\n        Bar(foo)\r\n    End If\r\n"
-                        )
+                        "\r\n    If foo IsNot Nothing\r\n        Bar(foo)\r\n    End If\r\n"
+                    )
                         .AsFunctionsBody(),
                     Factory.MetaCode("End _\r\n_\r\n _\r\nFunctions")
                         .Accepts(AcceptedCharacters.None)

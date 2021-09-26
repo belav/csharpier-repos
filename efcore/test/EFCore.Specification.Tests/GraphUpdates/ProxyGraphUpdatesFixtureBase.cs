@@ -415,40 +415,36 @@ namespace Microsoft.EntityFrameworkCore
                         e.OptionalChildren = new ObservableHashSet<Optional1>(
                             LegacyReferenceEqualityComparer.Instance
                         ) {
-                            context.Set<Optional1>()
-                                .CreateProxy(
-                                    e =>
-                                    {
-                                        e.Children = new ObservableHashSet<Optional2>(
-                                            LegacyReferenceEqualityComparer.Instance
-                                        ) {
-                                            context.Set<Optional2>().CreateProxy(),
-                                            context.Set<Optional2>().CreateProxy()
-                                        };
+                            context.Set<Optional1>().CreateProxy(
+                                e =>
+                                {
+                                    e.Children = new ObservableHashSet<Optional2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    ) {
+                                        context.Set<Optional2>().CreateProxy(),
+                                        context.Set<Optional2>().CreateProxy()
+                                    };
 
-                                        e.CompositeChildren =
-                                            new ObservableHashSet<OptionalComposite2>(
-                                                LegacyReferenceEqualityComparer.Instance
-                                            );
-                                    }
-                                ),
-                            context.Set<Optional1>()
-                                .CreateProxy(
-                                    e =>
-                                    {
-                                        e.Children = new ObservableHashSet<Optional2>(
-                                            LegacyReferenceEqualityComparer.Instance
-                                        ) {
-                                            context.Set<Optional2>().CreateProxy(),
-                                            context.Set<Optional2>().CreateProxy()
-                                        };
+                                    e.CompositeChildren = new ObservableHashSet<OptionalComposite2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    );
+                                }
+                            ),
+                            context.Set<Optional1>().CreateProxy(
+                                e =>
+                                {
+                                    e.Children = new ObservableHashSet<Optional2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    ) {
+                                        context.Set<Optional2>().CreateProxy(),
+                                        context.Set<Optional2>().CreateProxy()
+                                    };
 
-                                        e.CompositeChildren =
-                                            new ObservableHashSet<OptionalComposite2>(
-                                                LegacyReferenceEqualityComparer.Instance
-                                            );
-                                    }
-                                )
+                                    e.CompositeChildren = new ObservableHashSet<OptionalComposite2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    );
+                                }
+                            )
                         };
 
                         e.RequiredSingle = context.CreateProxy<RequiredSingle1>(
@@ -498,106 +494,98 @@ namespace Microsoft.EntityFrameworkCore
                         e.RequiredChildrenAk = new ObservableHashSet<RequiredAk1>(
                             LegacyReferenceEqualityComparer.Instance
                         ) {
-                            context.Set<RequiredAk1>()
-                                .CreateProxy(
-                                    e =>
-                                    {
-                                        e.AlternateId = Guid.NewGuid();
+                            context.Set<RequiredAk1>().CreateProxy(
+                                e =>
+                                {
+                                    e.AlternateId = Guid.NewGuid();
 
-                                        e.Children = new ObservableHashSet<RequiredAk2>(
-                                            LegacyReferenceEqualityComparer.Instance
-                                        ) {
-                                            context.Set<RequiredAk2>()
-                                                .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
-                                            context.Set<RequiredAk2>()
-                                                .CreateProxy(e => e.AlternateId = Guid.NewGuid())
-                                        };
+                                    e.Children = new ObservableHashSet<RequiredAk2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    ) {
+                                        context.Set<RequiredAk2>()
+                                            .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
+                                        context.Set<RequiredAk2>()
+                                            .CreateProxy(e => e.AlternateId = Guid.NewGuid())
+                                    };
 
-                                        e.CompositeChildren =
-                                            new ObservableHashSet<RequiredComposite2>(
-                                                LegacyReferenceEqualityComparer.Instance
-                                            ) {
-                                                context.Set<RequiredComposite2>().CreateProxy(),
-                                                context.Set<RequiredComposite2>().CreateProxy()
-                                            };
-                                    }
-                                ),
-                            context.Set<RequiredAk1>()
-                                .CreateProxy(
-                                    e =>
-                                    {
-                                        e.AlternateId = Guid.NewGuid();
+                                    e.CompositeChildren = new ObservableHashSet<RequiredComposite2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    ) {
+                                        context.Set<RequiredComposite2>().CreateProxy(),
+                                        context.Set<RequiredComposite2>().CreateProxy()
+                                    };
+                                }
+                            ),
+                            context.Set<RequiredAk1>().CreateProxy(
+                                e =>
+                                {
+                                    e.AlternateId = Guid.NewGuid();
 
-                                        e.Children = new ObservableHashSet<RequiredAk2>(
-                                            LegacyReferenceEqualityComparer.Instance
-                                        ) {
-                                            context.Set<RequiredAk2>()
-                                                .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
-                                            context.Set<RequiredAk2>()
-                                                .CreateProxy(e => e.AlternateId = Guid.NewGuid())
-                                        };
+                                    e.Children = new ObservableHashSet<RequiredAk2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    ) {
+                                        context.Set<RequiredAk2>()
+                                            .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
+                                        context.Set<RequiredAk2>()
+                                            .CreateProxy(e => e.AlternateId = Guid.NewGuid())
+                                    };
 
-                                        e.CompositeChildren =
-                                            new ObservableHashSet<RequiredComposite2>(
-                                                LegacyReferenceEqualityComparer.Instance
-                                            ) {
-                                                context.Set<RequiredComposite2>().CreateProxy(),
-                                                context.Set<RequiredComposite2>().CreateProxy()
-                                            };
-                                    }
-                                )
+                                    e.CompositeChildren = new ObservableHashSet<RequiredComposite2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    ) {
+                                        context.Set<RequiredComposite2>().CreateProxy(),
+                                        context.Set<RequiredComposite2>().CreateProxy()
+                                    };
+                                }
+                            )
                         };
 
                         e.OptionalChildrenAk = new ObservableHashSet<OptionalAk1>(
                             LegacyReferenceEqualityComparer.Instance
                         ) {
-                            context.Set<OptionalAk1>()
-                                .CreateProxy(
-                                    e =>
-                                    {
-                                        e.AlternateId = Guid.NewGuid();
+                            context.Set<OptionalAk1>().CreateProxy(
+                                e =>
+                                {
+                                    e.AlternateId = Guid.NewGuid();
 
-                                        e.Children = new ObservableHashSet<OptionalAk2>(
-                                            LegacyReferenceEqualityComparer.Instance
-                                        ) {
-                                            context.Set<OptionalAk2>()
-                                                .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
-                                            context.Set<OptionalAk2>()
-                                                .CreateProxy(e => e.AlternateId = Guid.NewGuid())
-                                        };
-                                        e.CompositeChildren =
-                                            new ObservableHashSet<OptionalComposite2>(
-                                                LegacyReferenceEqualityComparer.Instance
-                                            ) {
-                                                context.Set<OptionalComposite2>().CreateProxy(),
-                                                context.Set<OptionalComposite2>().CreateProxy()
-                                            };
-                                    }
-                                ),
-                            context.Set<OptionalAk1>()
-                                .CreateProxy(
-                                    e =>
-                                    {
-                                        e.AlternateId = Guid.NewGuid();
+                                    e.Children = new ObservableHashSet<OptionalAk2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    ) {
+                                        context.Set<OptionalAk2>()
+                                            .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
+                                        context.Set<OptionalAk2>()
+                                            .CreateProxy(e => e.AlternateId = Guid.NewGuid())
+                                    };
+                                    e.CompositeChildren = new ObservableHashSet<OptionalComposite2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    ) {
+                                        context.Set<OptionalComposite2>().CreateProxy(),
+                                        context.Set<OptionalComposite2>().CreateProxy()
+                                    };
+                                }
+                            ),
+                            context.Set<OptionalAk1>().CreateProxy(
+                                e =>
+                                {
+                                    e.AlternateId = Guid.NewGuid();
 
-                                        e.Children = new ObservableHashSet<OptionalAk2>(
-                                            LegacyReferenceEqualityComparer.Instance
-                                        ) {
-                                            context.Set<OptionalAk2>()
-                                                .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
-                                            context.Set<OptionalAk2>()
-                                                .CreateProxy(e => e.AlternateId = Guid.NewGuid())
-                                        };
+                                    e.Children = new ObservableHashSet<OptionalAk2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    ) {
+                                        context.Set<OptionalAk2>()
+                                            .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
+                                        context.Set<OptionalAk2>()
+                                            .CreateProxy(e => e.AlternateId = Guid.NewGuid())
+                                    };
 
-                                        e.CompositeChildren =
-                                            new ObservableHashSet<OptionalComposite2>(
-                                                LegacyReferenceEqualityComparer.Instance
-                                            ) {
-                                                context.Set<OptionalComposite2>().CreateProxy(),
-                                                context.Set<OptionalComposite2>().CreateProxy()
-                                            };
-                                    }
-                                )
+                                    e.CompositeChildren = new ObservableHashSet<OptionalComposite2>(
+                                        LegacyReferenceEqualityComparer.Instance
+                                    ) {
+                                        context.Set<OptionalComposite2>().CreateProxy(),
+                                        context.Set<OptionalComposite2>().CreateProxy()
+                                    };
+                                }
+                            )
                         };
 
                         e.RequiredSingleAk = context.CreateProxy<RequiredSingleAk1>(
@@ -682,44 +670,38 @@ namespace Microsoft.EntityFrameworkCore
                         e.RequiredCompositeChildren = new ObservableHashSet<RequiredComposite1>(
                             LegacyReferenceEqualityComparer.Instance
                         ) {
-                            context.Set<RequiredComposite1>()
-                                .CreateProxy(
-                                    e =>
-                                    {
-                                        e.Id = 1;
+                            context.Set<RequiredComposite1>().CreateProxy(
+                                e =>
+                                {
+                                    e.Id = 1;
 
-                                        e.CompositeChildren =
-                                            new ObservableHashSet<OptionalOverlapping2>(
-                                                LegacyReferenceEqualityComparer.Instance
-                                            ) {
-                                                context.CreateProxy<OptionalOverlapping2>(
-                                                    e => e.Id = 1
-                                                ),
-                                                context.CreateProxy<OptionalOverlapping2>(
-                                                    e => e.Id = 2
-                                                )
-                                            };
-                                    }
-                                ),
-                            context.Set<RequiredComposite1>()
-                                .CreateProxy(
-                                    e =>
-                                    {
-                                        e.Id = 2;
+                                    e.CompositeChildren =
+                                        new ObservableHashSet<OptionalOverlapping2>(
+                                            LegacyReferenceEqualityComparer.Instance
+                                        ) {
+                                            context.CreateProxy<OptionalOverlapping2>(
+                                                e => e.Id = 1
+                                            ),
+                                            context.CreateProxy<OptionalOverlapping2>(e => e.Id = 2)
+                                        };
+                                }
+                            ),
+                            context.Set<RequiredComposite1>().CreateProxy(
+                                e =>
+                                {
+                                    e.Id = 2;
 
-                                        e.CompositeChildren =
-                                            new ObservableHashSet<OptionalOverlapping2>(
-                                                LegacyReferenceEqualityComparer.Instance
-                                            ) {
-                                                context.CreateProxy<OptionalOverlapping2>(
-                                                    e => e.Id = 3
-                                                ),
-                                                context.CreateProxy<OptionalOverlapping2>(
-                                                    e => e.Id = 4
-                                                )
-                                            };
-                                    }
-                                )
+                                    e.CompositeChildren =
+                                        new ObservableHashSet<OptionalOverlapping2>(
+                                            LegacyReferenceEqualityComparer.Instance
+                                        ) {
+                                            context.CreateProxy<OptionalOverlapping2>(
+                                                e => e.Id = 3
+                                            ),
+                                            context.CreateProxy<OptionalOverlapping2>(e => e.Id = 4)
+                                        };
+                                }
+                            )
                         };
                     }
                 );
@@ -728,10 +710,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var tracker = new KeyValueEntityTracker();
 
-                context.ChangeTracker.TrackGraph(
-                    CreateFullGraph(context),
-                    e => tracker.TrackEntity(e.Entry)
-                );
+                context.ChangeTracker
+                    .TrackGraph(CreateFullGraph(context), e => tracker.TrackEntity(e.Entry));
 
                 context.Add(
                     context.CreateProxy<BadOrder>(

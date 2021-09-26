@@ -91,11 +91,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private PropertyActivator<ControllerContext>[] GetPropertiesToActivate(Type type)
         {
-            var activators = PropertyActivator<ControllerContext>.GetPropertiesToActivate(
-                type,
-                typeof(ViewDataDictionaryAttribute),
-                p => new PropertyActivator<ControllerContext>(p, GetViewDataDictionary)
-            );
+            var activators = PropertyActivator<ControllerContext>
+                .GetPropertiesToActivate(
+                    type,
+                    typeof(ViewDataDictionaryAttribute),
+                    p => new PropertyActivator<ControllerContext>(p, GetViewDataDictionary)
+                );
 
             return activators;
         }

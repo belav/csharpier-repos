@@ -356,12 +356,13 @@ namespace System.Security.Cryptography.Xml
                 foreach (X509Extension extension in certificate.Extensions)
                 {
                     if (
-                        string.Equals(
-                            extension.Oid.Value,
-                            "2.5.29.15" /* szOID_KEY_USAGE */
-                            ,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                extension.Oid.Value,
+                                "2.5.29.15" /* szOID_KEY_USAGE */
+                                ,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         X509KeyUsageExtension keyUsage = new X509KeyUsageExtension();
@@ -719,11 +720,12 @@ namespace System.Security.Cryptography.Xml
             foreach (string safeAlgorithm in SafeCanonicalizationMethods)
             {
                 if (
-                    string.Equals(
-                        safeAlgorithm,
-                        SignedInfo.CanonicalizationMethod,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            safeAlgorithm,
+                            SignedInfo.CanonicalizationMethod,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     return true;
@@ -762,11 +764,12 @@ namespace System.Security.Cryptography.Xml
             foreach (string safeAlgorithm in SafeCanonicalizationMethods)
             {
                 if (
-                    string.Equals(
-                        safeAlgorithm,
-                        transformAlgorithm,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            safeAlgorithm,
+                            transformAlgorithm,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     return true;
@@ -776,11 +779,12 @@ namespace System.Security.Cryptography.Xml
             foreach (string safeAlgorithm in DefaultSafeTransformMethods)
             {
                 if (
-                    string.Equals(
-                        safeAlgorithm,
-                        transformAlgorithm,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            safeAlgorithm,
+                            transformAlgorithm,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     return true;

@@ -148,9 +148,9 @@ namespace Test
                 // (15,21): error CS0826: No best type found for implicitly-typed array
                 //             var a = new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu};
                 Diagnostic(
-                        ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
-                        "new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}"
-                    )
+                    ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
+                    "new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}"
+                )
                     .WithLocation(15, 21),
                 // (17,35): error CS1929: '?[]' does not contain a definition for 'SequenceEqual' and the best extension method overload 'System.Linq.Queryable.SequenceEqual<Test.Program.E>(System.Linq.IQueryable<Test.Program.E>, System.Collections.Generic.IEnumerable<Test.Program.E>)' requires a receiver of type 'System.Linq.IQueryable<Test.Program.E>'
                 //              System.Console.Write(a.SequenceEqual(new E[]{E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}));
@@ -1009,16 +1009,12 @@ namespace Test
     }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (16,21): error CS0826: No best type found for implicitly-typed array
-                    //             E[] a = new[] { E.FortyTwo, 0 }; // Dev10 error CS0826
-                    Diagnostic(
-                            ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
-                            "new[] { E.FortyTwo, 0 }"
-                        )
-                        .WithLocation(16, 21)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (16,21): error CS0826: No best type found for implicitly-typed array
+                //             E[] a = new[] { E.FortyTwo, 0 }; // Dev10 error CS0826
+                Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, "new[] { E.FortyTwo, 0 }")
+                    .WithLocation(16, 21)
+            );
         }
         #endregion
     }

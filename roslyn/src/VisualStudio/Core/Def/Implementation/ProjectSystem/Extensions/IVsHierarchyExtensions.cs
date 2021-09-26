@@ -131,10 +131,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         {
             if (
                 ErrorHandler.Succeeded(
-                    ((IVsProject3)hierarchy).GetMkDocument(
-                        (uint)VSConstants.VSITEMID.Root,
-                        out var projectFilePath
-                    )
+                    ((IVsProject3)hierarchy)
+                        .GetMkDocument((uint)VSConstants.VSITEMID.Root, out var projectFilePath)
                 ) && !string.IsNullOrEmpty(projectFilePath)
             )
             {

@@ -73,27 +73,24 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new BloggingContext(testDatabase);
             var creator = GetDatabaseCreator(context);
 
-            await context.Database.CreateExecutionStrategy()
-                .ExecuteAsync(
-                    async () =>
+            await context.Database.CreateExecutionStrategy().ExecuteAsync(
+                async () =>
+                {
+                    using (CreateTransactionScope(ambientTransaction))
                     {
-                        using (CreateTransactionScope(ambientTransaction))
+                        if (useCanConnect)
                         {
-                            if (useCanConnect)
-                            {
-                                Assert.False(
-                                    async ? await creator.CanConnectAsync() : creator.CanConnect()
-                                );
-                            }
-                            else
-                            {
-                                Assert.False(
-                                    async ? await creator.ExistsAsync() : creator.Exists()
-                                );
-                            }
+                            Assert.False(
+                                async ? await creator.CanConnectAsync() : creator.CanConnect()
+                            );
+                        }
+                        else
+                        {
+                            Assert.False(async ? await creator.ExistsAsync() : creator.Exists());
                         }
                     }
-                );
+                }
+            );
 
             Assert.Equal(ConnectionState.Closed, context.Database.GetDbConnection().State);
         }
@@ -150,25 +147,24 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new BloggingContext(testDatabase);
             var creator = GetDatabaseCreator(context);
 
-            await context.Database.CreateExecutionStrategy()
-                .ExecuteAsync(
-                    async () =>
+            await context.Database.CreateExecutionStrategy().ExecuteAsync(
+                async () =>
+                {
+                    using (CreateTransactionScope(ambientTransaction))
                     {
-                        using (CreateTransactionScope(ambientTransaction))
+                        if (useCanConnect)
                         {
-                            if (useCanConnect)
-                            {
-                                Assert.True(
-                                    async ? await creator.CanConnectAsync() : creator.CanConnect()
-                                );
-                            }
-                            else
-                            {
-                                Assert.True(async ? await creator.ExistsAsync() : creator.Exists());
-                            }
+                            Assert.True(
+                                async ? await creator.CanConnectAsync() : creator.CanConnect()
+                            );
+                        }
+                        else
+                        {
+                            Assert.True(async ? await creator.ExistsAsync() : creator.Exists());
                         }
                     }
-                );
+                }
+            );
 
             Assert.Equal(ConnectionState.Closed, context.Database.GetDbConnection().State);
         }
@@ -219,23 +215,22 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.True(async ? await creator.ExistsAsync() : creator.Exists());
 
-            await GetExecutionStrategy(testDatabase)
-                .ExecuteAsync(
-                    async () =>
+            await GetExecutionStrategy(testDatabase).ExecuteAsync(
+                async () =>
+                {
+                    using (CreateTransactionScope(ambientTransaction))
                     {
-                        using (CreateTransactionScope(ambientTransaction))
+                        if (async)
                         {
-                            if (async)
-                            {
-                                Assert.True(await context.Database.EnsureDeletedAsync());
-                            }
-                            else
-                            {
-                                Assert.True(context.Database.EnsureDeleted());
-                            }
+                            Assert.True(await context.Database.EnsureDeletedAsync());
+                        }
+                        else
+                        {
+                            Assert.True(context.Database.EnsureDeleted());
                         }
                     }
-                );
+                }
+            );
 
             Assert.Equal(ConnectionState.Closed, context.Database.GetDbConnection().State);
 
@@ -316,7 +311,8 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             return TestEnvironment.IsSqlAzure
-              ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
+              ? new TestSqlServerRetryingExecutionStrategy()
+                .ExecuteAsync(
                     (true, async, ambientTransaction, file),
                     Creates_physical_database_and_schema_test
                 )
@@ -359,7 +355,8 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             return TestEnvironment.IsSqlAzure
-              ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
+              ? new TestSqlServerRetryingExecutionStrategy()
+                .ExecuteAsync(
                     (false, async, ambientTransaction, file),
                     Creates_physical_database_and_schema_test
                 )
@@ -409,15 +406,15 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var tables = testDatabase.Query<string>(
-                    "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'"
-                )
+                "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'"
+            )
                 .ToList();
             Assert.Single(tables);
             Assert.Equal("Blogs", tables.Single());
 
             var columns = testDatabase.Query<string>(
-                    "SELECT TABLE_NAME + '.' + COLUMN_NAME + ' (' + DATA_TYPE + ')' FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'Blogs' ORDER BY TABLE_NAME, COLUMN_NAME"
-                )
+                "SELECT TABLE_NAME + '.' + COLUMN_NAME + ' (' + DATA_TYPE + ')' FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'Blogs' ORDER BY TABLE_NAME, COLUMN_NAME"
+            )
                 .ToArray();
             Assert.Equal(14, columns.Length);
 
@@ -495,28 +492,27 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var testDatabase = SqlServerTestStore.GetOrCreate("NonExisting");
             var databaseCreator = GetDatabaseCreator(testDatabase);
-            await databaseCreator.ExecutionStrategyFactory.Create()
-                .ExecuteAsync(
-                    databaseCreator,
-                    async creator =>
-                    {
-                        var errorNumber = async
-                            ? (
-                                  await Assert.ThrowsAsync<SqlException>(
-                                      () => creator.HasTablesAsyncBase()
-                                  )
-                              ).Number
-                            : Assert.Throws<SqlException>(() => creator.HasTablesBase()).Number;
+            await databaseCreator.ExecutionStrategyFactory.Create().ExecuteAsync(
+                databaseCreator,
+                async creator =>
+                {
+                    var errorNumber = async
+                        ? (
+                              await Assert.ThrowsAsync<SqlException>(
+                                  () => creator.HasTablesAsyncBase()
+                              )
+                          ).Number
+                        : Assert.Throws<SqlException>(() => creator.HasTablesBase()).Number;
 
-                        if (errorNumber != 233) // skip if no-process transient failure
-                        {
-                            Assert.Equal(
-                                4060, // Login failed error number
-                                errorNumber
-                            );
-                        }
+                    if (errorNumber != 233) // skip if no-process transient failure
+                    {
+                        Assert.Equal(
+                            4060, // Login failed error number
+                            errorNumber
+                        );
                     }
-                );
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -530,18 +526,17 @@ namespace Microsoft.EntityFrameworkCore
             using var testDatabase = SqlServerTestStore.GetOrCreateInitialized("Empty");
             var creator = GetDatabaseCreator(testDatabase);
 
-            await GetExecutionStrategy(testDatabase)
-                .ExecuteAsync(
-                    async () =>
+            await GetExecutionStrategy(testDatabase).ExecuteAsync(
+                async () =>
+                {
+                    using (CreateTransactionScope(ambientTransaction))
                     {
-                        using (CreateTransactionScope(ambientTransaction))
-                        {
-                            Assert.False(
-                                async ? await creator.HasTablesAsyncBase() : creator.HasTablesBase()
-                            );
-                        }
+                        Assert.False(
+                            async ? await creator.HasTablesAsyncBase() : creator.HasTablesBase()
+                        );
                     }
-                );
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -556,18 +551,17 @@ namespace Microsoft.EntityFrameworkCore
                 .InitializeSqlServer(null, t => new BloggingContext(t), null);
             var creator = GetDatabaseCreator(testDatabase);
 
-            await GetExecutionStrategy(testDatabase)
-                .ExecuteAsync(
-                    async () =>
+            await GetExecutionStrategy(testDatabase).ExecuteAsync(
+                async () =>
+                {
+                    using (CreateTransactionScope(ambientTransaction))
                     {
-                        using (CreateTransactionScope(ambientTransaction))
-                        {
-                            Assert.True(
-                                async ? await creator.HasTablesAsyncBase() : creator.HasTablesBase()
-                            );
-                        }
+                        Assert.True(
+                            async ? await creator.HasTablesAsyncBase() : creator.HasTablesBase()
+                        );
                     }
-                );
+                }
+            );
         }
     }
 
@@ -673,7 +667,8 @@ namespace Microsoft.EntityFrameworkCore
                 await testDatabase.QueryAsync<string>(
                     "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'"
                 )
-            ).ToList();
+            )
+                .ToList();
             Assert.Single(tables);
             Assert.Equal("Blogs", tables.Single());
 
@@ -681,7 +676,8 @@ namespace Microsoft.EntityFrameworkCore
                 await testDatabase.QueryAsync<string>(
                     "SELECT TABLE_NAME + '.' + COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Blogs'"
                 )
-            ).ToList();
+            )
+                .ToList();
             Assert.Equal(14, columns.Count);
             Assert.Contains(columns, c => c == "Blogs.Key1");
             Assert.Contains(columns, c => c == "Blogs.Key2");
@@ -787,23 +783,22 @@ namespace Microsoft.EntityFrameworkCore
 
             creator.EnsureDeleted();
 
-            await GetExecutionStrategy(testDatabase)
-                .ExecuteAsync(
-                    async () =>
+            await GetExecutionStrategy(testDatabase).ExecuteAsync(
+                async () =>
+                {
+                    using (CreateTransactionScope(ambientTransaction))
                     {
-                        using (CreateTransactionScope(ambientTransaction))
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await creator.CreateAsync();
-                            }
-                            else
-                            {
-                                creator.Create();
-                            }
+                            await creator.CreateAsync();
+                        }
+                        else
+                        {
+                            creator.Create();
                         }
                     }
-                );
+                }
+            );
 
             Assert.True(creator.Exists());
 
@@ -822,11 +817,12 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.True(
                 await testDatabase.ExecuteScalarAsync<bool>(
-                    string.Concat(
-                        "SELECT is_read_committed_snapshot_on FROM sys.databases WHERE name='",
-                        testDatabase.Name,
-                        "'"
-                    )
+                    string
+                        .Concat(
+                            "SELECT is_read_committed_snapshot_on FROM sys.databases WHERE name='",
+                            testDatabase.Name,
+                            "'"
+                        )
                 )
             );
         }
@@ -884,7 +880,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private static IServiceProvider CreateServiceProvider()
         {
-            return new ServiceCollection().AddEntityFrameworkSqlServer()
+            return new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .AddScoped<IExecutionStrategyFactory, TestSqlServerExecutionStrategyFactory>()
                 .AddScoped<IRelationalDatabaseCreator, TestDatabaseCreator>()
                 .BuildServiceProvider();

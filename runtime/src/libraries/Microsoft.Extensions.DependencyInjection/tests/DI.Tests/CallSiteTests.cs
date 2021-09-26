@@ -105,19 +105,19 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var provider = new DynamicServiceProviderEngine(descriptors);
 
             var callSite = provider.CallSiteFactory.GetCallSite(serviceType, new CallSiteChain());
-            var collectionCallSite = provider.CallSiteFactory.GetCallSite(
-                typeof(IEnumerable<>).MakeGenericType(serviceType),
-                new CallSiteChain()
-            );
+            var collectionCallSite = provider.CallSiteFactory
+                .GetCallSite(
+                    typeof(IEnumerable<>).MakeGenericType(serviceType),
+                    new CallSiteChain()
+                );
 
             var compiledCallSite = CompileCallSite(callSite, provider);
             var compiledCollectionCallSite = CompileCallSite(collectionCallSite, provider);
 
             var service1 = Invoke(callSite, provider);
             var service2 = compiledCallSite(provider.Root);
-            var serviceEnumerator = (
-                (IEnumerable)compiledCollectionCallSite(provider.Root)
-            ).GetEnumerator();
+            var serviceEnumerator = ((IEnumerable)compiledCollectionCallSite(provider.Root))
+                .GetEnumerator();
 
             Assert.NotNull(service1);
             Assert.True(compare(service1, service2));
@@ -137,10 +137,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             descriptors.AddScoped<ServiceC>();
 
             var provider = new DynamicServiceProviderEngine(descriptors);
-            var callSite = provider.CallSiteFactory.GetCallSite(
-                typeof(ServiceC),
-                new CallSiteChain()
-            );
+            var callSite = provider.CallSiteFactory
+                .GetCallSite(typeof(ServiceC), new CallSiteChain());
             var compiledCallSite = CompileCallSite(callSite, provider);
 
             var serviceC = (ServiceC)compiledCallSite(provider.Root);
@@ -174,10 +172,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             {
                 disposables.Add(obj);
             };
-            var callSite = provider.CallSiteFactory.GetCallSite(
-                typeof(ServiceC),
-                new CallSiteChain()
-            );
+            var callSite = provider.CallSiteFactory
+                .GetCallSite(typeof(ServiceC), new CallSiteChain());
             var compiledCallSite = CompileCallSite(callSite, provider);
 
             var serviceC = (DisposableServiceC)compiledCallSite(provider.Root);
@@ -214,10 +210,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             {
                 disposables.Add(obj);
             };
-            var callSite = provider.CallSiteFactory.GetCallSite(
-                typeof(ServiceC),
-                new CallSiteChain()
-            );
+            var callSite = provider.CallSiteFactory
+                .GetCallSite(typeof(ServiceC), new CallSiteChain());
             var compiledCallSite = CompileCallSite(callSite, provider);
 
             var serviceC = (DisposableServiceC)compiledCallSite(provider.Root);
@@ -254,10 +248,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             {
                 disposables.Add(obj);
             };
-            var callSite = provider.CallSiteFactory.GetCallSite(
-                typeof(ServiceC),
-                new CallSiteChain()
-            );
+            var callSite = provider.CallSiteFactory
+                .GetCallSite(typeof(ServiceC), new CallSiteChain());
             var compiledCallSite = CompileCallSite(callSite, provider);
 
             var serviceC = (ServiceC)compiledCallSite(provider.Root);
@@ -288,10 +280,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             {
                 disposables.Add(obj);
             };
-            var callSite = provider.CallSiteFactory.GetCallSite(
-                typeof(ServiceD),
-                new CallSiteChain()
-            );
+            var callSite = provider.CallSiteFactory
+                .GetCallSite(typeof(ServiceD), new CallSiteChain());
             var compiledCallSite = CompileCallSite(callSite, provider);
 
             var serviceD = (ServiceD)compiledCallSite(provider.Root);
@@ -309,16 +299,12 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             var provider = new DynamicServiceProviderEngine(descriptors);
 
-            var callSite1 = provider.CallSiteFactory.GetCallSite(
-                typeof(ClassWithThrowingEmptyCtor),
-                new CallSiteChain()
-            );
+            var callSite1 = provider.CallSiteFactory
+                .GetCallSite(typeof(ClassWithThrowingEmptyCtor), new CallSiteChain());
             var compiledCallSite1 = CompileCallSite(callSite1, provider);
 
-            var callSite2 = provider.CallSiteFactory.GetCallSite(
-                typeof(ClassWithThrowingCtor),
-                new CallSiteChain()
-            );
+            var callSite2 = provider.CallSiteFactory
+                .GetCallSite(typeof(ClassWithThrowingCtor), new CallSiteChain());
             var compiledCallSite2 = CompileCallSite(callSite2, provider);
 
             var ex1 = Assert.Throws<Exception>(() => compiledCallSite1(provider.Root));
@@ -338,10 +324,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             var provider = new DynamicServiceProviderEngine(descriptors);
 
-            var callSite1 = provider.CallSiteFactory.GetCallSite(
-                typeof(ServiceE),
-                new CallSiteChain()
-            );
+            var callSite1 = provider.CallSiteFactory
+                .GetCallSite(typeof(ServiceE), new CallSiteChain());
             var compileCallSite = CompileCallSite(callSite1, provider);
 
             Assert.NotNull(compileCallSite);
@@ -449,11 +433,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             ServiceProviderEngine engine
         )
         {
-            return new ExpressionResolverBuilder(
-                CallSiteRuntimeResolver,
-                engine,
-                engine.Root
-            ).Build(callSite);
+            return new ExpressionResolverBuilder(CallSiteRuntimeResolver, engine, engine.Root)
+                .Build(callSite);
         }
     }
 }

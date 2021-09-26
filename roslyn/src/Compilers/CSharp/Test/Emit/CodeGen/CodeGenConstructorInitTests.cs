@@ -31,10 +31,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty)
-                .VerifyIL(
-                    "C..ctor",
-                    @"
+            CompileAndVerify(source, expectedOutput: string.Empty).VerifyIL(
+                "C..ctor",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -43,7 +42,7 @@ class C
   IL_0006:  ret       
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -63,10 +62,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty)
-                .VerifyIL(
-                    "C..ctor",
-                    @"
+            CompileAndVerify(source, expectedOutput: string.Empty).VerifyIL(
+                "C..ctor",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -75,7 +73,7 @@ class C
   IL_0006:  ret       
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -95,10 +93,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty)
-                .VerifyIL(
-                    "C..ctor",
-                    @"
+            CompileAndVerify(source, expectedOutput: string.Empty).VerifyIL(
+                "C..ctor",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -107,7 +104,7 @@ class C
   IL_0006:  ret       
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -131,10 +128,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty)
-                .VerifyIL(
-                    "C..ctor",
-                    @"
+            CompileAndVerify(source, expectedOutput: string.Empty).VerifyIL(
+                "C..ctor",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -144,7 +140,7 @@ class C
   IL_0007:  ret       
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -175,10 +171,9 @@ class C : B
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty)
-                .VerifyIL(
-                    "C..ctor",
-                    @"
+            CompileAndVerify(source, expectedOutput: string.Empty).VerifyIL(
+                "C..ctor",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -188,7 +183,7 @@ class C : B
   IL_0007:  ret       
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -216,10 +211,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty)
-                .VerifyIL(
-                    "C..ctor",
-                    @"
+            CompileAndVerify(source, expectedOutput: string.Empty).VerifyIL(
+                "C..ctor",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -229,7 +223,7 @@ class C
   IL_0007:  ret       
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -357,10 +351,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: "42")
-                .VerifyIL(
-                    "C..ctor",
-                    @"
+            CompileAndVerify(source, expectedOutput: "42").VerifyIL(
+                "C..ctor",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -372,7 +365,7 @@ class C
   IL_000e:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -398,10 +391,9 @@ public struct S
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: "42")
-                .VerifyIL(
-                    "S..ctor",
-                    @"
+            CompileAndVerify(source, expectedOutput: "42").VerifyIL(
+                "S..ctor",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -415,7 +407,7 @@ public struct S
   IL_0014:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -443,10 +435,9 @@ struct C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: "42")
-                .VerifyIL(
-                    "C..ctor(int)",
-                    @"
+            CompileAndVerify(source, expectedOutput: "42").VerifyIL(
+                "C..ctor(int)",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -467,7 +458,7 @@ struct C
   IL_0027:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -494,10 +485,9 @@ struct C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: "42")
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source, expectedOutput: "42").VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  1
@@ -512,7 +502,7 @@ struct C
   IL_0022:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -534,13 +524,12 @@ struct C
 }
 ";
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"123
+                source,
+                expectedOutput: @"123
 123"
-                )
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            ).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -551,7 +540,7 @@ struct C
   IL_000d:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -573,13 +562,12 @@ struct C
 }
 ";
             CompileAndVerify(
-                    source,
-                    expectedOutput: @"123
+                source,
+                expectedOutput: @"123
 123"
-                )
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            ).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -590,7 +578,7 @@ struct C
   IL_000d:  ret
 }
 "
-                );
+            );
         }
 
         [WorkItem(4383, "https://github.com/dotnet/roslyn/issues/4383")]
@@ -629,10 +617,9 @@ public static class Module1
         }
     }
 ";
-            CompileAndVerify(source, expectedOutput: "3")
-                .VerifyIL(
-                    "ClassWithStaticField..cctor",
-                    @"
+            CompileAndVerify(source, expectedOutput: "3").VerifyIL(
+                "ClassWithStaticField..cctor",
+                @"
 {
   // Code size       74 (0x4a)
   .maxstack  4
@@ -656,7 +643,7 @@ public static class Module1
   IL_0049:  ret
 }
 "
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -784,10 +771,9 @@ class C
     }
 }
 ";
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C.<>c..cctor",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C.<>c..cctor",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  1
@@ -796,7 +782,7 @@ class C
   IL_000a:  ret
 }
 "
-                );
+            );
         }
 
         [WorkItem(217748, "https://devdiv.visualstudio.com/DevDiv/_workitems?_a=edit&id=217748")]
@@ -809,17 +795,13 @@ class C
     static dynamic F() => 0;
     dynamic d = F() * 2;
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source)
-                .VerifyEmitDiagnostics(
-                    // (4,17): error CS0656: Missing compiler required member 'Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create'
-                    //     dynamic d = F() * 2;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F()")
-                        .WithArguments(
-                            "Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo",
-                            "Create"
-                        )
-                        .WithLocation(4, 17)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyEmitDiagnostics(
+                // (4,17): error CS0656: Missing compiler required member 'Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create'
+                //     dynamic d = F() * 2;
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F()")
+                    .WithArguments("Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo", "Create")
+                    .WithLocation(4, 17)
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -882,10 +864,9 @@ class C
 {
     static (int, object) pair = (0, null!);
 }";
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"{
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"{
   // Code size       13 (0xd)
   .maxstack  2
   IL_0000:  ldc.i4.0
@@ -894,7 +875,7 @@ class C
   IL_0007:  stsfld     ""System.ValueTuple<int, object> C.pair""
   IL_000c:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -914,16 +895,15 @@ class C
             // note: we could make the synthesized constructor smarter and realize that
             // nothing needs to be emitted for these initializers.
             // but it doesn't serve any realistic scenarios at this time.
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -973,16 +953,15 @@ class C
             // note: we could make the synthesized constructor smarter and realize that
             // nothing needs to be emitted for these initializers.
             // but it doesn't serve any realistic scenarios at this time.
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -996,10 +975,9 @@ class C
 {
     static int x = 1;
 }";
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1007,7 +985,7 @@ class C
   IL_0001:  stsfld     ""int C.x""
   IL_0006:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -1061,16 +1039,15 @@ class C
             // note: we could make the synthesized constructor smarter and realize that
             // nothing needs to be emitted for these initializers.
             // but it doesn't serve any realistic scenarios at this time.
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -1093,16 +1070,15 @@ class C
             // note: we could make the synthesized constructor smarter and realize that
             // nothing needs to be emitted for these initializers.
             // but it doesn't serve any realistic scenarios at this time.
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -1122,10 +1098,9 @@ class C
 {
     static S? s1 = default(S);
 }";
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -1137,7 +1112,7 @@ class C
   IL_000e:  stsfld     ""S? C.s1""
   IL_0013:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -1157,10 +1132,9 @@ class C
 {
     static S? s1 = new S();
 }";
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -1172,7 +1146,7 @@ class C
   IL_000e:  stsfld     ""S? C.s1""
   IL_0013:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -1192,10 +1166,9 @@ class C
 {
     static object s1 = default(S);
 }";
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -1207,7 +1180,7 @@ class C
   IL_000e:  stsfld     ""object C.s1""
   IL_0013:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -1227,10 +1200,9 @@ class C
 {
     static object s1 = new S();
 }";
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -1242,7 +1214,7 @@ class C
   IL_000e:  stsfld     ""object C.s1""
   IL_0013:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -1267,16 +1239,15 @@ class C
             // note: we could make the synthesized constructor smarter and realize that
             // nothing needs to be emitted for these initializers.
             // but it doesn't serve any realistic scenarios at this time.
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -1295,10 +1266,10 @@ unsafe class C
             // nothing needs to be emitted for the `(void*)0` initializer.
             // but it doesn't serve any realistic scenarios at this time.
             CompileAndVerify(
-                    source,
-                    options: TestOptions.UnsafeDebugDll,
-                    verify: Verification.Skipped
-                )
+                source,
+                options: TestOptions.UnsafeDebugDll,
+                verify: Verification.Skipped
+            )
                 .VerifyIL(
                     "C..cctor()",
                     @"
@@ -1383,16 +1354,15 @@ class C
     {
     }
 }";
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
@@ -1411,10 +1381,9 @@ class C
         x = null!;
     }
 }";
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "C..cctor()",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "C..cctor()",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1422,7 +1391,7 @@ class C
   IL_0001:  stsfld     ""string C.x""
   IL_0006:  ret
 }"
-                );
+            );
         }
     }
 }

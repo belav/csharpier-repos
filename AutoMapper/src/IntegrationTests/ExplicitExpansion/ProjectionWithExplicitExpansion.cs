@@ -96,7 +96,8 @@ namespace AutoMapper.IntegrationTests
                     Deep = new SourceDeepInner() { Dide = 28, Did1 = 38, }
                 }
             },
-        }.AsQueryable();
+        }
+            .AsQueryable();
 
         private static readonly Source _iqf = _iq.First();
 

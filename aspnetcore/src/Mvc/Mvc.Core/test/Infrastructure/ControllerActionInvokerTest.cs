@@ -43,9 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 BoundProperties = new List<ParameterDescriptor>(),
             };
 
-            actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
-                nameof(TestController.ActionMethod)
-            );
+            actionDescriptor.MethodInfo = typeof(TestController)
+                .GetMethod(nameof(TestController.ActionMethod));
             actionDescriptor.ControllerTypeInfo = typeof(TestController).GetTypeInfo();
 
             var listener = new TestDiagnosticListener();
@@ -90,9 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 BoundProperties = new List<ParameterDescriptor>(),
             };
 
-            actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
-                nameof(TestController.ActionMethod)
-            );
+            actionDescriptor.MethodInfo = typeof(TestController)
+                .GetMethod(nameof(TestController.ActionMethod));
             actionDescriptor.ControllerTypeInfo = typeof(TestController).GetTypeInfo();
 
             var listener = new TestDiagnosticListener();
@@ -225,12 +223,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var filter = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
             filter.Setup(
-                    f =>
-                        f.OnActionExecutionAsync(
-                            It.IsAny<ActionExecutingContext>(),
-                            It.IsAny<ActionExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnActionExecutionAsync(
+                        It.IsAny<ActionExecutingContext>(),
+                        It.IsAny<ActionExecutionDelegate>()
+                    )
+            )
                 .Returns<ActionExecutingContext, ActionExecutionDelegate>(
                     async (context, next) =>
                     {
@@ -355,12 +353,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var actionFilter2 = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
             actionFilter2.Setup(
-                    f =>
-                        f.OnActionExecutionAsync(
-                            It.IsAny<ActionExecutingContext>(),
-                            It.IsAny<ActionExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnActionExecutionAsync(
+                        It.IsAny<ActionExecutingContext>(),
+                        It.IsAny<ActionExecutionDelegate>()
+                    )
+            )
                 .Returns<ActionExecutingContext, ActionExecutionDelegate>(
                     (c, next) =>
                     {
@@ -454,12 +452,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var actionFilter2 = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
             actionFilter2.Setup(
-                    f =>
-                        f.OnActionExecutionAsync(
-                            It.IsAny<ActionExecutingContext>(),
-                            It.IsAny<ActionExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnActionExecutionAsync(
+                        It.IsAny<ActionExecutingContext>(),
+                        It.IsAny<ActionExecutionDelegate>()
+                    )
+            )
                 .Returns<ActionExecutingContext, ActionExecutionDelegate>(
                     (c, next) =>
                     {
@@ -528,12 +526,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             // Arrange
             var actionFilter = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
             actionFilter.Setup(
-                    f =>
-                        f.OnActionExecutionAsync(
-                            It.IsAny<ActionExecutingContext>(),
-                            It.IsAny<ActionExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnActionExecutionAsync(
+                        It.IsAny<ActionExecutingContext>(),
+                        It.IsAny<ActionExecutionDelegate>()
+                    )
+            )
                 .Returns<ActionExecutingContext, ActionExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -664,12 +662,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var filter1 = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
             filter1.Setup(
-                    f =>
-                        f.OnActionExecutionAsync(
-                            It.IsAny<ActionExecutingContext>(),
-                            It.IsAny<ActionExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnActionExecutionAsync(
+                        It.IsAny<ActionExecutingContext>(),
+                        It.IsAny<ActionExecutionDelegate>()
+                    )
+            )
                 .Returns<ActionExecutingContext, ActionExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -788,12 +786,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ResourceExecutedContext context = null;
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -840,12 +838,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ResourceExecutedContext context = null;
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -894,12 +892,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ResourceExecutedContext context = null;
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -946,12 +944,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             // Arrange
             var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
             resourceFilter.Setup(
-                    f =>
-                        f.OnResourceExecutionAsync(
-                            It.IsAny<ResourceExecutingContext>(),
-                            It.IsAny<ResourceExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnResourceExecutionAsync(
+                        It.IsAny<ResourceExecutingContext>(),
+                        It.IsAny<ResourceExecutionDelegate>()
+                    )
+            )
                 .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -963,12 +961,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var actionFilter1 = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
             actionFilter1.Setup(
-                    f =>
-                        f.OnActionExecutionAsync(
-                            It.IsAny<ActionExecutingContext>(),
-                            It.IsAny<ActionExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnActionExecutionAsync(
+                        It.IsAny<ActionExecutingContext>(),
+                        It.IsAny<ActionExecutionDelegate>()
+                    )
+            )
                 .Returns<ActionExecutingContext, ActionExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -978,12 +976,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var actionFilter2 = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
             actionFilter2.Setup(
-                    f =>
-                        f.OnActionExecutionAsync(
-                            It.IsAny<ActionExecutingContext>(),
-                            It.IsAny<ActionExecutionDelegate>()
-                        )
-                )
+                f =>
+                    f.OnActionExecutionAsync(
+                        It.IsAny<ActionExecutingContext>(),
+                        It.IsAny<ActionExecutionDelegate>()
+                    )
+            )
                 .Returns<ActionExecutingContext, ActionExecutionDelegate>(
                     async (c, next) =>
                     {
@@ -1612,7 +1610,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             {
                 ControllerTypeInfo = typeof(TestController).GetTypeInfo(),
                 BoundProperties = new List<ParameterDescriptor>(),
-                MethodInfo = typeof(TestController).GetTypeInfo()
+                MethodInfo = typeof(TestController)
+                    .GetTypeInfo()
                     .DeclaredMethods.First(
                         m =>
                             m.Name.Equals("ActionMethodWithDefaultValues", StringComparison.Ordinal)
@@ -1905,9 +1904,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             if (result == Result)
             {
-                actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
-                    nameof(TestController.ActionMethod)
-                );
+                actionDescriptor.MethodInfo = typeof(TestController)
+                    .GetMethod(nameof(TestController.ActionMethod));
             }
             else if (result != null)
             {
@@ -1915,9 +1913,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             }
             else if (exception == Exception)
             {
-                actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
-                    nameof(TestController.ThrowingActionMethod)
-                );
+                actionDescriptor.MethodInfo = typeof(TestController)
+                    .GetMethod(nameof(TestController.ThrowingActionMethod));
             }
             else if (exception != null)
             {
@@ -1925,9 +1922,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             }
             else
             {
-                actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
-                    nameof(TestController.ActionMethod)
-                );
+                actionDescriptor.MethodInfo = typeof(TestController)
+                    .GetMethod(nameof(TestController.ActionMethod));
             }
 
             return CreateInvoker(
@@ -1959,15 +1955,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             foreach (var kvp in arguments)
             {
-                actionDescriptor.Parameters.Add(
-                    new ControllerParameterDescriptor()
-                    {
-                        Name = kvp.Key,
-                        ParameterInfo = method.GetParameters()
-                            .Where(p => p.Name == kvp.Key)
-                            .Single(),
-                    }
-                );
+                actionDescriptor.Parameters
+                    .Add(
+                        new ControllerParameterDescriptor()
+                        {
+                            Name = kvp.Key,
+                            ParameterInfo = method.GetParameters()
+                                .Where(p => p.Name == kvp.Key)
+                                .Single(),
+                        }
+                    );
             }
 
             return CreateInvoker(filters, actionDescriptor, new TestController(), arguments);

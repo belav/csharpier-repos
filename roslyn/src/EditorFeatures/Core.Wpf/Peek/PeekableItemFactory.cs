@@ -57,10 +57,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
 
             var solution = project.Solution;
             var sourceDefinition = await SymbolFinder.FindSourceDefinitionAsync(
-                    symbol,
-                    solution,
-                    cancellationToken
-                )
+                symbol,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // And if our definition actually is from source, then let's re-figure out what project it came from
@@ -74,8 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 project = originatingProject ?? project;
             }
 
-            var symbolNavigationService =
-                solution.Workspace.Services.GetService<ISymbolNavigationService>();
+            var symbolNavigationService = solution.Workspace.Services
+                .GetService<ISymbolNavigationService>();
             var definitionItem = symbol.ToNonClassifiedDefinitionItem(
                 solution,
                 includeHiddenLocations: true

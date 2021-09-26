@@ -60,13 +60,14 @@ namespace System.Runtime.Serialization
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(
-                        value.ToString(CultureInfo.InvariantCulture),
-                        "DateTimeOffset",
-                        exception
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            value.ToString(CultureInfo.InvariantCulture),
+                            "DateTimeOffset",
+                            exception
+                        )
+                    );
             }
         }
 

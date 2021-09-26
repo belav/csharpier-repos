@@ -66,8 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 .Single();
 
             NamedTypeSymbol classLocalType = localConsumerRefsAsm.First(
-                    arg => arg.Name == "LocalTypes1"
-                )
+                arg => arg.Name == "LocalTypes1"
+            )
                 .GlobalNamespace.GetTypeMembers("LocalTypes1")
                 .Single();
             MethodSymbol methodSymbol = classLocalType.GetMembers("Test1")
@@ -155,9 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     .GetReferencedAssemblySymbols().Length
             );
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace.GetTypeMembers(
-                    "LocalType1"
-                )
+            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+                .GetTypeMembers("LocalType1")
                 .Single();
 
             MethodSymbol methodSymbol = classLocalType.GetMembers("Test1")
@@ -218,17 +217,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 .GlobalNamespace.GetTypeMembers("FooStruct")
                 .Single();
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace.GetTypeMembers(
-                    "TypeSubstitution"
-                )
+            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+                .GetTypeMembers("TypeSubstitution")
                 .Single();
             FieldSymbol localFieldSymbol = classLocalType.GetMembers("myOwnVar")
                 .OfType<FieldSymbol>()
                 .Single();
 
             NamedTypeSymbol classRefLocalType = localConsumerRefsAsm.First(
-                    arg => arg.Name == "ExternalAsm1"
-                )
+                arg => arg.Name == "ExternalAsm1"
+            )
                 .GlobalNamespace.GetTypeMembers("ExternalAsm1")
                 .Single();
             MethodSymbol refMethodSymbol = classRefLocalType.GetMembers("Scen1")
@@ -299,17 +297,16 @@ static class TypeSubstitution
                 .GlobalNamespace.ChildNamespace("InheritanceConflict");
             var canonicalTypeInter = canonicalType.GetTypeMembers("IBase").Single();
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace.GetTypeMembers(
-                    "TypeSubstitution"
-                )
+            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+                .GetTypeMembers("TypeSubstitution")
                 .Single();
             FieldSymbol localFieldSymbol = classLocalType.GetMembers("myOwnRef")
                 .OfType<FieldSymbol>()
                 .Single();
 
             NamedTypeSymbol classRefLocalType = localConsumerRefsAsm.First(
-                    arg => arg.Name == "ExternalAsm1"
-                )
+                arg => arg.Name == "ExternalAsm1"
+            )
                 .GlobalNamespace.GetTypeMembers("ExternalAsm1")
                 .Single();
             MethodSymbol refMethodSymbol = classRefLocalType.GetMembers("Scen2")
@@ -354,17 +351,16 @@ static class TypeSubstitution
                 .GlobalNamespace.GetTypeMembers("FooEnum")
                 .Single();
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace.GetTypeMembers(
-                    "TypeSubstitution"
-                )
+            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+                .GetTypeMembers("TypeSubstitution")
                 .Single();
             FieldSymbol localFieldSymbol = classLocalType.GetMembers("myLocalType")
                 .OfType<FieldSymbol>()
                 .Single();
 
             NamedTypeSymbol classRefLocalType = localConsumerRefsAsm.First(
-                    arg => arg.Name == "ExternalAsm1"
-                )
+                arg => arg.Name == "ExternalAsm1"
+            )
                 .GlobalNamespace.GetTypeMembers("ExternalAsm1")
                 .Single();
             MethodSymbol methodSymbol = classRefLocalType.GetMembers("Scen3")
@@ -411,17 +407,16 @@ static class TypeSubstitution
                 .GlobalNamespace.GetTypeMembers("ISubFuncProp")
                 .Single();
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace.GetTypeMembers(
-                    "TypeSubstitution"
-                )
+            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+                .GetTypeMembers("TypeSubstitution")
                 .Single();
             FieldSymbol localFieldSymbol = classLocalType.GetMembers("myLocalType")
                 .OfType<FieldSymbol>()
                 .Single();
 
             NamedTypeSymbol classRefLocalType = localConsumerRefsAsm.First(
-                    arg => arg.Name == "ExternalAsm1"
-                )
+                arg => arg.Name == "ExternalAsm1"
+            )
                 .GlobalNamespace.GetTypeMembers("ExternalAsm1")
                 .Single();
             var methodSymbol = classRefLocalType.GetMembers("Scen4")
@@ -457,22 +452,20 @@ static class TypeSubstitution
 
             var localConsumerRefsAsm = localConsumer.Assembly.GetNoPiaResolutionAssemblies();
 
-            var canonicalType = localConsumerRefsAsm[0].GlobalNamespace.ChildNamespace(
-                "GeneralEventScenario"
-            );
+            var canonicalType = localConsumerRefsAsm[0].GlobalNamespace
+                .ChildNamespace("GeneralEventScenario");
             var canonicalTypeInter = canonicalType.GetTypeMembers("EventHandler").Single();
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace.GetTypeMembers(
-                    "TypeSubstitution"
-                )
+            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+                .GetTypeMembers("TypeSubstitution")
                 .Single();
             FieldSymbol localFieldSymbol = classLocalType.GetMembers("myLocalType")
                 .OfType<FieldSymbol>()
                 .Single();
 
             NamedTypeSymbol classRefLocalType = localConsumerRefsAsm.First(
-                    arg => arg.Name == "ExternalAsm1"
-                )
+                arg => arg.Name == "ExternalAsm1"
+            )
                 .GlobalNamespace.GetTypeMembers("ExternalAsm1")
                 .Single();
             var methodSymbol = classRefLocalType.GetMembers("Scen5")
@@ -506,8 +499,8 @@ static class TypeSubstitution
                 .Single();
 
             NamedTypeSymbol classRefLocalType = localConsumerRefsAsm.First(
-                    arg => arg.Name == "ExternalAsm1"
-                )
+                arg => arg.Name == "ExternalAsm1"
+            )
                 .GlobalNamespace.GetTypeMembers("SubFuncProp")
                 .Single();
             MethodSymbol methodSymbol = classRefLocalType.GetMembers("Foo")
@@ -540,8 +533,8 @@ static class TypeSubstitution
                 .Single();
 
             NamedTypeSymbol classRefLocalType = localConsumerRefsAsm.First(
-                    arg => arg.Name == "ExternalAsm1"
-                )
+                arg => arg.Name == "ExternalAsm1"
+            )
                 .GlobalNamespace.GetTypeMembers("SubFuncProp")
                 .Single();
             MethodSymbol methodSymbol = classRefLocalType.GetMembers("Foo")
@@ -570,8 +563,8 @@ static class TypeSubstitution
             var localConsumerRefsAsm = localConsumer.Assembly.GetNoPiaResolutionAssemblies();
 
             NamedTypeSymbol classRefLocalType = localConsumerRefsAsm.First(
-                    arg => arg.Name == "ExternalAsm1"
-                )
+                arg => arg.Name == "ExternalAsm1"
+            )
                 .GlobalNamespace.GetTypeMembers("ExternalAsm1")
                 .Single();
             MethodSymbol refMethodSymbol = classRefLocalType.GetMembers("Scen2")
@@ -663,7 +656,8 @@ public class InterfaceImpl
             );
 
             Assert.True(
-                localType2.Assembly.GetNoPiaResolutionAssemblies()
+                localType2.Assembly
+                    .GetNoPiaResolutionAssemblies()
                     .First(arg => arg.Name == "Dummy1").IsLinked
             );
 

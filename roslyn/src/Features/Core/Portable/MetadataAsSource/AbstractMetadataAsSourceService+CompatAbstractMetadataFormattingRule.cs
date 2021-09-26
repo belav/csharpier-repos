@@ -147,11 +147,12 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 ref SyntaxToken currentToken,
                 ref NextGetAdjustNewLinesOperation nextOperation
             ) =>
-                base.GetAdjustNewLinesOperation(
-                    in previousToken,
-                    in currentToken,
-                    in nextOperation
-                );
+                base
+                    .GetAdjustNewLinesOperation(
+                        in previousToken,
+                        in currentToken,
+                        in nextOperation
+                    );
 
             /// <summary>
             /// returns AdjustSpacesOperation between two tokens either by itself or by filtering/replacing a operation returned by NextOperation

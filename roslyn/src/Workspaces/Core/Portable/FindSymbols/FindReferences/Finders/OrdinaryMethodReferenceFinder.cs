@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             else
             {
                 var otherPartsOfPartial = GetOtherPartsOfPartial(symbol);
-                var baseCascadedSymbols = await base.DetermineCascadedSymbolsAsync(
+                var baseCascadedSymbols = await base
+                    .DetermineCascadedSymbolsAsync(
                         symbol,
                         solution,
                         projects,
@@ -97,19 +98,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             // since they implicitly call those methods.
 
             var ordinaryDocuments = await FindDocumentsAsync(
-                    project,
-                    documents,
-                    findInGlobalSuppressions: true,
-                    cancellationToken,
-                    methodSymbol.Name
-                )
+                project,
+                documents,
+                findInGlobalSuppressions: true,
+                cancellationToken,
+                methodSymbol.Name
+            )
                 .ConfigureAwait(false);
             var forEachDocuments = IsForEachMethod(methodSymbol)
                 ? await FindDocumentsWithForEachStatementsAsync(
-                          project,
-                          documents,
-                          cancellationToken
-                      )
+                      project,
+                      documents,
+                      cancellationToken
+                  )
                       .ConfigureAwait(false)
                 : ImmutableArray<Document>.Empty;
 
@@ -151,21 +152,21 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var nameMatches = await FindReferencesInDocumentUsingSymbolNameAsync(
-                    symbol,
-                    document,
-                    semanticModel,
-                    cancellationToken
-                )
+                symbol,
+                document,
+                semanticModel,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (IsForEachMethod(symbol))
             {
                 var forEachMatches = await FindReferencesInForEachStatementsAsync(
-                        symbol,
-                        document,
-                        semanticModel,
-                        cancellationToken
-                    )
+                    symbol,
+                    document,
+                    semanticModel,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 nameMatches = nameMatches.Concat(forEachMatches);
             }
@@ -173,11 +174,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             if (IsDeconstructMethod(symbol))
             {
                 var deconstructMatches = await FindReferencesInDeconstructionAsync(
-                        symbol,
-                        document,
-                        semanticModel,
-                        cancellationToken
-                    )
+                    symbol,
+                    document,
+                    semanticModel,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 nameMatches = nameMatches.Concat(deconstructMatches);
             }
@@ -185,11 +186,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             if (IsGetAwaiterMethod(symbol))
             {
                 var getAwaiterMatches = await FindReferencesInAwaitExpressionAsync(
-                        symbol,
-                        document,
-                        semanticModel,
-                        cancellationToken
-                    )
+                    symbol,
+                    document,
+                    semanticModel,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 nameMatches = nameMatches.Concat(getAwaiterMatches);
             }

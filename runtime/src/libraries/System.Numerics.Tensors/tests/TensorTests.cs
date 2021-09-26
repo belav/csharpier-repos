@@ -178,7 +178,8 @@ namespace System.Numerics.Tensors.Tests
                 }
                 Assert.Equal<int>(
                     expectedValues,
-                    compressedSparseTensor.Values.Slice(0, compressedSparseTensor.NonZeroCount)
+                    compressedSparseTensor.Values
+                        .Slice(0, compressedSparseTensor.NonZeroCount)
                         .ToArray()
                 );
                 Assert.Equal<int>(
@@ -187,7 +188,8 @@ namespace System.Numerics.Tensors.Tests
                 );
                 Assert.Equal<int>(
                     expectedIndices,
-                    compressedSparseTensor.Indices.Slice(0, compressedSparseTensor.NonZeroCount)
+                    compressedSparseTensor.Indices
+                        .Slice(0, compressedSparseTensor.NonZeroCount)
                         .ToArray()
                 );
             }

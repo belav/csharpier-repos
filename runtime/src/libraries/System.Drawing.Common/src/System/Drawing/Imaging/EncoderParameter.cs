@@ -343,9 +343,8 @@ namespace System.Drawing.Imaging
 
             _parameterValue = Marshal.AllocHGlobal(bytes);
 
-            new ReadOnlySpan<byte>((void*)Value, bytes).CopyTo(
-                new Span<byte>((void*)_parameterValue, bytes)
-            );
+            new ReadOnlySpan<byte>((void*)Value, bytes)
+                .CopyTo(new Span<byte>((void*)_parameterValue, bytes));
 
             _parameterValueType = (EncoderParameterValueType)Type;
             _numberOfValues = NumberOfValues;
@@ -395,9 +394,8 @@ namespace System.Drawing.Imaging
 
             _parameterValue = Marshal.AllocHGlobal(bytes);
 
-            new ReadOnlySpan<byte>((void*)value, bytes).CopyTo(
-                new Span<byte>((void*)_parameterValue, bytes)
-            );
+            new ReadOnlySpan<byte>((void*)value, bytes)
+                .CopyTo(new Span<byte>((void*)_parameterValue, bytes));
 
             _parameterValueType = type;
             _numberOfValues = numberValues;

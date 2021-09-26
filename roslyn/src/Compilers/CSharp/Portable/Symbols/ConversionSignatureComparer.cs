@@ -48,16 +48,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return false;
             }
 
-            return member1.ReturnType.Equals(
-                    member2.ReturnType,
-                    TypeCompareKind.IgnoreDynamicAndTupleNames
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                )
-                && member1.ParameterTypesWithAnnotations[0].Equals(
-                    member2.ParameterTypesWithAnnotations[0],
-                    TypeCompareKind.IgnoreDynamicAndTupleNames
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                );
+            return member1.ReturnType
+                    .Equals(
+                        member2.ReturnType,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
+                && member1.ParameterTypesWithAnnotations[0]
+                    .Equals(
+                        member2.ParameterTypesWithAnnotations[0],
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    );
         }
 
         public int GetHashCode(SourceUserDefinedConversionSymbol member)

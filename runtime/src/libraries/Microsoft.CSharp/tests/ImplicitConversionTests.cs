@@ -25,7 +25,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, TSource, TTarget>> callSite = CallSite<
                 Func<CallSite, TSource, TTarget>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, TSource, TTarget> func = callSite.Target;
             TTarget result = func(callSite, argument);
             Assert.Equal(expected, result);
@@ -45,7 +46,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, TSource, TTarget>> callSite = CallSite<
                 Func<CallSite, TSource, TTarget>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, TSource, TTarget> func = callSite.Target;
             Assert.Throws<RuntimeBinderException>(() => func(callSite, argument));
 

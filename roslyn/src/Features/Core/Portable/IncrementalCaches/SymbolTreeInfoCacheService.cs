@@ -59,12 +59,12 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 // Note: pass 'loadOnly' so we only attempt to load from disk, not to actually
                 // try to create the metadata.
                 var info = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                        solution,
-                        reference,
-                        checksum,
-                        loadOnly: true,
-                        cancellationToken
-                    )
+                    solution,
+                    reference,
+                    checksum,
+                    loadOnly: true,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return info;
             }
@@ -76,9 +76,9 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
             {
                 // See if the last value produced matches what the caller is asking for.  If so, return that.
                 var checksum = await SymbolTreeInfo.GetSourceSymbolsChecksumAsync(
-                        project,
-                        cancellationToken
-                    )
+                    project,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (
                     _projectIdToInfo.TryGetValue(project.Id, out var projectInfo)
@@ -92,11 +92,11 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 // Note: pass 'loadOnly' so we only attempt to load from disk, not to actually
                 // try to create the index.
                 var info = await SymbolTreeInfo.GetInfoForSourceAssemblyAsync(
-                        project,
-                        checksum,
-                        loadOnly: true,
-                        cancellationToken
-                    )
+                    project,
+                    checksum,
+                    loadOnly: true,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return info;
             }

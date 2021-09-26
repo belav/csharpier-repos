@@ -86,8 +86,8 @@ namespace System.Globalization.Tests
                 int[] combiningCharOffsets = StringInfo.ParseCombiningCharacters(input);
                 Assert.Equal(
                     expected: expectedGraphemeClusterRanges.Select(
-                            range => range.GetOffsetAndLength(input.Length).Offset
-                        )
+                        range => range.GetOffsetAndLength(input.Length).Offset
+                    )
                         .ToArray(),
                     actual: combiningCharOffsets
                 );
@@ -177,14 +177,16 @@ namespace System.Globalization.Tests
             {
                 // Arrange
 
-                string forwardActual = string.Concat(
-                    clusters.SelectMany(cluster => cluster).Select(rune => rune.ToString())
-                );
-                string reverseExpected = string.Concat(
-                    clusters.Reverse()
-                        .SelectMany(cluster => cluster)
-                        .Select(rune => rune.ToString())
-                );
+                string forwardActual = string
+                    .Concat(
+                        clusters.SelectMany(cluster => cluster).Select(rune => rune.ToString())
+                    );
+                string reverseExpected = string
+                    .Concat(
+                        clusters.Reverse()
+                            .SelectMany(cluster => cluster)
+                            .Select(rune => rune.ToString())
+                    );
 
                 // Act
 
@@ -221,9 +223,8 @@ namespace System.Globalization.Tests
 
         private static IEnumerable<(Rune[][] clusters, string line)> GetGraphemeBreakTestData()
         {
-            using Stream stream = typeof(GraphemeBreakTest).Assembly.GetManifestResourceStream(
-                "GraphemeBreakTest.txt"
-            );
+            using Stream stream = typeof(GraphemeBreakTest).Assembly
+                .GetManifestResourceStream("GraphemeBreakTest.txt");
             using StreamReader reader = new StreamReader(stream);
 
             string line;
@@ -244,7 +245,8 @@ namespace System.Globalization.Tests
                 //
                 // We also return the line for ease of debugging any test failures.
 
-                string[] clusters = line[..line.IndexOf('#')].Trim()
+                string[] clusters = line[..line.IndexOf('#')]
+                    .Trim()
                     .Split(BREAK_REQUIRED, StringSplitOptions.RemoveEmptyEntries);
 
                 yield return (
@@ -259,11 +261,12 @@ namespace System.Globalization.Tests
                             uint[] scalarsWithinClusterAsUInt32s = Array.ConvertAll(
                                 scalarsWithinClusterAsStrings,
                                 scalar =>
-                                    uint.Parse(
-                                        scalar,
-                                        NumberStyles.HexNumber,
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    uint
+                                        .Parse(
+                                            scalar,
+                                            NumberStyles.HexNumber,
+                                            CultureInfo.InvariantCulture
+                                        )
                             );
                             Rune[] scalarsWithinClusterAsRunes = Array.ConvertAll(
                                 scalarsWithinClusterAsUInt32s,

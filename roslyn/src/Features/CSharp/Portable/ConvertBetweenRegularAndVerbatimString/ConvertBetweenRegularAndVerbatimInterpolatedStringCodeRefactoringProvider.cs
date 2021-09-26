@@ -62,9 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             Action<IVirtualCharService, StringBuilder, SyntaxToken> addStringText
         )
         {
-            using var _ = ArrayBuilder<InterpolatedStringContentSyntax>.GetInstance(
-                out var newContents
-            );
+            using var _ = ArrayBuilder<InterpolatedStringContentSyntax>
+                .GetInstance(out var newContents);
 
             foreach (var content in stringExpression.Contents)
             {

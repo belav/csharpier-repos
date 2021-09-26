@@ -83,7 +83,8 @@ namespace AutoMapper.Execution
             );
         private static Expression CreateReadOnlyDictionary(Type[] typeArguments)
         {
-            var ctor = typeof(ReadOnlyDictionary<, >).MakeGenericType(typeArguments)
+            var ctor = typeof(ReadOnlyDictionary<, >)
+                .MakeGenericType(typeArguments)
                 .GetConstructors()[0];
             return New(ctor, New(typeof(Dictionary<, >).MakeGenericType(typeArguments)));
         }

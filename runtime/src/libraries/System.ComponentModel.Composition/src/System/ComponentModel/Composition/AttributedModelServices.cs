@@ -191,8 +191,8 @@ namespace System.ComponentModel.Composition
 
             CompositionBatch batch = new CompositionBatch(
                 attributedParts.Select(
-                        attributedPart => AttributedModelServices.CreatePart(attributedPart)
-                    )
+                    attributedPart => AttributedModelServices.CreatePart(attributedPart)
+                )
                     .ToArray(),
                 Enumerable.Empty<ComposablePart>()
             );

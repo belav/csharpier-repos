@@ -51,9 +51,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
 
             var client = await RemoteHostClient.TryGetClientAsync(
-                    solution.Workspace,
-                    cancellationToken
-                )
+                solution.Workspace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (client != null)
             {
@@ -61,17 +61,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     IRemoteSymbolFinderService,
                     ImmutableArray<SerializableSymbolAndProjectId>
                 >(
-                        solution,
-                        (service, solutionInfo, cancellationToken) =>
-                            service.FindSolutionSourceDeclarationsWithNormalQueryAsync(
-                                solutionInfo,
-                                name,
-                                ignoreCase,
-                                criteria,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    solution,
+                    (service, solutionInfo, cancellationToken) =>
+                        service.FindSolutionSourceDeclarationsWithNormalQueryAsync(
+                            solutionInfo,
+                            name,
+                            ignoreCase,
+                            criteria,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!result.HasValue)
@@ -84,12 +84,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
 
             return await FindSourceDeclarationsWithNormalQueryInCurrentProcessAsync(
-                    solution,
-                    name,
-                    ignoreCase,
-                    criteria,
-                    cancellationToken
-                )
+                solution,
+                name,
+                ignoreCase,
+                criteria,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -126,18 +126,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     IRemoteSymbolFinderService,
                     ImmutableArray<SerializableSymbolAndProjectId>
                 >(
-                        project.Solution,
-                        (service, solutionInfo, cancellationToken) =>
-                            service.FindProjectSourceDeclarationsWithNormalQueryAsync(
-                                solutionInfo,
-                                project.Id,
-                                name,
-                                ignoreCase,
-                                criteria,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    project.Solution,
+                    (service, solutionInfo, cancellationToken) =>
+                        service.FindProjectSourceDeclarationsWithNormalQueryAsync(
+                            solutionInfo,
+                            project.Id,
+                            name,
+                            ignoreCase,
+                            criteria,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!result.HasValue)
@@ -150,12 +150,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
 
             return await FindSourceDeclarationsWithNormalQueryInCurrentProcessAsync(
-                    project,
-                    name,
-                    ignoreCase,
-                    criteria,
-                    cancellationToken
-                )
+                project,
+                name,
+                ignoreCase,
+                criteria,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -177,9 +177,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
 
             var client = await RemoteHostClient.TryGetClientAsync(
-                    solution.Workspace,
-                    cancellationToken
-                )
+                solution.Workspace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (client != null)
             {
@@ -187,16 +187,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     IRemoteSymbolFinderService,
                     ImmutableArray<SerializableSymbolAndProjectId>
                 >(
-                        solution,
-                        (service, solutionInfo, cancellationToken) =>
-                            service.FindSolutionSourceDeclarationsWithPatternAsync(
-                                solutionInfo,
-                                pattern,
-                                criteria,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    solution,
+                    (service, solutionInfo, cancellationToken) =>
+                        service.FindSolutionSourceDeclarationsWithPatternAsync(
+                            solutionInfo,
+                            pattern,
+                            criteria,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!result.HasValue)
@@ -209,11 +209,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
 
             return await FindSourceDeclarationsWithPatternInCurrentProcessAsync(
-                    solution,
-                    pattern,
-                    criteria,
-                    cancellationToken
-                )
+                solution,
+                pattern,
+                criteria,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -242,17 +242,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     IRemoteSymbolFinderService,
                     ImmutableArray<SerializableSymbolAndProjectId>
                 >(
-                        project.Solution,
-                        (service, solutionInfo, cancellationToken) =>
-                            service.FindProjectSourceDeclarationsWithPatternAsync(
-                                solutionInfo,
-                                project.Id,
-                                pattern,
-                                criteria,
-                                cancellationToken
-                            ),
-                        cancellationToken
-                    )
+                    project.Solution,
+                    (service, solutionInfo, cancellationToken) =>
+                        service.FindProjectSourceDeclarationsWithPatternAsync(
+                            solutionInfo,
+                            project.Id,
+                            pattern,
+                            criteria,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (!result.HasValue)
@@ -265,11 +265,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
 
             return await FindSourceDeclarationsWithPatternInCurrentProcessAsync(
-                    project,
-                    pattern,
-                    criteria,
-                    cancellationToken
-                )
+                project,
+                pattern,
+                criteria,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -298,12 +298,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 var project = solution.GetProject(projectId);
                 await AddCompilationDeclarationsWithNormalQueryAsync(
-                        project,
-                        query,
-                        criteria,
-                        result,
-                        cancellationToken
-                    )
+                    project,
+                    query,
+                    criteria,
+                    result,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -325,12 +325,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             using var query = SearchQuery.Create(name, ignoreCase);
 
             await AddCompilationDeclarationsWithNormalQueryAsync(
-                    project,
-                    query,
-                    filter,
-                    list,
-                    cancellationToken
-                )
+                project,
+                query,
+                filter,
+                list,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return list.ToImmutableAndFree();
         }

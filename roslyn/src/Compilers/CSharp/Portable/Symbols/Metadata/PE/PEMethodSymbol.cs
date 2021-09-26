@@ -229,7 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 return (
                     (NullableContextKind)((_bits >> NullableContextOffset) & NullableContextMask)
-                ).TryGetByte(out value);
+                )
+                    .TryGetByte(out value);
             }
 
             public bool SetNullableContext(byte? value)
@@ -394,13 +395,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 int rva;
                 MethodImplAttributes implFlags;
-                moduleSymbol.Module.GetMethodDefPropsOrThrow(
-                    methodDef,
-                    out _name,
-                    out implFlags,
-                    out localflags,
-                    out rva
-                );
+                moduleSymbol.Module
+                    .GetMethodDefPropsOrThrow(
+                        methodDef,
+                        out _name,
+                        out implFlags,
+                        out localflags,
+                        out rva
+                    );
                 Debug.Assert((uint)implFlags <= ushort.MaxValue);
                 _implFlags = (ushort)implFlags;
             }
@@ -887,10 +889,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             SignatureHeader signatureHeader;
             BadImageFormatException mrEx;
-            ParamInfo<TypeSymbol>[] paramInfo = new MetadataDecoder(
-                moduleSymbol,
-                this
-            ).GetSignatureForMethod(_handle, out signatureHeader, out mrEx);
+            ParamInfo<TypeSymbol>[] paramInfo = new MetadataDecoder(moduleSymbol, this)
+                .GetSignatureForMethod(_handle, out signatureHeader, out mrEx);
             bool makeBad = (mrEx != null);
 
             // If method is not generic, let's assign empty list for type parameters
@@ -1057,10 +1057,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     )
                     {
                         var moduleSymbol = _containingType.ContainingPEModule;
-                        isExtensionMethod = moduleSymbol.Module.HasExtensionAttribute(
-                            _handle,
-                            ignoreCase: false
-                        );
+                        isExtensionMethod = moduleSymbol.Module
+                            .HasExtensionAttribute(_handle, ignoreCase: false);
                     }
                     _packedFlags.InitializeIsExtensionMethod(isExtensionMethod);
                 }
@@ -1165,10 +1163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             byte? value;
             if (!_packedFlags.TryGetNullableContext(out value))
             {
-                value = _containingType.ContainingPEModule.Module.HasNullableContextAttribute(
-                    _handle,
-                    out byte arg
-                )
+                value = _containingType.ContainingPEModule.Module
+                .HasNullableContextAttribute(_handle, out byte arg)
                     ? arg
                     : _containingType.GetNullableContextValue();
                 _packedFlags.SetNullableContext(value);
@@ -1411,14 +1407,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 // any generic interfaces that we might be explicitly implementing.  There is no reason to pass in the method
                 // context, however, because any method type parameters will belong to the implemented (i.e. interface) method,
                 // which we do not yet know.
-                var explicitlyOverriddenMethods = new MetadataDecoder(
-                    moduleSymbol,
-                    _containingType
-                ).GetExplicitlyOverriddenMethods(
-                    _containingType.Handle,
-                    _handle,
-                    this.ContainingType
-                );
+                var explicitlyOverriddenMethods = new MetadataDecoder(moduleSymbol, _containingType)
+                    .GetExplicitlyOverriddenMethods(
+                        _containingType.Handle,
+                        _handle,
+                        this.ContainingType
+                    );
 
                 //avoid allocating a builder in the common case
                 var anyToRemove = false;
@@ -1446,8 +1440,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 if (anyToRemove)
                 {
-                    var explicitInterfaceImplementationsBuilder =
-                        ArrayBuilder<MethodSymbol>.GetInstance();
+                    var explicitInterfaceImplementationsBuilder = ArrayBuilder<MethodSymbol>
+                        .GetInstance();
                     foreach (var method in explicitlyOverriddenMethods)
                     {
                         if (method.ContainingType.IsInterface)
@@ -1608,9 +1602,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private UseSiteInfo<AssemblySymbol> GetCachedUseSiteInfo()
         {
-            return (_uncommonFields?._lazyCachedUseSiteInfo ?? default).ToUseSiteInfo(
-                PrimaryDependency
-            );
+            return (_uncommonFields?._lazyCachedUseSiteInfo ?? default)
+                .ToUseSiteInfo(PrimaryDependency);
         }
 
         private UseSiteInfo<AssemblySymbol> InitializeUseSiteDiagnostic(
@@ -1627,8 +1620,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 || !useSiteInfo.SecondaryDependencies.IsNullOrEmpty()
             )
             {
-                useSiteInfo = AccessUncommonFields()
-                    ._lazyCachedUseSiteInfo.InterlockedInitialize(PrimaryDependency, useSiteInfo);
+                useSiteInfo = AccessUncommonFields()._lazyCachedUseSiteInfo
+                    .InterlockedInitialize(PrimaryDependency, useSiteInfo);
             }
 
             _packedFlags.SetIsUseSiteDiagnosticPopulated();
@@ -1639,10 +1632,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             if (!_packedFlags.IsConditionalPopulated)
             {
-                var result =
-                    _containingType.ContainingPEModule.Module.GetConditionalAttributeValues(
-                        _handle
-                    );
+                var result = _containingType.ContainingPEModule.Module
+                    .GetConditionalAttributeValues(_handle);
                 Debug.Assert(!result.IsDefault);
                 if (!result.IsEmpty)
                 {
@@ -1729,8 +1720,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (!_packedFlags.IsUnmanagedCallersOnlyAttributePopulated)
             {
                 var containingModule = (PEModuleSymbol)ContainingModule;
-                var unmanagedCallersOnlyData =
-                    containingModule.Module.TryGetUnmanagedCallersOnlyAttribute(
+                var unmanagedCallersOnlyData = containingModule.Module
+                    .TryGetUnmanagedCallersOnlyAttribute(
                         _handle,
                         new MetadataDecoder(containingModule),
                         static (name, value, isField) =>

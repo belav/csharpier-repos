@@ -74,32 +74,32 @@ namespace System.ComponentModel.Tests
                         {
                             Assert.Equal(
                                 convertTest.CanConvert,
-                                this.Converter.CanConvertTo(
-                                    convertTest.Context,
-                                    convertTest.DestinationType
-                                )
+                                this.Converter
+                                    .CanConvertTo(convertTest.Context, convertTest.DestinationType)
                             );
 
                             if (convertTest.CanConvert)
                             {
-                                object actual = this.Converter.ConvertTo(
-                                    convertTest.Context,
-                                    convertTest.Culture,
-                                    convertTest.Source,
-                                    convertTest.DestinationType
-                                );
+                                object actual = this.Converter
+                                    .ConvertTo(
+                                        convertTest.Context,
+                                        convertTest.Culture,
+                                        convertTest.Source,
+                                        convertTest.DestinationType
+                                    );
                                 Assert.Equal(convertTest.Expected, actual);
                             }
                             else
                             {
                                 Assert.Throws<NotSupportedException>(
                                     () =>
-                                        this.Converter.ConvertTo(
-                                            convertTest.Context,
-                                            convertTest.Culture,
-                                            convertTest.Source,
-                                            convertTest.DestinationType
-                                        )
+                                        this.Converter
+                                            .ConvertTo(
+                                                convertTest.Context,
+                                                convertTest.Culture,
+                                                convertTest.Source,
+                                                convertTest.DestinationType
+                                            )
                                 );
                             }
                         }
@@ -195,20 +195,22 @@ namespace System.ComponentModel.Tests
                             {
                                 Assert.Equal(
                                     convertTest.CanConvert,
-                                    this.Converter.CanConvertFrom(
-                                        convertTest.Context,
-                                        convertTest.Source.GetType()
-                                    )
+                                    this.Converter
+                                        .CanConvertFrom(
+                                            convertTest.Context,
+                                            convertTest.Source.GetType()
+                                        )
                                 );
                             }
 
                             if (convertTest.NetCoreExceptionType == null)
                             {
-                                object actual = this.Converter.ConvertFrom(
-                                    convertTest.Context,
-                                    convertTest.Culture,
-                                    convertTest.Source
-                                );
+                                object actual = this.Converter
+                                    .ConvertFrom(
+                                        convertTest.Context,
+                                        convertTest.Culture,
+                                        convertTest.Source
+                                    );
                                 Assert.Equal(convertTest.Expected, actual);
                             }
                             else
@@ -217,11 +219,12 @@ namespace System.ComponentModel.Tests
                                     convertTest.NetCoreExceptionType,
                                     convertTest.NetFrameworkExceptionType,
                                     () =>
-                                        this.Converter.ConvertFrom(
-                                            convertTest.Context,
-                                            convertTest.Culture,
-                                            convertTest.Source
-                                        )
+                                        this.Converter
+                                            .ConvertFrom(
+                                                convertTest.Context,
+                                                convertTest.Culture,
+                                                convertTest.Source
+                                            )
                                 );
                             }
                         }

@@ -36,14 +36,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var now = systemClock.UtcNow;
             var heartbeatDuration = TimeSpan.FromSeconds(2);
 
-            heartbeatHandler.Setup(h => h.OnHeartbeat(now))
-                .Callback(
-                    () =>
-                    {
-                        handlerStartedTcs.SetResult();
-                        handlerMre.Wait();
-                    }
-                );
+            heartbeatHandler.Setup(h => h.OnHeartbeat(now)).Callback(
+                () =>
+                {
+                    handlerStartedTcs.SetResult();
+                    handlerMre.Wait();
+                }
+            );
             debugger.Setup(d => d.IsAttached).Returns(false);
 
             Task blockedHeartbeatTask;
@@ -72,9 +71,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             heartbeatHandler.Verify(h => h.OnHeartbeat(now), Times.Once());
 
             var warningMessage =
-                kestrelTrace.Logger.Messages.Single(
-                    message => message.LogLevel == LogLevel.Warning
-                ).Message;
+                kestrelTrace.Logger.Messages
+                    .Single(message => message.LogLevel == LogLevel.Warning).Message;
             Assert.Equal(
                 $"As of \"{now.ToString(CultureInfo.InvariantCulture)}\", the heartbeat has been running for "
                     + $"\"{heartbeatDuration.ToString("c", CultureInfo.InvariantCulture)}\" which is longer than "
@@ -97,14 +95,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             );
             var now = systemClock.UtcNow;
 
-            heartbeatHandler.Setup(h => h.OnHeartbeat(now))
-                .Callback(
-                    () =>
-                    {
-                        handlerStartedTcs.SetResult();
-                        handlerMre.Wait();
-                    }
-                );
+            heartbeatHandler.Setup(h => h.OnHeartbeat(now)).Callback(
+                () =>
+                {
+                    handlerStartedTcs.SetResult();
+                    handlerMre.Wait();
+                }
+            );
 
             debugger.Setup(d => d.IsAttached).Returns(true);
 
@@ -162,9 +159,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             Assert.Equal(
                 ex,
-                kestrelTrace.Logger.Messages.Single(
-                    message => message.LogLevel == LogLevel.Error
-                ).Exception
+                kestrelTrace.Logger.Messages
+                    .Single(message => message.LogLevel == LogLevel.Error).Exception
             );
         }
     }

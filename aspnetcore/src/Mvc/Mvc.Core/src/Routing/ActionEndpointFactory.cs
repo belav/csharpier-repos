@@ -161,10 +161,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 {
                     // This kind of thing can happen when a route pattern uses a *reserved* route value such as `action`.
                     // See: https://github.com/dotnet/aspnetcore/issues/14789
-                    var formattedRouteKeys = string.Join(
-                        ", ",
-                        resolvedRouteValues.Keys.Select(k => $"'{k}'")
-                    );
+                    var formattedRouteKeys = string
+                        .Join(", ", resolvedRouteValues.Keys.Select(k => $"'{k}'"));
                     throw new InvalidOperationException(
                         $"Failed to update the route pattern '{resolvedRoutePattern.RawText}' with required route values. "
                             + $"This can occur when the route pattern contains parameters with reserved names such as: {formattedRouteKeys} "
@@ -411,10 +409,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             if (action.FilterDescriptors != null && action.FilterDescriptors.Count > 0)
             {
                 foreach (
-                    var filter in action.FilterDescriptors.OrderBy(
-                            f => f,
-                            FilterDescriptorOrderComparer.Comparer
-                        )
+                    var filter in action.FilterDescriptors
+                        .OrderBy(f => f, FilterDescriptorOrderComparer.Comparer)
                         .Select(f => f.Filter)
                 )
                 {
@@ -436,18 +432,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                         && !builder.Metadata.OfType<HttpMethodMetadata>().Any()
                     )
                     {
-                        builder.Metadata.Add(
-                            new HttpMethodMetadata(httpMethodActionConstraint.HttpMethods)
-                        );
+                        builder.Metadata
+                            .Add(new HttpMethodMetadata(httpMethodActionConstraint.HttpMethods));
                     }
                     else if (
                         actionConstraint is ConsumesAttribute consumesAttribute
                         && !builder.Metadata.OfType<ConsumesMetadata>().Any()
                     )
                     {
-                        builder.Metadata.Add(
-                            new ConsumesMetadata(consumesAttribute.ContentTypes.ToArray())
-                        );
+                        builder.Metadata
+                            .Add(new ConsumesMetadata(consumesAttribute.ContentTypes.ToArray()));
                     }
                     else if (!builder.Metadata.Contains(actionConstraint))
                     {
@@ -524,8 +518,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
                 if (invokerFactory == null)
                 {
-                    invokerFactory =
-                        context.RequestServices.GetRequiredService<IActionInvokerFactory>();
+                    invokerFactory = context.RequestServices
+                        .GetRequiredService<IActionInvokerFactory>();
                 }
 
                 var invoker = invokerFactory.CreateInvoker(actionContext);

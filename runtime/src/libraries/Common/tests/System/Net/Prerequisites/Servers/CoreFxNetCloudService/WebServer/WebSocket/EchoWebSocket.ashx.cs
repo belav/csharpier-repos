@@ -18,9 +18,8 @@ namespace WebServer
 
         public void ProcessRequest(HttpContext context)
         {
-            _replyWithPartialMessages = context.Request.Url.Query.Contains(
-                "replyWithPartialMessages"
-            );
+            _replyWithPartialMessages = context.Request.Url.Query
+                .Contains("replyWithPartialMessages");
 
             string subProtocol = context.Request.QueryString["subprotocol"];
 
@@ -125,12 +124,13 @@ namespace WebServer
                 {
                     await socket.CloseAsync(
                         WebSocketCloseStatus.MessageTooBig,
-                        string.Format(
-                            "{0}: {1} > {2}",
-                            WebSocketCloseStatus.MessageTooBig.ToString(),
-                            offset,
-                            MaxBufferSize
-                        ),
+                        string
+                            .Format(
+                                "{0}: {1} > {2}",
+                                WebSocketCloseStatus.MessageTooBig.ToString(),
+                                offset,
+                                MaxBufferSize
+                            ),
                         CancellationToken.None
                     );
                     continue;

@@ -14,8 +14,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Internal
             .ToArray();
 
         private static readonly char[] _invalidFilterChars = _invalidFileNameChars.Where(
-                c => c != '*' && c != '|' && c != '?'
-            )
+            c => c != '*' && c != '|' && c != '?'
+        )
             .ToArray();
 
         private static readonly char[] _pathSeparators = new[]

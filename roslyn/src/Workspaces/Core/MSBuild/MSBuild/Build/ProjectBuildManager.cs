@@ -102,9 +102,9 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
 
                 using var stream = FileUtilities.OpenAsyncRead(path);
                 using var readStream = await SerializableBytes.CreateReadableStreamAsync(
-                        stream,
-                        cancellationToken
-                    )
+                    stream,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 using var xmlReader = XmlReader.Create(readStream, s_xmlReaderSettings);
                 var xml = MSB.Construction.ProjectRootElement.Create(xmlReader, projectCollection);
@@ -244,10 +244,11 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
                 if (!projectInstance.Targets.ContainsKey(target))
                 {
                     log.Add(
-                        string.Format(
-                            WorkspaceMSBuildResources.Project_does_not_contain_0_target,
-                            target
-                        ),
+                        string
+                            .Format(
+                                WorkspaceMSBuildResources.Project_does_not_contain_0_target,
+                                target
+                            ),
                         projectInstance.FullPath
                     );
                     return projectInstance;
@@ -287,10 +288,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
             )
             {
                 return await BuildAsync(
-                        MSB.Execution.BuildManager.DefaultBuildManager,
-                        requestData,
-                        cancellationToken
-                    )
+                    MSB.Execution.BuildManager.DefaultBuildManager,
+                    requestData,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -324,24 +325,23 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
             // execute build async
             try
             {
-                buildManager.PendBuildRequest(requestData)
-                    .ExecuteAsync(
-                        sub =>
+                buildManager.PendBuildRequest(requestData).ExecuteAsync(
+                    sub =>
+                    {
+                        // when finished
+                        try
                         {
-                            // when finished
-                            try
-                            {
-                                var result = sub.BuildResult;
-                                registration.Dispose();
-                                taskSource.TrySetResult(result);
-                            }
-                            catch (Exception e)
-                            {
-                                taskSource.TrySetException(e);
-                            }
-                        },
-                        null
-                    );
+                            var result = sub.BuildResult;
+                            registration.Dispose();
+                            taskSource.TrySetResult(result);
+                        }
+                        catch (Exception e)
+                        {
+                            taskSource.TrySetException(e);
+                        }
+                    },
+                    null
+                );
             }
             catch (Exception e)
             {

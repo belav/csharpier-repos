@@ -195,9 +195,8 @@ namespace System.Reflection.Metadata
             // All virtual tokens will be sorted after non-virtual tokens.
             // The order of handles that differ in kind is undefined,
             // but we include it so that we ensure consistency with == and != operators.
-            return ((long)(uint)left._value | (long)left._vType << 32).CompareTo(
-                (long)(uint)right._value | (long)right._vType << 32
-            );
+            return ((long)(uint)left._value | (long)left._vType << 32)
+                .CompareTo((long)(uint)right._value | (long)right._vType << 32);
         }
 
         public static readonly ModuleDefinitionHandle ModuleDefinition = new ModuleDefinitionHandle(

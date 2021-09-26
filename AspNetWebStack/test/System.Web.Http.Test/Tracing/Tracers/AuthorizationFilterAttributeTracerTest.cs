@@ -249,11 +249,12 @@ namespace System.Web.Http.Tracing.Tracers
             // Act
             Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    ((IAuthorizationFilter)tracer).ExecuteAuthorizationFilterAsync(
-                        actionContext,
-                        CancellationToken.None,
-                        continuation
-                    )
+                    ((IAuthorizationFilter)tracer)
+                        .ExecuteAuthorizationFilterAsync(
+                            actionContext,
+                            CancellationToken.None,
+                            continuation
+                        )
             );
 
             // Assert

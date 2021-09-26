@@ -38,20 +38,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // In the absence of a model on the current type, we'll attempt to use ViewDataDictionary<object> on the current type.
             var viewDataDictionaryModelType = declaredModelType ?? typeof(object);
 
-            _viewDataDictionaryType = typeof(ViewDataDictionary<>).MakeGenericType(
-                viewDataDictionaryModelType
-            );
+            _viewDataDictionaryType = typeof(ViewDataDictionary<>)
+                .MakeGenericType(viewDataDictionaryModelType);
             _rootFactory = ViewDataDictionaryFactory.CreateFactory(viewDataDictionaryModelType);
             _nestedFactory = ViewDataDictionaryFactory.CreateNestedFactory(
                 viewDataDictionaryModelType
             );
 
-            _propertyActivators = PropertyActivator<ViewContext>.GetPropertiesToActivate(
-                pageType,
-                typeof(RazorInjectAttribute),
-                propertyInfo => CreateActivateInfo(propertyInfo, propertyValueAccessors),
-                includeNonPublic: true
-            );
+            _propertyActivators = PropertyActivator<ViewContext>
+                .GetPropertiesToActivate(
+                    pageType,
+                    typeof(RazorInjectAttribute),
+                    propertyInfo => CreateActivateInfo(propertyInfo, propertyValueAccessors),
+                    includeNonPublic: true
+                );
         }
 
         public void Activate(object page, ViewContext context)

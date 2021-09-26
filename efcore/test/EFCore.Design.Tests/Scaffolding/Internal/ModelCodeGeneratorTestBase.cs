@@ -28,11 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
             buildModel(modelBuilder);
 
-            var model = SqlServerTestHelpers.Instance.Finalize(
-                modelBuilder,
-                designTime: true,
-                skipValidation: true
-            );
+            var model = SqlServerTestHelpers.Instance
+                .Finalize(modelBuilder, designTime: true, skipValidation: true);
 
             var generator = CreateServices()
                 .BuildServiceProvider()
@@ -55,9 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     BuildReference.ByName("Microsoft.EntityFrameworkCore.SqlServer")
                 },
                 Sources = new List<string>(
-                    new[] { scaffoldedModel.ContextFile.Code }.Concat(
-                        scaffoldedModel.AdditionalFiles.Select(f => f.Code)
-                    )
+                    new[] { scaffoldedModel.ContextFile.Code }
+                        .Concat(scaffoldedModel.AdditionalFiles.Select(f => f.Code))
                 )
             };
 
@@ -85,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 testAssembly,
                 reporter,
                 new string[0]
-            ).CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer");
+            )
+                .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer");
             return services;
         }
 

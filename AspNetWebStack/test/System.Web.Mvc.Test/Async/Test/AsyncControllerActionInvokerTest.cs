@@ -408,14 +408,14 @@ namespace System.Web.Mvc.Async.Test
                 Mock<AsyncActionDescriptor> mockActionDescriptor =
                     new Mock<AsyncActionDescriptor>();
                 mockActionDescriptor.Setup(
-                        d =>
-                            d.BeginExecute(
-                                controllerContext,
-                                parameters,
-                                It.IsAny<AsyncCallback>(),
-                                It.IsAny<object>()
-                            )
-                    )
+                    d =>
+                        d.BeginExecute(
+                            controllerContext,
+                            parameters,
+                            It.IsAny<AsyncCallback>(),
+                            It.IsAny<object>()
+                        )
+                )
                     .Returns(innerAsyncResult);
                 mockActionDescriptor.Setup(d => d.EndExecute(innerAsyncResult))
                     .Returns(expectedResult);
@@ -1189,14 +1189,14 @@ namespace System.Web.Mvc.Async.Test
             };
 
             mockActionDescriptor.Setup(
-                    d =>
-                        d.BeginExecute(
-                            controllerContext,
-                            parameters,
-                            It.IsAny<AsyncCallback>(),
-                            It.IsAny<object>()
-                        )
-                )
+                d =>
+                    d.BeginExecute(
+                        controllerContext,
+                        parameters,
+                        It.IsAny<AsyncCallback>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(beingExecute);
             mockActionDescriptor.Setup(d => d.EndExecute(It.IsAny<IAsyncResult>()))
                 .Returns(endExecute);
@@ -1393,11 +1393,8 @@ namespace System.Web.Mvc.Async.Test
                 ActionDescriptor actionDescriptor
             )
             {
-                return base.InvokeAuthenticationFilters(
-                    controllerContext,
-                    filters,
-                    actionDescriptor
-                );
+                return base
+                    .InvokeAuthenticationFilters(controllerContext, filters, actionDescriptor);
             }
 
             protected override AuthenticationContext InvokeAuthenticationFilters(
@@ -1420,12 +1417,13 @@ namespace System.Web.Mvc.Async.Test
                 ActionResult result
             )
             {
-                return base.InvokeAuthenticationFiltersChallenge(
-                    controllerContext,
-                    filters,
-                    actionDescriptor,
-                    result
-                );
+                return base
+                    .InvokeAuthenticationFiltersChallenge(
+                        controllerContext,
+                        filters,
+                        actionDescriptor,
+                        result
+                    );
             }
 
             protected override AuthenticationChallengeContext InvokeAuthenticationFiltersChallenge(
@@ -1462,11 +1460,8 @@ namespace System.Web.Mvc.Async.Test
                 ActionDescriptor actionDescriptor
             )
             {
-                return base.InvokeAuthorizationFilters(
-                    controllerContext,
-                    filters,
-                    actionDescriptor
-                );
+                return base
+                    .InvokeAuthorizationFilters(controllerContext, filters, actionDescriptor);
             }
 
             protected override ActionDescriptor FindAction(

@@ -601,7 +601,8 @@ namespace System.Tests
         {
             Type typeArgument =
                 enumType == null || !enumType.GetTypeInfo().IsEnum ? typeof(SimpleEnum) : enumType;
-            MethodInfo parseMethod = typeof(EnumTests).GetTypeInfo()
+            MethodInfo parseMethod = typeof(EnumTests)
+                .GetTypeInfo()
                 .GetMethod(
                     nameof(Parse_Generic_Invalid),
                     BindingFlags.Static | BindingFlags.NonPublic

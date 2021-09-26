@@ -55,9 +55,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             {
                 var throughExpression = memberAccess.Expression;
                 var throughSymbol = semanticModel.GetSymbolInfo(
-                        throughExpression,
-                        cancellationToken
-                    )
+                    throughExpression,
+                    cancellationToken
+                )
                     .GetAnySymbol();
 
                 // if it is via a base expression "base.", we know the "throughType" is the base class but
@@ -73,16 +73,16 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 var includeInstance =
                     !throughExpression.IsKind(SyntaxKind.IdentifierName)
                     || semanticModel.LookupSymbols(
-                            throughExpression.SpanStart,
-                            name: throughSymbol?.Name
-                        )
+                        throughExpression.SpanStart,
+                        name: throughSymbol?.Name
+                    )
                         .Any(s => !(s is INamedTypeSymbol))
                     || (
                         !(throughSymbol is INamespaceOrTypeSymbol)
                         && semanticModel.LookupSymbols(
-                                throughExpression.SpanStart,
-                                container: throughSymbol?.ContainingType
-                            )
+                            throughExpression.SpanStart,
+                            container: throughSymbol?.ContainingType
+                        )
                             .Any(s => !(s is INamedTypeSymbol))
                     );
 
@@ -91,9 +91,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     || (
                         throughExpression.IsKind(SyntaxKind.IdentifierName)
                         && semanticModel.LookupNamespacesAndTypes(
-                                throughExpression.SpanStart,
-                                name: throughSymbol?.Name
-                            )
+                            throughExpression.SpanStart,
+                            name: throughSymbol?.Name
+                        )
                             .Any(t => Equals(t.GetSymbolType(), throughType))
                     );
 
@@ -114,8 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             }
 
             var accessibleMethods = methodGroup.Where(
-                    m => m.IsAccessibleWithin(within, throughType: throughType)
-                )
+                m => m.IsAccessibleWithin(within, throughType: throughType)
+            )
                 .ToImmutableArrayOrEmpty();
             if (accessibleMethods.Length == 0)
             {

@@ -35,7 +35,8 @@ namespace System.Web.Helpers
             Drawing.Imaging.ImageFormat.Png,
             Drawing.Imaging.ImageFormat.Tiff,
             Drawing.Imaging.ImageFormat.Wmf
-        }.ToDictionary(format => format.Guid, format => format);
+        }
+            .ToDictionary(format => format.Guid, format => format);
 
         private static readonly Func<string, byte[]> _defaultReadAction = File.ReadAllBytes;
 

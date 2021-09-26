@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
                         symbol,
                         fixedName,
 #endif
-                        string.Format(CodeFixesResources.Fix_Name_Violation_colon_0, fixedName),
+                        string
+                            .Format(CodeFixesResources.Fix_Name_Violation_colon_0, fixedName),
                         c => FixAsync(document, symbol, fixedName, c),
                         equivalenceKey: nameof(NamingStyleCodeFixProvider)
                     ),
@@ -120,12 +121,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
         )
         {
             return await Renamer.RenameSymbolAsync(
-                    document.Project.Solution,
-                    symbol,
-                    fixedName,
-                    await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false),
-                    cancellationToken
-                )
+                document.Project.Solution,
+                symbol,
+                fixedName,
+                await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -183,8 +184,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
 #if CODE_STYLE  // https://github.com/dotnet/roslyn/issues/42218 tracks removing this conditional code.
                 return SpecializedCollections.SingletonEnumerable(codeAction);
 #else
-                var factory =
-                    _startingSolution.Workspace.Services.GetRequiredService<ISymbolRenamedCodeActionOperationFactoryWorkspaceService>();
+                var factory = _startingSolution.Workspace.Services
+                    .GetRequiredService<ISymbolRenamedCodeActionOperationFactoryWorkspaceService>();
                 return new CodeActionOperation[]
                 {
                     codeAction,
@@ -194,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
                         _startingSolution,
                         newSolution
                     )
-                }.AsEnumerable();
+                }
+                    .AsEnumerable();
 #endif
             }
 

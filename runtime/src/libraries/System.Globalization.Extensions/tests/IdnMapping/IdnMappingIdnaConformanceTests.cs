@@ -82,11 +82,12 @@ namespace System.Globalization.Tests
                     catch (ArgumentException)
                     {
                         if (
-                            !string.Equals(
-                                entry.UnicodeResult.Value,
-                                entry.Source,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            !string
+                                .Equals(
+                                    entry.UnicodeResult.Value,
+                                    entry.Source,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             string actualCodePoints = GetCodePoints(entry.Source);

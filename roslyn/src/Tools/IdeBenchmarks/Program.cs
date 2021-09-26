@@ -19,7 +19,8 @@ namespace IdeBenchmarks
             IConfig config = null;
 #endif
 
-            new BenchmarkSwitcher(typeof(Program).Assembly).Run(args, config);
+            new BenchmarkSwitcher(typeof(Program).Assembly)
+                .Run(args, config);
         }
     }
 }

@@ -783,22 +783,20 @@ class MyTaskMethodBuilder<T>
                 // (14,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Start'
                 //     static async MyTask<T> G<T>(T t) { await Task.Delay(0); return t; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "{ await Task.Delay(0); return t; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "{ await Task.Delay(0); return t; }"
+                )
                     .WithArguments("MyTaskMethodBuilder<T>", "Start")
                     .WithLocation(14, 38),
                 // (16,5): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<int>.Start'
                 //     {
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"{
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"{
         await F();
         return await G(3);
     }"
-                    )
-                    .WithArguments("MyTaskMethodBuilder<int>", "Start")
-                    .WithLocation(16, 5)
+                ).WithArguments("MyTaskMethodBuilder<int>", "Start").WithLocation(16, 5)
             );
         }
 
@@ -984,9 +982,9 @@ class MyTaskMethodBuilder<T>
                 // (14,40): error CS0311: The type 'C.<G>d__1<T>' cannot be used as type parameter 'TStateMachine' in the generic type or method 'MyTaskMethodBuilder<T>.AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter, ref TStateMachine)'. There is no implicit reference conversion from 'C.<G>d__1<T>' to 'System.Runtime.CompilerServices.ICriticalNotifyCompletion'.
                 //     static async MyTask<T> G<T>(T t) { await Task.Delay(0); return t; }
                 Diagnostic(
-                        ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
-                        "await Task.Delay(0);"
-                    )
+                    ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                    "await Task.Delay(0);"
+                )
                     .WithArguments(
                         "MyTaskMethodBuilder<T>.AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter, ref TStateMachine)",
                         "System.Runtime.CompilerServices.ICriticalNotifyCompletion",
@@ -1265,18 +1263,11 @@ public sealed class MyTaskMethodBuilder
                 // (4,5): error CS0315: The type 'Program.<F>d__0' cannot be used as type parameter 'TStateMachine' in the generic type or method 'MyTaskMethodBuilder.Start<TStateMachine>(ref TStateMachine)'. There is no boxing conversion from 'Program.<F>d__0' to 'IMyStateMachine'.
                 //     {
                 Diagnostic(
-                        ErrorCode.ERR_GenericConstraintNotSatisfiedValType,
-                        @"{
+                    ErrorCode.ERR_GenericConstraintNotSatisfiedValType,
+                    @"{
         await new MyTask();
     }"
-                    )
-                    .WithArguments(
-                        "MyTaskMethodBuilder.Start<TStateMachine>(ref TStateMachine)",
-                        "IMyStateMachine",
-                        "TStateMachine",
-                        "Program.<F>d__0"
-                    )
-                    .WithLocation(4, 5)
+                ).WithArguments("MyTaskMethodBuilder.Start<TStateMachine>(ref TStateMachine)", "IMyStateMachine", "TStateMachine", "Program.<F>d__0").WithLocation(4, 5)
             );
         }
 
@@ -1431,9 +1422,9 @@ public sealed class MyTaskMethodBuilder
                 // (5,9): error CS0311: The type 'MyTask.Awaiter' cannot be used as type parameter 'TAwaiter' in the generic type or method 'MyTaskMethodBuilder.AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter, ref TStateMachine)'. There is no implicit reference conversion from 'MyTask.Awaiter' to 'IMyAwaiter'.
                 //         await new MyTask();
                 Diagnostic(
-                        ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
-                        "await new MyTask();"
-                    )
+                    ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                    "await new MyTask();"
+                )
                     .WithArguments(
                         "MyTaskMethodBuilder.AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter, ref TStateMachine)",
                         "IMyAwaiter",

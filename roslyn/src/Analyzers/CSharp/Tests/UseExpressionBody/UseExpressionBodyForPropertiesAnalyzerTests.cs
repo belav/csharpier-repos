@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     },
                 },
                 MarkupOptions = MarkupOptions.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         private static async Task TestWithUseBlockBody(string code, string fixedCode)
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     },
                 },
                 MarkupOptions = MarkupOptions.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
@@ -291,7 +293,8 @@ class C
                 MarkupOptions = MarkupOptions.None,
                 NumberOfFixAllIterations = 2,
                 NumberOfIncrementalIterations = 2,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]

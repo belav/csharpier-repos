@@ -48,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
             try
             {
                 // NOTE: You may need to update AddEntityFrameworkDesignTimeServices() too
-                var services = new ServiceCollection().AddSingleton<TypeMappingSourceDependencies>()
+                var services = new ServiceCollection()
+                    .AddSingleton<TypeMappingSourceDependencies>()
                     .AddSingleton<RelationalTypeMappingSourceDependencies>()
                     .AddSingleton<ValueConverterSelectorDependencies>()
                     .AddSingleton<DiagnosticSource>(new DiagnosticListener(DbLoggerCategory.Name))
@@ -1043,8 +1044,8 @@ DROP TABLE PrincipalTable;"
                     );
                     Assert.Equal(
                         SqliteResources.LogUsingSchemaSelectionsWarning(
-                                new TestLogger<SqliteLoggingDefinitions>()
-                            )
+                            new TestLogger<SqliteLoggingDefinitions>()
+                        )
                             .GenerateMessage(),
                         Message
                     );
@@ -1114,8 +1115,8 @@ CREATE TABLE DependentTable (
                     );
                     Assert.Equal(
                         SqliteResources.LogForeignKeyScaffoldErrorPrincipalTableNotFound(
-                                new TestLogger<SqliteLoggingDefinitions>()
-                            )
+                            new TestLogger<SqliteLoggingDefinitions>()
+                        )
                             .GenerateMessage("0", "DependentTable", "PrincipalTable"),
                         Message
                     );
@@ -1156,8 +1157,8 @@ CREATE TABLE DependentTable (
                     );
                     Assert.Equal(
                         SqliteResources.LogPrincipalColumnNotFound(
-                                new TestLogger<SqliteLoggingDefinitions>()
-                            )
+                            new TestLogger<SqliteLoggingDefinitions>()
+                        )
                             .GenerateMessage(
                                 "0",
                                 "DependentTable",

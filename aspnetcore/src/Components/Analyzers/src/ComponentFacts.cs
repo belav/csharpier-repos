@@ -22,20 +22,15 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                 throw new ArgumentNullException(nameof(property));
             }
 
-            return property.GetAttributes()
-                .Any(
-                    a =>
-                    {
-                        return SymbolEqualityComparer.Default.Equals(
-                                a.AttributeClass,
-                                symbols.ParameterAttribute
-                            )
-                            || SymbolEqualityComparer.Default.Equals(
-                                a.AttributeClass,
-                                symbols.CascadingParameterAttribute
-                            );
-                    }
-                );
+            return property.GetAttributes().Any(
+                a =>
+                {
+                    return SymbolEqualityComparer.Default
+                            .Equals(a.AttributeClass, symbols.ParameterAttribute)
+                        || SymbolEqualityComparer.Default
+                            .Equals(a.AttributeClass, symbols.CascadingParameterAttribute);
+                }
+            );
         }
 
         public static bool IsParameter(ComponentSymbols symbols, IPropertySymbol property)
@@ -53,10 +48,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
             return property.GetAttributes()
                 .Any(
                     a =>
-                        SymbolEqualityComparer.Default.Equals(
-                            a.AttributeClass,
-                            symbols.ParameterAttribute
-                        )
+                        SymbolEqualityComparer.Default
+                            .Equals(a.AttributeClass, symbols.ParameterAttribute)
                 );
         }
 
@@ -78,10 +71,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
             var attribute = property.GetAttributes()
                 .FirstOrDefault(
                     a =>
-                        SymbolEqualityComparer.Default.Equals(
-                            a.AttributeClass,
-                            symbols.ParameterAttribute
-                        )
+                        SymbolEqualityComparer.Default
+                            .Equals(a.AttributeClass, symbols.ParameterAttribute)
                 );
             if (attribute == null)
             {
@@ -91,11 +82,12 @@ namespace Microsoft.AspNetCore.Components.Analyzers
             foreach (var kvp in attribute.NamedArguments)
             {
                 if (
-                    string.Equals(
-                        kvp.Key,
-                        ComponentsApi.ParameterAttribute.CaptureUnmatchedValues,
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            kvp.Key,
+                            ComponentsApi.ParameterAttribute.CaptureUnmatchedValues,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     return kvp.Value.Value as bool? ?? false;
@@ -120,10 +112,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
             return property.GetAttributes()
                 .Any(
                     a =>
-                        SymbolEqualityComparer.Default.Equals(
-                            a.AttributeClass,
-                            symbols.CascadingParameterAttribute
-                        )
+                        SymbolEqualityComparer.Default
+                            .Equals(a.AttributeClass, symbols.CascadingParameterAttribute)
                 );
         }
 

@@ -394,15 +394,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>();
             generator.Setup(
-                    mock =>
-                        mock.GenerateValidationSummary(
-                            expectedViewContext,
-                            expectedExcludePropertyErrors,
-                            null, // message
-                            null, // headerTag
-                            null
-                        )
-                ) // htmlAttributes
+                mock =>
+                    mock.GenerateValidationSummary(
+                        expectedViewContext,
+                        expectedExcludePropertyErrors,
+                        null, // message
+                        null, // headerTag
+                        null
+                    )
+            ) // htmlAttributes
                 .Returns(new TagBuilder("div"))
                 .Verifiable();
 
@@ -456,15 +456,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator.Setup(
-                    mock =>
-                        mock.GenerateValidationSummary(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<bool>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                mock =>
+                    mock.GenerateValidationSummary(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<bool>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(tagBuilder);
 
             var validationSummaryTagHelper = new ValidationSummaryTagHelper(generator.Object)
@@ -580,15 +580,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>();
             generator.Setup(
-                    mock =>
-                        mock.GenerateValidationSummary(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<bool>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                mock =>
+                    mock.GenerateValidationSummary(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<bool>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(tagBuilder)
                 .Verifiable();
 
@@ -705,10 +705,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             );
             validationSummaryTagHelper.ViewContext = viewContext;
 
-            viewContext.ModelState.AddModelError(
-                key: nameof(FormMetadata.ID),
-                errorMessage: expectedError
-            );
+            viewContext.ModelState
+                .AddModelError(key: nameof(FormMetadata.ID), errorMessage: expectedError);
 
             // Act
             await validationSummaryTagHelper.ProcessAsync(tagHelperContext, output);

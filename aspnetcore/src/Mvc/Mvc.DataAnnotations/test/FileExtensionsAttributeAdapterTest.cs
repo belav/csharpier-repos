@@ -35,12 +35,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             // FileExtensionsAttribute formats the extension list for the error message
             var formattedExtensions = string.Join(", ", expectedExtensions.Split(','));
-            var expectedErrorMessage = string.Format(
-                CultureInfo.CurrentCulture,
-                attribute.ErrorMessage,
-                nameof(Profile.PhotoFileName),
-                formattedExtensions
-            );
+            var expectedErrorMessage = string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    attribute.ErrorMessage,
+                    nameof(Profile.PhotoFileName),
+                    formattedExtensions
+                );
 
             var adapter = new FileExtensionsAttributeAdapter(attribute, stringLocalizer: null);
             var context = new ClientModelValidationContext(
@@ -115,12 +116,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             // FileExtensionsAttribute formats the extension list for the error message
             var formattedExtensions = string.Join(", ", expectedExtensions.Split(','));
-            var expectedErrorMessage = string.Format(
-                CultureInfo.CurrentCulture,
-                attribute.ErrorMessage,
-                nameof(Profile.PhotoFileName),
-                formattedExtensions
-            );
+            var expectedErrorMessage = string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    attribute.ErrorMessage,
+                    nameof(Profile.PhotoFileName),
+                    formattedExtensions
+                );
 
             var adapter = new FileExtensionsAttributeAdapter(attribute, stringLocalizer: null);
             var context = new ClientModelValidationContext(

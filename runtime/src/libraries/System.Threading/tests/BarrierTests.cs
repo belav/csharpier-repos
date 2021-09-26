@@ -303,13 +303,14 @@ namespace System.Threading.Tests
 
                 Task[] tasks = new Task[actions.Length];
                 for (int k = 0; k < tasks.Length; k++)
-                    tasks[k] = Task.Factory.StartNew(
-                        (index) => actions[(int)index](),
-                        k,
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        TaskScheduler.Default
-                    );
+                    tasks[k] = Task.Factory
+                        .StartNew(
+                            (index) => actions[(int)index](),
+                            k,
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            TaskScheduler.Default
+                        );
                 Task.WaitAll(tasks);
                 Assert.Equal(0, b.ParticipantCount);
             }
@@ -349,7 +350,8 @@ namespace System.Threading.Tests
                         catch (BarrierPostPhaseException ex)
                         {
                             if (
-                                ex.InnerException.GetType()
+                                ex.InnerException
+                                    .GetType()
                                     .Equals(typeof(InvalidOperationException))
                             )
                                 Interlocked.Increment(ref succeededCount);

@@ -49,12 +49,13 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             }
 
 #if NETSTANDARD2_1
-            return constructorCallSite.ConstructorInfo.Invoke(
-                BindingFlags.DoNotWrapExceptions,
-                binder: null,
-                parameters: parameterValues,
-                culture: null
-            );
+            return constructorCallSite.ConstructorInfo
+                .Invoke(
+                    BindingFlags.DoNotWrapExceptions,
+                    binder: null,
+                    parameters: parameterValues,
+                    culture: null
+                );
 #else
             try
             {

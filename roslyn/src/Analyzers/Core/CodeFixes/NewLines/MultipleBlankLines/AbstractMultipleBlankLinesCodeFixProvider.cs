@@ -62,9 +62,8 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>.GetInstance(
-                out var replacements
-            );
+            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>
+                .GetInstance(out var replacements);
             foreach (var diagnostic in diagnostics)
             {
                 var token = root.FindToken(diagnostic.AdditionalLocations[0].SourceSpan.Start);

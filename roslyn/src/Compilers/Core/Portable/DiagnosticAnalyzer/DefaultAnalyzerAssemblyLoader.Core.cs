@@ -30,11 +30,8 @@ namespace Microsoft.CodeAnalysis
                 );
 
                 if (
-                    System.Threading.Interlocked.CompareExchange(
-                        ref _loadContext,
-                        loadContext,
-                        null
-                    ) == null
+                    System.Threading.Interlocked
+                        .CompareExchange(ref _loadContext, loadContext, null) == null
                 )
                 {
                     _loadContext.Resolving += (context, name) =>

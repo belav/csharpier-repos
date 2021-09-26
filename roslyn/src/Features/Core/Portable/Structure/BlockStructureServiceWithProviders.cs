@@ -141,31 +141,33 @@ namespace Microsoft.CodeAnalysis.Structure
         {
             var language = context.SyntaxTree.Options.Language;
 
-            var showIndentGuidesForCodeLevelConstructs = context.OptionProvider.GetOption(
-                BlockStructureOptions.ShowBlockStructureGuidesForCodeLevelConstructs,
-                language
-            );
-            var showIndentGuidesForDeclarationLevelConstructs = context.OptionProvider.GetOption(
-                BlockStructureOptions.ShowBlockStructureGuidesForDeclarationLevelConstructs,
-                language
-            );
-            var showIndentGuidesForCommentsAndPreprocessorRegions =
-                context.OptionProvider.GetOption(
+            var showIndentGuidesForCodeLevelConstructs = context.OptionProvider
+                .GetOption(
+                    BlockStructureOptions.ShowBlockStructureGuidesForCodeLevelConstructs,
+                    language
+                );
+            var showIndentGuidesForDeclarationLevelConstructs = context.OptionProvider
+                .GetOption(
+                    BlockStructureOptions.ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                    language
+                );
+            var showIndentGuidesForCommentsAndPreprocessorRegions = context.OptionProvider
+                .GetOption(
                     BlockStructureOptions.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions,
                     language
                 );
-            var showOutliningForCodeLevelConstructs = context.OptionProvider.GetOption(
-                BlockStructureOptions.ShowOutliningForCodeLevelConstructs,
-                language
-            );
-            var showOutliningForDeclarationLevelConstructs = context.OptionProvider.GetOption(
-                BlockStructureOptions.ShowOutliningForDeclarationLevelConstructs,
-                language
-            );
-            var showOutliningForCommentsAndPreprocessorRegions = context.OptionProvider.GetOption(
-                BlockStructureOptions.ShowOutliningForCommentsAndPreprocessorRegions,
-                language
-            );
+            var showOutliningForCodeLevelConstructs = context.OptionProvider
+                .GetOption(BlockStructureOptions.ShowOutliningForCodeLevelConstructs, language);
+            var showOutliningForDeclarationLevelConstructs = context.OptionProvider
+                .GetOption(
+                    BlockStructureOptions.ShowOutliningForDeclarationLevelConstructs,
+                    language
+                );
+            var showOutliningForCommentsAndPreprocessorRegions = context.OptionProvider
+                .GetOption(
+                    BlockStructureOptions.ShowOutliningForCommentsAndPreprocessorRegions,
+                    language
+                );
 
             using var _ = ArrayBuilder<BlockSpan>.GetInstance(out var updatedSpans);
             foreach (var span in context.Spans)

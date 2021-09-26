@@ -9,15 +9,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
     internal sealed partial class ExportFactoryCreator
     {
         private static readonly MethodInfo _createStronglyTypedExportFactoryOfT =
-            typeof(ExportFactoryCreator).GetMethod(
-                "CreateStronglyTypedExportFactoryOfT",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            )!;
+            typeof(ExportFactoryCreator)
+                .GetMethod(
+                    "CreateStronglyTypedExportFactoryOfT",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                )!;
         private static readonly MethodInfo _createStronglyTypedExportFactoryOfTM =
-            typeof(ExportFactoryCreator).GetMethod(
-                "CreateStronglyTypedExportFactoryOfTM",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            )!;
+            typeof(ExportFactoryCreator)
+                .GetMethod(
+                    "CreateStronglyTypedExportFactoryOfTM",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                )!;
 
         private readonly Type _exportFactoryType;
 

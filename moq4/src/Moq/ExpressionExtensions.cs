@@ -172,11 +172,12 @@ namespace Moq
             else
             {
                 throw new ArgumentException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.UnsupportedExpression,
-                        remainder.ToStringFixed()
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.UnsupportedExpression,
+                            remainder.ToStringFixed()
+                        )
                 );
             }
 
@@ -232,7 +233,8 @@ namespace Moq
                         if (methodCallExpression.Method.IsGenericMethod)
                         {
                             foreach (
-                                var typeArgument in methodCallExpression.Method.GetGenericArguments()
+                                var typeArgument in methodCallExpression.Method
+                                    .GetGenericArguments()
                             )
                             {
                                 if (typeArgument.IsOrContainsTypeMatcher())
@@ -341,10 +343,13 @@ namespace Moq
                                 Expression.Invoke(parameter, arguments),
                                 parameter
                             ),
-                            method: r.Type.GetMethod(
-                                "Invoke",
-                                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-                            ),
+                            method: r.Type
+                                .GetMethod(
+                                    "Invoke",
+                                    BindingFlags.Public
+                                        | BindingFlags.NonPublic
+                                        | BindingFlags.Instance
+                                ),
                             arguments
                         );
                         return;
@@ -436,7 +441,8 @@ namespace Moq
             if (property.DeclaringType != expression.Expression.Type)
             {
                 var parameterTypes = new ParameterTypes(property.GetIndexParameters());
-                var derivedProperty = expression.Expression.Type.GetMember(
+                var derivedProperty = expression.Expression.Type
+                    .GetMember(
                         property.Name,
                         MemberTypes.Property,
                         BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
@@ -446,11 +452,8 @@ namespace Moq
                         p =>
                         {
                             return p.PropertyType == property.PropertyType
-                                && new ParameterTypes(p.GetIndexParameters()).CompareTo(
-                                    parameterTypes,
-                                    true,
-                                    false
-                                );
+                                && new ParameterTypes(p.GetIndexParameters())
+                                    .CompareTo(parameterTypes, true, false);
                         }
                     );
                 if (derivedProperty != null)
@@ -483,11 +486,12 @@ namespace Moq
             }
 
             throw new ArgumentException(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.SetupNotProperty,
-                    expression.ToStringFixed()
-                )
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.SetupNotProperty,
+                        expression.ToStringFixed()
+                    )
             );
         }
 
@@ -557,10 +561,8 @@ namespace Moq
                 ExpressionType.Parameter => false,
                 ExpressionType.Extension => !(expression is MatchExpression),
                 ExpressionType.Call
-                  => !((MethodCallExpression)expression).Method.IsDefined(
-                      typeof(MatcherAttribute),
-                      true
-                  ) && !expression.IsMatch(out _),
+                  => !((MethodCallExpression)expression).Method
+                      .IsDefined(typeof(MatcherAttribute), true) && !expression.IsMatch(out _),
                 ExpressionType.MemberAccess => !expression.IsMatch(out _),
                 _ => true,
             };

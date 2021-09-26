@@ -459,18 +459,16 @@ namespace System.Net
                 case 1:
                     return string.Format(s.Format, Format(s.GetArgument(0)));
                 case 2:
-                    return string.Format(
-                        s.Format,
-                        Format(s.GetArgument(0)),
-                        Format(s.GetArgument(1))
-                    );
+                    return string
+                        .Format(s.Format, Format(s.GetArgument(0)), Format(s.GetArgument(1)));
                 case 3:
-                    return string.Format(
-                        s.Format,
-                        Format(s.GetArgument(0)),
-                        Format(s.GetArgument(1)),
-                        Format(s.GetArgument(2))
-                    );
+                    return string
+                        .Format(
+                            s.Format,
+                            Format(s.GetArgument(0)),
+                            Format(s.GetArgument(1)),
+                            Format(s.GetArgument(2))
+                        );
                 default:
                     object?[] args = s.GetArguments();
                     object[] formattedArgs = new object[args.Length];

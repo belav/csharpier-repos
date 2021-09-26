@@ -205,9 +205,10 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "TokenSourceDispose:    > ctr.Dispose() failed when referring to a disposed CTS"
-                    )
+                    string
+                        .Format(
+                            "TokenSourceDispose:    > ctr.Dispose() failed when referring to a disposed CTS"
+                        )
                 );
             }
 
@@ -703,10 +704,11 @@ namespace System.Threading.Tasks.Tests
                     {
                         Assert.True(
                             false,
-                            string.Format(
-                                "Cancel_ThrowOnFirstException:  The wrong exception type was thrown. ex="
-                                    + ex
-                            )
+                            string
+                                .Format(
+                                    "Cancel_ThrowOnFirstException:  The wrong exception type was thrown. ex="
+                                        + ex
+                                )
                         );
                     }
                     mre_CancelHasBeenEnacted.Set();
@@ -1042,10 +1044,11 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "Bug901737_ODEWhenDisposingLinkedCTS:  - Exception Occurred (not an ODE!!): "
-                                + ex
-                        )
+                        string
+                            .Format(
+                                "Bug901737_ODEWhenDisposingLinkedCTS:  - Exception Occurred (not an ODE!!): "
+                                    + ex
+                            )
                     );
                 }
             }
@@ -1198,16 +1201,18 @@ namespace System.Threading.Tasks.Tests
                         if (c.Token.CanBeCanceled)
                             Assert.True(
                                 false,
-                                string.Format(
-                                    "DerivedCancellationTokenSource: Accessing the Token property should throw an ObjectDisposedException, but it did not."
-                                )
+                                string
+                                    .Format(
+                                        "DerivedCancellationTokenSource: Accessing the Token property should throw an ObjectDisposedException, but it did not."
+                                    )
                             );
                         else
                             Assert.True(
                                 false,
-                                string.Format(
-                                    "DerivedCancellationTokenSource: Accessing the Token property should throw an ObjectDisposedException, but it did not."
-                                )
+                                string
+                                    .Format(
+                                        "DerivedCancellationTokenSource: Accessing the Token property should throw an ObjectDisposedException, but it did not."
+                                    )
                             );
                     }
                 );
@@ -1373,13 +1378,11 @@ namespace System.Threading.Tasks.Tests
             bool registration2Invoked = false;
 
             var cts = new CancellationTokenSource();
-            CancellationTokenRegistration ctr1 = cts.Token.Register(
-                () => registration1Invoked = true
-            );
+            CancellationTokenRegistration ctr1 = cts.Token
+                .Register(() => registration1Invoked = true);
             Assert.True(cts.TryReset());
-            CancellationTokenRegistration ctr2 = cts.Token.Register(
-                () => registration2Invoked = true
-            );
+            CancellationTokenRegistration ctr2 = cts.Token
+                .Register(() => registration2Invoked = true);
 
             cts.Cancel();
 
@@ -1817,9 +1820,8 @@ namespace System.Threading.Tasks.Tests
                             for (int i = 0; i < Iters; i++)
                             {
                                 barrier.SignalAndWait();
-                                CancellationTokenRegistration ctr = cts.Token.Register(
-                                    () => callbackInvoked = true
-                                );
+                                CancellationTokenRegistration ctr = cts.Token
+                                    .Register(() => callbackInvoked = true);
                                 barrier.SignalAndWait();
                                 unregisterResult = ctr.Unregister();
                                 barrier.SignalAndWait();

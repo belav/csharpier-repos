@@ -127,11 +127,12 @@ namespace WebServer
 
             // We don't fully support this authentication method.
             context.Response.StatusCode = 501;
-            context.Response.StatusDescription = string.Format(
-                "Attempt to use unsupported challenge/response auth type. {0}: {1}",
-                authType,
-                authHeader
-            );
+            context.Response.StatusDescription = string
+                .Format(
+                    "Attempt to use unsupported challenge/response auth type. {0}: {1}",
+                    authType,
+                    authHeader
+                );
             return false;
         }
     }

@@ -102,11 +102,12 @@ namespace Microsoft.AspNetCore.Builder
             return app.UseStatusCodePages(
                 context =>
                 {
-                    var body = string.Format(
-                        CultureInfo.InvariantCulture,
-                        bodyFormat,
-                        context.HttpContext.Response.StatusCode
-                    );
+                    var body = string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            bodyFormat,
+                            context.HttpContext.Response.StatusCode
+                        );
                     context.HttpContext.Response.ContentType = contentType;
                     return context.HttpContext.Response.WriteAsync(body);
                 }
@@ -137,14 +138,14 @@ namespace Microsoft.AspNetCore.Builder
                 return app.UseStatusCodePages(
                     context =>
                     {
-                        var location = string.Format(
-                            CultureInfo.InvariantCulture,
-                            locationFormat,
-                            context.HttpContext.Response.StatusCode
-                        );
-                        context.HttpContext.Response.Redirect(
-                            context.HttpContext.Request.PathBase + location
-                        );
+                        var location = string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                locationFormat,
+                                context.HttpContext.Response.StatusCode
+                            );
+                        context.HttpContext.Response
+                            .Redirect(context.HttpContext.Request.PathBase + location);
                         return Task.CompletedTask;
                     }
                 );
@@ -154,11 +155,12 @@ namespace Microsoft.AspNetCore.Builder
                 return app.UseStatusCodePages(
                     context =>
                     {
-                        var location = string.Format(
-                            CultureInfo.InvariantCulture,
-                            locationFormat,
-                            context.HttpContext.Response.StatusCode
-                        );
+                        var location = string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                locationFormat,
+                                context.HttpContext.Response.StatusCode
+                            );
                         context.HttpContext.Response.Redirect(location);
                         return Task.CompletedTask;
                     }
@@ -212,16 +214,18 @@ namespace Microsoft.AspNetCore.Builder
                 async context =>
                 {
                     var newPath = new PathString(
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            pathFormat,
-                            context.HttpContext.Response.StatusCode
-                        )
+                        string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                pathFormat,
+                                context.HttpContext.Response.StatusCode
+                            )
                     );
                     var formatedQueryString =
                         queryFormat == null
                             ? null
-                            : string.Format(
+                            : string
+                              .Format(
                                   CultureInfo.InvariantCulture,
                                   queryFormat,
                                   context.HttpContext.Response.StatusCode
@@ -234,22 +238,23 @@ namespace Microsoft.AspNetCore.Builder
                     var originalPath = context.HttpContext.Request.Path;
                     var originalQueryString = context.HttpContext.Request.QueryString;
                     // Store the original paths so the app can check it.
-                    context.HttpContext.Features.Set<IStatusCodeReExecuteFeature>(
-                        new StatusCodeReExecuteFeature()
-                        {
-                            OriginalPathBase = context.HttpContext.Request.PathBase.Value!,
-                            OriginalPath = originalPath.Value!,
-                            OriginalQueryString = originalQueryString.HasValue
-                                ? originalQueryString.Value
-                                : null,
-                        }
-                    );
+                    context.HttpContext.Features
+                        .Set<IStatusCodeReExecuteFeature>(
+                            new StatusCodeReExecuteFeature()
+                            {
+                                OriginalPathBase = context.HttpContext.Request.PathBase.Value!,
+                                OriginalPath = originalPath.Value!,
+                                OriginalQueryString = originalQueryString.HasValue
+                                    ? originalQueryString.Value
+                                    : null,
+                            }
+                        );
 
                     // An endpoint may have already been set. Since we're going to re-invoke the middleware pipeline we need to reset
                     // the endpoint and route values to ensure things are re-calculated.
                     context.HttpContext.SetEndpoint(endpoint: null);
-                    var routeValuesFeature =
-                        context.HttpContext.Features.Get<IRouteValuesFeature>();
+                    var routeValuesFeature = context.HttpContext.Features
+                        .Get<IRouteValuesFeature>();
                     routeValuesFeature?.RouteValues?.Clear();
 
                     context.HttpContext.Request.Path = newPath;

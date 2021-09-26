@@ -80,16 +80,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // full compilation if we don't have that.
                 var containsSymbol = isExactNameSearch
                     ? await project.ContainsSymbolsWithNameAsync(
-                              query.Name,
-                              filter,
-                              cancellationToken
-                          )
+                          query.Name,
+                          filter,
+                          cancellationToken
+                      )
                           .ConfigureAwait(false)
                     : await project.ContainsSymbolsWithNameAsync(
-                              query.GetPredicate(),
-                              filter,
-                              cancellationToken
-                          )
+                          query.GetPredicate(),
+                          filter,
+                          cancellationToken
+                      )
                           .ConfigureAwait(false);
 
                 if (!containsSymbol)
@@ -119,13 +119,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     // Return symbols from skeleton assembly in this case so that symbols have
                     // the same language as startingCompilation.
                     symbolsWithName = symbolsWithName.Select(
-                            s =>
-                                s.GetSymbolKey(cancellationToken)
-                                    .Resolve(
-                                        startingCompilation,
-                                        cancellationToken: cancellationToken
-                                    ).Symbol
-                        )
+                        s =>
+                            s.GetSymbolKey(cancellationToken)
+                                .Resolve(
+                                    startingCompilation,
+                                    cancellationToken: cancellationToken
+                                ).Symbol
+                    )
                         .WhereNotNull()
                         .ToImmutableArray();
                 }
@@ -161,11 +161,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 if (referenceOpt != null)
                 {
                     var info = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                            project.Solution,
-                            referenceOpt,
-                            loadOnly: false,
-                            cancellationToken: cancellationToken
-                        )
+                        project.Solution,
+                        referenceOpt,
+                        loadOnly: false,
+                        cancellationToken: cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     var symbols = await info.FindAsync(query, assembly, filter, cancellationToken)

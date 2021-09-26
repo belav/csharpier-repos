@@ -52,8 +52,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 )
             )
             {
-                var syntaxFacts =
-                    completionContext.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = completionContext.Document
+                    .GetRequiredLanguageService<ISyntaxFactsService>();
                 if (
                     TryGetReceiverTypeSymbol(
                         syntaxContext,
@@ -87,9 +87,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                             )
                     );
 
-                    var timeoutInMilliseconds = completionContext.Options.GetOption(
-                        CompletionServiceOptions.TimeoutInMillisecondsForExtensionMethodImportCompletion
-                    );
+                    var timeoutInMilliseconds = completionContext.Options
+                        .GetOption(
+                            CompletionServiceOptions.TimeoutInMillisecondsForExtensionMethodImportCompletion
+                        );
 
                     // Timebox is enabled if timeout value is >= 0 and we are not triggered via expander
                     if (timeoutInMilliseconds >= 0 && !isExpandedCompletion)
@@ -98,9 +99,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         if (
                             timeoutInMilliseconds == 0
                             || await Task.WhenAny(
-                                    getItemsTask,
-                                    Task.Delay(timeoutInMilliseconds, linkedTokenSource.Token)
-                                )
+                                getItemsTask,
+                                Task.Delay(timeoutInMilliseconds, linkedTokenSource.Token)
+                            )
                                 .ConfigureAwait(false) != getItemsTask
                         )
                         {
@@ -134,8 +135,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             if (!_isTargetTypeCompletionFilterExperimentEnabled.HasValue)
             {
-                var experimentationService =
-                    workspace.Services.GetRequiredService<IExperimentationService>();
+                var experimentationService = workspace.Services
+                    .GetRequiredService<IExperimentationService>();
                 _isTargetTypeCompletionFilterExperimentEnabled =
                     experimentationService.IsExperimentEnabled(
                         WellKnownExperimentNames.TargetTypedCompletionFilter
@@ -167,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 // Check if we are accessing members of a type, no extension methods are exposed off of types.
                 if (
                     !(
-                        syntaxContext.SemanticModel.GetSymbolInfo(expressionNode, cancellationToken)
+                        syntaxContext.SemanticModel
+                            .GetSymbolInfo(expressionNode, cancellationToken)
                             .GetAnySymbol() is ITypeSymbol
                     )
                 )
@@ -175,15 +177,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     // The expression we're calling off of needs to have an actual instance type.
                     // We try to be more tolerant to errors here so completion would still be available in certain case of partially typed code.
                     receiverTypeSymbol =
-                        syntaxContext.SemanticModel.GetTypeInfo(
-                            expressionNode,
-                            cancellationToken
-                        ).Type;
+                        syntaxContext.SemanticModel
+                            .GetTypeInfo(expressionNode, cancellationToken).Type;
                     if (receiverTypeSymbol is IErrorTypeSymbol errorTypeSymbol)
                     {
-                        receiverTypeSymbol = errorTypeSymbol.CandidateSymbols.Select(
-                                s => GetSymbolType(s)
-                            )
+                        receiverTypeSymbol = errorTypeSymbol.CandidateSymbols
+                            .Select(s => GetSymbolType(s))
                             .FirstOrDefault(s => s != null);
                     }
 

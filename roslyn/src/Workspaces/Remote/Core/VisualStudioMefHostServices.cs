@@ -94,16 +94,18 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             }
 
             public bool Equals(ExportKey other) =>
-                string.Compare(
-                    ExtensionTypeName,
-                    other.ExtensionTypeName,
-                    StringComparison.OrdinalIgnoreCase
-                ) == 0
-                && string.Compare(
-                    MetadataTypeName,
-                    other.MetadataTypeName,
-                    StringComparison.OrdinalIgnoreCase
-                ) == 0;
+                string
+                    .Compare(
+                        ExtensionTypeName,
+                        other.ExtensionTypeName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                && string
+                    .Compare(
+                        MetadataTypeName,
+                        other.MetadataTypeName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0;
 
             public override bool Equals(object? obj) => obj is ExportKey key && Equals(key);
 

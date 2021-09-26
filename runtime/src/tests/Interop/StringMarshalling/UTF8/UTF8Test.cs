@@ -129,11 +129,12 @@ class UTF8StringBuilderTests
         if (!expectedReturn.Equals(nativeString.ToString()))
         {
             throw new Exception(
-                string.Format(
-                    "TestReturnStringBuilder: nativeString {0} != expecedNativeString {1}",
-                    nativeString.ToString(),
-                    expectedReturn
-                )
+                string
+                    .Format(
+                        "TestReturnStringBuilder: nativeString {0} != expecedNativeString {1}",
+                        nativeString.ToString(),
+                        expectedReturn
+                    )
             );
         }
     }

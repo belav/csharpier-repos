@@ -1757,8 +1757,8 @@ public class MyAttribute : Attribute { public int Value {get; set;} }",
                 _emptyCompilation.GetSpecialType(SpecialType.System_String)
             };
             var parameters = parameterTypes.Select(
-                    (t, i) => Generator.ParameterDeclaration("p" + i, Generator.TypeExpression(t))
-                )
+                (t, i) => Generator.ParameterDeclaration("p" + i, Generator.TypeExpression(t))
+            )
                 .ToList();
             var returnType = Generator.TypeExpression(SpecialType.System_Boolean);
 
@@ -4955,8 +4955,8 @@ public class C
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.MethodDeclaration("m", returnType: Generator.IdentifierName("t"))
-                    )
+                    Generator.MethodDeclaration("m", returnType: Generator.IdentifierName("t"))
+                )
                     .ToString()
             );
             Assert.Null(Generator.GetType(Generator.MethodDeclaration("m")));
@@ -4974,21 +4974,21 @@ public class C
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.IndexerDeclaration(
-                            new[]
-                            {
-                                Generator.ParameterDeclaration("p", Generator.IdentifierName("pt"))
-                            },
-                            Generator.IdentifierName("t")
-                        )
+                    Generator.IndexerDeclaration(
+                        new[]
+                        {
+                            Generator.ParameterDeclaration("p", Generator.IdentifierName("pt"))
+                        },
+                        Generator.IdentifierName("t")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
-                    )
+                    Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
+                )
                     .ToString()
             );
 
@@ -5000,19 +5000,16 @@ public class C
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.CustomEventDeclaration("ep", Generator.IdentifierName("t"))
-                    )
+                    Generator.CustomEventDeclaration("ep", Generator.IdentifierName("t"))
+                )
                     .ToString()
             );
 
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.DelegateDeclaration(
-                            "t",
-                            returnType: Generator.IdentifierName("t")
-                        )
-                    )
+                    Generator.DelegateDeclaration("t", returnType: Generator.IdentifierName("t"))
+                )
                     .ToString()
             );
             Assert.Null(Generator.GetType(Generator.DelegateDeclaration("d")));
@@ -5020,8 +5017,8 @@ public class C
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.LocalDeclarationStatement(Generator.IdentifierName("t"), "v")
-                    )
+                    Generator.LocalDeclarationStatement(Generator.IdentifierName("t"), "v")
+                )
                     .ToString()
             );
 
@@ -5035,106 +5032,100 @@ public class C
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.WithType(
-                            Generator.MethodDeclaration(
-                                "m",
-                                returnType: Generator.IdentifierName("x")
-                            ),
-                            Generator.IdentifierName("t")
-                        )
+                    Generator.WithType(
+                        Generator.MethodDeclaration("m", returnType: Generator.IdentifierName("x")),
+                        Generator.IdentifierName("t")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.WithType(
-                            Generator.FieldDeclaration("f", Generator.IdentifierName("x")),
-                            Generator.IdentifierName("t")
-                        )
+                    Generator.WithType(
+                        Generator.FieldDeclaration("f", Generator.IdentifierName("x")),
+                        Generator.IdentifierName("t")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.WithType(
-                            Generator.PropertyDeclaration("p", Generator.IdentifierName("x")),
-                            Generator.IdentifierName("t")
-                        )
+                    Generator.WithType(
+                        Generator.PropertyDeclaration("p", Generator.IdentifierName("x")),
+                        Generator.IdentifierName("t")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.WithType(
-                            Generator.IndexerDeclaration(
-                                new[]
-                                {
-                                    Generator.ParameterDeclaration(
-                                        "p",
-                                        Generator.IdentifierName("pt")
-                                    )
-                                },
-                                Generator.IdentifierName("x")
-                            ),
-                            Generator.IdentifierName("t")
-                        )
+                    Generator.WithType(
+                        Generator.IndexerDeclaration(
+                            new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("pt"))
+                            },
+                            Generator.IdentifierName("x")
+                        ),
+                        Generator.IdentifierName("t")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.WithType(
-                            Generator.ParameterDeclaration("p", Generator.IdentifierName("x")),
-                            Generator.IdentifierName("t")
-                        )
+                    Generator.WithType(
+                        Generator.ParameterDeclaration("p", Generator.IdentifierName("x")),
+                        Generator.IdentifierName("t")
                     )
+                )
                     .ToString()
             );
 
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.WithType(
-                            Generator.DelegateDeclaration("t"),
-                            Generator.IdentifierName("t")
-                        )
+                    Generator.WithType(
+                        Generator.DelegateDeclaration("t"),
+                        Generator.IdentifierName("t")
                     )
+                )
                     .ToString()
             );
 
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.WithType(
-                            Generator.EventDeclaration("ef", Generator.IdentifierName("x")),
-                            Generator.IdentifierName("t")
-                        )
+                    Generator.WithType(
+                        Generator.EventDeclaration("ef", Generator.IdentifierName("x")),
+                        Generator.IdentifierName("t")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.WithType(
-                            Generator.CustomEventDeclaration("ep", Generator.IdentifierName("x")),
-                            Generator.IdentifierName("t")
-                        )
+                    Generator.WithType(
+                        Generator.CustomEventDeclaration("ep", Generator.IdentifierName("x")),
+                        Generator.IdentifierName("t")
                     )
+                )
                     .ToString()
             );
 
             Assert.Equal(
                 "t",
                 Generator.GetType(
-                        Generator.WithType(
-                            Generator.LocalDeclarationStatement(Generator.IdentifierName("x"), "v"),
-                            Generator.IdentifierName("t")
-                        )
+                    Generator.WithType(
+                        Generator.LocalDeclarationStatement(Generator.IdentifierName("x"), "v"),
+                        Generator.IdentifierName("t")
                     )
+                )
                     .ToString()
             );
             Assert.Null(
@@ -5374,33 +5365,33 @@ public class C
             Assert.Equal(
                 "x",
                 Generator.GetExpression(
-                        Generator.FieldDeclaration(
-                            "f",
-                            Generator.IdentifierName("t"),
-                            initializer: Generator.IdentifierName("x")
-                        )
+                    Generator.FieldDeclaration(
+                        "f",
+                        Generator.IdentifierName("t"),
+                        initializer: Generator.IdentifierName("x")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "x",
                 Generator.GetExpression(
-                        Generator.ParameterDeclaration(
-                            "p",
-                            Generator.IdentifierName("t"),
-                            initializer: Generator.IdentifierName("x")
-                        )
+                    Generator.ParameterDeclaration(
+                        "p",
+                        Generator.IdentifierName("t"),
+                        initializer: Generator.IdentifierName("x")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "x",
                 Generator.GetExpression(
-                        Generator.LocalDeclarationStatement(
-                            "loc",
-                            initializer: Generator.IdentifierName("x")
-                        )
+                    Generator.LocalDeclarationStatement(
+                        "loc",
+                        initializer: Generator.IdentifierName("x")
                     )
+                )
                     .ToString()
             );
 
@@ -5425,29 +5416,29 @@ public class C
             Assert.Equal(
                 "x",
                 Generator.GetExpression(
-                        Generator.ValueReturningLambdaExpression(Generator.IdentifierName("x"))
-                    )
+                    Generator.ValueReturningLambdaExpression(Generator.IdentifierName("x"))
+                )
                     .ToString()
             );
             Assert.Equal(
                 "x",
                 Generator.GetExpression(
-                        Generator.VoidReturningLambdaExpression(Generator.IdentifierName("x"))
-                    )
+                    Generator.VoidReturningLambdaExpression(Generator.IdentifierName("x"))
+                )
                     .ToString()
             );
             Assert.Equal(
                 "x",
                 Generator.GetExpression(
-                        Generator.ValueReturningLambdaExpression("p", Generator.IdentifierName("x"))
-                    )
+                    Generator.ValueReturningLambdaExpression("p", Generator.IdentifierName("x"))
+                )
                     .ToString()
             );
             Assert.Equal(
                 "x",
                 Generator.GetExpression(
-                        Generator.VoidReturningLambdaExpression("p", Generator.IdentifierName("x"))
-                    )
+                    Generator.VoidReturningLambdaExpression("p", Generator.IdentifierName("x"))
+                )
                     .ToString()
             );
 
@@ -5485,34 +5476,31 @@ public class C
             Assert.Equal(
                 "x",
                 Generator.GetExpression(
-                        Generator.WithExpression(
-                            Generator.FieldDeclaration("f", Generator.IdentifierName("t")),
-                            Generator.IdentifierName("x")
-                        )
+                    Generator.WithExpression(
+                        Generator.FieldDeclaration("f", Generator.IdentifierName("t")),
+                        Generator.IdentifierName("x")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "x",
                 Generator.GetExpression(
-                        Generator.WithExpression(
-                            Generator.ParameterDeclaration("p", Generator.IdentifierName("t")),
-                            Generator.IdentifierName("x")
-                        )
+                    Generator.WithExpression(
+                        Generator.ParameterDeclaration("p", Generator.IdentifierName("t")),
+                        Generator.IdentifierName("x")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "x",
                 Generator.GetExpression(
-                        Generator.WithExpression(
-                            Generator.LocalDeclarationStatement(
-                                Generator.IdentifierName("t"),
-                                "loc"
-                            ),
-                            Generator.IdentifierName("x")
-                        )
+                    Generator.WithExpression(
+                        Generator.LocalDeclarationStatement(Generator.IdentifierName("t"), "loc"),
+                        Generator.IdentifierName("x")
                     )
+                )
                     .ToString()
             );
 
@@ -5520,97 +5508,94 @@ public class C
             Assert.Equal(
                 "y",
                 Generator.GetExpression(
-                        Generator.WithExpression(
-                            Generator.ValueReturningLambdaExpression(
-                                "p",
-                                new[] { Generator.IdentifierName("x") }
-                            ),
-                            Generator.IdentifierName("y")
-                        )
+                    Generator.WithExpression(
+                        Generator.ValueReturningLambdaExpression(
+                            "p",
+                            new[] { Generator.IdentifierName("x") }
+                        ),
+                        Generator.IdentifierName("y")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "y",
                 Generator.GetExpression(
-                        Generator.WithExpression(
-                            Generator.VoidReturningLambdaExpression(
-                                "p",
-                                new[] { Generator.IdentifierName("x") }
-                            ),
-                            Generator.IdentifierName("y")
-                        )
+                    Generator.WithExpression(
+                        Generator.VoidReturningLambdaExpression(
+                            "p",
+                            new[] { Generator.IdentifierName("x") }
+                        ),
+                        Generator.IdentifierName("y")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "y",
                 Generator.GetExpression(
-                        Generator.WithExpression(
-                            Generator.ValueReturningLambdaExpression(
-                                new[] { Generator.IdentifierName("x") }
-                            ),
-                            Generator.IdentifierName("y")
-                        )
+                    Generator.WithExpression(
+                        Generator.ValueReturningLambdaExpression(
+                            new[] { Generator.IdentifierName("x") }
+                        ),
+                        Generator.IdentifierName("y")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "y",
                 Generator.GetExpression(
-                        Generator.WithExpression(
-                            Generator.VoidReturningLambdaExpression(
-                                new[] { Generator.IdentifierName("x") }
-                            ),
-                            Generator.IdentifierName("y")
-                        )
+                    Generator.WithExpression(
+                        Generator.VoidReturningLambdaExpression(
+                            new[] { Generator.IdentifierName("x") }
+                        ),
+                        Generator.IdentifierName("y")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "y",
                 Generator.GetExpression(
-                        Generator.WithExpression(
-                            Generator.ValueReturningLambdaExpression(
-                                "p",
-                                Generator.IdentifierName("x")
-                            ),
-                            Generator.IdentifierName("y")
-                        )
+                    Generator.WithExpression(
+                        Generator.ValueReturningLambdaExpression(
+                            "p",
+                            Generator.IdentifierName("x")
+                        ),
+                        Generator.IdentifierName("y")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "y",
                 Generator.GetExpression(
-                        Generator.WithExpression(
-                            Generator.VoidReturningLambdaExpression(
-                                "p",
-                                Generator.IdentifierName("x")
-                            ),
-                            Generator.IdentifierName("y")
-                        )
+                    Generator.WithExpression(
+                        Generator.VoidReturningLambdaExpression("p", Generator.IdentifierName("x")),
+                        Generator.IdentifierName("y")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "y",
                 Generator.GetExpression(
-                        Generator.WithExpression(
-                            Generator.ValueReturningLambdaExpression(Generator.IdentifierName("x")),
-                            Generator.IdentifierName("y")
-                        )
+                    Generator.WithExpression(
+                        Generator.ValueReturningLambdaExpression(Generator.IdentifierName("x")),
+                        Generator.IdentifierName("y")
                     )
+                )
                     .ToString()
             );
             Assert.Equal(
                 "y",
                 Generator.GetExpression(
-                        Generator.WithExpression(
-                            Generator.VoidReturningLambdaExpression(Generator.IdentifierName("x")),
-                            Generator.IdentifierName("y")
-                        )
+                    Generator.WithExpression(
+                        Generator.VoidReturningLambdaExpression(Generator.IdentifierName("x")),
+                        Generator.IdentifierName("y")
                     )
+                )
                     .ToString()
             );
 
@@ -5635,8 +5620,8 @@ public class C
             Assert.Equal(
                 "y",
                 Generator.GetExpression(
-                        Generator.WithExpression(method, Generator.IdentifierName("y"))
-                    )
+                    Generator.WithExpression(method, Generator.IdentifierName("y"))
+                )
                     .ToString()
             );
 
@@ -5654,8 +5639,8 @@ public class C
             Assert.Equal(
                 "y",
                 Generator.GetExpression(
-                        Generator.WithExpression(local, Generator.IdentifierName("y"))
-                    )
+                    Generator.WithExpression(local, Generator.IdentifierName("y"))
+                )
                     .ToString()
             );
         }
@@ -5915,22 +5900,22 @@ public class C
             Assert.Equal(
                 "500",
                 Generator.GetExpression(
-                        Generator.WithExpression(x, Generator.LiteralExpression(500))
-                    )
+                    Generator.WithExpression(x, Generator.LiteralExpression(500))
+                )
                     .ToString()
             );
             Assert.Equal(
                 "500",
                 Generator.GetExpression(
-                        Generator.WithExpression(y, Generator.LiteralExpression(500))
-                    )
+                    Generator.WithExpression(y, Generator.LiteralExpression(500))
+                )
                     .ToString()
             );
             Assert.Equal(
                 "500",
                 Generator.GetExpression(
-                        Generator.WithExpression(z, Generator.LiteralExpression(500))
-                    )
+                    Generator.WithExpression(z, Generator.LiteralExpression(500))
+                )
                     .ToString()
             );
         }
@@ -5961,8 +5946,8 @@ public class C
             Assert.Equal(
                 "500",
                 Generator.GetExpression(
-                        Generator.WithExpression(y, Generator.LiteralExpression(500))
-                    )
+                    Generator.WithExpression(y, Generator.LiteralExpression(500))
+                )
                     .ToString()
             );
         }
@@ -7237,10 +7222,10 @@ public class C : IDisposable
             var newRoot = root.ReplaceNode(decl, newDecl);
 
             var elasticOnlyFormatted = Formatter.Format(
-                    newRoot,
-                    SyntaxAnnotation.ElasticAnnotation,
-                    _workspace
-                )
+                newRoot,
+                SyntaxAnnotation.ElasticAnnotation,
+                _workspace
+            )
                 .ToFullString();
             Assert.Equal(expected, elasticOnlyFormatted);
         }

@@ -140,9 +140,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
                     return;
 
                 var blockStructure = await outliningService.GetBlockStructureAsync(
-                        documentSnapshotSpan.Document,
-                        context.CancellationToken
-                    )
+                    documentSnapshotSpan.Document,
+                    context.CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 ProcessSpans(
@@ -316,10 +316,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
 
             var sourceSpans = new List<object>()
             {
-                elisionSpan.Snapshot.CreateTrackingSpan(
-                    elisionSpan,
-                    SpanTrackingMode.EdgeExclusive
-                ),
+                elisionSpan.Snapshot
+                    .CreateTrackingSpan(elisionSpan, SpanTrackingMode.EdgeExclusive),
                 "..."
             };
 

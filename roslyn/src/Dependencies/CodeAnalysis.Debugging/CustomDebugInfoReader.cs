@@ -430,10 +430,11 @@ namespace Microsoft.CodeAnalysis.Debugging
                         if (!groupSizes.IsDefault)
                         {
                             throw new InvalidOperationException(
-                                string.Format(
-                                    "Expected at most one Using record for method {0}",
-                                    FormatMethodToken(methodToken)
-                                )
+                                string
+                                    .Format(
+                                        "Expected at most one Using record for method {0}",
+                                        FormatMethodToken(methodToken)
+                                    )
                             );
                         }
 
@@ -444,10 +445,11 @@ namespace Microsoft.CodeAnalysis.Debugging
                         if (!externAliasStrings.IsDefault)
                         {
                             throw new InvalidOperationException(
-                                string.Format(
-                                    "Did not expect both Forward and ForwardToModule records for method {0}",
-                                    FormatMethodToken(methodToken)
-                                )
+                                string
+                                    .Format(
+                                        "Did not expect both Forward and ForwardToModule records for method {0}",
+                                        FormatMethodToken(methodToken)
+                                    )
                             );
                         }
 
@@ -466,10 +468,11 @@ namespace Microsoft.CodeAnalysis.Debugging
                         if (!externAliasStrings.IsDefault)
                         {
                             throw new InvalidOperationException(
-                                string.Format(
-                                    "Expected at most one ForwardToModule record for method {0}",
-                                    FormatMethodToken(methodToken)
-                                )
+                                string
+                                    .Format(
+                                        "Expected at most one ForwardToModule record for method {0}",
+                                        FormatMethodToken(methodToken)
+                                    )
                             );
                         }
 
@@ -516,10 +519,11 @@ namespace Microsoft.CodeAnalysis.Debugging
                     if (pos >= importStrings.Length)
                     {
                         throw new InvalidOperationException(
-                            string.Format(
-                                "Group size indicates more imports than there are import strings (method {0}).",
-                                FormatMethodToken(methodToken)
-                            )
+                            string
+                                .Format(
+                                    "Group size indicates more imports than there are import strings (method {0}).",
+                                    FormatMethodToken(methodToken)
+                                )
                         );
                     }
 
@@ -527,10 +531,11 @@ namespace Microsoft.CodeAnalysis.Debugging
                     if (IsCSharpExternAliasInfo(importString))
                     {
                         throw new InvalidOperationException(
-                            string.Format(
-                                "Encountered extern alias info before all import strings were consumed (method {0}).",
-                                FormatMethodToken(methodToken)
-                            )
+                            string
+                                .Format(
+                                    "Encountered extern alias info before all import strings were consumed (method {0}).",
+                                    FormatMethodToken(methodToken)
+                                )
                         );
                     }
 
@@ -552,10 +557,11 @@ namespace Microsoft.CodeAnalysis.Debugging
                     if (!IsCSharpExternAliasInfo(importString))
                     {
                         throw new InvalidOperationException(
-                            string.Format(
-                                "Expected only extern alias info strings after consuming the indicated number of imports (method {0}).",
-                                FormatMethodToken(methodToken)
-                            )
+                            string
+                                .Format(
+                                    "Expected only extern alias info strings after consuming the indicated number of imports (method {0}).",
+                                    FormatMethodToken(methodToken)
+                                )
                         );
                     }
 
@@ -571,10 +577,11 @@ namespace Microsoft.CodeAnalysis.Debugging
                 if (pos < importStrings.Length)
                 {
                     throw new InvalidOperationException(
-                        string.Format(
-                            "Group size indicates fewer imports than there are import strings (method {0}).",
-                            FormatMethodToken(methodToken)
-                        )
+                        string
+                            .Format(
+                                "Group size indicates fewer imports than there are import strings (method {0}).",
+                                FormatMethodToken(methodToken)
+                            )
                     );
                 }
             }
@@ -612,12 +619,13 @@ namespace Microsoft.CodeAnalysis.Debugging
                 if ('0' <= ch1 && ch1 <= '9')
                 {
                     if (
-                        int.TryParse(
-                            importString.Substring(1),
-                            NumberStyles.None,
-                            CultureInfo.InvariantCulture,
-                            out var tempMethodToken
-                        )
+                        int
+                            .TryParse(
+                                importString.Substring(1),
+                                NumberStyles.None,
+                                CultureInfo.InvariantCulture,
+                                out var tempMethodToken
+                            )
                     )
                     {
                         importStrings = getMethodImportStrings(tempMethodToken, arg);
@@ -634,12 +642,13 @@ namespace Microsoft.CodeAnalysis.Debugging
             if (globalVersion != CustomDebugInfoConstants.Version)
             {
                 throw new InvalidOperationException(
-                    string.Format(
-                        "Method {0}: Expected version {1}, but found version {2}.",
-                        FormatMethodToken(methodToken),
-                        CustomDebugInfoConstants.Version,
-                        globalVersion
-                    )
+                    string
+                        .Format(
+                            "Method {0}: Expected version {1}, but found version {2}.",
+                            FormatMethodToken(methodToken),
+                            CustomDebugInfoConstants.Version,
+                            globalVersion
+                        )
                 );
             }
         }

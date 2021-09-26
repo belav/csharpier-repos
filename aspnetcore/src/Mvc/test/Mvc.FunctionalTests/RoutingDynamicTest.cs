@@ -148,8 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Regression test for https://github.com/dotnet/aspnetcore/issues/13996
             // Arrange
             var client = Factory.WithWebHostBuilder(
-                    b => b.UseStartup<StartupForDynamicAndRazorPages>()
-                )
+                b => b.UseStartup<StartupForDynamicAndRazorPages>()
+            )
                 .CreateDefaultClient();
             var url = "/PageWithLinks";
 
@@ -168,8 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Regression test for https://github.com/dotnet/aspnetcore/issues/13996
             // Arrange
             var client = Factory.WithWebHostBuilder(
-                    b => b.UseStartup<StartupForDynamicAndRazorPages>()
-                )
+                b => b.UseStartup<StartupForDynamicAndRazorPages>()
+            )
                 .CreateDefaultClient();
             var url = "/de/area%3Dadmin,controller%3Ddynamic,action%3Dindex";
 

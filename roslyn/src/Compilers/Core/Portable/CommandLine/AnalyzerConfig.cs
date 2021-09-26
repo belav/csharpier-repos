@@ -94,9 +94,11 @@ namespace Microsoft.CodeAnalysis
         /// Comparer for sorting <see cref="AnalyzerConfig"/> files by <see cref="NormalizedDirectory"/> path length.
         /// </summary>
         internal static Comparer<AnalyzerConfig> DirectoryLengthComparer { get; } =
-            Comparer<AnalyzerConfig>.Create(
-                (e1, e2) => e1.NormalizedDirectory.Length.CompareTo(e2.NormalizedDirectory.Length)
-            );
+            Comparer<AnalyzerConfig>
+                .Create(
+                    (e1, e2) =>
+                        e1.NormalizedDirectory.Length.CompareTo(e2.NormalizedDirectory.Length)
+                );
 
         internal ImmutableArray<Section> NamedSections { get; }
 

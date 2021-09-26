@@ -70,13 +70,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                     services =>
                     {
-                        services.AddSignalR()
-                            .AddHubOptions<MethodHub>(
-                                options =>
-                                {
-                                    options.AddFilter(new VerifyMethodFilter(tcsService));
-                                }
-                            );
+                        services.AddSignalR().AddHubOptions<MethodHub>(
+                            options =>
+                            {
+                                options.AddFilter(new VerifyMethodFilter(tcsService));
+                            }
+                        );
                     },
                     LoggerFactory
                 );
@@ -94,13 +93,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                     services =>
                     {
-                        services.AddSignalR()
-                            .AddHubOptions<MethodHub>(
-                                options =>
-                                {
-                                    options.AddFilter<VerifyMethodFilter>();
-                                }
-                            );
+                        services.AddSignalR().AddHubOptions<MethodHub>(
+                            options =>
+                            {
+                                options.AddFilter<VerifyMethodFilter>();
+                            }
+                        );
 
                         services.AddSingleton(tcsService);
                     },
@@ -120,13 +118,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                     services =>
                     {
-                        services.AddSignalR()
-                            .AddHubOptions<MethodHub>(
-                                options =>
-                                {
-                                    options.AddFilter(typeof(VerifyMethodFilter));
-                                }
-                            );
+                        services.AddSignalR().AddHubOptions<MethodHub>(
+                            options =>
+                            {
+                                options.AddFilter(typeof(VerifyMethodFilter));
+                            }
+                        );
 
                         services.AddSingleton(tcsService);
                     },
@@ -177,13 +174,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                     services =>
                     {
-                        services.AddSignalR()
-                            .AddHubOptions<DynamicTestHub>(
-                                options =>
-                                {
-                                    options.AddFilter(typeof(EmptyFilter));
-                                }
-                            );
+                        services.AddSignalR().AddHubOptions<DynamicTestHub>(
+                            options =>
+                            {
+                                options.AddFilter(typeof(EmptyFilter));
+                            }
+                        );
                     },
                     LoggerFactory
                 );
@@ -333,14 +329,13 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                     services =>
                     {
-                        services.AddSignalR()
-                            .AddHubOptions<MethodHub>(
-                                options =>
-                                {
-                                    options.AddFilter(new VerifyMethodFilter(tcsService1));
-                                    options.AddFilter<VerifyMethodFilter>();
-                                }
-                            );
+                        services.AddSignalR().AddHubOptions<MethodHub>(
+                            options =>
+                            {
+                                options.AddFilter(new VerifyMethodFilter(tcsService1));
+                                options.AddFilter<VerifyMethodFilter>();
+                            }
+                        );
 
                         services.AddSingleton(tcsService2);
                     },
@@ -458,14 +453,13 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                     services =>
                     {
-                        services.AddSignalR()
-                            .AddHubOptions<MethodHub>(
-                                options =>
-                                {
-                                    options.AddFilter(new SyncPointFilter(syncPoints1));
-                                    options.AddFilter(new SyncPointFilter(syncPoints2));
-                                }
-                            );
+                        services.AddSignalR().AddHubOptions<MethodHub>(
+                            options =>
+                            {
+                                options.AddFilter(new SyncPointFilter(syncPoints1));
+                                options.AddFilter(new SyncPointFilter(syncPoints2));
+                            }
+                        );
                     },
                     LoggerFactory
                 );
@@ -526,17 +520,16 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     services =>
                     {
                         services.AddSignalR(
-                                options =>
-                                {
-                                    options.AddFilter(new SyncPointFilter(syncPoints1));
-                                }
-                            )
-                            .AddHubOptions<MethodHub>(
-                                options =>
-                                {
-                                    options.AddFilter(new SyncPointFilter(syncPoints2));
-                                }
-                            );
+                            options =>
+                            {
+                                options.AddFilter(new SyncPointFilter(syncPoints1));
+                            }
+                        ).AddHubOptions<MethodHub>(
+                            options =>
+                            {
+                                options.AddFilter(new SyncPointFilter(syncPoints2));
+                            }
+                        );
                     },
                     LoggerFactory
                 );

@@ -419,7 +419,8 @@ public class Point
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(21, 19),
                 // (22,22): error CS8715: Duplicate null suppression operator ('!')
                 //         if (i is < ((default)!!)) {} // error 15
-                Diagnostic(ErrorCode.ERR_DuplicateNullSuppression, "default").WithLocation(22, 22),
+                Diagnostic(ErrorCode.ERR_DuplicateNullSuppression, "default")
+                    .WithLocation(22, 22),
                 // (22,22): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         if (i is < ((default)!!)) {} // error 15
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(22, 22),
@@ -474,26 +475,26 @@ public class Point
     }
 }";
             CreateCompilation(
-                    source,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.RegularWithoutRecursivePatterns
-                )
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularWithoutRecursivePatterns
+            )
                 .VerifyDiagnostics(
                     // (5,17): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                     //         var r = 1 switch { _ => 0, };
                     Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
-                            "1 switch { _ => 0, }"
-                        )
+                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                        "1 switch { _ => 0, }"
+                    )
                         .WithArguments("recursive patterns", "8.0")
                         .WithLocation(5, 17)
                 );
 
             CreateCompilation(
-                    source,
-                    options: TestOptions.DebugExe,
-                    parseOptions: TestOptions.Regular8
-                )
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular8
+            )
                 .VerifyDiagnostics();
         }
 
@@ -511,19 +512,18 @@ public class Point
         var r2 = System.Console.Write(1) switch { _ => 0 };
     }
 }";
-            CreatePatternCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,18): error CS8117: Invalid operand for pattern match; value required, but found '(int, <null>)'.
-                    //         var r1 = (1, null) switch ( _ => 0 );
-                    Diagnostic(ErrorCode.ERR_BadPatternExpression, "(1, null)")
-                        .WithArguments("(int, <null>)")
-                        .WithLocation(5, 18),
-                    // (6,18): error CS8117: Invalid operand for pattern match; value required, but found 'void'.
-                    //         var r2 = System.Console.Write(1) switch ( _ => 0 );
-                    Diagnostic(ErrorCode.ERR_BadPatternExpression, "System.Console.Write(1)")
-                        .WithArguments("void")
-                        .WithLocation(6, 18)
-                );
+            CreatePatternCompilation(source).VerifyDiagnostics(
+                // (5,18): error CS8117: Invalid operand for pattern match; value required, but found '(int, <null>)'.
+                //         var r1 = (1, null) switch ( _ => 0 );
+                Diagnostic(ErrorCode.ERR_BadPatternExpression, "(1, null)")
+                    .WithArguments("(int, <null>)")
+                    .WithLocation(5, 18),
+                // (6,18): error CS8117: Invalid operand for pattern match; value required, but found 'void'.
+                //         var r2 = System.Console.Write(1) switch ( _ => 0 );
+                Diagnostic(ErrorCode.ERR_BadPatternExpression, "System.Console.Write(1)")
+                    .WithArguments("void")
+                    .WithLocation(6, 18)
+            );
         }
 
         [Fact]
@@ -543,27 +543,26 @@ public class Point
 }";
             // This is admittedly poor syntax error recovery (for the line declaring r2),
             // but this test demonstrates that it is a syntax error.
-            CreatePatternCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,34): error CS1003: Syntax error, '=>' expected
-                    //         var r1 = b switch { true ? true : true => true, false => false };
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "?")
-                        .WithArguments("=>", "?")
-                        .WithLocation(6, 34),
-                    // (6,34): error CS1525: Invalid expression term '?'
-                    //         var r1 = b switch { true ? true : true => true, false => false };
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?")
-                        .WithArguments("?")
-                        .WithLocation(6, 34),
-                    // (6,48): error CS1003: Syntax error, ',' expected
-                    //         var r1 = b switch { true ? true : true => true, false => false };
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                        .WithArguments(",", "=>")
-                        .WithLocation(6, 48),
-                    // (6,48): error CS8504: Pattern missing
-                    //         var r1 = b switch { true ? true : true => true, false => false };
-                    Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(6, 48)
-                );
+            CreatePatternCompilation(source).VerifyDiagnostics(
+                // (6,34): error CS1003: Syntax error, '=>' expected
+                //         var r1 = b switch { true ? true : true => true, false => false };
+                Diagnostic(ErrorCode.ERR_SyntaxError, "?")
+                    .WithArguments("=>", "?")
+                    .WithLocation(6, 34),
+                // (6,34): error CS1525: Invalid expression term '?'
+                //         var r1 = b switch { true ? true : true => true, false => false };
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?")
+                    .WithArguments("?")
+                    .WithLocation(6, 34),
+                // (6,48): error CS1003: Syntax error, ',' expected
+                //         var r1 = b switch { true ? true : true => true, false => false };
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
+                    .WithArguments(",", "=>")
+                    .WithLocation(6, 48),
+                // (6,48): error CS8504: Pattern missing
+                //         var r1 = b switch { true ? true : true => true, false => false };
+                Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(6, 48)
+            );
         }
 
         [Fact]
@@ -610,18 +609,16 @@ public class Point
         var r = 1 switch { };
     }
 }";
-            CreatePatternCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,19): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
-                    //         var r = 1 switch { };
-                    Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
-                        .WithArguments("_")
-                        .WithLocation(5, 19),
-                    // (5,19): error CS8506: No best type was found for the switch expression.
-                    //         var r = 1 switch { };
-                    Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
-                        .WithLocation(5, 19)
-                );
+            CreatePatternCompilation(source).VerifyDiagnostics(
+                // (5,19): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
+                //         var r = 1 switch { };
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("_")
+                    .WithLocation(5, 19),
+                // (5,19): error CS8506: No best type was found for the switch expression.
+                //         var r = 1 switch { };
+                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(5, 19)
+            );
         }
 
         [Fact]
@@ -639,14 +636,13 @@ public class Point
     public static void M() {}
     public delegate void D();
 }";
-            CreatePatternCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,19): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '3' is not covered.
-                    //         var x = 1 switch { 0 => M, 1 => new D(M), 2 => M };
-                    Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
-                        .WithArguments("3")
-                        .WithLocation(5, 19)
-                );
+            CreatePatternCompilation(source).VerifyDiagnostics(
+                // (5,19): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '3' is not covered.
+                //         var x = 1 switch { 0 => M, 1 => new D(M), 2 => M };
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("3")
+                    .WithLocation(5, 19)
+            );
         }
 
         [Fact]
@@ -683,14 +679,13 @@ public class Point
     }
     static int M(int i) => i;
 }";
-            CreatePatternCompilation(source)
-                .VerifyDiagnostics(
-                    // (8,34): error CS0165: Use of unassigned local variable 'u'
-                    //         System.Console.WriteLine(u);
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "u")
-                        .WithArguments("u")
-                        .WithLocation(8, 34)
-                );
+            CreatePatternCompilation(source).VerifyDiagnostics(
+                // (8,34): error CS0165: Use of unassigned local variable 'u'
+                //         System.Console.WriteLine(u);
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "u")
+                    .WithArguments("u")
+                    .WithLocation(8, 34)
+            );
         }
 
         [Fact]
@@ -709,14 +704,13 @@ public class Point
     }
     static int M(int i) => i;
 }";
-            CreatePatternCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,47): error CS0165: Use of unassigned local variable 'u'
-                    //         var x = q switch { 0 => u=0, 1 => u=M(u), _ => u=2 };
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "u")
-                        .WithArguments("u")
-                        .WithLocation(7, 47)
-                );
+            CreatePatternCompilation(source).VerifyDiagnostics(
+                // (7,47): error CS0165: Use of unassigned local variable 'u'
+                //         var x = q switch { 0 => u=0, 1 => u=M(u), _ => u=2 };
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "u")
+                    .WithArguments("u")
+                    .WithLocation(7, 47)
+            );
         }
 
         [Fact]
@@ -1278,17 +1272,17 @@ class Program1
                 // (6,26): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //     bool M2(object o) => o switch { 1 => true, _ => false };
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
-                        "o switch { 1 => true, _ => false }"
-                    )
+                    ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                    "o switch { 1 => true, _ => false }"
+                )
                     .WithArguments("recursive patterns", "8.0")
                     .WithLocation(6, 26),
                 // (12,26): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //     bool M4(object o) => o switch { 1 => true, _ => false };
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
-                        "o switch { 1 => true, _ => false }"
-                    )
+                    ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                    "o switch { 1 => true, _ => false }"
+                )
                     .WithArguments("recursive patterns", "8.0")
                     .WithLocation(12, 26)
             };
@@ -1447,9 +1441,9 @@ class Program1
                 // (5,34): error CS8415: An expression of type 'string' can never match the provided pattern.
                 //         System.Console.WriteLine("frog" is string { Length: 4, Length: 5 });
                 Diagnostic(
-                        ErrorCode.ERR_IsPatternImpossible,
-                        @"""frog"" is string { Length: 4, Length: 5 }"
-                    )
+                    ErrorCode.ERR_IsPatternImpossible,
+                    @"""frog"" is string { Length: 4, Length: 5 }"
+                )
                     .WithArguments("string")
                     .WithLocation(5, 34)
             );
@@ -1494,9 +1488,9 @@ class Program1
                 // (6,34): warning CS8416: The given expression never matches the provided pattern.
                 //         System.Console.WriteLine(s is string { Length: 3 });
                 Diagnostic(
-                        ErrorCode.WRN_GivenExpressionNeverMatchesPattern,
-                        "s is string { Length: 3 }"
-                    )
+                    ErrorCode.WRN_GivenExpressionNeverMatchesPattern,
+                    "s is string { Length: 3 }"
+                )
                     .WithLocation(6, 34)
             );
         }
@@ -1573,9 +1567,9 @@ class Program1
                 // (7,13): warning CS8416: The given expression never matches the provided pattern.
                 //         if (s is string { Length: 3 })
                 Diagnostic(
-                        ErrorCode.WRN_GivenExpressionNeverMatchesPattern,
-                        "s is string { Length: 3 }"
-                    )
+                    ErrorCode.WRN_GivenExpressionNeverMatchesPattern,
+                    "s is string { Length: 3 }"
+                )
                     .WithLocation(7, 13)
             );
         }
@@ -2159,9 +2153,8 @@ class Blah
                 "return obj is global::Class1 @class && this.i == @class.i;",
                 returnStatement.ToString()
             );
-            var modifiedReturnStatement = (ReturnStatementSyntax)new RemoveAliasQualifiers().Visit(
-                returnStatement
-            );
+            var modifiedReturnStatement = (ReturnStatementSyntax)new RemoveAliasQualifiers()
+                .Visit(returnStatement);
             Assert.Equal(
                 "return obj is Class1 @class && this.i == @class.i;",
                 modifiedReturnStatement.ToString()
@@ -2211,9 +2204,8 @@ class Blah
                 .OfType<ReturnStatementSyntax>()
                 .Single();
             Assert.Equal("return obj is global::Class1 @class;", returnStatement.ToString());
-            var modifiedReturnStatement = (ReturnStatementSyntax)new RemoveAliasQualifiers().Visit(
-                returnStatement
-            );
+            var modifiedReturnStatement = (ReturnStatementSyntax)new RemoveAliasQualifiers()
+                .Visit(returnStatement);
             Assert.Equal("return obj is Class1 @class;", modifiedReturnStatement.ToString());
             var gotModel = model.TryGetSpeculativeSemanticModel(
                 returnStatement.Location.SourceSpan.Start,
@@ -2599,10 +2591,10 @@ public class C
 }";
             CreateCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics();
             CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseDll,
-                    parseOptions: TestOptions.Regular7_3
-                )
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.Regular7_3
+            )
                 .VerifyDiagnostics(
                     // (5,21): error CS8511: An expression of type 'T' cannot be handled by a pattern of type '<null>'. Please use language version '8.0' or greater to match an open type with a constant pattern.
                     //         return t is null; // 1
@@ -2646,10 +2638,10 @@ public class C
 ";
             CreateCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics();
             CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseDll,
-                    parseOptions: TestOptions.Regular7_3
-                )
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.Regular7_3
+            )
                 .VerifyDiagnostics();
         }
 
@@ -2677,10 +2669,10 @@ public class C
 }
 ";
             CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseDll,
-                    parseOptions: TestOptions.RegularWithPatternCombinators
-                )
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            )
                 .VerifyDiagnostics(
                     // (5,13): warning CS8519: The given expression never matches the provided pattern.
                     //         _ = 1 is < 0; // 1
@@ -2752,10 +2744,10 @@ public class C
 }
 ";
             CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseDll,
-                    parseOptions: TestOptions.RegularWithPatternCombinators
-                )
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            )
                 .VerifyDiagnostics(
                     // (7,23): warning CS0162: Unreachable code detected
                     //             case < 0: break; // 1
@@ -2798,10 +2790,10 @@ public class C
 }
 ";
             CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseDll,
-                    parseOptions: TestOptions.RegularWithPatternCombinators
-                )
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            )
                 .VerifyDiagnostics(
                     // (7,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                     //             case < int.MinValue: break; // 1
@@ -2844,10 +2836,10 @@ public class C
 }
 ";
             CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseDll,
-                    parseOptions: TestOptions.RegularWithPatternCombinators
-                )
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            )
                 .VerifyDiagnostics(
                     // (5,13): error CS8518: An expression of type 'int' can never match the provided pattern.
                     //         _ = i is < int.MinValue; // 1
@@ -2895,10 +2887,10 @@ public class C
 }
 ";
             CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseDll,
-                    parseOptions: TestOptions.RegularWithPatternCombinators
-                )
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            )
                 .VerifyDiagnostics(
                     // (6,13): warning CS8794: An expression of type 'int' always matches the provided pattern.
                     //         _ = i is >= int.MinValue; // 1
@@ -2938,10 +2930,10 @@ public class C
 }
 ";
             CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseDll,
-                    parseOptions: TestOptions.RegularWithPatternCombinators
-                )
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            )
                 .VerifyDiagnostics(
                     // (5,19): error CS8121: An expression of type 'string' cannot be handled by a pattern of type 'Delegate'.
                     //         _ = s is (System.Delegate); // impossible parenthesized type pattern
@@ -3048,10 +3040,10 @@ public class C {
 }
 ";
             CreateCompilation(
-                    source,
-                    options: TestOptions.ReleaseDll,
-                    parseOptions: TestOptions.RegularWithPatternCombinators
-                )
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            )
                 .VerifyDiagnostics(
                     // (6,22): error CS8121: An expression of type 'string' cannot be handled by a pattern of type 'Delegate'.
                     //         _ = s is not System.Delegate;   // always negated type pattern
@@ -3176,9 +3168,9 @@ class F
 }
 ";
             var comp = CreateCompilation(
-                    source,
-                    parseOptions: TestOptions.RegularWithPatternCombinators
-                )
+                source,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            )
                 .VerifyDiagnostics(
                     // (11,15): error CS8506: No best type was found for the switch expression.
                     //         _ = i switch // 1
@@ -3440,14 +3432,13 @@ class C
         _ = is this.F(1);
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,13): error CS1525: Invalid expression term 'is'
-                    //         _ = is this.F(1);
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "is")
-                        .WithArguments("is")
-                        .WithLocation(6, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,13): error CS1525: Invalid expression term 'is'
+                //         _ = is this.F(1);
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "is")
+                    .WithArguments("is")
+                    .WithLocation(6, 13)
+            );
         }
 
         [Fact, WorkItem(45946, "https://github.com/dotnet/roslyn/issues/45946")]
@@ -3462,19 +3453,18 @@ class C
         _ = switch { this.F(1) => 1 };
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,13): error CS1525: Invalid expression term 'switch'
-                    //         _ = switch { this.F(1) => 1 };
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "switch")
-                        .WithArguments("switch")
-                        .WithLocation(6, 13),
-                    // (6,13): warning CS8848: Operator 'switch' cannot be used here due to precedence. Use parentheses to disambiguate.
-                    //         _ = switch { this.F(1) => 1 };
-                    Diagnostic(ErrorCode.WRN_PrecedenceInversion, "switch")
-                        .WithArguments("switch")
-                        .WithLocation(6, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,13): error CS1525: Invalid expression term 'switch'
+                //         _ = switch { this.F(1) => 1 };
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "switch")
+                    .WithArguments("switch")
+                    .WithLocation(6, 13),
+                // (6,13): warning CS8848: Operator 'switch' cannot be used here due to precedence. Use parentheses to disambiguate.
+                //         _ = switch { this.F(1) => 1 };
+                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "switch")
+                    .WithArguments("switch")
+                    .WithLocation(6, 13)
+            );
         }
 
         [Fact, WorkItem(48112, "https://github.com/dotnet/roslyn/issues/48112")]
@@ -3490,19 +3480,18 @@ class C
         _ = o switch { int? => 1, _ => 0 };
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (6,25): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the underlying type 'int' instead.
-                    //         _ = o switch { (int?) => 1, _ => 0 };
-                    Diagnostic(ErrorCode.ERR_PatternNullableType, "int?")
-                        .WithArguments("int")
-                        .WithLocation(6, 25),
-                    // (7,24): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the underlying type 'int' instead.
-                    //         _ = o switch { int? => 1, _ => 0 };
-                    Diagnostic(ErrorCode.ERR_PatternNullableType, "int?")
-                        .WithArguments("int")
-                        .WithLocation(7, 24)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (6,25): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the underlying type 'int' instead.
+                //         _ = o switch { (int?) => 1, _ => 0 };
+                Diagnostic(ErrorCode.ERR_PatternNullableType, "int?")
+                    .WithArguments("int")
+                    .WithLocation(6, 25),
+                // (7,24): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the underlying type 'int' instead.
+                //         _ = o switch { int? => 1, _ => 0 };
+                Diagnostic(ErrorCode.ERR_PatternNullableType, "int?")
+                    .WithArguments("int")
+                    .WithLocation(7, 24)
+            );
         }
     }
 }

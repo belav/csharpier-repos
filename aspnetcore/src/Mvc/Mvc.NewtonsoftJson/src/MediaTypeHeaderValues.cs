@@ -8,13 +8,13 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
     internal static class MediaTypeHeaderValues
     {
         public static readonly MediaTypeHeaderValue ApplicationJson = MediaTypeHeaderValue.Parse(
-                "application/json"
-            )
+            "application/json"
+        )
             .CopyAsReadOnly();
 
         public static readonly MediaTypeHeaderValue TextJson = MediaTypeHeaderValue.Parse(
-                "text/json"
-            )
+            "text/json"
+        )
             .CopyAsReadOnly();
 
         public static readonly MediaTypeHeaderValue ApplicationJsonPatch =

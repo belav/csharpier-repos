@@ -68,10 +68,10 @@ namespace System.IO.Compression.Tests
             {
                 IEnumerable<string> actual = archive.Entries.Select(entry => entry.Name);
                 IEnumerable<string> expected = Directory.EnumerateFileSystemEntries(
-                        zfolder("unicode"),
-                        "*",
-                        SearchOption.AllDirectories
-                    )
+                    zfolder("unicode"),
+                    "*",
+                    SearchOption.AllDirectories
+                )
                     .ToList();
                 Assert.True(
                     Enumerable.SequenceEqual(
@@ -440,9 +440,9 @@ namespace System.IO.Compression.Tests
             using (
                 StreamWriter writer = new StreamWriter(
                     archive.CreateEntry(
-                            "testdir" + Path.DirectorySeparatorChar,
-                            CompressionLevel.Optimal
-                        )
+                        "testdir" + Path.DirectorySeparatorChar,
+                        CompressionLevel.Optimal
+                    )
                         .Open()
                 )
             )

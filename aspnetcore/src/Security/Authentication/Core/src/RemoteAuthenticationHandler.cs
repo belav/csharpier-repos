@@ -219,10 +219,8 @@ namespace Microsoft.AspNetCore.Authentication
                     ticket != null
                     && ticket.Principal != null
                     && ticket.Properties != null
-                    && ticket.Properties.Items.TryGetValue(
-                        AuthSchemeKey,
-                        out var authenticatedScheme
-                    )
+                    && ticket.Properties.Items
+                        .TryGetValue(AuthSchemeKey, out var authenticatedScheme)
                     && string.Equals(Scheme.Name, authenticatedScheme, StringComparison.Ordinal)
                 )
                 {

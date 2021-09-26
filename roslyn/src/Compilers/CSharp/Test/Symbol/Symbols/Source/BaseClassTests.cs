@@ -207,15 +207,14 @@ class B<T> : A<B<T>> {
 }
 ";
             var comp = CreateCompilation(text);
-            comp.GetDeclarationDiagnostics()
-                .Verify(
-                    // (2,7): error CS0146: Circular base type dependency involving 'B<A<T>>' and 'A<T>'
-                    // class A<T> : B<A<T>> { }
-                    Diagnostic(ErrorCode.ERR_CircularBase, "A").WithArguments("B<A<T>>", "A<T>"),
-                    // (3,7): error CS0146: Circular base type dependency involving 'A<B<T>>' and 'B<T>'
-                    // class B<T> : A<B<T>> {
-                    Diagnostic(ErrorCode.ERR_CircularBase, "B").WithArguments("A<B<T>>", "B<T>")
-                );
+            comp.GetDeclarationDiagnostics().Verify(
+                // (2,7): error CS0146: Circular base type dependency involving 'B<A<T>>' and 'A<T>'
+                // class A<T> : B<A<T>> { }
+                Diagnostic(ErrorCode.ERR_CircularBase, "A").WithArguments("B<A<T>>", "A<T>"),
+                // (3,7): error CS0146: Circular base type dependency involving 'A<B<T>>' and 'B<T>'
+                // class B<T> : A<B<T>> {
+                Diagnostic(ErrorCode.ERR_CircularBase, "B").WithArguments("A<B<T>>", "B<T>")
+            );
         }
 
         [Fact]
@@ -723,11 +722,10 @@ class B : G {
 class A : A { } 
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (2,7): error CS0146: Circular base type dependency involving 'A' and 'A'
-                    Diagnostic(ErrorCode.ERR_CircularBase, "A").WithArguments("A", "A")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (2,7): error CS0146: Circular base type dependency involving 'A' and 'A'
+                Diagnostic(ErrorCode.ERR_CircularBase, "A").WithArguments("A", "A")
+            );
         }
 
         [Fact]
@@ -739,13 +737,12 @@ class A : B { }
 class B : A { } 
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (2,7): error CS0146: Circular base type dependency involving 'B' and 'A'
-                    Diagnostic(ErrorCode.ERR_CircularBase, "A").WithArguments("B", "A"),
-                    // (3,7): error CS0146: Circular base type dependency involving 'A' and 'B'
-                    Diagnostic(ErrorCode.ERR_CircularBase, "B").WithArguments("A", "B")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (2,7): error CS0146: Circular base type dependency involving 'B' and 'A'
+                Diagnostic(ErrorCode.ERR_CircularBase, "A").WithArguments("B", "A"),
+                // (3,7): error CS0146: Circular base type dependency involving 'A' and 'B'
+                Diagnostic(ErrorCode.ERR_CircularBase, "B").WithArguments("A", "B")
+            );
         }
 
         [Fact]
@@ -759,11 +756,10 @@ class A : A.B
 }
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (2,7): error CS0146: Circular base type dependency involving 'A.B' and 'A'
-                    Diagnostic(ErrorCode.ERR_CircularBase, "A").WithArguments("A.B", "A")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (2,7): error CS0146: Circular base type dependency involving 'A.B' and 'A'
+                Diagnostic(ErrorCode.ERR_CircularBase, "A").WithArguments("A.B", "A")
+            );
         }
 
         [Fact]
@@ -947,12 +943,10 @@ class C : A<D.B> { }
 class D : C { }
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (7,15): error CS0426: The type name 'B' does not exist in the type 'D'
-                    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInAgg, "B")
-                        .WithArguments("B", "D")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (7,15): error CS0426: The type name 'B' does not exist in the type 'D'
+                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInAgg, "B").WithArguments("B", "D")
+            );
         }
 
         [Fact]
@@ -970,11 +964,10 @@ class C : A<C>, I<C.B> { }
 interface I<T> { }
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (7,21): error CS0146: Circular base type dependency involving 'C' and 'C'
-                    Diagnostic(ErrorCode.ERR_CircularBase, "B").WithArguments("C", "C")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (7,21): error CS0146: Circular base type dependency involving 'C' and 'C'
+                Diagnostic(ErrorCode.ERR_CircularBase, "B").WithArguments("C", "C")
+            );
         }
 
         [Fact]
@@ -1038,15 +1031,13 @@ class B : A<B.Y.Z>
 
 ";
 
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (15,17): error CS0146: Circular base type dependency involving 'B.Y' and 'B'
-                    Diagnostic(ErrorCode.ERR_CircularBase, "X").WithArguments("B", "B.Y"),
-                    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInAgg, "Z")
-                        .WithArguments("Z", "B.Y"),
-                    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInAgg, "V")
-                        .WithArguments("V", "B.Y")
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (15,17): error CS0146: Circular base type dependency involving 'B.Y' and 'B'
+                Diagnostic(ErrorCode.ERR_CircularBase, "X").WithArguments("B", "B.Y"),
+                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInAgg, "Z")
+                    .WithArguments("Z", "B.Y"),
+                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInAgg, "V").WithArguments("V", "B.Y")
+            );
         }
 
         [Fact]
@@ -1529,9 +1520,8 @@ namespace @if
     public class @float : @int<@break>, @if.@break { }
 }";
             var comp = CreateCompilation(Parse(text));
-            NamespaceSymbol nif = (NamespaceSymbol)comp.SourceModule.GlobalNamespace.GetMembers(
-                    "if"
-                )
+            NamespaceSymbol nif = (NamespaceSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("if")
                 .Single();
             Assert.Equal("if", nif.Name);
             Assert.Equal("@if", nif.ToString());
@@ -1558,9 +1548,8 @@ namespace @if
     public class @float : @int<@break> : @if.@break { }
 }";
             var comp = CreateCompilation(Parse(text));
-            NamespaceSymbol nif = (NamespaceSymbol)comp.SourceModule.GlobalNamespace.GetMembers(
-                    "if"
-                )
+            NamespaceSymbol nif = (NamespaceSymbol)comp.SourceModule.GlobalNamespace
+                .GetMembers("if")
                 .Single();
             Assert.Equal("if", nif.Name);
             Assert.Equal("@if", nif.ToString());
@@ -1954,11 +1943,11 @@ public interface I2 : I<int> {}";
     }
 }";
             CreateCompilationWithILAndMscorlib40(
-                    csharp,
-                    il,
-                    appendDefaultHeader: false,
-                    targetFramework: TargetFramework.Standard
-                )
+                csharp,
+                il,
+                appendDefaultHeader: false,
+                targetFramework: TargetFramework.Standard
+            )
                 .VerifyDiagnostics(
                     // (4,30): error CS0648: 'I<dynamic>' is a type not supported by the language
                     //     static void F(I<dynamic> x)
@@ -2169,7 +2158,8 @@ class D
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using D;").WithLocation(2, 1),
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using A<int>.B;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A<int>.B;").WithLocation(1, 1)
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A<int>.B;")
+                    .WithLocation(1, 1)
             );
         }
 
@@ -2286,9 +2276,9 @@ namespace CrashTest
                 // (2,14): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'Crash<T>'. There is no implicit reference conversion from 'object' to 'CrashTest.Crash<object>.AbstractClass'.
                 // using static CrashTest.Crash<object>;
                 Diagnostic(
-                        ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
-                        "CrashTest.Crash<object>"
-                    )
+                    ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                    "CrashTest.Crash<object>"
+                )
                     .WithArguments(
                         "CrashTest.Crash<T>",
                         "CrashTest.Crash<object>.AbstractClass",
@@ -2433,9 +2423,9 @@ namespace CrashTest
                 // (2,1): hidden CS8019: Unnecessary using directive.
                 // using CrashTest.Crash<CrashTest.Class2>;
                 Diagnostic(
-                        ErrorCode.HDN_UnusedUsingDirective,
-                        "using CrashTest.Crash<CrashTest.Class2>;"
-                    )
+                    ErrorCode.HDN_UnusedUsingDirective,
+                    "using CrashTest.Crash<CrashTest.Class2>;"
+                )
                     .WithLocation(2, 1)
             );
         }

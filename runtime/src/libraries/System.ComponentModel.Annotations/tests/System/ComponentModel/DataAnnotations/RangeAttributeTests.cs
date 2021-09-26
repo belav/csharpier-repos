@@ -299,20 +299,16 @@ namespace System.ComponentModel.DataAnnotations.Tests
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
-                    new RangeAttribute(type, min, max)
-                    {
-                        ParseLimitsInInvariantCulture = true
-                    }.IsValid(null)
+                    new RangeAttribute(type, min, max) { ParseLimitsInInvariantCulture = true }
+                        .IsValid(null)
                 );
             }
 
             using (new ThreadCultureChange("fr-FR"))
             {
                 Assert.True(
-                    new RangeAttribute(type, min, max)
-                    {
-                        ParseLimitsInInvariantCulture = true
-                    }.IsValid(null)
+                    new RangeAttribute(type, min, max) { ParseLimitsInInvariantCulture = true }
+                        .IsValid(null)
                 );
             }
         }
@@ -406,10 +402,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
-                    new RangeAttribute(type, min, max)
-                    {
-                        ParseLimitsInInvariantCulture = true
-                    }.IsValid(value)
+                    new RangeAttribute(type, min, max) { ParseLimitsInInvariantCulture = true }
+                        .IsValid(value)
                 );
             }
 
@@ -439,10 +433,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
-                    new RangeAttribute(type, min, max)
-                    {
-                        ConvertValueInInvariantCulture = true
-                    }.IsValid(value)
+                    new RangeAttribute(type, min, max) { ConvertValueInInvariantCulture = true }
+                        .IsValid(value)
                 );
             }
 
@@ -473,7 +465,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                     {
                         ConvertValueInInvariantCulture = true,
                         ParseLimitsInInvariantCulture = true
-                    }.IsValid(value)
+                    }
+                        .IsValid(value)
                 );
             }
 
@@ -484,7 +477,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                     {
                         ConvertValueInInvariantCulture = true,
                         ParseLimitsInInvariantCulture = true
-                    }.IsValid(value)
+                    }
+                        .IsValid(value)
                 );
             }
         }
@@ -527,20 +521,16 @@ namespace System.ComponentModel.DataAnnotations.Tests
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
-                    new RangeAttribute(type, min, max)
-                    {
-                        ParseLimitsInInvariantCulture = true
-                    }.IsValid(value)
+                    new RangeAttribute(type, min, max) { ParseLimitsInInvariantCulture = true }
+                        .IsValid(value)
                 );
             }
 
             using (new ThreadCultureChange("fr-FR"))
             {
                 Assert.True(
-                    new RangeAttribute(type, min, max)
-                    {
-                        ParseLimitsInInvariantCulture = true
-                    }.IsValid(value)
+                    new RangeAttribute(type, min, max) { ParseLimitsInInvariantCulture = true }
+                        .IsValid(value)
                 );
             }
         }
@@ -561,10 +551,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.True(
-                    new RangeAttribute(type, min, max)
-                    {
-                        ConvertValueInInvariantCulture = true
-                    }.IsValid(value)
+                    new RangeAttribute(type, min, max) { ConvertValueInInvariantCulture = true }
+                        .IsValid(value)
                 );
             }
 
@@ -595,7 +583,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                     {
                         ConvertValueInInvariantCulture = true,
                         ParseLimitsInInvariantCulture = true
-                    }.IsValid(value)
+                    }
+                        .IsValid(value)
                 );
             }
 
@@ -606,7 +595,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                     {
                         ConvertValueInInvariantCulture = true,
                         ParseLimitsInInvariantCulture = true
-                    }.IsValid(value)
+                    }
+                        .IsValid(value)
                 );
             }
         }
@@ -690,10 +680,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             using (new ThreadCultureChange("fr-FR"))
             {
                 Assert.True(
-                    new RangeAttribute(type, min, max)
-                    {
-                        ConvertValueInInvariantCulture = true
-                    }.IsValid(value)
+                    new RangeAttribute(type, min, max) { ConvertValueInInvariantCulture = true }
+                        .IsValid(value)
                 );
             }
         }
@@ -770,10 +758,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.False(
-                    new RangeAttribute(type, min, max)
-                    {
-                        ParseLimitsInInvariantCulture = true
-                    }.IsValid(value)
+                    new RangeAttribute(type, min, max) { ParseLimitsInInvariantCulture = true }
+                        .IsValid(value)
                 );
             }
 
@@ -803,10 +789,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             using (new ThreadCultureChange("en-US"))
             {
                 Assert.False(
-                    new RangeAttribute(type, min, max)
-                    {
-                        ConvertValueInInvariantCulture = true
-                    }.IsValid(value)
+                    new RangeAttribute(type, min, max) { ConvertValueInInvariantCulture = true }
+                        .IsValid(value)
                 );
             }
 
@@ -837,7 +821,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                     {
                         ConvertValueInInvariantCulture = true,
                         ParseLimitsInInvariantCulture = true
-                    }.IsValid(value)
+                    }
+                        .IsValid(value)
                 );
             }
 
@@ -848,7 +833,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                     {
                         ConvertValueInInvariantCulture = true,
                         ParseLimitsInInvariantCulture = true
-                    }.IsValid(value)
+                    }
+                        .IsValid(value)
                 );
             }
         }

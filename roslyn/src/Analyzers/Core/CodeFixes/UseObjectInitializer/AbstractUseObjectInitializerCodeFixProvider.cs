@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                     TMemberAccessExpressionSyntax,
                     TAssignmentStatementSyntax,
                     TVariableDeclaratorSyntax
-                >.Analyze(semanticModel, syntaxFacts, objectCreation, cancellationToken);
+                >
+                    .Analyze(semanticModel, syntaxFacts, objectCreation, cancellationToken);
 
                 if (matches == null || matches.Value.Length == 0)
                 {

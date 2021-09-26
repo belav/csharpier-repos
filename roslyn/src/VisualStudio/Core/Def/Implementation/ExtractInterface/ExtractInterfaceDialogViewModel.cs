@@ -45,8 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             );
 
             MemberContainers = extractableMembers.Select(
-                    m => new MemberSymbolViewModel(m, glyphService)
-                )
+                m => new MemberSymbolViewModel(m, glyphService)
+            )
                 .OrderBy(s => s.SymbolName)
                 .ToList();
         }

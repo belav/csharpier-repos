@@ -100,9 +100,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             }
 
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    attribute,
-                    cancellationToken
-                )
+                attribute,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (
                 semanticModel.GetTypeInfo(attribute, cancellationToken).Type
@@ -118,9 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 return null;
             }
 
-            var accessibleConstructors = attributeType.InstanceConstructors.WhereAsArray(
-                    c => c.IsAccessibleWithin(within)
-                )
+            var accessibleConstructors = attributeType.InstanceConstructors
+                .WhereAsArray(c => c.IsAccessibleWithin(within))
                 .FilterToVisibleAndBrowsableSymbols(
                     document.ShouldHideAdvancedMembers(),
                     semanticModel.Compilation
@@ -144,17 +143,17 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             return CreateSignatureHelpItems(
                 accessibleConstructors.Select(
-                        c =>
-                            Convert(
-                                c,
-                                within,
-                                attribute,
-                                semanticModel,
-                                anonymousTypeDisplayService,
-                                documentationCommentFormatter,
-                                cancellationToken
-                            )
-                    )
+                    c =>
+                        Convert(
+                            c,
+                            within,
+                            attribute,
+                            semanticModel,
+                            anonymousTypeDisplayService,
+                            documentationCommentFormatter,
+                            cancellationToken
+                        )
+                )
                     .ToList(),
                 textSpan,
                 GetCurrentArgumentState(root, position, syntaxFacts, textSpan, cancellationToken),
@@ -203,10 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         )
         {
             var position = attribute.SpanStart;
-            var namedParameters = constructor.ContainingType.GetAttributeNamedParameters(
-                    semanticModel.Compilation,
-                    within
-                )
+            var namedParameters = constructor.ContainingType
+                .GetAttributeNamedParameters(semanticModel.Compilation, within)
                 .OrderBy(s => s.Name)
                 .ToList();
 

@@ -155,12 +155,13 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
             var services = new ServiceCollection();
             var listener = new DiagnosticListener(GetType().Assembly.FullName);
             var partManager = new ApplicationPartManager();
-            partManager.ApplicationParts.Add(
-                CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(
+            partManager.ApplicationParts
+                .Add(
+                    CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(
                         viewsAssembly
                     )
-                    .Single()
-            );
+                        .Single()
+                );
             var builder = services.AddSingleton<ILoggerFactory, NullLoggerFactory>()
                 .AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>()
                 .AddSingleton<DiagnosticSource>(listener)

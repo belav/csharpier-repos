@@ -92,18 +92,16 @@ namespace System.Tests
             bool expected
         )
         {
-            MethodInfo mi = typeof(TypeTests).GetMethod(
-                nameof(FilterName_Invoke_DelegateFiltersExpectedMembers)
-            );
+            MethodInfo mi = typeof(TypeTests)
+                .GetMethod(nameof(FilterName_Invoke_DelegateFiltersExpectedMembers));
             Assert.Equal(expected, Type.FilterName(mi, filterCriteria));
         }
 
         [Fact]
         public void FilterName_InvalidFilterCriteria_ThrowsInvalidFilterCriteriaException()
         {
-            MethodInfo mi = typeof(TypeTests).GetMethod(
-                nameof(FilterName_Invoke_DelegateFiltersExpectedMembers)
-            );
+            MethodInfo mi = typeof(TypeTests)
+                .GetMethod(nameof(FilterName_Invoke_DelegateFiltersExpectedMembers));
             Assert.Throws<InvalidFilterCriteriaException>(() => Type.FilterName(mi, null));
             Assert.Throws<InvalidFilterCriteriaException>(() => Type.FilterName(mi, new object()));
         }
@@ -137,18 +135,16 @@ namespace System.Tests
             bool expected
         )
         {
-            MethodInfo mi = typeof(TypeTests).GetMethod(
-                nameof(FilterNameIgnoreCase_Invoke_DelegateFiltersExpectedMembers)
-            );
+            MethodInfo mi = typeof(TypeTests)
+                .GetMethod(nameof(FilterNameIgnoreCase_Invoke_DelegateFiltersExpectedMembers));
             Assert.Equal(expected, Type.FilterNameIgnoreCase(mi, filterCriteria));
         }
 
         [Fact]
         public void FilterNameIgnoreCase_InvalidFilterCriteria_ThrowsInvalidFilterCriteriaException()
         {
-            MethodInfo mi = typeof(TypeTests).GetMethod(
-                nameof(FilterName_Invoke_DelegateFiltersExpectedMembers)
-            );
+            MethodInfo mi = typeof(TypeTests)
+                .GetMethod(nameof(FilterName_Invoke_DelegateFiltersExpectedMembers));
             Assert.Throws<InvalidFilterCriteriaException>(
                 () => Type.FilterNameIgnoreCase(mi, null)
             );
@@ -238,12 +234,8 @@ namespace System.Tests
         {
             Assert.Equal(
                 expectedLength,
-                typeof(TypeTests).FindMembers(
-                    memberType,
-                    bindingAttr,
-                    filter,
-                    filterCriteria
-                ).Length
+                typeof(TypeTests)
+                    .FindMembers(memberType, bindingAttr, filter, filterCriteria).Length
             );
         }
 
@@ -977,10 +969,8 @@ namespace System.Tests
                 Type theT = typeof(Outside<>).GetTypeInfo().GenericTypeParameters[0];
                 yield return new object[] { theT, true, true, false };
 
-                Type theM = typeof(TypeTests).GetMethod(
-                        nameof(GenericMethod),
-                        BindingFlags.NonPublic | BindingFlags.Static
-                    )
+                Type theM = typeof(TypeTests)
+                    .GetMethod(nameof(GenericMethod), BindingFlags.NonPublic | BindingFlags.Static)
                     .GetGenericArguments()[0];
                 yield return new object[] { theM, true, false, true };
             }
@@ -1012,29 +1002,28 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        string test1 = testtype;
-                        Type t1 = Type.GetType(
-                            test1,
-                            (aName) =>
-                                aName.Name == "Foo" ? Assembly.LoadFrom(s_testAssemblyPath) : null,
-                            typeloader,
-                            true
-                        );
+                () =>
+                {
+                    string test1 = testtype;
+                    Type t1 = Type.GetType(
+                        test1,
+                        (aName) =>
+                            aName.Name == "Foo" ? Assembly.LoadFrom(s_testAssemblyPath) : null,
+                        typeloader,
+                        true
+                    );
 
-                        Assert.NotNull(t1);
+                    Assert.NotNull(t1);
 
-                        string test2 =
-                            "System.Collections.Generic.Dictionary`2[[Program, TestLoadAssembly], [Program, TestLoadAssembly]]";
-                        Type t2 = Type.GetType(test2, assemblyloader, typeloader, true);
+                    string test2 =
+                        "System.Collections.Generic.Dictionary`2[[Program, TestLoadAssembly], [Program, TestLoadAssembly]]";
+                    Type t2 = Type.GetType(test2, assemblyloader, typeloader, true);
 
-                        Assert.NotNull(t2);
-                        Assert.Equal(t1, t2);
-                    },
-                    options
-                )
-                .Dispose();
+                    Assert.NotNull(t2);
+                    Assert.Equal(t1, t2);
+                },
+                options
+            ).Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -1045,18 +1034,17 @@ namespace System.Tests
         public void GetTypeByName_NoSuchType_ThrowsTypeLoadException(string typeName)
         {
             RemoteExecutor.Invoke(
-                    marshalledTypeName =>
-                    {
-                        Assert.Throws<TypeLoadException>(
-                            () => Type.GetType(marshalledTypeName, assemblyloader, typeloader, true)
-                        );
-                        Assert.Null(
-                            Type.GetType(marshalledTypeName, assemblyloader, typeloader, false)
-                        );
-                    },
-                    typeName
-                )
-                .Dispose();
+                marshalledTypeName =>
+                {
+                    Assert.Throws<TypeLoadException>(
+                        () => Type.GetType(marshalledTypeName, assemblyloader, typeloader, true)
+                    );
+                    Assert.Null(
+                        Type.GetType(marshalledTypeName, assemblyloader, typeloader, false)
+                    );
+                },
+                typeName
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -1064,36 +1052,35 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        //Type load failure due to case sensitive search of type Ptogram
-                        string test3 =
-                            "System.Collections.Generic.Dictionary`2[[Program, TestLoadAssembly], [program, TestLoadAssembly]]";
-                        Assert.Throws<TypeLoadException>(
-                            () =>
-                                Type.GetType(
-                                    test3,
-                                    assemblyloader,
-                                    typeloader,
-                                    true,
-                                    false //case sensitive
-                                )
-                        );
+                () =>
+                {
+                    //Type load failure due to case sensitive search of type Ptogram
+                    string test3 =
+                        "System.Collections.Generic.Dictionary`2[[Program, TestLoadAssembly], [program, TestLoadAssembly]]";
+                    Assert.Throws<TypeLoadException>(
+                        () =>
+                            Type.GetType(
+                                test3,
+                                assemblyloader,
+                                typeloader,
+                                true,
+                                false //case sensitive
+                            )
+                    );
 
-                        //non throwing version
-                        Type t2 = Type.GetType(
-                            test3,
-                            assemblyloader,
-                            typeloader,
-                            false, //no throw
-                            false
-                        );
+                    //non throwing version
+                    Type t2 = Type.GetType(
+                        test3,
+                        assemblyloader,
+                        typeloader,
+                        false, //no throw
+                        false
+                    );
 
-                        Assert.Null(t2);
-                    },
-                    options
-                )
-                .Dispose();
+                    Assert.Null(t2);
+                },
+                options
+            ).Dispose();
         }
 
         [Fact]

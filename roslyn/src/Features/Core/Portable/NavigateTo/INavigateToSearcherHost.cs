@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             CancellationToken cancellationToken
         )
         {
-            var service =
-                _solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+            var service = _solution.Workspace.Services
+                .GetRequiredService<IWorkspaceStatusService>();
 
             // We consider ourselves fully loaded when both the project system has completed loaded
             // us, and we've totally hydrated the oop side.  Until that happens, we'll attempt to
@@ -100,9 +100,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 {
                     // If there are no projects in this solution that use OOP, then there's nothing we need to do.
                     if (
-                        _solution.Projects.All(
-                            p => !RemoteSupportedLanguages.IsSupported(p.Language)
-                        )
+                        _solution.Projects
+                            .All(p => !RemoteSupportedLanguages.IsSupported(p.Language))
                     )
                     {
                         s_remoteHostHydrateTask = Task.CompletedTask;
@@ -117,21 +116,18 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                             async () =>
                             {
                                 var client = await RemoteHostClient.TryGetClientAsync(
-                                        _solution.Workspace,
-                                        _disposalToken
-                                    )
+                                    _solution.Workspace,
+                                    _disposalToken
+                                )
                                     .ConfigureAwait(false);
                                 if (client != null)
                                 {
                                     await client.TryInvokeAsync<IRemoteNavigateToSearchService>(
-                                            _solution,
-                                            (service, solutionInfo, cancellationToken) =>
-                                                service.HydrateAsync(
-                                                    solutionInfo,
-                                                    cancellationToken
-                                                ),
-                                            _disposalToken
-                                        )
+                                        _solution,
+                                        (service, solutionInfo, cancellationToken) =>
+                                            service.HydrateAsync(solutionInfo, cancellationToken),
+                                        _disposalToken
+                                    )
                                         .ConfigureAwait(false);
                                 }
                             },

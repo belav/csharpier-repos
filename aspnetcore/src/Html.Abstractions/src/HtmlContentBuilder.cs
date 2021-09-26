@@ -185,7 +185,8 @@ namespace Microsoft.AspNetCore.Html
                 else
                 {
                     // Only string, IHtmlContent values can be added to the buffer.
-                    ((IHtmlContent)entry).WriteTo(writer, encoder);
+                    ((IHtmlContent)entry)
+                        .WriteTo(writer, encoder);
                 }
             }
         }

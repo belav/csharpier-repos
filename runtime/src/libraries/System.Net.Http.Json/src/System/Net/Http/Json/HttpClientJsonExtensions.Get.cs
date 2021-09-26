@@ -133,7 +133,8 @@ namespace System.Net.Http.Json
                 // Nullable forgiving reason:
                 // GetAsync will usually return Content as not-null.
                 // If Content happens to be null, the extension will throw.
-                return await response.Content!.ReadFromJsonAsync(type, options, cancellationToken)
+                return await response.Content!
+                    .ReadFromJsonAsync(type, options, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -150,7 +151,8 @@ namespace System.Net.Http.Json
                 // Nullable forgiving reason:
                 // GetAsync will usually return Content as not-null.
                 // If Content happens to be null, the extension will throw.
-                return await response.Content!.ReadFromJsonAsync<T>(options, cancellationToken)
+                return await response.Content!
+                    .ReadFromJsonAsync<T>(options, cancellationToken)
                     .ConfigureAwait(false);
             }
         }

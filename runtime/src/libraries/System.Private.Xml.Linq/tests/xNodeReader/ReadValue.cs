@@ -797,10 +797,8 @@ namespace CoreXml.Test.XLinq
                 public void TestReadChar21()
                 {
                     string somechar = new string('x', 5000);
-                    string strxml = string.Format(
-                        "<ROOT>a" + somechar + "{0}c</ROOT>",
-                        Convert.ToChar(0)
-                    );
+                    string strxml = string
+                        .Format("<ROOT>a" + somechar + "{0}c</ROOT>", Convert.ToChar(0));
                     try
                     {
                         XmlReader DataReader = GetReaderStr(strxml);

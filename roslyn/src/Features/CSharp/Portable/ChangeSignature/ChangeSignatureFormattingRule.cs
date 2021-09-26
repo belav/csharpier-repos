@@ -85,11 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 );
             }
 
-            return base.GetAdjustNewLinesOperation(
-                in previousToken,
-                in currentToken,
-                in nextOperation
-            );
+            return base
+                .GetAdjustNewLinesOperation(in previousToken, in currentToken, in nextOperation);
         }
     }
 }

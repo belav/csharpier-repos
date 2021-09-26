@@ -67,14 +67,14 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }";
                 var compRef = CSharpCompilation.Create(
-                        "unconditionalsuppress",
-                        options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary),
-                        syntaxTrees: new[]
-                        {
-                            CSharpSyntaxTree.ParseText(unconditionalSuppressMessageDef)
-                        },
-                        references: new[] { TestBase.MscorlibRef }
-                    )
+                    "unconditionalsuppress",
+                    options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary),
+                    syntaxTrees: new[]
+                    {
+                        CSharpSyntaxTree.ParseText(unconditionalSuppressMessageDef)
+                    },
+                    references: new[] { TestBase.MscorlibRef }
+                )
                     .EmitToImageReference();
 
                 return ImmutableArray.Create(TestBase.MscorlibRef, compRef, TestBase.ValueTupleRef);

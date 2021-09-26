@@ -593,11 +593,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     var total = read;
                     while (read > 0)
                     {
-                        read = await context.Request.Body.ReadAsync(
-                            buffer,
-                            total,
-                            buffer.Length - total
-                        );
+                        read = await context.Request.Body
+                            .ReadAsync(buffer, total, buffer.Length - total);
                         total += read;
                     }
                     Assert.Equal(12, total);
@@ -634,10 +631,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     var readResult = await context.Request.BodyReader.ReadAsync();
                     while (!readResult.IsCompleted)
                     {
-                        context.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        context.Request.BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                         readResult = await context.Request.BodyReader.ReadAsync();
                     }
 
@@ -697,9 +692,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.Contains(
                 LogMessages,
                 m =>
-                    m.Message.Equals(
-                        "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
-                    )
+                    m.Message
+                        .Equals(
+                            "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
+                        )
             );
         }
 

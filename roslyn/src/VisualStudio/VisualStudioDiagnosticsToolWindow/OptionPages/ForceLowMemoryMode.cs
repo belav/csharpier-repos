@@ -75,7 +75,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             public Task PopulateAndMonitorAsync(int size)
             {
                 // run on background thread
-                return Task.Factory.StartNew(
+                return Task.Factory
+                    .StartNew(
                         () => this.PopulateAndMonitorWorkerAsync(size),
                         CancellationToken.None,
                         TaskCreationOptions.LongRunning,

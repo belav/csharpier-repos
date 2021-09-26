@@ -105,10 +105,11 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
             {
                 typeSyntax = declarationExpression.Type;
                 if (
-                    declarationExpression.Designation.IsKind(
-                        SyntaxKind.ParenthesizedVariableDesignation,
-                        out ParenthesizedVariableDesignationSyntax variableDesignation
-                    )
+                    declarationExpression.Designation
+                        .IsKind(
+                            SyntaxKind.ParenthesizedVariableDesignation,
+                            out ParenthesizedVariableDesignationSyntax variableDesignation
+                        )
                 )
                 {
                     parensDesignation = variableDesignation;
@@ -164,10 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
             var elements = ((INamedTypeSymbol)typeSymbol).TupleElements;
             Debug.Assert(elements.Length == parensDesignation.Variables.Count);
 
-            using var builderDisposer = ArrayBuilder<SyntaxNode>.GetInstance(
-                elements.Length,
-                out var builder
-            );
+            using var builderDisposer = ArrayBuilder<SyntaxNode>
+                .GetInstance(elements.Length, out var builder);
             for (var i = 0; i < elements.Length; i++)
             {
                 var designation = parensDesignation.Variables[i];
@@ -191,26 +190,27 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
                 }
 
                 newDeclaration = newDeclaration.WithLeadingTrivia(
-                        designation.GetAllPrecedingTriviaToPreviousToken()
-                    )
+                    designation.GetAllPrecedingTriviaToPreviousToken()
+                )
                     .WithTrailingTrivia(designation.GetTrailingTrivia());
 
                 builder.Add(SyntaxFactory.Argument(newDeclaration));
             }
 
-            var separatorBuilder = ArrayBuilder<SyntaxToken>.GetInstance(
-                builder.Count - 1,
-                SyntaxFactory.Token(leading: default, SyntaxKind.CommaToken, trailing: default)
-            );
+            var separatorBuilder = ArrayBuilder<SyntaxToken>
+                .GetInstance(
+                    builder.Count - 1,
+                    SyntaxFactory.Token(leading: default, SyntaxKind.CommaToken, trailing: default)
+                );
 
             return SyntaxFactory.TupleExpression(
-                    SyntaxFactory.Token(SyntaxKind.OpenParenToken).WithTrailingTrivia(),
-                    SyntaxFactory.SeparatedList(
-                        builder.ToImmutable(),
-                        separatorBuilder.ToImmutableAndFree()
-                    ),
-                    SyntaxFactory.Token(SyntaxKind.CloseParenToken)
-                )
+                SyntaxFactory.Token(SyntaxKind.OpenParenToken).WithTrailingTrivia(),
+                SyntaxFactory.SeparatedList(
+                    builder.ToImmutable(),
+                    separatorBuilder.ToImmutableAndFree()
+                ),
+                SyntaxFactory.Token(SyntaxKind.CloseParenToken)
+            )
                 .WithTrailingTrivia(parensDesignation.GetTrailingTrivia());
         }
 

@@ -2351,40 +2351,44 @@ namespace System.Globalization.Tests
             for (char c = '\uFF41'; c <= '\uFF5A'; c++) // Full width 'ａ' to `ｚ`
             {
                 Assert.False(
-                    string.Equals(
-                        new string(c, 1),
-                        new string((char)(c - 0x20), 1),
-                        StringComparison.InvariantCulture
-                    ),
+                    string
+                        .Equals(
+                            new string(c, 1),
+                            new string((char)(c - 0x20), 1),
+                            StringComparison.InvariantCulture
+                        ),
                     $"Expected '{(int)c:x4}' != '{c - 0x20:x4}'"
                 );
                 Assert.True(
-                    string.Equals(
-                        new string(c, 1),
-                        new string((char)(c - 0x20), 1),
-                        StringComparison.InvariantCultureIgnoreCase
-                    ),
+                    string
+                        .Equals(
+                            new string(c, 1),
+                            new string((char)(c - 0x20), 1),
+                            StringComparison.InvariantCultureIgnoreCase
+                        ),
                     $"Expected '{(int)c:x4}' == '{c - 0x20:x4}'"
                 );
             }
 
             // Edge case of the Ignore Width.
             Assert.False(
-                string.Compare(
-                    "\u3162\u3163",
-                    "\uFFDB\uFFDC",
-                    CultureInfo.InvariantCulture,
-                    CompareOptions.None
-                ) == 0,
+                string
+                    .Compare(
+                        "\u3162\u3163",
+                        "\uFFDB\uFFDC",
+                        CultureInfo.InvariantCulture,
+                        CompareOptions.None
+                    ) == 0,
                 $"Expect '0x3162 0x3163' != '0xFFDB 0xFFDC'"
             );
             Assert.True(
-                string.Compare(
-                    "\u3162\u3163",
-                    "\uFFDB\uFFDC",
-                    CultureInfo.InvariantCulture,
-                    CompareOptions.IgnoreWidth
-                ) == 0,
+                string
+                    .Compare(
+                        "\u3162\u3163",
+                        "\uFFDB\uFFDC",
+                        CultureInfo.InvariantCulture,
+                        CompareOptions.IgnoreWidth
+                    ) == 0,
                 "Expect '0x3162 0x3163' == '0xFFDB 0xFFDC'"
             );
 
@@ -2395,21 +2399,23 @@ namespace System.Globalization.Tests
             for (Char hiraganaChar = hiraganaStart; hiraganaChar <= hiraganaEnd; hiraganaChar++)
             {
                 Assert.False(
-                    string.Compare(
-                        new string(hiraganaChar, 1),
-                        new string((char)(hiraganaChar + hiraganaToKatakanaOffset), 1),
-                        CultureInfo.InvariantCulture,
-                        CompareOptions.IgnoreCase
-                    ) == 0,
+                    string
+                        .Compare(
+                            new string(hiraganaChar, 1),
+                            new string((char)(hiraganaChar + hiraganaToKatakanaOffset), 1),
+                            CultureInfo.InvariantCulture,
+                            CompareOptions.IgnoreCase
+                        ) == 0,
                     $"Expect '{(int)hiraganaChar:x4}'  != {(int)hiraganaChar + hiraganaToKatakanaOffset:x4} with CompareOptions.IgnoreCase"
                 );
                 Assert.True(
-                    string.Compare(
-                        new string(hiraganaChar, 1),
-                        new string((char)(hiraganaChar + hiraganaToKatakanaOffset), 1),
-                        CultureInfo.InvariantCulture,
-                        CompareOptions.IgnoreKanaType
-                    ) == 0,
+                    string
+                        .Compare(
+                            new string(hiraganaChar, 1),
+                            new string((char)(hiraganaChar + hiraganaToKatakanaOffset), 1),
+                            CultureInfo.InvariantCulture,
+                            CompareOptions.IgnoreKanaType
+                        ) == 0,
                     $"Expect '{(int)hiraganaChar:x4}'  == {(int)hiraganaChar + hiraganaToKatakanaOffset:x4} with CompareOptions.IgnoreKanaType"
                 );
             }

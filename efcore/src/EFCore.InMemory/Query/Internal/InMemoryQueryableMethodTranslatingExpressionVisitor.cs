@@ -100,16 +100,18 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 && methodCallExpression.Arguments.Count == 1
                 && methodCallExpression.Arguments[0].Type.TryGetSequenceType() != null
                 && (
-                    string.Equals(
-                        methodCallExpression.Method.Name,
-                        "AsSplitQuery",
-                        StringComparison.Ordinal
-                    )
-                    || string.Equals(
-                        methodCallExpression.Method.Name,
-                        "AsSingleQuery",
-                        StringComparison.Ordinal
-                    )
+                    string
+                        .Equals(
+                            methodCallExpression.Method.Name,
+                            "AsSplitQuery",
+                            StringComparison.Ordinal
+                        )
+                    || string
+                        .Equals(
+                            methodCallExpression.Method.Name,
+                            "AsSingleQuery",
+                            StringComparison.Ordinal
+                        )
                 )
             )
             {
@@ -198,9 +200,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             inMemoryQueryExpression.UpdateServerQueryExpression(
                 Expression.Not(
                     Expression.Call(
-                        EnumerableMethods.AnyWithoutPredicate.MakeGenericMethod(
-                            inMemoryQueryExpression.CurrentParameter.Type
-                        ),
+                        EnumerableMethods.AnyWithoutPredicate
+                            .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                         inMemoryQueryExpression.ServerQueryExpression
                     )
                 )
@@ -246,9 +247,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             inMemoryQueryExpression.UpdateServerQueryExpression(
                 Expression.Call(
-                    EnumerableMethods.AnyWithoutPredicate.MakeGenericMethod(
-                        inMemoryQueryExpression.CurrentParameter.Type
-                    ),
+                    EnumerableMethods.AnyWithoutPredicate
+                        .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                     inMemoryQueryExpression.ServerQueryExpression
                 )
             );
@@ -349,10 +349,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 Expression.Call(
                     EnumerableMethods.Contains.MakeGenericMethod(item.Type),
                     Expression.Call(
-                        EnumerableMethods.Select.MakeGenericMethod(
-                            inMemoryQueryExpression.CurrentParameter.Type,
-                            item.Type
-                        ),
+                        EnumerableMethods.Select
+                            .MakeGenericMethod(
+                                inMemoryQueryExpression.CurrentParameter.Type,
+                                item.Type
+                            ),
                         inMemoryQueryExpression.ServerQueryExpression,
                         Expression.Lambda(
                             inMemoryQueryExpression.GetMappedProjection(new ProjectionMember()),
@@ -405,9 +406,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             inMemoryQueryExpression.UpdateServerQueryExpression(
                 Expression.Call(
-                    EnumerableMethods.CountWithoutPredicate.MakeGenericMethod(
-                        inMemoryQueryExpression.CurrentParameter.Type
-                    ),
+                    EnumerableMethods.CountWithoutPredicate
+                        .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                     inMemoryQueryExpression.ServerQueryExpression
                 )
             );
@@ -453,9 +453,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             inMemoryQueryExpression.UpdateServerQueryExpression(
                 Expression.Call(
-                    EnumerableMethods.Distinct.MakeGenericMethod(
-                        inMemoryQueryExpression.CurrentParameter.Type
-                    ),
+                    EnumerableMethods.Distinct
+                        .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                     inMemoryQueryExpression.ServerQueryExpression
                 )
             );
@@ -571,7 +570,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 var newResultSelectorBody = new ReplacingExpressionVisitor(
                     new Expression[] { original1, original2 },
                     new[] { groupByShaper.KeySelector, groupByShaper }
-                ).Visit(resultSelector.Body);
+                )
+                    .Visit(resultSelector.Body);
 
                 newResultSelectorBody = ExpandWeakEntities(
                     inMemoryQueryExpression,
@@ -726,12 +726,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 resultSelector.Parameters[1].Type
             );
 
-            ((InMemoryQueryExpression)outer.QueryExpression).AddInnerJoin(
-                (InMemoryQueryExpression)inner.QueryExpression,
-                outerKeySelector,
-                innerKeySelector,
-                transparentIdentifierType
-            );
+            ((InMemoryQueryExpression)outer.QueryExpression)
+                .AddInnerJoin(
+                    (InMemoryQueryExpression)inner.QueryExpression,
+                    outerKeySelector,
+                    innerKeySelector,
+                    transparentIdentifierType
+                );
 
 #pragma warning disable CS0618 // Type or member is obsolete See issue#21200
             return TranslateResultSelectorForJoin(
@@ -943,12 +944,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 resultSelector.Parameters[1].Type
             );
 
-            ((InMemoryQueryExpression)outer.QueryExpression).AddLeftJoin(
-                (InMemoryQueryExpression)inner.QueryExpression,
-                outerKeySelector,
-                innerKeySelector,
-                transparentIdentifierType
-            );
+            ((InMemoryQueryExpression)outer.QueryExpression)
+                .AddLeftJoin(
+                    (InMemoryQueryExpression)inner.QueryExpression,
+                    outerKeySelector,
+                    innerKeySelector,
+                    transparentIdentifierType
+                );
 
 #pragma warning disable CS0618 // Type or member is obsolete See issue#21200
             return TranslateResultSelectorForJoin(
@@ -995,9 +997,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             inMemoryQueryExpression.UpdateServerQueryExpression(
                 Expression.Call(
-                    EnumerableMethods.LongCountWithoutPredicate.MakeGenericMethod(
-                        inMemoryQueryExpression.CurrentParameter.Type
-                    ),
+                    EnumerableMethods.LongCountWithoutPredicate
+                        .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                     inMemoryQueryExpression.ServerQueryExpression
                 )
             );
@@ -1177,9 +1178,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             inMemoryQueryExpression.UpdateServerQueryExpression(
                 Expression.Call(
-                    EnumerableMethods.Reverse.MakeGenericMethod(
-                        inMemoryQueryExpression.CurrentParameter.Type
-                    ),
+                    EnumerableMethods.Reverse
+                        .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                     inMemoryQueryExpression.ServerQueryExpression
                 )
             );
@@ -1238,9 +1238,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             Check.NotNull(collectionSelector, nameof(collectionSelector));
             Check.NotNull(resultSelector, nameof(resultSelector));
 
-            var defaultIfEmpty = new DefaultIfEmptyFindingExpressionVisitor().IsOptional(
-                collectionSelector
-            );
+            var defaultIfEmpty = new DefaultIfEmptyFindingExpressionVisitor()
+                .IsOptional(collectionSelector);
             var collectionSelectorBody = RemapLambdaBody(source, collectionSelector);
 
             if (Visit(collectionSelectorBody) is ShapedQueryExpression inner)
@@ -1254,11 +1253,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     ? MarkShaperNullable(inner.ShaperExpression)
                     : inner.ShaperExpression;
 
-                ((InMemoryQueryExpression)source.QueryExpression).AddSelectMany(
-                    (InMemoryQueryExpression)inner.QueryExpression,
-                    transparentIdentifierType,
-                    defaultIfEmpty
-                );
+                ((InMemoryQueryExpression)source.QueryExpression)
+                    .AddSelectMany(
+                        (InMemoryQueryExpression)inner.QueryExpression,
+                        transparentIdentifierType,
+                        defaultIfEmpty
+                    );
 
 #pragma warning disable CS0618 // Type or member is obsolete See issue#21200
                 return TranslateResultSelectorForJoin(
@@ -1377,9 +1377,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             inMemoryQueryExpression.UpdateServerQueryExpression(
                 Expression.Call(
-                    EnumerableMethods.Skip.MakeGenericMethod(
-                        inMemoryQueryExpression.CurrentParameter.Type
-                    ),
+                    EnumerableMethods.Skip
+                        .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                     inMemoryQueryExpression.ServerQueryExpression,
                     count
                 )
@@ -1447,9 +1446,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             inMemoryQueryExpression.UpdateServerQueryExpression(
                 Expression.Call(
-                    EnumerableMethods.Take.MakeGenericMethod(
-                        inMemoryQueryExpression.CurrentParameter.Type
-                    ),
+                    EnumerableMethods.Take
+                        .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                     inMemoryQueryExpression.ServerQueryExpression,
                     count
                 )
@@ -1500,12 +1498,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             inMemoryQueryExpression.UpdateServerQueryExpression(
                 Expression.Call(
-                    (
-                        ascending ? EnumerableMethods.ThenBy : EnumerableMethods.ThenByDescending
-                    ).MakeGenericMethod(
-                        inMemoryQueryExpression.CurrentParameter.Type,
-                        keySelector.ReturnType
-                    ),
+                    (ascending ? EnumerableMethods.ThenBy : EnumerableMethods.ThenByDescending)
+                        .MakeGenericMethod(
+                            inMemoryQueryExpression.CurrentParameter.Type,
+                            keySelector.ReturnType
+                        ),
                     inMemoryQueryExpression.ServerQueryExpression,
                     keySelector
                 )
@@ -1555,9 +1552,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             inMemoryQueryExpression.UpdateServerQueryExpression(
                 Expression.Call(
-                    EnumerableMethods.Where.MakeGenericMethod(
-                        inMemoryQueryExpression.CurrentParameter.Type
-                    ),
+                    EnumerableMethods.Where
+                        .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                     inMemoryQueryExpression.ServerQueryExpression,
                     predicate
                 )
@@ -1635,8 +1631,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
         private sealed class WeakEntityExpandingExpressionVisitor : ExpressionVisitor
         {
-            private static readonly MethodInfo _objectEqualsMethodInfo =
-                typeof(object).GetRequiredRuntimeMethod(
+            private static readonly MethodInfo _objectEqualsMethodInfo = typeof(object)
+                .GetRequiredRuntimeMethod(
                     nameof(object.Equals),
                     new[] { typeof(object), typeof(object) }
                 );
@@ -1761,9 +1757,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     var innerQueryExpression =
                         (InMemoryQueryExpression)innerShapedQuery.QueryExpression;
 
-                    var makeNullable = foreignKey.PrincipalKey.Properties.Concat(
-                            foreignKey.Properties
-                        )
+                    var makeNullable = foreignKey.PrincipalKey.Properties
+                        .Concat(foreignKey.Properties)
                         .Select(p => p.ClrType)
                         .Any(t => t.IsNullableType());
 
@@ -1773,12 +1768,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                           : foreignKey.PrincipalKey.Properties,
                         makeNullable
                     );
-                    var innerKey = innerShapedQuery.ShaperExpression.CreateKeyValuesExpression(
-                        navigation.IsOnDependent
-                          ? foreignKey.PrincipalKey.Properties
-                          : foreignKey.Properties,
-                        makeNullable
-                    );
+                    var innerKey = innerShapedQuery.ShaperExpression
+                        .CreateKeyValuesExpression(
+                            navigation.IsOnDependent
+                              ? foreignKey.PrincipalKey.Properties
+                              : foreignKey.Properties,
+                            makeNullable
+                        );
 
                     var keyComparison = Expression.Call(
                         _objectEqualsMethodInfo,
@@ -1790,17 +1786,16 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         ? Expression.AndAlso(
                               outerKey is NewArrayExpression newArrayExpression
                                 ? newArrayExpression.Expressions.Select(
-                                          e =>
-                                          {
-                                              var left = (e as UnaryExpression)?.Operand ?? e;
+                                      e =>
+                                      {
+                                          var left = (e as UnaryExpression)?.Operand ?? e;
 
-                                              return Expression.NotEqual(
-                                                  left,
-                                                  Expression.Constant(null, left.Type)
-                                              );
-                                          }
-                                      )
-                                      .Aggregate((l, r) => Expression.AndAlso(l, r))
+                                          return Expression.NotEqual(
+                                              left,
+                                              Expression.Constant(null, left.Type)
+                                          );
+                                      }
+                                  ).Aggregate((l, r) => Expression.AndAlso(l, r))
                                 : Expression.NotEqual(
                                       outerKey,
                                       Expression.Constant(null, outerKey.Type)
@@ -1812,9 +1807,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     var correlationPredicate = _expressionTranslator.Translate(predicate)!;
                     innerQueryExpression.UpdateServerQueryExpression(
                         Expression.Call(
-                            EnumerableMethods.Where.MakeGenericMethod(
-                                innerQueryExpression.CurrentParameter.Type
-                            ),
+                            EnumerableMethods.Where
+                                .MakeGenericMethod(innerQueryExpression.CurrentParameter.Type),
                             innerQueryExpression.ServerQueryExpression,
                             Expression.Lambda(
                                 correlationPredicate,
@@ -1854,9 +1848,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     var innerQueryExpression =
                         (InMemoryQueryExpression)innerShapedQuery.QueryExpression;
 
-                    var makeNullable = foreignKey.PrincipalKey.Properties.Concat(
-                            foreignKey.Properties
-                        )
+                    var makeNullable = foreignKey.PrincipalKey.Properties
+                        .Concat(foreignKey.Properties)
                         .Select(p => p.ClrType)
                         .Any(t => t.IsNullableType());
 
@@ -1866,12 +1859,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                           : foreignKey.PrincipalKey.Properties,
                         makeNullable
                     );
-                    var innerKey = innerShapedQuery.ShaperExpression.CreateKeyValuesExpression(
-                        navigation.IsOnDependent
-                          ? foreignKey.PrincipalKey.Properties
-                          : foreignKey.Properties,
-                        makeNullable
-                    );
+                    var innerKey = innerShapedQuery.ShaperExpression
+                        .CreateKeyValuesExpression(
+                            navigation.IsOnDependent
+                              ? foreignKey.PrincipalKey.Properties
+                              : foreignKey.Properties,
+                            makeNullable
+                        );
 
                     if (foreignKey.Properties.Count > 1)
                     {

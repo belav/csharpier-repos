@@ -237,10 +237,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string path = TestFiles.SignedMsuFile;
             if (!File.Exists(path))
                 throw new Exception(
-                    string.Format(
-                        "Test infrastructure failure: Expected to find file \"{0}\".",
-                        path
-                    )
+                    string
+                        .Format("Test infrastructure failure: Expected to find file \"{0}\".", path)
                 );
 
             using (X509Certificate2 c = new X509Certificate2(path))
@@ -293,10 +291,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string path = TestFiles.MsCertificateDerFile;
             if (!File.Exists(path))
                 throw new Exception(
-                    string.Format(
-                        "Test infrastructure failure: Expected to find file \"{0}\".",
-                        path
-                    )
+                    string
+                        .Format("Test infrastructure failure: Expected to find file \"{0}\".", path)
                 );
             byte[] data = File.ReadAllBytes(path);
             Assert.Equal(TestData.MsCertificate, data);

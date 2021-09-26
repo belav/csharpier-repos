@@ -44,11 +44,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
             )
             {
                 var result = await CodeGenerator.AddMemberDeclarationsAsync(
-                        _document.Project.Solution,
-                        _state.ClassType,
-                        _constructors.Select(CreateConstructorDefinition),
-                        cancellationToken: cancellationToken
-                    )
+                    _document.Project.Solution,
+                    _state.ClassType,
+                    _constructors.Select(CreateConstructorDefinition),
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return result;

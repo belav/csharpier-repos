@@ -315,7 +315,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Avx2).GetMethod(
+            var result = typeof(Avx2)
+                .GetMethod(
                     nameof(Avx2.BroadcastScalarToVector128),
                     new Type[] { typeof(Vector128<UInt64>) }
                 )
@@ -332,7 +333,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Avx2).GetMethod(
+            var result = typeof(Avx2)
+                .GetMethod(
                     nameof(Avx2.BroadcastScalarToVector128),
                     new Type[] { typeof(Vector128<UInt64>) }
                 )
@@ -349,7 +351,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Avx2).GetMethod(
+            var result = typeof(Avx2)
+                .GetMethod(
                     nameof(Avx2.BroadcastScalarToVector128),
                     new Type[] { typeof(Vector128<UInt64>) }
                 )
@@ -594,15 +597,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Avx2)}.{nameof(Avx2.BroadcastScalarToVector128)}<UInt64>(Vector128<UInt64>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Avx2)}.{nameof(Avx2.BroadcastScalarToVector128)}<UInt64>(Vector128<UInt64>): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

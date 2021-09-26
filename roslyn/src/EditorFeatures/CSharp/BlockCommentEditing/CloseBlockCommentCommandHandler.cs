@@ -52,9 +52,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
                         if (line.End == position && line.IsEmptyOrWhitespace(0, line.Length - 2))
                         {
                             if (
-                                args.SubjectBuffer.GetFeatureOnOffOption(
-                                    FeatureOnOffOptions.AutoInsertBlockCommentStartString
-                                )
+                                args.SubjectBuffer
+                                    .GetFeatureOnOffOption(
+                                        FeatureOnOffOptions.AutoInsertBlockCommentStartString
+                                    )
                                 && BlockCommentEditingCommandHandler.IsCaretInsideBlockCommentSyntax(
                                     caret.Value,
                                     out _,
@@ -62,10 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
                                 )
                             )
                             {
-                                args.SubjectBuffer.Replace(
-                                    new VisualStudio.Text.Span(position - 1, 1),
-                                    "/"
-                                );
+                                args.SubjectBuffer
+                                    .Replace(new VisualStudio.Text.Span(position - 1, 1), "/");
                                 return true;
                             }
                         }

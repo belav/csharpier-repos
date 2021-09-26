@@ -34,7 +34,8 @@ namespace AutoMapper.UnitTests.Projection
                     LastName = "White",
                     CustomerType = CustomerType.Vip
                 }
-            }.AsQueryable();
+            }
+                .AsQueryable();
 
             var projected = customers.ProjectTo<CustomerDto>(_config);
             projected.ShouldNotBeNull();
@@ -93,9 +94,8 @@ namespace AutoMapper.UnitTests.Projection
         [Fact]
         public void Should_validate_because_of_overridden_projection()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                Configuration.AssertConfigurationIsValid
-            );
+            typeof(AutoMapperConfigurationException)
+                .ShouldNotBeThrownBy(Configuration.AssertConfigurationIsValid);
         }
     }
 }

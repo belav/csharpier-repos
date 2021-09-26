@@ -895,13 +895,12 @@ namespace System
 }
 ";
             var sysConsoleRef = CreateEmptyCompilation(
-                    sysConsoleSrc,
-                    new[] { SystemRuntimePP7Ref },
-                    TestOptions.ReleaseDll.WithCryptoPublicKey(
-                        TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a
-                    ),
-                    assemblyName: "System.Console"
-                )
+                sysConsoleSrc,
+                new[] { SystemRuntimePP7Ref },
+                TestOptions.ReleaseDll
+                    .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a),
+                assemblyName: "System.Console"
+            )
                 .EmitToImageReference();
 
             var mainSrc =
@@ -938,7 +937,8 @@ Goo();
             var main2 = CreateEmptyCompilation(
                 new[] { Parse(mainSrc, options: TestOptions.Script) },
                 new[] { MscorlibRef_v46, sysConsoleRef, SystemRuntimeFacadeRef },
-                TestOptions.ReleaseDll.WithUsings("System.Console")
+                TestOptions.ReleaseDll
+                    .WithUsings("System.Console")
                     .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
             );
 
@@ -1005,8 +1005,8 @@ Goo();
         public void UseTypeInNetModule()
         {
             var module1Ref = ModuleMetadata.CreateFromImage(
-                    TestResources.SymbolsTests.netModule.netModule1
-                )
+                TestResources.SymbolsTests.netModule.netModule1
+            )
                 .GetReference(display: "netModule1.netmodule");
 
             var text =
@@ -1084,12 +1084,13 @@ static class @main
 ";
             var comp = CreateCompilation(text);
             var typeSym = comp.Assembly.GlobalNamespace.GetTypeMembers("MyClass").First();
-            var actual = string.Join(
-                ", ",
-                typeSym.GetMembers()
-                    .Select(symbol => symbol.ToTestDisplayString())
-                    .OrderBy(name => name)
-            );
+            var actual = string
+                .Join(
+                    ", ",
+                    typeSym.GetMembers()
+                        .Select(symbol => symbol.ToTestDisplayString())
+                        .OrderBy(name => name)
+                );
             Assert.Equal("MyClass..ctor(), MyClass..ctor(System.Int32 DummyInt)", actual);
         }
 
@@ -1144,10 +1145,12 @@ public class SubGenericClass<T> : BaseT<T>
             var comp = CreateCompilation(text);
             var typeSym = comp.Assembly.GlobalNamespace.GetTypeMembers("SubGenericClass").First();
             var actualSymbols = typeSym.GetMembers();
-            var actual = string.Join(
-                ", ",
-                actualSymbols.Select(symbol => symbol.ToTestDisplayString()).OrderBy(name => name)
-            );
+            var actual = string
+                .Join(
+                    ", ",
+                    actualSymbols.Select(symbol => symbol.ToTestDisplayString())
+                        .OrderBy(name => name)
+                );
             Assert.Equal(
                 "SubGenericClass<T>..ctor(), void SubGenericClass<T>.Meth3(GC1<T> t), void SubGenericClass<T>.Meth4(System.NonexistentType t)",
                 actual
@@ -1677,7 +1680,8 @@ public class NullableTest
 ";
 
             var comp = CreateCompilation(text);
-            var topType = comp.SourceModule.GlobalNamespace.GetTypeMembers("NullableTest")
+            var topType = comp.SourceModule.GlobalNamespace
+                .GetTypeMembers("NullableTest")
                 .FirstOrDefault();
             // ------------------------------
             var mem = topType.GetMembers("field01").Single();
@@ -2167,19 +2171,18 @@ namespace NS1
 
             Assert.False(i1.IsExplicitDefinitionOfNoPiaLocalType);
 
-            compilation.GetDeclarationDiagnostics()
-                .Verify(
-                    // (6,20): error CS0246: The type or namespace name 'TypeIdentifier' could not be found (are you missing a using directive or an assembly reference?)
-                    //     using alias1 = TypeIdentifier;
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "TypeIdentifier")
-                        .WithArguments("TypeIdentifier")
-                        .WithLocation(6, 20),
-                    // (8,6): error CS0616: 'TypeIdentifier' is not an attribute class
-                    //     [alias1]
-                    Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "alias1")
-                        .WithArguments("TypeIdentifier")
-                        .WithLocation(8, 6)
-                );
+            compilation.GetDeclarationDiagnostics().Verify(
+                // (6,20): error CS0246: The type or namespace name 'TypeIdentifier' could not be found (are you missing a using directive or an assembly reference?)
+                //     using alias1 = TypeIdentifier;
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "TypeIdentifier")
+                    .WithArguments("TypeIdentifier")
+                    .WithLocation(6, 20),
+                // (8,6): error CS0616: 'TypeIdentifier' is not an attribute class
+                //     [alias1]
+                Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "alias1")
+                    .WithArguments("TypeIdentifier")
+                    .WithLocation(8, 6)
+            );
 
             compilation = CreateCompilation(code);
             i1 = compilation.SourceAssembly.GetTypeByMetadataName("NS1.I1");
@@ -2208,24 +2211,23 @@ namespace NS1
 
             Assert.False(i1.IsExplicitDefinitionOfNoPiaLocalType);
 
-            compilation.GetDeclarationDiagnostics()
-                .Verify(
-                    // (6,20): error CS0246: The type or namespace name 'TypeIdentifier' could not be found (are you missing a using directive or an assembly reference?)
-                    //     using alias1 = TypeIdentifier;
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "TypeIdentifier")
-                        .WithArguments("TypeIdentifier")
-                        .WithLocation(6, 20),
-                    // (8,6): error CS0246: The type or namespace name 'alias1AttributeAttribute' could not be found (are you missing a using directive or an assembly reference?)
-                    //     [alias1Attribute]
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias1Attribute")
-                        .WithArguments("alias1AttributeAttribute")
-                        .WithLocation(8, 6),
-                    // (8,6): error CS0246: The type or namespace name 'alias1Attribute' could not be found (are you missing a using directive or an assembly reference?)
-                    //     [alias1Attribute]
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias1Attribute")
-                        .WithArguments("alias1Attribute")
-                        .WithLocation(8, 6)
-                );
+            compilation.GetDeclarationDiagnostics().Verify(
+                // (6,20): error CS0246: The type or namespace name 'TypeIdentifier' could not be found (are you missing a using directive or an assembly reference?)
+                //     using alias1 = TypeIdentifier;
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "TypeIdentifier")
+                    .WithArguments("TypeIdentifier")
+                    .WithLocation(6, 20),
+                // (8,6): error CS0246: The type or namespace name 'alias1AttributeAttribute' could not be found (are you missing a using directive or an assembly reference?)
+                //     [alias1Attribute]
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias1Attribute")
+                    .WithArguments("alias1AttributeAttribute")
+                    .WithLocation(8, 6),
+                // (8,6): error CS0246: The type or namespace name 'alias1Attribute' could not be found (are you missing a using directive or an assembly reference?)
+                //     [alias1Attribute]
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias1Attribute")
+                    .WithArguments("alias1Attribute")
+                    .WithLocation(8, 6)
+            );
         }
 
         [Fact]
@@ -2518,14 +2520,13 @@ namespace NS1
 
             Assert.False(i1.IsExplicitDefinitionOfNoPiaLocalType);
 
-            compilation.GetDeclarationDiagnostics()
-                .Verify(
-                    // (6,6): error CS0616: 'System.Runtime.InteropServices' is not an attribute class
-                    //     [alias1]
-                    Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "alias1")
-                        .WithArguments("System.Runtime.InteropServices")
-                        .WithLocation(6, 6)
-                );
+            compilation.GetDeclarationDiagnostics().Verify(
+                // (6,6): error CS0616: 'System.Runtime.InteropServices' is not an attribute class
+                //     [alias1]
+                Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "alias1")
+                    .WithArguments("System.Runtime.InteropServices")
+                    .WithLocation(6, 6)
+            );
         }
 
         [Fact]

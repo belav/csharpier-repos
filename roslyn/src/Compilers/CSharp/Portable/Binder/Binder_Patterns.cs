@@ -609,15 +609,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (!hasErrors)
                     {
-                        var requiredVersion =
-                            MessageID.IDS_FeatureRecursivePatterns.RequiredVersion();
+                        var requiredVersion = MessageID.IDS_FeatureRecursivePatterns
+                            .RequiredVersion();
                         if (
                             Compilation.LanguageVersion < requiredVersion
-                            && !this.Conversions.ClassifyConversionFromExpression(
-                                expression,
-                                inputType,
-                                ref useSiteInfo
-                            ).IsImplicit
+                            && !this.Conversions
+                                .ClassifyConversionFromExpression(
+                                    expression,
+                                    inputType,
+                                    ref useSiteInfo
+                                ).IsImplicit
                         )
                         {
                             diagnostics.Add(
@@ -970,11 +971,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         localSymbol.SetValEscape(GetValEscape(declType.Type, inputValEscape));
 
                         // Check for variable declaration errors.
-                        hasErrors |=
-                            localSymbol.ScopeBinder.ValidateDeclarationNameConflictsInScope(
-                                localSymbol,
-                                diagnostics
-                            );
+                        hasErrors |= localSymbol.ScopeBinder
+                            .ValidateDeclarationNameConflictsInScope(localSymbol, diagnostics);
 
                         if (!hasErrors)
                             hasErrors = CheckRestrictedTypeInAsyncMethod(
@@ -1119,9 +1117,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (node.PositionalPatternClause != null)
             {
                 PositionalPatternClauseSyntax positionalClause = node.PositionalPatternClause;
-                var patternsBuilder = ArrayBuilder<BoundSubpattern>.GetInstance(
-                    positionalClause.Subpatterns.Count
-                );
+                var patternsBuilder = ArrayBuilder<BoundSubpattern>
+                    .GetInstance(positionalClause.Subpatterns.Count);
                 if (IsZeroElementTupleType(declType))
                 {
                     // Work around https://github.com/dotnet/roslyn/issues/20648: The compiler's internal APIs such as `declType.IsTupleType`
@@ -1561,11 +1558,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics
                 );
                 var result =
-                    Compilation.Conversions.ClassifyBuiltInConversion(
-                        type,
-                        possibleBaseInterface,
-                        ref useSiteInfo
-                    ).IsImplicit;
+                    Compilation.Conversions
+                        .ClassifyBuiltInConversion(
+                            type,
+                            possibleBaseInterface,
+                            ref useSiteInfo
+                        ).IsImplicit;
                 diagnostics.Add(node, useSiteInfo);
                 return result;
             }
@@ -1710,9 +1708,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.ParenthesizedVariableDesignation:
                 {
                     var tupleDesignation = (ParenthesizedVariableDesignationSyntax)node;
-                    var subPatterns = ArrayBuilder<BoundSubpattern>.GetInstance(
-                        tupleDesignation.Variables.Count
-                    );
+                    var subPatterns = ArrayBuilder<BoundSubpattern>
+                        .GetInstance(tupleDesignation.Variables.Count);
                     MethodSymbol? deconstructMethod = null;
                     var strippedInputType = inputType.StrippedType();
 

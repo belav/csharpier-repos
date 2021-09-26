@@ -15,10 +15,8 @@ namespace System.Reflection.Emit.Tests
         public void GetILGenerator_Int_Owner(bool skipVisibility)
         {
             IDClass target = new IDClass();
-            FieldInfo field = typeof(IDClass).GetField(
-                FieldName,
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            FieldInfo field = typeof(IDClass)
+                .GetField(FieldName, BindingFlags.Instance | BindingFlags.NonPublic);
 
             Type[] paramTypes = new Type[] { typeof(IDClass), typeof(int) };
             DynamicMethod method = new DynamicMethod(
@@ -56,10 +54,8 @@ namespace System.Reflection.Emit.Tests
         {
             Module module = typeof(IDClass).GetTypeInfo().Module;
             IDClass target = new IDClass();
-            FieldInfo field = typeof(IDClass).GetField(
-                FieldName,
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            FieldInfo field = typeof(IDClass)
+                .GetField(FieldName, BindingFlags.Instance | BindingFlags.NonPublic);
 
             Type[] paramTypes = new Type[] { typeof(IDClass), typeof(int) };
             DynamicMethod method = new DynamicMethod(
@@ -86,10 +82,8 @@ namespace System.Reflection.Emit.Tests
         public void GetILGenerator_Owner(bool skipVisibility)
         {
             IDClass target = new IDClass();
-            FieldInfo field = typeof(IDClass).GetField(
-                FieldName,
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            FieldInfo field = typeof(IDClass)
+                .GetField(FieldName, BindingFlags.Instance | BindingFlags.NonPublic);
 
             Type[] paramTypes = new Type[] { typeof(IDClass), typeof(int) };
 
@@ -128,10 +122,8 @@ namespace System.Reflection.Emit.Tests
         {
             Module module = typeof(TestClass).GetTypeInfo().Module;
             IDClass target = new IDClass();
-            FieldInfo field = typeof(IDClass).GetField(
-                FieldName,
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            FieldInfo field = typeof(IDClass)
+                .GetField(FieldName, BindingFlags.Instance | BindingFlags.NonPublic);
 
             Type[] paramTypes = new Type[] { typeof(IDClass), typeof(int) };
             DynamicMethod method = new DynamicMethod(

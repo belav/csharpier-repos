@@ -57,15 +57,13 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
-            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>.GetInstance(
-                out var replacementMap
-            );
+            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>
+                .GetInstance(out var replacementMap);
 
             foreach (var diagnostic in diagnostics)
             {
-                var initializer = (ConstructorInitializerSyntax)diagnostic.AdditionalLocations[
-                    0
-                ].FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var initializer = (ConstructorInitializerSyntax)diagnostic.AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 var colonToken = initializer.ColonToken;
                 var thisBaseKeyword = initializer.ThisOrBaseKeyword;
                 var parenToken = colonToken.GetPreviousToken();
@@ -91,9 +89,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
                     //
                     // Just add a space after the colon, and remove all leading trivia from this/base
                     replacementMap[colonToken] = colonToken.WithLeadingTrivia(
-                            colonToken.LeadingTrivia.AddRange(colonToken.TrailingTrivia)
-                                .AddRange(thisBaseKeyword.LeadingTrivia)
-                        )
+                        colonToken.LeadingTrivia
+                            .AddRange(colonToken.TrailingTrivia)
+                            .AddRange(thisBaseKeyword.LeadingTrivia)
+                    )
                         .WithTrailingTrivia(SyntaxFactory.Space);
                     replacementMap[thisBaseKeyword] = thisBaseKeyword.WithoutLeadingTrivia();
                 }
@@ -132,9 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             {
                 var allColonTrivia = colonToken.LeadingTrivia.AddRange(colonToken.TrailingTrivia);
 
-                return previousToken.TrailingTrivia.All(
-                    t => t.Kind() == SyntaxKind.WhitespaceTrivia
-                )
+                return previousToken.TrailingTrivia
+                .All(t => t.Kind() == SyntaxKind.WhitespaceTrivia)
                   ? previousToken.WithTrailingTrivia(allColonTrivia)
                   : previousToken.WithAppendedTrailingTrivia(allColonTrivia);
             }

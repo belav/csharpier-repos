@@ -115,9 +115,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                 return;
             }
 
-            var binaryKind = _syntaxFacts.SyntaxKinds.Convert<TSyntaxKind>(
-                binaryExpression.RawKind
-            );
+            var binaryKind = _syntaxFacts.SyntaxKinds
+                .Convert<TSyntaxKind>(binaryExpression.RawKind);
             if (!_binaryToAssignmentMap.ContainsKey(binaryKind))
             {
                 return;

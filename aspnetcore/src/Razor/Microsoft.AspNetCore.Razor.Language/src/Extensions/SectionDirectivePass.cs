@@ -26,9 +26,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 var directive in documentNode.FindDirectiveReferences(SectionDirective.Directive)
             )
             {
-                var sectionName = (
-                    (DirectiveIntermediateNode)directive.Node
-                ).Tokens.FirstOrDefault()?.Content;
+                var sectionName = ((DirectiveIntermediateNode)directive.Node).Tokens
+                    .FirstOrDefault()?.Content;
 
                 var section = new SectionIntermediateNode() { SectionName = sectionName, };
 

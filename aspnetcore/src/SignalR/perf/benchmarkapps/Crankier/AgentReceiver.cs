@@ -49,9 +49,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                                 case "status":
                                     await _agent.StatusAsync(
                                         message.Value["Id"].ToObject<int>(),
-                                        message.Value[
-                                            "StatusInformation"
-                                        ].ToObject<StatusInformation>()
+                                        message.Value["StatusInformation"]
+                                            .ToObject<StatusInformation>()
                                     );
                                     break;
                             }

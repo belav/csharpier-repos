@@ -85,9 +85,10 @@ namespace System.CommandLine.Rendering.Tests
         [Fact]
         public void ToString_with_non_ansi_omits_ANSI_codes()
         {
-            var span = new TextSpanFormatter().ParseToSpan(
-                $"one{ForegroundColorSpan.Red()}two{ForegroundColorSpan.Reset()}three"
-            );
+            var span = new TextSpanFormatter()
+                .ParseToSpan(
+                    $"one{ForegroundColorSpan.Red()}two{ForegroundColorSpan.Reset()}three"
+                );
 
             span.ToString(OutputMode.NonAnsi).Should().Be("onetwothree");
         }
@@ -95,9 +96,10 @@ namespace System.CommandLine.Rendering.Tests
         [Fact]
         public void ToString_with_ansi_includes_ANSI_codes()
         {
-            var span = new TextSpanFormatter().ParseToSpan(
-                $"one{ForegroundColorSpan.Red()}two{ForegroundColorSpan.Reset()}three"
-            );
+            var span = new TextSpanFormatter()
+                .ParseToSpan(
+                    $"one{ForegroundColorSpan.Red()}two{ForegroundColorSpan.Reset()}three"
+                );
 
             span.ToString(OutputMode.Ansi)
                 .Should()

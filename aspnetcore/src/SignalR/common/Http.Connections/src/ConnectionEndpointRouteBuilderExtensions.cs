@@ -104,8 +104,8 @@ namespace Microsoft.AspNetCore.Builder
             Action<IConnectionBuilder> configure
         )
         {
-            var dispatcher =
-                endpoints.ServiceProvider.GetRequiredService<HttpConnectionDispatcher>();
+            var dispatcher = endpoints.ServiceProvider
+                .GetRequiredService<HttpConnectionDispatcher>();
 
             var connectionBuilder = new ConnectionBuilder(endpoints.ServiceProvider);
             configure(connectionBuilder);

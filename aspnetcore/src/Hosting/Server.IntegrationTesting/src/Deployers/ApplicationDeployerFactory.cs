@@ -47,11 +47,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     return new NginxDeployer(deploymentParameters, loggerFactory);
                 default:
                     throw new NotSupportedException(
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            "Found no deployers suitable for server type '{0}' with the current runtime.",
-                            deploymentParameters.ServerType
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                "Found no deployers suitable for server type '{0}' with the current runtime.",
+                                deploymentParameters.ServerType
+                            )
                     );
             }
         }

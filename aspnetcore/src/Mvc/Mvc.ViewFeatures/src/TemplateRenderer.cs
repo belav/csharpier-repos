@@ -292,8 +292,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewDataDictionary viewData
         )
         {
-            var newHelper =
-                viewContext.HttpContext.RequestServices.GetRequiredService<IHtmlHelper>();
+            var newHelper = viewContext.HttpContext.RequestServices
+                .GetRequiredService<IHtmlHelper>();
 
             if (newHelper is IViewContextAware contextable)
             {

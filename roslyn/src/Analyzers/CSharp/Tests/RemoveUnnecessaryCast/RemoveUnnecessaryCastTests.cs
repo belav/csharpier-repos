@@ -669,7 +669,8 @@ class Test
                 FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
                 BatchFixedState = { Sources = { batchFixedSource }, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(545291, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
@@ -717,7 +718,8 @@ class Test
                 BatchFixedState = { Sources = { batchFixedSource }, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
                 DiagnosticSelector = diagnostics => diagnostics[1],
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(545291, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
@@ -810,7 +812,8 @@ class Test
                 BatchFixedCode = batchFixedSource,
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
                 DiagnosticSelector = diagnostics => diagnostics[1],
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(545459, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545459")]
@@ -4973,7 +4976,8 @@ enum Sign
                 TestCode = source,
                 FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(18510, "https://github.com/dotnet/roslyn/issues/18510")]
@@ -5063,7 +5067,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -5088,7 +5093,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -5113,7 +5119,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -5151,7 +5158,8 @@ class C
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(12631, "https://github.com/dotnet/roslyn/issues/12631")]
@@ -5202,7 +5210,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -5227,7 +5236,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -5252,7 +5262,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -5290,7 +5301,8 @@ class C
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -5328,7 +5340,8 @@ class C
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -5349,7 +5362,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -5370,7 +5384,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -5391,7 +5406,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -5421,7 +5437,8 @@ class C
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp7_1,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(27239, "https://github.com/dotnet/roslyn/issues/27239")]
@@ -5772,7 +5789,8 @@ class Program
                 BatchFixedCode = batchFixedSource,
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
                 DiagnosticSelector = diagnostics => diagnostics[1],
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(36631, "https://github.com/dotnet/roslyn/issues/36631")]

@@ -96,12 +96,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     RSASignaturePadding.Pkcs1
                 );
 
-                request.CertificateExtensions.Add(
-                    new X509KeyUsageExtension(
-                        X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature,
-                        false
-                    )
-                );
+                request.CertificateExtensions
+                    .Add(
+                        new X509KeyUsageExtension(
+                            X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature,
+                            false
+                        )
+                    );
 
                 if (sanDnsNames != null)
                 {

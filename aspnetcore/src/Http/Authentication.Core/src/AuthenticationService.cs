@@ -289,10 +289,8 @@ namespace Microsoft.AspNetCore.Authentication
 
         private async Task<Exception> CreateMissingHandlerException(string scheme)
         {
-            var schemes = string.Join(
-                ", ",
-                (await Schemes.GetAllSchemesAsync()).Select(sch => sch.Name)
-            );
+            var schemes = string
+                .Join(", ", (await Schemes.GetAllSchemesAsync()).Select(sch => sch.Name));
 
             var footer =
                 $" Did you forget to call AddAuthentication().Add[SomeAuthHandler](\"{scheme}\",...)?";
@@ -312,14 +310,17 @@ namespace Microsoft.AspNetCore.Authentication
 
         private async Task<string> GetAllSignInSchemeNames()
         {
-            return string.Join(
-                ", ",
-                (await Schemes.GetAllSchemesAsync()).Where(
-                        sch =>
-                            typeof(IAuthenticationSignInHandler).IsAssignableFrom(sch.HandlerType)
-                    )
-                    .Select(sch => sch.Name)
-            );
+            return string
+                .Join(
+                    ", ",
+                    (await Schemes.GetAllSchemesAsync())
+                        .Where(
+                            sch =>
+                                typeof(IAuthenticationSignInHandler)
+                                    .IsAssignableFrom(sch.HandlerType)
+                        )
+                        .Select(sch => sch.Name)
+                );
         }
 
         private async Task<Exception> CreateMissingSignInHandlerException(string scheme)
@@ -369,14 +370,17 @@ namespace Microsoft.AspNetCore.Authentication
 
         private async Task<string> GetAllSignOutSchemeNames()
         {
-            return string.Join(
-                ", ",
-                (await Schemes.GetAllSchemesAsync()).Where(
-                        sch =>
-                            typeof(IAuthenticationSignOutHandler).IsAssignableFrom(sch.HandlerType)
-                    )
-                    .Select(sch => sch.Name)
-            );
+            return string
+                .Join(
+                    ", ",
+                    (await Schemes.GetAllSchemesAsync())
+                        .Where(
+                            sch =>
+                                typeof(IAuthenticationSignOutHandler)
+                                    .IsAssignableFrom(sch.HandlerType)
+                        )
+                        .Select(sch => sch.Name)
+                );
         }
 
         private async Task<Exception> CreateMissingSignOutHandlerException(string scheme)

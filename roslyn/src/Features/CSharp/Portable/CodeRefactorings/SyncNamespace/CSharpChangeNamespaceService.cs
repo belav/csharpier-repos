@@ -73,11 +73,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             }
 
             return await TryGetApplicableContainersFromAllDocumentsAsync(
-                    document.Project.Solution,
-                    allDocumentIds,
-                    containerSpan,
-                    cancellationToken
-                )
+                document.Project.Solution,
+                allDocumentIds,
+                containerSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -327,14 +327,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
                 return root.ReplaceNode(
                     namespaceDecl,
                     namespaceDecl.WithName(
-                            CreateNamespaceAsQualifiedName(
-                                    targetNamespaceParts,
-                                    aliasQualifier: null,
-                                    targetNamespaceParts.Length - 1
-                                )
-                                .WithTriviaFrom(namespaceDecl.Name)
-                                .WithAdditionalAnnotations(WarningAnnotation)
+                        CreateNamespaceAsQualifiedName(
+                            targetNamespaceParts,
+                            aliasQualifier: null,
+                            targetNamespaceParts.Length - 1
                         )
+                            .WithTriviaFrom(namespaceDecl.Name)
+                            .WithAdditionalAnnotations(WarningAnnotation)
+                    )
                         .WithoutAnnotations(ContainerAnnotation)
                 ); // Make sure to remove the annotation we added
             }
@@ -401,18 +401,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
 
             var targetNamespaceDecl = SyntaxFactory.NamespaceDeclaration(
                 name: CreateNamespaceAsQualifiedName(
-                        targetNamespaceParts,
-                        aliasQualifier: null,
-                        targetNamespaceParts.Length - 1
-                    )
+                    targetNamespaceParts,
+                    aliasQualifier: null,
+                    targetNamespaceParts.Length - 1
+                )
                     .WithAdditionalAnnotations(WarningAnnotation),
                 externs: default,
                 usings: default,
                 members: compilationUnit.Members
             );
             return compilationUnit.WithMembers(
-                    new SyntaxList<MemberDeclarationSyntax>(targetNamespaceDecl)
-                )
+                new SyntaxList<MemberDeclarationSyntax>(targetNamespaceDecl)
+            )
                 .WithoutAnnotations(ContainerAnnotation); // Make sure to remove the annotation we added
         }
 
@@ -472,7 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
                 }
 
                 if (
-                    namespaceDecl.Name.GetDiagnostics()
+                    namespaceDecl.Name
+                        .GetDiagnostics()
                         .Any(diag => diag.DefaultSeverity == DiagnosticSeverity.Error)
                 )
                 {
@@ -488,10 +489,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             }
 
             var containsPartial = await ContainsPartialTypeWithMultipleDeclarationsAsync(
-                    document,
-                    container,
-                    cancellationToken
-                )
+                document,
+                container,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (containsPartial)
@@ -503,8 +504,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
 
             static bool ContainsNamespaceDeclaration(SyntaxNode node) =>
                 node.DescendantNodes(
-                        n => n is CompilationUnitSyntax || n is NamespaceDeclarationSyntax
-                    )
+                    n => n is CompilationUnitSyntax || n is NamespaceDeclarationSyntax
+                )
                     .OfType<NamespaceDeclarationSyntax>()
                     .Any();
         }

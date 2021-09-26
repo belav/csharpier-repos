@@ -66,10 +66,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         public ImmutableArray<Cci.IMetadataNamedArgument> GetNamedArguments(EmitContext context)
         {
             // Perform fixup
-            Cci.ITypeReference stringType = context.Module.GetPlatformType(
-                Cci.PlatformType.SystemString,
-                context
-            );
+            Cci.ITypeReference stringType = context.Module
+                .GetPlatformType(Cci.PlatformType.SystemString, context);
 
 #if DEBUG
             // Must have exactly 1 named argument.
@@ -91,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             // PermissionSetAttribute type must have a writable public string type property member 'Hex'
             ISymbol iSymbol = _sourceAttribute.GetType(context).GetInternalSymbol()!.GetISymbol();
             Debug.Assert(
-                ((INamedTypeSymbol)iSymbol).GetMembers(HexPropertyName)
+                ((INamedTypeSymbol)iSymbol)
+                    .GetMembers(HexPropertyName)
                     .Any(
                         member =>
                             member.Kind == SymbolKind.Property

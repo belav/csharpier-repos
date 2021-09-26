@@ -287,11 +287,8 @@ namespace System.Net.Tests
             Task.Factory.FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
 
         public override Task<Stream> GetRequestStreamAsync(WebRequest request) =>
-            Task.Factory.FromAsync(
-                request.BeginGetRequestStream,
-                request.EndGetRequestStream,
-                null
-            );
+            Task.Factory
+                .FromAsync(request.BeginGetRequestStream, request.EndGetRequestStream, null);
     }
 
     public sealed class TaskFileWebRequestTestBase : AsyncFileWebRequestTestBase

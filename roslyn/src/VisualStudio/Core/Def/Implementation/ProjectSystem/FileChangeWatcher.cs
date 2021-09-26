@@ -61,12 +61,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             lock (_taskQueueGate)
             {
                 _taskQueue = _taskQueue.ContinueWith(
-                        _executeActionDelegate,
-                        action,
-                        CancellationToken.None,
-                        TaskContinuationOptions.None,
-                        TaskScheduler.Default
-                    )
+                    _executeActionDelegate,
+                    action,
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                )
                     .Unwrap();
             }
         }
@@ -199,20 +199,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         async service =>
                         {
                             var cookie = await service.AdviseDirChangeAsync(
-                                    watchedDirectory.Path,
-                                    watchSubdirectories: true,
-                                    this
-                                )
+                                watchedDirectory.Path,
+                                watchSubdirectories: true,
+                                this
+                            )
                                 .ConfigureAwait(false);
                             _directoryWatchCookies.Add(cookie);
 
                             if (watchedDirectory.ExtensionFilter != null)
                             {
                                 await service.FilterDirectoryChangesAsync(
-                                        cookie,
-                                        new string[] { watchedDirectory.ExtensionFilter },
-                                        CancellationToken.None
-                                    )
+                                    cookie,
+                                    new string[] { watchedDirectory.ExtensionFilter },
+                                    CancellationToken.None
+                                )
                                     .ConfigureAwait(false);
                             }
                         }
@@ -289,11 +289,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     async service =>
                     {
                         token.Cookie = await service.AdviseFileChangeAsync(
-                                filePath,
-                                _VSFILECHANGEFLAGS.VSFILECHG_Size
-                                    | _VSFILECHANGEFLAGS.VSFILECHG_Time,
-                                this
-                            )
+                            filePath,
+                            _VSFILECHANGEFLAGS.VSFILECHG_Size | _VSFILECHANGEFLAGS.VSFILECHG_Time,
+                            this
+                        )
                             .ConfigureAwait(false);
                     }
                 );

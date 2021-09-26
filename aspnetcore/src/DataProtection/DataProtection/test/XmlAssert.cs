@@ -99,14 +99,14 @@ namespace Microsoft.AspNetCore.DataProtection
             )
             {
                 List<XAttribute> orderedExpected = expected.Where(
-                        ShouldIncludeAttributeDuringComparison
-                    )
+                    ShouldIncludeAttributeDuringComparison
+                )
                     .OrderBy(attr => attr.Name.ToString())
                     .ToList();
 
                 List<XAttribute> orderedActual = actual.Where(
-                        ShouldIncludeAttributeDuringComparison
-                    )
+                    ShouldIncludeAttributeDuringComparison
+                )
                     .OrderBy(attr => attr.Name.ToString())
                     .ToList();
 
@@ -142,11 +142,12 @@ namespace Microsoft.AspNetCore.DataProtection
                 }
 
                 throw new NotSupportedException(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Node of type '{0}' is not supported.",
-                        node.GetType().Name
-                    )
+                    string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "Node of type '{0}' is not supported.",
+                            node.GetType().Name
+                        )
                 );
             }
         }

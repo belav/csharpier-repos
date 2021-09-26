@@ -31,14 +31,14 @@ namespace Microsoft.EntityFrameworkCore
         private async Task SaveChanges_logs_DatabaseErrorLogState_test(bool async)
         {
             var loggerFactory = new TestLoggerFactory();
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddSingleton<ILoggerFactory>(loggerFactory)
                 .BuildServiceProvider();
 
             using var context = new BloggingContext(serviceProvider);
-            context.Blogs.Add(
-                new BloggingContext.Blog(jimSaysThrow: false) { Url = "http://sample.com" }
-            );
+            context.Blogs
+                .Add(new BloggingContext.Blog(jimSaysThrow: false) { Url = "http://sample.com" });
             context.SaveChanges();
             context.ChangeTracker.Entries().Single().State = EntityState.Added;
 
@@ -55,16 +55,13 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(ex, loggerFactory.Logger.LastDatabaseErrorException);
             Assert.Same(
                 typeof(BloggingContext),
-                loggerFactory.Logger.LastDatabaseErrorState.Single(
-                    p => p.Key == "contextType"
-                ).Value
+                loggerFactory.Logger.LastDatabaseErrorState
+                    .Single(p => p.Key == "contextType").Value
             );
             Assert.EndsWith(
                 ex.ToString(),
-                loggerFactory.Logger.LastDatabaseErrorFormatter(
-                    loggerFactory.Logger.LastDatabaseErrorState,
-                    ex
-                )
+                loggerFactory.Logger
+                    .LastDatabaseErrorFormatter(loggerFactory.Logger.LastDatabaseErrorState, ex)
             );
         }
 
@@ -86,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore
         public Task Query_logs_DatabaseErrorLogState_during_LINQ_enumeration_async() =>
             Query_logs_DatabaseErrorLogState_test(
                 c =>
-                    c.Blogs.OrderBy(b => b.Name)
+                    c.Blogs
+                        .OrderBy(b => b.Name)
                         .Where(b => b.Url.StartsWith("http://"))
                         .ToListAsync()
             );
@@ -111,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore
         private async Task Query_logs_DatabaseErrorLogState_test(Func<BloggingContext, Task> test)
         {
             var loggerFactory = new TestLoggerFactory();
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddSingleton<ILoggerFactory>(loggerFactory)
                 .BuildServiceProvider();
 
@@ -131,16 +130,13 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(ex, loggerFactory.Logger.LastDatabaseErrorException);
             Assert.Same(
                 typeof(BloggingContext),
-                loggerFactory.Logger.LastDatabaseErrorState.Single(
-                    p => p.Key == "contextType"
-                ).Value
+                loggerFactory.Logger.LastDatabaseErrorState
+                    .Single(p => p.Key == "contextType").Value
             );
             Assert.EndsWith(
                 ex.ToString(),
-                loggerFactory.Logger.LastDatabaseErrorFormatter(
-                    loggerFactory.Logger.LastDatabaseErrorState,
-                    ex
-                )
+                loggerFactory.Logger
+                    .LastDatabaseErrorFormatter(loggerFactory.Logger.LastDatabaseErrorState, ex)
             );
         }
 

@@ -23,9 +23,8 @@ namespace Moq.Tests
                 };
                 yield return new object[]
                 {
-                    typeof(HasAbstractEventHandlerEvent).GetEvent(
-                        nameof(HasAbstractEventHandlerEvent.Event)
-                    )
+                    typeof(HasAbstractEventHandlerEvent)
+                        .GetEvent(nameof(HasAbstractEventHandlerEvent.Event))
                 };
                 yield return new object[]
                 {

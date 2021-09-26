@@ -216,9 +216,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         private class SelfRef
         {
             public static readonly PropertyInfo IdProperty = typeof(SelfRef).GetProperty("Id");
-            public static readonly PropertyInfo SelfRefIdProperty = typeof(SelfRef).GetProperty(
-                "SelfRefId"
-            );
+            public static readonly PropertyInfo SelfRefIdProperty = typeof(SelfRef)
+                .GetProperty("SelfRefId");
 
             public int Id { get; set; }
             public SelfRef SelfRefPrincipal { get; set; }

@@ -34,11 +34,8 @@ namespace Certificate.Optional.Sample
                                     request.Path,
                                     request.QueryString
                                 );
-                                context.Response.Redirect(
-                                    redirect,
-                                    permanent: false,
-                                    preserveMethod: true
-                                );
+                                context.Response
+                                    .Redirect(redirect, permanent: false, preserveMethod: true);
                                 context.HandleResponse(); // Don't do the default behavior that would send a 403 response.
                                 return Task.CompletedTask;
                             }
@@ -61,23 +58,24 @@ namespace Certificate.Optional.Sample
                 endpoints =>
                 {
                     endpoints.Map(
-                            "/auth",
-                            context =>
-                            {
-                                return context.Response.WriteAsync(
+                        "/auth",
+                        context =>
+                        {
+                            return context.Response
+                                .WriteAsync(
                                     $"Hello {context.User.Identity.Name} at {context.Request.Host}"
                                 );
-                            }
-                        )
-                        .RequireAuthorization();
+                        }
+                    ).RequireAuthorization();
 
                     endpoints.Map(
                         "{*url}",
                         context =>
                         {
-                            return context.Response.WriteAsync(
-                                $"Hello {context.User.Identity.Name} at {context.Request.Host}. Try /auth"
-                            );
+                            return context.Response
+                                .WriteAsync(
+                                    $"Hello {context.User.Identity.Name} at {context.Request.Host}. Try /auth"
+                                );
                         }
                     );
                 }

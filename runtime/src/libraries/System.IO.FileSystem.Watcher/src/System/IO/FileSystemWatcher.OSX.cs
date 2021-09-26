@@ -219,11 +219,12 @@ namespace System.IO
                         {
                             // Schedule the EventStream to run on the thread's RunLoop
                             s_scheduledStreamsCount++;
-                            Interop.EventStream.FSEventStreamScheduleWithRunLoop(
-                                eventStream,
-                                s_watcherRunLoop,
-                                Interop.RunLoop.kCFRunLoopDefaultMode
-                            );
+                            Interop.EventStream
+                                .FSEventStreamScheduleWithRunLoop(
+                                    eventStream,
+                                    s_watcherRunLoop,
+                                    Interop.RunLoop.kCFRunLoopDefaultMode
+                                );
                             return;
                         }
 
@@ -256,11 +257,12 @@ namespace System.IO
                         if (s_watcherRunLoop != IntPtr.Zero)
                         {
                             // Always unschedule the RunLoop before cleaning up
-                            Interop.EventStream.FSEventStreamUnscheduleFromRunLoop(
-                                eventStream,
-                                s_watcherRunLoop,
-                                Interop.RunLoop.kCFRunLoopDefaultMode
-                            );
+                            Interop.EventStream
+                                .FSEventStreamUnscheduleFromRunLoop(
+                                    eventStream,
+                                    s_watcherRunLoop,
+                                    Interop.RunLoop.kCFRunLoopDefaultMode
+                                );
                             s_scheduledStreamsCount--;
 
                             if (s_scheduledStreamsCount == 0)
@@ -291,11 +293,12 @@ namespace System.IO
                     );
 
                     // Schedule the EventStream to run on the thread's RunLoop
-                    Interop.EventStream.FSEventStreamScheduleWithRunLoop(
-                        eventStream,
-                        runLoop,
-                        Interop.RunLoop.kCFRunLoopDefaultMode
-                    );
+                    Interop.EventStream
+                        .FSEventStreamScheduleWithRunLoop(
+                            eventStream,
+                            runLoop,
+                            Interop.RunLoop.kCFRunLoopDefaultMode
+                        );
 
                     runLoopStarted.Set();
                     try
@@ -337,9 +340,8 @@ namespace System.IO
             internal void Start(CancellationToken cancellationToken)
             {
                 // Get the path to watch and verify we created the CFStringRef
-                SafeCreateHandle path = Interop.CoreFoundation.CFStringCreateWithCString(
-                    _fullDirectory
-                );
+                SafeCreateHandle path = Interop.CoreFoundation
+                    .CFStringCreateWithCString(_fullDirectory);
                 if (path.IsInvalid)
                 {
                     throw Interop.GetExceptionForIoErrno(
@@ -350,10 +352,8 @@ namespace System.IO
                 }
 
                 // Take the CFStringRef and put it into an array to pass to the EventStream
-                SafeCreateHandle arrPaths = Interop.CoreFoundation.CFArrayCreate(
-                    new CFStringRef[1] { path.DangerousGetHandle() },
-                    (UIntPtr)1
-                );
+                SafeCreateHandle arrPaths = Interop.CoreFoundation
+                    .CFArrayCreate(new CFStringRef[1] { path.DangerousGetHandle() }, (UIntPtr)1);
                 if (arrPaths.IsInvalid)
                 {
                     path.Dispose();
@@ -370,13 +370,14 @@ namespace System.IO
                 Interop.Sys.Sync();
 
                 // Create the event stream for the path and tell the stream to watch for file system events.
-                _eventStream = Interop.EventStream.FSEventStreamCreate(
-                    _callback,
-                    arrPaths,
-                    Interop.EventStream.kFSEventStreamEventIdSinceNow,
-                    0.0f,
-                    EventStreamFlags
-                );
+                _eventStream = Interop.EventStream
+                    .FSEventStreamCreate(
+                        _callback,
+                        arrPaths,
+                        Interop.EventStream.kFSEventStreamEventIdSinceNow,
+                        0.0f,
+                        EventStreamFlags
+                    );
                 if (_eventStream.IsInvalid)
                 {
                     arrPaths.Dispose();
@@ -449,13 +450,17 @@ namespace System.IO
                     ExecutionContext.Run(
                         context,
                         (object? o) =>
-                            ((RunningInstance)o!).ProcessEvents(
-                                numEvents.ToInt32(),
-                                eventPaths,
-                                new Span<FSEventStreamEventFlags>(eventFlags, numEvents.ToInt32()),
-                                new Span<FSEventStreamEventId>(eventIds, numEvents.ToInt32()),
-                                watcher
-                            ),
+                            ((RunningInstance)o!)
+                                .ProcessEvents(
+                                    numEvents.ToInt32(),
+                                    eventPaths,
+                                    new Span<FSEventStreamEventFlags>(
+                                        eventFlags,
+                                        numEvents.ToInt32()
+                                    ),
+                                    new Span<FSEventStreamEventId>(eventIds, numEvents.ToInt32()),
+                                    watcher
+                                ),
                         this
                     );
                 }
@@ -560,9 +565,10 @@ namespace System.IO
                                 if (
                                     DoesItemExist(
                                         path,
-                                        eventFlags[i].HasFlag(
-                                            FSEventStreamEventFlags.kFSEventStreamEventFlagItemIsFile
-                                        )
+                                        eventFlags[i]
+                                            .HasFlag(
+                                                FSEventStreamEventFlags.kFSEventStreamEventFlagItemIsFile
+                                            )
                                     )
                                 )
                                 {
@@ -628,9 +634,8 @@ namespace System.IO
                         MemoryMarshal.CreateReadOnlySpanFromNullTerminated(nativeEventPath);
                     Debug.Assert(!eventPath.IsEmpty, "Empty events are not supported");
 
-                    char[] tempBuffer = ArrayPool<char>.Shared.Rent(
-                        Encoding.UTF8.GetMaxCharCount(eventPath.Length)
-                    );
+                    char[] tempBuffer = ArrayPool<char>.Shared
+                        .Rent(Encoding.UTF8.GetMaxCharCount(eventPath.Length));
 
                     // Converting an array of bytes to UTF-8 char array
                     int charCount = Encoding.UTF8.GetChars(eventPath, tempBuffer);
@@ -768,9 +773,8 @@ namespace System.IO
 
                 if (
                     ids[currentIndex] + 1 == ids[nextIndex]
-                    && flags[nextIndex].HasFlag(
-                        FSEventStreamEventFlags.kFSEventStreamEventFlagItemRenamed
-                    )
+                    && flags[nextIndex]
+                        .HasFlag(FSEventStreamEventFlags.kFSEventStreamEventFlagItemRenamed)
                 )
                 {
                     return nextIndex;
